@@ -45,7 +45,7 @@ const SelectFileDialog = ({
 }: SelectFileDialogProps) => {
   const { t } = useTranslation();
 
-  const sessionPath = sessionStorage.getItem("filesSelectorPath");
+  // const sessionPath = sessionStorage.getItem("filesSelectorPath");
 
   const headerLabel = fileTypeDetection.filterParam
     ? t?.("Common:SelectFile") ?? ""
@@ -89,7 +89,7 @@ const SelectFileDialog = ({
       onSubmit={onSubmit}
       isRoomsOnly={false}
       isThirdParty={false}
-      currentFolderId={sessionPath || fileInfo.folderId}
+      currentFolderId={fileInfo.folderId}
       rootFolderType={fileInfo.rootFolderType}
       withHeader
       headerLabel={headerLabel}

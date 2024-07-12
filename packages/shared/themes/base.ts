@@ -666,7 +666,7 @@ export const getBaseTheme = () => {
           b: 38,
           a: 0.2,
         },
-        blur: 10,
+        blur: 9,
       },
 
       content: {
@@ -2080,6 +2080,8 @@ export const getBaseTheme = () => {
       closeButtonSize: "17px",
       closeButtonBg: "transparent",
 
+      nameColor: "#858585",
+
       links: {
         iconColor: "#3B72A7",
         iconErrorColor: "#F24724",
@@ -3046,7 +3048,8 @@ export const getBaseTheme = () => {
             backgroundColorDark: "#282828",
             greenBackgroundColor: "#40865C",
             blueBackgroundColor: "#446995",
-            orangeBackgroundColor: "#AA5252",
+            orangeBackgroundColor: "#BE6650",
+            redBackgroundColor: "#AA5251",
 
             dataFontColor: white,
             dataFontColorBlack: black,
@@ -3332,7 +3335,24 @@ export const getBaseTheme = () => {
       pluginName: "#5C5C5C",
       descriptionColor: "#657077",
     },
-
+    oauth: {
+      previewDialog: {
+        border: "1px solid #eceef1",
+      },
+      infoDialog: {
+        descLinkColor: "#657077",
+        blockHeaderColor: "#a3a9ae",
+        separatorColor: "#333333",
+      },
+      list: {
+        descriptionColor: "#a3a9ae",
+      },
+      clientForm: {
+        descriptionColor: "#a3a9ae",
+        headerBorder: "1px solid #d0d5da",
+        scopeDesc: "#a3a9ae",
+      },
+    },
     sdkPresets: {
       borderColor: "#d0d5da",
       secondaryColor: "#657077",

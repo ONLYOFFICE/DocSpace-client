@@ -23,9 +23,10 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
+import { useMemo } from "react";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import { decode } from "he";
 
 import { Avatar } from "@docspace/shared/components/avatar";
 import { Text } from "@docspace/shared/components/text";
@@ -39,7 +40,10 @@ const ChangeRoomOwner = ({
   onOwnerChange,
   currentColorScheme,
 }) => {
-  const userName = roomOwner.displayName ?? roomOwner.label;
+  const userName = useMemo(
+    () => decode(roomOwner.displayName ?? roomOwner.label),
+    [roomOwner.displayName, roomOwner.label],
+  );
 
   return (
     <Styled.ChangeRoomOwner>

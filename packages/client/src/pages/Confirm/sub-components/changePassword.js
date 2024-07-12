@@ -43,6 +43,7 @@ import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import withLoader from "../withLoader";
 import { StyledPage, StyledBody, StyledContent } from "./StyledConfirm";
 import ConfirmRoute from "SRC_DIR/helpers/confirmRoute";
+import { ALLOWED_PASSWORD_CHARACTERS } from "@docspace/shared/constants";
 
 const ChangePasswordForm = (props) => {
   const {
@@ -155,9 +156,7 @@ const ChangePasswordForm = (props) => {
                 isVertical={true}
                 labelVisible={false}
                 hasError={isPasswordErrorShow && !passwordValid}
-                errorMessage={`${t(
-                  "Common:PasswordLimitMessage",
-                )}: ${getPasswordErrorMessage(t, settings)}`}
+                errorMessage={t("Common:IncorrectPassword")}
               >
                 <PasswordInput
                   simpleView={false}
@@ -188,6 +187,7 @@ const ChangePasswordForm = (props) => {
                     "Common:PasswordLimitSpecialSymbols",
                   )}`}
                   generatePasswordTitle={t("Wizard:GeneratePassword")}
+                  tooltipAllowedCharacters={`${t("Common:AllowedCharacters")}: ${ALLOWED_PASSWORD_CHARACTERS}`}
                 />
               </FieldContainer>
             </div>

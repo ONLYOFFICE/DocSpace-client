@@ -155,7 +155,12 @@ const WhiteLabelComponent = (props) => {
   const onUseTextAsLogo = () => {
     let newLogos = logoUrlsWhiteLabel;
     for (let i = 0; i < logoUrlsWhiteLabel.length; i++) {
-      const options = getLogoOptions(i, logoTextWhiteLabel);
+      const options = getLogoOptions(
+        i,
+        logoTextWhiteLabel,
+        logoUrlsWhiteLabel[i].size.width,
+        logoUrlsWhiteLabel[i].size.height,
+      );
       const isDocsEditorName = logoUrlsWhiteLabel[i].name === "DocsEditor";
 
       const logoLight = generateLogo(

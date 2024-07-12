@@ -67,7 +67,7 @@ export const getFileTypeName = (fileType) => {
   }
 };
 
-export const getDefaultRoomName = (room, t) => {
+export const getRoomTypeName = (room, t) => {
   switch (room) {
     case RoomsType.CustomRoom:
       return t("Common:CustomRooms");

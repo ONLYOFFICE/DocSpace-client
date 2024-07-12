@@ -32,7 +32,7 @@ import TypeCell from "./TypeCell";
 import TagsCell from "./TagsCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
-import { classNames } from "@docspace/shared/utils";
+import { classNames, getLastColumn } from "@docspace/shared/utils";
 import { StyledBadgesContainer } from "../StyledTable";
 import { StyledQuickButtonsContainer } from "../StyledTable";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
@@ -59,7 +59,10 @@ const RoomsRowDataComponent = (props) => {
     badgesComponent,
     quickButtonsComponent,
     item,
+    tableStorageName,
   } = props;
+
+  const lastColumn = getLastColumn(tableStorageName);
 
   return (
     <>
@@ -92,6 +95,10 @@ const RoomsRowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Type" ? "no-extra-space" : "",
+          )}
         >
           <TypeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -128,6 +135,10 @@ const RoomsRowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Owner" ? "no-extra-space" : "",
+          )}
         >
           <AuthorCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -146,6 +157,10 @@ const RoomsRowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Activity" ? "no-extra-space" : "",
+          )}
         >
           <DateCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -200,6 +215,7 @@ export default inject(({ currentQuotaStore, tableStore }) => {
     roomColumnTagsIsEnabled,
     roomColumnActivityIsEnabled,
     roomQuotaColumnIsEnable,
+    tableStorageName,
   } = tableStore;
 
   const { showStorageInfo } = currentQuotaStore;
@@ -211,5 +227,6 @@ export default inject(({ currentQuotaStore, tableStore }) => {
     roomColumnTagsIsEnabled,
     roomColumnActivityIsEnabled,
     showStorageInfo,
+    tableStorageName,
   };
 })(observer(RoomsRowDataComponent));

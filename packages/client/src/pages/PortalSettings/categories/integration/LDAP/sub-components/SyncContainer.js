@@ -50,7 +50,6 @@ const SyncContainer = ({
   onChangeCron,
   cron,
   serverCron,
-  theme,
 
   isLdapEnabledOnServer,
   isUIDisabled,
@@ -60,7 +59,7 @@ const SyncContainer = ({
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    setDocumentTitle(t("Ldap:LdapSyncTitle"));
+    isMobileView && setDocumentTitle(t("Ldap:LdapSyncTitle"));
     onCheckView();
     window.addEventListener("resize", onCheckView);
 
@@ -169,7 +168,6 @@ const SyncContainer = ({
     return (
       <StyledLdapPage
         isMobileView={isMobileView}
-        theme={theme}
         isSettingPaid={isLdapAvailable}
       >
         {renderBody()}
@@ -183,7 +181,7 @@ const SyncContainer = ({
 export const SyncContainerSection = inject(
   ({ currentQuotaStore, settingsStore, ldapStore }) => {
     const { isLdapAvailable } = currentQuotaStore;
-    const { currentDeviceType, theme } = settingsStore;
+    const { currentDeviceType } = settingsStore;
     const {
       syncLdap,
       saveCronLdap,
@@ -205,7 +203,6 @@ export const SyncContainerSection = inject(
       onChangeCron,
       cron,
       serverCron,
-      theme,
 
       isLdapEnabledOnServer: serverSettings.EnableLdapAuthentication,
       isUIDisabled,

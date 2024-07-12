@@ -82,10 +82,7 @@ const Sdk = ({
     [FilterType.FoldersOnly]: t("Common:SelectTypeFiles", {
       type: t("Translations:Folders").toLowerCase(),
     }),
-    [FilterType.OFormTemplateOnly]: t("Common:SelectTypeFiles", {
-      type: t("Files:FormsTemplates").toLowerCase(),
-    }),
-    [FilterType.OFormOnly]: t("Common:SelectTypeFiles", {
+    [FilterType.Pdf]: t("Common:SelectTypeFiles", {
       type: t("Files:Forms").toLowerCase(),
     }),
     EditorSupportedTypes: t("Common:SelectTypeFiles", {

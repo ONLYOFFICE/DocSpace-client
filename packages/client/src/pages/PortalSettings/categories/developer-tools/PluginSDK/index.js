@@ -88,7 +88,9 @@ const PluginSDK = ({
             </Text>
           </div>
         </div>
-        <Text className={"description-text"}>{p.description}</Text>
+        <Text className={"description-text"} title={p.description}>
+          {p.description}
+        </Text>
         <Button
           icon={icon}
           onClick={() => window.open(p.homePage, "_blank")}

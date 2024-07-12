@@ -159,7 +159,10 @@ const PureHome = (props) => {
     userId,
     getFolderModel,
     scrollToTop,
+    isEmptyGroups,
   } = props;
+
+  //console.log(t("ComingSoon"))
 
   const location = useLocation();
   const { groupId } = useParams();
@@ -171,6 +174,7 @@ const PureHome = (props) => {
   const isPeopleAccounts = location.pathname.includes("accounts/people");
   const isGroupsAccounts =
     location.pathname.includes("accounts/groups") && !groupId;
+  const isAccountsEmptyFilter = isGroupsAccounts && isEmptyGroups;
 
   const { onDrop } = useFiles({
     t,
@@ -385,8 +389,10 @@ const PureHome = (props) => {
           </Section.SectionWarning>
         )}
 
-        {(((!isEmptyPage || showFilterLoader) && !isErrorRoomNotAvailable) ||
-          isAccountsPage) &&
+        {(((!isEmptyPage || showFilterLoader) &&
+          !isAccountsEmptyFilter &&
+          !isErrorRoomNotAvailable) ||
+          (!isAccountsEmptyFilter && isAccountsPage)) &&
           !isSettingsPage && (
             <Section.SectionFilter>
               {isFrame ? (
@@ -558,7 +564,8 @@ export const Component = inject(
     const { usersStore, groupsStore, viewAs: accountsViewAs } = peopleStore;
 
     const { getUsersList: fetchPeople } = usersStore;
-    const { getGroups: fetchGroups, fetchGroup } = groupsStore;
+    const { getGroups: fetchGroups, fetchGroup, groups } = groupsStore;
+    const isEmptyGroups = (groups && groups.length === 0) || !Boolean(groups);
 
     if (!firstLoad) {
       if (isLoading) {
@@ -671,6 +678,7 @@ export const Component = inject(
       setSelectedFolder,
       getFolderModel,
       scrollToTop,
+      isEmptyGroups,
     };
   },
 )(observer(Home));

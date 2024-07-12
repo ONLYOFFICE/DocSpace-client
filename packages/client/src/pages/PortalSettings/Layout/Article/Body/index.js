@@ -66,6 +66,7 @@ const ArticleBodyContent = (props) => {
     isProfileLoading,
     limitedAccessSpace,
     currentColorScheme,
+    baseDomain,
   } = props;
 
   const [selectedKeys, setSelectedKeys] = React.useState([]);
@@ -287,7 +288,7 @@ const ArticleBodyContent = (props) => {
       }
     }
 
-    if (!isOwner) {
+    if (!isOwner || (baseDomain && baseDomain === "localhost")) {
       const index = resultTree.findIndex((n) => n.tKey === "PortalDeletion");
       if (index !== -1) {
         resultTree.splice(index, 1);
@@ -358,6 +359,7 @@ export default inject(
       currentDeviceType,
       limitedAccessSpace,
       currentColorScheme,
+      baseDomain,
     } = settingsStore;
 
     const isProfileLoading =
@@ -379,6 +381,7 @@ export default inject(
       isProfileLoading,
       limitedAccessSpace,
       currentColorScheme,
+      baseDomain,
     };
   },
 )(

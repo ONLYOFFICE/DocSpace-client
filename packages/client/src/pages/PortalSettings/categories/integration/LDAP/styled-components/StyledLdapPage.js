@@ -62,10 +62,7 @@ const StyledLdapPage = styled(Box)`
   }
 
   .hide-button {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? `margin-right: 12px`
-        : `margin-left: 12px`};
+    margin-inline-start: 12px;
   }
 
   .ldap_checkbox-container {
@@ -78,10 +75,7 @@ const StyledLdapPage = styled(Box)`
       display: flex;
       align-items: baseline;
       .help-icon {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? `padding-right: 6px`
-            : `padding-left: 6px`};
+        padding-inline-start: 6px;
         position: relative;
         bottom: 4px;
       }
@@ -96,12 +90,17 @@ const StyledLdapPage = styled(Box)`
 
   .ldap_attribute-mapping {
     margin-top: 16px;
-    margin-bottom: 30px;
+    margin-bottom: 12px;
     input {
       margin-bottom: 16px;
     }
     display: grid;
     grid-gap: 12px;
+
+    .access-selector {
+      margin-right: 0;
+      margin-top: -4px;
+    }
   }
 
   .group_membership-header,
@@ -110,10 +109,7 @@ const StyledLdapPage = styled(Box)`
     display: flex;
     align-items: baseline;
     .help-icon {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? `padding-right: 6px`
-          : `padding-left: 6px`};
+      padding-inline-start: 6px;
       position: relative;
       bottom: 2px;
     }
@@ -156,8 +152,9 @@ const StyledLdapPage = styled(Box)`
   .ldap_attribute-mapping-text {
     display: flex;
     align-items: baseline;
-    p:first-child {
-      margin-right: 4px;
+
+    .help-icon {
+      margin-inline-start: 4px;
     }
   }
 
@@ -205,10 +202,7 @@ const StyledLdapPage = styled(Box)`
 
   .field-label {
     .help-icon {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? `padding-right: 2px`
-          : `padding-left: 2px`};
+      padding-inline-start: 2px;
       position: relative;
       bottom: 0px;
     }

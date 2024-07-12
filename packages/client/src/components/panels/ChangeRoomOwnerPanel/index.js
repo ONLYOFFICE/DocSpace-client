@@ -32,12 +32,16 @@ import { Backdrop } from "@docspace/shared/components/backdrop";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import { withTranslation } from "react-i18next";
 import Filter from "@docspace/shared/api/people/filter";
-import { EmployeeType, DeviceType } from "@docspace/shared/enums";
+import { EmployeeType } from "@docspace/shared/enums";
 import { Portal } from "@docspace/shared/components/portal";
 import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledChangeRoomOwner = styled.div`
   display: contents;
+
+  .change-owner_people-selector {
+    overflow: visible;
+  }
 
   ${({ showBackButton }) =>
     !showBackButton &&
@@ -93,12 +97,7 @@ const ChangeRoomOwner = (props) => {
     if (e.keyCode === 13 || e.which === 13) onChangeRoomOwner();
   };
 
-  const onChangeRoomOwner = async (
-    user,
-    selectedAccess,
-    newFooterInputValue,
-    isChecked,
-  ) => {
+  const onChangeRoomOwner = async (user, isChecked) => {
     if (showBackButton) {
       setRoomParams && setRoomParams(user[0]);
     } else {
@@ -164,16 +163,13 @@ const ChangeRoomOwner = (props) => {
           emptyScreenDescription={t("CreateEditRoomDialog:PeopleSelectorInfo", {
             productName: PRODUCT_NAME,
           })}
+          className="change-owner_people-selector"
         />
       </Aside>
     </StyledChangeRoomOwner>
   );
 
-  return currentDeviceType === DeviceType.mobile ? (
-    <Portal visible={visible} element={asideComponent} />
-  ) : (
-    asideComponent
-  );
+  return <Portal visible={visible} element={asideComponent} />;
 };
 
 export default inject(

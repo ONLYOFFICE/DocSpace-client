@@ -49,6 +49,7 @@
   "EditLink": "Edit link",
   "EditRoom": "Edit room",
   "EditSharedLink": "Edit shared link",
+  "Embed": "Embed",
   "EmbeddingSettings": "Embedding settings",
   "EmptyFile": "Empty file",
   "EmptyFilterSubheadingText": "No files to be displayed for this filter here",
@@ -129,6 +130,7 @@
   "PrivateRoomDescriptionUnbreakable": "Unbreakable AES-256 algorithm.",
   "PrivateRoomHeader": "Welcome to {{organizationName}} private room where every symbol you type is encrypted",
   "PrivateRoomSupport": "Work in Private Room is available via {{organizationName}} desktop app. <3>Instructions</3>",
+  "Protected": "protected",
   "RecentlyAccessible": "Recently accessible via link",
   "RecentViaLinkEmptyContainerDescription": "Here you will find a list of the recently opened files shared with you via an external link.",
   "RemovedFromFavorites": "Removed from favorites",
@@ -147,6 +149,7 @@
   "RoomOwner": "Room owner",
   "RoomPinned": "Room pinned",
   "RoomRemoved": "Room removed",
+  "RoomsPinLimitMessage": "You can't pin more than 10 rooms to the top. Unpin some that are currently pinned.",
   "RoomsPinned": "Rooms pinned: {{count}}",
   "RoomsRemoved": "Rooms removed",
   "RoomsUnpinned": "Rooms unpinned: {{count}}",
@@ -180,7 +183,5 @@
   "WantToRestoreTheRoom": "All shared links in this room will become active, and its contents will be available to everyone with the link. Do you want to restore the room?",
   "WantToRestoreTheRooms": "All shared links in restored rooms will become active, and their contents will be available to everyone with the room links. Do you want to restore the rooms?",
   "WithSubfolders": "With subfolders",
-  "YouLeftTheRoom": "You have left the room",
-  "Protected": "protected",
-  "Embed": "Embed"
+  "YouLeftTheRoom": "You have left the room"
 }

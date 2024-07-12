@@ -26,6 +26,9 @@
 
 import axios from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
+import merge from "lodash/merge";
+import cloneDeep from "lodash/cloneDeep";
+
 import api from "@docspace/shared/api";
 import {
   FileType,
@@ -37,6 +40,7 @@ import {
   ShareAccessRights,
   Events,
   FilterKeys,
+  RoomSearchArea,
 } from "@docspace/shared/enums";
 
 import { RoomsTypes } from "@docspace/shared/utils";
@@ -388,6 +392,9 @@ class FilesStore {
       const { socketSubscribers } = socketHelper;
       const pathParts = `FILE-${id}`;
 
+      const { isVisible, infoPanelSelection, setInfoPanelSelection } =
+        this.infoPanelStore;
+
       if (!socketSubscribers.has(pathParts)) return;
 
       const foundIndex = this.files.findIndex((x) => x.id === id);
@@ -406,7 +413,15 @@ class FilesStore {
         this.files[foundIndex].fileStatus & ~FileStatus.IsEditing,
       );
 
-      this.getFileInfo(id);
+      this.getFileInfo(id).then((file) => {
+        if (
+          isVisible &&
+          file.id === infoPanelSelection?.id &&
+          infoPanelSelection?.fileExst === file.fileExst
+        ) {
+          setInfoPanelSelection(merge(cloneDeep(infoPanelSelection), file));
+        }
+      });
 
       this.createThumbnail(this.files[foundIndex]);
     });
@@ -778,8 +793,6 @@ class FilesStore {
   };
 
   removeActiveItem = (file) => {
-    console.log(this.activeFiles);
-
     this.activeFiles =
       this.activeFiles?.filter((item) => item.id !== file.id) ?? [];
   };
@@ -1601,11 +1614,11 @@ class FilesStore {
             })
             .reverse();
         });
-
         this.selectedFolderStore.setSelectedFolder({
           folders: data.folders,
           ...data.current,
           inRoom: !!data.current.inRoom,
+          isRoom: !!data.current.roomType,
           pathParts: data.pathParts,
           navigationPath,
           ...{ new: data.new },
@@ -1723,6 +1736,18 @@ class FilesStore {
             console.log("Request canceled", err.message);
           } else {
             toastr.error(err);
+            if (isThirdPartyError) {
+              const userId = this.userStore?.user?.id;
+              const searchArea = window.DocSpace.location.pathname.includes(
+                "shared",
+              )
+                ? RoomSearchArea.Active
+                : RoomSearchArea.Archive;
+
+              return window.DocSpace.navigate(
+                `${window.DocSpace.location.pathname}?${RoomsFilter.getDefault(userId, searchArea).toUrlParams(userId, true)}`,
+              );
+            }
           }
         }
       })
@@ -1986,7 +2011,7 @@ class FilesStore {
     return newOptions.filter((o) => o);
   };
 
-  getFilesContextOptions = (item, fromInfoPanel) => {
+  getFilesContextOptions = (item, optionsToRemove = []) => {
     const isFile = !!item.fileExst || item.contentLength;
     const isRoom = !!item.roomType;
     const isFavorite =
@@ -2029,6 +2054,7 @@ class FilesStore {
     const canCopy = item.security?.Copy;
     const canDuplicate = item.security?.Duplicate;
     const canDownload = item.security?.Download;
+    const canEmbed = item.security?.Embed;
 
     if (isFile) {
       const shouldFillForm = item.viewAccessibility.WebRestrictedEditing;
@@ -2046,7 +2072,8 @@ class FilesStore {
         item.viewAccessibility.ImageView || item.viewAccessibility.MediaView;
       const canViewFile = item.viewAccessibility.WebView;
 
-      const isMasterForm = item.fileExst === ".docxf";
+      const isOldForm =
+        item.fileExst === ".docxf" || item.fileExst === ".oform"; //TODO: Remove after change security options
       const isPdf = item.fileExst === ".pdf";
 
       let fileOptions = [
@@ -2088,7 +2115,7 @@ class FilesStore {
         "move", //category
         "move-to",
         "copy-to",
-        "copy",
+        "duplicate",
         "restore",
         "rename",
         "separator2",
@@ -2097,6 +2124,10 @@ class FilesStore {
         "remove-from-recent",
         "copy-general-link",
       ];
+
+      if (optionsToRemove.length) {
+        fileOptions = this.removeOptions(fileOptions, optionsToRemove);
+      }
 
       if (!canDownload) {
         fileOptions = this.removeOptions(fileOptions, ["download"]);
@@ -2160,16 +2191,17 @@ class FilesStore {
       }
 
       if (!canDuplicate) {
-        fileOptions = this.removeOptions(fileOptions, ["copy"]);
+        fileOptions = this.removeOptions(fileOptions, ["duplicate"]);
       }
+
       if (!canMove && !canCopy && !canDuplicate) {
         fileOptions = this.removeOptions(fileOptions, ["move"]);
       }
 
-      if (!(isMasterForm && canDuplicate))
+      if (!(isOldForm && canDuplicate))
         fileOptions = this.removeOptions(fileOptions, ["make-form"]);
 
-      if (!canSubmitToFormGallery) {
+      if (!canSubmitToFormGallery || isOldForm) {
         fileOptions = this.removeOptions(fileOptions, [
           "submit-to-gallery",
           "separator-SubmitToGallery",
@@ -2193,10 +2225,7 @@ class FilesStore {
       }
 
       if (!canViewFile || isRecycleBinFolder) {
-        fileOptions = this.removeOptions(fileOptions, [
-          "preview",
-          "embedding-settings",
-        ]);
+        fileOptions = this.removeOptions(fileOptions, ["preview"]);
       }
 
       if (!canOpenPlayer || isRecycleBinFolder) {
@@ -2328,7 +2357,7 @@ class FilesStore {
         ]);
       }
 
-      if (this.publicRoomStore.isPublicRoom) {
+      if (this.publicRoomStore.isPublicRoom || !canEmbed) {
         fileOptions = this.removeOptions(fileOptions, ["embedding-settings"]);
       }
 
@@ -2356,6 +2385,7 @@ class FilesStore {
       const canPinRoom = item.security?.Pin;
 
       const canEditRoom = item.security?.EditRoom;
+      const canDuplicateRoom = item.security?.Duplicate;
 
       const canViewRoomInfo = item.security?.Read;
       const canMuteRoom = item.security?.Mute;
@@ -2375,18 +2405,24 @@ class FilesStore {
         "edit-room",
         "invite-users-to-room",
         "external-link",
+        "embedding-settings",
         "room-info",
         "pin-room",
         "unpin-room",
         "mute-room",
         "unmute-room",
         "separator1",
+        "duplicate-room",
         "download",
         "archive-room",
         "unarchive-room",
         "leave-room",
         "delete",
       ];
+
+      if (optionsToRemove.length) {
+        roomOptions = this.removeOptions(roomOptions, optionsToRemove);
+      }
 
       if (!canEditRoom) {
         roomOptions = this.removeOptions(roomOptions, [
@@ -2410,11 +2446,16 @@ class FilesStore {
         roomOptions = this.removeOptions(roomOptions, ["delete"]);
       }
 
+      if (!canDuplicate) {
+        roomOptions = this.removeOptions(roomOptions, ["duplicate-room"]);
+      }
+
       if (!canDownload) {
-        roomOptions = this.removeOptions(roomOptions, [
-          "separator1",
-          "download",
-        ]);
+        roomOptions = this.removeOptions(roomOptions, ["download"]);
+      }
+
+      if (!canDownload && !canDuplicate) {
+        roomOptions = this.removeOptions(roomOptions, ["separator1"]);
       }
 
       if (!item.providerKey) {
@@ -2443,6 +2484,10 @@ class FilesStore {
           : (roomOptions = this.removeOptions(roomOptions, ["unmute-room"]));
       }
 
+      if (this.publicRoomStore.isPublicRoom || !canEmbed) {
+        roomOptions = this.removeOptions(roomOptions, ["embedding-settings"]);
+      }
+
       if (!canViewRoomInfo) {
         roomOptions = this.removeOptions(roomOptions, ["room-info"]);
       }
@@ -2466,10 +2511,6 @@ class FilesStore {
         }
       }
 
-      // if (fromInfoPanel) {
-      //   roomOptions = this.removeOptions(roomOptions, ["external-link"]);
-      // }
-
       roomOptions = this.removeSeparator(roomOptions);
 
       return roomOptions;
@@ -2490,6 +2531,7 @@ class FilesStore {
         "move", //category
         "move-to",
         "copy-to",
+        "duplicate",
         "mark-read",
         "restore",
         "rename",
@@ -2498,6 +2540,10 @@ class FilesStore {
         // "unsubscribe",
         "delete",
       ];
+
+      if (optionsToRemove.length) {
+        folderOptions = this.removeOptions(folderOptions, optionsToRemove);
+      }
 
       if (!canDownload) {
         folderOptions = this.removeOptions(folderOptions, ["download"]);
@@ -2519,7 +2565,7 @@ class FilesStore {
       }
 
       if (!canDuplicate) {
-        folderOptions = this.removeOptions(folderOptions, ["copy"]);
+        folderOptions = this.removeOptions(folderOptions, ["duplicate"]);
       }
 
       if (!canMove && !canCopy && !canDuplicate) {
@@ -3496,7 +3542,7 @@ class FilesStore {
       case FilterType.ArchiveOnly:
         return t("Archives");
       case FilterType.FilesOnly:
-        return t("AllFiles");
+        return t("Translations:Files");
       case `room-${RoomsType.FillingFormsRoom}`:
         return t("Common:FillingFormRooms");
       case `room-${RoomsType.CustomRoom}`:

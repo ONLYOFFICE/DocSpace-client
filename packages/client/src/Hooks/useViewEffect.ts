@@ -31,7 +31,7 @@ import { DeviceType } from "@docspace/shared/enums";
 import { isTablet, isMobile, Context } from "@docspace/shared/utils";
 import { isMobile as isMobileDevice } from "react-device-detect";
 
-type DeviceUnionType = (typeof DeviceType)[keyof typeof DeviceType];
+export type DeviceUnionType = (typeof DeviceType)[keyof typeof DeviceType];
 
 type useViewEffectProps = {
   view: string;

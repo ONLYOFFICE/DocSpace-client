@@ -58,6 +58,14 @@ const generalRoutes = [
         path: "interface-theme",
         lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
       },
+      {
+        path: "authorized-apps",
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
 ];

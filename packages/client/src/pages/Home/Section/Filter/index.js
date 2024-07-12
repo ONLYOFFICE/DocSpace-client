@@ -60,7 +60,7 @@ import {
   ROOMS_PROVIDER_TYPE_NAME,
 } from "@docspace/shared/constants";
 
-import { getDefaultRoomName } from "SRC_DIR/helpers/filesUtils";
+import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
 
 import { SortByFieldName, TableVersions } from "SRC_DIR/helpers/constants";
 
@@ -470,7 +470,9 @@ const SectionFilterContent = ({
           newFilter.searchArea === RoomSearchArea.Active
             ? "rooms/shared"
             : "rooms/archived";
-        navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
+        navigate(
+          `${path}/filter?${newFilter.toUrlParams(userId)}&hash=${new Date().getTime()}`,
+        );
       } else {
         const filterType = getFilterType(data) || null;
 
@@ -1025,7 +1027,7 @@ const SectionFilterContent = ({
       if (roomsFilter.type) {
         const key = +roomsFilter.type;
 
-        const label = getDefaultRoomName(key, t);
+        const label = getRoomTypeName(key, t);
 
         filterValues.push({
           key: key,
@@ -1110,12 +1112,9 @@ const SectionFilterContent = ({
             label = t("Media");
             break;
           case FilterType.FilesOnly.toString():
-            label = t("AllFiles");
+            label = t("Translations:Files");
             break;
-          case FilterType.OFormTemplateOnly.toString():
-            label = t("FormsTemplates");
-            break;
-          case FilterType.OFormOnly.toString():
+          case FilterType.Pdf.toString():
             label = t("Forms");
             break;
         }
@@ -1639,16 +1638,16 @@ const SectionFilterContent = ({
           },
           ...folders,
           {
+            id: "filter_type-all-files",
+            key: FilterType.FilesOnly.toString(),
+            group: FilterGroups.filterType,
+            label: t("Translations:Files").toLowerCase(),
+          },
+          {
             id: "filter_type-documents",
             key: FilterType.DocumentsOnly.toString(),
             group: FilterGroups.filterType,
             label: t("Common:Documents").toLowerCase(),
-          },
-          {
-            id: "filter_type-presentations",
-            key: FilterType.PresentationsOnly.toString(),
-            group: FilterGroups.filterType,
-            label: t("Translations:Presentations").toLowerCase(),
           },
           {
             id: "filter_type-spreadsheets",
@@ -1657,27 +1656,20 @@ const SectionFilterContent = ({
             label: t("Translations:Spreadsheets").toLowerCase(),
           },
           {
-            id: "filter_type-form-templates",
-            key: FilterType.OFormTemplateOnly.toString(),
+            id: "filter_type-presentations",
+            key: FilterType.PresentationsOnly.toString(),
             group: FilterGroups.filterType,
-            label: t("FormsTemplates").toLowerCase(),
+            label: t("Translations:Presentations").toLowerCase(),
           },
           {
             id: "filter_type-forms",
-            key: FilterType.OFormOnly.toString(),
+            key: FilterType.Pdf.toString(),
             group: FilterGroups.filterType,
             label: t("Forms").toLowerCase(),
           },
           ...archives,
-
           ...images,
           ...media,
-          {
-            id: "filter_type-all-files",
-            key: FilterType.FilesOnly.toString(),
-            group: FilterGroups.filterType,
-            label: t("AllFiles").toLowerCase(),
-          },
         ];
 
     const subjectOptions = [
@@ -2388,7 +2380,7 @@ const SectionFilterContent = ({
         commonOptions.push(tags);
         commonOptions.push(owner);
         commonOptions.push(modifiedDate);
-        commonOptions.push(sortByStorage);
+        showStorageInfo && commonOptions.push(sortByStorage);
       } else if (isTrash) {
         // commonOptions.push(authorOption);
         // commonOptions.push(creationDate);

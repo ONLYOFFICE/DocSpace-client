@@ -37,6 +37,7 @@ import {
   convertRoomsToItems,
 } from "../FilesSelector.utils";
 import { UseSocketHelperProps } from "../FilesSelector.types";
+import { SettingsContext } from "../contexts/Settings";
 
 const useSocketHelper = ({
   socketHelper,
@@ -47,8 +48,9 @@ const useSocketHelper = ({
   setItems,
   setBreadCrumbs,
   setTotal,
-  getIcon,
 }: UseSocketHelperProps) => {
+  const { getIcon } = React.useContext(SettingsContext);
+
   const subscribedId = React.useRef<null | number>(null);
 
   const unsubscribe = React.useCallback(

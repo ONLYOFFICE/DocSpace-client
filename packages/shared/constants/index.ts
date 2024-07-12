@@ -68,15 +68,6 @@ export const MAX_FILE_COMMENT_LENGTH = 255;
 export const LINKS_LIMIT_COUNT = 5;
 export const LOADER_TIMEOUT = 300;
 
-export const ROOMS_TYPE_TRANSLATIONS = Object.freeze({
-  1: "Files:FillingFormRooms",
-  2: "Files:CollaborationRooms",
-  3: "Common:Review",
-  4: "Files:ViewOnlyRooms",
-  5: "Files:CustomRooms",
-  6: "Files:PublicRoom",
-});
-
 export const ROOMS_PROVIDER_TYPE_NAME = Object.freeze({
   1: "Box",
   2: "DropBox",
@@ -187,3 +178,6 @@ export const SDK_SCRIPT_URL =
   typeof window !== "undefined"
     ? `${window.location.origin}/static/scripts/sdk/${SDK_VERSION}/api.js`
     : "";
+
+export const ALLOWED_PASSWORD_CHARACTERS =
+  "a-z, A-Z, 0-9, !\"#%&'()*+,-./:;<=>?@[]^_`{|}";

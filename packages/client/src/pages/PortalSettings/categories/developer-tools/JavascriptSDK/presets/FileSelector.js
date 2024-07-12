@@ -112,11 +112,7 @@ const FileSelector = (props) => {
       label: t(`Translations:Spreadsheets`),
     },
     {
-      key: FilterType.OFormTemplateOnly,
-      label: t(`Files:FormsTemplates`),
-    },
-    {
-      key: FilterType.OFormOnly,
+      key: FilterType.Pdf,
       label: t(`Files:Forms`),
     },
     {
@@ -133,7 +129,7 @@ const FileSelector = (props) => {
     },
     {
       key: FilterType.FilesOnly,
-      label: t(`Files:AllFiles`),
+      label: t(`Translations:Files`),
     },
   ];
 

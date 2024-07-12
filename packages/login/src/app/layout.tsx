@@ -75,9 +75,9 @@ export default async function RootLayout({
     redirectUrl = url.toString();
   }
 
-  /*   if (typeof settings !== "string" && settings?.wizardToken) {
+  if (typeof settings !== "string" && settings?.wizardToken) {
     redirectUrl = `wizard`;
-  } */
+  }
 
   if (
     typeof settings !== "string" &&

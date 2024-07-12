@@ -58,7 +58,8 @@ export const Providers = ({
   );
 
   React.useEffect(() => {
-    if (redirectURL) window.location.replace(redirectURL);
+    if (redirectURL && window.location.pathname !== `/${redirectURL}`)
+      window.location.replace(redirectURL);
   }, [redirectURL]);
 
   const { i18n } = useI18N({

@@ -118,6 +118,18 @@ class PeopleTableHeader extends React.Component {
     this.state = { columns, resetColumnsSize };
   }
 
+  componentDidUpdate(prevProps) {
+    const { filter } = this.props;
+    const { columns } = this.state;
+    if (filter.sortBy !== prevProps.filter.sortBy) {
+      const columnIndex = columns.findIndex((c) => c?.sortBy === filter.sortBy);
+      if (columnIndex === -1) return;
+
+      !columns[columnIndex].enable &&
+        columns[columnIndex].onChange?.(columns[columnIndex].key);
+    }
+  }
+
   onColumnChange = (key, e) => {
     const { columns } = this.state;
     const columnIndex = columns.findIndex((c) => c.key === key);

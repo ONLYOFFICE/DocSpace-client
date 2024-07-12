@@ -155,7 +155,7 @@ export async function getPortalCultures() {
 
   const res = await fetch(getPortalCultures);
 
-  if (!res.ok) return;
+  if (!res.ok) throw new Error(res.statusText);
 
   const cultures = await res.json();
 
@@ -212,7 +212,7 @@ export async function getMachineName(confirmKey: string | null = null) {
 
   const res = await fetch(getMachineName);
 
-  if (!res.ok) return;
+  if (!res.ok) throw new Error(res.statusText);
 
   const machineName = await res.json();
 
@@ -228,7 +228,7 @@ export async function getIsLicenseRequired() {
 
   const res = await fetch(getIsLicenseRequired);
 
-  if (!res.ok) return;
+  if (!res.ok) throw new Error(res.statusText);
 
   const isLicenseRequire = await res.json();
 
@@ -244,7 +244,7 @@ export async function getPortalTimeZones(confirmKey: string | null = null) {
 
   const res = await fetch(getPortalTimeZones);
 
-  if (!res.ok) return;
+  if (!res.ok) throw new Error(res.statusText);
 
   const portalTimeZones = await res.json();
 

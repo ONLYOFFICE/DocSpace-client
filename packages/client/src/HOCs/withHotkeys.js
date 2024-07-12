@@ -144,6 +144,18 @@ const withHotkeys = (Component) => {
       window.dispatchEvent(event);
     };
 
+    const onRename = () => {
+      if (selection.length === 1) {
+        const item = selection[0];
+
+        if (!item.contextOptions.includes("rename")) return;
+
+        const event = new Event(Events.RENAME);
+        event.item = item;
+        window.dispatchEvent(event);
+      }
+    };
+
     const onCreateRoom = () => {
       if (!isVisitor && isRoomsFolder && security?.Create) {
         if (isGracePeriod) {
@@ -384,6 +396,8 @@ const withHotkeys = (Component) => {
       () => copyToClipboard(t, true),
       hotkeysFilter,
     );
+
+    useHotkeys("f2", onRename, hotkeysFilter);
 
     //Upload file
     useHotkeys(

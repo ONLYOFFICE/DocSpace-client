@@ -72,13 +72,14 @@ import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
 import { setLicense } from "@docspace/shared/api/settings";
 import { ComboBox, ComboBoxSize } from "@docspace/shared/components/combobox";
 import BetaBadge from "@docspace/client/src/components/BetaBadgeWrapper";
-import { isMobile } from "@docspace/shared/utils";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { useTheme } from "styled-components";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import api from "@docspace/shared/api";
 import { setCookie } from "@docspace/shared/utils/cookie";
 import { InputSize, InputType } from "@docspace/shared/components/text-input";
+import useDeviceType from "@/hooks/useDeviceType";
+import { DeviceType } from "@docspace/shared/enums";
 
 type WizardFormProps = {
   passwordSettings?: TPasswordSettings;
@@ -125,14 +126,16 @@ function WizardForm(props: WizardFormProps) {
   const [agreeTerms, setAgreeTerms] = useState(false);
   const [hasErrorAgree, setHasErrorAgree] = useState(false);
   const [isCreated, setIsCreated] = useState(false);
+  const [error, setError] = useState<unknown>();
 
   const { t, i18n } = useTranslation(["Wizard", "Common"]);
   const theme = useTheme();
+  const { currentDeviceType } = useDeviceType();
 
   const refPassInput = useRef<PasswordInputHandle>(null);
 
-  //TODO: add property
   const userCulture = culture || "en";
+  const isMobileView = currentDeviceType === DeviceType.mobile;
 
   const convertedCulture = convertLanguage(userCulture);
 
@@ -271,12 +274,18 @@ function WizardForm(props: WizardFormProps) {
         "max-age": COOKIE_EXPIRATION_YEAR,
       });
 
+      window.location.replace("/");
       //setWizardComplete();
     } catch (error) {
-      console.error(error);
+      setError(error);
       setIsCreated(false);
     }
   };
+
+  if (error) {
+    console.error(error);
+    throw new Error(t("ErrorInitWizard"));
+  }
 
   return (
     <WizardContainer>
@@ -392,14 +401,14 @@ function WizardForm(props: WizardFormProps) {
             selectedOption={selectedLanguage}
             onSelect={onLanguageSelect}
             isDisabled={isCreated}
-            scaled={isMobile()}
+            scaled={isMobileView}
             scaledOptions={false}
             size={ComboBoxSize.content}
             showDisabledItems={true}
             dropDownMaxHeight={364}
             manualWidth="250px"
-            isDefaultMode={!isMobile()}
-            withBlur={isMobile()}
+            isDefaultMode={!isMobileView}
+            withBlur={isMobileView}
             fillIcon={false}
             modernView={true}
           />
@@ -421,14 +430,14 @@ function WizardForm(props: WizardFormProps) {
           selectedOption={selectedTimezone}
           onSelect={onTimezoneSelect}
           isDisabled={isCreated}
-          scaled={isMobile()}
+          scaled={isMobileView}
           scaledOptions={false}
           size={ComboBoxSize.content}
           showDisabledItems={true}
           dropDownMaxHeight={364}
           manualWidth="350px"
-          isDefaultMode={!isMobile()}
-          withBlur={isMobile()}
+          isDefaultMode={!isMobileView}
+          withBlur={isMobileView}
           fillIcon={false}
           modernView={true}
         />

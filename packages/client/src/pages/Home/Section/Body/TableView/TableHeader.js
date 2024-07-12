@@ -425,6 +425,8 @@ class FilesTableHeader extends React.Component {
       isRecentTab,
       isArchiveFolder,
       showStorageInfo,
+      filter,
+      roomsFilter,
     } = this.props;
 
     if (
@@ -440,6 +442,19 @@ class FilesTableHeader extends React.Component {
     }
 
     const { columns } = this.state;
+
+    if (
+      filter.sortBy !== prevProps.filter.sortBy ||
+      (isRooms && roomsFilter.sortBy !== prevProps.roomsFilter.sortBy)
+    ) {
+      const sortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
+      const columnIndex = columns.findIndex((c) => c?.sortBy === sortBy);
+      if (columnIndex === -1) return;
+
+      !columns[columnIndex].enable &&
+        columns[columnIndex].onChange?.(columns[columnIndex].key);
+    }
+
     if (this.props.withContent !== prevProps.withContent) {
       const columnIndex = columns.findIndex((c) => c.key === "Share");
       if (columnIndex === -1) return;

@@ -149,6 +149,7 @@
   "RoomOwner": "Room owner",
   "RoomPinned": "Room pinned",
   "RoomRemoved": "Room removed",
+  "RoomsPinLimitMessage": "You can't pin more than 10 rooms to the top. Unpin some that are currently pinned.",
   "RoomsPinned": "Rooms pinned: {{count}}",
   "RoomsRemoved": "Rooms removed",
   "RoomsUnpinned": "Rooms unpinned: {{count}}",

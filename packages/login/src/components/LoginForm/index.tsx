@@ -306,8 +306,14 @@ const LoginForm = ({
           return;
         }
 
-        checkConfirmLink(confirmData);
-
+        try {
+          if (confirmData) await checkConfirmLink(confirmData);
+        } catch (e) {
+          console.error(e);
+        }
+        return res;
+      })
+      .then((res: string | object) => {
         const isConfirm = typeof res === "string" && res.includes("confirm");
         const redirectPath =
           referenceUrl || sessionStorage.getItem("referenceUrl");
@@ -364,6 +370,7 @@ const LoginForm = ({
     router,
     clientId,
     referenceUrl,
+    loginData,
   ]);
 
   const onBlurEmail = () => {

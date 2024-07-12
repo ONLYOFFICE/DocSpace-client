@@ -14,10 +14,14 @@ import {
 } from "../../utils/oauth/types";
 
 export const getClient = async (clientId: string): Promise<IClientProps> => {
-  const client = (await request({
-    method: "get",
-    url: `/clients/${clientId}`,
-  })) as IClientResDTO;
+  const client = (await request(
+    {
+      method: "get",
+      url: `/clients/${clientId}`,
+    },
+    false,
+    true,
+  )) as IClientResDTO;
 
   return transformToClientProps(client);
 };
@@ -26,10 +30,14 @@ export const getClientList = async (
   page: number,
   limit: number,
 ): Promise<IClientListProps> => {
-  const data = (await request({
-    method: "get",
-    url: `/clients?page=${page}&limit=${limit}`,
-  })) as IClientListDTO;
+  const data = (await request(
+    {
+      method: "get",
+      url: `/clients?page=${page}&limit=${limit}`,
+    },
+    false,
+    true,
+  )) as IClientListDTO;
 
   const clients: IClientListProps = { ...data, data: [] };
 
@@ -45,66 +53,94 @@ export const getClientList = async (
 export const addClient = async (data: IClientReqDTO): Promise<IClientProps> => {
   data.logout_redirect_uri = data.website_url;
 
-  const client = (await request({
-    method: "post",
-    url: `/clients`,
-    data,
-  })) as IClientResDTO;
+  const client = (await request(
+    {
+      method: "post",
+      url: `/clients`,
+      data,
+    },
+    false,
+    true,
+  )) as IClientResDTO;
 
   return transformToClientProps(client);
 };
 
 export const updateClient = async (clientId: string, data: IClientReqDTO) => {
-  await request({
-    method: "put",
-    url: `/clients/${clientId}`,
-    data,
-  });
+  await request(
+    {
+      method: "put",
+      url: `/clients/${clientId}`,
+      data,
+    },
+    false,
+    true,
+  );
 };
 
 export const changeClientStatus = async (
   clientId: string,
   status: boolean,
 ): Promise<void> => {
-  await request({
-    method: "patch",
-    url: `/clients/${clientId}/activation`,
-    data: { status },
-  });
+  await request(
+    {
+      method: "patch",
+      url: `/clients/${clientId}/activation`,
+      data: { status },
+    },
+    false,
+    true,
+  );
 };
 
 export const regenerateSecret = async (
   clientId: string,
 ): Promise<{ client_secret: string }> => {
-  const clientSecret = (await request({
-    method: "patch",
-    url: `/clients/${clientId}/regenerate`,
-  })) as { client_secret: string };
+  const clientSecret = (await request(
+    {
+      method: "patch",
+      url: `/clients/${clientId}/regenerate`,
+    },
+    false,
+    true,
+  )) as { client_secret: string };
 
   return clientSecret;
 };
 
 export const deleteClient = async (clientId: string): Promise<void> => {
-  await request({
-    method: "delete",
-    url: `/clients/${clientId}`,
-  });
+  await request(
+    {
+      method: "delete",
+      url: `/clients/${clientId}`,
+    },
+    false,
+    true,
+  );
 };
 
 export const getScope = async (name: string): Promise<TScope> => {
-  const scope = (await request({
-    method: "get",
-    url: `/scopes/${name}`,
-  })) as TScope;
+  const scope = (await request(
+    {
+      method: "get",
+      url: `/scopes/${name}`,
+    },
+    false,
+    true,
+  )) as TScope;
 
   return scope;
 };
 
 export const getScopeList = async (): Promise<TScope[]> => {
-  const scopeList = (await request({
-    method: "get",
-    url: `/scopes`,
-  })) as TScope[];
+  const scopeList = (await request(
+    {
+      method: "get",
+      url: `/scopes`,
+    },
+    false,
+    true,
+  )) as TScope[];
 
   return scopeList;
 };
@@ -113,10 +149,14 @@ export const getConsentList = async (
   page: number = 0,
   limit: number = 100,
 ): Promise<TConsentList & { consents: IClientProps[] }> => {
-  const consentList = (await request({
-    method: "get",
-    url: `/clients/consents?page=${page}&limit=${limit}`,
-  })) as TConsentList;
+  const consentList = (await request(
+    {
+      method: "get",
+      url: `/clients/consents?page=${page}&limit=${limit}`,
+    },
+    false,
+    true,
+  )) as TConsentList;
 
   const consents: IClientProps[] = [];
 
@@ -138,10 +178,14 @@ export const getConsentList = async (
 };
 
 export const revokeUserClient = async (clientId: string): Promise<void> => {
-  await request({
-    method: "delete",
-    url: `/clients/${clientId}/revoke`,
-  });
+  await request(
+    {
+      method: "delete",
+      url: `/clients/${clientId}/revoke`,
+    },
+    false,
+    true,
+  );
 };
 
 export const onOAuthSubmit = (
@@ -158,15 +202,19 @@ export const onOAuthSubmit = (
     formData.append("scope", s);
   });
 
-  return request({
-    method: "post",
-    url: `/oauth2/authorize`,
-    data: formData,
-    withRedirect: true,
-    headers: {
-      "X-Disable-Redirect": "true",
+  return request(
+    {
+      method: "post",
+      url: `/oauth2/authorize`,
+      data: formData,
+      withRedirect: true,
+      headers: {
+        "X-Disable-Redirect": "true",
+      },
     },
-  });
+    false,
+    true,
+  );
 };
 
 export const onOAuthCancel = (clientId: string, clientState: string) => {
@@ -175,13 +223,17 @@ export const onOAuthCancel = (clientId: string, clientState: string) => {
   formData.append("client_id", clientId);
   formData.append("state", clientState);
 
-  return request({
-    method: "post",
-    url: `/oauth2/authorize`,
-    data: formData,
-    withRedirect: true,
-    headers: {
-      "X-Disable-Redirect": "true",
+  return request(
+    {
+      method: "post",
+      url: `/oauth2/authorize`,
+      data: formData,
+      withRedirect: true,
+      headers: {
+        "X-Disable-Redirect": "true",
+      },
     },
-  });
+    false,
+    true,
+  );
 };

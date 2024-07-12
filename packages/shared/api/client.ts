@@ -36,8 +36,9 @@ export const initSSR = (headers: Record<string, string>) => {
 export const request = (
   options: TReqOption & AxiosRequestConfig,
   skipRedirect = false,
+  isOAuth = false,
 ) => {
-  return client.request(options, skipRedirect);
+  return client.request(options, skipRedirect, isOAuth);
 };
 
 export const setWithCredentialsStatus = (state: boolean) => {

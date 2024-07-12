@@ -31,24 +31,6 @@ import componentLoader from "@docspace/shared/utils/component-loader";
 
 import { generalRoutes } from "./general";
 
-const OAuthCreatePage = loadable(() =>
-  componentLoader(
-    () =>
-      import(
-        "../pages/PortalSettings/categories/developer-tools/OAuth/OAuthCreatePage"
-      ),
-  ),
-);
-
-const OAuthEditPage = loadable(() =>
-  componentLoader(
-    () =>
-      import(
-        "../pages/PortalSettings/categories/developer-tools/OAuth/OAuthEditPage"
-      ),
-  ),
-);
-
 const PortalSettingsRoutes = {
   path: "portal-settings/",
   lazy: () => componentLoader(() => import("SRC_DIR/pages/PortalSettings")),

@@ -2012,7 +2012,6 @@ const SectionFilterContent = ({
       }
 
       options.push(firstName, lastName);
-
       if (accountsViewAs === "table") {
         const tableColumns = isInsideGroup
           ? TABLE_INSIDE_GROUP_COLUMNS
@@ -2180,220 +2179,24 @@ const SectionFilterContent = ({
 
     commonOptions.push(name);
 
-    if (viewAs === "table") {
-      if (isRooms) {
-        const availableSort = localStorage
-          ?.getItem(`${TABLE_ROOMS_COLUMNS}=${userId}`)
-          ?.split(",");
-
-        const infoPanelColumnsSize = localStorage
-          ?.getItem(`${COLUMNS_ROOMS_SIZE_INFO_PANEL}=${userId}`)
-          ?.split(" ");
-
-        const hideOption = infoPanelVisible && infoPanelColumnsSize;
-
-        if (availableSort?.includes("Type")) {
-          const idx = availableSort.findIndex((x) => x === "Type");
-          const hide = hideOption && infoPanelColumnsSize[idx] === "0px";
-
-          !hide && commonOptions.push(roomType);
-        }
-
-        if (availableSort?.includes("Tags")) {
-          const idx = availableSort.findIndex((x) => x === "Tags");
-          const hide = hideOption && infoPanelColumnsSize[idx] === "0px";
-
-          !hide && commonOptions.push(tags);
-        }
-
-        if (availableSort?.includes("Owner")) {
-          const idx = availableSort.findIndex((x) => x === "Owner");
-          const hide = hideOption && infoPanelColumnsSize[idx] === "0px";
-
-          !hide && commonOptions.push(owner);
-        }
-
-        if (availableSort?.includes("Activity")) {
-          const idx = availableSort.findIndex((x) => x === "Activity");
-          const hide = hideOption && infoPanelColumnsSize[idx] === "0px";
-
-          !hide && commonOptions.push(modifiedDate);
-        }
-
-        if (showStorageInfo && availableSort?.includes("Storage")) {
-          const idx = availableSort.findIndex(
-            (x) => x === SortByFieldName.UsedSpace,
-          );
-          const hide = hideOption && infoPanelColumnsSize[idx] === "0px";
-
-          !hide && commonOptions.push(sortByStorage);
-        }
-      } else if (isTrash) {
-        const availableSort = localStorage
-          ?.getItem(`${TABLE_TRASH_COLUMNS}=${userId}`)
-          ?.split(",");
-
-        const infoPanelColumnsSize = localStorage
-          ?.getItem(`${COLUMNS_TRASH_SIZE_INFO_PANEL}=${userId}`)
-          ?.split(" ");
-
-        if (availableSort?.includes("Room")) {
-          const idx = availableSort.findIndex((x) => x === "Room");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
-
-          // !hide && commonOptions.push(room);
-        }
-        if (availableSort?.includes("AuthorTrash")) {
-          const idx = availableSort.findIndex((x) => x === "AuthorTrash");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
-
-          // !hide && commonOptions.push(authorOption);
-        }
-        if (availableSort?.includes("CreatedTrash")) {
-          const idx = availableSort.findIndex((x) => x === "CreatedTrash");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
-
-          // !hide && commonOptions.push(creationDate);
-        }
-        if (availableSort?.includes("Erasure")) {
-          const idx = availableSort.findIndex((x) => x === "Erasure");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
-
-          !hide && commonOptions.push(erasure);
-        }
-        if (availableSort?.includes("SizeTrash")) {
-          const idx = availableSort.findIndex((x) => x === "SizeTrash");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
-
-          !hide && commonOptions.push(size);
-        }
-        if (availableSort?.includes("TypeTrash")) {
-          const idx = availableSort.findIndex((x) => x === "TypeTrash");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
-
-          // !hide && commonOptions.push(type);
-        }
-      } else if (isRecentTab) {
-        const availableSort = localStorage
-          ?.getItem(`${TABLE_RECENT_COLUMNS}=${userId}`)
-          ?.split(",");
-
-        const infoPanelColumnsSize = localStorage
-          ?.getItem(`${COLUMNS_RECENT_SIZE_INFO_PANEL}=${userId}`)
-          ?.split(" ");
-
-        if (availableSort?.includes("LastOpened")) {
-          const idx = availableSort.findIndex((x) => x === "LastOpened");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
-
-          !hide && commonOptions.push(lastOpenedDate);
-        }
-
-        if (availableSort?.includes("Size")) {
-          const idx = availableSort.findIndex((x) => x === "Size");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
-
-          !hide && commonOptions.push(size);
-        }
-      } else {
-        const availableSort = localStorage
-          ?.getItem(`${TABLE_COLUMNS}=${userId}`)
-          ?.split(",");
-
-        const infoPanelColumnsSize = localStorage
-          ?.getItem(`${COLUMNS_SIZE_INFO_PANEL}=${userId}`)
-          ?.split(" ");
-
-        if (availableSort?.includes("Author")) {
-          const idx = availableSort.findIndex((x) => x === "Author");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
-
-          // !hide && commonOptions.push(authorOption);
-        }
-        if (availableSort?.includes("Created")) {
-          const idx = availableSort.findIndex((x) => x === "Created");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
-
-          // !hide && commonOptions.push(creationDate);
-        }
-        if (availableSort?.includes("Modified")) {
-          const idx = availableSort.findIndex((x) => x === "Modified");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
-
-          !hide && commonOptions.push(modifiedDate);
-        }
-        if (availableSort?.includes("Size")) {
-          const idx = availableSort.findIndex((x) => x === "Size");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
-
-          !hide && commonOptions.push(size);
-        }
-        if (availableSort?.includes("Type")) {
-          const idx = availableSort.findIndex((x) => x === "Type");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
-
-          // !hide && commonOptions.push(type);
-        }
-      }
+    if (isRooms) {
+      commonOptions.push(roomType);
+      commonOptions.push(tags);
+      commonOptions.push(owner);
+      commonOptions.push(modifiedDate);
+      showStorageInfo && commonOptions.push(sortByStorage);
+    } else if (isTrash) {
+      // commonOptions.push(authorOption);
+      // commonOptions.push(creationDate);
+      commonOptions.push(erasure);
+      commonOptions.push(size);
+      // commonOptions.push(type);
     } else {
-      if (isRooms) {
-        commonOptions.push(roomType);
-        commonOptions.push(tags);
-        commonOptions.push(owner);
-        commonOptions.push(modifiedDate);
-        showStorageInfo && commonOptions.push(sortByStorage);
-      } else if (isTrash) {
-        // commonOptions.push(authorOption);
-        // commonOptions.push(creationDate);
-        commonOptions.push(erasure);
-        commonOptions.push(size);
-        // commonOptions.push(type);
-      } else {
-        // commonOptions.push(authorOption);
-        // commonOptions.push(creationDate);
-        commonOptions.push(modifiedDate);
-        commonOptions.push(size);
-        // commonOptions.push(type);
-      }
+      // commonOptions.push(authorOption);
+      // commonOptions.push(creationDate);
+      commonOptions.push(modifiedDate);
+      commonOptions.push(size);
+      // commonOptions.push(type);
     }
 
     return commonOptions;

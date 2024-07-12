@@ -25,6 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { Metadata } from "next";
+import { headers } from "next/headers";
+
+import { getSelectorsByUserAgent } from "react-device-detect";
+
 import { BRAND_NAME } from "@docspace/shared/constants";
 
 import { getData } from "@/utils/actions";
@@ -51,6 +55,17 @@ async function Page({ searchParams }: RootPageProps) {
   const { fileId, fileid, version, doc, action, share, editorType, error } =
     searchParams ?? initialSearchParams;
 
+  const hdrs = headers();
+
+  let type = editorType;
+
+  const ua = hdrs.get("user-agent");
+  if (ua && !type) {
+    const { isMobile } = getSelectorsByUserAgent(ua);
+
+    if (isMobile) type = "mobile";
+  }
+
   const startDate = new Date();
 
   const data = await getData(
@@ -59,7 +74,7 @@ async function Page({ searchParams }: RootPageProps) {
     doc,
     action,
     share,
-    editorType,
+    type,
   );
 
   const timer = new Date().getTime() - startDate.getTime();

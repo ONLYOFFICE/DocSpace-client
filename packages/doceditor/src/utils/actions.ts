@@ -348,6 +348,18 @@ export async function getSettings(share?: string) {
   return settings.response as TSettings;
 }
 
+export const checkIsAuthenticated = async () => {
+  const [request] = createRequest(["/authentication"], [["", ""]], "GET");
+
+  const res = await fetch(request);
+
+  if (!res.ok) return;
+
+  const isAuth = await res.json();
+
+  return isAuth.response as boolean;
+};
+
 export async function checkFillFromDraft(
   templateFileId: number,
   share?: string,
@@ -401,15 +413,17 @@ export async function openEdit(
       return { ...config.response, timer } as IInitialConfig;
     }
 
-    const editorUrl =
-      cookie?.includes("asc_auth_key") || share
-        ? (await getEditorUrl("", share)).docServiceUrl
-        : "";
+    const isAuth = share ? true : await checkIsAuthenticated();
+
+    const editorUrl = isAuth
+      ? (await getEditorUrl("", share)).docServiceUrl
+      : "";
 
     const status =
       config.error?.type === EditorConfigErrorType.NotFoundScope
         ? "not-found"
-        : config.error?.type === EditorConfigErrorType.AccessDeniedScope
+        : config.error?.type === EditorConfigErrorType.AccessDeniedScope &&
+            isAuth
           ? "access-denied"
           : config.error?.type === EditorConfigErrorType.TenantQuotaException
             ? "quota-exception"
@@ -419,12 +433,11 @@ export async function openEdit(
 
     const message = status ? config.error.message : undefined;
 
-    const error =
-      cookie?.includes("asc_auth_key") || share
-        ? config.error.type === EditorConfigErrorType.LinkScope
-          ? { message: message ?? "unauthorized", status, editorUrl }
-          : { ...config.error, status, editorUrl }
-        : { message: "unauthorized", status, editorUrl };
+    const error = isAuth
+      ? config.error.type === EditorConfigErrorType.LinkScope
+        ? { message: message ?? "unauthorized", status, editorUrl }
+        : { ...config.error, status, editorUrl }
+      : { message: "unauthorized", status, editorUrl };
 
     return error as TError;
   }

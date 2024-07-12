@@ -142,8 +142,14 @@ export const enum FilterType {
   ArchiveOnly = 10,
   ByExtension = 11,
   MediaOnly = 12,
-  OFormTemplateOnly = 18,
-  OFormOnly = 19,
+  FillingFormsRooms = 13,
+  EditingRooms = 14,
+  ReviewRooms = 15,
+  ReadOnlyRooms = 16,
+  CustomRooms = 17,
+  PublicRooms = 20,
+  FormRooms = 21,
+  Pdf = 22,
 }
 
 /**
@@ -556,7 +562,6 @@ export const enum FilesSelectorExtendedFilterTypes {
   Media = "Media",
   Archives = "Archives",
   AllFiles = "AllFiles",
-  FormTemplates = "FormTemplates",
   Forms = "Forms",
 }
 

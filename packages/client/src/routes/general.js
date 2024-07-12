@@ -60,11 +60,7 @@ const generalRoutes = [
       },
       {
         path: "authorized-apps",
-        element: (
-          <PrivateRoute>
-            <Profile />
-          </PrivateRoute>
-        ),
+        lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
       },
     ],
   },

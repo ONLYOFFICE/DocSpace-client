@@ -185,6 +185,7 @@ class AxiosClient {
   request = (
     options: TReqOption & AxiosRequestConfig,
     skipRedirect = false,
+    isOAuth = false,
   ) => {
     const onSuccess = (response: TRes) => {
       const error = this.getResponseError(response);
@@ -216,9 +217,9 @@ class AxiosClient {
       if (options.baseURL === "/apisystem" && !response.data.response)
         return response.data;
 
-      return typeof response.data.response !== "undefined"
-        ? response.data.response
-        : response.data;
+      if (isOAuth && !response.data.response) return response.data;
+
+      return response.data.response;
     };
 
     const onError = (error: TError) => {

@@ -38,6 +38,9 @@ export type TOnCallback = {
   enableQuota: boolean;
   quota: number;
 };
+let client: Socket<DefaultEventsMap, DefaultEventsMap> | null = null;
+let callbacks: { eventName: string; callback: (value: TOnCallback) => void }[] =
+  [];
 
 const subscribers = new Set<string>();
 
@@ -71,11 +74,6 @@ export type TConfig = {
 };
 
 class SocketIOHelper {
-  client: Socket<DefaultEventsMap, DefaultEventsMap> | null = null;
-
-  callbacks: { eventName: string; callback: (value: TOnCallback) => void }[] =
-    [];
-
   socketUrl: string | null = null;
 
   constructor(url: string, publicRoomKey: string) {
@@ -83,7 +81,7 @@ class SocketIOHelper {
 
     this.socketUrl = url;
 
-    if (this.client) return;
+    if (client) return;
 
     const origin = window.location.origin;
 
@@ -100,22 +98,22 @@ class SocketIOHelper {
       };
     }
 
-    this.client = io(origin, config);
+    client = io(origin, config);
 
-    this.client.on("connect", () => {
-      console.log(`socket is connected`);
-      if (this.callbacks?.length > 0) {
-        this.callbacks.forEach(({ eventName, callback }) => {
-          if (!this.client) return;
-          this.client.on(eventName, callback);
+    client.on("connect", () => {
+      console.log("socket is connected");
+      if (callbacks?.length > 0) {
+        callbacks.forEach(({ eventName, callback }) => {
+          if (!client) return;
+          client.on(eventName, callback);
         });
-        this.callbacks = [];
+        callbacks = [];
       }
     });
-    this.client.on("connect_error", (err) =>
+    client.on("connect_error", (err) =>
       console.log("socket connect error", err),
     );
-    this.client.on("disconnect", () => console.log("socket is disconnected"));
+    client.on("disconnect", () => console.log("socket is disconnected"));
 
     // DEV tests
     // window.socketHelper = this;
@@ -132,7 +130,7 @@ class SocketIOHelper {
   emit = ({ command, data, room = null }: TEmit) => {
     if (!this.isEnabled) return;
 
-    console.log(`[WS] emit`, command, data, room);
+    console.log("[WS] emit", command, data, room);
 
     const ids =
       !data || !data.roomParts
@@ -153,42 +151,42 @@ class SocketIOHelper {
       }
     });
 
-    if (!this.client) return;
+    if (!client) return;
 
-    if (!this.client.connected) {
-      this.client.on("connect", () => {
+    if (!client.connected) {
+      client.on("connect", () => {
         if (room !== null) {
-          if (!this.client) return;
+          if (!client) return;
           // @ts-expect-error need refactoring
           client.to(room).emit(command, data);
         } else {
-          if (!this.client) return;
-          this.client.emit(command, data);
+          if (!client) return;
+          client.emit(command, data);
         }
       });
     } else if (room) {
       // @ts-expect-error need refactoring
       client.to(room).emit(command, data);
     } else {
-      this.client.emit(command, data);
+      client.emit(command, data);
     }
   };
 
   on = (eventName: string, callback: (value: TOptSocket) => void) => {
     if (!this.isEnabled) {
-      this.callbacks.push({ eventName, callback });
+      callbacks.push({ eventName, callback });
       return;
     }
 
-    if (!this.client) return;
+    if (!client) return;
 
-    if (!this.client.connected) {
-      this.client.on("connect", () => {
-        if (!this.client) return;
-        this.client.on(eventName, callback);
+    if (!client.connected) {
+      client.on("connect", () => {
+        if (!client) return;
+        client.on(eventName, callback);
       });
     } else {
-      this.client.on(eventName, callback);
+      client.on(eventName, callback);
     }
   };
 }

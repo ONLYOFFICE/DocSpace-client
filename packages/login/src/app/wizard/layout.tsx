@@ -61,8 +61,6 @@ export default async function Layout({
 
   const isRegisterContainerVisible = objectSettings?.enabledJoin;
 
-  console.log(objectSettings);
-
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <SimpleNav systemTheme={systemTheme} isLanguageComboboxVisible={false} />

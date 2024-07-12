@@ -60,14 +60,7 @@ const StyledBody = styled.div`
     .payment_price_month-text {
       margin: auto 0;
       margin-bottom: 9px;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: 8px;
-            `
-          : css`
-              margin-left: 8px;
-            `}
+      margin-inline-start: 8px;
     }
     .payment_price_month-text,
     .payment_price_price-text {

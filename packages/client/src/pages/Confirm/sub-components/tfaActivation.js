@@ -71,10 +71,7 @@ const StyledForm = styled(Box)`
     flex-direction: column;
     gap: 0px;
 
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `padding-left: 8px;`
-        : `padding-right: 8px;`}
+    padding-inline-end: 8px;
   }
 
   .app-code-wrapper {

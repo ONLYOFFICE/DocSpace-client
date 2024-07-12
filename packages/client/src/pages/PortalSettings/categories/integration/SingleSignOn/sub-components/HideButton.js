@@ -39,14 +39,7 @@ const StyledWrapper = styled.div`
   margin: ${(props) => (props.isAdditionalParameters ? "0" : "24px 0")};
 
   .hide-button {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 12px;
-          `
-        : css`
-            margin-left: 12px;
-          `}
+    margin-inline-start: 12px;
   }
 `;
 

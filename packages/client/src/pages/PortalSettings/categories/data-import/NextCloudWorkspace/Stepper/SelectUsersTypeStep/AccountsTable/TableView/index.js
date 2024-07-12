@@ -50,7 +50,7 @@ const UserSelectTableContainer = styled(StyledTableContainer)`
     z-index: 201;
     width: calc(100% + 40px);
     margin-top: -33px;
-    margin-left: -20px;
+    margin-inline-start: -20px;
     top: 0;
 
     margin-bottom: -36px;
@@ -70,14 +70,8 @@ const UserSelectTableContainer = styled(StyledTableContainer)`
 
     .table-container_header {
       position: absolute;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              padding: 0px 28px 0 15px;
-            `
-          : css`
-              padding: 0px 15px 0 28px;
-            `}
+      padding-block: 0;
+      padding-inline: 28px 15px;
     }
   }
 `;

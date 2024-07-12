@@ -37,14 +37,7 @@ const StyledComponent = styled(ModalDialog)`
   .modal-dialog-aside-footer {
     width: 100%;
     bottom: 0 !important;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            right: 0;
-          `
-        : css`
-            left: 0;
-          `}
+    inset-inline-start: 0;
     padding: 16px;
     box-shadow: 0px 12px 40px rgba(4, 15, 27, 0.12);
   }

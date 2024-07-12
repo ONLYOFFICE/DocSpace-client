@@ -45,8 +45,8 @@ export const StyledPage = styled.div`
 
   @media ${mobile} {
     width: 100%;
-    padding: ${({ theme }) =>
-      getCorrectFourValuesStyle("32px 8px 0 16px", theme.interfaceDirection)};
+    padding-block: 32px 0;
+    padding-inline: 16px 8px;
 
     .language-combo-box {
       display: none;
@@ -68,7 +68,7 @@ export const StyledPage = styled.div`
 
   .language-combo-box {
     position: absolute;
-    right: 28px;
+    inset-inline-end: 28px;
     top: 28px;
   }
 `;

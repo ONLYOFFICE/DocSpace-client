@@ -45,7 +45,7 @@ const EmptyContainer = styled(EmptyScreenContainer)`
   }
 
   .ec-image {
-    margin-right: 22px;
+    margin-inline-end: 22px;
     margin-top: 22px;
 
     @media ${mobile} {

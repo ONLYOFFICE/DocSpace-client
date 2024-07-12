@@ -35,14 +35,7 @@ const StyledContactContainer = styled.div`
   display: flex;
   width: 100%;
   a {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 4px;
-          `
-        : css`
-            margin-left: 4px;
-          `}
+    margin-inline-start: 4px;
   }
 `;
 

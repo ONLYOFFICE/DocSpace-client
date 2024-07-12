@@ -118,10 +118,7 @@ const StyledDownloadContent = styled.div`
       .download-dialog-link {
         width: max-content;
         a {
-          ${({ theme }) =>
-            theme.interfaceDirection === "rtl"
-              ? `padding-left: 0;`
-              : `padding-right: 0;`}
+          padding-inline-end: 0;
           text-underline-offset: 1px;
         }
       }

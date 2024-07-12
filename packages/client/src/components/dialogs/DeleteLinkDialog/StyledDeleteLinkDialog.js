@@ -39,10 +39,10 @@ const StyledDeleteLinkDialog = styled(ModalDialog)`
   }
 
   .modal-dialog-aside-header {
-    margin: ${({ theme }) =>
-      getCorrectFourValuesStyle("0 -24px 0 -16px", theme.interfaceDirection)};
-    padding: ${({ theme }) =>
-      getCorrectFourValuesStyle("0 0 0 16px", theme.interfaceDirection)};
+    margin-block: 0;
+    margin-inline: -16px -24px;
+    padding-block: 0;
+    padding-inline: 16px 0;
   }
 
   .delete_dialog-header-text {
@@ -68,10 +68,7 @@ const StyledDeleteLinkDialog = styled(ModalDialog)`
   .modal-dialog-aside-footer {
     @media ${tablet} {
       width: 100%;
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl"
-          ? `padding-left: 32px;`
-          : `padding-right: 32px;`}
+      padding-inline-end: 32px;
       display: flex;
     }
   }

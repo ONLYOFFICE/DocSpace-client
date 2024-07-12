@@ -78,7 +78,8 @@ const RootContainer = styled(Box)`
 
     border-radius: 6px;
     min-height: 116px;
-    padding: 12px 12px 8px 20px;
+    padding-block: 12px 8px;
+    padding-inline: 20px 12px;
   }
 
   .request-block {

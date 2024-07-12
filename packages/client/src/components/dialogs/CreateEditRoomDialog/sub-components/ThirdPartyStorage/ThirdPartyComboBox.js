@@ -51,7 +51,7 @@ const StyledStorageLocation = styled.div`
     }
 
     .combo-button {
-      padding-left: 8px;
+      padding-inline-start: 8px;
     }
   }
 

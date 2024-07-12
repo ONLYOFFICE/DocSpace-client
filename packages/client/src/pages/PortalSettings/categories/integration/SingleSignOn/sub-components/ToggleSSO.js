@@ -57,14 +57,7 @@ const StyledWrapper = styled.div`
     .toggle-caption_title {
       display: flex;
       .toggle-caption_title_badge {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-right: 4px;
-              `
-            : css`
-                margin-left: 4px;
-              `}
+        margin-inline-start: 4px;
         cursor: auto;
       }
     }

@@ -41,10 +41,7 @@ const IconWrapper = styled.div`
       &::before {
         content: "";
         position: absolute;
-        top: 0px;
-        right: 0px;
-        bottom: 0px;
-        left: 0px;
+        inset: 0;
         border: 1px solid ${(props) => props.theme.itemIcon.borderColor};
         border-radius: 5px;
         overflow: hidden;
@@ -70,14 +67,7 @@ const EncryptedFileIcon = styled.div`
   position: absolute;
   width: 16px;
   margin-top: 14px;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: 12px;
-        `
-      : css`
-          margin-left: 12px;
-        `}
+  margin-inline-start: 12px;
 `;
 
 const ItemIcon = ({

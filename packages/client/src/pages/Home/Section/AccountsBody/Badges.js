@@ -49,27 +49,13 @@ const StyledBadgesContainer = styled.div`
     props.infoPanelVisible &&
     css`
       .accounts-badge:last-child {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-left: 12px;
-              `
-            : css`
-                margin-right: 12px;
-              `}
+        margin-inline-end: 12px;
       }
     `}
 `;
 
 const StyledPaidBadge = styled(Badge)`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-left: 8px;
-        `
-      : css`
-          margin-right: 8px;
-        `}
+  margin-inline-end: 8px;
 `;
 
 const StyledSendClockIcon = styled(SendClockIcon)`

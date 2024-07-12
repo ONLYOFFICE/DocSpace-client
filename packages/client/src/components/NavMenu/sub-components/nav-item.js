@@ -54,8 +54,8 @@ const NavItemWrapper = styled(Link)`
   min-width: 48px;
   min-height: 50px;
   align-items: center;
-  padding: ${({ theme }) =>
-    getCorrectFourValuesStyle("0 16px 0 20px", theme.interfaceDirection)};
+  padding-block: 0;
+  padding-inline: 20px 16px;
   cursor: pointer;
   position: relative;
   box-sizing: border-box;
@@ -93,16 +93,16 @@ const NavItemWrapper = styled(Link)`
     `}
 
   @media ${tablet} {
-    padding: ${({ theme }) =>
-      getCorrectFourValuesStyle("0 16px 0 16px", theme.interfaceDirection)};
+    padding-block: 0;
+    padding-inline: 16px;
   }
 `;
 
 NavItemWrapper.defaultProps = { theme: Base };
 
 const NavItemLabel = styled(Text)`
-  margin: ${({ theme }) =>
-    getCorrectFourValuesStyle("0 auto 0 16px", theme.interfaceDirection)};
+  margin-block: 0;
+  margin-inline: 16px auto;
 
   display: ${(props) => (props.opened ? "block" : "none")};
   color: ${(props) =>
@@ -117,8 +117,8 @@ const badgeCss = css`
   position: absolute;
   top: 2px;
 
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl" ? `left: 4px;` : `right: 4px;`}
+  inset-inline-end: 4px;
+
   overflow: inherit;
 `;
 
@@ -136,9 +136,7 @@ const VersionBadge = styled.div`
   padding: 3px 6px;
   position: absolute;
   top: -5px;
-
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl" ? `right: 10px;` : `left: 10px;`}
+  inset-inline-start: 10px;
 `;
 
 const StyledMenuIcon = styled(MenuIcon)`

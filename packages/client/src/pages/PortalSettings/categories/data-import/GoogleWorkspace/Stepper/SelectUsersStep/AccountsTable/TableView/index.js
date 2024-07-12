@@ -49,14 +49,8 @@ const StyledTableContainer = styled(TableContainer)`
 
   .table-container_header {
     position: absolute;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding: 0px 28px 0 15px;
-          `
-        : css`
-            padding: 0px 15px 0 28px;
-          `}
+    padding-block: 0;
+    padding-inline: 28px 15px;
   }
 
   .checkboxWrapper {
@@ -67,7 +61,7 @@ const StyledTableContainer = styled(TableContainer)`
   .table-list-item {
     cursor: pointer;
 
-    padding-left: 20px;
+    padding-inline-start: 20px;
 
     &:hover {
       background-color: ${(props) =>
@@ -78,17 +72,17 @@ const StyledTableContainer = styled(TableContainer)`
         border-top: ${(props) =>
           `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
 
-        margin-left: -24px;
-        padding-left: 24px;
+        margin-inline-start: -24px;
+        padding-inline-start: 24px;
       }
 
       .checkboxWrapper {
-        padding-left: 32px;
+        padding-inline-start: 32px;
       }
 
       .table-container_row-context-menu-wrapper {
-        margin-right: -20px;
-        padding-right: 20px;
+        margin-inline-end: -20px;
+        padding-inline-end: 20px;
       }
     }
   }
@@ -99,7 +93,7 @@ const StyledTableContainer = styled(TableContainer)`
   }
 
   .clear-icon {
-    margin-right: 8px;
+    margin-inline-end: 8px;
     margin-top: 2px;
   }
 

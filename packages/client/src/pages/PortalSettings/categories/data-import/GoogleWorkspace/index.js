@@ -65,14 +65,7 @@ const GoogleWrapper = styled.div`
   }
 
   .step-counter {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 5px;
-          `
-        : css`
-            margin-right: 5px;
-          `}
+    margin-inline-end: 5px;
 
     font-size: 16px;
     font-weight: 700;

@@ -39,60 +39,29 @@ export const StyledHeader = styled.div`
     gap: 16px;
     align-items: center;
     flex-direction: row;
+    margin-inline-start: 17px;
 
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 17px;
-          `
-        : css`
-            margin-left: 17px;
-          `}
     @media ${tablet} {
       flex-direction: row-reverse;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: auto;
-            `
-          : css`
-              margin-left: auto;
-            `}
+      margin-inline-start: auto;
+
       & > div:first-child {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                padding: 8px 0px 8px 16px;
-                margin-left: -16px;
-              `
-            : css`
-                padding: 8px 16px 8px 0px;
-                margin-right: -16px;
-              `}
+        padding-block: 8px;
+        padding-inline: 0 16px;
+        margin-inline-end: -16px;
       }
     }
 
     .tariff-bar {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: auto;
-            `
-          : css`
-              margin-left: auto;
-            `}
+      margin-inline-start: auto;
     }
   }
   .arrow-button {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl" &&
-      css`
-        transform: scaleX(-1);
-      `}
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
     @media ${tablet} {
-      padding: 8px 16px 8px 16px;
-      margin-left: -16px;
-      margin-right: -16px;
+      padding: 8px 16px;
+      margin-inline: -16px;
     }
 
     padding-top: 1px;
@@ -104,13 +73,6 @@ export const StyledHeader = styled.div`
     white-space: nowrap;
     line-height: 25px;
 
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 17px;
-          `
-        : css`
-            margin-left: 17px;
-          `}
+    margin-inline-start: 17px;
   }
 `;

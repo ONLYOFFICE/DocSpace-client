@@ -55,7 +55,7 @@ const StyledLdapPage = styled(Box)`
     .toggle-caption_title {
       display: flex;
       .toggle-caption_title_badge {
-        margin-left: 4px;
+        margin-inline-start: 4px;
         cursor: auto;
       }
     }
@@ -66,7 +66,7 @@ const StyledLdapPage = styled(Box)`
   }
 
   .ldap_checkbox-container {
-    margin: 20px 0 20px 0;
+    margin: 20px 0;
     display: grid;
     grid-template-rows: 1fr 1fr;
     grid-gap: 12px;
@@ -83,7 +83,7 @@ const StyledLdapPage = styled(Box)`
   }
 
   .ldap_connection-container {
-    margin: 20px 0 28px 0;
+    margin: 20px 0 28px;
     display: grid;
     grid-gap: 12px;
   }
@@ -106,7 +106,7 @@ const StyledLdapPage = styled(Box)`
     }
 
     .access-selector {
-      margin-right: 0 !important;
+      margin-inline-end: 0 !important;
       margin-top: -4px;
     }
   }
@@ -199,7 +199,7 @@ const StyledLdapPage = styled(Box)`
     ${(props) =>
       props.isMobileView &&
       css`
-        padding-left: 16px;
+        padding-inline-start: 16px;
       `}
   }
 

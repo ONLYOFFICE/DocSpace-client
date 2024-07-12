@@ -37,10 +37,7 @@ import {
 const StyledLoader = styled.div`
   padding-top: 25px;
 
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `padding-right: 32px;`
-      : `padding-left: 32px;`}
+  padding-inline-start: 32px;
   display: flex;
   flex-direction: column;
 
@@ -63,12 +60,12 @@ const StyledLoader = styled.div`
 
   @media ${mobileMore} {
     flex-direction: row;
-    padding: ${({ theme }) =>
-      getCorrectFourValuesStyle("65px 0 0 104px", theme.interfaceDirection)};
+    padding-block: 65px 0;
+    padding-inline: 104px 0;
 
     .loader-description {
-      padding: ${({ theme }) =>
-        getCorrectFourValuesStyle("0 0 0 32px", theme.interfaceDirection)};
+      padding-block: 0;
+      padding-inline: 32px 0;
     }
   }
 `;

@@ -70,14 +70,7 @@ const StyledComponent = styled.div`
     font-weight: bold;
     font-size: 16px;
     line-height: 22px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 4px;
-          `
-        : css`
-            margin-right: 4px;
-          `}
+    margin-inline-end: 4px;
   }
 
   .settings-block {

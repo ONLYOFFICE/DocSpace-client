@@ -70,7 +70,8 @@ const StyledInfoBar = styled.div`
     font-weight: 400;
   }
   .close-icon {
-    margin: 3px 1px 0px 0px;
+    margin-block: 3px 0;
+    margin-inline: 0 1px;
     path {
       fill: ${({ theme }) => theme.iconButton.color};
     }

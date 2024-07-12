@@ -38,14 +38,7 @@ const StyledRowContent = styled(RowContent)`
   }
 
   .username {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 5px;
-          `
-        : css`
-            margin-right: 5px;
-          `}
+    margin-inline-end: 5px;
     font-size: 14px;
     font-weight: 600;
     color: ${(props) => props.theme.client.settings.migration.subtitleColor};

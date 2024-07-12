@@ -58,10 +58,7 @@ const ModalDialogContainer = styled(ModalDialog)`
 
   .link-dialog {
     transition: opacity 0.2s;
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-left: 12px;`
-        : `margin-right: 12px;`}
+    margin-inline-end: 12px;
     opacity: ${(props) => (props.ChangeTextAnim ? 0 : 1)};
   }
 

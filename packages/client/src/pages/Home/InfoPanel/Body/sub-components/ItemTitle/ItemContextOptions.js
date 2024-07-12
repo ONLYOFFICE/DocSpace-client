@@ -34,14 +34,8 @@ import ContextHelper from "../../helpers/ContextHelper";
 
 const StyledItemContextOptions = styled.div`
   height: 16px;
-  margin: ${({ withLabel, theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? withLabel
-        ? "0 8px 0 0"
-        : "0 auto 0 0"
-      : withLabel
-        ? "0 0 0 8px"
-        : "0 0 0 auto"};
+  margin-block: 0;
+  margin-inline: ${({ withLabel }) => (withLabel ? "8px 0" : "auto 0")};
 `;
 
 const ItemContextOptions = ({

@@ -81,14 +81,7 @@ const StyledComponent = styled.div`
   }
 
   .checkbox {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 9px;
-          `
-        : css`
-            margin-right: 9px;
-          `}
+    margin-inline-end: 9px;
   }
 `;
 

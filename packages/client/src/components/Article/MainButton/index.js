@@ -115,8 +115,8 @@ const StyledButton = styled(Button)`
     justify-content: space-between;
     vertical-align: middle;
     box-sizing: border-box;
-    padding: ${({ theme }) =>
-      getCorrectFourValuesStyle("5px 14px 5px 12px", theme.interfaceDirection)};
+    padding-block: 5px;
+    padding-inline: 12px 14px;
     line-height: 22px;
     border-radius: 3px;
 

@@ -2666,7 +2666,7 @@ class FilesActionStore {
       content: oneFolder,
     };
 
-    this.uploadDataStore.itemOperationToFolder(operationData);
+    return this.uploadDataStore.itemOperationToFolder(operationData);
   };
 
   onLeaveRoom = (t, isOwner = false) => {

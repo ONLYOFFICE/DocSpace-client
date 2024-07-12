@@ -1647,7 +1647,6 @@ class UploadDataStore {
           .then(() =>
             this.moveToCopyTo(destFolderId, pbData, true, fileIds, folderIds),
           )
-          .catch((error) => toastr.error(error))
           .finally(async () => {
             //to update the status of trashIsEmpty filesStore
             if (this.treeFoldersStore.isRecycleBinFolder)

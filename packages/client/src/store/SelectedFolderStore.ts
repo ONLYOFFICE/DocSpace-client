@@ -51,7 +51,6 @@ export type TNavigationPath = {
   roomType: RoomsType;
   isRootRoom: boolean;
   shared: boolean;
-  canCopyPublicLink: boolean;
 };
 
 type ExcludeTypes = SettingsStore | Function;
@@ -181,7 +180,6 @@ class SelectedFolderStore {
       private: this.private,
       canShare: this.canShare,
       isArchive: this.isArchive,
-      canCopyPublicLink: this.canCopyPublicLink,
       type: this.type,
       isRootFolder: this.isRootFolder,
       parentRoomType: this.parentRoomType,
@@ -190,13 +188,6 @@ class SelectedFolderStore {
 
   get isRootFolder() {
     return this.pathParts && this.pathParts.length <= 1;
-  }
-
-  get canCopyPublicLink() {
-    return (
-      this.access === ShareAccessRights.RoomManager ||
-      this.access === ShareAccessRights.None
-    );
   }
 
   toDefault = () => {

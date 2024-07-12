@@ -297,9 +297,6 @@ class InfoPanelStore {
       ...infoPanelSelection,
       isRoom: infoPanelSelection.isRoom || !!infoPanelSelection.roomType,
       icon: this.getInfoPanelItemIcon(infoPanelSelection, 32),
-      canCopyPublicLink:
-        infoPanelSelection.access === ShareAccessRights.RoomManager ||
-        infoPanelSelection.access === ShareAccessRights.None,
     };
   };
 

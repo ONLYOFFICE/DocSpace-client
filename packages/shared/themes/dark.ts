@@ -3332,7 +3332,12 @@ const Dark: TTheme = {
   },
   completedForm: {
     linkColor: white,
-    descriptionColor: "#ADADAD",
+    descriptionColor: globalColors.silverChalice,
+
+    labelColor: globalColors.silverChalice,
+    box: {
+      background: globalColors.charlestonGreen,
+    },
   },
 };
 

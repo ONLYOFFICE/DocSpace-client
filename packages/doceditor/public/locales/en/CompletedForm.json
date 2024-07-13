@@ -1,6 +1,6 @@
 {
-  "Title": "The form is completed",
-  "Description": "Your form completed and saved",
+  "Title": "Form completed successfully",
+  "Description": "You submitted the filled PDF form which was assigned a unique number. To check the status, contact the form owner providing the assigned number.",
   "FillItOutAgain": "Fill it out again",
-  "GoToCompleteFolder": "Go to Complete folder"
+  "BackToRoom": "Back to room"
 }

@@ -62,8 +62,8 @@ const GroupsTableItem = ({
     changeGroupContextSelection(item, !rightMouseButtonClick);
   };
 
-  const onOpenGroup = () => {
-    openGroupAction(item.id, true, item.name);
+  const onOpenGroup = (e) => {
+    openGroupAction(item.id, true, item.name, e);
   };
 
   const onRowClick = (e) => {

@@ -2516,6 +2516,12 @@ class FilesActionStore {
 
       clearFiles();
 
+      if (window.location.search.includes("group")) {
+        setSelectedNode(["accounts", "groups", "filter"]);
+        return window.DocSpace.navigate(`accounts/groups?${params}`, {
+          replace: true,
+        });
+      }
       setSelectedNode(["accounts", "people", "filter"]);
 
       if (fromHotkeys) return;

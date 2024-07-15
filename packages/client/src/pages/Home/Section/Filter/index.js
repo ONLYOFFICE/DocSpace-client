@@ -2034,29 +2034,7 @@ const SectionFilterContent = ({
         default: true,
       };
 
-      groupsOptions.push(title);
-
-      if (accountsViewAs === "table") {
-        const availableSort = localStorage
-          ?.getItem(`${TABLE_GROUPS_COLUMNS}=${userId}`)
-          ?.split(",");
-
-        const infoPanelColumnsSize = localStorage
-          ?.getItem(`${COLUMNS_GROUPS_SIZE_INFO_PANEL}=${userId}`)
-          ?.split(" ");
-
-        if (availableSort?.includes("Head of Group")) {
-          const idx = availableSort.findIndex((x) => x === "Head of Group");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
-
-          !hide && groupsOptions.push(manager);
-        }
-      } else {
-        groupsOptions.push(manager);
-      }
+      groupsOptions.push(title, manager);
 
       return groupsOptions;
     }

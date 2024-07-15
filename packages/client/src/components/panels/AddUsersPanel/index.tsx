@@ -523,6 +523,7 @@ const AddUsersPanel = ({
             // Todo: Update groups empty screen texts when they are ready
             headerLabel: t("Common:ListAccounts"),
             withoutBackButton: false,
+            withoutBorder: true,
             onBackClick,
           }}
           onSelect={onSelect}

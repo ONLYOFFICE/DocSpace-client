@@ -88,6 +88,7 @@ export const StyledButtonScroll = styled.div<StyledButtonScrollProps>`
 `;
 
 export const StyledMobileDetails = styled.div`
+  direction: ${({ theme }) => theme.interfaceDirection};
   z-index: 307;
   position: fixed;
   top: 0;
@@ -112,6 +113,8 @@ export const StyledMobileDetails = styled.div`
     position: fixed;
     inset-inline-start: 21px;
     top: 22px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"};
   }
 
   .mobile-context {
@@ -205,6 +208,7 @@ export const StyledViewerContainer = styled.div<StyledViewerContainerProps>`
     position: fixed;
     top: 13px;
     inset-inline-end: 12px;
+    ${({ theme }) => (theme.interfaceDirection === "rtl" ? `left` : ``)}
     height: 17px;
     &:hover {
       background-color: transparent;

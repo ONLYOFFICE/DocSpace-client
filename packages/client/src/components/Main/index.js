@@ -59,7 +59,7 @@ const Main = (props) => {
     window.addEventListener("resize", onResize);
 
     return () => {
-      window.addEventListener("resize", onResize);
+      window.removeEventListener("resize", onResize);
 
       clearTimeout(updateSizeRef.current);
     };

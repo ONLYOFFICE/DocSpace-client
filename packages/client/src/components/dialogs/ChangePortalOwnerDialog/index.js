@@ -52,6 +52,7 @@ import {
   StyledSelectedOwner,
 } from "./StyledDialog";
 import { PRODUCT_NAME } from "@docspace/shared/constants";
+import { EmployeeActivationStatus } from "@docspace/shared/enums";
 
 const ChangePortalOwnerDialog = ({
   t,
@@ -91,7 +92,7 @@ const ChangePortalOwnerDialog = ({
         onClose && onClose();
         toastr.success(
           t("Settings:ConfirmEmailSended", {
-            ownerName: selectedUser.label,
+            ownerName: displayName,
           }),
         );
       })
@@ -122,6 +123,14 @@ const ChangePortalOwnerDialog = ({
     t("DeactivateOrDeletePortal", { productName: PRODUCT_NAME }),
   ];
 
+  const filter = React.useMemo(() => {
+    const newFilter = new Filter();
+
+    newFilter.employeeStatus = EmployeeActivationStatus.Activated;
+
+    return newFilter;
+  }, []);
+
   return (
     <ModalDialog
       displayType={"aside"}
@@ -149,6 +158,7 @@ const ChangePortalOwnerDialog = ({
             }}
             currentUserId={id}
             disableDisabledUsers
+            filter={filter}
           />
         </ModalDialog.Container>
       )}

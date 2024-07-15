@@ -28,7 +28,6 @@
 
 import React from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { isMobile } from "react-device-detect";
 import { useTranslation } from "react-i18next";
 
 import { DocumentEditor } from "@onlyoffice/document-editor-react";
@@ -142,13 +141,8 @@ const Editor = ({
   if (config) newConfig.editorConfig = { ...config.editorConfig };
 
   const search = typeof window !== "undefined" ? window.location.search : "";
-  const editorType = new URLSearchParams(search).get("editorType");
 
   //if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
-
-  if (editorType) newConfig.type = editorType;
-
-  if (isMobile) newConfig.type = "mobile";
 
   let goBack: TGoBack = {} as TGoBack;
 

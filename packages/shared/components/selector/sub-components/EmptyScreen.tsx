@@ -33,6 +33,7 @@ import UpSvgUrl from "PUBLIC_DIR/images/up.svg?url";
 import FormRoomEmptyDarkImageUrl from "PUBLIC_DIR/images/emptyview/selector.form.room.empty.screen.dark.svg?url";
 import FormRoomEmptyLightImageUrl from "PUBLIC_DIR/images/emptyview/selector.form.room.empty.screen.light.svg?url";
 import Plus16SvgUrl from "PUBLIC_DIR/images/icons/16/plus.svg?url";
+import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 
 import { RoomsType } from "../../../enums";
 
@@ -49,6 +50,7 @@ import useCreateDropDown from "../hooks/useCreateDropDown";
 import { EmptyScreenContext } from "../contexts/EmptyScreen";
 
 import NewItemDropDown from "./NewItemDropDown";
+import { SearchContext } from "../contexts/Search";
 
 const linkStyles = {
   isHovered: true,
@@ -75,6 +77,7 @@ const EmptyScreen = ({
   const theme = useTheme();
   const { t } = useTranslation(["Common"]);
 
+  const { onClearSearch } = useContext(SearchContext);
   const { isOpenDropDown, setIsOpenDropDown, onCloseDropDown } =
     useCreateDropDown();
 
@@ -175,12 +178,19 @@ const EmptyScreen = ({
             <IconButton
               className="empty-folder_container-icon"
               size={12}
-              onClick={createItem.onBackClick}
-              iconName={UpSvgUrl}
+              onClick={
+                withSearch ? () => onClearSearch?.() : createItem.onBackClick
+              }
+              iconName={withSearch ? ClearEmptyFilterSvgUrl : UpSvgUrl}
               isFill
             />
-            <Link {...linkStyles} onClick={createItem.onBackClick}>
-              {t("Common:Back")}
+            <Link
+              {...linkStyles}
+              onClick={
+                withSearch ? () => onClearSearch?.() : createItem.onBackClick
+              }
+            >
+              {withSearch ? t("Common:ClearFilter") : t("Common:Back")}
             </Link>
           </div>
         </div>

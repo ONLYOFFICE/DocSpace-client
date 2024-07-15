@@ -1573,18 +1573,14 @@ class FilesStore {
               (data.current.rootFolderType === Rooms ||
                 data.current.rootFolderType === Archive);
 
-            let shared, canCopyPublicLink;
+            let shared;
             if (idx === 1) {
               let room = data.current;
 
               if (!isCurrentFolder) {
                 room = await api.files.getFolderInfo(folderId);
                 shared = room.shared;
-                canCopyPublicLink =
-                  room.access === ShareAccessRights.RoomManager ||
-                  room.access === ShareAccessRights.None;
 
-                room.canCopyPublicLink = canCopyPublicLink;
                 this.infoPanelStore.setInfoPanelRoom(room);
               }
 
@@ -1602,7 +1598,6 @@ class FilesStore {
               roomType,
               isRootRoom,
               shared,
-              canCopyPublicLink,
             };
           }),
         ).then((res) => {
@@ -1941,10 +1936,10 @@ class FilesStore {
     return rooms;
   };
 
-  resetRoomQuota = async (itemsIDs, filter) => {
+  resetRoomQuota = async (itemsIDs, inRoom = false, filter) => {
     const rooms = await api.rooms.resetRoomQuota(itemsIDs);
 
-    await this.fetchRooms(null, filter, false, false, false);
+    if (!inRoom) await this.fetchRooms(null, filter, false, false, false);
 
     return rooms;
   };
@@ -2125,6 +2120,20 @@ class FilesStore {
 
       if (optionsToRemove.length) {
         fileOptions = this.removeOptions(fileOptions, optionsToRemove);
+      }
+
+      if (this.publicRoomStore.isPublicRoom) {
+        fileOptions = this.removeOptions(fileOptions, [
+          "separator0",
+          "sharing-settings",
+          "send-by-email",
+          "show-info",
+          "separator1",
+          "create-room",
+          "separator2",
+          "remove-from-recent",
+          "copy-general-link",
+        ]);
       }
 
       if (!canDownload) {
@@ -2546,6 +2555,15 @@ class FilesStore {
 
       if (optionsToRemove.length) {
         folderOptions = this.removeOptions(folderOptions, optionsToRemove);
+      }
+
+      if (this.publicRoomStore.isPublicRoom) {
+        folderOptions = this.removeOptions(folderOptions, [
+          "show-info",
+          "sharing-settings",
+          "separator1",
+          "create-room",
+        ]);
       }
 
       if (!canDownload) {
@@ -3370,10 +3388,6 @@ class FilesStore {
 
       const isForm = fileExst === ".oform";
 
-      const canCopyPublicLink =
-        access === ShareAccessRights.RoomManager ||
-        access === ShareAccessRights.None;
-
       return {
         availableExternalRights,
         access,
@@ -3443,7 +3457,6 @@ class FilesStore {
         type,
         hasDraft,
         isForm,
-        canCopyPublicLink,
         requestToken,
         lastOpened,
         quotaLimit,

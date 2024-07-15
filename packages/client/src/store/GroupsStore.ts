@@ -40,6 +40,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import AccountsFilter from "@docspace/shared/api/people/filter";
 import api from "@docspace/shared/api";
 import { TGroup } from "@docspace/shared/api/groups/types";
+import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 
 class GroupsStore {
   authStore;
@@ -593,9 +594,14 @@ class GroupsStore {
     groupId: string,
     withBackURL: boolean,
     tempTitle: string,
+    e: React.MouseEvent<Element, MouseEvent>,
   ) => {
     const { setIsSectionBodyLoading, setIsSectionFilterLoading } =
       this.clientLoadingStore;
+
+    const url = `/accounts/groups/${groupId}`;
+
+    if (openingNewTab(url, e)) return;
 
     this.setSelection([]);
     this.setBufferSelection(null);
@@ -610,7 +616,7 @@ class GroupsStore {
       this.setInsideGroupBackUrl(url);
     }
 
-    window.DocSpace.navigate(`/accounts/groups/${groupId}`);
+    window.DocSpace.navigate(url);
   };
 
   updateGroup = async (

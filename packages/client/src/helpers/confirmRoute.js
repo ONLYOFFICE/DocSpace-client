@@ -133,7 +133,7 @@ const ConfirmRoute = ({
               ? `/rooms/shared/${res?.roomId}/filter?folder=${res?.roomId}`
               : defaultPage;
 
-            console.error("user already exists", {
+            console.log("user already exists", {
               confirmLinkData,
               validationResult,
               finalUrl,

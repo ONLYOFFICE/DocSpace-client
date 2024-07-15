@@ -2131,15 +2131,16 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["download"]);
       }
 
-      if (
-        !isPdf ||
-        item.startFilling ||
-        item.rootFolderType === FolderType.USER
-      ) {
+      if (!isPdf || item.startFilling || item.isForm) {
         fileOptions = this.removeOptions(fileOptions, ["open-pdf"]);
       }
 
-      if (!isPdf || !item.security.EditForm || item.startFilling) {
+      if (
+        !isPdf ||
+        !item.security.EditForm ||
+        item.startFilling ||
+        !item.isForm
+      ) {
         fileOptions = this.removeOptions(fileOptions, ["edit-pdf"]);
       }
 
@@ -2176,7 +2177,7 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["edit"]);
       }
 
-      if (!(shouldFillForm && canFillForm)) {
+      if (!(shouldFillForm && canFillForm) || !item.isForm) {
         fileOptions = this.removeOptions(fileOptions, ["fill-form"]);
       }
 

@@ -107,13 +107,13 @@ export const CompletedForm = ({}: CompletedFormProps) => {
           />
         </Box>
         <FormNumberWrapper>
-          <span className="label">Form number:</span>
+          <span className="label">{t("CompletedForm:FormNumber")}</span>
           <Box>
             <Text className="completed-form__form-number">{formNumber}</Text>
           </Box>
         </FormNumberWrapper>
         <ManagerWrapper>
-          <span className="label">Manager:</span>
+          <span className="label">{t("CompletedForm:Manager")}</span>
           <Box>
             <Avatar
               className="manager__avatar"

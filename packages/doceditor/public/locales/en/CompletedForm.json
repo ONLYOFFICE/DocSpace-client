@@ -2,5 +2,7 @@
   "Title": "Form completed successfully",
   "Description": "You submitted the filled PDF form which was assigned a unique number. To check the status, contact the form owner providing the assigned number.",
   "FillItOutAgain": "Fill it out again",
-  "BackToRoom": "Back to room"
+  "BackToRoom": "Back to room",
+  "FormNumber": "Form number:",
+  "Manager": "Manager:"
 }

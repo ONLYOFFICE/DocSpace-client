@@ -2142,6 +2142,7 @@ const SectionFilterContent = ({
       commonOptions.push(modifiedDate);
       commonOptions.push(size);
       // commonOptions.push(type);
+      isRecentTab && commonOptions.push(lastOpenedDate);
     }
 
     return commonOptions;

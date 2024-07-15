@@ -259,7 +259,9 @@ const Root = ({
           socketHelper={socketHelper}
           filesSettings={filesSettings}
           headerLabel={headerLabelSFSDialog}
-          isVisible={isVisibleStartFillingSelectDialog}
+          isVisible={
+            isVisibleStartFillingSelectDialog && !conflictDataDialog.visible
+          }
           onClose={onCloseStartFillingSelectDialog}
           onSubmit={onSubmitStartFillingSelectDialog}
           getIsDisabled={getIsDisabledStartFillingSelectDialog}

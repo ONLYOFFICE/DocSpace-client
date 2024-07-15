@@ -27,8 +27,13 @@
 import { useCallback, useRef, useState } from "react";
 
 import { ConflictResolveType } from "@docspace/shared/enums";
-import { copyToFolder, getProgress } from "@docspace/shared/api/files";
+import {
+  checkFileConflicts,
+  copyToFolder,
+  getProgress,
+} from "@docspace/shared/api/files";
 // import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
+import { toastr } from "@docspace/shared/components/toast";
 
 import type {
   TFile,
@@ -40,8 +45,7 @@ import type {
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import type { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
-import { toastr } from "@docspace/shared/components/toast";
-import { TData } from "@docspace/shared/components/toast/Toast.type";
+import type { TData } from "@docspace/shared/components/toast/Toast.type";
 
 // import { useTranslation } from "react-i18next";
 
@@ -120,26 +124,26 @@ const useStartFillingSelectDialog = (fileInfo: TFile | undefined) => {
     const url = new URL(`${window.location.origin}/rooms/shared/filter`);
     url.searchParams.set("folder", selectedItemId.toString());
 
-    // const hasConfictFiles = await checkFileConflicts(
-    //   selectedItemId,
-    //   [],
-    //   [fileInfo.id],
-    // );
-
-    // if (hasConfictFiles.length > 0) {
-    //   conflictResolve = await showConflictResolveDialog(
-    //     folderTitle,
-    //     fileInfo.title,
-    //   );
-
-    //   if (!conflictResolve) {
-    //     requestRunning.current = false;
-
-    //     return Promise.resolve();
-    //   }
-    // }
-
     try {
+      const hasConfictFiles = await checkFileConflicts(
+        selectedItemId,
+        [],
+        [fileInfo.id],
+      );
+
+      if (hasConfictFiles.length > 0) {
+        conflictResolve = await showConflictResolveDialog(
+          folderTitle,
+          fileInfo.title,
+        );
+
+        if (!conflictResolve) {
+          requestRunning.current = false;
+
+          return Promise.resolve();
+        }
+      }
+
       await copyToFolder(
         Number(selectedItemId),
         [],

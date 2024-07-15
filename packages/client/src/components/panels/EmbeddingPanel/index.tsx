@@ -462,6 +462,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                   selectedOption={selectedLink as TOption}
                   displaySelectedOption
                   directionY="bottom"
+                  withLabel={false}
                 />
               </>
             )}

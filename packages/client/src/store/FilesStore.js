@@ -1938,10 +1938,10 @@ class FilesStore {
     return rooms;
   };
 
-  resetRoomQuota = async (itemsIDs, filter) => {
+  resetRoomQuota = async (itemsIDs, inRoom = false, filter) => {
     const rooms = await api.rooms.resetRoomQuota(itemsIDs);
 
-    await this.fetchRooms(null, filter, false, false, false);
+    if (!inRoom) await this.fetchRooms(null, filter, false, false, false);
 
     return rooms;
   };

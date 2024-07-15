@@ -96,9 +96,17 @@ const StyledLdapPage = styled(Box)`
     }
     display: grid;
     grid-gap: 12px;
+  }
+
+  .access-selector-wrapper {
+    width: 356px;
+
+    @media ${mobile} {
+      width: 100%;
+    }
 
     .access-selector {
-      margin-right: 0;
+      margin-right: 0 !important;
       margin-top: -4px;
     }
   }

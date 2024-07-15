@@ -91,7 +91,7 @@ const ChangePortalOwnerDialog = ({
         onClose && onClose();
         toastr.success(
           t("Settings:ConfirmEmailSended", {
-            ownerName: selectedUser.label,
+            ownerName: displayName,
           }),
         );
       })

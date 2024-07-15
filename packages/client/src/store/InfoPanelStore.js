@@ -119,9 +119,11 @@ class InfoPanelStore {
   };
 
   setIsVisible = (bool) => {
+    console.log(this.infoPanelSelectedItems[0]);
     if (
       (this.infoPanelSelectedItems.length &&
-        !this.infoPanelSelectedItems[0]?.isRoom) ||
+        !this.infoPanelSelectedItems[0]?.isRoom &&
+        !this.infoPanelSelectedItems[0]?.inRoom) ||
       (this.selectedFolderStore && !this.selectedFolderStore?.inRoom)
     ) {
       this.setView(infoDetails);

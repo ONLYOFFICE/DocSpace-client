@@ -351,6 +351,8 @@ class SelectedFolderStore {
         }
       });
     }
+
+    this.setInRoom(!!selectedFolder?.parentId);
   };
 }
 

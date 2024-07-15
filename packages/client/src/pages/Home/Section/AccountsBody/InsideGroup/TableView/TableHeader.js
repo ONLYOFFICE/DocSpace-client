@@ -156,6 +156,18 @@ class InsideGroupTableHeader extends React.Component {
     navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
   };
 
+  componentDidUpdate(prevProps) {
+    const { filter } = this.props;
+    const { columns } = this.state;
+    if (filter.sortBy !== prevProps.filter.sortBy) {
+      const columnIndex = columns.findIndex((c) => c?.sortBy === filter.sortBy);
+      if (columnIndex === -1) return;
+
+      !columns[columnIndex].enable &&
+        columns[columnIndex].onChange?.(columns[columnIndex].key);
+    }
+  }
+
   render() {
     const { columns } = this.state;
     const {

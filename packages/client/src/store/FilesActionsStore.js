@@ -1470,7 +1470,7 @@ class FilesActionStore {
     return titleWithoutExtension;
   };
 
-  checkAndOpenLocationAction = async (item) => {
+  checkAndOpenLocationAction = async (item, actionType) => {
     const { categoryType } = this.filesStore;
     const { myRoomsId, myFolderId, archiveRoomsId, recycleBinFolderId } =
       this.treeFoldersStore;
@@ -1501,7 +1501,11 @@ class FilesActionStore {
       rootFolderType,
     };
 
-    const url = getCategoryUrl(categoryType, parentId);
+    const isTrash = actionType === "delete";
+    const url = getCategoryUrl(
+      isTrash ? CategoryType.Trash : categoryType,
+      parentId,
+    );
 
     const newFilter = FilesFilter.getDefault();
 

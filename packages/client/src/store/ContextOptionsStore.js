@@ -1312,72 +1312,71 @@ class ContextOptionsStore {
             disabled: false,
           },
         ];
-    const moveActions =
-      isDesktop() && !isInfoPanel
-        ? [
-            {
-              id: "option_move-or-copy",
-              key: "move",
-              label: t("MoveOrCopy"),
-              icon: CopyReactSvgUrl,
-              items: [
-                {
-                  id: "option_move-to",
-                  key: "move-to",
-                  label: t("Common:MoveTo"),
-                  icon: MoveReactSvgUrl,
-                  onClick: isEditing
-                    ? () => this.onShowEditingToast(t)
-                    : () => this.onMoveAction(item),
-                  disabled: false,
-                },
-                {
-                  id: "option_copy-to",
-                  key: "copy-to",
-                  label: t("Common:Copy"),
-                  icon: CopyReactSvgUrl,
-                  onClick: () => this.onCopyAction(item),
-                  disabled: false,
-                },
-                {
-                  id: "option_create-duplicate",
-                  key: "duplicate",
-                  label: t("Common:Duplicate"),
-                  icon: DuplicateReactSvgUrl,
-                  onClick: () => this.onDuplicate(item, t),
-                  disabled: false,
-                },
-              ],
-            },
-          ]
-        : [
-            {
-              id: "option_move-to",
-              key: "move-to",
-              label: t("Common:MoveTo"),
-              icon: MoveReactSvgUrl,
-              onClick: isEditing
-                ? () => this.onShowEditingToast(t)
-                : () => this.onMoveAction(item),
-              disabled: false,
-            },
-            {
-              id: "option_copy-to",
-              key: "copy-to",
-              label: t("Common:Copy"),
-              icon: CopyReactSvgUrl,
-              onClick: () => this.onCopyAction(item),
-              disabled: false,
-            },
-            {
-              id: "option_create-duplicate",
-              key: "duplicate",
-              label: t("Common:Duplicate"),
-              icon: DuplicateReactSvgUrl,
-              onClick: () => this.onDuplicate(item, t),
-              disabled: false,
-            },
-          ];
+    const moveActions = isDesktop()
+      ? [
+          {
+            id: "option_move-or-copy",
+            key: "move",
+            label: t("MoveOrCopy"),
+            icon: CopyReactSvgUrl,
+            items: [
+              {
+                id: "option_move-to",
+                key: "move-to",
+                label: t("Common:MoveTo"),
+                icon: MoveReactSvgUrl,
+                onClick: isEditing
+                  ? () => this.onShowEditingToast(t)
+                  : () => this.onMoveAction(item),
+                disabled: false,
+              },
+              {
+                id: "option_copy-to",
+                key: "copy-to",
+                label: t("Common:Copy"),
+                icon: CopyReactSvgUrl,
+                onClick: () => this.onCopyAction(item),
+                disabled: false,
+              },
+              {
+                id: "option_create-duplicate",
+                key: "duplicate",
+                label: t("Common:Duplicate"),
+                icon: DuplicateReactSvgUrl,
+                onClick: () => this.onDuplicate(item, t),
+                disabled: false,
+              },
+            ],
+          },
+        ]
+      : [
+          {
+            id: "option_move-to",
+            key: "move-to",
+            label: t("Common:MoveTo"),
+            icon: MoveReactSvgUrl,
+            onClick: isEditing
+              ? () => this.onShowEditingToast(t)
+              : () => this.onMoveAction(item),
+            disabled: false,
+          },
+          {
+            id: "option_copy-to",
+            key: "copy-to",
+            label: t("Common:Copy"),
+            icon: CopyReactSvgUrl,
+            onClick: () => this.onCopyAction(item),
+            disabled: false,
+          },
+          {
+            id: "option_create-duplicate",
+            key: "duplicate",
+            label: t("Common:Duplicate"),
+            icon: DuplicateReactSvgUrl,
+            onClick: () => this.onDuplicate(item, t),
+            disabled: false,
+          },
+        ];
 
     const { pinOptions, muteOptions } = this.getRoomsRootContextOptions(
       item,

@@ -221,7 +221,11 @@ const Body = ({
       <BreadCrumbs visible={!isShareFormEmpty} />
 
       {withTabs && tabsData && (
-        <StyledTabs items={tabsData} selectedItemId={activeTabId} />
+        <StyledTabs
+          items={tabsData}
+          selectedItemId={activeTabId}
+          className="selector_body_tabs"
+        />
       )}
 
       <Search isSearch={itemsCount > 0 || isSearch} />

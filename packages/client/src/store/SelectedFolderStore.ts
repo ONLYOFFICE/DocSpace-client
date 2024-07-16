@@ -352,7 +352,9 @@ class SelectedFolderStore {
       });
     }
 
-    this.setInRoom(!!selectedFolder?.parentId);
+    selectedFolder?.pathParts?.forEach((value) => {
+      if (value.roomType) this.setInRoom(true);
+    });
   };
 }
 

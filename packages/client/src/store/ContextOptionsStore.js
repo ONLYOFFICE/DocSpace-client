@@ -1312,72 +1312,71 @@ class ContextOptionsStore {
             disabled: false,
           },
         ];
-    const moveActions =
-      isDesktop() && !isInfoPanel
-        ? [
-            {
-              id: "option_move-or-copy",
-              key: "move",
-              label: t("MoveOrCopy"),
-              icon: CopyReactSvgUrl,
-              items: [
-                {
-                  id: "option_move-to",
-                  key: "move-to",
-                  label: t("Common:MoveTo"),
-                  icon: MoveReactSvgUrl,
-                  onClick: isEditing
-                    ? () => this.onShowEditingToast(t)
-                    : () => this.onMoveAction(item),
-                  disabled: false,
-                },
-                {
-                  id: "option_copy-to",
-                  key: "copy-to",
-                  label: t("Common:Copy"),
-                  icon: CopyReactSvgUrl,
-                  onClick: () => this.onCopyAction(item),
-                  disabled: false,
-                },
-                {
-                  id: "option_create-duplicate",
-                  key: "duplicate",
-                  label: t("Common:Duplicate"),
-                  icon: DuplicateReactSvgUrl,
-                  onClick: () => this.onDuplicate(item, t),
-                  disabled: false,
-                },
-              ],
-            },
-          ]
-        : [
-            {
-              id: "option_move-to",
-              key: "move-to",
-              label: t("Common:MoveTo"),
-              icon: MoveReactSvgUrl,
-              onClick: isEditing
-                ? () => this.onShowEditingToast(t)
-                : () => this.onMoveAction(item),
-              disabled: false,
-            },
-            {
-              id: "option_copy-to",
-              key: "copy-to",
-              label: t("Common:Copy"),
-              icon: CopyReactSvgUrl,
-              onClick: () => this.onCopyAction(item),
-              disabled: false,
-            },
-            {
-              id: "option_create-duplicate",
-              key: "duplicate",
-              label: t("Common:Duplicate"),
-              icon: DuplicateReactSvgUrl,
-              onClick: () => this.onDuplicate(item, t),
-              disabled: false,
-            },
-          ];
+    const moveActions = isDesktop()
+      ? [
+          {
+            id: "option_move-or-copy",
+            key: "move",
+            label: t("MoveOrCopy"),
+            icon: CopyReactSvgUrl,
+            items: [
+              {
+                id: "option_move-to",
+                key: "move-to",
+                label: t("Common:MoveTo"),
+                icon: MoveReactSvgUrl,
+                onClick: isEditing
+                  ? () => this.onShowEditingToast(t)
+                  : () => this.onMoveAction(item),
+                disabled: false,
+              },
+              {
+                id: "option_copy-to",
+                key: "copy-to",
+                label: t("Common:Copy"),
+                icon: CopyReactSvgUrl,
+                onClick: () => this.onCopyAction(item),
+                disabled: false,
+              },
+              {
+                id: "option_create-duplicate",
+                key: "duplicate",
+                label: t("Common:Duplicate"),
+                icon: DuplicateReactSvgUrl,
+                onClick: () => this.onDuplicate(item, t),
+                disabled: false,
+              },
+            ],
+          },
+        ]
+      : [
+          {
+            id: "option_move-to",
+            key: "move-to",
+            label: t("Common:MoveTo"),
+            icon: MoveReactSvgUrl,
+            onClick: isEditing
+              ? () => this.onShowEditingToast(t)
+              : () => this.onMoveAction(item),
+            disabled: false,
+          },
+          {
+            id: "option_copy-to",
+            key: "copy-to",
+            label: t("Common:Copy"),
+            icon: CopyReactSvgUrl,
+            onClick: () => this.onCopyAction(item),
+            disabled: false,
+          },
+          {
+            id: "option_create-duplicate",
+            key: "duplicate",
+            label: t("Common:Duplicate"),
+            icon: DuplicateReactSvgUrl,
+            onClick: () => this.onDuplicate(item, t),
+            disabled: false,
+          },
+        ];
 
     const { pinOptions, muteOptions } = this.getRoomsRootContextOptions(
       item,
@@ -1390,14 +1389,17 @@ class ContextOptionsStore {
       item.roomType === RoomsType.FormRoom ||
       item.roomType === RoomsType.CustomRoom;
 
-    const { shared, navigationPath } = this.selectedFolderStore;
+    const { navigationPath } = this.selectedFolderStore;
 
     if (item.isRoom && withOpen) {
       withOpen = navigationPath.findIndex((f) => f.id === item.id) === -1;
     }
 
     const isArchive = item.rootFolderType === FolderType.Archive;
-    const isShared = shared || navigationPath.findIndex((r) => r.shared) > -1;
+
+    const hasShareLinkRights = item.shared
+      ? item.security?.Read
+      : item.security?.EditAccess;
 
     const optionsModel = [
       {
@@ -1553,20 +1555,14 @@ class ContextOptionsStore {
         label: t("Files:CopyLink"),
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onCopyLink(item, t),
-        disabled:
-          (isPublicRoomType && item.security?.Read && !isArchive) ||
-          !item.security?.CopyLink,
+        disabled: isPublicRoomType && hasShareLinkRights,
       },
       {
         id: "option_copy-external-link",
         key: "external-link",
         label: t("Files:CopySharedLink"),
         icon: TabletLinkReactSvgUrl,
-        disabled:
-          this.publicRoomStore.isPublicRoom ||
-          isArchive ||
-          !item.security?.Read ||
-          !isPublicRoomType,
+        disabled: !hasShareLinkRights,
         onClick: () => this.onCreateAndCopySharedLink(item, t),
         // onLoad: () => this.onLoadLinks(t, item),
       },

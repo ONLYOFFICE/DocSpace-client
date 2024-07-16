@@ -165,6 +165,8 @@ class CreateEditRoomStore {
         actions.push(createTag(createTagsData[i]));
       }
 
+      if (!!actions.length) await Promise.all(actions);
+
       // add new tags to room
       if (!!addTagsData.length)
         room = await addTagsToRoom(room.id, addTagsData);

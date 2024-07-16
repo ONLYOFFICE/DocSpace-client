@@ -109,6 +109,11 @@ export const feedInfo = [
     targetType: `${FeedTarget.Room}`,
     actionType: `${FeedAction.Rename}`,
   },
+  {
+    key: "RoomCopied",
+    targetType: `${FeedTarget.Room}`,
+    actionType: `${FeedAction.Copy}`,
+  },
   // ROOM TAGS
   {
     key: "AddedRoomTags",

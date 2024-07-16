@@ -140,6 +140,12 @@ class SelectedFolderStore {
 
   parentRoomType: Nullable<FolderType> = null;
 
+  usedSpace: number | undefined;
+
+  quotaLimit: number | undefined;
+
+  isCustomQuota: boolean | undefined;
+
   constructor(settingsStore: SettingsStore) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -183,6 +189,9 @@ class SelectedFolderStore {
       type: this.type,
       isRootFolder: this.isRootFolder,
       parentRoomType: this.parentRoomType,
+      usedSpace: this.usedSpace,
+      quotaLimit: this.quotaLimit,
+      isCustomQuota: this.isCustomQuota,
     };
   };
 
@@ -221,6 +230,9 @@ class SelectedFolderStore {
     this.type = null;
     this.inRoom = false;
     this.parentRoomType = null;
+    this.usedSpace = undefined;
+    this.quotaLimit = undefined;
+    this.isCustomQuota = undefined;
   };
 
   setParentId = (parentId: number) => {
@@ -339,6 +351,10 @@ class SelectedFolderStore {
         }
       });
     }
+
+    selectedFolder?.pathParts?.forEach((value) => {
+      if (value.roomType) this.setInRoom(true);
+    });
   };
 }
 

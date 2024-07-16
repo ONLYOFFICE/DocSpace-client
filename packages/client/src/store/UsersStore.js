@@ -384,9 +384,12 @@ class UsersStore {
           ) {
             options.push("separator-1");
 
-            if (status === EmployeeStatus.Active) {
+            if (
+              status === EmployeeStatus.Active ||
+              status === EmployeeStatus.Pending
+            ) {
               options.push("disable");
-            } else {
+            } else if (status === EmployeeStatus.Disabled) {
               options.push("enable");
             }
           }

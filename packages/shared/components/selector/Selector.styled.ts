@@ -63,7 +63,7 @@ const StyledSelector = styled.div`
   overflow: hidden;
 `;
 
-const StyledHeader = styled.div`
+const StyledHeader = styled.div<{ withoutBorder: boolean }>`
   width: calc(100% - 32px);
   min-height: 53px;
   height: 53px;
@@ -434,6 +434,8 @@ const StyledFooter = styled.div<{
         : "73px"};
 
   padding: 0 16px;
+
+  background-color: ${(props) => props.theme.backgroundColor};
 
   border-top: ${(props) => props.theme.selector.border};
 

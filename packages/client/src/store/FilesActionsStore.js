@@ -1077,7 +1077,7 @@ class FilesActionStore {
   };
 
   setPinAction = async (action, id, t) => {
-    const { pinRoom, unpinRoom, setSelected } = this.filesStore;
+    const { pinRoom, unpinRoom } = this.filesStore;
 
     const items = Array.isArray(id) ? id : [id];
 
@@ -1089,7 +1089,7 @@ class FilesActionStore {
     const updatingFolderList = (items, isPin = false) => {
       if (items.length === 0) return;
 
-      this.updateCurrentFolder(null, items, null, operationId);
+      this.updateCurrentFolder(null, items, true, operationId);
 
       const itemCount = { count: items.length };
 
@@ -1101,8 +1101,6 @@ class FilesActionStore {
       toastr.success(
         items.length > 1 ? translationForSeverals : translationForOneItem,
       );
-
-      setSelected("close");
     };
 
     const isPin = action === "pin";

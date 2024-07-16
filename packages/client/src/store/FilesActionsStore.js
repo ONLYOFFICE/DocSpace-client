@@ -1076,8 +1076,8 @@ class FilesActionStore {
     }
   };
 
-  setPinAction = (action, id, t) => {
-    const { pinRoom, unpinRoom, updateRoomPin, setSelected } = this.filesStore;
+  setPinAction = async (action, id, t) => {
+    const { pinRoom, unpinRoom, setSelected } = this.filesStore;
 
     const { infoPanelSelection, setInfoPanelSelection } = this.infoPanelStore;
 
@@ -1085,55 +1085,71 @@ class FilesActionStore {
 
     const actions = [];
     const operationId = uniqueid("operation_");
+    const withFinishedOperation = [];
+    let isError = false;
 
-    switch (action) {
-      case "pin":
-        items.forEach((item) => {
-          actions.push(pinRoom(item));
-        });
+    const updatingFolderList = (items, isPin = false) => {
+      infoPanelSelection &&
+        setInfoPanelSelection({ ...infoPanelSelection, pinned: isPin });
 
-        return Promise.all(actions)
-          .then(() => {
-            this.updateCurrentFolder(null, items, null, operationId);
-            if (infoPanelSelection) {
-              setInfoPanelSelection({ ...infoPanelSelection, pinned: true });
-            }
-          })
-          .then(() => setSelected("close"))
-          .then(() =>
-            toastr.success(
-              items.length > 1
-                ? t("RoomsPinned", { count: items.length })
-                : t("RoomPinned"),
-            ),
-          )
-          .catch((error) => {
-            console.log(error);
-            toastr.error(t("RoomsPinLimitMessage"));
-          });
-      case "unpin":
-        items.forEach((item) => {
-          updateRoomPin(item);
-          actions.push(unpinRoom(item));
-        });
-        return Promise.all(actions)
-          .then(() => {
-            this.updateCurrentFolder(null, items, null, operationId);
-            if (selection) {
-              setInfoPanelSelection({ ...selection, pinned: false });
-            }
-          })
-          .then(() => setSelected("close"))
-          .then(() => {
-            toastr.success(
-              items.length > 1
-                ? t("RoomsUnpinned", { count: items.length })
-                : t("RoomUnpinned"),
-            );
-          })
-          .catch((error) => console.log(error));
-      default:
-        return;
+      if (items.length === 0) return;
+
+      this.updateCurrentFolder(null, items, null, operationId);
+
+      const itemCount = { count: items.length };
+
+      const translationForOneItem = isPin ? t("RoomPinned") : t("RoomUnpinned");
+      const translationForSeverals = isPin
+        ? t("RoomsPinned", { ...itemCount })
+        : t("RoomsUnpinned", { ...itemCount });
+
+      toastr.success(
+        items.length > 1 ? translationForSeverals : translationForOneItem,
+      );
+
+      setSelected("close");
+    };
+
+    const isPin = action === "pin";
+
+    items.forEach((item) => {
+      actions.push(isPin ? pinRoom(item) : unpinRoom(item));
+    });
+
+    if (action === "pin") {
+      const result = await Promise.allSettled(actions);
+
+      if (!result) return;
+
+      result.forEach((res) => {
+        if (res.value) {
+          withFinishedOperation.push(res.value);
+        }
+
+        if (!res.value) isError = true;
+      });
+
+      updatingFolderList(withFinishedOperation, isPin);
+
+      isError && toastr.error(t("RoomsPinLimitMessage"));
+
+      return;
+    }
+
+    if (action === "unpin") {
+      const result = await Promise.allSettled(actions);
+
+      if (!result) return;
+
+      result.forEach((result) => {
+        if (result.value) {
+          withFinishedOperation.push(result.value);
+        }
+
+        if (!result.value) toastr.error(result.reason.response?.data?.error);
+      });
+
+      updatingFolderList(withFinishedOperation, isPin);
     }
   };
 

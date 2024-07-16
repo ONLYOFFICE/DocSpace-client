@@ -1077,7 +1077,7 @@ class FilesActionStore {
   };
 
   setPinAction = (action, id, t) => {
-    const { pinRoom, unpinRoom, updateRoomPin, setSelected } = this.filesStore;
+    const { pinRoom, unpinRoom, setSelected } = this.filesStore;
 
     const { infoPanelSelection, setInfoPanelSelection } = this.infoPanelStore;
 
@@ -1089,7 +1089,6 @@ class FilesActionStore {
     switch (action) {
       case "pin":
         items.forEach((item) => {
-          updateRoomPin(item);
           actions.push(pinRoom(item));
         });
 

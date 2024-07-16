@@ -63,7 +63,7 @@ const StyledSelector = styled.div`
   overflow: hidden;
 `;
 
-const StyledHeader = styled.div`
+const StyledHeader = styled.div<{ withoutBorder: boolean }>`
   width: calc(100% - 32px);
   min-height: 53px;
   height: 53px;
@@ -71,7 +71,10 @@ const StyledHeader = styled.div`
 
   padding: 0 16px;
 
-  border-bottom: ${(props) => props.theme.selector.border};
+  ${(props) =>
+    props.withoutBorder
+      ? "border-bottom: none;"
+      : `border-bottom: ${props.theme.selector.border};`}
 
   display: flex;
   align-items: center;
@@ -115,7 +118,7 @@ const StyledBody = styled.div<{
         ? `calc(100% - 16px - ${props.headerHeight}px)`
         : `calc(100% - 16px)`};
 
-  padding: ${({ withTabs }) => (withTabs ? "8px 0 0 0" : "16px 0 0 0")};
+  padding: ${({ withTabs }) => (withTabs ? "0" : "16px 0 0 0")};
 
   .search-input,
   .search-loader {
@@ -431,6 +434,8 @@ const StyledFooter = styled.div<{
         : "73px"};
 
   padding: 0 16px;
+
+  background-color: ${(props) => props.theme.backgroundColor};
 
   border-top: ${(props) => props.theme.selector.border};
 

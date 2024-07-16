@@ -130,6 +130,7 @@ const UsersInfoBlock = ({
             <Text fontSize="12px">
               {t("Settings:LicenseLimitDescription", {
                 productName: PRODUCT_NAME,
+                maxLimit: totalLicenceLimit,
               })}
             </Text>
           }

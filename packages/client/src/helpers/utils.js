@@ -134,10 +134,11 @@ export const getCategoryType = (location) => {
     if (pathname.indexOf("personal") > -1) {
       categoryType = CategoryType.Personal;
     } else if (pathname.indexOf("shared") > -1) {
-      categoryType =
-        pathname.indexOf("shared/filter") > -1
-          ? CategoryType.Shared
-          : CategoryType.SharedRoom;
+      const regexp = /(rooms)\/([\d])\/(shared)/;
+
+      categoryType = !regexp.test(location)
+        ? CategoryType.Shared
+        : CategoryType.SharedRoom;
     } else if (pathname.indexOf("share") > -1) {
       categoryType = CategoryType.PublicRoom;
     } else if (pathname.indexOf("archive") > -1) {

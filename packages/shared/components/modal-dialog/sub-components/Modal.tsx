@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { isIOS, isMobileOnly, isSafari } from "react-device-detect";
 
 import { classNames } from "../../../utils";
 import { DialogSkeleton, DialogAsideSkeleton } from "../../../skeletons";
@@ -101,6 +102,24 @@ const Modal = ({
   const footerProps = React.isValidElement(footer)
     ? (footer?.props as { className?: string })
     : { className: "" };
+
+  const onTouchMove = () => {
+    const activeElement = document.activeElement;
+    if (activeElement?.tagName === "INPUT") activeElement.blur();
+  };
+
+  const onFocusAction = () => {
+    document.addEventListener("touchmove", onTouchMove);
+  };
+
+  const onBlurAction = () => {
+    document.removeEventListener("touchmove", onTouchMove);
+  };
+
+  const iOSActions =
+    isMobileOnly && isIOS && isSafari
+      ? { onFocus: onFocusAction, onBlur: onBlurAction }
+      : {};
 
   return (
     <StyledModal
@@ -194,6 +213,7 @@ const Modal = ({
                     hasFooter={!!footer}
                     currentDisplayType={currentDisplayType}
                     {...bodyProps}
+                    {...iOSActions}
                     // embedded={embedded}
                   >
                     {currentDisplayType === "aside" && withBodyScroll ? (

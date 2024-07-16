@@ -88,7 +88,7 @@ class TableHeader extends React.Component<
       }
 
       for (let index in columns) {
-        if (columns[index].enable !== prevProps.columns[index].enable) {
+        if (columns[index]?.enable !== prevProps.columns[index]?.enable) {
           return this.resetColumns();
         }
       }

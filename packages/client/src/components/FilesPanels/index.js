@@ -30,7 +30,11 @@ import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { toastr } from "@docspace/shared/components/toast";
-import { Events, FilesSelectorFilterTypes } from "@docspace/shared/enums";
+import {
+  Events,
+  FilesSelectorFilterTypes,
+  FilterType,
+} from "@docspace/shared/enums";
 
 import {
   UploadPanel,
@@ -165,6 +169,7 @@ const Panels = (props) => {
       [FilesSelectorFilterTypes.DOCX]: t("Common:SelectDOCXFormat"),
       // [FilesSelectorFilterTypes.DOCXF]: t("Common:SelectDOCXFFormat"),
       [FilesSelectorFilterTypes.PDF]: t("Common:SelectPDFFormat"),
+      [FilterType.PDFForm]: t("Common:SelectPDFFormat"),
     };
 
     return text[selectFileFormRoomFilterParam];

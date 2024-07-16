@@ -131,6 +131,7 @@ export const enum FilterType {
   PublicRooms = 20,
   FormRooms = 21,
   Pdf = 22,
+  PDFForm = 23,
 }
 
 /**

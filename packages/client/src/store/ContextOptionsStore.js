@@ -104,6 +104,7 @@ import {
   UrlActionType,
   EmployeeType,
   FilesSelectorFilterTypes,
+  FilterType,
 } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { getFileLink, getFolderLink } from "@docspace/shared/api/files";
@@ -2218,7 +2219,7 @@ class ContextOptionsStore {
           label: t("Common:FromPortal", { productName: PRODUCT_NAME }),
           key: "personal_upload-from-docspace",
           onClick: () =>
-            this.onShowFormRoomSelectFileDialog(FilesSelectorFilterTypes.PDF),
+            this.onShowFormRoomSelectFileDialog(FilterType.PDFForm),
         },
         {
           id: "personal_upload-from-device",

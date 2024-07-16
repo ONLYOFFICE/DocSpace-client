@@ -27,6 +27,7 @@
 import { getNewFiles } from "@docspace/shared/api/files";
 import {
   FilesSelectorFilterTypes,
+  FilterType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
@@ -378,6 +379,11 @@ class DialogsStore {
     this.selectFileDialogVisible = visible;
   };
 
+  /**
+   *  @param {boolean} visible
+   *  @param {FilesSelectorFilterTypes | FilterType} [filterParam = FilesSelectorFilterTypes.DOCX]
+   *  @param {boolean} [openRoot = false]
+   */
   setSelectFileFormRoomDialogVisible = (
     visible,
     filterParam = FilesSelectorFilterTypes.DOCX,

@@ -3,6 +3,5 @@
   "FormFilling": "表单填写",
   "LinkName": "链接名称",
   "ShareEmailBody": "您已获得{{itemName}}文档的访问权限。点击下方的链接以立即打开文档：{{shareLink}}",
-  "ShareEmailSubject": "您已获得{{itemName}}文档的访问权限",
-  "SharingSettingsTitle": "共享设置"
+  "ShareEmailSubject": "您已获得{{itemName}}文档的访问权限"
 }

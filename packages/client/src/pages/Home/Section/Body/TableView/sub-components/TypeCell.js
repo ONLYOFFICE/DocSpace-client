@@ -27,7 +27,7 @@
 import React from "react";
 import { StyledTypeCell } from "./CellStyles";
 import { FileType } from "@docspace/shared/enums";
-import { getDefaultRoomName } from "../../../../../../helpers/filesUtils";
+import { getRoomTypeName } from "../../../../../../helpers/filesUtils";
 
 const TypeCell = ({ t, item, sideColor }) => {
   const { fileExst, fileTypeName, fileType, roomType } = item;
@@ -58,7 +58,7 @@ const TypeCell = ({ t, item, sideColor }) => {
     }
   };
 
-  const type = item.isRoom ? getDefaultRoomName(roomType, t) : getItemType();
+  const type = item.isRoom ? getRoomTypeName(roomType, t) : getItemType();
   const Exst = fileExst ? fileExst.slice(1).toUpperCase() : "";
   const data = `${type} ${Exst}`;
 

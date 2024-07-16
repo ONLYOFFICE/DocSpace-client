@@ -28,6 +28,7 @@ export interface EmptyViewContainerProps {
   parentRoomType: Nullable<FolderType>;
   folderType: Nullable<FolderType>;
   isFolder: boolean;
+  isArchiveFolderRoot: boolean;
   onClickInviteUsers?: (folderId: string | number, roomType: RoomsType) => void;
   setSelectFileFormRoomDialogVisible?: TStore["dialogsStore"]["setSelectFileFormRoomDialogVisible"];
   onCreateAndCopySharedLink?: TStore["contextOptionsStore"]["onCreateAndCopySharedLink"];

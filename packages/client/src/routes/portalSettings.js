@@ -66,7 +66,7 @@ const WelcomePageSettings = loadable(() =>
 );
 const DNSSettings = loadable(() =>
   componentLoader(
-    () => () =>
+    () =>
       import(
         "../pages/PortalSettings/categories/common/Customization/dns-settings"
       ),
@@ -333,6 +333,24 @@ const Viewer = loadable(() =>
   ),
 );
 
+const OAuthCreatePage = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/developer-tools/OAuth/OAuthCreatePage"
+      ),
+  ),
+);
+
+const OAuthEditPage = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/developer-tools/OAuth/OAuthEditPage"
+      ),
+  ),
+);
+
 const PortalSettingsRoutes = {
   path: "portal-settings/",
   element: (
@@ -559,6 +577,18 @@ const PortalSettingsRoutes = {
     {
       path: "developer-tools/webhooks/:id/:eventId",
       element: <WebhookDetails />,
+    },
+    {
+      path: "developer-tools/oauth",
+      element: <DeveloperTools />,
+    },
+    {
+      path: "developer-tools/oauth/create",
+      element: <OAuthCreatePage />,
+    },
+    {
+      path: "developer-tools/oauth/:id",
+      element: <OAuthEditPage />,
     },
     {
       path: "backup",

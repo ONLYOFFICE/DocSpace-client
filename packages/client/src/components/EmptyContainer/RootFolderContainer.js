@@ -151,7 +151,7 @@ const RootFolderContainer = (props) => {
   };
 
   const onGoToShared = () => {
-    const newFilter = RoomsFilter.getDefault(userId);
+    const newFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
 
     newFilter.searchArea = RoomSearchArea.Active;
 

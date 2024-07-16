@@ -108,6 +108,7 @@ const overflowStyle = (overflowProp: string) => `overflow: ${overflowProp};`;
 const paddingStyle = (paddingProp: string) => `padding: ${paddingProp};`;
 const textAlignStyle = (textAlign: string) => `text-align: ${textAlign};`;
 const widthStyle = (widthProp: string) => `width: ${widthProp};`;
+const gapStyle = (gapProp: string) => `gap: ${gapProp};`;
 
 const StyledBox = styled.div<BoxProps>`
   ${(props) => props.alignContent && alignContentStyle(props.alignContent)}
@@ -167,6 +168,7 @@ const StyledBox = styled.div<BoxProps>`
     )}
   
   ${(props) => props.widthProp && widthStyle(props.widthProp)}
+  ${(props) => props.gapProp && gapStyle(props.gapProp)}
 `;
 
 export { StyledBox };

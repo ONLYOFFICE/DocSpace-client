@@ -3,7 +3,6 @@
   "AddManuallyDescriptionAccounts": "Pozvite nových používateľov do {{productName}} osobne prostredníctvom e-mailu",
   "AddManuallyDescriptionRoom": "Pridajte existujúcich používateľov {{productName}} do miestnosti tak, že použijete ich mena alebo osobne pozvite nových používateľov prostredníctvom e-mailu",
   "EmailErrorMessage": "Emailová adresa nie je platná. E-mail môžete upraviť kliknutím naň.",
-  "GroupMaxAvailableRoleWarning": "Skupiny majú maximálne dostupnú rolu - \"{{role}}\". Po pridaní skupiny do miestnosti môžete povoliť rozšírenie práv.",
   "InvitationLanguage": "Jazyk pozvánky",
   "InviteAccountSearchPlaceholder": "Pozvať ľudí e-mailom",
   "InviteRoomSearchPlaceholder": "Pozvať ľudí podľa mena alebo e-mailu",

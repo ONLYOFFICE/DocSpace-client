@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -33,9 +33,11 @@ import { TextInput } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import { ComboBox } from "@docspace/shared/components/combobox";
-import { EmployeeType } from "@docspace/shared/enums";
+//import { ComboBox } from "@docspace/shared/components/combobox";
+// import { EmployeeType } from "@docspace/shared/enums";
 import { PRODUCT_NAME } from "@docspace/shared/constants";
+import AccessSelector from "SRC_DIR/components/AccessSelector";
+import { isMobile } from "@docspace/shared/utils";
 
 const FIRST_NAME = "firstName",
   SECOND_NAME = "secondName",
@@ -69,6 +71,8 @@ const AttributeMapping = (props) => {
 
   const { t } = useTranslation("Ldap");
 
+  const inputsRef = useRef();
+
   const onChangeValue = (e) => {
     const { value, name } = e.target;
 
@@ -92,28 +96,8 @@ const AttributeMapping = (props) => {
   };
 
   const onChangeUserType = (option) => {
-    setUserType(option.key);
+    setUserType(option.access);
   };
-
-  const getUserTypes = React.useCallback(() => {
-    const options = [
-      {
-        key: EmployeeType.Collaborator,
-        label: t("Common:PowerUser"),
-      },
-      { key: EmployeeType.User, label: t("Common:RoomAdmin") },
-      {
-        key: EmployeeType.Admin,
-        label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
-      },
-    ];
-    return options;
-  }, [t]);
-
-  const userTypes = getUserTypes(t);
-
-  const selectedOption =
-    userTypes.find((option) => option.key === userType) || {};
 
   return (
     <>
@@ -223,29 +207,45 @@ const AttributeMapping = (props) => {
               tabIndex={10}
             />
           </FieldContainer>
-
-          <FieldContainer
-            style={FIELD_STYLE}
-            isVertical
-            labelVisible={true}
-            hasError={errors.avatarAttribute}
-            labelText={t("LdapUserType")}
-            tooltipContent={t("LdapUserTypeTooltip")}
-            inlineHelpButton
-          >
-            <ComboBox
-              scaled
-              onSelect={onChangeUserType}
-              options={userTypes}
-              selectedOption={selectedOption}
-              displaySelectedOption
-              directionY="bottom"
-              withoutPadding
-              isDisabled={!isLdapEnabled || isUIDisabled}
-              tabIndex={12}
-            />
-          </FieldContainer>
         </div>
+      </Box>
+      <Box marginProp="0 0 24px 0">
+        <Box
+          displayProp="flex"
+          flexDirection="column"
+          gapProp="8px"
+          marginProp="0 0 12px 0"
+        >
+          <Box displayProp="flex" flexDirection="row" gapProp="4px">
+            <Text fontWeight={600} fontSize="15px" lineHeight="16px">
+              {t("LdapUsersType")}
+            </Text>
+            <HelpButton
+              tooltipContent={t("LdapUserTypeTooltip", {
+                productName: PRODUCT_NAME,
+              })}
+            />
+          </Box>
+          <Text fontWeight={400} fontSize="12px" lineHeight="16px">
+            {t("LdapUsersTypeInfo")}
+          </Text>
+        </Box>
+        <Box widthProp="356px">
+          <AccessSelector
+            className="add-manually-access"
+            t={t}
+            manualWidth={352}
+            roomType={-1}
+            defaultAccess={userType}
+            onSelectAccess={onChangeUserType}
+            containerRef={inputsRef}
+            isOwner
+            isMobileView={isMobile()}
+            isDisabled={!isLdapEnabled || isUIDisabled}
+            tabIndex={12}
+            directionX="left"
+          />
+        </Box>
       </Box>
     </>
   );

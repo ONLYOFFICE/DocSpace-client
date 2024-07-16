@@ -223,6 +223,7 @@ export type TCapabilities = {
   ssoLabel: string;
   oauthEnabled: boolean;
   ssoUrl: string;
+  identityServerEnabled: boolean;
 };
 
 export type TThirdPartyProvider = {

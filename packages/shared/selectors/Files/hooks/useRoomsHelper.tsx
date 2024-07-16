@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 
 import { getRooms } from "../../../api/rooms";
@@ -35,6 +35,8 @@ import RoomType from "../../../components/room-type";
 import { TSelectorItem } from "../../../components/selector";
 import { TBreadCrumb } from "../../../components/selector/Selector.types";
 
+import { LoadersContext } from "../contexts/Loaders";
+
 import { PAGE_COUNT, DEFAULT_BREAD_CRUMB } from "../FilesSelector.constants";
 import { UseRoomsHelperProps } from "../FilesSelector.types";
 import { convertRoomsToItems } from "../FilesSelector.utils";
@@ -42,20 +44,19 @@ import { convertRoomsToItems } from "../FilesSelector.utils";
 import useInputItemHelper from "./useInputItemHelper";
 
 const useRoomsHelper = ({
-  setIsNextPageLoading,
   setHasNextPage,
   setTotal,
   setItems,
   setBreadCrumbs,
   setIsRoot,
   onSetBaseFolderPath,
-  setIsBreadCrumbsLoading,
+
   searchValue,
   isRoomsOnly,
-  isFirstLoad,
+
   isInit,
   setIsInit,
-  setIsFirstLoad,
+
   withCreate,
   createDefineRoomLabel,
   createDefineRoomType,
@@ -64,6 +65,13 @@ const useRoomsHelper = ({
   subscribe,
 }: UseRoomsHelperProps) => {
   const { t } = useTranslation(["Common"]);
+  const {
+    setIsNextPageLoading,
+    setIsBreadCrumbsLoading,
+    isFirstLoad,
+    setIsFirstLoad,
+  } = useContext(LoadersContext);
+
   const { addInputItem } = useInputItemHelper({ withCreate, setItems });
 
   const requestRunning = React.useRef(false);

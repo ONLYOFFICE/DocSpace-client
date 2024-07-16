@@ -24,13 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useContext } from "react";
 
 import { useTranslation } from "react-i18next";
 
 import FolderSvgUrl from "PUBLIC_DIR/images/icons/32/folder.svg?url";
 
-import { getFolder, getFolderInfo, getSettingsFiles } from "../../../api/files";
+import { getFolder, getFolderInfo } from "../../../api/files";
 import FilesFilter from "../../../api/files/filter";
 import {
   ApplyFilterOption,
@@ -43,6 +43,9 @@ import { TSelectorItem } from "../../../components/selector";
 import { TData } from "../../../components/toast/Toast.type";
 import { TBreadCrumb } from "../../../components/selector/Selector.types";
 
+import { SettingsContext } from "../contexts/Settings";
+import { LoadersContext } from "../contexts/Loaders";
+
 import { PAGE_COUNT, DEFAULT_BREAD_CRUMB } from "../FilesSelector.constants";
 import { UseFilesHelpersProps } from "../FilesSelector.types";
 import {
@@ -52,13 +55,11 @@ import {
 import useInputItemHelper from "./useInputItemHelper";
 
 const useFilesHelper = ({
-  setIsNextPageLoading,
   setHasNextPage,
   setTotal,
   setItems,
   setBreadCrumbs,
-  setIsBreadCrumbsLoading,
-  isFirstLoad,
+
   selectedItemId,
   setIsRoot,
   searchValue,
@@ -73,17 +74,27 @@ const useFilesHelper = ({
   isUserOnly,
   rootThirdPartyId,
   getRoomList,
-  getIcon,
+
   setIsSelectedParentFolder,
   roomsFolderId,
   getFilesArchiveError,
   isInit,
   setIsInit,
-  setIsFirstLoad,
+
   withCreate,
   setSelectedItemId,
+  setSelectedItemType,
 }: UseFilesHelpersProps) => {
   const { t } = useTranslation(["Common"]);
+  const {
+    isFirstLoad,
+    setIsFirstLoad,
+    setIsNextPageLoading,
+    setIsBreadCrumbsLoading,
+  } = useContext(LoadersContext);
+
+  const { getIcon, extsWebEdited, filesSettingsLoading } =
+    useContext(SettingsContext);
 
   const { addInputItem } = useInputItemHelper({
     withCreate,
@@ -110,7 +121,7 @@ const useFilesHelper = ({
 
   const getFileList = React.useCallback(
     async (sIndex: number) => {
-      if (requestRunning.current) return;
+      if (requestRunning.current || filesSettingsLoading) return;
 
       requestRunning.current = true;
       setIsNextPageLoading(true);
@@ -126,8 +137,6 @@ const useFilesHelper = ({
       const page = startIndex / PAGE_COUNT;
 
       const filter = FilesFilter.getDefault();
-
-      const { extsWebEdited } = await getSettingsFiles();
 
       filter.page = page;
       filter.pageCount = PAGE_COUNT;
@@ -149,16 +158,12 @@ const useFilesHelper = ({
             filter.extension = "gz,tar";
             break;
 
-          case FilesSelectorFilterTypes.DOCXF:
-            filter.filterType = FilterType.OFormTemplateOnly;
-            break;
-
           case FilesSelectorFilterTypes.XLSX:
             filter.filterType = FilterType.SpreadsheetsOnly;
             break;
 
           case FilesSelectorFilterTypes.PDF:
-            filter.extension = FilesSelectorFilterTypes.PDF;
+            filter.filterType = FilterType.Pdf;
             break;
 
           case FilterType.DocumentsOnly:
@@ -189,19 +194,12 @@ const useFilesHelper = ({
             filter.filterType = FilterType.FoldersOnly;
             break;
 
-          case FilterType.OFormTemplateOnly:
-            filter.filterType = FilterType.OFormTemplateOnly;
-            break;
-
-          case FilterType.OFormOnly:
-            filter.filterType = FilterType.OFormOnly;
-            break;
-
           case FilterType.FilesOnly:
             filter.filterType = FilterType.FilesOnly;
             break;
 
           case FilesSelectorFilterTypes.ALL:
+            filter.applyFilterOption = ApplyFilterOption.All;
             filter.filterType = FilterType.None;
             break;
 
@@ -341,14 +339,20 @@ const useFilesHelper = ({
               hotkey: "f",
               onCreateClick: () => addInputItem(t("NewFolder"), FolderSvgUrl),
               onBackClick: () => {
-                setSelectedItemId(current.parentId);
+                let isRooms;
                 setBreadCrumbs((val) => {
                   const newVal = [...val];
 
-                  newVal.pop();
+                  const item = newVal.pop();
+
+                  isRooms = !!item?.roomType;
 
                   return newVal;
                 });
+
+                if (isRooms) setSelectedItemType("rooms");
+
+                setSelectedItemId(current.parentId);
               },
             });
           } else {
@@ -395,17 +399,20 @@ const useFilesHelper = ({
 
         if (onSetBaseFolderPath) {
           onSetBaseFolderPath([]);
-          toastr.error(e as TData);
         }
         setIsFirstLoad(false);
+        toastr.error(e as TData);
       }
     },
     [
+      filesSettingsLoading,
       setIsNextPageLoading,
+      withCreate,
       searchValue,
       filterParam,
       selectedItemId,
       isUserOnly,
+      extsWebEdited,
       getRootData,
       setSelectedItemSecurity,
       getIcon,
@@ -423,11 +430,11 @@ const useFilesHelper = ({
       setIsBreadCrumbsLoading,
       roomsFolderId,
       setIsSelectedParentFolder,
-      withCreate,
       setItems,
       setTotal,
-      addInputItem,
       t,
+      addInputItem,
+      setSelectedItemType,
       setSelectedItemId,
       rootThirdPartyId,
     ],

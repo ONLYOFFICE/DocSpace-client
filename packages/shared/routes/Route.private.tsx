@@ -55,6 +55,9 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     restricted,
     tenantStatus,
     enablePortalRename,
+
+    identityServerEnabled,
+    baseDomain,
   } = props;
 
   const location = useLocation();
@@ -92,6 +95,11 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       location.pathname ===
       "/portal-settings/customization/general/portal-renaming";
 
+    const isOAuthPage = location.pathname.includes(
+      "portal-settings/developer-tools/oauth",
+    );
+    const isAuthorizedAppsPage = location.pathname.includes("authorized-apps");
+
     if (isLoaded && !isAuthenticated) {
       if (isPortalDeactivate) {
         window.location.replace(
@@ -121,7 +129,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     if (
       isLoaded &&
       ((!isNotPaidPeriod && isPortalUnavailableUrl) ||
-        (!user?.isOwner && isPortalDeletionUrl) ||
+        ((!user?.isOwner || (baseDomain && baseDomain === "localhost")) &&
+          isPortalDeletionUrl) ||
         (isCommunity && isPaymentsUrl) ||
         (isEnterprise && isBonusPage))
     ) {
@@ -216,6 +225,24 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
 
     if (isPortalRenameUrl && !enablePortalRename) {
       return <Navigate replace to="/error/404" />;
+    }
+
+    if (isOAuthPage && !identityServerEnabled) {
+      return (
+        <Navigate
+          replace
+          to="/portal-settings/developer-tools/javascript-sdk"
+        />
+      );
+    }
+
+    if (isAuthorizedAppsPage && !identityServerEnabled) {
+      return (
+        <Navigate
+          replace
+          to={location.pathname.replace("authorized-apps", "login")}
+        />
+      );
     }
 
     if (

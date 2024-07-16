@@ -3,7 +3,6 @@
   "AddManuallyDescriptionAccounts": "Προσκαλέστε νέους χρήστες στο {{productName}} προσωπικά μέσω email",
   "AddManuallyDescriptionRoom": "Προσθέστε υπάρχοντες χρήστες του {{productName}} στο δωμάτιο χρησιμοποιώντας τα ονόματα ή προσκαλέστε νέους χρήστες προσωπικά μέσω email",
   "EmailErrorMessage": "Η διεύθυνση email δεν είναι έγκυρη. Μπορείτε να επεξεργαστείτε το email κάνοντας κλικ πάνω του.",
-  "GroupMaxAvailableRoleWarning": "Οι ομάδες έχουν τον μέγιστο διαθέσιμο ρόλο – «{{role}}». Μπορείτε να εκδώσετε αύξηση των δικαιωμάτων μετά την προσθήκη μιας ομάδας στο δωμάτιο.",
   "InvitationLanguage": "Γλώσσα πρόσκλησης",
   "InviteAccountSearchPlaceholder": "Πρόσκληση ατόμων μέσω email",
   "InviteRoomSearchPlaceholder": "Πρόσκληση ατόμων με όνομα ή email",

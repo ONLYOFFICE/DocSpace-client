@@ -154,7 +154,7 @@ const FileSelector = (props) => {
     buttonWithLogo: true,
     events: {
       onSelectCallback: (items) => {
-        toastr.success(items[0].label);
+        //toastr.success(items[0].label);
       },
       onCloseCallback: null,
       onAppReady: null,

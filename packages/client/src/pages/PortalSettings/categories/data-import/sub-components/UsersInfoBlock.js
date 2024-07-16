@@ -93,7 +93,7 @@ const UsersInfoBlock = ({
 }) => {
   return (
     <Wrapper>
-      {selectedUsers > totalLicenceLimit && (
+      {totalUsedUsers > totalLicenceLimit && (
         <Text className="license-limit-warning">
           {t("Settings:UserLimitExceeded", { productName: PRODUCT_NAME })}
         </Text>

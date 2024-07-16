@@ -24,14 +24,41 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface ProgressBarProps {
-  /** Progress value in %. Max value 100% */
-  percent: number;
-  /** Text in progress-bar. */
-  label?: string;
-  /** Show infinite progress */
-  isInfiniteProgress?: boolean;
-  className?: string;
-  status: string;
-  error: string;
-}
+import { inject, observer } from "mobx-react";
+import { Consumer } from "@docspace/shared/utils/context";
+
+import TableView from "./TableView";
+import RowView from "./RowView";
+
+import { AccountsTableProps, InjectedAccountsTableProps } from "../../../types";
+
+const AccountsTable = (props: AccountsTableProps) => {
+  const { t, viewAs, accountsData } = props as InjectedAccountsTableProps;
+
+  return (
+    <Consumer>
+      {(context) =>
+        viewAs === "table" ? (
+          <TableView
+            t={t}
+            sectionWidth={context.sectionWidth}
+            accountsData={accountsData}
+          />
+        ) : (
+          <RowView
+            t={t}
+            sectionWidth={context.sectionWidth}
+            accountsData={accountsData}
+          />
+        )
+      }
+    </Consumer>
+  );
+};
+export default inject<TStore>(({ setup }) => {
+  const { viewAs } = setup;
+
+  return {
+    viewAs,
+  };
+})(observer(AccountsTable));

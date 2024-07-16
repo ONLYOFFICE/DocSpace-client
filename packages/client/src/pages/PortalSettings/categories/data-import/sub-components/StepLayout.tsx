@@ -24,14 +24,63 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface ProgressBarProps {
-  /** Progress value in %. Max value 100% */
-  percent: number;
-  /** Text in progress-bar. */
-  label?: string;
-  /** Show infinite progress */
-  isInfiniteProgress?: boolean;
-  className?: string;
-  status: string;
-  error: string;
-}
+import styled from "styled-components";
+
+import { Text } from "@docspace/shared/components/text";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
+import { LayoutProps } from "../types";
+
+const DescriptionWrapper = styled.div`
+  max-width: 700px;
+
+  .data-import-description {
+    color: ${(props) => props.theme.client.settings.migration.descriptionColor};
+  }
+
+  .data-import-counter {
+    margin-top: 19px;
+    margin-bottom: 9px;
+  }
+
+  .data-import-section-description {
+    margin-bottom: 16px;
+    font-size: 12px;
+  }
+`;
+
+const StepLayout = (props: LayoutProps) => {
+  const {
+    t,
+    step,
+    totalSteps,
+    title,
+    description,
+    component,
+    organizationName,
+  } = props;
+
+  return (
+    <>
+      <DescriptionWrapper>
+        <Text className="data-import-description" lineHeight="20px">
+          {t("Settings:AboutDataImport", {
+            productName: PRODUCT_NAME,
+            organizationName,
+          })}
+        </Text>
+        <Text
+          className="data-import-counter"
+          fontSize="16px"
+          fontWeight={700}
+          lineHeight="22px"
+        >
+          {step}/{totalSteps}. {title}
+        </Text>
+        <div className="data-import-section-description">{description}</div>
+      </DescriptionWrapper>
+      {component}
+    </>
+  );
+};
+
+export default StepLayout;

@@ -24,14 +24,42 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface ProgressBarProps {
-  /** Progress value in %. Max value 100% */
-  percent: number;
-  /** Text in progress-bar. */
-  label?: string;
-  /** Show infinite progress */
-  isInfiniteProgress?: boolean;
-  className?: string;
-  status: string;
-  error: string;
-}
+import { useRef } from "react";
+import { Row } from "@docspace/shared/components/row";
+import UsersRowContent from "./UsersRowContent";
+import { TypeSelectUsersRowProps } from "../../../../types";
+
+const UsersRow = (props: TypeSelectUsersRowProps) => {
+  const { data, sectionWidth, typeOptions, isChecked, toggleAccount } = props;
+
+  const roleSelectorRef = useRef<HTMLDivElement>(null);
+
+  const handleAccountToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!roleSelectorRef.current?.contains(e.target)) {
+      toggleAccount();
+    }
+  };
+
+  return (
+    <Row
+      sectionWidth={sectionWidth}
+      key={data.key}
+      checked={isChecked}
+      contextButtonSpacerWidth="0"
+      onRowClick={handleAccountToggle}
+      onSelect={handleAccountToggle}
+    >
+      <UsersRowContent
+        id={data.key}
+        sectionWidth={sectionWidth}
+        displayName={data.displayName}
+        email={data.email}
+        type={data.userType}
+        typeOptions={typeOptions}
+        roleSelectorRef={roleSelectorRef}
+      />
+    </Row>
+  );
+};
+
+export default UsersRow;

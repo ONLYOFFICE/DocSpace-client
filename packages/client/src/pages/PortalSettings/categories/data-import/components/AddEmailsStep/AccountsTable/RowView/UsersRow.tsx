@@ -24,14 +24,60 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface ProgressBarProps {
-  /** Progress value in %. Max value 100% */
-  percent: number;
-  /** Text in progress-bar. */
-  label?: string;
-  /** Show infinite progress */
-  isInfiniteProgress?: boolean;
-  className?: string;
-  status: string;
-  error: string;
-}
+import { useState, useRef } from "react";
+import { Row } from "@docspace/shared/components/row";
+import UsersRowContent from "./UsersRowContent";
+import { AddEmailUsersRowProps } from "../../../../types";
+
+const UsersRow = (props: AddEmailUsersRowProps) => {
+  const {
+    data,
+    sectionWidth,
+    isChecked,
+    toggleAccount,
+    isEmailOpen,
+    setOpenedEmailKey,
+  } = props;
+
+  const emailInputRef = useRef<HTMLDivElement>(null);
+  const emailTextRef = useRef<HTMLSpanElement>(null);
+
+  const [isPrevEmailValid, setIsPrevEmailValid] = useState(
+    data.email?.length > 0,
+  );
+
+  const handleAccountToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (
+      isPrevEmailValid &&
+      !emailInputRef.current?.contains(e.target) &&
+      !emailTextRef.current?.contains(e.target)
+    ) {
+      toggleAccount();
+    }
+  };
+
+  return (
+    <Row
+      checked={isChecked}
+      onRowClick={handleAccountToggle}
+      onSelect={toggleAccount}
+      isDisabled={!isPrevEmailValid}
+    >
+      <UsersRowContent
+        id={data.key}
+        sectionWidth={sectionWidth}
+        displayName={data.displayName}
+        email={data.email || ""}
+        emailInputRef={emailInputRef}
+        emailTextRef={emailTextRef}
+        isChecked={isChecked}
+        isEmailOpen={isEmailOpen}
+        setOpenedEmailKey={setOpenedEmailKey}
+        setIsPrevEmailValid={setIsPrevEmailValid}
+        toggleAccount={toggleAccount}
+      />
+    </Row>
+  );
+};
+
+export default UsersRow;

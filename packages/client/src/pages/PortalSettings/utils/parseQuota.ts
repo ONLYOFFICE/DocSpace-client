@@ -23,15 +23,21 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { PortalFeaturesLimitations } from "@docspace/shared/enums";
+import { TQuota } from "../categories/data-import/types";
 
-export interface ProgressBarProps {
-  /** Progress value in %. Max value 100% */
-  percent: number;
-  /** Text in progress-bar. */
-  label?: string;
-  /** Show infinite progress */
-  isInfiniteProgress?: boolean;
-  className?: string;
-  status: string;
-  error: string;
-}
+export const parseQuota = (quotaCharacteristics: TQuota) => {
+  const maxValue = quotaCharacteristics.value;
+  const usedValue = quotaCharacteristics.used!.value;
+
+  if (maxValue === PortalFeaturesLimitations.Unavailable)
+    return { used: 0, max: null };
+
+  const isExistsMaxValue = maxValue !== PortalFeaturesLimitations.Limitless;
+
+  const resultingMaxValue = isExistsMaxValue ? maxValue : null;
+
+  const resultingUsedValue = usedValue;
+
+  return { used: resultingUsedValue, max: resultingMaxValue };
+};

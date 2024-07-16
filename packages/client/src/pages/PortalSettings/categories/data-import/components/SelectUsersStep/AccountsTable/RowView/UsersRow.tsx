@@ -24,14 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface ProgressBarProps {
-  /** Progress value in %. Max value 100% */
-  percent: number;
-  /** Text in progress-bar. */
-  label?: string;
-  /** Show infinite progress */
-  isInfiniteProgress?: boolean;
-  className?: string;
-  status: string;
-  error: string;
-}
+import { Row } from "@docspace/shared/components/row";
+import UsersRowContent from "./UsersRowContent";
+import { UsersRowProps } from "../../../../types";
+
+const UsersRow = (props: UsersRowProps) => {
+  const { t, data, sectionWidth, isChecked, toggleAccount } = props;
+
+  return (
+    <Row
+      checked={isChecked}
+      onSelect={toggleAccount}
+      contextButtonSpacerWidth="0"
+      onRowClick={toggleAccount}
+    >
+      <UsersRowContent
+        t={t}
+        data={data}
+        sectionWidth={sectionWidth}
+        displayName={data.displayName}
+        email={data.email}
+        isDuplicate={data.isDuplicate}
+      />
+    </Row>
+  );
+};
+
+export default UsersRow;

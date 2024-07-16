@@ -24,14 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface ProgressBarProps {
-  /** Progress value in %. Max value 100% */
-  percent: number;
-  /** Text in progress-bar. */
-  label?: string;
-  /** Show infinite progress */
-  isInfiniteProgress?: boolean;
-  className?: string;
-  status: string;
-  error: string;
-}
+import { Trans } from "react-i18next";
+import { NoEmailUsersProps } from "../types";
+
+export const NoEmailUsersBlock = ({ t, users }: NoEmailUsersProps) => {
+  return (
+    <p className="users-without-email">
+      <Trans t={t} ns="Settings" i18nKey="AccountsWithoutEmails">
+        We found <b>{{ users }} users</b> without emails. You can fill their
+        emails or continue without this action.
+      </Trans>
+    </p>
+  );
+};

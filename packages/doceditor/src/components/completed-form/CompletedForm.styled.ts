@@ -115,9 +115,9 @@ export const TextWrapper = styled.section`
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 32px;
+  gap: 20px;
 
-  margin-bottom: 32px;
+  margin-top: 24px;
 
   h1 {
     line-height: 28px;

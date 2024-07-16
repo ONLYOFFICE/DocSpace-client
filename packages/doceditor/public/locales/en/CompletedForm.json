@@ -1,8 +1,8 @@
 {
   "BackToRoom": "Back to room",
-  "Description": "You submitted the filled PDF form which was assigned a unique number. To check the status, contact the form owner providing the assigned number.",
+  "Description": "Your form completed and saved",
   "FillItOutAgain": "Fill it out again",
   "FormNumber": "Form number:",
   "Manager": "Manager:",
-  "Title": "Form completed successfully"
+  "Title": "The form is completed"
 }

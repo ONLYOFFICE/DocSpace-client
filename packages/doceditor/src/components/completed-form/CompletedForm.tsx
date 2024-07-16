@@ -27,7 +27,7 @@
 
 import React from "react";
 import Link from "next/link";
-// import Image from "next/image";
+import Image from "next/image";
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
@@ -90,11 +90,19 @@ export const CompletedForm = ({}: CompletedFormProps) => {
         <source media={mobileMore} srcSet={logoUrl} />
         <img src={logoUrl} alt="logo" />
       </picture>
+      <Image
+        priority
+        src={iconUrl}
+        className="completed-form__icon"
+        alt="icon"
+        width={416}
+        height={200}
+      />
       <TextWrapper>
         <Heading level={HeadingLevel.h1}>{t("CompletedForm:Title")}</Heading>
         <Text noSelect>{t("CompletedForm:Description")}</Text>
       </TextWrapper>
-      <MainContent>
+      {/* <MainContent>
         <Box className="completed-form__file">
           <PDFIcon />
           <Heading className="completed-form__filename" level={HeadingLevel.h5}>
@@ -146,7 +154,7 @@ export const CompletedForm = ({}: CompletedFormProps) => {
       </ButtonWrapper>
       <Link className="link" href="#">
         {t("CompletedForm:FillItOutAgain")}
-      </Link>
+      </Link> */}
     </CompletedFormLayout>
   );
 };

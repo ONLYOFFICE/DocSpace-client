@@ -74,7 +74,7 @@ const UserInput = styled.div`
 
 const StyledDropDown = styled(DropDown)`
   ${(props) => props.width && `width: ${props.width}px`};
-  left: 0;
+  inset-inline-start: 0;
 
   .list-item {
     display: flex;
@@ -102,7 +102,7 @@ const SearchItemText = styled(Text)`
     (props.primary && !props.disabled) || props.info
       ? props.theme.text.color
       : props.theme.text.emailColor};
-  ${(props) => props.info && `margin-left: auto`}
+  ${(props) => props.info && `margin-inline-start: auto`}
 `;
 
 SearchItemText.defaultProps = { theme: Base };

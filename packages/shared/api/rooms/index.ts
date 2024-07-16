@@ -183,7 +183,9 @@ export function editRoom(id, data) {
 export function pinRoom(id) {
   const options = { method: "put", url: `/files/rooms/${id}/pin` };
 
-  return request(options).then((res) => {
+  const skipRedirect = true;
+
+  return request(options, skipRedirect).then((res) => {
     return res;
   });
 }

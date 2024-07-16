@@ -209,6 +209,7 @@ const StyledTileContainer = styled.div`
   }
 
   @media ${tablet} {
+    margin-top: 16px;
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`

@@ -46,11 +46,18 @@ const HistoryMainTextFolderInfo = ({
   )
     return null;
 
+  const destination =
+    feed.data.parentType === 0 || feed.data.toParentType === 0
+      ? t("FeedLocationLabel", {
+          folderTitle: feed.data.parentTitle || feed.data.toFolderTitle,
+        })
+      : t("FeedLocationRoomLabel", {
+          folderTitle: feed.data.parentTitle || feed.data.toFolderTitle,
+        });
+
   return (
     <StyledHistoryBlockMessage className="message">
-      <span className="folder-label">
-        {` ${t("FeedLocationLabel", { folderTitle: feed.data.parentTitle || feed.data.toFolderTitle })}`}
-      </span>
+      <span className="folder-label">{destination}</span>
     </StyledHistoryBlockMessage>
   );
 };

@@ -70,8 +70,8 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
       <Backdrop
         visible={isOpen}
         onClick={onToggleCombobox}
-        withBackground={isMobile()}
-        withoutBlur={!isMobile()}
+        withBackground={false}
+        withoutBlur
       />
 
       <Styled.SortButton

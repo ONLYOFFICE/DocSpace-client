@@ -48,6 +48,8 @@ export interface TabsProps {
   type?: TabsTypes;
   /** Tab indentation for sticky positioning. */
   stickyTop?: string;
+  /** Sets a tab class name */
+  className?: string;
   /** Sets a callback function that is triggered when the tab is selected. */
   onSelect?: (element: TTabItem) => void;
 }

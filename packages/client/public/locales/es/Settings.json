@@ -148,7 +148,7 @@
   "LanguageAndTimeZoneSettingsNavDescription": "La configuración de idioma y zona horaria permite cambiar el idioma de todo el portal para todos los usuarios del mismo y configurar la zona horaria para que todos los eventos del portal se muestren con la fecha y hora correctas.",
   "LastUpdate": "Última actualización: {{date}}",
   "LicenseLimitCounter": "Límite de licencia para Administradores/Usuarios avanzados:",
-  "LicenseLimitDescription": "El contador de límite de licencias consta de: cuentas ya existentes en {{productName}} y nuevos usuarios que desea importar. Si importa usuarios que ya tienen una cuenta de {{productName}}, no volverán a contarse en el contador. Su licencia de {{productName}} le permite tener un máximo de 100 usuarios.",
+  "LicenseLimitDescription": "El contador de límite de licencias consta de: cuentas ya existentes en {{productName}} y nuevos usuarios que desea importar. Si importa usuarios que ya tienen una cuenta de {{productName}}, no volverán a contarse en el contador. Su licencia de {{productName}} le permite tener un máximo de {{maxLimit}} usuarios.",
   "Lifetime": "Duración (min)",
   "LimitThemesTooltip": "Solo puede crear 3 temas personalizados. Para crear uno nuevo, debe eliminar uno de los temas anteriores.",
   "LocalFile": "Archivo local",

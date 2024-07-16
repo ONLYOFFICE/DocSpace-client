@@ -1089,7 +1089,6 @@ class FilesActionStore {
     switch (action) {
       case "pin":
         items.forEach((item) => {
-          updateRoomPin(item);
           actions.push(pinRoom(item));
         });
 

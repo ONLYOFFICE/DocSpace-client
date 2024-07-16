@@ -44,7 +44,7 @@ const StyledEditLinkPanel = styled(ModalDialog)`
   }
 
   .modal-body {
-    padding: 0px 0px 8px;
+    padding: 0;
   }
 
   .field-label-icon {
@@ -55,7 +55,7 @@ const StyledEditLinkPanel = styled(ModalDialog)`
     padding: 4px 0px 0px;
 
     .edit-link_link-block {
-      padding: 0px 16px 20px 16px;
+      padding: 16px 16px 20px 16px;
 
       .edit-link-text {
         display: inline-flex;

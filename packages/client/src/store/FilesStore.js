@@ -2045,6 +2045,7 @@ class FilesStore {
     const canDelete = !isEditing && item.security?.Delete;
 
     const canCopy = item.security?.Copy;
+    const canCopyLink = item.security?.CopyLink;
     const canDuplicate = item.security?.Duplicate;
     const canDownload = item.security?.Download;
     const canEmbed = item.security?.Embed;
@@ -2363,7 +2364,7 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["open-location"]);
       }
 
-      if (isMyFolder || isRecycleBinFolder) {
+      if (isMyFolder || isRecycleBinFolder || !canCopyLink) {
         fileOptions = this.removeOptions(fileOptions, [
           "link-for-room-members",
         ]);
@@ -2406,7 +2407,6 @@ class FilesStore {
         item.roomType === RoomsType.PublicRoom ||
         item.roomType === RoomsType.FormRoom ||
         item.roomType === RoomsType.CustomRoom;
-      const isCustomRoomType = item.roomType === RoomsType.CustomRoom;
 
       let roomOptions = [
         "select",
@@ -2434,6 +2434,17 @@ class FilesStore {
 
       if (optionsToRemove.length) {
         roomOptions = this.removeOptions(roomOptions, optionsToRemove);
+      }
+
+      if (isArchiveFolder) {
+        roomOptions = this.removeOptions(roomOptions, [
+          "external-link",
+          "link-for-room-members",
+        ]);
+      }
+
+      if (!isPublicRoomType || this.publicRoomStore.isPublicRoom) {
+        roomOptions = this.removeOptions(roomOptions, ["external-link"]);
       }
 
       if (!canEditRoom) {

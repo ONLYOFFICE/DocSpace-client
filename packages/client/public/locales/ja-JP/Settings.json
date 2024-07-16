@@ -146,7 +146,7 @@
   "LanguageAndTimeZoneSettingsNavDescription": "言語とタイムゾーンの設定は、すべてのポータルユーザーのためにポータル全体の言語を変更し、ポータルのすべてのイベントが正しい日付と時刻で表示されるようにタイムゾーンを設定する方法です。",
   "LastUpdate": "最終更新日：{{date}} ",
   "LicenseLimitCounter": "ライセンス制限 管理者/パワー：",
-  "LicenseLimitDescription": "ライセンス制限カウンターは、{{productName}}に既に存在するアカウントと、インポートする新規ユーザーで構成されます。既に{{productName}}アカウントを持っているユーザーをインポートした場合、そのユーザーはカウントされません。現在の{{productName}}ライセンスでは、最大100人のユーザーを持つことができます。",
+  "LicenseLimitDescription": "ライセンス制限カウンターは、{{productName}}に既に存在するアカウントと、インポートする新規ユーザーで構成されます。既に{{productName}}アカウントを持っているユーザーをインポートした場合、そのユーザーはカウントされません。現在の{{productName}}ライセンスでは、最大{{maxLimit}}人のユーザーを持つことができます。",
   "Lifetime": "有効期間（分）",
   "LimitThemesTooltip": "カスタムテーマは3つまでしか作成できません。新しく作成する場合は、以前のテーマを1つ削除する必要があります。",
   "LocalFile": "ローカルファイル",

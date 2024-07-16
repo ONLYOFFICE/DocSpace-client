@@ -102,7 +102,7 @@ const RoomSelector = (props) => {
   const [roomType, setRoomType] = useState(roomTypeOptions[0]);
 
   const debouncedOnSelect = debounce((items) => {
-    toastr.success(items[0].label);
+    // toastr.success(items[0].label);
   }, 0);
 
   const [config, setConfig] = useState({

@@ -2519,7 +2519,7 @@ const Dark: TTheme = {
         borderColor: "#292929",
         hoverBorderColor: "#fafafa",
         color: "#858585",
-        iconColor: "#e8e8e9",
+        iconColor: "#858585",
       },
     },
 

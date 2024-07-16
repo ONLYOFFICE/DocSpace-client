@@ -1403,6 +1403,10 @@ export const getBaseTheme = () => {
     progressBar: {
       backgroundColor: "#F3F4F4",
 
+      animation: {
+        background: "#4781D1",
+      },
+
       percent: {
         background: "#4781D1",
       },
@@ -3335,7 +3339,24 @@ export const getBaseTheme = () => {
       pluginName: "#5C5C5C",
       descriptionColor: "#657077",
     },
-
+    oauth: {
+      previewDialog: {
+        border: "1px solid #eceef1",
+      },
+      infoDialog: {
+        descLinkColor: "#657077",
+        blockHeaderColor: "#a3a9ae",
+        separatorColor: "#333333",
+      },
+      list: {
+        descriptionColor: "#a3a9ae",
+      },
+      clientForm: {
+        descriptionColor: "#a3a9ae",
+        headerBorder: "1px solid #d0d5da",
+        scopeDesc: "#a3a9ae",
+      },
+    },
     sdkPresets: {
       borderColor: "#d0d5da",
       secondaryColor: "#657077",

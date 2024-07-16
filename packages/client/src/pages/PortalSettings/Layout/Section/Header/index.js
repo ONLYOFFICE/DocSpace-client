@@ -49,7 +49,7 @@ import {
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import TariffBar from "SRC_DIR/components/TariffBar";
 
-const HeaderContainer = styled.div`
+export const HeaderContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
@@ -120,7 +120,7 @@ const HeaderContainer = styled.div`
   }
 `;
 
-const StyledContainer = styled.div`
+export const StyledContainer = styled.div`
   .group-button-menu-container {
     ${(props) =>
       props.viewAs === "table"
@@ -148,6 +148,7 @@ const SectionHeaderContent = (props) => {
     setIsLoadedSectionHeader,
     isSSOAvailable,
     organizationName,
+    workspace,
   } = props;
 
   const navigate = useNavigate();
@@ -304,12 +305,16 @@ const SectionHeaderContent = (props) => {
     },
   ];
 
-  const pathname = location.pathname;
-
-  const isServicePage =
-    pathname.includes("google") ||
-    pathname.includes("nextcloud") ||
-    pathname.includes("onlyoffice");
+  const translatedHeader =
+    header === "ImportHeader"
+      ? workspace === "GoogleWorkspace"
+        ? t("ImportFromGoogle")
+        : workspace === "Nextcloud"
+          ? t("ImportFromNextcloud")
+          : workspace === "Workspace"
+            ? t("ImportFromPortal", { organizationName })
+            : t("DataImport")
+      : t(header, { organizationName });
 
   return (
     <StyledContainer isHeaderVisible={isHeaderVisible}>
@@ -339,18 +344,7 @@ const SectionHeaderContent = (props) => {
           )}
           <Headline type="content" truncate={true}>
             <div className="settings-section_header">
-              <div className="header">
-                {isMobile() && isServicePage && (
-                  <IconButton
-                    iconName={ArrowPathReactSvgUrl}
-                    size="17"
-                    isFill={true}
-                    onClick={onBackToParent}
-                    className="arrow-button"
-                  />
-                )}
-                {t(header, { organizationName })}
-              </div>
+              <div className="header">{translatedHeader}</div>
               {isNeedPaidIcon ? (
                 <Badge
                   backgroundColor="#EDC409"
@@ -385,51 +379,62 @@ const SectionHeaderContent = (props) => {
   );
 };
 
-export default inject(({ settingsStore, currentQuotaStore, setup, common }) => {
-  const {
-    isBrandingAndCustomizationAvailable,
-    isRestoreAndAutoBackupAvailable,
-    isSSOAvailable,
-  } = currentQuotaStore;
-  const { addUsers, removeAdmins } = setup.headerAction;
-  const { toggleSelector } = setup;
-  const {
-    selected,
-    setSelected,
-    isHeaderIndeterminate,
-    isHeaderChecked,
-    isHeaderVisible,
-    deselectUser,
-    selectAll,
-    selection,
-  } = setup.selectionStore;
-  const { admins, selectorIsOpen } = setup.security.accessRight;
-  const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
+export default inject(
+  ({
+    settingsStore,
+    currentQuotaStore,
+    setup,
+    common,
+    importAccountsStore,
+  }) => {
+    const {
+      isBrandingAndCustomizationAvailable,
+      isRestoreAndAutoBackupAvailable,
+      isSSOAvailable,
+    } = currentQuotaStore;
+    const { addUsers, removeAdmins } = setup.headerAction;
+    const { toggleSelector } = setup;
+    const {
+      selected,
+      setSelected,
+      isHeaderIndeterminate,
+      isHeaderChecked,
+      isHeaderVisible,
+      deselectUser,
+      selectAll,
+      selection,
+    } = setup.selectionStore;
+    const { admins, selectorIsOpen } = setup.security.accessRight;
+    const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
 
-  const { organizationName } = settingsStore;
+    const { organizationName } = settingsStore;
 
-  return {
-    addUsers,
-    removeAdmins,
-    selected,
-    setSelected,
-    admins,
-    isHeaderIndeterminate,
-    isHeaderChecked,
-    isHeaderVisible,
-    deselectUser,
-    selectAll,
-    toggleSelector,
-    selectorIsOpen,
-    selection,
-    isLoadedSectionHeader,
-    setIsLoadedSectionHeader,
-    isBrandingAndCustomizationAvailable,
-    isRestoreAndAutoBackupAvailable,
-    isSSOAvailable,
-    organizationName,
-  };
-})(
+    const { workspace } = importAccountsStore;
+
+    return {
+      addUsers,
+      removeAdmins,
+      selected,
+      setSelected,
+      admins,
+      isHeaderIndeterminate,
+      isHeaderChecked,
+      isHeaderVisible,
+      deselectUser,
+      selectAll,
+      toggleSelector,
+      selectorIsOpen,
+      selection,
+      isLoadedSectionHeader,
+      setIsLoadedSectionHeader,
+      isBrandingAndCustomizationAvailable,
+      isRestoreAndAutoBackupAvailable,
+      isSSOAvailable,
+      organizationName,
+      workspace,
+    };
+  },
+)(
   withLoading(
     withTranslation(["Settings", "SingleSignOn", "Common", "JavascriptSdk"])(
       observer(SectionHeaderContent),

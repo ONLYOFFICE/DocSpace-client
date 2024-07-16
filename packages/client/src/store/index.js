@@ -81,6 +81,10 @@ import PluginStore from "./PluginStore";
 import InfoPanelStore from "./InfoPanelStore";
 import CampaignsStore from "./CampaignsStore";
 
+import OAuthStore from "./OAuthStore";
+
+const oauthStore = new OAuthStore(userStore);
+
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
 
 const pluginStore = new PluginStore(
@@ -348,6 +352,7 @@ const store = {
   clientLoadingStore,
   publicRoomStore,
 
+  oauthStore,
   pluginStore,
   storageManagement,
   campaignsStore,

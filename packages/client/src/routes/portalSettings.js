@@ -236,31 +236,7 @@ const DeveloperTools = loadable(() =>
 
 const DataImport = loadable(() =>
   componentLoader(
-    () => import("../pages/PortalSettings/categories/data-import/index.js"),
-  ),
-);
-const GoogleDataImport = loadable(() =>
-  componentLoader(
-    () =>
-      import(
-        "../pages/PortalSettings/categories/data-import/GoogleWorkspace/index.js"
-      ),
-  ),
-);
-const NextcloudDataImport = loadable(() =>
-  componentLoader(
-    () =>
-      import(
-        "../pages/PortalSettings/categories/data-import/NextCloudWorkspace/index.js"
-      ),
-  ),
-);
-const OnlyofficeDataImport = loadable(() =>
-  componentLoader(
-    () =>
-      import(
-        "../pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/index.js"
-      ),
+    () => import("../pages/PortalSettings/categories/data-import/index.tsx"),
   ),
 );
 
@@ -353,6 +329,24 @@ const Viewer = loadable(() =>
     () =>
       import(
         "../pages/PortalSettings/categories/developer-tools/JavascriptSDK/presets/Viewer"
+      ),
+  ),
+);
+
+const OAuthCreatePage = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/developer-tools/OAuth/OAuthCreatePage"
+      ),
+  ),
+);
+
+const OAuthEditPage = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/developer-tools/OAuth/OAuthEditPage"
       ),
   ),
 );
@@ -537,20 +531,8 @@ const PortalSettingsRoutes = {
       element: <DeveloperTools />,
     },
     {
-      path: "data-import/migration",
+      path: "data-import",
       element: <DataImport />,
-    },
-    {
-      path: "data-import/migration/google",
-      element: <GoogleDataImport />,
-    },
-    {
-      path: "data-import/migration/nextcloud",
-      element: <NextcloudDataImport />,
-    },
-    {
-      path: "data-import/migration/onlyoffice",
-      element: <OnlyofficeDataImport />,
     },
     {
       path: "developer-tools/javascript-sdk/docspace",
@@ -595,6 +577,18 @@ const PortalSettingsRoutes = {
     {
       path: "developer-tools/webhooks/:id/:eventId",
       element: <WebhookDetails />,
+    },
+    {
+      path: "developer-tools/oauth",
+      element: <DeveloperTools />,
+    },
+    {
+      path: "developer-tools/oauth/create",
+      element: <OAuthCreatePage />,
+    },
+    {
+      path: "developer-tools/oauth/:id",
+      element: <OAuthEditPage />,
     },
     {
       path: "backup",

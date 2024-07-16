@@ -335,7 +335,7 @@ class SettingsStore {
   };
 
   get ldapSettingsUrl() {
-    //TODO: Change to real link
+    // TODO: Change to real link
     return `${this.helpLink}/administration/docspace-settings.aspx#LdapSettings_block`;
   }
 

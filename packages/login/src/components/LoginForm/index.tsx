@@ -38,7 +38,7 @@ import { useTranslation } from "react-i18next";
 import ReCAPTCHA from "react-google-recaptcha";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { useTheme } from "styled-components";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
@@ -49,23 +49,35 @@ import { toastr } from "@docspace/shared/components/toast";
 import { thirdPartyLogin, checkConfirmLink } from "@docspace/shared/api/user";
 import { setWithCredentialsStatus } from "@docspace/shared/api/client";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
+import { RecaptchaType } from "@docspace/shared/enums";
+import { getAvailablePortals } from "@docspace/shared/api/management";
+import { getCookie } from "@docspace/shared/utils";
+import { deleteCookie } from "@docspace/shared/utils/cookie";
 
 import { LoginFormProps } from "@/types";
-import { getEmailFromInvitation, getConfirmDataFromInvitation } from "@/utils";
+import {
+  generateOAuth2ReferenceURl,
+  getEmailFromInvitation,
+  getConfirmDataFromInvitation,
+} from "@/utils";
 
 import EmailContainer from "./sub-components/EmailContainer";
 import PasswordContainer from "./sub-components/PasswordContainer";
 import ForgotContainer from "./sub-components/ForgotContainer";
+import LDAPContainer from "./sub-components/LDAPContainer";
 
 import { StyledCaptcha } from "./LoginForm.styled";
 import { LoginDispatchContext, LoginValueContext } from "../Login";
-import LDAPContainer from "./sub-components/LDAPContainer";
-import { RecaptchaType } from "@docspace/shared/enums";
+import OAuthClientInfo from "../ConsentInfo";
+
+// import { gitAvailablePortals } from "@/utils/actions";
 
 const LoginForm = ({
   hashSettings,
   cookieSettingsEnabled,
   reCaptchaPublicKey,
+  clientId,
+  client,
   reCaptchaType,
 }: LoginFormProps) => {
   const { isLoading, isModalOpen, ldapDomain } = useContext(LoginValueContext);
@@ -73,6 +85,7 @@ const LoginForm = ({
   const toastId = useRef(null);
 
   const searchParams = useSearchParams();
+  const router = useRouter();
 
   const theme = useTheme();
 
@@ -174,7 +187,7 @@ const LoginForm = ({
 
   useEffect(() => {
     window.authCallback = authCallback;
-  }, [authCallback]);
+  }, [authCallback, currentCulture]);
 
   useEffect(() => {
     message && setErrorText(message);
@@ -205,7 +218,7 @@ const LoginForm = ({
     if (!passwordValid) setPasswordValid(true);
   };
 
-  const onSubmit = useCallback(() => {
+  const onSubmit = useCallback(async () => {
     //errorText && setErrorText("");
     let captchaToken: string | undefined | null = "";
 
@@ -258,8 +271,41 @@ const LoginForm = ({
     isDesktop && checkPwd();
     const session = !isChecked;
 
+    if (client?.isPublic && hash) {
+      const portals = await getAvailablePortals({
+        Email: user,
+        PasswordHash: hash,
+      });
+
+      if (portals.length === 1) {
+        window.open(`${portals[0].portalLink}`, "_self");
+
+        return;
+      }
+
+      const searchParams = new URLSearchParams();
+
+      const portalsString = JSON.stringify({ portals });
+
+      searchParams.set("portals", portalsString);
+      searchParams.set("clientId", client.clientId);
+
+      router.push(`/tenant-list?${searchParams.toString()}`);
+      setIsLoading(false);
+      return;
+    }
+
     login(user, hash, pwd, session, captchaToken, currentCulture, reCaptchaType)
       .then(async (res: string | object) => {
+        const redirectUrl = getCookie("x-redirect-authorization-uri");
+        if (clientId && redirectUrl) {
+          deleteCookie("x-redirect-authorization-uri");
+
+          window.location.replace(redirectUrl);
+
+          return;
+        }
+
         try {
           if (confirmData) await checkConfirmLink(confirmData);
         } catch (e) {
@@ -312,13 +358,17 @@ const LoginForm = ({
     password,
     identifierValid,
     setIsLoading,
+    isLdapLoginChecked,
     hashSettings,
     isDesktop,
     isChecked,
-    isLdapLoginChecked,
+    client?.isPublic,
+    client?.clientId,
     currentCulture,
     reCaptchaType,
     isCaptchaSuccessful,
+    router,
+    clientId,
     referenceUrl,
     loginData,
   ]);
@@ -378,6 +428,14 @@ const LoginForm = ({
 
   return (
     <form className="auth-form-container">
+      {client && (
+        <OAuthClientInfo
+          name={client.name}
+          logo={client.logo}
+          websiteUrl={client.websiteUrl}
+        />
+      )}
+
       <EmailContainer
         emailFromInvitation={emailFromInvitation}
         isEmailErrorShow={isEmailErrorShow}
@@ -390,7 +448,6 @@ const LoginForm = ({
         isLdapLogin={isLdapLoginChecked}
         ldapDomain={ldapDomain}
       />
-
       <PasswordContainer
         isLoading={isLoading}
         emailFromInvitation={emailFromInvitation}
@@ -399,7 +456,6 @@ const LoginForm = ({
         password={password}
         onChangePassword={onChangePassword}
       />
-
       <ForgotContainer
         cookieSettingsEnabled={cookieSettingsEnabled}
         isChecked={isChecked}
@@ -440,7 +496,6 @@ const LoginForm = ({
           )}
         </StyledCaptcha>
       )}
-
       <Button
         id="login_submit"
         className="login-button"

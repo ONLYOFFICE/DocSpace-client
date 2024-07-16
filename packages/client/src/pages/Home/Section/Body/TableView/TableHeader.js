@@ -445,7 +445,10 @@ class FilesTableHeader extends React.Component {
 
     if (
       filter.sortBy !== prevProps.filter.sortBy ||
-      (isRooms && roomsFilter.sortBy !== prevProps.roomsFilter.sortBy)
+      filter.sortOrder !== prevProps.filter.sortOrder ||
+      (isRooms &&
+        (roomsFilter.sortBy !== prevProps.roomsFilter.sortBy ||
+          roomsFilter.sortOrder !== prevProps.roomsFilter.sortOrder))
     ) {
       const sortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
       const columnIndex = columns.findIndex((c) => c?.sortBy === sortBy);

@@ -121,7 +121,10 @@ class PeopleTableHeader extends React.Component {
   componentDidUpdate(prevProps) {
     const { filter } = this.props;
     const { columns } = this.state;
-    if (filter.sortBy !== prevProps.filter.sortBy) {
+    if (
+      filter.sortBy !== prevProps.filter.sortBy ||
+      filter.sortOrder !== prevProps.filter.sortOrder
+    ) {
       const columnIndex = columns.findIndex((c) => c?.sortBy === filter.sortBy);
       if (columnIndex === -1) return;
 

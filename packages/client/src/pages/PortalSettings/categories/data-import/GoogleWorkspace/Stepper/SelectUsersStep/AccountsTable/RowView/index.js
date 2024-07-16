@@ -44,7 +44,7 @@ const StyledRowContainer = styled(RowContainer)`
   margin: 0 0 20px;
 
   .clear-icon {
-    margin-right: 8px;
+    margin-inline-end: 8px;
   }
 
   .ec-desc {

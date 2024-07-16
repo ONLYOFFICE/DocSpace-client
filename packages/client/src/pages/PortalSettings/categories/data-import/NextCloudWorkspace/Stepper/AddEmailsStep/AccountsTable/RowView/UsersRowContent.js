@@ -70,7 +70,7 @@ const StyledRowContent = styled(RowContent)`
   }
 
   .user-email {
-    margin-right: 5px;
+    margin-inline-end: 5px;
     path {
       fill: #a3a9ae;
     }

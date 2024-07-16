@@ -28,6 +28,8 @@ import React from "react";
 import InfiniteLoader from "react-window-infinite-loader";
 import { FixedSizeList as List } from "react-window";
 
+import { Nullable } from "../../../types";
+
 import { Scrollbar } from "../../scrollbar";
 import { Text } from "../../text";
 
@@ -93,6 +95,8 @@ const Body = ({
   const { withSelectAll } = React.useContext(SelectAllContext);
 
   const [bodyHeight, setBodyHeight] = React.useState(0);
+  const [savedInputValue, setSavedInputValue] =
+    React.useState<Nullable<string>>(null);
 
   const bodyRef = React.useRef<HTMLDivElement>(null);
   const listOptionsRef = React.useRef<null | InfiniteLoader>(null);
@@ -258,6 +262,8 @@ const Body = ({
                     renderCustomItem,
                     setInputItemVisible,
                     inputItemVisible,
+                    savedInputValue,
+                    setSavedInputValue,
                   }}
                   itemSize={48}
                   onItemsRendered={onItemsRendered}

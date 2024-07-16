@@ -157,7 +157,7 @@ const SetRoomParams = ({
           setRoomType={setRoomType}
           setIsScrollLocked={setIsScrollLocked}
           isDisabled={isDisabled}
-          forсeHideDropdown={forceHideRoomTypeDropdown}
+          forceHideDropdown={forceHideRoomTypeDropdown}
         />
       )}
       {isEdit && (

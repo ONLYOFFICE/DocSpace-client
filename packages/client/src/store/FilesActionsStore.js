@@ -1130,17 +1130,19 @@ class FilesActionStore {
       return;
     }
 
-    const result = await Promise.allSettled(actions);
-    if (!result) return;
+    if (action === "unpin") {
+      const result = await Promise.allSettled(actions);
+      if (!result) return;
 
-    result.forEach((result) => {
-      if (result.value) {
-        withFinishedOperation.push(result.value);
-      }
-      if (!result.value) toastr.error(result.reason.response?.data?.error);
-    });
+      result.forEach((result) => {
+        if (result.value) {
+          withFinishedOperation.push(result.value);
+        }
+        if (!result.value) toastr.error(result.reason.response?.data?.error);
+      });
 
-    updatingFolderList(withFinishedOperation, isPin);
+      updatingFolderList(withFinishedOperation, isPin);
+    }
   };
 
   setMuteAction = (action, item, t) => {

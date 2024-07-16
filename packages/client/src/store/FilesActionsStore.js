@@ -1077,7 +1077,7 @@ class FilesActionStore {
   };
 
   setPinAction = (action, id, t) => {
-    const { pinRoom, unpinRoom, setSelected } = this.filesStore;
+    const { pinRoom, unpinRoom, updateRoomPin, setSelected } = this.filesStore;
 
     const { infoPanelSelection, setInfoPanelSelection } = this.infoPanelStore;
 

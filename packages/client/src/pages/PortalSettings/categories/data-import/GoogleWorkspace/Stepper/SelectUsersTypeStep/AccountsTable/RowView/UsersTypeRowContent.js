@@ -58,7 +58,7 @@ const StyledRowContent = styled(RowContent)`
   }
 
   .user-email {
-    margin-right: 5px;
+    margin-inline-end: 5px;
     font-size: 12px;
     font-weight: 600;
     color: ${(props) =>
@@ -80,7 +80,7 @@ const StyledRowContent = styled(RowContent)`
 
     .combo-buttons_arrow-icon {
       flex: initial;
-      margin-right: 0px;
+      margin-inline-end: 0px;
     }
 
     svg {

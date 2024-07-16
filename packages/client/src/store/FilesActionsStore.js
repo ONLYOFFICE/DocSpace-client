@@ -1079,8 +1079,6 @@ class FilesActionStore {
   setPinAction = async (action, id, t) => {
     const { pinRoom, unpinRoom, setSelected } = this.filesStore;
 
-    const { infoPanelSelection, setInfoPanelSelection } = this.infoPanelStore;
-
     const items = Array.isArray(id) ? id : [id];
 
     const actions = [];
@@ -1089,9 +1087,6 @@ class FilesActionStore {
     let isError = false;
 
     const updatingFolderList = (items, isPin = false) => {
-      infoPanelSelection &&
-        setInfoPanelSelection({ ...infoPanelSelection, pinned: isPin });
-
       if (items.length === 0) return;
 
       this.updateCurrentFolder(null, items, null, operationId);
@@ -1116,7 +1111,7 @@ class FilesActionStore {
       actions.push(isPin ? pinRoom(item) : unpinRoom(item));
     });
 
-    if (action === "pin") {
+    if (isPin) {
       const result = await Promise.allSettled(actions);
 
       if (!result) return;
@@ -1125,7 +1120,6 @@ class FilesActionStore {
         if (res.value) {
           withFinishedOperation.push(res.value);
         }
-
         if (!res.value) isError = true;
       });
 
@@ -1136,21 +1130,17 @@ class FilesActionStore {
       return;
     }
 
-    if (action === "unpin") {
-      const result = await Promise.allSettled(actions);
+    const result = await Promise.allSettled(actions);
+    if (!result) return;
 
-      if (!result) return;
+    result.forEach((result) => {
+      if (result.value) {
+        withFinishedOperation.push(result.value);
+      }
+      if (!result.value) toastr.error(result.reason.response?.data?.error);
+    });
 
-      result.forEach((result) => {
-        if (result.value) {
-          withFinishedOperation.push(result.value);
-        }
-
-        if (!result.value) toastr.error(result.reason.response?.data?.error);
-      });
-
-      updatingFolderList(withFinishedOperation, isPin);
-    }
+    updatingFolderList(withFinishedOperation, isPin);
   };
 
   setMuteAction = (action, item, t) => {

@@ -160,7 +160,6 @@ const StyledHeader = styled.div`
   align-items: center;
   border-bottom: ${(props) =>
     `1px solid ${props.theme.modalDialog.headerBorderColor}`};
-  margin-bottom: 16px;
   height: 52px;
   padding: 0 16px 0;
 

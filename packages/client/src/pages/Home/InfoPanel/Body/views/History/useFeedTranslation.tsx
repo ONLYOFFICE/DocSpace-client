@@ -43,6 +43,16 @@ export const useFeedTranslation = (
           components={{ 1: <strong /> }}
         />
       );
+    case "RoomCopied":
+      return (
+        <Trans
+          t={t}
+          ns="InfoPanel"
+          i18nKey="HistoryRoomCopied"
+          values={{ roomTitle: feed.data.title }}
+          components={{ 1: <strong /> }}
+        />
+      );
     case "RoomRenamed":
       return (
         <Trans

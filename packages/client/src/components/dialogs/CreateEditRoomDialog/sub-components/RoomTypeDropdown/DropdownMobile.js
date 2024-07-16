@@ -30,6 +30,7 @@ import styled from "styled-components";
 import RoomType from "@docspace/shared/components/room-type";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
 import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Portal } from "@docspace/shared/components/portal";
 
 import { Base } from "@docspace/shared/themes";
 
@@ -57,33 +58,38 @@ const DropdownMobile = ({
   open,
   onClose,
   chooseRoomType,
-  forсeHideDropdown,
+  forceHideDropdown,
 }) => {
   return (
-    <>
-      <Backdrop
-        visible={open}
-        onClick={onClose}
-        withBackground
-        withoutBlur={false}
-        isAside
-        zIndex={450}
-      />
-      {!forсeHideDropdown && (
-        <StyledDropdownMobile className="dropdown-mobile" isOpen={open}>
-          {RoomsTypeValues.map((roomType) => (
-            <RoomType
-              id={roomType}
-              t={t}
-              key={roomType}
-              roomType={roomType}
-              type="dropdownItem"
-              onClick={() => chooseRoomType(roomType)}
-            />
-          ))}
-        </StyledDropdownMobile>
-      )}
-    </>
+    <Portal
+      visible
+      element={
+        <>
+          <Backdrop
+            visible={open}
+            onClick={onClose}
+            withBackground
+            withoutBlur={false}
+            isAside
+            zIndex={450}
+          />
+          {!forceHideDropdown && (
+            <StyledDropdownMobile className="dropdown-mobile" isOpen={open}>
+              {RoomsTypeValues.map((roomType) => (
+                <RoomType
+                  id={roomType}
+                  t={t}
+                  key={roomType}
+                  roomType={roomType}
+                  type="dropdownItem"
+                  onClick={() => chooseRoomType(roomType)}
+                />
+              ))}
+            </StyledDropdownMobile>
+          )}
+        </>
+      }
+    />
   );
 };
 

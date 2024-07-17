@@ -236,31 +236,7 @@ const DeveloperTools = loadable(() =>
 
 const DataImport = loadable(() =>
   componentLoader(
-    () => import("../pages/PortalSettings/categories/data-import/index.js"),
-  ),
-);
-const GoogleDataImport = loadable(() =>
-  componentLoader(
-    () =>
-      import(
-        "../pages/PortalSettings/categories/data-import/GoogleWorkspace/index.js"
-      ),
-  ),
-);
-const NextcloudDataImport = loadable(() =>
-  componentLoader(
-    () =>
-      import(
-        "../pages/PortalSettings/categories/data-import/NextCloudWorkspace/index.js"
-      ),
-  ),
-);
-const OnlyofficeDataImport = loadable(() =>
-  componentLoader(
-    () =>
-      import(
-        "../pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/index.js"
-      ),
+    () => import("../pages/PortalSettings/categories/data-import/index.tsx"),
   ),
 );
 
@@ -559,20 +535,8 @@ const PortalSettingsRoutes = {
       element: <DeveloperTools />,
     },
     {
-      path: "data-import/migration",
+      path: "data-import",
       element: <DataImport />,
-    },
-    {
-      path: "data-import/migration/google",
-      element: <GoogleDataImport />,
-    },
-    {
-      path: "data-import/migration/nextcloud",
-      element: <NextcloudDataImport />,
-    },
-    {
-      path: "data-import/migration/onlyoffice",
-      element: <OnlyofficeDataImport />,
     },
     {
       path: "developer-tools/javascript-sdk/docspace",

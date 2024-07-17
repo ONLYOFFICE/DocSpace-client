@@ -654,7 +654,7 @@ class HotkeyStore {
         },
       };
 
-      if (isPublic) {
+      if (isPublic && !selections.rootFolderType) {
         this.dialogsStore.setMoveToPublicRoomVisible(true, operationData);
         return;
       }

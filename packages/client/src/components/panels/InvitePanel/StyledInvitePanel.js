@@ -325,6 +325,28 @@ const StyledInviteInputContainer = styled.div`
 
   .header_aside-panel {
     max-width: 100% !important;
+
+    .selector_body_tabs {
+      display: flex;
+      justify-content: left;
+      margin-bottom: 16px;
+      padding: 0;
+      width: -webkit-fill-available;
+
+      .sticky-indent {
+        height: 0;
+      }
+
+      .sticky {
+        .scroll-body {
+          overflow-x: hidden;
+        }
+        .scroll-body > div {
+          justify-content: left;
+          padding-left: 16px;
+        }
+      }
+    }
   }
 `;
 

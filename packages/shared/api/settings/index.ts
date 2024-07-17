@@ -46,6 +46,10 @@ import {
   TThirdPartyProvider,
   TPaymentSettings,
   TGetSsoSettings,
+  TWorkspaceService,
+  TWorkspaceStatusResponse,
+  TMigrationData,
+  TSendWelcomeEmailData,
   TPortalCultures,
 } from "./types";
 
@@ -1119,28 +1123,30 @@ export function getSendingTestMailStatus() {
   });
 }
 
-export function migrationList() {
-  return request({
+export async function migrationList() {
+  const res = (await request({
     method: "get",
     url: `/migration/list`,
-  });
+  })) as TWorkspaceService[];
+  return res;
 }
 
-export function migrationName(name) {
+export function initMigration(name: TWorkspaceService) {
   return request({
     method: "post",
     url: `/migration/init/${name}`,
   });
 }
 
-export function migrationStatus() {
-  return request({
+export async function migrationStatus() {
+  const res = (await request({
     method: "get",
     url: `/migration/status`,
-  });
+  })) as TWorkspaceStatusResponse;
+  return res;
 }
 
-export function migrateFile(data) {
+export function migrateFile(data: TMigrationData) {
   return request({
     method: "post",
     url: `/migration/migrate`,
@@ -1179,11 +1185,13 @@ export function migrationClear() {
   });
 }
 
-export function migrationLog() {
-  return axios.get("/api/2.0/migration/logs");
+export async function migrationLog() {
+  const response = await axios.get("/api/2.0/migration/logs");
+  if (!response || !response.data) return null;
+  return response.data as string;
 }
 
-export function migrationFinish(data) {
+export function migrationFinish(data: TSendWelcomeEmailData) {
   return request({
     method: "post",
     url: `/migration/finish`,

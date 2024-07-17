@@ -31,6 +31,7 @@ export interface ProgressBarProps {
   label?: string;
   /** Show infinite progress */
   isInfiniteProgress?: boolean;
+  className?: string;
   status: string;
   error: string;
 }

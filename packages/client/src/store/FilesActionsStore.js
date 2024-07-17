@@ -1470,7 +1470,7 @@ class FilesActionStore {
     return titleWithoutExtension;
   };
 
-  checkAndOpenLocationAction = async (item) => {
+  checkAndOpenLocationAction = async (item, actionType) => {
     const { categoryType } = this.filesStore;
     const { myRoomsId, myFolderId, archiveRoomsId, recycleBinFolderId } =
       this.treeFoldersStore;
@@ -1482,7 +1482,8 @@ class FilesActionStore {
     };
 
     const { title, fileExst } = item;
-    const parentId = item.parentId || item.toFolderId || recycleBinFolderId;
+    const parentId =
+      item.parentId || item.toFolderId || item.folderId || recycleBinFolderId;
     const parentTitle = item.parentTitle || item.toFolderTitle;
 
     const isRoot = [
@@ -1501,7 +1502,11 @@ class FilesActionStore {
       rootFolderType,
     };
 
-    const url = getCategoryUrl(categoryType, parentId);
+    const isTrash = actionType === "delete";
+    const url = getCategoryUrl(
+      isTrash ? CategoryType.Trash : categoryType,
+      parentId,
+    );
 
     const newFilter = FilesFilter.getDefault();
 
@@ -2511,6 +2516,12 @@ class FilesActionStore {
 
       clearFiles();
 
+      if (window.location.search.includes("group")) {
+        setSelectedNode(["accounts", "groups", "filter"]);
+        return window.DocSpace.navigate(`accounts/groups?${params}`, {
+          replace: true,
+        });
+      }
       setSelectedNode(["accounts", "people", "filter"]);
 
       if (fromHotkeys) return;
@@ -2666,7 +2677,7 @@ class FilesActionStore {
       content: oneFolder,
     };
 
-    this.uploadDataStore.itemOperationToFolder(operationData);
+    return this.uploadDataStore.itemOperationToFolder(operationData);
   };
 
   onLeaveRoom = (t, isOwner = false) => {

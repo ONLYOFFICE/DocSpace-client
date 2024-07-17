@@ -2890,7 +2890,7 @@ __metadata:
     react-autosize-textarea: "npm:^7.1.0"
     react-content-loader: "npm:^5.1.4"
     react-countdown: "npm:2.3.5"
-    react-device-detect: "npm:^1.17.0"
+    react-device-detect: "npm:^2.2.3"
     react-docgen-typescript-plugin: "npm:^1.0.5"
     react-dom: "npm:^18.2.0"
     react-draggable: "npm:^4.4.6"
@@ -23517,15 +23517,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-device-detect@npm:^1.17.0":
-  version: 1.17.0
-  resolution: "react-device-detect@npm:1.17.0"
+"react-device-detect@npm:^2.2.3":
+  version: 2.2.3
+  resolution: "react-device-detect@npm:2.2.3"
   dependencies:
-    ua-parser-js: "npm:^0.7.24"
+    ua-parser-js: "npm:^1.0.33"
   peerDependencies:
-    react: ">= 0.14.0 < 18.0.0"
-    react-dom: ">= 0.14.0 < 18.0.0"
-  checksum: 10/7a108095222057653a68bbee5d3ef208b110440a9a78790fb41737f0dec684250a5fa98da8a0e8da4443da49a29272eb6d6eb157999d4c06187f6af27b79d38d
+    react: ">= 0.14.0"
+    react-dom: ">= 0.14.0"
+  checksum: 10/7152e2b216b3bb6fd75c7859d3441b89658695c629a13c5d374f076756705650be585d5c4dc19d9d34908ef1b61f19b52f1055d74dd7104b77d1b6f897ee09e0
   languageName: node
   linkType: hard
 
@@ -27532,10 +27532,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ua-parser-js@npm:^0.7.24, ua-parser-js@npm:^0.7.9":
+"ua-parser-js@npm:^0.7.9":
   version: 0.7.38
   resolution: "ua-parser-js@npm:0.7.38"
   checksum: 10/011609d0176952abc60b7a20e0af266a899b34f4c49a6f5097d6af763da27eacaa3752b710ae4d930d7b99508bb8c0b34ebe8042e1d9fdc4056d051b209b0842
+  languageName: node
+  linkType: hard
+
+"ua-parser-js@npm:^1.0.33":
+  version: 1.0.38
+  resolution: "ua-parser-js@npm:1.0.38"
+  checksum: 10/f2345e9bd0f9c5f85bcaa434535fae88f4bb891538e568106f0225b2c2937fbfbeb5782bd22320d07b6b3d68b350b8861574c1d7af072ff9b2362fb72d326fd9
   languageName: node
   linkType: hard
 

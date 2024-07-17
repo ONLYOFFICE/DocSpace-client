@@ -1373,6 +1373,10 @@ const Dark: TTheme = {
   progressBar: {
     backgroundColor: "#858585",
 
+    animation: {
+      background: "#FFFFFF",
+    },
+
     percent: {
       background: "#E17415",
     },

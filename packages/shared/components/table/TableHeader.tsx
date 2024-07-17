@@ -39,6 +39,7 @@ import { TTableColumn, TableHeaderProps } from "./Table.types";
 import { TableSettings } from "./sub-components/TableSettings";
 import { TableHeaderCell } from "./sub-components/TableHeaderCell";
 import { checkingForUnfixedSize, getSubstring } from "./Table.utils";
+import { isDesktop } from "../../utils";
 
 const defaultMinColumnSize = 110;
 const settingsSize = 24;
@@ -88,7 +89,7 @@ class TableHeader extends React.Component<
       }
 
       for (let index in columns) {
-        if (columns[index].enable !== prevProps.columns[index].enable) {
+        if (columns[index]?.enable !== prevProps.columns[index]?.enable) {
           return this.resetColumns();
         }
       }
@@ -346,6 +347,8 @@ class TableHeader extends React.Component<
       columns,
       setHideColumns,
     } = this.props;
+
+    if (!isDesktop()) return;
 
     let activeColumnIndex = null;
 

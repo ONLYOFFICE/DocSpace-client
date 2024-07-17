@@ -216,6 +216,7 @@ const SectionHeaderContent = (props) => {
     tReady,
     setIsLoadedSectionHeader,
     isSSOAvailable,
+    workspace,
   } = props;
 
   const navigate = useNavigate();
@@ -465,11 +466,16 @@ const SectionHeaderContent = (props) => {
       ];
 
   const pathname = location.pathname;
-
-  const isServicePage =
-    pathname.includes("google") ||
-    pathname.includes("nextcloud") ||
-    pathname.includes("onlyoffice");
+  const translatedHeader =
+    header === "ImportHeader"
+      ? workspace === "GoogleWorkspace"
+        ? t("ImportFromGoogle")
+        : workspace === "Nextcloud"
+          ? t("ImportFromNextcloud")
+          : workspace === "Workspace"
+            ? t("ImportFromPortal", { organizationName })
+            : t("DataImport")
+      : t(header, { organizationName });
 
   const isHeaderVisible = isSessionsPage
     ? isPeopleHeaderVisible
@@ -514,18 +520,7 @@ const SectionHeaderContent = (props) => {
           )}
           <Headline type="content" truncate={true}>
             <div className="settings-section_header">
-              <div className="header">
-                {isMobile() && isServicePage && (
-                  <IconButton
-                    iconName={ArrowPathReactSvgUrl}
-                    size="17"
-                    isFill={true}
-                    onClick={onBackToParent}
-                    className="arrow-button"
-                  />
-                )}
-                {t(header)}
-              </div>
+              <div className="header">{translatedHeader}</div>
               {isNeedPaidIcon ? (
                 <Badge
                   backgroundColor="#EDC409"
@@ -598,6 +593,7 @@ export default inject(
       getFromDateAgo,
       isMe,
     } = peopleStore.selectionStore;
+    const { organizationName } = settingsStore;
 
     const { admins, selectorIsOpen } = setup.security.accessRight;
     const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;

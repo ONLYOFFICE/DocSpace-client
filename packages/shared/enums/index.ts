@@ -584,3 +584,12 @@ export const enum LDAPCertificateProblem {
   CertUntrustedCa = -2146762478,
   CertUnrecognizedError = -2146762477,
 }
+
+export enum FileExtensions {
+  PDF = "pdf",
+  DOC = "doc",
+  DOCX = "docx",
+  DOCXF = "docxf",
+  XLSX = "xlsx",
+  PPTX = "pptx",
+}

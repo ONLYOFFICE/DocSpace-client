@@ -28,6 +28,7 @@ import React from "react";
 import { observer } from "mobx-react";
 
 import { useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
@@ -53,6 +54,7 @@ const CommonWhiteLabel = ({
   isEqualText,
   isSaving,
 }) => {
+  const theme = useTheme();
   const { t } = useTranslation(["Settings", "Profile", "Common"]);
 
   return (
@@ -66,7 +68,7 @@ const CommonWhiteLabel = ({
         {!isSettingPaid && (
           <Badge
             className="paid-badge"
-            backgroundColor="#EDC409"
+            backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
             label={t("Common:Paid")}
             isPaidBadge={true}
           />

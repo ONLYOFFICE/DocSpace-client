@@ -245,6 +245,7 @@ const AttributeMapping = (props) => {
             tabIndex={12}
             directionX="left"
           />
+          <div></div>
         </Box>
       </Box>
     </>

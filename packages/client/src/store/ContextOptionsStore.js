@@ -105,6 +105,7 @@ import {
   EmployeeType,
   FilesSelectorFilterTypes,
   FilterType,
+  FileExtensions,
 } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { getFileLink, getFolderLink } from "@docspace/shared/api/files";
@@ -2129,9 +2130,12 @@ class ContextOptionsStore {
   onCreate = (format) => {
     const event = new Event(Events.CREATE);
 
+    const isPDf = format === FileExtensions.PDF;
+
     const payload = {
       extension: format,
       id: -1,
+      edit: isPDf,
     };
 
     event.payload = payload;

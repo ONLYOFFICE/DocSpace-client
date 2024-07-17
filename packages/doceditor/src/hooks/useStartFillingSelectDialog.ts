@@ -158,24 +158,24 @@ const useStartFillingSelectDialog = (fileInfo: TFile | undefined) => {
     url.searchParams.set("folder", selectedItemId.toString());
 
     try {
-      const hasConfictFiles = await checkFileConflicts(
-        selectedItemId,
-        [],
-        [fileInfo.id],
-      );
+      // const hasConfictFiles = await checkFileConflicts(
+      //   selectedItemId,
+      //   [],
+      //   [fileInfo.id],
+      // );
 
-      if (hasConfictFiles.length > 0) {
-        conflictResolve = await showConflictResolveDialog(
-          folderTitle,
-          fileInfo.title,
-        );
+      // if (hasConfictFiles.length > 0) {
+      //   conflictResolve = await showConflictResolveDialog(
+      //     folderTitle,
+      //     fileInfo.title,
+      //   );
 
-        if (!conflictResolve) {
-          requestRunning.current = false;
+      //   if (!conflictResolve) {
+      //     requestRunning.current = false;
 
-          return Promise.resolve();
-        }
-      }
+      //     return Promise.resolve();
+      //   }
+      // }
 
       const fileUrl = await getFileUrl();
 
@@ -187,8 +187,6 @@ const useStartFillingSelectDialog = (fileInfo: TFile | undefined) => {
       );
 
       const [key, value] = response?.split(":") ?? [];
-
-      console.log({ key, value });
 
       // await copyToFolder(
       //   Number(selectedItemId),

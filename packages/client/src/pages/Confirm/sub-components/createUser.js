@@ -214,7 +214,7 @@ const CreateUserForm = (props) => {
       });
 
       const finalUrl = roomId
-        ? `/rooms/shared/filter?folder=${roomId}`
+        ? `/rooms/shared/${roomId}/filter?folder=${roomId}`
         : defaultPage;
 
       if (roomId) {
@@ -326,7 +326,7 @@ const CreateUserForm = (props) => {
     signupOAuth(signupAccount)
       .then(() => {
         const url = roomData.roomId
-          ? `/rooms/shared/filter?folder=${roomData.roomId}/`
+          ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}/`
           : defaultPage;
         window.location.replace(url);
       })
@@ -354,7 +354,7 @@ const CreateUserForm = (props) => {
     //console.log({ res });
 
     const finalUrl = roomData.roomId
-      ? `/rooms/shared/filter?folder=${roomData.roomId}`
+      ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}`
       : defaultPage;
 
     const isConfirm = typeof res === "string" && res.includes("confirm");

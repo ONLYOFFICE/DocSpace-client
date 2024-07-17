@@ -132,7 +132,7 @@ const IntegrationWrapper = (props) => {
       items={data}
       selectedItemId={currentTabId}
       onSelect={onSelect}
-      topProps={SECTION_HEADER_HEIGHT[currentDeviceType]}
+      stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
     />
   );
 };

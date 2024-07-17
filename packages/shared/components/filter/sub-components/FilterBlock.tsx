@@ -229,7 +229,7 @@ const FilterBlock = ({
         };
       });
 
-      if (isSelected) {
+      if (isSelected && key !== "0") {
         if (isMultiSelect) {
           const groupIdx = value.findIndex(
             (item) => "group" in item && item.group === group,
@@ -293,7 +293,7 @@ const FilterBlock = ({
             ) {
               item.key.push(key);
             } else {
-              item.key = key;
+              item.key = isSelected && key === "0" ? "1" : key;
               if (label) {
                 item.label = label;
               }

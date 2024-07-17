@@ -42,10 +42,12 @@ type THeaderBackButton =
   | {
       onBackClick: () => void;
       withoutBackButton: false;
+      withoutBorder: false;
     }
   | {
       onBackClick?: undefined;
       withoutBackButton?: undefined;
+      withoutBorder: undefined;
     };
 
 export type HeaderProps = {

@@ -122,7 +122,7 @@ export const HistoryItemList = ({
               iconName={FolderLocationReactSvgUrl}
               size="16"
               isFill
-              onClick={() => checkAndOpenLocationAction!(item)}
+              onClick={() => checkAndOpenLocationAction!(item, actionType)}
               title={t("Files:OpenLocation")}
             />
           </StyledHistoryBlockFile>

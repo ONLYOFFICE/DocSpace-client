@@ -441,40 +441,10 @@ const PortalSettingsRoutes = {
         ),
     },
     {
-      path: "data-import/migration",
+      path: "data-import",
       lazy: () =>
         componentLoader(
           () => import("SRC_DIR/pages/PortalSettings/categories/data-import"),
-        ),
-    },
-    {
-      path: "data-import/migration/google",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/data-import/GoogleWorkspace"
-            ),
-        ),
-    },
-    {
-      path: "data-import/migration/nextcloud",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/data-import/NextCloudWorkspace"
-            ),
-        ),
-    },
-    {
-      path: "data-import/migration/onlyoffice",
-      lazy: () =>
-        componentLoader(
-          () =>
-            import(
-              "SRC_DIR/pages/PortalSettings/categories/data-import/OnlyofficeWorkspace"
-            ),
         ),
     },
     {

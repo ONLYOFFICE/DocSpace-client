@@ -26,6 +26,7 @@
 
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
 import { Badge } from "@docspace/shared/components/badge";
@@ -45,7 +46,9 @@ const buttonProps = {
 };
 const StatisticsComponent = (props) => {
   const { t } = useTranslation("Settings");
+  const theme = useTheme();
   const { isStatisticsAvailable } = props;
+
   const iconElement = (
     id,
     icon,
@@ -89,7 +92,7 @@ const StatisticsComponent = (props) => {
         </StyledMainTitle>
         {!isStatisticsAvailable && (
           <Badge
-            backgroundColor="#EDC409"
+            backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
             label={t("Common:Paid")}
             className="paid-badge"
             isPaidBadge

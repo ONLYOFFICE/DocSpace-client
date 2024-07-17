@@ -135,6 +135,7 @@ const Root = ({
     onSDKRequestStartFilling,
     conflictDataDialog,
     headerLabelSFSDialog,
+    onDownloadAs,
   } = useStartFillingSelectDialog(fileInfo);
 
   const {
@@ -211,6 +212,7 @@ const Root = ({
           fileInfo={fileInfo}
           errorMessage={error?.message}
           isSkipError={!!isSkipError}
+          onDownloadAs={onDownloadAs}
           onSDKRequestSharingSettings={onSDKRequestSharingSettings}
           onSDKRequestSaveAs={onSDKRequestSaveAs}
           onSDKRequestInsertImage={onSDKRequestInsertImage}

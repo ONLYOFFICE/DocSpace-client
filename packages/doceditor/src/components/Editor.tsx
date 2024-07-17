@@ -72,6 +72,7 @@ const Editor = ({
   errorMessage,
   isSkipError,
 
+  onDownloadAs,
   onSDKRequestSharingSettings,
   onSDKRequestSaveAs,
   onSDKRequestInsertImage,
@@ -235,6 +236,7 @@ const Editor = ({
     onMetaChange,
     onMakeActionLink,
     onOutdatedVersion,
+    onDownloadAs,
   };
 
   if (successAuth) {

@@ -34,6 +34,7 @@ import {
 } from "@docspace/shared/api/files";
 // import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
 import { toastr } from "@docspace/shared/components/toast";
+import { EDITOR_ID } from "@docspace/shared/constants";
 
 import type {
   TFile,
@@ -48,7 +49,7 @@ import type { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSe
 import type { TData } from "@docspace/shared/components/toast/Toast.type";
 
 // import { useTranslation } from "react-i18next";
-
+import { saveAs } from "@/utils";
 import type { ConflictStateType } from "@/types";
 
 const DefaultConflictDataDialogState: ConflictStateType = {
@@ -59,8 +60,20 @@ const DefaultConflictDataDialogState: ConflictStateType = {
   folderName: "",
 };
 
+const hasFileUrl = (arg: object): arg is { data: { url: string } } => {
+  return (
+    "data" in arg &&
+    typeof arg.data === "object" &&
+    arg.data !== null &&
+    "url" in arg.data &&
+    typeof arg.data.url === "string"
+  );
+};
+
 const useStartFillingSelectDialog = (fileInfo: TFile | undefined) => {
   // const { t } = useTranslation(["Common"]);
+  const resolveRef = useRef<(value: string | PromiseLike<string>) => void>();
+
   const [headerLabelSFSDialog, setHeaderLabelSFSDialog] = useState("");
 
   const [isVisible, setIsVisible] = useState(false);
@@ -105,6 +118,26 @@ const useStartFillingSelectDialog = (fileInfo: TFile | undefined) => {
     }
   };
 
+  const onDownloadAs = (obj: object) => {
+    if (hasFileUrl(obj)) {
+      resolveRef.current?.(obj.data.url);
+      resolveRef.current = undefined;
+    }
+  };
+
+  const getFileUrl = async () => {
+    const docEditor =
+      typeof window !== "undefined" && window.DocEditor?.instances[EDITOR_ID];
+
+    docEditor?.downloadAs("pdf");
+
+    const url = await new Promise<string>((resolve) => {
+      resolveRef.current = resolve;
+    });
+
+    return url;
+  };
+
   const onSubmit = async (
     selectedItemId: string | number | undefined,
     folderTitle: string,
@@ -144,27 +177,40 @@ const useStartFillingSelectDialog = (fileInfo: TFile | undefined) => {
         }
       }
 
-      await copyToFolder(
-        Number(selectedItemId),
-        [],
-        [fileInfo.id],
-        conflictResolve,
+      const fileUrl = await getFileUrl();
+
+      const response = await saveAs(
+        fileInfo.title,
+        fileUrl,
+        selectedItemId,
         false,
       );
 
-      const error = await new Promise((resolve) => {
-        const interval = setInterval(async () => {
-          const [progress] = await getProgress();
+      const [key, value] = response?.split(":") ?? [];
 
-          if (progress?.finished) {
-            clearInterval(interval);
-            resolve(progress.error);
-          }
-        }, 1000);
-      });
+      console.log({ key, value });
 
-      if (error) {
-        toastr.error(error);
+      // await copyToFolder(
+      //   Number(selectedItemId),
+      //   [],
+      //   [fileInfo.id],
+      //   conflictResolve,
+      //   false,
+      // );
+
+      // const error = await new Promise((resolve) => {
+      //   const interval = setInterval(async () => {
+      //     const [progress] = await getProgress();
+
+      //     if (progress?.finished) {
+      //       clearInterval(interval);
+      //       resolve(progress.error);
+      //     }
+      //   }, 1000);
+      // });
+
+      if (key === "error") {
+        toastr.error(value);
       } else {
         window.location.replace(url.toString());
         onClose();
@@ -208,6 +254,7 @@ const useStartFillingSelectDialog = (fileInfo: TFile | undefined) => {
     onSubmitStartFillingSelectDialog: onSubmit,
     onCloseStartFillingSelectDialog: onClose,
     getIsDisabledStartFillingSelectDialog: getIsDisabled,
+    onDownloadAs,
     isVisibleStartFillingSelectDialog: isVisible,
     conflictDataDialog,
     headerLabelSFSDialog,

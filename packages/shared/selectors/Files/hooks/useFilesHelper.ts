@@ -170,6 +170,10 @@ const useFilesHelper = ({
             filter.filterType = FilterType.DocumentsOnly;
             break;
 
+          case FilterType.PDFForm:
+            filter.filterType = FilterType.PDFForm;
+            break;
+
           case FilterType.PresentationsOnly:
             filter.filterType = FilterType.PresentationsOnly;
             break;

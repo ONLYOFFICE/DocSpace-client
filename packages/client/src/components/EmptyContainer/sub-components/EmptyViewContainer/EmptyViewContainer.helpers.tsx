@@ -3,6 +3,7 @@ import { P, match } from "ts-pattern";
 
 import {
   FilesSelectorFilterTypes,
+  FilterType,
   FolderType,
   RoomsType,
   ShareAccessRights,
@@ -304,7 +305,7 @@ const helperOptions = (
   const createUploadFromDocSpace = (
     title: string,
     description: string,
-    filterType: FilesSelectorFilterTypes,
+    filterType: FilesSelectorFilterTypes | FilterType,
   ) => ({
     title,
     description,
@@ -353,7 +354,7 @@ export const getOptions = (
       productName: PRODUCT_NAME,
     }),
     t("EmptyView:UploadPDFFormOptionDescription"),
-    FilesSelectorFilterTypes.PDF,
+    FilterType.PDFForm,
   );
 
   const uploadAllFromDocSpace = createUploadFromDocSpace(

@@ -104,6 +104,7 @@ import {
   UrlActionType,
   EmployeeType,
   FilesSelectorFilterTypes,
+  FilterType,
   FileExtensions,
 } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -181,6 +182,9 @@ class ContextOptionsStore {
   };
 
   onClickLinkFillForm = (item) => {
+    if (!item.startFilling)
+      return this.dialogsStore.setFillPDFDialogData(true, item);
+
     return this.gotoDocEditor(false, item);
   };
 
@@ -685,7 +689,9 @@ class ContextOptionsStore {
   };
 
   onOpenPDFEditDialog = (id) => {
-    this.dialogsStore.setPdfFormEditVisible(true, id);
+    this.filesStore.openDocEditor(id, false, null, true);
+
+    // this.dialogsStore.setPdfFormEditVisible(true, id);
   };
 
   filterModel = (model, filter) => {
@@ -1425,7 +1431,7 @@ class ContextOptionsStore {
         label: t("Common:FillFormButton"),
         icon: FormFillRectSvgUrl,
         onClick: () => this.onClickLinkFillForm(item),
-        disabled: !item.startFilling,
+        disabled: false,
       },
       {
         id: "option_open-pdf",
@@ -1438,7 +1444,7 @@ class ContextOptionsStore {
       {
         id: "option_edit-pdf",
         key: "edit-pdf",
-        label: t("Common:EditPDFForm"),
+        label: t("Common:EditButton"),
         icon: AccessEditReactSvgUrl,
         onClick: () => this.onOpenPDFEditDialog(item.id),
         disabled: false,
@@ -2214,7 +2220,7 @@ class ContextOptionsStore {
           label: t("Common:FromPortal", { productName: PRODUCT_NAME }),
           key: "personal_upload-from-docspace",
           onClick: () =>
-            this.onShowFormRoomSelectFileDialog(FilesSelectorFilterTypes.PDF),
+            this.onShowFormRoomSelectFileDialog(FilterType.PDFForm),
         },
         {
           id: "personal_upload-from-device",

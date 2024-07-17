@@ -50,6 +50,26 @@ type THeaderBackButton =
       withoutBorder: undefined;
     };
 
+export type TInfoBarData = {
+  title: string;
+  description: string;
+  icon?: string;
+  onClose?: VoidFunction;
+};
+
+export type TInfoBar = {
+  withInfoBar?: boolean;
+  infoBarData?: TInfoBarData;
+};
+
+export type InfoBarProps = {
+  visible: boolean;
+};
+
+export type BreadCrumbsProps = {
+  visible?: boolean;
+};
+
 export type HeaderProps = {
   headerLabel: string;
 } & THeaderBackButton;
@@ -287,6 +307,7 @@ export type TRenderCustomItem = (
 ) => React.ReactNode | null;
 
 export type SelectorProps = TSelectorHeader &
+  TInfoBar &
   TSelectorInfo &
   TSelectorTabs &
   TSelectorSelectAll &
@@ -400,6 +421,9 @@ type TSelectorItemEmpty = {
   onAcceptInput?: undefined;
   onCancelInput?: undefined;
   placeholder?: undefined;
+
+  isRoomsOnly?: undefined;
+  createDefineRoomType?: undefined;
 };
 
 export type TSelectorItemUser = MergeTypes<
@@ -477,6 +501,9 @@ export type TSelectorItemNew = MergeTypes<
     dropDownItems?: React.ReactElement[];
     onCreateClick?: VoidFunction;
     onBackClick: VoidFunction;
+
+    isRoomsOnly?: boolean;
+    createDefineRoomType?: RoomsType;
   }
 >;
 

@@ -137,6 +137,10 @@ const StyledBody = styled.div<{
 
     color: ${(props) => props.theme.selector.bodyDescriptionText};
   }
+
+  .selector_info-bar {
+    margin: 0px 20px 16px;
+  }
 `;
 
 const StyledSelectAll = styled.div`
@@ -349,6 +353,65 @@ const StyledEmptyScreen = styled.div<{ withSearch: boolean }>`
     color: ${(props) => props.theme.selector.emptyScreen.descriptionColor};
 
     margin-top: 8px;
+  }
+`;
+
+const StyledNewEmptyScreen = styled.section`
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  padding: 0 28px;
+
+  box-sizing: border-box;
+
+  .empty-image {
+    margin-top: 64px;
+  }
+
+  .empty-header {
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 700;
+    text-align: center;
+
+    margin: 0;
+
+    margin-top: 32px;
+  }
+
+  .empty-description {
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+
+    margin-top: 8px;
+
+    color: ${(props) => props.theme.selector.emptyScreen.pressedButtonColor};
+  }
+
+  .empty_button-wrapper {
+    display: flex;
+    justify-content: flex-start;
+
+    align-self: flex-start;
+
+    align-items: center;
+    gap: 16px;
+
+    padding: 12px 0;
+    margin-top: 16px;
+  }
+
+  .empty-button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .empty-button-label {
+    cursor: pointer;
   }
 `;
 
@@ -581,6 +644,7 @@ StyledBody.defaultProps = { theme: Base };
 StyledSelectAll.defaultProps = { theme: Base };
 StyledItem.defaultProps = { theme: Base };
 StyledEmptyScreen.defaultProps = { theme: Base };
+StyledNewEmptyScreen.defaultProps = { theme: Base };
 StyledArrowRightSvg.defaultProps = { theme: Base };
 StyledComboBox.defaultProps = { theme: Base };
 StyledInfo.defaultProps = { theme: Base };
@@ -607,4 +671,5 @@ export {
   StyledAccessSelector,
   StyledInputWrapper,
   StyledCreateDropDown,
+  StyledNewEmptyScreen,
 };

@@ -1,6 +1,8 @@
 {
+  "BackToRoom": "Back to room",
   "Description": "Your form completed and saved",
   "FillItOutAgain": "Fill it out again",
-  "GoToCompleteFolder": "Go to Complete folder",
+  "FormNumber": "Form number:",
+  "Manager": "Manager:",
   "Title": "The form is completed"
 }

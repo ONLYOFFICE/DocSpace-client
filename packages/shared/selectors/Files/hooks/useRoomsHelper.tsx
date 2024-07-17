@@ -165,7 +165,8 @@ const useRoomsHelper = ({
             id: "create-room-item",
             key: "create-room-item",
             hotkey: "r",
-
+            isRoomsOnly,
+            createDefineRoomType,
             dropDownItems: createDefineRoomType
               ? undefined
               : createDropDownItems,

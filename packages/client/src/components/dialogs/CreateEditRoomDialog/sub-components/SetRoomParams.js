@@ -54,6 +54,7 @@ const StyledSetRoomParams = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 22px;
+  margin-top: 20px;
 
   .icon-editor_text {
     margin-bottom: 6px;

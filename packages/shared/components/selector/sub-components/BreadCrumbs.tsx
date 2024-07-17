@@ -32,7 +32,11 @@ import {
 } from "../../context-menu-button";
 import { ContextMenuModel } from "../../context-menu";
 
-import { TBreadCrumb, TDisplayedItem } from "../Selector.types";
+import {
+  BreadCrumbsProps,
+  TBreadCrumb,
+  TDisplayedItem,
+} from "../Selector.types";
 import {
   StyledBreadCrumbs,
   StyledItemText,
@@ -40,7 +44,7 @@ import {
 } from "../Selector.styled";
 import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
 
-const BreadCrumbs = () => {
+const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
   const {
     withBreadCrumbs,
     breadCrumbs,
@@ -186,7 +190,7 @@ const BreadCrumbs = () => {
       "minmax(1px, max-content) 12px minmax(1px, max-content)";
   }
 
-  if (!withBreadCrumbs) return null;
+  if (!withBreadCrumbs || !visible) return null;
 
   if (isBreadCrumbsLoading) return breadCrumbsLoader;
 

@@ -28,6 +28,7 @@ import React from "react";
 import InfiniteLoader from "react-window-infinite-loader";
 import { FixedSizeList as List } from "react-window";
 
+import { RoomsType } from "../../../enums";
 import { Nullable } from "../../../types";
 
 import { Scrollbar } from "../../scrollbar";
@@ -37,10 +38,12 @@ import { SearchContext, SearchValueContext } from "../contexts/Search";
 import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
 import { TabsContext } from "../contexts/Tabs";
 import { SelectAllContext } from "../contexts/SelectAll";
+import { InfoBarContext } from "../contexts/InfoBar";
 
 import { StyledBody, StyledTabs } from "../Selector.styled";
 import { BodyProps } from "../Selector.types";
 
+import { InfoBar } from "./InfoBar";
 import { Search } from "./Search";
 import { SelectAll } from "./SelectAll";
 import { EmptyScreen } from "./EmptyScreen";
@@ -87,6 +90,7 @@ const Body = ({
 }: BodyProps) => {
   const { withSearch } = React.useContext(SearchContext);
   const isSearch = React.useContext(SearchValueContext);
+  const { withInfoBar } = React.useContext(InfoBarContext);
 
   const { withBreadCrumbs } = React.useContext(BreadCrumbsContext);
 
@@ -182,11 +186,24 @@ const Body = ({
     }
   }
 
+  if (withInfoBar) {
+    const infoEl = document.querySelector(".selector_info-bar");
+    if (infoEl) {
+      const height = infoEl.getClientRects()[0].height;
+      listHeight -= height;
+    }
+  }
+
   if (withBreadCrumbs) listHeight -= BREAD_CRUMBS_HEIGHT;
 
   if (showSelectAll) listHeight -= SELECT_ALL_HEIGHT;
 
   if (descriptionText) listHeight -= BODY_DESCRIPTION_TEXT_HEIGHT;
+
+  const isShareFormEmpty =
+    itemsCount === 0 &&
+    Boolean(items?.[0]?.isRoomsOnly) &&
+    Boolean(items?.[0]?.createDefineRoomType === RoomsType.FormRoom);
 
   return (
     <StyledBody
@@ -204,7 +221,8 @@ const Body = ({
       withHeader={withHeader}
       withTabs={withTabs}
     >
-      <BreadCrumbs />
+      <InfoBar visible={itemsCount !== 0} />
+      <BreadCrumbs visible={!isShareFormEmpty} />
 
       {withTabs && tabsData && (
         <StyledTabs

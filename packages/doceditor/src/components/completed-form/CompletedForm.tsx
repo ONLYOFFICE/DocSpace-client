@@ -31,21 +31,37 @@ import Image from "next/image";
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
+import CompletedFormDarkIcon from "PUBLIC_DIR/images/completedForm/completed.form.icon.dark.svg?url";
+import CompletedFormLightIcon from "PUBLIC_DIR/images/completedForm/completed.form.icon.light.svg?url";
+import PDFIcon from "PUBLIC_DIR/images/icons/32/pdf.svg";
+import DownloadIconUrl from "PUBLIC_DIR/images/download.react.svg?url";
+import MailIcon from "PUBLIC_DIR/images/icons/12/mail.svg";
+
 import { Text } from "@docspace/shared/components/text";
 import { getBgPattern, getLogoUrl } from "@docspace/shared/utils/common";
 
-import CompletedFormDarkIcon from "PUBLIC_DIR/images/completedForm/completed.form.icon.dark.svg?url";
-import CompletedFormLightIcon from "PUBLIC_DIR/images/completedForm/completed.form.icon.light.svg?url";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { WhiteLabelLogoType } from "@docspace/shared/enums";
+import { mobile, mobileMore } from "@docspace/shared/utils";
+import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
 
 import {
   CompletedFormLayout,
   ButtonWrapper,
   TextWrapper,
+  Box,
+  FormNumberWrapper,
+  ManagerWrapper,
+  MainContent,
 } from "./CompletedForm.styled";
+
 import type { CompletedFormProps } from "./CompletedForm.types";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { WhiteLabelLogoType } from "@docspace/shared/enums";
-import { mobile, mobileMore } from "@docspace/shared/utils";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import {
+  Avatar,
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/shared/components/avatar";
 
 export const CompletedForm = ({}: CompletedFormProps) => {
   const theme = useTheme();
@@ -58,9 +74,14 @@ export const CompletedForm = ({}: CompletedFormProps) => {
 
   const iconUrl = theme.isBase ? CompletedFormLightIcon : CompletedFormDarkIcon;
 
-  const onClose = () => {
-    window.close();
-  };
+  // const onClose = () => {
+  //   window.close();
+  // };
+
+  const formNumber = 312;
+
+  const email = "example@gmail.com";
+  const user = "User User";
 
   return (
     <CompletedFormLayout bgPattern={bgPattern}>
@@ -78,25 +99,61 @@ export const CompletedForm = ({}: CompletedFormProps) => {
         height={200}
       />
       <TextWrapper>
-        <Text as="h1">{t("CompletedForm:Title")}</Text>
-        <Text as="p">{t("CompletedForm:Description")}</Text>
+        <Heading level={HeadingLevel.h1}>{t("CompletedForm:Title")}</Heading>
+        <Text noSelect>{t("CompletedForm:Description")}</Text>
       </TextWrapper>
-      {/* <ButtonWrapper>
+      {/* <MainContent>
+        <Box className="completed-form__file">
+          <PDFIcon />
+          <Heading className="completed-form__filename" level={HeadingLevel.h5}>
+            312 – leave application (7/8/2024 11:04 PM)
+          </Heading>
+          <IconButton
+            size={16}
+            className="completed-form__download"
+            iconName={DownloadIconUrl}
+          />
+        </Box>
+        <FormNumberWrapper>
+          <span className="label">{t("CompletedForm:FormNumber")}</span>
+          <Box>
+            <Text className="completed-form__form-number">{formNumber}</Text>
+          </Box>
+        </FormNumberWrapper>
+        <ManagerWrapper>
+          <span className="label">{t("CompletedForm:Manager")}</span>
+          <Box>
+            <Avatar
+              className="manager__avatar"
+              size={AvatarSize.medium}
+              role={AvatarRole.manager}
+              source={""}
+            />
+            <Heading level={HeadingLevel.h3} className="manager__user-name">
+              {user}
+            </Heading>
+            <Link className="manager__mail link" href={`mailto:${email}`}>
+              <MailIcon />
+              {email}
+            </Link>
+          </Box>
+        </ManagerWrapper>
+      </MainContent>
+      <ButtonWrapper>
         <Button
           scale
           primary
           size={ButtonSize.medium}
-          label={t("Common:CloseButton")}
-          onClick={onClose}
+          label={t("Common:Download")}
         />
         <Button
           scale
           size={ButtonSize.medium}
-          label={t("CompletedForm:FillItOutAgain")}
+          label={t("CompletedForm:BackToRoom")}
         />
       </ButtonWrapper>
       <Link className="link" href="#">
-        {t("CompletedForm:GoToCompleteFolder")}
+        {t("CompletedForm:FillItOutAgain")}
       </Link> */}
     </CompletedFormLayout>
   );

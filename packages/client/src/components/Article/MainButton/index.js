@@ -61,6 +61,7 @@ import {
   RoomsType,
   FilesSelectorFilterTypes,
   FolderType,
+  FilterType,
 } from "@docspace/shared/enums";
 
 import styled, { css } from "styled-components";
@@ -378,8 +379,7 @@ const ArticleMainButtonContent = (props) => {
         label: t("Common:FromPortal", { productName: PRODUCT_NAME }),
         key: "actions_upload-from-docspace",
         disabled: false,
-        onClick: () =>
-          onShowFormRoomSelectFileDialog(FilesSelectorFilterTypes.PDF),
+        onClick: () => onShowFormRoomSelectFileDialog(FilterType.PDFForm),
       };
 
       const uploadFormDevice = {

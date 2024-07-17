@@ -27,6 +27,7 @@
 import React from "react";
 import { ReactSVG } from "react-svg";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
 
 import RightArrowReactSvgUrl from "PUBLIC_DIR/images/right.arrow.react.svg?url";
 import ArrowLeftReactUrl from "PUBLIC_DIR/images/arrow-left.react.svg?url";
@@ -69,6 +70,7 @@ const DropDownItem = (props: DropDownItemProps) => {
   } = props;
 
   const { t } = useTranslation(["Common"]);
+  const theme = useTheme();
 
   const { withToggle, checked, onClick, onClickSelectedItem, label, ...rest } =
     props;
@@ -168,7 +170,7 @@ const DropDownItem = (props: DropDownItemProps) => {
             fontSize="9px"
             isHovered={false}
             borderRadius="50px"
-            backgroundColor="#533ED1"
+            backgroundColor={theme.isBase ? "#533ED1" : "#5447A3"}
             label={t("Common:BetaLabel")}
           />
         </WrapperBadge>

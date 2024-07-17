@@ -99,10 +99,14 @@ const StyledLdapPage = styled(Box)`
   }
 
   .access-selector-wrapper {
-    width: 356px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 12px;
 
     @media ${mobile} {
       width: 100%;
+      grid-template-columns: 1fr 0;
+      grid-gap: 0;
     }
 
     .access-selector {
@@ -137,7 +141,7 @@ const StyledLdapPage = styled(Box)`
     ${(props) =>
       !props.isMobileView &&
       css`
-        grid-template-columns: minmax(100px, 340px) 1fr;
+        grid-template-columns: 1fr 1fr;
       `}
   }
 

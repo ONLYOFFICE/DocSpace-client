@@ -1,6 +1,6 @@
 {
-  "Title": "The form is completed",
   "Description": "Your form completed and saved",
   "FillItOutAgain": "Fill it out again",
-  "GoToCompleteFolder": "Go to Complete folder"
+  "GoToCompleteFolder": "Go to Complete folder",
+  "Title": "The form is completed"
 }

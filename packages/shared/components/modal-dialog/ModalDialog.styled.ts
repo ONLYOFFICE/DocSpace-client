@@ -178,7 +178,7 @@ const StyledBody = styled(Box)<{
   withBodyScroll?: boolean;
 }>`
   position: relative;
-  padding: 16px;
+  padding: 0 16px;
   padding-bottom: ${(props) =>
     props.currentDisplayType === "aside" || props.hasFooter ? "8px" : "16px"};
 

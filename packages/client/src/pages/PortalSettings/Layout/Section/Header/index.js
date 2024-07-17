@@ -217,6 +217,7 @@ const SectionHeaderContent = (props) => {
     setIsLoadedSectionHeader,
     isSSOAvailable,
     workspace,
+    organizationName,
   } = props;
 
   const navigate = useNavigate();
@@ -377,11 +378,9 @@ const SectionHeaderContent = (props) => {
     setItems,
     setUserSessionPanelVisible,
     setDisplayName,
-    getFromDateAgo,
   } = props;
   const { header, isCategoryOrHeader, isNeedPaidIcon } = state;
   const arrayOfParams = getArrayOfParams();
-  const fromDateAgo = getFromDateAgo(peopleSelection[0]?.id);
 
   const menuItems = isSessionsPage ? (
     <>
@@ -465,18 +464,6 @@ const SectionHeaderContent = (props) => {
         },
       ];
 
-  const pathname = location.pathname;
-  const translatedHeader =
-    header === "ImportHeader"
-      ? workspace === "GoogleWorkspace"
-        ? t("ImportFromGoogle")
-        : workspace === "Nextcloud"
-          ? t("ImportFromNextcloud")
-          : workspace === "Workspace"
-            ? t("ImportFromPortal", { organizationName })
-            : t("DataImport")
-      : t(header, { organizationName });
-
   const isHeaderVisible = isSessionsPage
     ? isPeopleHeaderVisible
     : isSetupHeaderVisible;
@@ -490,6 +477,17 @@ const SectionHeaderContent = (props) => {
     : isSetupleHeaderIndeterminate;
 
   const withoutInfoPanelToggler = isSessionsPage ? true : false;
+
+  const translatedHeader =
+    header === "ImportHeader"
+      ? workspace === "GoogleWorkspace"
+        ? t("ImportFromGoogle")
+        : workspace === "Nextcloud"
+          ? t("ImportFromNextcloud")
+          : workspace === "Workspace"
+            ? t("ImportFromPortal", { organizationName })
+            : t("DataImport")
+      : t(header, { organizationName });
 
   return (
     <StyledContainer isHeaderVisible={isHeaderVisible}>
@@ -556,19 +554,35 @@ const SectionHeaderContent = (props) => {
 };
 
 export default inject(
-  ({ currentQuotaStore, setup, common, peopleStore, dialogsStore }) => {
+  ({
+    currentQuotaStore,
+    setup,
+    common,
+    peopleStore,
+    dialogsStore,
+    settingsStore,
+    importAccountsStore,
+  }) => {
+    const { addUsers, removeAdmins } = setup.headerAction;
+    const { organizationName } = settingsStore;
+    const { workspace } = importAccountsStore;
+    const { admins, selectorIsOpen } = setup.security.accessRight;
+    const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
+    const { setUserSessionPanelVisible } = dialogsStore;
+
     const {
       isBrandingAndCustomizationAvailable,
       isRestoreAndAutoBackupAvailable,
       isSSOAvailable,
     } = currentQuotaStore;
-    const { addUsers, removeAdmins } = setup.headerAction;
+
     const {
       toggleSelector,
       setDisableDialogVisible,
       setLogoutDialogVisible,
       setLogoutAllDialogVisible,
     } = setup;
+
     const {
       selected,
       setSelected: setupSetSelected,
@@ -590,14 +604,9 @@ export default inject(
       setItems,
       setDisplayName,
       allSessions,
-      getFromDateAgo,
       isMe,
     } = peopleStore.selectionStore;
-    const { organizationName } = settingsStore;
 
-    const { admins, selectorIsOpen } = setup.security.accessRight;
-    const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
-    const { setUserSessionPanelVisible } = dialogsStore;
     return {
       addUsers,
       removeAdmins,
@@ -630,8 +639,9 @@ export default inject(
       setUserSessionPanelVisible,
       setDisplayName,
       allSessions,
-      getFromDateAgo,
       isMe,
+      organizationName,
+      workspace,
     };
   },
 )(

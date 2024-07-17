@@ -104,6 +104,7 @@ import {
   UrlActionType,
   EmployeeType,
   FilesSelectorFilterTypes,
+  FileExtensions,
 } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { getFileLink, getFolderLink } from "@docspace/shared/api/files";
@@ -1389,14 +1390,17 @@ class ContextOptionsStore {
       item.roomType === RoomsType.FormRoom ||
       item.roomType === RoomsType.CustomRoom;
 
-    const { shared, navigationPath } = this.selectedFolderStore;
+    const { navigationPath } = this.selectedFolderStore;
 
     if (item.isRoom && withOpen) {
       withOpen = navigationPath.findIndex((f) => f.id === item.id) === -1;
     }
 
     const isArchive = item.rootFolderType === FolderType.Archive;
-    const isShared = shared || navigationPath.findIndex((r) => r.shared) > -1;
+
+    const hasShareLinkRights = item.shared
+      ? item.security?.Read
+      : item.security?.EditAccess;
 
     const optionsModel = [
       {
@@ -1552,20 +1556,14 @@ class ContextOptionsStore {
         label: t("Files:CopyLink"),
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onCopyLink(item, t),
-        disabled:
-          (isPublicRoomType && item.security?.Read && !isArchive) ||
-          !item.security?.CopyLink,
+        disabled: isPublicRoomType && hasShareLinkRights,
       },
       {
         id: "option_copy-external-link",
         key: "external-link",
         label: t("Files:CopySharedLink"),
         icon: TabletLinkReactSvgUrl,
-        disabled:
-          this.publicRoomStore.isPublicRoom ||
-          isArchive ||
-          !item.security?.Read ||
-          !isPublicRoomType,
+        disabled: !hasShareLinkRights,
         onClick: () => this.onCreateAndCopySharedLink(item, t),
         // onLoad: () => this.onLoadLinks(t, item),
       },
@@ -2126,9 +2124,12 @@ class ContextOptionsStore {
   onCreate = (format) => {
     const event = new Event(Events.CREATE);
 
+    const isPDf = format === FileExtensions.PDF;
+
     const payload = {
       extension: format,
       id: -1,
+      edit: isPDf,
     };
 
     event.payload = payload;

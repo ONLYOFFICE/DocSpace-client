@@ -147,7 +147,7 @@
   "LanguageAndTimeZoneSettingsNavDescription": "Setări limbă și fus orar este modul de a schimba limba portalului pentru toți utilizatorii portalului și de a configura fusul orar pentru că ora și data evenimentelor de pe portal este afișată corect.",
   "LastUpdate": "Ultima actualizare: {{date}}",
   "LicenseLimitCounter": "Limita impusă de licență administratori/utilizatori avansați:",
-  "LicenseLimitDescription": "Contorul limitei de licență este format din: conturile deja existente în spațiu {{productName}} și utilizatorii noi pe care doriți să le importați. Dacă importați utilizatorii care au deja un cont {{productName}}, aceștia nu vor fi înregistrate de contorul din nou. Numărul maxim de 100 utilizatori este permis conform licenței dvs {{productName}}.",
+  "LicenseLimitDescription": "Contorul limitei de licență este format din: conturile deja existente în spațiu {{productName}} și utilizatorii noi pe care doriți să le importați. Dacă importați utilizatorii care au deja un cont {{productName}}, aceștia nu vor fi înregistrate de contorul din nou. Numărul maxim de {{maxLimit}} utilizatori este permis conform licenței dvs {{productName}}.",
   "Lifetime": "Durata (min)",
   "LimitThemesTooltip": "Puteţi crea doar 3 teme particularizate. Pentru a crea o temă nouă, trebuie să ştergeţi una dintre temele anterioare.",
   "LocalFile": "Fișierul local",

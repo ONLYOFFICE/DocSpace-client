@@ -121,7 +121,8 @@ class InfoPanelStore {
   setIsVisible = (bool) => {
     if (
       (this.infoPanelSelectedItems.length &&
-        !this.infoPanelSelectedItems[0]?.isRoom) ||
+        !this.infoPanelSelectedItems[0]?.isRoom &&
+        !this.infoPanelSelectedItems[0]?.inRoom) ||
       (this.selectedFolderStore && !this.selectedFolderStore?.inRoom)
     ) {
       this.setView(infoDetails);

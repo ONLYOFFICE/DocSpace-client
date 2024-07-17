@@ -36,7 +36,7 @@ import { ComboBox } from "@docspace/shared/components/combobox";
 
 const StyledTableRow = styled(TableRow)`
   .table-container_cell {
-    padding-right: 30px;
+    padding-inline-end: 30px;
     text-overflow: ellipsis;
   }
 
@@ -47,7 +47,7 @@ const StyledTableRow = styled(TableRow)`
   }
 
   .user-email {
-    margin-right: 5px;
+    margin-inline-end: 5px;
     font-size: 13px;
     font-weight: 600;
     color: ${(props) =>
@@ -69,7 +69,7 @@ const StyledTableRow = styled(TableRow)`
 
     .combo-buttons_arrow-icon {
       flex: initial;
-      margin-right: 0px;
+      margin-inline-end: 0px;
     }
 
     svg {

@@ -151,7 +151,7 @@
   "LastUpdate": "Last update: {{date}}",
   "LDAP": "LDAP Settings",
   "LicenseLimitCounter": "License limit Admins/Power users:",
-  "LicenseLimitDescription": "The license limit counter consists of: already existing accounts in {{productName}} and new users that you want to import. If you import users who already have a {{productName}} account, they will not be counted again in the counter. Your {{productName}} license allows you to have a maximum of 100 users.",
+  "LicenseLimitDescription": "The license limit counter consists of: already existing accounts in {{productName}} and new users that you want to import. If you import users who already have a {{productName}} account, they will not be counted again in the counter. Your {{productName}} license allows you to have a maximum of {{maxLimit}} users.",
   "Lifetime": "Lifetime (min)",
   "LimitThemesTooltip": "You can only create 3 custom themes. To create a new one, you must delete one of the previous themes.",
   "LocalFile": "Local file",

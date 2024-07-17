@@ -51,6 +51,8 @@ const useSocketHelper = ({
 }: UseSocketHelperProps) => {
   const { getIcon } = React.useContext(SettingsContext);
 
+  const initRef = React.useRef(false);
+
   const subscribedId = React.useRef<null | number>(null);
 
   const unsubscribe = React.useCallback(
@@ -281,6 +283,10 @@ const useSocketHelper = ({
   );
 
   React.useEffect(() => {
+    if (initRef.current) return;
+
+    initRef.current = true;
+
     socketHelper.on("s:modify-folder", (opt?: TOptSocket) => {
       switch (opt?.cmd) {
         case "create":

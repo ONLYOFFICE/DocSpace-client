@@ -230,7 +230,7 @@ const AttributeMapping = (props) => {
             {t("LdapUsersTypeInfo")}
           </Text>
         </Box>
-        <Box widthProp="356px">
+        <Box className="access-selector-wrapper">
           <AccessSelector
             className="add-manually-access"
             t={t}
@@ -245,6 +245,7 @@ const AttributeMapping = (props) => {
             tabIndex={12}
             directionX="left"
           />
+          <div></div>
         </Box>
       </Box>
     </>

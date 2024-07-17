@@ -146,7 +146,7 @@
   "LanguageAndTimeZoneSettingsNavDescription": "Dil və Saat qurşağı Parametrləri bütün portal istifadəçiləri üçün bütün portalın dilini dəyişmək və portaldakı bütün hadisələrin düzgün tarix və vaxtla göstərilməsi üçün saat qurşağını konfiqurasiya etmək üsuludur.",
   "LastUpdate": "Son yeniləmə: {{date}}",
   "LicenseLimitCounter": "Lisenziya limiti Administratorlar/Güc:",
-  "LicenseLimitDescription": "Lisenziya limiti sayğacı aşağıdakılardan ibarətdir: {{productName}}-də mövcud hesablar və idxal etmək istədiyiniz yeni istifadəçilər. Artıq {{productName}} hesabı olan istifadəçiləri idxal etsəniz, onlar bir daha sayğacda sayılmayacaqlar. {{productName}} lisenziyanız maksimum 100 istifadəçinin mövcud olmasına imkan verir.",
+  "LicenseLimitDescription": "Lisenziya limiti sayğacı aşağıdakılardan ibarətdir: {{productName}}-də mövcud hesablar və idxal etmək istədiyiniz yeni istifadəçilər. Artıq {{productName}} hesabı olan istifadəçiləri idxal etsəniz, onlar bir daha sayğacda sayılmayacaqlar. {{productName}} lisenziyanız maksimum {{maxLimit}} istifadəçinin mövcud olmasına imkan verir.",
   "Lifetime": "Ömürlük (dəq)",
   "LimitThemesTooltip": "Siz yalnız 3 fərdi mövzu yarada bilərsiniz. Yenisini yaratmaq üçün əvvəlki mövzulardan birini silməlisiniz.",
   "LocalFile": "Yerli fayl",

@@ -35,9 +35,14 @@ import { StyledHeader } from "../Selector.styled";
 import { HeaderProps } from "../Selector.types";
 
 const Header = React.memo(
-  ({ onBackClick, withoutBackButton, headerLabel }: HeaderProps) => {
+  ({
+    onBackClick,
+    withoutBackButton,
+    headerLabel,
+    withoutBorder,
+  }: HeaderProps) => {
     return (
-      <StyledHeader>
+      <StyledHeader withoutBorder={withoutBorder}>
         {!withoutBackButton && typeof withoutBackButton === "boolean" && (
           <IconButton
             className="arrow-button"

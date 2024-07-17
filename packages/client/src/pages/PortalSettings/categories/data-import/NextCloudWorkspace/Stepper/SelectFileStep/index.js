@@ -312,6 +312,7 @@ const SelectFileStep = ({
           placeholder={fileName || t("Settings:BackupFile")}
           isDisabled={isFileLoading}
           accept={[".zip"]}
+          isMultiple={false}
         />
       </FileUploadContainer>
       {isFileLoading ? (

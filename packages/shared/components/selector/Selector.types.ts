@@ -26,7 +26,7 @@
 
 import React from "react";
 import { RoomsType, ShareAccessRights } from "../../enums";
-import { MergeTypes } from "../../types";
+import { MergeTypes, Nullable } from "../../types";
 
 import { TFileSecurity, TFolderSecurity } from "../../api/files/types";
 import { TRoomSecurity } from "../../api/rooms/types";
@@ -42,10 +42,12 @@ type THeaderBackButton =
   | {
       onBackClick: () => void;
       withoutBackButton: false;
+      withoutBorder: false;
     }
   | {
       onBackClick?: undefined;
       withoutBackButton?: undefined;
+      withoutBorder: undefined;
     };
 
 export type HeaderProps = {
@@ -522,6 +524,8 @@ export type Data = {
   renderCustomItem?: TRenderCustomItem;
   setInputItemVisible: (value: boolean) => void;
   inputItemVisible: boolean;
+  savedInputValue: Nullable<string>;
+  setSavedInputValue: (value: Nullable<string>) => void;
 };
 
 export interface ItemProps {

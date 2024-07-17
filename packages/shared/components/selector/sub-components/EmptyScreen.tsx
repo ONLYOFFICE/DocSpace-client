@@ -29,6 +29,7 @@ import { useTranslation } from "react-i18next";
 
 import PlusSvgUrl from "PUBLIC_DIR/images/plus.svg?url";
 import UpSvgUrl from "PUBLIC_DIR/images/up.svg?url";
+import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 
 import { Heading } from "../../heading";
 import { Text } from "../../text";
@@ -42,6 +43,7 @@ import useCreateDropDown from "../hooks/useCreateDropDown";
 import { EmptyScreenContext } from "../contexts/EmptyScreen";
 
 import NewItemDropDown from "./NewItemDropDown";
+import { SearchContext } from "../contexts/Search";
 
 const linkStyles = {
   isHovered: true,
@@ -65,6 +67,7 @@ const EmptyScreen = ({
     searchEmptyScreenDescription,
   } = useContext(EmptyScreenContext);
   const { t } = useTranslation(["Common"]);
+  const { onClearSearch } = useContext(SearchContext);
   const { isOpenDropDown, setIsOpenDropDown, onCloseDropDown } =
     useCreateDropDown();
 
@@ -128,12 +131,19 @@ const EmptyScreen = ({
             <IconButton
               className="empty-folder_container-icon"
               size={12}
-              onClick={createItem.onBackClick}
-              iconName={UpSvgUrl}
+              onClick={
+                withSearch ? () => onClearSearch?.() : createItem.onBackClick
+              }
+              iconName={withSearch ? ClearEmptyFilterSvgUrl : UpSvgUrl}
               isFill
             />
-            <Link {...linkStyles} onClick={createItem.onBackClick}>
-              {t("Common:Back")}
+            <Link
+              {...linkStyles}
+              onClick={
+                withSearch ? () => onClearSearch?.() : createItem.onBackClick
+              }
+            >
+              {withSearch ? t("Common:ClearFilter") : t("Common:Back")}
             </Link>
           </div>
         </div>

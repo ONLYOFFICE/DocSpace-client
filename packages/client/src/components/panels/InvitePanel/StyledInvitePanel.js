@@ -342,8 +342,8 @@ const StyledInviteInputContainer = styled.div`
           overflow-x: hidden;
         }
         .scroll-body > div {
-          justify-content: left;
-          padding-left: 16px;
+          justify-content: flex-start;
+          padding-inline-start: 16px;
         }
       }
     }

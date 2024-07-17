@@ -118,12 +118,11 @@ const ScrollList = styled.div`
       ? "auto"
       : props.offsetTop && `calc(100% - ${props.offsetTop}px)`};
 
-  ${!isMobile() &&
-  css`
-    .row-item {
+  .row-item {
+    @media not ${mobile} {
       width: 448px !important;
     }
-  `}
+  }
 `;
 
 const StyledBlock = styled.div`

@@ -91,9 +91,6 @@ const StyledLdapPage = styled(Box)`
   .ldap_attribute-mapping {
     margin-top: 16px;
     margin-bottom: 12px;
-    input {
-      margin-bottom: 16px;
-    }
     display: grid;
     grid-gap: 12px;
   }

@@ -25,7 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { CompletedForm } from "@/components/completed-form";
 
-async function Page() {
+interface PageProps {
+  searchParams: Record<string, string | undefined>;
+}
+
+async function Page({ searchParams }: PageProps) {
+  const { share, fileId, fillingSessionId } = searchParams;
+
+  console.log({ share, fileId, fillingSessionId });
+
   return <CompletedForm />;
 }
 

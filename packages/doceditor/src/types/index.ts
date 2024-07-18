@@ -182,6 +182,8 @@ export interface IInitialConfig {
   errorMessage?: string;
   message?: undefined;
   startFilling?: boolean;
+
+  fillingSessionId?: string;
 }
 
 export type TError = {

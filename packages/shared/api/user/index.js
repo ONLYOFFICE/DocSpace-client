@@ -26,12 +26,23 @@
 
 import { request, setWithCredentialsStatus } from "../client";
 
-export function login(userName, passwordHash, session, recaptchaResponse) {
+export function login(
+  userName,
+  passwordHash,
+  password,
+  session,
+  recaptchaResponse,
+  recaptchaType,
+  culture,
+) {
   const data = {
     userName,
     passwordHash,
+    password,
     session,
     recaptchaResponse,
+    recaptchaType,
+    culture,
   };
 
   return request({
@@ -42,12 +53,12 @@ export function login(userName, passwordHash, session, recaptchaResponse) {
   });
 }
 
-export function thirdPartyLogin(SerializedProfile) {
+export function thirdPartyLogin(SerializedProfile, culture) {
   return request({
     method: "post",
     url: "authentication",
     skipLogout: true,
-    data: { SerializedProfile },
+    data: { SerializedProfile, culture },
   });
 }
 

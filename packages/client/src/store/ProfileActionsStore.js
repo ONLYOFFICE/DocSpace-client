@@ -48,7 +48,7 @@ import { isDesktop, isTablet } from "@docspace/shared/utils";
 import TariffBar from "SRC_DIR/components/TariffBar";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 
-const PROXY_HOMEPAGE_URL = combineUrl(window.DocSpaceConfig?.proxy?.url, "/");
+const PROXY_HOMEPAGE_URL = combineUrl(window.ClientConfig?.proxy?.url, "/");
 const PROFILE_SELF_URL = combineUrl(PROXY_HOMEPAGE_URL, "/profile");
 //const PROFILE_MY_URL = combineUrl(PROXY_HOMEPAGE_URL, "/my");
 const ABOUT_URL = combineUrl(PROXY_HOMEPAGE_URL, "/about");
@@ -226,7 +226,7 @@ class ProfileActionsStore {
       const ssoLogoutUrl = await this.authStore.logout(false);
 
       window.location.replace(
-        combineUrl(window.DocSpaceConfig?.proxy?.url, ssoLogoutUrl || "/login"),
+        combineUrl(window.ClientConfig?.proxy?.url, ssoLogoutUrl || "/login"),
       );
     } catch (e) {
       console.error(e);

@@ -56,6 +56,7 @@ const Sdk = ({
   fetchExternalLinks,
   getFilePrimaryLink,
   getFilesSettings,
+  organizationName,
 }) => {
   const [isDataReady, setIsDataReady] = useState(false);
 
@@ -81,14 +82,11 @@ const Sdk = ({
     [FilterType.FoldersOnly]: t("Common:SelectTypeFiles", {
       type: t("Translations:Folders").toLowerCase(),
     }),
-    [FilterType.OFormTemplateOnly]: t("Common:SelectTypeFiles", {
-      type: t("Files:FormsTemplates").toLowerCase(),
-    }),
-    [FilterType.OFormOnly]: t("Common:SelectTypeFiles", {
+    [FilterType.Pdf]: t("Common:SelectTypeFiles", {
       type: t("Files:Forms").toLowerCase(),
     }),
     EditorSupportedTypes: t("Common:SelectTypeFiles", {
-      type: t("AllTypesAvailableForEditing"),
+      type: t("AllTypesAvailableForEditing", { organizationName }),
     }),
   };
 
@@ -198,7 +196,8 @@ const Sdk = ({
 
       if (
         data[0].roomType === RoomsType.PublicRoom ||
-        (data[0].roomType === RoomsType.CustomRoom && data[0].shared)
+        (data[0].roomType === RoomsType.CustomRoom && data[0].shared) ||
+        (data[0].roomType === RoomsType.FormRoom && data[0].shared)
       ) {
         const links = await fetchExternalLinks(data[0].id);
 
@@ -316,8 +315,14 @@ export default inject(
     filesStore,
   }) => {
     const { login, logout } = authStore;
-    const { theme, setFrameConfig, frameConfig, getSettings, isLoaded } =
-      settingsStore;
+    const {
+      theme,
+      setFrameConfig,
+      frameConfig,
+      getSettings,
+      isLoaded,
+      organizationName,
+    } = settingsStore;
     const { loadCurrentUser, user } = userStore;
     const { updateProfileCulture } = peopleStore.targetUserStore;
     const { getIcon, getRoomsIcon, getFilesSettings } = filesSettingsStore;
@@ -340,6 +345,7 @@ export default inject(
       fetchExternalLinks,
       getFilePrimaryLink,
       getFilesSettings,
+      organizationName,
     };
   },
 )(

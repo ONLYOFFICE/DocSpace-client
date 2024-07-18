@@ -124,7 +124,7 @@ const SimpleUserRow = (props) => {
   const {
     item,
     sectionWidth,
-    contextOptionsProps,
+    getContextModel,
     checkedProps,
     onContentRowSelect,
     onUserContextClick,
@@ -146,7 +146,7 @@ const SimpleUserRow = (props) => {
     <StyledWrapper
       className={`user-item row-wrapper ${
         isChecked || isActive ? "row-selected" : ""
-      }`}
+      } ${item.id}`}
       value={value}
       checked={isChecked}
       isActive={isActive}
@@ -159,11 +159,12 @@ const SimpleUserRow = (props) => {
           onSelect={onContentRowSelect}
           checked={isChecked}
           isActive={isActive}
-          {...contextOptionsProps}
           sectionWidth={sectionWidth}
           mode={"modern"}
           className={"user-row"}
           onContextClick={onRowContextClick}
+          contextOptions={item.options}
+          getContextModel={getContextModel}
         >
           <UserContent {...props} />
         </StyledSimpleUserRow>

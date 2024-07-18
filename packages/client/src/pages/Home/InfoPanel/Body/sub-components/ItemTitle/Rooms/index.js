@@ -38,6 +38,7 @@ import { RoomIcon } from "@docspace/shared/components/room-icon";
 import RoomsContextBtn from "./context-btn";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
+import Search from "../../Search";
 
 const RoomsItemHeader = ({
   t,
@@ -52,6 +53,7 @@ const RoomsItemHeader = ({
   setBufferSelection,
   isArchive,
   hasLinks,
+  showSearchBlock,
   setShowSearchBlock,
   roomType,
 }) => {
@@ -66,6 +68,7 @@ const RoomsItemHeader = ({
   const canInviteUserInRoomAbility = security?.EditAccess;
   const showPlanetIcon =
     (selection.roomType === RoomsType.PublicRoom ||
+      selection.roomType === RoomsType.FormRoom ||
       selection.roomType === RoomsType.CustomRoom) &&
     hasLinks;
 
@@ -99,6 +102,8 @@ const RoomsItemHeader = ({
 
   return (
     <StyledTitle ref={itemTitleRef}>
+      {isRoomMembersPanel && showSearchBlock && <Search />}
+
       <div className="item-icon">
         <RoomIcon
           color={selection.logo?.color}
@@ -111,7 +116,9 @@ const RoomsItemHeader = ({
         />
       </div>
 
-      <Text className="text">{selection.title}</Text>
+      <Text className="text" title={selection.title}>
+        {selection.title}
+      </Text>
 
       <div className="info_title-icons">
         {isRoomMembersPanel && (
@@ -160,6 +167,7 @@ export default inject(
       infoPanelSelection,
       roomsView,
       setIsMobileHidden,
+      showSearchBlock,
       setShowSearchBlock,
     } = infoPanelStore;
     const { externalLinks } = publicRoomStore;
@@ -176,6 +184,7 @@ export default inject(
       roomsView,
       infoPanelSelection,
       setIsMobileHidden,
+      showSearchBlock,
       setShowSearchBlock,
 
       isGracePeriod: currentTariffStatusStore.isGracePeriod,

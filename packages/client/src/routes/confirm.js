@@ -105,7 +105,7 @@ const confirmRoutes = [
   {
     path: "LinkInvite",
     element: (
-      <ConfirmRoute doAuthenticated={AuthenticatedAction.Redirect}>
+      <ConfirmRoute doAuthenticated={AuthenticatedAction.None}>
         <CreateUserForm />
       </ConfirmRoute>
     ),
@@ -193,7 +193,7 @@ const confirmRoutes = [
   {
     path: "PortalSuspend",
     element: (
-      <ConfirmRoute>
+      <ConfirmRoute doAuthenticated={AuthenticatedAction.Logout}>
         <DeactivatePortal />
       </ConfirmRoute>
     ),
@@ -201,7 +201,7 @@ const confirmRoutes = [
   {
     path: "PortalContinue",
     element: (
-      <ConfirmRoute>
+      <ConfirmRoute doAuthenticated={AuthenticatedAction.Logout}>
         <ContinuePortal />
       </ConfirmRoute>
     ),

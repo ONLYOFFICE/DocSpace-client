@@ -99,7 +99,6 @@ export interface ProgressColorTheme extends DefaultColorThemeProps {
   themeId: ThemeId.Progress;
   percent?: number;
   $currentColorScheme?: TColorScheme;
-  theme: TTheme;
 }
 
 export interface VersionBadgeTheme extends DefaultColorThemeProps {

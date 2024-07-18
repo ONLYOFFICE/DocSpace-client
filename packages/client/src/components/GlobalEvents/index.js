@@ -115,6 +115,7 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
       withoutDialog: payload.withoutDialog ?? false,
       preview: payload.preview ?? false,
       actionEdit: payload.edit ?? false,
+      openEditor: payload.openEditor ?? true,
       onClose: () => {
         setCreateDialogProps({
           visible: false,
@@ -128,6 +129,7 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
           withoutDialog: false,
           preview: false,
           actionEdit: false,
+          openEditor: true,
         });
       },
     });
@@ -154,8 +156,13 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
     setCreateRoomDialogProps({
       title: e?.title,
       visible: true,
+      startRoomType: e?.payload?.startRoomType,
       onClose: () =>
-        setCreateRoomDialogProps({ visible: false, onClose: null }),
+        setCreateRoomDialogProps({
+          visible: false,
+          onClose: null,
+          startRoomType: undefined,
+        }),
     });
   }, []);
 

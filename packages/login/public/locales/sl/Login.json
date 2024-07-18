@@ -1,7 +1,7 @@
 {
   "CodeSubtitle": "Na {{email}} smo poslali 6-mestno kodo. Koda ima omejeno trajanje veljavnosti, vnesite jo čim prej.",
   "CodeTitle": "Koda vam je bila poslana po e-pošti",
-  "ErrorInvalidText": "V 10 sekundah boste preusmerjeni na <1>DocSpace</1>",
+  "ErrorInvalidText": "V 10 sekundah boste preusmerjeni na <1>{{productName}}</1>",
   "ExpiredCode": "Ta koda ni več veljavna. Zahtevajte novo kodo in poskusite znova.",
   "ForgotPassword": "Ste pozabili geslo?",
   "InvalidCode": "Ta koda je napačna. Poskusite znova.",
@@ -19,5 +19,6 @@
   "RegisterTitle": "Zahteva za registracijo",
   "RegistrationEmailWatermark": "Email",
   "RememberHelper": "Privzeta življenjska doba seje je 20 minut. Preverite to možnost, če jo želite nastaviti na 1 leto. Če želite nastaviti poljubno vrednost, pojdite v Nastavitve.",
-  "ResendCode": "Ponovno pošlji kodo"
+  "ResendCode": "Ponovno pošlji kodo",
+  "UserIsAlreadyRegistered": "Uporabnik <1>{{email}}</1> je že registriran v tem prostoru {{productName}}. Vnesite svoje geslo ali se vrnite nazaj in nadaljujte z drugim e-mail naslovom."
 }

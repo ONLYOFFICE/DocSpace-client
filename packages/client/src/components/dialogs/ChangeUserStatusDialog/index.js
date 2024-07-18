@@ -40,6 +40,7 @@ import { withTranslation } from "react-i18next";
 import { EmployeeStatus } from "@docspace/shared/enums";
 import ModalDialogContainer from "../ModalDialogContainer";
 import { inject, observer } from "mobx-react";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 class ChangeUserStatusDialogComponent extends React.Component {
   constructor(props) {
@@ -131,8 +132,8 @@ class ChangeUserStatusDialogComponent extends React.Component {
       header = onlyOneUser ? t("DisableUser") : t("DisableUsers");
 
       bodyText = onlyOneUser
-        ? t("DisableUserDescription")
-        : t("DisableUsersDescription");
+        ? t("DisableUserDescription", { productName: PRODUCT_NAME })
+        : t("DisableUsersDescription", { productName: PRODUCT_NAME });
 
       bodyText = bodyText + t("DisableGeneralDescription");
 
@@ -141,8 +142,8 @@ class ChangeUserStatusDialogComponent extends React.Component {
       header = onlyOneUser ? t("EnableUser") : t("EnableUsers");
 
       bodyText = onlyOneUser
-        ? t("EnableUserDescription")
-        : t("EnableUsersDescription");
+        ? t("EnableUserDescription", { productName: PRODUCT_NAME })
+        : t("EnableUsersDescription", { productName: PRODUCT_NAME });
 
       buttonLabelSave = t("Common:Enable");
     }

@@ -26,19 +26,24 @@
 
 "use server";
 
-import { cookies } from "next/headers";
+import { headers } from "next/headers";
 
-import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
-
+import {
+  createRequest,
+  getBaseUrl,
+} from "@docspace/shared/utils/next-ssr-helper";
+import { TUser } from "@docspace/shared/api/people/types";
 import {
   TCapabilities,
   TGetColorTheme,
   TGetSsoSettings,
+  TPortalCultures,
   TSettings,
   TThirdPartyProvider,
   TVersionBuild,
 } from "@docspace/shared/api/settings/types";
-import { TenantStatus } from "@docspace/shared/enums";
+import { TScope } from "@docspace/shared/utils/oauth/types";
+import { transformToClientProps } from "@docspace/shared/utils/oauth";
 
 export const checkIsAuthenticated = async () => {
   const [request] = createRequest(["/authentication"], [["", ""]], "GET");
@@ -133,7 +138,7 @@ export async function getCapabilities() {
 }
 
 export async function getSSO() {
-  const [getSSO] = createRequest([`/capabilities`], [["", ""]], "GET");
+  const [getSSO] = createRequest([`/settings/ssov2`], [["", ""]], "GET");
 
   const res = await fetch(getSSO);
 
@@ -144,35 +149,97 @@ export async function getSSO() {
   return sso.response as TGetSsoSettings;
 }
 
-export const getData = async () => {
-  const [settings, ...rest] = await Promise.all([
-    getSettings(),
-    getVersionBuild(),
-    getColorTheme(),
-  ]);
+export async function getUser() {
+  const hdrs = headers();
+  const cookie = hdrs.get("cookie");
 
-  if (
-    settings &&
-    settings !== "access-restricted" &&
-    settings !== "portal-not-found" &&
-    settings.tenantStatus !== TenantStatus.PortalRestore
-  ) {
-    const response = await Promise.all([
-      getThirdPartyProviders(),
-      getCapabilities(),
-      getSSO(),
-    ]);
+  const [getUser] = createRequest([`/people/@self`], [["", ""]], "GET");
 
-    return [settings, ...rest, ...response];
-  }
+  if (!cookie?.includes("asc_auth_key")) return undefined;
+  const userRes = await fetch(getUser);
 
-  return [settings, ...rest];
-};
+  if (userRes.status === 401) return undefined;
 
-export const updateCookie = (name: string, value: string, options: object) => {
-  "use server";
+  if (!userRes.ok) return;
 
-  const cookieStore = cookies();
+  const user = await userRes.json();
 
-  cookieStore.set(name, value, options);
-};
+  return user.response as TUser;
+}
+
+export async function getScopeList() {
+  const [getScopeList] = createRequest([`/scopes`], [["", ""]], "GET");
+
+  const scopeList = await fetch(getScopeList);
+
+  if (!scopeList.ok) return;
+
+  const scopes = await scopeList.json();
+
+  return scopes as TScope[];
+}
+
+export async function getOAuthClient(clientId: string) {
+  const [getOAuthClient] = createRequest(
+    [`/clients/${clientId}/public/info`],
+    [["", ""]],
+    "GET",
+  );
+
+  const oauthClient = await fetch(getOAuthClient);
+
+  if (!oauthClient.ok) return;
+
+  const client = await oauthClient.json();
+
+  return transformToClientProps(client);
+}
+
+export async function getPortalCultures() {
+  const [getPortalCultures] = createRequest(
+    [`/settings/cultures`],
+    [["", ""]],
+    "GET",
+  );
+
+  const res = await fetch(getPortalCultures);
+
+  if (!res.ok) return;
+
+  const cultures = await res.json();
+
+  return cultures.response as TPortalCultures;
+}
+
+export async function gitAvailablePortals(data: {
+  email: string;
+  passwordHash: string;
+}) {
+  const [gitAvailablePortals] = createRequest(
+    [`/portal/signin`],
+    [["Content-Type", "application/json"]],
+    "POST",
+    JSON.stringify(data),
+    true,
+  );
+
+  console.log(gitAvailablePortals.url);
+
+  const response = await fetch(gitAvailablePortals);
+  if (!response.ok) return null;
+
+  const { response: portals } = await response.json();
+
+  console.log(portals);
+
+  // return config;
+}
+
+export async function getConfig() {
+  const baseUrl = getBaseUrl();
+  const config = await (
+    await fetch(`${baseUrl}/static/scripts/config.json`)
+  ).json();
+
+  return config;
+}

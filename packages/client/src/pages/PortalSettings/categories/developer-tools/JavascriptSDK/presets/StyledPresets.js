@@ -39,8 +39,9 @@ export const SDKContainer = styled(Box)`
     width: 100%;
   `}
 
-  .tabs_body {
+  .tabs-body {
     height: calc(100lvh - 260px);
+    display: block;
   }
 
   .linkHelp {
@@ -170,7 +171,7 @@ export const Frame = styled(Box)`
   position: relative;
 
   border-radius: 6px;
-  border: 1px solid ${(props) => props.theme.sdkPresets.borderColor};
+  border: 1px solid ${(props) => props.theme.sdkPresets?.borderColor};
 
   width: calc(${(props) => (props.width ? props.width : "100%")} + 2px);
   height: calc(${(props) => (props.height ? props.height : "100%")} + 2px);
@@ -289,6 +290,7 @@ export const GetCodeButtonWrapper = styled.div`
   bottom: 0;
   margin-top: 32px;
   background-color: ${({ theme }) => theme.backgroundColor};
+  z-index: 1;
 
   @media ${mobile} {
     position: fixed;

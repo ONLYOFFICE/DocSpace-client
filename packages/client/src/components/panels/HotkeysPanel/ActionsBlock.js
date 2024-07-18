@@ -34,7 +34,7 @@ const ActionsBlock = ({ t, textStyles, keyTextStyles, CtrlKey }) => {
       <Row className="hotkeys_row">
         <>
           <Text {...textStyles}>{t("HotkeysOpen")}</Text>
-          <Text {...keyTextStyles}>{t("HotkeysEnterKey")}</Text>
+          <Text {...keyTextStyles}>Enter</Text>
         </>
       </Row>
       <Row className="hotkeys_row">
@@ -71,6 +71,12 @@ const ActionsBlock = ({ t, textStyles, keyTextStyles, CtrlKey }) => {
         <>
           <Text {...textStyles}>{t("HotkeysCutSelected")}</Text>
           <Text {...keyTextStyles}> {CtrlKey} + x</Text>
+        </>
+      </Row>
+      <Row className="hotkeys_row">
+        <>
+          <Text {...textStyles}>{t("HotkeysRenameSelected")}</Text>
+          <Text {...keyTextStyles}> F2</Text>
         </>
       </Row>
     </>

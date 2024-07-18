@@ -42,7 +42,11 @@ const generalRoutes = [
       {
         index: true,
         Component: () => (
-          <Navigate to="login" state={window.DocSpace?.location?.state} />
+          <Navigate
+            to="login"
+            state={window.DocSpace?.location?.state}
+            replace
+          />
         ),
       },
       {
@@ -71,6 +75,14 @@ const generalRoutes = [
       },
       {
         path: "interface-theme",
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "authorized-apps",
         element: (
           <PrivateRoute>
             <Profile />

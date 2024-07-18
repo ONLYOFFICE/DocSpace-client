@@ -43,6 +43,7 @@ import MobileView from "./Branding/MobileView";
 import { UnavailableStyles } from "../../utils/commonSettingsStyles";
 import { resetSessionStorage } from "../../utils";
 import { DeviceType } from "@docspace/shared/enums";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledComponent = styled.div`
   max-width: 700px;
@@ -124,7 +125,9 @@ const Branding = ({
           <hr />
           {isLoadedCompanyInfoSettingsData ? (
             <div className="section-description settings_unavailable">
-              {t("Settings:BrandingSectionDescription")}
+              {t("Settings:BrandingSectionDescription", {
+                productName: PRODUCT_NAME,
+              })}
             </div>
           ) : (
             <LoaderBrandingDescription />

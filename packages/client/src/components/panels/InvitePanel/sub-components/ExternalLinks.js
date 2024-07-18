@@ -39,7 +39,7 @@ import { DropDown } from "@docspace/shared/components/drop-down";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 
-import AccessSelector from "./AccessSelector";
+import AccessSelector from "../../../AccessSelector";
 
 import {
   StyledBlock,
@@ -49,6 +49,7 @@ import {
   StyledToggleButton,
   StyledDescription,
 } from "../StyledInvitePanel";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const ExternalLinks = ({
   t,
@@ -220,7 +221,7 @@ const ExternalLinks = ({
       </StyledSubHeader>
       <StyledDescription>
         {roomId === -1
-          ? t("InviteViaLinkDescriptionAccounts")
+          ? t("InviteViaLinkDescriptionAccounts", { productName: PRODUCT_NAME })
           : t("InviteViaLinkDescriptionRoom")}
       </StyledDescription>
       {externalLinksVisible && (

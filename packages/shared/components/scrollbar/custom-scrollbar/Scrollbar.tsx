@@ -27,6 +27,9 @@
 /* eslint-disable no-bitwise */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/sort-comp */
+
+"use client";
+
 import { cnb } from "cnbuilder";
 import * as React from "react";
 import { DraggableData } from "react-draggable";
@@ -47,6 +50,7 @@ import {
 } from "./types";
 import * as util from "./util";
 import { isBrowser, renderDivWithRenderer } from "./util";
+import ScrollbarContext from "./ScrollbarContext";
 
 let pageZoomLevel: number = isBrowser ? zoomLevel() : 1;
 if (isBrowser) {
@@ -144,14 +148,7 @@ export type ScrollbarState = {
   isRTL?: boolean;
 };
 
-export type ScrollbarContextValue = { parentScrollbar: Scrollbar | null };
-
-export const ScrollbarContext: React.Context<ScrollbarContextValue> =
-  React.createContext({
-    parentScrollbar: null,
-  } as ScrollbarContextValue);
-
-class Scrollbar extends React.Component<ScrollbarProps, ScrollbarState> {
+export class Scrollbar extends React.Component<ScrollbarProps, ScrollbarState> {
   // eslint-disable-next-line react/static-property-placement
   static contextType = ScrollbarContext;
 

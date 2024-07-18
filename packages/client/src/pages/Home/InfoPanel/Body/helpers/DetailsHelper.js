@@ -37,8 +37,8 @@ import { decode } from "he";
 
 import {
   connectedCloudsTypeTitleTranslation as getProviderTranslation,
-  getDefaultRoomName,
   getFileTypeName,
+  getRoomTypeName,
 } from "@docspace/client/src/helpers/filesUtils";
 import CommentEditor from "../sub-components/CommentEditor";
 
@@ -70,7 +70,7 @@ const tagList = (tags, selectTag) => (
         key={i}
         className="property-tag"
         label={tag}
-        onClick={() => selectTag(tag)}
+        onClick={() => selectTag({ label: tag })}
       />
     ))}
   </div>
@@ -278,12 +278,16 @@ class DetailsHelper {
   getAuthorDecoration = (byField = "createdBy") => {
     const onClick = () => this.openUser(this.item[byField], this.navigate);
 
+    const isAnonim = this.item[byField]?.isAnonim;
     const displayName = this.item[byField]?.displayName;
-    const name = displayName ? decode(displayName) : "";
+
+    let name = displayName ? decode(displayName) : "";
+
+    if (isAnonim) name = this.t("Common:Anonymous");
 
     //console.log("getAuthorDecoration", { name, displayName });
 
-    return this.isVisitor || this.isCollaborator
+    return this.isVisitor || this.isCollaborator || isAnonim
       ? text(name)
       : link(name, onClick);
   };
@@ -295,7 +299,7 @@ class DetailsHelper {
   getItemType = () => {
     return text(
       this.item.isRoom
-        ? getDefaultRoomName(this.item.roomType, this.t)
+        ? getRoomTypeName(this.item.roomType, this.t)
         : getFileTypeName(this.item.fileType),
     );
   };

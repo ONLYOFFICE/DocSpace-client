@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable, runInAction } from "mobx";
+import { TFunction } from "i18next";
 import * as groupsApi from "@docspace/shared/api/groups";
 import { Events } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
@@ -39,6 +40,7 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import AccountsFilter from "@docspace/shared/api/people/filter";
 import api from "@docspace/shared/api";
 import { TGroup } from "@docspace/shared/api/groups/types";
+import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 
 class GroupsStore {
   authStore;
@@ -109,7 +111,7 @@ class GroupsStore {
     window.history.replaceState(
       "",
       "",
-      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, newPath),
+      combineUrl(window.ClientConfig?.proxy?.url, config.homepage, newPath),
     );
   };
 
@@ -174,7 +176,7 @@ class GroupsStore {
     window.history.replaceState(
       "",
       "",
-      combineUrl(window.DocSpaceConfig?.proxy?.url, config.homepage, newPath),
+      combineUrl(window.ClientConfig?.proxy?.url, config.homepage, newPath),
     );
   };
 
@@ -362,7 +364,15 @@ class GroupsStore {
     this.bufferSelection = null;
     this.selected = selected;
     this.setSelection(this.getGroupsBySelected(selected));
+
+    this.peopleStore.accountsHotkeysStore.setHotkeyCaret(null);
     return selected;
+  };
+
+  selectAll = () => {
+    this.bufferSelection = null;
+
+    if (this.groups?.length) this.setSelection(this.groups);
   };
 
   getGroupsBySelected = (selected: "all" | "none") => {
@@ -466,6 +476,47 @@ class GroupsStore {
     }
   };
 
+  get hasGroupsToRemove() {
+    if (this.peopleStore.userStore.user.isRoomAdmin) {
+      return false;
+    }
+
+    const noLdapItems = this.selection.filter((item) => !item?.isLDAP);
+
+    return noLdapItems.length > 0;
+  }
+
+  getMultipleGroupsContextOptions = (t: TFunction) => {
+    const { setDeleteGroupDialogVisible } = this.peopleStore.dialogStore;
+
+    return [
+      {
+        id: "info",
+        key: "group-info",
+        className: "group-menu_drop-down",
+        label: t("Common:Info"),
+        title: t("Common:Info"),
+        icon: InfoReactSvgUrl,
+        onClick: () => this.infoPanelStore.setIsVisible(true),
+      },
+      {
+        key: "separator",
+        isSeparator: true,
+        disabled: !this.hasGroupsToRemove,
+      },
+      {
+        id: "delete-group",
+        key: "delete-group",
+        className: "group-menu_drop-down",
+        label: t("Common:Delete"),
+        title: t("Common:Delete"),
+        icon: TrashReactSvgUrl,
+        onClick: () => setDeleteGroupDialogVisible(true),
+        disabled: !this.hasGroupsToRemove,
+      },
+    ];
+  };
+
   getGroupContextOptions = (
     t,
     item,
@@ -475,19 +526,20 @@ class GroupsStore {
     const { isRoomAdmin } = this.peopleStore.userStore.user;
 
     return [
-      !isRoomAdmin && {
-        id: "edit-group",
-        key: "edit-group",
-        className: "group-menu_drop-down",
-        label: t("PeopleTranslations:EditGroup"),
-        title: t("PeopleTranslations:EditGroup"),
-        icon: PencilReactSvgUrl,
-        onClick: () => {
-          const event = new Event(Events.GROUP_EDIT);
-          event.item = item;
-          window.dispatchEvent(event);
+      !isRoomAdmin &&
+        !item?.isLDAP && {
+          id: "edit-group",
+          key: "edit-group",
+          className: "group-menu_drop-down",
+          label: t("PeopleTranslations:EditGroup"),
+          title: t("PeopleTranslations:EditGroup"),
+          icon: PencilReactSvgUrl,
+          onClick: () => {
+            const event = new Event(Events.GROUP_EDIT);
+            event.item = item;
+            window.dispatchEvent(event);
+          },
         },
-      },
       !forInfoPanel && {
         id: "info",
         key: "group-info",
@@ -507,20 +559,28 @@ class GroupsStore {
           this.infoPanelStore.setIsVisible(true);
         },
       },
-      !isRoomAdmin && {
-        key: "separator",
-        isSeparator: true,
-      },
-      !isRoomAdmin && {
-        id: "delete-group",
-        key: "delete-group",
-        className: "group-menu_drop-down",
-        label: t("Common:Delete"),
-        title: t("Common:Delete"),
-        icon: TrashReactSvgUrl,
-        onClick: () => this.onDeleteClick(item.name),
-      },
+      !isRoomAdmin &&
+        !item?.isLDAP && {
+          key: "separator",
+          isSeparator: true,
+        },
+      !isRoomAdmin &&
+        !item?.isLDAP && {
+          id: "delete-group",
+          key: "delete-group",
+          className: "group-menu_drop-down",
+          label: t("Common:Delete"),
+          title: t("Common:Delete"),
+          icon: TrashReactSvgUrl,
+          onClick: () => this.onDeleteClick(item.name),
+        },
     ];
+  };
+
+  getModel = (t: TFunction, item: TGroup) => {
+    return this.selection.length > 1
+      ? this.getMultipleGroupsContextOptions(t)
+      : this.getGroupContextOptions(t, item);
   };
 
   clearInsideGroup = () => {
@@ -534,18 +594,29 @@ class GroupsStore {
     groupId: string,
     withBackURL: boolean,
     tempTitle: string,
+    e: React.MouseEvent<Element, MouseEvent>,
   ) => {
+    const { setIsSectionBodyLoading, setIsSectionFilterLoading } =
+      this.clientLoadingStore;
+
+    const url = `/accounts/groups/${groupId}`;
+
+    if (openingNewTab(url, e)) return;
+
     this.setSelection([]);
     this.setBufferSelection(null);
     this.setCurrentGroup(null);
     this.setInsideGroupTempTitle(tempTitle);
+
+    setIsSectionFilterLoading(true);
+    setIsSectionBodyLoading(true);
 
     if (withBackURL) {
       const url = `${window.location.pathname}${window.location.search}`;
       this.setInsideGroupBackUrl(url);
     }
 
-    window.DocSpace.navigate(`/accounts/groups/${groupId}`);
+    window.DocSpace.navigate(url);
   };
 
   updateGroup = async (
@@ -581,6 +652,7 @@ class GroupsStore {
           this.insideGroupFilter.clone(),
         );
         this.peopleStore.usersStore.setUsers(members.items);
+        this.setInsideGroupTempTitle(res.name);
       }
 
       if (infoPanelSelection?.id === res.id) {

@@ -42,20 +42,20 @@ const useError = ({ error, editorUrl }: UseErrorProps) => {
       sessionStorage.setItem("referenceUrl", window.location.href);
 
       window.open(
-        combineUrl(window.DocSpaceConfig?.proxy?.url, "/login"),
+        combineUrl(window.ClientConfig?.proxy?.url, "/login"),
         "_self",
       );
     }
     if (error?.message === "unavailable") {
       window.open(
-        combineUrl(window.DocSpaceConfig?.proxy?.url, "/unavailable"),
+        combineUrl(window.ClientConfig?.proxy?.url, "/unavailable"),
         "_self",
       );
     }
 
     if (error?.message === "restore-backup") {
       window.open(
-        combineUrl(window.DocSpaceConfig?.proxy?.url, "/preparation-portal"),
+        combineUrl(window.ClientConfig?.proxy?.url, "/preparation-portal"),
         "_self",
       );
     }

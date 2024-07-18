@@ -37,16 +37,10 @@ const StyledTagList = styled.div`
   width: 100%;
 
   .set_room_params-tag_input-tag {
-    background: ${(props) =>
-      props.theme.createEditRoomDialog.tagInput.tagBackground};
     padding: 6px 8px;
     border-radius: 3px;
     margin: 0;
 
-    :hover {
-      background: ${(props) =>
-        props.theme.createEditRoomDialog.tagInput.tagHoverBackground};
-    }
     .tag-icon {
       ${({ theme }) =>
         theme.interfaceDirection === "rtl"

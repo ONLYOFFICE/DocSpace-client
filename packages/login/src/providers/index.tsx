@@ -30,7 +30,6 @@ import React from "react";
 import { I18nextProvider } from "react-i18next";
 
 import { ThemeProvider } from "@docspace/shared/components/theme-provider";
-import ErrorBoundary from "@docspace/shared/components/error-boundary/ErrorBoundary";
 import { TFirebaseSettings } from "@docspace/shared/api/settings/types";
 import FirebaseHelper from "@docspace/shared/utils/firebase";
 import { TUser } from "@docspace/shared/api/people/types";
@@ -40,15 +39,14 @@ import { Base, Dark } from "@docspace/shared/themes";
 import { TDataContext } from "@/types";
 import useI18N from "@/hooks/useI18N";
 import useTheme from "@/hooks/useTheme";
-import useDeviceType from "@/hooks/useDeviceType";
 
 import pkgFile from "../../package.json";
+import ErrorBoundaryWrapper from "./ErrorBoundary";
 
 export const Providers = ({
   children,
   value,
   timers,
-  api_host,
   redirectURL,
 }: {
   children: React.ReactNode;
@@ -60,43 +58,33 @@ export const Providers = ({
   );
 
   React.useEffect(() => {
-    console.log("Layout API requests timings:", { ...timers });
-    console.log("API_HOST: ", api_host);
-  }, [api_host, timers]);
-
-  React.useEffect(() => {
-    if (redirectURL) window.location.replace("/");
+    if (redirectURL) window.location.replace(redirectURL);
   }, [redirectURL]);
 
-  const { currentDeviceType } = useDeviceType();
+  React.useEffect(() => {
+    console.log("Timers:", { ...timers });
+  }, [timers]);
 
   const { i18n } = useI18N({
     settings: value.settings,
   });
 
-  const { theme } = useTheme({
+  const { theme, currentColorTheme } = useTheme({
     colorTheme: value.colorTheme,
-    settings: value.settings,
+    systemTheme: value.systemTheme,
+    i18n,
   });
 
-  const currentTheme =
-    typeof window !== "undefined" || !value.systemTheme
-      ? theme
-      : value.systemTheme === ThemeKeys.BaseStr
-        ? Base
-        : Dark;
-
   return (
-    <ThemeProvider theme={currentTheme}>
+    <ThemeProvider theme={theme} currentColorScheme={currentColorTheme}>
       <I18nextProvider i18n={i18n}>
-        <ErrorBoundary
+        <ErrorBoundaryWrapper
           user={{} as TUser}
           version={pkgFile.version}
           firebaseHelper={firebaseHelper}
-          currentDeviceType={currentDeviceType}
         >
           {children}
-        </ErrorBoundary>
+        </ErrorBoundaryWrapper>
       </I18nextProvider>
     </ThemeProvider>
   );

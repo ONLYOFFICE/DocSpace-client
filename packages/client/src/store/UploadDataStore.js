@@ -44,6 +44,7 @@ import {
   checkIsFileExist,
 } from "@docspace/shared/api/files";
 import { toastr } from "@docspace/shared/components/toast";
+import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
 
 import {
   isMobile as isMobileUtils,
@@ -1799,7 +1800,10 @@ class UploadDataStore {
     let finished = data.finished;
 
     while (!finished) {
-      const item = await this.getOperationProgress(data.id);
+      const item = await getOperationProgress(
+        data.id,
+        getUnexpectedErrorText(),
+      );
       operationItem = item;
 
       progress = item ? item.progress : 100;
@@ -1915,29 +1919,6 @@ class UploadDataStore {
 
       setTimeout(() => clearSecondaryProgressData(pbData.operationId), TIMEOUT);
     }
-  };
-
-  getOperationProgress = async (id) => {
-    const promise = new Promise((resolve, reject) => {
-      setTimeout(async () => {
-        try {
-          await getProgress().then((res) => {
-            if (!res || res.length === 0) {
-              reject(getUnexpectedErrorText());
-            }
-
-            const currentItem = res.find((x) => x.id === id);
-            if (currentItem?.error) {
-              reject(currentItem.error);
-            }
-            resolve(currentItem);
-          });
-        } catch (error) {
-          reject(error);
-        }
-      }, 1000);
-    });
-    return promise;
   };
 
   clearActiveOperations = (fileIds = [], folderIds = []) => {

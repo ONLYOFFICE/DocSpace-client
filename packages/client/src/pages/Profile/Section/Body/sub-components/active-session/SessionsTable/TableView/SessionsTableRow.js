@@ -74,6 +74,10 @@ const StyledTableRow = styled(TableRow)`
             margin-left: 8px;
           `}
   }
+
+  .remove-cell {
+    justify-content: flex-end;
+  }
 `;
 
 StyledTableRow.defaultProps = { theme: Base };
@@ -82,7 +86,6 @@ const SessionsTableRow = (props) => {
   const {
     item,
     hideColumns,
-    standalone,
     currentSession,
     setPlatformModalData,
     setLogoutDialogVisible,
@@ -125,41 +128,37 @@ const SessionsTableRow = (props) => {
 
       <TableCell>
         <Text className="session-info" truncate>
-          {!standalone ? (
+          {(country || city) && (
             <>
-              {country}, {city}
+              {country}
+              {country && city && ", "}
+              {city}
               <span className="divider"></span>
-              {ip}
             </>
-          ) : (
-            <>{ip}</>
           )}
+          {ip}
         </Text>
       </TableCell>
 
       {showRemoveIcon && (
-        <TableCell>
-          <Box style={{ marginLeft: "8px" }}>
-            <IconButton
-              size={20}
-              iconName={RemoveSessionSvgUrl}
-              isClickable
-              onClick={onRemoveClick}
-            />
-          </Box>
+        <TableCell className="remove-cell">
+          <IconButton
+            size={20}
+            iconName={RemoveSessionSvgUrl}
+            isClickable
+            onClick={onRemoveClick}
+          />
         </TableCell>
       )}
     </StyledTableRow>
   );
 };
 
-export default inject(({ setup, settingsStore }) => {
-  const { standalone } = settingsStore;
+export default inject(({ setup }) => {
   const { currentSession, setLogoutDialogVisible, setPlatformModalData } =
     setup;
 
   return {
-    standalone,
     currentSession,
     setLogoutDialogVisible,
     setPlatformModalData,

@@ -31,7 +31,7 @@ import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { InputBlock } from "@docspace/shared/components/input-block";
-import { globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes/globalColors";
 
 const iconColor = globalColors.gray;
 

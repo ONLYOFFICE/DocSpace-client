@@ -24,31 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import debounce from "lodash.debounce";
 import { Box } from "@docspace/shared/components/box";
-import { TextInput } from "@docspace/shared/components/text-input";
-import { Textarea } from "@docspace/shared/components/textarea";
 import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
-import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import { SelectedItem } from "@docspace/shared/components/selected-item";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
-import { objectToGetParams, loadScript } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
 
-import GetCodeDialog from "../sub-components/GetCodeDialog";
-import CodeBlock from "../sub-components/CodeBlock";
-import { Button } from "@docspace/shared/components/button";
 import { TooltipContent } from "../sub-components/TooltipContent";
 import { useNavigate } from "react-router-dom";
-import { Link } from "@docspace/shared/components/link";
 import FilesFilter from "@docspace/shared/api/files/filter";
 
 import LeftMenuUrl from "PUBLIC_DIR/images/sdk-presets_left-menu.react.svg?url";
@@ -64,30 +55,41 @@ import ActionButtonDarkUrl from "PUBLIC_DIR/images/sdk-presets_action-button_dar
 import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
 import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png?url";
 
-const showPreviewThreshold = 720;
-
 import { FilterBlock } from "../sub-components/FilterBlock";
+import { WidthSetter } from "../sub-components/WidthSetter";
+import { HeightSetter } from "../sub-components/HeightSetter";
+import { FrameIdSetter } from "../sub-components/FrameIdSetter";
+import { PresetWrapper } from "../sub-components/PresetWrapper";
+import { SharedLinkHint } from "../sub-components/SharedLinkHint";
+import { SearchTerm } from "../sub-components/SearchTerm";
+import { ItemsCountBlock } from "../sub-components/ItemsCountBlock";
+import { DisplayPageBlock } from "../sub-components/DisplayPageBlock";
+import { PreviewBlock } from "../sub-components/PreviewBlock";
+
+import { loadFrame } from "../utils";
 
 import {
-  SDKContainer,
+  dataDimensions,
+  defaultWidthDimension,
+  defaultHeightDimension,
+  defaultWidth,
+  defaultHeight,
+} from "../constants";
+
+import {
   Controls,
-  CategoryHeader,
   CategorySubHeader,
-  CategoryDescription,
   ControlsGroup,
   LabelGroup,
   ControlsSection,
   Frame,
   Container,
-  RowContainer,
   ColumnContainer,
-  Preview,
-  GetCodeButtonWrapper,
   FilesSelectorInputWrapper,
   SelectedItemsContainer,
   CheckboxGroup,
-  CodeWrapper,
 } from "./StyledPresets";
+import { PRODUCT_NAME, SDK_SCRIPT_URL } from "@docspace/shared/constants";
 
 const Manager = (props) => {
   const { t, setDocumentTitle, fetchExternalLinks, theme, currentColorScheme } =
@@ -95,8 +97,6 @@ const Manager = (props) => {
   const navigate = useNavigate();
 
   setDocumentTitle(t("JavascriptSdk"));
-
-  const scriptUrl = `${window.location.origin}/static/scripts/sdk/1.0.0/api.js`;
 
   const dataSortBy = [
     { key: "DateAndTime", label: t("Common:LastModifiedDate"), default: true },
@@ -112,11 +112,6 @@ const Manager = (props) => {
     { key: "ascending", label: t("Ascending") },
   ];
 
-  const dataDimensions = [
-    { key: "percent", label: "%", default: true },
-    { key: "pixel", label: "px" },
-  ];
-
   const columnDisplayOptions = [
     { value: "default", label: t("DefaultColumnsOption") },
     { value: "custom", label: t("SetItUp") },
@@ -127,23 +122,8 @@ const Manager = (props) => {
     { key: "Activity", label: t("Files:ByLastModified") },
   ]);
 
-  const settingsTranslations = {
-    password: t("Common:Password").toLowerCase(),
-    denyDownload: t("FileContentCopy").toLowerCase(),
-    expirationDate: t("LimitByTime").toLowerCase(),
-  };
-
   const [sortBy, setSortBy] = useState(dataSortBy[0]);
   const [sortOrder, setSortOrder] = useState(dataSortOrder[0]);
-  const [widthDimension, setWidthDimension] = useState(dataDimensions[0]);
-  const [heightDimension, setHeightDimension] = useState(dataDimensions[0]);
-  const [width, setWidth] = useState("100");
-  const [height, setHeight] = useState("100");
-  const [withSubfolders, setWithSubfolders] = useState(false);
-  const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
-  const [showPreview, setShowPreview] = useState(
-    window.innerWidth > showPreviewThreshold,
-  );
   const [sharedLinks, setSharedLinks] = useState(null);
   const [columnDisplay, setColumnDisplay] = useState(
     columnDisplayOptions[0].value,
@@ -158,8 +138,8 @@ const Manager = (props) => {
 
   const [config, setConfig] = useState({
     mode: "manager",
-    width: `${width}${widthDimension.label}`,
-    height: `${height}${heightDimension.label}`,
+    width: `${defaultWidth}${defaultWidthDimension.label}`,
+    height: `${defaultHeight}${defaultHeightDimension.label}`,
     frameId: "ds-frame",
     showHeader: true,
     showTitle: true,
@@ -178,59 +158,25 @@ const Manager = (props) => {
     },
   });
 
-  const params = objectToGetParams(config);
-
   const frameId = config.frameId || "ds-frame";
 
   const destroyFrame = () => {
     window.DocSpace?.SDK?.frames[frameId]?.destroyFrame();
   };
 
-  const loadFrame = debounce(() => {
-    const script = document.getElementById("integration");
-
-    if (script) {
-      script.remove();
-    }
-
-    const params = objectToGetParams(config);
-
-    loadScript(`${scriptUrl}${params}`, "integration", () =>
-      window.DocSpace.SDK.initFrame(config),
-    );
-  }, 500);
+  const loadCurrentFrame = () => loadFrame(config, SDK_SCRIPT_URL);
 
   useEffect(() => {
-    loadFrame();
+    loadCurrentFrame();
     return () => destroyFrame();
   });
-  
+
   useEffect(() => {
     const scroll = document.getElementsByClassName("section-scroll")[0];
     if (scroll) {
       scroll.scrollTop = 0;
     }
   }, []);
-
-  const onChangeTab = () => {
-    loadFrame();
-  };
-
-  const onChangeWidth = (e) => {
-    setConfig((config) => {
-      return { ...config, width: `${e.target.value}${widthDimension.label}` };
-    });
-
-    setWidth(e.target.value);
-  };
-
-  const onChangeHeight = (e) => {
-    setConfig((config) => {
-      return { ...config, height: `${e.target.value}${heightDimension.label}` };
-    });
-
-    setHeight(e.target.value);
-  };
 
   const onChangeFolderId = async (id, publicInPath) => {
     let newConfig = { id, requestToken: null, rootPath: "/rooms/shared/" };
@@ -284,20 +230,6 @@ const Manager = (props) => {
     });
   };
 
-  const onChangeFrameId = (e) => {
-    setConfig((config) => {
-      return { ...config, frameId: e.target.value };
-    });
-  };
-
-  const onChangeWithSubfolders = (e) => {
-    setConfig((config) => {
-      return { ...config, withSubfolders: !withSubfolders };
-    });
-
-    setWithSubfolders(!withSubfolders);
-  };
-
   const onChangeSortBy = (item) => {
     setConfig((config) => {
       return { ...config, filter: { ...config.filter, sortby: item.key } };
@@ -312,22 +244,6 @@ const Manager = (props) => {
     });
 
     setSortOrder(item);
-  };
-
-  const onChangeWidthDimension = (item) => {
-    setConfig((config) => {
-      return { ...config, width: `${width}${item.label}` };
-    });
-
-    setWidthDimension(item);
-  };
-
-  const onChangeHeightDimension = (item) => {
-    setConfig((config) => {
-      return { ...config, height: `${height}${item.label}` };
-    });
-
-    setHeightDimension(item);
   };
 
   const onChangeShowHeader = (e) => {
@@ -366,27 +282,6 @@ const Manager = (props) => {
     });
   };
 
-  const onChangeCount = (e) => {
-    setConfig((config) => {
-      return { ...config, filter: { ...config.filter, count: e.target.value } };
-    });
-  };
-
-  const onChangePage = (e) => {
-    setConfig((config) => {
-      return { ...config, filter: { ...config.filter, page: e.target.value } };
-    });
-  };
-
-  const onChangeSearch = (e) => {
-    setConfig((config) => {
-      return {
-        ...config,
-        filter: { ...config.filter, filterValue: e.target.value },
-      };
-    });
-  };
-
   const changeColumnsOption = (e) => {
     if (e.target.value === "default") {
       setConfig((config) => ({
@@ -401,10 +296,6 @@ const Manager = (props) => {
     }
     setColumnDisplay(e.target.value);
   };
-
-  const openGetCodeModal = () => setIsGetCodeDialogOpened(true);
-
-  const closeGetCodeModal = () => setIsGetCodeDialogOpened(false);
 
   const onColumnSelect = (option) => {
     setColumnsOptions((prevColumnsOptions) =>
@@ -442,138 +333,55 @@ const Manager = (props) => {
     navigate(`/rooms/shared/${id}/filter?${filter.toUrlParams()}`);
   };
 
-  const onResize = () => {
-    const isEnoughWidthForPreview = window.innerWidth > showPreviewThreshold;
-    if (isEnoughWidthForPreview !== showPreview)
-      setShowPreview(isEnoughWidthForPreview);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", onResize);
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  }, [showPreview]);
-
-  const codeBlock = `<div id="${frameId}">Fallback text</div>\n<script src="${scriptUrl}${params}"></script>`;
+  const redirectToSelectedRoom = () => navigateRoom(config.id);
 
   const preview = (
     <Frame
-      width={
-        config.id !== undefined && widthDimension.label === "px"
-          ? width + widthDimension.label
-          : undefined
-      }
-      height={
-        config.id !== undefined && heightDimension.label === "px"
-          ? height + heightDimension.label
-          : undefined
-      }
+      width={config.width.includes("px") ? config.width : undefined}
+      height={config.height.includes("px") ? config.height : undefined}
       targetId={frameId}
     >
       <Box id={frameId}></Box>
     </Frame>
   );
 
-  const code = (
-    <CodeWrapper height="fit-content">
-      <CategorySubHeader className="copy-window-code">
-        {`HTML ${t("CodeTitle")}`}
-      </CategorySubHeader>
-      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
-        {t("HtmlCodeDescription")}
-      </Text>
-      <Textarea value={codeBlock} heightTextArea={153} />
-      <CategorySubHeader className="copy-window-code">
-        {`JavaScript ${t("CodeTitle")}`}
-      </CategorySubHeader>
-      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
-        {t("JavaScriptCodeDescription")}
-      </Text>
-      <CodeBlock config={config} />
-    </CodeWrapper>
-  );
-
-  const dataTabs = [
-    {
-      key: "preview",
-      title: t("Common:Preview"),
-      content: preview,
-    },
-    {
-      key: "code",
-      title: t("Code"),
-      content: code,
-    },
-  ];
-
   return (
-    <SDKContainer>
-      <CategoryDescription>
-        <Text className="sdk-description">{t("CustomDescription")}</Text>
-      </CategoryDescription>
-      <CategoryHeader>{t("CreateSampleDocSpace")}</CategoryHeader>
+    <PresetWrapper
+      description={t("CustomDescription", { productName: PRODUCT_NAME })}
+      header={t("CreateSamplePortal", { productName: PRODUCT_NAME })}
+    >
       <Container>
-        {showPreview && (
-          <Preview>
-            <TabsContainer onSelect={onChangeTab} elements={dataTabs} />
-          </Preview>
-        )}
+        <PreviewBlock
+          t={t}
+          loadCurrentFrame={loadCurrentFrame}
+          preview={preview}
+          theme={theme}
+          frameId={frameId}
+          scriptUrl={SDK_SCRIPT_URL}
+          config={config}
+        />
         <Controls>
           <ControlsSection>
             <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
-            <ControlsGroup>
-              <Label className="label" text={t("EmbeddingPanel:Width")} />
-              <RowContainer combo>
-                <TextInput
-                  onChange={onChangeWidth}
-                  placeholder={t("EnterWidth")}
-                  value={width}
-                  tabIndex={2}
-                />
-                <ComboBox
-                  size="content"
-                  scaled={false}
-                  scaledOptions={true}
-                  onSelect={onChangeWidthDimension}
-                  options={dataDimensions}
-                  selectedOption={widthDimension}
-                  displaySelectedOption
-                  directionY="bottom"
-                />
-              </RowContainer>
-            </ControlsGroup>
-            <ControlsGroup>
-              <Label className="label" text={t("EmbeddingPanel:Height")} />
-              <RowContainer combo>
-                <TextInput
-                  onChange={onChangeHeight}
-                  placeholder={t("EnterHeight")}
-                  value={height}
-                  tabIndex={3}
-                />
-                <ComboBox
-                  size="content"
-                  scaled={false}
-                  scaledOptions={true}
-                  onSelect={onChangeHeightDimension}
-                  options={dataDimensions}
-                  selectedOption={heightDimension}
-                  displaySelectedOption
-                  directionY="bottom"
-                />
-              </RowContainer>
-            </ControlsGroup>
-            <ControlsGroup>
-              <Label className="label" text={t("FrameId")} />
-              <TextInput
-                scale={true}
-                onChange={onChangeFrameId}
-                placeholder={t("EnterId")}
-                value={config.frameId}
-                tabIndex={4}
-              />
-            </ControlsGroup>
+            <WidthSetter
+              t={t}
+              setConfig={setConfig}
+              dataDimensions={dataDimensions}
+              defaultDimension={defaultWidthDimension}
+              defaultWidth={defaultWidth}
+            />
+            <HeightSetter
+              t={t}
+              setConfig={setConfig}
+              dataDimensions={dataDimensions}
+              defaultDimension={defaultHeightDimension}
+              defaultHeight={defaultHeight}
+            />
+            <FrameIdSetter
+              t={t}
+              defaultFrameId={config.frameId}
+              setConfig={setConfig}
+            />
           </ControlsSection>
 
           <ControlsSection>
@@ -696,7 +504,9 @@ const Manager = (props) => {
                   tooltipContent={
                     <TooltipContent
                       title={t("Header")}
-                      description={t("HeaderDescription")}
+                      description={t("HeaderDescription", {
+                        productName: PRODUCT_NAME,
+                      })}
                       img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
                     />
                   }
@@ -736,13 +546,13 @@ const Manager = (props) => {
                     size={12}
                     tooltipContent={
                       <Text fontSize="12px">
-                        {t("CreateEditRoomDialog:PublicRoomDescription")}
+                        {t("Common:PublicRoomDescription")}
                       </Text>
                     }
                   />
                 </LabelGroup>
                 <ComboBox
-                  scaled={true}
+                  scaled
                   onSelect={onChangeSharedLink}
                   options={sharedLinks}
                   selectedOption={selectedLink}
@@ -750,80 +560,13 @@ const Manager = (props) => {
                   directionY="bottom"
                 />
 
-                {selectedLink && selectedLink.settings.length === 1 ? (
-                  <div>
-                    <Text
-                      className="linkHelp"
-                      fontSize="12px"
-                      lineHeight="16px"
-                    >
-                      {t("LinkSetDescription", {
-                        parameter:
-                          settingsTranslations[selectedLink.settings[0]],
-                      })}
-                    </Text>
-                    <Link
-                      color={currentColorScheme?.main?.accent}
-                      fontSize="12px"
-                      lineHeight="16px"
-                      onClick={() => navigateRoom(config.id)}
-                    >
-                      {" "}
-                      {t("GoToRoom")}.
-                    </Link>
-                  </div>
-                ) : selectedLink.settings.length === 2 ? (
-                  <div>
-                    <Text
-                      className="linkHelp"
-                      fontSize="12px"
-                      lineHeight="16px"
-                    >
-                      {t("LinkSetDescription2", {
-                        parameter1:
-                          settingsTranslations[selectedLink.settings[0]],
-                        parameter2:
-                          settingsTranslations[selectedLink.settings[1]],
-                      })}
-                    </Text>
-                    <Link
-                      color={currentColorScheme?.main?.accent}
-                      fontSize="12px"
-                      lineHeight="16px"
-                      onClick={() => navigateRoom(config.id)}
-                    >
-                      {" "}
-                      {t("GoToRoom")}.
-                    </Link>
-                  </div>
-                ) : selectedLink.settings.length === 3 ? (
-                  <div>
-                    <Text
-                      className="linkHelp"
-                      fontSize="12px"
-                      lineHeight="16px"
-                    >
-                      {t("LinkSetDescription3", {
-                        parameter1:
-                          settingsTranslations[selectedLink.settings[0]],
-                        parameter2:
-                          settingsTranslations[selectedLink.settings[1]],
-                        parameter3:
-                          settingsTranslations[selectedLink.settings[2]],
-                      })}
-                    </Text>
-                    <Link
-                      color={currentColorScheme?.main?.accent}
-                      fontSize="12px"
-                      lineHeight="16px"
-                      onClick={() => navigateRoom(config.id)}
-                    >
-                      {" "}
-                      {t("GoToRoom")}.
-                    </Link>
-                  </div>
-                ) : (
-                  <></>
+                {selectedLink && (
+                  <SharedLinkHint
+                    t={t}
+                    linkSettings={selectedLink.settings}
+                    redirectToSelectedRoom={redirectToSelectedRoom}
+                    currentColorScheme={currentColorScheme}
+                  />
                 )}
               </ControlsGroup>
             )}
@@ -834,29 +577,14 @@ const Manager = (props) => {
               <FilterBlock t={t} config={config} setConfig={setConfig} />
             </ColumnContainer>
             <ControlsGroup>
-              <Label className="label" text={t("SearchTerm")} />
-              <ColumnContainer>
-                <TextInput
-                  scale={true}
-                  onChange={onChangeSearch}
-                  placeholder={t("Common:Search")}
-                  value={config.filter.filterValue}
-                  tabIndex={5}
-                />
-                <Checkbox
-                  className="checkbox"
-                  label={t("Files:WithSubfolders")}
-                  onChange={onChangeWithSubfolders}
-                  isChecked={withSubfolders}
-                />
-              </ColumnContainer>
+              <SearchTerm t={t} config={config} setConfig={setConfig} />
             </ControlsGroup>
             <ControlsGroup>
               <Label className="label" text={t("Common:SortBy")} />
               <ComboBox
                 onSelect={onChangeSortBy}
                 options={dataSortBy}
-                scaled={true}
+                scaled
                 selectedOption={sortBy}
                 displaySelectedOption
                 directionY="top"
@@ -867,42 +595,18 @@ const Manager = (props) => {
               <ComboBox
                 onSelect={onChangeSortOrder}
                 options={dataSortOrder}
-                scaled={true}
+                scaled
                 selectedOption={sortOrder}
                 displaySelectedOption
                 directionY="top"
               />
             </ControlsGroup>
-            <ControlsGroup>
-              <LabelGroup>
-                <Label className="label" text={t("ItemsCount")} />
-                <HelpButton
-                  offsetRight={0}
-                  size={12}
-                  tooltipContent={
-                    <Text fontSize="12px">{t("ItemsCountDescription")}</Text>
-                  }
-                />
-              </LabelGroup>
-              <TextInput
-                scale={true}
-                onChange={onChangeCount}
-                placeholder={t("EnterCount")}
-                value={config.filter.count}
-                tabIndex={6}
-              />
-            </ControlsGroup>
-            <ControlsGroup>
-              <Label className="label" text={t("Page")} />
-              <TextInput
-                scale={true}
-                onChange={onChangePage}
-                placeholder={t("EnterPage")}
-                value={config.filter.page}
-                isDisabled={!config.filter.count}
-                tabIndex={7}
-              />
-            </ControlsGroup>
+            <ItemsCountBlock
+              t={t}
+              count={config.filter.count}
+              setConfig={setConfig}
+            />
+            <DisplayPageBlock t={t} config={config} setConfig={setConfig} />
             <Label className="label" text={t("DisplayColumns")} />
             <RadioButtonGroup
               orientation="vertical"
@@ -922,7 +626,7 @@ const Manager = (props) => {
                       label: t("Common:SelectAction"),
                     }
                   }
-                  scaled={true}
+                  scaled
                   directionY="top"
                   selectedOption={{
                     key: "Select",
@@ -946,29 +650,7 @@ const Manager = (props) => {
           </ControlsSection>
         </Controls>
       </Container>
-
-      {!showPreview && (
-        <>
-          <GetCodeButtonWrapper>
-            <Button
-              id="get-sdk-code-button"
-              primary
-              size="normal"
-              scale
-              label={t("GetCode")}
-              onClick={openGetCodeModal}
-            />
-          </GetCodeButtonWrapper>
-
-          <GetCodeDialog
-            t={t}
-            visible={isGetCodeDialogOpened}
-            codeBlock={codeBlock}
-            onClose={closeGetCodeModal}
-          />
-        </>
-      )}
-    </SDKContainer>
+    </PresetWrapper>
   );
 };
 

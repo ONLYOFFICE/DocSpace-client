@@ -28,28 +28,29 @@
 "use client";
 
 import React from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 
 import { mobile } from "@docspace/shared/utils/device";
 import { getLogoUrl } from "@docspace/shared/utils/common";
 import { Base, Dark } from "@docspace/shared/themes";
 import { ThemeKeys, WhiteLabelLogoType } from "@docspace/shared/enums";
+import LanguageComboboxWrapper from "./LanguageCombobox";
 
-const StyledSimpleNav = styled.div<{ isError: boolean }>`
+const StyledSimpleNav = styled.div`
   display: none;
   height: 48px;
   align-items: center;
   justify-content: center;
   background-color: ${(props) => props.theme?.login?.navBackground};
 
-  svg {
-    path:last-child {
-      fill: ${(props) => props.theme.client?.home?.logoColor};
-    }
-  }
-
   @media ${mobile} {
-    display: ${(props) => (props.isError ? "none" : "flex")};
+    display: flex;
+
+    .language-combo-box {
+      position: absolute;
+      top: 7px;
+      right: 8px;
+    }
   }
 `;
 
@@ -60,21 +61,14 @@ interface SimpleNavProps {
 }
 
 const SimpleNav = ({ systemTheme }: SimpleNavProps) => {
-  const isDark = systemTheme === ThemeKeys.DarkStr;
+  const theme = useTheme();
+  const isDark = !theme.isBase;
   const logoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, isDark);
 
-  const isError = false;
-  typeof window !== "undefined"
-    ? window?.location?.pathname === "/login/error"
-    : false;
-
   return (
-    <StyledSimpleNav
-      id="login-header"
-      isError={isError}
-      theme={isDark ? Dark : Base}
-    >
+    <StyledSimpleNav id="login-header">
       <img src={logoUrl} alt="logo-url" />
+      <LanguageComboboxWrapper />
     </StyledSimpleNav>
   );
 };

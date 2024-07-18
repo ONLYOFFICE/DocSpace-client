@@ -43,6 +43,7 @@ export interface SocialButtonProps {
   t: TTranslation;
   /** Sets a callback function that is triggered when the button is clicked */
   onClick: (e: React.MouseEvent<Element, MouseEvent>) => void | Promise<void>;
+  onMoreAuthToggle?: (value: boolean) => void;
   /** Sets the button to present a disabled state */
   isDisabled: boolean;
 }

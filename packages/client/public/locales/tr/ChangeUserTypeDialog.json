@@ -3,6 +3,6 @@
   "ChangeUserTypeHeader": "Kullanıcı türünü değiştir",
   "ChangeUserTypeMessage": "'{{ firstType }}' türündeki kullanıcılar '{{ secondType }}' türüne taşınacaktır.",
   "ChangeUserTypeMessageMulti": "Seçilen kullanıcılar '{{ secondType }}' türüne taşınacaktır.",
-  "ChangeUserTypeMessageWarning": "DocSpace yöneticileri ve kendiniz için türü değiştiremezsiniz.",
+  "ChangeUserTypeMessageWarning": "{{productName}} yöneticileri ve kendiniz için türü değiştiremezsiniz.",
   "SuccessChangeUserType": "Kullanıcı türü başarıyla değiştirildi"
 }

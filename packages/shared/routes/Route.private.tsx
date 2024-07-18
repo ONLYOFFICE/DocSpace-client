@@ -55,6 +55,9 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     restricted,
     tenantStatus,
     enablePortalRename,
+
+    identityServerEnabled,
+    baseDomain,
   } = props;
 
   const location = useLocation();
@@ -63,7 +66,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     if (!user && isAuthenticated) {
       if (isPortalDeactivate) {
         window.location.replace(
-          combineUrl(window.DocSpaceConfig?.proxy?.url, "/unavailable"),
+          combineUrl(window.ClientConfig?.proxy?.url, "/unavailable"),
         );
 
         return null;
@@ -92,10 +95,15 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       location.pathname ===
       "/portal-settings/customization/general/portal-renaming";
 
+    const isOAuthPage = location.pathname.includes(
+      "portal-settings/developer-tools/oauth",
+    );
+    const isAuthorizedAppsPage = location.pathname.includes("authorized-apps");
+
     if (isLoaded && !isAuthenticated) {
       if (isPortalDeactivate) {
         window.location.replace(
-          combineUrl(window.DocSpaceConfig?.proxy?.url, "/unavailable"),
+          combineUrl(window.ClientConfig?.proxy?.url, "/unavailable"),
         );
 
         return null;
@@ -112,7 +120,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       }
 
       window.location.replace(
-        combineUrl(window.DocSpaceConfig?.proxy?.url, redirectPath),
+        combineUrl(window.ClientConfig?.proxy?.url, redirectPath),
       );
 
       return null;
@@ -121,7 +129,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     if (
       isLoaded &&
       ((!isNotPaidPeriod && isPortalUnavailableUrl) ||
-        (!user?.isOwner && isPortalDeletionUrl) ||
+        ((!user?.isOwner || (baseDomain && baseDomain === "localhost")) &&
+          isPortalDeletionUrl) ||
         (isCommunity && isPaymentsUrl) ||
         (isEnterprise && isBonusPage))
     ) {
@@ -138,7 +147,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
         <Navigate
           replace
           to={combineUrl(
-            window.DocSpaceConfig?.proxy?.url,
+            window.ClientConfig?.proxy?.url,
             "/preparation-portal",
           )}
         />
@@ -157,7 +166,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
         <Navigate
           replace
           to={combineUrl(
-            window.DocSpaceConfig?.proxy?.url,
+            window.ClientConfig?.proxy?.url,
             "/portal-settings/payments/portal-payments",
           )}
         />
@@ -175,7 +184,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
         <Navigate
           replace
           to={combineUrl(
-            window.DocSpaceConfig?.proxy?.url,
+            window.ClientConfig?.proxy?.url,
             "/portal-unavailable",
           )}
         />
@@ -188,7 +197,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     if (isPortalDeactivate && location.pathname !== "/unavailable") {
       return (
         <Navigate
-          to={combineUrl(window.DocSpaceConfig?.proxy?.url, "/unavailable")}
+          to={combineUrl(window.ClientConfig?.proxy?.url, "/unavailable")}
           state={{ from: location }}
         />
       );
@@ -216,6 +225,24 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
 
     if (isPortalRenameUrl && !enablePortalRename) {
       return <Navigate replace to="/error/404" />;
+    }
+
+    if (isOAuthPage && !identityServerEnabled) {
+      return (
+        <Navigate
+          replace
+          to="/portal-settings/developer-tools/javascript-sdk"
+        />
+      );
+    }
+
+    if (isAuthorizedAppsPage && !identityServerEnabled) {
+      return (
+        <Navigate
+          replace
+          to={location.pathname.replace("authorized-apps", "login")}
+        />
+      );
     }
 
     if (

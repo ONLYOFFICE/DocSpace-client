@@ -103,7 +103,7 @@ class DialogsStore {
   createRoomConfirmDialogVisible = false;
   changeUserTypeDialogVisible = false;
   editLinkPanelIsVisible = false;
-  embeddingPanelIsVisible = false;
+  embeddingPanelData = { visible: false, item: null };
   submitToGalleryDialogVisible = false;
   linkParams = null;
   leaveRoomDialogVisible = false;
@@ -380,13 +380,6 @@ class DialogsStore {
     this.selectFileFormRoomOpenRoot = openRoot;
   };
 
-  createFromTemplateForm = (fileInfo) => {
-    this.createMasterForm(fileInfo, {
-      extension: "pdf",
-      withoutDialog: true,
-    });
-  };
-
   createMasterForm = async (fileInfo, options) => {
     const { extension = "pdf", withoutDialog, preview } = options;
 
@@ -409,6 +402,7 @@ class DialogsStore {
       templateId: fileInfo.id,
       withoutDialog,
       preview,
+      edit: true,
     };
 
     event.payload = payload;
@@ -493,8 +487,8 @@ class DialogsStore {
     this.deleteLinkDialogVisible = visible;
   };
 
-  setEmbeddingPanelIsVisible = (embeddingPanelIsVisible) => {
-    this.embeddingPanelIsVisible = embeddingPanelIsVisible;
+  setEmbeddingPanelData = (embeddingPanelData) => {
+    this.embeddingPanelData = embeddingPanelData;
   };
 
   setMoveToPublicRoomVisible = (visible, data = null) => {

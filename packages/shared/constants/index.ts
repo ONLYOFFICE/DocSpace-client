@@ -46,7 +46,6 @@ export const LOADER_STYLE = Object.freeze({
   animate: true,
 });
 
-export const DOCSPACE = "DocSpace";
 export const MANAGER = "manager";
 export const TOTAL_SIZE = "total_size";
 export const FILE_SIZE = "file_size";
@@ -68,15 +67,6 @@ export const LIVE_CHAT_LOCAL_STORAGE_KEY = "live_chat_state";
 export const MAX_FILE_COMMENT_LENGTH = 255;
 export const LINKS_LIMIT_COUNT = 5;
 export const LOADER_TIMEOUT = 300;
-
-export const ROOMS_TYPE_TRANSLATIONS = Object.freeze({
-  1: "Files:FillingFormRooms",
-  2: "Files:CollaborationRooms",
-  3: "Common:Review",
-  4: "Files:ViewOnlyRooms",
-  5: "Files:CustomRooms",
-  6: "Files:PublicRoom",
-});
 
 export const ROOMS_PROVIDER_TYPE_NAME = Object.freeze({
   1: "Box",
@@ -146,11 +136,10 @@ export const PROVIDERS_DATA = Object.freeze({
 
 export const PASSWORD_LIMIT_SPECIAL_CHARACTERS = "!@#$%^&*";
 
-export const EDITOR_ID = "docspace_editor";
+export const EDITOR_ID = "portal_editor";
 
 export const WRONG_PORTAL_NAME_URL =
-  (typeof window !== "undefined" &&
-    window.DocSpaceConfig?.wrongPortalNameUrl) ||
+  (typeof window !== "undefined" && window.ClientConfig?.wrongPortalNameUrl) ||
   `https://www.onlyoffice.com/wrongportalname.aspx`;
 
 export const MEDIA_VIEW_URL = "/media/view/";
@@ -180,3 +169,15 @@ export const SYSTEM_FONT_FAMILY =
 export const HTML_EXST = [".htm", ".mht", ".html"];
 
 export const SYSTEM_THEME_KEY = "system_theme";
+
+export const PRODUCT_NAME = "DocSpace";
+export const BRAND_NAME = "ONLYOFFICE";
+
+const SDK_VERSION = "1.0.0";
+export const SDK_SCRIPT_URL =
+  typeof window !== "undefined"
+    ? `${window.location.origin}/static/scripts/sdk/${SDK_VERSION}/api.js`
+    : "";
+
+export const ALLOWED_PASSWORD_CHARACTERS =
+  "a-z, A-Z, 0-9, !\"#%&'()*+,-./:;<=>?@[]^_`{|}";

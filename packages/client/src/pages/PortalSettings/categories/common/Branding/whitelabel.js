@@ -27,6 +27,7 @@ import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { isMobile } from "react-device-detect";
 
 import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
@@ -154,7 +155,12 @@ const WhiteLabel = (props) => {
   const onUseTextAsLogo = () => {
     let newLogos = logoUrlsWhiteLabel;
     for (let i = 0; i < logoUrlsWhiteLabel.length; i++) {
-      const options = getLogoOptions(i, logoTextWhiteLabel);
+      const options = getLogoOptions(
+        i,
+        logoTextWhiteLabel,
+        logoUrlsWhiteLabel[i].size.width,
+        logoUrlsWhiteLabel[i].size.height,
+      );
       const isDocsEditorName = logoUrlsWhiteLabel[i].name === "DocsEditor";
 
       const logoLight = generateLogo(
@@ -309,7 +315,7 @@ const WhiteLabel = (props) => {
             isDisabled={!isSettingPaid}
             isReadOnly={!isSettingPaid}
             scale={true}
-            isAutoFocussed={true}
+            isAutoFocussed={!isMobile}
             tabIndex={1}
             maxLength={30}
           />

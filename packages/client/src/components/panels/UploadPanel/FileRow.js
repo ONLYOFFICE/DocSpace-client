@@ -41,30 +41,19 @@ import { Button } from "@docspace/shared/components/button";
 import { tablet } from "@docspace/shared/utils";
 
 const StyledFileRow = styled(Row)`
-  width: calc(100% - 16px);
+  width: 100%;
   box-sizing: border-box;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          padding-right: 16px;
-        `
-      : css`
-          padding-left: 16px;
-        `}
-  max-width: 484px;
 
   .row_context-menu-wrapper {
     width: auto;
     display: none;
   }
-  ::after {
-    max-width: 468px;
-    width: calc(100% - 16px);
-  }
 
   ${!isMobile && "min-height: 48px;"}
 
   height: 100%;
+
+  padding-inline-end: 16px;
 
   .styled-element,
   .row_content {
@@ -489,7 +478,8 @@ export default inject(
     name = splitted.join(".");
 
     const { theme } = settingsStore;
-    const { canViewedDocs, getIconSrc, isArchive } = filesSettingsStore;
+    const { canViewedDocs, getIconSrc, isArchive, openOnNewPage } =
+      filesSettingsStore;
     const {
       uploaded,
       cancelCurrentUpload,
@@ -513,9 +503,7 @@ export default inject(
     const fileIcon = getIconSrc(ext, 32);
 
     const downloadInCurrentTab =
-      window.DocSpaceConfig?.editor?.openOnNewPage === false ||
-      isArchive(ext) ||
-      !canViewedDocs(ext);
+      !openOnNewPage || isArchive(ext) || !canViewedDocs(ext);
 
     return {
       theme,

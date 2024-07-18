@@ -45,6 +45,7 @@ import CommonStore from "./CommonStore";
 
 import ProfileActionsStore from "./ProfileActionsStore";
 import SsoFormStore from "./SsoFormStore";
+import LdapFormStore from "./LdapFormStore";
 
 import FilesStore from "./FilesStore";
 import SelectedFolderStore from "./SelectedFolderStore";
@@ -80,6 +81,10 @@ import PluginStore from "./PluginStore";
 import InfoPanelStore from "./InfoPanelStore";
 import CampaignsStore from "./CampaignsStore";
 
+import OAuthStore from "./OAuthStore";
+
+const oauthStore = new OAuthStore(userStore);
+
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
 
 const pluginStore = new PluginStore(
@@ -106,6 +111,7 @@ const backupStore = new BackupStore();
 const commonStore = new CommonStore(settingsStore);
 
 const ssoStore = new SsoFormStore();
+const ldapStore = new LdapFormStore(currentQuotaStore);
 
 const tagsStore = new TagsStore();
 
@@ -313,6 +319,8 @@ const store = {
   common: commonStore,
   infoPanelStore,
   ssoStore,
+  ldapStore,
+
   profileActionsStore,
 
   filesStore,
@@ -344,6 +352,7 @@ const store = {
   clientLoadingStore,
   publicRoomStore,
 
+  oauthStore,
   pluginStore,
   storageManagement,
   campaignsStore,

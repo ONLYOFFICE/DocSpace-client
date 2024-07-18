@@ -26,38 +26,37 @@
 
 import { ScrollbarType } from "./Scrollbar.enums";
 
-export interface ScrollbarProps {
+export type ScrollbarProps = {
   /** Accepts class */
   className?: string;
+  /** This class will be placed on scroller element */
+  scrollClass?: string;
   /** Accepts id  */
   id?: string;
   /** Accepts css style  */
   style?: React.CSSProperties;
   /** Enable tracks auto hiding.  */
   autoHide?: boolean;
-  /** Track auto hiding delay in ms.  */
-  hideTrackTimer?: number;
   /** Fix scrollbar size. */
   fixedSize?: boolean;
   /** Disable vertical scrolling. */
   noScrollY?: boolean;
   /** Disable horizontal scrolling. */
   noScrollX?: boolean;
-  /** Calculating height of content depending on number of lines */
-  isFullHeight?: boolean;
-  /** Calculated height of content depending on number of lines in pixels */
-  fullHeight?: number;
+  /** Wrap children in context that contains scrollbar instance */
+  createContext?: boolean;
+  /** Set focus on scroll content element after first render */
+  autoFocus?: boolean;
 
   onScroll?: React.UIEventHandler<HTMLDivElement>;
-  scrollclass?: string;
   children?: React.ReactNode;
-}
+};
 
-export interface CustomScrollbarsVirtualListProps {
-  onScroll?: React.UIEventHandler<HTMLDivElement>;
+export type CustomScrollbarsVirtualListProps = Pick<
+  ScrollbarProps,
+  "style" | "onScroll" | "children" | "className" | "autoFocus" | "scrollClass"
+> & {
   forwardedRef?: React.ForwardedRef<unknown>;
-  style?: React.CSSProperties;
-  children?: React.ReactNode;
-  className?: string;
-  stype: ScrollbarType;
-}
+  contentRef?: React.MutableRefObject<HTMLDivElement | null>;
+  stype?: ScrollbarType;
+};

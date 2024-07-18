@@ -25,23 +25,55 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+"use client";
+
+import React, { useLayoutEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
+import { WhiteLabelLogoType } from "@docspace/shared/enums";
+import { getLogoUrl } from "@docspace/shared/utils/common";
 
 import { GreetingContainersProps } from "@/types";
 import { DEFAULT_PORTAL_TEXT, DEFAULT_ROOM_TEXT } from "@/utils/constants";
+import { getInvitationLinkData } from "@/utils";
 
-const GreetingContainer = ({
-  roomName,
-  firstName,
-  lastName,
-  greetingSettings,
-  logoUrl,
-  type,
-}: GreetingContainersProps) => {
-  const { t } = useTranslation();
+const GreetingContainer = ({ greetingSettings }: GreetingContainersProps) => {
+  const { t } = useTranslation(["Login"]);
+  const theme = useTheme();
+
+  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme.isBase);
+
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+
+  const [invitationLinkData, setInvitationLinkData] = useState({
+    email: "",
+    roomName: "",
+    firstName: "",
+    lastName: "",
+    type: "",
+  });
+
+  useLayoutEffect(() => {
+    if (!searchParams) return;
+
+    const encodeString = searchParams.get("loginData");
+
+    if (!encodeString) return;
+
+    const queryParams = getInvitationLinkData(encodeString);
+
+    if (!queryParams) return;
+
+    setInvitationLinkData(queryParams);
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }, [searchParams]);
+
+  const { type, roomName, firstName, lastName } = invitationLinkData;
 
   return (
     <>
@@ -53,7 +85,9 @@ const GreetingContainer = ({
           textAlign="center"
           className="greeting-title"
         >
-          {greetingSettings}
+          {pathname === "/tenant-list"
+            ? "Choose your portal"
+            : greetingSettings}
         </Text>
       )}
 
@@ -68,6 +102,7 @@ const GreetingContainer = ({
               values={{
                 firstName,
                 lastName,
+                productName: PRODUCT_NAME,
                 ...(roomName
                   ? { roomName }
                   : { spaceAddress: window.location.host }),

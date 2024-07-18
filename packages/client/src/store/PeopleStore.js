@@ -40,6 +40,7 @@ import TargetUserStore from "./TargetUserStore";
 import EditingFormStore from "./EditingFormStore";
 import FilterStore from "./FilterStore";
 import SelectionStore from "./SelectionPeopleStore";
+import AccountsHotkeysStore from "./AccountsHotkeysStore";
 import HeaderMenuStore from "./HeaderMenuStore";
 
 import InviteLinksStore from "./InviteLinksStore";
@@ -57,6 +58,7 @@ import {
 } from "@docspace/shared/enums";
 import Filter from "@docspace/shared/api/people/filter";
 import { deleteGroup } from "@docspace/shared/api/groups";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 class PeopleStore {
   contextOptionsStore = null;
@@ -77,10 +79,12 @@ class PeopleStore {
   profileActionsStore = null;
   infoPanelStore = null;
   userStore = null;
+  accountsHotkeysStore = null;
 
   isInit = false;
   viewAs = isDesktop() ? "table" : "row";
   isLoadedProfileSectionBody = false;
+  enabledHotkeys = true;
 
   constructor(
     authStore,
@@ -101,6 +105,7 @@ class PeopleStore {
       infoPanelStore,
       userStore,
     );
+    this.accountsHotkeysStore = new AccountsHotkeysStore(this);
     this.groupsStore = new GroupsStore(
       authStore,
       this,
@@ -311,8 +316,8 @@ class PeopleStore {
     const adminOption = {
       id: "menu_change-user_administrator",
       className: "group-menu_drop-down",
-      label: t("Common:DocSpaceAdmin"),
-      title: t("Common:DocSpaceAdmin"),
+      label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
+      title: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
       onClick: (e) => this.onChangeType(e),
       "data-action": "admin",
       key: "administrator",
@@ -506,30 +511,16 @@ class PeopleStore {
     this.isLoadedProfileSectionBody = isLoadedProfileSectionBody;
   };
 
-  getStatusType = (user) => {
-    if (
-      user.status === EmployeeStatus.Active &&
-      user.activationStatus === EmployeeActivationStatus.Activated
-    ) {
-      return "normal";
-    } else if (
-      user.status === EmployeeStatus.Active &&
-      user.activationStatus === EmployeeActivationStatus.Pending
-    ) {
-      return "pending";
-    } else if (user.status === EmployeeStatus.Disabled) {
-      return "disabled";
-    } else {
-      return "unknown";
-    }
-  };
-
   getUserRole = (user) => {
     if (user.isOwner) return "owner";
     else if (user.isAdmin) return "admin";
     else if (user.isCollaborator) return "collaborator";
     else if (user.isVisitor) return "user";
     else return "manager";
+  };
+
+  setEnabledHotkeys = (enabledHotkeys) => {
+    this.enabledHotkeys = enabledHotkeys;
   };
 }
 

@@ -1,5 +1,4 @@
 {
-  "Authentication": "ການຢືນຢັນ",
   "AuthViaNTLM": "ກວດສອບ ຜ່ານ NTLM",
   "EnableSSL": "ເປີດໃຊ້ SSL",
   "EnterDomain": "ໃສ່ໂດເມນ",
@@ -12,6 +11,5 @@
   "Port": "ຜອດຶ",
   "SenderDisplayName": "ຊື່ຜູ້ສົ່ງ",
   "SenderEmailAddress": "ທີ່ຢູ່ອີເມວຂອງຜູ້ສົ່ງ",
-  "SendTestMail": "ສົ່ງອີເມວທົດສອບ",
-  "SuccessfullyCompletedOperation": "ການດໍາເນີນງານໄດ້ສໍາເລັດສົບຜົນສໍາເລັດ."
+  "SendTestMail": "ສົ່ງອີເມວທົດສອບ"
 }

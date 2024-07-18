@@ -193,7 +193,7 @@ const StyledRow = styled.div`
     line-height: 16px;
   }
 
-  .invite-panel_access-selector {
+  .access-selector {
     margin-inline-start: auto;
     margin-inline-end: 0;
 
@@ -275,17 +275,6 @@ const StyledInviteInput = styled.div`
   }
 `;
 
-const StyledAccessSelector = styled.div`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-left: 16px;
-        `
-      : css`
-          margin-right: 16px;
-        `}
-`;
-
 const StyledEditInput = styled(TextInput)`
   width: 100%;
 `;
@@ -336,6 +325,28 @@ const StyledInviteInputContainer = styled.div`
 
   .header_aside-panel {
     max-width: 100% !important;
+
+    .selector_body_tabs {
+      display: flex;
+      justify-content: left;
+      margin-bottom: 16px;
+      padding: 0;
+      width: -webkit-fill-available;
+
+      .sticky-indent {
+        height: 0;
+      }
+
+      .sticky {
+        .scroll-body {
+          overflow-x: hidden;
+        }
+        .scroll-body > div {
+          justify-content: left;
+          padding-left: 16px;
+        }
+      }
+    }
   }
 `;
 
@@ -425,7 +436,7 @@ const StyledCrossIcon = styled(CrossIcon)`
 StyledCrossIcon.defaultProps = { theme: Base };
 
 const StyledDeleteIcon = styled(DeleteIcon)`
-cursor: pointer;
+  cursor: pointer;
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
@@ -591,7 +602,6 @@ export {
   StyledLink,
   ResetLink,
   ScrollList,
-  StyledAccessSelector,
   StyledToggleButton,
   StyledDescription,
   StyledInviteLanguage,

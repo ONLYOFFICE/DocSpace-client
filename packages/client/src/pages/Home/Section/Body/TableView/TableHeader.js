@@ -49,11 +49,11 @@ class FilesTableHeader extends React.Component {
       columnStorageName,
       columnInfoPanelStorageName,
       isPublicRoom,
-      isFrame,
       isRecentTab,
       isDefaultRoomsQuotaSet,
       showStorageInfo,
       isArchiveFolder,
+      tableStorageName,
     } = this.props;
 
     const defaultColumns = [];
@@ -111,7 +111,7 @@ class FilesTableHeader extends React.Component {
           key: "QuickButtons",
           title: "",
           enable: this.props.roomColumnQuickButtonsIsEnabled,
-          defaultSize: 75,
+          defaultSize: 52,
           resizable: false,
         },
       ];
@@ -201,7 +201,7 @@ class FilesTableHeader extends React.Component {
           key: "QuickButtons",
           title: "",
           enable: this.props.quickButtonsColumnIsEnabled,
-          defaultSize: 75,
+          defaultSize: 52,
           resizable: false,
         },
       ];
@@ -280,7 +280,7 @@ class FilesTableHeader extends React.Component {
           key: "QuickButtons",
           title: "",
           enable: this.props.quickButtonsColumnIsEnabled,
-          defaultSize: 75,
+          defaultSize: 52,
           resizable: false,
         },
       ];
@@ -350,7 +350,7 @@ class FilesTableHeader extends React.Component {
           key: "QuickButtons",
           title: "",
           enable: this.props.quickButtonsColumnIsEnabled,
-          defaultSize: 75,
+          defaultSize: 52,
           resizable: false,
         },
       ];
@@ -358,7 +358,7 @@ class FilesTableHeader extends React.Component {
     }
 
     let columns = getColumns(defaultColumns);
-    const storageColumns = localStorage.getItem(this.props.tableStorageName);
+    const storageColumns = localStorage.getItem(tableStorageName);
     const splitColumns = storageColumns && storageColumns.split(",");
     const resetColumnsSize =
       (splitColumns && splitColumns.length !== columns.length) || !splitColumns;
@@ -424,6 +424,7 @@ class FilesTableHeader extends React.Component {
       columnInfoPanelStorageName,
       isRecentTab,
       isArchiveFolder,
+      showStorageInfo,
     } = this.props;
 
     if (
@@ -432,7 +433,8 @@ class FilesTableHeader extends React.Component {
       isTrashFolder !== prevProps.isTrashFolder ||
       columnStorageName !== prevProps.columnStorageName ||
       columnInfoPanelStorageName !== prevProps.columnInfoPanelStorageName ||
-      isRecentTab !== prevProps.isRecentTab
+      isRecentTab !== prevProps.isRecentTab ||
+      showStorageInfo !== prevProps.showStorageInfo
     ) {
       return this.getTableColumns(true);
     }
@@ -529,7 +531,6 @@ class FilesTableHeader extends React.Component {
       filter,
       roomsFilter,
       isRooms,
-      sectionWidth,
       firstElemChecked,
       sortingVisible,
       infoPanelVisible,
@@ -561,7 +562,6 @@ class FilesTableHeader extends React.Component {
         columns={columns}
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
-        sectionWidth={sectionWidth}
         resetColumnsSize={resetColumnsSize}
         sortingVisible={sortingVisible}
         infoPanelVisible={infoPanelVisible}

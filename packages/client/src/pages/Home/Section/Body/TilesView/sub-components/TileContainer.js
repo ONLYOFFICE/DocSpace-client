@@ -146,7 +146,7 @@ const StyledTileContainer = styled.div`
               display: none;
               cursor: pointer;
               ${(props) =>
-                props.isDesc &&
+                !props.isDesc &&
                 css`
                   transform: rotate(180deg);
                 `}
@@ -209,6 +209,7 @@ const StyledTileContainer = styled.div`
   }
 
   @media ${tablet} {
+    margin-top: 16px;
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`

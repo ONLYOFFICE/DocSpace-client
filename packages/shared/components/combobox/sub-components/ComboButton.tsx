@@ -109,7 +109,7 @@ const ComboButton = (props: ComboButtonProps) => {
       )}
       {selectedOption && selectedOption.icon && (
         <StyledIcon
-          className="forceColor"
+          className="combo-button_selected-icon-container"
           isDisabled={isDisabled}
           defaultOption={defaultOption}
           // isSelected={isSelected}

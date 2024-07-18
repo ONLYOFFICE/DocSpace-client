@@ -1,7 +1,7 @@
 {
   "CodeSubtitle": "Hemos enviado un código de 6 dígitos a {{email}}. El código tiene un periodo de validez limitado, introdúzcalo lo antes posible.",
   "CodeTitle": "Se le ha enviado el código por correo electrónico",
-  "ErrorInvalidText": "Dentro de 10 segundos se le redirigirá a la página de <1>DocSpace</1>",
+  "ErrorInvalidText": "Dentro de 10 segundos se le redirigirá a la página de <1>{{productName}}</1>",
   "ExpiredCode": "Este código ya no es válido. Solicite un nuevo código e inténtelo de nuevo.",
   "ForgotPassword": "¿Ha olvidado su contraseña?",
   "InvalidCode": "Este código no es válido. Inténtelo de nuevo.",
@@ -19,5 +19,6 @@
   "RegisterTitle": "Solicitud de registro",
   "RegistrationEmailWatermark": "Email",
   "RememberHelper": "La duración de la sesión por defecto es de 20 minutos. Marque esta opción para establecerla en 1 año. Para establecer su propio valor, vaya a Ajustes.",
-  "ResendCode": "Reenviar código"
+  "ResendCode": "Reenviar código",
+  "UserIsAlreadyRegistered": "El usuario <1>{{email}}</1> ya está registrado en este {{productName}}, introduzca su contraseña o regrese para continuar con otro correo electrónico."
 }

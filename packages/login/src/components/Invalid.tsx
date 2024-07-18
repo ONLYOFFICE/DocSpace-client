@@ -35,7 +35,13 @@ import { Text } from "@docspace/shared/components/text";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 
-import { getMessageFromKey, getMessageKeyTranslate } from "@/utils";
+import {
+  getMessageFromKey,
+  getMessageKeyTranslate,
+  getOAuthMessageKeyTranslation,
+} from "@/utils";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
+import { OAuth2ErrorKey } from "@/utils/enums";
 
 const homepage = "/";
 
@@ -52,7 +58,7 @@ const InvalidError = ({ match }: InvalidErrorProps) => {
   const { t } = useTranslation(["Login", "Errors", "Common"]);
 
   React.useEffect(() => {
-    const url = combineUrl(window.DocSpaceConfig?.proxy?.url, homepage);
+    const url = combineUrl(window.ClientConfig?.proxy?.url, homepage);
     setProxyHomepageUrl(url);
     const timeout = setTimeout(() => {
       router.push("/");
@@ -61,19 +67,35 @@ const InvalidError = ({ match }: InvalidErrorProps) => {
   }, [router]);
 
   const message = getMessageFromKey(match?.messageKey ? +match.messageKey : 1);
-  const errorTitle = match?.messageKey
-    ? getMessageKeyTranslate(t, message)
-    : t("Common:ExpiredLink");
+  const oauthError = getOAuthMessageKeyTranslation(
+    t,
+    match?.oauthMessageKey as OAuth2ErrorKey | undefined,
+  );
+
+  const errorTitle = oauthError
+    ? oauthError
+    : match?.messageKey
+      ? getMessageKeyTranslate(t, message)
+      : t("Common:ExpiredLink");
 
   return (
     <ErrorContainer headerText={errorTitle}>
       <Text fontSize="13px" fontWeight="600">
-        <Trans t={t} i18nKey="ErrorInvalidText">
-          In 10 seconds you will be redirected to the
-          <Link className="error_description_link" href={proxyHomepageUrl}>
-            DocSpace
-          </Link>
-        </Trans>
+        <Trans
+          t={t}
+          i18nKey="ErrorInvalidText"
+          values={{
+            productName: PRODUCT_NAME,
+          }}
+          components={{
+            1: (
+              <Link
+                className="error_description_link"
+                href={proxyHomepageUrl}
+              />
+            ),
+          }}
+        />
       </Text>
     </ErrorContainer>
   );

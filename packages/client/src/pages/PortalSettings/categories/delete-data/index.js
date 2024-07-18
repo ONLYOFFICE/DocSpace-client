@@ -26,60 +26,64 @@
 
 import React, { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import { Submenu } from "@docspace/shared/components/submenu";
+import { useNavigate, useLocation } from "react-router-dom";
+import { Tabs } from "@docspace/shared/components/tabs";
 import { inject, observer } from "mobx-react";
 import PortalDeactivationSection from "./portalDeactivation";
 import PortalDeletionSection from "./portalDeletion";
 import DeleteDataLoader from "./DeleteDataLoader";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "../../../../../package.json";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const DeleteData = (props) => {
   const { t, isNotPaidPeriod, tReady } = props;
 
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const [currentTab, setCurrentTab] = useState(0);
+  const [currentTabId, setCurrentTabId] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
   const data = [
     {
       id: "deletion",
-      name: t("DeleteDocSpace"),
+      name: t("DeletePortal", { productName: PRODUCT_NAME }),
       content: <PortalDeletionSection />,
     },
     {
       id: "deactivation",
-      name: t("PortalDeactivation"),
+      name: t("PortalDeactivation", { productName: PRODUCT_NAME }),
       content: <PortalDeactivationSection />,
     },
   ];
 
   useEffect(() => {
     const path = location.pathname;
-    const currentTab = data.findIndex((item) => path.includes(item.id));
-    if (currentTab !== -1) setCurrentTab(currentTab);
+    const currentTab = data.find((item) => path.includes(item.id));
+    if (currentTab !== -1 && data.length) setCurrentTabId(currentTab.id);
+
     setIsLoading(true);
-  }, []);
+  }, [location.pathname]);
 
   const onSelect = (e) => {
     navigate(
       combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
+        window.ClientConfig?.proxy?.url,
         config.homepage,
         `/portal-settings/delete-data/${e.id}`,
       ),
     );
+    setCurrentTabId(e.id);
   };
 
   if (!isLoading || !tReady) return <DeleteDataLoader />;
   return isNotPaidPeriod ? (
     <PortalDeletionSection />
   ) : (
-    <Submenu
-      data={data}
-      startSelect={currentTab}
+    <Tabs
+      items={data}
+      selectedItemId={currentTabId}
       onSelect={(e) => onSelect(e)}
     />
   );

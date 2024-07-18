@@ -84,6 +84,8 @@ class AuthStore {
 
   clientError = false;
 
+  isPortalInfoLoaded = false;
+
   constructor(
     userStoreConst: UserStore,
     currentTariffStatusStoreConst: CurrentTariffStatusStore,
@@ -99,16 +101,26 @@ class AuthStore {
 
     const { socketHelper } = this.settingsStore;
 
-    socketHelper.on("s:change-quota-used-value", ({ featureId, value }) => {
-      console.log(`[WS] change-quota-used-value ${featureId}:${value}`);
+    socketHelper.on("s:change-quota-used-value", (res) => {
+      console.log(
+        `[WS] change-quota-used-value ${res?.featureId}:${res?.value}`,
+      );
+
+      if (!res || !res?.featureId) return;
+      const { featureId, value } = res;
 
       runInAction(() => {
         this.currentQuotaStore?.updateQuotaUsedValue(featureId, value);
       });
     });
 
-    socketHelper.on("s:change-quota-feature-value", ({ featureId, value }) => {
-      console.log(`[WS] change-quota-feature-value ${featureId}:${value}`);
+    socketHelper.on("s:change-quota-feature-value", (res) => {
+      console.log(
+        `[WS] change-quota-feature-value ${res?.featureId}:${res?.value}`,
+      );
+
+      if (!res || !res?.featureId) return;
+      const { featureId, value } = res;
 
       runInAction(() => {
         if (featureId === "free") {
@@ -158,7 +170,7 @@ class AuthStore {
 
     this.skipRequest = skipRequest ?? false;
 
-    await this.settingsStore?.init();
+    await Promise.all([this.settingsStore?.init(), this.getCapabilities()]);
 
     const requests = [];
 
@@ -245,6 +257,8 @@ class AuthStore {
 
     this.currentQuotaStore?.setPortalQuotaValue(quota);
     this.currentTariffStatusStore?.setPortalTariffValue(tariff);
+
+    this.isPortalInfoLoaded = true;
   };
 
   setLanguage() {
@@ -264,7 +278,10 @@ class AuthStore {
     let success = false;
     if (this.isAuthenticated) {
       success =
-        (this.userStore?.isLoaded && this.settingsStore?.isLoaded) ?? false;
+        (this.userStore?.isLoaded &&
+          this.settingsStore?.isLoaded &&
+          this.isPortalInfoLoaded) ??
+        false;
 
       if (success) this.setLanguage();
     } else {

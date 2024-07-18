@@ -1,5 +1,4 @@
 {
-  "Authentication": "身份验证",
   "AuthViaNTLM": "通过 NTLM 授权",
   "EnableSSL": "启用S​​SL",
   "EnterDomain": "输入域",
@@ -12,6 +11,5 @@
   "Port": "端口",
   "SenderDisplayName": "发件人显示名称",
   "SenderEmailAddress": "发件人电邮地址",
-  "SendTestMail": "发送测试邮件",
-  "SuccessfullyCompletedOperation": "操作已成功完成。"
+  "SendTestMail": "发送测试邮件"
 }

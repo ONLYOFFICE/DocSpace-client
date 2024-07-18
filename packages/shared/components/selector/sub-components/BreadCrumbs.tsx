@@ -32,33 +32,34 @@ import {
 } from "../../context-menu-button";
 import { ContextMenuModel } from "../../context-menu";
 
-import {
-  TBreadCrumb,
-  BreadCrumbsProps,
-  TDisplayedItem,
-} from "../Selector.types";
+import { TBreadCrumb, TDisplayedItem } from "../Selector.types";
 import {
   StyledBreadCrumbs,
   StyledItemText,
   StyledArrowRightSvg,
 } from "../Selector.styled";
+import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
 
-const BreadCrumbs = ({
-  breadCrumbs,
-  onSelectBreadCrumb,
-  isLoading,
-}: BreadCrumbsProps) => {
+const BreadCrumbs = () => {
+  const {
+    withBreadCrumbs,
+    breadCrumbs,
+    breadCrumbsLoader,
+    isBreadCrumbsLoading,
+    onSelectBreadCrumb,
+  } = React.useContext(BreadCrumbsContext);
+
   const [displayedItems, setDisplayedItems] = React.useState<TDisplayedItem[]>(
     [],
   );
 
   const onClickItem = React.useCallback(
     ({ item }: { item: TBreadCrumb }) => {
-      if (isLoading) return;
+      if (isBreadCrumbsLoading) return;
 
-      onSelectBreadCrumb(item);
+      onSelectBreadCrumb?.(item);
     },
-    [isLoading, onSelectBreadCrumb],
+    [isBreadCrumbsLoading, onSelectBreadCrumb],
   );
 
   const calculateDisplayedItems = React.useCallback(
@@ -185,6 +186,10 @@ const BreadCrumbs = ({
       "minmax(1px, max-content) 12px minmax(1px, max-content)";
   }
 
+  if (!withBreadCrumbs) return null;
+
+  if (isBreadCrumbsLoading) return breadCrumbsLoader;
+
   return (
     <StyledBreadCrumbs
       itemsCount={displayedItems.length}
@@ -214,11 +219,12 @@ const BreadCrumbs = ({
             noSelect
             truncate
             isCurrent={index === displayedItems.length - 1}
-            isLoading={isLoading || false}
+            isLoading={isBreadCrumbsLoading}
             onClick={() => {
-              if (index === displayedItems.length - 1 || isLoading) return;
+              if (index === displayedItems.length - 1 || isBreadCrumbsLoading)
+                return;
 
-              onSelectBreadCrumb({
+              onSelectBreadCrumb?.({
                 id: item.id,
                 label: item.label,
                 isRoom: item.isRoom,

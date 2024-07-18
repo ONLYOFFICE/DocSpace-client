@@ -61,6 +61,7 @@ import EmptyScreenArchiveUrl from "PUBLIC_DIR/images/empty_screen_archive.svg?ur
 import EmptyScreenArchiveDarkUrl from "PUBLIC_DIR/images/empty_screen_archive_dark.svg?url";
 
 import CommonButtons from "./sub-components/CommonButtons";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const RootFolderContainer = (props) => {
   const {
@@ -118,9 +119,9 @@ const RootFolderContainer = (props) => {
   const archiveRoomsDescription =
     isVisitor || isCollaborator
       ? t("ArchiveEmptyScreenUser")
-      : t("ArchiveEmptyScreen");
+      : t("ArchiveEmptyScreen", { productName: PRODUCT_NAME });
 
-  const privateRoomHeader = t("PrivateRoomHeader");
+  const privateRoomHeader = t("PrivateRoomHeader", { organizationName });
   const privacyIcon = <img alt="" src={PrivacySvgUrl} />;
   const privateRoomDescTranslations = [
     t("PrivateRoomDescriptionSafest"),
@@ -129,7 +130,7 @@ const RootFolderContainer = (props) => {
     t("PrivateRoomDescriptionUnbreakable"),
   ];
 
-  const roomHeader = t("EmptyRootRoomHeader");
+  const roomHeader = t("EmptyRootRoomHeader", { productName: PRODUCT_NAME });
 
   const onGoToPersonal = () => {
     const newFilter = FilesFilter.getDefault();
@@ -150,7 +151,7 @@ const RootFolderContainer = (props) => {
   };
 
   const onGoToShared = () => {
-    const newFilter = RoomsFilter.getDefault(userId);
+    const newFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
 
     newFilter.searchArea = RoomSearchArea.Active;
 

@@ -85,4 +85,5 @@ export interface LinkWithDropDownProps {
   /** Displays the scrollbar */
   hasScroll?: boolean;
   isHovered?: boolean;
+  manualWidth?: string | undefined;
 }

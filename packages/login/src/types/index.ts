@@ -33,7 +33,8 @@ import {
   TThirdPartyProvider,
 } from "@docspace/shared/api/settings/types";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
-import { ThemeKeys } from "@docspace/shared/enums";
+import { IClientProps } from "@docspace/shared/utils/oauth/types";
+import { RecaptchaType, ThemeKeys } from "@docspace/shared/enums";
 
 export type TDataContext = {
   settings?: TSettings;
@@ -42,12 +43,7 @@ export type TDataContext = {
 };
 
 export type GreetingContainersProps = {
-  roomName?: string;
-  firstName?: string;
-  lastName?: string;
   greetingSettings?: string;
-  logoUrl?: string;
-  type: string;
 };
 
 export type LoginProps = {
@@ -58,6 +54,7 @@ export type LoginProps = {
   thirdPartyProvider?: TThirdPartyProvider[];
   ssoSettings?: TGetSsoSettings;
   systemTheme?: ThemeKeys;
+  cultures: string[];
 };
 
 export type RegisterProps = {
@@ -86,16 +83,12 @@ export type RegisterModalDialogProps = {
 };
 
 export type LoginFormProps = {
-  isLoading: boolean;
-  setIsLoading: (isLoading: boolean) => void;
   hashSettings?: TPasswordHash;
-  isDesktop: boolean;
-  match: { [key: string]: string };
-  openRecoverDialog: () => void;
-  enableAdmMess: boolean;
-  recaptchaPublicKey?: string;
-  emailFromInvitation?: string;
+  reCaptchaPublicKey?: string;
+  reCaptchaType?: RecaptchaType;
   cookieSettingsEnabled: boolean;
+  clientId?: string;
+  client?: IClientProps;
 };
 
 export type ForgotPasswordModalDialogProps = {

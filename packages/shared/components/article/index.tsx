@@ -102,7 +102,6 @@ const Article = ({
   standalone,
   currentTariffPlanTitle,
   trialDaysLeft,
-  paymentDate,
 
   languageBaseName,
   zendeskEmail,
@@ -110,7 +109,7 @@ const Article = ({
   chatDisplayName,
   zendeskKey,
   showProgress,
-
+  organizationName,
   user,
   getActions,
   onProfileClick,
@@ -294,7 +293,11 @@ const Article = ({
                 />
               )}
               {!hideAppsBlock && (
-                <ArticleApps withDevTools={withDevTools} showText={showText} />
+                <ArticleApps
+                  withDevTools={withDevTools}
+                  showText={showText}
+                  organizationName={organizationName}
+                />
               )}
               {!isMobile && isLiveChatAvailable && (
                 <ArticleLiveChat

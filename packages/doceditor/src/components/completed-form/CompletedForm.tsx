@@ -27,12 +27,12 @@
 
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
+// import Image from "next/image";
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
-import CompletedFormDarkIcon from "PUBLIC_DIR/images/completedForm/completed.form.icon.dark.svg?url";
-import CompletedFormLightIcon from "PUBLIC_DIR/images/completedForm/completed.form.icon.light.svg?url";
+// import CompletedFormDarkIcon from "PUBLIC_DIR/images/completedForm/completed.form.icon.dark.svg?url";
+// import CompletedFormLightIcon from "PUBLIC_DIR/images/completedForm/completed.form.icon.light.svg?url";
 import PDFIcon from "PUBLIC_DIR/images/icons/32/pdf.svg";
 import DownloadIconUrl from "PUBLIC_DIR/images/download.react.svg?url";
 import MailIcon from "PUBLIC_DIR/images/icons/12/mail.svg";
@@ -72,7 +72,7 @@ export const CompletedForm = ({}: CompletedFormProps) => {
 
   const bgPattern = getBgPattern(theme.currentColorScheme?.id);
 
-  const iconUrl = theme.isBase ? CompletedFormLightIcon : CompletedFormDarkIcon;
+  // const iconUrl = theme.isBase ? CompletedFormLightIcon : CompletedFormDarkIcon;
 
   // const onClose = () => {
   //   window.close();
@@ -90,19 +90,19 @@ export const CompletedForm = ({}: CompletedFormProps) => {
         <source media={mobileMore} srcSet={logoUrl} />
         <img src={logoUrl} alt="logo" />
       </picture>
-      <Image
+      {/* <Image
         priority
         src={iconUrl}
         className="completed-form__icon"
         alt="icon"
         width={416}
         height={200}
-      />
+      /> */}
       <TextWrapper>
         <Heading level={HeadingLevel.h1}>{t("CompletedForm:Title")}</Heading>
         <Text noSelect>{t("CompletedForm:Description")}</Text>
       </TextWrapper>
-      {/* <MainContent>
+      <MainContent>
         <Box className="completed-form__file">
           <PDFIcon />
           <Heading className="completed-form__filename" level={HeadingLevel.h5}>
@@ -154,7 +154,7 @@ export const CompletedForm = ({}: CompletedFormProps) => {
       </ButtonWrapper>
       <Link className="link" href="#">
         {t("CompletedForm:FillItOutAgain")}
-      </Link> */}
+      </Link>
     </CompletedFormLayout>
   );
 };

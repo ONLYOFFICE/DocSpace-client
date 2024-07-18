@@ -29,8 +29,6 @@ import { headers } from "next/headers";
 
 import { getSelectorsByUserAgent } from "react-device-detect";
 
-import { BRAND_NAME } from "@docspace/shared/constants";
-
 import { getData } from "@/utils/actions";
 import { RootPageProps } from "@/types";
 import Root from "@/components/Root";
@@ -44,6 +42,8 @@ const initialSearchParams: RootPageProps["searchParams"] = {
   share: undefined,
   editorType: undefined,
 };
+
+const BRAND_NAME = "ONLYOFFICE"; //TODO: replace to t("Common:OrganizationName");
 
 export const metadata: Metadata = {
   title: `${BRAND_NAME} DocEditor page`,

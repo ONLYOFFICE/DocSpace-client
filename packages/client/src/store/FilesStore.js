@@ -1476,10 +1476,10 @@ class FilesStore {
 
     const { filterType, searchInContent } = filterData;
 
-    if (typeof filterData.withSubfolders !== "boolean")
+    if (!Boolean(filterData.withSubfolders))
       filterData.withSubfolders = defaultFilter.withSubfolders;
 
-    if (typeof searchInContent !== "boolean")
+    if (!Boolean(searchInContent))
       filterData.searchInContent = defaultFilter.searchInContent;
 
     if (!Object.keys(FilterType).find((key) => FilterType[key] === filterType))

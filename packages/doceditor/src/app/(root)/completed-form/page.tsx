@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { CompletedForm } from "@/components/completed-form";
+import { getFillingSession } from "@/utils/actions";
 
 interface PageProps {
   searchParams: Record<string, string | undefined>;
@@ -32,7 +33,11 @@ interface PageProps {
 async function Page({ searchParams }: PageProps) {
   const { share, fileId, fillingSessionId } = searchParams;
 
-  console.log({ share, fileId, fillingSessionId });
+  console.log({ fillingSessionId, fileId, share });
+
+  const session = await getFillingSession(fillingSessionId!, share);
+
+  console.log({ session });
 
   return <CompletedForm />;
 }

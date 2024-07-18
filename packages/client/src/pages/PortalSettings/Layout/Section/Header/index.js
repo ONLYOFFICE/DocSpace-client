@@ -184,7 +184,6 @@ const SectionHeaderContent = (props) => {
     tReady,
     setIsLoadedSectionHeader,
     isSSOAvailable,
-    organizationName,
   } = props;
 
   const navigate = useNavigate();
@@ -387,7 +386,7 @@ const SectionHeaderContent = (props) => {
                     className="arrow-button"
                   />
                 )}
-                {t(header, { organizationName })}
+                {t(header, { organizationName: t("Common:OrganizationName") })}
               </div>
               {isNeedPaidIcon ? (
                 <Badge
@@ -423,7 +422,7 @@ const SectionHeaderContent = (props) => {
   );
 };
 
-export default inject(({ settingsStore, currentQuotaStore, setup, common }) => {
+export default inject(({ currentQuotaStore, setup, common }) => {
   const {
     isBrandingAndCustomizationAvailable,
     isRestoreAndAutoBackupAvailable,
@@ -444,8 +443,6 @@ export default inject(({ settingsStore, currentQuotaStore, setup, common }) => {
   const { admins, selectorIsOpen } = setup.security.accessRight;
   const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
 
-  const { organizationName } = settingsStore;
-
   return {
     addUsers,
     removeAdmins,
@@ -465,7 +462,6 @@ export default inject(({ settingsStore, currentQuotaStore, setup, common }) => {
     isBrandingAndCustomizationAvailable,
     isRestoreAndAutoBackupAvailable,
     isSSOAvailable,
-    organizationName,
   };
 })(
   withLoading(

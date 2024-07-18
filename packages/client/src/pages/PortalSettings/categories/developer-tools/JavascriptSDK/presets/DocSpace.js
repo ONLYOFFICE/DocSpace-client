@@ -53,9 +53,10 @@ import {
   ControlsSection,
 } from "./StyledPresets";
 import { PRODUCT_NAME, SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const DocSpace = (props) => {
-  const { t, setDocumentTitle, theme } = props;
+  const { t, theme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -155,13 +156,11 @@ const DocSpace = (props) => {
   );
 };
 
-export default inject(({ authStore, settingsStore }) => {
-  const { setDocumentTitle } = authStore;
+export default inject(({ settingsStore }) => {
   const { theme } = settingsStore;
 
   return {
     theme,
-    setDocumentTitle,
   };
 })(
   withTranslation([

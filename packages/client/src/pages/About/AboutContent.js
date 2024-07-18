@@ -101,13 +101,8 @@ const StyledAboutBody = styled.div`
 `;
 
 const AboutContent = (props) => {
-  const {
-    buildVersionInfo,
-    theme,
-    companyInfoSettingsData,
-    previewData,
-    organizationName,
-  } = props;
+  const { buildVersionInfo, theme, companyInfoSettingsData, previewData } =
+    props;
   const { t } = useTranslation("About");
   const license = "AGPL-3.0";
   const linkRepo = "https://github.com/ONLYOFFICE/DocSpace";
@@ -158,7 +153,7 @@ const AboutContent = (props) => {
             target="_blank"
             enableUserSelect
           >
-            &nbsp;{organizationName} {PRODUCT_NAME}&nbsp;
+            &nbsp;{t("Common:OrganizationName")} {PRODUCT_NAME}&nbsp;
           </ColorTheme>
 
           <Text
@@ -274,11 +269,10 @@ const AboutContent = (props) => {
 };
 
 export default inject(({ settingsStore }) => {
-  const { theme, companyInfoSettingsData, organizationName } = settingsStore;
+  const { theme, companyInfoSettingsData } = settingsStore;
 
   return {
     theme,
     companyInfoSettingsData,
-    organizationName,
   };
 })(observer(AboutContent));

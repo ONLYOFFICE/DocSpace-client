@@ -64,9 +64,10 @@ import {
   Container,
 } from "./StyledPresets";
 import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const RoomSelector = (props) => {
-  const { t, setDocumentTitle, theme } = props;
+  const { t, theme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -254,12 +255,10 @@ const RoomSelector = (props) => {
 };
 
 export default inject(({ authStore, settingsStore }) => {
-  const { setDocumentTitle } = authStore;
   const { theme } = settingsStore;
 
   return {
     theme,
-    setDocumentTitle,
   };
 })(
   withTranslation([

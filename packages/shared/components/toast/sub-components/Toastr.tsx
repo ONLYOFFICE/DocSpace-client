@@ -206,6 +206,8 @@ function error(
     message = data;
   }
 
+  console.error(message);
+
   return notify(
     ToastType.error,
     message,

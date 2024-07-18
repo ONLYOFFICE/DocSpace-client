@@ -108,7 +108,6 @@ const GoogleWorkspace = ({
   getMigrationStatus,
   setUsers,
   filteredUsers,
-  organizationName,
 }) => {
   const [showReminder, setShowReminder] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
@@ -236,7 +235,7 @@ const GoogleWorkspace = ({
       <Text className="workspace-subtitle">
         {t("Settings:AboutDataImport", {
           productName: PRODUCT_NAME,
-          organizationName,
+          organizationName: t("Common:OrganizationName"),
         })}
       </Text>
       <div className="step-container">
@@ -253,7 +252,7 @@ const GoogleWorkspace = ({
             renderTooltip,
             Trans,
             filteredUsers.length === 0,
-            organizationName,
+            t("Common:OrganizationName"),
           )}
         </Box>
         <StepContent
@@ -273,7 +272,7 @@ export default inject(({ setup, settingsStore, importAccountsStore }) => {
   const { clearCheckedAccounts, getMigrationStatus, setUsers, filteredUsers } =
     importAccountsStore;
   const { viewAs, setViewAs } = setup;
-  const { currentDeviceType, organizationName } = settingsStore;
+  const { currentDeviceType } = settingsStore;
 
   return {
     clearCheckedAccounts,
@@ -283,6 +282,5 @@ export default inject(({ setup, settingsStore, importAccountsStore }) => {
     getMigrationStatus,
     setUsers,
     filteredUsers,
-    organizationName,
   };
 })(withTranslation(["Common, Settings"])(observer(GoogleWorkspace)));

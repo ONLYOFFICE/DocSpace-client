@@ -66,7 +66,6 @@ const NextcloudWorkspace = (props) => {
     getMigrationStatus,
     setUsers,
     filteredUsers,
-    organizationName,
   } = props;
   const [currentStep, setCurrentStep] = useState(1);
   const [shouldRender, setShouldRender] = useState(false);
@@ -75,7 +74,7 @@ const NextcloudWorkspace = (props) => {
     currentStep,
     setCurrentStep,
     filteredUsers.length === 0,
-    organizationName,
+    t("Common:OrganizationName"),
   );
   const navigate = useNavigate();
 
@@ -155,7 +154,7 @@ const NextcloudWorkspace = (props) => {
         >
           {t("Settings:AboutDataImport", {
             productName: PRODUCT_NAME,
-            organizationName,
+            organizationName: t("Common:OrganizationName"),
           })}
         </Text>
         <Text
@@ -179,7 +178,7 @@ export default inject(({ setup, settingsStore, importAccountsStore }) => {
   const { clearCheckedAccounts, getMigrationStatus, setUsers, filteredUsers } =
     importAccountsStore;
   const { initSettings, viewAs, setViewAs } = setup;
-  const { currentDeviceType, organizationName } = settingsStore;
+  const { currentDeviceType } = settingsStore;
 
   return {
     initSettings,
@@ -191,7 +190,6 @@ export default inject(({ setup, settingsStore, importAccountsStore }) => {
     getMigrationStatus,
     setUsers,
     filteredUsers,
-    organizationName,
   };
 })(
   withTranslation(["Common, SMTPSettings, Settings"])(

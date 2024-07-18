@@ -31,7 +31,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { Link } from "@docspace/shared/components/link";
 import { MainContainer, ButtonWrapper } from "./StyledDeleteData";
-import { setDocumentTitle } from "../../../../helpers/utils";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { DeletePortalDialog } from "SRC_DIR/components/dialogs";
 import { toastr } from "@docspace/shared/components/toast";
 import {

@@ -43,7 +43,6 @@ export const getStepsData = (
   currentStep,
   setCurrentStep,
   isTypeSelectEmpty,
-  organizationName,
 ) => {
   const isSixthStep = currentStep === 6;
 
@@ -76,7 +75,7 @@ export const getStepsData = (
       title: t("Settings:SelectUsersWithEmail"),
       description: t("Settings:SelectUsersDescriptionNextcloud", {
         productName: PRODUCT_NAME,
-        organizationName,
+        organizationName: t("Common:OrganizationName"),
       }),
       component: (
         <SelectUsersStep
@@ -90,7 +89,7 @@ export const getStepsData = (
       title: t("Settings:AddEmails"),
       description: t("Settings:AddEmailsDescription", {
         productName: PRODUCT_NAME,
-        organizationName,
+        organizationName: t("Common:OrganizationName"),
       }),
       component: (
         <AddEmailsStep
@@ -186,7 +185,7 @@ export const getStepsData = (
       title: t("Settings:DataImportComplete"),
       description: t("Settings:ImportCompleteDescriptionNextcloud", {
         productName: PRODUCT_NAME,
-        organizationName,
+        organizationName: t("Common:OrganizationName"),
       }),
       component: (
         <ImportCompleteStep

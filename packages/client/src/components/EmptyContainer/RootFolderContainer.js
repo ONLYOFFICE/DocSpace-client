@@ -70,7 +70,6 @@ const RootFolderContainer = (props) => {
     isPrivacyFolder,
     isDesktop,
     isEncryptionSupport,
-    organizationName,
     privacyInstructions,
     title,
     onCreate,
@@ -121,7 +120,9 @@ const RootFolderContainer = (props) => {
       ? t("ArchiveEmptyScreenUser")
       : t("ArchiveEmptyScreen", { productName: PRODUCT_NAME });
 
-  const privateRoomHeader = t("PrivateRoomHeader", { organizationName });
+  const privateRoomHeader = t("PrivateRoomHeader", {
+    organizationName: t("Common:OrganizationName"),
+  });
   const privacyIcon = <img alt="" src={PrivacySvgUrl} />;
   const privateRoomDescTranslations = [
     t("PrivateRoomDescriptionSafest"),
@@ -259,8 +260,8 @@ const RootFolderContainer = (props) => {
       {!isDesktop && (
         <Text fontSize="12px">
           <Trans t={t} i18nKey="PrivateRoomSupport" ns="Files">
-            Work in Private Room is available via {{ organizationName }} desktop
-            app.
+            Work in Private Room is available via{" "}
+            {{ organizationName: t("Common:OrganizationName") }} desktop app.
             <Link
               isBold
               isHovered
@@ -376,8 +377,7 @@ export default inject(
     userStore,
     publicRoomStore,
   }) => {
-    const { isDesktopClient, isEncryptionSupport, organizationName, theme } =
-      settingsStore;
+    const { isDesktopClient, isEncryptionSupport, theme } = settingsStore;
 
     const { setIsSectionFilterLoading } = clientLoadingStore;
 
@@ -400,7 +400,6 @@ export default inject(
       userId: userStore?.user?.id,
       isCollaborator: userStore?.user?.isCollaborator,
       isEncryptionSupport,
-      organizationName,
       privacyInstructions,
       title,
       myFolderId,

@@ -39,7 +39,7 @@ const StyledWrapper = styled.div`
   gap: 20px;
 `;
 
-const MobileView = ({ isSSOAvailable, organizationName }) => {
+const MobileView = ({ isSSOAvailable }) => {
   const { t } = useTranslation(["SingleSignOn", "Settings"]);
   const navigate = useNavigate();
 
@@ -51,7 +51,9 @@ const MobileView = ({ isSSOAvailable, organizationName }) => {
   return (
     <StyledWrapper>
       <MobileCategoryWrapper
-        title={t("ServiceProviderSettings", { organizationName })}
+        title={t("ServiceProviderSettings", {
+          organizationName: t("Common:OrganizationName"),
+        })}
         subtitle={t("ServiceProviderSettingsDescription")}
         url="/portal-settings/integration/sso/settings"
         withPaidBadge={!isSSOAvailable}
@@ -59,10 +61,12 @@ const MobileView = ({ isSSOAvailable, organizationName }) => {
         onClickLink={onClickLink}
       />
       <MobileCategoryWrapper
-        title={t("SpMetadata", { organizationName })}
+        title={t("SpMetadata", {
+          organizationName: t("Common:OrganizationName"),
+        })}
         subtitle={t("SpMetadataDescription", {
           productName: PRODUCT_NAME,
-          organizationName,
+          organizationName: t("Common:OrganizationName"),
         })}
         url="/portal-settings/integration/sso/metadata"
         withPaidBadge={!isSSOAvailable}

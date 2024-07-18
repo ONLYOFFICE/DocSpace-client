@@ -157,8 +157,6 @@ class SettingsStore {
     timePattern: "h:mm tt",
   };
 
-  organizationName = BRAND_NAME;
-
   greetingSettings = "Web Office Applications";
 
   enableAdmMess = false;

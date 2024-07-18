@@ -32,7 +32,7 @@ import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { Link } from "@docspace/shared/components/link";
 import { MainContainer, ButtonWrapper } from "./StyledDeleteData";
-import { setDocumentTitle } from "../../../../helpers/utils";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { sendSuspendPortalEmail } from "@docspace/shared/api/portal";
 import { isDesktop } from "@docspace/shared/utils";
 import { EmployeeActivationStatus } from "@docspace/shared/enums";

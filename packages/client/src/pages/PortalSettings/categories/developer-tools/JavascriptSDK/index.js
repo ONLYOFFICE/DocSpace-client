@@ -56,6 +56,7 @@ import FileSelectorImgDark from "PUBLIC_DIR/images/sdk-presets_file-selector_dar
 import EditorImgDark from "PUBLIC_DIR/images/sdk-presets_editor_dark.react.svg?url";
 import ViewerImgDark from "PUBLIC_DIR/images/sdk-presets_viewer_dark.react.svg?url";
 import CustomImgDark from "PUBLIC_DIR/images/sdk-presets_custom_dark.react.svg?url";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const SDKContainer = styled(Box)`
   @media ${tablet} {
@@ -117,7 +118,7 @@ const PresetsContainer = styled.div`
 `;
 
 const PortalIntegration = (props) => {
-  const { t, setDocumentTitle, currentColorScheme, sdkLink, theme } = props;
+  const { t, currentColorScheme, sdkLink, theme } = props;
 
   const isSmall = useRef(
     (() => {
@@ -242,13 +243,11 @@ const PortalIntegration = (props) => {
   );
 };
 
-export default inject(({ settingsStore, authStore, publicRoomStore }) => {
-  const { setDocumentTitle } = authStore;
+export default inject(({ settingsStore }) => {
   const { theme, currentColorScheme, sdkLink } = settingsStore;
 
   return {
     theme,
-    setDocumentTitle,
     currentColorScheme,
     sdkLink,
   };

@@ -90,10 +90,10 @@ import {
   CheckboxGroup,
 } from "./StyledPresets";
 import { PRODUCT_NAME, SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const Manager = (props) => {
-  const { t, setDocumentTitle, fetchExternalLinks, theme, currentColorScheme } =
-    props;
+  const { t, fetchExternalLinks, theme, currentColorScheme } = props;
   const navigate = useNavigate();
 
   setDocumentTitle(t("JavascriptSdk"));
@@ -654,14 +654,12 @@ const Manager = (props) => {
   );
 };
 
-export default inject(({ authStore, settingsStore, publicRoomStore }) => {
-  const { setDocumentTitle } = authStore;
+export default inject(({ settingsStore, publicRoomStore }) => {
   const { theme, currentColorScheme } = settingsStore;
   const { fetchExternalLinks } = publicRoomStore;
 
   return {
     theme,
-    setDocumentTitle,
     fetchExternalLinks,
     currentColorScheme,
   };

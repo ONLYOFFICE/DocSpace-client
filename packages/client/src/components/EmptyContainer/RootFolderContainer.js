@@ -61,7 +61,6 @@ import EmptyScreenArchiveUrl from "PUBLIC_DIR/images/empty_screen_archive.svg?ur
 import EmptyScreenArchiveDarkUrl from "PUBLIC_DIR/images/empty_screen_archive_dark.svg?url";
 
 import CommonButtons from "./sub-components/CommonButtons";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const RootFolderContainer = (props) => {
   const {
@@ -118,7 +117,7 @@ const RootFolderContainer = (props) => {
   const archiveRoomsDescription =
     isVisitor || isCollaborator
       ? t("ArchiveEmptyScreenUser")
-      : t("ArchiveEmptyScreen", { productName: PRODUCT_NAME });
+      : t("ArchiveEmptyScreen", { productName: t("Common:ProductName") });
 
   const privateRoomHeader = t("PrivateRoomHeader", {
     organizationName: t("Common:OrganizationName"),
@@ -131,7 +130,9 @@ const RootFolderContainer = (props) => {
     t("PrivateRoomDescriptionUnbreakable"),
   ];
 
-  const roomHeader = t("EmptyRootRoomHeader", { productName: PRODUCT_NAME });
+  const roomHeader = t("EmptyRootRoomHeader", {
+    productName: t("Common:ProductName"),
+  });
 
   const onGoToPersonal = () => {
     const newFilter = FilesFilter.getDefault();

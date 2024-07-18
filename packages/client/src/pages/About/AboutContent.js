@@ -32,7 +32,6 @@ import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledAboutBody = styled.div`
   width: 100%;
@@ -153,7 +152,7 @@ const AboutContent = (props) => {
             target="_blank"
             enableUserSelect
           >
-            &nbsp;{t("Common:OrganizationName")} {PRODUCT_NAME}&nbsp;
+            &nbsp;{t("Common:OrganizationName")} {t("Common:ProductName")}&nbsp;
           </ColorTheme>
 
           <Text

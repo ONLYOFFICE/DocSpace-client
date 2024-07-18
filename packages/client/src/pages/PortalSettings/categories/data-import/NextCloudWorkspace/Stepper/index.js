@@ -36,7 +36,6 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import { Text } from "@docspace/shared/components/text";
 
 import { Trans } from "react-i18next";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 export const getStepsData = (
   t,
@@ -74,7 +73,7 @@ export const getStepsData = (
     {
       title: t("Settings:SelectUsersWithEmail"),
       description: t("Settings:SelectUsersDescriptionNextcloud", {
-        productName: PRODUCT_NAME,
+        productName: t("Common:ProductName"),
         organizationName: t("Common:OrganizationName"),
       }),
       component: (
@@ -88,7 +87,7 @@ export const getStepsData = (
     {
       title: t("Settings:AddEmails"),
       description: t("Settings:AddEmailsDescription", {
-        productName: PRODUCT_NAME,
+        productName: t("Common:ProductName"),
         organizationName: t("Common:OrganizationName"),
       }),
       component: (
@@ -113,7 +112,7 @@ export const getStepsData = (
             ns="Settings"
             i18nKey="SelectUserTypesDescription"
             values={{
-              productName: PRODUCT_NAME,
+              productName: t("Common:ProductName"),
             }}
             components={{
               1: <b />,
@@ -129,7 +128,7 @@ export const getStepsData = (
                   i18nKey="TypesAndPrivileges"
                   ns="Settings"
                   t={t}
-                  values={{ productName: PRODUCT_NAME }}
+                  values={{ productName: t("Common:ProductName") }}
                   components={{
                     1: <b></b>,
                     2: <b></b>,
@@ -159,7 +158,7 @@ export const getStepsData = (
     {
       title: t("Settings:DataImport"),
       description: t("Settings:ImportSectionDescription", {
-        productName: PRODUCT_NAME,
+        productName: t("Common:ProductName"),
       }),
       component: (
         <ImportStep
@@ -184,7 +183,7 @@ export const getStepsData = (
     {
       title: t("Settings:DataImportComplete"),
       description: t("Settings:ImportCompleteDescriptionNextcloud", {
-        productName: PRODUCT_NAME,
+        productName: t("Common:ProductName"),
         organizationName: t("Common:OrganizationName"),
       }),
       component: (

@@ -45,7 +45,6 @@ import { Text } from "@docspace/shared/components/text";
 import { Box } from "@docspace/shared/components/box";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { toastr } from "@docspace/shared/components/toast";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const STEP_LENGTH = 6;
 
@@ -133,7 +132,7 @@ const GoogleWorkspace = ({
         i18nKey="TypesAndPrivileges"
         ns="Settings"
         t={t}
-        values={{ productName: PRODUCT_NAME }}
+        values={{ productName: t("Common:ProductName") }}
         components={{
           1: <strong></strong>,
           2: <strong></strong>,
@@ -234,7 +233,7 @@ const GoogleWorkspace = ({
     <GoogleWrapper>
       <Text className="workspace-subtitle">
         {t("Settings:AboutDataImport", {
-          productName: PRODUCT_NAME,
+          productName: t("Common:ProductName"),
           organizationName: t("Common:OrganizationName"),
         })}
       </Text>

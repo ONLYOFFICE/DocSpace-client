@@ -31,7 +31,7 @@ import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Box } from "@docspace/shared/components/box";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
+
 import LdapFieldComponent from "./LdapFieldComponent";
 
 const FIELD_STYLE = { marginBottom: "0px" };
@@ -98,7 +98,7 @@ const GroupMembership = (props) => {
         />
         <HelpButton
           tooltipContent={t("LdapGroupMembershipTooltip", {
-            productName: PRODUCT_NAME,
+            productName: t("Common:ProductName"),
           })}
         />
       </div>

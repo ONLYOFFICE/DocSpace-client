@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { StyledTitleComponent } from "../StyledComponent";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
+
 import { getTwoDotsReplacing } from "../../utils";
 
 const TariffTitleContainer = ({
@@ -95,7 +95,7 @@ const TariffTitleContainer = ({
         <div className="title">
           <Text fontWeight={600} fontSize="14px" as="span">
             {t("ActivateTariffDescr", {
-              productName: PRODUCT_NAME,
+              productName: t("Common:ProductName"),
               organizationName: t("Common:OrganizationName"),
             })}
           </Text>{" "}

@@ -37,7 +37,6 @@ import { StyledPage, StyledBody, StyledContent } from "./StyledConfirm";
 import withLoader from "../withLoader";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const ProfileRemoveForm = (props) => {
   const { t, greetingTitle, linkData, legalTerms, currentColorScheme } = props;
@@ -71,7 +70,7 @@ const ProfileRemoveForm = (props) => {
             </Text>
             <Text fontSize="16px" fontWeight="600" className="confirm-subtitle">
               {t("DeleteProfileSuccessDescription", {
-                productName: PRODUCT_NAME,
+                productName: t("Common:ProductName"),
               })}
               <Trans
                 i18nKey="DeleteProfileSuccessMessageInfo"

@@ -35,7 +35,7 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 //import { ComboBox } from "@docspace/shared/components/combobox";
 // import { EmployeeType } from "@docspace/shared/enums";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
+
 import AccessSelector from "SRC_DIR/components/AccessSelector";
 import { isMobile } from "@docspace/shared/utils";
 import LdapFieldComponent from "./LdapFieldComponent";
@@ -220,7 +220,7 @@ const AttributeMapping = (props) => {
             </Text>
             <HelpButton
               tooltipContent={t("LdapUserTypeTooltip", {
-                productName: PRODUCT_NAME,
+                productName: t("Common:ProductName"),
               })}
             />
           </Box>

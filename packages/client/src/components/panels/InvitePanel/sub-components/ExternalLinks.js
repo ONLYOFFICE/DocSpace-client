@@ -49,7 +49,6 @@ import {
   StyledToggleButton,
   StyledDescription,
 } from "../StyledInvitePanel";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const ExternalLinks = ({
   t,
@@ -221,7 +220,9 @@ const ExternalLinks = ({
       </StyledSubHeader>
       <StyledDescription>
         {roomId === -1
-          ? t("InviteViaLinkDescriptionAccounts", { productName: PRODUCT_NAME })
+          ? t("InviteViaLinkDescriptionAccounts", {
+              productName: t("Common:ProductName"),
+            })
           : t("InviteViaLinkDescriptionRoom")}
       </StyledDescription>
       {externalLinksVisible && (

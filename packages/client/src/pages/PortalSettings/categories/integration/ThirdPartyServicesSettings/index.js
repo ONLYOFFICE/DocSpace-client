@@ -47,7 +47,7 @@ import ConsumerItem from "./sub-components/consumerItem";
 import ConsumerModalDialog from "./sub-components/consumerModalDialog";
 
 import ThirdPartyLoader from "./sub-components/thirdPartyLoader";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
+
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const RootContainer = styled(Box)`
@@ -254,7 +254,7 @@ class ThirdPartyServices extends React.Component {
             />
             <Text>
               {t("IntegrationRequest", {
-                productName: PRODUCT_NAME,
+                productName: t("Common:ProductName"),
                 organizationName: t("Common:OrganizationName"),
               })}
             </Text>

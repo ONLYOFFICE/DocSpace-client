@@ -89,7 +89,7 @@ import {
   SelectedItemsContainer,
   CheckboxGroup,
 } from "./StyledPresets";
-import { PRODUCT_NAME, SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const Manager = (props) => {
@@ -347,8 +347,10 @@ const Manager = (props) => {
 
   return (
     <PresetWrapper
-      description={t("CustomDescription", { productName: PRODUCT_NAME })}
-      header={t("CreateSamplePortal", { productName: PRODUCT_NAME })}
+      description={t("CustomDescription", {
+        productName: t("Common:ProductName"),
+      })}
+      header={t("CreateSamplePortal", { productName: t("Common:ProductName") })}
     >
       <Container>
         <PreviewBlock
@@ -505,7 +507,7 @@ const Manager = (props) => {
                     <TooltipContent
                       title={t("Header")}
                       description={t("HeaderDescription", {
-                        productName: PRODUCT_NAME,
+                        productName: t("Common:ProductName"),
                       })}
                       img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
                     />

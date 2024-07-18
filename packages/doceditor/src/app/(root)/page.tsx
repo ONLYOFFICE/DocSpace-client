@@ -43,14 +43,6 @@ const initialSearchParams: RootPageProps["searchParams"] = {
   editorType: undefined,
 };
 
-const BRAND_NAME = "ONLYOFFICE"; //TODO: replace to t("Common:OrganizationName");
-
-export const metadata: Metadata = {
-  title: `${BRAND_NAME} DocEditor page`,
-
-  description: "",
-};
-
 async function Page({ searchParams }: RootPageProps) {
   const { fileId, fileid, version, doc, action, share, editorType, error } =
     searchParams ?? initialSearchParams;

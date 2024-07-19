@@ -67,10 +67,6 @@ const ConvertDialogComponent = (props) => {
       label: t("Spreadsheet"),
       value: ".xlsx",
     },
-    {
-      label: t("Presentation"),
-      value: ".pptx",
-    },
   ];
 
   const isXML = convertItem?.fileExst?.includes(".xml");

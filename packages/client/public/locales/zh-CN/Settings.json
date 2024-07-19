@@ -151,7 +151,7 @@
   "LastUpdate": "上次更新时间：{{date}}",
   "LDAP": "LDAP 设置",
   "LicenseLimitCounter": "许可限制管理员/高级用户：",
-  "LicenseLimitDescription": "许可证限制计数器包括：{{productName}}中已存在的帐户和您要导入的新用户。如果您导入已拥有{{productName}}帐户的用户，则不会再次将其计入计数器。您的{{productName}}许可证允许您最多拥有 100 个用户。",
+  "LicenseLimitDescription": "许可证限制计数器包括：{{productName}}中已存在的帐户和您要导入的新用户。如果您导入已拥有{{productName}}帐户的用户，则不会再次将其计入计数器。您的{{productName}}许可证允许您最多拥有 {{maxLimit}} 个用户。",
   "Lifetime": "寿命（分钟）",
   "LimitThemesTooltip": "您只能创建 3 个自定义主题。如需创建新的主题，请删除一个之前的主题。",
   "LocalFile": "本地文件",

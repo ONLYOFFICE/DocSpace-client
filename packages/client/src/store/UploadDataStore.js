@@ -1173,7 +1173,7 @@ class UploadDataStore {
     operationId,
     toFolderId,
   ) => {
-    const { chunkUploadCount: asyncChunkUploadCount } = this.filesSettingsStore;
+    const { uploadThreadCount } = this.filesSettingsStore;
     const length = requestsDataArray.length;
 
     const isThirdPartyFolder = typeof toFolderId === "string";
@@ -1204,8 +1204,7 @@ class UploadDataStore {
       }
 
       const promise = new Promise((resolve, reject) => {
-        let i =
-          length <= asyncChunkUploadCount ? length : asyncChunkUploadCount;
+        let i = length <= uploadThreadCount ? length : uploadThreadCount;
         while (i !== 0) {
           this.asyncUpload(
             t,
@@ -1269,15 +1268,15 @@ class UploadDataStore {
       // console.log("IS PARALLEL");
       const notUploadedFiles = this.files.filter((f) => !f.inAction);
 
-      const { chunkUploadCount } = this.filesSettingsStore;
+      const { maxUploadFilesCount } = this.filesSettingsStore;
 
       const countFiles =
-        notUploadedFiles.length >= chunkUploadCount
-          ? chunkUploadCount
+        notUploadedFiles.length >= maxUploadFilesCount
+          ? maxUploadFilesCount
           : notUploadedFiles.length;
 
       for (let i = 0; i < countFiles; i++) {
-        if (this.currentUploadNumber <= chunkUploadCount) {
+        if (this.currentUploadNumber <= maxUploadFilesCount) {
           const fileIndex = this.files.findIndex(
             (f) => f.uniqueId === notUploadedFiles[i].uniqueId,
           );

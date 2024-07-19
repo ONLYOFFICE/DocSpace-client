@@ -31,15 +31,15 @@ interface PageProps {
 }
 
 async function Page({ searchParams }: PageProps) {
-  const { share, fileId, fillingSessionId } = searchParams;
-
-  console.log({ fillingSessionId, fileId, share });
+  const { share, fillingSessionId, is_file } = searchParams;
 
   const session = await getFillingSession(fillingSessionId!, share);
 
-  console.log({ session });
+  const isShreFile = is_file === "true";
 
-  return <CompletedForm />;
+  return (
+    <CompletedForm session={session} share={share} isShreFile={isShreFile} />
+  );
 }
 
 export default Page;

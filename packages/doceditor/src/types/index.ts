@@ -230,7 +230,7 @@ export type EditorProps = {
   errorMessage?: string;
   isSkipError?: boolean;
 
-  onDownloadAs: (obj: object) => void;
+  onDownloadAs?: (obj: object) => void;
   onSDKRequestSharingSettings?: () => void;
   onSDKRequestSaveAs?: (event: object) => void;
   onSDKRequestInsertImage?: (event: object) => void;

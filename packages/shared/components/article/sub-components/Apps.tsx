@@ -56,8 +56,8 @@ const getLink = () => {
 };
 
 const ArticleApps = React.memo(
-  ({ showText, withDevTools, organizationName }: ArticleAppsProps) => {
-    const { t } = useTranslation(["Translations"]);
+  ({ showText, withDevTools }: ArticleAppsProps) => {
+    const { t } = useTranslation(["Translations", "Common"]);
     const theme = useTheme();
 
     const baseUrl = getLink();
@@ -79,7 +79,9 @@ const ArticleApps = React.memo(
             size={32}
             isFill
             hoverColor={theme.filesArticleBody.downloadAppList.winHoverColor}
-            title={t("Common:MobileWin", { organizationName })}
+            title={t("Common:MobileWin", {
+              organizationName: t("Common:OrganizationName"),
+            })}
           />
           <IconButton
             onClick={() => window.open(desktopLink)}
@@ -87,7 +89,9 @@ const ArticleApps = React.memo(
             size={32}
             isFill
             hoverColor={theme.filesArticleBody.downloadAppList.macHoverColor}
-            title={t("Common:MobileMac", { organizationName })}
+            title={t("Common:MobileMac", {
+              organizationName: t("Common:OrganizationName"),
+            })}
           />
           <IconButton
             onClick={() => window.open(desktopLink)}
@@ -95,7 +99,9 @@ const ArticleApps = React.memo(
             size={32}
             isFill
             hoverColor={theme.filesArticleBody.downloadAppList.linuxHoverColor}
-            title={t("Common:MobileLinux", { organizationName })}
+            title={t("Common:MobileLinux", {
+              organizationName: t("Common:OrganizationName"),
+            })}
           />
           <IconButton
             onClick={() => window.open(androidLink)}
@@ -105,7 +111,9 @@ const ArticleApps = React.memo(
             hoverColor={
               theme.filesArticleBody.downloadAppList.androidHoverColor
             }
-            title={t("Common:MobileAndroid", { organizationName })}
+            title={t("Common:MobileAndroid", {
+              organizationName: t("Common:OrganizationName"),
+            })}
           />
           <IconButton
             onClick={() => window.open(iosLink)}
@@ -113,7 +121,9 @@ const ArticleApps = React.memo(
             size={32}
             isFill
             hoverColor={theme.filesArticleBody.downloadAppList.iosHoverColor}
-            title={t("Common:MobileIos", { organizationName })}
+            title={t("Common:MobileIos", {
+              organizationName: t("Common:OrganizationName"),
+            })}
           />
         </div>
       </StyledArticleApps>

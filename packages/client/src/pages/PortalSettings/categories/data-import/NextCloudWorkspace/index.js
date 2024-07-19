@@ -38,7 +38,6 @@ import { toastr } from "@docspace/shared/components/toast";
 import { getStepsData } from "./Stepper";
 import BreakpointWarning from "SRC_DIR/components/BreakpointWarning";
 import SelectFileLoader from "../sub-components/SelectFileLoader";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const NextcloudWrapper = styled.div`
   max-width: 700px;
@@ -66,7 +65,6 @@ const NextcloudWorkspace = (props) => {
     getMigrationStatus,
     setUsers,
     filteredUsers,
-    organizationName,
   } = props;
   const [currentStep, setCurrentStep] = useState(1);
   const [shouldRender, setShouldRender] = useState(false);
@@ -75,7 +73,7 @@ const NextcloudWorkspace = (props) => {
     currentStep,
     setCurrentStep,
     filteredUsers.length === 0,
-    organizationName,
+    t("Common:OrganizationName"),
   );
   const navigate = useNavigate();
 
@@ -154,8 +152,8 @@ const NextcloudWorkspace = (props) => {
           color={theme.isBase ? "#657077" : "#ADADAD"}
         >
           {t("Settings:AboutDataImport", {
-            productName: PRODUCT_NAME,
-            organizationName,
+            productName: t("Common:ProductName"),
+            organizationName: t("Common:OrganizationName"),
           })}
         </Text>
         <Text
@@ -179,7 +177,7 @@ export default inject(({ setup, settingsStore, importAccountsStore }) => {
   const { clearCheckedAccounts, getMigrationStatus, setUsers, filteredUsers } =
     importAccountsStore;
   const { initSettings, viewAs, setViewAs } = setup;
-  const { currentDeviceType, organizationName } = settingsStore;
+  const { currentDeviceType } = settingsStore;
 
   return {
     initSettings,
@@ -191,7 +189,6 @@ export default inject(({ setup, settingsStore, importAccountsStore }) => {
     getMigrationStatus,
     setUsers,
     filteredUsers,
-    organizationName,
   };
 })(
   withTranslation(["Common, SMTPSettings, Settings"])(

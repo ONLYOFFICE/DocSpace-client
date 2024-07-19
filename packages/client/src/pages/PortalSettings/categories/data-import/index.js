@@ -42,7 +42,8 @@ import GoogleWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.google.r
 import NextcloudWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.nextcloud.react.svg?url";
 import OnlyofficeWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.onlyoffice.react.svg?url";
 import DataImportLoader from "./sub-components/DataImportLoader";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
+
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const DataImport = ({
   t,
@@ -51,10 +52,8 @@ const DataImport = ({
   setServices,
   getMigrationList,
   getMigrationStatus,
-  setDocumentTitle,
   isMigrationInit,
   setIsMigrationInit,
-  organizationName,
 }) => {
   const navigate = useNavigate();
 
@@ -135,8 +134,8 @@ const DataImport = ({
     <WorkspacesContainer>
       <Text className="data-import-description">
         {t("DataImportDescription", {
-          productName: PRODUCT_NAME,
-          organizationName,
+          productName: t("Common:ProductName"),
+          organizationName: t("Common:OrganizationName"),
         })}
       </Text>
       <Text className="data-import-subtitle">{t("UploadBackupData")}</Text>
@@ -174,9 +173,7 @@ export default inject(({ authStore, settingsStore, importAccountsStore }) => {
     setIsMigrationInit,
   } = importAccountsStore;
 
-  const { setDocumentTitle } = authStore;
-
-  const { organizationName, theme } = settingsStore;
+  const { theme } = settingsStore;
 
   return {
     services,
@@ -184,9 +181,7 @@ export default inject(({ authStore, settingsStore, importAccountsStore }) => {
     getMigrationList,
     getMigrationStatus,
     theme,
-    setDocumentTitle,
     isMigrationInit,
     setIsMigrationInit,
-    organizationName,
   };
 })(withTranslation(["Settings"])(observer(DataImport)));

@@ -57,7 +57,7 @@ const StyledBody = styled.div`
     .embedding-panel_banner-close-icon {
       min-width: 12px;
       min-height: 12px;
-      margin-left: auto;
+      margin-inline-start: auto;
     }
   }
 

@@ -24,58 +24,67 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { Metadata } from "next";
-import { headers } from "next/headers";
+import React from "react";
+import { inject, observer } from "mobx-react";
+import { TextInput } from "@docspace/shared/components/text-input";
+import { Textarea } from "@docspace/shared/components/textarea";
 
-import { getSelectorsByUserAgent } from "react-device-detect";
+const LdapFieldComponent = (props) => {
+  const {
+    isTextArea,
+    errors,
+    removeErrorField,
+    setErrorField,
+    name,
+    onChange,
+    ...prop
+  } = props;
 
-import { getData } from "@/utils/actions";
-import { RootPageProps } from "@/types";
-import Root from "@/components/Root";
+  const onChangeFn = (e) => {
+    const { value, name } = e.target;
 
-const initialSearchParams: RootPageProps["searchParams"] = {
-  fileId: undefined,
-  fileid: undefined,
-  version: undefined,
-  doc: undefined,
-  action: undefined,
-  share: undefined,
-  editorType: undefined,
+    if (value.trim() !== "") {
+      removeErrorField(name);
+    } else {
+      setErrorField(name);
+    }
+
+    onChange && onChange(e);
+  };
+
+  const onFocus = (e) => {
+    const name = e.target.name;
+    if (errors[name]) {
+      removeErrorField(name);
+    }
+  };
+
+  const onBlur = (e) => {
+    if (e.target.value.trim() === "") {
+      setErrorField(e.target.name);
+    }
+  };
+
+  if (isTextArea)
+    return <Textarea name={name} onChange={onChangeFn} {...prop} />;
+
+  return (
+    <TextInput
+      name={name}
+      onBlur={onBlur}
+      onFocus={onFocus}
+      onChange={onChangeFn}
+      {...prop}
+    />
+  );
 };
 
-async function Page({ searchParams }: RootPageProps) {
-  const { fileId, fileid, version, doc, action, share, editorType, error } =
-    searchParams ?? initialSearchParams;
+export default inject(({ ldapStore }) => {
+  const { errors, removeErrorField, setErrorField } = ldapStore;
 
-  const hdrs = headers();
-
-  let type = editorType;
-
-  const ua = hdrs.get("user-agent");
-  if (ua && !type) {
-    const { isMobile } = getSelectorsByUserAgent(ua);
-
-    if (isMobile) type = "mobile";
-  }
-
-  const startDate = new Date();
-
-  const data = await getData(
-    fileId ?? fileid ?? "",
-    version,
-    doc,
-    action,
-    share,
-    type,
-  );
-
-  const timer = new Date().getTime() - startDate.getTime();
-
-  if (data.error?.status === "not-found" && error) {
-    data.error.message = error;
-  }
-
-  return <Root {...data} timer={timer} />;
-}
-
-export default Page;
+  return {
+    errors,
+    removeErrorField,
+    setErrorField,
+  };
+})(observer(LdapFieldComponent));

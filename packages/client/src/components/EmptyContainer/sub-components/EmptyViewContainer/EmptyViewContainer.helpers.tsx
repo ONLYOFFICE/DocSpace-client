@@ -47,7 +47,6 @@ import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TFolderSecurity } from "@docspace/shared/api/files/types";
 import type { EmptyViewItemType } from "@docspace/shared/components/empty-view";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 import type {
   ExtensiontionType,
@@ -100,7 +99,7 @@ export const getDescription = (
       )
       .with([FolderType.FormRoom, null, P._], () =>
         t("EmptyView:FormFolderDefaultDescription", {
-          portalName: PRODUCT_NAME,
+          productName: t("Common:ProductName"),
         }),
       )
       .otherwise(() => "");
@@ -351,7 +350,7 @@ export const getOptions = (
 
   const uploadPDFFromDocSpace = createUploadFromDocSpace(
     t("EmptyView:UploadFromPortalTitle", {
-      productName: PRODUCT_NAME,
+      productName: t("Common:ProductName"),
     }),
     t("EmptyView:UploadPDFFormOptionDescription"),
     FilterType.PDFForm,
@@ -359,7 +358,7 @@ export const getOptions = (
 
   const uploadAllFromDocSpace = createUploadFromDocSpace(
     t("EmptyView:UploadFromPortalTitle", {
-      productName: PRODUCT_NAME,
+      productName: t("Common:ProductName"),
     }),
     t("EmptyView:UploadFromPortalDescription"),
     // TODO: need fix selector

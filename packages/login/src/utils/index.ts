@@ -174,3 +174,15 @@ export const getSelectZone = (
     zones.filter((zone) => zone.key === defaultTimezone)
   );
 };
+
+export const getStringFromSearchParams = (searchParams: {
+  [key: string]: string;
+}): string => {
+  let stringSearchParams = "";
+
+  for (const [key, value] of Object.entries(searchParams)) {
+    stringSearchParams += `&${key}=${value}`;
+  }
+
+  return stringSearchParams.slice(1);
+};

@@ -36,7 +36,6 @@ import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 import SimpleNav from "@/components/SimpleNav";
 import { LoginContent, LoginFormWrapper } from "@/components/Login";
-import GreetingContainer from "@/components/GreetingContainer";
 import { getColorTheme, getSettings } from "@/utils/actions";
 
 const LanguageComboboxWrapper = dynamic(
@@ -79,10 +78,7 @@ export default async function Layout({
               themeId={ThemeId.LinkForgotPassword}
               isRegisterContainerVisible={isRegisterContainerVisible}
             >
-              <GreetingContainer
-                greetingSettings={objectSettings?.greetingSettings}
-              />
-              <FormWrapper id="login-form">{children}</FormWrapper>
+              {children}
             </ColorTheme>
           </LoginContent>
         </Scrollbar>

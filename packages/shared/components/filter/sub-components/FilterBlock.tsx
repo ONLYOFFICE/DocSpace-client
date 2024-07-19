@@ -479,6 +479,8 @@ const FilterBlock = ({
   };
 
   const showFooter = isLoading ? false : isEqualFilter();
+  const showClearFilterBtn =
+    !isLoading && (selectedFilterValue.length > 0 || filterValues.length > 0);
 
   const filterBlockComponent = (
     <>
@@ -535,7 +537,7 @@ const FilterBlock = ({
             <Heading size={HeadingSize.medium} level={HeadingLevel.h1}>
               {filterHeader}
             </Heading>
-            {showFooter && (
+            {showClearFilterBtn && (
               <IconButton
                 id="filter_search-options-clear"
                 iconName={ClearReactSvgUrl}

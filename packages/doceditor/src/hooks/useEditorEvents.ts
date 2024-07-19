@@ -558,6 +558,7 @@ const useEditorEvents = ({
       setTimeout(() => {
         docSaved
           ? setDocumentTitle(
+              t,
               docTitle,
               config?.document.fileType ?? "",
               documentReady,
@@ -565,6 +566,7 @@ const useEditorEvents = ({
               setDocTitle,
             )
           : setDocumentTitle(
+              t,
               `*${docTitle}`,
               config?.document.fileType ?? "",
               documentReady,
@@ -573,7 +575,14 @@ const useEditorEvents = ({
             );
       }, 500);
     },
-    [config?.document.fileType, docSaved, docTitle, documentReady, successAuth],
+    [
+      t,
+      config?.document.fileType,
+      docSaved,
+      docTitle,
+      documentReady,
+      successAuth,
+    ],
   );
 
   const onMetaChange = React.useCallback(
@@ -583,6 +592,7 @@ const useEditorEvents = ({
 
       if (newTitle && newTitle !== docTitle) {
         setDocumentTitle(
+          t,
           newTitle,
           config?.document.fileType ?? "",
           documentReady,
@@ -592,7 +602,7 @@ const useEditorEvents = ({
         setDocTitle(newTitle);
       }
     },
-    [config?.document.fileType, docTitle, documentReady, successAuth],
+    [t, config?.document.fileType, docTitle, documentReady, successAuth],
   );
 
   const onMakeActionLink = React.useCallback((event: object) => {

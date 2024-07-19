@@ -33,7 +33,6 @@ import { ToggleButton } from "@docspace/shared/components/toggle-button";
 
 import { StyledBaseQuotaComponent } from "../StyledComponent";
 import QuotaForm from "../../../../../components/QuotaForm";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 let timerId = null;
 const QuotaPerItemComponent = (props) => {
@@ -107,8 +106,10 @@ const QuotaPerItemComponent = (props) => {
         />
         <Text className="toggle_label" fontSize="12px">
           {type === "user"
-            ? t("SetDefaultUserQuota", { productName: PRODUCT_NAME })
-            : t("SetDefaultRoomQuota", { productName: PRODUCT_NAME })}
+            ? t("SetDefaultUserQuota", { productName: t("Common:ProductName") })
+            : t("SetDefaultRoomQuota", {
+                productName: t("Common:ProductName"),
+              })}
         </Text>
         {isToggleChecked && (
           <QuotaForm

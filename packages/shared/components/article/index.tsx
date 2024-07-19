@@ -109,7 +109,6 @@ const Article = ({
   chatDisplayName,
   zendeskKey,
   showProgress,
-  organizationName,
   user,
   getActions,
   onProfileClick,
@@ -293,11 +292,7 @@ const Article = ({
                 />
               )}
               {!hideAppsBlock && (
-                <ArticleApps
-                  withDevTools={withDevTools}
-                  showText={showText}
-                  organizationName={organizationName}
-                />
+                <ArticleApps withDevTools={withDevTools} showText={showText} />
               )}
               {!isMobile && isLiveChatAvailable && (
                 <ArticleLiveChat

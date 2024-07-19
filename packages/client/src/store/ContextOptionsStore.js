@@ -111,7 +111,6 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import { getFileLink, getFolderLink } from "@docspace/shared/api/files";
 import { resendInvitesAgain } from "@docspace/shared/api/people";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -1594,7 +1593,9 @@ class ContextOptionsStore {
       {
         id: "option_link-for-portal-users",
         key: "link-for-portal-users",
-        label: t("LinkForPortalUsers", { productName: PRODUCT_NAME }),
+        label: t("LinkForPortalUsers", {
+          productName: t("Common:ProductName"),
+        }),
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onClickLinkForPortal(item, t),
         disabled: false,
@@ -2217,7 +2218,9 @@ class ContextOptionsStore {
           id: "personal_upload-from-docspace",
           className: "main-button_drop-down",
           icon: ActionsUploadReactSvgUrl,
-          label: t("Common:FromPortal", { productName: PRODUCT_NAME }),
+          label: t("Common:FromPortal", {
+            productName: t("Common:ProductName"),
+          }),
           key: "personal_upload-from-docspace",
           onClick: () =>
             this.onShowFormRoomSelectFileDialog(FilterType.PDFForm),
@@ -2335,7 +2338,9 @@ class ContextOptionsStore {
         id: "accounts-add_administrator",
         className: "main-button_drop-down",
         icon: PersonAdminReactSvgUrl,
-        label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
+        label: t("Common:PortalAdmin", {
+          productName: t("Common:ProductName"),
+        }),
         onClick: this.onInvite,
         "data-type": EmployeeType.Admin,
         key: "administrator",

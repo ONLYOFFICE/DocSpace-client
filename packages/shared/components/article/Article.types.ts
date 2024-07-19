@@ -71,7 +71,6 @@ export interface ArticleZendeskProps {
 export interface ArticleAppsProps {
   showText: boolean;
   withDevTools: boolean;
-  organizationName: string;
 }
 
 export interface ArticleDevToolsBarProps {

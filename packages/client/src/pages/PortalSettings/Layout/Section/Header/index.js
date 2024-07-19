@@ -184,7 +184,6 @@ const SectionHeaderContent = (props) => {
     tReady,
     setIsLoadedSectionHeader,
     isSSOAvailable,
-    organizationName,
   } = props;
 
   const navigate = useNavigate();
@@ -376,31 +375,29 @@ const SectionHeaderContent = (props) => {
             />
           )}
           <Headline type="content" truncate={true}>
-            <div className="settings-section_header">
-              <div className="header">
-                {isMobile() && isServicePage && (
-                  <IconButton
-                    iconName={ArrowPathReactSvgUrl}
-                    size="17"
-                    isFill={true}
-                    onClick={onBackToParent}
-                    className="arrow-button"
-                  />
-                )}
-                {t(header, { organizationName })}
-              </div>
-              {isNeedPaidIcon ? (
-                <Badge
-                  backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
-                  label={t("Common:Paid")}
-                  fontWeight="700"
-                  className="settings-section_badge"
-                  isPaidBadge={true}
-                />
-              ) : (
-                ""
-              )}
-            </div>
+            {isMobile() && isServicePage && (
+              <IconButton
+                iconName={ArrowPathReactSvgUrl}
+                size="17"
+                isFill={true}
+                onClick={onBackToParent}
+                className="arrow-button"
+              />
+            )}
+            {t(header, {
+              organizationName: t("Common:OrganizationName"),
+            })}
+            {isNeedPaidIcon ? (
+              <Badge
+                backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
+                label={t("Common:Paid")}
+                fontWeight="700"
+                className="settings-section_badge"
+                isPaidBadge={true}
+              />
+            ) : (
+              ""
+            )}
           </Headline>
           <div className="tariff-bar">
             <TariffBar />
@@ -423,7 +420,7 @@ const SectionHeaderContent = (props) => {
   );
 };
 
-export default inject(({ settingsStore, currentQuotaStore, setup, common }) => {
+export default inject(({ currentQuotaStore, setup, common }) => {
   const {
     isBrandingAndCustomizationAvailable,
     isRestoreAndAutoBackupAvailable,
@@ -444,8 +441,6 @@ export default inject(({ settingsStore, currentQuotaStore, setup, common }) => {
   const { admins, selectorIsOpen } = setup.security.accessRight;
   const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
 
-  const { organizationName } = settingsStore;
-
   return {
     addUsers,
     removeAdmins,
@@ -465,7 +460,6 @@ export default inject(({ settingsStore, currentQuotaStore, setup, common }) => {
     isBrandingAndCustomizationAvailable,
     isRestoreAndAutoBackupAvailable,
     isSSOAvailable,
-    organizationName,
   };
 })(
   withLoading(

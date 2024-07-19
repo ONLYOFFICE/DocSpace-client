@@ -38,6 +38,7 @@ import type {
   Nullable,
   TCreatedBy,
   TPathParts,
+  TTranslation,
 } from "@docspace/shared/types";
 import { TFolder, TFolderSecurity } from "@docspace/shared/api/files/types";
 import { TLogo, TRoomSecurity } from "@docspace/shared/api/rooms/types";
@@ -304,9 +305,10 @@ class SelectedFolderStore {
     if (!("providerKey" in selectedFolder)) this.providerKey = null;
   };
 
-  setSelectedFolder: (selectedFolder: TSetSelectedFolder | null) => void = (
-    selectedFolder,
-  ) => {
+  setSelectedFolder: (
+    t: TTranslation,
+    selectedFolder: TSetSelectedFolder | null,
+  ) => void = (selectedFolder) => {
     const socketHelper = this.settingsStore?.socketHelper;
 
     this.toDefault();

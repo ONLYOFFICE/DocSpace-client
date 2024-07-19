@@ -40,6 +40,7 @@
   "RoomExternalLinkCreated": "Link created.",
   "RoomExternalLinkDeleted": "Link <1>«{{linkTitle}}»</1> deleted.",
   "RoomExternalLinkRenamed": "Link <1>«{{oldLinkTitle}}»</1> renamed to <1>«{{linkTitle}}»</1>",
+  "RoomExternalLinkRevoked": "Previous link <1>«{{linkTitle}}»</1> revoked <br/> New Link <1>«{{linkTitle}}»</1> created",
   "RoomGroupAdded": "Groups  added.",
   "RoomGroupRemove": "Group removed",
   "RoomLogoCreated": "Icon changed",

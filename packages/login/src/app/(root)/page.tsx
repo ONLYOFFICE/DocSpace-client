@@ -30,6 +30,8 @@ import LoginForm from "@/components/LoginForm";
 import ThirdParty from "@/components/ThirdParty";
 import RecoverAccess from "@/components/RecoverAccess";
 import Register from "@/components/Register";
+import { GreetingLoginContainer } from "@/components/GreetingContainer";
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 async function Page() {
   const settings = await getSettings();
@@ -38,23 +40,28 @@ async function Page() {
     <Login>
       {settings && typeof settings !== "string" && (
         <>
-          <LoginForm
-            hashSettings={settings?.passwordHash}
-            cookieSettingsEnabled={settings?.cookieSettingsEnabled}
-            reCaptchaPublicKey={settings?.recaptchaPublicKey}
-            reCaptchaType={settings?.recaptchaType}
+          <GreetingLoginContainer
+            greetingSettings={settings.greetingSettings}
           />
-          <ThirdParty />
-          {settings.enableAdmMess && <RecoverAccess />}
-          {settings.enabledJoin && (
-            <Register
-              id="login_register"
-              enabledJoin
-              trustedDomains={settings.trustedDomains}
-              trustedDomainsType={settings.trustedDomainsType}
-              isAuthenticated={false}
+          <FormWrapper id="login-form">
+            <LoginForm
+              hashSettings={settings?.passwordHash}
+              cookieSettingsEnabled={settings?.cookieSettingsEnabled}
+              reCaptchaPublicKey={settings?.recaptchaPublicKey}
+              reCaptchaType={settings?.recaptchaType}
             />
-          )}
+            <ThirdParty />
+            {settings.enableAdmMess && <RecoverAccess />}
+            {settings.enabledJoin && (
+              <Register
+                id="login_register"
+                enabledJoin
+                trustedDomains={settings.trustedDomains}
+                trustedDomainsType={settings.trustedDomainsType}
+                isAuthenticated={false}
+              />
+            )}
+          </FormWrapper>
         </>
       )}
     </Login>

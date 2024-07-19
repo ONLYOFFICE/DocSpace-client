@@ -21,7 +21,6 @@
   "FolderTitleWebDav": "مجلد WebDAV",
   "FolderTitleYandex": "مجلد Yandex",
   "FormTemplates": "قوالب جاهزة",
-  "LinkCopySuccess": "تم نسخ الرابط إلى الحافظة",
   "LinkHasExpiredAndHasBeenDisabled": "تم انتهاء صلاحية الرابط وتم تعطيله",
   "LinkValidTime": "هذا الرابط صالح لمدة {{days_count}} أيام فقط.",
   "NewForm": "نموذج PDF",

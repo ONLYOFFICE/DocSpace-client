@@ -21,7 +21,6 @@
   "FolderTitleWebDav": "WebDAV目录",
   "FolderTitleYandex": "Yandex目录",
   "FormTemplates": "表单模板",
-  "LinkCopySuccess": "链接已复制到剪贴板中",
   "LinkHasExpiredAndHasBeenDisabled": "此链接过期，已被禁用",
   "LinkValidTime": "该链接仅在{{days_count}}天内有效。",
   "NewForm": "PDF 表单",

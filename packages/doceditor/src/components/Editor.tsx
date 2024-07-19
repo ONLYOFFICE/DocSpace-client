@@ -172,12 +172,12 @@ const Editor = ({
             ? window.ClientConfig?.editor?.requestClose ?? false
             : false,
         text: openFileLocationText,
+        blank: openOnNewPage,
       };
       if (
         typeof window !== "undefined" &&
         !window.ClientConfig?.editor?.requestClose
       ) {
-        goBack.blank = openOnNewPage ? true : false;
         goBack.url = getBackUrl(fileInfo.rootFolderType, fileInfo.folderId);
       }
     }

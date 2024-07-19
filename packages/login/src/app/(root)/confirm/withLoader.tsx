@@ -39,7 +39,6 @@ import {
   TPasswordSettings,
   TThirdPartyProvider,
 } from "@docspace/shared/api/settings/types";
-import { Nullable } from "@docspace/shared/types";
 import {
   getCapabilities,
   getPortalPasswordSettings,
@@ -57,11 +56,10 @@ export default function withLoader<T extends WithLoaderProps>(
     const { linkData } = useContext(ConfirmRouteContext);
 
     const [passwordSettings, setPasswordSettings] =
-      useState<Nullable<TPasswordSettings>>(null);
-    const [capabilities, setCapabilities] =
-      useState<Nullable<TCapabilities>>(null);
-    const [thirdPartyProvider, setThirdPartyProvider] =
-      useState<Nullable<TThirdPartyProvider[]>>(null);
+      useState<TPasswordSettings>();
+    const [capabilities, setCapabilities] = useState<TCapabilities>();
+    const [thirdPartyProviders, setThirdPartyProviders] =
+      useState<TThirdPartyProvider[]>();
 
     const [isLoadedState, setIsLoadedState] = useState(false);
     const [error, setError] = useState<string>();
@@ -122,7 +120,7 @@ export default function withLoader<T extends WithLoaderProps>(
           getCapabilities(),
         ]);
 
-        if (thirdParty) setThirdPartyProvider(thirdParty);
+        if (thirdParty) setThirdPartyProviders(thirdParty);
         if (capabilities) setCapabilities(capabilities);
       } catch (error) {
         const knownError = error as TError;
@@ -185,7 +183,7 @@ export default function withLoader<T extends WithLoaderProps>(
         setIsLoaded={setIsLoadedState}
         passwordSettings={passwordSettings}
         capabilities={capabilities}
-        thirdPartyProvider={thirdPartyProvider}
+        thirdPartyProviders={thirdPartyProviders}
       />
     );
   };

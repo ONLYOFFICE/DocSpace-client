@@ -172,6 +172,7 @@ const Editor = ({
             ? window.ClientConfig?.editor?.requestClose ?? false
             : false,
         text: openFileLocationText,
+        blank: openOnNewPage,
       };
       if (
         typeof window !== "undefined" &&

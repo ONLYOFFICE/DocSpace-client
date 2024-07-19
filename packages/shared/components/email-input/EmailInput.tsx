@@ -53,7 +53,7 @@ const EmailInput = ({
   hasError,
   isAutoFocussed,
   ...rest
-}: EmailInputProps) => {
+}: EmailInputProps & TextInputProps) => {
   const [inputValue, setInputValue] = React.useState(value);
   const [isValidEmail, setIsValidEmail] = React.useState<TValidate>(
     {} as TValidate,

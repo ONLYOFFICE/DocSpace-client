@@ -192,6 +192,31 @@ export async function getUserByEmail(
 
   const res = await fetch(getUserByEmail);
 
+  if (!res.ok) {
+    return res.status;
+  }
+
+  const user = await res.json();
+
+  if (user && user.displayName) {
+    user.displayName = Encoder.htmlDecode(user.displayName);
+  }
+
+  return user.response as TUser;
+}
+
+export async function getUserFromConfirm(
+  userId: string,
+  confirmKey: string | null = null,
+) {
+  const [getUserFromConfirm] = createRequest(
+    [`/people/${userId}`],
+    [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
+    "GET",
+  );
+
+  const res = await fetch(getUserFromConfirm);
+
   if (!res.ok) return;
 
   const user = await res.json();
@@ -284,4 +309,42 @@ export async function logout() {
   const res = await fetch(logout);
 
   if (!res.ok) return;
+}
+
+export async function signupOAuth(signupAccount: { [key: string]: string }) {
+  const [signupOAuth] = createRequest(
+    [`/people/thirdparty/signup`],
+    [["", ""]],
+    "POST",
+    JSON.stringify({
+      signupAccount,
+    }),
+  );
+
+  const res = await (await fetch(signupOAuth)).json();
+
+  if (!res.ok) throw new Error(res.statusText);
+}
+
+export async function createUser(data, confirmKey: string | null = null) {
+  const [createUser] = createRequest(
+    [`/people`],
+    [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
+    "POST",
+    JSON.stringify({
+      data,
+    }),
+  );
+
+  const res = await fetch(createUser);
+
+  if (!res.ok) throw new Error(res.statusText);
+
+  const user = await res.json();
+
+  if (user && user.displayName) {
+    user.displayName = Encoder.htmlDecode(user.displayName);
+  }
+
+  return user.response as TUser;
 }

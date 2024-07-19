@@ -183,7 +183,8 @@ const AboutContent = (props) => {
             target="_blank"
             enableUserSelect
           >
-            &nbsp;ONLYOFFICE Docs&nbsp;
+            &nbsp;{t("Common:OrganizationName")}{" "}
+            {t("Common:ProductEditorsName")}&nbsp;
           </ColorTheme>
           <Text className="row-el select-el" fontSize="13px" fontWeight="600">
             v.

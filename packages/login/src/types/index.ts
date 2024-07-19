@@ -31,8 +31,10 @@ import {
   TGetSsoSettings,
   TPasswordHash,
   TPasswordSettings,
+  TPortalCultures,
   TSettings,
   TThirdPartyProvider,
+  TTimeZone,
 } from "@docspace/shared/api/settings/types";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import { RecaptchaType, ThemeKeys } from "@docspace/shared/enums";
@@ -70,9 +72,9 @@ export type TCulturesOption = {
 export type WithLoaderProps = {
   isLoaded: boolean;
   setIsLoaded(): void;
-  passwordSettings: Nullable<TPasswordSettings>;
-  capabilities: Nullable<TCapabilities>;
-  thirdPartyProvider: Nullable<TThirdPartyProvider[]>;
+  passwordSettings?: TPasswordSettings;
+  capabilities?: TCapabilities;
+  thirdPartyProviders?: TThirdPartyProvider[];
 };
 
 export type TDataContext = {
@@ -116,13 +118,13 @@ export type TConfirmLinkResult = {
 export interface ConfirmRouteProps {
   doAuthenticated?: AuthenticatedAction;
   defaultPage?: string;
-  socketUrl: string;
+  socketUrl?: string;
   children: ReactNode | string;
 }
 
 export type GreetingContainersProps = {
   greetingSettings?: string;
-  wizardToken?: string;
+  welcomeTitle?: string;
 };
 
 export type LoginProps = {
@@ -172,4 +174,15 @@ export type ForgotPasswordModalDialogProps = {
   isVisible: boolean;
   userEmail?: string;
   onDialogClose: () => void;
+};
+
+export type WizardFormProps = {
+  passwordSettings?: TPasswordSettings;
+  machineName?: string;
+  isRequiredLicense?: boolean;
+  portalTimeZones?: TTimeZone[];
+  portalCultures?: TPortalCultures;
+  culture?: string;
+  wizardToken?: string;
+  passwordHash?: TPasswordHash;
 };

@@ -34,12 +34,13 @@ import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 import SimpleNav from "@/components/SimpleNav";
-import GreetingContainer from "@/components/GreetingContainer";
+
 import { getColorTheme, getSettings } from "@/utils/actions";
 import {
   WizardContent,
   WizardFormWrapper,
 } from "@/components/Wizard/Wizard.styled";
+import { GreetingContainer } from "@/components/GreetingContainer";
 
 export default async function Layout({
   children,
@@ -73,7 +74,10 @@ export default async function Layout({
               themeId={ThemeId.LinkForgotPassword}
               isRegisterContainerVisible={isRegisterContainerVisible}
             >
-              <GreetingContainer wizardToken={objectSettings?.wizardToken} />
+              <GreetingContainer
+                greetingSettings={objectSettings?.greetingSettings}
+                welcomeTitle="Wizard:WelcomeTitle"
+              />
               <FormWrapper id="wizard-form">{children}</FormWrapper>
             </ColorTheme>
           </WizardContent>

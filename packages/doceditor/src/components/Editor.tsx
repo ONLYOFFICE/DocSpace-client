@@ -178,7 +178,6 @@ const Editor = ({
         typeof window !== "undefined" &&
         !window.ClientConfig?.editor?.requestClose
       ) {
-        goBack.blank = openOnNewPage ? true : false;
         goBack.url = getBackUrl(fileInfo.rootFolderType, fileInfo.folderId);
       }
     }

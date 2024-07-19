@@ -29,7 +29,7 @@ import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touch.react.svg?url";
 import React from "react";
 import { inject, observer } from "mobx-react";
-import styled, { css } from "styled-components";
+import styled, { css, useTheme } from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import Headline from "@docspace/shared/components/headline/Headline";
@@ -184,11 +184,11 @@ const SectionHeaderContent = (props) => {
     tReady,
     setIsLoadedSectionHeader,
     isSSOAvailable,
-    organizationName,
   } = props;
 
   const navigate = useNavigate();
   const location = useLocation();
+  const theme = useTheme();
 
   const [state, setState] = React.useState({
     header: "",
@@ -386,11 +386,11 @@ const SectionHeaderContent = (props) => {
                     className="arrow-button"
                   />
                 )}
-                {t(header, { organizationName })}
+                {t(header, { organizationName: t("Common:OrganizationName") })}
               </div>
               {isNeedPaidIcon ? (
                 <Badge
-                  backgroundColor="#EDC409"
+                  backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
                   label={t("Common:Paid")}
                   fontWeight="700"
                   className="settings-section_badge"
@@ -422,7 +422,7 @@ const SectionHeaderContent = (props) => {
   );
 };
 
-export default inject(({ settingsStore, currentQuotaStore, setup, common }) => {
+export default inject(({ currentQuotaStore, setup, common }) => {
   const {
     isBrandingAndCustomizationAvailable,
     isRestoreAndAutoBackupAvailable,
@@ -443,8 +443,6 @@ export default inject(({ settingsStore, currentQuotaStore, setup, common }) => {
   const { admins, selectorIsOpen } = setup.security.accessRight;
   const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
 
-  const { organizationName } = settingsStore;
-
   return {
     addUsers,
     removeAdmins,
@@ -464,7 +462,6 @@ export default inject(({ settingsStore, currentQuotaStore, setup, common }) => {
     isBrandingAndCustomizationAvailable,
     isRestoreAndAutoBackupAvailable,
     isSSOAvailable,
-    organizationName,
   };
 })(
   withLoading(

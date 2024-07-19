@@ -162,7 +162,9 @@ const EditRoomEvent = ({
       for (let i = 0; i < newTags.length; i++) {
         createTagActions.push(createTag(newTags[i]));
       }
-      await Promise.all(createTagActions);
+      if (!!createTagActions.length) {
+        await Promise.all(createTagActions);
+      }
 
       const actions = [];
       if (isOwnerChanged) {
@@ -176,7 +178,8 @@ const EditRoomEvent = ({
         };
       }
       if (tags.length) {
-        actions.push(addTagsToRoom(room.id, newTags));
+        const tagsToAddList = tags.filter((t) => !startTags.includes(t));
+        actions.push(addTagsToRoom(room.id, tagsToAddList));
         room.tags = tags;
       }
 
@@ -185,7 +188,9 @@ const EditRoomEvent = ({
         room.tags = tags;
       }
 
-      await Promise.all(actions);
+      if (!!actions.length) {
+        await Promise.all(actions);
+      }
 
       if (!!item.logo.original && !roomParams.icon.uploadedFile) {
         room = await removeLogoFromRoom(room.id);

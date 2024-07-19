@@ -694,17 +694,15 @@ class FilesStore {
 
     const localKey = `${PDF_FORM_DIALOG_KEY}-${this.userStore.user.id}`;
 
-    const isFirst = JSON.parse(localStorage.getItem(localKey) ?? "true");
+    const show = !JSON.parse(localStorage.getItem(localKey) ?? "false");
 
     const event = new CustomEvent(Events.CREATE_PDF_FORM_FILE, {
       detail: {
         file,
-        isFill: !option.isOneMember,
-        isFirst,
+        show,
+        localKey,
       },
     });
-
-    if (isFirst) localStorage.setItem(localKey, "false");
 
     window?.dispatchEvent(event);
   };
@@ -1478,10 +1476,10 @@ class FilesStore {
 
     const { filterType, searchInContent } = filterData;
 
-    if (typeof filterData.withSubfolders !== "boolean")
+    if (!Boolean(filterData.withSubfolders))
       filterData.withSubfolders = defaultFilter.withSubfolders;
 
-    if (typeof searchInContent !== "boolean")
+    if (!Boolean(searchInContent))
       filterData.searchInContent = defaultFilter.searchInContent;
 
     if (!Object.keys(FilterType).find((key) => FilterType[key] === filterType))
@@ -2082,7 +2080,7 @@ class FilesStore {
         "view",
         "pdf-view",
         "make-form",
-        // "edit-pdf",
+        "edit-pdf",
         "separator0",
         "submit-to-gallery",
         "separator-SubmitToGallery",
@@ -2143,13 +2141,18 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["download"]);
       }
 
-      if (!isPdf || item.startFilling) {
+      if (!isPdf || item.startFilling || item.isForm) {
         fileOptions = this.removeOptions(fileOptions, ["open-pdf"]);
       }
 
-      // if (!item.security.EditForm || !item.startFilling) {
-      //   fileOptions = this.removeOptions(fileOptions, ["edit-pdf"]);
-      // }
+      if (
+        !isPdf ||
+        !item.security.EditForm ||
+        item.startFilling ||
+        !item.isForm
+      ) {
+        fileOptions = this.removeOptions(fileOptions, ["edit-pdf"]);
+      }
 
       if (!isPdf || !window.ClientConfig?.pdfViewer || isRecycleBinFolder) {
         fileOptions = this.removeOptions(fileOptions, ["pdf-view"]);
@@ -2184,7 +2187,7 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["edit"]);
       }
 
-      if (!(shouldFillForm && canFillForm)) {
+      if (!(shouldFillForm && canFillForm) || !item.isForm) {
         fileOptions = this.removeOptions(fileOptions, ["fill-form"]);
       }
 

@@ -605,7 +605,7 @@ const Dark: TTheme = {
     padding: "1px",
     lineHeight: "0.8",
     overflow: "hidden",
-    color: black,
+    color: white,
     backgroundColor: "#F59931",
     disableBackgroundColor: "#858585",
   },
@@ -1113,21 +1113,21 @@ const Dark: TTheme = {
     },
 
     administrator: {
-      fill: "#F59931",
+      fill: "#A15B1D",
       stroke: darkBlack,
-      color: black,
+      color: white,
     },
 
     guest: {
       fill: "#575757",
       stroke: darkBlack,
-      color: black,
+      color: white,
     },
 
     owner: {
-      fill: "#EDC409",
+      fill: "#A38A1A",
       stroke: darkBlack,
-      color: black,
+      color: white,
     },
 
     editContainer: {
@@ -2519,7 +2519,7 @@ const Dark: TTheme = {
         borderColor: "#292929",
         hoverBorderColor: "#fafafa",
         color: "#858585",
-        iconColor: "#e8e8e9",
+        iconColor: "#858585",
       },
     },
 
@@ -3332,7 +3332,12 @@ const Dark: TTheme = {
   },
   completedForm: {
     linkColor: white,
-    descriptionColor: "#ADADAD",
+    descriptionColor: globalColors.silverChalice,
+
+    labelColor: globalColors.silverChalice,
+    box: {
+      background: globalColors.charlestonGreen,
+    },
   },
 };
 

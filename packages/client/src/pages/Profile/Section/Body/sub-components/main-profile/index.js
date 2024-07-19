@@ -228,7 +228,7 @@ const MainProfile = (props) => {
               className="sso-badge"
               label={t("Common:SSO")}
               color={"#FFFFFF"}
-              backgroundColor="#22C386"
+              backgroundColor={theme.isBase ? "#22C386" : "#2E5E4C"}
               fontSize={"9px"}
               fontWeight={800}
               noHover
@@ -242,7 +242,7 @@ const MainProfile = (props) => {
               className="sso-badge"
               label={t("Common:LDAP")}
               color={"#FFFFFF"}
-              backgroundColor="#8570BD"
+              backgroundColor={theme.isBase ? "#8570BD" : "#544C6A"}
               fontSize={"9px"}
               fontWeight={800}
               noHover
@@ -268,7 +268,7 @@ const MainProfile = (props) => {
                   className="sso-badge"
                   label={t("Common:SSO")}
                   color={"#FFFFFF"}
-                  backgroundColor="#22C386"
+                  backgroundColor={theme.isBase ? "#22C386" : "#2E5E4C"}
                   fontSize={"9px"}
                   fontWeight={800}
                   noHover
@@ -287,7 +287,7 @@ const MainProfile = (props) => {
                   className="ldap-badge"
                   label={t("Common:LDAP")}
                   color={"#FFFFFF"}
-                  backgroundColor="#8570BD"
+                  backgroundColor={theme.isBase ? "#8570BD" : "#544C6A"}
                   fontSize={"9px"}
                   fontWeight={800}
                   noHover

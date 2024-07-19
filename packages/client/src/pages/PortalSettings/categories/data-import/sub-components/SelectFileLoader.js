@@ -29,7 +29,7 @@ import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { tablet } from "@docspace/shared/utils/device";
 
 const StyledLoader = styled.div`
-  padding-right: 8px;
+  padding-inline-end: 8px;
 
   .header {
     display: flex;
@@ -71,7 +71,7 @@ const StyledLoader = styled.div`
     max-width: 350px;
 
     .next {
-      margin-right: 8px;
+      margin-inline-end: 8px;
     }
   }
 `;

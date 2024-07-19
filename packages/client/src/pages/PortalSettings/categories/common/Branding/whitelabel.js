@@ -73,6 +73,7 @@ const WhiteLabel = (props) => {
 
     resetIsInit,
     standalone,
+    theme,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -278,7 +279,7 @@ const WhiteLabel = (props) => {
           <Badge
             className="paid-badge"
             fontWeight="700"
-            backgroundColor="#EDC409"
+            backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
             label={t("Common:Paid")}
             isPaidBadge={true}
           />

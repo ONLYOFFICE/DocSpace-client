@@ -28,7 +28,6 @@ import styled from "styled-components";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Text } from "@docspace/shared/components/text";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const Wrapper = styled.div`
   margin: 16px 0;
@@ -58,7 +57,7 @@ const UsersInfoWrapper = styled.div`
   }
 
   .selected-users-count {
-    margin-right: 24px;
+    margin-inline-end: 24px;
     color: ${(props) =>
       props.theme.client.settings.migration.infoBlockTextColor};
     font-weight: 700;
@@ -66,7 +65,7 @@ const UsersInfoWrapper = styled.div`
   }
 
   .selected-admins-count {
-    margin-right: 8px;
+    margin-inline-end: 8px;
     color: ${(props) =>
       props.theme.client.settings.migration.infoBlockTextColor};
     font-weight: 700;
@@ -75,7 +74,7 @@ const UsersInfoWrapper = styled.div`
     span {
       font-weight: 700;
       font-size: 14px;
-      margin-left: 4px;
+      margin-inline-start: 4px;
       color: ${(props) =>
         props.selectedUsers > props.totalLicenceLimit
           ? props.theme.client.settings.migration.errorTextColor
@@ -93,9 +92,11 @@ const UsersInfoBlock = ({
 }) => {
   return (
     <Wrapper>
-      {selectedUsers > totalLicenceLimit && (
+      {totalUsedUsers > totalLicenceLimit && (
         <Text className="license-limit-warning">
-          {t("Settings:UserLimitExceeded", { productName: PRODUCT_NAME })}
+          {t("Settings:UserLimitExceeded", {
+            productName: t("Common:ProductName"),
+          })}
         </Text>
       )}
 
@@ -118,7 +119,7 @@ const UsersInfoBlock = ({
           tooltipContent={
             <Text fontSize="12px">
               {t("Settings:LicenseLimitDescription", {
-                productName: PRODUCT_NAME,
+                productName: t("Common:ProductName"),
                 maxLimit: totalLicenceLimit,
               })}
             </Text>

@@ -3357,7 +3357,13 @@ export const getBaseTheme = () => {
 
     completedForm: {
       linkColor: "#4781D1",
-      descriptionColor: gray,
+      descriptionColor: grayMain,
+
+      labelColor: globalColors.grayMain,
+
+      box: {
+        background: globalColors.grayLight,
+      },
     },
   };
 };

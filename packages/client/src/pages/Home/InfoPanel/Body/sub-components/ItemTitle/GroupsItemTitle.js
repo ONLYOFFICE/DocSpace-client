@@ -26,6 +26,7 @@
 
 import { useRef } from "react";
 import { withTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
@@ -43,6 +44,7 @@ const GroupsItemTitle = ({
   getGroupContextOptions,
 }) => {
   const itemTitleRef = useRef();
+  const theme = useTheme();
 
   const getContextOptions = () =>
     getGroupContextOptions(t, infoPanelSelection, true);
@@ -88,7 +90,7 @@ const GroupsItemTitle = ({
               className="ldap-badge"
               label={t("Common:LDAP")}
               color={"#FFFFFF"}
-              backgroundColor="#8570BD"
+              backgroundColor={theme.isBase ? "#8570BD" : "#544C6A"}
               fontSize={"9px"}
               fontWeight={800}
               noHover

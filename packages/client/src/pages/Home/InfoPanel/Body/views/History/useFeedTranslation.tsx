@@ -89,7 +89,7 @@ export const useFeedTranslation = (
           components={{ 1: <strong /> }}
         />
       );
-    case "RoomExternalLinkDeleted":
+    case "RoomExternalLinkRevoked":
       return (
         <Trans
           t={t}

@@ -72,7 +72,7 @@ const CodeBlock = ({ config }) => {
   });
 
   return (
-    <StyledContainer>
+    <StyledContainer dir="ltr">
       <CodeMirror
         value={codeString}
         maxWidth="800px"

@@ -38,7 +38,6 @@ import {
   TextInput,
 } from "@docspace/shared/components/text-input";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.left.react.svg?url";
 
@@ -100,7 +99,7 @@ const EmailContainer = ({
             values={{
               email: emailFromInvitation,
             }}
-            portalName={PRODUCT_NAME}
+            productName={t("Common:ProductName")}
             components={{
               1: (
                 <Link

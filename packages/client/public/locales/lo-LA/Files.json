@@ -1,7 +1,6 @@
 {
   "AddMembersDescription": "ທ່ານສາມາດເພີ່ມສະມາຊິກທີມໃຫມ່ດ້ວຍຕົນເອງ ຫຼືເຊີນເຂົາເຈົ້າຜ່ານລິ້ງ.",
   "All": "ທັງໝົດ",
-  "AllFiles": "ເອກະສານທັງໝົດ",
   "ArchiveAction": "ແຟ້ມຈັດເກັບຫວ່າງເປົ່າ",
   "ArchivedRoomsAction": "ຫ້ອງຖືກເກັບໄວ້",
   "ArchiveEmptyScreen": "ທ່ານສາມາດຈັດເກັບຫ້ອງທີ່ທ່ານບໍ່ໄດ້ໃຊ້ ແລະກູ້ພວກມັນຄືນມາໃນ {{productName}} ຂອງທ່ານ ໃນທຸກເວລາ ຫຼືລຶບພວກມັນອອກຖາວອນ. ຫ້ອງເຫຼົ່ານີ້ຈະປາກົດຢູ່ທີ່ນີ້.",
@@ -45,7 +44,6 @@
   "FolderRemoved": "ຍ້າຍແຟ້ມໄປທີ່ຖັງຂີ້ເຫຍື້ອ",
   "FolderRenamed": "ໂຟນເດີ '{{folderTitle}}' ຖືກປ່ຽນເປັນ '{{newFoldedTitle}}'",
   "Forms": "ແບບຟອມ",
-  "FormsTemplates": "ຮູບແບບແບບຟອມ",
   "GeneralLinkDeletedSuccessfully": "ສ້າງລິ້ງທົ່ວໄປໃໝ່ສຳເລັດແລ້ວ ",
   "GoToMyRooms": "ໄປທີ່ຫ້ອງຂອງຂ້ອຍ",
   "GoToPersonal": "ໄປທີ່ເອກະສານຂອງຂ້ອຍ",

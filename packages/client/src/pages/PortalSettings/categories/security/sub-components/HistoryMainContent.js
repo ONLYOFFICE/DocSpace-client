@@ -29,7 +29,7 @@ import { Text } from "@docspace/shared/components/text";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { UnavailableStyles } from "../../../utils/commonSettingsStyles";
@@ -191,6 +191,8 @@ const HistoryMainContent = (props) => {
 
   const isLoginHistoryPage = window.location.pathname.includes("login-history");
 
+  const theme = useTheme();
+
   useEffect(() => {
     getSettings();
   }, []);
@@ -315,7 +317,7 @@ const HistoryMainContent = (props) => {
         <Badge
           className="paid-badge"
           fontWeight="700"
-          backgroundColor="#EDC409"
+          backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
           label={t("Common:Paid")}
           isPaidBadge={true}
         />

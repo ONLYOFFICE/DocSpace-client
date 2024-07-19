@@ -54,6 +54,7 @@ export async function fileCopyAs(
   destFolderId: string,
   enableExternalExt?: boolean,
   password?: string,
+  toForm?: string,
 ): Promise<{
   file: TFile | undefined;
   error:
@@ -77,6 +78,7 @@ export async function fileCopyAs(
         destFolderId: tryParseToNumber(destFolderId),
         enableExternalExt,
         password,
+        toForm: toForm === "true",
       }),
     );
 

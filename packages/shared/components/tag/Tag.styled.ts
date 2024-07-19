@@ -104,6 +104,20 @@ const StyledTag = styled.div<{
     padding: 2px 0px;
     width: 16px;
     height: 16px;
+
+    ${(props) =>
+      !props.theme.isBase &&
+      css`
+        svg {
+          path[fill] {
+            fill: #fff;
+        }
+
+          path[stroke] {
+            stroke: #fff;
+          }
+        `}
+    }
   }
 
   ${(props) =>

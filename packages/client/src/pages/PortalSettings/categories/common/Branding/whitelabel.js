@@ -74,11 +74,12 @@ const WhiteLabel = (props) => {
     resetIsInit,
     standalone,
     theme,
+
+    isWhitelableLoaded,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [isLoadedData, setIsLoadedData] = useState(false);
   const [logoTextWhiteLabel, setLogoTextWhiteLabel] = useState("");
   const [isSaving, setIsSaving] = useState(false);
 
@@ -134,12 +135,6 @@ const WhiteLabel = (props) => {
       saveToSessionStorage("companyName", companyNameFromSessionStorage);
     }
   }, [logoText]);
-
-  useEffect(() => {
-    if (logoTextWhiteLabel && logoUrlsWhiteLabel.length && !isLoadedData) {
-      setIsLoadedData(true);
-    }
-  }, [isLoadedData, logoTextWhiteLabel, logoUrlsWhiteLabel]);
 
   const onResetCompanyName = async () => {
     const whlText = await getWhiteLabelLogoText();
@@ -265,7 +260,7 @@ const WhiteLabel = (props) => {
   const isEqualText = defaultLogoTextWhiteLabel === logoTextWhiteLabel;
   const saveButtonDisabled = isEqualLogo && isEqualText;
 
-  return !isLoadedData ? (
+  return !isWhitelableLoaded ? (
     <LoaderWhiteLabel />
   ) : (
     <WhiteLabelWrapper showReminder={!saveButtonDisabled}>
@@ -563,6 +558,7 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     defaultLogoTextWhiteLabel,
     enableRestoreButton,
     resetIsInit,
+    isWhitelableLoaded,
   } = common;
 
   const {
@@ -590,5 +586,7 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     deviceType,
     resetIsInit,
     standalone,
+
+    isWhitelableLoaded,
   };
 })(withTranslation(["Settings", "Profile", "Common"])(observer(WhiteLabel)));

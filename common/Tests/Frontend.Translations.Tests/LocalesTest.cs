@@ -82,6 +82,7 @@ public class LocalesTest
 
 
     public List<string> ForbiddenElements { get { return new List<string>() { "ONLYOFFICE", "DOCSPACE" }; } }
+    public List<string> SkipForbiddenKeys = new List<string> { "OrganizationName", "ProductName", "ProductEditorsName" };
     //public List<JsonEncodingError> WrongEncodingJsonErrors { get; set; }
 
     private static readonly string _md5ExcludesPath = Path.GetFullPath(Utils.ConvertPathToOS("../../../md5-excludes.json"));
@@ -817,7 +818,6 @@ public class LocalesTest
     {
         var message = $"Next keys have forbidden values `{string.Join(",", ForbiddenElements)}`:\r\n\r\n";
 
-
         var exists = false;
 
         var i = 0;
@@ -845,9 +845,13 @@ public class LocalesTest
 
             }
         }
+
         foreach (var lng in CommonTranslations)
         {
-            var translationItems = lng.Translations.Where(f => ForbiddenElements.Any(elem => f.Value.ToUpper().Contains(elem))).ToList();
+            var translationItems = lng.Translations
+                .Where(elem => !SkipForbiddenKeys.Exists(k => k == elem.Key))
+                .Where(f => ForbiddenElements.Any(elem => f.Value.ToUpper().Contains(elem)))
+                .ToList();
 
             if (!translationItems.Any())
                 continue;
@@ -871,7 +875,6 @@ public class LocalesTest
     {
         var message = $"Next keys have forbidden elements in names `{string.Join(",", ForbiddenElements)}`:\r\n\r\n";
 
-
         var exists = false;
 
         var i = 0;
@@ -884,7 +887,6 @@ public class LocalesTest
             foreach (var lng in module.AvailableLanguages)
             {
                 var translationItems = lng.Translations.Where(f => ForbiddenElements.Any(elem => f.Key.ToUpper().Contains(elem))).ToList();
-
 
                 if (!translationItems.Any())
                     continue;
@@ -903,7 +905,10 @@ public class LocalesTest
 
         foreach (var lng in CommonTranslations)
         {
-            var translationItems = lng.Translations.Where(f => ForbiddenElements.Any(elem => f.Key.ToUpper().Contains(elem))).ToList();
+            var translationItems = lng.Translations
+                .Where(elem => !SkipForbiddenKeys.Exists(k => k == elem.Key))
+                .Where(f => ForbiddenElements.Any(elem => f.Key.ToUpper().Contains(elem)))
+                .ToList();
 
             if (!translationItems.Any())
                 continue;

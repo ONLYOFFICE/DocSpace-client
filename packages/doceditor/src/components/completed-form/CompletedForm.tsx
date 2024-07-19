@@ -39,6 +39,7 @@ import DownloadIconUrl from "PUBLIC_DIR/images/download.react.svg?url";
 import LinkIconUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 import MailIcon from "PUBLIC_DIR/images/icons/12/mail.svg";
 
+import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
 import { getBgPattern, getLogoUrl } from "@docspace/shared/utils/common";
 import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
@@ -138,10 +139,11 @@ export const CompletedForm = ({
     history.pushState({}, "", url);
   };
 
-  const copyLinkFile = () => {
+  const copyLinkFile = async () => {
     const url = getFolderUrl(completedForm.folderId, false);
 
-    copyShareLink(url);
+    await copyShareLink(url);
+    toastr.success(t("Common:LinkCopySuccess"));
   };
 
   const handleDownload = () => {

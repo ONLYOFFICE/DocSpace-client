@@ -61,15 +61,15 @@ const ConvertDialogComponent = (props) => {
   const options = [
     {
       label: t("Document"),
-      value: "Document",
+      value: ".docx",
     },
     {
       label: t("Spreadsheet"),
-      value: "Spreadsheet",
+      value: ".xlsx",
     },
     {
       label: t("Presentation"),
-      value: "Presentation",
+      value: ".pptx",
     },
   ];
 

@@ -26,19 +26,13 @@
 
 "use client";
 
-import { TCulturesOption, TTimeZoneOption } from "@/types";
+import { TCulturesOption, TTimeZoneOption, WizardFormProps } from "@/types";
 import { getSelectZone, getUserTimezone, mapTimezonesToArray } from "@/utils";
 import {
   DEFAULT_SELECT_LANGUAGE,
   DEFAULT_SELECT_TIMEZONE,
   URL_LICENSE,
 } from "@/utils/constants";
-import {
-  TPasswordHash,
-  TPasswordSettings,
-  TPortalCultures,
-  TTimeZone,
-} from "@docspace/shared/api/settings/types";
 import {
   convertLanguage,
   createPasswordHash,
@@ -80,17 +74,7 @@ import { setCookie } from "@docspace/shared/utils/cookie";
 import { InputSize, InputType } from "@docspace/shared/components/text-input";
 import useDeviceType from "@/hooks/useDeviceType";
 import { DeviceType } from "@docspace/shared/enums";
-
-type WizardFormProps = {
-  passwordSettings?: TPasswordSettings;
-  machineName?: string;
-  isRequiredLicense?: boolean;
-  portalTimeZones?: TTimeZone[];
-  portalCultures?: TPortalCultures;
-  culture?: string;
-  wizardToken?: string;
-  passwordHash?: TPasswordHash;
-};
+import { Nullable } from "@docspace/shared/types";
 
 const emailSettings = new EmailSettings();
 emailSettings.allowDomainPunycode = true;
@@ -122,7 +106,7 @@ function WizardForm(props: WizardFormProps) {
   const [hasErrorPass, setHasErrorPass] = useState(false);
   const [hasErrorLicense, setHasErrorLicense] = useState(false);
   const [invalidLicense, setInvalidLicense] = useState(false);
-  const [licenseUpload, setLicenseUpload] = useState<string | null>(null);
+  const [licenseUpload, setLicenseUpload] = useState<Nullable<string>>(null);
   const [agreeTerms, setAgreeTerms] = useState(false);
   const [hasErrorAgree, setHasErrorAgree] = useState(false);
   const [isCreated, setIsCreated] = useState(false);
@@ -132,7 +116,7 @@ function WizardForm(props: WizardFormProps) {
   const theme = useTheme();
   const { currentDeviceType } = useDeviceType();
 
-  const refPassInput = useRef<PasswordInputHandle>(null);
+  const refPassInput = useRef<Nullable<PasswordInputHandle>>(null);
 
   const userCulture = culture || "en";
   const isMobileView = currentDeviceType === DeviceType.mobile;

@@ -1,1 +1,4 @@
-{}
+{
+  "AccessingProblem": "如果您在访问此{{productName}}时遇到问题，请联系管理员。",
+  "ContactAdministrator": "联系{{productName}}管理员"
+}

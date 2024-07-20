@@ -48,6 +48,34 @@ import type {
 
 import { REPLACED_URL_PATH } from "./constants";
 
+export async function getFillingSession(
+  fillingSessionId: string,
+  share?: string,
+) {
+  const [request] = createRequest(
+    [`/files/file/fillresult?fillingSessionId=${fillingSessionId}`],
+    [
+      ["Content-Type", "application/json;charset=utf-8"],
+      share ? ["Request-Token", share] : ["", ""],
+    ],
+    "GET",
+  );
+
+  try {
+    console.log({ request });
+
+    const response = await fetch(request);
+
+    if (response.ok) return await response.json();
+
+    throw new Error("Something went wrong", {
+      cause: await response.json(),
+    });
+  } catch (error) {
+    console.log("File copyas error ", error);
+  }
+}
+
 export async function fileCopyAs(
   fileId: string,
   destTitle: string,

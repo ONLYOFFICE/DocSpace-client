@@ -62,6 +62,11 @@ export const CompletedFormLayout = styled.section<CompletedFormLayoutProps>`
     color: ${(props) => props.theme.completedForm.linkColor};
   }
 
+  .completed-form__empty {
+    gap: 20px;
+    margin-top: 24px;
+  }
+
   @media ${mobile} {
     background-image: none;
 
@@ -92,7 +97,7 @@ export const CompletedFormLayout = styled.section<CompletedFormLayoutProps>`
   }
 `;
 
-export const ButtonWrapper = styled.footer`
+export const ButtonWrapper = styled.footer<{ isShreFile: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,7 +106,7 @@ export const ButtonWrapper = styled.footer`
 
   margin-bottom: 24px;
   max-width: 600px;
-  width: 100%;
+  width: ${(props) => (props.isShreFile ? "298px" : "100%;")};
 
   @media ${mobile} {
     flex-wrap: wrap;
@@ -115,9 +120,9 @@ export const TextWrapper = styled.section`
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 20px;
+  gap: 32px;
 
-  margin-top: 24px;
+  /* margin-top: 32px; */
 
   h1 {
     line-height: 28px;
@@ -163,7 +168,7 @@ export const MainContent = styled.main`
 
   gap: 16px;
 
-  margin-bottom: 32px;
+  margin: 32px 0;
 
   .completed-form__file {
     grid-area: form-file;

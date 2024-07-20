@@ -396,7 +396,7 @@ class ContextOptionsStore {
         : `${window.location.origin + config.homepage}/filter?folder=${id}`, //TODO: Change url by category
     );
 
-    toastr.success(t("Translations:LinkCopySuccess"));
+    toastr.success(t("Common:LinkCopySuccess"));
   };
 
   onCopyLink = async (item, t) => {
@@ -415,7 +415,7 @@ class ContextOptionsStore {
           ? await getFolderLink(item.id)
           : await getFileLink(item.id);
         copyShareLink(itemLink.sharedTo.shareLink);
-        toastr.success(t("Translations:LinkCopySuccess"));
+        toastr.success(t("Common:LinkCopySuccess"));
       } catch (error) {
         toastr.error(error);
       }
@@ -427,13 +427,13 @@ class ContextOptionsStore {
       item.rootFolderType === FolderType.SHARE
     ) {
       copy(item.webUrl);
-      return toastr.success(t("Translations:LinkCopySuccess"));
+      return toastr.success(t("Common:LinkCopySuccess"));
     }
 
     if (href) {
       copy(href);
 
-      return toastr.success(t("Translations:LinkCopySuccess"));
+      return toastr.success(t("Common:LinkCopySuccess"));
     }
 
     const { canConvert } = this.filesSettingsStore;
@@ -454,7 +454,7 @@ class ContextOptionsStore {
 
     copy(url);
 
-    toastr.success(t("Translations:LinkCopySuccess"));
+    toastr.success(t("Common:LinkCopySuccess"));
   };
 
   onOpenEmbeddingSettings = async (item) => {
@@ -748,7 +748,7 @@ class ContextOptionsStore {
   //             label: title,
   //             onClick: () => {
   //               copy(shareLink);
-  //               toastr.success(t("Translations:LinkCopySuccess"));
+  //               toastr.success(t("Common:LinkCopySuccess"));
   //             },
   //           });
   //         }
@@ -1125,7 +1125,7 @@ class ContextOptionsStore {
           icon: TabletLinkReactSvgUrl,
           onClick: () => {
             copy(window.location.href);
-            toastr.success(t("Translations:LinkCopySuccess"));
+            toastr.success(t("Common:LinkCopySuccess"));
           },
           disabled: this.settingsStore.isFrame,
         },

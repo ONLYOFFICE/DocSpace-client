@@ -375,31 +375,29 @@ const SectionHeaderContent = (props) => {
             />
           )}
           <Headline type="content" truncate={true}>
-            <div className="settings-section_header">
-              <div className="header">
-                {isMobile() && isServicePage && (
-                  <IconButton
-                    iconName={ArrowPathReactSvgUrl}
-                    size="17"
-                    isFill={true}
-                    onClick={onBackToParent}
-                    className="arrow-button"
-                  />
-                )}
-                {t(header, { organizationName: t("Common:OrganizationName") })}
-              </div>
-              {isNeedPaidIcon ? (
-                <Badge
-                  backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
-                  label={t("Common:Paid")}
-                  fontWeight="700"
-                  className="settings-section_badge"
-                  isPaidBadge={true}
-                />
-              ) : (
-                ""
-              )}
-            </div>
+            {isMobile() && isServicePage && (
+              <IconButton
+                iconName={ArrowPathReactSvgUrl}
+                size="17"
+                isFill={true}
+                onClick={onBackToParent}
+                className="arrow-button"
+              />
+            )}
+            {t(header, {
+              organizationName: t("Common:OrganizationName"),
+            })}
+            {isNeedPaidIcon ? (
+              <Badge
+                backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
+                label={t("Common:Paid")}
+                fontWeight="700"
+                className="settings-section_badge"
+                isPaidBadge={true}
+              />
+            ) : (
+              ""
+            )}
           </Headline>
           <div className="tariff-bar">
             <TariffBar />

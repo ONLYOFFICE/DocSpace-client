@@ -74,13 +74,15 @@ const WhiteLabel = (props) => {
     resetIsInit,
     standalone,
     theme,
+
+    isWhitelableLoaded,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [isLoadedData, setIsLoadedData] = useState(false);
   const [logoTextWhiteLabel, setLogoTextWhiteLabel] = useState("");
   const [isSaving, setIsSaving] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(!logoText);
 
   const isMobileView = deviceType === DeviceType.mobile;
 
@@ -122,6 +124,12 @@ const WhiteLabel = (props) => {
   };
 
   useEffect(() => {
+    if (!isWhitelableLoaded) return;
+
+    setIsEmpty(!logoText);
+  }, [logoText]);
+
+  useEffect(() => {
     const companyNameFromSessionStorage = getFromSessionStorage("companyName");
 
     if (!companyNameFromSessionStorage) {
@@ -135,12 +143,6 @@ const WhiteLabel = (props) => {
     }
   }, [logoText]);
 
-  useEffect(() => {
-    if (logoTextWhiteLabel && logoUrlsWhiteLabel.length && !isLoadedData) {
-      setIsLoadedData(true);
-    }
-  }, [isLoadedData, logoTextWhiteLabel, logoUrlsWhiteLabel]);
-
   const onResetCompanyName = async () => {
     const whlText = await getWhiteLabelLogoText();
     saveToSessionStorage("companyName", whlText);
@@ -149,12 +151,18 @@ const WhiteLabel = (props) => {
 
   const onChangeCompanyName = (e) => {
     const value = e.target.value;
+    setIsEmpty(!value || value?.trim() === "");
     setLogoTextWhiteLabel(value);
     saveToSessionStorage("companyName", value);
   };
 
   const onUseTextAsLogo = () => {
+    if (!logoTextWhiteLabel) {
+      return;
+    }
+
     let newLogos = logoUrlsWhiteLabel;
+
     for (let i = 0; i < logoUrlsWhiteLabel.length; i++) {
       const options = getLogoOptions(
         i,
@@ -265,7 +273,7 @@ const WhiteLabel = (props) => {
   const isEqualText = defaultLogoTextWhiteLabel === logoTextWhiteLabel;
   const saveButtonDisabled = isEqualLogo && isEqualText;
 
-  return !isLoadedData ? (
+  return !isWhitelableLoaded ? (
     <LoaderWhiteLabel />
   ) : (
     <WhiteLabelWrapper showReminder={!saveButtonDisabled}>
@@ -308,6 +316,7 @@ const WhiteLabel = (props) => {
           labelText={t("Common:CompanyName")}
           isVertical={true}
           className="settings_unavailable"
+          hasError={isEmpty}
         >
           <TextInput
             className="company-name input"
@@ -319,6 +328,7 @@ const WhiteLabel = (props) => {
             isAutoFocussed={!isMobile}
             tabIndex={1}
             maxLength={30}
+            hasError={isEmpty}
           />
           <Button
             id="btnUseAsLogo"
@@ -563,6 +573,7 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     defaultLogoTextWhiteLabel,
     enableRestoreButton,
     resetIsInit,
+    isWhitelableLoaded,
   } = common;
 
   const {
@@ -590,5 +601,7 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     deviceType,
     resetIsInit,
     standalone,
+
+    isWhitelableLoaded,
   };
 })(withTranslation(["Settings", "Profile", "Common"])(observer(WhiteLabel)));

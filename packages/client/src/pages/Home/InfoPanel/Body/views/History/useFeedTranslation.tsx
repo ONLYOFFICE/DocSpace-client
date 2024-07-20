@@ -89,7 +89,7 @@ export const useFeedTranslation = (
           components={{ 1: <strong /> }}
         />
       );
-    case "RoomExternalLinkRevoked":
+    case "RoomExternalLinkDeleted":
       return (
         <Trans
           t={t}
@@ -97,6 +97,18 @@ export const useFeedTranslation = (
           i18nKey="RoomExternalLinkDeleted"
           values={{
             linkTitle: feed.data.title,
+          }}
+          components={{ 1: <strong /> }}
+        />
+      );
+    case "RoomExternalLinkRevoked":
+      return (
+        <Trans
+          t={t}
+          ns="InfoPanel"
+          i18nKey="RoomExternalLinkRevoked"
+          values={{
+            linkTitle: feed.data.title || feed.data.sharedTo?.title,
           }}
           components={{ 1: <strong /> }}
         />

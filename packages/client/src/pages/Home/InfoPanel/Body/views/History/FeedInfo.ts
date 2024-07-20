@@ -7,6 +7,7 @@ enum FeedAction {
   Rename = "rename",
   Move = "move",
   Copy = "copy",
+  Revoke = "revoke",
 }
 
 enum FeedTarget {
@@ -148,9 +149,14 @@ export const feedInfo = [
     actionType: `${FeedAction.Rename}`,
   },
   {
-    key: "RoomExternalLinkRevoked",
+    key: "RoomExternalLinkDeleted",
     targetType: `${FeedTarget.RoomExternalLink}`,
     actionType: `${FeedAction.Delete}`,
+  },
+  {
+    key: "RoomExternalLinkRevoked",
+    targetType: `${FeedTarget.RoomExternalLink}`,
+    actionType: `${FeedAction.Revoke}`,
   },
   //
   // USER

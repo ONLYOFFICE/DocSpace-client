@@ -140,7 +140,9 @@ export const CompletedForm = ({
   };
 
   const copyLinkFile = async () => {
-    const url = getFolderUrl(completedForm.folderId, false);
+    const origin = window.location.origin;
+
+    const url = `${origin}/doceditor?fileId=${completedForm.id}`;
 
     await copyShareLink(url);
     toastr.success(t("Common:LinkCopySuccess"));

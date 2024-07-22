@@ -384,7 +384,6 @@ export const settingsTree = [
             icon: "",
             link: "google",
             tKey: "ImportFromGoogle",
-            isCategory: true,
           },
           {
             id: "portal-settings_catalog-nextcloud-data-migration",
@@ -392,7 +391,6 @@ export const settingsTree = [
             icon: "",
             link: "nextcloud",
             tKey: "ImportFromNextcloud",
-            isCategory: true,
           },
           {
             id: "portal-settings_catalog-onlyoffice-data-migration",
@@ -400,7 +398,6 @@ export const settingsTree = [
             icon: "",
             link: "onlyoffice",
             tKey: "ImportFromPortal",
-            isCategory: true,
           },
         ],
       },

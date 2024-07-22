@@ -43,16 +43,19 @@ export const CompletedFormLayout = styled.section<CompletedFormLayoutProps>`
   }
 
   width: 100%;
-  height: 100%;
-  padding: 100px 16px 0px;
+  height: 100dvh;
+  padding: 100px 16px 16px;
+
+  overflow-y: auto;
 
   background-image: ${(props) => props.bgPattern};
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
+  background-position: center;
 
   picture {
-    margin-bottom: 125px;
+    margin-bottom: clamp(40px, 10vh, 125px);
   }
 
   .link {

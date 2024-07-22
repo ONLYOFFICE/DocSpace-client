@@ -707,6 +707,14 @@ class UploadDataStore {
   };
 
   startUpload = (uploadFiles, folderId, t) => {
+    const withoutHiddenFiles = Object.values(uploadFiles).filter((f) => {
+      const isHidden = /(^|\/)\.[^\/\.]/g.test(f.name);
+
+      return !isHidden;
+    });
+
+    console.log("startUpload", { withoutHiddenFiles, uploadFiles });
+
     const { canConvert } = this.filesSettingsStore;
 
     const toFolderId = folderId ? folderId : this.selectedFolderStore.id;
@@ -728,10 +736,10 @@ class UploadDataStore {
     let filesSize = 0;
     let convertSize = 0;
 
-    const uploadFilesArray = Object.keys(uploadFiles);
+    const uploadFilesArray = Object.keys(withoutHiddenFiles);
     const hasFolder =
       uploadFilesArray.findIndex((_, ind) => {
-        const file = uploadFiles[ind];
+        const file = withoutHiddenFiles[ind];
 
         const filePath = file.path
           ? file.path
@@ -746,13 +754,13 @@ class UploadDataStore {
       if (this.uploaded) {
         this.isParallel = false;
       } else if (this.isParallel) {
-        this.tempFiles.push({ uploadFiles, folderId, t });
+        this.tempFiles.push({ withoutHiddenFiles, folderId, t });
         return;
       }
     }
 
     for (let index of uploadFilesArray) {
-      const file = uploadFiles[index];
+      const file = withoutHiddenFiles[index];
 
       const parts = file.name.split(".");
       const ext = parts.length > 1 ? "." + parts.pop() : "";

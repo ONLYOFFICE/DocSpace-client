@@ -21,7 +21,6 @@
   "FolderTitleWebDav": "Adresář WebDAV",
   "FolderTitleYandex": "Adresář Yandex",
   "FormTemplates": "Šablony formulářů",
-  "LinkCopySuccess": "Odkaz byl zkopírován do schránky",
   "LinkHasExpiredAndHasBeenDisabled": "Platnost odkazu vypršela a byl zakázán",
   "LinkValidTime": "Tento odkaz je platný pouze po dobu {{days_count}} dnů.",
   "NewForm": "PDF formulář",

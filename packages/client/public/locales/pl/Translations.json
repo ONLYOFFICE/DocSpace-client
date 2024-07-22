@@ -21,7 +21,6 @@
   "FolderTitleWebDav": "Katalog WebDAV",
   "FolderTitleYandex": "Katalog Yandex",
   "FormTemplates": "Szablony formularza",
-  "LinkCopySuccess": "Link został skopiowany do schowka",
   "LinkHasExpiredAndHasBeenDisabled": "Link wygasł i został wyłączony",
   "LinkValidTime": "Link jest ważny tylko przez {{days_count}} dni.",
   "NewForm": "Formularz PDF",

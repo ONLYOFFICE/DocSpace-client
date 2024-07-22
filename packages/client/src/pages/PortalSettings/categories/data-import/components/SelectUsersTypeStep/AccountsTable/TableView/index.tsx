@@ -57,7 +57,7 @@ const UserSelectTableContainer = styled(StyledTableContainer)`
     z-index: 201;
     width: calc(100% + 40px);
     margin-top: -33px;
-    margin-left: -20px;
+    margin-inline-start: -20px;
     top: 0;
 
     margin-bottom: -36px;

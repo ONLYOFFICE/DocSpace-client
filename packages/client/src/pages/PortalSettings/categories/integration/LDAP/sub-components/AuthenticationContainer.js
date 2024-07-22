@@ -29,9 +29,9 @@ import { useTranslation } from "react-i18next";
 
 import { Box } from "@docspace/shared/components/box";
 import { HelpButton } from "@docspace/shared/components/help-button";
-import { TextInput } from "@docspace/shared/components/text-input";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import LdapFieldComponent from "./LdapFieldComponent";
 
 const LOGIN = "login",
   PASSWORD = "password";
@@ -87,7 +87,7 @@ const AuthenticationContainer = ({
           inlineHelpButton
           isRequired
         >
-          <TextInput
+          <LdapFieldComponent
             name={LOGIN}
             hasError={errors.login}
             onChange={onChangeValue}
@@ -108,7 +108,7 @@ const AuthenticationContainer = ({
           inlineHelpButton
           isRequired
         >
-          <TextInput
+          <LdapFieldComponent
             name={PASSWORD}
             type="password"
             hasError={errors.password}

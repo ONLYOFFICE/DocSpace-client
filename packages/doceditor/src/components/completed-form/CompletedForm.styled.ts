@@ -38,22 +38,36 @@ export const CompletedFormLayout = styled.section<CompletedFormLayoutProps>`
 
   box-sizing: border-box;
 
+  * {
+    box-sizing: border-box;
+  }
+
   width: 100%;
-  height: 100%;
-  padding: 100px 16px 0px;
+  height: 100dvh;
+  padding: 100px 16px 16px;
+
+  overflow-y: auto;
 
   background-image: ${(props) => props.bgPattern};
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
+  background-position: center;
 
   picture {
-    margin-bottom: 125px;
+    margin-bottom: clamp(40px, 10vh, 125px);
   }
 
   .link {
+    font-size: 13px;
+    line-height: 15px;
     font-weight: 600;
     color: ${(props) => props.theme.completedForm.linkColor};
+  }
+
+  .completed-form__empty {
+    gap: 20px;
+    margin-top: 24px;
   }
 
   @media ${mobile} {
@@ -86,7 +100,7 @@ export const CompletedFormLayout = styled.section<CompletedFormLayoutProps>`
   }
 `;
 
-export const ButtonWrapper = styled.footer`
+export const ButtonWrapper = styled.footer<{ isShreFile: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -94,8 +108,8 @@ export const ButtonWrapper = styled.footer`
   gap: 8px;
 
   margin-bottom: 24px;
-  max-width: 480px;
-  width: 100%;
+  max-width: 600px;
+  width: ${(props) => (props.isShreFile ? "298px" : "100%;")};
 
   @media ${mobile} {
     flex-wrap: wrap;
@@ -109,15 +123,16 @@ export const TextWrapper = styled.section`
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 20px;
+  gap: 32px;
 
-  margin: 24px 0;
+  /* margin-top: 32px; */
 
   h1 {
     line-height: 28px;
     font-size: 23px;
     font-weight: 700;
     text-align: center;
+    margin: 0;
   }
 
   p {
@@ -125,6 +140,123 @@ export const TextWrapper = styled.section`
     line-height: 16px;
     color: ${(props) => props.theme.completedForm.descriptionColor};
     text-align: center;
-    max-width: 480px;
+    max-width: 600px;
+  }
+`;
+
+export const Box = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  background-color: ${(props) => props.theme.completedForm.box.background};
+
+  padding: 16px;
+
+  width: 100%;
+
+  border-radius: 6px;
+`;
+
+export const MainContent = styled.main`
+  max-width: 600px;
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr auto;
+  grid-template-areas:
+    "form-file form-file form-file"
+    "form-number manager manager";
+
+  gap: 16px;
+
+  margin: 32px 0;
+
+  .completed-form__file {
+    grid-area: form-file;
+  }
+
+  .completed-form__filename {
+    font-size: 14px;
+    line-height: 16px;
+
+    margin: 0px;
+  }
+
+  .completed-form__download {
+    cursor: pointer;
+    margin-inline-start: auto;
+  }
+
+  .label {
+    display: inline-block;
+    margin-bottom: 4px;
+
+    font-size: 14px;
+    line-height: 16px;
+    color: ${(props) => props.theme.completedForm.labelColor};
+  }
+
+  .completed-form__form-number {
+    font-size: 42px;
+    line-height: 1.1;
+    font-weight: 600;
+    color: ${(props) => props.theme.completedForm.descriptionColor};
+  }
+`;
+
+export const FormNumberWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  grid-area: form-number;
+
+  > div {
+    justify-content: center;
+    flex-grow: 1;
+  }
+`;
+
+export const ManagerWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  grid-area: manager;
+
+  > ${Box} {
+    flex-grow: 1;
+
+    display: grid;
+    grid-template-columns: 46px 1fr;
+    grid-template-areas:
+      "avatar user-name"
+      "avatar mail";
+
+    gap: 4px 16px;
+
+    .manager__avatar {
+      grid-area: avatar;
+      width: 46px;
+      min-width: 46px;
+      height: 46px;
+    }
+
+    .manager__user-name {
+      grid-area: user-name;
+
+      margin: 0px;
+      font-size: 16px;
+      line-height: 22px;
+      font-weight: 700;
+    }
+
+    .manager__mail {
+      grid-area: mail;
+
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
   }
 `;

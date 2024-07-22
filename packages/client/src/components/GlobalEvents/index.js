@@ -50,6 +50,7 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
     templateId: null,
     fromTemplate: null,
     onClose: null,
+    toForm: false,
   });
 
   const [renameDialogProps, setRenameDialogProps] = useState({
@@ -116,6 +117,7 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
       preview: payload.preview ?? false,
       actionEdit: payload.edit ?? false,
       openEditor: payload.openEditor ?? true,
+      toForm: payload.toForm ?? false,
       onClose: () => {
         setCreateDialogProps({
           visible: false,
@@ -130,6 +132,7 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
           preview: false,
           actionEdit: false,
           openEditor: true,
+          toForm: false,
         });
       },
     });

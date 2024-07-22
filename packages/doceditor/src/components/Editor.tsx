@@ -58,6 +58,11 @@ type IConfigType = IConfig & {
     onRequestStartFilling?: (event: object) => void;
     onSubmit?: (event: object) => void;
   };
+  editorConfig?: {
+    customization?: {
+      close?: Record<string, unknown>;
+    };
+  };
 };
 
 const Editor = ({
@@ -72,6 +77,7 @@ const Editor = ({
   errorMessage,
   isSkipError,
 
+  onDownloadAs,
   onSDKRequestSharingSettings,
   onSDKRequestSaveAs,
   onSDKRequestInsertImage,
@@ -171,12 +177,12 @@ const Editor = ({
             ? window.ClientConfig?.editor?.requestClose ?? false
             : false,
         text: openFileLocationText,
+        blank: openOnNewPage,
       };
       if (
         typeof window !== "undefined" &&
         !window.ClientConfig?.editor?.requestClose
       ) {
-        goBack.blank = openOnNewPage ? true : false;
         goBack.url = getBackUrl(fileInfo.rootFolderType, fileInfo.folderId);
       }
     }
@@ -235,6 +241,7 @@ const Editor = ({
     onMetaChange,
     onMakeActionLink,
     onOutdatedVersion,
+    onDownloadAs,
   };
 
   if (successAuth) {
@@ -299,14 +306,24 @@ const Editor = ({
 
   if (config?.startFilling) {
     newConfig.events.onRequestStartFilling = () =>
-      onSDKRequestStartFilling?.(t("Common:StartFilling"));
+      onSDKRequestStartFilling?.(t("Common:ShareAndCollect"));
   }
 
   newConfig.events.onSubmit = () => {
     const origin = window.location.origin;
 
+    const otherSearchParams = new URLSearchParams();
+
+    if (config?.fillingSessionId)
+      otherSearchParams.append("fillingSessionId", config.fillingSessionId);
+
+    const combinedSearchParams = new URLSearchParams({
+      ...Object.fromEntries(searchParams),
+      ...Object.fromEntries(otherSearchParams),
+    });
+
     window.location.replace(
-      `${origin}/doceditor/completed-form?${searchParams.toString()}`,
+      `${origin}/doceditor/completed-form?${combinedSearchParams.toString()}`,
     );
   };
 

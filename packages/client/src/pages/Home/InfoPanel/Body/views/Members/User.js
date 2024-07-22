@@ -43,7 +43,6 @@ import { StyledUserTypeHeader } from "../../styles/members";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { Link } from "@docspace/shared/components/link";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const User = ({
   t,
@@ -289,8 +288,8 @@ const User = ({
 
   const tooltipContent = `${
     user.isOwner
-      ? t("Common:PortalOwner", { productName: PRODUCT_NAME })
-      : t("Common:PortalAdmin", { productName: PRODUCT_NAME })
+      ? t("Common:PortalOwner", { productName: t("Common:ProductName") })
+      : t("Common:PortalAdmin", { productName: t("Common:ProductName") })
   }. ${t("Common:HasFullAccess")}`;
 
   return user.isTitle ? (

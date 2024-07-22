@@ -41,20 +41,13 @@ import NextcloudWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.nextc
 import WorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.onlyoffice.react.svg?url";
 
 import { LinkType } from "@docspace/shared/components/link/Link.enums";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 import DataImportLoader from "../sub-components/DataImportLoader";
 import { WorkspacesContainer } from "../StyledDataImport";
 import { ProvidersProps, InjectedProvidersProps } from "../types";
 
 const Providers = (props: ProvidersProps) => {
-  const {
-    theme,
-    services,
-    setServices,
-    getMigrationList,
-    setWorkspace,
-    organizationName,
-  } = props as InjectedProvidersProps;
+  const { theme, services, setServices, getMigrationList, setWorkspace } =
+    props as InjectedProvidersProps;
 
   const [areProvidersReady, setAreProvidersReady] = useState(false);
 
@@ -92,8 +85,8 @@ const Providers = (props: ProvidersProps) => {
     <WorkspacesContainer>
       <Text className="data-import-description">
         {t("DataImportDescription", {
-          productName: PRODUCT_NAME,
-          organizationName,
+          productName: t("Common:ProductName"),
+          organizationName: t("Common:OrganizationName"),
         })}
       </Text>
       <Text className="data-import-subtitle">{t("UploadBackupData")}</Text>
@@ -125,7 +118,7 @@ export default inject<TStore>(({ settingsStore, importAccountsStore }) => {
   const { services, setServices, getMigrationList, setWorkspace } =
     importAccountsStore;
 
-  const { organizationName, theme } = settingsStore;
+  const { theme } = settingsStore;
 
   return {
     services,
@@ -134,7 +127,5 @@ export default inject<TStore>(({ settingsStore, importAccountsStore }) => {
 
     theme,
     setWorkspace,
-
-    organizationName,
   };
 })(observer(Providers));

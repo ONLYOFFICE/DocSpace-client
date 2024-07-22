@@ -41,4 +41,6 @@ export interface SelectorAddButtonProps {
   iconName?: string;
   /** Change colors to accent */
   isAction?: boolean;
+
+  iconSize?: number;
 }

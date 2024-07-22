@@ -41,7 +41,6 @@ const GoogleWorkspace = (props: WorkspaceProps) => {
     filteredUsers,
     step,
     setStep,
-    organizationName,
     migratingWorkspace,
     migrationPhase,
     isMigrationInit,
@@ -55,7 +54,7 @@ const GoogleWorkspace = (props: WorkspaceProps) => {
   const StepsData = getStepsData(
     t,
     filteredUsers.length === 0,
-    organizationName,
+    t("Common:OrganizationName"),
   );
 
   useLayoutEffect(() => {
@@ -82,7 +81,7 @@ const GoogleWorkspace = (props: WorkspaceProps) => {
       title={StepsData[step - 1].title}
       description={StepsData[step - 1].description}
       component={StepsData[step - 1].component}
-      organizationName={organizationName}
+      organizationName={t("Common:OrganizationName")}
     />
   );
 };
@@ -98,11 +97,10 @@ export default inject<TStore>(({ settingsStore, importAccountsStore }) => {
     isMigrationInit,
     setIsMigrationInit,
   } = importAccountsStore;
-  const { theme, organizationName } = settingsStore;
+  const { theme } = settingsStore;
 
   return {
     theme,
-    organizationName,
     filteredUsers,
     step,
     setStep,

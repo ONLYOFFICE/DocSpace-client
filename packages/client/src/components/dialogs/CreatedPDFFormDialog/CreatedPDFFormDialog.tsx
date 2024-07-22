@@ -36,58 +36,46 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 
 import { Wrapper } from "./CreatedPDFFormDialog.styled";
-import type { CreatedPDFFormDialogProps } from "./CreatedPDFFormDialog.types";
+import type {
+  CreatedPDFFormDialogProps,
+  InjectedCreatedPDFFormDialogProps,
+} from "./CreatedPDFFormDialog.types";
 
 export const CreatedPDFFormDialog = inject<TStore>(
-  ({ contextOptionsStore, selectedFolderStore }) => {
-    const { onClickLinkFillForm, onCreateAndCopySharedLink } =
-      contextOptionsStore;
+  ({ contextOptionsStore }) => {
+    const { onCopyLink } = contextOptionsStore;
 
-    const { id, roomType, security } = selectedFolderStore;
-
-    return {
-      id,
-      roomType,
-      security,
-      onCreateAndCopySharedLink,
-      onClickLinkFillForm,
-    };
+    return { onCopyLink };
   },
 )(
   observer(
     ({
-      data,
-      roomType,
-      security,
-      id,
-      onCreateAndCopySharedLink,
-      onClickLinkFillForm,
+      file,
+      localKey,
       onClose,
+      onCopyLink,
       visible,
-    }: CreatedPDFFormDialogProps) => {
+    }: CreatedPDFFormDialogProps & InjectedCreatedPDFFormDialogProps) => {
       const { t } = useTranslation(["PDFFormDialog", "Common"]);
       const theme = useTheme();
 
       const onSubmit = () => {
-        if (data.isFill) {
-          onClickLinkFillForm?.(data.file);
-        } else if (Boolean(roomType) && security?.EditAccess) {
-          onCreateAndCopySharedLink?.({ id }, t);
-        }
-
+        onCopyLink(file, t);
         onClose();
       };
 
-      const description = data.isFill
-        ? t("PDFFormSuccessfullyCreatedDescription")
-        : t("PDFFormInviteDescription");
+      const handleChangeCheckbox = (
+        event: React.ChangeEvent<HTMLInputElement>,
+      ) => {
+        localStorage.setItem(localKey, event.target.checked.toString());
+      };
 
-      const primaryButtonLabel = data.isFill
-        ? t("Common:Fill")
-        : t("Common:CopyPublicLink");
+      const description = t("PDFFormSuccessfullyCreatedDescription");
+      const primaryButtonLabel = t("Common:CopyPublicLink");
 
       return (
         <ModalDialog
@@ -101,6 +89,11 @@ export const CreatedPDFFormDialog = inject<TStore>(
             <Wrapper>
               {theme.isBase ? <HeaderIcon /> : <HeaderDarkIcon />}
               <span>{description}</span>
+              <Checkbox
+                className="created-pdf__checkbox"
+                onChange={handleChangeCheckbox}
+                label={t("Common:DontShowAgain")}
+              />
             </Wrapper>
           </ModalDialog.Body>
           <ModalDialog.Footer>
@@ -126,4 +119,4 @@ export const CreatedPDFFormDialog = inject<TStore>(
       );
     },
   ),
-);
+) as unknown as React.FC<CreatedPDFFormDialogProps>;

@@ -40,7 +40,6 @@ import { Base } from "@docspace/shared/themes";
 import { useNavigate } from "react-router-dom";
 
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledWrapper = styled.div`
   display: contents;
@@ -275,8 +274,8 @@ const InsideGroupTableRow = (props) => {
 
     const adminOption = {
       key: "admin",
-      title: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
-      label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
+      title: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
+      label: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
       action: "admin",
     };
     const managerOption = {
@@ -354,7 +353,9 @@ const InsideGroupTableRow = (props) => {
       case "owner":
         return t("Common:Owner");
       case "admin":
-        return t("Common:PortalAdmin", { productName: PRODUCT_NAME });
+        return t("Common:PortalAdmin", {
+          productName: t("Common:ProductName"),
+        });
       case "manager":
         return t("Common:RoomAdmin");
       case "collaborator":

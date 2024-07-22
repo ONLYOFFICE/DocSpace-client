@@ -50,7 +50,6 @@ const StyledSsoPage = styled.div`
   .field-label-icon {
     align-items: center;
     margin-bottom: 4px;
-    max-width: 350px;
   }
 
   .field-label {

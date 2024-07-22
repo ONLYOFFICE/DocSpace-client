@@ -31,6 +31,7 @@ import { getIconPathByFolderType } from "../../utils/common";
 import { iconSize32 } from "../../utils/image-helpers";
 import { DEFAULT_FILE_EXTS } from "./FilesSelector.constants";
 import { getTitleWithoutExtension } from "../../utils";
+import { TTranslation } from "../../types";
 
 const isDisableFolder = (
   folder: TFolder,
@@ -156,4 +157,12 @@ export const convertRoomsToItems: (rooms: TRoom[]) => TSelectorItem[] = (
   });
 
   return items;
+};
+
+export const getDefaultBreadCrumb = (t: TTranslation) => {
+  return {
+    label: t("Common:ProductName"),
+    id: 0,
+    isRoom: false,
+  };
 };

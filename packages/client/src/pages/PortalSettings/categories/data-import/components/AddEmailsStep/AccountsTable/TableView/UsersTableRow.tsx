@@ -56,7 +56,7 @@ const EmailInputWrapper = styled.div`
 
 const StyledTableRow = styled(TableRow)`
   .table-container_cell {
-    padding-right: 30px;
+    padding-inline-end: 30px;
     text-overflow: ellipsis;
   }
 

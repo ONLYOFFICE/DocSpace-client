@@ -34,8 +34,10 @@ import { getGroupMembersInRoom } from "@docspace/shared/api/groups";
 import { useTranslation } from "react-i18next";
 import { InputSize } from "@docspace/shared/components/text-input";
 import { SearchInput } from "@docspace/shared/components/search-input";
-import GroupMember from "./GroupMember";
+import GroupMember from "./sub-components/GroupMember";
 import EmptyContainer from "./EmptyContainer";
+import GroupMembersList from "./sub-components/GroupMembersList/GroupMembersList";
+import { StyledModalDialog } from "./EditGroupMembersDialog.styled";
 
 interface EditGroupMembersProps {
   visible: boolean;
@@ -87,7 +89,7 @@ const EditGroupMembers = ({
   }
 
   return (
-    <ModalDialog
+    <StyledModalDialog
       visible={visible}
       onClose={onClose}
       displayType={ModalDialogType.aside}
@@ -104,16 +106,15 @@ const EditGroupMembers = ({
           size={InputSize.base}
         />
 
-        <div style={{ height: "12px", width: "100%" }} />
-
         {isSearchListEmpty && <EmptyContainer />}
 
-        {hasMembers &&
-          filteredGroupMembers.map(({ user, ...rest }) => (
-            <GroupMember t={t} key={user.id} user={{ ...user, ...rest }} />
-          ))}
+        {/*{hasMembers &&*/}
+        {/*  filteredGroupMembers.map(({ user, ...rest }) => (*/}
+        {/*    <GroupMember t={t} key={user.id} user={{ ...user, ...rest }} />*/}
+        {/*  ))}*/}
+        {hasMembers && <GroupMembersList members={groupMembers} />}
       </ModalDialog.Body>
-    </ModalDialog>
+    </StyledModalDialog>
   );
 };
 

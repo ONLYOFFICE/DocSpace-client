@@ -26,6 +26,7 @@
 "use client";
 
 import React from "react";
+import { decode } from "he";
 import Link from "next/link";
 import Image from "next/image";
 import { useTheme } from "styled-components";
@@ -35,15 +36,30 @@ import CompletedFormDarkIcon from "PUBLIC_DIR/images/completedForm/completed.for
 import CompletedFormLightIcon from "PUBLIC_DIR/images/completedForm/completed.form.icon.light.svg?url";
 import PDFIcon from "PUBLIC_DIR/images/icons/32/pdf.svg";
 import DownloadIconUrl from "PUBLIC_DIR/images/download.react.svg?url";
+import LinkIconUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 import MailIcon from "PUBLIC_DIR/images/icons/12/mail.svg";
 
+import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
 import { getBgPattern, getLogoUrl } from "@docspace/shared/utils/common";
+import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { mobile, mobileMore } from "@docspace/shared/utils";
 import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { copyShareLink } from "@docspace/shared/utils/copy";
+
+import {
+  Avatar,
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/shared/components/avatar";
+
+import FilesFilter from "@docspace/shared/api/files/filter";
+
+import useUpdateSearchParamId from "@/hooks/useUpdateSearchParamId";
 
 import {
   CompletedFormLayout,
@@ -56,16 +72,16 @@ import {
 } from "./CompletedForm.styled";
 
 import type { CompletedFormProps } from "./CompletedForm.types";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import {
-  Avatar,
-  AvatarRole,
-  AvatarSize,
-} from "@docspace/shared/components/avatar";
 
-export const CompletedForm = ({}: CompletedFormProps) => {
+export const CompletedForm = ({
+  session,
+  share,
+  isShreFile,
+}: CompletedFormProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["CompletedForm", "Common"]);
+
+  useUpdateSearchParamId(session?.response.originalForm.id.toString());
 
   const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme.isBase);
   const smallLogoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
@@ -74,14 +90,85 @@ export const CompletedForm = ({}: CompletedFormProps) => {
 
   const iconUrl = theme.isBase ? CompletedFormLightIcon : CompletedFormDarkIcon;
 
-  // const onClose = () => {
-  //   window.close();
-  // };
+  if (!session)
+    return (
+      <CompletedFormLayout bgPattern={bgPattern}>
+        <picture className="completed-form__logo">
+          <source media={mobile} srcSet={smallLogoUrl} />
+          <source media={mobileMore} srcSet={logoUrl} />
+          <img src={logoUrl} alt="logo" />
+        </picture>
+        <Image
+          priority
+          src={iconUrl}
+          className="completed-form__icon"
+          alt="icon"
+          width={416}
+          height={200}
+        />
+        <TextWrapper className="completed-form__empty">
+          <Heading level={HeadingLevel.h1}>{t("CompletedForm:Title")}</Heading>
+          <Text noSelect>{t("CompletedForm:Description")}</Text>
+        </TextWrapper>
+      </CompletedFormLayout>
+    );
 
-  const formNumber = 312;
+  const {
+    response: { completedForm, formNumber, manager, originalForm, roomId },
+  } = session;
 
-  const email = "example@gmail.com";
-  const user = "User User";
+  const isAnonim = Boolean(share);
+
+  const getFolderUrl = (folderId: number, isAnonim: boolean): string => {
+    if (isNullOrUndefined(folderId)) return "";
+
+    const origin = window.location.origin;
+
+    const filter = FilesFilter.getDefault();
+
+    filter.folder = folderId.toString();
+
+    const path = isAnonim
+      ? `/rooms/share?key=${share}&`
+      : `/rooms/shared/${roomId}?`;
+
+    return `${origin}${path}${filter.toUrlParams()}`;
+  };
+
+  const setHistory = (url: string) => {
+    history.pushState({}, "", url);
+  };
+
+  const copyLinkFile = async () => {
+    const origin = window.location.origin;
+
+    const url = `${origin}/doceditor?fileId=${completedForm.id}`;
+
+    await copyShareLink(url);
+    toastr.success(t("Common:LinkCopySuccess"));
+  };
+
+  const handleDownload = () => {
+    window.open(completedForm.viewUrl, "_self");
+  };
+
+  const gotoCompleteFolder = () => {
+    const url = getFolderUrl(completedForm.folderId, false);
+    setHistory(url);
+    window.location.replace(url);
+  };
+
+  const handleBackToRoom = () => {
+    const url = getFolderUrl(roomId, isAnonim);
+    setHistory(url);
+    window.location.replace(url);
+  };
+
+  const fillAgainSearchParams = new URLSearchParams({
+    fileId: originalForm.id.toString(),
+    ...(share ? { share } : {}),
+    ...(isShreFile ? { is_file: "true" } : {}),
+  });
 
   return (
     <CompletedFormLayout bgPattern={bgPattern}>
@@ -90,28 +177,27 @@ export const CompletedForm = ({}: CompletedFormProps) => {
         <source media={mobileMore} srcSet={logoUrl} />
         <img src={logoUrl} alt="logo" />
       </picture>
-      <Image
-        priority
-        src={iconUrl}
-        className="completed-form__icon"
-        alt="icon"
-        width={416}
-        height={200}
-      />
       <TextWrapper>
-        <Heading level={HeadingLevel.h1}>{t("CompletedForm:Title")}</Heading>
-        <Text noSelect>{t("CompletedForm:Description")}</Text>
+        <Heading level={HeadingLevel.h1}>
+          {t("CompletedForm:FormCompletedSuccessfully")}
+        </Heading>
+        <Text noSelect>
+          {isAnonim
+            ? t("CompletedForm:DescriptionForAnonymous")
+            : t("CompletedForm:DescriptionForRegisteredUser")}
+        </Text>
       </TextWrapper>
-      {/* <MainContent>
+      <MainContent>
         <Box className="completed-form__file">
           <PDFIcon />
           <Heading className="completed-form__filename" level={HeadingLevel.h5}>
-            312 – leave application (7/8/2024 11:04 PM)
+            {completedForm.title}
           </Heading>
           <IconButton
             size={16}
             className="completed-form__download"
-            iconName={DownloadIconUrl}
+            iconName={isAnonim ? DownloadIconUrl : LinkIconUrl}
+            onClick={isAnonim ? handleDownload : copyLinkFile}
           />
         </Box>
         <FormNumberWrapper>
@@ -127,34 +213,43 @@ export const CompletedForm = ({}: CompletedFormProps) => {
               className="manager__avatar"
               size={AvatarSize.medium}
               role={AvatarRole.manager}
-              source={""}
+              source={manager.avatar}
             />
             <Heading level={HeadingLevel.h3} className="manager__user-name">
-              {user}
+              {decode(manager.displayName)}
             </Heading>
-            <Link className="manager__mail link" href={`mailto:${email}`}>
+            <Link
+              className="manager__mail link"
+              href={`mailto:${manager.email}`}
+            >
               <MailIcon />
-              {email}
+              {manager.email}
             </Link>
           </Box>
         </ManagerWrapper>
       </MainContent>
-      <ButtonWrapper>
+      <ButtonWrapper isShreFile={isShreFile}>
         <Button
           scale
           primary
           size={ButtonSize.medium}
-          label={t("Common:Download")}
+          label={
+            isAnonim ? t("Common:Download") : t("CompletedForm:CheckReadyForm")
+          }
+          onClick={isAnonim ? handleDownload : gotoCompleteFolder}
         />
-        <Button
-          scale
-          size={ButtonSize.medium}
-          label={t("CompletedForm:BackToRoom")}
-        />
+        {!isShreFile && (
+          <Button
+            scale
+            size={ButtonSize.medium}
+            label={t("CompletedForm:BackToRoom")}
+            onClick={handleBackToRoom}
+          />
+        )}
       </ButtonWrapper>
-      <Link className="link" href="#">
+      <Link className="link" href={`/?${fillAgainSearchParams.toString()}`}>
         {t("CompletedForm:FillItOutAgain")}
-      </Link> */}
+      </Link>
     </CompletedFormLayout>
   );
 };

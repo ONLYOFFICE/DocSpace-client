@@ -1,7 +1,11 @@
 {
   "BackToRoom": "Back to room",
+  "CheckReadyForm": "Check ready form",
   "Description": "Your form completed and saved",
+  "DescriptionForAnonymous": "You submitted the filled PDF form which was assigned a unique number. To check the status, contact the form owner providing the assigned number.",
+  "DescriptionForRegisteredUser": "The filled PDF form is saved and available to you in the Complete folder. To check the status, contact the form owner providing the assigned number.",
   "FillItOutAgain": "Fill it out again",
+  "FormCompletedSuccessfully": "Form completed successfully",
   "FormNumber": "Form number:",
   "Manager": "Manager:",
   "Title": "The form is completed"

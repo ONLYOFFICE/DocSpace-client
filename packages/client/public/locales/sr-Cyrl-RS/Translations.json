@@ -21,7 +21,6 @@
   "FolderTitleWebDav": "WebDAV директоријум",
   "FolderTitleYandex": "Yandex директоријум",
   "FormTemplates": "Шаблони образаца",
-  "LinkCopySuccess": "Линк је копиран на привремену меморију",
   "LinkHasExpiredAndHasBeenDisabled": "Линк је истекао и онемогућен је",
   "LinkValidTime": "Овај линк је валидан само за {{days_count}} дана",
   "NewForm": "PDF образац",

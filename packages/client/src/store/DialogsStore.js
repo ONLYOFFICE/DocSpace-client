@@ -417,6 +417,7 @@ class DialogsStore {
       withoutDialog,
       preview,
       edit: true,
+      toForm: true,
     };
 
     event.payload = payload;

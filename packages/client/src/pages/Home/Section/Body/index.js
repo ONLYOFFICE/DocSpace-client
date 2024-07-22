@@ -35,7 +35,13 @@ import EmptyContainer from "../../../../components/EmptyContainer";
 import withLoader from "../../../../HOCs/withLoader";
 import TableView from "./TableView/TableContainer";
 import withHotkeys from "../../../../HOCs/withHotkeys";
-import { Consumer, isMobile, isTablet } from "@docspace/shared/utils";
+import {
+  clearEdgeScrollingTimer,
+  Consumer,
+  isMobile,
+  isTablet,
+  onEdgeScrolling,
+} from "@docspace/shared/utils";
 import { isElementInViewport } from "@docspace/shared/utils/common";
 
 import { DeviceType } from "@docspace/shared/enums";
@@ -197,6 +203,7 @@ const SectionBodyContent = (props) => {
       setDragging(true);
     }
 
+    onEdgeScrolling(e);
     setTooltipPosition(e.pageX, e.pageY);
     const wrapperElement = document.elementFromPoint(e.clientX, e.clientY);
     if (!wrapperElement) {
@@ -240,6 +247,7 @@ const SectionBodyContent = (props) => {
   };
 
   const onMouseUp = (e) => {
+    clearEdgeScrollingTimer();
     setStartDrag(false);
 
     setTimeout(() => {

@@ -234,7 +234,7 @@ export const CompletedForm = ({
           primary
           size={ButtonSize.medium}
           label={
-            isAnonim ? t("Common:Download") : t("CompletedForm:CheckReadyForm")
+            isAnonim ? t("Common:Download") : t("CompletedForm:CheckReadyForms")
           }
           onClick={isAnonim ? handleDownload : gotoCompleteFolder}
         />

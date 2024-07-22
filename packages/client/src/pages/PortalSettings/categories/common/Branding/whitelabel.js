@@ -179,6 +179,7 @@ const WhiteLabel = (props) => {
         options.fontSize,
         isDocsEditorName ? "#fff" : "#000",
         options.alignCenter,
+        options.isEditor,
       );
       const logoDark = generateLogo(
         options.width,
@@ -187,6 +188,7 @@ const WhiteLabel = (props) => {
         options.fontSize,
         "#fff",
         options.alignCenter,
+        options.isEditor,
       );
       newLogos[i].path.light = logoLight;
       newLogos[i].path.dark = logoDark;

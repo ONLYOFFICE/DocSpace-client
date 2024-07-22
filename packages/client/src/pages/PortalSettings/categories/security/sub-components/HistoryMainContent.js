@@ -84,7 +84,7 @@ const MainContainer = styled.div`
 
   .download-text {
     font-size: 13px;
-    padding: 24px 0;
+    padding: 16px 0 24px 0;
   }
 
   .storage-label {
@@ -326,6 +326,9 @@ const HistoryMainContent = (props) => {
         <Text fontSize="13px" className="login-history-description">
           {subHeader}
         </Text>
+
+        {/*  
+        // This part is commented out because it is not used in the current version of the application
         <Text className="latest-text settings_unavailable">{latestText} </Text>
 
         <label
@@ -380,7 +383,7 @@ const HistoryMainContent = (props) => {
               isDisabled={isSettingNotPaid}
             />
           </>
-        )}
+        )} */}
         <Text className="download-text settings_unavailable">
           {downloadText}
         </Text>

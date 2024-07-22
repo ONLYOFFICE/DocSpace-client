@@ -189,7 +189,7 @@ const Body = ({
   if (withInfoBar) {
     const infoEl = document.querySelector(".selector_info-bar");
     if (infoEl) {
-      const height = infoEl.getClientRects()[0].height;
+      const height = infoEl.getClientRects()[0].height + CONTAINER_PADDING;
       listHeight -= height;
     }
   }

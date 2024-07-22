@@ -43,10 +43,8 @@ export const CompletedFormLayout = styled.section<CompletedFormLayoutProps>`
   }
 
   width: 100%;
-  height: 100dvh;
+  min-height: 100dvh;
   padding: 100px 16px 16px;
-
-  overflow-y: auto;
 
   background-image: ${(props) => props.bgPattern};
   background-repeat: no-repeat;

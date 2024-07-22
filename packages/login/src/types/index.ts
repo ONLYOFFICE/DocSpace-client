@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { AuthenticatedAction, ValidationResult } from "@/utils/enums";
+import { ReactNode } from "react";
+
 import {
   TCapabilities,
   TGetColorTheme,
@@ -38,7 +39,8 @@ import {
 } from "@docspace/shared/api/settings/types";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import { RecaptchaType, ThemeKeys } from "@docspace/shared/enums";
-import { ReactNode } from "react";
+
+import { AuthenticatedAction, ValidationResult } from "@/utils/enums";
 
 export type TError =
   | {

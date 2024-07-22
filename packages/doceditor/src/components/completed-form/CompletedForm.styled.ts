@@ -83,7 +83,7 @@ export const CompletedFormLayout = styled.section<CompletedFormLayoutProps>`
       align-self: center;
       justify-content: center;
       height: 48px;
-      width: 100vw;
+      width: calc(100% + 32px);
       margin: 0 -16px;
 
       margin-bottom: 32px;

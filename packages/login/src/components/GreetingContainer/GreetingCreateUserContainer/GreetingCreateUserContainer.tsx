@@ -28,28 +28,33 @@
 
 "use client";
 
-import { Text } from "@docspace/shared/components/text";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
+import { useContext } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
+
+import { Text } from "@docspace/shared/components/text";
+import { PRODUCT_NAME } from "@docspace/shared/constants";
 import { getLogoUrl } from "@docspace/shared/utils";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
-import { useContext, useEffect, useState } from "react";
+
 import { ConfirmRouteContext } from "@/app/(root)/confirm/confirmRoute";
+import { DEFAULT_PORTAL_TEXT, DEFAULT_ROOM_TEXT } from "@/utils/constants";
+
 import { GreetingContainer } from "./GreetingCleateUserContainer.styled";
 
-// remove
-const DEFAULT_ROOM_TEXT =
-  "<strong>{{firstName}} {{lastName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
-const DEFAULT_PORTAL_TEXT =
-  "<strong>{{firstName}} {{lastName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
+type GreetingCleateUserContainerProps = {
+  type: string;
+  firstName?: string;
+  lastName?: string;
+  hostName: string | null;
+};
 
 export const GreetingCleateUserContainer = ({
   type,
   firstName,
   lastName,
   hostName,
-}) => {
+}: GreetingCleateUserContainerProps) => {
   const { t } = useTranslation(["Confirm", "Common"]);
   const theme = useTheme();
   const { roomData } = useContext(ConfirmRouteContext);

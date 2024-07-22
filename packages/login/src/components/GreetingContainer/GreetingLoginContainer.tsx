@@ -38,7 +38,7 @@ import { PRODUCT_NAME } from "@docspace/shared/constants";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { getLogoUrl } from "@docspace/shared/utils/common";
 
-import { GreetingContainersProps, TConfirmLinkParams } from "@/types";
+import { GreetingContainersProps } from "@/types";
 import { DEFAULT_PORTAL_TEXT, DEFAULT_ROOM_TEXT } from "@/utils/constants";
 import { getInvitationLinkData } from "@/utils";
 

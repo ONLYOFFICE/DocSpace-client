@@ -28,9 +28,8 @@
 
 "use client";
 
-import React, { useLayoutEffect, useState } from "react";
-import { Trans, useTranslation } from "react-i18next";
-import { useSearchParams } from "next/navigation";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
@@ -38,9 +37,7 @@ import { PRODUCT_NAME } from "@docspace/shared/constants";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { getLogoUrl } from "@docspace/shared/utils/common";
 
-import { GreetingContainersProps, TConfirmLinkParams } from "@/types";
-import { DEFAULT_PORTAL_TEXT, DEFAULT_ROOM_TEXT } from "@/utils/constants";
-import { getInvitationLinkData } from "@/utils";
+import { GreetingContainersProps } from "@/types";
 
 export const GreetingContainer = ({
   greetingSettings,

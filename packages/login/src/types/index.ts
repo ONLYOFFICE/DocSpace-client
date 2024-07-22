@@ -38,7 +38,6 @@ import {
 } from "@docspace/shared/api/settings/types";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import { RecaptchaType, ThemeKeys } from "@docspace/shared/enums";
-import { Nullable } from "@docspace/shared/types";
 import { ReactNode } from "react";
 
 export type TError =
@@ -185,4 +184,16 @@ export type WizardFormProps = {
   culture?: string;
   wizardToken?: string;
   passwordHash?: TPasswordHash;
+};
+
+export type TCreateUserData = {
+  fromInviteLink: boolean;
+  userName: string;
+  passwordHash: string;
+  cultureName: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  key?: string;
+  type?: number;
 };

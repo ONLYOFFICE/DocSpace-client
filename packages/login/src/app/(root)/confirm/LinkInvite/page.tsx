@@ -26,15 +26,15 @@
 
 import { headers } from "next/headers";
 
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
+
 import CreateUserForm from "@/components/CreateUserForm";
 import { GreetingCleateUserContainer } from "@/components/GreetingContainer";
 import { getStringFromSearchParams } from "@/utils";
 import { getSettings, getUserFromConfirm } from "@/utils/actions";
-import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 type LinkInviteProps = {
   searchParams: { [key: string]: string };
-  params: any;
 };
 
 async function Page({ searchParams }: LinkInviteProps) {
@@ -45,8 +45,10 @@ async function Page({ searchParams }: LinkInviteProps) {
   const uid = searchParams.uid;
   const confirmKey = getStringFromSearchParams(searchParams);
 
-  const settings = await getSettings();
-  const user = await getUserFromConfirm(uid, confirmKey);
+  const [settings, user] = await Promise.all([
+    getSettings(),
+    getUserFromConfirm(uid, confirmKey),
+  ]);
 
   return (
     <>
@@ -62,6 +64,8 @@ async function Page({ searchParams }: LinkInviteProps) {
             <CreateUserForm
               userNameRegex={settings.userNameRegex}
               passwordHash={settings.passwordHash}
+              firstName={user?.firstName}
+              lastName={user?.lastName}
             />
           </FormWrapper>
         </>

@@ -41,6 +41,7 @@ import {
 } from "@docspace/shared/api/settings/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import { Encoder } from "@docspace/shared/utils/encoder";
+import { TCreateUserData } from "@/types";
 
 export const checkIsAuthenticated = async () => {
   const [request] = createRequest(["/authentication"], [["", ""]], "GET");
@@ -326,19 +327,23 @@ export async function signupOAuth(signupAccount: { [key: string]: string }) {
   if (!res.ok) throw new Error(res.statusText);
 }
 
-export async function createUser(data, confirmKey: string | null = null) {
+export async function createUser(
+  data: TCreateUserData,
+  confirmKey: string | null = null,
+) {
   const [createUser] = createRequest(
     [`/people`],
-    [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
+    [
+      confirmKey ? ["Confirm", confirmKey] : ["", ""],
+      ["Content-Type", "application/json;charset=utf-8"],
+    ],
     "POST",
-    JSON.stringify({
-      data,
-    }),
+    JSON.stringify(data),
   );
 
   const res = await fetch(createUser);
 
-  if (!res.ok) throw new Error(res.statusText);
+  if (!res.ok) throw res;
 
   const user = await res.json();
 

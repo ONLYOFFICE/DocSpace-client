@@ -82,7 +82,7 @@ const WhiteLabel = (props) => {
 
   const [logoTextWhiteLabel, setLogoTextWhiteLabel] = useState("");
   const [isSaving, setIsSaving] = useState(false);
-  const [isEmpty, setIsEmpty] = useState(!logoText);
+  const [isEmpty, setIsEmpty] = useState(isWhitelableLoaded && !logoText);
 
   const isMobileView = deviceType === DeviceType.mobile;
 
@@ -126,22 +126,20 @@ const WhiteLabel = (props) => {
   useEffect(() => {
     if (!isWhitelableLoaded) return;
 
-    setIsEmpty(!logoText);
-  }, [logoText]);
-
-  useEffect(() => {
     const companyNameFromSessionStorage = getFromSessionStorage("companyName");
 
     if (!companyNameFromSessionStorage) {
+      setIsEmpty(!logoText);
       if (!logoText) return;
 
       setLogoTextWhiteLabel(logoText);
       saveToSessionStorage("companyName", logoText);
     } else {
+      setIsEmpty(!companyNameFromSessionStorage);
       setLogoTextWhiteLabel(companyNameFromSessionStorage);
       saveToSessionStorage("companyName", companyNameFromSessionStorage);
     }
-  }, [logoText]);
+  }, [logoText, isWhitelableLoaded]);
 
   const onResetCompanyName = async () => {
     const whlText = await getWhiteLabelLogoText();
@@ -151,13 +149,15 @@ const WhiteLabel = (props) => {
 
   const onChangeCompanyName = (e) => {
     const value = e.target.value;
-    setIsEmpty(!value || value?.trim() === "");
     setLogoTextWhiteLabel(value);
-    saveToSessionStorage("companyName", value);
+
+    const trimmedValue = value?.trim();
+    setIsEmpty(!trimmedValue);
+    saveToSessionStorage("companyName", trimmedValue);
   };
 
   const onUseTextAsLogo = () => {
-    if (!logoTextWhiteLabel) {
+    if (isEmpty) {
       return;
     }
 

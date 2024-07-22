@@ -223,7 +223,7 @@ export const CompletedForm = ({
               href={`mailto:${manager.email}`}
             >
               <MailIcon />
-              {manager.email}
+              <span>{manager.email}</span>
             </Link>
           </Box>
         </ManagerWrapper>

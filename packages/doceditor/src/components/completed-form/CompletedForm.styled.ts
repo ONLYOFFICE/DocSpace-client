@@ -163,7 +163,7 @@ export const MainContent = styled.main`
   width: 100%;
 
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 45fr 101fr;
   grid-template-rows: 1fr auto;
   grid-template-areas:
     "form-file form-file form-file"
@@ -175,6 +175,10 @@ export const MainContent = styled.main`
 
   .completed-form__file {
     grid-area: form-file;
+
+    svg {
+      flex-shrink: 0;
+    }
   }
 
   .completed-form__filename {
@@ -182,11 +186,16 @@ export const MainContent = styled.main`
     line-height: 16px;
 
     margin: 0px;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
 
   .completed-form__download {
     cursor: pointer;
     margin-inline-start: auto;
+    flex-shrink: 0;
   }
 
   .label {
@@ -203,6 +212,15 @@ export const MainContent = styled.main`
     line-height: 1.1;
     font-weight: 600;
     color: ${(props) => props.theme.completedForm.descriptionColor};
+  }
+
+  @media ${mobile} {
+    grid-template-columns: 100%;
+
+    grid-template-areas:
+      "form-file"
+      "form-number"
+      "manager";
   }
 `;
 
@@ -249,14 +267,49 @@ export const ManagerWrapper = styled.div`
       font-size: 16px;
       line-height: 22px;
       font-weight: 700;
+
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
+      /* max-width: 300px; */
     }
 
     .manager__mail {
       grid-area: mail;
-
       display: flex;
       gap: 8px;
+
       align-items: center;
+
+      span {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      svg {
+        flex: 0 0 auto;
+      }
+    }
+
+    @media ${mobile} {
+      grid-template-columns: 100%;
+      grid-template-areas:
+        "avatar"
+        "user-name"
+        "mail";
+
+      .manager__avatar {
+        justify-self: center;
+      }
+
+      .manager__user-name {
+        text-align: center;
+      }
+      .manager__mail {
+        justify-content: center;
+      }
     }
   }
 `;

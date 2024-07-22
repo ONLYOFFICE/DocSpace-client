@@ -96,12 +96,6 @@ const paymentStore = new PaymentStore(
   paymentQuotasStore,
 );
 const wizardStore = new WizardStore();
-const setupStore = new SettingsSetupStore(
-  tfaStore,
-  authStore,
-  settingsStore,
-  thirdPartyStore,
-);
 const confirmStore = new ConfirmStore();
 const backupStore = new BackupStore();
 const commonStore = new CommonStore(settingsStore);
@@ -129,6 +123,14 @@ const filesSettingsStore = new FilesSettingsStore(
   pluginStore,
   authStore,
   settingsStore,
+);
+
+const setupStore = new SettingsSetupStore(
+  tfaStore,
+  authStore,
+  settingsStore,
+  thirdPartyStore,
+  filesSettingsStore,
 );
 
 const accessRightsStore = new AccessRightsStore(

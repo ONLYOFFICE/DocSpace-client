@@ -26,10 +26,18 @@
 
 "use client";
 
-import SsoReactSvgUrl from "PUBLIC_DIR/images/sso.react.svg?url";
+import {
+  ChangeEvent,
+  KeyboardEvent,
+  MouseEvent,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { useTranslation } from "react-i18next";
 
-import { ConfirmRouteContext } from "@/app/(root)/confirm/confirmRoute";
-import withLoader from "@/app/(root)/confirm/withLoader";
 import { TPasswordHash } from "@docspace/shared/api/settings/types";
 import { toastr } from "@docspace/shared/components/toast";
 import {
@@ -44,47 +52,30 @@ import {
   getOAuthToken,
 } from "@docspace/shared/utils/common";
 import { setCookie } from "@docspace/shared/utils/cookie";
-import {
-  ChangeEvent,
-  KeyboardEvent,
-  MouseEvent,
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import { useTranslation } from "react-i18next";
 import { DeviceType } from "@docspace/shared/enums";
-import useDeviceType from "@/hooks/useDeviceType";
 import { RegisterContainer } from "./CreateUserForm.styled";
-import { FieldContainer } from "@docspace/shared/components/field-container";
-import { EmailInput, TValidate } from "@docspace/shared/components/email-input";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import {
-  InputSize,
-  InputType,
-  TextInput,
-} from "@docspace/shared/components/text-input";
-import { PasswordInput } from "@docspace/shared/components/password-input";
-import { getPasswordErrorMessage } from "@docspace/shared/utils/getPasswordErrorMessage";
-import { TError, WithLoaderProps } from "@/types";
-import { TUser } from "@docspace/shared/api/people/types";
+import { TValidate } from "@docspace/shared/components/email-input";
+import { TCreateUserData, TError, WithLoaderProps } from "@/types";
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
 import { Text } from "@docspace/shared/components/text";
-
 import { login } from "@docspace/shared/api/user";
-import {
-  createUser,
-  getUserByEmail,
-  getUserFromConfirm,
-  signupOAuth,
-} from "@/utils/actions";
+
+import SsoReactSvgUrl from "PUBLIC_DIR/images/sso.react.svg?url";
+
+import { ConfirmRouteContext } from "@/app/(root)/confirm/confirmRoute";
+import withLoader from "@/app/(root)/confirm/withLoader";
+import useDeviceType from "@/hooks/useDeviceType";
+import { createUser, getUserByEmail, signupOAuth } from "@/utils/actions";
+
+import EmailInputForm from "./sub-components/EmailInputForm";
+import RegistrationForm from "./sub-components/RegistrationForm";
 
 export type CreateUserFormProps = {
   userNameRegex: string;
   passwordHash: TPasswordHash;
   defaultPage?: string;
+  firstName?: string;
+  lastName?: string;
 } & WithLoaderProps;
 
 const CreateUserForm = (props: CreateUserFormProps) => {
@@ -95,9 +86,11 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     passwordSettings,
     capabilities,
     thirdPartyProviders,
+    firstName,
+    lastName,
   } = props;
   const { linkData, roomData } = useContext(ConfirmRouteContext);
-  const { t, i18n } = useTranslation(["Confirm", "Common", "Wizard"]);
+  const { t, i18n } = useTranslation(["Confirm", "Common"]);
   const { currentDeviceType } = useDeviceType();
 
   const currentCultureName = i18n.language;
@@ -121,10 +114,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
   const [snameValid, setSnameValid] = useState(true);
 
   const [isLoading, setIsLoading] = useState(false);
-
   const [errorText, setErrorText] = useState("");
-
-  const [user, setUser] = useState<TUser>();
 
   const [isEmailErrorShow, setIsEmailErrorShow] = useState(false);
   const [isPasswordErrorShow, setIsPasswordErrorShow] = useState(false);
@@ -149,7 +139,6 @@ const CreateUserForm = (props: CreateUserFormProps) => {
         culture: currentCultureName,
       };
 
-      // remove from component?
       return signupOAuth(signupAccount)
         .then(() => {
           const url = roomData.roomId
@@ -172,21 +161,9 @@ const CreateUserForm = (props: CreateUserFormProps) => {
   );
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (linkData.type === "LinkInvite") {
-        const uid = linkData?.uid ?? "";
-        const confirmKey = linkData?.confirmHeader || null;
-        // remove from component?
-        const user = await getUserFromConfirm(uid, confirmKey);
-        setUser(user);
-      }
-      window.authCallback = authCallback;
-
-      focusInput();
-    };
-
-    fetchData();
-  }, [authCallback, linkData?.confirmHeader, linkData.type, linkData?.uid]);
+    window.authCallback = authCallback;
+    focusInput();
+  }, [authCallback]);
 
   const onContinue = async () => {
     setIsLoading(true);
@@ -208,66 +185,53 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
     const headerKey = linkData?.confirmHeader ?? null;
 
-    try {
-      const toBinaryStr = (str: string) => {
-        const encoder = new TextEncoder();
-        const charCodes = encoder.encode(str);
-        return String.fromCharCode(...charCodes);
-      };
+    const toBinaryStr = (str: string) => {
+      const encoder = new TextEncoder();
+      const charCodes = encoder.encode(str);
+      // @ts-ignore
+      return String.fromCharCode(...charCodes);
+    };
 
-      const loginData = window.btoa(
-        toBinaryStr(
-          JSON.stringify({
-            type: "invitation",
-            email,
-            roomName,
-            firstName: user?.firstName,
-            lastName: user?.lastName,
-          }),
-        ),
-      );
+    const loginData = window.btoa(
+      toBinaryStr(
+        JSON.stringify({
+          type: "invitation",
+          email,
+          roomName,
+          firstName,
+          lastName,
+        }),
+      ),
+    );
 
-      const response = await getUserByEmail(email, headerKey);
+    const response = await getUserByEmail(email, headerKey);
 
-      if (typeof response === "number") {
-        const isNotExistUser = response === 404;
-
-        if (isNotExistUser) {
-          setRegistrationForm(true);
-        }
-        setIsLoading(false);
-
-        return;
-      }
-
-      setCookie(LANGUAGE, currentCultureName, {
-        "max-age": COOKIE_EXPIRATION_YEAR,
-      });
-
-      window.location.href = combineUrl(
-        window.ClientConfig?.proxy?.url,
-        "/login",
-        `?loginData=${loginData}`,
-      );
-    } catch (error) {
-      /* const knownError = error as TError;
-      console.log("knownError", error.status);
-
-      const status =
-        typeof knownError === "object" ? knownError.response?.status : "";
-      const isNotExistUser = status === 404;
+    if (typeof response === "number") {
+      const isNotExistUser = response === 404;
 
       if (isNotExistUser) {
         setRegistrationForm(true);
-      } */
+      }
+      setIsLoading(false);
+
+      return;
     }
+
+    setCookie(LANGUAGE, currentCultureName, {
+      "max-age": COOKIE_EXPIRATION_YEAR,
+    });
+
+    window.location.href = combineUrl(
+      window.ClientConfig?.proxy?.url,
+      "/login",
+      `?loginData=${loginData}`,
+    );
 
     setIsLoading(false);
   };
 
   const onSubmit = () => {
     const type = parseInt(linkData?.emplType ?? "");
-    console.log("here");
 
     setIsLoading(true);
     setErrorText("");
@@ -305,29 +269,37 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
     const hash = createPasswordHash(password, passwordHash);
 
-    const loginData = {
+    const fromInviteLink =
+      linkData.type === "LinkInvite" || linkData.type === "EmpInvite"
+        ? true
+        : false;
+
+    const confirmUser: TCreateUserData = {
+      fromInviteLink,
       userName: email,
       passwordHash: hash,
-    };
-
-    const personalData: { [key: string]: string | number } = {
-      firstname: fname.trim(),
-      lastname: sname.trim(),
+      firstName: fname.trim(),
+      lastName: sname.trim(),
       email: email,
       cultureName: currentCultureName,
     };
 
+    confirmUser.fromInviteLink =
+      linkData.type === "LinkInvite" || linkData.type === "EmpInvite"
+        ? true
+        : false;
+
     if (!!type) {
-      personalData.type = type;
+      confirmUser.type = type;
     }
 
     if (!!linkData.key) {
-      personalData.key = linkData.key;
+      confirmUser.key = linkData.key;
     }
 
     const headerKey = linkData?.confirmHeader ?? "";
 
-    createConfirmUser(personalData, loginData, headerKey).catch((error) => {
+    createConfirmUser(confirmUser, headerKey).catch((error) => {
       const knownError = error as TError;
       let errorMessage: string;
 
@@ -350,21 +322,12 @@ const CreateUserForm = (props: CreateUserFormProps) => {
   };
 
   const createConfirmUser = async (
-    registerData: { [key: string]: string | number },
-    loginData: { userName: string; passwordHash: string },
+    confirmUserData: TCreateUserData,
     key: string,
   ) => {
-    const fromInviteLink =
-      linkData.type === "LinkInvite" || linkData.type === "EmpInvite"
-        ? true
-        : false;
+    await createUser(confirmUserData, key);
 
-    const data = Object.assign({ fromInviteLink }, registerData, loginData);
-
-    await createUser(data, key);
-
-    const { userName, passwordHash } = loginData;
-
+    const { userName, passwordHash } = confirmUserData;
     const res = await login(userName, passwordHash);
 
     const finalUrl = roomData.roomId
@@ -372,10 +335,8 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       : defaultPage;
 
     const isConfirm = typeof res === "string" && res.includes("confirm");
-
     if (isConfirm) {
       sessionStorage.setItem("referenceUrl", finalUrl);
-
       return window.location.replace(typeof res === "string" ? res : "/");
     }
 
@@ -386,6 +347,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     setEmail(e.target.value);
     setIsEmailErrorShow(false);
   };
+
   const onChangeFname = (e: ChangeEvent<HTMLInputElement>) => {
     setFname(e.target.value);
     setFnameValid(nameRegex.test(e.target.value.trim()));
@@ -409,6 +371,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       registrationForm ? onSubmit() : onContinue();
     }
   };
+
   const onValidatePassword = (progressScore: boolean) => {
     setPasswordValid(progressScore);
   };
@@ -488,6 +451,10 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     setEmailErrorText(result.errors?.[0]);
   };
 
+  const onClickBack = () => {
+    setRegistrationForm(false);
+  };
+
   const ssoProps = ssoExists()
     ? {
         ssoUrl: capabilities?.ssoUrl,
@@ -499,168 +466,43 @@ const CreateUserForm = (props: CreateUserFormProps) => {
   return (
     <RegisterContainer registrationForm={registrationForm}>
       <div className="auth-form-fields">
-        <div className="email-container">
-          <FieldContainer
-            className="form-field"
-            isVertical={true}
-            labelVisible={false}
-            hasError={isEmailErrorShow && !emailValid}
-            errorMessage={
-              emailErrorText
-                ? t(`Common:${emailErrorText}`)
-                : t("Common:RequiredField")
-            }
-          >
-            <EmailInput
-              id="login"
-              name="login"
-              type={InputType.email}
-              size={InputSize.large}
-              hasError={isEmailErrorShow && !emailValid}
-              value={email}
-              placeholder={t("Common:Email")}
-              scale={true}
-              isAutoFocussed={true}
-              tabIndex={1}
-              isDisabled={isLoading || !!emailFromLink}
-              autoComplete="username"
-              onChange={onChangeEmail}
-              onBlur={onBlurEmail}
-              onValidateInput={onValidateEmail}
-              forwardedRef={inputRef}
-              onKeyDown={onKeyPress}
-            />
-          </FieldContainer>
-          <Button
-            className="login-button"
-            primary
-            size={ButtonSize.medium}
-            scale={true}
-            label={t("Common:ContinueButton")}
-            tabIndex={1}
-            isDisabled={isLoading}
-            isLoading={isLoading}
-            onClick={onContinue}
-          />
-        </div>
-
+        <EmailInputForm
+          ref={inputRef}
+          isLoading={isLoading}
+          email={email}
+          isEmailErrorShow={isEmailErrorShow}
+          emailValid={emailValid}
+          emailFromLink={emailFromLink}
+          emailErrorText={emailErrorText}
+          onContinue={onContinue}
+          onChange={onChangeEmail}
+          onValidate={onValidateEmail}
+          onBlur={onBlurEmail}
+          onKeyPress={onKeyPress}
+        />
         {registrationForm && (
-          <div>
-            {/* <RegistrationFormGreeting
-              email={email}
-              setRegistrationForm={setRegistrationForm}
-              type={linkData.type ?? ""}
-              emailFromLink={emailFromLink}
-            /> */}
-            <FieldContainer
-              className="form-field"
-              isVertical={true}
-              labelVisible={false}
-              hasError={!fnameValid}
-              errorMessage={
-                errorText
-                  ? errorText
-                  : fname.trim().length === 0
-                    ? t("Common:RequiredField")
-                    : t("Common:IncorrectFirstName")
-              }
-            >
-              <TextInput
-                id="first-name"
-                name="first-name"
-                type={InputType.text}
-                size={InputSize.large}
-                hasError={!fnameValid}
-                value={fname}
-                placeholder={t("Common:FirstName")}
-                scale={true}
-                tabIndex={1}
-                isDisabled={isLoading}
-                onChange={onChangeFname}
-                onKeyDown={onKeyPress}
-                isAutoFocussed
-              />
-            </FieldContainer>
-            <FieldContainer
-              className="form-field"
-              isVertical={true}
-              labelVisible={false}
-              hasError={!snameValid}
-              errorMessage={
-                errorText
-                  ? errorText
-                  : sname.trim().length === 0
-                    ? t("Common:RequiredField")
-                    : t("Common:IncorrectLastName")
-              }
-            >
-              <TextInput
-                id="last-name"
-                name="last-name"
-                type={InputType.text}
-                size={InputSize.large}
-                hasError={!snameValid}
-                value={sname}
-                placeholder={t("Common:LastName")}
-                scale={true}
-                tabIndex={1}
-                isDisabled={isLoading}
-                onChange={onChangeSname}
-                onKeyDown={onKeyPress}
-              />
-            </FieldContainer>
-            <FieldContainer
-              className="form-field password-field"
-              isVertical={true}
-              labelVisible={false}
-              hasError={isPasswordErrorShow && !passwordValid}
-              errorMessage={`${t(
-                "Common:PasswordLimitMessage",
-              )}: ${getPasswordErrorMessage(t, passwordSettings)}`}
-            >
-              <PasswordInput
-                simpleView={false}
-                passwordSettings={passwordSettings}
-                id="password"
-                inputName="password"
-                placeholder={t("Common:Password")}
-                inputType={InputType.password}
-                size={InputSize.large}
-                hasError={isPasswordErrorShow && !passwordValid}
-                inputValue={password}
-                scale={true}
-                tabIndex={1}
-                isDisabled={isLoading}
-                autoComplete="current-password"
-                onChange={onChangePassword}
-                onBlur={onBlurPassword}
-                onKeyDown={onKeyPress}
-                onValidateInput={onValidatePassword}
-                tooltipPasswordTitle={`${t("Common:PasswordLimitMessage")}:`}
-                tooltipPasswordLength={`${t(
-                  "Common:PasswordMinimumLength",
-                )}: ${passwordSettings ? passwordSettings.minLength : 8}`}
-                tooltipPasswordDigits={`${t("Common:PasswordLimitDigits")}`}
-                tooltipPasswordCapital={`${t("Common:PasswordLimitUpperCase")}`}
-                tooltipPasswordSpecial={`${t(
-                  "Common:PasswordLimitSpecialSymbols",
-                )}`}
-                generatePasswordTitle={t("Wizard:GeneratePassword")}
-              />
-            </FieldContainer>
-
-            <Button
-              className="login-button"
-              primary
-              size={ButtonSize.medium}
-              scale={true}
-              label={isLoading ? t("Common:LoadingProcessing") : t("SignUp")}
-              tabIndex={1}
-              isDisabled={isLoading}
-              isLoading={isLoading}
-              onClick={onSubmit}
-            />
-          </div>
+          <RegistrationForm
+            isLoading={isLoading}
+            email={email}
+            emailFromLink={emailFromLink}
+            errorText={errorText}
+            fnameValid={fnameValid}
+            fname={fname}
+            sname={sname}
+            snameValid={snameValid}
+            isPasswordErrorShow={isPasswordErrorShow}
+            passwordValid={passwordValid}
+            passwordSettings={passwordSettings}
+            password={password}
+            onChangeFname={onChangeFname}
+            onChangeSname={onChangeSname}
+            onChangePassword={onChangePassword}
+            onBlurPassword={onBlurPassword}
+            onKeyPress={onKeyPress}
+            onValidatePassword={onValidatePassword}
+            onClickBack={onClickBack}
+            onSubmit={onSubmit}
+          />
         )}
       </div>
 

@@ -24,41 +24,100 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { memo, useMemo } from "react";
+import React, { memo, useCallback } from "react";
+import { useTheme } from "styled-components";
 import { areEqual, FixedSizeList as List } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
+import InfiniteLoader from "react-window-infinite-loader";
 
-import { CustomScrollbarsVirtualListWithAutoFocus } from "@docspace/shared/components/scrollbar";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import { RowLoader } from "@docspace/shared/skeletons/selector";
+import { TGroupMemberInvitedInRoom } from "@docspace/shared/api/groups/types";
 
 import GroupMember from "../GroupMember";
 
 const ROW_HEIGHT = 48;
 const SEARCH_WITH_PADDING_HEIGHT = 60;
 
-const Row = memo(({ data, index, style }) => {
-  const member = data[index];
+const Row = memo(
+  ({
+    data,
+    index,
+    style,
+  }: {
+    data: TGroupMemberInvitedInRoom[];
+    index: number;
+    style: React.CSSProperties;
+  }) => {
+    const member = data[index];
 
-  return (
-    <div style={style}>
-      <GroupMember member={member} />
-    </div>
+    return (
+      <div style={style}>
+        {member ? (
+          <GroupMember member={member} />
+        ) : (
+          <RowLoader isMultiSelect={false} isContainer isUser />
+        )}
+      </div>
+    );
+  },
+  areEqual,
+);
+
+Row.displayName = "Row";
+
+interface GroupMembersListProps {
+  members: TGroupMemberInvitedInRoom[];
+  loadNextPage: (startIndex: number) => void;
+  hasNextPage: boolean;
+  total: number;
+  isNextPageLoading: boolean;
+}
+
+const GroupMembersList = ({
+  members,
+  loadNextPage,
+  hasNextPage,
+  total,
+  isNextPageLoading,
+}: GroupMembersListProps) => {
+  const { interfaceDirection } = useTheme();
+
+  const itemCount = hasNextPage ? members.length + 1 : members.length;
+
+  const isItemLoaded = useCallback(
+    (index: number) => {
+      return !hasNextPage || index < itemCount - 1;
+    },
+    [hasNextPage, itemCount],
   );
-}, areEqual);
 
-const GroupMembersList = ({ members }) => {
+  const loadMoreItems = isNextPageLoading ? () => {} : loadNextPage;
+
   return (
     <AutoSizer>
       {({ height, width }) => (
-        <List
-          height={height - SEARCH_WITH_PADDING_HEIGHT}
-          width={width}
-          itemCount={members.length}
-          itemSize={ROW_HEIGHT}
-          itemData={members}
-          outerElementType={CustomScrollbarsVirtualListWithAutoFocus}
+        <InfiniteLoader
+          isItemLoaded={isItemLoaded}
+          itemCount={total}
+          loadMoreItems={loadMoreItems}
         >
-          {Row}
-        </List>
+          {({ onItemsRendered, ref }) => (
+            <List
+              ref={ref}
+              direction={interfaceDirection}
+              height={height - SEARCH_WITH_PADDING_HEIGHT}
+              width={width}
+              itemCount={itemCount}
+              itemSize={ROW_HEIGHT}
+              itemData={members}
+              outerElementType={Scrollbar}
+              onItemsRendered={onItemsRendered}
+            >
+              {Row}
+            </List>
+          )}
+        </InfiniteLoader>
       )}
     </AutoSizer>
   );

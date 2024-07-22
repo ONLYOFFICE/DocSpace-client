@@ -24,37 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TUser } from "../people/types";
-import { ShareAccessRights } from "../../enums";
+import { SearchLoader } from "@docspace/shared/skeletons/selector";
+import React from "react";
+import { MemberLoader } from "@docspace/shared/skeletons/info-panel/body/views/MembersLoader";
 
-export type TGroup = {
-  category: string;
-  id: string;
-  manager: TUser;
-  name: string;
-  parent: string;
-  isGroup?: boolean;
-  membersCount: number;
-  shared?: boolean;
-  isLDAP: boolean;
-};
+interface ModalBodyLoaderProps {
+  withSearch: boolean;
+}
 
-export type TGroupMemberInvitedInRoom = {
-  user: TUser;
-  canEditAccess: boolean;
-  overridden: boolean;
-  owner: boolean;
-  groupAccess: number;
-  userAccess: ShareAccessRights;
-};
-
-export type TGetGroupMembersInRoom = {
-  items: TGroupMemberInvitedInRoom[];
-  total: number;
-};
-
-export type TGetGroupMembersInRoomFilter = {
-  startIndex?: number;
-  count?: number;
-  filterValue?: string;
+export const ModalBodyLoader = ({ withSearch }: ModalBodyLoaderProps) => {
+  return (
+    <div style={{ paddingTop: withSearch ? "16px" : "0" }}>
+      {withSearch && <SearchLoader />}
+      <div style={{ paddingInline: "16px" }}>
+        <MemberLoader count={25} />
+      </div>
+    </div>
+  );
 };

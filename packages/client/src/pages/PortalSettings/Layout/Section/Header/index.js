@@ -341,13 +341,6 @@ const SectionHeaderContent = (props) => {
     },
   ];
 
-  const pathname = location.pathname;
-
-  const isServicePage =
-    pathname.includes("google") ||
-    pathname.includes("nextcloud") ||
-    pathname.includes("onlyoffice");
-
   return (
     <StyledContainer isHeaderVisible={isHeaderVisible}>
       {isHeaderVisible ? (
@@ -365,7 +358,7 @@ const SectionHeaderContent = (props) => {
         <LoaderSectionHeader />
       ) : (
         <HeaderContainer>
-          {!isCategoryOrHeader && arrayOfParams[0] && (
+          {!isCategoryOrHeader && arrayOfParams[0] && isMobile() && (
             <IconButton
               iconName={ArrowPathReactSvgUrl}
               size="17"
@@ -375,15 +368,6 @@ const SectionHeaderContent = (props) => {
             />
           )}
           <Headline type="content" truncate={true}>
-            {isMobile() && isServicePage && (
-              <IconButton
-                iconName={ArrowPathReactSvgUrl}
-                size="17"
-                isFill={true}
-                onClick={onBackToParent}
-                className="arrow-button"
-              />
-            )}
             {t(header, {
               organizationName: t("Common:OrganizationName"),
             })}

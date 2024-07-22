@@ -76,6 +76,8 @@ class TableHeader extends React.Component<
       infoPanelVisible,
       columnStorageName,
       columnInfoPanelStorageName,
+      sortBy,
+      sorted,
     } = this.props;
 
     if (columnStorageName === prevProps.columnStorageName) {
@@ -92,6 +94,15 @@ class TableHeader extends React.Component<
         if (columns[index].enable !== prevProps.columns[index].enable) {
           return this.resetColumns();
         }
+      }
+    }
+
+    if (sortBy !== prevProps.sortBy || sorted !== prevProps.sorted) {
+      const columnIndex = columns.findIndex((c) => c?.sortBy === sortBy);
+      if (columnIndex === -1) return;
+
+      if (!columns[columnIndex].enable) {
+        columns[columnIndex].onChange?.(columns[columnIndex].key);
       }
     }
 

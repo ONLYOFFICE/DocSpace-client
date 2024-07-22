@@ -27,6 +27,7 @@
 "use client";
 
 import styled, { css } from "styled-components";
+
 import { mobile, tablet } from "@docspace/shared/utils";
 
 export const RegisterContainer = styled.div<{
@@ -46,6 +47,7 @@ export const RegisterContainer = styled.div<{
     align-items: center;
     color: ${(props) => props.theme.invitePage.borderColor};
     padding-top: 35px;
+    padding-bottom: 0;
     margin-bottom: 32px;
   }
 
@@ -79,10 +81,10 @@ export const RegisterContainer = styled.div<{
   }
 
   .password-field-wrapper {
-    width: 100%;
+    min-width: 100%;
   }
 
-  .greeting-container{
+  .greeting-user-container{
     margin-bottom: 32px;
     p{
       text-align: center;

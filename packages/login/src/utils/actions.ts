@@ -353,3 +353,31 @@ export async function createUser(
 
   return user.response as TUser;
 }
+
+export async function changePassword(
+  passwordHash: string,
+  userId?: string,
+  confirmKey: string | null = null,
+) {
+  const [changePassword] = createRequest(
+    [`/people/${userId}/password`],
+    [
+      confirmKey ? ["confirm", confirmKey] : ["", ""],
+      ["Content-Type", "application/json;charset=utf-8"],
+    ],
+    "PUT",
+    JSON.stringify({ passwordHash }),
+  );
+
+  const res = await fetch(changePassword);
+
+  if (!res.ok) throw new Error(res.statusText);
+
+  const user = await res.json();
+
+  if (user && user.displayName) {
+    user.displayName = Encoder.htmlDecode(user.displayName);
+  }
+
+  return user.response as TUser;
+}

@@ -207,7 +207,7 @@ export const CompletedForm = ({
           </Box>
         </FormNumberWrapper>
         <ManagerWrapper>
-          <span className="label">{t("CompletedForm:Manager")}</span>
+          <span className="label">{t("CompletedForm:FormOwner")}</span>
           <Box>
             <Avatar
               className="manager__avatar"

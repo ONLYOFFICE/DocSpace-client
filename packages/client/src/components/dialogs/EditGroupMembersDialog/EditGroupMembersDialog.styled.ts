@@ -24,72 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import { Base } from "@docspace/shared/themes";
+import styled from "styled-components";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
-export const GroupMember = styled.div<{ isExpect: boolean }>`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 0;
-
-  .avatar {
-    min-width: 32px;
-    min-height: 32px;
+export const StyledModalDialog = styled(ModalDialog)`
+  .modal-body {
+    padding: 0;
   }
 
-  .user_body-wrapper {
-    overflow: auto;
-  }
-
-  .name-wrapper,
-  .role-email {
-    display: flex;
-  }
-
-  .name {
-    font-weight: 600;
-    font-size: 14px;
-    line-height: ${({ theme }) =>
-      theme.interfaceDirection === "rtl" ? `20px` : `16px`};
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    ${(props) =>
-      props.isExpect && `color: ${props.theme.infoPanel.members.isExpectName}`};
-  }
-
-  .me-label {
-    font-weight: 600;
-    font-size: 14px;
-    line-height: ${({ theme }) =>
-      theme.interfaceDirection === "rtl" ? `20px` : `16px`};
-    color: ${(props) => props.theme.infoPanel.members.meLabelColor};
-    padding-inline-start: 8px;
-    margin-inline-start: -8px;
-  }
-
-  .individual-rights-tooltip {
-    margin-inline-start: auto;
-  }
-
-  .role-wrapper {
-    font-weight: 600;
-    font-size: 13px;
-    line-height: 20px;
-    white-space: nowrap;
-
-    .disabled-role-combobox {
-      color: ${(props) =>
-        props.theme.infoPanel.members.disabledRoleSelectorColor};
-
-      margin-inline-end: 16px;
-    }
-
-    .combo-button {
-      padding: 0 8px;
-    }
+  .search-input {
+    margin: 16px 16px 12px;
   }
 `;
-
-GroupMember.defaultProps = { theme: Base };

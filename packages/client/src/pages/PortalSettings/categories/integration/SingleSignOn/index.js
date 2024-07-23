@@ -69,7 +69,6 @@ const SingleSignOn = (props) => {
     <StyledSsoPage
       hideSettings={serviceProviderSettings}
       hideMetadata={spMetadata}
-      isSettingPaid={isSSOAvailable}
     >
       <Text className="intro-text settings_unavailable" noSelect>
         {t("SsoIntro")}
@@ -88,7 +87,7 @@ const SingleSignOn = (props) => {
             })}
             label={SERVICE_PROVIDER_SETTINGS}
             value={serviceProviderSettings}
-            isDisabled={!isSSOAvailable}
+            //isDisabled={!isSSOAvailable}
           />
 
           <SPSettings />
@@ -101,7 +100,7 @@ const SingleSignOn = (props) => {
             })}
             label={SP_METADATA}
             value={spMetadata}
-            isDisabled={!isSSOAvailable}
+            //isDisabled={!isSSOAvailable}
           />
 
           <Box className="sp-metadata">

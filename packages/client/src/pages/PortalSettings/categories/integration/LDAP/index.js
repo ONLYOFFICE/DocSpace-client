@@ -75,10 +75,7 @@ const LDAP = ({
 
   if (!isLoaded && isLdapAvailable) return <LdapLoader />;
   return (
-    <StyledLdapPage
-      isSmallWindow={isSmallWindow}
-      isSettingPaid={isLdapAvailable}
-    >
+    <StyledLdapPage isSmallWindow={isSmallWindow}>
       <Text className="intro-text settings_unavailable">{t("LdapIntro")}</Text>
       <Box marginProp="8px 0 24px 0">
         <Link

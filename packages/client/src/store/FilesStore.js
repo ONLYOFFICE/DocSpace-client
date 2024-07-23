@@ -3961,19 +3961,6 @@ class FilesStore {
 
   openDocEditor = (id, preview = false, shareKey = null, editForm = false) => {
     const { openOnNewPage } = this.filesSettingsStore;
-    const foundIndex = this.files.findIndex((x) => x.id === id);
-    const file = foundIndex !== -1 ? this.files[foundIndex] : undefined;
-    if (
-      file &&
-      !preview &&
-      file.rootFolderType !== FolderType.Archive &&
-      file.fileExst !== ".oform"
-    ) {
-      const newStatus = file.fileStatus | FileStatus.IsEditing;
-
-      this.updateSelectionStatus(id, newStatus, true);
-      this.updateFileStatus(foundIndex, newStatus);
-    }
 
     const share = shareKey ? shareKey : this.publicRoomStore.publicRoomKey;
 

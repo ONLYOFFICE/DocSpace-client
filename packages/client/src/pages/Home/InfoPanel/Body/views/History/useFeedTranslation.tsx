@@ -18,8 +18,18 @@ export const useFeedTranslation = (
     case "FileRenamed":
       return t("InfoPanel:FileRenamed");
     case "FileMoved":
+      if (feed.data.fromParentTitle) {
+        return t("InfoPanel:FileMovedTo", {
+          folderTitle: feed.data.parentTitle,
+        });
+      }
       return t("InfoPanel:FileMoved");
     case "FileCopied":
+      if (feed.data.fromParentTitle) {
+        return t("InfoPanel:FileCopiedTo", {
+          folderTitle: feed.data.parentTitle,
+        });
+      }
       return t("InfoPanel:FileCopied");
     case "FileDeleted":
       return t("InfoPanel:FileDeleted");

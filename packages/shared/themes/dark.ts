@@ -2082,6 +2082,7 @@ const Dark: TTheme = {
       folderLabelColor: "#A3A9AE",
       renamedItemColor: "#A3A9AE",
       oldRoleColor: "#A3A9AE",
+      messageColor: "#FFFFFF",
     },
 
     details: {

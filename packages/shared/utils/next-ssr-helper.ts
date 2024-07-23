@@ -54,6 +54,7 @@ export const createRequest = (
   body?: string,
 ) => {
   const hdrs = new Headers(headers());
+  hdrs.delete("content-length");
   const cookieStore = cookies();
 
   const apiURL = getAPIUrl();

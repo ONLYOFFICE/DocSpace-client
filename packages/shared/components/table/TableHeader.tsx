@@ -368,11 +368,7 @@ class TableHeader extends React.Component<
     if (storageSize) {
       const splitStorage = storageSize.split(" ");
 
-      if (
-        (defaultSize &&
-          splitStorage[splitStorage.length - 2] !== `${defaultSize}px`) ||
-        getSubstring(splitStorage[0]) <= defaultMinColumnSize
-      ) {
+      if (getSubstring(splitStorage[0]) <= defaultMinColumnSize) {
         localStorage.removeItem(columnStorageName);
         this.onResize();
         return;
@@ -620,7 +616,7 @@ class TableHeader extends React.Component<
         }
       } else {
         let overWidth = 0;
-        if (!hideColumns) {
+        if (!hideColumns && !hideColumnsConst) {
           // eslint-disable-next-line guard-for-in, no-restricted-syntax
           for (const index in tableContainer) {
             const item = tableContainer[index];

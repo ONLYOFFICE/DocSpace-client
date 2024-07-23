@@ -24,37 +24,72 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TUser } from "../people/types";
-import { ShareAccessRights } from "../../enums";
+import styled, { css } from "styled-components";
+import { Base } from "@docspace/shared/themes";
 
-export type TGroup = {
-  category: string;
-  id: string;
-  manager: TUser;
-  name: string;
-  parent: string;
-  isGroup?: boolean;
-  membersCount: number;
-  shared?: boolean;
-  isLDAP: boolean;
-};
+export const GroupMember = styled.div<{ isExpect: boolean }>`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
 
-export type TGroupMemberInvitedInRoom = {
-  user: TUser;
-  canEditAccess: boolean;
-  overridden: boolean;
-  owner: boolean;
-  groupAccess: number;
-  userAccess: ShareAccessRights;
-};
+  .avatar {
+    min-width: 32px;
+    min-height: 32px;
+  }
 
-export type TGetGroupMembersInRoom = {
-  items: TGroupMemberInvitedInRoom[];
-  total: number;
-};
+  .user_body-wrapper {
+    overflow: auto;
+  }
 
-export type TGetGroupMembersInRoomFilter = {
-  startIndex?: number;
-  count?: number;
-  filterValue?: string;
-};
+  .name-wrapper,
+  .role-email {
+    display: flex;
+  }
+
+  .name {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: ${({ theme }) =>
+      theme.interfaceDirection === "rtl" ? `20px` : `16px`};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    ${(props) =>
+      props.isExpect && `color: ${props.theme.infoPanel.members.isExpectName}`};
+  }
+
+  .me-label {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: ${({ theme }) =>
+      theme.interfaceDirection === "rtl" ? `20px` : `16px`};
+    color: ${(props) => props.theme.infoPanel.members.meLabelColor};
+    padding-inline-start: 8px;
+    margin-inline-start: -8px;
+  }
+
+  .individual-rights-tooltip {
+    margin-inline-start: auto;
+  }
+
+  .role-wrapper {
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 20px;
+    white-space: nowrap;
+
+    .disabled-role-combobox {
+      color: ${(props) =>
+        props.theme.infoPanel.members.disabledRoleSelectorColor};
+
+      margin-inline-end: 16px;
+    }
+
+    .combo-button {
+      padding: 0 8px;
+    }
+  }
+`;
+
+GroupMember.defaultProps = { theme: Base };

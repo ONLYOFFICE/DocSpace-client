@@ -143,9 +143,21 @@ const SelectUsersStep = (props) => {
           )}
         </>
       ) : (
-        <Text fontWeight={600} lineHeight="20px" className="mb-17">
-          {t("Settings:AddEmailsWarning")}
-        </Text>
+        <>
+          <Text fontWeight={600} lineHeight="20px" className="mb-17">
+            {t("Settings:AddEmailsWarning")}
+          </Text>
+          <SaveCancelButtons
+            className="save-cancel-buttons"
+            onSaveClick={incrementStep}
+            onCancelClick={goBack}
+            saveButtonLabel={t("Settings:NextStep")}
+            cancelButtonLabel={t("Common:Back")}
+            showReminder
+            displaySettings
+            isSaving={isSaving}
+          />
+        </>
       )}
 
       {filteredAccounts.length > 0 && (

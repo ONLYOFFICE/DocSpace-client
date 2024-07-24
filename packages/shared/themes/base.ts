@@ -2717,6 +2717,7 @@ export const getBaseTheme = () => {
       upload: {
         color: gray,
         tooltipColor: lightCumulus,
+        iconColor: lightErrorStatus,
 
         shareButton: {
           color: gray,

@@ -2695,6 +2695,7 @@ const Dark: TTheme = {
     upload: {
       color: black,
       tooltipColor: "#F5E9BA",
+      iconColor: darkErrorStatus,
 
       shareButton: {
         color: gray,

@@ -28,7 +28,7 @@ import styled, { css } from "styled-components";
 import { tablet, mobile } from "@docspace/shared/utils/device";
 
 import { TableContainer } from "@docspace/shared/components/table";
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 
 export const WorkspacesContainer = styled.div`
   max-width: 700px;
@@ -78,7 +78,7 @@ export const WorkspacesContainer = styled.div`
     cursor: pointer;
 
     &:hover {
-      border-color: #4781d1;
+      border-color: ${globalColors.lightBlueMain};
     }
 
     &:active {

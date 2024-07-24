@@ -10,7 +10,7 @@ import { SocialButton } from "@docspace/shared/components/social-button";
 import { Text } from "@docspace/shared/components/text";
 import { Textarea } from "@docspace/shared/components/textarea";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 import { generatePKCEPair } from "@docspace/shared/utils/oauth";
 import { AuthenticationMethod } from "@docspace/shared/enums";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -106,10 +106,10 @@ const styleBlock = `<style>
 
         border: none;
         stroke: none;
-        background: #ffffff;
+        background: ${globalColors.white};
         box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 1px, rgba(0, 0, 0, 0.12) 0px 0px 1px;
 
-        color: rgb(163, 169, 174);
+        color: ${globalColors.gray};
 
         font-weight: 600;
         font-size: 14px;
@@ -122,12 +122,12 @@ const styleBlock = `<style>
     .docspace-button:hover {
         box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 1px, rgba(0, 0, 0, 0.12) 0px 0px 1px;
         cursor: pointer;
-        color: #333333;
+        color: ${globalColors.black};
     }
 	
 	.docspace-button:active {
-		background-color: #F8F9F9;
-		color: #333333;
+		background-color: ${globalColors.grayLight};
+		color: ${globalColors.black};
 		cursor: pointer;
 	}
 

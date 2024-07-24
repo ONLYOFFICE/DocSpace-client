@@ -268,8 +268,8 @@ const MainProfile = (props) => {
                   id="sso-badge-profile"
                   className="sso-badge"
                   label={t("Common:SSO")}
-                  color={"#FFFFFF"}
-                  backgroundColor={theme.isBase ? "#22C386" : "#2E5E4C"}
+                  color={globalColors.white}
+                  backgroundColor={globalColors.mainGreen}
                   fontSize={"9px"}
                   fontWeight={800}
                   noHover
@@ -287,8 +287,8 @@ const MainProfile = (props) => {
                   id="ldap-badge-profile"
                   className="ldap-badge"
                   label={t("Common:LDAP")}
-                  color={"#FFFFFF"}
-                  backgroundColor={theme.isBase ? "#8570BD" : "#544C6A"}
+                  color={globalColors.white}
+                  backgroundColor={globalColors.secondPurple}
                   fontSize={"9px"}
                   fontWeight={800}
                   noHover

@@ -51,8 +51,6 @@ export interface UseThemeProps {
 const useTheme = ({ user, i18n, systemTheme, colorTheme }: UseThemeProps) => {
   const [currentColorTheme, setCurrentColorTheme] =
     React.useState<TColorScheme>(() => {
-      console.log("currentColorTheme");
-
       if (!colorTheme) return {} as TColorScheme;
 
       return (

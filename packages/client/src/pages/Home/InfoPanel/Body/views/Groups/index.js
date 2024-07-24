@@ -26,13 +26,19 @@
 
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import * as Styled from "../../styles/groups.styled";
-import withLoader from "@docspace/client/src/HOCs/withLoader";
-import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
-import GroupMember from "./GroupMember";
-import useFetchGroup from "./useFetchGroup";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+
+import withLoader from "@docspace/client/src/HOCs/withLoader";
+import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
+import api from "@docspace/shared/api";
+import AccountsFilter from "@docspace/shared/api/people/filter";
+import { MIN_LOADER_TIMER } from "@docspace/shared/selectors/Files/FilesSelector.constants";
+
+import GroupMember from "./GroupMember";
+import * as Styled from "../../styles/groups.styled";
+import useFetchGroup from "./useFetchGroup";
+import { GroupMembersList } from "./GroupMembersList/GroupMembersList";
 
 const Groups = ({
   infoPanelSelection,
@@ -42,6 +48,9 @@ const Groups = ({
   setInfoPanelSelectedGroup,
 }) => {
   const [isShowLoader, setIsShowLoader] = useState(false);
+  const [areMembersLoading, setAreMembersLoading] = useState(false);
+  const [groupMembers, setGroupMembers] = useState(null);
+  const [total, setTotal] = useState(0);
 
   const { groupId: paramsGroupId } = useParams();
   const isInsideGroup = !!paramsGroupId;
@@ -51,32 +60,88 @@ const Groups = ({
   const groupId = isInsideGroup ? paramsGroupId : infoPanelSelection?.id;
   const setGroup = isInsideGroup ? setCurrentGroup : setInfoPanelSelectedGroup;
 
+  const groupManager = group?.manager;
+
+  const loadNextPage = async (startIndex) => {
+    const startLoadingTime = new Date();
+
+    try {
+      if (startIndex === 0) {
+        setAreMembersLoading(true);
+      }
+
+      const pageCount = 100;
+      const filter = AccountsFilter.getDefault();
+      filter.group = groupId;
+      filter.page = startIndex / pageCount;
+      filter.pageCount = pageCount;
+
+      const res = await api.people.getUserList(filter);
+
+      const membersWithoutManager = groupManager
+        ? res.items.filter((item) => item.id !== groupManager.id)
+        : res.items;
+
+      setTotal(res.total);
+      if (startIndex === 0 || !groupMembers) {
+        setGroupMembers(membersWithoutManager);
+      } else {
+        setGroupMembers([...groupMembers, ...membersWithoutManager]);
+      }
+    } catch (e) {
+      console.log(e);
+    } finally {
+      const nowDate = new Date();
+      const diff = Math.abs(nowDate.getTime() - startLoadingTime.getTime());
+
+      if (diff < MIN_LOADER_TIMER) {
+        setTimeout(() => {
+          setAreMembersLoading(false);
+        }, MIN_LOADER_TIMER - diff);
+      } else {
+        setAreMembersLoading(false);
+      }
+    }
+  };
+
   useFetchGroup(groupId, group?.id, setGroup);
+
+  useEffect(() => {
+    if (group) {
+      loadNextPage(0);
+    }
+  }, [group]);
 
   useEffect(() => {
     const showLoaderTimer = setTimeout(() => setIsShowLoader(true), 500);
     return () => clearTimeout(showLoaderTimer);
   }, []);
 
-  const groupManager = group?.manager;
-  const groupMembers = group?.members?.filter(
-    (user) => user.id !== groupManager?.id,
-  );
-
   if (!group) {
-    if (isShowLoader) return <InfoPanelViewLoader view="groups" />;
+    if (isShowLoader)
+      return (
+        <Styled.GroupsContent>
+          <InfoPanelViewLoader view="groups" />
+        </Styled.GroupsContent>
+      );
     return null;
   }
+
+  const totalWithoutManager = groupManager ? total - 1 : total;
 
   return (
     <Styled.GroupsContent>
       {groupManager && <GroupMember groupMember={groupManager} isManager />}
-      {!groupMembers ? (
+      {!groupMembers || areMembersLoading ? (
         <InfoPanelViewLoader view="groups" />
       ) : (
-        groupMembers?.map((groupMember) => (
-          <GroupMember key={groupMember.id} groupMember={groupMember} />
-        ))
+        <GroupMembersList
+          members={groupMembers}
+          hasNextPage={groupMembers.length < totalWithoutManager}
+          loadNextPage={loadNextPage}
+          total={totalWithoutManager}
+          managerId={groupManager?.id}
+        />
       )}
     </Styled.GroupsContent>
   );

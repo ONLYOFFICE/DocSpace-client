@@ -69,12 +69,16 @@ export const getGroups = (filter = Filter.getDefault()) => {
   });
 };
 
-export const getGroupById = (groupId: string, signal: AbortSignal) => {
+export const getGroupById = (
+  groupId: string,
+  includeMembers: boolean = false,
+  signal?: AbortSignal,
+) => {
   return request({
     method: "get",
-    url: `/group/${groupId}`,
+    url: `/group/${groupId}?includeMembers=${includeMembers}`,
     signal,
-  });
+  }) as Promise<TGroup>;
 };
 
 export const getGroupsByName = async (

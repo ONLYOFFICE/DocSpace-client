@@ -34,6 +34,7 @@ export type TGroup = {
   name: string;
   parent: string;
   isGroup?: boolean;
+  members?: TUser[];
   membersCount: number;
   shared?: boolean;
   isLDAP: boolean;

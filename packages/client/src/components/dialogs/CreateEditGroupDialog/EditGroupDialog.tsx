@@ -143,7 +143,7 @@ const EditGroupDialog = ({
     if (groupParams.groupMembers) return;
     setFetchMembersIsLoading(true);
 
-    getGroupById(group.id)!
+    getGroupById(group.id, true)!
       .then((data: any) => {
         prevGroupParams.current.groupMembers = data.members;
         setInitialMembersIds(data.members.map((gm) => gm.id));

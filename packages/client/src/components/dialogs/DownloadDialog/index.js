@@ -33,6 +33,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import DownloadContent from "./DownloadContent";
 import { UrlActionType } from "@docspace/shared/enums";
+import { toastr } from "@docspace/shared/components/toast";
 
 class DownloadDialogComponent extends React.Component {
   constructor(props) {
@@ -109,12 +110,22 @@ class DownloadDialogComponent extends React.Component {
     return [files, folders, singleFileUrl];
   };
 
-  onDownload = () => {
-    const { t, downloadFiles, openUrl } = this.props;
+  onDownload = async () => {
+    const { t, downloadFiles, openUrl, convertFile } = this.props;
     const [fileConvertIds, folderIds, singleFileUrl] = this.getDownloadItems();
     if (fileConvertIds.length === 1 && folderIds.length === 0) {
       // Single file download as
       const file = fileConvertIds[0];
+
+      const convertedFiles = await convertFile({ fileId: file.key }, t);
+
+      const totalErrorsCount = sumBy(convertedFiles, (f) => {
+        f.error && toastr.error(f.error);
+        return f.error ? 1 : 0;
+      });
+
+      if (totalErrorsCount) return;
+
       if (file.value && singleFileUrl) {
         const viewUrl = `${singleFileUrl}&outputtype=${file.value}`;
         openUrl(viewUrl, UrlActionType.Download);
@@ -429,6 +440,7 @@ export default inject(
     filesActionsStore,
     filesSettingsStore,
     settingsStore,
+    uploadDataStore,
   }) => {
     const { sortedFiles, setSelected } = filesStore;
     const { extsConvertible } = filesSettingsStore;
@@ -450,6 +462,7 @@ export default inject(
 
       theme,
       openUrl,
+      convertFile: uploadDataStore.convertFile,
     };
   },
 )(observer(DownloadDialog));

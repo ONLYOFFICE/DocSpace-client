@@ -353,7 +353,8 @@ class UploadDataStore {
           this.uploadedFilesHistory.push(file);
         }
 
-        this.startConversion(t, isOpen);
+        this.setIsConvertSingleFile(false);
+        return this.startConversion(t, isOpen);
       } else {
         this.filesToConversion.push(file);
         if (!secondConvertingWithPassword && !conversionPositionIndex)
@@ -637,6 +638,7 @@ class UploadDataStore {
     if (this.uploaded || (this.isParallel && allFilesIsUploaded)) {
       this.setConversionPercent(100);
       this.finishUploadFiles();
+      return this.files;
     } else {
       runInAction(() => {
         this.converted = true;

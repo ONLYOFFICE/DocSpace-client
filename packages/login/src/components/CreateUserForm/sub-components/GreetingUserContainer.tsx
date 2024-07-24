@@ -78,7 +78,7 @@ export const GreetingUserContainer = ({
           }}
           portalName={PRODUCT_NAME}
           components={{
-            1: <ColorTheme themeId={ThemeId.Link} isHovered={false} />,
+            1: <ColorTheme tag="a" themeId={ThemeId.Link} isHovered={false} />,
           }}
         />
       </Text>

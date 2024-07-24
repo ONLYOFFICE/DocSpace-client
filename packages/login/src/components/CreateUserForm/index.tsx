@@ -284,10 +284,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       cultureName: currentCultureName,
     };
 
-    confirmUser.fromInviteLink =
-      linkData.type === "LinkInvite" || linkData.type === "EmpInvite"
-        ? true
-        : false;
+    confirmUser.fromInviteLink = fromInviteLink;
 
     if (!!type) {
       confirmUser.type = type;

@@ -46,9 +46,16 @@ export interface UseThemeProps {
   i18n?: i18n;
   systemTheme?: ThemeKeys;
   colorTheme?: TGetColorTheme;
+  lang?: string;
 }
 
-const useTheme = ({ user, i18n, systemTheme, colorTheme }: UseThemeProps) => {
+const useTheme = ({
+  user,
+  i18n,
+  systemTheme,
+  colorTheme,
+  lang,
+}: UseThemeProps) => {
   const [currentColorTheme, setCurrentColorTheme] =
     React.useState<TColorScheme>(() => {
       if (!colorTheme) return {} as TColorScheme;
@@ -60,7 +67,7 @@ const useTheme = ({ user, i18n, systemTheme, colorTheme }: UseThemeProps) => {
     });
 
   const [theme, setTheme] = React.useState<TTheme>(() => {
-    const interfaceDirection = i18n?.dir ? i18n.dir() : "ltr";
+    const interfaceDirection = i18n?.dir ? i18n.dir(lang) : "ltr";
 
     const newTheme = match<MatchType>([user?.theme, systemTheme])
       .returnType<TTheme>()
@@ -99,7 +106,7 @@ const useTheme = ({ user, i18n, systemTheme, colorTheme }: UseThemeProps) => {
     const SYSTEM_THEME = getSystemTheme();
 
     let theme = user?.theme ?? SYSTEM_THEME;
-    const interfaceDirection = i18n?.dir ? i18n.dir() : "ltr";
+    const interfaceDirection = i18n?.dir ? i18n.dir(lang) : "ltr";
 
     if (user?.theme === ThemeKeys.SystemStr) theme = SYSTEM_THEME;
 
@@ -116,7 +123,7 @@ const useTheme = ({ user, i18n, systemTheme, colorTheme }: UseThemeProps) => {
     });
 
     setCookie(SYSTEM_THEME_KEY, themeCookie);
-  }, [user?.theme, i18n, currentColorTheme]);
+  }, [user?.theme, i18n, currentColorTheme, lang]);
 
   React.useEffect(() => {
     getCurrentColorTheme();

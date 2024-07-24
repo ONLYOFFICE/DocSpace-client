@@ -56,11 +56,14 @@ const ThemeProvider = ({
 }: TThemeProvider) => {
   const { i18n } = useI18N({ settings, user });
 
+  const lang = user?.cultureName ?? settings?.culture;
+
   const { theme, currentColorTheme } = useTheme({
     user,
     i18n,
     systemTheme,
     colorTheme,
+    lang,
   });
 
   return (

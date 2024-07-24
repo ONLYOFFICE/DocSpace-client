@@ -131,7 +131,11 @@ const Badges = ({
           className="accounts-badge"
           label={t("Common:LDAP")}
           color={globalColors.white}
-          backgroundColor={globalColors.secondPurple}
+          backgroundColor={
+            theme.isBase
+              ? globalColors.secondPurple
+              : globalColors.secondPurpleDark
+          }
           fontSize={"9px"}
           fontWeight={800}
           noHover
@@ -144,7 +148,11 @@ const Badges = ({
           className="accounts-badge"
           label={t("SSO")}
           color={globalColors.white}
-          backgroundColor={globalColors.mainGreen}
+          backgroundColor={
+            theme.isBase
+              ? globalColors.secondGreen
+              : globalColors.secondGreenDark
+          }
           fontSize={"9px"}
           fontWeight={800}
           noHover
@@ -156,7 +164,11 @@ const Badges = ({
         <StyledPaidBadge
           className="paid-badge accounts-badge"
           label={t("Paid")}
-          backgroundColor={globalColors.favoritesStatus}
+          backgroundColor={
+            theme.isBase
+              ? globalColors.favoritesStatus
+              : globalColors.favoriteStatusDark
+          }
           fontSize={"9px"}
           fontWeight={800}
           lineHeight={"13px"}

@@ -87,7 +87,11 @@ const ToggleLDAP = ({
             </Text>
             {!isLdapAvailable && (
               <Badge
-                backgroundColor={globalColors.favoritesStatus}
+                backgroundColor={
+                  theme.isBase
+                    ? globalColors.favoritesStatus
+                    : globalColors.favoriteStatusDark
+                }
                 label={t("Common:Paid")}
                 className="toggle-caption_title_badge"
                 isPaidBadge={true}

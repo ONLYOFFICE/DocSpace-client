@@ -229,7 +229,11 @@ const MainProfile = (props) => {
               className="sso-badge"
               label={t("Common:SSO")}
               color={globalColors.white}
-              backgroundColor={globalColors.mainGreen}
+              backgroundColor={
+                theme.isBase
+                  ? globalColors.secondGreen
+                  : globalColors.secondGreenDark
+              }
               fontSize={"9px"}
               fontWeight={800}
               noHover
@@ -243,7 +247,11 @@ const MainProfile = (props) => {
               className="sso-badge"
               label={t("Common:LDAP")}
               color={globalColors.white}
-              backgroundColor={globalColors.secondPurple}
+              backgroundColor={
+                theme.isBase
+                  ? globalColors.secondPurple
+                  : globalColors.secondPurpleDark
+              }
               fontSize={"9px"}
               fontWeight={800}
               noHover
@@ -269,7 +277,11 @@ const MainProfile = (props) => {
                   className="sso-badge"
                   label={t("Common:SSO")}
                   color={globalColors.white}
-                  backgroundColor={globalColors.mainGreen}
+                  backgroundColor={
+                    theme.isBase
+                      ? globalColors.secondGreen
+                      : globalColors.secondGreenDark
+                  }
                   fontSize={"9px"}
                   fontWeight={800}
                   noHover
@@ -288,7 +300,11 @@ const MainProfile = (props) => {
                   className="ldap-badge"
                   label={t("Common:LDAP")}
                   color={globalColors.white}
-                  backgroundColor={globalColors.secondPurple}
+                  backgroundColor={
+                    theme.isBase
+                      ? globalColors.secondPurple
+                      : globalColors.secondPurpleDark
+                  }
                   fontSize={"9px"}
                   fontWeight={800}
                   noHover

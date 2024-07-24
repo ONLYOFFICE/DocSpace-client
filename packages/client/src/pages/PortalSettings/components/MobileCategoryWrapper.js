@@ -110,7 +110,11 @@ const MobileCategoryWrapper = (props) => {
         </Link>
         {withPaidBadge && (
           <Badge
-            backgroundColor={globalColors.favoritesStatus}
+            backgroundColor={
+              theme.isBase
+                ? globalColors.favoritesStatus
+                : globalColors.favoriteStatusDark
+            }
             label={badgeLabel}
             isPaidBadge={true}
             className="paid-badge"

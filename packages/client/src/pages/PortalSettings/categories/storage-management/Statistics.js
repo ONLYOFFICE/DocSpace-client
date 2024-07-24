@@ -92,7 +92,11 @@ const StatisticsComponent = (props) => {
         </StyledMainTitle>
         {!isStatisticsAvailable && (
           <Badge
-            backgroundColor={globalColors.favoritesStatus}
+            backgroundColor={
+              theme.isBase
+                ? globalColors.favoritesStatus
+                : globalColors.favoriteStatusDark
+            }
             label={t("Common:Paid")}
             className="paid-badge"
             isPaidBadge

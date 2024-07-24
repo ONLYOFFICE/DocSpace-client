@@ -395,7 +395,11 @@ const SectionHeaderContent = (props) => {
               <div className="header">{translatedHeader}</div>
               {isNeedPaidIcon ? (
                 <Badge
-                  backgroundColor={globalColors.favoritesStatus}
+                  backgroundColor={
+                    theme.isBase
+                      ? globalColors.favoritesStatus
+                      : globalColors.favoriteStatusDark
+                  }
                   label={t("Common:Paid")}
                   fontWeight="700"
                   className="settings-section_badge"

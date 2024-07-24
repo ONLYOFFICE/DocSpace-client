@@ -506,7 +506,11 @@ class AutomaticBackup extends React.PureComponent {
               </Text>
               {!isEnableAuto && (
                 <Badge
-                  backgroundColor={globalColors.favoritesStatus}
+                  backgroundColor={
+                    theme.isBase
+                      ? globalColors.favoritesStatus
+                      : globalColors.favoriteStatusDark
+                  }
                   label={t("Common:Paid")}
                   fontWeight="700"
                   className="auto-backup_badge"

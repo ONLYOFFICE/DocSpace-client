@@ -289,7 +289,11 @@ const WhiteLabel = (props) => {
           <Badge
             className="paid-badge"
             fontWeight="700"
-            backgroundColor={globalColors.favoritesStatus}
+            backgroundColor={
+              theme.isBase
+                ? globalColors.favoritesStatus
+                : globalColors.favoriteStatusDark
+            }
             label={t("Common:Paid")}
             isPaidBadge={true}
           />

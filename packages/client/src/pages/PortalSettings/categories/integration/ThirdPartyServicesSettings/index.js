@@ -295,7 +295,11 @@ class ThirdPartyServices extends React.Component {
                   </Text>
                   <Badge
                     className="paid-badge"
-                    backgroundColor={globalColors.favoritesStatus}
+                    backgroundColor={
+                      theme.isBase
+                        ? globalColors.favoritesStatus
+                        : globalColors.favoriteStatusDark
+                    }
                     fontWeight="700"
                     label={t("Common:Paid")}
                     isPaidBadge={true}

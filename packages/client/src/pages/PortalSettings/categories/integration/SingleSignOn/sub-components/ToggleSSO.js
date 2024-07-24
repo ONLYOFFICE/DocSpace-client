@@ -97,7 +97,11 @@ const ToggleSSO = ({ enableSso, ssoToggle, isSSOAvailable }) => {
           </Text>
           {!isSSOAvailable && (
             <Badge
-              backgroundColor={globalColors.favoritesStatus}
+              backgroundColor={
+                theme.isBase
+                  ? globalColors.favoritesStatus
+                  : globalColors.favoriteStatusDark
+              }
               label={t("Common:Paid")}
               fontWeight="700"
               className="toggle-caption_title_badge"

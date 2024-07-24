@@ -29,7 +29,7 @@ import styled, { css } from "styled-components";
 
 import { Text } from "../text";
 
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 
 const StyledTag = styled.div<{
   tagMaxWidth?: string;
@@ -111,11 +111,11 @@ const StyledTag = styled.div<{
       css`
         svg {
           path[fill] {
-            fill: #fff;
+            fill: ${globalColors.white};
         }
 
           path[stroke] {
-            stroke: #fff;
+            stroke: ${globalColors.white};
           }
         `}
     }

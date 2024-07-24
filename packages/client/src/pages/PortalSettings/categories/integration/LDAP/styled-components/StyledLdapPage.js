@@ -27,7 +27,6 @@
 import styled, { css } from "styled-components";
 import { Box } from "@docspace/shared/components/box";
 import { mobile } from "@docspace/shared/utils";
-import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 
 const StyledLdapPage = styled(Box)`
   max-width: ${(props) => (props.isSmallWindow ? "100%" : "700px")};
@@ -222,8 +221,6 @@ const StyledLdapPage = styled(Box)`
       margin-top: 24px;
     }
   }
-
-  ${(props) => !props.isSettingPaid && UnavailableStyles}
 `;
 
 export default StyledLdapPage;

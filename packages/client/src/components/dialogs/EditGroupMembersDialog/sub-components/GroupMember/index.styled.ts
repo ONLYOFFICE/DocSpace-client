@@ -24,64 +24,72 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+import styled, { css } from "styled-components";
+import { Base } from "@docspace/shared/themes";
 
-import { Box } from "@docspace/shared/components/box";
-import { Link } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
+export const GroupMember = styled.div<{ isExpect: boolean }>`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
 
-const HideButton = (props) => {
-  const { t } = useTranslation("SingleSignOn");
-  const { text, label, isAdditionalParameters, value, setIsSettingsShown } =
-    props;
-  const marginProp = isAdditionalParameters ? null : "24px 0";
+  .avatar {
+    min-width: 32px;
+    min-height: 32px;
+  }
 
-  const onClick = () => {
-    setIsSettingsShown(!value);
-  };
+  .user_body-wrapper {
+    overflow: auto;
+  }
 
-  return (
-    <Box
-      alignItems="center"
-      displayProp="flex"
-      flexDirection="row"
-      marginProp={marginProp}
-    >
-      {!isAdditionalParameters && (
-        <Text
-          as="h2"
-          fontSize="16px"
-          fontWeight={700}
-          className="settings_unavailable"
-          noSelect
-        >
-          {text}
-        </Text>
-      )}
+  .name-wrapper,
+  .role-email {
+    display: flex;
+  }
 
-      <Link
-        className="hide-button settings_unavailable"
-        isHovered
-        onClick={onClick}
-        type="action"
-      >
-        {value
-          ? isAdditionalParameters
-            ? t("HideAdditionalParameters")
-            : t("Hide")
-          : isAdditionalParameters
-            ? t("ShowAdditionalParameters")
-            : t("Show")}
-      </Link>
-    </Box>
-  );
-};
+  .name {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: ${({ theme }) =>
+      theme.interfaceDirection === "rtl" ? `20px` : `16px`};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    ${(props) =>
+      props.isExpect && `color: ${props.theme.infoPanel.members.isExpectName}`};
+  }
 
-export default inject(({ ldapStore }) => {
-  const { setIsSettingsShown } = ldapStore;
+  .me-label {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: ${({ theme }) =>
+      theme.interfaceDirection === "rtl" ? `20px` : `16px`};
+    color: ${(props) => props.theme.infoPanel.members.meLabelColor};
+    padding-inline-start: 8px;
+    margin-inline-start: -8px;
+  }
 
-  return {
-    setIsSettingsShown,
-  };
-})(observer(HideButton));
+  .individual-rights-tooltip {
+    margin-inline-start: auto;
+  }
+
+  .role-wrapper {
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 20px;
+    white-space: nowrap;
+
+    .disabled-role-combobox {
+      color: ${(props) =>
+        props.theme.infoPanel.members.disabledRoleSelectorColor};
+
+      margin-inline-end: 16px;
+    }
+
+    .combo-button {
+      padding: 0 8px;
+    }
+  }
+`;
+
+GroupMember.defaultProps = { theme: Base };

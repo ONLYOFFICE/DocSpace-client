@@ -24,64 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+import { SearchLoader } from "@docspace/shared/skeletons/selector";
+import React from "react";
+import { MemberLoader } from "@docspace/shared/skeletons/info-panel/body/views/MembersLoader";
 
-import { Box } from "@docspace/shared/components/box";
-import { Link } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
+interface ModalBodyLoaderProps {
+  withSearch: boolean;
+}
 
-const HideButton = (props) => {
-  const { t } = useTranslation("SingleSignOn");
-  const { text, label, isAdditionalParameters, value, setIsSettingsShown } =
-    props;
-  const marginProp = isAdditionalParameters ? null : "24px 0";
-
-  const onClick = () => {
-    setIsSettingsShown(!value);
-  };
-
+export const ModalBodyLoader = ({ withSearch }: ModalBodyLoaderProps) => {
   return (
-    <Box
-      alignItems="center"
-      displayProp="flex"
-      flexDirection="row"
-      marginProp={marginProp}
-    >
-      {!isAdditionalParameters && (
-        <Text
-          as="h2"
-          fontSize="16px"
-          fontWeight={700}
-          className="settings_unavailable"
-          noSelect
-        >
-          {text}
-        </Text>
-      )}
-
-      <Link
-        className="hide-button settings_unavailable"
-        isHovered
-        onClick={onClick}
-        type="action"
-      >
-        {value
-          ? isAdditionalParameters
-            ? t("HideAdditionalParameters")
-            : t("Hide")
-          : isAdditionalParameters
-            ? t("ShowAdditionalParameters")
-            : t("Show")}
-      </Link>
-    </Box>
+    <div style={{ paddingTop: withSearch ? "16px" : "0" }}>
+      {withSearch && <SearchLoader />}
+      <div style={{ paddingInline: "16px" }}>
+        <MemberLoader count={25} />
+      </div>
+    </div>
   );
 };
-
-export default inject(({ ldapStore }) => {
-  const { setIsSettingsShown } = ldapStore;
-
-  return {
-    setIsSettingsShown,
-  };
-})(observer(HideButton));

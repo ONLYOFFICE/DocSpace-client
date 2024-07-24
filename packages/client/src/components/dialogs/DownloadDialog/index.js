@@ -33,7 +33,6 @@ import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import DownloadContent from "./DownloadContent";
 import { UrlActionType } from "@docspace/shared/enums";
-import { toastr } from "@docspace/shared/components/toast";
 import sumBy from "lodash/sumBy";
 
 class DownloadDialogComponent extends React.Component {
@@ -73,6 +72,7 @@ class DownloadDialogComponent extends React.Component {
         files: other,
       },
       modalDialogToggle: "modalDialogToggle",
+      isLoading: false,
     };
   }
 
@@ -118,14 +118,15 @@ class DownloadDialogComponent extends React.Component {
       // Single file download as
       const file = fileConvertIds[0];
 
+      this.setState({ isLoading: true });
       const convertedFiles = await convertFile({ fileId: file.key }, t);
+      this.setState({ isLoading: false });
 
       const totalErrorsCount = sumBy(convertedFiles, (f) => {
-        f.error && toastr.error(f.error);
         return f.error ? 1 : 0;
       });
 
-      if (totalErrorsCount) return;
+      if (totalErrorsCount > 0 || !convertedFiles.length) return;
 
       if (file.value && singleFileUrl) {
         const viewUrl = `${singleFileUrl}&outputtype=${file.value}`;
@@ -411,7 +412,7 @@ class DownloadDialogComponent extends React.Component {
             size="normal"
             primary
             onClick={this.onDownload}
-            isDisabled={isCheckedLength === 0}
+            isDisabled={isCheckedLength === 0 || this.state.isLoading}
             scale
           />
           <Button
@@ -420,6 +421,7 @@ class DownloadDialogComponent extends React.Component {
             label={t("Common:CancelButton")}
             size="normal"
             onClick={this.onClose}
+            isDisabled={this.state.isLoading}
             scale
           />
         </ModalDialog.Footer>

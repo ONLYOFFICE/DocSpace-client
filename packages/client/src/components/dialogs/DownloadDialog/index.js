@@ -33,7 +33,6 @@ import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import DownloadContent from "./DownloadContent";
 import { UrlActionType } from "@docspace/shared/enums";
-import sumBy from "lodash/sumBy";
 
 class DownloadDialogComponent extends React.Component {
   constructor(props) {
@@ -119,14 +118,10 @@ class DownloadDialogComponent extends React.Component {
       const file = fileConvertIds[0];
 
       this.setState({ isLoading: true });
-      const convertedFiles = await convertFile({ fileId: file.key }, t);
+      const convertedFilesErrors = await convertFile({ fileId: file.key }, t);
       this.setState({ isLoading: false });
 
-      const totalErrorsCount = sumBy(convertedFiles, (f) => {
-        return f.error ? 1 : 0;
-      });
-
-      if (totalErrorsCount > 0 || !convertedFiles.length) return;
+      if (convertedFilesErrors > 0) return;
 
       if (file.value && singleFileUrl) {
         const viewUrl = `${singleFileUrl}&outputtype=${file.value}`;

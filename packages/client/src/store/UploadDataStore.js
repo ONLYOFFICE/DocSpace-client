@@ -322,9 +322,10 @@ class UploadDataStore {
     const secondConvertingWithPassword = file.hasOwnProperty("password");
     const conversionPositionIndex = file.hasOwnProperty("index");
 
-    let alreadyConverting = this.files.some(
+    const convertedFile = this.files.find(
       (item) => item.fileId === file.fileId,
     );
+    let alreadyConverting = !!convertedFile;
 
     if (this.isConvertSingleFile) alreadyConverting = false;
 
@@ -360,9 +361,10 @@ class UploadDataStore {
         if (!secondConvertingWithPassword && !conversionPositionIndex)
           this.uploadedFilesHistory.push(file);
       }
+    } else {
+      this.setIsConvertSingleFile(false);
+      return convertedFile && convertedFile.error ? 1 : 0;
     }
-
-    this.setIsConvertSingleFile(false);
   };
 
   getNewPercent = (uploadedSize, indexOfFile) => {
@@ -638,7 +640,9 @@ class UploadDataStore {
     if (this.uploaded || (this.isParallel && allFilesIsUploaded)) {
       this.setConversionPercent(100);
       this.finishUploadFiles();
-      return this.files;
+
+      const errorsCount = sumBy(this.files, (f) => (f.error ? 1 : 0));
+      return errorsCount;
     } else {
       runInAction(() => {
         this.converted = true;

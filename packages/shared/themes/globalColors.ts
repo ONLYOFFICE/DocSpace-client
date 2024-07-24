@@ -57,12 +57,14 @@ export const globalColors = {
 
   mainGreen: "#2DB482",
   secondGreen: "#22C386",
+  secondGreenDark: "#2E5E4C",
   mainOrange: "#F97A0B",
   secondOrange: "#FF9933",
   mainRed: "#F2665A",
   mainPurple: "#533ED1",
   purple: "#6D4EC2",
   secondPurple: "#8570BD",
+  secondPurpleDark: "#544C6A",
   mainBlueLight: "#13B7EC",
   secondBlue: "#11A3D4",
   mainYellow: "#FFD30F",
@@ -71,6 +73,7 @@ export const globalColors = {
   darkErrorStatus: "#E06451",
 
   favoritesStatus: "#EDC409",
+  favoriteStatusDark: "#A38A1A",
   lightStatusWarning: "#ED7309",
   darkStatusWarning: "#E17415",
   lightStatusPositive: "#35AD17",

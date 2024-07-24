@@ -39,6 +39,7 @@ export type CompletedFormProps = {
       originalForm: TFile;
       formNumber: number;
       roomId: number;
+      isRoomMember: boolean;
     };
   };
   isShreFile: boolean;

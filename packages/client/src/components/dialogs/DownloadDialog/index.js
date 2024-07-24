@@ -34,6 +34,7 @@ import { Button } from "@docspace/shared/components/button";
 import DownloadContent from "./DownloadContent";
 import { UrlActionType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
+import sumBy from "lodash/sumBy";
 
 class DownloadDialogComponent extends React.Component {
   constructor(props) {

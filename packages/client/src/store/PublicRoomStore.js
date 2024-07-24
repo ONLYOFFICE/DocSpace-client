@@ -126,7 +126,7 @@ class PublicRoomStore {
         if (filter) {
           const folderId = filter.folder;
           return fetchFiles(folderId, filter).catch((error) => {
-            if (error.response.status === 403) {
+            if (error?.response?.status === 403) {
               window.location.replace(
                 combineUrl(window.ClientConfig?.proxy?.url, "/login"),
               );

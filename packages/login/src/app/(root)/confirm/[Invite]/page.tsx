@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { headers } from "next/headers";
+import { notFound } from "next/navigation";
 
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
@@ -35,11 +35,12 @@ import { getSettings, getUserFromConfirm } from "@/utils/actions";
 
 type LinkInviteProps = {
   searchParams: { [key: string]: string };
+  params: { Invite: string };
 };
 
-async function Page({ searchParams }: LinkInviteProps) {
-  const headersList = headers();
-  const hostname = headersList.get("x-forwarded-host");
+async function Page({ searchParams, params }: LinkInviteProps) {
+  if (params.Invite !== "LinkInvite" && params.Invite !== "EmpInvite")
+    return notFound();
 
   const type = searchParams.type;
   const uid = searchParams.uid;
@@ -55,7 +56,6 @@ async function Page({ searchParams }: LinkInviteProps) {
       {settings && typeof settings !== "string" && (
         <>
           <GreetingCleateUserContainer
-            hostName={hostname}
             type={type}
             firstName={user?.firstName}
             lastName={user?.lastName}

@@ -42,7 +42,10 @@ import { useSearchParams } from "next/navigation";
 
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { createPasswordHash } from "@docspace/shared/utils/common";
+import {
+  createPasswordHash,
+  frameCallCommand,
+} from "@docspace/shared/utils/common";
 import { checkPwd } from "@docspace/shared/utils/desktop";
 import { login } from "@docspace/shared/utils/loginUtils";
 import { toastr } from "@docspace/shared/components/toast";
@@ -116,6 +119,7 @@ const LoginForm = ({
 
     setIdentifier(email);
     setEmailFromInvitation(email);
+    frameCallCommand("setIsLoaded");
   }, [loginData]);
 
   const authCallback = useCallback(

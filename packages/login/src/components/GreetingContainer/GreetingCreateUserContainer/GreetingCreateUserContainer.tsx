@@ -28,7 +28,7 @@
 
 "use client";
 
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
@@ -46,20 +46,26 @@ type GreetingCleateUserContainerProps = {
   type: string;
   firstName?: string;
   lastName?: string;
-  hostName: string | null;
 };
 
 export const GreetingCleateUserContainer = ({
   type,
   firstName,
   lastName,
-  hostName,
 }: GreetingCleateUserContainerProps) => {
   const { t } = useTranslation(["Confirm", "Common"]);
   const theme = useTheme();
   const { roomData } = useContext(ConfirmRouteContext);
 
   const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme.isBase);
+
+  const [hostName, setHostName] = useState("");
+
+  useEffect(() => {
+    if (process) {
+      setHostName(window.location.host);
+    }
+  }, []);
 
   return (
     <GreetingContainer>

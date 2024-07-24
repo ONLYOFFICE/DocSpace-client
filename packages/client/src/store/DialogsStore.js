@@ -79,6 +79,7 @@ class DialogsStore {
   restoreAllPanelVisible = false;
   archiveDialogVisible = false;
   restoreRoomDialogVisible = false;
+  roomLogoCoverDialogVisible = false;
   eventDialogVisible = false;
   deleteLinkDialogVisible = false;
 
@@ -548,6 +549,10 @@ class DialogsStore {
       visible,
       file,
     };
+  };
+
+  setRoomLogoCoverDialogVisible = (visible) => {
+    this.roomLogoCoverDialogVisible = visible;
   };
 }
 

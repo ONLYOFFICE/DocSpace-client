@@ -114,10 +114,17 @@ export const CompletedForm = ({
     );
 
   const {
-    response: { completedForm, formNumber, manager, originalForm, roomId },
+    response: {
+      completedForm,
+      formNumber,
+      manager,
+      originalForm,
+      roomId,
+      isRoomMember,
+    },
   } = session;
 
-  const isAnonim = Boolean(share);
+  const isAnonim = Boolean(share) && !isRoomMember;
 
   const getFolderUrl = (folderId: number, isAnonim: boolean): string => {
     if (isNullOrUndefined(folderId)) return "";
@@ -228,7 +235,7 @@ export const CompletedForm = ({
           </Box>
         </ManagerWrapper>
       </MainContent>
-      <ButtonWrapper isShreFile={isShreFile}>
+      <ButtonWrapper isShreFile={isShreFile && !isRoomMember}>
         <Button
           scale
           primary
@@ -238,7 +245,7 @@ export const CompletedForm = ({
           }
           onClick={isAnonim ? handleDownload : gotoCompleteFolder}
         />
-        {!isShreFile && (
+        {(!isShreFile || isRoomMember) && (
           <Button
             scale
             size={ButtonSize.medium}

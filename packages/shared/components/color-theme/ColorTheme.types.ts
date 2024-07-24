@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TColorScheme, TTheme } from "../../themes";
+import { TColorScheme } from "../../themes";
 
 import { IconButtonProps } from "../icon-button/IconButton.types";
 import { LinkProps } from "../link/Link.types";
@@ -109,6 +109,8 @@ export interface VersionBadgeTheme extends DefaultColorThemeProps {
 export interface LinkColorTheme extends LinkProps, DefaultColorThemeProps {
   themeId: ThemeId.Link;
   noHover?: boolean;
+  tag?: string;
+  truncate?: boolean;
   $currentColorScheme?: TColorScheme;
   onClick?: (e: React.MouseEvent<Element>) => void;
 }

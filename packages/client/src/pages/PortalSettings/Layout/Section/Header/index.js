@@ -356,15 +356,18 @@ const SectionHeaderContent = (props) => {
         <LoaderSectionHeader />
       ) : (
         <HeaderContainer>
-          {!isCategoryOrHeader && arrayOfParams[0] && isMobile() && (
-            <IconButton
-              iconName={ArrowPathReactSvgUrl}
-              size="17"
-              isFill={true}
-              onClick={onBackToParent}
-              className="arrow-button"
-            />
-          )}
+          {!isCategoryOrHeader &&
+            arrayOfParams[0] &&
+            (isMobile() ||
+              window.location.href.indexOf("/javascript-sdk/") > -1) && (
+              <IconButton
+                iconName={ArrowPathReactSvgUrl}
+                size="17"
+                isFill={true}
+                onClick={onBackToParent}
+                className="arrow-button"
+              />
+            )}
           <Headline type="content" truncate={true}>
             <div className="settings-section_header">
               <div className="header">

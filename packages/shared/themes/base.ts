@@ -110,6 +110,7 @@ const {
   editorGreenColor,
   editorBlueColor,
   editorOrangeColor,
+  editorRedColor,
   windowsColor,
   linuxColor,
   androidColor,
@@ -1301,7 +1302,7 @@ export const getBaseTheme = () => {
       backgroundColor: lightGrayHover,
 
       animation: {
-        background: "#4781D1",
+        background: lightBlueMain,
       },
 
       percent: {
@@ -1855,7 +1856,7 @@ export const getBaseTheme = () => {
       closeButtonIcon: white,
       closeButtonSize: "17px",
 
-      nameColor: "#858585",
+      nameColor: grayDark,
 
       links: {
         iconColor: lightIcons,
@@ -2829,7 +2830,7 @@ export const getBaseTheme = () => {
             greenBackgroundColor: editorGreenColor,
             blueBackgroundColor: editorBlueColor,
             orangeBackgroundColor: editorOrangeColor,
-            redBackgroundColor: "#AA5251",
+            redBackgroundColor: editorRedColor,
 
             dataFontColor: white,
             dataFontColorBlack: black,
@@ -3161,20 +3162,20 @@ export const getBaseTheme = () => {
     },
     oauth: {
       previewDialog: {
-        border: "1px solid #eceef1",
+        border: `1px solid ${grayLightMid}`,
       },
       infoDialog: {
-        descLinkColor: "#657077",
-        blockHeaderColor: "#a3a9ae",
-        separatorColor: "#333333",
+        descLinkColor: lightGrayDark,
+        blockHeaderColor: gray,
+        separatorColor: black,
       },
       list: {
-        descriptionColor: "#a3a9ae",
+        descriptionColor: gray,
       },
       clientForm: {
-        descriptionColor: "#a3a9ae",
-        headerBorder: "1px solid #d0d5da",
-        scopeDesc: "#a3a9ae",
+        descriptionColor: gray,
+        headerBorder: `1px solid ${grayStrong}`,
+        scopeDesc: gray,
       },
     },
     sdkPresets: {
@@ -3193,8 +3194,8 @@ export const getBaseTheme = () => {
     },
 
     embeddingPanel: {
-      descriptionTextColor: "#657077",
-      iconColor: "#657077",
+      descriptionTextColor: lightGrayDark,
+      iconColor: lightGrayDark,
     },
 
     completedForm: {

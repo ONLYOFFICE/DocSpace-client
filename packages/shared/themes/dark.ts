@@ -100,6 +100,7 @@ const {
   editorGreenColor,
   editorBlueColor,
   editorOrangeColor,
+  editorRedColor,
   windowsColor,
   linuxColor,
   androidColor,
@@ -1284,7 +1285,7 @@ const Dark: TTheme = {
     backgroundColor: grayDark,
 
     animation: {
-      background: "#FFFFFF",
+      background: white,
     },
 
     percent: {
@@ -1840,7 +1841,7 @@ const Dark: TTheme = {
     closeButtonIcon: black,
     closeButtonSize: "12px",
 
-    nameColor: "#A3A9AE",
+    nameColor: gray,
 
     links: {
       iconColor: grayDark,
@@ -2814,7 +2815,7 @@ const Dark: TTheme = {
           greenBackgroundColor: editorGreenColor,
           blueBackgroundColor: editorBlueColor,
           orangeBackgroundColor: editorOrangeColor,
-          redBackgroundColor: "#AA5251",
+          redBackgroundColor: editorRedColor,
 
           dataFontColor: white,
           dataFontColorBlack: white,
@@ -3144,20 +3145,20 @@ const Dark: TTheme = {
 
   oauth: {
     previewDialog: {
-      border: "1px solid #242424",
+      border: `1px solid ${grayDarkMid}`,
     },
     infoDialog: {
-      descLinkColor: "#adadad",
-      blockHeaderColor: "#858585",
-      separatorColor: "#474747",
+      descLinkColor: darkGrayDark,
+      blockHeaderColor: grayDark,
+      separatorColor: grayDarkStrong,
     },
     list: {
-      descriptionColor: "#858585",
+      descriptionColor: grayDark,
     },
     clientForm: {
-      descriptionColor: "#858585",
-      headerBorder: "1px solid #474747",
-      scopeDesc: "#858585",
+      descriptionColor: grayDark,
+      headerBorder: `1px solid ${grayDarkStrong}`,
+      scopeDesc: grayDark,
     },
   },
   sdkPresets: {
@@ -3177,8 +3178,8 @@ const Dark: TTheme = {
   },
 
   embeddingPanel: {
-    descriptionTextColor: "#ADADAD",
-    iconColor: "#ADADAD",
+    descriptionTextColor: darkGrayDark,
+    iconColor: darkGrayDark,
   },
   completedForm: {
     linkColor: white,

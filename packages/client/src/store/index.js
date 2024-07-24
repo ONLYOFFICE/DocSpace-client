@@ -81,6 +81,10 @@ import PluginStore from "./PluginStore";
 import InfoPanelStore from "./InfoPanelStore";
 import CampaignsStore from "./CampaignsStore";
 
+import OAuthStore from "./OAuthStore";
+
+const oauthStore = new OAuthStore(userStore);
+
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
 
 const pluginStore = new PluginStore(
@@ -96,12 +100,6 @@ const paymentStore = new PaymentStore(
   paymentQuotasStore,
 );
 const wizardStore = new WizardStore();
-const setupStore = new SettingsSetupStore(
-  tfaStore,
-  authStore,
-  settingsStore,
-  thirdPartyStore,
-);
 const confirmStore = new ConfirmStore();
 const backupStore = new BackupStore();
 const commonStore = new CommonStore(settingsStore);
@@ -129,6 +127,14 @@ const filesSettingsStore = new FilesSettingsStore(
   pluginStore,
   authStore,
   settingsStore,
+);
+
+const setupStore = new SettingsSetupStore(
+  tfaStore,
+  authStore,
+  settingsStore,
+  thirdPartyStore,
+  filesSettingsStore,
 );
 
 const accessRightsStore = new AccessRightsStore(
@@ -348,6 +354,7 @@ const store = {
   clientLoadingStore,
   publicRoomStore,
 
+  oauthStore,
   pluginStore,
   storageManagement,
   campaignsStore,

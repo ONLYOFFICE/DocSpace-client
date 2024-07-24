@@ -586,7 +586,7 @@ const Dark: TTheme = {
     padding: "1px",
     lineHeight: "0.8",
     overflow: "hidden",
-    color: black,
+    color: white,
     backgroundColor: darkStatusWarning,
     disableBackgroundColor: grayDark,
   },
@@ -1090,19 +1090,19 @@ const Dark: TTheme = {
     administrator: {
       fill: darkStatusWarning,
       stroke: darkBlack,
-      color: black,
+      color: white,
     },
 
     guest: {
       fill: darkIcon,
       stroke: darkBlack,
-      color: black,
+      color: white,
     },
 
     owner: {
       fill: favoritesStatus,
       stroke: darkBlack,
-      color: black,
+      color: white,
     },
 
     editContainer: {
@@ -1282,6 +1282,10 @@ const Dark: TTheme = {
 
   progressBar: {
     backgroundColor: grayDark,
+
+    animation: {
+      background: "#FFFFFF",
+    },
 
     percent: {
       background: darkStatusWarning,
@@ -1835,6 +1839,8 @@ const Dark: TTheme = {
     closeButtonWrapperPadding: "6px",
     closeButtonIcon: black,
     closeButtonSize: "12px",
+
+    nameColor: "#A3A9AE",
 
     links: {
       iconColor: grayDark,
@@ -2808,6 +2814,7 @@ const Dark: TTheme = {
           greenBackgroundColor: editorGreenColor,
           blueBackgroundColor: editorBlueColor,
           orangeBackgroundColor: editorOrangeColor,
+          redBackgroundColor: "#AA5251",
 
           dataFontColor: white,
           dataFontColorBlack: white,
@@ -3135,6 +3142,24 @@ const Dark: TTheme = {
     color: grayDark,
   },
 
+  oauth: {
+    previewDialog: {
+      border: "1px solid #242424",
+    },
+    infoDialog: {
+      descLinkColor: "#adadad",
+      blockHeaderColor: "#858585",
+      separatorColor: "#474747",
+    },
+    list: {
+      descriptionColor: "#858585",
+    },
+    clientForm: {
+      descriptionColor: "#858585",
+      headerBorder: "1px solid #474747",
+      scopeDesc: "#858585",
+    },
+  },
   sdkPresets: {
     borderColor: grayDarkStrong,
     secondaryColor: darkGrayDark,
@@ -3158,6 +3183,11 @@ const Dark: TTheme = {
   completedForm: {
     linkColor: white,
     descriptionColor: darkGrayDark,
+    labelColor: darkGrayDark,
+
+    box: {
+      background: darkGrayLight,
+    },
   },
 
   management: {

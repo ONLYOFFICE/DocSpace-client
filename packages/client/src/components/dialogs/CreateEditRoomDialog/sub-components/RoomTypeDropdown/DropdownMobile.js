@@ -30,6 +30,7 @@ import styled from "styled-components";
 import RoomType from "@docspace/shared/components/room-type";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
 import { Backdrop } from "@docspace/shared/components/backdrop";
+import { Portal } from "@docspace/shared/components/portal";
 
 import { Base, globalColors } from "@docspace/shared/themes";
 
@@ -39,11 +40,6 @@ const StyledDropdownMobile = styled.div`
   bottom: 0;
   z-index: 500;
   padding-top: 6px;
-
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `margin-right: -16px;`
-      : `margin-left: -16px;`}
   box-shadow: 0px -4px 60px ${globalColors.popupShadow};
   border-radius: 6px 6px 0px 0px;
   background: ${(props) =>
@@ -57,33 +53,38 @@ const DropdownMobile = ({
   open,
   onClose,
   chooseRoomType,
-  forсeHideDropdown,
+  forceHideDropdown,
 }) => {
   return (
-    <>
-      <Backdrop
-        visible={open}
-        onClick={onClose}
-        withBackground
-        withoutBlur={false}
-        isAside
-        zIndex={450}
-      />
-      {!forсeHideDropdown && (
-        <StyledDropdownMobile className="dropdown-mobile" isOpen={open}>
-          {RoomsTypeValues.map((roomType) => (
-            <RoomType
-              id={roomType}
-              t={t}
-              key={roomType}
-              roomType={roomType}
-              type="dropdownItem"
-              onClick={() => chooseRoomType(roomType)}
-            />
-          ))}
-        </StyledDropdownMobile>
-      )}
-    </>
+    <Portal
+      visible
+      element={
+        <>
+          <Backdrop
+            visible={open}
+            onClick={onClose}
+            withBackground
+            withoutBlur={false}
+            isAside
+            zIndex={450}
+          />
+          {!forceHideDropdown && (
+            <StyledDropdownMobile className="dropdown-mobile" isOpen={open}>
+              {RoomsTypeValues.map((roomType) => (
+                <RoomType
+                  id={roomType}
+                  t={t}
+                  key={roomType}
+                  roomType={roomType}
+                  type="dropdownItem"
+                  onClick={() => chooseRoomType(roomType)}
+                />
+              ))}
+            </StyledDropdownMobile>
+          )}
+        </>
+      }
+    />
   );
 };
 

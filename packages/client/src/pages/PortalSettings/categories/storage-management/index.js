@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 import moment from "moment";
 
 import { SettingsStorageManagementSkeleton } from "@docspace/shared/skeletons/settings";
-import { setDocumentTitle } from "@docspace/client/src/helpers/filesUtils";
+import { setDocumentTitle } from "@docspace/client/src/helpers/utils";
 
 import QuotasComponent from "./Quotas";
 import StatisticsComponent from "./Statistics";

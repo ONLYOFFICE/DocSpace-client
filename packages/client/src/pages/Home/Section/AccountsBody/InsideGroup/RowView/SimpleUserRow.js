@@ -124,7 +124,7 @@ const SimpleUserRow = (props) => {
   const {
     item,
     sectionWidth,
-    contextOptionsProps,
+    getContextModel,
     checkedProps,
     onContentRowSelect,
     onUserContextClick,
@@ -159,12 +159,13 @@ const SimpleUserRow = (props) => {
           onSelect={onContentRowSelect}
           checked={isChecked}
           isActive={isActive}
-          {...contextOptionsProps}
           sectionWidth={sectionWidth}
           mode={"modern"}
           className={"user-row"}
           onContextClick={onRowContextClick}
           withoutBorder={true}
+          contextOptions={item.options}
+          getContextModel={getContextModel}
         >
           <UserContent {...props} />
         </StyledSimpleUserRow>

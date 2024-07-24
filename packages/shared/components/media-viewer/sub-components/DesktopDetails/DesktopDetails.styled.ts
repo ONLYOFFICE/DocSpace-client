@@ -28,6 +28,7 @@ import styled from "styled-components";
 import { globalColors } from "../../../../themes";
 
 export const DesktopDetailsContainer = styled.div`
+  direction: ${({ theme }) => theme.interfaceDirection};
   padding-top: 21px;
   height: 64px;
   width: 100%;

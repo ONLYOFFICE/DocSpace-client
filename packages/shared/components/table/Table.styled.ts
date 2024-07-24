@@ -415,10 +415,14 @@ const StyledTableHeaderCell = styled.div<{
         ? props.theme.tableContainer.header.activeTextColor
         : props.theme.tableContainer.header.textColor};
 
-    &:hover {
-      color: ${(props) =>
-        props.theme.tableContainer.header.hoverTextColor} !important;
-    }
+    ${(props) =>
+      props.showIcon &&
+      props.sortingVisible &&
+      css`
+        &:hover {
+          color: ${props.theme.tableContainer.header.hoverTextColor} !important;
+        }
+      `}
   }
 `;
 

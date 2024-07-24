@@ -26,6 +26,7 @@
 
 import { useRef } from "react";
 import { withTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
@@ -44,6 +45,7 @@ const GroupsItemTitle = ({
   getGroupContextOptions,
 }) => {
   const itemTitleRef = useRef();
+  const theme = useTheme();
 
   const getContextOptions = () =>
     getGroupContextOptions(t, infoPanelSelection, true);

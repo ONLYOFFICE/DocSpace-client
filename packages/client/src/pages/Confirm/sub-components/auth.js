@@ -27,8 +27,9 @@
 import React, { useEffect } from "react";
 import { Loader } from "@docspace/shared/components/loader";
 import Section from "@docspace/shared/components/section";
+import { getCookie, deleteCookie } from "@docspace/shared/utils/cookie";
 import { loginWithConfirmKey } from "@docspace/shared/api/user";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useLocation } from "react-router-dom";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { toastr } from "@docspace/shared/components/toast";
 import { frameCallEvent } from "@docspace/shared/utils/common";
@@ -37,6 +38,7 @@ const Auth = (props) => {
   //console.log("Auth render");
   const { linkData } = props;
   let [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
   useEffect(() => {
     loginWithConfirmKey({
       ConfirmData: {
@@ -49,6 +51,22 @@ const Auth = (props) => {
         frameCallEvent({ event: "onAuthSuccess" });
 
         const url = searchParams.get("referenceUrl");
+
+        const redirectUrl = getCookie("x-redirect-authorization-uri");
+
+        deleteCookie("x-redirect-authorization-uri");
+
+        if (redirectUrl) {
+          window.location.replace(redirectUrl);
+          return;
+        }
+
+        if (url && url.includes("oauth2")) {
+          const newUrl = location.search.split("referenceUrl=")[1];
+
+          window.location.replace(newUrl);
+          return;
+        }
 
         if (url) {
           try {

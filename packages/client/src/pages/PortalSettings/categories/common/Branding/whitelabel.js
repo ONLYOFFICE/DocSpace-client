@@ -73,13 +73,16 @@ const WhiteLabel = (props) => {
 
     resetIsInit,
     standalone,
+    theme,
+
+    isWhitelableLoaded,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [isLoadedData, setIsLoadedData] = useState(false);
   const [logoTextWhiteLabel, setLogoTextWhiteLabel] = useState("");
   const [isSaving, setIsSaving] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(isWhitelableLoaded && !logoText);
 
   const isMobileView = deviceType === DeviceType.mobile;
 
@@ -121,24 +124,22 @@ const WhiteLabel = (props) => {
   };
 
   useEffect(() => {
+    if (!isWhitelableLoaded) return;
+
     const companyNameFromSessionStorage = getFromSessionStorage("companyName");
 
     if (!companyNameFromSessionStorage) {
+      setIsEmpty(!logoText);
       if (!logoText) return;
 
       setLogoTextWhiteLabel(logoText);
       saveToSessionStorage("companyName", logoText);
     } else {
+      setIsEmpty(!companyNameFromSessionStorage);
       setLogoTextWhiteLabel(companyNameFromSessionStorage);
       saveToSessionStorage("companyName", companyNameFromSessionStorage);
     }
-  }, [logoText]);
-
-  useEffect(() => {
-    if (logoTextWhiteLabel && logoUrlsWhiteLabel.length && !isLoadedData) {
-      setIsLoadedData(true);
-    }
-  }, [isLoadedData, logoTextWhiteLabel, logoUrlsWhiteLabel]);
+  }, [logoText, isWhitelableLoaded]);
 
   const onResetCompanyName = async () => {
     const whlText = await getWhiteLabelLogoText();
@@ -149,13 +150,26 @@ const WhiteLabel = (props) => {
   const onChangeCompanyName = (e) => {
     const value = e.target.value;
     setLogoTextWhiteLabel(value);
-    saveToSessionStorage("companyName", value);
+
+    const trimmedValue = value?.trim();
+    setIsEmpty(!trimmedValue);
+    saveToSessionStorage("companyName", trimmedValue);
   };
 
   const onUseTextAsLogo = () => {
+    if (isEmpty) {
+      return;
+    }
+
     let newLogos = logoUrlsWhiteLabel;
+
     for (let i = 0; i < logoUrlsWhiteLabel.length; i++) {
-      const options = getLogoOptions(i, logoTextWhiteLabel);
+      const options = getLogoOptions(
+        i,
+        logoTextWhiteLabel,
+        logoUrlsWhiteLabel[i].size.width,
+        logoUrlsWhiteLabel[i].size.height,
+      );
       const isDocsEditorName = logoUrlsWhiteLabel[i].name === "DocsEditor";
 
       const logoLight = generateLogo(
@@ -165,6 +179,7 @@ const WhiteLabel = (props) => {
         options.fontSize,
         isDocsEditorName ? globalColors.white : globalColors.darkBlack,
         options.alignCenter,
+        options.isEditor,
       );
       const logoDark = generateLogo(
         options.width,
@@ -173,6 +188,7 @@ const WhiteLabel = (props) => {
         options.fontSize,
         globalColors.white,
         options.alignCenter,
+        options.isEditor,
       );
       newLogos[i].path.light = logoLight;
       newLogos[i].path.dark = logoDark;
@@ -259,7 +275,7 @@ const WhiteLabel = (props) => {
   const isEqualText = defaultLogoTextWhiteLabel === logoTextWhiteLabel;
   const saveButtonDisabled = isEqualLogo && isEqualText;
 
-  return !isLoadedData ? (
+  return !isWhitelableLoaded ? (
     <LoaderWhiteLabel />
   ) : (
     <WhiteLabelWrapper showReminder={!saveButtonDisabled}>
@@ -302,6 +318,7 @@ const WhiteLabel = (props) => {
           labelText={t("Common:CompanyName")}
           isVertical={true}
           className="settings_unavailable"
+          hasError={isEmpty}
         >
           <TextInput
             className="company-name input"
@@ -313,6 +330,7 @@ const WhiteLabel = (props) => {
             isAutoFocussed={!isMobile}
             tabIndex={1}
             maxLength={30}
+            hasError={isEmpty}
           />
           <Button
             id="btnUseAsLogo"
@@ -557,6 +575,7 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     defaultLogoTextWhiteLabel,
     enableRestoreButton,
     resetIsInit,
+    isWhitelableLoaded,
   } = common;
 
   const {
@@ -584,5 +603,7 @@ export default inject(({ settingsStore, common, currentQuotaStore }) => {
     deviceType,
     resetIsInit,
     standalone,
+
+    isWhitelableLoaded,
   };
 })(withTranslation(["Settings", "Profile", "Common"])(observer(WhiteLabel)));

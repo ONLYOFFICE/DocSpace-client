@@ -34,7 +34,6 @@ import { toastr } from "@docspace/shared/components/toast";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 import { globalColors } from "@docspace/shared/themes";
 
 const ChangeUserTypeEvent = ({
@@ -142,7 +141,9 @@ const ChangeUserTypeEvent = ({
   const getType = (type) => {
     switch (type) {
       case "admin":
-        return t("Common:PortalAdmin", { productName: PRODUCT_NAME });
+        return t("Common:PortalAdmin", {
+          productName: t("Common:ProductName"),
+        });
       case "manager":
         return t("Common:RoomAdmin");
       case "collaborator":

@@ -32,9 +32,14 @@ const StyledModalDialog = styled(ModalDialog)`
   .modal-header {
     margin: 0;
   }
+
+  .modal-body {
+    padding: 0;
+  }
 `;
 
 const StyledBody = styled.div`
+  padding: 0 16px;
   .embedding-panel_header-link {
     margin: 10px 0 2px;
   }
@@ -53,7 +58,7 @@ const StyledBody = styled.div`
     .embedding-panel_banner-close-icon {
       min-width: 12px;
       min-height: 12px;
-      margin-left: auto;
+      margin-inline-start: auto;
     }
   }
 
@@ -133,10 +138,10 @@ const StyledBody = styled.div`
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
-            left: 16px;
+            left: 32px;
           `
         : css`
-            right: 16px;
+            right: 32px;
           `}
   }
 

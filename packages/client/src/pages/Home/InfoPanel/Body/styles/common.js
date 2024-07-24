@@ -139,9 +139,6 @@ const StyledTitle = styled.div`
     margin: 0 8px;
     overflow: hidden;
     text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
   }
 
   .free-label {

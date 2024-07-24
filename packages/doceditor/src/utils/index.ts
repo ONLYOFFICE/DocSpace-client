@@ -30,11 +30,7 @@ import { request } from "@docspace/shared/api/client";
 import { convertFile } from "@docspace/shared/api/files";
 import { TEditHistory } from "@docspace/shared/api/files/types";
 import { FolderType } from "@docspace/shared/enums";
-
-import type { IInitialConfig } from "@/types";
-
-import { IS_VIEW } from "./constants";
-import { BRAND_NAME } from "@docspace/shared/constants";
+import { TTranslation } from "@docspace/shared/types";
 
 export const getBackUrl = (
   rootFolderType: FolderType,
@@ -155,13 +151,14 @@ export const checkIfFirstSymbolInStringIsRtl = (str: string | null) => {
 };
 
 export const setDocumentTitle = (
+  t: TTranslation,
   subTitle: string | null = null,
   fileType: string,
   documentReady: boolean,
   successAuth: boolean,
   callback?: (value: string) => void,
 ) => {
-  const organizationName = BRAND_NAME; //TODO: Replace to API variant
+  const organizationName = t("Common:OrganizationName");
   const moduleTitle = "Documents"; //TODO: Replace to API variant
 
   let newSubTitle = subTitle;

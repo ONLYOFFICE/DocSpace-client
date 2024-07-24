@@ -98,7 +98,7 @@ const StyledAccountsItemTitle = styled.div`
       font-weight: 600;
       font-size: 13px;
       line-height: 20px;
-      color: ${(props) => props.theme.text.disableColor};
+      color: ${(props) => props.theme.infoPanel.nameColor};
       user-select: text;
     }
 
@@ -198,6 +198,7 @@ const StyledAccountContent = styled.div`
       flex-direction: column;
       align-items: start;
       justify-content: center;
+      overflow: hidden;
     }
   }
 `;

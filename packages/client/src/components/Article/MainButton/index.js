@@ -61,6 +61,7 @@ import {
   RoomsType,
   FilesSelectorFilterTypes,
   FolderType,
+  FilterType,
 } from "@docspace/shared/enums";
 
 import styled, { css } from "styled-components";
@@ -69,7 +70,6 @@ import { resendInvitesAgain } from "@docspace/shared/api/people";
 import { getCorrectFourValuesStyle } from "@docspace/shared/utils";
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isTablet } from "react-device-detect";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 import { globalColors } from "@docspace/shared/themes";
 
 const StyledButton = styled(Button)`
@@ -376,11 +376,10 @@ const ArticleMainButtonContent = (props) => {
         id: "actions_upload-from-docspace",
         className: "main-button_drop-down",
         icon: ActionsUploadReactSvgUrl,
-        label: t("Common:FromPortal", { productName: PRODUCT_NAME }),
+        label: t("Common:FromPortal", { productName: t("Common:ProductName") }),
         key: "actions_upload-from-docspace",
         disabled: false,
-        onClick: () =>
-          onShowFormRoomSelectFileDialog(FilesSelectorFilterTypes.PDF),
+        onClick: () => onShowFormRoomSelectFileDialog(FilterType.PDFForm),
       };
 
       const uploadFormDevice = {
@@ -625,7 +624,9 @@ const ArticleMainButtonContent = (props) => {
               id: "invite_portal-administrator",
               className: "main-button_drop-down",
               icon: PersonAdminReactSvgUrl,
-              label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
+              label: t("Common:PortalAdmin", {
+                productName: t("Common:ProductName"),
+              }),
               onClick: onInvite,
               action: EmployeeType.Admin,
               key: "administrator",

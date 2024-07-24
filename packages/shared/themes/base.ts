@@ -29,7 +29,6 @@ import AvatarBaseReactSvgUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
 import { globalColors } from "./globalColors";
 import { CommonTheme } from "./commonTheme";
 import { DEFAULT_FONT_FAMILY } from "../constants";
-import { color } from "storybook-static/sb-manager/chunk-INSKDKQB";
 
 export type TColorScheme = {
   id: number;
@@ -1301,6 +1300,10 @@ export const getBaseTheme = () => {
     progressBar: {
       backgroundColor: lightGrayHover,
 
+      animation: {
+        background: "#4781D1",
+      },
+
       percent: {
         background: lightBlueMain,
       },
@@ -1851,6 +1854,8 @@ export const getBaseTheme = () => {
       closeButtonWrapperPadding: "0px",
       closeButtonIcon: white,
       closeButtonSize: "17px",
+
+      nameColor: "#858585",
 
       links: {
         iconColor: lightIcons,
@@ -2824,6 +2829,7 @@ export const getBaseTheme = () => {
             greenBackgroundColor: editorGreenColor,
             blueBackgroundColor: editorBlueColor,
             orangeBackgroundColor: editorOrangeColor,
+            redBackgroundColor: "#AA5251",
 
             dataFontColor: white,
             dataFontColorBlack: black,
@@ -3153,7 +3159,24 @@ export const getBaseTheme = () => {
       descriptionColor: lightGrayDark,
       color: grayDark,
     },
-
+    oauth: {
+      previewDialog: {
+        border: "1px solid #eceef1",
+      },
+      infoDialog: {
+        descLinkColor: "#657077",
+        blockHeaderColor: "#a3a9ae",
+        separatorColor: "#333333",
+      },
+      list: {
+        descriptionColor: "#a3a9ae",
+      },
+      clientForm: {
+        descriptionColor: "#a3a9ae",
+        headerBorder: "1px solid #d0d5da",
+        scopeDesc: "#a3a9ae",
+      },
+    },
     sdkPresets: {
       borderColor: grayStrong,
       secondaryColor: lightGrayDark,
@@ -3177,6 +3200,12 @@ export const getBaseTheme = () => {
     completedForm: {
       linkColor: lightBlueMain,
       descriptionColor: gray,
+
+      labelColor: gray,
+
+      box: {
+        background: globalColors.grayLight,
+      },
     },
 
     management: {

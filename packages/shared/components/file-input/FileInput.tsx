@@ -58,6 +58,7 @@ const FileInputPure = ({
   path,
   idButton,
   isDocumentIcon,
+  isMultiple = true,
   ...rest
 }: FileInputProps) => {
   const { t } = useTranslation("Common");
@@ -119,7 +120,12 @@ const FileInputPure = ({
     fromStorage && !isDisabled ? { onClick: rest.onClick } : {};
 
   return (
-    <Dropzone onDrop={onDrop} noClick={isDisabled || isLoading} accept={accept}>
+    <Dropzone
+      onDrop={onDrop}
+      noClick={isDisabled || isLoading}
+      accept={accept}
+      multiple={isMultiple}
+    >
       {({ getRootProps, getInputProps }) => (
         <StyledFileInput
           scale={scale ? 1 : 0}
@@ -199,6 +205,7 @@ FileInputPure.defaultProps = {
   isLoading: false,
   accept: [""],
   isDocumentIcon: false,
+  isMultiple: true,
 };
 
 export { FileInputPure };

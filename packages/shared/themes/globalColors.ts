@@ -69,6 +69,7 @@ export const globalColors = {
 
   lightErrorStatus: "#F24724",
   darkErrorStatus: "#E06451",
+
   favoritesStatus: "#EDC409",
   lightStatusWarning: "#ED7309",
   darkStatusWarning: "#E17415",

@@ -674,7 +674,7 @@ const StyledSortButton = styled.div<{ viewAs: TViewAs; isDesc: boolean }>`
 
       .selected-option-item {
         background: ${(props) => props.theme.filterInput.sort.hoverBackground};
-        cursor: auto;
+        cursor: pointer;
 
         .selected-option-item__icon {
           visibility: visible;

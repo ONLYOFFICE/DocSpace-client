@@ -29,7 +29,7 @@ import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touch.react.svg?url";
 import React from "react";
 import { inject, observer } from "mobx-react";
-import styled, { css } from "styled-components";
+import styled, { css, useTheme } from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import Headline from "@docspace/shared/components/headline/Headline";
@@ -47,10 +47,9 @@ import {
   getTKeyByKey,
   checkPropertyByLink,
 } from "../../../utils";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import TariffBar from "SRC_DIR/components/TariffBar";
 
-const HeaderContainer = styled.div`
+export const HeaderContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
@@ -158,7 +157,7 @@ const HeaderContainer = styled.div`
   }
 `;
 
-const StyledContainer = styled.div`
+export const StyledContainer = styled.div`
   .group-button-menu-container {
     ${(props) =>
       props.viewAs === "table"
@@ -185,11 +184,12 @@ const SectionHeaderContent = (props) => {
     tReady,
     setIsLoadedSectionHeader,
     isSSOAvailable,
-    organizationName,
+    workspace,
   } = props;
 
   const navigate = useNavigate();
   const location = useLocation();
+  const theme = useTheme();
 
   const [state, setState] = React.useState({
     header: "",
@@ -342,12 +342,18 @@ const SectionHeaderContent = (props) => {
     },
   ];
 
-  const pathname = location.pathname;
-
-  const isServicePage =
-    pathname.includes("google") ||
-    pathname.includes("nextcloud") ||
-    pathname.includes("onlyoffice");
+  const translatedHeader =
+    header === "ImportHeader"
+      ? workspace === "GoogleWorkspace"
+        ? t("ImportFromGoogle")
+        : workspace === "Nextcloud"
+          ? t("ImportFromNextcloud")
+          : workspace === "Workspace"
+            ? t("ImportFromPortal", {
+                organizationName: t("Common:OrganizationName"),
+              })
+            : t("DataImport")
+      : t(header, { organizationName: t("Common:OrganizationName") });
 
   return (
     <StyledContainer isHeaderVisible={isHeaderVisible}>
@@ -376,19 +382,17 @@ const SectionHeaderContent = (props) => {
             />
           )}
           <Headline type="content" truncate={true}>
+            {isMobile() && isServicePage && (
+              <IconButton
+                iconName={ArrowPathReactSvgUrl}
+                size="17"
+                isFill={true}
+                onClick={onBackToParent}
+                className="arrow-button"
+              />
+            )}
             <div className="settings-section_header">
-              <div className="header">
-                {isMobile() && isServicePage && (
-                  <IconButton
-                    iconName={ArrowPathReactSvgUrl}
-                    size="17"
-                    isFill={true}
-                    onClick={onBackToParent}
-                    className="arrow-button"
-                  />
-                )}
-                {t(header, { organizationName })}
-              </div>
+              <div className="header">{translatedHeader}</div>
               {isNeedPaidIcon ? (
                 <Badge
                   backgroundColor={globalColors.favoritesStatus}
@@ -423,51 +427,53 @@ const SectionHeaderContent = (props) => {
   );
 };
 
-export default inject(({ settingsStore, currentQuotaStore, setup, common }) => {
-  const {
-    isBrandingAndCustomizationAvailable,
-    isRestoreAndAutoBackupAvailable,
-    isSSOAvailable,
-  } = currentQuotaStore;
-  const { addUsers, removeAdmins } = setup.headerAction;
-  const { toggleSelector } = setup;
-  const {
-    selected,
-    setSelected,
-    isHeaderIndeterminate,
-    isHeaderChecked,
-    isHeaderVisible,
-    deselectUser,
-    selectAll,
-    selection,
-  } = setup.selectionStore;
-  const { admins, selectorIsOpen } = setup.security.accessRight;
-  const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
+export default inject(
+  ({ currentQuotaStore, setup, common, importAccountsStore }) => {
+    const {
+      isBrandingAndCustomizationAvailable,
+      isRestoreAndAutoBackupAvailable,
+      isSSOAvailable,
+    } = currentQuotaStore;
+    const { addUsers, removeAdmins } = setup.headerAction;
+    const { toggleSelector } = setup;
+    const {
+      selected,
+      setSelected,
+      isHeaderIndeterminate,
+      isHeaderChecked,
+      isHeaderVisible,
+      deselectUser,
+      selectAll,
+      selection,
+    } = setup.selectionStore;
+    const { admins, selectorIsOpen } = setup.security.accessRight;
+    const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
 
-  const { organizationName } = settingsStore;
+    const { workspace } = importAccountsStore;
 
-  return {
-    addUsers,
-    removeAdmins,
-    selected,
-    setSelected,
-    admins,
-    isHeaderIndeterminate,
-    isHeaderChecked,
-    isHeaderVisible,
-    deselectUser,
-    selectAll,
-    toggleSelector,
-    selectorIsOpen,
-    selection,
-    isLoadedSectionHeader,
-    setIsLoadedSectionHeader,
-    isBrandingAndCustomizationAvailable,
-    isRestoreAndAutoBackupAvailable,
-    isSSOAvailable,
-    organizationName,
-  };
-})(
+    return {
+      addUsers,
+      removeAdmins,
+      selected,
+      setSelected,
+      admins,
+      isHeaderIndeterminate,
+      isHeaderChecked,
+      isHeaderVisible,
+      deselectUser,
+      selectAll,
+      toggleSelector,
+      selectorIsOpen,
+      selection,
+      isLoadedSectionHeader,
+      setIsLoadedSectionHeader,
+      isBrandingAndCustomizationAvailable,
+      isRestoreAndAutoBackupAvailable,
+      isSSOAvailable,
+      workspace,
+    };
+  },
+)(
   withLoading(
     withTranslation(["Settings", "SingleSignOn", "Common", "JavascriptSdk"])(
       observer(SectionHeaderContent),

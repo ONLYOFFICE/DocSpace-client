@@ -105,6 +105,7 @@ const PluginItem = ({
             className="plugin-description"
             fontWeight={400}
             lineHeight="20px"
+            title={description}
           >
             {description}
           </Text>

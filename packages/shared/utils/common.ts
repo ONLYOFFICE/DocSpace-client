@@ -65,7 +65,6 @@ import {
 import {
   COOKIE_EXPIRATION_YEAR,
   LANGUAGE,
-  PRODUCT_NAME,
   PUBLIC_MEDIA_VIEW_URL,
   RTL_LANGUAGES,
 } from "../constants";
@@ -145,7 +144,7 @@ export const getUserTypeLabel = (
     case "owner":
       return t("Common:Owner");
     case "admin":
-      return t("Common:PortalAdmin", { productName: PRODUCT_NAME });
+      return t("Common:PortalAdmin", { productName: t("Common:ProductName") });
     case "manager":
       return t("Common:RoomAdmin");
     case "collaborator":
@@ -663,11 +662,14 @@ export const getSpaceQuotaAsText = (
   isDefaultQuotaSet: boolean,
 ) => {
   const usedValue = getConvertedQuota(t, usedSpace);
+
+  if (!isDefaultQuotaSet) return usedValue;
+
+  if (!quotaLimit) return usedValue;
+
   const quotaValue = getConvertedQuota(t, quotaLimit);
 
-  if (isDefaultQuotaSet) return `${usedValue} / ${quotaValue}`;
-
-  return usedValue;
+  return `${usedValue} / ${quotaValue}`;
 };
 
 export const conversionToBytes = (size: number, power: number) => {
@@ -1100,6 +1102,42 @@ export function getLogoUrl(
   return `/logo.ashx?logotype=${logoType}&dark=${dark}&default=${def}`;
 }
 
+export const getUserTypeName = (
+  isOwner: boolean,
+  isPortalAdmin: boolean,
+  isRoomAdmin: boolean,
+  isCollaborator: boolean,
+  t: TTranslation,
+) => {
+  if (isOwner) return t("Common:Owner");
+
+  if (isPortalAdmin)
+    return t("Common:PortalAdmin", { productName: t("Common:ProductName") });
+
+  if (isRoomAdmin) return t("Common:RoomAdmin");
+
+  if (isCollaborator) return t("Common:PowerUser");
+
+  return t("Common:User");
+};
+
+export const getUserTypeDescription = (
+  isPortalAdmin: boolean,
+  isRoomAdmin: boolean,
+  isCollaborator: boolean,
+  t: TTranslation,
+) => {
+  if (isPortalAdmin)
+    return t("Translations:RolePortalAdminDescription", {
+      productName: t("Common:ProductName"),
+    });
+
+  if (isRoomAdmin) return t("Translations:RoleRoomAdminDescription");
+
+  if (isCollaborator) return t("Translations:RolePowerUserDescription");
+
+  return t("Translations:RoleViewerDescription");
+};
 export function setLanguageForUnauthorized(culture: string) {
   setCookie(LANGUAGE, culture, {
     "max-age": COOKIE_EXPIRATION_YEAR,

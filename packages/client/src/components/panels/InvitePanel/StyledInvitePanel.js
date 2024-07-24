@@ -118,12 +118,11 @@ const ScrollList = styled.div`
       ? "auto"
       : props.offsetTop && `calc(100% - ${props.offsetTop}px)`};
 
-  ${!isMobile() &&
-  css`
-    .row-item {
+  .row-item {
+    @media not ${mobile} {
       width: 448px !important;
     }
-  `}
+  }
 `;
 
 const StyledBlock = styled.div`
@@ -197,7 +196,7 @@ const StyledRow = styled.div`
     line-height: 16px;
   }
 
-  .invite-panel_access-selector {
+  .access-selector {
     margin-inline-start: auto;
     margin-inline-end: 0;
 
@@ -268,7 +267,7 @@ const StyledInviteInput = styled.div`
   .append {
     display: ${(props) => (props.isShowCross ? "flex" : "none")};
     align-items: center;
-    padding-right: 8px;
+    padding-inline-end: 8px;
     cursor: default;
   }
 
@@ -277,17 +276,6 @@ const StyledInviteInput = styled.div`
   :focus-within {
     border-color: ${(props) => props.theme.inputBlock.borderColor};
   }
-`;
-
-const StyledAccessSelector = styled.div`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-left: 16px;
-        `
-      : css`
-          margin-right: 16px;
-        `}
 `;
 
 const StyledEditInput = styled(TextInput)`
@@ -340,6 +328,28 @@ const StyledInviteInputContainer = styled.div`
 
   .header_aside-panel {
     max-width: 100% !important;
+
+    .selector_body_tabs {
+      display: flex;
+      justify-content: left;
+      margin-bottom: 16px;
+      padding: 0;
+      width: -webkit-fill-available;
+
+      .sticky-indent {
+        height: 0;
+      }
+
+      .sticky {
+        .scroll-body {
+          overflow-x: hidden;
+        }
+        .scroll-body > div {
+          justify-content: flex-start;
+          padding-inline-start: 16px;
+        }
+      }
+    }
   }
 `;
 
@@ -366,7 +376,7 @@ const StyledDropDown = styled(DropDown)`
 
     .email-list_add-button {
       display: flex;
-      margin-left: auto;
+      margin-inline-start: auto;
       align-items: center;
       gap: 4px;
 
@@ -374,8 +384,13 @@ const StyledDropDown = styled(DropDown)`
         color: ${(props) => props.theme.filesPanels.invite.addButtonColor};
       }
 
-      svg path {
-        fill: ${(props) => props.theme.filesPanels.invite.addButtonColor};
+      svg {
+        ${({ theme }) =>
+          theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"};
+
+        path {
+          fill: ${(props) => props.theme.filesPanels.invite.addButtonColor};
+        }
       }
     }
   }
@@ -595,7 +610,6 @@ export {
   StyledLink,
   ResetLink,
   ScrollList,
-  StyledAccessSelector,
   StyledToggleButton,
   StyledDescription,
   StyledInviteLanguage,

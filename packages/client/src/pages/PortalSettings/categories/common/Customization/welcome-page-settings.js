@@ -379,7 +379,6 @@ const WelcomePageSettings = (props) => {
 export default inject(({ settingsStore, setup, common }) => {
   const {
     greetingSettings,
-    organizationName,
     theme,
     currentColorScheme,
     welcomePageSettingsUrl,
@@ -397,7 +396,6 @@ export default inject(({ settingsStore, setup, common }) => {
   return {
     theme,
     greetingSettings,
-    organizationName,
     setGreetingTitle,
     restoreGreetingTitle,
     isLoaded,

@@ -63,6 +63,7 @@ ControlBtn.defaultProps = { theme: Base };
 
 export const StyledDropDown = styled(DropDown)`
   background: ${globalColors.black};
+  direction: ${({ theme }) => theme.interfaceDirection};
 `;
 
 export const StyledDropDownItem = styled(DropDownItem)`
@@ -88,6 +89,7 @@ export const StyledButtonScroll = styled.div<StyledButtonScrollProps>`
 `;
 
 export const StyledMobileDetails = styled.div`
+  direction: ${({ theme }) => theme.interfaceDirection};
   z-index: 307;
   position: fixed;
   top: 0;
@@ -111,13 +113,15 @@ export const StyledMobileDetails = styled.div`
 
   .mobile-close {
     position: fixed;
-    left: 21px;
+    inset-inline-start: 21px;
     top: 22px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"};
   }
 
   .mobile-context {
     position: fixed;
-    right: 22px;
+    inset-inline-end: 22px;
     top: 22px;
   }
 
@@ -226,14 +230,7 @@ export const StyledViewerContainer = styled.div<StyledViewerContainerProps>`
   .mediaPlayerClose {
     position: fixed;
     top: 13px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: 12px;
-          `
-        : css`
-            right: 12px;
-          `}
+    inset-inline-end: 12px;
     height: 17px;
     &:hover {
       background-color: transparent;

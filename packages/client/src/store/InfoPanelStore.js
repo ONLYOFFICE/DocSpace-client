@@ -121,7 +121,8 @@ class InfoPanelStore {
   setIsVisible = (bool) => {
     if (
       (this.infoPanelSelectedItems.length &&
-        !this.infoPanelSelectedItems[0]?.isRoom) ||
+        !this.infoPanelSelectedItems[0]?.isRoom &&
+        !this.infoPanelSelectedItems[0]?.inRoom) ||
       (this.selectedFolderStore && !this.selectedFolderStore?.inRoom)
     ) {
       this.setView(infoDetails);
@@ -297,9 +298,6 @@ class InfoPanelStore {
       ...infoPanelSelection,
       isRoom: infoPanelSelection.isRoom || !!infoPanelSelection.roomType,
       icon: this.getInfoPanelItemIcon(infoPanelSelection, 32),
-      canCopyPublicLink:
-        infoPanelSelection.access === ShareAccessRights.RoomManager ||
-        infoPanelSelection.access === ShareAccessRights.None,
     };
   };
 

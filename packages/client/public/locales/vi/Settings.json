@@ -146,7 +146,7 @@
   "LanguageAndTimeZoneSettingsNavDescription": "Cài đặt ngôn ngữ và múi giờ là một cách để thay đổi ngôn ngữ của toàn bộ cổng thông tin cho tất cả người dùng cổng thông tin và định cấu hình múi giờ để tất cả các sự kiện của cổng thông tin sẽ được hiển thị với ngày và giờ chính xác.",
   "LastUpdate": "Ngày cập nhật cuối cùng: {{date}}",
   "LicenseLimitCounter": "Giới hạn bản quyền Quản trị viên/Người dùng cấp cao:",
-  "LicenseLimitDescription": "Số lượng giới hạn bản quyền bao gồm: tài khoản đã tồn tại trong {{productName}} và người dùng mới mà bạn muốn nhập. Nếu bạn nhập người dùng đã có tài khoản {{productName}}, họ sẽ không được tính lại trong số lượng. Bản quyền {{productName}} cho phép bạn có tối đa 100 người dùng.",
+  "LicenseLimitDescription": "Số lượng giới hạn bản quyền bao gồm: tài khoản đã tồn tại trong {{productName}} và người dùng mới mà bạn muốn nhập. Nếu bạn nhập người dùng đã có tài khoản {{productName}}, họ sẽ không được tính lại trong số lượng. Bản quyền {{productName}} cho phép bạn có tối đa {{maxLimit}} người dùng.",
   "Lifetime": "Thời gian tồn tại (phút)",
   "LimitThemesTooltip": "Bạn chỉ có thể tạo 3 theme tùy chỉnh. Để tạo một theme mới, bạn phải xóa một trong các theme trước đó.",
   "LocalFile": "Tập tin cục bộ",

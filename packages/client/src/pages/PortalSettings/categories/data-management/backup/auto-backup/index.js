@@ -59,7 +59,6 @@ import { Link } from "@docspace/shared/components/link";
 import { getSettingsThirdParty } from "@docspace/shared/api/files";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { isManagement } from "@docspace/shared/utils/common";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 import { globalColors } from "@docspace/shared/themes";
 
 const { DocumentModuleType, ResourcesModuleType, StorageModuleType } =
@@ -471,7 +470,9 @@ class AutomaticBackup extends React.PureComponent {
       <StyledAutoBackup isEnableAuto={isEnableAuto}>
         <div className="backup_modules-header_wrapper">
           <Text className="backup_modules-description settings_unavailable">
-            {t("AutoBackupDescription", { productName: PRODUCT_NAME })}
+            {t("AutoBackupDescription", {
+              productName: t("Common:ProductName"),
+            })}
           </Text>
           <Link
             className="link-learn-more"

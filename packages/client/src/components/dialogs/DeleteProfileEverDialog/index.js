@@ -136,7 +136,7 @@ const DeleteProfileEverDialogComponent = (props) => {
       .catch((error) => toastr.error(error))
       .finally(() => {
         setIsRequestRunning(false);
-        needResetUserSelection && setSelected("close");
+        setSelected("close");
         onClose();
       });
   };

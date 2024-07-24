@@ -35,4 +35,5 @@ export type TGroup = {
   isGroup?: boolean;
   membersCount: number;
   shared?: boolean;
+  isLDAP: boolean;
 };

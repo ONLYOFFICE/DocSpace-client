@@ -165,6 +165,8 @@ class CreateEditRoomStore {
         actions.push(createTag(createTagsData[i]));
       }
 
+      if (!!actions.length) await Promise.all(actions);
+
       // add new tags to room
       if (!!addTagsData.length)
         room = await addTagsToRoom(room.id, addTagsData);
@@ -203,7 +205,9 @@ class CreateEditRoomStore {
               ? [bufferSelection]
               : [];
 
-        preparingDataForCopyingToRoom(room.id, selections, t);
+        preparingDataForCopyingToRoom(room.id, selections, t).catch((error) =>
+          toastr.error(error),
+        );
       }
 
       this.roomIsCreated = true;

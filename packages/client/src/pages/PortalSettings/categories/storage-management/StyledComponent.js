@@ -157,7 +157,8 @@ const StyledFolderTagSection = styled.div`
   width: ${(props) => props.width + "%"};
 
   &:first-of-type {
-    border-radius: 46px 0px 0px 46px;
+    border-start-start-radius: 46px;
+    border-end-start-radius: 46px;
   }
 `;
 

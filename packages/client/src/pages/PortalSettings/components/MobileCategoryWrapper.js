@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
 import { Badge } from "@docspace/shared/components/badge";
@@ -91,6 +91,8 @@ const MobileCategoryWrapper = (props) => {
     withPaidBadge,
     badgeLabel,
   } = props;
+
+  const theme = useTheme();
 
   const onClickProp = isDisabled ? {} : { onClick: onClickLink };
   const onHrefProp = isDisabled ? {} : { href: url };

@@ -40,7 +40,6 @@ import {
   ControlsSection,
   RowContainer,
 } from "../presets/StyledPresets";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 import { globalColors } from "@docspace/shared/themes";
 
 export const MainElementParameter = ({
@@ -127,7 +126,9 @@ export const MainElementParameter = ({
             <TextInput
               scale
               onChange={setButtonText}
-              placeholder={t("SelectToPortal", { productName: PRODUCT_NAME })}
+              placeholder={t("SelectToPortal", {
+                productName: t("Common:ProductName"),
+              })}
               value={buttonValue}
               tabIndex={3}
             />

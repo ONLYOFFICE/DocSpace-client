@@ -53,6 +53,8 @@ const StyledFileRow = styled(Row)`
 
   height: 100%;
 
+  padding-inline-end: 16px;
+
   .styled-element,
   .row_content {
     ${(props) =>
@@ -336,6 +338,11 @@ class FileRow extends Component {
 
     const onMediaClick = () => this.onMediaClick(item.fileId);
 
+    const onFileClick = (url) => {
+      if (!url) return;
+      window.open(url, downloadInCurrentTab ? "_self" : "_blank");
+    };
+
     return (
       <>
         <StyledFileRow
@@ -366,10 +373,13 @@ class FileRow extends Component {
                 <div className="upload-panel_file-name">
                   <Link
                     className="upload-panel-file-error_text"
+                    onClick={() =>
+                      onFileClick(item.fileInfo ? item.fileInfo.webUrl : "")
+                    }
                     fontWeight="600"
                     truncate
-                    href={item.fileInfo ? item.fileInfo.webUrl : ""}
-                    target={downloadInCurrentTab ? "_self" : "_blank"}
+                    // href={item.fileInfo ? item.fileInfo.webUrl : ""}
+                    // target={downloadInCurrentTab ? "_self" : "_blank"}
                   >
                     {name}
                     {fileExtension}

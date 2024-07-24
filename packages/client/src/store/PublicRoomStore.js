@@ -207,8 +207,11 @@ class PublicRoomStore {
       .then((res) => {
         if (res?.shared) {
           const filter = FilesFilter.getDefault();
+          const subFolder = new URLSearchParams(window.location.search).get(
+            "folder",
+          );
           const url = getCategoryUrl(CategoryType.Shared);
-          filter.folder = res.id;
+          filter.folder = subFolder ? subFolder : res.id;
 
           return window.location.replace(`${url}?${filter.toUrlParams()}`);
         }

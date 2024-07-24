@@ -27,7 +27,7 @@
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
     "@types/node": "^20",
-    "@types/react": "^18",
+    "@types/react": "^18.2.53",
     "@types/react-dom": "^18",
     "@types/react-google-recaptcha": "^2.1.9",
     "babel-plugin-styled-components": "^2.1.4",

@@ -64,6 +64,7 @@ const StyledNav = styled.nav`
   .icon-profile-menu {
     cursor: pointer;
     -webkit-tap-highlight-color: ${globalColors.tapHighlight};
+    z-index: 300;
   }
 `;
 const HeaderNav = ({

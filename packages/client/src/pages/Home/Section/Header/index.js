@@ -647,7 +647,6 @@ export default inject(
       pathParts,
       navigationPath,
       security,
-      canCopyPublicLink,
       rootFolderType,
       shared,
     } = selectedFolderStore;
@@ -664,8 +663,6 @@ export default inject(
 
     const isRoom = !!roomType;
     const isPublicRoomType = roomType === RoomsType.PublicRoom;
-    const isCustomRoomType = roomType === RoomsType.CustomRoom;
-    const isFormRoomType = roomType === RoomsType.FormRoom;
 
     const {
       onCreateAndCopySharedLink,
@@ -715,17 +712,12 @@ export default inject(
 
     const isArchive = rootFolderType === FolderType.Archive;
 
-    const sharedItem = navigationPath.find((r) => r.shared);
+    const isShared = shared || navigationPath.find((r) => r.shared);
 
     const showNavigationButton =
-      isLoading || !security?.CopyLink
+      isLoading || !security?.CopyLink || isPublicRoom || isArchive
         ? false
-        : (!isPublicRoom &&
-            !isArchive &&
-            canCopyPublicLink &&
-            (isPublicRoomType || isCustomRoomType || isFormRoomType) &&
-            shared) ||
-          (sharedItem && sharedItem.canCopyPublicLink);
+        : security?.Read && isShared;
 
     return {
       showText: settingsStore.showText,
@@ -749,7 +741,6 @@ export default inject(
 
       setSelected,
       security,
-      canCopyPublicLink,
 
       getHeaderMenu,
       getCheckboxItemLabel,

@@ -76,7 +76,8 @@ const Root = ({
   const isSkipError =
     error?.status === "not-found" ||
     (error?.status === "access-denied" && !!error.editorUrl) ||
-    error?.status === "not-supported";
+    error?.status === "not-supported" ||
+    error?.status === "quota-exception";
 
   const { t } = useTranslation(["Editor", "Common"]);
 
@@ -134,6 +135,7 @@ const Root = ({
     onSDKRequestStartFilling,
     conflictDataDialog,
     headerLabelSFSDialog,
+    onDownloadAs,
   } = useStartFillingSelectDialog(fileInfo);
 
   const {
@@ -210,6 +212,7 @@ const Root = ({
           fileInfo={fileInfo}
           errorMessage={error?.message}
           isSkipError={!!isSkipError}
+          onDownloadAs={onDownloadAs}
           onSDKRequestSharingSettings={onSDKRequestSharingSettings}
           onSDKRequestSaveAs={onSDKRequestSaveAs}
           onSDKRequestInsertImage={onSDKRequestInsertImage}
@@ -258,7 +261,9 @@ const Root = ({
           socketHelper={socketHelper}
           filesSettings={filesSettings}
           headerLabel={headerLabelSFSDialog}
-          isVisible={isVisibleStartFillingSelectDialog}
+          isVisible={
+            isVisibleStartFillingSelectDialog && !conflictDataDialog.visible
+          }
           onClose={onCloseStartFillingSelectDialog}
           onSubmit={onSubmitStartFillingSelectDialog}
           getIsDisabled={getIsDisabledStartFillingSelectDialog}

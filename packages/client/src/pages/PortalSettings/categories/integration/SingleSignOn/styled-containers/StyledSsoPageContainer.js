@@ -28,6 +28,7 @@ import styled, { css } from "styled-components";
 import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 
 const StyledSsoPage = styled.div`
+  max-width: 100%;
   box-sizing: border-box;
   outline: none;
 
@@ -49,7 +50,6 @@ const StyledSsoPage = styled.div`
   .field-label-icon {
     align-items: center;
     margin-bottom: 4px;
-    max-width: 350px;
   }
 
   .field-label {

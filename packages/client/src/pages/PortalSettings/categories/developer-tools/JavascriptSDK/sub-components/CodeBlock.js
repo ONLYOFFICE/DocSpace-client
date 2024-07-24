@@ -39,6 +39,7 @@ const StyledContainer = styled.div`
   width: 800px;
   overflow: hidden;
   background-color: ${(props) => props.theme.sdkPresets.previewBackgroundColor};
+  margin-bottom: 16px;
 `;
 
 StyledContainer.defaultProps = { theme: Base };
@@ -71,7 +72,7 @@ const CodeBlock = ({ config }) => {
   });
 
   return (
-    <StyledContainer>
+    <StyledContainer dir="ltr">
       <CodeMirror
         value={codeString}
         maxWidth="800px"

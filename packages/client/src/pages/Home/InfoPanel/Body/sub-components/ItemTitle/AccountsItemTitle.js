@@ -26,6 +26,7 @@
 
 import { useRef } from "react";
 import { withTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
 import { Tooltip } from "@docspace/shared/components/tooltip";
@@ -49,6 +50,7 @@ const AccountsItemTitle = ({
     return <></>;
   }
 
+  const theme = useTheme();
   const itemTitleRef = useRef();
 
   const isPending =

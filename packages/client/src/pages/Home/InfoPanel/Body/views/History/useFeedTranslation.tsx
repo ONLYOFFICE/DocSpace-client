@@ -38,7 +38,17 @@ export const useFeedTranslation = (
         <Trans
           t={t}
           ns="InfoPanel"
-          i18nKey="RoomCreated"
+          i18nKey="HistoryRoomCreated"
+          values={{ roomTitle: feed.data.title }}
+          components={{ 1: <strong /> }}
+        />
+      );
+    case "RoomCopied":
+      return (
+        <Trans
+          t={t}
+          ns="InfoPanel"
+          i18nKey="HistoryRoomCopied"
           values={{ roomTitle: feed.data.title }}
           components={{ 1: <strong /> }}
         />
@@ -87,6 +97,18 @@ export const useFeedTranslation = (
           i18nKey="RoomExternalLinkDeleted"
           values={{
             linkTitle: feed.data.title,
+          }}
+          components={{ 1: <strong /> }}
+        />
+      );
+    case "RoomExternalLinkRevoked":
+      return (
+        <Trans
+          t={t}
+          ns="InfoPanel"
+          i18nKey="RoomExternalLinkRevoked"
+          values={{
+            linkTitle: feed.data.title || feed.data.sharedTo?.title,
           }}
           components={{ 1: <strong /> }}
         />

@@ -1723,6 +1723,8 @@ class FilesStore {
         ].includes(err?.response?.status);
 
         if (isUserError && !isThirdPartyError) {
+          if (isPublicRoom()) return Promise.reject(err);
+
           this.setIsErrorRoomNotAvailable(true);
         } else {
           if (axios.isCancel(err)) {

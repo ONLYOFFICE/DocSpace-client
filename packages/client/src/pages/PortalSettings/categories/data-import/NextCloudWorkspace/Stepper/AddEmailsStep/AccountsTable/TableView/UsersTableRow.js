@@ -58,25 +58,27 @@ const StyledTableRow = styled(TableRow)`
     display: flex;
     gap: 8px;
     overflow: hidden;
+    font-size: 12px;
+    font-weight: 600;
+    color: ${(props) =>
+      props.theme.client.settings.migration.tableRowTextColor};
+
     path {
-      fill: #a3a9ae;
+      fill: ${(props) => props.theme.client.settings.migration.tableHeaderText};
     }
   }
 
   .import-email-input {
     width: 357.67px;
   }
-
-  .textOverflow {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
 `;
 
 const DecisionButton = styled(Button)`
   width: 32px;
   height: 32px;
+  path {
+    fill: ${(props) => props.theme.client.settings.migration.tableHeaderText};
+  }
 `;
 
 DecisionButton.defaultProps = { theme: Base };
@@ -169,7 +171,7 @@ const UsersTableRow = ({
           isChecked={isChecked}
           isDisabled={!isPrevEmailValid}
         />
-        <Text fontWeight={600} className="textOverflow">
+        <Text fontWeight={600} truncate>
           {displayName}
         </Text>
       </TableCell>
@@ -196,7 +198,7 @@ const UsersTableRow = ({
         ) : (
           <span onClick={openEmail} className="user-email" ref={emailTextRef}>
             <EditSvg />
-            <Text fontWeight={600} color="#A3A9AE" className="textOverflow">
+            <Text className="user-email" truncate>
               {prevEmail !== "" ? prevEmail : t("Settings:NoEmail")}
             </Text>
           </span>

@@ -70,26 +70,22 @@ export default function withLoader<T extends WithLoaderProps>(
 
     const getData = useCallback(async () => {
       if (type === "EmpInvite" && email) {
-        try {
-          const response = await getUserByEmail(email, confirmHeader);
+        const response = await getUserByEmail(email, confirmHeader);
 
-          if (response) {
-            const loginData = window.btoa(
-              JSON.stringify({
-                type: "invitation",
-                email: email,
-              }),
-            );
+        if (response !== 404) {
+          const loginData = window.btoa(
+            JSON.stringify({
+              type: "invitation",
+              email: email,
+            }),
+          );
 
-            window.location.href = combineUrl(
-              window.ClientConfig?.proxy?.url,
-              "/login",
-              `?loginData=${loginData}`,
-            );
-          }
-
-          return;
-        } catch (e) {}
+          window.location.href = combineUrl(
+            window.ClientConfig?.proxy?.url,
+            "/login",
+            `?loginData=${loginData}`,
+          );
+        }
       }
 
       try {

@@ -29,7 +29,6 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { isManagement } from "@docspace/shared/utils/common";
 import MobileCategoryWrapper from "../../../components/MobileCategoryWrapper";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -61,7 +60,7 @@ const MobileView = ({ isSettingPaid, showSettings }) => {
           <MobileCategoryWrapper
             title={t("CompanyInfoSettings")}
             subtitle={t("BrandingSectionDescription", {
-              productName: PRODUCT_NAME,
+              productName: t("Common:ProductName"),
             })}
             url={`${baseUrl}/branding/company-info-settings`}
             withPaidBadge={!isSettingPaid}

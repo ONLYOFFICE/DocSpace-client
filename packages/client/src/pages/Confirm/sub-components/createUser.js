@@ -55,7 +55,6 @@ import {
   ALLOWED_PASSWORD_CHARACTERS,
   COOKIE_EXPIRATION_YEAR,
   LANGUAGE,
-  PRODUCT_NAME,
   PROVIDERS_DATA,
 } from "@docspace/shared/constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -212,7 +211,7 @@ const CreateUserForm = (props) => {
       });
 
       const finalUrl = roomId
-        ? `/rooms/shared/filter?folder=${roomId}`
+        ? `/rooms/shared/${roomId}/filter?folder=${roomId}`
         : defaultPage;
 
       if (roomId) {
@@ -324,7 +323,7 @@ const CreateUserForm = (props) => {
     signupOAuth(signupAccount)
       .then(() => {
         const url = roomData.roomId
-          ? `/rooms/shared/filter?folder=${roomData.roomId}/`
+          ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}/`
           : defaultPage;
         window.location.replace(url);
       })
@@ -352,7 +351,7 @@ const CreateUserForm = (props) => {
     //console.log({ res });
 
     const finalUrl = roomData.roomId
-      ? `/rooms/shared/filter?folder=${roomData.roomId}`
+      ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}`
       : defaultPage;
 
     const isConfirm = typeof res === "string" && res.includes("confirm");
@@ -511,7 +510,7 @@ const CreateUserForm = (props) => {
                     values={{
                       firstName: user.firstName,
                       lastName: user.lastName,
-                      productName: PRODUCT_NAME,
+                      productName: t("Common:ProductName"),
                       ...(roomName
                         ? { roomName }
                         : { spaceAddress: window.location.host }),

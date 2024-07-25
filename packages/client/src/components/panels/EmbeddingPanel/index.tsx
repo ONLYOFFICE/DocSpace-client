@@ -48,7 +48,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { PRODUCT_NAME, SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 import HeaderUrl from "PUBLIC_DIR/images/sdk-presets_header.react.svg?url";
@@ -427,7 +427,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                   </Trans>
                 ) : (
                   t("EmbeddingPanel:EmbeddingBarDescription", {
-                    productName: PRODUCT_NAME,
+                    productName: t("Common:ProductName"),
                   })
                 )}
               </Text>
@@ -457,6 +457,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                   selectedOption={selectedLink as TOption}
                   displaySelectedOption
                   directionY="bottom"
+                  withLabel={false}
                 />
               </>
             )}

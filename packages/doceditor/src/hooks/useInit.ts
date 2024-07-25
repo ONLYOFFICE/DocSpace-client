@@ -54,13 +54,14 @@ const useInit = ({
     if (!config) return;
 
     setDocumentTitle(
+      t,
       config.document.title,
       config.document.fileType,
       documentReady,
       successAuth ?? false,
       setDocTitle,
     );
-  }, [config, documentReady, fileInfo, setDocTitle, successAuth]);
+  }, [t, config, documentReady, fileInfo, setDocTitle, successAuth]);
 
   React.useEffect(() => {
     if (config && IS_DESKTOP_EDITOR && user && fileInfo?.id) {

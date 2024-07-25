@@ -25,7 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { Metadata } from "next";
-import { BRAND_NAME } from "@docspace/shared/constants";
+import { headers } from "next/headers";
+
+import { getSelectorsByUserAgent } from "react-device-detect";
 
 import { getData } from "@/utils/actions";
 import { RootPageProps } from "@/types";
@@ -41,15 +43,20 @@ const initialSearchParams: RootPageProps["searchParams"] = {
   editorType: undefined,
 };
 
-export const metadata: Metadata = {
-  title: `${BRAND_NAME} DocEditor page`,
-
-  description: "",
-};
-
 async function Page({ searchParams }: RootPageProps) {
   const { fileId, fileid, version, doc, action, share, editorType, error } =
     searchParams ?? initialSearchParams;
+
+  const hdrs = headers();
+
+  let type = editorType;
+
+  const ua = hdrs.get("user-agent");
+  if (ua && !type) {
+    const { isMobile } = getSelectorsByUserAgent(ua);
+
+    if (isMobile) type = "mobile";
+  }
 
   const startDate = new Date();
 
@@ -59,7 +66,7 @@ async function Page({ searchParams }: RootPageProps) {
     doc,
     action,
     share,
-    editorType,
+    type,
   );
 
   const timer = new Date().getTime() - startDate.getTime();

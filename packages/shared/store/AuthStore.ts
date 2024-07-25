@@ -471,28 +471,6 @@ class AuthStore {
     );
   }
 
-  setDocumentTitle = (subTitle = null) => {
-    let title;
-
-    // const currentModule = this.settingsStore?.product;
-    const organizationName = this.settingsStore?.organizationName;
-
-    if (subTitle) {
-      title = `${subTitle} - ${organizationName}`;
-      // if (this.isAuthenticated && currentModule) {
-      //   title = `${subTitle} - ${currentModule.title}`;
-      // } else {
-      //   title = `${subTitle} - ${organizationName}`;
-      // }
-      // } else if ( organizationName) {
-      // title = `${currentModule.title} - ${organizationName}`;
-    } else {
-      title = organizationName;
-    }
-
-    document.title = title ?? "";
-  };
-
   setProductVersion = (version: string) => {
     this.version = version;
   };

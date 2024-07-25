@@ -91,14 +91,23 @@ const StyledLdapPage = styled(Box)`
   .ldap_attribute-mapping {
     margin-top: 16px;
     margin-bottom: 12px;
-    input {
-      margin-bottom: 16px;
-    }
     display: grid;
     grid-gap: 12px;
+  }
+
+  .access-selector-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 12px;
+
+    @media ${mobile} {
+      width: 100%;
+      grid-template-columns: 1fr 0;
+      grid-gap: 0;
+    }
 
     .access-selector {
-      margin-right: 0;
+      margin-right: 0 !important;
       margin-top: -4px;
     }
   }
@@ -129,7 +138,7 @@ const StyledLdapPage = styled(Box)`
     ${(props) =>
       !props.isMobileView &&
       css`
-        grid-template-columns: minmax(100px, 340px) 1fr;
+        grid-template-columns: 1fr 1fr;
       `}
   }
 

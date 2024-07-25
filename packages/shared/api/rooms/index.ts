@@ -184,7 +184,9 @@ export function editRoom(id, data) {
 export function pinRoom(id) {
   const options = { method: "put", url: `/files/rooms/${id}/pin` };
 
-  return request(options).then((res) => {
+  const skipRedirect = true;
+
+  return request(options, skipRedirect).then((res) => {
     return res;
   });
 }
@@ -333,8 +335,8 @@ export const setInvitationLinks = async (roomId, linkId, title, access) => {
       access,
     },
   };
-
-  const res = await request(options);
+  const skipRedirect = true;
+  const res = await request(options, skipRedirect);
 
   return res;
 };
@@ -372,7 +374,8 @@ export const setRoomSecurity = async (id, data) => {
     data,
   };
 
-  const res = await request(options);
+  const skipRedirect = true;
+  const res = await request(options, skipRedirect);
 
   res.members.forEach((item) => {
     if (item.subjectType === MembersSubjectType.Group) {
@@ -405,21 +408,26 @@ export function editExternalLink(
   disabled: boolean,
   denyDownload: boolean,
 ) {
-  return request({
-    method: "put",
+  const skipRedirect = true;
 
-    url: `/files/rooms/${roomId}/links`,
-    data: {
-      linkId,
-      title,
-      access,
-      expirationDate,
-      linkType,
-      password,
-      disabled,
-      denyDownload,
+  return request(
+    {
+      method: "put",
+
+      url: `/files/rooms/${roomId}/links`,
+      data: {
+        linkId,
+        title,
+        access,
+        expirationDate,
+        linkType,
+        password,
+        disabled,
+        denyDownload,
+      },
     },
-  });
+    skipRedirect,
+  );
 }
 
 export function getExternalLinks(roomId, type) {

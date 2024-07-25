@@ -1,9 +1,0 @@
-{
-  "date": "2024711_121949",
-  "checksums": {
-    "api.js": "9b7b808480a7a3b84fff3bbc086fb3c7",
-    "api.poly.js": "6ef0a93fc185ef373f73abeaa1c9104e",
-    "browserDetector.js": "fedff3ea7197068a5c86c5cf2c51ec31",
-    "config.json": "225114f784ac16f33c0a0cb0a6363438"
-  }
-}

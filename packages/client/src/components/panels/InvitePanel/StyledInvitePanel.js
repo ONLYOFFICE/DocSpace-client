@@ -118,12 +118,11 @@ const ScrollList = styled.div`
       ? "auto"
       : props.offsetTop && `calc(100% - ${props.offsetTop}px)`};
 
-  ${!isMobile() &&
-  css`
-    .row-item {
+  .row-item {
+    @media not ${mobile} {
       width: 448px !important;
     }
-  `}
+  }
 `;
 
 const StyledBlock = styled.div`
@@ -264,7 +263,7 @@ const StyledInviteInput = styled.div`
   .append {
     display: ${(props) => (props.isShowCross ? "flex" : "none")};
     align-items: center;
-    padding-right: 8px;
+    padding-inline-end: 8px;
     cursor: default;
   }
 
@@ -325,6 +324,28 @@ const StyledInviteInputContainer = styled.div`
 
   .header_aside-panel {
     max-width: 100% !important;
+
+    .selector_body_tabs {
+      display: flex;
+      justify-content: left;
+      margin-bottom: 16px;
+      padding: 0;
+      width: -webkit-fill-available;
+
+      .sticky-indent {
+        height: 0;
+      }
+
+      .sticky {
+        .scroll-body {
+          overflow-x: hidden;
+        }
+        .scroll-body > div {
+          justify-content: flex-start;
+          padding-inline-start: 16px;
+        }
+      }
+    }
   }
 `;
 
@@ -351,7 +372,7 @@ const StyledDropDown = styled(DropDown)`
 
     .email-list_add-button {
       display: flex;
-      margin-left: auto;
+      margin-inline-start: auto;
       align-items: center;
       gap: 4px;
 
@@ -359,8 +380,13 @@ const StyledDropDown = styled(DropDown)`
         color: #4781d1;
       }
 
-      svg path {
-        fill: #4781d1;
+      svg {
+        ${({ theme }) =>
+          theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"};
+
+        path {
+          fill: #4781d1;
+        }
       }
     }
   }

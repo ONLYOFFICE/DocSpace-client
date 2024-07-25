@@ -55,10 +55,7 @@ import {
   RoomsProviderType,
   RoomsType,
 } from "@docspace/shared/enums";
-import {
-  PRODUCT_NAME,
-  ROOMS_PROVIDER_TYPE_NAME,
-} from "@docspace/shared/constants";
+import { ROOMS_PROVIDER_TYPE_NAME } from "@docspace/shared/constants";
 
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
 
@@ -808,7 +805,9 @@ const SectionFilterContent = ({
 
           switch (+filter.role) {
             case EmployeeType.Admin:
-              label = t("Common:PortalAdmin", { productName: PRODUCT_NAME });
+              label = t("Common:PortalAdmin", {
+                productName: t("Common:ProductName"),
+              });
               break;
             case EmployeeType.User:
               label = t("Common:RoomAdmin");
@@ -1112,12 +1111,9 @@ const SectionFilterContent = ({
             label = t("Media");
             break;
           case FilterType.FilesOnly.toString():
-            label = t("AllFiles");
+            label = t("Translations:Files");
             break;
-          case FilterType.OFormTemplateOnly.toString():
-            label = t("FormsTemplates");
-            break;
-          case FilterType.OFormOnly.toString():
+          case FilterType.Pdf.toString():
             label = t("Forms");
             break;
         }
@@ -1348,7 +1344,9 @@ const SectionFilterContent = ({
           id: "filter_type-docspace-admin",
           key: EmployeeType.Admin,
           group: "filter-type",
-          label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
+          label: t("Common:PortalAdmin", {
+            productName: t("Common:ProductName"),
+          }),
         },
         {
           id: "filter_type-room-admin",
@@ -1641,16 +1639,16 @@ const SectionFilterContent = ({
           },
           ...folders,
           {
+            id: "filter_type-all-files",
+            key: FilterType.FilesOnly.toString(),
+            group: FilterGroups.filterType,
+            label: t("Translations:Files").toLowerCase(),
+          },
+          {
             id: "filter_type-documents",
             key: FilterType.DocumentsOnly.toString(),
             group: FilterGroups.filterType,
             label: t("Common:Documents").toLowerCase(),
-          },
-          {
-            id: "filter_type-presentations",
-            key: FilterType.PresentationsOnly.toString(),
-            group: FilterGroups.filterType,
-            label: t("Translations:Presentations").toLowerCase(),
           },
           {
             id: "filter_type-spreadsheets",
@@ -1659,27 +1657,20 @@ const SectionFilterContent = ({
             label: t("Translations:Spreadsheets").toLowerCase(),
           },
           {
-            id: "filter_type-form-templates",
-            key: FilterType.OFormTemplateOnly.toString(),
+            id: "filter_type-presentations",
+            key: FilterType.PresentationsOnly.toString(),
             group: FilterGroups.filterType,
-            label: t("FormsTemplates").toLowerCase(),
+            label: t("Translations:Presentations").toLowerCase(),
           },
           {
             id: "filter_type-forms",
-            key: FilterType.OFormOnly.toString(),
+            key: FilterType.Pdf.toString(),
             group: FilterGroups.filterType,
             label: t("Forms").toLowerCase(),
           },
           ...archives,
-
           ...images,
           ...media,
-          {
-            id: "filter_type-all-files",
-            key: FilterType.FilesOnly.toString(),
-            group: FilterGroups.filterType,
-            label: t("AllFiles").toLowerCase(),
-          },
         ];
 
     const subjectOptions = [

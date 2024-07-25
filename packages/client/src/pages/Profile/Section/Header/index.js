@@ -185,7 +185,7 @@ const Header = (props) => {
             size={17}
             getData={getUserContextOptions}
             isDisabled={false}
-            usePortal={false}
+            usePortal={true}
           />
         )}
 

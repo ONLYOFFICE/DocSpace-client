@@ -104,12 +104,13 @@ import {
   UrlActionType,
   EmployeeType,
   FilesSelectorFilterTypes,
+  FilterType,
+  FileExtensions,
 } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { getFileLink, getFolderLink } from "@docspace/shared/api/files";
 import { resendInvitesAgain } from "@docspace/shared/api/people";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const LOADER_TIMER = 500;
 let loadingTime;
@@ -180,6 +181,9 @@ class ContextOptionsStore {
   };
 
   onClickLinkFillForm = (item) => {
+    if (!item.startFilling)
+      return this.dialogsStore.setFillPDFDialogData(true, item);
+
     return this.gotoDocEditor(false, item);
   };
 
@@ -392,21 +396,18 @@ class ContextOptionsStore {
         : `${window.location.origin + config.homepage}/filter?folder=${id}`, //TODO: Change url by category
     );
 
-    toastr.success(t("Translations:LinkCopySuccess"));
+    toastr.success(t("Common:LinkCopySuccess"));
   };
 
   onCopyLink = async (item, t) => {
-    const { shared, navigationPath, canCopyPublicLink } =
-      this.selectedFolderStore;
+    const { shared, navigationPath } = this.selectedFolderStore;
 
     const isArchive = item.rootFolderType === FolderType.Archive;
 
     const { href } = item;
     const sharedItem = navigationPath.find((r) => r.shared);
 
-    const isShared =
-      (sharedItem && sharedItem.canCopyPublicLink) ||
-      (shared && canCopyPublicLink);
+    const isShared = shared || sharedItem;
 
     if (isShared && !isArchive) {
       try {
@@ -414,7 +415,7 @@ class ContextOptionsStore {
           ? await getFolderLink(item.id)
           : await getFileLink(item.id);
         copyShareLink(itemLink.sharedTo.shareLink);
-        toastr.success(t("Translations:LinkCopySuccess"));
+        toastr.success(t("Common:LinkCopySuccess"));
       } catch (error) {
         toastr.error(error);
       }
@@ -426,13 +427,13 @@ class ContextOptionsStore {
       item.rootFolderType === FolderType.SHARE
     ) {
       copy(item.webUrl);
-      return toastr.success(t("Translations:LinkCopySuccess"));
+      return toastr.success(t("Common:LinkCopySuccess"));
     }
 
     if (href) {
       copy(href);
 
-      return toastr.success(t("Translations:LinkCopySuccess"));
+      return toastr.success(t("Common:LinkCopySuccess"));
     }
 
     const { canConvert } = this.filesSettingsStore;
@@ -453,7 +454,7 @@ class ContextOptionsStore {
 
     copy(url);
 
-    toastr.success(t("Translations:LinkCopySuccess"));
+    toastr.success(t("Common:LinkCopySuccess"));
   };
 
   onOpenEmbeddingSettings = async (item) => {
@@ -687,7 +688,9 @@ class ContextOptionsStore {
   };
 
   onOpenPDFEditDialog = (id) => {
-    this.dialogsStore.setPdfFormEditVisible(true, id);
+    this.filesStore.openDocEditor(id, false, null, true);
+
+    // this.dialogsStore.setPdfFormEditVisible(true, id);
   };
 
   filterModel = (model, filter) => {
@@ -745,7 +748,7 @@ class ContextOptionsStore {
   //             label: title,
   //             onClick: () => {
   //               copy(shareLink);
-  //               toastr.success(t("Translations:LinkCopySuccess"));
+  //               toastr.success(t("Common:LinkCopySuccess"));
   //             },
   //           });
   //         }
@@ -1118,13 +1121,18 @@ class ContextOptionsStore {
       return [
         {
           key: "public-room_share",
-          label: t("Files:CopyLink"),
+          label: t("Files:CopySharedLink"),
           icon: TabletLinkReactSvgUrl,
           onClick: () => {
             copy(window.location.href);
-            toastr.success(t("Translations:LinkCopySuccess"));
+            toastr.success(t("Common:LinkCopySuccess"));
           },
           disabled: this.settingsStore.isFrame,
+        },
+        {
+          key: "separator0",
+          isSeparator: true,
+          disabled: !item.security?.Download,
         },
         {
           key: "public-room_edit",
@@ -1218,8 +1226,7 @@ class ContextOptionsStore {
     const hasInfoPanel = contextOptions.includes("show-info");
 
     //const emailSendIsDisabled = true;
-    const showSeparator0 =
-      (hasInfoPanel || !isMedia) && !this.publicRoomStore.isPublicRoom; // || !emailSendIsDisabled;
+    const showSeparator0 = hasInfoPanel || !isMedia; // || !emailSendIsDisabled;
 
     const { isGroupMenuBlocked } = this.filesActionsStore;
 
@@ -1311,72 +1318,71 @@ class ContextOptionsStore {
             disabled: false,
           },
         ];
-    const moveActions =
-      isDesktop() && !isInfoPanel
-        ? [
-            {
-              id: "option_move-or-copy",
-              key: "move",
-              label: t("MoveOrCopy"),
-              icon: CopyReactSvgUrl,
-              items: [
-                {
-                  id: "option_move-to",
-                  key: "move-to",
-                  label: t("Common:MoveTo"),
-                  icon: MoveReactSvgUrl,
-                  onClick: isEditing
-                    ? () => this.onShowEditingToast(t)
-                    : () => this.onMoveAction(item),
-                  disabled: false,
-                },
-                {
-                  id: "option_copy-to",
-                  key: "copy-to",
-                  label: t("Common:Copy"),
-                  icon: CopyReactSvgUrl,
-                  onClick: () => this.onCopyAction(item),
-                  disabled: false,
-                },
-                {
-                  id: "option_create-duplicate",
-                  key: "duplicate",
-                  label: t("Common:Duplicate"),
-                  icon: DuplicateReactSvgUrl,
-                  onClick: () => this.onDuplicate(item, t),
-                  disabled: false,
-                },
-              ],
-            },
-          ]
-        : [
-            {
-              id: "option_move-to",
-              key: "move-to",
-              label: t("Common:MoveTo"),
-              icon: MoveReactSvgUrl,
-              onClick: isEditing
-                ? () => this.onShowEditingToast(t)
-                : () => this.onMoveAction(item),
-              disabled: false,
-            },
-            {
-              id: "option_copy-to",
-              key: "copy-to",
-              label: t("Common:Copy"),
-              icon: CopyReactSvgUrl,
-              onClick: () => this.onCopyAction(item),
-              disabled: false,
-            },
-            {
-              id: "option_create-duplicate",
-              key: "duplicate",
-              label: t("Common:Duplicate"),
-              icon: DuplicateReactSvgUrl,
-              onClick: () => this.onDuplicate(item, t),
-              disabled: false,
-            },
-          ];
+    const moveActions = isDesktop()
+      ? [
+          {
+            id: "option_move-or-copy",
+            key: "move",
+            label: t("MoveOrCopy"),
+            icon: CopyReactSvgUrl,
+            items: [
+              {
+                id: "option_move-to",
+                key: "move-to",
+                label: t("Common:MoveTo"),
+                icon: MoveReactSvgUrl,
+                onClick: isEditing
+                  ? () => this.onShowEditingToast(t)
+                  : () => this.onMoveAction(item),
+                disabled: false,
+              },
+              {
+                id: "option_copy-to",
+                key: "copy-to",
+                label: t("Common:Copy"),
+                icon: CopyReactSvgUrl,
+                onClick: () => this.onCopyAction(item),
+                disabled: false,
+              },
+              {
+                id: "option_create-duplicate",
+                key: "duplicate",
+                label: t("Common:Duplicate"),
+                icon: DuplicateReactSvgUrl,
+                onClick: () => this.onDuplicate(item, t),
+                disabled: false,
+              },
+            ],
+          },
+        ]
+      : [
+          {
+            id: "option_move-to",
+            key: "move-to",
+            label: t("Common:MoveTo"),
+            icon: MoveReactSvgUrl,
+            onClick: isEditing
+              ? () => this.onShowEditingToast(t)
+              : () => this.onMoveAction(item),
+            disabled: false,
+          },
+          {
+            id: "option_copy-to",
+            key: "copy-to",
+            label: t("Common:Copy"),
+            icon: CopyReactSvgUrl,
+            onClick: () => this.onCopyAction(item),
+            disabled: false,
+          },
+          {
+            id: "option_create-duplicate",
+            key: "duplicate",
+            label: t("Common:Duplicate"),
+            icon: DuplicateReactSvgUrl,
+            onClick: () => this.onDuplicate(item, t),
+            disabled: false,
+          },
+        ];
 
     const { pinOptions, muteOptions } = this.getRoomsRootContextOptions(
       item,
@@ -1389,14 +1395,17 @@ class ContextOptionsStore {
       item.roomType === RoomsType.FormRoom ||
       item.roomType === RoomsType.CustomRoom;
 
-    const { shared, navigationPath } = this.selectedFolderStore;
+    const { navigationPath } = this.selectedFolderStore;
 
     if (item.isRoom && withOpen) {
       withOpen = navigationPath.findIndex((f) => f.id === item.id) === -1;
     }
 
     const isArchive = item.rootFolderType === FolderType.Archive;
-    const isShared = shared || navigationPath.findIndex((r) => r.shared) > -1;
+
+    const hasShareLinkRights = item.shared
+      ? item.security?.Read
+      : item.security?.EditAccess;
 
     const optionsModel = [
       {
@@ -1421,7 +1430,7 @@ class ContextOptionsStore {
         label: t("Common:FillFormButton"),
         icon: FormFillRectSvgUrl,
         onClick: () => this.onClickLinkFillForm(item),
-        disabled: !item.startFilling,
+        disabled: false,
       },
       {
         id: "option_open-pdf",
@@ -1434,7 +1443,7 @@ class ContextOptionsStore {
       {
         id: "option_edit-pdf",
         key: "edit-pdf",
-        label: t("Common:EditPDFForm"),
+        label: t("Common:EditButton"),
         icon: AccessEditReactSvgUrl,
         onClick: () => this.onOpenPDFEditDialog(item.id),
         disabled: false,
@@ -1552,21 +1561,14 @@ class ContextOptionsStore {
         label: t("Files:CopyLink"),
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onCopyLink(item, t),
-        disabled:
-          (isPublicRoomType && item.canCopyPublicLink && !isArchive) ||
-          this.publicRoomStore.isPublicRoom ||
-          !item.security?.CopyLink,
+        disabled: isPublicRoomType && hasShareLinkRights,
       },
       {
         id: "option_copy-external-link",
         key: "external-link",
         label: t("Files:CopySharedLink"),
         icon: TabletLinkReactSvgUrl,
-        disabled:
-          this.publicRoomStore.isPublicRoom ||
-          isArchive ||
-          !item.canCopyPublicLink ||
-          !isPublicRoomType,
+        disabled: !hasShareLinkRights,
         onClick: () => this.onCreateAndCopySharedLink(item, t),
         // onLoad: () => this.onLoadLinks(t, item),
       },
@@ -1591,7 +1593,9 @@ class ContextOptionsStore {
       {
         id: "option_link-for-portal-users",
         key: "link-for-portal-users",
-        label: t("LinkForPortalUsers", { productName: PRODUCT_NAME }),
+        label: t("LinkForPortalUsers", {
+          productName: t("Common:ProductName"),
+        }),
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onClickLinkForPortal(item, t),
         disabled: false,
@@ -1617,7 +1621,7 @@ class ContextOptionsStore {
         label: t("Common:Info"),
         icon: InfoOutlineReactSvgUrl,
         onClick: () => this.onShowInfoPanel(item),
-        disabled: this.publicRoomStore.isPublicRoom,
+        disabled: false,
       },
       {
         id: "option_block-unblock-version",
@@ -1627,7 +1631,7 @@ class ContextOptionsStore {
         onClick: () => this.lockFile(item, t),
         disabled: false,
       },
-      !this.publicRoomStore.isPublicRoom && {
+      {
         key: "separator1",
         isSeparator: true,
       },
@@ -2127,9 +2131,12 @@ class ContextOptionsStore {
   onCreate = (format) => {
     const event = new Event(Events.CREATE);
 
+    const isPDf = format === FileExtensions.PDF;
+
     const payload = {
       extension: format,
       id: -1,
+      edit: isPDf,
     };
 
     event.payload = payload;
@@ -2211,10 +2218,12 @@ class ContextOptionsStore {
           id: "personal_upload-from-docspace",
           className: "main-button_drop-down",
           icon: ActionsUploadReactSvgUrl,
-          label: t("Common:FromPortal", { productName: PRODUCT_NAME }),
+          label: t("Common:FromPortal", {
+            productName: t("Common:ProductName"),
+          }),
           key: "personal_upload-from-docspace",
           onClick: () =>
-            this.onShowFormRoomSelectFileDialog(FilesSelectorFilterTypes.PDF),
+            this.onShowFormRoomSelectFileDialog(FilterType.PDFForm),
         },
         {
           id: "personal_upload-from-device",
@@ -2329,7 +2338,9 @@ class ContextOptionsStore {
         id: "accounts-add_administrator",
         className: "main-button_drop-down",
         icon: PersonAdminReactSvgUrl,
-        label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
+        label: t("Common:PortalAdmin", {
+          productName: t("Common:ProductName"),
+        }),
         onClick: this.onInvite,
         "data-type": EmployeeType.Admin,
         key: "administrator",

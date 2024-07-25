@@ -112,6 +112,8 @@ const FilesSelectorComponent = ({
   withCreate,
   createDefineRoomLabel,
   createDefineRoomType,
+  withInfoBar,
+  infoBarData,
 }: FilesSelectorProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["Common"]);
@@ -427,7 +429,9 @@ const FilesSelectorComponent = ({
       isChecked: boolean,
     ) => {
       const isPublic =
-        breadCrumbs.findIndex((f) => f.roomType === RoomsType.PublicRoom) > -1;
+        breadCrumbs.findIndex((f) => f.roomType === RoomsType.PublicRoom) >
+          -1 && rootFolderType !== FolderType.Rooms;
+
       const folderTitle = breadCrumbs[breadCrumbs.length - 1].label;
 
       await onSubmit(
@@ -585,6 +589,8 @@ const FilesSelectorComponent = ({
       }
       descriptionText={descriptionText}
       disableFirstFetch
+      withInfoBar={withInfoBar}
+      infoBarData={infoBarData}
     />
   );
 

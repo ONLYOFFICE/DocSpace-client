@@ -694,17 +694,15 @@ class FilesStore {
 
     const localKey = `${PDF_FORM_DIALOG_KEY}-${this.userStore.user.id}`;
 
-    const isFirst = JSON.parse(localStorage.getItem(localKey) ?? "true");
+    const show = !JSON.parse(localStorage.getItem(localKey) ?? "false");
 
     const event = new CustomEvent(Events.CREATE_PDF_FORM_FILE, {
       detail: {
         file,
-        isFill: !option.isOneMember,
-        isFirst,
+        show,
+        localKey,
       },
     });
-
-    if (isFirst) localStorage.setItem(localKey, "false");
 
     window?.dispatchEvent(event);
   };
@@ -1478,10 +1476,10 @@ class FilesStore {
 
     const { filterType, searchInContent } = filterData;
 
-    if (typeof filterData.withSubfolders !== "boolean")
+    if (!Boolean(filterData.withSubfolders))
       filterData.withSubfolders = defaultFilter.withSubfolders;
 
-    if (typeof searchInContent !== "boolean")
+    if (!Boolean(searchInContent))
       filterData.searchInContent = defaultFilter.searchInContent;
 
     if (!Object.keys(FilterType).find((key) => FilterType[key] === filterType))
@@ -1575,18 +1573,14 @@ class FilesStore {
               (data.current.rootFolderType === Rooms ||
                 data.current.rootFolderType === Archive);
 
-            let shared, canCopyPublicLink;
+            let shared;
             if (idx === 1) {
               let room = data.current;
 
               if (!isCurrentFolder) {
                 room = await api.files.getFolderInfo(folderId);
                 shared = room.shared;
-                canCopyPublicLink =
-                  room.access === ShareAccessRights.RoomManager ||
-                  room.access === ShareAccessRights.None;
 
-                room.canCopyPublicLink = canCopyPublicLink;
                 this.infoPanelStore.setInfoPanelRoom(room);
               }
 
@@ -1604,7 +1598,6 @@ class FilesStore {
               roomType,
               isRootRoom,
               shared,
-              canCopyPublicLink,
             };
           }),
         ).then((res) => {
@@ -1943,10 +1936,10 @@ class FilesStore {
     return rooms;
   };
 
-  resetRoomQuota = async (itemsIDs, filter) => {
+  resetRoomQuota = async (itemsIDs, inRoom = false, filter) => {
     const rooms = await api.rooms.resetRoomQuota(itemsIDs);
 
-    await this.fetchRooms(null, filter, false, false, false);
+    if (!inRoom) await this.fetchRooms(null, filter, false, false, false);
 
     return rooms;
   };
@@ -2052,6 +2045,7 @@ class FilesStore {
     const canDelete = !isEditing && item.security?.Delete;
 
     const canCopy = item.security?.Copy;
+    const canCopyLink = item.security?.CopyLink;
     const canDuplicate = item.security?.Duplicate;
     const canDownload = item.security?.Download;
     const canEmbed = item.security?.Embed;
@@ -2072,7 +2066,8 @@ class FilesStore {
         item.viewAccessibility.ImageView || item.viewAccessibility.MediaView;
       const canViewFile = item.viewAccessibility.WebView;
 
-      const isMasterForm = item.fileExst === ".docxf";
+      const isOldForm =
+        item.fileExst === ".docxf" || item.fileExst === ".oform"; //TODO: Remove after change security options
       const isPdf = item.fileExst === ".pdf";
 
       let fileOptions = [
@@ -2085,7 +2080,7 @@ class FilesStore {
         "view",
         "pdf-view",
         "make-form",
-        // "edit-pdf",
+        "edit-pdf",
         "separator0",
         "submit-to-gallery",
         "separator-SubmitToGallery",
@@ -2128,17 +2123,36 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, optionsToRemove);
       }
 
+      if (this.publicRoomStore.isPublicRoom) {
+        fileOptions = this.removeOptions(fileOptions, [
+          "separator0",
+          "sharing-settings",
+          "send-by-email",
+          "show-info",
+          "separator1",
+          "create-room",
+          "separator2",
+          "remove-from-recent",
+          "copy-general-link",
+        ]);
+      }
+
       if (!canDownload) {
         fileOptions = this.removeOptions(fileOptions, ["download"]);
       }
 
-      if (!isPdf || item.startFilling) {
+      if (!isPdf || item.startFilling || item.isForm) {
         fileOptions = this.removeOptions(fileOptions, ["open-pdf"]);
       }
 
-      // if (!item.security.EditForm || !item.startFilling) {
-      //   fileOptions = this.removeOptions(fileOptions, ["edit-pdf"]);
-      // }
+      if (
+        !isPdf ||
+        !item.security.EditForm ||
+        item.startFilling ||
+        !item.isForm
+      ) {
+        fileOptions = this.removeOptions(fileOptions, ["edit-pdf"]);
+      }
 
       if (!isPdf || !window.ClientConfig?.pdfViewer || isRecycleBinFolder) {
         fileOptions = this.removeOptions(fileOptions, ["pdf-view"]);
@@ -2173,7 +2187,7 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["edit"]);
       }
 
-      if (!(shouldFillForm && canFillForm)) {
+      if (!(shouldFillForm && canFillForm) || !item.isForm) {
         fileOptions = this.removeOptions(fileOptions, ["fill-form"]);
       }
 
@@ -2197,10 +2211,10 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["move"]);
       }
 
-      if (!(isMasterForm && canDuplicate))
+      if (!(isOldForm && canDuplicate))
         fileOptions = this.removeOptions(fileOptions, ["make-form"]);
 
-      if (!canSubmitToFormGallery || isMasterForm) {
+      if (!canSubmitToFormGallery || isOldForm) {
         fileOptions = this.removeOptions(fileOptions, [
           "submit-to-gallery",
           "separator-SubmitToGallery",
@@ -2350,7 +2364,7 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["open-location"]);
       }
 
-      if (isMyFolder || isRecycleBinFolder) {
+      if (isMyFolder || isRecycleBinFolder || !canCopyLink) {
         fileOptions = this.removeOptions(fileOptions, [
           "link-for-room-members",
         ]);
@@ -2393,7 +2407,6 @@ class FilesStore {
         item.roomType === RoomsType.PublicRoom ||
         item.roomType === RoomsType.FormRoom ||
         item.roomType === RoomsType.CustomRoom;
-      const isCustomRoomType = item.roomType === RoomsType.CustomRoom;
 
       let roomOptions = [
         "select",
@@ -2421,6 +2434,17 @@ class FilesStore {
 
       if (optionsToRemove.length) {
         roomOptions = this.removeOptions(roomOptions, optionsToRemove);
+      }
+
+      if (isArchiveFolder) {
+        roomOptions = this.removeOptions(roomOptions, [
+          "external-link",
+          "link-for-room-members",
+        ]);
+      }
+
+      if (!isPublicRoomType || this.publicRoomStore.isPublicRoom) {
+        roomOptions = this.removeOptions(roomOptions, ["external-link"]);
       }
 
       if (!canEditRoom) {
@@ -2542,6 +2566,15 @@ class FilesStore {
 
       if (optionsToRemove.length) {
         folderOptions = this.removeOptions(folderOptions, optionsToRemove);
+      }
+
+      if (this.publicRoomStore.isPublicRoom) {
+        folderOptions = this.removeOptions(folderOptions, [
+          "show-info",
+          "sharing-settings",
+          "separator1",
+          "create-room",
+        ]);
       }
 
       if (!canDownload) {
@@ -3366,10 +3399,6 @@ class FilesStore {
 
       const isForm = fileExst === ".oform";
 
-      const canCopyPublicLink =
-        access === ShareAccessRights.RoomManager ||
-        access === ShareAccessRights.None;
-
       return {
         availableExternalRights,
         access,
@@ -3439,7 +3468,6 @@ class FilesStore {
         type,
         hasDraft,
         isForm,
-        canCopyPublicLink,
         requestToken,
         lastOpened,
         quotaLimit,
@@ -3541,7 +3569,7 @@ class FilesStore {
       case FilterType.ArchiveOnly:
         return t("Archives");
       case FilterType.FilesOnly:
-        return t("AllFiles");
+        return t("Translations:Files");
       case `room-${RoomsType.FillingFormsRoom}`:
         return t("Common:FillingFormRooms");
       case `room-${RoomsType.CustomRoom}`:

@@ -46,11 +46,12 @@ import { TBreadCrumb } from "../../../components/selector/Selector.types";
 import { SettingsContext } from "../contexts/Settings";
 import { LoadersContext } from "../contexts/Loaders";
 
-import { PAGE_COUNT, DEFAULT_BREAD_CRUMB } from "../FilesSelector.constants";
+import { PAGE_COUNT } from "../FilesSelector.constants";
 import { UseFilesHelpersProps } from "../FilesSelector.types";
 import {
   convertFilesToItems,
   convertFoldersToItems,
+  getDefaultBreadCrumb,
 } from "../FilesSelector.utils";
 import useInputItemHelper from "./useInputItemHelper";
 
@@ -158,20 +159,20 @@ const useFilesHelper = ({
             filter.extension = "gz,tar";
             break;
 
-          case FilesSelectorFilterTypes.DOCXF:
-            filter.filterType = FilterType.OFormTemplateOnly;
-            break;
-
           case FilesSelectorFilterTypes.XLSX:
             filter.filterType = FilterType.SpreadsheetsOnly;
             break;
 
           case FilesSelectorFilterTypes.PDF:
-            filter.extension = FilesSelectorFilterTypes.PDF;
+            filter.filterType = FilterType.Pdf;
             break;
 
           case FilterType.DocumentsOnly:
             filter.filterType = FilterType.DocumentsOnly;
+            break;
+
+          case FilterType.PDFForm:
+            filter.filterType = FilterType.PDFForm;
             break;
 
           case FilterType.PresentationsOnly:
@@ -198,19 +199,12 @@ const useFilesHelper = ({
             filter.filterType = FilterType.FoldersOnly;
             break;
 
-          case FilterType.OFormTemplateOnly:
-            filter.filterType = FilterType.OFormTemplateOnly;
-            break;
-
-          case FilterType.OFormOnly:
-            filter.filterType = FilterType.OFormOnly;
-            break;
-
           case FilterType.FilesOnly:
             filter.filterType = FilterType.FilesOnly;
             break;
 
           case FilesSelectorFilterTypes.ALL:
+            filter.applyFilterOption = ApplyFilterOption.All;
             filter.filterType = FilterType.None;
             break;
 
@@ -331,7 +325,7 @@ const useFilesHelper = ({
           // });
 
           if (!isThirdParty && !isRoomsOnly && !isUserOnly)
-            breadCrumbs.unshift({ ...DEFAULT_BREAD_CRUMB });
+            breadCrumbs.unshift({ ...getDefaultBreadCrumb(t) });
 
           onSetBaseFolderPath?.(isErrorPath ? [] : breadCrumbs);
 
@@ -340,7 +334,9 @@ const useFilesHelper = ({
         }
 
         if (firstLoadRef.current || startIndex === 0) {
-          if (withCreate) {
+          const { security } = current;
+
+          if (withCreate && security.Create) {
             setTotal(total + 1);
             itemList.unshift({
               isCreateNewItem: true,

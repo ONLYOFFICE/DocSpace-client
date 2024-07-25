@@ -26,7 +26,7 @@
 
 import React from "react";
 import { RoomsType, ShareAccessRights } from "../../enums";
-import { MergeTypes } from "../../types";
+import { MergeTypes, Nullable } from "../../types";
 
 import { TFileSecurity, TFolderSecurity } from "../../api/files/types";
 import { TRoomSecurity } from "../../api/rooms/types";
@@ -42,11 +42,33 @@ type THeaderBackButton =
   | {
       onBackClick: () => void;
       withoutBackButton: false;
+      withoutBorder: false;
     }
   | {
       onBackClick?: undefined;
       withoutBackButton?: undefined;
+      withoutBorder: undefined;
     };
+
+export type TInfoBarData = {
+  title: string;
+  description: string;
+  icon?: string;
+  onClose?: VoidFunction;
+};
+
+export type TInfoBar = {
+  withInfoBar?: boolean;
+  infoBarData?: TInfoBarData;
+};
+
+export type InfoBarProps = {
+  visible: boolean;
+};
+
+export type BreadCrumbsProps = {
+  visible?: boolean;
+};
 
 export type HeaderProps = {
   headerLabel: string;
@@ -285,6 +307,7 @@ export type TRenderCustomItem = (
 ) => React.ReactNode | null;
 
 export type SelectorProps = TSelectorHeader &
+  TInfoBar &
   TSelectorInfo &
   TSelectorTabs &
   TSelectorSelectAll &
@@ -398,6 +421,9 @@ type TSelectorItemEmpty = {
   onAcceptInput?: undefined;
   onCancelInput?: undefined;
   placeholder?: undefined;
+
+  isRoomsOnly?: undefined;
+  createDefineRoomType?: undefined;
 };
 
 export type TSelectorItemUser = MergeTypes<
@@ -475,6 +501,9 @@ export type TSelectorItemNew = MergeTypes<
     dropDownItems?: React.ReactElement[];
     onCreateClick?: VoidFunction;
     onBackClick: VoidFunction;
+
+    isRoomsOnly?: boolean;
+    createDefineRoomType?: RoomsType;
   }
 >;
 
@@ -522,6 +551,8 @@ export type Data = {
   renderCustomItem?: TRenderCustomItem;
   setInputItemVisible: (value: boolean) => void;
   inputItemVisible: boolean;
+  savedInputValue: Nullable<string>;
+  setSavedInputValue: (value: Nullable<string>) => void;
 };
 
 export interface ItemProps {

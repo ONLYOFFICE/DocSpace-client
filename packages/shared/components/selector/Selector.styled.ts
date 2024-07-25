@@ -63,7 +63,7 @@ const StyledSelector = styled.div`
   overflow: hidden;
 `;
 
-const StyledHeader = styled.div`
+const StyledHeader = styled.div<{ withoutBorder: boolean }>`
   width: calc(100% - 32px);
   min-height: 53px;
   height: 53px;
@@ -71,7 +71,10 @@ const StyledHeader = styled.div`
 
   padding: 0 16px;
 
-  border-bottom: ${(props) => props.theme.selector.border};
+  ${(props) =>
+    props.withoutBorder
+      ? "border-bottom: none;"
+      : `border-bottom: ${props.theme.selector.border};`}
 
   display: flex;
   align-items: center;
@@ -115,7 +118,7 @@ const StyledBody = styled.div<{
         ? `calc(100% - 16px - ${props.headerHeight}px)`
         : `calc(100% - 16px)`};
 
-  padding: ${({ withTabs }) => (withTabs ? "8px 0 0 0" : "16px 0 0 0")};
+  padding: ${({ withTabs }) => (withTabs ? "0" : "16px 0 0 0")};
 
   .search-input,
   .search-loader {
@@ -133,6 +136,10 @@ const StyledBody = styled.div<{
     padding: 0 16px;
 
     color: ${(props) => props.theme.selector.bodyDescriptionText};
+  }
+
+  .selector_info-bar {
+    margin: 0px 20px 16px;
   }
 `;
 
@@ -349,6 +356,65 @@ const StyledEmptyScreen = styled.div<{ withSearch: boolean }>`
   }
 `;
 
+const StyledNewEmptyScreen = styled.section`
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  padding: 0 28px;
+
+  box-sizing: border-box;
+
+  .empty-image {
+    margin-top: 64px;
+  }
+
+  .empty-header {
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 700;
+    text-align: center;
+
+    margin: 0;
+
+    margin-top: 32px;
+  }
+
+  .empty-description {
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+
+    margin-top: 8px;
+
+    color: ${(props) => props.theme.selector.emptyScreen.pressedButtonColor};
+  }
+
+  .empty_button-wrapper {
+    display: flex;
+    justify-content: flex-start;
+
+    align-self: flex-start;
+
+    align-items: center;
+    gap: 16px;
+
+    padding: 12px 0;
+    margin-top: 16px;
+  }
+
+  .empty-button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .empty-button-label {
+    cursor: pointer;
+  }
+`;
+
 const StyledBreadCrumbs = styled.div<{
   itemsCount: number;
   gridTemplateColumns: string;
@@ -431,6 +497,8 @@ const StyledFooter = styled.div<{
         : "73px"};
 
   padding: 0 16px;
+
+  background-color: ${(props) => props.theme.backgroundColor};
 
   border-top: ${(props) => props.theme.selector.border};
 
@@ -576,6 +644,7 @@ StyledBody.defaultProps = { theme: Base };
 StyledSelectAll.defaultProps = { theme: Base };
 StyledItem.defaultProps = { theme: Base };
 StyledEmptyScreen.defaultProps = { theme: Base };
+StyledNewEmptyScreen.defaultProps = { theme: Base };
 StyledArrowRightSvg.defaultProps = { theme: Base };
 StyledComboBox.defaultProps = { theme: Base };
 StyledInfo.defaultProps = { theme: Base };
@@ -602,4 +671,5 @@ export {
   StyledAccessSelector,
   StyledInputWrapper,
   StyledCreateDropDown,
+  StyledNewEmptyScreen,
 };

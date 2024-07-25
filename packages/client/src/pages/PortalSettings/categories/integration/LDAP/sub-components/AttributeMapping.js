@@ -35,13 +35,14 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 //import { ComboBox } from "@docspace/shared/components/combobox";
 // import { EmployeeType } from "@docspace/shared/enums";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
+
 import AccessSelector from "SRC_DIR/components/AccessSelector";
 import { isMobile } from "@docspace/shared/utils";
+import LdapFieldComponent from "./LdapFieldComponent";
 
 const FIRST_NAME = "firstName",
   SECOND_NAME = "secondName",
-  MAIL = "mailName",
+  MAIL = "mail",
   AVATAR = "avatarAttribute",
   QUOTA = "userQuotaLimit";
 
@@ -108,108 +109,105 @@ const AttributeMapping = (props) => {
         <HelpButton tooltipContent={t("LdapAdvancedSettingsTooltip")} />
       </div>
       <Box className="ldap_attribute-mapping">
-        <div>
-          <FieldContainer
-            style={FIELD_STYLE}
-            isVertical
-            labelVisible={true}
-            errorMessage={t("Common:EmptyFieldError")}
+        <FieldContainer
+          style={FIELD_STYLE}
+          isVertical
+          labelVisible={true}
+          errorMessage={t("Common:EmptyFieldError")}
+          hasError={errors.firstName}
+          labelText={t("LdapFirstName")}
+          isRequired
+        >
+          <LdapFieldComponent
+            name={FIRST_NAME}
             hasError={errors.firstName}
-            labelText={t("LdapFirstName")}
-            isRequired
-          >
-            <TextInput
-              name={FIRST_NAME}
-              hasError={errors.firstName}
-              onChange={onChangeValue}
-              value={firstName}
-              scale
-              isDisabled={!isLdapEnabled || isUIDisabled}
-              tabIndex={7}
-            />
-          </FieldContainer>
+            onChange={onChangeValue}
+            value={firstName}
+            scale
+            isDisabled={!isLdapEnabled || isUIDisabled}
+            tabIndex={7}
+          />
+        </FieldContainer>
 
-          <FieldContainer
-            style={FIELD_STYLE}
-            isVertical
-            labelVisible={true}
-            errorMessage={t("Common:EmptyFieldError")}
+        <FieldContainer
+          style={FIELD_STYLE}
+          isVertical
+          labelVisible={true}
+          errorMessage={t("Common:EmptyFieldError")}
+          hasError={errors.mail}
+          labelText={t("LdapMail")}
+          isRequired
+        >
+          <LdapFieldComponent
+            name={MAIL}
             hasError={errors.mail}
-            labelText={t("LdapMail")}
-            isRequired
-          >
-            <TextInput
-              name={MAIL}
-              hasError={errors.mail}
-              onChange={onChangeValue}
-              value={mail}
-              scale
-              isDisabled={!isLdapEnabled || isUIDisabled}
-              tabIndex={9}
-            />
-          </FieldContainer>
+            onChange={onChangeValue}
+            value={mail}
+            scale
+            isDisabled={!isLdapEnabled || isUIDisabled}
+            tabIndex={9}
+          />
+        </FieldContainer>
 
-          <FieldContainer
-            style={FIELD_STYLE}
-            isVertical
-            labelVisible={true}
+        <FieldContainer
+          style={FIELD_STYLE}
+          isVertical
+          labelVisible={true}
+          hasError={errors.userQuotaLimit}
+          labelText={t("LdapQuota")}
+          tooltipContent={t("LdapUserQuotaTooltip")}
+          inlineHelpButton
+        >
+          <TextInput
+            name={QUOTA}
             hasError={errors.userQuotaLimit}
-            labelText={t("LdapQuota")}
-            tooltipContent={t("LdapUserQuotaTooltip")}
-            inlineHelpButton
-          >
-            <TextInput
-              name={QUOTA}
-              hasError={errors.userQuotaLimit}
-              onChange={onChangeValue}
-              value={userQuotaLimit}
-              scale
-              isDisabled={!isLdapEnabled || isUIDisabled}
-              tabIndex={11}
-            />
-          </FieldContainer>
-        </div>
-        <div>
-          <FieldContainer
-            style={FIELD_STYLE}
-            isVertical
-            labelVisible={true}
-            errorMessage={t("Common:EmptyFieldError")}
-            hasError={errors.secondName}
-            labelText={t("LdapSecondName")}
-            isRequired
-          >
-            <TextInput
-              name={SECOND_NAME}
-              hasError={errors.secondName}
-              onChange={onChangeValue}
-              value={secondName}
-              scale
-              isDisabled={!isLdapEnabled || isUIDisabled}
-              tabIndex={8}
-            />
-          </FieldContainer>
+            onChange={onChangeValue}
+            value={userQuotaLimit}
+            scale
+            isDisabled={!isLdapEnabled || isUIDisabled}
+            tabIndex={11}
+          />
+        </FieldContainer>
 
-          <FieldContainer
-            style={FIELD_STYLE}
-            isVertical
-            labelVisible={true}
+        <FieldContainer
+          style={FIELD_STYLE}
+          isVertical
+          labelVisible={true}
+          errorMessage={t("Common:EmptyFieldError")}
+          hasError={errors.secondName}
+          labelText={t("LdapSecondName")}
+          isRequired
+        >
+          <LdapFieldComponent
+            name={SECOND_NAME}
+            hasError={errors.secondName}
+            onChange={onChangeValue}
+            value={secondName}
+            scale
+            isDisabled={!isLdapEnabled || isUIDisabled}
+            tabIndex={8}
+          />
+        </FieldContainer>
+
+        <FieldContainer
+          style={FIELD_STYLE}
+          isVertical
+          labelVisible={true}
+          hasError={errors.avatarAttribute}
+          labelText={t("LdapAvatar")}
+        >
+          <TextInput
+            name={AVATAR}
             hasError={errors.avatarAttribute}
-            labelText={t("LdapAvatar")}
-          >
-            <TextInput
-              name={AVATAR}
-              hasError={errors.avatarAttribute}
-              onChange={onChangeValue}
-              value={avatarAttribute}
-              scale
-              isDisabled={!isLdapEnabled || isUIDisabled}
-              tabIndex={10}
-            />
-          </FieldContainer>
-        </div>
+            onChange={onChangeValue}
+            value={avatarAttribute}
+            scale
+            isDisabled={!isLdapEnabled || isUIDisabled}
+            tabIndex={10}
+          />
+        </FieldContainer>
       </Box>
-      <Box marginProp="0 0 24px 0">
+      <Box marginProp="24px 0 24px 0">
         <Box
           displayProp="flex"
           flexDirection="column"
@@ -222,7 +220,7 @@ const AttributeMapping = (props) => {
             </Text>
             <HelpButton
               tooltipContent={t("LdapUserTypeTooltip", {
-                productName: PRODUCT_NAME,
+                productName: t("Common:ProductName"),
               })}
             />
           </Box>
@@ -230,7 +228,7 @@ const AttributeMapping = (props) => {
             {t("LdapUsersTypeInfo")}
           </Text>
         </Box>
-        <Box widthProp="356px">
+        <Box className="access-selector-wrapper">
           <AccessSelector
             className="add-manually-access"
             t={t}
@@ -245,6 +243,7 @@ const AttributeMapping = (props) => {
             tabIndex={12}
             directionX="left"
           />
+          <div></div>
         </Box>
       </Box>
     </>

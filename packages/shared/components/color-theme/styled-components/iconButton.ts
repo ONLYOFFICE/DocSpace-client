@@ -43,7 +43,7 @@ const StyledIconTheme = styled(StyledIcon)<
     }
   }
 
-  @media (hover: hover) {
+  @media (hover: hover) and (pointer: fine) {
     &:hover {
       svg {
         path {

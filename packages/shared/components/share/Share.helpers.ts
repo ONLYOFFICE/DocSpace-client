@@ -36,7 +36,6 @@ import { ShareAccessRights } from "../../enums";
 import { TTranslation } from "../../types";
 import { TAvailableExternalRights } from "../../api/files/types";
 import { TOption } from "../combobox";
-import { PRODUCT_NAME } from "../../constants";
 
 export const getShareOptions = (t: TTranslation) => {
   return [
@@ -48,7 +47,9 @@ export const getShareOptions = (t: TTranslation) => {
     {
       internal: true,
       key: "users",
-      label: t("Common:SpaceUsersOnly", { productName: PRODUCT_NAME }),
+      label: t("Common:SpaceUsersOnly", {
+        productName: t("Common:ProductName"),
+      }),
     },
   ];
 };

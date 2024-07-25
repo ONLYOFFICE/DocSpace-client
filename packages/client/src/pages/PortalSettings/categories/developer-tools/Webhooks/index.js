@@ -42,6 +42,7 @@ import { useTranslation } from "react-i18next";
 
 import { DeleteWebhookDialog } from "./sub-components/DeleteWebhookDialog";
 import { toastr } from "@docspace/shared/components/toast";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const MainWrapper = styled.div`
   width: 100%;
@@ -78,7 +79,6 @@ const Webhooks = (props) => {
     loadWebhooks,
     addWebhook,
     isWebhooksEmpty,
-    setDocumentTitle,
     currentWebhook,
     editWebhook,
     deleteWebhook,
@@ -185,14 +185,12 @@ export default inject(({ webhooksStore, authStore }) => {
     editWebhook,
     deleteWebhook,
   } = webhooksStore;
-  const { setDocumentTitle } = authStore;
 
   return {
     state,
     loadWebhooks,
     addWebhook,
     isWebhooksEmpty,
-    setDocumentTitle,
     currentWebhook,
     editWebhook,
     deleteWebhook,

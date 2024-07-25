@@ -1076,62 +1076,70 @@ class FilesActionStore {
     }
   };
 
-  setPinAction = (action, id, t) => {
-    const { pinRoom, unpinRoom, updateRoomPin, setSelected } = this.filesStore;
-
-    const { infoPanelSelection, setInfoPanelSelection } = this.infoPanelStore;
+  setPinAction = async (action, id, t) => {
+    const { pinRoom, unpinRoom } = this.filesStore;
 
     const items = Array.isArray(id) ? id : [id];
 
     const actions = [];
     const operationId = uniqueid("operation_");
+    const withFinishedOperation = [];
+    let isError = false;
 
-    switch (action) {
-      case "pin":
-        items.forEach((item) => {
-          updateRoomPin(item);
-          actions.push(pinRoom(item));
-        });
+    const updatingFolderList = (items, isPin = false) => {
+      if (items.length === 0) return;
 
-        return Promise.all(actions)
-          .then(() => {
-            this.updateCurrentFolder(null, items, null, operationId);
-            if (infoPanelSelection) {
-              setInfoPanelSelection({ ...infoPanelSelection, pinned: true });
-            }
-          })
-          .then(() => setSelected("close"))
-          .then(() =>
-            toastr.success(
-              items.length > 1
-                ? t("RoomsPinned", { count: items.length })
-                : t("RoomPinned"),
-            ),
-          )
-          .catch((error) => console.log(error));
-      case "unpin":
-        items.forEach((item) => {
-          updateRoomPin(item);
-          actions.push(unpinRoom(item));
-        });
-        return Promise.all(actions)
-          .then(() => {
-            this.updateCurrentFolder(null, items, null, operationId);
-            if (selection) {
-              setInfoPanelSelection({ ...selection, pinned: false });
-            }
-          })
-          .then(() => setSelected("close"))
-          .then(() => {
-            toastr.success(
-              items.length > 1
-                ? t("RoomsUnpinned", { count: items.length })
-                : t("RoomUnpinned"),
-            );
-          })
-          .catch((error) => console.log(error));
-      default:
-        return;
+      this.updateCurrentFolder(null, items, true, operationId);
+
+      const itemCount = { count: items.length };
+
+      const translationForOneItem = isPin ? t("RoomPinned") : t("RoomUnpinned");
+      const translationForSeverals = isPin
+        ? t("RoomsPinned", { ...itemCount })
+        : t("RoomsUnpinned", { ...itemCount });
+
+      toastr.success(
+        items.length > 1 ? translationForSeverals : translationForOneItem,
+      );
+    };
+
+    const isPin = action === "pin";
+
+    items.forEach((item) => {
+      actions.push(isPin ? pinRoom(item) : unpinRoom(item));
+    });
+
+    if (isPin) {
+      const result = await Promise.allSettled(actions);
+
+      if (!result) return;
+
+      result.forEach((res) => {
+        if (res.value) {
+          withFinishedOperation.push(res.value);
+        }
+        if (!res.value) isError = true;
+      });
+
+      updatingFolderList(withFinishedOperation, isPin);
+
+      isError && toastr.error(t("RoomsPinLimitMessage"));
+
+      return;
+    }
+
+    if (action === "unpin") {
+      const result = await Promise.allSettled(actions);
+      if (!result) return;
+
+      result.forEach((result) => {
+        if (result.value) {
+          withFinishedOperation.push(result.value);
+        }
+        if (!result.value) toastr.error(result.reason.response?.data?.error);
+      });
+
+      updatingFolderList(withFinishedOperation, isPin);
     }
   };
 
@@ -1467,7 +1475,7 @@ class FilesActionStore {
     return titleWithoutExtension;
   };
 
-  checkAndOpenLocationAction = async (item) => {
+  checkAndOpenLocationAction = async (item, actionType) => {
     const { categoryType } = this.filesStore;
     const { myRoomsId, myFolderId, archiveRoomsId, recycleBinFolderId } =
       this.treeFoldersStore;
@@ -1479,7 +1487,8 @@ class FilesActionStore {
     };
 
     const { title, fileExst } = item;
-    const parentId = item.parentId || item.toFolderId || recycleBinFolderId;
+    const parentId =
+      item.parentId || item.toFolderId || item.folderId || recycleBinFolderId;
     const parentTitle = item.parentTitle || item.toFolderTitle;
 
     const isRoot = [
@@ -1498,7 +1507,11 @@ class FilesActionStore {
       rootFolderType,
     };
 
-    const url = getCategoryUrl(categoryType, parentId);
+    const isTrash = actionType === "delete";
+    const url = getCategoryUrl(
+      isTrash ? CategoryType.Trash : categoryType,
+      parentId,
+    );
 
     const newFilter = FilesFilter.getDefault();
 
@@ -2508,6 +2521,12 @@ class FilesActionStore {
 
       clearFiles();
 
+      if (window.location.search.includes("group")) {
+        setSelectedNode(["accounts", "groups", "filter"]);
+        return window.DocSpace.navigate(`accounts/groups?${params}`, {
+          replace: true,
+        });
+      }
       setSelectedNode(["accounts", "people", "filter"]);
 
       if (fromHotkeys) return;
@@ -2663,7 +2682,7 @@ class FilesActionStore {
       content: oneFolder,
     };
 
-    this.uploadDataStore.itemOperationToFolder(operationData);
+    return this.uploadDataStore.itemOperationToFolder(operationData);
   };
 
   onLeaveRoom = (t, isOwner = false) => {

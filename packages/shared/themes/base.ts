@@ -1403,6 +1403,10 @@ export const getBaseTheme = () => {
     progressBar: {
       backgroundColor: "#F3F4F4",
 
+      animation: {
+        background: "#4781D1",
+      },
+
       percent: {
         background: "#4781D1",
       },
@@ -3376,7 +3380,13 @@ export const getBaseTheme = () => {
 
     completedForm: {
       linkColor: "#4781D1",
-      descriptionColor: gray,
+      descriptionColor: grayMain,
+
+      labelColor: globalColors.grayMain,
+
+      box: {
+        background: globalColors.grayLight,
+      },
     },
   };
 };

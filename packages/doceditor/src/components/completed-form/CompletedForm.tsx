@@ -142,10 +142,6 @@ export const CompletedForm = ({
     return `${origin}${path}${filter.toUrlParams()}`;
   };
 
-  const setHistory = (url: string) => {
-    history.pushState({}, "", url);
-  };
-
   const copyLinkFile = async () => {
     const origin = window.location.origin;
 
@@ -161,14 +157,12 @@ export const CompletedForm = ({
 
   const gotoCompleteFolder = () => {
     const url = getFolderUrl(completedForm.folderId, false);
-    setHistory(url);
-    window.location.replace(url);
+    window.location.assign(url);
   };
 
   const handleBackToRoom = () => {
     const url = getFolderUrl(roomId, isAnonim);
-    setHistory(url);
-    window.location.replace(url);
+    window.location.assign(url);
   };
 
   const fillAgainSearchParams = new URLSearchParams({

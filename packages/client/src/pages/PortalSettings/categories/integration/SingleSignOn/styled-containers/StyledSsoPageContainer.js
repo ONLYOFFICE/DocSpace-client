@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 
 const StyledSsoPage = styled.div`
   max-width: 100%;
@@ -147,8 +146,6 @@ const StyledSsoPage = styled.div`
             `}
     }
   }
-
-  ${(props) => !props.isSettingPaid && UnavailableStyles}
 `;
 
 export default StyledSsoPage;

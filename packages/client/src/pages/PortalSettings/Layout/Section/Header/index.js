@@ -74,8 +74,6 @@ const HeaderContainer = styled.div`
       white-space: nowrap;
       overflow: hidden;
       color: ${(props) => props.theme.client.settings.headerTitleColor};
-      display: flex;
-      align-items: center;
     }
   }
   .action-wrapper {
@@ -341,13 +339,6 @@ const SectionHeaderContent = (props) => {
     },
   ];
 
-  const pathname = location.pathname;
-
-  const isServicePage =
-    pathname.includes("google") ||
-    pathname.includes("nextcloud") ||
-    pathname.includes("onlyoffice");
-
   return (
     <StyledContainer isHeaderVisible={isHeaderVisible}>
       {isHeaderVisible ? (
@@ -365,17 +356,10 @@ const SectionHeaderContent = (props) => {
         <LoaderSectionHeader />
       ) : (
         <HeaderContainer>
-          {!isCategoryOrHeader && arrayOfParams[0] && (
-            <IconButton
-              iconName={ArrowPathReactSvgUrl}
-              size="17"
-              isFill={true}
-              onClick={onBackToParent}
-              className="arrow-button"
-            />
-          )}
-          <Headline type="content" truncate={true}>
-            {isMobile() && isServicePage && (
+          {!isCategoryOrHeader &&
+            arrayOfParams[0] &&
+            (isMobile() ||
+              window.location.href.indexOf("/javascript-sdk/") > -1) && (
               <IconButton
                 iconName={ArrowPathReactSvgUrl}
                 size="17"
@@ -384,20 +368,25 @@ const SectionHeaderContent = (props) => {
                 className="arrow-button"
               />
             )}
-            {t(header, {
-              organizationName: t("Common:OrganizationName"),
-            })}
-            {isNeedPaidIcon ? (
-              <Badge
-                backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
-                label={t("Common:Paid")}
-                fontWeight="700"
-                className="settings-section_badge"
-                isPaidBadge={true}
-              />
-            ) : (
-              ""
-            )}
+          <Headline type="content" truncate={true}>
+            <div className="settings-section_header">
+              <div className="header">
+                {t(header, {
+                  organizationName: t("Common:OrganizationName"),
+                })}
+              </div>
+              {isNeedPaidIcon ? (
+                <Badge
+                  backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
+                  label={t("Common:Paid")}
+                  fontWeight="700"
+                  className="settings-section_badge"
+                  isPaidBadge={true}
+                />
+              ) : (
+                ""
+              )}
+            </div>
           </Headline>
           <div className="tariff-bar">
             <TariffBar />

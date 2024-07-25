@@ -34,10 +34,20 @@ import UsersRow from "./UsersRow";
 import { Row } from "@docspace/shared/components/row";
 import { Text } from "@docspace/shared/components/text";
 
+const StyledRowContainer = styled(RowContainer)`
+  margin: 0 0 20px;
+`;
+
 const StyledRow = styled(Row)`
   box-sizing: border-box;
   height: 40px;
   min-height: 40px;
+
+  .row-header-title {
+    color: ${(props) => props.theme.client.settings.migration.tableHeaderText};
+    font-weight: 600;
+    font-size: 12px;
+  }
 
   @media ${tablet} {
     .row_content {
@@ -76,7 +86,7 @@ const RowView = (props) => {
     checkedUsers.withoutEmail.length !== usersWithFilledEmails.length;
 
   return (
-    <RowContainer useReactWindow={false}>
+    <StyledRowContainer useReactWindow={false}>
       <StyledRow
         sectionWidth={sectionWidth}
         checked={
@@ -87,9 +97,7 @@ const RowView = (props) => {
         indeterminate={isIndeterminate}
         isDisabled={usersWithFilledEmails.length === 0}
       >
-        <Text color="#a3a9ae" fontWeight={600} fontSize="12px">
-          {t("Common:Name")}
-        </Text>
+        <Text className="row-header-title">{t("Common:Name")}</Text>
       </StyledRow>
       {accountsData.map((data) => (
         <UsersRow
@@ -103,7 +111,7 @@ const RowView = (props) => {
           setOpenedEmailKey={setOpenedEmailKey}
         />
       ))}
-    </RowContainer>
+    </StyledRowContainer>
   );
 };
 

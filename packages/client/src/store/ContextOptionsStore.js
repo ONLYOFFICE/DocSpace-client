@@ -116,6 +116,13 @@ const LOADER_TIMER = 500;
 let loadingTime;
 let timer;
 
+const systemFolders = [
+  FolderType.InProgress,
+  FolderType.Done,
+  FolderType.SubFolderDone,
+  FolderType.SubFolderInProgress,
+];
+
 class ContextOptionsStore {
   settingsStore;
   dialogsStore;
@@ -409,7 +416,9 @@ class ContextOptionsStore {
 
     const isShared = shared || sharedItem;
 
-    if (isShared && !isArchive) {
+    const isSystemFolder = systemFolders.includes(item.type);
+
+    if (isShared && !isArchive && !isSystemFolder) {
       try {
         const itemLink = item.isFolder
           ? await getFolderLink(item.id)

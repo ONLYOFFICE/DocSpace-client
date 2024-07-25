@@ -24,18 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { SETTINGS_SIZE } from "./Table.constants";
+import { SearchLoader } from "@docspace/shared/skeletons/selector";
+import React from "react";
+import { MemberLoader } from "@docspace/shared/skeletons/info-panel/body/views/MembersLoader";
 
-export const getSubstring = (str: string) => +str.substring(0, str.length - 2);
+interface ModalBodyLoaderProps {
+  withSearch: boolean;
+}
 
-export const checkingForUnfixedSize = (
-  item: string,
-  defaultColumnSize: number,
-) => {
+export const ModalBodyLoader = ({ withSearch }: ModalBodyLoaderProps) => {
   return (
-    item !== "24px" && // TODO: SETTINGS_SIZE is not imported
-    item !== `${SETTINGS_SIZE}px` &&
-    item !== `${defaultColumnSize}px` &&
-    item !== "0px"
+    <div style={{ paddingTop: withSearch ? "16px" : "0" }}>
+      {withSearch && <SearchLoader />}
+      <div style={{ paddingInline: "16px" }}>
+        <MemberLoader count={25} />
+      </div>
+    </div>
   );
 };

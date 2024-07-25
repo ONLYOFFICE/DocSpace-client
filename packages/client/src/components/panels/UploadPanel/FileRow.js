@@ -96,14 +96,8 @@ const StyledFileRow = styled(Row)`
   .password-input {
     position: absolute;
     top: 48px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            right: 16px;
-          `
-        : css`
-            left: 16px;
-          `}
+    left: 0px;
+    right: 0px;
     max-width: 470px;
     width: calc(100% - 16px);
     display: flex;

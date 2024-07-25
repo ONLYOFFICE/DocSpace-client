@@ -24,6 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+export const enum ScopeType {
+  read = "read",
+  write = "write",
+  openid = "openid",
+}
+
+export const enum ScopeGroup {
+  files = "files",
+  accounts = "accounts",
+  profiles = "profiles",
+  rooms = "rooms",
+  openid = "openid",
+}
+
+export const enum AuthenticationMethod {
+  none = "none",
+  "client_secret_post" = "client_secret_post",
+}
+
 /**
  * Enum for employee activation status.
  * @readonly
@@ -123,8 +142,15 @@ export const enum FilterType {
   ArchiveOnly = 10,
   ByExtension = 11,
   MediaOnly = 12,
-  OFormTemplateOnly = 18,
-  OFormOnly = 19,
+  FillingFormsRooms = 13,
+  EditingRooms = 14,
+  ReviewRooms = 15,
+  ReadOnlyRooms = 16,
+  CustomRooms = 17,
+  PublicRooms = 20,
+  FormRooms = 21,
+  Pdf = 22,
+  PDFForm = 23,
 }
 
 /**
@@ -540,7 +566,6 @@ export const enum FilesSelectorExtendedFilterTypes {
   Media = "Media",
   Archives = "Archives",
   AllFiles = "AllFiles",
-  FormTemplates = "FormTemplates",
   Forms = "Forms",
 }
 
@@ -580,4 +605,13 @@ export const enum LDAPCertificateProblem {
   CertWrongUsage = -2146762480,
   CertUntrustedCa = -2146762478,
   CertUnrecognizedError = -2146762477,
+}
+
+export enum FileExtensions {
+  PDF = "pdf",
+  DOC = "doc",
+  DOCX = "docx",
+  DOCXF = "docxf",
+  XLSX = "xlsx",
+  PPTX = "pptx",
 }

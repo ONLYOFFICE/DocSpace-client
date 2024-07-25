@@ -3,6 +3,7 @@ import { P, match } from "ts-pattern";
 
 import {
   FilesSelectorFilterTypes,
+  FilterType,
   FolderType,
   RoomsType,
   ShareAccessRights,
@@ -46,7 +47,6 @@ import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TFolderSecurity } from "@docspace/shared/api/files/types";
 import type { EmptyViewItemType } from "@docspace/shared/components/empty-view";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 import type {
   ExtensiontionType,
@@ -63,6 +63,7 @@ export const getDescription = (
   isFolder: boolean,
   folderType: Nullable<FolderType>,
   parentRoomType: Nullable<FolderType>,
+  isArchiveFolderRoot: boolean,
 ): string => {
   const isCollaborator = access === ShareAccessRights.Collaborator;
 
@@ -88,18 +89,24 @@ export const getDescription = (
         ],
         () => t("Files:EmptyFormSubFolderHeaderText"),
       )
-      .with([FolderType.FormRoom, null, P.when(() => isNotAdmin)], () =>
-        t("EmptyView:FormFolderDefaultUserDescription"),
+      .with(
+        [
+          FolderType.FormRoom,
+          null,
+          P.when(() => isNotAdmin || isArchiveFolderRoot),
+        ],
+        () => t("EmptyView:FormFolderDefaultUserDescription"),
       )
       .with([FolderType.FormRoom, null, P._], () =>
         t("EmptyView:FormFolderDefaultDescription", {
-          portalName: PRODUCT_NAME,
+          productName: t("Common:ProductName"),
         }),
       )
       .otherwise(() => "");
   }
 
-  if (isNotAdmin) return t("EmptyView:UserEmptyDescription");
+  if (isNotAdmin || isArchiveFolderRoot)
+    return t("EmptyView:UserEmptyDescription");
 
   if (isCollaborator) return t("EmptyView:CollaboratorEmptyDesciprtion");
 
@@ -113,6 +120,7 @@ export const getTitle = (
   isFolder: boolean,
   folderType: Nullable<FolderType>,
   parentRoomType: Nullable<FolderType>,
+  isArchiveFolderRoot: boolean,
 ): string => {
   const isCollaborator = access === ShareAccessRights.Collaborator;
 
@@ -135,8 +143,13 @@ export const getTitle = (
       .with([P._, FolderType.SubFolderInProgress, P._], () =>
         t("Files:EmptyFormSubFolderProgressDescriptionText"),
       )
-      .with([FolderType.FormRoom, null, P.when(() => isNotAdmin)], () =>
-        t("EmptyView:FormFolderDefaultUserTitle"),
+      .with(
+        [
+          FolderType.FormRoom,
+          null,
+          P.when(() => isNotAdmin || isArchiveFolderRoot),
+        ],
+        () => t("EmptyView:FormFolderDefaultUserTitle"),
       )
       .with([FolderType.FormRoom, null, P._], () =>
         t("EmptyView:FormFolderDefaultTitle"),
@@ -146,7 +159,7 @@ export const getTitle = (
 
   if (isCollaborator) return t("EmptyView:CollaboratorEmptyTitle");
 
-  if (isNotAdmin) return t("EmptyView:UserEmptyTitle");
+  if (isNotAdmin || isArchiveFolderRoot) return t("Files:EmptyScreenFolder");
 
   switch (type) {
     case RoomsType.FormRoom:
@@ -291,7 +304,7 @@ const helperOptions = (
   const createUploadFromDocSpace = (
     title: string,
     description: string,
-    filterType: FilesSelectorFilterTypes,
+    filterType: FilesSelectorFilterTypes | FilterType,
   ) => ({
     title,
     description,
@@ -317,6 +330,7 @@ export const getOptions = (
   isFolder: boolean,
   folderType: Nullable<FolderType>,
   parentRoomType: Nullable<FolderType>,
+  isArchiveFolderRoot: boolean,
   actions: OptionActions,
 ): EmptyViewItemType[] => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
@@ -336,15 +350,15 @@ export const getOptions = (
 
   const uploadPDFFromDocSpace = createUploadFromDocSpace(
     t("EmptyView:UploadFromPortalTitle", {
-      productName: PRODUCT_NAME,
+      productName: t("Common:ProductName"),
     }),
     t("EmptyView:UploadPDFFormOptionDescription"),
-    FilesSelectorFilterTypes.PDF,
+    FilterType.PDFForm,
   );
 
   const uploadAllFromDocSpace = createUploadFromDocSpace(
     t("EmptyView:UploadFromPortalTitle", {
-      productName: PRODUCT_NAME,
+      productName: t("Common:ProductName"),
     }),
     t("EmptyView:UploadFromPortalDescription"),
     // TODO: need fix selector
@@ -416,6 +430,8 @@ export const getOptions = (
       },
     ],
   };
+
+  if (isArchiveFolderRoot) return [];
 
   if (isFolder) {
     return match([parentRoomType, folderType, access])

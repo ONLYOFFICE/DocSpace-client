@@ -113,6 +113,8 @@ const SubMenu = (props: {
 
     if (items && isMobileDevice) {
       setActiveItem(item);
+
+      e.stopPropagation();
       return;
     }
 
@@ -311,6 +313,12 @@ const SubMenu = (props: {
       onItemClick(e, item);
     };
 
+    const onMouseDown = (e: React.MouseEvent) => {
+      if (e.button !== 1) return;
+
+      onClick(e);
+    };
+
     let content = (
       <a
         href={item.url || "#"}
@@ -368,6 +376,7 @@ const SubMenu = (props: {
           className={className || ""}
           style={{ ...item.style, ...style }}
           onClick={onClick}
+          onMouseDown={onMouseDown}
           onMouseEnter={(e) => onItemMouseEnter(e, item)}
         >
           {content}
@@ -389,6 +398,7 @@ const SubMenu = (props: {
         className={className || ""}
         style={{ ...item.style, ...style }}
         onClick={onClick}
+        onMouseDown={onMouseDown}
         onMouseEnter={(e) => onItemMouseEnter(e, item)}
       >
         {content}

@@ -33,10 +33,6 @@ import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { ConflictResolveType } from "@docspace/shared/enums";
 
-import DialogsStore from "SRC_DIR/store/DialogsStore";
-import UploadDataStore from "SRC_DIR/store/UploadDataStore";
-import FilesStore from "SRC_DIR/store/FilesStore";
-
 import {
   ConflictResolveDialogProps,
   TActiveItem,
@@ -61,6 +57,8 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     setRestoreAllPanelVisible,
     setMoveToPublicRoomVisible,
     handleFilesUpload,
+    setShareCollectSelector,
+    openFileAction,
   } = props;
 
   const { t, ready } = useTranslation(["Common"]);
@@ -74,6 +72,8 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     isCopy,
     translations,
     isUploadConflict,
+    selectedFolder,
+    fromShareCollectSelector,
   } = conflictResolveDialogData;
 
   const onClose = () => {
@@ -87,6 +87,7 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     setCopyPanelVisible(false);
     setRestoreAllPanelVisible(false);
     setMoveToPublicRoomVisible(false);
+    setShareCollectSelector(false);
   };
 
   const differenceArray = (
@@ -142,6 +143,10 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     setSelected("none");
     onClosePanels();
     try {
+      if (fromShareCollectSelector) {
+        openFileAction(selectedFolder, t);
+      }
+
       sessionStorage.setItem("filesSelectorPath", `${destFolderId}`);
       await itemOperationToFolder(data);
     } catch (error: unknown) {
@@ -234,16 +239,8 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
   );
 };
 
-export default inject(
-  ({
-    dialogsStore,
-    uploadDataStore,
-    filesStore,
-  }: {
-    dialogsStore: DialogsStore;
-    uploadDataStore: UploadDataStore;
-    filesStore: FilesStore;
-  }) => {
+export default inject<TStore>(
+  ({ dialogsStore, uploadDataStore, filesStore, filesActionsStore }) => {
     const {
       conflictResolveDialogVisible: visible,
       setConflictResolveDialogVisible,
@@ -254,7 +251,10 @@ export default inject(
       setRestoreAllPanelVisible,
       setCopyPanelVisible,
       setMoveToPublicRoomVisible,
+      setShareCollectSelector,
     } = dialogsStore;
+
+    const { openFileAction } = filesActionsStore;
 
     const { itemOperationToFolder, handleFilesUpload } = uploadDataStore;
     const {
@@ -284,6 +284,8 @@ export default inject(
       setCopyPanelVisible,
       setMoveToPublicRoomVisible,
       handleFilesUpload,
+      setShareCollectSelector,
+      openFileAction,
     };
   },
 )(observer(ConflictResolveDialog));

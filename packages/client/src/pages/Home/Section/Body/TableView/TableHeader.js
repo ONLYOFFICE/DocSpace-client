@@ -460,7 +460,6 @@ class FilesTableHeader extends React.Component {
       this.setState({
         columns,
         resetColumnsSize,
-        tableStorageName,
         columnStorageName,
         columnInfoPanelStorageName,
       });
@@ -468,7 +467,6 @@ class FilesTableHeader extends React.Component {
       this.state = {
         columns,
         resetColumnsSize,
-        tableStorageName,
         columnStorageName,
         columnInfoPanelStorageName,
       };
@@ -622,7 +620,6 @@ class FilesTableHeader extends React.Component {
       filter,
       roomsFilter,
       isRooms,
-      sectionWidth,
       firstElemChecked,
       sortingVisible,
       infoPanelVisible,
@@ -637,7 +634,6 @@ class FilesTableHeader extends React.Component {
     const {
       columns,
       resetColumnsSize,
-      tableStorageName,
       columnStorageName,
       columnInfoPanelStorageName,
     } = this.state;
@@ -655,7 +651,6 @@ class FilesTableHeader extends React.Component {
         columns={columns}
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
-        sectionWidth={sectionWidth}
         resetColumnsSize={resetColumnsSize}
         sortingVisible={sortingVisible}
         infoPanelVisible={infoPanelVisible}
@@ -664,7 +659,6 @@ class FilesTableHeader extends React.Component {
         setHideColumns={setHideColumns}
         settingsTitle={t("Files:TableSettingsTitle")}
         showSettings={isFrame ? showSettings : true}
-        tableStorageName={tableStorageName}
       />
     );
   }

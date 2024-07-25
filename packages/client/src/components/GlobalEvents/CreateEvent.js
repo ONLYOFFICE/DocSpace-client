@@ -68,6 +68,7 @@ const CreateEvent = ({
   setPortalTariff,
   withoutDialog,
   preview,
+  toForm,
   publicRoomKey,
   actionEdit,
   openOnNewPage,
@@ -175,6 +176,8 @@ const CreateEvent = ({
           if (actionEdit) {
             searchParams.append("action", "edit");
           }
+
+          if (toForm) searchParams.append("toForm", "true");
 
           if (publicRoomKey) {
             searchParams.append("share", publicRoomKey);

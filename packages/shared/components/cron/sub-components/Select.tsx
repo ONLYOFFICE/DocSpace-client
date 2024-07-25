@@ -118,6 +118,7 @@ export const Select = ({
         selectedOption={selectedOption}
         dropDownMaxHeight={dropDownMaxHeight}
         isDisabled={isDisabled}
+        directionY="both"
       />
     </SelectWrapper>
   );

@@ -3,6 +3,5 @@
   "FormFilling": "Ձևաթղթի լրացում",
   "LinkName": "Հղման անվանում",
   "ShareEmailBody": "Ձեզ տրվել է մատչում դեպի {{itemName}} փաստաթուղթ: Փաստաթուղթը հենց հիմա բացելու համար սեղմեք ստորև նշված հղումը՝ {{shareLink}}.",
-  "ShareEmailSubject": "Ձեզ տրվել է մատչում դեպի {{itemName}} փաստաթուղթ:",
-  "SharingSettingsTitle": "Համօգտագործման կարգավորումներ"
+  "ShareEmailSubject": "Ձեզ տրվել է մատչում դեպի {{itemName}} փաստաթուղթ:"
 }

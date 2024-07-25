@@ -55,7 +55,6 @@ import IndicatorLoader from "./components/IndicatorLoader";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 import DialogsWrapper from "./components/dialogs/DialogsWrapper";
 import useCreateFileError from "./Hooks/useCreateFileError";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 // import ReactSmartBanner from "./components/SmartBanner";
 
@@ -87,8 +86,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     version,
     pagesWithoutNavMenu,
     isFrame,
-
-    organizationName,
   } = rest;
 
   const theme = useTheme();
@@ -258,7 +255,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       headerText: t("Attention"),
       text: `${t("BarMaintenanceDescription", {
         targetDate: targetDate,
-        productName: `${organizationName} ${PRODUCT_NAME}`,
+        productName: `${t("Common:OrganizationName")} ${t("Common:ProductName")}`,
       })} ${t("BarMaintenanceDisclaimer")}`,
       isMaintenance: true,
       onAction: () => {
@@ -482,7 +479,6 @@ const ShellWrapper = inject(
       frameConfig,
       isPortalDeactivate,
       isPortalRestoring,
-      organizationName,
     } = settingsStore;
 
     const isBase = settingsStore.theme.isBase;
@@ -545,7 +541,6 @@ const ShellWrapper = inject(
       version,
       pagesWithoutNavMenu,
       isFrame,
-      organizationName,
     };
   },
 )(observer(Shell));

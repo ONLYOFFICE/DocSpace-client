@@ -57,6 +57,7 @@ const StyledWrapper = styled.div`
   }
 
   .checkbox-input {
+    width: fit-content;
     margin: 10px 8px 6px 0;
   }
 
@@ -172,6 +173,7 @@ const FieldMapping = (props) => {
           <Text fontSize="12px">{t("AdvancedSettingsTooltip")}</Text>
         }
         tooltipClass="advanced-settings-tooltip icon-button"
+        labelVisible={true}
       >
         <Checkbox
           id="hide-auth-page"

@@ -150,7 +150,7 @@ class LdapFormStore {
       mail: MailAttribute,
       avatarAttribute: AvatarAttribute,
       userQuotaLimit: UserQuotaLimit,
-      userType: EmployeeType.Collaborator,
+      userType: EmployeeType.Guest,
     };
 
     this.authentication = authentication;
@@ -165,7 +165,7 @@ class LdapFormStore {
     this.groupAttribute = groupAttribute;
     this.groupNameAttribute = groupNameAttribute;
 
-    this.login = login;
+    this.login = login || "";
     this.password = password || "";
   };
 
@@ -206,6 +206,7 @@ class LdapFormStore {
 
     runInAction(() => {
       this.isLoaded = true;
+      this.errors = {};
     });
 
     if (
@@ -229,6 +230,14 @@ class LdapFormStore {
 
   setUserDN = (userDN) => {
     this.requiredSettings.userDN = userDN;
+  };
+
+  removeErrorField = (fieldName) => {
+    delete this.errors[fieldName];
+  };
+
+  setErrorField = (fieldName) => {
+    this.errors[fieldName] = true;
   };
 
   setLoginAttribute = (loginAttribute) => {
@@ -368,17 +377,8 @@ class LdapFormStore {
     this.errors = {};
 
     if (!toDefault && !turnOff) {
-      if (this.authentication) {
-        this.errors.login = this.login.trim() === "";
-        this.errors.password = this.password.trim() === "";
-
-        isErrorExist = this.errors.login || this.errors.password;
-      }
-
       for (var key in this.requiredSettings) {
-        // console.log({ key });
         if (
-          this.requiredSettings[key] &&
           typeof this.requiredSettings[key] == "string" &&
           this.requiredSettings[key].trim() === ""
         ) {
@@ -387,7 +387,33 @@ class LdapFormStore {
         }
       }
 
-      if (isErrorExist) return;
+      if (this.groupMembership) {
+        const groupFields = [
+          ["groupDN", this.groupDN],
+          ["userAttribute", this.userAttribute],
+          ["groupFilter", this.groupFilter],
+          ["groupAttribute", this.groupAttribute],
+          ["groupNameAttribute", this.groupNameAttribute],
+        ];
+
+        for (var key of groupFields) {
+          if (key[1].trim() === "") {
+            this.errors[key[0]] = true;
+          }
+        }
+      }
+
+      if (this.authentication) {
+        this.errors.login = this.login.trim() === "";
+        this.errors.password = this.password.trim() === "";
+
+        isErrorExist = this.errors.login || this.errors.password;
+      }
+
+      if (isErrorExist) {
+        this.scrollToField();
+        return;
+      }
     }
 
     const settings = this.getSettings();
@@ -400,6 +426,16 @@ class LdapFormStore {
         () => this.checkStatus(t, toDefault),
         constants.GET_STATUS_TIMEOUT,
       );
+    }
+  };
+
+  scrollToField = () => {
+    for (let key in this.errors) {
+      const element = document.getElementsByName(key)[0];
+
+      element.focus();
+      element.blur();
+      return;
     }
   };
 

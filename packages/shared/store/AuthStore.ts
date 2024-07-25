@@ -170,7 +170,7 @@ class AuthStore {
 
     this.skipRequest = skipRequest ?? false;
 
-    await this.settingsStore?.init();
+    await Promise.all([this.settingsStore?.init(), this.getCapabilities()]);
 
     const requests = [];
 
@@ -470,28 +470,6 @@ class AuthStore {
       // || //this.userStore.isAuthenticated
     );
   }
-
-  setDocumentTitle = (subTitle = null) => {
-    let title;
-
-    // const currentModule = this.settingsStore?.product;
-    const organizationName = this.settingsStore?.organizationName;
-
-    if (subTitle) {
-      title = `${subTitle} - ${organizationName}`;
-      // if (this.isAuthenticated && currentModule) {
-      //   title = `${subTitle} - ${currentModule.title}`;
-      // } else {
-      //   title = `${subTitle} - ${organizationName}`;
-      // }
-      // } else if ( organizationName) {
-      // title = `${currentModule.title} - ${organizationName}`;
-    } else {
-      title = organizationName;
-    }
-
-    document.title = title ?? "";
-  };
 
   setProductVersion = (version: string) => {
     this.version = version;

@@ -262,7 +262,7 @@ const useFiles = ({
     const newFilter = filter
       ? filter.clone()
       : isRooms
-        ? RoomsFilter.getDefault(userId)
+        ? RoomsFilter.getDefault(userId, filterObj.searchArea)
         : FilesFilter.getDefault();
     const requests = [Promise.resolve(newFilter)];
 
@@ -274,7 +274,7 @@ const useFiles = ({
       .all(requests)
       .catch((err) => {
         if (isRooms) {
-          Promise.resolve(RoomsFilter.getDefault(userId));
+          Promise.resolve(RoomsFilter.getDefault(userId, filterObj.searchArea));
         } else {
           Promise.resolve(FilesFilter.getDefault());
         }
@@ -330,6 +330,7 @@ const useFiles = ({
             fromTemplate: true,
             title: gallerySelected.attributes.name_form,
             openEditor: !isFormRoom,
+            edit: !isFormRoom,
           };
 
           event.payload = payload;

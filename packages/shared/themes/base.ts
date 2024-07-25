@@ -1403,6 +1403,10 @@ export const getBaseTheme = () => {
     progressBar: {
       backgroundColor: "#F3F4F4",
 
+      animation: {
+        background: "#4781D1",
+      },
+
       percent: {
         background: "#4781D1",
       },
@@ -2079,6 +2083,8 @@ export const getBaseTheme = () => {
       closeButtonIcon: white,
       closeButtonSize: "17px",
       closeButtonBg: "transparent",
+
+      nameColor: "#858585",
 
       links: {
         iconColor: "#3B72A7",
@@ -3047,7 +3053,8 @@ export const getBaseTheme = () => {
             backgroundColorDark: "#282828",
             greenBackgroundColor: "#40865C",
             blueBackgroundColor: "#446995",
-            orangeBackgroundColor: "#AA5252",
+            orangeBackgroundColor: "#BE6650",
+            redBackgroundColor: "#AA5251",
 
             dataFontColor: white,
             dataFontColorBlack: black,
@@ -3333,7 +3340,24 @@ export const getBaseTheme = () => {
       pluginName: "#5C5C5C",
       descriptionColor: "#657077",
     },
-
+    oauth: {
+      previewDialog: {
+        border: "1px solid #eceef1",
+      },
+      infoDialog: {
+        descLinkColor: "#657077",
+        blockHeaderColor: "#a3a9ae",
+        separatorColor: "#333333",
+      },
+      list: {
+        descriptionColor: "#a3a9ae",
+      },
+      clientForm: {
+        descriptionColor: "#a3a9ae",
+        headerBorder: "1px solid #d0d5da",
+        scopeDesc: "#a3a9ae",
+      },
+    },
     sdkPresets: {
       borderColor: "#d0d5da",
       secondaryColor: "#657077",
@@ -3355,7 +3379,13 @@ export const getBaseTheme = () => {
 
     completedForm: {
       linkColor: "#4781D1",
-      descriptionColor: gray,
+      descriptionColor: grayMain,
+
+      labelColor: globalColors.grayMain,
+
+      box: {
+        background: globalColors.grayLight,
+      },
     },
   };
 };

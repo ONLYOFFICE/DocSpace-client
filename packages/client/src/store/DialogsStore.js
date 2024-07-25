@@ -27,6 +27,7 @@
 import { getNewFiles } from "@docspace/shared/api/files";
 import {
   FilesSelectorFilterTypes,
+  FilterType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
@@ -121,6 +122,14 @@ class DialogsStore {
 
   selectFileFormRoomFilterParam = FilesSelectorFilterTypes.DOCX;
   selectFileFormRoomOpenRoot = false;
+  fillPDFDialogData = {
+    visible: false,
+    data: null,
+  };
+  shareCollectSelector = {
+    visible: false,
+    file: null,
+  };
 
   constructor(
     authStore,
@@ -373,6 +382,11 @@ class DialogsStore {
     this.selectFileDialogVisible = visible;
   };
 
+  /**
+   *  @param {boolean} visible
+   *  @param {FilesSelectorFilterTypes | FilterType} [filterParam = FilesSelectorFilterTypes.DOCX]
+   *  @param {boolean} [openRoot = false]
+   */
   setSelectFileFormRoomDialogVisible = (
     visible,
     filterParam = FilesSelectorFilterTypes.DOCX,
@@ -405,6 +419,8 @@ class DialogsStore {
       templateId: fileInfo.id,
       withoutDialog,
       preview,
+      edit: true,
+      toForm: true,
     };
 
     event.payload = payload;
@@ -516,6 +532,25 @@ class DialogsStore {
   setPdfFormEditVisible = (visible, data) => {
     this.pdfFormEditVisible = visible;
     this.pdfFormEditData = data;
+  };
+
+  setFillPDFDialogData = (visible, data) => {
+    this.fillPDFDialogData = {
+      visible,
+      data,
+    };
+  };
+
+  /**
+   * @param {boolean} visible
+   * @param {import("@docspace/shared/api/files/types").TFile} [file = null]
+   * @returns {void}
+   */
+  setShareCollectSelector = (visible, file = null) => {
+    this.shareCollectSelector = {
+      visible,
+      file,
+    };
   };
 
   setCreateRoomTemplateDialogVisible = (visible) => {

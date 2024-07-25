@@ -531,13 +531,19 @@ const StyledSectionContainer = styled.section<SectionContainerProps>`
     padding-inline-start: 16px;
   }
 
-  .section-scroll > .scroll-body {
-    display: flex;
-    flex-direction: column;
-    padding-inline-start: 20px !important;
+  .section-scroll {
+    > .scroll-body {
+      display: flex;
+      flex-direction: column;
+      padding-inline-start: 20px !important;
 
-    @media ${tablet} {
-      padding-inline-start: 16px !important;
+      @media ${tablet} {
+        padding-inline-start: 16px !important;
+      }
+    }
+
+    > .resize-triggers {
+      direction: ltr;
     }
   }
 

@@ -220,6 +220,10 @@ const Badges = ({
     !isArchiveFolder &&
     !isTile;
 
+  const onDraftClick = () => {
+    if (!isTrashFolder) openLocationFile();
+  };
+
   return fileExst ? (
     <div className="badges additional-badges file__badges">
       {/* {startFilling && (
@@ -248,7 +252,7 @@ const Badges = ({
             style={{
               width: "max-content",
             }}
-            onClick={openLocationFile}
+            onClick={onDraftClick}
           />
         </BadgeWrapper>
       )}

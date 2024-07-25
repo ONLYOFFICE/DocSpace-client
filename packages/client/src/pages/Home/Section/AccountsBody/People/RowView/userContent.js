@@ -34,7 +34,8 @@ import { Link } from "@docspace/shared/components/link";
 
 import Badges from "../../Badges";
 import { tablet, mobile } from "@docspace/shared/utils/device";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
+
+import { getUserTypeName } from "@docspace/shared/utils/common";
 
 const StyledRowContent = styled(RowContent)`
   @media ${tablet} {
@@ -89,6 +90,9 @@ const UserContent = ({
     isCollaborator,
     isSSO,
     isLDAP,
+    isOwner,
+    isAdmin,
+    isRoomAdmin,
   } = item;
 
   const nameColor =
@@ -100,16 +104,13 @@ const UserContent = ({
       ? theme.peopleTableRow.pendingSideInfoColor
       : theme.peopleTableRow.sideInfoColor;
 
-  const roleLabel =
-    role === "owner"
-      ? t("Common:Owner")
-      : role === "admin"
-        ? t("Common:PortalAdmin", { productName: PRODUCT_NAME })
-        : isCollaborator
-          ? t("Common:PowerUser")
-          : isVisitor
-            ? t("Common:User")
-            : t("Common:RoomAdmin");
+  const roleLabel = getUserTypeName(
+    isOwner,
+    isAdmin,
+    isRoomAdmin,
+    isCollaborator,
+    t,
+  );
 
   const isPaidUser = !standalone && !isVisitor;
 

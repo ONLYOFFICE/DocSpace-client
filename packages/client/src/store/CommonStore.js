@@ -211,6 +211,13 @@ class CommonStore {
     this.applyNewLogos(logos);
   };
 
+  get isWhitelableLoaded() {
+    return (
+      this.logoUrlsWhiteLabel.length > 0 &&
+      this.whiteLabelLogoText !== undefined
+    );
+  }
+
   getGreetingSettingsIsDefault = async () => {
     const isDefault = await api.settings.getGreetingSettingsIsDefault();
     runInAction(() => {

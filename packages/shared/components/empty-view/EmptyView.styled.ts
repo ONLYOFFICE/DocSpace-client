@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { mobile } from "@docspace/shared/utils";
 
 export const EmptyViewWrapper = styled.div`
   margin-inline: auto;
@@ -31,8 +32,13 @@ export const EmptyViewHeader = styled.div`
   .ev-subheading {
     color: ${(props) => props.theme.emptyContent.description.color};
     text-align: center;
-    text-wrap: balance;
-    max-width: 300px;
+  }
+
+  @media ${mobile} {
+    > svg {
+      height: 105px;
+      width: 150px;
+    }
   }
 `;
 
@@ -40,6 +46,8 @@ export const EmptyViewBody = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+
+  width: 100%;
 `;
 
 export const EmptyViewItemWrapper = styled.div`
@@ -55,7 +63,40 @@ export const EmptyViewItemWrapper = styled.div`
     width: 36px;
     height: 36px;
 
-    flex: 1 0 36px;
+    flex: 0 0 36px;
+  }
+
+  :nth-child(1) .ev-item__icon {
+    rect {
+      color: #5299e0;
+    }
+    path {
+      color: #4781d1;
+    }
+  }
+  :nth-child(2) .ev-item__icon {
+    rect {
+      color: #2db482;
+    }
+    path {
+      color: #2db482;
+    }
+  }
+  :nth-child(3) .ev-item__icon {
+    rect {
+      color: #f97a0b;
+    }
+    path {
+      color: #f97a0b;
+    }
+  }
+  :nth-child(4) .ev-item__icon {
+    rect {
+      color: #6d4ec2;
+    }
+    path {
+      color: #6d4ec2;
+    }
   }
 
   .ev-item-header {
@@ -65,11 +106,10 @@ export const EmptyViewItemWrapper = styled.div`
 
   .ev-item-subheading {
     color: ${(props) => props.theme.emptyContent.description.color};
-    text-wrap: balance;
   }
 
   .ev-item__arrow-icon {
-    flex: 1 0 12px;
+    flex: 0 0 12px;
   }
 
   @media (hover: hover) {
@@ -86,5 +126,6 @@ export const EmptyViewItemWrapper = styled.div`
 export const EmptyViewItemBody = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
+  flex: 1 1 auto;
 `;

@@ -315,8 +315,8 @@ class PeopleStore {
     const adminOption = {
       id: "menu_change-user_administrator",
       className: "group-menu_drop-down",
-      label: t("Common:DocspaceAdmin"),
-      title: t("Common:DocspaceAdmin"),
+      label: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
+      title: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
       onClick: (e) => this.onChangeType(e),
       "data-action": "admin",
       key: "administrator",
@@ -508,24 +508,6 @@ class PeopleStore {
 
   setIsLoadedProfileSectionBody = (isLoadedProfileSectionBody) => {
     this.isLoadedProfileSectionBody = isLoadedProfileSectionBody;
-  };
-
-  getStatusType = (user) => {
-    if (
-      user.status === EmployeeStatus.Active &&
-      user.activationStatus === EmployeeActivationStatus.Activated
-    ) {
-      return "normal";
-    } else if (
-      user.status === EmployeeStatus.Active &&
-      user.activationStatus === EmployeeActivationStatus.Pending
-    ) {
-      return "pending";
-    } else if (user.status === EmployeeStatus.Disabled) {
-      return "disabled";
-    } else {
-      return "unknown";
-    }
   };
 
   getUserRole = (user) => {

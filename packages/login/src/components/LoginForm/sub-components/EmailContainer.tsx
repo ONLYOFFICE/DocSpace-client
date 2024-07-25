@@ -32,7 +32,11 @@ import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkType } from "@docspace/shared/components/link";
 import { IconButton } from "@docspace/shared/components/icon-button";
-import { InputSize, InputType } from "@docspace/shared/components/text-input";
+import {
+  InputSize,
+  InputType,
+  TextInput,
+} from "@docspace/shared/components/text-input";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.left.react.svg?url";
@@ -49,6 +53,8 @@ interface IEmailContainer {
   onChangeLogin: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlurEmail: () => void;
   onValidateEmail: (res: TValidate) => undefined;
+  isLdapLogin: boolean;
+  ldapDomain: string;
 }
 
 const EmailContainer = ({
@@ -61,6 +67,8 @@ const EmailContainer = ({
   onChangeLogin,
   onBlurEmail,
   onValidateEmail,
+  isLdapLogin,
+  ldapDomain,
 }: IEmailContainer) => {
   const { t } = useTranslation(["Login", "Common"]);
 
@@ -91,6 +99,7 @@ const EmailContainer = ({
             values={{
               email: emailFromInvitation,
             }}
+            productName={t("Common:ProductName")}
             components={{
               1: (
                 <Link
@@ -116,23 +125,44 @@ const EmailContainer = ({
         errorText ? t(`Common:${errorText}`) : t("Common:RequiredField")
       } //TODO: Add wrong login server error
     >
-      <EmailInput
-        id="login_username"
-        name="login"
-        type={InputType.email}
-        hasError={isEmailErrorShow}
-        value={identifier}
-        placeholder={t("RegistrationEmailWatermark")}
-        size={InputSize.large}
-        scale={true}
-        isAutoFocussed={true}
-        tabIndex={1}
-        isDisabled={isLoading}
-        autoComplete="username"
-        onChange={onChangeLogin}
-        onBlur={onBlurEmail}
-        onValidateInput={onValidateEmail}
-      />
+      {isLdapLogin ? (
+        <TextInput
+          id="login_username"
+          name="login"
+          type={InputType.text}
+          hasError={isEmailErrorShow}
+          value={identifier}
+          placeholder={t("LDAPUsernamePlaceholder", {
+            ldap_domain: ldapDomain,
+          })}
+          size={InputSize.large}
+          scale={true}
+          isAutoFocussed={true}
+          tabIndex={1}
+          isDisabled={isLoading}
+          autoComplete="off"
+          onChange={onChangeLogin}
+          onBlur={onBlurEmail}
+        />
+      ) : (
+        <EmailInput
+          id="login_username"
+          name="login"
+          type={InputType.email}
+          hasError={isEmailErrorShow}
+          value={identifier}
+          placeholder={t("RegistrationEmailWatermark")}
+          size={InputSize.large}
+          scale={true}
+          isAutoFocussed={true}
+          tabIndex={1}
+          isDisabled={isLoading}
+          autoComplete="username"
+          onChange={onChangeLogin}
+          onBlur={onBlurEmail}
+          onValidateInput={onValidateEmail}
+        />
+      )}
     </FieldContainer>
   );
 };

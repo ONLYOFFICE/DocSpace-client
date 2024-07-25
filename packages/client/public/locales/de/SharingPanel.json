@@ -3,6 +3,5 @@
   "FormFilling": "Ausfüllen von Formularen",
   "LinkName": "Linkname",
   "ShareEmailBody": "Ihnen wurde Zugriff auf das Dokument {{itemName}} erteilt. Zum Öffnen klicken Sie auf den Link: {{shareLink}}.",
-  "ShareEmailSubject": "Ihnen wurde Zugriff auf das Dokument {{itemName}} erteilt",
-  "SharingSettingsTitle": "Freigabeeinstellungen"
+  "ShareEmailSubject": "Ihnen wurde Zugriff auf das Dokument {{itemName}} erteilt"
 }

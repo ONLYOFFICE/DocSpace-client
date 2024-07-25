@@ -46,6 +46,7 @@ class SettingsSetupStore {
   settingsStore = null;
   tfaStore = null;
   thirdPartyStore = null;
+  filesSettingsStore = null;
   isInit = false;
   logoutDialogVisible = false;
   logoutAllDialogVisible = false;
@@ -111,12 +112,19 @@ class SettingsSetupStore {
   currentSession = [];
   platformModalData = {};
 
-  constructor(tfaStore, authStore, settingsStore, thirdPartyStore) {
+  constructor(
+    tfaStore,
+    authStore,
+    settingsStore,
+    thirdPartyStore,
+    filesSettingsStore,
+  ) {
     this.selectionStore = new SelectionStore(this);
     this.authStore = authStore;
     this.tfaStore = tfaStore;
     this.settingsStore = settingsStore;
     this.thirdPartyStore = thirdPartyStore;
+    this.filesSettingsStore = filesSettingsStore;
     makeAutoObservable(this);
   }
 
@@ -317,7 +325,7 @@ class SettingsSetupStore {
       "",
       "",
       combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
+        window.ClientConfig?.proxy?.url,
         `${config.homepage}/portal-settings/security/access-rights/admins`,
         `/filter?page=${filter.page}`, //TODO: Change url by category
       ),
@@ -433,16 +441,21 @@ class SettingsSetupStore {
   };
 
   getLoginHistoryReport = async () => {
+    const { openOnNewPage } = this.filesSettingsStore;
     const res = await api.settings.getLoginHistoryReport();
-    setTimeout(() => window.open(res), 100); //hack for ios
+    setTimeout(() => window.open(res, openOnNewPage ? "_blank" : "_self"), 100); //hack for ios
     return this.setAuditTrailReport(res);
   };
 
   getAuditTrailReport = async () => {
+    const { openOnNewPage } = this.filesSettingsStore;
     try {
       this.setIsLoadingDownloadReport(true);
       const res = await api.settings.getAuditTrailReport();
-      setTimeout(() => window.open(res), 100); //hack for ios
+      setTimeout(
+        () => window.open(res, openOnNewPage ? "_blank" : "_self"),
+        100,
+      ); //hack for ios
       return this.setAuditTrailReport(res);
     } catch (error) {
       console.error(error);
@@ -502,7 +515,7 @@ class SettingsSetupStore {
     this.integration.selectedConsumer = consumer || {};
     this.setConsumers(res);
 
-    return !!consumer
+    return !!consumer;
   };
 
   updateConsumerProps = async (newProps) => {

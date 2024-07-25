@@ -39,6 +39,8 @@ import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 import { StyledAccountContent } from "../../styles/accounts";
 import { getUserTypeLabel } from "@docspace/shared/utils/common";
 
+import { EmployeeStatus } from "@docspace/shared/enums";
+
 const Accounts = (props) => {
   const {
     t,
@@ -68,14 +70,13 @@ const Accounts = (props) => {
   }, [infoPanelSelection, getStatusLabel]);
 
   const getStatusLabel = React.useCallback(() => {
-    const status = getUserStatus(infoPanelSelection);
-    switch (status) {
-      case "active":
+    switch (infoPanelSelection?.status) {
+      case EmployeeStatus.Active:
         return setStatusLabel(t("Common:Active"));
-      case "pending":
-        return setStatusLabel(t("PeopleTranslations:PendingTitle"));
-      case "disabled":
-        return setStatusLabel(t("Settings:Disabled"));
+      case EmployeeStatus.Pending:
+        return setStatusLabel(t("PeopleTranslations:PendingInviteTitle"));
+      case EmployeeStatus.Disabled:
+        return setStatusLabel(t("PeopleTranslations:DisabledEmployeeStatus"));
       default:
         return setStatusLabel(t("Common:Active"));
     }
@@ -85,10 +86,10 @@ const Accounts = (props) => {
     const options = [];
 
     const adminOption = {
-      id: "info-account-type_docspace-admin",
+      id: "info-account-type_portal-admin",
       key: "admin",
-      title: t("Common:DocspaceAdmin"),
-      label: t("Common:DocspaceAdmin"),
+      title: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
+      label: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
       action: "admin",
     };
     const managerOption = {
@@ -157,10 +158,10 @@ const Accounts = (props) => {
     setPeopleBufferSelection(null);
   };
 
-  const typeLabel = React.useCallback(() => getUserTypeLabel(role, t), [])();
-
   const renderTypeData = () => {
     const typesOptions = getTypesOptions();
+
+    const typeLabel = getUserTypeLabel(role, t);
 
     const combobox = (
       <ComboBox
@@ -295,6 +296,7 @@ const Accounts = (props) => {
                     fontWeight={600}
                     title={group.name}
                     onClick={() => onGroupClick(group.id)}
+                    isTextOverflow
                   >
                     {group.name}
                   </Link>

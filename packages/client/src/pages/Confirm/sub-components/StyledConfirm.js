@@ -47,6 +47,10 @@ export const StyledPage = styled.div`
     width: 100%;
     padding: ${({ theme }) =>
       getCorrectFourValuesStyle("32px 8px 0 16px", theme.interfaceDirection)};
+
+    .language-combo-box {
+      display: none;
+    }
   }
 
   .subtitle {
@@ -60,6 +64,12 @@ export const StyledPage = styled.div`
 
   .subtitle {
     margin-bottom: 32px;
+  }
+
+  .language-combo-box {
+    position: absolute;
+    right: 28px;
+    top: 28px;
   }
 `;
 
@@ -91,7 +101,7 @@ export const StyledHeader = styled.div`
     margin-bottom: 32px;
   }
 
-  .docspace-logo {
+  .portal-logo {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -123,7 +133,7 @@ export const StyledBody = styled.div`
     margin-bottom: 32px;
   }
 
-  .docspace-logo {
+  .portal-logo {
     display: flex;
     align-items: center;
     justify-content: center;

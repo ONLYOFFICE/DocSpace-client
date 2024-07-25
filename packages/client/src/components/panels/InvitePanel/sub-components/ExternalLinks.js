@@ -39,7 +39,7 @@ import { DropDown } from "@docspace/shared/components/drop-down";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 
-import AccessSelector from "./AccessSelector";
+import AccessSelector from "../../../AccessSelector";
 
 import {
   StyledBlock,
@@ -125,10 +125,9 @@ const ExternalLinks = ({
   const copyLink = (link) => {
     if (link) {
       toastr.success(
-        `${t("Translations:LinkCopySuccess")}. ${t(
-          "Translations:LinkValidTime",
-          { days_count: 7 },
-        )}`,
+        `${t("Common:LinkCopySuccess")}. ${t("Translations:LinkValidTime", {
+          days_count: 7,
+        })}`,
       );
       copy(link);
     }
@@ -220,7 +219,9 @@ const ExternalLinks = ({
       </StyledSubHeader>
       <StyledDescription>
         {roomId === -1
-          ? t("InviteViaLinkDescriptionAccounts")
+          ? t("InviteViaLinkDescriptionAccounts", {
+              productName: t("Common:ProductName"),
+            })
           : t("InviteViaLinkDescriptionRoom")}
       </StyledDescription>
       {externalLinksVisible && (

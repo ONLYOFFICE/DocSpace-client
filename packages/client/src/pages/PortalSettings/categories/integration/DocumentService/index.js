@@ -38,6 +38,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { SettingsDSConnectSkeleton } from "@docspace/shared/skeletons/settings";
 import { DeviceType } from "@docspace/shared/enums";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const URL_REGEX = /^https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{1,256}\/?$/;
 const DNS_PLACEHOLDER = `${window.location.protocol}//<docspace-dns-name>/`;
@@ -69,6 +70,7 @@ const DocumentService = ({
   const [initInternalUrl, setInitInternalUrl] = useState("");
 
   useEffect(() => {
+    setDocumentTitle(t("DocumentService"));
     setIsLoading(true);
     getDocumentServiceLocation()
       .then((result) => {
@@ -216,7 +218,9 @@ const DocumentService = ({
           <div className="input-wrapper">
             <Label
               htmlFor="internalAdress"
-              text={t("Settings:DocumentServiceLocationUrlInternal")}
+              text={t("Settings:DocumentServiceLocationUrlInternal", {
+                productName: t("Common:ProductName"),
+              })}
             />
             <InputBlock
               id="internalAdress"
@@ -240,7 +244,9 @@ const DocumentService = ({
           <div className="input-wrapper">
             <Label
               htmlFor="portalAdress"
-              text={t("Settings:DocumentServiceLocationUrlPortal")}
+              text={t("Settings:DocumentServiceLocationUrlPortal", {
+                productName: t("Common:ProductName"),
+              })}
             />
             <InputBlock
               id="portalAdress"

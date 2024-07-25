@@ -146,8 +146,16 @@ const PaymentContainer = (props) => {
             <>
               <Text isBold>{t("ManagerTypesDescription")}</Text>
               <br />
-              <Text isBold>{t("Common:DocspaceAdmin")}</Text>
-              <Text>{t("AdministratorDescription")}</Text>
+              <Text isBold>
+                {t("Common:PortalAdmin", {
+                  productName: t("Common:ProductName"),
+                })}
+              </Text>
+              <Text>
+                {t("AdministratorDescription", {
+                  productName: t("Common:ProductName"),
+                })}
+              </Text>
               <br />
               <Text isBold>{t("Common:RoomAdmin")}</Text>
               <Text>{t("RoomManagerDescription")}</Text>
@@ -280,7 +288,9 @@ const PaymentContainer = (props) => {
             (days remaining: {{ delayDaysCount }})
           </Trans>{" "}
           <Text as="span" fontSize="14px" lineHeight="16px">
-            {t("GracePeriodActivatedDescription")}
+            {t("GracePeriodActivatedDescription", {
+              productName: t("Common:ProductName"),
+            })}
           </Text>
         </Text>
       );

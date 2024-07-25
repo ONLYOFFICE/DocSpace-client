@@ -187,7 +187,7 @@ const FolderInput = ({
   title += path;
   if (createNewFolderIsChecked) {
     title += path ? "/" : "";
-    title += roomTitle || t("Files:NewRoom");
+    title += roomTitle || t("Common:NewRoom");
   }
 
   return (
@@ -200,7 +200,7 @@ const FolderInput = ({
           <span className="path">{path}</span>
           {createNewFolderIsChecked && (
             <span className="room_title">
-              {(path ? "/" : "") + (roomTitle || t("Files:NewRoom"))}
+              {(path ? "/" : "") + (roomTitle || t("Common:NewRoom"))}
             </span>
           )}
         </div>

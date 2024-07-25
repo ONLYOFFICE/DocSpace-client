@@ -50,20 +50,15 @@ import YahooIconUrl from "PUBLIC_DIR/images/yahoo.react.svg?url";
 import { toastr } from "@docspace/shared/components/toast";
 
 export const getUserStatus = (user) => {
-  if (
-    user.status === EmployeeStatus.Active &&
-    user.activationStatus === EmployeeActivationStatus.Activated
-  ) {
-    return "active";
-  } else if (
-    user.status === EmployeeStatus.Active &&
-    user.activationStatus === EmployeeActivationStatus.Pending
-  ) {
-    return "pending";
-  } else if (user.status === EmployeeStatus.Disabled) {
-    return "disabled";
-  } else {
-    return "unknown";
+  switch (user.status) {
+    case EmployeeStatus.Active:
+      return "active";
+    case EmployeeStatus.Pending:
+      return "pending";
+    case EmployeeStatus.Disabled:
+      return "disabled";
+    default:
+      return "unknown";
   }
 };
 

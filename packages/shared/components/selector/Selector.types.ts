@@ -26,27 +26,53 @@
 
 import React from "react";
 import { RoomsType, ShareAccessRights } from "../../enums";
-import { AvatarRole } from "../avatar";
+import { MergeTypes, Nullable } from "../../types";
+
 import { TFileSecurity, TFolderSecurity } from "../../api/files/types";
 import { TRoomSecurity } from "../../api/rooms/types";
-import { TSubmenuItem } from "../submenu";
+
+import { AvatarRole } from "../avatar";
+import { TTabItem } from "../tabs";
+
 import { SelectorAccessRightsMode } from "./Selector.enums";
 
 // header
 
-type THeaderBackButton = {
-  onBackClick: () => void;
-  withoutBackButton: false;
+type THeaderBackButton =
+  | {
+      onBackClick: () => void;
+      withoutBackButton: false;
+      withoutBorder: false;
+    }
+  | {
+      onBackClick?: undefined;
+      withoutBackButton?: undefined;
+      withoutBorder: undefined;
+    };
+
+export type TInfoBarData = {
+  title: string;
+  description: string;
+  icon?: string;
+  onClose?: VoidFunction;
 };
 
-type THeaderNonBackButton = {
-  onBackClick?: undefined;
-  withoutBackButton?: undefined;
+export type TInfoBar = {
+  withInfoBar?: boolean;
+  infoBarData?: TInfoBarData;
+};
+
+export type InfoBarProps = {
+  visible: boolean;
+};
+
+export type BreadCrumbsProps = {
+  visible?: boolean;
 };
 
 export type HeaderProps = {
   headerLabel: string;
-} & (THeaderBackButton | THeaderNonBackButton);
+} & THeaderBackButton;
 
 export type TSelectorHeader =
   | {
@@ -56,68 +82,59 @@ export type TSelectorHeader =
   | { withHeader?: undefined; headerProps?: undefined };
 
 // bread crumbs
+type TOnBreadCrumbClick = ({
+  e,
+  open,
+  item,
+}: {
+  e: React.MouseEvent;
+  open: boolean;
+  item: TBreadCrumb;
+}) => void;
 
 export type TBreadCrumb = {
   id: string | number;
   label: string;
   isRoom?: boolean;
   minWidth?: string;
-  onClick?: ({
-    e,
-    open,
-    item,
-  }: {
-    e: React.MouseEvent;
-    open: boolean;
-    item: TBreadCrumb;
-  }) => void;
   roomType?: RoomsType;
+  onClick?: TOnBreadCrumbClick;
 };
 
-export interface BreadCrumbsProps {
-  breadCrumbs: TBreadCrumb[];
-  onSelectBreadCrumb: (item: TBreadCrumb) => void;
-  isLoading: boolean;
-}
+export type TDisplayedItem = {
+  id: string | number;
+  label: string;
+  isArrow: boolean;
+  isList: boolean;
+  isRoom?: boolean;
+  listItems?: TBreadCrumb[];
+};
 
 export type TSelectorBreadCrumbs =
   | {
       withBreadCrumbs: true;
-      breadCrumbs: TBreadCrumb[];
-      onSelectBreadCrumb: (item: TBreadCrumb) => void;
-      breadCrumbsLoader: React.ReactNode;
       isBreadCrumbsLoading: boolean;
+      breadCrumbs: TBreadCrumb[];
+      breadCrumbsLoader: React.ReactNode;
+
+      onSelectBreadCrumb: (item: TBreadCrumb) => void;
     }
   | {
       withBreadCrumbs?: undefined;
-      breadCrumbs?: undefined;
-      onSelectBreadCrumb?: undefined;
-      breadCrumbsLoader?: undefined;
       isBreadCrumbsLoading?: undefined;
+      breadCrumbs?: undefined;
+      breadCrumbsLoader?: undefined;
+
+      onSelectBreadCrumb?: undefined;
     };
 
 // tabs
-
-export type TWithTabs =
-  | { withTabs: true; tabsData: TSubmenuItem[]; activeTabId: string }
+export type TSelectorTabs =
+  | { withTabs: true; tabsData: TTabItem[]; activeTabId: string }
   | { withTabs?: undefined; tabsData?: undefined; activeTabId?: undefined };
 
 // select all
-
-export interface SelectAllProps {
-  label: string;
-  icon: string;
-  onSelectAll: () => void;
-  isChecked: boolean;
-  isIndeterminate: boolean;
-  isLoading: boolean;
-  rowLoader: React.ReactNode;
-}
-
-export type TSelectorSelectAll = {
-  isAllIndeterminate?: boolean;
-  isAllChecked?: boolean;
-} & (
+export type TSelectorSelectAll =
   | {
       withSelectAll: true;
       selectAllLabel: string;
@@ -129,17 +146,9 @@ export type TSelectorSelectAll = {
       selectAllLabel?: undefined;
       selectAllIcon?: undefined;
       onSelectAll?: undefined;
-    }
-);
+    };
 
 // search
-export interface SearchProps {
-  placeholder?: string;
-  value?: string;
-  onSearch: (value: string, callback?: Function) => void;
-  onClearSearch: (callback?: Function) => void;
-  setIsSearch: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
 export type TSelectorSearch =
   | {
@@ -161,23 +170,15 @@ export type TSelectorSearch =
       onClearSearch?: undefined;
     };
 
-export type TSelectorBodySearch = TSelectorSearch & {
-  isSearch: boolean;
-  setIsSearch: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
 // empty screen
 export interface EmptyScreenProps {
-  image: string;
-  header: string;
-  description: string;
-  searchImage: string;
-  searchHeader: string;
-  searchDescription: string;
   withSearch: boolean;
+
+  items: TSelectorItem[];
+  inputItemVisible: boolean;
 }
 
-type TSelectorEmptyScreen = {
+export type TSelectorEmptyScreen = {
   emptyScreenImage: string;
   emptyScreenHeader: string;
   emptyScreenDescription: string;
@@ -187,6 +188,7 @@ type TSelectorEmptyScreen = {
   searchEmptyScreenDescription: string;
 };
 
+// submit button
 type TOnSubmit = (
   selectedItems: TSelectorItem[],
   access: TAccessRight | null,
@@ -194,7 +196,6 @@ type TOnSubmit = (
   isFooterCheckboxChecked: boolean,
 ) => void | Promise<void>;
 
-// submit button
 export type TSelectorSubmitButton = {
   submitButtonLabel: string;
   disableSubmitButton: boolean;
@@ -298,9 +299,17 @@ export type TSelectorInfo =
   | { withInfo: true; infoText: string }
   | { withInfo?: undefined; infoText?: undefined };
 
+export type TRenderCustomItem = (
+  label: string,
+  role?: string,
+  email?: string,
+  isGroup?: boolean,
+) => React.ReactNode | null;
+
 export type SelectorProps = TSelectorHeader &
+  TInfoBar &
   TSelectorInfo &
-  TWithTabs &
+  TSelectorTabs &
   TSelectorSelectAll &
   TSelectorEmptyScreen &
   TSelectorSearch &
@@ -333,51 +342,39 @@ export type SelectorProps = TSelectorHeader &
 
     rowLoader: React.ReactNode;
 
-    renderCustomItem?: (
-      label: string,
-      role?: string,
-      email?: string,
-      isGroup?: boolean,
-    ) => React.ReactNode | null;
+    renderCustomItem?: TRenderCustomItem;
 
     alwaysShowFooter?: boolean;
     descriptionText?: string;
   };
 
-export type BodyProps = TSelectorBreadCrumbs &
-  TSelectorInfo &
-  TWithTabs &
-  TSelectorBodySearch &
-  TSelectorSelectAll &
-  TSelectorEmptyScreen &
-  TSelectorBreadCrumbs & {
-    footerVisible: boolean;
-    withHeader?: boolean;
+export type BodyProps = TSelectorInfo & {
+  footerVisible: boolean;
+  withHeader?: boolean;
 
-    value?: string;
+  value?: string;
 
-    isMultiSelect: boolean;
+  isMultiSelect: boolean;
 
-    items: TSelectorItem[];
-    renderCustomItem?: (
-      label: string,
-      role?: string,
-      email?: string,
-    ) => React.ReactNode | null;
-    onSelect: (item: TSelectorItem, isDoubleClick: boolean) => void;
+  inputItemVisible: boolean;
+  setInputItemVisible: (value: boolean) => void;
 
-    loadMoreItems: (startIndex: number) => void;
-    hasNextPage: boolean;
-    isNextPageLoading: boolean;
-    totalItems: number;
-    isLoading: boolean;
+  items: TSelectorItem[];
+  renderCustomItem?: TRenderCustomItem;
+  onSelect: (item: TSelectorItem, isDoubleClick: boolean) => void;
 
-    rowLoader: React.ReactNode;
+  loadMoreItems: (startIndex: number) => void;
+  hasNextPage: boolean;
+  isNextPageLoading: boolean;
+  totalItems: number;
+  isLoading: boolean;
 
-    withFooterInput?: boolean;
-    withFooterCheckbox?: boolean;
-    descriptionText?: string;
-  };
+  rowLoader: React.ReactNode;
+
+  withFooterInput?: boolean;
+  withFooterCheckbox?: boolean;
+  descriptionText?: string;
+};
 
 export type FooterProps = TSelectorFooterSubmitButton &
   TSelectorCancelButton &
@@ -389,146 +386,161 @@ export type FooterProps = TSelectorFooterSubmitButton &
     requestRunning?: boolean;
   };
 
-type TSelectorItemLogo =
-  | {
-      avatar: string;
-      color?: undefined;
-      hasAvatar?: boolean;
-      icon?: undefined;
-      iconOriginal?: string;
-      role?: AvatarRole;
-    }
-  | {
-      avatar?: undefined;
-      color: string;
-      hasAvatar?: undefined;
-      icon?: undefined;
-      iconOriginal?: string;
-      role?: undefined;
-    }
-  | {
-      avatar?: undefined;
-      color?: undefined;
-      hasAvatar?: undefined;
-      icon: string;
-      iconOriginal: string;
-      role?: undefined;
-    };
+type TSelectorItemEmpty = {
+  avatar?: undefined;
+  color?: undefined;
+  hasAvatar?: undefined;
+  icon?: undefined;
+  iconOriginal?: undefined;
+  role?: undefined;
+  email?: undefined;
+  isOwner?: undefined;
+  isAdmin?: undefined;
+  isVisitor?: undefined;
+  isCollaborator?: undefined;
+  isRoomAdmin?: undefined;
+  access?: undefined;
+  fileExst?: undefined;
+  shared?: undefined;
+  parentId?: undefined;
+  rootFolderType?: undefined;
+  security?: undefined;
+  isFolder?: undefined;
+  filesCount?: undefined;
+  foldersCount?: undefined;
+  roomType?: undefined;
+  isGroup?: undefined;
+  name?: undefined;
+  isCreateNewItem?: undefined;
+  onCreateClick?: undefined;
+  hotkey?: undefined;
+  onBackClick?: undefined;
+  dropDownItems?: undefined;
+  isInputItem?: undefined;
+  defaultInputValue?: undefined;
+  onAcceptInput?: undefined;
+  onCancelInput?: undefined;
+  placeholder?: undefined;
+
+  isRoomsOnly?: undefined;
+  createDefineRoomType?: undefined;
+};
+
+export type TSelectorItemUser = MergeTypes<
+  TSelectorItemEmpty,
+  {
+    email: string;
+    isOwner: boolean;
+    isAdmin: boolean;
+    isVisitor: boolean;
+    isCollaborator: boolean;
+    isRoomAdmin: boolean;
+    avatar: string;
+    hasAvatar: boolean;
+    role: AvatarRole;
+
+    access?: ShareAccessRights | string | number;
+  }
+>;
+
+export type TSelectorItemFile = MergeTypes<
+  TSelectorItemEmpty,
+  {
+    fileExst: string;
+    parentId: string | number;
+    rootFolderType: string | number;
+    security: TFileSecurity;
+    icon: string;
+  }
+>;
+
+export type TSelectorItemFolder = MergeTypes<
+  TSelectorItemEmpty,
+  {
+    isFolder: boolean;
+    parentId: string | number;
+    rootFolderType: string | number;
+    filesCount: number;
+    foldersCount: number;
+    security: TFolderSecurity;
+    icon?: string;
+    avatar?: string;
+  }
+>;
+
+export type TSelectorItemRoom = MergeTypes<
+  TSelectorItemEmpty,
+  {
+    isFolder: boolean;
+    roomType: RoomsType;
+    shared: boolean;
+    parentId: string | number;
+    rootFolderType: string | number;
+    filesCount: number;
+    foldersCount: number;
+    security: TRoomSecurity;
+    icon?: string;
+    color?: string;
+    iconOriginal?: string;
+  }
+>;
+
+export type TSelectorItemGroup = MergeTypes<
+  TSelectorItemEmpty,
+  {
+    isGroup: boolean;
+    name: string;
+  }
+>;
+
+export type TSelectorItemNew = MergeTypes<
+  TSelectorItemEmpty,
+  {
+    isCreateNewItem: boolean;
+    hotkey?: string;
+    dropDownItems?: React.ReactElement[];
+    onCreateClick?: VoidFunction;
+    onBackClick: VoidFunction;
+
+    isRoomsOnly?: boolean;
+    createDefineRoomType?: RoomsType;
+  }
+>;
+
+export type TSelectorItemInput = MergeTypes<
+  TSelectorItemEmpty,
+  {
+    isInputItem: boolean;
+    defaultInputValue: string;
+    icon?: string;
+    color?: string;
+    roomType?: RoomsType;
+    placeholder?: string;
+
+    onAcceptInput: (value: string) => void;
+    onCancelInput: VoidFunction;
+  }
+>;
 
 type TSelectorItemType =
-  | {
-      email: string;
-      fileExst?: undefined;
-      roomType?: undefined;
-      shared?: undefined;
-      isOwner: boolean;
-      isAdmin: boolean;
-      isVisitor: boolean;
-      isCollaborator: boolean;
-      isRoomAdmin: boolean;
-      access?: ShareAccessRights | string | number;
-      isFolder?: undefined;
-      parentId?: undefined;
-      rootFolderType?: undefined;
-      filesCount?: undefined;
-      foldersCount?: undefined;
-      security?: undefined;
-      isGroup?: undefined;
-      name?: undefined;
-    }
-  | {
-      email?: undefined;
-      fileExst: string;
-      roomType?: undefined;
-      shared?: boolean;
-      isOwner?: undefined;
-      isAdmin?: undefined;
-      isVisitor?: undefined;
-      isCollaborator?: undefined;
-      isRoomAdmin?: undefined;
-      access?: undefined;
-      isFolder?: undefined;
-      parentId?: string | number;
-      rootFolderType?: string | number;
-      filesCount?: undefined;
-      foldersCount?: undefined;
-      security?: TFileSecurity;
-      isGroup?: undefined;
-      name?: undefined;
-    }
-  | {
-      email?: undefined;
-      fileExst?: undefined;
-      roomType: RoomsType;
-      shared?: boolean;
-      isOwner?: undefined;
-      isAdmin?: undefined;
-      isVisitor?: undefined;
-      isCollaborator?: undefined;
-      isRoomAdmin?: undefined;
-      access?: undefined;
-      isFolder: boolean;
-      parentId?: string | number;
-      rootFolderType?: string | number;
-      filesCount?: number;
-      foldersCount?: number;
-      security?: TRoomSecurity;
-      isGroup?: undefined;
-      name?: undefined;
-    }
-  | {
-      email?: undefined;
-      fileExst?: undefined;
-      roomType?: undefined;
-      shared?: boolean;
-      isOwner?: undefined;
-      isAdmin?: undefined;
-      isVisitor?: undefined;
-      isCollaborator?: undefined;
-      isRoomAdmin?: undefined;
-      access?: undefined;
-      isFolder: boolean;
-      parentId?: string | number;
-      rootFolderType?: string | number;
-      filesCount?: number;
-      foldersCount?: number;
-      security?: TFolderSecurity;
-      isGroup?: undefined;
-      name?: undefined;
-    }
-  | {
-      email?: undefined;
-      fileExst?: undefined;
-      roomType?: undefined;
-      shared?: boolean;
-      isOwner?: undefined;
-      isAdmin?: undefined;
-      isVisitor?: undefined;
-      isCollaborator?: undefined;
-      isRoomAdmin?: undefined;
-      access?: undefined;
-      isFolder?: undefined;
-      parentId?: string | number;
-      rootFolderType?: string | number;
-      filesCount?: number;
-      foldersCount?: number;
-      security?: TFolderSecurity;
-      isGroup: true;
-      name: string;
-    };
+  | TSelectorItemUser
+  | TSelectorItemFile
+  | TSelectorItemFolder
+  | TSelectorItemRoom
+  | TSelectorItemGroup
+  | TSelectorItemNew
+  | TSelectorItemInput;
 
-export type TSelectorItem = TSelectorItemLogo &
-  TSelectorItemType & {
-    key?: string;
-    id?: string | number;
-    label: string;
-    displayName?: string;
+export type TSelectorItem = TSelectorItemType & {
+  label: string;
 
-    isSelected?: boolean;
-
-    isDisabled?: boolean;
-    disabledText?: string;
-  };
+  key?: string;
+  id?: string | number;
+  displayName?: string;
+  isSelected?: boolean;
+  isDisabled?: boolean;
+  disabledText?: string;
+};
 
 export type Data = {
   items: TSelectorItem[];
@@ -536,12 +548,11 @@ export type Data = {
   isMultiSelect: boolean;
   isItemLoaded: (index: number) => boolean;
   rowLoader: React.ReactNode;
-  renderCustomItem?: (
-    label: string,
-    role?: string,
-    email?: string,
-    isGroup?: boolean,
-  ) => React.ReactNode | null;
+  renderCustomItem?: TRenderCustomItem;
+  setInputItemVisible: (value: boolean) => void;
+  inputItemVisible: boolean;
+  savedInputValue: Nullable<string>;
+  setSavedInputValue: (value: Nullable<string>) => void;
 };
 
 export interface ItemProps {
@@ -549,12 +560,3 @@ export interface ItemProps {
   style: React.CSSProperties;
   data: Data;
 }
-
-export type TDisplayedItem = {
-  id: string | number;
-  label: string;
-  isArrow: boolean;
-  isList: boolean;
-  isRoom?: boolean;
-  listItems?: TBreadCrumb[];
-};

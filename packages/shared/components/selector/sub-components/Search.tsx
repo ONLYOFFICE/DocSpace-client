@@ -24,48 +24,58 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useContext, useCallback } from "react";
 
 import { SearchInput } from "../../search-input";
 import { InputSize } from "../../text-input";
 
-import { SearchProps } from "../Selector.types";
+import { SearchContext, SearchDispatchContext } from "../contexts/Search";
+import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
 
-const Search = React.memo(
-  ({
-    placeholder,
-    value,
-    onSearch,
+const Search = React.memo(({ isSearch }: { isSearch: boolean }) => {
+  const {
+    searchPlaceholder,
+    searchValue,
+    isSearchLoading,
+    searchLoader,
+    withSearch,
     onClearSearch,
-    setIsSearch,
-  }: SearchProps) => {
-    const onClearSearchAction = React.useCallback(() => {
-      onClearSearch?.(() => setIsSearch(false));
-    }, [onClearSearch, setIsSearch]);
+    onSearch,
+  } = useContext(SearchContext);
+  const setIsSearch = useContext(SearchDispatchContext);
 
-    const onSearchAction = React.useCallback(
-      (data: string) => {
-        const v = data.trim();
+  const { isBreadCrumbsLoading } = useContext(BreadCrumbsContext);
 
-        if (v === "") return onClearSearchAction();
+  const onClearSearchAction = useCallback(() => {
+    onClearSearch?.(() => setIsSearch(false));
+  }, [onClearSearch, setIsSearch]);
 
-        onSearch?.(v, () => setIsSearch(true));
-      },
-      [onClearSearchAction, onSearch, setIsSearch],
-    );
+  const onSearchAction = useCallback(
+    (data: string) => {
+      const v = data.trim();
 
-    return (
-      <SearchInput
-        className="search-input"
-        placeholder={placeholder}
-        value={value ?? ""}
-        onChange={onSearchAction}
-        onClearSearch={onClearSearchAction}
-        size={InputSize.base}
-      />
-    );
-  },
-);
+      if (v === "") return onClearSearchAction();
+
+      onSearch?.(v, () => setIsSearch(true));
+    },
+    [onClearSearchAction, onSearch, setIsSearch],
+  );
+
+  if (isBreadCrumbsLoading || isSearchLoading) return searchLoader;
+
+  if (!withSearch || !isSearch) return null;
+
+  return (
+    <SearchInput
+      className="search-input"
+      placeholder={searchPlaceholder}
+      value={searchValue ?? ""}
+      onChange={onSearchAction}
+      onClearSearch={onClearSearchAction}
+      size={InputSize.base}
+    />
+  );
+});
 
 Search.displayName = "Search";
 

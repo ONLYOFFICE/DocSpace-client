@@ -24,10 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
+
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
+
 import Scripts from "@/components/Scripts";
 import StyledComponentsRegistry from "@/utils/registry";
-
 import "@/styles/globals.scss";
 import Providers from "@/providers";
 import { getSettings, getUser } from "@/utils/actions";
@@ -37,6 +39,13 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const hdrs = headers();
+
+  if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
+    console.log("is health check");
+    return <></>;
+  }
+
   const startDate = new Date();
   const [user, settings] = await Promise.all([getUser(), getSettings()]);
   const timer = new Date().getTime() - startDate.getTime();

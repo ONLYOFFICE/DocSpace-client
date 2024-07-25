@@ -337,7 +337,10 @@ export async function getTrashFolderList() {
 //   return request(options);
 // }
 
-export async function createFolder(parentFolderId: number, title: string) {
+export async function createFolder(
+  parentFolderId: number | string,
+  title: string,
+) {
   const data = { title };
   const options: AxiosRequestConfig = {
     method: "post",
@@ -711,6 +714,21 @@ export async function copyToFolder(
   const res = (await request({
     method: "put",
     url: "/files/fileops/copy",
+    data,
+  })) as TOperation[];
+
+  return res;
+}
+
+export async function duplicate(folderIds: number[], fileIds: number[]) {
+  const data = {
+    folderIds,
+    fileIds,
+  };
+
+  const res = (await request({
+    method: "put",
+    url: "/files/fileops/duplicate",
     data,
   })) as TOperation[];
 
@@ -1430,4 +1448,11 @@ export async function startFilling(fileId: string | number): Promise<void> {
   };
 
   await request(options);
+}
+
+export async function checkIsPDFForm(fileId: string | number) {
+  return request({
+    method: "get",
+    url: `/files/file/${fileId}/isformpdf`,
+  }) as Promise<boolean>;
 }

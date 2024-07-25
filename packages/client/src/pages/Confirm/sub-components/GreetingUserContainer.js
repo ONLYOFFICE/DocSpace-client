@@ -33,7 +33,7 @@ import { Text } from "@docspace/shared/components/text";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.left.react.svg?url";
 
 const DEFAULT_CREATION_TEXT =
-  "A DocSpace account will be created for {{email}}. Please, complete your registration:";
+  "A {{productName}} account will be created for {{email}}. Please, complete your registration:";
 
 const GreetingUserContainer = ({
   email,
@@ -69,6 +69,7 @@ const GreetingUserContainer = ({
           values={{
             email,
           }}
+          productName={t("Common:ProductName")}
           components={{
             1: <ColorTheme tag="a" themeId={ThemeId.Link} isHovered={false} />,
           }}

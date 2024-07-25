@@ -55,6 +55,8 @@ export type NonFunctionProperties<T, ExcludeTypes> = Pick<
   NonFunctionPropertyNames<T, ExcludeTypes>
 >;
 
+export type MergeTypes<T, MergedType> = Omit<T, keyof MergedType> & MergedType;
+
 export type TPathParts = {
   id: number;
   title: string;
@@ -99,7 +101,7 @@ declare global {
     DocSpace: {
       navigate: (path: string, state?: { [key: string]: unknown }) => void;
     };
-    DocSpaceConfig?: {
+    ClientConfig?: {
       pdfViewerUrl: string;
       wrongPortalNameUrl?: string;
       api: {
@@ -110,6 +112,9 @@ declare global {
         url?: string;
       };
       imageThumbnails?: boolean;
+      oauth2: {
+        origin: string;
+      };
       editor?: {
         requestClose: boolean;
       };

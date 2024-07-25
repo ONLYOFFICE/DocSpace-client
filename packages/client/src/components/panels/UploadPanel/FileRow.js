@@ -41,30 +41,19 @@ import { Button } from "@docspace/shared/components/button";
 import { tablet } from "@docspace/shared/utils";
 
 const StyledFileRow = styled(Row)`
-  width: calc(100% - 16px);
+  width: 100%;
   box-sizing: border-box;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          padding-right: 16px;
-        `
-      : css`
-          padding-left: 16px;
-        `}
-  max-width: 484px;
 
   .row_context-menu-wrapper {
     width: auto;
     display: none;
   }
-  ::after {
-    max-width: 468px;
-    width: calc(100% - 16px);
-  }
 
   ${!isMobile && "min-height: 48px;"}
 
   height: 100%;
+
+  padding-inline-end: 16px;
 
   .styled-element,
   .row_content {
@@ -334,6 +323,11 @@ class FileRow extends Component {
 
     const onMediaClick = () => this.onMediaClick(item.fileId);
 
+    const onFileClick = (url) => {
+      if (!url) return;
+      window.open(url, downloadInCurrentTab ? "_self" : "_blank");
+    };
+
     return (
       <>
         <StyledFileRow
@@ -363,11 +357,14 @@ class FileRow extends Component {
               ) : (
                 <div className="upload-panel_file-name">
                   <Link
+                    onClick={() =>
+                      onFileClick(item.fileInfo ? item.fileInfo.webUrl : "")
+                    }
                     fontWeight="600"
                     color={item.error && "#A3A9AE"}
                     truncate
-                    href={item.fileInfo ? item.fileInfo.webUrl : ""}
-                    target={downloadInCurrentTab ? "_self" : "_blank"}
+                    // href={item.fileInfo ? item.fileInfo.webUrl : ""}
+                    // target={downloadInCurrentTab ? "_self" : "_blank"}
                   >
                     {name}
                     {fileExtension}

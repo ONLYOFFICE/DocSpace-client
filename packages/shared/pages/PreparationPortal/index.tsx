@@ -115,7 +115,9 @@ const PreparationPortal = (props: IPreparationPortal) => {
                 <Text className="preparation-portal_percent">{`${percent} %`}</Text>
               </div>
               <Text className="preparation-portal_text">
-                {t("PreparationPortalDescription")}
+                {t("PreparationPortalDescription", {
+                  productName: t("Common:ProductName"),
+                })}
               </Text>
             </ColorTheme>
           )}

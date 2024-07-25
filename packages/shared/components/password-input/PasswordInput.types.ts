@@ -129,6 +129,8 @@ export interface PasswordInputProps {
   simpleView?: boolean;
   /** Sets a title of the password generation button */
   generatePasswordTitle?: string;
+  /** Title that indicates that the tooltip must contain allowed characters */
+  tooltipAllowedCharacters?: string;
   /** Setting display block to set element to full width */
   isFullWidth?: boolean;
   /** Focus the input field on initial render */

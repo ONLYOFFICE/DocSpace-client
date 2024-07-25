@@ -86,12 +86,13 @@ const STORAGE_FILTER = "storageFilter";
 const DEFAULT_STORAGE_FILTER = null;
 
 class RoomsFilter {
-  static getDefault(userId) {
+  static getDefault(userId, searchArea) {
     const defaultFilter = new RoomsFilter(
       DEFAULT_PAGE,
       DEFAULT_PAGE_COUNT,
       DEFAULT_TOTAL,
     );
+    defaultFilter.searchArea = searchArea || DEFAULT_SEARCH_AREA;
 
     if (userId) {
       try {

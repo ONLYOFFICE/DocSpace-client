@@ -44,22 +44,23 @@ import {
 import withLoader from "../withLoader";
 
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
+import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 
 const RemovePortal = (props) => {
   const { t, greetingTitle, linkData, companyInfoSettingsData } = props;
   const [isRemoved, setIsRemoved] = useState(false);
-  const navigate = useNavigate();
 
   const url = companyInfoSettingsData?.site
     ? companyInfoSettingsData.site
     : "https://onlyoffice.com";
 
+  const navigate = useNavigate();
+
   const onDeleteClick = async () => {
     try {
-      await deletePortal(linkData.confirmHeader);
+      const res = await deletePortal(linkData.confirmHeader);
       setIsRemoved(true);
-      setTimeout(() => (location.href = url), 10000);
+      setTimeout(() => (location.href = res ? res : url), 10000);
     } catch (e) {
       toastr.error(e);
     }
@@ -73,7 +74,7 @@ const RemovePortal = (props) => {
     <StyledPage>
       <StyledContent>
         <StyledBody>
-          <DocspaceLogo className="docspace-logo" />
+          <PortalLogo className="portal-logo" />
           <Text fontSize="23px" fontWeight="700" className="title">
             {greetingTitle}
           </Text>
@@ -91,7 +92,11 @@ const RemovePortal = (props) => {
               </Text>
             ) : (
               <>
-                <Text className="subtitle">{t("PortalRemoveTitle")}</Text>
+                <Text className="subtitle">
+                  {t("PortalRemoveTitle", {
+                    productName: t("Common:ProductName"),
+                  })}
+                </Text>
                 <ButtonsWrapper>
                   <Button
                     primary

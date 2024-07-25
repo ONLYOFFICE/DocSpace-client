@@ -38,7 +38,7 @@ export const YearsHeader = ({
   isMobile,
 }: YearsHeaderProps) => {
   const selectedYear = observedDate.year();
-  const firstYear = selectedYear - (selectedYear % 10);
+  const firstYear = selectedYear;
 
   const onLeftClick = () =>
     setObservedDate((prevObservedDate) =>

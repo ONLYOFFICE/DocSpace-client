@@ -65,6 +65,7 @@ const ArticleBodyContent = (props) => {
     isProfileLoading,
     limitedAccessSpace,
     currentColorScheme,
+    baseDomain,
   } = props;
 
   const [selectedKeys, setSelectedKeys] = React.useState([]);
@@ -210,7 +211,7 @@ const ArticleBodyContent = (props) => {
       case "ManagementCategorySecurity":
         return t("ManagementCategorySecurity");
       case "PortalAccess":
-        return t("PortalAccess");
+        return t("PortalAccess", { productName: t("Common:ProductName") });
       case "TwoFactorAuth":
         return t("TwoFactorAuth");
       case "ManagementCategoryIntegration":
@@ -225,24 +226,22 @@ const ArticleBodyContent = (props) => {
         return t("Common:PaymentsTitle");
       case "ManagementCategoryDataManagement":
         return t("ManagementCategoryDataManagement");
+      case "LdapSettings":
+        return t("Ldap:LdapSettings");
+      case "LdapSyncTitle":
+        return t("Ldap:LdapSyncTitle");
       case "RestoreBackup":
         return t("RestoreBackup");
       case "PortalDeletion":
-        return t("PortalDeletion");
+        return t("PortalDeletion", { productName: t("Common:ProductName") });
       case "Common:DeveloperTools":
         return t("Common:DeveloperTools");
       case "Common:Bonus":
         return t("Common:Bonus");
-      case "Common:FreeProFeatures":
-        return "Common:FreeProFeatures";
+      case "Common:FreeAccessToLicensedVersion":
+        return "Common:FreeAccessToLicensedVersion";
       case "DataImport":
         return t("DataImport");
-      case "ImportFromGoogle":
-        return t("ImportFromGoogle");
-      case "ImportFromNextcloud":
-        return t("ImportFromNextcloud");
-      case "ImportFromOnlyoffice":
-        return t("ImportFromOnlyoffice");
       case "StorageManagement":
         return t("StorageManagement");
       default:
@@ -282,7 +281,7 @@ const ArticleBodyContent = (props) => {
       }
     }
 
-    if (!isOwner) {
+    if (!isOwner || (baseDomain && baseDomain === "localhost")) {
       const index = resultTree.findIndex((n) => n.tKey === "PortalDeletion");
       if (index !== -1) {
         resultTree.splice(index, 1);
@@ -298,14 +297,16 @@ const ArticleBodyContent = (props) => {
 
       const patternSearching = selectedKeys[0].split("-");
       const selectedKey = patternSearching[0];
+      const title = mapKeys(item.tKey);
 
       items.push(
         <ArticleItem
           key={item.key}
           id={item.key}
+          title={title}
           icon={icon}
           showText={showText}
-          text={mapKeys(item.tKey)}
+          text={title}
           value={item.link}
           isActive={item.key === selectedKey}
           onClick={(e) => onSelect(item.key, e)}
@@ -351,6 +352,7 @@ export default inject(
       currentDeviceType,
       limitedAccessSpace,
       currentColorScheme,
+      baseDomain,
     } = settingsStore;
 
     const isProfileLoading =
@@ -372,10 +374,13 @@ export default inject(
       isProfileLoading,
       limitedAccessSpace,
       currentColorScheme,
+      baseDomain,
     };
   },
 )(
   withLoading(
-    withTranslation(["Settings", "Common"])(observer(ArticleBodyContent)),
+    withTranslation(["Settings", "Common", "Ldap"])(
+      observer(ArticleBodyContent),
+    ),
   ),
 );

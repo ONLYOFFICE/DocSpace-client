@@ -29,12 +29,10 @@ import { useTranslation } from "react-i18next";
 
 import { useStore } from "SRC_DIR/store";
 import BrandingPage from "client/BrandingPage";
+import { setDocumentTitle } from "SRC_DIR/utils";
 
 const Branding = () => {
   const { t } = useTranslation(["Settings"]);
-
-  const { authStore } = useStore();
-  const { setDocumentTitle } = authStore;
 
   useEffect(() => {
     setDocumentTitle(t("Branding"));

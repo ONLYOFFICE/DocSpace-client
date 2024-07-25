@@ -38,7 +38,6 @@ import { PreviewBlock } from "../sub-components/PreviewBlock";
 import { loadFrame } from "../utils";
 
 import {
-  scriptUrl,
   dataDimensions,
   defaultWidthDimension,
   defaultHeightDimension,
@@ -53,9 +52,11 @@ import {
   Container,
   ControlsSection,
 } from "./StyledPresets";
+import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const DocSpace = (props) => {
-  const { t, setDocumentTitle, theme } = props;
+  const { t, theme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -87,7 +88,7 @@ const DocSpace = (props) => {
     window.DocSpace?.SDK?.frames[frameId]?.destroyFrame();
   };
 
-  const loadCurrentFrame = () => loadFrame(config, scriptUrl);
+  const loadCurrentFrame = () => loadFrame(config, SDK_SCRIPT_URL);
 
   useEffect(() => {
     loadCurrentFrame();
@@ -113,8 +114,10 @@ const DocSpace = (props) => {
 
   return (
     <PresetWrapper
-      description={t("DocspaceDescription")}
-      header={t("CreateSampleDocspace")}
+      description={t("PortalDescription", {
+        productName: t("Common:ProductName"),
+      })}
+      header={t("CreateSamplePortal", { productName: t("Common:ProductName") })}
     >
       <Container>
         <PreviewBlock
@@ -123,7 +126,7 @@ const DocSpace = (props) => {
           preview={preview}
           theme={theme}
           frameId={frameId}
-          scriptUrl={scriptUrl}
+          scriptUrl={SDK_SCRIPT_URL}
           config={config}
         />
         <Controls>
@@ -155,13 +158,11 @@ const DocSpace = (props) => {
   );
 };
 
-export default inject(({ authStore, settingsStore }) => {
-  const { setDocumentTitle } = authStore;
+export default inject(({ settingsStore }) => {
   const { theme } = settingsStore;
 
   return {
     theme,
-    setDocumentTitle,
   };
 })(
   withTranslation([

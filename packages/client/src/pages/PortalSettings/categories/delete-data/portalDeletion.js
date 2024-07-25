@@ -31,7 +31,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { Link } from "@docspace/shared/components/link";
 import { MainContainer, ButtonWrapper } from "./StyledDeleteData";
-import { setDocumentTitle } from "../../../../helpers/utils";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { DeletePortalDialog } from "SRC_DIR/components/dialogs";
 import { toastr } from "@docspace/shared/components/toast";
 import {
@@ -56,7 +56,9 @@ const PortalDeletion = (props) => {
   };
 
   useEffect(() => {
-    setDocumentTitle(t("DeleteDocspace"));
+    setDocumentTitle(
+      t("DeletePortal", { productName: t("Common:ProductName") }),
+    );
     fetchData();
     onCheckView();
     window.addEventListener("resize", onCheckView);
@@ -107,7 +109,10 @@ const PortalDeletion = (props) => {
         />
         {notActivatedEmail && (
           <Text fontSize="12px" fontWeight="600">
-            {t("MainBar:ConfirmEmailHeader", { email: owner.email })}
+            {t("MainBar:ConfirmEmailHeader", {
+              email: owner.email,
+              productName: t("Common:ProductName"),
+            })}
             <Link
               className="request-again-link"
               color={currentColorScheme?.main?.accent}

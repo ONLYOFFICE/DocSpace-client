@@ -32,7 +32,7 @@ import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 
 import { ProfileViewLoader } from "@docspace/shared/skeletons/profile";
-import { Submenu } from "@docspace/shared/components/submenu";
+import { Tabs } from "@docspace/shared/components/tabs";
 
 import MainProfile from "./sub-components/main-profile";
 import LoginContent from "./sub-components/LoginContent";
@@ -41,6 +41,8 @@ import FileManagement from "./sub-components/file-management";
 import InterfaceTheme from "./sub-components/interface-theme";
 
 import { tablet } from "@docspace/shared/utils";
+import { DeviceType } from "@docspace/shared/enums";
+import AuthorizedApps from "./sub-components/authorized-apps";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
 const Wrapper = styled.div`
@@ -54,16 +56,22 @@ const Wrapper = styled.div`
   }
 `;
 
-const StyledSubMenu = styled(Submenu)`
+const StyledTabs = styled(Tabs)`
   > .sticky {
     z-index: 201;
-    margin-inline-end: -17px;
-    padding-inline-end: 17px;
+    margin-inline-end: -16px;
+    padding-inline-end: 16px;
   }
 `;
 
 const SectionBodyContent = (props) => {
-  const { showProfileLoader, profile, currentDeviceType, t } = props;
+  const {
+    showProfileLoader,
+    profile,
+    currentDeviceType,
+    identityServerEnabled,
+    t,
+  } = props;
   const navigate = useNavigate();
 
   const data = [
@@ -84,6 +92,14 @@ const SectionBodyContent = (props) => {
     },
   ];
 
+  if (identityServerEnabled) {
+    data.push({
+      id: "authorized-apps",
+      name: t("OAuth:AuthorizedApps"),
+      content: <AuthorizedApps />,
+    });
+  }
+
   if (!profile?.isVisitor)
     data.splice(2, 0, {
       id: "file-management",
@@ -91,13 +107,13 @@ const SectionBodyContent = (props) => {
       content: <FileManagement />,
     });
 
-  const getCurrentTab = () => {
+  const getCurrentTabId = () => {
     const path = location.pathname;
-    const currentTab = data.findIndex((item) => path.includes(item.id));
-    return currentTab !== -1 ? currentTab : 0;
+    const currentTab = data.find((item) => path.includes(item.id));
+    return currentTab !== -1 && data.length ? currentTab.id : data[0].id;
   };
 
-  const currentTab = getCurrentTab();
+  const currentTabId = getCurrentTabId();
 
   const onSelect = (e) => {
     const arrayPaths = location.pathname.split("/");
@@ -110,26 +126,31 @@ const SectionBodyContent = (props) => {
   return (
     <Wrapper>
       <MainProfile />
-      <StyledSubMenu
-        data={data}
-        startSelect={currentTab}
+      <StyledTabs
+        items={data}
+        selectedItemId={currentTabId}
         onSelect={onSelect}
-        topProps={SECTION_HEADER_HEIGHT[currentDeviceType]}
+        stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
       />
     </Wrapper>
   );
 };
 
-export default inject(({ settingsStore, peopleStore, clientLoadingStore }) => {
-  const { showProfileLoader } = clientLoadingStore;
-  const { targetUser: profile } = peopleStore.targetUserStore;
+export default inject(
+  ({ settingsStore, peopleStore, clientLoadingStore, authStore }) => {
+    const { showProfileLoader } = clientLoadingStore;
+    const { targetUser: profile } = peopleStore.targetUserStore;
 
-  return {
-    profile,
-    currentDeviceType: settingsStore.currentDeviceType,
-    showProfileLoader,
-  };
-})(
+    const { identityServerEnabled } = authStore.capabilities;
+
+    return {
+      profile,
+      currentDeviceType: settingsStore.currentDeviceType,
+      showProfileLoader,
+      identityServerEnabled,
+    };
+  },
+)(
   observer(
     withTranslation([
       "Profile",
@@ -141,6 +162,7 @@ export default inject(({ settingsStore, peopleStore, clientLoadingStore }) => {
       "DeleteSelfProfileDialog",
       "Notifications",
       "ConnectDialog",
+      "OAuth",
     ])(SectionBodyContent),
   ),
 );

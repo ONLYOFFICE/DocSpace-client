@@ -41,10 +41,12 @@ export const getAccessOptions = (
 ) => {
   let options = [];
   const accesses = {
-    docSpaceAdmin: {
-      key: "docSpaceAdmin",
-      label: t("Common:DocspaceAdmin"),
-      description: t("Translations:RoleDocspaceAdminDescription"),
+    portalAdmin: {
+      key: "portalAdmin",
+      label: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
+      description: t("Translations:RolePortalAdminDescription", {
+        productName: t("Common:ProductName"),
+      }),
       ...(!standalone && { quota: t("Common:Paid") }),
       color: "#EDC409",
       access:
@@ -179,7 +181,7 @@ export const getAccessOptions = (
       ];
       break;
     case -1:
-      if (isOwner) options.push(accesses.docSpaceAdmin);
+      if (isOwner) options.push(accesses.portalAdmin);
 
       options = [
         ...options,

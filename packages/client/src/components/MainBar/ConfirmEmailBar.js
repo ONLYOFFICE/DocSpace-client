@@ -44,7 +44,10 @@ const ConfirmEmailBar = ({
   return (
     tReady && (
       <SnackBar
-        headerText={t("ConfirmEmailHeader", { email: userEmail })}
+        headerText={t("ConfirmEmailHeader", {
+          email: userEmail,
+          productName: t("Common:ProductName"),
+        })}
         text={
           <>
             {t("ConfirmEmailDescription")}{" "}

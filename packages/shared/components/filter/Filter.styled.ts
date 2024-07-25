@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { isIOS, isMobile } from "react-device-detect";
 
 import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
 
@@ -675,7 +674,7 @@ const StyledSortButton = styled.div<{ viewAs: TViewAs; isDesc: boolean }>`
 
       .selected-option-item {
         background: ${(props) => props.theme.filterInput.sort.hoverBackground};
-        cursor: auto;
+        cursor: pointer;
 
         .selected-option-item__icon {
           visibility: visible;

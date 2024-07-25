@@ -27,7 +27,7 @@
 import { isMobile } from "@docspace/shared/utils";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import RoomType from "../RoomType";
+import RoomType from "@docspace/shared/components/room-type";
 import DropdownDesktop from "./DropdownDesktop";
 import DropdownMobile from "./DropdownMobile";
 
@@ -47,7 +47,7 @@ const RoomTypeDropdown = ({
   setRoomType,
   setIsScrollLocked,
   isDisabled,
-  forсeHideDropdown,
+  forceHideDropdown,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -69,11 +69,11 @@ const RoomTypeDropdown = ({
   };
 
   useEffect(() => {
-    if (forсeHideDropdown) {
+    if (forceHideDropdown) {
       setIsScrollLocked(false);
       setIsOpen(false);
     }
-  }, [forсeHideDropdown]);
+  }, [forceHideDropdown]);
 
   return (
     <StyledRoomTypeDropdown isOpen={isOpen}>
@@ -92,7 +92,7 @@ const RoomTypeDropdown = ({
           open={isOpen}
           onClose={toggleDropdown}
           chooseRoomType={chooseRoomType}
-          forсeHideDropdown={forсeHideDropdown}
+          forceHideDropdown={forceHideDropdown}
         />
       ) : (
         <DropdownDesktop t={t} open={isOpen} chooseRoomType={chooseRoomType} />

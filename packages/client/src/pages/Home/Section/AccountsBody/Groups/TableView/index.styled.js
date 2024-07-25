@@ -139,6 +139,11 @@ export const GroupsRow = styled(TableRow)`
     justify-content: flex-end;
     padding-inline-end: 0;
   }
+
+  .badges {
+    margin-inline-start: 12px;
+  }
+
   :hover {
     .table-container_cell {
       cursor: pointer;

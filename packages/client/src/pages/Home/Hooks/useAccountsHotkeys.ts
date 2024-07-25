@@ -26,7 +26,6 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { useHotkeys, Options } from "react-hotkeys-hook";
-import throttle from "lodash/throttle";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
 interface AccountsHotkeysProps {
@@ -36,6 +35,10 @@ interface AccountsHotkeysProps {
   selectBottom: () => void;
   selectUpper: () => void;
   activateHotkeys: (e: KeyboardEvent) => void;
+  selectAll: () => void;
+  deselectAll: () => void;
+  openItem: () => void;
+  onClickBack: (fromHotkeys: boolean) => void;
 }
 
 const useAccountsHotkeys = ({
@@ -44,6 +47,10 @@ const useAccountsHotkeys = ({
   selectBottom,
   selectUpper,
   activateHotkeys,
+  selectAll,
+  deselectAll,
+  openItem,
+  onClickBack,
 }: AccountsHotkeysProps) => {
   const [isEnabled, setIsEnabled] = useState(true);
 
@@ -71,14 +78,17 @@ const useAccountsHotkeys = ({
   );
 
   useEffect(() => {
-    const throttledKeyDownEvent = throttle(onKeyDown, 300);
-
     window.addEventListener("keydown", onKeyDown);
 
     return () => {
-      window.removeEventListener("keypress", throttledKeyDownEvent);
+      window.removeEventListener("keydown", onKeyDown);
     };
   }, [onKeyDown]);
+
+  const onClickBackAction = () => {
+    deselectAll();
+    onClickBack(true);
+  };
 
   useHotkeys(
     "*",
@@ -104,6 +114,18 @@ const useAccountsHotkeys = ({
     },
     hotkeysFilter,
   );
+
+  // Select all accounts
+  useHotkeys("shift+a, ctrl+a", selectAll, hotkeysFilter);
+
+  // Deselect all accounts
+  useHotkeys("shift+n, ESC", deselectAll, hotkeysFilter);
+
+  // Open item
+  useHotkeys("Enter", () => openItem(), hotkeysFilter);
+
+  // Back to parent folder
+  useHotkeys("Backspace", onClickBackAction, hotkeysFilter);
 };
 
 export default useAccountsHotkeys;

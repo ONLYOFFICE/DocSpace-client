@@ -124,8 +124,12 @@ const ChangeStorageQuotaDialog = (props) => {
       <ModalDialog.Body>
         <Text noSelect>
           {isDisableQuota
-            ? t("Common:TurnOffDiskSpaceLimit")
-            : t("Common:SetDiskSpaceQuota")}
+            ? t("Common:TurnOffDiskSpaceLimit", {
+                productName: t("Common:ProductName"),
+              })
+            : t("Common:SetDiskSpaceQuota", {
+                productName: t("Common:ProductName"),
+              })}
         </Text>
         {!isDisableQuota && (
           <QuotaForm

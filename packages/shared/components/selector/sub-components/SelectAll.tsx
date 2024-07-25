@@ -24,63 +24,68 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { ReactNode, useContext } from "react";
 
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
 import { Text } from "../../text";
 import { Checkbox } from "../../checkbox";
 
 import { StyledSelectAll } from "../Selector.styled";
-import { SelectAllProps } from "../Selector.types";
+import { SelectAllContext } from "../contexts/SelectAll";
 
 const SelectAll = React.memo(
   ({
-    label,
-    icon,
-    onSelectAll,
-    isChecked,
-    isIndeterminate,
+    show,
     isLoading,
     rowLoader,
-  }: SelectAllProps) => {
+  }: {
+    show: boolean;
+    isLoading: boolean;
+    rowLoader: ReactNode;
+  }) => {
+    const {
+      selectAllIcon,
+      selectAllLabel,
+      isAllChecked,
+      isAllIndeterminate,
+      onSelectAll,
+    } = useContext(SelectAllContext);
+
+    if (!show) return null;
+
+    if (isLoading) return rowLoader;
+
     const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
       if (e.target instanceof HTMLElement && e.target.closest(".checkbox"))
         return;
 
-      onSelectAll();
+      onSelectAll?.();
     };
 
     return (
       <StyledSelectAll onClick={onClick}>
-        {isLoading ? (
-          rowLoader
-        ) : (
-          <>
-            <Avatar
-              className="select-all_avatar"
-              source={icon}
-              role={AvatarRole.user}
-              size={AvatarSize.min}
-            />
+        <Avatar
+          className="select-all_avatar"
+          source={selectAllIcon ?? ""}
+          role={AvatarRole.user}
+          size={AvatarSize.min}
+        />
 
-            <Text
-              className="label"
-              fontWeight={600}
-              fontSize="14px"
-              noSelect
-              truncate
-            >
-              {label}
-            </Text>
+        <Text
+          className="label"
+          fontWeight={600}
+          fontSize="14px"
+          noSelect
+          truncate
+        >
+          {selectAllLabel}
+        </Text>
 
-            <Checkbox
-              className="checkbox"
-              isChecked={isChecked}
-              isIndeterminate={isIndeterminate}
-              // onChange={onSelectAll}
-            />
-          </>
-        )}
+        <Checkbox
+          className="checkbox"
+          isChecked={isAllChecked}
+          isIndeterminate={isAllIndeterminate}
+        />
       </StyledSelectAll>
     );
   },

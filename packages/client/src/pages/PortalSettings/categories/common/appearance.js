@@ -32,7 +32,7 @@ import { inject, observer } from "mobx-react";
 import { Button } from "@docspace/shared/components/button";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { Text } from "@docspace/shared/components/text";
-import { TabsContainer } from "@docspace/shared/components/tabs-container";
+import { Tabs, TabsTypes } from "@docspace/shared/components/tabs";
 import Preview from "./Appearance/preview";
 import { saveToSessionStorage, getFromSessionStorage } from "../../utils";
 import ColorSchemeDialog from "./sub-components/colorSchemeDialog";
@@ -138,12 +138,11 @@ const Appearance = (props) => {
 
   const [theme, setTheme] = useState(appearanceTheme);
 
-  const array_items = useMemo(
+  const arrayItems = useMemo(
     () => [
       {
         id: "light-theme",
-        key: "0",
-        title: t("Profile:LightTheme"),
+        name: t("Profile:LightTheme"),
         content: (
           <Preview
             appliedColorAccent={appliedColorAccent}
@@ -156,8 +155,7 @@ const Appearance = (props) => {
       },
       {
         id: "dark-theme",
-        key: "1",
-        title: t("Profile:DarkTheme"),
+        name: t("Profile:DarkTheme"),
         content: (
           <Preview
             appliedColorAccent={appliedColorAccent}
@@ -185,7 +183,7 @@ const Appearance = (props) => {
 
   useEffect(() => {
     getSettings();
-    setDocumentTitle(t("Appearance"));
+    setDocumentTitle(t("Common:Appearance"));
   }, []);
 
   useEffect(() => {
@@ -799,7 +797,7 @@ const Appearance = (props) => {
           onSaveColorSchemeDialog={onSaveColorSchemeDialog}
         />
         <div className="header preview-header">{t("Common:Preview")}</div>
-        <TabsContainer elements={array_items} />
+        <Tabs items={arrayItems} type={TabsTypes.Secondary} />
 
         <div className="buttons-container">
           <Button

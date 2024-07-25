@@ -88,8 +88,13 @@ const DeleteGroupDialog = (props) => {
       <ModalDialog.Body>
         <Text>
           {hasMoreGroups
-            ? t("DeleteDialog:DeleteAllGroupDescription")
-            : t("DeleteDialog:DeleteGroupDescription", { groupName })}
+            ? t("DeleteDialog:DeleteAllGroupDescription", {
+                productName: t("Common:ProductName"),
+              })
+            : t("DeleteDialog:DeleteGroupDescription", {
+                productName: t("Common:ProductName"),
+                groupName,
+              })}
         </Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>

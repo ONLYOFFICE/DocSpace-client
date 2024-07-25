@@ -167,7 +167,11 @@ const FileManagement = ({
               onChange={onChangeOpenEditorInSameTab}
               isChecked={openEditorInSameTab}
             />
-            <Text>{t("OpenSameTab")}</Text>
+            <Text>
+              {t("OpenSameTab", {
+                organizationName: t("Common:OrganizationName"),
+              })}
+            </Text>
           </div>
         )}
       </Box>

@@ -45,7 +45,9 @@ const PreparationPortalDialog = (props) => {
       isCloseable={false}
       isLarge
     >
-      <ModalDialog.Header>{t("PortalRestoring")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {t("PortalRestoring", { productName: t("Common:ProductName") })}
+      </ModalDialog.Header>
       <ModalDialog.Body>
         <StyledPreparationPortalDialog>
           <PreparationPortal withoutHeader style={{ padding: "0" }} isDialog />

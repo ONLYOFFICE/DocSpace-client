@@ -104,74 +104,65 @@ export const StyledInfo = styled.div`
     display: grid;
     grid-template-columns: minmax(75px, auto) minmax(0, 1fr);
     gap: 24px;
+    row-gap: 16px;
     max-width: 100%;
 
-    .profile-block {
+    .profile-block-field {
       display: flex;
-      flex-direction: column;
+      gap: 8px;
+      height: 20px;
+      align-items: center;
+      line-height: 20px;
+    }
 
-      .profile-block-field {
+    .sso-badge,
+    .ldap-badge {
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-right: 4px;
+            `
+          : css`
+              margin-left: 4px;
+            `}
+    }
+
+    .email-container {
+      .send-again-desktop {
         display: flex;
-        gap: 8px;
-        height: 20px;
-        align-items: center;
-        line-height: 20px;
       }
+    }
+    .user-type-container {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
 
-      .sso-badge {
+    .language-combo-box-wrapper {
+      display: flex;
+      height: 28px;
+      align-items: center;
+      gap: 8px;
+
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-right: -8px;
+            `
+          : css`
+              margin-left: -8px;
+            `}
+
+      .language-combo-box .combo-button {
+        padding-inline-end: 0px;
         ${(props) =>
           props.theme.interfaceDirection === "rtl"
             ? css`
-                margin-right: 18px;
+                padding-right: 8px;
               `
             : css`
-                margin-left: 18px;
+                padding-left: 8px;
               `}
-      }
-
-      .profile-block-password {
-        margin-top: 16px;
-      }
-
-      .email-container {
-        margin-top: 16px;
-
-        .send-again-desktop {
-          display: flex;
-        }
-      }
-      .language-combo-box-wrapper {
-        display: flex;
-        height: 28px;
-        align-items: center;
-        margin-top: 11px;
-        gap: 8px;
-
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-right: -8px;
-              `
-            : css`
-                margin-left: -8px;
-              `}
-
-        .language-combo-box .combo-button {
-          padding-inline-end: 0px;
-          ${(props) =>
-            props.theme.interfaceDirection === "rtl"
-              ? css`
-                  padding-right: 8px;
-                `
-              : css`
-                  padding-left: 8px;
-                `}
-        }
-
-        @media ${tablet} {
-          height: 36px;
-          margin-top: 7px;
-        }
       }
     }
   }

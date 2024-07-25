@@ -25,64 +25,57 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 import { observer, inject } from "mobx-react";
 
 import HeaderIcon from "PUBLIC_DIR/images/ready.pdf.form.modal.svg";
+import HeaderDarkIcon from "PUBLIC_DIR/images/ready.pdf.form.modal.dark.svg";
 
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 
 import { Wrapper } from "./CreatedPDFFormDialog.styled";
-import type { CreatedPDFFormDialogProps } from "./CreatedPDFFormDialog.types";
+import type {
+  CreatedPDFFormDialogProps,
+  InjectedCreatedPDFFormDialogProps,
+} from "./CreatedPDFFormDialog.types";
 
 export const CreatedPDFFormDialog = inject<TStore>(
-  ({ contextOptionsStore, selectedFolderStore }) => {
-    const { onClickInviteUsers, onClickLinkFillForm } = contextOptionsStore;
-    const { id, roomType, security } = selectedFolderStore;
+  ({ contextOptionsStore }) => {
+    const { onCopyLink } = contextOptionsStore;
 
-    return {
-      id,
-      roomType,
-      security,
-      onClickInviteUsers,
-      onClickLinkFillForm,
-    };
+    return { onCopyLink };
   },
 )(
   observer(
     ({
-      data,
-      roomType,
-      security,
-      id: selectedFolderId,
-      onClickInviteUsers,
-      onClickLinkFillForm,
+      file,
+      localKey,
       onClose,
+      onCopyLink,
       visible,
-    }: CreatedPDFFormDialogProps) => {
+    }: CreatedPDFFormDialogProps & InjectedCreatedPDFFormDialogProps) => {
       const { t } = useTranslation(["PDFFormDialog", "Common"]);
+      const theme = useTheme();
 
       const onSubmit = () => {
-        if (data.isFill) {
-          onClickLinkFillForm?.(data.file);
-        } else if (Boolean(roomType) && security?.EditAccess) {
-          onClickInviteUsers?.(selectedFolderId, roomType);
-        }
-
+        onCopyLink(file, t);
         onClose();
       };
 
-      const description = data.isFill
-        ? t("PDFFormSuccessfullyCreatedDescription")
-        : t("PDFFormInviteDescription");
+      const handleChangeCheckbox = (
+        event: React.ChangeEvent<HTMLInputElement>,
+      ) => {
+        localStorage.setItem(localKey, event.target.checked.toString());
+      };
 
-      const primaryButtonLabel = data.isFill
-        ? t("Common:Fill")
-        : t("Common:Invite");
+      const description = t("PDFFormSuccessfullyCreatedDescription");
+      const primaryButtonLabel = t("Common:CopyPublicLink");
 
       return (
         <ModalDialog
@@ -94,8 +87,13 @@ export const CreatedPDFFormDialog = inject<TStore>(
           <ModalDialog.Header>{t("PDFFormDialogTitle")}</ModalDialog.Header>
           <ModalDialog.Body>
             <Wrapper>
-              <HeaderIcon />
+              {theme.isBase ? <HeaderIcon /> : <HeaderDarkIcon />}
               <span>{description}</span>
+              <Checkbox
+                className="created-pdf__checkbox"
+                onChange={handleChangeCheckbox}
+                label={t("Common:DontShowAgain")}
+              />
             </Wrapper>
           </ModalDialog.Body>
           <ModalDialog.Footer>
@@ -121,4 +119,4 @@ export const CreatedPDFFormDialog = inject<TStore>(
       );
     },
   ),
-);
+) as unknown as React.FC<CreatedPDFFormDialogProps>;

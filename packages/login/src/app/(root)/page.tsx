@@ -24,38 +24,54 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { getSettings } from "@/utils/actions";
+import { getOAuthClient, getSettings } from "@/utils/actions";
 import Login from "@/components/Login";
 import LoginForm from "@/components/LoginForm";
 import ThirdParty from "@/components/ThirdParty";
 import RecoverAccess from "@/components/RecoverAccess";
 import Register from "@/components/Register";
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
-async function Page() {
-  const settings = await getSettings();
+async function Page({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string };
+}) {
+  const clientId = searchParams.client_id;
+
+  const [settings, client] = await Promise.all([
+    getSettings(),
+    clientId ? getOAuthClient(clientId) : undefined,
+  ]);
 
   return (
-    <Login>
-      {settings && typeof settings !== "string" && (
-        <>
-          <LoginForm
-            hashSettings={settings?.passwordHash}
-            cookieSettingsEnabled={settings?.cookieSettingsEnabled}
-          />
-          <ThirdParty />
-          {settings.enableAdmMess && <RecoverAccess />}
-          {settings.enabledJoin && (
-            <Register
-              id="login_register"
-              enabledJoin
-              trustedDomains={settings.trustedDomains}
-              trustedDomainsType={settings.trustedDomainsType}
-              isAuthenticated={false}
+    <FormWrapper id="login-form">
+      <Login>
+        {settings && typeof settings !== "string" && (
+          <>
+            <LoginForm
+              hashSettings={settings?.passwordHash}
+              cookieSettingsEnabled={settings?.cookieSettingsEnabled}
+              clientId={clientId}
+              client={client}
+              reCaptchaPublicKey={settings?.recaptchaPublicKey}
+              reCaptchaType={settings?.recaptchaType}
             />
-          )}
-        </>
-      )}
-    </Login>
+            {!clientId && <ThirdParty />}
+            {settings.enableAdmMess && <RecoverAccess />}
+            {settings.enabledJoin && !clientId && (
+              <Register
+                id="login_register"
+                enabledJoin
+                trustedDomains={settings.trustedDomains}
+                trustedDomainsType={settings.trustedDomainsType}
+                isAuthenticated={false}
+              />
+            )}
+          </>
+        )}
+      </Login>
+    </FormWrapper>
   );
 }
 

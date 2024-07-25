@@ -69,7 +69,9 @@ const ChangeUserTypeDialog = ({
               type.
             </Trans>
           )}{" "}
-          {t("ChangeUserTypeMessageWarning")}
+          {t("ChangeUserTypeMessageWarning", {
+            productName: t("Common:ProductName"),
+          })}
         </Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>

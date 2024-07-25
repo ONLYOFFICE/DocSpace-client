@@ -35,6 +35,9 @@ import PrivateRoute from "../components/PrivateRouteWrapper";
 import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 
 import { generalRoutes } from "./general";
+import SettingsContainer from "../pages/PortalSettings/categories/integration/LDAP/sub-components/SettingsContainer";
+import SyncContainer from "../pages/PortalSettings/categories/integration/LDAP/sub-components/SyncContainer";
+import StyledLdapPage from "../pages/PortalSettings/categories/integration/LDAP/styled-components/StyledLdapPage";
 
 const PortalSettings = loadable(() =>
   componentLoader(() => import("../pages/PortalSettings")),
@@ -63,7 +66,7 @@ const WelcomePageSettings = loadable(() =>
 );
 const DNSSettings = loadable(() =>
   componentLoader(
-    () => () =>
+    () =>
       import(
         "../pages/PortalSettings/categories/common/Customization/dns-settings"
       ),
@@ -233,31 +236,7 @@ const DeveloperTools = loadable(() =>
 
 const DataImport = loadable(() =>
   componentLoader(
-    () => import("../pages/PortalSettings/categories/data-import/index.js"),
-  ),
-);
-const GoogleDataImport = loadable(() =>
-  componentLoader(
-    () =>
-      import(
-        "../pages/PortalSettings/categories/data-import/GoogleWorkspace/index.js"
-      ),
-  ),
-);
-const NextcloudDataImport = loadable(() =>
-  componentLoader(
-    () =>
-      import(
-        "../pages/PortalSettings/categories/data-import/NextCloudWorkspace/index.js"
-      ),
-  ),
-);
-const OnlyofficeDataImport = loadable(() =>
-  componentLoader(
-    () =>
-      import(
-        "../pages/PortalSettings/categories/data-import/OnlyofficeWorkspace/index.js"
-      ),
+    () => import("../pages/PortalSettings/categories/data-import/index.tsx"),
   ),
 );
 
@@ -354,6 +333,24 @@ const Viewer = loadable(() =>
   ),
 );
 
+const OAuthCreatePage = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/developer-tools/OAuth/OAuthCreatePage"
+      ),
+  ),
+);
+
+const OAuthEditPage = loadable(() =>
+  componentLoader(
+    () =>
+      import(
+        "../pages/PortalSettings/categories/developer-tools/OAuth/OAuthEditPage"
+      ),
+  ),
+);
+
 const PortalSettingsRoutes = {
   path: "portal-settings/",
   element: (
@@ -367,11 +364,11 @@ const PortalSettingsRoutes = {
   children: [
     {
       index: true,
-      element: <Navigate to="customization/general" />,
+      element: <Navigate to="customization/general" replace />,
     },
     {
       path: "customization",
-      element: <Navigate to="customization/general" />,
+      element: <Navigate to="customization/general" replace />,
     },
     {
       path: "customization/general",
@@ -415,7 +412,7 @@ const PortalSettingsRoutes = {
     },
     {
       path: "security",
-      element: <Navigate to="security/access-portal" />,
+      element: <Navigate to="security/access-portal" replace />,
     },
     {
       path: "security/access-portal",
@@ -459,22 +456,34 @@ const PortalSettingsRoutes = {
     },
     {
       path: "integration",
-      element: <Navigate to="integration/third-party-services" />,
+      element: <Navigate to="integration/third-party-services" replace />,
+    },
+    {
+      path: "integration/ldap",
+      element: <Integration />,
+    },
+    {
+      path: "integration/ldap/settings",
+      element: <SettingsContainer />,
+    },
+    {
+      path: "integration/ldap/sync-data",
+      element: <SyncContainer />,
     },
     {
       path: "integration/third-party-services",
       element: <Integration />,
     },
     {
-      path: "integration/single-sign-on",
+      path: "integration/sso",
       element: <Integration />,
     },
     {
-      path: "integration/single-sign-on/sp-settings",
+      path: "integration/sso/settings",
       element: <SPSettings />,
     },
     {
-      path: "integration/single-sign-on/sp-metadata",
+      path: "integration/sso/metadata",
       element: <SPMetadata />,
     },
     {
@@ -511,7 +520,7 @@ const PortalSettingsRoutes = {
     },
     {
       path: "developer-tools",
-      element: <Navigate to="javascript-sdk" />,
+      element: <Navigate to="javascript-sdk" replace />,
     },
     {
       path: "developer-tools/api",
@@ -522,20 +531,8 @@ const PortalSettingsRoutes = {
       element: <DeveloperTools />,
     },
     {
-      path: "data-import/migration",
+      path: "data-import",
       element: <DataImport />,
-    },
-    {
-      path: "data-import/migration/google",
-      element: <GoogleDataImport />,
-    },
-    {
-      path: "data-import/migration/nextcloud",
-      element: <NextcloudDataImport />,
-    },
-    {
-      path: "data-import/migration/onlyoffice",
-      element: <OnlyofficeDataImport />,
     },
     {
       path: "developer-tools/javascript-sdk/docspace",
@@ -582,8 +579,20 @@ const PortalSettingsRoutes = {
       element: <WebhookDetails />,
     },
     {
+      path: "developer-tools/oauth",
+      element: <DeveloperTools />,
+    },
+    {
+      path: "developer-tools/oauth/create",
+      element: <OAuthCreatePage />,
+    },
+    {
+      path: "developer-tools/oauth/:id",
+      element: <OAuthEditPage />,
+    },
+    {
       path: "backup",
-      element: <Navigate to="backup/data-backup" />,
+      element: <Navigate to="backup/data-backup" replace />,
     },
     {
       path: "backup/data-backup",
@@ -595,7 +604,7 @@ const PortalSettingsRoutes = {
     },
     {
       path: "delete-data",
-      element: <Navigate to="delete-data/deletion" />,
+      element: <Navigate to="delete-data/deletion" replace />,
     },
     {
       path: "delete-data/deletion",
@@ -607,7 +616,7 @@ const PortalSettingsRoutes = {
     },
     {
       path: "restore",
-      element: <Navigate to="restore/restore-backup" />,
+      element: <Navigate to="restore/restore-backup" replace />,
     },
     {
       path: "restore/restore-backup",

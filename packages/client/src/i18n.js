@@ -61,6 +61,7 @@ newInstance
     },
 
     ns: [
+      "Common",
       "ArchiveDialog",
       "InfoPanel",
       "InviteDialog",

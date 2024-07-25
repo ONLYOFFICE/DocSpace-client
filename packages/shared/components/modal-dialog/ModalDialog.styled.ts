@@ -155,13 +155,14 @@ const Content = styled.div.attrs((props: { modalSwipeOffset?: number }) => ({
         `}
 `;
 
-const StyledHeader = styled.div`
+const StyledHeader = styled.div<{ currentDisplayType?: ModalDialogType }>`
   display: flex;
   align-items: center;
   border-bottom: ${(props) =>
     `1px solid ${props.theme.modalDialog.headerBorderColor}`};
-  margin-bottom: 16px;
   height: 52px;
+  margin-bottom: ${(props) =>
+    props.currentDisplayType === "aside" ? "0px" : "16px"};
   padding: 0 16px 0;
 
   .heading {

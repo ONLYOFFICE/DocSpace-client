@@ -159,10 +159,10 @@ const RoomSelector = ({
       if (isFirstLoad) {
         setTotal(totalCount);
 
-        setItems([...rooms] as TSelectorItem[]);
+        setItems([...rooms]);
       } else {
         setItems((prevItems) => {
-          const newItems = [...rooms] as TSelectorItem[];
+          const newItems = [...rooms];
 
           return [...prevItems, ...newItems];
         });

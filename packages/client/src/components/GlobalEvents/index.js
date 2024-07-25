@@ -50,6 +50,7 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
     templateId: null,
     fromTemplate: null,
     onClose: null,
+    toForm: false,
   });
 
   const [renameDialogProps, setRenameDialogProps] = useState({
@@ -115,6 +116,8 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
       withoutDialog: payload.withoutDialog ?? false,
       preview: payload.preview ?? false,
       actionEdit: payload.edit ?? false,
+      openEditor: payload.openEditor ?? true,
+      toForm: payload.toForm ?? false,
       onClose: () => {
         setCreateDialogProps({
           visible: false,
@@ -128,6 +131,8 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
           withoutDialog: false,
           preview: false,
           actionEdit: false,
+          openEditor: true,
+          toForm: false,
         });
       },
     });
@@ -154,8 +159,13 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
     setCreateRoomDialogProps({
       title: e?.title,
       visible: true,
+      startRoomType: e?.payload?.startRoomType,
       onClose: () =>
-        setCreateRoomDialogProps({ visible: false, onClose: null }),
+        setCreateRoomDialogProps({
+          visible: false,
+          onClose: null,
+          startRoomType: undefined,
+        }),
     });
   }, []);
 

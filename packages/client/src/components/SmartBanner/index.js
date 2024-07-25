@@ -93,7 +93,9 @@ const ReactSmartBanner = (props) => {
   return isMobile && isBannerVisible && ready && isTouchDevice ? (
     <Wrapper>
       <SmartBanner
-        title={t("SmartBanner:AppName")}
+        title={t("SmartBanner:AppName", {
+          organizationName: t("Common:OrganizationName"),
+        })}
         author="Ascensio System SIA"
         button={t("Common:View")}
         force={force}

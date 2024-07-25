@@ -30,6 +30,7 @@ import { headers } from "next/headers";
 
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 import { TenantStatus, EditorConfigErrorType } from "@docspace/shared/enums";
+import { tryParseToNumber } from "@docspace/shared/utils/tryParseToNumber";
 import type {
   TDocServiceLocation,
   TFile,
@@ -47,12 +48,41 @@ import type {
 
 import { REPLACED_URL_PATH } from "./constants";
 
+export async function getFillingSession(
+  fillingSessionId: string,
+  share?: string,
+) {
+  const [request] = createRequest(
+    [`/files/file/fillresult?fillingSessionId=${fillingSessionId}`],
+    [
+      ["Content-Type", "application/json;charset=utf-8"],
+      share ? ["Request-Token", share] : ["", ""],
+    ],
+    "GET",
+  );
+
+  try {
+    console.log({ request });
+
+    const response = await fetch(request);
+
+    if (response.ok) return await response.json();
+
+    throw new Error("Something went wrong", {
+      cause: await response.json(),
+    });
+  } catch (error) {
+    console.log("File copyas error ", error);
+  }
+}
+
 export async function fileCopyAs(
   fileId: string,
   destTitle: string,
   destFolderId: string,
   enableExternalExt?: boolean,
   password?: string,
+  toForm?: string,
 ): Promise<{
   file: TFile | undefined;
   error:
@@ -73,11 +103,11 @@ export async function fileCopyAs(
       "POST",
       JSON.stringify({
         destTitle,
-        destFolderId: +destFolderId,
+        destFolderId: tryParseToNumber(destFolderId),
         enableExternalExt,
         password,
+        toForm: toForm === "true",
       }),
-      false,
     );
 
     const file = await (await fetch(createFile)).json();
@@ -139,7 +169,6 @@ export async function createFile(
       [["Content-Type", "application/json;charset=utf-8"]],
       "POST",
       JSON.stringify({ title, templateId, formId }),
-      false,
     );
 
     const file = await (await fetch(createFile)).json();
@@ -311,7 +340,6 @@ export async function getUser(share?: string) {
     [share ? ["Request-Token", share] : ["", ""]],
     "GET",
     undefined,
-    false,
   );
 
   if (!cookie?.includes("asc_auth_key")) return undefined;
@@ -337,7 +365,6 @@ export async function getSettings(share?: string) {
     [share ? ["Request-Token", share] : ["", ""]],
     "GET",
     undefined,
-    false,
   );
 
   const settingsRes = await fetch(getSettings);
@@ -351,6 +378,18 @@ export async function getSettings(share?: string) {
   return settings.response as TSettings;
 }
 
+export const checkIsAuthenticated = async () => {
+  const [request] = createRequest(["/authentication"], [["", ""]], "GET");
+
+  const res = await fetch(request);
+
+  if (!res.ok) return;
+
+  const isAuth = await res.json();
+
+  return isAuth.response as boolean;
+};
+
 export async function checkFillFromDraft(
   templateFileId: number,
   share?: string,
@@ -363,7 +402,6 @@ export async function checkFillFromDraft(
     ],
     "POST",
     JSON.stringify({ fileId: templateFileId }),
-    false,
   );
 
   const response = await fetch(checkFillFormDraft);
@@ -380,6 +418,7 @@ export async function openEdit(
   searchParams: string,
   share?: string,
 ) {
+  const startDate = new Date();
   const hdrs = headers();
   const cookie = hdrs.get("cookie");
 
@@ -388,7 +427,6 @@ export async function openEdit(
     [share ? ["Request-Token", share] : ["", ""]],
     "GET",
     undefined,
-    false,
   );
 
   const res = await fetch(getConfig);
@@ -397,34 +435,39 @@ export async function openEdit(
     const config = await res.json();
 
     if (res.ok) {
+      const timer = new Date().getTime() - startDate.getTime();
+
       config.response.editorUrl = (
         config.response as IInitialConfig
       ).editorUrl.replace(REPLACED_URL_PATH, "");
-      return config.response as IInitialConfig;
+      return { ...config.response, timer } as IInitialConfig;
     }
 
-    const editorUrl =
-      cookie?.includes("asc_auth_key") || share
-        ? (await getEditorUrl("", share)).docServiceUrl
-        : "";
+    const isAuth = share ? true : await checkIsAuthenticated();
+
+    const editorUrl = isAuth
+      ? (await getEditorUrl("", share)).docServiceUrl
+      : "";
 
     const status =
       config.error?.type === EditorConfigErrorType.NotFoundScope
         ? "not-found"
-        : config.error?.type === EditorConfigErrorType.AccessDeniedScope
+        : config.error?.type === EditorConfigErrorType.AccessDeniedScope &&
+            isAuth
           ? "access-denied"
-          : res.status === 415
-            ? "not-supported"
-            : undefined;
+          : config.error?.type === EditorConfigErrorType.TenantQuotaException
+            ? "quota-exception"
+            : res.status === 415
+              ? "not-supported"
+              : undefined;
 
     const message = status ? config.error.message : undefined;
 
-    const error =
-      cookie?.includes("asc_auth_key") || share
-        ? config.error.type === EditorConfigErrorType.LinkScope
-          ? { message: message ?? "unauthorized", status, editorUrl }
-          : { ...config.error, status, editorUrl }
-        : { message: "unauthorized", status, editorUrl };
+    const error = isAuth
+      ? config.error.type === EditorConfigErrorType.LinkScope
+        ? { message: message ?? "unauthorized", status, editorUrl }
+        : { ...config.error, status, editorUrl }
+      : { message: "unauthorized", status, editorUrl };
 
     return error as TError;
   }
@@ -449,7 +492,6 @@ export async function getEditorUrl(
     [share ? ["Request-Token", share] : ["", ""]],
     "GET",
     undefined,
-    false,
   );
 
   const res = await fetch(request);

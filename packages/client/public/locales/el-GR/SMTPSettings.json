@@ -1,5 +1,4 @@
 {
-  "Authentication": "Πιστοποίηση",
   "AuthViaNTLM": "Αυθεντικοποίηση μέσω NTLM",
   "EnableSSL": "Ενεργοποίηση SSL",
   "EnterDomain": "Εισάγετε τομέα",
@@ -12,6 +11,5 @@
   "Port": "Θύρα",
   "SenderDisplayName": "Όνομα απεικόνισης αποστολέα",
   "SenderEmailAddress": "Διεύθυνση Email Αποστολέα",
-  "SendTestMail": "Αποστολή δοκιμαστικού email",
-  "SuccessfullyCompletedOperation": "Η λειτουργία ολοκληρώθηκε με επιτυχία."
+  "SendTestMail": "Αποστολή δοκιμαστικού email"
 }

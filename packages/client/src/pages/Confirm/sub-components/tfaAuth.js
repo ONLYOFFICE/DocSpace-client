@@ -38,7 +38,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import withLoader from "../withLoader";
 import { mobile } from "@docspace/shared/utils";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
+import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import { StyledPage, StyledContent } from "./StyledConfirm";
 import { validateTfaCode } from "@docspace/shared/api/settings";
 import { loginWithTfaCode } from "@docspace/shared/api/user";
@@ -54,7 +54,7 @@ const StyledForm = styled(Box)`
     width: 100%;
   }
 
-  .docspace-logo {
+  .portal-logo {
     width: 100%;
     display: flex;
     align-items: center;
@@ -130,7 +130,7 @@ const TfaAuthForm = withLoader((props) => {
     <StyledPage>
       <StyledContent>
         <StyledForm className="app-code-container">
-          <DocspaceLogo className="docspace-logo" />
+          <PortalLogo className="portal-logo" />
           <FormWrapper>
             <Box className="app-code-description" marginProp="0 0 32px 0">
               <Text isBold fontSize="14px" className="app-code-text">

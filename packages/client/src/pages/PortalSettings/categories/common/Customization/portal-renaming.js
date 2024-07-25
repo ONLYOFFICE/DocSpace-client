@@ -103,7 +103,9 @@ const PortalRenaming = (props) => {
   const [isShowModal, setIsShowModal] = useState(false);
 
   useEffect(() => {
-    setDocumentTitle(t("PortalRenaming"));
+    setDocumentTitle(
+      t("PortalRenaming", { productName: t("Common:ProductName") }),
+    );
     setPortalName(portalNameInitially);
     const page = isMobileView ? "language-and-time-zone" : "general";
     if (!isLoaded) initSettings(page).then(() => setIsLoaded(true));
@@ -323,7 +325,9 @@ const PortalRenaming = (props) => {
     >
       {isCustomizationView && !isMobileView && (
         <div className="category-item-heading">
-          <div className="category-item-title">{t("PortalRenaming")}</div>
+          <div className="category-item-title">
+            {t("PortalRenaming", { productName: t("Common:ProductName") })}
+          </div>
         </div>
       )}
       <div className="category-item-description">

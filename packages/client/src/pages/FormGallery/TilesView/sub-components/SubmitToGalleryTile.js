@@ -120,8 +120,16 @@ const SubmitToGalleryTile = ({
       />
 
       <div className="info">
-        <div className="title">{t("Common:SubmitToGalleryBlockHeader")}</div>
-        <div className="body">{t("Common:SubmitToGalleryBlockBody")}</div>
+        <div className="title">
+          {t("Common:SubmitToGalleryBlockHeader", {
+            organizationName: t("Common:OrganizationName"),
+          })}
+        </div>
+        <div className="body">
+          {t("Common:SubmitToGalleryBlockBody", {
+            organizationName: t("Common:OrganizationName"),
+          })}
+        </div>
       </div>
 
       <Button
@@ -134,9 +142,14 @@ const SubmitToGalleryTile = ({
   );
 };
 
-export default inject(({ settingsStore, oformsStore, dialogsStore }) => ({
-  submitToGalleryTileIsVisible: oformsStore.submitToGalleryTileIsVisible,
-  hideSubmitToGalleryTile: oformsStore.hideSubmitToGalleryTile,
-  setSubmitToGalleryDialogVisible: dialogsStore.setSubmitToGalleryDialogVisible,
-  currentColorScheme: settingsStore.currentColorScheme,
-}))(withTranslation("Common", "FormGallery")(observer(SubmitToGalleryTile)));
+export default inject(({ settingsStore, oformsStore, dialogsStore }) => {
+  const { currentColorScheme } = settingsStore;
+
+  return {
+    submitToGalleryTileIsVisible: oformsStore.submitToGalleryTileIsVisible,
+    hideSubmitToGalleryTile: oformsStore.hideSubmitToGalleryTile,
+    setSubmitToGalleryDialogVisible:
+      dialogsStore.setSubmitToGalleryDialogVisible,
+    currentColorScheme,
+  };
+})(withTranslation("Common", "FormGallery")(observer(SubmitToGalleryTile)));

@@ -564,8 +564,15 @@ export default inject(
     const { usersStore, groupsStore, viewAs: accountsViewAs } = peopleStore;
 
     const { getUsersList: fetchPeople } = usersStore;
-    const { getGroups: fetchGroups, fetchGroup, groups } = groupsStore;
-    const isEmptyGroups = (groups && groups.length === 0) || !Boolean(groups);
+    const {
+      getGroups: fetchGroups,
+      fetchGroup,
+      groups,
+      groupsIsFiltered,
+    } = groupsStore;
+    const isEmptyGroups =
+      !groupsIsFiltered &&
+      ((groups && groups.length === 0) || !Boolean(groups));
 
     if (!firstLoad) {
       if (isLoading) {

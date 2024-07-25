@@ -381,3 +381,22 @@ export async function changePassword(
 
   return user.response as TUser;
 }
+
+export async function ownerChange(
+  ownerId?: string,
+  confirmKey: string | null = null,
+) {
+  const [changePassword] = createRequest(
+    [`/settings/owner`],
+    [
+      confirmKey ? ["confirm", confirmKey] : ["", ""],
+      ["Content-Type", "application/json;charset=utf-8"],
+    ],
+    "PUT",
+    JSON.stringify({ ownerId }),
+  );
+
+  const res = await fetch(changePassword);
+
+  if (!res.ok) throw new Error(res.statusText);
+}

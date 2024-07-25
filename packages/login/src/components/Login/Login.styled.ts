@@ -86,6 +86,11 @@ export const LoginFormWrapper = styled.div<{ bgPattern: string }>`
       display: none;
     }
   }
+
+  .subtitle {
+    margin-bottom: 32px;
+  }
+
   .invitation-info-container {
     margin-bottom: 16px;
     .sign-in-container {

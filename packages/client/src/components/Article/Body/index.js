@@ -109,8 +109,6 @@ const ArticleBodyContent = (props) => {
           const filterStorageItem =
             userId && localStorage.getItem(`UserFilter=${userId}`);
 
-          console.log("Article filterStorageItem", filterStorageItem);
-
           const splitFilter = filterStorageItem.split(",");
 
           myFilter.sortBy = splitFilter[0];
@@ -134,6 +132,14 @@ const ArticleBodyContent = (props) => {
         case recycleBinFolderId:
           const recycleBinFilter = FilesFilter.getDefault();
           recycleBinFilter.folder = folderId;
+
+          const filterStorageTrash =
+            userId && localStorage.getItem(`UserFilterTrash=${userId}`);
+          const splitFilterTrash = filterStorageTrash.split(",");
+
+          recycleBinFilter.sortBy = splitFilterTrash[0];
+          recycleBinFilter.sortOrder = splitFilterTrash[1];
+
           params = recycleBinFilter.toUrlParams();
           path = getCategoryUrl(CategoryType.Trash);
 

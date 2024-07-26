@@ -1302,10 +1302,16 @@ class FilesStore {
 
   //TODO: FILTER
   setFilesFilter = (filter, folderId = null) => {
+    const { recycleBinFolderId } = this.treeFoldersStore;
+
     if (folderId === "recent") {
       const key = `UserFilterRecent=${this.userStore.user?.id}`;
       const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
 
+      localStorage.setItem(key, value);
+    } else if (+folderId === recycleBinFolderId) {
+      const key = `UserFilterTrash=${this.userStore.user?.id}`;
+      const value = `${filter.sortBy},${filter.sortOrder}`;
       localStorage.setItem(key, value);
     } else if (!this.publicRoomStore.isPublicRoom) {
       const key = `UserFilter=${this.userStore.user?.id}`;

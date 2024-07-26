@@ -99,14 +99,15 @@ export const getDataSaveAs = async (params: string) => {
   }
 };
 
-export const saveAs = (
+export const saveAs = <T = string>(
   title: string,
   url: string,
   folderId: string | number,
   openNewTab: boolean,
+  action = "create",
 ) => {
   const options = {
-    action: "create",
+    action,
     fileuri: url,
     title: title,
     folderid: folderId,
@@ -115,7 +116,7 @@ export const saveAs = (
 
   const params = toUrlParams(options, true);
   if (!openNewTab) {
-    return getDataSaveAs(params);
+    return getDataSaveAs(params) as Promise<T>;
   } else {
     const handlerUrl = combineUrl(
       window.ClientConfig?.proxy?.url,

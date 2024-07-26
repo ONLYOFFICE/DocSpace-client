@@ -160,6 +160,7 @@ const PureHome = (props) => {
     getFolderModel,
     scrollToTop,
     isEmptyGroups,
+    wsCreatedPDFForm,
   } = props;
 
   //console.log(t("ComingSoon"))
@@ -206,6 +207,7 @@ const PureHome = (props) => {
 
     scrollToTop,
     selectedFolderStore,
+    wsCreatedPDFForm,
   });
 
   const { showUploadPanel } = useOperations({
@@ -500,6 +502,7 @@ export default inject(
       removeTagsFromRoom,
       getRooms,
       scrollToTop,
+      wsCreatedPDFForm,
     } = filesStore;
 
     const { updateProfileCulture } = peopleStore.targetUserStore;
@@ -686,6 +689,7 @@ export default inject(
       getFolderModel,
       scrollToTop,
       isEmptyGroups,
+      wsCreatedPDFForm,
     };
   },
 )(observer(Home));

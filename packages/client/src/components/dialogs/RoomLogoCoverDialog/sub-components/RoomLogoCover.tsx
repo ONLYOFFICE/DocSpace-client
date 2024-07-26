@@ -27,10 +27,10 @@ import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import { RoomLogoCoverProps } from "./RoomLogoCover.types";
 
 import { CustomLogo } from "./CustomLogo";
 import { SelectColor } from "./SelectColor";
+import { SelectIcon } from "./SelectIcon";
 
 const logoColors = [
   "#FF6680",
@@ -59,17 +59,23 @@ const RoomLogoCoverContainer = styled.div`
     line-height: 20px;
   }
 
-  .colors-container {
+  .colors-container,
+  .cover-icon-container {
     display: flex;
     flex-wrap: wrap;
+  }
+
+  .select-color-container {
+    margin: 14px 0;
   }
 `;
 
 const RoomLogoCover = (props) => {
   // const { appearanceTheme } = props;
-  const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Common", "CreateEditRoomDialog"]);
 
   const [color, setColor] = useState<string>(logoColors[3]); // set room icon default color
+  const [withoutIcon, setWithoutIcon] = useState<boolean>(true);
 
   // const onChangeColor: React.MouseEvent = (color: string) => {
   //   setColor(color);
@@ -81,30 +87,28 @@ const RoomLogoCover = (props) => {
         <CustomLogo color={color} />
       </div>
       <div className="color-select-container">
-        <SelectColor t={t} logoColors={logoColors} onChangeColor={setColor} />
+        <SelectColor
+          t={t}
+          selectedColor={color}
+          logoColors={logoColors}
+          onChangeColor={setColor}
+        />
+      </div>
+      <div className="icon-select-container">
+        <SelectIcon
+          t={t}
+          withoutIcon={withoutIcon}
+          setWithoutIcon={setWithoutIcon}
+        />
       </div>
     </RoomLogoCoverContainer>
   );
 };
 
 export default inject<TStore>(({ settingsStore }) => {
-  const {
-    appearanceTheme,
-    //   selectedThemeId,
-
-    // getAppearanceTheme,
-    // currentColorScheme,
-
-    //  theme,
-  } = settingsStore;
+  const { appearanceTheme } = settingsStore;
 
   return {
     appearanceTheme,
-    //  selectedThemeId,
-
-    // getAppearanceTheme,
-    //  currentColorScheme,
-
-    //   theme,
   };
 })(observer(RoomLogoCover));

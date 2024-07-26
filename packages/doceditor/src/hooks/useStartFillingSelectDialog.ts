@@ -231,7 +231,6 @@ const useStartFillingSelectDialog = (fileInfo: TFile | undefined) => {
       if (key === "error") {
         toastr.error(value);
       } else {
-        requestRunning.current = false;
         window.location.replace(url.toString());
         onClose();
       }

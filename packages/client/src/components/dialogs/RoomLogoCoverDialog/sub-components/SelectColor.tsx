@@ -55,22 +55,48 @@ const StyledColorItem = styled.div<ColorItemProps>`
   }
 `;
 
+const SelectedColorItem = styled.div`
+  width: 28px;
+  height: 28px;
+  margin-right: 8px;
+  margin-top: 6px;
+  border-radius: 50%;
+  border: ${(props) => `solid 2px ${props.color}`};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .circle {
+    width: 20px;
+    height: 20px;
+    background-color: ${(props) => props.color};
+    border-radius: 50%;
+  }
+`;
+
 export const SelectColor = ({
-  t,
   logoColors,
+  selectedColor,
+  t,
   onChangeColor,
 }: SelectColorProps) => {
   return (
-    <>
+    <div className="select-color-container">
       <div className="color-name">{t("Common:Color")}</div>
       <div className="colors-container">
-        {logoColors.map((color) => (
-          <StyledColorItem
-            key={color}
-            color={color}
-            onClick={() => onChangeColor(color)}
-          />
-        ))}
+        {logoColors.map((color) =>
+          color === selectedColor ? (
+            <SelectedColorItem key={color} color={color}>
+              <div className="circle" color={color} />
+            </SelectedColorItem>
+          ) : (
+            <StyledColorItem
+              key={color}
+              color={color}
+              onClick={() => onChangeColor(color)}
+            />
+          ),
+        )}
         <StyledColorItem isEmptyColor>
           <IconButton
             className="select-color-plus-icon"
@@ -80,6 +106,6 @@ export const SelectColor = ({
           />
         </StyledColorItem>
       </div>
-    </>
+    </div>
   );
 };

@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export const INFO_PANEL_WIDTH = 400;
+export const TABLE_HEADER_HEIGHT = 40;
 
 export function checkIsSSR() {
   return typeof window === "undefined";

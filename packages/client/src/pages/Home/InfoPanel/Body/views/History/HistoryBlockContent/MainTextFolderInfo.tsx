@@ -54,23 +54,23 @@ const HistoryMainTextFolderInfo = ({
 
   if (!parentTitle) return null;
 
-  const isRoom = parentType === 0;
-  const isFromRoom = fromParentType === 0;
+  const isFolder = parentType === 0;
+  const isFromFolder = fromParentType === 0;
 
-  const destination = isRoom
+  const destination = isFolder
     ? t("FeedLocationLabel", { folderTitle: parentTitle })
     : t("FeedLocationRoomLabel", { folderTitle: parentTitle });
 
-  const sourceDestination = isFromRoom
+  const sourceDestination = isFromFolder
     ? t("FeedLocationLabelFrom", { folderTitle: fromParentTitle })
     : t("FeedLocationRoomLabel", { folderTitle: parentTitle });
 
-  const className = !isFromRoom ? "folder-label" : "source-folder-label";
+  const className = isFromFolder ? "source-folder-label" : "folder-label";
 
   return (
     <StyledHistoryBlockMessage className="message">
       <span className={className}>
-        {!isFromRoom ? destination : sourceDestination}
+        {isFromFolder ? sourceDestination : destination}
       </span>
     </StyledHistoryBlockMessage>
   );

@@ -34,5 +34,12 @@ export interface CustomLogoProps {
 export interface SelectColorProps {
   t: TTranslation;
   logoColors: string[];
+  selectedColor: string;
   onChangeColor: Dispatch<SetStateAction<string>>;
+}
+
+export interface SelectIconProps {
+  t: TTranslation;
+  withoutIcon: boolean;
+  setWithoutIcon: Dispatch<SetStateAction<boolean>>;
 }

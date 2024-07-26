@@ -29,7 +29,9 @@ import { inject, observer } from "mobx-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import { isTablet } from "@docspace/shared/utils/device";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import styled from "styled-components";
+import axios from "axios";
 
 import { Text } from "@docspace/shared/components/text";
 import { Box } from "@docspace/shared/components/box";
@@ -188,7 +190,21 @@ const SelectFileStep = ({
         throw new Error(t("Common:SomethingWentWrong"));
       }
 
-      await singleFileUploading(file, setProgress, isAbort);
+      const location = combineUrl(
+        window.location.origin,
+        "migrationFileUpload.ashx",
+      );
+
+      const res = await axios.post(location + "?Init=true");
+
+      if (!res.data.Success) {
+        toastr.error(res.data.Message);
+        setIsFileError(true);
+        setIsFileLoading(false);
+        return;
+      }
+
+      await singleFileUploading(file, setProgress, isAbort, res);
 
       if (isAbort.current) return;
 

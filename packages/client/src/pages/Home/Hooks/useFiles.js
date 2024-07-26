@@ -306,7 +306,7 @@ const useFiles = ({
 
           const isFormRoom =
             selectedFolderStore.roomType === RoomsType.FormRoom ||
-            selectedFolderStore.type === FolderType.FormRoom;
+            selectedFolderStore.parentRoomType === FolderType.FormRoom;
 
           const payload = {
             extension: "pdf",

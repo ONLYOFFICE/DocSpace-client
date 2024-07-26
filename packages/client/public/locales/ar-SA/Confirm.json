@@ -7,6 +7,7 @@
   "DeleteProfileBtn": "احذف حسابي",
   "DeleteProfileConfirmation": "انتباه! أنت على وشك حذف حسابك.",
   "DeleteProfileConfirmationInfo": "بالنقر فوق \\ \"حذف حسابي \\\" ، فإنك توافق على <1> سياسة الخصوصية الخاصة بنا. </ 1>",
+  "DeleteProfileSuccessDescription": "تم تعطيل حسابك {{productName}} بنجاح. يمكن لمالك أو مسؤول {{productName}} حذف حسابك المعطل نهائيًا.",
   "DeleteProfileSuccessMessage": "تم حذف حسابك بنجاح.",
   "DeleteProfileSuccessMessageInfo": "راجع <1> سياسة الخصوصية </ 1> لمعرفة المزيد حول حذف حسابك والبيانات المرتبطة به.",
   "EmailAndPasswordCopiedToClipboard": "تم نسخ البريد الإلكتروني وكلمة المرور إلى الحافظة",

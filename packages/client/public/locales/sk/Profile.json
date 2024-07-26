@@ -1,5 +1,6 @@
 {
   "ActiveSessions": "Aktívne relácie",
+  "AutoDeleteTitle": "Všetky relácie staršie ako 60 dní sa automaticky odstránia.",
   "ChangeEmailSuccess": "E-mail bol úspešne zmenený ",
   "ChangePasswordAfterLoggingOut": "Zmeniť heslo po odhlásení",
   "ConnectSocialNetworks": "Pripojte svoje sociálne siete",
@@ -27,5 +28,6 @@
   "SuccessLogout": "Aktívne pripojenie bolo odhlásené: {{platform}}, {{browser}}",
   "SystemTheme": "Použiť tému systému",
   "SystemThemeDescription": "Prepínajte medzi svetlými a tmavými témami automaticky, keď tak urobí váš systém.",
+  "TerminateAllSessions": "Ukončenie všetkých relácií okrem aktuálnej",
   "TwoFactorDescription": "Správca povolil všetkým používateľom dvojfaktorovú autentifikáciu prostredníctvom aplikácie generujúcej kód."
 }

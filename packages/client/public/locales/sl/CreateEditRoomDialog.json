@@ -1,8 +1,10 @@
 {
+  "ActivationRequired": "zahtevana aktivacija",
   "ChooseRoomType": "Izberi tip sobe",
   "CreateRoomConfirmation": "Nadaljuj brez povezovanja pomnilnika?\nIzbrali ste možnost shranjevanja tretje osebe, ki še ni povezana. Če nadaljujete brez povezave s storitvijo, ta možnost ne bo dodana.",
   "CreateTagOption": "Ustvari oznako",
   "DisableRoomQuota": "Onemogoči kvoto za to sobo",
+  "FormRoomBarDescription": "Ta soba je na voljo vsem s povezavo. Zunanji uporabniki bodo imeli dovoljenje za izpolnjevanje obrazcev za vse datoteke.",
   "Icon": "Ikona",
   "MakeRoomPrivateDescription": "Vse datoteke v tej sobi bodo šifrirane.",
   "MakeRoomPrivateLimitationsWarningDescription": "S to funkcijo lahko povabite samo obstoječe uporabnike {{productName}}. Ko ustvarite sobo, ne boste mogli spremeniti seznama uporabnikov.",

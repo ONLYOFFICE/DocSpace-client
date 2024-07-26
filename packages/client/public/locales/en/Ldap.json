@@ -45,7 +45,7 @@
   "LdapSettings": "LDAP settings",
   "LdapSettingsCertCnNoMatch": "Certificate name does not match hostname",
   "LdapSettingsCertExpired": "Certificate is expired",
-  "LdapSettingsCertIssuerChaining": "No certificate  issuer chain was provided",
+  "LdapSettingsCertIssuerChaining": "No certificate issuer chain was provided",
   "LdapSettingsCertMalformed": "Malformed certificate",
   "LdapSettingsCertUnrecognizedError": "Unrecognized Error",
   "LdapSettingsCertUntrustedCa": "Certificate Authority who issued the certificate is not trusted",

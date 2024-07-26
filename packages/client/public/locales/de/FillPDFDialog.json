@@ -1,1 +1,6 @@
-{}
+{
+  "FillOutButtonLabel": "Ausfüllen",
+  "FillOutTitle": "Formular selbst ausfüllen",
+  "FillPDFDialogTitle": "Ausfüllen als",
+  "ShareCollectDescription": "Geben Sie Ihr Formular frei und sammeln Sie Antworten über einen Raum zum Ausfüllen von Formularen."
+}

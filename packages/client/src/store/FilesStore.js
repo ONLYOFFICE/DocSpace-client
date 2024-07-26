@@ -72,6 +72,7 @@ import debounce from "lodash.debounce";
 import clone from "lodash/clone";
 import Queue from "queue-promise";
 import { parseHistory } from "SRC_DIR/pages/Home/InfoPanel/Body/helpers/HistoryHelper";
+import { toJSON } from "@docspace/shared/api/rooms/filter";
 
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = localStorage.getItem("viewAs");
@@ -1305,13 +1306,11 @@ class FilesStore {
       const key = `UserFilterRecent=${this.userStore.user?.id}`;
       const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
 
-      console.log("setItem UserFilterRecent", value);
       localStorage.setItem(key, value);
     } else if (!this.publicRoomStore.isPublicRoom) {
       const key = `UserFilter=${this.userStore.user?.id}`;
       const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
 
-      console.log("setItem UserFilter", value);
       localStorage.setItem(key, value);
     }
 
@@ -1338,7 +1337,19 @@ class FilesStore {
   setRoomsFilter = (filter) => {
     if (!this.settingsStore.withPaging) filter.pageCount = 100;
 
-    // this.setFilterUrl(filter, true);
+    const isArchive = this.categoryType === CategoryType.Archive;
+
+    const key = isArchive
+      ? `UserRoomsArchivedFilter=${this.userStore.user?.id}`
+      : `UserRoomsSharedFilter=${this.userStore.user?.id}`;
+
+    const sharedStorageFilter = JSON.parse(localStorage.getItem(key));
+    sharedStorageFilter.sortBy = filter.sortBy;
+    sharedStorageFilter.sortOrder = filter.sortOrder;
+
+    const value = toJSON(sharedStorageFilter);
+    localStorage.setItem(key, value);
+
     this.roomsFilter = filter;
 
     runInAction(() => {

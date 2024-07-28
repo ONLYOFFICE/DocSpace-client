@@ -1304,6 +1304,18 @@ class FilesStore {
   setFilesFilter = (filter, folderId = null) => {
     const { recycleBinFolderId } = this.treeFoldersStore;
 
+    if (this.categoryType === CategoryType.Archive) {
+      const key = `UserFilterArchiveRoom=${this.userStore.user?.id}`;
+      const value = `${filter.sortBy},${filter.sortOrder}`;
+      localStorage.setItem(key, value);
+    }
+
+    if (this.categoryType === CategoryType.SharedRoom) {
+      const key = `UserFilterSharedRoom=${this.userStore.user?.id}`;
+      const value = `${filter.sortBy},${filter.sortOrder}`;
+      localStorage.setItem(key, value);
+    }
+
     if (folderId === "recent") {
       const key = `UserFilterRecent=${this.userStore.user?.id}`;
       const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;

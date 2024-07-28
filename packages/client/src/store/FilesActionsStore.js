@@ -2336,7 +2336,8 @@ class FilesActionStore {
   onMarkAsRead = (item) => this.markAsRead([], [`${item.id}`], item);
 
   openFileAction = (item, t, e) => {
-    const { openDocEditor, isPrivacyFolder, setSelection } = this.filesStore;
+    const { openDocEditor, isPrivacyFolder, setSelection, categoryType } =
+      this.filesStore;
     const { currentDeviceType } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
     const { enablePlugins } = this.settingsStore;
@@ -2388,23 +2389,21 @@ class FilesActionStore {
       const filter = FilesFilter.getDefault();
       const filterObj = FilesFilter.getFilter(window.location);
 
-      console.log("openFileAction isRoom", isRoom);
       if (isRoom) {
-        const TABLE_COLUMNS = `filesTableColumns_ver-${TableVersions.Files}`;
-        const storageColumns = localStorage.getItem(
-          `${TABLE_COLUMNS}=${this.userStore.user.id}`,
-        );
+        const key =
+          categoryType === CategoryType.Archive
+            ? `UserFilterArchiveRoom=${this.userStore.user?.id}`
+            : `UserFilterSharedRoom=${this.userStore.user?.id}`;
 
-        Object.entries(SortByFieldName).map((item) => {
-          console.log("SortByFieldName", item);
-        });
+        const filterStorageSharedRoom =
+          this.userStore.user?.id && localStorage.getItem(key);
 
-        console.log("openFileAction storageColumns", storageColumns);
-        console.log(
-          "openFileAction filterObj",
-          filterObj.sortBy,
-          filterObj.sortOrder,
-        );
+        if (filterStorageSharedRoom) {
+          const splitFilter = filterStorageSharedRoom.split(",");
+
+          filter.sortBy = splitFilter[0];
+          filter.sortOrder = splitFilter[1];
+        }
       } else {
         filter.sortBy = filterObj.sortBy;
         filter.sortOrder = filterObj.sortOrder;

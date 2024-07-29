@@ -266,6 +266,19 @@ export const FormNumberWrapper = styled.div`
 
   grid-area: form-number;
 
+  .form-number--big {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  @media ${mobileMore} {
+    .form-number--big {
+      font-size: 23px;
+      line-height: 28px;
+    }
+  }
+
   > div {
     justify-content: center;
     flex-grow: 1;

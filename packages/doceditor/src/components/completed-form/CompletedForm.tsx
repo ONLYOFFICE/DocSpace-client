@@ -46,10 +46,11 @@ import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
-import { mobile, mobileMore } from "@docspace/shared/utils";
+import { classNames, mobile, mobileMore } from "@docspace/shared/utils";
 import { Heading, HeadingLevel } from "@docspace/shared/components/heading";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { copyShareLink } from "@docspace/shared/utils/copy";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 import {
   Avatar,
@@ -73,7 +74,8 @@ import {
 } from "./CompletedForm.styled";
 
 import type { CompletedFormProps } from "./CompletedForm.types";
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
+
+const BIG_FORM_NUMBER = 9_999_999;
 
 export const CompletedForm = ({
   session,
@@ -215,7 +217,11 @@ export const CompletedForm = ({
             <FormNumberWrapper>
               <span className="label">{t("CompletedForm:FormNumber")}</span>
               <Box>
-                <Text className="completed-form__form-number">
+                <Text
+                  className={classNames("completed-form__form-number", {
+                    ["form-number--big"]: formNumber > BIG_FORM_NUMBER,
+                  })}
+                >
                   {formNumber}
                 </Text>
               </Box>

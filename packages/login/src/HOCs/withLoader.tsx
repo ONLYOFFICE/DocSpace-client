@@ -33,12 +33,14 @@ import React, {
   useEffect,
   useState,
 } from "react";
+
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
   TCapabilities,
   TPasswordSettings,
   TThirdPartyProvider,
 } from "@docspace/shared/api/settings/types";
+
 import {
   getCapabilities,
   getPortalPasswordSettings,
@@ -46,8 +48,8 @@ import {
   getUserByEmail,
 } from "@/utils/actions";
 import { TError, WithLoaderProps } from "@/types";
-import { ConfirmRouteContext } from "./confirmRoute";
-import Loading from "./loading";
+import { ConfirmRouteContext } from "@/components/ConfirmRoute";
+import Loading from "../app/(root)/confirm/loading";
 
 export default function withLoader<T extends WithLoaderProps>(
   WrappedComponent: ComponentType<T>,

@@ -717,7 +717,7 @@ export function getTfaSecretKeyAndQR(confirmKey = null) {
   return request(options);
 }
 
-export function validateTfaCode(code, confirmKey = null) {
+export function validateTfaCode(code, confirmKey: string | null = null) {
   const data = {
     code,
   };

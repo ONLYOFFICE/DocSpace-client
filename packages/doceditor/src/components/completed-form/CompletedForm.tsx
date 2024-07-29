@@ -69,9 +69,11 @@ import {
   FormNumberWrapper,
   ManagerWrapper,
   MainContent,
+  ContainerCompletedForm,
 } from "./CompletedForm.styled";
 
 import type { CompletedFormProps } from "./CompletedForm.types";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 export const CompletedForm = ({
   session,
@@ -92,25 +94,29 @@ export const CompletedForm = ({
 
   if (!session)
     return (
-      <CompletedFormLayout bgPattern={bgPattern}>
-        <picture className="completed-form__logo">
-          <source media={mobile} srcSet={smallLogoUrl} />
-          <source media={mobileMore} srcSet={logoUrl} />
-          <img src={logoUrl} alt="logo" />
-        </picture>
-        <Image
-          priority
-          src={iconUrl}
-          className="completed-form__icon"
-          alt="icon"
-          width={416}
-          height={200}
-        />
-        <TextWrapper className="completed-form__empty">
-          <Heading level={HeadingLevel.h1}>{t("CompletedForm:Title")}</Heading>
-          <Text noSelect>{t("CompletedForm:Description")}</Text>
-        </TextWrapper>
-      </CompletedFormLayout>
+      <ContainerCompletedForm bgPattern={bgPattern}>
+        <CompletedFormLayout className="completed-form__default-layout">
+          <picture className="completed-form__logo">
+            <source media={mobile} srcSet={smallLogoUrl} />
+            <source media={mobileMore} srcSet={logoUrl} />
+            <img src={logoUrl} alt="logo" />
+          </picture>
+          <Image
+            priority
+            src={iconUrl}
+            className="completed-form__icon"
+            alt="icon"
+            width={416}
+            height={200}
+          />
+          <TextWrapper className="completed-form__empty">
+            <Heading level={HeadingLevel.h1}>
+              {t("CompletedForm:Title")}
+            </Heading>
+            <Text noSelect>{t("CompletedForm:Description")}</Text>
+          </TextWrapper>
+        </CompletedFormLayout>
+      </ContainerCompletedForm>
     );
 
   const {
@@ -172,85 +178,96 @@ export const CompletedForm = ({
   });
 
   return (
-    <CompletedFormLayout bgPattern={bgPattern}>
-      <picture className="completed-form__logo">
-        <source media={mobile} srcSet={smallLogoUrl} />
-        <source media={mobileMore} srcSet={logoUrl} />
-        <img src={logoUrl} alt="logo" />
-      </picture>
-      <TextWrapper>
-        <Heading level={HeadingLevel.h1}>
-          {t("CompletedForm:FormCompletedSuccessfully")}
-        </Heading>
-        <Text noSelect>
-          {isAnonim
-            ? t("CompletedForm:DescriptionForAnonymous")
-            : t("CompletedForm:DescriptionForRegisteredUser")}
-        </Text>
-      </TextWrapper>
-      <MainContent>
-        <Box className="completed-form__file">
-          <PDFIcon />
-          <Heading className="completed-form__filename" level={HeadingLevel.h5}>
-            {completedForm.title}
-          </Heading>
-          <IconButton
-            size={16}
-            className="completed-form__download"
-            iconName={isAnonim ? DownloadIconUrl : LinkIconUrl}
-            onClick={isAnonim ? handleDownload : copyLinkFile}
-          />
-        </Box>
-        <FormNumberWrapper>
-          <span className="label">{t("CompletedForm:FormNumber")}</span>
-          <Box>
-            <Text className="completed-form__form-number">{formNumber}</Text>
-          </Box>
-        </FormNumberWrapper>
-        <ManagerWrapper>
-          <span className="label">{t("CompletedForm:FormOwner")}</span>
-          <Box>
-            <Avatar
-              className="manager__avatar"
-              size={AvatarSize.medium}
-              role={AvatarRole.manager}
-              source={manager.avatar}
-            />
-            <Heading level={HeadingLevel.h3} className="manager__user-name">
-              {decode(manager.displayName)}
+    <ContainerCompletedForm bgPattern={bgPattern}>
+      <Scrollbar fixedSize>
+        <CompletedFormLayout>
+          <picture className="completed-form__logo">
+            <source media={mobile} srcSet={smallLogoUrl} />
+            <source media={mobileMore} srcSet={logoUrl} />
+            <img src={logoUrl} alt="logo" />
+          </picture>
+          <TextWrapper>
+            <Heading level={HeadingLevel.h1}>
+              {t("CompletedForm:FormCompletedSuccessfully")}
             </Heading>
-            <Link
-              className="manager__mail link"
-              href={`mailto:${manager.email}`}
-            >
-              <MailIcon />
-              <span>{manager.email}</span>
-            </Link>
-          </Box>
-        </ManagerWrapper>
-      </MainContent>
-      <ButtonWrapper isShreFile={isShreFile && !isRoomMember}>
-        <Button
-          scale
-          primary
-          size={ButtonSize.medium}
-          label={
-            isAnonim ? t("Common:Download") : t("CompletedForm:CheckReadyForms")
-          }
-          onClick={isAnonim ? handleDownload : gotoCompleteFolder}
-        />
-        {(!isShreFile || isRoomMember) && (
-          <Button
-            scale
-            size={ButtonSize.medium}
-            label={t("CompletedForm:BackToRoom")}
-            onClick={handleBackToRoom}
-          />
-        )}
-      </ButtonWrapper>
-      <Link className="link" href={`/?${fillAgainSearchParams.toString()}`}>
-        {t("CompletedForm:FillItOutAgain")}
-      </Link>
-    </CompletedFormLayout>
+            <Text noSelect>
+              {isAnonim
+                ? t("CompletedForm:DescriptionForAnonymous")
+                : t("CompletedForm:DescriptionForRegisteredUser")}
+            </Text>
+          </TextWrapper>
+          <MainContent>
+            <Box className="completed-form__file">
+              <PDFIcon />
+              <Heading
+                className="completed-form__filename"
+                level={HeadingLevel.h5}
+              >
+                {completedForm.title}
+              </Heading>
+              <IconButton
+                size={16}
+                className="completed-form__download"
+                iconName={isAnonim ? DownloadIconUrl : LinkIconUrl}
+                onClick={isAnonim ? handleDownload : copyLinkFile}
+              />
+            </Box>
+            <FormNumberWrapper>
+              <span className="label">{t("CompletedForm:FormNumber")}</span>
+              <Box>
+                <Text className="completed-form__form-number">
+                  {formNumber}
+                </Text>
+              </Box>
+            </FormNumberWrapper>
+            <ManagerWrapper>
+              <span className="label">{t("CompletedForm:FormOwner")}</span>
+              <Box>
+                <Avatar
+                  className="manager__avatar"
+                  size={AvatarSize.medium}
+                  role={AvatarRole.manager}
+                  source={manager.avatar}
+                />
+                <Heading level={HeadingLevel.h3} className="manager__user-name">
+                  {decode(manager.displayName)}
+                </Heading>
+                <Link
+                  className="manager__mail link"
+                  href={`mailto:${manager.email}`}
+                >
+                  <MailIcon />
+                  <span>{manager.email}</span>
+                </Link>
+              </Box>
+            </ManagerWrapper>
+          </MainContent>
+          <ButtonWrapper isShreFile={isShreFile && !isRoomMember}>
+            <Button
+              scale
+              primary
+              size={ButtonSize.medium}
+              label={
+                isAnonim
+                  ? t("Common:Download")
+                  : t("CompletedForm:CheckReadyForms")
+              }
+              onClick={isAnonim ? handleDownload : gotoCompleteFolder}
+            />
+            {(!isShreFile || isRoomMember) && (
+              <Button
+                scale
+                size={ButtonSize.medium}
+                label={t("CompletedForm:BackToRoom")}
+                onClick={handleBackToRoom}
+              />
+            )}
+          </ButtonWrapper>
+          <Link className="link" href={`/?${fillAgainSearchParams.toString()}`}>
+            {t("CompletedForm:FillItOutAgain")}
+          </Link>
+        </CompletedFormLayout>
+      </Scrollbar>
+    </ContainerCompletedForm>
   );
 };

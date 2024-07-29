@@ -115,12 +115,17 @@ const StyledHistoryBlockMessage = styled.div`
     overflow: hidden;
   }
 
-  .folder-label {
+  .folder-label,
+  .source-folder-label {
     max-width: 100%;
     color: ${(props) => props.theme.infoPanel.history.locationIconColor};
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+  }
+
+  .source-folder-label {
+    color: ${(props) => props.theme.infoPanel.history.messageColor};
   }
 
   .old-role {

@@ -37,9 +37,12 @@ import { TBreadCrumb } from "../../../components/selector/Selector.types";
 
 import { LoadersContext } from "../contexts/Loaders";
 
-import { PAGE_COUNT, DEFAULT_BREAD_CRUMB } from "../FilesSelector.constants";
+import { PAGE_COUNT } from "../FilesSelector.constants";
 import { UseRoomsHelperProps } from "../FilesSelector.types";
-import { convertRoomsToItems } from "../FilesSelector.utils";
+import {
+  convertRoomsToItems,
+  getDefaultBreadCrumb,
+} from "../FilesSelector.utils";
 
 import useInputItemHelper from "./useInputItemHelper";
 
@@ -142,7 +145,7 @@ const useRoomsHelper = ({
 
         const breadCrumbs: TBreadCrumb[] = [{ label: title, id, isRoom: true }];
 
-        if (!isRoomsOnly) breadCrumbs.unshift({ ...DEFAULT_BREAD_CRUMB });
+        if (!isRoomsOnly) breadCrumbs.unshift({ ...getDefaultBreadCrumb(t) });
 
         onSetBaseFolderPath?.(breadCrumbs);
 
@@ -165,7 +168,8 @@ const useRoomsHelper = ({
             id: "create-room-item",
             key: "create-room-item",
             hotkey: "r",
-
+            isRoomsOnly,
+            createDefineRoomType,
             dropDownItems: createDefineRoomType
               ? undefined
               : createDropDownItems,

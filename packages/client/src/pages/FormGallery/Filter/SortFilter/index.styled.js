@@ -52,7 +52,7 @@ export const SortButton = styled.div`
       min-width: 200px;
       margin-top: 3px;
 
-      @media ${mobile} {
+      /* @media ${mobile} {
         position: absolute;
         width: 100%;
         bottom: 0;
@@ -60,7 +60,7 @@ export const SortButton = styled.div`
         top: auto;
         border-end-start-radius: 0;
         border-end-end-radius: 0;
-      }
+      }*/
     }
 
     .optionalBlock {
@@ -83,7 +83,7 @@ export const SortButton = styled.div`
 
 export const SortComboBox = styled(ComboBox)`
   @media ${mobile} {
-    position: static;
+    /* position: static; */
   }
 `;
 

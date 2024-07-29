@@ -28,7 +28,7 @@ import { useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
-
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { toastr } from "@docspace/shared/components/toast";
 
 import { DataImportProps, InjectedDataImportProps } from "./types";
@@ -40,7 +40,6 @@ import OnlyofficeWorkspace from "./OnlyofficeWorkspace";
 
 const DataImport = (props: DataImportProps) => {
   const {
-    setDocumentTitle,
     viewAs,
     setViewAs,
     currentDeviceType,
@@ -66,7 +65,7 @@ const DataImport = (props: DataImportProps) => {
 
   useEffect(() => {
     setDocumentTitle(t("DataImport"));
-  }, [setDocumentTitle, t]);
+  }, [t]);
 
   const updateStatus = useCallback(async () => {
     const response = await getMigrationStatus();
@@ -154,12 +153,10 @@ export default inject<TStore>(
       setMigrationPhase,
     } = importAccountsStore;
 
-    const { setDocumentTitle } = authStore;
     const { viewAs, setViewAs } = setup;
     const { currentDeviceType } = settingsStore;
 
     return {
-      setDocumentTitle,
       viewAs,
       setViewAs,
       currentDeviceType,

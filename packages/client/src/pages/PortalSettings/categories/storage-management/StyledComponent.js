@@ -158,8 +158,6 @@ const StyledFolderTagSection = styled.div`
 
   &:first-of-type {
     border-start-start-radius: 46px;
-    border-start-end-radius: 0;
-    border-end-end-radius: 0;
     border-end-start-radius: 46px;
   }
 `;

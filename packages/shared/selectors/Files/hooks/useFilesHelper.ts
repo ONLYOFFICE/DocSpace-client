@@ -46,11 +46,12 @@ import { TBreadCrumb } from "../../../components/selector/Selector.types";
 import { SettingsContext } from "../contexts/Settings";
 import { LoadersContext } from "../contexts/Loaders";
 
-import { PAGE_COUNT, DEFAULT_BREAD_CRUMB } from "../FilesSelector.constants";
+import { PAGE_COUNT } from "../FilesSelector.constants";
 import { UseFilesHelpersProps } from "../FilesSelector.types";
 import {
   convertFilesToItems,
   convertFoldersToItems,
+  getDefaultBreadCrumb,
 } from "../FilesSelector.utils";
 import useInputItemHelper from "./useInputItemHelper";
 
@@ -168,6 +169,10 @@ const useFilesHelper = ({
 
           case FilterType.DocumentsOnly:
             filter.filterType = FilterType.DocumentsOnly;
+            break;
+
+          case FilterType.PDFForm:
+            filter.filterType = FilterType.PDFForm;
             break;
 
           case FilterType.PresentationsOnly:
@@ -320,7 +325,7 @@ const useFilesHelper = ({
           // });
 
           if (!isThirdParty && !isRoomsOnly && !isUserOnly)
-            breadCrumbs.unshift({ ...DEFAULT_BREAD_CRUMB });
+            breadCrumbs.unshift({ ...getDefaultBreadCrumb(t) });
 
           onSetBaseFolderPath?.(isErrorPath ? [] : breadCrumbs);
 

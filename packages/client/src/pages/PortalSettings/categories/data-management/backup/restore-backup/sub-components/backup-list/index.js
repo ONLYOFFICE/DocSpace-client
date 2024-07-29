@@ -50,7 +50,6 @@ import { StyledBackupList } from "../../../StyledBackup";
 import BackupListBody from "./BackupListBody";
 import { TenantStatus } from "@docspace/shared/enums";
 import styled from "styled-components";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledModalDialog = styled(ModalDialog)`
   .restore_footer {
@@ -210,11 +209,13 @@ const BackupListModalDialog = (props) => {
   const helpContent = () => (
     <>
       <Text className="restore-backup_warning-description">
-        {t("RestoreBackupWarningText", { productName: PRODUCT_NAME })}{" "}
+        {t("RestoreBackupWarningText", {
+          productName: t("Common:ProductName"),
+        })}{" "}
         {!standalone && (
           <Text as="span" className="restore-backup_warning-link">
             {t("RestoreBackupResetInfoWarningText", {
-              productName: PRODUCT_NAME,
+              productName: t("Common:ProductName"),
             })}
           </Text>
         )}

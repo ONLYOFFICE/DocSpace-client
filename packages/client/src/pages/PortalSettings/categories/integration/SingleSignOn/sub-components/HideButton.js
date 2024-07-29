@@ -45,21 +45,12 @@ const StyledWrapper = styled.div`
 
 const HideButton = (props) => {
   const { t } = useTranslation("SingleSignOn");
-  const {
-    text,
-    label,
-    isAdditionalParameters,
-    value,
-    setHideLabel,
-    isDisabled,
-    id,
-  } = props;
+  const { text, label, isAdditionalParameters, value, setHideLabel, id } =
+    props;
 
   const onClick = () => {
     setHideLabel(label);
   };
-
-  const onClickProp = isDisabled ? {} : { onClick: onClick };
 
   return (
     <StyledWrapper isAdditionalParameters={isAdditionalParameters}>
@@ -79,7 +70,7 @@ const HideButton = (props) => {
         id={id}
         className="hide-button settings_unavailable"
         isHovered
-        {...onClickProp}
+        onClick={onClick}
         type="action"
       >
         {value

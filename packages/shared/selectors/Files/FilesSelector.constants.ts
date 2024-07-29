@@ -24,15 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { PRODUCT_NAME } from "../../constants";
-import { TBreadCrumb } from "../../components/selector/Selector.types";
-
-export const DEFAULT_BREAD_CRUMB: TBreadCrumb = {
-  label: PRODUCT_NAME,
-  id: 0,
-  isRoom: false,
-};
-
 export const SHOW_LOADER_TIMER = 200;
 export const MIN_LOADER_TIMER = 500;
 

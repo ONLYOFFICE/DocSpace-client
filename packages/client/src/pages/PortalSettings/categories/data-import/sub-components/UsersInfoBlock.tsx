@@ -28,7 +28,6 @@ import styled from "styled-components";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Text } from "@docspace/shared/components/text";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 import { mobile } from "@docspace/shared/utils";
 import { UsersInfoBlockProps } from "../types";
 
@@ -104,9 +103,11 @@ const UsersInfoBlock = ({
 }: UsersInfoBlockProps) => {
   return (
     <Wrapper>
-      {selectedUsers > totalLicenceLimit && (
+      {totalUsedUsers > totalLicenceLimit && (
         <Text className="license-limit-warning">
-          {t("Settings:UserLimitExceeded", { productName: PRODUCT_NAME })}
+          {t("Settings:UserLimitExceeded", {
+            productName: t("Common:ProductName"),
+          })}
         </Text>
       )}
 
@@ -129,7 +130,7 @@ const UsersInfoBlock = ({
           tooltipContent={
             <Text fontSize="12px">
               {t("Settings:LicenseLimitDescription", {
-                productName: PRODUCT_NAME,
+                productName: t("Common:ProductName"),
                 maxLimit: totalLicenceLimit,
               })}
             </Text>

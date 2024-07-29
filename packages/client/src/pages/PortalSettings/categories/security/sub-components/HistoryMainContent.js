@@ -29,7 +29,7 @@ import { Text } from "@docspace/shared/components/text";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { UnavailableStyles } from "../../../utils/commonSettingsStyles";
@@ -84,7 +84,7 @@ const MainContainer = styled.div`
 
   .download-text {
     font-size: 13px;
-    padding: 24px 0;
+    padding: 16px 0 24px 0;
   }
 
   .storage-label {
@@ -190,6 +190,8 @@ const HistoryMainContent = (props) => {
   const [auditLifeTimeReminder, setAuditLifeTimeReminder] = useState(false);
 
   const isLoginHistoryPage = window.location.pathname.includes("login-history");
+
+  const theme = useTheme();
 
   useEffect(() => {
     getSettings();
@@ -315,7 +317,7 @@ const HistoryMainContent = (props) => {
         <Badge
           className="paid-badge"
           fontWeight="700"
-          backgroundColor="#EDC409"
+          backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
           label={t("Common:Paid")}
           isPaidBadge={true}
         />
@@ -324,6 +326,9 @@ const HistoryMainContent = (props) => {
         <Text fontSize="13px" className="login-history-description">
           {subHeader}
         </Text>
+
+        {/*  
+        // This part is commented out because it is not used in the current version of the application
         <Text className="latest-text settings_unavailable">{latestText} </Text>
 
         <label
@@ -378,7 +383,7 @@ const HistoryMainContent = (props) => {
               isDisabled={isSettingNotPaid}
             />
           </>
-        )}
+        )} */}
         <Text className="download-text settings_unavailable">
           {downloadText}
         </Text>

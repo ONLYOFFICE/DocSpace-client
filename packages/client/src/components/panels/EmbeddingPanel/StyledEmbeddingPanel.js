@@ -33,7 +33,7 @@ const StyledModalDialog = styled(ModalDialog)`
   }
 
   .modal-body {
-    padding: 0 0 8px;
+    padding: 0;
   }
 `;
 

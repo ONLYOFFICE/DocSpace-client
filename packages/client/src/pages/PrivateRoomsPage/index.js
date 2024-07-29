@@ -38,7 +38,6 @@ import { mobile, tablet } from "@docspace/shared/utils";
 import { Trans, withTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import { isMobile } from "react-device-detect";
-//import { setDocumentTitle } from "@docspace/client/src/helpers/filesUtils";
 import { toastr } from "@docspace/shared/components/toast";
 import { checkProtocol } from "../../helpers/files-helpers";
 import Base from "@docspace/shared/themes/base";
@@ -125,11 +124,7 @@ const StyledPrivacyPage = styled.div`
 
 StyledPrivacyPage.defaultProps = { theme: Base };
 
-const PrivacyPageComponent = ({ t, tReady, organizationName }) => {
-  //   useEffect(() => {
-  //     setDocumentTitle(t("Common:About"));
-  //   }, [t]);
-
+const PrivacyPageComponent = ({ t, tReady }) => {
   const [isDisabled, setIsDisabled] = useState(false);
 
   const location = useLocation();
@@ -175,7 +170,7 @@ const PrivacyPageComponent = ({ t, tReady, organizationName }) => {
             i18nKey="PrivacyClick"
             ns="PrivacyPage"
             values={{
-              organizationName,
+              organizationName: t("Common:OrganizationName"),
             }}
             components={{
               1: <strong></strong>,
@@ -196,7 +191,9 @@ const PrivacyPageComponent = ({ t, tReady, organizationName }) => {
           size="medium"
           primary
           isDisabled={isDisabled}
-          label={t("PrivacyButton", { organizationName })}
+          label={t("PrivacyButton", {
+            organizationName: t("Common:OrganizationName"),
+          })}
         />
 
         <label className="privacy-rooms-text-separator" />
@@ -207,7 +204,10 @@ const PrivacyPageComponent = ({ t, tReady, organizationName }) => {
             fontSize="16px"
             fontWeight={300}
           >
-            {t("PrivacyEditors", { organizationName })}?
+            {t("PrivacyEditors", {
+              organizationName: t("Common:OrganizationName"),
+            })}
+            ?
           </Text>
           <Link
             className="privacy-rooms-link privacy-rooms-install-text"
@@ -225,7 +225,12 @@ const PrivacyPageComponent = ({ t, tReady, organizationName }) => {
           textAlign="center"
           className="privacy-rooms-text-description"
         >
-          <p>{t("PrivacyDescriptionEditors", { organizationName })}.</p>
+          <p>
+            {t("PrivacyDescriptionEditors", {
+              organizationName: t("Common:OrganizationName"),
+            })}
+            .
+          </p>
           <p>{t("PrivacyDescriptionConnect")}.</p>
         </Text>
       </div>
@@ -247,9 +252,4 @@ const PrivacyPage = (props) => {
   );
 };
 
-export default inject(({ settingsStore }) => {
-  const { organizationName } = settingsStore;
-  return {
-    organizationName,
-  };
-})(observer(PrivacyPage));
+export default observer(PrivacyPage);

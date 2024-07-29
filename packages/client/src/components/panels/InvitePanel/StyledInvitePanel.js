@@ -94,12 +94,11 @@ const ScrollList = styled.div`
       ? "auto"
       : props.offsetTop && `calc(100% - ${props.offsetTop}px)`};
 
-  ${!isMobile() &&
-  css`
-    .row-item {
+  .row-item {
+    @media not ${mobile} {
       width: 448px !important;
     }
-  `}
+  }
 `;
 
 const StyledBlock = styled.div`
@@ -294,8 +293,8 @@ const StyledInviteInputContainer = styled.div`
           overflow-x: hidden;
         }
         .scroll-body > div {
-          justify-content: left;
-          padding-left: 16px;
+          justify-content: flex-start;
+          padding-inline-start: 16px;
         }
       }
     }
@@ -335,11 +334,11 @@ const StyledDropDown = styled(DropDown)`
 
       svg {
         ${({ theme }) =>
-          theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
-      }
+          theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"};
 
-      svg path {
-        fill: #4781d1;
+        path {
+          fill: #4781d1;
+        }
       }
     }
   }
@@ -453,8 +452,7 @@ const StyledControlContainer = styled.div`
     display: flex;
 
     top: -27px;
-    inset-inline-end: 10px;
-    inset-inline-start: unset;
+    inset-inline: unset 10px;
   }
 `;
 const StyledInviteLanguage = styled.div`

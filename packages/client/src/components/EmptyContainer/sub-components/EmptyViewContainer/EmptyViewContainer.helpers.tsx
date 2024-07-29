@@ -3,6 +3,7 @@ import { P, match } from "ts-pattern";
 
 import {
   FilesSelectorFilterTypes,
+  FilterType,
   FolderType,
   RoomsType,
   ShareAccessRights,
@@ -46,7 +47,6 @@ import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TFolderSecurity } from "@docspace/shared/api/files/types";
 import type { EmptyViewItemType } from "@docspace/shared/components/empty-view";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 import type {
   ExtensiontionType,
@@ -99,7 +99,7 @@ export const getDescription = (
       )
       .with([FolderType.FormRoom, null, P._], () =>
         t("EmptyView:FormFolderDefaultDescription", {
-          portalName: PRODUCT_NAME,
+          productName: t("Common:ProductName"),
         }),
       )
       .otherwise(() => "");
@@ -304,7 +304,7 @@ const helperOptions = (
   const createUploadFromDocSpace = (
     title: string,
     description: string,
-    filterType: FilesSelectorFilterTypes,
+    filterType: FilesSelectorFilterTypes | FilterType,
   ) => ({
     title,
     description,
@@ -350,15 +350,15 @@ export const getOptions = (
 
   const uploadPDFFromDocSpace = createUploadFromDocSpace(
     t("EmptyView:UploadFromPortalTitle", {
-      productName: PRODUCT_NAME,
+      productName: t("Common:ProductName"),
     }),
     t("EmptyView:UploadPDFFormOptionDescription"),
-    FilesSelectorFilterTypes.PDF,
+    FilterType.PDFForm,
   );
 
   const uploadAllFromDocSpace = createUploadFromDocSpace(
     t("EmptyView:UploadFromPortalTitle", {
-      productName: PRODUCT_NAME,
+      productName: t("Common:ProductName"),
     }),
     t("EmptyView:UploadFromPortalDescription"),
     // TODO: need fix selector

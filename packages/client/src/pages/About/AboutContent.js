@@ -32,7 +32,6 @@ import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledAboutBody = styled.div`
   width: 100%;
@@ -101,13 +100,8 @@ const StyledAboutBody = styled.div`
 `;
 
 const AboutContent = (props) => {
-  const {
-    buildVersionInfo,
-    theme,
-    companyInfoSettingsData,
-    previewData,
-    organizationName,
-  } = props;
+  const { buildVersionInfo, theme, companyInfoSettingsData, previewData } =
+    props;
   const { t } = useTranslation("About");
   const license = "AGPL-3.0";
   const linkRepo = "https://github.com/ONLYOFFICE/DocSpace";
@@ -158,7 +152,7 @@ const AboutContent = (props) => {
             target="_blank"
             enableUserSelect
           >
-            &nbsp;{organizationName} {PRODUCT_NAME}&nbsp;
+            &nbsp;{t("Common:OrganizationName")} {t("Common:ProductName")}&nbsp;
           </ColorTheme>
 
           <Text
@@ -189,7 +183,8 @@ const AboutContent = (props) => {
             target="_blank"
             enableUserSelect
           >
-            &nbsp;ONLYOFFICE Docs&nbsp;
+            &nbsp;{t("Common:OrganizationName")}{" "}
+            {t("Common:ProductEditorsName")}&nbsp;
           </ColorTheme>
           <Text className="row-el select-el" fontSize="13px" fontWeight="600">
             v.
@@ -274,11 +269,10 @@ const AboutContent = (props) => {
 };
 
 export default inject(({ settingsStore }) => {
-  const { theme, companyInfoSettingsData, organizationName } = settingsStore;
+  const { theme, companyInfoSettingsData } = settingsStore;
 
   return {
     theme,
     companyInfoSettingsData,
-    organizationName,
   };
 })(observer(AboutContent));

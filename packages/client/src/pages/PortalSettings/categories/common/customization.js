@@ -103,7 +103,7 @@ const Customization = (props) => {
   const isLoadedSetting = isLoaded && tReady;
 
   useEffect(() => {
-    setDocumentTitle(t("Customization"));
+    setDocumentTitle(t("Settings:Customization"));
 
     return () => {
       resetIsInit();

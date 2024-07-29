@@ -62,6 +62,7 @@ export const ControlBtn = styled.div`
 ControlBtn.defaultProps = { theme: Base };
 
 export const StyledDropDown = styled(DropDown)`
+  direction: ${({ theme }) => theme.interfaceDirection};
   background: #333;
 `;
 
@@ -159,8 +160,16 @@ export const StyledViewerContainer = styled.div<StyledViewerContainerProps>`
   overflow: hidden;
   > span {
     position: fixed;
-    inset-inline-end: 0;
-    margin-inline-end: 10px;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            left: 0;
+            margin-left: 10px;
+          `
+        : css`
+            right: 0;
+            margin-right: 10px;
+          `}
     bottom: 5px;
     z-index: 305;
   }
@@ -189,8 +198,14 @@ export const StyledViewerContainer = styled.div<StyledViewerContainerProps>`
     );
     position: fixed;
     top: 0;
-    inset-inline-start: 0;
-
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            right: 0;
+          `
+        : css`
+            left: 0;
+          `}
     .title {
       text-align: center;
       white-space: nowrap;
@@ -199,7 +214,14 @@ export const StyledViewerContainer = styled.div<StyledViewerContainerProps>`
       font-weight: 600;
       text-overflow: ellipsis;
       width: calc(100% - 50px);
-      padding-inline-start: 16px;
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              padding-right: 16px;
+            `
+          : css`
+              padding-left: 16px;
+            `}
       box-sizing: border-box;
       color: ${(props) => props.theme.mediaViewer.titleColor};
     }
@@ -208,7 +230,6 @@ export const StyledViewerContainer = styled.div<StyledViewerContainerProps>`
     position: fixed;
     top: 13px;
     inset-inline-end: 12px;
-    ${({ theme }) => (theme.interfaceDirection === "rtl" ? `left` : ``)}
     height: 17px;
     &:hover {
       background-color: transparent;

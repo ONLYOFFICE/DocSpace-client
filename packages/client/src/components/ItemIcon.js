@@ -42,7 +42,8 @@ const IconWrapper = styled.div`
         content: "";
         position: absolute;
         inset: 0;
-        border: 1px solid ${(props) => props.theme.itemIcon.borderColor};
+        /* border: ${(props) => props.theme.itemIcon.borderColor}; */
+        border: 1px solid transparent;
         border-radius: 5px;
         overflow: hidden;
       }

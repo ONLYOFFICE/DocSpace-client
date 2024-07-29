@@ -70,7 +70,7 @@ export const StyledAvatarWrapper = styled.div`
 
     @media ${mobile} {
       display: flex;
-      position: fixed;
+      position: absolute;
       inset-inline-end: 16px;
     }
   }

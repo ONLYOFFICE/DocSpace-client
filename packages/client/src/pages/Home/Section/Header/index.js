@@ -692,12 +692,12 @@ export default inject(
 
     const isArchive = rootFolderType === FolderType.Archive;
 
-    const sharedItem = navigationPath.find((r) => r.shared);
+    const isShared = shared || navigationPath.find((r) => r.shared);
 
     const showNavigationButton =
       isLoading || !security?.CopyLink || isPublicRoom || isArchive
         ? false
-        : security?.Read && (shared || sharedItem);
+        : security?.Read && isShared;
 
     return {
       showText: settingsStore.showText,

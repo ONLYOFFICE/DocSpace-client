@@ -41,7 +41,6 @@ const OnlyofficeWorkspace = (props: WorkspaceProps) => {
     filteredUsers,
     step,
     setStep,
-    organizationName,
     migratingWorkspace,
     migrationPhase,
     isMigrationInit,
@@ -52,11 +51,7 @@ const OnlyofficeWorkspace = (props: WorkspaceProps) => {
     "Common, SMTPSettings, Settings",
   ]);
 
-  const StepsData = getStepsData(
-    t,
-    filteredUsers.length === 0,
-    organizationName,
-  );
+  const StepsData = getStepsData(t, filteredUsers.length === 0);
 
   useLayoutEffect(() => {
     if (migratingWorkspace === "Workspace" && !isMigrationInit) {
@@ -82,7 +77,6 @@ const OnlyofficeWorkspace = (props: WorkspaceProps) => {
       title={StepsData[step - 1].title}
       description={StepsData[step - 1].description}
       component={StepsData[step - 1].component}
-      organizationName={organizationName}
     />
   );
 };
@@ -98,7 +92,7 @@ export default inject<TStore>(({ settingsStore, importAccountsStore }) => {
     isMigrationInit,
     setIsMigrationInit,
   } = importAccountsStore;
-  const { theme, organizationName } = settingsStore;
+  const { theme } = settingsStore;
 
   return {
     theme,
@@ -106,7 +100,6 @@ export default inject<TStore>(({ settingsStore, importAccountsStore }) => {
     step,
     setStep,
     setWorkspace,
-    organizationName,
     migrationPhase,
     migratingWorkspace,
     isMigrationInit,

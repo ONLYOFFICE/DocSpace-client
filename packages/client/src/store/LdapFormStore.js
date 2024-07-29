@@ -232,6 +232,14 @@ class LdapFormStore {
     this.requiredSettings.userDN = userDN;
   };
 
+  removeErrorField = (fieldName) => {
+    delete this.errors[fieldName];
+  };
+
+  setErrorField = (fieldName) => {
+    this.errors[fieldName] = true;
+  };
+
   setLoginAttribute = (loginAttribute) => {
     this.requiredSettings.loginAttribute = loginAttribute;
   };

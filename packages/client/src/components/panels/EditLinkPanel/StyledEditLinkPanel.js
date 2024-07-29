@@ -37,7 +37,7 @@ const StyledEditLinkPanel = styled(ModalDialog)`
   }
 
   .modal-body {
-    padding: 0px 0px 8px;
+    padding: 0;
   }
 
   .field-label-icon {
@@ -48,7 +48,7 @@ const StyledEditLinkPanel = styled(ModalDialog)`
     padding: 4px 0px 0px;
 
     .edit-link_link-block {
-      padding: 0px 16px 20px;
+      padding: 16px 16px 20px;
 
       .edit-link-text {
         display: inline-flex;
@@ -77,8 +77,7 @@ const StyledEditLinkPanel = styled(ModalDialog)`
         gap: 8px;
 
         .edit-link-toggle {
-          margin-inline-start: auto;
-          margin-inline-end: 28px;
+          margin-inline: auto 28px;
         }
       }
       .edit-link_password-block {

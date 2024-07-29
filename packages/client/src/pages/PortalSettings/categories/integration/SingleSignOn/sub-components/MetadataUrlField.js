@@ -70,7 +70,7 @@ const MetadataUrlField = ({
 
   const onCopyClick = () => {
     copy(placeholder);
-    toastr.success(t("Translations:LinkCopySuccess"));
+    toastr.success(t("Common:LinkCopySuccess"));
   };
 
   return (

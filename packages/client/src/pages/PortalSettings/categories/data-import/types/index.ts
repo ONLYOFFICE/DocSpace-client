@@ -45,7 +45,6 @@ export interface InjectedProvidersProps extends ProvidersProps {
   setServices: TStore["importAccountsStore"]["setServices"];
   getMigrationList: TStore["importAccountsStore"]["getMigrationList"];
   setWorkspace: TStore["importAccountsStore"]["setWorkspace"];
-  organizationName: TStore["settingsStore"]["organizationName"];
 }
 
 export interface SelectFileStepProps {
@@ -101,7 +100,6 @@ export interface InjectedWorkspaceProps extends WorkspaceProps {
   setStep: TStore["importAccountsStore"]["setStep"];
   migratingWorkspace: TStore["importAccountsStore"]["migratingWorkspace"];
   migrationPhase: TStore["importAccountsStore"]["migrationPhase"];
-  organizationName: TStore["settingsStore"]["organizationName"];
   isMigrationInit: TStore["importAccountsStore"]["isMigrationInit"];
   setIsMigrationInit: TStore["importAccountsStore"]["setIsMigrationInit"];
 
@@ -116,7 +114,6 @@ export interface LayoutProps {
   title: string;
   description: string;
   component: JSX.Element;
-  organizationName: string;
 }
 
 export type TQuota = TPaymentFeature;

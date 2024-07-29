@@ -48,14 +48,8 @@ const checkboxesNames = {
 const StyledWrapper = styled.div`
   margin: 16px 0;
   .checkbox-input {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin: 10px 0 6px 8px;
-          `
-        : css`
-            margin: 10px 8px 6px 0;
-          `}
+    margin-block: 10px 6px;
+    margin-inline: 0 8px;
   }
 `;
 

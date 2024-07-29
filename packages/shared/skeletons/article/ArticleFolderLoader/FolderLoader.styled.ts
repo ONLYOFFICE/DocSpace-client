@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { tablet, mobile, getCorrectFourValuesStyle } from "../../../utils";
+import { tablet, mobile } from "../../../utils";
 
 import { RectangleSkeleton } from "../../rectangle";
 
@@ -33,15 +33,13 @@ const StyledContainer = styled.div<{ showText: boolean }>`
   margin: 0;
 
   max-width: 210px;
-  padding: ${({ theme }) =>
-    getCorrectFourValuesStyle("0 20px 0 0", theme.interfaceDirection)};
+  padding-block: 0;
+  padding-inline: 0 20px;
 
   @media ${tablet} {
     width: ${(props) => (props.showText ? "240px" : "52px")};
-    padding: ${(props) => {
-      const padding = props.showText ? "0 16px 0 16px" : "10px 16px 10px 12px";
-      return getCorrectFourValuesStyle(padding, props.theme.interfaceDirection);
-    }};
+    padding-block: ${(props) => (props.showText ? "0" : "10px")};
+    padding-inline: ${(props) => (props.showText ? "16px" : "12px 16px")};
     box-sizing: border-box;
   }
 

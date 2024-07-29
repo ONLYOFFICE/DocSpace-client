@@ -67,8 +67,7 @@ const StyledBody = styled.div`
     p {
       margin-bottom: 5px;
       margin-top: 5px;
-      padding-left: 16px;
-      padding-right: 16px;
+      padding-inline: 16px;
     }
   }
 `;

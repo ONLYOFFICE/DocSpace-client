@@ -45,35 +45,14 @@ const StyledContainer = styled.div`
   border-radius: 6px;
 
   .payer-info {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 3px;
-          `
-        : css`
-            margin-left: 3px;
-          `}
+    margin-inline-start: 3px;
   }
 
   .payer-info_avatar {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 16px;
-          `
-        : css`
-            margin-right: 16px;
-          `}
+    margin-inline-end: 16px;
   }
   .payer-info {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 3px;
-          `
-        : css`
-            margin-right: 3px;
-          `}
+    margin-inline-end: 3px;
   }
   .payer-info_wrapper {
     height: max-content;
@@ -84,14 +63,7 @@ const StyledContainer = styled.div`
 
     .payer-info_description {
       p {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-left: 3px;
-              `
-            : css`
-                margin-right: 3px;
-              `}
+        margin-inline-end: 3px;
       }
       div {
         display: inline-block;

@@ -88,10 +88,7 @@ const StyledPermanentSetting = styled.div`
   }
 
   .permanent_setting-help_button {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: auto;`
-        : `margin-left: auto;`}
+    margin-inline-start: auto;
     white-space: pre-line;
   }
 

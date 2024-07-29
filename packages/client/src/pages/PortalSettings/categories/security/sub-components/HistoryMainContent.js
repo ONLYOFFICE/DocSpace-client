@@ -56,7 +56,7 @@ const MainContainer = styled.div`
   .paid-badge {
     cursor: auto;
     margin-bottom: 8px;
-    margin-left: -2px;
+    margin-inline-start: -2px;
   }
 
   .login-history-description {

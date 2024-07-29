@@ -54,7 +54,7 @@ const StyledComponent = styled.div`
   }
 
   .theme-container {
-    padding: 12px 0 24px 0;
+    padding: 12px 0 24px;
     display: flex;
   }
 
@@ -65,14 +65,7 @@ const StyledComponent = styled.div`
   .theme-add {
     width: 46px;
     height: 46px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 12px;
-          `
-        : css`
-            margin-right: 12px;
-          `}
+    margin-inline-end: 12px;
     border-radius: 8px;
     cursor: pointer;
     background: ${(props) => (props.theme.isBase ? "#eceef1" : "#474747")}
@@ -82,14 +75,7 @@ const StyledComponent = styled.div`
   .add-theme {
     background: #d0d5da;
     padding-top: 16px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-right: 16px;
-          `
-        : css`
-            padding-left: 16px;
-          `}
+    padding-inline-start: 16px;
     box-sizing: border-box;
   }
 
@@ -98,14 +84,7 @@ const StyledComponent = styled.div`
     padding-top: 24px;
 
     .button:not(:last-child) {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 8px;
-            `
-          : css`
-              margin-right: 8px;
-            `}
+      margin-inline-end: 8px;
     }
     @media ${mobile} {
       .button {
@@ -122,21 +101,15 @@ const StyledComponent = styled.div`
           margin: 0;
 
           .button:not(:last-child) {
-            margin-right: 0px;
+            margin-inline-end: 0px;
           }
         }
       `}
   }
 
   .check-img {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding: 16px 15px 0 0;
-          `
-        : css`
-            padding: 16px 0 0 15px;
-          `}
+    padding-block: 16px 0;
+    padding-inline: 15px 0;
     svg path {
       fill: ${(props) => props.colorCheckImg};
     }
@@ -146,14 +119,7 @@ const StyledComponent = styled.div`
 const StyledTheme = styled.div`
   width: 46px;
   height: 46px;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-left: 12px;
-        `
-      : css`
-          margin-right: 12px;
-        `}
+  margin-inline-end: 12px;
   border-radius: 8px;
   cursor: pointer;
 
@@ -163,14 +129,8 @@ const StyledTheme = styled.div`
 
   &:hover {
     .check-hover {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              padding: 16px 15px 0 0;
-            `
-          : css`
-              padding: 16px 0 0 15px;
-            `}
+      padding-block: 16px 0;
+      padding-inline: 15px 0;
       visibility: visible;
       opacity: 0.5;
       svg path {

@@ -99,13 +99,7 @@ const StyledRole = styled.div`
 `;
 
 const StyledAssignedRole = styled.div`
-  padding-left: 4px;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl" &&
-    css`
-      padding-right: 4px;
-      padding-left: auto;
-    `}
+  padding-inline-start: 4px;
   color: rgba(170, 170, 170, 1);
 
   ::before {

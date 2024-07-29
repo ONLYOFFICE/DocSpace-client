@@ -55,14 +55,7 @@ const StyledWrapper = styled.div`
 
   .label > div {
     display: inline-flex;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 4px;
-          `
-        : css`
-            margin-left: 4px;
-          `}
+    margin-inline-start: 4px;
   }
 `;
 

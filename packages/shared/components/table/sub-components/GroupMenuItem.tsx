@@ -100,7 +100,7 @@ const StyledButton = styled(Button)`
   }
 
   .btnIcon {
-    padding-right: 8px;
+    padding-inline-end: 8px;
   }
 
   .button-content {

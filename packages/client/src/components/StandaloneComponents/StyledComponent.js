@@ -67,14 +67,7 @@ const StyledContactComponent = styled.div`
     display: flex;
     width: 100%;
     p {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 4px;
-            `
-          : css`
-              margin-right: 4px;
-            `}
+      margin-inline-end: 4px;
       margin-bottom: 4px;
     }
 

@@ -44,13 +44,7 @@ const StyledLabel = styled.label<{
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
   .checkbox {
-    margin-right: 12px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl" &&
-      css`
-        margin-right: 0;
-        margin-left: 12px;
-      `}
+    margin-inline-end: 12px;
     overflow: visible;
     outline: none;
   }
@@ -184,11 +178,7 @@ const StyledLabel = styled.label<{
 
   .help-button {
     display: inline-block;
-
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: 4px;`
-        : `margin-left: 4px;`}
+    margin-inline-start: 4px;
   }
 `;
 StyledLabel.defaultProps = { theme: Base };
@@ -196,7 +186,7 @@ StyledLabel.defaultProps = { theme: Base };
 const HiddenInput = styled.input`
   opacity: 0.0001;
   position: absolute;
-  right: 0;
+  inset-inline-end: 0;
   z-index: -1;
 `;
 

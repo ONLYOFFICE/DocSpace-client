@@ -42,7 +42,7 @@ const InfoWrapper = styled.div`
 const InfoText = styled(Text)`
   max-width: 660px;
   white-space: break-spaces;
-  margin: 0 0 8px 0;
+  margin: 0 0 8px;
   line-height: 20px;
   color: ${(props) => props.theme.client.settings.common.descriptionColor};
 `;

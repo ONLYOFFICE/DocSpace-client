@@ -47,10 +47,7 @@ export const LoginFormWrapper = styled.div<{ bgPattern: string }>`
     background-attachment: fixed;
     background-size: cover;
     position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
+    inset: 0;
 
     @media ${mobile} {
       background-image: none;
@@ -79,7 +76,7 @@ export const LoginFormWrapper = styled.div<{ bgPattern: string }>`
 
   .language-combo-box {
     position: fixed;
-    right: 28px;
+    inset-inline-end: 28px;
     top: 28px;
 
     @media ${mobile} {
@@ -100,14 +97,7 @@ export const LoginFormWrapper = styled.div<{ bgPattern: string }>`
         text-overflow: ellipsis;
         overflow: hidden;
 
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                right: 0;
-              `
-            : css`
-                left: 0;
-              `};
+        inset-inline-start: 0;
 
         display: flex;
         gap: 4px;

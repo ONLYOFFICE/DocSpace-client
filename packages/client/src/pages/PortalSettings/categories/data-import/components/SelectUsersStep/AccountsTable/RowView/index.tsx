@@ -68,14 +68,7 @@ const StyledRow = styled(Row)`
   .row-header-item {
     display: flex;
     align-items: center;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 6px;
-          `
-        : css`
-            margin-left: 6px;
-          `}
+    margin-inline-start: 6px;
   }
 
   .row-header-title {

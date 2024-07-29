@@ -68,6 +68,6 @@ export const MobileDrawerHeader = styled.div`
   }
 
   .mobile-drawer_cross-icon {
-    margin-left: auto;
+    margin-inline-start: auto;
   }
 `;

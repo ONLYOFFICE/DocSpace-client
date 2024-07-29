@@ -57,7 +57,7 @@ const StyledModalDialog = styled(ModalDialog)`
     .restore_dialog-button {
       display: flex;
       button:first-child {
-        margin-right: 10px;
+        margin-inline-end: 10px;
         width: 50%;
       }
       button:last-child {
@@ -78,7 +78,7 @@ const StyledModalDialog = styled(ModalDialog)`
     }
 
     .backup-list_tooltip {
-      margin-left: 8px;
+      margin-inline-start: 8px;
     }
   }
 `;

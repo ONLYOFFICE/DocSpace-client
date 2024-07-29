@@ -69,12 +69,6 @@ export const Thumbnails = styled.section<{ visible: boolean }>`
 
 export const HideSidebarIcon = styled(ArticleShowMenuReactSvgUrl)`
   ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: auto;
-        `
-      : css`
-          transform: rotate(180deg);
-          margin-left: auto;
-        `}
+    theme.interfaceDirection !== "rtl" && "transform: rotate(180deg)"};
+  margin-inline-start: auto;
 `;

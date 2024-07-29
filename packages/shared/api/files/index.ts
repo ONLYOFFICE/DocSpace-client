@@ -789,10 +789,11 @@ export async function getNewFiles(folderId: number) {
 // TODO: update res type
 export async function convertFile(
   fileId: string | number | null,
+  outputType = null,
   password = null,
   sync = false,
 ) {
-  const data = { password, sync };
+  const data = { password, sync, outputType };
 
   const res = (await request({
     method: "put",

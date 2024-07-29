@@ -33,8 +33,7 @@ import { ContextMenuButton } from "@docspace/shared/components/context-menu-butt
 
 const StyledItemContextOptions = styled.div`
   height: 16px;
-  margin: ${({ theme }) =>
-    theme.interfaceDirection === "rtl" ? "0 auto 0 0" : "0 0 0 auto"};
+  margin-block: auto 0;
 `;
 
 const RoomsContextBtn = ({

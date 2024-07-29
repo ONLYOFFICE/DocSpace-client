@@ -63,7 +63,7 @@ const StyledRow = styled.div`
     display: flex;
     gap: 16px;
     align-items: center;
-    margin-left: auto;
+    margin-inline-start: auto;
   }
 `;
 

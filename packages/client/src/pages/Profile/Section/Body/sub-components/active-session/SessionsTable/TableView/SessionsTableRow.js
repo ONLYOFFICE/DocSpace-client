@@ -40,14 +40,7 @@ import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
 const StyledTableRow = styled(TableRow)`
   .session-platform {
     font-weight: 600;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 5px;
-          `
-        : css`
-            margin-right: 5px;
-          `}
+    margin-inline-end: 5px;
   }
 
   .session-info {
@@ -65,14 +58,7 @@ const StyledTableRow = styled(TableRow)`
   }
 
   .tick-icon {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 8px;
-          `
-        : css`
-            margin-left: 8px;
-          `}
+    margin-inline-start: 8px;
   }
 
   .remove-cell {

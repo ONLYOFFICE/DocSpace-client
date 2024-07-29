@@ -46,15 +46,10 @@ const StyledBox = styled.div`
   grid-template-columns: 1fr;
   grid-template-rows: 16px;
   grid-row-gap: 2px;
-  justify-items: ${({ theme }) =>
-    theme.interfaceDirection === "rtl" ? `right` : `left`};
-  align-items: left;
+  justify-items: start;
+  align-items: start;
   box-sizing: border-box;
-
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `padding-left: ${isDesktop() ? "8px" : "12px"};`
-      : `padding-right: ${isDesktop() ? "8px" : "12px"};`}
+  padding-inline-end: ${isDesktop() ? "8px" : "12px"};
 
   .first-row-content__mobile {
     max-width: 384px;

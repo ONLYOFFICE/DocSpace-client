@@ -34,7 +34,7 @@ import { ShareCalendarProps } from "../Share.types";
 
 const StyledCalendar = styled(Calendar)`
   position: absolute;
-  right: 32px;
+  inset-inline-end: 32px;
 
   ${(props) =>
     props.isMobile &&

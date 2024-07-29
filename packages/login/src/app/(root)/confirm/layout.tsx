@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import ConfirmRoute from "@/components/ConfirmRoute";
 import { getSettings } from "@/utils/actions";
-import ConfirmRoute from "./confirmRoute";
 
 export default async function Layout({
   children,

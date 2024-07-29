@@ -51,8 +51,6 @@ async function Page({ searchParams }: PortalOwnerChangeProps) {
   const settings = await getSettings();
   const user = await getUserFromConfirm(uid, confirmKey);
 
-  console.log("RES", res);
-
   return (
     <>
       {settings && typeof settings !== "string" && (

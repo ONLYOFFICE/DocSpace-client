@@ -187,7 +187,6 @@ const ArticleBodyContent = (props) => {
       setSelection && setSelection([]);
 
       setIsLoading(true, withTimer);
-
       navigate(path, { state });
 
       if (currentDeviceType === DeviceType.mobile) {

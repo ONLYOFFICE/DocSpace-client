@@ -57,34 +57,25 @@ const MyDocumentsTabs = ({
     const filter = FilesFilter.getDefault();
     const url = window.DocSpace.location.pathname;
 
-    if (e.id === "recent") {
-      const filterStorageItem =
-        user?.id && localStorage.getItem(`UserFilterRecent=${user.id}`);
+    const recent = e.id === "recent";
 
-      if (filterStorageItem) {
-        const splitFilter = filterStorageItem.split(",");
+    const filterStorageItem = user?.id
+      ? recent
+        ? localStorage.getItem(`UserFilterRecent=${user.id}`)
+        : localStorage.getItem(`UserFilter=${user.id}`)
+      : null;
 
-        filter.sortBy = splitFilter[0];
-        filter.sortOrder = splitFilter[1];
-      } else {
-        filter.sortBy = "LastOpened";
-      }
+    if (filterStorageItem) {
+      const splitFilter = filterStorageItem.split(",");
 
+      filter.sortBy = splitFilter[0];
+      filter.sortOrder = splitFilter[1];
+    } else if (recent) filter.sortBy = "LastOpened";
+
+    if (recent) {
       filter.folder = e.id;
       filter.searchArea = 3;
-    } else {
-      const filterStorageItem =
-        user?.id && localStorage.getItem(`UserFilter=${user.id}`);
-
-      if (filterStorageItem) {
-        const splitFilter = filterStorageItem.split(",");
-
-        filter.sortBy = splitFilter[0];
-        filter.sortOrder = splitFilter[1];
-      }
-
-      filter.searchArea = null;
-    }
+    } else filter.searchArea = null;
 
     setFilter(filter);
     window.DocSpace.navigate(`${url}?${filter.toUrlParams()}`);

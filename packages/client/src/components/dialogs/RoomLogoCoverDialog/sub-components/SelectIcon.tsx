@@ -28,6 +28,7 @@ import React from "react";
 
 import styled, { css } from "styled-components";
 
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { SelectIconProps } from "../RoomLogoCoverDialog.types";
 import { RoomCoverIcons } from "../data";
 
@@ -70,12 +71,24 @@ const StyledIconContainer = styled.div`
   height: 30px;
   margin-right: 10px;
   margin-top: 8px;
+  border-radius: 4px;
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(71, 129, 209, 0.2);
+  }
+
+  .cover-icon {
+    &:hover {
+      cursor: pointer;
+    }
+  }
 `;
 
 export const SelectIcon = ({
   t,
   withoutIcon,
   setWithoutIcon,
+  setIcon,
 }: SelectIconProps) => {
   const toggleWithoutIcon = () => setWithoutIcon((state: boolean) => !state);
   return (
@@ -86,8 +99,14 @@ export const SelectIcon = ({
       </StyledWithoutIcon>
       <div className="cover-icon-container">
         {RoomCoverIcons.map((icon) => (
-          <StyledIconContainer key={icon}>
-            <img src={icon} alt="cover-icon" />
+          <StyledIconContainer onClick={() => setIcon(icon)} key={icon}>
+            <ColorTheme
+              themeId={ThemeId.IconButton}
+              iconName={icon}
+              className="cover-icon"
+              size={20}
+              alt="cover-icon"
+            />
           </StyledIconContainer>
         ))}
       </div>

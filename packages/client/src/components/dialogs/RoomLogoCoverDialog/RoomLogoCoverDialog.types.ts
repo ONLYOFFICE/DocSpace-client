@@ -29,6 +29,7 @@ import type { TTranslation } from "@docspace/shared/types";
 
 export interface CustomLogoProps {
   color?: string;
+  icon?: string;
 }
 
 export interface SelectColorProps {
@@ -42,4 +43,5 @@ export interface SelectIconProps {
   t: TTranslation;
   withoutIcon: boolean;
   setWithoutIcon: Dispatch<SetStateAction<boolean>>;
+  setIcon: Dispatch<SetStateAction<string>>;
 }

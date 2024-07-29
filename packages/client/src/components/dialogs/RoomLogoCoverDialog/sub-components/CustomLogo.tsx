@@ -26,6 +26,7 @@
 
 import React from "react";
 import styled from "styled-components";
+import { ReactSVG } from "react-svg";
 import { CustomLogoProps } from "../RoomLogoCoverDialog.types";
 
 const StyledLogo = styled.div`
@@ -33,8 +34,25 @@ const StyledLogo = styled.div`
   width: 96px;
   height: 96px;
   border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .custom-logo-cover {
+    svg {
+      width: 60px;
+      height: 60px;
+      path {
+        fill: #fff;
+      }
+    }
+  }
 `;
 
-export const CustomLogo = ({ color }: CustomLogoProps) => {
-  return <StyledLogo color={color} />;
+export const CustomLogo = ({ color, icon }: CustomLogoProps) => {
+  return (
+    <StyledLogo color={color}>
+      <ReactSVG className="custom-logo-cover" src={icon} alt="icon" />
+    </StyledLogo>
+  );
 };

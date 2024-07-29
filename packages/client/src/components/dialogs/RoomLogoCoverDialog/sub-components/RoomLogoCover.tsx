@@ -71,20 +71,16 @@ const RoomLogoCoverContainer = styled.div`
 `;
 
 const RoomLogoCover = (props) => {
-  // const { appearanceTheme } = props;
   const { t } = useTranslation(["Common", "CreateEditRoomDialog"]);
 
   const [color, setColor] = useState<string>(logoColors[3]); // set room icon default color
+  const [icon, setIcon] = useState<string>("Aa");
   const [withoutIcon, setWithoutIcon] = useState<boolean>(true);
-
-  // const onChangeColor: React.MouseEvent = (color: string) => {
-  //   setColor(color);
-  // };
 
   return (
     <RoomLogoCoverContainer>
       <div className="room-logo-container">
-        <CustomLogo color={color} />
+        <CustomLogo icon={icon} color={color} />
       </div>
       <div className="color-select-container">
         <SelectColor
@@ -98,6 +94,7 @@ const RoomLogoCover = (props) => {
         <SelectIcon
           t={t}
           withoutIcon={withoutIcon}
+          setIcon={setIcon}
           setWithoutIcon={setWithoutIcon}
         />
       </div>

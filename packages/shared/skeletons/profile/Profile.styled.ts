@@ -26,7 +26,7 @@
 
 import styled from "styled-components";
 
-import { tablet, getCorrectFourValuesStyle } from "@docspace/shared/utils";
+import { tablet } from "@docspace/shared/utils";
 
 export const StyledWrapper = styled.div`
   width: 660px;

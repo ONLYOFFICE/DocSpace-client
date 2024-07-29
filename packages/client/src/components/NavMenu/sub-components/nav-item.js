@@ -32,11 +32,7 @@ import styled, { css } from "styled-components";
 import { Badge } from "@docspace/shared/components/badge";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
-import {
-  commonIconsStyles,
-  getCorrectFourValuesStyle,
-  tablet,
-} from "@docspace/shared/utils";
+import { commonIconsStyles, tablet } from "@docspace/shared/utils";
 
 import MenuIcon from "PUBLIC_DIR/images/menu.react.svg";
 import { Base } from "@docspace/shared/themes";

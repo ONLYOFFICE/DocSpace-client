@@ -25,11 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import {
-  mobile,
-  tablet,
-  getCorrectFourValuesStyle,
-} from "@docspace/shared/utils";
+import { mobile, tablet } from "@docspace/shared/utils";
 
 export const StyledPage = styled.div`
   display: flex;

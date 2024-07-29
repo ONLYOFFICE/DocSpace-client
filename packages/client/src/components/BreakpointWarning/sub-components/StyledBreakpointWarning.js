@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { getCorrectFourValuesStyle, mobileMore } from "@docspace/shared/utils";
+import { mobileMore } from "@docspace/shared/utils";
 
 const StyledBreakpointWarning = styled.div`
   padding-block: 24px 0;

@@ -67,7 +67,6 @@ import {
 import styled, { css } from "styled-components";
 
 import { resendInvitesAgain } from "@docspace/shared/api/people";
-import { getCorrectFourValuesStyle } from "@docspace/shared/utils";
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isTablet } from "react-device-detect";
 

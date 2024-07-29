@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { getCorrectFourValuesStyle } from "../../utils";
 import { Base } from "../../themes";
 
 const Selectors = styled.div<{ hasError?: boolean }>`

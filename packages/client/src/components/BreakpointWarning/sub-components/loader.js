@@ -28,11 +28,7 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-import {
-  getCorrectFourValuesStyle,
-  isMobile,
-  mobileMore,
-} from "@docspace/shared/utils";
+import { isMobile, mobileMore } from "@docspace/shared/utils";
 
 const StyledLoader = styled.div`
   padding-top: 25px;

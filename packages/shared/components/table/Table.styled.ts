@@ -26,12 +26,7 @@
 
 import styled, { css } from "styled-components";
 import { Base } from "../../themes";
-import {
-  mobile,
-  tablet,
-  getCorrectBorderRadius,
-  getCorrectFourValuesStyle,
-} from "../../utils";
+import { mobile, tablet } from "../../utils";
 import { IconButton } from "../icon-button";
 import { Scrollbar } from "../scrollbar";
 import { ColorTheme } from "../color-theme";

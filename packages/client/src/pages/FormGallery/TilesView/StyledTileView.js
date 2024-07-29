@@ -29,13 +29,7 @@ import { Base } from "@docspace/shared/themes";
 import TileContent from "./sub-components/TileContent";
 import { ContextMenu } from "@docspace/shared/components/context-menu";
 
-import {
-  tablet,
-  desktop,
-  mobile,
-  mobileMore,
-  getCorrectFourValuesStyle,
-} from "@docspace/shared/utils";
+import { tablet, desktop, mobile, mobileMore } from "@docspace/shared/utils";
 
 const FlexBoxStyles = css`
   display: flex;

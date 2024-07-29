@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 import { Row } from "@docspace/shared/components/row";
-import { tablet, getCorrectFourValuesStyle } from "@docspace/shared/utils";
+import { tablet } from "@docspace/shared/utils";
 import { Base } from "@docspace/shared/themes";
 
 const StyledBody = styled.div`

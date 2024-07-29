@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { tablet, getCorrectFourValuesStyle } from "../../utils";
+import { tablet } from "../../utils";
 import { Base } from "../../themes";
 
 const StyledContextMenu = styled.div`

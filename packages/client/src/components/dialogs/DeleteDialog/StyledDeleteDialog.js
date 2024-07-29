@@ -27,7 +27,7 @@
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
 import styled from "styled-components";
-import { getCorrectFourValuesStyle, tablet } from "@docspace/shared/utils";
+import { tablet } from "@docspace/shared/utils";
 
 const StyledDeleteDialog = styled(ModalDialog)`
   /* .scroll-body {

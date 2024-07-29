@@ -86,8 +86,6 @@ import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
-import { TableVersions } from "SRC_DIR/helpers/constants";
-import { SortByFieldName } from "SRC_DIR/helpers/constants";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 
@@ -2411,10 +2409,6 @@ class FilesActionStore {
 
       filter.folder = id;
 
-      console.log("openFileAction getDefault", filter);
-
-      console.log("openFileAction filter.toUrlParams()", filter.toUrlParams());
-
       const url = `${path}?${filter.toUrlParams()}`;
 
       if (openingNewTab(url, e)) return;
@@ -2491,8 +2485,6 @@ class FilesActionStore {
     const { clearFiles, setBufferSelection } = this.filesStore;
     const { clearInsideGroup, insideGroupBackUrl } =
       this.peopleStore.groupsStore;
-
-    console.log("onClickBack");
 
     setBufferSelection(null);
 
@@ -2635,10 +2627,7 @@ class FilesActionStore {
     const { navigationPath, rootFolderType } = this.selectedFolderStore;
 
     const filter = FilesFilter.getDefault();
-
     const filterObj = FilesFilter.getFilter(window.location);
-
-    console.log("backToParentFolder  filterObj", filterObj);
 
     filter.sortBy = filterObj.sortBy;
     filter.sortOrder = filterObj.sortOrder;

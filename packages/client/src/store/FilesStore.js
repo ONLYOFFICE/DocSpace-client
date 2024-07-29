@@ -1304,31 +1304,21 @@ class FilesStore {
   setFilesFilter = (filter, folderId = null) => {
     const { recycleBinFolderId } = this.treeFoldersStore;
 
-    if (this.categoryType === CategoryType.Archive) {
-      const key = `UserFilterArchiveRoom=${this.userStore.user?.id}`;
+    const key =
+      this.categoryType === CategoryType.Archive
+        ? `UserFilterArchiveRoom=${this.userStore.user?.id}`
+        : this.categoryType === CategoryType.SharedRoom
+          ? `UserFilterSharedRoom=${this.userStore.user?.id}`
+          : folderId === "recent"
+            ? `UserFilterRecent=${this.userStore.user?.id}`
+            : +folderId === recycleBinFolderId
+              ? `UserFilterTrash=${this.userStore.user?.id}`
+              : !this.publicRoomStore.isPublicRoom
+                ? `UserFilter=${this.userStore.user?.id}`
+                : null;
+
+    if (key) {
       const value = `${filter.sortBy},${filter.sortOrder}`;
-      localStorage.setItem(key, value);
-    }
-
-    if (this.categoryType === CategoryType.SharedRoom) {
-      const key = `UserFilterSharedRoom=${this.userStore.user?.id}`;
-      const value = `${filter.sortBy},${filter.sortOrder}`;
-      localStorage.setItem(key, value);
-    }
-
-    if (folderId === "recent") {
-      const key = `UserFilterRecent=${this.userStore.user?.id}`;
-      const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
-
-      localStorage.setItem(key, value);
-    } else if (+folderId === recycleBinFolderId) {
-      const key = `UserFilterTrash=${this.userStore.user?.id}`;
-      const value = `${filter.sortBy},${filter.sortOrder}`;
-      localStorage.setItem(key, value);
-    } else if (!this.publicRoomStore.isPublicRoom) {
-      const key = `UserFilter=${this.userStore.user?.id}`;
-      const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
-
       localStorage.setItem(key, value);
     }
 
@@ -1483,7 +1473,6 @@ class FilesStore {
     const filterData = filter ? filter.clone() : FilesFilter.getDefault();
     filterData.folder = folderId;
 
-    //check
     if (folderId === "@my" && this.userStore.user.isVisitor) {
       const url = getCategoryUrl(CategoryType.Shared);
       return window.DocSpace.navigate(
@@ -1498,18 +1487,11 @@ class FilesStore {
       this.userStore.user?.id &&
       localStorage.getItem(`UserFilter=${this.userStore.user.id}`);
 
-    console.log(
-      "folderId filterStorageItem filter",
-      folderId,
-      filterStorageItem,
-      filter,
-    );
     if (filterStorageItem && !filter) {
       const splitFilter = filterStorageItem.split(",");
 
       filterData.sortBy = splitFilter[0];
-      filterData.pageCount = +splitFilter[1];
-      filterData.sortOrder = splitFilter[2];
+      filterData.sortOrder = splitFilter[1];
     }
 
     if (!this.settingsStore.withPaging) {

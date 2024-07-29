@@ -57,19 +57,15 @@ const MyDocumentsTabs = ({
     const filter = FilesFilter.getDefault();
     const url = window.DocSpace.location.pathname;
 
-    console.log("SUBMENU  e.id", e.id);
-
     if (e.id === "recent") {
       const filterStorageItem =
         user?.id && localStorage.getItem(`UserFilterRecent=${user.id}`);
-
-      console.log("SUBMENU UserFilterRecent", filterStorageItem);
 
       if (filterStorageItem) {
         const splitFilter = filterStorageItem.split(",");
 
         filter.sortBy = splitFilter[0];
-        filter.sortOrder = splitFilter[2];
+        filter.sortOrder = splitFilter[1];
       } else {
         filter.sortBy = "LastOpened";
       }
@@ -80,13 +76,11 @@ const MyDocumentsTabs = ({
       const filterStorageItem =
         user?.id && localStorage.getItem(`UserFilter=${user.id}`);
 
-      console.log("SUBMENU UserFilter", filterStorageItem);
-
       if (filterStorageItem) {
         const splitFilter = filterStorageItem.split(",");
 
         filter.sortBy = splitFilter[0];
-        filter.sortOrder = splitFilter[2];
+        filter.sortOrder = splitFilter[1];
       }
 
       filter.searchArea = null;

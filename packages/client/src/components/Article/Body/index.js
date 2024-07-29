@@ -109,10 +109,12 @@ const ArticleBodyContent = (props) => {
           const filterStorageItem =
             userId && localStorage.getItem(`UserFilter=${userId}`);
 
-          const splitFilter = filterStorageItem.split(",");
+          if (filterStorageItem) {
+            const splitFilter = filterStorageItem.split(",");
 
-          myFilter.sortBy = splitFilter[0];
-          myFilter.sortOrder = splitFilter[2];
+            myFilter.sortBy = splitFilter[0];
+            myFilter.sortOrder = splitFilter[1];
+          }
 
           params = myFilter.toUrlParams();
 
@@ -135,10 +137,13 @@ const ArticleBodyContent = (props) => {
 
           const filterStorageTrash =
             userId && localStorage.getItem(`UserFilterTrash=${userId}`);
-          const splitFilterTrash = filterStorageTrash.split(",");
 
-          recycleBinFilter.sortBy = splitFilterTrash[0];
-          recycleBinFilter.sortOrder = splitFilterTrash[1];
+          if (filterStorageTrash) {
+            const splitFilterTrash = filterStorageTrash.split(",");
+
+            recycleBinFilter.sortBy = splitFilterTrash[0];
+            recycleBinFilter.sortOrder = splitFilterTrash[1];
+          }
 
           params = recycleBinFilter.toUrlParams();
           path = getCategoryUrl(CategoryType.Trash);
@@ -183,7 +188,6 @@ const ArticleBodyContent = (props) => {
 
       setIsLoading(true, withTimer);
 
-      console.log("path", path);
       navigate(path, { state });
 
       if (currentDeviceType === DeviceType.mobile) {

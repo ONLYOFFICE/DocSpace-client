@@ -62,6 +62,7 @@ const UsersRow = (props: AddEmailUsersRowProps) => {
       onRowClick={handleAccountToggle}
       onSelect={toggleAccount}
       isDisabled={!isPrevEmailValid}
+      contextButtonSpacerWidth="0"
     >
       <UsersRowContent
         id={data.key}

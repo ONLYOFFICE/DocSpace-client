@@ -2088,6 +2088,7 @@ const Dark: TTheme = {
       folderLabelColor: "#A3A9AE",
       renamedItemColor: "#A3A9AE",
       oldRoleColor: "#A3A9AE",
+      messageColor: "#FFFFFF",
     },
 
     details: {
@@ -2700,6 +2701,7 @@ const Dark: TTheme = {
     upload: {
       color: black,
       tooltipColor: "#F5E9BA",
+      iconColor: darkErrorStatus,
 
       shareButton: {
         color: gray,

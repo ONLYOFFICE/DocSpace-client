@@ -38,8 +38,11 @@ interface UseI18NProps {
 
 const useI18N = ({ settings, user }: UseI18NProps) => {
   const [i18n, setI18N] = React.useState<i18n>(
-    getI18NInstance(user?.cultureName ?? "en", settings?.culture ?? "en") ??
-      ({} as i18n),
+    () =>
+      getI18NInstance(
+        user?.cultureName ?? settings?.culture ?? "en",
+        settings?.culture ?? "en",
+      ) ?? ({} as i18n),
   );
 
   const isInit = React.useRef(false);
@@ -53,7 +56,7 @@ const useI18N = ({ settings, user }: UseI18NProps) => {
     isInit.current = true;
 
     const instance = getI18NInstance(
-      user?.cultureName ?? "en",
+      user?.cultureName ?? settings?.culture ?? "en",
       settings?.culture ?? "en",
     );
 

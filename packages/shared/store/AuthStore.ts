@@ -369,7 +369,7 @@ class AuthStore {
 
   login = async (user: TUser, hash: string, session = true) => {
     try {
-      const response = (await api.user.login(user, hash, session)) as {
+      const response = (await api.user.login(user, hash, "", session)) as {
         token: string;
         tfa: string;
         error: { message: unknown };

@@ -36,7 +36,10 @@ import type {
   TFile,
 } from "@docspace/shared/api/files/types";
 import { TUser } from "@docspace/shared/api/people/types";
-import { TSettings } from "@docspace/shared/api/settings/types";
+import type {
+  TGetColorTheme,
+  TSettings,
+} from "@docspace/shared/api/settings/types";
 
 import type {
   ActionType,
@@ -499,4 +502,20 @@ export async function getEditorUrl(
   const editorUrl = await res.json();
 
   return editorUrl.response as TDocServiceLocation;
+}
+
+export async function getColorTheme() {
+  const [getSettings] = createRequest(
+    [`/settings/colortheme`],
+    [["", ""]],
+    "GET",
+  );
+
+  const res = await fetch(getSettings);
+
+  if (!res.ok) return;
+
+  const colorTheme = await res.json();
+
+  return colorTheme.response as TGetColorTheme;
 }

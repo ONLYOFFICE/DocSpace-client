@@ -73,8 +73,6 @@ export const HeaderContainer = styled.div`
       white-space: nowrap;
       overflow: hidden;
       color: ${(props) => props.theme.client.settings.headerTitleColor};
-      display: flex;
-      align-items: center;
     }
   }
   .action-wrapper {
@@ -371,17 +369,10 @@ const SectionHeaderContent = (props) => {
         <LoaderSectionHeader />
       ) : (
         <HeaderContainer>
-          {!isCategoryOrHeader && arrayOfParams[0] && (
-            <IconButton
-              iconName={ArrowPathReactSvgUrl}
-              size="17"
-              isFill={true}
-              onClick={onBackToParent}
-              className="arrow-button"
-            />
-          )}
-          <Headline type="content" truncate={true}>
-            {isMobile() && isServicePage && (
+          {!isCategoryOrHeader &&
+            arrayOfParams[0] &&
+            (isMobile() ||
+              window.location.href.indexOf("/javascript-sdk/") > -1) && (
               <IconButton
                 iconName={ArrowPathReactSvgUrl}
                 size="17"
@@ -390,6 +381,7 @@ const SectionHeaderContent = (props) => {
                 className="arrow-button"
               />
             )}
+          <Headline type="content" truncate={true}>
             <div className="settings-section_header">
               <div className="header">{translatedHeader}</div>
               {isNeedPaidIcon ? (

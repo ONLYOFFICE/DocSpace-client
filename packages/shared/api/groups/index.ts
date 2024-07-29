@@ -127,7 +127,7 @@ export const getGroupMembersInRoom = (
 export const updateGroup = (
   groupId: string,
   groupName: string,
-  groupManager: string,
+  groupManager: string | undefined,
   membersToAdd: string[],
   membersToRemove: string[],
 ) => {

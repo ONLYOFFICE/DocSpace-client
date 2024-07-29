@@ -26,59 +26,38 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
+
 import { ShareAccessRights } from "@docspace/shared/enums";
-import { toastr } from "@docspace/shared/components/toast";
 import { Portal } from "@docspace/shared/components/portal";
 import { TUser } from "@docspace/shared/api/people/types";
-import { TSelectorItem } from "@docspace/shared/components/selector";
+
 import AddUsersPanel from "../../../../panels/AddUsersPanel";
 import { getAccessOptions } from "../../../../panels/InvitePanel/utils";
 
-interface SelectGroupMembersPanelProps {
+type MembersSelectorProps = {
   isVisible: boolean;
   onClose: () => void;
   onParentPanelClose: () => void;
-  groupManager?: TUser;
-  groupMembers: TUser[];
-  setGroupMembers: (groupMembers: (TUser | TSelectorItem)[]) => void;
-}
 
-const SelectGroupMembersPanel = ({
+  addMembers: (members: TUser[]) => void;
+} & (
+  | { checkIfUserInvited: (user: TUser) => boolean; invitedUsers?: undefined }
+  | { invitedUsers: string[]; checkIfUserInvited?: undefined }
+);
+
+export const MembersSelector = ({
   isVisible,
-  onClose,
+  addMembers,
   onParentPanelClose,
-  groupManager,
-  groupMembers,
-  setGroupMembers,
-}: SelectGroupMembersPanelProps) => {
+  onClose,
+  checkIfUserInvited,
+  invitedUsers,
+}: MembersSelectorProps) => {
   const { t } = useTranslation(["InviteDialog"]);
   const accessOptions = getAccessOptions(t, 5, false, true);
-
-  const onAddGroupMembers = (newGroupMembers: TSelectorItem[]) => {
-    const resultGroupMembers: (TUser | TSelectorItem)[] = [...groupMembers];
-    let showErrorWasSelected = false;
-
-    newGroupMembers.forEach((groupMember) => {
-      if (groupMembers.findIndex((gm) => gm.id === groupMember.id) !== -1) {
-        showErrorWasSelected = true;
-        return;
-      }
-      resultGroupMembers.push(groupMember);
-    });
-
-    if (showErrorWasSelected) {
-      toastr.warning("Some users have already been added");
-    }
-
-    setGroupMembers(resultGroupMembers);
-  };
-
-  const invitedUsers = React.useMemo(
-    () => [...groupMembers].map((g) => g?.id),
-    [groupMembers],
-  );
-
-  if (groupManager) invitedUsers.push(groupManager.id);
+  const invitedProps = checkIfUserInvited
+    ? { checkIfUserInvited }
+    : { invitedUsers };
 
   return (
     <Portal
@@ -88,19 +67,17 @@ const SelectGroupMembersPanel = ({
           onClose={onClose}
           onParentPanelClose={onParentPanelClose}
           isMultiSelect
-          setDataItems={onAddGroupMembers}
+          setDataItems={addMembers}
           accessOptions={accessOptions}
           withAccessRights={false}
           isEncrypted
           defaultAccess={ShareAccessRights.FullAccess}
           withoutBackground
           withBlur={false}
-          invitedUsers={invitedUsers}
           disableDisabledUsers
+          {...invitedProps}
         />
       }
     />
   );
 };
-
-export default SelectGroupMembersPanel;

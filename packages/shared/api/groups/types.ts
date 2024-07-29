@@ -30,7 +30,7 @@ import { ShareAccessRights } from "../../enums";
 export type TGroup = {
   category: string;
   id: string;
-  manager: TUser;
+  manager?: TUser;
   name: string;
   parent: string;
   isGroup?: boolean;

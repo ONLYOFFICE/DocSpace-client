@@ -42,7 +42,7 @@ import GroupNameParam from "./sub-components/GroupNameParam";
 import HeadOfGroup from "./sub-components/HeadOfGroupParam";
 import MembersParam from "./sub-components/MembersParam";
 import SelectGroupManagerPanel from "./sub-components/HeadOfGroupParam/SelectGroupManagerPanel";
-import SelectGroupMembersPanel from "./sub-components/MembersParam/SelectGroupMembersPanel";
+import { SelectMembersPanel } from "./sub-components/create-components/SelectMembersPanel";
 
 interface CreateGroupDialogProps {
   visible: boolean;
@@ -177,7 +177,7 @@ const CreateGroupDialog = ({
       )}
 
       {selectMembersPanelIsVisible && (
-        <SelectGroupMembersPanel
+        <SelectMembersPanel
           isVisible={selectMembersPanelIsVisible}
           onClose={onHideSelectMembersPanel}
           onParentPanelClose={onClose}

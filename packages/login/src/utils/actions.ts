@@ -41,7 +41,7 @@ import {
 } from "@docspace/shared/api/settings/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import { Encoder } from "@docspace/shared/utils/encoder";
-import { TCreateUserData } from "@/types";
+import { TCreateUserData, TTfaSecretKeyAndQR } from "@/types";
 
 export const checkIsAuthenticated = async () => {
   const [request] = createRequest(["/authentication"], [["", ""]], "GET");
@@ -100,7 +100,7 @@ export async function getColorTheme() {
 
   const res = await fetch(getSettings);
 
-  if (!res.ok) return;
+  if (!res.ok) throw new Error(res.statusText);
 
   const colorTheme = await res.json();
 
@@ -399,4 +399,20 @@ export async function ownerChange(
   const res = await fetch(changePassword);
 
   if (!res.ok) throw new Error(res.statusText);
+}
+
+export async function getTfaSecretKeyAndQR(confirmKey: string | null = null) {
+  const [getTfaSecretKeyAndQR] = createRequest(
+    [`/settings/tfaapp/setup`],
+    [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
+    "GET",
+  );
+
+  const res = await fetch(getTfaSecretKeyAndQR);
+
+  if (!res.ok) throw new Error(res.statusText);
+
+  const tfaSecretKeyAndQR = await res.json();
+
+  return tfaSecretKeyAndQR.response as TTfaSecretKeyAndQR;
 }

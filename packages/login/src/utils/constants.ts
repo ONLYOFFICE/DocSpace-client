@@ -46,3 +46,10 @@ export const DEFAULT_SELECT_LANGUAGE: TCulturesOption = {
 };
 
 export const URL_LICENSE = "https://gnu.org/licenses/gpl-3.0.html";
+
+export const TFA_ANDROID_APP_URL =
+  "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2";
+export const TFA_IOS_APP_URL =
+  "https://apps.apple.com/app/google-authenticator/id388497605";
+export const TFA_WIN_APP_URL =
+  "https://www.microsoft.com/ru-ru/p/authenticator/9wzdncrfj3rj?rtc=1&activetab=pivot:overviewtab";

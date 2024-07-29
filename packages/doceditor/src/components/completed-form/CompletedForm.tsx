@@ -114,10 +114,17 @@ export const CompletedForm = ({
     );
 
   const {
-    response: { completedForm, formNumber, manager, originalForm, roomId },
+    response: {
+      completedForm,
+      formNumber,
+      manager,
+      originalForm,
+      roomId,
+      isRoomMember,
+    },
   } = session;
 
-  const isAnonim = Boolean(share);
+  const isAnonim = Boolean(share) && !isRoomMember;
 
   const getFolderUrl = (folderId: number, isAnonim: boolean): string => {
     if (isNullOrUndefined(folderId)) return "";
@@ -135,10 +142,6 @@ export const CompletedForm = ({
     return `${origin}${path}${filter.toUrlParams()}`;
   };
 
-  const setHistory = (url: string) => {
-    history.pushState({}, "", url);
-  };
-
   const copyLinkFile = async () => {
     const origin = window.location.origin;
 
@@ -154,14 +157,12 @@ export const CompletedForm = ({
 
   const gotoCompleteFolder = () => {
     const url = getFolderUrl(completedForm.folderId, false);
-    setHistory(url);
-    window.location.replace(url);
+    window.location.assign(url);
   };
 
   const handleBackToRoom = () => {
     const url = getFolderUrl(roomId, isAnonim);
-    setHistory(url);
-    window.location.replace(url);
+    window.location.assign(url);
   };
 
   const fillAgainSearchParams = new URLSearchParams({
@@ -207,7 +208,7 @@ export const CompletedForm = ({
           </Box>
         </FormNumberWrapper>
         <ManagerWrapper>
-          <span className="label">{t("CompletedForm:Manager")}</span>
+          <span className="label">{t("CompletedForm:FormOwner")}</span>
           <Box>
             <Avatar
               className="manager__avatar"
@@ -223,22 +224,22 @@ export const CompletedForm = ({
               href={`mailto:${manager.email}`}
             >
               <MailIcon />
-              {manager.email}
+              <span>{manager.email}</span>
             </Link>
           </Box>
         </ManagerWrapper>
       </MainContent>
-      <ButtonWrapper isShreFile={isShreFile}>
+      <ButtonWrapper isShreFile={isShreFile && !isRoomMember}>
         <Button
           scale
           primary
           size={ButtonSize.medium}
           label={
-            isAnonim ? t("Common:Download") : t("CompletedForm:CheckReadyForm")
+            isAnonim ? t("Common:Download") : t("CompletedForm:CheckReadyForms")
           }
           onClick={isAnonim ? handleDownload : gotoCompleteFolder}
         />
-        {!isShreFile && (
+        {(!isShreFile || isRoomMember) && (
           <Button
             scale
             size={ButtonSize.medium}

@@ -294,6 +294,7 @@ const Sdk = ({
           acceptButtonLabel={frameConfig?.acceptButtonLabel}
           cancelButtonLabel={frameConfig?.cancelButtonLabel}
           currentFolderId={frameConfig?.id}
+          openRoot={!frameConfig?.id}
           descriptionText={formatsDescription[frameConfig?.filterParam] || ""}
         />
       );

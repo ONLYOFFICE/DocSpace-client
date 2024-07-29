@@ -70,7 +70,7 @@ export const StyledAvatarWrapper = styled.div`
 
     @media ${mobile} {
       display: flex;
-      position: fixed;
+      position: absolute;
       right: 16px;
       ${(props) =>
         props.theme.interfaceDirection === "rtl"

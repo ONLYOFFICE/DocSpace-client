@@ -34,7 +34,7 @@ import {
 } from "@docspace/shared/api/files";
 // import { getOperationProgress } from "@docspace/shared/utils/getOperationProgress";
 import { toastr } from "@docspace/shared/components/toast";
-import { EDITOR_ID } from "@docspace/shared/constants";
+import { CREATED_FORM_KEY, EDITOR_ID } from "@docspace/shared/constants";
 
 import type {
   TFile,
@@ -52,6 +52,13 @@ import type { TData } from "@docspace/shared/components/toast/Toast.type";
 import { saveAs } from "@/utils";
 import type { ConflictStateType } from "@/types";
 
+type SuccessResponseType = {
+  form: TFile;
+  message: string;
+};
+type FaildResponseType = string;
+type ResponseType = SuccessResponseType | FaildResponseType;
+
 const DefaultConflictDataDialogState: ConflictStateType = {
   visible: false,
   resolve: () => {},
@@ -68,6 +75,12 @@ const hasFileUrl = (arg: object): arg is { data: { url: string } } => {
     "url" in arg.data &&
     typeof arg.data.url === "string"
   );
+};
+
+const isSuccessResponse = (
+  res: ResponseType | undefined,
+): res is SuccessResponseType => {
+  return Boolean(res) && typeof res === "object" && "form" in res;
 };
 
 const useStartFillingSelectDialog = (fileInfo: TFile | undefined) => {
@@ -179,14 +192,22 @@ const useStartFillingSelectDialog = (fileInfo: TFile | undefined) => {
 
       const fileUrl = await getFileUrl();
 
-      const response = await saveAs(
+      const response = await saveAs<ResponseType>(
         fileInfo.title,
         fileUrl,
         selectedItemId,
         false,
+        "createForm",
       );
 
-      const [key, value] = response?.split(":") ?? [];
+      if (isSuccessResponse(response)) {
+        const { form } = response;
+
+        sessionStorage.setItem(CREATED_FORM_KEY, JSON.stringify(form));
+      }
+
+      const [key, value] =
+        typeof response === "string" ? response.split(":") : [];
 
       // await copyToFolder(
       //   Number(selectedItemId),

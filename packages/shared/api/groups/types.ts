@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TUser } from "../people/types";
+import { ShareAccessRights } from "../../enums";
 
 export type TGroup = {
   category: string;
@@ -36,4 +37,24 @@ export type TGroup = {
   membersCount: number;
   shared?: boolean;
   isLDAP: boolean;
+};
+
+export type TGroupMemberInvitedInRoom = {
+  user: TUser;
+  canEditAccess: boolean;
+  overridden: boolean;
+  owner: boolean;
+  groupAccess: number;
+  userAccess: ShareAccessRights;
+};
+
+export type TGetGroupMembersInRoom = {
+  items: TGroupMemberInvitedInRoom[];
+  total: number;
+};
+
+export type TGetGroupMembersInRoomFilter = {
+  startIndex?: number;
+  count?: number;
+  filterValue?: string;
 };

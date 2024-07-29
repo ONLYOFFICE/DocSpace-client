@@ -1447,7 +1447,6 @@ class FilesStore {
   };
 
   refreshFiles = async () => {
-    console.log("call fetchFiles");
     const res = await this.fetchFiles(this.selectedFolderStore.id, this.filter);
     return res;
   };

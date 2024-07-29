@@ -21,7 +21,6 @@
   "FolderTitleWebDav": "Каталог WebDAV",
   "FolderTitleYandex": "Каталог Yandex",
   "FormTemplates": "Шаблони форми",
-  "LinkCopySuccess": "Посилання скопійовано до буферу обміну",
   "LinkHasExpiredAndHasBeenDisabled": "Термін дії посилання закінчився, і його було вимкнено",
   "LinkValidTime": "Це посилання дійсне лише протягом {{days_count}} дн.",
   "NewForm": "Форма PDF",

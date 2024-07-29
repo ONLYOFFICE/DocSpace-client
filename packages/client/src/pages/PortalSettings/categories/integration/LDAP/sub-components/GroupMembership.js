@@ -30,10 +30,9 @@ import { useTranslation } from "react-i18next";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Box } from "@docspace/shared/components/box";
-import { TextInput } from "@docspace/shared/components/text-input";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import { Textarea } from "@docspace/shared/components/textarea";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
+
+import LdapFieldComponent from "./LdapFieldComponent";
 
 const FIELD_STYLE = { marginBottom: "0px" };
 
@@ -99,7 +98,7 @@ const GroupMembership = (props) => {
         />
         <HelpButton
           tooltipContent={t("LdapGroupMembershipTooltip", {
-            productName: PRODUCT_NAME,
+            productName: t("Common:ProductName"),
           })}
         />
       </div>
@@ -114,7 +113,7 @@ const GroupMembership = (props) => {
           hasError={errors.groupDN}
           tooltipContent={t("LdapGroupDNTooltip")}
         >
-          <TextInput
+          <LdapFieldComponent
             className="field-input"
             onChange={onChange}
             name={GROUP_DN}
@@ -135,7 +134,7 @@ const GroupMembership = (props) => {
           isRequired
           tooltipContent={t("LdapGroupUserAttributeTooltip")}
         >
-          <TextInput
+          <LdapFieldComponent
             className="field-input"
             onChange={onChange}
             name={USER_ATTRIBUTE}
@@ -158,7 +157,8 @@ const GroupMembership = (props) => {
           inlineHelpButton
           isRequired
         >
-          <Textarea
+          <LdapFieldComponent
+            isTextArea
             value={groupFilter}
             onChange={onChange}
             hasError={errors.groupFilter}
@@ -178,7 +178,7 @@ const GroupMembership = (props) => {
           isRequired
           tooltipContent={t("LdapGroupNameAttributeTooltip")}
         >
-          <TextInput
+          <LdapFieldComponent
             className="field-input"
             onChange={onChange}
             name={GROUP_NAME_ATTRIBUTE}
@@ -198,7 +198,7 @@ const GroupMembership = (props) => {
           isRequired
           tooltipContent={t("LdapGroupAttributeTooltip")}
         >
-          <TextInput
+          <LdapFieldComponent
             className="field-input"
             onChange={onChange}
             name={GROUP_ATTRIBUTE}

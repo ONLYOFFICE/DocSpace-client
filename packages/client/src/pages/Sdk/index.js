@@ -56,7 +56,6 @@ const Sdk = ({
   fetchExternalLinks,
   getFilePrimaryLink,
   getFilesSettings,
-  organizationName,
 }) => {
   const [isDataReady, setIsDataReady] = useState(false);
 
@@ -86,7 +85,9 @@ const Sdk = ({
       type: t("Files:Forms").toLowerCase(),
     }),
     EditorSupportedTypes: t("Common:SelectTypeFiles", {
-      type: t("AllTypesAvailableForEditing", { organizationName }),
+      type: t("AllTypesAvailableForEditing", {
+        organizationName: t("Common:OrganizationName"),
+      }),
     }),
   };
 
@@ -293,6 +294,7 @@ const Sdk = ({
           acceptButtonLabel={frameConfig?.acceptButtonLabel}
           cancelButtonLabel={frameConfig?.cancelButtonLabel}
           currentFolderId={frameConfig?.id}
+          openRoot={!frameConfig?.id}
           descriptionText={formatsDescription[frameConfig?.filterParam] || ""}
         />
       );
@@ -315,14 +317,8 @@ export default inject(
     filesStore,
   }) => {
     const { login, logout } = authStore;
-    const {
-      theme,
-      setFrameConfig,
-      frameConfig,
-      getSettings,
-      isLoaded,
-      organizationName,
-    } = settingsStore;
+    const { theme, setFrameConfig, frameConfig, getSettings, isLoaded } =
+      settingsStore;
     const { loadCurrentUser, user } = userStore;
     const { updateProfileCulture } = peopleStore.targetUserStore;
     const { getIcon, getRoomsIcon, getFilesSettings } = filesSettingsStore;
@@ -345,7 +341,6 @@ export default inject(
       fetchExternalLinks,
       getFilePrimaryLink,
       getFilesSettings,
-      organizationName,
     };
   },
 )(

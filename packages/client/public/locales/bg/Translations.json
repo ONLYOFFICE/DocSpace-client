@@ -21,7 +21,6 @@
   "FolderTitleWebDav": "WebDAV директория",
   "FolderTitleYandex": "Yandex директория",
   "FormTemplates": "Шаблони на формуляри",
-  "LinkCopySuccess": "Връзката беше копирана в клипборда",
   "LinkHasExpiredAndHasBeenDisabled": "Линкът изтече и беше деактивиран",
   "LinkValidTime": "Този линк е валиден само за {{days_count}} дни.",
   "NewForm": "PDF формуляр",

@@ -42,7 +42,6 @@ import { SecuritySessions } from "./sessions/SecuritySessions";
 import { resetSessionStorage } from "../../utils";
 import { DeviceType } from "@docspace/shared/enums";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const SecurityWrapper = (props) => {
   const { t, loadBaseInfo, resetIsInit, currentDeviceType } = props;
@@ -54,7 +53,7 @@ const SecurityWrapper = (props) => {
   const data = [
     {
       id: "access-portal",
-      name: t("PortalAccess", { productName: PRODUCT_NAME }),
+      name: t("PortalAccess", { productName: t("Common:ProductName") }),
       content: <AccessPortal />,
     },
     {

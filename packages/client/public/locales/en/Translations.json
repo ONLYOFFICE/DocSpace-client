@@ -21,7 +21,6 @@
   "FolderTitleWebDav": "WebDAV Directory",
   "FolderTitleYandex": "Yandex Directory",
   "FormTemplates": "Form templates",
-  "LinkCopySuccess": "Link has been copied to the clipboard",
   "LinkHasExpiredAndHasBeenDisabled": "The link has expired and has been disabled",
   "LinkValidTime": "This link is valid for {{days_count}} days only.",
   "NewForm": "PDF Form",

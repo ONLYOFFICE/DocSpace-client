@@ -187,6 +187,7 @@ class SsoFormStore {
     } else {
       this.enableSso = false;
       !this.hasErrors && this.entityId.trim() !== "" && this.saveSsoSettings(t);
+      this.hideErrors();
     }
 
     for (let key in this) {

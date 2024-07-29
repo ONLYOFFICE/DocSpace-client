@@ -42,7 +42,6 @@ import { DeviceType } from "@docspace/shared/enums";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import LoaderAdditionalResources from "../sub-components/loaderAdditionalResources";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const mobileCSS = css`
   margin-top: 0px;
@@ -278,7 +277,7 @@ const AdditionalResources = (props) => {
         </div>
         <div className="settings_unavailable additional-description">
           {t("Settings:AdditionalResourcesDescription", {
-            productName: PRODUCT_NAME,
+            productName: t("Common:ProductName"),
           })}
         </div>
         <div className="branding-checkbox">

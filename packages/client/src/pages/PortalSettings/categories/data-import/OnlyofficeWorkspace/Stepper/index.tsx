@@ -31,7 +31,6 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 
 import UserSolidIcon from "PUBLIC_DIR/images/catalog.user.solid.react.svg?url";
 import SharedIcon from "PUBLIC_DIR/images/catalog.old.share.react.svg?url";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 import SelectFileStep from "../../components/SelectFileStep";
 import SelectUsersStep from "../../components/SelectUsersStep";
 import SelectUsersTypeStep from "../../components/SelectUsersTypeStep";
@@ -41,17 +40,13 @@ import ImportCompleteStep from "../../components/ImportCompleteStep";
 
 import { TFunciton } from "../../types";
 
-export const getStepsData = (
-  t: TFunciton,
-  isTypeSelectEmpty: boolean,
-  organizationName: string,
-) => {
+export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
   return [
     {
       title: t("Common:SelectFile"),
       description: t("Settings:SelectFileDescriptionWorkspace", {
-        productName: PRODUCT_NAME,
-        organizationName,
+        productName: t("Common:ProductName"),
+        organizationName: t("Common:OrganizationName"),
       }),
       component: (
         <SelectFileStep
@@ -65,8 +60,8 @@ export const getStepsData = (
     {
       title: t("Settings:SelectUsers"),
       description: t("Settings:SelectUsersDescriptionWorkspace", {
-        productName: PRODUCT_NAME,
-        organizationName,
+        productName: t("Common:ProductName"),
+        organizationName: t("Common:OrganizationName"),
       }),
       component: <SelectUsersStep t={t} canDisable shouldSetUsers />,
     },
@@ -84,7 +79,7 @@ export const getStepsData = (
             ns="Settings"
             i18nKey="SelectUserTypesDescription"
             values={{
-              productName: PRODUCT_NAME,
+              productName: t("Common:ProductName"),
             }}
             components={{
               1: <b />,
@@ -99,7 +94,7 @@ export const getStepsData = (
                   i18nKey="TypesAndPrivileges"
                   ns="Settings"
                   t={t}
-                  values={{ productName: PRODUCT_NAME }}
+                  values={{ productName: t("Common:ProductName") }}
                   components={{
                     1: <b />,
                     2: <b />,
@@ -123,13 +118,13 @@ export const getStepsData = (
     {
       title: t("Settings:DataImport"),
       description: t("Settings:ImportSectionDescription", {
-        productName: PRODUCT_NAME,
-        organizationName,
+        productName: t("Common:ProductName"),
+        organizationName: t("Common:OrganizationName"),
       }),
       component: (
         <ImportStep
           t={t}
-          serviceName={`${organizationName} Workspace`}
+          serviceName={`${t("Common:OrganizationName")} Workspace`}
           usersExportDetails={{
             name: t("Common:People"),
             icon: UserSolidIcon,
@@ -159,8 +154,8 @@ export const getStepsData = (
     {
       title: t("Settings:DataImportComplete"),
       description: t("Settings:ImportCompleteDescriptionWorkspace", {
-        productName: PRODUCT_NAME,
-        organizationName,
+        productName: t("Common:ProductName"),
+        organizationName: t("Common:OrganizationName"),
       }),
       component: <ImportCompleteStep t={t} />,
     },

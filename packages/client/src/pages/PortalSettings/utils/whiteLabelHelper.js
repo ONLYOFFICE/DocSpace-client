@@ -34,14 +34,16 @@ export const generateLogo = (
   text,
   fontSize = 18,
   fontColor = "#000",
-  alignCenter,
+  alignCenter = false,
+  isEditor = false,
 ) => {
   const canvas = document.createElement("canvas");
   canvas.width = width;
   canvas.height = height;
 
+  console.log("isEditor", isEditor);
   const ctx = canvas.getContext("2d");
-  const x = alignCenter ? width / 2 : 0;
+  const x = alignCenter ? width / 2 : isEditor ? 10 : 0;
   const y = (height - fontSize) / 2;
   ctx.fillStyle = "transparent";
   ctx.clearRect(0, 0, width, height);
@@ -87,6 +89,8 @@ export const getLogoOptions = (index, text, width, height) => {
         text,
         width,
         height,
+        alignCenter: false,
+        isEditor: true,
       };
     case 4:
       return {
@@ -94,6 +98,8 @@ export const getLogoOptions = (index, text, width, height) => {
         text,
         width,
         height,
+        alignCenter: false,
+        isEditor: true,
       };
     case 5:
       return {

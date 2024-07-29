@@ -87,8 +87,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     version,
     pagesWithoutNavMenu,
     isFrame,
-
-    organizationName,
     setDataFromSocket,
     updateDataFromSocket,
     sessionLogout,
@@ -322,7 +320,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       headerText: t("Attention"),
       text: `${t("BarMaintenanceDescription", {
         targetDate: targetDate,
-        productName: `${organizationName} ${PRODUCT_NAME}`,
+        productName: `${t("Common:OrganizationName")} ${t("Common:ProductName")}`,
       })} ${t("BarMaintenanceDisclaimer")}`,
       isMaintenance: true,
       onAction: () => {
@@ -554,7 +552,6 @@ const ShellWrapper = inject(
       frameConfig,
       isPortalDeactivate,
       isPortalRestoring,
-      organizationName,
     } = settingsStore;
 
     const isBase = settingsStore.theme.isBase;
@@ -617,7 +614,6 @@ const ShellWrapper = inject(
       version,
       pagesWithoutNavMenu,
       isFrame,
-      organizationName,
       setDataFromSocket,
       updateDataFromSocket,
       sessionLogout,

@@ -33,6 +33,30 @@ import {
   StyledMembersLoader,
 } from "../body.styled";
 
+export const MemberLoader = ({ count = 1 }: { count?: number }) => {
+  return (
+    <>
+      {[...Array(count).keys()].map((i) => (
+        <StyledMemberLoader key={i}>
+          <RectangleSkeleton
+            className="avatar"
+            width="32px"
+            height="32px"
+            borderRadius="50%"
+          />
+          <RectangleSkeleton width="212px" height="16px" borderRadius="3px" />
+          <RectangleSkeleton
+            className="role-selector"
+            width="64px"
+            height="20px"
+            borderRadius="3px"
+          />
+        </StyledMemberLoader>
+      ))}
+    </>
+  );
+};
+
 const MembersLoader = () => {
   return (
     <StyledMembersLoader>
@@ -41,46 +65,14 @@ const MembersLoader = () => {
         <RectangleSkeleton width="16px" height="16px" borderRadius="3px" />
       </StyledMemberSubtitleLoader>
 
-      {[...Array(4).keys()].map((i) => (
-        <StyledMemberLoader key={i}>
-          <RectangleSkeleton
-            className="avatar"
-            width="32px"
-            height="32px"
-            borderRadius="50%"
-          />
-          <RectangleSkeleton width="212px" height="16px" borderRadius="3px" />
-          <RectangleSkeleton
-            className="role-selector"
-            width="64px"
-            height="20px"
-            borderRadius="3px"
-          />
-        </StyledMemberLoader>
-      ))}
+      <MemberLoader count={4} />
 
       <StyledMemberSubtitleLoader className="pending_users">
         <RectangleSkeleton width="111px" height="16px" borderRadius="3px" />
         <RectangleSkeleton width="16px" height="16px" borderRadius="3px" />
       </StyledMemberSubtitleLoader>
 
-      {[...Array(4).keys()].map((i) => (
-        <StyledMemberLoader key={i}>
-          <RectangleSkeleton
-            className="avatar"
-            width="32px"
-            height="32px"
-            borderRadius="50%"
-          />
-          <RectangleSkeleton width="212px" height="16px" borderRadius="3px" />
-          <RectangleSkeleton
-            className="role-selector"
-            width="64px"
-            height="20px"
-            borderRadius="3px"
-          />
-        </StyledMemberLoader>
-      ))}
+      <MemberLoader count={4} />
     </StyledMembersLoader>
   );
 };

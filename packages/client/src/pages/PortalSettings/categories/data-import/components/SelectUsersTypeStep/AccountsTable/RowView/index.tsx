@@ -99,7 +99,7 @@ const StyledRowContainer = styled(RowContainer)`
   }
 
   .clear-icon {
-    margin-right: 8px;
+    margin-inline-end: 8px;
   }
 
   .ec-desc {

@@ -2114,6 +2114,7 @@ export const getBaseTheme = () => {
         folderLabelColor: "#A3A9AE",
         renamedItemColor: "#A3A9AE",
         oldRoleColor: "#657077",
+        messageColor: "#333333",
       },
 
       details: {
@@ -2720,6 +2721,7 @@ export const getBaseTheme = () => {
       upload: {
         color: gray,
         tooltipColor: lightCumulus,
+        iconColor: lightErrorStatus,
 
         shareButton: {
           color: gray,
@@ -3382,7 +3384,13 @@ export const getBaseTheme = () => {
 
     completedForm: {
       linkColor: "#4781D1",
-      descriptionColor: gray,
+      descriptionColor: grayMain,
+
+      labelColor: globalColors.grayMain,
+
+      box: {
+        background: globalColors.grayLight,
+      },
     },
   };
 };

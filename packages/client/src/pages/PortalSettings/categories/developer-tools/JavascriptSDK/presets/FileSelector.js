@@ -78,10 +78,10 @@ import {
   FilesSelectorInputWrapper,
 } from "./StyledPresets";
 import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const FileSelector = (props) => {
-  const { t, setDocumentTitle, fetchExternalLinks, theme, organizationName } =
-    props;
+  const { t, fetchExternalLinks, theme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -89,7 +89,9 @@ const FileSelector = (props) => {
     { value: FilesSelectorFilterTypes.ALL, label: t("AllTypes") },
     {
       value: "EditorSupportedTypes",
-      label: t("AllTypesSupportedByEditor", { organizationName }),
+      label: t("AllTypesSupportedByEditor", {
+        organizationName: t("Common:OrganizationName"),
+      }),
     },
     { value: "SelectorTypes", label: t("SelectTypes") },
   ];
@@ -154,7 +156,7 @@ const FileSelector = (props) => {
     buttonWithLogo: true,
     events: {
       onSelectCallback: (items) => {
-        toastr.success(items[0].label);
+        //toastr.success(items[0].label);
       },
       onCloseCallback: null,
       onAppReady: null,
@@ -436,16 +438,13 @@ const FileSelector = (props) => {
   );
 };
 
-export default inject(({ authStore, settingsStore, publicRoomStore }) => {
-  const { setDocumentTitle } = authStore;
-  const { theme, organizationName } = settingsStore;
+export default inject(({ settingsStore, publicRoomStore }) => {
+  const { theme } = settingsStore;
   const { fetchExternalLinks } = publicRoomStore;
 
   return {
     theme,
-    setDocumentTitle,
     fetchExternalLinks,
-    organizationName,
   };
 })(
   withTranslation([

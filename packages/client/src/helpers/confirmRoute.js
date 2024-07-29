@@ -91,7 +91,7 @@ const ConfirmRoute = ({
       if (doAuthenticated == AuthenticatedAction.Redirect)
         return window.location.replace(defaultPage);
 
-      if (doAuthenticated == AuthenticatedAction.Logout) logout();
+      if (doAuthenticated == AuthenticatedAction.Logout) logout(false);
     }
 
     const { search } = location;

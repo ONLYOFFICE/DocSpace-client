@@ -30,7 +30,11 @@ import { useTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { toastr } from "@docspace/shared/components/toast";
-import { Events, FilesSelectorFilterTypes } from "@docspace/shared/enums";
+import {
+  Events,
+  FilesSelectorFilterTypes,
+  FilterType,
+} from "@docspace/shared/enums";
 
 import {
   UploadPanel,
@@ -78,6 +82,8 @@ import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
 import { PDFFormEditingDialog } from "../dialogs/PDFFormEditingDialog";
 import { SharePDFFormDialog } from "../dialogs/SharePDFFormDialog";
 import { SessionsPanel } from "../panels/UserSessionsPanel";
+import { FillPDFDialog } from "../dialogs/FillPDFDialog";
+import { ShareCollectSelector } from "../ShareCollectSelector";
 
 const Panels = (props) => {
   const {
@@ -133,11 +139,14 @@ const Panels = (props) => {
     userSessionsPanelVisible,
     pdfFormEditVisible,
     selectFileFormRoomOpenRoot,
+    fillPDFDialogData,
+    shareCollectSelector,
   } = props;
 
   const [createPDFFormFile, setCreatePDFFormFile] = useState({
     visible: false,
-    data: null,
+    file: null,
+    localKey: "",
     onClose: null,
   });
 
@@ -162,6 +171,7 @@ const Panels = (props) => {
       [FilesSelectorFilterTypes.DOCX]: t("Common:SelectDOCXFormat"),
       // [FilesSelectorFilterTypes.DOCXF]: t("Common:SelectDOCXFFormat"),
       [FilesSelectorFilterTypes.PDF]: t("Common:SelectPDFFormat"),
+      [FilterType.PDFForm]: t("Common:SelectPDFFormat"),
     };
 
     return text[selectFileFormRoomFilterParam];
@@ -172,9 +182,9 @@ const Panels = (props) => {
      * @param {CustomEvent} event
      */
     (event) => {
-      const { file, isFill, isFirst } = event.detail;
+      const { file, show, localKey } = event.detail;
 
-      if (!isFirst) {
+      if (!show) {
         return toastr.success(
           <Trans
             ns="PDFFormDialog"
@@ -187,12 +197,15 @@ const Panels = (props) => {
 
       setCreatePDFFormFile({
         visible: true,
-        data: {
-          file,
-          isFill,
-        },
+        file,
+        localKey,
         onClose: () => {
-          setCreatePDFFormFile({ visible: false, onClose: null, data: null });
+          setCreatePDFFormFile({
+            visible: false,
+            onClose: null,
+            file: null,
+            localKey: "",
+          });
         },
       });
     },
@@ -358,6 +371,15 @@ const Panels = (props) => {
     ),
 
     userSessionsPanelVisible && <SessionsPanel key="user-sessions-panel" />,
+    fillPDFDialogData.visible && (
+      <FillPDFDialog key="fill-pdf-form-dialog" {...fillPDFDialogData} />
+    ),
+    shareCollectSelector.visible && (
+      <ShareCollectSelector
+        key="share-collect-dialog"
+        {...shareCollectSelector}
+      />
+    ),
   ];
 };
 
@@ -419,6 +441,8 @@ export default inject(
       userSessionsPanelVisible,
       pdfFormEditVisible,
       selectFileFormRoomOpenRoot,
+      fillPDFDialogData,
+      shareCollectSelector,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -488,6 +512,8 @@ export default inject(
       userSessionsPanelVisible,
       pdfFormEditVisible,
       selectFileFormRoomOpenRoot,
+      fillPDFDialogData,
+      shareCollectSelector,
     };
   },
 )(observer(Panels));

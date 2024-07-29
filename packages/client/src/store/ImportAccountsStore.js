@@ -26,6 +26,7 @@
 
 import axios from "axios";
 import { uploadFile } from "@docspace/shared/api/files";
+import { toastr } from "@docspace/shared/components/toast";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { makeAutoObservable, runInAction } from "mobx";
 import {
@@ -248,98 +249,104 @@ class ImportAccountsStore {
   //   return this.checkedAccounts.length;
   // }
 
-  multipleFileUploading = async (files, setProgress, isAbort, res) => {
+  initializeMigration = async () => {
+    const location = combineUrl(
+      window.location.origin,
+      "migrationFileUpload.ashx",
+    );
+
     try {
-      const location = combineUrl(
-        window.location.origin,
-        "migrationFileUpload.ashx",
-      );
+      const res = await axios.post(`${location}?Init=true`);
+      return { res, location };
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  };
 
-      if (res.data.Success) {
-        const requestsDataArray = [];
+  multipleFileUploading = async (files, setProgress, isAbort) => {
+    try {
+      const { res, location } = await this.initializeMigration();
+      if (!res.data.Success) {
+        toastr.error(res.data.Message);
+        return;
+      }
 
-        const chunkUploadSize = res.data.ChunkSize;
+      const requestsDataArray = [];
 
-        if (isAbort.current) return;
+      const chunkUploadSize = res.data.ChunkSize;
 
-        const chunksNumber = files
-          .map((file) =>
-            Math.ceil(file.size / chunkUploadSize, chunkUploadSize),
-          )
-          .reduce((curr, next) => curr + next, 0);
+      if (isAbort.current) return;
 
-        files.forEach((file) => {
-          const chunks = Math.ceil(
-            file.size / chunkUploadSize,
-            chunkUploadSize,
-          );
-          let chunkCounter = 0;
+      const chunksNumber = files
+        .map((file) => Math.ceil(file.size / chunkUploadSize, chunkUploadSize))
+        .reduce((curr, next) => curr + next, 0);
 
-          while (chunkCounter < chunks) {
-            const offset = chunkCounter * chunkUploadSize;
-            const formData = new FormData();
-            formData.append(
-              "file",
-              file.slice(offset, offset + chunkUploadSize),
-            );
-            requestsDataArray.push({ formData, fileName: file.name });
-            chunkCounter++;
-          }
-        });
+      files.forEach((file) => {
+        const chunks = Math.ceil(file.size / chunkUploadSize, chunkUploadSize);
+        let chunkCounter = 0;
 
-        let chunk = 0;
-
-        while (chunk < chunksNumber && this.isFileLoading) {
-          if (isAbort.current) return;
-          await uploadFile(
-            location + `?Name=${requestsDataArray[chunk].fileName}`,
-            requestsDataArray[chunk].formData,
-          );
-          const progress = (chunk / chunksNumber) * 100;
-          setProgress(Math.ceil(progress));
-          chunk++;
+        while (chunkCounter < chunks) {
+          const offset = chunkCounter * chunkUploadSize;
+          const formData = new FormData();
+          formData.append("file", file.slice(offset, offset + chunkUploadSize));
+          requestsDataArray.push({ formData, fileName: file.name });
+          chunkCounter++;
         }
+      });
+
+      let chunk = 0;
+
+      while (chunk < chunksNumber && this.isFileLoading) {
+        if (isAbort.current) return;
+        await uploadFile(
+          location + `?Name=${requestsDataArray[chunk].fileName}`,
+          requestsDataArray[chunk].formData,
+        );
+        const progress = (chunk / chunksNumber) * 100;
+        setProgress(Math.ceil(progress));
+        chunk++;
       }
     } catch (e) {
       console.error(e);
     }
   };
 
-  singleFileUploading = async (file, setProgress, isAbort, res) => {
+  singleFileUploading = async (file, setProgress, isAbort) => {
     try {
-      const location = combineUrl(
-        window.location.origin,
-        "migrationFileUpload.ashx",
-      );
+      const { res, location } = await this.initializeMigration();
 
-      if (res.data.Success) {
-        let chunk = 0;
-        const requestsDataArray = [];
+      if (!res.data.Success) {
+        toastr.error(res.data.Message);
+        return;
+      }
 
-        const chunkUploadSize = res.data.ChunkSize;
-        const chunks = Math.ceil(file.size / chunkUploadSize, chunkUploadSize);
+      let chunk = 0;
+      const requestsDataArray = [];
 
+      const chunkUploadSize = res.data.ChunkSize;
+      const chunks = Math.ceil(file.size / chunkUploadSize, chunkUploadSize);
+
+      if (isAbort.current) return;
+
+      while (chunk < chunks) {
+        const offset = chunk * chunkUploadSize;
+        const formData = new FormData();
+        formData.append("file", file.slice(offset, offset + chunkUploadSize));
+        requestsDataArray.push(formData);
+        chunk++;
+      }
+
+      chunk = 0;
+      while (chunk < chunks && this.isFileLoading) {
         if (isAbort.current) return;
-
-        while (chunk < chunks) {
-          const offset = chunk * chunkUploadSize;
-          const formData = new FormData();
-          formData.append("file", file.slice(offset, offset + chunkUploadSize));
-          requestsDataArray.push(formData);
-          chunk++;
-        }
-
-        chunk = 0;
-        while (chunk < chunks && this.isFileLoading) {
-          if (isAbort.current) return;
-          await uploadFile(
-            location + `?Name=${file.name}`,
-            requestsDataArray[chunk],
-          );
-          const progress = (chunk / chunks) * 100;
-          setProgress(Math.ceil(progress));
-          chunk++;
-        }
+        await uploadFile(
+          location + `?Name=${file.name}`,
+          requestsDataArray[chunk],
+        );
+        const progress = (chunk / chunks) * 100;
+        setProgress(Math.ceil(progress));
+        chunk++;
       }
     } catch (e) {
       console.error(e);

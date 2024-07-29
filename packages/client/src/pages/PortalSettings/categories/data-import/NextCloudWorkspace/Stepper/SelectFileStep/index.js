@@ -29,9 +29,7 @@ import { inject, observer } from "mobx-react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import { isTablet } from "@docspace/shared/utils/device";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import styled from "styled-components";
-import axios from "axios";
 
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
@@ -119,7 +117,8 @@ const SelectFileStep = ({
 }) => {
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
   const [progress, setProgress] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
+  const [showInfiniteLoader, setShowInfiniteLoader] = useState(false);
+  const [showErrorText, setShowErrorText] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isFileError, setIsFileError] = useState(false);
   const [fileName, setFileName] = useState(null);
@@ -130,9 +129,7 @@ const SelectFileStep = ({
 
   const [failTries, setFailsTries] = useState(FAILS_TRIES);
 
-  const goBack = () => {
-    navigate("/portal-settings/data-import/migration");
-  };
+  const goBack = () => navigate("/portal-settings/data-import/migration");
 
   const checkMigrationStatusAndUpdate = async () => {
     try {
@@ -158,9 +155,9 @@ const SelectFileStep = ({
       }
 
       if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
-        toastr.error(res.error);
-        setIsFileError(true);
+        setIsFileError(false);
         setIsSaveDisabled(false);
+        setFileName(null);
         clearInterval(uploadInterval.current);
       } else if (res.isCompleted || res.progress === 100) {
         setUsers(res.parseResult);
@@ -169,7 +166,7 @@ const SelectFileStep = ({
         clearInterval(uploadInterval.current);
       }
     } catch (error) {
-      toastr.error(error.message);
+      toastr.error(error.message || t("Common:SomethingWentWrong"));
       setIsFileError(true);
       clearInterval(uploadInterval.current);
     }
@@ -192,76 +189,54 @@ const SelectFileStep = ({
   };
 
   const onUploadFile = async (file) => {
-    setIsVisible(true);
+    setShowInfiniteLoader(true);
+
     try {
       if (Array.isArray(file)) throw new Error(t("Common:SomethingWentWrong"));
 
-      const location = combineUrl(
-        window.location.origin,
-        "migrationFileUpload.ashx",
-      );
-
-      const res = await axios.post(location + "?Init=true");
-
-      if (!res.data.Success) {
-        toastr.error(res.data.Message);
-        setIsFileError(true);
-        setIsFileLoading(false);
-        return;
-      }
-
-      await singleFileUploading(file, setProgress, isAbort, res);
+      await singleFileUploading(file, setProgress, isAbort);
 
       if (isAbort.current) return;
 
       await initMigrationName(searchParams.get("service"));
 
       uploadInterval.current = setInterval(async () => {
-        try {
-          const res = await getMigrationStatus();
+        const res = await getMigrationStatus();
 
-          if (!res && failTries) {
-            setFailsTries((tries) => tries - 1);
-            return;
-          }
+        if (!res && failTries) {
+          setFailsTries((tries) => tries - 1);
+          return;
+        }
 
-          if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
-            clearInterval(uploadInterval.current);
-            setIsFileError(true);
-            setIsFileLoading(false);
-            toastr.error(res.error);
-            return;
-          }
-
-          if (res.isCompleted || res.parseResult.progress === 100) {
-            clearInterval(uploadInterval.current);
-            setIsFileLoading(false);
-            setIsVisible(false);
-            setUsers(res.parseResult);
-            setIsSaveDisabled(true);
-          }
-
-          setProgress(res.progress);
-
-          if (res.progress > 10) {
-            setIsVisible(false);
-          } else {
-            setIsVisible(true);
-          }
-        } catch (error) {
-          toastr.error(error || error.message);
+        if (!res || res.parseResult.failedArchives.length > 0 || res.error) {
+          toastr.error(res.error || t("Common:SomethingWentWrong"));
           setIsFileError(true);
           setIsFileLoading(false);
-          setIsError(true);
           clearInterval(uploadInterval.current);
-        } finally {
-          isAbort.current = false;
+          setShowErrorText(true);
+          return;
         }
+
+        if (res.isCompleted || res.parseResult.progress === 100) {
+          clearInterval(uploadInterval.current);
+          setIsFileLoading(false);
+          setShowInfiniteLoader(false);
+          setUsers(res.parseResult);
+          setIsSaveDisabled(true);
+        }
+
+        setProgress(res.progress);
+        setShowInfiniteLoader(res.progress <= 10);
+        setShowErrorText(!!res.error);
+
+        isAbort.current = false;
       }, 1000);
     } catch (error) {
       toastr.error(error || error.message);
+      setIsError(true);
       setIsFileError(true);
       setIsFileLoading(false);
+      clearInterval(uploadInterval.current);
     }
   };
 
@@ -335,7 +310,7 @@ const SelectFileStep = ({
         <FileUploadContainer>
           <ProgressBar
             percent={progress}
-            isInfiniteProgress={isVisible}
+            isInfiniteProgress={showInfiniteLoader}
             className="select-file-progress-bar"
             label={t("Settings:BackupFileUploading")}
           />
@@ -355,7 +330,9 @@ const SelectFileStep = ({
                 label={t("Common:LoadingIsComplete")}
               />
               <Text className="error-text">
-                {t("Settings:UnsupportedFilesDescription")}
+                {showErrorText
+                  ? t("Settings:UnsupportedFilesDescription")
+                  : t("Settings:UnsupportedFilesWithUploadDesc")}
               </Text>
               <Link
                 type="action"

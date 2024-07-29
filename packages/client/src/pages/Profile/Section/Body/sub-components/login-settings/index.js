@@ -57,8 +57,9 @@ const LoginSettings = (props) => {
     useState(false);
 
   useEffect(() => {
-    if (location?.state?.openBackupCodesDialog) {
+    if (sessionStorage.getItem("openBackupCodesDialog")) {
       setBackupCodesDialogVisible(true);
+      sessionStorage.removeItem("openBackupCodesDialog");
     }
   }, []);
 

@@ -974,7 +974,7 @@ class ContextOptionsStore {
     const filterUrlParams = filesFilter.toUrlParams();
     const url = getCategoryUrl(
       this.filesStore.categoryType,
-      filterUrlParams.folder,
+      filesFilter.folder,
     );
 
     navigate(

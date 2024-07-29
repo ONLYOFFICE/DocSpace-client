@@ -112,11 +112,11 @@ const StyledBody = styled.div<{
   height: ${(props) =>
     props.footerVisible
       ? props.withHeader
-        ? `calc(100% - 16px - ${props.footerHeight}px - ${props.headerHeight}px)`
-        : `calc(100% - 16px - ${props.footerHeight}px)`
+        ? `calc(100% - ${props.footerHeight}px - ${props.headerHeight}px)`
+        : `calc(100% - ${props.footerHeight}px)`
       : props.withHeader
-        ? `calc(100% - 16px - ${props.headerHeight}px)`
-        : `calc(100% - 16px)`};
+        ? `calc(100% - ${props.headerHeight}px)`
+        : "100%"};
 
   padding: ${({ withTabs }) => (withTabs ? "0" : "16px 0 0 0")};
 

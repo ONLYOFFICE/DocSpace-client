@@ -33,7 +33,7 @@ const StyledModalDialog = styled(ModalDialog)`
   }
 
   .modal-body {
-    padding: 0 0 8px;
+    padding: 0;
   }
 `;
 
@@ -57,7 +57,7 @@ const StyledBody = styled.div`
     .embedding-panel_banner-close-icon {
       min-width: 12px;
       min-height: 12px;
-      margin-left: auto;
+      margin-inline-start: auto;
     }
   }
 

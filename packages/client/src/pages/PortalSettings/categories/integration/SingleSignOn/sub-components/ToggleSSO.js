@@ -25,13 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled, { css } from "styled-components";
+import styled, { css, useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Badge } from "@docspace/shared/components/badge";
 import { mobile } from "@docspace/shared/utils";
+import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -69,12 +70,16 @@ const StyledWrapper = styled.div`
       }
     }
   }
+
+  ${(props) => !props.isSSOAvailable && UnavailableStyles}
 `;
 
 const ToggleSSO = ({ enableSso, ssoToggle, isSSOAvailable }) => {
   const { t } = useTranslation("SingleSignOn");
+
+  const theme = useTheme();
   return (
-    <StyledWrapper>
+    <StyledWrapper isSSOAvailable={isSSOAvailable}>
       <ToggleButton
         className="enable-sso toggle"
         isChecked={enableSso}
@@ -94,7 +99,7 @@ const ToggleSSO = ({ enableSso, ssoToggle, isSSOAvailable }) => {
           </Text>
           {!isSSOAvailable && (
             <Badge
-              backgroundColor="#EDC409"
+              backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
               label={t("Common:Paid")}
               fontWeight="700"
               className="toggle-caption_title_badge"

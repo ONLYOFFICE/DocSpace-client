@@ -34,10 +34,7 @@ import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject, observer } from "mobx-react";
 import { DeviceType } from "@docspace/shared/enums";
-import {
-  COOKIE_EXPIRATION_YEAR,
-  PRODUCT_NAME,
-} from "@docspace/shared/constants";
+import { COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { setCookie } from "@docspace/shared/utils/cookie";
 import { useNavigate } from "react-router-dom";
@@ -524,7 +521,9 @@ const LanguageAndTimeZone = (props) => {
       )}
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight={400}>
-          {t("TimeLanguageSettingsDescription", { productName: PRODUCT_NAME })}
+          {t("TimeLanguageSettingsDescription", {
+            productName: t("Common:ProductName"),
+          })}
         </Text>
         <Text>
           <Trans t={t} i18nKey="TimeLanguageSettingsSave" />

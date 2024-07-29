@@ -270,6 +270,7 @@ const LoginContainer = styled.div<{
     align-items: center;
     justify-content: center;
     width: 100%;
+    max-width: 386px;
     height: ${(props) => (props.type === "invitation" ? "26.56px" : "44px")};
     padding-bottom: ${(props) =>
       props.type === "invitation" ? "16px" : "40px"};

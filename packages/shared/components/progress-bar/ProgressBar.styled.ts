@@ -46,15 +46,21 @@ const StyledProgressBarContainer = styled.div`
 
 StyledProgressBarContainer.defaultProps = { theme: Base };
 
-const loadingAnimation = keyframes`
+const getLoadingAnimation = (dir: "ltr" | "rtl") => {
+  const isRtl = dir === "rtl";
+  const startValue = isRtl ? "50%" : "-50%";
+  const endValue = isRtl ? "-400%" : "400%";
+
+  return keyframes`
  0% {
-    transform: translateX(-50%);
+    transform: translateX(${startValue});
   }
 
   100% {
-    transform: translateX(400%);
+    transform: translateX(${endValue});
   }
 `;
+};
 
 const StyledProgressBar = styled.div<{ percent: number }>`
   width: 100%;
@@ -65,7 +71,7 @@ const StyledProgressBar = styled.div<{ percent: number }>`
   background-color: ${(props) => props.theme.progressBar.backgroundColor};
 
   .progress-bar_percent {
-    float: left;
+    float: inline-start;
     overflow: hidden;
     max-height: 4px;
     min-height: 4px;
@@ -80,7 +86,8 @@ const StyledProgressBar = styled.div<{ percent: number }>`
     width: 25%;
     border-radius: 3px;
     background: ${(props) => props.theme.progressBar.percent.background};
-    animation: ${loadingAnimation} 2s linear infinite;
+    animation: ${({ theme }) => getLoadingAnimation(theme.interfaceDirection)}
+      2s linear infinite;
   }
 `;
 

@@ -96,14 +96,8 @@ const StyledFileRow = styled(Row)`
   .password-input {
     position: absolute;
     top: 48px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            right: 16px;
-          `
-        : css`
-            left: 16px;
-          `}
+    left: 0px;
+    right: 0px;
     max-width: 470px;
     width: calc(100% - 16px);
     display: flex;
@@ -323,6 +317,11 @@ class FileRow extends Component {
 
     const onMediaClick = () => this.onMediaClick(item.fileId);
 
+    const onFileClick = (url) => {
+      if (!url) return;
+      window.open(url, downloadInCurrentTab ? "_self" : "_blank");
+    };
+
     return (
       <>
         <StyledFileRow
@@ -352,11 +351,14 @@ class FileRow extends Component {
               ) : (
                 <div className="upload-panel_file-name">
                   <Link
+                    onClick={() =>
+                      onFileClick(item.fileInfo ? item.fileInfo.webUrl : "")
+                    }
                     fontWeight="600"
                     color={item.error && "#A3A9AE"}
                     truncate
-                    href={item.fileInfo ? item.fileInfo.webUrl : ""}
-                    target={downloadInCurrentTab ? "_self" : "_blank"}
+                    // href={item.fileInfo ? item.fileInfo.webUrl : ""}
+                    // target={downloadInCurrentTab ? "_self" : "_blank"}
                   >
                     {name}
                     {fileExtension}

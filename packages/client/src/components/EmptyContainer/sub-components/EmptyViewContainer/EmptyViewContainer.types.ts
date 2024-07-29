@@ -2,6 +2,7 @@ import type { TFolderSecurity } from "@docspace/shared/api/files/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type {
   FilesSelectorFilterTypes,
+  FilterType,
   FolderType,
   RoomsType,
   ShareAccessRights,
@@ -41,7 +42,7 @@ export type OptionActions = {
   inviteUser: VoidFunction;
   onCreate: (extension: ExtensiontionType, withoutDialog?: boolean) => void;
   uploadFromDocspace: (
-    filterParam: FilesSelectorFilterTypes,
+    filterParam: FilesSelectorFilterTypes | FilterType,
     openRoot?: boolean,
   ) => void;
   onUploadAction: (type: UploadType) => void;

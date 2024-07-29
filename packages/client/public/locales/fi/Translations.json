@@ -21,7 +21,6 @@
   "FolderTitleWebDav": "WebDAV-hakemisto",
   "FolderTitleYandex": "Yandex-hakemisto",
   "FormTemplates": "Lomakepohjat",
-  "LinkCopySuccess": "Linkki on kopioitu leikepöydälle",
   "LinkHasExpiredAndHasBeenDisabled": "Linkki on vanhentunut ja se on poistettu käytöstä",
   "LinkValidTime": "Linkki on voimassa vain {{days_count}} päivää.",
   "NewForm": "PDF-lomake",

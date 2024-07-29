@@ -69,7 +69,8 @@ class FilesSettingsStore {
   openEditorInSameTab = null;
   thumbnails1280x720 = window.ClientConfig?.thumbnails1280x720 || false;
   chunkUploadSize = 1024 * 1023; // 1024 * 1023; //~0.999mb
-  chunkUploadCount = 5;
+  maxUploadThreadCount = 15;
+  maxUploadFilesCount = 5;
 
   settingsIsLoaded = false;
 
@@ -121,6 +122,10 @@ class FilesSettingsStore {
   setIsLoaded = (isLoaded) => {
     this.settingsIsLoaded = isLoaded;
   };
+
+  get uploadThreadCount() {
+    return this.maxUploadThreadCount / this.maxUploadFilesCount;
+  }
 
   get isLoadedSettingsTree() {
     return (

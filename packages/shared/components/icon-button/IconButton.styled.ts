@@ -49,7 +49,7 @@ const StyledOuter = styled.div<IconButtonProps>`
         }
       }
 
-      @media (hover: hover) {
+      @media (hover: hover) and (pointer: fine) {
         &:hover {
           svg {
             path {
@@ -76,7 +76,7 @@ const StyledOuter = styled.div<IconButtonProps>`
         }
       }
 
-      @media (hover: hover) {
+      @media (hover: hover) and (pointer: fine) {
         &:hover {
           svg {
             path {

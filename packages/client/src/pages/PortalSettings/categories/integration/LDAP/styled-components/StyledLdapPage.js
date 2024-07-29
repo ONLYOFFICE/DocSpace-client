@@ -27,7 +27,6 @@
 import styled, { css } from "styled-components";
 import { Box } from "@docspace/shared/components/box";
 import { mobile } from "@docspace/shared/utils";
-import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 
 const StyledLdapPage = styled(Box)`
   max-width: ${(props) => (props.isSmallWindow ? "100%" : "700px")};
@@ -91,18 +90,19 @@ const StyledLdapPage = styled(Box)`
   .ldap_attribute-mapping {
     margin-top: 16px;
     margin-bottom: 12px;
-    input {
-      margin-bottom: 16px;
-    }
     display: grid;
     grid-gap: 12px;
   }
 
   .access-selector-wrapper {
-    width: 356px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 12px;
 
     @media ${mobile} {
       width: 100%;
+      grid-template-columns: 1fr 0;
+      grid-gap: 0;
     }
 
     .access-selector {
@@ -137,7 +137,7 @@ const StyledLdapPage = styled(Box)`
     ${(props) =>
       !props.isMobileView &&
       css`
-        grid-template-columns: minmax(100px, 340px) 1fr;
+        grid-template-columns: 1fr 1fr;
       `}
   }
 
@@ -221,8 +221,6 @@ const StyledLdapPage = styled(Box)`
       margin-top: 24px;
     }
   }
-
-  ${(props) => !props.isSettingPaid && UnavailableStyles}
 `;
 
 export default StyledLdapPage;

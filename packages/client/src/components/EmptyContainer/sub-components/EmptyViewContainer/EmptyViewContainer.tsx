@@ -3,7 +3,11 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import React, { useMemo, useCallback } from "react";
 
-import { Events, FilesSelectorFilterTypes } from "@docspace/shared/enums";
+import {
+  Events,
+  FilesSelectorFilterTypes,
+  FilterType,
+} from "@docspace/shared/enums";
 import { EmptyView } from "@docspace/shared/components/empty-view";
 
 import {
@@ -60,7 +64,10 @@ const EmptyViewContainer = observer(
     }, [onClickInviteUsers, folderId, type]);
 
     const uploadFromDocspace = useCallback(
-      (filterParam: FilesSelectorFilterTypes, openRoot: boolean = true) => {
+      (
+        filterParam: FilesSelectorFilterTypes | FilterType,
+        openRoot: boolean = true,
+      ) => {
         setSelectFileFormRoomDialogVisible?.(true, filterParam, openRoot);
       },
       [setSelectFileFormRoomDialogVisible],

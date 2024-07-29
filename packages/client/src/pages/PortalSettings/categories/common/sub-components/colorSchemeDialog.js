@@ -49,6 +49,10 @@ const StyledComponent = styled(ModalDialog)`
     box-shadow: 0px 12px 40px rgba(4, 15, 27, 0.12);
   }
 
+  .new-colors-container {
+    margin-top: 20px;
+  }
+
   .flex {
     display: flex;
     justify-content: space-between;
@@ -166,7 +170,7 @@ const ColorSchemeDialog = (props) => {
     >
       <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>
-        <div>
+        <div className="new-colors-container">
           <div className="flex relative">
             <div className="name-color">{t("Settings:AccentColor")}</div>
             <div

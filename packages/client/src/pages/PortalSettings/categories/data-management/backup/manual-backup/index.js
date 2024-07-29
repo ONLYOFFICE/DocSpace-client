@@ -70,7 +70,9 @@ class ManualBackup extends React.Component {
 
     this.timerId = null;
 
-    setDocumentTitle(props.t("DataBackup"));
+    const { t } = props;
+
+    setDocumentTitle(t("DataBackup"));
 
     this.state = {
       selectedFolder: "",

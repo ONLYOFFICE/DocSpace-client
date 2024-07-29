@@ -28,7 +28,6 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { Consumer } from "@docspace/shared/utils/context";
 
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 import TableView from "./TableView";
 import RowView from "./RowView";
 import {
@@ -66,7 +65,7 @@ const AccountsTable = (props: AccountsTableProps) => {
     {
       key: UserTypes.PortalAdmin,
       label: t(`Common:PortalAdmin`, {
-        productName: PRODUCT_NAME,
+        productName: t("Common:ProductName"),
       }),
       onClick: setTypePortalAdmin,
     },

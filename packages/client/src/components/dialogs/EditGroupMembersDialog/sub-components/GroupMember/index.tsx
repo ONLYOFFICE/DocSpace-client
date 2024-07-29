@@ -24,39 +24,47 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useState } from "react";
 import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
+import { isMobile, isMobileOnly } from "react-device-detect";
+
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
-// import { StyledUser } from "../../styles/members";
 import { Avatar } from "@docspace/shared/components/avatar";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import DefaultUserPhotoUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
-import { isMobileOnly, isMobile } from "react-device-detect";
 import { decode } from "he";
 import { filterUserRoleOptions } from "SRC_DIR/helpers";
 import { Text } from "@docspace/shared/components/text";
-import * as Styled from "./index.styled";
 import { getUserRoleOptionsByUserAccess } from "@docspace/shared/utils/room-members/getUserRoleOptionsByUserAccess";
 import { getUserRoleOptionsByRoomType } from "@docspace/shared/utils/room-members/getUserRoleOptionsByRoomType";
 import { updateRoomMemberRole } from "@docspace/shared/api/rooms";
 import { toastr } from "@docspace/shared/components/toast";
-import { useState } from "react";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { getUserRoleOptions } from "@docspace/shared/utils/room-members/getUserRoleOptions";
 import { ShareAccessRights } from "@docspace/shared/enums";
-import { getUserRole, getUserTypeLabel } from "@docspace/shared/utils/common";
+import { getUserRole } from "@docspace/shared/utils/common";
+import { TGroupMemberInvitedInRoom } from "@docspace/shared/api/groups/types";
+
+import * as Styled from "./index.styled";
 
 interface GroupMemberProps {
-  t: any;
-  user: any;
+  member: TGroupMemberInvitedInRoom;
   infoPanelSelection: any;
 }
 
-const GroupMember = ({ t, user, infoPanelSelection }: GroupMemberProps) => {
+const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
+  const { user } = member;
+
   const [isLoading, setIsLoading] = useState(false);
+  const { t } = useTranslation("Common");
 
   const userRole = user.isOwner
     ? getUserRoleOptions(t).portalAdmin
-    : getUserRoleOptionsByUserAccess(t, user.userAccess || user.groupAccess);
+    : getUserRoleOptionsByUserAccess(
+        t,
+        member.userAccess || member.groupAccess,
+      );
 
   const fullRoomRoleOptions = getUserRoleOptionsByRoomType(
     t,
@@ -86,7 +94,7 @@ const GroupMember = ({ t, user, infoPanelSelection }: GroupMemberProps) => {
   else
     selectedUserRoleCBOption = getUserRoleOptionsByUserAccess(
       t,
-      user.userAccess || user.groupAccess,
+      member.userAccess || member.groupAccess,
     );
 
   const availableUserRoleCBOptions = filterUserRoleOptions(
@@ -101,7 +109,7 @@ const GroupMember = ({ t, user, infoPanelSelection }: GroupMemberProps) => {
       notify: false,
       sharingMessage: "",
     })
-      .then(() => (user.userAccess = userRoleOption.access))
+      .then(() => (member.userAccess = userRoleOption.access))
       .catch((err) => toastr.error(err))
       .finally(() => setIsLoading(false));
   };
@@ -134,8 +142,8 @@ const GroupMember = ({ t, user, infoPanelSelection }: GroupMemberProps) => {
       </div>
 
       <div className="individual-rights-tooltip">
-        {user.userAccess &&
-          user.userAccess !== user.groupAccess &&
+        {member.userAccess &&
+          member.userAccess !== member.groupAccess &&
           !user.isOwner && (
             <HelpButton
               place="left"
@@ -152,7 +160,7 @@ const GroupMember = ({ t, user, infoPanelSelection }: GroupMemberProps) => {
 
       {userRole && userRoleOptions && (
         <div className="role-wrapper">
-          {user.canEditAccess && !user.isOwner ? (
+          {member.canEditAccess && !user.isOwner ? (
             <ComboBox
               className="role-combobox"
               selectedOption={userRole}
@@ -180,6 +188,6 @@ const GroupMember = ({ t, user, infoPanelSelection }: GroupMemberProps) => {
   );
 };
 
-export default inject(({ infoPanelStore }) => ({
+export default inject(({ infoPanelStore }: any) => ({
   infoPanelSelection: infoPanelStore.infoPanelSelection,
 }))(observer(GroupMember));

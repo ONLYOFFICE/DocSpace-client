@@ -43,6 +43,10 @@ const StyledSimpleNav = styled.div`
   justify-content: center;
   background-color: ${(props) => props.theme?.login?.navBackground};
 
+  .logo {
+    height: 24px;
+  }
+
   @media ${mobile} {
     display: flex;
 
@@ -67,7 +71,7 @@ const SimpleNav = ({ systemTheme }: SimpleNavProps) => {
 
   return (
     <StyledSimpleNav id="login-header">
-      <img src={logoUrl} alt="logo-url" />
+      <img className="logo" src={logoUrl} alt="logo-url" />
       <LanguageComboboxWrapper />
     </StyledSimpleNav>
   );

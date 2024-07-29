@@ -27,8 +27,12 @@
 import Filter from "./filter";
 
 import { request } from "../client";
-import { checkFilterInstance } from "../../utils/common";
-import { TGroup } from "./types";
+import { checkFilterInstance, toUrlParams } from "../../utils/common";
+import {
+  TGetGroupMembersInRoom,
+  TGetGroupMembersInRoomFilter,
+  TGroup,
+} from "./types";
 
 // * Create
 
@@ -104,11 +108,14 @@ export const getGroupsByUserId = (userId: string) => {
 export const getGroupMembersInRoom = (
   folderId: string | number,
   groupId: string,
+  filter: TGetGroupMembersInRoomFilter,
 ) => {
+  const url = `/files/folder/${folderId}/group/${groupId}/share?${toUrlParams(filter, false)}`;
+
   return request({
     method: "get",
-    url: `/files/folder/${folderId}/group/${groupId}/share`,
-  });
+    url,
+  }) as Promise<TGetGroupMembersInRoom>;
 };
 
 // * Update

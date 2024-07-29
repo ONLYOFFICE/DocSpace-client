@@ -1352,11 +1352,13 @@ class FilesStore {
       : `UserRoomsSharedFilter=${this.userStore.user?.id}`;
 
     const sharedStorageFilter = JSON.parse(localStorage.getItem(key));
-    sharedStorageFilter.sortBy = filter.sortBy;
-    sharedStorageFilter.sortOrder = filter.sortOrder;
+    if (sharedStorageFilter) {
+      sharedStorageFilter.sortBy = filter.sortBy;
+      sharedStorageFilter.sortOrder = filter.sortOrder;
 
-    const value = toJSON(sharedStorageFilter);
-    localStorage.setItem(key, value);
+      const value = toJSON(sharedStorageFilter);
+      localStorage.setItem(key, value);
+    }
 
     this.roomsFilter = filter;
 

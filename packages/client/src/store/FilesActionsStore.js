@@ -1459,6 +1459,23 @@ class FilesActionStore {
 
     filter.folder = id;
 
+    if (isRoom) {
+      const key =
+        categoryType === CategoryType.Archive
+          ? `UserFilterArchiveRoom=${this.userStore.user?.id}`
+          : `UserFilterSharedRoom=${this.userStore.user?.id}`;
+
+      const filterStorageSharedRoom =
+        this.userStore.user?.id && localStorage.getItem(key);
+
+      if (filterStorageSharedRoom) {
+        const splitFilter = filterStorageSharedRoom.split(",");
+
+        filter.sortBy = splitFilter[0];
+        filter.sortOrder = splitFilter[1];
+      }
+    }
+
     const url = getCategoryUrl(categoryType, id);
 
     window.DocSpace.navigate(`${url}?${filter.toUrlParams()}`, { state });
@@ -2403,6 +2420,7 @@ class FilesActionStore {
           filter.sortOrder = splitFilter[1];
         }
       } else {
+        // For the document section at all levels there is one sorting
         filter.sortBy = filterObj.sortBy;
         filter.sortOrder = filterObj.sortOrder;
       }

@@ -120,30 +120,28 @@ export const getRoomAccessOptions = (t: TTranslation) => {
   return [
     {
       access: ShareAccessRights.Editing,
-      description:
-        "Operations with existing files: viewing, editing, form filling, reviewing, commenting.",
+      description: t("Translations:RoleEditorDescription"),
       key: "editing",
       label: t("Common:Editor"),
       icon: AccessEditReactSvgUrl,
     },
     {
       access: ShareAccessRights.Review,
-      description:
-        "Operations with existing files: viewing, reviewing, commenting.",
+      description: t("Translations:RoleReviewerDescription"),
       key: "review",
       label: t("Translations:RoleReviewer"),
       icon: AccessReviewReactSvgUrl,
     },
     {
       access: ShareAccessRights.Comment,
-      description: "Operations with existing files: viewing, commenting.",
+      description: t("Translations:RoleCommentatorDescription"),
       key: "commenting",
       label: t("Commentator"),
       icon: AccessCommentReactSvgUrl,
     },
     {
       access: ShareAccessRights.ReadOnly,
-      description: "File viewing",
+      description: t("Translations:RoleViewerDescription"),
       key: "viewing",
       label: t("JavascriptSdk:Viewer"),
       icon: EyeReactSvgUrl,

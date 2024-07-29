@@ -116,6 +116,25 @@ export type TConfirmLinkResult = {
   roomId?: string;
   title?: string;
 };
+
+export type TCreateUserData = {
+  fromInviteLink: boolean;
+  userName: string;
+  passwordHash: string;
+  cultureName: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  key?: string;
+  type?: number;
+};
+
+export type TTfaSecretKeyAndQR = {
+  account: string;
+  manualEntryKey: string;
+  qrCodeSetupImageUrl: string;
+};
+
 export interface ConfirmRouteProps {
   doAuthenticated?: AuthenticatedAction;
   defaultPage?: string;
@@ -186,16 +205,4 @@ export type WizardFormProps = {
   culture?: string;
   wizardToken?: string;
   passwordHash?: TPasswordHash;
-};
-
-export type TCreateUserData = {
-  fromInviteLink: boolean;
-  userName: string;
-  passwordHash: string;
-  cultureName: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  key?: string;
-  type?: number;
 };

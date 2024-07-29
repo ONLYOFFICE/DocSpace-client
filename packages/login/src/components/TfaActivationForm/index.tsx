@@ -28,7 +28,7 @@
 
 "use client";
 
-import { useContext, useState } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import { useTheme } from "styled-components";
 import { Trans, useTranslation } from "react-i18next";
 
@@ -71,17 +71,21 @@ import {
 const PROXY_BASE_URL = combineUrl(window.ClientConfig?.proxy?.url, "/profile");
 
 type TfaActivationFormProps = {
-  secretKey: any;
-  qrCode: any;
+  secretKey: string;
+  qrCode: string;
   passwordHash: TPasswordHash;
   userName?: string;
 
   currentColorScheme?: TColorScheme;
 } & WithLoaderProps;
 
-const TfaActivationForm = (props: TfaActivationFormProps) => {
-  const { secretKey, qrCode, passwordHash, userName, currentColorScheme } =
-    props;
+const TfaActivationForm = ({
+  secretKey,
+  qrCode,
+  passwordHash,
+  userName,
+  currentColorScheme,
+}: TfaActivationFormProps) => {
   const { linkData } = useContext(ConfirmRouteContext);
   const { t } = useTranslation(["Confirm", "Common"]);
 
@@ -122,6 +126,11 @@ const TfaActivationForm = (props: TfaActivationFormProps) => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
+    setCode(event.target.value);
+    setError("");
   };
 
   const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -209,7 +218,7 @@ const TfaActivationForm = (props: TfaActivationFormProps) => {
                   <TextInput
                     id="code"
                     name="code"
-                    type={InputType.email}
+                    type={InputType.text}
                     size={InputSize.large}
                     scale
                     isAutoFocussed
@@ -217,10 +226,7 @@ const TfaActivationForm = (props: TfaActivationFormProps) => {
                     placeholder={t("EnterCodePlaceholder")}
                     isDisabled={isLoading}
                     maxLength={6}
-                    onChange={(e) => {
-                      setCode(e.target.value);
-                      setError("");
-                    }}
+                    onChange={onChangeInput}
                     value={code}
                     hasError={error ? true : false}
                     onKeyDown={onKeyPress}

@@ -62,10 +62,10 @@ import { login } from "@docspace/shared/api/user";
 
 import SsoReactSvgUrl from "PUBLIC_DIR/images/sso.react.svg?url";
 
-import { ConfirmRouteContext } from "@/app/(root)/confirm/confirmRoute";
-import withLoader from "@/app/(root)/confirm/withLoader";
+import withLoader from "@/HOCs/withLoader";
 import useDeviceType from "@/hooks/useDeviceType";
 import { createUser, getUserByEmail, signupOAuth } from "@/utils/actions";
+import { ConfirmRouteContext } from "../ConfirmRoute";
 
 import EmailInputForm from "./sub-components/EmailInputForm";
 import RegistrationForm from "./sub-components/RegistrationForm";

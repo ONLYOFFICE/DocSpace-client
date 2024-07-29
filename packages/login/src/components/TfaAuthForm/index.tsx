@@ -45,9 +45,9 @@ import {
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { TPasswordHash } from "@docspace/shared/api/settings/types";
 
-import withLoader from "@/app/(root)/confirm/withLoader";
-import { ConfirmRouteContext } from "@/app/(root)/confirm/confirmRoute";
+import withLoader from "@/HOCs/withLoader";
 import { TError, WithLoaderProps } from "@/types";
+import { ConfirmRouteContext } from "../ConfirmRoute";
 
 import { StyledForm } from "./TfaAuthForm.styled";
 

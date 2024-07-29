@@ -37,7 +37,7 @@ import { PRODUCT_NAME } from "@docspace/shared/constants";
 import { getLogoUrl } from "@docspace/shared/utils";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 
-import { ConfirmRouteContext } from "@/app/(root)/confirm/confirmRoute";
+import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import { DEFAULT_PORTAL_TEXT, DEFAULT_ROOM_TEXT } from "@/utils/constants";
 
 import { GreetingContainer } from "./GreetingCleateUserContainer.styled";

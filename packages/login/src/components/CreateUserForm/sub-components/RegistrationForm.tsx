@@ -40,7 +40,7 @@ import {
 } from "@docspace/shared/components/text-input";
 import { getPasswordErrorMessage } from "@docspace/shared/utils/getPasswordErrorMessage";
 
-import { ConfirmRouteContext } from "@/app/(root)/confirm/confirmRoute";
+import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 
 import { GreetingUserContainer } from "./GreetingUserContainer";
 

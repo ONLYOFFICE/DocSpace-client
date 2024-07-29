@@ -28,12 +28,13 @@
 
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import { updateActivationStatus } from "@docspace/shared/api/people";
-import { ConfirmRouteContext } from "@/app/(root)/confirm/confirmRoute";
-import { TError } from "@/types";
-
 import AppLoader from "@docspace/shared/components/app-loader";
+
+import { ConfirmRouteContext } from "../ConfirmRoute";
+import { TError } from "@/types";
 
 const EmailActivationForm = () => {
   const [error, setError] = useState<string>();

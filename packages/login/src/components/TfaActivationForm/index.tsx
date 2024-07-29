@@ -58,9 +58,9 @@ import {
   TFA_IOS_APP_URL,
   TFA_WIN_APP_URL,
 } from "@/utils/constants";
-import { ConfirmRouteContext } from "@/app/(root)/confirm/confirmRoute";
-import withLoader from "@/app/(root)/confirm/withLoader";
+import withLoader from "@/HOCs/withLoader";
 import { TError, WithLoaderProps } from "@/types";
+import { ConfirmRouteContext } from "../ConfirmRoute";
 
 import {
   StyledContent,

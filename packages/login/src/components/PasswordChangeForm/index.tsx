@@ -38,12 +38,12 @@ import { createPasswordHash } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/shared/components/toast";
 import { getPasswordErrorMessage } from "@docspace/shared/utils/getPasswordErrorMessage";
 import { InputSize, InputType } from "@docspace/shared/components/text-input";
-
 import { TPasswordHash } from "@docspace/shared/api/settings/types";
-import { ConfirmRouteContext } from "@/app/(root)/confirm/confirmRoute";
-import withLoader from "@/app/(root)/confirm/withLoader";
+
+import withLoader from "@/HOCs/withLoader";
 import { changePassword } from "@/utils/actions";
 import { TError, WithLoaderProps } from "@/types";
+import { ConfirmRouteContext } from "../ConfirmRoute";
 
 import { PasswordChangeWrapper } from "./PasswordChangeForm.styled";
 

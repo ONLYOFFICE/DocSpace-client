@@ -34,12 +34,12 @@ import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 import { PRODUCT_NAME } from "@docspace/shared/constants";
 
-import { ConfirmRouteContext } from "@/app/(root)/confirm/confirmRoute";
-import withLoader from "@/app/(root)/confirm/withLoader";
+import withLoader from "@/HOCs/withLoader";
 import { TError, WithLoaderProps } from "@/types";
 import { ownerChange } from "@/utils/actions";
 
 import { ButtonsWrapper } from "./ChangeOwner.styled";
+import { ConfirmRouteContext } from "../ConfirmRoute";
 
 type ChangeOwnerFormProps = {
   newOwner?: string;

@@ -45,7 +45,6 @@ import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
 import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
 import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 import { sendToastReport } from "@docspace/shared/utils/crashReport";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 import Main from "./components/Main";
 import Layout from "./components/Layout";

@@ -36,7 +36,6 @@ import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
 } from "@docspace/shared/components/context-menu-button";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 import styled, { css } from "styled-components";
 import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
@@ -161,7 +160,8 @@ const LastSessionBlock = (props: LastSessionBlockProps) => {
 
   const getUserType = (): string => {
     if (isOwner) return t("Common:Owner");
-    if (isAdmin) return t("Common:PortalAdmin", { productName: PRODUCT_NAME });
+    if (isAdmin)
+      return t("Common:PortalAdmin", { productName: t("Common:ProductName") });
     if (isRoomAdmin) return t("Common:RoomAdmin");
     if (isCollaborator) return t("Common:PowerUser");
     return t("Common:User");

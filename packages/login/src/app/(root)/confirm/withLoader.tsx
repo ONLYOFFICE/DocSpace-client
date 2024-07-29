@@ -154,14 +154,14 @@ export default function withLoader<T extends WithLoaderProps>(
     }, [type, getInviteData]);
 
     const isLoaded =
-      type === "TfaActivation" || type === "TfaAuth"
-        ? isLoadedState
-        : type === "PasswordChange" ||
-            type === "LinkInvite" ||
-            type === "Activation" ||
-            type === "EmpInvite"
-          ? !!passwordSettings
-          : true;
+      /*  type === "TfaActivation" || type === "TfaAuth"
+        ? isLoadedState */
+      type === "PasswordChange" ||
+      type === "LinkInvite" ||
+      type === "Activation" ||
+      type === "EmpInvite"
+        ? !!passwordSettings
+        : true;
 
     if (!isLoaded) {
       return <Loading />;

@@ -27,6 +27,7 @@
 import axios from "axios";
 import { uploadFile } from "@docspace/shared/api/files";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { toastr } from "@docspace/shared/components/toast";
 import { makeAutoObservable, runInAction } from "mobx";
 import {
   migrationList,
@@ -350,9 +351,14 @@ class ImportAccountsStore {
       if (chunkSize) {
         chunkUploadSize = chunkSize;
       } else {
-        const res: { data: { ChunkSize: number } } = await axios.post(
-          `${location}?Init=${startChunk === 0}`,
-        );
+        const res: {
+          data: { Success: boolean; ChunkSize: number; Message: string };
+        } = await axios.post(`${location}?Init=${startChunk === 0}`);
+
+        if (!res.data.Success) {
+          toastr.error(res.data.Message);
+          throw new Error(res.data.Message);
+        }
 
         chunkUploadSize = res.data.ChunkSize;
         setChunkSize(chunkUploadSize);
@@ -422,9 +428,14 @@ class ImportAccountsStore {
       if (chunkSize) {
         chunkUploadSize = chunkSize;
       } else {
-        const res: { data: { ChunkSize: number } } = await axios.post(
-          `${location}?Init=${startChunk === 0}`,
-        );
+        const res: {
+          data: { Success: boolean; ChunkSize: number; Message: string };
+        } = await axios.post(`${location}?Init=${startChunk === 0}`);
+
+        if (!res.data.Success) {
+          toastr.error(res.data.Message);
+          throw new Error(res.data.Message);
+        }
 
         chunkUploadSize = res.data.ChunkSize;
         setChunkSize(chunkUploadSize);

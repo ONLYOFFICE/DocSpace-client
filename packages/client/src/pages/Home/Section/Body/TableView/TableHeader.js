@@ -54,6 +54,8 @@ class FilesTableHeader extends React.Component {
       showStorageInfo,
       isArchiveFolder,
       tableStorageName,
+      roomsFilter,
+      filter,
     } = this.props;
 
     const defaultColumns = [];
@@ -365,6 +367,9 @@ class FilesTableHeader extends React.Component {
 
     const tableColumns = columns.map((c) => c.enable && c.key);
 
+    const sortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
+    const sortOrder = isRooms ? roomsFilter.sortOrder : filter.sortOrder;
+
     this.setTableColumns(tableColumns);
     if (fromUpdate) {
       this.setState({
@@ -372,6 +377,8 @@ class FilesTableHeader extends React.Component {
         resetColumnsSize,
         columnStorageName,
         columnInfoPanelStorageName,
+        sortBy,
+        sortOrder,
       });
     } else {
       this.state = {
@@ -379,6 +386,8 @@ class FilesTableHeader extends React.Component {
         resetColumnsSize,
         columnStorageName,
         columnInfoPanelStorageName,
+        sortBy,
+        sortOrder,
       };
     }
   };
@@ -425,7 +434,12 @@ class FilesTableHeader extends React.Component {
       isRecentTab,
       isArchiveFolder,
       showStorageInfo,
+      roomsFilter,
+      filter,
     } = this.props;
+
+    const sortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
+    const sortOrder = isRooms ? roomsFilter.sortOrder : filter.sortOrder;
 
     if (
       isArchiveFolder !== prevProps.isArchiveFolder ||
@@ -434,7 +448,9 @@ class FilesTableHeader extends React.Component {
       columnStorageName !== prevProps.columnStorageName ||
       columnInfoPanelStorageName !== prevProps.columnInfoPanelStorageName ||
       isRecentTab !== prevProps.isRecentTab ||
-      showStorageInfo !== prevProps.showStorageInfo
+      showStorageInfo !== prevProps.showStorageInfo ||
+      sortBy !== this.state.sortBy ||
+      sortOrder !== this.state.sortOrder
     ) {
       return this.getTableColumns(true);
     }
@@ -529,9 +545,6 @@ class FilesTableHeader extends React.Component {
       t,
       containerRef,
       isHeaderChecked,
-      filter,
-      roomsFilter,
-      isRooms,
       firstElemChecked,
       sortingVisible,
       infoPanelVisible,
@@ -548,10 +561,9 @@ class FilesTableHeader extends React.Component {
       resetColumnsSize,
       columnStorageName,
       columnInfoPanelStorageName,
+      sortBy,
+      sortOrder,
     } = this.state;
-
-    const sortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
-    const sortOrder = isRooms ? roomsFilter.sortOrder : filter.sortOrder;
 
     return (
       <TableHeader

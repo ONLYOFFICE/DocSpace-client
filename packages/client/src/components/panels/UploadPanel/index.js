@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import ClearActiveReactSvgUrl from "PUBLIC_DIR/images/clear.active.react.svg?url";
+import ClearReactSvgUrl from "PUBLIC_DIR/images/clear.react.svg?url";
 import ButtonCancelReactSvgUrl from "PUBLIC_DIR/images/button.cancel.react.svg?url";
 
 import React from "react";
@@ -136,8 +136,8 @@ class UploadPanelComponent extends React.Component {
             <div>
               {uploaded && converted ? (
                 <IconButton
-                  size="20"
-                  iconName={ClearActiveReactSvgUrl}
+                  size={17}
+                  iconName={ClearReactSvgUrl}
                   isClickable
                   onClick={this.clearUploadPanel}
                 />

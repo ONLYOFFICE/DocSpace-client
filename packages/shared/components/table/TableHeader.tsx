@@ -86,6 +86,14 @@ class TableHeaderComponent extends React.Component<
         ? localStorage.getItem(columnInfoPanelStorageName)
         : localStorage.getItem(columnStorageName);
 
+      if (sortBy !== prevProps.sortBy || sorted !== prevProps.sorted) {
+        const columnIndex = columns.findIndex((c) => c?.sortBy === sortBy);
+
+        if (columnIndex > -1 && !columns[columnIndex].enable) {
+          columns[columnIndex].onChange?.(columns[columnIndex].key);
+        }
+      }
+
       // columns.length + 1 - its settings column
       if (storageSize && storageSize.split(" ").length !== columns.length + 1) {
         return this.resetColumns();
@@ -95,15 +103,6 @@ class TableHeaderComponent extends React.Component<
         if (columns[index].enable !== prevProps.columns[index].enable) {
           return this.resetColumns();
         }
-      }
-    }
-
-    if (sortBy !== prevProps.sortBy || sorted !== prevProps.sorted) {
-      const columnIndex = columns.findIndex((c) => c?.sortBy === sortBy);
-      if (columnIndex === -1) return;
-
-      if (!columns[columnIndex].enable) {
-        columns[columnIndex].onChange?.(columns[columnIndex].key);
       }
     }
 

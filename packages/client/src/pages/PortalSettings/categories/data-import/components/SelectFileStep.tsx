@@ -289,6 +289,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
       }
     } finally {
       isAbort.current = false;
+      setIsBackupEmpty(false);
     }
   };
 
@@ -405,6 +406,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
           }
           accept={acceptedExtensions}
           size={InputSize.base}
+          isMultiple={migratorName === "GoogleWorkspace"}
         />
       </FileUploadContainer>
       {fileLoadingStatus === "upload" || fileLoadingStatus === "proceed" ? (

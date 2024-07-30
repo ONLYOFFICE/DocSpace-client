@@ -393,28 +393,28 @@ export const checkIsAuthenticated = async () => {
   return isAuth.response as boolean;
 };
 
-export async function checkFillFromDraft(
-  templateFileId: number,
-  share?: string,
-) {
-  const [checkFillFormDraft] = createRequest(
-    [`/files/masterform/${templateFileId}/checkfillformdraft`],
-    [
-      share ? ["Request-Token", share] : ["", ""],
-      ["Content-Type", "application/json;charset=utf-8"],
-    ],
-    "POST",
-    JSON.stringify({ fileId: templateFileId }),
-  );
+// export async function checkFillFromDraft(
+//   templateFileId: number,
+//   share?: string,
+// ) {
+//   const [checkFillFormDraft] = createRequest(
+//     [`/files/masterform/${templateFileId}/checkfillformdraft`],
+//     [
+//       share ? ["Request-Token", share] : ["", ""],
+//       ["Content-Type", "application/json;charset=utf-8"],
+//     ],
+//     "POST",
+//     JSON.stringify({ fileId: templateFileId }),
+//   );
 
-  const response = await fetch(checkFillFormDraft);
+//   const response = await fetch(checkFillFormDraft);
 
-  if (!response.ok) return null;
+//   if (!response.ok) return null;
 
-  const { response: formUrl } = await response.json();
+//   const { response: formUrl } = await response.json();
 
-  return formUrl as string;
-}
+//   return formUrl as string;
+// }
 
 export async function openEdit(
   fileId: number | string,

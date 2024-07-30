@@ -240,6 +240,8 @@ const SectionHeaderContent = (props) => {
   };
 
   const onContextOptionsClick = () => {
+    if (isInsideGroup) return;
+
     setBufferSelection(selectedFolder);
   };
 

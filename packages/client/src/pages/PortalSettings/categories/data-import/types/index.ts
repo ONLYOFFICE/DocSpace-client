@@ -76,7 +76,6 @@ export interface InjectedSelectFileStepProps extends SelectFileStepProps {
 export interface DataImportProps {}
 
 export interface InjectedDataImportProps extends DataImportProps {
-  setDocumentTitle: TStore["authStore"]["setDocumentTitle"];
   getMigrationStatus: TStore["importAccountsStore"]["getMigrationStatus"];
   viewAs: TStore["setup"]["viewAs"];
   setViewAs: TStore["setup"]["setViewAs"];
@@ -102,8 +101,6 @@ export interface InjectedWorkspaceProps extends WorkspaceProps {
   migrationPhase: TStore["importAccountsStore"]["migrationPhase"];
   isMigrationInit: TStore["importAccountsStore"]["isMigrationInit"];
   setIsMigrationInit: TStore["importAccountsStore"]["setIsMigrationInit"];
-
-  setDocumentTitle: TStore["authStore"]["setDocumentTitle"];
 }
 
 export interface LayoutProps {

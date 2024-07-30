@@ -27,9 +27,9 @@
 import { useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { toastr } from "@docspace/shared/components/toast";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { DataImportProps, InjectedDataImportProps } from "./types";
 
@@ -140,7 +140,7 @@ const DataImport = (props: DataImportProps) => {
 };
 
 export default inject<TStore>(
-  ({ authStore, settingsStore, setup, importAccountsStore }) => {
+  ({ settingsStore, setup, importAccountsStore }) => {
     const {
       getMigrationStatus,
       isMigrationInit,

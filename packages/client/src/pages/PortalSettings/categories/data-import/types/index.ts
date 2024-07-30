@@ -169,6 +169,7 @@ export interface InjectedTableViewProps extends TableViewProps {
 
 export interface AddEmailTableProps extends InjectedTableViewProps {
   users: TStore["importAccountsStore"]["users"];
+  setSearchValue: TStore["importAccountsStore"]["setSearchValue"];
 }
 
 export interface SelectUserTableProps extends InjectedTableViewProps {
@@ -220,6 +221,7 @@ export interface AddEmailRowProps extends RowViewProps {
   toggleAccount: TStore["importAccountsStore"]["toggleAccount"];
   toggleAllAccounts: TStore["importAccountsStore"]["toggleAllAccounts"];
   isAccountChecked: TStore["importAccountsStore"]["isAccountChecked"];
+  setSearchValue: TStore["importAccountsStore"]["setSearchValue"];
 }
 
 export interface UsersRowProps {

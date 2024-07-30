@@ -51,7 +51,6 @@ const REFRESH_TIMEOUT = 100;
 const AddEmailsStep = (props: AddEmailsStepProps) => {
   const {
     t,
-
     incrementStep,
     decrementStep,
     users,
@@ -67,10 +66,8 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
     setWorkspace,
     setMigratingWorkspace,
     setMigrationPhase,
-
     cancelUploadDialogVisible,
     setCancelUploadDialogVisible,
-
     quotaCharacteristics,
   } = props as InjectedAddEmailsStepProps;
 
@@ -97,8 +94,8 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
   const filteredAccounts = dataPortion.filter(
     (data) =>
       data.firstName?.toLowerCase().startsWith(searchValue.toLowerCase()) ||
-      data.displayName.toLowerCase().startsWith(searchValue.toLowerCase()) ||
-      data.email.toLowerCase().startsWith(searchValue.toLowerCase()),
+      data.displayName?.toLowerCase().startsWith(searchValue.toLowerCase()) ||
+      data.email?.toLowerCase().startsWith(searchValue.toLowerCase()),
   );
 
   const handleStepIncrement = () => {
@@ -195,7 +192,7 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
         </Text>
       )}
 
-      {Buttons}
+      {filteredAccounts.length > 0 && Buttons}
 
       {cancelUploadDialogVisible && (
         <CancelUploadDialog

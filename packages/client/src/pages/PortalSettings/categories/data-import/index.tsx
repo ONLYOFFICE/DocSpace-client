@@ -43,7 +43,6 @@ const DataImport = (props: DataImportProps) => {
     viewAs,
     setViewAs,
     currentDeviceType,
-
     getMigrationStatus,
     isMigrationInit,
     setUsers,
@@ -74,15 +73,14 @@ const DataImport = (props: DataImportProps) => {
 
     const { parseResult, error, isCompleted } = response;
 
-    if (
-      error ||
-      parseResult.failedArchives.length > 0 ||
+    const isErrorOrFailedParse = error || parseResult.failedArchives.length > 0;
+    const isNoUsersParsed =
       parseResult.users.length +
         parseResult.existUsers.length +
         parseResult.withoutEmailUsers.length ===
-        0
-    )
-      return;
+      0;
+
+    if (isErrorOrFailedParse || isNoUsersParsed) return;
 
     if (parseResult.operation === "parse") {
       setWorkspace(parseResult.migratorName);
@@ -160,7 +158,6 @@ export default inject<TStore>(
       viewAs,
       setViewAs,
       currentDeviceType,
-
       getMigrationStatus,
       isMigrationInit,
       setUsers,

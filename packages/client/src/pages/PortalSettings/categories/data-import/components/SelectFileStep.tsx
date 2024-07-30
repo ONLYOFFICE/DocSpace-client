@@ -89,18 +89,13 @@ const FileUploadContainer = styled.div`
   .cancelUploadButton {
     @media ${mobile} {
       margin-bottom: 0;
-
       width: auto;
-
       position: fixed;
       inset-inline: 0px;
       bottom: 0px;
-
       padding: 16px;
-
       background: ${(props) =>
         props.theme.client.settings.migration.workspaceBackground};
-
       gap: 0;
     }
   }
@@ -134,17 +129,14 @@ const FAIL_TRIES = 2;
 
 const SelectFileStep = (props: SelectFileStepProps) => {
   const {
+    t,
     isMultipleUpload,
     migratorName,
     acceptedExtensions,
-
-    t,
     incrementStep,
     setWorkspace,
-
     cancelUploadDialogVisible,
     setCancelUploadDialogVisible,
-
     initMigrationName,
     singleFileUploading,
     getMigrationStatus,
@@ -204,12 +196,13 @@ const SelectFileStep = (props: SelectFileStepProps) => {
 
       if (res.isCompleted || res.progress === 100) {
         clearInterval(uploadInterval.current);
-        if (
+
+        const totalUsers =
           res.parseResult.users.length +
-            res.parseResult.existUsers.length +
-            res.parseResult.withoutEmailUsers.length >
-          0
-        ) {
+          res.parseResult.existUsers.length +
+          res.parseResult.withoutEmailUsers.length;
+
+        if (totalUsers > 0) {
           setUsers(res.parseResult);
           setIsBackupEmpty(false);
           setLoadingStatus("done");

@@ -42,7 +42,6 @@ const ImportProcessingStep = (props: ImportProcessingStepProps) => {
   const {
     t,
     migratorName,
-
     incrementStep,
     setIsLoading,
     proceedFileMigration,
@@ -50,8 +49,7 @@ const ImportProcessingStep = (props: ImportProcessingStepProps) => {
   } = props as InjectedImportProcessingStepProps;
 
   const [percent, setPercent] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
-
+  const [isVisibleProgress, setIsVisibleProgress] = useState(false);
   const [failTries, setFailTries] = useState(FAIL_TRIES);
 
   const uploadInterval = useRef<number>();
@@ -59,7 +57,7 @@ const ImportProcessingStep = (props: ImportProcessingStepProps) => {
   const handleFileMigration = async () => {
     setIsLoading(true);
     setPercent(0);
-    setIsVisible(true);
+    setIsVisibleProgress(true);
     try {
       await proceedFileMigration(migratorName);
 
@@ -78,17 +76,12 @@ const ImportProcessingStep = (props: ImportProcessingStepProps) => {
         }
 
         setPercent(res.progress);
-
-        if (res.progress > 10) {
-          setIsVisible(false);
-        } else {
-          setIsVisible(true);
-        }
+        setIsVisibleProgress(res.progress <= 10);
 
         if (res.isCompleted || res.progress === 100) {
           clearInterval(uploadInterval.current);
           setIsLoading(false);
-          setIsVisible(false);
+          setIsVisibleProgress(false);
           setPercent(100);
           setTimeout(() => {
             incrementStep();
@@ -111,7 +104,7 @@ const ImportProcessingStep = (props: ImportProcessingStepProps) => {
     <Wrapper>
       <ProgressBar
         percent={percent}
-        isInfiniteProgress={isVisible}
+        isInfiniteProgress={isVisibleProgress}
         className="data-import-progress-bar"
       />
     </Wrapper>

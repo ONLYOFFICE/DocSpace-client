@@ -98,7 +98,8 @@ const FileUploadContainer = styled.div`
 
       padding: 16px;
 
-      background: white;
+      background: ${(props) =>
+        props.theme.client.settings.migration.workspaceBackground};
 
       gap: 0;
     }

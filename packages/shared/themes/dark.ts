@@ -1864,15 +1864,15 @@ const Dark: TTheme = {
     },
 
     history: {
-      subtitleColor: "#A3A9AE",
-      fileBlockBg: "#292929",
-      dateColor: "#A3A9AE",
-      fileExstColor: "#A3A9AE",
-      locationIconColor: "#A3A9AE",
-      folderLabelColor: "#A3A9AE",
-      renamedItemColor: "#A3A9AE",
-      oldRoleColor: "#A3A9AE",
-      messageColor: "#FFFFFF",
+      subtitleColor: gray,
+      fileBlockBg: darkGrayLight,
+      dateColor: gray,
+      fileExstColor: gray,
+      locationIconColor: gray,
+      folderLabelColor: gray,
+      renamedItemColor: gray,
+      oldRoleColor: gray,
+      messageColor: white,
     },
 
     details: {

@@ -72,7 +72,7 @@ import debounce from "lodash.debounce";
 import clone from "lodash/clone";
 import Queue from "queue-promise";
 import { parseHistory } from "SRC_DIR/pages/Home/InfoPanel/Body/helpers/HistoryHelper";
-
+import { toJSON } from "@docspace/shared/api/rooms/filter";
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = localStorage.getItem("viewAs");
 
@@ -1300,10 +1300,24 @@ class FilesStore {
   };
 
   //TODO: FILTER
-  setFilesFilter = (filter) => {
-    if (!this.publicRoomStore.isPublicRoom) {
-      const key = `UserFilter=${this.userStore.user?.id}`;
-      const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
+  setFilesFilter = (filter, folderId = null) => {
+    const { recycleBinFolderId } = this.treeFoldersStore;
+
+    const key =
+      this.categoryType === CategoryType.Archive
+        ? `UserFilterArchiveRoom=${this.userStore.user?.id}`
+        : this.categoryType === CategoryType.SharedRoom
+          ? `UserFilterSharedRoom=${this.userStore.user?.id}`
+          : folderId === "recent"
+            ? `UserFilterRecent=${this.userStore.user?.id}`
+            : +folderId === recycleBinFolderId
+              ? `UserFilterTrash=${this.userStore.user?.id}`
+              : !this.publicRoomStore.isPublicRoom
+                ? `UserFilter=${this.userStore.user?.id}`
+                : null;
+
+    if (key) {
+      const value = `${filter.sortBy},${filter.sortOrder}`;
       localStorage.setItem(key, value);
     }
 
@@ -1329,6 +1343,21 @@ class FilesStore {
 
   setRoomsFilter = (filter) => {
     if (!this.settingsStore.withPaging) filter.pageCount = 100;
+
+    const isArchive = this.categoryType === CategoryType.Archive;
+
+    const key = isArchive
+      ? `UserRoomsArchivedFilter=${this.userStore.user?.id}`
+      : `UserRoomsSharedFilter=${this.userStore.user?.id}`;
+
+    const sharedStorageFilter = JSON.parse(localStorage.getItem(key));
+    if (sharedStorageFilter) {
+      sharedStorageFilter.sortBy = filter.sortBy;
+      sharedStorageFilter.sortOrder = filter.sortOrder;
+
+      const value = toJSON(sharedStorageFilter);
+      localStorage.setItem(key, value);
+    }
 
     // this.setFilterUrl(filter, true);
     this.roomsFilter = filter;
@@ -1463,7 +1492,6 @@ class FilesStore {
       const splitFilter = filterStorageItem.split(",");
 
       filterData.sortBy = splitFilter[0];
-      filterData.pageCount = +splitFilter[1];
       filterData.sortOrder = splitFilter[2];
     }
 
@@ -1540,7 +1568,7 @@ class FilesStore {
           //save filter for after closing preview change url
           this.setTempFilter(filterData);
         } else {
-          this.setFilesFilter(filterData); //TODO: FILTER
+          this.setFilesFilter(filterData, folderId); //TODO: FILTER
         }
 
         const isPrivacyFolder =

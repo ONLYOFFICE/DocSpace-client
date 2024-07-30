@@ -24,10 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { DropDown } from "@docspace/shared/components/drop-down";
+import { ColorPicker } from "@docspace/shared/components/color-picker";
 import { SelectColorProps } from "../RoomLogoCoverDialog.types";
 
 interface ColorItemProps {
@@ -48,6 +51,12 @@ const StyledColorItem = styled.div<ColorItemProps>`
       display: flex;
       justify-content: center;
       align-items: center;
+    `}
+
+  ${(props) =>
+    props.isSelected &&
+    css`
+      background-color: #f3f4f4;
     `}
 
   &:hover {
@@ -80,6 +89,15 @@ export const SelectColor = ({
   t,
   onChangeColor,
 }: SelectColorProps) => {
+  const [openColorPicker, setOpenColorPicker] = useState<boolean>(false);
+
+  const onApply = (color: string) => {
+    setOpenColorPicker(false);
+    onChangeColor(color);
+  };
+
+  const isCustomColor = !logoColors.includes(selectedColor); // add usecallback
+
   return (
     <div className="select-color-container">
       <div className="color-name">{t("Common:Color")}</div>
@@ -97,14 +115,35 @@ export const SelectColor = ({
             />
           ),
         )}
-        <StyledColorItem isEmptyColor>
+        <StyledColorItem isEmptyColor isSelected={openColorPicker}>
           <IconButton
             className="select-color-plus-icon"
             size={16}
             iconName={PlusSvgUrl}
+            onClick={() => setOpenColorPicker(true)}
             isFill
           />
         </StyledColorItem>
+        <DropDown
+          directionX="right"
+          manualY="170px"
+          manualX="-163px"
+          withBackdrop={false}
+          isDefaultMode={false}
+          open={openColorPicker}
+          clickOutsideAction={() => setOpenColorPicker(false)}
+        >
+          <DropDownItem className="drop-down-item-hex">
+            <ColorPicker
+              id="accent-hex"
+              onClose={() => setOpenColorPicker(false)}
+              onApply={onApply}
+              appliedColor={selectedColor}
+              applyButtonLabel={t("Common:ApplyButton")}
+              cancelButtonLabel={t("Common:CancelButton")}
+            />
+          </DropDownItem>
+        </DropDown>
       </div>
     </div>
   );

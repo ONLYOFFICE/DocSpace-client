@@ -35,14 +35,11 @@ import { SelectIcon } from "./SelectIcon";
 const logoColors = [
   "#FF6680",
   "#FF8F40",
-  "#F2D230",
   "#61C059",
-  "#70E096",
   "#1FCECB",
   "#5CC3F7",
   "#6191F2",
   "#7757D9",
-  "#B679F2",
   "#FF7FD4",
 ];
 
@@ -80,7 +77,7 @@ const RoomLogoCover = (props) => {
   return (
     <RoomLogoCoverContainer>
       <div className="room-logo-container">
-        <CustomLogo icon={icon} color={color} />
+        <CustomLogo icon={icon} color={color} withoutIcon={withoutIcon} />
       </div>
       <div className="color-select-container">
         <SelectColor

@@ -78,6 +78,7 @@ const StyledIconContainer = styled.div`
   }
 
   .cover-icon {
+    overflow: visible;
     &:hover {
       cursor: pointer;
     }

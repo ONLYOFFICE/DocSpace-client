@@ -30,6 +30,7 @@ import type { TTranslation } from "@docspace/shared/types";
 export interface CustomLogoProps {
   color?: string;
   icon?: string;
+  withoutIcon: boolean;
 }
 
 export interface SelectColorProps {

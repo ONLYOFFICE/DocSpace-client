@@ -65,6 +65,8 @@ import { LoginDispatchContext, LoginValueContext } from "../Login";
 import LDAPContainer from "./sub-components/LDAPContainer";
 import { RecaptchaType } from "@docspace/shared/enums";
 
+let showToastr = true;
+
 const LoginForm = ({
   hashSettings,
   cookieSettingsEnabled,
@@ -195,8 +197,7 @@ const LoginForm = ({
       !toastr.isActive(toastId.current || "confirm-email-toast")
     )
       toastId.current = toastr.success(text);
-    if (authError && ready) toastr.error(t("Common:ProviderLoginError"));
-  }, [message, confirmedEmail, t, ready, authError, authCallback]);
+  }, [message, confirmedEmail, t, ready, authCallback]);
 
   const onChangeLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
     //console.log("onChangeLogin", e.target.value);
@@ -379,6 +380,11 @@ const LoginForm = ({
   }, [isModalOpen, onSubmit]);
 
   const passwordErrorMessage = errorMessage();
+
+  if (authError && ready) {
+    if (showToastr) toastr.error(t("Common:ProviderLoginError"));
+    showToastr = false;
+  }
 
   return (
     <form className="auth-form-container">

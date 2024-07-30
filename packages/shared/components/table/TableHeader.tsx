@@ -77,12 +77,22 @@ class TableHeaderComponent extends React.Component<
       infoPanelVisible,
       columnStorageName,
       columnInfoPanelStorageName,
+      sortBy,
+      sorted,
     } = this.props;
 
     if (columnStorageName === prevProps.columnStorageName) {
       const storageSize = infoPanelVisible
         ? localStorage.getItem(columnInfoPanelStorageName)
         : localStorage.getItem(columnStorageName);
+
+      if (sortBy !== prevProps.sortBy || sorted !== prevProps.sorted) {
+        const columnIndex = columns.findIndex((c) => c?.sortBy === sortBy);
+
+        if (columnIndex > -1 && !columns[columnIndex].enable) {
+          columns[columnIndex].onChange?.(columns[columnIndex].key);
+        }
+      }
 
       // columns.length + 1 - its settings column
       if (storageSize && storageSize.split(" ").length !== columns.length + 1) {

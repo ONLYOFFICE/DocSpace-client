@@ -1459,6 +1459,23 @@ class FilesActionStore {
 
     filter.folder = id;
 
+    if (isRoom) {
+      const key =
+        categoryType === CategoryType.Archive
+          ? `UserFilterArchiveRoom=${this.userStore.user?.id}`
+          : `UserFilterSharedRoom=${this.userStore.user?.id}`;
+
+      const filterStorageSharedRoom =
+        this.userStore.user?.id && localStorage.getItem(key);
+
+      if (filterStorageSharedRoom) {
+        const splitFilter = filterStorageSharedRoom.split(",");
+
+        filter.sortBy = splitFilter[0];
+        filter.sortOrder = splitFilter[1];
+      }
+    }
+
     const url = getCategoryUrl(categoryType, id);
 
     window.DocSpace.navigate(`${url}?${filter.toUrlParams()}`, { state });
@@ -2334,7 +2351,8 @@ class FilesActionStore {
   onMarkAsRead = (item) => this.markAsRead([], [`${item.id}`], item);
 
   openFileAction = (item, t, e) => {
-    const { openDocEditor, isPrivacyFolder, setSelection } = this.filesStore;
+    const { openDocEditor, isPrivacyFolder, setSelection, categoryType } =
+      this.filesStore;
     const { currentDeviceType } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
     const { enablePlugins } = this.settingsStore;
@@ -2384,6 +2402,30 @@ class FilesActionStore {
       );
 
       const filter = FilesFilter.getDefault();
+
+      const filterObj = FilesFilter.getFilter(window.location);
+
+      if (isRoom) {
+        const key =
+          categoryType === CategoryType.Archive
+            ? `UserFilterArchiveRoom=${this.userStore.user?.id}`
+            : `UserFilterSharedRoom=${this.userStore.user?.id}`;
+
+        const filterStorageSharedRoom =
+          this.userStore.user?.id && localStorage.getItem(key);
+
+        if (filterStorageSharedRoom) {
+          const splitFilter = filterStorageSharedRoom.split(",");
+
+          filter.sortBy = splitFilter[0];
+          filter.sortOrder = splitFilter[1];
+        }
+      } else {
+        // For the document section at all levels there is one sorting
+        filter.sortBy = filterObj.sortBy;
+        filter.sortOrder = filterObj.sortOrder;
+      }
+
       filter.folder = id;
 
       const url = `${path}?${filter.toUrlParams()}`;
@@ -2604,6 +2646,11 @@ class FilesActionStore {
     const { navigationPath, rootFolderType } = this.selectedFolderStore;
 
     const filter = FilesFilter.getDefault();
+
+    const filterObj = FilesFilter.getFilter(window.location);
+
+    filter.sortBy = filterObj.sortBy;
+    filter.sortOrder = filterObj.sortOrder;
 
     filter.folder = id;
 

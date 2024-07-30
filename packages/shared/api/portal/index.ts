@@ -35,7 +35,7 @@ import {
   TTenantExtra,
 } from "./types";
 
-export function getShortenedLink(link) {
+export function getShortenedLink(link: string) {
   return request({
     method: "put",
     url: "/portal/getshortenlink",
@@ -43,13 +43,13 @@ export function getShortenedLink(link) {
   });
 }
 
-export function getInvitationLink(type) {
-  return request({
+export async function getInvitationLink(type: EmployeeType) {
+  const res = await request({
     method: "get",
     url: `/portal/users/invite/${type}`,
-  }).then((link) => {
-    return Promise.resolve(link);
   });
+
+  return res;
 }
 
 export function getInvitationLinks() {

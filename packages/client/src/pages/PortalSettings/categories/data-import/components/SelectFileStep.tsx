@@ -413,7 +413,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
           />
           <div className="cancelUploadButton">
             <Button
-              size={isTablet() ? ButtonSize.medium : ButtonSize.small}
+              size={isTablet() ? ButtonSize.medium : ButtonSize.normal}
               label={t("Common:CancelButton")}
               onClick={onCancel}
               scale={isMobile()}

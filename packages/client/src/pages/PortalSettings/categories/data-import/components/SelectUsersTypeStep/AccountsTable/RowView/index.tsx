@@ -55,7 +55,7 @@ const StyledRowContainer = styled(RowContainer)`
     margin-inline-start: -16px;
     width: 100%;
 
-    margin-top: -31.5px;
+    margin-top: -32.5px;
     top: 53px;
     margin-bottom: -29.5px;
 

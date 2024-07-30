@@ -33,6 +33,7 @@ import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Badge } from "@docspace/shared/components/badge";
 import { globalColors } from "@docspace/shared/themes";
 import { mobile } from "@docspace/shared/utils";
+import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -58,18 +59,13 @@ const StyledWrapper = styled.div`
     .toggle-caption_title {
       display: flex;
       .toggle-caption_title_badge {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-right: 4px;
-              `
-            : css`
-                margin-left: 4px;
-              `}
+        margin-inline-start: 4px;
         cursor: auto;
       }
     }
   }
+
+  ${(props) => !props.isSSOAvailable && UnavailableStyles}
 `;
 
 const ToggleSSO = ({ enableSso, ssoToggle, isSSOAvailable }) => {
@@ -77,7 +73,7 @@ const ToggleSSO = ({ enableSso, ssoToggle, isSSOAvailable }) => {
 
   const theme = useTheme();
   return (
-    <StyledWrapper>
+    <StyledWrapper isSSOAvailable={isSSOAvailable}>
       <ToggleButton
         className="enable-sso toggle"
         isChecked={enableSso}

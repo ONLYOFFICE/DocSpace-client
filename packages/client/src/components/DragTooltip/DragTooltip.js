@@ -50,14 +50,7 @@ const StyledTooltip = styled.div`
     align-items: center;
   }
   .tooltip-moved-obj-icon {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 6px;
-          `
-        : css`
-            margin-right: 6px;
-          `}
+    margin-inline-end: 6px;
   }
   .tooltip-moved-obj-extension {
     color: ${(props) => props.theme.filesDragTooltip.color};

@@ -172,14 +172,8 @@ export const StyledTableContainer = styled(TableContainer)`
 
   .table-container_header {
     position: absolute;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding: 0px 28px 0 15px;
-          `
-        : css`
-            padding: 0px 15px 0 28px;
-          `}
+    padding-block: 0;
+    padding-inline: 28px 15px;
   }
 
   .header-container-text {

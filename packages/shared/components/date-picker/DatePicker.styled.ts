@@ -48,8 +48,7 @@ const DropDownStyle = styled.div`
     @media ${mobile} {
       position: fixed;
       top: unset;
-      right: 0;
-      left: 0;
+      inset-inline: 0;
       bottom: 0;
       width: 100%;
       width: -moz-available;
@@ -120,13 +119,7 @@ const DateSelector = styled.div`
   align-items: center;
 
   .mr-8 {
-    margin-right: 8px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl" &&
-      css`
-        margin-right: 0px;
-        margin-left: 8px;
-      `}
+    margin-inline-end: 8px;
   }
 `;
 
@@ -141,7 +134,7 @@ const StyledCalendar = styled(Calendar)`
   @media ${mobile} {
     position: fixed;
     bottom: 0;
-    left: 0;
+    inset-inline-start: 0;
   }
 `;
 

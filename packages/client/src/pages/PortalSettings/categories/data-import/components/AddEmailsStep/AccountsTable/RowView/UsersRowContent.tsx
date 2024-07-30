@@ -60,6 +60,9 @@ const DecisionButton = styled(Button)`
   width: 32px;
   height: 32px;
   padding: 0;
+  path {
+    fill: ${(props) => props.theme.client.settings.migration.tableHeaderText};
+  }
 `;
 
 DecisionButton.defaultProps = { theme: Base };
@@ -82,13 +85,19 @@ const StyledRowContent = styled(RowContent)`
 
   .user-email {
     margin-inline-end: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    color: ${(props) =>
+      props.theme.client.settings.migration.tableRowTextColor};
+
     path {
-      fill: ${globalColors.gray};
+      fill: ${(props) => props.theme.client.settings.migration.tableHeaderText};
     }
   }
 
   .row-main-container-wrapper {
     margin: 0;
+    width: 100%;
   }
 
   .mainIcons {
@@ -179,7 +188,12 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
         <Text fontWeight={600} fontSize="14px">
           {displayName}
         </Text>
-        <Text fontWeight={600} fontSize="12px" color={globalColors.gray}>
+        <Text
+          className="user-email"
+          fontWeight={600}
+          fontSize="12px"
+          color={globalColors.gray}
+        >
           {prevEmail === "" ? t("Settings:NoEmail") : prevEmail}
         </Text>
       </div>

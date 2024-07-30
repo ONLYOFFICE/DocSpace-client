@@ -44,10 +44,10 @@ const StyledCertificatesTable = styled.div`
       display: flex;
       align-items: center;
 
-      border-left: ${(props) =>
+      border-inline-start: ${(props) =>
         props.theme.client.settings.integration.sso.border};
       height: 13px;
-      padding-left: 8px;
+      padding-inline-start: 8px;
     }
   }
 

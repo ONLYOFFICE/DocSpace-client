@@ -42,10 +42,7 @@ const EditContainer = styled.div`
   position: absolute;
   display: flex;
 
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? `left: ${props.theme.avatar.editContainer.right};`
-      : `right: ${props.theme.avatar.editContainer.right};`}
+  inset-inline-end: ${({ theme }) => theme.avatar.editContainer.right};
 
   bottom: ${(props) => props.theme.avatar.editContainer.bottom};
   background-color: ${(props) =>
@@ -109,10 +106,7 @@ const RoleWrapper = styled.div<{
   theme: TTheme;
 }>`
   position: absolute;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? `left: ${rightStyle(props)};`
-      : `right ${rightStyle(props)};`}
+  inset-inline-end: ${(props) => rightStyle(props)};
 
   bottom: ${(props) => bottomStyle(props)};
 
@@ -161,6 +155,8 @@ const NamedAvatar = styled.div<{ size: AvatarSize; isGroup: boolean }>`
     props.isGroup
       ? props.theme.avatar.initialsContainer.groupColor
       : props.theme.avatar.initialsContainer.color};
+
+  // doesn't require mirroring for rtl
   left: ${(props) => props.theme.avatar.initialsContainer.left};
   top: ${(props) => props.theme.avatar.initialsContainer.top};
   transform: ${(props) => props.theme.avatar.initialsContainer.transform};

@@ -62,10 +62,8 @@ const HeaderContainer = styled.div`
   flex-wrap: wrap;
 
   @media ${mobile} {
-    margin-left: -14px;
-    padding-left: 14px;
-    margin-right: -14px;
-    padding-right: 14px;
+    margin-inline: -14px;
+    padding-inline: 14px;
   }
 
   .arrow-button {

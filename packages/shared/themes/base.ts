@@ -1879,14 +1879,15 @@ export const getBaseTheme = () => {
       },
 
       history: {
-        subtitleColor: gray,
-        fileBlockBg: grayLight,
-        dateColor: gray,
-        fileExstColor: gray,
-        locationIconColor: gray,
-        folderLabelColor: gray,
-        renamedItemColor: gray,
-        oldRoleColor: lightGrayDark,
+        subtitleColor: "#a3a9ae",
+        fileBlockBg: "#f8f9f9",
+        dateColor: "#A3A9AE",
+        fileExstColor: "#A3A9AE",
+        locationIconColor: "#A3A9AE",
+        folderLabelColor: "#A3A9AE",
+        renamedItemColor: "#A3A9AE",
+        oldRoleColor: "#657077",
+        messageColor: "#333333",
       },
 
       details: {
@@ -2478,8 +2479,7 @@ export const getBaseTheme = () => {
       upload: {
         color: gray,
         tooltipColor: lightToastInfo,
-        iconFill: gray,
-        textColor: gray,
+        iconColor: lightErrorStatus,
 
         shareButton: {
           color: gray,

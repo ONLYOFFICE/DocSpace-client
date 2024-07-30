@@ -74,14 +74,7 @@ const displaySettings = css<{
         : "none"};
 
     @media ${mobile} {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              padding-right: 16px;
-            `
-          : css`
-              padding-left: 16px;
-            `}
+      padding-inline-start: 16px;
     }
   }
 
@@ -93,15 +86,8 @@ const displaySettings = css<{
         border-top: 1px solid ${globalColors.grayLightMid};
         width: calc(100% - 16px);
 
-        ${props.theme.interfaceDirection === "rtl"
-          ? css`
-              right: 0;
-              padding-right: 16px;
-            `
-          : css`
-              left: 0;
-              padding-left: 16px;
-            `}
+        inset-inline-start: 0;
+        padding-inline-start: 16px;
       }
     `}
 `;
@@ -125,11 +111,7 @@ const tabletButtons = css`
     position: static;
     padding: 0;
     margin-bottom: 0;
-
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? "margin-right: 8px;"
-        : "margin-left: 8px;"}
+    margin-inline-start: 8px;
   }
 `;
 
@@ -148,20 +130,10 @@ const StyledSaveCancelButtons = styled.div<{
   width: ${(props) => props.theme.saveCancelButtons.width};
   background-color: ${({ theme }) => theme.backgroundColor};
 
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? `right: ${props.theme.saveCancelButtons.left};`
-      : `left: ${props.theme.saveCancelButtons.left};`}
+  inset-inline-start: ${({ theme }) => theme.saveCancelButtons.left};
 
   .save-button {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: ${props.theme.saveCancelButtons.marginRight};
-          `
-        : css`
-            margin-right: ${props.theme.saveCancelButtons.marginRight};
-          `}
+    margin-inline-end: ${({ theme }) => theme.saveCancelButtons.marginRight};
   }
   .unsaved-changes {
     color: ${(props) => props.theme.saveCancelButtons.unsavedColor};

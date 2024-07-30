@@ -51,11 +51,8 @@ const BannerWrapper = styled.div<{
     border-radius: 4px;
     border: 1px solid ${(props) => props.borderColor};
 
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl" &&
-      css`
-        transform: scaleX(-1);
-      `}
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
   }
 
   @media ${mobile} {
@@ -65,14 +62,7 @@ const BannerWrapper = styled.div<{
 
   .close-icon {
     position: absolute;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: 14px;
-          `
-        : css`
-            right: 14px;
-          `}
+    inset-inline-end: 14px;
 
     top: 18px;
 
@@ -132,15 +122,9 @@ const BannerIcon = styled.div`
   position: absolute;
   bottom: 1px;
 
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          left: 1px;
-          transform: scaleX(-1);
-        `
-      : css`
-          right: 1px;
-        `}
+  inset-inline-end: 1px;
+  ${({ theme }) =>
+    theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
 
   @media ${mobile} {
     width: 140px;

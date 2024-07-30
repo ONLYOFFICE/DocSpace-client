@@ -55,9 +55,8 @@ const checkedStyle = css`
 
 const StyledWrapper = styled.div`
   .files-item {
-    border-left: none;
-    border-right: none;
-    margin-left: 0;
+    border-inline: none;
+    margin-inline-start: 0;
   }
   height: 59px;
   box-sizing: border-box;
@@ -94,10 +93,8 @@ const StyledWrapper = styled.div`
       z-index: 1;
       position: relative;
 
-      margin-left: -24px;
-      margin-right: -24px;
-      padding-left: 24px;
-      padding-right: 24px;
+      margin-inline: -24px;
+      padding-inline: 24px;
     `}
 
   ${(props) =>
@@ -149,14 +146,7 @@ const StyledSimpleFilesRow = styled(Row)`
 
   .styled-element {
     height: 32px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 12px;
-          `
-        : css`
-            margin-right: 12px;
-          `}
+    margin-inline-end: 12px;
   }
 
   .row_content {
@@ -241,31 +231,12 @@ const StyledSimpleFilesRow = styled(Row)`
   }
 
   .expandButton {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: ${(props) =>
-              !props.folderCategory ? "17px" : "24px"};
-          `
-        : css`
-            margin-left: ${(props) =>
-              !props.folderCategory ? "17px" : "24px"};
-          `}
+    margin-inline-start: ${(props) =>
+      !props.folderCategory ? "17px" : "24px"};
     padding-top: 0px;
   }
   .expandButton > div:first-child {
-    ${(props) =>
-      props.folderCategory &&
-      css`
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                padding-right: 0 !important;
-              `
-            : css`
-                padding-left: 0 !important;
-              `}
-      `}
+    ${(props) => props.folderCategory && `padding-inline-start: 0 !important;`}
   }
 
   .badges {
@@ -280,8 +251,7 @@ const StyledSimpleFilesRow = styled(Row)`
 
     > div {
       margin-top: 0px;
-      margin-left: 0;
-      margin-right: 0;
+      margin-inline: 0;
     }
   }
 
@@ -297,14 +267,7 @@ const StyledSimpleFilesRow = styled(Row)`
     }
 
     /* .badges__quickButtons:not(:empty) {
-      ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 8px;
-          `
-        : css`
-            margin-left: 8px;
-          `}
+      margin-inline-start: 8px;
     } */
     .room__badges:empty,
     .file__badges:empty,
@@ -408,10 +371,8 @@ const SimpleFilesRow = (props) => {
   const dragStyles =
     dragging && isDragging
       ? {
-          marginLeft: "-16px",
-          marginRight: "-16px",
-          paddingLeft: "16px",
-          paddingRight: "16px",
+          marginInline: "-16px",
+          paddingInline: "16px",
         }
       : {};
 

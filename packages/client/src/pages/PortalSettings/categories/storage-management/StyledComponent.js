@@ -199,7 +199,7 @@ const StyledDivider = styled.div`
   width: 100%;
   background-color: ${(props) =>
     props.theme.client.settings.storageManagement.dividerColor};
-  margin: 28px 0 28px 0;
+  margin: 28px 0 28px;
 `;
 
 const StyledSimpleFilesRow = styled(Row)`

@@ -139,12 +139,7 @@ const heightStyle = (props: { size?: ButtonSize; theme: TTheme }) =>
 const fontSizeStyle = (props: { size?: ButtonSize; theme: TTheme }) =>
   props.theme.button.fontSize[props.size || ButtonSize.normal];
 
-const ButtonWrapper = React.forwardRef<
-  HTMLButtonElement,
-  ButtonProps & {
-    interfaceDirection?: boolean | string;
-  }
->(
+const ButtonWrapper = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       primary,
@@ -172,7 +167,6 @@ const StyledButton = styled(ButtonWrapper).attrs((props: ButtonProps) => ({
   tabIndex: props.tabIndex,
 }))`
   position: relative;
-  direction: ${(props) => props?.interfaceDirection && "rtl"};
   height: ${(props) => heightStyle(props)};
   font-size: ${(props) => fontSizeStyle(props)};
 
@@ -255,10 +249,7 @@ const StyledButton = styled(ButtonWrapper).attrs((props: ButtonProps) => ({
 
     position: absolute;
 
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
 
     width: 100%;
     height: 100%;

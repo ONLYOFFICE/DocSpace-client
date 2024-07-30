@@ -87,6 +87,7 @@ export const ToastSpeed = styled.div`
   position: fixed;
 
   top: 50%;
+  // doesn't require mirroring for RTL
   left: 50%;
 
   display: flex;

@@ -40,14 +40,8 @@ const StyledIconBlock = styled.div<{
     props.isDisabled || !props.isClickable ? "default" : "pointer"};
 
   height: ${(props) => props.theme.inputBlock.height};
-  padding-right: ${(props) => props.theme.inputBlock.paddingRight};
-  padding-left: ${(props) => props.theme.inputBlock.paddingLeft};
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl" &&
-    css`
-      padding-left: ${props.theme.inputBlock.paddingRight};
-      padding-right: ${props.theme.inputBlock.paddingLeft};
-    `}
+  padding-inline-end: ${(props) => props.theme.inputBlock.paddingRight};
+  padding-inline-start: ${(props) => props.theme.inputBlock.paddingLeft};
   -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 `;
 StyledIconBlock.defaultProps = { theme: Base };

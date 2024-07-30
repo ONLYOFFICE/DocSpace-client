@@ -50,10 +50,7 @@ const StyledModal = styled(ModalDialogContainer)`
     display: flex;
     align-items: center;
 
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `padding-right: 8px;`
-        : `padding-left: 8px;`}
+    padding-inline-start: 8px;
   }
 `;
 

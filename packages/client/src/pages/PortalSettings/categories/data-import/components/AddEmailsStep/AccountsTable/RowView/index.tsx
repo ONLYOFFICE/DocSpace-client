@@ -38,19 +38,19 @@ import UsersRow from "./UsersRow";
 import { AddEmailRowProps, RowViewProps } from "../../../../types";
 
 const StyledRowContainer = styled(RowContainer)`
-  margin-bottom: 20px;
-
-  .row-main-container-wrapper {
-    @media ${tablet} {
-      margin: 0;
-    }
-  }
+  margin: 0 0 20px;
 `;
 
 const StyledRow = styled(Row)`
   box-sizing: border-box;
   height: 40px;
   min-height: 40px;
+
+  .row-header-title {
+    color: ${(props) => props.theme.client.settings.migration.tableHeaderText};
+    font-weight: 600;
+    font-size: 12px;
+  }
 
   @media ${tablet} {
     .row_content {
@@ -102,7 +102,12 @@ const RowView = (props: RowViewProps) => {
         indeterminate={isIndeterminate}
         isDisabled={usersWithFilledEmails.length === 0}
       >
-        <Text color={globalColors.gray} fontWeight={600} fontSize="12px">
+        <Text
+          className="row-header-title"
+          color={globalColors.gray}
+          fontWeight={600}
+          fontSize="12px"
+        >
           {t("Common:Name")}
         </Text>
       </StyledRow>

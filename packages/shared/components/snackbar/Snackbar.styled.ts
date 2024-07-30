@@ -109,19 +109,14 @@ const StyledSnackBar = styled(Box)<{
     border: none;
     font-size: inherit;
     color: ${globalColors.black};
-    margin: 0px 4px 4px 24px;
+    margin-block: 0 4px;
+    margin-inline: 24px 4px;
 
     padding: 0;
 
     min-width: min-content;
     cursor: pointer;
-    margin-left: 12px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl" &&
-      css`
-        margin-right: 12px;
-        margin-left: 4px;
-      `}
+    margin-inline-start: 12px;
     text-decoration: underline;
   }
 
@@ -139,6 +134,7 @@ const StyledSnackBar = styled(Box)<{
 
 const StyledAction = styled.div`
   position: absolute;
+  // doesn't require mirroring for RTL
   right: 8px;
   top: 8px;
   background: inherit;
@@ -149,6 +145,7 @@ const StyledAction = styled.div`
   cursor: pointer;
   text-decoration: underline;
   @media ${tablet} {
+    // doesn't require mirroring for RTL
     right: 14px;
   }
 `;

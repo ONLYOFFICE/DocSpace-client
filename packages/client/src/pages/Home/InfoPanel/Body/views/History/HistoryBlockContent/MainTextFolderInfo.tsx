@@ -40,24 +40,38 @@ const HistoryMainTextFolderInfo = ({
   feed,
   selectedFolderId,
 }: HistoryMainTextFolderInfoProps) => {
-  if (
-    feed.data.parentId === selectedFolderId ||
-    feed.data.toFolderId === selectedFolderId
-  )
+  const {
+    parentId,
+    toFolderId,
+    parentTitle,
+    parentType,
+    fromParentType,
+    fromParentTitle,
+  } = feed.data;
+
+  if (parentId === selectedFolderId || toFolderId === selectedFolderId)
     return null;
 
-  const destination =
-    feed.data.parentType === 0 || feed.data.toParentType === 0
-      ? t("FeedLocationLabel", {
-          folderTitle: feed.data.parentTitle || feed.data.toFolderTitle,
-        })
-      : t("FeedLocationRoomLabel", {
-          folderTitle: feed.data.parentTitle || feed.data.toFolderTitle,
-        });
+  if (!parentTitle) return null;
+
+  const isFolder = parentType === 0;
+  const isFromFolder = fromParentType === 0;
+
+  const destination = isFolder
+    ? t("FeedLocationLabel", { folderTitle: parentTitle })
+    : t("FeedLocationRoomLabel", { folderTitle: parentTitle });
+
+  const sourceDestination = isFromFolder
+    ? t("FeedLocationLabelFrom", { folderTitle: fromParentTitle })
+    : t("FeedLocationRoomLabel", { folderTitle: parentTitle });
+
+  const className = isFromFolder ? "source-folder-label" : "folder-label";
 
   return (
     <StyledHistoryBlockMessage className="message">
-      <span className="folder-label">{destination}</span>
+      <span className={className}>
+        {isFromFolder ? sourceDestination : destination}
+      </span>
     </StyledHistoryBlockMessage>
   );
 };

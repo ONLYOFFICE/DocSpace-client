@@ -169,6 +169,7 @@ const Editor = ({
       goBack = {
         requestClose: true,
         text: openFileLocationText,
+        blank: openOnNewPage,
       };
     } else {
       goBack = {

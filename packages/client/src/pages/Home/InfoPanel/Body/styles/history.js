@@ -82,14 +82,7 @@ const StyledHistoryBlock = styled.div`
       .date {
         white-space: nowrap;
         display: inline-block;
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-right: auto;
-              `
-            : css`
-                margin-left: auto;
-              `}
+        margin-inline-start: auto;
         font-weight: 600;
         font-size: 12px;
         color: ${(props) => props.theme.infoPanel.history.dateColor};
@@ -122,12 +115,17 @@ const StyledHistoryBlockMessage = styled.div`
     overflow: hidden;
   }
 
-  .folder-label {
+  .folder-label,
+  .source-folder-label {
     max-width: 100%;
     color: ${(props) => props.theme.infoPanel.history.locationIconColor};
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+  }
+
+  .source-folder-label {
+    color: ${(props) => props.theme.infoPanel.history.messageColor};
   }
 
   .old-role {
@@ -226,14 +224,7 @@ const StyledHistoryBlockFile = styled.div`
   }
 
   .location-btn {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: auto;
-          `
-        : css`
-            margin-left: auto;
-          `}
+    margin-inline-start: auto;
     min-width: 16px;
   }
 `;

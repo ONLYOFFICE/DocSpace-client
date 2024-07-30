@@ -50,14 +50,7 @@ const SimpleFilesTileContent = styled(TileContent)`
   }
 
   .badge {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 8px;
-          `
-        : css`
-            margin-right: 8px;
-          `}
+    margin-inline-end: 8px;
     cursor: pointer;
     height: 16px;
     width: 16px;
@@ -65,14 +58,7 @@ const SimpleFilesTileContent = styled(TileContent)`
 
   .new-items {
     position: absolute;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: 29px;
-          `
-        : css`
-            right: 29px;
-          `}
+    inset-inline-end: 29px;
     top: 19px;
   }
 
@@ -83,14 +69,7 @@ const SimpleFilesTileContent = styled(TileContent)`
 
   .share-icon {
     margin-top: -4px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 8px;
-          `
-        : css`
-            padding-right: 8px;
-          `}
+    padding-inline-end: 8px;
   }
 
   .favorite,

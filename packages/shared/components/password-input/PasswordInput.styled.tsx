@@ -62,6 +62,7 @@ const StyledInput = styled(SimpleInput)<{
   input {
     flex: inherit;
     width: calc(100% - 40px);
+    // logical property won't work because of dir: auto
     text-align: ${({ theme }) =>
       theme.interfaceDirection === "rtl" ? "right" : "left"};
     &::-ms-reveal {
@@ -104,6 +105,7 @@ const StyledInput = styled(SimpleInput)<{
     top: 50%;
     transform: translate(-50%, -50%);
 
+    // logical properties won't work correctly here
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
@@ -113,7 +115,7 @@ const StyledInput = styled(SimpleInput)<{
         : css`
             padding-right: 2px;
             right: -16px;
-          `}
+          `};
   }
 
   .prepend-children {

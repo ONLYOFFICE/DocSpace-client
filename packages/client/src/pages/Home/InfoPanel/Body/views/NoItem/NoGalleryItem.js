@@ -32,7 +32,7 @@ const StyledGalleryEmptyScreen = styled.div`
   .info-panel_gallery-empty-screen-img {
     display: block;
     margin: 0 auto;
-    padding: 80px 0 32px 0;
+    padding: 80px 0 32px;
   }
 
   .info-panel_gallery-empty-screen-text {

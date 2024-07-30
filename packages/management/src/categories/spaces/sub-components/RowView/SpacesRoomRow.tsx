@@ -48,17 +48,11 @@ const StyledRoomRow = styled(Row)`
 
   .styled-element {
     width: 32px;
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: 20px;`
-        : `margin-left: 20px`}
+    margin-inline-start: 20px;
   }
 
   .row_context-menu-wrapper {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-left: 18px;`
-        : `margin-right: 18px;`}
+    margin-inline-end: 18px;
   }
 `;
 

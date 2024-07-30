@@ -35,8 +35,7 @@ const StyledNav = styled.nav`
   background-color: ${(props) => props.theme.nav.backgroundColor};
   height: 100%;
 
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl" ? `right: 0;` : `left: 0;`}
+  inset-inline-start: 0;
   overflow-x: hidden;
   overflow-y: auto;
   position: fixed;
@@ -63,8 +62,7 @@ const StyledNav = styled.nav`
 
     bottom: 8px;
 
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl" ? `right: 16px;` : `left: 16px;`}
+    inset-inline-start: 16px;
 
     white-space: nowrap;
     a:focus {

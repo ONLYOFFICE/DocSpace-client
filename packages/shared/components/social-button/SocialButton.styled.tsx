@@ -180,14 +180,7 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
     text-overflow: ${(props) => props.theme.socialButton.text.textOverflow};
     white-space: ${(props) => props.theme.socialButton.text.whiteSpace};
 
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 16px;
-          `
-        : css`
-            padding-right: 16px;
-          `}
+    padding-inline-end: 16px;
   }
 
   svg {

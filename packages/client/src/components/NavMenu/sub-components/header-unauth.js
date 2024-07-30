@@ -38,7 +38,7 @@ import { setLanguageForUnauthorized } from "@docspace/shared/utils/common";
 import i18n from "../../../i18n";
 
 const Header = styled.header`
-  align-items: left;
+  align-items: start;
   background-color: ${(props) => props.theme.header.backgroundColor};
   display: flex;
   width: 100vw;
@@ -79,7 +79,7 @@ const Header = styled.header`
     //margin: auto;
     // margin-right: 8px;
     position: absolute;
-    right: 8px;
+    inset-inline-end: 8px;
     top: 6px;
   }
 `;

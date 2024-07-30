@@ -57,14 +57,8 @@ const StyledContainer = styled.div`
   min-height: 33px;
 
   .table-container_group-menu {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin: 0 -20px 0 0;
-          `
-        : css`
-            margin: 0 0 0 -20px;
-          `}
+    margin-block: 0;
+    margin-inline: -20px 0;
     -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
     width: calc(100% + 40px);
@@ -72,28 +66,15 @@ const StyledContainer = styled.div`
 
     @media ${tablet} {
       height: 61px;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin: 0 -16px 0 0;
-            `
-          : css`
-              margin: 0 0 0 -16px;
-            `}
+      margin-block: 0;
+      margin-inline: -16px 0;
       width: calc(100% + 32px);
     }
 
     @media ${mobile} {
       height: 52px !important;
-
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin: 0 -16px 0 0;
-            `
-          : css`
-              margin: 0 0 0 -16px;
-            `}
+      margin-block: 0;
+      margin-inline: -16px 0;
       width: calc(100% + 32px);
     }
   }

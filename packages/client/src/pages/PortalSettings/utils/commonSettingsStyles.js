@@ -49,14 +49,7 @@ export const commonSettingsStyles = css`
     }
 
     .inherit-title-link {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 7px;
-            `
-          : css`
-              margin-right: 7px;
-            `}
+      margin-inline-end: 7px;
       font-size: 19px;
       font-weight: 600;
     }

@@ -61,10 +61,7 @@ const FillingStatusContainer = styled.div<{
 
   .status-done-icon,
   .status-interrupted-icon {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? `margin-left: 10px;`
-        : `margin-right: 10px;`}
+    margin-inline-end: 10px;
   }
 `;
 
@@ -122,10 +119,7 @@ const AccordionItem = styled.div<{
     align-items: center;
     justify-content: space-between;
 
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? `padding-right: 15px;`
-        : `padding-left: 15px;`}
+    padding-inline-start: 15px;
   }
 
   .accordion-item-wrapper {
@@ -134,24 +128,19 @@ const AccordionItem = styled.div<{
     min-height: 40px;
     margin: ${(props) => (props.isDone || props.isInterrupted ? "0" : "2px 0")};
 
-    ${(props) => {
+    border-inline-start: ${(props) => {
       const borderValue = `2px ${
         props.isDone || props.isInterrupted ? "solid" : "dashed"
       } ${globalColors.gray};`;
 
-      return props.theme.interfaceDirection === "rtl"
-        ? `border-right: ${borderValue}`
-        : `border-left: ${borderValue}`;
-    }}
+      return borderValue;
+    }};
     border-color: ${(props) =>
       (props.isDone && globalColors.lightBlueMain) ||
       (props.isInterrupted && globalColors.mainRed)};
 
     .status-text {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? `margin-right: 15px;`
-          : `margin-left: 15px;`}
+      margin-inline-start: 15px;
       color: ${(props) =>
         props.theme.isBase ? globalColors.lightGrayDark : "#FFFFFF99"};
     }
@@ -162,10 +151,7 @@ const AccordionItem = styled.div<{
     }
 
     .filled-status-text {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? `margin-right: 15px;`
-          : `margin-left: 15px;`}
+      margin-inline-start: 15px;
       color: ${(props) =>
         props.isDone ? globalColors.lightBlueMain : globalColors.lightGrayDark};
     }

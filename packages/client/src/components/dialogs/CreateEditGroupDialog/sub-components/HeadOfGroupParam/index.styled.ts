@@ -28,7 +28,7 @@ import styled from "styled-components";
 
 export const Header = styled.div`
   width: 100%;
-  padding: 8px 0 12px 0;
+  padding: 8px 0 12px;
 
   color: ${(props) =>
     props.theme.createEditRoomDialog.commonParam.descriptionColor};

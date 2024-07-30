@@ -48,8 +48,7 @@ const StyledDropdownDesktop = styled.div`
     z-index: 400;
     top: 0;
 
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl" ? `right: 0;` : `left: 0;`}
+    inset-inline-start: 0;
     box-sizing: border-box;
     width: 100%;
     position: absolute;

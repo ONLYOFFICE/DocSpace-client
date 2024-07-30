@@ -83,7 +83,7 @@ const StyledLinkRow = styled.div`
   }
 
   .external-row-icons {
-    margin-left: auto;
+    margin-inline-start: auto;
     display: flex;
     gap: 16px;
   }
@@ -102,7 +102,7 @@ const StyledLinkRow = styled.div`
     svg {
       position: absolute;
       top: 0px;
-      left: 0px;
+      inset-inline-start: 0px;
     }
 
     width: 12px;

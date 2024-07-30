@@ -62,8 +62,7 @@ const LoginContainer = styled.div<{
   }
 
   @media ${mobile} {
-    margin-left: auto;
-    margin-right: auto;
+    margin-inline: auto;
     max-width: 100%;
     width: calc(100% - 32px);
   }
@@ -159,10 +158,7 @@ const LoginContainer = styled.div<{
           align-items: flex-start;
 
           svg {
-            ${({ theme }) =>
-              theme.interfaceDirection === "rtl"
-                ? `margin-left: 8px !important;`
-                : `margin-right: 8px !important;`}
+            margin-inline-end: 8px !important;
             rect {
               fill: ${(props) => props.theme.checkbox.fillColor};
               stroke: ${(props) => props.theme.checkbox.borderColor};
@@ -198,11 +194,7 @@ const LoginContainer = styled.div<{
 
       .login-link {
         line-height: 18px;
-
-        ${({ theme }) =>
-          theme.interfaceDirection === "rtl"
-            ? `margin-right: auto;`
-            : `margin-left: auto;`}
+        margin-inline-start: auto;
       }
     }
 
@@ -211,10 +203,7 @@ const LoginContainer = styled.div<{
     }
 
     .login-button-dialog {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl"
-          ? `margin-left: 8px;`
-          : `margin-right: 8px;`}
+      margin-inline-end: 8px;
     }
 
     .login-bottom-border {

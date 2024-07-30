@@ -271,7 +271,7 @@ const Template = () => (
       </div>
       <div style={{ padding: "8px 0" }}>
         <div style={{ display: "flex" }}>
-          <div style={{ marginRight: 16 }}>
+          <div style={{ marginInlineEnd: 16 }}>
             <Button
               size={ButtonSize.normal}
               isDisabled={false}
@@ -396,7 +396,7 @@ const Template = () => (
         {/* <BooleanValue>
           {({ value, toggle }: any) => ( */}
         <div style={{ display: "flex" }}>
-          <div style={{ marginRight: 24 }}>
+          <div style={{ marginInlineEnd: 24 }}>
             <Checkbox
               id="id"
               name="name"
@@ -475,7 +475,7 @@ const Template = () => (
           label="Loading..."
         />
       </div>
-      <div style={{ padding: "8px 0", marginLeft: 45 }}>
+      <div style={{ padding: "8px 0", marginInlineStart: 45 }}>
         <Loader
           type={LoaderTypes.oval}
           color="black"
@@ -483,7 +483,7 @@ const Template = () => (
           label="Loading"
         />
       </div>
-      <div style={{ padding: "8px 0", marginLeft: 45 }}>
+      <div style={{ padding: "8px 0", marginInlineStart: 45 }}>
         <Loader
           type={LoaderTypes.dualRing}
           color="black"

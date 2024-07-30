@@ -69,6 +69,7 @@ const StyledModalBackdrop = styled.div.attrs(
   width: 100vw;
   overflow: hidden;
   position: fixed;
+  // doesn't require mirroring for RTL
   left: 0;
   top: 0;
 

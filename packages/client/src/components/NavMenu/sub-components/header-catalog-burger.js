@@ -41,10 +41,7 @@ const StyledIconBox = styled.div`
 
   align-items: center;
 
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `padding-right: 16px;`
-      : `padding-left: 16px;`}
+  padding-inline-start: 16px;
   -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 `;
 

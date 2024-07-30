@@ -50,10 +50,7 @@ export const Wrapper = styled.div`
     background-attachment: fixed;
     background-size: cover;
     position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
+    inset: 0;
     z-index: -1;
 
     @media ${mobile} {
@@ -169,19 +166,12 @@ export const StyledInfo = styled.div`
   .machine-name {
     padding-bottom: 4px;
     padding-top: 4px;
-    padding-left: 8px;
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `padding-right: 8px;`
-        : `padding-left: 8px;`}
+    padding-inline-start: 8px;
     line-height: 20px;
   }
 
   .combo-button {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `padding-right: 8px;`
-        : `padding-left: 8px;`}
+    padding-inline-start: 8px;
   }
 
   .wrapper__language-selector {
@@ -212,9 +202,6 @@ export const StyledAcceptTerms = styled.div`
   padding-bottom: 24px;
 
   .wizard-checkbox svg {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-left: 8px;`
-        : `margin-right: 8px;`}
+    margin-inline-end: 8px;
   }
 `;

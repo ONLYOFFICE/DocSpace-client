@@ -30,14 +30,7 @@ import { globalColors } from "../../themes";
 
 const Wrapper = styled.div`
   .save-button {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 10px;
-          `
-        : css`
-            margin-right: 10px;
-          `}
+    inset-inline-end: 10px;
   }
 
   .hex-color-picker .react-colorful {
@@ -47,7 +40,7 @@ const Wrapper = styled.div`
   }
 
   .react-colorful__saturation {
-    margin: 16px 0 26px 0;
+    margin-block: 16px 26px;
     border-radius: 3px;
   }
 
@@ -102,14 +95,7 @@ const Wrapper = styled.div`
     display: flex;
 
     .apply-button {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 8px;
-            `
-          : css`
-              margin-right: 8px;
-            `}
+      inset-inline-end: 8px;
     }
   }
 

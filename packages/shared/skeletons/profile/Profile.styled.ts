@@ -26,7 +26,7 @@
 
 import styled from "styled-components";
 
-import { tablet, getCorrectFourValuesStyle } from "@docspace/shared/utils";
+import { tablet } from "@docspace/shared/utils";
 import { globalColors } from "../../themes";
 
 export const StyledWrapper = styled.div`
@@ -136,10 +136,7 @@ export const ThemeBlock = styled.div`
     }
 
     .description {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl"
-          ? `padding-right: 23px;`
-          : `padding-left: 23px;`}
+      padding-inline-start: 23px;
     }
   }
 
@@ -161,10 +158,9 @@ export const MobileView = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin-top: 8px;
   padding: 0 16px;
-  margin: ${({ theme }) =>
-    getCorrectFourValuesStyle("0 0 0 -20px", theme.interfaceDirection)};
+  margin-block: 0;
+  margin-inline: -20px 0;
 
   .avatar {
     height: 124px;
@@ -204,10 +200,7 @@ export const MobileView = styled.div`
     }
 
     .check-box {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl"
-          ? `padding-left: 7px;`
-          : `padding-right: 7px;`}
+      padding-inline-end: 7px;
     }
 
     .theme-selection {
@@ -215,10 +208,7 @@ export const MobileView = styled.div`
       flex-direction: column;
       padding-top: 4px;
 
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl"
-          ? `padding-right: 22px;`
-          : `padding-left: 22px;`}
+      padding-inline-start: 22px;
 
       .theme-description {
         padding-bottom: 12px;

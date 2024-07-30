@@ -33,7 +33,7 @@ import { globalColors } from "../../../../themes";
 export const HoverProgress = styled.div`
   display: none;
   position: absolute;
-  left: 0px;
+  inset-inline-start: 0px;
 
   height: 6px;
 
@@ -43,7 +43,7 @@ export const HoverProgress = styled.div`
 
 export const Progress = styled.div`
   position: absolute;
-  left: 0px;
+  inset-inline-start: 0px;
   width: 0;
   height: 4px;
 
@@ -111,6 +111,7 @@ export const PlayerTimelineWrapper = styled.div`
   time {
     display: none;
     position: absolute;
+    // doesn't require mirroring for RTL
     left: 50%;
     top: -25px;
     font-size: 13px;

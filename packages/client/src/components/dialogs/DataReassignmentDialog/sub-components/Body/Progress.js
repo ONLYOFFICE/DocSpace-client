@@ -101,7 +101,7 @@ const StyledProgress = styled.div`
   }
 
   .status-pending {
-    padding-left: 24px;
+    padding-inline-start: 24px;
     height: 20px;
   }
 

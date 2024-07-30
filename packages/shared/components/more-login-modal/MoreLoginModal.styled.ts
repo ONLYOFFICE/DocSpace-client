@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { mobile } from "@docspace/shared/utils";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
@@ -44,14 +44,7 @@ export const ProviderRow = styled.div`
   svg {
     height: 24px;
     width: 24px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-right: 4px;
-          `
-        : css`
-            padding-left: 4px;
-          `}
+    padding-inline-start: 4px;
 
     path {
       fill: ${(props) => !props.theme.isBase && globalColors.white};

@@ -67,14 +67,7 @@ const Header = styled.h4`
   }
 
   img {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 4px;
-          `
-        : css`
-            margin-left: 4px;
-          `}
+    margin-inline-start: 4px;
   }
 `;
 

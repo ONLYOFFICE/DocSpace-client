@@ -32,7 +32,7 @@ import { globalColors } from "../../../../themes";
 export const PlayerVolumeControlWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 10px;
+  margin-inline-start: 10px;
 `;
 
 export const IconWrapper = styled.div`
@@ -87,10 +87,10 @@ export const VolumeWrapper = styled.div`
   height: 28px;
   display: flex;
   align-items: center;
-  padding-left: 9px;
+  padding-inline-start: 9px;
 
   input {
-    margin-right: 15px;
+    margin-inline-end: 15px;
     width: 80%;
     height: 4px;
 

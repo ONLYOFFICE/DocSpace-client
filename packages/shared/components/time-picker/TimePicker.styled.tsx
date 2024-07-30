@@ -60,8 +60,7 @@ const TimeInput = styled.div<{ hasError?: boolean; isFocused?: boolean }>`
   input {
     max-width: 22px;
     padding: 0;
-    padding-left: 2.5px;
-    margin-right: -2.5px;
+    padding-inline: 2.5px -2.5px;
   }
 
   input[type="search"]::-webkit-search-decoration,

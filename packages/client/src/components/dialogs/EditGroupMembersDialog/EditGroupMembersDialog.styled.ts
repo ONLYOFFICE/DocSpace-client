@@ -24,8 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const DEFAULT_MIN_COLUMN_SIZE = 110;
-export const SETTINGS_SIZE = 24;
-export const CONTAINER_MARGIN = 25;
-export const MIN_SIZE_FIRST_COLUMN = 210;
-export const TABLE_HEADER_HEIGHT = 40;
+import styled from "styled-components";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+
+export const StyledModalDialog = styled(ModalDialog)`
+  .modal-body {
+    padding: 0;
+  }
+
+  .search-input {
+    margin: 16px 16px 12px;
+  }
+`;

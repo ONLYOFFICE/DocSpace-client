@@ -1492,7 +1492,7 @@ class FilesStore {
       const splitFilter = filterStorageItem.split(",");
 
       filterData.sortBy = splitFilter[0];
-      filterData.sortOrder = splitFilter[2];
+      filterData.sortOrder = splitFilter[1];
     }
 
     if (!this.settingsStore.withPaging) {

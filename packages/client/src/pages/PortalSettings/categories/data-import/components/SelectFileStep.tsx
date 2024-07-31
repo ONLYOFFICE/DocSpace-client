@@ -86,6 +86,12 @@ const Wrapper = styled.div`
 const FileUploadContainer = styled.div`
   max-width: 350px;
 
+  .cancel-btn {
+    @media ${mobile} {
+      height: 40px;
+    }
+  }
+
   .cancelUploadButton {
     @media ${mobile} {
       margin-bottom: 0;
@@ -413,7 +419,8 @@ const SelectFileStep = (props: SelectFileStepProps) => {
           />
           <div className="cancelUploadButton">
             <Button
-              size={isTablet() ? ButtonSize.medium : ButtonSize.normal}
+              size={isTablet() ? ButtonSize.medium : ButtonSize.small}
+              className="cancel-btn"
               label={t("Common:CancelButton")}
               onClick={onCancel}
               scale={isMobile()}

@@ -228,15 +228,11 @@ const SelectFileStep = (props: SelectFileStepProps) => {
         setIsInfiniteProgress(false);
       }
     } catch (error) {
-      if (error instanceof Error) {
-        if (error.message === "Network Error") {
-          setIsNetworkError(true);
-        }
-        toastr.error(error || t("Common:SomethingWentWrong"));
-        setIsFileError(true);
-        setLoadingStatus("none");
-        clearInterval(uploadInterval.current);
-      }
+      toastr.error(error || t("Common:SomethingWentWrong"));
+      setIsFileError(true);
+      setLoadingStatus("none");
+      clearInterval(uploadInterval.current);
+      setIsNetworkError(true);
     }
   }, [
     failTries,
@@ -278,15 +274,10 @@ const SelectFileStep = (props: SelectFileStepProps) => {
       await initMigrationName(migratorName);
       setLoadingStatus("proceed");
     } catch (error) {
-      if (error instanceof Error) {
-        if (error.message === "Network Error") {
-          setIsNetworkError(true);
-        }
-
-        toastr.error(error || t("Common:SomethingWentWrong"));
-        setIsFileError(true);
-        setLoadingStatus("none");
-      }
+      toastr.error(error || t("Common:SomethingWentWrong"));
+      setIsFileError(true);
+      setLoadingStatus("none");
+      setIsNetworkError(true);
     } finally {
       isAbort.current = false;
       setIsBackupEmpty(false);

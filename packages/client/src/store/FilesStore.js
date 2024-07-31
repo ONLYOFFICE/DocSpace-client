@@ -53,6 +53,7 @@ import config from "PACKAGE_FILE";
 import { thumbnailStatuses } from "@docspace/client/src/helpers/filesConstants";
 import { getDaysRemaining } from "@docspace/shared/utils/common";
 import {
+  LOADER_TIMEOUT,
   MEDIA_VIEW_URL,
   PDF_FORM_DIALOG_KEY,
   ROOMS_PROVIDER_TYPE_NAME,
@@ -380,7 +381,7 @@ class FilesStore {
     socketHelper.on("s:modify-room", (option) => {
       switch (option.cmd) {
         case "create-form":
-          this.wsCreatedPDFForm(option);
+          setTimeout(() => this.wsCreatedPDFForm(option), LOADER_TIMEOUT * 2);
           break;
 
         default:
@@ -3498,6 +3499,7 @@ class FilesStore {
         type,
         hasDraft,
         isForm,
+        isPDFForm: item.isForm,
         requestToken,
         lastOpened,
         quotaLimit,

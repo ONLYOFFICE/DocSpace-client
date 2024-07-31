@@ -1181,15 +1181,15 @@ export async function getPresignedUri(fileId: number | string) {
   return res;
 }
 
-export async function checkFillFormDraft(fileId: number | string) {
-  const res = (await request({
-    method: "post",
-    url: `files/masterform/${fileId}/checkfillformdraft`,
-    data: { fileId },
-  })) as string;
+// export async function checkFillFormDraft(fileId: number | string) {
+//   const res = (await request({
+//     method: "post",
+//     url: `files/masterform/${fileId}/checkfillformdraft`,
+//     data: { fileId },
+//   })) as string;
 
-  return res;
-}
+//   return res;
+// }
 
 export async function fileCopyAs(
   fileId: number,

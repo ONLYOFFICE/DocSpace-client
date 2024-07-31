@@ -187,9 +187,12 @@ const AddEmailsStep = (props: AddEmailsStepProps) => {
           )}
         </>
       ) : (
-        <Text fontWeight={600} lineHeight="20px" className="mb-17">
-          {t("Settings:WithoutEmailHint")}
-        </Text>
+        <>
+          <Text fontWeight={600} lineHeight="20px" className="mb-17">
+            {t("Settings:WithoutEmailHint")}
+          </Text>
+          {Buttons}
+        </>
       )}
 
       {filteredAccounts.length > 0 && Buttons}

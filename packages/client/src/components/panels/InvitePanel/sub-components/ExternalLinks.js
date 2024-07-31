@@ -65,20 +65,26 @@ const ExternalLinks = ({
   setActiveLink,
   activeLink,
   isMobileView,
+  getPortalInviteLink,
 }) => {
   const [actionLinksVisible, setActionLinksVisible] = useState(false);
 
   const inputsRef = useRef();
 
-  const toggleLinks = () => {
+  const toggleLinks = async (e) => {
     if (roomId === -1) {
-      const link = shareLinks.find((l) => l.access === +defaultAccess);
+      if (e?.target?.checked) {
+        const link = shareLinks.find((l) => l.access === defaultAccess);
 
-      setActiveLink(link);
-      copyLink(link.shareLink);
+        link.shareLink = await getPortalInviteLink(defaultAccess);
+
+        setActiveLink(link);
+        copyLink(link.shareLink);
+      }
     } else {
       !externalLinksVisible ? editLink() : disableLink();
     }
+
     onChangeExternalLinksVisible(!externalLinksVisible);
   };
 
@@ -107,10 +113,12 @@ const ExternalLinks = ({
     setActiveLink(activeLink);
   };
 
-  const onSelectAccess = (access) => {
+  const onSelectAccess = async (access) => {
     let link = null;
     if (roomId === -1) {
       link = shareLinks.find((l) => l.access === access.access);
+
+      link.shareLink = await getPortalInviteLink(access.access);
 
       setActiveLink(link);
     } else {
@@ -255,17 +263,21 @@ const ExternalLinks = ({
   );
 };
 
-export default inject(({ userStore, dialogsStore, filesStore }) => {
-  const { isOwner } = userStore.user;
-  const { invitePanelOptions } = dialogsStore;
-  const { setInvitationLinks } = filesStore;
-  const { roomId, hideSelector, defaultAccess } = invitePanelOptions;
+export default inject(
+  ({ userStore, dialogsStore, filesStore, peopleStore }) => {
+    const { isOwner } = userStore.user;
+    const { invitePanelOptions } = dialogsStore;
+    const { setInvitationLinks } = filesStore;
+    const { roomId, hideSelector, defaultAccess } = invitePanelOptions;
+    const { getPortalInviteLink } = peopleStore.inviteLinksStore;
 
-  return {
-    setInvitationLinks,
-    roomId,
-    hideSelector,
-    defaultAccess,
-    isOwner,
-  };
-})(observer(ExternalLinks));
+    return {
+      setInvitationLinks,
+      roomId,
+      hideSelector,
+      defaultAccess,
+      isOwner,
+      getPortalInviteLink,
+    };
+  },
+)(observer(ExternalLinks));

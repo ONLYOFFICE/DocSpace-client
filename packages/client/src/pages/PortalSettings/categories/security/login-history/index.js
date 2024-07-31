@@ -93,7 +93,6 @@ const LoginHistory = (props) => {
           storagePeriod={t("StoragePeriod")}
           saveButtonLabel={t("Common:SaveButton")}
           cancelButtonLabel={t("Common:CancelButton")}
-          downloadText={t("DownloadStatisticsText")}
           lifetime={securityLifetime.loginHistoryLifeTime}
           securityLifetime={securityLifetime}
           setLifetimeAuditSettings={setLifetimeAuditSettings}

@@ -27,24 +27,16 @@
 
 import styled from "styled-components";
 
-import { mobile } from "@docspace/shared/utils";
+import { mobile, mobileMore } from "@docspace/shared/utils";
 
 import type { CompletedFormLayoutProps } from "./CompletedForm.types";
 
-export const CompletedFormLayout = styled.section<CompletedFormLayoutProps>`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-
+export const ContainerCompletedForm = styled.section<CompletedFormLayoutProps>`
   box-sizing: border-box;
 
   * {
     box-sizing: border-box;
   }
-
-  width: 100%;
-  min-height: 100dvh;
-  padding: 100px 16px 16px;
 
   background-image: ${(props) => props.bgPattern};
   background-repeat: no-repeat;
@@ -52,8 +44,44 @@ export const CompletedFormLayout = styled.section<CompletedFormLayoutProps>`
   background-size: cover;
   background-position: center;
 
+  width: 100%;
+  min-height: 100dvh;
+  height: 100%;
+
+  .scroller {
+    > .scroll-body {
+      display: flex;
+      flex-direction: column;
+      padding-inline-end: 16px !important;
+    }
+  }
+
+  .completed-form__default-layout {
+    padding: clamp(42px, 8vh, 100px) 16px 16px;
+
+    picture {
+    }
+  }
+
+  @media ${mobile} {
+    .completed-form__default-layout {
+      padding: 0px 16px 16px;
+    }
+
+    background-image: none;
+  }
+`;
+
+export const CompletedFormLayout = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  padding: clamp(42px, 8vh, 100px) 0px 16px 16px;
+
   picture {
-    margin-bottom: clamp(40px, 10vh, 125px);
+    margin-bottom: clamp(40px, 8vh, 125px);
+    user-select: none;
   }
 
   .link {
@@ -68,9 +96,14 @@ export const CompletedFormLayout = styled.section<CompletedFormLayoutProps>`
     margin-top: 24px;
   }
 
-  @media ${mobile} {
-    background-image: none;
+  @media ${mobileMore} and (max-height: 650px) {
+    padding-top: 42px;
+    .completed-form__logo {
+      margin-bottom: 40px;
+    }
+  }
 
+  @media ${mobile} {
     padding-top: 0px;
 
     .completed-form__icon {
@@ -94,6 +127,11 @@ export const CompletedFormLayout = styled.section<CompletedFormLayoutProps>`
         height: 24px;
         align-self: center;
       }
+    }
+
+    .completed-form__empty {
+      gap: 20px;
+      margin-top: 24px;
     }
   }
 `;
@@ -227,6 +265,19 @@ export const FormNumberWrapper = styled.div`
   flex-direction: column;
 
   grid-area: form-number;
+
+  .form-number--big {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  @media ${mobileMore} {
+    .form-number--big {
+      font-size: 23px;
+      line-height: 28px;
+    }
+  }
 
   > div {
     justify-content: center;

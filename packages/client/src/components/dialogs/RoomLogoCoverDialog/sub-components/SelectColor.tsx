@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styled, { css } from "styled-components";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";
@@ -35,12 +35,12 @@ import { SelectColorProps } from "../RoomLogoCoverDialog.types";
 
 interface ColorItemProps {
   isEmptyColor?: boolean;
+  isSelected?: boolean;
 }
 
 const StyledColorItem = styled.div<ColorItemProps>`
   width: 30px;
   height: 30px;
-  margin-right: 10px;
   margin-top: 8px;
   border-radius: 50%;
   background-color: ${(props) => props.color};
@@ -67,7 +67,6 @@ const StyledColorItem = styled.div<ColorItemProps>`
 const SelectedColorItem = styled.div`
   width: 28px;
   height: 28px;
-  margin-right: 8px;
   margin-top: 6px;
   border-radius: 50%;
   border: ${(props) => `solid 2px ${props.color}`};
@@ -90,6 +89,8 @@ export const SelectColor = ({
   onChangeColor,
 }: SelectColorProps) => {
   const [openColorPicker, setOpenColorPicker] = useState<boolean>(false);
+
+  const iconRef = useRef(null);
 
   const onApply = (color: string) => {
     setOpenColorPicker(false);
@@ -115,7 +116,11 @@ export const SelectColor = ({
             />
           ),
         )}
-        <StyledColorItem isEmptyColor isSelected={openColorPicker}>
+        <StyledColorItem
+          isEmptyColor
+          isSelected={openColorPicker}
+          ref={iconRef}
+        >
           <IconButton
             className="select-color-plus-icon"
             size={16}
@@ -126,10 +131,9 @@ export const SelectColor = ({
         </StyledColorItem>
         <DropDown
           directionX="right"
-          manualY="170px"
-          manualX="-163px"
+          forwardedRef={iconRef}
           withBackdrop={false}
-          isDefaultMode={false}
+          isDefaultMode
           open={openColorPicker}
           clickOutsideAction={() => setOpenColorPicker(false)}
         >

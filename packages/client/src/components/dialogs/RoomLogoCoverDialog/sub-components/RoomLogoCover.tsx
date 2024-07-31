@@ -23,10 +23,12 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 import { CustomLogo } from "./CustomLogo";
 import { SelectColor } from "./SelectColor";
@@ -35,6 +37,7 @@ import { SelectIcon } from "./SelectIcon";
 const logoColors = [
   "#FF6680",
   "#FF8F40",
+  "#F2D230",
   "#61C059",
   "#1FCECB",
   "#5CC3F7",
@@ -48,6 +51,7 @@ const RoomLogoCoverContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 16px;
   }
 
   .color-name {
@@ -60,10 +64,15 @@ const RoomLogoCoverContainer = styled.div`
   .cover-icon-container {
     display: flex;
     flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .colors-container {
+    flex-wrap: nowrap;
   }
 
   .select-color-container {
-    margin: 14px 0;
+    margin-bottom: 14px;
   }
 `;
 
@@ -74,27 +83,31 @@ const RoomLogoCover = (props) => {
   const [icon, setIcon] = useState<string>("Aa");
   const [withoutIcon, setWithoutIcon] = useState<boolean>(true);
 
+  const scrollRef = useRef(null);
+
   return (
     <RoomLogoCoverContainer>
       <div className="room-logo-container">
         <CustomLogo icon={icon} color={color} withoutIcon={withoutIcon} />
       </div>
-      <div className="color-select-container">
-        <SelectColor
-          t={t}
-          selectedColor={color}
-          logoColors={logoColors}
-          onChangeColor={setColor}
-        />
-      </div>
-      <div className="icon-select-container">
-        <SelectIcon
-          t={t}
-          withoutIcon={withoutIcon}
-          setIcon={setIcon}
-          setWithoutIcon={setWithoutIcon}
-        />
-      </div>
+      <Scrollbar style={{ height: "400px" }} ref={scrollRef}>
+        <div className="color-select-container">
+          <SelectColor
+            t={t}
+            selectedColor={color}
+            logoColors={logoColors}
+            onChangeColor={setColor}
+          />
+        </div>
+        <div className="icon-select-container">
+          <SelectIcon
+            t={t}
+            withoutIcon={withoutIcon}
+            setIcon={setIcon}
+            setWithoutIcon={setWithoutIcon}
+          />
+        </div>
+      </Scrollbar>
     </RoomLogoCoverContainer>
   );
 };

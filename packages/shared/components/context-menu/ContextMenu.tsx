@@ -248,24 +248,6 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
           left = event.pageX - width + 1;
         }
 
-        // if (
-        //   isTabletUtils() &&
-        //   (height > 483 ||
-        //     (isMobileOnly && window.innerHeight < window.innerWidth))
-        // ) {
-        //   const article = document.getElementById("article-container");
-
-        //   let currentArticleWidth = 0;
-        //   if (article) {
-        //     currentArticleWidth = article.offsetWidth;
-        //   }
-
-        //   setChangeView(true);
-        //   setArticleWidth(currentArticleWidth);
-
-        //   return;
-        // }
-
         if (mobileView) {
           setChangeView(true);
           setArticleWidth(0);

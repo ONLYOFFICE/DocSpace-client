@@ -105,6 +105,17 @@ const ArticleBodyContent = (props) => {
         case myFolderId:
           const myFilter = FilesFilter.getDefault();
           myFilter.folder = folderId;
+
+          const filterStorageItem =
+            userId && localStorage.getItem(`UserFilter=${userId}`);
+
+          if (filterStorageItem) {
+            const splitFilter = filterStorageItem.split(",");
+
+            myFilter.sortBy = splitFilter[0];
+            myFilter.sortOrder = splitFilter[1];
+          }
+
           params = myFilter.toUrlParams();
 
           path = getCategoryUrl(CategoryType.Personal);
@@ -123,6 +134,17 @@ const ArticleBodyContent = (props) => {
         case recycleBinFolderId:
           const recycleBinFilter = FilesFilter.getDefault();
           recycleBinFilter.folder = folderId;
+
+          const filterStorageTrash =
+            userId && localStorage.getItem(`UserFilterTrash=${userId}`);
+
+          if (filterStorageTrash) {
+            const splitFilterTrash = filterStorageTrash.split(",");
+
+            recycleBinFilter.sortBy = splitFilterTrash[0];
+            recycleBinFilter.sortOrder = splitFilterTrash[1];
+          }
+
           params = recycleBinFilter.toUrlParams();
           path = getCategoryUrl(CategoryType.Trash);
 

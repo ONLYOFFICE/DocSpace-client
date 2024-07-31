@@ -91,10 +91,8 @@ const SubMenu = (props: {
   ) => {
     const { disabled, url, onClick, items, action, label } = item;
 
-    if (label && (items || item.onLoad)) {
+    if (isMobile() && label && (items || item.onLoad)) {
       e.preventDefault();
-
-      if (!isMobileDevice) return;
 
       if (items) onMobileItemClick?.(e, label as string, items, undefined);
       else if (item.onLoad)

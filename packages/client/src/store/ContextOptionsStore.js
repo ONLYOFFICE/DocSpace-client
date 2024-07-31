@@ -188,7 +188,7 @@ class ContextOptionsStore {
   };
 
   onClickLinkFillForm = (item) => {
-    if (!item.startFilling)
+    if (!item.startFilling && item.isPDFForm)
       return this.dialogsStore.setFillPDFDialogData(true, item);
 
     return this.gotoDocEditor(false, item);

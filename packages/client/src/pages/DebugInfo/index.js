@@ -49,7 +49,7 @@ const StyledModalDialog = styled(ModalDialog)`
     --color-border-muted: hsla(210, 18%, 87%, 1);
 
     .modal-footer {
-      padding-right: 4px;
+      padding-inline-end: 4px;
     }
 
     a {

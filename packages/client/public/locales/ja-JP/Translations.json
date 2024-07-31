@@ -21,7 +21,6 @@
   "FolderTitleWebDav": "WebDAVディレクトリ",
   "FolderTitleYandex": "Yandexディレクトリ",
   "FormTemplates": "フォームのテンプレート",
-  "LinkCopySuccess": "リンクがクリップボードにコピーされました",
   "LinkHasExpiredAndHasBeenDisabled": "リンクは有効期限が切れたため無効になっています",
   "LinkValidTime": "このリンクは {{days_count}} 日間のみ有効です。",
   "NewForm": "PDFフォーム",

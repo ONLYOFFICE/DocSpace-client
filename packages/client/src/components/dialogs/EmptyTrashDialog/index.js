@@ -39,10 +39,7 @@ const StyledModal = styled(ModalDialogContainer)`
   .cancel-btn {
     display: inline-block;
 
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: 8px;`
-        : `margin-left: 8px;`}
+    margin-inline-start: 8px;
   }
 `;
 

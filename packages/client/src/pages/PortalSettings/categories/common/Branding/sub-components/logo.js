@@ -66,15 +66,19 @@ const Logo = (props) => {
         {isEditor ? (
           <div className="logos-editor-wrapper" onClick={onLogoClick}>
             <img
-              className="logo-docs-editor background-green"
-              src={currentLogo}
-            />
-            <img
               className="logo-docs-editor background-blue"
               src={currentLogo}
             />
             <img
+              className="logo-docs-editor background-red"
+              src={currentLogo}
+            />
+            <img
               className="logo-docs-editor background-orange"
+              src={currentLogo}
+            />
+            <img
+              className="logo-docs-editor background-green"
               src={currentLogo}
             />
           </div>

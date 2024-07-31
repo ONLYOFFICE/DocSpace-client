@@ -61,15 +61,14 @@ import {
   RoomsType,
   FilesSelectorFilterTypes,
   FolderType,
+  FilterType,
 } from "@docspace/shared/enums";
 
 import styled, { css } from "styled-components";
 
 import { resendInvitesAgain } from "@docspace/shared/api/people";
-import { getCorrectFourValuesStyle } from "@docspace/shared/utils";
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isTablet } from "react-device-detect";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledButton = styled(Button)`
   font-weight: 700;
@@ -115,8 +114,8 @@ const StyledButton = styled(Button)`
     justify-content: space-between;
     vertical-align: middle;
     box-sizing: border-box;
-    padding: ${({ theme }) =>
-      getCorrectFourValuesStyle("5px 14px 5px 12px", theme.interfaceDirection)};
+    padding-block: 5px;
+    padding-inline: 12px 14px;
     line-height: 22px;
     border-radius: 3px;
 
@@ -375,11 +374,10 @@ const ArticleMainButtonContent = (props) => {
         id: "actions_upload-from-docspace",
         className: "main-button_drop-down",
         icon: ActionsUploadReactSvgUrl,
-        label: t("Common:FromPortal", { productName: PRODUCT_NAME }),
+        label: t("Common:FromPortal", { productName: t("Common:ProductName") }),
         key: "actions_upload-from-docspace",
         disabled: false,
-        onClick: () =>
-          onShowFormRoomSelectFileDialog(FilesSelectorFilterTypes.PDF),
+        onClick: () => onShowFormRoomSelectFileDialog(FilterType.PDFForm),
       };
 
       const uploadFormDevice = {
@@ -624,7 +622,9 @@ const ArticleMainButtonContent = (props) => {
               id: "invite_portal-administrator",
               className: "main-button_drop-down",
               icon: PersonAdminReactSvgUrl,
-              label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
+              label: t("Common:PortalAdmin", {
+                productName: t("Common:ProductName"),
+              }),
               onClick: onInvite,
               action: EmployeeType.Admin,
               key: "administrator",

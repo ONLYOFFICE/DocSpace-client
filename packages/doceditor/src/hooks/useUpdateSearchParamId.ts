@@ -2,7 +2,7 @@ import React from "react";
 
 const useUpdateSearchParamId = (
   fileId: string | undefined,
-  hash: string | undefined,
+  hash?: string | undefined,
 ) => {
   React.useLayoutEffect(() => {
     if (!fileId) return;
@@ -24,4 +24,3 @@ const useUpdateSearchParamId = (
 };
 
 export default useUpdateSearchParamId;
-

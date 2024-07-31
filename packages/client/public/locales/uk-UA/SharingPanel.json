@@ -3,6 +3,5 @@
   "FormFilling": "Заповнення форми",
   "LinkName": "Назва посилання",
   "ShareEmailBody": "Вам надано доступ до документа {{itemName}}. Клацніть посилання нижче, щоб відкрити документ зараз: {{shareLink}}.",
-  "ShareEmailSubject": "Вам надано доступ до документа {{itemName}}",
-  "SharingSettingsTitle": "Параметри спільного доступу"
+  "ShareEmailSubject": "Вам надано доступ до документа {{itemName}}"
 }

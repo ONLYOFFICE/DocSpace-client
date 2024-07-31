@@ -27,8 +27,11 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import {
   getInvitationLinks,
+  getInvitationLink,
   getShortenedLink,
 } from "@docspace/shared/api/portal";
+
+import { EmployeeType } from "@docspace/shared/enums";
 
 class InviteLinksStore {
   peopleStore = null;
@@ -59,9 +62,7 @@ class InviteLinksStore {
   };
 
   getPortalInviteLinks = async () => {
-    const isViewerAdmin = !this.peopleStore.authStore.isVisitor;
-
-    if (!isViewerAdmin) return Promise.resolve();
+    if (this.peopleStore.authStore.isVisitor) return Promise.resolve();
 
     const links = await getInvitationLinks();
 
@@ -71,6 +72,31 @@ class InviteLinksStore {
       this.setAdminLink(links.adminLink);
       this.setCollaboratorLink(links.collaboratorLink);
     });
+  };
+
+  getPortalInviteLink = async (type) => {
+    if (this.peopleStore.authStore.isVisitor) return Promise.resolve();
+
+    const link = await getInvitationLink(type);
+
+    runInAction(() => {
+      switch (type) {
+        case EmployeeType.User:
+          this.setUserLink(link);
+          break;
+        case EmployeeType.Guest:
+          this.setGuestLink(link);
+          break;
+        case EmployeeType.Admin:
+          this.setAdminLink(link);
+          break;
+        case EmployeeType.Collaborator:
+          this.setCollaboratorLink(link);
+          break;
+      }
+    });
+
+    return link;
   };
 
   getShortenedLink = async (link, forUser = false) => {

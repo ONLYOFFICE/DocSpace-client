@@ -29,6 +29,8 @@ import styled, { css } from "styled-components";
 import { Base } from "@docspace/shared/themes";
 import { desktop, mobile } from "@docspace/shared/utils";
 
+// doesn't require mirroring for RTL
+
 const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
   background: ${(props) => props.theme.errorContainer.background};
   cursor: default;
@@ -44,7 +46,7 @@ const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 auto;
+  margin: 0 auto 8px 0;
   padding-top: 100px;
   border: 0;
   box-sizing: border-box;

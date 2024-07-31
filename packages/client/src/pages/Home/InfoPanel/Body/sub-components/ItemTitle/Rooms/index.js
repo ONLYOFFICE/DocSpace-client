@@ -116,7 +116,9 @@ const RoomsItemHeader = ({
         />
       </div>
 
-      <Text className="text">{selection.title}</Text>
+      <Text className="text" title={selection.title}>
+        {selection.title}
+      </Text>
 
       <div className="info_title-icons">
         {isRoomMembersPanel && (

@@ -40,7 +40,6 @@ import PriceCalculation from "./PriceCalculation";
 import BenefitsContainer from "./BenefitsContainer";
 import ContactContainer from "./ContactContainer";
 import PayerInformationContainer from "./PayerInformationContainer";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledBody = styled.div`
   max-width: 660px;
@@ -102,14 +101,7 @@ const StyledBody = styled.div`
       margin: auto 0;
     }
     .payment-info_managers-price {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 6px;
-            `
-          : css`
-              margin-right: 6px;
-            `}
+      margin-inline-end: 6px;
     }
   }
 `;
@@ -148,10 +140,14 @@ const PaymentContainer = (props) => {
               <Text isBold>{t("ManagerTypesDescription")}</Text>
               <br />
               <Text isBold>
-                {t("Common:PortalAdmin", { productName: PRODUCT_NAME })}
+                {t("Common:PortalAdmin", {
+                  productName: t("Common:ProductName"),
+                })}
               </Text>
               <Text>
-                {t("AdministratorDescription", { productName: PRODUCT_NAME })}
+                {t("AdministratorDescription", {
+                  productName: t("Common:ProductName"),
+                })}
               </Text>
               <br />
               <Text isBold>{t("Common:RoomAdmin")}</Text>
@@ -286,7 +282,7 @@ const PaymentContainer = (props) => {
           </Trans>{" "}
           <Text as="span" fontSize="14px" lineHeight="16px">
             {t("GracePeriodActivatedDescription", {
-              productName: PRODUCT_NAME,
+              productName: t("Common:ProductName"),
             })}
           </Text>
         </Text>

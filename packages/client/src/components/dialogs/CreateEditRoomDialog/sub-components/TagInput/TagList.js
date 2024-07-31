@@ -42,10 +42,7 @@ const StyledTagList = styled.div`
     margin: 0;
 
     .tag-icon {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl"
-          ? `margin-right: 10px;`
-          : `margin-left: 10px;`}
+      margin-inline-start: 10px;
       svg {
         width: 10px;
         height: 10px;

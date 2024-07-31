@@ -52,14 +52,7 @@ const StyledCurrentTariffContainer = styled.div`
 
   div {
     padding-bottom: 8px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 24px;
-          `
-        : css`
-            margin-right: 24px;
-          `}
+    margin-inline-end: 24px;
   }
 
   p {
@@ -67,14 +60,7 @@ const StyledCurrentTariffContainer = styled.div`
     color: ${(props) => props.theme.client.settings.payment.tariffText};
     .current-tariff_count {
       color: ${(props) => props.theme.client.settings.payment.tariffText};
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: 4px;
-            `
-          : css`
-              margin-left: 4px;
-            `}
+      margin-inline-start: 4px;
     }
   }
 `;

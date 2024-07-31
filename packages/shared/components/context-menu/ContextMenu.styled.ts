@@ -33,19 +33,11 @@ const styledTabletView = css<{ articleWidth: number }>`
   width: ${(props) => props.theme.newContextMenu.devices.tabletWidth};
   max-width: ${(props) => props.theme.newContextMenu.devices.tabletWidth};
   max-height: ${(props) => props.theme.newContextMenu.devices.maxHeight};
-  left: ${(props) =>
+  inset-inline-start: ${(props) =>
     props.articleWidth
       ? `${props.articleWidth}px`
       : props.theme.newContextMenu.devices.left};
-  right: ${(props) => props.theme.newContextMenu.devices.right};
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl" &&
-    css`
-      left: ${props.theme.newContextMenu.devices.right};
-      right: ${props.articleWidth
-        ? `${props.articleWidth}px`
-        : props.theme.newContextMenu.devices.left};
-    `}
+  inset-inline-end: ${(props) => props.theme.newContextMenu.devices.right};
   bottom: ${(props) => props.theme.newContextMenu.devices.bottom};
   margin: ${(props) => props.theme.newContextMenu.devices.margin};
 `;
@@ -55,13 +47,7 @@ const styledMobileView = css`
   width: ${(props) => props.theme.newContextMenu.devices.mobileWidth};
   max-width: ${(props) => props.theme.newContextMenu.devices.mobileWidth};
   max-height: ${(props) => props.theme.newContextMenu.devices.maxHeight};
-  left: ${(props) => props.theme.newContextMenu.devices.left};
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl" &&
-    css`
-      left: 0;
-      right: ${props.theme.newContextMenu.devices.left};
-    `}
+  inset-inline-start: ${(props) => props.theme.newContextMenu.devices.left};
   bottom: ${(props) => props.theme.newContextMenu.devices.bottom};
   border-radius: ${(props) => props.theme.newContextMenu.mobileBorderRadius};
 `;
@@ -72,7 +58,7 @@ export const SubMenuItem = styled.li<{ noHover?: boolean }>`
   justify-content: space-between;
 
   & > div {
-    margin-right: 12px;
+    margin-inline-end: 12px;
   }
 
   & label {
@@ -187,13 +173,7 @@ const StyledContextMenu = styled.div<{
     .avatar-wrapper {
       min-width: 32px;
       box-sizing: border-box;
-      margin-right: 8px;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl" &&
-        css`
-          margin-right: 0px;
-          margin-left: 8px;
-        `}
+      margin-inline-end: 8px;
     }
 
     .text {
@@ -211,6 +191,8 @@ const StyledContextMenu = styled.div<{
         `}
 
       color: ${(props) => props.theme.menuItem.text.color};
+
+      // logical property won't work because of "dir: auto"
       text-align: ${({ theme }) =>
         theme.interfaceDirection === "rtl" ? `right` : `left`};
       text-transform: none;
@@ -244,12 +226,10 @@ const StyledContextMenu = styled.div<{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-left: 4px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl" &&
-      css`
-        margin-left: -4px;
-      `}
+
+    // doesn't require margin-right in RTL
+    margin-left: ${({ theme }) =>
+      theme.interfaceDirection === "rtl" ? "-4px" : "4px"};
     margin-top: -4px;
   }
 
@@ -372,24 +352,17 @@ const StyledContextMenu = styled.div<{
       }
     }
 
-    margin-right: 8px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl" &&
-      css`
-        margin-right: 0px;
-        margin-left: 8px;
-      `}
+    margin-inline-end: 8px;
   }
 
   .p-submenu-icon {
-    margin-left: auto;
-    padding-left: 8px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl" &&
+    margin-inline-start: auto;
+    padding-inline-start: 8px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl" &&
       css`
+        transform-box: content-box;
         transform: scaleX(-1);
-        margin-right: auto;
-        margin-left: 0;
       `}
     path[fill] {
       fill: ${(props) => props.theme.dropDownItem.icon.color};

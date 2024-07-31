@@ -45,6 +45,7 @@ type TSearchParams = {
   fromFile?: string;
   fromTemplate?: string;
   action?: string;
+  toForm?: string;
 };
 
 async function Page({ searchParams }: { searchParams: TSearchParams }) {
@@ -65,6 +66,7 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
     fromTemplate,
     formId,
     action,
+    toForm,
   } = searchParams;
 
   if (!parentId || !fileTitle) redirect(baseURL);
@@ -87,7 +89,14 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
 
   const { file, error } =
     fromFile && templateId
-      ? await fileCopyAs(templateId, fileTitle, parentId, false, password)
+      ? await fileCopyAs(
+          templateId,
+          fileTitle,
+          parentId,
+          false,
+          password,
+          toForm,
+        )
       : await createFile(parentId, fileTitle, templateId, formId);
 
   if (!file) {
@@ -121,6 +130,7 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
     }
 
     const redirectURL = `/doceditor?${searchParams.toString()}`;
+
     return permanentRedirect(redirectURL);
   }
 

@@ -225,9 +225,7 @@ const ActivateUserForm = (props) => {
                 isVertical={true}
                 labelVisible={false}
                 hasError={isPasswordErrorShow && !passwordValid}
-                errorMessage={`${t(
-                  "Common:PasswordLimitMessage",
-                )}: ${getPasswordErrorMessage(t, settings)}`}
+                errorMessage={t("Common:IncorrectPassword")}
               >
                 <PasswordInput
                   className="confirm-input"
@@ -257,6 +255,7 @@ const ActivateUserForm = (props) => {
                     "Common:PasswordLimitSpecialSymbols",
                   )}`}
                   generatePasswordTitle={t("Wizard:GeneratePassword")}
+                  tooltipAllowedCharacters={`${t("Common:AllowedCharacters")}: ${ALLOWED_PASSWORD_CHARACTERS}`}
                   // If need copy credentials use t("EmailAndPasswordCopiedToClipboard")
                 />
               </FieldContainer>

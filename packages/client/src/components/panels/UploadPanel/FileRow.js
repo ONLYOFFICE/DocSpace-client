@@ -53,6 +53,8 @@ const StyledFileRow = styled(Row)`
 
   height: 100%;
 
+  padding-inline-end: 16px;
+
   .styled-element,
   .row_content {
     ${(props) =>
@@ -67,14 +69,7 @@ const StyledFileRow = styled(Row)`
   }
 
   .styled-element {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 8px !important;
-          `
-        : css`
-            margin-right: 8px !important;
-          `}
+    margin-inline-end: 8px !important;
   }
 
   .upload-panel_file-name {
@@ -94,29 +89,14 @@ const StyledFileRow = styled(Row)`
   .password-input {
     position: absolute;
     top: 48px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            right: 16px;
-          `
-        : css`
-            left: 16px;
-          `}
+    inset-inline: 0;
     max-width: 470px;
     width: calc(100% - 16px);
     display: flex;
   }
 
   #conversion-button {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 8px;
-          `
-        : css`
-            margin-left: 8px;
-          `}
-
+    margin-inline-start: 8px;
     width: 100%;
     max-width: 78px;
   }
@@ -127,16 +107,8 @@ const StyledFileRow = styled(Row)`
   }
 
   .upload_panel-icon {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: auto;
-            padding-right: 16px;
-          `
-        : css`
-            margin-left: auto;
-            padding-left: 16px;
-          `}
+    margin-inline-start: auto;
+    padding-inline-start: 16px;
 
     line-height: 24px;
     display: flex;
@@ -149,15 +121,7 @@ const StyledFileRow = styled(Row)`
     }
 
     .enter-password {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 8px;
-            `
-          : css`
-              margin-right: 8px;
-            `}
-
+      margin-inline-end: 8px;
       text-decoration: underline dashed;
       cursor: pointer;
     }
@@ -168,14 +132,7 @@ const StyledFileRow = styled(Row)`
   }
 
   .convert_icon {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 12px;
-          `
-        : css`
-            padding-right: 12px;
-          `}
+    padding-inline-end: 12px;
   }
 
   .upload-panel_file-row-link {
@@ -321,6 +278,11 @@ class FileRow extends Component {
 
     const onMediaClick = () => this.onMediaClick(item.fileId);
 
+    const onFileClick = (url) => {
+      if (!url) return;
+      window.open(url, downloadInCurrentTab ? "_self" : "_blank");
+    };
+
     return (
       <>
         <StyledFileRow
@@ -350,11 +312,14 @@ class FileRow extends Component {
               ) : (
                 <div className="upload-panel_file-name">
                   <Link
+                    onClick={() =>
+                      onFileClick(item.fileInfo ? item.fileInfo.webUrl : "")
+                    }
                     fontWeight="600"
                     color={item.error && "#A3A9AE"}
                     truncate
-                    href={item.fileInfo ? item.fileInfo.webUrl : ""}
-                    target={downloadInCurrentTab ? "_self" : "_blank"}
+                    // href={item.fileInfo ? item.fileInfo.webUrl : ""}
+                    // target={downloadInCurrentTab ? "_self" : "_blank"}
                   >
                     {name}
                     {fileExtension}

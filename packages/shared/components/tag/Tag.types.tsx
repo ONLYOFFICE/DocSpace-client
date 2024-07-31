@@ -52,6 +52,7 @@ export interface TagProps {
   icon?: string;
   isDefault?: boolean;
   isLast?: boolean;
+  removeTagIcon?: boolean;
   roomType?: number;
   providerType?: number;
 }

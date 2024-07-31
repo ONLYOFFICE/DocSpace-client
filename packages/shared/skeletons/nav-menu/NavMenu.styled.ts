@@ -35,11 +35,11 @@ const StyledHeader = styled.div`
 
   grid-template-rows: 1fr;
   grid-column-gap: 16px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-inline-start: 20px;
+  padding-inline-end: 20px;
   @media ${tablet} {
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-inline-start: 16px;
+    padding-inline-end: 16px;
   }
 `;
 

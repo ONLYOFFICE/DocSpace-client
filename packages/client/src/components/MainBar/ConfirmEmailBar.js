@@ -31,7 +31,6 @@ import styled from "styled-components";
 import { SnackBar } from "@docspace/shared/components/snackbar";
 
 import { Link } from "@docspace/shared/components/link";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const ConfirmEmailBar = ({
   t,
@@ -47,7 +46,7 @@ const ConfirmEmailBar = ({
       <SnackBar
         headerText={t("ConfirmEmailHeader", {
           email: userEmail,
-          productName: PRODUCT_NAME,
+          productName: t("Common:ProductName"),
         })}
         text={
           <>

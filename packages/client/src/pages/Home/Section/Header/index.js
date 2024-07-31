@@ -56,14 +56,8 @@ const StyledContainer = styled.div`
   min-height: 33px;
 
   .table-container_group-menu {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin: 0 -20px 0 0;
-          `
-        : css`
-            margin: 0 0 0 -20px;
-          `}
+    margin-block: 0;
+    margin-inline: -20px 0;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
     width: calc(100% + 40px);
@@ -71,28 +65,15 @@ const StyledContainer = styled.div`
 
     @media ${tablet} {
       height: 61px;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin: 0 -16px 0 0;
-            `
-          : css`
-              margin: 0 0 0 -16px;
-            `}
+      margin-block: 0;
+      margin-inline: -16px 0;
       width: calc(100% + 32px);
     }
 
     @media ${mobile} {
       height: 52px !important;
-
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin: 0 -16px 0 0;
-            `
-          : css`
-              margin: 0 0 0 -16px;
-            `}
+      margin-block: 0;
+      margin-inline: -16px 0;
       width: calc(100% + 32px);
     }
   }
@@ -259,6 +240,8 @@ const SectionHeaderContent = (props) => {
   };
 
   const onContextOptionsClick = () => {
+    if (isInsideGroup) return;
+
     setBufferSelection(selectedFolder);
   };
 
@@ -646,7 +629,6 @@ export default inject(
       pathParts,
       navigationPath,
       security,
-      canCopyPublicLink,
       rootFolderType,
       shared,
     } = selectedFolderStore;
@@ -663,8 +645,6 @@ export default inject(
 
     const isRoom = !!roomType;
     const isPublicRoomType = roomType === RoomsType.PublicRoom;
-    const isCustomRoomType = roomType === RoomsType.CustomRoom;
-    const isFormRoomType = roomType === RoomsType.FormRoom;
 
     const {
       onCreateAndCopySharedLink,
@@ -714,17 +694,12 @@ export default inject(
 
     const isArchive = rootFolderType === FolderType.Archive;
 
-    const sharedItem = navigationPath.find((r) => r.shared);
+    const isShared = shared || navigationPath.find((r) => r.shared);
 
     const showNavigationButton =
-      isLoading || !security?.CopyLink
+      isLoading || !security?.CopyLink || isPublicRoom || isArchive
         ? false
-        : (!isPublicRoom &&
-            !isArchive &&
-            canCopyPublicLink &&
-            (isPublicRoomType || isCustomRoomType || isFormRoomType) &&
-            shared) ||
-          (sharedItem && sharedItem.canCopyPublicLink);
+        : security?.Read && isShared;
 
     return {
       showText: settingsStore.showText,
@@ -748,7 +723,6 @@ export default inject(
 
       setSelected,
       security,
-      canCopyPublicLink,
 
       getHeaderMenu,
       getCheckboxItemLabel,

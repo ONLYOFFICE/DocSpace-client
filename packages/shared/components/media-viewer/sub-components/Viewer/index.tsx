@@ -229,7 +229,7 @@ export const Viewer = (props: ViewerProps) => {
     playlistFile.fileExst === ".tiff" || playlistFile.fileExst === ".tif";
 
   return (
-    <StyledViewerContainer visible={visible}>
+    <StyledViewerContainer dir="ltr" visible={visible}>
       {!isFullscreen && !isMobile && panelVisible && !isPdf && (
         <DesktopDetails
           title={title}

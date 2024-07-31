@@ -448,7 +448,7 @@ class UploadDataStore {
 
     while (index < len) {
       const conversionItem = filesToConversion[index];
-      const { fileId, toFolderId, password } = conversionItem;
+      const { fileId, toFolderId, password, format } = conversionItem;
       const itemPassword = password ? password : null;
       const file = this.files.find((f) => f.fileId === fileId);
       if (file) runInAction(() => (file.inConversion = true));
@@ -460,7 +460,7 @@ class UploadDataStore {
 
       const numberFiles = this.files.filter((f) => f.needConvert).length;
 
-      const res = convertFile(fileId, itemPassword)
+      const res = convertFile(fileId, format, itemPassword)
         .then((res) => res)
         .catch(() => {
           const error = t("FailedToConvert");
@@ -707,6 +707,14 @@ class UploadDataStore {
   };
 
   startUpload = (uploadFiles, folderId, t) => {
+    const withoutHiddenFiles = Object.values(uploadFiles).filter((f) => {
+      const isHidden = /(^|\/)\.[^\/\.]/g.test(f.name);
+
+      return !isHidden;
+    });
+
+    console.log("startUpload", { withoutHiddenFiles, uploadFiles });
+
     const { canConvert } = this.filesSettingsStore;
 
     const toFolderId = folderId ? folderId : this.selectedFolderStore.id;
@@ -728,10 +736,10 @@ class UploadDataStore {
     let filesSize = 0;
     let convertSize = 0;
 
-    const uploadFilesArray = Object.keys(uploadFiles);
+    const uploadFilesArray = Object.keys(withoutHiddenFiles);
     const hasFolder =
       uploadFilesArray.findIndex((_, ind) => {
-        const file = uploadFiles[ind];
+        const file = withoutHiddenFiles[ind];
 
         const filePath = file.path
           ? file.path
@@ -746,13 +754,13 @@ class UploadDataStore {
       if (this.uploaded) {
         this.isParallel = false;
       } else if (this.isParallel) {
-        this.tempFiles.push({ uploadFiles, folderId, t });
+        this.tempFiles.push({ withoutHiddenFiles, folderId, t });
         return;
       }
     }
 
     for (let index of uploadFilesArray) {
-      const file = uploadFiles[index];
+      const file = withoutHiddenFiles[index];
 
       const parts = file.name.split(".");
       const ext = parts.length > 1 ? "." + parts.pop() : "";
@@ -1025,6 +1033,10 @@ class UploadDataStore {
     if (!currentFile) return resolve();
     const { needConvert } = currentFile;
 
+    const isXML = currentFile.fileInfo?.fileExst?.includes(".xml");
+
+    if (isXML) return resolve();
+
     if (needConvert) {
       runInAction(() => (currentFile.action = "convert"));
 
@@ -1173,7 +1185,7 @@ class UploadDataStore {
     operationId,
     toFolderId,
   ) => {
-    const { chunkUploadCount: asyncChunkUploadCount } = this.filesSettingsStore;
+    const { uploadThreadCount } = this.filesSettingsStore;
     const length = requestsDataArray.length;
 
     const isThirdPartyFolder = typeof toFolderId === "string";
@@ -1204,8 +1216,7 @@ class UploadDataStore {
       }
 
       const promise = new Promise((resolve, reject) => {
-        let i =
-          length <= asyncChunkUploadCount ? length : asyncChunkUploadCount;
+        let i = length <= uploadThreadCount ? length : uploadThreadCount;
         while (i !== 0) {
           this.asyncUpload(
             t,
@@ -1269,15 +1280,15 @@ class UploadDataStore {
       // console.log("IS PARALLEL");
       const notUploadedFiles = this.files.filter((f) => !f.inAction);
 
-      const { chunkUploadCount } = this.filesSettingsStore;
+      const { maxUploadFilesCount } = this.filesSettingsStore;
 
       const countFiles =
-        notUploadedFiles.length >= chunkUploadCount
-          ? chunkUploadCount
+        notUploadedFiles.length >= maxUploadFilesCount
+          ? maxUploadFilesCount
           : notUploadedFiles.length;
 
       for (let i = 0; i < countFiles; i++) {
-        if (this.currentUploadNumber <= chunkUploadCount) {
+        if (this.currentUploadNumber <= maxUploadFilesCount) {
           const fileIndex = this.files.findIndex(
             (f) => f.uniqueId === notUploadedFiles[i].uniqueId,
           );

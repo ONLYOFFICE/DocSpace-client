@@ -431,7 +431,9 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                     {`"Add the website URL for embedding to the <1>allow list</1>."`}
                   </Trans>
                 ) : (
-                  t("EmbeddingPanel:EmbeddingBarDescription")
+                  t("EmbeddingPanel:EmbeddingBarDescription", {
+                    productName: t("Common:ProductName"),
+                  })
                 )}
               </Text>
               <IconButton
@@ -460,6 +462,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                   selectedOption={selectedLink as TOption}
                   displaySelectedOption
                   directionY="bottom"
+                  withLabel={false}
                 />
               </>
             )}

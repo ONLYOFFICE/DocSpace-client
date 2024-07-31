@@ -27,7 +27,7 @@
 import { thirdPartyLogin } from "@docspace/shared/utils/loginUtils";
 import { Nullable, TTranslation } from "@docspace/shared/types";
 
-import { MessageKey } from "./enums";
+import { MessageKey, OAuth2ErrorKey } from "./enums";
 
 export async function oAuthLogin(profile: string) {
   let isSuccess = false;
@@ -99,6 +99,32 @@ export const getMessageKeyTranslate = (t: TTranslation, message: string) => {
       return t("Errors:SsoAttributesNotFound");
     case "QuotaPaidUserLimitError":
       return t("Common:QuotaPaidUserLimitError");
+    case "InvalidLink":
+      return t("Common:InvalidLink");
+    default:
+      return t("Common:Error");
+  }
+};
+
+export const getOAuthMessageKeyTranslation = (
+  t: TTranslation,
+  messageKey?: OAuth2ErrorKey,
+) => {
+  if (!messageKey) return;
+  switch (messageKey) {
+    case OAuth2ErrorKey.asc_retrieval_error:
+      return t("Common:SomethingWentWrong");
+    case OAuth2ErrorKey.client_disabled_error:
+      return t("Errors:OAuthApplicationDisabled");
+    case OAuth2ErrorKey.client_not_found_error:
+      return t("Errors:OAuthApplicationEmpty");
+    case OAuth2ErrorKey.client_permission_denied_error:
+      return t("Common:AccessDenied");
+    case OAuth2ErrorKey.missing_client_id_error:
+      return t("Errors:OAuthClientEmpty");
+    case OAuth2ErrorKey.something_went_wrong_error:
+      return t("Common:UnknownError");
+    case OAuth2ErrorKey.missing_asc_cookie_error:
     default:
       return t("Common:Error");
   }
@@ -124,6 +150,12 @@ export const getInvitationLinkData = (encodeString: string) => {
     firstName: string;
     lastName: string;
     type: string;
+    linkData?: {
+      confirmHeader?: string;
+      key: string;
+      type: string;
+      uid?: string;
+    };
   };
 
   return queryParams;
@@ -137,4 +169,20 @@ export const getEmailFromInvitation = (encodeString: Nullable<string>) => {
   if (!queryParams || !queryParams.email) return "";
 
   return queryParams.email;
+};
+
+export const generateOAuth2ReferenceURl = (clientId: string) => {
+  return `/login/consent?clientId=${clientId}`;
+};
+
+export const getConfirmDataFromInvitation = (
+  encodeString: Nullable<string>,
+) => {
+  if (!encodeString) return "";
+
+  const queryParams = getInvitationLinkData(encodeString);
+
+  if (!queryParams || !queryParams.linkData) return {};
+
+  return queryParams.linkData;
 };

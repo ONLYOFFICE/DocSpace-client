@@ -52,10 +52,7 @@ const StyledItem = styled.div<{ isUser?: boolean }>`
   align-items: center;
 
   .avatar {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-left: 8px;`
-        : `margin-right: 8px;`}
+    margin-inline-end: 8px;
 
     ${(props) =>
       props.isUser &&
@@ -65,10 +62,7 @@ const StyledItem = styled.div<{ isUser?: boolean }>`
   }
 
   .checkbox {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: auto;`
-        : `margin-left: auto;`}
+    margin-inline-start: auto;
   }
 `;
 

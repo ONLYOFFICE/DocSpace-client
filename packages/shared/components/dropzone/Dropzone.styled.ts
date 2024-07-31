@@ -43,6 +43,8 @@ const StyledDropzone = styled.div<{ $isLoading?: boolean }>`
   .dropzone_loader {
     position: absolute;
     top: 50%;
+
+    // doesn't require mirroring for RTL
     left: 50%;
     transform: translate(-50%, -50%);
   }

@@ -45,22 +45,22 @@ import withLoader from "../withLoader";
 
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const RemovePortal = (props) => {
   const { t, greetingTitle, linkData, companyInfoSettingsData } = props;
   const [isRemoved, setIsRemoved] = useState(false);
-  const navigate = useNavigate();
 
   const url = companyInfoSettingsData?.site
     ? companyInfoSettingsData.site
     : "https://onlyoffice.com";
 
+  const navigate = useNavigate();
+
   const onDeleteClick = async () => {
     try {
-      await deletePortal(linkData.confirmHeader);
+      const res = await deletePortal(linkData.confirmHeader);
       setIsRemoved(true);
-      setTimeout(() => (location.href = url), 10000);
+      setTimeout(() => (location.href = res ? res : url), 10000);
     } catch (e) {
       toastr.error(e);
     }
@@ -93,7 +93,9 @@ const RemovePortal = (props) => {
             ) : (
               <>
                 <Text className="subtitle">
-                  {t("PortalRemoveTitle", { productName: PRODUCT_NAME })}
+                  {t("PortalRemoveTitle", {
+                    productName: t("Common:ProductName"),
+                  })}
                 </Text>
                 <ButtonsWrapper>
                   <Button

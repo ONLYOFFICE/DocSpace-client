@@ -69,6 +69,8 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
     renderCustomItem,
     setInputItemVisible,
     inputItemVisible,
+    savedInputValue,
+    setSavedInputValue,
   }: Data = data;
   const { t } = useTranslation(["Common"]);
 
@@ -111,7 +113,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
     if (isInputItem) {
       return (
         <InputItem
-          defaultInputValue={defaultInputValue}
+          defaultInputValue={savedInputValue ?? defaultInputValue}
           onAcceptInput={onAcceptInput}
           onCancelInput={onCancelInput}
           style={style}
@@ -119,6 +121,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           roomType={roomType}
           icon={icon}
           setInputItemVisible={setInputItemVisible}
+          setSavedInputValue={setSavedInputValue}
           placeholder={placeholder}
         />
       );

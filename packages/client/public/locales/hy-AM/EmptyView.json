@@ -19,7 +19,7 @@
   "UploadDevicePDFFormOptionDescription": "Վերբեռնեք պատրաստի PDF ձևը սենյակ ձեր սարքից:",
   "UploadDevicePDFFormOptionTitle": "Վերբեռնել սարքից",
   "UploadFromPortalDescription": "Վերբեռնել ցանկացած տեսակի ֆայլ փաստաթղթերից կամ սենյակներից",
-  "UploadFromPortalTitle": "Վերբեռնում {{արտադրանքիԱնվանում}}-ից",
+  "UploadFromPortalTitle": "Վերբեռնում {{productName}}-ից",
   "UploadPDFFormOptionDescription": "Ընտրել պատրաստ PDF ձևը, որը հասանելի է {{productName}}-ում և վերբեռնեք այն սենյակ:",
   "UserEmptyDescription": "Ադմինիստրատորների կողմից վերբեռնված ֆայլերը և թղթապանակները կհայտնվեն այստեղ:"
 }

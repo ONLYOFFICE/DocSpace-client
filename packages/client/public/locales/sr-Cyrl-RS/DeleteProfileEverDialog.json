@@ -3,8 +3,6 @@
   "CannotReassignFiles": "Ако обришете више корисника одједном, не можете да доделите њихове датотеке другим корисницима.",
   "DeleteGroupUsersSuccessMessage": "Корисници су успешно обрисани.",
   "DeleteMyDocumentsUser": "Све личне датотеке и фолдери у одељку Документи овог корисника биц́е трајно избрисани.",
-  "DeletePersonalData": "Lični podaci, sve lične datoteke i folderi u Dokumenti i Otpad odeljcima* odabranih korisnika će biti trajno obrisani. Datoteke i folderi odabranih korisnika koji se čuvaju u zajedničkim odeljcima* kao što su prostorije ostaće u {{productName}}.",
-  "DeletePersonalDataApplicable": "*Primenljivo za odabrane korisnike koji imaju takve datoteke i foldere.",
   "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Собе које је направио овај корисник и документи ускладиштени у овим собама биц́е аутоматски поново додељени администратору који врши брисање: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Поново доделите податке ручно да бисте изабрали другог одредишног корисника за доделу.",
   "DeleteUser": "Обриши корисника",
   "DeleteUserMessage": "{{userCaption}} <strong> {{user}}</strong> ц́е бити обрисан. Ова радња се не може опозвати.",

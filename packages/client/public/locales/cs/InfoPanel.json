@@ -27,7 +27,7 @@
   "GalleryEmptyScreenText": "Podrobnosti o šabloně formuláře naleznete zde",
   "GroupsEmptyScreenText": "Podrobnosti o skupině naleznete zde",
   "HistoryEmptyScreenText": "Historie aktivit se zobrazí zde",
-  "HistoryRoomCreated": "Vytvořena místnost <<1>”{{roomTitle}}”</1> ",
+  "HistoryRoomCreated": "Vytvořena místnost <1>”{{roomTitle}}”</1> ",
   "HistoryThirdParty": "Zobrazení historie není k dispozici pro veřejné místnosti s připojenými úložišti třetích stran.",
   "InfoBanner": "Seznam pozvaných uživatelů zahrnuje vlastníka a/nebo správce tohoto prostoru {{productName}} s plným přístupem do všech místností. Vlastníkovi a/nebo správci nelze přidělit jiná přístupová práva. Po přidání do místnosti budou informováni o všech změnách.",
   "ItemsSelected": "Vybrané položky",

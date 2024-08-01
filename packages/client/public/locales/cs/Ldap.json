@@ -61,7 +61,7 @@
   "LdapSyncDescription": "Synchronizace dat LDAP je způsob synchronizace změn dat mezi portálem a serverem LDAP. Povolte možnost „Automatická synchronizace“ a nastavte časové období pro automatickou aktualizaci informací.",
   "LdapSyncTitle": "Synchronizace dat LDAP",
   "LdapToggle": "Ověřování LDAP",
-  "LdapToggleDescription": "Tuto možnost povolte, pokud chcete uživatele ze serveru LDAP/Active Directory přidávat do {{název produktu}} automaticky. Přidaní uživatelé se budou moci autorizovat pomocí svých pověření ze serveru LDAP/Active Directory. {{productName}} neukládá hesla uživatelů lokálně a bude ověřovat uživatele odesláním jejich přihlašovacího jména a hesla na server LDAP/Active Directory.",
+  "LdapToggleDescription": "Tuto možnost povolte, pokud chcete uživatele ze serveru LDAP/Active Directory přidávat do {{productName}} automaticky. Přidaní uživatelé se budou moci autorizovat pomocí svých pověření ze serveru LDAP/Active Directory. {{productName}} neukládá hesla uživatelů lokálně a bude ověřovat uživatele odesláním jejich přihlašovacího jména a hesla na server LDAP/Active Directory.",
   "LdapUserAttribute": "Atribut uživatele",
   "LdapUserDN": "Uživatel DN",
   "LdapUserDNTooltip": "Zadejte rozlišující název adresáře obsahujícího uživatele, které chcete přidat.",

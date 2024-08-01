@@ -294,7 +294,7 @@
   "UseHttp": "Gebruik Http",
   "UserAgreement": "Ik bevestig en wil doorgaan",
   "UserLimitExceeded": "Gebruikerslimiet overschreden. Om door te gaan naar de volgende stap, moet u het aantal gebruikers aanpassen of de {{productName}} gebruikerslimiet verhogen.",
-  "UsersAreRegistered": "U hebt gebruikers geselecteerd die geregistreerd zijn in uw {{productnaam}}, met de rollen al ingesteld. Ga door naar de volgende stap of ga terug om meer gebruikers te selecteren.",
+  "UsersAreRegistered": "U hebt gebruikers geselecteerd die geregistreerd zijn in uw {{productName}}, met de rollen al ingesteld. Ga door naar de volgende stap of ga terug om meer gebruikers te selecteren.",
   "UsersSectionDescription": "In het gedeelte \"Gebruikers\" staan de gebruikers die u in de vorige stap hebt geselecteerd. Deze is standaard altijd ingeschakeld en kan niet worden uitgeschakeld.",
   "UseSpecialChar": "Gebruik speciale karakters",
   "UseUpperCase": "Hoofdletters gebruiken",

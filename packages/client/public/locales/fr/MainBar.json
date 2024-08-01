@@ -12,7 +12,7 @@
   "StorageQuotaDescription": "Vous pouvez supprimer les fichiers inutiles ou <1>{{clickHere}}</1> pour trouver un plan tarifaire plus adapté à votre {{productName}}.",
   "StorageQuotaExceeded": "Quota de stockage est dépassé",
   "StorageQuotaHeader": "L’espace de stockage est sur le point d’être dépassé : {{currentValue}} / {{maxValue}}",
-  "StorageQuotaUserDescription": " Vous pouvez supprimer les fichiers inutiles pour libérer de l'espace disque.",
+  "StorageQuotaUserDescription": "Vous pouvez supprimer les fichiers inutiles pour libérer de l'espace disque.",
   "TenantCustomQuotaDescription": "Vous pouvez supprimer les fichiers inutiles ou modifier le quota dans la section <1>Paramètres de gestion du stockage.</1>",
   "UserQuotaDescription": "<1>{{clickHere}}</1> pour trouver un meilleur plan tarifaire pour votre {{productName}}.",
   "UserQuotaHeader": "Le nombre d'administrateurs/utilisateurs avancés est sur le point d'être dépassé : {{currentValue}} / {{maxValue}}."

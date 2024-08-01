@@ -1,6 +1,6 @@
 {
   "ActiveSessions": "Aktive Sitzungen",
-  "AutoDeleteTitle": " Alle Sitzungen, die älter als 60 Tage sind, werden automatisch gelöscht.",
+  "AutoDeleteTitle": "Alle Sitzungen, die älter als 60 Tage sind, werden automatisch gelöscht.",
   "ChangeEmailSuccess": "E-Mail wurde erfolgreich geändert",
   "ChangePasswordAfterLoggingOut": "Passwort nach Abmeldung ändern",
   "ConnectSocialNetworks": "Verbinden Sie Ihre sozialen Netzwerke",
@@ -28,6 +28,6 @@
   "SuccessLogout": "Die aktive Verbindung wurde abgemeldet: {{platform}}, {{browser}}",
   "SystemTheme": "Wie im System",
   "SystemThemeDescription": "Wechseln Sie automatisch zwischen hellen und dunklen Themen, wenn Ihr System dies tut.",
-  "TerminateAllSessions": " Alle Sitzungen außer der aktuellen beenden",
+  "TerminateAllSessions": "Alle Sitzungen außer der aktuellen beenden",
   "TwoFactorDescription": "Zwei-Faktor-Authentifizierung über eine App für Generierung von Codes wurde für alle aktiviert."
 }

@@ -1,6 +1,6 @@
 {
   "ActiveSessions": "Sessioni Attive",
-  "AutoDeleteTitle": " Tutte le sessioni più vecchie di 60 giorni verranno cancellate automaticamente.",
+  "AutoDeleteTitle": "Tutte le sessioni più vecchie di 60 giorni verranno cancellate automaticamente.",
   "ChangeEmailSuccess": "L'indirizzo e-mail è stato modificato con successo",
   "ChangePasswordAfterLoggingOut": "Cambia la password dopo il logout",
   "ConnectSocialNetworks": "Connetti le tue reti sociali",
@@ -28,6 +28,6 @@
   "SuccessLogout": "La connessione attiva è stata disconnessa: {{platform}}, {{browser}}",
   "SystemTheme": "Usare tema di sistema",
   "SystemThemeDescription": "Passare automaticamente dal tema chiaro a quello scuro quando lo fa il tuo sistema.",
-  "TerminateAllSessions": " Termina tutte le sessioni eccetto quella attuale",
+  "TerminateAllSessions": "Termina tutte le sessioni eccetto quella attuale",
   "TwoFactorDescription": "L'autenticazione a due fattori tramite un'app che genera codice è stata attivata per tutti gli utenti dall'amministratore."
 }

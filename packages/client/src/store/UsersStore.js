@@ -47,6 +47,8 @@ class UsersStore {
   providers = [];
   accountsIsIsLoading = false;
   operationRunning = false;
+  abortController = new AbortController();
+  requestRunning = false;
 
   constructor(peopleStore, settingsStore, infoPanelStore, userStore) {
     this.peopleStore = peopleStore;
@@ -62,6 +64,12 @@ class UsersStore {
     withFilterLocalStorage = false,
   ) => {
     const filterData = filter ? filter.clone() : Filter.getDefault();
+
+    if (this.requestRunning) {
+      this.abortController.abort();
+
+      this.abortController = new AbortController();
+    }
 
     const filterStorageItem = localStorage.getItem(
       `PeopleFilter=${this.userStore.user?.id}`,
@@ -88,8 +96,15 @@ class UsersStore {
     if (filterData.group && filterData.group === "root")
       filterData.group = undefined;
 
-    const res = await api.people.getUserList(filterData);
+    this.requestRunning = true;
+
+    const res = await api.people.getUserList(
+      filterData,
+      this.abortController.signal,
+    );
     filterData.total = res.total;
+
+    this.requestRunning = false;
 
     if (updateFilter) {
       this.peopleStore.filterStore.setFilterParams(filterData);
@@ -141,9 +156,10 @@ class UsersStore {
 
   get needResetUserSelection() {
     const { isVisible: infoPanelVisible } = this.infoPanelStore;
-    const { isOneUserSelection } = this.peopleStore.selectionStore;
+    const { isOneUserSelection, isOnlyBufferSelection } =
+      this.peopleStore.selectionStore;
 
-    return !infoPanelVisible || !isOneUserSelection;
+    return !infoPanelVisible || (!isOneUserSelection && !isOnlyBufferSelection);
   }
   updateUserStatus = async (status, userIds) => {
     return api.people.updateUserStatus(status, userIds).then((users) => {
@@ -152,6 +168,10 @@ class UsersStore {
           const userIndex = this.users.findIndex((x) => x.id === user.id);
           if (userIndex !== -1) this.users[userIndex] = user;
         });
+
+        if (!this.needResetUserSelection) {
+          this.peopleStore.selectionStore.updateSelection(this.peopleList);
+        }
       }
 
       return users;
@@ -324,7 +344,7 @@ class UsersStore {
 
           options.push("details");
 
-          if (userRole === "manager" || userRole === "admin") {
+          if (userRole !== "user") {
             options.push("reassign-data");
           }
 
@@ -364,9 +384,12 @@ class UsersStore {
           ) {
             options.push("separator-1");
 
-            if (status === EmployeeStatus.Active) {
+            if (
+              status === EmployeeStatus.Active ||
+              status === EmployeeStatus.Pending
+            ) {
               options.push("disable");
-            } else {
+            } else if (status === EmployeeStatus.Disabled) {
               options.push("enable");
             }
           }

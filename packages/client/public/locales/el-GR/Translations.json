@@ -21,7 +21,6 @@
   "FolderTitleWebDav": "Κατάλογος WebDAV",
   "FolderTitleYandex": "Κατάλογος Yandex",
   "FormTemplates": "Πρότυπα φόρμας",
-  "LinkCopySuccess": "Ο σύνδεσμος έχει αντιγραφεί στο πρόχειρο",
   "LinkHasExpiredAndHasBeenDisabled": "Ο σύνδεσμος έχει λήξει και έχει απενεργοποιηθεί",
   "LinkValidTime": "Αυτός ο σύνδεσμος ισχύει μόνο για {{days_count}} ημέρες.",
   "NewForm": "Φόρμα PDF",

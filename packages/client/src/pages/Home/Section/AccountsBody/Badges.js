@@ -26,7 +26,7 @@
 
 import React from "react";
 import { inject, observer } from "mobx-react";
-import styled, { css } from "styled-components";
+import styled, { css, useTheme } from "styled-components";
 import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -49,27 +49,13 @@ const StyledBadgesContainer = styled.div`
     props.infoPanelVisible &&
     css`
       .accounts-badge:last-child {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-left: 12px;
-              `
-            : css`
-                margin-right: 12px;
-              `}
+        margin-inline-end: 12px;
       }
     `}
 `;
 
 const StyledPaidBadge = styled(Badge)`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-left: 8px;
-        `
-      : css`
-          margin-right: 8px;
-        `}
+  margin-inline-end: 8px;
 `;
 
 const StyledSendClockIcon = styled(SendClockIcon)`
@@ -97,6 +83,7 @@ const Badges = ({
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const theme = useTheme();
 
   const onClickPaid = () => {
     if (filter.payments === PaymentsType.Paid) return;
@@ -130,7 +117,7 @@ const Badges = ({
           className="accounts-badge"
           label={t("Common:LDAP")}
           color={"#FFFFFF"}
-          backgroundColor="#8570BD"
+          backgroundColor={theme.isBase ? "#8570BD" : "#544C6A"}
           fontSize={"9px"}
           fontWeight={800}
           noHover
@@ -143,7 +130,7 @@ const Badges = ({
           className="accounts-badge"
           label={t("SSO")}
           color={"#FFFFFF"}
-          backgroundColor="#22C386"
+          backgroundColor={theme.isBase ? "#22C386" : "#2E5E4C"}
           fontSize={"9px"}
           fontWeight={800}
           noHover
@@ -155,7 +142,7 @@ const Badges = ({
         <StyledPaidBadge
           className="paid-badge accounts-badge"
           label={t("Paid")}
-          backgroundColor={"#EDC409"}
+          backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
           fontSize={"9px"}
           fontWeight={800}
           lineHeight={"13px"}

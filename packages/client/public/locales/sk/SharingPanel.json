@@ -3,6 +3,5 @@
   "FormFilling": "Vyplnenie formulára",
   "LinkName": "Názov odkazu",
   "ShareEmailBody": "Bol vám udelený prístup k dokumentu {{itemName}}. Kliknutím na odkaz nižšie otvoríte dokument hneď teraz: {{shareLink}}.",
-  "ShareEmailSubject": "Bol vám udelený prístup k dokumentu {{itemName}}.",
-  "SharingSettingsTitle": "Nastavenia zdieľania"
+  "ShareEmailSubject": "Bol vám udelený prístup k dokumentu {{itemName}}."
 }

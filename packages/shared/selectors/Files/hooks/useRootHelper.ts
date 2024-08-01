@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useContext } from "react";
 
 import { FolderType } from "../../../enums";
 import { getFoldersTree } from "../../../api/files";
@@ -33,20 +33,26 @@ import { getCatalogIconUrlByType } from "../../../utils/catalogIconHelper";
 import { TSelectorItem } from "../../../components/selector";
 
 import { UseRootHelperProps } from "../FilesSelector.types";
-import { DEFAULT_BREAD_CRUMB } from "../FilesSelector.constants";
+import { getDefaultBreadCrumb } from "../FilesSelector.utils";
+import { LoadersContext } from "../contexts/Loaders";
+import { useTranslation } from "react-i18next";
 
 const useRootHelper = ({
   setBreadCrumbs,
-  setIsBreadCrumbsLoading,
+
   setItems,
   treeFolders,
-  setIsNextPageLoading,
+
   setTotal,
   setHasNextPage,
   isUserOnly,
   setIsInit,
-  setIsFirstLoad,
 }: UseRootHelperProps) => {
+  const { t } = useTranslation(["Common"]);
+
+  const { setIsBreadCrumbsLoading, setIsNextPageLoading, setIsFirstLoad } =
+    useContext(LoadersContext);
+
   const [isRoot, setIsRoot] = React.useState<boolean>(false);
   const requestRunning = React.useRef(false);
 
@@ -54,7 +60,7 @@ const useRootHelper = ({
     if (requestRunning.current) return;
 
     requestRunning.current = true;
-    setBreadCrumbs([DEFAULT_BREAD_CRUMB]);
+    setBreadCrumbs([getDefaultBreadCrumb(t)]);
     setIsRoot(true);
     setIsNextPageLoading(true);
     setIsBreadCrumbsLoading(false);
@@ -110,6 +116,7 @@ const useRootHelper = ({
     setItems,
     setTotal,
     treeFolders,
+    t,
   ]);
 
   return { isRoot, setIsRoot, getRootData };

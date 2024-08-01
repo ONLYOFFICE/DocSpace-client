@@ -69,7 +69,7 @@ const OptionsComponent = (props) => {
           <Link data-format="pptx" onClick={onCreate} {...linkStyles}>
             {t("Presentation")},
           </Link>
-          <Link data-format="docxf" onClick={onCreate} {...linkStyles}>
+          <Link data-format="pdf" onClick={onCreate} {...linkStyles}>
             {t("Translations:NewForm")}
           </Link>
         </Box>
@@ -191,12 +191,14 @@ const CommonButtons = (props) => {
           ? getCategoryUrl(CategoryType.Archive)
           : getCategoryUrl(CategoryType.Shared);
 
-      const newFilter = RoomsFilter.getDefault(userId);
-
-      newFilter.searchArea =
+      const searchArea =
         rootFolderType === FolderType.Archive
           ? RoomSearchArea.Archive
           : RoomSearchArea.Active;
+
+      const newFilter = RoomsFilter.getDefault(userId, searchArea);
+
+      newFilter.searchArea = searchArea;
 
       const state = {
         title: navigationPath[0].title,

@@ -39,7 +39,7 @@ export const PlayerDesktopContextMenuWrapper = styled.div`
   }
 
   & > svg {
-    padding-left: 19px;
+    padding-inline-start: 19px;
     padding-bottom: 3px;
     width: 18px;
     height: 20px;

@@ -91,7 +91,7 @@ const ConfirmRoute = ({
       if (doAuthenticated == AuthenticatedAction.Redirect)
         return window.location.replace(defaultPage);
 
-      if (doAuthenticated == AuthenticatedAction.Logout) logout();
+      if (doAuthenticated == AuthenticatedAction.Logout) logout(false);
     }
 
     const { search } = location;
@@ -128,13 +128,30 @@ const ConfirmRoute = ({
 
             setState((val) => ({ ...val, isLoaded: true, linkData, roomData }));
             break;
+          case ValidationResult.UserExisted:
+            const finalUrl = res?.roomId
+              ? `/rooms/shared/${res?.roomId}/filter?folder=${res?.roomId}`
+              : defaultPage;
+
+            console.log("user already exists", {
+              confirmLinkData,
+              validationResult,
+              finalUrl,
+            });
+
+            window.location.replace(finalUrl);
+            break;
           case ValidationResult.Invalid:
-            console.error("invlid link", { confirmLinkData, validationResult });
+            console.error("invalid link", {
+              confirmLinkData,
+              validationResult,
+            });
             window.location.href = combineUrl(
               window.ClientConfig?.proxy?.url,
               path,
-              "/error",
+              "/error?messageKey=21",
             );
+
             break;
           case ValidationResult.Expired:
             console.error("expired link", {
@@ -157,6 +174,24 @@ const ConfirmRoute = ({
               path,
               "/error?messageKey=20",
             );
+            break;
+          case ValidationResult.QuotaFailed:
+            console.error("access below quota", {
+              confirmLinkData,
+              validationResult,
+            });
+            window.location.href = combineUrl(
+              window.ClientConfig?.proxy?.url,
+              path,
+              "/error",
+            );
+            break;
+          case ValidationResult.UserExcluded:
+            console.error("user excluded", {
+              confirmLinkData,
+              validationResult,
+            });
+            window.location.replace(defaultPage);
             break;
           default:
             console.error("unknown link", {

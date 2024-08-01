@@ -21,6 +21,5 @@
   "UploadFromPortalDescription": "Upload any type files from Documents or Rooms",
   "UploadFromPortalTitle": "Upload from {{productName}}",
   "UploadPDFFormOptionDescription": "Select a ready PDF form available in {{productName}} and upload it to the room.",
-  "UserEmptyDescription": "Files and folders uploaded by admins will appeared here.",
-  "UserEmptyTitle": "No docs here yet"
+  "UserEmptyDescription": "Files and folders uploaded by admins will appeared here."
 }

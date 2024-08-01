@@ -49,7 +49,6 @@ import { PreviewBlock } from "../sub-components/PreviewBlock";
 import { loadFrame } from "../utils";
 
 import {
-  scriptUrl,
   dataDimensions,
   defaultWidthDimension,
   defaultHeightDimension,
@@ -64,9 +63,11 @@ import {
   Frame,
   Container,
 } from "./StyledPresets";
+import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const RoomSelector = (props) => {
-  const { t, setDocumentTitle, theme } = props;
+  const { t, theme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -102,7 +103,7 @@ const RoomSelector = (props) => {
   const [roomType, setRoomType] = useState(roomTypeOptions[0]);
 
   const debouncedOnSelect = debounce((items) => {
-    toastr.success(items[0].label);
+    // toastr.success(items[0].label);
   }, 0);
 
   const [config, setConfig] = useState({
@@ -135,7 +136,7 @@ const RoomSelector = (props) => {
     window.DocSpace?.SDK?.frames[frameId]?.destroyFrame();
   };
 
-  const loadCurrentFrame = () => loadFrame(config, scriptUrl);
+  const loadCurrentFrame = () => loadFrame(config, SDK_SCRIPT_URL);
 
   useEffect(() => {
     loadCurrentFrame();
@@ -188,7 +189,7 @@ const RoomSelector = (props) => {
           preview={preview}
           theme={theme}
           frameId={frameId}
-          scriptUrl={scriptUrl}
+          scriptUrl={SDK_SCRIPT_URL}
           config={config}
         />
         <Controls>
@@ -254,12 +255,10 @@ const RoomSelector = (props) => {
 };
 
 export default inject(({ authStore, settingsStore }) => {
-  const { setDocumentTitle } = authStore;
   const { theme } = settingsStore;
 
   return {
     theme,
-    setDocumentTitle,
   };
 })(
   withTranslation([

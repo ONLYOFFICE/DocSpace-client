@@ -605,15 +605,15 @@ const Dark: TTheme = {
     padding: "1px",
     lineHeight: "0.8",
     overflow: "hidden",
-    color: black,
+    color: white,
     backgroundColor: "#F59931",
     disableBackgroundColor: "#858585",
   },
 
   scrollbar: {
-    bgColor: "rgba(20, 20, 20, 0.4)",
-    hoverBgColor: "rgba(20, 20, 20, 0.64)",
-    pressBgColor: "rgba(20, 20, 20, 0.8)",
+    bgColor: "rgba(136, 136, 136, 0.4)",
+    hoverBgColor: "rgba(136, 136, 136, 0.64)",
+    pressBgColor: "rgba(136, 136, 136, 0.8)",
     paddingInlineEnd: "17px !important",
     paddingInlineEndMobile: "8px !important",
   },
@@ -637,7 +637,7 @@ const Dark: TTheme = {
         b: 27,
         a: 0.4,
       },
-      blur: 10,
+      blur: 9,
     },
 
     content: {
@@ -1113,21 +1113,21 @@ const Dark: TTheme = {
     },
 
     administrator: {
-      fill: "#F59931",
+      fill: "#A15B1D",
       stroke: darkBlack,
-      color: black,
+      color: white,
     },
 
     guest: {
       fill: "#575757",
       stroke: darkBlack,
-      color: black,
+      color: white,
     },
 
     owner: {
-      fill: "#EDC409",
+      fill: "#A38A1A",
       stroke: darkBlack,
-      color: black,
+      color: white,
     },
 
     editContainer: {
@@ -1372,6 +1372,10 @@ const Dark: TTheme = {
 
   progressBar: {
     backgroundColor: "#858585",
+
+    animation: {
+      background: "#FFFFFF",
+    },
 
     percent: {
       background: "#E17415",
@@ -2052,6 +2056,8 @@ const Dark: TTheme = {
     closeButtonSize: "12px",
     closeButtonBg: "#a2a2a2",
 
+    nameColor: "#A3A9AE",
+
     links: {
       iconColor: "#858585",
       iconErrorColor: "#E06451",
@@ -2078,6 +2084,9 @@ const Dark: TTheme = {
       fileExstColor: "#A3A9AE",
       locationIconColor: "#A3A9AE",
       folderLabelColor: "#A3A9AE",
+      renamedItemColor: "#A3A9AE",
+      oldRoleColor: "#A3A9AE",
+      messageColor: "#FFFFFF",
     },
 
     details: {
@@ -2471,11 +2480,6 @@ const Dark: TTheme = {
       descriptionColor: "#a3a9ae",
     },
 
-    tagInput: {
-      tagBackground: "#242424",
-      tagHoverBackground: "#3D3D3D",
-    },
-
     dropdown: {
       background: "#333333",
       borderColor: "#474747",
@@ -2520,7 +2524,7 @@ const Dark: TTheme = {
         borderColor: "#292929",
         hoverBorderColor: "#fafafa",
         color: "#858585",
-        iconColor: "#e8e8e9",
+        iconColor: "#858585",
       },
     },
 
@@ -2695,6 +2699,7 @@ const Dark: TTheme = {
     upload: {
       color: black,
       tooltipColor: "#F5E9BA",
+      iconColor: darkErrorStatus,
 
       shareButton: {
         color: gray,
@@ -3016,7 +3021,7 @@ const Dark: TTheme = {
         linkColorHelp: "#E06A1B",
         tooltipLinkColor: "#e06a1b",
         arrowColor: white,
-        descriptionColor: "#858585",
+        descriptionColor: "#ADADAD",
         brandingDescriptionColor: "#858585",
 
         whiteLabel: {
@@ -3027,7 +3032,8 @@ const Dark: TTheme = {
           backgroundColorDark: "#282828",
           greenBackgroundColor: "#40865C",
           blueBackgroundColor: "#446995",
-          orangeBackgroundColor: "#AA5252",
+          orangeBackgroundColor: "#BE6650",
+          redBackgroundColor: "#AA5251",
 
           dataFontColor: white,
           dataFontColorBlack: white,
@@ -3157,7 +3163,7 @@ const Dark: TTheme = {
     gradientColor: black,
     lineColor: "#474747",
 
-    textColorPrimary: "#657077",
+    textColorPrimary: "#ADADAD",
     activeTextColorPrimary: white,
     hoverTextColorPrimary: white,
     pressedTextColorPrimary: "#CCCCCC",
@@ -3180,11 +3186,14 @@ const Dark: TTheme = {
 
   tag: {
     color: white,
+    deletedColor: "#A3A9AE",
     background: "#474747",
     hoverBackground: "#282828",
     disabledBackground: "#858585",
+    deletedBackground: "#282828",
     defaultTagColor: white,
-    newTagBackground: "#333333",
+    newTagBackground: "#242424",
+    newTagHoverBackground: "#3D3D3D",
   },
 
   profile: {
@@ -3308,6 +3317,24 @@ const Dark: TTheme = {
     descriptionColor: "#ADADAD",
   },
 
+  oauth: {
+    previewDialog: {
+      border: "1px solid #242424",
+    },
+    infoDialog: {
+      descLinkColor: "#adadad",
+      blockHeaderColor: "#858585",
+      separatorColor: "#474747",
+    },
+    list: {
+      descriptionColor: "#858585",
+    },
+    clientForm: {
+      descriptionColor: "#858585",
+      headerBorder: "1px solid #474747",
+      scopeDesc: "#858585",
+    },
+  },
   sdkPresets: {
     borderColor: "#474747",
     secondaryColor: "#ADADAD",
@@ -3322,9 +3349,19 @@ const Dark: TTheme = {
   dateTimePicker: {
     colorClockIcon: "#ADADAD",
   },
+
+  embeddingPanel: {
+    descriptionTextColor: "#ADADAD",
+    iconColor: "#ADADAD",
+  },
   completedForm: {
     linkColor: white,
-    descriptionColor: "#ADADAD",
+    descriptionColor: globalColors.silverChalice,
+
+    labelColor: globalColors.silverChalice,
+    box: {
+      background: globalColors.charlestonGreen,
+    },
   },
 };
 

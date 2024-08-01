@@ -27,7 +27,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 
-import { isMobile as isMobileUtil, DomHelpers } from "@docspace/shared/utils";
 import { isMobileOnly, isMobile } from "react-device-detect";
 
 import { Button } from "@docspace/shared/components/button";
@@ -51,7 +50,7 @@ const StyledStorageLocation = styled.div`
     }
 
     .combo-button {
-      padding-left: 8px;
+      padding-inline-start: 8px;
     }
   }
 
@@ -124,6 +123,7 @@ const ThirdPartyComboBox = ({
   setIsOauthWindowOpen,
 
   isDisabled,
+  setIsScrollLocked,
 }) => {
   const deafultSelectedItem = {
     key: "length",
@@ -244,8 +244,8 @@ const ThirdPartyComboBox = ({
           directionY="both"
           displaySelectedOption
           noBorder={false}
-          fixedDirection
-          isDefaultMode={false}
+          // fixedDirection
+          isDefaultMode={true}
           hideMobileView={false}
           forceCloseClickOutside
           scaledOptions

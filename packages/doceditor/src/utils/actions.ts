@@ -30,12 +30,16 @@ import { headers } from "next/headers";
 
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 import { TenantStatus, EditorConfigErrorType } from "@docspace/shared/enums";
+import { tryParseToNumber } from "@docspace/shared/utils/tryParseToNumber";
 import type {
   TDocServiceLocation,
   TFile,
 } from "@docspace/shared/api/files/types";
 import { TUser } from "@docspace/shared/api/people/types";
-import { TSettings } from "@docspace/shared/api/settings/types";
+import type {
+  TGetColorTheme,
+  TSettings,
+} from "@docspace/shared/api/settings/types";
 
 import type {
   ActionType,
@@ -47,12 +51,41 @@ import type {
 
 import { REPLACED_URL_PATH } from "./constants";
 
+export async function getFillingSession(
+  fillingSessionId: string,
+  share?: string,
+) {
+  const [request] = createRequest(
+    [`/files/file/fillresult?fillingSessionId=${fillingSessionId}`],
+    [
+      ["Content-Type", "application/json;charset=utf-8"],
+      share ? ["Request-Token", share] : ["", ""],
+    ],
+    "GET",
+  );
+
+  try {
+    console.log({ request });
+
+    const response = await fetch(request);
+
+    if (response.ok) return await response.json();
+
+    throw new Error("Something went wrong", {
+      cause: await response.json(),
+    });
+  } catch (error) {
+    console.log("File copyas error ", error);
+  }
+}
+
 export async function fileCopyAs(
   fileId: string,
   destTitle: string,
   destFolderId: string,
   enableExternalExt?: boolean,
   password?: string,
+  toForm?: string,
 ): Promise<{
   file: TFile | undefined;
   error:
@@ -73,9 +106,10 @@ export async function fileCopyAs(
       "POST",
       JSON.stringify({
         destTitle,
-        destFolderId: +destFolderId,
+        destFolderId: tryParseToNumber(destFolderId),
         enableExternalExt,
         password,
+        toForm: toForm === "true",
       }),
     );
 
@@ -347,28 +381,40 @@ export async function getSettings(share?: string) {
   return settings.response as TSettings;
 }
 
-export async function checkFillFromDraft(
-  templateFileId: number,
-  share?: string,
-) {
-  const [checkFillFormDraft] = createRequest(
-    [`/files/masterform/${templateFileId}/checkfillformdraft`],
-    [
-      share ? ["Request-Token", share] : ["", ""],
-      ["Content-Type", "application/json;charset=utf-8"],
-    ],
-    "POST",
-    JSON.stringify({ fileId: templateFileId }),
-  );
+export const checkIsAuthenticated = async () => {
+  const [request] = createRequest(["/authentication"], [["", ""]], "GET");
 
-  const response = await fetch(checkFillFormDraft);
+  const res = await fetch(request);
 
-  if (!response.ok) return null;
+  if (!res.ok) return;
 
-  const { response: formUrl } = await response.json();
+  const isAuth = await res.json();
 
-  return formUrl as string;
-}
+  return isAuth.response as boolean;
+};
+
+// export async function checkFillFromDraft(
+//   templateFileId: number,
+//   share?: string,
+// ) {
+//   const [checkFillFormDraft] = createRequest(
+//     [`/files/masterform/${templateFileId}/checkfillformdraft`],
+//     [
+//       share ? ["Request-Token", share] : ["", ""],
+//       ["Content-Type", "application/json;charset=utf-8"],
+//     ],
+//     "POST",
+//     JSON.stringify({ fileId: templateFileId }),
+//   );
+
+//   const response = await fetch(checkFillFormDraft);
+
+//   if (!response.ok) return null;
+
+//   const { response: formUrl } = await response.json();
+
+//   return formUrl as string;
+// }
 
 export async function openEdit(
   fileId: number | string,
@@ -400,28 +446,31 @@ export async function openEdit(
       return { ...config.response, timer } as IInitialConfig;
     }
 
-    const editorUrl =
-      cookie?.includes("asc_auth_key") || share
-        ? (await getEditorUrl("", share)).docServiceUrl
-        : "";
+    const isAuth = share ? true : await checkIsAuthenticated();
+
+    const editorUrl = isAuth
+      ? (await getEditorUrl("", share)).docServiceUrl
+      : "";
 
     const status =
       config.error?.type === EditorConfigErrorType.NotFoundScope
         ? "not-found"
-        : config.error?.type === EditorConfigErrorType.AccessDeniedScope
+        : config.error?.type === EditorConfigErrorType.AccessDeniedScope &&
+            isAuth
           ? "access-denied"
-          : res.status === 415
-            ? "not-supported"
-            : undefined;
+          : config.error?.type === EditorConfigErrorType.TenantQuotaException
+            ? "quota-exception"
+            : res.status === 415
+              ? "not-supported"
+              : undefined;
 
     const message = status ? config.error.message : undefined;
 
-    const error =
-      cookie?.includes("asc_auth_key") || share
-        ? config.error.type === EditorConfigErrorType.LinkScope
-          ? { message: message ?? "unauthorized", status, editorUrl }
-          : { ...config.error, status, editorUrl }
-        : { message: "unauthorized", status, editorUrl };
+    const error = isAuth
+      ? config.error.type === EditorConfigErrorType.LinkScope
+        ? { message: message ?? "unauthorized", status, editorUrl }
+        : { ...config.error, status, editorUrl }
+      : { message: "unauthorized", status, editorUrl };
 
     return error as TError;
   }
@@ -453,4 +502,20 @@ export async function getEditorUrl(
   const editorUrl = await res.json();
 
   return editorUrl.response as TDocServiceLocation;
+}
+
+export async function getColorTheme() {
+  const [getSettings] = createRequest(
+    [`/settings/colortheme`],
+    [["", ""]],
+    "GET",
+  );
+
+  const res = await fetch(getSettings);
+
+  if (!res.ok) return;
+
+  const colorTheme = await res.json();
+
+  return colorTheme.response as TGetColorTheme;
 }

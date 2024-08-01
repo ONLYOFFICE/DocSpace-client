@@ -35,8 +35,7 @@ const StyledIndicator = styled.div`
   position: absolute;
   top: 25px;
 
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl" ? `right: 25px;` : `left: 25px;`}
+  inset-inline-start: 25px;
 
   z-index: 10;
 `;

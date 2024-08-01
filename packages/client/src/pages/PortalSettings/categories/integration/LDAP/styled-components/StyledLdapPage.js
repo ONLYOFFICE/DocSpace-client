@@ -27,7 +27,6 @@
 import styled, { css } from "styled-components";
 import { Box } from "@docspace/shared/components/box";
 import { mobile } from "@docspace/shared/utils";
-import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 
 const StyledLdapPage = styled(Box)`
   max-width: ${(props) => (props.isSmallWindow ? "100%" : "700px")};
@@ -55,21 +54,18 @@ const StyledLdapPage = styled(Box)`
     .toggle-caption_title {
       display: flex;
       .toggle-caption_title_badge {
-        margin-left: 4px;
+        margin-inline-start: 4px;
         cursor: auto;
       }
     }
   }
 
   .hide-button {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? `margin-right: 12px`
-        : `margin-left: 12px`};
+    margin-inline-start: 12px;
   }
 
   .ldap_checkbox-container {
-    margin: 20px 0 20px 0;
+    margin: 20px 0;
     display: grid;
     grid-template-rows: 1fr 1fr;
     grid-gap: 12px;
@@ -78,10 +74,7 @@ const StyledLdapPage = styled(Box)`
       display: flex;
       align-items: baseline;
       .help-icon {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? `padding-right: 6px`
-            : `padding-left: 6px`};
+        padding-inline-start: 6px;
         position: relative;
         bottom: 4px;
       }
@@ -89,19 +82,33 @@ const StyledLdapPage = styled(Box)`
   }
 
   .ldap_connection-container {
-    margin: 20px 0 28px 0;
+    margin: 20px 0 28px;
     display: grid;
     grid-gap: 12px;
   }
 
   .ldap_attribute-mapping {
     margin-top: 16px;
-    margin-bottom: 30px;
-    input {
-      margin-bottom: 16px;
-    }
+    margin-bottom: 12px;
     display: grid;
     grid-gap: 12px;
+  }
+
+  .access-selector-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 12px;
+
+    @media ${mobile} {
+      width: 100%;
+      grid-template-columns: 1fr 0;
+      grid-gap: 0;
+    }
+
+    .access-selector {
+      margin-inline-end: 0 !important;
+      margin-top: -4px;
+    }
   }
 
   .group_membership-header,
@@ -110,10 +117,7 @@ const StyledLdapPage = styled(Box)`
     display: flex;
     align-items: baseline;
     .help-icon {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? `padding-right: 6px`
-          : `padding-left: 6px`};
+      padding-inline-start: 6px;
       position: relative;
       bottom: 2px;
     }
@@ -133,7 +137,7 @@ const StyledLdapPage = styled(Box)`
     ${(props) =>
       !props.isMobileView &&
       css`
-        grid-template-columns: minmax(100px, 340px) 1fr;
+        grid-template-columns: 1fr 1fr;
       `}
   }
 
@@ -156,8 +160,9 @@ const StyledLdapPage = styled(Box)`
   .ldap_attribute-mapping-text {
     display: flex;
     align-items: baseline;
-    p:first-child {
-      margin-right: 4px;
+
+    .help-icon {
+      margin-inline-start: 4px;
     }
   }
 
@@ -194,7 +199,7 @@ const StyledLdapPage = styled(Box)`
     ${(props) =>
       props.isMobileView &&
       css`
-        padding-left: 16px;
+        padding-inline-start: 16px;
       `}
   }
 
@@ -205,10 +210,7 @@ const StyledLdapPage = styled(Box)`
 
   .field-label {
     .help-icon {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? `padding-right: 2px`
-          : `padding-left: 2px`};
+      padding-inline-start: 2px;
       position: relative;
       bottom: 0px;
     }
@@ -219,8 +221,6 @@ const StyledLdapPage = styled(Box)`
       margin-top: 24px;
     }
   }
-
-  ${(props) => !props.isSettingPaid && UnavailableStyles}
 `;
 
 export default StyledLdapPage;

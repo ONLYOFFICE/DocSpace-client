@@ -59,9 +59,8 @@ export const VideoWrapper = styled(animated.div)<{ $visible: boolean }>`
 
 export const StyledPlayerControls = styled.div<{ $isShow: boolean }>`
   position: fixed;
-  right: 0px;
+  inset-inline: 0;
   bottom: 0px;
-  left: 0px;
   z-index: 307;
   display: flex;
 
@@ -99,7 +98,7 @@ export const ControlContainer = styled.div`
   @media ${tablet} {
     margin-top: 8px;
     .player_right-control {
-      margin-right: -8px;
+      margin-inline-end: -8px;
     }
   }
 `;

@@ -24,12 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect, useCallback, useRef, memo } from "react";
-
+import { useState, useEffect, useCallback, useRef } from "react";
+import { Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { FileAction } from "@docspace/shared/enums";
 import { Events } from "@docspace/shared/enums";
+import { toastr } from "@docspace/shared/components/toast";
 
 import CreateEvent from "./CreateEvent";
 import RenameEvent from "./RenameEvent";
@@ -40,6 +41,8 @@ import EditGroupEvent from "./GroupEvents/EditGroupEvent";
 import ChangeUserTypeEvent from "./ChangeUserTypeEvent";
 import CreatePluginFile from "./CreatePluginFileEvent";
 import ChangeQuotaEvent from "./ChangeQuotaEvent";
+import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
+
 const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
   const [createDialogProps, setCreateDialogProps] = useState({
     visible: false,
@@ -50,6 +53,7 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
     templateId: null,
     fromTemplate: null,
     onClose: null,
+    toForm: false,
   });
 
   const [renameDialogProps, setRenameDialogProps] = useState({
@@ -97,6 +101,13 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
     onClose: null,
   });
 
+  const [createPDFFormFile, setCreatePDFFormFile] = useState({
+    visible: false,
+    file: null,
+    localKey: "",
+    onClose: null,
+  });
+
   const eventHandlersList = useRef([]);
 
   const onCreate = useCallback((e) => {
@@ -116,6 +127,7 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
       preview: payload.preview ?? false,
       actionEdit: payload.edit ?? false,
       openEditor: payload.openEditor ?? true,
+      toForm: payload.toForm ?? false,
       onClose: () => {
         setCreateDialogProps({
           visible: false,
@@ -130,6 +142,7 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
           preview: false,
           actionEdit: false,
           openEditor: true,
+          toForm: false,
         });
       },
     });
@@ -233,6 +246,45 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
     [enablePlugins],
   );
 
+  const handleCreatePDFFormFile = useCallback(
+    /**
+     * @typedef {Object} DetailType
+     * @property {import("@docspace/shared/api/files/types").TFile} file
+     * @property {boolean} show
+     * @property {string} localKey
+     * @param {CustomEvent<DetailType>} event
+     */
+    (event) => {
+      const { file, show, localKey } = event.detail;
+
+      if (!show) {
+        return toastr.success(
+          <Trans
+            ns="PDFFormDialog"
+            i18nKey="PDFFormIsReadyToast"
+            components={{ 1: <strong /> }}
+            values={{ filename: file.title }}
+          />,
+        );
+      }
+
+      setCreatePDFFormFile({
+        visible: true,
+        file,
+        localKey,
+        onClose: () => {
+          setCreatePDFFormFile({
+            visible: false,
+            onClose: null,
+            file: null,
+            localKey: "",
+          });
+        },
+      });
+    },
+    [],
+  );
+
   const onChangeQuota = useCallback((e) => {
     const { payload } = e;
 
@@ -258,6 +310,21 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
       },
     });
   }, []);
+
+  useEffect(() => {
+    window.addEventListener(
+      Events.CREATE_PDF_FORM_FILE,
+      handleCreatePDFFormFile,
+    );
+
+    return () => {
+      window.removeEventListener(
+        Events.CREATE_PDF_FORM_FILE,
+        handleCreatePDFFormFile,
+      );
+    };
+  }, [handleCreatePDFFormFile]);
+
   useEffect(() => {
     window.addEventListener(Events.CREATE, onCreate);
     window.addEventListener(Events.RENAME, onRename);
@@ -356,6 +423,12 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
     ),
     changeQuotaDialog.visible && (
       <ChangeQuotaEvent key={Events.CHANGE_QUOTA} {...changeQuotaDialog} />
+    ),
+    createPDFFormFile.visible && !createDialogProps.visible && (
+      <CreatedPDFFormDialog
+        key="created-pdf-form-dialog"
+        {...createPDFFormFile}
+      />
     ),
   ];
 };

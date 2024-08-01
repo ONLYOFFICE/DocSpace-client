@@ -67,26 +67,12 @@ const StyledInfoPanelHeader = styled.div`
     align-items: center;
     justify-content: space-between;
     .header-text {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: 20px;
-            `
-          : css`
-              margin-left: 20px;
-            `}
+      margin-inline-start: 20px;
     }
   }
 
   .info-panel-toggle-bg {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 20px;
-          `
-        : css`
-            margin-right: 20px;
-          `}
+    margin-inline-end: 20px;
   }
 
   .tabs {

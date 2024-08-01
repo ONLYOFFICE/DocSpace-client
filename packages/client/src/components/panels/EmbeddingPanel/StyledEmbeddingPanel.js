@@ -25,89 +25,92 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
-import { Base } from "@docspace/shared/themes";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
-const StyledEmbeddingPanel = styled.div`
-  .embedding-panel {
-    .scroll-body {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              padding-left: 0 !important;
-            `
-          : css`
-              padding-right: 0 !important;
-            `}
-    }
+const StyledModalDialog = styled(ModalDialog)`
+  .modal-header {
+    margin: 0;
   }
 
-  .embedding_header {
-    padding: 0 16px;
-    border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
-
-    .hotkeys_heading {
-      font-weight: 700;
-      font-size: 18px;
-    }
+  .modal-body {
+    padding: 0;
   }
-`;
-
-StyledEmbeddingPanel.defaultProps = { theme: Base };
-
-const StyledScrollbar = styled(Scrollbar)`
-  position: relative;
-  padding: 16px 0;
-  height: calc(100vh - 87px) !important;
 `;
 
 const StyledBody = styled.div`
+  padding: 0 16px;
+  .embedding-panel_header-link {
+    margin: 10px 0 2px;
+  }
+
+  .embedding-panel_combo-box {
+    margin-bottom: 6px;
+  }
+
+  .embedding-panel_banner {
+    display: flex;
+    padding: 12px 16px;
+    gap: 16px;
+    margin: 0px -16px 12px;
+    background-color: ${(props) => props.theme.infoBlock.background};
+
+    .embedding-panel_banner-close-icon {
+      min-width: 12px;
+      min-height: 12px;
+      margin-inline-start: auto;
+    }
+  }
+
   .embedding-panel_body {
-    padding: 20px 16px 0 16px;
-  }
+    .embedding-panel_bar {
+      .embedding-panel_bar-header {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
 
-  .embedding-panel_links-container {
-    display: flex;
-    .embedding-panel_link {
-      box-sizing: border-box;
-
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 8px;
-            `
-          : css`
-              margin-right: 8px;
-            `}
-
-      border: 1px solid #eceef1;
-      border-radius: 16px;
-      line-height: 20px;
-      padding: 3px 15px;
-
-      text-decoration: none;
+      .header-icon {
+        svg path {
+          fill: ${({ theme }) => theme.embeddingPanel.iconColor};
+        }
+      }
     }
 
-    .embedding-panel_link_active {
-      color: #ffffff;
-      background: #265a8f;
+    .embedding-panel_header-text {
+      margin: 16px 0;
     }
-  }
 
-  .embedding-panel_inputs-container {
-    display: flex;
-    margin-top: 16px;
+    .embedding-panel_checkbox-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
 
-    .embedding-panel_input {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 8px;
-            `
-          : css`
-              margin-right: 8px;
-            `}
-      width: 94px;
+      .embedding-panel_checkbox-element {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+    }
+
+    .embedding-panel_inputs-container {
+      display: flex;
+      margin-bottom: 20px;
+      gap: 8px;
+
+      .embedding-panel_block {
+        width: 100%;
+
+        .embedding-panel_size-block {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          height: 32px;
+        }
+      }
+
+      .embedding-panel_input {
+        width: 94px;
+      }
     }
   }
 
@@ -117,21 +120,14 @@ const StyledBody = styled.div`
   }
 
   .embedding-panel_text {
-    padding: 0px 0 4px 0;
+    padding: 0px 0 4px;
   }
 
   .embedding-panel_copy-icon {
     position: absolute;
     z-index: 1;
     margin: 8px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: 16px;
-          `
-        : css`
-            right: 16px;
-          `}
+    inset-inline-end: 32px;
   }
 
   .embedding-panel_preview-button {
@@ -139,4 +135,4 @@ const StyledBody = styled.div`
   }
 `;
 
-export { StyledEmbeddingPanel, StyledScrollbar, StyledBody };
+export { StyledModalDialog, StyledBody };

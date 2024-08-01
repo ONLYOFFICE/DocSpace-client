@@ -46,7 +46,7 @@
   "URL": "URL",
   "ViewRawPayload": "Погледај сирови payload",
   "WebhookCreated": "Webhook креиран",
-  "WebhookCreationHint": "Овај webhook ће бити додељен свим догађајима у DocSpace-у",
+  "WebhookCreationHint": "Овај webhook ће бити додељен свим догађајима у {{productName}}-у",
   "WebhookDetails": "Webhook детаљи",
   "WebhookEditedSuccessfully": "Webhook конфигурација успешно уређена",
   "WebhookHistory": "Webhook историја",
@@ -55,5 +55,5 @@
   "WebhookRemoved": "Webhook уклоњен",
   "Webhooks": "Webhooks",
   "WebhooksGuide": "Webhooks водич",
-  "WebhooksInfo": "Користите webhooks да бисте извршили прилагођене акције на страни било које апликације или wеб странице коју користите на основу различитих догађаја у ONLYOFFICE DocSpace-у. Овде можете креирати и управљати свим својим webhook-овима, конфигурисати их и прегледати историју сваког webhook-а како бисте проверили њихову изведбу."
+  "WebhooksInfo": "Користите webhooks да бисте извршили прилагођене акције на страни било које апликације или wеб странице коју користите на основу различитих догађаја у {{organizationName}} {{productName}}-у. Овде можете креирати и управљати свим својим webhook-овима, конфигурисати их и прегледати историју сваког webhook-а како бисте проверили њихову изведбу."
 }

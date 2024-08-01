@@ -53,6 +53,7 @@ export const ROOM = "room";
 export const USERS = "users";
 export const USERS_IN_ROOM = "usersInRoom";
 export const PDF_FORM_DIALOG_KEY = "pdf_form_dialog";
+export const CREATED_FORM_KEY = "created_form_key";
 
 export const COUNT_FOR_SHOWING_BAR = 2;
 export const PERCENTAGE_FOR_SHOWING_BAR = 90;
@@ -67,15 +68,6 @@ export const LIVE_CHAT_LOCAL_STORAGE_KEY = "live_chat_state";
 export const MAX_FILE_COMMENT_LENGTH = 255;
 export const LINKS_LIMIT_COUNT = 5;
 export const LOADER_TIMEOUT = 300;
-
-export const ROOMS_TYPE_TRANSLATIONS = Object.freeze({
-  1: "Files:FillingFormRooms",
-  2: "Files:CollaborationRooms",
-  3: "Common:Review",
-  4: "Files:ViewOnlyRooms",
-  5: "Files:CustomRooms",
-  6: "Files:PublicRoom",
-});
 
 export const ROOMS_PROVIDER_TYPE_NAME = Object.freeze({
   1: "Box",
@@ -179,5 +171,11 @@ export const HTML_EXST = [".htm", ".mht", ".html"];
 
 export const SYSTEM_THEME_KEY = "system_theme";
 
-export const PRODUCT_NAME = "DocSpace";
-export const BRAND_NAME = "ONLYOFFICE";
+const SDK_VERSION = "1.0.0";
+export const SDK_SCRIPT_URL =
+  typeof window !== "undefined"
+    ? `${window.location.origin}/static/scripts/sdk/${SDK_VERSION}/api.js`
+    : "";
+
+export const ALLOWED_PASSWORD_CHARACTERS =
+  "a-z, A-Z, 0-9, !\"#%&'()*+,-./:;<=>?@[]^_`{|}";

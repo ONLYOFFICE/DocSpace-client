@@ -29,4 +29,8 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
 export const StyledModal = styled(ModalDialog)`
   user-select: none;
+
+  .modal-body {
+    padding-top: 20px;
+  }
 `;

@@ -66,7 +66,7 @@ const SettingsContainer = ({
 
   useEffect(() => {
     isLdapAvailable && isMobileView && !isLoaded && load();
-    setDocumentTitle(t("Ldap:LdapSettings"));
+    isMobileView && setDocumentTitle(t("Ldap:LdapSettings"));
     onCheckView();
     window.addEventListener("resize", onCheckView);
 
@@ -83,11 +83,7 @@ const SettingsContainer = ({
   const renderBody = () => (
     <>
       {!isMobileView && (
-        <HideButton
-          text={t("Settings:LDAP")}
-          value={isSettingsShown}
-          isDisabled={!isLdapAvailable}
-        />
+        <HideButton text={t("Settings:LDAP")} value={isSettingsShown} />
       )}
 
       {isMobileView && <ToggleLDAP />}
@@ -120,7 +116,6 @@ const SettingsContainer = ({
     return (
       <StyledLdapPage
         isMobileView={isMobileView}
-        theme={theme}
         isSettingPaid={isLdapAvailable}
       >
         {renderBody()}
@@ -132,7 +127,7 @@ const SettingsContainer = ({
 
 export default inject(({ settingsStore, currentQuotaStore, ldapStore }) => {
   const { isLdapAvailable } = currentQuotaStore;
-  const { currentDeviceType, theme } = settingsStore;
+  const { currentDeviceType } = settingsStore;
   const { isSettingsShown, isCertificateDialogVisible, isLoaded, load } =
     ldapStore;
 
@@ -142,7 +137,6 @@ export default inject(({ settingsStore, currentQuotaStore, ldapStore }) => {
     isLdapAvailable,
     isSettingsShown,
     isMobileView,
-    theme,
     isCertificateDialogVisible,
     isLoaded,
     load,

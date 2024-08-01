@@ -666,7 +666,7 @@ export const getBaseTheme = () => {
           b: 38,
           a: 0.2,
         },
-        blur: 10,
+        blur: 9,
       },
 
       content: {
@@ -1403,6 +1403,10 @@ export const getBaseTheme = () => {
     progressBar: {
       backgroundColor: "#F3F4F4",
 
+      animation: {
+        background: "#4781D1",
+      },
+
       percent: {
         background: "#4781D1",
       },
@@ -2080,6 +2084,8 @@ export const getBaseTheme = () => {
       closeButtonSize: "17px",
       closeButtonBg: "transparent",
 
+      nameColor: "#858585",
+
       links: {
         iconColor: "#3B72A7",
         iconErrorColor: "#F24724",
@@ -2106,6 +2112,9 @@ export const getBaseTheme = () => {
         fileExstColor: "#A3A9AE",
         locationIconColor: "#A3A9AE",
         folderLabelColor: "#A3A9AE",
+        renamedItemColor: "#A3A9AE",
+        oldRoleColor: "#657077",
+        messageColor: "#333333",
       },
 
       details: {
@@ -2494,11 +2503,6 @@ export const getBaseTheme = () => {
         descriptionColor: "#555f65",
       },
 
-      tagInput: {
-        tagBackground: "#ECEEF1",
-        tagHoverBackground: "#F3F4F4",
-      },
-
       dropdown: {
         background: "#ffffff",
         borderColor: "#d0d5da",
@@ -2717,6 +2721,7 @@ export const getBaseTheme = () => {
       upload: {
         color: gray,
         tooltipColor: lightCumulus,
+        iconColor: lightErrorStatus,
 
         shareButton: {
           color: gray,
@@ -3049,7 +3054,8 @@ export const getBaseTheme = () => {
             backgroundColorDark: "#282828",
             greenBackgroundColor: "#40865C",
             blueBackgroundColor: "#446995",
-            orangeBackgroundColor: "#AA5252",
+            orangeBackgroundColor: "#BE6650",
+            redBackgroundColor: "#AA5251",
 
             dataFontColor: white,
             dataFontColorBlack: black,
@@ -3205,11 +3211,14 @@ export const getBaseTheme = () => {
 
     tag: {
       color: black,
+      deletedColor: "#A3A9AE",
       background: "#f3f4f4",
       hoverBackground: "#eceef1",
       disabledBackground: "#f8f9f9",
+      deletedBackground: "#F8F9F9",
       defaultTagColor: black,
       newTagBackground: "#eceef1",
+      newTagHoverBackground: "#F3F4F4",
     },
 
     profile: {
@@ -3332,7 +3341,24 @@ export const getBaseTheme = () => {
       pluginName: "#5C5C5C",
       descriptionColor: "#657077",
     },
-
+    oauth: {
+      previewDialog: {
+        border: "1px solid #eceef1",
+      },
+      infoDialog: {
+        descLinkColor: "#657077",
+        blockHeaderColor: "#a3a9ae",
+        separatorColor: "#333333",
+      },
+      list: {
+        descriptionColor: "#a3a9ae",
+      },
+      clientForm: {
+        descriptionColor: "#a3a9ae",
+        headerBorder: "1px solid #d0d5da",
+        scopeDesc: "#a3a9ae",
+      },
+    },
     sdkPresets: {
       borderColor: "#d0d5da",
       secondaryColor: "#657077",
@@ -3347,9 +3373,20 @@ export const getBaseTheme = () => {
       colorClockIcon: "#657077",
     },
 
+    embeddingPanel: {
+      descriptionTextColor: "#657077",
+      iconColor: "#657077",
+    },
+
     completedForm: {
       linkColor: "#4781D1",
-      descriptionColor: gray,
+      descriptionColor: grayMain,
+
+      labelColor: globalColors.grayMain,
+
+      box: {
+        background: globalColors.grayLight,
+      },
     },
   };
 };

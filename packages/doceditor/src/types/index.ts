@@ -68,6 +68,7 @@ export type RootPageProps = {
     action: ActionType;
     share: string;
     editorType: string;
+    error?: string;
   }>;
 };
 export type TDocumentInfo = {
@@ -181,6 +182,8 @@ export interface IInitialConfig {
   errorMessage?: string;
   message?: undefined;
   startFilling?: boolean;
+
+  fillingSessionId?: string;
 }
 
 export type TError = {
@@ -227,6 +230,7 @@ export type EditorProps = {
   errorMessage?: string;
   isSkipError?: boolean;
 
+  onDownloadAs?: (obj: object) => void;
   onSDKRequestSharingSettings?: () => void;
   onSDKRequestSaveAs?: (event: object) => void;
   onSDKRequestInsertImage?: (event: object) => void;

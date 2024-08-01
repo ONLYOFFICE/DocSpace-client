@@ -39,7 +39,6 @@ import ThirdPartyStorage from "./ThirdPartyStorage";
 
 import withLoader from "@docspace/client/src/HOCs/withLoader";
 import SetRoomParamsLoader from "@docspace/shared/skeletons/create-edit-room/SetRoomParams";
-import { getRoomTypeDefaultTagTranslation } from "../data";
 
 import { ImageEditor } from "@docspace/shared/components/image-editor";
 import PreviewTile from "@docspace/shared/components/image-editor/PreviewTile";
@@ -48,12 +47,14 @@ import { Text } from "@docspace/shared/components/text";
 import ChangeRoomOwner from "./ChangeRoomOwner";
 import RoomQuota from "./RoomQuota";
 import { RoomsType } from "@docspace/shared/enums";
+import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
 
 const StyledSetRoomParams = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   gap: 22px;
+  margin-top: 20px;
 
   .icon-editor_text {
     margin-bottom: 6px;
@@ -129,7 +130,7 @@ const SetRoomParams = ({
     if (!icon.uploadedFile !== disableImageRescaling)
       setDisableImageRescaling(!icon.uploadedFile);
 
-    setRoomParams({ ...roomParams, icon: icon });
+    setRoomParams({ ...roomParams, icon: icon, iconWasUpdated: true });
   };
 
   const onOwnerChange = () => {
@@ -157,7 +158,7 @@ const SetRoomParams = ({
           setRoomType={setRoomType}
           setIsScrollLocked={setIsScrollLocked}
           isDisabled={isDisabled}
-          forсeHideDropdown={forceHideRoomTypeDropdown}
+          forceHideDropdown={forceHideRoomTypeDropdown}
         />
       )}
       {isEdit && (
@@ -258,10 +259,7 @@ const SetRoomParams = ({
               previewIcon={previewIcon}
               tags={roomParams.tags.map((tag) => tag.name)}
               isDisabled={isDisabled}
-              defaultTagLabel={getRoomTypeDefaultTagTranslation(
-                roomParams.type,
-                t,
-              )}
+              defaultTagLabel={getRoomTypeName(roomParams.type, t)}
             />
           }
         />

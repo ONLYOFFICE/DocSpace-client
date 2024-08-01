@@ -46,7 +46,6 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const LDAP = ({
   ldapSettingsUrl,
-  theme,
   currentColorScheme,
   isLdapAvailable,
   load,
@@ -60,7 +59,7 @@ const LDAP = ({
   useEffect(() => {
     isLdapAvailable && load(t);
     onCheckView();
-    setDocumentTitle(t("Settings:ManagementCategoryIntegration"));
+    setDocumentTitle(t("Ldap:LdapSettings"));
     window.addEventListener("resize", onCheckView);
 
     return () => window.removeEventListener("resize", onCheckView);
@@ -74,13 +73,9 @@ const LDAP = ({
     }
   };
 
-  if (!isLoaded) return <LdapLoader />;
+  if (!isLoaded && isLdapAvailable) return <LdapLoader />;
   return (
-    <StyledLdapPage
-      isSmallWindow={isSmallWindow}
-      theme={theme}
-      isSettingPaid={isLdapAvailable}
-    >
+    <StyledLdapPage isSmallWindow={isSmallWindow}>
       <Text className="intro-text settings_unavailable">{t("LdapIntro")}</Text>
       <Box marginProp="8px 0 24px 0">
         <Link
@@ -115,7 +110,7 @@ const LDAP = ({
 
 export default inject(({ ldapStore, settingsStore, currentQuotaStore }) => {
   const { isLdapAvailable } = currentQuotaStore;
-  const { ldapSettingsUrl, theme, currentColorScheme, currentDeviceType } =
+  const { ldapSettingsUrl, currentColorScheme, currentDeviceType } =
     settingsStore;
   const { load, isLdapEnabled, isLoaded } = ldapStore;
 
@@ -123,7 +118,6 @@ export default inject(({ ldapStore, settingsStore, currentQuotaStore }) => {
 
   return {
     ldapSettingsUrl,
-    theme,
     currentColorScheme,
     isLdapAvailable,
     load,

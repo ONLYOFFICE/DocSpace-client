@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import { Aside } from "@docspace/shared/components/aside";
@@ -32,12 +32,15 @@ import { Backdrop } from "@docspace/shared/components/backdrop";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import { withTranslation } from "react-i18next";
 import Filter from "@docspace/shared/api/people/filter";
-import { EmployeeType, DeviceType } from "@docspace/shared/enums";
+import { EmployeeType } from "@docspace/shared/enums";
 import { Portal } from "@docspace/shared/components/portal";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledChangeRoomOwner = styled.div`
   display: contents;
+
+  .change-owner_people-selector {
+    overflow: visible;
+  }
 
   ${({ showBackButton }) =>
     !showBackButton &&
@@ -79,19 +82,6 @@ const ChangeRoomOwner = (props) => {
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    document.addEventListener("keyup", onKeyUp, false);
-
-    return () => {
-      document.removeEventListener("keyup", onKeyUp, false);
-    };
-  }, []);
-
-  const onKeyUp = (e) => {
-    if (e.keyCode === 27) onClose();
-    if (e.keyCode === 13 || e.which === 13) onChangeRoomOwner();
-  };
 
   const onChangeRoomOwner = async (
     user,
@@ -158,22 +148,19 @@ const ChangeRoomOwner = (props) => {
           disableDisabledUsers
           withInfo
           infoText={t("CreateEditRoomDialog:PeopleSelectorInfo", {
-            productName: PRODUCT_NAME,
+            productName: t("Common:ProductName"),
           })}
           emptyScreenHeader={t("Common:NotFoundUsers")}
           emptyScreenDescription={t("CreateEditRoomDialog:PeopleSelectorInfo", {
-            productName: PRODUCT_NAME,
+            productName: t("Common:ProductName"),
           })}
+          className="change-owner_people-selector"
         />
       </Aside>
     </StyledChangeRoomOwner>
   );
 
-  return currentDeviceType === DeviceType.mobile ? (
-    <Portal visible={visible} element={asideComponent} />
-  ) : (
-    asideComponent
-  );
+  return <Portal visible={visible} element={asideComponent} />;
 };
 
 export default inject(

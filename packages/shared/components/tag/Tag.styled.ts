@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { ReactSVG } from "react-svg";
 import styled, { css } from "styled-components";
 
 import { Text } from "../text";
@@ -34,6 +35,7 @@ const StyledTag = styled.div<{
   tagMaxWidth?: string;
   isLast?: boolean;
   isDisabled?: boolean;
+  isDeleted?: boolean;
   isNewTag?: boolean;
   isDefault?: boolean;
   isClickable?: boolean;
@@ -48,15 +50,7 @@ const StyledTag = styled.div<{
   box-sizing: border-box;
 
   padding: 2px 10px;
-
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-left: ${props.isLast ? "0" : "4px"};
-        `
-      : css`
-          margin-right: ${props.isLast ? "0" : "4px"};
-        `}
+  margin-inline-end: ${({ isLast }) => (isLast ? "0" : "4px")};
 
   background: ${(props) =>
     props.isDisabled
@@ -76,15 +70,18 @@ const StyledTag = styled.div<{
     pointer-events: none;
   }
 
+  ${({ isDeleted, theme }) =>
+    isDeleted &&
+    css`
+      background: ${theme.tag.deletedBackground};
+      .tag-text {
+        text-decoration: line-through;
+        color: ${theme.tag.deletedColor};
+      }
+    `}
+
   .tag-icon {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 12px;
-          `
-        : css`
-            margin-left: 12px;
-          `}
+    margin-inline-start: 12px;
 
     cursor: pointer;
   }
@@ -93,25 +90,75 @@ const StyledTag = styled.div<{
     padding: 2px 0px;
     width: 16px;
     height: 16px;
+
+    ${(props) =>
+      !props.theme.isBase &&
+      css`
+        svg {
+          path[fill] {
+            fill: #fff;
+        }
+
+          path[stroke] {
+            stroke: #fff;
+          }
+        `}
+    }
   }
 
   ${(props) =>
     props.isClickable &&
     !props.isDisabled &&
+    !props.isDeleted &&
     css`
       cursor: pointer;
       &:hover {
-        background: ${props.theme.tag.hoverBackground};
+        background: ${!props.isNewTag
+          ? props.theme.tag.hoverBackground
+          : props.theme.tag.newTagHoverBackground};
       }
     `}
 `;
 
 StyledTag.defaultProps = { theme: Base };
 
-const StyledDropdownText = styled(Text)`
+const StyledDropdownIcon = styled(ReactSVG)`
+  display: flex;
+  align-items: center;
+
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl" &&
+    css`
+      transform: scaleX(-1);
+    `}
+
+  pointer-events: none;
+
+  svg {
+    path:first-child {
+      stroke: ${(props) => props.theme.tag.color};
+    }
+    path:last-child {
+      fill: ${(props) => props.theme.tag.color};
+    }
+  }
+`;
+
+const StyledDropdownText = styled(Text)<{ removeTagIcon?: boolean }>`
   line-height: 30px;
   display: block;
   pointer-events: none;
+  ${(props) =>
+    !props.removeTagIcon &&
+    css`
+      ${props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: 8px !important;
+          `
+        : css`
+            margin-left: 8px !important;
+          `}
+    `}
 `;
 
-export { StyledTag, StyledDropdownText };
+export { StyledTag, StyledDropdownText, StyledDropdownIcon };

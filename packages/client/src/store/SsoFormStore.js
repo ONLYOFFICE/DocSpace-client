@@ -187,6 +187,7 @@ class SsoFormStore {
     } else {
       this.enableSso = false;
       !this.hasErrors && this.entityId.trim() !== "" && this.saveSsoSettings(t);
+      this.hideErrors();
     }
 
     for (let key in this) {
@@ -273,6 +274,7 @@ class SsoFormStore {
       this.isLoadingXml = true;
       const response = await loadXmlMetadata(data);
       this.setFieldsFromMetaData(response.data.meta);
+      this.hideErrors();
       this.isLoadingXml = false;
     } catch (err) {
       this.isLoadingXml = false;
@@ -291,6 +293,7 @@ class SsoFormStore {
       this.isLoadingXml = true;
       const response = await uploadXmlMetadata(data);
       this.setFieldsFromMetaData(response.data.meta);
+      this.hideErrors();
       this.isLoadingXml = false;
     } catch (err) {
       this.isLoadingXml = false;
@@ -377,6 +380,8 @@ class SsoFormStore {
     };
   };
   saveSsoSettings = async (t) => {
+    this.checkRequiredFields();
+
     const settings = this.getSettings();
     const data = { serializeSettings: JSON.stringify(settings) };
 
@@ -877,6 +882,15 @@ class SsoFormStore {
     this.errorMessage = null;
   };
 
+  hideErrors = () => {
+    for (let key in this) {
+      if (key.includes("HasError") && this[key] !== false) {
+        console.log("key", key);
+        this[key] = false;
+      }
+    }
+  };
+
   validate = (string) => {
     if (string.trim().length === 0) throw new Error("EmptyFieldError");
     else return true;
@@ -886,9 +900,22 @@ class SsoFormStore {
     window.open("/sso/metadata", "_blank");
   };
 
+  checkRequiredFields = () => {
+    this.setError("entityId", this.entityId);
+    this.setError("ssoUrlPost", this.ssoUrlPost);
+    this.setError("sloUrlPost", this.sloUrlPost);
+    this.setError("firstName", this.firstName);
+    this.setError("lastName", this.lastName);
+    this.setError("email", this.email);
+
+    if (this.hasErrors) {
+      this.scrollToField();
+    }
+  };
+
   get hasErrors() {
     for (let key in this) {
-      if (key.includes("ErrorMessage") && this[key] !== null) return true;
+      if (key.includes("HasError") && this[key] !== false) return true;
     }
     return false;
   }
@@ -918,6 +945,18 @@ class SsoFormStore {
         cert.action === SSO_ENCRYPT || cert.action === SSO_SIGNING_ENCRYPT,
     );
   }
+
+  scrollToField = () => {
+    for (let key in this) {
+      if (key.includes("HasError") && this[key] !== false) {
+        const name = key.replace("HasError", "");
+        const element = document.getElementsByName(name)[0];
+        element.focus();
+        element.blur();
+        return;
+      }
+    }
+  };
 }
 
 export default SsoFormStore;

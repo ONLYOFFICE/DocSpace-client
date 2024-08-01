@@ -60,7 +60,6 @@ import { PreviewBlock } from "../sub-components/PreviewBlock";
 import { loadFrame } from "../utils";
 
 import {
-  scriptUrl,
   dataDimensions,
   defaultWidthDimension,
   defaultHeightDimension,
@@ -79,10 +78,11 @@ import {
   ControlsSection,
   CheckboxGroup,
 } from "./StyledPresets";
+import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const SimpleRoom = (props) => {
-  const { t, setDocumentTitle, fetchExternalLinks, currentColorScheme, theme } =
-    props;
+  const { t, fetchExternalLinks, currentColorScheme, theme } = props;
   const navigate = useNavigate();
 
   setDocumentTitle(t("JavascriptSdk"));
@@ -119,7 +119,7 @@ const SimpleRoom = (props) => {
     window.DocSpace?.SDK?.frames[frameId]?.destroyFrame();
   };
 
-  const loadCurrentFrame = () => loadFrame(config, scriptUrl);
+  const loadCurrentFrame = () => loadFrame(config, SDK_SCRIPT_URL);
 
   useEffect(() => {
     loadCurrentFrame();
@@ -244,7 +244,7 @@ const SimpleRoom = (props) => {
           preview={preview}
           theme={theme}
           frameId={frameId}
-          scriptUrl={scriptUrl}
+          scriptUrl={SDK_SCRIPT_URL}
           config={config}
           isDisabled={config?.id === undefined}
         />
@@ -385,14 +385,12 @@ const SimpleRoom = (props) => {
   );
 };
 
-export default inject(({ authStore, settingsStore, publicRoomStore }) => {
-  const { setDocumentTitle } = authStore;
+export default inject(({ settingsStore, publicRoomStore }) => {
   const { theme, currentColorScheme } = settingsStore;
   const { fetchExternalLinks } = publicRoomStore;
 
   return {
     theme,
-    setDocumentTitle,
     fetchExternalLinks,
     currentColorScheme,
   };

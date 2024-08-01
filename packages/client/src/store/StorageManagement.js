@@ -102,10 +102,15 @@ class StorageManagement {
       );
     }
 
+    this.needRecalculating = false;
+
     try {
       if (isInit) this.needRecalculating = await checkRecalculateQuota();
 
+      if(!this.needRecalculating && this.isRecalculating) this.setIsRecalculating(false);
+
       let roomsList, accountsList;
+      
       [
         this.portalInfo,
         this.activeUsersCount,
@@ -123,12 +128,26 @@ class StorageManagement {
         );
 
       if (!this.quotaSettings.lastRecalculateDate && isInit) {
-        await recalculateQuota();
-        this.getIntervalCheckRecalculate();
+      
+        this.setIsRecalculating(true);
+
+        try {
+          await recalculateQuota();
+
+          this.getIntervalCheckRecalculate();
+        } catch (e) {
+          toastr.error(e);
+
+          this.setIsRecalculating(false);
+        }
+
         return;
       }
 
-      if (this.needRecalculating) this.getIntervalCheckRecalculate();
+      if (this.needRecalculating) {
+        this.setIsRecalculating(true);
+        this.getIntervalCheckRecalculate();
+      }
     } catch (e) {
       toastr.error(e);
     }
@@ -180,6 +199,9 @@ class StorageManagement {
   };
   getIntervalCheckRecalculate = () => {
     let isWaitRequest = false;
+
+    if (this.intervalId) return;
+
     this.intervalId = setInterval(async () => {
       try {
         if (isWaitRequest) {

@@ -29,6 +29,7 @@ import { makeAutoObservable } from "mobx";
 
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
   frameCallCommand,
   isPublicRoom as isPublicRoomUtil,
@@ -124,7 +125,13 @@ class PublicRoomStore {
 
         if (filter) {
           const folderId = filter.folder;
-          return fetchFiles(folderId, filter);
+          return fetchFiles(folderId, filter).catch((error) => {
+            if (error?.response?.status === 403) {
+              window.location.replace(
+                combineUrl(window.ClientConfig?.proxy?.url, "/login"),
+              );
+            }
+          });
         }
 
         return Promise.resolve();
@@ -207,8 +214,11 @@ class PublicRoomStore {
       .then((res) => {
         if (res?.shared) {
           const filter = FilesFilter.getDefault();
+          const subFolder = new URLSearchParams(window.location.search).get(
+            "folder",
+          );
           const url = getCategoryUrl(CategoryType.Shared);
-          filter.folder = res.id;
+          filter.folder = subFolder ? subFolder : res.id;
 
           return window.location.replace(`${url}?${filter.toUrlParams()}`);
         }

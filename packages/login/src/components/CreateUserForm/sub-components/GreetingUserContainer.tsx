@@ -76,7 +76,7 @@ export const GreetingUserContainer = ({
           values={{
             email,
           }}
-          portalName={PRODUCT_NAME}
+          productName={t("Common:ProductName")}
           components={{
             1: <ColorTheme tag="a" themeId={ThemeId.Link} isHovered={false} />,
           }}

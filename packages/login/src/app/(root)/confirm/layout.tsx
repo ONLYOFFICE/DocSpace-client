@@ -25,6 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import ConfirmRoute from "@/components/ConfirmRoute";
+import {
+  StyledBody,
+  StyledContent,
+  StyledPage,
+} from "@/components/StyledConfirm.styled";
+
 import { getSettings } from "@/utils/actions";
 
 export default async function Layout({
@@ -35,15 +41,19 @@ export default async function Layout({
   const settings = await getSettings();
 
   return (
-    <>
-      {settings && typeof settings !== "string" && (
-        <ConfirmRoute
-          defaultPage={settings?.defaultPage}
-          socketUrl={settings?.socketUrl}
-        >
-          {children}
-        </ConfirmRoute>
-      )}
-    </>
+    <StyledPage id="confirm-page">
+      <StyledContent id="confirm-content">
+        <StyledBody id="confirm-body">
+          {settings && typeof settings !== "string" && (
+            <ConfirmRoute
+              defaultPage={settings?.defaultPage}
+              socketUrl={settings?.socketUrl}
+            >
+              {children}
+            </ConfirmRoute>
+          )}
+        </StyledBody>
+      </StyledContent>
+    </StyledPage>
   );
 }

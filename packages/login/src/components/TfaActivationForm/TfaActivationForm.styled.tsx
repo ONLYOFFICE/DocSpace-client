@@ -28,143 +28,8 @@
 
 import styled from "styled-components";
 
-import {
-  mobile,
-  tablet,
-  getCorrectFourValuesStyle,
-} from "@docspace/shared/utils";
+import { mobile, tablet } from "@docspace/shared/utils";
 import { Box } from "@docspace/shared/components/box";
-
-export const StyledPage = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
-  max-width: 960px;
-  box-sizing: border-box;
-
-  @media ${tablet} {
-    padding: 0 16px;
-  }
-
-  @media ${mobile} {
-    width: 100%;
-    padding: ${({ theme }) =>
-      getCorrectFourValuesStyle("32px 8px 0 16px", theme.interfaceDirection)};
-
-    .language-combo-box {
-      display: none;
-    }
-  }
-
-  .subtitle {
-    margin-bottom: 32px;
-  }
-
-  .password-form {
-    width: 100%;
-    margin-bottom: 8px;
-  }
-
-  .subtitle {
-    margin-bottom: 32px;
-  }
-
-  .language-combo-box {
-    position: absolute;
-    right: 28px;
-    top: 28px;
-  }
-`;
-
-export const StyledContent = styled.div`
-  min-height: 100vh;
-  flex: 1 0 auto;
-  flex-direction: column;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-
-  @media ${mobile} {
-    width: 100%;
-    justify-content: start;
-    min-height: 100%;
-  }
-`;
-
-export const StyledHeader = styled.div`
-  .title {
-    margin-bottom: 32px;
-    text-align: center;
-  }
-
-  .subtitle {
-    margin-bottom: 32px;
-  }
-
-  .portal-logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-bottom: 40px;
-  }
-
-  @media ${mobile} {
-    margin-top: 0;
-  }
-`;
-
-export const StyledBody = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 56px auto;
-
-  @media ${mobile} {
-    width: 100%;
-    margin: 0 auto;
-  }
-
-  .title {
-    margin-bottom: 32px;
-    text-align: center;
-  }
-
-  .subtitle {
-    margin-bottom: 32px;
-  }
-
-  .portal-logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-bottom: 40px;
-  }
-
-  .password-field-wrapper {
-    width: 100%;
-  }
-
-  .password-change-form {
-    margin-top: 32px;
-    margin-bottom: 16px;
-  }
-
-  .phone-input {
-    margin-bottom: 24px;
-  }
-
-  .delete-profile-confirm {
-    margin-bottom: 8px;
-  }
-
-  .phone-title {
-    margin-bottom: 8px;
-  }
-`;
 
 export const StyledForm = styled(Box)`
   margin: 56px auto;
@@ -200,13 +65,18 @@ export const StyledForm = styled(Box)`
     }
   }
 
-  .portal-logo {
-    padding-bottom: 40px;
+  .logo-wrapper {
+    height: 44px;
+    width: auto;
 
     @media ${tablet} {
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+
+    @media ${mobile} {
+      display: none;
     }
   }
 

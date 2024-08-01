@@ -29,13 +29,11 @@
 "use client";
 
 import { ChangeEvent, useContext, useState } from "react";
-import { useTheme } from "styled-components";
 import { Trans, useTranslation } from "react-i18next";
 
 import { Link, LinkTarget } from "@docspace/shared/components/link";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { Text } from "@docspace/shared/components/text";
-import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import { Box } from "@docspace/shared/components/box";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { FieldContainer } from "@docspace/shared/components/field-container";
@@ -50,8 +48,6 @@ import { TColorScheme } from "@docspace/shared/themes";
 import { TPasswordHash } from "@docspace/shared/api/settings/types";
 import { loginWithTfaCode } from "@docspace/shared/api/user";
 import { validateTfaCode } from "@docspace/shared/api/settings";
-import { getLogoUrl } from "@docspace/shared/utils";
-import { WhiteLabelLogoType } from "@docspace/shared/enums";
 
 import {
   TFA_ANDROID_APP_URL,
@@ -62,11 +58,8 @@ import withLoader from "@/HOCs/withLoader";
 import { TError, WithLoaderProps } from "@/types";
 import { ConfirmRouteContext } from "../ConfirmRoute";
 
-import {
-  StyledContent,
-  StyledForm,
-  StyledPage,
-} from "./TfaActivationForm.styled";
+
+import { GreetingContainer } from "../GreetingContainer";
 
 const PROXY_BASE_URL = combineUrl(window.ClientConfig?.proxy?.url, "/profile");
 
@@ -137,123 +130,113 @@ const TfaActivationForm = ({
     if (event.code === "Enter" || event.code === "NumpadEnter") onSubmit();
   };
 
-  const theme = useTheme();
-
-  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme.isBase);
-
   return (
-    <StyledPage>
-      <StyledContent>
-        <StyledForm className="set-app-container">
-          <Box className="set-app-description" marginProp="0 0 32px 0">
-            <PortalLogo className="portal-logo" />
-            <Text isBold fontSize="14px" className="set-app-title">
-              {t("SetAppTitle")}
-            </Text>
+    <>
+      <Box className="set-app-description" marginProp="0 0 32px 0">
+        <GreetingContainer />
 
-            <Trans
-              t={t}
-              i18nKey="SetAppDescription"
-              ns="Confirm"
-              productName={t("Common:ProductName")}
+        <Text isBold fontSize="14px" className="set-app-title">
+          {t("SetAppTitle")}
+        </Text>
+
+        <Trans
+          t={t}
+          i18nKey="SetAppDescription"
+          ns="Confirm"
+          productName={t("Common:ProductName")}
+        >
+          The two-factor authentication is enabled to provide additional portal
+          security. Configure your authenticator application to continue work on
+          the portal. For example you could use Google Authenticator for
+          <Link
+            color={currentColorScheme?.main?.accent}
+            href={TFA_ANDROID_APP_URL}
+            target={LinkTarget.blank}
+          >
+            Android
+          </Link>
+          and{" "}
+          <Link
+            color={currentColorScheme?.main?.accent}
+            href={TFA_IOS_APP_URL}
+            target={LinkTarget.blank}
+          >
+            iOS
+          </Link>{" "}
+          or Authenticator for{" "}
+          <Link
+            color={currentColorScheme?.main?.accent}
+            href={TFA_WIN_APP_URL}
+            target={LinkTarget.blank}
+          >
+            Windows Phone
+          </Link>{" "}
+          .
+        </Trans>
+
+        <Text className="set-app-text">
+          <Trans
+            t={t}
+            i18nKey="SetAppInstallDescription"
+            ns="Confirm"
+            key={secretKey}
+          >
+            To connect your apllication scan the QR code or manually enter your
+            secret key <strong>{{ secretKey }}</strong> then enter 6-digit code
+            from your application in the field below.
+          </Trans>
+        </Text>
+      </Box>
+      <FormWrapper id="tfa-activation-form">
+        <Box
+          displayProp="flex"
+          flexDirection="column"
+          className="app-code-wrapper"
+        >
+          <div className="qrcode-wrapper">
+            <img src={qrCode} height="180px" width="180px" alt="QR-code" />
+          </div>
+          <Box className="app-code-input">
+            <FieldContainer
+              labelVisible={false}
+              hasError={error ? true : false}
+              errorMessage={error}
             >
-              The two-factor authentication is enabled to provide additional
-              portal security. Configure your authenticator application to
-              continue work on the portal. For example you could use Google
-              Authenticator for
-              <Link
-                color={currentColorScheme?.main?.accent}
-                href={TFA_ANDROID_APP_URL}
-                target={LinkTarget.blank}
-              >
-                Android
-              </Link>
-              and{" "}
-              <Link
-                color={currentColorScheme?.main?.accent}
-                href={TFA_IOS_APP_URL}
-                target={LinkTarget.blank}
-              >
-                iOS
-              </Link>{" "}
-              or Authenticator for{" "}
-              <Link
-                color={currentColorScheme?.main?.accent}
-                href={TFA_WIN_APP_URL}
-                target={LinkTarget.blank}
-              >
-                Windows Phone
-              </Link>{" "}
-              .
-            </Trans>
-
-            <Text className="set-app-text">
-              <Trans
-                t={t}
-                i18nKey="SetAppInstallDescription"
-                ns="Confirm"
-                key={secretKey}
-              >
-                To connect your apllication scan the QR code or manually enter
-                your secret key <strong>{{ secretKey }}</strong> then enter
-                6-digit code from your application in the field below.
-              </Trans>
-            </Text>
+              <TextInput
+                id="code"
+                name="code"
+                type={InputType.text}
+                size={InputSize.large}
+                scale
+                isAutoFocussed
+                tabIndex={1}
+                placeholder={t("EnterCodePlaceholder")}
+                isDisabled={isLoading}
+                maxLength={6}
+                onChange={onChangeInput}
+                value={code}
+                hasError={error ? true : false}
+                onKeyDown={onKeyPress}
+              />
+            </FieldContainer>
           </Box>
-          <FormWrapper>
-            <Box
-              displayProp="flex"
-              flexDirection="column"
-              className="app-code-wrapper"
-            >
-              <div className="qrcode-wrapper">
-                <img src={qrCode} height="180px" width="180px" alt="QR-code" />
-              </div>
-              <Box className="app-code-input">
-                <FieldContainer
-                  labelVisible={false}
-                  hasError={error ? true : false}
-                  errorMessage={error}
-                >
-                  <TextInput
-                    id="code"
-                    name="code"
-                    type={InputType.text}
-                    size={InputSize.large}
-                    scale
-                    isAutoFocussed
-                    tabIndex={1}
-                    placeholder={t("EnterCodePlaceholder")}
-                    isDisabled={isLoading}
-                    maxLength={6}
-                    onChange={onChangeInput}
-                    value={code}
-                    hasError={error ? true : false}
-                    onKeyDown={onKeyPress}
-                  />
-                </FieldContainer>
-              </Box>
-              <Box className="app-code-continue-btn">
-                <Button
-                  scale
-                  primary
-                  size={ButtonSize.medium}
-                  tabIndex={3}
-                  label={
-                    isLoading
-                      ? t("Common:LoadingProcessing")
-                      : t("SetAppButton")
-                  }
-                  isDisabled={!code.length || isLoading}
-                  isLoading={isLoading}
-                  onClick={onSubmit}
-                />
-              </Box>
-            </Box>
-          </FormWrapper>
-        </StyledForm>
-      </StyledContent>
-    </StyledPage>
+          <Box className="app-code-continue-btn">
+            <Button
+              scale
+              primary
+              size={ButtonSize.medium}
+              tabIndex={3}
+              label={
+                isLoading ? t("Common:LoadingProcessing") : t("SetAppButton")
+              }
+              isDisabled={!code.length || isLoading}
+              isLoading={isLoading}
+              onClick={onSubmit}
+            />
+          </Box>
+        </Box>
+      </FormWrapper>
+    </>
   );
 };
 

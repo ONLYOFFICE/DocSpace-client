@@ -4,7 +4,7 @@
   "CreateRoomConfirmation": "继续且不连接存储？\n您已选择尚未连接的第三方存储选项。如果在未连接服务的情况下继续，则不会添加此选项。",
   "CreateTagOption": "创建标签",
   "DisableRoomQuota": "停用该房间的配额",
-  "FormRoomBarDescription": " 此房间可供任何有链接的人使用。外部用户将拥有所有文件的填表权限。",
+  "FormRoomBarDescription": "任何有链接的人都能够访问此房间。外部用户拥有所有文件的填写权限。",
   "Icon": "图标",
   "MakeRoomPrivateDescription": "此房间中的所有文件都将被加密。",
   "MakeRoomPrivateLimitationsWarningDescription": " 使用此功能，您只能邀请现有的{{productName}}用户。创建房间后，您将无法更改用户列表。",

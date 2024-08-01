@@ -12,6 +12,7 @@
   "StorageQuotaDescription": "Bạn có thể xóa các tập tin không cần thiết hoặc <1>{{clickHere}}</1> để tìm gói dịch vụ có giá phù hợp hơn cho {{productName}} của mình.",
   "StorageQuotaExceeded": "Đã vượt quá hạn mức lưu trữ",
   "StorageQuotaHeader": "Dung lượng lưu trữ sắp vượt quá:{{currentValue}} / {{maxValue}}",
+  "StorageQuotaUserDescription": "Bạn có thể xóa các tập tin không cần thiết để giải phóng dung lượng ổ đĩa.",
   "TenantCustomQuotaDescription": "Bạn có thể xóa các tập tin không cần thiết hoặc thay đổi hạn mức trong cài đặt Quản lý lưu trữ <1>.</1>",
   "UserQuotaDescription": "<1>{{clickHere}}</1> để tìm gói dịch vụ có giá tốt hơn cho {{productName}} của bạn.",
   "UserQuotaHeader": "Sắp vượt quá số lượng quản trị viên/người dùng cấp cao:{{currentValue}}/{{maxValue}}."

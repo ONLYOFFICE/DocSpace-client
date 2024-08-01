@@ -1,4 +1,11 @@
 {
+  "CodeSuccessfullyCopied": "Code d'insertion copié avec succès dans le presse-papiers",
+  "ContentRestricted": "La copie de contenu, le téléchargement et l'impression de fichiers sont restreints.",
+  "DisplaySettings": "Paramètres d'affichage",
+  "EmbeddingBarAllowList": "Ajoutez l'URL du site web à intégrer à <1>la liste d'autorisation</1>.",
+  "EmbeddingBarDescription": "L'intégration ne fonctionnera que pour les URL spécifiées par l'administrateur {{productName}} dans les paramètres du SDK JavaScript.",
   "Height": "Hauteur",
+  "Link": "Lien",
+  "LinkProtectedWithPassword": "Le lien est protégé par un mot de passe.",
   "Width": "Largeur"
 }

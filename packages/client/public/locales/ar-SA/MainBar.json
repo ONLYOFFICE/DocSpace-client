@@ -12,6 +12,7 @@
   "StorageQuotaDescription": "يمكنك إزالة الملفات غير الضرورية أو <1> {{clickHere}}</1> للعثور على خطة تسعير أكثر ملاءمة لـ {{productName}} الخاص بك.",
   "StorageQuotaExceeded": "تم تجاوز حصة التخزين",
   "StorageQuotaHeader": "حجم مساحة التخزين على وشك أن يتم تجاوزها: {{currentValue}} / {{maxValue}}",
+  "StorageQuotaUserDescription": "يمكنك إزالة الملفات غير الضرورية لتحرير مساحة القرص.",
   "TenantCustomQuotaDescription": "يمكنك إزالة الملفات غير الضرورية أو تغيير الحصة النسبية في <1> إعدادات إدارة التخزين.</1>",
   "UserQuotaDescription": "<1>{{clickHere}}</1> للعثور على خطة تسعير أفضل لـ {{productName}} الخاص بك.",
   "UserQuotaHeader": "عدد المشرفين المستخدمين المتميزين على وشك أن يتم تجاوزه: {{currentValue}} / {{maxValue}}"

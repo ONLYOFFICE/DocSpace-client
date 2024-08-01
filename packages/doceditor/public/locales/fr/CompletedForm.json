@@ -1,1 +1,7 @@
-{}
+{
+  "BackToRoom": "Retour à la salle",
+  "Description": "Votre formulaire rempli et enregistré",
+  "FillItOutAgain": "Remplir à nouveau",
+  "FormNumber": "Numéro de formulaire :",
+  "Title": "Le formulaire est rempli"
+}

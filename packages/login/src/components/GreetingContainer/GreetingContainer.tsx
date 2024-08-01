@@ -51,16 +51,18 @@ export const GreetingContainer = ({
   return (
     <>
       <img src={logoUrl} className="logo-wrapper" alt="greeting-logo" />
-      <Text
-        fontSize="23px"
-        fontWeight={700}
-        textAlign="center"
-        className="greeting-title"
-      >
-        {welcomeTitle
-          ? t(`${welcomeTitle}`, { productName: PRODUCT_NAME })
-          : greetingSettings}
-      </Text>
+      {(welcomeTitle || greetingSettings) && (
+        <Text
+          fontSize="23px"
+          fontWeight={700}
+          textAlign="center"
+          className="greeting-title"
+        >
+          {welcomeTitle
+            ? t(`${welcomeTitle}`, { productName: PRODUCT_NAME })
+            : greetingSettings}
+        </Text>
+      )}
     </>
   );
 };

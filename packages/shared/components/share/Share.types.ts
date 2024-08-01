@@ -92,6 +92,8 @@ export type ExpiredComboBoxProps = {
   ) => Promise<void>;
   isDisabled?: boolean;
   isRoomsLink?: boolean;
+  changeAccessOption: (item: TOption, link: TFileLink) => Promise<void>;
+  accessOptions: TOption[];
 };
 
 export type ShareProps = {

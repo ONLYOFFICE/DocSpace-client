@@ -163,9 +163,11 @@ const LinkRow = ({
             {!isPrimaryLink && (
               <ExpiredComboBox
                 link={link}
+                accessOptions={accessOptions}
                 changeExpirationOption={changeExpirationOption}
                 isDisabled={isLoaded || isArchiveFolder}
                 isRoomsLink={isRoomsLink}
+                changeAccessOption={changeAccessOption}
               />
             )}
           </div>

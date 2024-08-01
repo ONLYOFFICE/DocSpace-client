@@ -31,9 +31,8 @@ import { ChangeEvent, useContext, useState } from "react";
 
 import { validateTfaCode } from "@docspace/shared/api/settings";
 import { loginWithTfaCode } from "@docspace/shared/api/user";
-import { FormWrapper } from "@docspace/shared/components/form-wrapper";
+
 import { toastr } from "@docspace/shared/components/toast";
-import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { FieldContainer } from "@docspace/shared/components/field-container";
@@ -48,8 +47,6 @@ import { TPasswordHash } from "@docspace/shared/api/settings/types";
 import withLoader from "@/HOCs/withLoader";
 import { TError, WithLoaderProps } from "@/types";
 import { ConfirmRouteContext } from "../ConfirmRoute";
-
-import { StyledForm } from "./TfaAuthForm.styled";
 
 type TfaAuthFormProps = {
   passwordHash: TPasswordHash;
@@ -119,63 +116,60 @@ const TfaAuthForm = ({
   };
 
   return (
-    <StyledForm className="app-code-container">
-      <PortalLogo className="portal-logo" />
-      <FormWrapper>
-        <Box className="app-code-description" marginProp="0 0 32px 0">
-          <Text isBold fontSize="14px" className="app-code-text">
-            {t("EnterAppCodeTitle")}
-          </Text>
-          <Text>{t("EnterAppCodeDescription")}</Text>
-        </Box>
-        <Box
-          displayProp="flex"
-          flexDirection="column"
-          className="app-code-wrapper"
-        >
-          <Box className="app-code-input">
-            <FieldContainer
-              labelVisible={false}
-              hasError={error ? true : false}
-              errorMessage={error}
-            >
-              <TextInput
-                id="code"
-                name="code"
-                type={InputType.text}
-                size={InputSize.large}
-                scale
-                isAutoFocussed
-                tabIndex={1}
-                placeholder={t("EnterCodePlaceholder")}
-                isDisabled={isLoading}
-                maxLength={6}
-                onChange={onChangeInput}
-                value={code}
-                hasError={error ? true : false}
-                onKeyDown={onKeyPress}
-              />
-            </FieldContainer>
-          </Box>
-          <Box className="app-code-continue-btn">
-            <Button
+    <>
+      <Box className="app-code-description" marginProp="0 0 32px 0">
+        <Text isBold fontSize="14px" className="app-code-text">
+          {t("EnterAppCodeTitle")}
+        </Text>
+        <Text>{t("EnterAppCodeDescription")}</Text>
+      </Box>
+      <Box
+        displayProp="flex"
+        flexDirection="column"
+        className="app-code-wrapper"
+      >
+        <Box className="app-code-input">
+          <FieldContainer
+            labelVisible={false}
+            hasError={error ? true : false}
+            errorMessage={error}
+          >
+            <TextInput
+              id="code"
+              name="code"
+              type={InputType.text}
+              size={InputSize.large}
               scale
-              primary
-              size={ButtonSize.medium}
-              tabIndex={3}
-              label={
-                isLoading
-                  ? t("Common:LoadingProcessing")
-                  : t("Common:ContinueButton")
-              }
-              isDisabled={!code.length || isLoading}
-              isLoading={isLoading}
-              onClick={onSubmit}
+              isAutoFocussed
+              tabIndex={1}
+              placeholder={t("EnterCodePlaceholder")}
+              isDisabled={isLoading}
+              maxLength={6}
+              onChange={onChangeInput}
+              value={code}
+              hasError={error ? true : false}
+              onKeyDown={onKeyPress}
             />
-          </Box>
+          </FieldContainer>
         </Box>
-      </FormWrapper>
-    </StyledForm>
+        <Box className="app-code-continue-btn">
+          <Button
+            scale
+            primary
+            size={ButtonSize.medium}
+            tabIndex={3}
+            label={
+              isLoading
+                ? t("Common:LoadingProcessing")
+                : t("Common:ContinueButton")
+            }
+            isDisabled={!code.length || isLoading}
+            isLoading={isLoading}
+            onClick={onSubmit}
+          />
+        </Box>
+      </Box>
+    </>
   );
 };
 

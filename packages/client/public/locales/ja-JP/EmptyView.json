@@ -1,10 +1,9 @@
 {
-  "CollaboratorEmptyDesciprtion": " クイックアクションで始めましょう：",
   "CollaboratorEmptyTitle": " ルームは空です。",
   "CreateNewFileDescription": " ファイルやフォルダを作成して、ルームで作業を開始する",
   "CreateNewFileTitle": " 新しいファイルを作成",
   "CustomRoomEmptyTitle": " カスタムルームへようこそ",
-  "EmptyDescription": " クイックアクションで始めましょう：",
+  "EmptyDescription": " クイックアクションで始めましょう：",
   "FormFolderDefaultDescription": " PDF フォームをここにドロップするか、{{productName}} またはデバイスからアップロードしてください。",
   "FormFolderDefaultTitle": " フォームはまだありません",
   "FormFolderDefaultUserDescription": " 管理者がアップロードしたフォームは、ここに表示されます。",

@@ -59,8 +59,7 @@ export interface InjectedSelectFileStepProps extends SelectFileStepProps {
   setWorkspace: TStore["importAccountsStore"]["setWorkspace"];
   cancelUploadDialogVisible: TStore["dialogsStore"]["cancelUploadDialogVisible"];
   setCancelUploadDialogVisible: TStore["dialogsStore"]["setCancelUploadDialogVisible"];
-  initMigrationName: TStore["importAccountsStore"]["initMigrationName"];
-  singleFileUploading: TStore["importAccountsStore"]["singleFileUploading"];
+  initMigrations: TStore["importAccountsStore"]["initMigrations"];
   getMigrationStatus: TStore["importAccountsStore"]["getMigrationStatus"];
   setUsers: TStore["importAccountsStore"]["setUsers"];
   fileLoadingStatus: TStore["importAccountsStore"]["fileLoadingStatus"];
@@ -68,9 +67,9 @@ export interface InjectedSelectFileStepProps extends SelectFileStepProps {
   cancelMigration: TStore["importAccountsStore"]["cancelMigration"];
   files: TStore["importAccountsStore"]["files"];
   setFiles: TStore["importAccountsStore"]["setFiles"];
-  multipleFileUploading: TStore["importAccountsStore"]["multipleFileUploading"];
   migratingWorkspace: TStore["importAccountsStore"]["migratingWorkspace"];
   setMigratingWorkspace: TStore["importAccountsStore"]["setMigratingWorkspace"];
+  uploadFiles: TStore["importAccountsStore"]["uploadFiles"];
 }
 
 export interface DataImportProps {}

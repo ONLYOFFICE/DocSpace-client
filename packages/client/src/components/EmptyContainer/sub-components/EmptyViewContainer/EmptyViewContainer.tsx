@@ -184,7 +184,7 @@ const EmptyViewContainer = observer(
   },
 );
 
-const injectedEmptyViewContainer = inject<TStore>(
+const InjectedEmptyViewContainer = inject<TStore>(
   ({ contextOptionsStore, selectedFolderStore, dialogsStore }) => {
     const { onClickInviteUsers, onCreateAndCopySharedLink } =
       contextOptionsStore;
@@ -206,4 +206,4 @@ const injectedEmptyViewContainer = inject<TStore>(
   },
 )(EmptyViewContainer);
 
-export default injectedEmptyViewContainer;
+export default InjectedEmptyViewContainer;

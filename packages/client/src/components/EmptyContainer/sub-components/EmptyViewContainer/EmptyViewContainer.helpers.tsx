@@ -15,6 +15,12 @@ import EmptyFormRoomLightIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.
 import EmptyCustomRoomDarkIcon from "PUBLIC_DIR/images/emptyview/empty.custom.room.dark.svg";
 import EmptyCustomRoomLightIcon from "PUBLIC_DIR/images/emptyview/empty.custom.room.light.svg";
 
+import EmptyPublicRoomDarkIcon from "PUBLIC_DIR/images/emptyview/empty.public.room.dark.svg";
+import EmptyPublicRoomLightIcon from "PUBLIC_DIR/images/emptyview/empty.public.room.light.svg";
+
+import EmptyPublicRoomCollaboratorDarkIcon from "PUBLIC_DIR/images/emptyview/empty.public.room.collaborator.dark.svg";
+import EmptyPublicRoomCollaboratorLightIcon from "PUBLIC_DIR/images/emptyview/empty.public.room.collaborator.light.svg";
+
 import EmptyFormRoomCollaboratorDarkIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.collaborator.dark.svg";
 import EmptyFormRoomCollaboratorLightIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.collaborator.light.svg";
 
@@ -167,7 +173,7 @@ export const getTitle = (
     case RoomsType.EditingRoom:
       return "";
     case RoomsType.PublicRoom:
-      return "";
+      return t("EmptyView:PublicRoomEmptyTitle");
     case RoomsType.CustomRoom:
       return t("EmptyView:CustomRoomEmptyTitle");
     default:
@@ -214,7 +220,25 @@ export const getRoomIcon = (
       )
 
       .with([RoomsType.EditingRoom, P._], () => <div />)
-      .with([RoomsType.PublicRoom, P._], () => <div />)
+      .with(
+        [
+          RoomsType.PublicRoom,
+          P.union(ShareAccessRights.None, ShareAccessRights.RoomManager), // owner, docspace admin, room admin
+        ],
+        () =>
+          isBaseTheme ? (
+            <EmptyPublicRoomLightIcon />
+          ) : (
+            <EmptyPublicRoomDarkIcon />
+          ),
+      )
+      .with([RoomsType.PublicRoom, ShareAccessRights.Collaborator], () =>
+        isBaseTheme ? (
+          <EmptyPublicRoomCollaboratorLightIcon />
+        ) : (
+          <EmptyPublicRoomCollaboratorDarkIcon />
+        ),
+      )
       .with(
         [
           RoomsType.CustomRoom,
@@ -381,11 +405,20 @@ export const getOptions = (
     t("EmptyView:InviteUsersOptionDescription"),
   );
 
-  const shareRoom = {
+  const shareFillingRoom = {
     title: t("EmptyView:ShareOptionTitle"),
     description: t("EmptyView:ShareOptionDescription"),
     icon: <SharedIcon />,
     key: "share-room",
+    onClick: actions.createAndCopySharedLink,
+    disabled: false,
+  };
+
+  const sharePublicRoom = {
+    title: t("EmptyView:SharePublicRoomOptionTitle"),
+    description: t("EmptyView:SharePublicRoomOptionDescription"),
+    icon: <SharedIcon />,
+    key: "share-public-room",
     onClick: actions.createAndCopySharedLink,
     disabled: false,
   };
@@ -461,13 +494,23 @@ export const getOptions = (
       if (isFormFiller) return [];
 
       if (isCollaborator)
-        return [uploadPDFFromDocSpace, uploadFromDevicePDF, shareRoom];
+        return [uploadPDFFromDocSpace, uploadFromDevicePDF, shareFillingRoom];
 
-      return [uploadPDFFromDocSpace, uploadFromDevicePDF, shareRoom];
+      return [uploadPDFFromDocSpace, uploadFromDevicePDF, shareFillingRoom];
     case RoomsType.EditingRoom:
       return [];
     case RoomsType.PublicRoom:
-      return [];
+      if (isNotAdmin) return [];
+
+      if (isCollaborator)
+        return [createFile, uploadAllFromDocSpace, uploadFromDeviceAnyFile];
+
+      return [
+        createFile,
+        sharePublicRoom,
+        uploadAllFromDocSpace,
+        uploadFromDeviceAnyFile,
+      ];
     case RoomsType.CustomRoom:
       if (isNotAdmin) return [];
 

@@ -582,7 +582,12 @@ class GroupsStore {
           label: t("Common:Delete"),
           title: t("Common:Delete"),
           icon: TrashReactSvgUrl,
-          onClick: () => this.onDeleteClick(item.name),
+          onClick: () => {
+            if (forInsideGroup) {
+              this.setBufferSelection(item);
+            }
+            this.onDeleteClick(item.name);
+          },
         },
     ];
   };

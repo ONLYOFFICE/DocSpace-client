@@ -26,19 +26,21 @@
 
 "use client";
 
-import React, { createContext, useCallback, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { getCookie } from "@docspace/shared/utils";
-import { LANGUAGE } from "@docspace/shared/constants";
 import {
   notFound,
   usePathname,
   useRouter,
   useSearchParams,
 } from "next/navigation";
+import React, { createContext, useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+
+import { getCookie } from "@docspace/shared/utils";
+import { LANGUAGE } from "@docspace/shared/constants";
+import { checkConfirmLink } from "@docspace/shared/api/user";
+
 import { logout } from "@/utils/actions";
 import { AuthenticatedAction, ValidationResult } from "@/utils/enums";
-import { checkConfirmLink } from "@docspace/shared/api/user";
 import {
   TConfirmLinkResult,
   TConfirmLinkParams,
@@ -46,7 +48,7 @@ import {
   TError,
   TConfirmRouteContext,
 } from "@/types";
-import Loading from "./loading";
+import Loading from "@/app/(root)/confirm/loading";
 
 export const ConfirmRouteContext = createContext<TConfirmRouteContext>({
   linkData: {},
@@ -80,7 +82,7 @@ function ConfirmRoute(props: ConfirmRouteProps) {
 
   const getLinkParams = useCallback(() => {
     const queryParams = Object.fromEntries(
-      new URLSearchParams(searchParams),
+      new URLSearchParams(searchParams.toString()),
     ) as TConfirmLinkParams;
 
     const posSeparator = pathname.lastIndexOf("/");

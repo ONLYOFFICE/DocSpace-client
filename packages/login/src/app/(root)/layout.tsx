@@ -25,35 +25,22 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { cookies } from "next/headers";
-import dynamic from "next/dynamic";
 
 import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
-import { ThemeKeys, WhiteLabelLogoType } from "@docspace/shared/enums";
-import { getBgPattern, getLogoUrl } from "@docspace/shared/utils/common";
+import { ThemeKeys } from "@docspace/shared/enums";
+import { getBgPattern } from "@docspace/shared/utils/common";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 import SimpleNav from "@/components/SimpleNav";
-import { LoginContent, LoginFormWrapper } from "@/components/Login";
-import { getColorTheme, getSettings } from "@/utils/actions";
-
-const LanguageComboboxWrapper = dynamic(
-  () => import("@/components/LanguageCombobox"),
-  {
-    ssr: false,
-  },
-);
+import { getColorTheme } from "@/utils/actions";
+import { ContentWrapper, FormWrapper } from "@/components/StyledLayout.styled";
 
 export default async function Layout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [settings, colorTheme] = await Promise.all([
-    getSettings(),
-    getColorTheme(),
-  ]);
+  const colorTheme = await getColorTheme();
 
   const cookieStore = cookies();
 
@@ -61,28 +48,16 @@ export default async function Layout({
 
   const bgPattern = getBgPattern(colorTheme?.selected);
 
-  const objectSettings = typeof settings === "string" ? undefined : settings;
-
-  const isRegisterContainerVisible = objectSettings?.enabledJoin;
-
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <SimpleNav systemTheme={systemTheme} />
 
-      <LoginFormWrapper id="login-page" bgPattern={bgPattern}>
+      <FormWrapper bgPattern={bgPattern} id="form-wrapper">
         <div className="bg-cover" />
         <Scrollbar id="customScrollBar">
-          <LanguageComboboxWrapper />
-          <LoginContent>
-            <ColorTheme
-              themeId={ThemeId.LinkForgotPassword}
-              isRegisterContainerVisible={isRegisterContainerVisible}
-            >
-              {children}
-            </ColorTheme>
-          </LoginContent>
+          <ContentWrapper id="content-wrapper">{children}</ContentWrapper>
         </Scrollbar>
-      </LoginFormWrapper>
+      </FormWrapper>
     </div>
   );
 }

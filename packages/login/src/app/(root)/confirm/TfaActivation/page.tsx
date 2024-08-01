@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import TfaActivationForm from "@/components/TfaActivationForm";
+import { StyledForm } from "@/components/TfaActivationForm/TfaActivationForm.styled";
 import { getStringFromSearchParams } from "@/utils";
 import {
   getColorTheme,
@@ -33,11 +34,11 @@ import {
   getUserFromConfirm,
 } from "@/utils/actions";
 
-type PortalOwnerChangeProps = {
+type TfaActivationProps = {
   searchParams: { [key: string]: string };
 };
 
-async function Page({ searchParams }: PortalOwnerChangeProps) {
+async function Page({ searchParams }: TfaActivationProps) {
   const colorTheme = await getColorTheme();
 
   const currentColorScheme = colorTheme?.themes.find((theme) => {
@@ -54,7 +55,7 @@ async function Page({ searchParams }: PortalOwnerChangeProps) {
   return (
     <>
       {settings && typeof settings !== "string" && (
-        <>
+        <StyledForm className="set-app-container">
           <TfaActivationForm
             secretKey={res.manualEntryKey}
             qrCode={res.qrCodeSetupImageUrl}
@@ -62,7 +63,7 @@ async function Page({ searchParams }: PortalOwnerChangeProps) {
             userName={user?.userName}
             currentColorScheme={currentColorScheme}
           />
-        </>
+        </StyledForm>
       )}
     </>
   );

@@ -49,7 +49,7 @@ async function Page({ searchParams }: PortalOwnerChangeProps) {
       {settings && typeof settings !== "string" && (
         <>
           <GreetingContainer greetingSettings={settings.greetingSettings} />
-          <FormWrapper id="login-form">
+          <FormWrapper id="owner-change-form">
             <ChangeOwnerForm newOwner={user?.displayName} />
           </FormWrapper>
         </>

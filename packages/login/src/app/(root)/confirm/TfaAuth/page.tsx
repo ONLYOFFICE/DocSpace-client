@@ -24,15 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { GreetingContainer } from "@/components/GreetingContainer";
 import TfaAuthForm from "@/components/TfaAuthForm";
 import { getStringFromSearchParams } from "@/utils";
 import { getSettings, getUserFromConfirm } from "@/utils/actions";
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
-type PortalOwnerChangeProps = {
+type TfaAuthProps = {
   searchParams: { [key: string]: string };
 };
 
-async function Page({ searchParams }: PortalOwnerChangeProps) {
+async function Page({ searchParams }: TfaAuthProps) {
   const confirmKey = getStringFromSearchParams(searchParams);
   const uid = searchParams.uid;
 
@@ -43,10 +45,13 @@ async function Page({ searchParams }: PortalOwnerChangeProps) {
     <>
       {settings && typeof settings !== "string" && (
         <>
-          <TfaAuthForm
-            passwordHash={settings.passwordHash}
-            userName={user?.userName}
-          />
+          <GreetingContainer />
+          <FormWrapper id="tfa-auth-form">
+            <TfaAuthForm
+              passwordHash={settings.passwordHash}
+              userName={user?.userName}
+            />
+          </FormWrapper>
         </>
       )}
     </>

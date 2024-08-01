@@ -32,6 +32,7 @@ import CreateUserForm from "@/components/CreateUserForm";
 import { GreetingCleateUserContainer } from "@/components/GreetingContainer";
 import { getStringFromSearchParams } from "@/utils";
 import { getSettings, getUserFromConfirm } from "@/utils/actions";
+import LanguageComboboxWrapper from "@/components/LanguageCombobox";
 
 type LinkInviteProps = {
   searchParams: { [key: string]: string };
@@ -53,6 +54,7 @@ async function Page({ searchParams, params }: LinkInviteProps) {
 
   return (
     <>
+      <LanguageComboboxWrapper />
       {settings && typeof settings !== "string" && (
         <>
           <GreetingCleateUserContainer
@@ -60,7 +62,7 @@ async function Page({ searchParams, params }: LinkInviteProps) {
             firstName={user?.firstName}
             lastName={user?.lastName}
           />
-          <FormWrapper id="login-form">
+          <FormWrapper id="invite-form">
             <CreateUserForm
               userNameRegex={settings.userNameRegex}
               passwordHash={settings.passwordHash}

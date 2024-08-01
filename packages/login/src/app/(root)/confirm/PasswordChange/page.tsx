@@ -30,11 +30,11 @@ import { GreetingContainer } from "@/components/GreetingContainer";
 import PasswordChangeForm from "@/components/PasswordChangeForm";
 import { getSettings } from "@/utils/actions";
 
-type EmailActivationProps = {
+type PasswordChangProps = {
   searchParams: { [key: string]: string };
 };
 
-async function Page({ searchParams }: EmailActivationProps) {
+async function Page({ searchParams }: PasswordChangProps) {
   const settings = await getSettings();
 
   return (
@@ -42,7 +42,7 @@ async function Page({ searchParams }: EmailActivationProps) {
       {settings && typeof settings !== "string" && (
         <>
           <GreetingContainer greetingSettings={settings?.greetingSettings} />
-          <FormWrapper>
+          <FormWrapper id="password-change-form">
             <PasswordChangeForm passwordHash={settings.passwordHash} />
           </FormWrapper>
         </>

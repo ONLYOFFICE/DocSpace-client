@@ -28,6 +28,7 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 
+import { mobile, tablet } from "@docspace/shared/utils";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 import { CustomLogo } from "./CustomLogo";
@@ -59,16 +60,26 @@ const RoomLogoCoverContainer = styled.div`
     font-size: 13px;
     line-height: 20px;
   }
+  .colors-container {
+    flex-wrap: nowrap;
+  }
 
   .colors-container,
   .cover-icon-container {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+
+    @media ${tablet} {
+      flex-wrap: wrap;
+      gap: 16px;
+    }
   }
 
-  .colors-container {
-    flex-wrap: nowrap;
+  .cover-icon-container {
+    @media ${mobile} {
+      padding-left: 10px;
+    }
   }
 
   .select-color-container {

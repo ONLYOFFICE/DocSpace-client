@@ -31,6 +31,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
+import { mobile, tablet } from "@docspace/shared/utils";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import RoomLogoCover from "./sub-components/RoomLogoCover";
 
@@ -38,6 +39,14 @@ const StyledModalDialog = styled(ModalDialog)`
   #modal-dialog {
     width: 422px;
     min-height: 648px;
+
+    @media ${tablet} {
+      width: 464px;
+    }
+
+    @media ${mobile} {
+      width: 100vw;
+    }
 
     .modal-body {
       padding: 0;

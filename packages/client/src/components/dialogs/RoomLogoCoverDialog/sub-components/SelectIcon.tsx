@@ -27,6 +27,7 @@
 import React from "react";
 
 import styled, { css } from "styled-components";
+import { mobile, tablet } from "@docspace/shared/utils";
 
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { SelectIconProps } from "../RoomLogoCoverDialog.types";
@@ -69,6 +70,11 @@ const StyledIconContainer = styled.div`
   justify-content: center;
   width: 30px;
   height: 30px;
+
+  @media ${tablet} {
+    width: 40px;
+    height: 40px;
+  }
   border-radius: 4px;
   &:hover {
     cursor: pointer;

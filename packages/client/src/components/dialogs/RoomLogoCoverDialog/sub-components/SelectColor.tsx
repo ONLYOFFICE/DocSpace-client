@@ -26,6 +26,8 @@
 
 import React, { useState, useRef } from "react";
 import styled, { css } from "styled-components";
+
+import { mobile, tablet } from "@docspace/shared/utils";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
@@ -44,6 +46,11 @@ const StyledColorItem = styled.div<ColorItemProps>`
   margin-top: 8px;
   border-radius: 50%;
   background-color: ${(props) => props.color};
+
+  @media ${tablet} {
+    width: 40px;
+    height: 40px;
+  }
 
   ${(props) =>
     props.isEmptyColor &&
@@ -74,11 +81,21 @@ const SelectedColorItem = styled.div`
   align-items: center;
   justify-content: center;
 
+  @media ${tablet} {
+    width: 36px;
+    height: 36px;
+  }
+
   .circle {
     width: 20px;
     height: 20px;
     background-color: ${(props) => props.color};
     border-radius: 50%;
+
+    @media ${tablet} {
+      width: 28px;
+      height: 28px;
+    }
   }
 `;
 
@@ -130,7 +147,7 @@ export const SelectColor = ({
           />
         </StyledColorItem>
         <DropDown
-          directionX="right"
+          directionX="both"
           forwardedRef={iconRef}
           withBackdrop={false}
           isDefaultMode

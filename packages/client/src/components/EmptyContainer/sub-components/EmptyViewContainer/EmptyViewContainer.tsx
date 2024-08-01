@@ -34,8 +34,11 @@ const EmptyViewContainer = observer(
     folderType,
     selectedFolder,
     parentRoomType,
+    isVisibleInfoPanel,
     isArchiveFolderRoot,
+    setViewInfoPanel,
     onClickInviteUsers,
+    setVisibleInfoPanel,
     onCreateAndCopySharedLink,
     setSelectFileFormRoomDialogVisible,
   }: EmptyViewContainerProps) => {
@@ -47,6 +50,12 @@ const EmptyViewContainer = observer(
     ]);
 
     const theme = useTheme();
+
+    const openInfoPanel = useCallback(() => {
+      if (!isVisibleInfoPanel) setVisibleInfoPanel?.(true);
+
+      setViewInfoPanel?.("info_members");
+    }, [setViewInfoPanel, setVisibleInfoPanel, isVisibleInfoPanel]);
 
     const onUploadAction = useCallback((uploadType: UploadType) => {
       const element =
@@ -152,6 +161,7 @@ const EmptyViewContainer = observer(
             uploadFromDocspace,
             onUploadAction,
             createAndCopySharedLink,
+            openInfoPanel,
           },
         ),
       [
@@ -168,6 +178,7 @@ const EmptyViewContainer = observer(
         onUploadAction,
         createAndCopySharedLink,
         onCreate,
+        openInfoPanel,
       ],
     );
 
@@ -185,9 +196,20 @@ const EmptyViewContainer = observer(
 );
 
 const InjectedEmptyViewContainer = inject<TStore>(
-  ({ contextOptionsStore, selectedFolderStore, dialogsStore }) => {
+  ({
+    contextOptionsStore,
+    selectedFolderStore,
+    dialogsStore,
+    infoPanelStore,
+  }) => {
     const { onClickInviteUsers, onCreateAndCopySharedLink } =
       contextOptionsStore;
+
+    const {
+      setIsVisible: setVisibleInfoPanel,
+      isVisible: isVisibleInfoPanel,
+      setView: setViewInfoPanel,
+    } = infoPanelStore;
 
     const { setSelectFileFormRoomDialogVisible } = dialogsStore;
 
@@ -199,9 +221,12 @@ const InjectedEmptyViewContainer = inject<TStore>(
       access,
       security,
       selectedFolder,
+      isVisibleInfoPanel,
       onClickInviteUsers,
       onCreateAndCopySharedLink,
       setSelectFileFormRoomDialogVisible,
+      setVisibleInfoPanel,
+      setViewInfoPanel,
     };
   },
 )(EmptyViewContainer);

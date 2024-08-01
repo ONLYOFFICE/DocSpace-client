@@ -36,6 +36,9 @@ export interface EmptyViewContainerProps {
   selectedFolder?: ReturnType<
     TStore["selectedFolderStore"]["getSelectedFolder"]
   >;
+  setVisibleInfoPanel?: (arg: boolean) => void;
+  isVisibleInfoPanel: boolean;
+  setViewInfoPanel?: TStore["infoPanelStore"]["setView"];
 }
 
 export type OptionActions = {
@@ -47,4 +50,5 @@ export type OptionActions = {
   ) => void;
   onUploadAction: (type: UploadType) => void;
   createAndCopySharedLink: VoidFunction;
+  openInfoPanel: VoidFunction;
 };

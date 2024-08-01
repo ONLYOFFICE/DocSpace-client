@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { tablet, mobile } from "@docspace/shared/utils/device";
 
 import { TableContainer } from "@docspace/shared/components/table";
@@ -172,14 +172,8 @@ export const StyledTableContainer = styled(TableContainer)`
 
   .table-container_header {
     position: absolute;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding: 0px 28px 0 15px;
-          `
-        : css`
-            padding: 0px 15px 0 28px;
-          `}
+    padding-block: 0;
+    padding-inline: 28px 15px;
   }
 
   .header-container-text {

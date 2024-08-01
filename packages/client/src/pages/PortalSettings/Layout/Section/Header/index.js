@@ -57,14 +57,7 @@ export const HeaderContainer = styled.div`
     display: flex;
     align-items: center;
     .settings-section_badge {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: 8px;
-            `
-          : css`
-              margin-left: 8px;
-            `}
+      margin-inline-start: 8px;
       cursor: auto;
     }
 
@@ -79,28 +72,13 @@ export const HeaderContainer = styled.div`
     flex-grow: 1;
 
     .action-button {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: auto;
-            `
-          : css`
-              margin-left: auto;
-            `}
+      margin-inline-start: auto;
     }
   }
 
   .arrow-button {
     flex-shrink: 0;
-
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 12px;
-          `
-        : css`
-            margin-right: 12px;
-          `}
+    margin-inline-end: 12px;
 
     svg {
       ${({ theme }) =>
@@ -108,16 +86,8 @@ export const HeaderContainer = styled.div`
     }
 
     @media ${tablet} {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              padding: 8px 8px 8px 0;
-              margin-right: -8px;
-            `
-          : css`
-              padding: 8px 0 8px 8px;
-              margin-left: -8px;
-            `}
+      padding-block: 8px;
+      padding-inline: 8px 0;
     }
   }
 
@@ -143,14 +113,7 @@ export const HeaderContainer = styled.div`
   }
 
   .tariff-bar {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: auto;
-          `
-        : css`
-            margin-left: auto;
-          `}
+    margin-inline-start: auto;
   }
 `;
 

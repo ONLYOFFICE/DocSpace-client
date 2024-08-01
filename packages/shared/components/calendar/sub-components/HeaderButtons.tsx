@@ -42,13 +42,12 @@ export const HeaderButtons = ({
   isMobile,
 }: HeaderButtonsProps) => {
   const theme = useTheme();
-  const isRtl = theme?.interfaceDirection === "rtl";
   const marginSize = isMobile ? "12px" : "8px";
   return (
     <ButtonsContainer>
       <StyledRoundButtonTheme
         className="arrow-previous"
-        style={isRtl ? { marginLeft: marginSize } : { marginRight: marginSize }}
+        style={{ marginInlineEnd: marginSize }}
         onClick={onLeftClick}
         disabled={isLeftDisabled}
         isMobile={isMobile}

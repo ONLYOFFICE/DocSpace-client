@@ -33,14 +33,7 @@ const StyledContainer = styled.div<{
   z-index: 209;
   position: absolute;
   bottom: 0;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          right: 0;
-        `
-      : css`
-          left: 0;
-        `}
+  inset-inline-start: 0;
   min-width: 251px;
   max-width: 251px;
   background-color: ${(props) => props.theme.catalog.profile.background};
@@ -59,11 +52,7 @@ const StyledBlock = styled.div`
   justify-content: center;
 
   border-top: ${(props) => props.theme.catalog.profile.borderTop};
-
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `border-left: ${theme.catalog.verticalLine};`
-      : `border-right: ${theme.catalog.verticalLine};`}
+  border-inline-end: ${({ theme }) => theme.catalog.verticalLine};
   background-color: ${(props) => props.theme.catalog.profile.background};
 
   @media ${tablet} {
@@ -71,17 +60,11 @@ const StyledBlock = styled.div`
   }
 
   .title {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: 12px;`
-        : `margin-left: 12px;`}
+    margin-inline-start: 12px;
   }
 
   .option-button {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: auto;`
-        : `margin-left: auto;`}
+    margin-inline-start: auto;
   }
 `;
 

@@ -48,8 +48,7 @@ const StyledBody = styled.div`
   }
   .conversion-input {
     width: 100%;
-    text-align: ${({ theme }) =>
-      theme.interfaceDirection === "rtl" ? `right` : `left`};
+    text-align: start;
   }
 `;
 const SimulatePassword = memo(

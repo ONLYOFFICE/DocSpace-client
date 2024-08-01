@@ -27,7 +27,7 @@
 import { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { Base } from "@docspace/shared/themes";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import { IconButton } from "@docspace/shared/components/icon-button";
@@ -77,14 +77,8 @@ const UserSelectTableContainer = styled(StyledTableContainer)`
 
     .table-container_header {
       position: absolute;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              padding: 0px 28px 0 15px;
-            `
-          : css`
-              padding: 0px 15px 0 28px;
-            `}
+      padding-block: 0;
+      padding-inline: 28px 15px;
     }
   }
 `;
@@ -103,7 +97,6 @@ const TableView = (props: TypeSelectTableViewProps) => {
     sectionWidth,
     accountsData,
     typeOptions,
-
     userId,
     checkedUsers,
     toggleAccount,

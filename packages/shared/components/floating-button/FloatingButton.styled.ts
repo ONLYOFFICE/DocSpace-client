@@ -50,14 +50,7 @@ const StyledFloatingButtonWrapper = styled.div<{ showTwoProgress?: boolean }>`
   @media ${desktop} {
     position: absolute;
     z-index: 300;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: 0;
-          `
-        : css`
-            right: 0;
-          `}
+    inset-inline-end: 0;
 
     bottom: ${(props) => (props.showTwoProgress ? "96px" : "0")};
 
@@ -70,8 +63,7 @@ const StyledFloatingButtonWrapper = styled.div<{ showTwoProgress?: boolean }>`
     position: absolute;
     cursor: pointer;
 
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl" ? `left: 77px;` : `right: 77px;`}
+    inset-inline-end: 77px;
     bottom: 33px;
   }
   &:hover {
@@ -109,9 +101,8 @@ const StyledCircle = styled.div<{ percent: number; displayProgress?: boolean }>`
     position: absolute;
     border-radius: 50%;
     top: 0;
-    left: 0;
+    inset-inline: 0;
     bottom: 0;
-    right: 0;
     margin: auto;
 
     display: flex;
@@ -199,8 +190,7 @@ const StyledAlertIcon = styled.div`
   width: 12px;
   height: 12px;
 
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl" ? `right: 20px;` : `left: 20px;`}
+  inset-inline-start: 20px;
   top: 0px;
 
   svg {

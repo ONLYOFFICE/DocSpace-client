@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { Base } from "../../themes";
 import { mobile } from "../../utils";
@@ -33,14 +33,7 @@ import { ComboBox } from "../combobox";
 
 const StyledWrapper = styled(ComboBox)`
   .combo-button {
-    padding-left: 8px;
-    padding-right: 8px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl" &&
-      css`
-        padding-left: 8px;
-        padding-right: 8px;
-      `}
+    padding-inline: 8px;
   }
 
   ${({ type, theme }) =>
@@ -104,7 +97,7 @@ const StyledItemDescription = styled.div`
 StyledItemDescription.defaultProps = { theme: Base };
 
 const StyledItemIcon = styled.img<{ isShortenIcon?: boolean }>`
-  padding-inline-end: 8px;
+  margin-inline-end: 8px;
 
   ${({ isShortenIcon }) =>
     isShortenIcon &&

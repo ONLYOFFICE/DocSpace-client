@@ -69,17 +69,14 @@ const StyledFolderInput = styled.div`
   .root_label,
   .path,
   .room_title {
-    padding: 5px 0px 5px 0px;
+    padding: 5px 0px;
     font-weight: 400;
     font-size: 13px;
     line-height: 20px;
   }
 
   .root_label {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `padding-right: 8px;`
-        : `padding-left: 8px;`}
+    padding-inline-start: 8px;
     /* background-color: ${(props) =>
       props.theme.createEditRoomDialog.thirdpartyStorage.folderInput
         .background}; */
@@ -95,20 +92,14 @@ const StyledFolderInput = styled.div`
   }
 
   .room_title {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `padding-left: 8px;`
-        : `padding-right: 8px;`}
+    padding-inline-end: 8px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
   .icon-wrapper {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: auto;`
-        : `margin-left: auto;`}
+    margin-inline-start: auto;
     background-color: ${(props) =>
       props.theme.createEditRoomDialog.thirdpartyStorage.folderInput
         .background};
@@ -122,10 +113,7 @@ const StyledFolderInput = styled.div`
     transition: all 0.2s ease;
     border-top: none !important;
     border-bottom: none !important;
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `border-left: none !important;`
-        : `border-right: none !important;`}
+    border-inline-end: none !important;
 
     &:hover {
       path {

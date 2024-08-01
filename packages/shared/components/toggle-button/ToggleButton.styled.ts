@@ -122,7 +122,7 @@ ToggleButtonContainer.defaultProps = { theme: Base };
 const HiddenInput = styled.input`
   opacity: 0.0001;
   position: absolute;
-  right: 0;
+  inset-inline-end: 0;
   z-index: -1;
 `;
 

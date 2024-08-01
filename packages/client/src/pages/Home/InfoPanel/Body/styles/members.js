@@ -75,8 +75,7 @@ const StyledUser = styled.div`
   .name {
     font-weight: 600;
     font-size: 14px;
-    line-height: ${({ theme }) =>
-      theme.interfaceDirection === "rtl" ? `20px` : `16px`};
+    line-height: 16px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -87,26 +86,15 @@ const StyledUser = styled.div`
   .me-label {
     font-weight: 600;
     font-size: 14px;
-    line-height: ${({ theme }) =>
-      theme.interfaceDirection === "rtl" ? `20px` : `16px`};
+    line-height: 16px;
     color: ${(props) => props.theme.infoPanel.members.meLabelColor};
     padding-inline-start: 8px;
     margin-inline-start: -8px;
   }
 
   .role-wrapper {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: -12px;
-            padding-right: 8px;
-            margin-right: auto;
-          `
-        : css`
-            margin-right: -12px;
-            padding-left: 8px;
-            margin-left: auto;
-          `}
+    margin-inline: auto -12px;
+    padding-inline-start: 8px;
 
     font-weight: 600;
     font-size: 13px;

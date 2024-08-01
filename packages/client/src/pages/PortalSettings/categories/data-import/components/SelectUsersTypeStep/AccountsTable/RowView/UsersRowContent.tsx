@@ -45,14 +45,7 @@ const StyledRowContent = styled(RowContent)`
 
   .row-main-container-wrapper {
     width: 100%;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 0px;
-          `
-        : css`
-            margin-right: 0px;
-          `}
+    margin-inline-end: 0;
   }
 
   .rowMainContainer {

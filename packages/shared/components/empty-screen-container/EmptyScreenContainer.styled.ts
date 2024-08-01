@@ -128,8 +128,7 @@ const EmptyContentBody = styled.div<{
         ? "69px" // calculated without section body padding and without filter
         : "31px"}; // calculated without section body padding, margin of filter
     max-width: 343px;
-    padding-left: 28px;
-    padding-right: 28px;
+    padding-inline: 28px;
     width: fit-content;
     .ec-image {
       height: 75px;

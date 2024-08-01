@@ -61,6 +61,7 @@ const StyledList = styled(List)`
   margin-bottom: 24px;
 
   .members-list-item {
+    // doesn't require mirroring for RTL
     left: unset !important;
     inset-inline-start: 0;
     width: calc(100% - 20px) !important;

@@ -188,7 +188,7 @@ class ContextOptionsStore {
   };
 
   onClickLinkFillForm = (item) => {
-    if (!item.startFilling)
+    if (!item.startFilling && item.isPDFForm)
       return this.dialogsStore.setFillPDFDialogData(true, item);
 
     return this.gotoDocEditor(false, item);
@@ -1942,7 +1942,7 @@ class ContextOptionsStore {
       selection.findIndex((k) => k.security.Download) !== -1;
 
     const favoriteItems = selection.filter((k) =>
-      k.contextOptions.includes("mark-as-favorite"),
+      k.contextOptions?.includes("mark-as-favorite"),
     );
 
     const moveItems = selection.filter((k) =>

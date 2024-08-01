@@ -27,8 +27,8 @@
 import styled from "styled-components";
 
 export const List = styled.ul`
-  padding-left: 16px;
-  padding-right: 30px;
+  padding-inline-start: 16px;
+  padding-inline-end: 30px;
 
   list-style: none;
   margin-top: 0px;
@@ -39,7 +39,7 @@ export const List = styled.ul`
 
 export const Item = styled.li`
   color: #ffffff;
-  padding: 1px 16px 0 16px;
+  padding: 1px 16px 0;
   font-weight: 400;
   font-size: 13px;
   line-height: 20px;

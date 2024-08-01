@@ -77,14 +77,7 @@ const StyledSsoPage = styled.div`
   }
 
   .radio-button-group {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 24px;
-          `
-        : css`
-            margin-left: 24px;
-          `}
+    margin-inline-start: 24px;
   }
 
   .combo-button-label {
@@ -92,14 +85,7 @@ const StyledSsoPage = styled.div`
   }
 
   .save-button {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 8px;
-          `
-        : css`
-            margin-right: 8px;
-          `}
+    margin-inline-end: 8px;
   }
 
   .download-button {
@@ -136,14 +122,7 @@ const StyledSsoPage = styled.div`
 
     .label > div {
       display: inline-flex;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: 4px;
-            `
-          : css`
-              margin-left: 4px;
-            `}
+      margin-inline-start: 4px;
     }
   }
 `;

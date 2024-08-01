@@ -114,7 +114,7 @@ export default inject<TStore>(({ dialogsStore, infoPanelStore }) => {
   const { infoPanelSelection } = infoPanelStore;
   const { setLinkParams, setEditLinkPanelIsVisible } = dialogsStore;
   const { id, roomType, security } = infoPanelSelection!;
-  const { EditRoom } = security!;
+  const { EditRoom } = security || {};
 
   const isFormRoom = roomType === RoomsType.FormRoom;
 

@@ -224,6 +224,7 @@ const SectionHeaderContent = (props) => {
     onEmptyTrashAction,
     getHeaderOptions,
     setBufferSelection,
+    setGroupsBufferSelection,
   } = props;
 
   const location = useLocation();
@@ -259,7 +260,9 @@ const SectionHeaderContent = (props) => {
   };
 
   const onContextOptionsClick = () => {
-    setBufferSelection(selectedFolder);
+    isInsideGroup
+      ? setGroupsBufferSelection(currentGroup)
+      : setBufferSelection(selectedFolder);
   };
 
   const onSelect = (e) => {
@@ -655,6 +658,7 @@ export default inject(
       currentGroup,
       getGroupContextOptions,
       setSelected: setGroupsSelected,
+      setBufferSelection: setGroupsBufferSelection,
       insideGroupTempTitle,
     } = peopleStore.groupsStore;
 
@@ -797,6 +801,7 @@ export default inject(
       onEmptyTrashAction,
       getHeaderOptions,
       setBufferSelection,
+      setGroupsBufferSelection,
     };
   },
 )(

@@ -70,6 +70,7 @@ export const StyledPage = styled.div`
 
     .public-room-text {
       margin: 8px 0;
+      white-space: wrap;
     }
 
     .public-room-name {
@@ -82,12 +83,6 @@ export const StyledPage = styled.div`
     .public-room-icon {
       min-width: 32px;
       min-height: 32px;
-    }
-
-    .public-room-text {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
   }
 `;

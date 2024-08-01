@@ -31,8 +31,7 @@ import { inject, observer } from "mobx-react";
 
 import RoomTypeDropdown from "./RoomTypeDropdown";
 import TagInput from "./TagInput";
-import RoomType from "./RoomType";
-
+import RoomType from "@docspace/shared/components/room-type";
 import PermanentSettings from "./PermanentSettings";
 import InputParam from "./Params/InputParam";
 import ThirdPartyStorage from "./ThirdPartyStorage";
@@ -40,23 +39,22 @@ import ThirdPartyStorage from "./ThirdPartyStorage";
 
 import withLoader from "@docspace/client/src/HOCs/withLoader";
 import SetRoomParamsLoader from "@docspace/shared/skeletons/create-edit-room/SetRoomParams";
-import { getRoomTypeDefaultTagTranslation } from "../data";
 
 import { ImageEditor } from "@docspace/shared/components/image-editor";
 import PreviewTile from "@docspace/shared/components/image-editor/PreviewTile";
 import { Text } from "@docspace/shared/components/text";
 
-import SystemFolders from "./SystemFolders";
-import { RoomsType } from "@docspace/shared/enums";
-
 import ChangeRoomOwner from "./ChangeRoomOwner";
 import RoomQuota from "./RoomQuota";
+import { RoomsType } from "@docspace/shared/enums";
+import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
 
 const StyledSetRoomParams = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   gap: 22px;
+  margin-top: 20px;
 
   .icon-editor_text {
     margin-bottom: 6px;
@@ -97,6 +95,8 @@ const SetRoomParams = ({
   currentColorScheme,
   setChangeRoomOwnerIsVisible,
   folderFormValidation,
+  disabledChangeRoomType,
+  maxImageUploadSize,
 }) => {
   const [previewIcon, setPreviewIcon] = useState(null);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
@@ -130,7 +130,7 @@ const SetRoomParams = ({
     if (!icon.uploadedFile !== disableImageRescaling)
       setDisableImageRescaling(!icon.uploadedFile);
 
-    setRoomParams({ ...roomParams, icon: icon });
+    setRoomParams({ ...roomParams, icon: icon, iconWasUpdated: true });
   };
 
   const onOwnerChange = () => {
@@ -149,7 +149,7 @@ const SetRoomParams = ({
 
   return (
     <StyledSetRoomParams disableImageRescaling={disableImageRescaling}>
-      {isEdit ? (
+      {isEdit || disabledChangeRoomType ? (
         <RoomType t={t} roomType={roomParams.type} type="displayItem" />
       ) : (
         <RoomTypeDropdown
@@ -158,7 +158,7 @@ const SetRoomParams = ({
           setRoomType={setRoomType}
           setIsScrollLocked={setIsScrollLocked}
           isDisabled={isDisabled}
-          forсeHideDropdown={forceHideRoomTypeDropdown}
+          forceHideDropdown={forceHideRoomTypeDropdown}
         />
       )}
       {isEdit && (
@@ -208,7 +208,6 @@ const SetRoomParams = ({
           onChangeIsPrivate={onChangeIsPrivate}
         />
       )} */}
-      {isFormRoom && <SystemFolders t={t} />}
 
       {isEdit && (
         <ChangeRoomOwner
@@ -252,17 +251,15 @@ const SetRoomParams = ({
           onChangeImage={onChangeIcon}
           classNameWrapperImageCropper={"icon-editor"}
           disableImageRescaling={disableImageRescaling}
+          maxImageSize={maxImageUploadSize}
           Preview={
             <PreviewTile
               t={t}
-              title={roomParams.title || t("Files:NewRoom")}
+              title={roomParams.title || t("Common:NewRoom")}
               previewIcon={previewIcon}
               tags={roomParams.tags.map((tag) => tag.name)}
               isDisabled={isDisabled}
-              defaultTagLabel={getRoomTypeDefaultTagTranslation(
-                roomParams.type,
-                t,
-              )}
+              defaultTagLabel={getRoomTypeName(roomParams.type, t)}
             />
           }
         />
@@ -275,16 +272,17 @@ export default inject(({ settingsStore, dialogsStore, currentQuotaStore }) => {
   const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 
   const { setChangeRoomOwnerIsVisible } = dialogsStore;
-  const { folderFormValidation } = settingsStore;
+  const { folderFormValidation, maxImageUploadSize } = settingsStore;
 
   return {
     isDefaultRoomsQuotaSet,
     folderFormValidation,
     setChangeRoomOwnerIsVisible,
+    maxImageUploadSize,
   };
 })(
   observer(
-    withTranslation(["CreateEditRoomDialog", "Translations"])(
+    withTranslation(["CreateEditRoomDialog", "Translations", "Common"])(
       withLoader(SetRoomParams)(<SetRoomParamsLoader />),
     ),
   ),

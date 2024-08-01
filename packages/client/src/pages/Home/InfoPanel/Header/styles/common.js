@@ -28,9 +28,9 @@ import styled, { css } from "styled-components";
 import { Base } from "@docspace/shared/themes";
 import { tablet } from "@docspace/shared/utils";
 
-const getHeaderHeight = ({ withSubmenu, isTablet }) => {
+const getHeaderHeight = ({ withTabs, isTablet }) => {
   let res = isTablet ? 53 : 69;
-  if (withSubmenu) res += 32;
+  if (withTabs) res += 32;
   return `${res}px`;
 };
 
@@ -53,9 +53,7 @@ const StyledInfoPanelHeader = styled.div`
   display: flex;
   flex-direction: column;
   border-bottom: ${(props) =>
-    props.withSubmenu
-      ? "none"
-      : `1px solid ${props.theme.infoPanel.borderColor}`};
+    props.withTabs ? "none" : `1px solid ${props.theme.infoPanel.borderColor}`};
   .main {
     height: ${(props) => getMainHeight(props)};
     min-height: ${(props) => getMainHeight(props)};
@@ -91,16 +89,13 @@ const StyledInfoPanelHeader = styled.div`
           `}
   }
 
-  .submenu {
+  .tabs {
     display: flex;
     width: 100%;
     justify-content: center;
     .sticky {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      .bottom-line {
-        background-color: ${(props) => props.theme.infoPanel.borderColor};
+      .scroll-body > div {
+        justify-content: center;
       }
     }
   }

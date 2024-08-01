@@ -41,10 +41,12 @@ export const getAccessOptions = (
 ) => {
   let options = [];
   const accesses = {
-    docSpaceAdmin: {
-      key: "docSpaceAdmin",
-      label: t("Common:DocSpaceAdmin"),
-      description: t("Translations:RoleDocSpaceAdminDescription"),
+    portalAdmin: {
+      key: "portalAdmin",
+      label: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
+      description: t("Translations:RolePortalAdminDescription", {
+        productName: t("Common:ProductName"),
+      }),
       ...(!standalone && { quota: t("Common:Paid") }),
       color: "#EDC409",
       access:
@@ -175,12 +177,11 @@ export const getAccessOptions = (
         accesses.roomAdmin,
         accesses.collaborator,
         { key: "s1", isSeparator: withSeparator },
-        accesses.viewer,
         accesses.formFiller,
       ];
       break;
     case -1:
-      if (isOwner) options.push(accesses.docSpaceAdmin);
+      if (isOwner) options.push(accesses.portalAdmin);
 
       options = [
         ...options,

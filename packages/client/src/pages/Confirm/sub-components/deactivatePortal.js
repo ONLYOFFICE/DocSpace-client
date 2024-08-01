@@ -43,7 +43,7 @@ import {
 import withLoader from "../withLoader";
 
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
+import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 
 const DeactivatePortal = (props) => {
   const { t, greetingTitle, linkData, companyInfoSettingsData } = props;
@@ -73,7 +73,7 @@ const DeactivatePortal = (props) => {
     <StyledPage>
       <StyledContent>
         <StyledBody>
-          <DocspaceLogo className="docspace-logo" />
+          <PortalLogo className="portal-logo" />
           <Text fontSize="23px" fontWeight="700" className="title">
             {greetingTitle}
           </Text>
@@ -91,7 +91,11 @@ const DeactivatePortal = (props) => {
               </Text>
             ) : (
               <>
-                <Text className="subtitle">{t("PortalDeactivateTitle")}</Text>
+                <Text className="subtitle">
+                  {t("PortalDeactivateTitle", {
+                    productName: t("Common:ProductName"),
+                  })}
+                </Text>
                 <ButtonsWrapper>
                   <Button
                     scale

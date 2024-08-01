@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { headers } from "next/headers";
+import { headers, cookies } from "next/headers";
 
 const API_PREFIX = "api/2.0";
 
@@ -40,7 +40,8 @@ export const getBaseUrl = () => {
 };
 
 export const getAPIUrl = () => {
-  const baseUrl = getBaseUrl();
+  const baseUrl = process.env.API_HOST?.trim() ?? getBaseUrl();
+
   const baseAPIUrl = `${baseUrl}/${API_PREFIX}`;
 
   return baseAPIUrl;
@@ -53,12 +54,37 @@ export const createRequest = (
   body?: string,
 ) => {
   const hdrs = new Headers(headers());
+  const cookieStore = cookies();
 
   const apiURL = getAPIUrl();
 
   newHeaders.forEach((hdr) => {
     if (hdr[0]) hdrs.set(hdr[0], hdr[1]);
   });
+
+  const baseURL = getBaseUrl();
+
+  if (baseURL && process.env.API_HOST?.trim()) hdrs.set("origin", baseURL);
+
+  const authToken = cookieStore.get("asc_auth_key")?.value;
+
+  if (authToken) hdrs.set("Authorization", authToken);
+
+  cookieStore
+    .getAll()
+    .map((c) => {
+      if (c.name.includes("sharelink")) {
+        return c;
+      }
+
+      return false;
+    })
+    .filter((v) => !!v)
+    .forEach((value) => {
+      hdrs.set(value.name, value.value);
+
+      return value;
+    });
 
   const urls = paths.map((path) => `${apiURL}${path}`);
 

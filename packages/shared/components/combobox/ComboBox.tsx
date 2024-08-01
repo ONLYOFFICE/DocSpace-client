@@ -107,16 +107,22 @@ const ComboBoxPure = (props: ComboboxProps) => {
     });
   };
 
-  const optionClick = (option: TOption) => {
-    const { onSelect } = props;
+  const optionClick = (
+    option: TOption,
+    event: React.ChangeEvent<HTMLInputElement> | React.MouseEvent,
+  ) => {
+    const { onSelect, setIsOpenItemAccess } = props;
 
     setSelectedOption({ ...option });
-    // setIsOpen((v) => {
-    //   setIsOpenItemAccess?.(!v);
-    //   return !v;
-    // });
+
+    setIsOpen((v) => {
+      setIsOpenItemAccess?.(!v);
+      return !v;
+    });
 
     onSelect?.(option);
+
+    event?.stopPropagation();
   };
 
   const {
@@ -164,6 +170,9 @@ const ComboBoxPure = (props: ComboboxProps) => {
     title,
     className,
     plusBadgeValue,
+    optionStyle,
+    style,
+    withLabel = true,
   } = props;
 
   const { tabIndex, onClickSelectedItem } = props;
@@ -176,6 +185,10 @@ const ComboBoxPure = (props: ComboboxProps) => {
   React.useEffect(() => {
     setSelectedOption(selectedOptionProps);
   }, [selectedOptionProps]);
+
+  React.useEffect(() => {
+    setIsOpen(false);
+  }, [withLabel]);
 
   const dropDownMaxHeightProp = dropDownMaxHeight
     ? { maxHeight: dropDownMaxHeight }
@@ -225,23 +238,28 @@ const ComboBoxPure = (props: ComboboxProps) => {
         option.disabled ||
         (!displaySelectedOption && option.label === selectedOption.label);
 
-      const isActive =
-        displaySelectedOption && option.label === selectedOption.label;
+      const isActiveOption = withLabel
+        ? option.label === selectedOption.label
+        : option.key === selectedOption.key;
 
-      const isSelected = option.label === selectedOption.label;
+      const isActive = displaySelectedOption && isActiveOption;
+
+      const isSelected = isActiveOption;
+
       return (
         <DropDownItem
           {...option}
-          className="drop-down-item"
+          className={`drop-down-item ${"className" in option ? option.className : ""}`}
           textOverflow={textOverflow}
           key={option.key}
           disabled={disabled}
-          onClick={() => optionClick(option)}
+          onClick={(e) => optionClick(option, e)}
           onClickSelectedItem={() => onClickSelectedItem?.(option)}
           fillIcon={fillIcon}
           isModern={noBorder}
           isActive={isActive}
           isSelected={isSelected}
+          style={optionStyle}
         />
       );
     }) as React.ReactNode);
@@ -292,7 +310,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
           open={isOpen}
           forwardedRef={ref}
           clickOutsideAction={handleClickOutside}
-          style={advancedOptions ? { padding: "6px 0px" } : {}}
+          style={style}
           {...dropDownMaxHeightProp}
           {...dropDownManualWidthProp}
           showDisabledItems={showDisabledItems}

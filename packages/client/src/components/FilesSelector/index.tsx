@@ -34,6 +34,7 @@ import FilesSelector from "@docspace/shared/selectors/Files";
 import { toastr } from "@docspace/shared/components/toast";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import {
+  TFile,
   TFileSecurity,
   TFolder,
   TFolderSecurity,
@@ -41,7 +42,7 @@ import {
 import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
-import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
+import { TRoom, TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { TTranslation } from "@docspace/shared/types";
 
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
@@ -54,6 +55,8 @@ import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 
 import { FilesSelectorProps } from "./FilesSelector.types";
 import { getAcceptButtonLabel, getHeaderLabel, getIsDisabled } from "./utils";
+
+let disabledItems: (string | number)[] = [];
 
 const FilesSelectorWrapper = ({
   isPanelVisible = false,
@@ -77,6 +80,7 @@ const FilesSelectorWrapper = ({
   isRestore,
   isRestoreAll,
   isSelect,
+  isFormRoom,
 
   currentFolderId,
   fromFolderId,
@@ -86,7 +90,7 @@ const FilesSelectorWrapper = ({
   treeFolders,
 
   selection,
-  disabledItems,
+  // disabledItems,
   setConflictDialogData,
   checkFileConflicts,
   itemOperationToFolder,
@@ -133,6 +137,9 @@ const FilesSelectorWrapper = ({
   isRoomBackup,
 
   roomsFolderId,
+  openRoot,
+
+  filesSettings,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -167,8 +174,16 @@ const FilesSelectorWrapper = ({
     onCloseAction();
   };
 
-  const getFilesArchiveError = (name: string) =>
-    t("Common:ArchivedRoomAction", { name });
+  const getFilesArchiveError = React.useCallback(
+    (name: string) => t("Common:ArchivedRoomAction", { name }),
+    [t],
+  );
+
+  React.useEffect(() => {
+    return () => {
+      disabledItems = [];
+    };
+  }, []);
 
   const onAccept = async (
     selectedItemId: string | number | undefined,
@@ -274,6 +289,8 @@ const FilesSelectorWrapper = ({
     isSelect,
     filterParam,
     isRestore,
+    isFormRoom,
+    isThirdParty,
     isSelectFolder,
   );
 
@@ -286,6 +303,7 @@ const FilesSelectorWrapper = ({
     isSelect,
     filterParam,
     isRestore,
+    isFormRoom,
     isSelectFolder,
   );
 
@@ -320,8 +338,11 @@ const FilesSelectorWrapper = ({
     );
   };
 
+  const openRootVar = openRoot || isRestore || isRestoreAll;
+
   return (
     <FilesSelector
+      openRoot={openRootVar}
       socketHelper={socketHelper}
       socketSubscribers={socketSubscribers}
       disabledItems={disabledItems}
@@ -335,7 +356,7 @@ const FilesSelectorWrapper = ({
       isThirdParty={isThirdParty}
       rootThirdPartyId={rootThirdPartyId}
       roomsFolderId={roomsFolderId}
-      currentFolderId={currentFolderId}
+      currentFolderId={isFormRoom && openRootVar ? "" : currentFolderId}
       parentId={parentId}
       rootFolderType={rootFolderType || FolderType.Rooms}
       currentDeviceType={currentDeviceType}
@@ -369,6 +390,8 @@ const FilesSelectorWrapper = ({
         isMove || isCopy || isRestore ? "select-file-modal-cancel" : ""
       }
       getFilesArchiveError={getFilesArchiveError}
+      withCreate={(isMove || isCopy || isRestore || isRestoreAll) ?? false}
+      filesSettings={filesSettings}
     />
   );
 };
@@ -401,7 +424,7 @@ export default inject(
       isRestore,
       isPanelVisible,
       id,
-      currentFolderId,
+      currentFolderId: currentFolderIdProp,
     }: FilesSelectorProps,
   ) => {
     const { id: selectedId, parentId, rootFolderType } = selectedFolderStore;
@@ -440,11 +463,11 @@ export default inject(
       setSelected,
       filesSettingsStore,
     } = filesStore;
-    const { getIcon } = filesSettingsStore;
+    const { getIcon, filesSettings } = filesSettingsStore;
     const { isVisible: infoPanelIsVisible, infoPanelSelection } =
       infoPanelStore;
 
-    const selections =
+    const selections: (TFile | TFolder | TRoom) & { isEditing: boolean }[] =
       isMove || isCopy || isRestoreAll || isRestore
         ? isRestoreAll
           ? filesList
@@ -457,39 +480,41 @@ export default inject(
                 : []
         : [];
 
-    const sessionPath = window.sessionStorage.getItem("filesSelectorPath");
+    // const sessionPath = window.sessionStorage.getItem("filesSelectorPath");
 
-    const selectionsWithoutEditing = isRestoreAll
+    const selectionsWithoutEditing: (TFile | TFolder | TRoom)[] = isRestoreAll
       ? filesList
       : isCopy
         ? selections
         : selections.filter((f) => f && !f?.isEditing);
 
-    const disabledItems: (string | number)[] = [];
-
-    selectionsWithoutEditing.forEach((item) => {
-      if ((item?.isFolder || item?.parentId) && item?.id) {
+    selectionsWithoutEditing.forEach((item: TFile | TFolder | TRoom) => {
+      if (
+        (("isFolder" in item && item?.isFolder) ||
+          ("parentId" in item && item?.parentId)) &&
+        item?.id &&
+        !disabledItems.includes(item.id)
+      ) {
         disabledItems.push(item.id);
       }
     });
 
     const includeFolder =
-      selectionsWithoutEditing.filter((i) => i.isFolder).length > 0;
+      selectionsWithoutEditing.filter((i) => "isFolder" in i && i.isFolder)
+        .length > 0;
 
     const fromFolderId =
       id ||
       (rootFolderType === FolderType.Archive ||
       rootFolderType === FolderType.TRASH
         ? undefined
-        : selectedId === selectionsWithoutEditing[0]?.id
+        : selectedId === selectionsWithoutEditing[0]?.id &&
+            "isFolder" in selectionsWithoutEditing[0] &&
+            selectionsWithoutEditing[0]?.isFolder
           ? parentId
           : selectedId);
 
-    const folderId =
-      currentFolderId ||
-      (sessionPath && (isMove || isCopy || isRestore || isRestoreAll)
-        ? +sessionPath
-        : fromFolderId);
+    const folderId = fromFolderId;
 
     return {
       fromFolderId,
@@ -527,7 +552,8 @@ export default inject(
       getIcon,
 
       roomsFolderId,
-      currentFolderId: folderId,
+      currentFolderId: folderId || currentFolderIdProp,
+      filesSettings,
     };
   },
 )(observer(FilesSelectorWrapper));

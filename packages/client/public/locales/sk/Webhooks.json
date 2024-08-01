@@ -46,7 +46,7 @@
   "URL": "URL",
   "ViewRawPayload": "Zobraziť nespracovaný dátový obsah",
   "WebhookCreated": "Webhook vytvorený",
-  "WebhookCreationHint": "Tento webhook bude priradený všetkým udalostiam v aplikácii DocSpace",
+  "WebhookCreationHint": "Tento webhook bude priradený všetkým udalostiam v aplikácii {{productName}}",
   "WebhookDetails": "Podrobnosti o webhooku",
   "WebhookEditedSuccessfully": "Konfigurácia webhooku úspešne upravená",
   "WebhookHistory": "História webhooku",
@@ -55,5 +55,5 @@
   "WebhookRemoved": "Webhook odstránený",
   "Webhooks": "Webhooky",
   "WebhooksGuide": "Sprievodca webhookmi",
-  "WebhooksInfo": "Pomocou webhookov môžete vykonávať vlastné operácie na strane akejkoľvek aplikácie alebo webových stránok, ktoré používate, na základe rôznych udalostí v ONLYOFFICE DocSpace.\nTu môžete vytvárať a spravovať všetky svoje webhooky, konfigurovať ich a prechádzať históriu každého webhooku a kontrolovať ich výkon."
+  "WebhooksInfo": "Pomocou webhookov môžete vykonávať vlastné operácie na strane akejkoľvek aplikácie alebo webových stránok, ktoré používate, na základe rôznych udalostí v {{organizationName}} {{productName}}.\nTu môžete vytvárať a spravovať všetky svoje webhooky, konfigurovať ich a prechádzať históriu každého webhooku a kontrolovať ich výkon."
 }

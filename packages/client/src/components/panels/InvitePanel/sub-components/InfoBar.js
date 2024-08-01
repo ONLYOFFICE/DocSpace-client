@@ -94,7 +94,9 @@ const InfoBar = (props) => {
             {t("Common:Info")}
           </Text>
         </div>
-        <div className="body-container">{t("InfoPanel:InfoBanner")}</div>
+        <div className="body-container">
+          {t("InfoPanel:InfoBanner", { productName: t("Common:ProductName") })}
+        </div>
       </div>
 
       <IconButton

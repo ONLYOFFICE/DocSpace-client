@@ -62,6 +62,7 @@ import {
   TThirdPartyCapabilities,
   TTirdParties,
   TUploadOperation,
+  TConnectingStorages,
 } from "./types";
 
 export async function openEdit(
@@ -336,7 +337,10 @@ export async function getTrashFolderList() {
 //   return request(options);
 // }
 
-export async function createFolder(parentFolderId: number, title: string) {
+export async function createFolder(
+  parentFolderId: number | string,
+  title: string,
+) {
   const data = { title };
   const options: AxiosRequestConfig = {
     method: "post",
@@ -471,10 +475,15 @@ export async function createFile(
 //   return request(options);
 // }
 
-export async function getFileInfo(fileId: number) {
+export async function getFileInfo(fileId: number | string, share?: string) {
   const options: AxiosRequestConfig = {
     method: "get",
     url: `/files/file/${fileId}`,
+    headers: share
+      ? {
+          "Request-Token": share,
+        }
+      : undefined,
   };
 
   const res = (await request(options)) as TFile;
@@ -711,6 +720,21 @@ export async function copyToFolder(
   return res;
 }
 
+export async function duplicate(folderIds: number[], fileIds: number[]) {
+  const data = {
+    folderIds,
+    fileIds,
+  };
+
+  const res = (await request({
+    method: "put",
+    url: "/files/fileops/duplicate",
+    data,
+  })) as TOperation[];
+
+  return res;
+}
+
 export async function moveToFolder(
   destFolderId: number,
   folderIds: number[],
@@ -900,6 +924,17 @@ export async function changeKeepNewFileName(val: boolean) {
   const res = (await request({
     method: "put",
     url: "files/keepnewfilename",
+    data,
+  })) as boolean;
+
+  return res;
+}
+
+export async function changeOpenEditorInSameTab(val: boolean) {
+  const data = { set: val };
+  const res = (await request({
+    method: "put",
+    url: "files/settings/openeditorinsametab",
     data,
   })) as boolean;
 
@@ -1300,6 +1335,15 @@ export async function getFileLink(fileId: number) {
   return res;
 }
 
+export async function getFolderLink(fileId: number) {
+  const res = (await request({
+    method: "get",
+    url: `/files/folder/${fileId}/link`,
+  })) as TFileLink;
+
+  return res;
+}
+
 export async function getExternalLinks(
   fileId: number | string,
   startIndex = 0,
@@ -1386,4 +1430,29 @@ export async function getFilesUsedSpace() {
   const res = (await request(options)) as TFilesUsedSpace;
 
   return res;
+}
+
+export async function getConnectingStorages() {
+  const res = (await request({
+    method: "get",
+    url: "files/thirdparty/providers",
+  })) as TConnectingStorages;
+
+  return res;
+}
+
+export async function startFilling(fileId: string | number): Promise<void> {
+  const options: AxiosRequestConfig = {
+    method: "put",
+    url: `files/file/${fileId}/startfilling`,
+  };
+
+  await request(options);
+}
+
+export async function checkIsPDFForm(fileId: string | number) {
+  return request({
+    method: "get",
+    url: `/files/file/${fileId}/isformpdf`,
+  }) as Promise<boolean>;
 }

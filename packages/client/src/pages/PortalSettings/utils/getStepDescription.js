@@ -29,30 +29,49 @@ export const getGoogleStepDescription = (
   stepIndex,
   renderTooltip,
   Trans,
+  isTypeSelectEmpty,
 ) => {
   switch (stepIndex) {
     case 1:
       return t("Settings:SelectFileDescriptionGoogle");
     case 2:
-      return t("Settings:SelectUsersDescriptionGoogle");
+      return t("Settings:SelectUsersDescriptionGoogle", {
+        productName: t("Common:ProductName"),
+        organizationName: t("Common:OrganizationName"),
+      });
     case 3:
-      return (
+      return isTypeSelectEmpty ? (
         <>
-          <Trans t={t} ns="Settings" i18nKey="SelectUserTypesDescription">
-            Select DocSpace roles for the imported users: <b>DocSpace admin</b>,{" "}
-            <b>Room admin</b>
-            or <b>Power user</b>. By default, Power user role is selected for
-            each user. You can manage the roles after the import.
-          </Trans>
+          <b>{t("Settings:RolesAreSet")}</b>
+          <div>{t("Settings:UsersAreRegistered")}</div>
+        </>
+      ) : (
+        <>
+          <Trans
+            t={t}
+            ns="Settings"
+            i18nKey="SelectUserTypesDescription"
+            values={{
+              productName: t("Common:ProductName"),
+            }}
+            components={{
+              1: <b />,
+            }}
+          />
           {renderTooltip}
         </>
       );
     case 4:
-      return t("Settings:ImportSectionDescription");
+      return t("Settings:ImportSectionDescription", {
+        productName: t("Common:ProductName"),
+      });
     case 5:
       return t("Settings:ImportProcessingDescription");
     case 6:
-      return t("Settings:ImportCompleteDescriptionGoogle");
+      return t("Settings:ImportCompleteDescriptionGoogle", {
+        productName: t("Common:ProductName"),
+        organizationName: t("Common:OrganizationName"),
+      });
     default:
       return;
   }
@@ -63,30 +82,51 @@ export const getWorkspaceStepDescription = (
   stepIndex,
   renderTooltip,
   Trans,
+  isTypeSelectEmpty,
 ) => {
   switch (stepIndex) {
     case 1:
-      return t("Settings:SelectFileDescriptionWorkspace");
+      return t("Settings:SelectFileDescriptionWorkspace", {
+        organizationName: t("Common:OrganizationName"),
+      });
     case 2:
-      return t("Settings:SelectUsersDescriptionWorkspace");
+      return t("Settings:SelectUsersDescriptionWorkspace", {
+        productName: t("Common:ProductName"),
+        organizationName: t("Common:OrganizationName"),
+      });
     case 3:
-      return (
+      return isTypeSelectEmpty ? (
         <>
-          <Trans t={t} ns="Settings" i18nKey="SelectUserTypesDescription">
-            Select DocSpace roles for the imported users: <b>DocSpace admin</b>,{" "}
-            <b>Room admin</b>
-            or <b>Power user</b>. By default, Power user role is selected for
-            each user. You can manage the roles after the import.
-          </Trans>
+          <b>{t("Settings:RolesAreSet")}</b>
+          <div>{t("Settings:UsersAreRegistered")}</div>
+        </>
+      ) : (
+        <>
+          <Trans
+            t={t}
+            ns="Settings"
+            i18nKey="SelectUserTypesDescription"
+            values={{
+              productName: t("Common:ProductName"),
+            }}
+            components={{
+              1: <b />,
+            }}
+          />
           {renderTooltip}
         </>
       );
     case 4:
-      return t("Settings:ImportSectionDescription");
+      return t("Settings:ImportSectionDescription", {
+        productName: t("Common:ProductName"),
+      });
     case 5:
       return t("Settings:ImportProcessingDescription");
     case 6:
-      return t("Settings:ImportCompleteDescriptionWorkspace");
+      return t("Settings:ImportCompleteDescriptionWorkspace", {
+        productName: t("Common:ProductName"),
+        organizationName: t("Common:OrganizationName"),
+      });
     default:
       return;
   }

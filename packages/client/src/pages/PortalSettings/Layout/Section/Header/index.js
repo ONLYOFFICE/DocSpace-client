@@ -29,7 +29,7 @@ import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touch.react.svg?url";
 import React from "react";
 import { inject, observer } from "mobx-react";
-import styled, { css } from "styled-components";
+import styled, { css, useTheme } from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import Headline from "@docspace/shared/components/headline/Headline";
@@ -74,8 +74,6 @@ const HeaderContainer = styled.div`
       white-space: nowrap;
       overflow: hidden;
       color: ${(props) => props.theme.client.settings.headerTitleColor};
-      display: flex;
-      align-items: center;
     }
   }
   .action-wrapper {
@@ -94,6 +92,8 @@ const HeaderContainer = styled.div`
   }
 
   .arrow-button {
+    flex-shrink: 0;
+
     ${(props) =>
       props.theme.interfaceDirection === "rtl"
         ? css`
@@ -186,6 +186,7 @@ const SectionHeaderContent = (props) => {
 
   const navigate = useNavigate();
   const location = useLocation();
+  const theme = useTheme();
 
   const [state, setState] = React.useState({
     header: "",
@@ -338,13 +339,6 @@ const SectionHeaderContent = (props) => {
     },
   ];
 
-  const pathname = location.pathname;
-
-  const isServicePage =
-    pathname.includes("google") ||
-    pathname.includes("nextcloud") ||
-    pathname.includes("onlyoffice");
-
   return (
     <StyledContainer isHeaderVisible={isHeaderVisible}>
       {isHeaderVisible ? (
@@ -362,32 +356,28 @@ const SectionHeaderContent = (props) => {
         <LoaderSectionHeader />
       ) : (
         <HeaderContainer>
-          {!isCategoryOrHeader && arrayOfParams[0] && (
-            <IconButton
-              iconName={ArrowPathReactSvgUrl}
-              size="17"
-              isFill={true}
-              onClick={onBackToParent}
-              className="arrow-button"
-            />
-          )}
+          {!isCategoryOrHeader &&
+            arrayOfParams[0] &&
+            (isMobile() ||
+              window.location.href.indexOf("/javascript-sdk/") > -1) && (
+              <IconButton
+                iconName={ArrowPathReactSvgUrl}
+                size="17"
+                isFill={true}
+                onClick={onBackToParent}
+                className="arrow-button"
+              />
+            )}
           <Headline type="content" truncate={true}>
             <div className="settings-section_header">
               <div className="header">
-                {isMobile() && isServicePage && (
-                  <IconButton
-                    iconName={ArrowPathReactSvgUrl}
-                    size="17"
-                    isFill={true}
-                    onClick={onBackToParent}
-                    className="arrow-button"
-                  />
-                )}
-                {t(header)}
+                {t(header, {
+                  organizationName: t("Common:OrganizationName"),
+                })}
               </div>
               {isNeedPaidIcon ? (
                 <Badge
-                  backgroundColor="#EDC409"
+                  backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
                   label={t("Common:Paid")}
                   fontWeight="700"
                   className="settings-section_badge"
@@ -439,6 +429,7 @@ export default inject(({ currentQuotaStore, setup, common }) => {
   } = setup.selectionStore;
   const { admins, selectorIsOpen } = setup.security.accessRight;
   const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
+
   return {
     addUsers,
     removeAdmins,

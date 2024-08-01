@@ -31,15 +31,26 @@ import { getIconPathByFolderType } from "../../utils/common";
 import { iconSize32 } from "../../utils/image-helpers";
 import { DEFAULT_FILE_EXTS } from "./FilesSelector.constants";
 import { getTitleWithoutExtension } from "../../utils";
+import { TTranslation } from "../../types";
+
+const isDisableFolder = (
+  folder: TFolder,
+  disabledItems: (number | string)[],
+  filterParam?: string | number,
+) => {
+  if (!folder.security.Create) return true;
+
+  return filterParam ? false : disabledItems?.includes(folder.id);
+};
 
 export const convertFoldersToItems: (
   folders: TFolder[],
   disabledItems: (number | string)[],
-  filterParam?: string,
+  filterParam?: string | number,
 ) => TSelectorItem[] = (
   folders: TFolder[],
   disabledItems: (number | string)[],
-  filterParam?: string,
+  filterParam?: string | number,
 ) => {
   const items = folders.map((folder: TFolder) => {
     const {
@@ -50,11 +61,14 @@ export const convertFoldersToItems: (
       foldersCount,
       security,
       parentId,
+      type,
       rootFolderType,
     } = folder;
 
-    const folderIconPath = getIconPathByFolderType(rootFolderType);
+    const folderIconPath = getIconPathByFolderType(type);
     const icon = iconSize32.get(folderIconPath) as string;
+
+    const isDisabled = isDisableFolder(folder, disabledItems, filterParam);
 
     return {
       id,
@@ -68,7 +82,7 @@ export const convertFoldersToItems: (
       rootFolderType,
       isFolder: true,
       //   roomType,
-      isDisabled: filterParam ? false : disabledItems?.includes(id),
+      isDisabled,
     };
   });
 
@@ -78,11 +92,11 @@ export const convertFoldersToItems: (
 export const convertFilesToItems: (
   files: TFile[],
   getIcon: (fileExst: string) => string,
-  filterParam?: string,
+  filterParam?: string | number,
 ) => TSelectorItem[] = (
   files: TFile[],
   getIcon: (fileExst: string) => string,
-  filterParam?: string,
+  filterParam?: string | number,
 ) => {
   const items = files.map((file) => {
     const { id, title, security, folderId, rootFolderType, fileExst } = file;
@@ -143,4 +157,12 @@ export const convertRoomsToItems: (rooms: TRoom[]) => TSelectorItem[] = (
   });
 
   return items;
+};
+
+export const getDefaultBreadCrumb = (t: TTranslation) => {
+  return {
+    label: t("Common:ProductName"),
+    id: 0,
+    isRoom: false,
+  };
 };

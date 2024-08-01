@@ -32,7 +32,7 @@ import { useTranslation } from "react-i18next";
 import AboutContent from "./AboutContent";
 
 const AboutDialog = (props) => {
-  const { visible, onClose, personal, buildVersionInfo, previewData } = props;
+  const { visible, onClose, buildVersionInfo, previewData } = props;
   const { t, ready } = useTranslation(["About", "Common"]);
 
   return (
@@ -46,7 +46,6 @@ const AboutDialog = (props) => {
       <ModalDialog.Header>{t("AboutHeader")}</ModalDialog.Header>
       <ModalDialog.Body>
         <AboutContent
-          personal={personal}
           buildVersionInfo={buildVersionInfo}
           previewData={previewData}
         />
@@ -58,7 +57,6 @@ const AboutDialog = (props) => {
 AboutDialog.propTypes = {
   visible: PropTypes.bool,
   onClose: PropTypes.func,
-  personal: PropTypes.bool,
   buildVersionInfo: PropTypes.object,
   previewData: PropTypes.object,
 };

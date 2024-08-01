@@ -139,9 +139,6 @@ const StyledTitle = styled.div`
     margin: 0 8px;
     overflow: hidden;
     text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
   }
 
   .free-label {
@@ -211,17 +208,24 @@ const StyledSearchContainer = styled.div`
   box-sizing: border-box;
   position: absolute;
   top: 0;
-  left: 0;
+  inset-inline: 0 -20px;
   display: flex;
   align-items: center;
   gap: 8px;
   height: 68px;
-  width: 100%;
   padding: 0 16px;
   border-radius: 0 0 6px 6px;
   background-color: ${(props) => props.theme.infoPanel.backgroundColor};
   z-index: 101;
   box-shadow: ${({ theme }) => theme.infoPanel.search.boxShadow};
+
+  @media ${tablet} {
+    inset-inline: 0;
+  }
+
+  @media ${mobile} {
+    inset-inline: 0 -14px;
+  }
 `;
 
 const StyledLink = styled.div`

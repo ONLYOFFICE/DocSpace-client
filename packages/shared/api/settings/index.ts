@@ -45,6 +45,8 @@ import {
   TCapabilities,
   TThirdPartyProvider,
   TPaymentSettings,
+  TGetSsoSettings,
+  TPortalCultures,
 } from "./types";
 
 export async function getSettings(withPassword = false, headers = null) {
@@ -66,7 +68,7 @@ export async function getPortalCultures() {
   const res = (await request({
     method: "get",
     url: "/settings/cultures",
-  })) as string[];
+  })) as TPortalCultures;
 
   return res;
 }
@@ -801,13 +803,15 @@ export function toggleTipsSubscription() {
   return request(options);
 }
 
-export function getCurrentSsoSettings() {
-  const options = {
+export async function getCurrentSsoSettings() {
+  const options: AxiosRequestConfig = {
     method: "get",
     url: "/settings/ssov2",
   };
 
-  return request(options);
+  const res = (await request(options)) as TGetSsoSettings;
+
+  return res;
 }
 
 export function submitSsoForm(data) {
@@ -1120,6 +1124,23 @@ export function migrationCancel() {
   });
 }
 
+export function getLdapSettings() {
+  const options = {
+    method: "get",
+    url: "/settings/ldap",
+  };
+
+  return request(options);
+}
+
+export function saveLdapSettings(settings) {
+  return request({
+    method: "post",
+    url: `/settings/ldap`,
+    data: settings,
+  });
+}
+
 export function migrationClear() {
   return request({
     method: "post",
@@ -1177,6 +1198,52 @@ export function setTenantQuotaSettings(data) {
     method: "put",
     url: `/settings/tenantquotasettings`,
     data,
+  };
+
+  return request(options);
+}
+
+export function getLdapStatus() {
+  const options = {
+    method: "get",
+    url: "/settings/ldap/status",
+  };
+
+  return request(options);
+}
+
+export function getLdapDefaultSettings() {
+  const options = {
+    method: "get",
+    url: "/settings/ldap/default",
+  };
+
+  return request(options);
+}
+
+export function syncLdap() {
+  const options = {
+    method: "get",
+    url: "/settings/ldap/sync",
+  };
+
+  return request(options);
+}
+
+export function saveCronLdap(cron) {
+  const options = {
+    method: "post",
+    url: "/settings/ldap/cron",
+    data: { Cron: cron },
+  };
+
+  return request(options);
+}
+
+export function getCronLdap() {
+  const options = {
+    method: "get",
+    url: "/settings/ldap/cron",
   };
 
   return request(options);

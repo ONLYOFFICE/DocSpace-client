@@ -26,32 +26,20 @@
 
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import debounce from "lodash.debounce";
 import { Box } from "@docspace/shared/components/box";
-import { TextInput } from "@docspace/shared/components/text-input";
-import { Textarea } from "@docspace/shared/components/textarea";
 import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
-import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import RoomsSelectorInput from "SRC_DIR/components/RoomsSelectorInput";
-import { objectToGetParams, loadScript } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
-
-import { isTablet, isMobile } from "@docspace/shared/utils/device";
 
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 
-import GetCodeDialog from "../sub-components/GetCodeDialog";
-import { Button } from "@docspace/shared/components/button";
-
 import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
-import CodeBlock from "../sub-components/CodeBlock";
 
 import { TooltipContent } from "../sub-components/TooltipContent";
 import { useNavigate } from "react-router-dom";
-import { Link } from "@docspace/shared/components/link";
 import FilesFilter from "@docspace/shared/api/files/filter";
 
 import { RoomsType } from "@docspace/shared/enums";
@@ -62,63 +50,51 @@ import SearchUrl from "PUBLIC_DIR/images/sdk-presets_search.react.svg?url";
 import TitleDarkUrl from "PUBLIC_DIR/images/sdk-presets_title_dark.png?url";
 import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
 
-const showPreviewThreshold = 720;
+import { WidthSetter } from "../sub-components/WidthSetter";
+import { HeightSetter } from "../sub-components/HeightSetter";
+import { FrameIdSetter } from "../sub-components/FrameIdSetter";
+import { PresetWrapper } from "../sub-components/PresetWrapper";
+import { SharedLinkHint } from "../sub-components/SharedLinkHint";
+import { PreviewBlock } from "../sub-components/PreviewBlock";
+
+import { loadFrame } from "../utils";
 
 import {
-  SDKContainer,
+  dataDimensions,
+  defaultWidthDimension,
+  defaultHeightDimension,
+  defaultWidth,
+  defaultHeight,
+} from "../constants";
+
+import {
   Controls,
-  CategoryHeader,
   CategorySubHeader,
-  CategoryDescription,
   ControlsGroup,
   LabelGroup,
   Frame,
   Container,
-  RowContainer,
-  Preview,
-  GetCodeButtonWrapper,
   FilesSelectorInputWrapper,
   ControlsSection,
-  CodeWrapper,
   CheckboxGroup,
 } from "./StyledPresets";
+import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const SimpleRoom = (props) => {
-  const { t, setDocumentTitle, fetchExternalLinks, currentColorScheme, theme } =
-    props;
+  const { t, fetchExternalLinks, currentColorScheme, theme } = props;
   const navigate = useNavigate();
 
   setDocumentTitle(t("JavascriptSdk"));
 
-  const scriptUrl = `${window.location.origin}/static/scripts/sdk/1.0.0/api.js`;
-
-  const dataDimensions = [
-    { key: "percent", label: "%", default: true },
-    { key: "pixel", label: "px" },
-  ];
-
-  const settingsTranslations = {
-    password: t("Common:Password").toLowerCase(),
-    denyDownload: t("FileContentCopy").toLowerCase(),
-    expirationDate: t("LimitByTime").toLowerCase(),
-  };
-
-  const [widthDimension, setWidthDimension] = useState(dataDimensions[0]);
-  const [heightDimension, setHeightDimension] = useState(dataDimensions[0]);
-  const [width, setWidth] = useState("100");
-  const [height, setHeight] = useState("100");
-  const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
-  const [showPreview, setShowPreview] = useState(
-    window.innerWidth > showPreviewThreshold,
-  );
   const [sharedLinks, setSharedLinks] = useState(null);
 
   const [selectedLink, setSelectedLink] = useState(null);
 
   const [config, setConfig] = useState({
     mode: "manager",
-    width: `${width}${widthDimension.label}`,
-    height: `${height}${heightDimension.label}`,
+    width: `${defaultWidth}${defaultWidthDimension.label}`,
+    height: `${defaultHeight}${defaultHeightDimension.label}`,
     frameId: "ds-frame",
     showHeader: false,
     showTitle: true,
@@ -137,56 +113,25 @@ const SimpleRoom = (props) => {
     },
   });
 
-  const params = objectToGetParams(config);
-
   const frameId = config.frameId || "ds-frame";
 
   const destroyFrame = () => {
     window.DocSpace?.SDK?.frames[frameId]?.destroyFrame();
   };
 
-  const loadFrame = debounce(() => {
-    const script = document.getElementById("integration");
+  const loadCurrentFrame = () => loadFrame(config, SDK_SCRIPT_URL);
 
-    if (script) {
-      script.remove();
-    }
-
-    const params = objectToGetParams(config);
-
-    loadScript(`${scriptUrl}${params}`, "integration", () =>
-      window.DocSpace.SDK.initFrame(config),
-    );
-  }, 500);
+  useEffect(() => {
+    loadCurrentFrame();
+    return () => destroyFrame();
+  });
 
   useEffect(() => {
     const scroll = document.getElementsByClassName("section-scroll")[0];
     if (scroll) {
       scroll.scrollTop = 0;
     }
-    loadFrame();
-    return () => destroyFrame();
-  });
-
-  const onChangeTab = () => {
-    loadFrame();
-  };
-
-  const onChangeWidth = (e) => {
-    setConfig((config) => {
-      return { ...config, width: `${e.target.value}${widthDimension.label}` };
-    });
-
-    setWidth(e.target.value);
-  };
-
-  const onChangeHeight = (e) => {
-    setConfig((config) => {
-      return { ...config, height: `${e.target.value}${heightDimension.label}` };
-    });
-
-    setHeight(e.target.value);
-  };
+  }, []);
 
   const onChangeFolderId = async (rooms) => {
     const publicRoom = rooms[0];
@@ -241,28 +186,6 @@ const SimpleRoom = (props) => {
     });
   };
 
-  const onChangeFrameId = (e) => {
-    setConfig((config) => {
-      return { ...config, frameId: e.target.value };
-    });
-  };
-
-  const onChangeWidthDimension = (item) => {
-    setConfig((config) => {
-      return { ...config, width: `${width}${item.label}` };
-    });
-
-    setWidthDimension(item);
-  };
-
-  const onChangeHeightDimension = (item) => {
-    setConfig((config) => {
-      return { ...config, height: `${height}${item.label}` };
-    });
-
-    setHeightDimension(item);
-  };
-
   const onChangeShowTitle = () => {
     setConfig((config) => {
       return { ...config, showTitle: !config.showTitle };
@@ -275,49 +198,30 @@ const SimpleRoom = (props) => {
     });
   };
 
-  const openGetCodeModal = () => setIsGetCodeDialogOpened(true);
-
-  const closeGetCodeModal = () => setIsGetCodeDialogOpened(false);
-
-  const onResize = () => {
-    const isEnoughWidthForPreview = window.innerWidth > showPreviewThreshold;
-    if (isEnoughWidthForPreview !== showPreview)
-      setShowPreview(isEnoughWidthForPreview);
-  };
-
   const navigateRoom = (id) => {
     const filter = FilesFilter.getDefault();
     filter.folder = id;
     navigate(`/rooms/shared/${id}/filter?${filter.toUrlParams()}`);
   };
 
-  useEffect(() => {
-    window.addEventListener("resize", onResize);
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  }, [showPreview]);
-
-  const codeBlock = `<div id="${frameId}">Fallback text</div>\n<script src="${scriptUrl}${params}"></script>`;
+  const redirectToSelectedRoom = () => navigateRoom(config.id);
 
   const preview = (
     <Frame
       width={
-        config.id !== undefined && widthDimension.label === "px"
-          ? width + widthDimension.label
+        config.id !== undefined && config.width.includes("px")
+          ? config.width
           : undefined
       }
       height={
-        config.id !== undefined && heightDimension.label === "px"
-          ? height + heightDimension.label
+        config.id !== undefined && config.height.includes("px")
+          ? config.height
           : undefined
       }
       targetId={frameId}
     >
       {config.id !== undefined ? (
-        <>
-          <Box id={frameId}></Box>
-        </>
+        <Box id={frameId}></Box>
       ) : (
         <EmptyIframeContainer
           text={t("RoomPreview")}
@@ -328,54 +232,22 @@ const SimpleRoom = (props) => {
     </Frame>
   );
 
-  const code = (
-    <CodeWrapper height="fit-content">
-      <CategorySubHeader className="copy-window-code">
-        {`HTML ${t("CodeTitle")}`}
-      </CategorySubHeader>
-      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
-        {t("HtmlCodeDescription")}
-      </Text>
-      <Textarea value={codeBlock} heightTextArea={153} />
-      <CategorySubHeader className="copy-window-code">
-        {`JavaScript ${t("CodeTitle")}`}
-      </CategorySubHeader>
-      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
-        {t("JavaScriptCodeDescription")}
-      </Text>
-      <CodeBlock config={config} />
-    </CodeWrapper>
-  );
-
-  const dataTabs = [
-    {
-      key: "preview",
-      title: t("Common:Preview"),
-      content: preview,
-    },
-    {
-      key: "code",
-      title: t("Code"),
-      content: code,
-    },
-  ];
-
   return (
-    <SDKContainer>
-      <CategoryDescription>
-        <Text className="sdk-description">{t("PublicRoomDescription")}</Text>
-      </CategoryDescription>
-      <CategoryHeader>{t("CreateSamplePublicRoom")}</CategoryHeader>
+    <PresetWrapper
+      description={t("PublicRoomDescription")}
+      header={t("CreateSamplePublicRoom")}
+    >
       <Container>
-        {showPreview && (
-          <Preview>
-            <TabsContainer
-              isDisabled={config?.id === undefined}
-              onSelect={onChangeTab}
-              elements={dataTabs}
-            />
-          </Preview>
-        )}
+        <PreviewBlock
+          t={t}
+          loadCurrentFrame={loadCurrentFrame}
+          preview={preview}
+          theme={theme}
+          frameId={frameId}
+          scriptUrl={SDK_SCRIPT_URL}
+          config={config}
+          isDisabled={config?.id === undefined}
+        />
         <Controls>
           <ControlsSection>
             <CategorySubHeader>{t("DataDisplay")}</CategorySubHeader>
@@ -413,93 +285,26 @@ const SimpleRoom = (props) => {
                     size={12}
                     tooltipContent={
                       <Text fontSize="12px">
-                        {t("CreateEditRoomDialog:PublicRoomDescription")}
+                        {t("Common:PublicRoomDescription")}
                       </Text>
                     }
                   />
                 </LabelGroup>
                 <ComboBox
-                  scaled={true}
+                  scaled
                   onSelect={onChangeSharedLink}
                   options={sharedLinks}
                   selectedOption={selectedLink}
                   displaySelectedOption
                   directionY="bottom"
                 />
-                {selectedLink && selectedLink.settings.length === 1 ? (
-                  <div>
-                    <Text
-                      className="linkHelp"
-                      fontSize="12px"
-                      lineHeight="16px"
-                    >
-                      {t("LinkSetDescription", {
-                        parameter:
-                          settingsTranslations[selectedLink.settings[0]],
-                      })}
-                    </Text>
-                    <Link
-                      color={currentColorScheme?.main?.accent}
-                      fontSize="12px"
-                      lineHeight="16px"
-                      onClick={() => navigateRoom(config.id)}
-                    >
-                      {" "}
-                      {t("GoToRoom")}.
-                    </Link>
-                  </div>
-                ) : selectedLink.settings.length === 2 ? (
-                  <div>
-                    <Text
-                      className="linkHelp"
-                      fontSize="12px"
-                      lineHeight="16px"
-                    >
-                      {t("LinkSetDescription2", {
-                        parameter1:
-                          settingsTranslations[selectedLink.settings[0]],
-                        parameter2:
-                          settingsTranslations[selectedLink.settings[1]],
-                      })}
-                    </Text>
-                    <Link
-                      color={currentColorScheme?.main?.accent}
-                      fontSize="12px"
-                      lineHeight="16px"
-                      onClick={() => navigateRoom(config.id)}
-                    >
-                      {" "}
-                      {t("GoToRoom")}.
-                    </Link>
-                  </div>
-                ) : selectedLink.settings.length === 3 ? (
-                  <div>
-                    <Text
-                      className="linkHelp"
-                      fontSize="12px"
-                      lineHeight="16px"
-                    >
-                      {t("LinkSetDescription3", {
-                        parameter1:
-                          settingsTranslations[selectedLink.settings[0]],
-                        parameter2:
-                          settingsTranslations[selectedLink.settings[1]],
-                        parameter3:
-                          settingsTranslations[selectedLink.settings[2]],
-                      })}
-                    </Text>
-                    <Link
-                      color={currentColorScheme?.main?.accent}
-                      fontSize="12px"
-                      lineHeight="16px"
-                      onClick={() => navigateRoom(config.id)}
-                    >
-                      {" "}
-                      {t("GoToRoom")}.
-                    </Link>
-                  </div>
-                ) : (
-                  <></>
+                {selectedLink && (
+                  <SharedLinkHint
+                    t={t}
+                    linkSettings={selectedLink.settings}
+                    redirectToSelectedRoom={redirectToSelectedRoom}
+                    currentColorScheme={currentColorScheme}
+                  />
                 )}
               </ControlsGroup>
             )}
@@ -507,58 +312,25 @@ const SimpleRoom = (props) => {
 
           <ControlsSection>
             <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
-            <ControlsGroup>
-              <Label className="label" text={t("EmbeddingPanel:Width")} />
-              <RowContainer combo>
-                <TextInput
-                  onChange={onChangeWidth}
-                  placeholder={t("EnterWidth")}
-                  value={width}
-                  tabIndex={2}
-                />
-                <ComboBox
-                  size="content"
-                  scaled={false}
-                  scaledOptions={true}
-                  onSelect={onChangeWidthDimension}
-                  options={dataDimensions}
-                  selectedOption={widthDimension}
-                  displaySelectedOption
-                  directionY="bottom"
-                />
-              </RowContainer>
-            </ControlsGroup>
-            <ControlsGroup>
-              <Label className="label" text={t("EmbeddingPanel:Height")} />
-              <RowContainer combo>
-                <TextInput
-                  onChange={onChangeHeight}
-                  placeholder={t("EnterHeight")}
-                  value={height}
-                  tabIndex={3}
-                />
-                <ComboBox
-                  size="content"
-                  scaled={false}
-                  scaledOptions={true}
-                  onSelect={onChangeHeightDimension}
-                  options={dataDimensions}
-                  selectedOption={heightDimension}
-                  displaySelectedOption
-                  directionY="bottom"
-                />
-              </RowContainer>
-            </ControlsGroup>
-            <ControlsGroup>
-              <Label className="label" text={t("FrameId")} />
-              <TextInput
-                scale={true}
-                onChange={onChangeFrameId}
-                placeholder={t("EnterId")}
-                value={config.frameId}
-                tabIndex={4}
-              />
-            </ControlsGroup>
+            <WidthSetter
+              t={t}
+              setConfig={setConfig}
+              dataDimensions={dataDimensions}
+              defaultDimension={defaultWidthDimension}
+              defaultWidth={defaultWidth}
+            />
+            <HeightSetter
+              t={t}
+              setConfig={setConfig}
+              dataDimensions={dataDimensions}
+              defaultDimension={defaultHeightDimension}
+              defaultHeight={defaultHeight}
+            />
+            <FrameIdSetter
+              t={t}
+              defaultFrameId={config.frameId}
+              setConfig={setConfig}
+            />
           </ControlsSection>
 
           <ControlsSection>
@@ -609,40 +381,16 @@ const SimpleRoom = (props) => {
           </ControlsSection>
         </Controls>
       </Container>
-
-      {!showPreview && (
-        <>
-          <GetCodeButtonWrapper>
-            <Button
-              id="get-sdk-code-button"
-              primary
-              size="normal"
-              scale
-              label={t("GetCode")}
-              onClick={openGetCodeModal}
-            />
-          </GetCodeButtonWrapper>
-
-          <GetCodeDialog
-            t={t}
-            visible={isGetCodeDialogOpened}
-            codeBlock={codeBlock}
-            onClose={closeGetCodeModal}
-          />
-        </>
-      )}
-    </SDKContainer>
+    </PresetWrapper>
   );
 };
 
-export default inject(({ authStore, settingsStore, publicRoomStore }) => {
-  const { setDocumentTitle } = authStore;
+export default inject(({ settingsStore, publicRoomStore }) => {
   const { theme, currentColorScheme } = settingsStore;
   const { fetchExternalLinks } = publicRoomStore;
 
   return {
     theme,
-    setDocumentTitle,
     fetchExternalLinks,
     currentColorScheme,
   };

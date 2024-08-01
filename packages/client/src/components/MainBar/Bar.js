@@ -49,6 +49,8 @@ const Bar = (props) => {
     firstLoad,
 
     isAdmin,
+    isPowerUser,
+    isRoomAdmin,
     userEmail,
     setMaintenanceExist,
     withActivationBar,
@@ -118,8 +120,6 @@ const Bar = (props) => {
         setBarVisible((value) => ({
           ...value,
           roomQuota: !closed.includes(QuotaBarTypes.RoomQuota),
-          storageQuota: !closed.includes(QuotaBarTypes.StorageQuota),
-          tenantCustomQuota: !closed.includes(QuotaBarTypes.TenantCustomQuota),
           userQuota: !closed.includes(QuotaBarTypes.UserQuota),
           storageAndRoomQuota: !closed.includes(
             QuotaBarTypes.UserAndStorageQuota,
@@ -127,6 +127,13 @@ const Bar = (props) => {
           storageAndUserQuota: !closed.includes(
             QuotaBarTypes.RoomAndStorageQuota,
           ),
+        }));
+      }
+      if (isAdmin || isPowerUser || isRoomAdmin) {
+        setBarVisible((value) => ({
+          ...value,
+          storageQuota: !closed.includes(QuotaBarTypes.StorageQuota),
+          tenantCustomQuota: !closed.includes(QuotaBarTypes.TenantCustomQuota),
         }));
       }
 
@@ -139,8 +146,8 @@ const Bar = (props) => {
     } else {
       setBarVisible({
         roomQuota: isAdmin,
-        storageQuota: isAdmin,
-        tenantCustomQuota: isAdmin,
+        storageQuota: isAdmin || isPowerUser || isRoomAdmin,
+        tenantCustomQuota: isAdmin || isPowerUser || isRoomAdmin,
         userQuota: isAdmin,
         storageAndUserQuota: isAdmin,
         storageAndRoomQuota: isAdmin,
@@ -189,9 +196,11 @@ const Bar = (props) => {
     setMaintenanceExist(false);
   };
 
-  const onClickQuota = (type) => {
-    type === QuotaBarTypes.StorageQuota && onPaymentsClick && onPaymentsClick();
-    type === QuotaBarTypes.TenantCustomQuota && onClickTenantCustomQuota();
+  const onClickQuota = (type, e) => {
+    type === QuotaBarTypes.TenantCustomQuota ||
+    type === QuotaBarTypes.PersonalUserQuota
+      ? onClickTenantCustomQuota()
+      : onPaymentsClick(e);
 
     onCloseQuota(type);
   };
@@ -397,6 +406,8 @@ export default inject(
 
     return {
       isAdmin: user?.isAdmin,
+      isPowerUser: user?.isCollaborator,
+      isRoomAdmin: user?.isRoomAdmin,
       userEmail: user?.email,
       withActivationBar,
       sendActivationLink,

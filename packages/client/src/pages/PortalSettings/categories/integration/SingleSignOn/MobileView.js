@@ -49,17 +49,24 @@ const MobileView = ({ isSSOAvailable }) => {
   return (
     <StyledWrapper>
       <MobileCategoryWrapper
-        title={t("ServiceProviderSettings")}
+        title={t("ServiceProviderSettings", {
+          organizationName: t("Common:OrganizationName"),
+        })}
         subtitle={t("ServiceProviderSettingsDescription")}
-        url="/portal-settings/integration/single-sign-on/sp-settings"
+        url="/portal-settings/integration/sso/settings"
         withPaidBadge={!isSSOAvailable}
         badgeLabel={t("Common:Paid")}
         onClickLink={onClickLink}
       />
       <MobileCategoryWrapper
-        title={t("SpMetadata")}
-        subtitle={t("SpMetadataDescription")}
-        url="/portal-settings/integration/single-sign-on/sp-metadata"
+        title={t("SpMetadata", {
+          organizationName: t("Common:OrganizationName"),
+        })}
+        subtitle={t("SpMetadataDescription", {
+          productName: t("Common:ProductName"),
+          organizationName: t("Common:OrganizationName"),
+        })}
+        url="/portal-settings/integration/sso/metadata"
         withPaidBadge={!isSSOAvailable}
         badgeLabel={t("Common:Paid")}
         onClickLink={onClickLink}

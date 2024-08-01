@@ -28,58 +28,56 @@
 
 import { headers } from "next/headers";
 
-import {
-  createRequest,
-  getBaseUrl,
-} from "@docspace/shared/utils/next-ssr-helper";
+import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 import { TenantStatus, EditorConfigErrorType } from "@docspace/shared/enums";
+import { tryParseToNumber } from "@docspace/shared/utils/tryParseToNumber";
 import type {
   TDocServiceLocation,
   TFile,
 } from "@docspace/shared/api/files/types";
 import { TUser } from "@docspace/shared/api/people/types";
-import { TSettings } from "@docspace/shared/api/settings/types";
+import type {
+  TGetColorTheme,
+  TSettings,
+} from "@docspace/shared/api/settings/types";
 
-import type { IInitialConfig, TCatchError, TError, TResponse } from "@/types";
+import type {
+  ActionType,
+  IInitialConfig,
+  TCatchError,
+  TError,
+  TResponse,
+} from "@/types";
 
 import { REPLACED_URL_PATH } from "./constants";
 
-import { isTemplateFile } from ".";
-
-const processFillFormDraft = async (
-  config: IInitialConfig,
-  searchParams: URLSearchParams,
-
+export async function getFillingSession(
+  fillingSessionId: string,
   share?: string,
-): Promise<[string, IInitialConfig | TError, string | undefined] | void> => {
-  const templateFileId = config.file.id;
+) {
+  const [request] = createRequest(
+    [`/files/file/fillresult?fillingSessionId=${fillingSessionId}`],
+    [
+      ["Content-Type", "application/json;charset=utf-8"],
+      share ? ["Request-Token", share] : ["", ""],
+    ],
+    "GET",
+  );
 
-  const formUrl = await checkFillFromDraft(templateFileId, share);
+  try {
+    console.log({ request });
 
-  if (!formUrl) return;
+    const response = await fetch(request);
 
-  const basePath = getBaseUrl();
-  const url = new URL(basePath + formUrl);
+    if (response.ok) return await response.json();
 
-  const queryFileId = url.searchParams.get("fileid");
-
-  if (!queryFileId) return;
-
-  url.searchParams.delete("fileid");
-
-  const combinedSearchParams = new URLSearchParams({
-    ...Object.fromEntries(searchParams),
-    ...Object.fromEntries(url.searchParams),
-  });
-
-  const actions: [Promise<IInitialConfig | TError>] = [
-    openEdit(queryFileId, combinedSearchParams.toString(), share),
-  ];
-
-  const [newConfig] = await Promise.all(actions);
-
-  return [queryFileId, newConfig, url.hash ?? ""];
-};
+    throw new Error("Something went wrong", {
+      cause: await response.json(),
+    });
+  } catch (error) {
+    console.log("File copyas error ", error);
+  }
+}
 
 export async function fileCopyAs(
   fileId: string,
@@ -87,6 +85,7 @@ export async function fileCopyAs(
   destFolderId: string,
   enableExternalExt?: boolean,
   password?: string,
+  toForm?: string,
 ): Promise<{
   file: TFile | undefined;
   error:
@@ -107,9 +106,10 @@ export async function fileCopyAs(
       "POST",
       JSON.stringify({
         destTitle,
-        destFolderId: +destFolderId,
+        destFolderId: tryParseToNumber(destFolderId),
         enableExternalExt,
         password,
+        toForm: toForm === "true",
       }),
     );
 
@@ -211,20 +211,24 @@ export async function getData(
   fileId: string,
   version?: string,
   doc?: string,
-  view?: boolean,
+  action?: ActionType,
   share?: string,
   editorType?: string,
 ) {
+  const view = action === "view";
+  const edit = action === "edit";
+
   try {
     const searchParams = new URLSearchParams();
 
-    if (view) searchParams.append("view", view ? "true" : "false");
+    if (view) searchParams.append("view", "true");
     if (version) {
       searchParams.append("version", version);
     }
     if (doc) searchParams.append("doc", doc);
     if (share) searchParams.append("share", share);
     if (editorType) searchParams.append("editorType", editorType);
+    if (edit) searchParams.append("edit", "true");
 
     const [config, user, settings] = await Promise.all([
       openEdit(fileId, searchParams.toString(), share),
@@ -234,6 +238,7 @@ export async function getData(
     ]);
 
     if ("editorConfig" in config && typeof settings !== "string") {
+      const newFileId = config.file.id.toString();
       const response: TResponse = {
         config,
         user,
@@ -241,25 +246,8 @@ export async function getData(
         successAuth: false,
         isSharingAccess: false,
         doc,
-        fileId,
+        fileId: newFileId !== fileId ? newFileId : fileId,
       };
-
-      if (isTemplateFile(response.config)) {
-        const result = await processFillFormDraft(
-          response.config,
-          searchParams,
-          share,
-        );
-
-        if (result) {
-          const [newFileId, newConfig, hash] = result;
-
-          response.fileId = newFileId;
-          response.config = newConfig as IInitialConfig;
-
-          if (hash) response.hash = hash;
-        }
-      }
 
       const successAuth = !!user;
 
@@ -354,6 +342,7 @@ export async function getUser(share?: string) {
     [`/people/@self`],
     [share ? ["Request-Token", share] : ["", ""]],
     "GET",
+    undefined,
   );
 
   if (!cookie?.includes("asc_auth_key")) return undefined;
@@ -378,6 +367,7 @@ export async function getSettings(share?: string) {
     ],
     [share ? ["Request-Token", share] : ["", ""]],
     "GET",
+    undefined,
   );
 
   const settingsRes = await fetch(getSettings);
@@ -390,6 +380,18 @@ export async function getSettings(share?: string) {
 
   return settings.response as TSettings;
 }
+
+export const checkIsAuthenticated = async () => {
+  const [request] = createRequest(["/authentication"], [["", ""]], "GET");
+
+  const res = await fetch(request);
+
+  if (!res.ok) return;
+
+  const isAuth = await res.json();
+
+  return isAuth.response as boolean;
+};
 
 export async function checkFillFromDraft(
   templateFileId: number,
@@ -419,6 +421,7 @@ export async function openEdit(
   searchParams: string,
   share?: string,
 ) {
+  const startDate = new Date();
   const hdrs = headers();
   const cookie = hdrs.get("cookie");
 
@@ -426,6 +429,7 @@ export async function openEdit(
     [`/files/file/${fileId}/openedit?${searchParams}`],
     [share ? ["Request-Token", share] : ["", ""]],
     "GET",
+    undefined,
   );
 
   const res = await fetch(getConfig);
@@ -434,34 +438,39 @@ export async function openEdit(
     const config = await res.json();
 
     if (res.ok) {
+      const timer = new Date().getTime() - startDate.getTime();
+
       config.response.editorUrl = (
         config.response as IInitialConfig
       ).editorUrl.replace(REPLACED_URL_PATH, "");
-      return config.response as IInitialConfig;
+      return { ...config.response, timer } as IInitialConfig;
     }
 
-    const editorUrl =
-      cookie?.includes("asc_auth_key") || share
-        ? (await getEditorUrl("", share)).docServiceUrl
-        : "";
+    const isAuth = share ? true : await checkIsAuthenticated();
+
+    const editorUrl = isAuth
+      ? (await getEditorUrl("", share)).docServiceUrl
+      : "";
 
     const status =
       config.error?.type === EditorConfigErrorType.NotFoundScope
         ? "not-found"
-        : config.error?.type === EditorConfigErrorType.AccessDeniedScope
+        : config.error?.type === EditorConfigErrorType.AccessDeniedScope &&
+            isAuth
           ? "access-denied"
-          : res.status === 415
-            ? "not-supported"
-            : undefined;
+          : config.error?.type === EditorConfigErrorType.TenantQuotaException
+            ? "quota-exception"
+            : res.status === 415
+              ? "not-supported"
+              : undefined;
 
     const message = status ? config.error.message : undefined;
 
-    const error =
-      cookie?.includes("asc_auth_key") || share
-        ? config.error.type === EditorConfigErrorType.LinkScope
-          ? { message: message ?? "unauthorized", status, editorUrl }
-          : { ...config.error, status, editorUrl }
-        : { message: "unauthorized", status, editorUrl };
+    const error = isAuth
+      ? config.error.type === EditorConfigErrorType.LinkScope
+        ? { message: message ?? "unauthorized", status, editorUrl }
+        : { ...config.error, status, editorUrl }
+      : { message: "unauthorized", status, editorUrl };
 
     return error as TError;
   }
@@ -485,6 +494,7 @@ export async function getEditorUrl(
     [`/files/docservice?${editorSearchParams ? editorSearchParams : ""}`],
     [share ? ["Request-Token", share] : ["", ""]],
     "GET",
+    undefined,
   );
 
   const res = await fetch(request);
@@ -492,4 +502,20 @@ export async function getEditorUrl(
   const editorUrl = await res.json();
 
   return editorUrl.response as TDocServiceLocation;
+}
+
+export async function getColorTheme() {
+  const [getSettings] = createRequest(
+    [`/settings/colortheme`],
+    [["", ""]],
+    "GET",
+  );
+
+  const res = await fetch(getSettings);
+
+  if (!res.ok) return;
+
+  const colorTheme = await res.json();
+
+  return colorTheme.response as TGetColorTheme;
 }

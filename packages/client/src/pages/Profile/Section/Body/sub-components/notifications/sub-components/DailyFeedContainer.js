@@ -51,7 +51,7 @@ const DailyFeedContainer = ({
     <div className="notification-container">
       <div className="row">
         <Text {...textProps} className="subscription-title">
-          {t("DailyFeed")}
+          {t("DailyFeed", { productName: t("Common:ProductName") })}
         </Text>
         <ToggleButton
           className="daily-feed"
@@ -59,7 +59,9 @@ const DailyFeedContainer = ({
           isChecked={dailyFeedSubscriptions}
         />
       </div>
-      <Text {...textDescriptionsProps}>{t("DailyFeedDescription")}</Text>
+      <Text {...textDescriptionsProps}>
+        {t("DailyFeedDescription", { productName: t("Common:ProductName") })}
+      </Text>
     </div>
   );
 };

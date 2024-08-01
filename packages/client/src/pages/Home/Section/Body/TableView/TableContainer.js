@@ -235,6 +235,7 @@ const Table = ({
         navigate={navigate}
         location={location}
         isRooms={isRooms}
+        filesList={filesList}
       />
 
       <TableBody

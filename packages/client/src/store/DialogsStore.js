@@ -25,7 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { getNewFiles } from "@docspace/shared/api/files";
-import { ShareAccessRights } from "@docspace/shared/enums";
+import {
+  FilesSelectorFilterTypes,
+  FilterType,
+  ShareAccessRights,
+} from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
 import { Events } from "@docspace/shared/enums";
 
@@ -52,6 +56,7 @@ class DialogsStore {
   conflictResolveDialogVisible = false;
   convertDialogVisible = false;
   selectFileDialogVisible = false;
+  selectFileFormRoomDialogVisible = false;
   convertPasswordDialogVisible = false;
   inviteUsersWarningDialogVisible = false;
   changeQuotaDialogVisible = false;
@@ -99,16 +104,29 @@ class DialogsStore {
   createRoomConfirmDialogVisible = false;
   changeUserTypeDialogVisible = false;
   editLinkPanelIsVisible = false;
-  embeddingPanelIsVisible = false;
+  embeddingPanelData = { visible: false, item: null };
   submitToGalleryDialogVisible = false;
   linkParams = null;
   leaveRoomDialogVisible = false;
   changeRoomOwnerIsVisible = false;
   changeRoomOwnerData = null;
   editMembersGroup = null;
+  pdfFormEditVisible = false;
+  pdfFormEditData = null;
 
   shareFolderDialogVisible = false;
   cancelUploadDialogVisible = false;
+
+  selectFileFormRoomFilterParam = FilesSelectorFilterTypes.DOCX;
+  selectFileFormRoomOpenRoot = false;
+  fillPDFDialogData = {
+    visible: false,
+    data: null,
+  };
+  shareCollectSelector = {
+    visible: false,
+    file: null,
+  };
 
   constructor(
     authStore,
@@ -361,14 +379,45 @@ class DialogsStore {
     this.selectFileDialogVisible = visible;
   };
 
-  createMasterForm = async (fileInfo) => {
+  /**
+   *  @param {boolean} visible
+   *  @param {FilesSelectorFilterTypes | FilterType} [filterParam = FilesSelectorFilterTypes.DOCX]
+   *  @param {boolean} [openRoot = false]
+   */
+  setSelectFileFormRoomDialogVisible = (
+    visible,
+    filterParam = FilesSelectorFilterTypes.DOCX,
+    openRoot = false,
+  ) => {
+    this.selectFileFormRoomDialogVisible = visible;
+    this.selectFileFormRoomFilterParam = filterParam;
+    this.selectFileFormRoomOpenRoot = openRoot;
+  };
+
+  createMasterForm = async (fileInfo, options) => {
+    const { extension = "pdf", withoutDialog, preview } = options;
+
+    const newTitle = fileInfo.title;
+
+    let lastIndex = newTitle.lastIndexOf(".");
+
+    if (lastIndex === -1) {
+      lastIndex = newTitle.length;
+    }
+
     const event = new Event(Events.CREATE);
 
+    const title = newTitle.substring(0, lastIndex);
+
     const payload = {
-      extension: "docxf",
+      extension,
       id: -1,
-      title: fileInfo.title,
+      title: withoutDialog ? title : `${title}.${extension}`,
       templateId: fileInfo.id,
+      withoutDialog,
+      preview,
+      edit: true,
+      toForm: true,
     };
 
     event.payload = payload;
@@ -453,8 +502,8 @@ class DialogsStore {
     this.deleteLinkDialogVisible = visible;
   };
 
-  setEmbeddingPanelIsVisible = (embeddingPanelIsVisible) => {
-    this.embeddingPanelIsVisible = embeddingPanelIsVisible;
+  setEmbeddingPanelData = (embeddingPanelData) => {
+    this.embeddingPanelData = embeddingPanelData;
   };
 
   setMoveToPublicRoomVisible = (visible, data = null) => {
@@ -475,6 +524,30 @@ class DialogsStore {
 
   setCancelUploadDialogVisible = (visible) => {
     this.cancelUploadDialogVisible = visible;
+  };
+
+  setPdfFormEditVisible = (visible, data) => {
+    this.pdfFormEditVisible = visible;
+    this.pdfFormEditData = data;
+  };
+
+  setFillPDFDialogData = (visible, data) => {
+    this.fillPDFDialogData = {
+      visible,
+      data,
+    };
+  };
+
+  /**
+   * @param {boolean} visible
+   * @param {import("@docspace/shared/api/files/types").TFile} [file = null]
+   * @returns {void}
+   */
+  setShareCollectSelector = (visible, file = null) => {
+    this.shareCollectSelector = {
+      visible,
+      file,
+    };
   };
 }
 

@@ -25,7 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
-import CatalogUserReactSvgUrl from "PUBLIC_DIR/images/catalog.user.react.svg?url";
+// import CatalogUserReactSvgUrl from "PUBLIC_DIR/images/catalog.user.react.svg?url";
+import CatalogDocumentsReactSvgUrl from "PUBLIC_DIR/images/catalog.documents.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
 import CatalogArchiveReactSvgUrl from "PUBLIC_DIR/images/catalog.archive.react.svg?url";
 import CatalogSharedReactSvgUrl from "PUBLIC_DIR/images/catalog.shared.react.svg?url";
@@ -48,7 +49,7 @@ import CatalogSettingsGiftReactSvgUrl from "PUBLIC_DIR/images/gift.react.svg?url
 import CatalogSettingsStorageManagementReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-storage-management.svg?url";
 
 import CatalogFolder20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.folder.react.svg?url";
-import CatalogUser20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.user.react.svg?url";
+import CatalogDocuments20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.documents.react.svg?url";
 import CatalogRooms20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.rooms.react.svg?url";
 import CatalogArchive20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.archive.react.svg?url";
 import CatalogShared20ReactSvgUrl from "PUBLIC_DIR/images/icons/20/catalog.shared.react.svg?url";
@@ -89,7 +90,7 @@ const defaultIcon: Record<SizeType, string> = {
 
 const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
   16: {
-    [FolderType.USER]: CatalogUserReactSvgUrl,
+    [FolderType.USER]: CatalogDocumentsReactSvgUrl,
     [FolderType.Rooms]: CatalogRoomsReactSvgUrl,
     [FolderType.Archive]: CatalogArchiveReactSvgUrl,
     [FolderType.SHARE]: CatalogSharedReactSvgUrl,
@@ -113,7 +114,7 @@ const icons: Record<SizeType, Partial<Record<PageUnionType, string>>> = {
     [PageType.storageManagement]: CatalogSettingsStorageManagementReactSvgUrl,
   },
   20: {
-    [FolderType.USER]: CatalogUser20ReactSvgUrl,
+    [FolderType.USER]: CatalogDocuments20ReactSvgUrl,
     [FolderType.Rooms]: CatalogRooms20ReactSvgUrl,
     [FolderType.Archive]: CatalogArchive20ReactSvgUrl,
     [FolderType.SHARE]: CatalogShared20ReactSvgUrl,

@@ -102,7 +102,9 @@ const PluginPage = ({
           /> */}
       {withUpload && (
         <>
-          <Text>{t("UploadDescription")}</Text>
+          <Text>
+            {t("UploadDescription", { productName: t("Common:ProductName") })}
+          </Text>
           <Dropzone
             onDrop={onDrop}
             isDisabled={!withUpload}

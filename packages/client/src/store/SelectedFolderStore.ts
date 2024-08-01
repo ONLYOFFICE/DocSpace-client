@@ -32,11 +32,13 @@ import {
   RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
-import {
+import type {
   NonFunctionProperties,
   NonFunctionPropertyNames,
+  Nullable,
   TCreatedBy,
   TPathParts,
+  TTranslation,
 } from "@docspace/shared/types";
 import { TFolder, TFolderSecurity } from "@docspace/shared/api/files/types";
 import { TLogo, TRoomSecurity } from "@docspace/shared/api/rooms/types";
@@ -50,7 +52,6 @@ export type TNavigationPath = {
   roomType: RoomsType;
   isRootRoom: boolean;
   shared: boolean;
-  canCopyPublicLink: boolean;
 };
 
 type ExcludeTypes = SettingsStore | Function;
@@ -138,6 +139,14 @@ class SelectedFolderStore {
 
   canShare = false;
 
+  parentRoomType: Nullable<FolderType> = null;
+
+  usedSpace: number | undefined;
+
+  quotaLimit: number | undefined;
+
+  isCustomQuota: boolean | undefined;
+
   constructor(settingsStore: SettingsStore) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -178,21 +187,17 @@ class SelectedFolderStore {
       private: this.private,
       canShare: this.canShare,
       isArchive: this.isArchive,
-      canCopyPublicLink: this.canCopyPublicLink,
       type: this.type,
       isRootFolder: this.isRootFolder,
+      parentRoomType: this.parentRoomType,
+      usedSpace: this.usedSpace,
+      quotaLimit: this.quotaLimit,
+      isCustomQuota: this.isCustomQuota,
     };
   };
 
   get isRootFolder() {
     return this.pathParts && this.pathParts.length <= 1;
-  }
-
-  get canCopyPublicLink() {
-    return (
-      this.access === ShareAccessRights.RoomManager ||
-      this.access === ShareAccessRights.None
-    );
   }
 
   toDefault = () => {
@@ -225,6 +230,10 @@ class SelectedFolderStore {
     this.security = null;
     this.type = null;
     this.inRoom = false;
+    this.parentRoomType = null;
+    this.usedSpace = undefined;
+    this.quotaLimit = undefined;
+    this.isCustomQuota = undefined;
   };
 
   setParentId = (parentId: number) => {
@@ -296,9 +305,10 @@ class SelectedFolderStore {
     if (!("providerKey" in selectedFolder)) this.providerKey = null;
   };
 
-  setSelectedFolder: (selectedFolder: TSetSelectedFolder | null) => void = (
-    selectedFolder,
-  ) => {
+  setSelectedFolder: (
+    t: TTranslation,
+    selectedFolder: TSetSelectedFolder | null,
+  ) => void = (selectedFolder) => {
     const socketHelper = this.settingsStore?.socketHelper;
 
     this.toDefault();
@@ -343,6 +353,10 @@ class SelectedFolderStore {
         }
       });
     }
+
+    selectedFolder?.pathParts?.forEach((value) => {
+      if (value.roomType) this.setInRoom(true);
+    });
   };
 }
 

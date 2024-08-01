@@ -55,6 +55,8 @@ export type NonFunctionProperties<T, ExcludeTypes> = Pick<
   NonFunctionPropertyNames<T, ExcludeTypes>
 >;
 
+export type MergeTypes<T, MergedType> = Omit<T, keyof MergedType> & MergedType;
+
 export type TPathParts = {
   id: number;
   title: string;
@@ -99,7 +101,7 @@ declare global {
     DocSpace: {
       navigate: (path: string, state?: { [key: string]: unknown }) => void;
     };
-    DocSpaceConfig?: {
+    ClientConfig?: {
       pdfViewerUrl: string;
       wrongPortalNameUrl?: string;
       api: {
@@ -112,7 +114,6 @@ declare global {
       imageThumbnails?: boolean;
       editor?: {
         requestClose: boolean;
-        openOnNewPage: boolean;
       };
       firebase: {
         fetchTimeoutMillis?: number;
@@ -153,6 +154,7 @@ declare global {
     };
     dataLayer?: Record<string, unknown>[];
     errorOnLoad?: Error;
+    authCallback?: (profile: string) => Promise<void>;
   }
 
   export type ContextMenuModel =

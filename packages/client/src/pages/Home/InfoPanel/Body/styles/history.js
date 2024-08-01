@@ -46,31 +46,6 @@ const StyledHistorySubtitle = styled.div`
   color: ${(props) => props.theme.infoPanel.history.subtitleColor};
 `;
 
-const StyledUserNameLink = styled.span`
-  display: inline-block;
-
-  white-space: normal;
-  margin: 1px 0;
-
-  .username {
-    font-size: 13px;
-    font-weight: 600;
-    display: inline-block;
-  }
-
-  .link {
-    text-decoration: underline;
-    text-decoration-style: dashed;
-    text-underline-offset: 2px;
-  }
-
-  .space {
-    display: inline-block;
-    width: 4px;
-    height: 15px;
-  }
-`;
-
 const StyledHistoryBlock = styled.div`
   width: 100%;
   display: flex;
@@ -121,26 +96,6 @@ const StyledHistoryBlock = styled.div`
       }
     }
   }
-
-  ${(props) =>
-    props.isUserAction &&
-    css`
-      .info {
-        flex-direction: row;
-        flex-wrap: wrap;
-        .message {
-          display: inline-block;
-          ${(props) =>
-            props.theme.interfaceDirection === "rtl"
-              ? css`
-                  margin-left: 4px;
-                `
-              : css`
-                  margin-right: 4px;
-                `}
-        }
-      }
-    `}
 `;
 
 const StyledHistoryBlockMessage = styled.div`
@@ -148,13 +103,13 @@ const StyledHistoryBlockMessage = styled.div`
   font-size: 13px;
   line-height: 20px;
 
-  display: flex;
+  display: inline-flex;
   gap: 4px;
+  max-width: 100%;
 
   .main-message {
-    width: max-content;
     max-width: 100%;
-    min-width: max-content;
+    padding-inline-end: 4px;
   }
 
   strong {
@@ -167,13 +122,56 @@ const StyledHistoryBlockMessage = styled.div`
     overflow: hidden;
   }
 
-  .folder-label {
+  .folder-label,
+  .source-folder-label {
     max-width: 100%;
     color: ${(props) => props.theme.infoPanel.history.locationIconColor};
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
   }
+
+  .source-folder-label {
+    color: ${(props) => props.theme.infoPanel.history.messageColor};
+  }
+
+  .old-role {
+    color: ${(props) => props.theme.infoPanel.history.oldRoleColor};
+    font-weight: 600;
+    text-decoration: line-through;
+  }
+`;
+
+const StyledHistoryLink = styled.span`
+  display: inline-block;
+
+  white-space: normal;
+  margin: 1px 0;
+
+  .text {
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-block;
+  }
+
+  .link {
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-underline-offset: 2px;
+  }
+
+  .space {
+    display: inline-block;
+    width: 4px;
+    height: 15px;
+  }
+`;
+
+const StyledHistoryBlockTagList = styled.div`
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
 `;
 
 const StyledHistoryBlockFilesList = styled.div`
@@ -183,28 +181,6 @@ const StyledHistoryBlockFilesList = styled.div`
   padding: 8px 0;
   background: ${(props) => props.theme.infoPanel.history.fileBlockBg};
   border-radius: 3px;
-
-  .show_more-link {
-    cursor: pointer;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin: 10px 20px 3px 0;
-          `
-        : css`
-            margin: 10px 0 3px 20px;
-          `}
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 15px;
-
-    strong {
-      font-weight: 600;
-      text-decoration: underline;
-      text-decoration-style: dashed;
-      text-underline-offset: 2px;
-    }
-  }
 `;
 
 const StyledHistoryBlockFile = styled.div`
@@ -241,6 +217,17 @@ const StyledHistoryBlockFile = styled.div`
       flex-shrink: 0;
       color: ${(props) => props.theme.infoPanel.history.fileExstColor};
     }
+
+    &.old-item-title {
+      .name {
+        color: ${(props) => props.theme.infoPanel.history.renamedItemColor};
+        text-decoration: line-through;
+      }
+      .exst {
+        color: ${(props) => props.theme.infoPanel.history.renamedItemColor};
+        text-decoration: line-through;
+      }
+    }
   }
 
   .location-btn {
@@ -256,6 +243,29 @@ const StyledHistoryBlockFile = styled.div`
   }
 `;
 
+const StyledHistoryBlockExpandLink = styled.div`
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 20px;
+
+  &.files-list-expand-link {
+    margin-top: 8px;
+    margin-inline-start: 20px;
+  }
+
+  &.user-list-expand-link {
+    display: inline-block;
+  }
+
+  strong {
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-underline-offset: 2px;
+  }
+`;
+
 StyledHistorySubtitle.defaultProps = { theme: Base };
 StyledHistoryBlock.defaultProps = { theme: Base };
 StyledHistoryBlockMessage.defaultProps = { theme: Base };
@@ -265,9 +275,11 @@ StyledHistoryBlockFile.defaultProps = { theme: Base };
 export {
   StyledHistoryList,
   StyledHistorySubtitle,
-  StyledUserNameLink,
+  StyledHistoryLink,
   StyledHistoryBlock,
   StyledHistoryBlockMessage,
   StyledHistoryBlockFilesList,
   StyledHistoryBlockFile,
+  StyledHistoryBlockTagList,
+  StyledHistoryBlockExpandLink,
 };

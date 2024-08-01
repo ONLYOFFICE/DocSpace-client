@@ -28,8 +28,11 @@ import { useCallback, useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
+import { FolderType, RoomsType } from "@docspace/shared/enums";
+
 import EmptyContainer from "./EmptyContainer";
 import CommonButtons from "./sub-components/CommonButtons";
+import EmptyViewContainer from "./sub-components/EmptyViewContainer/EmptyViewContainer";
 import {
   getDescriptionText,
   getEmptyScreenType,
@@ -42,6 +45,7 @@ const EmptyFolderContainer = ({
   t,
   onCreate,
   type, // folder type
+  folderId,
   linkStyles,
   sectionWidth,
   canCreateFiles,
@@ -49,6 +53,7 @@ const EmptyFolderContainer = ({
   roomType,
   isArchiveFolderRoot,
   isEmptyPage,
+  parentRoomType, // folder parent room type
 }) => {
   const isRoom = !!roomType;
   const displayRoomCondition = isRoom && !isArchiveFolderRoot;
@@ -74,6 +79,22 @@ const EmptyFolderContainer = ({
     [t, canCreateFiles, type],
   );
 
+  if (
+    roomType === RoomsType.FormRoom ||
+    parentRoomType === FolderType.FormRoom
+  ) {
+    return (
+      <EmptyViewContainer
+        type={roomType}
+        folderType={type}
+        isFolder={!isRoom}
+        folderId={folderId}
+        parentRoomType={parentRoomType}
+        isArchiveFolderRoot={isArchiveFolderRoot}
+      />
+    );
+  }
+
   return (
     <EmptyContainer
       headerText={headerText}
@@ -95,7 +116,7 @@ export default inject(
     treeFoldersStore,
     filesStore,
   }) => {
-    const { roomType } = selectedFolderStore;
+    const { roomType, id: folderId, parentRoomType } = selectedFolderStore;
 
     const { canCreateFiles } = accessRightsStore;
 
@@ -104,11 +125,12 @@ export default inject(
 
     return {
       isLoading,
-
+      folderId,
       roomType,
       canCreateFiles,
       isArchiveFolderRoot,
       theme: settingsStore.theme,
+      parentRoomType,
     };
   },
 )(withTranslation(["Files", "Translations"])(observer(EmptyFolderContainer)));

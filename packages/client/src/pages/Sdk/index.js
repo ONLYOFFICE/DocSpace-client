@@ -37,7 +37,7 @@ import {
   createPasswordHash,
   frameCallCommand,
 } from "@docspace/shared/utils/common";
-import { RoomsType } from "@docspace/shared/enums";
+import { RoomsType, FilterType } from "@docspace/shared/enums";
 
 const Sdk = ({
   t,
@@ -60,11 +60,35 @@ const Sdk = ({
   const [isDataReady, setIsDataReady] = useState(false);
 
   const formatsDescription = {
-    DOCX: t("Common:SelectDOCXFormat"),
-    DOCXF: t("Common:SelectDOCXFFormat"),
-    BackupOnly: t("Common:SelectBackupOnlyFormat"),
-    IMG: t("Common:SelectIMGFormat"),
-    XLSX: t("Common:SelectXLSXFormat"),
+    [FilterType.DocumentsOnly]: t("Common:SelectTypeFiles", {
+      type: t("Common:Documents").toLowerCase(),
+    }),
+    [FilterType.SpreadsheetsOnly]: t("Common:SelectTypeFiles", {
+      type: t("Translations:Spreadsheets").toLowerCase(),
+    }),
+    [FilterType.PresentationsOnly]: t("Common:SelectTypeFiles", {
+      type: t("Translations:Presentations").toLowerCase(),
+    }),
+    [FilterType.ImagesOnly]: t("Common:SelectTypeFiles", {
+      type: t("Files:Images").toLowerCase(),
+    }),
+    [FilterType.MediaOnly]: t("Common:SelectExtensionFiles", {
+      extension: t("Files:Media").toLowerCase(),
+    }),
+    [FilterType.ArchiveOnly]: t("Common:SelectTypeFiles", {
+      type: t("Files:Archives").toLowerCase(),
+    }),
+    [FilterType.FoldersOnly]: t("Common:SelectTypeFiles", {
+      type: t("Translations:Folders").toLowerCase(),
+    }),
+    [FilterType.Pdf]: t("Common:SelectTypeFiles", {
+      type: t("Files:Forms").toLowerCase(),
+    }),
+    EditorSupportedTypes: t("Common:SelectTypeFiles", {
+      type: t("AllTypesAvailableForEditing", {
+        organizationName: t("Common:OrganizationName"),
+      }),
+    }),
   };
 
   useEffect(() => {
@@ -173,7 +197,8 @@ const Sdk = ({
 
       if (
         data[0].roomType === RoomsType.PublicRoom ||
-        (data[0].roomType === RoomsType.CustomRoom && data[0].shared)
+        (data[0].roomType === RoomsType.CustomRoom && data[0].shared) ||
+        (data[0].roomType === RoomsType.FormRoom && data[0].shared)
       ) {
         const links = await fetchExternalLinks(data[0].id);
 
@@ -269,15 +294,15 @@ const Sdk = ({
           acceptButtonLabel={frameConfig?.acceptButtonLabel}
           cancelButtonLabel={frameConfig?.cancelButtonLabel}
           currentFolderId={frameConfig?.id}
-          descriptionText={
-            formatsDescription[frameConfig?.filterParam || "DOCX"]
-          }
+          openRoot={!frameConfig?.id}
+          descriptionText={formatsDescription[frameConfig?.filterParam] || ""}
         />
       );
       break;
     default:
       component = <AppLoader />;
   }
+
   return component;
 };
 
@@ -318,4 +343,12 @@ export default inject(
       getFilesSettings,
     };
   },
-)(withTranslation(["JavascriptSdk", "Common"])(observer(Sdk)));
+)(
+  withTranslation([
+    "JavascriptSdk",
+    "Common",
+    "Settings",
+    "Translations",
+    "Files",
+  ])(observer(Sdk)),
+);

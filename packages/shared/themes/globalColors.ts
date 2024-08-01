@@ -26,6 +26,7 @@
 
 export const globalColors = {
   black: "#333",
+  charlestonGreen: "#282828",
   darkBlack: "#000",
   white: "#FFF",
   whiteSolitude: "#E4E7EB",
@@ -89,4 +90,6 @@ export const globalColors = {
 
   lightErrorStatus: "#F24724",
   darkErrorStatus: "#E06451",
+  outerSpace: "#474747",
+  silverChalice: "#ADADAD",
 };

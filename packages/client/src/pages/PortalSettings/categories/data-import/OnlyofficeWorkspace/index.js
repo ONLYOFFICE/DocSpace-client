@@ -28,7 +28,10 @@ import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { Trans, withTranslation } from "react-i18next";
 import { getStepTitle, getWorkspaceStepDescription } from "../../../utils";
-import { tablet } from "@docspace/shared/utils/device";
+import {
+  tablet,
+  isMobile as isMobileBreakpoint,
+} from "@docspace/shared/utils/device";
 import { isMobile } from "react-device-detect";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import styled, { css } from "styled-components";
@@ -101,6 +104,7 @@ const OnlyofficeWorkspace = ({
   currentDeviceType,
   getMigrationStatus,
   setUsers,
+  filteredUsers,
 }) => {
   const [showReminder, setShowReminder] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
@@ -126,6 +130,7 @@ const OnlyofficeWorkspace = ({
         i18nKey="TypesAndPrivileges"
         ns="Settings"
         t={t}
+        values={{ productName: t("Common:ProductName") }}
         components={{
           1: <strong></strong>,
           2: <strong></strong>,
@@ -211,7 +216,7 @@ const OnlyofficeWorkspace = ({
     return clearCheckedAccounts;
   }, []);
 
-  if (isMobile) {
+  if (isMobile || isMobileBreakpoint()) {
     return (
       <BreakpointWarning
         isMobileUnavailableOnly
@@ -225,7 +230,10 @@ const OnlyofficeWorkspace = ({
   return (
     <WorkspaceWrapper>
       <Text className="workspace-subtitle">
-        {t("Settings:AboutDataImport")}
+        {t("Settings:AboutDataImport", {
+          productName: t("Common:ProductName"),
+          organizationName: t("Common:OrganizationName"),
+        })}
       </Text>
       <div className="step-container">
         <Box displayProp="flex" marginProp="0 0 8px">
@@ -235,7 +243,14 @@ const OnlyofficeWorkspace = ({
           <Text className="step-title">{getStepTitle(t, currentStep)}</Text>
         </Box>
         <Box className="step-description">
-          {getWorkspaceStepDescription(t, currentStep, renderTooltip, Trans)}
+          {getWorkspaceStepDescription(
+            t,
+            currentStep,
+            renderTooltip,
+            Trans,
+            filteredUsers.length === 0,
+            t("Common:OrganizationName"),
+          )}
         </Box>
         <StepContent
           t={t}
@@ -251,7 +266,7 @@ const OnlyofficeWorkspace = ({
 };
 
 export default inject(({ setup, settingsStore, importAccountsStore }) => {
-  const { clearCheckedAccounts, getMigrationStatus, setUsers } =
+  const { clearCheckedAccounts, getMigrationStatus, setUsers, filteredUsers } =
     importAccountsStore;
   const { viewAs, setViewAs } = setup;
   const { currentDeviceType } = settingsStore;
@@ -263,5 +278,6 @@ export default inject(({ setup, settingsStore, importAccountsStore }) => {
     currentDeviceType,
     getMigrationStatus,
     setUsers,
+    filteredUsers,
   };
 })(withTranslation(["Common, Settings"])(observer(OnlyofficeWorkspace)));

@@ -25,7 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TSelectorItem } from "../../components/selector";
-import { TBreadCrumb } from "../../components/selector/Selector.types";
+import {
+  TBreadCrumb,
+  TInfoBar,
+} from "../../components/selector/Selector.types";
 import {
   TFileSecurity,
   TFilesSettings,
@@ -33,25 +36,25 @@ import {
   TFolderSecurity,
 } from "../../api/files/types";
 import SocketIOHelper from "../../utils/socket";
-import { DeviceType, FolderType } from "../../enums";
+import { DeviceType, FolderType, RoomsType } from "../../enums";
 import { TRoomSecurity } from "../../api/rooms/types";
+
+export type TCreateDefineRoom = {
+  label: string;
+  type: RoomsType;
+};
 
 export interface UseRootHelperProps {
   setBreadCrumbs: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
-  setIsBreadCrumbsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setTotal: React.Dispatch<React.SetStateAction<number>>;
   setItems: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
 
-  setIsNextPageLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setHasNextPage: React.Dispatch<React.SetStateAction<boolean>>;
 
   setIsInit: (value: boolean) => void;
   treeFolders?: TFolder[];
   isUserOnly?: boolean;
-  setIsFirstLoad: (value: boolean) => void;
 }
-
-export interface UseLoadersHelperProps {}
 
 export type UseSocketHelperProps = {
   socketHelper: SocketIOHelper;
@@ -61,17 +64,14 @@ export type UseSocketHelperProps = {
   setTotal: React.Dispatch<React.SetStateAction<number>>;
   disabledItems: (string | number)[];
   filterParam?: string;
-  getIcon: (fileExst: string) => string;
+  withCreate: boolean;
 };
 
 export type UseRoomsHelperProps = {
-  setBreadCrumbs: (items: TBreadCrumb[]) => void;
-  setIsBreadCrumbsLoading: (value: boolean) => void;
-  setIsNextPageLoading: (value: boolean) => void;
+  setBreadCrumbs: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
   setHasNextPage: (value: boolean) => void;
   setTotal: (value: number) => void;
   setItems: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
-  isFirstLoad: boolean;
   setIsRoot: (value: boolean) => void;
   searchValue?: string;
   isRoomsOnly: boolean;
@@ -80,28 +80,32 @@ export type UseRoomsHelperProps = {
   ) => void;
   isInit: boolean;
   setIsInit: (value: boolean) => void;
-  setIsFirstLoad: (value: boolean) => void;
+  withCreate: boolean;
+  createDefineRoomLabel?: string;
+  createDefineRoomType?: RoomsType;
+  getRootData?: () => Promise<void>;
+  setSelectedItemType: React.Dispatch<
+    React.SetStateAction<"rooms" | "files" | undefined>
+  >;
+  subscribe: (id: number) => string | number | undefined;
 };
 
 export type UseFilesHelpersProps = {
   roomsFolderId?: number;
-  setBreadCrumbs: (items: TBreadCrumb[]) => void;
-  setIsBreadCrumbsLoading: (value: boolean) => void;
+  setBreadCrumbs: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
   setIsSelectedParentFolder: (value: boolean) => void;
-  setIsNextPageLoading: (value: boolean) => void;
   setHasNextPage: (value: boolean) => void;
   setTotal: (value: number) => void;
   setItems: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
-  isFirstLoad: boolean;
   selectedItemId: string | number | undefined;
   setIsRoot: (value: boolean) => void;
   setIsInit: (value: boolean) => void;
   searchValue?: string;
-  disabledItems: string[] | number[];
+  disabledItems: (string | number)[];
   setSelectedItemSecurity: (value: TFileSecurity | TFolderSecurity) => void;
   isThirdParty: boolean;
   setSelectedTreeNode: (treeNode: TFolder) => void;
-  filterParam?: string;
+  filterParam?: string | number;
   getRootData?: () => Promise<void>;
   onSetBaseFolderPath?: (
     value: number | string | undefined | TBreadCrumb[],
@@ -115,10 +119,18 @@ export type UseFilesHelpersProps = {
     isInit?: boolean,
     isErrorPath?: boolean,
   ) => Promise<void>;
-  getIcon: (fileExst: string) => string;
+
   getFilesArchiveError: (name: string) => string;
   isInit: boolean;
-  setIsFirstLoad: (value: boolean) => void;
+  withCreate: boolean;
+  setSelectedItemId: (value: number | string) => void;
+  setSelectedItemType: (value?: "rooms" | "files") => void;
+};
+
+export type TUseInputItemHelper = {
+  withCreate: boolean;
+  selectedItemId?: string | number | undefined;
+  setItems: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
 };
 
 export type TSelectedFileInfo = {
@@ -129,74 +141,81 @@ export type TSelectedFileInfo = {
   inPublic?: boolean | undefined;
 } | null;
 
-export type FilesSelectorProps = (
-  | {
-      getIcon: (size: number, fileExst: string) => string;
-      filesSettings?: never;
-    }
-  | { getIcon?: never; filesSettings: TFilesSettings }
-) & {
-  socketHelper: SocketIOHelper;
-  socketSubscribers: Set<string>;
-  disabledItems: string[] | number[];
-  filterParam?: string;
-  withoutBackButton: boolean;
-  withBreadCrumbs: boolean;
-  withSearch: boolean;
-  cancelButtonLabel: string;
+export type TGetIcon = (size: number, fileExst: string) => string;
 
-  treeFolders?: TFolder[];
-  onSetBaseFolderPath?: (
-    value: number | string | undefined | TBreadCrumb[],
-  ) => void;
-  isUserOnly?: boolean;
-  openRoot?: boolean;
-  isRoomsOnly: boolean;
-  isThirdParty: boolean;
-  rootThirdPartyId?: string;
-  roomsFolderId?: number;
-  currentFolderId: number | string;
-  parentId?: number | string;
-  rootFolderType: FolderType;
-  onCancel: () => void;
-  onSubmit: (
-    selectedItemId: string | number | undefined,
-    folderTitle: string,
-    isPublic: boolean,
-    breadCrumbs: TBreadCrumb[],
-    fileName: string,
-    isChecked: boolean,
-    selectedTreeNode: TFolder,
-    selectedFileInfo: TSelectedFileInfo,
-  ) => void | Promise<void>;
-  getIsDisabled: (
-    isFirstLoad: boolean,
-    isSelectedParentFolder: boolean,
-    selectedItemId: string | number | undefined,
-    selectedItemType: "rooms" | "files" | undefined,
-    isRoot: boolean,
-    selectedItemSecurity:
-      | TFileSecurity
-      | TFolderSecurity
-      | TRoomSecurity
-      | undefined,
-    selectedFileInfo: TSelectedFileInfo,
-  ) => boolean;
-  setIsDataReady?: (value: boolean) => void;
-  withHeader: boolean;
-  headerLabel: string;
-  submitButtonLabel: string;
-  withCancelButton: boolean;
-  withFooterInput: boolean;
-  withFooterCheckbox: boolean;
-  footerInputHeader: string;
-  currentFooterInputValue: string;
-  footerCheckboxLabel: string;
-  descriptionText: string;
-  submitButtonId?: string;
-  cancelButtonId?: string;
-  embedded?: boolean;
-  isPanelVisible: boolean;
-  currentDeviceType: DeviceType;
-  getFilesArchiveError: (name: string) => string;
-};
+export type FilesSelectorProps = TInfoBar &
+  (
+    | {
+        getIcon: TGetIcon;
+        filesSettings?: TFilesSettings;
+      }
+    | { getIcon?: never; filesSettings: TFilesSettings }
+  ) & {
+    socketHelper: SocketIOHelper;
+    socketSubscribers: Set<string>;
+    disabledItems: (string | number)[];
+    filterParam?: string;
+    withoutBackButton: boolean;
+    withBreadCrumbs: boolean;
+    withSearch: boolean;
+    cancelButtonLabel: string;
+
+    treeFolders?: TFolder[];
+    onSetBaseFolderPath?: (
+      value: number | string | undefined | TBreadCrumb[],
+    ) => void;
+    isUserOnly?: boolean;
+    openRoot?: boolean;
+    isRoomsOnly: boolean;
+    isThirdParty: boolean;
+    rootThirdPartyId?: string;
+    roomsFolderId?: number;
+    currentFolderId: number | string;
+    parentId?: number | string;
+    rootFolderType: FolderType;
+    onCancel: () => void;
+    onSubmit: (
+      selectedItemId: string | number | undefined,
+      folderTitle: string,
+      isPublic: boolean,
+      breadCrumbs: TBreadCrumb[],
+      fileName: string,
+      isChecked: boolean,
+      selectedTreeNode: TFolder,
+      selectedFileInfo: TSelectedFileInfo,
+    ) => void | Promise<void>;
+    getIsDisabled: (
+      isFirstLoad: boolean,
+      isSelectedParentFolder: boolean,
+      selectedItemId: string | number | undefined,
+      selectedItemType: "rooms" | "files" | undefined,
+      isRoot: boolean,
+      selectedItemSecurity:
+        | TFileSecurity
+        | TFolderSecurity
+        | TRoomSecurity
+        | undefined,
+      selectedFileInfo: TSelectedFileInfo,
+    ) => boolean;
+    setIsDataReady?: (value: boolean) => void;
+    withHeader: boolean;
+    headerLabel: string;
+    submitButtonLabel: string;
+    withCancelButton: boolean;
+    withFooterInput: boolean;
+    withFooterCheckbox: boolean;
+    footerInputHeader: string;
+    currentFooterInputValue: string;
+    footerCheckboxLabel: string;
+    descriptionText: string;
+    submitButtonId?: string;
+    cancelButtonId?: string;
+    embedded?: boolean;
+    isPanelVisible: boolean;
+    currentDeviceType: DeviceType;
+    getFilesArchiveError: (name: string) => string;
+
+    withCreate: boolean;
+    createDefineRoomLabel?: string;
+    createDefineRoomType?: RoomsType;
+  };

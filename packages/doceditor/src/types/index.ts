@@ -39,7 +39,10 @@ import { TSettings } from "@docspace/shared/api/settings/types";
 import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
 import SocketIOHelper from "@docspace/shared/utils/socket";
-import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
+import {
+  ConflictResolveType,
+  FilesSelectorFilterTypes,
+} from "@docspace/shared/enums";
 import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import { TTranslation } from "@docspace/shared/types";
 
@@ -50,11 +53,24 @@ export type TGoBack = {
   url?: string;
 };
 
+export type ActionType = "view" | "edit";
+
 export type TDocumentInfoSharingSettings = {
   user: string;
   permissions: string;
 };
-
+export type RootPageProps = {
+  searchParams: Partial<{
+    fileId: string;
+    fileid: string;
+    version: string;
+    doc: string;
+    action: ActionType;
+    share: string;
+    editorType: string;
+    error?: string;
+  }>;
+};
 export type TDocumentInfo = {
   favorite: boolean;
   folder: string;
@@ -165,6 +181,9 @@ export interface IInitialConfig {
   Error?: string;
   errorMessage?: string;
   message?: undefined;
+  startFilling?: boolean;
+
+  fillingSessionId?: string;
 }
 
 export type TError = {
@@ -211,12 +230,14 @@ export type EditorProps = {
   errorMessage?: string;
   isSkipError?: boolean;
 
+  onDownloadAs?: (obj: object) => void;
   onSDKRequestSharingSettings?: () => void;
   onSDKRequestSaveAs?: (event: object) => void;
   onSDKRequestInsertImage?: (event: object) => void;
   onSDKRequestSelectSpreadsheet?: (event: object) => void;
   onSDKRequestSelectDocument?: (event: object) => void;
   onSDKRequestReferenceSource?: (event: object) => void;
+  onSDKRequestStartFilling?: (haederLabel: string) => void;
 };
 
 export type TEventData = {
@@ -323,6 +344,7 @@ export interface UseEventsProps {
   doc?: string;
   errorMessage?: string;
   isSkipError?: boolean;
+  openOnNewPage: boolean;
   t: TTranslation;
 }
 
@@ -363,6 +385,7 @@ export type TDocEditor = {
   setHistoryData?: (obj: THistoryData) => void;
   setActionLink: (link: string) => void;
   setUsers?: ({ c, users }: { c: string; users: TSharedUsers[] }) => void;
+  startFilling?: VoidFunction;
 };
 
 export type TCatchError =
@@ -380,3 +403,48 @@ export type TCatchError =
   | { statusText: string }
   | { message: string }
   | string;
+
+export type StartFillingSelectorDialogPprops = {
+  socketHelper: SocketIOHelper;
+  fileInfo: TFile;
+  isVisible: boolean;
+  onClose: VoidFunction;
+  headerLabel: string;
+
+  getIsDisabled: (
+    isFirstLoad: boolean,
+    isSelectedParentFolder: boolean,
+    selectedItemId: string | number | undefined,
+    selectedItemType: "rooms" | "files" | undefined,
+    isRoot: boolean,
+    selectedItemSecurity:
+      | TFileSecurity
+      | TFolderSecurity
+      | TRoomSecurity
+      | undefined,
+    selectedFileInfo: TSelectedFileInfo,
+  ) => boolean;
+
+  onSubmit: (
+    selectedItemId: string | number | undefined,
+    folderTitle: string,
+    isPublic: boolean,
+    breadCrumbs: TBreadCrumb[],
+    fileName: string,
+    isChecked: boolean,
+    selectedTreeNode: TFolder,
+    selectedFileInfo: TSelectedFileInfo,
+  ) => Promise<void>;
+
+  filesSettings: TFilesSettings;
+};
+
+export type ConflictStateType = {
+  visible: boolean;
+  resolve: (
+    value: ConflictResolveType | PromiseLike<ConflictResolveType>,
+  ) => void;
+  reject: (reason?: any) => void;
+  fileName: string;
+  folderName: string;
+};

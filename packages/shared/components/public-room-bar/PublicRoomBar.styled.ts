@@ -53,6 +53,7 @@ const StyledPublicRoomBar = styled.div`
 
   .text-container_header {
     color: ${(props) => props.theme.infoBlock.headerColor};
+    overflow: hidden;
   }
 
   .text-container_body {
@@ -60,16 +61,17 @@ const StyledPublicRoomBar = styled.div`
   }
 
   .close-icon {
-    margin: -5px -17px 0 0;
+    /* margin: -5px -17px 0 0; */
+    cursor: pointer;
 
     path {
       fill: ${({ theme }) => theme.iconButton.color};
     }
 
-    svg {
+    /* svg {
       weight: 8px;
       height: 8px;
-    }
+    } */
   }
 `;
 

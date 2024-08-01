@@ -24,106 +24,118 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import RemoveSessionSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
-import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
-import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import { ReactSVG } from "react-svg";
+import styled, { css } from "styled-components";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
+
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { Box } from "@docspace/shared/components/box";
-import { HelpButton } from "@docspace/shared/components/help-button";
 import { toastr } from "@docspace/shared/components/toast";
-import { useTheme } from "styled-components";
-import { convertTime } from "@docspace/shared/utils/convertTime";
-
+import { HelpButton } from "@docspace/shared/components/help-button";
 import { ProfileFooterLoader } from "@docspace/shared/skeletons/profile";
+import InfoReactSvgUrl from "PUBLIC_DIR/images/info.react.svg?url";
+
+import SessionsTable from "./SessionsTable";
 
 import {
-  LogoutConnectionDialog,
-  LogoutAllConnectionDialog,
+  LogoutSessionDialog,
+  LogoutAllSessionDialog,
 } from "SRC_DIR/components/dialogs";
 
-import {
-  StyledFooter,
-  Table,
-  TableHead,
-  TableRow,
-  TableHeaderCell,
-  TableBody,
-  TableDataCell,
-} from "./styled-active-sessions";
-import { DeviceType } from "@docspace/shared/enums";
-import moment from "moment-timezone";
-
-const removeIcon = (
-  <ReactSVG className="remove-icon" src={RemoveSessionSvgUrl} />
-);
-const tickIcon = (
-  <ReactSVG className="tick-icon" wrapper="span" src={TickSvgUrl} />
-);
+const StyledWrapper = styled.div`
+  .auto-delete-title {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 20px;
+    margin-top: 8px;
+    color: ${(props) => props.theme.profile.activeSessions.tableCellColor};
+  }
+  .terminate-session-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 10px 0 0;
+  }
+  .terminate-all-sessions {
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .icon-button {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: 5px;
+          `
+        : css`
+            margin-left: 5px;
+          `}
+  }
+`;
 
 const ActiveSessions = ({
   t,
-  locale,
   getAllSessions,
   removeAllSessions,
   removeSession,
-  logoutVisible,
-  setLogoutVisible,
-  logoutAllVisible,
-  setLogoutAllVisible,
+  logoutDialogVisible,
+  setLogoutDialogVisible,
+  logoutAllDialogVisible,
+  setLogoutAllDialogVisible,
   removeAllExecptThis,
   sessionsIsInit,
   getSessions,
   sessions,
-  currentSession,
-  setSessions,
+  viewAs,
+  setViewAs,
   currentDeviceType,
+  setSessions,
+  platformModalData,
 }) => {
-  const isDesktop = currentDeviceType === DeviceType.desktop;
-  const isMobile = currentDeviceType === DeviceType.mobile;
-
-  const [modalData, setModalData] = useState({});
-  const [loading, setLoading] = useState(false);
-  const { interfaceDirection } = useTheme();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     getSessions();
   }, []);
 
+  useViewEffect({
+    view: viewAs,
+    setView: setViewAs,
+    currentDeviceType,
+  });
+
   const onClickRemoveAllSessions = async () => {
     try {
-      setLoading(true);
+      setIsLoading(true);
       await removeAllSessions().then((res) => window.location.replace(res));
     } catch (error) {
       toastr.error(error);
     } finally {
-      setLoading(false);
-      setLogoutAllVisible(false);
+      setIsLoading(false);
+      setLogoutAllDialogVisible(false);
     }
   };
 
   const onClickRemoveAllExceptThis = async () => {
     try {
-      setLoading(true);
+      setIsLoading(true);
       await removeAllExecptThis().then(() =>
         getAllSessions().then((res) => setSessions(res.items)),
       );
     } catch (error) {
       toastr.error(error);
     } finally {
-      setLoading(false);
-      setLogoutAllVisible(false);
+      setIsLoading(false);
+      setLogoutAllDialogVisible(false);
     }
   };
 
   const onClickRemoveSession = async (id) => {
     const foundSession = sessions.find((s) => s.id === id);
     try {
-      setLoading(true);
+      setIsLoading(true);
       await removeSession(foundSession.id).then(() =>
         getAllSessions().then((res) => setSessions(res.items)),
       );
@@ -136,190 +148,107 @@ const ActiveSessions = ({
     } catch (error) {
       toastr.error(error);
     } finally {
-      setLoading(false);
-      setLogoutVisible(false);
+      setIsLoading(false);
+      setLogoutDialogVisible(false);
     }
   };
 
-  const convertTime = (date) => {
-    return moment(date).tz(window.timezone).locale(locale).format("L, LTS");
-  };
-  const tableCell = (platform, browser) =>
-    interfaceDirection === "rtl" && !isMobile ? (
-      <>
-        <span className="session-browser">
-          <span>{browser}</span>
-        </span>
-        {platform}
-      </>
-    ) : (
-      <>
-        {platform}
-        <span className="session-browser">
-          <span>{browser}</span>
-        </span>
-      </>
-    );
+  const tooltipContent = (
+    <Text fontSize="12px">
+      {t("Profile:LogoutAllActiveSessionsDescription")}
+    </Text>
+  );
+
   if (!sessionsIsInit) return <ProfileFooterLoader isProfileFooter />;
+
   return (
-    <StyledFooter>
+    <StyledWrapper>
       <Text fontSize="16px" fontWeight={700} lineHeight="22px">
         {t("Profile:ActiveSessions")}
       </Text>
-      <Box
-        displayProp="flex"
-        alignItems="center"
-        justifyContent="flex-start"
-        marginProp="10px 0 0"
-      >
+
+      {/* TODO: Uncomment after fix on backend */}
+      {/* <Text className="auto-delete-title">{t("Profile:AutoDeleteTitle")}</Text> */}
+
+      <Box className="terminate-session-container">
         <Link
-          className="session-logout"
+          className="terminate-all-sessions"
           type="action"
           isHovered
-          onClick={() => setLogoutAllVisible(true)}
+          onClick={() => setLogoutAllDialogVisible(true)}
         >
-          {t("Profile:LogoutAllActiveSessions")}
+          {t("Profile:TerminateAllSessions")}
         </Link>
         <HelpButton
           offsetRight={0}
           iconName={InfoReactSvgUrl}
-          tooltipContent={
-            <Text fontSize="12px">
-              {t("Profile:LogoutAllActiveSessionsDescription")}
-            </Text>
-          }
+          tooltipContent={tooltipContent}
         />
       </Box>
-      {!isDesktop ? (
-        <Table>
-          <TableBody>
-            {sessions.map((session) => (
-              <TableRow key={session.id}>
-                <TableDataCell style={{ borderTop: "0" }}>
-                  {tableCell(session.platform, session.browser)}
-                  {currentSession === session.id ? tickIcon : null}
 
-                  <Box flexDirection="column" alignItems="center">
-                    <span className="session-date">
-                      {convertTime(session.date)}
-                    </span>
-                    <span className="session-ip" dir="ltr">
-                      {session.ip}
-                    </span>
-                  </Box>
-                </TableDataCell>
+      <SessionsTable t={t} sessionsData={sessions} viewAs={viewAs} />
 
-                <TableDataCell
-                  style={{ borderTop: "0" }}
-                  onClick={() => {
-                    setLogoutVisible(true);
-                    setModalData({
-                      id: session.id,
-                      platform: session.platform,
-                      browser: session.browser,
-                    });
-                  }}
-                >
-                  {currentSession !== session.id ? removeIcon : null}
-                </TableDataCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      ) : (
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableHeaderCell>{t("Common:Sessions")}</TableHeaderCell>
-              <TableHeaderCell>{t("Common:Date")}</TableHeaderCell>
-              <TableHeaderCell>{t("Common:IpAddress")}</TableHeaderCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {sessions.map((session) => (
-              <TableRow key={session.id}>
-                <TableDataCell>
-                  {tableCell(session.platform, session.browser)}
-                  {currentSession === session.id ? tickIcon : null}
-                </TableDataCell>
-                <TableDataCell>{convertTime(session.date)}</TableDataCell>
-                <TableDataCell>{session.ip}</TableDataCell>
-                <TableDataCell
-                  onClick={() => {
-                    setLogoutVisible(true);
-                    setModalData({
-                      id: session.id,
-                      platform: session.platform,
-                      browser: session.browser,
-                    });
-                  }}
-                >
-                  {currentSession !== session.id ? removeIcon : null}
-                </TableDataCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      )}
-
-      {logoutVisible && (
-        <LogoutConnectionDialog
-          visible={logoutVisible}
-          data={modalData}
-          loading={loading}
-          onClose={() => setLogoutVisible(false)}
+      {logoutDialogVisible && (
+        <LogoutSessionDialog
+          t={t}
+          visible={logoutDialogVisible}
+          data={platformModalData}
+          isLoading={isLoading}
+          onClose={() => setLogoutDialogVisible(false)}
           onRemoveSession={onClickRemoveSession}
         />
       )}
 
-      {logoutAllVisible && (
-        <LogoutAllConnectionDialog
-          visible={logoutAllVisible}
-          loading={loading}
-          onClose={() => setLogoutAllVisible(false)}
+      {logoutAllDialogVisible && (
+        <LogoutAllSessionDialog
+          t={t}
+          visible={logoutAllDialogVisible}
+          isLoading={isLoading}
+          onClose={() => setLogoutAllDialogVisible(false)}
           onRemoveAllSessions={onClickRemoveAllSessions}
           onRemoveAllExceptThis={onClickRemoveAllExceptThis}
         />
       )}
-    </StyledFooter>
+    </StyledWrapper>
   );
 };
 
-export default inject(({ settingsStore, userStore, setup }) => {
-  const { culture, currentDeviceType } = settingsStore;
-  const { user } = userStore;
-  const locale = (user && user.cultureName) || culture || "en";
+export default inject(({ settingsStore, setup }) => {
+  const { currentDeviceType } = settingsStore;
 
   const {
     getAllSessions,
     removeAllSessions,
     removeSession,
-    logoutVisible,
-    setLogoutVisible,
-    logoutAllVisible,
-    setLogoutAllVisible,
+    logoutDialogVisible,
+    setLogoutDialogVisible,
+    logoutAllDialogVisible,
+    setLogoutAllDialogVisible,
     removeAllExecptThis,
     sessionsIsInit,
     sessions,
-    currentSession,
+    viewAs,
+    setViewAs,
     getSessions,
     setSessions,
+    platformModalData,
   } = setup;
   return {
-    locale,
     getAllSessions,
     removeAllSessions,
     removeSession,
-    logoutVisible,
-    setLogoutVisible,
-    logoutAllVisible,
-    setLogoutAllVisible,
+    logoutDialogVisible,
+    setLogoutDialogVisible,
+    logoutAllDialogVisible,
+    setLogoutAllDialogVisible,
     removeAllExecptThis,
     sessionsIsInit,
     sessions,
-    currentSession,
+    viewAs,
+    setViewAs,
     getSessions,
     setSessions,
     currentDeviceType,
+    platformModalData,
   };
 })(observer(withTranslation(["Profile", "Common"])(ActiveSessions)));

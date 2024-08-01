@@ -157,7 +157,13 @@ const PureHome = (props) => {
     getRooms,
     setSelectedFolder,
     userId,
+    getFolderModel,
+    scrollToTop,
+    isEmptyGroups,
+    wsCreatedPDFForm,
   } = props;
+
+  //console.log(t("ComingSoon"))
 
   const location = useLocation();
   const { groupId } = useParams();
@@ -169,6 +175,7 @@ const PureHome = (props) => {
   const isPeopleAccounts = location.pathname.includes("accounts/people");
   const isGroupsAccounts =
     location.pathname.includes("accounts/groups") && !groupId;
+  const isAccountsEmptyFilter = isGroupsAccounts && isEmptyGroups;
 
   const { onDrop } = useFiles({
     t,
@@ -197,6 +204,10 @@ const PureHome = (props) => {
     gallerySelected,
     folderSecurity,
     userId,
+
+    scrollToTop,
+    selectedFolderStore,
+    wsCreatedPDFForm,
   });
 
   const { showUploadPanel } = useOperations({
@@ -226,6 +237,8 @@ const PureHome = (props) => {
     setSelectedNode,
     fetchPeople,
     setPortalTariff,
+
+    scrollToTop,
   });
 
   useGroups({
@@ -238,6 +251,8 @@ const PureHome = (props) => {
 
     setSelectedNode,
     fetchGroups,
+
+    scrollToTop,
   });
 
   useInsideGroup({
@@ -247,6 +262,8 @@ const PureHome = (props) => {
     setIsLoading,
     setPortalTariff,
     fetchGroup,
+
+    scrollToTop,
   });
 
   useSettings({
@@ -281,6 +298,11 @@ const PureHome = (props) => {
     getRooms,
     isLoading,
   });
+
+  const getContextModel = () => {
+    if (isFrame) return null;
+    return getFolderModel(t, true);
+  };
 
   React.useEffect(() => {
     window.addEventListener("popstate", onClickBack);
@@ -334,6 +356,7 @@ const PureHome = (props) => {
   sectionProps.secondaryProgressBarValue = secondaryProgressDataStorePercent;
   sectionProps.secondaryProgressBarIcon = secondaryProgressDataStoreIcon;
   sectionProps.showSecondaryButtonAlert = secondaryProgressDataStoreAlert;
+  sectionProps.getContextModel = getContextModel;
 
   return (
     <>
@@ -368,8 +391,10 @@ const PureHome = (props) => {
           </Section.SectionWarning>
         )}
 
-        {(((!isEmptyPage || showFilterLoader) && !isErrorRoomNotAvailable) ||
-          isAccountsPage) &&
+        {(((!isEmptyPage || showFilterLoader) &&
+          !isAccountsEmptyFilter &&
+          !isErrorRoomNotAvailable) ||
+          (!isAccountsEmptyFilter && isAccountsPage)) &&
           !isSettingsPage && (
             <Section.SectionFilter>
               {isFrame ? (
@@ -381,7 +406,9 @@ const PureHome = (props) => {
           )}
 
         <Section.SectionBody isAccounts={isAccountsPage}>
-          <Outlet />
+          <>
+            <Outlet />
+          </>
         </Section.SectionBody>
 
         <Section.InfoPanelHeader>
@@ -419,6 +446,7 @@ export default inject(
     userStore,
     currentTariffStatusStore,
     settingsStore,
+    contextOptionsStore,
   }) => {
     const { setSelectedFolder, security: folderSecurity } = selectedFolderStore;
     const {
@@ -433,9 +461,10 @@ export default inject(
       setIsSectionBodyLoading,
       setIsSectionFilterLoading,
       isLoading,
-
       showFilterLoader,
     } = clientLoadingStore;
+
+    const { getFolderModel } = contextOptionsStore;
 
     const setIsLoading = (param, withoutTimer, withHeaderLoader) => {
       if (withHeaderLoader) setIsSectionHeaderLoading(param, !withoutTimer);
@@ -472,6 +501,8 @@ export default inject(
       addTagsToRoom,
       removeTagsFromRoom,
       getRooms,
+      scrollToTop,
+      wsCreatedPDFForm,
     } = filesStore;
 
     const { updateProfileCulture } = peopleStore.targetUserStore;
@@ -536,7 +567,15 @@ export default inject(
     const { usersStore, groupsStore, viewAs: accountsViewAs } = peopleStore;
 
     const { getUsersList: fetchPeople } = usersStore;
-    const { getGroups: fetchGroups, fetchGroup } = groupsStore;
+    const {
+      getGroups: fetchGroups,
+      fetchGroup,
+      groups,
+      groupsIsFiltered,
+    } = groupsStore;
+    const isEmptyGroups =
+      !groupsIsFiltered &&
+      ((groups && groups.length === 0) || !Boolean(groups));
 
     if (!firstLoad) {
       if (isLoading) {
@@ -647,6 +686,10 @@ export default inject(
       updateProfileCulture,
       getRooms,
       setSelectedFolder,
+      getFolderModel,
+      scrollToTop,
+      isEmptyGroups,
+      wsCreatedPDFForm,
     };
   },
 )(observer(Home));

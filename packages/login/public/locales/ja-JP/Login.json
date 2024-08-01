@@ -1,8 +1,7 @@
 {
   "CodeSubtitle": "{{email}}に6桁のコードを送りました。コードは有効期限がありますので、お早めにご入力ください。",
   "CodeTitle": "コードを送りました",
-  "CookieSettingsTitle": "セッション期間",
-  "ErrorInvalidText": "10秒後、<1>DocSpace</1>にリダイレクトされます。",
+  "ErrorInvalidText": "10秒後、<1>{{productName}}</1>にリダイレクトされます。",
   "ExpiredCode": "このコードは有効期限が切られています。新しいコードをリクエストして、もう一度ご入力ください。",
   "ForgotPassword": "パスワードをお忘れですか？",
   "InvalidCode": "このコードが無効です。もう一度ご入力ください。",
@@ -21,5 +20,5 @@
   "RegistrationEmailWatermark": "メール",
   "RememberHelper": "デフォルトのセッションライフタイムは20分です。このオプションをチェックすると、1年間に設定されます。独自の値を設定するには、「設定」で設定します。",
   "ResendCode": "コードの再送信",
-  "UserIsAlreadyRegistered": "ユーザー<1>{{email}}</1>はすでにこのDocSpaceに登録されています。パスワードを入力するか、前に戻って別のメールアドレスでログインしてください。"
+  "UserIsAlreadyRegistered": "ユーザー<1>{{email}}</1>はすでにこの{{productName}}に登録されています。パスワードを入力するか、前に戻って別のメールアドレスでログインしてください。"
 }

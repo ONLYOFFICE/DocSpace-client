@@ -29,7 +29,7 @@ import {
   setFavoritesSetting,
   setRecentSetting,
 } from "@docspace/shared/api/files";
-import { RoomsType } from "@docspace/shared/enums";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 import axios from "axios";
 import { makeAutoObservable } from "mobx";
 import { presentInArray } from "@docspace/shared/utils";
@@ -40,7 +40,10 @@ import {
   iconSize96,
 } from "@docspace/shared/utils/image-helpers";
 import { HTML_EXST } from "@docspace/shared/constants";
-import { getIconPathByFolderType } from "@docspace/shared/utils/common";
+import {
+  getIconPathByFolderType,
+  isPublicPreview,
+} from "@docspace/shared/utils/common";
 class FilesSettingsStore {
   thirdPartyStore;
   treeFoldersStore;
@@ -48,6 +51,8 @@ class FilesSettingsStore {
   pluginStore;
   authStore;
   settingsStore;
+
+  filesSettings = null;
 
   isErrorSettings = null;
   expandedSetting = null;
@@ -61,9 +66,11 @@ class FilesSettingsStore {
   recentSection = null;
   hideConfirmConvertSave = null;
   keepNewFileName = null;
-  thumbnails1280x720 = window.DocSpaceConfig?.thumbnails1280x720 || false;
+  openEditorInSameTab = null;
+  thumbnails1280x720 = window.ClientConfig?.thumbnails1280x720 || false;
   chunkUploadSize = 1024 * 1023; // 1024 * 1023; //~0.999mb
-  chunkUploadCount = 5;
+  maxUploadThreadCount = 15;
+  maxUploadFilesCount = 5;
 
   settingsIsLoaded = false;
 
@@ -116,6 +123,10 @@ class FilesSettingsStore {
     this.settingsIsLoaded = isLoaded;
   };
 
+  get uploadThreadCount() {
+    return this.maxUploadThreadCount / this.maxUploadFilesCount;
+  }
+
   get isLoadedSettingsTree() {
     return (
       this.confirmDelete !== null &&
@@ -127,6 +138,7 @@ class FilesSettingsStore {
   }
 
   setFilesSettings = (settings) => {
+    this.filesSettings = settings;
     const settingsItems = Object.keys(settings);
     for (let key of settingsItems) {
       this[key] = settings[key];
@@ -150,7 +162,11 @@ class FilesSettingsStore {
         this.setFilesSettings(settings);
         this.setIsLoaded(true);
 
-        if (!settings.enableThirdParty || this.publicRoomStore.isPublicRoom)
+        if (
+          !settings.enableThirdParty ||
+          this.publicRoomStore.isPublicRoom ||
+          isPublicPreview()
+        )
           return;
 
         return axios
@@ -196,6 +212,12 @@ class FilesSettingsStore {
     api.files
       .changeKeepNewFileName(data)
       .then((res) => this.setFilesSetting("keepNewFileName", res));
+  };
+
+  setOpenEditorInSameTab = (data) => {
+    api.files
+      .changeOpenEditorInSameTab(data)
+      .then((res) => this.setFilesSetting("openEditorInSameTab", res));
   };
 
   setEnableThirdParty = async (data, setting) => {
@@ -294,6 +316,17 @@ class FilesSettingsStore {
   isSpreadsheet = (extension) =>
     presentInArray(this.extsSpreadsheet, extension);
 
+  /**
+   *
+   * @param {number} [size = 24]
+   * @param {string } [fileExst = null]
+   * @param {string} [pproviderKey
+   * @param {*} contentLength
+   * @param {RoomsType | null} roomType
+   * @param {boolean | null} isArchive
+   * @param {FolderType} folderType
+   * @returns {string | undefined}
+   */
   getIcon = (
     size = 24,
     fileExst = null,
@@ -654,6 +687,15 @@ class FilesSettingsStore {
 
     return this.getIconUrl(extension, size);
   };
+
+  get openOnNewPage() {
+    if (
+      window.navigator.userAgent.includes("ZoomWebKit") ||
+      window.navigator.userAgent.includes("ZoomApps")
+    )
+      return false;
+    return !this.openEditorInSameTab;
+  }
 }
 
 export default FilesSettingsStore;

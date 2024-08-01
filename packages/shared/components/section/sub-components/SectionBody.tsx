@@ -25,12 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { useLocation } from "react-router-dom";
 
 // import { inject, observer } from "mobx-react";
 
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
-
-import { DeviceType } from "@docspace/shared/enums";
+import { ContextMenu } from "@docspace/shared/components/context-menu";
 
 import {
   StyledDropZoneBody,
@@ -51,15 +50,93 @@ const SectionBody = React.memo(
 
     isDesktop,
     settingsStudio = false,
-    currentDeviceType,
+    getContextModel,
   }: SectionBodyProps) => {
     const focusRef = React.useRef<HTMLDivElement | null>(null);
+    const cmRef = React.useRef<null | {
+      show: (e: React.MouseEvent | MouseEvent) => void;
+      hide: (e: React.MouseEvent | MouseEvent) => void;
+      toggle: (e: React.MouseEvent | MouseEvent) => boolean;
+      getVisible: () => boolean;
+    }>(null);
+    const location = useLocation();
+
+    const [isOpen, setIsOpen] = React.useState(false);
+
+    const onContextMenu = React.useCallback(
+      (e: MouseEvent | React.MouseEvent<Element, MouseEvent>) => {
+        const bodyElem = document.getElementsByClassName(
+          "section-body",
+        )[0] as HTMLDivElement;
+
+        const target = e.target as Node;
+
+        if (
+          !getContextModel ||
+          !getContextModel() ||
+          !bodyElem ||
+          !bodyElem.contains(target)
+        )
+          return;
+
+        e.stopPropagation();
+        e.preventDefault();
+
+        // if (cmRef.current) cmRef.current.toggle(e);
+        if (cmRef.current) {
+          if (!isOpen) cmRef?.current?.show(e);
+          else cmRef?.current?.hide(e);
+          setIsOpen(!isOpen);
+        }
+      },
+      [getContextModel, isOpen],
+    );
+
+    const onHide = () => {
+      setIsOpen(false);
+    };
+
+    const focusSectionBody = React.useCallback(() => {
+      if (focusRef.current) focusRef.current.focus({ preventScroll: true });
+    }, []);
+
+    const onBodyFocusOut = React.useCallback(
+      (e: FocusEvent) => {
+        if (e.relatedTarget !== null) return;
+        focusSectionBody();
+      },
+      [focusSectionBody],
+    );
+
+    React.useEffect(() => {
+      document.addEventListener("contextmenu", onContextMenu);
+
+      return () => {
+        document.removeEventListener("contextmenu", onContextMenu);
+      };
+    }, [onContextMenu]);
 
     React.useEffect(() => {
       if (!autoFocus) return;
 
-      if (focusRef.current) focusRef.current.focus();
-    }, [autoFocus]);
+      focusSectionBody();
+    }, [autoFocus, location.pathname, focusSectionBody]);
+
+    React.useEffect(() => {
+      if (!autoFocus) return;
+
+      const customScrollbar = document.querySelector(
+        "#customScrollBar > .scroll-wrapper > .scroller > .scroll-body",
+      );
+      customScrollbar?.removeAttribute("tabIndex");
+
+      document.body.addEventListener("focusout", onBodyFocusOut);
+
+      return () => {
+        customScrollbar?.setAttribute("tabIndex", "-1");
+        document.body.removeEventListener("focusout", onBodyFocusOut);
+      };
+    }, [autoFocus, onBodyFocusOut]);
 
     const focusProps = autoFocus
       ? {
@@ -67,6 +144,16 @@ const SectionBody = React.memo(
           tabIndex: -1,
         }
       : {};
+
+    const contextBlock = (
+      <ContextMenu
+        ref={cmRef}
+        onHide={onHide}
+        getContextModel={getContextModel}
+        withBackdrop
+        model={[]}
+      />
+    );
 
     return uploadFiles ? (
       <StyledDropZoneBody
@@ -79,33 +166,20 @@ const SectionBody = React.memo(
         className="section-body"
       >
         {withScroll ? (
-          currentDeviceType !== DeviceType.mobile ? (
-            <Scrollbar
-              id="sectionScroll"
-              scrollclass="section-scroll"
-              fixedSize
-            >
-              <div className="section-wrapper">
-                <div className="section-wrapper-content" {...focusProps}>
-                  {children}
-                  <StyledSpacer />
-                </div>
-              </div>
-            </Scrollbar>
-          ) : (
-            <div className="section-wrapper">
-              <div className="section-wrapper-content" {...focusProps}>
-                {children}
-                <StyledSpacer />
-              </div>
+          <div className="section-wrapper">
+            <div className="section-wrapper-content" {...focusProps}>
+              {children}
+              <StyledSpacer />
             </div>
-          )
+          </div>
         ) : (
           <div className="section-wrapper">
             {children}
             <StyledSpacer />
           </div>
         )}
+
+        {contextBlock}
       </StyledDropZoneBody>
     ) : (
       <StyledSectionBody
@@ -114,32 +188,19 @@ const SectionBody = React.memo(
         isDesktop={isDesktop}
         settingsStudio={settingsStudio}
         isFormGallery={isFormGallery}
+        className="section-body"
       >
         {withScroll ? (
-          currentDeviceType !== DeviceType.mobile ? (
-            <Scrollbar
-              id="sectionScroll"
-              scrollclass="section-scroll"
-              fixedSize
-            >
-              <div className="section-wrapper">
-                <div className="section-wrapper-content" {...focusProps}>
-                  {children}
-                  <StyledSpacer className="settings-mobile" />
-                </div>
-              </div>
-            </Scrollbar>
-          ) : (
-            <div className="section-wrapper">
-              <div className="section-wrapper-content" {...focusProps}>
-                {children}
-                <StyledSpacer className="settings-mobile" />
-              </div>
+          <div className="section-wrapper">
+            <div className="section-wrapper-content" {...focusProps}>
+              {children}
+              <StyledSpacer className="settings-mobile" />
             </div>
-          )
+          </div>
         ) : (
           <div className="section-wrapper">{children}</div>
         )}
+        {contextBlock}
       </StyledSectionBody>
     );
   },

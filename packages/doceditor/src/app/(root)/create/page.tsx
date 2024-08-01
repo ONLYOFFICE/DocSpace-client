@@ -44,6 +44,8 @@ type TSearchParams = {
   open?: string;
   fromFile?: string;
   fromTemplate?: string;
+  action?: string;
+  toForm?: string;
 };
 
 async function Page({ searchParams }: { searchParams: TSearchParams }) {
@@ -63,6 +65,8 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
 
     fromTemplate,
     formId,
+    action,
+    toForm,
   } = searchParams;
 
   if (!parentId || !fileTitle) redirect(baseURL);
@@ -74,6 +78,7 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
     parentId,
     id,
     open,
+    action,
     password,
   };
 
@@ -84,7 +89,14 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
 
   const { file, error } =
     fromFile && templateId
-      ? await fileCopyAs(templateId, fileTitle, parentId, false, password)
+      ? await fileCopyAs(
+          templateId,
+          fileTitle,
+          parentId,
+          false,
+          password,
+          toForm,
+        )
       : await createFile(parentId, fileTitle, templateId, formId);
 
   if (!file) {
@@ -110,7 +122,15 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
   }
 
   if (fileId || !fileError) {
-    const redirectURL = `${baseURL}/doceditor?fileId=${fileId}`;
+    const searchParams = new URLSearchParams();
+
+    searchParams.append("fileId", fileId?.toString() ?? "");
+    if (action) {
+      searchParams.append("action", action);
+    }
+
+    const redirectURL = `/doceditor?${searchParams.toString()}`;
+
     return permanentRedirect(redirectURL);
   }
 

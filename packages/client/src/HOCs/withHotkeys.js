@@ -28,9 +28,8 @@ import { useEffect, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { observer, inject } from "mobx-react";
 import { useNavigate } from "react-router-dom";
-import { Events } from "@docspace/shared/enums";
+import { Events, FolderType, RoomsType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
-import throttle from "lodash/throttle";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
 const withHotkeys = (Component) => {
@@ -63,6 +62,7 @@ const withHotkeys = (Component) => {
       moveCaretRight,
       openItem,
       selectAll,
+      deselectAll,
       activateHotkeys,
       onClickBack,
 
@@ -89,6 +89,10 @@ const withHotkeys = (Component) => {
       security,
       copyToClipboard,
       uploadClipboardFiles,
+
+      isGroupMenuBlocked,
+      isFormRoom,
+      isParentFolderFormRoom,
     } = props;
 
     const navigate = useNavigate();
@@ -122,7 +126,12 @@ const withHotkeys = (Component) => {
       !security?.Create;
 
     const onCreate = (extension) => {
-      if (folderWithNoAction) return;
+      if (
+        folderWithNoAction ||
+        (Boolean(extension) && (isFormRoom || isParentFolderFormRoom))
+      )
+        return;
+
       const event = new Event(Events.CREATE);
 
       const payload = {
@@ -133,6 +142,18 @@ const withHotkeys = (Component) => {
       event.payload = payload;
 
       window.dispatchEvent(event);
+    };
+
+    const onRename = () => {
+      if (selection.length === 1) {
+        const item = selection[0];
+
+        if (!item.contextOptions.includes("rename")) return;
+
+        const event = new Event(Events.RENAME);
+        event.item = item;
+        window.dispatchEvent(event);
+      }
     };
 
     const onCreateRoom = () => {
@@ -152,13 +173,11 @@ const withHotkeys = (Component) => {
     };
 
     useEffect(() => {
-      const throttledKeyDownEvent = throttle(onKeyDown, 300);
-
-      window.addEventListener("keydown", throttledKeyDownEvent);
+      window.addEventListener("keydown", onKeyDown);
       document.addEventListener("paste", onPaste);
 
       return () => {
-        window.removeEventListener("keypress", throttledKeyDownEvent);
+        window.removeEventListener("keydown", onKeyDown);
         document.removeEventListener("paste", onPaste);
       };
     });
@@ -229,7 +248,7 @@ const withHotkeys = (Component) => {
     useHotkeys("shift+a, ctrl+a", selectAll, hotkeysFilter);
 
     //Deselect all files and folders
-    useHotkeys("shift+n, ESC", () => setSelected("none"), hotkeysFilter);
+    useHotkeys("shift+n, ESC", deselectAll, hotkeysFilter);
 
     //Move down without changing selection
     useHotkeys("ctrl+DOWN, command+DOWN", moveCaretBottom, hotkeysFilter);
@@ -275,7 +294,7 @@ const withHotkeys = (Component) => {
     });
 
     //Crete form template
-    useHotkeys("Shift+o", () => onCreate("docxf"), {
+    useHotkeys("Shift+o", () => onCreate("pdf"), {
       ...hotkeysFilter,
       ...{ keyup: true },
     });
@@ -284,7 +303,7 @@ const withHotkeys = (Component) => {
     useHotkeys(
       "Alt+Shift+o",
       () => {
-        if (folderWithNoAction) return;
+        if (folderWithNoAction || isFormRoom || isParentFolderFormRoom) return;
         setSelectFileDialogVisible(true);
       },
 
@@ -317,7 +336,7 @@ const withHotkeys = (Component) => {
           return;
         }
 
-        if (isAvailableOption("delete")) {
+        if (isAvailableOption("delete") && !isGroupMenuBlocked) {
           if (isRecentFolder) return;
 
           if (isFavoritesFolder) {
@@ -377,6 +396,8 @@ const withHotkeys = (Component) => {
       () => copyToClipboard(t, true),
       hotkeysFilter,
     );
+
+    useHotkeys("f2", onRename, hotkeysFilter);
 
     //Upload file
     useHotkeys(
@@ -442,6 +463,7 @@ const withHotkeys = (Component) => {
         moveCaretRight,
         openItem,
         selectAll,
+        deselectAll,
         activateHotkeys,
         uploadFile,
         copyToClipboard,
@@ -460,6 +482,7 @@ const withHotkeys = (Component) => {
         setFavoriteAction,
         deleteRooms,
         archiveRooms,
+        isGroupMenuBlocked,
       } = filesActionsStore;
 
       const { visible: mediaViewerIsVisible } = mediaViewerDataStore;
@@ -477,6 +500,9 @@ const withHotkeys = (Component) => {
       } = treeFoldersStore;
 
       const security = selectedFolderStore.security;
+      const isFormRoom = selectedFolderStore.roomType === RoomsType.FormRoom;
+      const isParentFolderFormRoom =
+        selectedFolderStore.parentRoomType === FolderType.FormRoom;
 
       return {
         setSelected,
@@ -505,6 +531,7 @@ const withHotkeys = (Component) => {
         moveCaretRight,
         openItem,
         selectAll,
+        deselectAll,
         activateHotkeys,
         onClickBack,
 
@@ -533,6 +560,10 @@ const withHotkeys = (Component) => {
         copyToClipboard,
 
         uploadClipboardFiles,
+
+        isGroupMenuBlocked,
+        isFormRoom,
+        isParentFolderFormRoom,
       };
     },
   )(observer(WithHotkeys));

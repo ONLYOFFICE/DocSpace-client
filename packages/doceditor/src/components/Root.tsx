@@ -26,11 +26,10 @@
 
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
-import AppLoader from "@docspace/shared/components/app-loader";
 
 import { TResponse } from "@/types";
 import useError from "@/hooks/useError";
@@ -43,6 +42,7 @@ import useSocketHelper from "@/hooks/useSocketHelper";
 import useShareDialog from "@/hooks/useShareDialog";
 import useFilesSettings from "@/hooks/useFilesSettings";
 import useUpdateSearchParamId from "@/hooks/useUpdateSearchParamId";
+import useStartFillingSelectDialog from "@/hooks/useStartFillingSelectDialog";
 
 import DeepLink from "./deep-link";
 import Editor from "./Editor";
@@ -50,6 +50,8 @@ import SelectFileDialog from "./SelectFileDialog";
 import SelectFolderDialog from "./SelectFolderDialog";
 import SharingDialog from "./ShareDialog";
 import { calculateAsideHeight } from "@/utils";
+import StartFillingSelectorDialog from "./StartFillingSelectDialog";
+import ConflictResolveDialog from "./ConflictResolveDialog";
 
 const Root = ({
   settings,
@@ -62,6 +64,7 @@ const Root = ({
   doc,
   fileId,
   hash,
+  timer,
 }: TResponse) => {
   const editorRef = React.useRef<null | HTMLElement>(null);
 
@@ -73,9 +76,15 @@ const Root = ({
   const isSkipError =
     error?.status === "not-found" ||
     (error?.status === "access-denied" && !!error.editorUrl) ||
-    error?.status === "not-supported";
+    error?.status === "not-supported" ||
+    error?.status === "quota-exception";
 
   const { t } = useTranslation(["Editor", "Common"]);
+
+  useEffect(() => {
+    console.log("editor timer: ", timer);
+    console.log("openEdit timer: ", config?.timer);
+  }, [config?.timer, timer]);
 
   useRootInit({
     documentType: config?.documentType,
@@ -117,12 +126,24 @@ const Root = ({
     selectFileDialogFileTypeDetection,
     selectFileDialogVisible,
   } = useSelectFileDialog({ instanceId: instanceId ?? "" });
+
+  const {
+    getIsDisabledStartFillingSelectDialog,
+    isVisibleStartFillingSelectDialog,
+    onCloseStartFillingSelectDialog,
+    onSubmitStartFillingSelectDialog,
+    onSDKRequestStartFilling,
+    conflictDataDialog,
+    headerLabelSFSDialog,
+    onDownloadAs,
+  } = useStartFillingSelectDialog(fileInfo);
+
   const {
     isSharingDialogVisible,
 
     onCloseSharingDialog,
     onSDKRequestSharingSettings,
-  } = useShareDialog();
+  } = useShareDialog(config, onSDKRequestStartFilling);
 
   useUpdateSearchParamId(fileId, hash);
 
@@ -191,12 +212,14 @@ const Root = ({
           fileInfo={fileInfo}
           errorMessage={error?.message}
           isSkipError={!!isSkipError}
+          onDownloadAs={onDownloadAs}
           onSDKRequestSharingSettings={onSDKRequestSharingSettings}
           onSDKRequestSaveAs={onSDKRequestSaveAs}
           onSDKRequestInsertImage={onSDKRequestInsertImage}
           onSDKRequestReferenceSource={onSDKRequestReferenceSource}
           onSDKRequestSelectDocument={onSDKRequestSelectDocument}
           onSDKRequestSelectSpreadsheet={onSDKRequestSelectSpreadsheet}
+          onSDKRequestStartFilling={onSDKRequestStartFilling}
         />
       )}
 
@@ -231,6 +254,23 @@ const Root = ({
           fileInfo={fileInfo}
           onCancel={onCloseSharingDialog}
         />
+      )}
+      {isVisibleStartFillingSelectDialog && !!socketHelper && fileInfo && (
+        <StartFillingSelectorDialog
+          fileInfo={fileInfo}
+          socketHelper={socketHelper}
+          filesSettings={filesSettings}
+          headerLabel={headerLabelSFSDialog}
+          isVisible={
+            isVisibleStartFillingSelectDialog && !conflictDataDialog.visible
+          }
+          onClose={onCloseStartFillingSelectDialog}
+          onSubmit={onSubmitStartFillingSelectDialog}
+          getIsDisabled={getIsDisabledStartFillingSelectDialog}
+        />
+      )}
+      {conflictDataDialog.visible && (
+        <ConflictResolveDialog {...conflictDataDialog} />
       )}
     </div>
   );

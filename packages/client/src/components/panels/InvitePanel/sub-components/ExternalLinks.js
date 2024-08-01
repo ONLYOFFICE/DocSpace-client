@@ -37,8 +37,9 @@ import { InputBlock } from "@docspace/shared/components/input-block";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { DropDown } from "@docspace/shared/components/drop-down";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 
-import AccessSelector from "./AccessSelector";
+import AccessSelector from "../../../AccessSelector";
 
 import {
   StyledBlock,
@@ -48,7 +49,6 @@ import {
   StyledToggleButton,
   StyledDescription,
 } from "../StyledInvitePanel";
-import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 
 const ExternalLinks = ({
   t,
@@ -87,10 +87,7 @@ const ExternalLinks = ({
   };
 
   const editLink = async () => {
-    const type =
-      roomType === RoomsType.PublicRoom
-        ? ShareAccessRights.Collaborator
-        : ShareAccessRights.ReadOnly;
+    const type = getDefaultAccessUser(roomType);
 
     const link = await setInvitationLinks(roomId, "Invite", type);
 
@@ -128,10 +125,9 @@ const ExternalLinks = ({
   const copyLink = (link) => {
     if (link) {
       toastr.success(
-        `${t("Translations:LinkCopySuccess")}. ${t(
-          "Translations:LinkValidTime",
-          { days_count: 7 },
-        )}`,
+        `${t("Common:LinkCopySuccess")}. ${t("Translations:LinkValidTime", {
+          days_count: 7,
+        })}`,
       );
       copy(link);
     }
@@ -223,7 +219,9 @@ const ExternalLinks = ({
       </StyledSubHeader>
       <StyledDescription>
         {roomId === -1
-          ? t("InviteViaLinkDescriptionAccounts")
+          ? t("InviteViaLinkDescriptionAccounts", {
+              productName: t("Common:ProductName"),
+            })
           : t("InviteViaLinkDescriptionRoom")}
       </StyledDescription>
       {externalLinksVisible && (

@@ -43,7 +43,7 @@ const Dialogs = ({
     selectFileDialogVisible && (
       <FilesSelector
         key="select-file-dialog"
-        filterParam={FilesSelectorFilterTypes.OFORM}
+        filterParam={FilesSelectorFilterTypes.PDF}
         isPanelVisible={selectFileDialogVisible}
         onSelectFile={() => {}}
         onClose={onCloseSelectFileDialogVisible}

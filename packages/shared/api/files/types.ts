@@ -112,6 +112,7 @@ export type TFile = {
   providerId?: number;
   providerKey?: string;
   providerItem?: boolean;
+  thumbnailUrl?: string;
 };
 
 export type TOpenEditRequest = {
@@ -185,6 +186,7 @@ export type TFolder = {
   isArchive?: boolean;
   roomType?: RoomsType;
   path?: TPathParts[];
+  type?: FolderType;
 };
 
 export type TGetFolderPath = TFolder[];
@@ -238,7 +240,8 @@ export type TFilesSettings = {
   };
   canSearchByContent: boolean;
   chunkUploadSize: number;
-  chunkUploadCount: number;
+  maxUploadThreadCount: number;
+  maxUploadFilesCount: number;
   confirmDelete: boolean;
   convertNotify: boolean;
   defaultOrder: { is_asc: boolean; property: 1 };
@@ -293,6 +296,7 @@ export type TFilesSettings = {
   storeOriginalFiles: boolean;
   templatesSection: boolean;
   updateIfExist: boolean;
+  openEditorInSameTab: boolean;
 };
 
 export type TPresignedUri = {
@@ -414,3 +418,13 @@ export type TFilesUsedSpace = {
     usedSpace: number;
   };
 };
+
+export type TConnectingStorage = {
+  name: string;
+  key: string;
+  connected: boolean;
+  oauth: boolean;
+  redirectUrl: string;
+};
+
+export type TConnectingStorages = TConnectingStorage[];

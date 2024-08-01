@@ -37,17 +37,22 @@ import {
   convertRoomsToItems,
 } from "../FilesSelector.utils";
 import { UseSocketHelperProps } from "../FilesSelector.types";
+import { SettingsContext } from "../contexts/Settings";
 
 const useSocketHelper = ({
   socketHelper,
   socketSubscribers,
   disabledItems,
   filterParam,
+  withCreate,
   setItems,
   setBreadCrumbs,
   setTotal,
-  getIcon,
 }: UseSocketHelperProps) => {
+  const { getIcon } = React.useContext(SettingsContext);
+
+  const initRef = React.useRef(false);
+
   const subscribedId = React.useRef<null | number>(null);
 
   const unsubscribe = React.useCallback(
@@ -109,9 +114,9 @@ const useSocketHelper = ({
 
       if (opt?.type === "file" && "folderId" in data) {
         item = convertFilesToItems([data], getIcon, filterParam)[0];
-      } else if (opt?.type === "folder" && "roomType" in data) {
+      } else if (opt?.type === "folder" && !("folderId" in data)) {
         item =
-          data.roomType && "tags" in data
+          "roomType" in data && data.roomType && "tags" in data
             ? convertRoomsToItems([data])[0]
             : convertFoldersToItems([data], disabledItems, filterParam)[0];
       }
@@ -122,6 +127,18 @@ const useSocketHelper = ({
         if (opt.type === "folder") {
           setTotal((v) => v + 1);
 
+          if (withCreate) {
+            const newValue = [...value];
+
+            let idx = 1;
+
+            if (value[0]?.isInputItem) idx = 0;
+
+            newValue.splice(idx, 1, item);
+
+            return newValue;
+          }
+
           return [item, ...value];
         }
 
@@ -129,7 +146,12 @@ const useSocketHelper = ({
           let idx = 0;
 
           for (let i = 0; i < value.length - 1; i += 1) {
-            if (!value[i].isFolder) break;
+            if (
+              !value[i]?.isFolder &&
+              !value[i]?.isCreateNewItem &&
+              !value[i]?.isInputItem
+            )
+              break;
 
             idx = i + 1;
           }
@@ -146,7 +168,7 @@ const useSocketHelper = ({
         return value;
       });
     },
-    [disabledItems, filterParam, getIcon, setItems, setTotal],
+    [disabledItems, filterParam, getIcon, setItems, setTotal, withCreate],
   );
 
   const updateItem = React.useCallback(
@@ -261,6 +283,10 @@ const useSocketHelper = ({
   );
 
   React.useEffect(() => {
+    if (initRef.current) return;
+
+    initRef.current = true;
+
     socketHelper.on("s:modify-folder", (opt?: TOptSocket) => {
       switch (opt?.cmd) {
         case "create":

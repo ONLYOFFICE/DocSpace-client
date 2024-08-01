@@ -70,28 +70,25 @@ const DeletePortalDialog = () => {
       <ModalDialog.Body className="">
         <Trans
           i18nKey="DeletePortalText"
-          t={t}
-          domain={domain}
-          displayName={displayName}
-          email={email}
-        >
-          Please note: only the owner is able to delete the selected DocSpace.
-          The owner of <strong>{{ domain }}</strong> is{" "}
-          <strong>{{ displayName }}</strong>{" "}
-          <Link
-            className="email-link"
-            type="page"
-            href={`mailto:${email}`}
-            noHover
-            color={currentColorScheme?.main?.accent}
-            title={email}
-          >
-            {{ email }}{" "}
-          </Link>
-          . If you are not the owner, you will not be able to access the
-          DocSpace deletion settings by clicking the DELETE button and will be
-          redirected to the Rooms section.
-        </Trans>
+          values={{
+            productName: t("Common:ProductName"),
+            displayName,
+            email,
+            domain,
+          }}
+          components={{
+            1: <strong />,
+            5: (
+              <Link
+                className="email-link"
+                href={`mailto:${email}`}
+                noHover
+                color={currentColorScheme?.main?.accent}
+                title={email}
+              />
+            ),
+          }}
+        />
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

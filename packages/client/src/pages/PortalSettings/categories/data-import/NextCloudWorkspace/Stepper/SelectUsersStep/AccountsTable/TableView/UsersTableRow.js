@@ -32,7 +32,7 @@ import styled from "styled-components";
 
 const StyledTableRow = styled(TableRow)`
   .table-container_cell {
-    padding-right: 30px;
+    padding-inline-end: 30px;
     text-overflow: ellipsis;
   }
 
@@ -43,7 +43,7 @@ const StyledTableRow = styled(TableRow)`
   }
 
   .user-email {
-    margin-right: 5px;
+    margin-inline-end: 5px;
     font-size: 13px;
     font-weight: 600;
     color: ${(props) =>
@@ -88,7 +88,9 @@ const UsersTableRow = ({
 
       <TableCell>
         {isDuplicate ? (
-          <Text className="user-existing">{t("Settings:ExistingAccount")}</Text>
+          <Text className="user-existing">
+            {t("Settings:AccountAlreadyExists")}
+          </Text>
         ) : (
           <Text className="not-existing">{NOT_EXIST}</Text>
         )}

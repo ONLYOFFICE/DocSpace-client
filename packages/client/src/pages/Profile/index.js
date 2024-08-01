@@ -35,6 +35,7 @@ import Dialogs from "../Home/Section/AccountsBody/Dialogs";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 class Profile extends React.Component {
   componentDidMount() {
@@ -42,7 +43,6 @@ class Profile extends React.Component {
       fetchProfile,
       profile,
       t,
-      setDocumentTitle,
 
       setIsEditTargetUser,
 
@@ -147,7 +147,7 @@ export default inject(
     tfaStore,
     treeFoldersStore,
   }) => {
-    const { setDocumentTitle, language } = authStore;
+    const { language } = authStore;
 
     const {
       setIsProfileLoaded,
@@ -175,7 +175,6 @@ export default inject(
     const { getTfaType } = tfaStore;
 
     return {
-      setDocumentTitle,
       language,
       fetchProfile,
       profile,

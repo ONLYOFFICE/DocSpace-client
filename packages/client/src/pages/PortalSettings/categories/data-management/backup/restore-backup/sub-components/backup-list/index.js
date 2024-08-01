@@ -175,7 +175,7 @@ const BackupListModalDialog = (props) => {
       .then(() =>
         navigate(
           combineUrl(
-            window.DocSpaceConfig?.proxy?.url,
+            window.ClientConfig?.proxy?.url,
             config.homepage,
             "/preparation-portal",
           ),
@@ -209,10 +209,14 @@ const BackupListModalDialog = (props) => {
   const helpContent = () => (
     <>
       <Text className="restore-backup_warning-description">
-        {t("RestoreBackupWarningText")}{" "}
+        {t("RestoreBackupWarningText", {
+          productName: t("Common:ProductName"),
+        })}{" "}
         {!standalone && (
           <Text as="span" className="restore-backup_warning-link">
-            {t("RestoreBackupResetInfoWarningText")}
+            {t("RestoreBackupResetInfoWarningText", {
+              productName: t("Common:ProductName"),
+            })}
           </Text>
         )}
       </Text>

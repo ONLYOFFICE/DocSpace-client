@@ -130,7 +130,7 @@ const EditRoomEvent = ({
     const quotaLimit = roomParams?.quota || item.quotaLimit;
 
     const editRoomParams = {
-      title: roomParams.title || t("Files:NewRoom"),
+      title: roomParams.title || t("Common:NewRoom"),
       ...(isDefaultRoomsQuotaSet && {
         quota: +quotaLimit,
       }),
@@ -156,14 +156,15 @@ const EditRoomEvent = ({
         isTitleChanged || isQuotaChanged
           ? await editRoom(item.id, editRoomParams)
           : item;
-
       room.isLogoLoading = true;
 
       const createTagActions = [];
       for (let i = 0; i < newTags.length; i++) {
         createTagActions.push(createTag(newTags[i]));
       }
-      await Promise.all(createTagActions);
+      if (!!createTagActions.length) {
+        await Promise.all(createTagActions);
+      }
 
       const actions = [];
       if (isOwnerChanged) {
@@ -177,19 +178,25 @@ const EditRoomEvent = ({
         };
       }
       if (tags.length) {
-        actions.push(addTagsToRoom(room.id, tags));
+        const tagsToAddList = tags.filter((t) => !startTags.includes(t));
+        actions.push(addTagsToRoom(room.id, tagsToAddList));
         room.tags = tags;
       }
-      if (removedTags.length)
-        actions.push(removeTagsFromRoom(room.id, removedTags));
 
-      await Promise.all(actions);
+      if (removedTags.length) {
+        actions.push(removeTagsFromRoom(room.id, removedTags));
+        room.tags = tags;
+      }
+
+      if (!!actions.length) {
+        await Promise.all(actions);
+      }
 
       if (!!item.logo.original && !roomParams.icon.uploadedFile) {
         room = await removeLogoFromRoom(room.id);
       }
 
-      if (roomParams.icon.uploadedFile) {
+      if (roomParams.iconWasUpdated && roomParams.icon.uploadedFile) {
         updateRoom(item, {
           ...room,
           logo: { big: item.logo.original },

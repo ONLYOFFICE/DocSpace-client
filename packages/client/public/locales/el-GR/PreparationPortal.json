@@ -1,4 +1,4 @@
 {
-  "PortalRestoring": "Επαναφορά DocSpace",
-  "PreparationPortalDescription": "Μόλις ολοκληρωθεί η διαδικασία επαναφοράς, θα μεταφερθείτε αυτόματα στην DocSpace σας."
+  "PortalRestoring": "Επαναφορά {{productName}}",
+  "PreparationPortalDescription": "Μόλις ολοκληρωθεί η διαδικασία επαναφοράς, θα μεταφερθείτε αυτόματα στην {{productName}} σας."
 }

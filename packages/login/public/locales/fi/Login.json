@@ -1,8 +1,7 @@
 {
   "CodeSubtitle": "Lähetimme 6-numeroisen koodin osoitteeseen {{email}}. Koodilla on rajoitettu voimassaoloaika, syötä se mahdollisimman pian.",
   "CodeTitle": "Koodi lähetettiin sinulle sähköpostitse",
-  "CookieSettingsTitle": "Istunnon kesto",
-  "ErrorInvalidText": "10 sekunnin kuluttua sinut ohjataan <1>DocSpace</1>",
+  "ErrorInvalidText": "10 sekunnin kuluttua sinut ohjataan <1>{{productName}}</1>",
   "ExpiredCode": "Tämä koodi ei ole enää voimassa. Pyydä uutta koodia ja yritä uudelleen.",
   "ForgotPassword": "Unohditko salasanasi?",
   "InvalidCode": "Tämä koodi ei kelpaa. Yritä uudelleen.",
@@ -20,6 +19,5 @@
   "RegisterTitle": "Rekisteröintipyyntö",
   "RegistrationEmailWatermark": "sähköposti",
   "RememberHelper": "Istunnon oletuskesto on 20 minuuttia. Valitse tämä vaihtoehto, jos haluat asettaa sen 1 vuodeksi. Voit asettaa oman arvon Asetuksissa.",
-  "ResendCode": "Lähetä koodi uudelleen",
-  "UserIsAlreadyRegistered": "Käyttäjä <1>{{email}}</1> on jo rekisteröity tähän DocSpaceen, syötä salasanasi tai mene takaisin jatkaaksesi toisella sähköpostilla."
+  "ResendCode": "Lähetä koodi uudelleen"
 }

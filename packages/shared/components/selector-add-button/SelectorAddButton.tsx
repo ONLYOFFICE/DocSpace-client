@@ -36,12 +36,14 @@ import { SelectorAddButtonProps } from "./SelectorAddButton.types";
 const SelectorAddButton = (props: SelectorAddButtonProps) => {
   const {
     isDisabled = false,
+    isAction,
     title,
     className,
     id,
     style,
     iconName = ActionsHeaderTouchReactSvgUrl,
     onClick,
+    iconSize = 12,
   } = props;
 
   const onClickAction = (e: React.MouseEvent) => {
@@ -52,6 +54,7 @@ const SelectorAddButton = (props: SelectorAddButtonProps) => {
     <StyledButton
       {...props}
       isDisabled={isDisabled}
+      isAction={isAction}
       title={title}
       onClick={onClickAction}
       className={className}
@@ -60,7 +63,7 @@ const SelectorAddButton = (props: SelectorAddButtonProps) => {
       data-testid="selector-add-button"
     >
       <IconButton
-        size={12}
+        size={iconSize}
         iconName={iconName}
         isFill
         isDisabled={isDisabled}

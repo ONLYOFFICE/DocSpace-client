@@ -32,7 +32,7 @@ import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 
 import { ProfileViewLoader } from "@docspace/shared/skeletons/profile";
-import { Submenu } from "@docspace/shared/components/submenu";
+import { Tabs } from "@docspace/shared/components/tabs";
 
 import MainProfile from "./sub-components/main-profile";
 import LoginContent from "./sub-components/LoginContent";
@@ -41,7 +41,7 @@ import FileManagement from "./sub-components/file-management";
 import InterfaceTheme from "./sub-components/interface-theme";
 
 import { tablet } from "@docspace/shared/utils";
-import { DeviceType } from "@docspace/shared/enums";
+import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
 const Wrapper = styled.div`
   display: flex;
@@ -51,6 +51,14 @@ const Wrapper = styled.div`
   @media ${tablet} {
     width: 100%;
     max-width: 100%;
+  }
+`;
+
+const StyledTabs = styled(Tabs)`
+  > .sticky {
+    z-index: 201;
+    margin-inline-end: -16px;
+    padding-inline-end: 16px;
   }
 `;
 
@@ -83,13 +91,13 @@ const SectionBodyContent = (props) => {
       content: <FileManagement />,
     });
 
-  const getCurrentTab = () => {
+  const getCurrentTabId = () => {
     const path = location.pathname;
-    const currentTab = data.findIndex((item) => path.includes(item.id));
-    return currentTab !== -1 ? currentTab : 0;
+    const currentTab = data.find((item) => path.includes(item.id));
+    return currentTab !== -1 && data.length ? currentTab.id : data[0].id;
   };
 
-  const currentTab = getCurrentTab();
+  const currentTabId = getCurrentTabId();
 
   const onSelect = (e) => {
     const arrayPaths = location.pathname.split("/");
@@ -102,17 +110,11 @@ const SectionBodyContent = (props) => {
   return (
     <Wrapper>
       <MainProfile />
-      <Submenu
-        data={data}
-        startSelect={currentTab}
+      <StyledTabs
+        items={data}
+        selectedItemId={currentTabId}
         onSelect={onSelect}
-        topProps={
-          currentDeviceType === DeviceType.desktop
-            ? 0
-            : currentDeviceType === DeviceType.mobile
-              ? "53px"
-              : "61px"
-        }
+        stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
       />
     </Wrapper>
   );

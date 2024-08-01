@@ -48,12 +48,15 @@ const StyledOuter = styled.div<IconButtonProps>`
           stroke: ${props.color || props.theme.iconButton.color};
         }
       }
-      &:hover {
-        svg {
-          path {
-            stroke: ${props.isDisabled
-              ? props.theme.iconButton.color
-              : props.color || props.theme.iconButton.hoverColor};
+
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          svg {
+            path {
+              stroke: ${props.isDisabled
+                ? props.theme.iconButton.color
+                : props.color || props.theme.iconButton.hoverColor};
+            }
           }
         }
       }
@@ -72,12 +75,15 @@ const StyledOuter = styled.div<IconButtonProps>`
           fill: ${props.color || props.theme.iconButton.color};
         }
       }
-      &:hover {
-        svg {
-          path {
-            fill: ${props.isDisabled
-              ? props.theme.iconButton.color
-              : props.color || props.theme.iconButton.hoverColor};
+
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          svg {
+            path {
+              fill: ${props.isDisabled
+                ? props.theme.iconButton.color
+                : props.color || props.theme.iconButton.hoverColor};
+            }
           }
         }
       }

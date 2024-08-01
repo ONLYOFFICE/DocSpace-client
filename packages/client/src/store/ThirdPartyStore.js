@@ -51,6 +51,7 @@ import i18n from "../i18n";
 class ThirdPartyStore {
   capabilities = null;
   providers = [];
+  connectingStorages = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -69,6 +70,21 @@ class ThirdPartyStore {
   fetchThirdPartyProviders = async () => {
     const list = await api.files.getThirdPartyList();
     this.setThirdPartyProviders(list);
+  };
+
+  fetchConnectingStorages = async () => {
+    const res = await api.files.getConnectingStorages();
+
+    this.connectingStorages = res.map((storage) => ({
+      id: storage.name,
+      className: `storage_${storage.key}`,
+      providerKey: storage.key !== "WebDav" ? storage.key : storage.name,
+      isConnected: storage.connected,
+      isOauth: storage.oauth,
+      oauthHref: storage.redirectUrl,
+      category: storage.name,
+      requiredConnectionUrl: storage.requiredConnectionUrl,
+    }));
   };
 
   saveThirdParty = (

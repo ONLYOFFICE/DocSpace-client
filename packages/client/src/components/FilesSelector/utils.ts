@@ -29,6 +29,7 @@ import {
   TFolderSecurity,
 } from "@docspace/shared/api/files/types";
 import { TRoomSecurity } from "@docspace/shared/api/rooms/types";
+
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
 
@@ -41,6 +42,8 @@ export const getHeaderLabel = (
   isSelect?: boolean,
   filterParam?: string,
   isRestore?: boolean,
+  isFormRoom?: boolean,
+  isThirdParty?: boolean,
   isSelectFolder?: boolean,
 ) => {
   if (isRestore) return t("Common:RestoreTo");
@@ -50,6 +53,12 @@ export const getHeaderLabel = (
   if (isRestoreAll) return t("Common:Restore");
   if (isSelect) {
     return filterParam ? t("Common:SelectFile") : t("Common:SelectAction");
+  }
+
+  if (isFormRoom) {
+    return t("Common:SelectFromPortal", {
+      productName: t("Common:ProductName"),
+    });
   }
 
   if (filterParam === FilesSelectorFilterTypes.DOCX)
@@ -68,13 +77,14 @@ export const getAcceptButtonLabel = (
   isSelect?: boolean,
   filterParam?: string,
   isRestore?: boolean,
+  isFormRoom?: boolean,
   isSelectFolder?: boolean,
 ) => {
   if (isRestore) return t("Common:RestoreHere");
   if (isMove) return t("Common:MoveHere");
   if (isCopy && !isEditorDialog) return t("Common:CopyHere");
   if (isRestoreAll) return t("Common:RestoreHere");
-  if (isSelect || isSelectFolder) return t("Common:SelectAction");
+  if (isSelect || isFormRoom || isSelectFolder) return t("Common:SelectAction");
 
   if (filterParam === FilesSelectorFilterTypes.DOCX) return t("Common:Create");
   // if (filterParam === FilesSelectorFilterTypes.DOCXF) return t("Common:SubmitToGallery");

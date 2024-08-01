@@ -25,16 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useCallback, useRef } from "react";
-import { CustomScrollbarsVirtualList as CustomScrollbars } from "@docspace/shared/components/scrollbar";
+import { CustomScrollbarsVirtualListWithAutoFocus } from "@docspace/shared/components/scrollbar";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { VariableSizeList as List } from "react-window";
 import { inject, observer } from "mobx-react";
 import FileRow from "./FileRow";
 import { isDesktop } from "@docspace/shared/utils";
-
-const CustomScrollbarsVirtualList = React.forwardRef((props, ref) => (
-  <CustomScrollbars {...props} forwardedRef={ref} />
-));
 
 const mobileRowHeight = 48;
 const desktopRowHeight = 48;
@@ -92,7 +88,7 @@ const FileList = ({ uploadDataFiles }) => {
           itemSize={getSize}
           itemCount={uploadDataFiles.length}
           itemData={uploadDataFiles}
-          outerElementType={CustomScrollbarsVirtualList}
+          outerElementType={CustomScrollbarsVirtualListWithAutoFocus}
         >
           {renderRow}
         </List>

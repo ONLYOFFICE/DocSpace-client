@@ -72,27 +72,41 @@ export const onSDKRequestHistoryClose = () => {
   document.location.reload();
 };
 
-export const onSDKRequestEditRights = async (fileInfo?: TFile) => {
+export const onSDKRequestEditRights = async (
+  fileInfo?: TFile,
+  documentType?: string,
+) => {
   console.log("ONLYOFFICE Document Editor requests editing rights");
+
   const url = window.location.href;
+  const isPDF = documentType === "pdf";
 
-  const index = url.indexOf("&action=view");
+  let newURL = new URL(url);
 
-  if (index) {
-    let convertUrl = url.substring(0, index);
-
-    if (
-      fileInfo?.viewAccessibility?.MustConvert &&
-      fileInfo?.security?.Convert
-    ) {
-      const newUrl = await convertDocumentUrl(fileInfo.id);
-      if (newUrl) {
-        convertUrl = newUrl.webUrl;
+  if (
+    !isPDF &&
+    fileInfo?.viewAccessibility?.MustConvert &&
+    fileInfo?.security?.Convert
+  ) {
+    try {
+      const response = await convertDocumentUrl(fileInfo.id);
+      if (response && response.webUrl) {
+        newURL = new URL(response.webUrl);
+      } else {
+        throw new Error("Invalid response data");
       }
+    } catch (error) {
+      console.error("Error converting document", { error });
+      return;
     }
-    history.pushState({}, "", convertUrl);
-    document.location.reload();
+  } else {
+    if (newURL.searchParams.has("action")) newURL.searchParams.delete("action");
+
+    newURL.searchParams.append("action", "edit");
   }
+
+  history.pushState({}, "", newURL.toString());
+  document.location.reload();
 };
 
 export type TRenameEvent = {
@@ -106,3 +120,5 @@ export const onSDKRequestRename = async (
   const title = (event as TRenameEvent).data;
   await updateFile(id, title);
 };
+
+export const onOutdatedVersion = () => window.location.reload();

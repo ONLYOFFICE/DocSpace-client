@@ -41,30 +41,19 @@ import { Button } from "@docspace/shared/components/button";
 import { tablet } from "@docspace/shared/utils";
 
 const StyledFileRow = styled(Row)`
-  width: calc(100% - 16px);
+  width: 100%;
   box-sizing: border-box;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          padding-right: 16px;
-        `
-      : css`
-          padding-left: 16px;
-        `}
-  max-width: 484px;
 
   .row_context-menu-wrapper {
     width: auto;
     display: none;
   }
-  ::after {
-    max-width: 468px;
-    width: calc(100% - 16px);
-  }
 
   ${!isMobile && "min-height: 48px;"}
 
   height: 100%;
+
+  padding-inline-end: 16px;
 
   .styled-element,
   .row_content {
@@ -107,14 +96,8 @@ const StyledFileRow = styled(Row)`
   .password-input {
     position: absolute;
     top: 48px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            right: 16px;
-          `
-        : css`
-            left: 16px;
-          `}
+    left: 0px;
+    right: 0px;
     max-width: 470px;
     width: calc(100% - 16px);
     display: flex;
@@ -316,7 +299,6 @@ class FileRow extends Component {
       isMedia,
       ext,
       name,
-      isPersonal,
       isMediaActive,
       downloadInCurrentTab,
       isPlugin,
@@ -334,6 +316,11 @@ class FileRow extends Component {
     );
 
     const onMediaClick = () => this.onMediaClick(item.fileId);
+
+    const onFileClick = (url) => {
+      if (!url) return;
+      window.open(url, downloadInCurrentTab ? "_self" : "_blank");
+    };
 
     return (
       <>
@@ -364,11 +351,14 @@ class FileRow extends Component {
               ) : (
                 <div className="upload-panel_file-name">
                   <Link
+                    onClick={() =>
+                      onFileClick(item.fileInfo ? item.fileInfo.webUrl : "")
+                    }
                     fontWeight="600"
                     color={item.error && "#A3A9AE"}
                     truncate
-                    href={item.fileInfo ? item.fileInfo.webUrl : ""}
-                    target={downloadInCurrentTab ? "_self" : "_blank"}
+                    // href={item.fileInfo ? item.fileInfo.webUrl : ""}
+                    // target={downloadInCurrentTab ? "_self" : "_blank"}
                   >
                     {name}
                     {fileExtension}
@@ -387,7 +377,6 @@ class FileRow extends Component {
             {item.fileId && !item.error ? (
               <ActionsUploadedFile
                 item={item}
-                isPersonal={isPersonal}
                 onCancelCurrentUpload={this.onCancelCurrentUpload}
               />
             ) : item.error || (!item.fileId && uploaded) ? (
@@ -490,8 +479,9 @@ export default inject(
 
     name = splitted.join(".");
 
-    const { personal, theme } = settingsStore;
-    const { canViewedDocs, getIconSrc, isArchive } = filesSettingsStore;
+    const { theme } = settingsStore;
+    const { canViewedDocs, getIconSrc, isArchive, openOnNewPage } =
+      filesSettingsStore;
     const {
       uploaded,
       cancelCurrentUpload,
@@ -515,12 +505,9 @@ export default inject(
     const fileIcon = getIconSrc(ext, 32);
 
     const downloadInCurrentTab =
-      window.DocSpaceConfig?.editor?.openOnNewPage === false ||
-      isArchive(ext) ||
-      !canViewedDocs(ext);
+      !openOnNewPage || isArchive(ext) || !canViewedDocs(ext);
 
     return {
-      isPersonal: personal,
       theme,
       uploaded,
       isMedia: !!isMedia,

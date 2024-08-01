@@ -57,16 +57,19 @@ const StyledTextInput = styled(Input).attrs((props) => ({
     props.isDisabled
       ? props.theme.input.disableBackgroundColor
       : props.theme.input.backgroundColor};
+
+  -webkit-background-clip: text !important;
+
   -webkit-text-fill-color: ${(props) =>
     props.isDisabled
       ? props.theme.input.disableColor
-      : props?.value?.length > 0
+      : props?.value
         ? props.theme.text.color
         : props.theme.textInput.placeholderColor} !important;
   caret-color: ${(props) =>
     props.isDisabled ? props.theme.input.disableColor : props.theme.text.color};
-  -webkit-background-clip: text !important;
-  box-shadow: inset 0 0 20px 20px
+
+  box-shadow: inset 0 0 0 30px
     ${(props) =>
       props.isDisabled
         ? props.theme.input.disableBackgroundColor

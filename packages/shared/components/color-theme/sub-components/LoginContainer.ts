@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+"use client";
+
 import styled from "styled-components";
 import { tablet, mobile } from "../../../utils";
 import { Base } from "../../../themes";
@@ -268,6 +270,7 @@ const LoginContainer = styled.div<{
     align-items: center;
     justify-content: center;
     width: 100%;
+    max-width: 386px;
     height: ${(props) => (props.type === "invitation" ? "26.56px" : "44px")};
     padding-bottom: ${(props) =>
       props.type === "invitation" ? "16px" : "40px"};

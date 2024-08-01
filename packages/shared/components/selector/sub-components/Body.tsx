@@ -25,22 +25,32 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-
 import InfiniteLoader from "react-window-infinite-loader";
 import { FixedSizeList as List } from "react-window";
 
-import { CustomScrollbarsVirtualList, Scrollbar } from "../../scrollbar";
+import { RoomsType } from "../../../enums";
+import { Nullable } from "../../../types";
+
+import { Scrollbar } from "../../scrollbar";
 import { Text } from "../../text";
 
+import { SearchContext, SearchValueContext } from "../contexts/Search";
+import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
+import { TabsContext } from "../contexts/Tabs";
+import { SelectAllContext } from "../contexts/SelectAll";
+import { InfoBarContext } from "../contexts/InfoBar";
+
+import { StyledBody, StyledTabs } from "../Selector.styled";
+import { BodyProps } from "../Selector.types";
+
+import { InfoBar } from "./InfoBar";
 import { Search } from "./Search";
 import { SelectAll } from "./SelectAll";
 import { EmptyScreen } from "./EmptyScreen";
 import { BreadCrumbs } from "./BreadCrumbs";
-
-import { StyledBody, StyledTabs } from "../Selector.styled";
-import { BodyProps } from "../Selector.types";
 import { Item } from "./Item";
 import { Info } from "./Info";
+import { VirtualScroll } from "./VirtualScroll";
 
 const CONTAINER_PADDING = 16;
 const HEADER_HEIGHT = 54;
@@ -55,59 +65,56 @@ const FOOTER_WITH_CHECKBOX_HEIGHT = 181;
 
 const Body = ({
   footerVisible,
-  isSearch,
-  isAllIndeterminate,
-  isAllChecked,
-  searchPlaceholder,
-  setIsSearch,
-  searchValue,
-  onSearch,
-  onClearSearch,
+
   items,
   onSelect,
   isMultiSelect,
-  withSelectAll,
-  selectAllLabel,
-  selectAllIcon,
-  onSelectAll,
-  emptyScreenImage,
-  emptyScreenHeader,
-  emptyScreenDescription,
-  searchEmptyScreenImage,
-  searchEmptyScreenHeader,
-  searchEmptyScreenDescription,
+
   loadMoreItems,
   hasNextPage,
   totalItems,
   renderCustomItem,
   isLoading,
-  searchLoader,
+
   rowLoader,
-  withBreadCrumbs,
-  breadCrumbs,
-  onSelectBreadCrumb,
-  breadCrumbsLoader,
-  withSearch,
-  isBreadCrumbsLoading,
-  isSearchLoading,
+
   withFooterInput,
   withFooterCheckbox,
   descriptionText,
   withHeader,
 
-  withTabs,
-  tabsData,
-  activeTabId,
-
   withInfo,
   infoText,
+  setInputItemVisible,
+  inputItemVisible,
 }: BodyProps) => {
+  const { withSearch } = React.useContext(SearchContext);
+  const isSearch = React.useContext(SearchValueContext);
+  const { withInfoBar } = React.useContext(InfoBarContext);
+
+  const { withBreadCrumbs } = React.useContext(BreadCrumbsContext);
+
+  const { withTabs, tabsData, activeTabId } = React.useContext(TabsContext);
+
+  const { withSelectAll } = React.useContext(SelectAllContext);
+
   const [bodyHeight, setBodyHeight] = React.useState(0);
+  const [savedInputValue, setSavedInputValue] =
+    React.useState<Nullable<string>>(null);
 
   const bodyRef = React.useRef<HTMLDivElement>(null);
   const listOptionsRef = React.useRef<null | InfiniteLoader>(null);
 
-  const itemsCount = hasNextPage ? items.length + 1 : items.length;
+  const isEmptyInput =
+    items.length === 2 && items[1].isInputItem && items[0].isCreateNewItem;
+
+  const itemsCount = hasNextPage
+    ? items.length + 1
+    : items.length === 1 && items[0].isCreateNewItem
+      ? 0
+      : isEmptyInput
+        ? 1
+        : items.length;
 
   const resetCache = React.useCallback(() => {
     if (listOptionsRef && listOptionsRef.current) {
@@ -128,6 +135,16 @@ const Body = ({
     [hasNextPage, itemsCount],
   );
 
+  const onLoadMoreItems = React.useCallback(
+    (startIndex: number) => {
+      // first page loads in selector's useEffect
+      if (startIndex === 1) return;
+
+      loadMoreItems(startIndex);
+    },
+    [loadMoreItems],
+  );
+
   React.useEffect(() => {
     window.addEventListener("resize", onBodyResize);
 
@@ -144,9 +161,22 @@ const Body = ({
     resetCache();
   }, [resetCache, hasNextPage]);
 
+  // scroll to top after changing tab
+  React.useEffect(() => {
+    if (!withTabs) return;
+    const scrollElement = document.querySelector(".selector-body-scroll");
+
+    if (scrollElement) {
+      scrollElement.scrollTo(0, 0);
+    }
+  }, [withTabs, activeTabId]);
+
   let listHeight = bodyHeight - CONTAINER_PADDING;
 
-  if (withSearch || isSearch || itemsCount > 0) listHeight -= SEARCH_HEIGHT;
+  const showSearch = withSearch && (isSearch || itemsCount > 0);
+  const showSelectAll = (isMultiSelect && withSelectAll && !isSearch) || false;
+
+  if (showSearch) listHeight -= SEARCH_HEIGHT;
   if (withTabs) listHeight -= TABS_HEIGHT;
   if (withInfo) {
     const infoEl = document.getElementById("selector-info-text");
@@ -156,12 +186,24 @@ const Body = ({
     }
   }
 
+  if (withInfoBar) {
+    const infoEl = document.querySelector(".selector_info-bar");
+    if (infoEl) {
+      const height = infoEl.getClientRects()[0].height + CONTAINER_PADDING;
+      listHeight -= height;
+    }
+  }
+
   if (withBreadCrumbs) listHeight -= BREAD_CRUMBS_HEIGHT;
 
-  if (isMultiSelect && withSelectAll && !isSearch)
-    listHeight -= SELECT_ALL_HEIGHT;
+  if (showSelectAll) listHeight -= SELECT_ALL_HEIGHT;
 
   if (descriptionText) listHeight -= BODY_DESCRIPTION_TEXT_HEIGHT;
+
+  const isShareFormEmpty =
+    itemsCount === 0 &&
+    Boolean(items?.[0]?.isRoomsOnly) &&
+    Boolean(items?.[0]?.createDefineRoomType === RoomsType.FormRoom);
 
   return (
     <StyledBody
@@ -179,37 +221,18 @@ const Body = ({
       withHeader={withHeader}
       withTabs={withTabs}
     >
-      {withBreadCrumbs ? (
-        isBreadCrumbsLoading ? (
-          breadCrumbsLoader
-        ) : (
-          <BreadCrumbs
-            breadCrumbs={breadCrumbs}
-            onSelectBreadCrumb={onSelectBreadCrumb}
-            isLoading={isLoading}
-          />
-        )
-      ) : null}
+      <InfoBar visible={itemsCount !== 0} />
+      <BreadCrumbs visible={!isShareFormEmpty} />
 
       {withTabs && tabsData && (
         <StyledTabs
-          startSelect={0}
-          data={tabsData}
-          forsedActiveItemId={activeTabId}
+          items={tabsData}
+          selectedItemId={activeTabId}
+          className="selector_body_tabs"
         />
       )}
 
-      {isSearchLoading || isBreadCrumbsLoading ? (
-        searchLoader
-      ) : withSearch && (itemsCount > 0 || isSearch) ? (
-        <Search
-          placeholder={searchPlaceholder}
-          value={searchValue}
-          onSearch={onSearch}
-          onClearSearch={onClearSearch}
-          setIsSearch={setIsSearch}
-        />
-      ) : null}
+      <Search isSearch={itemsCount > 0 || isSearch} />
 
       {withInfo && !isLoading && (
         <Info withInfo={withInfo} infoText={infoText} />
@@ -220,36 +243,27 @@ const Body = ({
       ) : itemsCount === 0 ? (
         <EmptyScreen
           withSearch={isSearch}
-          image={emptyScreenImage}
-          header={emptyScreenHeader}
-          description={emptyScreenDescription}
-          searchImage={searchEmptyScreenImage}
-          searchHeader={searchEmptyScreenHeader}
-          searchDescription={searchEmptyScreenDescription}
+          items={items}
+          inputItemVisible={inputItemVisible}
         />
       ) : (
         <>
           {!!descriptionText && (
             <Text className="body-description-text">{descriptionText}</Text>
           )}
-          {isMultiSelect && withSelectAll && !isSearch && (
-            <SelectAll
-              label={selectAllLabel}
-              icon={selectAllIcon}
-              isChecked={isAllChecked || false}
-              isIndeterminate={isAllIndeterminate || false}
-              onSelectAll={onSelectAll}
-              isLoading={isLoading}
-              rowLoader={rowLoader}
-            />
-          )}
+
+          <SelectAll
+            show={showSelectAll}
+            isLoading={isLoading}
+            rowLoader={rowLoader}
+          />
 
           {bodyHeight && (
             <InfiniteLoader
               ref={listOptionsRef}
               isItemLoaded={isItemLoaded}
               itemCount={totalItems}
-              loadMoreItems={loadMoreItems}
+              loadMoreItems={onLoadMoreItems}
             >
               {({ onItemsRendered, ref }) => (
                 <List
@@ -258,17 +272,21 @@ const Body = ({
                   width="100%"
                   itemCount={itemsCount}
                   itemData={{
-                    items,
+                    items: isEmptyInput ? [items[1]] : items,
                     onSelect,
                     isMultiSelect: isMultiSelect || false,
                     rowLoader,
                     isItemLoaded,
                     renderCustomItem,
+                    setInputItemVisible,
+                    inputItemVisible,
+                    savedInputValue,
+                    setSavedInputValue,
                   }}
                   itemSize={48}
                   onItemsRendered={onItemsRendered}
                   ref={ref}
-                  outerElementType={CustomScrollbarsVirtualList}
+                  outerElementType={VirtualScroll}
                 >
                   {Item}
                 </List>

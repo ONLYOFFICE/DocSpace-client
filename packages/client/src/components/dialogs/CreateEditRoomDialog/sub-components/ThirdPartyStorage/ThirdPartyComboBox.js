@@ -27,7 +27,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 
-import { isMobile as isMobileUtil, DomHelpers } from "@docspace/shared/utils";
 import { isMobileOnly, isMobile } from "react-device-detect";
 
 import { Button } from "@docspace/shared/components/button";
@@ -35,6 +34,8 @@ import { connectedCloudsTypeTitleTranslation as ProviderKeyTranslation } from "@
 import { Base } from "@docspace/shared/themes";
 import { toastr } from "@docspace/shared/components/toast";
 import { ComboBox } from "@docspace/shared/components/combobox";
+
+import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
 
 const StyledStorageLocation = styled.div`
   display: flex;
@@ -58,9 +59,48 @@ const StyledStorageLocation = styled.div`
     flex-direction: row;
     gap: 8px;
   }
+
+  .storage-unavailable {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+
+    .drop-down-item_icon {
+      svg {
+        path[fill] {
+          fill: ${(props) => props.theme.dropDownItem.disableColor};
+        }
+
+        path[stroke] {
+          stroke: ${(props) => props.theme.dropDownItem.disableColor};
+        }
+
+        circle[fill] {
+          fill: ${(props) => props.theme.dropDownItem.disableColor};
+        }
+
+        rect[fill] {
+          fill: ${(props) => props.theme.dropDownItem.disableColor};
+        }
+      }
+    }
+
+    color: ${(props) => props.theme.dropDownItem.disableColor};
+  }
 `;
 
 StyledStorageLocation.defaultProps = { theme: Base };
+
+const services = {
+  GoogleDrive: "google",
+  Box: "box",
+  Dropbox: "dropbox",
+  OneDrive: "skydrive",
+  Nextcloud: "nextcloud",
+  kDrive: "kdrive",
+  ownCloud: "owncloud",
+  WebDav: "webdav",
+};
 
 const ThirdPartyComboBox = ({
   t,
@@ -83,15 +123,30 @@ const ThirdPartyComboBox = ({
   setIsOauthWindowOpen,
 
   isDisabled,
+  setIsScrollLocked,
 }) => {
+  const deafultSelectedItem = {
+    key: "length",
+    label:
+      storageLocation?.provider?.title ||
+      t("ThirdPartyStorageComboBoxPlaceholder"),
+  };
+
+  const [selectedItem, setSelectedItem] = useState(deafultSelectedItem);
+
   const thirdparties = connectItems.map((item) => ({
     ...item,
-    title: item.category
-      ? item.category
-      : ProviderKeyTranslation(item.providerKey, t),
+    title: ProviderKeyTranslation(item.providerKey, t),
   }));
 
-  const setStorageLocaiton = (thirparty) => {
+  const setStorageLocaiton = (thirparty, isConnected) => {
+    if (!isConnected) {
+      window.open(
+        `/portal-settings/integration/third-party-services?service=${services[thirparty.id]}`,
+        "_blank",
+      );
+      return;
+    }
     onChangeProvider(thirparty);
   };
 
@@ -152,19 +207,26 @@ const ThirdPartyComboBox = ({
     setSaveThirdpartyResponse(null);
   }, [saveThirdpartyResponse]);
 
-  const options = thirdparties.map((item) => ({
-    label: item.title,
-    title: item.title,
-    key: item?.category ?? item.id,
-  }));
+  const options = thirdparties
+    .sort((storage) => (storage.isConnected ? -1 : 1))
+    .map((item) => ({
+      label:
+        item.title + (item.isConnected ? "" : ` (${t("ActivationRequired")})`),
+      title: item.title,
+      key: item.id,
+      icon: item.isConnected ? undefined : ExternalLinkReactSvgUrl,
+      className: item.isConnected ? "" : "storage-unavailable",
+    }));
 
   const onSelect = (elem) => {
     const thirdparty = thirdparties.find((t) => {
-      if (t.category) return elem.key === t.category;
-      else return elem.key === t.id;
+      return elem.key === t.id;
     });
 
-    thirdparty && setStorageLocaiton(thirdparty);
+    thirdparty && setStorageLocaiton(thirdparty, thirdparty.isConnected);
+    thirdparty.isConnected
+      ? setSelectedItem(elem)
+      : setSelectedItem({ ...deafultSelectedItem });
   };
 
   return (
@@ -172,12 +234,7 @@ const ThirdPartyComboBox = ({
       <div className="set_room_params-thirdparty">
         <ComboBox
           className="thirdparty-combobox"
-          selectedOption={{
-            key: "length",
-            label:
-              storageLocation?.provider?.title ||
-              t("ThirdPartyStorageComboBoxPlaceholder"),
-          }}
+          selectedOption={selectedItem}
           options={options}
           scaled
           withBackdrop={isMobile}
@@ -187,8 +244,8 @@ const ThirdPartyComboBox = ({
           directionY="both"
           displaySelectedOption
           noBorder={false}
-          fixedDirection
-          isDefaultMode={false}
+          // fixedDirection
+          isDefaultMode={true}
           hideMobileView={false}
           forceCloseClickOutside
           scaledOptions

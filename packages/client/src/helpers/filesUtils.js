@@ -67,48 +67,28 @@ export const getFileTypeName = (fileType) => {
   }
 };
 
-export const getDefaultRoomName = (room, t) => {
+export const getRoomTypeName = (room, t) => {
   switch (room) {
     case RoomsType.CustomRoom:
-      return t("Files:CustomRooms");
+      return t("Common:CustomRooms");
 
     case RoomsType.FillingFormsRoom:
-      return t("Files:FillingFormRooms");
+      return t("Common:FillingFormRooms");
 
     case RoomsType.EditingRoom:
-      return t("Files:CollaborationRooms");
+      return t("Common:CollaborationRooms");
 
     case RoomsType.ReviewRoom:
       return t("Common:Review");
 
     case RoomsType.ReadOnlyRoom:
-      return t("Files:ViewOnlyRooms");
+      return t("Common:ViewOnlyRooms");
 
     case RoomsType.PublicRoom:
-      return t("Files:PublicRoom");
+      return t("Common:PublicRoom");
     case RoomsType.FormRoom:
-      return t("Files:FormRoom");
+      return t("Common:FormRoom");
   }
-};
-
-export const setDocumentTitle = (subTitle = null) => {
-  const { isAuthenticated, product: currentModule } = authStore;
-  const { organizationName } = settingsStore;
-
-  let title;
-  if (subTitle) {
-    if (isAuthenticated && currentModule) {
-      title = subTitle + " - " + currentModule.title;
-    } else {
-      title = subTitle + " - " + organizationName;
-    }
-  } else if (currentModule && organizationName) {
-    title = currentModule.title + " - " + organizationName;
-  } else {
-    title = organizationName;
-  }
-
-  document.title = title;
 };
 
 export const getDefaultFileName = (format) => {
@@ -119,7 +99,7 @@ export const getDefaultFileName = (format) => {
       return i18n.t("Common:NewSpreadsheet");
     case "pptx":
       return i18n.t("Common:NewPresentation");
-    case "docxf":
+    case "pdf":
       return i18n.t("Common:NewMasterForm");
     default:
       return i18n.t("Common:NewFolder");

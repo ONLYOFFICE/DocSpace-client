@@ -24,17 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { inject, observer } from "mobx-react";
 import { Text } from "@docspace/shared/components/text";
 import { NoUserSelect, tablet, getLogoUrl } from "@docspace/shared/utils";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import { ReactSVG } from "react-svg";
 
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import logoPersonalAboutUrl from "PUBLIC_DIR/images/logo_personal_about.svg?url";
 
 const StyledAboutBody = styled.div`
   width: 100%;
@@ -103,13 +100,8 @@ const StyledAboutBody = styled.div`
 `;
 
 const AboutContent = (props) => {
-  const {
-    personal,
-    buildVersionInfo,
-    theme,
-    companyInfoSettingsData,
-    previewData,
-  } = props;
+  const { buildVersionInfo, theme, companyInfoSettingsData, previewData } =
+    props;
   const { t } = useTranslation("About");
   const license = "AGPL-3.0";
   const linkRepo = "https://github.com/ONLYOFFICE/DocSpace";
@@ -139,20 +131,12 @@ const AboutContent = (props) => {
     companyInfoSettingsData && (
       <StyledAboutBody>
         <div className="avatar">
-          {personal ? (
-            <ReactSVG
-              src={logoPersonalAboutUrl}
-              className="logo-theme no-select"
-            />
-          ) : (
-            <img
-              src={logo}
-              alt="Logo"
-              className="logo-docspace-theme no-select"
-            />
-          )}
+          <img
+            src={logo}
+            alt="Logo"
+            className="logo-docspace-theme no-select"
+          />
         </div>
-
         <div className="row">
           <Text className="row-el" fontSize="13px">
             {t("DocumentManagement")}:
@@ -168,7 +152,7 @@ const AboutContent = (props) => {
             target="_blank"
             enableUserSelect
           >
-            &nbsp;ONLYOFFICE DocSpace&nbsp;
+            &nbsp;{t("Common:OrganizationName")} {t("Common:ProductName")}&nbsp;
           </ColorTheme>
 
           <Text
@@ -199,7 +183,8 @@ const AboutContent = (props) => {
             target="_blank"
             enableUserSelect
           >
-            &nbsp;ONLYOFFICE Docs&nbsp;
+            &nbsp;{t("Common:OrganizationName")}{" "}
+            {t("Common:ProductEditorsName")}&nbsp;
           </ColorTheme>
           <Text className="row-el select-el" fontSize="13px" fontWeight="600">
             v.

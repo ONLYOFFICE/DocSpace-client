@@ -50,7 +50,7 @@ import {
   RegisterContainer,
   StyledCreateUserContent,
 } from "./StyledCreateUser";
-import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
+import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import GreetingUserContainer from "./GreetingUserContainer";
 
 const ActivateUserForm = (props) => {
@@ -165,7 +165,7 @@ const ActivateUserForm = (props) => {
       <StyledCreateUserContent>
         <StyledHeader>
           <GreetingContainer>
-            <DocspaceLogo className="docspace-logo" />
+            <PortalLogo className="portal-logo" />
           </GreetingContainer>
         </StyledHeader>
 
@@ -225,9 +225,7 @@ const ActivateUserForm = (props) => {
                 isVertical={true}
                 labelVisible={false}
                 hasError={isPasswordErrorShow && !passwordValid}
-                errorMessage={`${t(
-                  "Common:PasswordLimitMessage",
-                )}: ${getPasswordErrorMessage(t, settings)}`}
+                errorMessage={t("Common:IncorrectPassword")}
               >
                 <PasswordInput
                   className="confirm-input"
@@ -257,6 +255,7 @@ const ActivateUserForm = (props) => {
                     "Common:PasswordLimitSpecialSymbols",
                   )}`}
                   generatePasswordTitle={t("Wizard:GeneratePassword")}
+                  tooltipAllowedCharacters={`${t("Common:AllowedCharacters")}: ${ALLOWED_PASSWORD_CHARACTERS}`}
                   // If need copy credentials use t("EmailAndPasswordCopiedToClipboard")
                 />
               </FieldContainer>

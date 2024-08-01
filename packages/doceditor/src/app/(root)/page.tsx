@@ -25,49 +25,57 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
+import { headers } from "next/headers";
 
-import AppLoader from "@docspace/shared/components/app-loader";
+import { getSelectorsByUserAgent } from "react-device-detect";
 
 import { getData } from "@/utils/actions";
+import { RootPageProps } from "@/types";
+import Root from "@/components/Root";
 
-const Root = dynamic(() => import("@/components/Root"), {
-  ssr: false,
-  loading: () => <AppLoader />,
-});
-
-export const metadata: Metadata = {
-  title: "Onlyoffice DocEditor page",
-
-  description: "",
+const initialSearchParams: RootPageProps["searchParams"] = {
+  fileId: undefined,
+  fileid: undefined,
+  version: undefined,
+  doc: undefined,
+  action: undefined,
+  share: undefined,
+  editorType: undefined,
 };
 
-async function Page({
-  searchParams,
-}: {
-  searchParams?: { [key: string]: string };
-}) {
-  const { fileId, fileid, version, doc, action, share, editorType } =
-    searchParams || {
-      fileId: undefined,
-      fileid: undefined,
-      version: undefined,
-      doc: undefined,
-      action: undefined,
-      share: undefined,
-      editorType: undefined,
-    };
+async function Page({ searchParams }: RootPageProps) {
+  const { fileId, fileid, version, doc, action, share, editorType, error } =
+    searchParams ?? initialSearchParams;
+
+  const hdrs = headers();
+
+  let type = editorType;
+
+  const ua = hdrs.get("user-agent");
+  if (ua && !type) {
+    const { isMobile } = getSelectorsByUserAgent(ua);
+
+    if (isMobile) type = "mobile";
+  }
+
+  const startDate = new Date();
 
   const data = await getData(
     fileId ?? fileid ?? "",
     version,
     doc,
-    action === "view",
+    action,
     share,
-    editorType,
+    type,
   );
 
-  return <Root {...data} />;
+  const timer = new Date().getTime() - startDate.getTime();
+
+  if (data.error?.status === "not-found" && error) {
+    data.error.message = error;
+  }
+
+  return <Root {...data} timer={timer} />;
 }
 
 export default Page;

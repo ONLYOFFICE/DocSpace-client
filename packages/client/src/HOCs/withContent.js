@@ -175,8 +175,7 @@ export default function withContent(WrappedContent) {
       const { isRecycleBinFolder, isPrivacyFolder, isArchiveFolder } =
         treeFoldersStore;
 
-      const { culture, personal, folderFormValidation, isDesktopClient } =
-        settingsStore;
+      const { culture, folderFormValidation, isDesktopClient } = settingsStore;
 
       const {
         setConvertPasswordDialogVisible,
@@ -217,7 +216,6 @@ export default function withContent(WrappedContent) {
         titleWithoutExt,
 
         setCreatedItem,
-        personal,
         isPublicRoom,
         publicRoomKey,
       };

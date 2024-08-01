@@ -36,11 +36,9 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { StyledTitle } from "../../../styles/common";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import RoomsContextBtn from "./context-btn";
-import {
-  FolderType,
-  RoomsType,
-  ShareAccessRights,
-} from "@docspace/shared/enums";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
+import Search from "../../Search";
 
 const RoomsItemHeader = ({
   t,
@@ -50,13 +48,14 @@ const RoomsItemHeader = ({
   isGracePeriod,
   setInvitePanelOptions,
   setInviteUsersWarningDialogVisible,
-  isPublicRoomType,
   roomsView,
   setSelection,
   setBufferSelection,
   isArchive,
   hasLinks,
+  showSearchBlock,
   setShowSearchBlock,
+  roomType,
 }) => {
   const itemTitleRef = useRef();
 
@@ -69,6 +68,7 @@ const RoomsItemHeader = ({
   const canInviteUserInRoomAbility = security?.EditAccess;
   const showPlanetIcon =
     (selection.roomType === RoomsType.PublicRoom ||
+      selection.roomType === RoomsType.FormRoom ||
       selection.roomType === RoomsType.CustomRoom) &&
     hasLinks;
 
@@ -94,9 +94,7 @@ const RoomsItemHeader = ({
       visible: true,
       roomId: parentRoomId,
       hideSelector: false,
-      defaultAccess: isPublicRoomType
-        ? ShareAccessRights.RoomManager
-        : ShareAccessRights.ReadOnly,
+      defaultAccess: getDefaultAccessUser(roomType),
     });
   };
 
@@ -104,6 +102,8 @@ const RoomsItemHeader = ({
 
   return (
     <StyledTitle ref={itemTitleRef}>
+      {isRoomMembersPanel && showSearchBlock && <Search />}
+
       <div className="item-icon">
         <RoomIcon
           color={selection.logo?.color}
@@ -116,7 +116,9 @@ const RoomsItemHeader = ({
         />
       </div>
 
-      <Text className="text">{selection.title}</Text>
+      <Text className="text" title={selection.title}>
+        {selection.title}
+      </Text>
 
       <div className="info_title-icons">
         {isRoomMembersPanel && (
@@ -165,6 +167,7 @@ export default inject(
       infoPanelSelection,
       roomsView,
       setIsMobileHidden,
+      showSearchBlock,
       setShowSearchBlock,
     } = infoPanelStore;
     const { externalLinks } = publicRoomStore;
@@ -172,11 +175,16 @@ export default inject(
     const selection = infoPanelSelection.length > 1 ? null : infoPanelSelection;
     const isArchive = selection?.rootFolderType === FolderType.Archive;
 
+    const roomType =
+      selectedFolderStore.roomType ??
+      infoPanelStore.infoPanelSelection?.roomType;
+
     return {
       selection,
       roomsView,
       infoPanelSelection,
       setIsMobileHidden,
+      showSearchBlock,
       setShowSearchBlock,
 
       isGracePeriod: currentTariffStatusStore.isGracePeriod,
@@ -185,14 +193,11 @@ export default inject(
       setInviteUsersWarningDialogVisible:
         dialogsStore.setInviteUsersWarningDialogVisible,
 
-      isPublicRoomType:
-        (selectedFolderStore.roomType ??
-          infoPanelStore.infoPanelSelection?.roomType) === RoomsType.PublicRoom,
-
       setSelection: filesStore.setSelection,
       setBufferSelection: filesStore.setBufferSelection,
       isArchive,
       hasLinks: externalLinks.length,
+      roomType,
     };
   },
 )(

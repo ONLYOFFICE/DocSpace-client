@@ -144,5 +144,5 @@ export interface ArticleProps {
   standalone?: boolean;
   currentTariffPlanTitle?: string;
   trialDaysLeft?: number;
-  paymentDate?: Date;
+  organizationName: string;
 }

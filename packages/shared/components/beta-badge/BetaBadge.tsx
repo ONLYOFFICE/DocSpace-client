@@ -47,7 +47,9 @@ const BetaBadge = ({
 
   const tooltipDescription = (
     <>
-      {t("Common:BetaBadgeDescription")}{" "}
+      {t("Common:BetaBadgeDescription", {
+        productName: t("Common:ProductName"),
+      })}
       {!withOutFeedbackLink && (
         <Trans
           t={t}

@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 
 const StyledSsoPage = styled.div`
+  max-width: 100%;
   box-sizing: border-box;
   outline: none;
 
@@ -37,31 +37,6 @@ const StyledSsoPage = styled.div`
     color: ${(props) => props.theme.client.settings.common.descriptionColor};
     margin-bottom: 20px;
     line-height: 20px;
-  }
-
-  .toggle {
-    position: static;
-    margin-top: 1px;
-  }
-
-  .toggle-caption {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    .toggle-caption_title {
-      display: flex;
-      .toggle-caption_title_badge {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-right: 4px;
-              `
-            : css`
-                margin-left: 4px;
-              `}
-        cursor: auto;
-      }
-    }
   }
 
   .field-input {
@@ -74,7 +49,6 @@ const StyledSsoPage = styled.div`
   .field-label-icon {
     align-items: center;
     margin-bottom: 4px;
-    max-width: 350px;
   }
 
   .field-label {
@@ -172,8 +146,6 @@ const StyledSsoPage = styled.div`
             `}
     }
   }
-
-  ${(props) => !props.isSettingPaid && UnavailableStyles}
 `;
 
 export default StyledSsoPage;

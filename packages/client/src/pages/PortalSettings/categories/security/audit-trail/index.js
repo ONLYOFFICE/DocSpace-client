@@ -88,7 +88,9 @@ const AuditTrail = (props) => {
       {securityLifetime && securityLifetime.auditTrailLifeTime && (
         <HistoryMainContent
           t={t}
-          subHeader={t("AuditSubheader")}
+          subHeader={t("AuditSubheader", {
+            productName: t("Common:ProductName"),
+          })}
           latestText={t("LoginLatestText")}
           storagePeriod={t("StoragePeriod")}
           saveButtonLabel={t("Common:SaveButton")}

@@ -96,7 +96,7 @@ const StyledRowContainer = styled(RowContainer)`
   }
 
   .clear-icon {
-    margin-right: 8px;
+    margin-inline-end: 8px;
   }
 
   .ec-desc {
@@ -129,7 +129,7 @@ const RowView = (props) => {
     sectionWidth,
     accountsData,
     typeOptions,
-    users,
+    filteredUsers,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
@@ -139,10 +139,10 @@ const RowView = (props) => {
 
   const isIndeterminate =
     checkedUsers.result.length > 0 &&
-    checkedUsers.result.length !== users.result.length;
+    checkedUsers.result.length !== filteredUsers.length;
 
   const toggleAll = (isChecked) =>
-    toggleAllAccounts(isChecked, users.result, checkedAccountType);
+    toggleAllAccounts(isChecked, filteredUsers, checkedAccountType);
 
   const onClearFilter = () => setSearchValue("");
 
@@ -169,7 +169,7 @@ const RowView = (props) => {
             withoutInfoPanelToggler
             withComboBox={false}
             isIndeterminate={isIndeterminate}
-            isChecked={checkedUsers.result.length === users.result.length}
+            isChecked={checkedUsers.result.length === filteredUsers.length}
             onChange={toggleAll}
           />
         </div>
@@ -224,20 +224,20 @@ const RowView = (props) => {
 
 export default inject(({ importAccountsStore }) => {
   const {
-    users,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
+    filteredUsers,
   } = importAccountsStore;
 
   return {
-    users,
     checkedUsers,
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
     setSearchValue,
+    filteredUsers,
   };
 })(observer(RowView));

@@ -43,10 +43,10 @@ const AccountsTable = ({
 }) => {
   const typeOptions = [
     {
-      key: UserTypes.DocSpaceAdmin,
-      label: t("Common:DocSpaceAdmin"),
+      key: UserTypes.PortalAdmin,
+      label: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
       onClick: () => {
-        changeGroupType(UserTypes.DocSpaceAdmin);
+        changeGroupType(UserTypes.PortalAdmin);
         toggleAllAccounts(false, [], checkedAccountType);
       },
     },

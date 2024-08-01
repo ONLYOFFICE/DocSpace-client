@@ -73,11 +73,16 @@ const StyledLinkRow = styled.div`
   gap: 12px;
   height: 100%;
   background: ${(props) => props.theme.backgroundColor};
-  cursor: pointer;
 
-  .icon-button_svg {
-    cursor: pointer;
-  }
+  ${(props) =>
+    !props.isArchiveFolder &&
+    css`
+      cursor: pointer;
+
+      .icon-button_svg {
+        cursor: pointer;
+      }
+    `};
 
   .create-link-icon {
     display: flex;
@@ -139,6 +144,16 @@ const StyledLinkRow = styled.div`
       }
     `}
   }
+`;
+
+const ROOMS_ITEM_HEADER_HEIGHT = "80px";
+
+export const StyledPublicRoomBarContainer = styled.div`
+  position: sticky;
+  top: ${ROOMS_ITEM_HEADER_HEIGHT};
+  background: ${(props) => props.theme.backgroundColor};
+  overflow: hidden;
+  z-index: 1;
 `;
 
 StyledLinkRow.defaultProps = { theme: Base };

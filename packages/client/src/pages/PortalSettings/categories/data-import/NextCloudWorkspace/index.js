@@ -27,6 +27,7 @@
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import { isMobile as isMobileBreakpoint } from "@docspace/shared/utils/device";
 import { isMobile } from "react-device-detect";
 import { useNavigate } from "react-router-dom";
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
@@ -63,10 +64,17 @@ const NextcloudWorkspace = (props) => {
     currentDeviceType,
     getMigrationStatus,
     setUsers,
+    filteredUsers,
   } = props;
   const [currentStep, setCurrentStep] = useState(1);
   const [shouldRender, setShouldRender] = useState(false);
-  const StepsData = getStepsData(t, currentStep, setCurrentStep);
+  const StepsData = getStepsData(
+    t,
+    currentStep,
+    setCurrentStep,
+    filteredUsers.length === 0,
+    t("Common:OrganizationName"),
+  );
   const navigate = useNavigate();
 
   useViewEffect({
@@ -125,7 +133,7 @@ const NextcloudWorkspace = (props) => {
     return clearCheckedAccounts;
   }, []);
 
-  if (isMobile)
+  if (isMobile || isMobileBreakpoint())
     return (
       <BreakpointWarning
         isMobileUnavailableOnly
@@ -143,7 +151,10 @@ const NextcloudWorkspace = (props) => {
           lineHeight="20px"
           color={theme.isBase ? "#657077" : "#ADADAD"}
         >
-          {t("Settings:AboutDataImport")}
+          {t("Settings:AboutDataImport", {
+            productName: t("Common:ProductName"),
+            organizationName: t("Common:OrganizationName"),
+          })}
         </Text>
         <Text
           className="data-import-counter"
@@ -163,7 +174,7 @@ const NextcloudWorkspace = (props) => {
 };
 
 export default inject(({ setup, settingsStore, importAccountsStore }) => {
-  const { clearCheckedAccounts, getMigrationStatus, setUsers } =
+  const { clearCheckedAccounts, getMigrationStatus, setUsers, filteredUsers } =
     importAccountsStore;
   const { initSettings, viewAs, setViewAs } = setup;
   const { currentDeviceType } = settingsStore;
@@ -177,6 +188,7 @@ export default inject(({ setup, settingsStore, importAccountsStore }) => {
     currentDeviceType,
     getMigrationStatus,
     setUsers,
+    filteredUsers,
   };
 })(
   withTranslation(["Common, SMTPSettings, Settings"])(

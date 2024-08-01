@@ -46,9 +46,10 @@ class SettingsSetupStore {
   settingsStore = null;
   tfaStore = null;
   thirdPartyStore = null;
+  filesSettingsStore = null;
   isInit = false;
-  logoutVisible = false;
-  logoutAllVisible = false;
+  logoutDialogVisible = false;
+  logoutAllDialogVisible = false;
   viewAs = isDesktop() ? "table" : "row";
 
   isLoadingDownloadReport = false;
@@ -109,13 +110,21 @@ class SettingsSetupStore {
   sessionsIsInit = false;
   sessions = [];
   currentSession = [];
+  platformModalData = {};
 
-  constructor(tfaStore, authStore, settingsStore, thirdPartyStore) {
+  constructor(
+    tfaStore,
+    authStore,
+    settingsStore,
+    thirdPartyStore,
+    filesSettingsStore,
+  ) {
     this.selectionStore = new SelectionStore(this);
     this.authStore = authStore;
     this.tfaStore = tfaStore;
     this.settingsStore = settingsStore;
     this.thirdPartyStore = thirdPartyStore;
+    this.filesSettingsStore = filesSettingsStore;
     makeAutoObservable(this);
   }
 
@@ -316,7 +325,7 @@ class SettingsSetupStore {
       "",
       "",
       combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
+        window.ClientConfig?.proxy?.url,
         `${config.homepage}/portal-settings/security/access-rights/admins`,
         `/filter?page=${filter.page}`, //TODO: Change url by category
       ),
@@ -432,16 +441,21 @@ class SettingsSetupStore {
   };
 
   getLoginHistoryReport = async () => {
+    const { openOnNewPage } = this.filesSettingsStore;
     const res = await api.settings.getLoginHistoryReport();
-    setTimeout(() => window.open(res), 100); //hack for ios
+    setTimeout(() => window.open(res, openOnNewPage ? "_blank" : "_self"), 100); //hack for ios
     return this.setAuditTrailReport(res);
   };
 
   getAuditTrailReport = async () => {
+    const { openOnNewPage } = this.filesSettingsStore;
     try {
       this.setIsLoadingDownloadReport(true);
       const res = await api.settings.getAuditTrailReport();
-      setTimeout(() => window.open(res), 100); //hack for ios
+      setTimeout(
+        () => window.open(res, openOnNewPage ? "_blank" : "_self"),
+        100,
+      ); //hack for ios
       return this.setAuditTrailReport(res);
     } catch (error) {
       console.error(error);
@@ -493,6 +507,15 @@ class SettingsSetupStore {
   getConsumers = async () => {
     const res = await api.settings.getConsumersList();
     this.setConsumers(res);
+  };
+
+  fetchAndSetConsumers = async (consumerName) => {
+    const res = await api.settings.getConsumersList();
+    const consumer = res.find((c) => c.name === consumerName);
+    this.integration.selectedConsumer = consumer || {};
+    this.setConsumers(res);
+
+    return !!consumer;
   };
 
   updateConsumerProps = async (newProps) => {
@@ -554,9 +577,13 @@ class SettingsSetupStore {
     return api.settings.removeActiveSession(id);
   };
 
-  setLogoutVisible = (visible) => (this.logoutVisible = visible);
+  setLogoutDialogVisible = (visible) => {
+    this.logoutDialogVisible = visible;
+  };
 
-  setLogoutAllVisible = (visible) => (this.logoutAllVisible = visible);
+  setLogoutAllDialogVisible = (visible) => {
+    this.logoutAllDialogVisible = visible;
+  };
 
   getSessions = () => {
     if (this.sessionsIsInit) return;
@@ -569,6 +596,14 @@ class SettingsSetupStore {
 
   setSessions = (sessions) => {
     this.sessions = sessions;
+  };
+
+  setPlatformModalData = (data) => {
+    this.platformModalData = {
+      id: data.id,
+      platform: data.platform,
+      browser: data.browser,
+    };
   };
 }
 

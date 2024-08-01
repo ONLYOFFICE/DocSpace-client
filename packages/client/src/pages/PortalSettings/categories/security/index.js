@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useState } from "react";
-import { Submenu } from "@docspace/shared/components/submenu";
-import { useNavigate } from "react-router-dom";
+import { Tabs } from "@docspace/shared/components/tabs";
+import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -40,17 +40,19 @@ import AccessLoader from "./sub-components/loaders/access-loader";
 import AuditTrail from "./audit-trail/index.js";
 import { resetSessionStorage } from "../../utils";
 import { DeviceType } from "@docspace/shared/enums";
+import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
 const SecurityWrapper = (props) => {
   const { t, loadBaseInfo, resetIsInit, currentDeviceType } = props;
-  const [currentTab, setCurrentTab] = useState(0);
+  const [currentTabId, setCurrentTabId] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const data = [
     {
       id: "access-portal",
-      name: t("PortalAccess"),
+      name: t("PortalAccess", { productName: t("Common:ProductName") }),
       content: <AccessPortal />,
     },
     {
@@ -79,24 +81,25 @@ const SecurityWrapper = (props) => {
 
   useEffect(() => {
     const path = location.pathname;
-    const currentTab = data.findIndex((item) => path.includes(item.id));
-    if (currentTab !== -1) setCurrentTab(currentTab);
+    const currentTab = data.find((item) => path.includes(item.id));
+    if (currentTab !== -1 && data.length) setCurrentTabId(currentTab.id);
 
     load();
-  }, []);
+  }, [location.pathname]);
 
   const onSelect = (e) => {
     navigate(
       combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
+        window.ClientConfig?.proxy?.url,
         config.homepage,
         `/portal-settings/security/${e.id}`,
       ),
     );
+    setCurrentTabId(e.id);
   };
 
-  if (!isLoading)
-    return currentTab === 0 ? (
+  if (!isLoading && data.length)
+    return currentTabId === data[0].id ? (
       currentDeviceType !== DeviceType.desktop ? (
         <MobileSecurityLoader />
       ) : (
@@ -105,18 +108,13 @@ const SecurityWrapper = (props) => {
     ) : (
       <AccessLoader />
     );
+
   return (
-    <Submenu
-      data={data}
-      startSelect={currentTab}
+    <Tabs
+      items={data}
+      selectedItemId={currentTabId}
       onSelect={(e) => onSelect(e)}
-      topProps={
-        currentDeviceType === DeviceType.desktop
-          ? 0
-          : currentDeviceType === DeviceType.mobile
-            ? "53px"
-            : "61px"
-      }
+      stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
     />
   );
 };

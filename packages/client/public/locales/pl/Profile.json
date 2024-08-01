@@ -15,7 +15,6 @@
   "LightTheme": "Motyw jasny",
   "LogoutActiveConnection": "Wyloguj z aktywnego połączenia",
   "LogoutAllActiveConnections": "Wyloguj ze wszystkich aktywnych połączeń",
-  "LogoutAllActiveSessions": "Wyloguj ze wszystkich aktywnych sesji",
   "LogoutAllActiveSessionsDescription": "Wszystkie aktywne połączenia, oprócz niniejszego zostaną wylogowane, ponieważ jest ono obecnie w użyciu.",
   "LogoutBtn": "Wyloguj",
   "LogoutDescription": "Uwaga. Wszystkie aktywne połączenia, oprócz niniejszego zostaną wylogowane, ponieważ jest ono obecnie w użyciu.",

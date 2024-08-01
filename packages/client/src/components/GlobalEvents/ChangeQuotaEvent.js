@@ -138,14 +138,13 @@ export default inject(
       usersStore;
     const { setCustomRoomQuota, needResetFilesSelection } = filesStore;
 
-    const { defaultUsersQuota, defaultRoomsQuota } = currentQuotaStore;
     const {
-      selection: infoPanelSelection,
+      infoPanelSelection,
       setNewInfoPanelSelection,
       setInfoPanelSelection,
     } = infoPanelStore;
 
-    const inRoom = infoPanelSelection?.inRoom;
+    const inRoom = !!infoPanelSelection?.navigationPath;
     const needResetSelection =
       type === "user" ? needResetUserSelection : needResetFilesSelection;
 

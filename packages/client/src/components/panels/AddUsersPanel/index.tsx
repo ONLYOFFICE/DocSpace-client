@@ -43,7 +43,7 @@ import {
   TAccessRight,
   TSelectorAccessRights,
   TSelectorCancelButton,
-  TWithTabs,
+  TSelectorTabs,
 } from "@docspace/shared/components/selector/Selector.types";
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
@@ -321,8 +321,11 @@ const AddUsersPanel = ({
   const onClearSearch = useCallback(
     (callback?: Function) => {
       isFirstLoad.current = true;
-      setIsLoading(true);
-      setSearchValue(() => {
+      setSearchValue((prevValue: string) => {
+        if (prevValue !== "") {
+          setIsLoading(true);
+        }
+
         return "";
       });
       callback?.();
@@ -475,7 +478,7 @@ const AddUsersPanel = ({
       }
     : {};
 
-  const withTabsProps: TWithTabs = withGroups
+  const withTabsProps: TSelectorTabs = withGroups
     ? {
         withTabs: true,
         tabsData: [
@@ -519,6 +522,7 @@ const AddUsersPanel = ({
             // Todo: Update groups empty screen texts when they are ready
             headerLabel: t("Common:ListAccounts"),
             withoutBackButton: false,
+            withoutBorder: true,
             onBackClick,
           }}
           onSelect={onSelect}
@@ -544,7 +548,9 @@ const AddUsersPanel = ({
           }
           emptyScreenDescription={
             activeTabId === PEOPLE_TAB_ID
-              ? t("Common:EmptyDescription")
+              ? t("Common:EmptyDescription", {
+                  productName: t("Common:ProductName"),
+                })
               : t("Common:GroupsNotFoundDescription")
           }
           searchEmptyScreenImage={emptyScreenImage}

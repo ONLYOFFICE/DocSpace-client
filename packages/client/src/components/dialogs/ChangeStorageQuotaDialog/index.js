@@ -116,12 +116,20 @@ const ChangeStorageQuotaDialog = (props) => {
 
   return (
     <StyledModalDialog visible={isVisible} onClose={onCloseClick}>
-      <ModalDialog.Header>{t("Common:DisableStorageQuota")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {isDisableQuota
+          ? t("Common:DisableStorageQuota")
+          : t("Common:ManageStorageQuota")}
+      </ModalDialog.Header>
       <ModalDialog.Body>
         <Text noSelect>
           {isDisableQuota
-            ? t("Common:TurnOffDiskSpaceLimit")
-            : t("Common:SetDiskSpaceQuota")}
+            ? t("Common:TurnOffDiskSpaceLimit", {
+                productName: t("Common:ProductName"),
+              })
+            : t("Common:SetDiskSpaceQuota", {
+                productName: t("Common:ProductName"),
+              })}
         </Text>
         {!isDisableQuota && (
           <QuotaForm

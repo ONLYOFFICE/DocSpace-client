@@ -26,81 +26,60 @@
 
 import { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import debounce from "lodash.debounce";
 import { Box } from "@docspace/shared/components/box";
-import { TextInput } from "@docspace/shared/components/text-input";
-import { Textarea } from "@docspace/shared/components/textarea";
 import { Label } from "@docspace/shared/components/label";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { ComboBox } from "@docspace/shared/components/combobox";
-import { TabsContainer } from "@docspace/shared/components/tabs-container";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
-import { objectToGetParams, loadScript } from "@docspace/shared/utils/common";
 import { inject, observer } from "mobx-react";
 import { ImageEditor } from "@docspace/shared/components/image-editor";
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 
-import { isTablet, isMobile } from "@docspace/shared/utils/device";
-
 import EmptyIframeContainer from "../sub-components/EmptyIframeContainer";
 
-import GetCodeDialog from "../sub-components/GetCodeDialog";
-import CodeBlock from "../sub-components/CodeBlock";
-import { Button } from "@docspace/shared/components/button";
+import { WidthSetter } from "../sub-components/WidthSetter";
+import { HeightSetter } from "../sub-components/HeightSetter";
+import { FrameIdSetter } from "../sub-components/FrameIdSetter";
+import { PresetWrapper } from "../sub-components/PresetWrapper";
+import { PreviewBlock } from "../sub-components/PreviewBlock";
 
-const showPreviewThreshold = 720;
+import { loadFrame } from "../utils";
 
 import {
-  SDKContainer,
+  dataDimensions,
+  defaultWidthDimension,
+  defaultHeightDimension,
+  defaultWidth,
+  defaultHeight,
+} from "../constants";
+
+import {
   Controls,
-  CategoryHeader,
   CategorySubHeader,
-  CategoryDescription,
   ControlsGroup,
   LabelGroup,
   ControlsSection,
   Frame,
   Container,
-  RowContainer,
-  ColumnContainer,
-  Preview,
-  GetCodeButtonWrapper,
   FilesSelectorInputWrapper,
-  CodeWrapper,
 } from "./StyledPresets";
+import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const Viewer = (props) => {
-  const { t, setDocumentTitle, getFilePrimaryLink, theme } = props;
+  const { t, getFilePrimaryLink, theme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
-
-  const scriptUrl = `${window.location.origin}/static/scripts/sdk/1.0.0/api.js`;
-
-  const dataDimensions = [
-    { key: "percent", label: "%", default: true },
-    { key: "pixel", label: "px" },
-  ];
-
-  const [widthDimension, setWidthDimension] = useState(dataDimensions[0]);
-  const [heightDimension, setHeightDimension] = useState(dataDimensions[0]);
-  const [width, setWidth] = useState("100");
-  const [height, setHeight] = useState("100");
-  const [isGetCodeDialogOpened, setIsGetCodeDialogOpened] = useState(false);
-  const [showPreview, setShowPreview] = useState(
-    window.innerWidth > showPreviewThreshold,
-  );
 
   const [config, setConfig] = useState({
     mode: "viewer",
     editorType: "embedded",
-    width: `${width}${widthDimension.label}`,
-    height: `${height}${heightDimension.label}`,
+    width: `${defaultWidth}${defaultWidthDimension.label}`,
+    height: `${defaultHeight}${defaultHeightDimension.label}`,
     frameId: "ds-frame",
     init: false,
   });
-
-  const params = objectToGetParams(config);
 
   const frameId = config.frameId || "ds-frame";
 
@@ -108,48 +87,19 @@ const Viewer = (props) => {
     window.DocSpace?.SDK?.frames[frameId]?.destroyFrame();
   };
 
-  const loadFrame = debounce(() => {
-    const script = document.getElementById("integration");
+  const loadCurrentFrame = () => loadFrame(config, SDK_SCRIPT_URL);
 
-    if (script) {
-      script.remove();
-    }
-
-    const params = objectToGetParams(config);
-
-    loadScript(`${scriptUrl}${params}`, "integration", () =>
-      window.DocSpace.SDK.initFrame(config),
-    );
-  }, 500);
+  useEffect(() => {
+    loadCurrentFrame();
+    return () => destroyFrame();
+  });
 
   useEffect(() => {
     const scroll = document.getElementsByClassName("section-scroll")[0];
     if (scroll) {
       scroll.scrollTop = 0;
     }
-    loadFrame();
-    return () => destroyFrame();
-  });
-
-  const onChangeTab = () => {
-    loadFrame();
-  };
-
-  const onChangeWidth = (e) => {
-    setConfig((config) => {
-      return { ...config, width: `${e.target.value}${widthDimension.label}` };
-    });
-
-    setWidth(e.target.value);
-  };
-
-  const onChangeHeight = (e) => {
-    setConfig((config) => {
-      return { ...config, height: `${e.target.value}${heightDimension.label}` };
-    });
-
-    setHeight(e.target.value);
-  };
+  }, []);
 
   const onChangeFileId = async (file) => {
     const newConfig = {
@@ -170,65 +120,22 @@ const Viewer = (props) => {
     });
   };
 
-  const onChangeFrameId = (e) => {
-    setConfig((config) => {
-      return { ...config, frameId: e.target.value, init: true };
-    });
-  };
-
-  const onChangeWidthDimension = (item) => {
-    setConfig((config) => {
-      return { ...config, width: `${width}${item.label}` };
-    });
-
-    setWidthDimension(item);
-  };
-
-  const onChangeHeightDimension = (item) => {
-    setConfig((config) => {
-      return { ...config, height: `${height}${item.label}` };
-    });
-
-    setHeightDimension(item);
-  };
-
-  const openGetCodeModal = () => setIsGetCodeDialogOpened(true);
-
-  const closeGetCodeModal = () => setIsGetCodeDialogOpened(false);
-
-  const onResize = () => {
-    const isEnoughWidthForPreview = window.innerWidth > showPreviewThreshold;
-    if (isEnoughWidthForPreview !== showPreview)
-      setShowPreview(isEnoughWidthForPreview);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", onResize);
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  }, [showPreview]);
-
-  const codeBlock = `<div id="${frameId}">Fallback text</div>\n<script src="${scriptUrl}${params}"></script>`;
-
   const preview = (
     <Frame
       width={
-        config.id !== undefined && widthDimension.label === "px"
-          ? width + widthDimension.label
+        config.id !== undefined && config.width.includes("px")
+          ? config.width
           : undefined
       }
       height={
-        config.id !== undefined && heightDimension.label === "px"
-          ? height + heightDimension.label
+        config.id !== undefined && config.height.includes("px")
+          ? config.height
           : undefined
       }
       targetId={frameId}
     >
       {config.id !== undefined ? (
-        <>
-          <Box id={frameId}></Box>
-        </>
+        <Box id={frameId}></Box>
       ) : (
         <EmptyIframeContainer
           text={t("FilePreview")}
@@ -239,54 +146,22 @@ const Viewer = (props) => {
     </Frame>
   );
 
-  const code = (
-    <CodeWrapper height="fit-content">
-      <CategorySubHeader className="copy-window-code">
-        {`HTML ${t("CodeTitle")}`}
-      </CategorySubHeader>
-      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
-        {t("HtmlCodeDescription")}
-      </Text>
-      <Textarea value={codeBlock} heightTextArea={153} />
-      <CategorySubHeader className="copy-window-code">
-        {`JavaScript ${t("CodeTitle")}`}
-      </CategorySubHeader>
-      <Text lineHeight="20px" color={theme.isBase ? "#657077" : "#ADADAD"}>
-        {t("JavaScriptCodeDescription")}
-      </Text>
-      <CodeBlock config={config} />
-    </CodeWrapper>
-  );
-
-  const dataTabs = [
-    {
-      key: "preview",
-      title: t("Common:Preview"),
-      content: preview,
-    },
-    {
-      key: "code",
-      title: t("Code"),
-      content: code,
-    },
-  ];
-
   return (
-    <SDKContainer>
-      <CategoryDescription>
-        <Text className="sdk-description">{t("ViewerDescription")}</Text>
-      </CategoryDescription>
-      <CategoryHeader>{t("CreateSampleViewer")}</CategoryHeader>
+    <PresetWrapper
+      description={t("ViewerDescription")}
+      header={t("CreateSampleViewer")}
+    >
       <Container>
-        {showPreview && (
-          <Preview>
-            <TabsContainer
-              isDisabled={config?.id === undefined}
-              onSelect={onChangeTab}
-              elements={dataTabs}
-            />
-          </Preview>
-        )}
+        <PreviewBlock
+          t={t}
+          loadCurrentFrame={loadCurrentFrame}
+          preview={preview}
+          theme={theme}
+          frameId={frameId}
+          scriptUrl={SDK_SCRIPT_URL}
+          config={config}
+          isDisabled={config?.id === undefined}
+        />
         <Controls>
           <ControlsSection>
             <CategorySubHeader>{t("FileId")}</CategorySubHeader>
@@ -307,58 +182,25 @@ const Viewer = (props) => {
 
           <ControlsSection>
             <CategorySubHeader>{t("CustomizingDisplay")}</CategorySubHeader>
-            <ControlsGroup>
-              <Label className="label" text={t("EmbeddingPanel:Width")} />
-              <RowContainer combo>
-                <TextInput
-                  onChange={onChangeWidth}
-                  placeholder={t("EnterWidth")}
-                  value={width}
-                  tabIndex={2}
-                />
-                <ComboBox
-                  size="content"
-                  scaled={false}
-                  scaledOptions={true}
-                  onSelect={onChangeWidthDimension}
-                  options={dataDimensions}
-                  selectedOption={widthDimension}
-                  displaySelectedOption
-                  directionY="bottom"
-                />
-              </RowContainer>
-            </ControlsGroup>
-            <ControlsGroup>
-              <Label className="label" text={t("EmbeddingPanel:Height")} />
-              <RowContainer combo>
-                <TextInput
-                  onChange={onChangeHeight}
-                  placeholder={t("EnterHeight")}
-                  value={height}
-                  tabIndex={3}
-                />
-                <ComboBox
-                  size="content"
-                  scaled={false}
-                  scaledOptions={true}
-                  onSelect={onChangeHeightDimension}
-                  options={dataDimensions}
-                  selectedOption={heightDimension}
-                  displaySelectedOption
-                  directionY="bottom"
-                />
-              </RowContainer>
-            </ControlsGroup>
-            <ControlsGroup>
-              <Label className="label" text={t("FrameId")} />
-              <TextInput
-                scale={true}
-                onChange={onChangeFrameId}
-                placeholder={t("EnterId")}
-                value={config.frameId}
-                tabIndex={4}
-              />
-            </ControlsGroup>
+            <WidthSetter
+              t={t}
+              setConfig={setConfig}
+              dataDimensions={dataDimensions}
+              defaultDimension={defaultWidthDimension}
+              defaultWidth={defaultWidth}
+            />
+            <HeightSetter
+              t={t}
+              setConfig={setConfig}
+              dataDimensions={dataDimensions}
+              defaultDimension={defaultHeightDimension}
+              defaultHeight={defaultHeight}
+            />
+            <FrameIdSetter
+              t={t}
+              defaultFrameId={config.frameId}
+              setConfig={setConfig}
+            />
           </ControlsSection>
 
           {/* <InterfaceElements>
@@ -367,14 +209,14 @@ const Viewer = (props) => {
               className="checkbox"
               label={t("TabPlugins")}
               onChange={() => {}}
-              isChecked={true}
+              isChecked
             />
             <RowContainer>
-              <Checkbox label={t("Chat")} onChange={() => {}} isChecked={true} />
+              <Checkbox label={t("Chat")} onChange={() => {}} isChecked />
               <Text color="gray">({t("InLeftPanel")})</Text>
             </RowContainer>
             <RowContainer>
-              <Checkbox label={t("FeedbackAndSupport")} onChange={() => {}} isChecked={true} />
+              <Checkbox label={t("FeedbackAndSupport")} onChange={() => {}} isChecked />
               <Text color="gray">({t("InLeftPanel")})</Text>
             </RowContainer>
           </InterfaceElements>
@@ -395,7 +237,7 @@ const Viewer = (props) => {
               { key: "2", label: "50%" },
               { key: "3", label: "25%" },
             ]}
-            scaled={true}
+            scaled
             selectedOption={{ key: "1", label: "100%", default: true }}
             displaySelectedOption
             directionY="top"
@@ -409,7 +251,7 @@ const Viewer = (props) => {
               { key: "3", label: "90%" },
               { key: "4", label: "180%" },
             ]}
-            scaled={true}
+            scaled
             selectedOption={{ key: "1", label: "45%", default: true }}
             displaySelectedOption
             directionY="top"
@@ -425,40 +267,16 @@ const Viewer = (props) => {
           /> */}
         </Controls>
       </Container>
-
-      {!showPreview && (
-        <>
-          <GetCodeButtonWrapper>
-            <Button
-              id="get-sdk-code-button"
-              primary
-              size="normal"
-              scale
-              label={t("GetCode")}
-              onClick={openGetCodeModal}
-            />
-          </GetCodeButtonWrapper>
-
-          <GetCodeDialog
-            t={t}
-            visible={isGetCodeDialogOpened}
-            codeBlock={codeBlock}
-            onClose={closeGetCodeModal}
-          />
-        </>
-      )}
-    </SDKContainer>
+    </PresetWrapper>
   );
 };
 
-export default inject(({ authStore, settingsStore, filesStore }) => {
-  const { setDocumentTitle } = authStore;
+export default inject(({ settingsStore, filesStore }) => {
   const { theme } = settingsStore;
   const { getFilePrimaryLink } = filesStore;
 
   return {
     theme,
-    setDocumentTitle,
     getFilePrimaryLink,
   };
 })(

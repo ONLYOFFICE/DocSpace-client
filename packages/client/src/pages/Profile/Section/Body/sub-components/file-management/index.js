@@ -61,6 +61,9 @@ const FileManagement = ({
   setKeepNewFileName,
   setThumbnails1280x720,
   thumbnails1280x720,
+
+  openEditorInSameTab,
+  setOpenEditorInSameTab,
 }) => {
   const { t, ready } = useTranslation(["FilesSettings", "Common"]);
 
@@ -86,6 +89,10 @@ const FileManagement = ({
   const onChangeKeepNewFileName = React.useCallback(() => {
     setKeepNewFileName(!keepNewFileName);
   }, [setKeepNewFileName, keepNewFileName]);
+
+  const onChangeOpenEditorInSameTab = React.useCallback(() => {
+    setOpenEditorInSameTab(!openEditorInSameTab);
+  }, [setOpenEditorInSameTab, openEditorInSameTab]);
 
   const onChangeFavorites = React.useCallback(
     (e) => {
@@ -151,6 +158,20 @@ const FileManagement = ({
               isChecked={confirmDelete}
             />
             <Text>{t("DisplayNotification")}</Text>
+          </div>
+        )}
+        {!isVisitor && (
+          <div className="toggle-btn-wrapper">
+            <ToggleButton
+              className="open-same-tab toggle-btn"
+              onChange={onChangeOpenEditorInSameTab}
+              isChecked={openEditorInSameTab}
+            />
+            <Text>
+              {t("OpenSameTab", {
+                organizationName: t("Common:OrganizationName"),
+              })}
+            </Text>
           </div>
         )}
       </Box>
@@ -232,6 +253,9 @@ export default inject(({ userStore, filesSettingsStore, treeFoldersStore }) => {
 
     setThumbnails1280x720,
     thumbnails1280x720,
+
+    openEditorInSameTab,
+    setOpenEditorInSameTab,
   } = filesSettingsStore;
 
   const { myFolderId, commonFolderId } = treeFoldersStore;
@@ -263,5 +287,8 @@ export default inject(({ userStore, filesSettingsStore, treeFoldersStore }) => {
 
     setThumbnails1280x720,
     thumbnails1280x720,
+
+    openEditorInSameTab,
+    setOpenEditorInSameTab,
   };
 })(observer(FileManagement));

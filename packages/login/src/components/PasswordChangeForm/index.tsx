@@ -45,8 +45,6 @@ import { changePassword } from "@/utils/actions";
 import { TError, WithLoaderProps } from "@/types";
 import { ConfirmRouteContext } from "../ConfirmRoute";
 
-import { PasswordChangeWrapper } from "./PasswordChangeForm.styled";
-
 type PasswordChangeFormProps = {
   passwordHash: TPasswordHash;
 } & WithLoaderProps;
@@ -143,7 +141,7 @@ const PasswordChangeForm = ({
   };
 
   return (
-    <PasswordChangeWrapper>
+    <>
       <div className="password-form">
         <Text fontSize="16px" fontWeight="600" className="subtitle">
           {t("PassworResetTitle")}
@@ -196,7 +194,7 @@ const PasswordChangeForm = ({
         onClick={onSubmit}
         isDisabled={isLoading}
       />
-    </PasswordChangeWrapper>
+    </>
   );
 };
 

@@ -196,9 +196,12 @@ const SelectUsersStep = (props: SelectUsersStepProps) => {
           )}
         </>
       ) : (
-        <Text fontWeight={600} lineHeight="20px" className="mb-17">
-          {t("Settings:AddEmailsWarning")}
-        </Text>
+        <>
+          <Text fontWeight={600} lineHeight="20px" className="mb-17">
+            {t("Settings:AddEmailsWarning")}
+          </Text>
+          {Buttons}
+        </>
       )}
 
       {filteredAccounts.length > 0 && Buttons}

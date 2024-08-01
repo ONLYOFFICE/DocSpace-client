@@ -50,6 +50,13 @@ const contextCss = css`
 `;
 
 const StyledTableContainer = styled(TableContainer)`
+  .badges__quickButtons {
+    padding-left: 16px;
+    display: flex;
+    flex-grow: 2;
+    justify-content: flex-end;
+  }
+
   .table-row-selected {
     .table-container_file-name-cell {
       ${fileNameCss}

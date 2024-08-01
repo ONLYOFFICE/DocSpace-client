@@ -82,7 +82,7 @@ const TableHeaderCell = ({
       data-default={isDefault}
       data-enable={enable}
       data-min-width={minWidth}
-      data-default-size={defaultSize}
+      // data-default-size={defaultSize}
       sortingVisible={sortingVisible}
       ref={tagRef}
     >
@@ -121,7 +121,7 @@ const TableHeaderCell = ({
       data-enable={enable}
       data-default={isDefault}
       data-min-width={minWidth}
-      data-default-size={defaultSize}
+      // data-default-size={defaultSize}
       sortingVisible={sortingVisible}
     >
       <div className="table-container_header-item">

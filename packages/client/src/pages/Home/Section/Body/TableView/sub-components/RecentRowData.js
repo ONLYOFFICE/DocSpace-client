@@ -213,7 +213,7 @@ const RecentRowDataComponent = (props) => {
       ) : (
         <div />
       )}
-      {quickButtonsColumnIsEnabled ? (
+      {/* {quickButtonsColumnIsEnabled ? (
         <TableCell
           style={
             !quickButtonsColumnIsEnabled
@@ -232,7 +232,7 @@ const RecentRowDataComponent = (props) => {
         </TableCell>
       ) : (
         <div />
-      )}
+      )} */}
     </>
   );
 };

@@ -36,7 +36,7 @@ import AppLoader from "@docspace/shared/components/app-loader";
 import { ConfirmRouteContext } from "../ConfirmRoute";
 import { TError } from "@/types";
 
-const EmailActivationForm = () => {
+const EmailActivationHandler = () => {
   const [error, setError] = useState<string>();
 
   const { linkData } = useContext(ConfirmRouteContext);
@@ -75,4 +75,4 @@ const EmailActivationForm = () => {
   return <AppLoader />;
 };
 
-export default EmailActivationForm;
+export default EmailActivationHandler;

@@ -28,15 +28,10 @@
 
 import { LoginContext } from "./Login.context";
 
-import { LoginContent, LoginFormWrapper } from "./Login.styled";
+import { LoginContent } from "./Login.styled";
 import { LoginValueContext, LoginDispatchContext } from "./Login.context";
 
-export {
-  LoginContent,
-  LoginFormWrapper,
-  LoginValueContext,
-  LoginDispatchContext,
-};
+export { LoginContent, LoginValueContext, LoginDispatchContext };
 
 const Login = ({ children }: { children: React.ReactNode }) => {
   return <LoginContext>{children}</LoginContext>;

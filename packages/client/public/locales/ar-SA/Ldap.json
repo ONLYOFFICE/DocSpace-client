@@ -13,7 +13,6 @@
   "LdapEnableSSLTooltip": "يمكنك جعل حركة مرور LDAP سرية وآمنة باستخدام طبقة المقابس الآمنة (SSL)",
   "LdapEnableStartTls": "تفعيل StartTLS",
   "LdapEnableStartTlsTooltip": "يوفر StartTLS طريقة لترقية اتصال النص العادي إلى اتصال مشفر (TLS أو SSL) بدلاً من استخدام بوابة منفصل للاتصال المشفر.",
-  "LdapFirstName": "الاسم الاول",
   "LdapGroupAttribute": "Group Attribute",
   "LdapGroupAttributeTooltip": "أدخل ميزة هدف المجموعة التي تحدد المستخدمين الذين تتضمنهم هذه المجموعة.",
   "LdapGroupDN": "الاسم التعريفي للمجموعة",

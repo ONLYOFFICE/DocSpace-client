@@ -13,7 +13,6 @@
   "LdapEnableSSLTooltip": "Ви можете зробити трафік LDAP конфіденційним і безпечним за допомогою протоколу Secure Sockets Layer (SSL)",
   "LdapEnableStartTls": "Увімкнути StartTLS",
   "LdapEnableStartTlsTooltip": "StartTLS дозволяє оновити звичайне текстове з'єднання до зашифрованого (TLS або SSL) з'єднання замість використання окремого порту для зашифрованого зв'язку.",
-  "LdapFirstName": "Ім'я",
   "LdapGroupAttribute": "Атрибут групи",
   "LdapGroupAttributeTooltip": "Введіть атрибут об'єкта групи, який визначає, яких користувачів включає ця група.",
   "LdapGroupDN": "Унікальне ім'я групи",

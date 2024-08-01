@@ -13,7 +13,6 @@
   "LdapEnableSSLTooltip": "LDAP datplūsmu varat padarīt konfidenciālu un drošu, izmantojot drošligzdu slāni (SSL)",
   "LdapEnableStartTls": "Iespējot StartTLS",
   "LdapEnableStartTlsTooltip": "StartTLS piedāvā veidu, kā vienkāršā teksta savienojumu jaunināt uz šifrētu (TLS vai SSL) savienojumu, nevis izmantot atsevišķu portu šifrētai saziņai.",
-  "LdapFirstName": "Vārds",
   "LdapGroupAttribute": "Grupas atribūts",
   "LdapGroupAttributeTooltip": "Ievadiet grupas objekta atribūtu, kas norāda, kādus lietotājus šī grupa ietver.",
   "LdapGroupDN": "Grupas DN",

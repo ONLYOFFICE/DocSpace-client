@@ -13,7 +13,6 @@
   "LdapEnableSSLTooltip": "您可以使用安全套接字层（SSL）使 LDAP 流量保密且安全",
   "LdapEnableStartTls": "启用 StartTLS",
   "LdapEnableStartTlsTooltip": "StartTLS 提供了一种将纯文本连接升级为加密（TLS 或 SSL）连接的方法，而不是使用单独的端口进行加密通信。",
-  "LdapFirstName": "名",
   "LdapGroupAttribute": "组属性",
   "LdapGroupAttributeTooltip": "输入组对象属性，该属性指定此组包含哪些用户。",
   "LdapGroupDN": "组 DN",

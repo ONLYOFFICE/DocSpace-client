@@ -13,7 +13,6 @@
   "LdapEnableSSLTooltip": "Sie können den LDAP-Datenverkehr vertraulich und sicher gestalten, indem Sie Secure Sockets Layer (SSL) verwenden.",
   "LdapEnableStartTls": "StartTLS aktivieren",
   "LdapEnableStartTlsTooltip": "StartTLS bietet eine Möglichkeit, eine Klartextverbindung in eine verschlüsselte (TLS oder SSL) Verbindung umzuwandeln, anstatt einen separaten Port für die verschlüsselte Kommunikation zu verwenden.",
-  "LdapFirstName": "Vorname",
   "LdapGroupAttribute": "Gruppenattribut",
   "LdapGroupAttributeTooltip": "Geben Sie das Attribut des Gruppenobjekts ein, das angibt, welche Benutzer diese Gruppe umfasst.",
   "LdapGroupDN": "Gruppen-DN",

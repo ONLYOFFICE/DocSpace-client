@@ -13,7 +13,6 @@
   "LdapEnableSSLTooltip": "Zadbaj o bezpieczeństwo i poufność ruchu LDAP za pomocą Secure Sockets Layer (SSL)",
   "LdapEnableStartTls": "Włącz StartTLS",
   "LdapEnableStartTlsTooltip": "StartTLS umożliwia ulepszenie połączenia jawnego do połączenia szyfrowanego (TLS lub SSL) zamiast używania oddzielnego portu do komunikacji szyfrowanej.",
-  "LdapFirstName": "Imię",
   "LdapGroupAttribute": "Atrybut grupy",
   "LdapGroupAttributeTooltip": "Wprowadź atrybut obiektu grupy, który określa, jakich użytkowników obejmuje ta grupa.",
   "LdapGroupDN": "Nazwa wyróżniająca grupy",

@@ -13,7 +13,6 @@
   "LdapEnableSSLTooltip": "U kunt LDAP-verkeer vertrouwelijk en veilig maken door SSL (Secure Sockets Layer) te gebruiken.",
   "LdapEnableStartTls": "StartTLS inschakelen",
   "LdapEnableStartTlsTooltip": "StartTLS biedt een manier om een verbinding met platte tekst te upgraden naar een versleutelde (TLS of SSL) verbinding in plaats van een aparte poort te gebruiken voor versleutelde communicatie.",
-  "LdapFirstName": "Voornaam",
   "LdapGroupAttribute": "Groepsattribuut",
   "LdapGroupAttributeTooltip": "Voer het groepsobject attribuut in dat aangeeft welke gebruikers deze groep bevat.",
   "LdapGroupDN": "Groep DN",

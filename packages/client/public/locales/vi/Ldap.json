@@ -13,7 +13,6 @@
   "LdapEnableSSLTooltip": "Bạn có thể làm cho lưu lượng LDAP được bảo mật và an toàn bằng cách sử dụng Lớp Cổng Bảo Mật (SSL)",
   "LdapEnableStartTls": "Kích hoạt StartTLS",
   "LdapEnableStartTlsTooltip": "StartTLS cung cấp một cách để nâng cấp kết nối văn bản thuần túy thành kết nối được mã hóa (TLS hoặc SSL) thay vì sử dụng một cổng riêng cho việc giao tiếp được mã hóa.",
-  "LdapFirstName": "Tên",
   "LdapGroupAttribute": "Thuộc tính Nhóm",
   "LdapGroupAttributeTooltip": "Nhập thuộc tính đối tượng nhóm chỉ định những người dùng được bao gồm trong nhóm này.",
   "LdapGroupDN": "DN Nhóm",

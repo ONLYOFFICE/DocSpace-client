@@ -13,7 +13,6 @@
   "LdapEnableSSLTooltip": "Voit muuttaa LDAP-liikenteen luottamukselliseksi ja turvalliseksi käyttäen Secure Sockets Layeriä (SSL)",
   "LdapEnableStartTls": "Ota StartTLS käyttöön",
   "LdapEnableStartTlsTooltip": "StartTLS tarjoaa tavan päivittää tavallinen tekstiyhteys salattuun (TLS tai SSL) yhteyteen sen sijaa, että käytettäisiin erillistä porttia salattua yhteyttä varten.",
-  "LdapFirstName": "Etunimi",
   "LdapGroupAttribute": "Ryhmäattribuutti",
   "LdapGroupAttributeTooltip": "Syötä ryhmän objektiattribuutti, joka määrittelee mitä käyttäjiä tämä ryhmä sisältää.",
   "LdapGroupDN": "Ryhmä DN",

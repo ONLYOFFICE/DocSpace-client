@@ -13,7 +13,6 @@
   "LdapEnableSSLTooltip": "Secure Sockets Layer (SSL) kullanarak LDAP trafiğini gizli ve güvenli bir hale getirebilirsiniz",
   "LdapEnableStartTls": "StartTLS'yi Etkinleştir",
   "LdapEnableStartTlsTooltip": "StartTLS, şifreli iletişim için ayrı bir bağlantı noktası kullanmak yerine düz metin bağlantısını şifreli (TLS veya SSL) bağlantıya yükseltmenin bir yolunu sunmaktadır.",
-  "LdapFirstName": "İsim",
   "LdapGroupAttribute": "Grup Özelliği",
   "LdapGroupAttributeTooltip": "Bu grubun hangi kullanıcıları içerdiğini belirten grup nesnesi özelliğini girin.",
   "LdapGroupDN": "Grup DN",

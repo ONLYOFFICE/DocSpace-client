@@ -13,7 +13,6 @@
   "LdapEnableSSLTooltip": "セキュア・ソケット・レイヤー（SSL）を使用することで、LDAPトラフィックの機密性と安全性を高めることができます。",
   "LdapEnableStartTls": "StartTLS を有効にする",
   "LdapEnableStartTlsTooltip": "StartTLSは、暗号化通信用に別のポートを使用する代わりに、プレーンテキスト接続を暗号化（TLSまたはSSL）接続にアップグレードする方法を提供します。",
-  "LdapFirstName": "名",
   "LdapGroupAttribute": "グループ属性",
   "LdapGroupAttributeTooltip": "このグループに含まれるユーザーを指定するグループオブジェクト属性を入力してください。",
   "LdapGroupDN": "グループDN",

@@ -13,7 +13,6 @@
   "LdapEnableSSLTooltip": "Vous pouvez rendre le trafic LDAP confidentiel et sécurisé en utilisant le protocole SSL (Secure Sockets Layer).",
   "LdapEnableStartTls": "Activer StartTLS",
   "LdapEnableStartTlsTooltip": "StartTLS permet de transformer une connexion en texte brut en une connexion cryptée (TLS ou SSL) au lieu d'utiliser un port distinct pour la communication cryptée.",
-  "LdapFirstName": "Prénom",
   "LdapGroupAttribute": "Attribut du groupe",
   "LdapGroupAttributeTooltip": "Entrez un attribut de l'objet groupe qui spécifie quels utilisateurs sont membres de ce groupe.",
   "LdapGroupDN": "Groupe DN",

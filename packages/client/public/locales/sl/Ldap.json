@@ -13,7 +13,6 @@
   "LdapEnableSSLTooltip": "Zaupen in varen promet LDAP lahko urediš z uporabo Secure Sockets Layer (SSL)",
   "LdapEnableStartTls": "Omogoči StartTLS",
   "LdapEnableStartTlsTooltip": "StartTLS ponuja način za nadgradnjo povezave z navadnim besedilom v šifrirano (TLS ali SSL) povezavo namesto uporabe ločenih vrat za šifrirano komunikacijo.",
-  "LdapFirstName": "Ime",
   "LdapGroupAttribute": "Atribut skupine",
   "LdapGroupAttributeTooltip": "Vnesite atribut objekta skupine, ki določa, katere uporabnike vključuje ta skupina.",
   "LdapGroupDN": "DN skupine",

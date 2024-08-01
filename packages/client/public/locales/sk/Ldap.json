@@ -13,7 +13,6 @@
   "LdapEnableSSLTooltip": "Dôvernosť a bezpečnosť prevádzky LDAP môžete zabezpečiť pomocou protokolu SSL (Secure Sockets Layer).",
   "LdapEnableStartTls": "Povoliť StartTLS",
   "LdapEnableStartTlsTooltip": "StartTLS ponúka spôsob, ako vylepšiť obyčajné textové pripojenie na šifrované (TLS alebo SSL) namiesto používania samostatného portu na šifrovanie komunikácie.",
-  "LdapFirstName": "Prvé meno",
   "LdapGroupAttribute": "Atribút Skupina",
   "LdapGroupAttributeTooltip": "Zadajte atribút objektu skupiny, ktorý určuje, akých používateľov táto skupina združuje.",
   "LdapGroupDN": "DN skupiny",

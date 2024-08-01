@@ -13,7 +13,6 @@
   "LdapEnableSSLTooltip": "보안 소켓 계층(SSL)을 사용하여 LDAP 트래픽을 기밀로 유지하고 보안을 유지할 수 있습니다",
   "LdapEnableStartTls": "StartTLS 활성화",
   "LdapEnableStartTlsTooltip": "StartTLS는 암호화된 통신에 별도의 포트를 사용하는 대신 일반 텍스트 연결을 암호화(TLS 또는 SSL) 연결로 업그레이드하는 방법을 제공합니다.",
-  "LdapFirstName": "첫 번째 이름",
   "LdapGroupAttribute": "그룹 속성",
   "LdapGroupAttributeTooltip": "이 그룹에 포함될 사용자를 지정하는 그룹 개체 속성을 입력하세요.",
   "LdapGroupDN": "그룹 DN",

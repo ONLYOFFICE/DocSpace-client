@@ -13,7 +13,6 @@
   "LdapEnableSSLTooltip": "Utilizarea protocolului Secure Sockets Layer (SSL) securizează și protejează confidențialitatea procesului de comunicare cu serverul LDAP.",
   "LdapEnableStartTls": "Activare StartTLS",
   "LdapEnableStartTlsTooltip": "StartTLS permite actualizarea unei conexiuni de text simplu la o conexiune sigură (TLS sau SSL)  și înlocuiește folosirea unui port separat pentru asigurarea conexiunii criptate.",
-  "LdapFirstName": "Prenume",
   "LdapGroupAttribute": "Atributul de grup",
   "LdapGroupAttributeTooltip": "Introduceți atributul obiectului de grup care indică utilizatorii din acest grup.",
   "LdapGroupDN": "Nume distinct de grup",

@@ -13,7 +13,6 @@
   "LdapEnableSSLTooltip": "Դուք կարող եք դարձնել LDAP-ը գաղտնի և անվտանգ, օգտագործելով Secure Sockets Layer (SSL):",
   "LdapEnableStartTls": "Միացնել StartTLS-ը",
   "LdapEnableStartTlsTooltip": "StartTLS-ն առաջարկում է պարզ տեքստային կապը գաղտնագրված (TLS կամ SSL) կապի թարմացման միջոց՝ կոդավորված հաղորդակցության համար առանձին պորտ օգտագործելու փոխարեն: ",
-  "LdapFirstName": "Անուն",
   "LdapGroupAttribute": "Խմբի հատկանիշ",
   "LdapGroupAttributeTooltip": "Մուտքագրեք խմբի օբյեկտի հատկանիշը, որը նշում է, թե ինչ օգտվողներ է ներառում այս խումբը:",
   "LdapGroupDN": "Խումբ DN",

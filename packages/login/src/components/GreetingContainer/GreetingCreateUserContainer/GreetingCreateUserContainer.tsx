@@ -99,7 +99,7 @@ export const GreetingCleateUserContainer = ({
                 values={{
                   firstName,
                   lastName,
-                  productName: PRODUCT_NAME,
+                  productName: t("Common:ProductName"),
                   ...(roomData.title
                     ? { roomName: roomData.title }
                     : { spaceAddress: hostName }),

@@ -58,7 +58,6 @@ import withLoader from "@/HOCs/withLoader";
 import { TError, WithLoaderProps } from "@/types";
 import { ConfirmRouteContext } from "../ConfirmRoute";
 
-
 import { GreetingContainer } from "../GreetingContainer";
 
 const PROXY_BASE_URL = combineUrl(window.ClientConfig?.proxy?.url, "/profile");

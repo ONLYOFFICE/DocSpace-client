@@ -150,9 +150,7 @@ const PasswordChangeForm = ({
           isVertical={true}
           labelVisible={false}
           hasError={isPasswordErrorShow && !passwordValid}
-          errorMessage={`${t(
-            "Common:PasswordLimitMessage",
-          )}: ${getPasswordErrorMessage(t, passwordSettings)}`}
+          errorMessage={t("Common:IncorrectPassword")}
         >
           <PasswordInput
             simpleView={false}
@@ -181,6 +179,7 @@ const PasswordChangeForm = ({
               "Common:PasswordLimitSpecialSymbols",
             )}`}
             generatePasswordTitle={t("Wizard:GeneratePassword")}
+            tooltipAllowedCharacters={`${t("Common:AllowedCharacters")}: ${ALLOWED_PASSWORD_CHARACTERS}`}
           />
         </FieldContainer>
       </div>

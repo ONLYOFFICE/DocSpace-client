@@ -32,7 +32,6 @@ import { useTranslation } from "react-i18next";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 import withLoader from "@/HOCs/withLoader";
 import { TError, WithLoaderProps } from "@/types";
@@ -86,7 +85,7 @@ const ChangeOwnerForm = ({ newOwner }: ChangeOwnerFormProps) => {
       {isOwnerChanged ? (
         <Text>
           {t("ConfirmOwnerPortalSuccessMessage", {
-            productName: PRODUCT_NAME,
+            productName: t("Common:ProductName"),
           })}
         </Text>
       ) : (
@@ -94,7 +93,7 @@ const ChangeOwnerForm = ({ newOwner }: ChangeOwnerFormProps) => {
           <Text className="subtitle">
             {t("ConfirmOwnerPortalTitle", {
               newOwner: newOwner,
-              productName: PRODUCT_NAME,
+              productName: t("Common:ProductName"),
             })}
           </Text>
           <ButtonsWrapper>

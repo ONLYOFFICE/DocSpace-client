@@ -100,6 +100,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
   const emailFromLink = linkData?.email ? linkData.email : "";
   const roomName = roomData?.title;
+  const roomId = roomData?.roomId;
 
   const [email, setEmail] = useState(emailFromLink);
   const [emailValid, setEmailValid] = useState(true);
@@ -142,7 +143,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       return signupOAuth(signupAccount)
         .then(() => {
           const url = roomData.roomId
-            ? `/rooms/shared/filter?folder=${roomData.roomId}/`
+            ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}/`
             : defaultPage;
           window.location.replace(url);
         })
@@ -166,22 +167,12 @@ const CreateUserForm = (props: CreateUserFormProps) => {
   }, [authCallback]);
 
   const onContinue = async () => {
-    setIsLoading(true);
-
-    let hasError = false;
-
-    const emailRegex = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$";
-    const validationEmail = new RegExp(emailRegex);
-
-    if (!validationEmail.test(email.trim())) {
-      hasError = true;
-      setEmailValid(!hasError);
-    }
-
-    if (hasError) {
-      setIsLoading(false);
+    if (!emailValid) {
+      setIsEmailErrorShow(true);
       return;
     }
+
+    setIsLoading(true);
 
     const headerKey = linkData?.confirmHeader ?? null;
 
@@ -200,6 +191,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
           roomName,
           firstName,
           lastName,
+          linkData,
         }),
       ),
     );
@@ -220,6 +212,14 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     setCookie(LANGUAGE, currentCultureName, {
       "max-age": COOKIE_EXPIRATION_YEAR,
     });
+
+    const finalUrl = roomId
+      ? `/rooms/shared/${roomId}/filter?folder=${roomId}`
+      : defaultPage;
+
+    if (roomId) {
+      sessionStorage.setItem("referenceUrl", finalUrl);
+    }
 
     window.location.href = combineUrl(
       window.ClientConfig?.proxy?.url,
@@ -246,14 +246,6 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     if (!sname.trim() || !snameValid) {
       hasError = true;
       setSnameValid(!hasError);
-    }
-
-    const emailRegex = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$";
-    const validationEmail = new RegExp(emailRegex);
-
-    if (!validationEmail.test(email.trim())) {
-      hasError = true;
-      setEmailValid(!hasError);
     }
 
     if (!passwordValid || !password.trim()) {
@@ -328,7 +320,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     const res = await login(userName, passwordHash);
 
     const finalUrl = roomData.roomId
-      ? `/rooms/shared/filter?folder=${roomData.roomId}`
+      ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}`
       : defaultPage;
 
     const isConfirm = typeof res === "string" && res.includes("confirm");

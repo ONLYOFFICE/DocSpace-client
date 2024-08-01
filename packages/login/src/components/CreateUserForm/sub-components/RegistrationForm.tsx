@@ -38,7 +38,6 @@ import {
   InputType,
   TextInput,
 } from "@docspace/shared/components/text-input";
-import { getPasswordErrorMessage } from "@docspace/shared/utils/getPasswordErrorMessage";
 
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 
@@ -171,9 +170,7 @@ const RegistrationForm = ({
         isVertical={true}
         labelVisible={false}
         hasError={isPasswordErrorShow && !passwordValid}
-        errorMessage={`${t(
-          "Common:PasswordLimitMessage",
-        )}: ${getPasswordErrorMessage(t, passwordSettings)}`}
+        errorMessage={t("Common:IncorrectPassword")}
       >
         <PasswordInput
           simpleView={false}
@@ -201,6 +198,7 @@ const RegistrationForm = ({
           tooltipPasswordCapital={`${t("Common:PasswordLimitUpperCase")}`}
           tooltipPasswordSpecial={`${t("Common:PasswordLimitSpecialSymbols")}`}
           generatePasswordTitle={t("Wizard:GeneratePassword")}
+          tooltipAllowedCharacters={`${t("Common:AllowedCharacters")}: ${ALLOWED_PASSWORD_CHARACTERS}`}
         />
       </FieldContainer>
 

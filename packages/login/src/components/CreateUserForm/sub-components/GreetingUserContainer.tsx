@@ -29,7 +29,6 @@ import { useTranslation, Trans } from "react-i18next";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Text } from "@docspace/shared/components/text";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.left.react.svg?url";
 

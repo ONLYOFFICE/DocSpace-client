@@ -46,7 +46,6 @@ import { useTranslation } from "react-i18next";
 import {
   COOKIE_EXPIRATION_YEAR,
   LANGUAGE,
-  PRODUCT_NAME,
 } from "@docspace/shared/constants";
 import { EmailSettings } from "@docspace/shared/utils";
 import {
@@ -274,7 +273,7 @@ function WizardForm(props: WizardFormProps) {
   return (
     <WizardContainer>
       <Text fontWeight={600} fontSize="16px" className="form-header">
-        {t("Wizard:Desc", { productName: PRODUCT_NAME })}
+        {t("Wizard:Desc", { productName: t("Common:ProductName") })}
       </Text>
       <FieldContainer
         className="wizard-field"

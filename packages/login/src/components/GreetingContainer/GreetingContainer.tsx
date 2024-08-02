@@ -33,7 +33,6 @@ import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { getLogoUrl } from "@docspace/shared/utils/common";
 
@@ -59,7 +58,7 @@ export const GreetingContainer = ({
           className="greeting-title"
         >
           {welcomeTitle
-            ? t(`${welcomeTitle}`, { productName: PRODUCT_NAME })
+            ? t(`${welcomeTitle}`, { productName: t("Common:ProductName") })
             : greetingSettings}
         </Text>
       )}

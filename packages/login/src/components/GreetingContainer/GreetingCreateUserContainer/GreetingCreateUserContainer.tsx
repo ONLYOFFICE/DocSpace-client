@@ -33,7 +33,6 @@ import { Trans, useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 import { getLogoUrl } from "@docspace/shared/utils";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 

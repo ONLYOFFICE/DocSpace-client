@@ -119,9 +119,9 @@ export const globalColors = {
   //
 
   tickColor: "#20D21F",
-  redRomb: "#de7a59",
-  blueRomb: "#55bce6",
-  greenRomb: "#a1cb5c",
+  redRomb: "#FF6F3D",
+  blueRomb: "#5DC0E8",
+  greenRomb: "#95C038",
   tapHighlight: "rgba(0, 0, 0, 0)",
   badgeShadow: "rgba(4, 15, 27, 0.16)",
   popupShadow: "rgba(4, 15, 27, 0.08)",

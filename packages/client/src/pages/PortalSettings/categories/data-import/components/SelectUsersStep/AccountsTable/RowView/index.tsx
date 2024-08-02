@@ -26,7 +26,7 @@
 
 import { inject, observer } from "mobx-react";
 import { tablet } from "@docspace/shared/utils/device";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import { IconButton } from "@docspace/shared/components/icon-button";
@@ -142,7 +142,6 @@ const RowView = (props: RowViewProps) => {
     t,
     sectionWidth,
     accountsData,
-
     checkedUsers,
     withEmailUsers,
     toggleAccount,

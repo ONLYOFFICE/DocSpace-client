@@ -26,7 +26,7 @@
 
 import { inject, observer } from "mobx-react";
 import { tablet } from "@docspace/shared/utils/device";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import { IconButton } from "@docspace/shared/components/icon-button";
@@ -56,7 +56,7 @@ const StyledRowContainer = styled(RowContainer)`
     margin-inline-start: -16px;
     width: 100%;
 
-    margin-top: -31.5px;
+    margin-top: -32.5px;
     top: 53px;
     margin-bottom: -29.5px;
 

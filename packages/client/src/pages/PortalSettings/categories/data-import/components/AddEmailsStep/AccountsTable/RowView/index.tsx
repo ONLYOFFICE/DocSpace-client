@@ -29,16 +29,25 @@ import { inject, observer } from "mobx-react";
 import { tablet } from "@docspace/shared/utils/device";
 import styled from "styled-components";
 
+import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { Link, LinkType } from "@docspace/shared/components/link";
+import { Box } from "@docspace/shared/components/box";
 import { RowContainer } from "@docspace/shared/components/row-container";
 import { Row } from "@docspace/shared/components/row";
 import { Text } from "@docspace/shared/components/text";
-import { globalColors } from "@docspace/shared/themes";
+import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
+import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 import { TEnhancedMigrationUser } from "@docspace/shared/api/settings/types";
 import UsersRow from "./UsersRow";
 import { AddEmailRowProps, RowViewProps } from "../../../../types";
 
 const StyledRowContainer = styled(RowContainer)`
   margin: 0 0 20px;
+
+  .clear-icon {
+    margin-inline-end: 8px;
+  }
 `;
 
 const StyledRow = styled(Row)`
@@ -72,6 +81,7 @@ const RowView = (props: RowViewProps) => {
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
+    setSearchValue,
   } = props as AddEmailRowProps;
 
   const [openedEmailKey, setOpenedEmailKey] = useState("");
@@ -86,6 +96,8 @@ const RowView = (props: RowViewProps) => {
   const handleToggle = (user: TEnhancedMigrationUser) =>
     toggleAccount(user, checkedAccountType);
 
+  const onClearFilter = () => setSearchValue("");
+
   const isIndeterminate =
     checkedUsers.withoutEmail.length > 0 &&
     checkedUsers.withoutEmail.length !== usersWithFilledEmails.length;
@@ -96,33 +108,56 @@ const RowView = (props: RowViewProps) => {
 
   return (
     <StyledRowContainer useReactWindow={false}>
-      <StyledRow
-        checked={isChecked}
-        onSelect={toggleAll}
-        indeterminate={isIndeterminate}
-        isDisabled={usersWithFilledEmails.length === 0}
-      >
-        <Text
-          className="row-header-title"
-          color={globalColors.gray}
-          fontWeight={600}
-          fontSize="12px"
-        >
-          {t("Common:Name")}
-        </Text>
-      </StyledRow>
-      {accountsData.map((data) => (
-        <UsersRow
-          t={t}
-          key={data.key}
-          data={data}
-          sectionWidth={sectionWidth}
-          toggleAccount={() => handleToggle(data)}
-          isChecked={isAccountChecked(data.key, checkedAccountType)}
-          isEmailOpen={openedEmailKey === data.key}
-          setOpenedEmailKey={setOpenedEmailKey}
+      {accountsData.length > 0 ? (
+        <>
+          <StyledRow
+            checked={isChecked}
+            onSelect={toggleAll}
+            indeterminate={isIndeterminate}
+            isDisabled={usersWithFilledEmails.length === 0}
+          >
+            <Text className="row-header-title">{t("Common:Name")}</Text>
+          </StyledRow>
+          {accountsData.map((data) => (
+            <UsersRow
+              t={t}
+              key={data.key}
+              data={data}
+              sectionWidth={sectionWidth}
+              toggleAccount={() => handleToggle(data)}
+              isChecked={isAccountChecked(data.key, checkedAccountType)}
+              isEmailOpen={openedEmailKey === data.key}
+              setOpenedEmailKey={setOpenedEmailKey}
+            />
+          ))}
+        </>
+      ) : (
+        <EmptyScreenContainer
+          imageSrc={EmptyScreenUserReactSvgUrl}
+          imageAlt="Empty Screen user image"
+          headerText={t("Common:NotFoundUsers")}
+          descriptionText={t("Common:NotFoundUsersDescription")}
+          buttons={
+            <Box displayProp="flex" alignItems="center">
+              <IconButton
+                className="clear-icon"
+                isFill
+                size={12}
+                onClick={onClearFilter}
+                iconName={ClearEmptyFilterSvgUrl}
+              />
+              <Link
+                type={LinkType.action}
+                isHovered
+                fontWeight="600"
+                onClick={onClearFilter}
+              >
+                {t("Common:ClearFilter")}
+              </Link>
+            </Box>
+          }
         />
-      ))}
+      )}
     </StyledRowContainer>
   );
 };
@@ -134,6 +169,7 @@ export default inject<TStore>(({ importAccountsStore }) => {
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
+    setSearchValue,
   } = importAccountsStore;
 
   return {
@@ -142,5 +178,6 @@ export default inject<TStore>(({ importAccountsStore }) => {
     toggleAccount,
     toggleAllAccounts,
     isAccountChecked,
+    setSearchValue,
   };
 })(observer(RowView));

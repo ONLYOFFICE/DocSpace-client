@@ -1,4 +1,11 @@
 {
+  "CodeSuccessfullyCopied": "Kod za unos uspešno kopiran na privremeno čuvanje podataka.",
+  "ContentRestricted": "Kopiranje sadržaja, preuzimanje datoteka i štampanje je zabranjeno.",
+  "DisplaySettings": "Podešavanja Ekrana",
+  "EmbeddingBarAllowList": "Dodajte URL web sajta za ugrađivanje na <1>listu dozvoljenih</1>.",
+  "EmbeddingBarDescription": "Ugrađivanje će funkcionisati samo za URL adrese koje je odredio administrator {{productName}} u podešavanjima JavaScript paketa za razvoj softvera (SDK).",
   "Height": "Visina",
+  "Link": "Link",
+  "LinkProtectedWithPassword": "Link je zaštićen lozinkom.",
   "Width": "Širina"
 }

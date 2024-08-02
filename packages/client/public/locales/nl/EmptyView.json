@@ -1,1 +1,24 @@
-{}
+{
+  "CollaboratorEmptyTitle": "De kamer is leeg.",
+  "CreateNewFileDescription": "Begin te werken in de kamer door bestanden of mappen aan te maken",
+  "CreateNewFileTitle": "Maak een nieuw bestand",
+  "CustomRoomEmptyTitle": "Welkom in de Aangepaste kamer",
+  "EmptyDescription": "Aan de slag met snelle acties:",
+  "FormFolderDefaultDescription": "Plaats hier PDF formulieren of upload ze vanaf {{productName}} of apparaat.",
+  "FormFolderDefaultTitle": "Hier zijn nog geen formulieren ",
+  "FormFolderDefaultUserDescription": "De formulieren die door de beheerders zijn geüpload, worden hier weergegeven.",
+  "FormFolderDefaultUserTitle": "Nog geen formulieren in deze map",
+  "FormRoomEmptyTitle": "Welkom in de kamer voor het invullen van Formulieren",
+  "InviteUsersOptionDescription": "Portaalleden toevoegen voor gezamenlijke bewerking in de kamer",
+  "InviteUsersOptionTitle": "Deelnemers Uitnodigen",
+  "ShareOptionDescription": "Kopieer een openbare toegangslink of nodig andere gebruikers uit in de kamer om het formulier invulproces te starten.",
+  "ShareOptionTitle": "Deel een kamer",
+  "UploadDeviceOptionDescription": "Upload elk type bestand vanaf uw persoonlijke apparaat",
+  "UploadDeviceOptionTitle": "Uploaden vanaf uw Apparaat",
+  "UploadDevicePDFFormOptionDescription": "Upload een gereed PDF formulier naar de kamer vanaf uw apparaat.",
+  "UploadDevicePDFFormOptionTitle": "Uploaden vanaf apparaat",
+  "UploadFromPortalDescription": "Upload elk type bestand vanuit Documenten of Kamers",
+  "UploadFromPortalTitle": "Uploaden van {{productName}}",
+  "UploadPDFFormOptionDescription": "Selecteer een PDF formulier dat beschikbaar is in {{productName}} en upload het naar de kamer.",
+  "UserEmptyDescription": "Bestanden en mappen die door admins zijn geüpload verschijnen hier."
+}

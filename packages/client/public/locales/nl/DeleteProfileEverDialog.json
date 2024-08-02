@@ -3,6 +3,8 @@
   "CannotReassignFiles": "Als u meerdere gebruikers tegelijk verwijdert, kunt u hun bestanden niet opnieuw toewijzen aan andere gebruikers.",
   "DeleteGroupUsersSuccessMessage": "Gebruikers zijn met succes verwijderd.",
   "DeleteMyDocumentsUser": "Alle persoonlijke bestanden en mappen in Mijn documenten van deze gebruiker worden definitief verwijderd.",
+  "DeletePersonalData": "Persoonsgegevens, alle persoonlijke bestanden en mappen in de secties Documenten en Prullenbak* van de geselecteerde gebruikers worden definitief verwijderd. Bestanden en mappen van de geselecteerde gebruikers die worden bewaard in gemeenschappelijke secties* zoals kamers, blijven in {{productName}}.",
+  "DeletePersonalDataApplicable": "*Van toepassing op de geselecteerde gebruikers die dergelijke bestanden en mappen hebben.",
   "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Kamers aangemaakt door deze gebruiker en documenten opgeslagen in deze kamers worden automatisch toegewezen aan een beheerder die gaat verwijderen: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Gegevens handmatig opnieuw toewijzen om een andere bestemmingsgebruiker te kiezen om opnieuw toe te wijzen.",
   "DeleteUser": "Gebruiker verwijderen",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> zal worden verwijderd. Deze actie kan niet ongedaan worden gemaakt.",

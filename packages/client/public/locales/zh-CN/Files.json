@@ -137,7 +137,7 @@
   "RestoreAll": "全部还原",
   "RevokeLink": "撤销链接",
   "RoomAvailableViaExternalLink": "可通过外部链接访问的房间",
-  "RoomAvailableViaSharedLink": "房间可通过共享链接使用",
+  "RoomAvailableViaSharedLink": "可通过共享连接访问此房间",
   "RoomCreated": "房间已创建",
   "RoomEmptyAtTheMoment": "这个房间目前是空的。",
   "RoomEmptyContainerDescription": "请创建首个房间。",

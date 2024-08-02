@@ -12,6 +12,7 @@
   "StorageQuotaDescription": "Sie können die unerwünschten Dateien entfernen oder <1>{{{clickHere}}</1> einen geeigneteren Preisplan für Ihren {{productName}} finden.",
   "StorageQuotaExceeded": "Speicherquote überschritten",
   "StorageQuotaHeader": "Das Speicherplatzlimit wird bald überschritten: {{currentValue}} / {{maxValue}}",
+  "StorageQuotaUserDescription": "Sie können die nicht benötigten Dateien entfernen, um Speicherplatz freizugeben.",
   "TenantCustomQuotaDescription": "Sie können unnötige Dateien entfernen oder die Quote in den <1>Speicherverwaltungseinstellungen</1> ändern",
   "UserQuotaDescription": "<1>{{clickHere}}</1>, um einen besseren Preisplan für Ihr {{productName}} zu finden.",
   "UserQuotaHeader": "Die Anzahl der Admins/Power-User wird bald überschritten sein: {{currentValue}} / {{maxValue}}."

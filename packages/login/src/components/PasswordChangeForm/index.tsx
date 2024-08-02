@@ -36,9 +36,9 @@ import { PasswordInput } from "@docspace/shared/components/password-input";
 import { Text } from "@docspace/shared/components/text";
 import { createPasswordHash } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/shared/components/toast";
-import { getPasswordErrorMessage } from "@docspace/shared/utils/getPasswordErrorMessage";
 import { InputSize, InputType } from "@docspace/shared/components/text-input";
 import { TPasswordHash } from "@docspace/shared/api/settings/types";
+import { ALLOWED_PASSWORD_CHARACTERS } from "@docspace/shared/constants";
 
 import withLoader from "@/HOCs/withLoader";
 import { changePassword } from "@/utils/actions";

@@ -38,6 +38,7 @@ import {
   InputType,
   TextInput,
 } from "@docspace/shared/components/text-input";
+import { ALLOWED_PASSWORD_CHARACTERS } from "@docspace/shared/constants";
 
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 

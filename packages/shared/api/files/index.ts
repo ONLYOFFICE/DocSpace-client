@@ -931,6 +931,17 @@ export async function changeKeepNewFileName(val: boolean) {
   return res;
 }
 
+export async function enableDisplayFileExtension(val: boolean) {
+  const data = { set: val };
+  const res = (await request({
+    method: "put",
+    url: "files/displayfileextension",
+    data,
+  })) as boolean;
+
+  return res;
+}
+
 export async function changeOpenEditorInSameTab(val: boolean) {
   const data = { set: val };
   const res = (await request({

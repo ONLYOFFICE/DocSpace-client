@@ -216,8 +216,9 @@ class FilesSettingsStore {
   };
 
   setDisplayFileExtension = (data) => {
-    this.setFilesSetting("displayFileExtension", data ? true : false);
-    console.log("need backend");
+    api.files
+      .enableDisplayFileExtension(data)
+      .then((res) => this.setFilesSetting("displayFileExtension", res));
   };
 
   setOpenEditorInSameTab = (data) => {

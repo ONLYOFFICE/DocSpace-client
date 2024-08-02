@@ -100,7 +100,7 @@ const StyledRole = styled.div`
 
 const StyledAssignedRole = styled.div`
   padding-inline-start: 4px;
-  color: rgba(170, 170, 170, 1);
+  color: ${globalColors.gray};
 
   ::before {
     content: "(";

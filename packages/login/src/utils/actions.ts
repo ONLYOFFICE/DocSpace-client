@@ -26,7 +26,7 @@
 
 "use server";
 
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 
 import {
   createRequest,
@@ -44,11 +44,11 @@ import {
   TTimeZone,
   TVersionBuild,
 } from "@docspace/shared/api/settings/types";
-import { TUser } from "@docspace/shared/api/people/types";
 import { Encoder } from "@docspace/shared/utils/encoder";
 import { TCreateUserData, TTfaSecretKeyAndQR } from "@/types";
 import { TScope } from "@docspace/shared/utils/oauth/types";
 import { transformToClientProps } from "@docspace/shared/utils/oauth";
+import { EmployeeActivationStatus } from "@docspace/shared/enums";
 
 export const checkIsAuthenticated = async () => {
   const [request] = createRequest(["/authentication"], [["", ""]], "GET");
@@ -466,6 +466,46 @@ export async function changePassword(
   }
 
   return user.response as TUser;
+}
+
+export async function changeEmail(
+  email: string,
+  userId?: string,
+  key: string | null = null,
+) {
+  const [changeEmail] = createRequest(
+    [`/people/${userId}/password`],
+    [
+      key ? ["confirm", key] : ["", ""],
+      ["Content-Type", "application/json;charset=utf-8"],
+    ],
+    "PUT",
+    JSON.stringify({ email }),
+  );
+
+  const res = await fetch(changeEmail);
+
+  if (!res.ok) throw new Error(res.statusText);
+}
+
+export async function updateActivationStatus(
+  activationStatus: EmployeeActivationStatus,
+  userId: string,
+  key: string,
+) {
+  const [updateActivationStatus] = createRequest(
+    [`/people/activationstatus/${activationStatus}`],
+    [
+      key ? ["confirm", key] : ["", ""],
+      ["Content-Type", "application/json;charset=utf-8"],
+    ],
+    "PUT",
+    JSON.stringify({ userIds: [userId] }),
+  );
+
+  const res = await fetch(updateActivationStatus);
+
+  if (!res.ok) throw new Error(res.statusText);
 }
 
 export async function ownerChange(

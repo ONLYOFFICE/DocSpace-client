@@ -6,6 +6,7 @@
   "DisplayTemplates": "Zobrazit šablony",
   "IntermediateVersion": "Zachovat všechny uložené meziverze",
   "KeepIntermediateVersion": "Při úpravách zachovat meziverze",
+  "OpenSameTab": "Otevřít editor {{organizationName}} na stejné kartě",
   "OriginalCopy": "Uložit kopii souboru i v původním formátu",
   "StoringFileVersion": "Ukládání verzí souborů",
   "ThirdPartyAccounts": "Účty třetích stran",

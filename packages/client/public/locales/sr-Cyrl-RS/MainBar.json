@@ -13,6 +13,6 @@
   "StorageQuotaExceeded": "Квота складишта прекорачена",
   "StorageQuotaHeader": "Количина меморијског простора ц́е ускоро бити прекорачена: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Можете уклонити непотребне датотеке или променити квоту у <1>Storage management settings.</1>",
-  "UserQuotaDescription": "<1> {{clickHere }}</1> да бисте пронашли бољи план цена за свој {{productName}}.",
+  "UserQuotaDescription": "<1>{{clickHere }}</1> да бисте пронашли бољи план цена за свој {{productName}}.",
   "UserQuotaHeader": "Број администратора/напредних корисника ће ускоро бити прекорачен: {{currentValue}} / {{maxValue}}."
 }

@@ -5,6 +5,7 @@
   "ExpiredCode": "Questo codice non è più valido. Richiedi un nuovo codice e riprova.",
   "ForgotPassword": "Password dimenticata?",
   "InvalidCode": "Questo codice non è valido. Riprova.",
+  "LDAPUsernamePlaceholder": "Nome utente di {{ldap_domain}}",
   "MessageAuthorize": "‎Accedere per continuare‎",
   "MessageEmailConfirmed": "Il tuo indirizzo email è stato confermato con successo.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "‎Inserisci l'e-mail che hai usato per la registrazione. Le istruzioni per il recupero della password verranno inviate su di esso.‎",
@@ -20,5 +21,7 @@
   "RegistrationEmailWatermark": "Email",
   "RememberHelper": "‎La durata predefinita della sessione è di 20 minuti. Selezionare questa opzione per impostarla su 1 anno. Per impostare il proprio valore, passare a Impostazioni.‎",
   "ResendCode": "Invia nuovamente il codice",
+  "SignInLDAP": "Accedi a: {{ldap_domain}}",
+  "SignInLdapHelper": "Utilizza le credenziali per il dominio aziendale",
   "UserIsAlreadyRegistered": "L'utente <1>{{email}}</1> è già registrato in questo {{productName}}, inserisci la tua password o torna indietro per continuare con un'altra email."
 }

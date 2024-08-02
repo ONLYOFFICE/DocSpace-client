@@ -1,1 +1,24 @@
-{}
+{
+  "CollaboratorEmptyTitle": "Pokój jest pusty.",
+  "CreateNewFileDescription": "Rozpocznij pracę w pokoju, tworząc pliki lub katalogi",
+  "CreateNewFileTitle": "Utwórz nowy plik",
+  "CustomRoomEmptyTitle": "Witaj w pokoju Niestandardowym",
+  "EmptyDescription": "Rozpocznij od szybkich działań:",
+  "FormFolderDefaultDescription": "Upuść formularze PDF tutaj lub prześlij je z {{productName}} bądź urządzenia.",
+  "FormFolderDefaultTitle": "Brak formularzy",
+  "FormFolderDefaultUserDescription": "Tutaj pojawią się formularze przesłane przez administratorów.",
+  "FormFolderDefaultUserTitle": "Brak formularzy w tym katalogu",
+  "FormRoomEmptyTitle": "Witaj w pokoju do wypełniania formularzy",
+  "InviteUsersOptionDescription": "Dodaj członków portalu do wspólnej edycji w pokoju",
+  "InviteUsersOptionTitle": "Zapraszanie uczestników",
+  "ShareOptionDescription": "Skopiuj link dostępu publicznego lub zaproś innych użytkowników do pokoju, aby rozpocząć proces wypełniania formularza.",
+  "ShareOptionTitle": "Udostępnij pokój",
+  "UploadDeviceOptionDescription": "Prześlij pliki dowolnego typu ze swojego urządzenia osobistego",
+  "UploadDeviceOptionTitle": "Prześlij ze swojego urządzenia",
+  "UploadDevicePDFFormOptionDescription": "Prześlij gotowy formularz PDF do pokoju ze swojego urządzenia.",
+  "UploadDevicePDFFormOptionTitle": "Prześlij z urządzenia",
+  "UploadFromPortalDescription": "Prześlij pliki dowolnego typu z Dokumentów lub Pokoi",
+  "UploadFromPortalTitle": "Prześlij z {{productName}}",
+  "UploadPDFFormOptionDescription": "Wybierz gotowy formularz PDF dostępny w {{productName}} i prześlij go do pokoju.",
+  "UserEmptyDescription": "Tutaj pojawią się pliki i katalogi przesłane przez administratorów."
+}

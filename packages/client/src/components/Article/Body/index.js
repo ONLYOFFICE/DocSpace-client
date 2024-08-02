@@ -44,6 +44,7 @@ import { CategoryType } from "SRC_DIR/helpers/constants";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { showProgress } from "@docspace/shared/utils/common";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 
 const ArticleBodyContent = (props) => {
@@ -187,6 +188,7 @@ const ArticleBodyContent = (props) => {
       setSelection && setSelection([]);
 
       setIsLoading(true, withTimer);
+
       navigate(path, { state });
 
       if (currentDeviceType === DeviceType.mobile) {
@@ -314,6 +316,8 @@ export default inject(
 
     const setIsLoading = (param, withTimer) => {
       setIsSectionFilterLoading(param, withTimer);
+
+      if (param && withTimer) showProgress();
     };
 
     const { roomsFolderId, archiveFolderId, myFolderId, recycleBinFolderId } =

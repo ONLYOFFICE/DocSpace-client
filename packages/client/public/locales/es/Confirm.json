@@ -7,6 +7,7 @@
   "DeleteProfileBtn": "Eliminar mi cuenta",
   "DeleteProfileConfirmation": "¡Atención! Usted va a eliminar su cuenta.",
   "DeleteProfileConfirmationInfo": "Al hacer clic en \"Eliminar mi cuenta\", usted acepta <1>nuestra política de privacidad.</1>",
+  "DeleteProfileSuccessDescription": "Su cuenta de {{productName}} se ha desactivado correctamente. El propietario o administrador de {{productName}} puede eliminar permanentemente su cuenta desactivada.",
   "DeleteProfileSuccessMessage": "Su cuenta ha sido eliminada con éxito.",
   "DeleteProfileSuccessMessageInfo": "Consulte <1>nuestra política de privacidad</1> para saber más sobre la eliminación de su cuenta y los datos asociados a ella.",
   "EmailAndPasswordCopiedToClipboard": "Email y contraseña se han copiado al portapapeles",

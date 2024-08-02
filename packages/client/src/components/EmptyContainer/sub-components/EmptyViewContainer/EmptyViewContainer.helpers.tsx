@@ -108,8 +108,6 @@ export const getDescription = (
   if (isNotAdmin || isArchiveFolderRoot)
     return t("EmptyView:UserEmptyDescription");
 
-  if (isCollaborator) return t("EmptyView:CollaboratorEmptyDesciprtion");
-
   return t("EmptyView:EmptyDescription");
 };
 

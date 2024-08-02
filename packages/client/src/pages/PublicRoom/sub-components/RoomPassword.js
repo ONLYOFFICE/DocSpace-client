@@ -37,7 +37,7 @@ import { frameCallCommand } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/shared/components/toast";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
-import { ValidationStatus } from "../../../helpers/constants";
+import { ValidationStatus } from "@docspace/shared/enums";
 
 import PublicRoomIcon from "PUBLIC_DIR/images/icons/32/room/public.svg";
 
@@ -167,6 +167,7 @@ const RoomPassword = (props) => {
                   isDisabled={isLoading}
                   isDisableTooltip
                   forwardedRef={inputRef}
+                  isAutoFocussed
                 />
               </FieldContainer>
             </div>

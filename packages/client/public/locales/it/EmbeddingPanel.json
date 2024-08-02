@@ -1,4 +1,11 @@
 {
+  "CodeSuccessfullyCopied": "Codice da inserire copiato con successo negli appunti",
+  "ContentRestricted": "La copia dei contenuti, il download dei file e la stampa sono limitati.",
+  "DisplaySettings": "Impostazioni di visualizzazione",
+  "EmbeddingBarAllowList": "Aggiungi l'URL del sito web da incorporare all'<1>elenco consentiti</1>.",
+  "EmbeddingBarDescription": "L'incorporamento funzionerà solo per gli URL specificati dall'amministratore di {{productName}} nelle impostazioni dell'SDK JavaScript.",
   "Height": "Altezza",
+  "Link": "Link",
+  "LinkProtectedWithPassword": "Il link è protetto da password.",
   "Width": "Larghezza"
 }

@@ -12,6 +12,7 @@
   "StorageQuotaDescription": "Možete da uklonite nepotrebne datoteke ili <1>{{clickHere}}</1> da biste pronašli prikladniji plan cena za vaš {{productName}}.",
   "StorageQuotaExceeded": "Kvota skladišta prekoračena",
   "StorageQuotaHeader": "Količina memorijskog prostora će uskoro biti prekoračena: {{currentValue}} / {{maxValue}}",
+  "StorageQuotaUserDescription": "Možete ukloniti nepotrebne datoteke da biste oslobodili prostor na disku.",
   "TenantCustomQuotaDescription": "Možete ukloniti nepotrebne datoteke ili promeniti kvotu u <1>Storage management settings.</1>",
   "UserQuotaDescription": "<1>{{clickHere}}</1> da biste pronašli bolji plan cena za svoj {{productName}}.",
   "UserQuotaHeader": "Broj administratora/naprednih korisnika će uskoro biti prekoračen: {{currentValue}} / {{maxValue}}."

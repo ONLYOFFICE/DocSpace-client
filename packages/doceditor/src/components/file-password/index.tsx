@@ -34,7 +34,6 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 
 import {
   StyledPage,

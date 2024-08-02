@@ -277,7 +277,7 @@
   "MyDocuments": "My documents",
   "Name": "Name",
   "NeedPassword": "You need a password to access the room",
-  "EnterPasswordDescription": "File «<1>{{fileName}}</1>» is located in the password-protected room. Please enter a password for the room",
+  "EnterPasswordDescription": "File <1>«{{fileName}}»</1> is located in the password-protected room. Please enter a password for the room",
   "PasswordRequired": "Password required",
   "NewDocument": "New document",
   "NewFolder": "New folder",

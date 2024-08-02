@@ -124,6 +124,10 @@ export const StyledContent = styled.div`
     justify-content: start;
     min-height: 100%;
   }
+
+  .bold {
+    font-weight: 600;
+  }
 `;
 
 export const StyledBody = styled.div`

@@ -71,7 +71,9 @@ export interface InjectedSelectFileStepProps extends SelectFileStepProps {
   setMigratingWorkspace: TStore["importAccountsStore"]["setMigratingWorkspace"];
   uploadFiles: TStore["importAccountsStore"]["uploadFiles"];
   defaultUsersQuota: TStore["currentQuotaStore"]["defaultUsersQuota"];
+  defaultRoomsQuota: TStore["currentQuotaStore"]["defaultRoomsQuota"];
   isDefaultUsersQuotaSet: TStore["currentQuotaStore"]["isDefaultUsersQuotaSet"];
+  isDefaultRoomsQuotaSet: TStore["currentQuotaStore"]["isDefaultRoomsQuotaSet"];
   warningQuotaDialogVisible: TStore["dialogsStore"]["warningQuotaDialogVisible"];
   setWarningQuotaDialogVisible: TStore["dialogsStore"]["setWarningQuotaDialogVisible"];
 }

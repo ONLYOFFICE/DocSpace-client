@@ -29,7 +29,7 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 
-import { convertBytes } from "@docspace/client/src/pages/PortalSettings/utils/convertBytes";
+import { getConvertedSize } from "@docspace/shared/utils/common";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { WarningQuotaDialogProps } from "./WarningQuotaDialog.types";
@@ -52,7 +52,7 @@ export const WarningQuotaDialog = ({
       <ModalDialog.Body>
         <Text noSelect style={{ marginBottom: "16px" }}>
           {t("Settings:StorageQuotaWarningDescription", {
-            quotaLimit: convertBytes(defaultQuota),
+            quotaLimit: getConvertedSize(t, defaultQuota),
             productName: t("Common:ProductName"),
           })}
         </Text>

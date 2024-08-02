@@ -157,7 +157,9 @@ const SelectFileStep = (props: SelectFileStepProps) => {
     setMigratingWorkspace,
     uploadFiles,
     defaultUsersQuota,
+    defaultRoomsQuota,
     isDefaultUsersQuotaSet,
+    isDefaultRoomsQuotaSet,
     warningQuotaDialogVisible,
     setWarningQuotaDialogVisible,
   } = props as InjectedSelectFileStepProps;
@@ -182,9 +184,17 @@ const SelectFileStep = (props: SelectFileStepProps) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setWarningQuotaDialogVisible(isDefaultUsersQuotaSet);
-    setDefaultQuota(defaultUsersQuota ?? 0);
-  }, [isDefaultUsersQuotaSet, setWarningQuotaDialogVisible, defaultUsersQuota]);
+    setWarningQuotaDialogVisible(
+      isDefaultUsersQuotaSet || isDefaultRoomsQuotaSet,
+    );
+    setDefaultQuota((defaultUsersQuota || defaultRoomsQuota) ?? 0);
+  }, [
+    defaultUsersQuota,
+    defaultRoomsQuota,
+    isDefaultRoomsQuotaSet,
+    isDefaultUsersQuotaSet,
+    setWarningQuotaDialogVisible,
+  ]);
 
   const onClickRedirect = () => {
     navigate("/portal-settings/management/disk-space");
@@ -531,7 +541,12 @@ export default inject<TStore>(
       setWarningQuotaDialogVisible,
     } = dialogsStore;
 
-    const { isDefaultUsersQuotaSet, defaultUsersQuota } = currentQuotaStore;
+    const {
+      isDefaultRoomsQuotaSet,
+      isDefaultUsersQuotaSet,
+      defaultUsersQuota,
+      defaultRoomsQuota,
+    } = currentQuotaStore;
 
     return {
       initMigrations,
@@ -550,6 +565,8 @@ export default inject<TStore>(
       setMigratingWorkspace,
       uploadFiles,
       defaultUsersQuota,
+      defaultRoomsQuota,
+      isDefaultRoomsQuotaSet,
       isDefaultUsersQuotaSet,
       warningQuotaDialogVisible,
       setWarningQuotaDialogVisible,

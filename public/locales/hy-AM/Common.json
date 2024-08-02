@@ -388,6 +388,7 @@
   "SelectFromPortal": "Ընտրել  {{productName}}-ից",
   "SelectorEmptyScreenHeader": "Այստեղ դեռ ֆայլեր և թղթապանակներ չկան",
   "SelectorFormRoomEmptyScreenDescription": "Ձեր ձևով կիսվելու և պատասխաններ հավաքելու համար խնդրում ենք ստեղծել Ձևաթղթերի լրացման սենյակ:",
+  "SelectorInfoBarDescription": "Կիսվեք ձեր ձևով և հավաքեք պատասխանները Ձևաթղթերի լրացման սենյակի միջոցով: Ընտրեք գոյություն ունեցող սենյակ կամ ստեղծեք նորը:",
   "SelectorInfoBarTitle": "Ուղարկել սենյակ լցնելու համար",
   "SelectPDFFormat": "Ընտրել .PDF ֆայլ",
   "SelectRoom": "Ընտրել Սենյակ",

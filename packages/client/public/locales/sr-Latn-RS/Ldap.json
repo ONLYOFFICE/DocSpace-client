@@ -43,7 +43,7 @@
   "LdapSettings": "LDAP podešavanja",
   "LdapSettingsCertCnNoMatch": "Ime sertifikata se ne poklapa sa imenom hosta",
   "LdapSettingsCertExpired": "Sertifikat je istekao",
-  "LdapSettingsCertIssuerChaining": "Nije pružen lanac izdavača sertifikata.",
+  "LdapSettingsCertIssuerChaining": "Nije pružen lanac izdavača sertifikata",
   "LdapSettingsCertMalformed": "Neispravan sertifikat",
   "LdapSettingsCertUnrecognizedError": "Neprepoznatljiva Greška",
   "LdapSettingsCertUntrustedCa": "Autoritet Sertifikata koji je izdao sertifikat nije pouzdan",

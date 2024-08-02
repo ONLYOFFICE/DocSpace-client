@@ -3,6 +3,8 @@
   "CheckReadyForms": "Проверить готовые формы",
   "Description": "Ваша форма заполнена и сохранена",
   "FillItOutAgain": "Заполнить еще раз",
+  "FormCompletedSuccessfully": "Форма успешно заполнена",
   "FormNumber": "Форма номер:",
+  "FormOwner": "Владелец формы",
   "Title": "Форма заполнена"
 }

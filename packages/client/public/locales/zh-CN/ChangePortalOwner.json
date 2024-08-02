@@ -1,6 +1,6 @@
 {
   "AppointAdmin": "预约管理员",
-  "BackupPortal": " 备份{{productName}}数据",
+  "BackupPortal": " 备份{{productName}}数据",
   "ChangeInstruction": " 要更改{{productName}}所有者，请在下面选择新所有者的姓名。",
   "ChangeOwner": " 更改{{productName}}所有者",
   "ChangeUser": "变更用户",

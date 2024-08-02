@@ -34,6 +34,8 @@ import EmptyFormRoomFillingDarkIcon from "PUBLIC_DIR/images/emptyview/empty.form
 import EmptyFormRoomFillingLightIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.filling.light.svg";
 
 import CreateNewFormIcon from "PUBLIC_DIR/images/emptyview/create.new.form.svg";
+import CreateNewSpreadsheetIcon from "PUBLIC_DIR/images/emptyview/create.new.spreadsheet.svg";
+import CreateNewPresentation from "PUBLIC_DIR/images/emptyview/create.new.presentation.svg";
 // import CreateFromFormIcon from "PUBLIC_DIR/images/emptyview/create.from.document.form.svg";
 import InviteUserFormIcon from "PUBLIC_DIR/images/emptyview/invite.user.svg";
 import UploadPDFFormIcon from "PUBLIC_DIR/images/emptyview/upload.pdf.form.svg";
@@ -48,6 +50,10 @@ import FolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
 
 import FormDefaultFolderLight from "PUBLIC_DIR/images/emptyview/empty.form.default.folder.light.svg";
 import FormDefaultFolderDark from "PUBLIC_DIR/images/emptyview/empty.form.default.folder.dark.svg";
+import DefaultFolderDark from "PUBLIC_DIR/images/emptyview/empty.default.folder.dark.svg";
+import DefaultFolderLight from "PUBLIC_DIR/images/emptyview/empty.default.folder.light.svg";
+import DefaultFolderUserDark from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.dark.svg";
+import DefaultFolderUserLight from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.light.svg";
 
 import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
@@ -59,8 +65,21 @@ import type {
   OptionActions,
   UploadType,
 } from "./EmptyViewContainer.types";
+import { DefaultFolderType } from "./EmptyViewContainer.constants";
 
 type AccessType = Nullable<ShareAccessRights> | undefined;
+
+const isUser = (access: AccessType) => {
+  return (
+    access !== ShareAccessRights.None &&
+    access !== ShareAccessRights.RoomManager &&
+    access !== ShareAccessRights.Collaborator
+  );
+};
+
+const isAdmin = (access: AccessType) => {
+  return !isUser(access);
+};
 
 export const getDescription = (
   type: RoomsType,
@@ -73,10 +92,7 @@ export const getDescription = (
 ): string => {
   const isCollaborator = access === ShareAccessRights.Collaborator;
 
-  const isNotAdmin =
-    access !== ShareAccessRights.None &&
-    access !== ShareAccessRights.RoomManager &&
-    !isCollaborator;
+  const isNotAdmin = isUser(access);
 
   if (isFolder) {
     return match([parentRoomType, folderType, access])
@@ -103,10 +119,16 @@ export const getDescription = (
         ],
         () => t("EmptyView:FormFolderDefaultUserDescription"),
       )
-      .with([FolderType.FormRoom, null, P._], () =>
+      .with([FolderType.FormRoom, DefaultFolderType, P._], () =>
         t("EmptyView:FormFolderDefaultDescription", {
           productName: t("Common:ProductName"),
         }),
+      )
+      .with([P._, DefaultFolderType, P.when(isAdmin)], () =>
+        t("EmptyView:DefaultFolderDescription"),
+      )
+      .with([P._, DefaultFolderType, P.when(isUser)], () =>
+        t("EmptyView:UserEmptyDescription"),
       )
       .otherwise(() => "");
   }
@@ -130,10 +152,7 @@ export const getTitle = (
 ): string => {
   const isCollaborator = access === ShareAccessRights.Collaborator;
 
-  const isNotAdmin =
-    access !== ShareAccessRights.None &&
-    access !== ShareAccessRights.RoomManager &&
-    !isCollaborator;
+  const isNotAdmin = isUser(access);
 
   if (isFolder) {
     return match([parentRoomType, folderType, access])
@@ -152,14 +171,15 @@ export const getTitle = (
       .with(
         [
           FolderType.FormRoom,
-          null,
+          DefaultFolderType,
           P.when(() => isNotAdmin || isArchiveFolderRoot),
         ],
         () => t("EmptyView:FormFolderDefaultUserTitle"),
       )
-      .with([FolderType.FormRoom, null, P._], () =>
+      .with([FolderType.FormRoom, DefaultFolderType, P._], () =>
         t("EmptyView:FormFolderDefaultTitle"),
       )
+      .with([P._, DefaultFolderType, P._], () => t("Files:EmptyScreenFolder"))
       .otherwise(() => "");
   }
 
@@ -190,6 +210,12 @@ export const getFolderIcon = (
   return match([roomType, folderType, access])
     .with([FolderType.FormRoom, P._, P._], () =>
       isBaseTheme ? <FormDefaultFolderLight /> : <FormDefaultFolderDark />,
+    )
+    .with([P._, DefaultFolderType, P.when(isUser)], () =>
+      isBaseTheme ? <DefaultFolderUserLight /> : <DefaultFolderUserDark />,
+    )
+    .with([P._, DefaultFolderType, P.when(isAdmin)], () =>
+      isBaseTheme ? <DefaultFolderLight /> : <DefaultFolderDark />,
     )
     .otherwise(() => <div />);
 };
@@ -360,10 +386,7 @@ export const getOptions = (
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
 
-  const isNotAdmin =
-    access !== ShareAccessRights.None &&
-    access !== ShareAccessRights.RoomManager &&
-    !isCollaborator;
+  const isNotAdmin = isUser(access);
 
   const {
     createInviteOption,
@@ -420,6 +443,31 @@ export const getOptions = (
     icon: <SharedIcon />,
     key: "share-public-room",
     onClick: actions.openInfoPanel,
+    disabled: false,
+  };
+
+  const createDoc = {
+    title: t("EmptyView:CreateDocument"),
+    description: t("EmptyView:CreateDocumentDescription"),
+    icon: <CreateNewFormIcon />,
+    key: "create-doc-option",
+    onClick: () => actions.onCreate("docx"),
+    disabled: false,
+  };
+  const createSpreadsheet = {
+    title: t("EmptyView:CreateSpreadsheet"),
+    description: t("EmptyView:CreateSpreadsheetDescription"),
+    icon: <CreateNewSpreadsheetIcon />,
+    key: "create-spreadsheet-option",
+    onClick: () => actions.onCreate("xlsx"),
+    disabled: false,
+  };
+  const createPresentation = {
+    title: t("EmptyView:CreatePresentation"),
+    description: t("EmptyView:CreatePresentationDescription"),
+    icon: <CreateNewPresentation />,
+    key: "create-presentation-option",
+    onClick: () => actions.onCreate("pptx"),
     disabled: false,
   };
 
@@ -481,10 +529,14 @@ export const getOptions = (
         ],
         () => [],
       )
-      .with([FolderType.FormRoom, null, P.when(() => isNotAdmin)], () => [])
-      .with([FolderType.FormRoom, null, P._], () => [
+      .with([FolderType.FormRoom, DefaultFolderType, P.when(isAdmin)], () => [
         uploadPDFFromDocSpace,
         uploadFromDevicePDF,
+      ])
+      .with([P._, DefaultFolderType, P.when(isAdmin)], () => [
+        createDoc,
+        createSpreadsheet,
+        createPresentation,
       ])
       .otherwise(() => []);
   }

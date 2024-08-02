@@ -79,18 +79,16 @@ const EmptyFolderContainer = ({
     [t, canCreateFiles, type],
   );
 
-  if (roomType || parentRoomType === FolderType.FormRoom) {
-    return (
-      <EmptyViewContainer
-        type={roomType}
-        folderType={type}
-        isFolder={!isRoom}
-        folderId={folderId}
-        parentRoomType={parentRoomType}
-        isArchiveFolderRoot={isArchiveFolderRoot}
-      />
-    );
-  }
+  return (
+    <EmptyViewContainer
+      type={roomType}
+      folderType={type}
+      isFolder={!isRoom}
+      folderId={folderId}
+      parentRoomType={parentRoomType}
+      isArchiveFolderRoot={isArchiveFolderRoot}
+    />
+  );
 
   return (
     <EmptyContainer

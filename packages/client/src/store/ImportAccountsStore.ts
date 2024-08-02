@@ -27,6 +27,7 @@
 import axios from "axios";
 import { uploadFile } from "@docspace/shared/api/files";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { toastr } from "@docspace/shared/components/toast";
 import { makeAutoObservable, runInAction } from "mobx";
 import {
   migrationList,
@@ -328,8 +329,8 @@ class ImportAccountsStore {
     };
   };
 
-  multipleFileUploading = async (
-    files: File[],
+  uploadFiles = async (
+    filesData: File | File[],
     setProgress: (progress: number) => void,
     isAbort: React.MutableRefObject<boolean>,
     setChunk: React.Dispatch<React.SetStateAction<number>>,
@@ -338,29 +339,34 @@ class ImportAccountsStore {
     chunkSize: number,
   ) => {
     let chunk = 0;
+    const location = combineUrl(
+      window.location.origin,
+      "migrationFileUpload.ashx",
+    );
+
     try {
-      const location = combineUrl(
-        window.location.origin,
-        "migrationFileUpload.ashx",
-      );
-      const requestsDataArray: { formData: FormData; fileName: string }[] = [];
+      let chunkUploadSize = chunkSize;
 
-      let chunkUploadSize = 0;
+      if (!chunkSize) {
+        const res = await axios.post<{
+          Success: boolean;
+          ChunkSize: number;
+          Message: string;
+        }>(`${location}?Init=${startChunk === 0}`);
 
-      if (chunkSize) {
-        chunkUploadSize = chunkSize;
-      } else {
-        const res: { data: { ChunkSize: number } } = await axios.post(
-          `${location}?Init=${startChunk === 0}`,
-        );
+        if (!res.data.Success) {
+          toastr.error(res.data.Message);
+          throw new Error(res.data.Message);
+        }
 
         chunkUploadSize = res.data.ChunkSize;
         setChunkSize(chunkUploadSize);
       }
 
-      if (!chunkUploadSize) return;
+      if (!chunkUploadSize || isAbort.current) return;
 
-      if (isAbort.current) return;
+      const requestsDataArray: { formData: FormData; fileName: string }[] = [];
+      const files = Array.isArray(filesData) ? filesData : [filesData];
 
       const chunksNumber = files
         .map((file) => Math.ceil(file.size / chunkUploadSize))
@@ -396,74 +402,9 @@ class ImportAccountsStore {
         setProgress(Math.ceil(progress));
         chunk += 1;
       }
-    } catch (e) {
+    } catch (error) {
       setChunk(chunk);
-    }
-  };
-
-  singleFileUploading = async (
-    file: File,
-    setProgress: (progress: number) => void,
-    isAbort: React.MutableRefObject<boolean>,
-    setChunk: React.Dispatch<React.SetStateAction<number>>,
-    startChunk: number,
-    setChunkSize: React.Dispatch<React.SetStateAction<number>>,
-    chunkSize: number,
-  ) => {
-    let chunk = 0;
-    try {
-      const location = combineUrl(
-        window.location.origin,
-        "migrationFileUpload.ashx",
-      );
-
-      let chunkUploadSize = 0;
-
-      if (chunkSize) {
-        chunkUploadSize = chunkSize;
-      } else {
-        const res: { data: { ChunkSize: number } } = await axios.post(
-          `${location}?Init=${startChunk === 0}`,
-        );
-
-        chunkUploadSize = res.data.ChunkSize;
-        setChunkSize(chunkUploadSize);
-      }
-
-      if (!chunkUploadSize) return;
-
-      const requestsDataArray = [];
-
-      const chunks = Math.ceil(file.size / chunkUploadSize);
-
-      if (isAbort.current) return;
-
-      while (chunk < chunks) {
-        const offset = chunk * chunkUploadSize;
-        const formData = new FormData();
-        formData.append("file", file.slice(offset, offset + chunkUploadSize));
-        requestsDataArray.push(formData);
-        chunk += 1;
-      }
-
-      chunk = startChunk || 0;
-      while (
-        chunk < chunks &&
-        (this.fileLoadingStatus === "upload" ||
-          this.fileLoadingStatus === "proceed")
-      ) {
-        if (isAbort.current) return;
-        // eslint-disable-next-line no-await-in-loop
-        await uploadFile(
-          `${location}?Name=${file.name}`,
-          requestsDataArray[chunk],
-        );
-        const progress = (chunk / chunks) * 100;
-        setProgress(Math.ceil(progress));
-        chunk += 1;
-      }
-    } catch (e) {
-      setChunk(chunk);
+      throw new Error(error as string);
     }
   };
 
@@ -481,7 +422,7 @@ class ImportAccountsStore {
   };
 
   // eslint-disable-next-line class-methods-use-this
-  initMigrationName = (name: TWorkspaceService) => {
+  initMigrations = (name: TWorkspaceService) => {
     return initMigration(name);
   };
 

@@ -34,7 +34,7 @@
         IE: 11,
         Edge: 109,
         Opera: 90,
-        Safari: 16,
+        Safari: 15,
         SafariMobile: 16,
         AscDesktopEditor: 6,
         SamsungBrowser: 4,
@@ -50,7 +50,7 @@
         let temp = [];
         let match =
           agent.match(
-            /(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i,
+            /(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i
           ) || [];
 
         if (/trident/i.test(match[1])) {
@@ -60,7 +60,7 @@
 
         if (match[1] === "Chrome") {
           temp = agent.match(
-            /\b(OPR|Edge|AscDesktopEditor|SamsungBrowser|UCBrowser)\/(\d+.\d)/,
+            /\b(OPR|Edge|AscDesktopEditor|SamsungBrowser|UCBrowser)\/(\d+.\d)/
           );
 
           const userOS =

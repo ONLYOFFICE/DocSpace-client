@@ -26,10 +26,9 @@
 
 import React, { useMemo, useState, useCallback, useEffect } from "react";
 
-import { useTranslation, Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { toastr } from "@docspace/shared/components/toast";
 import {
   Events,
   FilesSelectorFilterTypes,
@@ -78,7 +77,6 @@ import FilesSelector from "../FilesSelector";
 
 import LeaveRoomDialog from "../dialogs/LeaveRoomDialog";
 import ChangeRoomOwnerPanel from "../panels/ChangeRoomOwnerPanel";
-import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
 import { PDFFormEditingDialog } from "../dialogs/PDFFormEditingDialog";
 import { SharePDFFormDialog } from "../dialogs/SharePDFFormDialog";
 import { SessionsPanel } from "../panels/UserSessionsPanel";
@@ -143,13 +141,6 @@ const Panels = (props) => {
     shareCollectSelector,
   } = props;
 
-  const [createPDFFormFile, setCreatePDFFormFile] = useState({
-    visible: false,
-    file: null,
-    localKey: "",
-    onClose: null,
-  });
-
   const [sharePDFForm, setSharePDFForm] = useState({
     visible: false,
     data: null,
@@ -177,41 +168,6 @@ const Panels = (props) => {
     return text[selectFileFormRoomFilterParam];
   }, [selectFileFormRoomFilterParam, t]);
 
-  const handleCreatePDFFormFile = useCallback(
-    /**
-     * @param {CustomEvent} event
-     */
-    (event) => {
-      const { file, show, localKey } = event.detail;
-
-      if (!show) {
-        return toastr.success(
-          <Trans
-            ns="PDFFormDialog"
-            i18nKey="PDFFormIsReadyToast"
-            components={{ 1: <strong /> }}
-            values={{ filename: file.title }}
-          />,
-        );
-      }
-
-      setCreatePDFFormFile({
-        visible: true,
-        file,
-        localKey,
-        onClose: () => {
-          setCreatePDFFormFile({
-            visible: false,
-            onClose: null,
-            file: null,
-            localKey: "",
-          });
-        },
-      });
-    },
-    [],
-  );
-
   const handleSharePDFForm = useCallback(
     /**
      * @param {CustomEvent} event
@@ -231,20 +187,12 @@ const Panels = (props) => {
   );
 
   useEffect(() => {
-    window.addEventListener(
-      Events.CREATE_PDF_FORM_FILE,
-      handleCreatePDFFormFile,
-    );
     window.addEventListener(Events.Share_PDF_Form, handleSharePDFForm);
 
     return () => {
-      window.removeEventListener(
-        Events.CREATE_PDF_FORM_FILE,
-        handleCreatePDFFormFile,
-      );
       window.removeEventListener(Events.Share_PDF_Form, handleSharePDFForm);
     };
-  }, [handleCreatePDFFormFile, handleSharePDFForm]);
+  }, [handleSharePDFForm]);
 
   return [
     settingsPluginDialogVisible && (
@@ -359,12 +307,6 @@ const Panels = (props) => {
       <ChangeRoomOwnerPanel key="change-room-owner" />
     ),
     shareFolderDialogVisible && <ShareFolderDialog key="share-folder-dialog" />,
-    createPDFFormFile.visible && (
-      <CreatedPDFFormDialog
-        key="created-pdf-form-dialog"
-        {...createPDFFormFile}
-      />
-    ),
     pdfFormEditVisible && <PDFFormEditingDialog key="pdf-form-edit-dialog" />,
     sharePDFForm.visible && (
       <SharePDFFormDialog key="share-pdf-form-dialog" {...sharePDFForm} />

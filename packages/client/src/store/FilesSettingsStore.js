@@ -71,6 +71,7 @@ class FilesSettingsStore {
   chunkUploadSize = 1024 * 1023; // 1024 * 1023; //~0.999mb
   maxUploadThreadCount = 15;
   maxUploadFilesCount = 5;
+  displayFileExtension = null;
 
   settingsIsLoaded = false;
 
@@ -212,6 +213,11 @@ class FilesSettingsStore {
     api.files
       .changeKeepNewFileName(data)
       .then((res) => this.setFilesSetting("keepNewFileName", res));
+  };
+
+  setDisplayFileExtension = (data) => {
+    this.setFilesSetting("displayFileExtension", data ? true : false);
+    console.log("need backend");
   };
 
   setOpenEditorInSameTab = (data) => {

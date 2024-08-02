@@ -4,7 +4,7 @@ import { observer, inject } from "mobx-react";
 import { useParams, useSearchParams } from "react-router-dom";
 
 import api from "@docspace/shared/api";
-import { UrlActionType } from "@docspace/shared/enums";
+import { UrlActionType, ValidationStatus } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import MediaViewer from "@docspace/shared/components/media-viewer/MediaViewer";
 import { ViewerLoader } from "@docspace/shared/components/media-viewer/sub-components/ViewerLoader";
@@ -16,8 +16,6 @@ import type {
   NumberOrString,
   PlaylistType,
 } from "@docspace/shared/components/media-viewer/MediaViewer.types";
-
-import { ValidationStatus } from "SRC_DIR/helpers/constants";
 
 import type { PublicPreviewProps } from "./PublicPreview.types";
 import { DEFAULT_EXTS_IMAGE } from "./PublicPreview.constants";

@@ -432,6 +432,10 @@ class GroupsStore {
   };
 
   onDeleteGroup = async (t, groupId) => {
+    const { getIsInsideGroup, setInfoPanelSelectedGroup } = this.infoPanelStore;
+    const isDeletingCurrentGroup =
+      getIsInsideGroup() && this.currentGroup?.id === groupId;
+
     this.setIsLoading(true);
 
     if (!groupId) {
@@ -447,6 +451,12 @@ class GroupsStore {
       this.infoPanelStore.setInfoPanelSelection(null);
       this.setIsLoading(false);
       this.peopleStore.dialogStore.setDeleteGroupDialogVisible(false);
+
+      if (isDeletingCurrentGroup) {
+        setInfoPanelSelectedGroup(null);
+        this.setBufferSelection(null);
+        window.DocSpace.navigate(`accounts/groups`);
+      }
     } catch (err) {
       toastr.error(err.message);
       console.error(err);
@@ -572,7 +582,12 @@ class GroupsStore {
           label: t("Common:Delete"),
           title: t("Common:Delete"),
           icon: TrashReactSvgUrl,
-          onClick: () => this.onDeleteClick(item.name),
+          onClick: () => {
+            if (forInsideGroup) {
+              this.setBufferSelection(item);
+            }
+            this.onDeleteClick(item.name);
+          },
         },
     ];
   };

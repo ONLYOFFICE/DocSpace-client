@@ -1,8 +1,10 @@
 {
+  "ActivationRequired": "je potrebná aktivácia",
   "ChooseRoomType": "Vyberte typ miestnosti",
   "CreateRoomConfirmation": "Vybrali ste si možnosť úložiska od tretej strany, ktoré ešte nie je pripojené. Ak budete pokračovať bez aktivácie služby, táto možnosť nebude pridaná.",
   "CreateTagOption": "Vytvoriť značku",
   "DisableRoomQuota": "Vypnúť kvótu pre túto miestnosť",
+  "FormRoomBarDescription": "Táto miestnosť je dostupná každému, kto má k dispozícii odkaz. Externí používatelia budú mať oprávnenie na vyplnenie pre všetky súbory.",
   "Icon": "Ikona",
   "MakeRoomPrivateDescription": "Všetky súbory v tejto miestnosti budú zašifrované.",
   "MakeRoomPrivateLimitationsWarningDescription": "Pomocou tejto funkcie môžete pozývať iba existujúcich používateľov {{productName}}. Po vytvorení miestnosti už nebudete môcť zmeniť zoznam používateľov.",

@@ -3,6 +3,8 @@
   "CannotReassignFiles": "Se você excluir vários usuários de uma vez, não poderá reatribuir seus arquivos a outros usuários.",
   "DeleteGroupUsersSuccessMessage": "Os utilizadores foram eliminados com êxito.",
   "DeleteMyDocumentsUser": "Todos os arquivos e pastas pessoais na seção Documentos deste usuário serão excluídos permanentemente.",
+  "DeletePersonalData": "Os dados pessoais, todos os arquivos e pastas pessoais nas seções Documentos e Lixeira* dos usuários selecionados serão excluídos permanentemente. Arquivos e pastas dos usuários selecionados mantidos em seções comuns*, como salas, permanecerão em {{productName}}.",
+  "DeletePersonalDataApplicable": "*Aplicável aos usuários selecionados que possuem tais arquivos e pastas.",
   "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} As salas criadas por este usuário e os documentos armazenados nessas salas serão reatribuídos automaticamente a um administrador que executa a exclusão: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Reatribua os dados manualmente para escolher outro usuário de destino para reatribuição.",
   "DeleteUser": "Eliminar utilizador",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> será excluído. Essa ação não pode ser desfeita.",

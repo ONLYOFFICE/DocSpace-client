@@ -54,6 +54,7 @@ import { SearchProvider } from "./contexts/Search";
 import { BreadCrumbsProvider } from "./contexts/BreadCrumbs";
 import { TabsProvider } from "./contexts/Tabs";
 import { SelectAllProvider } from "./contexts/SelectAll";
+import { InfoBarProvider } from "./contexts/InfoBar";
 
 const Selector = ({
   id,
@@ -139,6 +140,8 @@ const Selector = ({
 
   withInfo,
   infoText,
+  infoBarData,
+  withInfoBar,
 }: SelectorProps) => {
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
 
@@ -529,6 +532,8 @@ const Selector = ({
       }
     : {};
 
+  const infoBarProps = { infoBarData, withInfoBar };
+
   React.useEffect(() => {
     if (!isMultiSelect) return;
     let hasConflict = false;
@@ -576,59 +581,61 @@ const Selector = ({
         searchEmptyScreenHeader={searchEmptyScreenHeader}
         searchEmptyScreenDescription={searchEmptyScreenDescription}
       >
-        <SearchProvider {...searchProps}>
-          <BreadCrumbsProvider {...breadCrumbsProps}>
-            <TabsProvider {...tabsProps}>
-              <SelectAllProvider
-                {...onSelectAllProps}
-                isAllChecked={isAllChecked}
-                isAllIndeterminate={isAllIndeterminate}
-              >
-                {withHeader && <Header {...headerProps} />}
-                <Body
-                  withHeader={withHeader}
-                  footerVisible={footerVisible || !!alwaysShowFooter}
-                  items={[...renderedItems]}
-                  isMultiSelect={isMultiSelect}
-                  onSelect={onSelectAction}
-                  hasNextPage={hasNextPage}
-                  isNextPageLoading={isNextPageLoading}
-                  loadMoreItems={loadMoreItems}
-                  renderCustomItem={renderCustomItem}
-                  totalItems={totalItems || 0}
-                  isLoading={isLoading}
-                  rowLoader={rowLoader}
-                  withFooterInput={withFooterInput}
-                  withFooterCheckbox={withFooterCheckbox}
-                  descriptionText={descriptionText}
-                  inputItemVisible={inputItemVisible}
-                  setInputItemVisible={setInputItemVisible}
-                  // info
-                  {...infoProps}
-                />
-                {(footerVisible || alwaysShowFooter) && (
-                  <Footer
+        <InfoBarProvider {...infoBarProps}>
+          <SearchProvider {...searchProps}>
+            <BreadCrumbsProvider {...breadCrumbsProps}>
+              <TabsProvider {...tabsProps}>
+                <SelectAllProvider
+                  {...onSelectAllProps}
+                  isAllChecked={isAllChecked}
+                  isAllIndeterminate={isAllIndeterminate}
+                >
+                  {withHeader && <Header {...headerProps} />}
+                  <Body
+                    withHeader={withHeader}
+                    footerVisible={footerVisible || !!alwaysShowFooter}
+                    items={[...renderedItems]}
                     isMultiSelect={isMultiSelect}
-                    selectedItemsCount={newSelectedItems.length}
-                    onSubmit={onSubmitAction}
-                    submitButtonLabel={submitButtonLabel}
-                    disableSubmitButton={disableSubmitButton}
-                    submitButtonId={submitButtonId}
-                    requestRunning={requestRunning}
-                    // cancel button
-                    {...cancelButtonProps}
-                    // access rights
-                    {...accessRightsProps}
-                    // input
-                    {...inputProps}
-                    // checkbox
-                    {...checkboxProps}
+                    onSelect={onSelectAction}
+                    hasNextPage={hasNextPage}
+                    isNextPageLoading={isNextPageLoading}
+                    loadMoreItems={loadMoreItems}
+                    renderCustomItem={renderCustomItem}
+                    totalItems={totalItems || 0}
+                    isLoading={isLoading}
+                    rowLoader={rowLoader}
+                    withFooterInput={withFooterInput}
+                    withFooterCheckbox={withFooterCheckbox}
+                    descriptionText={descriptionText}
+                    inputItemVisible={inputItemVisible}
+                    setInputItemVisible={setInputItemVisible}
+                    // info
+                    {...infoProps}
                   />
-                )}
-              </SelectAllProvider>
-            </TabsProvider>
-          </BreadCrumbsProvider>
-        </SearchProvider>
+                  {(footerVisible || alwaysShowFooter) && (
+                    <Footer
+                      isMultiSelect={isMultiSelect}
+                      selectedItemsCount={newSelectedItems.length}
+                      onSubmit={onSubmitAction}
+                      submitButtonLabel={submitButtonLabel}
+                      disableSubmitButton={disableSubmitButton}
+                      submitButtonId={submitButtonId}
+                      requestRunning={requestRunning}
+                      // cancel button
+                      {...cancelButtonProps}
+                      // access rights
+                      {...accessRightsProps}
+                      // input
+                      {...inputProps}
+                      // checkbox
+                      {...checkboxProps}
+                    />
+                  )}
+                </SelectAllProvider>
+              </TabsProvider>
+            </BreadCrumbsProvider>
+          </SearchProvider>
+        </InfoBarProvider>
       </EmptyScreenProvider>
     </StyledSelector>
   );

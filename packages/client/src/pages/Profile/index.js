@@ -29,6 +29,7 @@ import { useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 import Section from "@docspace/shared/components/section";
 
@@ -45,7 +46,6 @@ class Profile extends React.Component {
       fetchProfile,
       profile,
       t,
-      setDocumentTitle,
 
       setIsEditTargetUser,
 
@@ -150,7 +150,7 @@ const ComponentPure = inject(
     tfaStore,
     treeFoldersStore,
   }) => {
-    const { setDocumentTitle, language } = authStore;
+    const { language } = authStore;
 
     const {
       setIsProfileLoaded,
@@ -178,7 +178,6 @@ const ComponentPure = inject(
     const { getTfaType } = tfaStore;
 
     return {
-      setDocumentTitle,
       language,
       fetchProfile,
       profile,

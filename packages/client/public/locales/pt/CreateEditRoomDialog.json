@@ -1,8 +1,10 @@
 {
+  "ActivationRequired": "ativação necessária",
   "ChooseRoomType": "Escolha o tipo de sala",
   "CreateRoomConfirmation": "Continuar sem se conectar ao armazenamento?\nSelecionou uma opção de armazenamento de terceiros que ainda não está associada. Se prosseguir sem associar o serviço, esta opção não será adicionada.",
   "CreateTagOption": "Criar tag",
   "DisableRoomQuota": "Desativar cota para esta sala",
+  "FormRoomBarDescription": "Esta sala está disponível para qualquer pessoa com o link. Os usuários externos terão permissão de preenchimento de formulário para todos os arquivos.",
   "Icon": "Ícone",
   "MakeRoomPrivateDescription": "Todos os ficheiros nesta sala serão encriptados.",
   "MakeRoomPrivateLimitationsWarningDescription": "Com esta funcionalidade, pode convidar apenas utilizadores já existentes no {{productName}}. Depois de criar uma sala, não será possível alterar a lista de utilizadores.",

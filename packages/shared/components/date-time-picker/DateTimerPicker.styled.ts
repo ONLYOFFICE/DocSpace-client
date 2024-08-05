@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { getCorrectFourValuesStyle } from "../../utils";
 import { Base } from "../../themes";
 
 const Selectors = styled.div<{ hasError?: boolean }>`
@@ -66,8 +65,7 @@ const TimeCell = styled.span<{ hasError?: boolean }>`
   .clockIcon {
     width: 12px;
     height: 12px;
-    padding: ${({ theme }) =>
-      getCorrectFourValuesStyle("0 10px 0 2px", theme.interfaceDirection)};
+    padding-inline: 2px 10px;
 
     path {
       fill: ${(props) => props.theme.dateTimePicker.colorClockIcon};
@@ -88,10 +86,7 @@ const TimeCell = styled.span<{ hasError?: boolean }>`
 TimeCell.defaultProps = { theme: Base };
 
 const TimeSelector = styled.span`
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `margin-right: 4px;`
-      : `margin-left: 4px;`}
+  margin-inline-start: 4px;
   display: inline-flex;
   align-items: center;
 `;

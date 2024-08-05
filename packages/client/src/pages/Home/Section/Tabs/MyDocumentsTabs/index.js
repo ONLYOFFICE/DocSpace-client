@@ -38,6 +38,7 @@ const MyDocumentsTabs = ({
   setFilter,
   showBodyLoader,
   isRoot,
+  user,
 }) => {
   const { t } = useTranslation(["Common", "Files"]);
 
@@ -56,13 +57,25 @@ const MyDocumentsTabs = ({
     const filter = FilesFilter.getDefault();
     const url = window.DocSpace.location.pathname;
 
-    if (e.id === "recent") {
+    const recent = e.id === "recent";
+
+    const filterStorageItem = user?.id
+      ? recent
+        ? localStorage.getItem(`UserFilterRecent=${user.id}`)
+        : localStorage.getItem(`UserFilter=${user.id}`)
+      : null;
+
+    if (filterStorageItem) {
+      const splitFilter = filterStorageItem.split(",");
+
+      filter.sortBy = splitFilter[0];
+      filter.sortOrder = splitFilter[1];
+    } else if (recent) filter.sortBy = "LastOpened";
+
+    if (recent) {
       filter.folder = e.id;
       filter.searchArea = 3;
-      filter.sortBy = "LastOpened";
-    } else {
-      filter.searchArea = null;
-    }
+    } else filter.searchArea = null;
 
     setFilter(filter);
     window.DocSpace.navigate(`${url}?${filter.toUrlParams()}`);
@@ -83,17 +96,18 @@ const MyDocumentsTabs = ({
 };
 
 export default inject(
-  ({ treeFoldersStore, filesStore, clientLoadingStore }) => {
+  ({ treeFoldersStore, filesStore, clientLoadingStore, userStore }) => {
     const { isPersonalRoom, isRecentTab, isRoot } = treeFoldersStore;
     const { setFilter } = filesStore;
     const { showBodyLoader } = clientLoadingStore;
-
+    const { user } = userStore;
     return {
       isPersonalRoom,
       isRecentTab,
       setFilter,
       showBodyLoader,
       isRoot,
+      user,
     };
   },
 )(observer(MyDocumentsTabs));

@@ -48,13 +48,6 @@ export const StyledWrapper = styled.div`
 
   .floating-btn {
     bottom: 100px !important;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: 16px !important;
-          `
-        : css`
-            right: 16px !important;
-          `}
+    inset-inline-end: 16px !important;
   }
 `;

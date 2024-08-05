@@ -33,7 +33,7 @@ const StyledModalDialog = styled(ModalDialog)`
   }
 
   .modal-body {
-    padding: 0 0 8px;
+    padding: 0;
   }
 `;
 
@@ -57,7 +57,7 @@ const StyledBody = styled.div`
     .embedding-panel_banner-close-icon {
       min-width: 12px;
       min-height: 12px;
-      margin-left: auto;
+      margin-inline-start: auto;
     }
   }
 
@@ -103,19 +103,12 @@ const StyledBody = styled.div`
         .embedding-panel_size-block {
           display: flex;
           align-items: center;
+          gap: 8px;
           height: 32px;
         }
       }
 
       .embedding-panel_input {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-left: 8px;
-              `
-            : css`
-                margin-right: 8px;
-              `}
         width: 94px;
       }
     }
@@ -127,21 +120,14 @@ const StyledBody = styled.div`
   }
 
   .embedding-panel_text {
-    padding: 0px 0 4px 0;
+    padding: 0px 0 4px;
   }
 
   .embedding-panel_copy-icon {
     position: absolute;
     z-index: 1;
     margin: 8px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: 32px;
-          `
-        : css`
-            right: 32px;
-          `}
+    inset-inline-end: 32px;
   }
 
   .embedding-panel_preview-button {

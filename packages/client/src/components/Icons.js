@@ -41,14 +41,7 @@ export const EncryptedFileIcon = styled.div`
   position: absolute;
   width: 16px;
   margin-top: 14px;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: 12px;
-        `
-      : css`
-          margin-left: 12px;
-        `}
+  margin-inline-start: 12px;
 `;
 
 export const StyledFavoriteIcon = styled(FavoriteIcon)`

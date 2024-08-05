@@ -32,7 +32,6 @@ import RoomsIcon from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
 import PortfolioIcon from "PUBLIC_DIR/images/catalog.portfolio.react.svg?url";
 import ProjectsIcon from "PUBLIC_DIR/images/catalog.projects.react.svg?url";
 import DocumentsIcon from "PUBLIC_DIR/images/catalog.documents.react.svg?url";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import ImportSection from "../sub-components/ImportSection";
 import { ImportStepProps, InjectedImportStepProps } from "../types";
@@ -108,7 +107,7 @@ const ImportStep = (props: ImportStepProps) => {
         }}
         importSection={{
           sectionName: t("Common:Accounts"),
-          workspace: PRODUCT_NAME,
+          workspace: t("Common:ProductName"),
           sectionIcon: AccountsIcon,
         }}
         isDisabled
@@ -125,7 +124,7 @@ const ImportStep = (props: ImportStepProps) => {
         }}
         importSection={{
           sectionName: t("Common:Accounts"),
-          workspace: PRODUCT_NAME,
+          workspace: t("Common:ProductName"),
           sectionIcon: AccountsIcon,
         }}
         isDisabled={false}
@@ -143,7 +142,7 @@ const ImportStep = (props: ImportStepProps) => {
         }}
         importSection={{
           sectionName: t("Common:Documents"),
-          workspace: PRODUCT_NAME,
+          workspace: t("Common:ProductName"),
           sectionIcon: DocumentsIcon,
         }}
         isDisabled={false}
@@ -161,7 +160,7 @@ const ImportStep = (props: ImportStepProps) => {
         }}
         importSection={{
           sectionName: t("Common:Documents"),
-          workspace: PRODUCT_NAME,
+          workspace: t("Common:ProductName"),
           sectionIcon: DocumentsIcon,
         }}
         isDisabled={false}
@@ -178,7 +177,44 @@ const ImportStep = (props: ImportStepProps) => {
         }}
         importSection={{
           sectionName: t("Common:Rooms"),
-          workspace: PRODUCT_NAME,
+          workspace: t("Common:ProductName"),
+          sectionIcon: RoomsIcon,
+        }}
+        isDisabled={false}
+      />
+      <ImportSection
+        isChecked={importOptions.importCommonFiles}
+        onChange={(e) => onChange(e, "importCommonFiles")}
+        sectionName={t("Common:CommonFiles")}
+        description={t("Settings:CommonFilesDescription", {
+          user: user?.displayName,
+          productName: t("Common:ProductName"),
+        })}
+        exportSection={{
+          sectionName: t("Common:Common"),
+          workspace: serviceName,
+          sectionIcon: PortfolioIcon,
+        }}
+        importSection={{
+          sectionName: t("Common:Rooms"),
+          workspace: t("Common:ProductName"),
+          sectionIcon: RoomsIcon,
+        }}
+        isDisabled={false}
+      />
+      <ImportSection
+        isChecked={importOptions.importProjectFiles}
+        onChange={(e) => onChange(e, "importProjectFiles")}
+        sectionName={t("Common:Projects")}
+        description={t("Settings:ProjectsDescription")}
+        exportSection={{
+          sectionName: t("Common:Projects"),
+          workspace: serviceName,
+          sectionIcon: ProjectsIcon,
+        }}
+        importSection={{
+          sectionName: t("Common:Rooms"),
+          workspace: t("Common:ProductName"),
           sectionIcon: RoomsIcon,
         }}
         isDisabled={false}
@@ -198,7 +234,7 @@ const ImportStep = (props: ImportStepProps) => {
           }}
           importSection={{
             sectionName: t("Common:Rooms"),
-            workspace: PRODUCT_NAME,
+            workspace: t("Common:ProductName"),
             sectionIcon: RoomsIcon,
           }}
           isDisabled={false}
@@ -218,7 +254,7 @@ const ImportStep = (props: ImportStepProps) => {
           }}
           importSection={{
             sectionName: t("Common:Rooms"),
-            workspace: PRODUCT_NAME,
+            workspace: t("Common:ProductName"),
             sectionIcon: RoomsIcon,
           }}
           isDisabled={false}

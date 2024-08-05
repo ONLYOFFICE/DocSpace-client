@@ -54,33 +54,19 @@ const StyledCloseButtonWrapper = styled.div<{
       ? css`
           top: 18px;
 
-          ${props.theme.interfaceDirection === "rtl"
-            ? `left: -30px;`
-            : `right: -30px;`}
+          inset-inline-end: -30px;
 
           @media ${mobile} {
-            ${props.theme.interfaceDirection === "rtl"
-              ? `left: 10px;`
-              : `right: 10px;`}
+            inset-inline-end: 10px;
             top: -27px;
           }
         `
       : css`
           top: 18px;
-          ${props.theme.interfaceDirection === "rtl"
-            ? `right: -27px;`
-            : `left: -27px;`}
+          inset-inline-start: -27px;
           @media ${mobile} {
             top: -27px;
-            ${props.theme.interfaceDirection === "rtl"
-              ? css`
-                  right: auto;
-                  left: 10px;
-                `
-              : css`
-                  left: auto;
-                  right: 10px;
-                `}
+            inset-inline: auto 10px;
           }
         `}
 

@@ -150,6 +150,7 @@ export const enum FilterType {
   PublicRooms = 20,
   FormRooms = 21,
   Pdf = 22,
+  PDFForm = 23,
 }
 
 /**
@@ -601,4 +602,22 @@ export const enum LDAPCertificateProblem {
   CertWrongUsage = -2146762480,
   CertUntrustedCa = -2146762478,
   CertUnrecognizedError = -2146762477,
+}
+
+export enum FileExtensions {
+  PDF = "pdf",
+  DOC = "doc",
+  DOCX = "docx",
+  DOCXF = "docxf",
+  XLSX = "xlsx",
+  PPTX = "pptx",
+}
+
+export enum ValidationStatus {
+  Ok = 0,
+  Invalid = 1,
+  Expired = 2,
+  Password = 3,
+  InvalidPassword = 4,
+  ExternalAccessDenied = 5,
 }

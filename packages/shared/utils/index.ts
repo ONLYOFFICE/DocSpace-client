@@ -77,6 +77,7 @@ import {
 } from "./common";
 import { DeviceType } from "../enums";
 import { TFile } from "../api/files/types";
+import { onEdgeScrolling, clearEdgeScrollingTimer } from "./edgeScrolling";
 
 export {
   isBetaLanguage,
@@ -127,6 +128,8 @@ export {
   ObjectUtils,
   getLogoUrl,
   isMobileDevice,
+  onEdgeScrolling,
+  clearEdgeScrollingTimer,
 };
 
 export const getModalType = () => {

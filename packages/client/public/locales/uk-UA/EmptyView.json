@@ -1,1 +1,24 @@
-{}
+{
+  "CollaboratorEmptyTitle": "Кімната порожня.",
+  "CreateNewFileDescription": "Почніть працювати в кімнаті, створюючи файли або папки",
+  "CreateNewFileTitle": "Створити новий файл",
+  "CustomRoomEmptyTitle": "Вітаємо в налаштовуваній кімнаті",
+  "EmptyDescription": "Почніть зі швидких дій:",
+  "FormFolderDefaultDescription": "Перетягніть PDF-форми сюди або передайте з {{productName}} чи пристрою.",
+  "FormFolderDefaultTitle": "Тут ще немає форм",
+  "FormFolderDefaultUserDescription": "Тут з'являться форми, передані адміністраторами.",
+  "FormFolderDefaultUserTitle": "У цій папці ще немає форм",
+  "FormRoomEmptyTitle": "Ласкаво просимо до кімнати заповнення форм",
+  "InviteUsersOptionDescription": "Додайте учасників порталу для спільного редагування в кімнаті",
+  "InviteUsersOptionTitle": "Запрошення учасників",
+  "ShareOptionDescription": "Скопіюйте посилання публічного доступу або запросіть інших користувачів до кімнати, щоб почати процес заповнення форм",
+  "ShareOptionTitle": "Поділитися кімнатою",
+  "UploadDeviceOptionDescription": "Передайте файли будь-якого типу зі свого особистого пристрою",
+  "UploadDeviceOptionTitle": "Передати з пристрою",
+  "UploadDevicePDFFormOptionDescription": "Передайте готову PDF-форму до кімнати зі свого пристрою",
+  "UploadDevicePDFFormOptionTitle": "Передати з пристрою",
+  "UploadFromPortalDescription": "Передавайте файли будь-якого типу з розділів «Документи» та «Кімнати»",
+  "UploadFromPortalTitle": "Передати з {{productName}}",
+  "UploadPDFFormOptionDescription": "Виберіть готову PDF-форму, доступну в {{productName}}, і передайте її до кімнати.",
+  "UserEmptyDescription": "Тут з'являться файли та папки, передані адміністраторами."
+}

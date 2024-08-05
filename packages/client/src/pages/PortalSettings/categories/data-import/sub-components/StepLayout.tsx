@@ -27,7 +27,6 @@
 import styled from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 import { LayoutProps } from "../types";
 
 const DescriptionWrapper = styled.div`
@@ -49,23 +48,15 @@ const DescriptionWrapper = styled.div`
 `;
 
 const StepLayout = (props: LayoutProps) => {
-  const {
-    t,
-    step,
-    totalSteps,
-    title,
-    description,
-    component,
-    organizationName,
-  } = props;
+  const { t, step, totalSteps, title, description, component } = props;
 
   return (
     <>
       <DescriptionWrapper>
         <Text className="data-import-description" lineHeight="20px">
           {t("Settings:AboutDataImport", {
-            productName: PRODUCT_NAME,
-            organizationName,
+            productName: t("Common:ProductName"),
+            organizationName: t("Common:OrganizationName"),
           })}
         </Text>
         <Text

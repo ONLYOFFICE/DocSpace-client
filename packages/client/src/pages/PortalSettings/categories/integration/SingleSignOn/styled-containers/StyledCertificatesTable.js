@@ -44,9 +44,9 @@ const StyledCertificatesTable = styled.div`
       display: flex;
       align-items: center;
 
-      border-left: 1px solid #d0d5da;
+      border-inline-start: 1px solid #d0d5da;
       height: 13px;
-      padding-left: 8px;
+      padding-inline-start: 8px;
     }
   }
 

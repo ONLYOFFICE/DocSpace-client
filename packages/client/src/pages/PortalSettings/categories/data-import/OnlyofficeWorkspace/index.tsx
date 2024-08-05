@@ -41,7 +41,6 @@ const OnlyofficeWorkspace = (props: WorkspaceProps) => {
     filteredUsers,
     step,
     setStep,
-    organizationName,
     migratingWorkspace,
     migrationPhase,
     isMigrationInit,
@@ -52,11 +51,7 @@ const OnlyofficeWorkspace = (props: WorkspaceProps) => {
     "Common, SMTPSettings, Settings",
   ]);
 
-  const StepsData = getStepsData(
-    t,
-    filteredUsers.length === 0,
-    organizationName,
-  );
+  const StepsData = getStepsData(t, filteredUsers.length === 0);
 
   useLayoutEffect(() => {
     if (migratingWorkspace === "Workspace" && !isMigrationInit) {
@@ -69,6 +64,7 @@ const OnlyofficeWorkspace = (props: WorkspaceProps) => {
       }
       setIsMigrationInit(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!ready) return <SelectFileLoader />;
@@ -82,7 +78,6 @@ const OnlyofficeWorkspace = (props: WorkspaceProps) => {
       title={StepsData[step - 1].title}
       description={StepsData[step - 1].description}
       component={StepsData[step - 1].component}
-      organizationName={organizationName}
     />
   );
 };
@@ -99,7 +94,7 @@ export const Component = inject<TStore>(
       isMigrationInit,
       setIsMigrationInit,
     } = importAccountsStore;
-    const { theme, organizationName } = settingsStore;
+    const { theme } = settingsStore;
 
     return {
       theme,
@@ -107,7 +102,6 @@ export const Component = inject<TStore>(
       step,
       setStep,
       setWorkspace,
-      organizationName,
       migrationPhase,
       migratingWorkspace,
       isMigrationInit,

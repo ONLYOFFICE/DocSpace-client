@@ -91,4 +91,5 @@ export const globalColors = {
   lightErrorStatus: "#F24724",
   darkErrorStatus: "#E06451",
   outerSpace: "#474747",
+  silverChalice: "#ADADAD",
 };

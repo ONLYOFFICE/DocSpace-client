@@ -12,6 +12,7 @@
   "StorageQuotaDescription": "Pode remover os ficheiros desnecessários ou <1>{{clickHere}}</1> para encontrar um plano de preços mais adequado para o seu {{productName}}.",
   "StorageQuotaExceeded": "Cota de armazenamento excedida",
   "StorageQuotaHeader": "A capacidade de armazenamento do espaço está prestes a ser excedida: {{currentValue}} / {{maxValue}}",
+  "StorageQuotaUserDescription": "Você pode remover os arquivos desnecessários para liberar espaço em disco.",
   "TenantCustomQuotaDescription": "Você pode remover os arquivos desnecessários ou alterar a cota nas <1>Configurações de gerenciamento de armazenamento.</1>",
   "UserQuotaDescription": "<1>{{clickHere}}</1> para encontrar um plano de preços melhor para o seu {{productName}}.",
   "UserQuotaHeader": "O número de administradores/utilizadores com poder está prestes a ser excedido: {{currentValue}} / {{maxValue}}."

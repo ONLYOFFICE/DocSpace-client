@@ -45,7 +45,6 @@ export interface InjectedProvidersProps extends ProvidersProps {
   setServices: TStore["importAccountsStore"]["setServices"];
   getMigrationList: TStore["importAccountsStore"]["getMigrationList"];
   setWorkspace: TStore["importAccountsStore"]["setWorkspace"];
-  organizationName: TStore["settingsStore"]["organizationName"];
 }
 
 export interface SelectFileStepProps {
@@ -60,8 +59,7 @@ export interface InjectedSelectFileStepProps extends SelectFileStepProps {
   setWorkspace: TStore["importAccountsStore"]["setWorkspace"];
   cancelUploadDialogVisible: TStore["dialogsStore"]["cancelUploadDialogVisible"];
   setCancelUploadDialogVisible: TStore["dialogsStore"]["setCancelUploadDialogVisible"];
-  initMigrationName: TStore["importAccountsStore"]["initMigrationName"];
-  singleFileUploading: TStore["importAccountsStore"]["singleFileUploading"];
+  initMigrations: TStore["importAccountsStore"]["initMigrations"];
   getMigrationStatus: TStore["importAccountsStore"]["getMigrationStatus"];
   setUsers: TStore["importAccountsStore"]["setUsers"];
   fileLoadingStatus: TStore["importAccountsStore"]["fileLoadingStatus"];
@@ -69,15 +67,14 @@ export interface InjectedSelectFileStepProps extends SelectFileStepProps {
   cancelMigration: TStore["importAccountsStore"]["cancelMigration"];
   files: TStore["importAccountsStore"]["files"];
   setFiles: TStore["importAccountsStore"]["setFiles"];
-  multipleFileUploading: TStore["importAccountsStore"]["multipleFileUploading"];
   migratingWorkspace: TStore["importAccountsStore"]["migratingWorkspace"];
   setMigratingWorkspace: TStore["importAccountsStore"]["setMigratingWorkspace"];
+  uploadFiles: TStore["importAccountsStore"]["uploadFiles"];
 }
 
 export interface DataImportProps {}
 
 export interface InjectedDataImportProps extends DataImportProps {
-  setDocumentTitle: TStore["authStore"]["setDocumentTitle"];
   getMigrationStatus: TStore["importAccountsStore"]["getMigrationStatus"];
   viewAs: TStore["setup"]["viewAs"];
   setViewAs: TStore["setup"]["setViewAs"];
@@ -101,11 +98,8 @@ export interface InjectedWorkspaceProps extends WorkspaceProps {
   setStep: TStore["importAccountsStore"]["setStep"];
   migratingWorkspace: TStore["importAccountsStore"]["migratingWorkspace"];
   migrationPhase: TStore["importAccountsStore"]["migrationPhase"];
-  organizationName: TStore["settingsStore"]["organizationName"];
   isMigrationInit: TStore["importAccountsStore"]["isMigrationInit"];
   setIsMigrationInit: TStore["importAccountsStore"]["setIsMigrationInit"];
-
-  setDocumentTitle: TStore["authStore"]["setDocumentTitle"];
 }
 
 export interface LayoutProps {
@@ -116,7 +110,6 @@ export interface LayoutProps {
   title: string;
   description: string;
   component: JSX.Element;
-  organizationName: string;
 }
 
 export type TQuota = TPaymentFeature;
@@ -175,6 +168,7 @@ export interface InjectedTableViewProps extends TableViewProps {
 
 export interface AddEmailTableProps extends InjectedTableViewProps {
   users: TStore["importAccountsStore"]["users"];
+  setSearchValue: TStore["importAccountsStore"]["setSearchValue"];
 }
 
 export interface SelectUserTableProps extends InjectedTableViewProps {
@@ -226,6 +220,7 @@ export interface AddEmailRowProps extends RowViewProps {
   toggleAccount: TStore["importAccountsStore"]["toggleAccount"];
   toggleAllAccounts: TStore["importAccountsStore"]["toggleAllAccounts"];
   isAccountChecked: TStore["importAccountsStore"]["isAccountChecked"];
+  setSearchValue: TStore["importAccountsStore"]["setSearchValue"];
 }
 
 export interface UsersRowProps {

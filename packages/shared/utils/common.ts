@@ -65,7 +65,6 @@ import {
 import {
   COOKIE_EXPIRATION_YEAR,
   LANGUAGE,
-  PRODUCT_NAME,
   PUBLIC_MEDIA_VIEW_URL,
   RTL_LANGUAGES,
 } from "../constants";
@@ -145,7 +144,7 @@ export const getUserTypeLabel = (
     case "owner":
       return t("Common:Owner");
     case "admin":
-      return t("Common:PortalAdmin", { productName: PRODUCT_NAME });
+      return t("Common:PortalAdmin", { productName: t("Common:ProductName") });
     case "manager":
       return t("Common:RoomAdmin");
     case "collaborator":
@@ -273,8 +272,13 @@ export function showLoader() {
   if (isMobile) return;
 
   hideLoader();
-
   timer = setTimeout(() => TopLoaderService.start(), 500);
+}
+
+export function showProgress() {
+  if (isMobile) return;
+  TopLoaderService.cancel();
+  TopLoaderService.start();
 }
 
 export function isMe(user: TUser, userName: string) {
@@ -1113,7 +1117,7 @@ export const getUserTypeName = (
   if (isOwner) return t("Common:Owner");
 
   if (isPortalAdmin)
-    return t("Common:PortalAdmin", { productName: PRODUCT_NAME });
+    return t("Common:PortalAdmin", { productName: t("Common:ProductName") });
 
   if (isRoomAdmin) return t("Common:RoomAdmin");
 
@@ -1130,7 +1134,7 @@ export const getUserTypeDescription = (
 ) => {
   if (isPortalAdmin)
     return t("Translations:RolePortalAdminDescription", {
-      productName: PRODUCT_NAME,
+      productName: t("Common:ProductName"),
     });
 
   if (isRoomAdmin) return t("Translations:RoleRoomAdminDescription");

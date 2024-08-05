@@ -33,6 +33,9 @@ import { useTheme } from "styled-components";
 
 const StyledLoadErrorIcon = styled(LoadErrorIcon)`
   outline: none !important;
+  path {
+    fill: ${(props) => props.theme.filesPanels.upload.iconColor};
+  }
 `;
 
 const ErrorFileUpload = ({

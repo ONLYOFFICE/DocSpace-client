@@ -29,6 +29,7 @@ import { makeAutoObservable } from "mobx";
 
 import api from "@docspace/shared/api";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
   frameCallCommand,
   isPublicRoom as isPublicRoomUtil,
@@ -37,7 +38,8 @@ import {
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
-import { LinkType, ValidationStatus } from "../helpers/constants";
+import { LinkType } from "../helpers/constants";
+import { ValidationStatus } from "@docspace/shared/enums";
 
 class PublicRoomStore {
   externalLinks = [];
@@ -124,7 +126,13 @@ class PublicRoomStore {
 
         if (filter) {
           const folderId = filter.folder;
-          return fetchFiles(folderId, filter);
+          return fetchFiles(folderId, filter).catch((error) => {
+            if (error?.response?.status === 403) {
+              window.location.replace(
+                combineUrl(window.ClientConfig?.proxy?.url, "/login"),
+              );
+            }
+          });
         }
 
         return Promise.resolve();

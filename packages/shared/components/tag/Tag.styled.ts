@@ -50,15 +50,7 @@ const StyledTag = styled.div<{
   box-sizing: border-box;
 
   padding: 2px 10px;
-
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-left: ${props.isLast ? "0" : "4px"};
-        `
-      : css`
-          margin-right: ${props.isLast ? "0" : "4px"};
-        `}
+  margin-inline-end: ${({ isLast }) => (isLast ? "0" : "4px")};
 
   background: ${(props) =>
     props.isDisabled
@@ -89,14 +81,7 @@ const StyledTag = styled.div<{
     `}
 
   .tag-icon {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 12px;
-          `
-        : css`
-            margin-left: 12px;
-          `}
+    margin-inline-start: 12px;
 
     cursor: pointer;
   }
@@ -105,6 +90,20 @@ const StyledTag = styled.div<{
     padding: 2px 0px;
     width: 16px;
     height: 16px;
+
+    ${(props) =>
+      !props.theme.isBase &&
+      css`
+        svg {
+          path[fill] {
+            fill: #fff;
+        }
+
+          path[stroke] {
+            stroke: #fff;
+          }
+        `}
+    }
   }
 
   ${(props) =>

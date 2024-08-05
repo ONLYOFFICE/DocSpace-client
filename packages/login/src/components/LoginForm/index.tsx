@@ -42,7 +42,10 @@ import { useSearchParams, useRouter } from "next/navigation";
 
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { createPasswordHash } from "@docspace/shared/utils/common";
+import {
+  createPasswordHash,
+  frameCallCommand,
+} from "@docspace/shared/utils/common";
 import { checkPwd } from "@docspace/shared/utils/desktop";
 import { login } from "@docspace/shared/utils/loginUtils";
 import { toastr } from "@docspace/shared/components/toast";
@@ -71,6 +74,8 @@ import { LoginDispatchContext, LoginValueContext } from "../Login";
 import OAuthClientInfo from "../ConsentInfo";
 
 // import { gitAvailablePortals } from "@/utils/actions";
+
+let showToastr = true;
 
 const LoginForm = ({
   hashSettings,
@@ -129,6 +134,7 @@ const LoginForm = ({
 
     setIdentifier(email);
     setEmailFromInvitation(email);
+    frameCallCommand("setIsLoaded");
   }, [loginData]);
 
   const authCallback = useCallback(
@@ -204,8 +210,7 @@ const LoginForm = ({
       !toastr.isActive(toastId.current || "confirm-email-toast")
     )
       toastId.current = toastr.success(text);
-    if (authError && ready) toastr.error(t("Common:ProviderLoginError"));
-  }, [message, confirmedEmail, t, ready, authError, authCallback]);
+  }, [message, confirmedEmail, t, ready, authCallback]);
 
   const onChangeLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
     //console.log("onChangeLogin", e.target.value);
@@ -425,6 +430,11 @@ const LoginForm = ({
   }, [isModalOpen, onSubmit]);
 
   const passwordErrorMessage = errorMessage();
+
+  if (authError && ready) {
+    if (showToastr) toastr.error(t("Common:ProviderLoginError"));
+    showToastr = false;
+  }
 
   return (
     <form className="auth-form-container">

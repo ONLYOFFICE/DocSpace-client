@@ -28,9 +28,8 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { Box } from "@docspace/shared/components/box";
-import { TextInput } from "@docspace/shared/components/text-input";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import { Textarea } from "@docspace/shared/components/textarea";
+import LdapFieldComponent from "./LdapFieldComponent";
 
 const USER_DN = "userDN",
   SERVER = "server",
@@ -97,7 +96,7 @@ const ConnectionSettings = (props) => {
           inlineHelpButton
           isRequired
         >
-          <TextInput
+          <LdapFieldComponent
             name={SERVER}
             hasError={errors.server}
             onChange={onChangeValue}
@@ -118,7 +117,7 @@ const ConnectionSettings = (props) => {
           inlineHelpButton
           isRequired
         >
-          <TextInput
+          <LdapFieldComponent
             name={USER_DN}
             hasError={errors.userDN}
             onChange={onChangeValue}
@@ -139,7 +138,7 @@ const ConnectionSettings = (props) => {
           inlineHelpButton
           isRequired
         >
-          <TextInput
+          <LdapFieldComponent
             name={LOGIN_ATTRIBUTE}
             hasError={errors.loginAttribute}
             onChange={onChangeValue}
@@ -162,7 +161,7 @@ const ConnectionSettings = (props) => {
           inlineHelpButton
           isRequired
         >
-          <TextInput
+          <LdapFieldComponent
             pattern="[0-9]*"
             name={PORT_NUMBER}
             hasError={errors.portNumber}
@@ -185,7 +184,8 @@ const ConnectionSettings = (props) => {
           inlineHelpButton
           isRequired
         >
-          <Textarea
+          <LdapFieldComponent
+            isTextArea
             name={USER_FILTER}
             hasError={errors.userFilter}
             onChange={onChangeValue}

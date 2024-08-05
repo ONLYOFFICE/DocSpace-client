@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect, useReducer, useState } from "react";
-import styled, { css, useTheme } from "styled-components";
+import styled, { css } from "styled-components";
 import { Meta, StoryObj } from "@storybook/react";
 
 import MobileActionsFolderReactSvgUrl from "PUBLIC_DIR/images/mobile.actions.folder.react.svg?url";
@@ -60,7 +60,8 @@ const StyledWrapper = styled.div<{ isAutoDocs: boolean; isMobile?: boolean }>`
       width: calc(100% + 40px);
       height: 500px;
       position: relative;
-      margin: 0 0 -20px -20px;
+      margin-block: 0 -20px;
+      margin-inline: -20px 0;
     `}
 `;
 
@@ -174,8 +175,6 @@ const Template = ({ ...args }) => {
   const isAutoDocs =
     typeof window !== "undefined" && window?.location?.href.includes("docs");
 
-  const { interfaceDirection } = useTheme();
-
   const actionOptions = [
     {
       key: "1",
@@ -231,15 +230,13 @@ const Template = ({ ...args }) => {
         style={{
           position: "absolute",
           bottom: "26px",
-          left: interfaceDirection === "rtl" ? "44px" : "unset",
-          right: interfaceDirection !== "rtl" ? "44px" : "unset",
+          insetInlineEnd: "44px",
         }}
         actionOptions={actionOptions}
         dropdownStyle={{
           position: "absolute",
           bottom: "25px",
-          left: interfaceDirection === "rtl" ? "60px" : "unset",
-          right: interfaceDirection !== "rtl" ? "60px" : "unset",
+          insetInlineEnd: "60px",
         }}
         progressOptions={progressOptions}
         buttonOptions={buttonOptions}

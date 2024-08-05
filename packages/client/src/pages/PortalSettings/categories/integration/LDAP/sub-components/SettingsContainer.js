@@ -83,11 +83,7 @@ const SettingsContainer = ({
   const renderBody = () => (
     <>
       {!isMobileView && (
-        <HideButton
-          text={t("Settings:LDAP")}
-          value={isSettingsShown}
-          isDisabled={!isLdapAvailable}
-        />
+        <HideButton text={t("Settings:LDAP")} value={isSettingsShown} />
       )}
 
       {isMobileView && <ToggleLDAP />}

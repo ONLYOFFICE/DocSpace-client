@@ -50,14 +50,8 @@ const MainContainer = styled.div`
   .password-slider {
     width: 160px;
     height: 8px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin: 24px 0px 24px 16px;
-          `
-        : css`
-            margin: 24px 16px 24px 0px;
-          `}
+    margin-block: 24px;
+    margin-inline: 0 16px;
   }
 
   .checkboxes {

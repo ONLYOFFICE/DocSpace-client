@@ -29,11 +29,11 @@ import { headers } from "next/headers";
 
 import { getSelectorsByUserAgent } from "react-device-detect";
 
-import { BRAND_NAME } from "@docspace/shared/constants";
-
-import { getData } from "@/utils/actions";
+import { getData, validatePublicRoomKey } from "@/utils/actions";
 import { RootPageProps } from "@/types";
 import Root from "@/components/Root";
+import FilePassword from "@/components/file-password";
+import { ValidationStatus } from "@docspace/shared/enums";
 
 const initialSearchParams: RootPageProps["searchParams"] = {
   fileId: undefined,
@@ -43,12 +43,6 @@ const initialSearchParams: RootPageProps["searchParams"] = {
   action: undefined,
   share: undefined,
   editorType: undefined,
-};
-
-export const metadata: Metadata = {
-  title: `${BRAND_NAME} DocEditor page`,
-
-  description: "",
 };
 
 async function Page({ searchParams }: RootPageProps) {
@@ -64,6 +58,17 @@ async function Page({ searchParams }: RootPageProps) {
     const { isMobile } = getSelectorsByUserAgent(ua);
 
     if (isMobile) type = "mobile";
+  }
+
+  if (share) {
+    const roomData = await validatePublicRoomKey(share, fileId ?? fileid ?? "");
+    if (!roomData) return;
+
+    const { status } = roomData.response;
+
+    if (status === ValidationStatus.Password) {
+      return <FilePassword {...roomData.response} shareKey={share} />;
+    }
   }
 
   const startDate = new Date();

@@ -49,7 +49,6 @@ import {
 } from "@docspace/shared/api/settings";
 import { loginWithTfaCode } from "@docspace/shared/api/user";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 import ConfirmRoute from "SRC_DIR/helpers/confirmRoute";
 
 const StyledForm = styled(Box)`
@@ -72,10 +71,7 @@ const StyledForm = styled(Box)`
     flex-direction: column;
     gap: 0px;
 
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `padding-left: 8px;`
-        : `padding-right: 8px;`}
+    padding-inline-end: 8px;
   }
 
   .app-code-wrapper {
@@ -202,7 +198,7 @@ const TfaActivationForm = withLoader((props) => {
               t={t}
               i18nKey="SetAppDescription"
               ns="Confirm"
-              portalName={PRODUCT_NAME}
+              productName={t("Common:ProductName")}
             >
               The two-factor authentication is enabled to provide additional
               portal security. Configure your authenticator application to

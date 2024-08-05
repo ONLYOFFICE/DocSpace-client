@@ -81,14 +81,12 @@ const StyledHeader = styled.div<{ withoutBorder: boolean }>`
 
   .arrow-button {
     cursor: pointer;
-    margin-right: 12px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl" &&
-      css`
-        margin-left: 12px;
-        margin-right: 0px;
-        transform: scaleX(-1);
-      `}
+    margin-inline-end: 12px;
+
+    svg {
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+    }
   }
 
   .heading-text {
@@ -112,13 +110,13 @@ const StyledBody = styled.div<{
   height: ${(props) =>
     props.footerVisible
       ? props.withHeader
-        ? `calc(100% - 16px - ${props.footerHeight}px - ${props.headerHeight}px)`
-        : `calc(100% - 16px - ${props.footerHeight}px)`
+        ? `calc(100% - ${props.footerHeight}px - ${props.headerHeight}px)`
+        : `calc(100% - ${props.footerHeight}px)`
       : props.withHeader
-        ? `calc(100% - 16px - ${props.headerHeight}px)`
-        : `calc(100% - 16px)`};
+        ? `calc(100% - ${props.headerHeight}px)`
+        : "100%"};
 
-  padding: ${({ withTabs }) => (withTabs ? "0" : "16px 0 0 0")};
+  padding: ${({ withTabs }) => (withTabs ? "0" : "16px 0 0")};
 
   .search-input,
   .search-loader {
@@ -136,6 +134,10 @@ const StyledBody = styled.div<{
     padding: 0 16px;
 
     color: ${(props) => props.theme.selector.bodyDescriptionText};
+  }
+
+  .selector_info-bar {
+    margin: 0px 20px 16px;
   }
 `;
 
@@ -166,13 +168,7 @@ const StyledSelectAll = styled.div`
 
     line-height: 16px;
 
-    margin-left: 8px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl" &&
-      css`
-        margin-left: 0;
-        margin-right: 8px;
-      `}
+    margin-inline-start: 8px;
   }
 
   .checkbox {
@@ -219,16 +215,9 @@ const StyledItem = styled.div<{
     // width: 100%;
     // max-width: 100%;
 
-    line-height: ${({ theme }) =>
-      theme.interfaceDirection === "rtl" ? `20px` : `18px`};
+    line-height: 18px;
 
-    margin-left: 8px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl" &&
-      css`
-        margin-left: 0;
-        margin-right: 8px;
-      `}
+    margin-inline-start: 8px;
   }
 
   .clicked-label {
@@ -352,6 +341,65 @@ const StyledEmptyScreen = styled.div<{ withSearch: boolean }>`
   }
 `;
 
+const StyledNewEmptyScreen = styled.section`
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  padding: 0 28px;
+
+  box-sizing: border-box;
+
+  .empty-image {
+    margin-top: 64px;
+  }
+
+  .empty-header {
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 700;
+    text-align: center;
+
+    margin: 0;
+
+    margin-top: 32px;
+  }
+
+  .empty-description {
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+
+    margin-top: 8px;
+
+    color: ${(props) => props.theme.selector.emptyScreen.pressedButtonColor};
+  }
+
+  .empty_button-wrapper {
+    display: flex;
+    justify-content: flex-start;
+
+    align-self: flex-start;
+
+    align-items: center;
+    gap: 16px;
+
+    padding: 12px 0;
+    margin-top: 16px;
+  }
+
+  .empty-button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .empty-button-label {
+    cursor: pointer;
+  }
+`;
+
 const StyledBreadCrumbs = styled.div<{
   itemsCount: number;
   gridTemplateColumns: string;
@@ -359,7 +407,7 @@ const StyledBreadCrumbs = styled.div<{
   width: 100%;
   height: 38px;
 
-  padding: 0 16px 16px 16px;
+  padding: 0 16px 16px;
 
   box-sizing: border-box;
 
@@ -399,11 +447,9 @@ const StyledItemText = styled(Text)<{
 StyledItemText.defaultProps = { theme: Base };
 
 const StyledArrowRightSvg = styled(ArrowRightSvg)`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl" &&
-    css`
-      transform: scaleX(-1);
-    `}
+  ${({ theme }) =>
+    theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+
   path {
     fill: ${(props) => props.theme.selector.breadCrumbs.arrowRightColor};
   }
@@ -542,7 +588,7 @@ const StyledCreateDropDown = styled.div<{ isEmpty: boolean }>`
   position: absolute;
 
   top: ${(props) => (props.isEmpty ? "32px" : "48px")};
-  left: ${(props) => (props.isEmpty ? "-12px" : "16px")};
+  inset-inline-start: ${(props) => (props.isEmpty ? "-12px" : "16px")};
   z-index: 453;
 
   padding-top: 8px;
@@ -568,8 +614,7 @@ const StyledCreateDropDown = styled.div<{ isEmpty: boolean }>`
     position: fixed;
     top: unset;
     bottom: 0;
-    left: 0;
-    right: 0;
+    inset-inline: 0;
 
     border-radius: 6px 6px 0 0;
   }
@@ -581,6 +626,7 @@ StyledBody.defaultProps = { theme: Base };
 StyledSelectAll.defaultProps = { theme: Base };
 StyledItem.defaultProps = { theme: Base };
 StyledEmptyScreen.defaultProps = { theme: Base };
+StyledNewEmptyScreen.defaultProps = { theme: Base };
 StyledArrowRightSvg.defaultProps = { theme: Base };
 StyledComboBox.defaultProps = { theme: Base };
 StyledInfo.defaultProps = { theme: Base };
@@ -607,4 +653,5 @@ export {
   StyledAccessSelector,
   StyledInputWrapper,
   StyledCreateDropDown,
+  StyledNewEmptyScreen,
 };

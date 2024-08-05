@@ -380,7 +380,7 @@ export const WelcomePageSettings = inject(
   ({ settingsStore, setup, common }) => {
     const {
       greetingSettings,
-      organizationName,
+
       theme,
       currentColorScheme,
       welcomePageSettingsUrl,
@@ -398,7 +398,6 @@ export const WelcomePageSettings = inject(
     return {
       theme,
       greetingSettings,
-      organizationName,
       setGreetingTitle,
       restoreGreetingTitle,
       isLoaded,

@@ -26,7 +26,7 @@
 
 import { inject, observer } from "mobx-react";
 import { tablet } from "@docspace/shared/utils/device";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import { IconButton } from "@docspace/shared/components/icon-button";
@@ -52,17 +52,10 @@ const StyledRowContainer = styled(RowContainer)`
     height: 61px;
     position: sticky;
     z-index: 201;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: -16px;
-          `
-        : css`
-            margin-left: -16px;
-          `}
+    margin-inline-start: -16px;
     width: 100%;
 
-    margin-top: -31.5px;
+    margin-top: -32.5px;
     top: 53px;
     margin-bottom: -29.5px;
 
@@ -73,14 +66,7 @@ const StyledRowContainer = styled(RowContainer)`
     }
 
     .table-container_group-menu-checkbox {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: 8px;
-            `
-          : css`
-              margin-left: 8px;
-            `}
+      margin-inline-start: 8px;
     }
 
     .table-container_group-menu-separator {
@@ -99,7 +85,7 @@ const StyledRowContainer = styled(RowContainer)`
   }
 
   .clear-icon {
-    margin-right: 8px;
+    margin-inline-end: 8px;
   }
 
   .ec-desc {

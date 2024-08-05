@@ -73,13 +73,16 @@ const WhiteLabelComponent = (props) => {
 
     resetIsInit,
     standalone,
+    theme,
+
+    isWhitelableLoaded,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [isLoadedData, setIsLoadedData] = useState(false);
   const [logoTextWhiteLabel, setLogoTextWhiteLabel] = useState("");
   const [isSaving, setIsSaving] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(isWhitelableLoaded && !logoText);
 
   const isMobileView = deviceType === DeviceType.mobile;
 
@@ -121,24 +124,22 @@ const WhiteLabelComponent = (props) => {
   };
 
   useEffect(() => {
+    if (!isWhitelableLoaded) return;
+
     const companyNameFromSessionStorage = getFromSessionStorage("companyName");
 
     if (!companyNameFromSessionStorage) {
+      setIsEmpty(!logoText);
       if (!logoText) return;
 
       setLogoTextWhiteLabel(logoText);
       saveToSessionStorage("companyName", logoText);
     } else {
+      setIsEmpty(!companyNameFromSessionStorage);
       setLogoTextWhiteLabel(companyNameFromSessionStorage);
       saveToSessionStorage("companyName", companyNameFromSessionStorage);
     }
-  }, [logoText]);
-
-  useEffect(() => {
-    if (logoTextWhiteLabel && logoUrlsWhiteLabel.length && !isLoadedData) {
-      setIsLoadedData(true);
-    }
-  }, [isLoadedData, logoTextWhiteLabel, logoUrlsWhiteLabel]);
+  }, [logoText, isWhitelableLoaded]);
 
   const onResetCompanyName = async () => {
     const whlText = await getWhiteLabelLogoText();
@@ -149,11 +150,19 @@ const WhiteLabelComponent = (props) => {
   const onChangeCompanyName = (e) => {
     const value = e.target.value;
     setLogoTextWhiteLabel(value);
-    saveToSessionStorage("companyName", value);
+
+    const trimmedValue = value?.trim();
+    setIsEmpty(!trimmedValue);
+    saveToSessionStorage("companyName", trimmedValue);
   };
 
   const onUseTextAsLogo = () => {
+    if (isEmpty) {
+      return;
+    }
+
     let newLogos = logoUrlsWhiteLabel;
+
     for (let i = 0; i < logoUrlsWhiteLabel.length; i++) {
       const options = getLogoOptions(
         i,
@@ -170,6 +179,7 @@ const WhiteLabelComponent = (props) => {
         options.fontSize,
         isDocsEditorName ? "#fff" : "#000",
         options.alignCenter,
+        options.isEditor,
       );
       const logoDark = generateLogo(
         options.width,
@@ -178,6 +188,7 @@ const WhiteLabelComponent = (props) => {
         options.fontSize,
         "#fff",
         options.alignCenter,
+        options.isEditor,
       );
       newLogos[i].path.light = logoLight;
       newLogos[i].path.dark = logoDark;
@@ -264,7 +275,7 @@ const WhiteLabelComponent = (props) => {
   const isEqualText = defaultLogoTextWhiteLabel === logoTextWhiteLabel;
   const saveButtonDisabled = isEqualLogo && isEqualText;
 
-  return !isLoadedData ? (
+  return !isWhitelableLoaded ? (
     <LoaderWhiteLabel />
   ) : (
     <WhiteLabelWrapper showReminder={!saveButtonDisabled}>
@@ -278,7 +289,7 @@ const WhiteLabelComponent = (props) => {
           <Badge
             className="paid-badge"
             fontWeight="700"
-            backgroundColor="#EDC409"
+            backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
             label={t("Common:Paid")}
             isPaidBadge={true}
           />
@@ -307,6 +318,7 @@ const WhiteLabelComponent = (props) => {
           labelText={t("Common:CompanyName")}
           isVertical={true}
           className="settings_unavailable"
+          hasError={isEmpty}
         >
           <TextInput
             className="company-name input"
@@ -318,6 +330,7 @@ const WhiteLabelComponent = (props) => {
             isAutoFocussed={!isMobile}
             tabIndex={1}
             maxLength={30}
+            hasError={isEmpty}
           />
           <Button
             id="btnUseAsLogo"
@@ -563,6 +576,7 @@ export const WhiteLabel = inject(
       defaultLogoTextWhiteLabel,
       enableRestoreButton,
       resetIsInit,
+      isWhitelableLoaded,
     } = common;
 
     const {
@@ -590,6 +604,8 @@ export const WhiteLabel = inject(
       deviceType,
       resetIsInit,
       standalone,
+
+      isWhitelableLoaded,
     };
   },
 )(

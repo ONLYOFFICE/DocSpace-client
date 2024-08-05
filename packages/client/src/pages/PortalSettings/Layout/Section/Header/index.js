@@ -29,7 +29,7 @@ import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touch.react.svg?url";
 import React from "react";
 import { inject, observer } from "mobx-react";
-import styled, { css } from "styled-components";
+import styled, { css, useTheme } from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import Headline from "@docspace/shared/components/headline/Headline";
@@ -46,7 +46,6 @@ import {
   getTKeyByKey,
   checkPropertyByLink,
 } from "../../../utils";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import TariffBar from "SRC_DIR/components/TariffBar";
 
 export const HeaderContainer = styled.div`
@@ -58,14 +57,7 @@ export const HeaderContainer = styled.div`
     display: flex;
     align-items: center;
     .settings-section_badge {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: 8px;
-            `
-          : css`
-              margin-left: 8px;
-            `}
+      margin-inline-start: 8px;
       cursor: auto;
     }
 
@@ -74,36 +66,19 @@ export const HeaderContainer = styled.div`
       white-space: nowrap;
       overflow: hidden;
       color: ${(props) => props.theme.client.settings.headerTitleColor};
-      display: flex;
-      align-items: center;
     }
   }
   .action-wrapper {
     flex-grow: 1;
 
     .action-button {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: auto;
-            `
-          : css`
-              margin-left: auto;
-            `}
+      margin-inline-start: auto;
     }
   }
 
   .arrow-button {
     flex-shrink: 0;
-
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 12px;
-          `
-        : css`
-            margin-right: 12px;
-          `}
+    margin-inline-end: 12px;
 
     svg {
       ${({ theme }) =>
@@ -111,16 +86,8 @@ export const HeaderContainer = styled.div`
     }
 
     @media ${tablet} {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              padding: 8px 8px 8px 0;
-              margin-right: -8px;
-            `
-          : css`
-              padding: 8px 0 8px 8px;
-              margin-left: -8px;
-            `}
+      padding-block: 8px;
+      padding-inline: 8px 0;
     }
   }
 
@@ -146,14 +113,7 @@ export const HeaderContainer = styled.div`
   }
 
   .tariff-bar {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: auto;
-          `
-        : css`
-            margin-left: auto;
-          `}
+    margin-inline-start: auto;
   }
 `;
 
@@ -184,12 +144,12 @@ const SectionHeaderContent = (props) => {
     tReady,
     setIsLoadedSectionHeader,
     isSSOAvailable,
-    organizationName,
     workspace,
   } = props;
 
   const navigate = useNavigate();
   const location = useLocation();
+  const theme = useTheme();
 
   const [state, setState] = React.useState({
     header: "",
@@ -349,9 +309,11 @@ const SectionHeaderContent = (props) => {
         : workspace === "Nextcloud"
           ? t("ImportFromNextcloud")
           : workspace === "Workspace"
-            ? t("ImportFromPortal", { organizationName })
+            ? t("ImportFromPortal", {
+                organizationName: t("Common:OrganizationName"),
+              })
             : t("DataImport")
-      : t(header, { organizationName });
+      : t(header, { organizationName: t("Common:OrganizationName") });
 
   return (
     <StyledContainer isHeaderVisible={isHeaderVisible}>
@@ -370,21 +332,24 @@ const SectionHeaderContent = (props) => {
         <LoaderSectionHeader />
       ) : (
         <HeaderContainer>
-          {!isCategoryOrHeader && arrayOfParams[0] && (
-            <IconButton
-              iconName={ArrowPathReactSvgUrl}
-              size="17"
-              isFill={true}
-              onClick={onBackToParent}
-              className="arrow-button"
-            />
-          )}
+          {!isCategoryOrHeader &&
+            arrayOfParams[0] &&
+            (isMobile() ||
+              window.location.href.indexOf("/javascript-sdk/") > -1) && (
+              <IconButton
+                iconName={ArrowPathReactSvgUrl}
+                size="17"
+                isFill={true}
+                onClick={onBackToParent}
+                className="arrow-button"
+              />
+            )}
           <Headline type="content" truncate={true}>
             <div className="settings-section_header">
               <div className="header">{translatedHeader}</div>
               {isNeedPaidIcon ? (
                 <Badge
-                  backgroundColor="#EDC409"
+                  backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
                   label={t("Common:Paid")}
                   fontWeight="700"
                   className="settings-section_badge"
@@ -417,13 +382,7 @@ const SectionHeaderContent = (props) => {
 };
 
 export default inject(
-  ({
-    settingsStore,
-    currentQuotaStore,
-    setup,
-    common,
-    importAccountsStore,
-  }) => {
+  ({ currentQuotaStore, setup, common, importAccountsStore }) => {
     const {
       isBrandingAndCustomizationAvailable,
       isRestoreAndAutoBackupAvailable,
@@ -443,8 +402,6 @@ export default inject(
     } = setup.selectionStore;
     const { admins, selectorIsOpen } = setup.security.accessRight;
     const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
-
-    const { organizationName } = settingsStore;
 
     const { workspace } = importAccountsStore;
 
@@ -467,7 +424,6 @@ export default inject(
       isBrandingAndCustomizationAvailable,
       isRestoreAndAutoBackupAvailable,
       isSSOAvailable,
-      organizationName,
       workspace,
     };
   },

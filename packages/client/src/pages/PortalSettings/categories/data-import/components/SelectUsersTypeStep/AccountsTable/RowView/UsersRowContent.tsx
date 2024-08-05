@@ -45,14 +45,7 @@ const StyledRowContent = styled(RowContent)`
 
   .row-main-container-wrapper {
     width: 100%;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 0px;
-          `
-        : css`
-            margin-right: 0px;
-          `}
+    margin-inline-end: 0;
   }
 
   .rowMainContainer {
@@ -67,7 +60,7 @@ const StyledRowContent = styled(RowContent)`
   }
 
   .user-email {
-    margin-right: 5px;
+    margin-inline-end: 5px;
     font-size: 12px;
     font-weight: 600;
     color: ${(props) =>
@@ -89,7 +82,7 @@ const StyledRowContent = styled(RowContent)`
 
     .combo-buttons_arrow-icon {
       flex: initial;
-      margin-right: 0px;
+      margin-inline-end: 0px;
     }
 
     svg {

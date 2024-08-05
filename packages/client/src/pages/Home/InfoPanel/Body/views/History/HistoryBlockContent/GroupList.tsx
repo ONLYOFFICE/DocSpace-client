@@ -76,7 +76,7 @@ const HistoryGroupList = ({
   ];
 
   const onGroupClick = (groupId: string) => {
-    setSelectedFolder?.(null);
+    setSelectedFolder?.(t, null);
     setPeopleSelection?.([]);
     setPeopleBufferSelection?.(null);
     setFilesSelection?.([]);

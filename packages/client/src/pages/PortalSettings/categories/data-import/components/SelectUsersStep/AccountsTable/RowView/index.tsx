@@ -26,7 +26,7 @@
 
 import { inject, observer } from "mobx-react";
 import { tablet } from "@docspace/shared/utils/device";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import { IconButton } from "@docspace/shared/components/icon-button";
@@ -46,7 +46,7 @@ const StyledRowContainer = styled(RowContainer)`
   margin: 0 0 20px;
 
   .clear-icon {
-    margin-right: 8px;
+    margin-inline-end: 8px;
   }
 
   .ec-desc {
@@ -68,14 +68,7 @@ const StyledRow = styled(Row)`
   .row-header-item {
     display: flex;
     align-items: center;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 6px;
-          `
-        : css`
-            margin-left: 6px;
-          `}
+    margin-inline-start: 6px;
   }
 
   .row-header-title {
@@ -98,7 +91,6 @@ const RowView = (props: RowViewProps) => {
     t,
     sectionWidth,
     accountsData,
-
     checkedUsers,
     withEmailUsers,
     toggleAccount,

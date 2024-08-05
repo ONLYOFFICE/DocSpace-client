@@ -42,7 +42,6 @@ import withLoading from "SRC_DIR/HOCs/withLoading";
 import { PortalRenamingDialog } from "SRC_DIR/components/dialogs";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const PortalRenamingComponent = (props) => {
   const {
@@ -104,7 +103,9 @@ const PortalRenamingComponent = (props) => {
   const [isShowModal, setIsShowModal] = useState(false);
 
   useEffect(() => {
-    setDocumentTitle(t("PortalRenaming", { productName: PRODUCT_NAME }));
+    setDocumentTitle(
+      t("PortalRenaming", { productName: t("Common:ProductName") }),
+    );
     setPortalName(portalNameInitially);
     const page = isMobileView ? "language-and-time-zone" : "general";
     if (!isLoaded) initSettings(page).then(() => setIsLoaded(true));
@@ -325,7 +326,7 @@ const PortalRenamingComponent = (props) => {
       {isCustomizationView && !isMobileView && (
         <div className="category-item-heading">
           <div className="category-item-title">
-            {t("PortalRenaming", { productName: PRODUCT_NAME })}
+            {t("PortalRenaming", { productName: t("Common:ProductName") })}
           </div>
         </div>
       )}

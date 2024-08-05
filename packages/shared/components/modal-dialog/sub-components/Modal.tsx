@@ -191,6 +191,7 @@ const Modal = ({
                       "modal-header"
                     }
                     {...headerProps}
+                    currentDisplayType={currentDisplayType}
                   >
                     <Heading
                       level={1}

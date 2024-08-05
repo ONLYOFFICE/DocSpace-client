@@ -31,7 +31,6 @@ import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Badge } from "@docspace/shared/components/badge";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const borderProp = { radius: "6px" };
 
@@ -87,7 +86,7 @@ const ToggleLDAP = ({
             </Text>
             {!isLdapAvailable && (
               <Badge
-                backgroundColor="#EDC409"
+                backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
                 label={t("Common:Paid")}
                 className="toggle-caption_title_badge"
                 isPaidBadge={true}
@@ -101,7 +100,9 @@ const ToggleLDAP = ({
             className="settings_unavailable"
             noSelect
           >
-            {t("LdapToggleDescription", { productName: PRODUCT_NAME })}
+            {t("LdapToggleDescription", {
+              productName: t("Common:ProductName"),
+            })}
           </Text>
         </div>
       </Box>

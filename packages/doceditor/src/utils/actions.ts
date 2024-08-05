@@ -36,7 +36,10 @@ import type {
   TFile,
 } from "@docspace/shared/api/files/types";
 import { TUser } from "@docspace/shared/api/people/types";
-import { TSettings } from "@docspace/shared/api/settings/types";
+import type {
+  TGetColorTheme,
+  TSettings,
+} from "@docspace/shared/api/settings/types";
 
 import type {
   ActionType,
@@ -48,12 +51,41 @@ import type {
 
 import { REPLACED_URL_PATH } from "./constants";
 
+export async function getFillingSession(
+  fillingSessionId: string,
+  share?: string,
+) {
+  const [request] = createRequest(
+    [`/files/file/fillresult?fillingSessionId=${fillingSessionId}`],
+    [
+      ["Content-Type", "application/json;charset=utf-8"],
+      share ? ["Request-Token", share] : ["", ""],
+    ],
+    "GET",
+  );
+
+  try {
+    console.log({ request });
+
+    const response = await fetch(request);
+
+    if (response.ok) return await response.json();
+
+    throw new Error("Something went wrong", {
+      cause: await response.json(),
+    });
+  } catch (error) {
+    console.log("File copyas error ", error);
+  }
+}
+
 export async function fileCopyAs(
   fileId: string,
   destTitle: string,
   destFolderId: string,
   enableExternalExt?: boolean,
   password?: string,
+  toForm?: string,
 ): Promise<{
   file: TFile | undefined;
   error:
@@ -77,6 +109,7 @@ export async function fileCopyAs(
         destFolderId: tryParseToNumber(destFolderId),
         enableExternalExt,
         password,
+        toForm: toForm === "true",
       }),
     );
 
@@ -360,28 +393,44 @@ export const checkIsAuthenticated = async () => {
   return isAuth.response as boolean;
 };
 
-export async function checkFillFromDraft(
-  templateFileId: number,
-  share?: string,
-) {
-  const [checkFillFormDraft] = createRequest(
-    [`/files/masterform/${templateFileId}/checkfillformdraft`],
-    [
-      share ? ["Request-Token", share] : ["", ""],
-      ["Content-Type", "application/json;charset=utf-8"],
-    ],
-    "POST",
-    JSON.stringify({ fileId: templateFileId }),
+export async function validatePublicRoomKey(key: string, fileId?: string) {
+  const [validatePublicRoomKey] = createRequest(
+    [`/files/share/${key}?fileid=${fileId}`],
+    [key ? ["Request-Token", key] : ["", ""]],
+    "GET",
   );
 
-  const response = await fetch(checkFillFormDraft);
+  const res = await fetch(validatePublicRoomKey);
+  if (res.status === 401) return undefined;
+  if (!res.ok) return;
 
-  if (!response.ok) return null;
+  const room = await res.json();
 
-  const { response: formUrl } = await response.json();
-
-  return formUrl as string;
+  return room;
 }
+
+// export async function checkFillFromDraft(
+//   templateFileId: number,
+//   share?: string,
+// ) {
+//   const [checkFillFormDraft] = createRequest(
+//     [`/files/masterform/${templateFileId}/checkfillformdraft`],
+//     [
+//       share ? ["Request-Token", share] : ["", ""],
+//       ["Content-Type", "application/json;charset=utf-8"],
+//     ],
+//     "POST",
+//     JSON.stringify({ fileId: templateFileId }),
+//   );
+
+//   const response = await fetch(checkFillFormDraft);
+
+//   if (!response.ok) return null;
+
+//   const { response: formUrl } = await response.json();
+
+//   return formUrl as string;
+// }
 
 export async function openEdit(
   fileId: number | string,
@@ -469,4 +518,20 @@ export async function getEditorUrl(
   const editorUrl = await res.json();
 
   return editorUrl.response as TDocServiceLocation;
+}
+
+export async function getColorTheme() {
+  const [getSettings] = createRequest(
+    [`/settings/colortheme`],
+    [["", ""]],
+    "GET",
+  );
+
+  const res = await fetch(getSettings);
+
+  if (!res.ok) return;
+
+  const colorTheme = await res.json();
+
+  return colorTheme.response as TGetColorTheme;
 }

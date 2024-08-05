@@ -69,10 +69,11 @@ const StyledFileInput = styled.div<{
 
     text-overflow: ellipsis;
 
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? `padding-left: ${paddingRightStyle(props) || "40px"};`
-        : `padding-right: ${paddingRightStyle(props) || "40px"};`}
+    // logical property won't work here (dir: auto)
+    ${(props) => {
+      const side = props.theme.interfaceDirection === "rtl" ? "left" : "right";
+      return `padding-${side}: ${paddingRightStyle(props) || "40px"};`;
+    }}
 
     cursor: ${(props) => (props.isDisabled ? "default" : "pointer")};
     margin: 0;
@@ -130,14 +131,7 @@ const StyledFileInput = styled.div<{
         theme.interfaceDirection,
       )};
 
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: 0;
-          `
-        : css`
-            right: 0;
-          `}
+    inset-inline-end: 0;
   }
 
   .icon-button {

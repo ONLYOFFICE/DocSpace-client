@@ -86,6 +86,7 @@ const rowStyles = css<{ width: number }>`
   // !important styles override inline styles from react-virtualized
   .row-list-item,
   .row-loader {
+    // doesn't require mirroring for LTR
     ${({ theme }) =>
       theme.interfaceDirection === "rtl" &&
       `left: unset !important;
@@ -106,10 +107,7 @@ const rowStyles = css<{ width: number }>`
 `;
 
 const tableStyles = css<{ width: number }>`
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `margin-right: -20px;`
-      : `margin-left: -20px;`}
+  margin-inline-start: -20px;
   width: ${({ width }) => `${width + 40}px !important`};
 
   .ReactVirtualized__Grid__innerScrollContainer {
@@ -122,14 +120,14 @@ const tableStyles = css<{ width: number }>`
   // !important styles override inline styles from react-virtualized
   .table-list-item,
   .table-container_body-loader {
+    padding-inline-start: 20px;
+    // doesn't require mirroring for LTR
     ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `
-        padding-right: 20px;
+      theme.interfaceDirection === "rtl" &&
+      css`
         left: unset !important;
         right: 0 !important;
-        `
-        : `padding-left: 20px;`}
+      `}
   }
 `;
 

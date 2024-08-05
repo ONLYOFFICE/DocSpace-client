@@ -41,7 +41,6 @@ const GoogleWorkspace = (props: WorkspaceProps) => {
     filteredUsers,
     step,
     setStep,
-    organizationName,
     migratingWorkspace,
     migrationPhase,
     isMigrationInit,
@@ -52,11 +51,7 @@ const GoogleWorkspace = (props: WorkspaceProps) => {
     "Common, SMTPSettings, Settings",
   ]);
 
-  const StepsData = getStepsData(
-    t,
-    filteredUsers.length === 0,
-    organizationName,
-  );
+  const StepsData = getStepsData(t, filteredUsers.length === 0);
 
   useLayoutEffect(() => {
     if (migratingWorkspace === "GoogleWorkspace" && !isMigrationInit) {
@@ -69,6 +64,7 @@ const GoogleWorkspace = (props: WorkspaceProps) => {
       }
       setIsMigrationInit(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!ready) return <SelectFileLoader />;
@@ -82,7 +78,6 @@ const GoogleWorkspace = (props: WorkspaceProps) => {
       title={StepsData[step - 1].title}
       description={StepsData[step - 1].description}
       component={StepsData[step - 1].component}
-      organizationName={organizationName}
     />
   );
 };
@@ -99,11 +94,11 @@ export const Component = inject<TStore>(
       isMigrationInit,
       setIsMigrationInit,
     } = importAccountsStore;
-    const { theme, organizationName } = settingsStore;
+    const { theme } = settingsStore;
 
     return {
       theme,
-      organizationName,
+
       filteredUsers,
       step,
       setStep,

@@ -109,8 +109,6 @@ const PasswordChangeForm = ({
       if (typeof res === "string") window.location.replace(res);
       else window.location.replace("/");
     } catch (error) {
-      console.log("error", error);
-
       const knownError = error as TError;
       let errorMessage: string;
 

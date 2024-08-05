@@ -6,6 +6,7 @@
   "ChangeUser": "Zmień użytkownika",
   "DeactivateOrDeletePortal": "Dezaktywuj lub usuń {{productName}}",
   "DoTheSame": "Postępuj tak samo jak administratorzy",
+  "ManagePortal": "Zarządzaj konfiguracją {{productName}}",
   "ManageUser": "Zarządzaj kontami użytkowników",
   "NewPortalOwner": "Nowy właściciel {{productName}}",
   "PortalOwnerCan": "Właściciel {{productName}} może:",

@@ -115,7 +115,7 @@ const AttributeMapping = (props) => {
           labelVisible={true}
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.firstName}
-          labelText={t("LdapFirstName")}
+          labelText={t("Common:FirstName")}
           isRequired
         >
           <LdapFieldComponent

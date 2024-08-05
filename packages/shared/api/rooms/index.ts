@@ -27,6 +27,7 @@
 /* eslint-disable @typescript-eslint/default-param-last */
 import { AxiosRequestConfig } from "axios";
 
+import moment from "moment";
 import { FolderType, MembersSubjectType, ShareAccessRights } from "../../enums";
 import { request } from "../client";
 import {
@@ -35,8 +36,7 @@ import {
   toUrlParams,
 } from "../../utils/common";
 import RoomsFilter from "./filter";
-import { TGetRooms } from "./types";
-import moment from "moment";
+import { TGetRooms, TPublicRoomPassword } from "./types";
 
 export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
   let params;
@@ -453,12 +453,17 @@ export function validatePublicRoomKey(key) {
   });
 }
 
-export function validatePublicRoomPassword(key, passwordHash) {
-  return request({
+export async function validatePublicRoomPassword(
+  key: string,
+  passwordHash: string,
+) {
+  const res = (await request({
     method: "post",
     url: `files/share/${key}/password`,
     data: { password: passwordHash },
-  });
+  })) as TPublicRoomPassword;
+
+  return res;
 }
 
 export function setCustomRoomQuota(roomIds, quota) {

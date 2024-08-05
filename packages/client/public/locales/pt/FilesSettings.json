@@ -6,6 +6,7 @@
   "DisplayTemplates": "Mostrar Modelos",
   "IntermediateVersion": "Manter todas as versões intermédias guardadas",
   "KeepIntermediateVersion": "Manter versões intermediárias ao editar",
+  "OpenSameTab": "Abra o editor {{organizationName}} na mesma guia",
   "OriginalCopy": "Guardar a cópia do ficheiro também no formato original",
   "StoringFileVersion": "Armazenamento de versões de ficheiros",
   "ThirdPartyAccounts": "Contas de terceiros",

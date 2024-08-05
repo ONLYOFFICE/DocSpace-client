@@ -3,6 +3,8 @@
   "CannotReassignFiles": "Ak vymažete viacerých používateľov naraz, ich súbory nemôžete opätovne priradiť iným používateľom.",
   "DeleteGroupUsersSuccessMessage": "Používatelia boli úspešne odstránení.",
   "DeleteMyDocumentsUser": "Všetky osobné súbory a priečinky v časti Dokumenty tohto používateľa budú natrvalo vymazané.",
+  "DeletePersonalData": "Osobné údaje, všetky osobné súbory a priečinky v častiach Dokumenty a Kôš* vybraných používateľov budú natrvalo vymazané. Súbory a priečinky vybraných používateľov uchovávané v spoločných častiach*, napríklad v miestnostiach, zostanú v {{productName}}.",
+  "DeletePersonalDataApplicable": "*Platí pre vybraných používateľov, ktorí majú takéto súbory a priečinky.",
   "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Miestnosti vytvorené týmto používateľom a dokumenty uložené v týchto miestnostiach budú automaticky preradené administrátorovi, ktorý realizuje vymazávanie: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Ak chcete vybrať iného cieľového používateľa na opätovné priradenie, priraďte údaje ručne .",
   "DeleteUser": "Odstrániť používateľa",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> bude vymazaný. Tento úkon sa nedá odvolať.",

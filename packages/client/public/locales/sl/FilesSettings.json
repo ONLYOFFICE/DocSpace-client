@@ -6,6 +6,7 @@
   "DisplayTemplates": "Prikaži predloge",
   "IntermediateVersion": "Ohranite vse shranjene vmesne različice",
   "KeepIntermediateVersion": "Pri urejanju ohranite vmesne različice",
+  "OpenSameTab": "Odpri urejevalnik {{organizationName}} v istem zavihku",
   "OriginalCopy": "Kopijo datoteke shranite tudi v izvirni obliki",
   "StoringFileVersion": "Shranjevanje različic datotek",
   "ThirdPartyAccounts": "Računi tretjih oseb",

@@ -238,7 +238,7 @@ const FilesSelectorComponent = ({
           setSelectedItemType(undefined);
           getRootData();
         } else {
-          setItems([]);
+          // setItems([]);
 
           setBreadCrumbs((bc) => {
             const idx = bc.findIndex(
@@ -302,7 +302,7 @@ const FilesSelectorComponent = ({
       if (item.isFolder) {
         setIsFirstLoad(true);
 
-        setItems([]);
+        // setItems([]);
         setBreadCrumbs((value) => [
           ...value,
           {
@@ -506,7 +506,7 @@ const FilesSelectorComponent = ({
     submitButtonLabel,
     submitButtonId,
     disableSubmitButton: getIsDisabled(
-      isFirstLoad,
+      isFirstLoad && showLoader,
       isSelectedParentFolder,
       selectedItemId,
       selectedItemType,

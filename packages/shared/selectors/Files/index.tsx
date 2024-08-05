@@ -445,7 +445,14 @@ const FilesSelectorComponent = ({
         selectedFileInfo,
       );
     },
-    [breadCrumbs, selectedFileInfo, selectedItemId, selectedTreeNode, onSubmit],
+    [
+      breadCrumbs,
+      rootFolderType,
+      onSubmit,
+      selectedItemId,
+      selectedTreeNode,
+      selectedFileInfo,
+    ],
   );
 
   React.useEffect(() => {

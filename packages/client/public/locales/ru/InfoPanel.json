@@ -43,6 +43,7 @@
   "RoomExternalLinkCreated": "Ссылка создана.",
   "RoomExternalLinkDeleted": "Ссылка <1>«{{linkTitle}}»</1> удалена.",
   "RoomExternalLinkRenamed": "Ссылка <1>«{{oldLinkTitle}}»</1> переименована в <1>«{{linkTitle}}»</1>",
+  "RoomExternalLinkRevoked": "Предыдущая ссылка <1>«{{linkTitle}}»</1> аннулирована <br/> Создана новая ссылка <1>«{{linkTitle}}»</1>",
   "RoomGroupAdded": "Группы добавлены.",
   "RoomGroupRemove": "Группа удалена",
   "RoomLogoChanged": "Иконка изменена",

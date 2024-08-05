@@ -12,8 +12,17 @@ import {
 import EmptyFormRoomDarkIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.dark.svg";
 import EmptyFormRoomLightIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.light.svg";
 
+import EmptyFormRoomCollaboratorDarkIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.collaborator.dark.svg";
+import EmptyFormRoomCollaboratorLightIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.collaborator.light.svg";
+
+import EmptyFormRoomFillingDarkIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.filling.dark.svg";
+import EmptyFormRoomFillingLightIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.filling.light.svg";
+
 import EmptyCustomRoomDarkIcon from "PUBLIC_DIR/images/emptyview/empty.custom.room.dark.svg";
 import EmptyCustomRoomLightIcon from "PUBLIC_DIR/images/emptyview/empty.custom.room.light.svg";
+
+import EmptyCustomRoomCollaboratorDarkIcon from "PUBLIC_DIR/images/emptyview/empty.custom.room.collaborator.dark.svg";
+import EmptyCustomRoomCollaboratorLightIcon from "PUBLIC_DIR/images/emptyview/empty.custom.room.collaborator.light.svg";
 
 import EmptyPublicRoomDarkIcon from "PUBLIC_DIR/images/emptyview/empty.public.room.dark.svg";
 import EmptyPublicRoomLightIcon from "PUBLIC_DIR/images/emptyview/empty.public.room.light.svg";
@@ -21,17 +30,13 @@ import EmptyPublicRoomLightIcon from "PUBLIC_DIR/images/emptyview/empty.public.r
 import EmptyPublicRoomCollaboratorDarkIcon from "PUBLIC_DIR/images/emptyview/empty.public.room.collaborator.dark.svg";
 import EmptyPublicRoomCollaboratorLightIcon from "PUBLIC_DIR/images/emptyview/empty.public.room.collaborator.light.svg";
 
-import EmptyFormRoomCollaboratorDarkIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.collaborator.dark.svg";
-import EmptyFormRoomCollaboratorLightIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.collaborator.light.svg";
+import EmptyCollaborationRoomDarkIcon from "PUBLIC_DIR/images/emptyview/empty.collaboration.room.dark.svg";
+import EmptyCollaborationRoomLightIcon from "PUBLIC_DIR/images/emptyview/empty.collaboration.room.light.svg";
+import EmptyCollaborationRoomCollaboratorDarkIcon from "PUBLIC_DIR/images/emptyview/empty.collaboration.room.collaborator.dark.svg";
+import EmptyCollaborationRoomCollaboratorLightIcon from "PUBLIC_DIR/images/emptyview/empty.collaboration.room.collaborator.light.svg";
 
-import EmptyCustomRoomCollaboratorDarkIcon from "PUBLIC_DIR/images/emptyview/empty.custom.room.collaborator.dark.svg";
-import EmptyCustomRoomCollaboratorLightIcon from "PUBLIC_DIR/images/emptyview/empty.custom.room.collaborator.light.svg";
-
-import EmptyCustomRoomOtherDarkIcon from "PUBLIC_DIR/images/emptyview/empty.custom.room.other.dark.svg";
-import EmptyCustomRoomOtherLightIcon from "PUBLIC_DIR/images/emptyview/empty.custom.room.other.light.svg";
-
-import EmptyFormRoomFillingDarkIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.filling.dark.svg";
-import EmptyFormRoomFillingLightIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.filling.light.svg";
+// import EmptyCustomRoomOtherDarkIcon from "PUBLIC_DIR/images/emptyview/empty.custom.room.other.dark.svg";
+// import EmptyCustomRoomOtherLightIcon from "PUBLIC_DIR/images/emptyview/empty.custom.room.other.light.svg";
 
 import CreateNewFormIcon from "PUBLIC_DIR/images/emptyview/create.new.form.svg";
 import CreateNewSpreadsheetIcon from "PUBLIC_DIR/images/emptyview/create.new.spreadsheet.svg";
@@ -90,8 +95,6 @@ export const getDescription = (
   parentRoomType: Nullable<FolderType>,
   isArchiveFolderRoot: boolean,
 ): string => {
-  const isCollaborator = access === ShareAccessRights.Collaborator;
-
   const isNotAdmin = isUser(access);
 
   if (isFolder) {
@@ -189,7 +192,7 @@ export const getTitle = (
     case RoomsType.FormRoom:
       return t("EmptyView:FormRoomEmptyTitle");
     case RoomsType.EditingRoom:
-      return "";
+      return t("EmptyView:CollaborationRoomEmptyTitle");
     case RoomsType.PublicRoom:
       return t("EmptyView:PublicRoomEmptyTitle");
     case RoomsType.CustomRoom:
@@ -242,8 +245,25 @@ export const getRoomIcon = (
       .with([RoomsType.FormRoom, P._], () =>
         isBaseTheme ? <EmptyFormRoomLightIcon /> : <EmptyFormRoomDarkIcon />,
       )
-
-      .with([RoomsType.EditingRoom, P._], () => <div />)
+      .with(
+        [
+          RoomsType.EditingRoom,
+          P.union(ShareAccessRights.None, ShareAccessRights.RoomManager),
+        ],
+        () =>
+          isBaseTheme ? (
+            <EmptyCollaborationRoomLightIcon />
+          ) : (
+            <EmptyCollaborationRoomDarkIcon />
+          ),
+      )
+      .with([RoomsType.EditingRoom, ShareAccessRights.Collaborator], () =>
+        isBaseTheme ? (
+          <EmptyCollaborationRoomCollaboratorLightIcon />
+        ) : (
+          <EmptyCollaborationRoomCollaboratorDarkIcon />
+        ),
+      )
       .with(
         [
           RoomsType.PublicRoom,
@@ -282,12 +302,8 @@ export const getRoomIcon = (
           <EmptyCustomRoomCollaboratorDarkIcon />
         ),
       )
-      .with([RoomsType.CustomRoom, P._], () =>
-        isBaseTheme ? (
-          <EmptyCustomRoomOtherLightIcon />
-        ) : (
-          <EmptyCustomRoomOtherDarkIcon />
-        ),
+      .with([P._, P.when(isUser)], () =>
+        isBaseTheme ? <DefaultFolderUserLight /> : <DefaultFolderUserDark />,
       )
       // eslint-disable-next-line react/jsx-no-useless-fragment
       .otherwise(() => <></>)
@@ -426,6 +442,11 @@ export const getOptions = (
     t("EmptyView:InviteUsersOptionDescription"),
   );
 
+  const inviteUserEditingRoom = createInviteOption(
+    t("EmptyView:InviteUsersOptionTitle"),
+    t("EmptyView:InviteUsersCollaborationOptionDescription"),
+  );
+
   const shareFillingRoom = {
     title: t("EmptyView:ShareOptionTitle"),
     description: t("EmptyView:ShareOptionDescription"),
@@ -548,7 +569,17 @@ export const getOptions = (
 
       return [uploadPDFFromDocSpace, uploadFromDevicePDF, shareFillingRoom];
     case RoomsType.EditingRoom:
-      return [];
+      if (isNotAdmin) return [];
+
+      if (isCollaborator)
+        return [createFile, uploadAllFromDocSpace, uploadFromDeviceAnyFile];
+
+      return [
+        createFile,
+        inviteUserEditingRoom,
+        uploadAllFromDocSpace,
+        uploadFromDeviceAnyFile,
+      ];
     case RoomsType.PublicRoom:
       if (isNotAdmin) return [];
 
@@ -564,7 +595,8 @@ export const getOptions = (
     case RoomsType.CustomRoom:
       if (isNotAdmin) return [];
 
-      if (isCollaborator) return [createFile, uploadFromDeviceAnyFile];
+      if (isCollaborator)
+        return [createFile, uploadAllFromDocSpace, uploadFromDeviceAnyFile];
 
       return [
         createFile,

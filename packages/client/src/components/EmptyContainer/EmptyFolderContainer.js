@@ -28,11 +28,8 @@ import { useCallback, useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { FolderType, RoomsType } from "@docspace/shared/enums";
-
 import EmptyContainer from "./EmptyContainer";
 import CommonButtons from "./sub-components/CommonButtons";
-import EmptyViewContainer from "./sub-components/EmptyViewContainer/EmptyViewContainer";
 import {
   getDescriptionText,
   getEmptyScreenType,
@@ -77,17 +74,6 @@ const EmptyFolderContainer = ({
   const descriptionText = useMemo(
     () => getDescriptionText(type, canCreateFiles, t),
     [t, canCreateFiles, type],
-  );
-
-  return (
-    <EmptyViewContainer
-      type={roomType}
-      folderType={type}
-      isFolder={!isRoom}
-      folderId={folderId}
-      parentRoomType={parentRoomType}
-      isArchiveFolderRoot={isArchiveFolderRoot}
-    />
   );
 
   return (

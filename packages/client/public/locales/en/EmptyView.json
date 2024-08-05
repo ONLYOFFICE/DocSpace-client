@@ -1,4 +1,5 @@
 {
+  "CollaborationRoomEmptyTitle": "Welcome to the Collaboration room",
   "CollaboratorEmptyTitle": "The room is empty.",
   "CreateDocument": "Create a new document",
   "CreateDocumentDescription": "Take advantage of vast word processing functionality.",
@@ -16,6 +17,7 @@
   "FormFolderDefaultUserDescription": "The forms uploaded by the administrators will be appeared here.",
   "FormFolderDefaultUserTitle": "No forms in this folder yet",
   "FormRoomEmptyTitle": "Welcome to the Form filling room",
+  "InviteUsersCollaborationOptionDescription": "Add members for joint editing in the room.",
   "InviteUsersOptionDescription": "Add portal members for joint editing in the room",
   "InviteUsersOptionTitle": "Inviting Attendees",
   "PublicRoomEmptyTitle": "Welcome to the Public room",

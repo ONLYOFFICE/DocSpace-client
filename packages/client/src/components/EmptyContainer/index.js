@@ -31,8 +31,9 @@ import { Events, FileExtensions } from "@docspace/shared/enums";
 
 import RootFolderContainer from "./RootFolderContainer";
 import EmptyFilterContainer from "./EmptyFilterContainer";
-import EmptyFolderContainer from "./EmptyFolderContainer";
 import RoomNoAccessContainer from "./RoomNoAccessContainer";
+
+import EmptyViewContainer from "./sub-components/EmptyViewContainer/EmptyViewContainer";
 
 const linkStyles = {
   isHovered: true,
@@ -56,8 +57,14 @@ const EmptyContainer = ({
   isRoot,
   isPublicRoom,
   isEmptyPage,
+  roomType,
+  parentRoomType,
+  folderId,
+  isArchiveFolderRoot,
 }) => {
   //const location = useLocation();
+
+  const isRoom = !!roomType;
 
   linkStyles.color = theme.filesEmptyContainer.linkColor;
 
@@ -101,22 +108,26 @@ const EmptyContainer = ({
 
   //isLoading && location?.state ? location.state?.isRoot : parentId === 0;
 
-  return isFiltered ? (
-    <EmptyFilterContainer linkStyles={linkStyles} />
-  ) : isRootEmptyPage ? (
-    <RootFolderContainer
-      onCreate={onCreate}
-      linkStyles={linkStyles}
-      onCreateRoom={onCreateRoom}
-      sectionWidth={sectionWidth}
-    />
-  ) : (
-    <EmptyFolderContainer
-      sectionWidth={sectionWidth}
-      onCreate={onCreate}
-      linkStyles={linkStyles}
-      type={type}
-      isEmptyPage={isEmptyPage}
+  if (isFiltered) return <EmptyFilterContainer linkStyles={linkStyles} />;
+
+  if (isRootEmptyPage)
+    return (
+      <RootFolderContainer
+        onCreate={onCreate}
+        linkStyles={linkStyles}
+        onCreateRoom={onCreateRoom}
+        sectionWidth={sectionWidth}
+      />
+    );
+
+  return (
+    <EmptyViewContainer
+      type={roomType}
+      folderType={type}
+      isFolder={!isRoom}
+      folderId={folderId}
+      parentRoomType={parentRoomType}
+      isArchiveFolderRoot={isArchiveFolderRoot}
     />
   );
 };
@@ -131,6 +142,7 @@ export default inject(
     clientLoadingStore,
     currentTariffStatusStore,
     publicRoomStore,
+    treeFoldersStore,
   }) => {
     const { isErrorRoomNotAvailable, isFiltered } = filesStore;
     const { isLoading } = clientLoadingStore;
@@ -142,6 +154,9 @@ export default inject(
 
     const isRoomNotFoundOrMoved =
       isFiltered === null && isErrorRoomNotAvailable;
+
+    const { roomType, id: folderId, parentRoomType } = selectedFolderStore;
+    const { isArchiveFolderRoot } = treeFoldersStore;
 
     const isRoot = selectedFolderStore.pathParts?.length === 1;
 
@@ -157,6 +172,10 @@ export default inject(
       type: selectedFolderStore.type,
       isRoot,
       isPublicRoom,
+      roomType,
+      parentRoomType,
+      folderId,
+      isArchiveFolderRoot,
     };
   },
 )(observer(EmptyContainer));

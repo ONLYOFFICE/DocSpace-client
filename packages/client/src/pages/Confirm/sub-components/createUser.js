@@ -322,7 +322,9 @@ const CreateUserForm = (props) => {
       culture: currentCultureName,
     };
 
-    signupOAuth(signupAccount)
+    const confirmKey = linkData.confirmHeader;
+
+    signupOAuth(signupAccount, confirmKey)
       .then(() => {
         const url = roomData.roomId
           ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}/`

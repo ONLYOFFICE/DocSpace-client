@@ -63,10 +63,6 @@ const RowDataComponent = (props) => {
 
   const lastColumn = getLastColumn(tableStorageName);
 
-  console.log("lastColumn", lastColumn);
-  console.log("quickButtonsComponent", quickButtonsComponent);
-  console.log("sizeColumnIsEnabled", sizeColumnIsEnabled);
-
   return (
     <>
       <TableCell
@@ -88,7 +84,7 @@ const RowDataComponent = (props) => {
         <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
           {badgesComponent}
         </StyledBadgesContainer>
-        {/* {lastColumn === "Name" ? quickButtonsComponent : <></>} */}
+        {lastColumn === "Name" ? quickButtonsComponent : <></>}
       </TableCell>
 
       {authorColumnIsEnabled ? (
@@ -106,7 +102,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {/* {lastColumn === "Author" ? quickButtonsComponent : <></>} */}
+          {lastColumn === "Author" ? quickButtonsComponent : <></>}
         </TableCell>
       ) : (
         <div />
@@ -130,7 +126,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {/* {lastColumn === "Created" ? quickButtonsComponent : <></>} */}
+          {lastColumn === "Created" ? quickButtonsComponent : <></>}
         </TableCell>
       ) : (
         <div />
@@ -151,7 +147,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {/* {lastColumn === "Modified" ? quickButtonsComponent : <></>} */}
+          {lastColumn === "Modified" ? quickButtonsComponent : <></>}
         </TableCell>
       ) : (
         <div />
@@ -172,7 +168,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {/* {lastColumn === "Size" ? quickButtonsComponent : <></>} */}
+          {lastColumn === "Size" ? quickButtonsComponent : <></>}
         </TableCell>
       ) : (
         <div />
@@ -195,7 +191,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {/* {lastColumn === "Type" ? quickButtonsComponent : <></>} */}
+          {lastColumn === "Type" ? quickButtonsComponent : <></>}
         </TableCell>
       ) : (
         <div />

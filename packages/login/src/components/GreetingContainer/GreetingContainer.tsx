@@ -42,7 +42,7 @@ export const GreetingContainer = ({
   greetingSettings,
   welcomeTitle,
 }: GreetingContainersProps) => {
-  const { t } = useTranslation(["Wizard, Login, Confirm"]);
+  const { t } = useTranslation(["Wizard", "Login", "Confirm"]);
   const theme = useTheme();
 
   const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme.isBase);

@@ -45,6 +45,8 @@ export const DEFAULT_SELECT_LANGUAGE: TCulturesOption = {
   icon: EnUSReactSvgUrl,
 };
 
+export const URL_ONLYOFFICE = "https://onlyoffice.com";
+
 export const URL_LICENSE = "https://gnu.org/licenses/gpl-3.0.html";
 
 export const TFA_ANDROID_APP_URL =

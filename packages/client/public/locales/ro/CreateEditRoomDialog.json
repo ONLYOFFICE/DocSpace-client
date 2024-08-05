@@ -1,8 +1,10 @@
 {
+  "ActivationRequired": "este necesară activarea",
   "ChooseRoomType": "Alegeţi tipul de sală",
   "CreateRoomConfirmation": "Continuați fără a conecta serviciu de stocare?\nAţi selectat serviciu terț de stocare care nu este încă conectat. Dacă continuați fără a vă conecta la serviciul, această opțiune nu va fi adăugată.",
   "CreateTagOption": "Creare etichetă",
   "DisableRoomQuota": "Dezactivare cotă de stocare pentru această sală",
+  "FormRoomBarDescription": "Această sală este disponibilă tuturor la linkul. Utilizatorii externi vor fi acordaţi permisiunea de Completator de formulare pentru toate fişiere.",
   "Icon": "Pictogramă",
   "MakeRoomPrivateDescription": "Toate fişierele din această sală vor fi criptate.",
   "MakeRoomPrivateLimitationsWarningDescription": "Această funcţie vă permite să invitaţi doar utilizatorii {{productName}} existenți. După crearea unei săli, nu veţi putea modifica lista de utilizatori.",

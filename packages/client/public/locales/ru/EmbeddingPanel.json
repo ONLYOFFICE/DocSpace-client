@@ -1,4 +1,11 @@
 {
+  "CodeSuccessfullyCopied": "Код для вставки успешно скопирован в буфер обмена",
+  "ContentRestricted": "Копирование содержимого, загрузка и печать файлов ограничены.",
+  "DisplaySettings": "Настройки отображения",
+  "EmbeddingBarAllowList": "Добавьте URL-адрес веб-сайта для встраивания в <1>список разрешенных</1>.",
+  "EmbeddingBarDescription": "Встраивание будет работать только для URL-адресов, указанных администратором {{productName}} в настройках JavaScript SDK.",
   "Height": "Высота",
+  "Link": "Ссылка",
+  "LinkProtectedWithPassword": "Ссылка защищена паролем.",
   "Width": "Ширина"
 }

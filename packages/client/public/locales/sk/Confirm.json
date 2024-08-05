@@ -7,6 +7,7 @@
   "DeleteProfileBtn": "Vymazať môj účet",
   "DeleteProfileConfirmation": "Pozor! Idete si zmazať účet.",
   "DeleteProfileConfirmationInfo": "Odkliknutím \"Vymazať môj účet\" súhlasíte s našou <1>politikou Ochrany súkromia.</1>",
+  "DeleteProfileSuccessDescription": "Váš účet {{productName}} bol úspešne deaktivovaný. Vlastník alebo administrátor {{productName}} môže natrvalo vymazať vaše deaktivované konto.",
   "DeleteProfileSuccessMessage": "Váš účet bol úspešne odstránený.",
   "DeleteProfileSuccessMessageInfo": "Viac informácií o odstránení účtu a údajov s ním spojených nájdete v našich <1>pravidlách ochrany osobných údajov</1>.",
   "EmailAndPasswordCopiedToClipboard": "E-mail a heslo boli skopírované do schránky",

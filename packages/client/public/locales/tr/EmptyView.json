@@ -1,1 +1,24 @@
-{}
+{
+  "CollaboratorEmptyTitle": "Oda boş.",
+  "CreateNewFileDescription": "Dosya veya klasör oluşturarak odada çalışmaya başlayın",
+  "CreateNewFileTitle": "Yeni bir dosya oluştur",
+  "CustomRoomEmptyTitle": "Özel odaya hoş geldiniz",
+  "EmptyDescription": "Hızlı işlemlerle başlayın:",
+  "FormFolderDefaultDescription": "PDF formlarını buraya bırakın veya {{productName}} veya cihazdan yükleyin.",
+  "FormFolderDefaultTitle": "Burada henüz form yok",
+  "FormFolderDefaultUserDescription": "Yöneticiler tarafından yüklenen formlar burada görünecektir.",
+  "FormFolderDefaultUserTitle": "Bu klasörde henüz form yok",
+  "FormRoomEmptyTitle": "Form doldurma odasına hoş geldiniz",
+  "InviteUsersOptionDescription": "Odada ortak düzenleme için portal üyeleri ekleyin",
+  "InviteUsersOptionTitle": "Katılımcıları Davet Etme",
+  "ShareOptionDescription": "Bir genel erişim bağlantısını kopyalayın veya form doldurma işlemini başlatmak için diğer kullanıcıları odaya davet edin.",
+  "ShareOptionTitle": "Oda paylaşma",
+  "UploadDeviceOptionDescription": "Kişisel cihazınızdan her tür dosyayı yükleyin",
+  "UploadDeviceOptionTitle": "Cihazınızdan Yükleme",
+  "UploadDevicePDFFormOptionDescription": "Hazır bir PDF formunu cihazınızdan odaya yükleyin.",
+  "UploadDevicePDFFormOptionTitle": "Cihazdan yükleyin",
+  "UploadFromPortalDescription": "Belgeler veya Odalardan her tür dosyayı yükleyin",
+  "UploadFromPortalTitle": "{{productName}} kaynağından yükleyin",
+  "UploadPDFFormOptionDescription": "{{productName}} içinde bulunan hazır bir PDF formunu seçin ve odaya yükleyin.",
+  "UserEmptyDescription": "Yöneticiler tarafından yüklenen dosya ve klasörler burada görünecektir."
+}

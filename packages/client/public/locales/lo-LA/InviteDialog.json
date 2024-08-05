@@ -11,5 +11,6 @@
   "InviteViaLinkDescriptionRoom": "ສ້າງການເຊື່ອມຕໍ່ທົ່ວໄປສໍາລັບການອະນຸຍາດຕົນເອງໃນຫ້ອງ",
   "LinkCopySuccess": "ລິ້ງຖືກຄັດລອກແລ້ວ",
   "ResetChange": "ຣີເຊັດການປ່ຽນແປງ",
-  "SendInvitation": "ສົ່ງຄຳເຊີນ"
+  "SendInvitation": "ສົ່ງຄຳເຊີນ",
+  "UsersAlreadyAdded": "ຜູ້ໃຊ້ບາງຄົນໄດ້ຖືກເພີ່ມແລ້ວ"
 }

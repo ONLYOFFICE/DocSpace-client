@@ -7,6 +7,7 @@
   "DeleteProfileBtn": "Hesabımı silin",
   "DeleteProfileConfirmation": "Diqqət! Hesabınızı silmək üzrəsiniz.",
   "DeleteProfileConfirmationInfo": "\"Hesabımı silin\" seçiminə klikləməklə bizim <1>Məxfilik siyasətimizlə razılaşırsınız.</1>",
+  "DeleteProfileSuccessDescription": "{{productName}} hesabınız uğurla deaktiv edildi. {{productName}} sahibi və ya administratoru deaktiv edilmiş hesabınızı həmişəlik silə bilər.",
   "DeleteProfileSuccessMessage": "Hesabınız uğurla silinmişdir.",
   "DeleteProfileSuccessMessageInfo": "Hesabınızın və onunla bağlı məlumatların silinməsi haqqında daha ətraflı öyrənmək üçün bizim <1>Məxfilik Siyasətimizə</1> nəzər yetirin.",
   "EmailAndPasswordCopiedToClipboard": "E-poçt ünvanı və şifrə mübadilə buferinə kopyalandı.",

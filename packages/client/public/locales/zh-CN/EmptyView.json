@@ -1,10 +1,9 @@
 {
-  "CollaboratorEmptyDesciprtion": " 开始使用快速操作：",
   "CollaboratorEmptyTitle": " 房间是空的。",
   "CreateNewFileDescription": " 通过创建文件或文件夹开始在房间中工作",
   "CreateNewFileTitle": " 创建新文件",
   "CustomRoomEmptyTitle": " 欢迎来到自定义房间",
-  "EmptyDescription": " 开始使用快速操作：",
+  "EmptyDescription": " 开始使用快速操作：",
   "FormFolderDefaultDescription": " 将 PDF 表单拖放到此处或从{{productName}}或设备上传。",
   "FormFolderDefaultTitle": " 此处尚无表单",
   "FormFolderDefaultUserDescription": " 管理员上传的表单将显示在此处。",

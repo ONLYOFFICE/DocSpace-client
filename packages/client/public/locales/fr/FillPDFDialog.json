@@ -1,1 +1,6 @@
-{}
+{
+  "FillOutButtonLabel": "Remplir",
+  "FillOutTitle": "Remplir le formulaire soi-même",
+  "FillPDFDialogTitle": "Remplir en tant que",
+  "ShareCollectDescription": "Partagez votre formulaire et collectez les réponses via une salle de remplissage de formulaires."
+}

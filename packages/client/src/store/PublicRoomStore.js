@@ -38,7 +38,8 @@ import {
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
-import { LinkType, ValidationStatus } from "../helpers/constants";
+import { LinkType } from "../helpers/constants";
+import { ValidationStatus } from "@docspace/shared/enums";
 
 class PublicRoomStore {
   externalLinks = [];

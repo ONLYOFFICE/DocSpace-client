@@ -78,7 +78,6 @@ class InfoPanelStore {
 
   infoPanelSelection = null;
   selectionHistory = null;
-  selectionHistory = null;
 
   roomsView = infoMembers;
   fileView = infoHistory;
@@ -94,7 +93,6 @@ class InfoPanelStore {
   publicRoomStore = null;
 
   infoPanelMembers = null;
-  infoPanelSelection = null;
   infoPanelRoom = null;
   membersIsLoading = false;
   isMembersPanelUpdating = false;

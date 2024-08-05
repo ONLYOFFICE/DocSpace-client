@@ -1,1 +1,24 @@
-{}
+{
+  "CollaboratorEmptyTitle": "الغرفة فارغة.",
+  "CreateNewFileDescription": "ابدأ العمل في الغرفة عن طريق إنشاء الملفات أو المجلدات",
+  "CreateNewFileTitle": "إنشاء ملف جديد",
+  "CustomRoomEmptyTitle": "مرحبًا بك في الغرفة المخصصة",
+  "EmptyDescription": "ابدأ بالإجراءات السريعة:",
+  "FormFolderDefaultDescription": "أسقط نماذج PDF هنا أو قم بتحميلها من {{productName}} أو من الجهاز.",
+  "FormFolderDefaultTitle": "لا توجد نماذج هنا حتى الآن",
+  "FormFolderDefaultUserDescription": "ستظهر هنا النماذج التي تم تحميلها من قبل المسؤولين.",
+  "FormFolderDefaultUserTitle": "لا توجد نماذج في هذا المجلد حتى الآن",
+  "FormRoomEmptyTitle": "مرحبًا بك في غرفة تعبئة النموذج",
+  "InviteUsersOptionDescription": "إضافة أعضاء البوابة الإلكترونية للتحرير المشترك في الغرفة",
+  "InviteUsersOptionTitle": "دعوة الحضور",
+  "ShareOptionDescription": "انسخ رابط الوصول العام أو قم بدعوة مستخدمين آخرين إلى الغرفة لبدء عملية تعبئة النموذج.",
+  "ShareOptionTitle": "مشاركة غرفة",
+  "UploadDeviceOptionDescription": "قم بتحميل أي نوع من الملفات من جهازك الشخصي",
+  "UploadDeviceOptionTitle": "تحميل من جهازك",
+  "UploadDevicePDFFormOptionDescription": "قم بتحميل نموذج PDF جاهز إلى الغرفة من جهازك.",
+  "UploadDevicePDFFormOptionTitle": "تحميل من الجهاز",
+  "UploadFromPortalDescription": "قم بتحميل أي نوع من الملفات من المستندات أو الغرف",
+  "UploadFromPortalTitle": "تحميل من {{productName}}",
+  "UploadPDFFormOptionDescription": "حدد نموذج  PDFجاهزًا متاحًا في {{productName}} وقم بتحميله إلى الغرفة. ",
+  "UserEmptyDescription": "ستظهر هنا الملفات والمجلدات التي تم تحميلها بواسطة المسؤولين."
+}

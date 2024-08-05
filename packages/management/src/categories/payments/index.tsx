@@ -25,10 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import PaymentsPage from "client/PaymentsPage";
+import { Component } from "client/PaymentsPage";
 
 const Payments = () => {
-  return <PaymentsPage />;
+  return <Component />;
 };
 
 export default Payments;

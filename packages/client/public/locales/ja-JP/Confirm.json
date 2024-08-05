@@ -6,6 +6,7 @@
   "DeleteProfileBtn": "アカウントの削除",
   "DeleteProfileConfirmation": "ご注意！アカウントを削除しようとしています。",
   "DeleteProfileConfirmationInfo": "\"Delete my account\" をクリックすると、<1>プライバシーポリシー</1> に同意したことになります。",
+  "DeleteProfileSuccessDescription": "お客様の{{productName}}アカウントは正常に無効化されました。{{productName}}の所有者または管理者は、無効化されたアカウントを永久に削除できます。",
   "DeleteProfileSuccessMessage": "お客様のアカウントは正常に削除されました。",
   "DeleteProfileSuccessMessageInfo": "お客様のアカウントとそれに関連するデータの削除については、<1>プライバシーポリシー</1>をご覧ください。",
   "EmailAndPasswordCopiedToClipboard": "メールとパスワードをクリップボードにコピー",

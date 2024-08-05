@@ -35,7 +35,7 @@
         Edge: 109,
         Opera: 90,
         Safari: 15,
-        SafariMobile: 16,
+        SafariMobile: 15,
         AscDesktopEditor: 6,
         SamsungBrowser: 4,
         UCBrowser: 12,

@@ -346,12 +346,16 @@ export function linkOAuth(serializedProfile) {
   });
 }
 
-export function signupOAuth(signupAccount) {
-  return request({
+export function signupOAuth(signupAccount, confirmKey = null) {
+  const options = {
     method: "post",
     url: "people/thirdparty/signup",
     data: signupAccount,
-  });
+  };
+
+  if (confirmKey) options.headers = { confirm: confirmKey };
+
+  return request(options);
 }
 
 export function unlinkOAuth(provider) {

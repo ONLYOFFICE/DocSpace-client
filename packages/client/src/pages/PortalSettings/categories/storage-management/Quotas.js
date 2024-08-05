@@ -35,8 +35,8 @@ import { Badge } from "@docspace/shared/components/badge";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import { StyledBaseQuotaComponent, StyledMainTitle } from "./StyledComponent";
-import QuotaPerRoomComponent from "./sub-components/QuotaPerRoom";
-import QuotaPerUserComponent from "./sub-components/QuotaPerUser";
+import { QuotaPerRoomComponentSection } from "./sub-components/QuotaPerRoom";
+import { QuotaPerUserComponentSection } from "./sub-components/QuotaPerUser";
 import MobileQuotasComponent from "./sub-components/MobileQuotas";
 
 const helpLink =
@@ -48,8 +48,8 @@ const QuotaPerItemsComponent = ({ isStatisticsAvailable }) => {
 
   return (
     <>
-      <QuotaPerRoomComponent isDisabled={!isStatisticsAvailable} />
-      <QuotaPerUserComponent />
+      <QuotaPerRoomComponentSection isDisabled={!isStatisticsAvailable} />
+      <QuotaPerUserComponentSection />
     </>
   );
 };

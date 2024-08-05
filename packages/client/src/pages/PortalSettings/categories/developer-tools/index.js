@@ -148,7 +148,7 @@ const DeveloperToolsWrapper = (props) => {
   );
 };
 
-export default inject(({ setup, settingsStore, authStore }) => {
+export const Component = inject(({ setup, settingsStore, authStore }) => {
   const { initSettings } = setup;
 
   const { identityServerEnabled } = authStore.capabilities;

@@ -35,6 +35,7 @@ import {
 import { TUser } from "@docspace/shared/api/people/types";
 import {
   TCapabilities,
+  TCompanyInfo,
   TGetColorTheme,
   TGetSsoSettings,
   TPasswordSettings,
@@ -249,6 +250,22 @@ export async function getConfig() {
   return config;
 }
 
+export async function getCompanyInfoSettings() {
+  const [getCompanyInfoSettings] = createRequest(
+    [`/settings/rebranding/company`],
+    [["", ""]],
+    "GET",
+  );
+
+  const res = await fetch(getCompanyInfoSettings);
+
+  if (!res.ok) throw new Error(res.statusText);
+
+  const passwordSettings = await res.json();
+
+  return passwordSettings.response as TCompanyInfo;
+}
+
 export async function getPortalPasswordSettings(
   confirmKey: string | null = null,
 ) {
@@ -440,6 +457,21 @@ export async function createUser(
   return user.response as TUser;
 }
 
+export async function suspendPortal(confirmKey: string | null = null) {
+  const [changeEmail] = createRequest(
+    [`/portal/suspend`],
+    [
+      confirmKey ? ["confirm", confirmKey] : ["", ""],
+      ["Content-Type", "application/json;charset=utf-8"],
+    ],
+    "PUT",
+  );
+
+  const res = await fetch(changeEmail);
+
+  if (!res.ok) throw new Error(res.statusText);
+}
+
 export async function changePassword(
   passwordHash: string,
   userId?: string,
@@ -541,4 +573,16 @@ export async function getTfaSecretKeyAndQR(confirmKey: string | null = null) {
   const tfaSecretKeyAndQR = await res.json();
 
   return tfaSecretKeyAndQR.response as TTfaSecretKeyAndQR;
+}
+
+export async function deleteSelf(confirmKey: string | null = null) {
+  const [deleteSelf] = createRequest(
+    [`/people/@self`],
+    [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
+    "DELETE",
+  );
+
+  const res = await fetch(deleteSelf);
+
+  if (!res.ok) throw new Error(res.statusText);
 }

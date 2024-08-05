@@ -156,3 +156,10 @@ export const StyledBody = styled.div`
     margin-bottom: 8px;
   }
 `;
+
+export const ButtonsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  width: 100%;
+`;

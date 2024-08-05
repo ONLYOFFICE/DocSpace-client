@@ -37,8 +37,8 @@ import withLoader from "@/HOCs/withLoader";
 import { TError, WithLoaderProps } from "@/types";
 import { ownerChange } from "@/utils/actions";
 
-import { ButtonsWrapper } from "./ChangeOwner.styled";
 import { ConfirmRouteContext } from "../ConfirmRoute";
+import { ButtonsWrapper } from "../StyledConfirm.styled";
 
 type ChangeOwnerFormProps = {
   newOwner?: string;

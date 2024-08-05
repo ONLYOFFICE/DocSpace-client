@@ -165,7 +165,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
     socketHelper.emit({
       command: "subscribe",
-      data: { roomParts: "66faa6e4-f133-11ea-b126-00ffeec8b4ef" },
+      data: { roomParts: userId },
     });
 
     socketHelper.on("s:logout-session", (loginEventId) => {
@@ -177,7 +177,12 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
         );
       }
     });
-  }, [socketHelper, userLoginEventId, setPreparationPortalDialogVisible]);
+  }, [
+    socketHelper,
+    userLoginEventId,
+    setPreparationPortalDialogVisible,
+    userId,
+  ]);
 
   const { t, ready } = useTranslation(["Common"]); //TODO: if enable banner ["Common", "SmartBanner"]
 

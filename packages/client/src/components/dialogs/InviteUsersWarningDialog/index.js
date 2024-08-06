@@ -91,6 +91,7 @@ const InviteUsersWarningDialog = (props) => {
       visible={visible}
       onClose={onClose}
       displayType="modal"
+      autoMaxHeight
     >
       <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
       <ModalDialog.Body>

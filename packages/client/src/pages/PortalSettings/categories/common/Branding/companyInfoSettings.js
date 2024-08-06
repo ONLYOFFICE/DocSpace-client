@@ -78,7 +78,7 @@ const StyledComponent = styled.div`
   }
 `;
 
-const CompanyInfoSettings = (props) => {
+const CompanyInfoSettingsComponent = (props) => {
   const {
     t,
     isSettingPaid,
@@ -495,38 +495,42 @@ const CompanyInfoSettings = (props) => {
   );
 };
 
-export default inject(({ settingsStore, common, currentQuotaStore }) => {
-  const {
-    setIsLoadedCompanyInfoSettingsData,
-    isLoadedCompanyInfoSettingsData,
-  } = common;
+export const CompanyInfoSettings = inject(
+  ({ settingsStore, common, currentQuotaStore }) => {
+    const {
+      setIsLoadedCompanyInfoSettingsData,
+      isLoadedCompanyInfoSettingsData,
+    } = common;
 
-  const {
-    getCompanyInfoSettings,
+    const {
+      getCompanyInfoSettings,
 
-    companyInfoSettingsIsDefault,
+      companyInfoSettingsIsDefault,
 
-    companyInfoSettingsData,
-    buildVersionInfo,
-    deviceType,
-  } = settingsStore;
+      companyInfoSettingsData,
+      buildVersionInfo,
+      deviceType,
+    } = settingsStore;
 
-  const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
+    const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
 
-  return {
-    getCompanyInfoSettings,
+    return {
+      getCompanyInfoSettings,
 
-    companyInfoSettingsIsDefault,
+      companyInfoSettingsIsDefault,
 
-    companyInfoSettingsData,
-    setIsLoadedCompanyInfoSettingsData,
-    isLoadedCompanyInfoSettingsData,
-    buildVersionInfo,
-    isSettingPaid: isBrandingAndCustomizationAvailable,
-    deviceType,
-  };
-})(
+      companyInfoSettingsData,
+      setIsLoadedCompanyInfoSettingsData,
+      isLoadedCompanyInfoSettingsData,
+      buildVersionInfo,
+      isSettingPaid: isBrandingAndCustomizationAvailable,
+      deviceType,
+    };
+  },
+)(
   withLoading(
-    withTranslation(["Settings", "Common"])(observer(CompanyInfoSettings)),
+    withTranslation(["Settings", "Common"])(
+      observer(CompanyInfoSettingsComponent),
+    ),
   ),
 );

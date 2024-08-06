@@ -28,7 +28,7 @@ import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 import { setDocumentTitle } from "SRC_DIR/utils";
-import RestorePage from "client/RestorePage";
+import { Component } from "client/RestorePage";
 
 const Restore = () => {
   const { t } = useTranslation(["Settings"]);
@@ -37,7 +37,7 @@ const Restore = () => {
     setDocumentTitle(t("RestoreBackup"));
   }, []);
 
-  return <RestorePage />;
+  return <Component />;
 };
 
 export default Restore;

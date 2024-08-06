@@ -85,6 +85,7 @@ const RoomsRowDataComponent = (props) => {
         <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
           {badgesComponent}
         </StyledBadgesContainer>
+        {lastColumn === "Name" ? quickButtonsComponent : <></>}
       </TableCell>
 
       {roomColumnTypeIsEnabled ? (
@@ -104,6 +105,7 @@ const RoomsRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "Type" ? quickButtonsComponent : <></>}
         </TableCell>
       ) : (
         <div />
@@ -122,6 +124,7 @@ const RoomsRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "Tags" ? quickButtonsComponent : <></>}
         </TableCell>
       ) : (
         <div />
@@ -144,6 +147,7 @@ const RoomsRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "Owner" ? quickButtonsComponent : <></>}
         </TableCell>
       ) : (
         <div />
@@ -166,6 +170,7 @@ const RoomsRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "Activity" ? quickButtonsComponent : <></>}
         </TableCell>
       ) : (
         <div />
@@ -178,12 +183,13 @@ const RoomsRowDataComponent = (props) => {
               type="room"
               isReadOnly={!item?.security?.EditRoom}
             />
+            {lastColumn === "Storage" ? quickButtonsComponent : <></>}
           </TableCell>
         ) : (
           <div />
         ))}
 
-      {roomColumnQuickButtonsIsEnabled ? (
+      {/* {roomColumnQuickButtonsIsEnabled ? (
         <TableCell
           style={
             !roomColumnQuickButtonsIsEnabled
@@ -202,7 +208,7 @@ const RoomsRowDataComponent = (props) => {
         </TableCell>
       ) : (
         <div />
-      )}
+      )} */}
     </>
   );
 };

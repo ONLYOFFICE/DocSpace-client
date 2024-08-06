@@ -119,7 +119,7 @@ class FilesTableHeader extends React.Component {
       ];
 
       showStorageInfo &&
-        columns.splice(columns.length - 1, 0, {
+        columns.splice(columns.length, 0, {
           key: "Storage",
           title:
             isDefaultRoomsQuotaSet && !isArchiveFolder

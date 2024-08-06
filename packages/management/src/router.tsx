@@ -41,7 +41,7 @@ import Bonus from "./categories/bonus";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 
 import Error404 from "@docspace/shared/components/errors/Error404";
-import PreparationPortal from "@docspace/shared/pages/PreparationPortal";
+import { PreparationPortal } from "@docspace/shared/pages/PreparationPortal";
 
 const routes = [
   {

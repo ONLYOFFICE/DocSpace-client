@@ -1,8 +1,10 @@
 {
+  "ActivationRequired": "aktivasyon gerekli",
   "ChooseRoomType": "Oda tipini seç",
   "CreateRoomConfirmation": "Depolamayı bağlamadan devam edilsin mi?\nHenüz bağlanmamış bir üçüncü taraf depolama seçeneği seçtiniz. Servisi bağlamadan devam ederseniz bu seçenek eklenmeyecektir.",
   "CreateTagOption": "Etiket oluştur",
   "DisableRoomQuota": "Bu oda için kotayı devre dışı bırak",
+  "FormRoomBarDescription": "Bu oda, bağlantıya sahip olan herkes tarafından kullanılabilir. Harici kullanıcılar tüm dosyalar için Form Doldurma iznine sahip olacaktır.",
   "Icon": "Simge",
   "MakeRoomPrivateDescription": "Bu odadaki tüm dosyalar şifrelenecektir.",
   "MakeRoomPrivateLimitationsWarningDescription": "Bu özellik ile sadece mevcut {{productName}} kullanıcılarını davet edebilirsiniz. Bir oda oluşturduktan sonra kullanıcı listesini değiştiremezsiniz.",

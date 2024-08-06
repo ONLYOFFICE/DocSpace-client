@@ -14,7 +14,7 @@
   "LDAPGroupTooltip": "此组从 LDAP 加载。如果您需要重命名、添加或删除用户，请参阅 LDAP 目录。",
   "NameChangeButton": "更改名称",
   "PasswordChangeButton": "更改密码",
-  "PendingInviteTitle": "待处理的邀请",
+  "PendingInviteTitle": "待处理邀请",
   "PendingTitle": "待定",
   "PeopleCount": "人数：{{count}}",
   "RemoveData": "删除个人数据",

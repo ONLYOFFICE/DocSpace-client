@@ -1,8 +1,10 @@
 {
+  "ActivationRequired": "nepieciešams aktivizācijas kods",
   "ChooseRoomType": "Izvēlieties telpas tipu",
   "CreateRoomConfirmation": "Vai turpināt, neizveidojot savienojumu ar krātuvi?\nEsat atlasījis trešās puses krātuves opciju, kas vēl nav pievienota. Ja turpināsiet, nepievienojot pakalpojumu, šī opcija netiks pievienota.",
   "CreateTagOption": "Izveidot birku",
   "DisableRoomQuota": "Atspējot kvotu šai telpai",
+  "FormRoomBarDescription": "Šī telpa ir pieejama ikvienam, kam ir saite. Ārējiem lietotājiem būs veidlapu aizpildītāja atļauja visiem failiem.",
   "Icon": "Ikona",
   "MakeRoomPrivateDescription": "Visi faili šajā telpā tiks šifrēti.",
   "MakeRoomPrivateLimitationsWarningDescription": "Izmantojot šo funkciju, varat uzaicināt tikai esošos {{productName}} lietotājus. Pēc telpas izveides jūs nevarēsiet mainīt lietotāju sarakstu.",

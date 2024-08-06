@@ -4,6 +4,7 @@
   "CreateRoomConfirmation": "Želite li da nastavite bez povezivanja memorijskog prostora?\nIzabrali ste opciju skladištenja treće strane koja još uvek nije povezana. Ako nastavite bez povezivanja usluge, ova opcija neće biti dodata.",
   "CreateTagOption": "Kreiraj tag",
   "DisableRoomQuota": "Onemogući kvotu za ovu sobu",
+  "FormRoomBarDescription": "Ova prostorija je dostupna za bilo koga sa linkom. Spoljni korisnici će imati dozvolu za Popunjavanje Formulara za sve datoteke.",
   "Icon": "Ikonica",
   "MakeRoomPrivateDescription": "Sve datoteke u ovoj sobi će biti šifrovane.",
   "MakeRoomPrivateLimitationsWarningDescription": "Pomoću ove funkcije možete pozvati samo postojeće {{productName}} korisnike. Nakon kreiranja sobe, nećete moći da promenite listu korisnika.",

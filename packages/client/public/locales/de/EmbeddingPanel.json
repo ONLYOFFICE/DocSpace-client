@@ -1,4 +1,11 @@
 {
+  "CodeSuccessfullyCopied": "Code zum Einfügen erfolgreich in die Zwischenablage kopiert",
+  "ContentRestricted": "Das Kopieren von Inhalten, das Herunterladen von Dateien und das Drucken sind eingeschränkt.",
+  "DisplaySettings": "Anzeigeeinstellungen",
+  "EmbeddingBarAllowList": "Fügen Sie die Website-URL für die Einbettung in die <1>Zulassungsliste</1> ein.",
+  "EmbeddingBarDescription": "Das Einbetten funktioniert nur für die URLs, die der {{productName}}-Administrator in den JavaScript-SDK-Einstellungen angegeben hat.",
   "Height": "Höhe",
+  "Link": "Link",
+  "LinkProtectedWithPassword": "Der Link ist mit einem Passwort geschützt.",
   "Width": "Breite"
 }

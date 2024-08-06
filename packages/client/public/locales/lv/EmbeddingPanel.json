@@ -1,4 +1,11 @@
 {
+  "CodeSuccessfullyCopied": "Kods ievietošanai veiksmīgi iekopēts starpliktuvē",
+  "ContentRestricted": "Satura kopēšana, failu lejupielāde un drukāšana ir ierobežota.",
+  "DisplaySettings": "Displeja iestatījumi",
+  "EmbeddingBarAllowList": "Pievienojiet vietnes URL iegulšanai <1>atļauto sarakstā</1>.",
+  "EmbeddingBarDescription": "Iegulšana darbosies tikai tiem vietrāžiem URL, kurus {{productName}} administrators norādījis JavaScript SDK iestatījumos.",
   "Height": "Augstums",
+  "Link": "Saite",
+  "LinkProtectedWithPassword": "Saite ir aizsargāta ar paroli.",
   "Width": "Platums"
 }

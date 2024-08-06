@@ -3,6 +3,8 @@
   "CannotReassignFiles": "Nếu bạn xóa nhiều người dùng cùng một lúc, bạn không thể chuyển giao tập tin của họ lại cho người dùng khác.",
   "DeleteGroupUsersSuccessMessage": "Người dùng đã được xóa thành công.",
   "DeleteMyDocumentsUser": "Tất cả các tập tin và thư mục cá nhân trong phần Tài liệu của người dùng này sẽ bị xóa vĩnh viễn.",
+  "DeletePersonalData": "Dữ liệu cá nhân, tất cả các tập tin và thư mục cá nhân trong phần Tài Liệu và Thùng rác* của người dùng đã chọn sẽ bị xóa vĩnh viễn. Các tập tin và thư mục của người dùng đã chọn được lưu trong các phần chung* chẳng hạn như phòng sẽ vẫn còn trong {{productName}}.",
+  "DeletePersonalDataApplicable": "*Áp dụng cho những người dùng đã chọn có các tập tin và thư mục đó.",
   "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Các phòng được tạo bởi người dùng này và các tài liệu được lưu trữ trong các phòng này sẽ tự động được chuyển giao lại cho quản trị viên thực hiện việc xóa: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Chuyển giao lại dữ liệu theo cách thủ công để chọn người dùng đích khác để chuyển giao lại.",
   "DeleteUser": "Xoá người dùng",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> sẽ bị xóa. Hành động này không thể được hoàn tác.",

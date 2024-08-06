@@ -27,7 +27,8 @@
 /* eslint-disable @typescript-eslint/default-param-last */
 import { AxiosRequestConfig } from "axios";
 
-import { FolderType, MembersSubjectType } from "../../enums";
+import moment from "moment";
+import { FolderType, MembersSubjectType, ShareAccessRights } from "../../enums";
 import { request } from "../client";
 import {
   checkFilterInstance,
@@ -35,7 +36,7 @@ import {
   toUrlParams,
 } from "../../utils/common";
 import RoomsFilter from "./filter";
-import { TGetRooms } from "./types";
+import { TGetRooms, TPublicRoomPassword } from "./types";
 
 export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
   let params;
@@ -397,15 +398,15 @@ export const acceptInvitationByLink = async () => {
 };
 
 export function editExternalLink(
-  roomId,
-  linkId,
-  title,
-  access,
-  expirationDate,
-  linkType,
-  password,
-  disabled,
-  denyDownload,
+  roomId: number | string,
+  linkId: number | string,
+  title: string,
+  access: ShareAccessRights,
+  expirationDate: moment.Moment,
+  linkType: number,
+  password: string,
+  disabled: boolean,
+  denyDownload: boolean,
 ) {
   const skipRedirect = true;
 
@@ -452,12 +453,17 @@ export function validatePublicRoomKey(key) {
   });
 }
 
-export function validatePublicRoomPassword(key, passwordHash) {
-  return request({
+export async function validatePublicRoomPassword(
+  key: string,
+  passwordHash: string,
+) {
+  const res = (await request({
     method: "post",
     url: `files/share/${key}/password`,
     data: { password: passwordHash },
-  });
+  })) as TPublicRoomPassword;
+
+  return res;
 }
 
 export function setCustomRoomQuota(roomIds, quota) {

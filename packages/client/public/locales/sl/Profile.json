@@ -1,5 +1,6 @@
 {
   "ActiveSessions": "Aktivne seje",
+  "AutoDeleteTitle": "Vse seje, starejše od 60 dni, bodo samodejno izbrisane.",
   "ChangeEmailSuccess": "E-mail naslov je bil uspešno spremenjen ",
   "ChangePasswordAfterLoggingOut": "Zamenjaj geslo po prijavi",
   "ConnectSocialNetworks": "Povežite svoja socialna omrežja",
@@ -27,5 +28,6 @@
   "SuccessLogout": "Aktivna povezava je bila odjavljena: {{platform}}, {{browser}}",
   "SystemTheme": "Uporabi sistemsko temo",
   "SystemThemeDescription": "Samodejno preklapljajte med svetlimi in temnimi temami, ko to počne vaš sistem.",
+  "TerminateAllSessions": "Prekini vse seje, razen trenutne",
   "TwoFactorDescription": "Administrator je za vse uporabnike omogočil dvofaktorsko avtentikacijo preko aplikacije za ustvarjanje kode."
 }

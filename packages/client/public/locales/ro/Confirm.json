@@ -7,6 +7,7 @@
   "DeleteProfileBtn": "Șterge contul meu",
   "DeleteProfileConfirmation": "Atenție! Dumneavoastră sunteți pe cale de a șterge contul dvs.",
   "DeleteProfileConfirmationInfo": "Apăsând Șterge contul meu, acceptați că sunteți de acord cu <1>Politica de confidențialitate a companiei.</1>",
+  "DeleteProfileSuccessDescription": "Contul dvs {{productName}} a fost dezactivat cu succes. Proprietarul sau administratorul {{productName}} poate șterge definitiv contul dvs dezactivat.",
   "DeleteProfileSuccessMessage": "Contul dvs a fost șters cu succes.",
   "DeleteProfileSuccessMessageInfo": "Vă invităm să luați la cunoștință <1>Politica de confidențialitate</1> ca să aflați mai multe despre suprimarea contului și datelor asociate contului.",
   "EmailAndPasswordCopiedToClipboard": "Adresa de e-mail și parola sunt copiate în clipboard  ",

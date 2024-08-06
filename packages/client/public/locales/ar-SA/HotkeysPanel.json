@@ -30,6 +30,7 @@
   "HotkeysPlayPause": "تشغيل / إيقاف مؤقت",
   "HotkeysRedoLastUndoneAction": "أعد آخر إجراء تم التراجع عنه",
   "HotkeysRemove": "احذف العناصر المحددة",
+  "HotkeysRenameSelected": "إعادة تسمية العنصر",
   "HotkeysSelectAll": "حدد جميع المجلدات والملفات المرئية",
   "HotkeysSelectDown": "حدد العنصر التالي لأسفل",
   "HotkeysSelection": "اختيار العناصر",

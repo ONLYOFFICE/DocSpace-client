@@ -1,7 +1,7 @@
 {
-  "BackToRoom": "Preencha novamente",
+  "BackToRoom": "Voltar para a sala",
   "CheckReadyForms": "Verifique os formulários prontos",
-  "Description": "Preencha novamente",
+  "Description": "Seu formulário preenchido e salvo",
   "DescriptionForAnonymous": "Você enviou o formulário PDF preenchido que recebeu um número exclusivo. Para verificar o status, entre em contato com o proprietário do formulário fornecendo o número atribuído.",
   "DescriptionForRegisteredUser": "O formulário PDF preenchido é salvo e está disponível para você na pasta Concluído. Para verificar o status, entre em contato com o proprietário do formulário fornecendo o número atribuído.",
   "FillItOutAgain": "Preencha novamente",

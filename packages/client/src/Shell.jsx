@@ -171,7 +171,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     socketHelper.on("s:logout-session", (loginEventId) => {
       console.log(`[WS] "logout-session"`, loginEventId, userLoginEventId);
 
-      if (userLoginEventId === loginEventId) {
+      if (userLoginEventId === loginEventId || loginEventId === 0) {
         window.location.replace(
           combineUrl(window.ClientConfig?.proxy?.url, "/login"),
         );

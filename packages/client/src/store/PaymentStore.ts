@@ -231,15 +231,12 @@ class PaymentStore {
   };
 
   standaloneBasicSettings = async (t: TTranslation) => {
-    if (!this.currentTariffStatusStore || !this.currentQuotaStore) return;
-
-    const { fetchPortalQuota } = this.currentQuotaStore;
-    const { fetchPortalTariff } = this.currentTariffStatusStore;
+    const { getPaymentInfo } = authStore;
 
     this.setIsUpdatingBasicSettings(true);
 
     try {
-      await Promise.all([fetchPortalTariff(), fetchPortalQuota()]);
+      await getPaymentInfo();
     } catch (e) {
       toastr.error(t("Common:UnexpectedError"));
 
@@ -250,10 +247,7 @@ class PaymentStore {
   };
 
   standaloneInit = async (t: TTranslation) => {
-    if (!this.currentTariffStatusStore || !this.currentQuotaStore) return;
-
-    const { fetchPortalTariff } = this.currentTariffStatusStore;
-    const { fetchPortalQuota } = this.currentQuotaStore;
+    const { getPaymentInfo } = authStore;
 
     if (this.isInitPaymentPage) {
       this.standaloneBasicSettings(t);
@@ -262,11 +256,7 @@ class PaymentStore {
     }
 
     try {
-      await Promise.all([
-        this.getSettingsPayment(),
-        fetchPortalTariff(),
-        fetchPortalQuota(),
-      ]);
+      await Promise.all([this.getSettingsPayment(), getPaymentInfo()]);
     } catch (error) {
       toastr.error(t("Common:UnexpectedError"));
       console.error(error);
@@ -327,17 +317,14 @@ class PaymentStore {
 
   acceptPaymentsLicense = async (t: TTranslation) => {
     try {
+      const { getPaymentInfo } = authStore;
+
       await acceptLicense();
 
       toastr.success(t("ActivateLicenseActivated"));
       localStorage.removeItem("enterpriseAlertClose");
 
-      if (!this.currentTariffStatusStore || !this.currentQuotaStore) return;
-
-      const { fetchPortalTariff } = this.currentTariffStatusStore;
-      const { fetchPortalQuota } = this.currentQuotaStore;
-
-      await Promise.all([fetchPortalTariff(), fetchPortalQuota()]);
+      await getPaymentInfo();
     } catch (e) {
       toastr.error(e as TData);
     }

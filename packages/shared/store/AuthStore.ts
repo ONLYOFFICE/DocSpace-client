@@ -227,16 +227,6 @@ class AuthStore {
     });
   };
 
-  // fetchTenantExtra = (refresh: boolean) => {
-  //   return getPortalTenantExtra(refresh).then((result) => {
-  //     if (!result) return;
-
-  //     const { tariff, quota, ...tenantExtra } = result;
-
-  //     this.tenantExtra = tenantExtra;
-  //   });
-  // };
-
   getPaymentInfo = async () => {
     let refresh = false;
 

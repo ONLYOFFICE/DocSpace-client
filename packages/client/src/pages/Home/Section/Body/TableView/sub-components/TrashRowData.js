@@ -217,26 +217,6 @@ const TrashRowDataComponent = (props) => {
       ) : (
         <div />
       )}
-      {quickButtonsColumnIsEnabled ? (
-        <TableCell
-          style={
-            !quickButtonsColumnIsEnabled
-              ? { background: "none" }
-              : dragStyles.style
-          }
-          {...selectionProp}
-          className={classNames(
-            selectionProp?.className,
-            "table-container_quick-buttons-wrapper",
-          )}
-        >
-          <StyledQuickButtonsContainer>
-            {quickButtonsComponent}
-          </StyledQuickButtonsContainer>
-        </TableCell>
-      ) : (
-        <div />
-      )}
     </>
   );
 };

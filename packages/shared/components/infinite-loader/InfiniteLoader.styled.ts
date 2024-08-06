@@ -28,7 +28,7 @@ import { List } from "react-virtualized";
 import styled, { css } from "styled-components";
 
 import { Base } from "../../themes";
-import { mobile, tablet } from "../../utils";
+import { desktop, mobile, tablet } from "../../utils";
 import { TViewAs } from "../../types";
 
 const StyledScroll = styled.div`
@@ -157,4 +157,43 @@ StyledScroll.defaultProps = {
   theme: Base,
 };
 
-export { StyledScroll, StyledList };
+const paddingCss = css`
+  @media ${desktop} {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: 1px;
+            padding-left: 0px;
+          `
+        : css`
+            margin-left: 1px;
+            padding-right: 0px;
+          `}
+  }
+
+  @media ${tablet} {
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: -1px;
+          `
+        : css`
+            margin-left: -1px;
+          `}
+  }
+`;
+
+const StyledItem = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(216px, 1fr));
+  gap: 14px 16px;
+  width: 100%;
+
+  @media ${tablet} {
+    gap: 14px;
+  }
+
+  ${paddingCss};
+`;
+
+export { StyledScroll, StyledList, StyledItem };

@@ -30,7 +30,6 @@ import { makeAutoObservable, runInAction } from "mobx";
 import api from "../api";
 import { setWithCredentialsStatus } from "../api/client";
 import { loginWithTfaCode } from "../api/user";
-import { getPortalTenantExtra } from "../api/portal";
 import { TUser } from "../api/people/types";
 import { TCapabilities, TThirdPartyProvider } from "../api/settings/types";
 import { logout as logoutDesktop } from "../utils/desktop";

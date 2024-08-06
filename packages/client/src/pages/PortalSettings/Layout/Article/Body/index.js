@@ -346,8 +346,8 @@ export default inject(
     currentTariffStatusStore,
   }) => {
     const { isLoadedArticleBody, setIsLoadedArticleBody } = common;
-    const { isCommunity } = authStore;
-    const { isNotPaidPeriod } = currentTariffStatusStore;
+
+    const { isNotPaidPeriod, isCommunity } = currentTariffStatusStore;
     const { user } = userStore;
     const { isOwner } = user;
     const {

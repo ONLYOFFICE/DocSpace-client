@@ -158,7 +158,7 @@ class AuthStore {
   updateTariff = async () => {
     this.setIsUpdatingTariff(true);
 
-    await this.getTenantExtra();
+    await this.getPaymentInfo();
     await this.currentTariffStatusStore?.setPayerInfo();
 
     this.setIsUpdatingTariff(false);
@@ -189,7 +189,7 @@ class AuthStore {
       requests.push(
         this.userStore?.init(i18n, this.settingsStore.culture).then(() => {
           if (!isPortalRestore) {
-            this.getTenantExtra();
+            this.getPaymentInfo();
           }
         }),
       );
@@ -227,28 +227,17 @@ class AuthStore {
     });
   };
 
-  get isEnterprise() {
-    this.currentTariffStatusStore?.setIsEnterprise(
-      this.tenantExtra?.enterprise || false,
-    );
-    return this.tenantExtra?.enterprise;
-  }
+  // fetchTenantExtra = (refresh: boolean) => {
+  //   return getPortalTenantExtra(refresh).then((result) => {
+  //     if (!result) return;
 
-  get isCommunity() {
-    return this.tenantExtra?.opensource;
-  }
+  //     const { tariff, quota, ...tenantExtra } = result;
 
-  fetchTenantExtra = (refresh: boolean) => {
-    return getPortalTenantExtra(refresh).then((result) => {
-      if (!result) return;
+  //     this.tenantExtra = tenantExtra;
+  //   });
+  // };
 
-      const { tariff, quota, ...tenantExtra } = result;
-
-      this.tenantExtra = tenantExtra;
-    });
-  };
-
-  getTenantExtra = async () => {
+  getPaymentInfo = async () => {
     let refresh = false;
 
     if (window.location.search === "?complete=true") {
@@ -262,10 +251,7 @@ class AuthStore {
     request.push(this.currentTariffStatusStore?.fetchPortalTariff(refresh));
 
     if (!user) {
-      request.push(
-        this.currentQuotaStore?.fetchPortalQuota(refresh),
-        this.fetchTenantExtra(refresh),
-      );
+      request.push(this.currentQuotaStore?.fetchPortalQuota(refresh));
     }
 
     await Promise.all(request);

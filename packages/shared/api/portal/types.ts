@@ -37,6 +37,8 @@ export type TPortalTariff = {
   customerId: string;
   portalStatus?: number;
   quotas: TQuotas[];
+  enterprise: boolean;
+  openSource: boolean;
 };
 
 export type TPaymentFeature = {

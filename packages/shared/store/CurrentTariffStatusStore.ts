@@ -46,8 +46,6 @@ class CurrentTariffStatusStore {
 
   language: string = "en";
 
-  isEnterprise: boolean = false;
-
   constructor() {
     makeAutoObservable(this);
   }
@@ -56,13 +54,17 @@ class CurrentTariffStatusStore {
     this.language = language;
   };
 
-  setIsEnterprise = (isEnterprise: boolean) => {
-    this.isEnterprise = isEnterprise;
-  };
-
   setIsLoaded = (isLoaded: boolean) => {
     this.isLoaded = isLoaded;
   };
+
+  get isEnterprise() {
+    return this.portalTariffStatus?.enterprise;
+  }
+
+  get isCommunity() {
+    return this.portalTariffStatus?.openSource;
+  }
 
   get isGracePeriod() {
     return this.portalTariffStatus?.state === TariffState.Delay;

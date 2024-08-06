@@ -39,8 +39,34 @@ export const WarningQuotaDialog = ({
   visible,
   onClickRedirect,
   onCloseDialog,
-  defaultQuota,
+  defaultRoomsQuota,
+  defaultUsersQuota,
+  isDefaultRoomsQuotaSet,
+  isDefaultUsersQuotaSet,
 }: WarningQuotaDialogProps) => {
+  const getWarningDescription = () => {
+    if (isDefaultRoomsQuotaSet && isDefaultUsersQuotaSet) {
+      return t("Settings:StorageQuotaWarningDescription", {
+        usersQuotaLimit: getConvertedSize(t, defaultUsersQuota),
+        roomsQuotaLimit: getConvertedSize(t, defaultRoomsQuota),
+        productName: t("Common:ProductName"),
+      });
+    }
+    if (isDefaultRoomsQuotaSet) {
+      return t("Settings:RoomsQuotaWarningDescription", {
+        roomsQuotaLimit: getConvertedSize(t, defaultRoomsQuota),
+        productName: t("Common:ProductName"),
+      });
+    }
+    if (isDefaultUsersQuotaSet) {
+      return t("Settings:UsersQuotaWarningDescription", {
+        usersQuotaLimit: getConvertedSize(t, defaultUsersQuota),
+        productName: t("Common:ProductName"),
+      });
+    }
+    return "";
+  };
+
   return (
     <ModalDialog
       autoMaxHeight
@@ -51,10 +77,7 @@ export const WarningQuotaDialog = ({
       <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text noSelect style={{ marginBottom: "16px" }}>
-          {t("Settings:StorageQuotaWarningDescription", {
-            quotaLimit: getConvertedSize(t, defaultQuota),
-            productName: t("Common:ProductName"),
-          })}
+          {getWarningDescription()}
         </Text>
         <Text noSelect>{t("Settings:WantToContinue")}</Text>
       </ModalDialog.Body>

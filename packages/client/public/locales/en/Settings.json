@@ -258,7 +258,10 @@
   "Statistics": "Statistics",
   "StorageManagement": "Storage management",
   "StoragePeriod": "Storage period",
-  "StorageQuotaWarningDescription": "Storage quota of {{quotaLimit}} is enabled for users of this {{productName}}. Limitations can occur during data import.",
+  "StorageQuotaWarningDescription": "Storage quota is enabled for this {{productName}}: {{roomsQuotaLimit}} for rooms, {{usersQuotaLimit}} for users. Limitations can occur during data import.",
+  "RoomsQuotaWarningDescription": "Storage quota is enabled for this {{productName}}: {{roomsQuotaLimit}} for rooms. Limitations can occur during data import.",
+  "UsersQuotaWarningDescription": "Storage quota is enabled for this {{productName}}: {{usersQuotaLimit}} for users. Limitations can occur during data import.",
+
   "StudioTimeLanguageSettings": "Language and Time Zone Settings",
   "Submit": "Submit",
   "SuccessfullySaveGreetingSettingsMessage": "Welcome Page settings have been successfully saved",

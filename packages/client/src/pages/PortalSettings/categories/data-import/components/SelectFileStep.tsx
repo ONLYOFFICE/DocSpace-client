@@ -156,8 +156,8 @@ const SelectFileStep = (props: SelectFileStepProps) => {
     migratingWorkspace,
     setMigratingWorkspace,
     uploadFiles,
-    defaultUsersQuota,
-    defaultRoomsQuota,
+    defaultUsersQuota = 0,
+    defaultRoomsQuota = 0,
     isDefaultUsersQuotaSet,
     isDefaultRoomsQuotaSet,
     warningQuotaDialogVisible,
@@ -168,7 +168,6 @@ const SelectFileStep = (props: SelectFileStepProps) => {
     migratorName === migratingWorkspace,
   );
   const [progress, setProgress] = useState(0);
-  const [defaultQuota, setDefaultQuota] = useState(0);
   const [isInfiniteProgress, setIsInfiniteProgress] = useState(true);
   const [isNetworkError, setIsNetworkError] = useState(false);
   const [isFileError, setIsFileError] = useState(false);
@@ -184,17 +183,11 @@ const SelectFileStep = (props: SelectFileStepProps) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setWarningQuotaDialogVisible(
-      isDefaultUsersQuotaSet || isDefaultRoomsQuotaSet,
-    );
-    setDefaultQuota((defaultUsersQuota || defaultRoomsQuota) ?? 0);
-  }, [
-    defaultUsersQuota,
-    defaultRoomsQuota,
-    isDefaultRoomsQuotaSet,
-    isDefaultUsersQuotaSet,
-    setWarningQuotaDialogVisible,
-  ]);
+    const isQuotaWarningVisible =
+      isDefaultUsersQuotaSet || isDefaultRoomsQuotaSet;
+    setWarningQuotaDialogVisible(isQuotaWarningVisible);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isDefaultUsersQuotaSet, isDefaultRoomsQuotaSet]);
 
   const onClickRedirect = () => {
     navigate("/portal-settings/management/disk-space");
@@ -510,7 +503,10 @@ const SelectFileStep = (props: SelectFileStepProps) => {
           visible={warningQuotaDialogVisible}
           onCloseDialog={() => setWarningQuotaDialogVisible(false)}
           onClickRedirect={onClickRedirect}
-          defaultQuota={defaultQuota}
+          defaultRoomsQuota={defaultRoomsQuota}
+          defaultUsersQuota={defaultUsersQuota}
+          isDefaultRoomsQuotaSet={isDefaultRoomsQuotaSet}
+          isDefaultUsersQuotaSet={isDefaultUsersQuotaSet}
         />
       )}
     </Wrapper>

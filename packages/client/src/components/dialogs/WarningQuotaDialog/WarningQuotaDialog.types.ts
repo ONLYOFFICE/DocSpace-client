@@ -31,5 +31,8 @@ export interface WarningQuotaDialogProps {
   visible: boolean;
   onCloseDialog: () => void;
   onClickRedirect: () => void;
-  defaultQuota: number;
+  defaultRoomsQuota: number;
+  defaultUsersQuota: number;
+  isDefaultRoomsQuotaSet?: boolean;
+  isDefaultUsersQuotaSet?: boolean;
 }

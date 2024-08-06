@@ -234,6 +234,7 @@ const contextOptionsStore = new ContextOptionsStore(
   pluginStore,
   infoPanelStore,
   currentTariffStatusStore,
+  currentQuotaStore,
   userStore,
   clientLoadingStore,
 );

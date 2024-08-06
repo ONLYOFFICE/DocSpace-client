@@ -34,7 +34,7 @@ import {
 
 import { toastr } from "../components/toast";
 import { TData } from "../components/toast/Toast.type";
-import { PortalFeaturesLimitations } from "../enums";
+import { EmployeeType, PortalFeaturesLimitations } from "../enums";
 import api from "../api";
 import { TPaymentFeature, TPaymentQuota } from "../api/portal/types";
 import {
@@ -49,19 +49,25 @@ import {
 } from "../constants";
 import { Nullable } from "../types";
 import { UserStore } from "./UserStore";
-
+import { CurrentTariffStatusStore } from "./CurrentTariffStatusStore";
 class CurrentQuotasStore {
   currentPortalQuota: Nullable<TPaymentQuota> = null;
 
   userStore: UserStore | null = null;
 
+  currentTariffStatusStore: CurrentTariffStatusStore | null = null;
+
   currentPortalQuotaFeatures: TPaymentFeature[] = [];
 
   isLoaded = false;
 
-  constructor(userStoreConst: UserStore) {
+  constructor(
+    userStoreConst: UserStore,
+    currentTariffStatusStore: CurrentTariffStatusStore,
+  ) {
     makeAutoObservable(this);
     this.userStore = userStoreConst;
+    this.currentTariffStatusStore = currentTariffStatusStore;
   }
 
   setIsLoaded = (isLoaded: boolean) => {
@@ -273,6 +279,17 @@ class CurrentQuotasStore {
       this.maxCountManagersByQuota >= this.addedManagersCount
     );
   }
+
+  get isPaidUserLimit() {
+    return this.addedManagersCount >= this.maxCountManagersByQuota;
+  }
+
+  showWarningDialog = (type: number) => {
+    if (type && this.isPaidUserLimit && type !== EmployeeType.Guest)
+      return true;
+
+    return this.currentTariffStatusStore?.isGracePeriod;
+  };
 
   get showUserPersonalQuotaBar() {
     const personalQuotaLimitReached = this.userStore?.personalQuotaLimitReached;

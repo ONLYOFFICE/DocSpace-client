@@ -139,6 +139,7 @@ class ContextOptionsStore {
   pluginStore;
   infoPanelStore;
   currentTariffStatusStore;
+  currentQuotaStore;
   userStore;
   clientLoadingStore;
 
@@ -160,6 +161,7 @@ class ContextOptionsStore {
     pluginStore,
     infoPanelStore,
     currentTariffStatusStore,
+    currentQuotaStore,
     userStore,
     clientLoadingStore,
   ) {
@@ -179,6 +181,7 @@ class ContextOptionsStore {
     this.pluginStore = pluginStore;
     this.infoPanelStore = infoPanelStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
+    this.currentQuotaStore = currentQuotaStore;
     this.userStore = userStore;
     this.clientLoadingStore = clientLoadingStore;
   }
@@ -2104,7 +2107,7 @@ class ContextOptionsStore {
 
     const type = e.item["data-type"];
 
-    if (this.currentTariffStatusStore.isGracePeriod) {
+    if (this.currentQuotaStore.showWarningDialog(type)) {
       setInviteUsersWarningDialogVisible(true);
       return;
     }

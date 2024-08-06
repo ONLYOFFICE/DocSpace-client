@@ -180,6 +180,7 @@ const ArticleMainButtonContent = (props) => {
 
     parentRoomType,
     isFolder,
+    showWarningDialog,
   } = props;
 
   const navigate = useNavigate();
@@ -283,7 +284,7 @@ const ArticleMainButtonContent = (props) => {
   const onInvite = React.useCallback((e) => {
     const type = e.action;
 
-    if (isGracePeriod) {
+    if (showWarningDialog(type)) {
       setInviteUsersWarningDialogVisible(true);
       return;
     }
@@ -901,6 +902,7 @@ export default inject(
     versionHistoryStore,
     userStore,
     currentTariffStatusStore,
+    currentQuotaStore,
   }) => {
     const { showArticleLoader } = clientLoadingStore;
     const { mainButtonMobileVisible } = filesStore;
@@ -939,6 +941,7 @@ export default inject(
 
     const { isAdmin, isOwner, isRoomAdmin } = userStore.user;
     const { isGracePeriod } = currentTariffStatusStore;
+    const { showWarningDialog } = currentQuotaStore;
 
     const { setOformFromFolderId, oformsFilter } = oformsStore;
     const { mainButtonItemsList } = pluginStore;
@@ -997,6 +1000,8 @@ export default inject(
       isFolder,
       selectFileFormRoomDialogVisible,
       setSelectFileFormRoomDialogVisible,
+
+      showWarningDialog,
     };
   },
 )(

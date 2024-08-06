@@ -79,7 +79,10 @@ const useSocketHelper = ({ socketUrl, user }: UseSocketHelperProps) => {
     socketIOHelper.on("s:logout-session", async (loginEventId) => {
       console.log(`[WS] "logout-session"`, loginEventId, user?.loginEventId);
 
-      if (Number(loginEventId) === user?.loginEventId) {
+      if (
+        Number(loginEventId) === user?.loginEventId ||
+        Number(loginEventId) === 0
+      ) {
         const docEditor =
           typeof window !== "undefined" &&
           window.DocEditor?.instances[EDITOR_ID];

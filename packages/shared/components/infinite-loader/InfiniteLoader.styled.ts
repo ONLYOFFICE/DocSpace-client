@@ -159,27 +159,12 @@ StyledScroll.defaultProps = {
 
 const paddingCss = css`
   @media ${desktop} {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 1px;
-            padding-left: 0px;
-          `
-        : css`
-            margin-left: 1px;
-            padding-right: 0px;
-          `}
+    margin-inline-start: 1px;
+    padding-inline-end: 0;
   }
 
   @media ${tablet} {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: -1px;
-          `
-        : css`
-            margin-left: -1px;
-          `}
+    margin-inline-start: -1px;
   }
 `;
 

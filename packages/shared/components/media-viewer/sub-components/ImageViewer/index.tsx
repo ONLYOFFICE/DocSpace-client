@@ -951,6 +951,16 @@ export const ImageViewer = ({
     };
   }, []);
 
+  useLayoutEffect(() => {
+    return () => {
+      if (imgRef.current) {
+        // abort img loading
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        imgRef.current.src = "";
+      }
+    };
+  }, []);
+
   return (
     <>
       {isMobile && !backgroundBlack && mobileDetails}

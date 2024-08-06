@@ -32,7 +32,6 @@ import {
   TPortal,
   TPortalTariff,
   TRestoreProgress,
-  TTenantExtra,
 } from "./types";
 
 export function getShortenedLink(link: string) {

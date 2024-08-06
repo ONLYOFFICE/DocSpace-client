@@ -154,6 +154,7 @@ const LinkRow = ({
               type="onlyIcon"
               isDisabled={isExpiredLink || isLoaded}
               manualWidth="fit-content"
+              withBackdrop={false}
             />
           </div>
         </StyledLinkRow>

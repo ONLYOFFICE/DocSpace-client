@@ -118,17 +118,6 @@ export type TTenantExtraRes = {
   enableTariffPage: boolean;
 };
 
-export type TTenantExtra = {
-  customMode: boolean;
-  opensource: boolean;
-  enterprise: boolean;
-  tariff: TTariff;
-  quota: TPaymentQuota;
-  notPaid: boolean;
-  licenseAccept: Date;
-  enableTariffPage: boolean;
-};
-
 export type TRestoreProgress = {
   progress: number;
   error?: any;

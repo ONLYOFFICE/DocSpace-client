@@ -256,16 +256,6 @@ export async function getPortalPaymentQuotas() {
   return res;
 }
 
-export async function getPortalTenantExtra(refresh: boolean) {
-  const params = refresh ? { refresh: true } : {};
-  const res = (await request({
-    method: "get",
-    url: "/portal/tenantextra",
-    params,
-  })) as TTenantExtra;
-
-  return res;
-}
 export async function getPortalQuota(refresh = false) {
   const params = refresh ? { refresh: true } : {};
   // console.log("getPortalQuota", { params });

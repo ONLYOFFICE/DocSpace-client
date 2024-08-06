@@ -43,6 +43,7 @@
   "RoomExternalLinkCreated": "Linkul a fost creat.",
   "RoomExternalLinkDeleted": "Linkul <1>«{{linkTitle}}»</1> a fost șters.",
   "RoomExternalLinkRenamed": "Linkul <1>«{{oldLinkTitle}}»</1> a fost redenumit <1>«{{linkTitle}}»</1>",
+  "RoomExternalLinkRevoked": "Linkul precedent <1>«{{linkTitle}}»</1> a fost revocat <br/> Un link nou <1>«{{linkTitle}}»</1> va fi creat ",
   "RoomGroupAdded": "Grupuri au fost adăugate.",
   "RoomGroupRemove": "Grupul a fost eliminat.",
   "RoomLogoChanged": "Pictograma a fost schimbată",

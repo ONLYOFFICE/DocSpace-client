@@ -1857,8 +1857,10 @@ export const getBaseTheme = () => {
       closeButtonSize: "17px",
 
       nameColor: grayDark,
+      avatarColor: grayText,
 
       links: {
+        color: lightBlueMain,
         iconColor: lightIcons,
         iconErrorColor: lightErrorStatus,
         primaryColor: grayText,

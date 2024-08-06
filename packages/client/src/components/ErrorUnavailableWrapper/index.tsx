@@ -33,7 +33,7 @@ const ErrorUnavailableWrapper = (props: ErrorUnavailableProps) => {
   return <ErrorUnavailable {...props} />;
 };
 
-export default inject<TStore>(({ settingsStore }) => {
+export const Component = inject<TStore>(({ settingsStore }) => {
   const { whiteLabelLogoUrls } = settingsStore;
 
   return {

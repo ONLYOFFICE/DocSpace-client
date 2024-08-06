@@ -315,7 +315,7 @@ const IpSecurity = (props) => {
   );
 };
 
-export default inject(({ settingsStore, setup }) => {
+export const IpSecuritySection = inject(({ settingsStore, setup }) => {
   const {
     ipRestrictionEnable,
     setIpRestrictionsEnable,

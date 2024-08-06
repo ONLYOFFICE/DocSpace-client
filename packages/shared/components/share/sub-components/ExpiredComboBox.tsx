@@ -38,11 +38,15 @@ import { ExpiredComboBoxProps } from "../Share.types";
 
 import ShareCalendar from "./ShareCalendar";
 import { globalColors } from "../../../themes";
+import { ShareAccessRights } from "../../../enums";
 
 const ExpiredComboBox = ({
   link,
   changeExpirationOption,
   isDisabled,
+  isRoomsLink,
+  changeAccessOption,
+  accessOptions,
 }: ExpiredComboBoxProps) => {
   const { t, i18n } = useTranslation(["Common"]);
   const calendarRef = useRef<HTMLDivElement | null>(null);
@@ -108,8 +112,9 @@ const ExpiredComboBox = ({
     return { date: calculatedDate + 1, label: t("Common:Days") };
   };
 
-  const onRegenerateClick = () => {
-    setSevenDays();
+  const onRemoveLink = () => {
+    const opt = accessOptions.find((o) => o.access === ShareAccessRights.None);
+    if (opt) changeAccessOption(opt, link);
   };
 
   useEffect(() => {
@@ -151,7 +156,7 @@ const ExpiredComboBox = ({
         </Trans>
       );
     }
-    const date = t("Common:Unlimited");
+    const date = t("Common:Unlimited").toLowerCase();
 
     return (
       <Trans t={t} i18nKey="LinkIsValid" ns="Common">
@@ -182,9 +187,9 @@ const ExpiredComboBox = ({
             fontWeight={400}
             fontSize="12px"
             color={globalColors.lightBlueMain}
-            onClick={onRegenerateClick}
+            onClick={onRemoveLink}
           >
-            {t("Common:Regenerate")}
+            {t("Common:RemoveLink")}
           </Link>
         </Text>
       ) : (
@@ -194,10 +199,12 @@ const ExpiredComboBox = ({
       )}
       {showCalendar && (
         <ShareCalendar
+          bodyRef={bodyRef}
           onDateSet={setDateFromCalendar}
           calendarRef={calendarRef}
           closeCalendar={onCalendarClose}
           locale={i18n.language}
+          useDropDown={isRoomsLink}
         />
       )}
     </div>

@@ -1842,8 +1842,10 @@ const Dark: TTheme = {
     closeButtonSize: "12px",
 
     nameColor: gray,
+    avatarColor: gray,
 
     links: {
+      color: lightBlueMain,
       iconColor: grayDark,
       iconErrorColor: darkErrorStatus,
       primaryColor: darkGrayDark,

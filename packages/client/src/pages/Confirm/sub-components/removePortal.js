@@ -45,6 +45,7 @@ import withLoader from "../withLoader";
 
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
+import ConfirmRoute from "SRC_DIR/helpers/confirmRoute";
 
 const RemovePortal = (props) => {
   const { t, greetingTitle, linkData, companyInfoSettingsData } = props;
@@ -123,8 +124,16 @@ const RemovePortal = (props) => {
   );
 };
 
-export default inject(({ settingsStore }) => ({
+const ComponentWrapper = inject(({ settingsStore }) => ({
   greetingTitle: settingsStore.greetingSettings,
   theme: settingsStore.theme,
   companyInfoSettingsData: settingsStore.companyInfoSettingsData,
 }))(withTranslation(["Confirm", "Common"])(withLoader(observer(RemovePortal))));
+
+export const Component = () => {
+  return (
+    <ConfirmRoute>
+      <ComponentWrapper />
+    </ConfirmRoute>
+  );
+};

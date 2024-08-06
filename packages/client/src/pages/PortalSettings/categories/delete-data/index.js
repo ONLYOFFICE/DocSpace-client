@@ -88,7 +88,7 @@ const DeleteData = (props) => {
   );
 };
 
-export default inject(({ currentTariffStatusStore }) => {
+export const Component = inject(({ currentTariffStatusStore }) => {
   const { isNotPaidPeriod } = currentTariffStatusStore;
 
   return {

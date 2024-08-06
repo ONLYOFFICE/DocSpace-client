@@ -74,6 +74,8 @@ import LanguageComboboxWrapper from "./LanguageCombobox";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 
 import { setCookie } from "@docspace/shared/utils/cookie";
+import ConfirmRoute from "SRC_DIR/helpers/confirmRoute";
+import { AuthenticatedAction } from "SRC_DIR/helpers/enums";
 
 const DEFAULT_ROOM_TEXT =
   "<strong>{{firstName}} {{lastName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
@@ -320,7 +322,9 @@ const CreateUserForm = (props) => {
       culture: currentCultureName,
     };
 
-    signupOAuth(signupAccount)
+    const confirmKey = linkData.confirmHeader;
+
+    signupOAuth(signupAccount, confirmKey)
       .then(() => {
         const url = roomData.roomId
           ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}/`
@@ -723,7 +727,7 @@ const CreateUserForm = (props) => {
   );
 };
 
-export default inject(({ settingsStore, authStore }) => {
+const ComponentWrapper = inject(({ settingsStore, authStore }) => {
   const { providers, thirdPartyLogin, capabilities } = authStore;
   const {
     passwordSettings,
@@ -756,3 +760,11 @@ export default inject(({ settingsStore, authStore }) => {
     ),
   ),
 );
+
+export const Component = () => {
+  return (
+    <ConfirmRoute doAuthenticated={AuthenticatedAction.None}>
+      <ComponentWrapper />
+    </ConfirmRoute>
+  );
+};

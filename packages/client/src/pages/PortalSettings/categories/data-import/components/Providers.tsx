@@ -114,18 +114,20 @@ const Providers = (props: ProvidersProps) => {
     </WorkspacesContainer>
   );
 };
-export default inject<TStore>(({ settingsStore, importAccountsStore }) => {
-  const { services, setServices, getMigrationList, setWorkspace } =
-    importAccountsStore;
+export const Component = inject<TStore>(
+  ({ settingsStore, importAccountsStore }) => {
+    const { services, setServices, getMigrationList, setWorkspace } =
+      importAccountsStore;
 
-  const { theme } = settingsStore;
+    const { theme } = settingsStore;
 
-  return {
-    services,
-    setServices,
-    getMigrationList,
+    return {
+      services,
+      setServices,
+      getMigrationList,
 
-    theme,
-    setWorkspace,
-  };
-})(observer(Providers));
+      theme,
+      setWorkspace,
+    };
+  },
+)(observer(Providers));

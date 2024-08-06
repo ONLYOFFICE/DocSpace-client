@@ -71,7 +71,7 @@ const ImportStep = ({
         exportSection={{ sectionName: users, workspace: serviceName }}
         importSection={{
           sectionName: t("Common:Accounts"),
-          workspace: "DocSpace",
+          workspace: t("Common:ProductName"),
           SectionIcon: PeopleIcon,
         }}
         isDisabled
@@ -87,7 +87,7 @@ const ImportStep = ({
         }}
         importSection={{
           sectionName: t("Common:Accounts"),
-          workspace: "DocSpace",
+          workspace: t("Common:ProductName"),
           SectionIcon: AccountsIcon,
         }}
       />
@@ -102,7 +102,7 @@ const ImportStep = ({
         }}
         importSection={{
           sectionName: t("Common:Documents"),
-          workspace: "DocSpace",
+          workspace: t("Common:ProductName"),
           SectionIcon: DocumentsIcon,
         }}
       />
@@ -117,7 +117,7 @@ const ImportStep = ({
         }}
         importSection={{
           sectionName: t("Common:Documents"),
-          workspace: "DocSpace",
+          workspace: t("Common:ProductName"),
           SectionIcon: DocumentsIcon,
         }}
       />
@@ -132,7 +132,7 @@ const ImportStep = ({
         }}
         importSection={{
           sectionName: t("Common:Rooms"),
-          workspace: "DocSpace",
+          workspace: t("Common:ProductName"),
           SectionIcon: RoomsIcon,
         }}
       />

@@ -179,6 +179,14 @@ class CurrentQuotasStore {
     return result?.value;
   }
 
+  get isLdapAvailable() {
+    const result = this.currentPortalQuotaFeatures.find(
+      (obj) => obj.id === "ldap",
+    );
+
+    return result?.value;
+  }
+
   get isStatisticsAvailable() {
     const result = this.currentPortalQuotaFeatures.find(
       (obj) => obj.id === "statistic",

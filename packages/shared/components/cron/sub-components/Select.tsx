@@ -42,6 +42,7 @@ export const Select = ({
   setValue,
   prefix,
   dropDownMaxHeight,
+  isDisabled,
 }: SelectProps) => {
   const { i18n } = useTranslation();
 
@@ -116,6 +117,8 @@ export const Select = ({
         onClickSelectedItem={onReset}
         selectedOption={selectedOption}
         dropDownMaxHeight={dropDownMaxHeight}
+        isDisabled={isDisabled}
+        directionY="both"
       />
     </SelectWrapper>
   );

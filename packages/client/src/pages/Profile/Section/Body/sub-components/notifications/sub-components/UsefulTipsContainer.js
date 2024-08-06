@@ -30,6 +30,7 @@ import { inject, observer } from "mobx-react";
 
 import { NotificationsType } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
+
 const UsefulTipsContainer = ({
   t,
   changeSubscription,
@@ -50,7 +51,7 @@ const UsefulTipsContainer = ({
     <div className="notification-container">
       <div className="row">
         <Text {...textProps} className="subscription-title">
-          {t("UsefulTips")}
+          {t("UsefulTips", { productName: t("Common:ProductName") })}
         </Text>
         <ToggleButton
           className="useful-tips toggle-btn"
@@ -58,7 +59,9 @@ const UsefulTipsContainer = ({
           isChecked={usefulTipsSubscription}
         />
       </div>
-      <Text {...textDescriptionsProps}>{t("UsefulTipsDescription")}</Text>
+      <Text {...textDescriptionsProps}>
+        {t("UsefulTipsDescription", { productName: t("Common:ProductName") })}
+      </Text>
     </div>
   );
 };

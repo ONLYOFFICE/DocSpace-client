@@ -51,7 +51,12 @@ const EmptyScreen = ({ t, theme, withUpload, onDrop }: PluginsEmptyScreen) => {
   return (
     <StyledEmptyScreen
       headerText={t("NoPlugins")}
-      descriptionText={<Text>{withUpload && t("UploadDescription")}</Text>}
+      descriptionText={
+        <Text>
+          {withUpload &&
+            t("UploadDescription", { productName: t("Common:ProductName") })}
+        </Text>
+      }
       style={{ gridColumnGap: "39px" }}
       buttonStyle={{ marginTop: "16px" }}
       imageSrc={imageSrc}

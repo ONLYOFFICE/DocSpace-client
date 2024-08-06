@@ -43,8 +43,8 @@ const AccountsTable = (props) => {
     toggleAllAccounts,
   } = props;
 
-  const setTypeDocspaceAdmin = () => {
-    changeGroupType(UserTypes.DocSpaceAdmin);
+  const setTypePortalAdmin = () => {
+    changeGroupType(UserTypes.PortalAdmin);
     toggleAllAccounts(false, [], checkedAccountType);
   };
   const setTypeRoomAdmin = () => {
@@ -58,13 +58,15 @@ const AccountsTable = (props) => {
 
   const typeOptions = [
     {
-      key: UserTypes.DocSpaceAdmin,
-      label: t(`Common:${UserTypes.DocSpaceAdmin}`),
-      onClick: setTypeDocspaceAdmin,
+      key: UserTypes.PortalAdmin,
+      label: t(`Common:PortalAdmin`, {
+        productName: t("Common:ProductName"),
+      }),
+      onClick: setTypePortalAdmin,
     },
     {
       key: UserTypes.RoomAdmin,
-      label: t(`Common:${UserTypes.RoomAdmin}`),
+      label: t("Common:RoomAdmin"),
       onClick: setTypeRoomAdmin,
     },
     {

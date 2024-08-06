@@ -78,7 +78,7 @@ const StyledModalBackdrop = styled.div.attrs(
     position: absolute;
   }
 
-  transition: 0.2s;
+  transition: opacity 0.2s;
   opacity: 0;
   &.modal-backdrop-active {
     opacity: 1;

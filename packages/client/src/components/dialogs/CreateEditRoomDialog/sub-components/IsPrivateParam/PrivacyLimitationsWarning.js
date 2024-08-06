@@ -104,7 +104,9 @@ const PrivacyLimitationsWarning = ({ t }) => {
         <div className="warning-title-text">{t("Common:Warning")}</div>
       </div>
       <div className="warning-description">
-        {t("MakeRoomPrivateLimitationsWarningDescription")}
+        {t("MakeRoomPrivateLimitationsWarningDescription", {
+          productName: t("Common:ProductName"),
+        })}
       </div>
       <div className="warning-link">{t("Common:LearnMore")}</div>
     </StyledPrivacyLimitationsWarning>

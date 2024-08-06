@@ -96,7 +96,6 @@ export default inject<TStore>(
       isLicenseExpiring,
       isLicenseDateExpired,
       trialDaysLeft,
-      paymentDate,
     } = currentTariffStatusStore;
 
     return {
@@ -118,7 +117,6 @@ export default inject<TStore>(
       isTrial,
       isLicenseDateExpired,
       trialDaysLeft,
-      paymentDate,
 
       toggleArticleOpen,
 

@@ -40,6 +40,7 @@ const BodyComponent = (props) => {
     userPerformedDeletion,
     users,
     onlyOneUser,
+    areUsersOnly,
   } = props;
 
   const warningMessageMyDocuments = t("DeleteMyDocumentsUser");
@@ -71,13 +72,21 @@ const BodyComponent = (props) => {
   if (deleteWithoutReassign) {
     return (
       <>
-        <Text className="user-delete">{t("ActionCannotBeUndone")}</Text>
+        <Text className="user-delete">
+          {t("ActionCannotBeUndone", { productName: t("Common:ProductName") })}
+        </Text>
         <Text className="text-warning">{t("PleaseNote")}</Text>
+        <Text className="text-delete-description">
+          {t("DeletePersonalData", { productName: t("Common:ProductName") })}
+        </Text>
         <Text className="text-delete-description">
           {t("CannotReassignFiles")}
         </Text>
         <Text className="text-delete-description">
           {t("ToBeAbleToReassignData")}
+        </Text>
+        <Text className="text-delete-description">
+          {t("DeletePersonalDataApplicable")}
         </Text>
       </>
     );
@@ -86,9 +95,15 @@ const BodyComponent = (props) => {
   if (!onlyOneUser) {
     return (
       <>
-        <Text className="user-delete">{t("ActionCannotBeUndone")}</Text>
-        <Text className="text-warning">{t("Common:Warning")}</Text>
-        <Text className="text-delete-description">{warningMessage}</Text>
+        <Text className="user-delete">
+          {t("ActionCannotBeUndone", { productName: t("Common:ProductName") })}
+        </Text>
+        {!areUsersOnly && (
+          <>
+            <Text className="text-warning">{t("Common:Warning")}</Text>
+            <Text className="text-delete-description">{warningMessage}</Text>
+          </>
+        )}
       </>
     );
   }
@@ -96,8 +111,12 @@ const BodyComponent = (props) => {
   return (
     <>
       <Text className="user-delete">{deleteMessage}</Text>
-      <Text className="text-warning">{t("Common:Warning")}</Text>
-      <Text className="text-delete-description">{warningMessage}</Text>
+      {!areUsersOnly && (
+        <>
+          <Text className="text-warning">{t("Common:Warning")}</Text>
+          <Text className="text-delete-description">{warningMessage}</Text>
+        </>
+      )}
 
       {needReassignData && (
         <Link

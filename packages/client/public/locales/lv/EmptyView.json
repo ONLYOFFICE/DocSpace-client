@@ -1,1 +1,24 @@
-{}
+{
+  "CollaboratorEmptyTitle": "Telpa ir tukša.",
+  "CreateNewFileDescription": "Sāciet darbu telpā, izveidojot failus vai mapes",
+  "CreateNewFileTitle": "Izveidot jaunu failu",
+  "CustomRoomEmptyTitle": "Laipni lūdzam pielāgotajā telpā",
+  "EmptyDescription": "Sāciet ar ātrām darbībām:",
+  "FormFolderDefaultDescription": "Nometiet PDF veidlapas šeit vai augšupielādējiet no {{productName}} vai ierīces.",
+  "FormFolderDefaultTitle": "Šeit vēl nav veidlapu",
+  "FormFolderDefaultUserDescription": "Šeit tiks parādītas administratoru augšupielādētās veidlapas.",
+  "FormFolderDefaultUserTitle": "Šajā mapē vēl nav nevienas veidlapas",
+  "FormRoomEmptyTitle": "Laipni lūdzam veidlapu aizpildīšanas telpā",
+  "InviteUsersOptionDescription": "Pievienojiet portāla dalībniekus kopīgai rediģēšanai telpā",
+  "InviteUsersOptionTitle": "Dalībnieku uzaicināšana",
+  "ShareOptionDescription": "Kopējiet publiskās piekļuves saiti vai uzaiciniet citus lietotājus uz telpu, lai sāktu aizpildīt veidlapas.",
+  "ShareOptionTitle": "Kopīgot telpu",
+  "UploadDeviceOptionDescription": "Augšupielādējiet jebkāda veida failus no personīgās ierīces",
+  "UploadDeviceOptionTitle": "Augšupielādēt no ierīces",
+  "UploadDevicePDFFormOptionDescription": "Augšupielādējiet telpā gatavu PDF veidlapu no savas ierīces.",
+  "UploadDevicePDFFormOptionTitle": "Augšupielādēt no ierīces",
+  "UploadFromPortalDescription": "Augšupielādējiet jebkāda veida failus no Dokumentiem vai Telpām",
+  "UploadFromPortalTitle": "Augšupielādēt no {{productName}}",
+  "UploadPDFFormOptionDescription": "Izvēlieties gatavu PDF veidlapu, kas pieejama šeit: {{productName}}, un augšupielādējiet to telpā.",
+  "UserEmptyDescription": "Šeit tiks parādīti administratoru augšupielādētie faili un mapes."
+}

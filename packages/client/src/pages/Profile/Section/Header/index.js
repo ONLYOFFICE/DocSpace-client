@@ -140,7 +140,7 @@ const Header = (props) => {
       return navigate("/portal-settings/customization/general");
     }
 
-    const roomsFilter = RoomsFilter.getDefault(userId);
+    const roomsFilter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
 
     roomsFilter.searchArea = RoomSearchArea.Active;
     const urlParams = roomsFilter.toUrlParams(userId);
@@ -156,7 +156,10 @@ const Header = (props) => {
 
   return (
     <StyledHeader
-      showContextButton={(isAdmin && !profile?.isOwner) || isMe}
+      showContextButton={
+        (isAdmin && !profile?.isOwner) ||
+        (isMe && !profile?.isLDAP && !profile?.isSSO)
+      }
       isVisitor={isVisitor || isCollaborator}
     >
       <IconButton
@@ -170,11 +173,11 @@ const Header = (props) => {
       <div>
         <Headline className="header-headline" type="content">
           {t("Profile:MyProfile")}
-          {profile?.isLDAP && ` (${t("PeopleTranslations:LDAPLbl")})`}
         </Headline>
       </div>
       <div className="action-button">
-        {((isAdmin && !profile?.isOwner) || isMe) && (
+        {((isAdmin && !profile?.isOwner) ||
+          (isMe && !profile?.isLDAP && !profile?.isSSO)) && (
           <ContextMenuButton
             directionX="right"
             title={t("Common:Actions")}
@@ -182,7 +185,7 @@ const Header = (props) => {
             size={17}
             getData={getUserContextOptions}
             isDisabled={false}
-            usePortal={false}
+            usePortal={true}
           />
         )}
 

@@ -312,6 +312,7 @@ export default function withFileActions(WrappedFileItem) {
 
       const showPlanetIcon =
         (item.roomType === RoomsType.PublicRoom ||
+          item.roomType === RoomsType.FormRoom ||
           item.roomType === RoomsType.CustomRoom) &&
         item.shared;
 

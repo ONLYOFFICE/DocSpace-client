@@ -125,7 +125,9 @@ export const MainElementParameter = ({
             <TextInput
               scale
               onChange={setButtonText}
-              placeholder={t("SelectToDocSpace")}
+              placeholder={t("SelectToPortal", {
+                productName: t("Common:ProductName"),
+              })}
               value={buttonValue}
               tabIndex={3}
             />

@@ -240,7 +240,8 @@ export type TFilesSettings = {
   };
   canSearchByContent: boolean;
   chunkUploadSize: number;
-  chunkUploadCount: number;
+  maxUploadThreadCount: number;
+  maxUploadFilesCount: number;
   confirmDelete: boolean;
   convertNotify: boolean;
   defaultOrder: { is_asc: boolean; property: 1 };
@@ -295,6 +296,7 @@ export type TFilesSettings = {
   storeOriginalFiles: boolean;
   templatesSection: boolean;
   updateIfExist: boolean;
+  openEditorInSameTab: boolean;
 };
 
 export type TPresignedUri = {

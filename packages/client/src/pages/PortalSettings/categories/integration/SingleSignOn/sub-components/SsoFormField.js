@@ -55,6 +55,8 @@ const SsoFormField = ({
       place="top"
       tooltipContent={tooltipContent}
       tooltipClass={tooltipClass}
+      labelVisible={!!labelText}
+      isRequired
     >
       {children}
       <SsoTextInput

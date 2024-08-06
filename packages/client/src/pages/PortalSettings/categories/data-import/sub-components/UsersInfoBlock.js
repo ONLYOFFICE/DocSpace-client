@@ -57,7 +57,7 @@ const UsersInfoWrapper = styled.div`
   }
 
   .selected-users-count {
-    margin-right: 24px;
+    margin-inline-end: 24px;
     color: ${(props) =>
       props.theme.client.settings.migration.infoBlockTextColor};
     font-weight: 700;
@@ -65,7 +65,7 @@ const UsersInfoWrapper = styled.div`
   }
 
   .selected-admins-count {
-    margin-right: 8px;
+    margin-inline-end: 8px;
     color: ${(props) =>
       props.theme.client.settings.migration.infoBlockTextColor};
     font-weight: 700;
@@ -74,7 +74,7 @@ const UsersInfoWrapper = styled.div`
     span {
       font-weight: 700;
       font-size: 14px;
-      margin-left: 4px;
+      margin-inline-start: 4px;
       color: ${(props) =>
         props.selectedUsers > props.totalLicenceLimit
           ? props.theme.client.settings.migration.errorTextColor
@@ -87,18 +87,21 @@ const UsersInfoBlock = ({
   t,
   selectedUsers,
   totalUsers,
+  totalUsedUsers,
   totalLicenceLimit,
 }) => {
   return (
     <Wrapper>
-      {selectedUsers > totalLicenceLimit && (
+      {totalUsedUsers > totalLicenceLimit && (
         <Text className="license-limit-warning">
-          {t("Settings:UserLimitExceeded")}
+          {t("Settings:UserLimitExceeded", {
+            productName: t("Common:ProductName"),
+          })}
         </Text>
       )}
 
       <UsersInfoWrapper
-        selectedUsers={selectedUsers}
+        selectedUsers={totalUsedUsers}
         totalLicenceLimit={totalLicenceLimit}
       >
         <Text className="selected-users-count" truncate>
@@ -107,14 +110,19 @@ const UsersInfoBlock = ({
         <Text as="div" className="selected-admins-count" truncate>
           {t("Settings:LicenseLimitCounter")}
           <Text as="span">
-            {selectedUsers}/{totalLicenceLimit}
+            {totalUsedUsers}/{totalLicenceLimit}
           </Text>
         </Text>
         <HelpButton
           place="right"
           offsetRight={0}
           tooltipContent={
-            <Text fontSize="12px">{t("Settings:LicenseLimitDescription")}</Text>
+            <Text fontSize="12px">
+              {t("Settings:LicenseLimitDescription", {
+                productName: t("Common:ProductName"),
+                maxLimit: totalLicenceLimit,
+              })}
+            </Text>
           }
         />
       </UsersInfoWrapper>

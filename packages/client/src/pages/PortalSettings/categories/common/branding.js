@@ -124,7 +124,9 @@ const Branding = ({
           <hr />
           {isLoadedCompanyInfoSettingsData ? (
             <div className="section-description settings_unavailable">
-              {t("Settings:BrandingSectionDescription")}
+              {t("Settings:BrandingSectionDescription", {
+                productName: t("Common:ProductName"),
+              })}
             </div>
           ) : (
             <LoaderBrandingDescription />

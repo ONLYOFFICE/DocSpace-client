@@ -32,7 +32,7 @@ import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
-import { classNames } from "@docspace/shared/utils";
+import { classNames, getLastColumn } from "@docspace/shared/utils";
 import {
   StyledBadgesContainer,
   StyledQuickButtonsContainer,
@@ -59,7 +59,10 @@ const RecentRowDataComponent = (props) => {
     showHotkeyBorder,
     badgesComponent,
     quickButtonsComponent,
+    tableStorageName,
   } = props;
+
+  const lastColumn = getLastColumn(tableStorageName);
 
   return (
     <>
@@ -90,6 +93,10 @@ const RecentRowDataComponent = (props) => {
             !authorColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Author" ? "no-extra-space" : "",
+          )}
         >
           <AuthorCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -108,6 +115,10 @@ const RecentRowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Created" ? "no-extra-space" : "",
+          )}
         >
           <DateCell
             create
@@ -127,6 +138,10 @@ const RecentRowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "LastOpened" ? "no-extra-space" : "",
+          )}
         >
           <DateCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -143,6 +158,10 @@ const RecentRowDataComponent = (props) => {
             !modifiedColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Modified" ? "no-extra-space" : "",
+          )}
         >
           <DateCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -159,6 +178,10 @@ const RecentRowDataComponent = (props) => {
             !sizeColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Size" ? "no-extra-space" : "",
+          )}
         >
           <SizeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -177,6 +200,10 @@ const RecentRowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Type" ? "no-extra-space" : "",
+          )}
         >
           <TypeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -219,6 +246,7 @@ export default inject(({ tableStore }) => {
     typeColumnIsEnabled,
     quickButtonsColumnIsEnabled,
     lastOpenedColumnIsEnabled,
+    tableStorageName,
   } = tableStore;
 
   return {
@@ -229,5 +257,6 @@ export default inject(({ tableStore }) => {
     typeColumnIsEnabled,
     quickButtonsColumnIsEnabled,
     lastOpenedColumnIsEnabled,
+    tableStorageName,
   };
 })(observer(RecentRowDataComponent));

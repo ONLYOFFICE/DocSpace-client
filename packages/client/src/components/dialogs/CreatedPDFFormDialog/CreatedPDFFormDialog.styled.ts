@@ -29,9 +29,13 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 16px;
 
   > svg {
     align-self: center;
+    width: 100%;
+  }
+
+  .created-pdf__checkbox {
+    margin-top: 16px;
   }
 `;

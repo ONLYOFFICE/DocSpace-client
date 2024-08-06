@@ -346,7 +346,7 @@ const StyledTableHeaderCell = styled.div<{
     display: ${(props) =>
       props.isActive && props.showIcon ? "block" : "none"};
     ${(props) =>
-      props.sorted &&
+      !props.sorted &&
       css`
         transform: scale(1, -1);
         padding: ${getCorrectFourValuesStyle(
@@ -415,10 +415,14 @@ const StyledTableHeaderCell = styled.div<{
         ? props.theme.tableContainer.header.activeTextColor
         : props.theme.tableContainer.header.textColor};
 
-    &:hover {
-      color: ${(props) =>
-        props.theme.tableContainer.header.hoverTextColor} !important;
-    }
+    ${(props) =>
+      props.showIcon &&
+      props.sortingVisible &&
+      css`
+        &:hover {
+          color: ${props.theme.tableContainer.header.hoverTextColor} !important;
+        }
+      `}
   }
 `;
 
@@ -478,10 +482,10 @@ const StyledTableCell = styled.div<{ hasAccess?: boolean; checked?: boolean }>`
   display: flex;
   align-items: center;
 
-  ${({ theme }) =>
+  /* ${({ theme }) =>
     theme.interfaceDirection === "rtl"
       ? `padding-left: 30px;`
-      : `padding-right: 30px;`}
+      : `padding-right: 30px;`} */
 
   .react-svg-icon svg {
     margin-top: 2px;

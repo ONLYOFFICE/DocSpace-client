@@ -49,6 +49,9 @@ const EmailInputWrapper = styled.div`
 const DecisionButton = styled(Button)`
   width: 32px;
   height: 32px;
+  path {
+    fill: ${(props) => props.theme.client.settings.migration.tableHeaderText};
+  }
 `;
 
 DecisionButton.defaultProps = { theme: Base };
@@ -70,14 +73,20 @@ const StyledRowContent = styled(RowContent)`
   }
 
   .user-email {
-    margin-right: 5px;
+    margin-inline-end: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    color: ${(props) =>
+      props.theme.client.settings.migration.tableRowTextColor};
+
     path {
-      fill: #a3a9ae;
+      fill: ${(props) => props.theme.client.settings.migration.tableHeaderText};
     }
   }
 
   .row-main-container-wrapper {
     margin: 0;
+    width: 100%;
   }
 
   .mainIcons {
@@ -156,14 +165,14 @@ const UsersRowContent = ({
         <Text fontWeight={600} fontSize="14px">
           {displayName}
         </Text>
-        <Text fontWeight={600} fontSize="12px" color="#A3A9AE">
+        <Text className="user-email">
           {prevEmail === "" ? t("Settings:NoEmail") : prevEmail}
         </Text>
       </div>
       {isEmailOpen ? (
         <EmailInputWrapper ref={emailInputRef}>
           <EmailInput
-            placeholder={t("Settings:NoEmail")}
+            placeholder={t("EnterEmail")}
             className="import-email-input"
             value={tempEmail}
             onChange={handleEmailChange}

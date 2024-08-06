@@ -25,83 +25,109 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import styled, { css, useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
-import { withTranslation } from "react-i18next";
-import { Box } from "@docspace/shared/components/box";
-//import FormStore from "@docspace/studio/src/store/SsoFormStore";
+import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Badge } from "@docspace/shared/components/badge";
+import { mobile } from "@docspace/shared/utils";
+import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 
-const borderProp = { radius: "6px" };
+const StyledWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding: 12px;
+  border-radius: 6px;
+  background: ${(props) =>
+    props.theme.client.settings.integration.sso.toggleContentBackground};
 
-const ToggleSSO = (props) => {
-  const { theme, enableSso, ssoToggle, isSSOAvailable, t } = props;
+  @media ${mobile} {
+    margin-bottom: 24px;
+  }
 
+  .toggle {
+    position: static;
+    margin-top: 1px;
+  }
+
+  .toggle-caption {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    .toggle-caption_title {
+      display: flex;
+      .toggle-caption_title_badge {
+        ${(props) =>
+          props.theme.interfaceDirection === "rtl"
+            ? css`
+                margin-right: 4px;
+              `
+            : css`
+                margin-left: 4px;
+              `}
+        cursor: auto;
+      }
+    }
+  }
+
+  ${(props) => !props.isSSOAvailable && UnavailableStyles}
+`;
+
+const ToggleSSO = ({ enableSso, ssoToggle, isSSOAvailable }) => {
+  const { t } = useTranslation("SingleSignOn");
+
+  const theme = useTheme();
   return (
-    <>
-      <Text className="intro-text settings_unavailable" noSelect>
-        {t("SsoIntro")}
-      </Text>
+    <StyledWrapper isSSOAvailable={isSSOAvailable}>
+      <ToggleButton
+        className="enable-sso toggle"
+        isChecked={enableSso}
+        onChange={() => ssoToggle(t)}
+        isDisabled={!isSSOAvailable}
+      />
 
-      <Box
-        backgroundProp={
-          theme.client.settings.integration.sso.toggleContentBackground
-        }
-        borderProp={borderProp}
-        displayProp="flex"
-        flexDirection="row"
-        paddingProp="12px"
-      >
-        <ToggleButton
-          className="enable-sso toggle"
-          isChecked={enableSso}
-          onChange={() => ssoToggle(t)}
-          isDisabled={!isSSOAvailable}
-        />
-
-        <div className="toggle-caption">
-          <div className="toggle-caption_title">
-            <Text
-              fontWeight={600}
-              lineHeight="20px"
-              noSelect
-              className="settings_unavailable"
-            >
-              {t("TurnOnSSO")}
-            </Text>
-            {!isSSOAvailable && (
-              <Badge
-                backgroundColor="#EDC409"
-                label={t("Common:Paid")}
-                fontWeight="700"
-                className="toggle-caption_title_badge"
-                isPaidBadge={true}
-              />
-            )}
-          </div>
+      <div className="toggle-caption">
+        <div className="toggle-caption_title">
           <Text
-            fontSize="12px"
-            fontWeight={400}
-            lineHeight="16px"
-            className="settings_unavailable"
+            fontWeight={600}
+            lineHeight="20px"
             noSelect
+            className="settings_unavailable"
           >
-            {t("TurnOnSSOCaption")}
+            {t("TurnOnSSO")}
           </Text>
+          {!isSSOAvailable && (
+            <Badge
+              backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
+              label={t("Common:Paid")}
+              fontWeight="700"
+              className="toggle-caption_title_badge"
+              isPaidBadge={true}
+            />
+          )}
         </div>
-      </Box>
-    </>
+        <Text
+          fontSize="12px"
+          fontWeight={400}
+          lineHeight="16px"
+          className="settings_unavailable"
+          noSelect
+        >
+          {t("TurnOnSSOCaption")}
+        </Text>
+      </div>
+    </StyledWrapper>
   );
 };
 
-export default inject(({ settingsStore, ssoStore }) => {
-  const { theme } = settingsStore;
+export default inject(({ currentQuotaStore, ssoStore }) => {
   const { enableSso, ssoToggle } = ssoStore;
+  const { isSSOAvailable } = currentQuotaStore;
 
   return {
-    theme,
     enableSso,
     ssoToggle,
+    isSSOAvailable,
   };
-})(withTranslation(["SingleSignOn"])(observer(ToggleSSO)));
+})(observer(ToggleSSO));

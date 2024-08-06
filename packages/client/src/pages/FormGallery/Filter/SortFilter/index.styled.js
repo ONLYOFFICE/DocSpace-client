@@ -31,6 +31,7 @@ import { ComboBox } from "@docspace/shared/components/combobox";
 
 export const SortButton = styled.div`
   .combo-button {
+    padding-inline-end: 3px;
     background: ${(props) =>
       props.theme.filterInput.sort.background} !important;
 
@@ -51,7 +52,7 @@ export const SortButton = styled.div`
       min-width: 200px;
       margin-top: 3px;
 
-      @media ${mobile} {
+      /* @media ${mobile} {
         position: absolute;
         width: 100%;
         bottom: 0;
@@ -59,7 +60,7 @@ export const SortButton = styled.div`
         top: auto;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
-      }
+      } */
     }
 
     .optionalBlock {
@@ -67,6 +68,7 @@ export const SortButton = styled.div`
       align-items: center;
       justify-content: center;
       margin: 0;
+      padding: 0 16px;
     }
 
     .combo-buttons_arrow-icon {
@@ -81,7 +83,7 @@ export const SortButton = styled.div`
 
 export const SortComboBox = styled(ComboBox)`
   @media ${mobile} {
-    position: static;
+    /* position: static; */
   }
 `;
 
@@ -128,7 +130,7 @@ export const SortDropdownItem = styled(DropDownItem)`
         `}
 
   ${({ isDescending }) =>
-    isDescending &&
+    !isDescending &&
     css`
       .sortorder-arrow {
         transform: rotate(180deg);

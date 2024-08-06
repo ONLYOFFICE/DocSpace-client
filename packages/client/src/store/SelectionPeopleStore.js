@@ -26,7 +26,6 @@
 
 import { makeAutoObservable } from "mobx";
 import { EmployeeStatus } from "@docspace/shared/enums";
-import { getUserStatus } from "../helpers/people-helpers";
 
 class SelectionStore {
   peopleStore = null;
@@ -47,9 +46,20 @@ class SelectionStore {
   }
 
   updateSelection = (peopleList) => {
+    const hasSelection = !!this.selection.length;
+    const hasBufferSelection = !!this.bufferSelection;
+
     peopleList.some((el) => {
-      if (el.id === this.selection[0].id) this.setSelection([el]);
+      if (hasSelection && this.selection[0].id === el.id)
+        this.setSelection([el]);
+
+      if (hasBufferSelection && this.bufferSelection.id === el.id)
+        this.setBufferSelection(el);
     });
+
+    if (hasSelection) {
+      this.recalculateUsersRights();
+    }
   };
 
   resetUsersRight = () => {
@@ -72,6 +82,11 @@ class SelectionStore {
         this.selectionUsersRights[key]--;
       }
     }
+  };
+
+  recalculateUsersRights = () => {
+    this.resetUsersRight();
+    this.selection.forEach((u) => this.incrementUsersRights(u));
   };
 
   setSelection = (selection) => {
@@ -180,6 +195,7 @@ class SelectionStore {
     if (exists) return;
 
     this.setSelection([...this.selection, user]);
+    this.peopleStore.accountsHotkeysStore.setHotkeyCaret(null);
 
     this.incrementUsersRights(user);
   };
@@ -227,17 +243,15 @@ class SelectionStore {
   };
 
   getUserChecked = (user, selected) => {
-    const status = getUserStatus(user);
-
     switch (selected) {
       case "all":
         return true;
       case "active":
-        return status === "active";
+        return user.status === EmployeeStatus.Active;
       case "pending":
-        return status === "pending";
+        return user.status === EmployeeStatus.Pending;
       case "disabled":
-        return status === "disabled";
+        return user.status === EmployeeStatus.Disabled;
       default:
         return false;
     }
@@ -264,6 +278,8 @@ class SelectionStore {
       this.resetUsersRight();
       list.forEach((u) => this.incrementUsersRights(u));
     }
+
+    this.peopleStore.accountsHotkeysStore.setHotkeyCaret(null);
 
     return selected;
   };
@@ -301,6 +317,10 @@ class SelectionStore {
 
   get isOneUserSelection() {
     return this.selection.length > 0 && this.selection.length === 1;
+  }
+
+  get isOnlyBufferSelection() {
+    return !this.selection.length && !!this.bufferSelection;
   }
 
   get hasFreeUsers() {

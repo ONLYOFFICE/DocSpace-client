@@ -26,12 +26,16 @@
 
 import { useRef } from "react";
 import { withTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
+import { matchPath } from "react-router";
 import { Text } from "@docspace/shared/components/text";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
 import { StyledAccountsItemTitle } from "../../styles/accounts";
 import { inject, observer } from "mobx-react";
 import { decode } from "he";
+import { Badge } from "@docspace/shared/components/badge";
+import { Tooltip } from "@docspace/shared/components/tooltip";
 
 const GroupsItemTitle = ({
   t,
@@ -41,9 +45,15 @@ const GroupsItemTitle = ({
   getGroupContextOptions,
 }) => {
   const itemTitleRef = useRef();
+  const theme = useTheme();
+
+  const isInsideGroup = matchPath(
+    "/accounts/groups/:groupId/filter",
+    location.pathname,
+  );
 
   const getContextOptions = () =>
-    getGroupContextOptions(t, infoPanelSelection, true);
+    getGroupContextOptions(t, infoPanelSelection, true, isInsideGroup);
 
   const groupName = infoPanelSelection.name
     ? decode(infoPanelSelection.name).trim()
@@ -78,9 +88,28 @@ const GroupsItemTitle = ({
             })}
           </Text>
         )}
+
+        {infoPanelSelection?.isLDAP && (
+          <>
+            <Badge
+              id="ldap-badge-info-panel"
+              className="ldap-badge"
+              label={t("Common:LDAP")}
+              color={"#FFFFFF"}
+              backgroundColor={theme.isBase ? "#8570BD" : "#544C6A"}
+              fontSize={"9px"}
+              fontWeight={800}
+              noHover
+              lineHeight={"13px"}
+            />
+            <Tooltip anchorSelect={`div[id='ldap-badge-info-panel'] div`}>
+              {t("PeopleTranslations:LDAPGroupTooltip")}
+            </Tooltip>
+          </>
+        )}
       </div>
 
-      {!isRoomAdmin && (
+      {!isRoomAdmin && !infoPanelSelection.isLDAP && (
         <ContextMenuButton
           id="info-accounts-options"
           className="context-button"

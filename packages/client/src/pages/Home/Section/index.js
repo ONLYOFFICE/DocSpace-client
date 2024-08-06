@@ -31,4 +31,4 @@ export { default as SettingsSectionBodyContent } from "./SettingsBody";
 export { default as SectionFilterContent } from "./Filter";
 export { default as SectionPagingContent } from "./Paging";
 export { default as SectionWarningContent } from "./Warning";
-export { default as SectionSubmenuContent } from "./Submenu";
+export { default as SectionSubmenuContent } from "./Tabs";

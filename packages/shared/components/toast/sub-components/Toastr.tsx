@@ -27,7 +27,7 @@
 "use client";
 
 import React from "react";
-import { toast } from "react-toastify";
+import { Id, toast } from "react-toastify";
 import styled from "styled-components";
 
 import CheckToastReactSvg from "PUBLIC_DIR/images/check.toast.react.svg";
@@ -206,6 +206,8 @@ function error(
     message = data;
   }
 
+  console.error(message);
+
   return notify(
     ToastType.error,
     message,
@@ -254,12 +256,17 @@ function clear() {
   return toast.dismiss();
 }
 
+function isActive(id: Id) {
+  return toast.isActive(id);
+}
+
 const toastr = {
   clear,
   error,
   info,
   success,
   warning,
+  isActive,
 };
 
 export { toastr };

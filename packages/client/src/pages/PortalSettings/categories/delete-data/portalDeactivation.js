@@ -32,7 +32,7 @@ import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { Link } from "@docspace/shared/components/link";
 import { MainContainer, ButtonWrapper } from "./StyledDeleteData";
-import { setDocumentTitle } from "../../../../helpers/utils";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { sendSuspendPortalEmail } from "@docspace/shared/api/portal";
 import { isDesktop } from "@docspace/shared/utils";
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
@@ -48,7 +48,9 @@ const PortalDeactivation = (props) => {
   };
 
   useEffect(() => {
-    setDocumentTitle(t("PortalDeactivation"));
+    setDocumentTitle(
+      t("PortalDeactivation", { productName: t("Common:ProductName") }),
+    );
     fetchData();
     onCheckView();
     window.addEventListener("resize", onCheckView);
@@ -83,7 +85,11 @@ const PortalDeactivation = (props) => {
       <Text fontSize="13px" className="description">
         {t("PortalDeactivationDescription")}
       </Text>
-      <Text className="helper">{t("PortalDeactivationHelper")}</Text>
+      <Text className="helper">
+        {t("PortalDeactivationHelper", {
+          productName: t("Common:ProductName"),
+        })}
+      </Text>
       <ButtonWrapper>
         <Button
           className="deactivate-button button"
@@ -95,7 +101,10 @@ const PortalDeactivation = (props) => {
         />
         {notActivatedEmail && (
           <Text fontSize="12px" fontWeight="600">
-            {t("MainBar:ConfirmEmailHeader", { email: owner.email })}
+            {t("MainBar:ConfirmEmailHeader", {
+              email: owner.email,
+              productName: t("Common:ProductName"),
+            })}
             <Link
               className="request-again-link"
               color={currentColorScheme?.main?.accent}

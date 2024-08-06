@@ -35,7 +35,13 @@ import EmptyContainer from "../../../../components/EmptyContainer";
 import withLoader from "../../../../HOCs/withLoader";
 import TableView from "./TableView/TableContainer";
 import withHotkeys from "../../../../HOCs/withHotkeys";
-import { Consumer, isMobile, isTablet } from "@docspace/shared/utils";
+import {
+  clearEdgeScrollingTimer,
+  Consumer,
+  isMobile,
+  isTablet,
+  onEdgeScrolling,
+} from "@docspace/shared/utils";
 import { isElementInViewport } from "@docspace/shared/utils/common";
 
 import { DeviceType } from "@docspace/shared/enums";
@@ -155,6 +161,14 @@ const SectionBodyContent = (props) => {
     }
   };
 
+  const isHeaderOptionButton = (event) => {
+    const parent = document.querySelector("#header_optional-button");
+
+    if (!parent || !event.target) return false;
+
+    return parent.contains(event.target);
+  };
+
   const onMouseDown = (e) => {
     if (
       (e.target.closest(".scroll-body") &&
@@ -165,7 +179,8 @@ const SectionBodyContent = (props) => {
         !e.target.closest(".document-catalog")) ||
       e.target.closest(".files-main-button") ||
       e.target.closest(".add-button") ||
-      e.target.closest("#filter_search-input")
+      e.target.closest("#filter_search-input") ||
+      isHeaderOptionButton(e)
     ) {
       setSelection([]);
       setBufferSelection(null);
@@ -188,6 +203,7 @@ const SectionBodyContent = (props) => {
       setDragging(true);
     }
 
+    onEdgeScrolling(e);
     setTooltipPosition(e.pageX, e.pageY);
     const wrapperElement = document.elementFromPoint(e.clientX, e.clientY);
     if (!wrapperElement) {
@@ -231,6 +247,7 @@ const SectionBodyContent = (props) => {
   };
 
   const onMouseUp = (e) => {
+    clearEdgeScrollingTimer();
     setStartDrag(false);
 
     setTimeout(() => {

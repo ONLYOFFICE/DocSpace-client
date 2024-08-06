@@ -72,7 +72,10 @@ export const getStepsData = (
     },
     {
       title: t("Settings:SelectUsersWithEmail"),
-      description: t("Settings:SelectUsersDescriptionNextcloud"),
+      description: t("Settings:SelectUsersDescriptionNextcloud", {
+        productName: t("Common:ProductName"),
+        organizationName: t("Common:OrganizationName"),
+      }),
       component: (
         <SelectUsersStep
           t={t}
@@ -83,7 +86,10 @@ export const getStepsData = (
     },
     {
       title: t("Settings:AddEmails"),
-      description: t("Settings:AddEmailsDescription"),
+      description: t("Settings:AddEmailsDescription", {
+        productName: t("Common:ProductName"),
+        organizationName: t("Common:OrganizationName"),
+      }),
       component: (
         <AddEmailsStep
           t={t}
@@ -101,12 +107,18 @@ export const getStepsData = (
         </>
       ) : (
         <>
-          <Trans t={t} ns="Settings" i18nKey="SelectUserTypesDescription">
-            Select DocSpace roles for the imported users: <b>DocSpace admin</b>,{" "}
-            <b>Room admin</b>
-            or <b>Power user</b>. By default, Power user role is selected for
-            each user. You can manage the roles after the import.
-          </Trans>
+          <Trans
+            t={t}
+            ns="Settings"
+            i18nKey="SelectUserTypesDescription"
+            values={{
+              productName: t("Common:ProductName"),
+            }}
+            components={{
+              1: <b />,
+            }}
+          />
+
           <HelpButton
             place="bottom"
             offsetRight={0}
@@ -116,6 +128,7 @@ export const getStepsData = (
                   i18nKey="TypesAndPrivileges"
                   ns="Settings"
                   t={t}
+                  values={{ productName: t("Common:ProductName") }}
                   components={{
                     1: <b></b>,
                     2: <b></b>,
@@ -144,7 +157,9 @@ export const getStepsData = (
     },
     {
       title: t("Settings:DataImport"),
-      description: t("Settings:ImportSectionDescription"),
+      description: t("Settings:ImportSectionDescription", {
+        productName: t("Common:ProductName"),
+      }),
       component: (
         <ImportStep
           t={t}
@@ -167,7 +182,10 @@ export const getStepsData = (
     },
     {
       title: t("Settings:DataImportComplete"),
-      description: t("Settings:ImportCompleteDescriptionNextcloud"),
+      description: t("Settings:ImportCompleteDescriptionNextcloud", {
+        productName: t("Common:ProductName"),
+        organizationName: t("Common:OrganizationName"),
+      }),
       component: (
         <ImportCompleteStep
           t={t}

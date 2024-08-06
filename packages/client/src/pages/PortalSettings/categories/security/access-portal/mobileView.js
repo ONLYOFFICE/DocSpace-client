@@ -37,7 +37,9 @@ const MobileView = (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setDocumentTitle(t("PortalAccess"));
+    setDocumentTitle(
+      t("PortalAccess", { productName: t("Common:ProductName") }),
+    );
   }, []);
 
   const onClickLink = (e) => {
@@ -99,13 +101,9 @@ const MobileView = (props) => {
       />
       <MobileCategoryWrapper
         title={t("SessionLifetime")}
-        subtitle={
-          <Trans
-            i18nKey="SessionLifetimeMobileDescription"
-            ns="Settings"
-            t={t}
-          />
-        }
+        subtitle={t("SessionLifetimeMobileDescription", {
+          productName: t("Common:ProductName"),
+        })}
         url="/portal-settings/security/access-portal/lifetime"
         onClickLink={onClickLink}
       />

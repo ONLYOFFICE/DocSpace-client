@@ -51,11 +51,11 @@ const StyledTableContainer = styled(TableContainer)`
     position: sticky;
     z-index: 201;
     width: calc(100% + 40px);
-    margin-top: 20px;
-    margin-left: -20px;
+    margin-top: -33px;
+    margin-inline-start: -20px;
     top: 0;
 
-    margin-bottom: -37.5px;
+    margin-bottom: -36px;
 
     .table-container_group-menu {
       border-image-slice: 0;
@@ -95,7 +95,7 @@ const StyledTableContainer = styled(TableContainer)`
   .table-list-item {
     cursor: pointer;
 
-    padding-left: 20px;
+    padding-inline-start: 20px;
 
     &:hover {
       background-color: ${(props) =>
@@ -106,17 +106,17 @@ const StyledTableContainer = styled(TableContainer)`
         border-top: ${(props) =>
           `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
 
-        margin-left: -24px;
-        padding-left: 24px;
+        margin-inline-start: -24px;
+        padding-inline-start: 24px;
       }
 
       .checkboxWrapper {
-        padding-left: 32px;
+        padding-inline-start: 32px;
       }
 
       .table-container_row-context-menu-wrapper {
-        margin-right: -20px;
-        padding-right: 20px;
+        margin-inline-end: -20px;
+        padding-inline-end: 20px;
       }
     }
   }
@@ -127,7 +127,7 @@ const StyledTableContainer = styled(TableContainer)`
   }
 
   .clear-icon {
-    margin-right: 8px;
+    margin-inline-end: 8px;
     margin-top: 2px;
   }
 

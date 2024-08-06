@@ -40,7 +40,10 @@ import { TReqOption } from "../../utils/axiosClient";
 import { EmployeeActivationStatus, ThemeKeys } from "../../enums";
 import { TGroup } from "../groups/types";
 
-export async function getUserList(filter = Filter.getDefault()) {
+export async function getUserList(
+  filter = Filter.getDefault(),
+  signal?: AbortSignal,
+) {
   let params = "";
   // if (fake) {
   //   return fakePeople.getUserList(filter);
@@ -57,6 +60,7 @@ export async function getUserList(filter = Filter.getDefault()) {
   const res = (await request({
     method: "get",
     url: `/people${params}`,
+    signal,
   })) as TGetUserList;
 
   res.items = res.items.map((user) => {
@@ -342,12 +346,16 @@ export function linkOAuth(serializedProfile) {
   });
 }
 
-export function signupOAuth(signupAccount) {
-  return request({
+export function signupOAuth(signupAccount, confirmKey = null) {
+  const options = {
     method: "post",
     url: "people/thirdparty/signup",
     data: signupAccount,
-  });
+  };
+
+  if (confirmKey) options.headers = { confirm: confirmKey };
+
+  return request(options);
 }
 
 export function unlinkOAuth(provider) {

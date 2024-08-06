@@ -42,7 +42,9 @@ const AccessRestricted = () => {
       <AccessRestrictedWrapper>
         <ErrorContainer
           headerText={t("AccessDenied")}
-          bodyText={t("PortalRestriction")}
+          bodyText={t("PortalRestriction", {
+            productName: t("Common:ProductName"),
+          })}
         />
       </AccessRestrictedWrapper>
     )

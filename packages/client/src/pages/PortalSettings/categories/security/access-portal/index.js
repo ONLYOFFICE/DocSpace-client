@@ -57,7 +57,9 @@ const AccessPortal = (props) => {
   } = props;
 
   useEffect(() => {
-    setDocumentTitle(t("PortalAccess"));
+    setDocumentTitle(
+      t("PortalAccess", { productName: t("Common:ProductName") }),
+    );
   }, []);
 
   if (isMobileView) return <MobileView />;
@@ -95,7 +97,9 @@ const AccessPortal = (props) => {
 
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight="400">
-          {t("TwoFactorAuthEnableDescription")}
+          {t("TwoFactorAuthEnableDescription", {
+            productName: t("Common:ProductName"),
+          })}
         </Text>
         <Text fontSize="13px" fontWeight="400">
           <Trans t={t} i18nKey="TwoFactorAuthSave" />
@@ -173,7 +177,9 @@ const AccessPortal = (props) => {
       </Text>
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight="400">
-          {t("AdminsMessageSettingDescription")}
+          {t("AdminsMessageSettingDescription", {
+            productName: t("Common:ProductName"),
+          })}
         </Text>
         <Text fontSize="13px" fontWeight="400">
           <Trans t={t} i18nKey="SaveToApply" />

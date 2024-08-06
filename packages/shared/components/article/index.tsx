@@ -101,7 +101,6 @@ const Article = ({
   standalone,
   currentTariffPlanTitle,
   trialDaysLeft,
-  paymentDate,
 
   languageBaseName,
   zendeskEmail,
@@ -109,7 +108,6 @@ const Article = ({
   chatDisplayName,
   zendeskKey,
   showProgress,
-
   user,
   getActions,
   onProfileClick,

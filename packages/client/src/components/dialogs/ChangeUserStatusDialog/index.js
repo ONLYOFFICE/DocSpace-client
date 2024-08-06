@@ -131,8 +131,10 @@ class ChangeUserStatusDialogComponent extends React.Component {
       header = onlyOneUser ? t("DisableUser") : t("DisableUsers");
 
       bodyText = onlyOneUser
-        ? t("DisableUserDescription")
-        : t("DisableUsersDescription");
+        ? t("DisableUserDescription", { productName: t("Common:ProductName") })
+        : t("DisableUsersDescription", {
+            productName: t("Common:ProductName"),
+          });
 
       bodyText = bodyText + t("DisableGeneralDescription");
 
@@ -141,8 +143,8 @@ class ChangeUserStatusDialogComponent extends React.Component {
       header = onlyOneUser ? t("EnableUser") : t("EnableUsers");
 
       bodyText = onlyOneUser
-        ? t("EnableUserDescription")
-        : t("EnableUsersDescription");
+        ? t("EnableUserDescription", { productName: t("Common:ProductName") })
+        : t("EnableUsersDescription", { productName: t("Common:ProductName") });
 
       buttonLabelSave = t("Common:Enable");
     }

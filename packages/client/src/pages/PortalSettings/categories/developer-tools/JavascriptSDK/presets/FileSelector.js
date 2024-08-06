@@ -60,7 +60,6 @@ import { PreviewBlock } from "../sub-components/PreviewBlock";
 import { loadFrame } from "../utils";
 
 import {
-  scriptUrl,
   dataDimensions,
   defaultWidthDimension,
   defaultHeightDimension,
@@ -78,15 +77,22 @@ import {
   Container,
   FilesSelectorInputWrapper,
 } from "./StyledPresets";
+import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const FileSelector = (props) => {
-  const { t, setDocumentTitle, fetchExternalLinks, theme } = props;
+  const { t, fetchExternalLinks, theme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
   const fileTypeDisplay = [
     { value: FilesSelectorFilterTypes.ALL, label: t("AllTypes") },
-    { value: "EditorSupportedTypes", label: t("AllTypesSupportedByEditor") },
+    {
+      value: "EditorSupportedTypes",
+      label: t("AllTypesSupportedByEditor", {
+        organizationName: t("Common:OrganizationName"),
+      }),
+    },
     { value: "SelectorTypes", label: t("SelectTypes") },
   ];
 
@@ -108,11 +114,7 @@ const FileSelector = (props) => {
       label: t(`Translations:Spreadsheets`),
     },
     {
-      key: FilterType.OFormTemplateOnly,
-      label: t(`Files:FormsTemplates`),
-    },
-    {
-      key: FilterType.OFormOnly,
+      key: FilterType.Pdf,
       label: t(`Files:Forms`),
     },
     {
@@ -129,7 +131,7 @@ const FileSelector = (props) => {
     },
     {
       key: FilterType.FilesOnly,
-      label: t(`Files:AllFiles`),
+      label: t(`Translations:Files`),
     },
   ];
 
@@ -154,7 +156,7 @@ const FileSelector = (props) => {
     buttonWithLogo: true,
     events: {
       onSelectCallback: (items) => {
-        toastr.success(items[0].label);
+        //toastr.success(items[0].label);
       },
       onCloseCallback: null,
       onAppReady: null,
@@ -171,7 +173,7 @@ const FileSelector = (props) => {
     window.DocSpace?.SDK?.frames[frameId]?.destroyFrame();
   };
 
-  const loadCurrentFrame = () => loadFrame(config, scriptUrl);
+  const loadCurrentFrame = () => loadFrame(config, SDK_SCRIPT_URL);
 
   useEffect(() => {
     loadCurrentFrame();
@@ -272,7 +274,7 @@ const FileSelector = (props) => {
           preview={preview}
           theme={theme}
           frameId={frameId}
-          scriptUrl={scriptUrl}
+          scriptUrl={SDK_SCRIPT_URL}
           config={config}
         />
         <Controls>
@@ -385,7 +387,7 @@ const FileSelector = (props) => {
                     size={12}
                     tooltipContent={
                       <Text fontSize="12px">
-                        {t("CreateEditRoomDialog:PublicRoomDescription")}
+                        {t("Common:PublicRoomDescription")}
                       </Text>
                     }
                   />
@@ -436,14 +438,12 @@ const FileSelector = (props) => {
   );
 };
 
-export default inject(({ authStore, settingsStore, publicRoomStore }) => {
-  const { setDocumentTitle } = authStore;
+export default inject(({ settingsStore, publicRoomStore }) => {
   const { theme } = settingsStore;
   const { fetchExternalLinks } = publicRoomStore;
 
   return {
     theme,
-    setDocumentTitle,
     fetchExternalLinks,
   };
 })(

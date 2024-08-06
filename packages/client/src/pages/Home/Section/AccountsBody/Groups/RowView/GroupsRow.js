@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import { useNavigate } from "react-router-dom";
 import * as Styled from "./index.styled";
 import { Link } from "@docspace/shared/components/link";
 import { withTranslation } from "react-i18next";
@@ -34,7 +33,7 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
-import React from "react";
+import Badges from "../../Badges";
 
 const GroupsRow = ({
   t,
@@ -42,6 +41,7 @@ const GroupsRow = ({
   selection,
   bufferSelection,
   getGroupContextOptions,
+  getModel,
   sectionWidth,
   theme,
   openGroupAction,
@@ -59,15 +59,15 @@ const GroupsRow = ({
     changeGroupContextSelection(item, !rightMouseButtonClick);
   };
 
-  const onOpenGroup = () => {
-    openGroupAction(item.id, true, item.name);
+  const onOpenGroup = (e) => {
+    openGroupAction(item.id, true, item.name, e);
   };
 
   const nameColor =
     item.statusType === "pending" || item.statusType === "disabled"
       ? theme.peopleTableRow.pendingNameColor
       : theme.peopleTableRow.nameColor;
-  const sideInfoColor = theme.peopleTableRow.pendingSideInfoColor;
+  const sideInfoColor = theme.peopleTableRow.sideInfoColor;
 
   const titleWithoutSpaces = item.name.replace(/\s+/g, " ").trim();
   const indexAfterLastSpace = titleWithoutSpaces.lastIndexOf(" ");
@@ -78,13 +78,15 @@ const GroupsRow = ({
 
   const groupName = (item.name[0] + secondCharacter).toUpperCase();
 
+  const getContextModel = () => getModel(t, item);
+
   return (
     <Styled.GroupsRowWrapper
       isChecked={isChecked}
       isActive={isActive}
       className={`group-item row-wrapper ${
         isChecked || isActive ? "row-selected" : ""
-      }`}
+      } ${item.id}`}
       value={item.id}
     >
       <div className={"group-item"}>
@@ -107,6 +109,7 @@ const GroupsRow = ({
           checked={isChecked}
           isActive={isActive}
           contextOptions={getGroupContextOptions(t, item)}
+          getContextModel={getContextModel}
           sectionWidth={sectionWidth}
           mode={"modern"}
           className={"group-row"}
@@ -133,7 +136,7 @@ const GroupsRow = ({
               {item.name}
             </Link>
 
-            <div></div>
+            <Badges isLDAP={item.isLDAP} />
 
             <Link
               key={"group-title"}
@@ -162,6 +165,7 @@ export default inject(({ peopleStore, settingsStore }) => ({
   selection: peopleStore.groupsStore.selection,
   bufferSelection: peopleStore.groupsStore.bufferSelection,
   getGroupContextOptions: peopleStore.groupsStore.getGroupContextOptions,
+  getModel: peopleStore.groupsStore.getModel,
   openGroupAction: peopleStore.groupsStore.openGroupAction,
   changeGroupSelection: peopleStore.groupsStore.changeGroupSelection,
   changeGroupContextSelection:

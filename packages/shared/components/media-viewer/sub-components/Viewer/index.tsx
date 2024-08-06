@@ -229,7 +229,7 @@ export const Viewer = (props: ViewerProps) => {
     playlistFile.fileExst === ".tiff" || playlistFile.fileExst === ".tif";
 
   return (
-    <StyledViewerContainer visible={visible}>
+    <StyledViewerContainer dir="ltr" visible={visible}>
       {!isFullscreen && !isMobile && panelVisible && !isPdf && (
         <DesktopDetails
           title={title}
@@ -251,7 +251,7 @@ export const Viewer = (props: ViewerProps) => {
 
       {isImage ? (
         <ImageViewer
-          key={fileUrl}
+          key={targetFile?.viewUrl}
           isTiff={isTiff}
           devices={devices}
           toolbar={toolbar}

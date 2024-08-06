@@ -48,7 +48,11 @@ const Bonus = ({ standaloneInit, isInitPaymentPage }) => {
   return (
     <StyledComponent>
       <BenefitsContainer />
-      <Text fontWeight={600}>{t("UpgradeToProBannerInstructionHeader")}</Text>
+      <Text fontWeight={600}>
+        {t("UpgradeToProBannerInstructionHeader", {
+          organizationName: t("Common:OrganizationName"),
+        })}
+      </Text>
       <Text>{t("UpgradeToProBannerInstructionDescr")}</Text>
 
       <OfficialDocumentation />
@@ -60,7 +64,6 @@ const Bonus = ({ standaloneInit, isInitPaymentPage }) => {
 
 export default inject(({ paymentStore }) => {
   const { standaloneInit, isInitPaymentPage } = paymentStore;
-
   return {
     standaloneInit,
     isInitPaymentPage,

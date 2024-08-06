@@ -1,5 +1,4 @@
 {
-  "Authentication": "Doğrulama",
   "AuthViaNTLM": "NTLM aracılığıyla kimlik doğrulama",
   "EnableSSL": "SSL'yi etkinleştir",
   "EnterDomain": "Alan adını girin",
@@ -12,6 +11,5 @@
   "Port": "Bağlantı noktası",
   "SenderDisplayName": "Gönderici Ekran İsmi",
   "SenderEmailAddress": "Gönderici Eposta Adresi",
-  "SendTestMail": "Test Postası Gönder",
-  "SuccessfullyCompletedOperation": "İşlem başarıyla tamamlandı."
+  "SendTestMail": "Test Postası Gönder"
 }

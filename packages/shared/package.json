@@ -1,6 +1,6 @@
 {
   "name": "@docspace/shared",
-  "version": "2.5.1",
+  "version": "2.6.1",
   "private": true,
   "scripts": {
     "build": "echo 'skip it'",
@@ -48,7 +48,7 @@
     "react-autosize-textarea": "^7.1.0",
     "react-content-loader": "^5.1.4",
     "react-countdown": "2.3.5",
-    "react-device-detect": "^1.17.0",
+    "react-device-detect": "^2.2.3",
     "react-dom": "^18.2.0",
     "react-draggable": "^4.4.6",
     "react-dropzone": "^11.7.1",

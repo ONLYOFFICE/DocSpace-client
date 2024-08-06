@@ -52,6 +52,8 @@ import {
   StyledSelectedOwner,
 } from "./StyledDialog";
 
+import { EmployeeActivationStatus } from "@docspace/shared/enums";
+
 const ChangePortalOwnerDialog = ({
   t,
   visible,
@@ -90,7 +92,7 @@ const ChangePortalOwnerDialog = ({
         onClose && onClose();
         toastr.success(
           t("Settings:ConfirmEmailSended", {
-            ownerName: selectedUser.label,
+            ownerName: displayName,
           }),
         );
       })
@@ -114,12 +116,22 @@ const ChangePortalOwnerDialog = ({
     t("DoTheSame"),
     t("AppointAdmin"),
     t("SetAccessRights"),
-    t("ManagePortal"),
+    t("ManagePortal", { productName: t("Common:ProductName") }),
     t("ManageUser"),
-    t("ChangePortalOwner:ChangeOwner"),
-    t("BackupPortal"),
-    t("DeactivateOrDeletePortal"),
+    t("ChangePortalOwner:ChangeOwner", {
+      productName: t("Common:ProductName"),
+    }),
+    t("BackupPortal", { productName: t("Common:ProductName") }),
+    t("DeactivateOrDeletePortal", { productName: t("Common:ProductName") }),
   ];
+
+  const filter = React.useMemo(() => {
+    const newFilter = new Filter();
+
+    newFilter.employeeStatus = EmployeeActivationStatus.Activated;
+
+    return newFilter;
+  }, []);
 
   return (
     <ModalDialog
@@ -148,6 +160,7 @@ const ChangePortalOwnerDialog = ({
             }}
             currentUserId={id}
             disableDisabledUsers
+            filter={filter}
           />
         </ModalDialog.Container>
       )}
@@ -172,10 +185,10 @@ const ChangePortalOwnerDialog = ({
 
         <StyledPeopleSelectorInfo>
           <Text className="new-owner" noSelect title={t("NewPortalOwner")}>
-            {t("NewPortalOwner")}
+            {t("NewPortalOwner", { productName: t("Common:ProductName") })}
           </Text>
           <Text className="description" noSelect title={t("ChangeInstruction")}>
-            {t("ChangeInstruction")}
+            {t("ChangeInstruction", { productName: t("Common:ProductName") })}
           </Text>
         </StyledPeopleSelectorInfo>
 
@@ -217,7 +230,7 @@ const ChangePortalOwnerDialog = ({
 
         <StyledAvailableList>
           <Text className="list-header" noSelect title={t("PortalOwnerCan")}>
-            {t("PortalOwnerCan")}
+            {t("PortalOwnerCan", { productName: t("Common:ProductName") })}
           </Text>
 
           {ownerRights?.map((item) => (

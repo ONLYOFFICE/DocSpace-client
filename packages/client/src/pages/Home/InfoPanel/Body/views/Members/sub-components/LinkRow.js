@@ -35,7 +35,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { toastr } from "@docspace/shared/components/toast";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
-import LinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.reat.svg?url";
+import LinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
 import ShareReactSvgUrl from "PUBLIC_DIR/images/share.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
@@ -60,11 +60,12 @@ const LinkRow = (props) => {
     editExternalLink,
     setEditLinkPanelIsVisible,
     setDeleteLinkDialogVisible,
-    setEmbeddingPanelIsVisible,
+    setEmbeddingPanelData,
     isArchiveFolder,
     theme,
     setIsScrollLocked,
     isPublicRoomType,
+    isFormRoom,
     ...rest
   } = props;
 
@@ -90,33 +91,39 @@ const LinkRow = (props) => {
 
   const onEditLink = () => {
     setEditLinkPanelIsVisible(true);
-    setLinkParams({ isEdit: true, link });
+    setLinkParams({
+      isEdit: true,
+      link,
+      roomId,
+      isPublic: isPublicRoomType,
+      isFormRoom,
+    });
     onCloseContextMenu();
   };
 
-  const onDisableLink = () => {
-    if (isExpired) {
-      setEditLinkPanelIsVisible(true);
-      setLinkParams({ isEdit: true, link });
-      return;
-    }
+  // const onDisableLink = () => {
+  //   if (isExpired) {
+  //     setEditLinkPanelIsVisible(true);
+  //     setLinkParams({ isEdit: true, link, roomId, isPublic: isPublicRoomType, isFormRoom });
+  //     return;
+  //   }
 
-    setIsLoading(true);
+  //   setIsLoading(true);
 
-    const newLink = JSON.parse(JSON.stringify(link));
-    newLink.sharedTo.disabled = !newLink.sharedTo.disabled;
+  //   const newLink = JSON.parse(JSON.stringify(link));
+  //   newLink.sharedTo.disabled = !newLink.sharedTo.disabled;
 
-    editExternalLink(roomId, newLink)
-      .then((link) => {
-        setExternalLink(link);
+  //   editExternalLink(roomId, newLink)
+  //     .then((link) => {
+  //       setExternalLink(link);
 
-        disabled
-          ? toastr.success(t("Files:LinkEnabledSuccessfully"))
-          : toastr.success(t("Files:LinkDisabledSuccessfully"));
-      })
-      .catch((err) => toastr.error(err?.message))
-      .finally(() => setIsLoading(false));
-  };
+  //       disabled
+  //         ? toastr.success(t("Files:LinkEnabledSuccessfully"))
+  //         : toastr.success(t("Files:LinkDisabledSuccessfully"));
+  //     })
+  //     .catch((err) => toastr.error(err?.message))
+  //     .finally(() => setIsLoading(false));
+  // };
 
   const onCopyPassword = () => {
     copy(password);
@@ -124,13 +131,13 @@ const LinkRow = (props) => {
   };
 
   const onEmbeddingClick = () => {
-    setLinkParams({ link, roomId });
-    setEmbeddingPanelIsVisible(true);
+    setLinkParams({ link, roomId, isPublic: isPublicRoomType, isFormRoom });
+    setEmbeddingPanelData({ visible: true });
     onCloseContextMenu();
   };
 
   const onDeleteLink = () => {
-    setLinkParams({ link });
+    setLinkParams({ link, roomId, isPublic: isPublicRoomType, isFormRoom });
     setDeleteLinkDialogVisible(true);
     onCloseContextMenu();
   };
@@ -148,6 +155,8 @@ const LinkRow = (props) => {
   const onCloseContextMenu = () => {
     setIsScrollLocked(false);
   };
+
+  const isDisabled = disabled || isExpired;
 
   const getData = () => {
     return [
@@ -167,20 +176,20 @@ const LinkRow = (props) => {
       //   icon: ShareReactSvgUrl,
       //   // onClick: () => args.onClickLabel("label2"),
       // },
-      // !isExpired && {
-      //   key: "embedding-settings-key",
-      //   label: t("Files:EmbeddingSettings"),
-      //   icon: CodeReactSvgUrl,
-      //   onClick: onEmbeddingClick,
-      // },
 
-      !disabled &&
-        !isExpired && {
-          key: "copy-link-settings-key",
-          label: t("Files:CopySharedLink"),
-          icon: CopyToReactSvgUrl,
-          onClick: onCopyExternalLink,
-        },
+      !isDisabled && {
+        key: "copy-link-settings-key",
+        label: t("Files:CopySharedLink"),
+        icon: CopyToReactSvgUrl,
+        onClick: onCopyExternalLink,
+      },
+
+      !isDisabled && {
+        key: "embedding-settings-key",
+        label: t("Files:EmbeddingSettings"),
+        icon: CodeReactSvgUrl,
+        onClick: onEmbeddingClick,
+      },
 
       // disabled
       //   ? {
@@ -216,7 +225,11 @@ const LinkRow = (props) => {
   const textColor = disabled ? theme.text.disableColor : theme.text.color;
 
   return (
-    <StyledLinkRow {...rest} isExpired={isExpired}>
+    <StyledLinkRow
+      {...rest}
+      isArchiveFolder={isArchiveFolder}
+      isExpired={isExpired}
+    >
       <Avatar
         size="min"
         source={LinkReactSvgUrl}
@@ -301,7 +314,7 @@ export default inject(
     const {
       setEditLinkPanelIsVisible,
       setDeleteLinkDialogVisible,
-      setEmbeddingPanelIsVisible,
+      setEmbeddingPanelData,
       setLinkParams,
     } = dialogsStore;
     const { editExternalLink, setExternalLink } = publicRoomStore;
@@ -314,10 +327,13 @@ export default inject(
       setExternalLink,
       setEditLinkPanelIsVisible,
       setDeleteLinkDialogVisible,
-      setEmbeddingPanelIsVisible,
+      setEmbeddingPanelData,
       isArchiveFolder: isArchiveFolderRoot,
       theme,
-      isPublicRoomType: infoPanelSelection.roomType === RoomsType.PublicRoom,
+      isPublicRoomType:
+        infoPanelSelection.roomType === RoomsType.PublicRoom ||
+        infoPanelSelection.roomType === RoomsType.FormRoom,
+      isFormRoom: infoPanelSelection?.roomType === RoomsType.FormRoom,
     };
   },
 )(

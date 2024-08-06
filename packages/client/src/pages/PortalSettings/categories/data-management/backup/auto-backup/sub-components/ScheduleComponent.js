@@ -59,7 +59,7 @@ const ScheduleComponent = ({
   const { t } = useTranslation("Settings");
   const renderHelpContent = () => (
     <Text className="schedule_description" fontSize="12px">
-      {t("AutoSavePeriodHelp")}
+      {t("AutoSavePeriodHelp", { productName: t("Common:ProductName") })}
     </Text>
   );
 

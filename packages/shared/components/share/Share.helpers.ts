@@ -47,7 +47,9 @@ export const getShareOptions = (t: TTranslation) => {
     {
       internal: true,
       key: "users",
-      label: t("Common:SpaceUsersOnly"),
+      label: t("Common:SpaceUsersOnly", {
+        productName: t("Common:ProductName"),
+      }),
     },
   ];
 };

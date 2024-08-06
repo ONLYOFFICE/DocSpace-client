@@ -1,6 +1,6 @@
 {
   "ErrorEmptyResponse": "Пуста відповідь",
-  "ErrorUnavailableText": "DocSpace недоступний",
+  "ErrorUnavailableText": "{{productName}} недоступний",
   "LinkDoesNotExist": "Посилання, яке ви намагаєтеся відкрити, не існує.",
   "LinkHasExpired": "Термін дії посилання, за яким ви перейшли, закінчився."
 }

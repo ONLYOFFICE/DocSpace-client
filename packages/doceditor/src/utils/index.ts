@@ -30,10 +30,7 @@ import { request } from "@docspace/shared/api/client";
 import { convertFile } from "@docspace/shared/api/files";
 import { TEditHistory } from "@docspace/shared/api/files/types";
 import { FolderType } from "@docspace/shared/enums";
-
-import type { IInitialConfig } from "@/types";
-
-import { IS_VIEW } from "./constants";
+import { TTranslation } from "@docspace/shared/types";
 
 export const getBackUrl = (
   rootFolderType: FolderType,
@@ -51,6 +48,8 @@ export const getBackUrl = (
     } else {
       backUrl = `/rooms/shared/${folderId}/filter?folder=${folderId}`;
     }
+  } else if (rootFolderType === FolderType.Archive) {
+    backUrl = `/rooms/archived/${folderId}/filter?folder=${folderId}`;
   } else {
     if (
       rootFolderType === FolderType.SHARE ||
@@ -90,7 +89,7 @@ export const convertDocumentUrl = async (fileId: number | string) => {
 export const getDataSaveAs = async (params: string) => {
   try {
     const data = await request({
-      baseURL: combineUrl(window.DocSpaceConfig?.proxy?.url),
+      baseURL: combineUrl(window.ClientConfig?.proxy?.url),
       method: "get",
       url: `/filehandler.ashx?${params}`,
       responseType: "text",
@@ -102,14 +101,15 @@ export const getDataSaveAs = async (params: string) => {
   }
 };
 
-export const saveAs = (
+export const saveAs = <T = string>(
   title: string,
   url: string,
   folderId: string | number,
   openNewTab: boolean,
+  action = "create",
 ) => {
   const options = {
-    action: "create",
+    action,
     fileuri: url,
     title: title,
     folderid: folderId,
@@ -118,10 +118,10 @@ export const saveAs = (
 
   const params = toUrlParams(options, true);
   if (!openNewTab) {
-    return getDataSaveAs(params);
+    return getDataSaveAs(params) as Promise<T>;
   } else {
     const handlerUrl = combineUrl(
-      window.DocSpaceConfig?.proxy?.url,
+      window.ClientConfig?.proxy?.url,
 
       window["AscDesktopEditor"] !== undefined //FIX Save as with open new tab on DesktopEditors
         ? "/Products/Files/HttpHandlers/"
@@ -154,13 +154,14 @@ export const checkIfFirstSymbolInStringIsRtl = (str: string | null) => {
 };
 
 export const setDocumentTitle = (
+  t: TTranslation,
   subTitle: string | null = null,
   fileType: string,
   documentReady: boolean,
   successAuth: boolean,
   callback?: (value: string) => void,
 ) => {
-  const organizationName = "ONLYOFFICE"; //TODO: Replace to API variant
+  const organizationName = t("Common:OrganizationName");
   const moduleTitle = "Documents"; //TODO: Replace to API variant
 
   let newSubTitle = subTitle;

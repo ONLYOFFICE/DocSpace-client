@@ -27,10 +27,11 @@
 import { observer, inject } from "mobx-react";
 //import { useLocation } from "react-router-dom";
 
+import { Events, FileExtensions } from "@docspace/shared/enums";
+
 import RootFolderContainer from "./RootFolderContainer";
 import EmptyFilterContainer from "./EmptyFilterContainer";
 import EmptyFolderContainer from "./EmptyFolderContainer";
-import { Events } from "@docspace/shared/enums";
 import RoomNoAccessContainer from "./RoomNoAccessContainer";
 
 const linkStyles = {
@@ -65,9 +66,12 @@ const EmptyContainer = ({
 
     const event = new Event(Events.CREATE);
 
+    const isPDF = format === FileExtensions.PDF;
+
     const payload = {
       extension: format,
       id: -1,
+      edit: isPDF,
     };
     event.payload = payload;
 

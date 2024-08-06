@@ -45,6 +45,7 @@ import CommonStore from "./CommonStore";
 
 import ProfileActionsStore from "./ProfileActionsStore";
 import SsoFormStore from "./SsoFormStore";
+import LdapFormStore from "./LdapFormStore";
 
 import FilesStore from "./FilesStore";
 import SelectedFolderStore from "./SelectedFolderStore";
@@ -95,17 +96,12 @@ const paymentStore = new PaymentStore(
   paymentQuotasStore,
 );
 const wizardStore = new WizardStore();
-const setupStore = new SettingsSetupStore(
-  tfaStore,
-  authStore,
-  settingsStore,
-  thirdPartyStore,
-);
 const confirmStore = new ConfirmStore();
 const backupStore = new BackupStore();
 const commonStore = new CommonStore(settingsStore);
 
 const ssoStore = new SsoFormStore();
+const ldapStore = new LdapFormStore(currentQuotaStore);
 
 const tagsStore = new TagsStore();
 
@@ -127,6 +123,14 @@ const filesSettingsStore = new FilesSettingsStore(
   pluginStore,
   authStore,
   settingsStore,
+);
+
+const setupStore = new SettingsSetupStore(
+  tfaStore,
+  authStore,
+  settingsStore,
+  thirdPartyStore,
+  filesSettingsStore,
 );
 
 const accessRightsStore = new AccessRightsStore(
@@ -313,6 +317,8 @@ const store = {
   common: commonStore,
   infoPanelStore,
   ssoStore,
+  ldapStore,
+
   profileActionsStore,
 
   filesStore,

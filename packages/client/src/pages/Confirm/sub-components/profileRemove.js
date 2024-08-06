@@ -36,7 +36,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { StyledPage, StyledBody, StyledContent } from "./StyledConfirm";
 import withLoader from "../withLoader";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
+import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 
 const ProfileRemoveForm = (props) => {
   const { t, greetingTitle, linkData, legalTerms, currentColorScheme } = props;
@@ -63,18 +63,21 @@ const ProfileRemoveForm = (props) => {
     return (
       <StyledPage>
         <StyledContent>
-          <StyledBody>
-            <DocspaceLogo className="docspace-logo" />
+          <StyledBody style={{ whiteSpace: "pre-wrap" }}>
+            <PortalLogo className="portal-logo" />
             <Text fontSize="23px" fontWeight="700" className="title">
               {t("DeleteProfileSuccessMessage")}
             </Text>
             <Text fontSize="16px" fontWeight="600" className="confirm-subtitle">
+              {t("DeleteProfileSuccessDescription", {
+                productName: t("Common:ProductName"),
+              })}
               <Trans
                 i18nKey="DeleteProfileSuccessMessageInfo"
                 ns="Confirm"
                 t={t}
               >
-                See our
+                Please check our
                 <Link
                   fontSize="16px"
                   fontWeight="600"
@@ -85,8 +88,7 @@ const ProfileRemoveForm = (props) => {
                 >
                   Privacy policy
                 </Link>
-                to learn more about deleting your account and the data
-                associated with it.
+                to learn more about deleting your account and associated data.
               </Trans>
             </Text>
           </StyledBody>
@@ -99,7 +101,7 @@ const ProfileRemoveForm = (props) => {
     <StyledPage>
       <StyledContent>
         <StyledBody>
-          <DocspaceLogo className="docspace-logo" />
+          <PortalLogo className="portal-logo" />
           <Text fontSize="23px" fontWeight="700" className="title">
             {greetingTitle}
           </Text>
@@ -119,7 +121,7 @@ const ProfileRemoveForm = (props) => {
                   ns="Confirm"
                   t={t}
                 >
-                  By clicking \"Delete my account\" you agree with our Privacy
+                  By clicking \"Disable my account\" you agree with our Privacy
                   policy
                   <Link
                     type="page"

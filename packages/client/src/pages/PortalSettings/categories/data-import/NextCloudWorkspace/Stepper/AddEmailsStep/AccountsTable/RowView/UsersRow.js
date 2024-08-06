@@ -62,6 +62,7 @@ const UsersRow = (props) => {
       checked={isChecked}
       onClick={handleAccountToggle}
       isDisabled={!isPrevEmailValid}
+      contextButtonSpacerWidth="0"
     >
       <UsersRowContent
         t={t}

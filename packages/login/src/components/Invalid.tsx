@@ -52,7 +52,7 @@ const InvalidError = ({ match }: InvalidErrorProps) => {
   const { t } = useTranslation(["Login", "Errors", "Common"]);
 
   React.useEffect(() => {
-    const url = combineUrl(window.DocSpaceConfig?.proxy?.url, homepage);
+    const url = combineUrl(window.ClientConfig?.proxy?.url, homepage);
     setProxyHomepageUrl(url);
     const timeout = setTimeout(() => {
       router.push("/");
@@ -68,12 +68,21 @@ const InvalidError = ({ match }: InvalidErrorProps) => {
   return (
     <ErrorContainer headerText={errorTitle}>
       <Text fontSize="13px" fontWeight="600">
-        <Trans t={t} i18nKey="ErrorInvalidText">
-          In 10 seconds you will be redirected to the
-          <Link className="error_description_link" href={proxyHomepageUrl}>
-            DocSpace
-          </Link>
-        </Trans>
+        <Trans
+          t={t}
+          i18nKey="ErrorInvalidText"
+          values={{
+            productName: t("Common:ProductName"),
+          }}
+          components={{
+            1: (
+              <Link
+                className="error_description_link"
+                href={proxyHomepageUrl}
+              />
+            ),
+          }}
+        />
       </Text>
     </ErrorContainer>
   );

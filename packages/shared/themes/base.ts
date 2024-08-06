@@ -29,6 +29,7 @@ import AvatarBaseReactSvgUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
 import { globalColors } from "./globalColors";
 import { CommonTheme } from "./commonTheme";
 import { DEFAULT_FONT_FAMILY } from "../constants";
+import { color } from "storybook-static/sb-manager/chunk-INSKDKQB";
 
 export type TColorScheme = {
   id: number;
@@ -665,7 +666,7 @@ export const getBaseTheme = () => {
           b: 38,
           a: 0.2,
         },
-        blur: 10,
+        blur: 9,
       },
 
       content: {
@@ -1020,33 +1021,6 @@ export const getBaseTheme = () => {
       },
       after: {
         border: "none",
-      },
-    },
-
-    tabsContainer: {
-      scrollbar: {
-        width: "100%",
-        height: "44px",
-      },
-
-      label: {
-        height: " 32px",
-        borderRadius: "16px",
-        minWidth: "fit-content",
-        marginRight: "8px",
-        width: "fit-content",
-
-        backgroundColor: blueLightMid,
-        hoverBackgroundColor: grayLight,
-        disableBackgroundColor: grayLightMid,
-
-        title: {
-          margin: "7px 15px 7px 15px",
-          overflow: "hidden",
-          color: white,
-          hoverColor: black,
-          disableColor: grayMid,
-        },
       },
     },
 
@@ -1431,6 +1405,11 @@ export const getBaseTheme = () => {
 
       percent: {
         background: "#4781D1",
+      },
+
+      color: {
+        error: lightErrorStatus,
+        status: black,
       },
     },
 
@@ -2101,6 +2080,8 @@ export const getBaseTheme = () => {
       closeButtonSize: "17px",
       closeButtonBg: "transparent",
 
+      nameColor: "#858585",
+
       links: {
         iconColor: "#3B72A7",
         iconErrorColor: "#F24724",
@@ -2127,6 +2108,9 @@ export const getBaseTheme = () => {
         fileExstColor: "#A3A9AE",
         locationIconColor: "#A3A9AE",
         folderLabelColor: "#A3A9AE",
+        renamedItemColor: "#A3A9AE",
+        oldRoleColor: "#657077",
+        messageColor: "#333333",
       },
 
       details: {
@@ -2391,10 +2375,19 @@ export const getBaseTheme = () => {
       item: {
         hoverBackground: grayLight,
         selectedBackground: lightHover,
+
+        inputButtonBorder: "#D0D5DA",
+        inputButtonBorderHover: grayMain,
+
+        disableTextColor: "#A3A9AE",
       },
 
       emptyScreen: {
         descriptionColor: cyanBlueDarkShade,
+
+        buttonColor: "#657077",
+        hoverButtonColor: "#333333",
+        pressedButtonColor: "#555F65",
       },
     },
 
@@ -2467,18 +2460,20 @@ export const getBaseTheme = () => {
       roomType: {
         listItem: {
           background: "none",
+          hoverBackground: "#F8F9F9",
           borderColor: "#ECEEF1",
           descriptionText: "#A3A9AE",
         },
         dropdownButton: {
           background: "none",
+          hoverBackground: "#F8F9F9",
           borderColor: "#ECEEF1",
           isOpenBorderColor: "#2DA7DB",
           descriptionText: "#A3A9AE",
         },
         dropdownItem: {
           background: "#ffffff",
-          hoverBackground: "#f3f4f4",
+          hoverBackground: "#F8F9F9",
           descriptionText: "#A3A9AE",
         },
         displayItem: {
@@ -2502,11 +2497,6 @@ export const getBaseTheme = () => {
         background: "#f8f9f9",
         isPrivateIcon: "#35ad17",
         descriptionColor: "#555f65",
-      },
-
-      tagInput: {
-        tagBackground: "#ECEEF1",
-        tagHoverBackground: "#F3F4F4",
       },
 
       dropdown: {
@@ -2727,6 +2717,7 @@ export const getBaseTheme = () => {
       upload: {
         color: gray,
         tooltipColor: lightCumulus,
+        iconColor: lightErrorStatus,
 
         shareButton: {
           color: gray,
@@ -3059,7 +3050,8 @@ export const getBaseTheme = () => {
             backgroundColorDark: "#282828",
             greenBackgroundColor: "#40865C",
             blueBackgroundColor: "#446995",
-            orangeBackgroundColor: "#AA5252",
+            orangeBackgroundColor: "#BE6650",
+            redBackgroundColor: "#AA5251",
 
             dataFontColor: white,
             dataFontColorBlack: black,
@@ -3188,12 +3180,23 @@ export const getBaseTheme = () => {
       background: white,
     },
 
-    submenu: {
+    tabs: {
+      gradientColor: white,
       lineColor: "#eceef1",
-      backgroundColor: white,
-      textColor: "#657077",
-      activeTextColor: "#316DAA",
-      bottomLineColor: "#316DAA",
+
+      textColorPrimary: "#657077",
+      activeTextColorPrimary: "",
+      hoverTextColorPrimary: "#A3A9AE",
+      pressedTextColorPrimary: "#555F65",
+      backgroundColorPrimary: white,
+
+      textColorSecondary: "#333333",
+      activeTextColorSecondary: white,
+
+      backgroundColorSecondary: white,
+      hoverBackgroundColorSecondary: "#F3F4F4",
+      pressedBackgroundColorSecondary: "#ECEEF1",
+      activeBackgroundColorSecondary: "#265A8F",
     },
 
     hotkeys: {
@@ -3204,11 +3207,14 @@ export const getBaseTheme = () => {
 
     tag: {
       color: black,
+      deletedColor: "#A3A9AE",
       background: "#f3f4f4",
       hoverBackground: "#eceef1",
       disabledBackground: "#f8f9f9",
+      deletedBackground: "#F8F9F9",
       defaultTagColor: black,
       newTagBackground: "#eceef1",
+      newTagHoverBackground: "#F3F4F4",
     },
 
     profile: {
@@ -3344,6 +3350,22 @@ export const getBaseTheme = () => {
 
     dateTimePicker: {
       colorClockIcon: "#657077",
+    },
+
+    embeddingPanel: {
+      descriptionTextColor: "#657077",
+      iconColor: "#657077",
+    },
+
+    completedForm: {
+      linkColor: "#4781D1",
+      descriptionColor: grayMain,
+
+      labelColor: globalColors.grayMain,
+
+      box: {
+        background: globalColors.grayLight,
+      },
     },
   };
 };

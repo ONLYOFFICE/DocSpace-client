@@ -34,7 +34,7 @@ import React, {
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { DeviceType } from "@docspace/shared/enums";
+import { DeviceType, EmployeeType } from "@docspace/shared/enums";
 import { LOADER_TIMEOUT } from "@docspace/shared/constants";
 
 import { Backdrop } from "@docspace/shared/components/backdrop";
@@ -72,25 +72,18 @@ const InvitePanel = ({
   visible,
   setRoomSecurity,
   getRoomSecurityInfo,
-  getPortalInviteLinks,
-  userLink,
-  guestLink,
-  adminLink,
-  collaboratorLink,
   defaultAccess,
   inviteUsers,
   setInfoPanelIsMobileHidden,
-  updateInfoPanelSelection,
-  addInfoPanelMembers,
+  updateInfoPanelMembers,
+  isRoomMembersPanelOpen,
   setInviteLanguage,
   getUsersList,
   filter,
   currentDeviceType,
 }) => {
   const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
-    () =>
-      ((!userLink || !guestLink || !collaboratorLink) && !adminLink) ||
-      roomId !== -1,
+    roomId !== -1,
   );
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [hasErrors, setHasErrors] = useState(false);
@@ -116,6 +109,33 @@ const InvitePanel = ({
   const onChangeExternalLinksVisible = (visible) => {
     setExternalLinksVisible(visible);
   };
+
+  const accessModel = [
+    {
+      id: "user",
+      title: "User",
+      shareLink: "",
+      access: EmployeeType.User,
+    },
+    {
+      id: "guest",
+      title: "Guest",
+      shareLink: "",
+      access: EmployeeType.Guest,
+    },
+    {
+      id: "admin",
+      title: "Admin",
+      shareLink: "",
+      access: EmployeeType.Admin,
+    },
+    {
+      id: "collaborator",
+      title: "Collaborator",
+      shareLink: "",
+      access: EmployeeType.Collaborator,
+    },
+  ];
 
   const selectRoom = () => {
     const room = folders.find((folder) => folder.id === roomId);
@@ -167,40 +187,7 @@ const InvitePanel = ({
 
   useEffect(() => {
     if (roomId === -1) {
-      if ((!userLink || !guestLink || !collaboratorLink) && !adminLink) {
-        setInvitePanelIsLoading(true);
-        getPortalInviteLinks().finally(() => {
-          disableInvitePanelLoader();
-        });
-      }
-
-      setShareLinks([
-        {
-          id: "user",
-          title: "User",
-          shareLink: userLink,
-          access: 1,
-        },
-        {
-          id: "guest",
-          title: "Guest",
-          shareLink: guestLink,
-          access: 2,
-        },
-        {
-          id: "admin",
-          title: "Admin",
-          shareLink: adminLink,
-          access: 3,
-        },
-        {
-          id: "collaborator",
-          title: "Collaborator",
-          shareLink: collaboratorLink,
-          access: 4,
-        },
-      ]);
-
+      setShareLinks(accessModel);
       return;
     }
 
@@ -208,7 +195,7 @@ const InvitePanel = ({
     Promise.all([selectRoom(), getInfo()]).finally(() => {
       disableInvitePanelLoader(false);
     });
-  }, [roomId, userLink, guestLink, adminLink, collaboratorLink]);
+  }, [roomId]);
 
   useEffect(() => {
     const hasErrors = inviteItems.some((item) => !!item.errors?.length);
@@ -291,28 +278,6 @@ const InvitePanel = ({
 
       setIsLoading(false);
 
-      const invitedViaEmail = data.invitations
-        .filter((inv) => inv.email && !inv.id)
-        .map((invitation) => ({
-          access: invitation.access,
-          sharedTo: {
-            name: invitation.email,
-            userName: invitation.email,
-            email: invitation.email,
-            displayName: invitation.email,
-            status: 1,
-            activationStatus: 2,
-            usedSpace: 0,
-            hasAvatar: false,
-          },
-          canEditAccess: false,
-        }));
-
-      if (isRooms) {
-        const newInfoPanelMembers = [...result.members, ...invitedViaEmail];
-        addInfoPanelMembers(t, newInfoPanelMembers);
-      }
-
       onClose();
       toastr.success(t("Common:UsersInvited"));
 
@@ -320,7 +285,9 @@ const InvitePanel = ({
         toastr.warning(result?.warning);
       }
 
-      updateInfoPanelSelection();
+      if (isRoomMembersPanelOpen) {
+        updateInfoPanelMembers(t);
+      }
     } catch (err) {
       toastr.error(err);
       setIsLoading(false);
@@ -503,17 +470,9 @@ export default inject(
     const { filter } = peopleStore.filterStore;
     const {
       setIsMobileHidden: setInfoPanelIsMobileHidden,
-      updateInfoPanelSelection,
-      addInfoPanelMembers,
+      updateInfoPanelMembers,
+      isRoomMembersPanelOpen,
     } = infoPanelStore;
-
-    const {
-      getPortalInviteLinks,
-      userLink,
-      guestLink,
-      adminLink,
-      collaboratorLink,
-    } = peopleStore.inviteLinksStore;
 
     const {
       inviteItems,
@@ -540,15 +499,10 @@ export default inject(
       visible: invitePanelOptions.visible,
       defaultAccess: invitePanelOptions.defaultAccess,
       getFolderInfo,
-      getPortalInviteLinks,
-      userLink,
-      guestLink,
-      adminLink,
-      collaboratorLink,
       inviteUsers,
       setInfoPanelIsMobileHidden,
-      updateInfoPanelSelection,
-      addInfoPanelMembers,
+      updateInfoPanelMembers,
+      isRoomMembersPanelOpen,
       getUsersList,
       filter,
       currentDeviceType,

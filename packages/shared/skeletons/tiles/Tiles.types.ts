@@ -38,4 +38,5 @@ export interface StyledBottomProps {
 
 export interface TileSkeletonProps extends RectangleSkeletonProps {
   isFolder?: boolean;
+  isRoom?: boolean;
 }

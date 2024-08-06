@@ -40,8 +40,9 @@ const FileNameCell = ({
   theme,
   t,
   inProgress,
+  displayFileExtension,
 }) => {
-  const { title, viewAccessibility } = item;
+  const { title, viewAccessibility, fileExst } = item;
 
   const onChange = (e) => {
     onContentSelect && onContentSelect(e.target.checked, item);
@@ -87,6 +88,9 @@ const FileNameCell = ({
         dir="auto"
       >
         {titleWithoutExt}
+        {displayFileExtension && (
+          <span className="item-file-exst">{fileExst}</span>
+        )}
       </Link>
     </>
   );

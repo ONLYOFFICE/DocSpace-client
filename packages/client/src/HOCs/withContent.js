@@ -151,6 +151,7 @@ export default function withContent(WrappedContent) {
         uploadDataStore,
         publicRoomStore,
         userStore,
+        filesSettingsStore,
       },
       { item },
     ) => {
@@ -170,6 +171,7 @@ export default function withContent(WrappedContent) {
       } = filesStore;
 
       const { isPublicRoom, publicRoomKey } = publicRoomStore;
+      const { displayFileExtension } = filesSettingsStore;
 
       const { clearActiveOperations, fileCopyAs } = uploadDataStore;
       const { isRecycleBinFolder, isPrivacyFolder, isArchiveFolder } =
@@ -218,6 +220,7 @@ export default function withContent(WrappedContent) {
         setCreatedItem,
         isPublicRoom,
         publicRoomKey,
+        displayFileExtension,
       };
     },
   )(observer(WithContent));

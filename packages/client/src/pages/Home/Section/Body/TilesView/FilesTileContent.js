@@ -92,6 +92,10 @@ const SimpleFilesTileContent = styled(TileContent)`
     -webkit-box-orient: vertical;
   }
 
+  .item-file-exst {
+    color: ${(props) => props.theme.filesSection.tableView.fileExstColor};
+  }
+
   ${({ isRooms }) =>
     isRooms &&
     css`
@@ -117,6 +121,7 @@ const FilesTileContent = ({
   theme,
   isRooms,
   currentDeviceType,
+  displayFileExtension,
 }) => {
   const { fileExst, title, viewAccessibility } = item;
 
@@ -142,6 +147,9 @@ const FilesTileContent = ({
           isTextOverflow
         >
           {titleWithoutExt}
+          {displayFileExtension && (
+            <span className="item-file-exst">{fileExst}</span>
+          )}
         </Link>
       </SimpleFilesTileContent>
     </>

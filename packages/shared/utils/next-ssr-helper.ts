@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { headers } from "next/headers";
+import { headers, cookies } from "next/headers";
 
 const API_PREFIX = "api/2.0";
 const APISYSTEM_PREFIX = "apisystem";
@@ -40,16 +40,10 @@ export const getBaseUrl = () => {
   return baseURL;
 };
 
-export const getAPIUrl = (internalRequest: boolean, isApiSystem: boolean) => {
-  const baseUrl = internalRequest
-    ? process.env.API_HOST?.trim() ?? getBaseUrl()
-    : getBaseUrl();
+export const getAPIUrl = (apiSystem?: boolean) => {
+  const baseUrl = process.env.API_HOST?.trim() ?? getBaseUrl();
 
-  // const baseUrl = getBaseUrl();
-
-  const baseAPIUrl = isApiSystem
-    ? `${baseUrl}/${APISYSTEM_PREFIX}`
-    : `${baseUrl}/${API_PREFIX}`;
+  const baseAPIUrl = `${baseUrl}/${!apiSystem ? API_PREFIX : APISYSTEM_PREFIX}`;
 
   return baseAPIUrl;
 };
@@ -59,12 +53,12 @@ export const createRequest = (
   newHeaders: [string, string][],
   method: string,
   body?: string,
-  internalRequest: boolean = true,
-  isApiSystem: boolean = false,
+  apiSystem?: boolean,
 ) => {
   const hdrs = new Headers(headers());
+  const cookieStore = cookies();
 
-  const apiURL = getAPIUrl(internalRequest, isApiSystem);
+  const apiURL = getAPIUrl(apiSystem);
 
   newHeaders.forEach((hdr) => {
     if (hdr[0]) hdrs.set(hdr[0], hdr[1]);
@@ -73,6 +67,28 @@ export const createRequest = (
   const baseURL = getBaseUrl();
 
   if (baseURL && process.env.API_HOST?.trim()) hdrs.set("origin", baseURL);
+
+  // hdrs.set("x-docspace-address", baseURL);
+
+  const authToken = cookieStore.get("asc_auth_key")?.value;
+
+  if (authToken) hdrs.set("Authorization", authToken);
+
+  cookieStore
+    .getAll()
+    .map((c) => {
+      if (c.name.includes("sharelink")) {
+        return c;
+      }
+
+      return false;
+    })
+    .filter((v) => !!v)
+    .forEach((value) => {
+      hdrs.set(value.name, value.value);
+
+      return value;
+    });
 
   const urls = paths.map((path) => `${apiURL}${path}`);
 

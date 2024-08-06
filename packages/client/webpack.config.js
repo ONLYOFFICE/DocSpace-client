@@ -358,6 +358,7 @@ module.exports = (env, argv) => {
         "./RestorePage":
           "./src/pages/PortalSettings/categories/data-management/backup/restore-backup",
         "./PaymentsPage": "./src/pages/PortalSettings/categories/payments",
+        "./BonusPage": "./src/pages/Bonus",
         "./ChangeStorageQuotaDialog":
           "./src/components/dialogs/ChangeStorageQuotaDialog",
       },

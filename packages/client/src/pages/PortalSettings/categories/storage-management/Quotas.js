@@ -27,6 +27,7 @@
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { Trans } from "react-i18next";
+import { useTheme } from "styled-components";
 
 import { isMobile } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
@@ -34,8 +35,8 @@ import { Badge } from "@docspace/shared/components/badge";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import { StyledBaseQuotaComponent, StyledMainTitle } from "./StyledComponent";
-import QuotaPerRoomComponent from "./sub-components/QuotaPerRoom";
-import QuotaPerUserComponent from "./sub-components/QuotaPerUser";
+import { QuotaPerRoomComponentSection } from "./sub-components/QuotaPerRoom";
+import { QuotaPerUserComponentSection } from "./sub-components/QuotaPerUser";
 import MobileQuotasComponent from "./sub-components/MobileQuotas";
 
 const helpLink =
@@ -47,13 +48,14 @@ const QuotaPerItemsComponent = ({ isStatisticsAvailable }) => {
 
   return (
     <>
-      <QuotaPerRoomComponent isDisabled={!isStatisticsAvailable} />
-      <QuotaPerUserComponent />
+      <QuotaPerRoomComponentSection isDisabled={!isStatisticsAvailable} />
+      <QuotaPerUserComponentSection />
     </>
   );
 };
 const QuotasComponent = (props) => {
   const { t } = useTranslation("Settings");
+  const theme = useTheme();
 
   const { isStatisticsAvailable } = props;
 
@@ -66,7 +68,7 @@ const QuotasComponent = (props) => {
 
         {!isStatisticsAvailable && (
           <Badge
-            backgroundColor="#EDC409"
+            backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
             label={t("Common:Paid")}
             className="paid-badge"
             isPaidBadge

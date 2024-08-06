@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { matchPath } from "react-router";
+import { matchPath } from "react-router-dom";
 
 import AccountsFilter from "@docspace/shared/api/people/filter";
 
@@ -39,6 +39,7 @@ const useInsideGroup = ({
   setIsLoading,
   fetchGroup,
   setPortalTariff,
+  scrollToTop,
 }) => {
   const isInsideGroup = matchPath(
     "/accounts/groups/:groupId/filter",
@@ -58,6 +59,7 @@ const useInsideGroup = ({
         if (err?.response?.status === 402) setPortalTariff();
       })
       .finally(() => {
+        scrollToTop();
         setIsLoading(false);
       });
   }, [groupId, location.pathname, location.search]);

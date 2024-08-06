@@ -70,7 +70,7 @@ const RoomsSelectorInput = (props) => {
   } = props;
 
   const [isPanelVisible, setIsPanelVisible] = useState(false);
-  const BasePath = `DocSpace / ${t("Common:Rooms")} `;
+  const BasePath = `${t("Common:ProductName")} / ${t("Common:Rooms")} `;
   const [path, setPath] = useState("");
 
   const handleOnSubmit = (rooms) => {

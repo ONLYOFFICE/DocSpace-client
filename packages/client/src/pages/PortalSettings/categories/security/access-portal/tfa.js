@@ -174,7 +174,9 @@ const TwoFactorAuth = (props) => {
     <MainContainer>
       <LearnMoreWrapper>
         <Text fontSize="13px" fontWeight="400">
-          {t("TwoFactorAuthEnableDescription")}
+          {t("TwoFactorAuthEnableDescription", {
+            productName: t("Common:ProductName"),
+          })}
         </Text>
         <Link
           className="link-learn-more"
@@ -236,7 +238,7 @@ const TwoFactorAuth = (props) => {
   );
 };
 
-export default inject(({ settingsStore, setup, tfaStore }) => {
+export const TfaSection = inject(({ settingsStore, setup, tfaStore }) => {
   const {
     setTfaSettings,
 

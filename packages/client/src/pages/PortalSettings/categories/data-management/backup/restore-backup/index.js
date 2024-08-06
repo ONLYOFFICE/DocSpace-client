@@ -217,14 +217,18 @@ const RestoreBackup = (props) => {
         className="restore-backup_warning-description settings_unavailable"
         noSelect
       >
-        {t("RestoreBackupWarningText")}
+        {t("RestoreBackupWarningText", {
+          productName: t("Common:ProductName"),
+        })}
       </Text>
       {!standalone && (
         <Text
           className="restore-backup_warning-link settings_unavailable"
           noSelect
         >
-          {t("RestoreBackupResetInfoWarningText")}
+          {t("RestoreBackupResetInfoWarningText", {
+            productName: t("Common:ProductName"),
+          })}
         </Text>
       )}
     </>
@@ -294,35 +298,32 @@ const RestoreBackup = (props) => {
   );
 };
 
-export default inject(({ settingsStore, backup, currentQuotaStore }) => {
-  const { currentDeviceType, standalone, checkEnablePortalSettings } =
-    settingsStore;
-  const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
-  const {
-    getProgress,
-    clearProgressInterval,
-    setStorageRegions,
-    setThirdPartyStorage,
-    setConnectedThirdPartyAccount,
-    setRestoreResource,
-  } = backup;
+export const Component = inject(
+  ({ settingsStore, backup, currentQuotaStore }) => {
+    const { currentDeviceType, standalone } = settingsStore;
+    const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
+    const {
+      getProgress,
+      clearProgressInterval,
+      setStorageRegions,
+      setThirdPartyStorage,
+      setConnectedThirdPartyAccount,
+      setRestoreResource,
+    } = backup;
 
-  const buttonSize =
-    currentDeviceType !== DeviceType.desktop ? "normal" : "small";
+    const buttonSize =
+      currentDeviceType !== DeviceType.desktop ? "normal" : "small";
 
-  const isEnableRestore = checkEnablePortalSettings(
-    isRestoreAndAutoBackupAvailable,
-  );
-
-  return {
-    standalone,
-    isEnableRestore,
-    setStorageRegions,
-    setThirdPartyStorage,
-    buttonSize,
-    setConnectedThirdPartyAccount,
-    clearProgressInterval,
-    getProgress,
-    setRestoreResource,
-  };
-})(withTranslation(["Settings", "Common"])(observer(RestoreBackup)));
+    return {
+      standalone,
+      isEnableRestore: isRestoreAndAutoBackupAvailable,
+      setStorageRegions,
+      setThirdPartyStorage,
+      buttonSize,
+      setConnectedThirdPartyAccount,
+      clearProgressInterval,
+      getProgress,
+      setRestoreResource,
+    };
+  },
+)(withTranslation(["Settings", "Common"])(observer(RestoreBackup)));

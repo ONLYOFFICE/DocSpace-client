@@ -33,6 +33,7 @@ export const ImageViewerToolbarWrapper = styled.div`
 
   position: fixed;
   bottom: 24px;
+  // doesn't require mirroring for RTL
   left: 50%;
   z-index: 307;
 

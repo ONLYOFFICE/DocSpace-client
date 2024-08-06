@@ -219,6 +219,7 @@ const QuotaForm = ({
           onSelect={onSelectComboBox}
           showDisabledItems
           manualWidth={"fit-content"}
+          directionY="both"
         />
       </div>
       {checkboxLabel && (

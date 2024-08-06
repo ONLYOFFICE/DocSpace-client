@@ -49,7 +49,7 @@ type Story = StoryObj<typeof Tooltip>;
 
 export default meta;
 
-const bodyStyle = { marginTop: 100, marginLeft: 200 };
+const bodyStyle = { marginTop: 100, marginInlineStart: 200 };
 
 export const Default: Story = {
   render: (args) => {
@@ -122,7 +122,7 @@ export const AllTooltip: Story = {
     return (
       <div>
         <div>
-          <h5 style={{ marginLeft: -5 }}>Hover on me</h5>
+          <h5 style={{ marginInlineStart: -5 }}>Hover on me</h5>
           <Link data-tooltip-id="link" data-tooltip-content="Bob Johnston">
             Bob Johnston
           </Link>
@@ -142,7 +142,7 @@ export const AllTooltip: Story = {
         </Tooltip>
 
         <div>
-          <h5 style={{ marginLeft: -5 }}>Hover group</h5>
+          <h5 style={{ marginInlineStart: -5 }}>Hover group</h5>
           <Link data-tooltip-id="group" data-tooltip-content={0}>
             Bob
           </Link>

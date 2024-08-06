@@ -47,7 +47,9 @@ export const getShareOptions = (t: TTranslation) => {
     {
       internal: true,
       key: "users",
-      label: t("Common:SpaceUsersOnly"),
+      label: t("Common:SpaceUsersOnly", {
+        productName: t("Common:ProductName"),
+      }),
     },
   ];
 };
@@ -112,6 +114,39 @@ export const getAccessOptions = (
   });
 
   return items;
+};
+
+export const getRoomAccessOptions = (t: TTranslation) => {
+  return [
+    {
+      access: ShareAccessRights.Editing,
+      description: t("Translations:RoleEditorDescription"),
+      key: "editing",
+      label: t("Common:Editor"),
+      icon: AccessEditReactSvgUrl,
+    },
+    {
+      access: ShareAccessRights.Review,
+      description: t("Translations:RoleReviewerDescription"),
+      key: "review",
+      label: t("Translations:RoleReviewer"),
+      icon: AccessReviewReactSvgUrl,
+    },
+    {
+      access: ShareAccessRights.Comment,
+      description: t("Translations:RoleCommentatorDescription"),
+      key: "commenting",
+      label: t("Commentator"),
+      icon: AccessCommentReactSvgUrl,
+    },
+    {
+      access: ShareAccessRights.ReadOnly,
+      description: t("Translations:RoleViewerDescription"),
+      key: "viewing",
+      label: t("JavascriptSdk:Viewer"),
+      icon: EyeReactSvgUrl,
+    },
+  ];
 };
 
 export const getExpiredOptions = (

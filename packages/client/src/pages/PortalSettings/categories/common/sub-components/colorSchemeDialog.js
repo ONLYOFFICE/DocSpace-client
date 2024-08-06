@@ -37,16 +37,13 @@ const StyledComponent = styled(ModalDialog)`
   .modal-dialog-aside-footer {
     width: 100%;
     bottom: 0 !important;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            right: 0;
-          `
-        : css`
-            left: 0;
-          `}
+    inset-inline-start: 0;
     padding: 16px;
     box-shadow: 0px 12px 40px rgba(4, 15, 27, 0.12);
+  }
+
+  .new-colors-container {
+    margin-top: 20px;
   }
 
   .flex {
@@ -166,7 +163,7 @@ const ColorSchemeDialog = (props) => {
     >
       <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>
-        <div>
+        <div className="new-colors-container">
           <div className="flex relative">
             <div className="name-color">{t("Settings:AccentColor")}</div>
             <div

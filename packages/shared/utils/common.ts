@@ -31,7 +31,10 @@
 import find from "lodash/find";
 import moment from "moment-timezone";
 import { isMobile } from "react-device-detect";
+import { I18nextProviderProps } from "react-i18next";
 import sjcl from "sjcl";
+
+import { flagsIcons } from "@docspace/shared/utils/image-flags";
 
 import LoginPageSvgUrl from "PUBLIC_DIR/images/logo/loginpage.svg?url";
 import DarkLoginPageSvgUrl from "PUBLIC_DIR/images/logo/dark_loginpage.svg?url";
@@ -59,7 +62,12 @@ import {
   ErrorKeys,
   WhiteLabelLogoType,
 } from "../enums";
-import { LANGUAGE, PUBLIC_MEDIA_VIEW_URL, RTL_LANGUAGES } from "../constants";
+import {
+  COOKIE_EXPIRATION_YEAR,
+  LANGUAGE,
+  PUBLIC_MEDIA_VIEW_URL,
+  RTL_LANGUAGES,
+} from "../constants";
 
 import { TI18n, TTranslation } from "../types";
 import { TUser } from "../api/people/types";
@@ -70,7 +78,7 @@ import TopLoaderService from "../components/top-loading-indicator";
 
 import { Encoder } from "./encoder";
 import { combineUrl } from "./combineUrl";
-import { getCookie } from "./cookie";
+import { getCookie, setCookie } from "./cookie";
 import { checkIsSSR } from "./device";
 
 export const desktopConstants = Object.freeze({
@@ -80,6 +88,7 @@ export const desktopConstants = Object.freeze({
 });
 
 let timer: null | ReturnType<typeof setTimeout> = null;
+type I18n = I18nextProviderProps["i18n"];
 
 export function changeLanguage(i18n: TI18n, currentLng = getCookie(LANGUAGE)) {
   return currentLng
@@ -135,7 +144,7 @@ export const getUserTypeLabel = (
     case "owner":
       return t("Common:Owner");
     case "admin":
-      return t("Common:DocSpaceAdmin");
+      return t("Common:PortalAdmin", { productName: t("Common:ProductName") });
     case "manager":
       return t("Common:RoomAdmin");
     case "collaborator":
@@ -263,8 +272,13 @@ export function showLoader() {
   if (isMobile) return;
 
   hideLoader();
-
   timer = setTimeout(() => TopLoaderService.start(), 500);
+}
+
+export function showProgress() {
+  if (isMobile) return;
+  TopLoaderService.cancel();
+  TopLoaderService.start();
 }
 
 export function isMe(user: TUser, userName: string) {
@@ -288,9 +302,9 @@ export const getUserRole = (user: TUser) => {
     user.access === ShareAccessRights.RoomManager ||
     user.access === ShareAccessRights.Collaborator
   )
-    // TODO: Change to People Product Id const
+    //TODO: Change to People Product Id const
     return "admin";
-  // TODO: Need refactoring
+  //TODO: Need refactoring
   if (user.isVisitor) return "user";
   if (user.isCollaborator) return "collaborator";
   if (user.isRoomAdmin) return "manager";
@@ -483,33 +497,6 @@ export function convertLanguage(key: string) {
   }
 }
 
-export function convertToCulture(key: string) {
-  switch (key) {
-    case "ar":
-      return "ar-SA";
-    case "en":
-      return "en-US";
-    case "el":
-      return "el-GR";
-    case "hy":
-      return "hy-AM";
-    case "ko":
-      return "ko-KR";
-    case "lo":
-      return "lo-LA";
-    case "pt":
-      return "pt-BR";
-    case "uk":
-      return "uk-UA";
-    case "ja":
-      return "ja-JP";
-    case "zh":
-      return "zh-CN";
-    default:
-      return key;
-  }
-}
-
 export function convertToLanguage(key: string) {
   if (!key) return;
 
@@ -584,7 +571,7 @@ export function getOAuthToken(
 
 export function getLoginLink(token: string, code: string) {
   return combineUrl(
-    window.DocSpaceConfig?.proxy?.url,
+    window.ClientConfig?.proxy?.url,
     `/login.ashx?p=${token}&code=${code}`,
   );
 }
@@ -680,11 +667,14 @@ export const getSpaceQuotaAsText = (
   isDefaultQuotaSet: boolean,
 ) => {
   const usedValue = getConvertedQuota(t, usedSpace);
+
+  if (!isDefaultQuotaSet) return usedValue;
+
+  if (!quotaLimit) return usedValue;
+
   const quotaValue = getConvertedQuota(t, quotaLimit);
 
-  if (isDefaultQuotaSet) return `${usedValue} / ${quotaValue}`;
-
-  return usedValue;
+  return `${usedValue} / ${quotaValue}`;
 };
 
 export const conversionToBytes = (size: number, power: number) => {
@@ -1066,10 +1056,108 @@ export const insertDataLayer = (id: string) => {
   window.dataLayer.push({ user_id: id });
 };
 
+export const mapCulturesToArray = (
+  culturesArg: string[],
+  isBetaBadge: boolean = true,
+  i18nArg?: I18n,
+) => {
+  let t = null;
+
+  if (i18nArg) {
+    t = i18nArg.getFixedT(null, "Common");
+  }
+
+  return culturesArg.map((culture, index) => {
+    let iconName = culture;
+
+    switch (culture) {
+      case "sr-Cyrl-RS":
+      case "sr-Latn-RS":
+        iconName = "sr";
+        break;
+      default:
+        break;
+    }
+
+    const icon = flagsIcons?.get(`${iconName}.react.svg`);
+
+    const cultureObj = t
+      ? {
+          key: culture,
+          label: t(`Culture_${culture}`),
+          icon,
+          ...(isBetaBadge && { isBeta: isBetaLanguage(culture) }),
+          index,
+        }
+      : {
+          key: culture,
+          icon,
+          index,
+        };
+
+    return cultureObj;
+  });
+};
+
 export function getLogoUrl(
   logoType: WhiteLabelLogoType,
   dark: boolean = false,
   def: boolean = false,
 ) {
   return `/logo.ashx?logotype=${logoType}&dark=${dark}&default=${def}`;
+}
+
+export const getUserTypeName = (
+  isOwner: boolean,
+  isPortalAdmin: boolean,
+  isRoomAdmin: boolean,
+  isCollaborator: boolean,
+  t: TTranslation,
+) => {
+  if (isOwner) return t("Common:Owner");
+
+  if (isPortalAdmin)
+    return t("Common:PortalAdmin", { productName: t("Common:ProductName") });
+
+  if (isRoomAdmin) return t("Common:RoomAdmin");
+
+  if (isCollaborator) return t("Common:PowerUser");
+
+  return t("Common:User");
+};
+
+export const getUserTypeDescription = (
+  isPortalAdmin: boolean,
+  isRoomAdmin: boolean,
+  isCollaborator: boolean,
+  t: TTranslation,
+) => {
+  if (isPortalAdmin)
+    return t("Translations:RolePortalAdminDescription", {
+      productName: t("Common:ProductName"),
+    });
+
+  if (isRoomAdmin) return t("Translations:RoleRoomAdminDescription");
+
+  if (isCollaborator) return t("Translations:RolePowerUserDescription");
+
+  return t("Translations:RoleViewerDescription");
+};
+export function setLanguageForUnauthorized(culture: string) {
+  setCookie(LANGUAGE, culture, {
+    "max-age": COOKIE_EXPIRATION_YEAR,
+  });
+
+  if (!window) return;
+
+  const url = new URL(window.location.href);
+  const prevCulture = url.searchParams.get("culture");
+
+  if (prevCulture) {
+    const newUrl = window.location.href.replace(`&culture=${prevCulture}`, ``);
+
+    window.history.pushState("", "", newUrl);
+  }
+
+  window.location.reload();
 }

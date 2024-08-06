@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TenantStatus } from "../../enums";
+import { RecaptchaType, TenantStatus } from "../../enums";
 import { TColorScheme } from "../../themes";
 
 export type TTfaType = "sms" | "app" | "none";
@@ -91,7 +91,6 @@ export type TSettings = {
   ownerId: string;
   nameSchemaId: string;
   enableAdmMess: boolean;
-  docSpace: boolean;
   standalone: boolean;
   baseDomain: string;
   passwordHash: TPasswordHash;
@@ -127,6 +126,9 @@ export type TSettings = {
   tagManagerId?: string;
   limitedAccessSpace: boolean;
   enabledJoin?: boolean;
+  recaptchaPublicKey?: string;
+  recaptchaType?: RecaptchaType;
+  maxImageUploadSize: number;
 };
 
 export type TCustomSchema = {
@@ -217,10 +219,12 @@ export type TLoginSettings = {
 
 export type TCapabilities = {
   ldapEnabled: boolean;
+  ldapDomain: string;
   providers: string[];
   ssoLabel: string;
   oauthEnabled: boolean;
   ssoUrl: string;
+  identityServerEnabled: boolean;
 };
 
 export type TThirdPartyProvider = {
@@ -240,3 +244,69 @@ export type TPaymentSettings = {
   };
   max: number;
 };
+
+export type TWorkspaceService = "Workspace" | "GoogleWorkspace" | "Nextcloud";
+export type MigrationOperation = "parse" | "migration";
+
+export type TMigrationGroup = {
+  groupName: string;
+  userUidList: string[];
+  shouldImport: boolean;
+};
+
+export type TImportOptions = {
+  importGroups: boolean;
+  importPersonalFiles: boolean;
+  importSharedFiles: boolean;
+  importSharedFolders: boolean;
+  importCommonFiles: boolean;
+  importProjectFiles: boolean;
+};
+
+export type TMigrationUser = {
+  key: string;
+  email: string;
+  displayName: string;
+  firstName: string;
+  userType: string;
+  migratingFiles: {
+    foldersCount: number;
+    filesCount: number;
+    bytesTotal: number;
+  };
+  shouldImport: boolean;
+};
+
+export type TEnhancedMigrationUser = TMigrationUser & { isDuplicate: boolean };
+
+export type TMigrationStatusResult = {
+  migratorName: TWorkspaceService;
+  operation: MigrationOperation;
+  failedArchives: string[];
+  users: TMigrationUser[];
+  withoutEmailUsers: TMigrationUser[];
+  existUsers: TMigrationUser[];
+  groups: TMigrationGroup[];
+  successedUsers: number;
+  failedUsers: number;
+  files: string[];
+  errors: string[];
+} & TImportOptions;
+
+export type TWorkspaceStatusResponse =
+  | {
+      error: string;
+      isCompleted: boolean;
+      progress: number;
+      parseResult: TMigrationStatusResult;
+    }
+  | undefined;
+
+export type TMigrationData = {
+  users: TMigrationUser[];
+  migratorName: TWorkspaceService;
+} & TImportOptions;
+
+export type TSendWelcomeEmailData = { isSendWelcomeEmail: boolean };
+
+export type TPortalCultures = string[];

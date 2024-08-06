@@ -36,7 +36,11 @@ const ErrorUnavailable = () => {
   return (
     ready && (
       <ErrorUnavailableWrapper>
-        <ErrorContainer headerText={t("ErrorDeactivatedText")} />
+        <ErrorContainer
+          headerText={t("ErrorDeactivatedText", {
+            productName: t("Common:ProductName"),
+          })}
+        />
       </ErrorUnavailableWrapper>
     )
   );

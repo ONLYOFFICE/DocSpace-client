@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect } from "react";
-import { Submenu } from "@docspace/shared/components/submenu";
+import { Tabs } from "@docspace/shared/components/tabs";
 import { useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -35,15 +35,14 @@ import Customization from "./customization";
 import Branding from "./branding";
 import Appearance from "./appearance";
 import withLoading from "SRC_DIR/HOCs/withLoading";
-import LoaderSubmenu from "./sub-components/loaderSubmenu";
+import LoaderTabs from "./sub-components/loaderTabs";
 import { resetSessionStorage } from "../../utils";
 import { DeviceType } from "@docspace/shared/enums";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
-const SubmenuCommon = (props) => {
+const TabsCommon = (props) => {
   const {
     t,
-
     tReady,
     setIsLoadedSubmenu,
     loadBaseInfo,
@@ -68,13 +67,6 @@ const SubmenuCommon = (props) => {
     }
   }, [tReady, isLoadedSubmenu]);
 
-  const load = async () => {
-    const currentTab = getCurrentTab();
-    await loadBaseInfo(
-      !isMobileView ? (currentTab === 0 ? "general" : "branding") : "",
-    );
-  };
-
   const data = [
     {
       id: "general",
@@ -93,37 +85,47 @@ const SubmenuCommon = (props) => {
     },
   ];
 
+  const getCurrentTabId = () => {
+    const path = location.pathname;
+    const currentTab = data.find((item) => path.includes(item.id));
+    return currentTab !== -1 && data.length ? currentTab.id : data[0].id;
+  };
+
+  const currentTabId = getCurrentTabId();
+
+  const load = async () => {
+    await loadBaseInfo(
+      !isMobileView
+        ? currentTabId === "general"
+          ? "general"
+          : "branding"
+        : "",
+    );
+  };
+
   const onSelect = (e) => {
     navigate(
       combineUrl(
-        window.DocSpaceConfig?.proxy?.url,
+        window.ClientConfig?.proxy?.url,
         config.homepage,
         `/portal-settings/customization/${e.id}`,
       ),
     );
   };
 
-  const getCurrentTab = () => {
-    const path = location.pathname;
-    const currentTab = data.findIndex((item) => path.includes(item.id));
-    return currentTab !== -1 ? currentTab : 0;
-  };
-
-  const currentTab = getCurrentTab();
-
-  if (!isLoadedSubmenu) return <LoaderSubmenu />;
+  if (!isLoadedSubmenu) return <LoaderTabs />;
 
   return (
-    <Submenu
-      data={data}
-      startSelect={currentTab}
+    <Tabs
+      items={data}
+      selectedItemId={currentTabId}
       onSelect={(e) => onSelect(e)}
-      topProps={SECTION_HEADER_HEIGHT[currentDeviceType]}
+      stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
     />
   );
 };
 
-export default inject(({ settingsStore, common }) => {
+export const Component = inject(({ settingsStore, common }) => {
   const {
     isLoaded,
     setIsLoadedSubmenu,
@@ -146,4 +148,4 @@ export default inject(({ settingsStore, common }) => {
     currentDeviceType,
     isMobileView,
   };
-})(withLoading(withTranslation("Settings")(observer(SubmenuCommon))));
+})(withLoading(withTranslation("Settings")(observer(TabsCommon))));

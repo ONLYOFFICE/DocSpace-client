@@ -34,6 +34,7 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import { Avatar } from "@docspace/shared/components/avatar";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
+
 const StyledContainer = styled.div`
   display: flex;
   background: ${(props) => props.theme.client.settings.payment.backgroundColor};
@@ -44,35 +45,14 @@ const StyledContainer = styled.div`
   border-radius: 6px;
 
   .payer-info {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 3px;
-          `
-        : css`
-            margin-left: 3px;
-          `}
+    margin-inline-start: 3px;
   }
 
   .payer-info_avatar {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 16px;
-          `
-        : css`
-            margin-right: 16px;
-          `}
+    margin-inline-end: 16px;
   }
   .payer-info {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 3px;
-          `
-        : css`
-            margin-right: 3px;
-          `}
+    margin-inline-end: 3px;
   }
   .payer-info_wrapper {
     height: max-content;
@@ -83,14 +63,7 @@ const StyledContainer = styled.div`
 
     .payer-info_description {
       p {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-left: 3px;
-              `
-            : css`
-                margin-right: 3px;
-              `}
+        margin-inline-end: 3px;
       }
       div {
         display: inline-block;
@@ -125,7 +98,9 @@ const PayerInformationContainer = ({
       tooltipContent={
         <>
           <Text isBold>{t("Payer")}</Text>
-          <Text>{t("PayerDescription")}</Text>
+          <Text>
+            {t("PayerDescription", { productName: t("Common:ProductName") })}
+          </Text>
         </>
       }
     />
@@ -135,13 +110,21 @@ const PayerInformationContainer = ({
     const userNotFound = t("UserNotFoundMatchingEmail") + " ";
 
     let invalidEmailDescription = user.isOwner
-      ? t("InvalidEmailWithActiveSubscription")
-      : t("InvalidEmailWithActiveSubscriptionForAdmin");
+      ? t("InvalidEmailWithActiveSubscription", {
+          productName: t("Common:ProductName"),
+        })
+      : t("InvalidEmailWithActiveSubscriptionForAdmin", {
+          productName: t("Common:ProductName"),
+        });
 
     if (isNotPaidPeriod || isFreeAfterPaidPeriod) {
       invalidEmailDescription = user.isOwner
-        ? t("InvalidEmailWithoutActiveSubscription")
-        : t("InvalidEmailWithoutActiveSubscriptionByAdmin");
+        ? t("InvalidEmailWithoutActiveSubscription", {
+            productName: t("Common:ProductName"),
+          })
+        : t("InvalidEmailWithoutActiveSubscriptionByAdmin", {
+            productName: t("Common:ProductName"),
+          });
 
       return userNotFound + invalidEmailDescription;
     }

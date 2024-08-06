@@ -28,11 +28,10 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 
-import Error520 from "../../../../components/Error520Wrapper";
+import { Error520Component } from "../../../../components/Error520Wrapper";
 import { inject, observer } from "mobx-react";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
-import { Submenu } from "@docspace/shared/components/submenu";
 import PersonalSettings from "./CommonSettings";
 import GeneralSettings from "./AdminSettings";
 import { tablet } from "@docspace/shared/utils";
@@ -76,7 +75,7 @@ const SectionBodyContent = ({ isErrorSettings, user }) => {
 
   //     navigate(
   //       combineUrl(
-  //         window.DocSpaceConfig?.proxy?.url,
+  //         window.ClientConfig?.proxy?.url,
   //         config.homepage,
   //         `/settings/${id}`
   //       )
@@ -88,7 +87,7 @@ const SectionBodyContent = ({ isErrorSettings, user }) => {
   //const showAdminSettings = user.isAdmin || user.isOwner;
 
   return isErrorSettings ? (
-    <Error520 />
+    <Error520Component />
   ) : (
     <StyledContainer>
       <PersonalSettings

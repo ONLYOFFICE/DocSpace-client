@@ -68,7 +68,7 @@ import {
   StyledContent,
 } from "./StyledWizard";
 import { getUserTimezone, getSelectZone } from "./timezonesHelper";
-import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
+import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
 import {
   DEFAULT_SELECT_TIMEZONE,
@@ -187,7 +187,7 @@ const Wizard = (props) => {
 
   useEffect(() => {
     if (!wizardToken)
-      navigate(combineUrl(window.DocSpaceConfig?.proxy?.url, "/"));
+      navigate(combineUrl(window.ClientConfig?.proxy?.url, "/"));
     else fetchData();
   }, []);
 
@@ -318,18 +318,18 @@ const Wizard = (props) => {
       <Scrollbar id="customScrollBar">
         <StyledContent>
           <WizardContainer>
-            <DocspaceLogo className="docspace-logo" />
+            <PortalLogo className="portal-logo" />
             <Text
               as="div"
               fontWeight={700}
               fontSize="23px"
               className="welcome-text"
             >
-              {t("WelcomeTitle")}
+              {t("WelcomeTitle", { productName: t("Common:ProductName") })}
             </Text>
             <FormWrapper>
               <Text fontWeight={600} fontSize="16px" className="form-header">
-                {t("Desc")}
+                {t("Desc", { productName: t("Common:ProductName") })}
               </Text>
               <FieldContainer
                 className="wizard-field"
@@ -522,54 +522,56 @@ const Wizard = (props) => {
   );
 };
 
-export default inject(({ authStore, settingsStore, wizardStore }) => {
-  const {
-    passwordSettings,
-    wizardToken,
-    timezone,
-    urlLicense,
-    hashSettings,
-    setWizardComplete,
-    getPortalTimezones,
-    getPortalPasswordSettings,
-    theme,
-  } = settingsStore;
+export const WrappedComponent = inject(
+  ({ authStore, settingsStore, wizardStore }) => {
+    const {
+      passwordSettings,
+      wizardToken,
+      timezone,
+      urlLicense,
+      hashSettings,
+      setWizardComplete,
+      getPortalTimezones,
+      getPortalPasswordSettings,
+      theme,
+    } = settingsStore;
 
-  const { language } = authStore;
-  const {
-    isWizardLoaded,
-    machineName,
-    isLicenseRequired,
-    licenseUpload,
-    setIsWizardLoaded,
-    getMachineName,
-    getIsRequiredLicense,
+    const { language } = authStore;
+    const {
+      isWizardLoaded,
+      machineName,
+      isLicenseRequired,
+      licenseUpload,
+      setIsWizardLoaded,
+      getMachineName,
+      getIsRequiredLicense,
 
-    setLicense,
-    resetLicenseUploaded,
-  } = wizardStore;
+      setLicense,
+      resetLicenseUploaded,
+    } = wizardStore;
 
-  return {
-    theme,
-    isLoaded: authStore.isLoaded,
-    culture: language,
-    wizardToken,
-    passwordSettings,
-    timezone,
-    urlLicense,
-    hashSettings,
-    isWizardLoaded,
-    machineName,
-    isLicenseRequired,
-    licenseUpload,
-    setWizardComplete,
-    getPortalPasswordSettings,
-    getPortalTimezones,
-    setIsWizardLoaded,
-    getMachineName,
-    getIsRequiredLicense,
+    return {
+      theme,
+      isLoaded: authStore.isLoaded,
+      culture: language,
+      wizardToken,
+      passwordSettings,
+      timezone,
+      urlLicense,
+      hashSettings,
+      isWizardLoaded,
+      machineName,
+      isLicenseRequired,
+      licenseUpload,
+      setWizardComplete,
+      getPortalPasswordSettings,
+      getPortalTimezones,
+      setIsWizardLoaded,
+      getMachineName,
+      getIsRequiredLicense,
 
-    setLicense,
-    resetLicenseUploaded,
-  };
-})(withCultureNames(observer(Wizard)));
+      setLicense,
+      resetLicenseUploaded,
+    };
+  },
+)(withCultureNames(observer(Wizard)));

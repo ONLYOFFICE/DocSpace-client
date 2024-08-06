@@ -1,14 +1,14 @@
 {
   "AppointAdmin": "Designar administradores",
-  "BackupPortal": "Hacer copias de seguridad de los datos de DocSpace",
-  "ChangeInstruction": "Para cambiar el propietario de DocSpace, elija a continuación el nombre del nuevo propietario.",
-  "ChangeOwner": "Cambiar el propietario de DocSpace",
+  "BackupPortal": "Hacer copias de seguridad de los datos de {{productName}}",
+  "ChangeInstruction": "Para cambiar el propietario de {{productName}}, elija a continuación el nombre del nuevo propietario.",
+  "ChangeOwner": "Cambiar el propietario de {{productName}}",
   "ChangeUser": "Cambiar usuario",
-  "DeactivateOrDeletePortal": "Desactivar o eliminar DocSpace",
+  "DeactivateOrDeletePortal": "Desactivar o eliminar {{productName}}",
   "DoTheSame": "Hacer lo mismo que los administradores",
-  "ManagePortal": "Gestionar la configuración de DocSpace",
+  "ManagePortal": "Gestionar la configuración de {{productName}}",
   "ManageUser": "Gestionar las cuentas de usuarios",
-  "NewPortalOwner": "Nuevo propietario de DocSpace",
-  "PortalOwnerCan": "El propietario de DocSpace puede:",
+  "NewPortalOwner": "Nuevo propietario de {{productName}}",
+  "PortalOwnerCan": "El propietario de {{productName}} puede:",
   "SetAccessRights": "Establecer permisos de acceso"
 }

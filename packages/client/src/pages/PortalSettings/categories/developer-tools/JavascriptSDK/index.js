@@ -28,7 +28,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { DOCSPACE } from "@docspace/shared/constants";
+
 import { inject, observer } from "mobx-react";
 
 import { mobile, tablet } from "@docspace/shared/utils/device";
@@ -41,7 +41,7 @@ import { Text } from "@docspace/shared/components/text";
 import CSP from "./sub-components/csp";
 import PresetTile from "./sub-components/PresetTile";
 
-import DocspaceImg from "PUBLIC_DIR/images/sdk-presets_docspace.react.svg?url";
+import PortalImg from "PUBLIC_DIR/images/sdk-presets_portal.react.svg?url";
 import PublicRoomImg from "PUBLIC_DIR/images/sdk-presets_public-room.react.svg?url";
 import RoomSelectorImg from "PUBLIC_DIR/images/sdk-presets_room-selector.react.svg?url";
 import FileSelectorImg from "PUBLIC_DIR/images/sdk-presets_file-selector.react.svg?url";
@@ -49,13 +49,14 @@ import EditorImg from "PUBLIC_DIR/images/sdk-presets_editor.react.svg?url";
 import ViewerImg from "PUBLIC_DIR/images/sdk-presets_viewer.react.svg?url";
 import CustomImg from "PUBLIC_DIR/images/sdk-presets_custom.react.svg?url";
 
-import DocspaceImgDark from "PUBLIC_DIR/images/sdk-presets_docspace_dark.react.svg?url";
+import PortalImgDark from "PUBLIC_DIR/images/sdk-presets_portal_dark.react.svg?url";
 import PublicRoomImgDark from "PUBLIC_DIR/images/sdk-presets_public-room_dark.react.svg?url";
 import RoomSelectorImgDark from "PUBLIC_DIR/images/sdk-presets_room-selector_dark.react.svg?url";
 import FileSelectorImgDark from "PUBLIC_DIR/images/sdk-presets_file-selector_dark.react.svg?url";
 import EditorImgDark from "PUBLIC_DIR/images/sdk-presets_editor_dark.react.svg?url";
 import ViewerImgDark from "PUBLIC_DIR/images/sdk-presets_viewer_dark.react.svg?url";
 import CustomImgDark from "PUBLIC_DIR/images/sdk-presets_custom_dark.react.svg?url";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const SDKContainer = styled(Box)`
   @media ${tablet} {
@@ -117,7 +118,7 @@ const PresetsContainer = styled.div`
 `;
 
 const PortalIntegration = (props) => {
-  const { t, setDocumentTitle, currentColorScheme, sdkLink, theme } = props;
+  const { t, currentColorScheme, sdkLink, theme } = props;
 
   const isSmall = useRef(
     (() => {
@@ -133,7 +134,7 @@ const PortalIntegration = (props) => {
 
   const navigate = useNavigate();
 
-  const navigateToDocspace = () => navigate("docspace");
+  const navigateToPortal = () => navigate("docspace");
   const navigateToPublicRoom = () => navigate("public-room");
   const navigateToCustom = () => navigate("custom");
   const navigateToRoomSelector = () => navigate("room-selector");
@@ -143,13 +144,15 @@ const PortalIntegration = (props) => {
 
   const presetsData = [
     {
-      title: DOCSPACE,
-      description: t("DocspaceDescription"),
-      image: theme.isBase ? DocspaceImg : DocspaceImgDark,
-      handleOnClick: navigateToDocspace,
+      title: t("Common:ProductName"),
+      description: t("PortalDescription", {
+        productName: t("Common:ProductName"),
+      }),
+      image: theme.isBase ? PortalImg : PortalImgDark,
+      handleOnClick: navigateToPortal,
     },
     {
-      title: t("Files:PublicRoom"),
+      title: t("Common:PublicRoom"),
       description: t("PublicRoomDescription"),
       image: theme.isBase ? PublicRoomImg : PublicRoomImgDark,
       handleOnClick: navigateToPublicRoom,
@@ -180,7 +183,9 @@ const PortalIntegration = (props) => {
     },
     {
       title: t("Common:Custom"),
-      description: t("CustomDescription"),
+      description: t("CustomDescription", {
+        productName: t("Common:ProductName"),
+      }),
       image: theme.isBase ? CustomImg : CustomImgDark,
       handleOnClick: navigateToCustom,
     },
@@ -206,7 +211,9 @@ const PortalIntegration = (props) => {
   return (
     <SDKContainer>
       <CategoryDescription>
-        <Text className="sdk-description">{t("SDKDescription")}</Text>
+        <Text className="sdk-description">
+          {t("SDKDescription", { productName: t("Common:ProductName") })}
+        </Text>
         <Link
           color={currentColorScheme?.main?.accent}
           fontSize="13px"
@@ -218,7 +225,9 @@ const PortalIntegration = (props) => {
         </Link>
         <CSP t={t} />
       </CategoryDescription>
-      <CategoryHeader>{t("SelectModeEmbedding")}</CategoryHeader>
+      <CategoryHeader>
+        {t("SelectModeEmbedding", { productName: t("Common:ProductName") })}
+      </CategoryHeader>
       <Text lineHeight="20px" color={theme.sdkPresets.secondaryColor}>
         {t("InitializeSDK")}
       </Text>
@@ -238,13 +247,11 @@ const PortalIntegration = (props) => {
   );
 };
 
-export default inject(({ settingsStore, authStore, publicRoomStore }) => {
-  const { setDocumentTitle } = authStore;
+export default inject(({ settingsStore }) => {
   const { theme, currentColorScheme, sdkLink } = settingsStore;
 
   return {
     theme,
-    setDocumentTitle,
     currentColorScheme,
     sdkLink,
   };

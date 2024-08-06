@@ -36,7 +36,7 @@ const StyledBackdrop = styled.div<BackdropProps & { needBackground: boolean }>`
   ${(props) =>
     props.needBackground &&
     css`
-      backdrop-filter: blur(3px);
+      backdrop-filter: ${`blur(${props.theme.modalDialog.backdrop.blur}px)`};
     `};
 
   display: ${(props) => (props.visible ? "block" : "none")};
@@ -45,6 +45,8 @@ const StyledBackdrop = styled.div<BackdropProps & { needBackground: boolean }>`
   width: 100vw;
 
   z-index: ${(props) => props.zIndex};
+
+  // doesn't require mirroring for RTL
   left: 0;
   top: 0;
   cursor: ${(props) =>

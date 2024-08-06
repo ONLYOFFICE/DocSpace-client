@@ -34,6 +34,7 @@ import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 import GithubLight from "PUBLIC_DIR/images/github.light.react.svg";
 import GithubDark from "PUBLIC_DIR/images/github.dark.react.svg";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 import { StyledContainer } from "./StyledPluginSDK";
 
@@ -47,6 +48,10 @@ const PluginSDK = ({
   theme,
 }) => {
   const { t } = useTranslation(["WebPlugins", "VersionHistory", "Common"]);
+
+  React.useEffect(() => {
+    setDocumentTitle(t("WebPlugins:PluginSDK"));
+  }, []);
 
   const isMobile = currentDeviceType === "mobile";
 
@@ -87,7 +92,9 @@ const PluginSDK = ({
             </Text>
           </div>
         </div>
-        <Text className={"description-text"}>{p.description}</Text>
+        <Text className={"description-text"} title={p.description}>
+          {p.description}
+        </Text>
         <Button
           icon={icon}
           onClick={() => window.open(p.homePage, "_blank")}
@@ -124,7 +131,7 @@ const PluginSDK = ({
         fontWeight={400}
         lineHeight={"20px"}
       >
-        {t("PluginSDKInstruction")}
+        {t("PluginSDKInstruction", { productName: t("Common:ProductName") })}
       </Text>
       <Button
         className={"read-instructions-button"}

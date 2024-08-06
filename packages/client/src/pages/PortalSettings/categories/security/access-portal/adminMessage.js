@@ -174,7 +174,11 @@ const AdminMessage = (props) => {
   return (
     <MainContainer>
       <LearnMoreWrapper>
-        <Text>{t("AdminsMessageSettingDescription")}</Text>
+        <Text>
+          {t("AdminsMessageSettingDescription", {
+            productName: t("Common:ProductName"),
+          })}
+        </Text>
         <Text fontSize="13px" fontWeight="400" className="learn-subtitle">
           <Trans t={t} i18nKey="SaveToApply" />
         </Text>
@@ -230,7 +234,7 @@ const AdminMessage = (props) => {
   );
 };
 
-export default inject(({ settingsStore, setup }) => {
+export const AdminMessageSection = inject(({ settingsStore, setup }) => {
   const {
     enableAdmMess,
     setMessageSettings,

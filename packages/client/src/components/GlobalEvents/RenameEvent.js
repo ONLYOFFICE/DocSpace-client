@@ -108,9 +108,6 @@ const RenameEvent = ({
       : renameFolder(item.id, value)
           .then(() => completeAction(item, type))
           .then(() => {
-            if (selectedFolderId === item.id) {
-              setSelectedFolder({ title: value });
-            }
             toastr.success(
               t("FolderRenamed", {
                 folderTitle: item.title,

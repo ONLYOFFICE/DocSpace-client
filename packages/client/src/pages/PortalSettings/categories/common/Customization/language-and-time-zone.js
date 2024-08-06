@@ -78,7 +78,7 @@ let timezoneDefaultFromSessionStorage = "";
 
 const settingNames = ["language", "timezone"];
 
-const LanguageAndTimeZone = (props) => {
+const LanguageAndTimeZoneComponent = (props) => {
   const {
     i18n,
     language,
@@ -521,7 +521,9 @@ const LanguageAndTimeZone = (props) => {
       )}
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight={400}>
-          {t("TimeLanguageSettingsDescription")}
+          {t("TimeLanguageSettingsDescription", {
+            productName: t("Common:ProductName"),
+          })}
         </Text>
         <Text>
           <Trans t={t} i18nKey="TimeLanguageSettingsSave" />
@@ -555,46 +557,50 @@ const LanguageAndTimeZone = (props) => {
   );
 };
 
-export default inject(({ settingsStore, setup, common, userStore }) => {
-  const {
-    culture,
-    timezone,
-    timezones,
-    nameSchemaId,
-    greetingSettings,
-    cultures,
-    currentColorScheme,
-    languageAndTimeZoneSettingsUrl,
-    deviceType,
-  } = settingsStore;
+export const LanguageAndTimeZoneSettings = inject(
+  ({ settingsStore, setup, common, userStore }) => {
+    const {
+      culture,
+      timezone,
+      timezones,
+      nameSchemaId,
+      greetingSettings,
+      cultures,
+      currentColorScheme,
+      languageAndTimeZoneSettingsUrl,
+      deviceType,
+    } = settingsStore;
 
-  const { user } = userStore;
+    const { user } = userStore;
 
-  const { setLanguageAndTime } = setup;
-  const { isLoaded, setIsLoadedLngTZSettings, initSettings, setIsLoaded } =
-    common;
-  return {
-    user,
-    portalLanguage: culture,
-    portalTimeZoneId: timezone,
-    language: culture,
-    rawTimezones: timezones,
-    greetingSettings,
-    nameSchemaId,
-    setLanguageAndTime,
-    isLoaded,
-    setIsLoadedLngTZSettings,
-    cultures,
-    initSettings,
-    setIsLoaded,
-    currentColorScheme,
-    languageAndTimeZoneSettingsUrl,
-    deviceType,
-  };
-})(
+    const { setLanguageAndTime } = setup;
+    const { isLoaded, setIsLoadedLngTZSettings, initSettings, setIsLoaded } =
+      common;
+    return {
+      user,
+      portalLanguage: culture,
+      portalTimeZoneId: timezone,
+      language: culture,
+      rawTimezones: timezones,
+      greetingSettings,
+      nameSchemaId,
+      setLanguageAndTime,
+      isLoaded,
+      setIsLoadedLngTZSettings,
+      cultures,
+      initSettings,
+      setIsLoaded,
+      currentColorScheme,
+      languageAndTimeZoneSettingsUrl,
+      deviceType,
+    };
+  },
+)(
   withCultureNames(
     withLoading(
-      withTranslation(["Settings", "Common"])(observer(LanguageAndTimeZone)),
+      withTranslation(["Settings", "Common"])(
+        observer(LanguageAndTimeZoneComponent),
+      ),
     ),
   ),
 );

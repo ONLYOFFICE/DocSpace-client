@@ -43,7 +43,9 @@ const PortalRenamingDialog = (props) => {
       onClose={onClose}
       displayType="modal"
     >
-      <ModalDialog.Header>{t("Settings:PortalRenaming")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {t("Settings:PortalRenaming", { productName: t("Common:ProductName") })}
+      </ModalDialog.Header>
       <ModalDialog.Body>
         <Text fontSize="13px" fontWeight={400} noSelect>
           {t("Settings:PortalRenamingModalText")}

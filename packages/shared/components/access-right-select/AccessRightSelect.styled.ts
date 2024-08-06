@@ -33,15 +33,27 @@ import { ComboBox } from "../combobox";
 
 const StyledWrapper = styled(ComboBox)`
   .combo-button {
-    padding-left: 8px;
-    padding-right: 8px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl" &&
-      css`
-        padding-left: 8px;
-        padding-right: 8px;
-      `}
+    padding-inline: 8px;
   }
+
+  ${({ type, theme }) =>
+    type === "onlyIcon" &&
+    css`
+      .combo-button {
+        padding-right: 4px;
+      }
+
+      .combo-button_selected-icon-container {
+        margin-right: 0px;
+      }
+
+      .combo-buttons_arrow-icon,
+      .combo-button_selected-icon-container {
+        svg path {
+          fill: ${theme.iconButton.color};
+        }
+      }
+    `}
 
   @media ${mobile} {
     .backdrop-active {
@@ -84,8 +96,16 @@ const StyledItemDescription = styled.div`
 
 StyledItemDescription.defaultProps = { theme: Base };
 
-const StyledItemIcon = styled.img`
-  margin-right: 8px;
+const StyledItemIcon = styled.img<{ isShortenIcon?: boolean }>`
+  margin-inline-end: 8px;
+
+  ${({ isShortenIcon }) =>
+    isShortenIcon &&
+    css`
+      padding-top: 2px;
+      width: 12px;
+      height: 12px;
+    `}
 `;
 
 const StyledItemContent = styled.div`

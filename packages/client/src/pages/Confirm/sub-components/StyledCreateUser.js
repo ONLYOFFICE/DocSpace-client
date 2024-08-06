@@ -42,7 +42,6 @@ export const StyledCreateUserContent = styled.div`
 export const GreetingContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: left;
   height: 100%;
   width: ${DESKTOP_WIDTH}px;
 
@@ -63,7 +62,7 @@ export const GreetingContainer = styled.div`
     }
   }
 
-  .docspace-logo {
+  .portal-logo {
     width: 100%;
     padding-bottom: 16px;
     height: 26.56px;
@@ -146,14 +145,7 @@ export const RegisterContainer = styled.div`
         max-width: 60px;
         text-overflow: ellipsis;
         overflow: hidden;
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                right: 0;
-              `
-            : css`
-                left: 0;
-              `};
+        inset-inline-start: 0;
         display: flex;
         gap: 4px;
 

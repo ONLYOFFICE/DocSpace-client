@@ -39,9 +39,11 @@ import { createPasswordHash } from "@docspace/shared/utils/common";
 import { login } from "@docspace/shared/utils/loginUtils";
 import { getPasswordErrorMessage } from "@docspace/shared/utils/getPasswordErrorMessage";
 
-import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
+import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import withLoader from "../withLoader";
 import { StyledPage, StyledBody, StyledContent } from "./StyledConfirm";
+import ConfirmRoute from "SRC_DIR/helpers/confirmRoute";
+import { ALLOWED_PASSWORD_CHARACTERS } from "@docspace/shared/constants";
 
 const ChangePasswordForm = (props) => {
   const {
@@ -140,7 +142,7 @@ const ChangePasswordForm = (props) => {
     <StyledPage>
       <StyledContent>
         <StyledBody>
-          <DocspaceLogo className="docspace-logo" />
+          <PortalLogo className="portal-logo" />
           <Text fontSize="23px" fontWeight="700" className="title">
             {greetingTitle}
           </Text>
@@ -154,9 +156,7 @@ const ChangePasswordForm = (props) => {
                 isVertical={true}
                 labelVisible={false}
                 hasError={isPasswordErrorShow && !passwordValid}
-                errorMessage={`${t(
-                  "Common:PasswordLimitMessage",
-                )}: ${getPasswordErrorMessage(t, settings)}`}
+                errorMessage={t("Common:IncorrectPassword")}
               >
                 <PasswordInput
                   simpleView={false}
@@ -187,6 +187,7 @@ const ChangePasswordForm = (props) => {
                     "Common:PasswordLimitSpecialSymbols",
                   )}`}
                   generatePasswordTitle={t("Wizard:GeneratePassword")}
+                  tooltipAllowedCharacters={`${t("Common:AllowedCharacters")}: ${ALLOWED_PASSWORD_CHARACTERS}`}
                 />
               </FieldContainer>
             </div>
@@ -207,7 +208,7 @@ const ChangePasswordForm = (props) => {
   );
 };
 
-export default inject(({ authStore, settingsStore, setup }) => {
+const ComponentWrapper = inject(({ authStore, settingsStore, setup }) => {
   const {
     greetingSettings,
     hashSettings,
@@ -233,3 +234,11 @@ export default inject(({ authStore, settingsStore, setup }) => {
     withLoader(observer(ChangePasswordForm)),
   ),
 );
+
+export const Component = () => {
+  return (
+    <ConfirmRoute>
+      <ComponentWrapper />
+    </ConfirmRoute>
+  );
+};

@@ -74,7 +74,7 @@ const UserInput = styled.div`
 
 const StyledDropDown = styled(DropDown)`
   ${(props) => props.width && `width: ${props.width}px`};
-  left: 0;
+  inset-inline-start: 0;
 
   .list-item {
     display: flex;
@@ -95,16 +95,14 @@ const SearchItemText = styled(Text)`
   text-overflow: ellipsis;
   overflow: hidden;
   font-size: ${(props) =>
-    props.theme.getCorrectFontSize(
-      props.primary ? "14px" : props.info ? "11px" : "12px",
-    )};
+    props.primary ? "14px" : props.info ? "11px" : "12px"};
   font-weight: ${(props) => (props.primary || props.info ? "600" : "400")};
 
   color: ${(props) =>
     (props.primary && !props.disabled) || props.info
       ? props.theme.text.color
       : props.theme.text.emailColor};
-  ${(props) => props.info && `margin-left: auto`}
+  ${(props) => props.info && `margin-inline-start: auto`}
 `;
 
 SearchItemText.defaultProps = { theme: Base };
@@ -115,22 +113,22 @@ export const FilterBlock = ({ t, config, setConfig }) => {
   const roomTypeOptions = [
     {
       key: "room-filling-form-collaboration",
-      label: t("CreateEditRoomDialog:FormFilingRoomTitle"),
+      label: t("Common:FormFilingRoomTitle"),
       roomType: RoomsType.FormRoom,
     },
     {
       key: "room-type-collaboration",
-      label: t("CreateEditRoomDialog:CollaborationRoomTitle"),
+      label: t("Common:CollaborationRoomTitle"),
       roomType: RoomsType.EditingRoom,
     },
     {
       key: "room-type-public",
-      label: t("Files:PublicRoom"),
+      label: t("Common:PublicRoom"),
       roomType: RoomsType.PublicRoom,
     },
     {
       key: "room-type-custom",
-      label: t("CreateEditRoomDialog:CustomRoomTitle"),
+      label: t("Common:CustomRoomTitle"),
       roomType: RoomsType.CustomRoom,
     },
   ];
@@ -138,7 +136,7 @@ export const FilterBlock = ({ t, config, setConfig }) => {
   const filterOptions = [
     {
       key: "filter-type-all",
-      label: t("Files:AllFiles"),
+      label: t("Translations:Files"),
       typeKey: FilterType.FilesOnly,
     },
     {
@@ -177,14 +175,9 @@ export const FilterBlock = ({ t, config, setConfig }) => {
       typeKey: FilterType.MediaOnly,
     },
     {
-      key: "filter-type-forms-templates",
-      label: t("Files:FormsTemplates"),
-      typeKey: FilterType.OFormTemplateOnly,
-    },
-    {
       key: "filter-type-forms",
       label: t("Files:Forms"),
-      typeKey: FilterType.OFormOnly,
+      typeKey: FilterType.Pdf,
     },
   ];
 

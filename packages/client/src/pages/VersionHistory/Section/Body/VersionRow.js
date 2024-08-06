@@ -85,6 +85,7 @@ const VersionRow = (props) => {
     currentDeviceType,
     openUrl,
     setIsVerHistoryPanel,
+    openOnNewPage,
   } = props;
 
   const navigate = useNavigate();
@@ -101,7 +102,9 @@ const VersionRow = (props) => {
 
   const versionDate = getCorrectDate(culture, info.updated, "L", "LTS");
 
-  const title = `${Encoder.htmlDecode(info.updatedBy?.displayName)}`;
+  const title = info.updatedBy?.isAnonim
+    ? t("Common:Anonymous")
+    : `${Encoder.htmlDecode(info.updatedBy?.displayName)}`;
 
   const onDownloadAction = () =>
     openUrl(`${info.viewUrl}&version=${info.version}`, UrlActionType.Download);
@@ -144,7 +147,7 @@ const VersionRow = (props) => {
     if (MediaView || ImageView) {
       return window.open(
         combineUrl(MEDIA_VIEW_URL, info.id),
-        window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self",
+        openOnNewPage ? "_blank" : "_self",
       );
     }
 
@@ -169,10 +172,7 @@ const VersionRow = (props) => {
       }
     }
 
-    window.open(
-      info.webUrl,
-      window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self",
-    );
+    window.open(info.webUrl, openOnNewPage ? "_blank" : "_self");
   };
 
   const onRestoreClick = () => {
@@ -280,16 +280,27 @@ const VersionRow = (props) => {
             >
               {versionDate}
             </Link>
-            <Link
-              onClick={onUserClick}
-              fontWeight={600}
-              fontSize="14px"
-              title={title}
-              isTextOverflow={true}
-              className="version-link-file"
-            >
-              {title}
-            </Link>
+            {info.updatedBy?.isAnonim ? (
+              <Text
+                fontWeight={600}
+                color={theme.filesVersionHistory.color}
+                fontSize="14px"
+                title={title}
+              >
+                {title}
+              </Text>
+            ) : (
+              <Link
+                onClick={onUserClick}
+                fontWeight={600}
+                fontSize="14px"
+                title={title}
+                isTextOverflow={true}
+                className="version-link-file"
+              >
+                {title}
+              </Link>
+            )}
           </Box>
 
           {/*<Text
@@ -364,6 +375,7 @@ export default inject(
     pluginStore,
     infoPanelStore,
     userStore,
+    filesSettingsStore,
   }) => {
     const { user } = userStore;
     const { openUser, setIsVisible } = infoPanelStore;
@@ -386,6 +398,8 @@ export default inject(
     const isEdit = isEditingVersion || isEditing;
     const canChangeVersionFileHistory = !isEdit && fileSecurity?.EditHistory;
 
+    const { openOnNewPage } = filesSettingsStore;
+
     return {
       currentDeviceType,
       fileItemsList,
@@ -402,6 +416,7 @@ export default inject(
       setIsVisible,
       openUrl,
       setIsVerHistoryPanel,
+      openOnNewPage,
     };
   },
 )(

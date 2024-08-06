@@ -29,13 +29,7 @@ import { Base } from "@docspace/shared/themes";
 import TileContent from "./sub-components/TileContent";
 import { ContextMenu } from "@docspace/shared/components/context-menu";
 
-import {
-  tablet,
-  desktop,
-  mobile,
-  mobileMore,
-  getCorrectFourValuesStyle,
-} from "@docspace/shared/utils";
+import { tablet, desktop, mobile, mobileMore } from "@docspace/shared/utils";
 
 const FlexBoxStyles = css`
   display: flex;
@@ -82,16 +76,7 @@ const StyledTile = styled.div`
     width: 32px;
     height: 32px;
 
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 16px;
-            margin-left: 8px;
-          `
-        : css`
-            margin-left: 16px;
-            margin-right: 8px;
-          `}
+    margin-inline: 16px 8px;
   }
 
   .p-contextmenu {
@@ -102,7 +87,7 @@ const StyledTile = styled.div`
       width: 100%;
       top: auto;
       bottom: 0;
-      left: 0;
+      inset-inline-start: 0;
     }
   }
 `;
@@ -162,11 +147,7 @@ const StyledFileTileBottom = styled.div`
 
   .tile-file-loader {
     padding-top: 4px;
-
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `padding-right: 3px;`
-        : `padding-left: 3px;`}
+    padding-inline-start: 3px;
   }
 `;
 
@@ -200,10 +181,7 @@ const StyledElement = styled.div`
   flex: 0 0 auto;
   display: flex;
 
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `margin-left: 4px;`
-      : `margin-right: 4px;`}
+  margin-inline-end: 4px;
   user-select: none;
   margin-top: 3px;
 
@@ -215,8 +193,8 @@ const StyledOptionButton = styled.div`
   display: block;
 
   .expandButton > div:first-child {
-    padding: ${({ theme }) =>
-      getCorrectFourValuesStyle("8px 21px 8px 12px", theme.interfaceDirection)};
+    padding-block: 8px;
+    padding-inline: 12px 21px;
   }
 `;
 
@@ -234,10 +212,7 @@ const SimpleFilesTileContent = styled(TileContent)`
   }
 
   .badge {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-left: 8px;`
-        : `margin-right: 8px;`}
+    margin-inline-end: 8px;
     cursor: pointer;
     height: 16px;
     width: 16px;
@@ -245,9 +220,7 @@ const SimpleFilesTileContent = styled(TileContent)`
 
   .new-items {
     position: absolute;
-
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl" ? `left: 29px;` : `right: 29px;`}
+    inset-inline-end: 29px;
     top: 19px;
   }
 
@@ -258,11 +231,7 @@ const SimpleFilesTileContent = styled(TileContent)`
 
   .share-icon {
     margin-top: -4px;
-
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `padding-left: 8px;`
-        : `padding-right: 8px;`}
+    padding-inline-end: 8px;
   }
 
   .favorite,
@@ -286,10 +255,7 @@ const SimpleFilesTileContent = styled(TileContent)`
 
 const paddingCss = css`
   @media ${desktop} {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `padding-left: 3px;`
-        : `padding-right: 3px;`}
+    padding-inline-end: 3px;
   }
 `;
 
@@ -313,7 +279,7 @@ const StyledTileContainer = styled.div`
   height: 100%;
 
   @media ${tablet} {
-    margin-right: 0px !important;
+    margin-inline-end: 0 !important;
   }
 
   .tile-item-wrapper {
@@ -340,10 +306,7 @@ const StyledTileContainer = styled.div`
       cursor: pointer !important;
 
       .sort-combo-box {
-        ${({ theme }) =>
-          theme.interfaceDirection === "rtl"
-            ? `margin-left: 3px;`
-            : `margin-right: 3px;`}
+        margin-inline-end: 3px;
         .dropdown-container {
           top: 104%;
           bottom: auto;
@@ -366,7 +329,7 @@ const StyledTileContainer = styled.div`
               display: none;
               cursor: pointer;
               ${(props) =>
-                props.isDesc &&
+                !props.isDesc &&
                 css`
                   transform: rotate(180deg);
                 `}
@@ -405,10 +368,7 @@ const StyledTileContainer = styled.div`
           color: ${(props) => props.theme.filterInput.sort.tileSortColor};
 
           .sort-icon {
-            ${({ theme }) =>
-              theme.interfaceDirection === "rtl"
-                ? `margin-left: 8px;`
-                : `margin-right: 8px;`}
+            margin-inline-end: 8px;
             svg {
               path {
                 fill: ${(props) => props.theme.filterInput.sort.tileSortFill};
@@ -425,10 +385,7 @@ const StyledTileContainer = styled.div`
   }
 
   @media ${tablet} {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-left: -3px;`
-        : `margin-right: -3px;`}
+    margin-inline-end: -3px;
   }
 `;
 
@@ -458,7 +415,7 @@ const StyledContextMenu = styled(ContextMenu)`
     height: min-content;
     top: auto !important;
     bottom: 0;
-    left: 0;
+    inset-inline-start: 0;
     width: 100%;
   }
 `;

@@ -64,10 +64,10 @@ const DEFAULT_SEARCH_AREA = RoomSearchArea.Active;
 const TAGS = "tags";
 const DEFAULT_TAGS = null;
 
-const SORT_BY = "sortby";
+const SORT_BY = "sortBy";
 const DEFAULT_SORT_BY = "DateAndTime";
 
-const SORT_ORDER = "sortorder";
+const SORT_ORDER = "sortOrder";
 const DEFAULT_SORT_ORDER = "descending";
 
 const EXCLUDE_SUBJECT = "excludeSubject";
@@ -85,13 +85,29 @@ const DEFAULT_QUOTA_FILTER = null;
 const STORAGE_FILTER = "storageFilter";
 const DEFAULT_STORAGE_FILTER = null;
 
+export const toJSON = (filter) => {
+  const filterObject = transform(
+    filter,
+    (result, value, key) => {
+      if (value instanceof Function) return result;
+      if (value === null || value === false) return result;
+
+      result[key] = value;
+    },
+    {},
+  );
+
+  return JSON.stringify(filterObject);
+};
+
 class RoomsFilter {
-  static getDefault(userId) {
+  static getDefault(userId, searchArea) {
     const defaultFilter = new RoomsFilter(
       DEFAULT_PAGE,
       DEFAULT_PAGE_COUNT,
       DEFAULT_TOTAL,
     );
+    defaultFilter.searchArea = searchArea || DEFAULT_SEARCH_AREA;
 
     if (userId) {
       try {
@@ -263,19 +279,6 @@ class RoomsFilter {
     return this.page > 0;
   };
 
-  toJSON = (filter) => {
-    const filterObject = transform(
-      filter,
-      (result, value, key) => {
-        if (value instanceof Function) return result;
-        if (value === null || value === false) return result;
-        result[key] = value;
-      },
-      {},
-    );
-    return JSON.stringify(filterObject);
-  };
-
   toApiUrlParams = () => {
     const {
       page,
@@ -421,7 +424,7 @@ class RoomsFilter {
     if (!sharedStorageFilter && userId) {
       localStorage.setItem(
         `UserRoomsSharedFilter=${userId}`,
-        this.toJSON(defaultFilter),
+        toJSON(defaultFilter),
       );
     }
 
@@ -429,11 +432,11 @@ class RoomsFilter {
       defaultFilter.searchArea = RoomSearchArea.Archive;
       localStorage.setItem(
         `UserRoomsArchivedFilter=${userId}`,
-        this.toJSON(defaultFilter),
+        toJSON(defaultFilter),
       );
     }
 
-    const filterJSON = this.toJSON(dtoFilter);
+    const filterJSON = toJSON(dtoFilter);
 
     const currentStorageFilter =
       dtoFilter.searchArea === RoomSearchArea.Active

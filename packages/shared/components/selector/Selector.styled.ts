@@ -28,11 +28,13 @@ import styled, { css } from "styled-components";
 
 import ArrowRightSvg from "PUBLIC_DIR/images/arrow.right.react.svg";
 
+import { Tabs } from "../tabs";
 import { Base } from "../../themes";
+import { mobile } from "../../utils/device";
 
 import { ComboBox } from "../combobox";
 import { Text } from "../text";
-import { Submenu } from "../submenu";
+
 import { AccessRightSelect } from "../access-right-select";
 
 const accessComboboxStyles = css`
@@ -61,7 +63,7 @@ const StyledSelector = styled.div`
   overflow: hidden;
 `;
 
-const StyledHeader = styled.div`
+const StyledHeader = styled.div<{ withoutBorder: boolean }>`
   width: calc(100% - 32px);
   min-height: 53px;
   height: 53px;
@@ -69,21 +71,22 @@ const StyledHeader = styled.div`
 
   padding: 0 16px;
 
-  border-bottom: ${(props) => props.theme.selector.border};
+  ${(props) =>
+    props.withoutBorder
+      ? "border-bottom: none;"
+      : `border-bottom: ${props.theme.selector.border};`}
 
   display: flex;
   align-items: center;
 
   .arrow-button {
     cursor: pointer;
-    margin-right: 12px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl" &&
-      css`
-        margin-left: 12px;
-        margin-right: 0px;
-        transform: scaleX(-1);
-      `}
+    margin-inline-end: 12px;
+
+    svg {
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+    }
   }
 
   .heading-text {
@@ -107,13 +110,13 @@ const StyledBody = styled.div<{
   height: ${(props) =>
     props.footerVisible
       ? props.withHeader
-        ? `calc(100% - 16px - ${props.footerHeight}px - ${props.headerHeight}px)`
-        : `calc(100% - 16px - ${props.footerHeight}px)`
+        ? `calc(100% - ${props.footerHeight}px - ${props.headerHeight}px)`
+        : `calc(100% - ${props.footerHeight}px)`
       : props.withHeader
-        ? `calc(100% - 16px - ${props.headerHeight}px)`
-        : `calc(100% - 16px)`};
+        ? `calc(100% - ${props.headerHeight}px)`
+        : "100%"};
 
-  padding: ${({ withTabs }) => (withTabs ? "8px 0 0 0" : "16px 0 0 0")};
+  padding: ${({ withTabs }) => (withTabs ? "0" : "16px 0 0")};
 
   .search-input,
   .search-loader {
@@ -131,6 +134,10 @@ const StyledBody = styled.div<{
     padding: 0 16px;
 
     color: ${(props) => props.theme.selector.bodyDescriptionText};
+  }
+
+  .selector_info-bar {
+    margin: 0px 20px 16px;
   }
 `;
 
@@ -156,18 +163,12 @@ const StyledSelectAll = styled.div`
   }
 
   .label {
-    width: 100%;
-    max-width: 100%;
+    // width: 100%;
+    // max-width: 100%;
 
     line-height: 16px;
 
-    margin-left: 8px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl" &&
-      css`
-        margin-left: 0;
-        margin-right: 8px;
-      `}
+    margin-inline-start: 8px;
   }
 
   .checkbox {
@@ -186,6 +187,7 @@ const StyledItem = styled.div<{
   isSelected: boolean | undefined;
   isDisabled?: boolean;
   isMultiSelect: boolean;
+  noHover?: boolean;
 }>`
   display: flex;
   align-items: center;
@@ -193,6 +195,10 @@ const StyledItem = styled.div<{
   padding: 0 16px;
 
   box-sizing: border-box;
+
+  .room-logo__container {
+    margin: 0;
+  }
 
   .room-logo,
   .user-avatar {
@@ -206,25 +212,31 @@ const StyledItem = styled.div<{
   }
 
   .label {
-    width: 100%;
-    max-width: 100%;
+    // width: 100%;
+    // max-width: 100%;
 
-    line-height: ${({ theme }) =>
-      theme.interfaceDirection === "rtl" ? `20px` : `18px`};
+    line-height: 18px;
 
-    margin-left: 8px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl" &&
-      css`
-        margin-left: 0;
-        margin-right: 8px;
-      `}
+    margin-inline-start: 8px;
+  }
+
+  .clicked-label {
+    width: fit-content;
+    cursor: pointer;
+  }
+
+  .input-component {
+    margin-inline-start: 8px;
   }
 
   .checkbox {
     svg {
       margin-inline-end: 0px;
     }
+  }
+
+  .item-logo {
+    min-width: 32px;
   }
 
   ${(props) =>
@@ -236,7 +248,7 @@ const StyledItem = styled.div<{
           }
 
           .label {
-            color: #a3a9ae;
+            color: ${props.theme.selector.item.disableTextColor};
           }
 
           .disabled-text {
@@ -245,12 +257,13 @@ const StyledItem = styled.div<{
         `
       : css`
           ${props.isSelected && !props.isMultiSelect && selectedCss}
-          @media (hover: hover) {
+          ${!props.noHover &&
+          ` @media (hover: hover) {
             &:hover {
               cursor: pointer;
               background: ${props.theme.selector.item.hoverBackground};
             }
-          }
+          }`}
         `}
 `;
 
@@ -265,6 +278,40 @@ const StyledEmptyScreen = styled.div<{ withSearch: boolean }>`
   padding: 0 28px;
 
   box-sizing: border-box;
+
+  .buttons {
+    position: relative;
+
+    width: 100%;
+
+    margin-top: 32px;
+
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+
+    .empty-folder_container-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .empty-folder_link {
+        color: ${(props) => props.theme.selector.emptyScreen.buttonColor};
+      }
+
+      &:hover {
+        .empty-folder_link {
+          color: ${(props) =>
+            props.theme.selector.emptyScreen.hoverButtonColor};
+        }
+
+        svg path {
+          fill: ${(props) => props.theme.selector.emptyScreen.hoverButtonColor};
+        }
+      }
+    }
+  }
 
   .empty-image {
     max-width: 72px;
@@ -294,6 +341,65 @@ const StyledEmptyScreen = styled.div<{ withSearch: boolean }>`
   }
 `;
 
+const StyledNewEmptyScreen = styled.section`
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  padding: 0 28px;
+
+  box-sizing: border-box;
+
+  .empty-image {
+    margin-top: 64px;
+  }
+
+  .empty-header {
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 700;
+    text-align: center;
+
+    margin: 0;
+
+    margin-top: 32px;
+  }
+
+  .empty-description {
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+
+    margin-top: 8px;
+
+    color: ${(props) => props.theme.selector.emptyScreen.pressedButtonColor};
+  }
+
+  .empty_button-wrapper {
+    display: flex;
+    justify-content: flex-start;
+
+    align-self: flex-start;
+
+    align-items: center;
+    gap: 16px;
+
+    padding: 12px 0;
+    margin-top: 16px;
+  }
+
+  .empty-button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .empty-button-label {
+    cursor: pointer;
+  }
+`;
+
 const StyledBreadCrumbs = styled.div<{
   itemsCount: number;
   gridTemplateColumns: string;
@@ -301,7 +407,7 @@ const StyledBreadCrumbs = styled.div<{
   width: 100%;
   height: 38px;
 
-  padding: 0 16px 16px 16px;
+  padding: 0 16px 16px;
 
   box-sizing: border-box;
 
@@ -325,7 +431,10 @@ const StyledBreadCrumbs = styled.div<{
 
 StyledBreadCrumbs.defaultProps = { theme: Base };
 
-const StyledItemText = styled(Text)<{ isCurrent: boolean; isLoading: boolean }>`
+const StyledItemText = styled(Text)<{
+  isCurrent: boolean;
+  isLoading?: boolean;
+}>`
   ${(props) =>
     !props.isCurrent &&
     css`
@@ -338,11 +447,9 @@ const StyledItemText = styled(Text)<{ isCurrent: boolean; isLoading: boolean }>`
 StyledItemText.defaultProps = { theme: Base };
 
 const StyledArrowRightSvg = styled(ArrowRightSvg)`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl" &&
-    css`
-      transform: scaleX(-1);
-    `}
+  ${({ theme }) =>
+    theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+
   path {
     fill: ${(props) => props.theme.selector.breadCrumbs.arrowRightColor};
   }
@@ -373,6 +480,8 @@ const StyledFooter = styled.div<{
         : "73px"};
 
   padding: 0 16px;
+
+  background-color: ${(props) => props.theme.backgroundColor};
 
   border-top: ${(props) => props.theme.selector.border};
 
@@ -415,7 +524,7 @@ const StyledAccessSelector = styled(AccessRightSelect)`
   ${accessComboboxStyles}
 `;
 
-const StyledTabs = styled(Submenu)`
+const StyledTabs = styled(Tabs)`
   padding: 0 16px;
   margin-bottom: 16px;
 
@@ -440,15 +549,89 @@ const StyledInfo = styled.div`
   }
 `;
 
+const StyledInputWrapper = styled.div`
+  width: 32px;
+  height: 32px;
+
+  margin-inline-start: 8px;
+
+  border: 1px solid ${(props) => props.theme.selector.item.inputButtonBorder};
+  border-radius: 3px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  :hover {
+    div {
+      cursor: pointer;
+    }
+    cursor: pointer;
+
+    border-color: ${(props) =>
+      props.theme.selector.item.inputButtonBorderHover};
+
+    path {
+      fill: ${(props) => props.theme.selector.item.inputButtonBorderHover};
+    }
+  }
+`;
+
+// fix empty container padding with calc +24px
+const StyledCreateDropDown = styled.div<{ isEmpty: boolean }>`
+  width: ${(props) =>
+    props.isEmpty ? `calc(100% + 24px)` : `calc(100% - 32px)`};
+  height: fit-content;
+
+  position: absolute;
+
+  top: ${(props) => (props.isEmpty ? "32px" : "48px")};
+  inset-inline-start: ${(props) => (props.isEmpty ? "-12px" : "16px")};
+  z-index: 453;
+
+  padding-top: 8px;
+
+  background-color: ${(props) => props.theme.backgroundColor};
+
+  display: flex;
+  flex-direction: column;
+
+  box-sizing: border-box;
+
+  border: 1px solid;
+  border-color: ${(props) => props.theme.selector.item.inputButtonBorder};
+  border-radius: 6px;
+
+  box-shadow: ${(props) => props.theme.dropDown.boxShadow};
+
+  overflow: hidden;
+
+  @media ${mobile} {
+    width: 100%;
+
+    position: fixed;
+    top: unset;
+    bottom: 0;
+    inset-inline: 0;
+
+    border-radius: 6px 6px 0 0;
+  }
+`;
+
 StyledSelector.defaultProps = { theme: Base };
 StyledHeader.defaultProps = { theme: Base };
 StyledBody.defaultProps = { theme: Base };
 StyledSelectAll.defaultProps = { theme: Base };
 StyledItem.defaultProps = { theme: Base };
 StyledEmptyScreen.defaultProps = { theme: Base };
+StyledNewEmptyScreen.defaultProps = { theme: Base };
 StyledArrowRightSvg.defaultProps = { theme: Base };
 StyledComboBox.defaultProps = { theme: Base };
 StyledInfo.defaultProps = { theme: Base };
+StyledInputWrapper.defaultProps = { theme: Base };
+StyledCreateDropDown.defaultProps = { theme: Base };
 
 export {
   StyledSelector,
@@ -468,4 +651,7 @@ export {
   StyledTabs,
   StyledInfo,
   StyledAccessSelector,
+  StyledInputWrapper,
+  StyledCreateDropDown,
+  StyledNewEmptyScreen,
 };

@@ -29,7 +29,7 @@ import { observer, inject } from "mobx-react";
 import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import Section from "@docspace/shared/components/section";
 import { Loader } from "@docspace/shared/components/loader";
-import { ValidationStatus } from "../../helpers/constants";
+import { ValidationStatus } from "@docspace/shared/enums";
 import SectionWrapper from "SRC_DIR/components/Section";
 import RoomPassword from "./sub-components/RoomPassword";
 import RoomErrors from "./sub-components/RoomErrors";
@@ -127,7 +127,7 @@ const PublicRoom = (props) => {
   );
 };
 
-export default inject(
+export const WrappedComponent = inject(
   ({
     settingsStore,
     publicRoomStore,

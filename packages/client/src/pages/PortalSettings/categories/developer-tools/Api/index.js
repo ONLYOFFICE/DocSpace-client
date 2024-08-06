@@ -38,13 +38,15 @@ import ApiSvgUrl from "PUBLIC_DIR/images/settings.api.svg?url";
 import ApiDarkSvgUrl from "PUBLIC_DIR/images/settings.api.dark.svg?url";
 import { DeviceType } from "@docspace/shared/enums";
 
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+
 const EmptyContainer = styled(EmptyScreenContainer)`
   .ec-header {
     font-size: 23px;
   }
 
   .ec-image {
-    margin-right: 22px;
+    margin-inline-end: 22px;
     margin-top: 22px;
 
     @media ${mobile} {
@@ -60,7 +62,7 @@ const EmptyContainer = styled(EmptyScreenContainer)`
 `;
 
 const Api = (props) => {
-  const { t, setDocumentTitle, theme, apiBasicLink, currentDeviceType } = props;
+  const { t, theme, apiBasicLink, currentDeviceType } = props;
 
   const imgSrc = theme.isBase ? ApiSvgUrl : ApiDarkSvgUrl;
 
@@ -79,7 +81,10 @@ const Api = (props) => {
             scale={currentDeviceType === DeviceType.mobile}
           />
         }
-        descriptionText={t("ApiPageDescription")}
+        descriptionText={t("ApiPageDescription", {
+          productName: t("Common:ProductName"),
+          organizationName: t("Common:OrganizationName"),
+        })}
         headerText={t("ApiPageHeader")}
         imageAlt={t("ApiPageHeader")}
         imageSrc={imgSrc}
@@ -88,13 +93,11 @@ const Api = (props) => {
   );
 };
 
-export default inject(({ authStore, settingsStore }) => {
-  const { setDocumentTitle } = authStore;
+export default inject(({ settingsStore }) => {
   const { theme, apiBasicLink, currentDeviceType } = settingsStore;
 
   return {
     theme,
-    setDocumentTitle,
     apiBasicLink,
     currentDeviceType,
   };

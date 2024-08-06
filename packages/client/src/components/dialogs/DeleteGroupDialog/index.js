@@ -66,7 +66,7 @@ const DeleteGroupDialog = (props) => {
       if (hasMoreGroups) {
         onDeleteAllGroups(t);
       } else {
-        onDeleteGroup(t, bufferSelection?.id || selection[0].id);
+        onDeleteGroup(t, bufferSelection?.id || selection[0]?.id);
       }
     } catch (err) {
       toastr.error(err.message);
@@ -88,8 +88,13 @@ const DeleteGroupDialog = (props) => {
       <ModalDialog.Body>
         <Text>
           {hasMoreGroups
-            ? t("DeleteDialog:DeleteAllGroupDescription")
-            : t("DeleteDialog:DeleteGroupDescription", { groupName })}
+            ? t("DeleteDialog:DeleteAllGroupDescription", {
+                productName: t("Common:ProductName"),
+              })
+            : t("DeleteDialog:DeleteGroupDescription", {
+                productName: t("Common:ProductName"),
+                groupName,
+              })}
         </Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>

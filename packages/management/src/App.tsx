@@ -26,14 +26,14 @@
 
 import { observer } from "mobx-react";
 import React, { useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { isMobileOnly } from "react-device-detect";
 
 import { ThemeKeys } from "@docspace/shared/enums";
 import { Toast } from "@docspace/shared/components/toast";
 import { Portal } from "@docspace/shared/components/portal";
 import AppLoader from "@docspace/shared/components/app-loader";
-import Error403 from "@docspace/shared/components/errors/Error403";
+import { Error403 } from "@docspace/shared/components/errors/Error403";
 
 import tryRedirectTo from "@docspace/shared/utils/tryRedirectTo";
 
@@ -53,10 +53,14 @@ declare global {
   }
 }
 
+let isPaymentPageUnavailable = true;
+let isBonusPageUnavailable = true;
+
 const App = observer(() => {
   const { authStore, userStore, settingsStore } = useStore();
+  const location = useLocation();
 
-  const { init } = authStore;
+  const { init, isCommunity, isLoaded } = authStore;
   const { setTheme, limitedAccessSpace, timezone } = settingsStore;
 
   window.timezone = timezone;
@@ -77,6 +81,21 @@ const App = observer(() => {
     if (userTheme) setTheme(userTheme);
   }, [userTheme]);
 
+  isPaymentPageUnavailable = location.pathname === "/payments" && isCommunity;
+  isBonusPageUnavailable = location.pathname === "/bonus" && !isCommunity;
+
+  useEffect(() => {
+    if (!isLoaded) return;
+
+    if (isPaymentPageUnavailable) {
+      window.location.replace("/management/bonus");
+    }
+
+    if (isBonusPageUnavailable) {
+      window.location.replace("/management/payments");
+    }
+  }, [isLoaded]);
+
   const rootElement = document.getElementById("root") as HTMLElement;
 
   const toast = isMobileOnly ? (
@@ -85,10 +104,12 @@ const App = observer(() => {
     <Toast />
   );
 
-  if (!settingsStore?.isLoaded) return <AppLoader />;
+  if (!isLoaded || isPaymentPageUnavailable || isBonusPageUnavailable)
+    return <AppLoader />;
 
   if ((userStore?.user && !userStore?.user?.isAdmin) || limitedAccessSpace)
     return <Error403 />;
+
   if (userStore?.isLoaded && !userStore?.user)
     return tryRedirectTo(window.location.origin);
 

@@ -1,7 +1,11 @@
 {
-  "Auto": "آلي",
-  "CodeCopySuccess": "تم نسخ الرمز إلى الحافظة",
-  "EmbedCode": "كود التضمين",
+  "CodeSuccessfullyCopied": "تم نسخ الرمز المراد إدراجه بنجاح إلى الحافظة",
+  "ContentRestricted": "يتم تقييد نسخ المحتوى وتنزيل الملفات والطباعة.",
+  "DisplaySettings": "عرض الإعدادات",
+  "EmbeddingBarAllowList": "أضف عنوان URL لموقع الويب للتضمين في <1>قائمة السماح</1>.",
+  "EmbeddingBarDescription": "لن يعمل التضمين إلا مع عناوين URL المحددة بواسطة مشرف {{productName}} في إعدادات JavaScript SDK.",
   "Height": "الطول",
+  "Link": "الرابط",
+  "LinkProtectedWithPassword": "الرابط محمي بكلمة مرور.",
   "Width": "العرض"
 }

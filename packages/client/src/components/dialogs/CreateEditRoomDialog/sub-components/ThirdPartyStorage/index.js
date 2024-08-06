@@ -78,7 +78,7 @@ const ThirdPartyStorage = ({
 }) => {
   const channel = useRef(new BroadcastChannel("thirdpartyActivation"));
   channel.current.onmessage = (shouldRender) => {
-    shouldRender && fetchConnectingStorages()
+    shouldRender && fetchConnectingStorages();
   };
 
   const onChangeIsThirdparty = () => {
@@ -86,7 +86,11 @@ const ThirdPartyStorage = ({
 
     if (!connectItems.length) {
       const data = isRoomAdmin ? (
-        <Text as="p">{t("ThirdPartyStorageRoomAdminNoStorageAlert")}</Text>
+        <Text as="p">
+          {t("ThirdPartyStorageRoomAdminNoStorageAlert", {
+            productName: t("Common:ProductName"),
+          })}
+        </Text>
       ) : (
         <Text as="p">
           {t("ThirdPartyStorageNoStorageAlert")}{" "}

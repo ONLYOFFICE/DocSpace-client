@@ -38,8 +38,8 @@ import styled from "styled-components";
 
 const StyledGalleryContextOptions = styled.div`
   height: 16px;
-  margin: ${({ theme }) =>
-    theme.interfaceDirection === "rtl" ? "0 8px 0 0" : "0 0 0 8px"};
+  margin-block: 0;
+  margin-inline: 8px 0;
 `;
 
 const GalleryItemTitle = ({
@@ -70,7 +70,7 @@ const GalleryItemTitle = ({
 
   return (
     <StyledTitle ref={itemTitleRef}>
-      <ReactSVG className="icon" src={getIcon(32, ".docxf")} />
+      <ReactSVG className="icon" src={getIcon(32, ".pdf")} />
       <Text className="text">{gallerySelected?.attributes?.name_form}</Text>
 
       <Text color={currentColorScheme.main?.accent} className="free-label">

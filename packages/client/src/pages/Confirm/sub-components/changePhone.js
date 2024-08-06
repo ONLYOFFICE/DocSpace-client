@@ -34,7 +34,8 @@ import { inject, observer } from "mobx-react";
 import { StyledPage, StyledBody, StyledContent } from "./StyledConfirm";
 import withLoader from "../withLoader";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
+import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
+import ConfirmRoute from "SRC_DIR/helpers/confirmRoute";
 
 const ChangePhoneForm = (props) => {
   const { t, greetingTitle } = props;
@@ -44,7 +45,7 @@ const ChangePhoneForm = (props) => {
     <StyledPage>
       <StyledContent>
         <StyledBody>
-          <DocspaceLogo className="docspace-logo" />
+          <PortalLogo className="portal-logo" />
           <Text fontSize="23px" fontWeight="700" className="title">
             {greetingTitle}
           </Text>
@@ -57,7 +58,9 @@ const ChangePhoneForm = (props) => {
               <Text>
                 {t("CurrentNumber")}: {currentNumber}
               </Text>
-              <Text>{t("PhoneSubtitle")}</Text>
+              <Text>
+                {t("PhoneSubtitle", { productName: t("Common:ProductName") })}
+              </Text>
             </div>
 
             <TextInput
@@ -88,6 +91,14 @@ const ChangePhoneForm = (props) => {
   );
 };
 
-export default inject(({ settingsStore }) => ({
+const ComponentWrapper = inject(({ settingsStore }) => ({
   greetingTitle: settingsStore.greetingSettings,
 }))(withTranslation("Confirm")(withLoader(observer(ChangePhoneForm))));
+
+export const Component = () => {
+  return (
+    <ConfirmRoute>
+      <ComponentWrapper />
+    </ConfirmRoute>
+  );
+};

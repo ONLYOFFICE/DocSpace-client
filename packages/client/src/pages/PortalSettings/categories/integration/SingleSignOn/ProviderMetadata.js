@@ -72,8 +72,8 @@ const ProviderMetadata = (props) => {
 
   const checkWidth = () => {
     window.innerWidth > size.mobile &&
-      location.pathname.includes("sp-metadata") &&
-      navigate("/portal-settings/integration/single-sign-on");
+      location.pathname.includes("metadata") &&
+      navigate("/portal-settings/integration/sso");
   };
 
   return (
@@ -122,14 +122,16 @@ const ProviderMetadata = (props) => {
   );
 };
 
-export default inject(({ ssoStore, settingsStore, currentQuotaStore }) => {
-  const { downloadMetadata } = ssoStore;
-  const { currentDeviceType } = settingsStore;
-  const { isSSOAvailable } = currentQuotaStore;
+export const ProviderMetadataSection = inject(
+  ({ ssoStore, settingsStore, currentQuotaStore }) => {
+    const { downloadMetadata } = ssoStore;
+    const { currentDeviceType } = settingsStore;
+    const { isSSOAvailable } = currentQuotaStore;
 
-  return {
-    downloadMetadata,
-    currentDeviceType,
-    isSSOAvailable,
-  };
-})(observer(ProviderMetadata));
+    return {
+      downloadMetadata,
+      currentDeviceType,
+      isSSOAvailable,
+    };
+  },
+)(observer(ProviderMetadata));

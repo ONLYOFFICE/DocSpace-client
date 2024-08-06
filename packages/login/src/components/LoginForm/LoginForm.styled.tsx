@@ -35,7 +35,8 @@ export const StyledCaptcha = styled.div<{ isCaptchaError: boolean }>`
       props.isCaptchaError &&
       css`
         border: ${props.theme.login.captcha.border};
-        padding: 4px 4px 4px 2px;
+        padding-block: 4px;
+        padding-inline: 2px 4px;
       `};
 
     margin-bottom: 2px;

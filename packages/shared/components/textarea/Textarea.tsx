@@ -27,7 +27,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import copy from "copy-to-clipboard";
 
-import { Toast, toastr } from "../toast";
+import { toastr } from "../toast";
 
 import {
   StyledTextarea,
@@ -146,14 +146,12 @@ const Textarea = ({
         className={className}
         style={style}
         isDisabled={isDisabled}
-        hasError={isError}
+        hasError={isError || hasError}
         heightScale={heightScale}
         heightTextAreaProp={stringifiedHeight}
         isFullHeight={isFullHeight}
         fullHeight={fullHeight}
       >
-        <Toast />
-
         {hasNumeration && (
           <Numeration fontSize={`${fontSize}px`}>
             {numerationValue.join("\n")}

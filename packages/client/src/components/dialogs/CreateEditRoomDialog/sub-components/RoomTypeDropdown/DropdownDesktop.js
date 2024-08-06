@@ -27,8 +27,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import RoomType from "../RoomType";
-
+import RoomType from "@docspace/shared/components/room-type";
 import { Base } from "@docspace/shared/themes";
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
 
@@ -49,8 +48,7 @@ const StyledDropdownDesktop = styled.div`
     z-index: 400;
     top: 0;
 
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl" ? `right: 0;` : `left: 0;`}
+    inset-inline-start: 0;
     box-sizing: border-box;
     width: 100%;
     position: absolute;

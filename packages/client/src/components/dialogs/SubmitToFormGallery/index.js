@@ -76,7 +76,7 @@ const SubmitToFormGallery = ({
 
     setIsSubmitting(true);
 
-    const origin = combineUrl(window.DocSpaceConfig?.proxy?.url);
+    const origin = combineUrl(window.ClientConfig?.proxy?.url);
     const fileSrc = `${origin}/filehandler.ashx?action=download&fileid=${formItem.id}`;
 
     const file = await fetch(fileSrc)

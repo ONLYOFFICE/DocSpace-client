@@ -41,7 +41,7 @@ import ErrorContainer from "@docspace/shared/components/error-container/ErrorCon
 import { mobile, tablet } from "@docspace/shared/utils";
 import { Link } from "@docspace/shared/components/link";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
+import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import { StyledPage, StyledContent } from "./StyledConfirm";
 import {
   getTfaSecretKeyAndQR,
@@ -49,6 +49,7 @@ import {
 } from "@docspace/shared/api/settings";
 import { loginWithTfaCode } from "@docspace/shared/api/user";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import ConfirmRoute from "SRC_DIR/helpers/confirmRoute";
 
 const StyledForm = styled(Box)`
   margin: 56px auto;
@@ -70,10 +71,7 @@ const StyledForm = styled(Box)`
     flex-direction: column;
     gap: 0px;
 
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `padding-left: 8px;`
-        : `padding-right: 8px;`}
+    padding-inline-end: 8px;
   }
 
   .app-code-wrapper {
@@ -84,7 +82,7 @@ const StyledForm = styled(Box)`
     }
   }
 
-  .docspace-logo {
+  .portal-logo {
     padding-bottom: 40px;
 
     @media ${tablet} {
@@ -124,10 +122,7 @@ const StyledForm = styled(Box)`
     margin-top: 8px;
   }
 `;
-const PROXY_BASE_URL = combineUrl(
-  window.DocSpaceConfig?.proxy?.url,
-  "/profile",
-);
+const PROXY_BASE_URL = combineUrl(window.ClientConfig?.proxy?.url, "/profile");
 
 const TfaActivationForm = withLoader((props) => {
   const {
@@ -194,12 +189,17 @@ const TfaActivationForm = withLoader((props) => {
       <StyledContent>
         <StyledForm className="set-app-container">
           <Box className="set-app-description" marginProp="0 0 32px 0">
-            <DocspaceLogo className="docspace-logo" />
+            <PortalLogo className="portal-logo" />
             <Text isBold fontSize="14px" className="set-app-title">
               {t("SetAppTitle")}
             </Text>
 
-            <Trans t={t} i18nKey="SetAppDescription" ns="Confirm">
+            <Trans
+              t={t}
+              i18nKey="SetAppDescription"
+              ns="Confirm"
+              productName={t("Common:ProductName")}
+            >
               The two-factor authentication is enabled to provide additional
               portal security. Configure your authenticator application to
               continue work on the portal. For example you could use Google
@@ -343,7 +343,7 @@ const TfaActivationWrapper = (props) => {
   );
 };
 
-export default inject(({ settingsStore, confirm, tfaStore }) => ({
+const ComponentWrapper = inject(({ settingsStore, confirm, tfaStore }) => ({
   setIsLoaded: confirm.setIsLoaded,
   setIsLoading: confirm.setIsLoading,
   tfaAndroidAppUrl: tfaStore.tfaAndroidAppUrl,
@@ -351,3 +351,11 @@ export default inject(({ settingsStore, confirm, tfaStore }) => ({
   tfaWinAppUrl: tfaStore.tfaWinAppUrl,
   currentColorScheme: settingsStore.currentColorScheme,
 }))(withTranslation(["Confirm", "Common"])(observer(TfaActivationWrapper)));
+
+export const Component = () => {
+  return (
+    <ConfirmRoute>
+      <ComponentWrapper />
+    </ConfirmRoute>
+  );
+};

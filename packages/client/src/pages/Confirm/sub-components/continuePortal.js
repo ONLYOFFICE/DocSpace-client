@@ -43,7 +43,9 @@ import {
 import withLoader from "../withLoader";
 
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import DocspaceLogo from "@docspace/shared/components/docspace-logo/DocspaceLogo";
+import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
+import ConfirmRoute from "SRC_DIR/helpers/confirmRoute";
+import { AuthenticatedAction } from "SRC_DIR/helpers/enums";
 
 const ContinuePortal = (props) => {
   const { t, greetingTitle, linkData } = props;
@@ -69,7 +71,7 @@ const ContinuePortal = (props) => {
     <StyledPage>
       <StyledContent>
         <StyledBody>
-          <DocspaceLogo className="docspace-logo" />
+          <PortalLogo className="portal-logo" />
           <Text fontSize="23px" fontWeight="700" className="title">
             {greetingTitle}
           </Text>
@@ -87,7 +89,11 @@ const ContinuePortal = (props) => {
               </Text>
             ) : (
               <>
-                <Text className="subtitle">{t("PortalContinueTitle")}</Text>
+                <Text className="subtitle">
+                  {t("PortalContinueTitle", {
+                    productName: t("Common:ProductName"),
+                  })}
+                </Text>
                 <ButtonsWrapper>
                   <Button
                     primary
@@ -114,9 +120,17 @@ const ContinuePortal = (props) => {
   );
 };
 
-export default inject(({ settingsStore }) => ({
+const ComponentWrapper = inject(({ settingsStore }) => ({
   greetingTitle: settingsStore.greetingSettings,
   theme: settingsStore.theme,
 }))(
   withTranslation(["Confirm", "Common"])(withLoader(observer(ContinuePortal))),
 );
+
+export const Component = () => {
+  return (
+    <ConfirmRoute doAuthenticated={AuthenticatedAction.Logout}>
+      <ComponentWrapper />
+    </ConfirmRoute>
+  );
+};

@@ -33,7 +33,8 @@ import {
   TThirdPartyProvider,
 } from "@docspace/shared/api/settings/types";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
-import { ThemeKeys } from "@docspace/shared/enums";
+import { IClientProps } from "@docspace/shared/utils/oauth/types";
+import { RecaptchaType, ThemeKeys } from "@docspace/shared/enums";
 
 export type TDataContext = {
   settings?: TSettings;
@@ -43,7 +44,6 @@ export type TDataContext = {
 
 export type GreetingContainersProps = {
   greetingSettings?: string;
-  logoUrl?: string;
 };
 
 export type LoginProps = {
@@ -54,6 +54,7 @@ export type LoginProps = {
   thirdPartyProvider?: TThirdPartyProvider[];
   ssoSettings?: TGetSsoSettings;
   systemTheme?: ThemeKeys;
+  cultures: string[];
 };
 
 export type RegisterProps = {
@@ -84,7 +85,10 @@ export type RegisterModalDialogProps = {
 export type LoginFormProps = {
   hashSettings?: TPasswordHash;
   reCaptchaPublicKey?: string;
+  reCaptchaType?: RecaptchaType;
   cookieSettingsEnabled: boolean;
+  clientId?: string;
+  client?: IClientProps;
 };
 
 export type ForgotPasswordModalDialogProps = {

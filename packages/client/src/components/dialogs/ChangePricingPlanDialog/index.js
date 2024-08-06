@@ -71,7 +71,8 @@ const ChangePricingPlanDialog = ({
       <Trans t={t} i18nKey="PlanUsersLimit" ns="DowngradePlanDialog">
         You wish to downgrade the team to
         <strong>{{ usersCount: managersCount }}</strong>
-        admins/power users, and current number of such users in your DocSpace is
+        admins/power users, and current number of such users in your
+        {{ productName: t("Common:ProductName") }} is
         <strong>{{ currentUsersCount: addedManagersCount }}</strong>
       </Trans>
     </Text>

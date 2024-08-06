@@ -26,6 +26,7 @@
 
 import CombinedShapeSvgUrl from "PUBLIC_DIR/images/combined.shape.svg?url";
 import React, { useState, useEffect, useCallback } from "react";
+import { useTheme } from "styled-components";
 import { withTranslation } from "react-i18next";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
@@ -65,7 +66,7 @@ const buttonProps = {
   primary: true,
 };
 let timerId = null;
-const DNSSettings = (props) => {
+const DNSSettingsComponent = (props) => {
   const {
     t,
     isMobileView,
@@ -95,6 +96,8 @@ const DNSSettings = (props) => {
   const [isLoading, setIsLoading] = useState();
   const [isError, setIsError] = useState(false);
   const [errorText, setErrorText] = useState("");
+
+  const theme = useTheme();
 
   useEffect(() => {
     setDocumentTitle(t("DNSSettings"));
@@ -287,7 +290,7 @@ const DNSSettings = (props) => {
             <Badge
               className="paid-badge"
               fontWeight="700"
-              backgroundColor="#EDC409"
+              backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
               label={t("Common:Paid")}
               isPaidBadge={true}
             />
@@ -314,46 +317,52 @@ const DNSSettings = (props) => {
   );
 };
 
-export default inject(({ settingsStore, common, currentQuotaStore }) => {
-  const {
-    helpLink,
-    currentColorScheme,
-    standalone,
-    dnsSettingsUrl,
-    currentDeviceType,
-  } = settingsStore;
-  const {
-    isLoaded,
-    setIsLoadedDNSSettings,
-    initSettings,
-    setIsLoaded,
-    dnsSettings,
-    setIsEnableDNS,
-    setDNSName,
-    saveDNSSettings,
-    isDefaultDNS,
-  } = common;
+export const DNSSettings = inject(
+  ({ settingsStore, common, currentQuotaStore }) => {
+    const {
+      helpLink,
+      currentColorScheme,
+      standalone,
+      dnsSettingsUrl,
+      currentDeviceType,
+    } = settingsStore;
+    const {
+      isLoaded,
+      setIsLoadedDNSSettings,
+      initSettings,
+      setIsLoaded,
+      dnsSettings,
+      setIsEnableDNS,
+      setDNSName,
+      saveDNSSettings,
+      isDefaultDNS,
+    } = common;
 
-  const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
-  const { customObj } = dnsSettings;
-  const { dnsName, enable } = customObj;
+    const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
+    const { customObj } = dnsSettings;
+    const { dnsName, enable } = customObj;
 
-  return {
-    isDefaultDNS,
-    dnsName: dnsName || "",
-    enable,
-    setDNSName,
-    isLoaded,
-    setIsLoadedDNSSettings,
-    helpLink,
-    initSettings,
-    setIsLoaded,
-    isSettingPaid: isBrandingAndCustomizationAvailable,
-    currentColorScheme,
-    standalone,
-    setIsEnableDNS,
-    saveDNSSettings,
-    dnsSettingsUrl,
-    currentDeviceType,
-  };
-})(withLoading(withTranslation(["Settings", "Common"])(observer(DNSSettings))));
+    return {
+      isDefaultDNS,
+      dnsName: dnsName || "",
+      enable,
+      setDNSName,
+      isLoaded,
+      setIsLoadedDNSSettings,
+      helpLink,
+      initSettings,
+      setIsLoaded,
+      isSettingPaid: isBrandingAndCustomizationAvailable,
+      currentColorScheme,
+      standalone,
+      setIsEnableDNS,
+      saveDNSSettings,
+      dnsSettingsUrl,
+      currentDeviceType,
+    };
+  },
+)(
+  withLoading(
+    withTranslation(["Settings", "Common"])(observer(DNSSettingsComponent)),
+  ),
+);

@@ -47,7 +47,6 @@ import { PreviewBlock } from "../sub-components/PreviewBlock";
 import { loadFrame } from "../utils";
 
 import {
-  scriptUrl,
   dataDimensions,
   defaultWidthDimension,
   defaultHeightDimension,
@@ -65,9 +64,11 @@ import {
   Container,
   FilesSelectorInputWrapper,
 } from "./StyledPresets";
+import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const Viewer = (props) => {
-  const { t, setDocumentTitle, getFilePrimaryLink, theme } = props;
+  const { t, getFilePrimaryLink, theme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -86,7 +87,7 @@ const Viewer = (props) => {
     window.DocSpace?.SDK?.frames[frameId]?.destroyFrame();
   };
 
-  const loadCurrentFrame = () => loadFrame(config, scriptUrl);
+  const loadCurrentFrame = () => loadFrame(config, SDK_SCRIPT_URL);
 
   useEffect(() => {
     loadCurrentFrame();
@@ -157,7 +158,7 @@ const Viewer = (props) => {
           preview={preview}
           theme={theme}
           frameId={frameId}
-          scriptUrl={scriptUrl}
+          scriptUrl={SDK_SCRIPT_URL}
           config={config}
           isDisabled={config?.id === undefined}
         />
@@ -270,14 +271,12 @@ const Viewer = (props) => {
   );
 };
 
-export default inject(({ authStore, settingsStore, filesStore }) => {
-  const { setDocumentTitle } = authStore;
+export const Component = inject(({ settingsStore, filesStore }) => {
   const { theme } = settingsStore;
   const { getFilePrimaryLink } = filesStore;
 
   return {
     theme,
-    setDocumentTitle,
     getFilePrimaryLink,
   };
 })(

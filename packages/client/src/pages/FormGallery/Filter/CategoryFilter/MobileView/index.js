@@ -132,6 +132,7 @@ const CategoryFilterMobile = ({
               withHeaderArrow={!!openedMenuItem}
               headerArrowAction={onHeaderArrowClick}
               label={openedMenuItem?.label || t("Categories")}
+              style={{ paddingLeft: "0" }}
             />
 
             {!openedMenuItem && [
@@ -140,6 +141,7 @@ const CategoryFilterMobile = ({
                 className="dropdown-item"
                 label={t("FormGallery:ViewAllTemplates")}
                 onClick={onViewAllTemplates}
+                style={{ paddingLeft: "0" }}
               />,
               <DropDownItem
                 isSeparator
@@ -155,6 +157,7 @@ const CategoryFilterMobile = ({
                     className={`item-by-${item.key}`}
                     label={item.label}
                     onClick={() => onOpenMenuItem(item)}
+                    style={{ paddingLeft: "0" }}
                     isSubMenu
                   />
                 ))
@@ -163,6 +166,7 @@ const CategoryFilterMobile = ({
                     key={category.id}
                     label={getCategoryTitle(category)}
                     onClick={() => onFilterByCategory(category)}
+                    style={{ paddingLeft: "0" }}
                   />
                 ))}
           </Scrollbar>

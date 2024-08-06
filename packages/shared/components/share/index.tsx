@@ -116,9 +116,13 @@ const Share = (props: ShareProps) => {
         ? await getPrimaryFileLink(infoPanelSelection.id)
         : await getPrimaryLink(infoPanelSelection.id);
 
-      setFileLinks([link]);
-      copyShareLink(link.sharedTo.shareLink);
-      toastr.success(t("Common:GeneralAccessLinkCopied"));
+      if (link) {
+        setFileLinks([link]);
+        copyShareLink(link.sharedTo.shareLink);
+        toastr.success(t("Common:GeneralAccessLinkCopied"));
+      } else {
+        setFileLinks([]);
+      }
     } catch (error) {
       const message = (error as { message: string }).message
         ? ((error as { message: string }).message as TData)
@@ -240,11 +244,7 @@ const Share = (props: ShareProps) => {
 
       if (item.access === ShareAccessRights.None) {
         deleteLink(link.sharedTo.id);
-        if (link.sharedTo.primary) {
-          toastr.success(t("Common:GeneralAccessLinkRemove"));
-        } else {
-          toastr.success(t("Common:AdditionalLinkRemove"));
-        }
+        toastr.success(t("Common:LinkRemoved"));
       } else {
         updateLink(link, res);
         if (item.access === ShareAccessRights.DenyAccess) {

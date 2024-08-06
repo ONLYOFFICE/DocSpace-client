@@ -50,20 +50,14 @@ const StyledRow = styled.div<
   justify-items: center;
   align-items: center;
   .list-loader_rectangle {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `padding-left: 4px;`
-        : `padding-right: 4px;`}
+    padding-inline-end: 4px;
   }
   .list-loader_rectangle-content {
     width: 32px;
     height: 32px;
   }
   .list-loader_rectangle-row {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-left: auto;`
-        : `margin-right: auto;`}
+    margin-inline-end: auto;
     max-width: 167px;
   }
 `;

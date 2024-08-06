@@ -38,7 +38,7 @@ const StyledCatalogSpamIcon = styled(CatalogSpamIcon)`
   path {
     fill: #f21c0e;
   }
-  padding-left: 8px;
+  padding-inline-start: 8px;
 `;
 
 const AccountInfo = ({ user }) => {

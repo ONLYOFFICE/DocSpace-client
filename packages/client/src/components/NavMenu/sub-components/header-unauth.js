@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+﻿// (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -28,14 +28,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Box } from "@docspace/shared/components/box";
-import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { Base } from "@docspace/shared/themes";
 import { mobile, getLogoUrl } from "@docspace/shared/utils";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
+import { LanguageCombobox } from "@docspace/shared/components/language-combobox";
+import { setLanguageForUnauthorized } from "@docspace/shared/utils/common";
+
+import i18n from "../../../i18n";
 
 const Header = styled.header`
-  align-items: left;
+  align-items: start;
   background-color: ${(props) => props.theme.header.backgroundColor};
   display: flex;
   width: 100vw;
@@ -71,6 +74,14 @@ const Header = styled.header`
     padding: 12px 0;
     cursor: pointer;
   }
+
+  .language-combo-box {
+    //margin: auto;
+    // margin-right: 8px;
+    position: absolute;
+    inset-inline-end: 8px;
+    top: 6px;
+  }
 `;
 
 Header.defaultProps = { theme: Base };
@@ -81,9 +92,16 @@ const HeaderUnAuth = ({
   isAuthenticated,
   isLoaded,
   theme,
+  cultures,
 }) => {
-  const { t } = useTranslation("NavMenu");
   const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
+
+  const currentCultureName = i18n.language;
+
+  const onSelect = (culture) => {
+    const { key } = culture;
+    setLanguageForUnauthorized(key, i18n);
+  };
 
   return (
     <Header isLoaded={isLoaded} className="navMenuHeaderUnAuth">
@@ -103,6 +121,17 @@ const HeaderUnAuth = ({
           <></>
         )}
       </Box>
+
+      {!wizardToken && (
+        <LanguageCombobox
+          className="language-combo-box"
+          onSelectLanguage={onSelect}
+          cultures={cultures}
+          selectedCulture={currentCultureName}
+          withBorder={false}
+          isMobileView
+        />
+      )}
     </Header>
   );
 };
@@ -118,7 +147,7 @@ HeaderUnAuth.propTypes = {
 
 export default inject(({ authStore, settingsStore }) => {
   const { isAuthenticated, isLoaded } = authStore;
-  const { enableAdmMess, wizardToken, theme } = settingsStore;
+  const { enableAdmMess, wizardToken, theme, cultures } = settingsStore;
 
   return {
     enableAdmMess,
@@ -126,5 +155,6 @@ export default inject(({ authStore, settingsStore }) => {
     isAuthenticated,
     isLoaded,
     theme,
+    cultures,
   };
 })(observer(HeaderUnAuth));

@@ -43,7 +43,7 @@ import { PortalRenamingDialog } from "SRC_DIR/components/dialogs";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 
-const PortalRenaming = (props) => {
+const PortalRenamingComponent = (props) => {
   const {
     t,
     setPortalRename,
@@ -103,7 +103,9 @@ const PortalRenaming = (props) => {
   const [isShowModal, setIsShowModal] = useState(false);
 
   useEffect(() => {
-    setDocumentTitle(t("PortalRenaming"));
+    setDocumentTitle(
+      t("PortalRenaming", { productName: t("Common:ProductName") }),
+    );
     setPortalName(portalNameInitially);
     const page = isMobileView ? "language-and-time-zone" : "general";
     if (!isLoaded) initSettings(page).then(() => setIsLoaded(true));
@@ -323,7 +325,9 @@ const PortalRenaming = (props) => {
     >
       {isCustomizationView && !isMobileView && (
         <div className="category-item-heading">
-          <div className="category-item-title">{t("PortalRenaming")}</div>
+          <div className="category-item-title">
+            {t("PortalRenaming", { productName: t("Common:ProductName") })}
+          </div>
         </div>
       )}
       <div className="category-item-description">
@@ -370,7 +374,7 @@ const PortalRenaming = (props) => {
   );
 };
 
-export default inject(({ settingsStore, setup, common }) => {
+export const PortalRenaming = inject(({ settingsStore, setup, common }) => {
   const {
     theme,
     tenantAlias,
@@ -406,6 +410,6 @@ export default inject(({ settingsStore, setup, common }) => {
   };
 })(
   withLoading(
-    withTranslation(["Settings", "Common"])(observer(PortalRenaming)),
+    withTranslation(["Settings", "Common"])(observer(PortalRenamingComponent)),
   ),
 );

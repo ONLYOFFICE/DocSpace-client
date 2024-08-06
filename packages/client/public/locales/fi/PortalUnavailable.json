@@ -1,4 +1,3 @@
 {
-  "AccessingProblem": "Jos sinulla on ongelmia tähän DocSpaceen pääsyn kanssa, ole hyvä ja ota yhteys järjestelmänvalvojaan.",
-  "ContactAdministrator": "Ota yhteyttä DocSpace-järjestelmänvalvojaan"
+  "ContactAdministrator": "Ota yhteyttä {{productName}}-järjestelmänvalvojaan"
 }

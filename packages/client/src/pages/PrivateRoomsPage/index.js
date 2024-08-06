@@ -26,6 +26,7 @@
 
 import DarkGeneralPngUrl from "PUBLIC_DIR/images/dark_general.png";
 import React, { useState } from "react";
+import { observer, inject } from "mobx-react";
 import styled, { css } from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
@@ -37,7 +38,6 @@ import { mobile, tablet } from "@docspace/shared/utils";
 import { Trans, withTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import { isMobile } from "react-device-detect";
-//import { setDocumentTitle } from "@docspace/client/src/helpers/filesUtils";
 import { toastr } from "@docspace/shared/components/toast";
 import { checkProtocol } from "../../helpers/files-helpers";
 import Base from "@docspace/shared/themes/base";
@@ -65,15 +65,12 @@ const StyledPrivacyPage = styled.div`
 
   .privacy-rooms-text-separator {
     width: 70%;
-    margin: 28px 0 42px 0;
+    margin: 28px 0 42px;
     border-bottom: ${(props) => props.theme.filesPrivateRoom.borderBottom};
   }
 
   .privacy-rooms-install-text {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `text-align: right;`
-        : `text-align: left;`}
+    text-align: start;
 
     @media ${mobile} {
       text-align: center;
@@ -90,10 +87,7 @@ const StyledPrivacyPage = styled.div`
   }
 
   .privacy-rooms-link {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: 4px;`
-        : `margin-left: 4px;`}
+    margin-inline-start: 4px;
     color: ${(props) => props.theme.filesPrivateRoom.linkColor};
   }
 
@@ -106,22 +100,11 @@ const StyledPrivacyPage = styled.div`
   }
 
   .privacy-rooms-avatar {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? css`
-            text-align: right;
-            padding-right: 66px;
-          `
-        : css`
-            text-align: left;
-            padding-left: 66px;
-          `}
+    text-align: start;
+    padding-inline-start: 66px;
 
     @media ${tablet} {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl"
-          ? `padding-right: 74px;`
-          : `padding-left: 74px;`}
+      padding-inline-start: 74px;
     }
 
     @media ${mobile} {
@@ -142,10 +125,6 @@ const StyledPrivacyPage = styled.div`
 StyledPrivacyPage.defaultProps = { theme: Base };
 
 const PrivacyPageComponent = ({ t, tReady }) => {
-  //   useEffect(() => {
-  //     setDocumentTitle(t("Common:About"));
-  //   }, [t]);
-
   const [isDisabled, setIsDisabled] = useState(false);
 
   const location = useLocation();
@@ -186,11 +165,17 @@ const PrivacyPageComponent = ({ t, tReady }) => {
         </Text>
 
         <Text as="div" textAlign="center" fontSize="20px" fontWeight={300}>
-          <Trans t={t} i18nKey="PrivacyClick" ns="PrivacyPage">
-            Click Open <strong>ONLYOFFICE Desktop</strong> in the browser dialog
-            to work with the encrypted documents
-          </Trans>
-          .
+          <Trans
+            t={t}
+            i18nKey="PrivacyClick"
+            ns="PrivacyPage"
+            values={{
+              organizationName: t("Common:OrganizationName"),
+            }}
+            components={{
+              1: <strong></strong>,
+            }}
+          />
         </Text>
 
         <Text
@@ -206,7 +191,9 @@ const PrivacyPageComponent = ({ t, tReady }) => {
           size="medium"
           primary
           isDisabled={isDisabled}
-          label={t("PrivacyButton")}
+          label={t("PrivacyButton", {
+            organizationName: t("Common:OrganizationName"),
+          })}
         />
 
         <label className="privacy-rooms-text-separator" />
@@ -217,7 +204,10 @@ const PrivacyPageComponent = ({ t, tReady }) => {
             fontSize="16px"
             fontWeight={300}
           >
-            {t("PrivacyEditors")}?
+            {t("PrivacyEditors", {
+              organizationName: t("Common:OrganizationName"),
+            })}
+            ?
           </Text>
           <Link
             className="privacy-rooms-link privacy-rooms-install-text"
@@ -235,7 +225,12 @@ const PrivacyPageComponent = ({ t, tReady }) => {
           textAlign="center"
           className="privacy-rooms-text-description"
         >
-          <p>{t("PrivacyDescriptionEditors")}.</p>
+          <p>
+            {t("PrivacyDescriptionEditors", {
+              organizationName: t("Common:OrganizationName"),
+            })}
+            .
+          </p>
           <p>{t("PrivacyDescriptionConnect")}.</p>
         </Text>
       </div>
@@ -257,4 +252,4 @@ const PrivacyPage = (props) => {
   );
 };
 
-export default PrivacyPage;
+export default observer(PrivacyPage);

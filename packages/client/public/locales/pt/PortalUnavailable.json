@@ -1,4 +1,4 @@
 {
-  "AccessingProblem": "Se está com problemas no acesso a este DocSpace, por favor contacte o administrador.",
-  "ContactAdministrator": "Contacte o administrador do DocSpace"
+  "AccessingProblem": "Se está com problemas no acesso a este {{productName}}, por favor contacte o administrador.",
+  "ContactAdministrator": "Contacte o administrador do {{productName}}"
 }

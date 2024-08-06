@@ -51,7 +51,7 @@ import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
 import AddUsersPanel from "../../AddUsersPanel";
 import { getAccessOptions, getTopFreeRole } from "../utils";
-import AccessSelector from "./AccessSelector";
+import AccessSelector from "../../../AccessSelector";
 
 import {
   StyledSubHeader,
@@ -256,7 +256,7 @@ const InviteInput = ({
           const topFreeRole = getTopFreeRole(t, roomType);
           item.access = topFreeRole.access;
           item.warning = t("GroupMaxAvailableRoleWarning", {
-            role: topFreeRole.label,
+            roleName: topFreeRole.label,
           });
         }
 
@@ -317,7 +317,7 @@ const InviteInput = ({
       if (u.isGroup && checkIfAccessPaid(u.access)) {
         u.access = topFreeRole.access;
         u.warning = t("GroupMaxAvailableRoleWarning", {
-          role: topFreeRole.label,
+          roleName: topFreeRole.label,
         });
       }
     });
@@ -446,8 +446,12 @@ const InviteInput = ({
       </StyledSubHeader>
       <StyledDescription>
         {roomId === -1
-          ? t("AddManuallyDescriptionAccounts")
-          : t("AddManuallyDescriptionRoom")}
+          ? t("AddManuallyDescriptionAccounts", {
+              productName: t("Common:ProductName"),
+            })
+          : t("AddManuallyDescriptionRoom", {
+              productName: t("Common:ProductName"),
+            })}
       </StyledDescription>
       <StyledInviteLanguage>
         <Text className="invitation-language">{t("InvitationLanguage")}:</Text>

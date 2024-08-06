@@ -31,6 +31,7 @@ import { Base } from "../../themes";
 import { Text } from "../text";
 
 import { IconButton } from "../icon-button";
+import { classNames } from "../../utils";
 
 const StyledIcon = styled.div<{
   size: string;
@@ -159,7 +160,10 @@ const RoomIcon = ({
 }: RoomIconProps) => {
   const [correctImage, setCorrectImage] = React.useState(true);
 
-  const titleWithoutSpaces = title?.replace(/\s+/g, " ").trim();
+  const titleWithoutNumberDuplicate = title?.replace(/\(\d+\)/, "");
+  const titleWithoutSpaces = titleWithoutNumberDuplicate
+    ?.replace(/\s+/g, " ")
+    ?.trim();
   const indexAfterLastSpace = titleWithoutSpaces?.lastIndexOf(" ");
   const secondCharacter =
     !titleWithoutSpaces || indexAfterLastSpace === -1
@@ -199,7 +203,11 @@ const RoomIcon = ({
           <Text className="room-title">{roomTitle}</Text>
         </>
       ) : (
-        <img className={imgClassName} src={imgSrc} alt="room icon" />
+        <img
+          className={classNames([imgClassName, "not-selectable"])}
+          src={imgSrc}
+          alt="room icon"
+        />
       )}
 
       {badgeUrl && (

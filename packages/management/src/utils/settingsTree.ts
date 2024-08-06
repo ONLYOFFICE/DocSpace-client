@@ -29,6 +29,7 @@ import DataManagementIconUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-d
 import RestoreIconUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-restore.svg?url";
 import PaymentIconUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-payment.svg?url";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-common.svg?url";
+import CatalogSettingsGiftReactSvgUrl from "PUBLIC_DIR/images/gift.react.svg?url";
 
 export const settingsTree = [
   {
@@ -110,5 +111,13 @@ export const settingsTree = [
     tKey: "Common:PaymentsTitle",
     isHeader: true,
     isArticle: true,
+  },
+  {
+    id: "management-settings_catalog-bonus",
+    key: "5",
+    icon: CatalogSettingsGiftReactSvgUrl,
+    link: "bonus",
+    tKey: "Common:Bonus",
+    isHeader: true,
   },
 ];

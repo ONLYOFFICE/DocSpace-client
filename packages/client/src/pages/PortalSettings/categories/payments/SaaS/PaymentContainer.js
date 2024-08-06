@@ -101,14 +101,7 @@ const StyledBody = styled.div`
       margin: auto 0;
     }
     .payment-info_managers-price {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 6px;
-            `
-          : css`
-              margin-right: 6px;
-            `}
+      margin-inline-end: 6px;
     }
   }
 `;
@@ -146,8 +139,16 @@ const PaymentContainer = (props) => {
             <>
               <Text isBold>{t("ManagerTypesDescription")}</Text>
               <br />
-              <Text isBold>{t("Common:DocSpaceAdmin")}</Text>
-              <Text>{t("AdministratorDescription")}</Text>
+              <Text isBold>
+                {t("Common:PortalAdmin", {
+                  productName: t("Common:ProductName"),
+                })}
+              </Text>
+              <Text>
+                {t("AdministratorDescription", {
+                  productName: t("Common:ProductName"),
+                })}
+              </Text>
               <br />
               <Text isBold>{t("Common:RoomAdmin")}</Text>
               <Text>{t("RoomManagerDescription")}</Text>
@@ -280,7 +281,9 @@ const PaymentContainer = (props) => {
             (days remaining: {{ delayDaysCount }})
           </Trans>{" "}
           <Text as="span" fontSize="14px" lineHeight="16px">
-            {t("GracePeriodActivatedDescription")}
+            {t("GracePeriodActivatedDescription", {
+              productName: t("Common:ProductName"),
+            })}
           </Text>
         </Text>
       );

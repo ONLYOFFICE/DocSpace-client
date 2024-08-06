@@ -97,10 +97,7 @@ export const BgBlock = styled.div<{ bgPattern: string }>`
   background-attachment: fixed;
   background-size: cover;
   position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
+  inset: 0;
   z-index: 0;
 
   @media ${mobile} {
@@ -111,7 +108,6 @@ export const BgBlock = styled.div<{ bgPattern: string }>`
 export const StyledWrapper = styled.div`
   height: 100%;
   width: 100vw;
-  max-width: 960px;
 
   @media ${mobile} {
     margin: 0 auto;
@@ -124,7 +120,6 @@ export const StyledBody = styled.div`
   flex-direction: column;
   align-items: center;
 
-  max-width: 960px;
   width: 100vw;
   margin-bottom: 16px;
 

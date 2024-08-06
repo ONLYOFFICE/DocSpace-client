@@ -469,7 +469,9 @@ class AutomaticBackup extends React.PureComponent {
       <StyledAutoBackup isEnableAuto={isEnableAuto}>
         <div className="backup_modules-header_wrapper">
           <Text className="backup_modules-description settings_unavailable">
-            {t("AutoBackupDescription")}
+            {t("AutoBackupDescription", {
+              productName: t("Common:ProductName"),
+            })}
           </Text>
           <Link
             className="link-learn-more"
@@ -503,7 +505,7 @@ class AutomaticBackup extends React.PureComponent {
               </Text>
               {!isEnableAuto && !isManagement() && (
                 <Badge
-                  backgroundColor="#EDC409"
+                  backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
                   label={t("Common:Paid")}
                   fontWeight="700"
                   className="auto-backup_badge"

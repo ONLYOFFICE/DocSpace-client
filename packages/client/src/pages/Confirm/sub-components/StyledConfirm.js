@@ -25,11 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import {
-  mobile,
-  tablet,
-  getCorrectFourValuesStyle,
-} from "@docspace/shared/utils";
+import { mobile, tablet } from "@docspace/shared/utils";
 
 export const StyledPage = styled.div`
   display: flex;
@@ -45,8 +41,12 @@ export const StyledPage = styled.div`
 
   @media ${mobile} {
     width: 100%;
-    padding: ${({ theme }) =>
-      getCorrectFourValuesStyle("32px 8px 0 16px", theme.interfaceDirection)};
+    padding-block: 32px 0;
+    padding-inline: 16px 8px;
+
+    .language-combo-box {
+      display: none;
+    }
   }
 
   .subtitle {
@@ -60,6 +60,12 @@ export const StyledPage = styled.div`
 
   .subtitle {
     margin-bottom: 32px;
+  }
+
+  .language-combo-box {
+    position: absolute;
+    inset-inline-end: 28px;
+    top: 28px;
   }
 `;
 
@@ -91,7 +97,7 @@ export const StyledHeader = styled.div`
     margin-bottom: 32px;
   }
 
-  .docspace-logo {
+  .portal-logo {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -123,7 +129,7 @@ export const StyledBody = styled.div`
     margin-bottom: 32px;
   }
 
-  .docspace-logo {
+  .portal-logo {
     display: flex;
     align-items: center;
     justify-content: center;

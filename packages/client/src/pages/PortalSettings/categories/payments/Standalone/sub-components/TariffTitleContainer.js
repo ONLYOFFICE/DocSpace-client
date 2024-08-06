@@ -31,6 +31,8 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { StyledTitleComponent } from "../StyledComponent";
 
+import { getTwoDotsReplacing } from "../../utils";
+
 const TariffTitleContainer = ({
   isLicenseDateExpired,
   isTrial,
@@ -70,13 +72,18 @@ const TariffTitleContainer = ({
 
   const expiresDate = () => {
     if (isTrial) {
-      return t("ActivateTariffEnterpriseTrialExpiration", {
-        date: paymentDate,
-      });
+      return getTwoDotsReplacing(
+        t("ActivateTariffEnterpriseTrialExpiration", {
+          date: paymentDate,
+        }),
+      );
     }
-    return t("ActivateTariffEnterpriseExpiration", {
-      date: paymentDate,
-    });
+
+    return getTwoDotsReplacing(
+      t("ActivateTariffEnterpriseExpiration", {
+        date: paymentDate,
+      }),
+    );
   };
 
   return (
@@ -87,8 +94,11 @@ const TariffTitleContainer = ({
       <div className="payments_subscription">
         <div className="title">
           <Text fontWeight={600} fontSize="14px" as="span">
-            {t("ActivateTariffDescr")}{" "}
-          </Text>
+            {t("ActivateTariffDescr", {
+              productName: t("Common:ProductName"),
+              organizationName: t("Common:OrganizationName"),
+            })}
+          </Text>{" "}
           {!isLicenseDateExpired && (
             <Text fontSize="14px" as="span">
               {expiresDate()}
@@ -105,5 +115,11 @@ export default inject(({ currentQuotaStore, currentTariffStatusStore }) => {
   const { trialDaysLeft, paymentDate, isLicenseDateExpired } =
     currentTariffStatusStore;
   const { isTrial } = currentQuotaStore;
-  return { isTrial, trialDaysLeft, paymentDate, isLicenseDateExpired };
+
+  return {
+    isTrial,
+    trialDaysLeft,
+    paymentDate,
+    isLicenseDateExpired,
+  };
 })(observer(TariffTitleContainer));

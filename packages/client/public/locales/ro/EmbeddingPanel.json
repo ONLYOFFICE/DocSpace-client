@@ -1,7 +1,11 @@
 {
-  "Auto": "Automat",
-  "CodeCopySuccess": "Codul a fost copiat în clipboard",
-  "EmbedCode": "Editare cod",
+  "CodeSuccessfullyCopied": "Codul de inserat a fost copiat cu succes în clipboard",
+  "ContentRestricted": "Copierea conținutului, încărcarea fișierelor și imprimarea sunt restricționate.",
+  "DisplaySettings": "Setări de afișare",
+  "EmbeddingBarAllowList": "Introduceți adresa URL a site-ului pentru incorporare în <1>lista de adrese web de încredere</1>.",
+  "EmbeddingBarDescription": "Incorporarea este posibilă numai pentru adresele URL pe care administratorul {{productName}} le-a indicat în setările JavaScript SDK.",
   "Height": "Înălțime",
+  "Link": "Link",
+  "LinkProtectedWithPassword": "Acest link este protejat prin parolă.",
   "Width": "Lățime"
 }

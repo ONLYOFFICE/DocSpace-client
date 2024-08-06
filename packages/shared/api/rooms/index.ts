@@ -27,7 +27,8 @@
 /* eslint-disable @typescript-eslint/default-param-last */
 import { AxiosRequestConfig } from "axios";
 
-import { FolderType, MembersSubjectType } from "../../enums";
+import moment from "moment";
+import { FolderType, MembersSubjectType, ShareAccessRights } from "../../enums";
 import { request } from "../client";
 import {
   checkFilterInstance,
@@ -35,7 +36,7 @@ import {
   toUrlParams,
 } from "../../utils/common";
 import RoomsFilter from "./filter";
-import { TGetRooms } from "./types";
+import { TGetRooms, TPublicRoomPassword } from "./types";
 
 export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
   let params;
@@ -113,20 +114,21 @@ export function updateRoomMemberRole(id, data) {
   });
 }
 
-export function getHistory(module, id, signal = null, requestToken) {
+export function getHistory(
+  selectionType: "file" | "folder",
+  id,
+  signal = null,
+  requestToken,
+) {
   const options = {
     method: "get",
-    url: `/feed/filter?module=${module}&withRelated=true&id=${id}`,
+    url: `/files/${selectionType}/${id}/log`,
     signal,
   };
 
-  if (requestToken) {
-    options.headers = { "Request-Token": requestToken };
-  }
+  if (requestToken) options.headers = { "Request-Token": requestToken };
 
-  return request(options).then((res) => {
-    return res;
-  });
+  return request(options).then((res) => res);
 }
 
 export function getRoomHistory(id) {
@@ -182,7 +184,9 @@ export function editRoom(id, data) {
 export function pinRoom(id) {
   const options = { method: "put", url: `/files/rooms/${id}/pin` };
 
-  return request(options).then((res) => {
+  const skipRedirect = true;
+
+  return request(options, skipRedirect).then((res) => {
     return res;
   });
 }
@@ -331,8 +335,8 @@ export const setInvitationLinks = async (roomId, linkId, title, access) => {
       access,
     },
   };
-
-  const res = await request(options);
+  const skipRedirect = true;
+  const res = await request(options, skipRedirect);
 
   return res;
 };
@@ -370,7 +374,8 @@ export const setRoomSecurity = async (id, data) => {
     data,
   };
 
-  const res = await request(options);
+  const skipRedirect = true;
+  const res = await request(options, skipRedirect);
 
   res.members.forEach((item) => {
     if (item.subjectType === MembersSubjectType.Group) {
@@ -393,31 +398,36 @@ export const acceptInvitationByLink = async () => {
 };
 
 export function editExternalLink(
-  roomId,
-  linkId,
-  title,
-  access,
-  expirationDate,
-  linkType,
-  password,
-  disabled,
-  denyDownload,
+  roomId: number | string,
+  linkId: number | string,
+  title: string,
+  access: ShareAccessRights,
+  expirationDate: moment.Moment,
+  linkType: number,
+  password: string,
+  disabled: boolean,
+  denyDownload: boolean,
 ) {
-  return request({
-    method: "put",
+  const skipRedirect = true;
 
-    url: `/files/rooms/${roomId}/links`,
-    data: {
-      linkId,
-      title,
-      access,
-      expirationDate,
-      linkType,
-      password,
-      disabled,
-      denyDownload,
+  return request(
+    {
+      method: "put",
+
+      url: `/files/rooms/${roomId}/links`,
+      data: {
+        linkId,
+        title,
+        access,
+        expirationDate,
+        linkType,
+        password,
+        disabled,
+        denyDownload,
+      },
     },
-  });
+    skipRedirect,
+  );
 }
 
 export function getExternalLinks(roomId, type) {
@@ -443,12 +453,17 @@ export function validatePublicRoomKey(key) {
   });
 }
 
-export function validatePublicRoomPassword(key, passwordHash) {
-  return request({
+export async function validatePublicRoomPassword(
+  key: string,
+  passwordHash: string,
+) {
+  const res = (await request({
     method: "post",
     url: `files/share/${key}/password`,
     data: { password: passwordHash },
-  });
+  })) as TPublicRoomPassword;
+
+  return res;
 }
 
 export function setCustomRoomQuota(roomIds, quota) {

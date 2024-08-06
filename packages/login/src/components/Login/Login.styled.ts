@@ -33,7 +33,7 @@ import { mobile, tablet } from "@docspace/shared/utils/device";
 
 export const LoginFormWrapper = styled.div<{ bgPattern: string }>`
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
 
   box-sizing: border-box;
 
@@ -47,13 +47,11 @@ export const LoginFormWrapper = styled.div<{ bgPattern: string }>`
     background-attachment: fixed;
     background-size: cover;
     position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
+    inset: 0;
 
     @media ${mobile} {
       background-image: none;
+      height: 0;
     }
   }
 
@@ -75,6 +73,16 @@ export const LoginFormWrapper = styled.div<{ bgPattern: string }>`
       text-align: center;
     }
   }
+
+  .language-combo-box {
+    position: fixed;
+    inset-inline-end: 28px;
+    top: 28px;
+
+    @media ${mobile} {
+      display: none;
+    }
+  }
   .invitation-info-container {
     margin-bottom: 16px;
     .sign-in-container {
@@ -86,18 +94,10 @@ export const LoginFormWrapper = styled.div<{ bgPattern: string }>`
       margin-bottom: 16px;
       .back-title {
         position: absolute;
-        max-width: 60px;
         text-overflow: ellipsis;
         overflow: hidden;
 
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                right: 0;
-              `
-            : css`
-                left: 0;
-              `};
+        inset-inline-start: 0;
 
         display: flex;
         gap: 4px;

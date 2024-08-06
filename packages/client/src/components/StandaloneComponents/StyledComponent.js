@@ -51,12 +51,12 @@ const StyledBenefitsBody = styled.div`
     }
     .benefits-description {
       p:first-child {
-        margin-bottom: 2px;
+        margin-bottom: 3px;
       }
     }
   }
   .payments-benefits ~ .payments-benefits {
-    margin-top: 12px;
+    margin-top: 13px;
   }
 `;
 
@@ -67,15 +67,10 @@ const StyledContactComponent = styled.div`
     display: flex;
     width: 100%;
     p {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 4px;
-            `
-          : css`
-              margin-right: 4px;
-            `}
+      margin-inline-end: 4px;
+      margin-bottom: 4px;
     }
+
     a {
       text-decoration: underline;
     }

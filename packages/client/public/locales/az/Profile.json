@@ -1,5 +1,6 @@
 {
   "ActiveSessions": "Aktiv Sessiyalar",
+  "AutoDeleteTitle": "60 gündən köhnə bütün sessiyalar avtomatik silinəcək.",
   "ChangeEmailSuccess": "Elektron poçt uğurla dəyişdirildi",
   "ChangePasswordAfterLoggingOut": "Çıxdıqdan sonra şifrəni dəyişdirin",
   "ConnectSocialNetworks": "Sosial şəbəkələrinizi əlaqələndirin",
@@ -27,5 +28,6 @@
   "SuccessLogout": "Aktiv bağlantıdan çıxış edildi: {{platform}}, {{browser}}",
   "SystemTheme": "Sistem temasından istifadə edin",
   "SystemThemeDescription": "Sisteminiz bunu etdikdə açıq və qaranlıq temalar arasında avtomatik keçid edin.",
+  "TerminateAllSessions": "Cari sessiyadan başqa bütün sessiyaları dayandırın",
   "TwoFactorDescription": "Bütün istifadəçilər üçün ikili autentifikasiya (kod generasiyası ilə) inzibatçı tərəfindən yandırıldı."
 }

@@ -48,6 +48,8 @@ import ConsumerModalDialog from "./sub-components/consumerModalDialog";
 
 import ThirdPartyLoader from "./sub-components/thirdPartyLoader";
 
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+
 const RootContainer = styled(Box)`
   max-width: 700px;
   width: 100%;
@@ -77,7 +79,8 @@ const RootContainer = styled(Box)`
 
     border-radius: 6px;
     min-height: 116px;
-    padding: 12px 12px 8px 20px;
+    padding-block: 12px 8px;
+    padding-inline: 20px 12px;
   }
 
   .request-block {
@@ -109,7 +112,7 @@ const RootContainer = styled(Box)`
 class ThirdPartyServices extends React.Component {
   constructor(props) {
     super(props);
-    const { t, setDocumentTitle } = props;
+    const { t } = props;
 
     setDocumentTitle(`${t("ThirdPartyAuthorization")}`);
 
@@ -250,7 +253,12 @@ class ThirdPartyServices extends React.Component {
               src={imgSrc}
               alt="integration_icon"
             />
-            <Text>{t("IntegrationRequest")}</Text>
+            <Text>
+              {t("IntegrationRequest", {
+                productName: t("Common:ProductName"),
+                organizationName: t("Common:OrganizationName"),
+              })}
+            </Text>
             <Button
               label={t("Submit")}
               primary
@@ -287,7 +295,7 @@ class ThirdPartyServices extends React.Component {
                   </Text>
                   <Badge
                     className="paid-badge"
-                    backgroundColor="#EDC409"
+                    backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
                     fontWeight="700"
                     label={t("Common:Paid")}
                     isPaidBadge={true}
@@ -339,37 +347,33 @@ ThirdPartyServices.propTypes = {
   setSelectedConsumer: PropTypes.func.isRequired,
 };
 
-export default inject(
-  ({ setup, authStore, settingsStore, currentQuotaStore }) => {
-    const { setDocumentTitle } = authStore;
-    const {
-      integrationSettingsUrl,
-      theme,
-      currentColorScheme,
-      companyInfoSettingsData,
-    } = settingsStore;
-    const {
-      getConsumers,
-      integration,
-      updateConsumerProps,
-      setSelectedConsumer,
-      fetchAndSetConsumers,
-    } = setup;
-    const { consumers } = integration;
-    const { isThirdPartyAvailable } = currentQuotaStore;
+export default inject(({ setup, settingsStore, currentQuotaStore }) => {
+  const {
+    integrationSettingsUrl,
+    theme,
+    currentColorScheme,
+    companyInfoSettingsData,
+  } = settingsStore;
+  const {
+    getConsumers,
+    integration,
+    updateConsumerProps,
+    setSelectedConsumer,
+    fetchAndSetConsumers,
+  } = setup;
+  const { consumers } = integration;
+  const { isThirdPartyAvailable } = currentQuotaStore;
 
-    return {
-      theme,
-      consumers,
-      integrationSettingsUrl,
-      getConsumers,
-      updateConsumerProps,
-      setSelectedConsumer,
-      fetchAndSetConsumers,
-      setDocumentTitle,
-      currentColorScheme,
-      isThirdPartyAvailable,
-      supportEmail: companyInfoSettingsData?.email,
-    };
-  },
-)(withTranslation(["Settings", "Common"])(observer(ThirdPartyServices)));
+  return {
+    theme,
+    consumers,
+    integrationSettingsUrl,
+    getConsumers,
+    updateConsumerProps,
+    setSelectedConsumer,
+    fetchAndSetConsumers,
+    currentColorScheme,
+    isThirdPartyAvailable,
+    supportEmail: companyInfoSettingsData?.email,
+  };
+})(withTranslation(["Settings", "Common"])(observer(ThirdPartyServices)));

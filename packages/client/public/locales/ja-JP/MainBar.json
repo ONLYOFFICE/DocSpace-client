@@ -1,18 +1,19 @@
 {
   "ClickHere": "ここをクリック",
   "ConfirmEmailDescription": "アクティベーションメールに記載されているリンクを使用してください。アクティベーション用リンクが記載されたメールが届いていませんか？",
-  "ConfirmEmailHeader": "DocSpaceの機能を利用するために、メール({{ email }})を有効にしてください。",
+  "ConfirmEmailHeader": "{{productName}}の機能を利用するために、メール({{ email }})を有効にしてください。",
   "PersonalUserQuotaAdminsDescription": "新しいファイルやフォルダをアップロードしたり作成したりするには、<1>ストレージ管理設定</1>でディスク領域を解放するか、ユーザーごとに容量制限を管理してください。",
   "PersonalUserQuotaDescription": "新しいファイルやフォルダをアップロードしたり作成したりするには、ディスクの空き容量を確保するか、管理者に連絡してストレージの容量制限を増やしてください。",
   "RequestActivation": "もう一度アクティベーションを要求する",
-  "RoomQuotaDescription": "不要なルームをアーカイブしたり、<1>{{clickHere}}</1>して、DocSpaceにもっと適した料金プランを見つけることができます。",
+  "RoomQuotaDescription": "不要なルームをアーカイブしたり、<1>{{clickHere}}</1>して、{{productName}}にもっと適した料金プランを見つけることができます。",
   "RoomQuotaHeader": "このルームは、もうすぐ制限を超えます：{{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "ストレージやルームの制限を超えそうです。",
   "StorageAndUserHeader": "ストレージと管理者/パワーユーザーの制限を超えそうです。",
-  "StorageQuotaDescription": "不要なファイルを削除するか、<1>{{clickHere}}</1>して、DocSpaceに適した料金プランを見つけることができます。",
+  "StorageQuotaDescription": "不要なファイルを削除するか、<1>{{clickHere}}</1>して、{{productName}}に適した料金プランを見つけることができます。",
   "StorageQuotaExceeded": "ストレージ容量制限を超えています",
   "StorageQuotaHeader": "ストレージのスペースは、もうすぐサイズ上限を超えます：{{currentValue}} / {{maxValue}}",
+  "StorageQuotaUserDescription": "不要なファイルを削除して、ディスク領域を確保できます。",
   "TenantCustomQuotaDescription": "不要ファイルを削除するか、<1>ストレージ管理設定</1>で容量制限の変更ができます。",
-  "UserQuotaDescription": "お使いのDocSpaceに適した料金プランを選択するには、<1>{{clickHere}}</1>。",
+  "UserQuotaDescription": "お使いの{{productName}}に適した料金プランを選択するには、<1>{{clickHere}}</1>。",
   "UserQuotaHeader": "管理者/パワーユーザー数を超えそうです：{{currentValue}} / {{maxValue}}"
 }

@@ -48,6 +48,8 @@ const ConvertPasswordDialogComponent = (props) => {
     formCreationInfo,
     setFormCreationInfo,
     setPasswordEntryProcess,
+
+    openOnNewPage,
   } = props;
   const inputRef = React.useRef(null);
 
@@ -101,17 +103,16 @@ const ConvertPasswordDialogComponent = (props) => {
       searchParams.append("password", password);
       searchParams.append("fromFile", true);
 
+      searchParams.append("hash", new Date().getTime());
+
       const url = combineUrl(
         window.location.origin,
-        window.DocSpaceConfig?.proxy?.url,
+        window.ClientConfig?.proxy?.url,
         config.homepage,
         `/doceditor/create?${searchParams.toString()}`,
       );
 
-      window.open(
-        url,
-        window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self",
-      );
+      window.open(url, openOnNewPage ? "_blank" : "_self");
 
       setIsLoading(false);
       onClose();
@@ -215,6 +216,7 @@ export default inject(
     settingsStore,
     dialogsStore,
     uploadDataStore,
+    filesSettingsStore,
   }) => {
     const {
       convertPasswordDialogVisible: visible,
@@ -228,6 +230,8 @@ export default inject(
 
     const { isTabletView, isDesktopClient } = settingsStore;
 
+    const { openOnNewPage } = filesSettingsStore;
+
     return {
       visible,
       setConvertPasswordDialogVisible,
@@ -239,6 +243,7 @@ export default inject(
       setPasswordEntryProcess,
       isDesktop: isDesktopClient,
       completeAction,
+      openOnNewPage,
     };
   },
 )(observer(ConvertPasswordDialog));

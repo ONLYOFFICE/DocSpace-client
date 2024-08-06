@@ -84,6 +84,8 @@ class AuthStore {
 
   clientError = false;
 
+  isPortalInfoLoaded = false;
+
   constructor(
     userStoreConst: UserStore,
     currentTariffStatusStoreConst: CurrentTariffStatusStore,
@@ -99,16 +101,26 @@ class AuthStore {
 
     const { socketHelper } = this.settingsStore;
 
-    socketHelper.on("s:change-quota-used-value", ({ featureId, value }) => {
-      console.log(`[WS] change-quota-used-value ${featureId}:${value}`);
+    socketHelper.on("s:change-quota-used-value", (res) => {
+      console.log(
+        `[WS] change-quota-used-value ${res?.featureId}:${res?.value}`,
+      );
+
+      if (!res || !res?.featureId) return;
+      const { featureId, value } = res;
 
       runInAction(() => {
         this.currentQuotaStore?.updateQuotaUsedValue(featureId, value);
       });
     });
 
-    socketHelper.on("s:change-quota-feature-value", ({ featureId, value }) => {
-      console.log(`[WS] change-quota-feature-value ${featureId}:${value}`);
+    socketHelper.on("s:change-quota-feature-value", (res) => {
+      console.log(
+        `[WS] change-quota-feature-value ${res?.featureId}:${res?.value}`,
+      );
+
+      if (!res || !res?.featureId) return;
+      const { featureId, value } = res;
 
       runInAction(() => {
         if (featureId === "free") {
@@ -158,7 +170,7 @@ class AuthStore {
 
     this.skipRequest = skipRequest ?? false;
 
-    await this.settingsStore?.init();
+    await Promise.all([this.settingsStore?.init(), this.getCapabilities()]);
 
     const requests = [];
 
@@ -245,6 +257,8 @@ class AuthStore {
 
     this.currentQuotaStore?.setPortalQuotaValue(quota);
     this.currentTariffStatusStore?.setPortalTariffValue(tariff);
+
+    this.isPortalInfoLoaded = true;
   };
 
   setLanguage() {
@@ -264,7 +278,10 @@ class AuthStore {
     let success = false;
     if (this.isAuthenticated) {
       success =
-        (this.userStore?.isLoaded && this.settingsStore?.isLoaded) ?? false;
+        (this.userStore?.isLoaded &&
+          this.settingsStore?.isLoaded &&
+          this.isPortalInfoLoaded) ??
+        false;
 
       if (success) this.setLanguage();
     } else {
@@ -352,7 +369,7 @@ class AuthStore {
 
   login = async (user: TUser, hash: string, session = true) => {
     try {
-      const response = (await api.user.login(user, hash, session)) as {
+      const response = (await api.user.login(user, hash, "", session)) as {
         token: string;
         tfa: string;
         error: { message: unknown };
@@ -453,28 +470,6 @@ class AuthStore {
       // || //this.userStore.isAuthenticated
     );
   }
-
-  setDocumentTitle = (subTitle = null) => {
-    let title;
-
-    // const currentModule = this.settingsStore?.product;
-    const organizationName = this.settingsStore?.organizationName;
-
-    if (subTitle) {
-      title = `${subTitle} - ${organizationName}`;
-      // if (this.isAuthenticated && currentModule) {
-      //   title = `${subTitle} - ${currentModule.title}`;
-      // } else {
-      //   title = `${subTitle} - ${organizationName}`;
-      // }
-      // } else if ( organizationName) {
-      // title = `${currentModule.title} - ${organizationName}`;
-    } else {
-      title = organizationName;
-    }
-
-    document.title = title ?? "";
-  };
 
   setProductVersion = (version: string) => {
     this.version = version;

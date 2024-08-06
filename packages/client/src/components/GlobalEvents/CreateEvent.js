@@ -68,8 +68,12 @@ const CreateEvent = ({
   setPortalTariff,
   withoutDialog,
   preview,
+  toForm,
   publicRoomKey,
   actionEdit,
+  openOnNewPage,
+  openEditor,
+  createFile,
 }) => {
   const [headerTitle, setHeaderTitle] = React.useState(null);
   const [startValue, setStartValue] = React.useState("");
@@ -111,7 +115,7 @@ const CreateEvent = ({
     };
   }, [extension, title, fromTemplate, withoutDialog]);
 
-  const onSave = (e, value, open = true) => {
+  const onSave = async (e, value, open = true) => {
     let item;
     let createdFolderId;
 
@@ -156,47 +160,65 @@ const CreateEvent = ({
           return setIsLoading(false);
         });
     } else {
-      const searchParams = new URLSearchParams();
+      try {
+        if (openEditor) {
+          const searchParams = new URLSearchParams();
 
-      searchParams.append("parentId", parentId);
-      searchParams.append("fileTitle", `${newValue}.${extension}`);
-      searchParams.append("open", open);
-      searchParams.append("id", id);
+          searchParams.append("parentId", parentId);
+          searchParams.append("fileTitle", `${newValue}.${extension}`);
+          searchParams.append("open", open);
+          searchParams.append("id", id);
 
-      if (preview) {
-        searchParams.append("action", "view");
+          if (preview) {
+            searchParams.append("action", "view");
+          }
+
+          if (actionEdit) {
+            searchParams.append("action", "edit");
+          }
+
+          if (toForm) searchParams.append("toForm", "true");
+
+          if (publicRoomKey) {
+            searchParams.append("share", publicRoomKey);
+          }
+
+          if (isMakeFormFromFile) {
+            searchParams.append("fromFile", isMakeFormFromFile);
+            searchParams.append("templateId", templateId);
+          } else if (fromTemplate) {
+            searchParams.append("fromTemplate", fromTemplate);
+            searchParams.append("formId", gallerySelected.id);
+          }
+
+          searchParams.append("hash", new Date().getTime());
+
+          const url = combineUrl(
+            window.location.origin,
+            window.ClientConfig?.proxy?.url,
+            config.homepage,
+            `/doceditor/create?${searchParams.toString()}`,
+          );
+
+          window.open(url, openOnNewPage ? "_blank" : "_self");
+
+          return;
+        }
+
+        return await createFile(
+          +parentId,
+          `${newValue}.${extension}`,
+          templateId,
+          gallerySelected?.id,
+        ).catch((error) => {
+          toastr.error(error);
+        });
+      } catch (error) {
+        toastr.error(error);
+      } finally {
+        setIsLoading(false);
+        onCloseAction();
       }
-
-      if (actionEdit) {
-        searchParams.append("action", "edit");
-      }
-
-      if (publicRoomKey) {
-        searchParams.append("share", publicRoomKey);
-      }
-
-      if (isMakeFormFromFile) {
-        searchParams.append("fromFile", isMakeFormFromFile);
-        searchParams.append("templateId", templateId);
-      } else if (fromTemplate) {
-        searchParams.append("fromTemplate", fromTemplate);
-        searchParams.append("formId", gallerySelected.id);
-      }
-
-      const url = combineUrl(
-        window.location.origin,
-        window.DocSpaceConfig?.proxy?.url,
-        config.homepage,
-        `/doceditor/create?${searchParams.toString()}`,
-      );
-
-      window.open(
-        url,
-        window.DocSpaceConfig?.editor?.openOnNewPage ? "_blank" : "_self",
-      );
-
-      setIsLoading(false);
-      onCloseAction();
     }
   };
 
@@ -269,7 +291,7 @@ export default inject(
       eventDialogVisible,
     } = dialogsStore;
 
-    const { keepNewFileName } = filesSettingsStore;
+    const { keepNewFileName, openOnNewPage } = filesSettingsStore;
 
     return {
       setPortalTariff,
@@ -300,6 +322,7 @@ export default inject(
 
       keepNewFileName,
       publicRoomKey,
+      openOnNewPage,
     };
   },
 )(observer(CreateEvent));

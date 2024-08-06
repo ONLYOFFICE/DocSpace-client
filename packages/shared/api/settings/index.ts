@@ -46,6 +46,11 @@ import {
   TThirdPartyProvider,
   TPaymentSettings,
   TGetSsoSettings,
+  TWorkspaceService,
+  TWorkspaceStatusResponse,
+  TMigrationData,
+  TSendWelcomeEmailData,
+  TPortalCultures,
 } from "./types";
 
 export async function getSettings(withPassword = false, headers = null) {
@@ -67,7 +72,7 @@ export async function getPortalCultures() {
   const res = (await request({
     method: "get",
     url: "/settings/cultures",
-  })) as string[];
+  })) as TPortalCultures;
 
   return res;
 }
@@ -1087,28 +1092,30 @@ export function getSendingTestMailStatus() {
   });
 }
 
-export function migrationList() {
-  return request({
+export async function migrationList() {
+  const res = (await request({
     method: "get",
     url: `/migration/list`,
-  });
+  })) as TWorkspaceService[];
+  return res;
 }
 
-export function migrationName(name) {
+export function initMigration(name: TWorkspaceService) {
   return request({
     method: "post",
     url: `/migration/init/${name}`,
   });
 }
 
-export function migrationStatus() {
-  return request({
+export async function migrationStatus() {
+  const res = (await request({
     method: "get",
     url: `/migration/status`,
-  });
+  })) as TWorkspaceStatusResponse;
+  return res;
 }
 
-export function migrateFile(data) {
+export function migrateFile(data: TMigrationData) {
   return request({
     method: "post",
     url: `/migration/migrate`,
@@ -1123,6 +1130,23 @@ export function migrationCancel() {
   });
 }
 
+export function getLdapSettings() {
+  const options = {
+    method: "get",
+    url: "/settings/ldap",
+  };
+
+  return request(options);
+}
+
+export function saveLdapSettings(settings) {
+  return request({
+    method: "post",
+    url: `/settings/ldap`,
+    data: settings,
+  });
+}
+
 export function migrationClear() {
   return request({
     method: "post",
@@ -1130,11 +1154,13 @@ export function migrationClear() {
   });
 }
 
-export function migrationLog() {
-  return axios.get("/api/2.0/migration/logs");
+export async function migrationLog() {
+  const response = await axios.get("/api/2.0/migration/logs");
+  if (!response || !response.data) return null;
+  return response.data as string;
 }
 
-export function migrationFinish(data) {
+export function migrationFinish(data: TSendWelcomeEmailData) {
   return request({
     method: "post",
     url: `/migration/finish`,
@@ -1180,6 +1206,52 @@ export function setTenantQuotaSettings(data) {
     method: "put",
     url: `/settings/tenantquotasettings`,
     data,
+  };
+
+  return request(options);
+}
+
+export function getLdapStatus() {
+  const options = {
+    method: "get",
+    url: "/settings/ldap/status",
+  };
+
+  return request(options);
+}
+
+export function getLdapDefaultSettings() {
+  const options = {
+    method: "get",
+    url: "/settings/ldap/default",
+  };
+
+  return request(options);
+}
+
+export function syncLdap() {
+  const options = {
+    method: "get",
+    url: "/settings/ldap/sync",
+  };
+
+  return request(options);
+}
+
+export function saveCronLdap(cron) {
+  const options = {
+    method: "post",
+    url: "/settings/ldap/cron",
+    data: { Cron: cron },
+  };
+
+  return request(options);
+}
+
+export function getCronLdap() {
+  const options = {
+    method: "get",
+    url: "/settings/ldap/cron",
   };
 
   return request(options);

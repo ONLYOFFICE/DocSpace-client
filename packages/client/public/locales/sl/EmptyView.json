@@ -1,1 +1,24 @@
-{}
+{
+  "CollaboratorEmptyTitle": "Soba je prazna.",
+  "CreateNewFileDescription": "Začni delati v sobi z ustvarjanjem datotek ali map",
+  "CreateNewFileTitle": "Ustvari novo datoteko",
+  "CustomRoomEmptyTitle": "Dobrodošli v sobi po meri",
+  "EmptyDescription": "Začni s hitrimi dejanji:",
+  "FormFolderDefaultDescription": "Obrazce PDF spusti sem ali jih naloži iz {{productName}} ali naprave.",
+  "FormFolderDefaultTitle": "Tukaj še ni obrazcev",
+  "FormFolderDefaultUserDescription": "Tukaj bodo prikazani obrazci, ki so jih naložili skrbniki.",
+  "FormFolderDefaultUserTitle": "V tej mapi še ni obrazcev",
+  "FormRoomEmptyTitle": "Dobrodošli v sobi za izpolnjevanje obrazcev",
+  "InviteUsersOptionDescription": "Dodaj člane portala za skupno urejanje v sobi",
+  "InviteUsersOptionTitle": "Vabila udeležencem",
+  "ShareOptionDescription": "Kopiraj javno dostopno povezavo ali povabi druge uporabnike v sobo, da začnejo postopek izpolnjevanja obrazcev.",
+  "ShareOptionTitle": "Deli sobo",
+  "UploadDeviceOptionDescription": "Naloži datoteke katere koli vrste iz svoje osebne naprave",
+  "UploadDeviceOptionTitle": "Naloži iz svoje naprave",
+  "UploadDevicePDFFormOptionDescription": "Naloži pripravljen PDF obrazec v sobo iz svoje naprave.",
+  "UploadDevicePDFFormOptionTitle": "Naloži iz naprave",
+  "UploadFromPortalDescription": "Naloži datoteke katere koli vrste iz Dokumenti ali Sobe",
+  "UploadFromPortalTitle": "Naloži iz {{productName}}",
+  "UploadPDFFormOptionDescription": "Izberi pripravljen PDF obrazec, ki je na voljo v {{productName}} in ga naloži v sobo.",
+  "UserEmptyDescription": "Tukaj bodo prikazane datoteke in mape, ki so jih naložili skrbniki."
+}

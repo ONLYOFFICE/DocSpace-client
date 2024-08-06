@@ -28,6 +28,8 @@ import styled from "styled-components";
 
 const StyledSelectionArea = styled.div`
   top: 0;
+
+  // doesn't require mirroring for RTL
   left: 0;
   position: fixed;
   margin: 0;

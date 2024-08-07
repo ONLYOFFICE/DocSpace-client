@@ -41,30 +41,45 @@ export const WarningQuotaDialog = ({
   onCloseDialog,
   defaultRoomsQuota,
   defaultUsersQuota,
+  tenantCustomQuota,
   isDefaultRoomsQuotaSet,
   isDefaultUsersQuotaSet,
+  isTenantCustomQuotaSet,
 }: WarningQuotaDialogProps) => {
   const getWarningDescription = () => {
-    if (isDefaultRoomsQuotaSet && isDefaultUsersQuotaSet) {
-      return t("Settings:StorageQuotaWarningDescription", {
-        usersQuotaLimit: getConvertedSize(t, defaultUsersQuota),
-        roomsQuotaLimit: getConvertedSize(t, defaultRoomsQuota),
-        productName: t("Common:ProductName"),
-      });
-    }
+    const quotaLimits = [];
+
     if (isDefaultRoomsQuotaSet) {
-      return t("Settings:RoomsQuotaWarningDescription", {
-        roomsQuotaLimit: getConvertedSize(t, defaultRoomsQuota),
-        productName: t("Common:ProductName"),
-      });
+      quotaLimits.push(
+        t("Settings:RoomsQuotaLimit", {
+          roomsQuotaLimit: getConvertedSize(t, defaultRoomsQuota),
+        }),
+      );
     }
     if (isDefaultUsersQuotaSet) {
-      return t("Settings:UsersQuotaWarningDescription", {
-        usersQuotaLimit: getConvertedSize(t, defaultUsersQuota),
-        productName: t("Common:ProductName"),
-      });
+      quotaLimits.push(
+        t("Settings:UsersQuotaLimit", {
+          usersQuotaLimit: getConvertedSize(t, defaultUsersQuota),
+        }),
+      );
     }
-    return "";
+    if (isTenantCustomQuotaSet) {
+      quotaLimits.push(
+        t("Settings:TenantQuotaLimit", {
+          tenantQuotaLimit: getConvertedSize(t, tenantCustomQuota),
+          productName: t("Common:ProductName"),
+        }),
+      );
+    }
+
+    if (quotaLimits.length === 0) {
+      return "";
+    }
+
+    return t("Settings:StorageQuotaWarningDescription", {
+      quotaLimits: quotaLimits.join(", "),
+      productName: t("Common:ProductName"),
+    });
   };
 
   return (

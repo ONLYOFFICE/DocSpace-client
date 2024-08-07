@@ -158,8 +158,10 @@ const SelectFileStep = (props: SelectFileStepProps) => {
     uploadFiles,
     defaultUsersQuota = 0,
     defaultRoomsQuota = 0,
+    tenantCustomQuota = 0,
     isDefaultUsersQuotaSet,
     isDefaultRoomsQuotaSet,
+    isTenantCustomQuotaSet,
     warningQuotaDialogVisible,
     setWarningQuotaDialogVisible,
   } = props as InjectedSelectFileStepProps;
@@ -184,10 +186,12 @@ const SelectFileStep = (props: SelectFileStepProps) => {
 
   useEffect(() => {
     const isQuotaWarningVisible =
-      isDefaultUsersQuotaSet || isDefaultRoomsQuotaSet;
+      isDefaultUsersQuotaSet ||
+      isDefaultRoomsQuotaSet ||
+      isTenantCustomQuotaSet;
     setWarningQuotaDialogVisible(isQuotaWarningVisible);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isDefaultUsersQuotaSet, isDefaultRoomsQuotaSet]);
+  }, [isDefaultUsersQuotaSet, isDefaultRoomsQuotaSet, isTenantCustomQuotaSet]);
 
   const onClickRedirect = () => {
     navigate("/portal-settings/management/disk-space");
@@ -505,8 +509,10 @@ const SelectFileStep = (props: SelectFileStepProps) => {
           onClickRedirect={onClickRedirect}
           defaultRoomsQuota={defaultRoomsQuota}
           defaultUsersQuota={defaultUsersQuota}
+          tenantCustomQuota={tenantCustomQuota}
           isDefaultRoomsQuotaSet={isDefaultRoomsQuotaSet}
           isDefaultUsersQuotaSet={isDefaultUsersQuotaSet}
+          isTenantCustomQuotaSet={isTenantCustomQuotaSet}
         />
       )}
     </Wrapper>
@@ -540,8 +546,10 @@ export default inject<TStore>(
     const {
       isDefaultRoomsQuotaSet,
       isDefaultUsersQuotaSet,
+      isTenantCustomQuotaSet,
       defaultUsersQuota,
       defaultRoomsQuota,
+      tenantCustomQuota,
     } = currentQuotaStore;
 
     return {
@@ -562,8 +570,10 @@ export default inject<TStore>(
       uploadFiles,
       defaultUsersQuota,
       defaultRoomsQuota,
+      tenantCustomQuota,
       isDefaultRoomsQuotaSet,
       isDefaultUsersQuotaSet,
+      isTenantCustomQuotaSet,
       warningQuotaDialogVisible,
       setWarningQuotaDialogVisible,
     };

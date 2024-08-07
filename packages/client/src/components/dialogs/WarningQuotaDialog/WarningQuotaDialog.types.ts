@@ -33,6 +33,8 @@ export interface WarningQuotaDialogProps {
   onClickRedirect: () => void;
   defaultRoomsQuota: number;
   defaultUsersQuota: number;
+  tenantCustomQuota: number;
   isDefaultRoomsQuotaSet?: boolean;
   isDefaultUsersQuotaSet?: boolean;
+  isTenantCustomQuotaSet?: boolean;
 }

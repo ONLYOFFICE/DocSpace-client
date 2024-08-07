@@ -49,8 +49,6 @@ export default async function RootLayout({
     return <></>;
   }
 
-  const baseUrl = getBaseUrl();
-
   const cookieStore = cookies();
 
   const systemTheme = cookieStore.get(SYSTEM_THEME_KEY);
@@ -62,10 +60,9 @@ export default async function RootLayout({
 
   const startOtherOperationsDate = new Date();
 
-  const [settings, colorTheme, config] = await Promise.all([
+  const [settings, colorTheme] = await Promise.all([
     getSettings(),
     getColorTheme(),
-    getConfig(),
   ]);
 
   timers.otherOperations =
@@ -75,9 +72,7 @@ export default async function RootLayout({
 
   if (settings === "portal-not-found") {
     const hdrs = headers();
-    const config = await (
-      await fetch(`${baseUrl}/static/scripts/config.json`)
-    ).json();
+    const config = await getConfig();
 
     const host = hdrs.get("host");
 
@@ -92,7 +87,7 @@ export default async function RootLayout({
   }
 
   if (typeof settings !== "string" && settings?.wizardToken) {
-    redirect(`wizard`);
+    redirectUrl = `wizard`;
   }
 
   if (

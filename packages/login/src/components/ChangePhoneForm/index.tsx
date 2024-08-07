@@ -62,7 +62,7 @@ const ChangePhoneForm = () => {
         className="phone-input"
         id="phone"
         name="phone"
-        type={InputType.phone}
+        type={InputType.tel}
         size={InputSize.large}
         scale={true}
         isAutoFocussed={true}

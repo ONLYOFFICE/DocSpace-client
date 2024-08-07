@@ -1,7 +1,7 @@
 {
   "AccountWillBeCreated": " 将为 <1>{{email}}</1>创建{{productName}}帐户。请完成您的注册：",
   "ChangePasswordSuccess": "密码已成功更改",
-  "ConfirmOwnerPortalSuccessMessage": " {{productName}}所有者已成功更改。您将于 10 秒后被重定向。",
+  "ConfirmOwnerPortalSuccessMessage": " {{productName}}所有者已成功更改。您将于 10 秒后被重定向。",
   "ConfirmOwnerPortalTitle": "请确认您要将{{productName}}所有者更改为{{newOwner}}。",
   "CurrentNumber": "您目前的手机号码",
   "DeleteProfileBtn": "删除我的账户",

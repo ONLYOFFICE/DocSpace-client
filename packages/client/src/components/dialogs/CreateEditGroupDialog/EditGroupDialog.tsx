@@ -167,7 +167,6 @@ const EditGroupDialog = ({
               <MembersParam
                 groupManager={manager}
                 groupMembers={members}
-                setGroupMembers={addMembers}
                 removeMember={removeMember}
                 onShowSelectMembersPanel={onShowSelectMembersPanel}
                 withInfiniteLoader

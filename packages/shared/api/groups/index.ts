@@ -38,7 +38,7 @@ import {
 
 export const createGroup = (
   groupName: string,
-  groupManager: string,
+  groupManager: string | undefined,
   members: string[],
 ) => {
   return request({
@@ -49,7 +49,7 @@ export const createGroup = (
       groupManager,
       members,
     },
-  });
+  }) as Promise<TGroup>;
 };
 
 // * Read

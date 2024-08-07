@@ -34,7 +34,7 @@ type SelectMembersPanelProps = {
   isVisible: boolean;
   onClose: () => void;
   onParentPanelClose: () => void;
-  groupManager?: TUser;
+  groupManager: TUser | null;
   groupMembers: TUser[];
   addMembers: (members: TUser[]) => void;
 };

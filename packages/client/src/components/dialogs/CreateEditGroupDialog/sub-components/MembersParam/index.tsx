@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
@@ -52,7 +51,6 @@ type InfiniteLoaderProps =
 type MembersParamProps = {
   groupManager: TUser | null;
   groupMembers: TUser[] | null;
-  setGroupMembers: (groupMembers: TUser[]) => void;
   onShowSelectMembersPanel: () => void;
   removeMember: (member: TUser) => void;
 } & InfiniteLoaderProps;

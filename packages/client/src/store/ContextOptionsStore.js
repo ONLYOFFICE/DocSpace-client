@@ -188,7 +188,7 @@ class ContextOptionsStore {
   };
 
   onClickLinkFillForm = (item) => {
-    if (!item.startFilling)
+    if (!item.startFilling && item.isPDFForm)
       return this.dialogsStore.setFillPDFDialogData(true, item);
 
     return this.gotoDocEditor(false, item);
@@ -1220,6 +1220,8 @@ class ContextOptionsStore {
       );
     }
 
+    const { isPublicRoom } = this.publicRoomStore;
+
     const { contextOptions, isEditing } = item;
 
     const isRootThirdPartyFolder =
@@ -1386,9 +1388,11 @@ class ContextOptionsStore {
 
     const isArchive = item.rootFolderType === FolderType.Archive;
 
-    const hasShareLinkRights = item.shared
+    const hasShareLinkRights = isPublicRoom
       ? item.security?.Read
-      : item.security?.EditAccess;
+      : item.shared
+        ? item.security.CopySharedLink
+        : item.security?.EditAccess;
 
     const optionsModel = [
       {
@@ -1561,7 +1565,7 @@ class ContextOptionsStore {
         label: t("Common:Info"),
         icon: InfoOutlineReactSvgUrl,
         onClick: () => this.onShowInfoPanel(item),
-        disabled: this.publicRoomStore.isPublicRoom,
+        disabled: isPublicRoom,
       },
       ...pinOptions,
       ...muteOptions,
@@ -1739,8 +1743,7 @@ class ContextOptionsStore {
         label: t("LeaveTheRoom"),
         icon: LeaveRoomSvgUrl,
         onClick: this.onLeaveRoom,
-        disabled:
-          isArchive || !item.inRoom || this.publicRoomStore.isPublicRoom,
+        disabled: isArchive || !item.inRoom || isPublicRoom,
       },
       {
         id: "option_unarchive-room",

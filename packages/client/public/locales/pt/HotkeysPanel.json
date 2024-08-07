@@ -30,6 +30,7 @@
   "HotkeysPlayPause": "Play/Pausa",
   "HotkeysRedoLastUndoneAction": "Refazer a última ação anulada",
   "HotkeysRemove": "Remover itens selecionados",
+  "HotkeysRenameSelected": "Renomear item selecionado",
   "HotkeysSelectAll": "Selecionar todas as pastas e ficheiros visíveis",
   "HotkeysSelectDown": "Selecionar o próximo item abaixo",
   "HotkeysSelection": "A escolher itens",

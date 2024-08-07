@@ -271,7 +271,7 @@ const Viewer = (props) => {
   );
 };
 
-export default inject(({ settingsStore, filesStore }) => {
+export const Component = inject(({ settingsStore, filesStore }) => {
   const { theme } = settingsStore;
   const { getFilePrimaryLink } = filesStore;
 

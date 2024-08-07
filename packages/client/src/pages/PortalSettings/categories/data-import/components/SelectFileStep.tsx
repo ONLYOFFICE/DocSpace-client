@@ -86,20 +86,22 @@ const Wrapper = styled.div`
 const FileUploadContainer = styled.div`
   max-width: 350px;
 
+  .cancel-btn {
+    @media ${mobile} {
+      height: 40px;
+    }
+  }
+
   .cancelUploadButton {
     @media ${mobile} {
       margin-bottom: 0;
-
       width: auto;
-
       position: fixed;
       inset-inline: 0px;
       bottom: 0px;
-
       padding: 16px;
-
-      background: white;
-
+      background: ${(props) =>
+        props.theme.client.settings.migration.workspaceBackground};
       gap: 0;
     }
   }
@@ -133,19 +135,15 @@ const FAIL_TRIES = 2;
 
 const SelectFileStep = (props: SelectFileStepProps) => {
   const {
+    t,
     isMultipleUpload,
     migratorName,
     acceptedExtensions,
-
-    t,
     incrementStep,
     setWorkspace,
-
     cancelUploadDialogVisible,
     setCancelUploadDialogVisible,
-
-    initMigrationName,
-    singleFileUploading,
+    initMigrations,
     getMigrationStatus,
     setUsers,
     cancelMigration,
@@ -153,9 +151,9 @@ const SelectFileStep = (props: SelectFileStepProps) => {
     setLoadingStatus,
     files,
     setFiles,
-    multipleFileUploading,
     migratingWorkspace,
     setMigratingWorkspace,
+    uploadFiles,
   } = props as InjectedSelectFileStepProps;
 
   const [isSaveDisabled, setIsSaveDisabled] = useState(
@@ -174,8 +172,17 @@ const SelectFileStep = (props: SelectFileStepProps) => {
   const [chunkSize, setChunkSize] = useState(0);
 
   const [failTries, setFailTries] = useState(FAIL_TRIES);
-
   const uploadInterval = useRef<number>();
+
+  const handleError = useCallback(
+    (message?: string) => {
+      toastr.error(message || t("Common:SomethingWentWrong"));
+      setIsFileError(true);
+      setLoadingStatus("none");
+      clearInterval(uploadInterval.current);
+    },
+    [t, setLoadingStatus],
+  );
 
   const poolStatus = useCallback(async () => {
     try {
@@ -187,29 +194,24 @@ const SelectFileStep = (props: SelectFileStepProps) => {
       }
 
       if (!res) {
-        toastr.error(t("Common:SomethingWentWrong"));
-        setLoadingStatus("none");
-        clearInterval(uploadInterval.current);
+        handleError();
         return;
       }
 
       if (res.parseResult.failedArchives.length > 0 || res.error) {
-        toastr.error(res.error);
-        setIsFileError(true);
-        setLoadingStatus("none");
-        clearInterval(uploadInterval.current);
+        handleError(res.error);
         return;
       }
 
       if (res.isCompleted || res.progress === 100) {
         clearInterval(uploadInterval.current);
-        if (
+
+        const totalUsers =
           res.parseResult.users.length +
-            res.parseResult.existUsers.length +
-            res.parseResult.withoutEmailUsers.length >
-          0
-        ) {
-          setUsers(res.parseResult);
+          res.parseResult.existUsers.length +
+          res.parseResult.withoutEmailUsers.length;
+
+        if (totalUsers > 0) {
           setIsBackupEmpty(false);
           setLoadingStatus("done");
           setUsers(res.parseResult);
@@ -228,15 +230,8 @@ const SelectFileStep = (props: SelectFileStepProps) => {
         setIsInfiniteProgress(false);
       }
     } catch (error) {
-      if (error instanceof Error) {
-        if (error.message === "Network Error") {
-          setIsNetworkError(true);
-        }
-        toastr.error(error || t("Common:SomethingWentWrong"));
-        setIsFileError(true);
-        setLoadingStatus("none");
-        clearInterval(uploadInterval.current);
-      }
+      handleError(error as string);
+      setIsNetworkError(true);
     }
   }, [
     failTries,
@@ -244,49 +239,31 @@ const SelectFileStep = (props: SelectFileStepProps) => {
     isInfiniteProgress,
     setLoadingStatus,
     setUsers,
-    t,
+    handleError,
   ]);
 
   const onUploadFile = async (file: File | File[]) => {
     try {
-      if (file instanceof Array) {
-        setFiles(file.map((item) => item.name));
-        await multipleFileUploading(
-          file,
-          setProgress,
-          isAbort,
-          setChunk,
-          startChunk,
-          setChunkSize,
-          chunkSize,
-        );
-      } else {
-        setFiles([file.name]);
-        await singleFileUploading(
-          file,
-          setProgress,
-          isAbort,
-          setChunk,
-          startChunk,
-          setChunkSize,
-          chunkSize,
-        );
-      }
+      const filesData = Array.isArray(file) ? file : [file];
+      setFiles(filesData.map((item) => item.name));
+
+      await uploadFiles(
+        filesData,
+        setProgress,
+        isAbort,
+        setChunk,
+        startChunk,
+        setChunkSize,
+        chunkSize,
+      );
 
       if (isAbort.current) return;
 
-      await initMigrationName(migratorName);
+      await initMigrations(migratorName);
       setLoadingStatus("proceed");
     } catch (error) {
-      if (error instanceof Error) {
-        if (error.message === "Network Error") {
-          setIsNetworkError(true);
-        }
-
-        toastr.error(error || t("Common:SomethingWentWrong"));
-        setIsFileError(true);
-        setLoadingStatus("none");
-      }
+      handleError(error as string);
+      setIsNetworkError(true);
     } finally {
       isAbort.current = false;
     }
@@ -300,6 +277,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
 
     setProgress(0);
     setIsFileError(false);
+    setIsBackupEmpty(false);
     setIsSaveDisabled(true);
     setLoadingStatus("upload");
     setFailTries(FAIL_TRIES);
@@ -405,6 +383,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
           }
           accept={acceptedExtensions}
           size={InputSize.base}
+          isMultiple={migratorName === "GoogleWorkspace"}
         />
       </FileUploadContainer>
       {fileLoadingStatus === "upload" || fileLoadingStatus === "proceed" ? (
@@ -418,6 +397,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
           <div className="cancelUploadButton">
             <Button
               size={isTablet() ? ButtonSize.medium : ButtonSize.small}
+              className="cancel-btn"
               label={t("Common:CancelButton")}
               onClick={onCancel}
               scale={isMobile()}
@@ -503,8 +483,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
 
 export default inject<TStore>(({ dialogsStore, importAccountsStore }) => {
   const {
-    initMigrationName,
-    singleFileUploading,
+    initMigrations,
     getMigrationStatus,
     setUsers,
     fileLoadingStatus,
@@ -514,16 +493,15 @@ export default inject<TStore>(({ dialogsStore, importAccountsStore }) => {
     incrementStep,
     files,
     setFiles,
-    multipleFileUploading,
     migratingWorkspace,
     setMigratingWorkspace,
+    uploadFiles,
   } = importAccountsStore;
   const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
     dialogsStore;
 
   return {
-    initMigrationName,
-    singleFileUploading,
+    initMigrations,
     getMigrationStatus,
     setUsers,
     fileLoadingStatus,
@@ -535,8 +513,8 @@ export default inject<TStore>(({ dialogsStore, importAccountsStore }) => {
     incrementStep,
     files,
     setFiles,
-    multipleFileUploading,
     migratingWorkspace,
     setMigratingWorkspace,
+    uploadFiles,
   };
 })(observer(SelectFileStep));

@@ -51,11 +51,7 @@ const GoogleWorkspace = (props: WorkspaceProps) => {
     "Common, SMTPSettings, Settings",
   ]);
 
-  const StepsData = getStepsData(
-    t,
-    filteredUsers.length === 0,
-    t("Common:OrganizationName"),
-  );
+  const StepsData = getStepsData(t, filteredUsers.length === 0);
 
   useLayoutEffect(() => {
     if (migratingWorkspace === "GoogleWorkspace" && !isMigrationInit) {
@@ -68,6 +64,7 @@ const GoogleWorkspace = (props: WorkspaceProps) => {
       }
       setIsMigrationInit(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!ready) return <SelectFileLoader />;
@@ -81,33 +78,35 @@ const GoogleWorkspace = (props: WorkspaceProps) => {
       title={StepsData[step - 1].title}
       description={StepsData[step - 1].description}
       component={StepsData[step - 1].component}
-      organizationName={t("Common:OrganizationName")}
     />
   );
 };
 
-export default inject<TStore>(({ settingsStore, importAccountsStore }) => {
-  const {
-    filteredUsers,
-    step,
-    setStep,
-    setWorkspace,
-    migrationPhase,
-    migratingWorkspace,
-    isMigrationInit,
-    setIsMigrationInit,
-  } = importAccountsStore;
-  const { theme } = settingsStore;
+export const Component = inject<TStore>(
+  ({ settingsStore, importAccountsStore }) => {
+    const {
+      filteredUsers,
+      step,
+      setStep,
+      setWorkspace,
+      migrationPhase,
+      migratingWorkspace,
+      isMigrationInit,
+      setIsMigrationInit,
+    } = importAccountsStore;
+    const { theme } = settingsStore;
 
-  return {
-    theme,
-    filteredUsers,
-    step,
-    setStep,
-    setWorkspace,
-    migrationPhase,
-    migratingWorkspace,
-    isMigrationInit,
-    setIsMigrationInit,
-  };
-})(observer(GoogleWorkspace));
+    return {
+      theme,
+
+      filteredUsers,
+      step,
+      setStep,
+      setWorkspace,
+      migrationPhase,
+      migratingWorkspace,
+      isMigrationInit,
+      setIsMigrationInit,
+    };
+  },
+)(observer(GoogleWorkspace));

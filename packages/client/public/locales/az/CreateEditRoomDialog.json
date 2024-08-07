@@ -1,8 +1,10 @@
 {
+  "ActivationRequired": "aktivləşdirmə tələb olunur",
   "ChooseRoomType": "Otaq növünü seçin",
   "CreateRoomConfirmation": "Yaddaşa qoşulmadan davam edilsin?\nSiz hələ qoşulmamış üçüncü tərəfin yaddaş seçimini etmisiniz. Xidmətə qoşulmadan davam etsəniz, bu seçim əlavə edilməyəcək.",
   "CreateTagOption": "Teq yaradın",
   "DisableRoomQuota": "Bu otaq üçün kvotanı deaktiv edin",
+  "FormRoomBarDescription": "Bu otaq əlaqəsi olan hər kəs üçün əlçatandır. Xarici istifadəçilərin bütün fayllar üçün Forma Doldurma icazəsi olacaq.",
   "Icon": "Simvol",
   "MakeRoomPrivateDescription": "Bu otaqdakı bütün fayllar şifrələnəcək.",
   "MakeRoomPrivateLimitationsWarningDescription": "Bu funksiya ilə siz yalnız mövcud {{productName}} istifadəçilərini dəvət edə bilərsiniz. Otaq yaratdıqdan sonra istifadəçi siyahısını dəyişə bilməzsiniz.",

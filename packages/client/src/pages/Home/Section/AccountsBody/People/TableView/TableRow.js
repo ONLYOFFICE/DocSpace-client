@@ -605,6 +605,7 @@ const PeopleTableRow = (props) => {
               onClick={onEmailClick}
               isTextOverflow
               dir="auto"
+              enableUserSelect
             >
               {email}
             </Link>

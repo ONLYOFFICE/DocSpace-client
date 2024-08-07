@@ -27,23 +27,22 @@
 import { useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { toastr } from "@docspace/shared/components/toast";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { DataImportProps, InjectedDataImportProps } from "./types";
 
-import Providers from "./components/Providers";
-import NextcloudWorkspace from "./NextcloudWorkspace";
-import GoogleWorkspace from "./GoogleWorkspace";
-import OnlyofficeWorkspace from "./OnlyofficeWorkspace";
+import { Component as Providers } from "./components/Providers";
+import { Component as NextcloudWorkspace } from "./NextcloudWorkspace";
+import { Component as GoogleWorkspace } from "./GoogleWorkspace";
+import { Component as OnlyofficeWorkspace } from "./OnlyofficeWorkspace";
 
 const DataImport = (props: DataImportProps) => {
   const {
     viewAs,
     setViewAs,
     currentDeviceType,
-
     getMigrationStatus,
     isMigrationInit,
     setUsers,
@@ -74,15 +73,14 @@ const DataImport = (props: DataImportProps) => {
 
     const { parseResult, error, isCompleted } = response;
 
-    if (
-      error ||
-      parseResult.failedArchives.length > 0 ||
+    const isErrorOrFailedParse = error || parseResult.failedArchives.length > 0;
+    const isNoUsersParsed =
       parseResult.users.length +
         parseResult.existUsers.length +
         parseResult.withoutEmailUsers.length ===
-        0
-    )
-      return;
+      0;
+
+    if (isErrorOrFailedParse || isNoUsersParsed) return;
 
     if (parseResult.operation === "parse") {
       setWorkspace(parseResult.migratorName);
@@ -139,8 +137,8 @@ const DataImport = (props: DataImportProps) => {
   );
 };
 
-export default inject<TStore>(
-  ({ authStore, settingsStore, setup, importAccountsStore }) => {
+export const Component = inject<TStore>(
+  ({ settingsStore, setup, importAccountsStore }) => {
     const {
       getMigrationStatus,
       isMigrationInit,
@@ -160,7 +158,6 @@ export default inject<TStore>(
       viewAs,
       setViewAs,
       currentDeviceType,
-
       getMigrationStatus,
       isMigrationInit,
       setUsers,

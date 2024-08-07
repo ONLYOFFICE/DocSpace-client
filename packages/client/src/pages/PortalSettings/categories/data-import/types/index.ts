@@ -59,8 +59,7 @@ export interface InjectedSelectFileStepProps extends SelectFileStepProps {
   setWorkspace: TStore["importAccountsStore"]["setWorkspace"];
   cancelUploadDialogVisible: TStore["dialogsStore"]["cancelUploadDialogVisible"];
   setCancelUploadDialogVisible: TStore["dialogsStore"]["setCancelUploadDialogVisible"];
-  initMigrationName: TStore["importAccountsStore"]["initMigrationName"];
-  singleFileUploading: TStore["importAccountsStore"]["singleFileUploading"];
+  initMigrations: TStore["importAccountsStore"]["initMigrations"];
   getMigrationStatus: TStore["importAccountsStore"]["getMigrationStatus"];
   setUsers: TStore["importAccountsStore"]["setUsers"];
   fileLoadingStatus: TStore["importAccountsStore"]["fileLoadingStatus"];
@@ -68,15 +67,14 @@ export interface InjectedSelectFileStepProps extends SelectFileStepProps {
   cancelMigration: TStore["importAccountsStore"]["cancelMigration"];
   files: TStore["importAccountsStore"]["files"];
   setFiles: TStore["importAccountsStore"]["setFiles"];
-  multipleFileUploading: TStore["importAccountsStore"]["multipleFileUploading"];
   migratingWorkspace: TStore["importAccountsStore"]["migratingWorkspace"];
   setMigratingWorkspace: TStore["importAccountsStore"]["setMigratingWorkspace"];
+  uploadFiles: TStore["importAccountsStore"]["uploadFiles"];
 }
 
 export interface DataImportProps {}
 
 export interface InjectedDataImportProps extends DataImportProps {
-  setDocumentTitle: TStore["authStore"]["setDocumentTitle"];
   getMigrationStatus: TStore["importAccountsStore"]["getMigrationStatus"];
   viewAs: TStore["setup"]["viewAs"];
   setViewAs: TStore["setup"]["setViewAs"];
@@ -102,8 +100,6 @@ export interface InjectedWorkspaceProps extends WorkspaceProps {
   migrationPhase: TStore["importAccountsStore"]["migrationPhase"];
   isMigrationInit: TStore["importAccountsStore"]["isMigrationInit"];
   setIsMigrationInit: TStore["importAccountsStore"]["setIsMigrationInit"];
-
-  setDocumentTitle: TStore["authStore"]["setDocumentTitle"];
 }
 
 export interface LayoutProps {
@@ -172,6 +168,7 @@ export interface InjectedTableViewProps extends TableViewProps {
 
 export interface AddEmailTableProps extends InjectedTableViewProps {
   users: TStore["importAccountsStore"]["users"];
+  setSearchValue: TStore["importAccountsStore"]["setSearchValue"];
 }
 
 export interface SelectUserTableProps extends InjectedTableViewProps {
@@ -223,6 +220,7 @@ export interface AddEmailRowProps extends RowViewProps {
   toggleAccount: TStore["importAccountsStore"]["toggleAccount"];
   toggleAllAccounts: TStore["importAccountsStore"]["toggleAllAccounts"];
   isAccountChecked: TStore["importAccountsStore"]["isAccountChecked"];
+  setSearchValue: TStore["importAccountsStore"]["setSearchValue"];
 }
 
 export interface UsersRowProps {

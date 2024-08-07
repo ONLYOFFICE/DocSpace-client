@@ -51,10 +51,21 @@ const contextCss = css`
 
 const StyledTableContainer = styled(TableContainer)`
   .badges__quickButtons {
-    padding-left: 16px;
     display: flex;
-    flex-grow: 2;
+    flex-grow: 1;
     justify-content: flex-end;
+
+    .badge {
+      padding-left: 16px;
+    }
+
+    .badge:first-child {
+      padding-left: 8px;
+    }
+
+    .badge:last-child {
+      padding-right: 8px;
+    }
   }
 
   .table-row-selected {

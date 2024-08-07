@@ -232,7 +232,7 @@ const StyledTableRow = styled(TableRow)`
 
   .no-extra-space {
     p {
-      margin-inline-end: 0 !important;
+      margin-inline-end: 8px !important;
     }
   }
 `;

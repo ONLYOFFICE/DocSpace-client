@@ -42,7 +42,7 @@ import {
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import HeaderCatalogBurger from "./header-catalog-burger";
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 
 const Header = styled.header`
   display: flex;
@@ -59,7 +59,7 @@ const Header = styled.header`
     display: flex;
     align-items: center;
     justify-items: center;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
     ${NoUserSelect}
   }

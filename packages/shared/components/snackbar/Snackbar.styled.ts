@@ -28,6 +28,7 @@ import styled, { css } from "styled-components";
 
 import { Box } from "../box";
 import { tablet } from "../../utils";
+import { globalColors } from "../../themes";
 
 const StyledIframe = styled.iframe<{ sectionWidth: number }>`
   border: none;
@@ -107,7 +108,7 @@ const StyledSnackBar = styled(Box)<{
     display: inline-block;
     border: none;
     font-size: inherit;
-    color: "#333";
+    color: ${globalColors.black};
     margin-block: 0 4px;
     margin-inline: 24px 4px;
 
@@ -123,7 +124,7 @@ const StyledSnackBar = styled(Box)<{
     background: inherit;
     border: none;
     font-size: 13px;
-    color: "#000";
+    color: ${globalColors.darkBlack};
     cursor: pointer;
     line-height: 14px;
 
@@ -140,7 +141,7 @@ const StyledAction = styled.div`
   display: inline-block;
   border: none;
   font-size: inherit;
-  color: "#333";
+  color: ${globalColors.black};
   cursor: pointer;
   text-decoration: underline;
   @media ${tablet} {

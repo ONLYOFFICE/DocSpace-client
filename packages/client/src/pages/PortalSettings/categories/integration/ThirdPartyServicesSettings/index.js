@@ -42,6 +42,7 @@ import { Badge } from "@docspace/shared/components/badge";
 import { toastr } from "@docspace/shared/components/toast";
 import { Button } from "@docspace/shared/components/button";
 import { isMobile } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
 
 import ConsumerItem from "./sub-components/consumerItem";
 import ConsumerModalDialog from "./sub-components/consumerModalDialog";
@@ -295,7 +296,11 @@ class ThirdPartyServices extends React.Component {
                   </Text>
                   <Badge
                     className="paid-badge"
-                    backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
+                    backgroundColor={
+                      theme.isBase
+                        ? globalColors.favoritesStatus
+                        : globalColors.favoriteStatusDark
+                    }
                     fontWeight="700"
                     label={t("Common:Paid")}
                     isPaidBadge={true}

@@ -68,7 +68,7 @@ const LoginSettings = (props) => {
         <Text fontSize="16px" fontWeight={700} lineHeight="22px">
           {t("Settings:TwoFactorAuth")}
         </Text>
-        <Text color="#A3A9AE">{t("TwoFactorDescription")}</Text>
+        <Text className="description">{t("TwoFactorDescription")}</Text>
       </div>
       <div className="actions">
         <Button

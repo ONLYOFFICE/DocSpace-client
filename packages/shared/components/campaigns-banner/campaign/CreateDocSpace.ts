@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { globalColors } from "../../../themes";
+
 export const translates = {
   Header: "ONLYOFFICE for developers",
   SubHeader:
@@ -33,21 +35,21 @@ export const translates = {
 };
 
 export const config = {
-  borderColor: "#388BDE",
+  borderColor: globalColors.lightBlueMain,
   title: {
-    color: "#4781D1",
+    color: globalColors.lightBlueMain,
     fontSize: "12px",
     fontWeight: "600",
   },
   body: {
     fontSize: "13px",
     fontWeight: "600",
-    color: "#333",
+    color: globalColors.black,
   },
   action: {
     isButton: true,
-    color: "#fff",
-    backgroundColor: "#388BDE",
+    color: globalColors.white,
+    backgroundColor: globalColors.lightBlueMain,
     fontSize: "12px",
     fontWeight: "700",
     type: "open-url",

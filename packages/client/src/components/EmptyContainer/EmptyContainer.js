@@ -57,6 +57,10 @@ const EmptyFolderWrapper = styled.div`
     .second-description {
       margin: 32px 0 24px;
       text-align: center;
+
+      & > span {
+        color: ${(props) => props.theme.filesEmptyContainer.descriptionColor};
+      }
     }
 
     .empty-folder_container-image {

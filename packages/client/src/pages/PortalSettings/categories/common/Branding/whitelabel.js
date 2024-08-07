@@ -39,7 +39,7 @@ import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-butto
 import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
 import { size } from "@docspace/shared/utils";
-
+import { globalColors } from "@docspace/shared/themes";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import WhiteLabelWrapper from "./StyledWhitelabel";
 import LoaderWhiteLabel from "../sub-components/loaderWhiteLabel";
@@ -177,7 +177,7 @@ const WhiteLabelComponent = (props) => {
         options.height,
         options.text,
         options.fontSize,
-        isDocsEditorName ? "#fff" : "#000",
+        isDocsEditorName ? globalColors.white : globalColors.darkBlack,
         options.alignCenter,
         options.isEditor,
       );
@@ -186,7 +186,7 @@ const WhiteLabelComponent = (props) => {
         options.height,
         options.text,
         options.fontSize,
-        "#fff",
+        globalColors.white,
         options.alignCenter,
         options.isEditor,
       );
@@ -289,7 +289,11 @@ const WhiteLabelComponent = (props) => {
           <Badge
             className="paid-badge"
             fontWeight="700"
-            backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
+            backgroundColor={
+              theme.isBase
+                ? globalColors.favoritesStatus
+                : globalColors.favoriteStatusDark
+            }
             label={t("Common:Paid")}
             isPaidBadge={true}
           />

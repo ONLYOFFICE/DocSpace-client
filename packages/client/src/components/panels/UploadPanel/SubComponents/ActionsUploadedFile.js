@@ -55,7 +55,6 @@ const ActionsUploadedFile = ({ item, onCancelCurrentUpload }) => {
             className="convert_icon"
             size="medium"
             isfill={true}
-            color="#A3A9AE"
           />
         </div>
       )}

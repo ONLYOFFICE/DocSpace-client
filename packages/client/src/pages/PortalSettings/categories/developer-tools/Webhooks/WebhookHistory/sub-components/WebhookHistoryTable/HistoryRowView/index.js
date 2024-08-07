@@ -48,7 +48,7 @@ const StyledRowContainer = styled(RowContainer)`
 
   .row-list-item:has(.selected-row-item) {
     background-color: ${(props) =>
-      props.theme.isBase ? "#f3f4f4" : "#3D3D3D"};
+      props.theme.client.settings.webhooks.historyRowBackground};
   }
 `;
 

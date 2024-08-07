@@ -100,9 +100,9 @@ const Providers = (props: ProvidersProps) => {
           >
             <ReactSVG src={workspace.logo} className="workspace-logo" />
             <Link
+              className="link"
               type={LinkType.page}
               fontWeight="600"
-              color="#4781D1"
               isHovered
               isTextOverflow
             >

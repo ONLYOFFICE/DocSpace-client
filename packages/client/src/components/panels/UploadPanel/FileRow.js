@@ -121,6 +121,7 @@ const StyledFileRow = styled(Row)`
     }
 
     .enter-password {
+      color: ${(props) => props.theme.filesPanels.upload.textColor};
       margin-inline-end: 8px;
       text-decoration: underline dashed;
       cursor: pointer;
@@ -132,6 +133,7 @@ const StyledFileRow = styled(Row)`
   }
 
   .convert_icon {
+    color: ${(props) => props.theme.filesPanels.upload.iconFill};
     padding-inline-end: 12px;
   }
 
@@ -144,6 +146,18 @@ const StyledFileRow = styled(Row)`
     :hover {
       cursor: pointer;
     }
+  }
+
+  .upload-panel-file-error_text {
+    ${(props) =>
+      props.isError &&
+      css`
+        color: ${props.theme.filesPanels.upload.textColor};
+      `}
+  }
+
+  .file-exst {
+    color: ${(props) => props.theme.filesPanels.upload.textColor};
   }
 `;
 class FileRow extends Component {
@@ -269,7 +283,7 @@ class FileRow extends Component {
     const { showPasswordInput, password, passwordValid } = this.state;
 
     const fileExtension = ext ? (
-      <Text as="span" fontWeight="600" color="#A3A9AE">
+      <Text as="span" fontWeight="600" className="file-exst">
         {ext}
       </Text>
     ) : (
@@ -295,14 +309,14 @@ class FileRow extends Component {
           isMediaActive={isMediaActive}
           showPasswordInput={showPasswordInput}
           withoutBorder
+          isError={item.error}
         >
           <>
             {item.fileId ? (
               isMedia || (isPlugin && onPluginClick) ? (
                 <Link
-                  className="upload-panel_file-row-link"
+                  className="upload-panel_file-row-link upload-panel-file-error_text"
                   fontWeight="600"
-                  color={item.error && "#A3A9AE"}
                   truncate
                   onClick={isMedia ? onMediaClick : onPluginClick}
                 >
@@ -312,11 +326,11 @@ class FileRow extends Component {
               ) : (
                 <div className="upload-panel_file-name">
                   <Link
+                    className="upload-panel-file-error_text"
                     onClick={() =>
                       onFileClick(item.fileInfo ? item.fileInfo.webUrl : "")
                     }
                     fontWeight="600"
-                    color={item.error && "#A3A9AE"}
                     truncate
                     // href={item.fileInfo ? item.fileInfo.webUrl : ""}
                     // target={downloadInCurrentTab ? "_self" : "_blank"}
@@ -328,7 +342,11 @@ class FileRow extends Component {
               )
             ) : (
               <div className="upload-panel_file-name">
-                <Text fontWeight="600" color={item.error && "#A3A9AE"} truncate>
+                <Text
+                  fontWeight="600"
+                  truncate
+                  className="upload-panel-file-error_text"
+                >
                   {name}
                   {fileExtension}
                 </Text>

@@ -48,6 +48,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/shared/enums";
 import { parseDomain } from "@docspace/shared/utils/common";
+import { globalColors } from "@docspace/shared/themes";
 
 const toggleStyle = {
   position: "static",
@@ -213,10 +214,10 @@ const DNSSettingsComponent = (props) => {
             {errorText &&
               errorText.map((err, index) => (
                 <Text
+                  className="dns-error-text"
                   key={index}
                   fontSize="12px"
                   fontWeight="400"
-                  color="#F24724"
                 >
                   {err}
                 </Text>
@@ -227,7 +228,7 @@ const DNSSettingsComponent = (props) => {
               key="dns-hint"
               fontSize="12px"
               fontWeight="400"
-              color="#A3A9AE"
+              color={globalColors.gray}
             >
               {`${t("Settings:DNSSettingsHint")}${domainExampleText}`}
             </Text>
@@ -290,7 +291,11 @@ const DNSSettingsComponent = (props) => {
             <Badge
               className="paid-badge"
               fontWeight="700"
-              backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
+              backgroundColor={
+                theme.isBase
+                  ? globalColors.favoritesStatus
+                  : globalColors.favoriteStatusDark
+              }
               label={t("Common:Paid")}
               isPaidBadge={true}
             />

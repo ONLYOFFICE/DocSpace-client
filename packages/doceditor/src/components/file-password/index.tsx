@@ -111,7 +111,7 @@ const FilesPassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
 
   return (
     <>
-      <StyledSimpleNav id="login-header">
+      <StyledSimpleNav id="public-room-password-header">
         <Image
           className="logo"
           src={logoUrl}
@@ -122,87 +122,89 @@ const FilesPassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
         />
       </StyledSimpleNav>
       <StyledPage>
-        <StyledContent className="public-room-content">
-          <StyledBody>
-            <Image
-              priority
-              src={logoUrl}
-              className="logo-wrapper"
-              alt="icon"
-              width={416}
-              height={200}
-            />
+        <div className="public-room_content-wrapper">
+          <StyledContent className="public-room-content">
+            <StyledBody>
+              <Image
+                priority
+                src={logoUrl}
+                className="logo-wrapper"
+                alt="icon"
+                width={386}
+                height={44}
+              />
 
-            <FormWrapper>
-              <div className="password-form">
-                <Text fontSize="16px" fontWeight="600">
-                  {t("Common:PasswordRequired")}
-                </Text>
-
-                <Text
-                  fontSize="13px"
-                  fontWeight="400"
-                  className="public-room-text"
-                >
-                  <Trans
-                    t={t}
-                    ns="Common"
-                    i18nKey="EnterPasswordDescription"
-                    values={{ fileName: entryTitle }}
-                    components={{ 1: <span className="bold" /> }}
-                  />
-                </Text>
-                <div className="public-room-name">
-                  <PublicRoomIcon className="public-room-icon" />
-                  <Text
-                    className="public-room-text"
-                    fontSize="15px"
-                    fontWeight="600"
-                  >
-                    {title}
+              <FormWrapper>
+                <div className="password-form">
+                  <Text fontSize="16px" fontWeight="600">
+                    {t("Common:PasswordRequired")}
                   </Text>
+
+                  <Text
+                    fontSize="13px"
+                    fontWeight="400"
+                    className="public-room-text"
+                  >
+                    <Trans
+                      t={t}
+                      ns="Common"
+                      i18nKey="EnterPasswordDescription"
+                      values={{ fileName: entryTitle }}
+                      components={{ 1: <span className="bold" /> }}
+                    />
+                  </Text>
+                  <div className="public-room-name">
+                    <PublicRoomIcon className="public-room-icon" />
+                    <Text
+                      className="public-room-text"
+                      fontSize="15px"
+                      fontWeight="600"
+                    >
+                      {title}
+                    </Text>
+                  </div>
+
+                  <FieldContainer
+                    isVertical={true}
+                    labelVisible={false}
+                    hasError={!!errorMessage}
+                    errorMessage={errorMessage}
+                  >
+                    <PasswordInput
+                      simpleView
+                      id="password"
+                      inputName="password"
+                      placeholder={t("Common:Password")}
+                      type={InputType.password}
+                      inputValue={password}
+                      hasError={!!errorMessage}
+                      size={InputSize.large}
+                      scale
+                      tabIndex={1}
+                      autoComplete="current-password"
+                      onChange={onChangePassword}
+                      onKeyDown={onKeyPress}
+                      isDisabled={isLoading}
+                      isDisableTooltip
+                      isAutoFocussed
+                      // forwardedRef={inputRef}
+                    />
+                  </FieldContainer>
                 </div>
 
-                <FieldContainer
-                  isVertical={true}
-                  labelVisible={false}
-                  hasError={!!errorMessage}
-                  errorMessage={errorMessage}
-                >
-                  <PasswordInput
-                    simpleView
-                    id="password"
-                    inputName="password"
-                    placeholder={t("Common:Password")}
-                    type={InputType.password}
-                    inputValue={password}
-                    hasError={!!errorMessage}
-                    size={InputSize.large}
-                    scale
-                    tabIndex={1}
-                    autoComplete="current-password"
-                    onChange={onChangePassword}
-                    onKeyDown={onKeyPress}
-                    isDisabled={isLoading}
-                    isDisableTooltip
-                    isAutoFocussed
-                    // forwardedRef={inputRef}
-                  />
-                </FieldContainer>
-              </div>
-
-              <Button
-                primary
-                size={ButtonSize.medium}
-                scale
-                label={t("Common:ContinueButton")}
-                tabIndex={5}
-                onClick={onSubmit}
-                isDisabled={isLoading}
-              />
-            </FormWrapper>
-          </StyledBody>
-        </StyledContent>
+                <Button
+                  primary
+                  size={ButtonSize.medium}
+                  scale
+                  label={t("Common:ContinueButton")}
+                  tabIndex={5}
+                  onClick={onSubmit}
+                  isDisabled={isLoading}
+                />
+              </FormWrapper>
+            </StyledBody>
+          </StyledContent>
+        </div>
       </StyledPage>
     </>
   );

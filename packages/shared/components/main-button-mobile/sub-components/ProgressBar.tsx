@@ -65,7 +65,6 @@ const ProgressBarMobile = ({
         <Text
           className="progress-header"
           fontSize="14px"
-          // color="#657077"
           onClick={onClickHeaderAction}
           truncate
         >

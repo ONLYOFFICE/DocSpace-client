@@ -25,25 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-
-import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg";
-
-import { commonIconsStyles } from "@docspace/shared/utils";
 import { Base } from "@docspace/shared/themes";
-
-const StyledCrossIcon = styled(CrossReactSvg)`
-  ${commonIconsStyles}
-
-  g {
-    path {
-      fill: #657077;
-    }
-  }
-
-  path {
-    fill: #999976;
-  }
-`;
 
 const LinksBlock = styled.div`
   display: flex;
@@ -158,4 +140,4 @@ export const StyledPublicRoomBarContainer = styled.div`
 
 StyledLinkRow.defaultProps = { theme: Base };
 
-export { StyledCrossIcon, LinksBlock, StyledLinkRow };
+export { LinksBlock, StyledLinkRow };

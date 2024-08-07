@@ -26,6 +26,7 @@
 
 import styled, { css } from "styled-components";
 import { DropDown } from "../drop-down";
+import { globalColors } from "../../themes";
 
 const StyledLinks = styled.div`
   margin-top: 20px;
@@ -33,7 +34,7 @@ const StyledLinks = styled.div`
   .title-link {
     margin-bottom: 12px;
     line-height: 16px;
-    color: #a3a9ae;
+    color: ${globalColors.gray};
   }
 
   .additional-link {

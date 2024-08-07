@@ -31,6 +31,7 @@ import { inject, observer } from "mobx-react";
 
 import { SelectedItem } from "@docspace/shared/components/selected-item";
 import { Link } from "@docspace/shared/components/link";
+import { globalColors } from "@docspace/shared/themes";
 
 const StatusBarWrapper = styled.div`
   margin-top: 9px;
@@ -148,7 +149,7 @@ const StatusBar = (props) => {
           fontWeight={600}
           isHovered={true}
           onClick={clearAll}
-          color="#A3A9AE"
+          color={globalColors.gray}
           className="statusActionItem"
         >
           Clear all

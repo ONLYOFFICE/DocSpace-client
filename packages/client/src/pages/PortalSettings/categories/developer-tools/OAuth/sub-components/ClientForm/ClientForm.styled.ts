@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { mobile } from "@docspace/shared/utils/device";
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -276,11 +276,11 @@ const StyledInputAddBlock = styled.div`
     gap: 4px;
 
     p {
-      color: #4781d1;
+      color: ${globalColors.lightBlueMain};
     }
 
     svg path {
-      fill: #4781d1;
+      fill: ${globalColors.lightBlueMain};
     }
   }
 `;

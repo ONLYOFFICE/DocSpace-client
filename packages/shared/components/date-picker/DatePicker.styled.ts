@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 import { mobile } from "../../utils";
 
 import { Calendar } from "../calendar";
@@ -105,7 +105,7 @@ const Wrapper = styled.div`
       height: 12px;
       padding: 0 10px 0 2px;
       path {
-        fill: #657077;
+        fill: ${globalColors.lightGrayDark};
       }
     }
   }

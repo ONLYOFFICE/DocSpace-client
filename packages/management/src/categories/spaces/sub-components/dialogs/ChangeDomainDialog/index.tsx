@@ -44,6 +44,10 @@ const StyledModal = styled(ModalDialogContainer)`
   .create-portal-input {
     width: 100%;
   }
+
+  .error-text {
+    color: ${({ theme }) => theme.management.errorColor};
+  }
 `;
 
 const ChangeDomainDialogComponent = () => {
@@ -121,10 +125,10 @@ const ChangeDomainDialogComponent = () => {
             {domainNameError &&
               domainNameError.map((err, index) => (
                 <Text
+                  className="error-text"
                   key={index}
                   fontSize="12px"
                   fontWeight="400"
-                  color="#F24724"
                 >
                   {err}
                 </Text>

@@ -37,6 +37,7 @@ import { getExpiredOptions } from "../Share.helpers";
 import { ExpiredComboBoxProps } from "../Share.types";
 
 import ShareCalendar from "./ShareCalendar";
+import { globalColors } from "../../../themes";
 import { ShareAccessRights } from "../../../enums";
 
 const ExpiredComboBox = ({
@@ -141,7 +142,7 @@ const ExpiredComboBox = ({
           The link will expire after
           <LinkWithDropdown
             className="expired-options"
-            color="#4781D1"
+            color={globalColors.lightBlueMain}
             dropdownType="alwaysDashed"
             data={expiredOptions}
             fontSize="12px"
@@ -162,7 +163,7 @@ const ExpiredComboBox = ({
         The link is valid for
         <LinkWithDropdown
           className="expired-options"
-          color="#4781D1"
+          color={globalColors.lightBlueMain}
           dropdownType="alwaysDashed"
           data={expiredOptions}
           fontSize="12px"
@@ -185,7 +186,7 @@ const ExpiredComboBox = ({
             type={LinkType.action}
             fontWeight={400}
             fontSize="12px"
-            color="#4781D1"
+            color={globalColors.lightBlueMain}
             onClick={onRemoveLink}
           >
             {t("Common:RemoveLink")}

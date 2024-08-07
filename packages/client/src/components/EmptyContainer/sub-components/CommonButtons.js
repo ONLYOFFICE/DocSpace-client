@@ -97,7 +97,7 @@ const InviteUsersComponent = (props) => {
   return (
     <>
       <div className="second-description">
-        <Text as="span" color="#6A7378" fontSize="12px" noSelect>
+        <Text as="span" fontSize="12px" noSelect>
           {t("AddMembersDescription")}
         </Text>
       </div>

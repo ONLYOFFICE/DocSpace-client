@@ -38,6 +38,7 @@ import Badges from "@docspace/client/src/pages/Home/Section/AccountsBody/Badges"
 import { StyledAccountsItemTitle } from "../../styles/accounts";
 
 import { decode } from "he";
+import { globalColors } from "@docspace/shared/themes";
 
 const AccountsItemTitle = ({
   t,
@@ -114,8 +115,12 @@ const AccountsItemTitle = ({
               id="sso-badge-info-panel"
               className="sso-badge"
               label={t("Common:SSO")}
-              color={"#FFFFFF"}
-              backgroundColor={theme.isBase ? "#22C386" : "#2E5E4C"}
+              color={globalColors.white}
+              backgroundColor={
+                theme.isBase
+                  ? globalColors.secondGreen
+                  : globalColors.secondGreenDark
+              }
               fontSize={"9px"}
               fontWeight={800}
               noHover
@@ -133,8 +138,12 @@ const AccountsItemTitle = ({
               id="ldap-badge-info-panel"
               className="ldap-badge"
               label={t("Common:LDAP")}
-              color={"#FFFFFF"}
-              backgroundColor={theme.isBase ? "#8570BD" : "#544C6A"}
+              color={globalColors.white}
+              backgroundColor={
+                theme.isBase
+                  ? globalColors.secondPurple
+                  : globalColors.secondPurpleDark
+              }
               fontSize={"9px"}
               fontWeight={800}
               noHover

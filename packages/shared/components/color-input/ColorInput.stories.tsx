@@ -32,6 +32,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { ColorInput } from "./ColorInput";
 import { ColorInputProps } from "./ColorInput.types";
 import { InputSize } from "../text-input/TextInput.enums";
+import { globalColors } from "../../themes";
 
 const ColorInputContainer = styled.div`
   height: 300px;
@@ -78,7 +79,7 @@ const Template = ({ ...args }: ColorInputProps) => {
 export const Default: Story = {
   render: (args) => <Template {...args} />,
   args: {
-    defaultColor: "#4781D1",
+    defaultColor: globalColors.lightBlueMain,
     handleChange: (color) => {
       console.log(color);
     },

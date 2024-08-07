@@ -44,7 +44,7 @@ const StyledPlugin = styled.div`
     height: 1px;
     width: 100%;
 
-    background-color: #858585;
+    background-color: ${(props) => props.theme.plugins.color};
   }
 `;
 

@@ -28,7 +28,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 import { Text } from "../text";
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 import { NoUserSelect } from "../../utils";
 import { LinkProps } from "./Link.types";
 
@@ -62,7 +62,7 @@ const StyledText = styled(PureText)`
       : NoUserSelect}
 
   cursor: ${(props) => props.theme.link.cursor};
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
   opacity: ${(props) => props.isSemitransparent && props.theme.link.opacity};
   line-height: ${(props) =>
     props.lineHeight ? props.lineHeight : props.theme.link.lineHeight};

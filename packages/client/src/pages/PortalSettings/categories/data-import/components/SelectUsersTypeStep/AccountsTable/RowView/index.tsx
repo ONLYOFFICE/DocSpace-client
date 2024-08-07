@@ -39,6 +39,7 @@ import { Text } from "@docspace/shared/components/text";
 import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
 import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
+import { globalColors } from "@docspace/shared/themes";
 import UsersRow from "./UsersRow";
 import {
   InjectedTypeSelectRowViewProps,
@@ -62,7 +63,7 @@ const StyledRowContainer = styled(RowContainer)`
     .table-container_group-menu {
       padding: 0px 16px;
       border-image-slice: 0;
-      box-shadow: rgba(4, 15, 27, 0.07) 0px 15px 20px;
+      box-shadow: ${globalColors.menuShadow} 0px 15px 20px;
     }
 
     .table-container_group-menu-checkbox {

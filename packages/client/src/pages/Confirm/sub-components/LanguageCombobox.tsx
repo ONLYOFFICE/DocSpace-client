@@ -55,7 +55,7 @@ const LanguageComboboxWrapper = (props: TLanguageCombobox) => {
       onSelectLanguage={onLanguageSelect}
       cultures={cultures}
       selectedCulture={currentCultureName}
-      withBorder={false}
+      withBorder={!isMobileView}
     />
   );
 };

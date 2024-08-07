@@ -54,7 +54,7 @@ import { ValidationStatus, WhiteLabelLogoType } from "@docspace/shared/enums";
 import { validatePublicRoomPassword } from "@docspace/shared/api/rooms";
 import Image from "next/image";
 
-const FilesPassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
+const FilePassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
   const { t } = useTranslation(["Common"]);
 
   const theme = useTheme();
@@ -210,4 +210,4 @@ const FilesPassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
   );
 };
 
-export default FilesPassword;
+export default FilePassword;

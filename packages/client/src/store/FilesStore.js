@@ -3380,8 +3380,6 @@ class FilesStore {
       const isEditing =
         (item.fileStatus & FileStatus.IsEditing) === FileStatus.IsEditing;
 
-      console.log({ isEditing, status: item.fileStatus });
-
       const docUrl =
         !canOpenPlayer && !isFolder && this.getItemUrl(id, false, needConvert);
 

@@ -50,24 +50,6 @@ const contextCss = css`
 `;
 
 const StyledTableContainer = styled(TableContainer)`
-  .badges__quickButtons {
-    display: flex;
-    flex-grow: 1;
-    justify-content: flex-end;
-
-    .badge {
-      padding-left: 16px;
-    }
-
-    .badge:first-child {
-      padding-left: 8px;
-    }
-
-    .badge:last-child {
-      padding-right: 8px;
-    }
-  }
-
   .table-row-selected {
     .table-container_file-name-cell {
       ${fileNameCss}

@@ -33,10 +33,7 @@ import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
 import { classNames, getLastColumn } from "@docspace/shared/utils";
-import {
-  StyledBadgesContainer,
-  StyledQuickButtonsContainer,
-} from "../StyledTable";
+import { StyledBadgesContainer } from "../StyledTable";
 import ErasureCell from "./ErasureCell";
 import RoomCell from "./RoomCell";
 

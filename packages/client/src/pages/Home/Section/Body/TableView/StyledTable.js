@@ -136,9 +136,7 @@ const StyledTableRow = styled(TableRow)`
       `}
   }
 
-  .table-container_element-wrapper,
-  .table-container_quick-buttons-wrapper {
-    padding-inline-end: 0;
+  .table-container_element-wrapper {
   }
 
   .table-container_element-wrapper,
@@ -306,7 +304,10 @@ const StyledBadgesContainer = styled.div`
 `;
 
 const StyledQuickButtonsContainer = styled.div`
-  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-grow: 1;
 
   .badges {
     display: flex;
@@ -315,11 +316,7 @@ const StyledQuickButtonsContainer = styled.div`
   }
 
   .badge {
-    padding: 12px 7px;
-  }
-
-  .badge:last-child {
-    margin-inline-end: 3px;
+    padding: 12px 8px;
   }
 
   .lock-file {

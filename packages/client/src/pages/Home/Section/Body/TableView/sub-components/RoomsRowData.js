@@ -85,7 +85,13 @@ const RoomsRowDataComponent = (props) => {
         <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
           {badgesComponent}
         </StyledBadgesContainer>
-        {lastColumn === "Name" ? quickButtonsComponent : <></>}
+        {lastColumn === "Name" ? (
+          <StyledQuickButtonsContainer>
+            {quickButtonsComponent}
+          </StyledQuickButtonsContainer>
+        ) : (
+          <></>
+        )}
       </TableCell>
 
       {roomColumnTypeIsEnabled ? (
@@ -105,7 +111,13 @@ const RoomsRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Type" ? quickButtonsComponent : <></>}
+          {lastColumn === "Type" ? (
+            <StyledQuickButtonsContainer>
+              {quickButtonsComponent}
+            </StyledQuickButtonsContainer>
+          ) : (
+            <></>
+          )}
         </TableCell>
       ) : (
         <div />
@@ -124,7 +136,13 @@ const RoomsRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Tags" ? quickButtonsComponent : <></>}
+          {lastColumn === "Tags" ? (
+            <StyledQuickButtonsContainer>
+              {quickButtonsComponent}
+            </StyledQuickButtonsContainer>
+          ) : (
+            <></>
+          )}
         </TableCell>
       ) : (
         <div />
@@ -147,7 +165,13 @@ const RoomsRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Owner" ? quickButtonsComponent : <></>}
+          {lastColumn === "Owner" ? (
+            <StyledQuickButtonsContainer>
+              {quickButtonsComponent}
+            </StyledQuickButtonsContainer>
+          ) : (
+            <></>
+          )}
         </TableCell>
       ) : (
         <div />
@@ -170,7 +194,13 @@ const RoomsRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Activity" ? quickButtonsComponent : <></>}
+          {lastColumn === "Activity" ? (
+            <StyledQuickButtonsContainer>
+              {quickButtonsComponent}
+            </StyledQuickButtonsContainer>
+          ) : (
+            <></>
+          )}
         </TableCell>
       ) : (
         <div />
@@ -183,32 +213,17 @@ const RoomsRowDataComponent = (props) => {
               type="room"
               isReadOnly={!item?.security?.EditRoom}
             />
-            {lastColumn === "Storage" ? quickButtonsComponent : <></>}
+            {lastColumn === "Storage" ? (
+              <StyledQuickButtonsContainer>
+                {quickButtonsComponent}
+              </StyledQuickButtonsContainer>
+            ) : (
+              <></>
+            )}
           </TableCell>
         ) : (
           <div />
         ))}
-
-      {/* {roomColumnQuickButtonsIsEnabled ? (
-        <TableCell
-          style={
-            !roomColumnQuickButtonsIsEnabled
-              ? { background: "none" }
-              : dragStyles.style
-          }
-          {...selectionProp}
-          className={classNames(
-            selectionProp?.className,
-            "table-container_quick-buttons-wrapper",
-          )}
-        >
-          <StyledQuickButtonsContainer>
-            {quickButtonsComponent}
-          </StyledQuickButtonsContainer>
-        </TableCell>
-      ) : (
-        <div />
-      )} */}
     </>
   );
 };

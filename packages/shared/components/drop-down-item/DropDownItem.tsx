@@ -46,34 +46,43 @@ import { DropDownItemProps } from "./DropDownItem.types";
 
 const DropDownItem = (props: DropDownItemProps) => {
   const {
-    isSeparator,
-    isHeader,
     withHeaderArrow,
     headerArrowAction,
 
     icon,
     children,
-    disabled,
-    className,
 
-    fillIcon = true,
-    isSubMenu,
-    isActive,
-    withoutIcon,
-    noHover,
+    className,
 
     isSelected,
     isActiveDescendant,
     isBeta,
     additionalElement,
     setOpen,
+
+    isSeparator = false,
+    isHeader = false,
+
+    disabled = false,
+    noHover = false,
+
+    fillIcon = true,
+    isSubMenu = false,
+    isActive = false,
+    withoutIcon = false,
   } = props;
 
   const { t } = useTranslation(["Common"]);
   const theme = useTheme();
 
-  const { withToggle, checked, onClick, onClickSelectedItem, label, ...rest } =
-    props;
+  const {
+    withToggle,
+    checked,
+    onClick,
+    onClickSelectedItem,
+    label = "",
+    ...rest
+  } = props;
 
   const onClickAction = (
     e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
@@ -181,22 +190,6 @@ const DropDownItem = (props: DropDownItemProps) => {
       )}
     </StyledDropdownItem>
   );
-};
-
-DropDownItem.defaultProps = {
-  isSeparator: false,
-  isHeader: false,
-  tabIndex: -1,
-  label: "",
-  disabled: false,
-  noHover: false,
-  textOverflow: false,
-  fillIcon: true,
-  isSubMenu: false,
-  isActive: false,
-  withoutIcon: false,
-  height: 32,
-  heightTablet: 36,
 };
 
 export { DropDownItem };

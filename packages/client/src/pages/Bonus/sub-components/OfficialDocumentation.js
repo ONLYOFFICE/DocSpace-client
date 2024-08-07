@@ -37,9 +37,9 @@ const OfficialDocumentation = ({ dataBackupUrl }) => {
   const { t } = useTranslation("PaymentsEnterprise");
 
   const dockerLink =
-    "https://helpcenter.onlyoffice.com/installation/docspace-enterprise-install-docker.aspx";
+    "https://helpcenter.onlyoffice.com/installation/docspace-enterprise-install-script.aspx";
   const linuxDocker =
-    "https://helpcenter.onlyoffice.com/installation/docspace-enterprise-install-linux.aspx";
+    "https://helpcenter.onlyoffice.com/installation/docspace-enterprise-install-script.aspx";
   const windowsDocker =
     "https://helpcenter.onlyoffice.com/installation/docspace-enterprise-install-windows.aspx";
 

@@ -196,6 +196,7 @@ const InfiniteGrid = (props) => {
           key={key}
           className={`tiles-loader ${type}`}
           isFolder={type === "isFolder"}
+          isRoom={type === "isRoom"}
         />,
       );
     }

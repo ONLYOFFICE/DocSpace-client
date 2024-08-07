@@ -2504,6 +2504,9 @@ class FilesActionStore {
     const { clearFiles, setBufferSelection } = this.filesStore;
     const { clearInsideGroup, insideGroupBackUrl } =
       this.peopleStore.groupsStore;
+    const { isLoading } = this.clientLoadingStore;
+
+    if (isLoading) return;
 
     setBufferSelection(null);
 

@@ -63,7 +63,7 @@ const StyledSelector = styled.div`
   overflow: hidden;
 `;
 
-const StyledHeader = styled.div<{ withoutBorder: boolean }>`
+const StyledHeader = styled.div<{ withoutBorder?: boolean }>`
   width: calc(100% - 32px);
   min-height: 53px;
   height: 53px;

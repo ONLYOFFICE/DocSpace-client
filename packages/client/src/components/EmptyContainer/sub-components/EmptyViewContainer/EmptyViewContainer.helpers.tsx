@@ -75,19 +75,16 @@ export const getDescription = (
   if (isFolder) {
     return match([parentRoomType, folderType, access])
       .with([P._, FolderType.Done, P._], () =>
-        t("Files:EmptyFormFolderDoneHeaderText"),
+        t("Files:EmptyFormFolderDoneDescriptionText"),
       )
-
       .with([P._, FolderType.InProgress, P._], () =>
-        t("Files:EmptyFormFolderProgressHeaderText"),
+        t("Files:EmptyFormFolderProgressDescriptionText"),
       )
-      .with(
-        [
-          P._,
-          P.union(FolderType.SubFolderDone, FolderType.SubFolderInProgress),
-          P._,
-        ],
-        () => t("Files:EmptyFormSubFolderHeaderText"),
+      .with([P._, FolderType.SubFolderDone, P._], () =>
+        t("Files:EmptyFormSubFolderDoneDescriptionText"),
+      )
+      .with([P._, FolderType.SubFolderInProgress, P._], () =>
+        t("Files:EmptyFormSubFolderProgressDescriptionText"),
       )
       .with(
         [
@@ -130,16 +127,19 @@ export const getTitle = (
   if (isFolder) {
     return match([parentRoomType, folderType, access])
       .with([P._, FolderType.Done, P._], () =>
-        t("Files:EmptyFormFolderDoneDescriptionText"),
+        t("Files:EmptyFormFolderDoneHeaderText"),
       )
+
       .with([P._, FolderType.InProgress, P._], () =>
-        t("Files:EmptyFormFolderProgressDescriptionText"),
+        t("Files:EmptyFormFolderProgressHeaderText"),
       )
-      .with([P._, FolderType.SubFolderDone, P._], () =>
-        t("Files:EmptyFormSubFolderDoneDescriptionText"),
-      )
-      .with([P._, FolderType.SubFolderInProgress, P._], () =>
-        t("Files:EmptyFormSubFolderProgressDescriptionText"),
+      .with(
+        [
+          P._,
+          P.union(FolderType.SubFolderDone, FolderType.SubFolderInProgress),
+          P._,
+        ],
+        () => t("Files:EmptyFormSubFolderHeaderText"),
       )
       .with(
         [

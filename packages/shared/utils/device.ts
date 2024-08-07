@@ -26,6 +26,7 @@
 
 export const INFO_PANEL_WIDTH = 400;
 export const TABLE_HEADER_HEIGHT = 40;
+export const MAX_INFINITE_LOADER_SHIFT = 800;
 
 export function checkIsSSR() {
   return typeof window === "undefined";

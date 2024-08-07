@@ -26,7 +26,7 @@
 
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
@@ -49,12 +49,13 @@ import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 
 import { getLogoUrl } from "@docspace/shared/utils";
+import { frameCallCommand } from "@docspace/shared/utils/common";
 import { useTheme } from "styled-components";
 import { ValidationStatus, WhiteLabelLogoType } from "@docspace/shared/enums";
 import { validatePublicRoomPassword } from "@docspace/shared/api/rooms";
 import Image from "next/image";
 
-const FilesPassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
+const FilePassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
   const { t } = useTranslation(["Common"]);
 
   const theme = useTheme();
@@ -63,6 +64,8 @@ const FilesPassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
   const [passwordValid, setPasswordValid] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => frameCallCommand("setIsLoaded"), []);
 
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
@@ -210,4 +213,4 @@ const FilesPassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
   );
 };
 
-export default FilesPassword;
+export default FilePassword;

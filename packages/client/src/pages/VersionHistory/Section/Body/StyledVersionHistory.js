@@ -239,6 +239,10 @@ const StyledVersionRow = styled(Row)`
 
   .version-comment-wrapper {
     white-space: normal !important;
+
+    .version_text {
+      color: ${(props) => props.theme.filesVersionHistory.commentColor};
+    }
   }
 
   .row_context-menu-wrapper {

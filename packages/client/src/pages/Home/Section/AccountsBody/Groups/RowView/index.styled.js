@@ -28,7 +28,7 @@ import styled, { css } from "styled-components";
 import { RowContainer } from "@docspace/shared/components/row-container";
 import { isMobile, isTablet } from "react-device-detect";
 import { Row } from "@docspace/shared/components/row";
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 import { mobile, tablet } from "@docspace/shared/utils/device";
 import { RowContent } from "@docspace/shared/components/row-content";
 
@@ -142,7 +142,7 @@ export const GroupsRow = styled(Row)`
 
   position: unset;
 
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
   .styled-element {
     height: 32px;
     margin-inline-end: 12px;
@@ -156,8 +156,9 @@ export const GroupsRow = styled(Row)`
     font-size: 12px;
     font-weight: 700;
     line-height: 16px;
-    background: #eceef1;
-    color: #333;
+    background: ${(props) =>
+      props.theme.filesSection.tableView.row.backgroundGroup};
+    color: ${(props) => props.theme.filesSection.tableView.row.color};
     border-radius: 50%;
   }
 `;

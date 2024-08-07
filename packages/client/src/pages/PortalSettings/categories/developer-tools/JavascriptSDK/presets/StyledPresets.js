@@ -46,7 +46,7 @@ export const SDKContainer = styled(Box)`
 
   .linkHelp {
     display: inline;
-    color: "#657077";
+    color: ${(props) => props.theme.sdkPresets.linkHelpColor};
   }
 `;
 
@@ -272,6 +272,10 @@ export const Preview = styled(Box)`
   width: 100%;
   min-width: 660px;
   flex-direction: row;
+
+  .preview-description {
+    color: ${(props) => props.theme.sdkPresets.secondaryColor};
+  }
 
   @media ${tablet} {
     margin-top: 0;

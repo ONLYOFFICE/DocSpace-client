@@ -1,5 +1,6 @@
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
+import { globalColors } from "@docspace/shared/themes";
 
 import {
   StyledRowContent,
@@ -22,9 +23,9 @@ export const RowContent = ({ sectionWidth, item }: RowContentProps) => {
           </Text>
         </FlexWrapper>
 
-        <Text fontWeight={600} fontSize="12px" color="#A3A9AE">
+        <Text fontWeight={600} fontSize="12px" color={globalColors.gray}>
           <Link
-            color="#A3A9AE"
+            color={globalColors.gray}
             href={item.websiteUrl}
             type={LinkType.page}
             target={LinkTarget.blank}

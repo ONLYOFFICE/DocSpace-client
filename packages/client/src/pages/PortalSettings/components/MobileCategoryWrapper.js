@@ -33,6 +33,8 @@ import { Link } from "@docspace/shared/components/link";
 import { Base } from "@docspace/shared/themes";
 import commonIconsStyles from "@docspace/shared/utils/common-icons-style";
 import { isManagement } from "@docspace/shared/utils/common";
+import { globalColors } from "@docspace/shared/themes";
+
 import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 
 const StyledArrowRightIcon = styled(ArrowRightIcon)`
@@ -109,7 +111,11 @@ const MobileCategoryWrapper = (props) => {
         </Link>
         {withPaidBadge && !isManagement() && (
           <Badge
-            backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
+            backgroundColor={
+              theme.isBase
+                ? globalColors.favoritesStatus
+                : globalColors.favoriteStatusDark
+            }
             label={badgeLabel}
             isPaidBadge={true}
             className="paid-badge"

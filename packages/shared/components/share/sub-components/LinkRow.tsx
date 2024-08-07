@@ -175,7 +175,6 @@ const LinkRow = ({
             {!isArchiveFolder && (
               <IconButton
                 size={16}
-                className="link-row_copy-icon"
                 iconName={CopyIcon}
                 onClick={() => onCopyLink(link)}
                 title={t("Common:CreateAndCopy")}
@@ -221,6 +220,7 @@ const LinkRow = ({
                 type="onlyIcon"
                 isDisabled={isExpiredLink || isLoaded}
                 manualWidth="fit-content"
+                withBackdrop={false}
               />
             )}
           </div>

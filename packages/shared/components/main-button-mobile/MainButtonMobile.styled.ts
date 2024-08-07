@@ -29,7 +29,7 @@ import { isMobile } from "react-device-detect";
 
 import { mobile, tablet } from "../../utils";
 
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
 import { FloatingButton } from "../floating-button";
@@ -39,7 +39,7 @@ const StyledFloatingButton = styled(FloatingButton)`
   position: relative;
   z-index: 1010;
   background: ${(props) => props.theme.mainButtonMobile.buttonColor};
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   .circle__background {
     background: ${(props) => props.theme.mainButtonMobile.buttonColor};
@@ -378,15 +378,12 @@ export {
 const getDefaultProgressStyles = ({
   $currentColorScheme,
   theme,
-  error,
 }: ProgressBarMobileDefaultStyles) =>
   $currentColorScheme &&
   css`
-    background: ${error
-      ? theme.mainButtonMobile.bar.errorBackground
-      : theme.isBase
-        ? $currentColorScheme?.main?.accent
-        : "#FFFFFF"};
+    background: ${
+      theme.isBase ? $currentColorScheme?.main?.accent : globalColors.white
+    }};
   `;
 
 const StyledProgressBarTheme = styled(StyledBar)(getDefaultProgressStyles);

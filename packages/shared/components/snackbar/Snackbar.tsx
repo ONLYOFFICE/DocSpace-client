@@ -39,6 +39,7 @@ import { BarConfig, SnackbarProps } from "./Snackbar.types";
 import { StyledAction, StyledSnackBar, StyledIframe } from "./Snackbar.styled";
 import StyledCrossIcon from "./SnackbarAction.styled";
 import StyledLogoIcon from "./SnackbarLogo.styled.ts";
+import { globalColors } from "../../themes";
 
 class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
   static show(barConfig: BarConfig) {
@@ -128,7 +129,7 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
       text,
       headerText,
       btnText,
-      textColor = "#000",
+      textColor = globalColors.darkBlack,
       showIcon,
       fontSize,
       fontWeight,
@@ -139,7 +140,7 @@ class SnackBar extends React.Component<SnackbarProps, { isLoaded: boolean }> {
       isCampaigns,
       onAction,
       sectionWidth,
-      backgroundColor = "#F7E6BE",
+      backgroundColor = globalColors.lightToastAlert,
       ...rest
     } = this.props;
 

@@ -57,6 +57,7 @@ const StyledEditLinkPanel = styled(ModalDialog)`
 
       .edit-link_required-icon {
         display: inline-flex;
+        color: ${(props) => props.theme.editLink.requiredColor};
         margin-inline-start: 2px;
       }
 

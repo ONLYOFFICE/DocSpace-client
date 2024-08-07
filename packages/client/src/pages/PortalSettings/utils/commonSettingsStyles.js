@@ -43,7 +43,7 @@ export const commonSettingsStyles = css`
     }
 
     .category-item-description {
-      color: #555f65;
+      color: ${(props) => props.theme.client.settings.descriptionColor};
       font-size: 12px;
       max-width: 1024px;
     }

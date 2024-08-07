@@ -29,6 +29,7 @@ import { Meta, StoryObj } from "@storybook/react";
 
 import { Loader } from ".";
 import { LoaderTypes } from "./Loader.enums";
+import { globalColors } from "../../themes";
 
 const meta = {
   title: "Components/Loader",
@@ -61,7 +62,7 @@ export const Default: Story = {
   ),
   args: {
     type: LoaderTypes.base,
-    color: "#63686a",
+    color: globalColors.loaderLight,
     size: "18px",
     label: "Loading content, please wait...",
   },
@@ -79,19 +80,19 @@ export const Examples = {
       >
         <Loader
           type={LoaderTypes.base}
-          color="#63686a"
+          color={globalColors.loaderLight}
           size="18px"
           label="Loading content, please wait..."
         />
         <Loader
           type={LoaderTypes.dualRing}
-          color="#63686a"
+          color={globalColors.loaderLight}
           size="40px"
           label="Loading content, please wait."
         />
         <Loader
           type={LoaderTypes.oval}
-          color="#63686a"
+          color={globalColors.loaderLight}
           size="40px"
           label="Loading content, please wait."
         />

@@ -54,7 +54,7 @@
 describe("<LinkWithDropdown />", () => {
   it("renders without error", () => {
     // const wrapper = mount(
-    //   <LinkWithDropdown color="#333333" isBold={true} data={[]}>
+    //   <LinkWithDropdown isBold={true} data={[]}>
     //     Link with dropdown
     //   </LinkWithDropdown>
     // );
@@ -66,7 +66,7 @@ describe("<LinkWithDropdown />", () => {
   // it("re-render test", () => {
   //   const wrapper = mount(
   //     // @ts-expect-error TS(2322): Type '{ children: string; color: string; isBold: b... Remove this comment to see the full error message
-  //     <LinkWithDropdown color="#333333" isBold={true} data={data}>
+  //     <LinkWithDropdown isBold={true} data={data}>
   //       Link with dropdown
   //     </LinkWithDropdown>
   //   );
@@ -87,7 +87,7 @@ describe("<LinkWithDropdown />", () => {
   // it("re-render after changing color", () => {
   //   const wrapper = shallow(
   //     // @ts-expect-error TS(2322): Type '{ children: string; color: string; isBold: b... Remove this comment to see the full error message
-  //     <LinkWithDropdown color="#333333" isBold={true} data={data}>
+  //     <LinkWithDropdown isBold={true} data={data}>
   //       Link with dropdown
   //     </LinkWithDropdown>
   //   );
@@ -95,7 +95,7 @@ describe("<LinkWithDropdown />", () => {
 
   //   const shouldUpdate = instance.shouldComponentUpdate(
   //     {
-  //       color: "#999",
+  //       color: "",
   //     },
   //     instance.state
   //   );
@@ -108,7 +108,7 @@ describe("<LinkWithDropdown />", () => {
   // it("re-render after changing dropdownType and isOpen prop", () => {
   //   const wrapper = shallow(
   //     // @ts-expect-error TS(2322): Type '{ children: string; color: string; isBold: b... Remove this comment to see the full error message
-  //     <LinkWithDropdown color="#333333" isBold={true} data={data}>
+  //     <LinkWithDropdown isBold={true} data={data}>
   //       Link with dropdown
   //     </LinkWithDropdown>
   //   );
@@ -130,7 +130,7 @@ describe("<LinkWithDropdown />", () => {
   // it("re-render after changing isOpen prop", () => {
   //   const wrapper = shallow(
   //     // @ts-expect-error TS(2322): Type '{ children: string; color: string; isBold: b... Remove this comment to see the full error message
-  //     <LinkWithDropdown color="#333333" isBold={true} data={data}>
+  //     <LinkWithDropdown isBold={true} data={data}>
   //       Link with dropdown
   //     </LinkWithDropdown>
   //   );
@@ -151,7 +151,7 @@ describe("<LinkWithDropdown />", () => {
   // it("not re-render", () => {
   //   const wrapper = mount(
   //     // @ts-expect-error TS(2322): Type '{ children: string; color: string; isBold: b... Remove this comment to see the full error message
-  //     <LinkWithDropdown color="#333333" isBold={true} data={data}>
+  //     <LinkWithDropdown isBold={true} data={data}>
   //       Link with dropdown
   //     </LinkWithDropdown>
   //   );
@@ -170,7 +170,7 @@ describe("<LinkWithDropdown />", () => {
   // it("accepts id", () => {
   //   const wrapper = mount(
   //     // @ts-expect-error TS(2322): Type '{ children: string; color: string; isBold: b... Remove this comment to see the full error message
-  //     <LinkWithDropdown color="#333333" isBold={true} data={[]} id="testId">
+  //     <LinkWithDropdown isBold={true} data={[]} id="testId">
   //       Link with dropdown
   //     </LinkWithDropdown>
   //   );
@@ -184,7 +184,6 @@ describe("<LinkWithDropdown />", () => {
   //   const wrapper = mount(
   //     // @ts-expect-error TS(2322): Type '{ children: string; color: string; isBold: b... Remove this comment to see the full error message
   //     <LinkWithDropdown
-  //       color="#333333"
   //       isBold={true}
   //       data={[]}
   //       className="test"
@@ -202,7 +201,6 @@ describe("<LinkWithDropdown />", () => {
   //   const wrapper = mount(
   //     // @ts-expect-error TS(2322): Type '{ children: string; color: string; isBold: b... Remove this comment to see the full error message
   //     <LinkWithDropdown
-  //       color="#333333"
   //       isBold={true}
   //       data={[]}
   //       style={{ color: "red" }}
@@ -220,7 +218,6 @@ describe("<LinkWithDropdown />", () => {
   //   const wrapper = shallow(
   //     // @ts-expect-error TS(2322): Type '{ children: string; color: string; isBold: b... Remove this comment to see the full error message
   //     <LinkWithDropdown
-  //       color="#333333"
   //       isBold={true}
   //       data={[]}
   //       style={{ color: "red" }}
@@ -247,7 +244,6 @@ describe("<LinkWithDropdown />", () => {
   //   const wrapper = shallow(
   //     // @ts-expect-error TS(2322): Type '{ children: string; color: string; isBold: b... Remove this comment to see the full error message
   //     <LinkWithDropdown
-  //       color="#333333"
   //       isBold={true}
   //       data={[]}
   //       style={{ color: "red" }}
@@ -271,7 +267,6 @@ describe("<LinkWithDropdown />", () => {
   //   const wrapper = mount(
   //     // @ts-expect-error TS(2322): Type '{ children: string; color: string; isBold: b... Remove this comment to see the full error message
   //     <LinkWithDropdown
-  //       color="#333333"
   //       isBold={true}
   //       data={[]}
   //       dropdownType="appearDashedAfterHover"
@@ -288,7 +283,7 @@ describe("<LinkWithDropdown />", () => {
   // it("accepts prop isOpen", () => {
   //   const wrapper = mount(
   //     // @ts-expect-error TS(2322): Type '{ children: string; color: string; isBold: b... Remove this comment to see the full error message
-  //     <LinkWithDropdown color="#333333" isBold={true} data={[]} isOpen>
+  //     <LinkWithDropdown isBold={true} data={[]} isOpen>
   //       Link with dropdown
   //     </LinkWithDropdown>
   //   );
@@ -302,7 +297,6 @@ describe("<LinkWithDropdown />", () => {
   //   const wrapper = mount(
   //     // @ts-expect-error TS(2322): Type '{ children: string; color: string; isBold: b... Remove this comment to see the full error message
   //     <LinkWithDropdown
-  //       color="#333333"
   //       isBold={true}
   //       data={[]}
   //       isSemitransparent

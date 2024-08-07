@@ -51,9 +51,7 @@ export const PreviewBlock = ({
 
   const codeBlock = `<div id="${frameId}">Fallback text</div>\n<script src="${scriptUrl}${params}"></script>`;
 
-  const code = (
-    <CodeToInsert t={t} theme={theme} codeBlock={codeBlock} config={config} />
-  );
+  const code = <CodeToInsert t={t} codeBlock={codeBlock} config={config} />;
   const dataTabs = [
     {
       id: "preview",

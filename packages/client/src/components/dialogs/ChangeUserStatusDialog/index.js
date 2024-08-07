@@ -40,6 +40,7 @@ import { withTranslation } from "react-i18next";
 import { EmployeeStatus } from "@docspace/shared/enums";
 import ModalDialogContainer from "../ModalDialogContainer";
 import { inject, observer } from "mobx-react";
+import { globalColors } from "@docspace/shared/themes";
 
 class ChangeUserStatusDialogComponent extends React.Component {
   constructor(props) {
@@ -87,7 +88,7 @@ class ChangeUserStatusDialogComponent extends React.Component {
             <>
               <Text>{t("Common:QuotaPaidUserLimitError")}</Text>
               <Link
-                color="#5387AD"
+                color={globalColors.link}
                 isHovered={true}
                 onClick={this.onClickPayments}
               >

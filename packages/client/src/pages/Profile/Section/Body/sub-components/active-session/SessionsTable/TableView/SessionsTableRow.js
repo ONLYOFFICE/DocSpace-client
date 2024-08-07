@@ -36,6 +36,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { convertTime } from "@docspace/shared/utils/convertTime";
 import RemoveSessionSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
+import { globalColors } from "@docspace/shared/themes";
 
 const StyledTableRow = styled(TableRow)`
   .session-platform {
@@ -100,7 +101,7 @@ const SessionsTableRow = (props) => {
           <IconButton
             size={12}
             className="tick-icon"
-            color="#20D21F"
+            color={globalColors.tickColor}
             iconName={TickSvgUrl}
           />
         )}

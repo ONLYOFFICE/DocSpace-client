@@ -49,13 +49,18 @@ import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 const StyledComponent = styled.div`
   .link {
     font-weight: 600;
-    border-bottom: 1px dashed #333333;
-    border-color: ${(props) => !props.isSettingPaid && "#A3A9AE"};
+    border-bottom: ${(props) =>
+      props.theme.client.settings.common.companyInfo.border};
+    border-color: ${(props) =>
+      !props.isSettingPaid &&
+      props.theme.client.settings.common.companyInfo.color};
   }
 
   .description,
   .link {
-    color: ${(props) => !props.isSettingPaid && "#A3A9AE"};
+    color: ${(props) =>
+      !props.isSettingPaid &&
+      props.theme.client.settings.common.companyInfo.color};
   }
 
   .text-input {

@@ -68,6 +68,7 @@ import {
 
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
+import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 
 const minSearchValue = 2;
 
@@ -92,6 +93,7 @@ const InviteInput = ({
   i18n,
   setCultureKey,
   standalone,
+  isPaidUserLimit,
 }) => {
   const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
@@ -551,6 +553,8 @@ const InviteInput = ({
           containerRef={inputsRef}
           isOwner={isOwner}
           isMobileView={isMobileView}
+          isSelectionDisabled={isPaidUserLimit}
+          selectionErrorText={<PaidQuotaLimitError />}
         />
 
         {!hideSelector && addUsersPanelVisible && (
@@ -578,31 +582,35 @@ const InviteInput = ({
   );
 };
 
-export default inject(({ settingsStore, dialogsStore, userStore }) => {
-  const { isOwner } = userStore.user;
-  const {
-    invitePanelOptions,
-    setInviteItems,
-    inviteItems,
-    setInviteLanguage,
-    culture,
-  } = dialogsStore;
+export default inject(
+  ({ settingsStore, dialogsStore, userStore, currentQuotaStore }) => {
+    const { isOwner } = userStore.user;
+    const {
+      invitePanelOptions,
+      setInviteItems,
+      inviteItems,
+      setInviteLanguage,
+      culture,
+    } = dialogsStore;
 
-  const { culture: language, standalone } = settingsStore;
+    const { culture: language, standalone } = settingsStore;
+    const { isPaidUserLimit } = currentQuotaStore;
 
-  return {
-    language,
-    setInviteLanguage,
-    setInviteItems,
-    inviteItems,
-    culture,
-    roomId: invitePanelOptions.roomId,
-    hideSelector: invitePanelOptions.hideSelector,
-    defaultAccess: invitePanelOptions.defaultAccess,
-    isOwner,
-    standalone,
-  };
-})(
+    return {
+      language,
+      setInviteLanguage,
+      setInviteItems,
+      inviteItems,
+      culture,
+      roomId: invitePanelOptions.roomId,
+      hideSelector: invitePanelOptions.hideSelector,
+      defaultAccess: invitePanelOptions.defaultAccess,
+      isOwner,
+      standalone,
+      isPaidUserLimit,
+    };
+  },
+)(
   withCultureNames(
     withTranslation(["InviteDialog", "Common", "Translations"])(
       observer(InviteInput),

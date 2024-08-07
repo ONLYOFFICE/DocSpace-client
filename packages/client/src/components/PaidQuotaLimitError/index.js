@@ -23,32 +23,56 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 
-import { ComboboxProps } from "../combobox";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { toastr } from "@docspace/shared/components/toast";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
-type PropsFromCombobox = Pick<
-  ComboboxProps,
-  | "className"
-  | "selectedOption"
-  | "advancedOptions"
-  | "scaled"
-  | "scaledOptions"
-  | "size"
-  | "manualWidth"
-  | "onSelect"
-  | "directionX"
-  | "directionY"
-  | "fixedDirection"
-  | "isAside"
-  | "manualY"
-  | "withoutBackground"
-  | "withBackground"
-  | "withBlur"
->;
+const PaidQuotaLimitError = ({
+  isRoomAdmin,
+  setInvitePanelOptions,
+  invitePanelVisible,
+}) => {
+  const { t } = useTranslation();
 
-export type AccessRightSelectProps = PropsFromCombobox & {
-  /** List of access options */
-  accessOptions: ComboboxProps["options"];
-  isSelectionDisabled?: boolean;
-  selectionErrorText?: React.ReactNode;
+  const onClickPayments = () => {
+    const paymentPageUrl = combineUrl(
+      "/portal-settings",
+      "/payments/portal-payments",
+    );
+
+    toastr.clear();
+    window.DocSpace.navigate(paymentPageUrl);
+
+    invitePanelVisible &&
+      setInvitePanelOptions({
+        visible: false,
+        hideSelector: false,
+        defaultAccess: 1,
+      });
+  };
+
+  return (
+    <>
+      <Text>{t("Common:QuotaPaidUserLimitError")}</Text>
+      {!isRoomAdmin && (
+        <Link color="#5387AD" isHovered={true} onClick={onClickPayments}>
+          {t("Common:PaymentsTitle")}
+        </Link>
+      )}
+    </>
+  );
 };
+
+export default inject(({ authStore, dialogsStore }) => {
+  const { isRoomAdmin } = authStore;
+  const { setInvitePanelOptions, invitePanelOptions } = dialogsStore;
+  return {
+    isRoomAdmin,
+    setInvitePanelOptions,
+    invitePanelVisible: invitePanelOptions.visible,
+  };
+})(observer(PaidQuotaLimitError));

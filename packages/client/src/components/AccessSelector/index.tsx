@@ -52,6 +52,8 @@ interface AccessSelectorProps {
   isDisabled?: boolean;
   directionX?: string;
   directionY?: string;
+  isSelectionDisabled?: boolean;
+  selectionErrorText: React.ReactNode;
 }
 
 const AccessSelector: React.FC<AccessSelectorProps> = ({
@@ -72,6 +74,8 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
   isDisabled,
   directionX = "right",
   directionY = "bottom",
+  isSelectionDisabled,
+  selectionErrorText,
 }) => {
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
   const [width, setWidth] = useState(manualWidth || 0);
@@ -133,6 +137,8 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           setIsOpenItemAccess={setIsOpenItemAccess}
           hideMobileView={isMobileHorizontalOrientation}
           isDisabled={isDisabled}
+          isSelectionDisabled={isSelectionDisabled}
+          selectionErrorText={selectionErrorText}
         />
       )}
 
@@ -155,6 +161,8 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           withBackground={!isMobileView}
           withBlur={isMobileView}
           isDisabled={isDisabled}
+          isSelectionDisabled={isSelectionDisabled}
+          selectionErrorText={selectionErrorText}
         />
       )}
     </StyledAccessSelector>

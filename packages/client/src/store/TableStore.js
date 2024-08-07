@@ -55,7 +55,6 @@ class TableStore {
   roomColumnTypeIsEnabled = false;
   roomColumnTagsIsEnabled = true;
   roomColumnOwnerIsEnabled = false;
-  roomColumnQuickButtonsIsEnabled = true;
   roomColumnActivityIsEnabled = true;
   roomQuotaColumnIsEnable = false;
 
@@ -67,7 +66,6 @@ class TableStore {
   modifiedColumnIsEnabled = true;
   sizeColumnIsEnabled = true;
   typeColumnIsEnabled = true;
-  quickButtonsColumnIsEnabled = true;
   lastOpenedColumnIsEnabled = true;
 
   authorTrashColumnIsEnabled = true;
@@ -141,10 +139,6 @@ class TableStore {
 
   setTypeColumn = (enable) => {
     this.typeColumnIsEnabled = enable;
-  };
-
-  setQuickButtonsColumn = (enable) => {
-    this.quickButtonsColumnIsEnabled = enable;
   };
 
   setAuthorTrashColumn = (enable) => (this.authorTrashColumnIsEnabled = enable);
@@ -232,7 +226,6 @@ class TableStore {
         this.setErasureColumn(splitColumns.includes("Erasure"));
         this.setSizeTrashColumn(splitColumns.includes("SizeTrash"));
         this.setTypeTrashColumn(splitColumns.includes("TypeTrash"));
-        this.setQuickButtonsColumn(splitColumns.includes("QuickButtons"));
         return;
       }
 
@@ -241,7 +234,6 @@ class TableStore {
       this.setCreatedColumn(splitColumns.includes("Created"));
       this.setSizeColumn(splitColumns.includes("Size"));
       this.setTypeColumn(splitColumns.includes("Type"));
-      this.setQuickButtonsColumn(splitColumns.includes("QuickButtons"));
       this.setLastOpenedColumn(splitColumns.includes("LastOpened"));
     }
   };
@@ -313,10 +305,6 @@ class TableStore {
 
       case "TypeTrash":
         this.setTypeTrashColumn(!this.typeTrashColumnIsEnabled);
-        return;
-
-      case "QuickButtons":
-        this.setQuickButtonsColumn(!this.quickButtonsColumnIsEnabled);
         return;
 
       case "Owner":

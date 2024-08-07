@@ -45,8 +45,6 @@ const TrashRowDataComponent = (props) => {
     erasureColumnIsEnabled,
     sizeTrashColumnIsEnabled,
     typeTrashColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
-
     dragStyles,
     selectionProp,
     value,
@@ -57,7 +55,6 @@ const TrashRowDataComponent = (props) => {
     inProgress,
     showHotkeyBorder,
     badgesComponent,
-    quickButtonsComponent,
     tableStorageName,
   } = props;
 
@@ -226,7 +223,6 @@ export default inject(({ tableStore }) => {
     erasureColumnIsEnabled,
     sizeTrashColumnIsEnabled,
     typeTrashColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
     tableStorageName,
   } = tableStore;
 
@@ -237,7 +233,6 @@ export default inject(({ tableStore }) => {
     erasureColumnIsEnabled,
     sizeTrashColumnIsEnabled,
     typeTrashColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
     tableStorageName,
   };
 })(observer(TrashRowDataComponent));

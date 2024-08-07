@@ -45,8 +45,6 @@ const RowDataComponent = (props) => {
     modifiedColumnIsEnabled,
     sizeColumnIsEnabled,
     typeColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
-
     dragStyles,
     selectionProp,
     value,
@@ -243,7 +241,6 @@ export default inject(({ tableStore }) => {
     modifiedColumnIsEnabled,
     sizeColumnIsEnabled,
     typeColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
     tableStorageName,
   } = tableStore;
 
@@ -253,7 +250,6 @@ export default inject(({ tableStore }) => {
     modifiedColumnIsEnabled,
     sizeColumnIsEnabled,
     typeColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
     tableStorageName,
   };
 })(observer(RowDataComponent));

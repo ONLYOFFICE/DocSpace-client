@@ -42,7 +42,6 @@ const RecentRowDataComponent = (props) => {
     modifiedColumnIsEnabled,
     sizeColumnIsEnabled,
     typeColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
     lastOpenedColumnIsEnabled,
 
     dragStyles,
@@ -55,7 +54,6 @@ const RecentRowDataComponent = (props) => {
     inProgress,
     showHotkeyBorder,
     badgesComponent,
-    quickButtonsComponent,
     tableStorageName,
   } = props;
 
@@ -221,7 +219,6 @@ export default inject(({ tableStore }) => {
     modifiedColumnIsEnabled,
     sizeColumnIsEnabled,
     typeColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
     lastOpenedColumnIsEnabled,
     tableStorageName,
   } = tableStore;
@@ -232,7 +229,6 @@ export default inject(({ tableStore }) => {
     modifiedColumnIsEnabled,
     sizeColumnIsEnabled,
     typeColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
     lastOpenedColumnIsEnabled,
     tableStorageName,
   };

@@ -2176,7 +2176,7 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["download"]);
       }
 
-      if (!isPdf || item.startFilling || item.isForm) {
+      if (!isPdf || (shouldFillForm && canFillForm)) {
         fileOptions = this.removeOptions(fileOptions, ["open-pdf"]);
       }
 
@@ -3379,6 +3379,8 @@ class FilesStore {
       const needConvert = item.viewAccessibility?.MustConvert;
       const isEditing =
         (item.fileStatus & FileStatus.IsEditing) === FileStatus.IsEditing;
+
+      console.log({ isEditing, status: item.fileStatus });
 
       const docUrl =
         !canOpenPlayer && !isFolder && this.getItemUrl(id, false, needConvert);

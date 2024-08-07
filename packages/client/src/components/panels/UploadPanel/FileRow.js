@@ -121,7 +121,7 @@ const StyledFileRow = styled(Row)`
     }
 
     .enter-password {
-      color: ${(props) => props.theme.filesPanels.upload.textColor};
+      color: ${(props) => props.theme.filesPanels.upload.color};
       margin-inline-end: 8px;
       text-decoration: underline dashed;
       cursor: pointer;
@@ -152,12 +152,12 @@ const StyledFileRow = styled(Row)`
     ${(props) =>
       props.isError &&
       css`
-        color: ${props.theme.filesPanels.upload.textColor};
+        color: ${props.theme.filesPanels.upload.color};
       `}
   }
 
   .file-exst {
-    color: ${(props) => props.theme.filesPanels.upload.textColor};
+    color: ${(props) => props.theme.filesPanels.upload.color};
   }
 `;
 class FileRow extends Component {

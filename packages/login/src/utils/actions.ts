@@ -100,15 +100,15 @@ export async function getVersionBuild() {
 }
 
 export async function getColorTheme() {
-  const [getSettings] = createRequest(
+  const [getColorTheme] = createRequest(
     [`/settings/colortheme`],
     [["", ""]],
     "GET",
   );
 
-  const res = await fetch(getSettings);
+  const res = await fetch(getColorTheme);
 
-  if (!res.ok) throw new Error(res.statusText);
+  if (!res.ok) return;
 
   const colorTheme = await res.json();
 
@@ -210,7 +210,7 @@ export async function getPortalCultures() {
 
   const res = await fetch(getPortalCultures);
 
-  if (!res.ok) throw new Error(res.statusText);
+  if (!res.ok) return;
 
   const cultures = await res.json();
 
@@ -472,6 +472,21 @@ export async function suspendPortal(confirmKey: string | null = null) {
   if (!res.ok) throw new Error(res.statusText);
 }
 
+export async function continuePortal(confirmKey: string | null = null) {
+  const [continuePortal] = createRequest(
+    [`/portal/continue`],
+    [
+      confirmKey ? ["confirm", confirmKey] : ["", ""],
+      ["Content-Type", "application/json;charset=utf-8"],
+    ],
+    "PUT",
+  );
+
+  const res = await fetch(continuePortal);
+
+  if (!res.ok) throw new Error(res.statusText);
+}
+
 export async function changePassword(
   passwordHash: string,
   userId?: string,
@@ -585,4 +600,23 @@ export async function deleteSelf(confirmKey: string | null = null) {
   const res = await fetch(deleteSelf);
 
   if (!res.ok) throw new Error(res.statusText);
+}
+
+export async function deletePortal(confirmKey: string | null = null) {
+  const [deletePortal] = createRequest(
+    [`/portal/delete`],
+    [
+      confirmKey ? ["Confirm", confirmKey] : ["", ""],
+      ["Accept", "application/json;charset=utf-8"],
+    ],
+    "DELETE",
+  );
+
+  const res = await fetch(deletePortal);
+
+  if (!res.ok) throw new Error(res.statusText);
+
+  const feedbackUrl = await res.json();
+
+  return feedbackUrl.response as string;
 }

@@ -33,8 +33,6 @@ import { ThemeProvider } from "@docspace/shared/components/theme-provider";
 import { TFirebaseSettings } from "@docspace/shared/api/settings/types";
 import FirebaseHelper from "@docspace/shared/utils/firebase";
 import { TUser } from "@docspace/shared/api/people/types";
-import { ThemeKeys } from "@docspace/shared/enums";
-import { Base, Dark } from "@docspace/shared/themes";
 
 import { TDataContext } from "@/types";
 import useI18N from "@/hooks/useI18N";
@@ -42,11 +40,11 @@ import useTheme from "@/hooks/useTheme";
 
 import pkgFile from "../../package.json";
 import ErrorBoundaryWrapper from "./ErrorBoundary";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export const Providers = ({
   children,
   value,
-
   redirectURL,
 }: {
   children: React.ReactNode;
@@ -56,11 +54,20 @@ export const Providers = ({
   const firebaseHelper = new FirebaseHelper(
     value.settings?.firebase ?? ({} as TFirebaseSettings),
   );
+  const confirmType = useSearchParams().get("type");
+
+  let shouldRedirect = true;
+  if (redirectURL == `unavailable` && confirmType == "PortalContinue") {
+    shouldRedirect = false;
+  }
+
+  const pathName = usePathname();
+  const expectedPathName = `/${redirectURL}`;
 
   React.useEffect(() => {
-    if (redirectURL && window.location.pathname !== `/${redirectURL}`)
-      window.location.replace(redirectURL);
-  }, [redirectURL]);
+    if (shouldRedirect && redirectURL && pathName !== expectedPathName)
+      window.location.replace(expectedPathName);
+  }, [redirectURL, pathName, expectedPathName, shouldRedirect]);
 
   const { i18n } = useI18N({
     settings: value.settings,
@@ -80,7 +87,11 @@ export const Providers = ({
           version={pkgFile.version}
           firebaseHelper={firebaseHelper}
         >
-          {children}
+          {shouldRedirect && redirectURL && expectedPathName !== pathName ? (
+            <></>
+          ) : (
+            children
+          )}
         </ErrorBoundaryWrapper>
       </I18nextProvider>
     </ThemeProvider>

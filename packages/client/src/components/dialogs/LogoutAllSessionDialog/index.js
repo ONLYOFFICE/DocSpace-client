@@ -56,10 +56,9 @@ const LogoutAllSessionDialog = ({
       visible={visible}
       onClose={onClose}
       displayType="modal"
+      autoMaxHeight
     >
-      <ModalDialog.Header>
-        {t("Profile:LogoutAllActiveConnections")}
-      </ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:LogoutButton")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>{t("Profile:LogoutDescription")}</Text>
         <Text style={{ margin: "15px 0" }}>
@@ -70,8 +69,8 @@ const LogoutAllSessionDialog = ({
             className="change-password"
             isChecked={isChecked}
             onChange={onChangeCheckbox}
+            label={t("Profile:ChangePasswordAfterLoggingOut")}
           />
-          {t("Profile:ChangePasswordAfterLoggingOut")}
         </Box>
       </ModalDialog.Body>
       <ModalDialog.Footer>

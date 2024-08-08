@@ -693,7 +693,10 @@ class UploadDataStore {
     let conflicts = await checkIsFileExist(toFolderId, filesArray);
     const folderInfo = await getFolderInfo(toFolderId);
 
-    conflicts = conflicts.map((fileTitle) => ({ title: fileTitle }));
+    conflicts = conflicts.map((fileTitle) => ({
+      title: fileTitle,
+      isFile: true,
+    }));
 
     if (conflicts.length > 0) {
       this.setConflictDialogData(conflicts, {

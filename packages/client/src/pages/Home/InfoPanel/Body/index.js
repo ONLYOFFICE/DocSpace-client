@@ -74,7 +74,9 @@ const InfoPanelBodyContent = ({
         selectedItems[0]?.membersCount !== null &&
         selectedItems[0]?.membersCount !== undefined
       )) ||
-    (isInsideGroup && selectedItems.length && !selectedItems[0].manager);
+    (isInsideGroup &&
+      selectedItems.length &&
+      !selectedItems[0].hasOwnProperty("membersCount"));
 
   const isSeveralItems = props.selectedItems?.length > 1;
 

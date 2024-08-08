@@ -337,10 +337,14 @@ export default inject<TStore>(
     } = filesStore;
 
     const files = items
-      ? items.filter((f) => (f.fileExst || f.contentLength) && f)
+      ? items.filter((f) => {
+          if (f.isFile || f.fileExst || f.contentLength) return f;
+        })
       : [];
     const folders = items
-      ? items.filter((f) => !f.fileExst && !f.contentLength && f)
+      ? items.filter((f) => {
+          if (!f.fileExst && !f.contentLength && !f.isFile) return f;
+        })
       : [];
 
     return {

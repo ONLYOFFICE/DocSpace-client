@@ -504,7 +504,13 @@ export async function changePassword(
 
   const res = await fetch(changePassword);
 
-  if (!res.ok) throw new Error(res.statusText);
+  if (!res.ok) {
+    if (res.status === 500) {
+      const errorRes = await res.json();
+      throw new Error(errorRes.error.message);
+    }
+    throw new Error(res.statusText);
+  }
 
   const user = await res.json();
 
@@ -553,6 +559,37 @@ export async function updateActivationStatus(
   const res = await fetch(updateActivationStatus);
 
   if (!res.ok) throw new Error(res.statusText);
+}
+
+export async function updateUser(
+  id: string,
+  FirstName?: string,
+  LastName?: string,
+) {
+  const [updateUser] = createRequest(
+    [`/people/${id}`],
+    [["Content-Type", "application/json;charset=utf-8"]],
+    "PUT",
+    JSON.stringify({ id, FirstName, LastName }),
+  );
+
+  const res = await fetch(updateUser);
+
+  if (!res.ok) {
+    if (res.status === 500) {
+      const errorRes = await res.json();
+      throw new Error(errorRes.error.message);
+    }
+    throw new Error(res.statusText);
+  }
+
+  const user = await res.json();
+
+  if (user && user.displayName) {
+    user.displayName = Encoder.htmlDecode(user.displayName);
+  }
+
+  return user.response as TUser;
 }
 
 export async function ownerChange(

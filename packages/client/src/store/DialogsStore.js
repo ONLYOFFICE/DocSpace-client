@@ -26,6 +26,7 @@
 
 import { getNewFiles } from "@docspace/shared/api/files";
 import {
+  EmployeeType,
   FilesSelectorFilterTypes,
   FilterType,
   ShareAccessRights,
@@ -127,6 +128,8 @@ class DialogsStore {
     visible: false,
     file: null,
   };
+
+  invitePaidUsersCount = 0;
 
   constructor(
     authStore,
@@ -433,9 +436,33 @@ class DialogsStore {
     this.inviteItems = inviteItems;
   };
 
+  setInvitePaidUsersCount = (modifier = 1) => {
+    this.invitePaidUsersCount = this.invitePaidUsersCount + modifier;
+  };
+
+  isPaidUserAccess = (selectedAccess) => {
+    return (
+      selectedAccess === EmployeeType.Admin ||
+      selectedAccess === EmployeeType.Collaborator ||
+      selectedAccess === EmployeeType.User
+    );
+  };
+
   changeInviteItem = async (item) =>
     runInAction(() => {
       const index = this.inviteItems.findIndex((iItem) => iItem.id === item.id);
+
+      const isPrevAccessPaid = this.isPaidUserAccess(
+        this.inviteItems[index].access,
+      );
+      const isCurrAccessPaid = this.isPaidUserAccess(item.access);
+
+      let modifier = 0;
+  
+      if (isPrevAccessPaid && !isCurrAccessPaid) modifier = -1;
+      if (!isPrevAccessPaid && isCurrAccessPaid) modifier = 1;
+
+      this.setInvitePaidUsersCount(modifier);
 
       this.inviteItems[index] = { ...this.inviteItems[index], ...item };
     });

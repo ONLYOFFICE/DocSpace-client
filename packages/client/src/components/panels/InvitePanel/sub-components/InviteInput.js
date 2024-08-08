@@ -93,7 +93,8 @@ const InviteInput = ({
   i18n,
   setCultureKey,
   standalone,
-  isPaidUserLimit,
+  isPaidUserAccess,
+  setInvitePaidUsersCount,
 }) => {
   const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
@@ -136,6 +137,8 @@ const InviteInput = ({
 
     if (addresses.length > 1) {
       return addresses.map((address) => {
+        isPaidUserAccess(selectedAccess) && setInvitePaidUsersCount();
+
         return {
           email: address.email,
           id: uid(),
@@ -146,6 +149,8 @@ const InviteInput = ({
         };
       });
     }
+
+    isPaidUserAccess(selectedAccess) && setInvitePaidUsersCount();
 
     return {
       email: addresses[0].email,
@@ -591,10 +596,11 @@ export default inject(
       inviteItems,
       setInviteLanguage,
       culture,
+      setInvitePaidUsersCount,
+      isPaidUserAccess,
     } = dialogsStore;
 
     const { culture: language, standalone } = settingsStore;
-    const { isPaidUserLimit } = currentQuotaStore;
 
     return {
       language,
@@ -607,7 +613,8 @@ export default inject(
       defaultAccess: invitePanelOptions.defaultAccess,
       isOwner,
       standalone,
-      isPaidUserLimit,
+      isPaidUserAccess,
+      setInvitePaidUsersCount,
     };
   },
 )(

@@ -379,6 +379,7 @@ class FilesTableHeader extends React.Component {
         columnInfoPanelStorageName,
         sortBy,
         sortOrder,
+        isRecentTab,
       });
     } else {
       this.state = {
@@ -388,6 +389,7 @@ class FilesTableHeader extends React.Component {
         columnInfoPanelStorageName,
         sortBy,
         sortOrder,
+        isRecentTab,
       };
     }
   };
@@ -447,7 +449,7 @@ class FilesTableHeader extends React.Component {
       isTrashFolder !== prevProps.isTrashFolder ||
       columnStorageName !== prevProps.columnStorageName ||
       columnInfoPanelStorageName !== prevProps.columnInfoPanelStorageName ||
-      isRecentTab !== prevProps.isRecentTab ||
+      isRecentTab !== this.state.isRecentTab ||
       showStorageInfo !== prevProps.showStorageInfo ||
       sortBy !== this.state.sortBy ||
       sortOrder !== this.state.sortOrder

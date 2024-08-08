@@ -103,6 +103,7 @@ const Root = ({
   const { filesSettings } = useFilesSettings({});
   const { socketHelper } = useSocketHelper({
     socketUrl: user ? settings?.socketUrl ?? "" : "",
+    user,
   });
   const {
     onSDKRequestSaveAs,

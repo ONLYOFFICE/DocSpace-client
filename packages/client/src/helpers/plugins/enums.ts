@@ -110,7 +110,7 @@ export const enum PluginComponents {
 
 export const enum PluginUsersType {
   owner = "Owner",
-  docSpaceAdmin = "DocspaceAdmin",
+  docSpaceAdmin = "DocSpaceAdmin",
   roomAdmin = "RoomAdmin",
   collaborator = "Collaborator",
   user = "User",

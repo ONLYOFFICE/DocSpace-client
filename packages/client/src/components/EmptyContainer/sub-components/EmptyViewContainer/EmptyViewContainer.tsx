@@ -21,6 +21,8 @@ import type {
   CreateEvent,
   EmptyViewContainerProps,
   ExtensiontionType,
+  InjectedEmptyViewContainerProps,
+  OutEmptyViewContainerProps,
   UploadType,
 } from "./EmptyViewContainer.types";
 
@@ -34,13 +36,17 @@ const EmptyViewContainer = observer(
     folderType,
     selectedFolder,
     parentRoomType,
+    isRootEmptyPage,
     isVisibleInfoPanel,
     isArchiveFolderRoot,
+    rootFolderType,
+    isGracePeriod,
     setViewInfoPanel,
     onClickInviteUsers,
     setVisibleInfoPanel,
     onCreateAndCopySharedLink,
     setSelectFileFormRoomDialogVisible,
+    setInviteUsersWarningDialogVisible,
   }: EmptyViewContainerProps) => {
     const { t } = useTranslation([
       "EmptyView",
@@ -50,6 +56,16 @@ const EmptyViewContainer = observer(
     ]);
 
     const theme = useTheme();
+
+    const onCreateRoom = useCallback(() => {
+      if (isGracePeriod) {
+        setInviteUsersWarningDialogVisible(true);
+        return;
+      }
+
+      const event = new Event(Events.ROOM_CREATE);
+      window.dispatchEvent(event);
+    }, [isGracePeriod, setInviteUsersWarningDialogVisible]);
 
     const openInfoPanel = useCallback(() => {
       if (!isVisibleInfoPanel) setVisibleInfoPanel?.(true);
@@ -113,6 +129,8 @@ const EmptyViewContainer = observer(
         folderType,
         parentRoomType,
         isArchiveFolderRoot,
+        isRootEmptyPage,
+        rootFolderType,
       );
       const title = getTitle(
         type,
@@ -122,6 +140,8 @@ const EmptyViewContainer = observer(
         folderType,
         parentRoomType,
         isArchiveFolderRoot,
+        isRootEmptyPage,
+        rootFolderType,
       );
       const icon = getIcon(
         type,
@@ -130,6 +150,8 @@ const EmptyViewContainer = observer(
         isFolder,
         folderType,
         parentRoomType,
+        isRootEmptyPage,
+        rootFolderType,
       );
 
       return { description, title, icon };
@@ -141,7 +163,9 @@ const EmptyViewContainer = observer(
       isFolder,
       folderType,
       parentRoomType,
+      isRootEmptyPage,
       isArchiveFolderRoot,
+      rootFolderType,
     ]);
 
     const options = useMemo(
@@ -155,6 +179,8 @@ const EmptyViewContainer = observer(
           folderType,
           parentRoomType,
           isArchiveFolderRoot,
+          isRootEmptyPage,
+          rootFolderType,
           {
             inviteUser,
             onCreate,
@@ -162,6 +188,7 @@ const EmptyViewContainer = observer(
             onUploadAction,
             createAndCopySharedLink,
             openInfoPanel,
+            onCreateRoom,
           },
         ),
       [
@@ -172,6 +199,8 @@ const EmptyViewContainer = observer(
         folderType,
         parentRoomType,
         isArchiveFolderRoot,
+        isRootEmptyPage,
+        rootFolderType,
         t,
         inviteUser,
         uploadFromDocspace,
@@ -179,6 +208,7 @@ const EmptyViewContainer = observer(
         createAndCopySharedLink,
         onCreate,
         openInfoPanel,
+        onCreateRoom,
       ],
     );
 
@@ -195,15 +225,22 @@ const EmptyViewContainer = observer(
   },
 );
 
-const InjectedEmptyViewContainer = inject<TStore>(
+const InjectedEmptyViewContainer = inject<
+  TStore,
+  OutEmptyViewContainerProps,
+  InjectedEmptyViewContainerProps
+>(
   ({
     contextOptionsStore,
     selectedFolderStore,
     dialogsStore,
     infoPanelStore,
-  }) => {
+    currentTariffStatusStore,
+  }): InjectedEmptyViewContainerProps => {
     const { onClickInviteUsers, onCreateAndCopySharedLink } =
       contextOptionsStore;
+
+    const { isGracePeriod } = currentTariffStatusStore;
 
     const {
       setIsVisible: setVisibleInfoPanel,
@@ -211,9 +248,12 @@ const InjectedEmptyViewContainer = inject<TStore>(
       setView: setViewInfoPanel,
     } = infoPanelStore;
 
-    const { setSelectFileFormRoomDialogVisible } = dialogsStore;
+    const {
+      setSelectFileFormRoomDialogVisible,
+      setInviteUsersWarningDialogVisible,
+    } = dialogsStore;
 
-    const { security, access } = selectedFolderStore;
+    const { security, access, rootFolderType } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
 
@@ -222,13 +262,16 @@ const InjectedEmptyViewContainer = inject<TStore>(
       security,
       selectedFolder,
       isVisibleInfoPanel,
+      rootFolderType,
+      isGracePeriod,
       onClickInviteUsers,
       onCreateAndCopySharedLink,
       setSelectFileFormRoomDialogVisible,
+      setInviteUsersWarningDialogVisible,
       setVisibleInfoPanel,
       setViewInfoPanel,
     };
   },
-)(EmptyViewContainer);
+)(EmptyViewContainer as React.FC<OutEmptyViewContainerProps>);
 
 export default InjectedEmptyViewContainer;

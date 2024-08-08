@@ -85,16 +85,6 @@ const EmptyContainer = ({
     window.dispatchEvent(event);
   };
 
-  const onCreateRoom = (e) => {
-    if (isGracePeriod) {
-      setInviteUsersWarningDialogVisible(true);
-      return;
-    }
-
-    const event = new Event(Events.ROOM_CREATE);
-    window.dispatchEvent(event);
-  };
-
   if (isRoomNotFoundOrMoved) {
     return (
       <RoomNoAccessContainer
@@ -110,22 +100,13 @@ const EmptyContainer = ({
 
   if (isFiltered) return <EmptyFilterContainer linkStyles={linkStyles} />;
 
-  if (isRootEmptyPage)
-    return (
-      <RootFolderContainer
-        onCreate={onCreate}
-        linkStyles={linkStyles}
-        onCreateRoom={onCreateRoom}
-        sectionWidth={sectionWidth}
-      />
-    );
-
   return (
     <EmptyViewContainer
       type={roomType}
       folderType={type}
-      isFolder={!isRoom}
+      isFolder={!isRoom && !isRootEmptyPage}
       folderId={folderId}
+      isRootEmptyPage={isRootEmptyPage}
       parentRoomType={parentRoomType}
       isArchiveFolderRoot={isArchiveFolderRoot}
     />

@@ -9,42 +9,11 @@ import {
   ShareAccessRights,
 } from "@docspace/shared/enums";
 
-import EmptyFormRoomDarkIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.dark.svg";
-import EmptyFormRoomLightIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.light.svg";
-
-import EmptyFormRoomCollaboratorDarkIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.collaborator.dark.svg";
-import EmptyFormRoomCollaboratorLightIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.collaborator.light.svg";
-
-import EmptyFormRoomFillingDarkIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.filling.dark.svg";
-import EmptyFormRoomFillingLightIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.filling.light.svg";
-
-import EmptyCustomRoomDarkIcon from "PUBLIC_DIR/images/emptyview/empty.custom.room.dark.svg";
-import EmptyCustomRoomLightIcon from "PUBLIC_DIR/images/emptyview/empty.custom.room.light.svg";
-
-import EmptyCustomRoomCollaboratorDarkIcon from "PUBLIC_DIR/images/emptyview/empty.custom.room.collaborator.dark.svg";
-import EmptyCustomRoomCollaboratorLightIcon from "PUBLIC_DIR/images/emptyview/empty.custom.room.collaborator.light.svg";
-
-import EmptyPublicRoomDarkIcon from "PUBLIC_DIR/images/emptyview/empty.public.room.dark.svg";
-import EmptyPublicRoomLightIcon from "PUBLIC_DIR/images/emptyview/empty.public.room.light.svg";
-
-import EmptyPublicRoomCollaboratorDarkIcon from "PUBLIC_DIR/images/emptyview/empty.public.room.collaborator.dark.svg";
-import EmptyPublicRoomCollaboratorLightIcon from "PUBLIC_DIR/images/emptyview/empty.public.room.collaborator.light.svg";
-
-import EmptyCollaborationRoomDarkIcon from "PUBLIC_DIR/images/emptyview/empty.collaboration.room.dark.svg";
-import EmptyCollaborationRoomLightIcon from "PUBLIC_DIR/images/emptyview/empty.collaboration.room.light.svg";
-import EmptyCollaborationRoomCollaboratorDarkIcon from "PUBLIC_DIR/images/emptyview/empty.collaboration.room.collaborator.dark.svg";
-import EmptyCollaborationRoomCollaboratorLightIcon from "PUBLIC_DIR/images/emptyview/empty.collaboration.room.collaborator.light.svg";
-
-// import EmptyCustomRoomOtherDarkIcon from "PUBLIC_DIR/images/emptyview/empty.custom.room.other.dark.svg";
-// import EmptyCustomRoomOtherLightIcon from "PUBLIC_DIR/images/emptyview/empty.custom.room.other.light.svg";
-
 import CreateNewFormIcon from "PUBLIC_DIR/images/emptyview/create.new.form.svg";
 import CreateNewSpreadsheetIcon from "PUBLIC_DIR/images/emptyview/create.new.spreadsheet.svg";
 import CreateNewPresentation from "PUBLIC_DIR/images/emptyview/create.new.presentation.svg";
-// import CreateFromFormIcon from "PUBLIC_DIR/images/emptyview/create.from.document.form.svg";
-import InviteUserFormIcon from "PUBLIC_DIR/images/emptyview/invite.user.svg";
-import UploadPDFFormIcon from "PUBLIC_DIR/images/emptyview/upload.pdf.form.svg";
-import UploadDevicePDFFormIcon from "PUBLIC_DIR/images/emptyview/upload.device.pdf.form.svg";
+import CreateRoom from "PUBLIC_DIR/images/emptyview/create.room.svg";
+
 import SharedIcon from "PUBLIC_DIR/images/emptyview/share.svg";
 
 import DocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
@@ -53,38 +22,27 @@ import PresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.reac
 import FormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
 import FolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
 
-import FormDefaultFolderLight from "PUBLIC_DIR/images/emptyview/empty.form.default.folder.light.svg";
-import FormDefaultFolderDark from "PUBLIC_DIR/images/emptyview/empty.form.default.folder.dark.svg";
-import DefaultFolderDark from "PUBLIC_DIR/images/emptyview/empty.default.folder.dark.svg";
-import DefaultFolderLight from "PUBLIC_DIR/images/emptyview/empty.default.folder.light.svg";
-import DefaultFolderUserDark from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.dark.svg";
-import DefaultFolderUserLight from "PUBLIC_DIR/images/emptyview/empty.default.folder.user.light.svg";
-
 import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TFolderSecurity } from "@docspace/shared/api/files/types";
 import type { EmptyViewItemType } from "@docspace/shared/components/empty-view";
 
-import type {
-  ExtensiontionType,
-  OptionActions,
-  UploadType,
-} from "./EmptyViewContainer.types";
+import type { AccessType, OptionActions } from "./EmptyViewContainer.types";
 import { DefaultFolderType } from "./EmptyViewContainer.constants";
-
-type AccessType = Nullable<ShareAccessRights> | undefined;
-
-const isUser = (access: AccessType) => {
-  return (
-    access !== ShareAccessRights.None &&
-    access !== ShareAccessRights.RoomManager &&
-    access !== ShareAccessRights.Collaborator
-  );
-};
-
-const isAdmin = (access: AccessType) => {
-  return !isUser(access);
-};
+import {
+  getFolderDescription,
+  getFolderIcon,
+  getFolderTitle,
+  getRoomDescription,
+  getRoomIcon,
+  getRoomTitle,
+  getRootDesctiption,
+  getRootIcom,
+  getRootTitle,
+  helperOptions,
+  isAdmin,
+  isUser,
+} from "./EmptyViewContainer.utils";
 
 export const getDescription = (
   type: RoomsType,
@@ -94,49 +52,24 @@ export const getDescription = (
   folderType: Nullable<FolderType>,
   parentRoomType: Nullable<FolderType>,
   isArchiveFolderRoot: boolean,
+  isRootEmptyPage: boolean,
+  rootFolderType: Nullable<FolderType>,
 ): string => {
   const isNotAdmin = isUser(access);
 
-  if (isFolder) {
-    return match([parentRoomType, folderType, access])
-      .with([P._, FolderType.Done, P._], () =>
-        t("Files:EmptyFormFolderDoneDescriptionText"),
-      )
-      .with([P._, FolderType.InProgress, P._], () =>
-        t("Files:EmptyFormFolderProgressDescriptionText"),
-      )
-      .with([P._, FolderType.SubFolderDone, P._], () =>
-        t("Files:EmptyFormSubFolderDoneDescriptionText"),
-      )
-      .with([P._, FolderType.SubFolderInProgress, P._], () =>
-        t("Files:EmptyFormSubFolderProgressDescriptionText"),
-      )
-      .with(
-        [
-          FolderType.FormRoom,
-          null,
-          P.when(() => isNotAdmin || isArchiveFolderRoot),
-        ],
-        () => t("EmptyView:FormFolderDefaultUserDescription"),
-      )
-      .with([FolderType.FormRoom, DefaultFolderType, P._], () =>
-        t("EmptyView:FormFolderDefaultDescription", {
-          productName: t("Common:ProductName"),
-        }),
-      )
-      .with([P._, DefaultFolderType, P.when(isAdmin)], () =>
-        t("EmptyView:DefaultFolderDescription"),
-      )
-      .with([P._, DefaultFolderType, P.when(isUser)], () =>
-        t("EmptyView:UserEmptyDescription"),
-      )
-      .otherwise(() => "");
-  }
+  if (isRootEmptyPage) return getRootDesctiption(t, rootFolderType);
 
-  if (isNotAdmin || isArchiveFolderRoot)
-    return t("EmptyView:UserEmptyDescription");
+  if (isFolder)
+    return getFolderDescription(
+      t,
+      access,
+      isNotAdmin,
+      isArchiveFolderRoot,
+      folderType,
+      parentRoomType,
+    );
 
-  return t("EmptyView:EmptyDescription");
+  return getRoomDescription(t, isNotAdmin, isArchiveFolderRoot);
 };
 
 export const getTitle = (
@@ -147,167 +80,24 @@ export const getTitle = (
   folderType: Nullable<FolderType>,
   parentRoomType: Nullable<FolderType>,
   isArchiveFolderRoot: boolean,
+  isRootEmptyPage: boolean,
+  rootFolderType: Nullable<FolderType>,
 ): string => {
-  const isCollaborator = access === ShareAccessRights.Collaborator;
-
   const isNotAdmin = isUser(access);
 
-  if (isFolder) {
-    return match([parentRoomType, folderType, access])
-      .with([P._, FolderType.Done, P._], () =>
-        t("Files:EmptyFormFolderDoneHeaderText"),
-      )
+  if (isRootEmptyPage) return getRootTitle(t, rootFolderType);
 
-      .with([P._, FolderType.InProgress, P._], () =>
-        t("Files:EmptyFormFolderProgressHeaderText"),
-      )
-      .with(
-        [
-          P._,
-          P.union(FolderType.SubFolderDone, FolderType.SubFolderInProgress),
-          P._,
-        ],
-        () => t("Files:EmptyFormSubFolderHeaderText"),
-      )
-      .with(
-        [
-          FolderType.FormRoom,
-          DefaultFolderType,
-          P.when(() => isNotAdmin || isArchiveFolderRoot),
-        ],
-        () => t("EmptyView:FormFolderDefaultUserTitle"),
-      )
-      .with([FolderType.FormRoom, DefaultFolderType, P._], () =>
-        t("EmptyView:FormFolderDefaultTitle"),
-      )
-      .with([P._, DefaultFolderType, P._], () => t("Files:EmptyScreenFolder"))
-      .otherwise(() => "");
-  }
+  if (isFolder)
+    return getFolderTitle(
+      t,
+      isNotAdmin,
+      isArchiveFolderRoot,
+      access,
+      folderType,
+      parentRoomType,
+    );
 
-  if (isCollaborator) return t("EmptyView:CollaboratorEmptyTitle");
-
-  if (isNotAdmin || isArchiveFolderRoot) return t("Files:EmptyScreenFolder");
-
-  switch (type) {
-    case RoomsType.FormRoom:
-      return t("EmptyView:FormRoomEmptyTitle");
-    case RoomsType.EditingRoom:
-      return t("EmptyView:CollaborationRoomEmptyTitle");
-    case RoomsType.PublicRoom:
-      return t("EmptyView:PublicRoomEmptyTitle");
-    case RoomsType.CustomRoom:
-      return t("EmptyView:CustomRoomEmptyTitle");
-    default:
-      return "";
-  }
-};
-
-export const getFolderIcon = (
-  roomType: Nullable<FolderType>,
-  isBaseTheme: boolean,
-  access: AccessType,
-  folderType: Nullable<FolderType>,
-) => {
-  return match([roomType, folderType, access])
-    .with([FolderType.FormRoom, P._, P._], () =>
-      isBaseTheme ? <FormDefaultFolderLight /> : <FormDefaultFolderDark />,
-    )
-    .with([P._, DefaultFolderType, P.when(isUser)], () =>
-      isBaseTheme ? <DefaultFolderUserLight /> : <DefaultFolderUserDark />,
-    )
-    .with([P._, DefaultFolderType, P.when(isAdmin)], () =>
-      isBaseTheme ? <DefaultFolderLight /> : <DefaultFolderDark />,
-    )
-    .otherwise(() => <div />);
-};
-
-export const getRoomIcon = (
-  type: RoomsType,
-  isBaseTheme: boolean,
-  access: AccessType,
-) => {
-  return (
-    match([type, access])
-      .with([RoomsType.FormRoom, ShareAccessRights.FormFilling], () =>
-        isBaseTheme ? (
-          <EmptyFormRoomFillingLightIcon />
-        ) : (
-          <EmptyFormRoomFillingDarkIcon />
-        ),
-      )
-      .with([RoomsType.FormRoom, ShareAccessRights.Collaborator], () =>
-        isBaseTheme ? (
-          <EmptyFormRoomCollaboratorLightIcon />
-        ) : (
-          <EmptyFormRoomCollaboratorDarkIcon />
-        ),
-      )
-      .with([RoomsType.FormRoom, P._], () =>
-        isBaseTheme ? <EmptyFormRoomLightIcon /> : <EmptyFormRoomDarkIcon />,
-      )
-      .with(
-        [
-          RoomsType.EditingRoom,
-          P.union(ShareAccessRights.None, ShareAccessRights.RoomManager),
-        ],
-        () =>
-          isBaseTheme ? (
-            <EmptyCollaborationRoomLightIcon />
-          ) : (
-            <EmptyCollaborationRoomDarkIcon />
-          ),
-      )
-      .with([RoomsType.EditingRoom, ShareAccessRights.Collaborator], () =>
-        isBaseTheme ? (
-          <EmptyCollaborationRoomCollaboratorLightIcon />
-        ) : (
-          <EmptyCollaborationRoomCollaboratorDarkIcon />
-        ),
-      )
-      .with(
-        [
-          RoomsType.PublicRoom,
-          P.union(ShareAccessRights.None, ShareAccessRights.RoomManager), // owner, docspace admin, room admin
-        ],
-        () =>
-          isBaseTheme ? (
-            <EmptyPublicRoomLightIcon />
-          ) : (
-            <EmptyPublicRoomDarkIcon />
-          ),
-      )
-      .with([RoomsType.PublicRoom, ShareAccessRights.Collaborator], () =>
-        isBaseTheme ? (
-          <EmptyPublicRoomCollaboratorLightIcon />
-        ) : (
-          <EmptyPublicRoomCollaboratorDarkIcon />
-        ),
-      )
-      .with(
-        [
-          RoomsType.CustomRoom,
-          P.union(ShareAccessRights.None, ShareAccessRights.RoomManager), // owner, docspace admin, room admin
-        ],
-        () =>
-          isBaseTheme ? (
-            <EmptyCustomRoomLightIcon />
-          ) : (
-            <EmptyCustomRoomDarkIcon />
-          ),
-      )
-      .with([RoomsType.CustomRoom, ShareAccessRights.Collaborator], () =>
-        isBaseTheme ? (
-          <EmptyCustomRoomCollaboratorLightIcon />
-        ) : (
-          <EmptyCustomRoomCollaboratorDarkIcon />
-        ),
-      )
-      .with([P._, P.when(isUser)], () =>
-        isBaseTheme ? <DefaultFolderUserLight /> : <DefaultFolderUserDark />,
-      )
-      // eslint-disable-next-line react/jsx-no-useless-fragment
-      .otherwise(() => <></>)
-  );
+  return getRoomTitle(t, type, access, isNotAdmin, isArchiveFolderRoot);
 };
 
 export const getIcon = (
@@ -317,73 +107,14 @@ export const getIcon = (
   isFolder: boolean,
   folderType: Nullable<FolderType>,
   parentRoomType: Nullable<FolderType>,
+  isRootEmptyPage: boolean,
+  rootFolderType: Nullable<FolderType>,
 ): JSX.Element => {
+  if (isRootEmptyPage) return getRootIcom(rootFolderType, access, isBaseTheme);
+
   return isFolder
     ? getFolderIcon(parentRoomType, isBaseTheme, access, folderType)
     : getRoomIcon(type, isBaseTheme, access);
-};
-
-const helperOptions = (
-  actions: OptionActions,
-  security: Nullable<TFolderSecurity | TRoomSecurity>,
-) => {
-  const createInviteOption = (title: string, description: string) => {
-    return {
-      title,
-      description,
-      icon: <InviteUserFormIcon />,
-      key: "invite-users",
-      onClick: actions.inviteUser,
-      disabled: !security?.EditAccess,
-    };
-  };
-
-  const createCreateFileOption = (
-    title: string,
-    description: string,
-    extension: ExtensiontionType,
-    withoutDialog: boolean = false,
-  ) => ({
-    title,
-    description,
-    icon: <CreateNewFormIcon />,
-    key: "create-form",
-    onClick: () => actions.onCreate(extension, withoutDialog),
-    disabled: !security?.Create,
-  });
-
-  const createUploadFromDeviceOption = (
-    title: string,
-    description: string,
-    uploadType: UploadType,
-  ) => ({
-    title,
-    description,
-    icon: <UploadDevicePDFFormIcon />,
-    key: "create-form",
-    onClick: () => actions.onUploadAction(uploadType),
-    disabled: !security?.Create,
-  });
-
-  const createUploadFromDocSpace = (
-    title: string,
-    description: string,
-    filterType: FilesSelectorFilterTypes | FilterType,
-  ) => ({
-    title,
-    description,
-    icon: <UploadPDFFormIcon />,
-    key: "upload-pdf-form",
-    onClick: () => actions.uploadFromDocspace(filterType),
-    disabled: !security?.Create,
-  });
-
-  return {
-    createInviteOption,
-    createCreateFileOption,
-    createUploadFromDocSpace,
-    createUploadFromDeviceOption,
-  };
 };
 
 export const getOptions = (
@@ -395,6 +126,8 @@ export const getOptions = (
   folderType: Nullable<FolderType>,
   parentRoomType: Nullable<FolderType>,
   isArchiveFolderRoot: boolean,
+  isRootEmptyPage: boolean,
+  rootFolderType: Nullable<FolderType>,
   actions: OptionActions,
 ): EmptyViewItemType[] => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
@@ -490,6 +223,15 @@ export const getOptions = (
     disabled: false,
   };
 
+  const createRoom = {
+    title: t("EmptyView:CreateRoomTitleOption"),
+    description: t("EmptyView:CreateRoomDescriotionOption"),
+    icon: <CreateRoom />,
+    key: "create-room",
+    onClick: actions.onCreateRoom,
+    disabled: false,
+  };
+
   const createFile: EmptyViewItemType = {
     title: t("EmptyView:CreateNewFileTitle"),
     description: t("EmptyView:CreateNewFileDescription"),
@@ -532,6 +274,16 @@ export const getOptions = (
   };
 
   if (isArchiveFolderRoot) return [];
+
+  if (isRootEmptyPage) {
+    switch (rootFolderType) {
+      case FolderType.Rooms:
+        return [createRoom];
+
+      default:
+        return [];
+    }
+  }
 
   if (isFolder) {
     return match([parentRoomType, folderType, access])

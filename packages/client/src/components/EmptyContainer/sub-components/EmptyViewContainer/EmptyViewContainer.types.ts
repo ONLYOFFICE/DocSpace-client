@@ -11,7 +11,14 @@ import type { Nullable } from "@docspace/shared/types";
 
 export type UploadType = "pdf" | "file" | "folder";
 
-export type ExtensiontionType = "docx" | "xlsx" | "pptx" | "pdf" | undefined;
+export type FolderExtensiontionType = undefined;
+
+export type ExtensiontionType =
+  | "docx"
+  | "xlsx"
+  | "pptx"
+  | "pdf"
+  | FolderExtensiontionType;
 
 export type CreateEvent = Event & {
   payload?: {
@@ -21,25 +28,38 @@ export type CreateEvent = Event & {
   };
 };
 
-export interface EmptyViewContainerProps {
+export type AccessType = Nullable<ShareAccessRights> | undefined;
+
+export interface OutEmptyViewContainerProps {
   type: RoomsType;
   folderId: number;
-  access?: Nullable<ShareAccessRights>;
-  security?: Nullable<TFolderSecurity | TRoomSecurity>;
+
   parentRoomType: Nullable<FolderType>;
   folderType: Nullable<FolderType>;
   isFolder: boolean;
   isArchiveFolderRoot: boolean;
-  onClickInviteUsers?: (folderId: string | number, roomType: RoomsType) => void;
-  setSelectFileFormRoomDialogVisible?: TStore["dialogsStore"]["setSelectFileFormRoomDialogVisible"];
-  onCreateAndCopySharedLink?: TStore["contextOptionsStore"]["onCreateAndCopySharedLink"];
+  isRootEmptyPage: boolean;
+}
+
+export interface InjectedEmptyViewContainerProps {
+  access: Nullable<ShareAccessRights>;
+  security: Nullable<TFolderSecurity | TRoomSecurity>;
   selectedFolder?: ReturnType<
     TStore["selectedFolderStore"]["getSelectedFolder"]
   >;
-  setVisibleInfoPanel?: (arg: boolean) => void;
+  isGracePeriod: boolean;
   isVisibleInfoPanel: boolean;
-  setViewInfoPanel?: TStore["infoPanelStore"]["setView"];
+  rootFolderType: Nullable<FolderType>;
+  onClickInviteUsers: (folderId: string | number, roomType: RoomsType) => void;
+  onCreateAndCopySharedLink: TStore["contextOptionsStore"]["onCreateAndCopySharedLink"];
+  setSelectFileFormRoomDialogVisible: TStore["dialogsStore"]["setSelectFileFormRoomDialogVisible"];
+  setVisibleInfoPanel: (arg: boolean) => void;
+  setViewInfoPanel: TStore["infoPanelStore"]["setView"];
+  setInviteUsersWarningDialogVisible: TStore["dialogsStore"]["setInviteUsersWarningDialogVisible"];
 }
+
+export type EmptyViewContainerProps = OutEmptyViewContainerProps &
+  InjectedEmptyViewContainerProps;
 
 export type OptionActions = {
   inviteUser: VoidFunction;
@@ -51,4 +71,5 @@ export type OptionActions = {
   onUploadAction: (type: UploadType) => void;
   createAndCopySharedLink: VoidFunction;
   openInfoPanel: VoidFunction;
+  onCreateRoom: VoidFunction;
 };

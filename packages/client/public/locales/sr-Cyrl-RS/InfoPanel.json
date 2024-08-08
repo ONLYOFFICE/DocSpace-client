@@ -12,6 +12,7 @@
   "FeedLocationLabel": "Фолдер «{{folderTitle}}»",
   "FeedLocationLabelFrom": "од «{{folderTitle}}»",
   "FeedLocationRoomLabel": "Просторија «{{folderTitle}}»",
+  "FeedLocationSectionLabel": "Одељак «{{folderTitle}}»",
   "FileConverted": "Датотека је конвертована.",
   "FileCopied": "Датотеке су копиране.",
   "FileCopiedTo": "Датотеке копиране у «{{folderTitle}}»",

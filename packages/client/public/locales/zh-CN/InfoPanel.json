@@ -12,6 +12,7 @@
   "FeedLocationLabel": "文件夹 «{{folderTitle}}»",
   "FeedLocationLabelFrom": "来自«{{folderTitle}}»",
   "FeedLocationRoomLabel": "房间«{{folderTitle}}»",
+  "FeedLocationSectionLabel": "«{{folderTitle}}» 部分",
   "FileConverted": "文件已转换。",
   "FileCopied": "文件已复制。",
   "FileCopiedTo": "文件已复制到«{{folderTitle}}»",

@@ -12,6 +12,7 @@
   "FeedLocationLabel": "Thư mục «{{folderTitle}}»",
   "FeedLocationLabelFrom": "từ «{{folderTitle}}»",
   "FeedLocationRoomLabel": "Phòng «{{folderTitle}}»",
+  "FeedLocationSectionLabel": "Phần «{{folderTitle}}»",
   "FileConverted": "Đã chuyển đổi tập tin.",
   "FileCopied": "Đã sao chép các tập tin.",
   "FileCopiedTo": "Tập tin được sao chép vào «{{folderTitle}}»",

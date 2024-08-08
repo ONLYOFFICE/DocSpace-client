@@ -12,6 +12,7 @@
   "FeedLocationLabel": "«{{folderTitle}}» klasörü",
   "FeedLocationLabelFrom": "«{{folderTitle}}» klasöründen",
   "FeedLocationRoomLabel": "Oda «{{folderTitle}}»",
+  "FeedLocationSectionLabel": "Bölüm «{{folderTitle}}»",
   "FileConverted": "Dosya dönüştürüldü.",
   "FileCopied": "Dosyalar kopyalandı.",
   "FileCopiedTo": "Dosyalar «{{folderTitle}}» klasörüne kopyalandı",

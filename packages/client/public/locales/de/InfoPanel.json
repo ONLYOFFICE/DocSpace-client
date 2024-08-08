@@ -12,6 +12,7 @@
   "FeedLocationLabel": "Ordner «{{folderTitle}}»",
   "FeedLocationLabelFrom": "aus «{{folderTitle}}»",
   "FeedLocationRoomLabel": "Raum «{{folderTitle}}»",
+  "FeedLocationSectionLabel": "Sektion «{{folderTitle}}»",
   "FileConverted": "Datei konvertiert.",
   "FileCopied": "Dateien kopiert.",
   "FileCopiedTo": "Dateien kopiert in «{{folderTitle}}»",

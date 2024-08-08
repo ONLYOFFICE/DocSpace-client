@@ -12,6 +12,7 @@
   "FeedLocationLabel": "Kansio «{{folderTitle}}»",
   "FeedLocationLabelFrom": "«{{folderTitle}}» -kansiosta",
   "FeedLocationRoomLabel": "Huone «{{folderTitle}}»",
+  "FeedLocationSectionLabel": "Osio «{{folderTitle}}»",
   "FileConverted": "Tiedosto muunnettu.",
   "FileCopied": "Tiedostot kopioitu.",
   "FileCopiedTo": "Tiedostot siirretty «{{folderTitle}}»-kansioon",

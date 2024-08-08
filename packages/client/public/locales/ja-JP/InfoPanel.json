@@ -12,6 +12,7 @@
   "FeedLocationLabel": "«{{folderTitle}}» フォルダ",
   "FeedLocationLabelFrom": "「{{folderTitle}}」から",
   "FeedLocationRoomLabel": "「{{folderTitle}}」ルーム",
+  "FeedLocationSectionLabel": "«{{folderTitle}}» セクション",
   "FileConverted": " ファイルが変換されました。",
   "FileCopied": " ファイルがコピーされました。",
   "FileCopiedTo": "ファイルが「{{folderTitle}}」にコピーされました",

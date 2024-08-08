@@ -12,6 +12,7 @@
   "FeedLocationLabel": "Mape «{{folderTitle}}»",
   "FeedLocationLabelFrom": "no «{{folderTitle}}»",
   "FeedLocationRoomLabel": "Telpa «{{folderTitle}}»",
+  "FeedLocationSectionLabel": "Sadaļā «{{folderTitle}}»",
   "FileConverted": "Fails ir konvertēts.",
   "FileCopied": "Faili ir nokopēti.",
   "FileCopiedTo": "Faili ir kopēti uz «{{folderTitle}}»",

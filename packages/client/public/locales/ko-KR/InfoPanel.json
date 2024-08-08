@@ -12,6 +12,7 @@
   "FeedLocationLabel": "«{{folderTitle}}» 폴더",
   "FeedLocationLabelFrom": "«{{folderTitle}}»에서",
   "FeedLocationRoomLabel": "룸 «{{folderTitle}}»",
+  "FeedLocationSectionLabel": "섹션 «{{folderTitle}}»",
   "FileConverted": "파일이 변환되었습니다.",
   "FileCopied": "파일이 복사되었습니다.",
   "FileCopiedTo": "파일이 «{{folderTitle}}»폴더로 복사되었습니다",

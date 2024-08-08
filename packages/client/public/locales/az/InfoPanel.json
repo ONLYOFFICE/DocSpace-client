@@ -12,6 +12,7 @@
   "FeedLocationLabel": "Qovluq «{{folderTitle}}»",
   "FeedLocationLabelFrom": "«{{folderTitle}}» qovluğundan",
   "FeedLocationRoomLabel": "Otaq «{{folderTitle}}»",
+  "FeedLocationSectionLabel": "Bölmə «{{folderTitle}}»",
   "FileConverted": "Fayl dəyişdirildi.",
   "FileCopied": "Fayl kopyalandı.",
   "FileCopiedTo": "Fayllar «{{folderTitle}}» qovluğuna kopyalandı",

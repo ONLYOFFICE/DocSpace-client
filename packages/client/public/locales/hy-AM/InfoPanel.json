@@ -12,6 +12,7 @@
   "FeedLocationLabel": "Թղթապանակ «{{folderTitle}}»",
   "FeedLocationLabelFrom": "«{{folderTitle}}»-ից",
   "FeedLocationRoomLabel": "Սենյալ «{{folderTitle}}»",
+  "FeedLocationSectionLabel": "Հատված «{{folderTitle}}»",
   "FileConverted": "Ֆայլը փոխարկվել է:",
   "FileCopied": "Ֆայլերը պատճենված են:",
   "FileCopiedTo": "Ֆայլերը պատճենված են «{{folderTitle}}»-ում",

@@ -12,6 +12,7 @@
   "FeedLocationLabel": "Folder «{{folderTitle}}»",
   "FeedLocationLabelFrom": "od «{{folderTitle}}»",
   "FeedLocationRoomLabel": "Prostorija «{{folderTitle}}»",
+  "FeedLocationSectionLabel": "Odeljak «{{folderTitle}}»",
   "FileConverted": "Datoteka je konvertovana.",
   "FileCopied": "Datoteke su kopirane.",
   "FileCopiedTo": "Datoteke kopirane u «{{folderTitle}}»",

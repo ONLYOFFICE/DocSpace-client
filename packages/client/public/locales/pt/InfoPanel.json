@@ -12,6 +12,7 @@
   "FeedLocationLabel": "Pasta «{{folderTitle}}»",
   "FeedLocationLabelFrom": "de «{{folderTitle}}»",
   "FeedLocationRoomLabel": "Sala «{{folderTitle}}»",
+  "FeedLocationSectionLabel": "Secção «{{folderTitle}}»",
   "FileConverted": "Arquivo convertido.",
   "FileCopied": "Arquivos copiados.",
   "FileCopiedTo": "Arquivos copiados para «{{folderTitle}}»",

@@ -12,6 +12,7 @@
   "FeedLocationLabel": "Mapa «{{folderTitle}}»",
   "FeedLocationLabelFrom": "iz «{{folderTitle}}»",
   "FeedLocationRoomLabel": "Soba «{{folderTitle}}»",
+  "FeedLocationSectionLabel": "Sekcija «{{folderTitle}}»",
   "FileConverted": "Datoteka pretvorjena.",
   "FileCopied": "Datoteke kopirane.",
   "FileCopiedTo": "Datoteka kopirana v «{{folderTitle}}»",

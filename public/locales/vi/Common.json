@@ -185,7 +185,7 @@
   "Example": "Ví dụ: {{example}}",
   "ExpiredLink": "Liên kết đã hết hạn",
   "FeedbackAndSupport": "Phản hồi & Hỗ trợ",
-  "FileActionRequired": "Đích đến đã chứa một tập tin có tên «<1>{{fileName}} </1>».",
+  "FileActionRequired": "Đích đến đã chứa một tập tin có tên «<1>{{fileName}}</1>».",
   "FilesAlreadyContains": "Đích đến đã chứa các tập tin có cùng tên.",
   "FilesAndFoldersAlreadyContains": "Đích đến đã chứa các tập tin và thư mục có cùng tên.",
   "FilesAndFolderWillNotBeCopied": "Tập tin và thư mục sẽ không được sao chép",

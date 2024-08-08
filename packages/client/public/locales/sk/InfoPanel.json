@@ -12,6 +12,7 @@
   "FeedLocationLabel": "Priečinok «{{folderTitle}}»",
   "FeedLocationLabelFrom": "z «{{folderTitle}}»",
   "FeedLocationRoomLabel": "Miestnosť «{{folderTitle}}»",
+  "FeedLocationSectionLabel": "Sekcia «{{folderTitle}}»",
   "FileConverted": "Súbor skonvertovaný.",
   "FileCopied": "Súbory skopírované.",
   "FileCopiedTo": "Súbory skopírované do «{{folderTitle}}»",

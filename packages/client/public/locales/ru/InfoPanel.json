@@ -12,6 +12,7 @@
   "FeedLocationLabel": "Папка «{{folderTitle}}»",
   "FeedLocationLabelFrom": "из «{{folderTitle}}»",
   "FeedLocationRoomLabel": "Комната «{{folderTitle}}»",
+  "FeedLocationSectionLabel": "Раздел «{{folderTitle}}»",
   "FileConverted": "Файл конвертирован.",
   "FileCopied": "Файлы скопированы.",
   "FileCopiedTo": "Файлы скопированы в «{{folderTitle}}»",

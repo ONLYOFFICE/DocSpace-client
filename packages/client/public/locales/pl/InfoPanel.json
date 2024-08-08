@@ -12,6 +12,7 @@
   "FeedLocationLabel": "Katalog «{{folderTitle}}»",
   "FeedLocationLabelFrom": "z katalogu «{{folderTitle}}»",
   "FeedLocationRoomLabel": "Pokój «{{folderTitle}}»",
+  "FeedLocationSectionLabel": "Sekcja «{{folderTitle}}»",
   "FileConverted": "Plik został przekonwertowany.",
   "FileCopied": "Pliki zostały skopiowane.",
   "FileCopiedTo": "Pliki zostały skopiowane do katalogu «{{folderTitle}}»",

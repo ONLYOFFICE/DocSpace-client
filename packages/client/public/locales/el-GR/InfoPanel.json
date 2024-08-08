@@ -12,6 +12,7 @@
   "FeedLocationLabel": "Φάκελος «{{folderTitle}}»",
   "FeedLocationLabelFrom": "από «{{folderTitle}}»",
   "FeedLocationRoomLabel": "Δωμάτιο «{{folderTitle}}»",
+  "FeedLocationSectionLabel": "Ενότητα «{{folderTitle}}»",
   "FileConverted": "Έγινε μετατροπή του αρχείου.",
   "FileCopied": "Τα αρχεία αντιγράφηκαν.",
   "FileCopiedTo": "Τα αρχεία αντιγράφηκαν στο «{{folderTitle}}»",

@@ -12,6 +12,7 @@
   "FeedLocationLabel": "Dossier «{{folderTitle}}»",
   "FeedLocationLabelFrom": "de «{{folderTitle}}»",
   "FeedLocationRoomLabel": "Salle « {{folderTitle}} »",
+  "FeedLocationSectionLabel": "Section «{{folderTitle}}»",
   "FileConverted": "Fichier converti.",
   "FileCopied": "Fichiers copiés.",
   "FileCopiedTo": "Fichiers copiés dans «{{folderTitle}}»",

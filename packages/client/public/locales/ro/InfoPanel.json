@@ -12,6 +12,7 @@
   "FeedLocationLabel": "Folderul «{{folderTitle}}»",
   "FeedLocationLabelFrom": "din «{{folderTitle}}»",
   "FeedLocationRoomLabel": "Sala «{{folderTitle}}»",
+  "FeedLocationSectionLabel": "Secțiune «{{folderTitle}}»",
   "FileConverted": "Fișierul a fost convertit.",
   "FileCopied": "Fișiere au fost copiate.",
   "FileCopiedTo": "Fișierele au fost copiate în folderul «{{folderTitle}}»",

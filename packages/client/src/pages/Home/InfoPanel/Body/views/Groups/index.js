@@ -27,13 +27,16 @@
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import withLoader from "@docspace/client/src/HOCs/withLoader";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import api from "@docspace/shared/api";
 import AccountsFilter from "@docspace/shared/api/people/filter";
-import { MIN_LOADER_TIMER } from "@docspace/shared/selectors/Files/FilesSelector.constants";
+import {
+  MIN_LOADER_TIMER,
+  SHOW_LOADER_TIMER,
+} from "@docspace/shared/selectors/Files/FilesSelector.constants";
 
 import GroupMember from "./GroupMember";
 import * as Styled from "../../styles/groups.styled";
@@ -47,10 +50,13 @@ const Groups = ({
   infoPanelSelectedGroup,
   setInfoPanelSelectedGroup,
 }) => {
-  const [isShowLoader, setIsShowLoader] = useState(false);
-  const [areMembersLoading, setAreMembersLoading] = useState(false);
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
+  const [showLoader, setShowLoader] = useState(false);
   const [groupMembers, setGroupMembers] = useState(null);
   const [total, setTotal] = useState(0);
+
+  const startLoader = useRef(null);
+  const loaderTimeout = useRef(null);
 
   const { groupId: paramsGroupId } = useParams();
   const isInsideGroup = !!paramsGroupId;
@@ -63,13 +69,7 @@ const Groups = ({
   const groupManager = group?.manager;
 
   const loadNextPage = async (startIndex) => {
-    const startLoadingTime = new Date();
-
     try {
-      if (startIndex === 0) {
-        setAreMembersLoading(true);
-      }
-
       const pageCount = 100;
       const filter = AccountsFilter.getDefault();
       filter.group = groupId;
@@ -91,20 +91,47 @@ const Groups = ({
     } catch (e) {
       console.log(e);
     } finally {
-      const nowDate = new Date();
-      const diff = Math.abs(nowDate.getTime() - startLoadingTime.getTime());
-
-      if (diff < MIN_LOADER_TIMER) {
-        setTimeout(() => {
-          setAreMembersLoading(false);
-        }, MIN_LOADER_TIMER - diff);
-      } else {
-        setAreMembersLoading(false);
+      if (startIndex === 0) {
+        setIsFirstLoad(false);
       }
     }
   };
 
+  const calculateLoader = () => {
+    if (isFirstLoad) {
+      loaderTimeout.current = setTimeout(() => {
+        startLoader.current = new Date();
+        setShowLoader(true);
+      }, SHOW_LOADER_TIMER);
+    } else if (startLoader.current) {
+      const currentDate = new Date();
+
+      const ms = Math.abs(
+        startLoader.current.getTime() - currentDate.getTime(),
+      );
+
+      if (ms >= MIN_LOADER_TIMER) {
+        startLoader.current = null;
+        return setShowLoader(false);
+      }
+
+      setTimeout(() => {
+        startLoader.current = null;
+        setShowLoader(false);
+      }, MIN_LOADER_TIMER - ms);
+
+      loaderTimeout.current = null;
+    } else if (loaderTimeout.current) {
+      clearTimeout(loaderTimeout.current);
+      loaderTimeout.current = null;
+    }
+  };
+
   useFetchGroup(groupId, group?.id, setGroup);
+
+  useEffect(() => {
+    setIsFirstLoad(true);
+  }, [infoPanelSelection.id]);
 
   useEffect(() => {
     if (group) {
@@ -113,35 +140,38 @@ const Groups = ({
   }, [group]);
 
   useEffect(() => {
-    const showLoaderTimer = setTimeout(() => setIsShowLoader(true), 500);
-    return () => clearTimeout(showLoaderTimer);
+    calculateLoader();
+  }, [isFirstLoad]);
+
+  useEffect(() => {
+    return () => {
+      loaderTimeout.current = null;
+    };
   }, []);
 
-  if (!group) {
-    if (isShowLoader)
-      return (
-        <Styled.GroupsContent>
-          <InfoPanelViewLoader view="groups" />
-        </Styled.GroupsContent>
-      );
-    return null;
+  if (showLoader) {
+    return (
+      <Styled.GroupsContent>
+        <InfoPanelViewLoader view="groups" />
+      </Styled.GroupsContent>
+    );
   }
 
   const totalWithoutManager = groupManager ? total - 1 : total;
 
   return (
     <Styled.GroupsContent>
-      {groupManager && <GroupMember groupMember={groupManager} isManager />}
-      {!groupMembers || areMembersLoading ? (
-        <InfoPanelViewLoader view="groups" />
-      ) : (
-        <GroupMembersList
-          members={groupMembers}
-          hasNextPage={groupMembers.length < totalWithoutManager}
-          loadNextPage={loadNextPage}
-          total={totalWithoutManager}
-          managerId={groupManager?.id}
-        />
+      {isFirstLoad || !groupMembers ? null : (
+        <>
+          {groupManager && <GroupMember groupMember={groupManager} isManager />}
+          <GroupMembersList
+            members={groupMembers}
+            hasNextPage={groupMembers.length < totalWithoutManager}
+            loadNextPage={loadNextPage}
+            total={totalWithoutManager}
+            managerId={groupManager?.id}
+          />
+        </>
       )}
     </Styled.GroupsContent>
   );

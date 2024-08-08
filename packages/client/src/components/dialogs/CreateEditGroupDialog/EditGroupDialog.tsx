@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -34,6 +34,10 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { TGroup } from "@docspace/shared/api/groups/types";
+import {
+  MIN_LOADER_TIMER,
+  SHOW_LOADER_TIMER,
+} from "@docspace/shared/selectors/Files/FilesSelector.constants";
 import EditGroupStore from "SRC_DIR/store/EditGroupStore";
 
 import { StyledModal } from "./CreateEditGroupDialog.styled";
@@ -101,6 +105,10 @@ const EditGroupDialog = ({
     useState<boolean>(false);
   const [selectMembersPanelIsVisible, setSelectMembersPanelIsVisible] =
     useState<boolean>(false);
+  const [showLoader, setShowLoader] = useState(false);
+
+  const loaderTimeout = useRef<NodeJS.Timeout | null>(null);
+  const startLoaderTime = useRef<Date | null>(null);
 
   const onChangeGroupName = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -136,6 +144,38 @@ const EditGroupDialog = ({
     };
   }, []);
 
+  useEffect(() => {
+    if (!isInit) {
+      loaderTimeout.current = setTimeout(() => {
+        startLoaderTime.current = new Date();
+        setShowLoader(true);
+      }, SHOW_LOADER_TIMER);
+    } else if (startLoaderTime.current) {
+      const currentDate = new Date();
+
+      const ms = Math.abs(
+        startLoaderTime.current.getTime() - currentDate.getTime(),
+      );
+
+      if (ms >= MIN_LOADER_TIMER) {
+        startLoaderTime.current = null;
+        return setShowLoader(false);
+      }
+
+      setTimeout(() => {
+        if (isInit) {
+          startLoaderTime.current = null;
+          setShowLoader(false);
+        }
+      }, MIN_LOADER_TIMER - ms);
+
+      loaderTimeout.current = null;
+    } else if (loaderTimeout.current) {
+      clearTimeout(loaderTimeout.current);
+      loaderTimeout.current = null;
+    }
+  }, [isInit]);
+
   const notEnoughParamsToEdit = !title || (!manager && !members?.length);
 
   return (
@@ -152,31 +192,33 @@ const EditGroupDialog = ({
         </ModalDialog.Header>
 
         <ModalDialog.Body>
-          {isInit ? (
-            <>
-              <GroupNameParam
-                groupName={title}
-                onChangeGroupName={onChangeGroupName}
-              />
-              <HeadOfGroup
-                groupManager={manager}
-                onShowSelectGroupManagerPanel={onShowSelectGroupManagerPanel}
-                removeManager={removeManager}
-              />
-
-              <MembersParam
-                groupManager={manager}
-                groupMembers={members}
-                removeMember={removeMember}
-                onShowSelectMembersPanel={onShowSelectMembersPanel}
-                withInfiniteLoader
-                total={currentTotal}
-                loadNextPage={loadMembers}
-                hasNextPage={!!members && members.length < currentTotal}
-              />
-            </>
-          ) : (
+          {showLoader ? (
             <BodyLoader />
+          ) : (
+            isInit && (
+              <>
+                <GroupNameParam
+                  groupName={title}
+                  onChangeGroupName={onChangeGroupName}
+                />
+                <HeadOfGroup
+                  groupManager={manager}
+                  onShowSelectGroupManagerPanel={onShowSelectGroupManagerPanel}
+                  removeManager={removeManager}
+                />
+
+                <MembersParam
+                  groupManager={manager}
+                  groupMembers={members}
+                  removeMember={removeMember}
+                  onShowSelectMembersPanel={onShowSelectMembersPanel}
+                  withInfiniteLoader
+                  total={currentTotal}
+                  loadNextPage={loadMembers}
+                  hasNextPage={!!members && members.length < currentTotal}
+                />
+              </>
+            )
           )}
         </ModalDialog.Body>
 

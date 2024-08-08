@@ -54,7 +54,7 @@ interface IEmailContainer {
   onBlurEmail: () => void;
   onValidateEmail: (res: TValidate) => undefined;
   isLdapLogin: boolean;
-  ldapDomain: string;
+  ldapDomain?: string;
 }
 
 const EmailContainer = ({

@@ -144,7 +144,7 @@ const SocialNetworks = (props) => {
       return (
         <div key={`${item.provider}ProviderItem`}>
           <SocialButton
-            iconName={icon}
+            IconComponent={icon}
             label={getProviderTranslation(label, t, item.linked)}
             $iconOptions={iconOptions}
             onClick={onClick}

@@ -1,1 +1,24 @@
-{}
+{
+  "CollaboratorEmptyTitle": "Просторија је празна.",
+  "CreateNewFileDescription": "Започни рад у просторији креирањем датотека или фолдера",
+  "CreateNewFileTitle": "Креирај нову датотеку",
+  "CustomRoomEmptyTitle": "Добродошли на Прилагођену просторију",
+  "EmptyDescription": "Започни са брзим радњама:",
+  "FormFolderDefaultDescription": "Убаците PDF формуларе овде или отпремите са {{productName}} или уређаја.",
+  "FormFolderDefaultTitle": "Још увек нема формулара овде",
+  "FormFolderDefaultUserDescription": "Формулари отпремљени од стране администратора ће се појавити овде.",
+  "FormFolderDefaultUserTitle": "Још увек нема формулара у овом фолдеру",
+  "FormRoomEmptyTitle": "Добродошли у просторију за попуњавање формулара",
+  "InviteUsersOptionDescription": "Додај чланове портала за заједничко уређивање у просторији",
+  "InviteUsersOptionTitle": "Позивање Учесника",
+  "ShareOptionDescription": "Копирајте јавни приступни линк или позовите друге кориснике у просторију да започнете процес попуњавања формулара.",
+  "ShareOptionTitle": "Подели просторију",
+  "UploadDeviceOptionDescription": "Отпреми датотеке било ког типа са свог личног уређаја",
+  "UploadDeviceOptionTitle": "Отпреми са свог Уређаја",
+  "UploadDevicePDFFormOptionDescription": "Отпремите спреман PDF формулар на просторију са свог уређаја.",
+  "UploadDevicePDFFormOptionTitle": "Отпреми са уређаја",
+  "UploadFromPortalDescription": "Отпреми датотеке било ког типа из Документи или Просторије",
+  "UploadFromPortalTitle": "Отпреми из {{productName}}",
+  "UploadPDFFormOptionDescription": "Одаберите спреман PDF формулар доступан у {{productName}} и отпремите га у просторију.",
+  "UserEmptyDescription": "Датотеке и фолдери отпремљени од стране администратора ће се појавити овде."
+}

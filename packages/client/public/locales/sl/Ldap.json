@@ -17,6 +17,7 @@
   "LdapGroupAttributeTooltip": "Vnesite atribut objekta skupine, ki določa, katere uporabnike vključuje ta skupina.",
   "LdapGroupDN": "DN skupine",
   "LdapGroupDNTooltip": "Vnesite enoznačno ime v imenik s skupinami, ki jih želite dodati.",
+  "LdapGroupFilter": "Filter skupine",
   "LdapGroupFilterTooltip": "Uporabi iskalni filter LDAP, da izbereš skupine, ki bodo uvožene. Upoštevaj, da bodo dodani samo uporabniki iz teh skupin.",
   "LdapGroupMembership": "Članstvo v skupini",
   "LdapGroupMembershipTooltip": "Omogoči to možnost, če želiš dodati skupine iz strežnika LDAP/Active Directory v račune {{productName}}. Upoštevaj, da bodo dodani samo uporabniki, ki pripadajo tem skupinam.",

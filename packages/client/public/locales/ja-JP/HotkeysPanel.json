@@ -30,6 +30,7 @@
   "HotkeysPlayPause": "再生/一時停止",
   "HotkeysRedoLastUndoneAction": "元に戻したアクションをやり直す",
   "HotkeysRemove": "選択されているアイテムを解除",
+  "HotkeysRenameSelected": "選択したアイテムの名前を変更",
   "HotkeysSelectAll": "表示されているフォルダとファイルのすべてを選択",
   "HotkeysSelectDown": "次のアイテムを選択（下）",
   "HotkeysSelection": "アイテムの選択",

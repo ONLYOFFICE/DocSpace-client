@@ -15,7 +15,6 @@
   "InterfaceTheme": "Tema dell'interfaccia",
   "LightTheme": "Tema chiaro",
   "LogoutActiveConnection": "Esci dalla connessione attiva",
-  "LogoutAllActiveConnections": "Esci da tutte le connessioni attive",
   "LogoutAllActiveSessionsDescription": "Tutte le connessioni attive tranne questa che è attualmente in uso, verranno disconnesse.",
   "LogoutBtn": "Esci",
   "LogoutDescription": "Ti preghiamo di notare. Tutte le connessioni attive tranne questa connessione verranno disconnesse, poiché è attualmente in uso.",

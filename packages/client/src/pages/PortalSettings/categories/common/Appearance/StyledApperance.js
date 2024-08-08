@@ -68,12 +68,14 @@ const StyledComponent = styled.div`
     margin-inline-end: 12px;
     border-radius: 8px;
     cursor: pointer;
-    background: ${(props) => (props.theme.isBase ? "#eceef1" : "#474747")}
+    background: ${(props) =>
+        props.theme.client.settings.common.appearance.themeAddBackground}
       url(${PlusThemeSvgUrl}) no-repeat center;
   }
 
   .add-theme {
-    background: #d0d5da;
+    background: ${(props) =>
+      props.theme.client.settings.common.appearance.addThemeBackground};
     padding-top: 16px;
     padding-inline-start: 16px;
     box-sizing: border-box;

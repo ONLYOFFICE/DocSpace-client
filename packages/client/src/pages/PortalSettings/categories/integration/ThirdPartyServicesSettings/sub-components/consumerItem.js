@@ -31,7 +31,7 @@ import styled, { css } from "styled-components";
 import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import ConsumerToggle from "./consumerToggle";
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 import { thirdpartiesLogo } from "@docspace/shared/utils/image-thirdparties";
 
 const StyledItem = styled.div`
@@ -40,7 +40,7 @@ const StyledItem = styled.div`
       !props.isThirdPartyAvailable &&
       !props.isSet &&
       css`
-        color: #a3a9ae;
+        color: ${(props) => props.theme.client.settings.integration.textColor};
       `}
   }
 `;
@@ -53,17 +53,17 @@ const StyledBox = styled(Box)`
       !props.theme.isBase &&
       css`
         path {
-          fill: #ffffff;
+          fill: ${globalColors.white};
           opacity: 1;
         }
         ${props.isLinkedIn &&
         css`
           path:nth-child(8) {
-            fill: #333333;
+            fill: ${globalColors.black};
             opacity: 1;
           }
           path:nth-child(9) {
-            fill: #333333;
+            fill: ${globalColors.black};
             opacity: 1;
           }
         `}

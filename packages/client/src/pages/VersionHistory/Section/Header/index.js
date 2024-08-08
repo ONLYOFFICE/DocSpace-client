@@ -67,8 +67,6 @@ const SectionHeaderContent = (props) => {
       <IconButton
         iconName={ArrowPathReactSvgUrl}
         size="17"
-        // color="#A3A9AE"
-        // hoverColor="#657077"
         isFill={true}
         onClick={onClickBack}
         className="arrow-button"

@@ -65,7 +65,7 @@ export const GroupsContent = styled.div<{}>`
 
       .email {
         max-width: 180px;
-        color: #a3a9ae;
+        color: ${(props) => props.theme.infoPanel.groups.textColor};
         font-size: 12px;
         line-height: 16px;
         font-style: normal;
@@ -83,7 +83,7 @@ export const GroupsContent = styled.div<{}>`
       margin-inline-start: auto;
       .group-manager-tag {
         white-space: nowrap;
-        color: #d0d5da;
+        color: ${(props) => props.theme.infoPanel.groups.tagColor};
         font-size: 12px;
         font-weight: 600;
         line-height: 16px;

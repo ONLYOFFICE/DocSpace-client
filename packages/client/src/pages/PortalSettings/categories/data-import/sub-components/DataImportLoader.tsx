@@ -65,6 +65,35 @@ const StyledLoader = styled.div`
     justify-content: flex-start;
     flex-wrap: wrap;
     gap: 20px;
+
+    .link {
+      color: ${(props) => props.theme.client.settings.migration.linkColor};
+    }
+  }
+
+  .workspace-item {
+    background: ${(props) =>
+      props.theme.client.settings.migration.workspaceBackground};
+    border: ${(props) => props.theme.client.settings.migration.workspaceBorder};
+    border-radius: 6px;
+    width: 340px;
+    height: 64px;
+    box-sizing: border-box;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+
+    &:hover {
+      border-color: ${(props) =>
+        props.theme.client.settings.migration.workspaceHover};
+    }
+
+    &:active {
+      background-color: ${(props) =>
+        props.theme.client.settings.migration.workspaceBackground};
+    }
     max-width: 700px;
 
     @media ${tablet} {

@@ -135,32 +135,6 @@ const LoginContainer = styled.div<{
     margin-top: 32px;
   }
 
-  .code-input-bar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px;
-    margin-top: 16px;
-    padding: 14px 12px;
-    text-align: center;
-    font-weight: 600;
-    font-size: 11px;
-    line-height: 12px;
-    color: #333;
-    svg {
-      margin: 8px;
-    }
-  }
-
-  .code-input-bar.warning {
-    background: #f7e6be;
-    margin-bottom: 16px;
-  }
-
-  .code-input-bar.error {
-    background: #f7cdbe;
-  }
-
   .auth-form-container {
     width: 100%;
 
@@ -235,7 +209,7 @@ const LoginContainer = styled.div<{
     .login-bottom-border {
       width: 100%;
       height: 1px;
-      background: #eceef1;
+      background: ${(props) => props.theme.login.orLineColor};
     }
 
     .login-bottom-text {

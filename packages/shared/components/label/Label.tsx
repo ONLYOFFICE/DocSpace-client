@@ -29,6 +29,7 @@ import React from "react";
 import { Text } from "../text";
 
 import { LabelProps } from "./Label.types";
+import { globalColors } from "../../themes";
 
 const Label = (props: LabelProps) => {
   const {
@@ -45,7 +46,7 @@ const Label = (props: LabelProps) => {
     style,
     children,
   } = props;
-  const errorProp = error ? { color: "#c30" } : {};
+  const errorProp = error ? { color: globalColors.lightErrorStatus } : {};
 
   return (
     <Text
@@ -62,7 +63,10 @@ const Label = (props: LabelProps) => {
       className={className}
       data-testid="label"
     >
-      {text} {isRequired && <span style={{ color: "#c30" }}> *</span>}{" "}
+      {text}{" "}
+      {isRequired && (
+        <span style={{ color: globalColors.lightErrorStatus }}> *</span>
+      )}{" "}
       {children}
     </Text>
   );

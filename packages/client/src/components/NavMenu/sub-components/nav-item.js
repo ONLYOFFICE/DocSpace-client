@@ -35,7 +35,7 @@ import { Text } from "@docspace/shared/components/text";
 import { commonIconsStyles, tablet } from "@docspace/shared/utils";
 
 import MenuIcon from "PUBLIC_DIR/images/menu.react.svg";
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 
 const NavItemSeparator = styled.div`
   border-bottom: 1px ${(props) => (props.dashed ? "dashed" : "solid")}
@@ -123,9 +123,9 @@ const NavItemBadge = styled(Badge)`
 `;
 
 const VersionBadge = styled.div`
-  background-color: #3cb55b;
+  background-color: ${globalColors.lightStatusPositive};
   border-radius: 5px;
-  color: #ffffff;
+  color: ${globalColors.white};
   display: inline-block;
   font-size: 10px;
   line-height: 8px;

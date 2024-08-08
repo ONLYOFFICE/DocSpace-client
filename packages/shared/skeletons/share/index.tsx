@@ -30,6 +30,7 @@ import styled from "styled-components";
 import { Text } from "../../components/text";
 import { TTranslation } from "../../types";
 import { RectangleSkeleton, CircleSkeleton } from "../index";
+import { globalColors } from "../../themes";
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -43,7 +44,7 @@ const StyledWrapper = styled.div`
   .title-link {
     margin-bottom: 12px;
     line-height: 16px;
-    color: #a3a9ae;
+    color: ${globalColors.gray};
   }
 `;
 

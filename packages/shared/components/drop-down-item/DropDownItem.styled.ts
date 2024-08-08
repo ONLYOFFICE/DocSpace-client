@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 import { tablet } from "../../utils";
 
 const itemTruncate = css`
@@ -100,7 +100,7 @@ const StyledDropdownItem = styled.div<{
   text-decoration: none;
   user-select: none;
   outline: 0 !important;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   .drop-down-item_icon {
     svg {

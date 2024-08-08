@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
+import { globalColors } from "../../../../themes";
 
 export const DesktopDetailsContainer = styled.div`
   direction: ${({ theme }) => theme.interfaceDirection};
@@ -33,7 +34,7 @@ export const DesktopDetailsContainer = styled.div`
   width: 100%;
   background: linear-gradient(
     0deg,
-    rgba(0, 0, 0, 0) 0%,
+    ${globalColors.tapHighlight} 0%,
     rgba(0, 0, 0, 0.8) 100%
   );
 

@@ -31,6 +31,7 @@ import { RectangleSkeleton } from "../rectangle";
 
 import { StyledHeader, StyledSpacer } from "./NavMenu.styled";
 import type { NavMenuHeaderLoaderProps } from "./NavMenu.types";
+import { globalColors } from "../../themes";
 
 export const NavMenuHeaderLoader = ({
   id,
@@ -41,8 +42,8 @@ export const NavMenuHeaderLoader = ({
   const {
     title,
     borderRadius,
-    backgroundColor = "#fff",
-    foregroundColor = "#fff",
+    backgroundColor = globalColors.white,
+    foregroundColor = globalColors.white,
     backgroundOpacity = 0.25,
     foregroundOpacity = 0.2,
     speed,

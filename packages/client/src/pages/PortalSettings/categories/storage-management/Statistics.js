@@ -30,6 +30,7 @@ import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
 import { Badge } from "@docspace/shared/components/badge";
+import { globalColors } from "@docspace/shared/themes";
 
 import ItemIcon from "SRC_DIR/components/ItemIcon";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
@@ -91,7 +92,11 @@ const StatisticsComponent = (props) => {
         </StyledMainTitle>
         {!isStatisticsAvailable && (
           <Badge
-            backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
+            backgroundColor={
+              theme.isBase
+                ? globalColors.favoritesStatus
+                : globalColors.favoriteStatusDark
+            }
             label={t("Common:Paid")}
             className="paid-badge"
             isPaidBadge

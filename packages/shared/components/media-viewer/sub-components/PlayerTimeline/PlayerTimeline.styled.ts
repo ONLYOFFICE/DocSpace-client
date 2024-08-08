@@ -28,6 +28,7 @@ import styled, { css } from "styled-components";
 import { isMobile } from "react-device-detect";
 
 import { tablet, desktop } from "@docspace/shared/utils";
+import { globalColors } from "../../../../themes";
 
 export const HoverProgress = styled.div`
   display: none;
@@ -59,7 +60,7 @@ const mobileCss = css`
     -webkit-appearance: none;
     visibility: visible;
     opacity: 1;
-    background: #fff;
+    background: ${globalColors.white};
     height: 10px;
     width: 10px;
     border-radius: 50%;
@@ -72,7 +73,7 @@ const mobileCss = css`
     -webkit-appearance: none;
     visibility: visible;
     opacity: 1;
-    background: #fff;
+    background: ${globalColors.white};
     height: 10px;
     width: 10px;
     border-radius: 50%;
@@ -86,7 +87,7 @@ const mobileCss = css`
     -webkit-appearance: none;
     visibility: visible;
     opacity: 1;
-    background: #fff;
+    background: ${globalColors.white};
     height: 10px;
     width: 10px;
     border-radius: 50%;
@@ -114,7 +115,7 @@ export const PlayerTimelineWrapper = styled.div`
     left: 50%;
     top: -25px;
     font-size: 13px;
-    color: #fff;
+    color: ${globalColors.white};
     pointer-events: none;
     transform: translateX(-50%);
   }
@@ -151,7 +152,10 @@ export const PlayerTimelineWrapper = styled.div`
     border-radius: 5px;
 
     background: rgba(255, 255, 255, 0.3);
-    background-image: linear-gradient(#fff, #fff);
+    background-image: linear-gradient(
+      ${globalColors.white},
+      ${globalColors.white}
+    );
     background-repeat: no-repeat;
 
     z-index: 1;
@@ -169,7 +173,7 @@ export const PlayerTimelineWrapper = styled.div`
     -webkit-appearance: none;
     visibility: hidden;
     opacity: 0;
-    background: #fff;
+    background: ${globalColors.white};
 
     transition:
       opacity 0.3s ease 0s,
@@ -182,7 +186,7 @@ export const PlayerTimelineWrapper = styled.div`
     -webkit-appearance: none;
     visibility: hidden;
     opacity: 0;
-    background: #fff;
+    background: ${globalColors.white};
     transition:
       opacity 0.3s ease 0s,
       visibility 0.3s ease 0s;
@@ -194,7 +198,7 @@ export const PlayerTimelineWrapper = styled.div`
     -webkit-appearance: none;
     visibility: hidden;
     opacity: 0;
-    background: #fff;
+    background: ${globalColors.white};
     transition:
       opacity 0.3s ease 0s,
       visibility 0.3s ease 0s;

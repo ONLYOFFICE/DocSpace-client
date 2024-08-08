@@ -26,6 +26,8 @@
 
 import { useState } from "react";
 import { inject, observer } from "mobx-react";
+import { useTheme } from "styled-components";
+
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import { StyledUser } from "../../styles/members";
 import { Avatar } from "@docspace/shared/components/avatar";
@@ -67,6 +69,8 @@ const User = ({
 }) => {
   if (!infoPanelSelection) return null;
   if (!user.displayName && !user.name && !user.email) return null;
+
+  const theme = useTheme();
 
   const security = infoPanelSelection ? infoPanelSelection.security : {};
   const isExpect = user.isExpect;
@@ -263,7 +267,7 @@ const User = ({
         fontSize="12px"
         noSelect
         truncate
-        color="#A3A9AE !important"
+        color={theme.infoPanel.members.subtitleColor}
         dir="auto"
       >
         {`${typeLabel} | ${user.email}`}
@@ -356,7 +360,7 @@ const User = ({
               fontSize="12px"
               noSelect
               truncate
-              color="#A3A9AE"
+              color={theme.infoPanel.members.subtitleColor}
               dir="auto"
             >
               {`${typeLabel} | ${user.email}`}

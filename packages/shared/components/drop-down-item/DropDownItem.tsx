@@ -46,30 +46,27 @@ import { DropDownItemProps } from "./DropDownItem.types";
 
 const DropDownItem = (props: DropDownItemProps) => {
   const {
+    isSeparator = false,
+    isHeader = false,
     withHeaderArrow,
     headerArrowAction,
 
     icon,
     children,
-
+    disabled = false,
     className,
+
+    fillIcon = true,
+    isSubMenu = false,
+    isActive = false,
+    withoutIcon = false,
+    noHover = false,
 
     isSelected,
     isActiveDescendant,
     isBeta,
     additionalElement,
     setOpen,
-
-    isSeparator = false,
-    isHeader = false,
-
-    disabled = false,
-    noHover = false,
-
-    fillIcon = true,
-    isSubMenu = false,
-    isActive = false,
-    withoutIcon = false,
   } = props;
 
   const { t } = useTranslation(["Common"]);
@@ -81,6 +78,9 @@ const DropDownItem = (props: DropDownItemProps) => {
     onClick,
     onClickSelectedItem,
     label = "",
+    tabIndex = -1,
+    textOverflow = false,
+
     ...rest
   } = props;
 
@@ -106,6 +106,8 @@ const DropDownItem = (props: DropDownItemProps) => {
   return (
     <StyledDropdownItem
       {...rest}
+      tabIndex={tabIndex}
+      textOverflow={textOverflow}
       noHover={noHover}
       className={className}
       onClick={onClickAction}
@@ -190,6 +192,11 @@ const DropDownItem = (props: DropDownItemProps) => {
       )}
     </StyledDropdownItem>
   );
+};
+
+DropDownItem.defaultProps = {
+  height: 32,
+  heightTablet: 36,
 };
 
 export { DropDownItem };

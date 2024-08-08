@@ -71,6 +71,7 @@ export type TUser = {
   cultureName?: string;
   groups?: TUserGroup[];
   shared?: boolean;
+  loginEventId?: number;
 };
 
 export type TGetUserList = {

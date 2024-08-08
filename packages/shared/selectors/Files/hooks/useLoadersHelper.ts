@@ -44,6 +44,7 @@ const useLoadersHelper = () => {
   const [isFirstLoad, setIsFirstLoad] = React.useState(true);
 
   const startLoader = React.useRef<Date | null>(new Date());
+  const loaderTimeout = React.useRef<NodeJS.Timeout | null>(null);
 
   const breadCrumbsLoaderTimeout = React.useRef<NodeJS.Timeout | null>(null);
   const breadCrumbsStartLoader = React.useRef<Date | null>(new Date());
@@ -59,9 +60,10 @@ const useLoadersHelper = () => {
 
   const calculateLoader = React.useCallback(() => {
     if (isFirstLoad) {
-      setShowLoader(true);
-
-      startLoader.current = new Date();
+      loaderTimeout.current = setTimeout(() => {
+        startLoader.current = new Date();
+        if (isMount.current) setShowLoader(true);
+      }, SHOW_LOADER_TIMER);
     } else if (startLoader.current) {
       const currentDate = new Date();
 
@@ -80,6 +82,11 @@ const useLoadersHelper = () => {
           setShowLoader(false);
         }
       }, MIN_LOADER_TIMER - ms);
+
+      loaderTimeout.current = null;
+    } else if (loaderTimeout.current) {
+      clearTimeout(loaderTimeout.current);
+      loaderTimeout.current = null;
     }
   }, [isFirstLoad]);
 

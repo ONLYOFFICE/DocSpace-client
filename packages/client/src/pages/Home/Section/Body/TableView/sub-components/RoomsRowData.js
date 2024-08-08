@@ -41,7 +41,6 @@ const RoomsRowDataComponent = (props) => {
   const {
     roomColumnTypeIsEnabled,
     roomColumnOwnerIsEnabled,
-    roomColumnQuickButtonsIsEnabled,
     roomColumnTagsIsEnabled,
     roomColumnActivityIsEnabled,
     roomQuotaColumnIsEnable,
@@ -63,6 +62,11 @@ const RoomsRowDataComponent = (props) => {
   } = props;
 
   const lastColumn = getLastColumn(tableStorageName);
+  const quickButtonsComponentNode = (
+    <StyledQuickButtonsContainer>
+      {quickButtonsComponent}
+    </StyledQuickButtonsContainer>
+  );
 
   return (
     <>
@@ -85,13 +89,7 @@ const RoomsRowDataComponent = (props) => {
         <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
           {badgesComponent}
         </StyledBadgesContainer>
-        {lastColumn === "Name" ? (
-          <StyledQuickButtonsContainer>
-            {quickButtonsComponent}
-          </StyledQuickButtonsContainer>
-        ) : (
-          <></>
-        )}
+        {lastColumn === "Name" ? quickButtonsComponentNode : <></>}
       </TableCell>
 
       {roomColumnTypeIsEnabled ? (
@@ -111,13 +109,7 @@ const RoomsRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Type" ? (
-            <StyledQuickButtonsContainer>
-              {quickButtonsComponent}
-            </StyledQuickButtonsContainer>
-          ) : (
-            <></>
-          )}
+          {lastColumn === "Type" ? quickButtonsComponentNode : <></>}
         </TableCell>
       ) : (
         <div />
@@ -136,13 +128,7 @@ const RoomsRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Tags" ? (
-            <StyledQuickButtonsContainer>
-              {quickButtonsComponent}
-            </StyledQuickButtonsContainer>
-          ) : (
-            <></>
-          )}
+          {lastColumn === "Tags" ? quickButtonsComponentNode : <></>}
         </TableCell>
       ) : (
         <div />
@@ -165,13 +151,7 @@ const RoomsRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Owner" ? (
-            <StyledQuickButtonsContainer>
-              {quickButtonsComponent}
-            </StyledQuickButtonsContainer>
-          ) : (
-            <></>
-          )}
+          {lastColumn === "Owner" ? quickButtonsComponentNode : <></>}
         </TableCell>
       ) : (
         <div />
@@ -194,13 +174,7 @@ const RoomsRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Activity" ? (
-            <StyledQuickButtonsContainer>
-              {quickButtonsComponent}
-            </StyledQuickButtonsContainer>
-          ) : (
-            <></>
-          )}
+          {lastColumn === "Activity" ? quickButtonsComponentNode : <></>}
         </TableCell>
       ) : (
         <div />
@@ -213,13 +187,7 @@ const RoomsRowDataComponent = (props) => {
               type="room"
               isReadOnly={!item?.security?.EditRoom}
             />
-            {lastColumn === "Storage" ? (
-              <StyledQuickButtonsContainer>
-                {quickButtonsComponent}
-              </StyledQuickButtonsContainer>
-            ) : (
-              <></>
-            )}
+            {lastColumn === "Storage" ? quickButtonsComponentNode : <></>}
           </TableCell>
         ) : (
           <div />
@@ -232,7 +200,6 @@ export default inject(({ currentQuotaStore, tableStore }) => {
   const {
     roomColumnTypeIsEnabled,
     roomColumnOwnerIsEnabled,
-    roomColumnQuickButtonsIsEnabled,
     roomColumnTagsIsEnabled,
     roomColumnActivityIsEnabled,
     roomQuotaColumnIsEnable,
@@ -244,7 +211,6 @@ export default inject(({ currentQuotaStore, tableStore }) => {
     roomQuotaColumnIsEnable,
     roomColumnTypeIsEnabled,
     roomColumnOwnerIsEnabled,
-    roomColumnQuickButtonsIsEnabled,
     roomColumnTagsIsEnabled,
     roomColumnActivityIsEnabled,
     showStorageInfo,

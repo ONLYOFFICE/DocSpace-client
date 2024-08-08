@@ -60,6 +60,11 @@ const RowDataComponent = (props) => {
   } = props;
 
   const lastColumn = getLastColumn(tableStorageName);
+  const quickButtonsComponentNode = (
+    <StyledQuickButtonsContainer>
+      {quickButtonsComponent}
+    </StyledQuickButtonsContainer>
+  );
 
   return (
     <>
@@ -82,13 +87,7 @@ const RowDataComponent = (props) => {
         <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
           {badgesComponent}
         </StyledBadgesContainer>
-        {lastColumn === "Name" ? (
-          <StyledQuickButtonsContainer>
-            {quickButtonsComponent}
-          </StyledQuickButtonsContainer>
-        ) : (
-          <></>
-        )}
+        {lastColumn === "Name" ? quickButtonsComponentNode : <></>}
       </TableCell>
 
       {authorColumnIsEnabled ? (
@@ -106,13 +105,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Author" ? (
-            <StyledQuickButtonsContainer>
-              {quickButtonsComponent}
-            </StyledQuickButtonsContainer>
-          ) : (
-            <></>
-          )}
+          {lastColumn === "Author" ? quickButtonsComponentNode : <></>}
         </TableCell>
       ) : (
         <div />
@@ -136,13 +129,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Created" ? (
-            <StyledQuickButtonsContainer>
-              {quickButtonsComponent}
-            </StyledQuickButtonsContainer>
-          ) : (
-            <></>
-          )}
+          {lastColumn === "Created" ? quickButtonsComponentNode : <></>}
         </TableCell>
       ) : (
         <div />
@@ -163,13 +150,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Modified" ? (
-            <StyledQuickButtonsContainer>
-              {quickButtonsComponent}
-            </StyledQuickButtonsContainer>
-          ) : (
-            <></>
-          )}
+          {lastColumn === "Modified" ? quickButtonsComponentNode : <></>}
         </TableCell>
       ) : (
         <div />
@@ -190,13 +171,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Size" ? (
-            <StyledQuickButtonsContainer>
-              {quickButtonsComponent}
-            </StyledQuickButtonsContainer>
-          ) : (
-            <></>
-          )}
+          {lastColumn === "Size" ? quickButtonsComponentNode : <></>}
         </TableCell>
       ) : (
         <div />
@@ -219,13 +194,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Type" ? (
-            <StyledQuickButtonsContainer>
-              {quickButtonsComponent}
-            </StyledQuickButtonsContainer>
-          ) : (
-            <></>
-          )}
+          {lastColumn === "Type" ? quickButtonsComponentNode : <></>}
         </TableCell>
       ) : (
         <div />

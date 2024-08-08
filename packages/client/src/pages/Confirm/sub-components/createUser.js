@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import SsoReactSvgUrl from "PUBLIC_DIR/images/sso.react.svg?url";
+import SsoReactSvg from "PUBLIC_DIR/images/sso.react.svg";
 
 import React, { useEffect, useState, useCallback } from "react";
 import { withTranslation, Trans } from "react-i18next";
@@ -469,7 +469,7 @@ const CreateUserForm = (props) => {
     ? {
         ssoUrl: capabilities?.ssoUrl,
         ssoLabel: capabilities?.ssoLabel,
-        ssoSVG: SsoReactSvgUrl,
+        ssoSVG: SsoReactSvg,
       }
     : {};
 

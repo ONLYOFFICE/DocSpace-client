@@ -27,7 +27,7 @@
 import styled, { css } from "styled-components";
 import { isMobile } from "react-device-detect";
 
-import { Base, TColorScheme } from "../../themes";
+import { Base, TColorScheme, globalColors } from "../../themes";
 import { tablet } from "../../utils";
 
 import { Text } from "../text";
@@ -73,7 +73,7 @@ const StyledArticleItemHeaderContainer = styled.div<{
     font-weight: 600;
     font-size: 11px;
     line-height: 14px;
-    color: #a3a9ae;
+    color: ${(props) => props.theme.catalogItem.header.color};
   }
 
   @media ${tablet} {
@@ -93,7 +93,7 @@ const StyledArticleItemHeaderContainer = styled.div<{
           line-height: 1px;
           height: 1px;
 
-          background: #d0d5da;
+          background: ${props.theme.catalogItem.header.background};
         }
       `}
   }
@@ -343,7 +343,7 @@ const StyledArticleItemContainer = styled.div<{
       props.theme.catalogItem.container.tablet.marginBottom};
   }
 
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   .catalog-item__icon {
     display: none;

@@ -82,28 +82,30 @@ const OnlyofficeWorkspace = (props: WorkspaceProps) => {
   );
 };
 
-export default inject<TStore>(({ settingsStore, importAccountsStore }) => {
-  const {
-    filteredUsers,
-    step,
-    setStep,
-    setWorkspace,
-    migrationPhase,
-    migratingWorkspace,
-    isMigrationInit,
-    setIsMigrationInit,
-  } = importAccountsStore;
-  const { theme } = settingsStore;
+export const Component = inject<TStore>(
+  ({ settingsStore, importAccountsStore }) => {
+    const {
+      filteredUsers,
+      step,
+      setStep,
+      setWorkspace,
+      migrationPhase,
+      migratingWorkspace,
+      isMigrationInit,
+      setIsMigrationInit,
+    } = importAccountsStore;
+    const { theme } = settingsStore;
 
-  return {
-    theme,
-    filteredUsers,
-    step,
-    setStep,
-    setWorkspace,
-    migrationPhase,
-    migratingWorkspace,
-    isMigrationInit,
-    setIsMigrationInit,
-  };
-})(observer(OnlyofficeWorkspace));
+    return {
+      theme,
+      filteredUsers,
+      step,
+      setStep,
+      setWorkspace,
+      migrationPhase,
+      migratingWorkspace,
+      isMigrationInit,
+      setIsMigrationInit,
+    };
+  },
+)(observer(OnlyofficeWorkspace));

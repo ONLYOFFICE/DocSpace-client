@@ -141,7 +141,7 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
             >
               {t("Common:Domain")}
             </Text>
-            <Text color="#A3A9AE">(example.com)</Text>
+            <Text className="spaces-input-subheader">(example.com)</Text>
           </div>
 
           <TextInput
@@ -156,10 +156,10 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
             {domainNameError &&
               domainNameError.map((err, index) => (
                 <Text
+                  className="error-text"
                   key={index}
                   fontSize="12px"
                   fontWeight="400"
-                  color="#F24724"
                 >
                   {err}
                 </Text>
@@ -179,7 +179,7 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
             tabIndex={2}
           />
           <div>
-            <Text fontSize="12px" fontWeight="400" color="#F24724">
+            <Text className="error-text" fontSize="12px" fontWeight="400">
               {portalNameError || checkDomainError}
             </Text>
           </div>

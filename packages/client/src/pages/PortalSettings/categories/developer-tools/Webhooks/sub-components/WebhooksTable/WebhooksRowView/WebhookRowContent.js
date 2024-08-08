@@ -34,6 +34,7 @@ import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import StatusBadge from "../../StatusBadge";
 
 import { isMobile, tablet } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
 
 const StyledRowContent = styled(RowContent)`
   display: flex;
@@ -96,7 +97,7 @@ export const WebhookRowContent = ({
         </FlexWrapper>
 
         {!isMobile() && (
-          <Text fontWeight={600} fontSize="12px" color="#A3A9AE">
+          <Text fontWeight={600} fontSize="12px" color={globalColors.gray}>
             {webhook.uri}
           </Text>
         )}

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 
 const StyledComponent = styled.div`
   display: inline-flex;
@@ -40,7 +40,9 @@ const StyledComponent = styled.div`
 
     height: 100%;
     background: ${(props) =>
-      props.themePreview === "Light" ? "#f8f9f9" : "#292929"};
+      props.themePreview === "Light"
+        ? globalColors.grayLight
+        : globalColors.darkGrayLight};
     ${(props) =>
       props.withBorder &&
       css`
@@ -63,7 +65,9 @@ const StyledComponent = styled.div`
     width: 20px;
     height: 1px;
     background: ${(props) =>
-      props.themePreview === "Light" ? "#eceef1" : "#474747"};
+      props.themePreview === "Light"
+        ? globalColors.grayLightMid
+        : globalColors.grayDarkStrong};
     margin: 0 20px 31px;
   }
 
@@ -75,7 +79,8 @@ const StyledComponent = styled.div`
 
     circle {
       fill: ${(props) => props.colorPreview};
-      stroke: ${(props) => props.themePreview === "Dark" && "#292929"};
+      stroke: ${(props) =>
+        props.themePreview === "Dark" && globalColors.darkGrayLight};
     }
   }
 
@@ -115,7 +120,7 @@ const StyledComponent = styled.div`
         border-inline-start-style: none;
       `}
     background: ${(props) =>
-      props.themePreview === "Light" ? "#FFFFFF" : "#333333"};
+      props.themePreview === "Light" ? globalColors.white : globalColors.black};
   }
 
   .section-header {
@@ -169,7 +174,7 @@ const StyledComponent = styled.div`
   .color-badge rect {
     fill: ${(props) =>
       props.themePreview === "Dark" && props.selectThemeId === 7
-        ? "#FFFFFF"
+        ? globalColors.white
         : props.colorPreview} !important;
   }
 
@@ -177,7 +182,7 @@ const StyledComponent = styled.div`
     fill: ${(props) =>
       props.themePreview === "Light"
         ? `${props.colorPreview} !important`
-        : `#FFFFFF !important`};
+        : `${globalColors.white} !important`};
   }
 
   .menu-section {
@@ -193,7 +198,9 @@ const StyledComponent = styled.div`
 
   .loaders-theme {
     background-color: ${(props) =>
-      props.themePreview === "Light" ? "#FFF" : "#858585"};
+      props.themePreview === "Light"
+        ? globalColors.white
+        : globalColors.grayDark};
     border-radius: 3px;
   }
 
@@ -227,7 +234,7 @@ const StyledComponent = styled.div`
     padding-top: 9px;
     padding-bottom: 9px !important;
     background: ${(props) =>
-      props.themePreview === "Light" ? "#f0f0f0" : "#333333"};
+      props.themePreview === "Light" ? globalColors.white : globalColors.black};
   }
 
   .section-tile {
@@ -237,7 +244,9 @@ const StyledComponent = styled.div`
 
   .border-color {
     border-color: ${(props) =>
-      props.themePreview === "Light" ? "#d0d5da" : "#474747"};
+      props.themePreview === "Light"
+        ? globalColors.grayStrong
+        : globalColors.grayDarkStrong};
   }
 
   .tile {
@@ -250,7 +259,9 @@ const StyledComponent = styled.div`
 
   .background {
     background: ${(props) =>
-      props.themePreview === "Light" ? "#FFF" : "#292929"};
+      props.themePreview === "Light"
+        ? globalColors.white
+        : globalColors.darkGrayLight};
   }
 
   .tile-name {
@@ -314,7 +325,7 @@ const StyledComponent = styled.div`
       fill: ${(props) =>
         props.themePreview === "Light"
           ? `${props.colorPreview} !important`
-          : `#FFFFFF !important`};
+          : `${globalColors.white} !important`};
     }
   }
 
@@ -323,7 +334,7 @@ const StyledComponent = styled.div`
   }
 
   .main-button_text {
-    color: #ffffff !important;
+    color: ${globalColors.white} !important;
   }
 `;
 
@@ -339,7 +350,7 @@ const StyledFloatingButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0px 12px 40px rgba(4, 15, 27, 0.12);
+  box-shadow: 0px 12px 40px ${globalColors.popupShadow};
 `;
 
 StyledFloatingButton.defaultProps = { theme: Base };
@@ -361,10 +372,12 @@ const StyledMobilePreview = styled.div`
   border-radius: 16px;
   padding: 0px 16px;
   background: ${({ themePreview }) =>
-    themePreview === "Light" ? "#FFFFFF" : "#333333"};
+    themePreview === "Light" ? globalColors.white : globalColors.black};
 
   border: ${({ themePreview }) =>
-    themePreview === "Light" ? "1px solid #d0d5da" : "1px solid #474747"};
+    themePreview === "Light"
+      ? `1px solid ${globalColors.grayStrong}`
+      : `1px solid ${globalColors.grayDarkStrong}`};
 
   .section-search {
     height: 30px;
@@ -390,7 +403,7 @@ const StyledMobilePreview = styled.div`
   .color-badge rect {
     fill: ${(props) =>
       props.themePreview === "Dark" && props.selectThemeId === 7
-        ? "#FFFFFF"
+        ? globalColors.white
         : props.colorPreview} !important;
   }
 
@@ -398,7 +411,7 @@ const StyledMobilePreview = styled.div`
     fill: ${(props) =>
       props.themePreview === "Light"
         ? `${props.colorPreview} !important`
-        : `#FFFFFF !important`};
+        : `${globalColors.white} !important`};
   }
 
   .menu-section {
@@ -409,33 +422,41 @@ const StyledMobilePreview = styled.div`
 
   .loaders-theme {
     background-color: ${(props) =>
-      props.themePreview === "Light" ? "#FFF" : "#545454"};
+      props.themePreview === "Light"
+        ? globalColors.white
+        : globalColors.grayDark};
     border-radius: 3px;
   }
 
   .loaders-tile-theme {
     background: ${(props) =>
-      props.themePreview === "Light" ? "#F1F1F1" : "#333333"};
+      props.themePreview === "Light" ? globalColors.white : globalColors.black};
 
     border-radius: 3px;
   }
 
   .loaders-tile-text-theme {
     background: ${(props) =>
-      props.themePreview === "Light" ? "#D0D5DA" : "#858585"};
+      props.themePreview === "Light"
+        ? globalColors.grayStrong
+        : globalColors.grayDark};
 
     border-radius: 3px;
   }
 
   .loaders-theme-avatar {
     background-color: ${(props) =>
-      props.themePreview === "Light" ? "#FFF" : "#545454"};
+      props.themePreview === "Light"
+        ? globalColors.white
+        : globalColors.grayDark};
     border-radius: 50px;
   }
 
   .border-color {
     border-color: ${(props) =>
-      props.themePreview === "Light" ? "#d0d5da" : "#474747"};
+      props.themePreview === "Light"
+        ? globalColors.grayStrong
+        : globalColors.grayDarkStrong};
   }
 
   .tile {
@@ -448,7 +469,9 @@ const StyledMobilePreview = styled.div`
 
   .background {
     background: ${(props) =>
-      props.themePreview === "Light" ? "#FFF" : "#292929"};
+      props.themePreview === "Light"
+        ? globalColors.white
+        : globalColors.darkGrayLight};
   }
 
   .tile-name {
@@ -504,7 +527,7 @@ const StyledMobilePreview = styled.div`
       fill: ${(props) =>
         props.themePreview === "Light"
           ? `${props.colorPreview} !important`
-          : `#FFFFFF !important`};
+          : `${globalColors.white} !important`};
     }
   }
 
@@ -523,7 +546,9 @@ const StyledMobilePreview = styled.div`
     padding: 0 16px;
 
     background: ${({ themePreview }) =>
-      themePreview === "Light" ? "#FFFFFF" : "#282828"};
+      themePreview === "Light"
+        ? globalColors.white
+        : globalColors.darkGrayLight};
 
     border-radius: 16px 16px 0px 0px;
   }
@@ -541,7 +566,7 @@ const StyledMobilePreview = styled.div`
   .color-badge rect {
     fill: ${({ themePreview, selectThemeId, colorPreview }) =>
       themePreview === "Dark" && selectThemeId === 7
-        ? "#FFFFFF"
+        ? globalColors.white
         : colorPreview} !important;
   }
   .section-badge {
@@ -562,7 +587,8 @@ const StyledMobilePreview = styled.div`
   .icon-button_svg {
     svg {
       path {
-        fill: #a3a9ae;
+        fill: ${(props) =>
+          props.theme.client.settings.common.appearance.iconFill};
       }
     }
   }

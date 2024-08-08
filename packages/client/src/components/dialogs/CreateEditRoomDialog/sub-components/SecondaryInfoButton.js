@@ -32,10 +32,11 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 
 const StyledHelpButton = styled(HelpButton)`
   border-radius: 50%;
-  background-color: #a3a9ae;
+  background-color: ${(props) =>
+    props.theme.createEditRoomDialog.helpButton.background};
   circle,
   rect {
-    fill: #ffffff;
+    fill: ${(props) => props.theme.createEditRoomDialog.helpButton.fill};
   }
 `;
 

@@ -29,7 +29,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { isMobileOnly, isMobile } from "react-device-detect";
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 
 const StyledNav = styled.nav`
   background-color: ${(props) => props.theme.nav.backgroundColor};
@@ -43,7 +43,7 @@ const StyledNav = styled.nav`
   transition: width 0.3s ease-in-out;
   width: ${(props) => (props.opened ? "240px" : "0")};
   z-index: 200;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   .version-box {
     position: absolute;

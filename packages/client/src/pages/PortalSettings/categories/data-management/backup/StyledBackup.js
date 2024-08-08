@@ -31,6 +31,7 @@ import {
 } from "../../../utils/commonSettingsStyles";
 
 import { tablet, mobile } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
 
 const INPUT_LENGTH = "350px";
 const TEXT_LENGTH = "700px";
@@ -111,7 +112,7 @@ const commonStyles = css`
     max-width: fit-content;
     font-size: 12px;
     line-height: 15px;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
   }
 `;
 
@@ -345,7 +346,7 @@ const StyledRestoreBackup = styled.div`
 const StyledModules = styled.div`
   margin-bottom: 24px;
   .backup-description {
-    ${(props) => props.isDisabled && `color: #A3A9AE`};
+    ${(props) => props.isDisabled && `color: ${globalColors.gray};`};
     margin-inline-start: 25px;
     max-width: 700px;
   }
@@ -523,7 +524,7 @@ const StyledBackupList = styled.div`
     margin-top: -3px;
     grid-area: trash;
     path {
-      fill: #a3a9ae;
+      fill: ${globalColors.gray};
     }
   }
   .backup-list_icon {
@@ -537,7 +538,7 @@ const StyledBackupList = styled.div`
     white-space: nowrap;
   }
   .backup-list_file-exst {
-    color: #a3a9ae;
+    color: ${globalColors.gray};
     grid-area: ext;
   }
   .backup-list_radio-button {
@@ -591,7 +592,7 @@ const StyledSettingsHeader = styled.div`
   -ms-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
   -webkit-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
   -o-transition: top 0.3s cubic-bezier(0, 0, 0.8, 1);
-  background-color: #fff;
+  background-color: ${globalColors.white};
   z-index: 149;
   width: 100%;
   height: 50px;

@@ -122,14 +122,16 @@ const ProviderMetadata = (props) => {
   );
 };
 
-export default inject(({ ssoStore, settingsStore, currentQuotaStore }) => {
-  const { downloadMetadata } = ssoStore;
-  const { currentDeviceType } = settingsStore;
-  const { isSSOAvailable } = currentQuotaStore;
+export const ProviderMetadataSection = inject(
+  ({ ssoStore, settingsStore, currentQuotaStore }) => {
+    const { downloadMetadata } = ssoStore;
+    const { currentDeviceType } = settingsStore;
+    const { isSSOAvailable } = currentQuotaStore;
 
-  return {
-    downloadMetadata,
-    currentDeviceType,
-    isSSOAvailable,
-  };
-})(observer(ProviderMetadata));
+    return {
+      downloadMetadata,
+      currentDeviceType,
+      isSSOAvailable,
+    };
+  },
+)(observer(ProviderMetadata));

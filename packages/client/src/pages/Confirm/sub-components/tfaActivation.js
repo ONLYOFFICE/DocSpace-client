@@ -49,6 +49,7 @@ import {
 } from "@docspace/shared/api/settings";
 import { loginWithTfaCode } from "@docspace/shared/api/user";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import ConfirmRoute from "SRC_DIR/helpers/confirmRoute";
 
 const StyledForm = styled(Box)`
   margin: 56px auto;
@@ -342,7 +343,7 @@ const TfaActivationWrapper = (props) => {
   );
 };
 
-export default inject(({ settingsStore, confirm, tfaStore }) => ({
+const ComponentWrapper = inject(({ settingsStore, confirm, tfaStore }) => ({
   setIsLoaded: confirm.setIsLoaded,
   setIsLoading: confirm.setIsLoading,
   tfaAndroidAppUrl: tfaStore.tfaAndroidAppUrl,
@@ -350,3 +351,11 @@ export default inject(({ settingsStore, confirm, tfaStore }) => ({
   tfaWinAppUrl: tfaStore.tfaWinAppUrl,
   currentColorScheme: settingsStore.currentColorScheme,
 }))(withTranslation(["Confirm", "Common"])(observer(TfaActivationWrapper)));
+
+export const Component = () => {
+  return (
+    <ConfirmRoute>
+      <ComponentWrapper />
+    </ConfirmRoute>
+  );
+};

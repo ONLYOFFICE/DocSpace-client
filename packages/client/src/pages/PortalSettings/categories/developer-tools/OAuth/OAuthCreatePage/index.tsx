@@ -5,7 +5,7 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 import ClientForm from "../sub-components/ClientForm";
 
-const OAuthCreatePage = () => {
+const Component = () => {
   const { t } = useTranslation(["OAuth"]);
 
   React.useEffect(() => {
@@ -15,4 +15,4 @@ const OAuthCreatePage = () => {
   return <ClientForm />;
 };
 
-export default OAuthCreatePage;
+export { Component };

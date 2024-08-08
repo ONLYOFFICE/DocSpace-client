@@ -47,7 +47,7 @@ let greetingTitleFromSessionStorage = "";
 let greetingTitleDefaultFromSessionStorage = "";
 const settingNames = ["greetingTitle"];
 
-const WelcomePageSettings = (props) => {
+const WelcomePageSettingsComponent = (props) => {
   const {
     t,
     greetingSettings,
@@ -376,39 +376,44 @@ const WelcomePageSettings = (props) => {
   );
 };
 
-export default inject(({ settingsStore, setup, common }) => {
-  const {
-    greetingSettings,
-    theme,
-    currentColorScheme,
-    welcomePageSettingsUrl,
-  } = settingsStore;
-  const { setGreetingTitle, restoreGreetingTitle } = setup;
-  const {
-    isLoaded,
-    setIsLoadedWelcomePageSettings,
-    initSettings,
-    setIsLoaded,
-    greetingSettingsIsDefault,
-    getGreetingSettingsIsDefault,
-  } = common;
+export const WelcomePageSettings = inject(
+  ({ settingsStore, setup, common }) => {
+    const {
+      greetingSettings,
 
-  return {
-    theme,
-    greetingSettings,
-    setGreetingTitle,
-    restoreGreetingTitle,
-    isLoaded,
-    setIsLoadedWelcomePageSettings,
-    greetingSettingsIsDefault,
-    getGreetingSettingsIsDefault,
-    initSettings,
-    setIsLoaded,
-    currentColorScheme,
-    welcomePageSettingsUrl,
-  };
-})(
+      theme,
+      currentColorScheme,
+      welcomePageSettingsUrl,
+    } = settingsStore;
+    const { setGreetingTitle, restoreGreetingTitle } = setup;
+    const {
+      isLoaded,
+      setIsLoadedWelcomePageSettings,
+      initSettings,
+      setIsLoaded,
+      greetingSettingsIsDefault,
+      getGreetingSettingsIsDefault,
+    } = common;
+
+    return {
+      theme,
+      greetingSettings,
+      setGreetingTitle,
+      restoreGreetingTitle,
+      isLoaded,
+      setIsLoadedWelcomePageSettings,
+      greetingSettingsIsDefault,
+      getGreetingSettingsIsDefault,
+      initSettings,
+      setIsLoaded,
+      currentColorScheme,
+      welcomePageSettingsUrl,
+    };
+  },
+)(
   withLoading(
-    withTranslation(["Settings", "Common"])(observer(WelcomePageSettings)),
+    withTranslation(["Settings", "Common"])(
+      observer(WelcomePageSettingsComponent),
+    ),
   ),
 );

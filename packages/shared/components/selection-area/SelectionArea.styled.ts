@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
+import { globalColors } from "../../themes";
 
 const StyledSelectionArea = styled.div`
   top: 0;
@@ -36,7 +37,7 @@ const StyledSelectionArea = styled.div`
   display: none;
 
   background: rgba(68, 170, 255, 0.5);
-  border: 1px solid #4af;
+  border: 1px solid ${globalColors.lightSecondMain}
   z-index: 1000;
 `;
 

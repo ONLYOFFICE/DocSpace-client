@@ -31,6 +31,7 @@ import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
 import { Text } from "../../text";
 
 import { mobile } from "../../../utils";
+import { globalColors } from "../../../themes";
 
 const StyledWrapper = styled.div`
   width: 100%;
@@ -54,7 +55,7 @@ const StyledWrapper = styled.div`
     gap: 8px;
     align-items: center;
     padding: 8px;
-    border: 1px solid #eceef1;
+    border: 1px solid ${globalColors.grayLightMid};
     border-radius: 6px;
   }
 `;

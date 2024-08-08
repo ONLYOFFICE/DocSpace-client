@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base } from "../../../themes";
+import { Base, globalColors } from "../../../themes";
 
 const selectedItemTag = css`
   background: ${(props) =>
@@ -55,7 +55,7 @@ const StyledFilterBlockItemTag = styled.div<{ isSelected?: boolean }>`
 
   ${(props) => props.isSelected && selectedItemTag}
 
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 `;
 
 StyledFilterBlockItemTag.defaultProps = { theme: Base };

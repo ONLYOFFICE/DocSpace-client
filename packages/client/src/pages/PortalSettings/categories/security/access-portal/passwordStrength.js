@@ -309,7 +309,7 @@ const PasswordStrength = (props) => {
   );
 };
 
-export default inject(({ settingsStore, setup }) => {
+export const PasswordStrengthSection = inject(({ settingsStore, setup }) => {
   const {
     setPortalPasswordSettings,
     passwordSettings,

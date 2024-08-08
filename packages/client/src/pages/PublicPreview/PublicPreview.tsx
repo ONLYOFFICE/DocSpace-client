@@ -8,7 +8,7 @@ import { UrlActionType, ValidationStatus } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import MediaViewer from "@docspace/shared/components/media-viewer/MediaViewer";
 import { ViewerLoader } from "@docspace/shared/components/media-viewer/sub-components/ViewerLoader";
-import Error403 from "@docspace/shared/components/errors/Error403";
+import { Error403 } from "@docspace/shared/components/errors/Error403";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { validatePublicRoomKey } from "@docspace/shared/api/rooms";
 import type { TFile } from "@docspace/shared/api/files/types";
@@ -151,9 +151,12 @@ const PublicPreview = ({
   );
 };
 
-export default inject<TStore>(({ filesSettingsStore, settingsStore }) => {
-  const { getFilesSettings, getIcon, extsImagePreviewed } = filesSettingsStore;
-  const { openUrl } = settingsStore;
+export const WrappedComponent = inject<TStore>(
+  ({ filesSettingsStore, settingsStore }) => {
+    const { getFilesSettings, getIcon, extsImagePreviewed } =
+      filesSettingsStore;
+    const { openUrl } = settingsStore;
 
-  return { getFilesSettings, getIcon, openUrl, extsImagePreviewed };
-})(observer(PublicPreview));
+    return { getFilesSettings, getIcon, openUrl, extsImagePreviewed };
+  },
+)(observer(PublicPreview));

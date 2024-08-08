@@ -39,7 +39,11 @@ import {
 } from "@docspace/shared/api/settings/types";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
-import { RecaptchaType, ThemeKeys } from "@docspace/shared/enums";
+import {
+  EmployeeActivationStatus,
+  RecaptchaType,
+  ThemeKeys,
+} from "@docspace/shared/enums";
 
 import { AuthenticatedAction, ValidationResult } from "@/utils/enums";
 
@@ -95,6 +99,8 @@ export type TConfirmRouteContext = {
     type?: string;
     first?: string;
     roomId?: string;
+    firstname?: string;
+    lastname?: string;
   };
   roomData: {
     roomId?: string;
@@ -128,6 +134,20 @@ export type TCreateUserData = {
   lastName: string;
   key?: string;
   type?: number;
+};
+
+export type TActivateConfirmUser = {
+  personalData: {
+    firstname?: string;
+    lastname?: string;
+  };
+  loginData: {
+    userName: string;
+    passwordHash: string;
+  };
+  key: string;
+  userId: string;
+  activationStatus: EmployeeActivationStatus;
 };
 
 export type TTfaSecretKeyAndQR = {

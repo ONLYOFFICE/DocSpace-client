@@ -41,6 +41,7 @@ import DocumentService from "./DocumentService";
 import PluginPage from "./Plugins";
 import { Box } from "@docspace/shared/components/box";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+import { globalColors } from "@docspace/shared/themes";
 
 const IntegrationWrapper = (props) => {
   const {

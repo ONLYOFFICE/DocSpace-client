@@ -27,6 +27,7 @@
 /* eslint-disable no-console */
 import axios from "axios";
 import isEqual from "lodash/isEqual";
+import { globalColors } from "../themes";
 
 export type TWhiteLabel = {
   path: { light: string; dark: string };
@@ -40,7 +41,7 @@ export const generateLogo = (
   text: string,
   alignCenter: boolean,
   fontSize: number = 18,
-  fontColor: string = "#000",
+  fontColor: string = globalColors.darkBlack,
 ) => {
   const canvas = document.createElement("canvas");
   canvas.width = width;
@@ -179,7 +180,7 @@ export const getLogosAsText = (
       options.text,
       options.alignCenter || false,
       options.fontSize,
-      isDocsEditorName ? "#fff" : "#000",
+      isDocsEditorName ? globalColors.white : globalColors.darkBlack,
     );
     const logoDark = generateLogo(
       options.width,
@@ -187,7 +188,7 @@ export const getLogosAsText = (
       options.text,
       options.alignCenter || false,
       options.fontSize,
-      "#fff",
+      globalColors.white,
     );
     newLogos[i].path.light = logoLight;
     newLogos[i].path.dark = logoDark;

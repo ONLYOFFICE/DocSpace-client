@@ -47,7 +47,7 @@ type THeaderBackButton =
   | {
       onBackClick?: undefined;
       withoutBackButton?: undefined;
-      withoutBorder: undefined;
+      withoutBorder?: undefined;
     };
 
 export type TInfoBarData = {

@@ -38,12 +38,63 @@ import { Row } from "@docspace/shared/components/row";
 import { Text } from "@docspace/shared/components/text";
 import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
+import { globalColors } from "@docspace/shared/themes";
 import { TEnhancedMigrationUser } from "@docspace/shared/api/settings/types";
 import UsersRow from "./UsersRow";
 import { InjectedRowViewProps, RowViewProps } from "../../../../types";
 
 const StyledRowContainer = styled(RowContainer)`
   margin: 0 0 20px;
+
+  .table-group-menu {
+    height: 61px;
+    position: sticky;
+    z-index: 201;
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            margin-right: -16px;
+          `
+        : css`
+            margin-left: -16px;
+          `}
+    width: 100%;
+
+    margin-top: 20px;
+    top: 61px;
+    margin-bottom: -29.5px;
+
+    .table-container_group-menu {
+      padding: 0px 16px;
+      border-image-slice: 0;
+      box-shadow: ${globalColors.menuShadow} 0px 15px 20px;
+    }
+
+    .table-container_group-menu-checkbox {
+      ${(props) =>
+        props.theme.interfaceDirection === "rtl"
+          ? css`
+              margin-right: 8px;
+            `
+          : css`
+              margin-left: 8px;
+            `}
+    }
+
+    .table-container_group-menu-separator {
+      margin: 0 16px;
+    }
+  }
+
+  .header-container-text {
+    font-size: 12px;
+    color: ${(props) =>
+      props.theme.client.settings.migration.tableRowTextColor};
+  }
+
+  .table-container_header {
+    position: absolute;
+  }
 
   .clear-icon {
     margin-inline-end: 8px;

@@ -36,7 +36,7 @@ import { isMobile } from "react-device-detect";
 import { withTheme } from "styled-components";
 import { Link } from "@docspace/shared/components/link";
 import { Loader } from "@docspace/shared/components/loader";
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 import { Tags } from "@docspace/shared/components/tags";
 import { Tag } from "@docspace/shared/components/tag";
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
@@ -154,10 +154,11 @@ const StyledTile = styled.div`
     isRooms
       ? theme.filesSection.tilesView.tile.roomsBorderRadius
       : theme.filesSection.tilesView.tile.borderRadius};
-  ${(props) => props.showHotkeyBorder && "border-color: #2DA7DB"};
+  ${(props) =>
+    props.showHotkeyBorder && `border-color: ${globalColors.lightSecondMain}`};
   ${(props) =>
     props.isFolder && !props.isRooms && "border-start-start-radius: 6px;"}
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   ${(props) => props.isFolder && (props.isRoom ? roomsStyles : FlexBoxStyles)};
   ${(props) => (props.isFolder ? FolderStyles : FileStyles)};
@@ -200,7 +201,9 @@ const StyledTile = styled.div`
 
   &:before,
   &:after {
-    ${(props) => props.showHotkeyBorder && "border-color: #2DA7DB"};
+    ${(props) =>
+      props.showHotkeyBorder &&
+      `border-color: ${globalColors.lightSecondMain}`};
   }
 
   &:before,
@@ -468,7 +471,7 @@ const StyledIcons = styled.div`
     background: ${(props) =>
       props.theme.filesSection.tilesView.tile.backgroundBadgeColor};
     border-radius: 4px;
-    box-shadow: 0px 2px 4px rgba(4, 15, 27, 0.16);
+    box-shadow: 0px 2px 4px ${globalColors.badgeShadow};
   }
 `;
 

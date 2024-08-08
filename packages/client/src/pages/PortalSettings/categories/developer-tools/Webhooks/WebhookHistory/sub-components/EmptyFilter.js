@@ -26,15 +26,15 @@
 
 import React from "react";
 import styled from "styled-components";
+import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import EmptyFilterImg from "PUBLIC_DIR/images/empty_filter.react.svg?url";
 import EmptyFilterDarkImg from "PUBLIC_DIR/images/empty_filter_dark.react.svg?url";
 import ClearEmptyFilterIcon from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
-
-import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+import { globalColors } from "@docspace/shared/themes";
 
 const EmptyFilterWrapper = styled.div`
   width: 100%;
@@ -97,7 +97,9 @@ const EmptyFilter = (props) => {
           </Text>
           <Text
             fontSize="12px"
-            color={theme.isBase ? "#555F65" : "rgba(255, 255, 255, 0.6)"}
+            color={
+              theme.isBase ? globalColors.grayText : globalColors.grayDarkText
+            }
           >
             {t("NoResultsMatched")}
           </Text>
@@ -108,7 +110,7 @@ const EmptyFilter = (props) => {
               className="clearFilterIcon"
             />
             <Link
-              color={theme.isBase ? "#657077" : "inherit"}
+              color={theme.isBase ? globalColors.lightGrayDark : "inherit"}
               isHovered
               fontWeight={600}
               type="action"

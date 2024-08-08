@@ -46,6 +46,8 @@ import OAuth from "./OAuth";
 
 import SSOLoader from "./sub-components/ssoLoader";
 
+import { globalColors } from "@docspace/shared/themes";
+
 const DeveloperToolsWrapper = (props) => {
   const { currentDeviceType, identityServerEnabled } = props;
   const navigate = useNavigate();

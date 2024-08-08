@@ -51,7 +51,7 @@ const StyledContainer = styled.div`
   .public-room-header_separator {
     margin-block: 0;
     margin-inline: 15px 16px;
-    border-inline-start: 1px solid #dfe2e3;
+    border-inline-start: ${(props) => props.theme.publicRoom.border};
     height: 21px;
   }
 

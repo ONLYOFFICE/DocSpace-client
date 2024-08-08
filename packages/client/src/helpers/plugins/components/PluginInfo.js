@@ -58,7 +58,7 @@ const StyledInfo = styled.div`
     gap: 16px;
 
     .row-name {
-      color: #858585;
+      color: ${(props) => props.theme.plugins.color};
     }
   }
 `;

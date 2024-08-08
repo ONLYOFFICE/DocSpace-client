@@ -36,6 +36,7 @@ import { Checkbox } from "../checkbox";
 
 import { RowContent } from "./RowContent";
 import { RowContentProps } from "./RowContent.types";
+import { globalColors } from "../../themes";
 
 export default {
   title: "Components/RowContent",
@@ -60,10 +61,21 @@ const Template = (args: RowContentProps) => {
           Demo
         </Link>
         <>
-          <SendClockIcon size={IconSizeType.small} color="#3B72A7" />
-          <CatalogSpamIcon size={IconSizeType.small} color="#3B72A7" />
+          <SendClockIcon
+            size={IconSizeType.small}
+            color={globalColors.lightIcons}
+          />
+          <CatalogSpamIcon
+            size={IconSizeType.small}
+            color={globalColors.lightIcons}
+          />
         </>
-        <Link type={LinkType.page} title="Demo" fontSize="12px" color="#A3A9AE">
+        <Link
+          type={LinkType.page}
+          title="Demo"
+          fontSize="12px"
+          color={globalColors.gray}
+        >
           Demo
         </Link>
         <Link
@@ -71,7 +83,7 @@ const Template = (args: RowContentProps) => {
           type={LinkType.action}
           title="Demo"
           fontSize="12px"
-          color="#A3A9AE"
+          color={globalColors.gray}
         >
           Demo
         </Link>
@@ -79,7 +91,7 @@ const Template = (args: RowContentProps) => {
           type={LinkType.page}
           title="0 000 0000000"
           fontSize="12px"
-          color="#A3A9AE"
+          color={globalColors.gray}
         >
           0 000 0000000
         </Link>
@@ -88,7 +100,7 @@ const Template = (args: RowContentProps) => {
           type={LinkType.page}
           title="demo@demo.com"
           fontSize="12px"
-          color="#A3A9AE"
+          color={globalColors.gray}
         >
           demo@demo.com
         </Link>
@@ -98,14 +110,17 @@ const Template = (args: RowContentProps) => {
           Demo Demo
         </Link>
 
-        <CatalogSpamIcon size={IconSizeType.small} color="#3B72A7" />
+        <CatalogSpamIcon
+          size={IconSizeType.small}
+          color={globalColors.lightIcons}
+        />
 
         <Link
           // containerWidth="160px"
           type={LinkType.action}
           title="Demo Demo"
           fontSize="12px"
-          color="#A3A9AE"
+          color={globalColors.gray}
         >
           Demo Demo
         </Link>
@@ -113,7 +128,7 @@ const Template = (args: RowContentProps) => {
           type={LinkType.action}
           title="0 000 0000000"
           fontSize="12px"
-          color="#A3A9AE"
+          color={globalColors.gray}
         >
           0 000 0000000
         </Link>
@@ -122,7 +137,7 @@ const Template = (args: RowContentProps) => {
           type={LinkType.action}
           title="demo.demo@demo.com"
           fontSize="12px"
-          color="#A3A9AE"
+          color={globalColors.gray}
         >
           demo.demo@demo.com
         </Link>
@@ -142,7 +157,7 @@ const Template = (args: RowContentProps) => {
           type={LinkType.action}
           title="Demo Demo Demo"
           fontSize="12px"
-          color="#A3A9AE"
+          color={globalColors.gray}
         >
           Demo Demo Demo
         </Link>
@@ -150,7 +165,7 @@ const Template = (args: RowContentProps) => {
           type={LinkType.action}
           title="0 000 0000000"
           fontSize="12px"
-          color="#A3A9AE"
+          color={globalColors.gray}
         >
           0 000 0000000
         </Link>
@@ -159,7 +174,7 @@ const Template = (args: RowContentProps) => {
           type={LinkType.action}
           title="demo.demo.demo@demo.com"
           fontSize="12px"
-          color="#A3A9AE"
+          color={globalColors.gray}
         >
           demo.demo.demo@demo.com
         </Link>
@@ -174,13 +189,16 @@ const Template = (args: RowContentProps) => {
           Demo Demo Demo Demo
         </Link>
 
-        <SendClockIcon size={IconSizeType.small} color="#3B72A7" />
+        <SendClockIcon
+          size={IconSizeType.small}
+          color={globalColors.lightIcons}
+        />
 
         <Link
           type={LinkType.action}
           title="Demo"
           fontSize="12px"
-          color="#A3A9AE"
+          color={globalColors.gray}
         >
           Demo
         </Link>
@@ -189,7 +207,7 @@ const Template = (args: RowContentProps) => {
           type={LinkType.action}
           title="Demo Demo Demo Demo"
           fontSize="12px"
-          color="#A3A9AE"
+          color={globalColors.gray}
         >
           Demo Demo Demo Demo
         </Link>
@@ -197,7 +215,7 @@ const Template = (args: RowContentProps) => {
           type={LinkType.action}
           title="0 000 0000000"
           fontSize="12px"
-          color="#A3A9AE"
+          color={globalColors.gray}
         >
           0 000 0000000
         </Link>
@@ -206,7 +224,7 @@ const Template = (args: RowContentProps) => {
           type={LinkType.action}
           title="demo.demo.demo.demo@demo.com"
           fontSize="12px"
-          color="#A3A9AE"
+          color={globalColors.gray}
         >
           demo.demo.demo.demo@demo.com
         </Link>

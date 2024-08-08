@@ -39,6 +39,7 @@ import { SelectorAddButton } from "@docspace/shared/components/selector-add-butt
 import { SelectedItem } from "@docspace/shared/components/selected-item";
 import { tablet } from "@docspace/shared/utils";
 import Base from "@docspace/shared/themes/base";
+import { globalColors } from "@docspace/shared/themes";
 
 const CategoryHeader = styled.div`
   margin-top: 24px;
@@ -88,7 +89,7 @@ const ChipsContainer = styled.div`
 const InfoBar = styled.div`
   display: flex;
   background-color: ${(props) => props.theme.infoBar.background};
-  color: #333;
+  color: ${(props) => props.theme.infoBar.textColor};
   font-size: 12px;
   padding: 12px 16px;
   border-radius: 6px;
@@ -110,7 +111,7 @@ const InfoBar = styled.div`
     .header-icon {
       svg {
         path {
-          fill: #ed7309;
+          fill: ${(props) => props.theme.infoBar.iconFill};
         }
       }
     }
@@ -258,7 +259,7 @@ const CSP = ({
       </Container>
       <Text
         lineHeight="20px"
-        color={error ? theme?.input.focusErrorBorderColor : "#A3A9AE"}
+        color={error ? theme?.input.focusErrorBorderColor : globalColors.gray}
       >
         {error
           ? error

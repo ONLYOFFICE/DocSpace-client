@@ -64,7 +64,7 @@ const InputWrapper = styled.div`
   }
 
   input:focus {
-    border: 1px solid #5299e0;
+    border: ${(props) => props.theme.codeInput.focusBorder};
     outline: none;
   }
 

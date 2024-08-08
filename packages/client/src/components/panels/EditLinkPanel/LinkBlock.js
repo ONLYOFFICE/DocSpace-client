@@ -51,9 +51,7 @@ const LinkBlock = (props) => {
       <Text className="edit-link-text" fontSize="16px" fontWeight={600}>
         {t("LinkName")}
       </Text>
-      <Text className="edit-link_required-icon" color="#F24724">
-        *
-      </Text>
+      <Text className="edit-link_required-icon">*</Text>
 
       <TextInput
         scale

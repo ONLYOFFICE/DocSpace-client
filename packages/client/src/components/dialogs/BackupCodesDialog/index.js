@@ -43,6 +43,7 @@ import { isDesktop } from "@docspace/shared/utils";
 const StyledModal = styled(ModalDialogContainer)`
   .backup-codes-counter {
     margin-top: 16px;
+    color: ${(props) => props.theme.client.settings.security.tfa.textColor};
   }
 
   .backup-codes-print-link-wrapper {
@@ -107,11 +108,7 @@ class BackupCodesDialogComponent extends React.Component {
               {t("BackupCodesSecondDescription")}
             </Text>
 
-            <Text
-              className="backup-codes-counter"
-              fontWeight={600}
-              color="#A3A9AE"
-            >
+            <Text className="backup-codes-counter" fontWeight={600}>
               {backupCodesCount} {t("CodesCounter")}
             </Text>
 

@@ -35,6 +35,7 @@ import {
   StyledFolderTagSection,
 } from "../StyledComponent";
 import { getConvertedSize } from "@docspace/shared/utils/common";
+import { globalColors } from "@docspace/shared/themes";
 
 const calculateSize = (size, common) => {
   if (common === -1) return 0;
@@ -51,7 +52,12 @@ const getTags = (
   usedPortalSpace,
 ) => {
   const array = [];
-  const colors = ["#13B7EC", "#22C386", "#FF9933", "#FFD30F"];
+  const colors = [
+    globalColors.mainBlueLight,
+    globalColors.secondGreen,
+    globalColors.secondOrange,
+    globalColors.mainYellow,
+  ];
 
   let i = 0;
   let commonSize = standalone ? tenantCustomQuota : maxTotalSizeByQuota;

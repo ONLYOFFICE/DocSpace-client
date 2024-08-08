@@ -43,7 +43,7 @@ import EditSvg from "PUBLIC_DIR/images/access.edit.react.svg";
 import CrossSvg from "PUBLIC_DIR/images/cross.edit.react.svg";
 import CheckSvg from "PUBLIC_DIR/images/check.edit.react.svg";
 
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 
 import EmailChangeDialog from "SRC_DIR/components/dialogs/EmailChangeDialog";
 import {
@@ -188,7 +188,12 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
         <Text fontWeight={600} fontSize="14px">
           {displayName}
         </Text>
-        <Text className="user-email">
+        <Text
+          className="user-email"
+          fontWeight={600}
+          fontSize="12px"
+          color={globalColors.gray}
+        >
           {prevEmail === "" ? t("Settings:NoEmail") : prevEmail}
         </Text>
       </div>

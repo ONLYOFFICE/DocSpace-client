@@ -31,7 +31,7 @@ import CrossIcon from "PUBLIC_DIR/images/icons/17/cross.react.svg";
 
 import { mobile, tablet, desktop } from "../../utils";
 
-import { Base, TColorScheme } from "../../themes";
+import { Base, TColorScheme, globalColors } from "../../themes";
 
 const StyledArticle = styled.article<{
   showText?: boolean;
@@ -150,7 +150,7 @@ const StyledArticleHeader = styled.div<{ showText?: boolean }>`
     padding: 12px 0;
   }
 
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 `;
 
 StyledArticleHeader.defaultProps = { theme: Base };
@@ -411,7 +411,7 @@ const StyledHideArticleMenuButton = styled.div<{
 
   inset-inline-start: 0;
   cursor: pointer;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   min-width: ${({ showText }) => (showText ? "243px" : "60px")};
   max-width: ${({ showText }) => (showText ? "243px" : "60px")};

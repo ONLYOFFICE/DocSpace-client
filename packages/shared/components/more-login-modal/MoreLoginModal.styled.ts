@@ -28,6 +28,7 @@ import styled from "styled-components";
 
 import { mobile } from "@docspace/shared/utils";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { globalColors } from "../../themes";
 
 export const ProviderRow = styled.div`
   width: 100%;
@@ -46,7 +47,7 @@ export const ProviderRow = styled.div`
     padding-inline-start: 4px;
 
     path {
-      fill: ${(props) => !props.theme.isBase && "#fff"};
+      fill: ${(props) => !props.theme.isBase && globalColors.white};
     }
   }
 

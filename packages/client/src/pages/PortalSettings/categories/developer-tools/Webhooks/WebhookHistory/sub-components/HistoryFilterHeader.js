@@ -81,8 +81,7 @@ const FilterButton = styled.div`
   z-index: ${(props) => (props.isGroupMenuVisible ? 199 : 201)};
 
   border: 1px solid;
-  border-color: ${(props) =>
-    props.theme.isBase ? "#d0d5da" : "rgb(71, 71, 71)"};
+  border-color: ${(props) => props.theme.client.settings.webhooks.filterBorder};
   border-radius: 3px;
   cursor: pointer;
 
@@ -91,7 +90,7 @@ const FilterButton = styled.div`
   }
 
   :hover {
-    border-color: #a3a9ae;
+    border-color: ${(props) => props.theme.client.settings.webhooks.color};
     svg {
       path {
         fill: ${(props) => props.theme.iconButton.hoverColor};
@@ -103,7 +102,8 @@ const FilterButton = styled.div`
     z-index: 203;
     width: 8px;
     height: 8px;
-    background-color: #4781d1;
+    background-color: ${(props) =>
+      props.theme.client.settings.webhooks.spanBackground};
     border-radius: 50%;
     position: absolute;
     bottom: -2px;

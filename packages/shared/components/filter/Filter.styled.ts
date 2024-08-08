@@ -29,7 +29,7 @@ import styled, { css } from "styled-components";
 import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
 
 import { tablet, mobile } from "../../utils";
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 import { TViewAs } from "../../types";
 
 import { SearchInput } from "../search-input";
@@ -133,7 +133,7 @@ const StyledButton = styled.div<{ isOpen: boolean }>`
       }
     `}
 
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 `;
 
 StyledButton.defaultProps = { theme: Base };

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base, TTheme } from "../../themes";
+import { Base, TTheme, globalColors } from "../../themes";
 import { mobile, isMobile, getCorrectFourValuesStyle } from "../../utils";
 
 const styledTabletView = css<{ articleWidth: number }>`
@@ -136,7 +136,7 @@ const StyledContextMenu = styled.div<{
     box-sizing: border-box;
     background: none;
     outline: 0 !important;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
     .icon-wrapper {
       display: flex;
@@ -248,7 +248,7 @@ const StyledContextMenu = styled.div<{
     background: none;
     user-select: none;
     outline: 0 !important;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
     font-weight: ${(props) => props.theme.dropDownItem.fontWeight};
     font-size: ${(props) => props.theme.dropDownItem.fontSize};

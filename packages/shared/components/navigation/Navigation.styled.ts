@@ -30,7 +30,7 @@ import ExpanderDownIcon from "PUBLIC_DIR/images/expander-down.react.svg";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg";
 
 import { tablet, mobile, commonIconsStyles } from "../../utils";
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 
 import { ColorTheme } from "../color-theme";
 import { Heading } from "../heading";
@@ -89,7 +89,7 @@ const StyledContainer = styled.div<{
     .header_separator {
       display: ${({ isRootFolder }) => (isRootFolder ? "block" : "none")};
 
-      border-inline-start: 1px solid #dfe2e3;
+      border-inline-start: 1px solid ${globalColors.lightGraySelected};
       margin-block: 0;
       margin-inline: 15px 0;
 

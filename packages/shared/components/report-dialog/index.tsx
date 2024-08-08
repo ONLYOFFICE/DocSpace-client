@@ -46,6 +46,7 @@ import { ModalDialogType, ModalDialog } from "../modal-dialog";
 
 import { ModalDialogContainer } from "./ReportDialog.styled";
 import type { ReportDialogProps } from "./ReportDialog.types";
+import { globalColors } from "../../themes";
 
 const ReportDialog = (props: ReportDialogProps) => {
   const { t, ready } = useTranslation(["Common"]);
@@ -123,7 +124,7 @@ const ReportDialog = (props: ReportDialogProps) => {
           <img src={FileReactSvgUrl} className="file-icon" alt="" />
           <Text as="div" fontWeight={600} noSelect className="report-filename">
             {fileTitle}
-            <Text fontWeight={600} noSelect color="#A3A9AE">
+            <Text fontWeight={600} noSelect color={globalColors.gray}>
               .json
             </Text>
           </Text>

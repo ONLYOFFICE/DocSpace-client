@@ -59,7 +59,6 @@ const ArticleBodyContent = (props) => {
     isOwner,
     isLoadedArticleBody,
     standalone,
-    isEnterprise,
     isCommunity,
     currentDeviceType,
     isProfileLoading,
@@ -347,8 +346,8 @@ export default inject(
     currentTariffStatusStore,
   }) => {
     const { isLoadedArticleBody, setIsLoadedArticleBody } = common;
-    const { isEnterprise, isCommunity } = authStore;
-    const { isNotPaidPeriod } = currentTariffStatusStore;
+
+    const { isNotPaidPeriod, isCommunity } = currentTariffStatusStore;
     const { user } = userStore;
     const { isOwner } = user;
     const {
@@ -368,7 +367,7 @@ export default inject(
 
     return {
       standalone,
-      isEnterprise,
+
       showText,
       toggleArticleOpen,
       isLoadedArticleBody,

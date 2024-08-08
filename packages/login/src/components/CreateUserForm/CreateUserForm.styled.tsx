@@ -31,7 +31,7 @@ import styled, { css } from "styled-components";
 import { mobile, tablet } from "@docspace/shared/utils";
 
 export const RegisterContainer = styled.div<{
-  registrationForm: boolean;
+  registrationForm?: boolean;
 }>`
 
   height: 100%;

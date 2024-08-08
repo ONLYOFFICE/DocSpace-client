@@ -38,8 +38,8 @@ const DEFAULT_CREATION_TEXT =
 type GreetingUserContainerProps = {
   email: string;
   emailFromLink: string;
-  type: string;
-  onClickBack(): void;
+  type?: string;
+  onClickBack?(): void;
 };
 
 export const GreetingUserContainer = ({

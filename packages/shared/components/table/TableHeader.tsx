@@ -79,6 +79,7 @@ class TableHeaderComponent extends React.Component<
       columnInfoPanelStorageName,
       sortBy,
       sorted,
+      resetColumnsSize,
     } = this.props;
 
     if (columnStorageName === prevProps.columnStorageName) {
@@ -104,6 +105,13 @@ class TableHeaderComponent extends React.Component<
           return this.resetColumns();
         }
       }
+    }
+
+    const storageSize =
+      !resetColumnsSize && localStorage.getItem(columnStorageName);
+
+    if (columns.length !== prevProps.columns.length && !storageSize) {
+      return this.resetColumns();
     }
 
     this.onResize();

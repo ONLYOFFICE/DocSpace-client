@@ -55,6 +55,7 @@ const Groups = ({
   const [groupMembers, setGroupMembers] = useState(null);
   const [total, setTotal] = useState(0);
 
+  const abortControllerRef = useRef(new AbortController());
   const startLoader = useRef(null);
   const loaderTimeout = useRef(null);
 
@@ -70,13 +71,18 @@ const Groups = ({
 
   const loadNextPage = async (startIndex) => {
     try {
+      abortControllerRef.current = new AbortController();
+
       const pageCount = 100;
       const filter = AccountsFilter.getDefault();
       filter.group = groupId;
       filter.page = startIndex / pageCount;
       filter.pageCount = pageCount;
 
-      const res = await api.people.getUserList(filter);
+      const res = await api.people.getUserList(
+        filter,
+        abortControllerRef.current.signal,
+      );
 
       const membersWithoutManager = groupManager
         ? res.items.filter((item) => item.id !== groupManager.id)
@@ -137,6 +143,10 @@ const Groups = ({
     if (group) {
       loadNextPage(0);
     }
+
+    return () => {
+      abortControllerRef.current.abort();
+    };
   }, [group]);
 
   useEffect(() => {

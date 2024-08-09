@@ -3055,6 +3055,8 @@ export const getBaseTheme = () => {
 
             dataFontColor: white,
             dataFontColorBlack: black,
+            notAvailableBackground: grayLight,
+            textColor: black,
           },
         },
 

@@ -290,6 +290,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
     createConfirmUser(confirmUser, headerKey).catch((error) => {
       const knownError = error as TError;
+      console.log("error", error);
       let errorMessage: string;
 
       if (typeof knownError === "object") {

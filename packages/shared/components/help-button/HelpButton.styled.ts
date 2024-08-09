@@ -43,17 +43,10 @@ const Content = styled.div`
 `;
 Content.defaultProps = { theme: Base };
 
-const HeaderContent = styled.div`
-  display: flex;
-  align-items: center;
-  border-bottom: ${(props) => props.theme.helpButton.borderBottom};
-`;
-HeaderContent.defaultProps = { theme: Base };
-
 const Body = styled.div`
   position: relative;
   padding: ${(props) => props.theme.helpButton.bodyPadding};
 `;
 Body.defaultProps = { theme: Base };
 
-export { Content, HeaderContent, Body };
+export { Content, Body };

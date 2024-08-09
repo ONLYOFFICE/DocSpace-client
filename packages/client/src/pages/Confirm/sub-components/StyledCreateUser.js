@@ -83,6 +83,7 @@ export const RegisterContainer = styled.div`
   width: 100%;
 
   .or-label {
+    color: ${(props) => props.theme.invitePage.textColor};
     margin: 0 8px;
   }
 
@@ -91,7 +92,7 @@ export const RegisterContainer = styled.div`
     display: flex;
     width: 100%;
     align-items: center;
-    color: ${(props) => props.theme.invitePage.borderColor};;
+    color: ${(props) => props.theme.invitePage.borderColor};
     padding-top: 35px;
     margin-bottom: 32px;
   }

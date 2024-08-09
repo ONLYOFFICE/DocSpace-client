@@ -820,6 +820,10 @@ class FilesStore {
     this.activeFiles = items;
   };
 
+  updateActiveFolders = (items) => {
+    this.activeFolders = items;
+  };
+
   clearFiles = () => {
     this.setFolders([]);
     this.setFiles([]);

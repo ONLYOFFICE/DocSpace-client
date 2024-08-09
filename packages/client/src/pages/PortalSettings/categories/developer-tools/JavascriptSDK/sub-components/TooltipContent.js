@@ -29,6 +29,7 @@ import { Text } from "@docspace/shared/components/text";
 import styled from "styled-components";
 
 import XImg from "PUBLIC_DIR/images/x.react.svg";
+import { globalColors } from "@docspace/shared/themes";
 
 const Wrapper = styled.div`
   box-sizing: border-box;
@@ -48,7 +49,7 @@ const HeaderContainer = styled.header`
   svg {
     cursor: pointer;
     path {
-      fill: #333;
+      fill: ${globalColors.black};
     }
   }
 `;

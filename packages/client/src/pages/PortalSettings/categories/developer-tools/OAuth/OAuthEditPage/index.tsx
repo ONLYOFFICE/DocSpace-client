@@ -6,7 +6,7 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 import ClientForm from "../sub-components/ClientForm";
 
-const OAuthEditPage = () => {
+const Component = () => {
   const { id } = useParams();
 
   const { t } = useTranslation(["OAuth"]);
@@ -18,4 +18,4 @@ const OAuthEditPage = () => {
   return <ClientForm id={id} />;
 };
 
-export default OAuthEditPage;
+export { Component };

@@ -24,11 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { tablet, mobile } from "@docspace/shared/utils/device";
 
 import { TableContainer } from "@docspace/shared/components/table";
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 
 export const WorkspacesContainer = styled.div`
   max-width: 700px;
@@ -78,7 +78,7 @@ export const WorkspacesContainer = styled.div`
     cursor: pointer;
 
     &:hover {
-      border-color: #4781d1;
+      border-color: ${globalColors.lightBlueMain};
     }
 
     &:active {
@@ -153,7 +153,7 @@ export const UsersInfoBlock = styled.div`
   display: flex;
   align-items: center;
   max-width: 660px;
-  background: #f8f9f9;
+  background: ${(props) => props.theme.client.settings.migration.background};
   padding: 12px 16px;
   border-radius: 6px;
   margin: 16px 0;

@@ -26,14 +26,16 @@
 
 import React from "react";
 import styled, { css } from "styled-components";
+import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
+import json_beautifier from "csvjson-json_beautifier";
+
 import { Textarea } from "@docspace/shared/components/textarea";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
-import { inject, observer } from "mobx-react";
 
-import json_beautifier from "csvjson-json_beautifier";
 import { isMobile } from "@docspace/shared/utils";
-import { useTranslation } from "react-i18next";
+import { globalColors } from "@docspace/shared/themes";
 
 const DetailsWrapper = styled.div`
   width: 100%;
@@ -67,8 +69,8 @@ const LargePayloadStub = styled.div`
   padding: 12px 10px;
   margin-top: 4px;
 
-  background: #f8f9f9;
-  border: 1px solid #eceef1;
+  background: ${(props) => props.theme.client.settings.webhooks.background};
+  border: ${(props) => props.theme.client.settings.webhooks.border};
   border-radius: 3px;
 
   ${isMobile() &&
@@ -139,7 +141,7 @@ const ResponseDetails = ({ eventDetails }) => {
       </Text>
       {responsePayload.length > 4000 || numberOfLines > 100 ? (
         <LargePayloadStub>
-          <Text fontWeight={600} color="#657077">
+          <Text fontWeight={600} color={globalColors.lightGrayDark}>
             {t("PayloadIsTooLarge")}
           </Text>
           <Button

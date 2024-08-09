@@ -1,4 +1,11 @@
 {
+  "CodeSuccessfullyCopied": "Koda za vstavljanje je bila uspešno kopirana v odložišče",
+  "ContentRestricted": "Kopiranje vsebine, prenos datotek in tiskanje so omejeni.",
+  "DisplaySettings": "Nastavitve zaslona",
+  "EmbeddingBarAllowList": "Dodaj URL spletnega mesta za vdelavo na <1>seznam dovoljenih</1>.",
+  "EmbeddingBarDescription": "Vdelava bo delovala samo za URL-je, ki jih je določil skrbnik {{productName}} v nastavitvah JavaScript SDK.",
   "Height": "Višina",
+  "Link": "Povezava",
+  "LinkProtectedWithPassword": "Povezava je zaščitena z geslom.",
   "Width": "Širina"
 }

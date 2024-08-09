@@ -29,10 +29,11 @@ import styled from "styled-components";
 
 import { mobile } from "@docspace/shared/utils";
 import { formatTime } from "../../MediaViewer.utils";
+import { globalColors } from "../../../../themes";
 
 const PlayerDurationWrapper = styled.div`
   width: 102px;
-  color: #fff;
+  color: ${globalColors.white};
   user-select: none;
   font-size: 12px;
   font-weight: 700;

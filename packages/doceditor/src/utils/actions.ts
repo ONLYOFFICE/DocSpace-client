@@ -393,6 +393,22 @@ export const checkIsAuthenticated = async () => {
   return isAuth.response as boolean;
 };
 
+export async function validatePublicRoomKey(key: string, fileId?: string) {
+  const [validatePublicRoomKey] = createRequest(
+    [`/files/share/${key}?fileid=${fileId}`],
+    [key ? ["Request-Token", key] : ["", ""]],
+    "GET",
+  );
+
+  const res = await fetch(validatePublicRoomKey);
+  if (res.status === 401) return undefined;
+  if (!res.ok) return;
+
+  const room = await res.json();
+
+  return room;
+}
+
 // export async function checkFillFromDraft(
 //   templateFileId: number,
 //   share?: string,

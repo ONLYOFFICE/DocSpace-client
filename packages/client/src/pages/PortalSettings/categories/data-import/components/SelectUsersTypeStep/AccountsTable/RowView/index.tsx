@@ -26,7 +26,7 @@
 
 import { inject, observer } from "mobx-react";
 import { tablet } from "@docspace/shared/utils/device";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
 import { IconButton } from "@docspace/shared/components/icon-button";
@@ -39,6 +39,7 @@ import { Text } from "@docspace/shared/components/text";
 import ChangeTypeReactSvgUrl from "PUBLIC_DIR/images/change.type.react.svg?url";
 import EmptyScreenUserReactSvgUrl from "PUBLIC_DIR/images/empty_screen_user.react.svg?url";
 import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
+import { globalColors } from "@docspace/shared/themes";
 import UsersRow from "./UsersRow";
 import {
   InjectedTypeSelectRowViewProps,
@@ -55,14 +56,14 @@ const StyledRowContainer = styled(RowContainer)`
     margin-inline-start: -16px;
     width: 100%;
 
-    margin-top: -31.5px;
+    margin-top: -32.5px;
     top: 53px;
     margin-bottom: -29.5px;
 
     .table-container_group-menu {
       padding: 0px 16px;
       border-image-slice: 0;
-      box-shadow: rgba(4, 15, 27, 0.07) 0px 15px 20px;
+      box-shadow: ${globalColors.menuShadow} 0px 15px 20px;
     }
 
     .table-container_group-menu-checkbox {

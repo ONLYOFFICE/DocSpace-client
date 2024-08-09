@@ -7,6 +7,7 @@
   "DeleteProfileBtn": "Dzēst manu kontu",
   "DeleteProfileConfirmation": "Uzmanību! Jūs gatavojaties izdzēst savu kontu.",
   "DeleteProfileConfirmationInfo": "Noklikšķinot uz \"Dzēst manu kontu\", jūs piekrītat mūsu <1>konfidencialitātes politikai.</1>",
+  "DeleteProfileSuccessDescription": "Jūsu {{productName}} konts ir veiksmīgi atspējots. {{productName}} īpašnieks vai administrators var neatgriezeniski izdzēst jūsu atspējoto kontu.",
   "DeleteProfileSuccessMessage": "Jūsu konts ir veiksmīgi izdzēsts.",
   "DeleteProfileSuccessMessageInfo": "Skatiet mūsu <1>konfidencialitātes politiku</1>, lai uzzinātu vairāk par sava konta un ar to saistīto datu dzēšanu.",
   "EmailAndPasswordCopiedToClipboard": "E-pasts un parole ir kopēti starpliktuvē",

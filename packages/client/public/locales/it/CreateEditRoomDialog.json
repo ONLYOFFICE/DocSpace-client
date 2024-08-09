@@ -1,8 +1,10 @@
 {
+  "ActivationRequired": "attivazione richiesta",
   "ChooseRoomType": "Scegli il tipo di stanza",
   "CreateRoomConfirmation": "Continuare senza connettere l’archiviazione?\nHai selezionato un'opzione di archiviazione di terze parti che non è ancora connessa. Se procedi senza connettere il servizio, questa opzione non verrà aggiunta.",
   "CreateTagOption": "Crea un tag",
   "DisableRoomQuota": "Disattiva la quota per questa stanza",
+  "FormRoomBarDescription": "Questa stanza è a disposizione di chiunque abbia il link. Gli utenti esterni avranno l'autorizzazione come Compilatore moduli per tutti i file.",
   "Icon": "Icona",
   "MakeRoomPrivateDescription": "Tutti i file in questa stanza verranno crittografati.",
   "MakeRoomPrivateLimitationsWarningDescription": "Con questa funzione, puoi invitare solo gli utenti esistenti di {{productName}}. Dopo aver creato una stanza, non sarai in grado di modificare l’elenco degli utenti.",

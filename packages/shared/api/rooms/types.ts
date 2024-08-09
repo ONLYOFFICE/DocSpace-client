@@ -25,7 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TFile, TFolder } from "../files/types";
-import { FolderType, RoomsType, ShareAccessRights } from "../../enums";
+import {
+  FolderType,
+  RoomsType,
+  ShareAccessRights,
+  ValidationStatus,
+} from "../../enums";
 import { TCreatedBy, TPathParts } from "../../types";
 
 export type TLogo = {
@@ -90,4 +95,11 @@ export type TGetRooms = {
   count: number;
   total: number;
   new: number;
+};
+
+export type TPublicRoomPassword = {
+  linkId: string;
+  shared: boolean;
+  status: ValidationStatus;
+  tenantId: string | number;
 };

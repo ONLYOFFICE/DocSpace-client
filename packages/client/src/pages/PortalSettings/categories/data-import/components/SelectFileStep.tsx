@@ -25,11 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useRef, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import { isMobile, isTablet, mobile } from "@docspace/shared/utils/device";
 import styled from "styled-components";
 
+import { WarningQuotaDialog } from "SRC_DIR/components/dialogs/WarningQuotaDialog";
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { FileInput } from "@docspace/shared/components/file-input";
@@ -86,20 +88,22 @@ const Wrapper = styled.div`
 const FileUploadContainer = styled.div`
   max-width: 350px;
 
+  .cancel-btn {
+    @media ${mobile} {
+      height: 40px;
+    }
+  }
+
   .cancelUploadButton {
     @media ${mobile} {
       margin-bottom: 0;
-
       width: auto;
-
       position: fixed;
       inset-inline: 0px;
       bottom: 0px;
-
       padding: 16px;
-
-      background: white;
-
+      background: ${(props) =>
+        props.theme.client.settings.migration.workspaceBackground};
       gap: 0;
     }
   }
@@ -133,19 +137,15 @@ const FAIL_TRIES = 2;
 
 const SelectFileStep = (props: SelectFileStepProps) => {
   const {
+    t,
     isMultipleUpload,
     migratorName,
     acceptedExtensions,
-
-    t,
     incrementStep,
     setWorkspace,
-
     cancelUploadDialogVisible,
     setCancelUploadDialogVisible,
-
-    initMigrationName,
-    singleFileUploading,
+    initMigrations,
     getMigrationStatus,
     setUsers,
     cancelMigration,
@@ -153,9 +153,17 @@ const SelectFileStep = (props: SelectFileStepProps) => {
     setLoadingStatus,
     files,
     setFiles,
-    multipleFileUploading,
     migratingWorkspace,
     setMigratingWorkspace,
+    uploadFiles,
+    defaultUsersQuota = 0,
+    defaultRoomsQuota = 0,
+    tenantCustomQuota = 0,
+    isDefaultUsersQuotaSet,
+    isDefaultRoomsQuotaSet,
+    isTenantCustomQuotaSet,
+    warningQuotaDialogVisible,
+    setWarningQuotaDialogVisible,
   } = props as InjectedSelectFileStepProps;
 
   const [isSaveDisabled, setIsSaveDisabled] = useState(
@@ -163,7 +171,6 @@ const SelectFileStep = (props: SelectFileStepProps) => {
   );
   const [progress, setProgress] = useState(0);
   const [isInfiniteProgress, setIsInfiniteProgress] = useState(true);
-
   const [isNetworkError, setIsNetworkError] = useState(false);
   const [isFileError, setIsFileError] = useState(false);
   const [isBackupEmpty, setIsBackupEmpty] = useState(false);
@@ -174,8 +181,31 @@ const SelectFileStep = (props: SelectFileStepProps) => {
   const [chunkSize, setChunkSize] = useState(0);
 
   const [failTries, setFailTries] = useState(FAIL_TRIES);
-
   const uploadInterval = useRef<number>();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const isQuotaWarningVisible =
+      isDefaultUsersQuotaSet ||
+      isDefaultRoomsQuotaSet ||
+      isTenantCustomQuotaSet;
+    setWarningQuotaDialogVisible(isQuotaWarningVisible);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isDefaultUsersQuotaSet, isDefaultRoomsQuotaSet, isTenantCustomQuotaSet]);
+
+  const onClickRedirect = () => {
+    navigate("/portal-settings/management/disk-space");
+  };
+
+  const handleError = useCallback(
+    (message?: string) => {
+      toastr.error(message || t("Common:SomethingWentWrong"));
+      setIsFileError(true);
+      setLoadingStatus("none");
+      clearInterval(uploadInterval.current);
+    },
+    [t, setLoadingStatus],
+  );
 
   const poolStatus = useCallback(async () => {
     try {
@@ -187,29 +217,24 @@ const SelectFileStep = (props: SelectFileStepProps) => {
       }
 
       if (!res) {
-        toastr.error(t("Common:SomethingWentWrong"));
-        setLoadingStatus("none");
-        clearInterval(uploadInterval.current);
+        handleError();
         return;
       }
 
       if (res.parseResult.failedArchives.length > 0 || res.error) {
-        toastr.error(res.error);
-        setIsFileError(true);
-        setLoadingStatus("none");
-        clearInterval(uploadInterval.current);
+        handleError(res.error);
         return;
       }
 
       if (res.isCompleted || res.progress === 100) {
         clearInterval(uploadInterval.current);
-        if (
+
+        const totalUsers =
           res.parseResult.users.length +
-            res.parseResult.existUsers.length +
-            res.parseResult.withoutEmailUsers.length >
-          0
-        ) {
-          setUsers(res.parseResult);
+          res.parseResult.existUsers.length +
+          res.parseResult.withoutEmailUsers.length;
+
+        if (totalUsers > 0) {
           setIsBackupEmpty(false);
           setLoadingStatus("done");
           setUsers(res.parseResult);
@@ -228,15 +253,8 @@ const SelectFileStep = (props: SelectFileStepProps) => {
         setIsInfiniteProgress(false);
       }
     } catch (error) {
-      if (error instanceof Error) {
-        if (error.message === "Network Error") {
-          setIsNetworkError(true);
-        }
-        toastr.error(error || t("Common:SomethingWentWrong"));
-        setIsFileError(true);
-        setLoadingStatus("none");
-        clearInterval(uploadInterval.current);
-      }
+      handleError(error as string);
+      setIsNetworkError(true);
     }
   }, [
     failTries,
@@ -244,49 +262,31 @@ const SelectFileStep = (props: SelectFileStepProps) => {
     isInfiniteProgress,
     setLoadingStatus,
     setUsers,
-    t,
+    handleError,
   ]);
 
   const onUploadFile = async (file: File | File[]) => {
     try {
-      if (file instanceof Array) {
-        setFiles(file.map((item) => item.name));
-        await multipleFileUploading(
-          file,
-          setProgress,
-          isAbort,
-          setChunk,
-          startChunk,
-          setChunkSize,
-          chunkSize,
-        );
-      } else {
-        setFiles([file.name]);
-        await singleFileUploading(
-          file,
-          setProgress,
-          isAbort,
-          setChunk,
-          startChunk,
-          setChunkSize,
-          chunkSize,
-        );
-      }
+      const filesData = Array.isArray(file) ? file : [file];
+      setFiles(filesData.map((item) => item.name));
+
+      await uploadFiles(
+        filesData,
+        setProgress,
+        isAbort,
+        setChunk,
+        startChunk,
+        setChunkSize,
+        chunkSize,
+      );
 
       if (isAbort.current) return;
 
-      await initMigrationName(migratorName);
+      await initMigrations(migratorName);
       setLoadingStatus("proceed");
     } catch (error) {
-      if (error instanceof Error) {
-        if (error.message === "Network Error") {
-          setIsNetworkError(true);
-        }
-
-        toastr.error(error || t("Common:SomethingWentWrong"));
-        setIsFileError(true);
-        setLoadingStatus("none");
-      }
+      handleError(error as string);
+      setIsNetworkError(true);
     } finally {
       isAbort.current = false;
     }
@@ -300,6 +300,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
 
     setProgress(0);
     setIsFileError(false);
+    setIsBackupEmpty(false);
     setIsSaveDisabled(true);
     setLoadingStatus("upload");
     setFailTries(FAIL_TRIES);
@@ -405,6 +406,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
           }
           accept={acceptedExtensions}
           size={InputSize.base}
+          isMultiple={migratorName === "GoogleWorkspace"}
         />
       </FileUploadContainer>
       {fileLoadingStatus === "upload" || fileLoadingStatus === "proceed" ? (
@@ -418,6 +420,7 @@ const SelectFileStep = (props: SelectFileStepProps) => {
           <div className="cancelUploadButton">
             <Button
               size={isTablet() ? ButtonSize.medium : ButtonSize.small}
+              className="cancel-btn"
               label={t("Common:CancelButton")}
               onClick={onCancel}
               scale={isMobile()}
@@ -497,46 +500,82 @@ const SelectFileStep = (props: SelectFileStepProps) => {
           isSixthStep={false}
         />
       )}
+
+      {warningQuotaDialogVisible && (
+        <WarningQuotaDialog
+          t={t}
+          visible={warningQuotaDialogVisible}
+          onCloseDialog={() => setWarningQuotaDialogVisible(false)}
+          onClickRedirect={onClickRedirect}
+          defaultRoomsQuota={defaultRoomsQuota}
+          defaultUsersQuota={defaultUsersQuota}
+          tenantCustomQuota={tenantCustomQuota}
+          isDefaultRoomsQuotaSet={isDefaultRoomsQuotaSet}
+          isDefaultUsersQuotaSet={isDefaultUsersQuotaSet}
+          isTenantCustomQuotaSet={isTenantCustomQuotaSet}
+        />
+      )}
     </Wrapper>
   );
 };
 
-export default inject<TStore>(({ dialogsStore, importAccountsStore }) => {
-  const {
-    initMigrationName,
-    singleFileUploading,
-    getMigrationStatus,
-    setUsers,
-    fileLoadingStatus,
-    setLoadingStatus,
-    cancelMigration,
-    setWorkspace,
-    incrementStep,
-    files,
-    setFiles,
-    multipleFileUploading,
-    migratingWorkspace,
-    setMigratingWorkspace,
-  } = importAccountsStore;
-  const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
-    dialogsStore;
+export default inject<TStore>(
+  ({ dialogsStore, importAccountsStore, currentQuotaStore }) => {
+    const {
+      initMigrations,
+      getMigrationStatus,
+      setUsers,
+      fileLoadingStatus,
+      setLoadingStatus,
+      cancelMigration,
+      setWorkspace,
+      incrementStep,
+      files,
+      setFiles,
+      migratingWorkspace,
+      setMigratingWorkspace,
+      uploadFiles,
+    } = importAccountsStore;
+    const {
+      cancelUploadDialogVisible,
+      setCancelUploadDialogVisible,
+      warningQuotaDialogVisible,
+      setWarningQuotaDialogVisible,
+    } = dialogsStore;
 
-  return {
-    initMigrationName,
-    singleFileUploading,
-    getMigrationStatus,
-    setUsers,
-    fileLoadingStatus,
-    setLoadingStatus,
-    cancelMigration,
-    cancelUploadDialogVisible,
-    setCancelUploadDialogVisible,
-    setWorkspace,
-    incrementStep,
-    files,
-    setFiles,
-    multipleFileUploading,
-    migratingWorkspace,
-    setMigratingWorkspace,
-  };
-})(observer(SelectFileStep));
+    const {
+      isDefaultRoomsQuotaSet,
+      isDefaultUsersQuotaSet,
+      isTenantCustomQuotaSet,
+      defaultUsersQuota,
+      defaultRoomsQuota,
+      tenantCustomQuota,
+    } = currentQuotaStore;
+
+    return {
+      initMigrations,
+      getMigrationStatus,
+      setUsers,
+      fileLoadingStatus,
+      setLoadingStatus,
+      cancelMigration,
+      cancelUploadDialogVisible,
+      setCancelUploadDialogVisible,
+      setWorkspace,
+      incrementStep,
+      files,
+      setFiles,
+      migratingWorkspace,
+      setMigratingWorkspace,
+      uploadFiles,
+      defaultUsersQuota,
+      defaultRoomsQuota,
+      tenantCustomQuota,
+      isDefaultRoomsQuotaSet,
+      isDefaultUsersQuotaSet,
+      isTenantCustomQuotaSet,
+      warningQuotaDialogVisible,
+      setWarningQuotaDialogVisible,
+    };
+  },
+)(observer(SelectFileStep));

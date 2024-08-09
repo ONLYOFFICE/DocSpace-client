@@ -76,7 +76,7 @@ export const GroupMemberRow = styled.div<{}>`
 
     svg {
       path {
-        fill: #a3a9ae;
+        fill: ${(props) => props.theme.createEditGroupDialog.iconFill};
       }
     }
   }

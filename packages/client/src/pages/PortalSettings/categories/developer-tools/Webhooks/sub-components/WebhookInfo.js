@@ -50,9 +50,10 @@ const InfoText = styled(Text)`
 InfoText.defaultProps = { theme: Base };
 
 const StyledGuideLink = styled(Link)`
-  color: ${(props) => (props.theme.isBase ? "#316DAA" : "#4781D1")};
+  color: ${(props) => props.theme.client.settings.webhooks.linkColor};
+
   &:hover {
-    color: ${(props) => (props.theme.isBase ? "#316DAA" : "#4781D1")};
+    color: ${(props) => props.theme.client.settings.webhooks.linkColor};
   }
 `;
 

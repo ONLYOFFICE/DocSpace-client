@@ -26,12 +26,14 @@
 
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
+import { inject, observer } from "mobx-react";
+
 import { Loader } from "@docspace/shared/components/loader";
 import Section from "@docspace/shared/components/section";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import tryRedirectTo from "@docspace/shared/utils/tryRedirectTo";
-import { inject, observer } from "mobx-react";
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
+import ConfirmRoute from "SRC_DIR/helpers/confirmRoute";
 import SectionWrapper from "SRC_DIR/components/Section";
 
 const ActivateEmail = ({ updateEmailActivationStatus, linkData }) => {
@@ -89,9 +91,17 @@ const ActivateEmailForm = (props) => (
   </SectionWrapper>
 );
 
-export default inject(({ userStore }) => {
+const ComponentWrapper = inject(({ userStore }) => {
   const { updateEmailActivationStatus } = userStore;
   return {
     updateEmailActivationStatus,
   };
 })(observer(ActivateEmailForm));
+
+export const Component = () => {
+  return (
+    <ConfirmRoute>
+      <ComponentWrapper />
+    </ConfirmRoute>
+  );
+};

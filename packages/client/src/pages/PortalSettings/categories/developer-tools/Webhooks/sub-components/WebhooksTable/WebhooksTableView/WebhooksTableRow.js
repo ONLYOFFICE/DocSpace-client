@@ -40,6 +40,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { inject, observer } from "mobx-react";
+import { globalColors } from "@docspace/shared/themes";
 
 const StyledWrapper = styled.div`
   display: contents;
@@ -150,7 +151,7 @@ const WebhooksTableRow = (props) => {
             <Text
               as="span"
               fontSize="11px"
-              color="#A3A9AE"
+              color={globalColors.gray}
               fontWeight={600}
               className="textOverflow"
             >

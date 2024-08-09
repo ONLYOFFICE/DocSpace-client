@@ -70,7 +70,7 @@ const LanguageComboboxWrapper = () => {
       onSelectLanguage={onLanguageSelect}
       cultures={cultures}
       selectedCulture={currentCulture}
-      withBorder={false}
+      withBorder={!isMobileView}
       isMobileView={isMobileView}
     />
   );

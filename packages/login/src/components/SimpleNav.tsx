@@ -27,7 +27,7 @@
 
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import styled, { useTheme } from "styled-components";
 
 import { mobile } from "@docspace/shared/utils/device";
@@ -35,6 +35,9 @@ import { getLogoUrl } from "@docspace/shared/utils/common";
 import { Base, Dark } from "@docspace/shared/themes";
 import { ThemeKeys, WhiteLabelLogoType } from "@docspace/shared/enums";
 import LanguageComboboxWrapper from "./LanguageCombobox";
+import { useSearchParams } from "next/navigation";
+import { TypeLinkWithoutLanguageCombobox } from "@/utils/enums";
+import { TYPE_LINK_WITHOUT_LNG_COMBOBOX } from "@/utils/constants";
 
 const StyledSimpleNav = styled.div`
   display: none;
@@ -61,17 +64,20 @@ const StyledSimpleNav = styled.div`
 StyledSimpleNav.defaultProps = { theme: Base };
 
 interface SimpleNavProps {
-  systemTheme: ThemeKeys;
-  isLanguageComboboxVisible?: boolean;
+  systemTheme?: ThemeKeys;
 }
 
-const SimpleNav = ({
-  systemTheme,
-  isLanguageComboboxVisible = true,
-}: SimpleNavProps) => {
+const SimpleNav = ({ systemTheme }: SimpleNavProps) => {
   const theme = useTheme();
   const isDark = !theme.isBase;
   const logoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, isDark);
+
+  let isLanguageComboboxVisible = true;
+
+  const searchParamType = useSearchParams().get("type") ?? "";
+  if (TYPE_LINK_WITHOUT_LNG_COMBOBOX?.includes(searchParamType)) {
+    isLanguageComboboxVisible = false;
+  }
 
   return (
     <StyledSimpleNav id="login-header">

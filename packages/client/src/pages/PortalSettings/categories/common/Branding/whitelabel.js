@@ -76,6 +76,7 @@ const WhiteLabel = (props) => {
     theme,
 
     isWhitelableLoaded,
+    isCustomizationAvailable,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -170,6 +171,9 @@ const WhiteLabel = (props) => {
         logoUrlsWhiteLabel[i].size.width,
         logoUrlsWhiteLabel[i].size.height,
       );
+
+      if (options.isEditor && !isCustomizationAvailable) return;
+
       const isDocsEditorName = logoUrlsWhiteLabel[i].name === "DocsEditor";
 
       const logoLight = generateLogo(
@@ -514,6 +518,7 @@ const WhiteLabel = (props) => {
             onChangeText={t("ChangeLogoButton")}
             onChange={onChangeLogo}
             isSettingPaid={isSettingPaid}
+            isCustomizationAvailable={isCustomizationAvailable}
           />
         </div>
 
@@ -534,6 +539,7 @@ const WhiteLabel = (props) => {
             onChangeText={t("ChangeLogoButton")}
             onChange={onChangeLogo}
             isSettingPaid={isSettingPaid}
+            isCustomizationAvailable={isCustomizationAvailable}
           />
         </div>
       </div>
@@ -562,48 +568,55 @@ const WhiteLabel = (props) => {
   );
 };
 
-export default inject(({ settingsStore, common, currentQuotaStore }) => {
-  const {
-    setLogoText,
-    whiteLabelLogoText,
-    getWhiteLabelLogoText,
-    restoreWhiteLabelSettings,
-    initSettings,
-    saveWhiteLabelSettings,
-    logoUrlsWhiteLabel,
-    setLogoUrlsWhiteLabel,
-    defaultLogoTextWhiteLabel,
-    enableRestoreButton,
-    resetIsInit,
-    isWhitelableLoaded,
-  } = common;
+export default inject(
+  ({ settingsStore, common, currentQuotaStore, authStore }) => {
+    const {
+      setLogoText,
+      whiteLabelLogoText,
+      getWhiteLabelLogoText,
+      restoreWhiteLabelSettings,
+      initSettings,
+      saveWhiteLabelSettings,
+      logoUrlsWhiteLabel,
+      setLogoUrlsWhiteLabel,
+      defaultLogoTextWhiteLabel,
+      enableRestoreButton,
+      resetIsInit,
+      isWhitelableLoaded,
+    } = common;
 
-  const {
-    whiteLabelLogoUrls: defaultWhiteLabelLogoUrls,
-    deviceType,
-    standalone,
-  } = settingsStore;
-  const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
+    const {
+      whiteLabelLogoUrls: defaultWhiteLabelLogoUrls,
+      deviceType,
+      standalone,
+    } = settingsStore;
+    const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
+    const { tenantExtra } = authStore;
 
-  return {
-    setLogoText,
-    theme: settingsStore.theme,
-    logoText: whiteLabelLogoText,
-    getWhiteLabelLogoText,
-    saveWhiteLabelSettings,
-    restoreWhiteLabelSettings,
-    defaultWhiteLabelLogoUrls,
-    isSettingPaid: isBrandingAndCustomizationAvailable,
-    initSettings,
-    logoUrlsWhiteLabel,
-    setLogoUrlsWhiteLabel,
-    defaultLogoTextWhiteLabel,
-    enableRestoreButton,
+    const isCustomizationAvailable =
+      tenantExtra?.docServerLicense?.customization;
 
-    deviceType,
-    resetIsInit,
-    standalone,
+    return {
+      setLogoText,
+      theme: settingsStore.theme,
+      logoText: whiteLabelLogoText,
+      getWhiteLabelLogoText,
+      saveWhiteLabelSettings,
+      restoreWhiteLabelSettings,
+      defaultWhiteLabelLogoUrls,
+      isSettingPaid: isBrandingAndCustomizationAvailable,
+      initSettings,
+      logoUrlsWhiteLabel,
+      setLogoUrlsWhiteLabel,
+      defaultLogoTextWhiteLabel,
+      enableRestoreButton,
 
-    isWhitelableLoaded,
-  };
-})(withTranslation(["Settings", "Profile", "Common"])(observer(WhiteLabel)));
+      deviceType,
+      resetIsInit,
+      standalone,
+
+      isWhitelableLoaded,
+      isCustomizationAvailable,
+    };
+  },
+)(withTranslation(["Settings", "Profile", "Common"])(observer(WhiteLabel)));

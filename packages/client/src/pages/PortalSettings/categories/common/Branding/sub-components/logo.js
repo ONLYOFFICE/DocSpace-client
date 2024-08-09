@@ -25,12 +25,32 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import styled, { css } from "styled-components";
 
 import { getLogoFromPath } from "@docspace/shared/utils";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { isMobile } from "@docspace/shared/utils";
+
+import NotAvailable from "SRC_DIR/pages/PortalSettings/components/NotAvailable";
+
+const StyledLogoWrapper = styled.div`
+  ${(props) =>
+    !props.isCustomizationAvailable &&
+    css`
+      cursor: default;
+      pointer-events: none;
+      .logo-docs-editor,
+      .logo-image {
+        filter: opacity(0.5);
+      }
+      a,
+      a:hover {
+        color: ${(props) => props.theme.text.disableColor};
+      }
+    `}
+`;
 
 const Logo = (props) => {
   const {
@@ -43,6 +63,7 @@ const Logo = (props) => {
     linkId,
     imageClass,
     isEditor,
+    isCustomizationAvailable = true,
   } = props;
 
   const currentLogo = getLogoFromPath(src);
@@ -52,7 +73,7 @@ const Logo = (props) => {
   };
 
   return (
-    <div>
+    <StyledLogoWrapper isCustomizationAvailable={isCustomizationAvailable}>
       <div className="logo-item">
         {title && (
           <Text
@@ -83,16 +104,21 @@ const Logo = (props) => {
             />
           </div>
         ) : (
-          <img className={imageClass} src={currentLogo} onClick={onLogoClick} />
+          <img
+            className={`${imageClass} logo-image`}
+            src={currentLogo}
+            onClick={onLogoClick}
+          />
         )}
       </div>
+      {!isCustomizationAvailable && <NotAvailable />}
       <label>
         <input
           id={inputId}
           type="file"
           className="hidden"
           onChange={onChange}
-          disabled={!isSettingPaid}
+          disabled={!isSettingPaid || !isCustomizationAvailable}
         />
         <Link
           id={linkId}
@@ -104,7 +130,7 @@ const Logo = (props) => {
           {onChangeText}
         </Link>
       </label>
-    </div>
+    </StyledLogoWrapper>
   );
 };
 

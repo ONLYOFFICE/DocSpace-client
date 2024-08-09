@@ -2551,7 +2551,6 @@ export const getBaseTheme = () => {
       borderRadius: "6px",
       mobileBorderRadius: "6px 6px 0 0",
       boxShadow: `0px 8px 16px 0px ${boxShadowColor}`,
-      padding: "6px 0px",
       border: "none",
       devices: {
         maxHeight: "calc(100vh - 64px)",

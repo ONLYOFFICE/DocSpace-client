@@ -2536,7 +2536,6 @@ const Dark: TTheme = {
     borderRadius: "6px",
     mobileBorderRadius: "6px 6px 0 0",
     boxShadow: `0px 8px 16px 0px ${boxShadowDarkColor}`,
-    padding: "6px 0px",
     border: `1px solid ${grayDarkStrong}`,
     devices: {
       maxHeight: "calc(100vh - 64px)",

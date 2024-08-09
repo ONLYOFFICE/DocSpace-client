@@ -35,5 +35,10 @@
   "UploadFromPortalDescription": "Upload any type files from Documents or Rooms",
   "UploadFromPortalTitle": "Upload from {{productName}}",
   "UploadPDFFormOptionDescription": "Select a ready PDF form available in {{productName}} and upload it to the room.",
-  "UserEmptyDescription": "Files and folders uploaded by admins will appeared here."
+  "UserEmptyDescription": "Files and folders uploaded by admins will appeared here.",
+  "InviteRootRoomDescription": "Send an invitation to add new members to your {{productName}}",
+  "MigrationDataTitle": "Migration Data",
+  "MigrationDataDescription": "Import data to your {{productName}} from ONLYOFFICE Workspace, Google Workspace, or Nextcloud.",
+  "EmptyRootRoomUserTitle": "There are no rooms here yet",
+  "EmptyRootRoomUserDescription": "The shared room will appear here."
 }

@@ -34,6 +34,9 @@ import CreateNewFormIcon from "PUBLIC_DIR/images/emptyview/create.new.form.svg";
 import EmptyRoomsRootDarkIcon from "PUBLIC_DIR/images/emptyview/empty.rooms.root.dark.svg";
 import EmptyRoomsRootLightIcon from "PUBLIC_DIR/images/emptyview/empty.rooms.root.light.svg";
 
+import EmptyRoomsRootUserDarkIcon from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.dark.svg";
+import EmptyRoomsRootUserLightIcon from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.light.svg";
+
 import EmptyFormRoomDarkIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.dark.svg";
 import EmptyFormRoomLightIcon from "PUBLIC_DIR/images/emptyview/empty.form.room.light.svg";
 
@@ -88,6 +91,8 @@ import type {
 } from "./EmptyViewContainer.types";
 
 export const isUser = (access: AccessType) => {
+  console.log({ access });
+
   return (
     access !== ShareAccessRights.None &&
     access !== ShareAccessRights.RoomManager &&
@@ -155,14 +160,20 @@ export const getRoomDescription = (
 
 export const getRootDesctiption = (
   t: TTranslation,
+  access: AccessType,
   rootFolderType: Nullable<FolderType>,
 ) => {
-  return match([rootFolderType])
-    .with([FolderType.Rooms], () => t("Files:RoomEmptyContainerDescription"))
-    .with([FolderType.USER], () => t("Test"))
-    .with([FolderType.Recent], () => t("Test"))
-    .with([FolderType.Archive], () => t("Test"))
-    .with([FolderType.TRASH], () => t("Test"))
+  return match([rootFolderType, access])
+    .with([FolderType.Rooms, ShareAccessRights.None], () =>
+      t("Files:RoomEmptyContainerDescription"),
+    )
+    .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>
+      t("EmptyView:EmptyRootRoomUserDescription"),
+    )
+    .with([FolderType.USER, P._], () => t("Test"))
+    .with([FolderType.Recent, P._], () => t("Test"))
+    .with([FolderType.Archive, P._], () => t("Test"))
+    .with([FolderType.TRASH, P._], () => t("Test"))
     .otherwise(() => "");
 };
 
@@ -234,18 +245,22 @@ export const getRoomTitle = (
 
 export const getRootTitle = (
   t: TTranslation,
+  access: AccessType,
   rootFolderType: Nullable<FolderType>,
 ) => {
-  return match([rootFolderType])
-    .with([FolderType.Rooms], () =>
+  return match([rootFolderType, access])
+    .with([FolderType.Rooms, ShareAccessRights.None], () =>
       t("Files:EmptyRootRoomHeader", {
         productName: t("Common:ProductName"),
       }),
     )
-    .with([FolderType.USER], () => t("Test"))
-    .with([FolderType.Recent], () => t("Test"))
-    .with([FolderType.Archive], () => t("Test"))
-    .with([FolderType.TRASH], () => t("Test"))
+    .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>
+      t("EmptyView:EmptyRootRoomUserTitle"),
+    )
+    .with([FolderType.USER, P._], () => t("Test"))
+    .with([FolderType.Recent, P._], () => t("Test"))
+    .with([FolderType.Archive, P._], () => t("Test"))
+    .with([FolderType.TRASH, P._], () => t("Test"))
     .otherwise(() => "");
 };
 
@@ -363,8 +378,15 @@ export const getRootIcom = (
   isBaseTheme: boolean,
 ) => {
   return match([rootFolderType, access])
-    .with([FolderType.Rooms, P._], () =>
+    .with([FolderType.Rooms, ShareAccessRights.None], () =>
       isBaseTheme ? <EmptyRoomsRootLightIcon /> : <EmptyRoomsRootDarkIcon />,
+    )
+    .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>
+      isBaseTheme ? (
+        <EmptyRoomsRootUserLightIcon />
+      ) : (
+        <EmptyRoomsRootUserDarkIcon />
+      ),
     )
     .with([FolderType.USER, P._], () => <div />)
     .with([FolderType.Recent, P._], () => <div />)

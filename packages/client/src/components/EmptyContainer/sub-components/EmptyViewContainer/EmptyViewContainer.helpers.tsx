@@ -2,6 +2,7 @@ import React from "react";
 import { P, match } from "ts-pattern";
 
 import {
+  EmployeeType,
   FilesSelectorFilterTypes,
   FilterType,
   FolderType,
@@ -13,6 +14,7 @@ import CreateNewFormIcon from "PUBLIC_DIR/images/emptyview/create.new.form.svg";
 import CreateNewSpreadsheetIcon from "PUBLIC_DIR/images/emptyview/create.new.spreadsheet.svg";
 import CreateNewPresentation from "PUBLIC_DIR/images/emptyview/create.new.presentation.svg";
 import CreateRoom from "PUBLIC_DIR/images/emptyview/create.room.svg";
+import InviteUserFormIcon from "PUBLIC_DIR/images/emptyview/invite.user.svg";
 
 import SharedIcon from "PUBLIC_DIR/images/emptyview/share.svg";
 
@@ -57,7 +59,7 @@ export const getDescription = (
 ): string => {
   const isNotAdmin = isUser(access);
 
-  if (isRootEmptyPage) return getRootDesctiption(t, rootFolderType);
+  if (isRootEmptyPage) return getRootDesctiption(t, access, rootFolderType);
 
   if (isFolder)
     return getFolderDescription(
@@ -85,7 +87,7 @@ export const getTitle = (
 ): string => {
   const isNotAdmin = isUser(access);
 
-  if (isRootEmptyPage) return getRootTitle(t, rootFolderType);
+  if (isRootEmptyPage) return getRootTitle(t, access, rootFolderType);
 
   if (isFolder)
     return getFolderTitle(
@@ -232,6 +234,28 @@ export const getOptions = (
     disabled: false,
   };
 
+  const inviteRootRoom = {
+    title: t("EmptyView:InviteNewUsers"),
+    description: t("EmptyView:InviteRootRoomDescription", {
+      productName: t("Common:ProductName"),
+    }),
+    icon: <InviteUserFormIcon />,
+    key: "invite-root-room",
+    onClick: () => actions.inviteRootUser(EmployeeType.Guest),
+    disabled: false,
+  };
+
+  const migrationData = {
+    title: t("EmptyView:MigrationDataTitle"),
+    description: t("EmptyView:MigrationDataDescription", {
+      productName: t("Common:ProductName"),
+    }),
+    icon: <InviteUserFormIcon />,
+    key: "migration-data",
+    onClick: () => actions.navigate("/portal-settings/data-import"),
+    disabled: false,
+  };
+
   const createFile: EmptyViewItemType = {
     title: t("EmptyView:CreateNewFileTitle"),
     description: t("EmptyView:CreateNewFileDescription"),
@@ -276,13 +300,13 @@ export const getOptions = (
   if (isArchiveFolderRoot) return [];
 
   if (isRootEmptyPage) {
-    switch (rootFolderType) {
-      case FolderType.Rooms:
-        return [createRoom];
-
-      default:
-        return [];
-    }
+    return match([rootFolderType, access])
+      .with([FolderType.Rooms, ShareAccessRights.None], () => [
+        createRoom,
+        inviteRootRoom,
+        migrationData,
+      ])
+      .otherwise(() => []);
   }
 
   if (isFolder) {

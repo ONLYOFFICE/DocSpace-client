@@ -1,5 +1,5 @@
-import type { TFolderSecurity } from "@docspace/shared/api/files/types";
-import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
+import type { NavigateFunction } from "react-router-dom";
+
 import type {
   FilesSelectorFilterTypes,
   FilterType,
@@ -41,27 +41,34 @@ export interface OutEmptyViewContainerProps {
   isRootEmptyPage: boolean;
 }
 
-export interface InjectedEmptyViewContainerProps {
-  access: Nullable<ShareAccessRights>;
-  security: Nullable<TFolderSecurity | TRoomSecurity>;
-  selectedFolder?: ReturnType<
+export interface InjectedEmptyViewContainerProps
+  extends Pick<
+      TStore["contextOptionsStore"],
+      "inviteUser" | "onCreateAndCopySharedLink" | "onClickInviteUsers"
+    >,
+    Pick<
+      TStore["dialogsStore"],
+      | "setSelectFileFormRoomDialogVisible"
+      | "setInviteUsersWarningDialogVisible"
+    >,
+    Pick<
+      TStore["selectedFolderStore"],
+      "access" | "security" | "rootFolderType"
+    > {
+  selectedFolder: ReturnType<
     TStore["selectedFolderStore"]["getSelectedFolder"]
   >;
   isGracePeriod: boolean;
   isVisibleInfoPanel: boolean;
-  rootFolderType: Nullable<FolderType>;
-  onClickInviteUsers: (folderId: string | number, roomType: RoomsType) => void;
-  onCreateAndCopySharedLink: TStore["contextOptionsStore"]["onCreateAndCopySharedLink"];
-  setSelectFileFormRoomDialogVisible: TStore["dialogsStore"]["setSelectFileFormRoomDialogVisible"];
   setVisibleInfoPanel: (arg: boolean) => void;
   setViewInfoPanel: TStore["infoPanelStore"]["setView"];
-  setInviteUsersWarningDialogVisible: TStore["dialogsStore"]["setInviteUsersWarningDialogVisible"];
 }
 
 export type EmptyViewContainerProps = OutEmptyViewContainerProps &
   InjectedEmptyViewContainerProps;
 
 export type OptionActions = {
+  navigate: NavigateFunction;
   inviteUser: VoidFunction;
   onCreate: (extension: ExtensiontionType, withoutDialog?: boolean) => void;
   uploadFromDocspace: (
@@ -72,4 +79,5 @@ export type OptionActions = {
   createAndCopySharedLink: VoidFunction;
   openInfoPanel: VoidFunction;
   onCreateRoom: VoidFunction;
+  inviteRootUser: TStore["contextOptionsStore"]["inviteUser"];
 };

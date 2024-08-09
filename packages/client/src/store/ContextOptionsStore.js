@@ -2098,11 +2098,13 @@ class ContextOptionsStore {
     return newOptions;
   };
 
-  onInvite = (e) => {
+  /**
+   * @param {EmployeeType} userType
+   * @returns {void}
+   */
+  inviteUser = (userType) => {
     const { setInviteUsersWarningDialogVisible, setInvitePanelOptions } =
       this.dialogsStore;
-
-    const type = e.item["data-type"];
 
     if (this.currentTariffStatusStore.isGracePeriod) {
       setInviteUsersWarningDialogVisible(true);
@@ -2113,8 +2115,13 @@ class ContextOptionsStore {
       visible: true,
       roomId: -1,
       hideSelector: true,
-      defaultAccess: type,
+      defaultAccess: userType,
     });
+  };
+
+  onInvite = (e) => {
+    const type = e.item["data-type"];
+    this.inviteUser(type);
   };
 
   onInviteAgain = (t) => {

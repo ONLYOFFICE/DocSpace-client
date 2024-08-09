@@ -2,6 +2,7 @@ import { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import React, { useMemo, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
   Events,
@@ -47,7 +48,10 @@ const EmptyViewContainer = observer(
     onCreateAndCopySharedLink,
     setSelectFileFormRoomDialogVisible,
     setInviteUsersWarningDialogVisible,
+    inviteUser: inviteRootUser,
   }: EmptyViewContainerProps) => {
+    const navigate = useNavigate();
+
     const { t } = useTranslation([
       "EmptyView",
       "Files",
@@ -189,6 +193,8 @@ const EmptyViewContainer = observer(
             createAndCopySharedLink,
             openInfoPanel,
             onCreateRoom,
+            inviteRootUser,
+            navigate,
           },
         ),
       [
@@ -209,6 +215,8 @@ const EmptyViewContainer = observer(
         onCreate,
         openInfoPanel,
         onCreateRoom,
+        inviteRootUser,
+        navigate,
       ],
     );
 
@@ -237,7 +245,7 @@ const InjectedEmptyViewContainer = inject<
     infoPanelStore,
     currentTariffStatusStore,
   }): InjectedEmptyViewContainerProps => {
-    const { onClickInviteUsers, onCreateAndCopySharedLink } =
+    const { onClickInviteUsers, onCreateAndCopySharedLink, inviteUser } =
       contextOptionsStore;
 
     const { isGracePeriod } = currentTariffStatusStore;
@@ -270,6 +278,7 @@ const InjectedEmptyViewContainer = inject<
       setInviteUsersWarningDialogVisible,
       setVisibleInfoPanel,
       setViewInfoPanel,
+      inviteUser,
     };
   },
 )(EmptyViewContainer as React.FC<OutEmptyViewContainerProps>);

@@ -73,7 +73,7 @@ const SimpleNav = ({}: SimpleNavProps) => {
   return (
     <StyledSimpleNav id="login-header">
       <img className="logo" src={logoUrl} alt="logo-url" />
-      {/* <LanguageComboboxWrapper /> */}
+      <LanguageComboboxWrapper />
     </StyledSimpleNav>
   );
 };

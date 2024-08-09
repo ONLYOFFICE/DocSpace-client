@@ -27,16 +27,16 @@
 
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import styled, { useTheme } from "styled-components";
+import { useSearchParams } from "next/navigation";
 
 import { mobile } from "@docspace/shared/utils/device";
 import { getLogoUrl } from "@docspace/shared/utils/common";
-import { Base, Dark } from "@docspace/shared/themes";
+import { Base } from "@docspace/shared/themes";
 import { ThemeKeys, WhiteLabelLogoType } from "@docspace/shared/enums";
 import LanguageComboboxWrapper from "./LanguageCombobox";
-import { useSearchParams } from "next/navigation";
-import { TypeLinkWithoutLanguageCombobox } from "@/utils/enums";
+
 import { TYPE_LINK_WITHOUT_LNG_COMBOBOX } from "@/utils/constants";
 
 const StyledSimpleNav = styled.div`

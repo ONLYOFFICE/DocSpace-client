@@ -150,7 +150,7 @@ const TwoFactorAuth = (props) => {
 
       if (res) {
         setIsInit(false);
-        navigate(res.replace(window.location.origin, ""));
+        if (res) window.location.replace(res);
       }
     } catch (error) {
       toastr.error(error);

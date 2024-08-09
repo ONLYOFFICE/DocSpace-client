@@ -70,6 +70,7 @@ async function Page() {
             reCaptchaPublicKey={settings?.recaptchaPublicKey}
             reCaptchaType={settings?.recaptchaType}
             ldapDomain={capabilities?.ldapDomain}
+            ldapEnabled={capabilities?.ldapEnabled}
           />
           <ThirdParty
             thirdParty={thirdParty}

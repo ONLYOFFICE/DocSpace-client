@@ -66,16 +66,13 @@ const ThirdParty = ({
   hideAuthPage,
 }: ThirdPartyProps) => {
   const { isLoading } = useContext(LoginValueContext);
-  const { setIsModalOpen, setLdapDomain } = useContext(LoginDispatchContext);
+  const { setIsModalOpen } = useContext(LoginDispatchContext);
 
   const searchParams = useSearchParams();
 
   const { t } = useTranslation(["Login", "Common"]);
 
   useEffect(() => {
-    if (capabilities?.ldapEnabled && capabilities.ldapDomain)
-      setLdapDomain(capabilities.ldapDomain);
-
     if (
       ssoUrl &&
       hideAuthPage &&
@@ -83,7 +80,7 @@ const ThirdParty = ({
     ) {
       window.location.replace(ssoUrl);
     }
-  }, [capabilities, searchParams, setLdapDomain, ssoUrl, hideAuthPage]);
+  }, [capabilities, searchParams, ssoUrl, hideAuthPage]);
 
   const onSocialButtonClick = useCallback(
     (e: React.MouseEvent<Element, MouseEvent>) => {

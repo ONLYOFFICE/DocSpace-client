@@ -75,6 +75,7 @@ const LoginForm = ({
   reCaptchaPublicKey,
   reCaptchaType,
   ldapDomain,
+  ldapEnabled,
 }: LoginFormProps) => {
   const { isLoading, isModalOpen } = useContext(LoginValueContext);
   const { setIsLoading } = useContext(LoginDispatchContext);
@@ -420,7 +421,7 @@ const LoginForm = ({
         onChangeCheckbox={onChangeCheckbox}
       />
 
-      {ldapDomain && (
+      {ldapDomain && ldapEnabled && (
         <LDAPContainer
           ldapDomain={ldapDomain}
           isLdapLoginChecked={isLdapLoginChecked}

@@ -3,7 +3,7 @@
   "DeleteAllGroupsTitle": "删除群组",
   "DeleteFile": "您即将删除此文件。",
   "DeleteFolder": "您即将删除此文件夹。",
-  "DeleteGroupDescription": " 组{{groupName}} 将被删除。组中的用户不会从{{productName}}中删除。您确定要继续吗？",
+  "DeleteGroupDescription": " 组{{groupName}} 将被删除。组中的用户不会从{{productName}}中删除。您确定要继续吗？",
   "DeleteGroupTitle": "删除群组",
   "DeleteItems": "您即将删除这些项目。",
   "DeleteItemsSharedNote": "请注意，如果您已将它们分享给他人，它们将不可用。",

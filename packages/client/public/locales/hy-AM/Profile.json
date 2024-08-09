@@ -15,7 +15,6 @@
   "InterfaceTheme": "Միջերեսի ոճ",
   "LightTheme": "Բաց ոճ",
   "LogoutActiveConnection": "Դուրս եկեք ակտիվ կապից",
-  "LogoutAllActiveConnections": "Դուրս եկեք բոլոր ակտիվ կապերից",
   "LogoutAllActiveSessionsDescription": "Բոլոր ակտիվ կապերը, բացի այս կապից, դուրս կգրվեն, քանի որ այն ներկայումս օգտագործվում է:",
   "LogoutBtn": "Դուրս գալ",
   "LogoutDescription": "Նշում. Բոլոր ակտիվ կապերը, բացի այս կապից, դուրս կգրվեն, քանի որ այն ներկայումս օգտագործվում է:",

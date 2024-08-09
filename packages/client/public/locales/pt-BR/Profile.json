@@ -15,7 +15,6 @@
   "InterfaceTheme": "Tema de interface",
   "LightTheme": "Tema claro",
   "LogoutActiveConnection": "Sair da conexão ativa",
-  "LogoutAllActiveConnections": "Sair de todas as conexões ativas",
   "LogoutAllActiveSessionsDescription": "Todas as conexões ativas, exceto esta conexão, serão desconectadas, pois estão em uso no momento.",
   "LogoutBtn": "Sair",
   "LogoutDescription": "Observação. Todas as conexões ativas, exceto esta conexão, serão desconectadas, pois estão em uso no momento.",

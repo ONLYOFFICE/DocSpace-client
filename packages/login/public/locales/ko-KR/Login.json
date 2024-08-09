@@ -5,6 +5,7 @@
   "ExpiredCode": "더 이상 유효하지 않은 코드입니다. 새 코드를 요청한 뒤 다시 시도해 주세요.",
   "ForgotPassword": "비밀번호를 잊어버리셨나요?",
   "InvalidCode": "유효하지 않은 코드입니다. 다시 시도해 주세요.",
+  "LDAPUsernamePlaceholder": "{{ldap_domain}}의 사용자명",
   "MessageAuthorize": "계속하시려면 로그인해주세요",
   "MessageEmailConfirmed": "이메일이 성공적으로 활성화되었습니다.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "가입에 사용하신 이메일을 입력해주세요. 해당 이메일로 비밀번호 복원 방법이 발송됩니다.",
@@ -20,5 +21,7 @@
   "RegistrationEmailWatermark": "이메일",
   "RememberHelper": "기본 세션 기간은 20분입니다. 1년으로 설정하려면 이 옵션을 확인하세요. 원하시는 값으로 설정하려면 설정으로 이동하세요.",
   "ResendCode": "코드 재전송",
+  "SignInLDAP": "로그인: {{ldap_domain}}",
+  "SignInLdapHelper": "기업 도메인에 자격 증명 사용",
   "UserIsAlreadyRegistered": "<1>{{email}}</1> 사용자는 이미 이 {{productName}}에 등록되어 있습니다. 비밀번호를 입력하거나 돌아가서 다른 이메일로 계속 진행하세요."
 }

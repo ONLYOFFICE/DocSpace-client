@@ -7,6 +7,7 @@
   "DeleteProfileBtn": "Обриши мој налог",
   "DeleteProfileConfirmation": "Пажња! Спремате се да обришете свој налог.",
   "DeleteProfileConfirmationInfo": "Кликом на \"Делете мy аццоунт\" слажете се са нашим <1>Privacy policy.</1>",
+  "DeleteProfileSuccessDescription": "Ваш {{productName}} налог је успешно онемогућен. {{productName}} власник или администратор може трајно обрисати ваш онемогућен налог.",
   "DeleteProfileSuccessMessage": "Ваш налог је успешно обрисан.",
   "DeleteProfileSuccessMessageInfo": "Погледајте наш <1>Privacy policy</1> да научите више о брисању вашег налога и подацима повезаним са њим.",
   "EmailAndPasswordCopiedToClipboard": "Емаил и лозинка копирани у привремену меморију",

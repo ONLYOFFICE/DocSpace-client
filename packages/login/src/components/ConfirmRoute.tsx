@@ -26,12 +26,7 @@
 
 "use client";
 
-import {
-  notFound,
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from "next/navigation";
+import { notFound, usePathname, useSearchParams } from "next/navigation";
 import React, { createContext, useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -76,7 +71,6 @@ function ConfirmRoute(props: ConfirmRouteProps) {
 
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const router = useRouter();
 
   const isAuthenticated = !!socketUrl;
 
@@ -177,7 +171,7 @@ function ConfirmRoute(props: ConfirmRouteProps) {
   const { type, confirmLinkParams } = getLinkParams();
 
   if (!type && confirmLinkParams.type)
-    router.push(
+    window.location.replace(
       `/confirm/${confirmLinkParams.type}?${searchParams.toString()}`,
     );
 

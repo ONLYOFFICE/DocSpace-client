@@ -42,7 +42,7 @@ async function Page({ searchParams }: TfaAuthProps) {
   const user = await getUserFromConfirm(uid, confirmKey);
 
   return (
-    <>
+    <div className="content-center">
       {settings && typeof settings !== "string" && (
         <>
           <GreetingContainer />
@@ -54,7 +54,7 @@ async function Page({ searchParams }: TfaAuthProps) {
           </FormWrapper>
         </>
       )}
-    </>
+    </div>
   );
 }
 

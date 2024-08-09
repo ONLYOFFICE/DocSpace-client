@@ -54,24 +54,26 @@ async function Page({ searchParams, params }: LinkInviteProps) {
 
   return (
     <>
-      <LanguageComboboxWrapper />
-      {settings && typeof settings !== "string" && (
-        <>
-          <GreetingCleateUserContainer
-            type={type}
-            firstName={user?.firstName}
-            lastName={user?.lastName}
-          />
-          <FormWrapper id="invite-form">
-            <CreateUserForm
-              userNameRegex={settings.userNameRegex}
-              passwordHash={settings.passwordHash}
+      <div className="content-top">
+        <LanguageComboboxWrapper />
+        {settings && typeof settings !== "string" && (
+          <>
+            <GreetingCleateUserContainer
+              type={type}
               firstName={user?.firstName}
               lastName={user?.lastName}
             />
-          </FormWrapper>
-        </>
-      )}
+            <FormWrapper id="invite-form">
+              <CreateUserForm
+                userNameRegex={settings.userNameRegex}
+                passwordHash={settings.passwordHash}
+                firstName={user?.firstName}
+                lastName={user?.lastName}
+              />
+            </FormWrapper>
+          </>
+        )}
+      </div>
     </>
   );
 }

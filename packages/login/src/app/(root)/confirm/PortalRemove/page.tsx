@@ -41,7 +41,7 @@ async function Page({ searchParams }: RemovePortalProps) {
   ]);
 
   return (
-    <>
+    <div className="content-center">
       {settings && typeof settings !== "string" && (
         <>
           <GreetingContainer greetingSettings={settings?.greetingSettings} />
@@ -50,7 +50,7 @@ async function Page({ searchParams }: RemovePortalProps) {
           </FormWrapper>
         </>
       )}
-    </>
+    </div>
   );
 }
 

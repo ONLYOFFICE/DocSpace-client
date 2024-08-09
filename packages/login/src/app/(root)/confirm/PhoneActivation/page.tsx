@@ -38,7 +38,7 @@ async function Page({ searchParams }: PhoneActivationProps) {
   const settings = await getSettings();
 
   return (
-    <>
+    <div className="content-center">
       {settings && typeof settings !== "string" && (
         <>
           <GreetingContainer greetingSettings={settings?.greetingSettings} />
@@ -47,7 +47,7 @@ async function Page({ searchParams }: PhoneActivationProps) {
           </FormWrapper>
         </>
       )}
-    </>
+    </div>
   );
 }
 

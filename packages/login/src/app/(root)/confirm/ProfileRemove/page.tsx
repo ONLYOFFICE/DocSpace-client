@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { GreetingContainer } from "@/components/GreetingContainer";
 import { getColorTheme, getSettings } from "@/utils/actions";
 import ProfileRemoveForm from "@/components/ProfileRemoveForm ";
 
@@ -43,7 +42,7 @@ async function Page({ searchParams }: ProfileRemoveProps) {
   });
 
   return (
-    <>
+    <div className="content-center">
       {settings && typeof settings !== "string" && (
         <>
           <ProfileRemoveForm
@@ -53,7 +52,7 @@ async function Page({ searchParams }: ProfileRemoveProps) {
           />
         </>
       )}
-    </>
+    </div>
   );
 }
 

@@ -38,7 +38,7 @@ async function Page({ searchParams }: PasswordChangProps) {
   const settings = await getSettings();
 
   return (
-    <>
+    <div className="content-center">
       {settings && typeof settings !== "string" && (
         <>
           <GreetingContainer greetingSettings={settings?.greetingSettings} />
@@ -47,7 +47,7 @@ async function Page({ searchParams }: PasswordChangProps) {
           </FormWrapper>
         </>
       )}
-    </>
+    </div>
   );
 }
 

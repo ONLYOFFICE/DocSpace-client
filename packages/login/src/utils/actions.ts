@@ -446,7 +446,7 @@ export async function createUser(
 
   const res = await fetch(createUser);
 
-  if (!res.ok) throw res;
+  if (!res.ok) throw await res.json();
 
   const user = await res.json();
 

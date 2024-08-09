@@ -91,8 +91,6 @@ import type {
 } from "./EmptyViewContainer.types";
 
 export const isUser = (access: AccessType) => {
-  console.log({ access });
-
   return (
     access !== ShareAccessRights.None &&
     access !== ShareAccessRights.RoomManager &&
@@ -170,7 +168,9 @@ export const getRootDesctiption = (
     .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>
       t("EmptyView:EmptyRootRoomUserDescription"),
     )
-    .with([FolderType.USER, P._], () => t("Test"))
+    .with([FolderType.USER, ShareAccessRights.None], () =>
+      t("EmptyView:DefaultFolderDescription"),
+    )
     .with([FolderType.Recent, P._], () => t("Test"))
     .with([FolderType.Archive, P._], () => t("Test"))
     .with([FolderType.TRASH, P._], () => t("Test"))
@@ -248,6 +248,8 @@ export const getRootTitle = (
   access: AccessType,
   rootFolderType: Nullable<FolderType>,
 ) => {
+  console.log({ access, rootFolderType });
+
   return match([rootFolderType, access])
     .with([FolderType.Rooms, ShareAccessRights.None], () =>
       t("Files:EmptyRootRoomHeader", {
@@ -257,7 +259,9 @@ export const getRootTitle = (
     .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>
       t("EmptyView:EmptyRootRoomUserTitle"),
     )
-    .with([FolderType.USER, P._], () => t("Test"))
+    .with([FolderType.USER, ShareAccessRights.None], () =>
+      t("Files:EmptyScreenFolder"),
+    )
     .with([FolderType.Recent, P._], () => t("Test"))
     .with([FolderType.Archive, P._], () => t("Test"))
     .with([FolderType.TRASH, P._], () => t("Test"))
@@ -388,7 +392,9 @@ export const getRootIcom = (
         <EmptyRoomsRootUserDarkIcon />
       ),
     )
-    .with([FolderType.USER, P._], () => <div />)
+    .with([FolderType.USER, ShareAccessRights.None], () =>
+      isBaseTheme ? <DefaultFolderLight /> : <DefaultFolderDark />,
+    )
     .with([FolderType.Recent, P._], () => <div />)
     .with([FolderType.Archive, P._], () => <div />)
     .with([FolderType.TRASH, P._], () => <div />)

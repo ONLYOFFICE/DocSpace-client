@@ -306,6 +306,11 @@ export const getOptions = (
         inviteRootRoom,
         migrationData,
       ])
+      .with([FolderType.USER, ShareAccessRights.None], () => [
+        createDoc,
+        createSpreadsheet,
+        createPresentation,
+      ])
       .otherwise(() => []);
   }
 

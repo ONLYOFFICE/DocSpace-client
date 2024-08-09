@@ -106,7 +106,7 @@ const DeactivatePortalForm = ({ siteUrl }: DeactivatePortalProps) => {
               scale
               primary
               size={ButtonSize.medium}
-              label={t("Settings:Deactivate")}
+              label={t("Common:Deactivate")}
               tabIndex={1}
               onClick={onDeactivateClick}
             />

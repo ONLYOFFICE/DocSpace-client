@@ -93,7 +93,7 @@ const PortalDeactivation = (props) => {
       <ButtonWrapper>
         <Button
           className="deactivate-button button"
-          label={t("Deactivate")}
+          label={t("Common:Deactivate")}
           primary
           size={isDesktopView ? "small" : "normal"}
           onClick={onDeactivateClick}

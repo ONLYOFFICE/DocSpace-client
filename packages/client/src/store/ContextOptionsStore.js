@@ -188,7 +188,11 @@ class ContextOptionsStore {
   };
 
   onClickLinkFillForm = (item) => {
-    if (!item.startFilling && item.isPDFForm)
+    const isFormRoom =
+      this.selectedFolderStore?.roomType === RoomsType.FormRoom ||
+      this.selectedFolderStore?.parentRoomType === FolderType.FormRoom;
+
+    if (!item.startFilling && item.isPDFForm && !isFormRoom)
       return this.dialogsStore.setFillPDFDialogData(true, item);
 
     return this.gotoDocEditor(false, item);
@@ -1527,7 +1531,7 @@ class ContextOptionsStore {
           if (primaryLink) {
             copyShareLink(primaryLink.sharedTo.shareLink);
             item.shared
-              ? toastr.success(t("Files:LinkSuccessfullyCopied"))
+              ? toastr.success(t("Common:LinkSuccessfullyCopied"))
               : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
             setShareChanged(true);
           }

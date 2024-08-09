@@ -1,5 +1,6 @@
 {
   "AppointAdmin": "Nomina amministratori",
+  "BackupPortal": "Backup dei dati di {{productName}}",
   "ChangeInstruction": "Per modificare il proprietario di {{productName}}, scegli il nome del nuovo proprietario di seguito.",
   "ChangeOwner": "Cambia proprietario di {{productName}}",
   "ChangeUser": "Cambia utente",

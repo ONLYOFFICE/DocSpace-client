@@ -78,19 +78,14 @@ const PrivateRouteWrapper = ({
 
 export default inject<TStore>(
   ({ authStore, settingsStore, userStore, currentTariffStatusStore }) => {
-    const {
-      isAuthenticated,
-      isLoaded,
-      isAdmin,
+    const { isAuthenticated, isLoaded, isAdmin, isLogout, capabilities } =
+      authStore;
 
-      isLogout,
-      isCommunity,
-      isEnterprise,
-      capabilities,
-    } = authStore;
+    const { isNotPaidPeriod, isCommunity, isEnterprise } =
+      currentTariffStatusStore;
 
     const identityServerEnabled = capabilities?.identityServerEnabled;
-    const { isNotPaidPeriod } = currentTariffStatusStore;
+
     const { user } = userStore;
 
     const {

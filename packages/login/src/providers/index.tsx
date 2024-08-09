@@ -33,20 +33,18 @@ import { ThemeProvider } from "@docspace/shared/components/theme-provider";
 import { TFirebaseSettings } from "@docspace/shared/api/settings/types";
 import FirebaseHelper from "@docspace/shared/utils/firebase";
 import { TUser } from "@docspace/shared/api/people/types";
-import { ThemeKeys } from "@docspace/shared/enums";
-import { Base, Dark } from "@docspace/shared/themes";
 
 import { TDataContext } from "@/types";
 import useI18N from "@/hooks/useI18N";
 import useTheme from "@/hooks/useTheme";
 
 import pkgFile from "../../package.json";
+
 import ErrorBoundaryWrapper from "./ErrorBoundary";
 
 export const Providers = ({
   children,
   value,
-  timers,
   redirectURL,
 }: {
   children: React.ReactNode;
@@ -60,10 +58,6 @@ export const Providers = ({
   React.useEffect(() => {
     if (redirectURL) window.location.replace(redirectURL);
   }, [redirectURL]);
-
-  React.useEffect(() => {
-    console.log("Timers:", { ...timers });
-  }, [timers]);
 
   const { i18n } = useI18N({
     settings: value.settings,

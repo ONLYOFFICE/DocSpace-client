@@ -25,11 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useRef, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import { CancelUploadDialog } from "SRC_DIR/components/dialogs";
 import { isMobile, isTablet, mobile } from "@docspace/shared/utils/device";
 import styled from "styled-components";
 
+import { WarningQuotaDialog } from "SRC_DIR/components/dialogs/WarningQuotaDialog";
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { FileInput } from "@docspace/shared/components/file-input";
@@ -154,6 +156,14 @@ const SelectFileStep = (props: SelectFileStepProps) => {
     migratingWorkspace,
     setMigratingWorkspace,
     uploadFiles,
+    defaultUsersQuota = 0,
+    defaultRoomsQuota = 0,
+    tenantCustomQuota = 0,
+    isDefaultUsersQuotaSet,
+    isDefaultRoomsQuotaSet,
+    isTenantCustomQuotaSet,
+    warningQuotaDialogVisible,
+    setWarningQuotaDialogVisible,
   } = props as InjectedSelectFileStepProps;
 
   const [isSaveDisabled, setIsSaveDisabled] = useState(
@@ -161,7 +171,6 @@ const SelectFileStep = (props: SelectFileStepProps) => {
   );
   const [progress, setProgress] = useState(0);
   const [isInfiniteProgress, setIsInfiniteProgress] = useState(true);
-
   const [isNetworkError, setIsNetworkError] = useState(false);
   const [isFileError, setIsFileError] = useState(false);
   const [isBackupEmpty, setIsBackupEmpty] = useState(false);
@@ -173,6 +182,20 @@ const SelectFileStep = (props: SelectFileStepProps) => {
 
   const [failTries, setFailTries] = useState(FAIL_TRIES);
   const uploadInterval = useRef<number>();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const isQuotaWarningVisible =
+      isDefaultUsersQuotaSet ||
+      isDefaultRoomsQuotaSet ||
+      isTenantCustomQuotaSet;
+    setWarningQuotaDialogVisible(isQuotaWarningVisible);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isDefaultUsersQuotaSet, isDefaultRoomsQuotaSet, isTenantCustomQuotaSet]);
+
+  const onClickRedirect = () => {
+    navigate("/portal-settings/management/disk-space");
+  };
 
   const handleError = useCallback(
     (message?: string) => {
@@ -477,44 +500,82 @@ const SelectFileStep = (props: SelectFileStepProps) => {
           isSixthStep={false}
         />
       )}
+
+      {warningQuotaDialogVisible && (
+        <WarningQuotaDialog
+          t={t}
+          visible={warningQuotaDialogVisible}
+          onCloseDialog={() => setWarningQuotaDialogVisible(false)}
+          onClickRedirect={onClickRedirect}
+          defaultRoomsQuota={defaultRoomsQuota}
+          defaultUsersQuota={defaultUsersQuota}
+          tenantCustomQuota={tenantCustomQuota}
+          isDefaultRoomsQuotaSet={isDefaultRoomsQuotaSet}
+          isDefaultUsersQuotaSet={isDefaultUsersQuotaSet}
+          isTenantCustomQuotaSet={isTenantCustomQuotaSet}
+        />
+      )}
     </Wrapper>
   );
 };
 
-export default inject<TStore>(({ dialogsStore, importAccountsStore }) => {
-  const {
-    initMigrations,
-    getMigrationStatus,
-    setUsers,
-    fileLoadingStatus,
-    setLoadingStatus,
-    cancelMigration,
-    setWorkspace,
-    incrementStep,
-    files,
-    setFiles,
-    migratingWorkspace,
-    setMigratingWorkspace,
-    uploadFiles,
-  } = importAccountsStore;
-  const { cancelUploadDialogVisible, setCancelUploadDialogVisible } =
-    dialogsStore;
+export default inject<TStore>(
+  ({ dialogsStore, importAccountsStore, currentQuotaStore }) => {
+    const {
+      initMigrations,
+      getMigrationStatus,
+      setUsers,
+      fileLoadingStatus,
+      setLoadingStatus,
+      cancelMigration,
+      setWorkspace,
+      incrementStep,
+      files,
+      setFiles,
+      migratingWorkspace,
+      setMigratingWorkspace,
+      uploadFiles,
+    } = importAccountsStore;
+    const {
+      cancelUploadDialogVisible,
+      setCancelUploadDialogVisible,
+      warningQuotaDialogVisible,
+      setWarningQuotaDialogVisible,
+    } = dialogsStore;
 
-  return {
-    initMigrations,
-    getMigrationStatus,
-    setUsers,
-    fileLoadingStatus,
-    setLoadingStatus,
-    cancelMigration,
-    cancelUploadDialogVisible,
-    setCancelUploadDialogVisible,
-    setWorkspace,
-    incrementStep,
-    files,
-    setFiles,
-    migratingWorkspace,
-    setMigratingWorkspace,
-    uploadFiles,
-  };
-})(observer(SelectFileStep));
+    const {
+      isDefaultRoomsQuotaSet,
+      isDefaultUsersQuotaSet,
+      isTenantCustomQuotaSet,
+      defaultUsersQuota,
+      defaultRoomsQuota,
+      tenantCustomQuota,
+    } = currentQuotaStore;
+
+    return {
+      initMigrations,
+      getMigrationStatus,
+      setUsers,
+      fileLoadingStatus,
+      setLoadingStatus,
+      cancelMigration,
+      cancelUploadDialogVisible,
+      setCancelUploadDialogVisible,
+      setWorkspace,
+      incrementStep,
+      files,
+      setFiles,
+      migratingWorkspace,
+      setMigratingWorkspace,
+      uploadFiles,
+      defaultUsersQuota,
+      defaultRoomsQuota,
+      tenantCustomQuota,
+      isDefaultRoomsQuotaSet,
+      isDefaultUsersQuotaSet,
+      isTenantCustomQuotaSet,
+      warningQuotaDialogVisible,
+      setWarningQuotaDialogVisible,
+    };
+  },
+)(observer(SelectFileStep));

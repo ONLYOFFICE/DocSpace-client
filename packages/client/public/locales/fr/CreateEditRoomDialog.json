@@ -14,6 +14,7 @@
   "PublicRoomSystemFoldersDescription": "Les dossiers système stockent des copies de formulaires à différents stades d'achèvement. Les formulaires en cours de remplissage sont stockés dans le dossier En cours, et les formulaires complétés sont stockés dans le dossier Terminés.",
   "PublicRoomSystemFoldersTitle": "Dossiers système",
   "RoomEditing": "Salle de l’édition",
+  "RootFolderLabel": "Dossier racine",
   "StorageDescription": "Quota de stockage est fixé par salle. Vous pouvez modifier cette valeur ou désactiver la limite de stockage.",
   "TagsPlaceholder": "Ajouter un tag",
   "ThirdPartyStorageComboBoxPlaceholder": "Sélectionner le stockage",

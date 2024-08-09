@@ -671,7 +671,7 @@ class GroupsStore {
       }
 
       if (infoPanelSelection?.id === res.id) {
-        setInfoPanelSelection({ ...infoPanelSelection, ...res });
+        setInfoPanelSelection(res);
         setInfoPanelSelectedGroup(res);
       }
     } catch (err: any) {

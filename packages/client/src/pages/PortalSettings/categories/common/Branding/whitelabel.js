@@ -568,55 +568,50 @@ const WhiteLabel = (props) => {
   );
 };
 
-export default inject(
-  ({ settingsStore, common, currentQuotaStore, authStore }) => {
-    const {
-      setLogoText,
-      whiteLabelLogoText,
-      getWhiteLabelLogoText,
-      restoreWhiteLabelSettings,
-      initSettings,
-      saveWhiteLabelSettings,
-      logoUrlsWhiteLabel,
-      setLogoUrlsWhiteLabel,
-      defaultLogoTextWhiteLabel,
-      enableRestoreButton,
-      resetIsInit,
-      isWhitelableLoaded,
-    } = common;
+export default inject(({ settingsStore, common, currentQuotaStore }) => {
+  const {
+    setLogoText,
+    whiteLabelLogoText,
+    getWhiteLabelLogoText,
+    restoreWhiteLabelSettings,
+    initSettings,
+    saveWhiteLabelSettings,
+    logoUrlsWhiteLabel,
+    setLogoUrlsWhiteLabel,
+    defaultLogoTextWhiteLabel,
+    enableRestoreButton,
+    resetIsInit,
+    isWhitelableLoaded,
+  } = common;
 
-    const {
-      whiteLabelLogoUrls: defaultWhiteLabelLogoUrls,
-      deviceType,
-      standalone,
-    } = settingsStore;
-    const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
-    const { tenantExtra } = authStore;
+  const {
+    whiteLabelLogoUrls: defaultWhiteLabelLogoUrls,
+    deviceType,
+    standalone,
+  } = settingsStore;
+  const { isBrandingAndCustomizationAvailable, isCustomizationAvailable } =
+    currentQuotaStore;
 
-    const isCustomizationAvailable =
-      tenantExtra?.docServerLicense?.customization;
+  return {
+    setLogoText,
+    theme: settingsStore.theme,
+    logoText: whiteLabelLogoText,
+    getWhiteLabelLogoText,
+    saveWhiteLabelSettings,
+    restoreWhiteLabelSettings,
+    defaultWhiteLabelLogoUrls,
+    isSettingPaid: isBrandingAndCustomizationAvailable,
+    initSettings,
+    logoUrlsWhiteLabel,
+    setLogoUrlsWhiteLabel,
+    defaultLogoTextWhiteLabel,
+    enableRestoreButton,
 
-    return {
-      setLogoText,
-      theme: settingsStore.theme,
-      logoText: whiteLabelLogoText,
-      getWhiteLabelLogoText,
-      saveWhiteLabelSettings,
-      restoreWhiteLabelSettings,
-      defaultWhiteLabelLogoUrls,
-      isSettingPaid: isBrandingAndCustomizationAvailable,
-      initSettings,
-      logoUrlsWhiteLabel,
-      setLogoUrlsWhiteLabel,
-      defaultLogoTextWhiteLabel,
-      enableRestoreButton,
+    deviceType,
+    resetIsInit,
+    standalone,
 
-      deviceType,
-      resetIsInit,
-      standalone,
-
-      isWhitelableLoaded,
-      isCustomizationAvailable,
-    };
-  },
-)(withTranslation(["Settings", "Profile", "Common"])(observer(WhiteLabel)));
+    isWhitelableLoaded,
+    isCustomizationAvailable,
+  };
+})(withTranslation(["Settings", "Profile", "Common"])(observer(WhiteLabel)));

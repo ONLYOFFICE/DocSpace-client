@@ -40,7 +40,7 @@ import useTheme from "@/hooks/useTheme";
 
 import pkgFile from "../../package.json";
 import ErrorBoundaryWrapper from "./ErrorBoundary";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 export const Providers = ({
   children,

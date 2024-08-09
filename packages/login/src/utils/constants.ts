@@ -55,3 +55,16 @@ export const TFA_IOS_APP_URL =
   "https://apps.apple.com/app/google-authenticator/id388497605";
 export const TFA_WIN_APP_URL =
   "https://www.microsoft.com/ru-ru/p/authenticator/9wzdncrfj3rj?rtc=1&activetab=pivot:overviewtab";
+
+export const TYPE_LINK_WITHOUT_LNG_COMBOBOX = [
+  "Activation",
+  "PasswordChange",
+  "PhoneActivation",
+  "PortalOwnerChange",
+  "ProfileRemove",
+  "TfaActivation",
+  "TfaAuth",
+  "PortalRemove",
+  "PortalSuspend",
+  "PortalContinue",
+];

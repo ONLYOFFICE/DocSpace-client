@@ -96,6 +96,8 @@ const isDesktopEditors = window.AscDesktopEditor !== undefined;
 const systemTheme = getSystemTheme();
 
 class SettingsStore {
+  isFirstLoaded = false;
+
   isLoading = false;
 
   interfaceDirection = "";
@@ -659,6 +661,7 @@ class SettingsStore {
 
     this.setIsLoading(false);
     this.setIsLoaded(true);
+    this.setIsFirstLoaded(true);
   };
 
   setRoomsMode = (mode: boolean) => {
@@ -671,6 +674,10 @@ class SettingsStore {
 
   setIsLoaded = (isLoaded: boolean) => {
     this.isLoaded = isLoaded;
+  };
+
+  setIsFirstLoaded = (isFirstLoaded: boolean) => {
+    this.isFirstLoaded = isFirstLoaded;
   };
 
   setCultures = (cultures: string[]) => {

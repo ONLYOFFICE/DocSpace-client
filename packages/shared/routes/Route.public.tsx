@@ -36,6 +36,7 @@ import type { PublicRouteProps } from "./Routers.types";
 
 export const PublicRoute = (props: PublicRouteProps) => {
   const {
+    isFirstLoaded,
     wizardCompleted,
     isAuthenticated,
     tenantStatus,
@@ -89,8 +90,12 @@ export const PublicRoute = (props: PublicRouteProps) => {
         />
       );
     }
-    if (!wizardCompleted && location.pathname !== "/wizard") {
-      return <Navigate replace to="/wizard" />;
+
+    if (isFirstLoaded && !wizardCompleted && location.pathname !== "/wizard") {
+      window.location.replace(
+        combineUrl(window.ClientConfig?.proxy?.url, "/wizard"),
+      );
+      return null;
     }
 
     if (

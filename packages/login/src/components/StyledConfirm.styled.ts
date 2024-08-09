@@ -65,35 +65,48 @@ export const StyledPage = styled.div`
     inset-inline-end: 28px;
     top: 28px;
   }
-`;
 
-export const StyledContent = styled.div`
-  min-height: 100vh;
-  flex: 1 0 auto;
-  flex-direction: column;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-
-  @media ${mobile} {
-    width: 100%;
-    justify-content: start;
-    min-height: 100%;
+  .pageLoader {
+    display: flex;
+    justify-content: center;
   }
 `;
 
 export const StyledBody = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 56px auto;
+  min-height: 100vh;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+
+  .content-center {
+    min-height: calc(100vh - 112px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 56px auto;
+
+    @media ${mobile} {
+      justify-content: start;
+      margin: 0 auto;
+      min-height: 100%;
+    }
+  }
+
+  .content-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 88px auto;
+
+    @media ${mobile} {
+      margin: 0 auto;
+    }
+  }
 
   @media ${mobile} {
     width: 100%;
     margin: 0 auto;
+    min-height: 100%;
   }
 
   .logo-wrapper {
@@ -125,6 +138,10 @@ export const StyledBody = styled.div`
     align-items: center;
     justify-content: center;
     padding-bottom: 40px;
+
+    @media ${mobile} {
+      display: none;
+    }
   }
 
   .password-field-wrapper {
@@ -154,6 +171,10 @@ export const StyledBody = styled.div`
 
   .app-code-text {
     margin-bottom: 8px;
+  }
+
+  .app-code-continue-btn {
+    margin-top: 8px;
   }
 `;
 

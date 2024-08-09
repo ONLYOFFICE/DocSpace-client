@@ -24,8 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import useDeviceType from "@/hooks/useDeviceType";
 import ErrorBoundary from "@docspace/shared/components/error-boundary/ErrorBoundary";
+
+import useDeviceType from "@/hooks/useDeviceType";
+
 import { ErrorBoundaryProps } from "./ErrorBoundary.types";
 
 const ErrorBoundaryWrapper = (props: ErrorBoundaryProps) => {

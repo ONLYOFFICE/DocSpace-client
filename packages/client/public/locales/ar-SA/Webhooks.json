@@ -45,6 +45,7 @@
   "UnselectAll": "إلغاء تحديد الكل",
   "URL": "رابط",
   "ViewRawPayload": "عرض الحمولة الخام",
+  "WebhookCreated": "تم إنشاء Webhook",
   "WebhookCreationHint": "سيتم تعيين ويب هوك هذا لجميع الأحداث في {{productName}}",
   "WebhookDetails": "تفاصيل ويب هوك",
   "WebhookEditedSuccessfully": "تم تحرير تكوين ويب هوك بنجاح",

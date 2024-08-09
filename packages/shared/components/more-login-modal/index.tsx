@@ -89,9 +89,11 @@ const MoreLoginModal: React.FC<MoreLoginModalProps> = (props) => {
           const { icon, label } =
             PROVIDERS_DATA[item.provider as keyof ProvidersDataType];
 
+          const IconComponent = icon;
+
           return (
             <ProviderRow key={`ProviderItem${label}`}>
-              <ReactSVG src={icon} />
+              <IconComponent />
               <Text
                 fontSize="14px"
                 fontWeight="600"

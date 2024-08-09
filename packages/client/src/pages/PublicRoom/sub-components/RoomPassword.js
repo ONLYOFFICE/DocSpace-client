@@ -116,74 +116,76 @@ const RoomPassword = (props) => {
 
   return (
     <StyledPage>
-      <StyledContent className="public-room-content">
-        <StyledBody>
-          <PortalLogo className="portal-logo" />
+      <div className="public-room-page">
+        <StyledContent className="public-room-content">
+          <StyledBody>
+            <PortalLogo className="portal-logo" />
 
-          <FormWrapper>
-            <div className="password-form">
-              <Text fontSize="16px" fontWeight="600">
-                {t("UploadPanel:EnterPassword")}
-              </Text>
-
-              <Text
-                fontSize="13px"
-                fontWeight="400"
-                className="public-room-text"
-              >
-                {t("Common:NeedPassword")}:
-              </Text>
-              <div className="public-room-name">
-                <PublicRoomIcon className="public-room-icon" />
-                <Text
-                  className="public-room-text"
-                  fontSize="15px"
-                  fontWeight="600"
-                >
-                  {roomTitle}
+            <FormWrapper>
+              <div className="password-form">
+                <Text fontSize="16px" fontWeight="600">
+                  {t("UploadPanel:EnterPassword")}
                 </Text>
+
+                <Text
+                  fontSize="13px"
+                  fontWeight="400"
+                  className="public-room-text"
+                >
+                  {t("Common:NeedPassword")}:
+                </Text>
+                <div className="public-room-name">
+                  <PublicRoomIcon className="public-room-icon" />
+                  <Text
+                    className="public-room-text"
+                    fontSize="15px"
+                    fontWeight="600"
+                  >
+                    {roomTitle}
+                  </Text>
+                </div>
+
+                <FieldContainer
+                  isVertical={true}
+                  labelVisible={false}
+                  hasError={!!errorMessage}
+                  errorMessage={errorMessage}
+                >
+                  <PasswordInput
+                    simpleView
+                    id="password"
+                    inputName="password"
+                    placeholder={t("Common:Password")}
+                    type="password"
+                    inputValue={password}
+                    hasError={!!errorMessage}
+                    size="large"
+                    scale
+                    tabIndex={1}
+                    autoComplete="current-password"
+                    onChange={onChangePassword}
+                    onKeyDown={onKeyPress}
+                    isDisabled={isLoading}
+                    isDisableTooltip
+                    forwardedRef={inputRef}
+                    isAutoFocussed
+                  />
+                </FieldContainer>
               </div>
 
-              <FieldContainer
-                isVertical={true}
-                labelVisible={false}
-                hasError={!!errorMessage}
-                errorMessage={errorMessage}
-              >
-                <PasswordInput
-                  simpleView
-                  id="password"
-                  inputName="password"
-                  placeholder={t("Common:Password")}
-                  type="password"
-                  inputValue={password}
-                  hasError={!!errorMessage}
-                  size="large"
-                  scale
-                  tabIndex={1}
-                  autoComplete="current-password"
-                  onChange={onChangePassword}
-                  onKeyDown={onKeyPress}
-                  isDisabled={isLoading}
-                  isDisableTooltip
-                  forwardedRef={inputRef}
-                  isAutoFocussed
-                />
-              </FieldContainer>
-            </div>
-
-            <Button
-              primary
-              size="medium"
-              scale
-              label={t("Common:ContinueButton")}
-              tabIndex={5}
-              onClick={onSubmit}
-              isDisabled={isLoading}
-            />
-          </FormWrapper>
-        </StyledBody>
-      </StyledContent>
+              <Button
+                primary
+                size="medium"
+                scale
+                label={t("Common:ContinueButton")}
+                tabIndex={5}
+                onClick={onSubmit}
+                isDisabled={isLoading}
+              />
+            </FormWrapper>
+          </StyledBody>
+        </StyledContent>
+      </div>
     </StyledPage>
   );
 };

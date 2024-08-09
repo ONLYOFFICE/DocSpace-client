@@ -118,7 +118,7 @@ const DeepLink = ({
               </StyledBodyWrapper>
               <StyledActionsWrapper>
                 <Checkbox
-                  label={t("Common:Remember")}
+                  label={t("DeepLink:RememberChoice")}
                   isChecked={isRemember}
                   onChange={onChangeCheckbox}
                 />

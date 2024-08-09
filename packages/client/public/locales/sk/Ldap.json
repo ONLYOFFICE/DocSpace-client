@@ -17,6 +17,7 @@
   "LdapGroupAttributeTooltip": "Zadajte atribút objektu skupiny, ktorý určuje, akých používateľov táto skupina združuje.",
   "LdapGroupDN": "DN skupiny",
   "LdapGroupDNTooltip": "Zadajte rozlišujúci názov priečinka obsahujúceho skupiny, ktoré chcete pridať.",
+  "LdapGroupFilter": "Filter skupiny",
   "LdapGroupFilterTooltip": "Pomocou filtra na vyhľadávanie LDAP vyberte skupiny, ktoré sa budú importovať. Upozorňujeme, že pridaní budú len používatelia z týchto skupín.",
   "LdapGroupMembership": "Členstvo v skupine",
   "LdapGroupMembershipTooltip": "Túto možnosť povoľte, ak chcete pridať skupiny zo servera LDAP/Active Directory do účtov {{productName}}. Upozorňujeme, že pridaní budú len používatelia, ktorí patria do týchto skupín.",

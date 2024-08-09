@@ -57,10 +57,12 @@ let isPaymentPageUnavailable = true;
 let isBonusPageUnavailable = true;
 
 const App = observer(() => {
-  const { authStore, userStore, settingsStore } = useStore();
+  const { authStore, userStore, settingsStore, currentTariffStatusStore } =
+    useStore();
   const location = useLocation();
 
-  const { init, isCommunity, isLoaded } = authStore;
+  const { init, isLoaded } = authStore;
+  const { isCommunity } = currentTariffStatusStore;
   const { setTheme, limitedAccessSpace, timezone } = settingsStore;
 
   window.timezone = timezone;

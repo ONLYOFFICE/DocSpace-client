@@ -41,7 +41,6 @@ export const generateLogo = (
   canvas.width = width;
   canvas.height = height;
 
-  console.log("isEditor", isEditor);
   const ctx = canvas.getContext("2d");
   const x = alignCenter ? width / 2 : isEditor ? 10 : 0;
   const y = (height - fontSize) / 2;

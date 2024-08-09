@@ -550,6 +550,8 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
                   resetMenu={resetMenu}
                   onLeafClick={onLeafClick}
                   onMobileItemClick={onMobileItemClick}
+                  changeView={changeView}
+                  withHeader={withHeader}
                 />
               )}
             </div>

@@ -64,8 +64,18 @@ const SubMenu = (props: {
     loadFunc?: () => Promise<ContextMenuModel[]>,
   ) => void;
   onLoad?: () => Promise<ContextMenuModel[]>;
+  changeView?: boolean;
+  withHeader?: boolean;
 }) => {
-  const { onLeafClick, root, resetMenu, onMobileItemClick, onLoad } = props;
+  const {
+    onLeafClick,
+    root,
+    resetMenu,
+    onMobileItemClick,
+    onLoad,
+    changeView,
+    withHeader,
+  } = props;
 
   const [model, setModel] = useState(props?.model);
   const [isLoading, setIsLoading] = useState(false);
@@ -519,11 +529,17 @@ const SubMenu = (props: {
   const viewport = DomHelpers.getViewport();
   const paddingList = 12;
   const marginsList = 32;
+  const backdrop = 64;
+  const header = 55;
 
   const listHeight =
-    height + paddingList + marginsList > viewport.height
-      ? viewport.height - marginsList
-      : height + paddingList;
+    changeView && withHeader
+      ? height + paddingList + header > viewport.height
+        ? viewport.height - backdrop - header - paddingList
+        : height + paddingList
+      : height + paddingList + marginsList > viewport.height
+        ? viewport.height - marginsList
+        : height + paddingList;
 
   if (model) {
     return (

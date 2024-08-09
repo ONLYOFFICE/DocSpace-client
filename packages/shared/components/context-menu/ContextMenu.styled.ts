@@ -102,10 +102,6 @@ const StyledContextMenu = styled.div<{
       ${(props) => props.changeView && styledMobileView}
     }
 
-    @media ${mobile} {
-      ${(props) => props.changeView && styledMobileView}
-    }
-
     .scroll-body {
       display: flex;
       flex-direction: column;

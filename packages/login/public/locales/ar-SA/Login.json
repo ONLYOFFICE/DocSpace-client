@@ -5,6 +5,7 @@
   "ExpiredCode": "هذا الرمز لم يعد صالحا. اطلب رمزًا جديدًا وحاول مرة أخرى.",
   "ForgotPassword": "نسيت كلمة السر؟",
   "InvalidCode": "هذا الرمز غير صالح. حاول مرة أخرى.",
+  "LDAPUsernamePlaceholder": "اسم المستخدم لـ {{ldap_domain}}",
   "MessageAuthorize": "سجل الدخول للمتابعة",
   "MessageEmailConfirmed": "تم تفعيل عنوان بريدك الإلكتروني بنجاح.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "من فضلك، أدخل عنوان البريد الإلكتروني الذي استخدمته للتسجيل. سيتم إرسال تعليمات استعادة كلمة المرور إليه.",
@@ -20,5 +21,7 @@
   "RegistrationEmailWatermark": "بريد إلكتروني",
   "RememberHelper": "العمر الافتراضي للجلسة هو 20 دقيقة. حدد هذا الخيار لتعيينه على عام واحد. لتعيين القيمة الخاصة بك ، انتقل إلى الإعدادات.",
   "ResendCode": "أعد إرسال الرمز",
+  "SignInLDAP": "سجل الدخول إلى: {{ldap_domain}}",
+  "SignInLdapHelper": "استخدم بيانات الاعتماد الخاصة بنطاق المؤسسة",
   "UserIsAlreadyRegistered": "المستخدم <1>{{email}}</1>  مسجل بالفعل في {{productName}}، أدخل كلمة المرور الخاصة بك أو ارجع للمتابعة باستخدام بريد إلكتروني آخر."
 }

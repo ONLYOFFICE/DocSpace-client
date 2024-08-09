@@ -2,6 +2,7 @@
   "AccountWillBeCreated": "Một tài khoản {{productName}} sẽ được tạo cho <1>{{email}} </1>. Xin vui lòng hoàn tất đăng ký của bạn:",
   "ChangePasswordSuccess": "Mật khẩu đã được thay đổi thành công",
   "ConfirmOwnerPortalSuccessMessage": "Chủ sở hữu {{productName}} đã được thay đổi thành công. Trong 10 giây nữa, bạn sẽ được chuyển hướng.",
+  "ConfirmOwnerPortalTitle": "Xin vui lòng xác nhận bạn muốn thay đổi chủ sở hữu {{productName}} thành {{newOwner}}.",
   "CurrentNumber": "Số điện thoại di động hiện tại của bạn",
   "DeleteProfileBtn": "Xóa tài khoản của tôi",
   "DeleteProfileConfirmation": "Chú ý! Bạn sắp xóa tài khoản của mình.",

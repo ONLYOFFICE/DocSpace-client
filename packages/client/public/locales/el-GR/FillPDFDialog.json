@@ -1,1 +1,9 @@
-{}
+{
+  "FillOutButtonLabel": "Συμπλήρωση",
+  "FillOutDescription": "Συμπληρώστε τα πεδία της αρχικής φόρμας στο παράθυρο του εργαλείου επεξεργασίας.",
+  "FillOutTitle": "Συμπληρώστε μόνοι σας τη φόρμα",
+  "FillPDFDialogTitle": "Συμπλήρωση ως",
+  "ShareCollectButtonLabel": "Αντιγραφή στο δωμάτιο",
+  "ShareCollectDescription": "Μοιραστείτε τη φόρμα σας και συλλέξτε απαντήσεις μέσω ενός δωματίου συμπλήρωσης Φορμών.",
+  "ShareCollectTitle": "Κοινοποίηση"
+}

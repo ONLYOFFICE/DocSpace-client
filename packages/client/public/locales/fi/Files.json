@@ -92,6 +92,7 @@
   "LinkDisabledSuccessfully": "Linkki onnistuneesti poistettu käytöstä",
   "LinkEditedSuccessfully": "Linkki onnistuneesti muokattu ja kopioitu",
   "LinkEnabledSuccessfully": "Linkki onnistuneesti otettu käyttöön",
+  "LinkForPortalUsers": "Linkki {{productName}}:n käyttäjiin",
   "LinkSettings": "Linkkiasetukset",
   "LinkSuccessfullyCreatedAndCopied": "Linkki onnistuneesti luotu ja kopioitu leikepöydälle",
   "LinkValidUntil": "Tämä linkki on voimassa",

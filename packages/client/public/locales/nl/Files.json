@@ -92,6 +92,7 @@
   "LinkDisabledSuccessfully": "Link succesvol uitgeschakeld",
   "LinkEditedSuccessfully": "Link met succes bewerkt en gekopieerd",
   "LinkEnabledSuccessfully": "Link succesvol ingeschakeld",
+  "LinkForPortalUsers": "Link voor {{productName}} gebruikers",
   "LinkSettings": "Link instellingen",
   "LinkSuccessfullyCreatedAndCopied": "Link succesvol gemaakt en gekopieerd naar klembord",
   "LinkValidUntil": "Deze link is geldig tot",

@@ -30,6 +30,7 @@
   "HotkeysPlayPause": "Odtwarzanie/Pauza",
   "HotkeysRedoLastUndoneAction": "Powtórz ostatnią cofniętą akcję",
   "HotkeysRemove": "Usuń zaznaczone elementy",
+  "HotkeysRenameSelected": "Zmień nazwę wybranej pozycji",
   "HotkeysSelectAll": "Zaznacz wszystkie widoczne katalogi oraz pliki",
   "HotkeysSelectDown": "Zaznacz kolejny element poniżej",
   "HotkeysSelection": "Zaznaczanie elementów",

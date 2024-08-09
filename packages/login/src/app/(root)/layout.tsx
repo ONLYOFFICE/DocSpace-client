@@ -25,9 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { cookies } from "next/headers";
 
-import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 import { getBgPattern } from "@docspace/shared/utils/common";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 

@@ -43,6 +43,7 @@ export const StyledPage = styled.div`
 
   .logo-wrapper {
     display: block;
+    padding-bottom: 64px;
   }
 
   @media ${mobile} {
@@ -83,6 +84,17 @@ export const StyledPage = styled.div`
 
   .subtitle {
     margin-bottom: 32px;
+  }
+
+  .public-room_content-wrapper {
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    margin: 0px auto;
+    max-width: 960px;
+    box-sizing: border-box;
+    height: 100%;
   }
 
   .public-room-content {

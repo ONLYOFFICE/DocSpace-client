@@ -39,6 +39,7 @@ import useI18N from "@/hooks/useI18N";
 import useTheme from "@/hooks/useTheme";
 
 import pkgFile from "../../package.json";
+
 import ErrorBoundaryWrapper from "./ErrorBoundary";
 import { usePathname, useSearchParams } from "next/navigation";
 

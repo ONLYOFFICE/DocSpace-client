@@ -26,6 +26,7 @@
 
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
+
 import { Toast } from "@docspace/shared/components/toast";
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { TenantStatus, ThemeKeys } from "@docspace/shared/enums";
@@ -56,17 +57,10 @@ export default async function RootLayout({
 
   let redirectUrl = "";
 
-  const timers = { otherOperations: 0 };
-
-  const startOtherOperationsDate = new Date();
-
   const [settings, colorTheme] = await Promise.all([
     getSettings(),
     getColorTheme(),
   ]);
-
-  timers.otherOperations =
-    new Date().getTime() - startOtherOperationsDate.getTime();
 
   if (settings === "access-restricted") redirectUrl = `/${settings}`;
 

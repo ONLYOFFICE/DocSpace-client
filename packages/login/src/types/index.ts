@@ -211,6 +211,8 @@ export type LoginFormProps = {
   cookieSettingsEnabled: boolean;
   clientId?: string;
   client?: IClientProps;
+  ldapDomain?: string;
+  ldapEnabled?: boolean;
 };
 
 export type ForgotPasswordModalDialogProps = {

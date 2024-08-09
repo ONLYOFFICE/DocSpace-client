@@ -71,16 +71,6 @@ const ButtonContainer = ({
     (!isLdapEnabled || isUIDisabled || !hasChanges) && !hasProgressError;
   const resetDisabled = !isLdapEnabled || isUIDisabled || isDefaultSettings;
 
-  console.log("ButtonContainer", {
-    isLdapEnabled,
-    isUIDisabled,
-    hasChanges,
-    isDefaultSettings,
-
-    saveDisabled,
-    resetDisabled,
-  });
-
   return (
     <Box className="ldap_buttons-container">
       <SaveCancelButtons

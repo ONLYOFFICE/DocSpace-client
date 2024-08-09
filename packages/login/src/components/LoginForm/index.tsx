@@ -39,6 +39,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { useTheme } from "styled-components";
 import { useSearchParams, useRouter } from "next/navigation";
+import { Id } from "react-toastify";
 
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
@@ -84,10 +85,12 @@ const LoginForm = ({
   clientId,
   client,
   reCaptchaType,
+  ldapDomain,
+  ldapEnabled,
 }: LoginFormProps) => {
-  const { isLoading, isModalOpen, ldapDomain } = useContext(LoginValueContext);
+  const { isLoading, isModalOpen } = useContext(LoginValueContext);
   const { setIsLoading } = useContext(LoginDispatchContext);
-  const toastId = useRef(null);
+  const toastId = useRef<Id>();
 
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -473,7 +476,7 @@ const LoginForm = ({
         onChangeCheckbox={onChangeCheckbox}
       />
 
-      {ldapDomain && (
+      {ldapDomain && ldapEnabled && (
         <LDAPContainer
           ldapDomain={ldapDomain}
           isLdapLoginChecked={isLdapLoginChecked}

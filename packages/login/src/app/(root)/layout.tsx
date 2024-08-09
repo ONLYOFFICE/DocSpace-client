@@ -28,7 +28,6 @@ import React from "react";
 import { cookies } from "next/headers";
 
 import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
-import { ThemeKeys } from "@docspace/shared/enums";
 import { getBgPattern } from "@docspace/shared/utils/common";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
@@ -43,17 +42,13 @@ export default async function Layout({
 }) {
   const colorTheme = await getColorTheme();
 
-  const cookieStore = cookies();
-
-  const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as ThemeKeys;
-
   const bgPattern = getBgPattern(colorTheme?.selected);
 
   return (
     <div style={{ width: "100%", height: "100%" }}>
-      <SimpleNav systemTheme={systemTheme} />
+      <SimpleNav />
 
-      <FormWrapper bgPattern={bgPattern} id="form-wrapper">
+      <FormWrapper id="form-wrapper" bgPattern={bgPattern}>
         <div className="bg-cover" />
         <Scrollbar id="customScrollBar">
           <ContentWrapper id="content-wrapper">{children}</ContentWrapper>

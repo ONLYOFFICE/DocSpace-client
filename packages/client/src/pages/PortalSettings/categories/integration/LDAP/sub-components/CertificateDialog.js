@@ -59,7 +59,7 @@ const CertificateDialog = ({
   const onSaveAction = useCallback((e) => {
     setAcceptCertificate(true);
     setAcceptCertificateHash(cerficateIssue.uniqueHash);
-    save();
+    save(t);
     setCertificateDialogVisible(false);
   }, []);
 
@@ -141,7 +141,9 @@ const CertificateDialog = ({
           {hasError && (
             <Box>
               {cerficateIssue.errors.map((err) => (
-                <Text className="ldap-error-text">{mapError(err)}</Text>
+                <Text className="ldap-error-text" key={`err-${index}`}>
+                  {mapError(err)}
+                </Text>
               ))}
             </Box>
           )}

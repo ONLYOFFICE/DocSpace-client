@@ -34,7 +34,6 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
-
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { getLogoUrl } from "@docspace/shared/utils/common";
 

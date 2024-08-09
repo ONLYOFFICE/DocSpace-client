@@ -109,10 +109,9 @@ const BenefitsContainer = ({ isTrial, isEnterprise }) => {
 };
 
 export default inject(
-  ({ authStore, currentQuotaStore, paymentQuotasStore }) => {
-    const { isEnterprise } = authStore;
-
+  ({ currentTariffStatusStore, currentQuotaStore, paymentQuotasStore }) => {
     const { portalPaymentQuotasFeatures } = paymentQuotasStore;
+    const { isEnterprise } = currentTariffStatusStore;
 
     const { isTrial } = currentQuotaStore;
     return {

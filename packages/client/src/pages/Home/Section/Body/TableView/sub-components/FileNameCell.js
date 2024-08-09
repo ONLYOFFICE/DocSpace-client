@@ -26,6 +26,7 @@
 
 import React from "react";
 import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { TableCell } from "@docspace/shared/components/table";
 import { Loader } from "@docspace/shared/components/loader";
@@ -88,10 +89,18 @@ const FileNameCell = ({
         dir="auto"
       >
         {titleWithoutExt}
-        {displayFileExtension && (
-          <span className="item-file-exst">{fileExst}</span>
-        )}
       </Link>
+
+      {displayFileExtension && (
+        <Text
+          className="item-file-exst"
+          fontWeight="600"
+          fontSize="13px"
+          color={theme.filesSection.tableView.fileExstColor}
+        >
+          {fileExst}
+        </Text>
+      )}
     </>
   );
 };

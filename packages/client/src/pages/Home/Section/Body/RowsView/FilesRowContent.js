@@ -64,6 +64,10 @@ const SimpleFilesRowContent = styled(RowContent)`
     }
   }
 
+  .rowMainContainer {
+    margin-inline-end: ${(props) => props.displayFileExtension && "0px"};
+  }
+
   .row_update-text {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -91,7 +95,7 @@ const SimpleFilesRowContent = styled(RowContent)`
 
   .row-content-link {
     padding-block: 12px 0;
-    padding-inline: 0 12px;
+    padding-inline: ${(props) => !props.displayFileExtension && "0px 12px"};
     margin-top: ${(props) =>
       props.theme.interfaceDirection === "rtl" ? "-14px" : "-12px"};
   }
@@ -99,12 +103,17 @@ const SimpleFilesRowContent = styled(RowContent)`
   @media ${tablet} {
     .row-main-container-wrapper {
       display: flex;
-      justify-content: space-between;
+      align-items: center;
       max-width: inherit;
+    }
+
+    .mainIcons {
+      margin-bottom: ${(props) => props.displayFileExtension && "4px"};
     }
 
     .badges {
       flex-direction: row-reverse;
+      padding-inline: ${(props) => props.displayFileExtension && "0px 12px"};
     }
 
     .tablet-badge {
@@ -143,6 +152,10 @@ const SimpleFilesRowContent = styled(RowContent)`
       margin: 0;
     }
 
+    .mainIcons {
+      margin-bottom: ${(props) => props.displayFileExtension && "0px"};
+    }
+
     .can-convert {
       margin: 0 1px;
     }
@@ -173,6 +186,7 @@ const FilesRowContent = ({
   isDefaultRoomsQuotaSet,
   isStatisticsAvailable,
   showStorageInfo,
+  displayFileExtension,
 }) => {
   const {
     contentLength,
@@ -232,20 +246,21 @@ const FilesRowContent = ({
     }
   };
 
-  const additionalComponent = () => {
-    if (isRooms) return getRoomTypeName(item.roomType, t);
+  // const additionalComponent = () => {
+  //   if (isRooms) return getRoomTypeName(item.roomType, t);
 
-    if (!fileExst && !contentLength && !providerKey)
-      return `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(
-        "Translations:Files",
-      )}`;
+  //   if (!fileExst && !contentLength && !providerKey)
+  //     return `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(
+  //       "Translations:Files",
+  //     )}`;
 
-    if (fileExst) return `${fileExst.toUpperCase().replace(/^\./, "")}`;
+  //   if (fileExst) return `${fileExst.toUpperCase().replace(/^\./, "")}`;
 
-    return "";
-  };
+  //   return "";
+  // };
 
-  const additionalInfo = additionalComponent();
+  // const additionalInfo = additionalComponent();
+
   const mainInfo = contentComponent();
 
   return (
@@ -255,6 +270,7 @@ const FilesRowContent = ({
         isMobile={!isTablet()}
         isFile={fileExst || contentLength}
         sideColor={theme.filesSection.rowView.sideColor}
+        displayFileExtension={displayFileExtension}
       >
         <Link
           className="row-content-link"
@@ -273,6 +289,16 @@ const FilesRowContent = ({
         <div className="badges">
           {badgesComponent}
           {!isRoom && !isRooms && quickButtons}
+          {displayFileExtension && (
+            <Text
+              className="item-file-exst"
+              fontWeight="600"
+              fontSize="15px"
+              color={theme.filesSection.tableView.fileExstColor}
+            >
+              {fileExst}
+            </Text>
+          )}
         </div>
 
         {mainInfo && (
@@ -287,7 +313,7 @@ const FilesRowContent = ({
           </Text>
         )}
 
-        {additionalInfo && (
+        {/* {additionalInfo && (
           <Text
             containerMinWidth="90px"
             containerWidth="10%"
@@ -299,7 +325,7 @@ const FilesRowContent = ({
           >
             {additionalInfo}
           </Text>
-        )}
+        )} */}
       </SimpleFilesRowContent>
     </>
   );

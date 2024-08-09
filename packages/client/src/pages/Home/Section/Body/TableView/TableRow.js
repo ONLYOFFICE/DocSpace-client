@@ -72,6 +72,7 @@ const FilesTableRow = (props) => {
     badgeUrl,
     isRecentTab,
     canDrag,
+    displayFileExtension,
   } = props;
   const { acceptBackground, background } = theme.dragAndDrop;
 
@@ -174,6 +175,7 @@ const FilesTableRow = (props) => {
         contextOptions={item.contextOptions}
         getContextModel={getContextModel}
         showHotkeyBorder={showHotkeyBorder}
+        displayFileExtension={displayFileExtension}
         title={
           item.isFolder
             ? t("Translations:TitleShowFolderActions")

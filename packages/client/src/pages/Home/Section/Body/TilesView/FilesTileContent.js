@@ -30,6 +30,7 @@ import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 
 import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
 
 import TileContent from "./sub-components/TileContent";
 import withContent from "../../../../../HOCs/withContent";
@@ -42,7 +43,8 @@ const SimpleFilesTileContent = styled(TileContent)`
   .row-main-container {
     height: auto;
     max-width: 100%;
-    align-self: flex-end;
+    display: flex;
+    align-items: flex-end;
   }
 
   .main-icons {
@@ -84,16 +86,15 @@ const SimpleFilesTileContent = styled(TileContent)`
   .item-file-name {
     max-height: 100%;
     line-height: 20px;
-
+    max-width: 100px;
     overflow: hidden;
     text-overflow: ellipsis;
-    -webkit-line-clamp: 2;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
+    white-space: nowrap;
+    display: block;
   }
 
   .item-file-exst {
-    color: ${(props) => props.theme.filesSection.tableView.fileExstColor};
+    margin-bottom: 1px;
   }
 
   ${({ isRooms }) =>
@@ -147,10 +148,17 @@ const FilesTileContent = ({
           isTextOverflow
         >
           {titleWithoutExt}
-          {displayFileExtension && (
-            <span className="item-file-exst">{fileExst}</span>
-          )}
         </Link>
+        {displayFileExtension && (
+          <Text
+            className="item-file-exst"
+            fontWeight="600"
+            fontSize="13px"
+            color={theme.filesSection.tableView.fileExstColor}
+          >
+            {fileExst}
+          </Text>
+        )}
       </SimpleFilesTileContent>
     </>
   );

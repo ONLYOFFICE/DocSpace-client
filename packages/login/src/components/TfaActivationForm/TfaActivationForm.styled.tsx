@@ -32,7 +32,6 @@ import { mobile, tablet } from "@docspace/shared/utils";
 import { Box } from "@docspace/shared/components/box";
 
 export const StyledForm = styled(Box)`
-  margin: 56px auto;
   display: flex;
   flex: 1fr 1fr;
   gap: 80px;

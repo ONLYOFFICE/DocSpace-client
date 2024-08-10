@@ -145,7 +145,9 @@ const SimulatePassword = memo(
     }, [isDisabled]);
 
     useEffect(() => {
-      if (inputValue) setPassword(inputValue);
+      if (inputValue !== undefined) {
+        setPassword(inputValue);
+      }
     }, [inputValue]);
 
     return (

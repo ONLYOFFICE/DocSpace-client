@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
-import ResetConfirmationModal from "./sub-components/ResetConfirmationModal";
+import ResetConfirmationModal from "SRC_DIR/components/dialogs/ResetConfirmationDialog/ResetConfirmationModal";
 
 const SubmitResetButtons = (props) => {
   const { t } = useTranslation(["SingleSignOn", "Settings", "Common"]);
@@ -46,6 +46,8 @@ const SubmitResetButtons = (props) => {
     isLoadingXml,
     enableSso,
     isSSOAvailable,
+    closeResetModal,
+    confirmReset,
   } = props;
 
   return (
@@ -69,7 +71,13 @@ const SubmitResetButtons = (props) => {
         additionalClassSaveButton="save-button"
         additionalClassCancelButton="restore-button"
       />
-      {confirmationResetModal && <ResetConfirmationModal />}
+      {confirmationResetModal && (
+        <ResetConfirmationModal
+          closeResetModal={closeResetModal}
+          confirmReset={confirmReset}
+          confirmationResetModal={confirmationResetModal}
+        />
+      )}
     </>
   );
 };
@@ -86,6 +94,8 @@ export default inject(({ ssoStore, currentQuotaStore }) => {
     hasChanges,
     isLoadingXml,
     enableSso,
+    closeResetModal,
+    confirmReset,
   } = ssoStore;
   const { isSSOAvailable } = currentQuotaStore;
 
@@ -101,5 +111,7 @@ export default inject(({ ssoStore, currentQuotaStore }) => {
     isLoadingXml,
     enableSso,
     isSSOAvailable,
+    closeResetModal,
+    confirmReset,
   };
 })(observer(SubmitResetButtons));

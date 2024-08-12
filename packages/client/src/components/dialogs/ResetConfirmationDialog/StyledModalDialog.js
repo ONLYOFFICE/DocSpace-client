@@ -24,57 +24,41 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 
-import { Box } from "@docspace/shared/components/box";
-import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Text } from "@docspace/shared/components/text";
+import { mobile } from "@docspace/shared/utils";
 
-import StyledModalDialog from "../styled-containers/StyledModalDialog";
+const StyledModalDialog = styled(ModalDialog)`
+  .heading {
+    font-size: 21px;
+  }
 
-const ResetConfirmationModal = (props) => {
-  const { t } = useTranslation(["SingleSignOn", "Common"]);
-  const { closeResetModal, confirmationResetModal, confirmReset } = props;
+  .generate {
+    font-weight: 600;
+  }
 
-  return (
-    <StyledModalDialog
-      contentHeight="100%"
-      displayType="modal"
-      onClose={closeResetModal}
-      visible={confirmationResetModal}
-    >
-      <ModalDialog.Header>{t("Common:Confirmation")}</ModalDialog.Header>
+  .text-area {
+    width: 488px !important;
+    height: 72px !important;
+    margin-top: 4px;
 
-      <ModalDialog.Body>
-        <Text noSelect>{t("ConfirmationText")}</Text>
-      </ModalDialog.Body>
+    &-label {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
 
-      <ModalDialog.Footer>
-        <Button
-          id="ok-button"
-          label={t("Common:OKButton")}
-          onClick={confirmReset}
-          primary
-          scale
-          size="normal"
-        />
-        <Button
-          id="cancel-button"
-          label={t("Common:CancelButton")}
-          onClick={closeResetModal}
-          scale
-          size="normal"
-        />
-      </ModalDialog.Footer>
-    </StyledModalDialog>
-  );
-};
+    @media ${mobile} {
+      width: 100% !important;
+    }
+  }
+  .text-area-label {
+    margin-top: 16px;
+  }
 
-export default inject(({ ssoStore }) => {
-  const { closeResetModal, confirmationResetModal, confirmReset } = ssoStore;
+  .modal-combo {
+    margin: 16px 0 0 0;
+  }
+`;
 
-  return { closeResetModal, confirmationResetModal, confirmReset };
-})(observer(ResetConfirmationModal));
+export default StyledModalDialog;

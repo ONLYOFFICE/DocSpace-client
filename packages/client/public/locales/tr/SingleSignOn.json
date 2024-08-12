@@ -1,4 +1,4 @@
-{
+﻿{
   "AddCertificate": "Sertifika ekle",
   "AdvancedSettings": "Gelişmiş Ayarlar",
   "AdvancedSettingsTooltip": "Varsayılan kimlik doğrulama sayfasını gizle ve otomatik olarak SSO hizmetine yönlendir.",
@@ -6,7 +6,6 @@
   "AttributeMatchingTooltip": "Tekli Oturum Açma öznitelikleri 'Hesaplar' bölümündeki girişlere karşılık gelir.",
   "Binding": "Bağlayıcı:",
   "CertificateExist": "Aynı eylem türüne sahip sertifika zaten var",
-  "ConfirmationText": "Girdiğiniz tüm veriler kaybolacak. Devam etmek istediğinize emin misiniz?",
   "CustomEntryButton": "Özel oturum açma düğmesi başlığı",
   "CustomEntryTooltip": "Tek Oturum Açma hizmetiyle alana giriş yapmak için kullanılan düğmenin başlığı",
   "DownloadMetadataXML": "SP meta veri XML'sini indirin",

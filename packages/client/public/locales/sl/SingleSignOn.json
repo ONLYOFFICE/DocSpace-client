@@ -1,4 +1,4 @@
-{
+﻿{
   "AddCertificate": "Dodaj certifikat",
   "AdvancedSettings": "Napredne nastavitve",
   "AdvancedSettingsTooltip": "Skrij privzeto stran za avtentikacijo in samodejno preusmeri na storitev SSO.",
@@ -6,7 +6,6 @@
   "AttributeMatchingTooltip": "Ujemanje atributov enotne prijave z vnosi v razdelku 'Računi'.",
   "Binding": "Vezava:",
   "CertificateExist": "Certifikat z isto vrsto akcije že obstaja",
-  "ConfirmationText": "Vsi vneseni podatki bodo izgubljeni. Ali ste prepričani, da želite nadaljevati?",
   "CustomEntryButton": "Prilagojen naslov gumba za prijavo",
   "CustomEntryTooltip": "Napis za gumbu za prijavo v prostor s storitvijo enkratne prijave",
   "DownloadMetadataXML": "Prenesi SP metapodatke v XML",

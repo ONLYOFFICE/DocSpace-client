@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "O aplikácii",
   "AboutCompanyTitle": "O programe",
   "AccessDenied": "Prístup bol zamietnutý",
@@ -55,6 +55,7 @@
   "CommonFiles": "Spoločné súbory",
   "CompanyName": "Meno spoločnosti",
   "Confirmation": "Potvrdenie",
+  "ConfirmationText": "Všetky zadané údaje sa stratia. Ste si istý, že chcete pokračovať?",
   "ConflictResolveSelectAction": "Vyberte akciu:",
   "Connect": "Pripojiť",
   "Content": "Obsah",

@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Informationen",
   "AboutCompanyTitle": "Über diese Software",
   "AccessDenied": "Zugriff verweigert",
@@ -55,6 +55,7 @@
   "CommonFiles": "Gemeinsame Dateien",
   "CompanyName": "Name des Unternehmens",
   "Confirmation": "Bestätigung",
+  "ConfirmationText": "Alle von Ihnen eingegebenen Daten gehen verloren. Sind Sie sicher, dass Sie fortfahren möchten?",
   "ConflictResolveSelectAction": "Bitte wählen Sie die Aktion aus:",
   "Connect": "Verbinden",
   "Content": "Inhalt",

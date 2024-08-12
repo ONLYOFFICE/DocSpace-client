@@ -637,7 +637,7 @@ class GroupsStore {
   updateGroup = async (
     groupId: string,
     groupName: string,
-    groupManagerId: string,
+    groupManagerId: string | undefined,
     membersToAdd: string[],
     membersToRemove: string[],
   ) => {

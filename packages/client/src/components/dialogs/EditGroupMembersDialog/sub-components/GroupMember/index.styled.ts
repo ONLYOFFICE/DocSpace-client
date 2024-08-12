@@ -42,9 +42,13 @@ export const GroupMember = styled.div<{ isExpect: boolean }>`
     overflow: auto;
   }
 
-  .name-wrapper,
+  .info,
   .role-email {
     display: flex;
+  }
+
+  .info {
+    flex-direction: column;
   }
 
   .name {
@@ -57,6 +61,15 @@ export const GroupMember = styled.div<{ isExpect: boolean }>`
     text-overflow: ellipsis;
     ${(props) =>
       props.isExpect && `color: ${props.theme.infoPanel.members.isExpectName}`};
+  }
+
+  .email {
+    color: ${({ theme }) => theme.sideBarRow.metaDataColor};
+    font-size: 12px;
+    line-height: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .me-label {

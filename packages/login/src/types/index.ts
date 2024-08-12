@@ -43,6 +43,7 @@ export type TDataContext = {
 
 export type GreetingContainersProps = {
   greetingSettings?: string;
+  culture?: string;
 };
 
 export type LoginProps = {

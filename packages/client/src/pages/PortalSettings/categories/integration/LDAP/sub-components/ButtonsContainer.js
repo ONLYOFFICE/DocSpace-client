@@ -36,6 +36,8 @@ import ProgressContainer from "./ProgressContainer";
 
 import { DeviceType, LDAPOperation } from "@docspace/shared/enums";
 
+import ResetConfirmationModal from "SRC_DIR/components/dialogs/ResetConfirmationDialog/ResetConfirmationModal";
+
 const ButtonContainer = ({
   saveLdapSettings,
   restoreToDefault,
@@ -48,6 +50,10 @@ const ButtonContainer = ({
   isMobileView,
 
   hasProgressError,
+
+  confirmationResetModal,
+  closeResetModal,
+  openResetModal,
 }) => {
   const { t } = useTranslation(["Settings", "Common"]);
 
@@ -56,6 +62,7 @@ const ButtonContainer = ({
   }, [saveLdapSettings, t]);
 
   const onResetClick = React.useCallback(() => {
+    closeResetModal();
     restoreToDefault(t).catch((e) => toastr.error(e));
   }, [restoreToDefault, t]);
 
@@ -76,7 +83,7 @@ const ButtonContainer = ({
       <SaveCancelButtons
         className="save-cancel-buttons"
         onSaveClick={onSaveClick}
-        onCancelClick={onResetClick}
+        onCancelClick={openResetModal}
         saveButtonLabel={t("Common:SaveButton")}
         cancelButtonLabel={t("Settings:DefaultSettings")}
         displaySettings={true}
@@ -89,6 +96,13 @@ const ButtonContainer = ({
         showReminder={null}
         getTopComponent={getTopComponent}
       />
+      {confirmationResetModal && (
+        <ResetConfirmationModal
+          closeResetModal={closeResetModal}
+          confirmReset={onResetClick}
+          confirmationResetModal={confirmationResetModal}
+        />
+      )}
     </Box>
   );
 };
@@ -104,6 +118,9 @@ export default inject(({ settingsStore, ldapStore }) => {
     isUIDisabled,
 
     progressStatus,
+    confirmationResetModal,
+    closeResetModal,
+    openResetModal,
   } = ldapStore;
 
   const { currentDeviceType } = settingsStore;
@@ -123,5 +140,9 @@ export default inject(({ settingsStore, ldapStore }) => {
 
     isMobileView,
     hasProgressError: !!error,
+
+    confirmationResetModal,
+    closeResetModal,
+    openResetModal,
   };
 })(observer(ButtonContainer));

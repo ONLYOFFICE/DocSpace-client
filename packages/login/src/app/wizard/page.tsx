@@ -44,14 +44,6 @@ async function Page() {
     redirect("/");
   }
 
-  const passwordSettingsData = getPortalPasswordSettings(
-    objectSettings?.wizardToken,
-  );
-  const machineNameData = getMachineName(objectSettings?.wizardToken);
-  const isRequiredLicenseData = getIsLicenseRequired();
-  const portalTimeZonesData = getPortalTimeZones(objectSettings?.wizardToken);
-  const portalCulturesData = getPortalCultures();
-
   const [
     passwordSettings,
     machineName,
@@ -59,11 +51,11 @@ async function Page() {
     portalTimeZones,
     portalCultures,
   ] = await Promise.all([
-    passwordSettingsData,
-    machineNameData,
-    isRequiredLicenseData,
-    portalTimeZonesData,
-    portalCulturesData,
+    getPortalPasswordSettings(objectSettings?.wizardToken),
+    getMachineName(objectSettings?.wizardToken),
+    getIsLicenseRequired(),
+    getPortalTimeZones(objectSettings?.wizardToken),
+    getPortalCultures(),
   ]);
 
   return (

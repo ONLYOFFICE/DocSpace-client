@@ -26,21 +26,7 @@
 
 import styled, { css } from "styled-components";
 import { Base, TTheme, globalColors } from "../../themes";
-import { mobile, isMobile, getCorrectFourValuesStyle } from "../../utils";
-
-const styledTabletView = css<{ articleWidth: number }>`
-  position: fixed;
-  width: ${(props) => props.theme.newContextMenu.devices.tabletWidth};
-  max-width: ${(props) => props.theme.newContextMenu.devices.tabletWidth};
-  max-height: ${(props) => props.theme.newContextMenu.devices.maxHeight};
-  inset-inline-start: ${(props) =>
-    props.articleWidth
-      ? `${props.articleWidth}px`
-      : props.theme.newContextMenu.devices.left};
-  inset-inline-end: ${(props) => props.theme.newContextMenu.devices.right};
-  bottom: ${(props) => props.theme.newContextMenu.devices.bottom};
-  margin: ${(props) => props.theme.newContextMenu.devices.margin};
-`;
+import { mobile, getCorrectFourValuesStyle } from "../../utils";
 
 const styledMobileView = css`
   position: fixed;
@@ -98,10 +84,6 @@ const StyledContextMenu = styled.div<{
     -moz-box-shadow: ${(props) => props.theme.newContextMenu.boxShadow};
     -webkit-box-shadow: ${(props) => props.theme.newContextMenu.boxShadow};
 
-    @media ${mobile} {
-      ${(props) => props.changeView && styledMobileView}
-    }
-
     .scroll-body {
       display: flex;
       flex-direction: column;
@@ -109,11 +91,6 @@ const StyledContextMenu = styled.div<{
 
       padding-inline-end: 0 !important;
     }
-
-    ${!isMobile() &&
-    css`
-      max-width: calc(100vw - 32px);
-    `}
   }
 
   .contextmenu-header {
@@ -201,11 +178,6 @@ const StyledContextMenu = styled.div<{
     margin: 0;
     padding: 0;
     list-style: none;
-
-    ${!isMobile() &&
-    css`
-      max-width: calc(100vw - 32px);
-    `}
   }
 
   .p-contextmenu .p-submenu-list {
@@ -376,6 +348,16 @@ const StyledContextMenu = styled.div<{
   .p-contextmenu-enter-active {
     opacity: 1;
     transition: opacity 250ms;
+  }
+
+  .p-contextmenu {
+    @media ${mobile} {
+      ${(props) => props.changeView && styledMobileView}
+    }
+
+    @media not ${mobile} {
+      max-width: calc(100vw - 32px);
+    }
   }
 `;
 

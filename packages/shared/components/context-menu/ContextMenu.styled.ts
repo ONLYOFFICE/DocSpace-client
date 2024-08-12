@@ -359,6 +359,12 @@ const StyledContextMenu = styled.div<{
       max-width: calc(100vw - 32px);
     }
   }
+
+  .p-contextmenu ul {
+    @media not ${mobile} {
+      max-width: calc(100vw - 32px);
+    }
+  }
 `;
 
 StyledContextMenu.defaultProps = {

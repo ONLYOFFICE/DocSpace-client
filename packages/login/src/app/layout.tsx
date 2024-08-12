@@ -34,7 +34,12 @@ import { LANGUAGE, SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 
 import StyledComponentsRegistry from "@/utils/registry";
 import { Providers } from "@/providers";
-import { getColorTheme, getConfig, getSettings } from "@/utils/actions";
+import {
+  getColorTheme,
+  getConfig,
+  getSettings,
+  getUser,
+} from "@/utils/actions";
 
 import "../styles/globals.scss";
 
@@ -57,9 +62,10 @@ export default async function RootLayout({
 
   let redirectUrl = "";
 
-  const [settings, colorTheme] = await Promise.all([
+  const [settings, colorTheme, user] = await Promise.all([
     getSettings(),
     getColorTheme(),
+    getUser(),
   ]);
 
   if (settings === "access-restricted") redirectUrl = `/${settings}`;
@@ -123,6 +129,7 @@ export default async function RootLayout({
               systemTheme: systemTheme?.value as ThemeKeys,
             }}
             redirectURL={redirectUrl}
+            user={user}
           >
             <Toast isSSR />
             {children}

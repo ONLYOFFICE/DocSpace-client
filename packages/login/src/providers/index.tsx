@@ -47,10 +47,12 @@ export const Providers = ({
   children,
   value,
   redirectURL,
+  user,
 }: {
   children: React.ReactNode;
   value: TDataContext;
   redirectURL: string;
+  user?: TUser;
 }) => {
   const firebaseHelper = new FirebaseHelper(
     value.settings?.firebase ?? ({} as TFirebaseSettings),
@@ -75,6 +77,7 @@ export const Providers = ({
   });
 
   const { theme, currentColorTheme } = useTheme({
+    user,
     colorTheme: value.colorTheme,
     systemTheme: value.systemTheme,
     i18n,

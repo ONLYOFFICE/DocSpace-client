@@ -59,8 +59,9 @@ const SimulatePassword = memo(
     isDisabled = false,
     hasError = false,
     forwardedRef,
+    inputValue,
   }) => {
-    const [password, setPassword] = useState("");
+    const [password, setPassword] = useState(inputValue ?? "");
     const [caretPosition, setCaretPosition] = useState();
     const [inputType, setInputType] = useState("password");
 
@@ -141,6 +142,10 @@ const SimulatePassword = memo(
     useEffect(() => {
       isDisabled && inputType !== "password" && setInputType("password");
     }, [isDisabled]);
+
+    useEffect(() => {
+      setPassword(inputValue);
+    }, [inputValue]);
 
     return (
       <StyledBody

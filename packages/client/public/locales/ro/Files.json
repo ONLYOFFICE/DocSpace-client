@@ -92,6 +92,7 @@
   "LinkDisabledSuccessfully": "Link-ul a fost dezactivat cu succes",
   "LinkEditedSuccessfully": "Link-ul a fost modificat și copiat cu succes",
   "LinkEnabledSuccessfully": "Link-ul a fost activat cu succes",
+  "LinkForPortalUsers": "Linkul pentru utilizatorii {{productName}}",
   "LinkSettings": "Setări link",
   "LinkSuccessfullyCreatedAndCopied": "Link-ul a fost creat și copiat cu succes în clipboard",
   "LinkValidUntil": "Acest link va fi valabil până la",

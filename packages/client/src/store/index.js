@@ -261,6 +261,7 @@ const profileActionsStore = new ProfileActionsStore(
   pluginStore,
   userStore,
   settingsStore,
+  currentTariffStatusStore,
 );
 
 peopleStore.profileActionsStore = profileActionsStore;

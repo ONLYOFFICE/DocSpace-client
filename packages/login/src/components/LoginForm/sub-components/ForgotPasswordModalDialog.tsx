@@ -49,7 +49,7 @@ const ForgotPasswordModalDialog = ({
   userEmail,
   onDialogClose,
 }: ForgotPasswordModalDialogProps) => {
-  const [email, setEmail] = useState(userEmail);
+  const [email, setEmail] = useState(userEmail ?? "");
   const [emailError, setEmailError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorText, setErrorText] = useState("");

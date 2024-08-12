@@ -5,6 +5,7 @@
   "ExpiredCode": "Dany kod jest już nieważny. Poproś o nowy kod i spróbuj ponownie.",
   "ForgotPassword": "Nie pamiętasz hasła?",
   "InvalidCode": "Dany kod jest nieprawidłowy. Spróbuj ponownie.",
+  "LDAPUsernamePlaceholder": "Nazwa użytkownika {{ldap_domain}}",
   "MessageAuthorize": "Zaloguj się, aby kontynuować",
   "MessageEmailConfirmed": "Twój e-mail został pomyślnie aktywowany.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Podaj adres e-mail użyty podczas rejestracji. Instrukcje dotyczące odzyskiwania hasła zostaną wysłane pod wskazany adres.",
@@ -20,5 +21,7 @@
   "RegistrationEmailWatermark": "E-mail",
   "RememberHelper": "Domyślny czas trwania sesji to 20 min. Zaznacz tę opcję, aby ustawić go na 1 rok. Aby ustawić wartość niestandardową, przejdź do Ustawień.",
   "ResendCode": "Wyślij kod jeszcze raz",
+  "SignInLDAP": "Zaloguj się: {{ldap_domain}}",
+  "SignInLdapHelper": "Użyj danych uwierzytelniających domeny firmowej",
   "UserIsAlreadyRegistered": "Użytkownik <1>{{email}}</1>  jest już zarejestrowany w tym {{productName}}, wpisz swoje hasło lub wróć, aby kontynuować z innym adresem e-mail."
 }

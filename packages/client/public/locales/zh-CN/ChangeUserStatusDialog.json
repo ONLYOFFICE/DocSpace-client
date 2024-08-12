@@ -1,11 +1,11 @@
 {
   "DisableGeneralDescription": "如有需要，您可以稍后删除或启用已禁用的用户。请注意，您无法禁用某些用户，如所有者和您自己。",
   "DisableUser": "禁用用户",
-  "DisableUserDescription": " 如果您禁用此用户，他们将无法登录{{productName}}，但他们的文档和数据将保持不变。",
+  "DisableUserDescription": " 如果您禁用此用户，他们将无法登录{{productName}}，但他们的文档和数据将保持不变。",
   "DisableUsers": "禁用用户",
-  "DisableUsersDescription": " 如果您禁用这些用户，他们将无法登录{{productName}}，但他们的文档和数据将保持不变。",
+  "DisableUsersDescription": " 如果您禁用这些用户，他们将无法登录{{productName}}，但他们的文档和数据将保持不变。",
   "EnableUser": "启用用户",
-  "EnableUserDescription": " 如果您启用此用户，他们将能够再次登录{{productName}}并访问他们的文档和数据。",
+  "EnableUserDescription": " 如果您启用此用户，他们将能够再次登录{{productName}}并访问他们的文档和数据。",
   "EnableUsers": "启用用户",
   "EnableUsersDescription": "如果您启用这些用户，他们将能够再次登录{{productName}}并访问他们的文档和数据。"
 }

@@ -1,6 +1,6 @@
 {
   "ActiveSessions": "Активні сеанси",
-  "AutoDeleteTitle": "Усі сеанси старше 60 днів будуть автоматично видалені.",
+  "AutoDeleteTitle": "Усі сеанси старше 60 днів будуть автоматично видалені.",
   "ChangeEmailSuccess": "Електронну пошту успішно змінено ",
   "ChangePasswordAfterLoggingOut": "Змінити пароль після виходу",
   "ConnectSocialNetworks": "Під’єднати соціальні мережі",
@@ -15,7 +15,6 @@
   "InterfaceTheme": "Тема інтерфейсу",
   "LightTheme": "Світла тема",
   "LogoutActiveConnection": "Вийти з активного з’єднання",
-  "LogoutAllActiveConnections": "Вийти з усіх активних з’єднань",
   "LogoutAllActiveSessionsDescription": "Для всіх активних з’єднань, окрім цього, яке зараз використовується, буде здійснено вихід із системи.",
   "LogoutBtn": "Вийти",
   "LogoutDescription": "Примітка. Для всіх активних з’єднань, окрім цього, яке зараз використовується, буде здійснено вихід із системи.",

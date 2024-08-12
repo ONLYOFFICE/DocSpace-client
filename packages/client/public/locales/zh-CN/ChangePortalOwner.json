@@ -1,14 +1,14 @@
 {
   "AppointAdmin": "预约管理员",
-  "BackupPortal": " 备份{{productName}}数据",
-  "ChangeInstruction": " 要更改{{productName}}所有者，请在下面选择新所有者的姓名。",
-  "ChangeOwner": " 更改{{productName}}所有者",
+  "BackupPortal": " 备份{{productName}}数据",
+  "ChangeInstruction": " 要更改{{productName}}所有者，请在下面选择新所有者的姓名。",
+  "ChangeOwner": " 更改{{productName}}所有者",
   "ChangeUser": "变更用户",
-  "DeactivateOrDeletePortal": " 停用或删除{{productName}}",
+  "DeactivateOrDeletePortal": "停用或删除{{productName}}",
   "DoTheSame": "与管理员进行相同操作",
-  "ManagePortal": " 管理{{productName}}配置",
+  "ManagePortal": " 管理{{productName}}配置",
   "ManageUser": "管理用户账户",
-  "NewPortalOwner": " 新{{productName}}所有者",
-  "PortalOwnerCan": " {{productName}}所有者可以：",
+  "NewPortalOwner": " 新{{productName}}所有者",
+  "PortalOwnerCan": " {{productName}}所有者可以：",
   "SetAccessRights": "设置访问权限"
 }

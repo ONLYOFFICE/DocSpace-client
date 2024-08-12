@@ -3018,9 +3018,9 @@ export const getBaseTheme = () => {
     tag: {
       color: black,
       deletedColor: gray,
-      background: lightGrayHover,
-      hoverBackground: grayLightMid,
-      disabledBackground: grayLight,
+      background: grayLightMid,
+      hoverBackground: lightGraySelected,
+      disabledBackground: grayLightMid,
       deletedBackground: grayLight,
       defaultTagColor: black,
       newTagBackground: grayLightMid,

@@ -49,6 +49,7 @@ export const AccessRightSelectPure = ({
   className,
   isSelectionDisabled,
   selectionErrorText,
+  availableAccess,
   ...props
 }: AccessRightSelectProps) => {
   const [currentItem, setCurrentItem] = useState(selectedOption);
@@ -62,7 +63,11 @@ export const AccessRightSelectPure = ({
       if (option) {
         if (!isSelectionDisabled) setCurrentItem(option);
 
-        if (isSelectionDisabled && option.access !== selectedOption.access) {
+        const isError = availableAccess
+          ? availableAccess !== option.access
+          : option.access !== selectedOption.access;
+
+        if (isSelectionDisabled && isError) {
           toastr.error(selectionErrorText);
           return;
         }

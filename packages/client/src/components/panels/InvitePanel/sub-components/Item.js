@@ -50,6 +50,7 @@ import { filterGroupRoleOptions, filterUserRoleOptions } from "SRC_DIR/helpers";
 import AccessSelector from "../../../AccessSelector";
 
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
+import { EmployeeType } from "@docspace/shared/enums";
 
 const Item = ({
   t,
@@ -261,6 +262,7 @@ const Item = ({
             noBorder
             isSelectionDisabled={isPaidUserLimit}
             selectionErrorText={<PaidQuotaLimitError />}
+            availableAccess={EmployeeType.Guest}
           />
         </>
       )}

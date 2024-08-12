@@ -73,25 +73,36 @@ const ExternalLinks = ({
   getPortalInviteLink,
   isPaidUserLimit,
 }) => {
+  const [isLinksToggling, setIsLinksToggling] = useState(false);
+
   const [actionLinksVisible, setActionLinksVisible] = useState(false);
 
   const inputsRef = useRef();
 
   const toggleLinks = async (e) => {
-    if (roomId === -1) {
-      if (e?.target?.checked) {
-        const link = shareLinks.find((l) => l.access === defaultAccess);
+    if (isLinksToggling) return;
 
-        link.shareLink = await getPortalInviteLink(defaultAccess);
+    setIsLinksToggling(true);
 
-        setActiveLink(link);
-        copyLink(link.shareLink);
+    try {
+      if (roomId === -1) {
+        if (e?.target?.checked) {
+          const link = shareLinks.find((l) => l.access === defaultAccess);
+
+          link.shareLink = await getPortalInviteLink(defaultAccess);
+
+          setActiveLink(link);
+          copyLink(link.shareLink);
+        }
+      } else {
+        !externalLinksVisible ? editLink() : disableLink();
       }
-    } else {
-      !externalLinksVisible ? editLink() : disableLink();
+      onChangeExternalLinksVisible(!externalLinksVisible);
+    } catch (error) {
+      toastr.error(error.message);
+    } finally {
+      setIsLinksToggling(false);
     }
-
-    onChangeExternalLinksVisible(!externalLinksVisible);
   };
 
   const disableLink = () => {
@@ -232,6 +243,7 @@ const ExternalLinks = ({
           className="invite-via-link"
           isChecked={externalLinksVisible}
           onChange={toggleLinks}
+          isDisabled={isLinksToggling}
         />
       </StyledSubHeader>
       <StyledDescription>

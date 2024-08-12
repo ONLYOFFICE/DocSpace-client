@@ -37,6 +37,8 @@ const StyledLabel = styled.label<{
   position: relative;
   margin: 0;
 
+  line-height: 16px;
+
   user-select: none;
   -o-user-select: none;
   -moz-user-select: none;

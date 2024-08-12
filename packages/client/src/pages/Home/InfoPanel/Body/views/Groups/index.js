@@ -26,13 +26,22 @@
 
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import * as Styled from "../../styles/groups.styled";
+import { useParams } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+
 import withLoader from "@docspace/client/src/HOCs/withLoader";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
+import api from "@docspace/shared/api";
+import AccountsFilter from "@docspace/shared/api/people/filter";
+import {
+  MIN_LOADER_TIMER,
+  SHOW_LOADER_TIMER,
+} from "@docspace/shared/selectors/Files/FilesSelector.constants";
+
 import GroupMember from "./GroupMember";
+import * as Styled from "../../styles/groups.styled";
 import useFetchGroup from "./useFetchGroup";
-import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { GroupMembersList } from "./GroupMembersList/GroupMembersList";
 
 const Groups = ({
   infoPanelSelection,
@@ -41,7 +50,14 @@ const Groups = ({
   infoPanelSelectedGroup,
   setInfoPanelSelectedGroup,
 }) => {
-  const [isShowLoader, setIsShowLoader] = useState(false);
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
+  const [showLoader, setShowLoader] = useState(false);
+  const [groupMembers, setGroupMembers] = useState(null);
+  const [total, setTotal] = useState(0);
+
+  const abortControllerRef = useRef(new AbortController());
+  const startLoader = useRef(null);
+  const loaderTimeout = useRef(null);
 
   const { groupId: paramsGroupId } = useParams();
   const isInsideGroup = !!paramsGroupId;
@@ -51,32 +67,121 @@ const Groups = ({
   const groupId = isInsideGroup ? paramsGroupId : infoPanelSelection?.id;
   const setGroup = isInsideGroup ? setCurrentGroup : setInfoPanelSelectedGroup;
 
+  const groupManager = group?.manager;
+
+  const loadNextPage = async (startIndex) => {
+    try {
+      abortControllerRef.current = new AbortController();
+
+      const pageCount = 100;
+      const filter = AccountsFilter.getDefault();
+      filter.group = groupId;
+      filter.page = Math.ceil(startIndex / pageCount);
+      filter.pageCount = pageCount;
+
+      const res = await api.people.getUserList(
+        filter,
+        abortControllerRef.current.signal,
+      );
+
+      const membersWithoutManager = groupManager
+        ? res.items.filter((item) => item.id !== groupManager.id)
+        : res.items;
+
+      setTotal(res.total);
+      if (startIndex === 0 || !groupMembers) {
+        setGroupMembers(membersWithoutManager);
+      } else {
+        setGroupMembers([...groupMembers, ...membersWithoutManager]);
+      }
+    } catch (e) {
+      console.log(e);
+    } finally {
+      if (startIndex === 0) {
+        setIsFirstLoad(false);
+      }
+    }
+  };
+
+  const calculateLoader = () => {
+    if (isFirstLoad) {
+      loaderTimeout.current = setTimeout(() => {
+        startLoader.current = new Date();
+        setShowLoader(true);
+      }, SHOW_LOADER_TIMER);
+    } else if (startLoader.current) {
+      const currentDate = new Date();
+
+      const ms = Math.abs(
+        startLoader.current.getTime() - currentDate.getTime(),
+      );
+
+      if (ms >= MIN_LOADER_TIMER) {
+        startLoader.current = null;
+        return setShowLoader(false);
+      }
+
+      setTimeout(() => {
+        startLoader.current = null;
+        setShowLoader(false);
+      }, MIN_LOADER_TIMER - ms);
+
+      loaderTimeout.current = null;
+    } else if (loaderTimeout.current) {
+      clearTimeout(loaderTimeout.current);
+      loaderTimeout.current = null;
+    }
+  };
+
   useFetchGroup(groupId, group?.id, setGroup);
 
   useEffect(() => {
-    const showLoaderTimer = setTimeout(() => setIsShowLoader(true), 500);
-    return () => clearTimeout(showLoaderTimer);
+    setIsFirstLoad(true);
+  }, [infoPanelSelection.id]);
+
+  useEffect(() => {
+    if (group) {
+      loadNextPage(0);
+    }
+
+    return () => {
+      abortControllerRef.current.abort();
+    };
+  }, [group]);
+
+  useEffect(() => {
+    calculateLoader();
+  }, [isFirstLoad]);
+
+  useEffect(() => {
+    return () => {
+      loaderTimeout.current = null;
+    };
   }, []);
 
-  const groupManager = group?.manager;
-  const groupMembers = group?.members?.filter(
-    (user) => user.id !== groupManager?.id,
-  );
-
-  if (!group) {
-    if (isShowLoader) return <InfoPanelViewLoader view="groups" />;
-    return null;
+  if (showLoader) {
+    return (
+      <Styled.GroupsContent>
+        <InfoPanelViewLoader view="groups" />
+      </Styled.GroupsContent>
+    );
   }
+
+  const totalWithoutManager = groupManager ? total - 1 : total;
 
   return (
     <Styled.GroupsContent>
-      {groupManager && <GroupMember groupMember={groupManager} isManager />}
-      {!groupMembers ? (
-        <InfoPanelViewLoader view="groups" />
-      ) : (
-        groupMembers?.map((groupMember) => (
-          <GroupMember key={groupMember.id} groupMember={groupMember} />
-        ))
+      {isFirstLoad || !groupMembers ? null : (
+        <>
+          {groupManager && <GroupMember groupMember={groupManager} isManager />}
+          <GroupMembersList
+            members={groupMembers}
+            hasNextPage={groupMembers.length < totalWithoutManager}
+            loadNextPage={loadNextPage}
+            total={totalWithoutManager}
+            managerId={groupManager?.id}
+          />
+        </>
       )}
     </Styled.GroupsContent>
   );

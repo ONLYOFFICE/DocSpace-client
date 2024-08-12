@@ -26,7 +26,7 @@
 
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
@@ -49,12 +49,13 @@ import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 
 import { getLogoUrl } from "@docspace/shared/utils";
+import { frameCallCommand } from "@docspace/shared/utils/common";
 import { useTheme } from "styled-components";
 import { ValidationStatus, WhiteLabelLogoType } from "@docspace/shared/enums";
 import { validatePublicRoomPassword } from "@docspace/shared/api/rooms";
 import Image from "next/image";
 
-const FilesPassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
+const FilePassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
   const { t } = useTranslation(["Common"]);
 
   const theme = useTheme();
@@ -63,6 +64,8 @@ const FilesPassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
   const [passwordValid, setPasswordValid] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => frameCallCommand("setIsLoaded"), []);
 
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
@@ -111,7 +114,7 @@ const FilesPassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
 
   return (
     <>
-      <StyledSimpleNav id="login-header">
+      <StyledSimpleNav id="public-room-password-header">
         <Image
           className="logo"
           src={logoUrl}
@@ -122,90 +125,92 @@ const FilesPassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
         />
       </StyledSimpleNav>
       <StyledPage>
-        <StyledContent className="public-room-content">
-          <StyledBody>
-            <Image
-              priority
-              src={logoUrl}
-              className="logo-wrapper"
-              alt="icon"
-              width={416}
-              height={200}
-            />
+        <div className="public-room_content-wrapper">
+          <StyledContent className="public-room-content">
+            <StyledBody>
+              <Image
+                priority
+                src={logoUrl}
+                className="logo-wrapper"
+                alt="icon"
+                width={386}
+                height={44}
+              />
 
-            <FormWrapper>
-              <div className="password-form">
-                <Text fontSize="16px" fontWeight="600">
-                  {t("Common:PasswordRequired")}
-                </Text>
-
-                <Text
-                  fontSize="13px"
-                  fontWeight="400"
-                  className="public-room-text"
-                >
-                  <Trans
-                    t={t}
-                    ns="Common"
-                    i18nKey="EnterPasswordDescription"
-                    values={{ fileName: entryTitle }}
-                    components={{ 1: <span className="bold" /> }}
-                  />
-                </Text>
-                <div className="public-room-name">
-                  <PublicRoomIcon className="public-room-icon" />
-                  <Text
-                    className="public-room-text"
-                    fontSize="15px"
-                    fontWeight="600"
-                  >
-                    {title}
+              <FormWrapper>
+                <div className="password-form">
+                  <Text fontSize="16px" fontWeight="600">
+                    {t("Common:PasswordRequired")}
                   </Text>
+
+                  <Text
+                    fontSize="13px"
+                    fontWeight="400"
+                    className="public-room-text"
+                  >
+                    <Trans
+                      t={t}
+                      ns="Common"
+                      i18nKey="EnterPasswordDescription"
+                      values={{ fileName: entryTitle }}
+                      components={{ 1: <span className="bold" /> }}
+                    />
+                  </Text>
+                  <div className="public-room-name">
+                    <PublicRoomIcon className="public-room-icon" />
+                    <Text
+                      className="public-room-text"
+                      fontSize="15px"
+                      fontWeight="600"
+                    >
+                      {title}
+                    </Text>
+                  </div>
+
+                  <FieldContainer
+                    isVertical={true}
+                    labelVisible={false}
+                    hasError={!!errorMessage}
+                    errorMessage={errorMessage}
+                  >
+                    <PasswordInput
+                      simpleView
+                      id="password"
+                      inputName="password"
+                      placeholder={t("Common:Password")}
+                      type={InputType.password}
+                      inputValue={password}
+                      hasError={!!errorMessage}
+                      size={InputSize.large}
+                      scale
+                      tabIndex={1}
+                      autoComplete="current-password"
+                      onChange={onChangePassword}
+                      onKeyDown={onKeyPress}
+                      isDisabled={isLoading}
+                      isDisableTooltip
+                      isAutoFocussed
+                      // forwardedRef={inputRef}
+                    />
+                  </FieldContainer>
                 </div>
 
-                <FieldContainer
-                  isVertical={true}
-                  labelVisible={false}
-                  hasError={!!errorMessage}
-                  errorMessage={errorMessage}
-                >
-                  <PasswordInput
-                    simpleView
-                    id="password"
-                    inputName="password"
-                    placeholder={t("Common:Password")}
-                    type={InputType.password}
-                    inputValue={password}
-                    hasError={!!errorMessage}
-                    size={InputSize.large}
-                    scale
-                    tabIndex={1}
-                    autoComplete="current-password"
-                    onChange={onChangePassword}
-                    onKeyDown={onKeyPress}
-                    isDisabled={isLoading}
-                    isDisableTooltip
-                    isAutoFocussed
-                    // forwardedRef={inputRef}
-                  />
-                </FieldContainer>
-              </div>
-
-              <Button
-                primary
-                size={ButtonSize.medium}
-                scale
-                label={t("Common:ContinueButton")}
-                tabIndex={5}
-                onClick={onSubmit}
-                isDisabled={isLoading}
-              />
-            </FormWrapper>
-          </StyledBody>
-        </StyledContent>
+                <Button
+                  primary
+                  size={ButtonSize.medium}
+                  scale
+                  label={t("Common:ContinueButton")}
+                  tabIndex={5}
+                  onClick={onSubmit}
+                  isDisabled={isLoading}
+                />
+              </FormWrapper>
+            </StyledBody>
+          </StyledContent>
+        </div>
       </StyledPage>
     </>
   );
 };
 
-export default FilesPassword;
+export default FilePassword;

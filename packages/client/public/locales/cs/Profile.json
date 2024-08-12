@@ -15,7 +15,6 @@
   "InterfaceTheme": "Vzhled prostředí",
   "LightTheme": "Světlý motiv",
   "LogoutActiveConnection": "Odhlášení z aktivního připojení",
-  "LogoutAllActiveConnections": "Odhlášení ze všech aktivních připojení",
   "LogoutAllActiveSessionsDescription": "Všechna aktivní připojení kromě tohoto připojení budou odhlášena, protože jsou právě používána.",
   "LogoutBtn": "Odhlášení",
   "LogoutDescription": "Poznámka. Všechna aktivní připojení kromě tohoto připojení budou odhlášena, protože jsou právě používána.",

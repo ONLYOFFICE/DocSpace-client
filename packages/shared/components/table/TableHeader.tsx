@@ -79,6 +79,7 @@ class TableHeaderComponent extends React.Component<
       columnInfoPanelStorageName,
       sortBy,
       sorted,
+      resetColumnsSize,
     } = this.props;
 
     if (columnStorageName === prevProps.columnStorageName) {
@@ -104,6 +105,13 @@ class TableHeaderComponent extends React.Component<
           return this.resetColumns();
         }
       }
+    }
+
+    const storageSize =
+      !resetColumnsSize && localStorage.getItem(columnStorageName);
+
+    if (columns.length !== prevProps.columns.length && !storageSize) {
+      return this.resetColumns();
     }
 
     this.onResize();
@@ -224,6 +232,12 @@ class TableHeaderComponent extends React.Component<
     const maxSize = Math.max.apply(Math, clearSize);
 
     const defaultSize = columns[activeColumnIndex - 1].defaultSize;
+
+    if (!Array.isArray(clearSize)) {
+      console.log("addNewColumns clearSize", clearSize);
+      return true;
+    }
+
     const indexOfMaxSize = clearSize.findLastIndex((s) => s === maxSize);
 
     const addedColumn = 1;

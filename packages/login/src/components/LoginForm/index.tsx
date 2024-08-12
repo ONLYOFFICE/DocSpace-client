@@ -38,6 +38,7 @@ import { useTranslation } from "react-i18next";
 import ReCAPTCHA from "react-google-recaptcha";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { useTheme } from "styled-components";
+import { Id } from "react-toastify";
 import { useSearchParams } from "next/navigation";
 
 import { Text } from "@docspace/shared/components/text";
@@ -52,6 +53,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { thirdPartyLogin, checkConfirmLink } from "@docspace/shared/api/user";
 import { setWithCredentialsStatus } from "@docspace/shared/api/client";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
+import { RecaptchaType } from "@docspace/shared/enums";
 
 import { LoginFormProps } from "@/types";
 import { getEmailFromInvitation, getConfirmDataFromInvitation } from "@/utils";
@@ -59,11 +61,11 @@ import { getEmailFromInvitation, getConfirmDataFromInvitation } from "@/utils";
 import EmailContainer from "./sub-components/EmailContainer";
 import PasswordContainer from "./sub-components/PasswordContainer";
 import ForgotContainer from "./sub-components/ForgotContainer";
+import LDAPContainer from "./sub-components/LDAPContainer";
+
+import { LoginDispatchContext, LoginValueContext } from "../Login";
 
 import { StyledCaptcha } from "./LoginForm.styled";
-import { LoginDispatchContext, LoginValueContext } from "../Login";
-import LDAPContainer from "./sub-components/LDAPContainer";
-import { RecaptchaType } from "@docspace/shared/enums";
 
 let showToastr = true;
 
@@ -72,10 +74,12 @@ const LoginForm = ({
   cookieSettingsEnabled,
   reCaptchaPublicKey,
   reCaptchaType,
+  ldapDomain,
+  ldapEnabled,
 }: LoginFormProps) => {
-  const { isLoading, isModalOpen, ldapDomain } = useContext(LoginValueContext);
+  const { isLoading, isModalOpen } = useContext(LoginValueContext);
   const { setIsLoading } = useContext(LoginDispatchContext);
-  const toastId = useRef(null);
+  const toastId = useRef<Id>();
 
   const searchParams = useSearchParams();
 
@@ -417,7 +421,7 @@ const LoginForm = ({
         onChangeCheckbox={onChangeCheckbox}
       />
 
-      {ldapDomain && (
+      {ldapDomain && ldapEnabled && (
         <LDAPContainer
           ldapDomain={ldapDomain}
           isLdapLoginChecked={isLdapLoginChecked}

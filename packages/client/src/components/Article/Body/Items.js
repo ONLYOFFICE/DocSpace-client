@@ -421,9 +421,11 @@ export default inject(
     clientLoadingStore,
     userStore,
     settingsStore,
+    currentTariffStatusStore,
   }) => {
-    const { isCommunity, isPaymentPageAvailable, currentDeviceType } =
-      authStore;
+    const { isPaymentPageAvailable, currentDeviceType } = authStore;
+    const { isCommunity } = currentTariffStatusStore;
+
     const { showText, currentColorScheme } = settingsStore;
 
     const {

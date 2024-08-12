@@ -45,7 +45,7 @@ const useFetchGroup = (groupId, fetchedGroupId, setGroup) => {
       setIsLoading(true);
     }
 
-    getGroupById(groupId, abortControllerRef.current?.signal)
+    getGroupById(groupId, false, abortControllerRef.current?.signal)
       .then((data) => {
         if (isMount.current) startTransition(() => setGroup(data));
       })

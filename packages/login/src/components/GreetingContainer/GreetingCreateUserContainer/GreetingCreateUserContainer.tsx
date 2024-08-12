@@ -39,19 +39,19 @@ import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import { DEFAULT_PORTAL_TEXT, DEFAULT_ROOM_TEXT } from "@/utils/constants";
 
-import { GreetingContainer } from "./GreetingCleateUserContainer.styled";
+import { GreetingContainer } from "./GreetingCreateUserContainer.styled";
 
-type GreetingCleateUserContainerProps = {
+type GreetingCreateUserContainerProps = {
   type: string;
   firstName?: string;
   lastName?: string;
 };
 
-export const GreetingCleateUserContainer = ({
+export const GreetingCreateUserContainer = ({
   type,
   firstName,
   lastName,
-}: GreetingCleateUserContainerProps) => {
+}: GreetingCreateUserContainerProps) => {
   const { t } = useTranslation(["Confirm", "Common"]);
   const theme = useTheme();
   const { roomData } = useContext(ConfirmRouteContext);

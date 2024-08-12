@@ -29,7 +29,7 @@ import { notFound } from "next/navigation";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 import CreateUserForm from "@/components/CreateUserForm";
-import { GreetingCleateUserContainer } from "@/components/GreetingContainer";
+import { GreetingCreateUserContainer } from "@/components/GreetingContainer";
 import { getStringFromSearchParams } from "@/utils";
 import { getSettings, getUserFromConfirm } from "@/utils/actions";
 import LanguageComboboxWrapper from "@/components/LanguageCombobox";
@@ -58,7 +58,7 @@ async function Page({ searchParams, params }: LinkInviteProps) {
         <LanguageComboboxWrapper />
         {settings && typeof settings !== "string" && (
           <>
-            <GreetingCleateUserContainer
+            <GreetingCreateUserContainer
               type={type}
               firstName={user?.firstName}
               lastName={user?.lastName}

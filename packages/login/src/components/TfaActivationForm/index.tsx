@@ -48,6 +48,7 @@ import { TColorScheme } from "@docspace/shared/themes";
 import { TPasswordHash } from "@docspace/shared/api/settings/types";
 import { loginWithTfaCode } from "@docspace/shared/api/user";
 import { validateTfaCode } from "@docspace/shared/api/settings";
+import { OPEN_BACKUP_CODES_DIALOG } from "@docspace/shared/constants";
 
 import {
   TFA_ANDROID_APP_URL,
@@ -56,8 +57,8 @@ import {
 } from "@/utils/constants";
 import withLoader from "@/HOCs/withLoader";
 import { TError, WithLoaderProps } from "@/types";
-import { ConfirmRouteContext } from "../ConfirmRoute";
 
+import { ConfirmRouteContext } from "../ConfirmRoute";
 import { GreetingContainer } from "../GreetingContainer";
 
 const PROXY_BASE_URL = combineUrl(window.ClientConfig?.proxy?.url, "/profile");
@@ -97,7 +98,7 @@ const TfaActivationForm = ({
         await validateTfaCode(code, confirmHeader);
       }
 
-      sessionStorage.setItem("openBackupCodesDialog", "true");
+      sessionStorage.setItem(OPEN_BACKUP_CODES_DIALOG, "true");
       window.location.href = PROXY_BASE_URL;
     } catch (error) {
       const knownError = error as TError;

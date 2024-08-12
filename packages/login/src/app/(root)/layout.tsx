@@ -36,6 +36,7 @@ import SimpleNav from "@/components/SimpleNav";
 import { LoginContent, LoginFormWrapper } from "@/components/Login";
 import GreetingContainer from "@/components/GreetingContainer";
 import { getColorTheme, getSettings } from "@/utils/actions";
+import { cookies } from "next/headers";
 
 const LanguageComboboxWrapper = dynamic(
   () => import("@/components/LanguageCombobox"),
@@ -60,9 +61,12 @@ export default async function Layout({
 
   const isRegisterContainerVisible = objectSettings?.enabledJoin;
 
+  const culture =
+    cookies().get("asc_language")?.value ?? objectSettings?.culture;
+
   return (
     <div style={{ width: "100%", height: "100%" }}>
-      <SimpleNav />
+      <SimpleNav culture={culture} />
       <LoginFormWrapper id="login-page" bgPattern={bgPattern}>
         <div className="bg-cover" />
         <Scrollbar id="customScrollBar">
@@ -74,6 +78,7 @@ export default async function Layout({
             >
               <GreetingContainer
                 greetingSettings={objectSettings?.greetingSettings}
+                culture={culture}
               />
               {children}
             </ColorTheme>

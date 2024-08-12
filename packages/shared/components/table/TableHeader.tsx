@@ -232,6 +232,12 @@ class TableHeaderComponent extends React.Component<
     const maxSize = Math.max.apply(Math, clearSize);
 
     const defaultSize = columns[activeColumnIndex - 1].defaultSize;
+
+    if (!Array.isArray(clearSize)) {
+      console.log("addNewColumns clearSize", clearSize);
+      return true;
+    }
+
     const indexOfMaxSize = clearSize.findLastIndex((s) => s === maxSize);
 
     const addedColumn = 1;

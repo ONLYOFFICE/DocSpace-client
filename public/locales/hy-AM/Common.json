@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Մասին",
   "AboutCompanyTitle": "Ծրագրի մասին",
   "AccessDenied": "Մուտքն արգելված է",
@@ -55,6 +55,7 @@
   "CommonFiles": "Ընդհանուր ֆայլեր",
   "CompanyName": "Ընկերության անվանում",
   "Confirmation": "Հաստատում",
+  "ConfirmationText": "Ձեր մուտքագրած բոլոր տվյալները կկորչեն: Վստա՞հ եք, որ ցանկանում եք շարունակել:",
   "ConflictResolveSelectAction": "Խնդրում ենք ընտրել գործողությունը:",
   "Connect": "Կապակցվել",
   "Content": "Բովանդակություն",

@@ -14,7 +14,6 @@ import delay from "lodash/delay";
 import { toastr } from "@docspace/shared/components/toast";
 
 const constants = {
-  NULL_PERCENT: 0,
   SSL_LDAP_PORT: 636,
   DEFAULT_LDAP_PORT: 389,
   GET_STATUS_TIMEOUT: 1000,
@@ -91,6 +90,8 @@ class LdapFormStore {
   serverSettings = {};
 
   currentQuotaStore = null;
+
+  confirmationResetModal = false;
 
   constructor(currentQuotaStore) {
     makeAutoObservable(this);
@@ -604,6 +605,15 @@ class LdapFormStore {
 
   setIsSslEnabled = (enabled) => {
     this.isSslEnabled = enabled;
+
+    if (
+      this.requiredSettings.portNumber == constants.DEFAULT_LDAP_PORT ||
+      this.requiredSettings.portNumber == constants.SSL_LDAP_PORT
+    ) {
+      this.setPortNumber(
+        enabled ? constants.SSL_LDAP_PORT : constants.DEFAULT_LDAP_PORT,
+      );
+    }
   };
 
   get isCronEnabled() {
@@ -660,6 +670,14 @@ class LdapFormStore {
       error: "",
       source: "",
     };
+  };
+
+  openResetModal = () => {
+    this.confirmationResetModal = true;
+  };
+
+  closeResetModal = () => {
+    this.confirmationResetModal = false;
   };
 
   get hasChanges() {

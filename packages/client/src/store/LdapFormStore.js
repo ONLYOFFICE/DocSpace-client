@@ -92,6 +92,8 @@ class LdapFormStore {
 
   currentQuotaStore = null;
 
+  confirmationResetModal = false;
+
   constructor(currentQuotaStore) {
     makeAutoObservable(this);
 
@@ -660,6 +662,14 @@ class LdapFormStore {
       error: "",
       source: "",
     };
+  };
+
+  openResetModal = () => {
+    this.confirmationResetModal = true;
+  };
+
+  closeResetModal = () => {
+    this.confirmationResetModal = false;
   };
 
   get hasChanges() {

@@ -33,6 +33,7 @@ import { useTranslation } from "react-i18next";
 import { getCookie } from "@docspace/shared/utils";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { checkConfirmLink, logout } from "@docspace/shared/api/user";
+import AppLoader from "@docspace/shared/components/app-loader";
 
 import { AuthenticatedAction, ValidationResult } from "@/utils/enums";
 import {
@@ -42,7 +43,6 @@ import {
   TError,
   TConfirmRouteContext,
 } from "@/types";
-import Loading from "@/app/(root)/confirm/loading";
 
 export const ConfirmRouteContext = createContext<TConfirmRouteContext>({
   linkData: {},
@@ -180,7 +180,7 @@ function ConfirmRoute(props: ConfirmRouteProps) {
   }
 
   if (loading) {
-    return <Loading />;
+    return <AppLoader />;
   }
 
   return (

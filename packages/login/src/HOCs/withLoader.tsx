@@ -46,10 +46,10 @@ import {
   getCapabilities,
   getPortalPasswordSettings,
 } from "@docspace/shared/api/settings";
+import AppLoader from "@docspace/shared/components/app-loader";
 
 import { TError, WithLoaderProps } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
-import Loading from "../app/(root)/confirm/loading";
 
 export default function withLoader<T extends WithLoaderProps>(
   WrappedComponent: ComponentType<T>,
@@ -168,7 +168,7 @@ export default function withLoader<T extends WithLoaderProps>(
         : true;
 
     if (!isLoaded) {
-      return <Loading />;
+      return <AppLoader />;
     }
 
     if (error) {

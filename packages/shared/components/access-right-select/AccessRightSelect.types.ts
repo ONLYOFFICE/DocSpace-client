@@ -51,5 +51,5 @@ export type AccessRightSelectProps = PropsFromCombobox & {
   accessOptions: ComboboxProps["options"];
   isSelectionDisabled?: boolean;
   selectionErrorText?: React.ReactNode;
-  availableAccess?: number;
+  availableAccess?: number[];
 };

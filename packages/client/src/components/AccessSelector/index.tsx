@@ -54,7 +54,7 @@ interface AccessSelectorProps {
   directionY?: string;
   isSelectionDisabled?: boolean;
   selectionErrorText: React.ReactNode;
-  availableAccess?: number;
+  availableAccess?: number[];
 }
 
 const AccessSelector: React.FC<AccessSelectorProps> = ({

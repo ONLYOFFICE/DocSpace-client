@@ -61,17 +61,21 @@ export const AccessRightSelectPure = ({
   const onSelectCurrentItem = useCallback(
     (option: TOption) => {
       if (option) {
-        if (!isSelectionDisabled) setCurrentItem(option);
+        if (isSelectionDisabled) {
+          let isError =
+            option.access && option.access !== selectedOption.access;
 
-        const isError = availableAccess
-          ? availableAccess !== option.access
-          : option.access !== selectedOption.access;
+          if (availableAccess && option.access) {
+            isError = availableAccess.every((item) => item !== option.access);
+          }
 
-        if (isSelectionDisabled && isError) {
-          toastr.error(selectionErrorText);
-          return;
+          if (isError) {
+            toastr.error(selectionErrorText);
+            return;
+          }
         }
 
+        setCurrentItem(option);
         onSelect?.(option);
       }
     },

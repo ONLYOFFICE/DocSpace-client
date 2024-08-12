@@ -76,7 +76,7 @@ const Groups = ({
       const pageCount = 100;
       const filter = AccountsFilter.getDefault();
       filter.group = groupId;
-      filter.page = startIndex / pageCount;
+      filter.page = Math.ceil(startIndex / pageCount);
       filter.pageCount = pageCount;
 
       const res = await api.people.getUserList(

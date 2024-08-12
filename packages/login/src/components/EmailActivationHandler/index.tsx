@@ -31,9 +31,9 @@ import { useRouter } from "next/navigation";
 
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import AppLoader from "@docspace/shared/components/app-loader";
+import { updateActivationStatus } from "@docspace/shared/api/people";
 
 import { TError } from "@/types";
-import { updateActivationStatus } from "@/utils/actions";
 
 import { ConfirmRouteContext } from "../ConfirmRoute";
 

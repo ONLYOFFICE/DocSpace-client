@@ -30,7 +30,7 @@ import AppLoader from "@docspace/shared/components/app-loader";
 import { useContext, useEffect, useState } from "react";
 import { ConfirmRouteContext } from "../ConfirmRoute";
 import { TError } from "@/types";
-import { changeEmail } from "@/utils/actions";
+import { changeEmail } from "@docspace/shared/api/people";
 
 const EmailChangeHandler = () => {
   const [error, setError] = useState<string>();
@@ -39,7 +39,7 @@ const EmailChangeHandler = () => {
   const { email = "", uid = "", key = "" } = linkData;
 
   useEffect(() => {
-    changeEmail(email, uid, key)
+    changeEmail(uid, email, key)
       .then(() => {
         window.location.replace(`/profile?email_change=success`);
       })

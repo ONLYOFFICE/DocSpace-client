@@ -37,7 +37,7 @@ import { useContext, useState } from "react";
 import { TError, WithLoaderProps } from "@/types";
 import { ConfirmRouteContext } from "../ConfirmRoute";
 import { URL_ONLYOFFICE } from "@/utils/constants";
-import { deletePortal } from "@/utils/actions";
+import { deletePortal } from "@docspace/shared/api/portal";
 
 type RemovePortalFormProps = {
   siteUrl?: string;
@@ -55,8 +55,10 @@ const RemovePortalForm = ({ siteUrl }: RemovePortalFormProps) => {
     try {
       const res = await deletePortal(linkData.confirmHeader);
       setIsRemoved(true);
-      console.log("res", res);
-      setTimeout(() => (location.href = res ? res : url), 10000);
+      setTimeout(
+        () => (location.href = res && typeof res === "string" ? res : url),
+        10000,
+      );
     } catch (error) {
       const knownError = error as TError;
       let errorMessage: string;

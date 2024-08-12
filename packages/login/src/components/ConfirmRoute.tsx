@@ -32,9 +32,8 @@ import { useTranslation } from "react-i18next";
 
 import { getCookie } from "@docspace/shared/utils";
 import { LANGUAGE } from "@docspace/shared/constants";
-import { checkConfirmLink } from "@docspace/shared/api/user";
+import { checkConfirmLink, logout } from "@docspace/shared/api/user";
 
-import { logout } from "@/utils/actions";
 import { AuthenticatedAction, ValidationResult } from "@/utils/enums";
 import {
   TConfirmLinkResult,

@@ -35,12 +35,12 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 
 import withLoader from "@/HOCs/withLoader";
-import { suspendPortal } from "@/utils/actions";
 import { TError, WithLoaderProps } from "@/types";
 import { URL_ONLYOFFICE } from "@/utils/constants";
 
 import { ButtonsWrapper } from "../StyledConfirm.styled";
 import { ConfirmRouteContext } from "../ConfirmRoute";
+import { suspendPortal } from "@docspace/shared/api/portal";
 
 type DeactivatePortalProps = {
   siteUrl?: string;

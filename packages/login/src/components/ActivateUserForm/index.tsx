@@ -46,15 +46,15 @@ import { login } from "@docspace/shared/utils/loginUtils";
 
 import withLoader from "@/HOCs/withLoader";
 import { TActivateConfirmUser, TError, WithLoaderProps } from "@/types";
-import {
-  changePassword,
-  updateActivationStatus,
-  updateUser,
-} from "@/utils/actions";
 
 import { RegisterContainer } from "../CreateUserForm/CreateUserForm.styled";
 import { GreetingUserContainer } from "../CreateUserForm/sub-components/GreetingUserContainer";
 import { ConfirmRouteContext } from "../ConfirmRoute";
+import {
+  changePassword,
+  updateActivationStatus,
+  updateUser,
+} from "@docspace/shared/api/people";
 
 type ActivateUserFormPorps = {
   passwordHash: TPasswordHash;
@@ -166,16 +166,18 @@ const ActivateUserForm = ({
     userId,
     activationStatus,
   }: TActivateConfirmUser) => {
+    const changedData = {
+      id: userId,
+      FirstName: personalData.firstname,
+      LastName: personalData.lastname,
+    };
+
     const { userName, passwordHash } = loginData;
 
-    const res1 = await changePassword(passwordHash, userId, key);
+    const res1 = await changePassword(userId, passwordHash, key);
     const res2 = await updateActivationStatus(activationStatus, userId, key);
     const res3 = await login(userName, passwordHash);
-    const res4 = await updateUser(
-      userId,
-      personalData.firstname,
-      personalData.lastname,
-    );
+    const res4 = await updateUser(changedData);
   };
 
   const onKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {

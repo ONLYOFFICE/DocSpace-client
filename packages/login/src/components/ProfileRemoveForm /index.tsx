@@ -38,8 +38,8 @@ import { TError, WithLoaderProps } from "@/types";
 import { ConfirmRouteContext } from "../ConfirmRoute";
 import withLoader from "@/HOCs/withLoader";
 import { TColorScheme } from "@docspace/shared/themes";
-import { deleteSelf } from "@/utils/actions";
 import { GreetingContainer } from "../GreetingContainer";
+import { deleteSelf } from "@docspace/shared/api/people";
 
 type ProfileRemoveFormProps = {
   legalTerms: string;
@@ -61,7 +61,7 @@ const ProfileRemoveForm = ({
     setIsLoading(true);
 
     deleteSelf(linkData.confirmHeader)
-      .then(() => {
+      ?.then(() => {
         setIsLoading(false);
         setIsProfileDeleted(true);
       })

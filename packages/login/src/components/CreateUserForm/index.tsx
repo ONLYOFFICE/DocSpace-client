@@ -59,12 +59,16 @@ import { TCreateUserData, TError, WithLoaderProps } from "@/types";
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
 import { Text } from "@docspace/shared/components/text";
 import { login } from "@docspace/shared/api/user";
+import {
+  createUser,
+  getUserByEmail,
+  signupOAuth,
+} from "@docspace/shared/api/people";
 
 import SsoReactSvgUrl from "PUBLIC_DIR/images/sso.react.svg?url";
 
 import withLoader from "@/HOCs/withLoader";
 import useDeviceType from "@/hooks/useDeviceType";
-import { createUser, getUserByEmail, signupOAuth } from "@/utils/actions";
 import { ConfirmRouteContext } from "../ConfirmRoute";
 
 import EmailInputForm from "./sub-components/EmailInputForm";
@@ -141,7 +145,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       };
 
       return signupOAuth(signupAccount)
-        .then(() => {
+        ?.then(() => {
           const url = roomData.roomId
             ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}/`
             : defaultPage;

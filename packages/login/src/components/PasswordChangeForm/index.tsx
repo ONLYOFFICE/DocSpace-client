@@ -41,9 +41,9 @@ import { TPasswordHash } from "@docspace/shared/api/settings/types";
 import { ALLOWED_PASSWORD_CHARACTERS } from "@docspace/shared/constants";
 
 import withLoader from "@/HOCs/withLoader";
-import { changePassword } from "@/utils/actions";
 import { TError, WithLoaderProps } from "@/types";
 import { ConfirmRouteContext } from "../ConfirmRoute";
+import { changePassword } from "@docspace/shared/api/people";
 
 type PasswordChangeFormProps = {
   passwordHash: TPasswordHash;
@@ -90,7 +90,7 @@ const PasswordChangeForm = ({
     try {
       const hash = createPasswordHash(password, passwordHash);
 
-      await changePassword(hash, uid, confirmHeader);
+      await changePassword(uid, hash, confirmHeader);
       setIsLoading(false);
       toastr.success(t("ChangePasswordSuccess"));
 

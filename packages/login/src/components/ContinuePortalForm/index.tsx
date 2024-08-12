@@ -33,10 +33,10 @@ import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { continuePortal } from "@docspace/shared/api/portal";
 
 import withLoader from "@/HOCs/withLoader";
 import { TError } from "@/types";
-import { continuePortal } from "@/utils/actions";
 
 import { ConfirmRouteContext } from "../ConfirmRoute";
 import { ButtonsWrapper } from "../StyledConfirm.styled";

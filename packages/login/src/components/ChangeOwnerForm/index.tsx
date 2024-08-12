@@ -35,10 +35,10 @@ import { toastr } from "@docspace/shared/components/toast";
 
 import withLoader from "@/HOCs/withLoader";
 import { TError, WithLoaderProps } from "@/types";
-import { ownerChange } from "@/utils/actions";
 
 import { ConfirmRouteContext } from "../ConfirmRoute";
 import { ButtonsWrapper } from "../StyledConfirm.styled";
+import { ownerChange } from "@docspace/shared/api/settings";
 
 type ChangeOwnerFormProps = {
   newOwner?: string;
@@ -48,13 +48,14 @@ const ChangeOwnerForm = ({ newOwner }: ChangeOwnerFormProps) => {
   const { t } = useTranslation(["Confirm", "Common"]);
   const { linkData } = useContext(ConfirmRouteContext);
 
-  const ownerId = linkData.uid;
+  const ownerId = linkData.uid ?? "";
+  const confirmKey = linkData.confirmHeader ?? "";
 
   const [isOwnerChanged, setIsOwnerChanged] = useState(false);
 
   const onChangeOwnerClick = async () => {
     try {
-      await ownerChange(ownerId, linkData.confirmHeader);
+      await ownerChange(ownerId, confirmKey);
       setIsOwnerChanged(true);
       setTimeout(() => (location.href = "/"), 10000);
     } catch (error) {

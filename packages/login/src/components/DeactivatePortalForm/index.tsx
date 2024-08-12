@@ -33,6 +33,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
+import { suspendPortal } from "@docspace/shared/api/portal";
 
 import withLoader from "@/HOCs/withLoader";
 import { TError, WithLoaderProps } from "@/types";
@@ -40,7 +41,6 @@ import { URL_ONLYOFFICE } from "@/utils/constants";
 
 import { ButtonsWrapper } from "../StyledConfirm.styled";
 import { ConfirmRouteContext } from "../ConfirmRoute";
-import { suspendPortal } from "@docspace/shared/api/portal";
 
 type DeactivatePortalProps = {
   siteUrl?: string;

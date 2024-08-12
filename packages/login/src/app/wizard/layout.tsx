@@ -28,7 +28,7 @@ import { cookies } from "next/headers";
 
 import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 import { ThemeKeys } from "@docspace/shared/enums";
-import { getBgPattern, getLogoUrl } from "@docspace/shared/utils/common";
+import { getBgPattern } from "@docspace/shared/utils/common";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";

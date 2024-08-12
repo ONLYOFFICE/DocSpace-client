@@ -26,7 +26,7 @@
 
 "use client";
 
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { Base } from "@docspace/shared/themes";
 import { mobile, tablet } from "@docspace/shared/utils/device";

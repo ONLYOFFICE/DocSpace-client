@@ -32,13 +32,13 @@ import { useTranslation } from "react-i18next";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
+import { ownerChange } from "@docspace/shared/api/settings";
 
 import withLoader from "@/HOCs/withLoader";
 import { TError, WithLoaderProps } from "@/types";
 
 import { ConfirmRouteContext } from "../ConfirmRoute";
 import { ButtonsWrapper } from "../StyledConfirm.styled";
-import { ownerChange } from "@docspace/shared/api/settings";
 
 type ChangeOwnerFormProps = {
   newOwner?: string;

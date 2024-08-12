@@ -26,18 +26,21 @@
 
 "use client";
 
-import withLoader from "@/HOCs/withLoader";
+import { Trans, useTranslation } from "react-i18next";
+import { useContext, useState } from "react";
+
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
-import { Trans, useTranslation } from "react-i18next";
-import { ButtonsWrapper } from "../StyledConfirm.styled";
+import { deletePortal } from "@docspace/shared/api/portal";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
-import { useContext, useState } from "react";
+
 import { TError, WithLoaderProps } from "@/types";
-import { ConfirmRouteContext } from "../ConfirmRoute";
 import { URL_ONLYOFFICE } from "@/utils/constants";
-import { deletePortal } from "@docspace/shared/api/portal";
+import withLoader from "@/HOCs/withLoader";
+
+import { ConfirmRouteContext } from "../ConfirmRoute";
+import { ButtonsWrapper } from "../StyledConfirm.styled";
 
 type RemovePortalFormProps = {
   siteUrl?: string;

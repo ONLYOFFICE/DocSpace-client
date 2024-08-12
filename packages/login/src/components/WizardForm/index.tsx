@@ -26,13 +26,9 @@
 
 "use client";
 
-import { TCulturesOption, TTimeZoneOption, WizardFormProps } from "@/types";
-import { getSelectZone, getUserTimezone, mapTimezonesToArray } from "@/utils";
-import {
-  DEFAULT_SELECT_LANGUAGE,
-  DEFAULT_SELECT_TIMEZONE,
-  URL_LICENSE,
-} from "@/utils/constants";
+import { useTheme } from "styled-components";
+import { useTranslation } from "react-i18next";
+
 import {
   convertLanguage,
   createPasswordHash,
@@ -42,31 +38,19 @@ import { Text } from "@docspace/shared/components/text";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from "react";
 import { EmailInput, TValidate } from "@docspace/shared/components/email-input";
-import { useTranslation } from "react-i18next";
-import {
-  COOKIE_EXPIRATION_YEAR,
-  LANGUAGE,
-} from "@docspace/shared/constants";
+import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "@docspace/shared/constants";
 import { EmailSettings } from "@docspace/shared/utils";
 import {
   PasswordInput,
   PasswordInputHandle,
 } from "@docspace/shared/components/password-input";
 import { FileInput } from "@docspace/shared/components/file-input";
-import {
-  StyledAcceptTerms,
-  StyledInfo,
-  StyledLink,
-  WizardContainer,
-} from "./WizardForm.styled";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
-import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
 import { setLicense } from "@docspace/shared/api/settings";
 import { ComboBox, ComboBoxSize } from "@docspace/shared/components/combobox";
 import BetaBadge from "@docspace/client/src/components/BetaBadgeWrapper";
 import { Checkbox } from "@docspace/shared/components/checkbox";
-import { useTheme } from "styled-components";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import api from "@docspace/shared/api";
 import { setCookie } from "@docspace/shared/utils/cookie";
@@ -74,6 +58,23 @@ import { InputSize, InputType } from "@docspace/shared/components/text-input";
 import useDeviceType from "@/hooks/useDeviceType";
 import { DeviceType } from "@docspace/shared/enums";
 import { Nullable } from "@docspace/shared/types";
+
+import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
+
+import { TCulturesOption, TTimeZoneOption, WizardFormProps } from "@/types";
+import { getSelectZone, getUserTimezone, mapTimezonesToArray } from "@/utils";
+import {
+  DEFAULT_SELECT_LANGUAGE,
+  DEFAULT_SELECT_TIMEZONE,
+  URL_LICENSE,
+} from "@/utils/constants";
+
+import {
+  StyledAcceptTerms,
+  StyledInfo,
+  StyledLink,
+  WizardContainer,
+} from "./WizardForm.styled";
 
 const emailSettings = new EmailSettings();
 emailSettings.allowDomainPunycode = true;

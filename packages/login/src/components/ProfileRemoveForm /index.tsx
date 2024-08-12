@@ -27,19 +27,21 @@
 "use client";
 
 import { useContext, useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
-import { Trans, useTranslation } from "react-i18next";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
-import { TError, WithLoaderProps } from "@/types";
-import { ConfirmRouteContext } from "../ConfirmRoute";
-import withLoader from "@/HOCs/withLoader";
 import { TColorScheme } from "@docspace/shared/themes";
-import { GreetingContainer } from "../GreetingContainer";
 import { deleteSelf } from "@docspace/shared/api/people";
+
+import withLoader from "@/HOCs/withLoader";
+import { TError, WithLoaderProps } from "@/types";
+
+import { GreetingContainer } from "../GreetingContainer";
+import { ConfirmRouteContext } from "../ConfirmRoute";
 
 type ProfileRemoveFormProps = {
   legalTerms: string;

@@ -26,8 +26,7 @@
 
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
-import { getSettings, getUserFromConfirm } from "@/utils/actions";
-
+import { getSettings } from "@/utils/actions";
 import ActivateUserForm from "@/components/ActivateUserForm";
 import { GreetingCreateUserContainer } from "@/components/GreetingContainer";
 

@@ -26,18 +26,20 @@
 
 "use client";
 
+import { useSearchParams } from "next/navigation";
+import { useContext, useEffect } from "react";
+
 import { toastr } from "@docspace/shared/components/toast";
 import { getCookie } from "@docspace/shared/utils";
 import { deleteCookie } from "@docspace/shared/utils/cookie";
-import { useSearchParams } from "next/navigation";
-import { useContext, useEffect } from "react";
-import { ConfirmRouteContext } from "../ConfirmRoute";
 import AppLoader from "@docspace/shared/components/app-loader";
-import { TError } from "@/types";
 import { frameCallEvent } from "@docspace/shared/utils/common";
-
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { loginWithConfirmKey } from "@docspace/shared/api/user";
+
+import { TError } from "@/types";
+
+import { ConfirmRouteContext } from "../ConfirmRoute";
 
 const AuthHandler = () => {
   let searchParams = useSearchParams();

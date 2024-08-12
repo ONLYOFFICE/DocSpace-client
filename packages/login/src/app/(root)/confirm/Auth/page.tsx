@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import AuthHandler from "@/components/AuthHandler";
-import EmailActivationHandler from "@/components/EmailActivationHandler";
 
 type AuthProps = {
   searchParams: { [key: string]: string };

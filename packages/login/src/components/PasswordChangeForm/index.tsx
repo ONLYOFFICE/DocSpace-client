@@ -39,11 +39,11 @@ import { toastr } from "@docspace/shared/components/toast";
 import { InputSize, InputType } from "@docspace/shared/components/text-input";
 import { TPasswordHash } from "@docspace/shared/api/settings/types";
 import { ALLOWED_PASSWORD_CHARACTERS } from "@docspace/shared/constants";
+import { changePassword } from "@docspace/shared/api/people";
 
 import withLoader from "@/HOCs/withLoader";
 import { TError, WithLoaderProps } from "@/types";
 import { ConfirmRouteContext } from "../ConfirmRoute";
-import { changePassword } from "@docspace/shared/api/people";
 
 type PasswordChangeFormProps = {
   passwordHash: TPasswordHash;

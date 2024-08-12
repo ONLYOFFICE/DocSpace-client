@@ -46,6 +46,7 @@ import { TPasswordHash } from "@docspace/shared/api/settings/types";
 
 import withLoader from "@/HOCs/withLoader";
 import { TError, WithLoaderProps } from "@/types";
+
 import { ConfirmRouteContext } from "../ConfirmRoute";
 
 type TfaAuthFormProps = {

@@ -26,11 +26,14 @@
 
 "use client";
 
-import AppLoader from "@docspace/shared/components/app-loader";
 import { useContext, useEffect, useState } from "react";
-import { ConfirmRouteContext } from "../ConfirmRoute";
-import { TError } from "@/types";
+
+import AppLoader from "@docspace/shared/components/app-loader";
 import { changeEmail } from "@docspace/shared/api/people";
+
+import { TError } from "@/types";
+
+import { ConfirmRouteContext } from "../ConfirmRoute";
 
 const EmailChangeHandler = () => {
   const [error, setError] = useState<string>();

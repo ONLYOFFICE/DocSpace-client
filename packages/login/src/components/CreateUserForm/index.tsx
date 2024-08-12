@@ -53,7 +53,6 @@ import {
 } from "@docspace/shared/utils/common";
 import { setCookie } from "@docspace/shared/utils/cookie";
 import { DeviceType } from "@docspace/shared/enums";
-import { RegisterContainer } from "./CreateUserForm.styled";
 import { TValidate } from "@docspace/shared/components/email-input";
 import { TCreateUserData, TError, WithLoaderProps } from "@/types";
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
@@ -69,10 +68,11 @@ import SsoReactSvg from "PUBLIC_DIR/images/sso.react.svg";
 
 import withLoader from "@/HOCs/withLoader";
 import useDeviceType from "@/hooks/useDeviceType";
-import { ConfirmRouteContext } from "../ConfirmRoute";
 
+import { ConfirmRouteContext } from "../ConfirmRoute";
 import EmailInputForm from "./sub-components/EmailInputForm";
 import RegistrationForm from "./sub-components/RegistrationForm";
+import { RegisterContainer } from "./CreateUserForm.styled";
 
 export type CreateUserFormProps = {
   userNameRegex: string;

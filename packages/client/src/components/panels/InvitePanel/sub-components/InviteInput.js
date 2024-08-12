@@ -564,8 +564,10 @@ const InviteInput = ({
           containerRef={inputsRef}
           isOwner={isOwner}
           isMobileView={isMobileView}
-          isSelectionDisabled={isPaidUserLimit}
-          selectionErrorText={<PaidQuotaLimitError />}
+          {...(roomId === -1 && {
+            isSelectionDisabled: isPaidUserLimit,
+            selectionErrorText: <PaidQuotaLimitError />,
+          })}
         />
 
         {!hideSelector && addUsersPanelVisible && (

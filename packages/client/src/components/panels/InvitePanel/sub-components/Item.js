@@ -69,6 +69,7 @@ const Item = ({
   isPaidUserAccess,
   setInvitePaidUsersCount,
   isPaidUserLimit,
+  roomId,
 }) => {
   const {
     avatar,
@@ -260,9 +261,11 @@ const Item = ({
             setIsOpenItemAccess={setIsOpenItemAccess}
             isMobileView={isMobileView}
             noBorder
-            isSelectionDisabled={isPaidUserLimit}
-            selectionErrorText={<PaidQuotaLimitError />}
-            availableAccess={EmployeeType.Guest}
+            {...(roomId === -1 && {
+              isSelectionDisabled: isPaidUserLimit,
+              selectionErrorText: <PaidQuotaLimitError />,
+              availableAccess: [EmployeeType.Guest],
+            })}
           />
         </>
       )}
@@ -295,12 +298,14 @@ const Item = ({
 };
 
 export default inject(({ dialogsStore, currentQuotaStore }) => {
-  const { isPaidUserAccess, setInvitePaidUsersCount } = dialogsStore;
+  const { isPaidUserAccess, setInvitePaidUsersCount, invitePanelOptions } =
+    dialogsStore;
   const { isPaidUserLimit } = currentQuotaStore;
 
   return {
     isPaidUserAccess,
     setInvitePaidUsersCount,
     isPaidUserLimit,
+    roomId: invitePanelOptions.roomId,
   };
 })(observer(Item));

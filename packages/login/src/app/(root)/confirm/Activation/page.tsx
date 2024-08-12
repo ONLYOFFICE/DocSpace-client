@@ -29,10 +29,7 @@ import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { getSettings, getUserFromConfirm } from "@/utils/actions";
 
 import ActivateUserForm from "@/components/ActivateUserForm";
-import {
-  GreetingCleateUserContainer,
-  GreetingContainer,
-} from "@/components/GreetingContainer";
+import { GreetingCleateUserContainer } from "@/components/GreetingContainer";
 
 type ActivationProps = {
   searchParams: { [key: string]: string };
@@ -44,18 +41,16 @@ async function Page({ searchParams }: ActivationProps) {
   const settings = await getSettings();
 
   return (
-    <>
-      <div className="content-top">
-        {settings && typeof settings !== "string" && (
-          <>
-            <GreetingCleateUserContainer type={type} />
-            <FormWrapper id="activation-form">
-              <ActivateUserForm passwordHash={settings.passwordHash} />
-            </FormWrapper>
-          </>
-        )}
-      </div>
-    </>
+    <div className="content-top">
+      {settings && typeof settings !== "string" && (
+        <>
+          <GreetingCleateUserContainer type={type} />
+          <FormWrapper id="activation-form">
+            <ActivateUserForm passwordHash={settings.passwordHash} />
+          </FormWrapper>
+        </>
+      )}
+    </div>
   );
 }
 

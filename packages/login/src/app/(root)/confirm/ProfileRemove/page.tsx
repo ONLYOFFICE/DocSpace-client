@@ -44,13 +44,11 @@ async function Page({ searchParams }: ProfileRemoveProps) {
   return (
     <div className="content-center">
       {settings && typeof settings !== "string" && (
-        <>
-          <ProfileRemoveForm
-            greetingSettings={settings.greetingSettings}
-            legalTerms={settings.legalTerms}
-            currentColorScheme={currentColorScheme}
-          />
-        </>
+        <ProfileRemoveForm
+          greetingSettings={settings.greetingSettings}
+          legalTerms={settings.legalTerms}
+          currentColorScheme={currentColorScheme}
+        />
       )}
     </div>
   );

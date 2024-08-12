@@ -40,13 +40,13 @@ import {
   TPasswordSettings,
   TThirdPartyProvider,
 } from "@docspace/shared/api/settings/types";
-
+import { getUserByEmail } from "@docspace/shared/api/people";
 import {
+  getAuthProviders,
   getCapabilities,
   getPortalPasswordSettings,
-  getThirdPartyProviders,
-  getUserByEmail,
-} from "@/utils/actions";
+} from "@docspace/shared/api/settings";
+
 import { TError, WithLoaderProps } from "@/types";
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import Loading from "../app/(root)/confirm/loading";
@@ -72,9 +72,9 @@ export default function withLoader<T extends WithLoaderProps>(
 
     const getData = useCallback(async () => {
       if (type === "EmpInvite" && email) {
-        const response = await getUserByEmail(email, confirmHeader);
+        try {
+          await getUserByEmail(email, confirmHeader);
 
-        if (response !== 404) {
           const loginData = window.btoa(
             JSON.stringify({
               type: "invitation",
@@ -87,7 +87,9 @@ export default function withLoader<T extends WithLoaderProps>(
             "/login",
             `?loginData=${loginData}`,
           );
-        }
+
+          return;
+        } catch (e) {}
       }
 
       try {
@@ -114,7 +116,7 @@ export default function withLoader<T extends WithLoaderProps>(
     const getInviteData = useCallback(async () => {
       try {
         const [thirdParty, capabilities] = await Promise.all([
-          getThirdPartyProviders(),
+          getAuthProviders(),
           getCapabilities(),
         ]);
 

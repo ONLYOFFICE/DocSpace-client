@@ -49,6 +49,34 @@ export const EmptyViewBody = styled.div`
   gap: 8px;
 
   width: 100%;
+
+  &:has(> .ev-link) {
+    align-items: center;
+    margin-top: 2px;
+  }
+
+  .ev-link {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: nowrap;
+
+    max-width: fit-content;
+    text-decoration: none;
+
+    color: #4781d1;
+    svg {
+      color: #4781d1;
+    }
+
+    span {
+      font-weight: 600;
+      font-size: 13px;
+      line-height: 15px;
+      text-decoration: underline dotted;
+      text-underline-offset: 1px;
+    }
+  }
 `;
 
 export const EmptyViewItemWrapper = styled.div`

@@ -438,6 +438,7 @@ class DialogsStore {
 
   setInvitePaidUsersCount = (modifier = 1) => {
     this.invitePaidUsersCount = this.invitePaidUsersCount + modifier;
+    if (this.invitePaidUsersCount === -1) this.invitePaidUsersCount = 0;
   };
 
   isPaidUserAccess = (selectedAccess) => {
@@ -458,7 +459,7 @@ class DialogsStore {
       const isCurrAccessPaid = this.isPaidUserAccess(item.access);
 
       let modifier = 0;
-  
+
       if (isPrevAccessPaid && !isCurrAccessPaid) modifier = -1;
       if (!isPrevAccessPaid && isCurrAccessPaid) modifier = 1;
 

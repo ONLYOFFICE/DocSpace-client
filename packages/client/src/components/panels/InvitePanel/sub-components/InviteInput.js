@@ -95,6 +95,7 @@ const InviteInput = ({
   standalone,
   isPaidUserAccess,
   setInvitePaidUsersCount,
+  isPaidUserLimit,
 }) => {
   const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
@@ -226,10 +227,15 @@ const InviteInput = ({
   };
 
   const removeExist = (items) => {
-    const filtered = items.reduce((unique, o) => {
-      !unique.some((obj) =>
-        obj.isGroup ? obj.id === o.id : obj.email === o.email,
-      ) && unique.push(o);
+    const filtered = items.reduce((unique, current) => {
+      const isUnique = !unique.some((obj) =>
+        obj.isGroup ? obj.id === current.id : obj.email === current.email,
+      );
+
+      if (!isUnique && isPaidUserAccess(current.access))
+        setInvitePaidUsersCount(-1);
+
+      isUnique && unique.push(current);
 
       return unique;
     }, []);
@@ -601,7 +607,7 @@ export default inject(
     } = dialogsStore;
 
     const { culture: language, standalone } = settingsStore;
-
+    const { isPaidUserLimit } = currentQuotaStore;
     return {
       language,
       setInviteLanguage,
@@ -615,6 +621,7 @@ export default inject(
       standalone,
       isPaidUserAccess,
       setInvitePaidUsersCount,
+      isPaidUserLimit,
     };
   },
 )(

@@ -77,7 +77,9 @@ export async function getPortalCultures() {
   return res;
 }
 
-export async function getPortalPasswordSettings(confirmKey = null) {
+export async function getPortalPasswordSettings(
+  confirmKey: string | null = null,
+) {
   const options: AxiosRequestConfig = {
     method: "get",
     url: "/settings/security/password",
@@ -541,7 +543,7 @@ export function dataReassignmentTerminate(userId) {
   });
 }
 
-export function ownerChange(ownerId, confirmKey = null) {
+export function ownerChange(ownerId: string, confirmKey: string | null = null) {
   const data = { ownerId };
 
   const options = {

@@ -213,7 +213,7 @@ export function sendDeletePortalEmail() {
   });
 }
 
-export function suspendPortal(confirmKey = null) {
+export function suspendPortal(confirmKey: string | null = null) {
   const options = {
     method: "put",
     url: "/portal/suspend",
@@ -224,7 +224,7 @@ export function suspendPortal(confirmKey = null) {
   return request(options);
 }
 
-export function continuePortal(confirmKey = null) {
+export function continuePortal(confirmKey: string | null = null) {
   const options = {
     method: "put",
     url: "/portal/continue",
@@ -235,7 +235,7 @@ export function continuePortal(confirmKey = null) {
   return request(options);
 }
 
-export function deletePortal(confirmKey = null) {
+export function deletePortal(confirmKey: string | null = null) {
   const options = {
     method: "delete",
     url: "/portal/delete",

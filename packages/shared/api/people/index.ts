@@ -91,7 +91,10 @@ export async function getUser(userName = null, headers = null) {
   return user;
 }
 
-export async function getUserByEmail(userEmail: string, confirmKey = null) {
+export async function getUserByEmail(
+  userEmail: string,
+  confirmKey: string | null = null,
+) {
   const options = {
     method: "get",
     url: `/people/email?email=${userEmail}`,
@@ -129,7 +132,7 @@ export function getUserPhoto(userId) {
   });
 }
 
-export function createUser(data, confirmKey = null) {
+export function createUser(data, confirmKey: string | null = null) {
   const options = {
     method: "post",
     url: "/people",

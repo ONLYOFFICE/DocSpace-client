@@ -65,7 +65,7 @@ import {
   signupOAuth,
 } from "@docspace/shared/api/people";
 
-import SsoReactSvgUrl from "PUBLIC_DIR/images/sso.react.svg?url";
+import SsoReactSvg from "PUBLIC_DIR/images/sso.react.svg";
 
 import withLoader from "@/HOCs/withLoader";
 import useDeviceType from "@/hooks/useDeviceType";
@@ -453,7 +453,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     ? {
         ssoUrl: capabilities?.ssoUrl,
         ssoLabel: capabilities?.ssoLabel,
-        ssoSVG: SsoReactSvgUrl,
+        ssoSVG: SsoReactSvg,
       }
     : {};
 

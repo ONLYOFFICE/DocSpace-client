@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Par",
   "AboutCompanyTitle": "Par šo programmu",
   "AccessDenied": "Pieeja ir liegta",
@@ -55,6 +55,7 @@
   "CommonFiles": "Kopīgi faili",
   "CompanyName": "Uzņēmuma nosaukums",
   "Confirmation": "Apstiprinājums",
+  "ConfirmationText": "Visi ievadītie dati tiks zaudēti. Vai tiešām vēlaties turpināt?",
   "ConflictResolveSelectAction": "Lūdzu, atlasiet darbību:",
   "Connect": "Savienot",
   "Content": "Saturs",

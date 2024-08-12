@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Informații",
   "AboutCompanyTitle": "Despre aplicația",
   "AccessDenied": "Acces refuzat ",
@@ -55,6 +55,7 @@
   "CommonFiles": "Fișiere comune",
   "CompanyName": "Numele companiei",
   "Confirmation": "Confirmare",
+  "ConfirmationText": "Toate datele introduse se vor pierde. Sigur doriţi să continuați?",
   "ConflictResolveSelectAction": "Selectați acțiune:",
   "Connect": "Adaugă cont",
   "Content": "Conținut",

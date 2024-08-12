@@ -66,7 +66,6 @@
   "LdapUserDNTooltip": "Saisissez le nom distinctif du répertoire contenant les utilisateurs que vous souhaitez ajouter.",
   "LdapUserFilter": "Filtre d'utilisateurs",
   "LdapUserFilterTooltip": "Utilisez le filtre LDAP de recherche pour sélectionner les utilisateurs qui doivent être importés.",
-  "LdapUserQuotaTooltip": "Pour définir un quota de stockage pour cet utilisateur, saisissez une valeur entière pour cet attribut dans l'annuaire LDAP. La valeur du quota sera affichée en octets. Cet attribut ne sera appliqué que lors de la première installation et peut être modifié manuellement dans la section Comptes.",
   "LdapUsersType": "Type d'utilisateur",
   "LdapUsersTypeInfo": "Les utilisateurs ne peuvent accéder qu'aux salles auxquelles ils sont invités par les administrateurs et ne peuvent pas créer leurs propres salles, dossiers ou fichiers. Sélectionnez un autre type ci-dessous pour obtenir davantage d'autorisations. Sinon, vous pouvez modifier le type manuellement dans la section Comptes.",
   "LdapUserTypeTooltip": "Tous les utilisateurs seront ajoutés à {{productName}} avec le type sélectionné."

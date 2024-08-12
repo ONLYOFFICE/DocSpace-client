@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -25,64 +24,51 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
-
 import React from "react";
-import styled, { useTheme } from "styled-components";
+import { useTranslation } from "react-i18next";
 
-import { mobile } from "@docspace/shared/utils/device";
-import { getLogoUrl } from "@docspace/shared/utils/common";
-import { Base, Dark } from "@docspace/shared/themes";
-import { ThemeKeys, WhiteLabelLogoType } from "@docspace/shared/enums";
+import { Button } from "@docspace/shared/components/button";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Text } from "@docspace/shared/components/text";
 
-import LanguageComboboxWrapper from "./LanguageCombobox";
+import StyledModalDialog from "./StyledModalDialog";
 
-const StyledSimpleNav = styled.div`
-  display: none;
-  height: 48px;
-  align-items: center;
-  justify-content: center;
-  background-color: ${(props) => props.theme?.login?.navBackground};
-
-  .logo {
-    height: 24px;
-  }
-
-  @media ${mobile} {
-    display: flex;
-
-    .language-combo-box {
-      position: absolute;
-      top: 7px;
-      right: 8px;
-    }
-  }
-`;
-
-StyledSimpleNav.defaultProps = { theme: Base };
-
-interface SimpleNavProps {
-  culture?: string;
-}
-
-const SimpleNav = ({ culture }: SimpleNavProps) => {
-  const theme = useTheme();
-
-  const isDark = !theme.isBase;
-
-  const logoUrl = getLogoUrl(
-    WhiteLabelLogoType.LightSmall,
-    isDark,
-    false,
-    culture,
-  );
+const ResetConfirmationModal = (props) => {
+  const { t } = useTranslation(["Common"]);
+  const { closeResetModal, confirmationResetModal, confirmReset } = props;
 
   return (
-    <StyledSimpleNav id="login-header">
-      <img className="logo" src={logoUrl} alt="logo-url" />
-      <LanguageComboboxWrapper />
-    </StyledSimpleNav>
+    <StyledModalDialog
+      contentHeight="100%"
+      displayType="modal"
+      onClose={closeResetModal}
+      visible={confirmationResetModal}
+    >
+      <ModalDialog.Header>{t("Common:Confirmation")}</ModalDialog.Header>
+
+      <ModalDialog.Body>
+        <Text noSelect>{t("Common:ConfirmationText")}</Text>
+      </ModalDialog.Body>
+
+      <ModalDialog.Footer>
+        <Button
+          id="ok-button"
+          label={t("Common:OKButton")}
+          onClick={confirmReset}
+          primary
+          scale
+          size="normal"
+        />
+        <Button
+          id="cancel-button"
+          label={t("Common:CancelButton")}
+          onClick={closeResetModal}
+          scale
+          size="normal"
+        />
+      </ModalDialog.Footer>
+    </StyledModalDialog>
   );
 };
 
-export default SimpleNav;
+export default ResetConfirmationModal;

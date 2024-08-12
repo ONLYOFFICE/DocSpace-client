@@ -49,6 +49,8 @@ import {
 import { filterGroupRoleOptions, filterUserRoleOptions } from "SRC_DIR/helpers";
 import AccessSelector from "../../../AccessSelector";
 
+import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
+
 const Item = ({
   t,
   item,
@@ -65,6 +67,7 @@ const Item = ({
   standalone,
   isPaidUserAccess,
   setInvitePaidUsersCount,
+  isPaidUserLimit,
 }) => {
   const {
     avatar,
@@ -256,6 +259,8 @@ const Item = ({
             setIsOpenItemAccess={setIsOpenItemAccess}
             isMobileView={isMobileView}
             noBorder
+            isSelectionDisabled={isPaidUserLimit}
+            selectionErrorText={<PaidQuotaLimitError />}
           />
         </>
       )}
@@ -287,11 +292,13 @@ const Item = ({
   );
 };
 
-export default inject(({ dialogsStore }) => {
+export default inject(({ dialogsStore, currentQuotaStore }) => {
   const { isPaidUserAccess, setInvitePaidUsersCount } = dialogsStore;
+  const { isPaidUserLimit } = currentQuotaStore;
 
   return {
     isPaidUserAccess,
     setInvitePaidUsersCount,
+    isPaidUserLimit,
   };
 })(observer(Item));

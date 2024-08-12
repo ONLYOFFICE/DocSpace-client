@@ -26,11 +26,7 @@
 
 import EmailChangeHandler from "@/components/EmailChangeHandler";
 
-type EmailChangeProps = {
-  searchParams: { [key: string]: string };
-};
-
-async function Page({ searchParams }: EmailChangeProps) {
+async function Page() {
   return <EmailChangeHandler />;
 }
 

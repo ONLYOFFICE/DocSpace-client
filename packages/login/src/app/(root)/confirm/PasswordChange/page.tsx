@@ -30,11 +30,7 @@ import { GreetingContainer } from "@/components/GreetingContainer";
 import PasswordChangeForm from "@/components/PasswordChangeForm";
 import { getSettings } from "@/utils/actions";
 
-type PasswordChangProps = {
-  searchParams: { [key: string]: string };
-};
-
-async function Page({ searchParams }: PasswordChangProps) {
+async function Page() {
   const settings = await getSettings();
 
   return (

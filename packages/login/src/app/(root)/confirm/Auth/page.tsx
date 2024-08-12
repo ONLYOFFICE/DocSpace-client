@@ -26,11 +26,7 @@
 
 import AuthHandler from "@/components/AuthHandler";
 
-type AuthProps = {
-  searchParams: { [key: string]: string };
-};
-
-async function Page({ searchParams }: AuthProps) {
+async function Page() {
   return <AuthHandler />;
 }
 

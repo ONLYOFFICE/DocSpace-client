@@ -30,11 +30,7 @@ import { GreetingContainer } from "@/components/GreetingContainer";
 import { getSettings } from "@/utils/actions";
 import ChangePhoneForm from "@/components/ChangePhoneForm";
 
-type PhoneActivationProps = {
-  searchParams: { [key: string]: string };
-};
-
-async function Page({ searchParams }: PhoneActivationProps) {
+async function Page() {
   const settings = await getSettings();
 
   return (

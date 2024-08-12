@@ -26,11 +26,7 @@
 
 import EmailActivationHandler from "@/components/EmailActivationHandler";
 
-type EmailActivationProps = {
-  searchParams: { [key: string]: string };
-};
-
-async function Page({ searchParams }: EmailActivationProps) {
+async function Page() {
   return <EmailActivationHandler />;
 }
 

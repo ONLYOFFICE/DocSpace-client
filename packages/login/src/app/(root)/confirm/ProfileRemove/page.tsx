@@ -27,11 +27,7 @@
 import { getColorTheme, getSettings } from "@/utils/actions";
 import ProfileRemoveForm from "@/components/ProfileRemoveForm ";
 
-type ProfileRemoveProps = {
-  searchParams: { [key: string]: string };
-};
-
-async function Page({ searchParams }: ProfileRemoveProps) {
+async function Page() {
   const [settings, colorTheme] = await Promise.all([
     getSettings(),
     getColorTheme(),

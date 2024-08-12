@@ -30,11 +30,7 @@ import { GreetingContainer } from "@/components/GreetingContainer";
 import { getCompanyInfoSettings, getSettings } from "@/utils/actions";
 import DeactivatePortalForm from "@/components/DeactivatePortalForm";
 
-type PortalSuspendProps = {
-  searchParams: { [key: string]: string };
-};
-
-async function Page({ searchParams }: PortalSuspendProps) {
+async function Page() {
   const [settings, companyInfoSettings] = await Promise.all([
     getSettings(),
     getCompanyInfoSettings(),

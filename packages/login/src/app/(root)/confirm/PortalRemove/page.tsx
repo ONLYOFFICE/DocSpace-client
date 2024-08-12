@@ -30,11 +30,7 @@ import { GreetingContainer } from "@/components/GreetingContainer";
 import { getCompanyInfoSettings, getSettings } from "@/utils/actions";
 import RemovePortalForm from "@/components/RemovePortalForm";
 
-type RemovePortalProps = {
-  searchParams: { [key: string]: string };
-};
-
-async function Page({ searchParams }: RemovePortalProps) {
+async function Page() {
   const [settings, companyInfoSettings] = await Promise.all([
     getSettings(),
     getCompanyInfoSettings(),

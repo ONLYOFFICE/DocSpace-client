@@ -30,11 +30,7 @@ import { GreetingContainer } from "@/components/GreetingContainer";
 import { getSettings } from "@/utils/actions";
 import ContinuePortalForm from "@/components/ContinuePortalForm";
 
-type PortalContinueProps = {
-  searchParams: { [key: string]: string };
-};
-
-async function Page({ searchParams }: PortalContinueProps) {
+async function Page() {
   const settings = await getSettings();
 
   return (

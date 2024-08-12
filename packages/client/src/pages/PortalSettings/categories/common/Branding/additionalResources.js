@@ -187,12 +187,14 @@ const AdditionalResources = (props) => {
   const onSave = useCallback(async () => {
     setIsLoading(true);
 
+    const settings = JSON.parse(JSON.stringify(additionalResourcesData));
+
+    settings.feedbackAndSupportEnabled = feedbackAndSupportEnabled;
+    settings.videoGuidesEnabled = videoGuidesEnabled;
+    settings.helpCenterEnabled = helpCenterEnabled;
+
     await api.settings
-      .setAdditionalResources(
-        feedbackAndSupportEnabled,
-        videoGuidesEnabled,
-        helpCenterEnabled,
-      )
+      .setAdditionalResources(settings)
       .then(() => {
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
       })

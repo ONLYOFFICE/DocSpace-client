@@ -15,6 +15,7 @@ import CreateNewSpreadsheetIcon from "PUBLIC_DIR/images/emptyview/create.new.spr
 import CreateNewPresentation from "PUBLIC_DIR/images/emptyview/create.new.presentation.svg";
 import CreateRoom from "PUBLIC_DIR/images/emptyview/create.room.svg";
 import InviteUserFormIcon from "PUBLIC_DIR/images/emptyview/invite.user.svg";
+import PersonIcon from "PUBLIC_DIR/images/icons/12/person.svg";
 
 import SharedIcon from "PUBLIC_DIR/images/emptyview/share.svg";
 
@@ -27,7 +28,10 @@ import FolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
 import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
 import type { TFolderSecurity } from "@docspace/shared/api/files/types";
-import type { EmptyViewItemType } from "@docspace/shared/components/empty-view";
+import type {
+  EmptyViewItemType,
+  EmptyViewOptionsType,
+} from "@docspace/shared/components/empty-view";
 
 import type { AccessType, OptionActions } from "./EmptyViewContainer.types";
 import { DefaultFolderType } from "./EmptyViewContainer.constants";
@@ -131,7 +135,7 @@ export const getOptions = (
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
   actions: OptionActions,
-): EmptyViewItemType[] => {
+): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
 
@@ -301,6 +305,7 @@ export const getOptions = (
 
   if (isRootEmptyPage) {
     return match([rootFolderType, access])
+      .returnType<EmptyViewOptionsType>()
       .with([FolderType.Rooms, ShareAccessRights.None], () => [
         createRoom,
         inviteRootRoom,
@@ -311,6 +316,11 @@ export const getOptions = (
         createSpreadsheet,
         createPresentation,
       ])
+      .with([FolderType.Recent, P._], () => ({
+        ...actions.onGoToPersonal(),
+        icon: <PersonIcon />,
+        description: t("Files:GoToPersonal"),
+      }))
       .otherwise(() => []);
   }
 

@@ -40,5 +40,6 @@
   "MigrationDataTitle": "Migration Data",
   "MigrationDataDescription": "Import data to your {{productName}} from ONLYOFFICE Workspace, Google Workspace, or Nextcloud.",
   "EmptyRootRoomUserTitle": "There are no rooms here yet",
-  "EmptyRootRoomUserDescription": "The shared room will appear here."
+  "EmptyRootRoomUserDescription": "The shared room will appear here.",
+  "EmptyRecentDescription": "Your last viewed or edited docs will be displayed in this section."
 }

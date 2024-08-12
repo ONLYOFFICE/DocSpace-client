@@ -34,6 +34,9 @@ import CreateNewFormIcon from "PUBLIC_DIR/images/emptyview/create.new.form.svg";
 import EmptyRoomsRootDarkIcon from "PUBLIC_DIR/images/emptyview/empty.rooms.root.dark.svg";
 import EmptyRoomsRootLightIcon from "PUBLIC_DIR/images/emptyview/empty.rooms.root.light.svg";
 
+import EmptyRecentDarkIcon from "PUBLIC_DIR/images/emptyview/empty.recent.dark.svg";
+import EmptyRecentLightIcon from "PUBLIC_DIR/images/emptyview/empty.recent.light.svg";
+
 import EmptyRoomsRootUserDarkIcon from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.dark.svg";
 import EmptyRoomsRootUserLightIcon from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.light.svg";
 
@@ -171,7 +174,7 @@ export const getRootDesctiption = (
     .with([FolderType.USER, ShareAccessRights.None], () =>
       t("EmptyView:DefaultFolderDescription"),
     )
-    .with([FolderType.Recent, P._], () => t("Test"))
+    .with([FolderType.Recent, P._], () => t("EmptyView:EmptyRecentDescription"))
     .with([FolderType.Archive, P._], () => t("Test"))
     .with([FolderType.TRASH, P._], () => t("Test"))
     .otherwise(() => "");
@@ -262,7 +265,7 @@ export const getRootTitle = (
     .with([FolderType.USER, ShareAccessRights.None], () =>
       t("Files:EmptyScreenFolder"),
     )
-    .with([FolderType.Recent, P._], () => t("Test"))
+    .with([FolderType.Recent, P._], () => t("Files:NoFilesHereYet"))
     .with([FolderType.Archive, P._], () => t("Test"))
     .with([FolderType.TRASH, P._], () => t("Test"))
     .otherwise(() => "");
@@ -395,7 +398,9 @@ export const getRootIcom = (
     .with([FolderType.USER, ShareAccessRights.None], () =>
       isBaseTheme ? <DefaultFolderLight /> : <DefaultFolderDark />,
     )
-    .with([FolderType.Recent, P._], () => <div />)
+    .with([FolderType.Recent, P._], () =>
+      isBaseTheme ? <EmptyRecentLightIcon /> : <EmptyRecentDarkIcon />,
+    )
     .with([FolderType.Archive, P._], () => <div />)
     .with([FolderType.TRASH, P._], () => <div />)
     .otherwise(() => <div />);

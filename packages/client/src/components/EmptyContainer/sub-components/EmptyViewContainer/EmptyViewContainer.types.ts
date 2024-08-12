@@ -1,4 +1,4 @@
-import type { NavigateFunction } from "react-router-dom";
+import type { NavigateFunction, LinkProps } from "react-router-dom";
 
 import type {
   FilesSelectorFilterTypes,
@@ -54,7 +54,9 @@ export interface InjectedEmptyViewContainerProps
     Pick<
       TStore["selectedFolderStore"],
       "access" | "security" | "rootFolderType"
-    > {
+    >,
+    Pick<TStore["treeFoldersStore"], "myFolder" | "myFolderId">,
+    Pick<TStore["clientLoadingStore"], "setIsSectionFilterLoading"> {
   selectedFolder: ReturnType<
     TStore["selectedFolderStore"]["getSelectedFolder"]
   >;
@@ -80,4 +82,5 @@ export type OptionActions = {
   openInfoPanel: VoidFunction;
   onCreateRoom: VoidFunction;
   inviteRootUser: TStore["contextOptionsStore"]["inviteUser"];
+  onGoToPersonal: () => LinkProps;
 };

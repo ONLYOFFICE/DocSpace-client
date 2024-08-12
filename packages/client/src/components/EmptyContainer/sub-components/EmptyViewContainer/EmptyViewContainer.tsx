@@ -2,7 +2,7 @@ import { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import React, { useMemo, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, LinkProps } from "react-router-dom";
 
 import {
   Events,
@@ -10,6 +10,10 @@ import {
   FilterType,
 } from "@docspace/shared/enums";
 import { EmptyView } from "@docspace/shared/components/empty-view";
+import FilesFilter from "@docspace/shared/api/files/filter";
+
+import { getCategoryUrl } from "SRC_DIR/helpers/utils";
+import { CategoryType } from "SRC_DIR/helpers/constants";
 
 import {
   getDescription,
@@ -42,10 +46,13 @@ const EmptyViewContainer = observer(
     isArchiveFolderRoot,
     rootFolderType,
     isGracePeriod,
+    myFolderId,
+    myFolder,
     setViewInfoPanel,
     onClickInviteUsers,
     setVisibleInfoPanel,
     onCreateAndCopySharedLink,
+    // setIsSectionFilterLoading,
     setSelectFileFormRoomDialogVisible,
     setInviteUsersWarningDialogVisible,
     inviteUser: inviteRootUser,
@@ -60,6 +67,35 @@ const EmptyViewContainer = observer(
     ]);
 
     const theme = useTheme();
+
+    const onGoToPersonal = useCallback((): LinkProps => {
+      const newFilter = FilesFilter.getDefault();
+
+      newFilter.folder = myFolderId?.toString() ?? "";
+
+      const state = {
+        title: myFolder.title,
+        isRoot: true,
+        rootFolderType: myFolder.rootFolderType,
+      };
+
+      const path = getCategoryUrl(CategoryType.Personal);
+
+      // setIsSectionFilterLoading(true);
+
+      return {
+        to: {
+          pathname: path,
+          search: newFilter.toUrlParams(),
+        },
+        state,
+      };
+    }, [
+      myFolder.rootFolderType,
+      myFolder.title,
+      myFolderId,
+      // setIsSectionFilterLoading,
+    ]);
 
     const onCreateRoom = useCallback(() => {
       if (isGracePeriod) {
@@ -195,6 +231,7 @@ const EmptyViewContainer = observer(
             onCreateRoom,
             inviteRootUser,
             navigate,
+            onGoToPersonal,
           },
         ),
       [
@@ -217,6 +254,7 @@ const EmptyViewContainer = observer(
         onCreateRoom,
         inviteRootUser,
         navigate,
+        onGoToPersonal,
       ],
     );
 
@@ -244,7 +282,13 @@ const InjectedEmptyViewContainer = inject<
     dialogsStore,
     infoPanelStore,
     currentTariffStatusStore,
+    treeFoldersStore,
+    clientLoadingStore,
   }): InjectedEmptyViewContainerProps => {
+    const { myFolderId, myFolder } = treeFoldersStore;
+
+    const { setIsSectionFilterLoading } = clientLoadingStore;
+
     const { onClickInviteUsers, onCreateAndCopySharedLink, inviteUser } =
       contextOptionsStore;
 
@@ -272,13 +316,16 @@ const InjectedEmptyViewContainer = inject<
       isVisibleInfoPanel,
       rootFolderType,
       isGracePeriod,
+      myFolderId,
+      myFolder,
+      inviteUser,
+      setViewInfoPanel,
       onClickInviteUsers,
+      setVisibleInfoPanel,
+      setIsSectionFilterLoading,
       onCreateAndCopySharedLink,
       setSelectFileFormRoomDialogVisible,
       setInviteUsersWarningDialogVisible,
-      setVisibleInfoPanel,
-      setViewInfoPanel,
-      inviteUser,
     };
   },
 )(EmptyViewContainer as React.FC<OutEmptyViewContainerProps>);

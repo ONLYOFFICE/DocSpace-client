@@ -66,7 +66,6 @@
   "LdapUserDNTooltip": "Zadajte rozlišujúci názov priečinka, ktorý obsahuje používateľov, ktorých chcete pridať.",
   "LdapUserFilter": "Filter používateľov",
   "LdapUserFilterTooltip": "Pomocou filtra na vyhľadávanie LDAP vyberte používateľov, ktorí musia byť importovaní.",
-  "LdapUserQuotaTooltip": "Ak chcete nastaviť kvótu úložiska pre tohto používateľa, zadajte pre tento atribút v priečinku LDAP celočíselnú hodnotu. Zobrazí sa hodnota kvóty v bajtoch. Tento atribút sa použije len pri prvom nastavení a môžete ho zmeniť ručne v časti Účty.",
   "LdapUsersType": "Typ používateľov",
   "LdapUsersTypeInfo": "Používatelia majú prístup len do miestností, do ktorých ich pozvali administrátori, a nemôžu vytvárať vlastné miestnosti, priečinky alebo súbory. Vyberte iný typ nižšie, ak chcete poskytnúť viac oprávnení. V opačnom prípade môžete typ zmeniť ručne v časti Účty.",
   "LdapUserTypeTooltip": "Všetci používatelia budú pridaní do {{productName}} so zvoleným typom."

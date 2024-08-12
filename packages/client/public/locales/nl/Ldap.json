@@ -66,7 +66,6 @@
   "LdapUserDNTooltip": "Voer de onderscheidende naam in van de map met gebruikers die u wilt toevoegen.",
   "LdapUserFilter": "Gebruikersfilter",
   "LdapUserFilterTooltip": "Gebruik Zoek LDAP filter om gebruikers te selecteren die zullen worden geïmporteerd.",
-  "LdapUserQuotaTooltip": "Om een opslagquotum voor deze gebruiker in te stellen, voert u een gehele waarde voor dit attribuut in de LDAP directory in. De quotumwaarde wordt in bytes weergegeven. Dit attribuut wordt alleen toegepast tijdens de eerste installatie en kan handmatig worden gewijzigd in de Accounts sectie.",
   "LdapUsersType": "Type gebruiker",
   "LdapUsersTypeInfo": "Gebruikers hebben alleen toegang tot de kamers waarvoor ze door beheerders zijn uitgenodigd en kunnen geen eigen kamers, mappen of bestanden aanmaken. Selecteer hieronder een ander type om meer rechten te geven. Anders kunt u het type handmatig wijzigen in de Accounts sectie",
   "LdapUserTypeTooltip": "Alle gebruikers worden toegevoegd aan {{productName}} met het geselecteerde type."

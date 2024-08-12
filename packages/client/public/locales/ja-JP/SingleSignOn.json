@@ -1,4 +1,4 @@
-﻿{
+{
   "AddCertificate": "証明書の追加",
   "AdvancedSettings": "詳細設定",
   "AdvancedSettingsTooltip": "デフォルトの認証ページを非表示にし、自動的にSSOサービスにリダイレクトする。",

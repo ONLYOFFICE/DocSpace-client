@@ -516,32 +516,32 @@ const SubMenu = (props: {
   const active = isActive();
   const submenuLower = renderSubMenuLower();
 
-  const newModel = model.filter(
-    (item: ContextMenuModel) => item && !item.disabled,
-  );
-  const rowHeights: number[] = newModel.map((item: ContextMenuModel) => {
-    if (!item) return 0;
-    if (item.isSeparator) return 13;
-    return 36;
-  });
+  if (model.length) {
+    const newModel = model.filter(
+      (item: ContextMenuModel) => item && !item.disabled,
+    );
+    const rowHeights: number[] = newModel.map((item: ContextMenuModel) => {
+      if (!item) return 0;
+      if (item.isSeparator) return 13;
+      return 36;
+    });
 
-  const height = rowHeights.reduce((a, b) => a + b);
-  const viewport = DomHelpers.getViewport();
-  const paddingList = 12;
-  const marginsList = 32;
-  const backdrop = 64;
-  const header = 55;
+    const height = rowHeights.reduce((a, b) => a + b);
+    const viewport = DomHelpers.getViewport();
+    const paddingList = 12;
+    const marginsList = 32;
+    const backdrop = 64;
+    const header = 55;
 
-  const listHeight =
-    changeView && withHeader
-      ? height + paddingList + header > viewport.height
-        ? viewport.height - backdrop - header - paddingList
-        : height + paddingList
-      : height + paddingList + marginsList > viewport.height
-        ? viewport.height - marginsList
-        : height + paddingList;
+    const listHeight =
+      changeView && withHeader
+        ? height + paddingList + header > viewport.height
+          ? viewport.height - backdrop - header - paddingList
+          : height + paddingList
+        : height + paddingList + marginsList > viewport.height
+          ? viewport.height - marginsList
+          : height + paddingList;
 
-  if (model) {
     return (
       <CSSTransition
         nodeRef={subMenuRef}

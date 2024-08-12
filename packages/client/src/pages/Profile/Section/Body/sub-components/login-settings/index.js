@@ -33,6 +33,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { Link } from "@docspace/shared/components/link";
 import { unlinkTfaApp } from "@docspace/shared/api/settings";
+import { OPEN_BACKUP_CODES_DIALOG } from "@docspace/shared/constants";
 import {
   ResetApplicationDialog,
   BackupCodesDialog,
@@ -57,9 +58,9 @@ const LoginSettings = (props) => {
     useState(false);
 
   useEffect(() => {
-    if (sessionStorage.getItem("openBackupCodesDialog")) {
+    if (sessionStorage.getItem(OPEN_BACKUP_CODES_DIALOG)) {
       setBackupCodesDialogVisible(true);
-      sessionStorage.removeItem("openBackupCodesDialog");
+      sessionStorage.removeItem(OPEN_BACKUP_CODES_DIALOG);
     }
   }, []);
 

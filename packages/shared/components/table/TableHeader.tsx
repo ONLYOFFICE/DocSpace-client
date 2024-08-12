@@ -426,7 +426,7 @@ class TableHeaderComponent extends React.Component<
 
     if (!container) return;
 
-    const containerWidth = +container.clientWidth;
+    const containerWidth = container.getBoundingClientRect().width;
 
     const defaultWidth = tableContainer
       .map((column) => getSubstring(column))

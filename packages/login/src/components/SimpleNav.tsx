@@ -34,6 +34,7 @@ import { mobile } from "@docspace/shared/utils/device";
 import { getLogoUrl } from "@docspace/shared/utils/common";
 import { Base, Dark } from "@docspace/shared/themes";
 import { ThemeKeys, WhiteLabelLogoType } from "@docspace/shared/enums";
+
 import LanguageComboboxWrapper from "./LanguageCombobox";
 
 const StyledSimpleNav = styled.div`
@@ -60,13 +61,13 @@ const StyledSimpleNav = styled.div`
 
 StyledSimpleNav.defaultProps = { theme: Base };
 
-interface SimpleNavProps {
-  systemTheme: ThemeKeys;
-}
+interface SimpleNavProps {}
 
-const SimpleNav = ({ systemTheme }: SimpleNavProps) => {
+const SimpleNav = ({}: SimpleNavProps) => {
   const theme = useTheme();
+
   const isDark = !theme.isBase;
+
   const logoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, isDark);
 
   return (

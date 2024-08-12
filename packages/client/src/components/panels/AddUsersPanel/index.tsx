@@ -588,6 +588,7 @@ const AddUsersPanel = ({
           isSearchLoading={isInit}
           rowLoader={
             <RowLoader
+              style={{ paddingInlineEnd: 0 }}
               isUser
               count={15}
               isContainer={isLoading}

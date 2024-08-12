@@ -24,11 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { cookies } from "next/headers";
 import dynamic from "next/dynamic";
 
-import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
-import { ThemeKeys, WhiteLabelLogoType } from "@docspace/shared/enums";
 import { getBgPattern, getLogoUrl } from "@docspace/shared/utils/common";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
@@ -56,10 +53,6 @@ export default async function Layout({
     getColorTheme(),
   ]);
 
-  const cookieStore = cookies();
-
-  const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as ThemeKeys;
-
   const bgPattern = getBgPattern(colorTheme?.selected);
 
   const objectSettings = typeof settings === "string" ? undefined : settings;
@@ -68,8 +61,7 @@ export default async function Layout({
 
   return (
     <div style={{ width: "100%", height: "100%" }}>
-      <SimpleNav systemTheme={systemTheme} />
-
+      <SimpleNav />
       <LoginFormWrapper id="login-page" bgPattern={bgPattern}>
         <div className="bg-cover" />
         <Scrollbar id="customScrollBar">

@@ -155,13 +155,6 @@ class FilesActionStore {
     this.isBulkDownload = isBulkDownload;
   };
 
-  isMediaOpen = () => {
-    const { visible, setMediaViewerData, playlist } = this.mediaViewerDataStore;
-    if (visible && playlist.length === 1) {
-      setMediaViewerData({ visible: false, id: null });
-    }
-  };
-
   updateCurrentFolder = (fileIds, folderIds, clearSelection, operationId) => {
     const { clearSecondaryProgressData } =
       this.uploadDataStore.secondaryProgressDataStore;
@@ -390,8 +383,6 @@ class FilesActionStore {
     addActiveItems(null, folderIds, destFolderId);
 
     if (folderIds.length || fileIds.length) {
-      this.isMediaOpen();
-
       try {
         this.filesStore.setOperationAction(true);
         this.setGroupMenuBlocked(true);
@@ -852,7 +843,6 @@ class FilesActionStore {
 
     if (isFile) {
       addActiveItems([itemId], null, destFolderId);
-      this.isMediaOpen();
       return deleteFile(itemId)
         .then(async (res) => {
           if (res[0]?.error) return Promise.reject(res[0].error);

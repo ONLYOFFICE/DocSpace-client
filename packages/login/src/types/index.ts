@@ -86,6 +86,8 @@ export type LoginFormProps = {
   reCaptchaPublicKey?: string;
   reCaptchaType?: RecaptchaType;
   cookieSettingsEnabled: boolean;
+  ldapDomain?: string;
+  ldapEnabled?: boolean;
 };
 
 export type ForgotPasswordModalDialogProps = {

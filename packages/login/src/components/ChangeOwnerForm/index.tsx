@@ -34,15 +34,14 @@ import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 import { ownerChange } from "@docspace/shared/api/settings";
 
-import withLoader from "@/HOCs/withLoader";
-import { TError, WithLoaderProps } from "@/types";
+import { TError } from "@/types";
 
 import { ConfirmRouteContext } from "../ConfirmRoute";
 import { ButtonsWrapper } from "../StyledConfirm.styled";
 
 type ChangeOwnerFormProps = {
   newOwner?: string;
-} & WithLoaderProps;
+};
 
 const ChangeOwnerForm = ({ newOwner }: ChangeOwnerFormProps) => {
   const { t } = useTranslation(["Confirm", "Common"]);
@@ -122,4 +121,4 @@ const ChangeOwnerForm = ({ newOwner }: ChangeOwnerFormProps) => {
   );
 };
 
-export default withLoader(ChangeOwnerForm);
+export default ChangeOwnerForm;

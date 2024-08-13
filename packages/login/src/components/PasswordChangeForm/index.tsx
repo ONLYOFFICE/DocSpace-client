@@ -37,17 +37,20 @@ import { Text } from "@docspace/shared/components/text";
 import { createPasswordHash } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/shared/components/toast";
 import { InputSize, InputType } from "@docspace/shared/components/text-input";
-import { TPasswordHash } from "@docspace/shared/api/settings/types";
+import {
+  TPasswordHash,
+  TPasswordSettings,
+} from "@docspace/shared/api/settings/types";
 import { ALLOWED_PASSWORD_CHARACTERS } from "@docspace/shared/constants";
 import { changePassword } from "@docspace/shared/api/people";
 
-import withLoader from "@/HOCs/withLoader";
-import { TError, WithLoaderProps } from "@/types";
+import { TError } from "@/types";
 import { ConfirmRouteContext } from "../ConfirmRoute";
 
 type PasswordChangeFormProps = {
   passwordHash: TPasswordHash;
-} & WithLoaderProps;
+  passwordSettings?: TPasswordSettings;
+};
 
 const PasswordChangeForm = ({
   passwordSettings,
@@ -195,4 +198,4 @@ const PasswordChangeForm = ({
   );
 };
 
-export default withLoader(PasswordChangeForm);
+export default PasswordChangeForm;

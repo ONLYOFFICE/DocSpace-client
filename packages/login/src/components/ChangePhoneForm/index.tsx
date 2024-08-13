@@ -37,8 +37,6 @@ import {
 } from "@docspace/shared/components/text-input";
 import { Text } from "@docspace/shared/components/text";
 
-import withLoader from "@/HOCs/withLoader";
-
 const ChangePhoneForm = () => {
   const { t } = useTranslation(["Confirm", "Common"]);
 
@@ -84,4 +82,4 @@ const ChangePhoneForm = () => {
   );
 };
 
-export default withLoader(ChangePhoneForm);
+export default ChangePhoneForm;

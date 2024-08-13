@@ -44,8 +44,7 @@ import {
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { TPasswordHash } from "@docspace/shared/api/settings/types";
 
-import withLoader from "@/HOCs/withLoader";
-import { TError, WithLoaderProps } from "@/types";
+import { TError } from "@/types";
 
 import { ConfirmRouteContext } from "../ConfirmRoute";
 
@@ -53,7 +52,7 @@ type TfaAuthFormProps = {
   passwordHash: TPasswordHash;
   userName?: string;
   defaultPage?: string;
-} & WithLoaderProps;
+};
 
 const TfaAuthForm = ({
   passwordHash,
@@ -174,4 +173,4 @@ const TfaAuthForm = ({
   );
 };
 
-export default withLoader(TfaAuthForm);
+export default TfaAuthForm;

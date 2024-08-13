@@ -55,8 +55,7 @@ import {
   TFA_IOS_APP_URL,
   TFA_WIN_APP_URL,
 } from "@/utils/constants";
-import withLoader from "@/HOCs/withLoader";
-import { TError, WithLoaderProps } from "@/types";
+import { TError } from "@/types";
 
 import { ConfirmRouteContext } from "../ConfirmRoute";
 import { GreetingContainer } from "../GreetingContainer";
@@ -68,9 +67,8 @@ type TfaActivationFormProps = {
   qrCode: string;
   passwordHash: TPasswordHash;
   userName?: string;
-
   currentColorScheme?: TColorScheme;
-} & WithLoaderProps;
+};
 
 const TfaActivationForm = ({
   secretKey,
@@ -240,4 +238,4 @@ const TfaActivationForm = ({
   );
 };
 
-export default withLoader(TfaActivationForm);
+export default TfaActivationForm;

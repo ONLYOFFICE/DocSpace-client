@@ -35,8 +35,7 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { suspendPortal } from "@docspace/shared/api/portal";
 
-import withLoader from "@/HOCs/withLoader";
-import { TError, WithLoaderProps } from "@/types";
+import { TError } from "@/types";
 import { URL_ONLYOFFICE } from "@/utils/constants";
 
 import { ButtonsWrapper } from "../StyledConfirm.styled";
@@ -44,7 +43,7 @@ import { ConfirmRouteContext } from "../ConfirmRoute";
 
 type DeactivatePortalProps = {
   siteUrl?: string;
-} & WithLoaderProps;
+};
 
 const DeactivatePortalForm = ({ siteUrl }: DeactivatePortalProps) => {
   const { t } = useTranslation(["Confirm", "Common"]);
@@ -124,4 +123,4 @@ const DeactivatePortalForm = ({ siteUrl }: DeactivatePortalProps) => {
   );
 };
 
-export default withLoader(DeactivatePortalForm);
+export default DeactivatePortalForm;

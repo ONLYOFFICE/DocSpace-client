@@ -35,16 +35,15 @@ import { deletePortal } from "@docspace/shared/api/portal";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 
-import { TError, WithLoaderProps } from "@/types";
+import { TError } from "@/types";
 import { URL_ONLYOFFICE } from "@/utils/constants";
-import withLoader from "@/HOCs/withLoader";
 
 import { ConfirmRouteContext } from "../ConfirmRoute";
 import { ButtonsWrapper } from "../StyledConfirm.styled";
 
 type RemovePortalFormProps = {
   siteUrl?: string;
-} & WithLoaderProps;
+};
 
 const RemovePortalForm = ({ siteUrl }: RemovePortalFormProps) => {
   const { t } = useTranslation(["Confirm", "Common"]);
@@ -127,4 +126,4 @@ const RemovePortalForm = ({ siteUrl }: RemovePortalFormProps) => {
   );
 };
 
-export default withLoader(RemovePortalForm);
+export default RemovePortalForm;

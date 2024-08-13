@@ -38,7 +38,12 @@ import {
 } from "react";
 import { useTranslation } from "react-i18next";
 
-import { TPasswordHash } from "@docspace/shared/api/settings/types";
+import {
+  TCapabilities,
+  TPasswordHash,
+  TPasswordSettings,
+  TThirdPartyProvider,
+} from "@docspace/shared/api/settings/types";
 import { toastr } from "@docspace/shared/components/toast";
 import {
   COOKIE_EXPIRATION_YEAR,
@@ -54,7 +59,7 @@ import {
 import { setCookie } from "@docspace/shared/utils/cookie";
 import { DeviceType } from "@docspace/shared/enums";
 import { TValidate } from "@docspace/shared/components/email-input";
-import { TCreateUserData, TError, WithLoaderProps } from "@/types";
+import { TCreateUserData, TError } from "@/types";
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
 import { Text } from "@docspace/shared/components/text";
 import { login } from "@docspace/shared/api/user";
@@ -66,7 +71,6 @@ import {
 
 import SsoReactSvg from "PUBLIC_DIR/images/sso.react.svg";
 
-import withLoader from "@/HOCs/withLoader";
 import useDeviceType from "@/hooks/useDeviceType";
 
 import { ConfirmRouteContext } from "../ConfirmRoute";
@@ -78,9 +82,12 @@ export type CreateUserFormProps = {
   userNameRegex: string;
   passwordHash: TPasswordHash;
   defaultPage?: string;
+  passwordSettings?: TPasswordSettings;
+  capabilities?: TCapabilities;
+  thirdPartyProviders?: TThirdPartyProvider[];
   firstName?: string;
   lastName?: string;
-} & WithLoaderProps;
+};
 
 const CreateUserForm = (props: CreateUserFormProps) => {
   const {
@@ -180,56 +187,56 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
     const headerKey = linkData?.confirmHeader ?? null;
 
-    const toBinaryStr = (str: string) => {
-      const encoder = new TextEncoder();
-      const charCodes = encoder.encode(str);
-      // @ts-ignore
-      return String.fromCharCode(...charCodes);
-    };
+    try {
+      const toBinaryStr = (str: string) => {
+        const encoder = new TextEncoder();
+        const charCodes = encoder.encode(str);
+        // @ts-ignore
+        return String.fromCharCode(...charCodes);
+      };
 
-    const loginData = window.btoa(
-      toBinaryStr(
-        JSON.stringify({
-          type: "invitation",
-          email,
-          roomName,
-          firstName,
-          lastName,
-          linkData,
-        }),
-      ),
-    );
+      const loginData = window.btoa(
+        toBinaryStr(
+          JSON.stringify({
+            type: "invitation",
+            email,
+            roomName,
+            firstName,
+            lastName,
+            linkData,
+          }),
+        ),
+      );
 
-    const response = await getUserByEmail(email, headerKey);
+      await getUserByEmail(email, headerKey);
 
-    if (typeof response === "number") {
-      const isNotExistUser = response === 404;
+      setCookie(LANGUAGE, currentCultureName, {
+        "max-age": COOKIE_EXPIRATION_YEAR,
+      });
+
+      const finalUrl = roomId
+        ? `/rooms/shared/${roomId}/filter?folder=${roomId}`
+        : defaultPage;
+
+      if (roomId) {
+        sessionStorage.setItem("referenceUrl", finalUrl);
+      }
+
+      window.location.href = combineUrl(
+        window.ClientConfig?.proxy?.url,
+        "/login",
+        `?loginData=${loginData}`,
+      );
+    } catch (error) {
+      const knownError = error as TError;
+      const status =
+        typeof knownError === "object" ? knownError?.response?.status : "";
+      const isNotExistUser = status === 404;
 
       if (isNotExistUser) {
         setRegistrationForm(true);
       }
-      setIsLoading(false);
-
-      return;
     }
-
-    setCookie(LANGUAGE, currentCultureName, {
-      "max-age": COOKIE_EXPIRATION_YEAR,
-    });
-
-    const finalUrl = roomId
-      ? `/rooms/shared/${roomId}/filter?folder=${roomId}`
-      : defaultPage;
-
-    if (roomId) {
-      sessionStorage.setItem("referenceUrl", finalUrl);
-    }
-
-    window.location.href = combineUrl(
-      window.ClientConfig?.proxy?.url,
-      "/login",
-      `?loginData=${loginData}`,
-    );
 
     setIsLoading(false);
   };
@@ -294,7 +301,6 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
     createConfirmUser(confirmUser, headerKey).catch((error) => {
       const knownError = error as TError;
-      console.log("error", error);
       let errorMessage: string;
 
       if (typeof knownError === "object") {
@@ -520,4 +526,4 @@ const CreateUserForm = (props: CreateUserFormProps) => {
   );
 };
 
-export default withLoader(CreateUserForm);
+export default CreateUserForm;

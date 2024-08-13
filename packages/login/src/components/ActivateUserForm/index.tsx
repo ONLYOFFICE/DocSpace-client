@@ -37,15 +37,17 @@ import {
 } from "@docspace/shared/components/text-input";
 import { toastr } from "@docspace/shared/components/toast";
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
-import { TPasswordHash } from "@docspace/shared/api/settings/types";
+import {
+  TPasswordHash,
+  TPasswordSettings,
+} from "@docspace/shared/api/settings/types";
 import { createPasswordHash } from "@docspace/shared/utils/common";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { ALLOWED_PASSWORD_CHARACTERS } from "@docspace/shared/constants";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { login } from "@docspace/shared/utils/loginUtils";
 
-import withLoader from "@/HOCs/withLoader";
-import { TActivateConfirmUser, TError, WithLoaderProps } from "@/types";
+import { TActivateConfirmUser, TError } from "@/types";
 
 import { RegisterContainer } from "../CreateUserForm/CreateUserForm.styled";
 import { GreetingUserContainer } from "../CreateUserForm/sub-components/GreetingUserContainer";
@@ -59,7 +61,8 @@ import {
 type ActivateUserFormPorps = {
   passwordHash: TPasswordHash;
   defaultPage?: string;
-} & WithLoaderProps;
+  passwordSettings?: TPasswordSettings;
+};
 
 const ActivateUserForm = ({
   passwordSettings,
@@ -294,4 +297,4 @@ const ActivateUserForm = ({
   );
 };
 
-export default withLoader(ActivateUserForm);
+export default ActivateUserForm;

@@ -35,7 +35,6 @@ import { toastr } from "@docspace/shared/components/toast";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { continuePortal } from "@docspace/shared/api/portal";
 
-import withLoader from "@/HOCs/withLoader";
 import { TError } from "@/types";
 
 import { ConfirmRouteContext } from "../ConfirmRoute";
@@ -117,4 +116,4 @@ const ContinuePortalForm = () => {
   );
 };
 
-export default withLoader(ContinuePortalForm);
+export default ContinuePortalForm;

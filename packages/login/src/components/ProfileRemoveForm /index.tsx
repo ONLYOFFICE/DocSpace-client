@@ -37,8 +37,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { TColorScheme } from "@docspace/shared/themes";
 import { deleteSelf } from "@docspace/shared/api/people";
 
-import withLoader from "@/HOCs/withLoader";
-import { TError, WithLoaderProps } from "@/types";
+import { TError } from "@/types";
 
 import { GreetingContainer } from "../GreetingContainer";
 import { ConfirmRouteContext } from "../ConfirmRoute";
@@ -47,7 +46,7 @@ type ProfileRemoveFormProps = {
   legalTerms: string;
   greetingSettings: string;
   currentColorScheme?: TColorScheme;
-} & WithLoaderProps;
+};
 
 const ProfileRemoveForm = ({
   legalTerms,
@@ -156,4 +155,4 @@ const ProfileRemoveForm = ({
   );
 };
 
-export default withLoader(ProfileRemoveForm);
+export default ProfileRemoveForm;

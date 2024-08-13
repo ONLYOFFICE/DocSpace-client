@@ -16,6 +16,7 @@ import CreateNewPresentation from "PUBLIC_DIR/images/emptyview/create.new.presen
 import CreateRoom from "PUBLIC_DIR/images/emptyview/create.room.svg";
 import InviteUserFormIcon from "PUBLIC_DIR/images/emptyview/invite.user.svg";
 import PersonIcon from "PUBLIC_DIR/images/icons/12/person.svg";
+import FolderIcon from "PUBLIC_DIR/images/icons/12/folder.svg";
 
 import SharedIcon from "PUBLIC_DIR/images/emptyview/share.svg";
 
@@ -301,8 +302,6 @@ export const getOptions = (
     ],
   };
 
-  if (isArchiveFolderRoot) return [];
-
   if (isRootEmptyPage) {
     return match([rootFolderType, access])
       .returnType<EmptyViewOptionsType>()
@@ -321,8 +320,15 @@ export const getOptions = (
         icon: <PersonIcon />,
         description: t("Files:GoToPersonal"),
       }))
+      .with([FolderType.Archive, ShareAccessRights.None], () => ({
+        ...actions.onGoToShared(),
+        icon: <FolderIcon />,
+        description: t("Files:GoToMyRooms"),
+      }))
       .otherwise(() => []);
   }
+
+  if (isArchiveFolderRoot) return [];
 
   if (isFolder) {
     return match([parentRoomType, folderType, access])

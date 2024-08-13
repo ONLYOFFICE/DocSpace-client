@@ -55,11 +55,12 @@ export interface InjectedEmptyViewContainerProps
       TStore["selectedFolderStore"],
       "access" | "security" | "rootFolderType"
     >,
-    Pick<TStore["treeFoldersStore"], "myFolder" | "myFolderId">,
+    Pick<TStore["treeFoldersStore"], "myFolder" | "myFolderId" | "roomsFolder">,
     Pick<TStore["clientLoadingStore"], "setIsSectionFilterLoading"> {
   selectedFolder: ReturnType<
     TStore["selectedFolderStore"]["getSelectedFolder"]
   >;
+  userId: string | undefined;
   isGracePeriod: boolean;
   isVisibleInfoPanel: boolean;
   setVisibleInfoPanel: (arg: boolean) => void;
@@ -83,4 +84,5 @@ export type OptionActions = {
   onCreateRoom: VoidFunction;
   inviteRootUser: TStore["contextOptionsStore"]["inviteUser"];
   onGoToPersonal: () => LinkProps;
+  onGoToShared: () => LinkProps;
 };

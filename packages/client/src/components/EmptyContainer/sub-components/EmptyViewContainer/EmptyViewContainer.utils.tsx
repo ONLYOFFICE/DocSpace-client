@@ -37,6 +37,12 @@ import EmptyRoomsRootLightIcon from "PUBLIC_DIR/images/emptyview/empty.rooms.roo
 import EmptyRecentDarkIcon from "PUBLIC_DIR/images/emptyview/empty.recent.dark.svg";
 import EmptyRecentLightIcon from "PUBLIC_DIR/images/emptyview/empty.recent.light.svg";
 
+import EmptyArchiveDarkIcon from "PUBLIC_DIR/images/emptyview/empty.archive.dark.svg";
+import EmptyArchiveLightIcon from "PUBLIC_DIR/images/emptyview/empty.archive.light.svg";
+
+import EmptyArchiveUserDarkIcon from "PUBLIC_DIR/images/emptyview/empty.archive.user.dark.svg";
+import EmptyArchiveUserLightIcon from "PUBLIC_DIR/images/emptyview/empty.archive.user.light.svg";
+
 import EmptyRoomsRootUserDarkIcon from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.dark.svg";
 import EmptyRoomsRootUserLightIcon from "PUBLIC_DIR/images/emptyview/empty.rooms.root.user.light.svg";
 
@@ -175,7 +181,14 @@ export const getRootDesctiption = (
       t("EmptyView:DefaultFolderDescription"),
     )
     .with([FolderType.Recent, P._], () => t("EmptyView:EmptyRecentDescription"))
-    .with([FolderType.Archive, P._], () => t("Test"))
+    .with([FolderType.Archive, ShareAccessRights.None], () =>
+      t("Files:ArchiveEmptyScreen", {
+        productName: t("Common:ProductName"),
+      }),
+    )
+    .with([FolderType.Archive, ShareAccessRights.DenyAccess], () =>
+      t("Files:ArchiveEmptyScreenUser"),
+    )
     .with([FolderType.TRASH, P._], () => t("Test"))
     .otherwise(() => "");
 };
@@ -266,7 +279,7 @@ export const getRootTitle = (
       t("Files:EmptyScreenFolder"),
     )
     .with([FolderType.Recent, P._], () => t("Files:NoFilesHereYet"))
-    .with([FolderType.Archive, P._], () => t("Test"))
+    .with([FolderType.Archive, P._], () => t("Files:ArchiveEmptyScreenHeader"))
     .with([FolderType.TRASH, P._], () => t("Test"))
     .otherwise(() => "");
 };
@@ -401,7 +414,16 @@ export const getRootIcom = (
     .with([FolderType.Recent, P._], () =>
       isBaseTheme ? <EmptyRecentLightIcon /> : <EmptyRecentDarkIcon />,
     )
-    .with([FolderType.Archive, P._], () => <div />)
+    .with([FolderType.Archive, ShareAccessRights.None], () =>
+      isBaseTheme ? <EmptyArchiveLightIcon /> : <EmptyArchiveDarkIcon />,
+    )
+    .with([FolderType.Archive, ShareAccessRights.DenyAccess], () =>
+      isBaseTheme ? (
+        <EmptyArchiveUserLightIcon />
+      ) : (
+        <EmptyArchiveUserDarkIcon />
+      ),
+    )
     .with([FolderType.TRASH, P._], () => <div />)
     .otherwise(() => <div />);
 };

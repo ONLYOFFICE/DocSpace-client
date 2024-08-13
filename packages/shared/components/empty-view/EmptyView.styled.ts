@@ -75,7 +75,7 @@ export const EmptyViewBody = styled.div`
       font-size: 13px;
       line-height: 15px;
       text-decoration: underline dotted;
-      text-underline-offset: 1px;
+      text-underline-offset: 2px;
     }
   }
 `;

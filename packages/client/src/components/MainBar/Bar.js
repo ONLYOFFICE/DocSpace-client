@@ -69,7 +69,7 @@ const Bar = (props) => {
 
     showRoomQuotaBar,
     showStorageQuotaBar,
-    showUserQuotaBar,
+    showAlmostReachedUserTariffLimit,
 
     currentColorScheme,
 
@@ -283,7 +283,7 @@ const Bar = (props) => {
       };
     }
     if (
-      showUserQuotaBar &&
+      showAlmostReachedUserTariffLimit &&
       showStorageQuotaBar &&
       barVisible.storageAndUserQuota
     ) {
@@ -316,7 +316,7 @@ const Bar = (props) => {
       };
     }
 
-    if (showUserQuotaBar && barVisible.userQuota) {
+    if (showAlmostReachedUserTariffLimit && barVisible.userQuota) {
       return {
         type: QuotaBarTypes.UserQuota,
         maxValue: maxCountManagersByQuota,
@@ -402,7 +402,7 @@ export default inject(
 
       showRoomQuotaBar,
       showStorageQuotaBar,
-      showUserQuotaBar,
+      showAlmostReachedUserTariffLimit,
       showUserPersonalQuotaBar,
       tenantCustomQuota,
       showTenantCustomQuotaBar,
@@ -431,7 +431,7 @@ export default inject(
 
       showRoomQuotaBar,
       showStorageQuotaBar,
-      showUserQuotaBar,
+      showAlmostReachedUserTariffLimit,
 
       currentColorScheme,
       setMainBarVisible,

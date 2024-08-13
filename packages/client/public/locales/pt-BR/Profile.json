@@ -1,5 +1,6 @@
 {
   "ActiveSessions": "Sessões ativas",
+  "AutoDeleteTitle": "Todas as sessões com mais de 60 dias serão excluídas automaticamente.",
   "ChangeEmailSuccess": "O e-mail foi alterado com sucesso",
   "ChangePasswordAfterLoggingOut": "Alterar a senha após sair",
   "ConnectSocialNetworks": "Conecte suas redes sociais",
@@ -14,7 +15,6 @@
   "InterfaceTheme": "Tema de interface",
   "LightTheme": "Tema claro",
   "LogoutActiveConnection": "Sair da conexão ativa",
-  "LogoutAllActiveConnections": "Sair de todas as conexões ativas",
   "LogoutAllActiveSessionsDescription": "Todas as conexões ativas, exceto esta conexão, serão desconectadas, pois estão em uso no momento.",
   "LogoutBtn": "Sair",
   "LogoutDescription": "Observação. Todas as conexões ativas, exceto esta conexão, serão desconectadas, pois estão em uso no momento.",
@@ -27,5 +27,6 @@
   "SuccessLogout": "A conexão ativa foi desconectada: {{platform}}, {{browser}}",
   "SystemTheme": "Usar tema do sistema",
   "SystemThemeDescription": "Alterne automaticamente entre temas claros e escuros quando o sistema o fizer.",
+  "TerminateAllSessions": "Encerre todas as sessões, exceto a atual",
   "TwoFactorDescription": "A autenticação de dois fatores por meio de um aplicativo de geração de código foi habilitada para todos os usuários pelo administrador."
 }

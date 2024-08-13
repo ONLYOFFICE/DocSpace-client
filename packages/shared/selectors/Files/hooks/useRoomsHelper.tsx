@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 
 import { getRooms } from "../../../api/rooms";
@@ -35,27 +35,31 @@ import RoomType from "../../../components/room-type";
 import { TSelectorItem } from "../../../components/selector";
 import { TBreadCrumb } from "../../../components/selector/Selector.types";
 
-import { PAGE_COUNT, DEFAULT_BREAD_CRUMB } from "../FilesSelector.constants";
+import { LoadersContext } from "../contexts/Loaders";
+
+import { PAGE_COUNT } from "../FilesSelector.constants";
 import { UseRoomsHelperProps } from "../FilesSelector.types";
-import { convertRoomsToItems } from "../FilesSelector.utils";
+import {
+  convertRoomsToItems,
+  getDefaultBreadCrumb,
+} from "../FilesSelector.utils";
 
 import useInputItemHelper from "./useInputItemHelper";
 
 const useRoomsHelper = ({
-  setIsNextPageLoading,
   setHasNextPage,
   setTotal,
   setItems,
   setBreadCrumbs,
   setIsRoot,
   onSetBaseFolderPath,
-  setIsBreadCrumbsLoading,
+
   searchValue,
   isRoomsOnly,
-  isFirstLoad,
+
   isInit,
   setIsInit,
-  setIsFirstLoad,
+
   withCreate,
   createDefineRoomLabel,
   createDefineRoomType,
@@ -64,6 +68,13 @@ const useRoomsHelper = ({
   subscribe,
 }: UseRoomsHelperProps) => {
   const { t } = useTranslation(["Common"]);
+  const {
+    setIsNextPageLoading,
+    setIsBreadCrumbsLoading,
+    isFirstLoad,
+    setIsFirstLoad,
+  } = useContext(LoadersContext);
+
   const { addInputItem } = useInputItemHelper({ withCreate, setItems });
 
   const requestRunning = React.useRef(false);
@@ -134,7 +145,7 @@ const useRoomsHelper = ({
 
         const breadCrumbs: TBreadCrumb[] = [{ label: title, id, isRoom: true }];
 
-        if (!isRoomsOnly) breadCrumbs.unshift({ ...DEFAULT_BREAD_CRUMB });
+        if (!isRoomsOnly) breadCrumbs.unshift({ ...getDefaultBreadCrumb(t) });
 
         onSetBaseFolderPath?.(breadCrumbs);
 
@@ -147,7 +158,9 @@ const useRoomsHelper = ({
       setHasNextPage(count === PAGE_COUNT);
 
       if (firstLoadRef.current || startIndex === 0) {
-        if (withCreate) {
+        const { security } = current;
+
+        if (withCreate && security.Create) {
           setTotal(total + 1);
           const createItem: TSelectorItem = {
             isCreateNewItem: true,
@@ -155,7 +168,8 @@ const useRoomsHelper = ({
             id: "create-room-item",
             key: "create-room-item",
             hotkey: "r",
-
+            isRoomsOnly,
+            createDefineRoomType,
             dropDownItems: createDefineRoomType
               ? undefined
               : createDropDownItems,

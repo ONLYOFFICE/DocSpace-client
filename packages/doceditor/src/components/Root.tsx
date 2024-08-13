@@ -76,7 +76,8 @@ const Root = ({
   const isSkipError =
     error?.status === "not-found" ||
     (error?.status === "access-denied" && !!error.editorUrl) ||
-    error?.status === "not-supported";
+    error?.status === "not-supported" ||
+    error?.status === "quota-exception";
 
   const { t } = useTranslation(["Editor", "Common"]);
 
@@ -102,6 +103,7 @@ const Root = ({
   const { filesSettings } = useFilesSettings({});
   const { socketHelper } = useSocketHelper({
     socketUrl: user ? settings?.socketUrl ?? "" : "",
+    user,
   });
   const {
     onSDKRequestSaveAs,
@@ -125,12 +127,6 @@ const Root = ({
     selectFileDialogFileTypeDetection,
     selectFileDialogVisible,
   } = useSelectFileDialog({ instanceId: instanceId ?? "" });
-  const {
-    isSharingDialogVisible,
-
-    onCloseSharingDialog,
-    onSDKRequestSharingSettings,
-  } = useShareDialog();
 
   const {
     getIsDisabledStartFillingSelectDialog,
@@ -139,7 +135,16 @@ const Root = ({
     onSubmitStartFillingSelectDialog,
     onSDKRequestStartFilling,
     conflictDataDialog,
+    headerLabelSFSDialog,
+    onDownloadAs,
   } = useStartFillingSelectDialog(fileInfo);
+
+  const {
+    isSharingDialogVisible,
+
+    onCloseSharingDialog,
+    onSDKRequestSharingSettings,
+  } = useShareDialog(config, onSDKRequestStartFilling);
 
   useUpdateSearchParamId(fileId, hash);
 
@@ -208,6 +213,7 @@ const Root = ({
           fileInfo={fileInfo}
           errorMessage={error?.message}
           isSkipError={!!isSkipError}
+          onDownloadAs={onDownloadAs}
           onSDKRequestSharingSettings={onSDKRequestSharingSettings}
           onSDKRequestSaveAs={onSDKRequestSaveAs}
           onSDKRequestInsertImage={onSDKRequestInsertImage}
@@ -254,11 +260,14 @@ const Root = ({
         <StartFillingSelectorDialog
           fileInfo={fileInfo}
           socketHelper={socketHelper}
-          isVisible={isVisibleStartFillingSelectDialog}
+          filesSettings={filesSettings}
+          headerLabel={headerLabelSFSDialog}
+          isVisible={
+            isVisibleStartFillingSelectDialog && !conflictDataDialog.visible
+          }
           onClose={onCloseStartFillingSelectDialog}
           onSubmit={onSubmitStartFillingSelectDialog}
           getIsDisabled={getIsDisabledStartFillingSelectDialog}
-          filesSettings={filesSettings}
         />
       )}
       {conflictDataDialog.visible && (

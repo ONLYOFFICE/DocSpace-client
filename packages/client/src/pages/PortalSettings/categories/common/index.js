@@ -67,13 +67,6 @@ const TabsCommon = (props) => {
     }
   }, [tReady, isLoadedSubmenu]);
 
-  const load = async () => {
-    const currentTab = getCurrentTab();
-    await loadBaseInfo(
-      !isMobileView ? (currentTab === 0 ? "general" : "branding") : "",
-    );
-  };
-
   const data = [
     {
       id: "general",
@@ -92,6 +85,24 @@ const TabsCommon = (props) => {
     },
   ];
 
+  const getCurrentTabId = () => {
+    const path = location.pathname;
+    const currentTab = data.find((item) => path.includes(item.id));
+    return currentTab !== -1 && data.length ? currentTab.id : data[0].id;
+  };
+
+  const currentTabId = getCurrentTabId();
+
+  const load = async () => {
+    await loadBaseInfo(
+      !isMobileView
+        ? currentTabId === "general"
+          ? "general"
+          : "branding"
+        : "",
+    );
+  };
+
   const onSelect = (e) => {
     navigate(
       combineUrl(
@@ -101,14 +112,6 @@ const TabsCommon = (props) => {
       ),
     );
   };
-
-  const getCurrentTabId = () => {
-    const path = location.pathname;
-    const currentTab = data.find((item) => path.includes(item.id));
-    return currentTab !== -1 && data.length ? currentTab.id : data[0].id;
-  };
-
-  const currentTabId = getCurrentTabId();
 
   if (!isLoadedSubmenu) return <LoaderTabs />;
 
@@ -122,7 +125,7 @@ const TabsCommon = (props) => {
   );
 };
 
-export default inject(({ settingsStore, common }) => {
+export const Component = inject(({ settingsStore, common }) => {
   const {
     isLoaded,
     setIsLoadedSubmenu,

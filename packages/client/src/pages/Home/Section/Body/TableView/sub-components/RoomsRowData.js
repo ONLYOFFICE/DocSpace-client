@@ -32,7 +32,7 @@ import TypeCell from "./TypeCell";
 import TagsCell from "./TagsCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
-import { classNames } from "@docspace/shared/utils";
+import { classNames, getLastColumn } from "@docspace/shared/utils";
 import { StyledBadgesContainer } from "../StyledTable";
 import { StyledQuickButtonsContainer } from "../StyledTable";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
@@ -41,7 +41,6 @@ const RoomsRowDataComponent = (props) => {
   const {
     roomColumnTypeIsEnabled,
     roomColumnOwnerIsEnabled,
-    roomColumnQuickButtonsIsEnabled,
     roomColumnTagsIsEnabled,
     roomColumnActivityIsEnabled,
     roomQuotaColumnIsEnable,
@@ -59,7 +58,15 @@ const RoomsRowDataComponent = (props) => {
     badgesComponent,
     quickButtonsComponent,
     item,
+    tableStorageName,
   } = props;
+
+  const lastColumn = getLastColumn(tableStorageName);
+  const quickButtonsComponentNode = (
+    <StyledQuickButtonsContainer>
+      {quickButtonsComponent}
+    </StyledQuickButtonsContainer>
+  );
 
   return (
     <>
@@ -82,6 +89,7 @@ const RoomsRowDataComponent = (props) => {
         <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
           {badgesComponent}
         </StyledBadgesContainer>
+        {lastColumn === "Name" ? quickButtonsComponentNode : <></>}
       </TableCell>
 
       {roomColumnTypeIsEnabled ? (
@@ -92,11 +100,16 @@ const RoomsRowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Type" ? "no-extra-space" : "",
+          )}
         >
           <TypeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "Type" ? quickButtonsComponentNode : <></>}
         </TableCell>
       ) : (
         <div />
@@ -115,6 +128,7 @@ const RoomsRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "Tags" ? quickButtonsComponentNode : <></>}
         </TableCell>
       ) : (
         <div />
@@ -128,11 +142,16 @@ const RoomsRowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Owner" ? "no-extra-space" : "",
+          )}
         >
           <AuthorCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "Owner" ? quickButtonsComponentNode : <></>}
         </TableCell>
       ) : (
         <div />
@@ -146,11 +165,16 @@ const RoomsRowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Activity" ? "no-extra-space" : "",
+          )}
         >
           <DateCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "Activity" ? quickButtonsComponentNode : <></>}
         </TableCell>
       ) : (
         <div />
@@ -163,31 +187,11 @@ const RoomsRowDataComponent = (props) => {
               type="room"
               isReadOnly={!item?.security?.EditRoom}
             />
+            {lastColumn === "Storage" ? quickButtonsComponentNode : <></>}
           </TableCell>
         ) : (
           <div />
         ))}
-
-      {roomColumnQuickButtonsIsEnabled ? (
-        <TableCell
-          style={
-            !roomColumnQuickButtonsIsEnabled
-              ? { background: "none" }
-              : dragStyles.style
-          }
-          {...selectionProp}
-          className={classNames(
-            selectionProp?.className,
-            "table-container_quick-buttons-wrapper",
-          )}
-        >
-          <StyledQuickButtonsContainer>
-            {quickButtonsComponent}
-          </StyledQuickButtonsContainer>
-        </TableCell>
-      ) : (
-        <div />
-      )}
     </>
   );
 };
@@ -196,10 +200,10 @@ export default inject(({ currentQuotaStore, tableStore }) => {
   const {
     roomColumnTypeIsEnabled,
     roomColumnOwnerIsEnabled,
-    roomColumnQuickButtonsIsEnabled,
     roomColumnTagsIsEnabled,
     roomColumnActivityIsEnabled,
     roomQuotaColumnIsEnable,
+    tableStorageName,
   } = tableStore;
 
   const { showStorageInfo } = currentQuotaStore;
@@ -207,9 +211,9 @@ export default inject(({ currentQuotaStore, tableStore }) => {
     roomQuotaColumnIsEnable,
     roomColumnTypeIsEnabled,
     roomColumnOwnerIsEnabled,
-    roomColumnQuickButtonsIsEnabled,
     roomColumnTagsIsEnabled,
     roomColumnActivityIsEnabled,
     showStorageInfo,
+    tableStorageName,
   };
 })(observer(RoomsRowDataComponent));

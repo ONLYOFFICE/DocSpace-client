@@ -1,5 +1,6 @@
 {
   "ActiveSessions": "Sesiuni active",
+  "AutoDeleteTitle": "Toate sesiunile vor fi șterse automat în termen de 60 de zile.",
   "ChangeEmailSuccess": "Adresa e-mail a fost modificată cu succes",
   "ChangePasswordAfterLoggingOut": "Modificare parolă după deconectare",
   "ConnectSocialNetworks": "Conectați-vă reţelele sociale",
@@ -14,7 +15,6 @@
   "InterfaceTheme": "Tema interfeței",
   "LightTheme": "Tema luminoasă",
   "LogoutActiveConnection": "Deconectează conexiunea activă",
-  "LogoutAllActiveConnections": "Deconectează toate conexiuni active",
   "LogoutAllActiveSessionsDescription": "Toate conexiunile active vor fi deconectate, cu excepţia acestei conexiuni, deoarece ea este în curs de utilizare.",
   "LogoutBtn": "Deconectare",
   "LogoutDescription": "Menţiune. Toate conexiunile active vor fi deconectate, cu excepţia acestei conexiuni, deoarece ea este în curs de utilizare.",
@@ -27,5 +27,6 @@
   "SuccessLogout": "Conexiunea activă a fost deconectată: {{platform}}, {{browser}}",
   "SystemTheme": "Utilizare temă de sistem",
   "SystemThemeDescription": "Comutați automat între tema luminoasă şi întunecată în funcţie de setări sistem.",
+  "TerminateAllSessions": "Încheiați toate sesiunile, cu excepția celei curente",
   "TwoFactorDescription": "Autentificarea cu doi factori prin aplicația de generare coduri a fost activată pentru toți utilizatorii de către administratorul."
 }

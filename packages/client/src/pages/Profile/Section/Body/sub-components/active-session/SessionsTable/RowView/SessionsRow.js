@@ -32,6 +32,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import SessionsRowContent from "./SessionsRowContent";
 import RemoveSessionSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
+import { globalColors } from "@docspace/shared/themes";
 
 const SessionsRow = (props) => {
   const {
@@ -57,7 +58,11 @@ const SessionsRow = (props) => {
     <>
       {showTickIcon ? (
         !isMobile() && (
-          <IconButton size={16} iconName={TickSvgUrl} color="#20D21F" />
+          <IconButton
+            size={16}
+            iconName={TickSvgUrl}
+            color={globalColors.tickColor}
+          />
         )
       ) : (
         <IconButton

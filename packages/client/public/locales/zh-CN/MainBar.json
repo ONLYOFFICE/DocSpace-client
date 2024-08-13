@@ -1,14 +1,19 @@
 {
   "ClickHere": "点击此处",
   "ConfirmEmailDescription": "使用激活邮件中提供的链接。没有收到包含激活链接的邮件？",
+  "ConfirmEmailHeader": "请激活您的电子邮件 ({{ email }}) 以访问{{productName}}功能。",
   "PersonalUserQuotaAdminsDescription": "如要上传和创建新文件和文件夹，请释放磁盘空间，或在<1>存储空间管理设置</1>中管理每位用户的配额。",
   "PersonalUserQuotaDescription": "如要上传和创建新文件和文件夹，请释放磁盘空间，或联系管理员增加存储空间配额。",
   "RequestActivation": "请求再次激活",
+  "RoomQuotaDescription": "您可以存档不必要的房间或<1>{{clickHere}}</1>为您的{{productName}}找到更合适的定价计划。",
   "RoomQuotaHeader": "房间数量即将超出限制：{{currentValue}}/{{maxValue}}",
   "StorageAndRoomHeader": "存储和房间的限制即将被超过。",
   "StorageAndUserHeader": "存储和管理员/高级用户的数量限制即将被超过。",
+  "StorageQuotaDescription": "您可以删除不必要的文件或 <1>{{clickHere}}</1>为您的{{productName}}找到更合适的定价计划。",
   "StorageQuotaExceeded": "超出存储空间配额",
   "StorageQuotaHeader": "存储空间数量即将超出限制：{{currentValue}}/{{maxValue}}",
+  "StorageQuotaUserDescription": "您可以删除不必要的文件以释放磁盘空间。",
   "TenantCustomQuotaDescription": "您可以在<1>存储空间管理设置</1>中删除不必要的文件，或更改配额。",
-  "UserQuotaHeader": "管理员/高级用户的数量限制即将被超过。 {{currentValue}} / {{maxValue}}"
+  "UserQuotaDescription": "<1>{{clickHere}}</1>为您的{{productName}}找到更好的定价计划。",
+  "UserQuotaHeader": "管理员/高级用户的数量即将超过限制： {{currentValue}} / {{maxValue}}"
 }

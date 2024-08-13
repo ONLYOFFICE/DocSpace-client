@@ -39,7 +39,7 @@ import { SelectorAddButton } from "@docspace/shared/components/selector-add-butt
 import { SelectedItem } from "@docspace/shared/components/selected-item";
 import { tablet } from "@docspace/shared/utils";
 import Base from "@docspace/shared/themes/base";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
+import { globalColors } from "@docspace/shared/themes";
 
 const CategoryHeader = styled.div`
   margin-top: 24px;
@@ -89,7 +89,7 @@ const ChipsContainer = styled.div`
 const InfoBar = styled.div`
   display: flex;
   background-color: ${(props) => props.theme.infoBar.background};
-  color: #333;
+  color: ${(props) => props.theme.infoBar.textColor};
   font-size: 12px;
   padding: 12px 16px;
   border-radius: 6px;
@@ -111,7 +111,7 @@ const InfoBar = styled.div`
     .header-icon {
       svg {
         path {
-          fill: #ed7309;
+          fill: ${(props) => props.theme.infoBar.iconFill};
         }
       }
     }
@@ -205,10 +205,10 @@ const CSP = ({
   return (
     <>
       <CategoryHeader>
-        {t("CSPHeader", { productName: PRODUCT_NAME })}
+        {t("CSPHeader", { productName: t("Common:ProductName") })}
       </CategoryHeader>
       <Container className="description-holder">
-        {t("CSPDescription", { productName: PRODUCT_NAME })}
+        {t("CSPDescription", { productName: t("Common:ProductName") })}
         <HelpButton
           className="csp-helpbutton"
           offsetRight={0}
@@ -232,7 +232,9 @@ const CSP = ({
               </Text>
             </div>
             <div className="body-container">
-              {t("CSPInfoBarDescription", { productName: PRODUCT_NAME })}{" "}
+              {t("CSPInfoBarDescription", {
+                productName: t("Common:ProductName"),
+              })}{" "}
               <Link
                 color={currentColorScheme?.main?.accent}
                 fontSize="13px"
@@ -257,9 +259,11 @@ const CSP = ({
       </Container>
       <Text
         lineHeight="20px"
-        color={error ? theme?.input.focusErrorBorderColor : "#A3A9AE"}
+        color={error ? theme?.input.focusErrorBorderColor : globalColors.gray}
       >
-        {error ? error : t("CSPUrlHelp", { productName: PRODUCT_NAME })}
+        {error
+          ? error
+          : t("CSPUrlHelp", { productName: t("Common:ProductName") })}
       </Text>
       <ChipsContainer>{getChips(cspDomains)}</ChipsContainer>
     </>

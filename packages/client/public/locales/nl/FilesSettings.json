@@ -6,6 +6,7 @@
   "DisplayTemplates": "Sjablonen Weergeven",
   "IntermediateVersion": "Bewaar alle opgeslagen tussenversies",
   "KeepIntermediateVersion": "Bewaar tussenversies bij het bewerken",
+  "OpenSameTab": "Open {{organizationName}} editor in hetzelfde tabblad",
   "OriginalCopy": "Bewaar de bestandskopie ook in het oorspronkelijke formaat",
   "StoringFileVersion": "Opslaan van bestandsversies",
   "ThirdPartyAccounts": "Externe accounts",

@@ -69,7 +69,6 @@ import { PreviewBlock } from "../sub-components/PreviewBlock";
 import { loadFrame } from "../utils";
 
 import {
-  scriptUrl,
   dataDimensions,
   defaultWidthDimension,
   defaultHeightDimension,
@@ -90,11 +89,11 @@ import {
   SelectedItemsContainer,
   CheckboxGroup,
 } from "./StyledPresets";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
+import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const Manager = (props) => {
-  const { t, setDocumentTitle, fetchExternalLinks, theme, currentColorScheme } =
-    props;
+  const { t, fetchExternalLinks, theme, currentColorScheme } = props;
   const navigate = useNavigate();
 
   setDocumentTitle(t("JavascriptSdk"));
@@ -165,7 +164,7 @@ const Manager = (props) => {
     window.DocSpace?.SDK?.frames[frameId]?.destroyFrame();
   };
 
-  const loadCurrentFrame = () => loadFrame(config, scriptUrl);
+  const loadCurrentFrame = () => loadFrame(config, SDK_SCRIPT_URL);
 
   useEffect(() => {
     loadCurrentFrame();
@@ -348,8 +347,10 @@ const Manager = (props) => {
 
   return (
     <PresetWrapper
-      description={t("CustomDescription", { productName: PRODUCT_NAME })}
-      header={t("CreateSamplePortal", { productName: PRODUCT_NAME })}
+      description={t("CustomDescription", {
+        productName: t("Common:ProductName"),
+      })}
+      header={t("CreateSamplePortal", { productName: t("Common:ProductName") })}
     >
       <Container>
         <PreviewBlock
@@ -358,7 +359,7 @@ const Manager = (props) => {
           preview={preview}
           theme={theme}
           frameId={frameId}
-          scriptUrl={scriptUrl}
+          scriptUrl={SDK_SCRIPT_URL}
           config={config}
         />
         <Controls>
@@ -506,7 +507,7 @@ const Manager = (props) => {
                     <TooltipContent
                       title={t("Header")}
                       description={t("HeaderDescription", {
-                        productName: PRODUCT_NAME,
+                        productName: t("Common:ProductName"),
                       })}
                       img={theme.isBase ? HeaderUrl : HeaderDarkUrl}
                     />
@@ -655,14 +656,13 @@ const Manager = (props) => {
   );
 };
 
-export default inject(({ authStore, settingsStore, publicRoomStore }) => {
-  const { setDocumentTitle } = authStore;
+export const Component = inject(({ settingsStore, publicRoomStore }) => {
   const { theme, currentColorScheme } = settingsStore;
   const { fetchExternalLinks } = publicRoomStore;
 
   return {
     theme,
-    setDocumentTitle,
+
     fetchExternalLinks,
     currentColorScheme,
   };

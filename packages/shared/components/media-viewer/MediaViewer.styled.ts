@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 import { DropDown } from "@docspace/shared/components/drop-down";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 
@@ -62,20 +62,21 @@ export const ControlBtn = styled.div`
 ControlBtn.defaultProps = { theme: Base };
 
 export const StyledDropDown = styled(DropDown)`
-  background: #333;
+  background: ${globalColors.black};
+  direction: ${({ theme }) => theme.interfaceDirection};
 `;
 
 export const StyledDropDownItem = styled(DropDownItem)`
-  color: #fff;
+  color: ${globalColors.white};
 
   .drop-down-item_icon svg {
     path {
-      fill: #fff !important;
+      fill: ${globalColors.white} !important;
     }
   }
 
   &:hover {
-    background: #444;
+    background: ${globalColors.black};
   }
 `;
 
@@ -88,36 +89,38 @@ export const StyledButtonScroll = styled.div<StyledButtonScrollProps>`
 `;
 
 export const StyledMobileDetails = styled.div`
+  direction: ${({ theme }) => theme.interfaceDirection};
   z-index: 307;
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
+  inset-inline: 0;
   height: 53px;
   display: flex;
   justify-content: center;
   align-items: center;
   background: linear-gradient(
     0deg,
-    rgba(0, 0, 0, 0) 0%,
+    ${globalColors.tapHighlight} 0%,
     rgba(0, 0, 0, 0.8) 100%
   );
 
   svg {
     path {
-      fill: #fff;
+      fill: ${globalColors.white};
     }
   }
 
   .mobile-close {
     position: fixed;
-    left: 21px;
+    inset-inline-start: 21px;
     top: 22px;
+    ${({ theme }) =>
+      theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"};
   }
 
   .mobile-context {
     position: fixed;
-    right: 22px;
+    inset-inline-end: 22px;
     top: 22px;
   }
 
@@ -190,7 +193,7 @@ export const StyledViewerContainer = styled.div<StyledViewerContainerProps>`
     width: 100%;
     background: linear-gradient(
       0deg,
-      rgba(0, 0, 0, 0) 0%,
+      ${globalColors.tapHighlight} 0%,
       rgba(0, 0, 0, 0.8) 100%
     );
     position: fixed;
@@ -226,14 +229,7 @@ export const StyledViewerContainer = styled.div<StyledViewerContainerProps>`
   .mediaPlayerClose {
     position: fixed;
     top: 13px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: 12px;
-          `
-        : css`
-            right: 12px;
-          `}
+    inset-inline-end: 12px;
     height: 17px;
     &:hover {
       background-color: transparent;
@@ -247,10 +243,7 @@ export const StyledViewerContainer = styled.div<StyledViewerContainerProps>`
 
   .containerVideo {
     position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
+    inset: 0;
   }
 `;
 

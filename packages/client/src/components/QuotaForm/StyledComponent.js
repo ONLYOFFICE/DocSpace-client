@@ -40,7 +40,7 @@ const StyledBody = styled.div`
 
   .quota_checkbox {
     svg {
-      margin-right: 8px;
+      margin-inline-end: 8px;
     }
   }
 

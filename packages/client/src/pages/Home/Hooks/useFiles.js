@@ -32,9 +32,14 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { getGroup } from "@docspace/shared/api/groups";
 import { getUserById } from "@docspace/shared/api/people";
-import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import { CREATED_FORM_KEY, MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
-import { Events, RoomSearchArea } from "@docspace/shared/enums";
+import {
+  Events,
+  FolderType,
+  RoomSearchArea,
+  RoomsType,
+} from "@docspace/shared/enums";
 import { getObjectByLocation } from "@docspace/shared/utils/common";
 import { useParams } from "react-router-dom";
 
@@ -72,6 +77,8 @@ const useFiles = ({
   userId,
 
   scrollToTop,
+  selectedFolderStore,
+  wsCreatedPDFForm,
 }) => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -240,7 +247,7 @@ const useFiles = ({
     const newFilter = filter
       ? filter.clone()
       : isRooms
-        ? RoomsFilter.getDefault(userId)
+        ? RoomsFilter.getDefault(userId, filterObj.searchArea)
         : FilesFilter.getDefault();
     const requests = [Promise.resolve(newFilter)];
 
@@ -252,7 +259,7 @@ const useFiles = ({
       .all(requests)
       .catch((err) => {
         if (isRooms) {
-          Promise.resolve(RoomsFilter.getDefault(userId));
+          Promise.resolve(RoomsFilter.getDefault(userId, filterObj.searchArea));
         } else {
           Promise.resolve(FilesFilter.getDefault());
         }
@@ -286,7 +293,15 @@ const useFiles = ({
             );
           } else {
             const folderId = filter.folder;
-            return fetchFiles(folderId, filter);
+            return fetchFiles(folderId, filter)?.finally(() => {
+              const data = sessionStorage.getItem(CREATED_FORM_KEY);
+              if (data) {
+                wsCreatedPDFForm({
+                  data,
+                });
+                sessionStorage.removeItem(CREATED_FORM_KEY);
+              }
+            });
           }
         }
 
@@ -298,11 +313,17 @@ const useFiles = ({
 
           const event = new Event(Events.CREATE);
 
+          const isFormRoom =
+            selectedFolderStore.roomType === RoomsType.FormRoom ||
+            selectedFolderStore.parentRoomType === FolderType.FormRoom;
+
           const payload = {
             extension: "pdf",
             id: -1,
             fromTemplate: true,
             title: gallerySelected.attributes.name_form,
+            openEditor: !isFormRoom,
+            edit: !isFormRoom,
           };
 
           event.payload = payload;

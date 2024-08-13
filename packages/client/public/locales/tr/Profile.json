@@ -1,5 +1,6 @@
 {
   "ActiveSessions": "Aktif Oturumlar",
+  "AutoDeleteTitle": "60 günden eski tüm oturumlar otomatik olarak silinecektir.",
   "ChangeEmailSuccess": "E-posta başarıyla değiştirildi ",
   "ChangePasswordAfterLoggingOut": "Çıkış yaptıktan sonra şifreyi değiştir",
   "ConnectSocialNetworks": "Sosyal ağlarınızı bağlayın",
@@ -14,7 +15,6 @@
   "InterfaceTheme": "Arayüz teması",
   "LightTheme": "Açık tema",
   "LogoutActiveConnection": "Aktif bağlantıdan çıkış yap",
-  "LogoutAllActiveConnections": "Tüm aktif bağlantılardan çıkış yap",
   "LogoutAllActiveSessionsDescription": "Şu anda kullanımda olduğundan, bu bağlantı dışındaki tüm aktif bağlantıların oturumu kapatılacaktır.",
   "LogoutBtn": "Çıkış Yap",
   "LogoutDescription": "Not. Şu anda kullanımda olduğundan, bu bağlantı dışındaki tüm aktif bağlantıların oturumu kapatılacaktır.",
@@ -27,5 +27,6 @@
   "SuccessLogout": "Etkin bağlantının oturumu kapatıldı: {{platform}}, {{browser}}",
   "SystemTheme": "Sistem temasını kullan",
   "SystemThemeDescription": "Sisteminiz geçiş yaptığında açık ve koyu temalar arasında otomatik olarak geçiş yapın.",
+  "TerminateAllSessions": "Geçerli oturum dışındaki tüm oturumları sonlandırın",
   "TwoFactorDescription": "Tüm kullanıcılar için kod üreten bir uygulama aracılığıyla iki faktörlü kimlik doğrulama yönetici tarafından etkinleştirildi."
 }

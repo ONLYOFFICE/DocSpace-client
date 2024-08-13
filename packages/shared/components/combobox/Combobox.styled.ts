@@ -28,7 +28,7 @@ import styled, { css } from "styled-components";
 
 import TriangleDownIcon from "PUBLIC_DIR/images/triangle.down.react.svg";
 
-import { Base, TColorScheme, TTheme } from "../../themes";
+import { Base, TColorScheme, TTheme, globalColors } from "../../themes";
 import { mobile, NoUserSelect, commonIconsStyles } from "../../utils";
 
 import { Loader } from "../loader";
@@ -88,7 +88,7 @@ const StyledComboBox = styled.div<{
 
   position: relative;
   outline: 0;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   padding: ${(props) => (props.withoutPadding ? "0" : "4px 0")};
 
@@ -110,8 +110,7 @@ const StyledComboBox = styled.div<{
         @media ${mobile} {
           position: fixed;
           top: unset !important;
-          right: 0;
-          left: 0;
+          inset-inline: 0;
           bottom: 0 !important;
           width: 100%;
           width: -moz-available;
@@ -181,7 +180,7 @@ const StyledComboButton = styled.div<{
 
   gap: ${(props) => props.type && "4px"};
   justify-content: center;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   height: ${(props) =>
     props.noBorder
@@ -197,12 +196,12 @@ const StyledComboButton = styled.div<{
 
   ${NoUserSelect};
 
-  padding-left: ${(props) =>
+  padding-inline-start: ${(props) =>
     props.size === "content"
       ? props.theme.comboBox.button.paddingLeft
       : props.theme.comboBox.button.selectPaddingLeft};
 
-  padding-right: ${(props) =>
+  padding-inline-end: ${(props) =>
     props.size === "content"
       ? props.displayArrow
         ? props.theme.comboBox.button.paddingRight
@@ -210,24 +209,6 @@ const StyledComboButton = styled.div<{
       : props.displayArrow
         ? props.theme.comboBox.button.selectPaddingRight
         : props.theme.comboBox.button.selectPaddingRightNoArrow};
-  ${(props) => {
-    return (
-      props.theme.interfaceDirection === "rtl" &&
-      css`
-        padding-right: ${props.size === "content"
-          ? props.theme.comboBox.button.paddingLeft
-          : props.theme.comboBox.button.selectPaddingLeft};
-
-        padding-left: ${props.size === "content"
-          ? props.displayArrow
-            ? props.theme.comboBox.button.paddingRight
-            : props.theme.comboBox.button.paddingRightNoArrow
-          : props.displayArrow
-            ? props.theme.comboBox.button.selectPaddingRight
-            : props.theme.comboBox.button.selectPaddingRightNoArrow};
-      `
-    );
-  }}
 
   background: ${(props) =>
     !props.noBorder
@@ -319,17 +300,12 @@ const StyledComboButton = styled.div<{
   }
   .combo-button-label {
     visibility: ${(props) => (props.isLoading ? "hidden" : "visible")};
-
-    ${({ theme, plusBadgeValue, noBorder }) => {
-      const property = `margin-${theme.interfaceDirection === "rtl" ? "left" : "right"}`;
-      const value = plusBadgeValue
+    margin-inline-end: ${({ theme, plusBadgeValue, noBorder }) =>
+      plusBadgeValue
         ? 0
         : noBorder
           ? theme.comboBox.label.marginRight
-          : theme.comboBox.label.marginRightWithBorder;
-
-      return `${property}: ${value};`;
-    }}
+          : theme.comboBox.label.marginRightWithBorder};
     color: ${(props) =>
       props.isDisabled
         ? props.theme.comboBox.label.disabledColor
@@ -377,13 +353,8 @@ const StyledOptionalItem = styled.div<{
   defaultOption?: boolean;
   isDisabled?: boolean;
 }>`
-  margin-right: ${(props) => props.theme.comboBox.childrenButton.marginRight};
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl" &&
-    css`
-      margin-right: 0;
-      margin-left: ${props.theme.comboBox.childrenButton.marginRight};
-    `}
+  margin-inline-end: ${(props) =>
+    props.theme.comboBox.childrenButton.marginRight};
 
   visibility: ${(props) => (props.isLoading ? "hidden" : "visible")};
 
@@ -409,22 +380,15 @@ const StyledIcon = styled.div<{
   isDisabled?: boolean;
   isSelected?: boolean;
 }>`
-  margin-right: ${(props) => props.theme.comboBox.childrenButton.marginRight};
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl" &&
-    css`
-      margin-right: 0;
-      margin-left: ${props.theme.comboBox.childrenButton.marginRight};
-    `}
+  margin-inline-end: ${(props) =>
+    props.theme.comboBox.childrenButton.marginRight};
   width: ${(props) => props.theme.comboBox.childrenButton.width};
   height: ${(props) => props.theme.comboBox.childrenButton.height};
 
   visibility: ${(props) => (props.isLoading ? "hidden" : "visible")};
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl" &&
-    css`
-      transform: scaleX(-1);
-    `}
+  ${({ theme }) =>
+    theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+
   .combo-button_selected-icon {
     path {
       fill: ${(props) =>
@@ -494,41 +458,20 @@ const StyledArrowIcon = styled.div<{
     props.displayArrow ? props.theme.comboBox.arrow.width : "0px"};
   flex: ${(props) =>
     props.displayArrow ? props.theme.comboBox.arrow.flex : "0px"};
-  margin-right: ${(props) =>
+  margin-inline-end: ${(props) =>
     props.displayArrow ? props.theme.comboBox.arrow.marginRight : "0px"};
-  margin-left: ${(props) =>
+  margin-inline-start: ${(props) =>
     props.displayArrow ? props.theme.comboBox.arrow.marginLeft : "0px"};
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl" &&
-    css`
-      margin-right: ${props.displayArrow
-        ? props.theme.comboBox.arrow.marginLeft
-        : "0px"};
-      margin-left: ${props.displayArrow
-        ? props.theme.comboBox.arrow.marginRight
-        : "0px"};
-    `}
 
-  ${(props) =>
-    props.isOpen &&
-    `
-    transform: scale(1, -1);
-  `}
+  ${(props) => props.isOpen && `transform: scale(1, -1);`}
 `;
 
 StyledArrowIcon.defaultProps = { theme: Base };
 
 const StyledLoader = styled(Loader)<{ displaySize?: ComboBoxSize }>`
   position: absolute;
-
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: ${props.displaySize === "content" ? "-16px" : "-8px"};
-        `
-      : css`
-          margin-left: ${props.displaySize === "content" ? "-16px" : "-8px"};
-        `}
+  margin-inline-start: ${({ displaySize }) =>
+    displaySize === "content" ? "-16px" : "-8px"};
   margin-top: 2px;
 `;
 

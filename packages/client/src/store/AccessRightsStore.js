@@ -136,7 +136,7 @@ class AccessRightsStore {
       isOwner: userIsOwner,
     } = user;
 
-    const needActivate = status !== EmployeeStatus.Active && userId !== id;
+    const needActivate = status === EmployeeStatus.Disabled && userId !== id;
 
     if (isOwner) return needActivate;
 
@@ -153,9 +153,14 @@ class AccessRightsStore {
       id: userId,
       isAdmin: userIsAdmin,
       isOwner: userIsOwner,
+      isLDAP,
     } = user;
 
-    const needDisable = status !== EmployeeStatus.Disabled && userId !== id;
+    if (isLDAP) return false;
+
+    const needDisable =
+      (status == EmployeeStatus.Active || status == EmployeeStatus.Pending) &&
+      userId !== id;
 
     if (isOwner) return needDisable;
 

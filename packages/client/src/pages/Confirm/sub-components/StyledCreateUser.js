@@ -42,7 +42,6 @@ export const StyledCreateUserContent = styled.div`
 export const GreetingContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: left;
   height: 100%;
   width: ${DESKTOP_WIDTH}px;
 
@@ -83,6 +82,7 @@ export const RegisterContainer = styled.div`
   width: 100%;
 
   .or-label {
+    color: ${(props) => props.theme.invitePage.textColor};
     margin: 0 8px;
   }
 
@@ -91,7 +91,7 @@ export const RegisterContainer = styled.div`
     display: flex;
     width: 100%;
     align-items: center;
-    color: ${(props) => props.theme.invitePage.borderColor};;
+    color: ${(props) => props.theme.invitePage.borderColor};
     padding-top: 35px;
     margin-bottom: 32px;
   }
@@ -146,14 +146,7 @@ export const RegisterContainer = styled.div`
         max-width: 60px;
         text-overflow: ellipsis;
         overflow: hidden;
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                right: 0;
-              `
-            : css`
-                left: 0;
-              `};
+        inset-inline-start: 0;
         display: flex;
         gap: 4px;
 

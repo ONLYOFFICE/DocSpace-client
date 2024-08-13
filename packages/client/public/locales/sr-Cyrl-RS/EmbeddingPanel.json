@@ -1,7 +1,11 @@
 {
-  "Auto": "Ауто",
-  "CodeCopySuccess": "Код је копиран у привремену меморију",
-  "EmbedCode": "Угради код",
+  "CodeSuccessfullyCopied": "Код за унос успешно копиран на привремено чување података.",
+  "ContentRestricted": "Копирање садржаја, преузимање датотека и штампање је забрањено.",
+  "DisplaySettings": "Подешавања екрана",
+  "EmbeddingBarAllowList": "Додајте URL wеб сајта за уграђивање на <1> листу дозвољених </1>.",
+  "EmbeddingBarDescription": "Уграђивање ц́е функционисати само за URL адресе које је одредио администратор {{productName}} у подешавањима JavaScript пакета за развој софтвера (SDK).",
   "Height": "Висина",
+  "Link": "Линк",
+  "LinkProtectedWithPassword": "Линк је заштићен лозинком.",
   "Width": "Ширина"
 }

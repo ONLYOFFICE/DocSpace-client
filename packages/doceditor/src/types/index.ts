@@ -68,6 +68,7 @@ export type RootPageProps = {
     action: ActionType;
     share: string;
     editorType: string;
+    error?: string;
   }>;
 };
 export type TDocumentInfo = {
@@ -181,6 +182,8 @@ export interface IInitialConfig {
   errorMessage?: string;
   message?: undefined;
   startFilling?: boolean;
+
+  fillingSessionId?: string;
 }
 
 export type TError = {
@@ -227,13 +230,14 @@ export type EditorProps = {
   errorMessage?: string;
   isSkipError?: boolean;
 
+  onDownloadAs?: (obj: object) => void;
   onSDKRequestSharingSettings?: () => void;
   onSDKRequestSaveAs?: (event: object) => void;
   onSDKRequestInsertImage?: (event: object) => void;
   onSDKRequestSelectSpreadsheet?: (event: object) => void;
   onSDKRequestSelectDocument?: (event: object) => void;
   onSDKRequestReferenceSource?: (event: object) => void;
-  onSDKRequestStartFilling?: (event: object) => void;
+  onSDKRequestStartFilling?: (haederLabel: string) => void;
 };
 
 export type TEventData = {
@@ -330,6 +334,7 @@ export interface SelectFileDialogProps {
 
 export interface UseSocketHelperProps {
   socketUrl: string;
+  user?: TUser;
 }
 
 export interface UseEventsProps {
@@ -405,6 +410,7 @@ export type StartFillingSelectorDialogPprops = {
   fileInfo: TFile;
   isVisible: boolean;
   onClose: VoidFunction;
+  headerLabel: string;
 
   getIsDisabled: (
     isFirstLoad: boolean,

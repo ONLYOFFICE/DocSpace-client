@@ -36,7 +36,6 @@ import { toastr } from "@docspace/shared/components/toast";
 import toLower from "lodash/toLower";
 import { TranslationType } from "SRC_DIR/types/spaces";
 import { parseDomain, validatePortalName } from "@docspace/shared/utils/common";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 type TConfigurationSection = {
   t: TranslationType;
@@ -127,7 +126,9 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
           </Text>
         </div>
         <Text fontSize="12px" lineHeight="16px" fontWeight={400}>
-          {t("ConfigurationDescription", { productName: PRODUCT_NAME })}
+          {t("ConfigurationDescription", {
+            productName: t("Common:ProductName"),
+          })}
         </Text>
       </div>
       <div className="spaces-input-wrapper">
@@ -140,7 +141,7 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
             >
               {t("Common:Domain")}
             </Text>
-            <Text color="#A3A9AE">(example.com)</Text>
+            <Text className="spaces-input-subheader">(example.com)</Text>
           </div>
 
           <TextInput
@@ -155,10 +156,10 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
             {domainNameError &&
               domainNameError.map((err, index) => (
                 <Text
+                  className="error-text"
                   key={index}
                   fontSize="12px"
                   fontWeight="400"
-                  color="#F24724"
                 >
                   {err}
                 </Text>
@@ -167,7 +168,7 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
         </div>
         <div className="spaces-input-block">
           <Text fontSize="13px" fontWeight="600">
-            {t("PortalName", { productName: PRODUCT_NAME })}
+            {t("PortalName", { productName: t("Common:ProductName") })}
           </Text>
           <TextInput
             hasError={!!(portalNameError || checkDomainError)}
@@ -178,7 +179,7 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
             tabIndex={2}
           />
           <div>
-            <Text fontSize="12px" fontWeight="400" color="#F24724">
+            <Text className="error-text" fontSize="12px" fontWeight="400">
               {portalNameError || checkDomainError}
             </Text>
           </div>

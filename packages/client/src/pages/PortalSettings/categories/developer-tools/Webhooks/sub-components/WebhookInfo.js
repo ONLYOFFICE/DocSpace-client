@@ -32,7 +32,6 @@ import { Base } from "@docspace/shared/themes";
 
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 import { useTranslation } from "react-i18next";
 
@@ -43,7 +42,7 @@ const InfoWrapper = styled.div`
 const InfoText = styled(Text)`
   max-width: 660px;
   white-space: break-spaces;
-  margin: 0 0 8px 0;
+  margin: 0 0 8px;
   line-height: 20px;
   color: ${(props) => props.theme.client.settings.common.descriptionColor};
 `;
@@ -51,9 +50,10 @@ const InfoText = styled(Text)`
 InfoText.defaultProps = { theme: Base };
 
 const StyledGuideLink = styled(Link)`
-  color: ${(props) => (props.theme.isBase ? "#316DAA" : "#4781D1")};
+  color: ${(props) => props.theme.client.settings.webhooks.linkColor};
+
   &:hover {
-    color: ${(props) => (props.theme.isBase ? "#316DAA" : "#4781D1")};
+    color: ${(props) => props.theme.client.settings.webhooks.linkColor};
   }
 `;
 
@@ -61,12 +61,15 @@ StyledGuideLink.defaultProps = { theme: Base };
 
 const WebhookInfo = (props) => {
   const { t } = useTranslation(["Webhooks"]);
-  const { webhooksGuideUrl, organizationName } = props;
+  const { webhooksGuideUrl } = props;
 
   return (
     <InfoWrapper>
       <InfoText as="p">
-        {t("WebhooksInfo", { productName: PRODUCT_NAME, organizationName })}
+        {t("WebhooksInfo", {
+          productName: t("Common:ProductName"),
+          organizationName: t("Common:OrganizationName"),
+        })}
       </InfoText>
       <StyledGuideLink
         id="webhooks-info-link"
@@ -83,10 +86,9 @@ const WebhookInfo = (props) => {
 };
 
 export default inject(({ settingsStore }) => {
-  const { webhooksGuideUrl, organizationName } = settingsStore;
+  const { webhooksGuideUrl } = settingsStore;
 
   return {
     webhooksGuideUrl,
-    organizationName,
   };
 })(observer(WebhookInfo));

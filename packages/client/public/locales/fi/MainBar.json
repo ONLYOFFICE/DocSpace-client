@@ -1,6 +1,7 @@
 {
   "ClickHere": "Klikkaa tästä",
   "ConfirmEmailDescription": "Käytä aktivointisähköpostissa annettua linkkiä. Etkö ole saanut aktivointilinkkiä sähköpostilla?",
+  "ConfirmEmailHeader": "Ole hyvä ja aktivoi sähköpostisi ({{ email }}) saadaksesi {{productName}}:n ominaisuudet käyttöön.",
   "PersonalUserQuotaAdminsDescription": "Ole hyvä ja vapauta levytilaa ladataksesi ja luodaksesi uusia tiedostoja ja kansioita, tai hallitaksesi kiintiötä per käyttäjä <1>Muistinhallinta-asetuksissa. </1>",
   "PersonalUserQuotaDescription": "Ole hyvä ja vapauta levytilaa ladataksesi ja luodaksesi tiedostoja ja kansioita tai ota yhteyttä järjestelmänvalvojaan lisätäksesi muistin kiintiötä.",
   "RequestActivation": "Pyydä aktivointia vielä kerran",
@@ -11,6 +12,7 @@
   "StorageQuotaDescription": "Voit poistaa tarpeettomat tiedostot tai <1>{{clickHere}}</1> löytääksesi sopivamman hintaohjelman {{productName}}-llesi.",
   "StorageQuotaExceeded": "Muistin kiintiö ylitetty",
   "StorageQuotaHeader": "Tallennustilan määrä on ylittymässä: {{currentValue}} / {{maxValue}}",
+  "StorageQuotaUserDescription": "Voit poistaa tarpeettomat tiedostot vapauttaaksesi levytilaa.",
   "TenantCustomQuotaDescription": "Voit poistaa tarpeettomat tiedostot tai muuttaa kiintiötä <1>Muistinhallinta-asetuksissa.</1>",
   "UserQuotaDescription": "<1>{{clickHere}}</1> löytääksesi {{productName}}-llesi sopivamman hinnoitteluohjelman.",
   "UserQuotaHeader": "Ylläpitäjien/tehokäyttäjien määrän raja on ylittymässä: {{currentValue}} / {{maxValue}}"

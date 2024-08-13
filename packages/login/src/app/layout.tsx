@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { cookies, headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 import { Toast } from "@docspace/shared/components/toast";
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
@@ -33,7 +34,7 @@ import { LANGUAGE, SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 
 import StyledComponentsRegistry from "@/utils/registry";
 import { Providers } from "@/providers";
-import { getColorTheme, getSettings } from "@/utils/actions";
+import { getColorTheme, getConfig, getSettings } from "@/utils/actions";
 
 import "../styles/globals.scss";
 
@@ -42,6 +43,13 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const hdrs = headers();
+
+  if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
+    console.log("is health check");
+    return <></>;
+  }
+
   const baseUrl = getBaseUrl();
 
   const cookieStore = cookies();
@@ -51,25 +59,19 @@ export default async function RootLayout({
 
   let redirectUrl = "";
 
-  const timers = { otherOperations: 0 };
-
-  const startOtherOperationsDate = new Date();
-
   const [settings, colorTheme] = await Promise.all([
     getSettings(),
     getColorTheme(),
   ]);
 
-  timers.otherOperations =
-    new Date().getTime() - startOtherOperationsDate.getTime();
-
   if (settings === "access-restricted") redirectUrl = `/${settings}`;
 
   if (settings === "portal-not-found") {
+    const hdrs = headers();
     const config = await (
       await fetch(`${baseUrl}/static/scripts/config.json`)
     ).json();
-    const hdrs = headers();
+
     const host = hdrs.get("host");
 
     const url = new URL(
@@ -83,7 +85,7 @@ export default async function RootLayout({
   }
 
   if (typeof settings !== "string" && settings?.wizardToken) {
-    redirectUrl = `wizard`;
+    redirect(`wizard`);
   }
 
   if (
@@ -125,7 +127,6 @@ export default async function RootLayout({
               systemTheme: systemTheme?.value as ThemeKeys,
             }}
             redirectURL={redirectUrl}
-            timers={timers}
           >
             <Toast isSSR />
             {children}

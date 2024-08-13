@@ -37,7 +37,6 @@ import { Checkbox } from "@docspace/shared/components/checkbox";
 import toLower from "lodash/toLower";
 import { useStore } from "SRC_DIR/store";
 import { validatePortalName } from "@docspace/shared/utils/common";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledModal = styled(ModalDialogContainer)`
   #modal-dialog {
@@ -50,10 +49,7 @@ const StyledModal = styled(ModalDialogContainer)`
 
   .cancel-btn {
     display: inline-block;
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: 8px;`
-        : `margin-left: 8px;`}
+    margin-inline-start: 8px;
   }
 
   .create-portal-checkbox {
@@ -62,6 +58,14 @@ const StyledModal = styled(ModalDialogContainer)`
 
   .create-portal-input {
     width: 100%;
+  }
+
+  .error-text {
+    color: ${({ theme }) => theme.management.errorColor};
+  }
+
+  .sub-text {
+    color: ${({ theme }) => theme.management.textColor};
   }
 `;
 
@@ -111,7 +115,7 @@ const CreatePortalDialog = () => {
       name,
       domainValidator,
       setRegisterError,
-      t
+      t,
     );
 
     if (isValidPortalName) {
@@ -147,11 +151,13 @@ const CreatePortalDialog = () => {
       displayType="modal"
     >
       <ModalDialog.Header>
-        {t("CreatingPortal", { productName: PRODUCT_NAME })}
+        {t("CreatingPortal", { productName: t("Common:ProductName") })}
       </ModalDialog.Header>
       <ModalDialog.Body className="create-docspace-body">
         <Text noSelect={true}>
-          {t("CreateSpaceDescription", { productName: PRODUCT_NAME })}
+          {t("CreateSpaceDescription", {
+            productName: t("Common:ProductName"),
+          })}
         </Text>
         <div className="create-portal-input-block">
           <Text
@@ -169,15 +175,15 @@ const CreatePortalDialog = () => {
             className="create-portal-input"
           />
           <div>
-            <Text fontSize="12px" fontWeight="400" color="#F24724">
+            <Text className="error-text" fontSize="12px" fontWeight="400">
               {registerError}
             </Text>
           </div>
           <div style={{ marginTop: "6px", wordWrap: "break-word" }}>
             <Text
+              className="sub-text"
               fontSize="12px"
               fontWeight="400"
-              color="#A3A9AE"
             >{`${name}.${baseDomain}`}</Text>
           </div>
         </div>

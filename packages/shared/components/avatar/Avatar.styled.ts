@@ -26,7 +26,7 @@
 
 import styled from "styled-components";
 
-import { Base, TTheme } from "../../themes";
+import { Base, TTheme, globalColors } from "../../themes";
 import { commonIconsStyles, NoUserSelect } from "../../utils";
 
 import { CameraReactSvg } from "./svg";
@@ -42,10 +42,7 @@ const EditContainer = styled.div`
   position: absolute;
   display: flex;
 
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? `left: ${props.theme.avatar.editContainer.right};`
-      : `right: ${props.theme.avatar.editContainer.right};`}
+  inset-inline-end: ${({ theme }) => theme.avatar.editContainer.right};
 
   bottom: ${(props) => props.theme.avatar.editContainer.bottom};
   background-color: ${(props) =>
@@ -109,10 +106,7 @@ const RoleWrapper = styled.div<{
   theme: TTheme;
 }>`
   position: absolute;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? `left: ${rightStyle(props)};`
-      : `right ${rightStyle(props)};`}
+  inset-inline-end: ${(props) => rightStyle(props)};
 
   bottom: ${(props) => bottomStyle(props)};
 
@@ -161,6 +155,8 @@ const NamedAvatar = styled.div<{ size: AvatarSize; isGroup: boolean }>`
     props.isGroup
       ? props.theme.avatar.initialsContainer.groupColor
       : props.theme.avatar.initialsContainer.color};
+
+  // doesn't require mirroring for rtl
   left: ${(props) => props.theme.avatar.initialsContainer.left};
   top: ${(props) => props.theme.avatar.initialsContainer.top};
   transform: ${(props) => props.theme.avatar.initialsContainer.transform};
@@ -216,7 +212,7 @@ const StyledAvatar = styled.div<{ size: AvatarSize; theme: TTheme }>`
   font-family: ${(props) => props.theme.fontFamily};
   font-style: normal;
 
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   .admin_icon {
     rect:nth-child(1) {

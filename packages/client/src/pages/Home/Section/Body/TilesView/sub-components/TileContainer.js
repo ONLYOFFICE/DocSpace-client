@@ -36,27 +36,12 @@ import InfiniteGrid from "./InfiniteGrid";
 
 const paddingCss = css`
   @media ${desktop} {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 1px;
-            padding-left: 0px;
-          `
-        : css`
-            margin-left: 1px;
-            padding-right: 0px;
-          `}
+    margin-inline-start: 1px;
+    padding-inline-end: 0;
   }
 
   @media ${tablet} {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: -1px;
-          `
-        : css`
-            margin-left: -1px;
-          `}
+    margin-inline-start: -1px;
   }
 `;
 
@@ -116,14 +101,7 @@ const StyledTileContainer = styled.div`
       cursor: pointer !important;
 
       .sort-combo-box {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-left: 3px;
-              `
-            : css`
-                margin-right: 3px;
-              `}
+        margin-inline-end: 3px;
         .dropdown-container {
           top: 104%;
           bottom: auto;
@@ -185,14 +163,7 @@ const StyledTileContainer = styled.div`
           color: ${(props) => props.theme.filterInput.sort.tileSortColor};
 
           .sort-icon {
-            ${(props) =>
-              props.theme.interfaceDirection === "rtl"
-                ? css`
-                    margin-left: 8px;
-                  `
-                : css`
-                    margin-right: 8px;
-                  `}
+            margin-inline-end: 8px;
             svg {
               path {
                 fill: ${(props) => props.theme.filterInput.sort.tileSortFill};
@@ -208,15 +179,9 @@ const StyledTileContainer = styled.div`
     }
   }
 
-  @media ${tablet} {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: -3px;
-          `
-        : css`
-            margin-right: -3px;
-          `}
+  @media ${tablet} {  
+      margin-top: 16px;
+    margin-inline-end: -3px;
   }
 `;
 

@@ -77,7 +77,7 @@ export interface ContextMenuButtonProps {
   /** Sets the number of columns */
   columnCount?: number;
   /** Sets the display type */
-  displayType: ContextMenuButtonDisplayType;
+  displayType?: ContextMenuButtonDisplayType;
   /** Closing event */
   onClose?: () => void;
   /** Sets the drop down open with the portal */

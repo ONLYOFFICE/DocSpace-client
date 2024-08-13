@@ -60,9 +60,9 @@ export const GroupMemberRow = styled.div<{}>`
 
     .email {
       color: ${({ theme }) => theme.sideBarRow.metaDataColor};
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 400;
-      line-height: normal;
+      line-height: 16px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -76,7 +76,7 @@ export const GroupMemberRow = styled.div<{}>`
 
     svg {
       path {
-        fill: #a3a9ae;
+        fill: ${(props) => props.theme.createEditGroupDialog.iconFill};
       }
     }
   }

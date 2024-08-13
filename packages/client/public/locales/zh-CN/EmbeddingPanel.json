@@ -1,7 +1,11 @@
 {
-  "Auto": "自动",
-  "CodeCopySuccess": "代码已复制到剪贴板中",
-  "EmbedCode": "嵌入代码",
+  "CodeSuccessfullyCopied": " 插入代码已成功复制到剪贴板",
+  "ContentRestricted": " 内容复制、文件下载和打印受到限制。",
+  "DisplaySettings": " 显示设置",
+  "EmbeddingBarAllowList": " 将要嵌入的网站 URL 添加到<1>允许列表</1>。",
+  "EmbeddingBarDescription": "嵌入仅适用于 JavaScript SDK 设置中{{productName}}管理员指定的 URL。",
   "Height": "高度",
+  "Link": " 链接",
+  "LinkProtectedWithPassword": " 该链接受密码保护。",
   "Width": "宽度"
 }

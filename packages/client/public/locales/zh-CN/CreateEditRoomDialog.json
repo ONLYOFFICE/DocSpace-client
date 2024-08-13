@@ -1,11 +1,15 @@
 {
+  "ActivationRequired": " 需要激活",
   "ChooseRoomType": "选择房间类型",
   "CreateRoomConfirmation": "继续且不连接存储？\n您已选择尚未连接的第三方存储选项。如果在未连接服务的情况下继续，则不会添加此选项。",
   "CreateTagOption": "创建标签",
   "DisableRoomQuota": "停用该房间的配额",
+  "FormRoomBarDescription": "任何有链接的人都能够访问此房间。外部用户拥有所有文件的填写权限。",
   "Icon": "图标",
   "MakeRoomPrivateDescription": "此房间中的所有文件都将被加密。",
+  "MakeRoomPrivateLimitationsWarningDescription": " 使用此功能，您只能邀请现有的{{productName}}用户。创建房间后，您将无法更改用户列表。",
   "MakeRoomPrivateTitle": "将房间设为私密",
+  "PeopleSelectorInfo": " 只有房间管理员或{{productName}}管理员才能成为房间的所有者",
   "PublicRoomBarDescription": "所有人都可以通过链接进入此房间。外部用户拥有“仅查看”权限，可查看所有文件",
   "PublicRoomSystemFoldersDescription": "不同完成阶段的表单副本存储在“系统”文件夹中。正在填写的表单存储在“处理中”文件夹中，填写完成的表单存储在“完成”文件夹中。",
   "PublicRoomSystemFoldersTitle": "系统文件夹",
@@ -16,5 +20,6 @@
   "ThirdPartyStorageComboBoxPlaceholder": "选择存储空间",
   "ThirdPartyStorageDescription": "为此房间的数据存储使用第三方服务。将在已连接的存储空间中创建一个用于存储此房间数据的新文件夹。",
   "ThirdPartyStorageNoStorageAlert": "您需要在此之前于“集成”部分中连接相应服务。否则将无法建立连接。",
-  "ThirdPartyStoragePermanentSettingDescription": "文件已存储在第三方 {{thirdpartyTitle}} 存储空间的\"{{thirdpartyFolderName}}\"文件夹中。\n<strong>{{thirdpartyPath}}</strong>"
+  "ThirdPartyStoragePermanentSettingDescription": "文件已存储在第三方 {{thirdpartyTitle}} 存储空间的\"{{thirdpartyFolderName}}\"文件夹中。\n<strong>{{thirdpartyPath}}</strong>",
+  "ThirdPartyStorageRoomAdminNoStorageAlert": "要连接第三方存储，您需要在{{productName}}设置的集成部分中添加相应的服务。联系{{productName}}所有者或管理员以启用集成。"
 }

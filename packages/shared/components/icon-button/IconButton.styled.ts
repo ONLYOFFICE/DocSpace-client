@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 import { IconButtonProps } from "./IconButton.types";
 
 const StyledOuter = styled.div<IconButtonProps>`
@@ -34,7 +34,7 @@ const StyledOuter = styled.div<IconButtonProps>`
   cursor: ${(props) =>
     props.isDisabled || !props.isClickable ? "default" : "pointer"};
   line-height: 0;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   ${(props) =>
     props.isStroke &&
@@ -48,12 +48,15 @@ const StyledOuter = styled.div<IconButtonProps>`
           stroke: ${props.color || props.theme.iconButton.color};
         }
       }
-      &:hover {
-        svg {
-          path {
-            stroke: ${props.isDisabled
-              ? props.theme.iconButton.color
-              : props.color || props.theme.iconButton.hoverColor};
+
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          svg {
+            path {
+              stroke: ${props.isDisabled
+                ? props.theme.iconButton.color
+                : props.color || props.theme.iconButton.hoverColor};
+            }
           }
         }
       }
@@ -72,12 +75,15 @@ const StyledOuter = styled.div<IconButtonProps>`
           fill: ${props.color || props.theme.iconButton.color};
         }
       }
-      &:hover {
-        svg {
-          path {
-            fill: ${props.isDisabled
-              ? props.theme.iconButton.color
-              : props.color || props.theme.iconButton.hoverColor};
+
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          svg {
+            path {
+              fill: ${props.isDisabled
+                ? props.theme.iconButton.color
+                : props.color || props.theme.iconButton.hoverColor};
+            }
           }
         }
       }

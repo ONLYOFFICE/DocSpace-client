@@ -24,6 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+export const enum ScopeType {
+  read = "read",
+  write = "write",
+  openid = "openid",
+}
+
+export const enum ScopeGroup {
+  files = "files",
+  accounts = "accounts",
+  profiles = "profiles",
+  rooms = "rooms",
+  openid = "openid",
+}
+
+export const enum AuthenticationMethod {
+  none = "none",
+  "client_secret_post" = "client_secret_post",
+}
+
 /**
  * Enum for employee activation status.
  * @readonly
@@ -123,8 +142,15 @@ export const enum FilterType {
   ArchiveOnly = 10,
   ByExtension = 11,
   MediaOnly = 12,
-  OFormTemplateOnly = 18,
-  OFormOnly = 19,
+  FillingFormsRooms = 13,
+  EditingRooms = 14,
+  ReviewRooms = 15,
+  ReadOnlyRooms = 16,
+  CustomRooms = 17,
+  PublicRooms = 20,
+  FormRooms = 21,
+  Pdf = 22,
+  PDFForm = 23,
 }
 
 /**
@@ -474,12 +500,12 @@ export const enum ErrorKeys {
 }
 
 export enum RoomsType {
+  PublicRoom = 6,
   FormRoom = 1,
   // FillingFormsRoom= 1, //TODO: Restore when certs will be done
   EditingRoom = 2,
   // ReviewRoom: 3, //TODO: Restore when certs will be done
   // ReadOnlyRoom: 4, //TODO: Restore when certs will be done
-  PublicRoom = 6,
   CustomRoom = 5,
 }
 
@@ -537,7 +563,6 @@ export const enum FilesSelectorExtendedFilterTypes {
   Media = "Media",
   Archives = "Archives",
   AllFiles = "AllFiles",
-  FormTemplates = "FormTemplates",
   Forms = "Forms",
 }
 
@@ -552,4 +577,47 @@ export const enum EditorConfigErrorType {
 export const enum RoomsStorageFilter {
   internal = 1,
   thirdparty = 2,
+}
+
+export const enum LDAPOperation {
+  SaveAndSync = "Save",
+  Sync = "Sync",
+}
+
+export const enum LDAPCertificateProblem {
+  CertExpired = -2146762495,
+  CertValidityPeriodNesting = -2146762494,
+  CertRole = -2146762493,
+  CertPathLenConst = -2146762492,
+  CertCritical = -2146762491,
+  CertPurpose = -2146762490,
+  CertIssuerChaining = -2146762489,
+  CertMalformed = -2146762488,
+  CertUntrustedRoot = -2146762487,
+  CertChainnig = -2146762486,
+  CertRevoked = -2146762484,
+  CertUntrustedTestRoot = -2146762483,
+  CertRevocationFailure = -2146762482,
+  CertCnNoMatch = -2146762481,
+  CertWrongUsage = -2146762480,
+  CertUntrustedCa = -2146762478,
+  CertUnrecognizedError = -2146762477,
+}
+
+export enum FileExtensions {
+  PDF = "pdf",
+  DOC = "doc",
+  DOCX = "docx",
+  DOCXF = "docxf",
+  XLSX = "xlsx",
+  PPTX = "pptx",
+}
+
+export enum ValidationStatus {
+  Ok = 0,
+  Invalid = 1,
+  Expired = 2,
+  Password = 3,
+  InvalidPassword = 4,
+  ExternalAccessDenied = 5,
 }

@@ -90,6 +90,7 @@ const EmptyFolderContainer = ({
         isFolder={!isRoom}
         folderId={folderId}
         parentRoomType={parentRoomType}
+        isArchiveFolderRoot={isArchiveFolderRoot}
       />
     );
   }

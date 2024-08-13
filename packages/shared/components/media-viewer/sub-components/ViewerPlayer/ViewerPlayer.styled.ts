@@ -28,13 +28,14 @@ import styled from "styled-components";
 import { animated } from "@react-spring/web";
 
 import { tablet, mobile } from "@docspace/shared/utils";
+import { globalColors } from "../../../../themes";
 
 export const ContainerPlayer = styled.div<{ $isFullScreen: boolean }>`
   position: fixed;
   inset: 0;
   z-index: 305;
   background-color: ${(props) =>
-    props.$isFullScreen ? "#000" : "rgba(55, 55, 55, 0.6)"};
+    props.$isFullScreen ? globalColors.darkBlack : "rgba(55, 55, 55, 0.6)"};
   touch-action: none;
 `;
 
@@ -59,9 +60,8 @@ export const VideoWrapper = styled(animated.div)<{ $visible: boolean }>`
 
 export const StyledPlayerControls = styled.div<{ $isShow: boolean }>`
   position: fixed;
-  right: 0px;
+  inset-inline: 0;
   bottom: 0px;
-  left: 0px;
   z-index: 307;
   display: flex;
 
@@ -72,7 +72,7 @@ export const StyledPlayerControls = styled.div<{ $isShow: boolean }>`
   opacity: ${(props) => (props.$isShow ? "1" : "0")};
 
   background: linear-gradient(
-    rgba(0, 0, 0, 0) 0%,
+    ${globalColors.tapHighlight} 0%,
     rgba(0, 0, 0, 0.64) 48.44%,
     rgba(0, 0, 0, 0.89) 100%
   );
@@ -99,7 +99,7 @@ export const ControlContainer = styled.div`
   @media ${tablet} {
     margin-top: 8px;
     .player_right-control {
-      margin-right: -8px;
+      margin-inline-end: -8px;
     }
   }
 `;

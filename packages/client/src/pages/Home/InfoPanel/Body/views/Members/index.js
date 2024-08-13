@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
 
-import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
+import { RoomsType } from "@docspace/shared/enums";
 import { LINKS_LIMIT_COUNT } from "@docspace/shared/constants";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import MembersHelper from "../../helpers/MembersHelper";
@@ -50,9 +50,8 @@ import { Tooltip } from "@docspace/shared/components/tooltip";
 import { isDesktop } from "@docspace/shared/utils";
 import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
-import { ScrollbarContext } from "@docspace/shared/components/scrollbar";
+import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
 
-import { Avatar } from "@docspace/shared/components/avatar";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import LinkRow from "./sub-components/LinkRow";
 
@@ -124,7 +123,7 @@ const Members = ({
 
   const onAddNewLink = async () => {
     if (isPublicRoom || primaryLink) {
-      setLinkParams({ isEdit: false });
+      setLinkParams({ roomId: infoPanelSelection?.id, isEdit: false });
       setEditLinkPanelIsVisible(true);
     } else {
       getPrimaryLink(infoPanelSelection.id).then((link) => {
@@ -183,6 +182,8 @@ const Members = ({
           key="general-link"
           link={primaryLink}
           setIsScrollLocked={setIsScrollLocked}
+          isShareLink
+          isPrimaryLink
         />,
       );
     }
@@ -194,6 +195,7 @@ const Members = ({
             link={link}
             key={link?.sharedTo?.id}
             setIsScrollLocked={setIsScrollLocked}
+            isShareLink
           />,
         );
       });
@@ -203,6 +205,7 @@ const Members = ({
           key="create-additional-link"
           className="additional-link"
           onClick={onAddNewLink}
+          isShareLink
         >
           <div className="create-link-icon">
             <IconButton size={12} iconName={PlusIcon} isDisabled />

@@ -50,6 +50,10 @@ import {
 } from "@docspace/shared/api/files";
 import isEqual from "lodash/isEqual";
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
+import {
+  addLinksToHistory,
+  parseHistory,
+} from "SRC_DIR/pages/Home/InfoPanel/Body/helpers/HistoryHelper";
 
 const observedKeys = [
   "id",
@@ -74,7 +78,6 @@ class InfoPanelStore {
 
   infoPanelSelection = null;
   selectionHistory = null;
-  selectionHistory = null;
 
   roomsView = infoMembers;
   fileView = infoHistory;
@@ -90,7 +93,6 @@ class InfoPanelStore {
   publicRoomStore = null;
 
   infoPanelMembers = null;
-  infoPanelSelection = null;
   infoPanelRoom = null;
   membersIsLoading = false;
   isMembersPanelUpdating = false;
@@ -117,7 +119,8 @@ class InfoPanelStore {
   setIsVisible = (bool) => {
     if (
       (this.infoPanelSelectedItems.length &&
-        !this.infoPanelSelectedItems[0]?.isRoom) ||
+        !this.infoPanelSelectedItems[0]?.isRoom &&
+        !this.infoPanelSelectedItems[0]?.inRoom) ||
       (this.selectedFolderStore && !this.selectedFolderStore?.inRoom)
     ) {
       this.setView(infoDetails);
@@ -293,9 +296,6 @@ class InfoPanelStore {
       ...infoPanelSelection,
       isRoom: infoPanelSelection.isRoom || !!infoPanelSelection.roomType,
       icon: this.getInfoPanelItemIcon(infoPanelSelection, 32),
-      canCopyPublicLink:
-        infoPanelSelection.access === ShareAccessRights.RoomManager ||
-        infoPanelSelection.access === ShareAccessRights.None,
     };
   };
 
@@ -713,6 +713,45 @@ class InfoPanelStore {
     this.setInfoPanelMembers(fetchedMembers);
 
     this.setIsMembersPanelUpdating(false);
+  };
+
+  fetchHistory = async (abortControllerSignal = null) => {
+    const { getHistory, getRoomLinks } = this.filesStore;
+    const { setExternalLinks } = this.publicRoomStore;
+
+    let selectionType = "file";
+    if (this.infoPanelSelection.isRoom || this.infoPanelSelection.isFolder)
+      selectionType = "folder";
+
+    const withLinks =
+      this.infoPanelSelection.isRoom &&
+      [RoomsType.FormRoom, RoomsType.CustomRoom, RoomsType.PublicRoom].includes(
+        this.infoPanelSelection.roomType,
+      );
+
+    return getHistory(
+      selectionType,
+      this.infoPanelSelection.id,
+      abortControllerSignal,
+      this.infoPanelSelection?.requestToken,
+    )
+      .then(async (data) => {
+        if (withLinks) {
+          const links = await getRoomLinks(this.infoPanelSelection.id);
+          const historyWithLinks = addLinksToHistory(data, links);
+          setExternalLinks(links);
+          return historyWithLinks;
+        }
+        return data;
+      })
+      .then((data) => {
+        const parsedSelectionHistory = parseHistory(data);
+        this.setSelectionHistory(parsedSelectionHistory);
+        return parsedSelectionHistory;
+      })
+      .catch((err) => {
+        if (err.message !== "canceled") console.error(err);
+      });
   };
 
   openShareTab = () => {

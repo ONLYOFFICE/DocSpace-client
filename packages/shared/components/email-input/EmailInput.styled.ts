@@ -28,6 +28,7 @@ import styled from "styled-components";
 import { StyledTextInput } from "../text-input";
 
 const StyledEmailInput = styled(StyledTextInput)`
+  // logical property won't work because of "dir: auto"
   text-align: ${({ theme }) =>
     theme.interfaceDirection === "rtl" ? "right" : "left"};
 `;

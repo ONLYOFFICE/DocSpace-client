@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { withTranslation } from "react-i18next";
 import { TableCell } from "@docspace/shared/components/table";
 import { Link } from "@docspace/shared/components/link";
@@ -34,6 +33,8 @@ import { inject, observer } from "mobx-react";
 import * as Styled from "./index.styled";
 import { Text } from "@docspace/shared/components/text";
 import { Avatar } from "@docspace/shared/components/avatar";
+import Badges from "../../Badges";
+import { globalColors } from "@docspace/shared/themes";
 
 const GroupsTableItem = ({
   t,
@@ -43,6 +44,7 @@ const GroupsTableItem = ({
   hideColumns,
   bufferSelection,
   getGroupContextOptions,
+  getModel,
   openGroupAction,
   managerAccountsGroupsColumnIsEnabled,
 
@@ -61,8 +63,8 @@ const GroupsTableItem = ({
     changeGroupContextSelection(item, !rightMouseButtonClick);
   };
 
-  const onOpenGroup = () => {
-    openGroupAction(item.id, true, item.name);
+  const onOpenGroup = (e) => {
+    openGroupAction(item.id, true, item.name, e);
   };
 
   const onRowClick = (e) => {
@@ -77,6 +79,8 @@ const GroupsTableItem = ({
 
     selectRow(item);
   };
+
+  const getContextModel = () => getModel(t, item);
 
   let value = `folder_${item.id}_false_index_${itemIndex}`;
 
@@ -98,6 +102,7 @@ const GroupsTableItem = ({
         onDoubleClick={onOpenGroup}
         hideColumns={hideColumns}
         contextOptions={getGroupContextOptions(t, item)}
+        getContextModel={getContextModel}
       >
         <TableCell className={"table-container_group-title-cell"}>
           <TableCell
@@ -131,6 +136,8 @@ const GroupsTableItem = ({
           >
             {item.name}
           </Link>
+
+          <Badges isLDAP={item.isLDAP} />
         </TableCell>
 
         {managerAccountsGroupsColumnIsEnabled ? (
@@ -141,7 +148,7 @@ const GroupsTableItem = ({
               fontSize="13px"
               isTextOverflow
               className="table-cell_group-manager"
-              color={"#A3A9AE"}
+              color={globalColors.gray}
               dir="auto"
             >
               {item.manager?.displayName}
@@ -158,6 +165,7 @@ const GroupsTableItem = ({
 export default inject(({ peopleStore }) => ({
   bufferSelection: peopleStore.groupsStore.bufferSelection,
   getGroupContextOptions: peopleStore.groupsStore.getGroupContextOptions,
+  getModel: peopleStore.groupsStore.getModel,
   openGroupAction: peopleStore.groupsStore.openGroupAction,
   changeGroupSelection: peopleStore.groupsStore.changeGroupSelection,
   changeGroupContextSelection:

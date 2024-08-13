@@ -1,18 +1,19 @@
 {
   "ClickHere": "Кликните овде",
   "ConfirmEmailDescription": "Користите везу дату у емаил-у за активацију. Нисте добили емаил са линком за активацију?",
-  "ConfirmEmailHeader": "Активирајте своју емаил ({{ email }}) да бисте добили приступ функцијама DocSpace-а.",
+  "ConfirmEmailHeader": "Активирајте своју емаил ({{ email }}) да бисте добили приступ функцијама {{productName}}-а.",
   "PersonalUserQuotaAdminsDescription": "Да бисте отпремили и креирали нове датотеке и фолдере, ослободите простор на диску или управљајте квотом по кориснику у <1>Storage management settings.</1>",
   "PersonalUserQuotaDescription": "Да бисте отпремили и креирали нове датотеке и фасцикле, ослободите простор на диску или контактирајте администратора да повец́а квоту за складиштење.",
   "RequestActivation": "Затражи активацију још једном",
-  "RoomQuotaDescription": "Можете да архивирате непотребне собе или <1>{{clickHere}}</1> да бисте пронашли прикладнији план цена за ваш DocSpace.",
+  "RoomQuotaDescription": "Можете да архивирате непотребне собе или <1>{{clickHere}}</1> да бисте пронашли прикладнији план цена за ваш {{productName}}.",
   "RoomQuotaHeader": "Број соба ц́е ускоро бити прекорачен: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Ограничења складишта и соба ће ускоро бити прекорачена.",
   "StorageAndUserHeader": "Ограничења складишта и администратора/напредних корисника ће ускоро бити прекорачена.",
-  "StorageQuotaDescription": "Можете да уклоните непотребне датотеке или <1>{{clickHere}}</1> да бисте пронашли прикладнији план цена за ваш DocSpace.",
+  "StorageQuotaDescription": "Можете да уклоните непотребне датотеке или <1>{{clickHere}}</1> да бисте пронашли прикладнији план цена за ваш {{productName}}.",
   "StorageQuotaExceeded": "Квота складишта прекорачена",
   "StorageQuotaHeader": "Количина меморијског простора ц́е ускоро бити прекорачена: {{currentValue}} / {{maxValue}}",
+  "StorageQuotaUserDescription": "Можете уклонити непотребне датотеке да бисте ослободили простор на диску.",
   "TenantCustomQuotaDescription": "Можете уклонити непотребне датотеке или променити квоту у <1>Storage management settings.</1>",
-  "UserQuotaDescription": "<1> {{clickHere }}</1> да бисте пронашли бољи план цена за свој DocSpace.",
+  "UserQuotaDescription": "<1>{{clickHere }}</1> да бисте пронашли бољи план цена за свој {{productName}}.",
   "UserQuotaHeader": "Број администратора/напредних корисника ће ускоро бити прекорачен: {{currentValue}} / {{maxValue}}."
 }

@@ -1,5 +1,6 @@
 {
   "ActiveSessions": "活动会话",
+  "AutoDeleteTitle": "所有超过 60 天的会话将被自动删除。",
   "ChangeEmailSuccess": "邮箱已成功更改",
   "ChangePasswordAfterLoggingOut": "登出后变更密码",
   "ConnectSocialNetworks": "连接您的社交媒体",
@@ -14,7 +15,6 @@
   "InterfaceTheme": "界面主題",
   "LightTheme": "浅色主题",
   "LogoutActiveConnection": "从活动连接中注销",
-  "LogoutAllActiveConnections": "从所有活动连接中注销",
   "LogoutAllActiveSessionsDescription": "由于此连接当前正在使用，故除此之外的所有活动连接都将被注销。",
   "LogoutBtn": "注销",
   "LogoutDescription": "注意，由于此连接当前正在使用，故除此之外的所有活动连接都将被注销。",
@@ -27,5 +27,6 @@
   "SuccessLogout": "活动连接已登出：{{platform}}，{{browser}}",
   "SystemTheme": "使用系统主题",
   "SystemThemeDescription": "根据系统状态切换浅色和深色主题。",
+  "TerminateAllSessions": "终止除当前会话之外的所有会话",
   "TwoFactorDescription": "管理员为所有用户启用了通过代码生成应用进行的双因素身份认证功能。"
 }

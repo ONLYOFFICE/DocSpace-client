@@ -1,5 +1,6 @@
 {
   "ActiveSessions": "Aktīvās sesijas",
+  "AutoDeleteTitle": "Visas sesijas, kas vecākas par 60 dienām, tiks automātiski izdzēstas.",
   "ChangeEmailSuccess": "E-pasts ir veiksmīgi mainīts",
   "ChangePasswordAfterLoggingOut": "Mainīt paroli pēc izrakstīšanās",
   "ConnectSocialNetworks": "Savienojiet savus sociālos tīklus",
@@ -14,7 +15,6 @@
   "InterfaceTheme": "Interfeisa dizains",
   "LightTheme": "Gaišs dizains",
   "LogoutActiveConnection": "Izrakstīties no aktīvā savienojuma",
-  "LogoutAllActiveConnections": "Izrakstīties no visiem aktīvajiem savienojumiem",
   "LogoutAllActiveSessionsDescription": "Visi aktīvie savienojumi, izņemot šo savienojumu, tiks izrakstīti, jo tas pašlaik tiek lietots.",
   "LogoutBtn": "Izrakstīties",
   "LogoutDescription": "Piezīme. Visi aktīvie savienojumi, izņemot šo savienojumu, tiks izrakstīti, jo tas pašlaik tiek lietots.",
@@ -27,5 +27,6 @@
   "SuccessLogout": "Tika izrakstīts no aktīvā savienojuma: {{platform}}, {{browser}}",
   "SystemTheme": "Izmantot sistēmas dizainu",
   "SystemThemeDescription": "Automātiski pārslēdzieties starp gaišiem un tumšiem dizainiem, kad to dara sistēma.",
+  "TerminateAllSessions": "Pārtraukt visas sesijas, izņemot pašreizējo",
   "TwoFactorDescription": "Administrators visiem lietotājiem ir iespējojis divu faktoru autentifikāciju, izmantojot kodu ģenerējošu lietotni."
 }

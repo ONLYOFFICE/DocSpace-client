@@ -46,6 +46,9 @@ const PrivateRouteWrapper = ({
   restricted,
   withCollaborator,
   withManager,
+  identityServerEnabled,
+  limitedAccessSpace,
+  baseDomain,
 }: Partial<PrivateRouteProps>) => {
   return (
     <PrivateRoute
@@ -64,6 +67,9 @@ const PrivateRouteWrapper = ({
       withCollaborator={withCollaborator}
       isPortalDeactivate={isPortalDeactivate!}
       enablePortalRename={enablePortalRename!}
+      identityServerEnabled={identityServerEnabled}
+      limitedAccessSpace={limitedAccessSpace ?? null}
+      baseDomain={baseDomain}
     >
       {children}
     </PrivateRoute>
@@ -72,16 +78,14 @@ const PrivateRouteWrapper = ({
 
 export default inject<TStore>(
   ({ authStore, settingsStore, userStore, currentTariffStatusStore }) => {
-    const {
-      isAuthenticated,
-      isLoaded,
-      isAdmin,
+    const { isAuthenticated, isLoaded, isAdmin, isLogout, capabilities } =
+      authStore;
 
-      isLogout,
-      isCommunity,
-      isEnterprise,
-    } = authStore;
-    const { isNotPaidPeriod } = currentTariffStatusStore;
+    const { isNotPaidPeriod, isCommunity, isEnterprise } =
+      currentTariffStatusStore;
+
+    const identityServerEnabled = capabilities?.identityServerEnabled;
+
     const { user } = userStore;
 
     const {
@@ -89,6 +93,8 @@ export default inject<TStore>(
       tenantStatus,
       isPortalDeactivate,
       enablePortalRename,
+      limitedAccessSpace,
+      baseDomain,
     } = settingsStore;
 
     return {
@@ -104,6 +110,9 @@ export default inject<TStore>(
       isLogout,
       isEnterprise,
       enablePortalRename,
+      identityServerEnabled,
+      limitedAccessSpace,
+      baseDomain,
     };
   },
 )(observer(PrivateRouteWrapper));

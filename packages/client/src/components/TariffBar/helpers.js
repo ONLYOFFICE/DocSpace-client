@@ -24,8 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-const ORANGE = "#F97A0B";
-const RED = "#F2665A";
+import { globalColors } from "@docspace/shared/themes";
+
+const ORANGE = globalColors.mainOrange;
+const RED = globalColors.mainRed;
 
 export const getSaasBar = (
   t,

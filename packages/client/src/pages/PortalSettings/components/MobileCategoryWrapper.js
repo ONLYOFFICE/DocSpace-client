@@ -25,13 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
 import { Badge } from "@docspace/shared/components/badge";
 import { Link } from "@docspace/shared/components/link";
 import { Base } from "@docspace/shared/themes";
 import commonIconsStyles from "@docspace/shared/utils/common-icons-style";
+import { globalColors } from "@docspace/shared/themes";
 
 import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 
@@ -91,6 +92,8 @@ const MobileCategoryWrapper = (props) => {
     badgeLabel,
   } = props;
 
+  const theme = useTheme();
+
   const onClickProp = isDisabled ? {} : { onClick: onClickLink };
   const onHrefProp = isDisabled ? {} : { href: url };
 
@@ -107,7 +110,11 @@ const MobileCategoryWrapper = (props) => {
         </Link>
         {withPaidBadge && (
           <Badge
-            backgroundColor="#EDC409"
+            backgroundColor={
+              theme.isBase
+                ? globalColors.favoritesStatus
+                : globalColors.favoriteStatusDark
+            }
             label={badgeLabel}
             isPaidBadge={true}
             className="paid-badge"

@@ -28,8 +28,6 @@ import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-import { PRODUCT_NAME } from "@docspace/shared/constants";
-
 import MobileCategoryWrapper from "../../../components/MobileCategoryWrapper";
 
 const StyledWrapper = styled.div`
@@ -39,7 +37,7 @@ const StyledWrapper = styled.div`
   gap: 20px;
 `;
 
-const MobileView = ({ isSSOAvailable, organizationName }) => {
+const MobileView = ({ isSSOAvailable }) => {
   const { t } = useTranslation(["SingleSignOn", "Settings"]);
   const navigate = useNavigate();
 
@@ -51,20 +49,24 @@ const MobileView = ({ isSSOAvailable, organizationName }) => {
   return (
     <StyledWrapper>
       <MobileCategoryWrapper
-        title={t("ServiceProviderSettings", { organizationName })}
+        title={t("ServiceProviderSettings", {
+          organizationName: t("Common:OrganizationName"),
+        })}
         subtitle={t("ServiceProviderSettingsDescription")}
-        url="/portal-settings/integration/single-sign-on/sp-settings"
+        url="/portal-settings/integration/sso/settings"
         withPaidBadge={!isSSOAvailable}
         badgeLabel={t("Common:Paid")}
         onClickLink={onClickLink}
       />
       <MobileCategoryWrapper
-        title={t("SpMetadata", { organizationName })}
-        subtitle={t("SpMetadataDescription", {
-          productName: PRODUCT_NAME,
-          organizationName,
+        title={t("SpMetadata", {
+          organizationName: t("Common:OrganizationName"),
         })}
-        url="/portal-settings/integration/single-sign-on/sp-metadata"
+        subtitle={t("SpMetadataDescription", {
+          productName: t("Common:ProductName"),
+          organizationName: t("Common:OrganizationName"),
+        })}
+        url="/portal-settings/integration/sso/metadata"
         withPaidBadge={!isSSOAvailable}
         badgeLabel={t("Common:Paid")}
         onClickLink={onClickLink}

@@ -1,7 +1,11 @@
 {
-  "Auto": "Auto",
-  "CodeCopySuccess": "Koodi on kopioitu leikepöydälle",
-  "EmbedCode": "Upota koodi",
+  "CodeSuccessfullyCopied": "Syötettävä koodi kopioitu leikepöydälle",
+  "ContentRestricted": "Sisällön kopiointi, tiedoston lataaminen ja tulostaminen on rajoitettu.",
+  "DisplaySettings": "Näyttöasetukset",
+  "EmbeddingBarAllowList": "Lisää verkkosivun URL <1>allow list</1>:aan upottamista varten.",
+  "EmbeddingBarDescription": "Upottaminen onnistuu vain {{productName}}:n pääkäyttäjän määrittämien URL:ien kohdalla JavaScript SDK-asetuksissa.",
   "Height": "Korkeus",
+  "Link": "Linkki",
+  "LinkProtectedWithPassword": "Linkki on suojattu salasanalla.",
   "Width": "Leveys"
 }

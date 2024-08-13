@@ -1,0 +1,12 @@
+{
+  "BackToRoom": "返回房间",
+  "CheckReadyForms": "检查已完成的表单",
+  "Description": "您的表单已完成并保存",
+  "DescriptionForAnonymous": "您提交了已填写的 PDF 表单，该表单获得了一个特殊编号。若要检查状态，请联系表单所有者，获取指定编号。",
+  "DescriptionForRegisteredUser": "已保存填写的 PDF 表单，可在“完成”文件夹中查看。若要检查状态，请联系表单所有者，获取指定编号。",
+  "FillItOutAgain": " 再次填写",
+  "FormCompletedSuccessfully": "已成功完成表单",
+  "FormNumber": "表单编号：",
+  "FormOwner": "表单所有者",
+  "Title": "表单已完成"
+}

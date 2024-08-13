@@ -45,7 +45,7 @@ import {
   StyledInviteUserBody,
 } from "../StyledInvitePanel";
 import { filterGroupRoleOptions, filterUserRoleOptions } from "SRC_DIR/helpers";
-import AccessSelector from "./AccessSelector";
+import AccessSelector from "../../../AccessSelector";
 
 const Item = ({
   t,
@@ -196,11 +196,10 @@ const Item = ({
 
         {!isGroup && (
           <Text
-            className="label"
+            className="label about-label"
             fontWeight={400}
             fontSize="12px"
             noSelect
-            color="#A3A9AE"
             truncate
           >
             {`${typeLabel} | ${email}`}

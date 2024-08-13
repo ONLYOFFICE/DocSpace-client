@@ -32,11 +32,8 @@ import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
-import { classNames } from "@docspace/shared/utils";
-import {
-  StyledBadgesContainer,
-  StyledQuickButtonsContainer,
-} from "../StyledTable";
+import { classNames, getLastColumn } from "@docspace/shared/utils";
+import { StyledBadgesContainer } from "../StyledTable";
 import ErasureCell from "./ErasureCell";
 import RoomCell from "./RoomCell";
 
@@ -48,8 +45,6 @@ const TrashRowDataComponent = (props) => {
     erasureColumnIsEnabled,
     sizeTrashColumnIsEnabled,
     typeTrashColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
-
     dragStyles,
     selectionProp,
     value,
@@ -60,8 +55,10 @@ const TrashRowDataComponent = (props) => {
     inProgress,
     showHotkeyBorder,
     badgesComponent,
-    quickButtonsComponent,
+    tableStorageName,
   } = props;
+
+  const lastColumn = getLastColumn(tableStorageName);
 
   return (
     <>
@@ -92,6 +89,10 @@ const TrashRowDataComponent = (props) => {
             !roomColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Room" ? "no-extra-space" : "",
+          )}
         >
           <RoomCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -110,6 +111,10 @@ const TrashRowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "AuthorTrash" ? "no-extra-space" : "",
+          )}
         >
           <AuthorCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -128,6 +133,10 @@ const TrashRowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "CreatedTrash" ? "no-extra-space" : "",
+          )}
         >
           <DateCell
             create
@@ -145,6 +154,10 @@ const TrashRowDataComponent = (props) => {
             !erasureColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Erasure" ? "no-extra-space" : "",
+          )}
         >
           <ErasureCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -163,6 +176,10 @@ const TrashRowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "SizeTrash" ? "no-extra-space" : "",
+          )}
         >
           <SizeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
@@ -181,31 +198,15 @@ const TrashRowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "TypeTrash" ? "no-extra-space" : "",
+          )}
         >
           <TypeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-        </TableCell>
-      ) : (
-        <div />
-      )}
-      {quickButtonsColumnIsEnabled ? (
-        <TableCell
-          style={
-            !quickButtonsColumnIsEnabled
-              ? { background: "none" }
-              : dragStyles.style
-          }
-          {...selectionProp}
-          className={classNames(
-            selectionProp?.className,
-            "table-container_quick-buttons-wrapper",
-          )}
-        >
-          <StyledQuickButtonsContainer>
-            {quickButtonsComponent}
-          </StyledQuickButtonsContainer>
         </TableCell>
       ) : (
         <div />
@@ -222,7 +223,7 @@ export default inject(({ tableStore }) => {
     erasureColumnIsEnabled,
     sizeTrashColumnIsEnabled,
     typeTrashColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
+    tableStorageName,
   } = tableStore;
 
   return {
@@ -232,6 +233,6 @@ export default inject(({ tableStore }) => {
     erasureColumnIsEnabled,
     sizeTrashColumnIsEnabled,
     typeTrashColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
+    tableStorageName,
   };
 })(observer(TrashRowDataComponent));

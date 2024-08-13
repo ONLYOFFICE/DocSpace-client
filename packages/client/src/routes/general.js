@@ -24,16 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { Navigate } from "react-router-dom";
-import loadable from "@loadable/component";
 
-import PrivateRoute from "../components/PrivateRouteWrapper";
 import componentLoader from "@docspace/shared/utils/component-loader";
-
-const Profile = loadable(() =>
-  componentLoader(() => import("../pages/Profile")),
-);
 
 const generalRoutes = [
   {
@@ -51,35 +44,23 @@ const generalRoutes = [
       },
       {
         path: "login",
-        element: (
-          <PrivateRoute>
-            <Profile />
-          </PrivateRoute>
-        ),
+        lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
       },
       {
         path: "notifications",
-        element: (
-          <PrivateRoute>
-            <Profile />
-          </PrivateRoute>
-        ),
+        lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
       },
       {
         path: "file-management",
-        element: (
-          <PrivateRoute withCollaborator restricted>
-            <Profile />
-          </PrivateRoute>
-        ),
+        lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
       },
       {
         path: "interface-theme",
-        element: (
-          <PrivateRoute>
-            <Profile />
-          </PrivateRoute>
-        ),
+        lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
+      },
+      {
+        path: "authorized-apps",
+        lazy: () => componentLoader(() => import("SRC_DIR/pages/Profile")),
       },
     ],
   },

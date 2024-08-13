@@ -29,6 +29,7 @@ import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import styled from "styled-components";
 import { commonIconsStyles } from "@docspace/shared/utils";
 import { Base } from "@docspace/shared/themes";
+import { UnavailableStyles } from "../utils/commonSettingsStyles";
 
 export const StyledArrowRightIcon = styled(ArrowRightIcon)`
   ${commonIconsStyles}
@@ -65,10 +66,7 @@ export const StyledMobileCategoryWrapper = styled.div`
   }
 
   .inherit-title-link {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-left: 7px;`
-        : `margin-right: 7px;`}
+    margin-inline-end: 7px;
     font-size: 16px;
     font-weight: 700;
   }
@@ -76,6 +74,8 @@ export const StyledMobileCategoryWrapper = styled.div`
   .link-text {
     margin: 0;
   }
+
+  ${(props) => props.disabled && UnavailableStyles}
 `;
 
 StyledMobileCategoryWrapper.defaultProps = { theme: Base };

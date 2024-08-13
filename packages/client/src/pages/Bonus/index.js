@@ -36,7 +36,7 @@ import StyledComponent from "./StyledComponent";
 import OfficialDocumentation from "./sub-components/OfficialDocumentation";
 import ContactContainer from "SRC_DIR/components/StandaloneComponents/ContactContainer";
 
-const Bonus = ({ standaloneInit, isInitPaymentPage, organizationName }) => {
+const Bonus = ({ standaloneInit, isInitPaymentPage }) => {
   const { t, ready } = useTranslation("PaymentsEnterprise");
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const Bonus = ({ standaloneInit, isInitPaymentPage, organizationName }) => {
       <BenefitsContainer />
       <Text fontWeight={600}>
         {t("UpgradeToProBannerInstructionHeader", {
-          organizationName,
+          organizationName: t("Common:OrganizationName"),
         })}
       </Text>
       <Text>{t("UpgradeToProBannerInstructionDescr")}</Text>
@@ -62,12 +62,10 @@ const Bonus = ({ standaloneInit, isInitPaymentPage, organizationName }) => {
   );
 };
 
-export default inject(({ settingsStore, paymentStore }) => {
+export const Component = inject(({ paymentStore }) => {
   const { standaloneInit, isInitPaymentPage } = paymentStore;
-  const { organizationName } = settingsStore;
   return {
     standaloneInit,
     isInitPaymentPage,
-    organizationName,
   };
 })(observer(Bonus));

@@ -47,7 +47,6 @@ import {
 
 import { ArticleItem } from "@docspace/shared/components/article-item";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const ArticleBodyContent = (props) => {
   const {
@@ -60,12 +59,12 @@ const ArticleBodyContent = (props) => {
     isOwner,
     isLoadedArticleBody,
     standalone,
-    isEnterprise,
     isCommunity,
     currentDeviceType,
     isProfileLoading,
     limitedAccessSpace,
     currentColorScheme,
+    baseDomain,
   } = props;
 
   const [selectedKeys, setSelectedKeys] = React.useState([]);
@@ -211,7 +210,7 @@ const ArticleBodyContent = (props) => {
       case "ManagementCategorySecurity":
         return t("ManagementCategorySecurity");
       case "PortalAccess":
-        return t("PortalAccess", { productName: PRODUCT_NAME });
+        return t("PortalAccess", { productName: t("Common:ProductName") });
       case "TwoFactorAuth":
         return t("TwoFactorAuth");
       case "ManagementCategoryIntegration":
@@ -226,10 +225,14 @@ const ArticleBodyContent = (props) => {
         return t("Common:PaymentsTitle");
       case "ManagementCategoryDataManagement":
         return t("ManagementCategoryDataManagement");
+      case "LdapSettings":
+        return t("Ldap:LdapSettings");
+      case "LdapSyncTitle":
+        return t("Ldap:LdapSyncTitle");
       case "RestoreBackup":
         return t("RestoreBackup");
       case "PortalDeletion":
-        return t("PortalDeletion", { productName: PRODUCT_NAME });
+        return t("PortalDeletion", { productName: t("Common:ProductName") });
       case "Common:DeveloperTools":
         return t("Common:DeveloperTools");
       case "Common:Bonus":
@@ -238,12 +241,6 @@ const ArticleBodyContent = (props) => {
         return "Common:FreeAccessToLicensedVersion";
       case "DataImport":
         return t("DataImport");
-      case "ImportFromGoogle":
-        return t("ImportFromGoogle");
-      case "ImportFromNextcloud":
-        return t("ImportFromNextcloud");
-      case "ImportFromPortal":
-        return t("ImportFromPortal");
       case "StorageManagement":
         return t("StorageManagement");
       default:
@@ -283,7 +280,7 @@ const ArticleBodyContent = (props) => {
       }
     }
 
-    if (!isOwner) {
+    if (!isOwner || (baseDomain && baseDomain === "localhost")) {
       const index = resultTree.findIndex((n) => n.tKey === "PortalDeletion");
       if (index !== -1) {
         resultTree.splice(index, 1);
@@ -343,8 +340,8 @@ export default inject(
     currentTariffStatusStore,
   }) => {
     const { isLoadedArticleBody, setIsLoadedArticleBody } = common;
-    const { isEnterprise, isCommunity } = authStore;
-    const { isNotPaidPeriod } = currentTariffStatusStore;
+
+    const { isNotPaidPeriod, isCommunity } = currentTariffStatusStore;
     const { user } = userStore;
     const { isOwner } = user;
     const {
@@ -354,6 +351,7 @@ export default inject(
       currentDeviceType,
       limitedAccessSpace,
       currentColorScheme,
+      baseDomain,
     } = settingsStore;
 
     const isProfileLoading =
@@ -363,7 +361,7 @@ export default inject(
 
     return {
       standalone,
-      isEnterprise,
+
       showText,
       toggleArticleOpen,
       isLoadedArticleBody,
@@ -375,10 +373,13 @@ export default inject(
       isProfileLoading,
       limitedAccessSpace,
       currentColorScheme,
+      baseDomain,
     };
   },
 )(
   withLoading(
-    withTranslation(["Settings", "Common"])(observer(ArticleBodyContent)),
+    withTranslation(["Settings", "Common", "Ldap"])(
+      observer(ArticleBodyContent),
+    ),
   ),
 );

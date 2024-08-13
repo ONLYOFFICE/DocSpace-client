@@ -32,7 +32,7 @@ import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
-import { classNames } from "@docspace/shared/utils";
+import { classNames, getLastColumn } from "@docspace/shared/utils";
 import {
   StyledBadgesContainer,
   StyledQuickButtonsContainer,
@@ -45,8 +45,6 @@ const RowDataComponent = (props) => {
     modifiedColumnIsEnabled,
     sizeColumnIsEnabled,
     typeColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
-
     dragStyles,
     selectionProp,
     value,
@@ -58,7 +56,15 @@ const RowDataComponent = (props) => {
     showHotkeyBorder,
     badgesComponent,
     quickButtonsComponent,
+    tableStorageName,
   } = props;
+
+  const lastColumn = getLastColumn(tableStorageName);
+  const quickButtonsComponentNode = (
+    <StyledQuickButtonsContainer>
+      {quickButtonsComponent}
+    </StyledQuickButtonsContainer>
+  );
 
   return (
     <>
@@ -81,6 +87,7 @@ const RowDataComponent = (props) => {
         <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
           {badgesComponent}
         </StyledBadgesContainer>
+        {lastColumn === "Name" ? quickButtonsComponentNode : <></>}
       </TableCell>
 
       {authorColumnIsEnabled ? (
@@ -89,11 +96,16 @@ const RowDataComponent = (props) => {
             !authorColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Author" ? "no-extra-space" : "",
+          )}
         >
           <AuthorCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "Author" ? quickButtonsComponentNode : <></>}
         </TableCell>
       ) : (
         <div />
@@ -107,12 +119,17 @@ const RowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Created" ? "no-extra-space" : "",
+          )}
         >
           <DateCell
             create
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "Created" ? quickButtonsComponentNode : <></>}
         </TableCell>
       ) : (
         <div />
@@ -124,11 +141,16 @@ const RowDataComponent = (props) => {
             !modifiedColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Modified" ? "no-extra-space" : "",
+          )}
         >
           <DateCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "Modified" ? quickButtonsComponentNode : <></>}
         </TableCell>
       ) : (
         <div />
@@ -140,11 +162,16 @@ const RowDataComponent = (props) => {
             !sizeColumnIsEnabled ? { background: "none" } : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Size" ? "no-extra-space" : "",
+          )}
         >
           <SizeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "Size" ? quickButtonsComponentNode : <></>}
         </TableCell>
       ) : (
         <div />
@@ -158,31 +185,16 @@ const RowDataComponent = (props) => {
               : dragStyles.style
           }
           {...selectionProp}
+          className={classNames(
+            selectionProp?.className,
+            lastColumn === "Type" ? "no-extra-space" : "",
+          )}
         >
           <TypeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-        </TableCell>
-      ) : (
-        <div />
-      )}
-      {quickButtonsColumnIsEnabled ? (
-        <TableCell
-          style={
-            !quickButtonsColumnIsEnabled
-              ? { background: "none" }
-              : dragStyles.style
-          }
-          {...selectionProp}
-          className={classNames(
-            selectionProp?.className,
-            "table-container_quick-buttons-wrapper",
-          )}
-        >
-          <StyledQuickButtonsContainer>
-            {quickButtonsComponent}
-          </StyledQuickButtonsContainer>
+          {lastColumn === "Type" ? quickButtonsComponentNode : <></>}
         </TableCell>
       ) : (
         <div />
@@ -198,7 +210,7 @@ export default inject(({ tableStore }) => {
     modifiedColumnIsEnabled,
     sizeColumnIsEnabled,
     typeColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
+    tableStorageName,
   } = tableStore;
 
   return {
@@ -207,6 +219,6 @@ export default inject(({ tableStore }) => {
     modifiedColumnIsEnabled,
     sizeColumnIsEnabled,
     typeColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
+    tableStorageName,
   };
 })(observer(RowDataComponent));

@@ -1,5 +1,4 @@
 {
-  "Authentication": "Poświadczenie",
   "AuthViaNTLM": "Uwierzytelnianie przez NTLM",
   "EnableSSL": "Włącz protokół SSL",
   "EnterDomain": "Wpisz domenę",
@@ -12,6 +11,5 @@
   "Port": "Port",
   "SenderDisplayName": "Nazwa wyświetlana nadawcy",
   "SenderEmailAddress": "Adres e-mail nadawcy",
-  "SendTestMail": "Wyślij pocztę testową",
-  "SuccessfullyCompletedOperation": "Operacja została pomyślnie zakończona."
+  "SendTestMail": "Wyślij pocztę testową"
 }

@@ -33,7 +33,7 @@ import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 import AccessEditFormReactSvgUrl from "PUBLIC_DIR/images/access.edit.form.react.svg?url";
 import FileActionsConvertEditDocReactSvgUrl from "PUBLIC_DIR/images/file.actions.convert.edit.doc.react.svg?url";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
-import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.reat.svg?url";
+import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 import Refresh12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/refresh.react.svg?url";
 import Mute12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/mute.react.svg?url";
 import Mute16ReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
@@ -44,7 +44,7 @@ import { Badge } from "@docspace/shared/components/badge";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 
 import { isTablet, isDesktop, size, classNames } from "@docspace/shared/utils";
 
@@ -56,7 +56,7 @@ const StyledWrapper = styled.div`
   background: ${(props) => props.theme.filesBadges.backgroundColor};
   padding: 6px;
   border-radius: 4px;
-  box-shadow: 0px 2px 4px rgba(4, 15, 27, 0.16);
+  box-shadow: 0px 2px 4px ${globalColors.badgeShadow};
 `;
 
 StyledWrapper.defaultProps = { theme: Base };
@@ -217,6 +217,10 @@ const Badges = ({
     !isArchiveFolder &&
     !isTile;
 
+  const onDraftClick = () => {
+    if (!isTrashFolder) openLocationFile();
+  };
+
   return fileExst ? (
     <div className="badges additional-badges file__badges">
       {/* {startFilling && (
@@ -245,12 +249,12 @@ const Badges = ({
             style={{
               width: "max-content",
             }}
-            onClick={openLocationFile}
+            onClick={onDraftClick}
           />
         </BadgeWrapper>
       )}
 
-      {isEditing && !isVisitor && !(isRecentTab && !canEditing) && (
+      {isEditing && !(isRecentTab && !canEditing) && (
         <ColorTheme
           themeId={ThemeId.IconButton}
           isEditing={isEditing}
@@ -302,7 +306,6 @@ const Badges = ({
       {/* {isForm  && ( 
         <BadgeWrapper isTile={isTile}>
           <HelpButton
-            color="#F2675A"
             place="bottom"
             size={isViewTable ? 12 : 16}
             className="bagde_alert icons-group"

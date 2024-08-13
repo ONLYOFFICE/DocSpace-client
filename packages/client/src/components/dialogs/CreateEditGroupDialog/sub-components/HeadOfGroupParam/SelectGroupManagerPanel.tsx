@@ -25,8 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
+
 import { ShareAccessRights } from "@docspace/shared/enums";
 import { Portal } from "@docspace/shared/components/portal";
+import { TUser } from "@docspace/shared/api/people/types";
+
 import AddUsersPanel from "../../../../panels/AddUsersPanel";
 import { getAccessOptions } from "../../../../panels/InvitePanel/utils";
 
@@ -34,7 +37,7 @@ interface SelectGroupManagerPanelProps {
   isVisible: boolean;
   onClose: () => void;
   onParentPanelClose: () => void;
-  setGroupManager: (groupManager: object) => void;
+  setGroupManager: (groupManager: TUser) => void;
 }
 
 const SelectGroupManagerPanel = ({
@@ -46,7 +49,7 @@ const SelectGroupManagerPanel = ({
   const { t } = useTranslation(["InviteDialog"]);
   const accessOptions = getAccessOptions(t);
 
-  const onSelectGroupManager = (newGroupManager: object[]) => {
+  const onSelectGroupManager = (newGroupManager: TUser[]) => {
     setGroupManager(newGroupManager[0]);
   };
 

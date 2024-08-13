@@ -5,6 +5,7 @@
   "ExpiredCode": "Deze code is niet meer geldig. Vraag een nieuwe code aan en probeer het opnieuw.",
   "ForgotPassword": "Wachtwoord vergeten?",
   "InvalidCode": "Deze code is ongeldig. Probeer het opnieuw.",
+  "LDAPUsernamePlaceholder": "Gebruikersnaam van {{ldap_domain}} ",
   "MessageAuthorize": "Log in om verder te gaan",
   "MessageEmailConfirmed": "Uw e-mail is succesvol geactiveerd.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Voer het e-mailadres in dat u bij de registratie heeft gebruikt. De instructies voor het herstellen van het wachtwoord zullen u worden toegestuurd.",
@@ -20,5 +21,7 @@
   "RegistrationEmailWatermark": "E-mail",
   "RememberHelper": "De standaard sessieduur is 20 minuten. Vink deze optie aan om deze in te stellen op 1 jaar. Om uw eigen waarde in te stellen, ga naar Instellingen.",
   "ResendCode": "Code opnieuw versturen",
+  "SignInLDAP": "Aanmelden bij: {{ldap_domain}}",
+  "SignInLdapHelper": "Gebruik aanmeldgegevens voor het bedrijfsdomein",
   "UserIsAlreadyRegistered": "Gebruiker <1>{{email}}</1> is al geregistreerd in deze {{productName}}, voer uw wachtwoord in of ga terug om verder te gaan met een andere e-mail."
 }

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useContext } from "react";
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
@@ -59,20 +59,20 @@ import {
 } from "../../components/selector/Selector.types";
 
 import useFilesHelper from "./hooks/useFilesHelper";
-import useLoadersHelper from "./hooks/useLoadersHelper";
 import useRoomsHelper from "./hooks/useRoomsHelper";
 import useRootHelper from "./hooks/useRootHelper";
 import useSocketHelper from "./hooks/useSocketHelper";
-import useFilesSettings from "./hooks/useFilesSettings";
 
 import { FilesSelectorProps } from "./FilesSelector.types";
+import { SettingsContextProvider } from "./contexts/Settings";
+import { LoadersContext, LoadersContextProvider } from "./contexts/Loaders";
 
-const FilesSelector = ({
+const FilesSelectorComponent = ({
   socketHelper,
   socketSubscribers,
   disabledItems,
   filterParam,
-  getIcon: getIconProp,
+
   treeFolders,
   onSetBaseFolderPath,
   isUserOnly,
@@ -106,15 +106,24 @@ const FilesSelector = ({
   setIsDataReady,
   withSearch: withSearchProp,
   withBreadCrumbs: withBreadCrumbsProp,
-  filesSettings,
+
   cancelButtonLabel,
 
   withCreate,
   createDefineRoomLabel,
   createDefineRoomType,
+  withInfoBar,
+  infoBarData,
 }: FilesSelectorProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["Common"]);
+  const {
+    isFirstLoad,
+    setIsFirstLoad,
+    showLoader,
+    showBreadCrumbsLoader,
+    isNextPageLoading,
+  } = useContext(LoadersContext);
 
   const [breadCrumbs, setBreadCrumbs] = React.useState<TBreadCrumb[]>([]);
   const [items, setItems] = React.useState<TSelectorItem[]>([]);
@@ -146,100 +155,76 @@ const FilesSelector = ({
 
   const [isInit, setIsInit] = React.useState(true);
 
-  const { getIcon } = useFilesSettings(getIconProp, filesSettings);
-
   const { subscribe, unsubscribe } = useSocketHelper({
     socketHelper,
     socketSubscribers,
     disabledItems,
     filterParam,
     withCreate,
-    getIcon,
     setItems,
     setBreadCrumbs,
     setTotal,
   });
 
-  const {
-    setIsBreadCrumbsLoading,
-    isNextPageLoading,
-    setIsNextPageLoading,
-    isFirstLoad,
-    setIsFirstLoad,
-    showBreadCrumbsLoader,
-    showLoader,
-  } = useLoadersHelper();
-
   const { isRoot, setIsRoot, getRootData } = useRootHelper({
-    setIsBreadCrumbsLoading,
+    treeFolders,
+    isUserOnly,
+
     setBreadCrumbs,
     setTotal,
     setItems,
-    treeFolders,
     setHasNextPage,
-    setIsNextPageLoading,
-    isUserOnly,
     setIsInit,
-    setIsFirstLoad,
   });
 
   const { getRoomList } = useRoomsHelper({
-    setIsBreadCrumbsLoading,
     setBreadCrumbs,
-    setIsNextPageLoading,
     setHasNextPage,
     setTotal,
     setItems,
-    isFirstLoad,
     setIsRoot,
-    searchValue,
-    isRoomsOnly,
-
     onSetBaseFolderPath,
-    isInit,
     setIsInit,
-    setIsFirstLoad,
-
-    withCreate,
-    createDefineRoomLabel,
-    createDefineRoomType,
-
     getRootData,
     setSelectedItemType,
     subscribe,
+
+    searchValue,
+    isRoomsOnly,
+    isInit,
+    withCreate,
+    createDefineRoomLabel,
+    createDefineRoomType,
   });
 
   const { getFileList } = useFilesHelper({
-    setIsBreadCrumbsLoading,
     setBreadCrumbs,
-    setIsNextPageLoading,
     setHasNextPage,
     setTotal,
     setItems,
-    selectedItemId,
-    isFirstLoad,
     setIsRoot,
-    searchValue,
-    disabledItems,
     setSelectedItemSecurity,
-    isThirdParty,
     setSelectedTreeNode,
-    filterParam,
     getRootData,
     onSetBaseFolderPath,
+    getRoomList,
+    setIsSelectedParentFolder,
+    getFilesArchiveError,
+    setIsInit,
+    setSelectedItemId,
+    setSelectedItemType,
+
+    selectedItemId,
+    searchValue,
+    disabledItems,
+    isThirdParty,
+    filterParam,
     isRoomsOnly,
     isUserOnly,
     rootThirdPartyId,
-    getRoomList,
-    getIcon,
-    setIsFirstLoad,
-    setIsSelectedParentFolder,
     roomsFolderId,
-    getFilesArchiveError,
     isInit,
-    setIsInit,
     withCreate,
-    setSelectedItemId,
   });
 
   const onClickBreadCrumb = React.useCallback(
@@ -253,7 +238,7 @@ const FilesSelector = ({
           setSelectedItemType(undefined);
           getRootData();
         } else {
-          setItems([]);
+          // setItems([]);
 
           setBreadCrumbs((bc) => {
             const idx = bc.findIndex(
@@ -317,7 +302,7 @@ const FilesSelector = ({
       if (item.isFolder) {
         setIsFirstLoad(true);
 
-        setItems([]);
+        // setItems([]);
         setBreadCrumbs((value) => [
           ...value,
           {
@@ -444,7 +429,9 @@ const FilesSelector = ({
       isChecked: boolean,
     ) => {
       const isPublic =
-        breadCrumbs.findIndex((f) => f.roomType === RoomsType.PublicRoom) > -1;
+        breadCrumbs.findIndex((f) => f.roomType === RoomsType.PublicRoom) >
+          -1 && rootFolderType !== FolderType.Rooms;
+
       const folderTitle = breadCrumbs[breadCrumbs.length - 1].label;
 
       await onSubmit(
@@ -458,7 +445,14 @@ const FilesSelector = ({
         selectedFileInfo,
       );
     },
-    [breadCrumbs, selectedFileInfo, selectedItemId, selectedTreeNode, onSubmit],
+    [
+      breadCrumbs,
+      rootFolderType,
+      onSubmit,
+      selectedItemId,
+      selectedTreeNode,
+      selectedFileInfo,
+    ],
   );
 
   React.useEffect(() => {
@@ -512,7 +506,7 @@ const FilesSelector = ({
     submitButtonLabel,
     submitButtonId,
     disableSubmitButton: getIsDisabled(
-      isFirstLoad,
+      isFirstLoad && showLoader,
       isSelectedParentFolder,
       selectedItemId,
       selectedItemType,
@@ -602,6 +596,8 @@ const FilesSelector = ({
       }
       descriptionText={descriptionText}
       disableFirstFetch
+      withInfoBar={withInfoBar}
+      infoBarData={infoBarData}
     />
   );
 
@@ -631,6 +627,17 @@ const FilesSelector = ({
     <Portal visible={isPanelVisible} element={<div>{selectorComponent}</div>} />
   ) : (
     selectorComponent
+  );
+};
+
+const FilesSelector = (props: FilesSelectorProps) => {
+  const { filesSettings, getIcon } = props;
+  return (
+    <LoadersContextProvider>
+      <SettingsContextProvider settings={filesSettings} getIcon={getIcon}>
+        <FilesSelectorComponent {...props} />
+      </SettingsContextProvider>
+    </LoadersContextProvider>
   );
 };
 

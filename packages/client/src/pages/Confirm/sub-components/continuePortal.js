@@ -44,7 +44,8 @@ import withLoader from "../withLoader";
 
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
+import ConfirmRoute from "SRC_DIR/helpers/confirmRoute";
+import { AuthenticatedAction } from "SRC_DIR/helpers/enums";
 
 const ContinuePortal = (props) => {
   const { t, greetingTitle, linkData } = props;
@@ -89,7 +90,9 @@ const ContinuePortal = (props) => {
             ) : (
               <>
                 <Text className="subtitle">
-                  {t("PortalContinueTitle", { productName: PRODUCT_NAME })}
+                  {t("PortalContinueTitle", {
+                    productName: t("Common:ProductName"),
+                  })}
                 </Text>
                 <ButtonsWrapper>
                   <Button
@@ -117,9 +120,17 @@ const ContinuePortal = (props) => {
   );
 };
 
-export default inject(({ settingsStore }) => ({
+const ComponentWrapper = inject(({ settingsStore }) => ({
   greetingTitle: settingsStore.greetingSettings,
   theme: settingsStore.theme,
 }))(
   withTranslation(["Confirm", "Common"])(withLoader(observer(ContinuePortal))),
 );
+
+export const Component = () => {
+  return (
+    <ConfirmRoute doAuthenticated={AuthenticatedAction.Logout}>
+      <ComponentWrapper />
+    </ConfirmRoute>
+  );
+};

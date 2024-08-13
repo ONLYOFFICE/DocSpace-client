@@ -34,7 +34,6 @@ import { SSLVerification } from "./SSLVerification";
 import SecretKeyInput from "./SecretKeyInput";
 import { useTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const ModalDialogContainer = styled(ModalDialog)`
   .modal-body {
@@ -58,14 +57,7 @@ const Footer = styled.div`
     width: 100%;
   }
   button:first-of-type {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 10px;
-          `
-        : css`
-            margin-right: 10px;
-          `}
+    margin-inline-end: 10px;
   }
 `;
 
@@ -207,7 +199,9 @@ const WebhookDialog = (props) => {
         <StyledWebhookForm onSubmit={onFormSubmit}>
           {!isSettingsModal && (
             <Hint>
-              {t("WebhookCreationHint", { productName: PRODUCT_NAME })}
+              {t("WebhookCreationHint", {
+                productName: t("Common:ProductName"),
+              })}
             </Hint>
           )}
           <LabledInput

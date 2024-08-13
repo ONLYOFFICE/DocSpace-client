@@ -29,11 +29,10 @@
 
 import React, { useLayoutEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { getLogoUrl } from "@docspace/shared/utils/common";
 
@@ -41,13 +40,22 @@ import { GreetingContainersProps } from "@/types";
 import { DEFAULT_PORTAL_TEXT, DEFAULT_ROOM_TEXT } from "@/utils/constants";
 import { getInvitationLinkData } from "@/utils";
 
-const GreetingContainer = ({ greetingSettings }: GreetingContainersProps) => {
+const GreetingContainer = ({
+  greetingSettings,
+  culture,
+}: GreetingContainersProps) => {
   const { t } = useTranslation(["Login"]);
   const theme = useTheme();
 
-  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme.isBase);
+  const logoUrl = getLogoUrl(
+    WhiteLabelLogoType.LoginPage,
+    !theme.isBase,
+    false,
+    culture,
+  );
 
   const searchParams = useSearchParams();
+  const pathname = usePathname();
 
   const [invitationLinkData, setInvitationLinkData] = useState({
     email: "",
@@ -84,7 +92,9 @@ const GreetingContainer = ({ greetingSettings }: GreetingContainersProps) => {
           textAlign="center"
           className="greeting-title"
         >
-          {greetingSettings}
+          {pathname === "/tenant-list"
+            ? "Choose your portal"
+            : greetingSettings}
         </Text>
       )}
 
@@ -99,7 +109,7 @@ const GreetingContainer = ({ greetingSettings }: GreetingContainersProps) => {
               values={{
                 firstName,
                 lastName,
-                productName: PRODUCT_NAME,
+                productName: t("Common:ProductName"),
                 ...(roomName
                   ? { roomName }
                   : { spaceAddress: window.location.host }),

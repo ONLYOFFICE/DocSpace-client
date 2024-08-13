@@ -45,7 +45,6 @@ import { DropDown } from "@docspace/shared/components/drop-down";
 import { useNavigate } from "react-router-dom";
 
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledWrapper = styled.div`
   display: contents;
@@ -120,6 +119,13 @@ const StyledPeopleRow = styled(TableRow)`
   .table-cell_groups,
   .table-cell_room {
     margin-inline-start: -8px;
+    padding-inline-end: 12px;
+  }
+
+  .table-cell_email {
+    a {
+      margin-inline-end: 12px;
+    }
   }
 
   .groups-combobox,
@@ -207,7 +213,7 @@ const PeopleTableRow = (props) => {
   const {
     t,
     item,
-    contextOptionsProps,
+    getContextModel,
     element,
     checkedProps,
     onContentRowSelect,
@@ -244,6 +250,7 @@ const PeopleTableRow = (props) => {
     isVisitor,
     isCollaborator,
     isSSO,
+    isLDAP,
   } = item;
 
   const isPending = statusType === "pending" || statusType === "disabled";
@@ -264,8 +271,8 @@ const PeopleTableRow = (props) => {
 
     const adminOption = {
       key: "admin",
-      title: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
-      label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
+      title: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
+      label: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
       action: "admin",
     };
     const managerOption = {
@@ -343,7 +350,9 @@ const PeopleTableRow = (props) => {
       case "owner":
         return t("Common:Owner");
       case "admin":
-        return t("Common:PortalAdmin", { productName: PRODUCT_NAME });
+        return t("Common:PortalAdmin", {
+          productName: t("Common:ProductName"),
+        });
       case "manager":
         return t("Common:RoomAdmin");
       case "collaborator":
@@ -389,6 +398,8 @@ const PeopleTableRow = (props) => {
           modernView
           manualWidth={"fit-content"}
           isLoading={isLoading}
+          optionStyle={{ maxWidth: "400px" }}
+          textOverflow
         />
       );
 
@@ -485,7 +496,8 @@ const PeopleTableRow = (props) => {
         onClick={onRowClick}
         fileContextClick={onRowContextClick}
         hideColumns={hideColumns}
-        {...contextOptionsProps}
+        contextOptions={item.options}
+        getContextModel={getContextModel}
       >
         <TableCell className={"table-container_user-name-cell"}>
           <TableCell
@@ -511,6 +523,7 @@ const PeopleTableRow = (props) => {
             className="table-cell_username"
             noHover
             dir="auto"
+            truncate={true}
           >
             {statusType === "pending"
               ? email
@@ -518,7 +531,12 @@ const PeopleTableRow = (props) => {
                 ? displayName
                 : email}
           </Text>
-          <Badges statusType={statusType} isPaid={isPaidUser} isSSO={isSSO} />
+          <Badges
+            statusType={statusType}
+            isPaid={isPaidUser}
+            isSSO={isSSO}
+            isLDAP={isLDAP}
+          />
         </TableCell>
 
         {typeAccountsColumnIsEnabled ? (
@@ -577,7 +595,7 @@ const PeopleTableRow = (props) => {
         </TableCell> */}
 
         {emailAccountsColumnIsEnabled ? (
-          <TableCell>
+          <TableCell className={"table-cell_email"}>
             <Link
               type="page"
               title={email}
@@ -587,6 +605,7 @@ const PeopleTableRow = (props) => {
               onClick={onEmailClick}
               isTextOverflow
               dir="auto"
+              enableUserSelect
             >
               {email}
             </Link>

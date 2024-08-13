@@ -42,6 +42,7 @@ import {
 import { CampaignsBannerProps } from "./CampaignsBanner.types";
 
 import useFitText from "./useFitText";
+import { globalColors } from "../../themes";
 
 const CampaignsBanner = (props: CampaignsBannerProps) => {
   const {
@@ -76,7 +77,7 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
         {hasTitle && (
           <TextComponent
             className="header"
-            color={title?.color || "#333"}
+            color={title?.color || globalColors.black}
             fontSize={title?.fontSize}
             fontWeight={title?.fontWeight}
             lineHeight="12px"
@@ -87,7 +88,7 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
         <div>
           {hasBodyText && (
             <TextComponent
-              color={body?.color || "#333"}
+              color={body?.color || globalColors.black}
               fontSize={fontSize}
               fontWeight={body?.fontWeight}
             >
@@ -96,7 +97,7 @@ const CampaignsBanner = (props: CampaignsBannerProps) => {
           )}
           {hasText && (
             <TextComponent
-              color={text?.color || "#333"}
+              color={text?.color || globalColors.black}
               fontSize={text?.fontSize}
               fontWeight={text?.fontWeight}
             >

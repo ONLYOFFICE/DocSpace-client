@@ -24,19 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { withTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
+import { Tooltip } from "@docspace/shared/components/tooltip";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
 import { Badge } from "@docspace/shared/components/badge";
 import Badges from "@docspace/client/src/pages/Home/Section/AccountsBody/Badges";
 import { StyledAccountsItemTitle } from "../../styles/accounts";
-import { StyledTitle } from "../../styles/common";
 
 import { decode } from "he";
+import { globalColors } from "@docspace/shared/themes";
 
 const AccountsItemTitle = ({
   t,
@@ -48,6 +50,7 @@ const AccountsItemTitle = ({
     return <></>;
   }
 
+  const theme = useTheme();
   const itemTitleRef = useRef();
 
   const isPending =
@@ -66,6 +69,7 @@ const AccountsItemTitle = ({
     ? infoPanelSelection.avatar
     : DefaultUserPhoto;
   const isSSO = infoPanelSelection.isSSO || false;
+  const isLDAP = infoPanelSelection.isLDAP || false;
   const displayName = infoPanelSelection.displayName
     ? decode(infoPanelSelection.displayName).trim()
     : "";
@@ -74,6 +78,7 @@ const AccountsItemTitle = ({
     <StyledAccountsItemTitle
       isPending={isPending}
       isSSO={isSSO}
+      isLDAP={isLDAP}
       ref={itemTitleRef}
     >
       <Avatar
@@ -105,16 +110,49 @@ const AccountsItemTitle = ({
           </Text>
         )}
         {isSSO && (
-          <Badge
-            className="sso-badge"
-            label={t("Common:SSO")}
-            color={"#FFFFFF"}
-            backgroundColor="#22C386"
-            fontSize={"9px"}
-            fontWeight={800}
-            noHover
-            lineHeight={"13px"}
-          />
+          <>
+            <Badge
+              id="sso-badge-info-panel"
+              className="sso-badge"
+              label={t("Common:SSO")}
+              color={globalColors.white}
+              backgroundColor={
+                theme.isBase
+                  ? globalColors.secondGreen
+                  : globalColors.secondGreenDark
+              }
+              fontSize={"9px"}
+              fontWeight={800}
+              noHover
+              lineHeight={"13px"}
+            />
+            <Tooltip anchorSelect={`div[id='sso-badge-info-panel'] div`}>
+              {t("PeopleTranslations:SSOAccountTooltip")}
+            </Tooltip>
+          </>
+        )}
+
+        {isLDAP && (
+          <>
+            <Badge
+              id="ldap-badge-info-panel"
+              className="ldap-badge"
+              label={t("Common:LDAP")}
+              color={globalColors.white}
+              backgroundColor={
+                theme.isBase
+                  ? globalColors.secondPurple
+                  : globalColors.secondPurpleDark
+              }
+              fontSize={"9px"}
+              fontWeight={800}
+              noHover
+              lineHeight={"13px"}
+            />
+            <Tooltip anchorSelect={`div[id='ldap-badge-info-panel'] div`}>
+              {t("PeopleTranslations:LDAPAccountTooltip")}
+            </Tooltip>
+          </>
         )}
       </div>
       {!!contextOptions.length && (

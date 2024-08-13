@@ -30,7 +30,6 @@ import { Trans } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const BodyComponent = (props) => {
   const {
@@ -74,14 +73,20 @@ const BodyComponent = (props) => {
     return (
       <>
         <Text className="user-delete">
-          {t("ActionCannotBeUndone", { productName: PRODUCT_NAME })}
+          {t("ActionCannotBeUndone", { productName: t("Common:ProductName") })}
         </Text>
         <Text className="text-warning">{t("PleaseNote")}</Text>
+        <Text className="text-delete-description">
+          {t("DeletePersonalData", { productName: t("Common:ProductName") })}
+        </Text>
         <Text className="text-delete-description">
           {t("CannotReassignFiles")}
         </Text>
         <Text className="text-delete-description">
           {t("ToBeAbleToReassignData")}
+        </Text>
+        <Text className="text-delete-description">
+          {t("DeletePersonalDataApplicable")}
         </Text>
       </>
     );
@@ -91,7 +96,7 @@ const BodyComponent = (props) => {
     return (
       <>
         <Text className="user-delete">
-          {t("ActionCannotBeUndone", { productName: PRODUCT_NAME })}
+          {t("ActionCannotBeUndone", { productName: t("Common:ProductName") })}
         </Text>
         {!areUsersOnly && (
           <>

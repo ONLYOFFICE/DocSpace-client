@@ -24,23 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { PRODUCT_NAME } from "@docspace/shared/constants";
-
 export const getGoogleStepDescription = (
   t,
   stepIndex,
   renderTooltip,
   Trans,
   isTypeSelectEmpty,
-  organizationName,
 ) => {
   switch (stepIndex) {
     case 1:
       return t("Settings:SelectFileDescriptionGoogle");
     case 2:
       return t("Settings:SelectUsersDescriptionGoogle", {
-        productName: PRODUCT_NAME,
-        organizationName,
+        productName: t("Common:ProductName"),
+        organizationName: t("Common:OrganizationName"),
       });
     case 3:
       return isTypeSelectEmpty ? (
@@ -55,7 +52,7 @@ export const getGoogleStepDescription = (
             ns="Settings"
             i18nKey="SelectUserTypesDescription"
             values={{
-              productName: PRODUCT_NAME,
+              productName: t("Common:ProductName"),
             }}
             components={{
               1: <b />,
@@ -66,14 +63,14 @@ export const getGoogleStepDescription = (
       );
     case 4:
       return t("Settings:ImportSectionDescription", {
-        productName: PRODUCT_NAME,
+        productName: t("Common:ProductName"),
       });
     case 5:
       return t("Settings:ImportProcessingDescription");
     case 6:
       return t("Settings:ImportCompleteDescriptionGoogle", {
-        productName: PRODUCT_NAME,
-        organizationName,
+        productName: t("Common:ProductName"),
+        organizationName: t("Common:OrganizationName"),
       });
     default:
       return;
@@ -86,15 +83,16 @@ export const getWorkspaceStepDescription = (
   renderTooltip,
   Trans,
   isTypeSelectEmpty,
-  organizationName,
 ) => {
   switch (stepIndex) {
     case 1:
-      return t("Settings:SelectFileDescriptionWorkspace", organizationName);
+      return t("Settings:SelectFileDescriptionWorkspace", {
+        organizationName: t("Common:OrganizationName"),
+      });
     case 2:
       return t("Settings:SelectUsersDescriptionWorkspace", {
-        productName: PRODUCT_NAME,
-        organizationName,
+        productName: t("Common:ProductName"),
+        organizationName: t("Common:OrganizationName"),
       });
     case 3:
       return isTypeSelectEmpty ? (
@@ -109,7 +107,7 @@ export const getWorkspaceStepDescription = (
             ns="Settings"
             i18nKey="SelectUserTypesDescription"
             values={{
-              productName: PRODUCT_NAME,
+              productName: t("Common:ProductName"),
             }}
             components={{
               1: <b />,
@@ -120,14 +118,14 @@ export const getWorkspaceStepDescription = (
       );
     case 4:
       return t("Settings:ImportSectionDescription", {
-        productName: PRODUCT_NAME,
+        productName: t("Common:ProductName"),
       });
     case 5:
       return t("Settings:ImportProcessingDescription");
     case 6:
       return t("Settings:ImportCompleteDescriptionWorkspace", {
-        productName: PRODUCT_NAME,
-        organizationName,
+        productName: t("Common:ProductName"),
+        organizationName: t("Common:OrganizationName"),
       });
     default:
       return;

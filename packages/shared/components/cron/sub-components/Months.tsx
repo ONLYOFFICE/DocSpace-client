@@ -30,16 +30,19 @@ import { Select } from "./Select";
 
 import type { MonthsProps } from "../Cron.types";
 
-export const Months = memo(({ months, unit, setMonths, t }: MonthsProps) => {
-  return (
-    <Select
-      unit={unit}
-      value={months}
-      setValue={setMonths}
-      dropDownMaxHeight={300}
-      placeholder={t("EveryMonth")}
-    />
-  );
-});
+export const Months = memo(
+  ({ months, unit, setMonths, t, isDisabled }: MonthsProps) => {
+    return (
+      <Select
+        unit={unit}
+        value={months}
+        setValue={setMonths}
+        dropDownMaxHeight={300}
+        placeholder={t("EveryMonth")}
+        isDisabled={isDisabled}
+      />
+    );
+  },
+);
 
 Months.displayName = "Months";

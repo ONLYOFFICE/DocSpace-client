@@ -38,8 +38,8 @@ import styled from "styled-components";
 
 const StyledGalleryContextOptions = styled.div`
   height: 16px;
-  margin: ${({ theme }) =>
-    theme.interfaceDirection === "rtl" ? "0 8px 0 0" : "0 0 0 8px"};
+  margin-block: 0;
+  margin-inline: 8px 0;
 `;
 
 const GalleryItemTitle = ({

@@ -78,7 +78,6 @@ import {
   COOKIE_EXPIRATION_YEAR,
   MEDIA_VIEW_URL,
   WRONG_PORTAL_NAME_URL,
-  BRAND_NAME,
 } from "../constants";
 import { Dark, Base, TColorScheme } from "../themes";
 import { toastr } from "../components/toast";
@@ -156,8 +155,6 @@ class SettingsStore {
     dateTimePattern: "DD, mm dd, yy h:mm:ss tt",
     timePattern: "h:mm tt",
   };
-
-  organizationName = BRAND_NAME;
 
   greetingSettings = "Web Office Applications";
 
@@ -333,6 +330,11 @@ class SettingsStore {
   setTenantStatus = (tenantStatus: TenantStatus) => {
     this.tenantStatus = tenantStatus;
   };
+
+  get ldapSettingsUrl() {
+    // TODO: Change to real link
+    return `${this.helpLink}/administration/docspace-settings.aspx#LdapSettings_block`;
+  }
 
   get portalSettingsUrl() {
     return `${this.helpLink}/administration/docspace-settings.aspx`;

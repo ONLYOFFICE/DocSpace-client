@@ -25,11 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import type { Metadata } from "next";
-import { BRAND_NAME } from "@docspace/shared/constants";
+import { headers } from "next/headers";
 
-import { getData } from "@/utils/actions";
+import { getSelectorsByUserAgent } from "react-device-detect";
+
+import { getData, validatePublicRoomKey } from "@/utils/actions";
 import { RootPageProps } from "@/types";
 import Root from "@/components/Root";
+import FilePassword from "@/components/file-password";
+import { ValidationStatus } from "@docspace/shared/enums";
 
 const initialSearchParams: RootPageProps["searchParams"] = {
   fileId: undefined,
@@ -41,15 +45,31 @@ const initialSearchParams: RootPageProps["searchParams"] = {
   editorType: undefined,
 };
 
-export const metadata: Metadata = {
-  title: `${BRAND_NAME} DocEditor page`,
-
-  description: "",
-};
-
 async function Page({ searchParams }: RootPageProps) {
-  const { fileId, fileid, version, doc, action, share, editorType } =
+  const { fileId, fileid, version, doc, action, share, editorType, error } =
     searchParams ?? initialSearchParams;
+
+  const hdrs = headers();
+
+  let type = editorType;
+
+  const ua = hdrs.get("user-agent");
+  if (ua && !type) {
+    const { isMobile } = getSelectorsByUserAgent(ua);
+
+    if (isMobile) type = "mobile";
+  }
+
+  if (share) {
+    const roomData = await validatePublicRoomKey(share, fileId ?? fileid ?? "");
+    if (!roomData) return;
+
+    const { status } = roomData.response;
+
+    if (status === ValidationStatus.Password) {
+      return <FilePassword {...roomData.response} shareKey={share} />;
+    }
+  }
 
   const startDate = new Date();
 
@@ -59,10 +79,14 @@ async function Page({ searchParams }: RootPageProps) {
     doc,
     action,
     share,
-    editorType,
+    type,
   );
 
   const timer = new Date().getTime() - startDate.getTime();
+
+  if (data.error?.status === "not-found" && error) {
+    data.error.message = error;
+  }
 
   return <Root {...data} timer={timer} />;
 }

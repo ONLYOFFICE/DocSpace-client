@@ -109,6 +109,7 @@ const DownloadRow = (props) => {
             isAside={true}
             withoutBackground={true}
             withExpander
+            manualWidth={isMobile() ? "148px" : undefined}
           >
             {file.format || t("OriginalFormat")}
           </LinkWithDropdown>

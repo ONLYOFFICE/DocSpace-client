@@ -30,6 +30,7 @@ import { useTheme } from "styled-components";
 import { StyledSelectionArea } from "./SelectionArea.styled";
 import { frames } from "./SelectionArea.utils";
 import { SelectionAreaProps, TArrayTypes } from "./SelectionArea.types";
+import { onEdgeScrolling, clearEdgeScrollingTimer } from "../../utils";
 
 const SelectionArea = ({
   onMove,
@@ -298,6 +299,8 @@ const SelectionArea = ({
       areaLocation.current.x2 = e.clientX;
       areaLocation.current.y2 = e.clientY;
 
+      onEdgeScrolling(e);
+
       frame().next();
     },
     [frame],
@@ -358,6 +361,7 @@ const SelectionArea = ({
   }, [onMoveAction, onScroll, onTapMove]);
 
   const onTapStop = React.useCallback(() => {
+    clearEdgeScrollingTimer();
     removeListeners();
     document.removeEventListener("mouseup", onTapStop);
     window.removeEventListener("blur", onTapStop);

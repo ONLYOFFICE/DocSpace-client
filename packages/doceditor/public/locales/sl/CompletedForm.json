@@ -1,0 +1,12 @@
+{
+  "BackToRoom": "Nazaj na sobo",
+  "CheckReadyForms": "Preveri pripravljene obrazce",
+  "Description": "Vaš obrazec je izpolnjen in shranjen",
+  "DescriptionForAnonymous": "Oddali ste izpolnjen obrazec PDF, ki mu je bila dodeljena enoumna številka. Če želite preveriti stanje, se obrnite na lastnika obrazca, ki mu je dodeljena številka.",
+  "DescriptionForRegisteredUser": "Izpolnjen PDF obrazec je shranjen in je na voljo v mapi Dokončano. Če želite preveriti stanje, se obrnite na lastnika obrazca, ki mu je dodeljena številka.",
+  "FillItOutAgain": "Izpolni ga ponovno",
+  "FormCompletedSuccessfully": "Obrazec je izpolnjen",
+  "FormNumber": "Številka obrazca:",
+  "FormOwner": "Lastnik obrazca",
+  "Title": "Obrazec je izpolnjen"
+}

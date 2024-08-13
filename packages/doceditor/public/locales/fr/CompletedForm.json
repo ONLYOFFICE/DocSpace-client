@@ -1,0 +1,12 @@
+{
+  "BackToRoom": "Retour à la salle",
+  "CheckReadyForms": "Vérifier les formulaires prêts",
+  "Description": "Votre formulaire rempli et enregistré",
+  "DescriptionForAnonymous": "Vous avez soumis le formulaire PDF rempli auquel un numéro unique a été attribué. Pour vérifier l'état du formulaire, contactez le propriétaire du formulaire en lui communiquant le numéro attribué.",
+  "DescriptionForRegisteredUser": "Le formulaire PDF rempli est sauvegardé et mis à votre disposition dans le dossier Complet. Pour vérifier l'état du formulaire, contactez le propriétaire du formulaire en lui communiquant le numéro qui lui a été attribué.",
+  "FillItOutAgain": "Remplir à nouveau",
+  "FormCompletedSuccessfully": "Formulaire complété avec succès",
+  "FormNumber": "Numéro de formulaire :",
+  "FormOwner": "Propriétaire du formulaire",
+  "Title": "Le formulaire est rempli"
+}

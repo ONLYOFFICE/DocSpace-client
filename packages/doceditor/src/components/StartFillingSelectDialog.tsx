@@ -26,11 +26,17 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
+import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
+
 import FilesSelectorWrapper from "@docspace/shared/selectors/Files";
-import { DeviceType, FolderType, RoomsType } from "@docspace/shared/enums";
+import { DeviceType, RoomsType } from "@docspace/shared/enums";
+import { useSelectorInfoBar } from "@docspace/shared/hooks/useSelectorInfoBar";
+import {
+  TInfoBarData,
+  TSelectorCancelButton,
+} from "@docspace/shared/components/selector/Selector.types";
 
 import { StartFillingSelectorDialogPprops } from "@/types";
-import { TSelectorCancelButton } from "@docspace/shared/components/selector/Selector.types";
 
 function StartFillingSelectorDialog({
   socketHelper,
@@ -40,14 +46,22 @@ function StartFillingSelectorDialog({
   onClose,
   onSubmit,
   filesSettings,
+  headerLabel,
 }: StartFillingSelectorDialogPprops) {
   const { t } = useTranslation(["Common", "Editor"]);
+  const [withInfoBar, onCloseInfoBar] = useSelectorInfoBar();
 
   const cancelButtonProps: TSelectorCancelButton = {
     withCancelButton: true,
     onCancel: onClose,
     cancelButtonLabel: t("Common:CancelButton"),
     cancelButtonId: "select-file-modal-cancel",
+  };
+  const infoBarData: TInfoBarData = {
+    title: t("Common:SelectorInfoBarTitle"),
+    description: t("Common:SelectorInfoBarDescription"),
+    icon: InfoIcon,
+    onClose: onCloseInfoBar,
   };
 
   return (
@@ -60,14 +74,14 @@ function StartFillingSelectorDialog({
       withoutBackButton
       currentFolderId=""
       rootFolderType={fileInfo.rootFolderType}
-      createDefineRoomLabel={t("Common:NewFillingFormRoom")}
+      createDefineRoomLabel={t("Common:CreateFormFillingRoom")}
       createDefineRoomType={RoomsType.FormRoom}
       isPanelVisible={isVisible}
       socketHelper={socketHelper}
       filesSettings={filesSettings}
       currentDeviceType={DeviceType.desktop}
       socketSubscribers={socketHelper.socketSubscribers}
-      headerLabel={t("Common:StartFilling")}
+      headerLabel={headerLabel}
       submitButtonLabel={t("Common:CopyHere")}
       onSubmit={onSubmit}
       getIsDisabled={getIsDisabled}
@@ -82,6 +96,8 @@ function StartFillingSelectorDialog({
       isThirdParty={false}
       withFooterCheckbox={false}
       withFooterInput={false}
+      withInfoBar={withInfoBar}
+      infoBarData={infoBarData}
     />
   );
 }

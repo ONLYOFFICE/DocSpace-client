@@ -52,6 +52,9 @@ import {
 } from "./StyledCreateUser";
 import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import GreetingUserContainer from "./GreetingUserContainer";
+import ConfirmRoute from "SRC_DIR/helpers/confirmRoute";
+import { AuthenticatedAction } from "SRC_DIR/helpers/enums";
+import { ALLOWED_PASSWORD_CHARACTERS } from "@docspace/shared/constants";
 
 const ActivateUserForm = (props) => {
   const { t, settings, linkData, hashSettings, defaultPage, login } = props;
@@ -225,9 +228,7 @@ const ActivateUserForm = (props) => {
                 isVertical={true}
                 labelVisible={false}
                 hasError={isPasswordErrorShow && !passwordValid}
-                errorMessage={`${t(
-                  "Common:PasswordLimitMessage",
-                )}: ${getPasswordErrorMessage(t, settings)}`}
+                errorMessage={t("Common:IncorrectPassword")}
               >
                 <PasswordInput
                   className="confirm-input"
@@ -257,6 +258,7 @@ const ActivateUserForm = (props) => {
                     "Common:PasswordLimitSpecialSymbols",
                   )}`}
                   generatePasswordTitle={t("Wizard:GeneratePassword")}
+                  tooltipAllowedCharacters={`${t("Common:AllowedCharacters")}: ${ALLOWED_PASSWORD_CHARACTERS}`}
                   // If need copy credentials use t("EmailAndPasswordCopiedToClipboard")
                 />
               </FieldContainer>
@@ -279,7 +281,7 @@ const ActivateUserForm = (props) => {
   );
 };
 
-export default inject(({ authStore, settingsStore }) => {
+const ComponentWrapper = inject(({ authStore, settingsStore }) => {
   const {
     greetingSettings,
     hashSettings,
@@ -300,3 +302,11 @@ export default inject(({ authStore, settingsStore }) => {
     withLoader(observer(ActivateUserForm)),
   ),
 );
+
+export const Component = () => {
+  return (
+    <ConfirmRoute doAuthenticated={AuthenticatedAction.Redirect}>
+      <ComponentWrapper />
+    </ConfirmRoute>
+  );
+};

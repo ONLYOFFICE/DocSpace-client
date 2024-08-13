@@ -62,11 +62,21 @@ const InfoPanelBodyContent = ({
   const isInsideGroup = getIsGroups() && groupId;
   const isGroups =
     getIsGroups() ||
-    (isInsideGroup && (!selectedItems.length || !!selectedItems[0].manager));
+    (isInsideGroup &&
+      (!selectedItems.length ||
+        (selectedItems[0]?.membersCount !== null &&
+          selectedItems[0]?.membersCount !== undefined)));
   const isPeople =
     getIsPeople() ||
-    (getIsGroups() && !isInsideGroup && !selectedItems[0]?.manager) ||
-    (isInsideGroup && selectedItems.length && !selectedItems[0].manager);
+    (getIsGroups() &&
+      !isInsideGroup &&
+      !(
+        selectedItems[0]?.membersCount !== null &&
+        selectedItems[0]?.membersCount !== undefined
+      )) ||
+    (isInsideGroup &&
+      selectedItems.length &&
+      !selectedItems[0].hasOwnProperty("membersCount"));
 
   const isSeveralItems = props.selectedItems?.length > 1;
 

@@ -24,13 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useRef } from "react";
+import { useCallback, useState } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/shared/components/toast";
 
 import { ChangeQuotaDialog } from "../dialogs";
+
 let timerId = null;
 const ChangeQuotaEvent = (props) => {
   const {
@@ -105,13 +106,13 @@ const ChangeQuotaEvent = (props) => {
     onClose && onClose();
   };
 
-  const onCloseClick = () => {
+  const onCloseClick = useCallback(() => {
     timerId && clearTimeout(timerId);
     timerId = null;
 
     abortCallback && abortCallback();
     onClose && onClose();
-  };
+  }, [onClose, abortCallback]);
 
   return (
     <ChangeQuotaDialog
@@ -138,14 +139,13 @@ export default inject(
       usersStore;
     const { setCustomRoomQuota, needResetFilesSelection } = filesStore;
 
-    const { defaultUsersQuota, defaultRoomsQuota } = currentQuotaStore;
     const {
-      selection: infoPanelSelection,
+      infoPanelSelection,
       setNewInfoPanelSelection,
       setInfoPanelSelection,
     } = infoPanelStore;
 
-    const inRoom = infoPanelSelection?.inRoom;
+    const inRoom = !!infoPanelSelection?.navigationPath;
     const needResetSelection =
       type === "user" ? needResetUserSelection : needResetFilesSelection;
 

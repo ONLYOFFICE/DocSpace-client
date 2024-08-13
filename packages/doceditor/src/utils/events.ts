@@ -81,30 +81,31 @@ export const onSDKRequestEditRights = async (
   const url = window.location.href;
   const isPDF = documentType === "pdf";
 
-  if (isPDF) {
-    const newURL = new URL(url);
+  let newURL = new URL(url);
 
-    if (newURL.searchParams.has("action")) {
-      newURL.searchParams.delete("action");
+  if (
+    !isPDF &&
+    fileInfo?.viewAccessibility?.MustConvert &&
+    fileInfo?.security?.Convert
+  ) {
+    try {
+      const response = await convertDocumentUrl(fileInfo.id);
+      if (response && response.webUrl) {
+        newURL = new URL(response.webUrl);
+      } else {
+        throw new Error("Invalid response data");
+      }
+    } catch (error) {
+      console.error("Error converting document", { error });
+      return;
     }
+  } else {
+    if (newURL.searchParams.has("action")) newURL.searchParams.delete("action");
 
     newURL.searchParams.append("action", "edit");
-
-    history.pushState({}, "", newURL.toString());
-    document.location.reload();
-
-    return;
   }
 
-  let convertUrl = url;
-
-  if (fileInfo?.viewAccessibility?.MustConvert && fileInfo?.security?.Convert) {
-    const newUrl = await convertDocumentUrl(fileInfo.id);
-    if (newUrl) {
-      convertUrl = newUrl.webUrl;
-    }
-  }
-  history.pushState({}, "", convertUrl);
+  history.pushState({}, "", newURL.toString());
   document.location.reload();
 };
 

@@ -62,5 +62,6 @@ export interface SelectedItemProps {
   /** Passes ref to component */
   forwardedRef?: React.RefObject<HTMLDivElement>;
   classNameCloseButton?: string;
+  hideCross?: boolean;
   title?: string;
 }

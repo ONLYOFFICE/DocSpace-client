@@ -38,7 +38,6 @@ import {
   reachingSecondBoundary,
   reachingThirdBoundary,
 } from "./PreparationPortal.utils";
-import { PRODUCT_NAME } from "../../constants";
 
 const firstBound = 10;
 const secondBound = 63;
@@ -46,7 +45,7 @@ const secondBound = 63;
 let timerId: ReturnType<typeof setInterval> | null;
 let progressTimerId: ReturnType<typeof setInterval> | null;
 
-const PreparationPortal = (props: IPreparationPortal) => {
+export const PreparationPortal = (props: IPreparationPortal) => {
   const { withoutHeader, style, isDialog } = props;
 
   const { t } = useTranslation(["PreparationPortal", "Common"]);
@@ -117,7 +116,7 @@ const PreparationPortal = (props: IPreparationPortal) => {
               </div>
               <Text className="preparation-portal_text">
                 {t("PreparationPortalDescription", {
-                  productName: PRODUCT_NAME,
+                  productName: t("Common:ProductName"),
                 })}
               </Text>
             </ColorTheme>
@@ -127,5 +126,3 @@ const PreparationPortal = (props: IPreparationPortal) => {
     </StyledPreparationPortal>
   );
 };
-
-export default PreparationPortal;

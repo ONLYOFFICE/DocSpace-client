@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 import moment from "moment";
 
 import { SettingsStorageManagementSkeleton } from "@docspace/shared/skeletons/settings";
-import { setDocumentTitle } from "@docspace/client/src/helpers/filesUtils";
+import { setDocumentTitle } from "@docspace/client/src/helpers/utils";
 
 import QuotasComponent from "./Quotas";
 import StatisticsComponent from "./Statistics";
@@ -60,7 +60,7 @@ const StorageManagement = ({
     ready && setDocumentTitle(t("Settings:StorageManagement"));
   }, [ready]);
 
-  if (!isInit || !ready) return <SettingsStorageManagementSkeleton />;
+  if (!ready || !isInit) return <SettingsStorageManagementSkeleton />;
 
   return (
     <StyledBody>
@@ -75,7 +75,7 @@ const StorageManagement = ({
   );
 };
 
-export default inject(({ authStore, storageManagement }) => {
+export const Component = inject(({ authStore, storageManagement }) => {
   const { language } = authStore;
   const { init, isInit, clearIntervalCheckRecalculate } = storageManagement;
   return {

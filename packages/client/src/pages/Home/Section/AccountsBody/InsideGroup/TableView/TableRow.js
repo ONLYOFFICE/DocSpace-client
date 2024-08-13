@@ -40,7 +40,6 @@ import { Base } from "@docspace/shared/themes";
 import { useNavigate } from "react-router-dom";
 
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledWrapper = styled.div`
   display: contents;
@@ -117,6 +116,18 @@ const StyledPeopleRow = styled(TableRow)`
     margin-inline-start: -8px;
   }
 
+  .table-cell_type {
+    p {
+      margin-inline-end: 12px;
+    }
+  }
+
+  .table-cell_email {
+    a {
+      margin-inline-end: 12px;
+    }
+  }
+
   .groups-combobox,
   .type-combobox {
     visibility: ${(props) => (props.hideColumns ? "hidden" : "visible")};
@@ -132,6 +143,8 @@ const StyledPeopleRow = styled(TableRow)`
   .groups-combobox,
   .room-combobox {
     padding-inline-start: 8px;
+    padding-inline-end: 12px;
+
     overflow: hidden;
   }
 
@@ -202,7 +215,7 @@ const InsideGroupTableRow = (props) => {
   const {
     t,
     item,
-    contextOptionsProps,
+    getContextModel,
     element,
     checkedProps,
     onContentRowSelect,
@@ -240,6 +253,7 @@ const InsideGroupTableRow = (props) => {
     isVisitor,
     isCollaborator,
     isSSO,
+    isLDAP,
   } = item;
 
   const isPending = statusType === "pending" || statusType === "disabled";
@@ -260,8 +274,8 @@ const InsideGroupTableRow = (props) => {
 
     const adminOption = {
       key: "admin",
-      title: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
-      label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
+      title: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
+      label: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
       action: "admin",
     };
     const managerOption = {
@@ -339,7 +353,9 @@ const InsideGroupTableRow = (props) => {
       case "owner":
         return t("Common:Owner");
       case "admin":
-        return t("Common:PortalAdmin", { productName: PRODUCT_NAME });
+        return t("Common:PortalAdmin", {
+          productName: t("Common:ProductName"),
+        });
       case "manager":
         return t("Common:RoomAdmin");
       case "collaborator":
@@ -385,6 +401,8 @@ const InsideGroupTableRow = (props) => {
           modernView
           manualWidth={"fit-content"}
           isLoading={isLoading}
+          optionStyle={{ maxWidth: "400px" }}
+          textOverflow
         />
       );
 
@@ -482,7 +500,8 @@ const InsideGroupTableRow = (props) => {
         onClick={onRowClick}
         fileContextClick={onRowContextClick}
         hideColumns={hideColumns}
-        {...contextOptionsProps}
+        contextOptions={item.options}
+        getContextModel={getContextModel}
       >
         <TableCell className={"table-container_user-name-cell"}>
           <TableCell
@@ -508,6 +527,7 @@ const InsideGroupTableRow = (props) => {
             className="table-cell_username"
             noHover
             dir="auto"
+            truncate={true}
           >
             {statusType === "pending"
               ? email
@@ -515,7 +535,12 @@ const InsideGroupTableRow = (props) => {
                 ? displayName
                 : email}
           </Text>
-          <Badges statusType={statusType} isPaid={isPaidUser} isSSO={isSSO} />
+          <Badges
+            statusType={statusType}
+            isPaid={isPaidUser}
+            isSSO={isSSO}
+            isLDAP={isLDAP}
+          />
         </TableCell>
 
         {typeAccountsInsideGroupColumnIsEnabled ? (
@@ -574,7 +599,7 @@ const InsideGroupTableRow = (props) => {
         </TableCell> */}
 
         {emailAccountsInsideGroupColumnIsEnabled ? (
-          <TableCell>
+          <TableCell className={"table-cell_email"}>
             <Link
               type="page"
               title={email}

@@ -39,6 +39,10 @@ export const StyledWrapper = styled.div`
     gap: 4px;
   }
 
+  .description {
+    color: ${(props) => props.theme.profile.login.textColor};
+  }
+
   .actions {
     display: flex;
     gap: 16px;

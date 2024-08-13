@@ -59,18 +59,13 @@ const StyledInvitePanel = styled.div`
     backdrop-filter: blur(3px);
     z-index: 309;
     position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    inset: 0;
 
     .invite_panel {
       background-color: ${(props) => props.theme.infoPanel.backgroundColor};
-      border-left: ${(props) =>
-        `1px solid ${props.theme.infoPanel.borderColor}`};
       position: absolute;
       border: none;
-      right: 0;
+      inset-inline-end: 0;
       bottom: 0;
       height: calc(100% - 64px);
       width: 100vw;
@@ -82,32 +77,13 @@ const StyledInvitePanel = styled.div`
     height: calc(100% - 55px - 73px);
 
     .scroll-body {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              padding-left: 0px !important;
-            `
-          : css`
-              padding-right: 0px !important;
-            `}
+      padding-inline-end: 0 !important;
 
       @media ${desktop} {
         width: 480px;
         min-width: auto !important;
       }
     }
-
-    ${(props) =>
-      !props.addUsersPanelVisible &&
-      isMobile() &&
-      props.theme.interfaceDirection !== "rtl" &&
-      css`
-        .trackYVisible {
-          .scroller {
-            margin-right: -20px !important;
-          }
-        }
-      `}
   }
 `;
 
@@ -118,12 +94,11 @@ const ScrollList = styled.div`
       ? "auto"
       : props.offsetTop && `calc(100% - ${props.offsetTop}px)`};
 
-  ${!isMobile() &&
-  css`
-    .row-item {
+  .row-item {
+    @media not ${mobile} {
       width: 448px !important;
     }
-  `}
+  }
 `;
 
 const StyledBlock = styled.div`
@@ -137,6 +112,10 @@ const StyledInviteUserBody = styled.div`
   display: flex;
   flex-direction: column;
   overflow: auto;
+
+  .about-label {
+    color: ${(props) => props.theme.filesPanels.invite.textColor};
+  }
 `;
 
 const StyledHeading = styled(Heading)`
@@ -147,9 +126,8 @@ const StyledHeading = styled(Heading)`
 const StyledSubHeader = styled(Heading)`
   font-weight: 700;
   font-size: 16px;
-  padding-left: 16px;
-  padding-right: 16px;
-  margin: 16px 0 8px 0;
+  padding-inline: 16px;
+  margin: 16px 0 8px;
 
   ${(props) =>
     props.inline &&
@@ -161,8 +139,7 @@ const StyledSubHeader = styled(Heading)`
 `;
 
 const StyledDescription = styled(Text)`
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-inline: 16px;
   color: ${(props) =>
     props.theme.createEditRoomDialog.commonParam.descriptionColor};
   margin-bottom: 16px;
@@ -193,7 +170,7 @@ const StyledRow = styled.div`
     line-height: 16px;
   }
 
-  .invite-panel_access-selector {
+  .access-selector {
     margin-inline-start: auto;
     margin-inline-end: 0;
 
@@ -214,19 +191,11 @@ const StyledRow = styled.div`
 
 const StyledInviteInput = styled.div`
   ${fillAvailableWidth}
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: 16px;
-          margin-left: ${(props) => (props.hideSelector ? "16px" : "8px")};
-        `
-      : css`
-          margin-left: 16px;
-          margin-right: ${(props) => (props.hideSelector ? "16px" : "8px")};
-        `}
 
+  margin-inline-start: 16px;
+  margin-inline-end: ${(props) => (props.hideSelector ? "16px" : "8px")};
 
-    .input-link {
+  .input-link {
     height: 32px;
     border: 0px;
 
@@ -236,7 +205,7 @@ const StyledInviteInput = styled.div`
   }
 
   display: flex;
-  border: 1px solid rgb(208, 213, 218);
+  border: ${(props) => props.theme.filesPanels.invite.border};
   border-radius: 3px;
 
   .copy-link-icon {
@@ -264,7 +233,7 @@ const StyledInviteInput = styled.div`
   .append {
     display: ${(props) => (props.isShowCross ? "flex" : "none")};
     align-items: center;
-    padding-right: 8px;
+    padding-inline-end: 8px;
     cursor: default;
   }
 
@@ -275,33 +244,15 @@ const StyledInviteInput = styled.div`
   }
 `;
 
-const StyledAccessSelector = styled.div`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-left: 16px;
-        `
-      : css`
-          margin-right: 16px;
-        `}
-`;
-
 const StyledEditInput = styled(TextInput)`
   width: 100%;
 `;
 
 const StyledComboBox = styled(ComboBox)`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: auto;
-        `
-      : css`
-          margin-left: auto;
-        `}
+  margin-inline-start: auto;
 
   .combo-button-label,
-    .combo-button-label:hover {
+  .combo-button-label:hover {
     text-decoration: none;
   }
 
@@ -310,14 +261,7 @@ const StyledComboBox = styled(ComboBox)`
   justify-content: center;
 
   .combo-buttons_arrow-icon {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 2px;
-          `
-        : css`
-            margin-left: 2px;
-          `}
+    margin-inline-start: 2px;
   }
 
   padding: 0px;
@@ -336,6 +280,28 @@ const StyledInviteInputContainer = styled.div`
 
   .header_aside-panel {
     max-width: 100% !important;
+
+    .selector_body_tabs {
+      display: flex;
+      justify-content: left;
+      margin-bottom: 16px;
+      padding: 0;
+      width: -webkit-fill-available;
+
+      .sticky-indent {
+        height: 0;
+      }
+
+      .sticky {
+        .scroll-body {
+          overflow-x: hidden;
+        }
+        .scroll-body > div {
+          justify-content: flex-start;
+          padding-inline-start: 16px;
+        }
+      }
+    }
   }
 `;
 
@@ -362,24 +328,28 @@ const StyledDropDown = styled(DropDown)`
 
     .email-list_add-button {
       display: flex;
-      margin-left: auto;
+      margin-inline-start: auto;
       align-items: center;
       gap: 4px;
 
       p {
-        color: #4781d1;
+        color: ${(props) => props.theme.filesPanels.invite.addButtonColor};
       }
 
-      svg path {
-        fill: #4781d1;
+      svg {
+        ${({ theme }) =>
+          theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"};
+
+        path {
+          fill: ${(props) => props.theme.filesPanels.invite.addButtonColor};
+        }
       }
     }
   }
 `;
 
 const SearchItemText = styled(Text)`
-  line-height: ${({ theme }) =>
-    theme.interfaceDirection === "rtl" ? `20px` : `16px`};
+  line-height: 16px;
 
   text-overflow: ellipsis;
   overflow: hidden;
@@ -425,15 +395,8 @@ const StyledCrossIcon = styled(CrossIcon)`
 StyledCrossIcon.defaultProps = { theme: Base };
 
 const StyledDeleteIcon = styled(DeleteIcon)`
-cursor: pointer;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: auto;
-        `
-      : css`
-          margin-left: auto;
-        `}
+  cursor: pointer;
+  margin-inline-start: auto;
 
   ${iconStyles}
 `;
@@ -458,13 +421,11 @@ const StyledButtons = styled(Box)`
 `;
 
 const StyledLink = styled(Link)`
-  float: ${({ theme }) =>
-    theme.interfaceDirection === "rtl" ? `left` : `right`};
+  float: inline-end;
 `;
 
 const ResetLink = styled(Link)`
-  float: ${({ theme }) =>
-    theme.interfaceDirection === "rtl" ? `right` : `left`};
+  float: inline-start;
   padding: 0 16px;
   margin-bottom: 16px;
   font-size: 13px;
@@ -476,14 +437,7 @@ const ResetLink = styled(Link)`
 StyledButtons.defaultProps = { theme: Base };
 
 const StyledToggleButton = styled(ToggleButton)`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          left: 8px;
-        `
-      : css`
-          right: 8px;
-        `}
+  inset-inline-end: 8px;
   margin-top: -4px;
 `;
 
@@ -502,13 +456,11 @@ const StyledControlContainer = styled.div`
     display: flex;
 
     top: -27px;
-    right: 10px;
-    left: unset;
+    inset-inline: unset 10px;
   }
 `;
 const StyledInviteLanguage = styled.div`
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-inline: 16px;
   margin-top: -12px;
   display: flex;
   align-items: center;
@@ -522,7 +474,7 @@ const StyledInviteLanguage = styled.div`
   font-weight: 600;
   line-height: 20px;
   .list-link {
-    margin-left: 4px;
+    margin-inline-start: 4px;
     color: ${(props) => props.theme.createEditRoomDialog.commonParam.textColor};
   }
 
@@ -532,12 +484,11 @@ const StyledInviteLanguage = styled.div`
   }
   .language-combo-box {
     .combo-button {
-      padding-left: 6px;
-      padding-right: 6px;
+      padding-inline: 6px;
     }
 
     .combo-buttons_arrow-icon {
-      margin-left: 0px;
+      margin-inline-start: 0;
     }
 
     .combo-button_closed:not(:hover) .combo-button-label {
@@ -591,7 +542,6 @@ export {
   StyledLink,
   ResetLink,
   ScrollList,
-  StyledAccessSelector,
   StyledToggleButton,
   StyledDescription,
   StyledInviteLanguage,

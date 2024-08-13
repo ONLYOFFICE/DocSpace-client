@@ -40,7 +40,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { SettingsDSConnectSkeleton } from "@docspace/shared/skeletons/settings";
 import { DeviceType } from "@docspace/shared/enums";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const URL_REGEX = /^https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{1,256}\/?$/;
 const DNS_PLACEHOLDER = `${window.location.protocol}//<docspace-dns-name>/`;
@@ -80,6 +80,7 @@ const DocumentService = ({
   const [initInternalUrl, setInitInternalUrl] = useState("");
 
   useEffect(() => {
+    setDocumentTitle(t("DocumentService"));
     setIsLoading(true);
     getDocumentServiceLocation()
       .then((result) => {

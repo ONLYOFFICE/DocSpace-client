@@ -41,13 +41,12 @@ import {
   sloBindingOptions,
   nameIdOptions,
 } from "./sub-components/constants";
-import { DeviceType } from "@docspace/shared/enums";
 
 const PROVIDER_URL = "https://idpservice/idp";
 
 const StyledWrapper = styled.div`
   .radio-button-group {
-    margin-left: 24px;
+    margin-inline-start: 24px;
   }
 `;
 
@@ -73,13 +72,10 @@ const IdpSettings = (props) => {
     sloUrlRedirectHasError,
     isInit,
     init,
-    currentDeviceType,
   } = props;
 
-  const isMobileView = currentDeviceType === DeviceType.mobile;
-
   useEffect(() => {
-    if (!isInit || isMobileView) init();
+    if (!isInit) init();
   }, [isInit]);
 
   return (
@@ -227,7 +223,6 @@ export default inject(({ settingsStore, ssoStore }) => {
     init,
     isInit,
   } = ssoStore;
-  const { currentDeviceType } = settingsStore;
 
   return {
     ssoBinding,
@@ -249,6 +244,5 @@ export default inject(({ settingsStore, ssoStore }) => {
     sloUrlRedirectHasError,
     init,
     isInit,
-    currentDeviceType,
   };
 })(observer(IdpSettings));

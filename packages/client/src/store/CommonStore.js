@@ -172,12 +172,7 @@ class CommonStore {
   };
 
   applyNewLogos = (logos) => {
-    const theme =
-      typeof window !== "undefined" &&
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
+    const theme = this.settingsStore.theme.isBase ? "light" : "dark";
 
     const favicon = document.getElementById("favicon");
     const logo = document.getElementsByClassName("logo-icon_svg")?.[0];
@@ -215,6 +210,13 @@ class CommonStore {
 
     this.applyNewLogos(logos);
   };
+
+  get isWhitelableLoaded() {
+    return (
+      this.logoUrlsWhiteLabel.length > 0 &&
+      this.whiteLabelLogoText !== undefined
+    );
+  }
 
   getGreetingSettingsIsDefault = async () => {
     const isDefault = await api.settings.getGreetingSettingsIsDefault();

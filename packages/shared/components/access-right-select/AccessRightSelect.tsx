@@ -46,6 +46,7 @@ export const AccessRightSelectPure = ({
   advancedOptions,
   selectedOption,
   className,
+  type,
   ...props
 }: AccessRightSelectProps) => {
   const [currentItem, setCurrentItem] = useState(selectedOption);
@@ -76,7 +77,12 @@ export const AccessRightSelectPure = ({
           onClick={() => onSelectCurrentItem(item)}
         >
           <StyledItem>
-            {item.icon && <StyledItemIcon src={item.icon} />}
+            {item.icon && (
+              <StyledItemIcon
+                src={item.icon}
+                isShortenIcon={type === "onlyIcon"}
+              />
+            )}
             <StyledItemContent>
               <StyledItemTitle>
                 {item.label}
@@ -108,6 +114,7 @@ export const AccessRightSelectPure = ({
   return (
     <StyledWrapper
       className={className}
+      type={type}
       advancedOptions={formattedOptions}
       onSelect={onSelectCurrentItem}
       options={[]}
@@ -116,7 +123,7 @@ export const AccessRightSelectPure = ({
           icon: currentItem?.icon,
           default: true,
           key: currentItem?.key,
-          label: currentItem?.label,
+          label: type === "onlyIcon" ? "" : currentItem?.label,
         } as TOption
       }
       forceCloseClickOutside

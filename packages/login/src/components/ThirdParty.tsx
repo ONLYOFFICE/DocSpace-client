@@ -33,22 +33,13 @@ import styled from "styled-components";
 
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
 import { Text } from "@docspace/shared/components/text";
-import { PROVIDERS_DATA } from "@docspace/shared/constants";
 import { getOAuthToken, getLoginLink } from "@docspace/shared/utils/common";
 import {
   TCapabilities,
-  TGetSsoSettings,
   TThirdPartyProvider,
 } from "@docspace/shared/api/settings/types";
-import { Nullable } from "@docspace/shared/types";
 
-import SSOIcon from "PUBLIC_DIR/images/sso.react.svg?url";
-
-import {
-  getCapabilities,
-  getSSO,
-  getThirdPartyProviders,
-} from "@/utils/actions";
+import SSOIcon from "PUBLIC_DIR/images/sso.react.svg";
 
 import { LoginDispatchContext, LoginValueContext } from "./Login";
 
@@ -57,7 +48,23 @@ const StyledThirdParty = styled.div<{ isVisible: boolean }>`
   height: auto;
 `;
 
-const ThirdParty = () => {
+type ThirdPartyProps = {
+  thirdParty?: TThirdPartyProvider[];
+  capabilities?: TCapabilities;
+  ssoUrl?: string;
+  ssoExists?: boolean;
+  oauthDataExists?: boolean;
+  hideAuthPage?: boolean;
+};
+
+const ThirdParty = ({
+  thirdParty,
+  capabilities,
+  ssoUrl,
+  ssoExists,
+  oauthDataExists,
+  hideAuthPage,
+}: ThirdPartyProps) => {
   const { isLoading } = useContext(LoginValueContext);
   const { setIsModalOpen } = useContext(LoginDispatchContext);
 
@@ -65,32 +72,7 @@ const ThirdParty = () => {
 
   const { t } = useTranslation(["Login", "Common"]);
 
-  const [capabilities, setCapabilities] =
-    React.useState<Nullable<TCapabilities>>(null);
-  const [thirdPartyProvider, setThirdPartyProvider] =
-    React.useState<Nullable<TThirdPartyProvider[]>>(null);
-  const [ssoSettings, setSsoSettings] =
-    React.useState<Nullable<TGetSsoSettings>>(null);
-
-  const getData = useCallback(async () => {
-    const [thirdParty, capabilities, ssoSettings] = await Promise.all([
-      getThirdPartyProviders(),
-      getCapabilities(),
-      getSSO(),
-    ]);
-
-    if (thirdParty) setThirdPartyProvider(thirdParty);
-    if (capabilities) setCapabilities(capabilities);
-    if (ssoSettings) setSsoSettings(ssoSettings);
-  }, []);
-
   useEffect(() => {
-    getData();
-  }, [getData]);
-
-  useEffect(() => {
-    const ssoUrl = capabilities ? capabilities.ssoUrl : "";
-    const hideAuthPage = ssoSettings ? ssoSettings.hideAuthPage : false;
     if (
       ssoUrl &&
       hideAuthPage &&
@@ -98,25 +80,7 @@ const ThirdParty = () => {
     ) {
       window.location.replace(ssoUrl);
     }
-  }, [capabilities, searchParams, ssoSettings]);
-
-  const ssoExists = () => {
-    if (capabilities?.ssoUrl) return true;
-    else return false;
-  };
-
-  const oauthDataExists = () => {
-    if (!capabilities?.oauthEnabled) return false;
-
-    let existProviders = 0;
-    if (thirdPartyProvider && thirdPartyProvider.length > 0)
-      thirdPartyProvider?.map((item) => {
-        if (!(item.provider in PROVIDERS_DATA)) return;
-        existProviders++;
-      });
-
-    return !!existProviders;
-  };
+  }, [capabilities, searchParams, ssoUrl, hideAuthPage]);
 
   const onSocialButtonClick = useCallback(
     (e: React.MouseEvent<Element, MouseEvent>) => {
@@ -167,7 +131,7 @@ const ThirdParty = () => {
     [],
   );
 
-  const ssoProps = ssoExists()
+  const ssoProps = ssoExists
     ? {
         ssoUrl: capabilities?.ssoUrl,
         ssoLabel: capabilities?.ssoLabel,
@@ -175,7 +139,7 @@ const ThirdParty = () => {
       }
     : {};
 
-  const isVisible = oauthDataExists() || ssoExists();
+  const isVisible = oauthDataExists || ssoExists;
 
   return (
     isVisible && (
@@ -184,7 +148,7 @@ const ThirdParty = () => {
           <Text className="or-label">{t("Common:orContinueWith")}</Text>
         </div>
         <SocialButtonsGroup
-          providers={thirdPartyProvider ?? undefined}
+          providers={thirdParty ?? undefined}
           onClick={onSocialButtonClick}
           onMoreAuthToggle={setIsModalOpen}
           t={t}

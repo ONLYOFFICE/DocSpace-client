@@ -66,14 +66,7 @@ const Label = styled(ClearLabel)`
   cursor: ${(props) => !props.isDisabled && "pointer"};
 
   .radio-button {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: ${props.theme.radioButton.marginBeforeLabel};
-          `
-        : css`
-            margin-right: ${props.theme.radioButton.marginBeforeLabel};
-          `}
+    margin-inline-end: ${({ theme }) => theme.radioButton.marginBeforeLabel};
 
     path {
       fill: ${(props) =>
@@ -123,13 +116,7 @@ const Label = styled(ClearLabel)`
   &:not(:first-child) {
     ${(props) =>
       props.orientation === "horizontal" &&
-      (props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: ${props.spacing};
-          `
-        : css`
-            margin-left: ${props.spacing};
-          `)};
+      `margin-inline-start: ${props.spacing};`};
   }
 
   &:not(:last-child) {

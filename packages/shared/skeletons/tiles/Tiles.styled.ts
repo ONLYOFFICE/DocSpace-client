@@ -78,10 +78,7 @@ export const StyledBottom = styled.div<StyledBottomProps>`
   .second-content {
     width: 100%;
 
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: 8px;`
-        : `margin-left: 8px;`}
+    margin-inline-start: 8px;
   }
 
   ${(props) =>
@@ -93,10 +90,7 @@ export const StyledBottom = styled.div<StyledBottomProps>`
 
   .option-button {
     min-width: 16px;
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: 8px;`
-        : `margin-left: 8px;`}
+    margin-inline-start: 8px;
   }
 `;
 
@@ -119,4 +113,27 @@ export const StyledTilesWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 16px;
+`;
+
+export const StyledRoomTile = styled.div`
+  border: ${(props) => props.theme.filesSection.tilesView.tile.border};
+  border-radius: 6px;
+  height: 120px;
+`;
+
+export const StyledRoomTileTopContent = styled.div`
+  display: grid;
+  grid-template-columns: 32px 1fr 24px;
+  gap: 8px;
+  align-items: center;
+  height: 61px;
+  border-bottom: ${(props) => props.theme.filesSection.tilesView.tile.border};
+  padding: 0 8px 0 16px;
+`;
+
+export const StyledRoomTileBottomContent = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  gap: 4px;
 `;

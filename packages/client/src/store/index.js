@@ -45,6 +45,7 @@ import CommonStore from "./CommonStore";
 
 import ProfileActionsStore from "./ProfileActionsStore";
 import SsoFormStore from "./SsoFormStore";
+import LdapFormStore from "./LdapFormStore";
 
 import FilesStore from "./FilesStore";
 import SelectedFolderStore from "./SelectedFolderStore";
@@ -79,6 +80,11 @@ import ImportAccountsStore from "./ImportAccountsStore";
 import PluginStore from "./PluginStore";
 import InfoPanelStore from "./InfoPanelStore";
 import CampaignsStore from "./CampaignsStore";
+import EditGroupStore from "./EditGroupStore";
+
+import OAuthStore from "./OAuthStore";
+
+const oauthStore = new OAuthStore(userStore);
 
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
 
@@ -95,17 +101,12 @@ const paymentStore = new PaymentStore(
   paymentQuotasStore,
 );
 const wizardStore = new WizardStore();
-const setupStore = new SettingsSetupStore(
-  tfaStore,
-  authStore,
-  settingsStore,
-  thirdPartyStore,
-);
 const confirmStore = new ConfirmStore();
 const backupStore = new BackupStore();
 const commonStore = new CommonStore(settingsStore);
 
 const ssoStore = new SsoFormStore();
+const ldapStore = new LdapFormStore(currentQuotaStore);
 
 const tagsStore = new TagsStore();
 
@@ -127,6 +128,14 @@ const filesSettingsStore = new FilesSettingsStore(
   pluginStore,
   authStore,
   settingsStore,
+);
+
+const setupStore = new SettingsSetupStore(
+  tfaStore,
+  authStore,
+  settingsStore,
+  thirdPartyStore,
+  filesSettingsStore,
 );
 
 const accessRightsStore = new AccessRightsStore(
@@ -253,6 +262,7 @@ const profileActionsStore = new ProfileActionsStore(
   pluginStore,
   userStore,
   settingsStore,
+  currentTariffStatusStore,
 );
 
 peopleStore.profileActionsStore = profileActionsStore;
@@ -295,6 +305,8 @@ const storageManagement = new StorageManagement(
 
 const campaignsStore = new CampaignsStore(settingsStore, userStore);
 
+const editGroupStore = new EditGroupStore(peopleStore);
+
 const store = {
   authStore,
   userStore,
@@ -313,6 +325,8 @@ const store = {
   common: commonStore,
   infoPanelStore,
   ssoStore,
+  ldapStore,
+
   profileActionsStore,
 
   filesStore,
@@ -344,9 +358,11 @@ const store = {
   clientLoadingStore,
   publicRoomStore,
 
+  oauthStore,
   pluginStore,
   storageManagement,
   campaignsStore,
+  editGroupStore,
 };
 
 export default store;

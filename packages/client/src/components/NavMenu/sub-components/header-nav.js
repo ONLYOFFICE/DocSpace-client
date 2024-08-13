@@ -29,24 +29,20 @@ import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 import ProfileActions from "./profile-actions";
 import { useTranslation } from "react-i18next";
-import {
-  mobile,
-  tablet,
-  getCorrectFourValuesStyle,
-} from "@docspace/shared/utils";
+import { mobile, tablet } from "@docspace/shared/utils";
 import { inject, observer } from "mobx-react";
+import { globalColors } from "@docspace/shared/themes";
 
 const StyledNav = styled.nav`
   display: flex;
 
-  padding: ${({ theme }) =>
-    getCorrectFourValuesStyle("0 20px 0 16px", theme.interfaceDirection)};
+  padding-block: 0;
+  padding-inline: 16px 20px;
 
   align-items: center;
   position: absolute;
 
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl" ? `left: 0;` : `right: 0;`}
+  inset-inline-end: 0;
   height: 48px;
   z-index: 180 !important;
 
@@ -57,12 +53,13 @@ const StyledNav = styled.nav`
   }
 
   @media ${tablet} {
-    padding: ${({ theme }) =>
-      getCorrectFourValuesStyle("0 0px 0 16px", theme.interfaceDirection)};
+    padding-block: 0;
+    padding-inline: 16px 0;
   }
   .icon-profile-menu {
     cursor: pointer;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
+    z-index: 300;
   }
 `;
 const HeaderNav = ({

@@ -26,13 +26,13 @@
 
 import styled, { css } from "styled-components";
 
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 
 const StyledContainer = styled.div<{
   enableToggle?: boolean;
   isOpen?: boolean;
 }>`
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   .toggle-container {
     display: inline-block;

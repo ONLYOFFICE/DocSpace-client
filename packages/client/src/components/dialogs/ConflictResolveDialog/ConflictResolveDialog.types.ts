@@ -41,6 +41,9 @@ export type TConflictResolveDialogData = {
     files: { file: { name: string; size: string } }[];
     filesSize: number;
   };
+
+  selectedFolder?: TFolder;
+  fromShareCollectSelector?: boolean;
 };
 
 export type TActiveItem = TFile | TFolder;
@@ -49,7 +52,7 @@ export interface ConflictResolveDialogProps {
   visible: boolean;
   setConflictResolveDialogVisible: (value: boolean) => void;
   conflictResolveDialogData: TConflictResolveDialogData;
-  items: (TFile | TFolder)[];
+  items: (TFile & TFolder)[];
   itemOperationToFolder: (data: {
     destFolderId: number;
     folderIds: number[];
@@ -66,12 +69,15 @@ export interface ConflictResolveDialogProps {
   setActiveFiles: (items: TActiveItem[]) => void;
   setActiveFolders: (items: TActiveItem[]) => void;
   updateActiveFiles: (items: TActiveItem[]) => void;
+  updateActiveFolders: (items: TActiveItem[]) => void;
   setSelected: (value: string) => void;
   setMoveToPanelVisible: (value: boolean) => void;
   setRestorePanelVisible: (value: boolean) => void;
   setCopyPanelVisible: (value: boolean) => void;
   setRestoreAllPanelVisible: (value: boolean) => void;
   setMoveToPublicRoomVisible: (value: boolean) => void;
+  setShareCollectSelector: TStore["dialogsStore"]["setShareCollectSelector"];
+  openFileAction: TStore["filesActionsStore"]["openFileAction"];
   handleFilesUpload: (
     data: {
       files: {
@@ -85,4 +91,8 @@ export interface ConflictResolveDialogProps {
     t: TTranslation,
     create: boolean,
   ) => void;
+  isFileDialog: boolean;
+  isFolderDialog: boolean;
+  files: TFile[];
+  folders: TFolder[];
 }

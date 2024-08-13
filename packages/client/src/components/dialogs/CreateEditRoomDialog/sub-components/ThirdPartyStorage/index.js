@@ -37,7 +37,6 @@ import ThirdPartyComboBox from "./ThirdPartyComboBox";
 import FolderInput from "./FolderInput";
 import { getOAuthToken } from "@docspace/shared/utils/common";
 import { Checkbox } from "@docspace/shared/components/checkbox";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledThirdPartyStorage = styled(StyledParam)`
   flex-direction: column;
@@ -89,7 +88,7 @@ const ThirdPartyStorage = ({
       const data = isRoomAdmin ? (
         <Text as="p">
           {t("ThirdPartyStorageRoomAdminNoStorageAlert", {
-            productName: PRODUCT_NAME,
+            productName: t("Common:ProductName"),
           })}
         </Text>
       ) : (

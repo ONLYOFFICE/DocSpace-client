@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import styled, { css } from "styled-components";
 import ExpanderDownReactSvg from "PUBLIC_DIR/images/expander-down.react.svg";
 
@@ -32,7 +31,6 @@ import { Base } from "../../themes";
 import { Text } from "../text";
 import { TextProps } from "../text/Text.types";
 
-// import { transform } from "lodash";
 import {
   SimpleLinkWithDropdownProps,
   TDropdownType,
@@ -75,21 +73,13 @@ const Caret = styled(ExpanderDownIconWrapper)<{ color?: string }>`
   min-width: ${(props) => props.theme.linkWithDropdown.caret.minWidth};
   height: ${(props) => props.theme.linkWithDropdown.caret.height};
   min-height: ${(props) => props.theme.linkWithDropdown.caret.minHeight};
-  margin-left: ${(props) => props.theme.linkWithDropdown.caret.marginLeft};
+  margin-inline-start: ${(props) =>
+    props.theme.linkWithDropdown.caret.marginLeft};
   margin-top: ${(props) => props.theme.linkWithDropdown.caret.marginTop};
 
-  right: ${(props) => props.theme.linkWithDropdown.caret.right};
+  inset-inline-end: ${(props) => props.theme.linkWithDropdown.caret.right};
   top: ${(props) => props.theme.linkWithDropdown.caret.top};
   bottom: ${(props) => props.theme.linkWithDropdown.caret.bottom};
-
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl" &&
-    css`
-      margin-right: ${props.theme.linkWithDropdown.caret.marginLeft};
-      margin-left: 0;
-      left: ${props.theme.linkWithDropdown.caret.right};
-      right: 0;
-    `}
 
   margin: ${(props) => props.theme.linkWithDropdown.caret.margin};
 
@@ -121,14 +111,7 @@ const StyledLinkWithDropdown = styled(SimpleLinkWithDropdown)`
   display: flex;
   align-items: center;
 
-  padding-right: ${(props) => props.theme.linkWithDropdown.paddingRight};
-
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl" &&
-    css`
-      padding-left: ${props.theme.linkWithDropdown.paddingRight};
-      padding-right: 0;
-    `}
+  padding-inline-end: ${(props) => props.theme.linkWithDropdown.paddingRight};
 
   color: ${(props) =>
     props.isDisabled ? props.theme.linkWithDropdown.disableColor : props.color};

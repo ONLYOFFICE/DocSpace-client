@@ -3,7 +3,11 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import React, { useMemo, useCallback } from "react";
 
-import { Events, FilesSelectorFilterTypes } from "@docspace/shared/enums";
+import {
+  Events,
+  FilesSelectorFilterTypes,
+  FilterType,
+} from "@docspace/shared/enums";
 import { EmptyView } from "@docspace/shared/components/empty-view";
 
 import {
@@ -30,6 +34,7 @@ const EmptyViewContainer = observer(
     folderType,
     selectedFolder,
     parentRoomType,
+    isArchiveFolderRoot,
     onClickInviteUsers,
     onCreateAndCopySharedLink,
     setSelectFileFormRoomDialogVisible,
@@ -59,7 +64,10 @@ const EmptyViewContainer = observer(
     }, [onClickInviteUsers, folderId, type]);
 
     const uploadFromDocspace = useCallback(
-      (filterParam: FilesSelectorFilterTypes, openRoot: boolean = true) => {
+      (
+        filterParam: FilesSelectorFilterTypes | FilterType,
+        openRoot: boolean = true,
+      ) => {
         setSelectFileFormRoomDialogVisible?.(true, filterParam, openRoot);
       },
       [setSelectFileFormRoomDialogVisible],
@@ -95,6 +103,7 @@ const EmptyViewContainer = observer(
         isFolder,
         folderType,
         parentRoomType,
+        isArchiveFolderRoot,
       );
       const title = getTitle(
         type,
@@ -103,6 +112,7 @@ const EmptyViewContainer = observer(
         isFolder,
         folderType,
         parentRoomType,
+        isArchiveFolderRoot,
       );
       const icon = getIcon(
         type,
@@ -114,7 +124,16 @@ const EmptyViewContainer = observer(
       );
 
       return { description, title, icon };
-    }, [type, t, theme.isBase, access, isFolder, folderType, parentRoomType]);
+    }, [
+      type,
+      t,
+      theme.isBase,
+      access,
+      isFolder,
+      folderType,
+      parentRoomType,
+      isArchiveFolderRoot,
+    ]);
 
     const options = useMemo(
       () =>
@@ -126,6 +145,7 @@ const EmptyViewContainer = observer(
           isFolder,
           folderType,
           parentRoomType,
+          isArchiveFolderRoot,
           {
             inviteUser,
             onCreate,
@@ -141,6 +161,7 @@ const EmptyViewContainer = observer(
         isFolder,
         folderType,
         parentRoomType,
+        isArchiveFolderRoot,
         t,
         inviteUser,
         uploadFromDocspace,

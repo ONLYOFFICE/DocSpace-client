@@ -1,7 +1,11 @@
 {
-  "Auto": "Auto",
-  "CodeCopySuccess": "El código se ha copiado en el portapapeles",
-  "EmbedCode": "Código para incrustar",
+  "CodeSuccessfullyCopied": "El código de inserción se ha copiado correctamente en el portapapeles",
+  "ContentRestricted": "La copia de contenidos, la descarga de archivos y la impresión están restringidas.",
+  "DisplaySettings": "Ajustes de visualización",
+  "EmbeddingBarAllowList": "Añada la URL del sitio web para incrustarlo en la <1>lista de permisos</1>.",
+  "EmbeddingBarDescription": "La incrustación solo funcionará para las URL especificadas por el administrador de {{productName}} en la configuración del SDK de JavaScript.",
   "Height": "Altura",
+  "Link": "Enlace",
+  "LinkProtectedWithPassword": "El enlace está protegido con contraseña.",
   "Width": "Ancho"
 }

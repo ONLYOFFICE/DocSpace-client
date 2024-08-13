@@ -159,7 +159,11 @@ const PureHome = (props) => {
     userId,
     getFolderModel,
     scrollToTop,
+    isEmptyGroups,
+    wsCreatedPDFForm,
   } = props;
+
+  //console.log(t("ComingSoon"))
 
   const location = useLocation();
   const { groupId } = useParams();
@@ -171,6 +175,7 @@ const PureHome = (props) => {
   const isPeopleAccounts = location.pathname.includes("accounts/people");
   const isGroupsAccounts =
     location.pathname.includes("accounts/groups") && !groupId;
+  const isAccountsEmptyFilter = isGroupsAccounts && isEmptyGroups;
 
   const { onDrop } = useFiles({
     t,
@@ -201,6 +206,8 @@ const PureHome = (props) => {
     userId,
 
     scrollToTop,
+    selectedFolderStore,
+    wsCreatedPDFForm,
   });
 
   const { showUploadPanel } = useOperations({
@@ -294,7 +301,7 @@ const PureHome = (props) => {
 
   const getContextModel = () => {
     if (isFrame) return null;
-    return getFolderModel(t);
+    return getFolderModel(t, true);
   };
 
   React.useEffect(() => {
@@ -384,8 +391,10 @@ const PureHome = (props) => {
           </Section.SectionWarning>
         )}
 
-        {(((!isEmptyPage || showFilterLoader) && !isErrorRoomNotAvailable) ||
-          isAccountsPage) &&
+        {(((!isEmptyPage || showFilterLoader) &&
+          !isAccountsEmptyFilter &&
+          !isErrorRoomNotAvailable) ||
+          (!isAccountsEmptyFilter && isAccountsPage)) &&
           !isSettingsPage && (
             <Section.SectionFilter>
               {isFrame ? (
@@ -421,7 +430,7 @@ const PureHome = (props) => {
 
 const Home = withTranslation(["Files", "People"])(PureHome);
 
-export default inject(
+export const Component = inject(
   ({
     authStore,
     filesStore,
@@ -493,6 +502,7 @@ export default inject(
       removeTagsFromRoom,
       getRooms,
       scrollToTop,
+      wsCreatedPDFForm,
     } = filesStore;
 
     const { updateProfileCulture } = peopleStore.targetUserStore;
@@ -557,7 +567,15 @@ export default inject(
     const { usersStore, groupsStore, viewAs: accountsViewAs } = peopleStore;
 
     const { getUsersList: fetchPeople } = usersStore;
-    const { getGroups: fetchGroups, fetchGroup } = groupsStore;
+    const {
+      getGroups: fetchGroups,
+      fetchGroup,
+      groups,
+      groupsIsFiltered,
+    } = groupsStore;
+    const isEmptyGroups =
+      !groupsIsFiltered &&
+      ((groups && groups.length === 0) || !Boolean(groups));
 
     if (!firstLoad) {
       if (isLoading) {
@@ -670,6 +688,8 @@ export default inject(
       setSelectedFolder,
       getFolderModel,
       scrollToTop,
+      isEmptyGroups,
+      wsCreatedPDFForm,
     };
   },
 )(observer(Home));

@@ -24,41 +24,35 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect, useMemo } from "react";
-import { Backdrop } from "@docspace/shared/components/backdrop";
+import { useState, useMemo } from "react";
+import { inject, observer } from "mobx-react";
+import { withTranslation } from "react-i18next";
+import { ReactSVG } from "react-svg";
+
 import { Loader } from "@docspace/shared/components/loader";
 import { Text } from "@docspace/shared/components/text";
-import { Heading } from "@docspace/shared/components/heading";
-import { Aside } from "@docspace/shared/components/aside";
 import { Row } from "@docspace/shared/components/row";
 import { Button } from "@docspace/shared/components/button";
-import { withTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
-import { Portal } from "@docspace/shared/components/portal";
-
-import { ReactSVG } from "react-svg";
 import {
-  StyledAsidePanel,
-  StyledContent,
-  StyledHeaderContent,
-  StyledBody,
-  StyledFooter,
-  StyledSharingBody,
-  StyledLink,
-} from "../StyledPanels";
-import { inject, observer } from "mobx-react";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import config from "PACKAGE_FILE";
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
 import { DialogAsideSkeleton } from "@docspace/shared/skeletons/dialog";
-import withLoader from "../../../HOCs/withLoader";
+
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+
 import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
-import FilesFilter from "@docspace/shared/api/files/filter";
-import { DeviceType } from "@docspace/shared/enums";
 
-const SharingBodyStyle = { height: `calc(100vh - 156px)` };
+import { StyledNewFilesBody, StyledLink } from "../StyledPanels";
+import withLoader from "../../../HOCs/withLoader";
+
+import config from "PACKAGE_FILE";
+import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
 const NewFilesPanel = (props) => {
   const {
@@ -67,8 +61,6 @@ const NewFilesPanel = (props) => {
     getFolderIcon,
     newFiles,
     markAsRead,
-    setMediaViewerData,
-    currentFolderId,
     setIsLoading,
     t,
     visible,
@@ -210,40 +202,10 @@ const NewFilesPanel = (props) => {
       }
 
       if (isMedia) {
-        if (currentFolderId !== item.folderId) {
-          const categoryType = getCategoryTypeByFolderType(
-            rootFolderType,
-            item.folderId,
-          );
-
-          const state = {
-            title: "",
-            rootFolderType,
-
-            isRoot: false,
-          };
-          setIsLoading(true);
-
-          const url = getCategoryUrl(categoryType, item.folderId);
-
-          const filter = FilesFilter.getDefault();
-          filter.folder = item.folderId;
-
-          window.DocSpace.navigate(`${url}?${filter.toUrlParams()}`, { state });
-
-          const mediaItem = { visible: true, id };
-          setMediaViewerData(mediaItem);
-
-          setInProgress(false);
-          onClose();
-        } else {
-          const mediaItem = { visible: true, id };
-          setMediaViewerData(mediaItem);
-
-          return onClose();
-        }
-
-        return;
+        return window.open(
+          combineUrl(MEDIA_VIEW_URL, id),
+          openOnNewPage ? "_blank" : "_self",
+        );
       }
 
       if (fileItemsList && enablePlugins) {
@@ -295,61 +257,44 @@ const NewFilesPanel = (props) => {
     });
   }, [onNewFileClick, getItemIcon, currentOpenFileId]);
 
-  const element = (
-    <StyledAsidePanel visible={visible}>
-      <Backdrop
-        onClick={onClose}
-        visible={visible}
-        zIndex={310}
-        isAside={true}
-      />
-      <Aside className="header_aside-panel" visible={visible} onClose={onClose}>
-        <StyledContent>
-          <StyledHeaderContent>
-            <Heading className="files-operations-header" size="medium" truncate>
-              {t("NewFiles")}
-            </Heading>
-          </StyledHeaderContent>
-          {!isLoading ? (
-            <StyledBody className="files-operations-body">
-              <StyledSharingBody style={SharingBodyStyle}>
-                {filesListNode}
-              </StyledSharingBody>
-            </StyledBody>
-          ) : (
-            <div key="loader" className="panel-loader-wrapper">
-              <Loader type="oval" size="16px" className="panel-loader" />
-              <Text as="span">{`${t("Common:LoadingProcessing")} ${t(
-                "Common:LoadingDescription",
-              )}`}</Text>
-            </div>
-          )}
-          <StyledFooter>
-            <Button
-              className="new_files_panel-button new_file_panel-first-button"
-              label={t("Viewed")}
-              size="normal"
-              primary
-              onClick={onMarkAsRead}
-              isLoading={inProgress}
-            />
-            <Button
-              className="new_files_panel-button"
-              label={t("Common:CloseButton")}
-              size="normal"
-              isDisabled={inProgress}
-              onClick={onClose}
-            />
-          </StyledFooter>
-        </StyledContent>
-      </Aside>
-    </StyledAsidePanel>
-  );
-
-  return currentDeviceType === DeviceType.mobile ? (
-    <Portal element={element} />
-  ) : (
-    element
+  return (
+    <ModalDialog
+      visible={visible}
+      onClose={onClose}
+      displayType={ModalDialogType.aside}
+      withBodyScroll
+    >
+      <ModalDialog.Header>{t("NewFiles")}</ModalDialog.Header>
+      <ModalDialog.Body>
+        {!isLoading ? (
+          <StyledNewFilesBody>{filesListNode}</StyledNewFilesBody>
+        ) : (
+          <div key="loader" className="panel-loader-wrapper">
+            <Loader type="oval" size="16px" className="panel-loader" />
+            <Text as="span">{`${t("Common:LoadingProcessing")} ${t(
+              "Common:LoadingDescription",
+            )}`}</Text>
+          </div>
+        )}
+      </ModalDialog.Body>
+      <ModalDialog.Footer>
+        <Button
+          scale
+          label={t("Viewed")}
+          size="normal"
+          primary
+          onClick={onMarkAsRead}
+          isLoading={inProgress}
+        />
+        <Button
+          scale
+          label={t("Common:CloseButton")}
+          size="normal"
+          isDisabled={inProgress}
+          onClick={onClose}
+        />
+      </ModalDialog.Footer>
+    </ModalDialog>
   );
 };
 
@@ -359,7 +304,6 @@ export default inject(
     filesStore,
     mediaViewerDataStore,
     filesActionsStore,
-    selectedFolderStore,
     dialogsStore,
     filesSettingsStore,
     clientLoadingStore,
@@ -373,10 +317,9 @@ export default inject(
       setIsSectionFilterLoading(param);
     };
 
-    const { setMediaViewerData, setCurrentItem } = mediaViewerDataStore;
+    const { setCurrentItem } = mediaViewerDataStore;
     const { getIcon, getFolderIcon, openOnNewPage } = filesSettingsStore;
     const { markAsRead } = filesActionsStore;
-    const { id: currentFolderId } = selectedFolderStore;
 
     const {
       setNewFilesPanelVisible,
@@ -395,8 +338,6 @@ export default inject(
       newFilesIds,
       isLoading,
       setCurrentItem,
-      currentFolderId,
-      setMediaViewerData,
       getIcon,
       getFolderIcon,
       markAsRead,

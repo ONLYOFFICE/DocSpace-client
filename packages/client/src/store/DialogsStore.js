@@ -27,6 +27,7 @@
 import { getNewFiles } from "@docspace/shared/api/files";
 import {
   FilesSelectorFilterTypes,
+  FilterType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
@@ -103,7 +104,7 @@ class DialogsStore {
   createRoomConfirmDialogVisible = false;
   changeUserTypeDialogVisible = false;
   editLinkPanelIsVisible = false;
-  embeddingPanelIsVisible = false;
+  embeddingPanelData = { visible: false, item: null };
   submitToGalleryDialogVisible = false;
   linkParams = null;
   leaveRoomDialogVisible = false;
@@ -118,6 +119,16 @@ class DialogsStore {
 
   selectFileFormRoomFilterParam = FilesSelectorFilterTypes.DOCX;
   selectFileFormRoomOpenRoot = false;
+  fillPDFDialogData = {
+    visible: false,
+    data: null,
+  };
+  shareCollectSelector = {
+    visible: false,
+    file: null,
+  };
+
+  warningQuotaDialogVisible = false;
 
   constructor(
     authStore,
@@ -370,6 +381,11 @@ class DialogsStore {
     this.selectFileDialogVisible = visible;
   };
 
+  /**
+   *  @param {boolean} visible
+   *  @param {FilesSelectorFilterTypes | FilterType} [filterParam = FilesSelectorFilterTypes.DOCX]
+   *  @param {boolean} [openRoot = false]
+   */
   setSelectFileFormRoomDialogVisible = (
     visible,
     filterParam = FilesSelectorFilterTypes.DOCX,
@@ -378,13 +394,6 @@ class DialogsStore {
     this.selectFileFormRoomDialogVisible = visible;
     this.selectFileFormRoomFilterParam = filterParam;
     this.selectFileFormRoomOpenRoot = openRoot;
-  };
-
-  createFromTemplateForm = (fileInfo) => {
-    this.createMasterForm(fileInfo, {
-      extension: "pdf",
-      withoutDialog: true,
-    });
   };
 
   createMasterForm = async (fileInfo, options) => {
@@ -409,6 +418,8 @@ class DialogsStore {
       templateId: fileInfo.id,
       withoutDialog,
       preview,
+      edit: true,
+      toForm: true,
     };
 
     event.payload = payload;
@@ -493,8 +504,8 @@ class DialogsStore {
     this.deleteLinkDialogVisible = visible;
   };
 
-  setEmbeddingPanelIsVisible = (embeddingPanelIsVisible) => {
-    this.embeddingPanelIsVisible = embeddingPanelIsVisible;
+  setEmbeddingPanelData = (embeddingPanelData) => {
+    this.embeddingPanelData = embeddingPanelData;
   };
 
   setMoveToPublicRoomVisible = (visible, data = null) => {
@@ -520,6 +531,29 @@ class DialogsStore {
   setPdfFormEditVisible = (visible, data) => {
     this.pdfFormEditVisible = visible;
     this.pdfFormEditData = data;
+  };
+
+  setFillPDFDialogData = (visible, data) => {
+    this.fillPDFDialogData = {
+      visible,
+      data,
+    };
+  };
+
+  /**
+   * @param {boolean} visible
+   * @param {import("@docspace/shared/api/files/types").TFile} [file = null]
+   * @returns {void}
+   */
+  setShareCollectSelector = (visible, file = null) => {
+    this.shareCollectSelector = {
+      visible,
+      file,
+    };
+  };
+
+  setWarningQuotaDialogVisible = (visible) => {
+    this.warningQuotaDialogVisible = visible;
   };
 }
 

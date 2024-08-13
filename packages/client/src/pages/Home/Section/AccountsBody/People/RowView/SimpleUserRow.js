@@ -29,7 +29,7 @@ import styled, { css } from "styled-components";
 import { isMobile } from "react-device-detect";
 
 import { Row } from "@docspace/shared/components/row";
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
@@ -112,8 +112,7 @@ const StyledSimpleUserRow = styled(Row)`
   `}
 
   position: unset;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
   .styled-element {
     height: 32px;
     margin-inline-end: 12px;
@@ -124,7 +123,7 @@ const SimpleUserRow = (props) => {
   const {
     item,
     sectionWidth,
-    contextOptionsProps,
+    getContextModel,
     checkedProps,
     onContentRowSelect,
     onUserContextClick,
@@ -159,11 +158,12 @@ const SimpleUserRow = (props) => {
           onSelect={onContentRowSelect}
           checked={isChecked}
           isActive={isActive}
-          {...contextOptionsProps}
           sectionWidth={sectionWidth}
           mode={"modern"}
           className={"user-row"}
           onContextClick={onRowContextClick}
+          contextOptions={item.options}
+          getContextModel={getContextModel}
         >
           <UserContent {...props} />
         </StyledSimpleUserRow>

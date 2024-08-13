@@ -58,6 +58,7 @@ import {
   TPasswordSettings,
   TPasswordValidation,
 } from "./PasswordInput.types";
+import { globalColors } from "../../themes";
 
 const PasswordInput = React.forwardRef(
   (
@@ -102,6 +103,7 @@ const PasswordInput = React.forwardRef(
       tooltipOffsetLeft,
       tooltipOffsetTop,
       isAutoFocussed,
+      tooltipAllowedCharacters,
     }: PasswordInputProps,
     ref,
   ) => {
@@ -417,7 +419,7 @@ const PasswordInput = React.forwardRef(
           <Text
             className="text-tooltip"
             fontSize="10px"
-            color="#A3A9AE"
+            color={globalColors.gray}
             as="span"
           >
             {settings?.minLength ? length : null}{" "}
@@ -472,6 +474,8 @@ const PasswordInput = React.forwardRef(
               {tooltipPasswordSpecial}
             </StyledTooltipItem>
           )}
+
+          {tooltipAllowedCharacters}
 
           {generatePasswordTitle && (
             <div className="generate-btn-container">

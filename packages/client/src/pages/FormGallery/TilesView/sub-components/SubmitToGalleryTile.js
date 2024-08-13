@@ -82,15 +82,7 @@ const StyledCloseIcon = styled(CrossIcon)`
   position: absolute;
   top: 10px;
   cursor: pointer;
-
-  ${(props) =>
-    props.theme.interfaceDirection === "ltr"
-      ? css`
-          right: 10px;
-        `
-      : css`
-          left: 10px;
-        `}
+  inset-inline-end: 10px;
 
   path {
     fill: ${({ theme }) =>
@@ -106,7 +98,6 @@ const SubmitToGalleryTile = ({
   hideSubmitToGalleryTile,
   setSubmitToGalleryDialogVisible,
   currentColorScheme,
-  organizationName,
 }) => {
   if (!submitToGalleryTileIsVisible) return null;
 
@@ -122,10 +113,14 @@ const SubmitToGalleryTile = ({
 
       <div className="info">
         <div className="title">
-          {t("Common:SubmitToGalleryBlockHeader", { organizationName })}
+          {t("Common:SubmitToGalleryBlockHeader", {
+            organizationName: t("Common:OrganizationName"),
+          })}
         </div>
         <div className="body">
-          {t("Common:SubmitToGalleryBlockBody", { organizationName })}
+          {t("Common:SubmitToGalleryBlockBody", {
+            organizationName: t("Common:OrganizationName"),
+          })}
         </div>
       </div>
 
@@ -140,7 +135,7 @@ const SubmitToGalleryTile = ({
 };
 
 export default inject(({ settingsStore, oformsStore, dialogsStore }) => {
-  const { organizationName, currentColorScheme } = settingsStore;
+  const { currentColorScheme } = settingsStore;
 
   return {
     submitToGalleryTileIsVisible: oformsStore.submitToGalleryTileIsVisible,
@@ -148,6 +143,5 @@ export default inject(({ settingsStore, oformsStore, dialogsStore }) => {
     setSubmitToGalleryDialogVisible:
       dialogsStore.setSubmitToGalleryDialogVisible,
     currentColorScheme,
-    organizationName,
   };
 })(withTranslation("Common", "FormGallery")(observer(SubmitToGalleryTile)));

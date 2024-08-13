@@ -26,11 +26,14 @@
 
 import React, { useMemo, useState, useCallback, useEffect } from "react";
 
-import { useTranslation, Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { toastr } from "@docspace/shared/components/toast";
-import { Events, FilesSelectorFilterTypes } from "@docspace/shared/enums";
+import {
+  Events,
+  FilesSelectorFilterTypes,
+  FilterType,
+} from "@docspace/shared/enums";
 
 import {
   UploadPanel,
@@ -74,9 +77,10 @@ import FilesSelector from "../FilesSelector";
 
 import LeaveRoomDialog from "../dialogs/LeaveRoomDialog";
 import ChangeRoomOwnerPanel from "../panels/ChangeRoomOwnerPanel";
-import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
 import { PDFFormEditingDialog } from "../dialogs/PDFFormEditingDialog";
 import { SharePDFFormDialog } from "../dialogs/SharePDFFormDialog";
+import { FillPDFDialog } from "../dialogs/FillPDFDialog";
+import { ShareCollectSelector } from "../ShareCollectSelector";
 
 const Panels = (props) => {
   const {
@@ -101,7 +105,7 @@ const Panels = (props) => {
     selectFileFormRoomDialogVisible,
     selectFileFormRoomFilterParam,
     setSelectFileFormRoomDialogVisible,
-    createFromTemplateForm,
+    copyFromTemplateForm,
     hotkeyPanelVisible,
     invitePanelVisible,
     convertPasswordDialogVisible,
@@ -120,7 +124,7 @@ const Panels = (props) => {
     editLinkPanelIsVisible,
     unsavedChangesDialogVisible,
     deleteLinkDialogVisible,
-    embeddingPanelIsVisible,
+    embeddingPanelData,
     moveToPublicRoomVisible,
     backupToPublicRoomVisible,
     settingsPluginDialogVisible,
@@ -131,13 +135,9 @@ const Panels = (props) => {
     shareFolderDialogVisible,
     pdfFormEditVisible,
     selectFileFormRoomOpenRoot,
+    fillPDFDialogData,
+    shareCollectSelector,
   } = props;
-
-  const [createPDFFormFile, setCreatePDFFormFile] = useState({
-    visible: false,
-    data: null,
-    onClose: null,
-  });
 
   const [sharePDFForm, setSharePDFForm] = useState({
     visible: false,
@@ -160,42 +160,11 @@ const Panels = (props) => {
       [FilesSelectorFilterTypes.DOCX]: t("Common:SelectDOCXFormat"),
       // [FilesSelectorFilterTypes.DOCXF]: t("Common:SelectDOCXFFormat"),
       [FilesSelectorFilterTypes.PDF]: t("Common:SelectPDFFormat"),
+      [FilterType.PDFForm]: t("Common:SelectPDFFormat"),
     };
 
     return text[selectFileFormRoomFilterParam];
   }, [selectFileFormRoomFilterParam, t]);
-
-  const handleCreatePDFFormFile = useCallback(
-    /**
-     * @param {CustomEvent} event
-     */
-    (event) => {
-      const { file, isFill, isFirst } = event.detail;
-
-      if (!isFirst) {
-        return toastr.success(
-          <Trans
-            ns="PDFFormDialog"
-            i18nKey="PDFFormIsReadyToast"
-            components={{ 1: <strong /> }}
-            values={{ filename: file.title }}
-          />,
-        );
-      }
-
-      setCreatePDFFormFile({
-        visible: true,
-        data: {
-          file,
-          isFill,
-        },
-        onClose: () => {
-          setCreatePDFFormFile({ visible: false, onClose: null, data: null });
-        },
-      });
-    },
-    [],
-  );
 
   const handleSharePDFForm = useCallback(
     /**
@@ -216,20 +185,12 @@ const Panels = (props) => {
   );
 
   useEffect(() => {
-    window.addEventListener(
-      Events.CREATE_PDF_FORM_FILE,
-      handleCreatePDFFormFile,
-    );
     window.addEventListener(Events.Share_PDF_Form, handleSharePDFForm);
 
     return () => {
-      window.removeEventListener(
-        Events.CREATE_PDF_FORM_FILE,
-        handleCreatePDFFormFile,
-      );
       window.removeEventListener(Events.Share_PDF_Form, handleSharePDFForm);
     };
-  }, [handleCreatePDFFormFile, handleSharePDFForm]);
+  }, [handleSharePDFForm]);
 
   return [
     settingsPluginDialogVisible && (
@@ -301,7 +262,7 @@ const Panels = (props) => {
         key="select-file-form-room-dialog"
         onClose={onCloseFileFormRoomDialog}
         openRoot={selectFileFormRoomOpenRoot}
-        onSelectFile={createFromTemplateForm}
+        onSelectFile={(file) => copyFromTemplateForm(file, t)}
         filterParam={selectFileFormRoomFilterParam}
         descriptionText={descriptionTextFileFormRoomDialog}
       />
@@ -332,7 +293,7 @@ const Panels = (props) => {
       <UnsavedChangesDialog key="unsaved-dialog" />
     ),
     deleteLinkDialogVisible && <DeleteLinkDialog key="delete-link-dialog" />,
-    embeddingPanelIsVisible && <EmbeddingPanel key="embedding-panel" />,
+    embeddingPanelData.visible && <EmbeddingPanel key="embedding-panel" />,
     moveToPublicRoomVisible && (
       <MoveToPublicRoom key="move-to-public-room-panel" />
     ),
@@ -344,15 +305,18 @@ const Panels = (props) => {
       <ChangeRoomOwnerPanel key="change-room-owner" />
     ),
     shareFolderDialogVisible && <ShareFolderDialog key="share-folder-dialog" />,
-    createPDFFormFile.visible && (
-      <CreatedPDFFormDialog
-        key="created-pdf-form-dialog"
-        {...createPDFFormFile}
-      />
-    ),
     pdfFormEditVisible && <PDFFormEditingDialog key="pdf-form-edit-dialog" />,
     sharePDFForm.visible && (
       <SharePDFFormDialog key="share-pdf-form-dialog" {...sharePDFForm} />
+    ),
+    fillPDFDialogData.visible && (
+      <FillPDFDialog key="fill-pdf-form-dialog" {...fillPDFDialogData} />
+    ),
+    shareCollectSelector.visible && (
+      <ShareCollectSelector
+        key="share-collect-dialog"
+        {...shareCollectSelector}
+      />
     ),
   ];
 };
@@ -367,6 +331,7 @@ export default inject(
     createEditRoomStore,
     pluginStore,
     filesStore,
+    filesActionsStore,
   }) => {
     const {
       ownerPanelVisible,
@@ -397,7 +362,6 @@ export default inject(
       selectFileFormRoomDialogVisible,
       selectFileFormRoomFilterParam,
       setSelectFileFormRoomDialogVisible,
-      createFromTemplateForm,
       invitePanelOptions,
       inviteUsersWarningDialogVisible,
       changeUserTypeDialogVisible,
@@ -406,7 +370,7 @@ export default inject(
       editGroupMembersDialogVisible,
       editLinkPanelIsVisible,
       deleteLinkDialogVisible,
-      embeddingPanelIsVisible,
+      embeddingPanelData,
       moveToPublicRoomVisible,
       backupToPublicRoomVisible,
       leaveRoomDialogVisible,
@@ -414,9 +378,12 @@ export default inject(
       shareFolderDialogVisible,
       pdfFormEditVisible,
       selectFileFormRoomOpenRoot,
+      fillPDFDialogData,
+      shareCollectSelector,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
+    const { copyFromTemplateForm } = filesActionsStore;
 
     const { uploadPanelVisible } = uploadDataStore;
     const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
@@ -455,7 +422,7 @@ export default inject(
       selectFileFormRoomDialogVisible,
       selectFileFormRoomFilterParam,
       setSelectFileFormRoomDialogVisible,
-      createFromTemplateForm,
+      copyFromTemplateForm,
       hotkeyPanelVisible,
       restoreAllPanelVisible,
       invitePanelVisible: invitePanelOptions.visible,
@@ -470,7 +437,7 @@ export default inject(
       editLinkPanelIsVisible,
       unsavedChangesDialogVisible,
       deleteLinkDialogVisible,
-      embeddingPanelIsVisible,
+      embeddingPanelData,
       moveToPublicRoomVisible,
       backupToPublicRoomVisible,
       settingsPluginDialogVisible,
@@ -481,6 +448,8 @@ export default inject(
       shareFolderDialogVisible,
       pdfFormEditVisible,
       selectFileFormRoomOpenRoot,
+      fillPDFDialogData,
+      shareCollectSelector,
     };
   },
 )(observer(Panels));

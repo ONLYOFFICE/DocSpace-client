@@ -52,7 +52,7 @@ import { AvatarRole } from "../../components/avatar";
 import { Text } from "../../components/text";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";
-import { PRODUCT_NAME } from "../../constants";
+import { globalColors } from "../../themes";
 
 const toListItem = (
   item: TUser,
@@ -367,7 +367,7 @@ const PeopleSelector = ({
               fontSize="12px"
               noSelect
               truncate
-              color="#A3A9AE"
+              color={globalColors.gray}
               dir="auto"
             >
               {`${userType} | ${email}`}
@@ -398,7 +398,7 @@ const PeopleSelector = ({
       emptyScreenHeader={emptyScreenHeader ?? t("Common:EmptyHeader")}
       emptyScreenDescription={
         emptyScreenDescription ??
-        t("Common:EmptyDescription", { productName: PRODUCT_NAME })
+        t("Common:EmptyDescription", { productName: t("Common:ProductName") })
       }
       searchEmptyScreenImage={emptyScreenImage}
       searchEmptyScreenHeader={t("Common:NotFoundUsers")}

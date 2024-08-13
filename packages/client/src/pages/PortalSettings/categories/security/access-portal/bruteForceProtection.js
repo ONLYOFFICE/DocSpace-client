@@ -265,6 +265,7 @@ const BruteForceProtection = (props) => {
 
       <FieldContainer
         className="input-container"
+        labelVisible={true}
         labelText={t("NumberOfAttempts")}
         isVertical={true}
         place="top"
@@ -284,6 +285,7 @@ const BruteForceProtection = (props) => {
 
       <FieldContainer
         className="input-container"
+        labelVisible={true}
         labelText={t("BlockingTime")}
         isVertical={true}
         place="top"
@@ -303,6 +305,7 @@ const BruteForceProtection = (props) => {
 
       <FieldContainer
         className="input-container"
+        labelVisible={true}
         labelText={t("CheckPeriod")}
         isVertical={true}
         place="top"
@@ -338,30 +341,32 @@ const BruteForceProtection = (props) => {
   );
 };
 
-export default inject(({ settingsStore, setup }) => {
-  const {
-    numberAttempt,
-    blockingTime,
-    checkPeriod,
+export const BruteForceProtectionSection = inject(
+  ({ settingsStore, setup }) => {
+    const {
+      numberAttempt,
+      blockingTime,
+      checkPeriod,
 
-    getBruteForceProtection,
-    bruteForceProtectionUrl,
-    currentDeviceType,
-    currentColorScheme,
-  } = settingsStore;
+      getBruteForceProtection,
+      bruteForceProtectionUrl,
+      currentDeviceType,
+      currentColorScheme,
+    } = settingsStore;
 
-  const { initSettings, isInit } = setup;
+    const { initSettings, isInit } = setup;
 
-  return {
-    numberAttempt,
-    blockingTime,
-    checkPeriod,
+    return {
+      numberAttempt,
+      blockingTime,
+      checkPeriod,
 
-    getBruteForceProtection,
-    initSettings,
-    isInit,
-    bruteForceProtectionUrl,
-    currentDeviceType,
-    currentColorScheme,
-  };
-})(withTranslation(["Settings", "Common"])(observer(BruteForceProtection)));
+      getBruteForceProtection,
+      initSettings,
+      isInit,
+      bruteForceProtectionUrl,
+      currentDeviceType,
+      currentColorScheme,
+    };
+  },
+)(withTranslation(["Settings", "Common"])(observer(BruteForceProtection)));

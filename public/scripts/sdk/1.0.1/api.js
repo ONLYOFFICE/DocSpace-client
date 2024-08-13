@@ -97,6 +97,7 @@
       onAuthSuccess: null,
       onSignOut: null,
       onDownload: null,
+      onNoAccess: null,
     },
   };
 

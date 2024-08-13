@@ -42,6 +42,7 @@ import { GreetingLoginContainer } from "@/components/GreetingContainer";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import LanguageComboboxWrapper from "@/components/LanguageCombobox";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { cookies } from "next/headers";
 
 async function Page({
   searchParams,
@@ -76,6 +77,11 @@ async function Page({
   const isRegisterContainerVisible =
     typeof settings === "string" ? undefined : settings?.enabledJoin;
 
+  const culture =
+    cookies().get("asc_language")?.value ?? typeof settings === "string"
+      ? undefined
+      : settings?.culture;
+
   return (
     <>
       <LanguageComboboxWrapper />
@@ -87,6 +93,7 @@ async function Page({
           <LoginContent>
             <GreetingLoginContainer
               greetingSettings={settings.greetingSettings}
+              culture={culture}
             />
             <FormWrapper id="login-form">
               <Login>

@@ -325,6 +325,11 @@ export const getOptions = (
         icon: <FolderIcon />,
         description: t("Files:GoToMyRooms"),
       }))
+      .with([FolderType.TRASH, P._], () => ({
+        ...actions.onGoToPersonal(),
+        icon: <PersonIcon />,
+        description: t("Files:GoToPersonal"),
+      }))
       .otherwise(() => []);
   }
 

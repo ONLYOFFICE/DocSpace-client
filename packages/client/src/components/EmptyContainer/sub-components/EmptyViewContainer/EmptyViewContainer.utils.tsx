@@ -36,6 +36,8 @@ import EmptyRoomsRootLightIcon from "PUBLIC_DIR/images/emptyview/empty.rooms.roo
 
 import EmptyRecentDarkIcon from "PUBLIC_DIR/images/emptyview/empty.recent.dark.svg";
 import EmptyRecentLightIcon from "PUBLIC_DIR/images/emptyview/empty.recent.light.svg";
+import EmptyTrashDarkIcon from "PUBLIC_DIR/images/emptyview/empty.trash.dark.svg";
+import EmptyTrashLightIcon from "PUBLIC_DIR/images/emptyview/empty.trash.light.svg";
 
 import EmptyArchiveDarkIcon from "PUBLIC_DIR/images/emptyview/empty.archive.dark.svg";
 import EmptyArchiveLightIcon from "PUBLIC_DIR/images/emptyview/empty.archive.light.svg";
@@ -189,7 +191,7 @@ export const getRootDesctiption = (
     .with([FolderType.Archive, ShareAccessRights.DenyAccess], () =>
       t("Files:ArchiveEmptyScreenUser"),
     )
-    .with([FolderType.TRASH, P._], () => t("Test"))
+    .with([FolderType.TRASH, P._], () => t("Files:TrashEmptyDescription"))
     .otherwise(() => "");
 };
 
@@ -280,7 +282,7 @@ export const getRootTitle = (
     )
     .with([FolderType.Recent, P._], () => t("Files:NoFilesHereYet"))
     .with([FolderType.Archive, P._], () => t("Files:ArchiveEmptyScreenHeader"))
-    .with([FolderType.TRASH, P._], () => t("Test"))
+    .with([FolderType.TRASH, P._], () => t("Files:EmptyScreenFolder"))
     .otherwise(() => "");
 };
 
@@ -424,7 +426,9 @@ export const getRootIcom = (
         <EmptyArchiveUserDarkIcon />
       ),
     )
-    .with([FolderType.TRASH, P._], () => <div />)
+    .with([FolderType.TRASH, P._], () =>
+      isBaseTheme ? <EmptyTrashLightIcon /> : <EmptyTrashDarkIcon />,
+    )
     .otherwise(() => <div />);
 };
 

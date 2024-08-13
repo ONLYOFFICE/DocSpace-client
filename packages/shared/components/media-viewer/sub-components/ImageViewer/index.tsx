@@ -988,7 +988,7 @@ export const ImageViewer = ({
               window.ClientConfig?.imageThumbnails &&
               thumbnailSrc &&
               !showOriginSrc
-                ? `${thumbnailSrc}&size=3840x2160`
+                ? `${thumbnailSrc}&size=3840x2160&view=true`
                 : src
             }
             ref={imgRef}

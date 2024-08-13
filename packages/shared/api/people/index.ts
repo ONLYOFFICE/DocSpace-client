@@ -30,6 +30,7 @@ import { AccountsSearchArea } from "@docspace/shared/enums";
 // import axios from "axios";
 import { Encoder } from "@docspace/shared/utils/encoder";
 import { checkFilterInstance } from "@docspace/shared/utils/common";
+import { Nullable } from "types";
 import { request } from "../client";
 
 import Filter from "./filter";
@@ -93,7 +94,7 @@ export async function getUser(userName = null, headers = null) {
 
 export async function getUserByEmail(
   userEmail: string,
-  confirmKey: string | null = null,
+  confirmKey: Nullable<string> = null,
 ) {
   const options = {
     method: "get",
@@ -132,7 +133,7 @@ export function getUserPhoto(userId) {
   });
 }
 
-export function createUser(data, confirmKey: string | null = null) {
+export function createUser(data, confirmKey: Nullable<string> = null) {
   const options = {
     method: "post",
     url: "/people",

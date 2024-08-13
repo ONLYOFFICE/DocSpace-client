@@ -199,12 +199,12 @@ const QuotasBar = ({
           header: t("StorageQuotaHeader", { currentValue, maxValue }),
           description: getTenantCustomQuota(),
         };
-      case QuotaBarTypes.AlmostTariffLimitPerUser:
+      case QuotaBarTypes.UsersTariff:
         return {
           header: t("UserQuotaHeader", { currentValue, maxValue }),
           description: getUserTariffAlmostLimit(),
         };
-      case QuotaBarTypes.TariffLimitPerUser:
+      case QuotaBarTypes.UsersTariffLimit:
         return {
           header: t("UserTariffLimit", { currentValue, maxValue }),
           description: getUserTariffLimit(),

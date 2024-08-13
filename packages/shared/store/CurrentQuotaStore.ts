@@ -271,7 +271,7 @@ class CurrentQuotasStore {
     );
   }
 
-  get showAlmostReachedUserTariffLimit() {
+  get isUserTariffAlmostLimit() {
     return (
       this.addedManagersCount > 1 &&
       this.maxCountManagersByQuota - this.addedManagersCount <=

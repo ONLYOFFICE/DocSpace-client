@@ -69,7 +69,7 @@ const Bar = (props) => {
 
     showRoomQuotaBar,
     showStorageQuotaBar,
-    showAlmostReachedUserTariffLimit,
+    isUserTariffAlmostLimit,
 
     currentColorScheme,
 
@@ -87,8 +87,8 @@ const Bar = (props) => {
     roomQuota: false,
     storageQuota: false,
     tenantCustomQuota: false,
-    almostTariffLimitPerUser: false,
-    tariffLimitPerUser: false,
+    usersTariff: false,
+    usersTariffLimit: false,
     storageAndUserQuota: false,
     storageAndRoomQuota: false,
     confirmEmail: false,
@@ -135,12 +135,8 @@ const Bar = (props) => {
       if (isAdmin || isRoomAdmin) {
         setBarVisible((value) => ({
           ...value,
-          tariffLimitPerUser: !closed.includes(
-            QuotaBarTypes.TariffLimitPerUser,
-          ),
-          almostTariffLimitPerUser: !closed.includes(
-            QuotaBarTypes.AlmostTariffLimitPerUser,
-          ),
+          usersTariffLimit: !closed.includes(QuotaBarTypes.UsersTariffLimit),
+          usersTariff: !closed.includes(QuotaBarTypes.UsersTariff),
         }));
       }
       if (isAdmin || isPowerUser || isRoomAdmin) {
@@ -162,8 +158,8 @@ const Bar = (props) => {
         roomQuota: isAdmin,
         storageQuota: isAdmin || isPowerUser || isRoomAdmin,
         tenantCustomQuota: isAdmin || isPowerUser || isRoomAdmin,
-        almostTariffLimitPerUser: isAdmin | isRoomAdmin,
-        tariffLimitPerUser: isAdmin | isRoomAdmin,
+        usersTariff: isAdmin | isRoomAdmin,
+        usersTariffLimit: isAdmin | isRoomAdmin,
         storageAndUserQuota: isAdmin,
         storageAndRoomQuota: isAdmin,
         confirmEmail: true,
@@ -249,16 +245,16 @@ const Bar = (props) => {
       case QuotaBarTypes.TenantCustomQuota:
         setBarVisible((value) => ({ ...value, tenantCustomQuota: false }));
         break;
-      case QuotaBarTypes.AlmostTariffLimitPerUser:
+      case QuotaBarTypes.UsersTariff:
         setBarVisible((value) => ({
           ...value,
-          almostTariffLimitPerUser: false,
+          usersTariff: false,
         }));
         break;
-      case QuotaBarTypes.TariffLimitPerUser:
+      case QuotaBarTypes.UsersTariffLimit:
         setBarVisible((value) => ({
           ...value,
-          tariffLimitPerUser: false,
+          usersTariffLimit: false,
         }));
         break;
       case QuotaBarTypes.UserAndStorageQuota:
@@ -301,7 +297,7 @@ const Bar = (props) => {
       };
     }
     if (
-      showAlmostReachedUserTariffLimit &&
+      isUserTariffAlmostLimit &&
       showStorageQuotaBar &&
       barVisible.storageAndUserQuota
     ) {
@@ -334,20 +330,17 @@ const Bar = (props) => {
       };
     }
 
-    if (isUserTariffLimit && barVisible.tariffLimitPerUser) {
+    if (isUserTariffLimit && barVisible.usersTariffLimit) {
       return {
-        type: QuotaBarTypes.TariffLimitPerUser,
+        type: QuotaBarTypes.UsersTariffLimit,
         maxValue: maxCountManagersByQuota,
         currentValue: addedManagersCount,
       };
     }
 
-    if (
-      showAlmostReachedUserTariffLimit &&
-      barVisible.almostTariffLimitPerUser
-    ) {
+    if (isUserTariffAlmostLimit && barVisible.usersTariff) {
       return {
-        type: QuotaBarTypes.AlmostTariffLimitPerUser,
+        type: QuotaBarTypes.UsersTariff,
         maxValue: maxCountManagersByQuota,
         currentValue: addedManagersCount,
       };
@@ -431,7 +424,7 @@ export default inject(
 
       showRoomQuotaBar,
       showStorageQuotaBar,
-      showAlmostReachedUserTariffLimit,
+      isUserTariffAlmostLimit,
       showUserPersonalQuotaBar,
       tenantCustomQuota,
       showTenantCustomQuotaBar,
@@ -461,7 +454,7 @@ export default inject(
 
       showRoomQuotaBar,
       showStorageQuotaBar,
-      showAlmostReachedUserTariffLimit,
+      isUserTariffAlmostLimit,
 
       currentColorScheme,
       setMainBarVisible,

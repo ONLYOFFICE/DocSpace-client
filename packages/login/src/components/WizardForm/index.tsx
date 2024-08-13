@@ -32,7 +32,10 @@ import { useTranslation } from "react-i18next";
 import {
   convertLanguage,
   createPasswordHash,
+  getSelectZone,
+  getUserTimezone,
   mapCulturesToArray,
+  mapTimezonesToArray,
 } from "@docspace/shared/utils/common";
 import { Text } from "@docspace/shared/components/text";
 import { FieldContainer } from "@docspace/shared/components/field-container";
@@ -66,7 +69,6 @@ import { Nullable } from "@docspace/shared/types";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
 
 import { TCulturesOption, TTimeZoneOption, WizardFormProps } from "@/types";
-import { getSelectZone, getUserTimezone, mapTimezonesToArray } from "@/utils";
 import {
   DEFAULT_SELECT_LANGUAGE,
   DEFAULT_SELECT_TIMEZONE,

@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TCulturesOption, TTimeZoneOption } from "@/types";
+import { TTimeZoneOption } from "@/types";
+import { TOption } from "@docspace/shared/components/combobox";
 import EnUSReactSvgUrl from "PUBLIC_DIR/images/flags/en-US.react.svg?url";
 
 export const DEFAULT_EMAIL_TEXT =
@@ -39,7 +40,7 @@ export const DEFAULT_SELECT_TIMEZONE: TTimeZoneOption = {
   label: "(UTC) Coordinated Universal Time",
 };
 
-export const DEFAULT_SELECT_LANGUAGE: TCulturesOption = {
+export const DEFAULT_SELECT_LANGUAGE: TOption = {
   key: "en-US",
   label: "English (United States)",
   icon: EnUSReactSvgUrl,

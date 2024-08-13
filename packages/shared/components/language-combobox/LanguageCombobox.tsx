@@ -23,8 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React from "react";
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 import { mapCulturesToArray } from "../../utils/common";
@@ -58,7 +57,7 @@ const LanguageCombobox = (props: ComboboxProps) => {
     onSelectLanguage(culture);
   };
 
-  if (!currentCulture) return <></>;
+  if (!currentCulture) return null;
 
   return (
     <StyledComboBox
@@ -75,7 +74,7 @@ const LanguageCombobox = (props: ComboboxProps) => {
       dropDownMaxHeight={300}
       fillIcon={false}
       displaySelectedOption
-      manualWidth="41px"
+      manualWidth="42px"
       noBorder={false}
       type="onlyIcon"
       optionStyle={{ padding: "0 8px" }}

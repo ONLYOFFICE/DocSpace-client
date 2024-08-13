@@ -637,7 +637,7 @@ class GroupsStore {
   updateGroup = async (
     groupId: string,
     groupName: string,
-    groupManagerId: string,
+    groupManagerId: string | undefined,
     membersToAdd: string[],
     membersToRemove: string[],
   ) => {
@@ -671,7 +671,7 @@ class GroupsStore {
       }
 
       if (infoPanelSelection?.id === res.id) {
-        setInfoPanelSelection({ ...infoPanelSelection, ...res });
+        setInfoPanelSelection(res);
         setInfoPanelSelectedGroup(res);
       }
     } catch (err: any) {

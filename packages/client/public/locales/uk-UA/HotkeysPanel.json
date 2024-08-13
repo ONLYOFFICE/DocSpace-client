@@ -30,6 +30,7 @@
   "HotkeysPlayPause": "Відтворити/Призупинити",
   "HotkeysRedoLastUndoneAction": "Повторити останню скасовану дію",
   "HotkeysRemove": "Видалити вибрані елементи",
+  "HotkeysRenameSelected": "Перейменувати вибраний елемент",
   "HotkeysSelectAll": "Вибрати всі видимі папки та файли",
   "HotkeysSelectDown": "Вибрати наступний елемент унизу",
   "HotkeysSelection": "Вибір елементів",

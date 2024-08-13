@@ -3,7 +3,7 @@
   "LdapAdvancedSettings": "Impostazioni avanzate",
   "LdapAdvancedSettingsTooltip": "Scegli gli attributi utente che desideri sincronizzare con il tuo server LDAP.",
   "LdapAttributeMapping": "Mappatura degli attributi",
-  "LdapAuthenticationTooltip": " Abilita questa opzione se l'utente Windows corrente non dispone dei diritti di lettura dal server LDAP/Active Directory e immetti le credenziali di un altro utente con i diritti di lettura.",
+  "LdapAuthenticationTooltip": " Abilita questa opzione se l'utente Windows corrente non dispone dei diritti di lettura dal server LDAP/Active Directory e immetti le credenziali di un altro utente con i diritti di lettura.",
   "LdapAutoSyncToggle": "Sincronizzazione automatica",
   "LdapAutoSyncToggleDescription": "La sincronizzazione consentirà di caricare tutti i dati dal portale e aggiornare i nuovi dati dopo aver modificato le impostazioni. Sincronizza ogni volta che hai nuovi dati sugli utenti nel portale.",
   "LdapAvatar": "Foto del profilo",
@@ -66,7 +66,6 @@
   "LdapUserDNTooltip": "Inserisci il nome distinto nella directory contenente gli utenti che desideri aggiungere.",
   "LdapUserFilter": "Filtro utente",
   "LdapUserFilterTooltip": "Utilizza il filtro di ricerca LDAP per selezionare gli utenti che devono essere importati.",
-  "LdapUserQuotaTooltip": "Per impostare una quota di archiviazione per questo utente, inserisci un valore intero per questo attributo nella directory LDAP. Verrà visualizzato il valore della quota in byte. Questo attributo verrà applicato solo durante la prima configurazione e potrà essere modificato manualmente nella sezione Account.",
   "LdapUsersType": "Tipo di utenti",
   "LdapUsersTypeInfo": "Gli utenti possono accedere solo alle stanze cui sono stati invitati dagli amministratori e non possono creare stanze, cartelle o file propri. Di seguito seleziona un altro tipo  per fornire più autorizzazioni. Altrimenti puoi modificare manualmente la tipologia nella sezione Account.",
   "LdapUserTypeTooltip": "Tutti gli utenti verranno aggiunti a {{productName}} con il tipo selezionato."

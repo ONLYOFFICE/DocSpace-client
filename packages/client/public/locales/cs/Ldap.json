@@ -66,7 +66,6 @@
   "LdapUserDNTooltip": "Zadejte rozlišující název adresáře obsahujícího uživatele, které chcete přidat.",
   "LdapUserFilter": "Uživatelský filtr",
   "LdapUserFilterTooltip": "Pomocí vyhledávacího filtru LDAP vyberte uživatele, kteří musí být importováni.",
-  "LdapUserQuotaTooltip": "Chcete-li pro tohoto uživatele nastavit kvótu úložiště, zadejte pro tento atribut v adresáři LDAP celočíselnou hodnotu. Zobrazí se hodnota kvóty v bytech. Tento atribut se použije pouze při prvním nastavení a lze jej ručně změnit v části Účty.",
   "LdapUsersType": "Typ uživatele",
   "LdapUsersTypeInfo": "Uživatelé mají přístup pouze do místností, do kterých je pozvali správci, a nemohou vytvářet vlastní místnosti, složky ani soubory. Chcete-li poskytnout další oprávnění, vyberte níže jiný typ. Jinak můžete typ změnit ručně v části Účty.",
   "LdapUserTypeTooltip": "Všichni uživatelé budou přidáni do {{productName}} s vybraným typem."

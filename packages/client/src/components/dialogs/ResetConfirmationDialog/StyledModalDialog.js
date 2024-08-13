@@ -24,51 +24,41 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { GroupParams } from "../types";
-import GroupNameParam from "./GroupNameParam";
-import { Dispatch, ChangeEvent } from "react";
-import HeadOfGroup from "./HeadOfGroupParam";
-import MembersParam from "./MembersParam";
+import styled from "styled-components";
 
-interface CreateGroupDialogBodyProps {
-  groupParams: GroupParams;
-  setGroupParams: Dispatch<React.SetStateAction<GroupParams>>;
-  onClose: () => void;
-}
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { mobile } from "@docspace/shared/utils";
 
-const CreateGroupDialogBody = ({
-  groupParams,
-  setGroupParams,
-  onClose,
-}: CreateGroupDialogBodyProps) => {
-  const onChangeGroupName = (e: ChangeEvent<HTMLInputElement>) =>
-    setGroupParams({ ...groupParams, groupName: e.target.value });
+const StyledModalDialog = styled(ModalDialog)`
+  .heading {
+    font-size: 21px;
+  }
 
-  const setGroupManager = (groupManager: object) =>
-    setGroupParams({ ...groupParams, groupManager });
+  .generate {
+    font-weight: 600;
+  }
 
-  const setGroupMembers = (groupMembers: object[]) =>
-    setGroupParams({ ...groupParams, groupMembers });
+  .text-area {
+    width: 488px !important;
+    height: 72px !important;
+    margin-top: 4px;
 
-  return (
-    <>
-      <GroupNameParam
-        groupName={groupParams.groupName}
-        onChangeGroupName={onChangeGroupName}
-      />
-      <HeadOfGroup
-        groupManager={groupParams.groupManager}
-        setGroupManager={setGroupManager}
-        onClose={onClose}
-      />
-      <MembersParam
-        groupManager={groupParams.groupManager}
-        groupMembers={groupParams.groupMembers}
-        setGroupMembers={setGroupMembers}
-        onClose={onClose}
-      />
-    </>
-  );
-};
+    &-label {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
 
-export default CreateGroupDialogBody;
+    @media ${mobile} {
+      width: 100% !important;
+    }
+  }
+  .text-area-label {
+    margin-top: 16px;
+  }
+
+  .modal-combo {
+    margin: 16px 0 0 0;
+  }
+`;
+
+export default StyledModalDialog;

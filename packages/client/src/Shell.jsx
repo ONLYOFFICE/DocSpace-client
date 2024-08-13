@@ -88,6 +88,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     version,
     pagesWithoutNavMenu,
     isFrame,
+    barTypeInFrame,
   } = rest;
 
   const theme = useTheme();
@@ -457,7 +458,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       <DialogsWrapper t={t} />
 
       <Main isDesktop={isDesktop}>
-        {!isFrame && <MainBar />}
+        {barTypeInFrame !== "none" && <MainBar />}
         <div className="main-container">
           <Outlet />
         </div>
@@ -565,6 +566,7 @@ const ShellWrapper = inject(
       version,
       pagesWithoutNavMenu,
       isFrame,
+      barTypeInFrame: frameConfig?.showHeaderBanner,
     };
   },
 )(observer(Shell));

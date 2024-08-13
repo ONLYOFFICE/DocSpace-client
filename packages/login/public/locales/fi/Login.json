@@ -5,6 +5,7 @@
   "ExpiredCode": "Tämä koodi ei ole enää voimassa. Pyydä uutta koodia ja yritä uudelleen.",
   "ForgotPassword": "Unohditko salasanasi?",
   "InvalidCode": "Tämä koodi ei kelpaa. Yritä uudelleen.",
+  "LDAPUsernamePlaceholder": "{{ldap_domain}}:n käyttäjänimi",
   "MessageAuthorize": "Kirjaudu sisään jatkaaksesi",
   "MessageEmailConfirmed": "Sähköpostisi aktivointi onnistui.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Kirjoita rekisteröinnissä käyttämäsi sähköpostiosoite. Salasanan palautusohjeet lähetetään siihen.",
@@ -19,5 +20,8 @@
   "RegisterTitle": "Rekisteröintipyyntö",
   "RegistrationEmailWatermark": "sähköposti",
   "RememberHelper": "Istunnon oletuskesto on 20 minuuttia. Valitse tämä vaihtoehto, jos haluat asettaa sen 1 vuodeksi. Voit asettaa oman arvon Asetuksissa.",
-  "ResendCode": "Lähetä koodi uudelleen"
+  "ResendCode": "Lähetä koodi uudelleen",
+  "SignInLDAP": "Kirjaudu sisään: {{ldap_domain}}",
+  "SignInLdapHelper": "Käytä yrityksen verkkotunnuksen tunnistetietoja",
+  "UserIsAlreadyRegistered": "Käyttäjä <1>{{email}}</1> on jo rekisteröity {{productName}}:een, syötä salasanasi tai palaa jatkaaksesi toisella sähköpostilla."
 }

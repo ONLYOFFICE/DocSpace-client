@@ -663,7 +663,7 @@ const Dark: TTheme = {
 
   input: {
     color: white,
-    disableColor: grayDarkStrong,
+    disableColor: grayDarkText,
 
     backgroundColor: black,
     disableBackgroundColor: grayDarkStrong,

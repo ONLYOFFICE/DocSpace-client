@@ -28,10 +28,13 @@ import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 import { GreetingContainer } from "@/components/GreetingContainer";
 import PasswordChangeForm from "@/components/PasswordChangeForm";
-import { getSettings } from "@/utils/actions";
+import { getPortalPasswordSettings, getSettings } from "@/utils/actions";
 
 async function Page() {
-  const settings = await getSettings();
+  const [settings, passwordSettings] = await Promise.all([
+    getSettings(),
+    getPortalPasswordSettings(),
+  ]);
 
   return (
     <div className="content-center">
@@ -39,7 +42,10 @@ async function Page() {
         <>
           <GreetingContainer greetingSettings={settings?.greetingSettings} />
           <FormWrapper id="password-change-form">
-            <PasswordChangeForm passwordHash={settings.passwordHash} />
+            <PasswordChangeForm
+              passwordHash={settings.passwordHash}
+              passwordSettings={passwordSettings}
+            />
           </FormWrapper>
         </>
       )}

@@ -26,7 +26,7 @@
 
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
-import { getSettings } from "@/utils/actions";
+import { getPortalPasswordSettings, getSettings } from "@/utils/actions";
 import ActivateUserForm from "@/components/ActivateUserForm";
 import { GreetingCreateUserContainer } from "@/components/GreetingContainer";
 
@@ -37,7 +37,10 @@ type ActivationProps = {
 async function Page({ searchParams }: ActivationProps) {
   const type = searchParams.type;
 
-  const settings = await getSettings();
+  const [settings, passwordSettings] = await Promise.all([
+    getSettings(),
+    getPortalPasswordSettings(),
+  ]);
 
   return (
     <div className="content-top">
@@ -45,7 +48,10 @@ async function Page({ searchParams }: ActivationProps) {
         <>
           <GreetingCreateUserContainer type={type} />
           <FormWrapper id="activation-form">
-            <ActivateUserForm passwordHash={settings.passwordHash} />
+            <ActivateUserForm
+              passwordHash={settings.passwordHash}
+              passwordSettings={passwordSettings}
+            />
           </FormWrapper>
         </>
       )}

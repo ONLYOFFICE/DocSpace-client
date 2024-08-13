@@ -31,7 +31,13 @@ import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import CreateUserForm from "@/components/CreateUserForm";
 import { GreetingCreateUserContainer } from "@/components/GreetingContainer";
 import { getStringFromSearchParams } from "@/utils";
-import { getSettings, getUserFromConfirm } from "@/utils/actions";
+import {
+  getCapabilities,
+  getPortalPasswordSettings,
+  getSettings,
+  getThirdPartyProviders,
+  getUserFromConfirm,
+} from "@/utils/actions";
 import LanguageComboboxWrapper from "@/components/LanguageCombobox";
 
 type LinkInviteProps = {
@@ -47,10 +53,14 @@ async function Page({ searchParams, params }: LinkInviteProps) {
   const uid = searchParams.uid;
   const confirmKey = getStringFromSearchParams(searchParams);
 
-  const [settings, user] = await Promise.all([
-    getSettings(),
-    getUserFromConfirm(uid, confirmKey),
-  ]);
+  const [settings, user, thirdParty, capabilities, passwordSettings] =
+    await Promise.all([
+      getSettings(),
+      getUserFromConfirm(uid, confirmKey),
+      getThirdPartyProviders(),
+      getCapabilities(),
+      getPortalPasswordSettings(),
+    ]);
 
   return (
     <>
@@ -69,6 +79,9 @@ async function Page({ searchParams, params }: LinkInviteProps) {
                 passwordHash={settings.passwordHash}
                 firstName={user?.firstName}
                 lastName={user?.lastName}
+                passwordSettings={passwordSettings}
+                capabilities={capabilities}
+                thirdPartyProviders={thirdParty}
               />
             </FormWrapper>
           </>

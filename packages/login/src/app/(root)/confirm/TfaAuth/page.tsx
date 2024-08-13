@@ -39,8 +39,10 @@ async function Page({ searchParams }: TfaAuthProps) {
   const confirmKey = getStringFromSearchParams(searchParams);
   const uid = searchParams.uid;
 
-  const settings = await getSettings();
-  const user = await getUserFromConfirm(uid, confirmKey);
+  const [settings, user] = await Promise.all([
+    getSettings(),
+    getUserFromConfirm(uid, confirmKey),
+  ]);
 
   return (
     <div className="content-center">

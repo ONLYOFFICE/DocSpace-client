@@ -48,9 +48,11 @@ async function Page({ searchParams }: TfaActivationProps) {
   const confirmKey = getStringFromSearchParams(searchParams);
   const uid = searchParams.uid;
 
-  const res = await getTfaSecretKeyAndQR(confirmKey);
-  const settings = await getSettings();
-  const user = await getUserFromConfirm(uid, confirmKey);
+  const [res, settings, user] = await Promise.all([
+    getTfaSecretKeyAndQR(confirmKey),
+    getSettings(),
+    getUserFromConfirm(uid, confirmKey),
+  ]);
 
   return (
     <div className="content-center">

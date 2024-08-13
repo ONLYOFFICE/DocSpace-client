@@ -158,13 +158,19 @@ const SubMenu = (props: {
       const widthMaxContent = Math.max(...optionsWidth);
 
       if (root) subListWidth = subListWidth || widthMaxContent;
-      else subListWidth = widthMaxContent;
+      else if (!subMenuRef?.current?.style.width)
+        subListWidth = Math.max(subListWidth, widthMaxContent);
     }
 
     if (subMenuRef.current) {
       let subMenuRefTop = null;
 
-      if (!isMobile()) subMenuRef.current.style.width = `${subListWidth}px`;
+      if (!isMobile()) {
+        if (root) subMenuRef.current.style.width = `${subListWidth}px`;
+        else if (!subMenuRef?.current?.style.width) {
+          subMenuRef.current.style.width = `${subListWidth}px`;
+        }
+      }
 
       if (!isMobile() && !root) {
         const firstList = parentItem?.firstChild as HTMLElement;
@@ -218,6 +224,8 @@ const SubMenu = (props: {
         } else {
           subMenuRef.current.style.left = `${itemOuterWidth}px`;
 
+          if (!root) subMenuRef.current.style.marginLeft = `4px`;
+
           if (!root && subListWidth > freeSpaceRight) {
             // If the menu extends beyond the screen
             const newWidth = freeSpaceRight - 3 * submenuListMargin;
@@ -235,6 +243,8 @@ const SubMenu = (props: {
       if (!isRtl) {
         if (notEnoughWidthRight && freeSpaceLeft > freeSpaceRight) {
           subMenuRef.current.style.left = `${-1 * subListWidth}px`;
+
+          if (!root) subMenuRef.current.style.marginLeft = `-4px`;
 
           if (
             notEnoughWidthRight &&

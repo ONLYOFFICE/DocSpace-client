@@ -77,10 +77,10 @@ async function Page({
   const isRegisterContainerVisible =
     typeof settings === "string" ? undefined : settings?.enabledJoin;
 
-  const culture =
-    cookies().get("asc_language")?.value ?? typeof settings === "string"
-      ? undefined
-      : settings?.culture;
+  const settingsCulture =
+    typeof settings === "string" ? undefined : settings?.culture;
+
+  const culture = cookies().get("asc_language")?.value ?? settingsCulture;
 
   return (
     <>

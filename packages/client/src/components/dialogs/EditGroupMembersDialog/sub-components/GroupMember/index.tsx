@@ -170,7 +170,7 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
               size="content"
               modernView
               title={t("Common:Role")}
-              manualWidth={"fit-content"}
+              manualWidth="auto"
               isMobileView={isMobileOnly}
               directionY="both"
               displaySelectedOption

@@ -218,7 +218,7 @@ const QuotaForm = ({
           size="content"
           onSelect={onSelectComboBox}
           showDisabledItems
-          manualWidth={"fit-content"}
+          manualWidth="auto"
           directionY="both"
         />
       </div>

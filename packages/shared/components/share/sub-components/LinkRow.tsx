@@ -153,7 +153,7 @@ const LinkRow = ({
               modernView
               type="onlyIcon"
               isDisabled={isExpiredLink || isLoaded}
-              manualWidth="fit-content"
+              manualWidth="auto"
               withBackdrop={false}
             />
           </div>

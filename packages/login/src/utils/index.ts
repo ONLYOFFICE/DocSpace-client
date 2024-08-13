@@ -28,10 +28,6 @@ import { thirdPartyLogin } from "@docspace/shared/utils/loginUtils";
 import { Nullable, TTranslation } from "@docspace/shared/types";
 
 import { MessageKey, OAuth2ErrorKey } from "./enums";
-import { TTimeZone } from "@docspace/shared/api/settings/types";
-import { TTimeZoneOption } from "@/types";
-
-import { findWindows } from "windows-iana";
 
 export async function oAuthLogin(profile: string) {
   let isSuccess = false;
@@ -189,38 +185,6 @@ export const getConfirmDataFromInvitation = (
   if (!queryParams || !queryParams.linkData) return {};
 
   return queryParams.linkData;
-};
-
-export const mapTimezonesToArray = (
-  timezones: TTimeZone[],
-): TTimeZoneOption[] => {
-  return timezones.map((timezone) => {
-    return { key: timezone.id, label: timezone.displayName };
-  });
-};
-
-export const getUserTimezone = (): string => {
-  return Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
-};
-
-export const getSelectZone = (
-  zones: TTimeZoneOption[],
-  userTimezone: string,
-) => {
-  const defaultTimezone = "UTC";
-  const isWindowsZones = zones[0].key === "Dateline Standard Time"; //TODO: get from server
-
-  if (isWindowsZones) {
-    const windowsZoneKey = findWindows(userTimezone);
-    return (
-      zones.filter((zone) => zone.key === windowsZoneKey[0]) ||
-      zones.filter((zone) => zone.key === defaultTimezone)
-    );
-  }
-  return (
-    zones.filter((zone) => zone.key === userTimezone) ||
-    zones.filter((zone) => zone.key === defaultTimezone)
-  );
 };
 
 export const getStringFromSearchParams = (searchParams: {

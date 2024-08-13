@@ -276,12 +276,12 @@ class CurrentQuotasStore {
       this.addedManagersCount > 1 &&
       this.maxCountManagersByQuota - this.addedManagersCount <=
         COUNT_FOR_SHOWING_BAR &&
-      this.maxCountManagersByQuota >= this.addedManagersCount
+      this.maxCountManagersByQuota > this.addedManagersCount
     );
   }
 
-  get showReachedUserTariffLimit() {
-    return null;
+  get isUserTariffLimit() {
+    return this.isPaidUserLimit;
   }
 
   get isPaidUserLimit() {

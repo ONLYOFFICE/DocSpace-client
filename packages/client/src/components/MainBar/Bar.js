@@ -78,6 +78,7 @@ const Bar = (props) => {
 
     tenantCustomQuota,
     showTenantCustomQuotaBar,
+    isUserTariffLimit,
   } = props;
 
   const navigate = useNavigate();
@@ -87,6 +88,7 @@ const Bar = (props) => {
     storageQuota: false,
     tenantCustomQuota: false,
     almostTariffLimitPerUser: false,
+    tariffLimitPerUser: false,
     storageAndUserQuota: false,
     storageAndRoomQuota: false,
     confirmEmail: false,
@@ -129,10 +131,13 @@ const Bar = (props) => {
           ),
         }));
       }
+
       if (isAdmin || isRoomAdmin) {
         setBarVisible((value) => ({
           ...value,
-
+          tariffLimitPerUser: !closed.includes(
+            QuotaBarTypes.TariffLimitPerUser,
+          ),
           almostTariffLimitPerUser: !closed.includes(
             QuotaBarTypes.AlmostTariffLimitPerUser,
           ),
@@ -158,6 +163,7 @@ const Bar = (props) => {
         storageQuota: isAdmin || isPowerUser || isRoomAdmin,
         tenantCustomQuota: isAdmin || isPowerUser || isRoomAdmin,
         almostTariffLimitPerUser: isAdmin | isRoomAdmin,
+        tariffLimitPerUser: isAdmin | isRoomAdmin,
         storageAndUserQuota: isAdmin,
         storageAndRoomQuota: isAdmin,
         confirmEmail: true,
@@ -249,6 +255,12 @@ const Bar = (props) => {
           almostTariffLimitPerUser: false,
         }));
         break;
+      case QuotaBarTypes.TariffLimitPerUser:
+        setBarVisible((value) => ({
+          ...value,
+          tariffLimitPerUser: false,
+        }));
+        break;
       case QuotaBarTypes.UserAndStorageQuota:
         setBarVisible((value) => ({ ...value, storageAndUserQuota: false }));
         break;
@@ -319,6 +331,14 @@ const Bar = (props) => {
         type: QuotaBarTypes.TenantCustomQuota,
         maxValue: getConvertedSize(t, tenantCustomQuota),
         currentValue: getConvertedSize(t, usedTotalStorageSizeCount),
+      };
+    }
+
+    if (isUserTariffLimit && barVisible.tariffLimitPerUser) {
+      return {
+        type: QuotaBarTypes.TariffLimitPerUser,
+        maxValue: maxCountManagersByQuota,
+        currentValue: addedManagersCount,
       };
     }
 
@@ -415,6 +435,7 @@ export default inject(
       showUserPersonalQuotaBar,
       tenantCustomQuota,
       showTenantCustomQuotaBar,
+      isUserTariffLimit,
     } = currentQuotaStore;
 
     const { currentColorScheme, setMainBarVisible } = settingsStore;
@@ -448,6 +469,7 @@ export default inject(
       showUserPersonalQuotaBar,
       tenantCustomQuota,
       showTenantCustomQuotaBar,
+      isUserTariffLimit,
     };
   },
 )(withTranslation(["Profile", "Common"])(observer(Bar)));

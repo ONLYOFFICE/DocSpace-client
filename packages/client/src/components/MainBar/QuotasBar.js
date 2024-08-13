@@ -116,7 +116,55 @@ const QuotasBar = ({
       />
     );
   };
+  const getUserTariffAlmostLimit = () => {
+    if (!isAdmin) return t("UserTariffAlmostReached");
 
+    return (
+      <Trans
+        t={t}
+        i18nKey="UserTariffAlmostReachedForAdmins"
+        values={{
+          productName: t("Common:ProductName"),
+        }}
+        components={{
+          1: (
+            <Link
+              fontSize="12px"
+              fontWeight="400"
+              color={currentColorScheme?.main?.accent}
+              className="error_description_link"
+              onClick={onClickAction}
+            />
+          ),
+        }}
+      />
+    );
+  };
+
+  const getUserTariffLimit = () => {
+    if (!isAdmin) return t("UserTariffReached");
+
+    return (
+      <Trans
+        t={t}
+        i18nKey="UserTariffReachedForAdmins"
+        values={{
+          productName: t("Common:ProductName"),
+        }}
+        components={{
+          1: (
+            <Link
+              fontSize="12px"
+              fontWeight="400"
+              color={currentColorScheme?.main?.accent}
+              className="error_description_link"
+              onClick={onClickAction}
+            />
+          ),
+        }}
+      />
+    );
+  };
   const getQuotaInfo = () => {
     switch (type) {
       case QuotaBarTypes.RoomQuota:
@@ -154,9 +202,13 @@ const QuotasBar = ({
       case QuotaBarTypes.AlmostTariffLimitPerUser:
         return {
           header: t("UserQuotaHeader", { currentValue, maxValue }),
-          description: getUserQuotaDescription(),
+          description: getUserTariffAlmostLimit(),
         };
-
+      case QuotaBarTypes.TariffLimitPerUser:
+        return {
+          header: t("UserTariffLimit", { currentValue, maxValue }),
+          description: getUserTariffLimit(),
+        };
       case QuotaBarTypes.UserAndStorageQuota:
         return {
           header: t("StorageAndUserHeader", { currentValue, maxValue }),

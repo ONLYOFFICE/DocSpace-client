@@ -99,6 +99,7 @@ export const QuotaBarTypes = Object.freeze({
   RoomQuota: "room-quota",
   StorageQuota: "storage-quota",
   AlmostTariffLimitPerUser: "user-quota",
+  TariffLimitPerUser: "user-quota-limit",
   UserAndStorageQuota: "user-storage-quota",
   RoomAndStorageQuota: "room-storage-quota",
   PersonalUserQuota: "personal-user-quota",

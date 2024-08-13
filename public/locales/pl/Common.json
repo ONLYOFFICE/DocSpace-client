@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "O",
   "AboutCompanyTitle": "O tym programie",
   "AccessDenied": "Odmowa dostępu",
@@ -55,6 +55,7 @@
   "CommonFiles": "Wspólne pliki",
   "CompanyName": "Nama Perusahaan",
   "Confirmation": "Potwierdzenie",
+  "ConfirmationText": "Wszystkie wprowadzone dane zostaną utracone. Czy na pewno chcesz kontynuować?",
   "ConflictResolveSelectAction": "Wybierz działanie:",
   "Connect": "Podłącz",
   "Content": "Treść",

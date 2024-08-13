@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "について",
   "AboutCompanyTitle": "本プログラムについて",
   "AccessDenied": "アクセス拒否",
@@ -55,6 +55,7 @@
   "CommonFiles": "共通のファイル",
   "CompanyName": "企業名",
   "Confirmation": "確認事項",
+  "ConfirmationText": "入力したデータはすべて失われます。このまま続けますか？",
   "ConflictResolveSelectAction": "アクションをお選びください：",
   "Connect": "接続",
   "Content": "コンテンツ",

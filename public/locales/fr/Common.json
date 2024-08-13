@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "À propos de",
   "AboutCompanyTitle": "À propos de ce programme",
   "AccessDenied": " Accès refusé",
@@ -55,6 +55,7 @@
   "CommonFiles": "Fichiers communs",
   "CompanyName": "Nom de l'entreprise",
   "Confirmation": "Confirmation",
+  "ConfirmationText": "Toutes les données que vous avez saisies seront perdues. Êtes-vous sûr de vouloir continuer ?",
   "ConflictResolveSelectAction": "Veuillez sélectionner une action :",
   "Connect": "Connexion",
   "Content": "Contenu",

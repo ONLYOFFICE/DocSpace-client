@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Hakkında",
   "AboutCompanyTitle": "Bu program hakkında",
   "AccessDenied": "Erişim engellendi",
@@ -55,6 +55,7 @@
   "CommonFiles": "Ortak dosyalar",
   "CompanyName": "Şirket ismi",
   "Confirmation": "Onay",
+  "ConfirmationText": "Girdiğiniz tüm veriler kaybolacak. Devam etmek istediğinize emin misiniz?",
   "ConflictResolveSelectAction": "Lütfen işlemi seçin:",
   "Connect": "Bağlan",
   "Content": "İçerik",

@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "O nás",
   "AboutCompanyTitle": "O tomto programu",
   "AccessDenied": "Přístup odepřen",
@@ -55,6 +55,7 @@
   "CommonFiles": "Společné soubory",
   "CompanyName": "Název společnosti",
   "Confirmation": "Potvrzení",
+  "ConfirmationText": "Všechna zadaná data budou ztracena. Určitě chcete pokračovat?",
   "ConflictResolveSelectAction": "Prosím, vyberte akci:",
   "Connect": "Připojit",
   "Content": "Obsah",

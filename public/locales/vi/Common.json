@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Giới thiệu",
   "AboutCompanyTitle": "Giới thiệu về chương trình này",
   "AccessDenied": "Truy cập bị từ chối",
@@ -55,6 +55,7 @@
   "CommonFiles": "Các tập tin chung",
   "CompanyName": "Tên công ty",
   "Confirmation": "Xác nhận",
+  "ConfirmationText": "Tất cả dữ liệu bạn đã nhập sẽ bị mất. Bạn có chắc chắn muốn tiếp tục không?",
   "ConflictResolveSelectAction": "Vui lòng chọn hành động:",
   "Connect": "Kết nối",
   "Content": "Nội dung",

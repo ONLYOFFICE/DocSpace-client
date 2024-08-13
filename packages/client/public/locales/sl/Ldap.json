@@ -66,7 +66,6 @@
   "LdapUserDNTooltip": "Vnesi enoznačno ime v imenik z uporabniki, ki jih želiš dodati.",
   "LdapUserFilter": "Uporabniški Filter",
   "LdapUserFilterTooltip": "Uporabi iskalni filter LDAP, da izbereš uporabnike, ki jih je potrebno uvoziti.",
-  "LdapUserQuotaTooltip": "Če želiš nastaviti kvoto shranjevanja za tega uporabnika, vnesi celoštevilsko vrednost za ta atribut v imenik LDAP. Prikazala bo vrednost kvote v bajtih. Ta atribut bo uporabljen samo med prvo nastavitvijo in ga je mogoče spremeniti ročno v razdelku Računi.",
   "LdapUsersType": "Uporabniški tip",
   "LdapUsersTypeInfo": "Uporabniki lahko dostopajo samo do sob, v katere jih povabijo skrbniki, in ne morejo ustvariti lastnih sob, map ali datotek. Spodaj izberi drug tip, da omogočiš več dovoljenj. V nasprotnem primeru lahko vrsto spremeniš ročno v razdelku Računi.",
   "LdapUserTypeTooltip": "Vsi uporabniki bodo dodani v {{productName}} z izbranim tipom."

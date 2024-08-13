@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "من نحن",
   "AboutCompanyTitle": "نبذة تعريفية عن البرنامج",
   "AccessDenied": "المحاولة مرفوضة",
@@ -55,6 +55,7 @@
   "CommonFiles": "الملفات المشتركة",
   "CompanyName": "اسم الشركة",
   "Confirmation": "تأكيد",
+  "ConfirmationText": "سيتم فقدان جميع البيانات التي أدخلتها. هل أنت متأكد أنك ترغب في المتابعة؟",
   "ConflictResolveSelectAction": "الرجاء تحديد الإجراء:",
   "Connect": "ربط",
   "Content": "المحتوى",

@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "关于",
   "AboutCompanyTitle": "关于本计划",
   "AccessDenied": "拒绝访问",
@@ -55,6 +55,7 @@
   "CommonFiles": "公共文件",
   "CompanyName": "企业名称",
   "Confirmation": "确认",
+  "ConfirmationText": "您所输入的所有数据都将丢失。确定要继续吗？",
   "ConflictResolveSelectAction": "请选择操作：",
   "Connect": "连接",
   "Content": "内容",

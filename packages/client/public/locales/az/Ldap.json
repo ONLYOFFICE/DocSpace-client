@@ -66,7 +66,6 @@
   "LdapUserDNTooltip": "Əlavə etmək istədiyiniz istifadəçilərin olduğu qovluğa seçilən adı daxil edin.",
   "LdapUserFilter": "İstifadəçi Filtri",
   "LdapUserFilterTooltip": "İdxal edilməli olan istifadəçiləri seçmək üçün LDAP axtarış filtrindən istifadə edin.",
-  "LdapUserQuotaTooltip": "Bu istifadəçiyə yaddaş kvotasını təyin etmək üçün LDAP qovluğuna bu xüsusiyyətə uyğun tam dəyər daxil edin. O, kvota dəyərini baytla göstərəcək. Bu funksiya yalnız ilkin quraşdırma zamanı həyata keçiriləcək və Hesablar bölməsində əl ilə dəyişdirilə bilər.",
   "LdapUsersType": "İstifadəçi növü",
   "LdapUsersTypeInfo": "İstifadəçilər yalnız administratorlar tərəfindən dəvət olunduqları otaqlara daxil ola bilər və öz otaqları, qovluqları və ya fayllarını yarada bilməzlər. Daha çox icazə təmin etmək üçün aşağıda başqa növ seçin. Əks halda, Hesablar bölməsində növü əl ilə dəyişə bilərsiniz.",
   "LdapUserTypeTooltip": "Bütün istifadəçilər seçilmiş növlə {{productName}} –a əlavə olunacaq."

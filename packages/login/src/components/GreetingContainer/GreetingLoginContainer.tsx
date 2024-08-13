@@ -43,11 +43,17 @@ import { getInvitationLinkData } from "@/utils";
 
 export const GreetingLoginContainer = ({
   greetingSettings,
+  culture,
 }: GreetingContainersProps) => {
   const { t } = useTranslation(["Login", "Wizard"]);
   const theme = useTheme();
 
-  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme.isBase);
+  const logoUrl = getLogoUrl(
+    WhiteLabelLogoType.LoginPage,
+    !theme.isBase,
+    false,
+    culture,
+  );
 
   const searchParams = useSearchParams();
   const pathname = usePathname();

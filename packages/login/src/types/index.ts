@@ -171,6 +171,7 @@ export interface ConfirmRouteProps {
 
 export type GreetingContainersProps = {
   greetingSettings?: string;
+  culture?: string;
   welcomeTitle?: string;
 };
 

@@ -80,6 +80,7 @@ import ImportAccountsStore from "./ImportAccountsStore";
 import PluginStore from "./PluginStore";
 import InfoPanelStore from "./InfoPanelStore";
 import CampaignsStore from "./CampaignsStore";
+import EditGroupStore from "./EditGroupStore";
 
 import OAuthStore from "./OAuthStore";
 
@@ -304,6 +305,8 @@ const storageManagement = new StorageManagement(
 
 const campaignsStore = new CampaignsStore(settingsStore, userStore);
 
+const editGroupStore = new EditGroupStore(peopleStore);
+
 const store = {
   authStore,
   userStore,
@@ -359,6 +362,7 @@ const store = {
   pluginStore,
   storageManagement,
   campaignsStore,
+  editGroupStore,
 };
 
 export default store;

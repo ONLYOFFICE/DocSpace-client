@@ -74,7 +74,7 @@ const LanguageCombobox = (props: ComboboxProps) => {
       dropDownMaxHeight={300}
       fillIcon={false}
       displaySelectedOption
-      manualWidth="41px"
+      manualWidth="42px"
       noBorder={false}
       type="onlyIcon"
       optionStyle={{ padding: "0 8px" }}

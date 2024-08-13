@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Относно",
   "AboutCompanyTitle": "За тази програма",
   "AccessDenied": "Достъпът отказан",
@@ -55,6 +55,7 @@
   "CommonFiles": "Общи файлове",
   "CompanyName": "Име на фирмата",
   "Confirmation": "Потвърждение",
+  "ConfirmationText": "Всички въведени от вас данни ще бъдат загубени. Сигурни ли сте, че искате да продължите?",
   "ConflictResolveSelectAction": "Моля, изберете действие:",
   "Connect": "Свържи",
   "Content": "Съдържание",

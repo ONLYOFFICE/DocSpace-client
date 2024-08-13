@@ -64,14 +64,21 @@ const StyledSimpleNav = styled.div`
 
 StyledSimpleNav.defaultProps = { theme: Base };
 
-interface SimpleNavProps {}
+interface SimpleNavProps {
+  culture?: string;
+}
 
-const SimpleNav = ({}: SimpleNavProps) => {
+const SimpleNav = ({ culture }: SimpleNavProps) => {
   const theme = useTheme();
 
   const isDark = !theme.isBase;
 
-  const logoUrl = getLogoUrl(WhiteLabelLogoType.LightSmall, isDark);
+  const logoUrl = getLogoUrl(
+    WhiteLabelLogoType.LightSmall,
+    isDark,
+    false,
+    culture,
+  );
 
   let isLanguageComboboxVisible = true;
 

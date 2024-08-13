@@ -30,7 +30,8 @@ import { getBgPattern } from "@docspace/shared/utils/common";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 import SimpleNav from "@/components/SimpleNav";
-import { getColorTheme } from "@/utils/actions";
+import { getColorTheme, getSettings } from "@/utils/actions";
+import { cookies } from "next/headers";
 import { ContentWrapper, FormWrapper } from "@/components/StyledLayout.styled";
 
 export default async function Layout({
@@ -38,13 +39,21 @@ export default async function Layout({
 }: {
   children: React.ReactNode;
 }) {
-  const colorTheme = await getColorTheme();
+  const [settings, colorTheme] = await Promise.all([
+    getSettings(),
+    getColorTheme(),
+  ]);
 
   const bgPattern = getBgPattern(colorTheme?.selected);
 
+  const objectSettings = typeof settings === "string" ? undefined : settings;
+
+  const culture =
+    cookies().get("asc_language")?.value ?? objectSettings?.culture;
+
   return (
     <div style={{ width: "100%", height: "100%" }}>
-      <SimpleNav />
+      <SimpleNav culture={culture} />
 
       <FormWrapper id="form-wrapper" bgPattern={bgPattern}>
         <div className="bg-cover" />

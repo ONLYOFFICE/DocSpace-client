@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "පිළිබඳව",
   "AboutCompanyTitle": "මෙම මෘදුකාංගය ගැන",
   "AccessDenied": "ප්‍රවේශය ප්‍රතික්‍ෂේපිතයි",
@@ -51,6 +51,7 @@
   "CommonFiles": "සාමාන්‍ය ගොනු",
   "CompanyName": "සමාගමේ නම",
   "Confirmation": "තහවුරු කිරීම",
+  "ConfirmationText": "ඔබ ඇතුල් කළ සියළුම දත්ත නැති වී යනු ඇත. ඔබට ඉදිරියට යාමට වුවමනා ද?",
   "ConflictResolveSelectAction": "ක්‍රියාමාර්ගය තෝරන්න:",
   "Connect": "සබඳින්න",
   "Content": "අන්තර්ගතය",

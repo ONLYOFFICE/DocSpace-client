@@ -208,6 +208,7 @@ const SelectFileStep = ({
             setIsFileError(true);
             setIsFileLoading(false);
             clearInterval(uploadInterval.current);
+            setShowErrorText(true);
             return;
           }
 

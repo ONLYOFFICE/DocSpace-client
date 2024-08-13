@@ -216,7 +216,7 @@ const OnlyofficeWorkspace = ({
     return clearCheckedAccounts;
   }, []);
 
-  if (isMobile || isMobileBreakpoint()) {
+  if (isMobileBreakpoint()) {
     return (
       <BreakpointWarning
         isMobileUnavailableOnly

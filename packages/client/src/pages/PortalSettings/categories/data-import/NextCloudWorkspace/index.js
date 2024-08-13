@@ -133,7 +133,7 @@ const NextcloudWorkspace = (props) => {
     return clearCheckedAccounts;
   }, []);
 
-  if (isMobile || isMobileBreakpoint())
+  if (isMobileBreakpoint())
     return (
       <BreakpointWarning
         isMobileUnavailableOnly

@@ -93,13 +93,14 @@ const QuotasBar = ({
     );
   };
   const getUserQuotaDescription = () => {
+    if (!isAdmin) return t("UserTariffAlmostReached");
+
     return (
       <Trans
         t={t}
-        i18nKey="UserQuotaDescription"
+        i18nKey="UserTariffAlmostReachedForAdmins"
         values={{
           productName: t("Common:ProductName"),
-          clickHere: t("ClickHere"),
         }}
         components={{
           1: (
@@ -115,6 +116,7 @@ const QuotasBar = ({
       />
     );
   };
+
   const getQuotaInfo = () => {
     switch (type) {
       case QuotaBarTypes.RoomQuota:

@@ -14,6 +14,5 @@
   "StorageQuotaHeader": "Объем дискового пространства скоро будет превышен: {{currentValue}} / {{maxValue}}",
   "StorageQuotaUserDescription": "Вы можете удалить ненужные файлы, чтобы освободить место на диске.",
   "TenantCustomQuotaDescription": "Удалить ненужные файлы или изменить квоту можно в <1>Настройках управления хранилищем</1>.",
-  "UserQuotaDescription": "<1>{{clickHere}}</1>, чтобы найти лучший тарифный план для {{productName}}.",
   "UserQuotaHeader": "Количество администраторов/опытных пользователей скоро будет превышено: {{currentValue}} / {{maxValue}}."
 }

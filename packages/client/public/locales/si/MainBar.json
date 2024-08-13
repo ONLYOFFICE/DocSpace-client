@@ -13,6 +13,5 @@
   "StorageQuotaExceeded": "ආචයන සලාකය ඉක්මවා ඇත",
   "StorageQuotaHeader": "ආචයනයේ ඉඩ ඉක්මවීමට ආසන්නයි: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "ඔබට <1>ආචයන කළමනාකරණ සැකසුම්</1> මගින් අනවශ්‍ය ගොනු ඉවත් කිරීමට හෝ සලාකය වෙනස් කිරීමට හැකිය.",
-  "UserQuotaDescription": "ඔබගේ {{productName}} සඳහා වඩාත් සුදුසු මිලකරණ සැලසුමක් සොයා ගැනීමට <1>{{clickHere}}</1>",
   "UserQuotaHeader": "පරිපාලකයින්/බලවත් පරිශ්‍රීලකයින් ගණන ඉක්මවීමට ආසන්නයි: {{currentValue}} / {{maxValue}}."
 }

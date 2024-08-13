@@ -14,6 +14,5 @@
   "StorageQuotaHeader": "ストレージのスペースは、もうすぐサイズ上限を超えます：{{currentValue}} / {{maxValue}}",
   "StorageQuotaUserDescription": "不要なファイルを削除して、ディスク領域を確保できます。",
   "TenantCustomQuotaDescription": "不要ファイルを削除するか、<1>ストレージ管理設定</1>で容量制限の変更ができます。",
-  "UserQuotaDescription": "お使いの{{productName}}に適した料金プランを選択するには、<1>{{clickHere}}</1>。",
   "UserQuotaHeader": "管理者/パワーユーザー数を超えそうです：{{currentValue}} / {{maxValue}}"
 }

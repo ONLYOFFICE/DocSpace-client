@@ -14,6 +14,5 @@
   "StorageQuotaHeader": "Veľkosť úložného priestoru bude čoskoro prekročená: {{currentValue}} / {{maxValue}}",
   "StorageQuotaUserDescription": "Nepotrebné súbory môžete odstrániť, aby ste uvoľnili miesto na disku.",
   "TenantCustomQuotaDescription": "Nepotrebné súbory môžete odstrániť alebo zmeniť kvótu v <1> Nastaveniach spravovania úložísk.</1>",
-  "UserQuotaDescription": "<1>{{clickHere}}</1> a nájdite najlepší cenový plán pre váš {{productName}}.",
   "UserQuotaHeader": "Maximálny počet administrátorov/pokročilých používateľov bude čoskoro prekročený: {{currentValue}} / {{maxValue}}."
 }

@@ -14,6 +14,5 @@
   "StorageQuotaHeader": "Cota spaţiului de stocare este pe punctul de a fi depăşită: {{currentValue}} / {{maxValue}}",
   "StorageQuotaUserDescription": "Puteți elimina fișiere inutile pentru a elibera spațiu de stocare.",
   "TenantCustomQuotaDescription": "Puteţi elimina fişierele inutile sau modifica cotă de stocare din secțiunea <1>Setările de gestionare a spațiului de stocare.</1>.",
-  "UserQuotaDescription": "<1>{{clickHere}}</1> pentru a găsi cea mai bună ofertă pentru spațiul dvs {{productName}}.",
   "UserQuotaHeader": "Numărul maxim de administratori/utilizatori avansați este pe punctul de a fi depăşit. {{currentValue}} / {{maxValue}}."
 }

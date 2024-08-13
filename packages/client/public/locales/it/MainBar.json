@@ -14,6 +14,5 @@
   "StorageQuotaHeader": "Lo spazio di archiviazione sta per essere esaurito: {{currentValue}} / {{maxValue}}",
   "StorageQuotaUserDescription": "Puoi rimuovere i file non necessari per liberare spazio sul disco.",
   "TenantCustomQuotaDescription": "Puoi rimuovere i file non necessari o modificare la quota nelle <1>mpostazioni di gestione dello spazio di archiviazione.</1>",
-  "UserQuotaDescription": "<1>{{clickHere}}</1> per trovare un piano tariffario migliore per il tuo {{productName}}.",
   "UserQuotaHeader": "Il numero di amministratori/utenti esperti sta per essere superato: {{currentValue}} / {{maxValue}}."
 }

@@ -14,6 +14,5 @@
   "StorageQuotaHeader": "存储空间数量即将超出限制：{{currentValue}}/{{maxValue}}",
   "StorageQuotaUserDescription": "您可以删除不必要的文件以释放磁盘空间。",
   "TenantCustomQuotaDescription": "您可以在<1>存储空间管理设置</1>中删除不必要的文件，或更改配额。",
-  "UserQuotaDescription": "<1>{{clickHere}}</1>为您的{{productName}}找到更好的定价计划。",
   "UserQuotaHeader": "管理员/高级用户的数量即将超过限制： {{currentValue}} / {{maxValue}}"
 }

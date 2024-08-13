@@ -14,6 +14,5 @@
   "StorageQuotaHeader": "Պահեստային տարածքի քանակը քիչ է մնում գերազանցվի՝ {{currentValue}} / {{maxValue}}",
   "StorageQuotaUserDescription": "Դուք կարող եք հեռացնել ավելորդ ֆայլերը՝ սկավառակի տարածքը ազատելու համար:",
   "TenantCustomQuotaDescription": "Դուք կարող եք հեռացնել ավելորդ ֆայլերը կամ փոխել սահմանաչափը <1>Պահպանման կառավարման կարգավորումներ:</1>",
-  "UserQuotaDescription": "<1>{{clickHere}}</1> ձեր {{productName}}-ի համար ավելի լավ գնային փաթեթ գտնելու համար:",
   "UserQuotaHeader": "Ադմինիստրատորների/հզոր օգտատերերի թիվը պատրաստվում է գերազանցել՝ {{currentValue}} / {{maxValue}}:"
 }

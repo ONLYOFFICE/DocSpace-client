@@ -120,13 +120,19 @@ const Bar = (props) => {
         setBarVisible((value) => ({
           ...value,
           roomQuota: !closed.includes(QuotaBarTypes.RoomQuota),
-          userQuota: !closed.includes(QuotaBarTypes.UserQuota),
+
           storageAndRoomQuota: !closed.includes(
             QuotaBarTypes.UserAndStorageQuota,
           ),
           storageAndUserQuota: !closed.includes(
             QuotaBarTypes.RoomAndStorageQuota,
           ),
+        }));
+      }
+      if (isAdmin || isRoomAdmin) {
+        setBarVisible((value) => ({
+          ...value,
+          userQuota: !closed.includes(QuotaBarTypes.UserQuota),
         }));
       }
       if (isAdmin || isPowerUser || isRoomAdmin) {
@@ -148,7 +154,7 @@ const Bar = (props) => {
         roomQuota: isAdmin,
         storageQuota: isAdmin || isPowerUser || isRoomAdmin,
         tenantCustomQuota: isAdmin || isPowerUser || isRoomAdmin,
-        userQuota: isAdmin,
+        userQuota: isAdmin | isRoomAdmin,
         storageAndUserQuota: isAdmin,
         storageAndRoomQuota: isAdmin,
         confirmEmail: true,

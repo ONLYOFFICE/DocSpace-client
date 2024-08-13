@@ -14,6 +14,5 @@
   "StorageQuotaHeader": "저장 공간 용량이 곧 초과될 예정입니다: {{currentValue}} / {{maxValue}}",
   "StorageQuotaUserDescription": "불필요한 파일을 제거하여 디스크 공간을 확보할 수 있습니다.",
   "TenantCustomQuotaDescription": "<1>스토리지 관리 설정</1>에서 할당량을 변경하거나 불필요한 파일을 삭제하세요.",
-  "UserQuotaDescription": "<1>{{clickHere}}</1>하여{{productName}}에 대한 더 나은 요금제를 찾으세요.",
   "UserQuotaHeader": "곧 관리자/고급 사용자 수 한도를 초과하게 됩니다: {{currentValue}} / {{maxValue}}."
 }

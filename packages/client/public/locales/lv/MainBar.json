@@ -14,6 +14,5 @@
   "StorageQuotaHeader": "Tūlīt tiks pārsniegts krātuves vietas apjoms: {{currentValue}} / {{maxValue}}",
   "StorageQuotaUserDescription": "Jūs varat noņemt nevajadzīgos failus, lai atbrīvotu vietu diskā.",
   "TenantCustomQuotaDescription": "Jūs varat noņemt nevajadzīgos failus vai mainīt kvotu <1>Krātuves pārvaldības iestatījumos.</1>",
-  "UserQuotaDescription": "<1>{{clickHere}}</1>, lai atrastu labāku cenu plānu savam {{productName}}.",
   "UserQuotaHeader": "Tūlīt tiks pārsniegts administratoru/prasmīgo lietotāju skaits:{{currentValue}}/{{maxValue}}."
 }

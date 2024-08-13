@@ -86,7 +86,7 @@ const Bar = (props) => {
     roomQuota: false,
     storageQuota: false,
     tenantCustomQuota: false,
-    userQuota: false,
+    almostTariffLimitPerUser: false,
     storageAndUserQuota: false,
     storageAndRoomQuota: false,
     confirmEmail: false,
@@ -132,7 +132,10 @@ const Bar = (props) => {
       if (isAdmin || isRoomAdmin) {
         setBarVisible((value) => ({
           ...value,
-          userQuota: !closed.includes(QuotaBarTypes.UserQuota),
+
+          almostTariffLimitPerUser: !closed.includes(
+            QuotaBarTypes.AlmostTariffLimitPerUser,
+          ),
         }));
       }
       if (isAdmin || isPowerUser || isRoomAdmin) {
@@ -154,7 +157,7 @@ const Bar = (props) => {
         roomQuota: isAdmin,
         storageQuota: isAdmin || isPowerUser || isRoomAdmin,
         tenantCustomQuota: isAdmin || isPowerUser || isRoomAdmin,
-        userQuota: isAdmin | isRoomAdmin,
+        almostTariffLimitPerUser: isAdmin | isRoomAdmin,
         storageAndUserQuota: isAdmin,
         storageAndRoomQuota: isAdmin,
         confirmEmail: true,
@@ -240,8 +243,11 @@ const Bar = (props) => {
       case QuotaBarTypes.TenantCustomQuota:
         setBarVisible((value) => ({ ...value, tenantCustomQuota: false }));
         break;
-      case QuotaBarTypes.UserQuota:
-        setBarVisible((value) => ({ ...value, userQuota: false }));
+      case QuotaBarTypes.AlmostTariffLimitPerUser:
+        setBarVisible((value) => ({
+          ...value,
+          almostTariffLimitPerUser: false,
+        }));
         break;
       case QuotaBarTypes.UserAndStorageQuota:
         setBarVisible((value) => ({ ...value, storageAndUserQuota: false }));
@@ -316,9 +322,12 @@ const Bar = (props) => {
       };
     }
 
-    if (showAlmostReachedUserTariffLimit && barVisible.userQuota) {
+    if (
+      showAlmostReachedUserTariffLimit &&
+      barVisible.almostTariffLimitPerUser
+    ) {
       return {
-        type: QuotaBarTypes.UserQuota,
+        type: QuotaBarTypes.AlmostTariffLimitPerUser,
         maxValue: maxCountManagersByQuota,
         currentValue: addedManagersCount,
       };

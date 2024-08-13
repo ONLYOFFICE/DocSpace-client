@@ -280,6 +280,10 @@ class CurrentQuotasStore {
     );
   }
 
+  get showReachedUserTariffLimit() {
+    return null;
+  }
+
   get isPaidUserLimit() {
     return this.addedManagersCount >= this.maxCountManagersByQuota;
   }

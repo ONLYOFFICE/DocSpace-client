@@ -6,7 +6,6 @@
   "AttributeMatchingTooltip": "La corrispondenza degli attributi Single Sign-On con le voci della sezione 'Account'.",
   "Binding": "Vincolo:",
   "CertificateExist": "Il certificato con lo stesso tipo di azione già esiste",
-  "ConfirmationText": "Tutti i dati inseriti andranno persi. Sei sicuro di voler continuare?",
   "CustomEntryButton": "Didascalia del pulsante di accesso personalizzata",
   "CustomEntryTooltip": "Didascalia del pulsante utilizzato per effettuare l’accesso nello spazio con il servizio Single Sign-On",
   "DownloadMetadataXML": "Scarica SP file XML per metadati",

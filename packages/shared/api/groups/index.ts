@@ -38,7 +38,7 @@ import {
 
 export const createGroup = (
   groupName: string,
-  groupManager: string,
+  groupManager: string | undefined,
   members: string[],
 ) => {
   return request({
@@ -49,7 +49,7 @@ export const createGroup = (
       groupManager,
       members,
     },
-  });
+  }) as Promise<TGroup>;
 };
 
 // * Read
@@ -69,12 +69,16 @@ export const getGroups = (filter = Filter.getDefault()) => {
   });
 };
 
-export const getGroupById = (groupId: string, signal: AbortSignal) => {
+export const getGroupById = (
+  groupId: string,
+  includeMembers: boolean = false,
+  signal?: AbortSignal,
+) => {
   return request({
     method: "get",
-    url: `/group/${groupId}`,
+    url: `/group/${groupId}?includeMembers=${includeMembers}`,
     signal,
-  });
+  }) as Promise<TGroup>;
 };
 
 export const getGroupsByName = async (
@@ -123,7 +127,7 @@ export const getGroupMembersInRoom = (
 export const updateGroup = (
   groupId: string,
   groupName: string,
-  groupManager: string,
+  groupManager: string | undefined,
   membersToAdd: string[],
   membersToRemove: string[],
 ) => {

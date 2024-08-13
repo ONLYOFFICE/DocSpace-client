@@ -25,10 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { cookies, headers } from "next/headers";
-import { redirect } from "next/navigation";
 
 import { Toast } from "@docspace/shared/components/toast";
-import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { TenantStatus, ThemeKeys } from "@docspace/shared/enums";
 import { LANGUAGE, SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 

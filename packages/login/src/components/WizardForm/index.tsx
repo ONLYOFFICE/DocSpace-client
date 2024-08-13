@@ -48,7 +48,11 @@ import { FileInput } from "@docspace/shared/components/file-input";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { setLicense } from "@docspace/shared/api/settings";
-import { ComboBox, ComboBoxSize } from "@docspace/shared/components/combobox";
+import {
+  ComboBox,
+  ComboBoxSize,
+  TOption,
+} from "@docspace/shared/components/combobox";
 import BetaBadge from "@docspace/client/src/components/BetaBadgeWrapper";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
@@ -97,8 +101,8 @@ function WizardForm(props: WizardFormProps) {
   const [selectedLanguage, setSelectedLanguage] = useState<TCulturesOption>(
     DEFAULT_SELECT_LANGUAGE,
   );
-  const [cultures, setCultures] = useState<TCulturesOption[]>();
-  const [timezones, setTimezones] = useState<TTimeZoneOption[]>();
+  const [cultures, setCultures] = useState<TOption[]>();
+  const [timezones, setTimezones] = useState<TOption[]>();
 
   const [email, setEmail] = useState("");
   const [hasErrorEmail, setHasErrorEmail] = useState(false);
@@ -142,12 +146,23 @@ function WizardForm(props: WizardFormProps) {
     if (portalCultures) {
       const cultures = mapCulturesToArray(portalCultures, true, i18n);
       const select = cultures.filter((lang) => lang.key === convertedCulture);
-      setCultures(cultures);
+      setCultures(
+        cultures.map((culture) => ({
+          key: culture.key,
+          label: "label" in culture ? culture.label : "",
+          icon: culture.icon,
+        })),
+      );
 
       if (select.length === 0) {
         setSelectedLanguage(DEFAULT_SELECT_LANGUAGE);
       } else {
-        setSelectedLanguage(select[0]);
+        const culture = select[0];
+        setSelectedLanguage({
+          key: culture.key,
+          label: "label" in culture ? culture.label : "",
+          icon: culture.icon,
+        });
       }
     }
   }, [convertedCulture, i18n, portalCultures]);
@@ -175,12 +190,26 @@ function WizardForm(props: WizardFormProps) {
     refPassInput.current.onGeneratePassword(e);
   };
 
-  const onLanguageSelect = (lang: TCulturesOption) => {
-    setSelectedLanguage(lang);
+  const onLanguageSelect = (lang: TOption) => {
+    const cultures = mapCulturesToArray(portalCultures!, true, i18n);
+    const select = cultures.filter((culture) => culture.key === lang.key);
+    if (select.length === 0) {
+      setSelectedLanguage(DEFAULT_SELECT_LANGUAGE);
+    } else {
+      const culture = select[0];
+      setSelectedLanguage({
+        key: culture.key,
+        label: "label" in culture ? culture.label : "",
+        icon: culture.icon,
+      });
+    }
   };
 
-  const onTimezoneSelect = (timezone: TTimeZoneOption) => {
-    setSelectedTimezone(timezone);
+  const onTimezoneSelect = (timezone: TOption) => {
+    setSelectedTimezone({
+      key: timezone.key,
+      label: timezone.label ?? "",
+    });
   };
 
   const onLicenseFileHandler = (file: File | File[]) => {
@@ -259,7 +288,6 @@ function WizardForm(props: WizardFormProps) {
       });
 
       window.location.replace("/");
-      //setWizardComplete();
     } catch (error) {
       setError(error);
       setIsCreated(false);
@@ -382,7 +410,7 @@ function WizardForm(props: WizardFormProps) {
             withoutPadding
             directionY="both"
             options={cultures || []}
-            selectedOption={selectedLanguage}
+            selectedOption={selectedLanguage as TOption}
             onSelect={onLanguageSelect}
             isDisabled={isCreated}
             scaled={isMobileView}

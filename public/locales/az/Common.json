@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Haqqında",
   "AboutCompanyTitle": "Proqram haqqında",
   "AccessDenied": "Giriş qadağandır",
@@ -55,6 +55,7 @@
   "CommonFiles": "Ümumi fayllar",
   "CompanyName": "Şirkət adı",
   "Confirmation": "Təsdiqləmə",
+  "ConfirmationText": "Daxil etdiyiniz bütün məlumatlar itiriləcək. Davam etmək istədiyinizə əminsiniz?",
   "ConflictResolveSelectAction": "Xahiş edirik əməliyyatı seçin:",
   "Connect": "Qoşulmaq",
   "Content": "Kontent",

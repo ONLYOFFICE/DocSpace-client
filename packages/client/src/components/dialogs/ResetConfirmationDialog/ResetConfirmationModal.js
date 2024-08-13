@@ -24,41 +24,51 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TUser } from "@docspace/shared/api/people/types";
-import { EditGroupParams, GroupMembers } from "../types";
+import React from "react";
+import { useTranslation } from "react-i18next";
 
-const compareMembers = (a: GroupMembers, b: GroupMembers): boolean => {
-  if (!a && !b) return true;
-  if (!Array.isArray(a) || !Array.isArray(b)) return false;
-  if (a.length !== b.length) return false;
+import { Button } from "@docspace/shared/components/button";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Text } from "@docspace/shared/components/text";
 
-  const sortCb = (first: TUser, second: TUser) =>
-    first.id < second.id ? -1 : 1;
-  const sortedA = [...a].sort(sortCb);
-  const sortedB = [...b].sort(sortCb);
+import StyledModalDialog from "./StyledModalDialog";
 
-  return !sortedA.some((el, i) => el.id !== sortedB[i].id);
+const ResetConfirmationModal = (props) => {
+  const { t } = useTranslation(["Common"]);
+  const { closeResetModal, confirmationResetModal, confirmReset } = props;
+
+  return (
+    <StyledModalDialog
+      contentHeight="100%"
+      displayType="modal"
+      onClose={closeResetModal}
+      visible={confirmationResetModal}
+    >
+      <ModalDialog.Header>{t("Common:Confirmation")}</ModalDialog.Header>
+
+      <ModalDialog.Body>
+        <Text noSelect>{t("Common:ConfirmationText")}</Text>
+      </ModalDialog.Body>
+
+      <ModalDialog.Footer>
+        <Button
+          id="ok-button"
+          label={t("Common:OKButton")}
+          onClick={confirmReset}
+          primary
+          scale
+          size="normal"
+        />
+        <Button
+          id="cancel-button"
+          label={t("Common:CancelButton")}
+          onClick={closeResetModal}
+          scale
+          size="normal"
+        />
+      </ModalDialog.Footer>
+    </StyledModalDialog>
+  );
 };
 
-const removeManagerFromMembers = (members: GroupMembers, managerId: string) => {
-  return members?.filter((g) => g.id !== managerId) || null;
-};
-
-export const compareGroupParams = (
-  prev: EditGroupParams,
-  current: EditGroupParams,
-): boolean => {
-  const equalTitle = prev.groupName === current.groupName;
-  const equalManager = prev.groupManager?.id === current.groupManager?.id;
-
-  const prevGroupMembers = prev.groupManager?.id
-    ? removeManagerFromMembers(prev.groupMembers, prev.groupManager.id)
-    : prev.groupMembers;
-  const currentGroupMembers = current.groupManager?.id
-    ? removeManagerFromMembers(current.groupMembers, current.groupManager.id)
-    : current.groupMembers;
-
-  const equalMembers = compareMembers(prevGroupMembers, currentGroupMembers);
-
-  return equalTitle && equalManager && equalMembers;
-};
+export default ResetConfirmationModal;

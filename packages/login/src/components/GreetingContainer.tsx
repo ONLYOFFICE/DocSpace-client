@@ -40,11 +40,19 @@ import { GreetingContainersProps } from "@/types";
 import { DEFAULT_PORTAL_TEXT, DEFAULT_ROOM_TEXT } from "@/utils/constants";
 import { getInvitationLinkData } from "@/utils";
 
-const GreetingContainer = ({ greetingSettings }: GreetingContainersProps) => {
+const GreetingContainer = ({
+  greetingSettings,
+  culture,
+}: GreetingContainersProps) => {
   const { t } = useTranslation(["Login"]);
   const theme = useTheme();
 
-  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme.isBase);
+  const logoUrl = getLogoUrl(
+    WhiteLabelLogoType.LoginPage,
+    !theme.isBase,
+    false,
+    culture,
+  );
 
   const searchParams = useSearchParams();
   const pathname = usePathname();

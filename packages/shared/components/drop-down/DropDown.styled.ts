@@ -81,6 +81,7 @@ const StyledDropdown = styled.div<{
     props.zIndex ? props.zIndex : props.theme.dropDown.zIndex};
   display: ${(props) =>
     props.open ? (props.columnCount ? "block" : "table") : "none"};
+  table-layout: fixed;
 
   ${(props) =>
     !props.isDropdownReady &&
@@ -93,7 +94,7 @@ const StyledDropdown = styled.div<{
   border: ${(props) => props.theme.dropDown.border};
   border-radius: ${(props) => props.theme.dropDown.borderRadius};
   -moz-border-radius: ${(props) => props.theme.dropDown.borderRadius};
-  -webkit-border-radius: ${(props) => props.theme.dropDown.borderRadius};
+  -webkit-border-radius: ${(props) => props.theme.dropDown.borderRadius};dropDownMaxHeight
   box-shadow: ${(props) => props.theme.dropDown.boxShadow};
   -moz-box-shadow: ${(props) => props.theme.dropDown.boxShadow};
   -webkit-box-shadow: ${(props) => props.theme.dropDown.boxShadow};

@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "U vezi sa",
   "AboutCompanyTitle": "U vezi ovog programa",
   "AccessDenied": "Pristup odbijen",
@@ -55,6 +55,7 @@
   "CommonFiles": "Zajedničke datoteke",
   "CompanyName": "Ime kompanije",
   "Confirmation": "Konfirmacija",
+  "ConfirmationText": "Svi podaci koje ste uneli će biti izgubljeni. Da li ste sigurni da želite da nastavite?",
   "ConflictResolveSelectAction": "Molim vas odaberite akciju:",
   "Connect": "Poveži",
   "Content": "Sadržaj",

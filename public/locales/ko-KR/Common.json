@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "소개",
   "AboutCompanyTitle": "프로그램 소개",
   "AccessDenied": "액세스가 거부되었습니다",
@@ -55,6 +55,7 @@
   "CommonFiles": "공통 파일",
   "CompanyName": "회사 이름",
   "Confirmation": "확인",
+  "ConfirmationText": "입력한 모든 데이터가 손실됩니다. 정말로 계속하시겠습니까?",
   "ConflictResolveSelectAction": "작업 선택:",
   "Connect": "연결",
   "Content": "콘텐츠",

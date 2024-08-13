@@ -1,3 +1,4 @@
+import { isSeparator } from "@docspace/shared/utils/typeGuards";
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -64,16 +65,21 @@ export type TError =
 
 export type TTimeZoneOption = {
   key: string | number;
-  label?: string;
+  label: string;
 };
 
-export type TCulturesOption = {
-  index?: number;
-  isBeta?: boolean;
-  key: string | number;
-  label?: string;
-  icon?: string | undefined;
-};
+export type TCulturesOption =
+  | {
+      isBeta?: boolean;
+      key: string | number;
+      label: string;
+      icon?: string;
+    }
+  | {
+      isBeta?: boolean;
+      key: string | number;
+      icon?: string;
+    };
 
 export type WithLoaderProps = {
   isLoaded: boolean;

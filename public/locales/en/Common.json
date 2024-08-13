@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "About",
   "AboutCompanyTitle": "About this program",
   "AccessDenied": "Access denied",
@@ -55,6 +55,7 @@
   "CommonFiles": "Common files",
   "CompanyName": "Company name",
   "Confirmation": "Confirmation",
+  "ConfirmationText": "All the data you entered will be lost. Are you sure you want to continue?",
   "ConflictResolveSelectAction": "Please select the action:",
   "Connect": "Connect",
   "Content": "Content",

@@ -84,7 +84,7 @@ const GroupMember = ({
         className="avatar"
         role={groupMember.role || "user"}
         size={"min"}
-        source={groupMember.avatarSmall}
+        source={groupMember.avatarSmall || groupMember.avatar}
       />
 
       <div className="main-wrapper">

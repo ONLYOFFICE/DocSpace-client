@@ -6,7 +6,6 @@
   "AttributeMatchingTooltip": "Odgovarajuće Single Sign-On atributa sa unosima odeljka 'Nalozi'.",
   "Binding": "Povezivanje:",
   "CertificateExist": "Sertifikat sa istim tipom akcije već postoji",
-  "ConfirmationText": "Svi podaci koje ste uneli će biti izgubljeni. Da li ste sigurni da želite da nastavite?",
   "CustomEntryButton": "Prilagođena oznaka dugmeta za prijavljivanje",
   "CustomEntryTooltip": "Oznaka dugmeta za prijavljivanje u prostor pomoću usluge Single Sign-On",
   "DownloadMetadataXML": "Preuzmi SP metapodatke XML",

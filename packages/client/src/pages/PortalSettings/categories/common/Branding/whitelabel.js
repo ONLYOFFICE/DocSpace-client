@@ -172,7 +172,7 @@ const WhiteLabel = (props) => {
         logoUrlsWhiteLabel[i].size.height,
       );
 
-      if (options.isEditor && !isCustomizationAvailable) return;
+      if (options.isEditor && !isCustomizationAvailable) continue;
 
       const isDocsEditorName = logoUrlsWhiteLabel[i].name === "DocsEditor";
 

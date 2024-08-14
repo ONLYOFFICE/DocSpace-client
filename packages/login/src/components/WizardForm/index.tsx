@@ -65,10 +65,16 @@ import { InputSize, InputType } from "@docspace/shared/components/text-input";
 import useDeviceType from "@/hooks/useDeviceType";
 import { DeviceType } from "@docspace/shared/enums";
 import { Nullable } from "@docspace/shared/types";
+import {
+  TPasswordHash,
+  TPasswordSettings,
+  TPortalCultures,
+  TTimeZone,
+} from "@docspace/shared/api/settings/types";
 
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
 
-import { TCulturesOption, TTimeZoneOption, WizardFormProps } from "@/types";
+import { TCulturesOption, TTimeZoneOption } from "@/types";
 import {
   DEFAULT_SELECT_LANGUAGE,
   DEFAULT_SELECT_TIMEZONE,
@@ -81,6 +87,17 @@ import {
   StyledLink,
   WizardContainer,
 } from "./WizardForm.styled";
+
+type WizardFormProps = {
+  passwordSettings?: TPasswordSettings;
+  machineName?: string;
+  isRequiredLicense?: boolean;
+  portalTimeZones?: TTimeZone[];
+  portalCultures?: TPortalCultures;
+  culture?: string;
+  wizardToken?: string;
+  passwordHash?: TPasswordHash;
+};
 
 const emailSettings = new EmailSettings();
 emailSettings.allowDomainPunycode = true;

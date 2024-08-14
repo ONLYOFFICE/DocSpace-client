@@ -134,6 +134,26 @@ const AttributeMapping = (props) => {
           isVertical
           labelVisible={true}
           errorMessage={t("Common:EmptyFieldError")}
+          hasError={errors.secondName}
+          labelText={t("LdapSecondName")}
+          isRequired
+        >
+          <LdapFieldComponent
+            name={SECOND_NAME}
+            hasError={errors.secondName}
+            onChange={onChangeValue}
+            value={secondName}
+            scale
+            isDisabled={!isLdapEnabled || isUIDisabled}
+            tabIndex={8}
+          />
+        </FieldContainer>
+
+        <FieldContainer
+          style={FIELD_STYLE}
+          isVertical
+          labelVisible={true}
+          errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.mail}
           labelText={t("LdapMail")}
           isRequired
@@ -146,6 +166,24 @@ const AttributeMapping = (props) => {
             scale
             isDisabled={!isLdapEnabled || isUIDisabled}
             tabIndex={9}
+          />
+        </FieldContainer>
+
+        <FieldContainer
+          style={FIELD_STYLE}
+          isVertical
+          labelVisible={true}
+          hasError={errors.avatarAttribute}
+          labelText={t("LdapAvatar")}
+        >
+          <TextInput
+            name={AVATAR}
+            hasError={errors.avatarAttribute}
+            onChange={onChangeValue}
+            value={avatarAttribute}
+            scale
+            isDisabled={!isLdapEnabled || isUIDisabled}
+            tabIndex={10}
           />
         </FieldContainer>
 
@@ -166,44 +204,6 @@ const AttributeMapping = (props) => {
             scale
             isDisabled={!isLdapEnabled || isUIDisabled}
             tabIndex={11}
-          />
-        </FieldContainer>
-
-        <FieldContainer
-          style={FIELD_STYLE}
-          isVertical
-          labelVisible={true}
-          errorMessage={t("Common:EmptyFieldError")}
-          hasError={errors.secondName}
-          labelText={t("LdapSecondName")}
-          isRequired
-        >
-          <LdapFieldComponent
-            name={SECOND_NAME}
-            hasError={errors.secondName}
-            onChange={onChangeValue}
-            value={secondName}
-            scale
-            isDisabled={!isLdapEnabled || isUIDisabled}
-            tabIndex={8}
-          />
-        </FieldContainer>
-
-        <FieldContainer
-          style={FIELD_STYLE}
-          isVertical
-          labelVisible={true}
-          hasError={errors.avatarAttribute}
-          labelText={t("LdapAvatar")}
-        >
-          <TextInput
-            name={AVATAR}
-            hasError={errors.avatarAttribute}
-            onChange={onChangeValue}
-            value={avatarAttribute}
-            scale
-            isDisabled={!isLdapEnabled || isUIDisabled}
-            tabIndex={10}
           />
         </FieldContainer>
       </Box>

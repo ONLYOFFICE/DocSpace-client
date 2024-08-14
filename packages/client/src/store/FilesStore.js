@@ -2176,7 +2176,7 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["download"]);
       }
 
-      if (!isPdf || item.startFilling || item.isForm) {
+      if (!isPdf || (shouldFillForm && canFillForm)) {
         fileOptions = this.removeOptions(fileOptions, ["open-pdf"]);
       }
 

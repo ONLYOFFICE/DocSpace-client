@@ -3,7 +3,7 @@
   "LdapAdvancedSettings": "Erweiterte Einstellungen",
   "LdapAdvancedSettingsTooltip": "Wählen Sie die Benutzerattribute aus, die mit Ihrem LDAP-Server synchronisiert werden sollen.",
   "LdapAttributeMapping": "Attribut-Zuordnung",
-  "LdapAuthenticationTooltip": " Aktivieren Sie diese Option, wenn der aktuelle Windows-Benutzer nicht die Rechte hat, vom LDAP-Server/Active Directory zu lesen, und geben Sie die Anmeldedaten eines anderen Benutzers mit den Leserechten ein.",
+  "LdapAuthenticationTooltip": " Aktivieren Sie diese Option, wenn der aktuelle Windows-Benutzer nicht die Rechte hat, vom LDAP-Server/Active Directory zu lesen, und geben Sie die Anmeldedaten eines anderen Benutzers mit den Leserechten ein.",
   "LdapAutoSyncToggle": "Auto-Synchronisierung",
   "LdapAutoSyncToggleDescription": "Die Synchronisierung ermöglicht das Hochladen aller Daten aus dem Portal und die Aktualisierung der neuen Daten nach Änderung der Einstellungen. Synchronisieren Sie jedes Mal, wenn Sie neue Daten über Benutzer im Portal haben.",
   "LdapAvatar": "Profilfoto",
@@ -66,7 +66,6 @@
   "LdapUserDNTooltip": "Geben Sie den Namen des Verzeichnisses mit den Benutzern ein, die Sie hinzufügen möchten.",
   "LdapUserFilter": "Benutzerfilter",
   "LdapUserFilterTooltip": "Verwenden Sie den LDAP-Suchfilter, um die Benutzer auszuwählen, die importiert werden sollen.",
-  "LdapUserQuotaTooltip": "Um ein Speicherkontingent für diesen Benutzer festzulegen, geben Sie im LDAP-Verzeichnis einen ganzzahligen Wert für dieses Attribut ein. Es wird der Quotenwert in Bytes angezeigt. Dieses Attribut wird nur bei der Ersteinrichtung angewendet und kann manuell im Abschnitt Konten geändert werden.",
   "LdapUsersType": "Benutzertyp",
   "LdapUsersTypeInfo": "Benutzer können nur auf die Räume zugreifen, zu denen sie von Administratoren eingeladen wurden, und können keine eigenen Räume, Ordner oder Dateien erstellen. Wählen Sie unten einen anderen Typ, um mehr Berechtigungen zu vergeben. Andernfalls können Sie den Typ manuell im Abschnitt Konten ändern.",
   "LdapUserTypeTooltip": "Alle Benutzer werden zu {{productName}} mit dem ausgewählten Typ hinzugefügt."

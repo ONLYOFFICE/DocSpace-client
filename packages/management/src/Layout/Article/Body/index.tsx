@@ -52,9 +52,9 @@ const ArticleBodyContent = () => {
 
   const { t } = useTranslation(["Settings", "Common"]);
 
-  const { settingsStore, authStore } = useStore();
+  const { settingsStore, currentTariffStatusStore } = useStore();
 
-  const { isCommunity } = authStore;
+  const { isCommunity } = currentTariffStatusStore;
   const { toggleArticleOpen, setIsBurgerLoading, currentColorScheme } =
     settingsStore;
 

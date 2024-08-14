@@ -92,6 +92,7 @@
   "LinkDisabledSuccessfully": "Link został pomyślnie wyłączony",
   "LinkEditedSuccessfully": "Link został pomyślnie edytowany i skopiowany",
   "LinkEnabledSuccessfully": "Link został pomyślnie włączony",
+  "LinkForPortalUsers": "Link dla użytkowników {{productName}}",
   "LinkSettings": "Ustawienia linku",
   "LinkSuccessfullyCreatedAndCopied": "Link został pomyślnie utworzony i skopiowany do schowka",
   "LinkValidUntil": "Link będzie ważny do",

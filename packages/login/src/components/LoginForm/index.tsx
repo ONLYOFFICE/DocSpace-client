@@ -39,6 +39,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { useTheme } from "styled-components";
 import { useSearchParams, useRouter } from "next/navigation";
+import { Id } from "react-toastify";
 
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
@@ -84,10 +85,12 @@ const LoginForm = ({
   clientId,
   client,
   reCaptchaType,
+  ldapDomain,
+  ldapEnabled,
 }: LoginFormProps) => {
-  const { isLoading, isModalOpen, ldapDomain } = useContext(LoginValueContext);
+  const { isLoading, isModalOpen } = useContext(LoginValueContext);
   const { setIsLoading } = useContext(LoginDispatchContext);
-  const toastId = useRef(null);
+  const toastId = useRef<Id>();
 
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -121,7 +124,9 @@ const LoginForm = ({
   const [password, setPassword] = useState("");
 
   const [isChecked, setIsChecked] = useState(false);
-  const [isLdapLoginChecked, setIsLdapLoginChecked] = useState(!!ldapDomain);
+  const [isLdapLoginChecked, setIsLdapLoginChecked] = useState(
+    ldapEnabled || false,
+  );
   const [isCaptcha, setIsCaptcha] = useState(false);
   const [isCaptchaSuccessful, setIsCaptchaSuccess] = useState(false);
   const [isCaptchaError, setIsCaptchaError] = useState(false);
@@ -179,10 +184,6 @@ const LoginForm = ({
     },
     [t, referenceUrl, currentCulture],
   );
-
-  useEffect(() => {
-    setIsLdapLoginChecked(!!ldapDomain);
-  }, [ldapDomain]);
 
   useEffect(() => {
     const profile = localStorage.getItem("profile");
@@ -473,7 +474,7 @@ const LoginForm = ({
         onChangeCheckbox={onChangeCheckbox}
       />
 
-      {ldapDomain && (
+      {ldapDomain && ldapEnabled && (
         <LDAPContainer
           ldapDomain={ldapDomain}
           isLdapLoginChecked={isLdapLoginChecked}

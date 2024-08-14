@@ -33,10 +33,7 @@ import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
 import { classNames, getLastColumn } from "@docspace/shared/utils";
-import {
-  StyledBadgesContainer,
-  StyledQuickButtonsContainer,
-} from "../StyledTable";
+import { StyledBadgesContainer } from "../StyledTable";
 import ErasureCell from "./ErasureCell";
 import RoomCell from "./RoomCell";
 
@@ -48,8 +45,6 @@ const TrashRowDataComponent = (props) => {
     erasureColumnIsEnabled,
     sizeTrashColumnIsEnabled,
     typeTrashColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
-
     dragStyles,
     selectionProp,
     value,
@@ -60,7 +55,6 @@ const TrashRowDataComponent = (props) => {
     inProgress,
     showHotkeyBorder,
     badgesComponent,
-    quickButtonsComponent,
     tableStorageName,
   } = props;
 
@@ -217,26 +211,6 @@ const TrashRowDataComponent = (props) => {
       ) : (
         <div />
       )}
-      {quickButtonsColumnIsEnabled ? (
-        <TableCell
-          style={
-            !quickButtonsColumnIsEnabled
-              ? { background: "none" }
-              : dragStyles.style
-          }
-          {...selectionProp}
-          className={classNames(
-            selectionProp?.className,
-            "table-container_quick-buttons-wrapper",
-          )}
-        >
-          <StyledQuickButtonsContainer>
-            {quickButtonsComponent}
-          </StyledQuickButtonsContainer>
-        </TableCell>
-      ) : (
-        <div />
-      )}
     </>
   );
 };
@@ -249,7 +223,6 @@ export default inject(({ tableStore }) => {
     erasureColumnIsEnabled,
     sizeTrashColumnIsEnabled,
     typeTrashColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
     tableStorageName,
   } = tableStore;
 
@@ -260,7 +233,6 @@ export default inject(({ tableStore }) => {
     erasureColumnIsEnabled,
     sizeTrashColumnIsEnabled,
     typeTrashColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
     tableStorageName,
   };
 })(observer(TrashRowDataComponent));

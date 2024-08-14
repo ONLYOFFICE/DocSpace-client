@@ -2511,9 +2511,8 @@ export const getBaseTheme = () => {
       },
       separator: {
         borderBottom: `1px solid ${grayLightMid} !important`,
-        margin: "6px 16px 6px 16px !important",
+        margin: "6px 16px !important",
         height: "1px !important",
-        width: "calc(100% - 32px) !important",
       },
       text: {
         header: {
@@ -2534,7 +2533,7 @@ export const getBaseTheme = () => {
       background: "none",
       svgFill: black,
       header: {
-        height: "49px",
+        height: "55px",
         borderBottom: `1px solid ${grayLightMid}`,
         marginBottom: "6px",
       },
@@ -2544,7 +2543,7 @@ export const getBaseTheme = () => {
       padding: "0 12px",
       mobile: {
         height: "36px",
-        padding: "0 16px 6px",
+        padding: "6px 16px",
       },
     },
     newContextMenu: {
@@ -2552,7 +2551,6 @@ export const getBaseTheme = () => {
       borderRadius: "6px",
       mobileBorderRadius: "6px 6px 0 0",
       boxShadow: `0px 8px 16px 0px ${boxShadowColor}`,
-      padding: "6px 0px",
       border: "none",
       devices: {
         maxHeight: "calc(100vh - 64px)",
@@ -3018,9 +3016,9 @@ export const getBaseTheme = () => {
     tag: {
       color: black,
       deletedColor: gray,
-      background: lightGrayHover,
-      hoverBackground: grayLightMid,
-      disabledBackground: grayLight,
+      background: grayLightMid,
+      hoverBackground: lightGraySelected,
+      disabledBackground: grayLightMid,
       deletedBackground: grayLight,
       defaultTagColor: black,
       newTagBackground: grayLightMid,

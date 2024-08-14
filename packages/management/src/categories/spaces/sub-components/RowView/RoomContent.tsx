@@ -26,8 +26,7 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
-import styled, { css } from "styled-components";
-import { isMobileOnly } from "react-device-detect";
+import styled from "styled-components";
 
 import { RowContent } from "@docspace/shared/components/row-content";
 import { Text } from "@docspace/shared/components/text";
@@ -35,15 +34,12 @@ import { Text } from "@docspace/shared/components/text";
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { TTheme } from "@docspace/shared/themes";
 
+import { mobile } from "@docspace/shared/utils";
 import { TPortals } from "SRC_DIR/types/spaces";
 
 const StyledRowContent = styled(RowContent)`
   padding-bottom: 10px;
   .row-main-container-wrapper {
-    ${isMobileOnly &&
-    css`
-      margin-top: 14px;
-    `}
     display: flex;
     justify-content: flex-start;
   }
@@ -54,6 +50,16 @@ const StyledRowContent = styled(RowContent)`
 
   .spaces_row-current {
     color: ${({ theme }) => theme.management.textColor};
+  }
+
+  @media ${mobile} {
+    .row-main-container-wrapper {
+      flex-direction: column;
+    }
+
+    .mainIcons {
+      align-self: flex-start;
+    }
   }
 `;
 

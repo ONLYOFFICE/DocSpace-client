@@ -65,23 +65,28 @@ const ModalDialog = ({
   children,
   visible,
   onClose,
-  isLarge,
-  zIndex,
+
   className,
   displayType = ModalDialogType.modal,
   displayTypeDetailed,
-  isLoading,
+
   autoMaxHeight,
   autoMaxWidth,
-  withBodyScroll,
-  withFooterBorder,
+
   isScrollLocked,
-  containerVisible,
+
   isDoubleFooterLine,
-  isCloseable,
+
   embedded,
   withForm,
   blur,
+  zIndex = 310,
+  isLarge = false,
+  isLoading = false,
+  isCloseable = true,
+  withBodyScroll = false,
+  withFooterBorder = false,
+  containerVisible = false,
 }: ModalDialogProps) => {
   const onCloseEvent = React.useCallback(() => {
     if (embedded) return;
@@ -172,16 +177,6 @@ const ModalDialog = ({
       }
     />
   );
-};
-
-ModalDialog.defaultProps = {
-  zIndex: 310,
-  isLarge: false,
-  isLoading: false,
-  isCloseable: true,
-  withBodyScroll: false,
-  withFooterBorder: false,
-  containerVisible: false,
 };
 
 ModalDialog.Header = Header;

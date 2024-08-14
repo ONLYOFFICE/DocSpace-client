@@ -76,7 +76,7 @@ const QuotasBar = ({
     );
   };
   const getTenantCustomQuota = () => {
-    if (!isAdmin) return t("StorageQuotaUserDescription");
+    if (!isAdmin) return t("RemoveFilesOrContactToUpgradeQuota");
 
     return (
       <Trans i18nKey="TenantCustomQuotaDescription" t={t}>
@@ -254,9 +254,14 @@ const QuotasBar = ({
           header: t("StorageTariffLimit", { currentValue, maxValue }),
           description: getStorageTariffDescription(),
         };
-      case QuotaBarTypes.TenantCustomQuota:
+      case QuotaBarTypes.StorageQuota:
         return {
           header: t("StorageQuotaHeader", { currentValue, maxValue }),
+          description: getTenantCustomQuota(),
+        };
+      case QuotaBarTypes.StorageQuotaLimit:
+        return {
+          header: t("StorageTariffLimit", { currentValue, maxValue }),
           description: getTenantCustomQuota(),
         };
       case QuotaBarTypes.UsersTariff:

@@ -79,6 +79,8 @@ const Bar = (props) => {
     tenantCustomQuota,
     isStorageTariffLimit,
     isUserTariffLimit,
+    isStorageQuotaAlmostLimit,
+    isStorageQuotaLimit,
   } = props;
 
   const navigate = useNavigate();
@@ -87,7 +89,8 @@ const Bar = (props) => {
     roomQuota: false,
     storageTariff: false,
     storageTariffLimit: false,
-    tenantCustomQuota: false,
+    storageQuota: false,
+    storageQuotaLimit: false,
     usersTariff: false,
     usersTariffLimit: false,
     storageAndUserQuota: false,
@@ -148,8 +151,8 @@ const Bar = (props) => {
           storageTariffLimit: !closed.includes(
             QuotaBarTypes.StorageTariffLimit,
           ),
-
-          tenantCustomQuota: !closed.includes(QuotaBarTypes.TenantCustomQuota),
+          storageQuota: !closed.includes(QuotaBarTypes.StorageQuota),
+          storageQuotaLimit: !closed.includes(QuotaBarTypes.StorageQuotaLimit),
           personalUserQuota: !closed.includes(QuotaBarTypes.PersonalUserQuota),
         }));
       }
@@ -165,7 +168,8 @@ const Bar = (props) => {
         roomQuota: isAdmin,
         storageTariff: isAdmin || isPowerUser || isRoomAdmin,
         storageTariffLimit: isAdmin || isPowerUser || isRoomAdmin,
-        tenantCustomQuota: isAdmin || isPowerUser || isRoomAdmin,
+        storageQuota: isAdmin || isPowerUser || isRoomAdmin,
+        storageQuotaLimit: isAdmin || isPowerUser || isRoomAdmin,
         usersTariff: isAdmin | isRoomAdmin,
         usersTariffLimit: isAdmin | isRoomAdmin,
         storageAndUserQuota: isAdmin,
@@ -216,7 +220,7 @@ const Bar = (props) => {
   };
 
   const onClickQuota = (type, e) => {
-    type === QuotaBarTypes.TenantCustomQuota ||
+    type === QuotaBarTypes.StorageQuota ||
     type === QuotaBarTypes.PersonalUserQuota
       ? onClickTenantCustomQuota()
       : onPaymentsClick(e);
@@ -253,9 +257,12 @@ const Bar = (props) => {
       case QuotaBarTypes.StorageTariffLimit:
         setBarVisible((value) => ({ ...value, storageTariffLimit: false }));
         break;
-      // case QuotaBarTypes.TenantCustomQuota:
-      //   setBarVisible((value) => ({ ...value, tenantCustomQuota: false }));
-      //   break;
+      case QuotaBarTypes.StorageQuota:
+        setBarVisible((value) => ({ ...value, storageQuota: false }));
+        break;
+      case QuotaBarTypes.StorageQuotaLimit:
+        setBarVisible((value) => ({ ...value, storageQuotaLimit: false }));
+        break;
       case QuotaBarTypes.UsersTariff:
         setBarVisible((value) => ({
           ...value,
@@ -327,13 +334,21 @@ const Bar = (props) => {
     //   };
     // }
 
-    // if (isStorageTariffLimit && barVisible.tenantCustomQuota) {
-    //   return {
-    //     type: QuotaBarTypes.TenantCustomQuota,
-    //     maxValue: getConvertedSize(t, tenantCustomQuota),
-    //     currentValue: getConvertedSize(t, usedTotalStorageSizeCount),
-    //   };
-    // }
+    if (isStorageQuotaAlmostLimit && barVisible.storageQuota) {
+      return {
+        type: QuotaBarTypes.StorageQuota,
+        maxValue: getConvertedSize(t, tenantCustomQuota),
+        currentValue: getConvertedSize(t, usedTotalStorageSizeCount),
+      };
+    }
+
+    if (isStorageQuotaLimit && barVisible.storageQuotaLimit) {
+      return {
+        type: QuotaBarTypes.StorageQuotaLimit,
+        maxValue: getConvertedSize(t, tenantCustomQuota),
+        currentValue: getConvertedSize(t, usedTotalStorageSizeCount),
+      };
+    }
 
     if (isStorageTariffAlmostLimit && barVisible.storageTariff) {
       return {
@@ -366,7 +381,7 @@ const Bar = (props) => {
         currentValue: addedManagersCount,
       };
     }
-    console.log("isPersonalQuotaLimit", isPersonalQuotaLimit);
+
     if (isPersonalQuotaLimit && barVisible.personalUserQuota) {
       return {
         type: QuotaBarTypes.PersonalUserQuota,
@@ -451,6 +466,8 @@ export default inject(
       tenantCustomQuota,
       isStorageTariffLimit,
       isUserTariffLimit,
+      isStorageQuotaAlmostLimit,
+      isStorageQuotaLimit,
     } = currentQuotaStore;
 
     const { currentColorScheme, setMainBarVisible } = settingsStore;
@@ -485,6 +502,8 @@ export default inject(
       tenantCustomQuota,
       isStorageTariffLimit,
       isUserTariffLimit,
+      isStorageQuotaAlmostLimit,
+      isStorageQuotaLimit,
     };
   },
 )(withTranslation(["Profile", "Common"])(observer(Bar)));

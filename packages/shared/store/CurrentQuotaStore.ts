@@ -268,7 +268,8 @@ class CurrentQuotasStore {
     );
   }
 
-  get showTenantCustomQuotaBar() {
+  // For standalone mode
+  get isStorageQuotaAlmostLimit() {
     if (!this.isTenantCustomQuotaSet || this.tenantCustomQuota === undefined)
       return false;
 
@@ -276,7 +277,21 @@ class CurrentQuotasStore {
 
     return (
       (this.usedTotalStorageSizeCount / this.tenantCustomQuota) * 100 >=
-      PERCENTAGE_FOR_SHOWING_BAR
+        PERCENTAGE_FOR_SHOWING_BAR &&
+      this.tenantCustomQuota > this.usedTotalStorageSizeCount
+    );
+  }
+
+  get isStorageQuotaLimit() {
+    if (!this.isTenantCustomQuotaSet || this.tenantCustomQuota === undefined)
+      return false;
+
+    if (+this.tenantCustomQuota === -1) return false;
+
+    return (
+      (this.usedTotalStorageSizeCount / this.tenantCustomQuota) * 100 >=
+        PERCENTAGE_FOR_SHOWING_BAR &&
+      this.tenantCustomQuota <= this.usedTotalStorageSizeCount
     );
   }
 

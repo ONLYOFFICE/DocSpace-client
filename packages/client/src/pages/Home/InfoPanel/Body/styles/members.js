@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 
 const StyledUserTypeHeader = styled.div`
   display: flex;
@@ -90,6 +90,29 @@ const StyledUser = styled.div`
     color: ${(props) => props.theme.infoPanel.members.meLabelColor};
     padding-inline-start: 8px;
     margin-inline-start: -8px;
+  }
+
+  .status-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .status-indicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: ${globalColors.darkStatusPositive};
+  }
+
+  .status-text {
+    font-size: 12px;
+    line-height: 16px;
+    color: ${({ theme }) => theme.infoPanel.members.subtitleColor};
+  }
+
+  .status-loader {
+    margin-top: 4px;
   }
 
   .role-wrapper {

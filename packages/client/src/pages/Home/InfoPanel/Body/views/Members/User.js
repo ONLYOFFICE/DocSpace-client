@@ -36,15 +36,17 @@ import DefaultUserPhotoUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82
 import { toastr } from "@docspace/shared/components/toast";
 import { isMobileOnly, isMobile } from "react-device-detect";
 import { decode } from "he";
-import { filterGroupRoleOptions, filterUserRoleOptions } from "SRC_DIR/helpers";
 
 import { getUserRole, getUserTypeLabel } from "@docspace/shared/utils/common";
 import { Text } from "@docspace/shared/components/text";
-import EmailPlusReactSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
-import { StyledUserTypeHeader } from "../../styles/members";
 import { IconButton } from "@docspace/shared/components/icon-button";
-import { Tooltip } from "@docspace/shared/components/tooltip";
+import EmailPlusReactSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
 import { Link } from "@docspace/shared/components/link";
+import { filterGroupRoleOptions, filterUserRoleOptions } from "SRC_DIR/helpers";
+import { Tooltip } from "@docspace/shared/components/tooltip";
+
+import { StyledUserTypeHeader } from "../../styles/members";
+import { Status } from "./sub-components/Status";
 
 const User = ({
   t,
@@ -69,6 +71,9 @@ const User = ({
 }) => {
   if (!infoPanelSelection) return null;
   if (!user.displayName && !user.name && !user.email) return null;
+
+  const showStatus = !user.isGroup && !user.isExpect;
+  const status = "online";
 
   const theme = useTheme();
 
@@ -352,21 +357,22 @@ const User = ({
             <div className="me-label">&nbsp;{`(${t("Common:MeLabel")})`}</div>
           )}
         </div>
-        {!user.isGroup && (
-          <div className="role-email" style={{ display: "flex" }}>
-            <Text
-              className="label"
-              fontWeight={400}
-              fontSize="12px"
-              noSelect
-              truncate
-              color={theme.infoPanel.members.subtitleColor}
-              dir="auto"
-            >
-              {`${typeLabel} | ${user.email}`}
-            </Text>
-          </div>
-        )}
+        {showStatus && <Status status={status} />}
+        {/*{!user.isGroup && (*/}
+        {/*  <div className="role-email" style={{ display: "flex" }}>*/}
+        {/*    <Text*/}
+        {/*      className="label"*/}
+        {/*      fontWeight={400}*/}
+        {/*      fontSize="12px"*/}
+        {/*      noSelect*/}
+        {/*      truncate*/}
+        {/*      color={theme.infoPanel.members.subtitleColor}*/}
+        {/*      dir="auto"*/}
+        {/*    >*/}
+        {/*      {`${typeLabel} | ${user.email}`}*/}
+        {/*    </Text>*/}
+        {/*  </div>*/}
+        {/*)}*/}
       </div>
 
       {userRole && userRoleOptions && (

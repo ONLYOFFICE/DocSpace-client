@@ -24,13 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { default as useFiles } from "./useFiles";
-export { default as useSDK } from "./useSDK";
-export { default as useOperations } from "./useOperations";
-export { default as useAccounts } from "./useAccounts";
-export { default as useGroups } from "./useGroups";
-export { default as useSettings } from "./useSettings";
-export { default as usePublic } from "./usePublic";
-export { default as useInsideGroup } from "./useInsideGroup";
-export { default as useAccountsHotkeys } from "./useAccountsHotkeys";
-export { default as useEnterLeaveRoom } from "./useEnterLeaveRoom";
+import { useEffect } from "react";
+
+import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
+
+const useEnterLeaveRoom = (selectedFolderStore: SelectedFolderStore) => {
+  const { currentRoomId, enterRoom, leaveRoom } = selectedFolderStore;
+
+  useEffect(() => {
+    const roomId = currentRoomId;
+    if (roomId) {
+      enterRoom(roomId);
+    }
+
+    return () => {
+      if (roomId) {
+        leaveRoom(roomId);
+      }
+    };
+  }, [currentRoomId, enterRoom, leaveRoom]);
+};
+
+export default useEnterLeaveRoom;

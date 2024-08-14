@@ -202,6 +202,12 @@ class SelectedFolderStore {
     return this.pathParts && this.pathParts.length <= 1;
   }
 
+  get currentRoomId() {
+    if (!this.inRoom || !this.pathParts[1]) return null;
+
+    return this.pathParts[1].id;
+  }
+
   toDefault = () => {
     this.folders = null;
     this.parentId = 0;
@@ -364,6 +370,24 @@ class SelectedFolderStore {
 
     selectedFolder?.pathParts?.forEach((value) => {
       if (value.roomType) this.setInRoom(true);
+    });
+  };
+
+  enterRoom = (roomId: number) => {
+    const { socketHelper } = this.settingsStore;
+
+    socketHelper.emit({
+      command: "enterInRoom",
+      data: { roomPart: roomId },
+    });
+  };
+
+  leaveRoom = (roomId: number) => {
+    const { socketHelper } = this.settingsStore;
+
+    socketHelper.emit({
+      command: "leaveRoom",
+      data: { roomPart: roomId },
     });
   };
 }

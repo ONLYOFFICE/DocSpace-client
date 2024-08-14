@@ -58,6 +58,7 @@ import {
   useSettings,
   useGroups,
   useInsideGroup,
+  useEnterLeaveRoom,
 } from "./Hooks";
 
 const PureHome = (props) => {
@@ -304,6 +305,8 @@ const PureHome = (props) => {
     getRooms,
     isLoading,
   });
+
+  useEnterLeaveRoom(selectedFolderStore);
 
   const getContextModel = () => {
     if (isFrame) return null;

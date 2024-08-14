@@ -9,10 +9,7 @@
   "RoomQuotaHeader": "Odalar aşılmak üzere: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Depolama ve oda limitleri aşılmak üzere.",
   "StorageAndUserHeader": "Depolama ve yöneticiler/uzman kullanıcılar limitleri aşılmak üzere.",
-  "StorageQuotaDescription": "Gereksiz dosyaları arşivleyebilirsiniz veya <1>{{clickHere}}</1> ile {{productName}}'iniz için daha uygun bir fiyatlandırma planı bulabilirsiniz.",
-  "StorageQuotaExceeded": "Depolama kotası aşıldı",
   "StorageQuotaHeader": "Depolama alanı miktarı aşılmak üzere: {{currentValue}} / {{maxValue}}",
-  "StorageQuotaUserDescription": "Disk alanını boşaltmak için gereksiz dosyaları kaldırabilirsiniz.",
   "TenantCustomQuotaDescription": "Gereksiz dosyaları kaldırabilir veya <1>Depolama yönetimi ayarlarından</1> kotayı değiştirebilirsiniz.",
   "UserQuotaHeader": "Yönetici/uzman kullanıcı sayısı aşılmak üzere: {{currentValue}} / {{maxValue}}."
 }

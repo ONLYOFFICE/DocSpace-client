@@ -9,10 +9,7 @@
   "RoomQuotaHeader": "Počet místností bude brzy překročen: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Limity úložiště a místností budou brzy překročeny.",
   "StorageAndUserHeader": "Limity pro úložiště a správce/oprávněné uživatele budou brzy překročeny.",
-  "StorageQuotaDescription": "Nepotřebné soubory můžete odstranit nebo <1>{{clickHere}}}</1> pro nalezení vhodnějšího cenového tarifu pro váš {{productName}}.",
-  "StorageQuotaExceeded": "Překročení kvóty úložiště",
   "StorageQuotaHeader": "Množství úložného prostoru bude brzy překročeno: {{currentValue}} / {{maxValue}}.",
-  "StorageQuotaUserDescription": "Nepotřebné soubory můžete odstranit a uvolnit tak místo na disku.",
   "TenantCustomQuotaDescription": "Nepotřebné soubory můžete odstranit nebo změnit kvótu v <1>Nastavení správy úložiště.</1>",
   "UserQuotaHeader": "Počet administrátorů/přístupných uživatelů bude brzy překročen: {{currentValue}} / {{maxValue}}."
 }

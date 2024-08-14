@@ -9,10 +9,7 @@
   "RoomQuotaHeader": "Huoneet täyttyvät pian {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Muisti ja huoneiden määrän raja on ylittymässä. ",
   "StorageAndUserHeader": "Muisti ja ylläpitäjien/tehokäyttäjien määrän raja on ylittymässä.",
-  "StorageQuotaDescription": "Voit poistaa tarpeettomat tiedostot tai <1>{{clickHere}}</1> löytääksesi sopivamman hintaohjelman {{productName}}-llesi.",
-  "StorageQuotaExceeded": "Muistin kiintiö ylitetty",
   "StorageQuotaHeader": "Tallennustilan määrä on ylittymässä: {{currentValue}} / {{maxValue}}",
-  "StorageQuotaUserDescription": "Voit poistaa tarpeettomat tiedostot vapauttaaksesi levytilaa.",
   "TenantCustomQuotaDescription": "Voit poistaa tarpeettomat tiedostot tai muuttaa kiintiötä <1>Muistinhallinta-asetuksissa.</1>",
   "UserQuotaHeader": "Ylläpitäjien/tehokäyttäjien määrän raja on ylittymässä: {{currentValue}} / {{maxValue}}"
 }

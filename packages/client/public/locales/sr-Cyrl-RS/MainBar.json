@@ -9,10 +9,7 @@
   "RoomQuotaHeader": "Број соба ц́е ускоро бити прекорачен: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Ограничења складишта и соба ће ускоро бити прекорачена.",
   "StorageAndUserHeader": "Ограничења складишта и администратора/напредних корисника ће ускоро бити прекорачена.",
-  "StorageQuotaDescription": "Можете да уклоните непотребне датотеке или <1>{{clickHere}}</1> да бисте пронашли прикладнији план цена за ваш {{productName}}.",
-  "StorageQuotaExceeded": "Квота складишта прекорачена",
   "StorageQuotaHeader": "Количина меморијског простора ц́е ускоро бити прекорачена: {{currentValue}} / {{maxValue}}",
-  "StorageQuotaUserDescription": "Можете уклонити непотребне датотеке да бисте ослободили простор на диску.",
   "TenantCustomQuotaDescription": "Можете уклонити непотребне датотеке или променити квоту у <1>Storage management settings.</1>",
   "UserQuotaHeader": "Број администратора/напредних корисника ће ускоро бити прекорачен: {{currentValue}} / {{maxValue}}."
 }

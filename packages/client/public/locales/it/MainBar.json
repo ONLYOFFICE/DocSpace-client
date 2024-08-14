@@ -9,10 +9,7 @@
   "RoomQuotaHeader": "Sta per essere superato il limite di stanze: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "I limiti di spazio di archiviazione e stanze stanno per essere superati.",
   "StorageAndUserHeader": "I limiti di spazio di archiviazione e amministratori/utenti esperti stanno per essere superati.",
-  "StorageQuotaDescription": "Puoi rimuovere i file non necessari o <1>{{clickHere}}</1> per trovare un piano tariffario più adatto per il tuo {{productName}}.",
-  "StorageQuotaExceeded": "Quota di archiviazione superata",
   "StorageQuotaHeader": "Lo spazio di archiviazione sta per essere esaurito: {{currentValue}} / {{maxValue}}",
-  "StorageQuotaUserDescription": "Puoi rimuovere i file non necessari per liberare spazio sul disco.",
   "TenantCustomQuotaDescription": "Puoi rimuovere i file non necessari o modificare la quota nelle <1>mpostazioni di gestione dello spazio di archiviazione.</1>",
   "UserQuotaHeader": "Il numero di amministratori/utenti esperti sta per essere superato: {{currentValue}} / {{maxValue}}."
 }

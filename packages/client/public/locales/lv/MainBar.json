@@ -9,10 +9,7 @@
   "RoomQuotaHeader": "Tūlīt tiks pārsniegtas telpas: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Drīz tiks pārsniegti krātuves un telpu ierobežojumi.",
   "StorageAndUserHeader": "Tūlīt tiks pārsniegti krātuves un administratoru/prasmīgo lietotāju ierobežojumi.",
-  "StorageQuotaDescription": "Varat noņemt nevajadzīgos failus vai <1>{{clickHere}}</1>, lai atrastu savam {{productName}} piemērotāku cenu plānu.",
-  "StorageQuotaExceeded": "Pārsniegta krātuves kvota",
   "StorageQuotaHeader": "Tūlīt tiks pārsniegts krātuves vietas apjoms: {{currentValue}} / {{maxValue}}",
-  "StorageQuotaUserDescription": "Jūs varat noņemt nevajadzīgos failus, lai atbrīvotu vietu diskā.",
   "TenantCustomQuotaDescription": "Jūs varat noņemt nevajadzīgos failus vai mainīt kvotu <1>Krātuves pārvaldības iestatījumos.</1>",
   "UserQuotaHeader": "Tūlīt tiks pārsniegts administratoru/prasmīgo lietotāju skaits:{{currentValue}}/{{maxValue}}."
 }

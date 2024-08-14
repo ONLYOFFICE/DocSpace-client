@@ -53,28 +53,6 @@ const QuotasBar = ({
     onClose && onClose(type);
   };
 
-  const getStorageQuotaDescription = () => {
-    if (!isAdmin) return t("StorageQuotaUserDescription");
-
-    return (
-      <Trans
-        i18nKey="StorageQuotaDescription"
-        t={t}
-        values={{ productName: t("Common:ProductName") }}
-      >
-        You can remove the unnecessary files or
-        <Link
-          fontSize="12px"
-          fontWeight="400"
-          color={currentColorScheme?.main?.accent}
-          onClick={onClickAction}
-        >
-          {{ clickHere: t("ClickHere").toLowerCase() }}
-        </Link>{" "}
-        to find a better pricing plan for your portal.
-      </Trans>
-    );
-  };
   const getTenantCustomQuota = () => {
     if (!isAdmin) return t("RemoveFilesOrContactToUpgradeQuota");
 

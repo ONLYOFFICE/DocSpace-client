@@ -30,7 +30,7 @@ import { AccountsSearchArea } from "@docspace/shared/enums";
 // import axios from "axios";
 import { Encoder } from "@docspace/shared/utils/encoder";
 import { checkFilterInstance } from "@docspace/shared/utils/common";
-import { Nullable } from "types";
+import { Nullable } from "../../types";
 import { request } from "../client";
 
 import Filter from "./filter";

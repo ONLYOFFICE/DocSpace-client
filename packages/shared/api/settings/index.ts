@@ -25,7 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import axios, { AxiosRequestConfig } from "axios";
-import { Nullable } from "types";
+
+import { Nullable } from "../../types";
 import { TWhiteLabel } from "../../utils/whiteLabelHelper";
 import { request } from "../client";
 import {

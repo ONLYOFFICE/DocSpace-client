@@ -33,7 +33,7 @@ import {
   TPortalTariff,
   TRestoreProgress,
 } from "./types";
-import { Nullable } from "types";
+import { Nullable } from "../../types";
 
 export function getShortenedLink(link: string) {
   return request({

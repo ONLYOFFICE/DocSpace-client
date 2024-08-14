@@ -25,11 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { observer, inject } from "mobx-react";
-//import { useLocation } from "react-router-dom";
-
-import { Events, FileExtensions } from "@docspace/shared/enums";
-
-import RootFolderContainer from "./RootFolderContainer";
 import EmptyFilterContainer from "./EmptyFilterContainer";
 import RoomNoAccessContainer from "./RoomNoAccessContainer";
 
@@ -62,28 +57,9 @@ const EmptyContainer = ({
   folderId,
   isArchiveFolderRoot,
 }) => {
-  //const location = useLocation();
-
   const isRoom = !!roomType;
 
   linkStyles.color = theme.filesEmptyContainer.linkColor;
-
-  const onCreate = (e) => {
-    const format = e.currentTarget.dataset.format || null;
-
-    const event = new Event(Events.CREATE);
-
-    const isPDF = format === FileExtensions.PDF;
-
-    const payload = {
-      extension: format,
-      id: -1,
-      edit: isPDF,
-    };
-    event.payload = payload;
-
-    window.dispatchEvent(event);
-  };
 
   if (isRoomNotFoundOrMoved) {
     return (
@@ -95,8 +71,6 @@ const EmptyContainer = ({
   }
 
   const isRootEmptyPage = parentId === 0 || (isPublicRoom && isRoot);
-
-  //isLoading && location?.state ? location.state?.isRoot : parentId === 0;
 
   if (isFiltered) return <EmptyFilterContainer linkStyles={linkStyles} />;
 

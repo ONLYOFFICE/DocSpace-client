@@ -266,8 +266,6 @@ export const getRootTitle = (
   access: AccessType,
   rootFolderType: Nullable<FolderType>,
 ) => {
-  console.log({ access, rootFolderType });
-
   return match([rootFolderType, access])
     .with([FolderType.Rooms, ShareAccessRights.None], () =>
       t("Files:EmptyRootRoomHeader", {

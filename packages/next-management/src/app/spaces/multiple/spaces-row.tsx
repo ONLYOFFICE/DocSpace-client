@@ -24,25 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import DefaultLogoUrl from "PUBLIC_DIR/images/logo/leftmenu.svg?url";
 
-import { Header } from "./header";
-import { Spaces } from "./spaces";
-import { DomainSettings } from "./domain-settings";
-import { StyledWrapper } from "./multiple.styled";
+import { ReactSVG } from "react-svg";
 
-interface IProps {
-  baseDomain: string;
-  portals: TPortals[];
-}
+import { RowContent } from "./row-content";
+import { StyledSpaceRow } from "./multiple.styled";
 
-export const MultipleSpaces = ({ baseDomain, portals }: IProps) => {
+export const SpacesRow = ({ item }) => {
+  const logoElement = <ReactSVG id={item.key} src={DefaultLogoUrl} />;
+
   return (
-    <StyledWrapper>
-      <Header />
-      <Spaces portals={portals} />
-      <DomainSettings baseDomain={baseDomain} />
-    </StyledWrapper>
+    <StyledSpaceRow element={logoElement} key={item.id}>
+      <RowContent item={item} />
+    </StyledSpaceRow>
   );
 };
 

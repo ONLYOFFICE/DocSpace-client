@@ -24,25 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
-
-import { Header } from "./header";
-import { Spaces } from "./spaces";
-import { DomainSettings } from "./domain-settings";
-import { StyledWrapper } from "./multiple.styled";
+import { SpacesRow } from "./spaces-row";
+import { StyledRowContainer } from "./multiple.styled";
 
 interface IProps {
-  baseDomain: string;
   portals: TPortals[];
 }
 
-export const MultipleSpaces = ({ baseDomain, portals }: IProps) => {
+export const Spaces = ({ portals }: IProps) => {
+  console.log("portals", portals);
   return (
-    <StyledWrapper>
-      <Header />
-      <Spaces portals={portals} />
-      <DomainSettings baseDomain={baseDomain} />
-    </StyledWrapper>
+    <StyledRowContainer useReactWindow={false}>
+      {portals.map((item) => (
+        <SpacesRow key={item.tenantId} item={item} />
+      ))}
+    </StyledRowContainer>
   );
 };
 

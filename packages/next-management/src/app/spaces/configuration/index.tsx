@@ -56,11 +56,11 @@ import { Header } from "./header";
 import { Body } from "./body";
 import { StyledWrapper } from "./configuration.styled";
 
-export const ConfigurationSpaces = (props) => {
+export const ConfigurationSpaces = ({ domainValidator }) => {
   return (
     <StyledWrapper>
       <Header />
-      <Body {...props} />
+      <Body domainValidator={domainValidator} />
     </StyledWrapper>
   );
 };

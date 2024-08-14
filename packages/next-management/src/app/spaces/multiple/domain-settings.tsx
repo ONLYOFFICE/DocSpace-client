@@ -24,25 +24,63 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import { useTranslation } from "react-i18next";
 
-import { Header } from "./header";
-import { Spaces } from "./spaces";
-import { DomainSettings } from "./domain-settings";
-import { StyledWrapper } from "./multiple.styled";
+import { DeviceType } from "@docspace/shared/enums";
+import { Text } from "@docspace/shared/components/text";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+import {
+  TextInput,
+  InputType,
+  InputSize,
+} from "@docspace/shared/components/text-input";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+
+import useDeviceType from "@/hooks/useDeviceType";
+
+import { StyledDomainSettings } from "./multiple.styled";
 
 interface IProps {
   baseDomain: string;
-  portals: TPortals[];
 }
 
-export const MultipleSpaces = ({ baseDomain, portals }: IProps) => {
+export const DomainSettings = ({ baseDomain }: IProps) => {
+  const { t } = useTranslation(["Management", "Common"]);
+  const { currentDeviceType } = useDeviceType();
+
+  const onEditButtonClick = () => {};
+
   return (
-    <StyledWrapper>
-      <Header />
-      <Spaces portals={portals} />
-      <DomainSettings baseDomain={baseDomain} />
-    </StyledWrapper>
+    <StyledDomainSettings>
+      <Text fontSize="16px" fontWeight={700}>
+        {t("DomainSettings")}
+      </Text>
+      <FieldContainer
+        className="field-container"
+        isVertical
+        labelText={"Your current domain"}
+        labelVisible
+      >
+        <TextInput
+          type={InputType.text}
+          size={InputSize.base}
+          value={baseDomain}
+          isDisabled={true}
+          scale
+        />
+      </FieldContainer>
+      <Button
+        size={
+          currentDeviceType === DeviceType.desktop
+            ? ButtonSize.small
+            : ButtonSize.normal
+        }
+        label={t("Common:EditButton")}
+        primary={true}
+        onClick={onEditButtonClick}
+        scale={false}
+      />
+    </StyledDomainSettings>
   );
 };
 

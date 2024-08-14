@@ -26,6 +26,7 @@
 
 import { redirect } from "next/navigation";
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
+import { TDomainValidator } from "@docspace/shared/api/settings/types";
 
 import { getAllPortals, getSettings } from "@/lib/actions";
 
@@ -46,9 +47,17 @@ const SpacesPage = async () => {
     settings?.tenantAlias &&
     settings?.tenantAlias !== "localhost";
 
+  const domainValidator: TDomainValidator | undefined =
+    settings?.domainValidator;
+
   if (isConnected && portals && portals?.tenants?.length > 0)
-    return <MultipleSpaces />;
-  return <ConfigurationSpaces domainValidator={settings?.domainValidator} />;
+    return (
+      <MultipleSpaces
+        baseDomain={settings.baseDomain}
+        portals={portals.tenants}
+      />
+    );
+  return <ConfigurationSpaces domainValidator={domainValidator} />;
 };
 
 export default SpacesPage;

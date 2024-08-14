@@ -24,25 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import { useTranslation } from "react-i18next";
 
-import { Header } from "./header";
-import { Spaces } from "./spaces";
-import { DomainSettings } from "./domain-settings";
-import { StyledWrapper } from "./multiple.styled";
+import { DeviceType } from "@docspace/shared/enums";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 
-interface IProps {
-  baseDomain: string;
-  portals: TPortals[];
-}
+import useDeviceType from "@/hooks/useDeviceType";
 
-export const MultipleSpaces = ({ baseDomain, portals }: IProps) => {
+export const Header = () => {
+  const { t } = useTranslation(["Management"]);
+  const { currentDeviceType } = useDeviceType();
+
+  const onNewSpaceClick = () => {};
+
   return (
-    <StyledWrapper>
-      <Header />
-      <Spaces portals={portals} />
-      <DomainSettings baseDomain={baseDomain} />
-    </StyledWrapper>
+    <Button
+      size={
+        currentDeviceType === DeviceType.desktop
+          ? ButtonSize.small
+          : ButtonSize.normal
+      }
+      label={t("NewSpace")}
+      primary={true}
+      onClick={onNewSpaceClick}
+      scale={false}
+    />
   );
 };
 

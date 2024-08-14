@@ -60,7 +60,7 @@ export const Providers = ({
   const confirmType = useSearchParams().get("type");
 
   let shouldRedirect = true;
-  if (redirectURL == `unavailable` && confirmType == "PortalContinue") {
+  if (redirectURL === "unavailable" && confirmType === "PortalContinue") {
     shouldRedirect = false;
   }
 

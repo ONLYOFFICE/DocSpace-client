@@ -58,6 +58,9 @@ export interface OAuthStoreProps {
   resetDialogVisible: boolean;
   setResetDialogVisible: (value: boolean) => void;
 
+  generateDeveloperTokenDialogVisible: boolean;
+  setGenerateDeveloperTokenDialogVisible: (value: boolean) => void;
+
   deleteDialogVisible: boolean;
   setDeleteDialogVisible: (value: boolean) => void;
 
@@ -157,6 +160,8 @@ class OAuthStore implements OAuthStoreProps {
 
   resetDialogVisible: boolean = false;
 
+  generateDeveloperTokenDialogVisible: boolean = false;
+
   selection: string[] = [];
 
   bufferSelection: IClientProps | null = null;
@@ -214,6 +219,10 @@ class OAuthStore implements OAuthStoreProps {
 
   setResetDialogVisible = (value: boolean) => {
     this.resetDialogVisible = value;
+  };
+
+  setGenerateDeveloperTokenDialogVisible = (value: boolean) => {
+    this.generateDeveloperTokenDialogVisible = value;
   };
 
   setClientSecret = (value: string) => {
@@ -526,6 +535,7 @@ class OAuthStore implements OAuthStoreProps {
       this.setInfoDialogVisible(true);
       this.setDisableDialogVisible(false);
       this.setDeleteDialogVisible(false);
+      this.setGenerateDeveloperTokenDialogVisible(false);
     };
 
     const onRevoke = () => {
@@ -535,6 +545,7 @@ class OAuthStore implements OAuthStoreProps {
       this.setRevokeDialogVisible(true);
       this.setDisableDialogVisible(false);
       this.setDeleteDialogVisible(false);
+      this.setGenerateDeveloperTokenDialogVisible(false);
     };
 
     const onDisable = () => {
@@ -544,6 +555,17 @@ class OAuthStore implements OAuthStoreProps {
       this.setRevokeDialogVisible(false);
       this.setDisableDialogVisible(true);
       this.setDeleteDialogVisible(false);
+      this.setGenerateDeveloperTokenDialogVisible(false);
+    };
+
+    const onGenerateDevelopToken = () => {
+      this.setBufferSelection(clientId);
+      this.setPreviewDialogVisible(false);
+      this.setInfoDialogVisible(false);
+      this.setRevokeDialogVisible(false);
+      this.setDisableDialogVisible(false);
+      this.setDeleteDialogVisible(false);
+      this.setGenerateDeveloperTokenDialogVisible(true);
     };
 
     const openOption = {
@@ -598,6 +620,7 @@ class OAuthStore implements OAuthStoreProps {
       this.setRevokeDialogVisible(false);
       this.setDisableDialogVisible(false);
       this.setDeleteDialogVisible(true);
+      this.setGenerateDeveloperTokenDialogVisible(false);
     };
 
     const onShowPreview = () => {
@@ -607,6 +630,7 @@ class OAuthStore implements OAuthStoreProps {
       this.setRevokeDialogVisible(false);
       this.setDisableDialogVisible(false);
       this.setDeleteDialogVisible(false);
+      this.setGenerateDeveloperTokenDialogVisible(false);
     };
 
     const onEnable = async (status: boolean) => {
@@ -615,6 +639,7 @@ class OAuthStore implements OAuthStoreProps {
       this.setRevokeDialogVisible(false);
       this.setDisableDialogVisible(false);
       this.setDeleteDialogVisible(false);
+      this.setGenerateDeveloperTokenDialogVisible(false);
 
       if (isGroupContext) {
         try {
@@ -673,7 +698,15 @@ class OAuthStore implements OAuthStoreProps {
       onClick: onDisable,
     };
 
+    const generateDevelopTokenOption = {
+      key: "generate-token",
+      icon: EnableReactSvgUrl,
+      label: "Generate developer token",
+      onClick: onGenerateDevelopToken,
+    };
+
     const contextOptions = [
+      { ...generateDevelopTokenOption },
       {
         key: "Separator dropdownItem",
         isSeparator: true,

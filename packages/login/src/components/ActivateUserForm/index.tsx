@@ -177,10 +177,10 @@ const ActivateUserForm = ({
 
     const { userName, passwordHash } = loginData;
 
-    const res1 = await changePassword(userId, passwordHash, key);
-    const res2 = await updateActivationStatus(activationStatus, userId, key);
-    const res3 = await login(userName, passwordHash);
-    const res4 = await updateUser(changedData);
+    await changePassword(userId, passwordHash, key);
+    await updateActivationStatus(activationStatus, userId, key);
+    await login(userName, passwordHash);
+    await updateUser(changedData);
   };
 
   const onKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {

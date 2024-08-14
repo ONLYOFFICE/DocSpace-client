@@ -51,9 +51,10 @@ import { isDesktop } from "@docspace/shared/utils";
 import LinksToViewingIconUrl from "PUBLIC_DIR/images/links-to-viewing.react.svg?url";
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
-
 import { copyShareLink } from "@docspace/shared/utils/copy";
+
 import LinkRow from "./sub-components/LinkRow";
+import { useOnlineStatuses } from "./hooks/useOnlineStatuses";
 
 const Members = ({
   t,
@@ -79,6 +80,7 @@ const Members = ({
   membersIsLoading,
   searchValue,
   isMembersPanelUpdating,
+  socketHelper,
 }) => {
   const withoutTitlesAndLinks = !!searchValue;
   const membersHelper = new MembersHelper({ t });
@@ -93,6 +95,8 @@ const Members = ({
     if (isMembersPanelUpdating) return;
     scrollContext?.parentScrollbar?.scrollToTop();
   }, [isMembersPanelUpdating]);
+
+  useOnlineStatuses({ socketHelper, infoPanelSelection });
 
   const loadNextPage = async () => {
     await fetchMoreMembers(t, withoutTitlesAndLinks);
@@ -297,6 +301,7 @@ export default inject(
     treeFoldersStore,
     dialogsStore,
     infoPanelStore,
+    settingsStore,
   }) => {
     const {
       infoPanelSelection,
@@ -315,6 +320,7 @@ export default inject(
     const { primaryLink, additionalLinks, setExternalLink } = publicRoomStore;
     const { isArchiveFolderRoot } = treeFoldersStore;
     const { setLinkParams, setEditLinkPanelIsVisible } = dialogsStore;
+    const { socketHelper } = settingsStore;
 
     const roomType =
       selectedFolderStore.roomType ?? infoPanelSelection?.roomType;
@@ -355,6 +361,7 @@ export default inject(
       membersIsLoading,
       searchValue,
       isMembersPanelUpdating,
+      socketHelper,
     };
   },
 )(

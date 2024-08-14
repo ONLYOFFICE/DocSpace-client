@@ -287,10 +287,10 @@ const QuotasBar = ({
           header: t("StorageAndUserTariffLimitHeader"),
           description: getUpgradeTariffDescription(),
         };
-      case QuotaBarTypes.RoomAndStorageQuota:
+      case QuotaBarTypes.RoomsAndStorageTariff:
         return {
-          header: t("StorageAndRoomHeader", { currentValue, maxValue }),
-          description: getUserQuotaDescription(),
+          header: t("StorageAndRoomHeader"),
+          description: getUpgradeTariffDescription(),
         };
       case QuotaBarTypes.PersonalUserQuota:
         return {

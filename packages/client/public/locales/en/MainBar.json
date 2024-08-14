@@ -14,7 +14,7 @@
   "RemoveFilesOrClickToUpgrade": "Remove the unnecessary files or <1>click here</1> to upgrade your tariff plan.",
   "RemoveFilesOrContactToUpgrade": "Remove the unnecessary files or contact the {{productName}} administrator to upgrade the tariff plan.",
   "RemoveFilesOrContactToUpgradeQuota": "Remove the unnecessary files or contact the {{productName}} administrator to increase the storage quota.",
-  "StorageAndRoomHeader": "Storage and rooms limits are about to be exceeded.",
+  "StorageAndRoomHeader": "The limit for storage space and the number of rooms is about to be exceeded.",
   "StorageAndUserHeader": "The limit for storage space and the number of admins/power users is about to be exceeded.",
   "StorageAndUserTariffLimitHeader": "The limit is reached for storage space and the number of admins/power users ",
   "StorageQuotaHeader": "Storage space amount is about to be exceeded: {{currentValue}} / {{maxValue}}",

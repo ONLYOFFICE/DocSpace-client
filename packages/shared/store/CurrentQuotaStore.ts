@@ -252,6 +252,13 @@ class CurrentQuotasStore {
     );
   }
 
+  get isRoomTariffAlmostLimit() {
+    return (
+      this.maxCountRoomsByQuota - this.usedRoomsCount <=
+        COUNT_FOR_SHOWING_BAR && this.usedRoomsCount < this.maxCountRoomsByQuota
+    );
+  }
+
   get isStorageTariffAlmostLimit() {
     return (
       (this.usedTotalStorageSizeCount / this.maxTotalSizeByQuota) * 100 >=
@@ -296,11 +303,6 @@ class CurrentQuotasStore {
   }
 
   get isUserTariffAlmostLimit() {
-    console.log(
-      "isUserTariffAlmostLimit",
-      this.addedManagersCount,
-      this.maxCountManagersByQuota,
-    );
     return (
       this.addedManagersCount > 1 &&
       this.maxCountManagersByQuota - this.addedManagersCount <=

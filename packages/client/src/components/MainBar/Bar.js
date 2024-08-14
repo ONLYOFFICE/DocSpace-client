@@ -68,7 +68,7 @@ const Bar = (props) => {
     addedManagersCount,
 
     showRoomQuotaBar,
-    showStorageQuotaBar,
+    isStorageTariffAlmostLimit,
     isUserTariffAlmostLimit,
 
     currentColorScheme,
@@ -77,7 +77,7 @@ const Bar = (props) => {
     showUserPersonalQuotaBar,
 
     tenantCustomQuota,
-    showTenantCustomQuotaBar,
+    isStorageTariffLimit,
     isUserTariffLimit,
   } = props;
 
@@ -85,7 +85,8 @@ const Bar = (props) => {
 
   const [barVisible, setBarVisible] = useState({
     roomQuota: false,
-    storageQuota: false,
+    storageTariff: false,
+    storageTariffLimit: false,
     tenantCustomQuota: false,
     usersTariff: false,
     usersTariffLimit: false,
@@ -139,10 +140,17 @@ const Bar = (props) => {
           usersTariff: !closed.includes(QuotaBarTypes.UsersTariff),
         }));
       }
+      console.log(
+        "!closed.includes(QuotaBarTypes.StorageTariff)",
+        !closed.includes(QuotaBarTypes.StorageTariff),
+      );
       if (isAdmin || isPowerUser || isRoomAdmin) {
         setBarVisible((value) => ({
           ...value,
-          storageQuota: !closed.includes(QuotaBarTypes.StorageQuota),
+          storageTariff: !closed.includes(QuotaBarTypes.StorageTariff),
+          storageTariffLimit: !closed.includes(
+            QuotaBarTypes.StorageTariffLimit,
+          ),
           tenantCustomQuota: !closed.includes(QuotaBarTypes.TenantCustomQuota),
         }));
       }
@@ -156,7 +164,8 @@ const Bar = (props) => {
     } else {
       setBarVisible({
         roomQuota: isAdmin,
-        storageQuota: isAdmin || isPowerUser || isRoomAdmin,
+        storageTariff: isAdmin || isPowerUser || isRoomAdmin,
+        storageTariffLimit: isAdmin || isPowerUser || isRoomAdmin,
         tenantCustomQuota: isAdmin || isPowerUser || isRoomAdmin,
         usersTariff: isAdmin | isRoomAdmin,
         usersTariffLimit: isAdmin | isRoomAdmin,
@@ -236,15 +245,18 @@ const Bar = (props) => {
     localStorage.setItem("barClose", JSON.stringify(closed));
 
     switch (currentBar) {
-      case QuotaBarTypes.RoomQuota:
-        setBarVisible((value) => ({ ...value, roomQuota: false }));
+      // case QuotaBarTypes.RoomQuota:
+      //   setBarVisible((value) => ({ ...value, roomQuota: false }));
+      //   break;
+      case QuotaBarTypes.StorageTariff:
+        setBarVisible((value) => ({ ...value, storageTariff: false }));
         break;
-      case QuotaBarTypes.StorageQuota:
-        setBarVisible((value) => ({ ...value, storageQuota: false }));
+      case QuotaBarTypes.StorageTariffLimit:
+        setBarVisible((value) => ({ ...value, storageTariffLimit: false }));
         break;
-      case QuotaBarTypes.TenantCustomQuota:
-        setBarVisible((value) => ({ ...value, tenantCustomQuota: false }));
-        break;
+      // case QuotaBarTypes.TenantCustomQuota:
+      //   setBarVisible((value) => ({ ...value, tenantCustomQuota: false }));
+      //   break;
       case QuotaBarTypes.UsersTariff:
         setBarVisible((value) => ({
           ...value,
@@ -257,15 +269,15 @@ const Bar = (props) => {
           usersTariffLimit: false,
         }));
         break;
-      case QuotaBarTypes.UserAndStorageQuota:
-        setBarVisible((value) => ({ ...value, storageAndUserQuota: false }));
-        break;
-      case QuotaBarTypes.RoomAndStorageQuota:
-        setBarVisible((value) => ({ ...value, storageAndRoomQuota: false }));
-        break;
-      case QuotaBarTypes.PersonalUserQuota:
-        setBarVisible((value) => ({ ...value, personalUserQuota: false }));
-        break;
+      // case QuotaBarTypes.UserAndStorageQuota:
+      //   setBarVisible((value) => ({ ...value, storageAndUserQuota: false }));
+      //   break;
+      // case QuotaBarTypes.RoomAndStorageQuota:
+      //   setBarVisible((value) => ({ ...value, storageAndRoomQuota: false }));
+      //   break;
+      // case QuotaBarTypes.PersonalUserQuota:
+      //   setBarVisible((value) => ({ ...value, personalUserQuota: false }));
+      //   break;
     }
 
     setMaintenanceExist(false);
@@ -285,47 +297,62 @@ const Bar = (props) => {
   };
 
   const getCurrentBar = () => {
-    if (
-      showRoomQuotaBar &&
-      showStorageQuotaBar &&
-      barVisible.storageAndRoomQuota
-    ) {
-      return {
-        type: QuotaBarTypes.RoomAndStorageQuota,
-        maxValue: null,
-        currentValue: null,
-      };
-    }
-    if (
-      isUserTariffAlmostLimit &&
-      showStorageQuotaBar &&
-      barVisible.storageAndUserQuota
-    ) {
-      return {
-        type: QuotaBarTypes.UserAndStorageQuota,
-        maxValue: null,
-        currentValue: null,
-      };
-    }
+    // if (
+    //   showRoomQuotaBar &&
+    //   isStorageTariffAlmostLimit &&
+    //   barVisible.storageAndRoomQuota
+    // ) {
+    //   return {
+    //     type: QuotaBarTypes.RoomAndStorageQuota,
+    //     maxValue: null,
+    //     currentValue: null,
+    //   };
+    // }
+    // if (
+    //   isUserTariffAlmostLimit &&
+    //   isStorageTariffAlmostLimit &&
+    //   barVisible.storageAndUserQuota
+    // ) {
+    //   return {
+    //     type: QuotaBarTypes.UserAndStorageQuota,
+    //     maxValue: null,
+    //     currentValue: null,
+    //   };
+    // }
 
-    if (showRoomQuotaBar && barVisible.roomQuota) {
+    // if (showRoomQuotaBar && barVisible.roomQuota) {
+    //   return {
+    //     type: QuotaBarTypes.RoomQuota,
+    //     maxValue: maxCountRoomsByQuota,
+    //     currentValue: usedRoomsCount,
+    //   };
+    // }
+
+    // if (isStorageTariffLimit && barVisible.tenantCustomQuota) {
+    //   return {
+    //     type: QuotaBarTypes.TenantCustomQuota,
+    //     maxValue: getConvertedSize(t, tenantCustomQuota),
+    //     currentValue: getConvertedSize(t, usedTotalStorageSizeCount),
+    //   };
+    // }
+
+    console.log(
+      "isStorageTariffAlmostLimit",
+      isStorageTariffAlmostLimit,
+      barVisible.storageTariff,
+    );
+    if (isStorageTariffAlmostLimit && barVisible.storageTariff) {
       return {
-        type: QuotaBarTypes.RoomQuota,
-        maxValue: maxCountRoomsByQuota,
-        currentValue: usedRoomsCount,
-      };
-    }
-    if (showStorageQuotaBar && barVisible.storageQuota) {
-      return {
-        type: QuotaBarTypes.StorageQuota,
+        type: QuotaBarTypes.StorageTariff,
         maxValue: getConvertedSize(t, maxTotalSizeByQuota),
         currentValue: getConvertedSize(t, usedTotalStorageSizeCount),
       };
     }
-    if (showTenantCustomQuotaBar && barVisible.tenantCustomQuota) {
+
+    if (isStorageTariffLimit && barVisible.storageTariffLimit) {
       return {
-        type: QuotaBarTypes.TenantCustomQuota,
-        maxValue: getConvertedSize(t, tenantCustomQuota),
+        type: QuotaBarTypes.StorageTariffLimit,
+        maxValue: getConvertedSize(t, maxTotalSizeByQuota),
         currentValue: getConvertedSize(t, usedTotalStorageSizeCount),
       };
     }
@@ -346,11 +373,11 @@ const Bar = (props) => {
       };
     }
 
-    if (showUserPersonalQuotaBar && barVisible.personalUserQuota) {
-      return {
-        type: QuotaBarTypes.PersonalUserQuota,
-      };
-    }
+    // if (showUserPersonalQuotaBar && barVisible.personalUserQuota) {
+    //   return {
+    //     type: QuotaBarTypes.PersonalUserQuota,
+    //   };
+    // }
     return null;
   };
 
@@ -423,11 +450,11 @@ export default inject(
       addedManagersCount,
 
       showRoomQuotaBar,
-      showStorageQuotaBar,
+      isStorageTariffAlmostLimit,
       isUserTariffAlmostLimit,
       showUserPersonalQuotaBar,
       tenantCustomQuota,
-      showTenantCustomQuotaBar,
+      isStorageTariffLimit,
       isUserTariffLimit,
     } = currentQuotaStore;
 
@@ -453,7 +480,7 @@ export default inject(
       addedManagersCount,
 
       showRoomQuotaBar,
-      showStorageQuotaBar,
+      isStorageTariffAlmostLimit,
       isUserTariffAlmostLimit,
 
       currentColorScheme,
@@ -461,7 +488,7 @@ export default inject(
 
       showUserPersonalQuotaBar,
       tenantCustomQuota,
-      showTenantCustomQuotaBar,
+      isStorageTariffLimit,
       isUserTariffLimit,
     };
   },

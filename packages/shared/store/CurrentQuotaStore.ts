@@ -252,10 +252,19 @@ class CurrentQuotasStore {
     );
   }
 
-  get showStorageQuotaBar() {
+  get isStorageTariffAlmostLimit() {
     return (
       (this.usedTotalStorageSizeCount / this.maxTotalSizeByQuota) * 100 >=
-      PERCENTAGE_FOR_SHOWING_BAR
+        PERCENTAGE_FOR_SHOWING_BAR &&
+      this.usedTotalStorageSizeCount < this.maxTotalSizeByQuota
+    );
+  }
+
+  get isStorageTariffLimit() {
+    return (
+      (this.usedTotalStorageSizeCount / this.maxTotalSizeByQuota) * 100 >=
+        PERCENTAGE_FOR_SHOWING_BAR &&
+      this.usedTotalStorageSizeCount >= this.maxTotalSizeByQuota
     );
   }
 

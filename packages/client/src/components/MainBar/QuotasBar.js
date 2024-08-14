@@ -117,7 +117,10 @@ const QuotasBar = ({
     );
   };
   const getUserTariffAlmostLimit = () => {
-    if (!isAdmin) return t("UserTariffAlmostReached");
+    if (!isAdmin)
+      return t("UserTariffAlmostReached", {
+        productName: t("Common:ProductName"),
+      });
 
     return (
       <Trans
@@ -165,6 +168,31 @@ const QuotasBar = ({
       />
     );
   };
+
+  const getStorageTariffDescription = () => {
+    if (!isAdmin)
+      return t("RemoveFilesOrContactToUpgrade", {
+        productName: t("Common:ProductName"),
+      });
+
+    return (
+      <Trans
+        t={t}
+        i18nKey="RemoveFilesOrClickToUpgrade"
+        components={{
+          1: (
+            <Link
+              fontSize="12px"
+              fontWeight="400"
+              color={currentColorScheme?.main?.accent}
+              className="error_description_link"
+              onClick={onClickAction}
+            />
+          ),
+        }}
+      />
+    );
+  };
   const getQuotaInfo = () => {
     switch (type) {
       case QuotaBarTypes.RoomQuota:
@@ -189,10 +217,15 @@ const QuotasBar = ({
             </Trans>
           ),
         };
-      case QuotaBarTypes.StorageQuota:
+      case QuotaBarTypes.StorageTariff:
         return {
           header: t("StorageQuotaHeader", { currentValue, maxValue }),
-          description: getStorageQuotaDescription(),
+          description: getStorageTariffDescription(),
+        };
+      case QuotaBarTypes.StorageTariffLimit:
+        return {
+          header: t("StorageTariffLimit", { currentValue, maxValue }),
+          description: getStorageTariffDescription(),
         };
       case QuotaBarTypes.TenantCustomQuota:
         return {
@@ -204,7 +237,7 @@ const QuotasBar = ({
           header: t("UserQuotaHeader", { currentValue, maxValue }),
           description: getUserTariffAlmostLimit(),
         };
-      case QuotaBarTypes.UsersTariffLimit:
+      case QuotaBarTypes.TariffLimitPerUser:
         return {
           header: t("UserTariffLimit", { currentValue, maxValue }),
           description: getUserTariffLimit(),

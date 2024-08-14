@@ -63,18 +63,35 @@ const useTheme = ({ user, colorTheme, systemTheme, i18n }: UseThemeProps) => {
         ({} as TColorScheme)
       : ({} as TColorScheme);
 
-    const newTheme = match<MatchType>([user?.theme, systemTheme])
-      .returnType<TTheme>()
-      .with([ThemeKeys.DarkStr, P._], () => Dark)
-      .with([ThemeKeys.BaseStr, P._], () => Base)
-      .with([ThemeKeys.SystemStr, ThemeKeys.BaseStr], () => Base)
-      .with([ThemeKeys.SystemStr, ThemeKeys.DarkStr], () => Dark)
-      .with([undefined, ThemeKeys.DarkStr], () => Dark)
-      .with([undefined, ThemeKeys.BaseStr], () => Base)
-      .otherwise(() => Base);
+    let newTheme;
+
+    if (user?.theme === ThemeKeys.DarkStr) {
+      newTheme = Dark;
+    }
+    if (user?.theme === ThemeKeys.BaseStr) {
+      newTheme = Base;
+    }
+    if (
+      user?.theme === ThemeKeys.SystemStr &&
+      systemTheme === ThemeKeys.BaseStr
+    ) {
+      newTheme = Base;
+    }
+    if (
+      user?.theme === ThemeKeys.SystemStr &&
+      systemTheme === ThemeKeys.DarkStr
+    ) {
+      newTheme = Dark;
+    }
+    if (!user?.theme && systemTheme === ThemeKeys.DarkStr) {
+      newTheme = Dark;
+    }
+    if (!user?.theme && systemTheme === ThemeKeys.BaseStr) {
+      newTheme = Base;
+    }
 
     return {
-      ...newTheme,
+      ...(newTheme ?? Base),
       currentColorScheme: currColorTheme,
     };
   });

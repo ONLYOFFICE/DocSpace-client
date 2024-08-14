@@ -653,6 +653,7 @@ export const ViewerPlayer = ({
             onDurationChange={handleDurationChange}
             onLoadedMetadata={handleLoadedMetaDataVideo}
             onPlay={() => setIsPlaying(true)}
+            onContextMenu={(event) => event.preventDefault()}
           />
           <PlayerBigPlayButton
             onClick={handleBigPlayButtonClick}

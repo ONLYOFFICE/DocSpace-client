@@ -296,6 +296,11 @@ class CurrentQuotasStore {
   }
 
   get isUserTariffAlmostLimit() {
+    console.log(
+      "isUserTariffAlmostLimit",
+      this.addedManagersCount,
+      this.maxCountManagersByQuota,
+    );
     return (
       this.addedManagersCount > 1 &&
       this.maxCountManagersByQuota - this.addedManagersCount <=

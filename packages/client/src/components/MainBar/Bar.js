@@ -93,7 +93,8 @@ const Bar = (props) => {
     storageQuotaLimit: false,
     usersTariff: false,
     usersTariffLimit: false,
-    storageAndUserQuota: false,
+    storageAndUserTariff: false,
+    storageAndUserTariffLimit: false,
     storageAndRoomQuota: false,
     confirmEmail: false,
     personalUserQuota: false,
@@ -128,10 +129,7 @@ const Bar = (props) => {
           roomQuota: !closed.includes(QuotaBarTypes.RoomQuota),
 
           storageAndRoomQuota: !closed.includes(
-            QuotaBarTypes.UserAndStorageQuota,
-          ),
-          storageAndUserQuota: !closed.includes(
-            QuotaBarTypes.RoomAndStorageQuota,
+            QuotaBarTypes.UserAndStorageTariff,
           ),
         }));
       }
@@ -141,6 +139,12 @@ const Bar = (props) => {
           ...value,
           usersTariffLimit: !closed.includes(QuotaBarTypes.UsersTariffLimit),
           usersTariff: !closed.includes(QuotaBarTypes.UsersTariff),
+          storageAndUserTariff: !closed.includes(
+            QuotaBarTypes.UserAndStorageTariff,
+          ),
+          storageAndUserTariffLimit: !closed.includes(
+            QuotaBarTypes.UserAndStorageTariffLimit,
+          ),
         }));
       }
 
@@ -172,7 +176,8 @@ const Bar = (props) => {
         storageQuotaLimit: isAdmin || isPowerUser || isRoomAdmin,
         usersTariff: isAdmin | isRoomAdmin,
         usersTariffLimit: isAdmin | isRoomAdmin,
-        storageAndUserQuota: isAdmin,
+        storageAndUserTariff: isAdmin | isRoomAdmin,
+        storageAndUserTariffLimit: isAdmin | isRoomAdmin,
         storageAndRoomQuota: isAdmin,
         confirmEmail: true,
         personalUserQuota: isAdmin || isPowerUser || isRoomAdmin,
@@ -275,9 +280,15 @@ const Bar = (props) => {
           usersTariffLimit: false,
         }));
         break;
-      // case QuotaBarTypes.UserAndStorageQuota:
-      //   setBarVisible((value) => ({ ...value, storageAndUserQuota: false }));
-      //   break;
+      case QuotaBarTypes.UserAndStorageTariff:
+        setBarVisible((value) => ({ ...value, storageAndUserTariff: false }));
+        break;
+      case QuotaBarTypes.UserAndStorageTariffLimit:
+        setBarVisible((value) => ({
+          ...value,
+          storageAndUserTariffLimit: false,
+        }));
+        break;
       // case QuotaBarTypes.RoomAndStorageQuota:
       //   setBarVisible((value) => ({ ...value, storageAndRoomQuota: false }));
       //   break;
@@ -314,18 +325,34 @@ const Bar = (props) => {
     //     currentValue: null,
     //   };
     // }
-    // if (
-    //   isUserTariffAlmostLimit &&
-    //   isStorageTariffAlmostLimit &&
-    //   barVisible.storageAndUserQuota
-    // ) {
-    //   return {
-    //     type: QuotaBarTypes.UserAndStorageQuota,
-    //     maxValue: null,
-    //     currentValue: null,
-    //   };
-    // }
-
+    console.log(
+      "isUserTariffAlmostLimit",
+      isUserTariffAlmostLimit,
+      isStorageTariffAlmostLimit,
+      barVisible.storageAndUserTariff,
+    );
+    if (
+      isUserTariffAlmostLimit &&
+      isStorageTariffAlmostLimit &&
+      barVisible.storageAndUserTariff
+    ) {
+      return {
+        type: QuotaBarTypes.UserAndStorageTariff,
+        maxValue: null,
+        currentValue: null,
+      };
+    }
+    if (
+      isUserTariffLimit &&
+      isStorageTariffLimit &&
+      barVisible.storageAndUserTariffLimit
+    ) {
+      return {
+        type: QuotaBarTypes.UserAndStorageTariffLimit,
+        maxValue: null,
+        currentValue: null,
+      };
+    }
     // if (showRoomQuotaBar && barVisible.roomQuota) {
     //   return {
     //     type: QuotaBarTypes.RoomQuota,

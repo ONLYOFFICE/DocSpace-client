@@ -217,8 +217,33 @@ const QuotasBar = ({
   };
 
   const getPersonalQuotaHeader = () => {
-    if (!isAdmin) return t("PersonalStorageQuotaExceed");
-    return t("StorageQuotaPerUserExceeded");
+    if (!isAdmin) return t("PersonalQuotaHeader");
+    return t("PersonalQuotaHeaderForAdmins");
+  };
+
+  const getUpgradeTariffDescription = () => {
+    if (!isAdmin)
+      return t("ContactToUpgradeTariff", {
+        productName: t("Common:ProductName"),
+      });
+
+    return (
+      <Trans
+        t={t}
+        i18nKey="ClickToUpgradeTariff"
+        components={{
+          1: (
+            <Link
+              fontSize="12px"
+              fontWeight="400"
+              color={currentColorScheme?.main?.accent}
+              className="error_description_link"
+              onClick={onClickAction}
+            />
+          ),
+        }}
+      />
+    );
   };
   const getQuotaInfo = () => {
     switch (type) {
@@ -251,7 +276,7 @@ const QuotasBar = ({
         };
       case QuotaBarTypes.StorageTariffLimit:
         return {
-          header: t("StorageTariffLimit", { currentValue, maxValue }),
+          header: t("StorageLimitHeader", { currentValue, maxValue }),
           description: getStorageTariffDescription(),
         };
       case QuotaBarTypes.StorageQuota:
@@ -261,7 +286,7 @@ const QuotasBar = ({
         };
       case QuotaBarTypes.StorageQuotaLimit:
         return {
-          header: t("StorageTariffLimit", { currentValue, maxValue }),
+          header: t("StorageLimitHeader", { currentValue, maxValue }),
           description: getTenantCustomQuota(),
         };
       case QuotaBarTypes.UsersTariff:
@@ -271,13 +296,18 @@ const QuotasBar = ({
         };
       case QuotaBarTypes.UsersTariffLimit:
         return {
-          header: t("UserTariffLimit", { currentValue, maxValue }),
+          header: t("UserTariffLimitHeader", { currentValue, maxValue }),
           description: getUserTariffLimit(),
         };
-      case QuotaBarTypes.UserAndStorageQuota:
+      case QuotaBarTypes.UserAndStorageTariff:
         return {
-          header: t("StorageAndUserHeader", { currentValue, maxValue }),
-          description: getUserQuotaDescription(),
+          header: t("StorageAndUserHeader"),
+          description: getUpgradeTariffDescription(),
+        };
+      case QuotaBarTypes.UserAndStorageTariffLimit:
+        return {
+          header: t("StorageAndUserTariffLimitHeader"),
+          description: getUpgradeTariffDescription(),
         };
       case QuotaBarTypes.RoomAndStorageQuota:
         return {

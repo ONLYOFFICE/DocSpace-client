@@ -24,18 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { getColorTheme, getSettings } from "@/utils/actions";
+import { getSettings } from "@/utils/actions";
 import ProfileRemoveForm from "@/components/ProfileRemoveForm ";
 
 async function Page() {
-  const [settings, colorTheme] = await Promise.all([
-    getSettings(),
-    getColorTheme(),
-  ]);
-
-  const currentColorScheme = colorTheme?.themes.find((theme) => {
-    return colorTheme && colorTheme.selected === theme.id;
-  });
+  const settings = await getSettings();
 
   return (
     <div className="content-center">
@@ -43,7 +36,6 @@ async function Page() {
         <ProfileRemoveForm
           greetingSettings={settings.greetingSettings}
           legalTerms={settings.legalTerms}
-          currentColorScheme={currentColorScheme}
         />
       )}
     </div>

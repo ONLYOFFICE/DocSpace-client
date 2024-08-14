@@ -28,7 +28,6 @@ import TfaActivationForm from "@/components/TfaActivationForm";
 import { StyledForm } from "@/components/TfaActivationForm/TfaActivationForm.styled";
 import { getStringFromSearchParams } from "@/utils";
 import {
-  getColorTheme,
   getSettings,
   getTfaSecretKeyAndQR,
   getUserFromConfirm,
@@ -39,12 +38,6 @@ type TfaActivationProps = {
 };
 
 async function Page({ searchParams }: TfaActivationProps) {
-  const colorTheme = await getColorTheme();
-
-  const currentColorScheme = colorTheme?.themes.find((theme) => {
-    return colorTheme && colorTheme.selected === theme.id;
-  });
-
   const confirmKey = getStringFromSearchParams(searchParams);
   const uid = searchParams.uid;
 
@@ -63,7 +56,6 @@ async function Page({ searchParams }: TfaActivationProps) {
             qrCode={res.qrCodeSetupImageUrl}
             passwordHash={settings?.passwordHash}
             userName={user?.userName}
-            currentColorScheme={currentColorScheme}
           />
         </StyledForm>
       )}

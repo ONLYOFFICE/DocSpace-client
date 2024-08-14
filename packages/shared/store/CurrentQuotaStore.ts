@@ -304,7 +304,7 @@ class CurrentQuotasStore {
     return this.currentTariffStatusStore?.isGracePeriod;
   };
 
-  get showUserPersonalQuotaBar() {
+  get isPersonalQuotaLimit() {
     const personalQuotaLimitReached = this.userStore?.personalQuotaLimitReached;
 
     if (!this.isDefaultUsersQuotaSet) return false;

@@ -193,6 +193,33 @@ const QuotasBar = ({
       />
     );
   };
+
+  const getPersonalQuotaDescription = () => {
+    if (!isAdmin) return t("PersonalUserQuotaDescription");
+
+    return (
+      <Trans
+        t={t}
+        i18nKey="PersonalUserQuotaAdminsDescription"
+        components={{
+          1: (
+            <Link
+              fontSize="12px"
+              fontWeight="400"
+              color={currentColorScheme?.main?.accent}
+              className="error_description_link"
+              onClick={onClickAction}
+            />
+          ),
+        }}
+      />
+    );
+  };
+
+  const getPersonalQuotaHeader = () => {
+    if (!isAdmin) return t("PersonalStorageQuotaExceed");
+    return t("StorageQuotaPerUserExceeded");
+  };
   const getQuotaInfo = () => {
     switch (type) {
       case QuotaBarTypes.RoomQuota:
@@ -237,7 +264,7 @@ const QuotasBar = ({
           header: t("UserQuotaHeader", { currentValue, maxValue }),
           description: getUserTariffAlmostLimit(),
         };
-      case QuotaBarTypes.TariffLimitPerUser:
+      case QuotaBarTypes.UsersTariffLimit:
         return {
           header: t("UserTariffLimit", { currentValue, maxValue }),
           description: getUserTariffLimit(),
@@ -253,25 +280,9 @@ const QuotasBar = ({
           description: getUserQuotaDescription(),
         };
       case QuotaBarTypes.PersonalUserQuota:
-        const description = !isAdmin ? (
-          t("PersonalUserQuotaDescription")
-        ) : (
-          <Trans i18nKey="PersonalUserQuotaAdminsDescription" t={t}>
-            To upload and create new files and folders, please free up disk
-            space, or manage quota per user in the
-            <Link
-              fontSize="12px"
-              fontWeight="400"
-              color={currentColorScheme?.main?.accent}
-              onClick={onClickAction}
-            >
-              Storage management settings.
-            </Link>
-          </Trans>
-        );
         return {
-          header: t("StorageQuotaExceeded"),
-          description,
+          header: getPersonalQuotaHeader(),
+          description: getPersonalQuotaDescription(),
         };
 
       default:

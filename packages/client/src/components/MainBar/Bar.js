@@ -74,7 +74,7 @@ const Bar = (props) => {
     currentColorScheme,
 
     setMainBarVisible,
-    showUserPersonalQuotaBar,
+    isPersonalQuotaLimit,
 
     tenantCustomQuota,
     isStorageTariffLimit,
@@ -140,10 +140,7 @@ const Bar = (props) => {
           usersTariff: !closed.includes(QuotaBarTypes.UsersTariff),
         }));
       }
-      console.log(
-        "!closed.includes(QuotaBarTypes.StorageTariff)",
-        !closed.includes(QuotaBarTypes.StorageTariff),
-      );
+
       if (isAdmin || isPowerUser || isRoomAdmin) {
         setBarVisible((value) => ({
           ...value,
@@ -151,7 +148,9 @@ const Bar = (props) => {
           storageTariffLimit: !closed.includes(
             QuotaBarTypes.StorageTariffLimit,
           ),
+
           tenantCustomQuota: !closed.includes(QuotaBarTypes.TenantCustomQuota),
+          personalUserQuota: !closed.includes(QuotaBarTypes.PersonalUserQuota),
         }));
       }
 
@@ -172,7 +171,7 @@ const Bar = (props) => {
         storageAndUserQuota: isAdmin,
         storageAndRoomQuota: isAdmin,
         confirmEmail: true,
-        personalUserQuota: true,
+        personalUserQuota: isAdmin || isPowerUser || isRoomAdmin,
       });
     }
 
@@ -275,9 +274,9 @@ const Bar = (props) => {
       // case QuotaBarTypes.RoomAndStorageQuota:
       //   setBarVisible((value) => ({ ...value, storageAndRoomQuota: false }));
       //   break;
-      // case QuotaBarTypes.PersonalUserQuota:
-      //   setBarVisible((value) => ({ ...value, personalUserQuota: false }));
-      //   break;
+      case QuotaBarTypes.PersonalUserQuota:
+        setBarVisible((value) => ({ ...value, personalUserQuota: false }));
+        break;
     }
 
     setMaintenanceExist(false);
@@ -336,11 +335,6 @@ const Bar = (props) => {
     //   };
     // }
 
-    console.log(
-      "isStorageTariffAlmostLimit",
-      isStorageTariffAlmostLimit,
-      barVisible.storageTariff,
-    );
     if (isStorageTariffAlmostLimit && barVisible.storageTariff) {
       return {
         type: QuotaBarTypes.StorageTariff,
@@ -372,12 +366,13 @@ const Bar = (props) => {
         currentValue: addedManagersCount,
       };
     }
+    console.log("isPersonalQuotaLimit", isPersonalQuotaLimit);
+    if (isPersonalQuotaLimit && barVisible.personalUserQuota) {
+      return {
+        type: QuotaBarTypes.PersonalUserQuota,
+      };
+    }
 
-    // if (showUserPersonalQuotaBar && barVisible.personalUserQuota) {
-    //   return {
-    //     type: QuotaBarTypes.PersonalUserQuota,
-    //   };
-    // }
     return null;
   };
 
@@ -452,7 +447,7 @@ export default inject(
       showRoomQuotaBar,
       isStorageTariffAlmostLimit,
       isUserTariffAlmostLimit,
-      showUserPersonalQuotaBar,
+      isPersonalQuotaLimit,
       tenantCustomQuota,
       isStorageTariffLimit,
       isUserTariffLimit,
@@ -486,7 +481,7 @@ export default inject(
       currentColorScheme,
       setMainBarVisible,
 
-      showUserPersonalQuotaBar,
+      isPersonalQuotaLimit,
       tenantCustomQuota,
       isStorageTariffLimit,
       isUserTariffLimit,

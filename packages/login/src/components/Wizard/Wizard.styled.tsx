@@ -76,47 +76,6 @@ export const WizardFormWrapper = styled.div<{ bgPattern: string }>`
     }
   }
 
-  .invitation-info-container {
-    margin-bottom: 16px;
-    .sign-in-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-
-      margin-bottom: 16px;
-      .back-title {
-        position: absolute;
-        text-overflow: ellipsis;
-        overflow: hidden;
-
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                right: 0;
-              `
-            : css`
-                left: 0;
-              `};
-
-        display: flex;
-        gap: 4px;
-
-        svg {
-          ${(props) =>
-            props.theme.interfaceDirection === "rtl" &&
-            " transform: rotate(180deg)"};
-        }
-
-        p {
-          color: ${(props) => props.theme.login.backTitle.color};
-        }
-
-        p:hover {
-          cursor: pointer;
-        }
-      }
-    }
   }
 `;
 

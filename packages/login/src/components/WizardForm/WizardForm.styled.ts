@@ -110,22 +110,19 @@ export const StyledInfo = styled.div`
 
   margin-bottom: 4px;
 
+  .text {
+    color: ${(props) => props.theme.client.wizard.textColor};
+  }
+
   .machine-name {
     padding-bottom: 4px;
     padding-top: 4px;
-    padding-left: 8px;
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `padding-right: 8px;`
-        : `padding-left: 8px;`}
+    padding-inline-start: 8px;
     line-height: 20px;
   }
 
   .combo-button {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `padding-right: 8px;`
-        : `padding-left: 8px;`}
+    padding-inline-start: 8px;
   }
 
   .wrapper__language-selector {
@@ -156,9 +153,6 @@ export const StyledAcceptTerms = styled.div`
   padding-bottom: 24px;
 
   .wizard-checkbox svg {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-left: 8px;`
-        : `margin-right: 8px;`}
+    margin-inline-end: 8px;
   }
 `;

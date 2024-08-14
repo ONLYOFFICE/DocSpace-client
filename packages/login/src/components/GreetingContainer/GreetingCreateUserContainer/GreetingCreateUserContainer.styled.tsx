@@ -33,7 +33,6 @@ const TABLET_WIDTH = 480;
 export const GreetingContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: left;
   height: 100%;
   width: ${DESKTOP_WIDTH}px;
 

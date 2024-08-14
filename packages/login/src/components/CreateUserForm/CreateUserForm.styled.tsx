@@ -38,6 +38,7 @@ export const RegisterContainer = styled.div<{
   width: 100%;
 
   .or-label {
+    color: ${(props) => props.theme.invitePage.textColor};
     margin: 0 8px;
   }
 

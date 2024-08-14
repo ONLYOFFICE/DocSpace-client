@@ -518,7 +518,6 @@ class LdapFormStore {
         toastr.success(t("Common:SuccessfullyCompletedOperation"));
       }
     } catch (error) {
-      console.error(error);
       toastr.error(error);
       this.endProcess();
     }

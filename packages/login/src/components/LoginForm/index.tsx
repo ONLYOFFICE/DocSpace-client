@@ -53,7 +53,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { thirdPartyLogin, checkConfirmLink } from "@docspace/shared/api/user";
 import { setWithCredentialsStatus } from "@docspace/shared/api/client";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
-import { RecaptchaType } from "@docspace/shared/enums";
+import { ButtonKeys, RecaptchaType } from "@docspace/shared/enums";
 import { getAvailablePortals } from "@docspace/shared/api/management";
 import { getCookie } from "@docspace/shared/utils";
 import { deleteCookie } from "@docspace/shared/utils/cookie";
@@ -416,7 +416,7 @@ const LoginForm = ({
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Enter") {
+      if (e.key === ButtonKeys.enter) {
         if (isModalOpen) return;
 
         onSubmit();

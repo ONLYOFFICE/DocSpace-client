@@ -39,6 +39,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { sendInstructionsToChangePassword } from "@docspace/shared/api/people";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import { InputSize, InputType } from "@docspace/shared/components/text-input";
+import { ButtonKeys } from "@docspace/shared/enums";
 
 import { ForgotPasswordModalDialogProps } from "@/types";
 
@@ -84,7 +85,7 @@ const ForgotPasswordModalDialog = ({
 
   const onKeyDown = React.useCallback(
     (e: KeyboardEvent) => {
-      if (e.key === "Enter") {
+      if (e.key === ButtonKeys.enter) {
         onSendPasswordInstructions();
         e.preventDefault();
       }

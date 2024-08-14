@@ -36,7 +36,7 @@ import {
   TextInput,
 } from "@docspace/shared/components/text-input";
 import { toastr } from "@docspace/shared/components/toast";
-import { EmployeeActivationStatus } from "@docspace/shared/enums";
+import { ButtonKeys, EmployeeActivationStatus } from "@docspace/shared/enums";
 import {
   TPasswordHash,
   TPasswordSettings,
@@ -46,17 +46,17 @@ import { PasswordInput } from "@docspace/shared/components/password-input";
 import { ALLOWED_PASSWORD_CHARACTERS } from "@docspace/shared/constants";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { login } from "@docspace/shared/utils/loginUtils";
+import {
+  changePassword,
+  updateActivationStatus,
+  updateUser,
+} from "@docspace/shared/api/people";
 
 import { TActivateConfirmUser, TError } from "@/types";
 
 import { RegisterContainer } from "../CreateUserForm/CreateUserForm.styled";
 import { GreetingUserContainer } from "../CreateUserForm/sub-components/GreetingUserContainer";
 import { ConfirmRouteContext } from "../ConfirmRoute";
-import {
-  changePassword,
-  updateActivationStatus,
-  updateUser,
-} from "@docspace/shared/api/people";
 
 type ActivateUserFormPorps = {
   passwordHash: TPasswordHash;
@@ -184,7 +184,7 @@ const ActivateUserForm = ({
   };
 
   const onKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
+    if (event.key === ButtonKeys.enter) {
       onSubmit();
     }
   };

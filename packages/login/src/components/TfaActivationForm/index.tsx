@@ -49,6 +49,7 @@ import { TPasswordHash } from "@docspace/shared/api/settings/types";
 import { loginWithTfaCode } from "@docspace/shared/api/user";
 import { validateTfaCode } from "@docspace/shared/api/settings";
 import { OPEN_BACKUP_CODES_DIALOG } from "@docspace/shared/constants";
+import { ButtonKeys } from "@docspace/shared/enums";
 
 import {
   TFA_ANDROID_APP_URL,
@@ -124,7 +125,11 @@ const TfaActivationForm = ({
   };
 
   const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.code === "Enter" || event.code === "NumpadEnter") onSubmit();
+    if (
+      event.code === ButtonKeys.enter ||
+      event.code === ButtonKeys.numpadEnter
+    )
+      onSubmit();
   };
 
   return (

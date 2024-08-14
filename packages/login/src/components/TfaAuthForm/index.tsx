@@ -43,6 +43,7 @@ import {
 } from "@docspace/shared/components/text-input";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { TPasswordHash } from "@docspace/shared/api/settings/types";
+import { ButtonKeys } from "@docspace/shared/enums";
 
 import { TError } from "@/types";
 
@@ -112,7 +113,11 @@ const TfaAuthForm = ({
   };
 
   const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.code === "Enter" || event.code === "NumpadEnter") onSubmit();
+    if (
+      event.code === ButtonKeys.enter ||
+      event.code === ButtonKeys.numpadEnter
+    )
+      onSubmit();
   };
 
   return (

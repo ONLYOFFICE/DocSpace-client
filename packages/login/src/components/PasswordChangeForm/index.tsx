@@ -43,6 +43,7 @@ import {
 } from "@docspace/shared/api/settings/types";
 import { ALLOWED_PASSWORD_CHARACTERS } from "@docspace/shared/constants";
 import { changePassword } from "@docspace/shared/api/people";
+import { ButtonKeys } from "@docspace/shared/enums";
 
 import { TError } from "@/types";
 import { ConfirmRouteContext } from "../ConfirmRoute";
@@ -136,7 +137,7 @@ const PasswordChangeForm = ({
   };
 
   const onKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === ButtonKeys.enter) {
       onSubmit();
     }
   };

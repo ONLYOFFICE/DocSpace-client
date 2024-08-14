@@ -57,7 +57,7 @@ import {
   getOAuthToken,
 } from "@docspace/shared/utils/common";
 import { setCookie } from "@docspace/shared/utils/cookie";
-import { DeviceType } from "@docspace/shared/enums";
+import { ButtonKeys, DeviceType } from "@docspace/shared/enums";
 import { TValidate } from "@docspace/shared/components/email-input";
 import { TCreateUserData, TError } from "@/types";
 import { SocialButtonsGroup } from "@docspace/shared/components/social-buttons-group";
@@ -367,7 +367,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
   };
 
   const onKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === ButtonKeys.enter) {
       registrationForm ? onSubmit() : onContinue();
     }
   };

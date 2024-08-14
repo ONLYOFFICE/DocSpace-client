@@ -46,11 +46,15 @@ const EmailActivationHandler = () => {
   const { email, uid = "", key = "" } = linkData;
 
   useEffect(() => {
-    updateActivationStatus(EmployeeActivationStatus.Activated, uid, key)
-      .then(() => {
-        window.location.replace(`/login?confirmedEmail=${email}`);
-      })
-      .catch((error) => {
+    async function changeActivationStatus() {
+      await updateActivationStatus(
+        EmployeeActivationStatus.Activated,
+        uid,
+        key,
+      );
+      window.location.replace(`/login?confirmedEmail=${email}`);
+      try {
+      } catch (error) {
         const knownError = error as TError;
         let errorMessage: string;
 
@@ -63,9 +67,11 @@ const EmailActivationHandler = () => {
         } else {
           errorMessage = knownError;
         }
-
         setError(errorMessage);
-      });
+      }
+    }
+
+    changeActivationStatus();
   }, [email, key, uid, router]);
 
   if (error) {

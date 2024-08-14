@@ -48,13 +48,15 @@ const AuthHandler = () => {
   const { email = "", key = "" } = linkData;
 
   useEffect(() => {
-    loginWithConfirmKey({
-      ConfirmData: {
-        Email: email,
-        Key: key,
-      },
-    })
-      ?.then((res) => {
+    async function loginWithKey() {
+      try {
+        const res = await loginWithConfirmKey({
+          ConfirmData: {
+            Email: email,
+            Key: key,
+          },
+        });
+
         //console.log("Login with confirm key success", res);
         frameCallEvent({ event: "onAuthSuccess" });
 
@@ -89,8 +91,7 @@ const AuthHandler = () => {
 
         if (typeof res === "string") window.location.replace(res);
         else window.location.replace("/");
-      })
-      .catch((error) => {
+      } catch (error) {
         const knownError = error as TError;
         let errorMessage: string;
 
@@ -105,8 +106,11 @@ const AuthHandler = () => {
         }
 
         frameCallEvent({ event: "onAppError", data: error });
-        toastr.error(error);
-      });
+        toastr.error(errorMessage);
+      }
+    }
+
+    loginWithKey();
   });
 
   return <AppLoader />;

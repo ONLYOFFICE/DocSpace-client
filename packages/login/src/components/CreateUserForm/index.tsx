@@ -151,16 +151,28 @@ const CreateUserForm = (props: CreateUserFormProps) => {
         culture: currentCultureName,
       };
 
-      return signupOAuth(signupAccount)
-        ?.then(() => {
-          const url = roomData.roomId
-            ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}/`
-            : defaultPage;
-          window.location.replace(url);
-        })
-        .catch((e) => {
-          toastr.error(e);
-        });
+      try {
+        await signupOAuth(signupAccount);
+
+        const url = roomData.roomId
+          ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}/`
+          : defaultPage;
+        window.location.replace(url);
+      } catch (error) {
+        const knownError = error as TError;
+        let errorMessage: string;
+
+        if (typeof knownError === "object") {
+          errorMessage =
+            knownError?.response?.data?.error?.message ||
+            knownError?.statusText ||
+            knownError?.message ||
+            "";
+        } else {
+          errorMessage = knownError;
+        }
+        toastr.error(errorMessage);
+      }
     },
     [
       currentCultureName,
@@ -241,7 +253,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     setIsLoading(false);
   };
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     const type = parseInt(linkData?.emplType ?? "");
 
     setIsLoading(true);
@@ -299,7 +311,9 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
     const headerKey = linkData?.confirmHeader ?? "";
 
-    createConfirmUser(confirmUser, headerKey).catch((error) => {
+    try {
+      await createConfirmUser(confirmUser, headerKey);
+    } catch (error) {
       const knownError = error as TError;
       let errorMessage: string;
 
@@ -318,7 +332,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       setEmailErrorText(errorMessage);
       setEmailValid(false);
       setIsLoading(false);
-    });
+    }
   };
 
   const createConfirmUser = async (
@@ -385,7 +399,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
   };
 
   const onSocialButtonClick = useCallback(
-    (e: MouseEvent<Element>) => {
+    async (e: MouseEvent<Element>) => {
       const target = e.target as HTMLElement;
       let targetElement = target;
 
@@ -408,18 +422,18 @@ const CreateUserForm = (props: CreateUserFormProps) => {
               "width=800,height=500,status=no,toolbar=no,menubar=no,resizable=yes,scrollbars=no",
             );
 
-        getOAuthToken(tokenGetterWin).then((code) => {
-          const token = window.btoa(
-            JSON.stringify({
-              auth: providerName,
-              mode: "popup",
-              callback: "authCallback",
-            }),
-          );
+        const code = await getOAuthToken(tokenGetterWin);
 
-          if (tokenGetterWin && typeof tokenGetterWin === "object")
-            tokenGetterWin.location.href = getLoginLink(token, code);
-        });
+        const token = window.btoa(
+          JSON.stringify({
+            auth: providerName,
+            mode: "popup",
+            callback: "authCallback",
+          }),
+        );
+
+        if (tokenGetterWin && typeof tokenGetterWin === "object")
+          tokenGetterWin.location.href = getLoginLink(token, code);
       } catch (err) {
         console.log(err);
       }

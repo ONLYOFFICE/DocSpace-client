@@ -42,11 +42,11 @@ const EmailChangeHandler = () => {
   const { email = "", uid = "", key = "" } = linkData;
 
   useEffect(() => {
-    changeEmail(uid, email, key)
-      .then(() => {
+    async function emailChange() {
+      try {
+        await changeEmail(uid, email, key);
         window.location.replace(`/profile?email_change=success`);
-      })
-      .catch((error) => {
+      } catch (error) {
         const knownError = error as TError;
         let errorMessage: string;
 
@@ -59,9 +59,11 @@ const EmailChangeHandler = () => {
         } else {
           errorMessage = knownError;
         }
-
         setError(errorMessage);
-      });
+      }
+    }
+
+    emailChange();
   }, [email, uid, key]);
 
   if (error) {

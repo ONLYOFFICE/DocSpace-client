@@ -231,7 +231,7 @@ function WizardForm(props: WizardFormProps) {
     });
   };
 
-  const onLicenseFileHandler = (file: File | File[]) => {
+  const onLicenseFileHandler = async (file: File | File[]) => {
     if (licenseUpload) setLicenseUpload(null);
     setHasErrorLicense(false);
     setInvalidLicense(false);
@@ -241,15 +241,14 @@ function WizardForm(props: WizardFormProps) {
 
     if (!wizardToken) return;
 
-    setLicense(wizardToken, fd)
-      .then((res) => {
-        setLicenseUpload(res);
-      })
-      .catch((e) => {
-        console.error(e);
-        setHasErrorLicense(true);
-        setInvalidLicense(true);
-      });
+    try {
+      const res = await setLicense(wizardToken, fd);
+      setLicenseUpload(res);
+    } catch (e) {
+      console.error(e);
+      setHasErrorLicense(true);
+      setInvalidLicense(true);
+    }
   };
 
   const onAgreeTermsChange = () => {

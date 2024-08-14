@@ -58,32 +58,32 @@ const ProfileRemoveForm = ({
   const [isProfileDeleted, setIsProfileDeleted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const onDeleteProfile = () => {
+  const onDeleteProfile = async () => {
     setIsLoading(true);
 
-    deleteSelf(linkData.confirmHeader)
-      ?.then(() => {
-        setIsLoading(false);
-        setIsProfileDeleted(true);
-      })
-      .catch((error) => {
-        const knownError = error as TError;
-        let errorMessage: string;
+    try {
+      await deleteSelf(linkData.confirmHeader);
 
-        if (typeof knownError === "object") {
-          errorMessage =
-            knownError?.response?.data?.error?.message ||
-            knownError?.statusText ||
-            knownError?.message ||
-            "";
-        } else {
-          errorMessage = knownError;
-        }
-        console.error(errorMessage);
+      setIsLoading(false);
+      setIsProfileDeleted(true);
+    } catch (error) {
+      const knownError = error as TError;
+      let errorMessage: string;
 
-        setIsLoading(false);
-        toastr.error(error);
-      });
+      if (typeof knownError === "object") {
+        errorMessage =
+          knownError?.response?.data?.error?.message ||
+          knownError?.statusText ||
+          knownError?.message ||
+          "";
+      } else {
+        errorMessage = knownError;
+      }
+      console.error(errorMessage);
+
+      setIsLoading(false);
+      toastr.error(errorMessage);
+    }
   };
 
   if (isProfileDeleted) {

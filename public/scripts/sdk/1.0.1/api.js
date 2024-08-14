@@ -53,7 +53,7 @@
     showSignOut: true,
     destroyText: "",
     viewAs: "row", //TODO: ["row", "table", "tile"]
-    viewTableColumns: "Name,Type,Tags",
+    viewTableColumns: "Name,Size,Type,Tags",
     checkCSP: true,
     disableActionButton: false,
     showSettings: false,
@@ -97,6 +97,7 @@
       onAuthSuccess: null,
       onSignOut: null,
       onDownload: null,
+      onNoAccess: null,
     },
   };
 

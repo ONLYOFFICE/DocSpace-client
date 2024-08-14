@@ -305,7 +305,7 @@ const Editor = ({
     newConfig.events.onRequestClose = onSDKRequestClose;
   }
 
-  if (config?.startFilling) {
+  if (config?.startFilling && !IS_ZOOM) {
     newConfig.events.onRequestStartFilling = () =>
       onSDKRequestStartFilling?.(t("Common:ShareAndCollect"));
   }

@@ -40,9 +40,16 @@ import RecoverAccess from "@/components/RecoverAccess";
 import Register from "@/components/Register";
 import { GreetingLoginContainer } from "@/components/GreetingContainer";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-import LanguageComboboxWrapper from "@/components/LanguageCombobox";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { cookies } from "next/headers";
+import dynamic from "next/dynamic";
+
+const LanguageComboboxWrapper = dynamic(
+  () => import("@/components/LanguageCombobox"),
+  {
+    ssr: false,
+  },
+);
 
 async function Page({
   searchParams,

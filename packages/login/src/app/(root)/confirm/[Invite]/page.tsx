@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { notFound } from "next/navigation";
+import dynamic from "next/dynamic";
 
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
@@ -38,7 +39,13 @@ import {
   getThirdPartyProviders,
   getUserFromConfirm,
 } from "@/utils/actions";
-import LanguageComboboxWrapper from "@/components/LanguageCombobox";
+
+const LanguageComboboxWrapper = dynamic(
+  () => import("@/components/LanguageCombobox"),
+  {
+    ssr: false,
+  },
+);
 
 type LinkInviteProps = {
   searchParams: { [key: string]: string };

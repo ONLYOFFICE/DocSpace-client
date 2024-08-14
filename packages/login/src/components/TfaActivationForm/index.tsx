@@ -30,6 +30,7 @@
 
 import { ChangeEvent, useContext, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
 
 import { Link, LinkTarget } from "@docspace/shared/components/link";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -44,7 +45,6 @@ import {
 } from "@docspace/shared/components/text-input";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
-import { TColorScheme } from "@docspace/shared/themes";
 import { TPasswordHash } from "@docspace/shared/api/settings/types";
 import { loginWithTfaCode } from "@docspace/shared/api/user";
 import { validateTfaCode } from "@docspace/shared/api/settings";
@@ -67,7 +67,6 @@ type TfaActivationFormProps = {
   qrCode: string;
   passwordHash: TPasswordHash;
   userName?: string;
-  currentColorScheme?: TColorScheme;
 };
 
 const TfaActivationForm = ({
@@ -75,10 +74,10 @@ const TfaActivationForm = ({
   qrCode,
   passwordHash,
   userName,
-  currentColorScheme,
 }: TfaActivationFormProps) => {
   const { linkData } = useContext(ConfirmRouteContext);
   const { t } = useTranslation(["Confirm", "Common"]);
+  const { currentColorScheme } = useTheme();
 
   const [code, setCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);

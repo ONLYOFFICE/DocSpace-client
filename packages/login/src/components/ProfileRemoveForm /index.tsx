@@ -28,13 +28,13 @@
 
 import { useContext, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
-import { TColorScheme } from "@docspace/shared/themes";
 import { deleteSelf } from "@docspace/shared/api/people";
 
 import { TError } from "@/types";
@@ -45,16 +45,16 @@ import { ConfirmRouteContext } from "../ConfirmRoute";
 type ProfileRemoveFormProps = {
   legalTerms: string;
   greetingSettings: string;
-  currentColorScheme?: TColorScheme;
 };
 
 const ProfileRemoveForm = ({
   legalTerms,
   greetingSettings,
-  currentColorScheme,
 }: ProfileRemoveFormProps) => {
   const { linkData } = useContext(ConfirmRouteContext);
   const { t } = useTranslation(["Confirm", "Common"]);
+  const { currentColorScheme } = useTheme();
+
   const [isProfileDeleted, setIsProfileDeleted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 

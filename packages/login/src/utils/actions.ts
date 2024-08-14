@@ -46,10 +46,9 @@ import {
   TVersionBuild,
 } from "@docspace/shared/api/settings/types";
 import { Encoder } from "@docspace/shared/utils/encoder";
-import { TCreateUserData, TTfaSecretKeyAndQR } from "@/types";
+import { TTfaSecretKeyAndQR } from "@/types";
 import { TScope } from "@docspace/shared/utils/oauth/types";
 import { transformToClientProps } from "@docspace/shared/utils/oauth";
-import { EmployeeActivationStatus } from "@docspace/shared/enums";
 
 export const checkIsAuthenticated = async () => {
   const [request] = createRequest(["/authentication"], [["", ""]], "GET");

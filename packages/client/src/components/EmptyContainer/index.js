@@ -79,7 +79,7 @@ const EmptyContainer = ({
   };
 
   const onCreateRoom = (e) => {
-    if (isGracePeriod) {
+    if (isWarningRoomsDialog) {
       setInviteUsersWarningDialogVisible(true);
       return;
     }
@@ -126,7 +126,7 @@ export default inject(
     settingsStore,
     filesStore,
     dialogsStore,
-
+    currentQuotaStore,
     selectedFolderStore,
     clientLoadingStore,
     currentTariffStatusStore,
@@ -144,6 +144,7 @@ export default inject(
       isFiltered === null && isErrorRoomNotAvailable;
 
     const isRoot = selectedFolderStore.pathParts?.length === 1;
+    const { isWarningRoomsDialog } = currentQuotaStore;
 
     return {
       theme: settingsStore.theme,
@@ -157,6 +158,7 @@ export default inject(
       type: selectedFolderStore.type,
       isRoot,
       isPublicRoom,
+      isWarningRoomsDialog,
     };
   },
 )(observer(EmptyContainer));

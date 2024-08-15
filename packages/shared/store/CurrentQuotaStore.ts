@@ -259,6 +259,14 @@ class CurrentQuotasStore {
     );
   }
 
+  get isRoomsTariffLimit() {
+    return (
+      this.maxCountRoomsByQuota - this.usedRoomsCount <=
+        COUNT_FOR_SHOWING_BAR &&
+      this.usedRoomsCount >= this.maxCountRoomsByQuota
+    );
+  }
+
   get isStorageTariffAlmostLimit() {
     return (
       (this.usedTotalStorageSizeCount / this.maxTotalSizeByQuota) * 100 >=
@@ -325,6 +333,12 @@ class CurrentQuotasStore {
 
     return this.currentTariffStatusStore?.isGracePeriod;
   };
+
+  get isWarningRoomsDialog() {
+    return (
+      this.currentTariffStatusStore?.isGracePeriod || this.isRoomsTariffLimit
+    );
+  }
 
   get isPersonalQuotaLimit() {
     const personalQuotaLimitReached = this.userStore?.personalQuotaLimitReached;

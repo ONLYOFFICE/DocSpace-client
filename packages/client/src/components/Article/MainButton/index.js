@@ -171,7 +171,6 @@ const ArticleMainButtonContent = (props) => {
     copyPanelVisible,
 
     security,
-    isGracePeriod,
     setInviteUsersWarningDialogVisible,
     currentDeviceType,
 
@@ -181,6 +180,7 @@ const ArticleMainButtonContent = (props) => {
     parentRoomType,
     isFolder,
     showWarningDialog,
+    isWarningRoomsDialog,
   } = props;
 
   const navigate = useNavigate();
@@ -219,7 +219,7 @@ const ArticleMainButtonContent = (props) => {
   );
 
   const onCreateRoom = React.useCallback(() => {
-    if (isGracePeriod) {
+    if (isWarningRoomsDialog) {
       setInviteUsersWarningDialogVisible(true);
       return;
     }
@@ -940,8 +940,8 @@ export default inject(
     const isFolder = selectedFolderStore.isFolder;
 
     const { isAdmin, isOwner, isRoomAdmin } = userStore.user;
-    const { isGracePeriod } = currentTariffStatusStore;
-    const { showWarningDialog } = currentQuotaStore;
+
+    const { showWarningDialog, isWarningRoomsDialog } = currentQuotaStore;
 
     const { setOformFromFolderId, oformsFilter } = oformsStore;
     const { mainButtonItemsList } = pluginStore;
@@ -949,7 +949,6 @@ export default inject(
     const { frameConfig, isFrame } = settingsStore;
 
     return {
-      isGracePeriod,
       setInviteUsersWarningDialogVisible,
       showText: settingsStore.showText,
       isMobileArticle: settingsStore.isMobileArticle,
@@ -1002,6 +1001,7 @@ export default inject(
       setSelectFileFormRoomDialogVisible,
 
       showWarningDialog,
+      isWarningRoomsDialog,
     };
   },
 )(

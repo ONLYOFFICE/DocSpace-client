@@ -1799,9 +1799,10 @@ class FilesActionStore {
       setInviteUsersWarningDialogVisible,
       setRestoreRoomDialogVisible,
     } = this.dialogsStore;
-    const { isGracePeriod } = this.currentTariffStatusStore;
 
-    if (action === "unarchive" && isGracePeriod) {
+    const { isWarningRoomsDialog } = this.currentQuotaStore;
+
+    if (action === "unarchive" && isWarningRoomsDialog) {
       setInviteUsersWarningDialogVisible(true);
       return;
     }

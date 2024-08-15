@@ -27,13 +27,15 @@
 import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import moment from "moment-timezone";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
-
 import { getDaysRemaining } from "@docspace/shared/utils/common";
+
+import RoomsContent from "./sub-components/RoomsContent";
+import UsersContent from "./sub-components/UsersContent";
 
 const InviteUsersWarningDialog = (props) => {
   const {
@@ -48,6 +50,8 @@ const InviteUsersWarningDialog = (props) => {
     isGracePeriod,
     currentTariffPlanTitle,
     isPaymentPageAvailable,
+    isRoomsTariffLimit,
+    isUserTariffLimit,
   } = props;
 
   const navigate = useNavigate();
@@ -84,6 +88,31 @@ const InviteUsersWarningDialog = (props) => {
     navigate(paymentPageUrl);
   };
 
+  const location = useLocation();
+  const isAccounts = location.pathname.includes("accounts/people");
+
+  const contentForGracePeriod = (
+    <>
+      <Text fontWeight={700} noSelect>
+        {t("BusinessPlanPaymentOverdue", {
+          planName: currentTariffPlanTitle,
+        })}
+      </Text>
+      <br />
+      <Text noSelect as="div">
+        <Trans t={t} i18nKey="GracePeriodActivatedInfo" ns="Payments">
+          Grace period activated
+          <strong>
+            from {{ fromDate }} to {{ byDate }}
+          </strong>
+          (days remaining: {{ delayDaysCount }})
+        </Trans>
+      </Text>
+      <br />
+      <Text>{t("GracePeriodActivatedDescription")}</Text>
+    </>
+  );
+
   return (
     <ModalDialog
       isLarge={isGracePeriod}
@@ -95,37 +124,24 @@ const InviteUsersWarningDialog = (props) => {
     >
       <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
       <ModalDialog.Body>
-        {isGracePeriod ? (
-          <>
-            <Text fontWeight={700} noSelect>
-              {t("BusinessPlanPaymentOverdue", {
-                planName: currentTariffPlanTitle,
-              })}
-            </Text>
-            <br />
-            <Text noSelect as="div">
-              <Trans t={t} i18nKey="GracePeriodActivatedInfo" ns="Payments">
-                Grace period activated
-                <strong>
-                  from {{ fromDate }} to {{ byDate }}
-                </strong>
-                (days remaining: {{ delayDaysCount }})
-              </Trans>
-            </Text>
-            <br />
-            <Text>{t("GracePeriodActivatedDescription")}</Text>
-          </>
-        ) : (
-          <>
-            <Text fontWeight={700} noSelect>
-              {t("PaymentOverdue")}
-            </Text>
-            <br />
-            <Text>{t("UpgradePlanInfo")}</Text>
-            <br />
-            <Text>{t("ChooseNewPlan")}</Text>
-          </>
-        )}
+        {
+          isGracePeriod ? (
+            contentForGracePeriod
+          ) : isAccounts ? (
+            <UsersContent />
+          ) : (
+            <RoomsContent />
+          )
+          // <>
+          //   <Text fontWeight={700} noSelect>
+          //     {t("PaymentOverdue")}
+          //   </Text>
+          //   <br />
+          //   <Text>{t("UpgradePlanInfo")}</Text>
+          //   <br />
+          //   <Text>{t("ChooseNewPlan")}</Text>
+          // </>
+        }
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -161,7 +177,8 @@ export default inject(
   }) => {
     const { isPaymentPageAvailable } = authStore;
     const { dueDate, delayDueDate, isGracePeriod } = currentTariffStatusStore;
-    const { currentTariffPlanTitle } = currentQuotaStore;
+    const { currentTariffPlanTitle, isRoomsTariffLimit, isUserTariffLimit } =
+      currentQuotaStore;
 
     const {
       inviteUsersWarningDialogVisible,
@@ -177,6 +194,8 @@ export default inject(
       dueDate,
       delayDueDate,
       isGracePeriod,
+      isRoomsTariffLimit,
+      isUserTariffLimit,
     };
   },
 )(observer(withTranslation(["Payments", "Common"])(InviteUsersWarningDialog)));

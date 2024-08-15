@@ -83,7 +83,7 @@ const withHotkeys = (Component) => {
       isVisitor,
       deleteRooms,
       archiveRooms,
-      isGracePeriod,
+      isWarningRoomsDialog,
       setInviteUsersWarningDialogVisible,
 
       security,
@@ -158,7 +158,7 @@ const withHotkeys = (Component) => {
 
     const onCreateRoom = () => {
       if (!isVisitor && isRoomsFolder && security?.Create) {
-        if (isGracePeriod) {
+        if (isWarningRoomsDialog) {
           setInviteUsersWarningDialogVisible(true);
           return;
         }
@@ -436,7 +436,7 @@ const withHotkeys = (Component) => {
       treeFoldersStore,
       selectedFolderStore,
       userStore,
-      currentTariffStatusStore,
+      currentQuotaStore,
     }) => {
       const {
         setSelected,
@@ -487,7 +487,6 @@ const withHotkeys = (Component) => {
 
       const { visible: mediaViewerIsVisible } = mediaViewerDataStore;
       const { setHotkeyPanelVisible } = settingsStore;
-      const { isGracePeriod } = currentTariffStatusStore;
 
       const isVisitor = userStore.user?.isVisitor;
 
@@ -498,6 +497,8 @@ const withHotkeys = (Component) => {
         isArchiveFolder,
         isRoomsFolder,
       } = treeFoldersStore;
+
+      const { isWarningRoomsDialog } = currentQuotaStore;
 
       const security = selectedFolderStore.security;
       const isFormRoom = selectedFolderStore.roomType === RoomsType.FormRoom;
@@ -553,7 +554,7 @@ const withHotkeys = (Component) => {
         deleteRooms,
         archiveRooms,
 
-        isGracePeriod,
+        isWarningRoomsDialog,
         setInviteUsersWarningDialogVisible,
 
         security,

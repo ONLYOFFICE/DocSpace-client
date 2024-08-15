@@ -886,14 +886,14 @@ class ContextOptionsStore {
   onClickArchive = (e) => {
     const data = (e.currentTarget && e.currentTarget.dataset) || e;
     const { action } = data;
-    const { isGracePeriod } = this.currentTariffStatusStore;
+    const { isWarningRoomsDialog } = this.currentQuotaStore;
     const {
       setArchiveDialogVisible,
       setRestoreRoomDialogVisible,
       setInviteUsersWarningDialogVisible,
     } = this.dialogsStore;
 
-    if (action === "unarchive" && isGracePeriod) {
+    if (action === "unarchive" && isWarningRoomsDialog) {
       setInviteUsersWarningDialogVisible(true);
       return;
     }
@@ -1117,7 +1117,7 @@ class ContextOptionsStore {
 
     if (isExistActiveItems) return;
 
-    if (this.currentTariffStatusStore.isGracePeriod) {
+    if (this.currentQuotaStore.isWarningRoomsDialog) {
       setInviteUsersWarningDialogVisible(true);
       return;
     }
@@ -2138,7 +2138,7 @@ class ContextOptionsStore {
   };
 
   onCreateRoom = () => {
-    if (this.currentTariffStatusStore.isGracePeriod) {
+    if (this.currentQuotaStore.isWarningRoomsDialog) {
       this.dialogsStore.setInviteUsersWarningDialogVisible(true);
       return;
     }

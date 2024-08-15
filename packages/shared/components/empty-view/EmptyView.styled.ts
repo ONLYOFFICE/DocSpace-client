@@ -13,7 +13,11 @@ export const EmptyViewWrapper = styled.div`
   flex-direction: column;
   gap: 18px;
 
-  padding-top: 31px;
+  padding-top: 61px;
+
+  @media ${mobile} {
+    padding-top: 21px;
+  }
 `;
 
 export const EmptyViewHeader = styled.div`

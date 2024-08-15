@@ -34,7 +34,7 @@ import { useSearchParams } from "next/navigation";
 import { mobile } from "@docspace/shared/utils/device";
 import { getLogoUrl } from "@docspace/shared/utils/common";
 import { Base } from "@docspace/shared/themes";
-import { ThemeKeys, WhiteLabelLogoType } from "@docspace/shared/enums";
+import { WhiteLabelLogoType } from "@docspace/shared/enums";
 
 import LanguageComboboxWrapper from "./LanguageCombobox";
 
@@ -66,9 +66,13 @@ StyledSimpleNav.defaultProps = { theme: Base };
 
 interface SimpleNavProps {
   culture?: string;
+  isLanguageComboboxVisible?: boolean;
 }
 
-const SimpleNav = ({ culture }: SimpleNavProps) => {
+const SimpleNav = ({
+  culture,
+  isLanguageComboboxVisible = true,
+}: SimpleNavProps) => {
   const theme = useTheme();
 
   const isDark = !theme.isBase;
@@ -80,11 +84,11 @@ const SimpleNav = ({ culture }: SimpleNavProps) => {
     culture,
   );
 
-  let isLanguageComboboxVisible = true;
+  let isComboboxVisible = isLanguageComboboxVisible;
 
   const searchParamType = useSearchParams().get("type") ?? "";
   if (TYPE_LINK_WITHOUT_LNG_COMBOBOX?.includes(searchParamType)) {
-    isLanguageComboboxVisible = false;
+    isComboboxVisible = false;
   }
 
   return (

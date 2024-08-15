@@ -33,14 +33,27 @@ export interface RoomsContentProps {
   isRoomsTariffLimit: boolean;
   maxCountRoomsByQuota: number;
   usedRoomsCount: number;
+  isPaymentPageAvailable: boolean;
 }
 
 const RoomsContent = ({
   isRoomsTariffLimit,
   maxCountRoomsByQuota,
   usedRoomsCount,
+  isPaymentPageAvailable,
 }: RoomsContentProps) => {
-  const { t } = useTranslation(["Payments", "Common"]);
+  const { t } = useTranslation(["Payments", "Common", "MainBar"]);
+
+  const chooseNewPlan = (
+    <Text>
+      {isPaymentPageAvailable
+        ? t("ChooseNewPlan")
+        : t("MainBar:ContactToUpgradeTariff", {
+            productName: t("Common:ProductName"),
+          })}
+    </Text>
+  );
+
   if (isRoomsTariffLimit)
     return (
       <>
@@ -48,7 +61,7 @@ const RoomsContent = ({
         <br />
         <Text>{t("NewRoomWillExceedLimit")}</Text>
         <br />
-        <Text>{t("ChooseNewPlan")}</Text>
+        {chooseNewPlan}
       </>
     );
 
@@ -63,18 +76,20 @@ const RoomsContent = ({
         })}
       </Text>
       <br />
-      <Text>{t("ChooseNewPlan")}</Text>
+      {chooseNewPlan}
     </>
   );
 };
 
-export default inject(({ currentQuotaStore }) => {
+export default inject(({ currentQuotaStore, authStore }) => {
   const { isRoomsTariffLimit, maxCountRoomsByQuota, usedRoomsCount } =
     currentQuotaStore;
 
+  const { isPaymentPageAvailable } = authStore;
   return {
     isRoomsTariffLimit,
     maxCountRoomsByQuota,
     usedRoomsCount,
+    isPaymentPageAvailable,
   };
 })(observer(RoomsContent));

@@ -141,17 +141,16 @@ const InviteUsersWarningDialog = (props) => {
           size="normal"
           primary
           onClick={isPaymentPageAvailable ? onUpgradePlan : onClose}
-          scale={isPaymentPageAvailable}
+          scale
         />
-        {isPaymentPageAvailable && (
-          <Button
-            key="CancelButton"
-            label={t("Common:CancelButton")}
-            size="normal"
-            onClick={onClose}
-            scale
-          />
-        )}
+
+        <Button
+          key="CancelButton"
+          label={t("Common:CancelButton")}
+          size="normal"
+          onClick={onClose}
+          scale
+        />
       </ModalDialog.Footer>
     </ModalDialog>
   );

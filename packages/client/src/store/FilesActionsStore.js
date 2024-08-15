@@ -251,12 +251,7 @@ class FilesActionStore {
     return result;
   };
 
-  createFolderTree = async (
-    treeList,
-    parentFolderId,
-    filesList,
-    operationId,
-  ) => {
+  createFolderTree = async (treeList, parentFolderId, filesList) => {
     if (!treeList || !treeList.length) return;
 
     for (let i = 0; i < treeList.length; i++) {
@@ -274,28 +269,12 @@ class FilesActionStore {
         continue;
       }
 
-      this.uploadDataStore.secondaryProgressDataStore.setSecondaryProgressBarData(
-        {
-          icon: "file",
-          visible: true,
-          percent: 0,
-          label: "",
-          alert: false,
-          operationId,
-        },
-      );
-
       const folder = await createFolder(parentFolderId, treeNode.name);
       const parentId = folder.id;
 
       if (treeNode.children.length == 0) continue;
 
-      await this.createFolderTree(
-        treeNode.children,
-        parentId,
-        filesList,
-        operationId,
-      );
+      await this.createFolderTree(treeNode.children, parentId, filesList);
     }
 
     return treeList;
@@ -304,21 +283,33 @@ class FilesActionStore {
   createFoldersTree = async (files, folderId) => {
     //console.log("createFoldersTree", files, folderId);
 
-    const { secondaryProgressDataStore } = this.uploadDataStore;
-    const { clearSecondaryProgressData } = secondaryProgressDataStore;
+    const { primaryProgressDataStore } = this.uploadDataStore;
+
+    const { setPrimaryProgressBarData, clearPrimaryProgressData } =
+      primaryProgressDataStore;
 
     const operationId = uniqueid("operation_");
 
     const toFolderId = folderId ? folderId : this.selectedFolderStore.id;
 
+    setPrimaryProgressBarData({
+      icon: "upload",
+      visible: true,
+      percent: 0,
+      label: "",
+      alert: false,
+    });
+
     const tree = this.convertToTree(files);
 
     const filesList = [];
-    await this.createFolderTree(tree, toFolderId, filesList, operationId);
+    await this.createFolderTree(tree, toFolderId, filesList);
 
     this.updateCurrentFolder(null, [folderId], null, operationId);
 
-    setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+    if (!filesList.length) {
+      setTimeout(() => clearPrimaryProgressData(), TIMEOUT);
+    }
 
     return filesList;
   };

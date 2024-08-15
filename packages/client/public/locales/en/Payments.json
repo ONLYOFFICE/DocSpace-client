@@ -11,7 +11,7 @@
   "BusinessUpdated": "{{planName}} plan updated",
   "CannotCreateNewRoom": "Room cannot be created",
   "CannotRestoreRoom": "Room cannot be restored",
-  "CannotCreatePaidUsers": "Cannot add new paid users. ",
+  "CannotCreatePaidUsers": "Paid users cannot be added",
   "ChooseNewPayer": "Choose a new Payer",
   "ChooseNewPlan": "Would you like to choose a new pricing plan?",
   "ContactUs": "For sales questions, contact us at",
@@ -26,9 +26,10 @@
   "InvalidEmailWithoutActiveSubscriptionByAdmin": "We recommend contacting the {{productName}} owner to choose a new Payer.",
   "ManagerTypesDescription": "Admin account types and their privileges",
   "NewRoomWillExceedLimit": "Creating this room is not possible since the limit is reached for the number of rooms included in your current plan.",
-  "NewUsersWillExceedMembersLimit": "Adding new users will exceed the maximum number of portal paid members allowed by your current pricing plan.",
+  "NewUsersWillExceedMembersLimit": "Adding new paid users is not possible since the limit is reached for the number of admins included in your current plan.",
   "NotPossibleRoomRestoring": "Restoring this room is not possible since the limit is reached for the number of rooms included in your current plan.",
   "NumberOfRoomsAccordingToTariff": "Number of rooms according to your tariff plan: {{currentValue}}/{{maxValue}}",
+  "NumberOfUsersAccordingToTariff": "Number of managers according to your tariff plan: {{currentValue}}/{{maxValue}}",
   "Pay": "Pay",
   "Payer": "Payer",
   "PayerDescription": "This user has access to payment details and is the only user who can adjust the quota and make payments. The {{productName}} owner, as well as the paying manager themselves, can reassign the paying manager role using the Stripe customer portal.",
@@ -44,5 +45,6 @@
   "UpgradePlan": "Upgrade plan",
   "UserNotFound": "User <1>{{email}}</1> is not found.",
   "UserNotFoundMatchingEmail": "We couldn’t find the user with the matching Stripe e-mail.",
+  "UsersQuotaAlmostExhausted": "The quota of paid users is almost exhausted.",
   "YourPrice": "Your price"
 }

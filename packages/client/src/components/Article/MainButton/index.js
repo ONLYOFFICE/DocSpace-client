@@ -171,7 +171,7 @@ const ArticleMainButtonContent = (props) => {
     copyPanelVisible,
 
     security,
-    setInviteUsersWarningDialogVisible,
+    setQuotaWarningDialogVisible,
     currentDeviceType,
 
     isFrame,
@@ -220,7 +220,7 @@ const ArticleMainButtonContent = (props) => {
 
   const onCreateRoom = React.useCallback(() => {
     if (isWarningRoomsDialog) {
-      setInviteUsersWarningDialogVisible(true);
+      setQuotaWarningDialogVisible(true);
       return;
     }
 
@@ -285,7 +285,7 @@ const ArticleMainButtonContent = (props) => {
     const type = e.action;
 
     if (showWarningDialog(type)) {
-      setInviteUsersWarningDialogVisible(true);
+      setQuotaWarningDialogVisible(true);
       return;
     }
 
@@ -919,7 +919,7 @@ export default inject(
     const {
       setSelectFileDialogVisible,
       setInvitePanelOptions,
-      setInviteUsersWarningDialogVisible,
+      setQuotaWarningDialogVisible,
       copyPanelVisible,
       moveToPanelVisible,
       restorePanelVisible,
@@ -949,7 +949,7 @@ export default inject(
     const { frameConfig, isFrame } = settingsStore;
 
     return {
-      setInviteUsersWarningDialogVisible,
+      setQuotaWarningDialogVisible,
       showText: settingsStore.showText,
       isMobileArticle: settingsStore.isMobileArticle,
 

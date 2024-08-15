@@ -57,10 +57,29 @@ import { Text } from "@docspace/shared/components/text";
 
 export interface UsersContentProps {
   isUserTariffLimit: boolean;
+  isPaymentPageAvailable: boolean;
+  addedManagersCount: number;
+  maxCountManagersByQuota: number;
 }
 
-const UsersContent = ({ isUserTariffLimit }: UsersContentProps) => {
+const UsersContent = ({
+  isUserTariffLimit,
+  isPaymentPageAvailable,
+  addedManagersCount,
+  maxCountManagersByQuota,
+}: UsersContentProps) => {
   const { t } = useTranslation(["Payments", "Common"]);
+
+  const chooseNewPlan = (
+    <Text>
+      {isPaymentPageAvailable
+        ? t("ChooseNewPlan")
+        : t("MainBar:ContactToUpgradeTariff", {
+            productName: t("Common:ProductName"),
+          })}
+    </Text>
+  );
+
   if (isUserTariffLimit)
     return (
       <>
@@ -68,15 +87,38 @@ const UsersContent = ({ isUserTariffLimit }: UsersContentProps) => {
         <br />
         <Text>{t("NewUsersWillExceedMembersLimit")}</Text>
         <br />
-        <Text>{t("ChooseNewPlan")}</Text>
+        {chooseNewPlan}
       </>
     );
+
+  return (
+    <>
+      <Text fontWeight={600}>{t("UsersQuotaAlmostExhausted")}</Text>
+      <br />
+      <Text>
+        {t("NumberOfUsersAccordingToTariff", {
+          currentValue: addedManagersCount,
+          maxValue: maxCountManagersByQuota,
+        })}
+      </Text>
+      <br />
+      {chooseNewPlan}
+    </>
+  );
 };
 
 export default inject(({ currentQuotaStore }) => {
-  const { isUserTariffLimit } = currentQuotaStore;
+  const {
+    isUserTariffLimit,
+    isPaymentPageAvailable,
+    addedManagersCount,
+    maxCountManagersByQuota,
+  } = currentQuotaStore;
 
   return {
     isUserTariffLimit,
+    isPaymentPageAvailable,
+    addedManagersCount,
+    maxCountManagersByQuota,
   };
 })(observer(UsersContent));

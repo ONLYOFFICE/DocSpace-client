@@ -168,17 +168,15 @@ export default inject(
     const { currentTariffPlanTitle, isRoomsTariffLimit, isUserTariffLimit } =
       currentQuotaStore;
 
-    const {
-      inviteUsersWarningDialogVisible,
-      setInviteUsersWarningDialogVisible,
-    } = dialogsStore;
+    const { inviteQuotaWarningDialogVisible, setQuotaWarningDialogVisible } =
+      dialogsStore;
 
     return {
       isPaymentPageAvailable,
       currentTariffPlanTitle,
       language: authStore.language,
-      visible: inviteUsersWarningDialogVisible,
-      setIsVisible: setInviteUsersWarningDialogVisible,
+      visible: inviteQuotaWarningDialogVisible,
+      setIsVisible: setQuotaWarningDialogVisible,
       dueDate,
       delayDueDate,
       isGracePeriod,

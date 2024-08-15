@@ -52,7 +52,7 @@ const EmptyContainer = ({
   sectionWidth,
   isRoomNotFoundOrMoved,
   isGracePeriod,
-  setInviteUsersWarningDialogVisible,
+  setQuotaWarningDialogVisible,
   isRoot,
   isPublicRoom,
   isEmptyPage,
@@ -80,7 +80,7 @@ const EmptyContainer = ({
 
   const onCreateRoom = (e) => {
     if (isWarningRoomsDialog) {
-      setInviteUsersWarningDialogVisible(true);
+      setQuotaWarningDialogVisible(true);
       return;
     }
 
@@ -137,7 +137,7 @@ export default inject(
 
     const { isGracePeriod } = currentTariffStatusStore;
 
-    const { setInviteUsersWarningDialogVisible } = dialogsStore;
+    const { setQuotaWarningDialogVisible } = dialogsStore;
     const { isPublicRoom } = publicRoomStore;
 
     const isRoomNotFoundOrMoved =
@@ -154,7 +154,7 @@ export default inject(
       parentId: selectedFolderStore.parentId,
       isRoomNotFoundOrMoved,
       isGracePeriod,
-      setInviteUsersWarningDialogVisible,
+      setQuotaWarningDialogVisible,
       type: selectedFolderStore.type,
       isRoot,
       isPublicRoom,

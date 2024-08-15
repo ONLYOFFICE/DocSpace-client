@@ -84,7 +84,7 @@ const withHotkeys = (Component) => {
       deleteRooms,
       archiveRooms,
       isWarningRoomsDialog,
-      setInviteUsersWarningDialogVisible,
+      setQuotaWarningDialogVisible,
 
       security,
       copyToClipboard,
@@ -159,7 +159,7 @@ const withHotkeys = (Component) => {
     const onCreateRoom = () => {
       if (!isVisitor && isRoomsFolder && security?.Create) {
         if (isWarningRoomsDialog) {
-          setInviteUsersWarningDialogVisible(true);
+          setQuotaWarningDialogVisible(true);
           return;
         }
 
@@ -473,7 +473,7 @@ const withHotkeys = (Component) => {
       const {
         setDeleteDialogVisible,
         setSelectFileDialogVisible,
-        setInviteUsersWarningDialogVisible,
+        setQuotaWarningDialogVisible,
       } = dialogsStore;
       const {
         isAvailableOption,
@@ -555,7 +555,7 @@ const withHotkeys = (Component) => {
         archiveRooms,
 
         isWarningRoomsDialog,
-        setInviteUsersWarningDialogVisible,
+        setQuotaWarningDialogVisible,
 
         security,
         copyToClipboard,

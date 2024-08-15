@@ -561,7 +561,7 @@ class ContextOptionsStore {
 
   onDuplicate = (item) => {
     if (this.currentQuotaStore.isWarningRoomsDialog) {
-      this.dialogsStore.setInviteUsersWarningDialogVisible(true);
+      this.dialogsStore.setQuotaWarningDialogVisible(true);
       return;
     }
 
@@ -861,7 +861,7 @@ class ContextOptionsStore {
     const { isGracePeriod } = this.currentTariffStatusStore;
 
     if (isGracePeriod) {
-      this.dialogsStore.setInviteUsersWarningDialogVisible(true);
+      this.dialogsStore.setQuotaWarningDialogVisible(true);
     } else {
       this.dialogsStore.setInvitePanelOptions({
         visible: true,
@@ -886,11 +886,11 @@ class ContextOptionsStore {
     const {
       setArchiveDialogVisible,
       setRestoreRoomDialogVisible,
-      setInviteUsersWarningDialogVisible,
+      setQuotaWarningDialogVisible,
     } = this.dialogsStore;
 
     if (action === "unarchive" && isWarningRoomsDialog) {
-      setInviteUsersWarningDialogVisible(true);
+      setQuotaWarningDialogVisible(true);
       return;
     }
 
@@ -1104,7 +1104,7 @@ class ContextOptionsStore {
   onRestoreAllArchiveAction = () => {
     const { activeFiles, activeFolders } = this.filesStore;
     const {
-      setInviteUsersWarningDialogVisible,
+      setQuotaWarningDialogVisible,
       setRestoreAllArchive,
       setRestoreRoomDialogVisible,
     } = this.dialogsStore;
@@ -1114,7 +1114,7 @@ class ContextOptionsStore {
     if (isExistActiveItems) return;
 
     if (this.currentQuotaStore.isWarningRoomsDialog) {
-      setInviteUsersWarningDialogVisible(true);
+      setQuotaWarningDialogVisible(true);
       return;
     }
 
@@ -2102,13 +2102,13 @@ class ContextOptionsStore {
   };
 
   onInvite = (e) => {
-    const { setInviteUsersWarningDialogVisible, setInvitePanelOptions } =
+    const { setQuotaWarningDialogVisible, setInvitePanelOptions } =
       this.dialogsStore;
 
     const type = e.item["data-type"];
 
     if (this.currentQuotaStore.showWarningDialog(type)) {
-      setInviteUsersWarningDialogVisible(true);
+      setQuotaWarningDialogVisible(true);
       return;
     }
 
@@ -2135,7 +2135,7 @@ class ContextOptionsStore {
 
   onCreateRoom = (item, fromItem) => {
     if (this.currentQuotaStore.isWarningRoomsDialog) {
-      this.dialogsStore.setInviteUsersWarningDialogVisible(true);
+      this.dialogsStore.setQuotaWarningDialogVisible(true);
       return;
     }
 

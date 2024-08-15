@@ -59,7 +59,7 @@ class DialogsStore {
   selectFileDialogVisible = false;
   selectFileFormRoomDialogVisible = false;
   convertPasswordDialogVisible = false;
-  inviteUsersWarningDialogVisible = false;
+  inviteQuotaWarningDialogVisible = false;
   changeQuotaDialogVisible = false;
   unsavedChangesDialogVisible = false;
   moveToPublicRoomVisible = false;
@@ -130,6 +130,7 @@ class DialogsStore {
   };
 
   invitePaidUsersCount = 0;
+  isNewQuotaItemsByCurrentUser = false;
 
   constructor(
     authStore,
@@ -468,8 +469,12 @@ class DialogsStore {
       this.inviteItems[index] = { ...this.inviteItems[index], ...item };
     });
 
-  setInviteUsersWarningDialogVisible = (inviteUsersWarningDialogVisible) => {
-    this.inviteUsersWarningDialogVisible = inviteUsersWarningDialogVisible;
+  setQuotaWarningDialogVisible = (inviteQuotaWarningDialogVisible) => {
+    this.inviteQuotaWarningDialogVisible = inviteQuotaWarningDialogVisible;
+  };
+
+  setIsNewQuotaItemsByCurrentUser = (value) => {
+    this.isNewQuotaItemsByCurrentUser = value;
   };
 
   setCreateRoomDialogVisible = (createRoomDialogVisible) => {

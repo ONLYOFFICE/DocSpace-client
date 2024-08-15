@@ -115,7 +115,7 @@ const Panels = (props) => {
     confirmDialogIsLoading,
     restoreAllPanelVisible,
     archiveDialogVisible,
-    inviteUsersWarningDialogVisible,
+    inviteQuotaWarningDialogVisible,
     preparationPortalDialogVisible,
     changeUserTypeDialogVisible,
     restoreRoomDialogVisible,
@@ -138,11 +138,10 @@ const Panels = (props) => {
     selectFileFormRoomOpenRoot,
     fillPDFDialogData,
     shareCollectSelector,
-
-    isRoomCreatedByCurrentUser,
-    setIsRoomCreatedByCurrentUser,
-    isRoomTariffAlmostLimit,
-    setInviteUsersWarningDialogVisible,
+    setQuotaWarningDialogVisible,
+    setIsNewQuotaItemsByCurrentUser,
+    isNewQuotaItemsByCurrentUser,
+    isItemTariffAlmostLimit,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -199,14 +198,14 @@ const Panels = (props) => {
   }, [handleSharePDFForm]);
 
   useEffect(() => {
-    if (isRoomCreatedByCurrentUser) {
-      isRoomTariffAlmostLimit && setInviteUsersWarningDialogVisible(true);
-      setIsRoomCreatedByCurrentUser(false);
+    if (isNewQuotaItemsByCurrentUser) {
+      isItemTariffAlmostLimit && setQuotaWarningDialogVisible(true);
+      setIsNewQuotaItemsByCurrentUser(false);
     }
     return () => {
-      setIsRoomCreatedByCurrentUser(false);
+      setIsNewQuotaItemsByCurrentUser(false);
     };
-  }, [isRoomTariffAlmostLimit, isRoomCreatedByCurrentUser]);
+  }, [isItemTariffAlmostLimit, isNewQuotaItemsByCurrentUser]);
 
   return [
     settingsPluginDialogVisible && (
@@ -291,7 +290,7 @@ const Panels = (props) => {
     ),
     archiveDialogVisible && <ArchiveDialog key="archive-dialog" />,
     restoreRoomDialogVisible && <RestoreRoomDialog key="archive-dialog" />,
-    inviteUsersWarningDialogVisible && (
+    inviteQuotaWarningDialogVisible && (
       <InviteUsersWarningDialog key="invite-users-warning-dialog" />
     ),
     preparationPortalDialogVisible && (
@@ -379,7 +378,7 @@ export default inject(
       selectFileFormRoomFilterParam,
       setSelectFileFormRoomDialogVisible,
       invitePanelOptions,
-      inviteUsersWarningDialogVisible,
+      inviteQuotaWarningDialogVisible,
       changeUserTypeDialogVisible,
       changeQuotaDialogVisible,
       submitToGalleryDialogVisible,
@@ -397,7 +396,9 @@ export default inject(
       fillPDFDialogData,
       shareCollectSelector,
 
-      setInviteUsersWarningDialogVisible,
+      setQuotaWarningDialogVisible,
+      setIsNewQuotaItemsByCurrentUser,
+      isNewQuotaItemsByCurrentUser,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -406,18 +407,20 @@ export default inject(
     const { uploadPanelVisible } = uploadDataStore;
     const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
     const { hotkeyPanelVisible } = settingsStore;
-    const {
-      confirmDialogIsLoading,
-      isRoomCreatedByCurrentUser,
-      setIsRoomCreatedByCurrentUser,
-    } = createEditRoomStore;
-    const { isRoomTariffAlmostLimit } = currentQuotaStore;
+    const { confirmDialogIsLoading } = createEditRoomStore;
+    const { isRoomTariffAlmostLimit, isUserTariffAlmostLimit } =
+      currentQuotaStore;
 
     const {
       settingsPluginDialogVisible,
       deletePluginDialogVisible,
       pluginDialogVisible,
     } = pluginStore;
+
+    const isAccounts = window.location.href.indexOf("accounts/people") !== -1;
+    const isItemTariffAlmostLimit = isAccounts
+      ? isUserTariffAlmostLimit
+      : isRoomTariffAlmostLimit;
 
     return {
       preparationPortalDialogVisible,
@@ -450,7 +453,7 @@ export default inject(
       restoreAllPanelVisible,
       invitePanelVisible: invitePanelOptions.visible,
       archiveDialogVisible,
-      inviteUsersWarningDialogVisible,
+      inviteQuotaWarningDialogVisible,
       confirmDialogIsLoading,
       changeUserTypeDialogVisible,
       restoreRoomDialogVisible,
@@ -474,10 +477,10 @@ export default inject(
       fillPDFDialogData,
       shareCollectSelector,
 
-      isRoomCreatedByCurrentUser,
-      setIsRoomCreatedByCurrentUser,
-      isRoomTariffAlmostLimit,
-      setInviteUsersWarningDialogVisible,
+      setQuotaWarningDialogVisible,
+      setIsNewQuotaItemsByCurrentUser,
+      isNewQuotaItemsByCurrentUser,
+      isItemTariffAlmostLimit,
     };
   },
 )(observer(Panels));

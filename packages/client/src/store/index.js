@@ -288,6 +288,7 @@ const createEditRoomStore = new CreateEditRoomStore(
   infoPanelStore,
   currentQuotaStore,
   clientLoadingStore,
+  dialogsStore,
 );
 
 const webhooksStore = new WebhooksStore(settingsStore);

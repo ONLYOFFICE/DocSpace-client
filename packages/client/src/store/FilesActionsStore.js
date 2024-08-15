@@ -1796,14 +1796,14 @@ class FilesActionStore {
   archiveRooms = (action) => {
     const {
       setArchiveDialogVisible,
-      setInviteUsersWarningDialogVisible,
+      setQuotaWarningDialogVisible,
       setRestoreRoomDialogVisible,
     } = this.dialogsStore;
 
     const { isWarningRoomsDialog } = this.currentQuotaStore;
 
     if (action === "unarchive" && isWarningRoomsDialog) {
-      setInviteUsersWarningDialogVisible(true);
+      setQuotaWarningDialogVisible(true);
       return;
     }
 

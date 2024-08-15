@@ -93,6 +93,7 @@ const GenerateDeveloperTokenDialog = ({
 
       if (accessToken) {
         setToken(accessToken);
+        copy(accessToken);
         setDates({
           created: getDate(created, i18nParam),
           expires: getDate(expires, i18nParam),

@@ -141,10 +141,17 @@ function WizardForm(props: WizardFormProps) {
 
   const refPassInput = useRef<Nullable<PasswordInputHandle>>(null);
 
-  const userCulture = culture || "en";
   const isMobileView = currentDeviceType === DeviceType.mobile;
 
+  const [userCulture, setUserCulture] = useState("en");
+
   const convertedCulture = convertLanguage(userCulture);
+
+  useEffect(() => {
+    setUserCulture(
+      window.navigator ? window.navigator.language : culture ?? "en",
+    );
+  }, [culture]);
 
   useEffect(() => {
     if (portalTimeZones) {
@@ -172,6 +179,8 @@ function WizardForm(props: WizardFormProps) {
           icon: culture.icon,
         })),
       );
+
+      console.log("select", select);
 
       if (select.length === 0) {
         setSelectedLanguage(DEFAULT_SELECT_LANGUAGE);

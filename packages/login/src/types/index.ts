@@ -164,6 +164,13 @@ export type GreetingContainersProps = {
   welcomeTitle?: string;
 };
 
+export type GreetingCreateUserContainerProps = {
+  type: string;
+  firstName?: string;
+  lastName?: string;
+  culture?: string;
+};
+
 export type LoginProps = {
   searchParams: { [key: string]: string };
   isAuthenticated?: boolean;

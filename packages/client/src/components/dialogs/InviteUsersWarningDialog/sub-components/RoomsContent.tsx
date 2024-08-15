@@ -34,6 +34,7 @@ export interface RoomsContentProps {
   maxCountRoomsByQuota: number;
   usedRoomsCount: number;
   isPaymentPageAvailable: boolean;
+  isArchiveFolderRoot: boolean;
 }
 
 const RoomsContent = ({
@@ -41,6 +42,7 @@ const RoomsContent = ({
   maxCountRoomsByQuota,
   usedRoomsCount,
   isPaymentPageAvailable,
+  isArchiveFolderRoot,
 }: RoomsContentProps) => {
   const { t } = useTranslation(["Payments", "Common", "MainBar"]);
 
@@ -57,9 +59,17 @@ const RoomsContent = ({
   if (isRoomsTariffLimit)
     return (
       <>
-        <Text fontWeight={600}>{t("CannotCreateNewRoom")}</Text>
+        <Text fontWeight={600}>
+          {isArchiveFolderRoot
+            ? t("CannotRestoreRoom")
+            : t("CannotCreateNewRoom")}
+        </Text>
         <br />
-        <Text>{t("NewRoomWillExceedLimit")}</Text>
+        <Text>
+          {isArchiveFolderRoot
+            ? t("NotPossibleRoomRestoring")
+            : t("NewRoomWillExceedLimit")}
+        </Text>
         <br />
         {chooseNewPlan}
       </>
@@ -81,15 +91,19 @@ const RoomsContent = ({
   );
 };
 
-export default inject(({ currentQuotaStore, authStore }) => {
+export default inject(({ currentQuotaStore, authStore, treeFoldersStore }) => {
   const { isRoomsTariffLimit, maxCountRoomsByQuota, usedRoomsCount } =
     currentQuotaStore;
 
   const { isPaymentPageAvailable } = authStore;
+
+  const { isArchiveFolderRoot } = treeFoldersStore;
+
   return {
     isRoomsTariffLimit,
     maxCountRoomsByQuota,
     usedRoomsCount,
     isPaymentPageAvailable,
+    isArchiveFolderRoot,
   };
 })(observer(RoomsContent));

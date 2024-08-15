@@ -82,7 +82,7 @@ const PureHome = (props) => {
     startUpload,
     setDragging,
     dragging,
-    uploadEmptyFolders,
+    createFoldersTree,
     disableDrag,
     uploaded,
     converted,
@@ -182,7 +182,7 @@ const PureHome = (props) => {
     dragging,
     setDragging,
     disableDrag,
-    uploadEmptyFolders,
+    createFoldersTree,
     startUpload,
     fetchFiles,
     fetchRooms,
@@ -543,7 +543,7 @@ export default inject(
     const { setUploadPanelVisible, startUpload, uploaded, converted } =
       uploadDataStore;
 
-    const { uploadEmptyFolders, onClickBack } = filesActionsStore;
+    const { createFoldersTree, onClickBack } = filesActionsStore;
 
     const selectionLength = isProgressFinished ? selection.length : null;
     const selectionTitle = isProgressFinished
@@ -635,7 +635,7 @@ export default inject(
 
       setUploadPanelVisible,
       startUpload,
-      uploadEmptyFolders,
+      createFoldersTree,
 
       setToPreviewFile,
       setIsPreview,

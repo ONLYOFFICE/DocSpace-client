@@ -485,7 +485,7 @@ const CreateUserForm = (props) => {
           <PortalLogo className="portal-logo" />
           {linkData.type === "LinkInvite" && (
             <div className="tooltip">
-              <Text fontSize="16px">
+              <Text fontSize="16px" as="div" className="invitation-text">
                 {roomName ? (
                   <Trans
                     t={t}

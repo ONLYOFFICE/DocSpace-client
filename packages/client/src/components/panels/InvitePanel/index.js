@@ -268,6 +268,39 @@ const InvitePanel = ({
       defaultAccess: 1,
     });
   };
+
+  const getError = () => {
+    const paymentLink = (
+      <Trans
+        t={t}
+        i18nKey="ChangeUserPermissions"
+        ns="Common"
+        components={{
+          1: (
+            <ColorTheme
+              tag="a"
+              themeId={ThemeId.Link}
+              onClick={onClickPayments}
+              target="_blank"
+            />
+          ),
+        }}
+      />
+    );
+
+    return (
+      <>
+        <Text as="span">
+          {t("Common:PaidUsersExceedsLimit", {
+            count: maxCountManagersByQuota + invitePaidUsersCount,
+            limit: maxCountManagersByQuota,
+          })}
+        </Text>
+        &nbsp;
+        {!isRoomAdmin && paymentLink}
+      </>
+    );
+  };
   const onClickSend = async (e) => {
     const invitations = inviteItems.map((item) => {
       let newItem = {};
@@ -315,34 +348,7 @@ const InvitePanel = ({
       let error = err;
 
       if (err?.response?.status === 402) {
-        error = (
-          <>
-            <Text as="span">
-              {t("Common:PaidUsersExceedsLimit", {
-                count: maxCountManagersByQuota + invitePaidUsersCount,
-                limit: maxCountManagersByQuota,
-              })}
-            </Text>
-            &nbsp;
-            {!isRoomAdmin && (
-              <Trans
-                t={t}
-                i18nKey="ChangeUserPermissions"
-                ns="Common"
-                components={{
-                  1: (
-                    <ColorTheme
-                      tag="a"
-                      themeId={ThemeId.Link}
-                      onClick={onClickPayments}
-                      target="_blank"
-                    />
-                  ),
-                }}
-              />
-            )}
-          </>
-        );
+        error = getError();
       }
 
       toastr.error(error);

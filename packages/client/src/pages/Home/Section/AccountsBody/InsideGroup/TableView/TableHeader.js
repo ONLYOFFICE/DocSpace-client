@@ -138,15 +138,8 @@ class InsideGroupTableHeader extends React.Component {
       newFilter.sortBy = sortBy;
 
       if (sortBy === "AZ") {
-        if (
-          newFilter.sortBy !== "lastname" &&
-          newFilter.sortBy !== "firstname"
-        ) {
-          newFilter.sortBy = "firstname";
-        } else if (newFilter.sortBy === "lastname") {
-          newFilter.sortBy = "firstname";
-        } else {
-          newFilter.sortBy = "lastname";
+        if (newFilter.sortBy !== "displayname") {
+          newFilter.sortBy = "displayname";
         }
         newFilter.sortOrder =
           newFilter.sortOrder === "ascending" ? "descending" : "ascending";
@@ -176,10 +169,7 @@ class InsideGroupTableHeader extends React.Component {
     } = this.props;
     const { sortOrder } = filter;
 
-    const sortBy =
-      filter.sortBy === "firstname" || filter.sortBy === "lastname"
-        ? "AZ"
-        : filter.sortBy;
+    const sortBy = filter.sortBy === "displayname" ? "AZ" : filter.sortBy;
 
     return (
       <TableHeader

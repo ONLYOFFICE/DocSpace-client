@@ -98,6 +98,7 @@
       onSignOut: null,
       onDownload: null,
       onNoAccess: null,
+      onContentReady: null,
     },
   };
 
@@ -814,7 +815,10 @@
         targetFrame.style.height = this.config.height;
         targetFrame.parentNode.style.height = "inherit";
 
-        if (loader) loader.remove();
+        if (loader) {
+          loader.remove();
+          this.config.events.onContentReady();
+        }
       }
     }
 

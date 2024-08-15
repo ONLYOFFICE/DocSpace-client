@@ -54,26 +54,19 @@ export default async function Layout({
 
   const cookieStore = cookies();
 
-  const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as ThemeKeys;
-
   const bgPattern = getBgPattern(colorTheme?.selected);
 
   const objectSettings = typeof settings === "string" ? undefined : settings;
 
-  const isRegisterContainerVisible = objectSettings?.enabledJoin;
-
   return (
     <div style={{ width: "100%", height: "100%" }}>
-      <SimpleNav systemTheme={systemTheme} isLanguageComboboxVisible={false} />
+      <SimpleNav isLanguageComboboxVisible={false} />
 
       <WizardFormWrapper id="wizard-page" bgPattern={bgPattern}>
         <div className="bg-cover" />
         <Scrollbar id="customScrollBar">
           <WizardContent>
-            <ColorTheme
-              themeId={ThemeId.LinkForgotPassword}
-              isRegisterContainerVisible={isRegisterContainerVisible}
-            >
+            <ColorTheme themeId={ThemeId.LinkForgotPassword}>
               <GreetingContainer
                 greetingSettings={objectSettings?.greetingSettings}
                 welcomeTitle="Wizard:WelcomeTitle"

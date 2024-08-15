@@ -335,6 +335,11 @@ class CurrentQuotasStore {
   };
 
   get isWarningRoomsDialog() {
+    console.log(
+      "isRoomsTariffLimit",
+      this.currentTariffStatusStore?.isGracePeriod,
+      this.isRoomsTariffLimit,
+    );
     return (
       this.currentTariffStatusStore?.isGracePeriod || this.isRoomsTariffLimit
     );

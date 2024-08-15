@@ -87,8 +87,8 @@ class CreateEditRoomStore {
     this.onClose = onClose;
   };
 
-  setRoomIsCreated = (onClose) => {
-    this.onClose = onClose;
+  setIsRoomCreatedByCurrentUser = (value) => {
+    this.isRoomCreatedByCurrentUser = value;
   };
 
   onCreateRoom = async (withConfirm = false, t) => {
@@ -151,6 +151,8 @@ class CreateEditRoomStore {
         isThirdparty && storageFolderId
           ? await createRoomInThirdpary(storageFolderId, createRoomData)
           : await createRoom(createRoomData);
+
+      this.setIsRoomCreatedByCurrentUser(true);
 
       room.isLogoLoading = true;
 

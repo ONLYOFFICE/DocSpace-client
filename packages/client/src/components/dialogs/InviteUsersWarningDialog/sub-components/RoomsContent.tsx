@@ -31,9 +31,15 @@ import { Text } from "@docspace/shared/components/text";
 
 export interface RoomsContentProps {
   isRoomsTariffLimit: boolean;
+  maxCountRoomsByQuota: number;
+  usedRoomsCount: number;
 }
 
-const RoomsContent = ({ isRoomsTariffLimit }: RoomsContentProps) => {
+const RoomsContent = ({
+  isRoomsTariffLimit,
+  maxCountRoomsByQuota,
+  usedRoomsCount,
+}: RoomsContentProps) => {
   const { t } = useTranslation(["Payments", "Common"]);
   if (isRoomsTariffLimit)
     return (
@@ -45,12 +51,30 @@ const RoomsContent = ({ isRoomsTariffLimit }: RoomsContentProps) => {
         <Text>{t("ChooseNewPlan")}</Text>
       </>
     );
+
+  return (
+    <>
+      <Text fontWeight={600}>{t("RoomsQuotaAlmostExhausted")}</Text>
+      <br />
+      <Text>
+        {t("NumberOfRoomsAccordingToTariff", {
+          currentValue: usedRoomsCount,
+          maxValue: maxCountRoomsByQuota,
+        })}
+      </Text>
+      <br />
+      <Text>{t("ChooseNewPlan")}</Text>
+    </>
+  );
 };
 
 export default inject(({ currentQuotaStore }) => {
-  const { isRoomsTariffLimit } = currentQuotaStore;
+  const { isRoomsTariffLimit, maxCountRoomsByQuota, usedRoomsCount } =
+    currentQuotaStore;
 
   return {
     isRoomsTariffLimit,
+    maxCountRoomsByQuota,
+    usedRoomsCount,
   };
 })(observer(RoomsContent));

@@ -226,7 +226,7 @@ const ArticleMainButtonContent = (props) => {
 
     const event = new Event(Events.ROOM_CREATE);
     window.dispatchEvent(event);
-  }, []);
+  }, [isWarningRoomsDialog]);
 
   const onShowSelectFileDialog = React.useCallback(() => {
     setSelectFileDialogVisible(true);

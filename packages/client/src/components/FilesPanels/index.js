@@ -81,6 +81,7 @@ import { PDFFormEditingDialog } from "../dialogs/PDFFormEditingDialog";
 import { SharePDFFormDialog } from "../dialogs/SharePDFFormDialog";
 import { FillPDFDialog } from "../dialogs/FillPDFDialog";
 import { ShareCollectSelector } from "../ShareCollectSelector";
+import { currentQuotaStore } from "@docspace/shared/store";
 
 const Panels = (props) => {
   const {
@@ -137,6 +138,11 @@ const Panels = (props) => {
     selectFileFormRoomOpenRoot,
     fillPDFDialogData,
     shareCollectSelector,
+
+    isRoomCreatedByCurrentUser,
+    setIsRoomCreatedByCurrentUser,
+    isRoomTariffAlmostLimit,
+    setInviteUsersWarningDialogVisible,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -191,6 +197,16 @@ const Panels = (props) => {
       window.removeEventListener(Events.Share_PDF_Form, handleSharePDFForm);
     };
   }, [handleSharePDFForm]);
+
+  useEffect(() => {
+    if (isRoomCreatedByCurrentUser) {
+      isRoomTariffAlmostLimit && setInviteUsersWarningDialogVisible(true);
+      setIsRoomCreatedByCurrentUser(false);
+    }
+    return () => {
+      setIsRoomCreatedByCurrentUser(false);
+    };
+  }, [isRoomTariffAlmostLimit, isRoomCreatedByCurrentUser]);
 
   return [
     settingsPluginDialogVisible && (
@@ -330,7 +346,7 @@ export default inject(
     backup,
     createEditRoomStore,
     pluginStore,
-    filesStore,
+    currentQuotaStore,
     filesActionsStore,
   }) => {
     const {
@@ -380,6 +396,8 @@ export default inject(
       selectFileFormRoomOpenRoot,
       fillPDFDialogData,
       shareCollectSelector,
+
+      setInviteUsersWarningDialogVisible,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -388,7 +406,12 @@ export default inject(
     const { uploadPanelVisible } = uploadDataStore;
     const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
     const { hotkeyPanelVisible } = settingsStore;
-    const { confirmDialogIsLoading } = createEditRoomStore;
+    const {
+      confirmDialogIsLoading,
+      isRoomCreatedByCurrentUser,
+      setIsRoomCreatedByCurrentUser,
+    } = createEditRoomStore;
+    const { isRoomTariffAlmostLimit } = currentQuotaStore;
 
     const {
       settingsPluginDialogVisible,
@@ -450,6 +473,11 @@ export default inject(
       selectFileFormRoomOpenRoot,
       fillPDFDialogData,
       shareCollectSelector,
+
+      isRoomCreatedByCurrentUser,
+      setIsRoomCreatedByCurrentUser,
+      isRoomTariffAlmostLimit,
+      setInviteUsersWarningDialogVisible,
     };
   },
 )(observer(Panels));

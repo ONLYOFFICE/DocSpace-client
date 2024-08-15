@@ -97,6 +97,12 @@ const StyledForm = styled(Box)`
   .set-app-description {
     width: 100%;
     max-width: 500px;
+
+    .portal-logo {
+      margin: 0 auto;
+      max-width: 386px;
+      height: 44px;
+    }
   }
 
   .set-app-title {

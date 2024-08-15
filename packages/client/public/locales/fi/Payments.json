@@ -25,7 +25,6 @@
   "Pay": "Maksa",
   "Payer": "Maksaja",
   "PayerDescription": "Tällä käyttäjällä on pääsy maksutietoihin ja on ainoa käyttäjä, joka voi muokata kiintiötä ja suorittaa maksuja. {{productName}}-n omistaja ja maksava johtaja voivat määrätä uudelleen maksavan johtajan rooliin käyttäen Stripe-asiakasportaalia.",
-  "PaymentOverdue": "Et voi lisätä uusia käyttäjiä.",
   "PriceCalculation": "Laske hintasi",
   "RenewSubscription": "Uusi tilaus {{planName}} ohjelmaan",
   "RoomManagerDescription": "Huoneen hallinto ja arkistointi, käyttäjien kutsuminen ja hallinta. Useita järjestelmänvalvojia voi olla määrättynä huoneeseen.",
@@ -35,7 +34,6 @@
   "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/kuukausi</3>",
   "UpgradeNow": "Päivitä nyt",
   "UpgradePlan": "Päivitä ohjelma",
-  "UpgradePlanInfo": "Uusien käyttäjien lisääminen ylittää huoneen jäsenien maksimimäärän, jonka tämänhetkinen hinnoitteluohjelma sallii.",
   "UserNotFound": "Käyttäjän <1>{{email}}</1> ei löydy.",
   "UserNotFoundMatchingEmail": "Käyttäjää vastaavalla Stripe-sähköpostilla ei löytynyt.",
   "YourPrice": "Hintasi"

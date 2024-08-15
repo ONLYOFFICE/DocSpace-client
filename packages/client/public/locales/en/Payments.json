@@ -29,7 +29,6 @@
   "Pay": "Pay",
   "Payer": "Payer",
   "PayerDescription": "This user has access to payment details and is the only user who can adjust the quota and make payments. The {{productName}} owner, as well as the paying manager themselves, can reassign the paying manager role using the Stripe customer portal.",
-  "PaymentOverdue": "Cannot add new users.",
   "PriceCalculation": "Calculate your price",
   "RenewSubscription": "Renew subscription to {{planName}} plan",
   "RoomManagerDescription": "Room administration and archiving, user invitation and management. Several admins can be assigned to the room.",
@@ -39,7 +38,6 @@
   "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/month</3>",
   "UpgradeNow": "Upgrade now",
   "UpgradePlan": "Upgrade plan",
-  "UpgradePlanInfo": "By adding new users you will exceed the maximum number of room members allowed by your current pricing plan.",
   "UserNotFound": "User <1>{{email}}</1> is not found.",
   "UserNotFoundMatchingEmail": "We couldn’t find the user with the matching Stripe e-mail.",
   "YourPrice": "Your price"

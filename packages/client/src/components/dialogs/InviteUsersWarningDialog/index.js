@@ -124,24 +124,13 @@ const InviteUsersWarningDialog = (props) => {
     >
       <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
       <ModalDialog.Body>
-        {
-          isGracePeriod ? (
-            contentForGracePeriod
-          ) : isAccounts ? (
-            <UsersContent />
-          ) : (
-            <RoomsContent />
-          )
-          // <>
-          //   <Text fontWeight={700} noSelect>
-          //     {t("PaymentOverdue")}
-          //   </Text>
-          //   <br />
-          //   <Text>{t("UpgradePlanInfo")}</Text>
-          //   <br />
-          //   <Text>{t("ChooseNewPlan")}</Text>
-          // </>
-        }
+        {isGracePeriod ? (
+          contentForGracePeriod
+        ) : isAccounts ? (
+          <UsersContent />
+        ) : (
+          <RoomsContent />
+        )}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

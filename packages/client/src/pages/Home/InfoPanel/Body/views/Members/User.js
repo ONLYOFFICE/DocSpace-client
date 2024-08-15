@@ -68,12 +68,12 @@ const User = ({
   resendEmailInvitations,
   setEditMembersGroup,
   setEditGroupMembersDialogVisible,
+  statusInRoom,
 }) => {
   if (!infoPanelSelection) return null;
   if (!user.displayName && !user.name && !user.email) return null;
 
   const showStatus = !user.isGroup && !user.isExpect;
-  const status = "online";
 
   const theme = useTheme();
 
@@ -357,7 +357,7 @@ const User = ({
             <div className="me-label">&nbsp;{`(${t("Common:MeLabel")})`}</div>
           )}
         </div>
-        {showStatus && <Status status={status} />}
+        {showStatus && <Status status={statusInRoom?.status} />}
         {/*{!user.isGroup && (*/}
         {/*  <div className="role-email" style={{ display: "flex" }}>*/}
         {/*    <Text*/}

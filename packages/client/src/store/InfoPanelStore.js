@@ -97,7 +97,7 @@ class InfoPanelStore {
   infoPanelRoom = null;
   membersIsLoading = false;
   isMembersPanelUpdating = false;
-  membersStatusesMap = new Map();
+  statusesInRoomMap = new Map();
 
   shareChanged = false;
 
@@ -114,8 +114,7 @@ class InfoPanelStore {
     const { socketHelper } = settingsStore;
 
     socketHelper.on("statuses-in-room", (value) => {
-      console.log(value);
-      this.setMembersStatuses(value);
+      this.setStatusesInRoomMap(value);
     });
 
     socketHelper.on("enter-in-room", this.updateMemberStatus);
@@ -844,12 +843,12 @@ class InfoPanelStore {
     this.shareChanged = shareChanged;
   };
 
-  setMembersStatuses = (statuses) => {
-    this.membersStatusesMap = new Map(statuses.map((s) => [s.id, s]));
+  setStatusesInRoomMap = (statuses) => {
+    this.statusesInRoomMap = new Map(statuses.map((s) => [s.id, s]));
   };
 
   updateMemberStatus = (status) => {
-    this.membersStatusesMap.set(status.id, status);
+    this.statusesInRoomMap.set(status.id, status);
   };
 }
 

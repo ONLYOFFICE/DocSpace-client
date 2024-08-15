@@ -81,6 +81,7 @@ const Members = ({
   searchValue,
   isMembersPanelUpdating,
   socketHelper,
+  statusesInRoomMap,
 }) => {
   const withoutTitlesAndLinks = !!searchValue;
   const membersHelper = new MembersHelper({ t });
@@ -271,6 +272,11 @@ const Members = ({
       >
         {publicRoomItems}
         {membersList.map((user, index) => {
+          const statusProp =
+            !user.isGroup && !user.isExpect
+              ? { statusInRoom: statusesInRoomMap.get(user.id) }
+              : {};
+
           return (
             <User
               t={t}
@@ -284,6 +290,7 @@ const Members = ({
                 !isMembersPanelUpdating &&
                 membersList.length - headersCount < membersFilter.total
               }
+              {...statusProp}
             />
           );
         })}
@@ -313,6 +320,7 @@ export default inject(
       withPublicRoomBlock,
       searchValue,
       isMembersPanelUpdating,
+      statusesInRoomMap,
     } = infoPanelStore;
     const { membersFilter } = filesStore;
     const { id: selfId, isAdmin } = userStore.user;
@@ -362,6 +370,7 @@ export default inject(
       searchValue,
       isMembersPanelUpdating,
       socketHelper,
+      statusesInRoomMap,
     };
   },
 )(

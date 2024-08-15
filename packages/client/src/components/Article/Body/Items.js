@@ -86,16 +86,10 @@ const Item = ({
   const onDropZoneUpload = React.useCallback(
     (files, uploadToFolder) => {
       dragging && setDragging(false);
-      const emptyFolders = files.filter((f) => f.isEmptyDirectory);
 
-      if (emptyFolders.length > 0) {
-        uploadEmptyFolders(emptyFolders, uploadToFolder).then(() => {
-          const onlyFiles = files.filter((f) => !f.isEmptyDirectory);
-          if (onlyFiles.length > 0) startUpload(onlyFiles, uploadToFolder, t);
-        });
-      } else {
-        startUpload(files, uploadToFolder, t);
-      }
+      uploadEmptyFolders(files, uploadToFolder).then((f) => {
+        if (f.length > 0) startUpload(f, null, t);
+      });
     },
     [t, dragging, setDragging, startUpload, uploadEmptyFolders],
   );

@@ -70,6 +70,7 @@ import { resendInvitesAgain } from "@docspace/shared/api/people";
 import { getCorrectFourValuesStyle } from "@docspace/shared/utils";
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isTablet } from "react-device-detect";
+import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
 
 const StyledButton = styled(Button)`
   font-weight: 700;
@@ -180,6 +181,7 @@ const ArticleMainButtonContent = (props) => {
 
     parentRoomType,
     isFolder,
+    uploadEmptyFolders,
   } = props;
 
   const navigate = useNavigate();
@@ -239,8 +241,12 @@ const ArticleMainButtonContent = (props) => {
   );
 
   const onFileChange = React.useCallback(
-    (e) => {
-      startUpload(e.target.files, null, t);
+    async (e) => {
+      const files = await getFilesFromEvent(e);
+
+      uploadEmptyFolders(files).then((f) => {
+        if (f.length > 0) startUpload(f, null, t);
+      });
     },
     [startUpload, t],
   );
@@ -249,7 +255,7 @@ const ArticleMainButtonContent = (props) => {
     if (isPrivacy) {
       encryptionUploadDialog((encryptedFile, encrypted) => {
         encryptedFile.encrypted = encrypted;
-        startUpload([encryptedFile], null, t);
+        startUpload([encryptedFile], null, t); // TODO: uploadEmptyFolders
       });
     } else {
       inputFilesElement.current.click();
@@ -901,6 +907,7 @@ export default inject(
     versionHistoryStore,
     userStore,
     currentTariffStatusStore,
+    filesActionsStore,
   }) => {
     const { showArticleLoader } = clientLoadingStore;
     const { mainButtonMobileVisible } = filesStore;
@@ -944,6 +951,8 @@ export default inject(
     const { mainButtonItemsList } = pluginStore;
 
     const { frameConfig, isFrame } = settingsStore;
+
+    const { uploadEmptyFolders } = filesActionsStore;
 
     return {
       isGracePeriod,
@@ -997,6 +1006,7 @@ export default inject(
       isFolder,
       selectFileFormRoomDialogVisible,
       setSelectFileFormRoomDialogVisible,
+      uploadEmptyFolders,
     };
   },
 )(

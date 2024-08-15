@@ -50,6 +50,7 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import TariffBar from "SRC_DIR/components/TariffBar";
+import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -225,6 +226,7 @@ const SectionHeaderContent = (props) => {
     getHeaderOptions,
     setBufferSelection,
     setGroupsBufferSelection,
+    uploadEmptyFolders,
   } = props;
 
   const location = useLocation();
@@ -239,8 +241,12 @@ const SectionHeaderContent = (props) => {
   const isSettingsPage = location.pathname.includes("/settings");
 
   const onFileChange = React.useCallback(
-    (e) => {
-      startUpload(e.target.files, null, t);
+    async (e) => {
+      const files = await getFilesFromEvent(e);
+
+      uploadEmptyFolders(files).then((f) => {
+        if (f.length > 0) startUpload(f, null, t);
+      });
     },
     [startUpload, t],
   );
@@ -639,6 +645,7 @@ export default inject(
       moveToRoomsPage,
       onClickBack,
       moveToPublicRoom,
+      uploadEmptyFolders,
     } = filesActionsStore;
 
     const { setIsVisible, isVisible } = infoPanelStore;
@@ -802,6 +809,7 @@ export default inject(
       getHeaderOptions,
       setBufferSelection,
       setGroupsBufferSelection,
+      uploadEmptyFolders,
     };
   },
 )(

@@ -5,6 +5,7 @@ export type EmptyViewLinkType = {
   state?: unknown;
   icon: React.ReactElement;
   description: string;
+  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 };
 
 export type EmptyViewItemType = {

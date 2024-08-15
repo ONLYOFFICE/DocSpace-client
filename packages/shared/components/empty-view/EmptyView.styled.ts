@@ -67,6 +67,9 @@ export const EmptyViewBody = styled.div`
     color: #4781d1;
     svg {
       color: #4781d1;
+      g {
+        fill: currentColor;
+      }
       flex-shrink: 0;
     }
 

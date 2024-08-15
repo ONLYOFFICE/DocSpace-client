@@ -251,7 +251,12 @@ class FilesActionStore {
     return result;
   };
 
-  createFolderTree = async (treeList, parentFolderId, filesList) => {
+  createFolderTree = async (
+    treeList,
+    parentFolderId,
+    filesList,
+    operationId,
+  ) => {
     if (!treeList || !treeList.length) return;
 
     for (let i = 0; i < treeList.length; i++) {
@@ -269,12 +274,28 @@ class FilesActionStore {
         continue;
       }
 
+      this.uploadDataStore.secondaryProgressDataStore.setSecondaryProgressBarData(
+        {
+          icon: "file",
+          visible: true,
+          percent: 0,
+          label: "",
+          alert: false,
+          operationId,
+        },
+      );
+
       const folder = await createFolder(parentFolderId, treeNode.name);
       const parentId = folder.id;
 
       if (treeNode.children.length == 0) continue;
 
-      await this.createFolderTree(treeNode.children, parentId, filesList);
+      await this.createFolderTree(
+        treeNode.children,
+        parentId,
+        filesList,
+        operationId,
+      );
     }
 
     return treeList;
@@ -284,26 +305,16 @@ class FilesActionStore {
     //console.log("createFoldersTree", files, folderId);
 
     const { secondaryProgressDataStore } = this.uploadDataStore;
-    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
-      secondaryProgressDataStore;
+    const { clearSecondaryProgressData } = secondaryProgressDataStore;
 
     const operationId = uniqueid("operation_");
 
     const toFolderId = folderId ? folderId : this.selectedFolderStore.id;
 
-    setSecondaryProgressBarData({
-      icon: "file",
-      visible: true,
-      percent: 0,
-      label: "",
-      alert: false,
-      operationId,
-    });
-
     const tree = this.convertToTree(files);
 
     const filesList = [];
-    await this.createFolderTree(tree, toFolderId, filesList);
+    await this.createFolderTree(tree, toFolderId, filesList, operationId);
 
     this.updateCurrentFolder(null, [folderId], null, operationId);
 

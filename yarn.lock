@@ -2756,6 +2756,7 @@ __metadata:
   resolution: "@docspace/login@workspace:packages/login"
   dependencies:
     "@hcaptcha/react-hcaptcha": "npm:^1.10.1"
+    "@playwright/test": "npm:^1.46.0"
     "@svgr/webpack": "npm:^8.1.0"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18.2.53"
@@ -4776,6 +4777,17 @@ __metadata:
   version: 0.1.1
   resolution: "@pkgr/core@npm:0.1.1"
   checksum: 10/6f25fd2e3008f259c77207ac9915b02f1628420403b2630c92a07ff963129238c9262afc9e84344c7a23b5cc1f3965e2cd17e3798219f5fd78a63d144d3cceba
+  languageName: node
+  linkType: hard
+
+"@playwright/test@npm:^1.46.0":
+  version: 1.46.0
+  resolution: "@playwright/test@npm:1.46.0"
+  dependencies:
+    playwright: "npm:1.46.0"
+  bin:
+    playwright: cli.js
+  checksum: 10/710bf451555e67476bf6e911a07ec0e011474f769a10f8073b3b22fe9b81086a83b6821da354900a6d6d14d60e4320b2c9f7249cc5480e3923de56a8501b7ffe
   languageName: node
   linkType: hard
 
@@ -22561,6 +22573,30 @@ __metadata:
   bin:
     playwright-core: cli.js
   checksum: 10/6a71d2e2aa5b054d6e83836f09e139a0ff4de3aa9b6aebe0e03de3ab828c735d23a20a60fafcee91c1658da490cc390f05af463325ac842beaff58a173f7ad9e
+  languageName: node
+  linkType: hard
+
+"playwright-core@npm:1.46.0":
+  version: 1.46.0
+  resolution: "playwright-core@npm:1.46.0"
+  bin:
+    playwright-core: cli.js
+  checksum: 10/1fd237d01380be0d650ae7df73fb796eae9c208e0746bb110db270139f1d2a96bf3b8856c394a48720b30e145614a10f275ab08627d0c95ba2160dc0402a90cb
+  languageName: node
+  linkType: hard
+
+"playwright@npm:1.46.0":
+  version: 1.46.0
+  resolution: "playwright@npm:1.46.0"
+  dependencies:
+    fsevents: "npm:2.3.2"
+    playwright-core: "npm:1.46.0"
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  bin:
+    playwright: cli.js
+  checksum: 10/e06f3b53faaf4edf4fcf636b43004dd0db1e45dbdcb2b59037a9810dfce3a59f0386d4826ba7de42f98fe525539fa20dd8f8c46acd1f8e5c57dcb5c1d8d536ce
   languageName: node
   linkType: hard
 

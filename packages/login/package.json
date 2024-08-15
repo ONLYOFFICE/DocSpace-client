@@ -25,6 +25,7 @@
     "styled-components": "^5.3.9"
   },
   "devDependencies": {
+    "@playwright/test": "^1.46.0",
     "@svgr/webpack": "^8.1.0",
     "@types/node": "^20",
     "@types/react": "^18.2.53",

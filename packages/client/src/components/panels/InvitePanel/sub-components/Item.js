@@ -54,7 +54,6 @@ import { filterGroupRoleOptions, filterUserRoleOptions } from "SRC_DIR/helpers";
 import AccessSelector from "../../../AccessSelector";
 
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
-import { EmployeeType, ShareAccessRights } from "@docspace/shared/enums";
 
 const Item = ({
   t,

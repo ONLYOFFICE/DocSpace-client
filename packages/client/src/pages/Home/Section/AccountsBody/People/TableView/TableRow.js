@@ -438,7 +438,7 @@ const PeopleTableRow = (props) => {
         size="content"
         displaySelectedOption
         modernView
-        manualWidth={"fit-content"}
+        manualWidth={"auto"}
         isLoading={isLoading}
       />
     );

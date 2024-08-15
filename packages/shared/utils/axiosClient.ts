@@ -182,11 +182,11 @@ class AxiosClient {
     }
   };
 
-  request = (
+  request = <T>(
     options: TReqOption & AxiosRequestConfig,
     skipRedirect = false,
     isOAuth = false,
-  ) => {
+  ): Promise<T> | undefined => {
     const onSuccess = (response: TRes) => {
       const error = this.getResponseError(response);
 
@@ -295,7 +295,9 @@ class AxiosClient {
 
       return Promise.reject(error);
     };
-    return this.client?.(options).then(onSuccess).catch(onError);
+    return this.client?.(options).then(onSuccess).catch(onError) as
+      | Promise<T>
+      | undefined;
   };
 }
 

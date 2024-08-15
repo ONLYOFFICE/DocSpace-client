@@ -18,6 +18,8 @@ import DisableDialog from "./sub-components/DisableDialog";
 import DeleteDialog from "./sub-components/DeleteDialog";
 import OAuthEmptyScreen from "./sub-components/EmptyScreen";
 import List from "./sub-components/List";
+import GenerateDeveloperTokenDialog from "./sub-components/GenerateDeveloperTokenDialog";
+import RevokeDeveloperTokenDialog from "./sub-components/RevokeDeveloperTokenDialog";
 
 const MIN_LOADER_TIME = 500;
 
@@ -35,6 +37,8 @@ const OAuth = ({
   setIsInit,
   disableDialogVisible,
   deleteDialogVisible,
+  generateDeveloperTokenDialogVisible,
+  revokeDeveloperTokenDialogVisible,
 }: OAuthProps) => {
   const { t } = useTranslation(["OAuth"]);
 
@@ -102,6 +106,8 @@ const OAuth = ({
       {disableDialogVisible && <DisableDialog />}
       {previewDialogVisible && <PreviewDialog visible={previewDialogVisible} />}
       {deleteDialogVisible && <DeleteDialog />}
+      {generateDeveloperTokenDialogVisible && <GenerateDeveloperTokenDialog />}
+      {revokeDeveloperTokenDialogVisible && <RevokeDeveloperTokenDialog />}
     </OAuthContainer>
   );
 };
@@ -128,6 +134,8 @@ export default inject(
       setIsInit,
       disableDialogVisible,
       deleteDialogVisible,
+      generateDeveloperTokenDialogVisible,
+      revokeDeveloperTokenDialogVisible,
     } = oauthStore;
     return {
       viewAs,
@@ -143,6 +151,8 @@ export default inject(
       setIsInit,
       disableDialogVisible,
       deleteDialogVisible,
+      generateDeveloperTokenDialogVisible,
+      revokeDeveloperTokenDialogVisible,
     };
   },
 )(observer(OAuth));

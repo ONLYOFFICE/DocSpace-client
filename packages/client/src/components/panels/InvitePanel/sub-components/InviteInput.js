@@ -50,7 +50,7 @@ import { isBetaLanguage } from "@docspace/shared/utils";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
 import AddUsersPanel from "../../AddUsersPanel";
-import { getAccessOptions, getTopFreeRole, isPaidRoleUser } from "../utils";
+import { getAccessOptions, getTopFreeRole, isPaidUserRole } from "../utils";
 import AccessSelector from "../../../AccessSelector";
 
 import {
@@ -157,7 +157,7 @@ const InviteInput = ({
 
     let userAccess = selectedAccess;
 
-    if (isPaidUserLimit && roomId !== -1 && isPaidRoleUser(userAccess)) {
+    if (isPaidUserLimit && roomId !== -1 && isPaidUserRole(userAccess)) {
       const freeRole = getTopFreeRole(t, roomType)?.access;
       if (freeRole) {
         userAccess = freeRole;
@@ -346,7 +346,7 @@ const InviteInput = ({
         });
       }
 
-      if (isPaidUserLimit && isPaidRoleUser(u.access)) {
+      if (isPaidUserLimit && isPaidUserRole(u.access)) {
         const freeRole = getTopFreeRole(t, roomType)?.access;
 
         if (freeRole) {

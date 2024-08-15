@@ -40,8 +40,6 @@ import {
   getAccessOptions,
   getFreeUsersRoleArray,
   getFreeUsersTypeArray,
-  getTopFreeRole,
-  isPaidRoleUser,
 } from "../utils";
 import {
   StyledEditInput,

@@ -259,7 +259,7 @@ export const getTopFreeRole = (t, roomType) => {
   return freeAccesses[0];
 };
 
-export const isPaidRoleUser = (selectedAccess) => {
+export const isPaidUserRole = (selectedAccess) => {
   return (
     selectedAccess === ShareAccessRights.FullAccess ||
     selectedAccess === ShareAccessRights.Collaborator ||

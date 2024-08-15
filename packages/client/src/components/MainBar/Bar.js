@@ -331,12 +331,6 @@ const Bar = (props) => {
     //     currentValue: null,
     //   };
     // }
-    console.log(
-      "isUserTariffAlmostLimit",
-      isUserTariffAlmostLimit,
-      isStorageTariffAlmostLimit,
-      barVisible.storageAndUserTariff,
-    );
 
     if (
       isRoomTariffAlmostLimit &&

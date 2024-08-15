@@ -36,7 +36,13 @@ import { Text } from "@docspace/shared/components/text";
 import { parseAddresses } from "@docspace/shared/utils";
 import { getUserTypeLabel } from "@docspace/shared/utils/common";
 
-import { getAccessOptions } from "../utils";
+import {
+  getAccessOptions,
+  getFreeUsersRoleArray,
+  getFreeUsersTypeArray,
+  getTopFreeRole,
+  isPaidRoleUser,
+} from "../utils";
 import {
   StyledEditInput,
   StyledEditButton,
@@ -50,7 +56,7 @@ import { filterGroupRoleOptions, filterUserRoleOptions } from "SRC_DIR/helpers";
 import AccessSelector from "../../../AccessSelector";
 
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
-import { EmployeeType } from "@docspace/shared/enums";
+import { EmployeeType, ShareAccessRights } from "@docspace/shared/enums";
 
 const Item = ({
   t,
@@ -81,6 +87,7 @@ const Item = ({
     isGroup,
     name: groupName,
     warning,
+    isVisitor,
   } = item;
 
   const name = isGroup
@@ -200,6 +207,9 @@ const Item = ({
 
   const textProps = !!avatar || isGroup ? {} : { onClick: onEdit };
 
+  const availableAccess =
+    roomId === -1 ? getFreeUsersTypeArray() : getFreeUsersRoleArray();
+
   const displayBody = (
     <>
       <StyledInviteUserBody>
@@ -261,10 +271,10 @@ const Item = ({
             setIsOpenItemAccess={setIsOpenItemAccess}
             isMobileView={isMobileView}
             noBorder
-            {...(roomId === -1 && {
+            {...((roomId === -1 || !avatar || isVisitor) && {
               isSelectionDisabled: isPaidUserLimit,
               selectionErrorText: <PaidQuotaLimitError />,
-              availableAccess: [EmployeeType.Guest],
+              availableAccess,
             })}
           />
         </>

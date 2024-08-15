@@ -53,8 +53,7 @@ import {
   StyledDescription,
 } from "../StyledInvitePanel";
 
-import { getPaidQuotaLimitError } from "SRC_DIR/helpers/filesUtils";
-
+import { getFreeUsersRoleArray, getFreeUsersTypeArray } from "../utils";
 
 const ExternalLinks = ({
   t,
@@ -208,6 +207,9 @@ const ExternalLinks = ({
     [closeActionLinks],
   );
 
+  const availableAccess =
+    roomId === -1 ? getFreeUsersTypeArray() : getFreeUsersRoleArray();
+
   return (
     <StyledBlock noPadding ref={inputsRef}>
       <StyledSubHeader inline>
@@ -278,6 +280,7 @@ const ExternalLinks = ({
             isMobileView={isMobileView}
             isSelectionDisabled={isPaidUserLimit}
             selectionErrorText={<PaidQuotaLimitError />}
+            availableAccess={availableAccess}
           />
         </StyledInviteInputContainer>
       )}

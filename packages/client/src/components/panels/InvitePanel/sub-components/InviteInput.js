@@ -50,7 +50,7 @@ import { isBetaLanguage } from "@docspace/shared/utils";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
 import AddUsersPanel from "../../AddUsersPanel";
-import { getAccessOptions, getTopFreeRole } from "../utils";
+import { getAccessOptions, getTopFreeRole, isPaidRoleUser } from "../utils";
 import AccessSelector from "../../../AccessSelector";
 
 import {
@@ -151,12 +151,24 @@ const InviteInput = ({
       });
     }
 
-    isPaidUserAccess(selectedAccess) && setInvitePaidUsersCount();
+    roomId === -1 &&
+      isPaidUserAccess(selectedAccess) &&
+      setInvitePaidUsersCount();
+
+    let userAccess = selectedAccess;
+
+    if (isPaidUserLimit && roomId !== -1 && isPaidRoleUser(userAccess)) {
+      const freeRole = getTopFreeRole(t, roomType)?.access;
+      if (freeRole) {
+        userAccess = freeRole;
+        toastr.error(<PaidQuotaLimitError />);
+      }
+    }
 
     return {
       email: addresses[0].email,
       id: uid(),
-      access: selectedAccess,
+      access: userAccess,
       displayName: addresses[0].email,
       errors: addresses[0].parseErrors,
       isEmailInvite: true,
@@ -332,6 +344,15 @@ const InviteInput = ({
         u.warning = t("GroupMaxAvailableRoleWarning", {
           roleName: topFreeRole.label,
         });
+      }
+
+      if (isPaidUserLimit && isPaidRoleUser(u.access)) {
+        const freeRole = getTopFreeRole(t, roomType)?.access;
+
+        if (freeRole) {
+          u.access = freeRole;
+          toastr.error(<PaidQuotaLimitError />);
+        }
       }
     });
 

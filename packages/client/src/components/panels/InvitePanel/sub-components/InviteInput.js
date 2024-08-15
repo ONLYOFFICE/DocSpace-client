@@ -346,7 +346,7 @@ const InviteInput = ({
         });
       }
 
-      if (isPaidUserLimit && isPaidUserRole(u.access)) {
+      if (isPaidUserLimit && !u.avatar && isPaidUserRole(u.access)) {
         const freeRole = getTopFreeRole(t, roomType)?.access;
 
         if (freeRole) {

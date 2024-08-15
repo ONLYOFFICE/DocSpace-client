@@ -24,18 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import EmptyScreenPersonSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
-import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
-import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { Link } from "@docspace/shared/components/link";
-import { Box } from "@docspace/shared/components/box";
-import { Grid } from "@docspace/shared/components/grid";
+import EmptyScreenPersonSvgLight from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.light.svg";
+import EmptyScreenPersonSvgDark from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.dark.svg";
+
+import ClearEmptyFilterSvg from "PUBLIC_DIR/images/clear.empty.filter.svg";
+
+import { EmptyView } from "@docspace/shared/components/empty-view";
 
 const EmptyScreen = ({
   resetFilter,
@@ -49,50 +47,34 @@ const EmptyScreen = ({
   const title = t("Common:NotFoundUsers");
   const description = t("Common:NotFoundUsersDescription");
 
-  const onResetFilter = () => {
+  /**
+   * @type {React.MouseEventHandler<HTMLAnchorElement>}
+   */
+  const onResetFilter = (event) => {
+    event.preventDefault();
+
     setIsLoading(true);
     isPeopleAccounts ? resetFilter() : resetInsideGroupFilter();
   };
 
-  const imageSrc = theme.isBase
-    ? EmptyScreenPersonSvgUrl
-    : EmptyScreenPersonSvgDarkUrl;
+  const imageSrc = theme.isBase ? (
+    <EmptyScreenPersonSvgLight />
+  ) : (
+    <EmptyScreenPersonSvgDark />
+  );
+
   return (
-    <>
-      <EmptyScreenContainer
-        imageSrc={imageSrc}
-        imageAlt="Empty Screen Filter image"
-        headerText={title}
-        descriptionText={description}
-        buttons={
-          <Grid gridColumnGap="8px" columnsProp={["12px 1fr"]}>
-            {
-              <>
-                <Box>
-                  <IconButton
-                    className="empty-folder_container-icon"
-                    size="12"
-                    onClick={onResetFilter}
-                    iconName={ClearEmptyFilterSvgUrl}
-                    isFill
-                  />
-                </Box>
-                <Box marginProp="-4px 0 0 0">
-                  <Link
-                    type="action"
-                    isHovered={true}
-                    fontWeight="600"
-                    onClick={onResetFilter}
-                  >
-                    {t("Common:ClearFilter")}
-                  </Link>
-                </Box>
-              </>
-            }
-          </Grid>
-        }
-      />
-    </>
+    <EmptyView
+      description={description}
+      title={title}
+      icon={imageSrc}
+      options={{
+        to: "",
+        description: t("Common:ClearFilter"),
+        icon: <ClearEmptyFilterSvg />,
+        onClick: onResetFilter,
+      }}
+    />
   );
 };
 

@@ -113,7 +113,7 @@ const tagsStore = new TagsStore();
 const clientLoadingStore = new ClientLoadingStore();
 const publicRoomStore = new PublicRoomStore(clientLoadingStore);
 
-const infoPanelStore = new InfoPanelStore(userStore);
+const infoPanelStore = new InfoPanelStore(userStore, settingsStore);
 
 const treeFoldersStore = new TreeFoldersStore(
   selectedFolderStore,

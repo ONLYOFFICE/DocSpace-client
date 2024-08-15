@@ -97,6 +97,7 @@ class InfoPanelStore {
   infoPanelRoom = null;
   membersIsLoading = false;
   isMembersPanelUpdating = false;
+  membersStatusesMap = new Map();
 
   shareChanged = false;
 
@@ -105,10 +106,20 @@ class InfoPanelStore {
 
   infoPanelSelectedGroup = null;
 
-  constructor(userStore) {
+  constructor(userStore, settingsStore) {
     this.userStore = userStore;
 
     makeAutoObservable(this);
+
+    const { socketHelper } = settingsStore;
+
+    socketHelper.on("statuses-in-room", (value) => {
+      console.log(value);
+      this.setMembersStatuses(value);
+    });
+
+    socketHelper.on("enter-in-room", this.updateMemberStatus);
+    socketHelper.on("leave-in-room", this.updateMemberStatus);
   }
 
   // Setters
@@ -831,6 +842,14 @@ class InfoPanelStore {
 
   setShareChanged = (shareChanged) => {
     this.shareChanged = shareChanged;
+  };
+
+  setMembersStatuses = (statuses) => {
+    this.membersStatusesMap = new Map(statuses.map((s) => [s.id, s]));
+  };
+
+  updateMemberStatus = (status) => {
+    this.membersStatusesMap.set(status.id, status);
   };
 }
 

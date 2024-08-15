@@ -26,8 +26,10 @@
 
 import { notFound } from "next/navigation";
 import dynamic from "next/dynamic";
+import { cookies } from "next/headers";
 
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
+import { LANGUAGE } from "@docspace/shared/constants";
 
 import CreateUserForm from "@/components/CreateUserForm";
 import { GreetingCreateUserContainer } from "@/components/GreetingContainer";
@@ -69,6 +71,11 @@ async function Page({ searchParams, params }: LinkInviteProps) {
       getPortalPasswordSettings(),
     ]);
 
+  const settingsCulture =
+    typeof settings === "string" ? undefined : settings?.culture;
+
+  const culture = cookies().get(LANGUAGE)?.value ?? settingsCulture;
+
   return (
     <>
       <div className="content-top">
@@ -79,6 +86,7 @@ async function Page({ searchParams, params }: LinkInviteProps) {
               type={type}
               firstName={user?.firstName}
               lastName={user?.lastName}
+              culture={culture}
             />
             <FormWrapper id="invite-form">
               <CreateUserForm

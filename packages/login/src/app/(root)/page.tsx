@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { PROVIDERS_DATA } from "@docspace/shared/constants";
+import { LANGUAGE, PROVIDERS_DATA } from "@docspace/shared/constants";
 
 import {
   getOAuthClient,
@@ -87,7 +87,7 @@ async function Page({
   const settingsCulture =
     typeof settings === "string" ? undefined : settings?.culture;
 
-  const culture = cookies().get("asc_language")?.value ?? settingsCulture;
+  const culture = cookies().get(LANGUAGE)?.value ?? settingsCulture;
 
   return (
     <>

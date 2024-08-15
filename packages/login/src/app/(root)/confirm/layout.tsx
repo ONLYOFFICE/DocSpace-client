@@ -26,15 +26,33 @@
 
 import ConfirmRoute from "@/components/ConfirmRoute";
 import { StyledBody, StyledPage } from "@/components/StyledConfirm.styled";
+import { TConfirmLinkParams } from "@/types";
 
-import { getSettings } from "@/utils/actions";
+import { checkConfirmLink, getSettings } from "@/utils/actions";
+import { headers } from "next/headers";
 
 export default async function Layout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const settings = await getSettings();
+  const hdrs = headers();
+  const searchParams = hdrs.get("x-confirm-query") ?? "";
+  const type = hdrs.get("x-confirm-type") ?? "";
+
+  const queryParams = Object.fromEntries(
+    new URLSearchParams(searchParams.toString()),
+  ) as TConfirmLinkParams;
+
+  const confirmLinkParams: TConfirmLinkParams = Object.assign(
+    { type },
+    queryParams,
+  );
+
+  const [settings, confirmLinkResult] = await Promise.all([
+    getSettings(),
+    checkConfirmLink(confirmLinkParams),
+  ]);
 
   return (
     <StyledPage id="confirm-page">
@@ -43,6 +61,9 @@ export default async function Layout({
           <ConfirmRoute
             defaultPage={settings?.defaultPage}
             socketUrl={settings?.socketUrl}
+            confirmLinkResult={confirmLinkResult}
+            confirmLinkParams={confirmLinkParams}
+            confirmType={type}
           >
             {children}
           </ConfirmRoute>

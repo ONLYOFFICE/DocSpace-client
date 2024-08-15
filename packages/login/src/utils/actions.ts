@@ -46,7 +46,11 @@ import {
   TVersionBuild,
 } from "@docspace/shared/api/settings/types";
 import { Encoder } from "@docspace/shared/utils/encoder";
-import { TTfaSecretKeyAndQR } from "@/types";
+import {
+  TConfirmLinkParams,
+  TConfirmLinkResult,
+  TTfaSecretKeyAndQR,
+} from "@/types";
 import { TScope } from "@docspace/shared/utils/oauth/types";
 import { transformToClientProps } from "@docspace/shared/utils/oauth";
 
@@ -368,4 +372,21 @@ export async function getTfaSecretKeyAndQR(confirmKey: string | null = null) {
   const tfaSecretKeyAndQR = await res.json();
 
   return tfaSecretKeyAndQR.response as TTfaSecretKeyAndQR;
+}
+
+export async function checkConfirmLink(data: TConfirmLinkParams) {
+  const [checkConfirmLink] = createRequest(
+    [`/authentication/confirm`],
+    [["Content-Type", "application/json"]],
+    "POST",
+    JSON.stringify(data),
+  );
+
+  const response = await fetch(checkConfirmLink);
+
+  if (!response.ok) throw new Error(response.statusText);
+
+  const result = await response.json();
+
+  return result.response as TConfirmLinkResult;
 }

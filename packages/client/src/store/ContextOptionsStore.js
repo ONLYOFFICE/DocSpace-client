@@ -559,15 +559,6 @@ class ContextOptionsStore {
     this.dialogsStore.setDownloadDialogVisible(true);
   };
 
-  onClickCreateRoom = (item) => {
-    this.filesActionsStore.setProcessCreatingRoomFromData(true);
-    const event = new Event(Events.ROOM_CREATE);
-    if (item && item.isFolder) {
-      event.title = item.title;
-    }
-    window.dispatchEvent(event);
-  };
-
   onDuplicate = (item) => {
     this.filesActionsStore.duplicateAction(item);
   };
@@ -1696,7 +1687,7 @@ class ContextOptionsStore {
         key: "create-room",
         label: t("Files:CreateRoom"),
         icon: CatalogRoomsReactSvgUrl,
-        onClick: () => this.onClickCreateRoom(item),
+        onClick: () => this.onCreateRoom(item, true),
         disabled: !item.security?.CreateRoomFrom,
       },
       {
@@ -2009,7 +2000,7 @@ class ContextOptionsStore {
         key: "create-room",
         label: t("Files:CreateRoom"),
         icon: CatalogRoomsReactSvgUrl,
-        onClick: this.onClickCreateRoom,
+        onClick: () => this.onCreateRoom(null, true),
         disabled: !selection.security?.CreateRoomFrom,
       },
       {
@@ -2137,13 +2128,22 @@ class ContextOptionsStore {
     window.dispatchEvent(event);
   };
 
-  onCreateRoom = () => {
+  onCreateRoom = (item, fromItem) => {
     if (this.currentQuotaStore.isWarningRoomsDialog) {
       this.dialogsStore.setInviteUsersWarningDialogVisible(true);
       return;
     }
 
+    if (fromItem) {
+      this.filesActionsStore.setProcessCreatingRoomFromData(true);
+    }
+
     const event = new Event(Events.ROOM_CREATE);
+
+    if (item && item.isFolder) {
+      event.title = item.title;
+    }
+
     window.dispatchEvent(event);
   };
 

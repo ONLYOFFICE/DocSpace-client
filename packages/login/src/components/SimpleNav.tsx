@@ -94,7 +94,7 @@ const SimpleNav = ({
   return (
     <StyledSimpleNav id="login-header">
       <img className="logo" src={logoUrl} alt="logo-url" />
-      {isLanguageComboboxVisible && <LanguageComboboxWrapper />}
+      {isComboboxVisible && <LanguageComboboxWrapper />}
     </StyledSimpleNav>
   );
 };

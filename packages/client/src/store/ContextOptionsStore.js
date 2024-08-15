@@ -560,6 +560,11 @@ class ContextOptionsStore {
   };
 
   onDuplicate = (item) => {
+    if (this.currentQuotaStore.isWarningRoomsDialog) {
+      this.dialogsStore.setInviteUsersWarningDialogVisible(true);
+      return;
+    }
+
     this.filesActionsStore.duplicateAction(item);
   };
 

@@ -131,12 +131,16 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
       />
 
       <div className="user_body-wrapper">
-        <div className="name-wrapper">
+        <div className="info">
           <Text
             className="name"
             data-tooltip-id={`userTooltip_${Math.random()}`}
+            noSelect
           >
             {decode(user.displayName)}
+          </Text>
+          <Text className="email" noSelect>
+            {user.email}
           </Text>
         </div>
       </div>
@@ -170,7 +174,7 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
               size="content"
               modernView
               title={t("Common:Role")}
-              manualWidth={"fit-content"}
+              manualWidth="auto"
               isMobileView={isMobileOnly}
               directionY="both"
               displaySelectedOption

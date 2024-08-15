@@ -75,6 +75,7 @@ export type TFrameEvents = {
   onAuthSuccess: null | ((e: Event) => void);
   onSignOut: null | ((e: Event) => void);
   onDownload: null | ((e: Event) => void);
+  onNoAccess: null | ((e: Event) => void);
 };
 
 export type TFrameConfig = {
@@ -96,6 +97,7 @@ export type TFrameConfig = {
   showSelectorCancel: boolean;
   showSelectorHeader: boolean;
   showHeader: boolean;
+  showHeaderBanner: string;
   showTitle: boolean;
   showMenu: boolean;
   showFilter: boolean;

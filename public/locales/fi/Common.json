@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Tietoja",
   "AboutCompanyTitle": "Tietoja tästä ohjelmasta",
   "AccessDenied": "Pääsy evätty",
@@ -55,6 +55,7 @@
   "CommonFiles": "Yleiset kansiot",
   "CompanyName": "Yrityksen nimi",
   "Confirmation": "Vahvistus",
+  "ConfirmationText": "Kaikki syöttämäsi tieto menetetään. Haluatko varmasti jatkaa?",
   "ConflictResolveSelectAction": "Valitse toiminto:",
   "Connect": "Yhdistä",
   "Content": "Sisältö",

@@ -153,7 +153,9 @@ export const getOptions = (
     t("EmptyView:UploadFromPortalTitle", {
       productName: t("Common:ProductName"),
     }),
-    t("EmptyView:UploadPDFFormOptionDescription"),
+    t("EmptyView:UploadPDFFormOptionDescription", {
+      productName: t("Common:ProductName"),
+    }),
     FilterType.PDFForm,
   );
 

@@ -1103,8 +1103,9 @@ export function getLogoUrl(
   logoType: WhiteLabelLogoType,
   dark: boolean = false,
   def: boolean = false,
+  culture?: string,
 ) {
-  return `/logo.ashx?logotype=${logoType}&dark=${dark}&default=${def}`;
+  return `/logo.ashx?logotype=${logoType}&dark=${dark}&default=${def}${culture ? `&culture=${culture}` : ""}`;
 }
 
 export const getUserTypeName = (

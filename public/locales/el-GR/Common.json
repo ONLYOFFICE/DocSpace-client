@@ -1,4 +1,4 @@
-{
+﻿{
   "About": "Σχετικά",
   "AboutCompanyTitle": "Σχετικά με αυτό το πρόγραμμα",
   "AccessDenied": "Απαγόρευση πρόσβασης",
@@ -55,6 +55,7 @@
   "CommonFiles": "Κοινά αρχε",
   "CompanyName": "Όνομα εταιρείας",
   "Confirmation": "Επιβεβαίωση",
+  "ConfirmationText": "Όλα τα δεδομένα που έχετε εισάγει θα χαθούν. Θέλετε σίγουρα να συνεχίσετε;",
   "ConflictResolveSelectAction": "Επιλέξτε την ενέργεια",
   "Connect": "Σύνδεση",
   "Content": "Περιεχόμενο",

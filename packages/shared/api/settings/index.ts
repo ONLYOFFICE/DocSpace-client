@@ -411,16 +411,10 @@ export async function getCustomSchemaList() {
 }
 
 export function setAdditionalResources(
-  feedbackAndSupportEnabled,
-  videoGuidesEnabled,
-  helpCenterEnabled,
+  additionalResources: TAdditionalResources,
 ) {
   const data = {
-    settings: {
-      helpCenterEnabled,
-      feedbackAndSupportEnabled,
-      videoGuidesEnabled,
-    },
+    settings: additionalResources,
   };
 
   return request({

@@ -60,7 +60,7 @@ const MainBar = ({
   snackbarExist,
   setMaintenanceExist,
   isNotPaidPeriod,
-  isFrame,
+  barTypeInFrame,
 }) => {
   const { pathname } = useLocation();
 
@@ -69,7 +69,7 @@ const MainBar = ({
   }, []);
 
   const isVisibleBar =
-    !isFrame &&
+    barTypeInFrame !== "none" &&
     !isNotPaidPeriod &&
     !pathname.includes("error") &&
     !pathname.includes("confirm") &&
@@ -92,7 +92,7 @@ export default inject(
     filesStore,
     currentTariffStatusStore,
   }) => {
-    const { checkedMaintenance, setMaintenanceExist, snackbarExist, isFrame } =
+    const { checkedMaintenance, setMaintenanceExist, snackbarExist, frameConfig } =
       settingsStore;
     const { isNotPaidPeriod } = currentTariffStatusStore;
     const { firstLoad } = clientLoadingStore;
@@ -104,7 +104,7 @@ export default inject(
       snackbarExist,
       setMaintenanceExist,
       isNotPaidPeriod,
-      isFrame,
+      barTypeInFrame: frameConfig?.showHeaderBanner
     };
   },
 )(observer(MainBar));

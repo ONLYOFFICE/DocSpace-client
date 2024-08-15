@@ -52,7 +52,7 @@ const useFiles = ({
   dragging,
   setDragging,
   disableDrag,
-  uploadEmptyFolders,
+  createFoldersTree,
   startUpload,
 
   fetchFiles,
@@ -118,7 +118,7 @@ const useFiles = ({
 
     if (disableDrag) return;
 
-    uploadEmptyFolders(files, uploadToFolder).then((f) => {
+    createFoldersTree(files, uploadToFolder).then((f) => {
       if (f.length > 0) startUpload(f, null, t);
     });
   };

@@ -62,12 +62,12 @@ export default function withFileActions(WrappedFileItem) {
     };
 
     onDropZoneUpload = (files, uploadToFolder) => {
-      const { t, dragging, setDragging, startUpload, uploadEmptyFolders } =
+      const { t, dragging, setDragging, startUpload, createFoldersTree } =
         this.props;
 
       dragging && setDragging(false);
 
-      uploadEmptyFolders(files, uploadToFolder).then((f) => {
+      createFoldersTree(files, uploadToFolder).then((f) => {
         if (f.length > 0) startUpload(f, null, t);
       });
     };
@@ -364,7 +364,7 @@ export default function withFileActions(WrappedFileItem) {
         onSelectItem,
         //setNewBadgeCount,
         openFileAction,
-        uploadEmptyFolders,
+        createFoldersTree,
       } = filesActionsStore;
       const { setSharingPanelVisible } = dialogsStore;
       const {
@@ -468,7 +468,7 @@ export default function withFileActions(WrappedFileItem) {
         dragging,
         setDragging,
         startUpload,
-        uploadEmptyFolders,
+        createFoldersTree,
         draggable,
         setTooltipPosition,
         setStartDrag,

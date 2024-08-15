@@ -280,8 +280,8 @@ class FilesActionStore {
     return treeList;
   };
 
-  uploadEmptyFolders = async (files, folderId) => {
-    //console.log("uploadEmptyFolders", files, folderId);
+  createFoldersTree = async (files, folderId) => {
+    //console.log("createFoldersTree", files, folderId);
 
     const { secondaryProgressDataStore } = this.uploadDataStore;
     const { setSecondaryProgressBarData, clearSecondaryProgressData } =

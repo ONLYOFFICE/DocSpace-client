@@ -226,7 +226,7 @@ const SectionHeaderContent = (props) => {
     getHeaderOptions,
     setBufferSelection,
     setGroupsBufferSelection,
-    uploadEmptyFolders,
+    createFoldersTree,
   } = props;
 
   const location = useLocation();
@@ -244,7 +244,7 @@ const SectionHeaderContent = (props) => {
     async (e) => {
       const files = await getFilesFromEvent(e);
 
-      uploadEmptyFolders(files).then((f) => {
+      createFoldersTree(files).then((f) => {
         if (f.length > 0) startUpload(f, null, t);
       });
     },
@@ -645,7 +645,7 @@ export default inject(
       moveToRoomsPage,
       onClickBack,
       moveToPublicRoom,
-      uploadEmptyFolders,
+      createFoldersTree,
     } = filesActionsStore;
 
     const { setIsVisible, isVisible } = infoPanelStore;
@@ -809,7 +809,7 @@ export default inject(
       getHeaderOptions,
       setBufferSelection,
       setGroupsBufferSelection,
-      uploadEmptyFolders,
+      createFoldersTree,
     };
   },
 )(

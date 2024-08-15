@@ -683,7 +683,7 @@ class HotkeyStore {
   };
 
   uploadClipboardFiles = async (t, event) => {
-    const { uploadEmptyFolders } = this.filesActionsStore;
+    const { createFoldersTree } = this.filesActionsStore;
     const { startUpload } = this.uploadDataStore;
 
     if (this.filesStore.hotkeysClipboard.length) {
@@ -692,7 +692,7 @@ class HotkeyStore {
 
     const files = await getFilesFromEvent(event);
 
-    uploadEmptyFolders(files, uploadToFolder).then((f) => {
+    createFoldersTree(files, uploadToFolder).then((f) => {
       if (f.length > 0) startUpload(f, null, t);
     });
   };

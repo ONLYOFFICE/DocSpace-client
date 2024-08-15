@@ -68,7 +68,7 @@ const Item = ({
   onBadgeClick,
   showDragItems,
   startUpload,
-  uploadEmptyFolders,
+  createFoldersTree,
   setDragging,
   showBadge,
   labelBadge,
@@ -87,11 +87,11 @@ const Item = ({
     (files, uploadToFolder) => {
       dragging && setDragging(false);
 
-      uploadEmptyFolders(files, uploadToFolder).then((f) => {
+      createFoldersTree(files, uploadToFolder).then((f) => {
         if (f.length > 0) startUpload(f, null, t);
       });
     },
-    [t, dragging, setDragging, startUpload, uploadEmptyFolders],
+    [t, dragging, setDragging, startUpload, createFoldersTree],
   );
 
   const onDrop = React.useCallback(
@@ -187,7 +187,7 @@ const Items = ({
   dragging,
   setDragging,
   startUpload,
-  uploadEmptyFolders,
+  createFoldersTree,
   isVisitor,
   isCollaborator,
   isAdmin,
@@ -320,7 +320,7 @@ const Items = ({
             t={t}
             setDragging={setDragging}
             startUpload={startUpload}
-            uploadEmptyFolders={uploadEmptyFolders}
+            createFoldersTree={createFoldersTree}
             item={item}
             setBufferSelection={setBufferSelection}
             dragging={dragging}
@@ -382,7 +382,7 @@ const Items = ({
       showText,
       setDragging,
       startUpload,
-      uploadEmptyFolders,
+      createFoldersTree,
       trashIsEmpty,
       isAdmin,
       isVisitor,
@@ -443,7 +443,7 @@ export default inject(
     const { id, access: folderAccess } = selectedFolderStore;
     const {
       moveDragItems,
-      uploadEmptyFolders,
+      createFoldersTree,
       deleteAction,
       emptyTrashInProgress,
     } = filesActionsStore;
@@ -472,7 +472,7 @@ export default inject(
       setBufferSelection,
       deleteAction,
       startUpload,
-      uploadEmptyFolders,
+      createFoldersTree,
       setEmptyTrashDialogVisible,
       trashIsEmpty,
 

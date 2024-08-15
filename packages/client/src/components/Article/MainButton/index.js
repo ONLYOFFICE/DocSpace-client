@@ -181,7 +181,7 @@ const ArticleMainButtonContent = (props) => {
 
     parentRoomType,
     isFolder,
-    uploadEmptyFolders,
+    createFoldersTree,
   } = props;
 
   const navigate = useNavigate();
@@ -244,7 +244,7 @@ const ArticleMainButtonContent = (props) => {
     async (e) => {
       const files = await getFilesFromEvent(e);
 
-      uploadEmptyFolders(files).then((f) => {
+      createFoldersTree(files).then((f) => {
         if (f.length > 0) startUpload(f, null, t);
       });
     },
@@ -255,7 +255,7 @@ const ArticleMainButtonContent = (props) => {
     if (isPrivacy) {
       encryptionUploadDialog((encryptedFile, encrypted) => {
         encryptedFile.encrypted = encrypted;
-        startUpload([encryptedFile], null, t); // TODO: uploadEmptyFolders
+        startUpload([encryptedFile], null, t); // TODO: createFoldersTree
       });
     } else {
       inputFilesElement.current.click();
@@ -952,7 +952,7 @@ export default inject(
 
     const { frameConfig, isFrame } = settingsStore;
 
-    const { uploadEmptyFolders } = filesActionsStore;
+    const { createFoldersTree } = filesActionsStore;
 
     return {
       isGracePeriod,
@@ -1006,7 +1006,7 @@ export default inject(
       isFolder,
       selectFileFormRoomDialogVisible,
       setSelectFileFormRoomDialogVisible,
-      uploadEmptyFolders,
+      createFoldersTree,
     };
   },
 )(

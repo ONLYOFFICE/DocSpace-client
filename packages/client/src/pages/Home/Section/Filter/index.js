@@ -1961,16 +1961,9 @@ const SectionFilterContent = ({
       const options = [];
 
       const firstName = {
-        id: "sort-by_first-name",
-        key: "firstname",
-        label: t("Common:FirstName"),
-        default: true,
-      };
-
-      const lastName = {
-        id: "sort-by_last-name",
-        key: "lastname",
-        label: t("Common:LastName"),
+        id: "sort-by_displayname",
+        key: "displayname",
+        label: t("Common:Name"),
         default: true,
       };
 
@@ -2012,7 +2005,7 @@ const SectionFilterContent = ({
         hideableColumns.Storage = storage;
       }
 
-      options.push(firstName, lastName, type, department, email);
+      options.push(firstName, type, department, email);
       if (showStorageInfo) options.push(storage);
 
       return options;

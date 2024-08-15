@@ -1961,8 +1961,8 @@ const SectionFilterContent = ({
       const options = [];
 
       const firstName = {
-        id: "sort-by_first-name",
-        key: "firstname",
+        id: "sort-by_displayname",
+        key: "displayname",
         label: t("Common:Name"),
         default: true,
       };

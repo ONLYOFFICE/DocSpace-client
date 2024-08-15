@@ -406,6 +406,10 @@ export const ViewerPlayer = ({
     const percent = Number(event.target.value);
     const newCurrentTime = (percent / 100) * videoRef.current.duration;
 
+    const videoCurrentTime = videoRef.current.currentTime;
+
+    if (Math.abs(newCurrentTime - videoCurrentTime) <= 0.1) return;
+
     handleProgress();
     setTimeline(percent);
     setCurrentTime(newCurrentTime);
@@ -653,6 +657,7 @@ export const ViewerPlayer = ({
             onDurationChange={handleDurationChange}
             onLoadedMetadata={handleLoadedMetaDataVideo}
             onPlay={() => setIsPlaying(true)}
+            onContextMenu={(event) => event.preventDefault()}
           />
           <PlayerBigPlayButton
             onClick={handleBigPlayButtonClick}

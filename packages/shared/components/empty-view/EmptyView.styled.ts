@@ -16,7 +16,7 @@ export const EmptyViewWrapper = styled.div`
   padding-top: 61px;
 
   @media ${mobile} {
-    padding-top: 21px;
+    padding-top: 40px;
   }
 `;
 

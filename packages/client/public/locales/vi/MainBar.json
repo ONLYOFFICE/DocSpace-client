@@ -7,7 +7,6 @@
   "RequestActivation": "Yêu cầu kích hoạt lại",
   "RoomQuotaDescription": "Bạn có thể sao lưu các phòng không cần thiết hoặc <1>{{clickHere}}</1> để tìm gói dịch vụ có giá phù hợp hơn cho {{productName}} của mình.",
   "RoomQuotaHeader": "Phòng sắp vượt quá:{{currentValue}} / {{maxValue}}",
-  "StorageAndRoomHeader": "Sắp vượt quá giới hạn lưu trữ và phòng.",
   "StorageAndUserHeader": "Sắp vượt quá giới hạn lưu trữ và quản trị viên/người dùng cấp cao.",
   "StorageQuotaHeader": "Dung lượng lưu trữ sắp vượt quá:{{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Bạn có thể xóa các tập tin không cần thiết hoặc thay đổi hạn mức trong cài đặt Quản lý lưu trữ <1>.</1>",

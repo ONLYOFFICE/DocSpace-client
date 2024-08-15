@@ -7,7 +7,6 @@
   "RequestActivation": "请求再次激活",
   "RoomQuotaDescription": "您可以存档不必要的房间或<1>{{clickHere}}</1>为您的{{productName}}找到更合适的定价计划。",
   "RoomQuotaHeader": "房间数量即将超出限制：{{currentValue}}/{{maxValue}}",
-  "StorageAndRoomHeader": "存储和房间的限制即将被超过。",
   "StorageAndUserHeader": "存储和管理员/高级用户的数量限制即将被超过。",
   "StorageQuotaHeader": "存储空间数量即将超出限制：{{currentValue}}/{{maxValue}}",
   "TenantCustomQuotaDescription": "您可以在<1>存储空间管理设置</1>中删除不必要的文件，或更改配额。",

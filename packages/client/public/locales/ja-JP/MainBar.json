@@ -7,7 +7,6 @@
   "RequestActivation": "もう一度アクティベーションを要求する",
   "RoomQuotaDescription": "不要なルームをアーカイブしたり、<1>{{clickHere}}</1>して、{{productName}}にもっと適した料金プランを見つけることができます。",
   "RoomQuotaHeader": "このルームは、もうすぐ制限を超えます：{{currentValue}} / {{maxValue}}",
-  "StorageAndRoomHeader": "ストレージやルームの制限を超えそうです。",
   "StorageAndUserHeader": "ストレージと管理者/パワーユーザーの制限を超えそうです。",
   "StorageQuotaHeader": "ストレージのスペースは、もうすぐサイズ上限を超えます：{{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "不要ファイルを削除するか、<1>ストレージ管理設定</1>で容量制限の変更ができます。",

@@ -70,30 +70,7 @@ const QuotasBar = ({
       </Trans>
     );
   };
-  const getUserQuotaDescription = () => {
-    if (!isAdmin) return t("UserTariffAlmostReached");
 
-    return (
-      <Trans
-        t={t}
-        i18nKey="UserTariffAlmostReachedForAdmins"
-        values={{
-          productName: t("Common:ProductName"),
-        }}
-        components={{
-          1: (
-            <Link
-              fontSize="12px"
-              fontWeight="400"
-              color={currentColorScheme?.main?.accent}
-              className="error_description_link"
-              onClick={onClickAction}
-            />
-          ),
-        }}
-      />
-    );
-  };
   const getUserTariffAlmostLimit = () => {
     if (!isAdmin)
       return t("UserTariffAlmostReached", {

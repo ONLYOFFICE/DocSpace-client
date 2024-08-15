@@ -7,7 +7,6 @@
   "RequestActivation": "Yenidən aktivləşdirmə tələb edin",
   "RoomQuotaDescription": "{{productName}} üçün daha uyğun qiymət planı tapmaq üçün lazımsız otaqları arxivləşdirə və ya <1>{{clickHere}}</1> edə bilərsiniz.",
   "RoomQuotaHeader": "Otaqlar keçmək üzrədir: {{currentValue}} / {{maxValue}}",
-  "StorageAndRoomHeader": "Yaddaş və otaq limitləri aşmaq üzrədir.",
   "StorageAndUserHeader": "Yaddaş və administratorlar/ekspert istifadəçilər limitləri aşmaq üzrədir.",
   "StorageQuotaHeader": "Yaddaş sahəsinin həcmi keçmək üzrədir : {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "<1>Yaddaş idarəetmə parametrlərində</1> lazımsız faylları silə və ya kvotanı dəyişə bilərsiniz.",

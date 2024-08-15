@@ -7,7 +7,6 @@
   "RequestActivation": "Poproś o aktywację jeszcze raz",
   "RoomQuotaDescription": "Możesz zarchiwizować niepotrzebne pokoje lub <1>{{clickHere}}</1>, aby znaleźć bardziej odpowiedni plan cenowy dla swojego konta {{productName}}.",
   "RoomQuotaHeader": "Liczba pokoi zostanie niedługo przekroczona: {{currentValue}} / {{maxValue}}",
-  "StorageAndRoomHeader": "Limity pamięci i pokoi zostaną wkrótce przekroczone.",
   "StorageAndUserHeader": "Limity pamięci/użytkowników z większą liczbą uprawnień zostaną wkrótce przekroczone.",
   "StorageQuotaHeader": "Ilość miejsca w pamięci zostanie wkrótce przekroczona: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Możesz usunąć niepotrzebne pliki lub zmienić limit w <1>ustawieniach zarządzania pamięcią.</1>",

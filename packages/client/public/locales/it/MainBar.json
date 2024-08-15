@@ -7,7 +7,6 @@
   "RequestActivation": "Richiedi l’attivazione ancora una volta",
   "RoomQuotaDescription": "Puoi archiviare le stanze non necessarie o <1>{{clickHere}}</1> per trovare un piano tariffario più adatto per il tuo {{productName}}.",
   "RoomQuotaHeader": "Sta per essere superato il limite di stanze: {{currentValue}} / {{maxValue}}",
-  "StorageAndRoomHeader": "I limiti di spazio di archiviazione e stanze stanno per essere superati.",
   "StorageAndUserHeader": "I limiti di spazio di archiviazione e amministratori/utenti esperti stanno per essere superati.",
   "StorageQuotaHeader": "Lo spazio di archiviazione sta per essere esaurito: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Puoi rimuovere i file non necessari o modificare la quota nelle <1>mpostazioni di gestione dello spazio di archiviazione.</1>",

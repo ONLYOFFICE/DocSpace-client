@@ -7,7 +7,6 @@
   "RequestActivation": "Znovu požádat o o aktivaci",
   "RoomQuotaDescription": "Nepotřebné místnosti můžete archivovat nebo <1>{{clickHere}}}</1> pro nalezení vhodnějšího cenového tarifu pro váš {{productName}}.",
   "RoomQuotaHeader": "Počet místností bude brzy překročen: {{currentValue}} / {{maxValue}}",
-  "StorageAndRoomHeader": "Limity úložiště a místností budou brzy překročeny.",
   "StorageAndUserHeader": "Limity pro úložiště a správce/oprávněné uživatele budou brzy překročeny.",
   "StorageQuotaHeader": "Množství úložného prostoru bude brzy překročeno: {{currentValue}} / {{maxValue}}.",
   "TenantCustomQuotaDescription": "Nepotřebné soubory můžete odstranit nebo změnit kvótu v <1>Nastavení správy úložiště.</1>",

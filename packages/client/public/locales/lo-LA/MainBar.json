@@ -7,7 +7,6 @@
   "RequestActivation": "ຮ້ອງຂໍການເປີດໃຊ້ອີກເທື່ອຫນຶ່ງ",
   "RoomQuotaDescription": "ທ່ານສາມາດຈັດເກັບຫ້ອງທີ່ບໍ່ຈໍາເປັນໄວ້ ຫຼື <1 >{{clickHere}}</1> ເພື່ອຊອກຫາແຜນລາຄາທີ່ເໝາະສົມກວ່າສໍາລັບ {{productName}} ຂອງທ່ານ.",
   "RoomQuotaHeader": "ຫ້ອງກຳລັງຈະເກີນ: {{ currentValue }} / {{ maxValue }}",
-  "StorageAndRoomHeader": "ກໍາລັງຈະເກີນຂີດຈຳກັດບ່ອນຈັດເກັບຂໍ້ມູນ ແລະຫ້ອງ.",
   "StorageAndUserHeader": "ບ່ອນຈັດເກັບຂໍ້ມູນ ແລະ ຜູ້ເບິ່ງແຍງລະບົບ/ຜູ້ໃຊ້ກຳລັງຈະເກີນຂີດຈຳກັດ.",
   "StorageQuotaHeader": "ຈຳນວນພື້ນທີ່ຈັດເກັບກຳລັງຈະເກີນ: {{ currentValue }} / {{ maxValue }}",
   "TenantCustomQuotaDescription": "ທ່ານສາມາດລຶບໄຟລ໌ທີ່ບໍ່ຈໍາເປັນອອກ ຫຼືປ່ຽນໂຄຕ້າໄດ້ໃນ <1>ການຕັ້ງຄ່າການຈັດການບ່ອນເກັບຂໍ້ມູນ.</1>",

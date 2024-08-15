@@ -7,7 +7,6 @@
   "RequestActivation": "Solicitaţi activarea din nou",
   "RoomQuotaDescription": "Puteţi arhiva sălile inutile sau <1>{{clickHere}}</1> pentru a găsi un abonament mai potrivit pentru spaţiul dvs {{productName}}.",
   "RoomQuotaHeader": "Cota sălilor este pe punctul de a fi depăşită: {{currentValue}} / {{maxValue}}",
-  "StorageAndRoomHeader": "Limite de stocare și cota sălilor sunt pe punctul de a fi depăşiti.",
   "StorageAndUserHeader": "Limite de stocare pentru administratori/utilizatori avansați sunt pe punctul de a fi depăşiti.",
   "StorageQuotaHeader": "Cota spaţiului de stocare este pe punctul de a fi depăşită: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Puteţi elimina fişierele inutile sau modifica cotă de stocare din secțiunea <1>Setările de gestionare a spațiului de stocare.</1>.",

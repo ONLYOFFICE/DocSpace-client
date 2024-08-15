@@ -7,7 +7,6 @@
   "RequestActivation": "Затражи активацију још једном",
   "RoomQuotaDescription": "Можете да архивирате непотребне собе или <1>{{clickHere}}</1> да бисте пронашли прикладнији план цена за ваш {{productName}}.",
   "RoomQuotaHeader": "Број соба ц́е ускоро бити прекорачен: {{currentValue}} / {{maxValue}}",
-  "StorageAndRoomHeader": "Ограничења складишта и соба ће ускоро бити прекорачена.",
   "StorageAndUserHeader": "Ограничења складишта и администратора/напредних корисника ће ускоро бити прекорачена.",
   "StorageQuotaHeader": "Количина меморијског простора ц́е ускоро бити прекорачена: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Можете уклонити непотребне датотеке или променити квоту у <1>Storage management settings.</1>",

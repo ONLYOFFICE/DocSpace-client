@@ -81,7 +81,6 @@ import { PDFFormEditingDialog } from "../dialogs/PDFFormEditingDialog";
 import { SharePDFFormDialog } from "../dialogs/SharePDFFormDialog";
 import { FillPDFDialog } from "../dialogs/FillPDFDialog";
 import { ShareCollectSelector } from "../ShareCollectSelector";
-import { currentQuotaStore } from "@docspace/shared/store";
 
 const Panels = (props) => {
   const {
@@ -138,10 +137,11 @@ const Panels = (props) => {
     selectFileFormRoomOpenRoot,
     fillPDFDialogData,
     shareCollectSelector,
+
     setQuotaWarningDialogVisible,
-    setIsNewQuotaItemsByCurrentUser,
-    isNewQuotaItemsByCurrentUser,
     isItemTariffAlmostLimit,
+    resetQuotaItem,
+    isNewItemByCurrentUser,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -198,14 +198,15 @@ const Panels = (props) => {
   }, [handleSharePDFForm]);
 
   useEffect(() => {
-    if (isNewQuotaItemsByCurrentUser) {
+    if (isNewItemByCurrentUser) {
       isItemTariffAlmostLimit && setQuotaWarningDialogVisible(true);
-      setIsNewQuotaItemsByCurrentUser(false);
+
+      resetQuotaItem();
     }
     return () => {
-      setIsNewQuotaItemsByCurrentUser(false);
+      resetQuotaItem();
     };
-  }, [isItemTariffAlmostLimit, isNewQuotaItemsByCurrentUser]);
+  }, [isItemTariffAlmostLimit, isNewItemByCurrentUser]);
 
   return [
     settingsPluginDialogVisible && (
@@ -397,8 +398,10 @@ export default inject(
       shareCollectSelector,
 
       setQuotaWarningDialogVisible,
-      setIsNewQuotaItemsByCurrentUser,
-      isNewQuotaItemsByCurrentUser,
+      setIsNewRoomByCurrentUser,
+      setIsNewUserByCurrentUser,
+      isNewUserByCurrentUser,
+      isNewRoomByCurrentUser,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -421,6 +424,14 @@ export default inject(
     const isItemTariffAlmostLimit = isAccounts
       ? isUserTariffAlmostLimit
       : isRoomTariffAlmostLimit;
+    const resetQuotaItem = () => {
+      if (isNewUserByCurrentUser) setIsNewUserByCurrentUser(false);
+      if (isNewRoomByCurrentUser) setIsNewRoomByCurrentUser(false);
+    };
+
+    const isNewItemByCurrentUser = isAccounts
+      ? isNewUserByCurrentUser
+      : isNewRoomByCurrentUser;
 
     return {
       preparationPortalDialogVisible,
@@ -478,9 +489,9 @@ export default inject(
       shareCollectSelector,
 
       setQuotaWarningDialogVisible,
-      setIsNewQuotaItemsByCurrentUser,
-      isNewQuotaItemsByCurrentUser,
+      resetQuotaItem,
       isItemTariffAlmostLimit,
+      isNewItemByCurrentUser,
     };
   },
 )(observer(Panels));

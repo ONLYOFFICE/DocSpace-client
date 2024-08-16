@@ -88,7 +88,7 @@ const InvitePanel = ({
   isRoomAdmin,
   maxCountManagersByQuota,
   invitePaidUsersCount,
-  setIsNewQuotaItemsByCurrentUser,
+  setIsNewUserByCurrentUser,
 }) => {
   const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
     roomId !== -1,
@@ -334,7 +334,7 @@ const InvitePanel = ({
         : await setRoomSecurity(roomId, data);
 
       if (!isRooms) {
-        setIsNewQuotaItemsByCurrentUser(true);
+        setIsNewUserByCurrentUser(true);
       }
       setIsLoading(false);
 
@@ -549,7 +549,7 @@ export default inject(
       setInvitePanelOptions,
       setInviteLanguage,
       invitePaidUsersCount,
-      setIsNewQuotaItemsByCurrentUser,
+      setIsNewUserByCurrentUser,
     } = dialogsStore;
 
     const { getFolderInfo, setRoomSecurity, getRoomSecurityInfo, folders } =
@@ -583,7 +583,7 @@ export default inject(
       isRoomAdmin,
       maxCountManagersByQuota,
       invitePaidUsersCount,
-      setIsNewQuotaItemsByCurrentUser,
+      setIsNewUserByCurrentUser,
     };
   },
 )(

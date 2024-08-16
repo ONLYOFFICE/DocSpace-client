@@ -155,7 +155,7 @@ class CreateEditRoomStore {
           ? await createRoomInThirdpary(storageFolderId, createRoomData)
           : await createRoom(createRoomData);
 
-      this.dialogsStore.setIsNewQuotaItemsByCurrentUser(true);
+      this.dialogsStore.setIsNewRoomByCurrentUser(true);
 
       room.isLogoLoading = true;
 

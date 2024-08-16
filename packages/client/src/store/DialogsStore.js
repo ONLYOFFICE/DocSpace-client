@@ -473,8 +473,12 @@ class DialogsStore {
     this.inviteQuotaWarningDialogVisible = inviteQuotaWarningDialogVisible;
   };
 
-  setIsNewQuotaItemsByCurrentUser = (value) => {
-    this.isNewQuotaItemsByCurrentUser = value;
+  setIsNewRoomByCurrentUser = (value) => {
+    this.isNewRoomByCurrentUser = value;
+  };
+
+  setIsNewUserByCurrentUser = (value) => {
+    this.isNewUserByCurrentUser = value;
   };
 
   setCreateRoomDialogVisible = (createRoomDialogVisible) => {

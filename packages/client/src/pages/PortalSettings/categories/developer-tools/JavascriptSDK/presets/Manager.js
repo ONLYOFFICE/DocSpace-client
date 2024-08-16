@@ -130,6 +130,7 @@ const Manager = (props) => {
   );
   const [selectedColumns, setSelectedColumns] = useState([
     { key: "Name", label: t("Common:Name") },
+    { key: "Size", label: t("Common:Size") },
     { key: "Type", label: t("Common:Type") },
     { key: "Tags", label: t("Common:Tags") },
   ]);

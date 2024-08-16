@@ -40,7 +40,7 @@ const StyledErrorContainer = styled.div<{ isEditor: boolean }>`
     css`
       position: absolute;
     `}
-  overflow-x: hidden;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;

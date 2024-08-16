@@ -125,6 +125,17 @@ class EditGroupStore {
 
       const addedIds = Array.from(this.addedMembersMap.keys());
       const removedIds = Array.from(this.removedMembersMap.keys());
+      const oldManager = this.group.manager;
+      const oldManagerRemovedButRemainsAsMember =
+        oldManager &&
+        oldManager.id !== this.manager?.id &&
+        !this.removedMembersMap.has(oldManager.id);
+
+      // Requires when new group is without manager and old manager moved to members. updateGroup api method doesn't provide possibility to do it without setting new manager
+      if (this.manager === null && oldManagerRemovedButRemainsAsMember) {
+        await api.groups.removeGroupMembers(this.group.id, [oldManager.id]);
+        addedIds.push(oldManager.id);
+      }
 
       await updateGroup(
         this.group?.id,

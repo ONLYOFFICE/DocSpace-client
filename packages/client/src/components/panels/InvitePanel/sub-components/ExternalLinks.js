@@ -88,7 +88,7 @@ const ExternalLinks = ({
           copyLink(link.shareLink);
         }
       } else {
-        !externalLinksVisible ? editLink() : disableLink();
+        !externalLinksVisible ? await editLink() : await disableLink();
       }
       onChangeExternalLinksVisible(!externalLinksVisible);
     } catch (error) {
@@ -98,9 +98,10 @@ const ExternalLinks = ({
     }
   };
 
-  const disableLink = () => {
-    setInvitationLinks(roomId, "Invite", 0, shareLinks[0].id);
-    setShareLinks([]);
+  const disableLink = async () => {
+    shareLinks?.length &&
+      (await setInvitationLinks(roomId, "Invite", 0, shareLinks[0].id));
+    return setShareLinks([]);
   };
 
   const editLink = async () => {
@@ -120,7 +121,7 @@ const ExternalLinks = ({
 
     copyLink(shareLink);
     setShareLinks([activeLink]);
-    setActiveLink(activeLink);
+    return setActiveLink(activeLink);
   };
 
   const onSelectAccess = async (access) => {

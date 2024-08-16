@@ -25,18 +25,26 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Loader } from "@docspace/shared/components/loader";
 import Section from "@docspace/shared/components/section";
+import OperationContainer from "@docspace/shared/components/operation-container";
 import { loginWithConfirmKey } from "@docspace/shared/api/user";
 import { useSearchParams } from "react-router-dom";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { toastr } from "@docspace/shared/components/toast";
 import { frameCallEvent } from "@docspace/shared/utils/common";
 import SectionWrapper from "SRC_DIR/components/Section";
+
 const Auth = (props) => {
   //console.log("Auth render");
   const { linkData } = props;
   let [searchParams, setSearchParams] = useSearchParams();
+  const { t } = useTranslation(["Common"]);
+  let referenceUrl = searchParams.get("referenceUrl");
+  const isFileHandler = referenceUrl.indexOf("filehandler.ashx") !== -1;
+  const isExternalDownloading = referenceUrl.indexOf("action=download") !== -1;
+
   useEffect(() => {
     loginWithConfirmKey({
       ConfirmData: {
@@ -48,15 +56,17 @@ const Auth = (props) => {
         //console.log("Login with confirm key success", res);
         frameCallEvent({ event: "onAuthSuccess" });
 
-        const url = searchParams.get("referenceUrl");
-
-        if (url) {
+        if (referenceUrl) {
           try {
-            new URL(url);
-            return window.location.replace(url);
+            new URL(referenceUrl);
+            if (isFileHandler && isExternalDownloading) {
+              return;
+            } else {
+              return window.location.replace(referenceUrl);
+            }
           } catch {
             return window.location.replace(
-              combineUrl(window.location.origin, url),
+              combineUrl(window.location.origin, referenceUrl),
             );
           }
         }
@@ -70,7 +80,15 @@ const Auth = (props) => {
       });
   });
 
-  return <Loader className="pageLoader" type="rombs" size="40px" />;
+  return isFileHandler && isExternalDownloading ? (
+    <OperationContainer
+      url={referenceUrl}
+      title={t("DownloadOperationTitle")}
+      description={t("DownloadOperationDescription")}
+    />
+  ) : (
+    <Loader className="pageLoader" type="rombs" size="40px" />
+  );
 };
 
 const AuthPage = (props) => (

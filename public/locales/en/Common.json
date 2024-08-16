@@ -140,6 +140,8 @@
   "DontShowAgain": "Don't show again",
   "Download": "Download",
   "DownloadApps": "Download applications",
+  "DownloadOperationTitle": "File downloading in progress",
+  "DownloadOperationDescription": "Once ready, you can find the files in your browser's download folder and close this tab.",
   "DropzoneTitleExsts": "(JPG or PNG)",
   "DropzoneTitleLink": "Select new image",
   "DropzoneTitleSecondary": "or drop file here",

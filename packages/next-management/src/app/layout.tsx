@@ -24,11 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
+import { ThemeKeys } from "@docspace/shared/enums";
+import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 
 import StyledComponentsRegistry from "@/lib/registry";
-import { getSettings, getUser } from "@/lib/actions";
+import { getSettings, getUser, getColorTheme } from "@/lib/actions";
 import Providers from "@/providers";
 
 import { LayoutWrapper } from "@/components/layout";
@@ -40,12 +43,22 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [user, settings] = await Promise.all([getUser(), getSettings()]);
+  const [user, settings, colorTheme] = await Promise.all([
+    getUser(),
+    getSettings(),
+    getColorTheme(),
+  ]);
 
   if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
 
   if ((user && !user.isAdmin) || (settings && settings.limitedAccessSpace))
     redirect(`${getBaseUrl()}/error/403`);
+
+  const cookieStore = cookies();
+
+  const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as
+    | ThemeKeys
+    | undefined;
 
   return (
     <html lang="en">
@@ -54,7 +67,7 @@ export default async function RootLayout({
       </head>
       <body>
         <StyledComponentsRegistry>
-          <Providers contextData={{ user, settings }}>
+          <Providers contextData={{ user, settings, systemTheme, colorTheme }}>
             <LayoutWrapper>{children}</LayoutWrapper>
           </Providers>
         </StyledComponentsRegistry>

@@ -24,8 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+"use client";
+
 import { TUser } from "@docspace/shared/api/people/types";
-import { TSettings } from "@docspace/shared/api/settings/types";
+import type {
+  TGetColorTheme,
+  TSettings,
+} from "@docspace/shared/api/settings/types";
+import type { ThemeKeys } from "@docspace/shared/enums";
 
 import ThemeProvider from "./ThemeProvider";
 import TranslationProvider from "./TranslationProvider";
@@ -34,6 +40,8 @@ import StoreProvider from "./StoreProvider";
 export type TContextData = {
   user: TUser | undefined;
   settings: TSettings | undefined;
+  systemTheme: ThemeKeys | undefined;
+  colorTheme: TGetColorTheme | undefined;
 };
 
 export type TProviders = {

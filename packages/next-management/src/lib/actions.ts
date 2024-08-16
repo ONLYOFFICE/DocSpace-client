@@ -30,7 +30,7 @@ import { headers } from "next/headers";
 
 import { createRequest } from "@docspace/shared/utils/next-ssr-helper";
 import { TUser } from "@docspace/shared/api/people/types";
-import { TSettings } from "@docspace/shared/api/settings/types";
+import { TSettings, TGetColorTheme } from "@docspace/shared/api/settings/types";
 import { TGetAllPortals } from "@docspace/shared/api/management/types";
 
 export async function getUser() {
@@ -90,5 +90,21 @@ export async function getAllPortals() {
   const portals = await portalsRes.json();
 
   return portals as TGetAllPortals;
+}
+
+export async function getColorTheme() {
+  const [getSettings] = createRequest(
+    [`/settings/colortheme`],
+    [["", ""]],
+    "GET",
+  );
+
+  const res = await fetch(getSettings);
+
+  if (!res.ok) return;
+
+  const colorTheme = await res.json();
+
+  return colorTheme.response as TGetColorTheme;
 }
 

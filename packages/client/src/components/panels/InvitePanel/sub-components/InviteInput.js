@@ -138,17 +138,25 @@ const InviteInput = ({
     const uid = () => Math.random().toString(36).slice(-6);
     let userAccess = selectedAccess;
 
+    const isAccounts = roomId === -1;
+    const isPaidAccess = isAccounts
+      ? isPaidUserAccess(userAccess)
+      : isPaidUserRole(userAccess);
+
     if (addresses.length > 1) {
       let isShowErrorToast = false;
 
       const itemsArray = addresses.map((address) => {
-
-        if (roomId === -1 && isPaidUserAccess(userAccess)) {
+        if (isPaidAccess) {
           if (isPaidUserLimit) {
-            const freeType = EmployeeType.Guest;
+            const FreeUser = isAccounts
+              ? EmployeeType.Guest
+              : getTopFreeRole(t, roomType)?.access;
 
-            userAccess = freeType;
-            isShowErrorToast = true;
+            if (FreeUser) {
+              userAccess = FreeUser;
+              isShowErrorToast = true;
+            }
           } else {
             setInvitePaidUsersCount();
           }
@@ -169,23 +177,18 @@ const InviteInput = ({
       return itemsArray;
     }
 
-
-    if (roomId === -1 && isPaidUserAccess(userAccess)) {
+    if (isPaidAccess) {
       if (isPaidUserLimit) {
-        const freeType = EmployeeType.Guest;
+        const FreeUser = isAccounts
+          ? EmployeeType.Guest
+          : getTopFreeRole(t, roomType)?.access;
 
-        userAccess = freeType;
-        toastr.error(<PaidQuotaLimitError />);
+        if (FreeUser) {
+          userAccess = FreeUser;
+          toastr.error(<PaidQuotaLimitError />);
+        }
       } else {
         setInvitePaidUsersCount();
-      }
-    }
-
-    if (isPaidUserLimit && roomId !== -1 && isPaidUserRole(userAccess)) {
-      const freeRole = getTopFreeRole(t, roomType)?.access;
-      if (freeRole) {
-        userAccess = freeRole;
-        toastr.error(<PaidQuotaLimitError />);
       }
     }
 

@@ -89,6 +89,7 @@ const InvitePanel = ({
   maxCountManagersByQuota,
   invitePaidUsersCount,
   setIsNewUserByCurrentUser,
+  setInvitePaidUsersCount,
 }) => {
   const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
     roomId !== -1,
@@ -337,6 +338,7 @@ const InvitePanel = ({
         setIsNewUserByCurrentUser(true);
       }
       setIsLoading(false);
+      setInvitePaidUsersCount(0);
 
       onClose();
       toastr.success(t("Common:UsersInvited"));
@@ -550,6 +552,7 @@ export default inject(
       setInviteLanguage,
       invitePaidUsersCount,
       setIsNewUserByCurrentUser,
+      setInvitePaidUsersCount,
     } = dialogsStore;
 
     const { getFolderInfo, setRoomSecurity, getRoomSecurityInfo, folders } =
@@ -584,6 +587,7 @@ export default inject(
       maxCountManagersByQuota,
       invitePaidUsersCount,
       setIsNewUserByCurrentUser,
+      setInvitePaidUsersCount,
     };
   },
 )(

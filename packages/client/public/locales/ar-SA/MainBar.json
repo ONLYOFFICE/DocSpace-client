@@ -5,7 +5,6 @@
   "PersonalUserQuotaAdminsDescription": "لتحميل وإنشاء ملفات ومجلدات جديدة ، يرجى تحرير مساحة على القرص، أو إدارة الحصة النسبية لكل مستخدم في <1>إعدادات إدارة التخزين.</1>",
   "PersonalUserQuotaDescription": "لتحميل وإنشاء ملفات ومجلدات جديدة، يرجى تحرير مساحة على القرص أو الاتصال بالمسؤول لزيادة حصة التخزين.",
   "RequestActivation": "اطلب التفعيل مرة أخرى",
-  "RoomQuotaDescription": "يمكنك أرشفة الغرف غير الضرورية أو <1> {{clickHere}}</1> للعثور على خطة أسعار أكثر ملاءمة لـ {{productName}}",
   "RoomQuotaHeader": "عدد الغرف على وشك أن يتجاوز: {{currentValue}} / {{maxValue}}",
   "StorageAndUserHeader": "حدود مساحة التخزين والمشرفين / المستخدمين المتميزين على وشك أن يتم تجاوزها.",
   "StorageQuotaHeader": "حجم مساحة التخزين على وشك أن يتم تجاوزها: {{currentValue}} / {{maxValue}}",

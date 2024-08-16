@@ -5,7 +5,6 @@
   "PersonalUserQuotaAdminsDescription": "Da biste otpremili i kreirali nove datoteke i foldere, oslobodite prostor na disku ili upravljajte kvotom po korisniku u <1>Storage management settings</1>",
   "PersonalUserQuotaDescription": "Da biste otpremili i kreirali nove datoteke i fascikle, oslobodite prostor na disku ili kontaktirajte administratora da poveća kvotu za skladištenje.",
   "RequestActivation": "Zatraži aktivaciju još jednom",
-  "RoomQuotaDescription": "Možete da arhivirate nepotrebne sobe ili <1>{{clickHere}}</1> da biste pronašli prikladniji plan cena za vaš {{productName}}.",
   "RoomQuotaHeader": "Broj soba će uskoro biti prekoračen: {{currentValue}} / {{maxValue}}",
   "StorageAndUserHeader": "Ograničenja skladišta i administratora/naprednih korisnika će uskoro biti prekoračena.",
   "StorageQuotaHeader": "Količina memorijskog prostora će uskoro biti prekoračena: {{currentValue}} / {{maxValue}}",

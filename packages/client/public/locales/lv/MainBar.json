@@ -5,7 +5,6 @@
   "PersonalUserQuotaAdminsDescription": "Lai augšupielādētu un izveidotu jaunus failus un mapes, atbrīvojiet vietu diskā vai pārvaldiet kvotu katram lietotājam <1>Krātuves pārvaldības iestatījumos.</1>",
   "PersonalUserQuotaDescription": "Lai augšupielādētu un izveidotu jaunus failus un mapes, atbrīvojiet vietu diskā vai sazinieties ar administratoru, lai palielinātu krātuves kvotu.",
   "RequestActivation": "Vēreiz pieprasīt aktivizāciju",
-  "RoomQuotaDescription": "Varat arhivēt nevajadzīgās telpas vai <1>{{clickHere}}</1>, lai atrastu savam {{productName}} piemērotāku cenu plānu.",
   "RoomQuotaHeader": "Tūlīt tiks pārsniegtas telpas: {{currentValue}} / {{maxValue}}",
   "StorageAndUserHeader": "Tūlīt tiks pārsniegti krātuves un administratoru/prasmīgo lietotāju ierobežojumi.",
   "StorageQuotaHeader": "Tūlīt tiks pārsniegts krātuves vietas apjoms: {{currentValue}} / {{maxValue}}",

@@ -200,29 +200,42 @@ const QuotasBar = ({
       />
     );
   };
+
+  const getRoomsTariffDescription = () => {
+    if (!isAdmin)
+      return t("ArchivedRoomsOrContact", {
+        productName: t("Common:ProductName"),
+      });
+
+    return (
+      <Trans
+        t={t}
+        i18nKey="RoomQuotaDescription"
+        components={{
+          1: (
+            <Link
+              fontSize="12px"
+              fontWeight="400"
+              color={currentColorScheme?.main?.accent}
+              className="error_description_link"
+              onClick={onClickAction}
+            />
+          ),
+        }}
+      />
+    );
+  };
   const getQuotaInfo = () => {
     switch (type) {
-      case QuotaBarTypes.RoomQuota:
+      case QuotaBarTypes.RoomsTariff:
         return {
           header: t("RoomQuotaHeader", { currentValue, maxValue }),
-          description: (
-            <Trans
-              i18nKey="RoomQuotaDescription"
-              t={t}
-              values={{ productName: t("Common:ProductName") }}
-            >
-              You can archived the unnecessary rooms or
-              <Link
-                fontSize="12px"
-                fontWeight="400"
-                color={currentColorScheme?.main?.accent}
-                onClick={onClickAction}
-              >
-                {{ clickHere: t("ClickHere").toLowerCase() }}
-              </Link>{" "}
-              to find a better pricing plan for your portal.
-            </Trans>
-          ),
+          description: getRoomsTariffDescription(),
+        };
+      case QuotaBarTypes.RoomsTariffLimit:
+        return {
+          header: t("RoomQuotaHeaderLimit", { currentValue, maxValue }),
+          description: getRoomsTariffDescription(),
         };
       case QuotaBarTypes.StorageTariff:
         return {

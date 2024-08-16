@@ -5,7 +5,6 @@
   "PersonalUserQuotaAdminsDescription": "Aby móc przesyłać i tworzyć nowe pliki oraz katalogi, zwolnij miejsce na dysku lub zmień limit pamięci na użytkownika w <1>ustawieniach zarządzania pamięcią.</1>",
   "PersonalUserQuotaDescription": "Aby móc przesyłać i tworzyć nowe pliki oraz katalogi, zwolnij miejsce na dysku lub skontaktuj się z administratorem, aby zwiększyć limit pamięci.",
   "RequestActivation": "Poproś o aktywację jeszcze raz",
-  "RoomQuotaDescription": "Możesz zarchiwizować niepotrzebne pokoje lub <1>{{clickHere}}</1>, aby znaleźć bardziej odpowiedni plan cenowy dla swojego konta {{productName}}.",
   "RoomQuotaHeader": "Liczba pokoi zostanie niedługo przekroczona: {{currentValue}} / {{maxValue}}",
   "StorageAndUserHeader": "Limity pamięci/użytkowników z większą liczbą uprawnień zostaną wkrótce przekroczone.",
   "StorageQuotaHeader": "Ilość miejsca w pamięci zostanie wkrótce przekroczona: {{currentValue}} / {{maxValue}}",

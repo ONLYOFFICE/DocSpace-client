@@ -243,15 +243,6 @@ class CurrentQuotasStore {
     return result?.value;
   }
 
-  get showRoomQuotaBar() {
-    return (
-      this.maxCountRoomsByQuota - this.usedRoomsCount <=
-        COUNT_FOR_SHOWING_BAR &&
-      this.maxCountRoomsByQuota > 0 &&
-      this.maxCountRoomsByQuota >= this.usedRoomsCount
-    );
-  }
-
   get isRoomsTariffAlmostLimit() {
     return (
       this.maxCountRoomsByQuota - this.usedRoomsCount <=

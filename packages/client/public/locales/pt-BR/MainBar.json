@@ -5,7 +5,6 @@
   "PersonalUserQuotaAdminsDescription": "Para fazer upload e criar novos arquivos e pastas, libere espaço em disco ou gerencie a cota por usuário nas <1>Configurações de gerenciamento de armazenamento.</1>",
   "PersonalUserQuotaDescription": "Para fazer upload e criar novos arquivos e pastas, libere espaço em disco ou entre em contato com o administrador para aumentar a cota de armazenamento.",
   "RequestActivation": "Solicitar ativação mais uma vez",
-  "RoomQuotaDescription": "Você pode arquivar as salas desnecessárias ou <1>{{clickHere}}</1> para encontrar um plano de preços mais adequado para o seu {{productName}}.",
   "RoomQuotaHeader": "As salas estão prestes a ser excedidos: {{currentValue}} / {{maxValue}}",
   "StorageAndUserHeader": "Os limites de armazenamento e administradores/usuários avançados estão prestes a ser excedidos.",
   "StorageQuotaHeader": "A quantidade de espaço de armazenamento está prestes a ser excedida: {{currentValue}} / {{maxValue}}",

@@ -96,7 +96,8 @@ export const TableVersions = Object.freeze({
  */
 export const QuotaBarTypes = Object.freeze({
   ConfirmEmail: "confirm-email",
-  RoomQuota: "room-quota",
+  RoomsTariff: "room-quota",
+  RoomsTariffLimit: "room-quota-limit",
   StorageTariff: "storage-quota",
   StorageTariffLimit: "storage-quota-limit",
   UsersTariff: "user-quota",

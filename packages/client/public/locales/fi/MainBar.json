@@ -5,7 +5,6 @@
   "PersonalUserQuotaAdminsDescription": "Ole hyvä ja vapauta levytilaa ladataksesi ja luodaksesi uusia tiedostoja ja kansioita, tai hallitaksesi kiintiötä per käyttäjä <1>Muistinhallinta-asetuksissa. </1>",
   "PersonalUserQuotaDescription": "Ole hyvä ja vapauta levytilaa ladataksesi ja luodaksesi tiedostoja ja kansioita tai ota yhteyttä järjestelmänvalvojaan lisätäksesi muistin kiintiötä.",
   "RequestActivation": "Pyydä aktivointia vielä kerran",
-  "RoomQuotaDescription": "Voit arkistoida huoneita, joita et käytä tai <1>{{clickHere}}</1> löytääksesi sopivamman hinnoitteluohjelman {{productName}}-llesi.",
   "RoomQuotaHeader": "Huoneet täyttyvät pian {{currentValue}} / {{maxValue}}",
   "StorageAndUserHeader": "Muisti ja ylläpitäjien/tehokäyttäjien määrän raja on ylittymässä.",
   "StorageQuotaHeader": "Tallennustilan määrä on ylittymässä: {{currentValue}} / {{maxValue}}",

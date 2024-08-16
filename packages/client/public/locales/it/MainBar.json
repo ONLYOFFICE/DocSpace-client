@@ -5,7 +5,6 @@
   "PersonalUserQuotaAdminsDescription": "Per caricare e creare nuovi file e cartelle, libera spazio su disco o gestisci la quota per utente nelle <1>Impostazioni di gestione dello spazio di archiviazione.</1>",
   "PersonalUserQuotaDescription": "Per caricare e creare nuovi file e cartelle, libera spazio su disco o contatta l'amministratore per aumentare la quota di archiviazione.",
   "RequestActivation": "Richiedi l’attivazione ancora una volta",
-  "RoomQuotaDescription": "Puoi archiviare le stanze non necessarie o <1>{{clickHere}}</1> per trovare un piano tariffario più adatto per il tuo {{productName}}.",
   "RoomQuotaHeader": "Sta per essere superato il limite di stanze: {{currentValue}} / {{maxValue}}",
   "StorageAndUserHeader": "I limiti di spazio di archiviazione e amministratori/utenti esperti stanno per essere superati.",
   "StorageQuotaHeader": "Lo spazio di archiviazione sta per essere esaurito: {{currentValue}} / {{maxValue}}",

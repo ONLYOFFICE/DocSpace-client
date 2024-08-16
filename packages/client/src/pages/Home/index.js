@@ -161,6 +161,7 @@ const PureHome = (props) => {
     scrollToTop,
     isEmptyGroups,
     wsCreatedPDFForm,
+    disableUploadPanelOpen,
   } = props;
 
   //console.log(t("ComingSoon"))
@@ -222,7 +223,7 @@ const PureHome = (props) => {
     itemsSelectionTitle,
     secondaryProgressDataStoreIcon,
     itemsSelectionLength,
-
+    disableUploadPanelOpen,
     setItemsSelectionTitle,
   });
 
@@ -526,6 +527,7 @@ export default inject(
       percent: primaryProgressDataPercent,
       icon: primaryProgressDataIcon,
       alert: primaryProgressDataAlert,
+      disableUploadPanelOpen,
       clearPrimaryProgressData,
     } = primaryProgressDataStore;
 
@@ -602,6 +604,7 @@ export default inject(
       primaryProgressDataIcon,
       primaryProgressDataAlert,
       clearPrimaryProgressData,
+      disableUploadPanelOpen,
 
       clearUploadedFilesHistory,
 

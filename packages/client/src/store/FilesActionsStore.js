@@ -292,13 +292,15 @@ class FilesActionStore {
 
     const toFolderId = folderId ? folderId : this.selectedFolderStore.id;
 
-    setPrimaryProgressBarData({
+    const pbData = {
       icon: "upload",
       visible: true,
       percent: 0,
       label: "",
       alert: false,
-    });
+    };
+
+    setPrimaryProgressBarData({ ...pbData, disableUploadPanelOpen: true });
 
     const tree = this.convertToTree(files);
 
@@ -309,6 +311,8 @@ class FilesActionStore {
 
     if (!filesList.length) {
       setTimeout(() => clearPrimaryProgressData(), TIMEOUT);
+    } else {
+      setPrimaryProgressBarData({ ...pbData, disableUploadPanelOpen: false });
     }
 
     return filesList;

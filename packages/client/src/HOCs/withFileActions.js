@@ -270,12 +270,12 @@ export default function withFileActions(WrappedFileItem) {
         isRecentTab,
         canDrag,
       } = this.props;
-      const { access, id } = item;
+      const { id, security } = item;
 
       const isDragging =
         !isDisabledDropItem &&
         isFolder &&
-        access < 2 &&
+        security?.MoveTo &&
         !isTrashFolder &&
         !isPrivacy;
 

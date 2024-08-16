@@ -77,6 +77,7 @@ const WhiteLabel = (props) => {
 
     isWhitelableLoaded,
     isCustomizationAvailable,
+    isEnterprise,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -86,6 +87,7 @@ const WhiteLabel = (props) => {
   const [isEmpty, setIsEmpty] = useState(isWhitelableLoaded && !logoText);
 
   const isMobileView = deviceType === DeviceType.mobile;
+  const showAbout = isManagement() && isCustomizationAvailable && isEnterprise;
 
   const init = async () => {
     const isWhiteLabelPage = standalone
@@ -173,6 +175,7 @@ const WhiteLabel = (props) => {
       );
 
       if (options.isEditor && !isCustomizationAvailable) continue;
+      if (!showAbout && logoUrlsWhiteLabel[i].name === "AboutPage") continue;
 
       const isDocsEditorName = logoUrlsWhiteLabel[i].name === "DocsEditor";
 
@@ -448,39 +451,42 @@ const WhiteLabel = (props) => {
           </div>
         </div>
 
-        <div className="logo-wrapper">
-          <Text
-            fontSize="15px"
-            fontWeight="600"
-            className="settings_unavailable"
-          >
-            {t("LogoAbout")} ({logoUrlsWhiteLabel[6].size.width}x
-            {logoUrlsWhiteLabel[6].size.height})
-          </Text>
-          <div className="logos-wrapper">
-            <Logo
-              title={t("Profile:LightTheme")}
-              src={logoUrlsWhiteLabel[6].path.light}
-              imageClass="border-img logo-about background-white"
-              inputId={`logoUploader_${WhiteLabelLogoType.AboutPage}_light`}
-              linkId="link-about-light"
-              onChangeText={t("ChangeLogoButton")}
-              onChange={onChangeLogo}
-              isSettingPaid={isSettingPaid}
-            />
-            <Logo
-              title={t("Profile:DarkTheme")}
-              src={logoUrlsWhiteLabel[6].path.dark}
-              imageClass="border-img logo-about background-dark"
-              inputId={`logoUploader_${WhiteLabelLogoType.AboutPage}_dark`}
-              linkId="link-about-dark"
-              onChangeText={t("ChangeLogoButton")}
-              onChange={onChangeLogo}
-              isSettingPaid={isSettingPaid}
-            />
-          </div>
-        </div>
-
+        {showAbout && (
+          <>
+            <div className="logo-wrapper">
+              <Text
+                fontSize="15px"
+                fontWeight="600"
+                className="settings_unavailable"
+              >
+                {t("LogoAbout")} ({logoUrlsWhiteLabel[6].size.width}x
+                {logoUrlsWhiteLabel[6].size.height})
+              </Text>
+              <div className="logos-wrapper">
+                <Logo
+                  title={t("Profile:LightTheme")}
+                  src={logoUrlsWhiteLabel[6].path.light}
+                  imageClass="border-img logo-about background-white"
+                  inputId={`logoUploader_${WhiteLabelLogoType.AboutPage}_light`}
+                  linkId="link-about-light"
+                  onChangeText={t("ChangeLogoButton")}
+                  onChange={onChangeLogo}
+                  isSettingPaid={isSettingPaid}
+                />
+                <Logo
+                  title={t("Profile:DarkTheme")}
+                  src={logoUrlsWhiteLabel[6].path.dark}
+                  imageClass="border-img logo-about background-dark"
+                  inputId={`logoUploader_${WhiteLabelLogoType.AboutPage}_dark`}
+                  linkId="link-about-dark"
+                  onChangeText={t("ChangeLogoButton")}
+                  onChange={onChangeLogo}
+                  isSettingPaid={isSettingPaid}
+                />
+              </div>
+            </div>
+          </>
+        )}
         <div className="logo-wrapper">
           <Text
             fontSize="15px"
@@ -568,50 +574,54 @@ const WhiteLabel = (props) => {
   );
 };
 
-export default inject(({ settingsStore, common, currentQuotaStore }) => {
-  const {
-    setLogoText,
-    whiteLabelLogoText,
-    getWhiteLabelLogoText,
-    restoreWhiteLabelSettings,
-    initSettings,
-    saveWhiteLabelSettings,
-    logoUrlsWhiteLabel,
-    setLogoUrlsWhiteLabel,
-    defaultLogoTextWhiteLabel,
-    enableRestoreButton,
-    resetIsInit,
-    isWhitelableLoaded,
-  } = common;
+export default inject(
+  ({ settingsStore, common, currentQuotaStore, currentTariffStatusStore }) => {
+    const {
+      setLogoText,
+      whiteLabelLogoText,
+      getWhiteLabelLogoText,
+      restoreWhiteLabelSettings,
+      initSettings,
+      saveWhiteLabelSettings,
+      logoUrlsWhiteLabel,
+      setLogoUrlsWhiteLabel,
+      defaultLogoTextWhiteLabel,
+      enableRestoreButton,
+      resetIsInit,
+      isWhitelableLoaded,
+    } = common;
 
-  const {
-    whiteLabelLogoUrls: defaultWhiteLabelLogoUrls,
-    deviceType,
-    standalone,
-  } = settingsStore;
-  const { isBrandingAndCustomizationAvailable, isCustomizationAvailable } =
-    currentQuotaStore;
+    const {
+      whiteLabelLogoUrls: defaultWhiteLabelLogoUrls,
+      deviceType,
+      standalone,
+    } = settingsStore;
+    const { isBrandingAndCustomizationAvailable, isCustomizationAvailable } =
+      currentQuotaStore;
+    const { isEnterprise } = currentTariffStatusStore;
 
-  return {
-    setLogoText,
-    theme: settingsStore.theme,
-    logoText: whiteLabelLogoText,
-    getWhiteLabelLogoText,
-    saveWhiteLabelSettings,
-    restoreWhiteLabelSettings,
-    defaultWhiteLabelLogoUrls,
-    isSettingPaid: isBrandingAndCustomizationAvailable,
-    initSettings,
-    logoUrlsWhiteLabel,
-    setLogoUrlsWhiteLabel,
-    defaultLogoTextWhiteLabel,
-    enableRestoreButton,
+    return {
+      setLogoText,
+      theme: settingsStore.theme,
+      logoText: whiteLabelLogoText,
+      getWhiteLabelLogoText,
+      saveWhiteLabelSettings,
+      restoreWhiteLabelSettings,
+      defaultWhiteLabelLogoUrls,
+      isSettingPaid: isBrandingAndCustomizationAvailable,
+      initSettings,
+      logoUrlsWhiteLabel,
+      setLogoUrlsWhiteLabel,
+      defaultLogoTextWhiteLabel,
+      enableRestoreButton,
 
-    deviceType,
-    resetIsInit,
-    standalone,
+      deviceType,
+      resetIsInit,
+      standalone,
 
-    isWhitelableLoaded,
-    isCustomizationAvailable,
-  };
-})(withTranslation(["Settings", "Profile", "Common"])(observer(WhiteLabel)));
+      isWhitelableLoaded,
+      isCustomizationAvailable,
+      isEnterprise,
+    };
+  },
+)(withTranslation(["Settings", "Profile", "Common"])(observer(WhiteLabel)));

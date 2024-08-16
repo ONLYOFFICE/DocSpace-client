@@ -309,6 +309,14 @@ const InviteInput = ({
           });
         }
 
+        if (isPaidUserLimit && item.isVisitor && isPaidUserRole(item.access)) {
+          const freeRole = getTopFreeRole(t, roomType)?.access;
+
+          if (freeRole) {
+            item.access = freeRole;
+            toastr.error(<PaidQuotaLimitError />);
+          }
+        }
         const items = removeExist([item, ...inviteItems]);
         setInviteItems(items);
       }
@@ -370,7 +378,11 @@ const InviteInput = ({
         });
       }
 
-      if (isPaidUserLimit && !u.avatar && isPaidUserRole(u.access)) {
+      if (
+        isPaidUserLimit &&
+        (!u.avatar || u.isVisitor) &&
+        isPaidUserRole(u.access)
+      ) {
         const freeRole = getTopFreeRole(t, roomType)?.access;
 
         if (freeRole) {

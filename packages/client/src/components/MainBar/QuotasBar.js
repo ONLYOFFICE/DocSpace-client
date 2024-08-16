@@ -26,7 +26,6 @@
 
 import React from "react";
 import { withTranslation, Trans } from "react-i18next";
-import styled, { css } from "styled-components";
 
 import { SnackBar } from "@docspace/shared/components/snackbar";
 

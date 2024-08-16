@@ -126,13 +126,6 @@ const Bar = (props) => {
     }
 
     if (closed) {
-      if (isAdmin) {
-        setBarVisible((value) => ({
-          ...value,
-          roomQuota: !closed.includes(QuotaBarTypes.RoomQuota),
-        }));
-      }
-
       if (isAdmin || isRoomAdmin) {
         setBarVisible((value) => ({
           ...value,

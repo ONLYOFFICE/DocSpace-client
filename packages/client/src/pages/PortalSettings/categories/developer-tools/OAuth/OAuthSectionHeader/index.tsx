@@ -28,17 +28,15 @@ const OAuthSectionHeader = ({ isEdit }: { isEdit: boolean }) => {
       <HeaderContainer>
         <Headline type="content" truncate>
           <div className="settings-section_header">
-            <div className="header">
-              <IconButton
-                iconName={ArrowPathReactSvgUrl}
-                size={17}
-                isFill
-                onClick={onBack}
-                className="arrow-button"
-              />
+            <IconButton
+              iconName={ArrowPathReactSvgUrl}
+              size={17}
+              isFill
+              onClick={onBack}
+              className="arrow-button"
+            />
 
-              {isEdit ? t("EditApp") : t("NewApp")}
-            </div>
+            {isEdit ? t("EditApp") : t("NewApp")}
           </div>
         </Headline>
       </HeaderContainer>

@@ -28,7 +28,7 @@
 
 "use client";
 
-import { ChangeEvent, useContext, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
@@ -61,8 +61,6 @@ import { TError } from "@/types";
 import { ConfirmRouteContext } from "../ConfirmRoute";
 import { GreetingContainer } from "../GreetingContainer";
 
-const PROXY_BASE_URL = combineUrl(window.ClientConfig?.proxy?.url, "/profile");
-
 type TfaActivationFormProps = {
   secretKey: string;
   qrCode: string;
@@ -86,6 +84,14 @@ const TfaActivationForm = ({
 
   const { confirmHeader = null } = linkData;
 
+  const proxyBaseUrl = useRef("");
+  useEffect(() => {
+    proxyBaseUrl.current = combineUrl(
+      window.ClientConfig?.proxy?.url,
+      "/profile",
+    );
+  }, []);
+
   const onSubmit = async () => {
     try {
       setIsLoading(true);
@@ -97,7 +103,7 @@ const TfaActivationForm = ({
       }
 
       sessionStorage.setItem(OPEN_BACKUP_CODES_DIALOG, "true");
-      window.location.href = PROXY_BASE_URL;
+      window.location.href = proxyBaseUrl.current;
     } catch (error) {
       const knownError = error as TError;
       let errorMessage: string;

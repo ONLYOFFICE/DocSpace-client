@@ -82,6 +82,7 @@ const Bar = (props) => {
     isStorageQuotaAlmostLimit,
     isStorageQuotaLimit,
     isRoomTariffAlmostLimit,
+    isRoomsTariffLimit,
   } = props;
 
   const navigate = useNavigate();
@@ -97,6 +98,7 @@ const Bar = (props) => {
     storageAndUserTariff: false,
     storageAndUserTariffLimit: false,
     roomsAndStorageTariff: false,
+    roomsAndStorageTariffLimit: false,
     storageAndRoomQuota: false,
     confirmEmail: false,
     personalUserQuota: false,
@@ -147,6 +149,9 @@ const Bar = (props) => {
           roomsAndStorageTariff: closed.includes(
             QuotaBarTypes.RoomsAndStorageTariff,
           ),
+          roomsAndStorageTariffLimit: closed.includes(
+            QuotaBarTypes.RoomsAndStorageTariffLimit,
+          ),
           storageAndUserTariffLimit: !closed.includes(
             QuotaBarTypes.UserAndStorageTariffLimit,
           ),
@@ -183,6 +188,7 @@ const Bar = (props) => {
         usersTariffLimit: isAdmin | isRoomAdmin,
         storageAndUserTariff: isAdmin | isRoomAdmin,
         roomsAndStorageTariff: isAdmin | isRoomAdmin,
+        roomsAndStorageTariffLimit: isAdmin | isRoomAdmin,
         storageAndUserTariffLimit: isAdmin | isRoomAdmin,
         storageAndRoomQuota: isAdmin,
         confirmEmail: true,
@@ -298,6 +304,12 @@ const Bar = (props) => {
       case QuotaBarTypes.RoomsAndStorageTariff:
         setBarVisible((value) => ({ ...value, roomsAndStorageTariff: false }));
         break;
+      case QuotaBarTypes.RoomsAndStorageTariffLimit:
+        setBarVisible((value) => ({
+          ...value,
+          roomsAndStorageTariffLimit: false,
+        }));
+        break;
       case QuotaBarTypes.PersonalUserQuota:
         setBarVisible((value) => ({ ...value, personalUserQuota: false }));
         break;
@@ -339,6 +351,18 @@ const Bar = (props) => {
     ) {
       return {
         type: QuotaBarTypes.RoomsAndStorageTariff,
+        maxValue: null,
+        currentValue: null,
+      };
+    }
+
+    if (
+      isRoomsTariffLimit &&
+      isStorageTariffLimit &&
+      barVisible.roomsAndStorageTariffLimit
+    ) {
+      return {
+        type: QuotaBarTypes.RoomsAndStorageTariffLimit,
         maxValue: null,
         currentValue: null,
       };
@@ -510,6 +534,7 @@ export default inject(
       isStorageQuotaAlmostLimit,
       isStorageQuotaLimit,
       isRoomTariffAlmostLimit,
+      isRoomsTariffLimit,
     } = currentQuotaStore;
 
     const { currentColorScheme, setMainBarVisible } = settingsStore;
@@ -547,6 +572,7 @@ export default inject(
       isStorageQuotaAlmostLimit,
       isStorageQuotaLimit,
       isRoomTariffAlmostLimit,
+      isRoomsTariffLimit,
     };
   },
 )(withTranslation(["Profile", "Common"])(observer(Bar)));

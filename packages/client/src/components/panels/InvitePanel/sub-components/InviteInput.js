@@ -42,6 +42,7 @@ import BetaBadge from "../../../BetaBadgeWrapper";
 import { getMembersList } from "@docspace/shared/api/people";
 import {
   AccountsSearchArea,
+  EmployeeType,
   RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
@@ -135,27 +136,50 @@ const InviteInput = ({
   const toUserItems = (query) => {
     const addresses = parseAddresses(query);
     const uid = () => Math.random().toString(36).slice(-6);
+    let userAccess = selectedAccess;
 
     if (addresses.length > 1) {
-      return addresses.map((address) => {
-        isPaidUserAccess(selectedAccess) && setInvitePaidUsersCount();
+      let isShowErrorToast = false;
+
+      const itemsArray = addresses.map((address) => {
+
+        if (roomId === -1 && isPaidUserAccess(userAccess)) {
+          if (isPaidUserLimit) {
+            const freeType = EmployeeType.Guest;
+
+            userAccess = freeType;
+            isShowErrorToast = true;
+          } else {
+            setInvitePaidUsersCount();
+          }
+        }
 
         return {
           email: address.email,
           id: uid(),
-          access: selectedAccess,
+          access: userAccess,
           displayName: address.email,
           errors: address.parseErrors,
           isEmailInvite: true,
         };
       });
+
+      if (isShowErrorToast) toastr.error(<PaidQuotaLimitError />);
+
+      return itemsArray;
     }
 
-    roomId === -1 &&
-      isPaidUserAccess(selectedAccess) &&
-      setInvitePaidUsersCount();
 
-    let userAccess = selectedAccess;
+    if (roomId === -1 && isPaidUserAccess(userAccess)) {
+      if (isPaidUserLimit) {
+        const freeType = EmployeeType.Guest;
+
+        userAccess = freeType;
+        toastr.error(<PaidQuotaLimitError />);
+      } else {
+        setInvitePaidUsersCount();
+      }
+    }
 
     if (isPaidUserLimit && roomId !== -1 && isPaidUserRole(userAccess)) {
       const freeRole = getTopFreeRole(t, roomType)?.access;

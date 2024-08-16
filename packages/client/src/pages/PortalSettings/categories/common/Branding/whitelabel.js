@@ -85,6 +85,7 @@ const WhiteLabel = (props) => {
   const [isEmpty, setIsEmpty] = useState(isWhitelableLoaded && !logoText);
 
   const isMobileView = deviceType === DeviceType.mobile;
+  const showAbout = standalone && isManagement();
 
   const init = async () => {
     const isWhiteLabelPage = standalone
@@ -170,6 +171,9 @@ const WhiteLabel = (props) => {
         logoUrlsWhiteLabel[i].size.width,
         logoUrlsWhiteLabel[i].size.height,
       );
+
+      if (!showAbout && logoUrlsWhiteLabel[i].name === "AboutPage") continue;
+
       const isDocsEditorName = logoUrlsWhiteLabel[i].name === "DocsEditor";
 
       const logoLight = generateLogo(
@@ -444,39 +448,42 @@ const WhiteLabel = (props) => {
           </div>
         </div>
 
-        <div className="logo-wrapper">
-          <Text
-            fontSize="15px"
-            fontWeight="600"
-            className="settings_unavailable"
-          >
-            {t("LogoAbout")} ({logoUrlsWhiteLabel[6].size.width}x
-            {logoUrlsWhiteLabel[6].size.height})
-          </Text>
-          <div className="logos-wrapper">
-            <Logo
-              title={t("Profile:LightTheme")}
-              src={logoUrlsWhiteLabel[6].path.light}
-              imageClass="border-img logo-about background-white"
-              inputId={`logoUploader_${WhiteLabelLogoType.AboutPage}_light`}
-              linkId="link-about-light"
-              onChangeText={t("ChangeLogoButton")}
-              onChange={onChangeLogo}
-              isSettingPaid={isSettingPaid}
-            />
-            <Logo
-              title={t("Profile:DarkTheme")}
-              src={logoUrlsWhiteLabel[6].path.dark}
-              imageClass="border-img logo-about background-dark"
-              inputId={`logoUploader_${WhiteLabelLogoType.AboutPage}_dark`}
-              linkId="link-about-dark"
-              onChangeText={t("ChangeLogoButton")}
-              onChange={onChangeLogo}
-              isSettingPaid={isSettingPaid}
-            />
-          </div>
-        </div>
-
+        {showAbout && (
+          <>
+            <div className="logo-wrapper">
+              <Text
+                fontSize="15px"
+                fontWeight="600"
+                className="settings_unavailable"
+              >
+                {t("LogoAbout")} ({logoUrlsWhiteLabel[6].size.width}x
+                {logoUrlsWhiteLabel[6].size.height})
+              </Text>
+              <div className="logos-wrapper">
+                <Logo
+                  title={t("Profile:LightTheme")}
+                  src={logoUrlsWhiteLabel[6].path.light}
+                  imageClass="border-img logo-about background-white"
+                  inputId={`logoUploader_${WhiteLabelLogoType.AboutPage}_light`}
+                  linkId="link-about-light"
+                  onChangeText={t("ChangeLogoButton")}
+                  onChange={onChangeLogo}
+                  isSettingPaid={isSettingPaid}
+                />
+                <Logo
+                  title={t("Profile:DarkTheme")}
+                  src={logoUrlsWhiteLabel[6].path.dark}
+                  imageClass="border-img logo-about background-dark"
+                  inputId={`logoUploader_${WhiteLabelLogoType.AboutPage}_dark`}
+                  linkId="link-about-dark"
+                  onChangeText={t("ChangeLogoButton")}
+                  onChange={onChangeLogo}
+                  isSettingPaid={isSettingPaid}
+                />
+              </div>
+            </div>
+          </>
+        )}
         <div className="logo-wrapper">
           <Text
             fontSize="15px"

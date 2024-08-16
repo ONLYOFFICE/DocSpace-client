@@ -33,7 +33,6 @@ import { mobile, tablet } from "@docspace/shared/utils";
 export const RegisterContainer = styled.div<{
   registrationForm?: boolean;
 }>`
-
   height: 100%;
   width: 100%;
 

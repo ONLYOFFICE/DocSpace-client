@@ -44,7 +44,10 @@ export const GreetingContainer = styled.div`
   }
 
   .tooltip {
-    p {
+    .invitation-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       text-align: center;
     }
 
@@ -55,8 +58,10 @@ export const GreetingContainer = styled.div`
 
   .portal-logo {
     width: 100%;
+    max-width: 386px;
+    height: 44px;
+    margin: 0 auto;
     padding-bottom: 16px;
-    height: 26.56px;
     display: flex;
     align-items: center;
     justify-content: center;

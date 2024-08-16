@@ -49,9 +49,21 @@ export function middleware(request: NextRequest) {
   }
 
   if (request.nextUrl.pathname.includes("confirm")) {
-    const type = request.nextUrl.searchParams.get("type");
+    const queryType = request.nextUrl.searchParams.get("type");
+
+    const posSeparator = request.nextUrl.pathname.lastIndexOf("/");
+    const type = !!posSeparator
+      ? request.nextUrl.pathname?.slice(posSeparator + 1)
+      : "";
+    requestHeaders.set("x-confirm-type", type);
+    requestHeaders.set(
+      "x-confirm-query",
+      request.nextUrl.searchParams.toString(),
+    );
+
     return NextResponse.rewrite(
-      `${request.nextUrl.origin}/login/confirm/${type}${request.nextUrl.search}`,
+      `${request.nextUrl.origin}/login/confirm/${queryType}${request.nextUrl.search}`,
+      { headers: requestHeaders },
     );
   }
 
@@ -88,5 +100,12 @@ export function middleware(request: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/health", "/", "/not-found", "/consent", "/login", "/confirm"],
+  matcher: [
+    "/health",
+    "/",
+    "/not-found",
+    "/consent",
+    "/login",
+    "/confirm/:path*",
+  ],
 };

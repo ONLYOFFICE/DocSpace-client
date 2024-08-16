@@ -156,6 +156,9 @@ export interface ConfirmRouteProps {
   defaultPage?: string;
   socketUrl?: string;
   children: ReactNode;
+  confirmLinkResult: TConfirmLinkResult;
+  confirmLinkParams: TConfirmLinkParams;
+  confirmType: string;
 }
 
 export type GreetingContainersProps = {

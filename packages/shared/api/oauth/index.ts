@@ -11,6 +11,7 @@ import {
   IClientReqDTO,
   TConsentData,
   TConsentList,
+  TGenerateDeveloperToken,
 } from "../../utils/oauth/types";
 
 export const getClient = async (clientId: string): Promise<IClientProps> => {
@@ -233,6 +234,41 @@ export const onOAuthCancel = (clientId: string, clientState: string) => {
         "X-Disable-Redirect": "true",
       },
     },
+    false,
+    true,
+  );
+};
+
+export const generateDevelopToken = (
+  client_id: string,
+  client_secret: string,
+  scopes: string[],
+): Promise<TGenerateDeveloperToken> | undefined => {
+  const params = new URLSearchParams();
+  params.append("grant_type", "personal_access_token");
+  params.append("client_id", client_id);
+  params.append("client_secret", client_secret);
+  params.append("scope", scopes.join(" "));
+
+  return request<TGenerateDeveloperToken>(
+    { method: "post", url: "/oauth2/token", data: params },
+    false,
+    true,
+  );
+};
+
+export const revokeDeveloperToken = (
+  token: string,
+  client_id: string,
+  client_secret: string,
+) => {
+  const params = new URLSearchParams();
+  params.append("token", token);
+  params.append("client_id", client_id);
+  params.append("client_secret", client_secret);
+
+  return request(
+    { method: "post", url: "/oauth2/revoke", data: params },
     false,
     true,
   );

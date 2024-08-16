@@ -239,7 +239,7 @@ const ThirdPartyComboBox = ({
           scaled
           withBackdrop={isMobile}
           size="content"
-          manualWidth={"fit-content"}
+          manualWidth={"auto"}
           isMobileView={isMobileOnly}
           directionY="both"
           displaySelectedOption

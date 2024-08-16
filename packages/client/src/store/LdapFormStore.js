@@ -489,7 +489,7 @@ class LdapFormStore {
           completed: true,
           percents: 100,
           certificateConfirmRequest: null,
-          error: "",
+          error: t("Common:UnexpectedError"),
         };
       }
 
@@ -518,7 +518,6 @@ class LdapFormStore {
         toastr.success(t("Common:SuccessfullyCompletedOperation"));
       }
     } catch (error) {
-      console.error(error);
       toastr.error(error);
       this.endProcess();
     }

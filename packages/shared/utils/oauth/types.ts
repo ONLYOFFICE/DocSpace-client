@@ -150,3 +150,10 @@ export type IClientListProps = List<IClientProps>;
 export type IClientListDTO = List<IClientResDTO>;
 
 export type TConsentList = List<TConsentData>;
+
+export type TGenerateDeveloperToken = {
+  access_token: string;
+  expires_in: number;
+  scope: string;
+  token_type: string;
+};

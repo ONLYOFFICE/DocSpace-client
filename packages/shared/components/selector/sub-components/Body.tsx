@@ -124,7 +124,9 @@ const Body = ({
 
   const onBodyResize = React.useCallback(() => {
     if (bodyRef && bodyRef.current) {
-      setBodyHeight(bodyRef.current.offsetHeight);
+      setTimeout(() => {
+        setBodyHeight(bodyRef.current!.offsetHeight);
+      }, 20);
     }
   }, []);
 

@@ -146,6 +146,14 @@ export const addGroupMembers = (groupId: string, members: string) => {
   });
 };
 
+export const removeGroupMembers = (groupId: string, membersIds: string[]) => {
+  return request({
+    method: "delete",
+    url: `/group/${groupId}/members`,
+    data: { id: groupId, members: membersIds },
+  }) as Promise<TGroup>;
+};
+
 // * Delete
 
 export const deleteGroup = (groupId: string) => {

@@ -131,7 +131,7 @@ const UsersRowContent = ({
           size="content"
           displaySelectedOption
           modernView
-          manualWidth="fit-content"
+          manualWidth="auto"
         />
       </div>
     </Box>,

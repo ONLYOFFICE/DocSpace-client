@@ -155,7 +155,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
           directionX="right"
           directionY="top"
           fixedDirection
-          manualWidth="fit-content"
+          manualWidth="auto"
           isDefaultMode
           isAside={isMobileView}
           setIsOpenItemAccess={setIsOpenItemAccess}

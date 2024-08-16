@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import lodash from "lodash";
+import omit from "lodash/omit";
 import { useGesture } from "@use-gesture/react";
 import { useSpring, animated } from "@react-spring/web";
 import {
@@ -406,6 +406,10 @@ export const ViewerPlayer = ({
     const percent = Number(event.target.value);
     const newCurrentTime = (percent / 100) * videoRef.current.duration;
 
+    const videoCurrentTime = videoRef.current.currentTime;
+
+    if (Math.abs(newCurrentTime - videoCurrentTime) <= 0.1) return;
+
     handleProgress();
     setTimeline(percent);
     setCurrentTime(newCurrentTime);
@@ -640,7 +644,7 @@ export const ViewerPlayer = ({
             ref={videoRef}
             hidden={isAudio}
             preload="metadata"
-            style={lodash.omit(style, ["x", "y"])}
+            style={omit(style, ["x", "y"])}
             src={thumbnailSrc ? src : `${src}#t=0.001`}
             poster={posterUrl}
             onError={hadleError}
@@ -653,6 +657,7 @@ export const ViewerPlayer = ({
             onDurationChange={handleDurationChange}
             onLoadedMetadata={handleLoadedMetaDataVideo}
             onPlay={() => setIsPlaying(true)}
+            onContextMenu={(event) => event.preventDefault()}
           />
           <PlayerBigPlayButton
             onClick={handleBigPlayButtonClick}

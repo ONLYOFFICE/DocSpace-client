@@ -26,7 +26,7 @@
 
 /* eslint-disable no-console */
 import { makeAutoObservable, runInAction } from "mobx";
-import { cloneDeep } from "lodash";
+import cloneDeep from "lodash/cloneDeep";
 
 import api from "@docspace/shared/api";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";

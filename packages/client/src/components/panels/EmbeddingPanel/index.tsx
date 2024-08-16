@@ -160,7 +160,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   );
 
   const fileConfig = {
-    mode: "viewer",
+    mode: "editor",
     width: `${widthValue}${dataDimensions[0].label}`,
     height: `${heightValue}${dataDimensions[1].label}`,
     frameId: "ds-frame",

@@ -70,6 +70,7 @@ import { resendInvitesAgain } from "@docspace/shared/api/people";
 import { getCorrectFourValuesStyle } from "@docspace/shared/utils";
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isTablet } from "react-device-detect";
+import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
 
 const StyledButton = styled(Button)`
   font-weight: 700;
@@ -179,6 +180,7 @@ const ArticleMainButtonContent = (props) => {
 
     parentRoomType,
     isFolder,
+    createFoldersTree,
     showWarningDialog,
     isWarningRoomsDialog,
   } = props;
@@ -240,8 +242,12 @@ const ArticleMainButtonContent = (props) => {
   );
 
   const onFileChange = React.useCallback(
-    (e) => {
-      startUpload(e.target.files, null, t);
+    async (e) => {
+      const files = await getFilesFromEvent(e);
+
+      createFoldersTree(files).then((f) => {
+        if (f.length > 0) startUpload(f, null, t);
+      });
     },
     [startUpload, t],
   );
@@ -250,7 +256,7 @@ const ArticleMainButtonContent = (props) => {
     if (isPrivacy) {
       encryptionUploadDialog((encryptedFile, encrypted) => {
         encryptedFile.encrypted = encrypted;
-        startUpload([encryptedFile], null, t);
+        startUpload([encryptedFile], null, t); // TODO: createFoldersTree
       });
     } else {
       inputFilesElement.current.click();
@@ -902,6 +908,7 @@ export default inject(
     versionHistoryStore,
     userStore,
     currentTariffStatusStore,
+    filesActionsStore,
     currentQuotaStore,
   }) => {
     const { showArticleLoader } = clientLoadingStore;
@@ -947,6 +954,8 @@ export default inject(
     const { mainButtonItemsList } = pluginStore;
 
     const { frameConfig, isFrame } = settingsStore;
+
+    const { createFoldersTree } = filesActionsStore;
 
     return {
       setQuotaWarningDialogVisible,
@@ -999,6 +1008,7 @@ export default inject(
       isFolder,
       selectFileFormRoomDialogVisible,
       setSelectFileFormRoomDialogVisible,
+      createFoldersTree,
 
       showWarningDialog,
       isWarningRoomsDialog,

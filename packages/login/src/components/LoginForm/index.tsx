@@ -112,7 +112,9 @@ const LoginForm = ({
   const [password, setPassword] = useState("");
 
   const [isChecked, setIsChecked] = useState(false);
-  const [isLdapLoginChecked, setIsLdapLoginChecked] = useState(!!ldapDomain);
+  const [isLdapLoginChecked, setIsLdapLoginChecked] = useState(
+    ldapEnabled || false,
+  );
   const [isCaptcha, setIsCaptcha] = useState(false);
   const [isCaptchaSuccessful, setIsCaptchaSuccess] = useState(false);
   const [isCaptchaError, setIsCaptchaError] = useState(false);
@@ -170,10 +172,6 @@ const LoginForm = ({
     },
     [t, referenceUrl, currentCulture],
   );
-
-  useEffect(() => {
-    setIsLdapLoginChecked(!!ldapDomain);
-  }, [ldapDomain]);
 
   useEffect(() => {
     const profile = localStorage.getItem("profile");

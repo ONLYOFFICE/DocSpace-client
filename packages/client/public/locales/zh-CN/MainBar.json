@@ -1,5 +1,4 @@
 {
-  "ClickHere": "点击此处",
   "ConfirmEmailDescription": "使用激活邮件中提供的链接。没有收到包含激活链接的邮件？",
   "ConfirmEmailHeader": "请激活您的电子邮件 ({{ email }}) 以访问{{productName}}功能。",
   "PersonalUserQuotaAdminsDescription": "如要上传和创建新文件和文件夹，请释放磁盘空间，或在<1>存储空间管理设置</1>中管理每位用户的配额。",

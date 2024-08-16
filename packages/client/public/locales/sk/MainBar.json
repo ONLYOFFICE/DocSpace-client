@@ -1,5 +1,4 @@
 {
-  "ClickHere": "Kliknite tu",
   "ConfirmEmailDescription": "Použite odkaz uvedený v aktivačnom liste. Nedostali ste e-mail s aktivačným odkazom?",
   "ConfirmEmailHeader": "Ak chcete získať prístup k funkciám {{productName}}, aktivujte svoj e-mail ({{ email }}).",
   "PersonalUserQuotaAdminsDescription": "Ak chcete nahrávať a vytvárať nové súbory a priečinky, uvoľnite miesto na disku alebo spravujte používateľské kvóty v <1> Nastaveniach spravovania úložiska.</1>",

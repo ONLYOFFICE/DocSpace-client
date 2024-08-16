@@ -1,5 +1,4 @@
 {
-  "ClickHere": "Kliknij tutaj",
   "ConfirmEmailDescription": "Użyj linku otrzymanego w e-mailu aktywacyjnym. E-mail z linkiem aktywacyjnym nie dotarł?",
   "ConfirmEmailHeader": "Aktywuj swój adres e-mail ({{ email }}), aby uzyskać dostęp do funkcji {{productName}}.",
   "PersonalUserQuotaAdminsDescription": "Aby móc przesyłać i tworzyć nowe pliki oraz katalogi, zwolnij miejsce na dysku lub zmień limit pamięci na użytkownika w <1>ustawieniach zarządzania pamięcią.</1>",

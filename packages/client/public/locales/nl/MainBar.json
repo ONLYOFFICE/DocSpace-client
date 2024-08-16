@@ -1,5 +1,4 @@
 {
-  "ClickHere": "Klik hier",
   "ConfirmEmailDescription": "Gebruik de link in de activeringsmail. Hebt u geen e-mail ontvangen met de activeringslink?",
   "ConfirmEmailHeader": "Activeer uw e-mail ({{ email }}) om toegang te krijgen tot de {{productName}} functies.",
   "PersonalUserQuotaAdminsDescription": "Om nieuwe bestanden en mappen te uploaden en aan te maken, moet u schijfruimte vrijmaken of quota per gebruiker beheren in de <1>Instellingen voor opslagbeheer.</1>",

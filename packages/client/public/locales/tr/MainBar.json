@@ -1,5 +1,4 @@
 {
-  "ClickHere": "Buraya tıklayın",
   "ConfirmEmailDescription": "Aktivasyon e-postasında verilen bağlantıyı kullanın. Etkinleştirme bağlantısını içeren bir e-posta almadınız mı?",
   "ConfirmEmailHeader": "{{productName}} özelliklerine erişmek için lütfen e-postanızı ({{ email }}) etkinleştirin.",
   "PersonalUserQuotaAdminsDescription": "Yeni dosya ve klasörler yüklemek ve oluşturmak için lütfen disk alanını boşaltın veya <1>Depolama yönetimi ayarlarında</1> kullanıcı başına kotayı yönetin.",

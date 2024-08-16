@@ -1,5 +1,4 @@
 {
-  "ClickHere": "ここをクリック",
   "ConfirmEmailDescription": "アクティベーションメールに記載されているリンクを使用してください。アクティベーション用リンクが記載されたメールが届いていませんか？",
   "ConfirmEmailHeader": "{{productName}}の機能を利用するために、メール({{ email }})を有効にしてください。",
   "PersonalUserQuotaAdminsDescription": "新しいファイルやフォルダをアップロードしたり作成したりするには、<1>ストレージ管理設定</1>でディスク領域を解放するか、ユーザーごとに容量制限を管理してください。",

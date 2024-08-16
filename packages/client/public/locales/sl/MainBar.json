@@ -1,5 +1,4 @@
 {
-  "ClickHere": "Klikni tukaj",
   "ConfirmEmailDescription": "Uporabite povezavo v aktivacijskem e-mail sporočilu. Niste prejeli e-maila z aktivacijsko povezavo?",
   "ConfirmEmailHeader": "Aktiviraj svoj e-mail ({{ email }}) naslov za dostop do funkcij {{productName}}.",
   "PersonalUserQuotaAdminsDescription": "Če želite naložiti in ustvariti nove datoteke in mape, sprostite prostor na disku ali upravljajte s kvoto na uporabnika v <1>nastavitvah upravljanja shrambe.</1>",

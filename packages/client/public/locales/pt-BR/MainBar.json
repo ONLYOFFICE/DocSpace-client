@@ -1,5 +1,4 @@
 {
-  "ClickHere": "Clique aqui",
   "ConfirmEmailDescription": "Use o link fornecido no e-mail de ativação. Não recebeu um e-mail com o link de ativação?",
   "ConfirmEmailHeader": "Favor ativar seu e-mail ({{ email }}) para ter acesso às características do {{productName}}.",
   "PersonalUserQuotaAdminsDescription": "Para fazer upload e criar novos arquivos e pastas, libere espaço em disco ou gerencie a cota por usuário nas <1>Configurações de gerenciamento de armazenamento.</1>",

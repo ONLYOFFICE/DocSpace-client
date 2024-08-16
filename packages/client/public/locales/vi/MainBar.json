@@ -1,5 +1,4 @@
 {
-  "ClickHere": "Nhấp vào đây",
   "ConfirmEmailDescription": "Sử dụng liên kết được cung cấp trong email kích hoạt. Bạn chưa nhận được email chứa liên kết kích hoạt?",
   "ConfirmEmailHeader": "Xin vui lòng kích hoạt email ({{ email }}) của bạn để có quyền truy cập vào các tính năng {{productName}}.",
   "PersonalUserQuotaAdminsDescription": "Để tải lên và tạo các tập tin và thư mục mới, vui lòng giải phóng dung lượng đĩa hoặc quản lý hạn mức cho mỗi người dùng trong <1> cài đặt Quản lý lưu trữ.</1>",

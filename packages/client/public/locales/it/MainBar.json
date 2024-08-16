@@ -1,5 +1,4 @@
 {
-  "ClickHere": "Clicca qui",
   "ConfirmEmailDescription": "Utilizza il collegamento fornito nell’e-mail di attivazione. Non hai ricevuto un’e-mail con il link di attivazione?",
   "ConfirmEmailHeader": "Ti preghiamo di attivare la tua e-mail ({{ email }}) per accedere alle funzionalità di {{productName}}.",
   "PersonalUserQuotaAdminsDescription": "Per caricare e creare nuovi file e cartelle, libera spazio su disco o gestisci la quota per utente nelle <1>Impostazioni di gestione dello spazio di archiviazione.</1>",

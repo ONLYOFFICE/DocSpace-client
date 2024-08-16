@@ -1,5 +1,4 @@
 {
-  "ClickHere": "Noklikšķiniet šeit",
   "ConfirmEmailDescription": "Izmantojiet aktivizēšanas e-pasta ziņojumā norādīto saiti. Vai neesat saņēmis e-pasta ziņojumu ar aktivizēšanas saiti?",
   "ConfirmEmailHeader": "Lūdzu, aktivizējiet savu e-pastu ({{ email }}), lai piekļūtu {{productName}} funkcijām.",
   "PersonalUserQuotaAdminsDescription": "Lai augšupielādētu un izveidotu jaunus failus un mapes, atbrīvojiet vietu diskā vai pārvaldiet kvotu katram lietotājam <1>Krātuves pārvaldības iestatījumos.</1>",

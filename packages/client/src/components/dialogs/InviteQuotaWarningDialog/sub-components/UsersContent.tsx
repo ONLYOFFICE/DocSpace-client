@@ -68,7 +68,7 @@ const UsersContent = ({
   addedManagersCount,
   maxCountManagersByQuota,
 }: UsersContentProps) => {
-  const { t } = useTranslation(["Payments", "Common"]);
+  const { t } = useTranslation(["Payments", "Common", "MainBar"]);
 
   const chooseNewPlan = (
     <Text>
@@ -107,13 +107,14 @@ const UsersContent = ({
   );
 };
 
-export default inject(({ currentQuotaStore }) => {
+export default inject(({ currentQuotaStore, authStore }) => {
   const {
     isUserTariffLimit,
-    isPaymentPageAvailable,
+
     addedManagersCount,
     maxCountManagersByQuota,
   } = currentQuotaStore;
+  const { isPaymentPageAvailable } = authStore;
 
   return {
     isUserTariffLimit,

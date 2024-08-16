@@ -2348,6 +2348,7 @@ const Dark: TTheme = {
   },
 
   emptyView: {
+    linkColor: lightBlueMain,
     items: {
       hoverColor: darkGrayLight,
       pressColor: grayDarkStrong,

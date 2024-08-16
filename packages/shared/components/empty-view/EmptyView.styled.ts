@@ -68,9 +68,10 @@ export const EmptyViewBody = styled.div`
     max-width: fit-content;
     text-decoration: none;
 
-    color: #4781d1;
+    color: ${(props) => props.theme.emptyView.linkColor};
+
     svg {
-      color: #4781d1;
+      color: inherit;
       g {
         fill: currentColor;
       }

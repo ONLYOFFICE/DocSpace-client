@@ -54,7 +54,7 @@ import {
   ConflictResolveDialog,
   ConvertDialog,
   CreateRoomDialog,
-  InviteUsersWarningDialog,
+  InviteQuotaWarningDialog,
   CreateRoomConfirmDialog,
   ChangeUserTypeDialog,
   SubmitToFormGallery,
@@ -292,7 +292,7 @@ const Panels = (props) => {
     archiveDialogVisible && <ArchiveDialog key="archive-dialog" />,
     restoreRoomDialogVisible && <RestoreRoomDialog key="archive-dialog" />,
     inviteQuotaWarningDialogVisible && (
-      <InviteUsersWarningDialog key="invite-users-warning-dialog" />
+      <InviteQuotaWarningDialog key="invite-users-warning-dialog" />
     ),
     preparationPortalDialogVisible && (
       <PreparationPortalDialog key="preparation-portal-dialog" />

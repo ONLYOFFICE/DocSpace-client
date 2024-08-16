@@ -37,7 +37,7 @@ import { getDaysRemaining } from "@docspace/shared/utils/common";
 import RoomsContent from "./sub-components/RoomsContent";
 import UsersContent from "./sub-components/UsersContent";
 
-const InviteUsersWarningDialog = (props) => {
+const InviteQuotaWarningDialog = (props) => {
   const {
     t,
     tReady,
@@ -50,8 +50,6 @@ const InviteUsersWarningDialog = (props) => {
     isGracePeriod,
     currentTariffPlanTitle,
     isPaymentPageAvailable,
-    isRoomsTariffLimit,
-    isUserTariffLimit,
   } = props;
 
   const navigate = useNavigate();
@@ -178,8 +176,7 @@ export default inject(
   }) => {
     const { isPaymentPageAvailable } = authStore;
     const { dueDate, delayDueDate, isGracePeriod } = currentTariffStatusStore;
-    const { currentTariffPlanTitle, isRoomsTariffLimit, isUserTariffLimit } =
-      currentQuotaStore;
+    const { currentTariffPlanTitle } = currentQuotaStore;
 
     const { inviteQuotaWarningDialogVisible, setQuotaWarningDialogVisible } =
       dialogsStore;
@@ -193,8 +190,6 @@ export default inject(
       dueDate,
       delayDueDate,
       isGracePeriod,
-      isRoomsTariffLimit,
-      isUserTariffLimit,
     };
   },
-)(observer(withTranslation(["Payments", "Common"])(InviteUsersWarningDialog)));
+)(observer(withTranslation(["Payments", "Common"])(InviteQuotaWarningDialog)));

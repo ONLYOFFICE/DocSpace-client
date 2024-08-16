@@ -55,6 +55,8 @@ const InviteUsersWarningDialog = (props) => {
   } = props;
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const isAccounts = location.pathname.includes("accounts/people");
 
   const [datesData, setDatesData] = useState({});
 
@@ -78,7 +80,21 @@ const InviteUsersWarningDialog = (props) => {
     });
   };
 
-  const onClose = () => setIsVisible(false);
+  const onClose = () => {
+    if (!isGracePeriod) {
+      const closeItems =
+        JSON.parse(localStorage.getItem("warning-dialog")) || [];
+
+      const warningItem = isAccounts ? "user-quota" : "room-quota";
+
+      const closed =
+        closeItems.length > 0 ? [...closeItems, warningItem] : [warningItem];
+      console.log("closed", closed);
+      localStorage.setItem("warning-dialog", JSON.stringify(closed));
+    }
+
+    setIsVisible(false);
+  };
 
   const onUpgradePlan = () => {
     onClose();
@@ -87,9 +103,6 @@ const InviteUsersWarningDialog = (props) => {
 
     navigate(paymentPageUrl);
   };
-
-  const location = useLocation();
-  const isAccounts = location.pathname.includes("accounts/people");
 
   const contentForGracePeriod = (
     <>

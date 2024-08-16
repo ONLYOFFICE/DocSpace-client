@@ -81,6 +81,7 @@ import { PDFFormEditingDialog } from "../dialogs/PDFFormEditingDialog";
 import { SharePDFFormDialog } from "../dialogs/SharePDFFormDialog";
 import { FillPDFDialog } from "../dialogs/FillPDFDialog";
 import { ShareCollectSelector } from "../ShareCollectSelector";
+import { saveToLocalStorage } from "SRC_DIR/pages/PortalSettings/utils";
 
 const Panels = (props) => {
   const {
@@ -139,9 +140,8 @@ const Panels = (props) => {
     shareCollectSelector,
 
     setQuotaWarningDialogVisible,
-    isItemTariffAlmostLimit,
     resetQuotaItem,
-    isNewItemByCurrentUser,
+    isShowWarningDialog,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -198,15 +198,15 @@ const Panels = (props) => {
   }, [handleSharePDFForm]);
 
   useEffect(() => {
-    if (isNewItemByCurrentUser) {
-      isItemTariffAlmostLimit && setQuotaWarningDialogVisible(true);
+    if (isShowWarningDialog) {
+      setQuotaWarningDialogVisible(true);
 
       resetQuotaItem();
     }
     return () => {
       resetQuotaItem();
     };
-  }, [isItemTariffAlmostLimit, isNewItemByCurrentUser]);
+  }, [isShowWarningDialog]);
 
   return [
     settingsPluginDialogVisible && (
@@ -421,17 +421,20 @@ export default inject(
     } = pluginStore;
 
     const isAccounts = window.location.href.indexOf("accounts/people") !== -1;
-    const isItemTariffAlmostLimit = isAccounts
-      ? isUserTariffAlmostLimit
-      : isRoomTariffAlmostLimit;
     const resetQuotaItem = () => {
       if (isNewUserByCurrentUser) setIsNewUserByCurrentUser(false);
       if (isNewRoomByCurrentUser) setIsNewRoomByCurrentUser(false);
     };
 
-    const isNewItemByCurrentUser = isAccounts
-      ? isNewUserByCurrentUser
-      : isNewRoomByCurrentUser;
+    const closeItems = JSON.parse(localStorage.getItem("warning-dialog")) || [];
+
+    const isShowWarningDialog = isAccounts
+      ? isUserTariffAlmostLimit &&
+        !closeItems.includes("user-quota") &&
+        isNewUserByCurrentUser
+      : isRoomTariffAlmostLimit &&
+        !closeItems.includes("room-quota") &&
+        isNewRoomByCurrentUser;
 
     return {
       preparationPortalDialogVisible,
@@ -490,8 +493,7 @@ export default inject(
 
       setQuotaWarningDialogVisible,
       resetQuotaItem,
-      isItemTariffAlmostLimit,
-      isNewItemByCurrentUser,
+      isShowWarningDialog,
     };
   },
 )(observer(Panels));

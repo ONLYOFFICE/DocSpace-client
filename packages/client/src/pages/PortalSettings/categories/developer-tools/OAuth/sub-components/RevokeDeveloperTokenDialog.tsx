@@ -12,11 +12,15 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
-import { InputBlock } from "@docspace/shared/components/input-block";
-import { InputSize, InputType } from "@docspace/shared/components/text-input";
+
+import {
+  InputSize,
+  InputType,
+  TextInput,
+} from "@docspace/shared/components/text-input";
+import { UserStore } from "@docspace/shared/store/UserStore";
 
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
-import { UserStore } from "@docspace/shared/store/UserStore";
 
 const StyledContainer = styled.div`
   p {
@@ -86,13 +90,14 @@ const GenerateDeveloperTokenDialog = ({
       <ModalDialog.Body>
         <StyledContainer>
           <Text>Warning text</Text>
-          <InputBlock
+          <TextInput
             value={token}
             scale
             placeholder="Enter developer token"
             type={InputType.text}
             size={InputSize.base}
             onChange={onChange}
+            maxLength={10000}
           />
         </StyledContainer>
       </ModalDialog.Body>

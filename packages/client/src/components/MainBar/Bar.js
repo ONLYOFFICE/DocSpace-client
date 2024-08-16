@@ -81,7 +81,7 @@ const Bar = (props) => {
     isUserTariffLimit,
     isStorageQuotaAlmostLimit,
     isStorageQuotaLimit,
-    isRoomTariffAlmostLimit,
+    isRoomsTariffAlmostLimit,
     isRoomsTariffLimit,
   } = props;
 
@@ -345,7 +345,7 @@ const Bar = (props) => {
     // }
 
     if (
-      isRoomTariffAlmostLimit &&
+      isRoomsTariffAlmostLimit &&
       isStorageTariffAlmostLimit &&
       barVisible.roomsAndStorageTariff
     ) {
@@ -533,7 +533,7 @@ export default inject(
       isUserTariffLimit,
       isStorageQuotaAlmostLimit,
       isStorageQuotaLimit,
-      isRoomTariffAlmostLimit,
+      isRoomsTariffAlmostLimit,
       isRoomsTariffLimit,
     } = currentQuotaStore;
 
@@ -571,7 +571,7 @@ export default inject(
       isUserTariffLimit,
       isStorageQuotaAlmostLimit,
       isStorageQuotaLimit,
-      isRoomTariffAlmostLimit,
+      isRoomsTariffAlmostLimit,
       isRoomsTariffLimit,
     };
   },

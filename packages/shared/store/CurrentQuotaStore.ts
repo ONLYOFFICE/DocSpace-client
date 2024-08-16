@@ -252,7 +252,7 @@ class CurrentQuotasStore {
     );
   }
 
-  get isRoomTariffAlmostLimit() {
+  get isRoomsTariffAlmostLimit() {
     return (
       this.maxCountRoomsByQuota - this.usedRoomsCount <=
         COUNT_FOR_SHOWING_BAR && this.usedRoomsCount < this.maxCountRoomsByQuota

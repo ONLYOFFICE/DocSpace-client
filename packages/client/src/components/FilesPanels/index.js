@@ -411,7 +411,7 @@ export default inject(
     const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
     const { hotkeyPanelVisible } = settingsStore;
     const { confirmDialogIsLoading } = createEditRoomStore;
-    const { isRoomTariffAlmostLimit, isUserTariffAlmostLimit } =
+    const { isRoomsTariffAlmostLimit, isUserTariffAlmostLimit } =
       currentQuotaStore;
 
     const {
@@ -432,7 +432,7 @@ export default inject(
       ? isUserTariffAlmostLimit &&
         !closeItems.includes("user-quota") &&
         isNewUserByCurrentUser
-      : isRoomTariffAlmostLimit &&
+      : isRoomsTariffAlmostLimit &&
         !closeItems.includes("room-quota") &&
         isNewRoomByCurrentUser;
 

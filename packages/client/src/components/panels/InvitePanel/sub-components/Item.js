@@ -27,14 +27,20 @@
 import InfoEditReactSvgUrl from "PUBLIC_DIR/images/info.edit.react.svg?url";
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import AlertSvgUrl from "PUBLIC_DIR/images/icons/12/alert.react.svg?url";
+
 import React, { useState, useEffect } from "react";
+import { inject, observer } from "mobx-react";
+
 import { Avatar } from "@docspace/shared/components/avatar";
 import { Text } from "@docspace/shared/components/text";
-
 import { parseAddresses } from "@docspace/shared/utils";
-import { getAccessOptions } from "../utils";
 import { getUserTypeLabel } from "@docspace/shared/utils/common";
 
+import {
+  getAccessOptions,
+  getFreeUsersRoleArray,
+  getFreeUsersTypeArray,
+} from "../utils";
 import {
   StyledEditInput,
   StyledEditButton,
@@ -46,6 +52,8 @@ import {
 } from "../StyledInvitePanel";
 import { filterGroupRoleOptions, filterUserRoleOptions } from "SRC_DIR/helpers";
 import AccessSelector from "../../../AccessSelector";
+
+import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 
 const Item = ({
   t,
@@ -61,6 +69,10 @@ const Item = ({
   setIsOpenItemAccess,
   isMobileView,
   standalone,
+  isPaidUserAccess,
+  setInvitePaidUsersCount,
+  isPaidUserLimit,
+  roomId,
 }) => {
   const {
     avatar,
@@ -72,6 +84,7 @@ const Item = ({
     isGroup,
     name: groupName,
     warning,
+    isVisitor,
   } = item;
 
   const name = isGroup
@@ -162,7 +175,9 @@ const Item = ({
     const errors = !!parseErrors.length ? parseErrors : [];
 
     setParseErrors(errors);
-    changeInviteItem({ id, email: value, errors }).then(() => errorsInList());
+    changeInviteItem({ id, email: value, errors, access }).then(() =>
+      errorsInList(),
+    );
   };
 
   const changeValue = (e) => {
@@ -176,6 +191,8 @@ const Item = ({
   const removeItem = () => {
     const newItems = inviteItems.filter((item) => item.id !== id);
 
+    if (isPaidUserAccess(item.access)) setInvitePaidUsersCount(-1);
+
     setInviteItems(newItems);
   };
 
@@ -186,6 +203,9 @@ const Item = ({
   };
 
   const textProps = !!avatar || isGroup ? {} : { onClick: onEdit };
+
+  const availableAccess =
+    roomId === -1 ? getFreeUsersTypeArray() : getFreeUsersRoleArray();
 
   const displayBody = (
     <>
@@ -248,6 +268,11 @@ const Item = ({
             setIsOpenItemAccess={setIsOpenItemAccess}
             isMobileView={isMobileView}
             noBorder
+            {...((roomId === -1 || !avatar || isVisitor) && {
+              isSelectionDisabled: isPaidUserLimit,
+              selectionErrorText: <PaidQuotaLimitError />,
+              availableAccess,
+            })}
           />
         </>
       )}
@@ -279,4 +304,15 @@ const Item = ({
   );
 };
 
-export default Item;
+export default inject(({ dialogsStore, currentQuotaStore }) => {
+  const { isPaidUserAccess, setInvitePaidUsersCount, invitePanelOptions } =
+    dialogsStore;
+  const { isPaidUserLimit } = currentQuotaStore;
+
+  return {
+    isPaidUserAccess,
+    setInvitePaidUsersCount,
+    isPaidUserLimit,
+    roomId: invitePanelOptions.roomId,
+  };
+})(observer(Item));

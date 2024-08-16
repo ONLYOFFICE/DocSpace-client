@@ -52,7 +52,7 @@ const EmptyContainer = ({
   sectionWidth,
   isRoomNotFoundOrMoved,
   isGracePeriod,
-  setInviteUsersWarningDialogVisible,
+  setQuotaWarningDialogVisible,
   isRoot,
   isPublicRoom,
   isEmptyPage,
@@ -79,8 +79,8 @@ const EmptyContainer = ({
   };
 
   const onCreateRoom = (e) => {
-    if (isGracePeriod) {
-      setInviteUsersWarningDialogVisible(true);
+    if (isWarningRoomsDialog) {
+      setQuotaWarningDialogVisible(true);
       return;
     }
 
@@ -126,7 +126,7 @@ export default inject(
     settingsStore,
     filesStore,
     dialogsStore,
-
+    currentQuotaStore,
     selectedFolderStore,
     clientLoadingStore,
     currentTariffStatusStore,
@@ -137,13 +137,14 @@ export default inject(
 
     const { isGracePeriod } = currentTariffStatusStore;
 
-    const { setInviteUsersWarningDialogVisible } = dialogsStore;
+    const { setQuotaWarningDialogVisible } = dialogsStore;
     const { isPublicRoom } = publicRoomStore;
 
     const isRoomNotFoundOrMoved =
       isFiltered === null && isErrorRoomNotAvailable;
 
     const isRoot = selectedFolderStore.pathParts?.length === 1;
+    const { isWarningRoomsDialog } = currentQuotaStore;
 
     return {
       theme: settingsStore.theme,
@@ -153,10 +154,11 @@ export default inject(
       parentId: selectedFolderStore.parentId,
       isRoomNotFoundOrMoved,
       isGracePeriod,
-      setInviteUsersWarningDialogVisible,
+      setQuotaWarningDialogVisible,
       type: selectedFolderStore.type,
       isRoot,
       isPublicRoom,
+      isWarningRoomsDialog,
     };
   },
 )(observer(EmptyContainer));

@@ -1819,13 +1819,14 @@ class FilesActionStore {
   archiveRooms = (action) => {
     const {
       setArchiveDialogVisible,
-      setInviteUsersWarningDialogVisible,
+      setQuotaWarningDialogVisible,
       setRestoreRoomDialogVisible,
     } = this.dialogsStore;
-    const { isGracePeriod } = this.currentTariffStatusStore;
 
-    if (action === "unarchive" && isGracePeriod) {
-      setInviteUsersWarningDialogVisible(true);
+    const { isWarningRoomsDialog } = this.currentQuotaStore;
+
+    if (action === "unarchive" && isWarningRoomsDialog) {
+      setQuotaWarningDialogVisible(true);
       return;
     }
 

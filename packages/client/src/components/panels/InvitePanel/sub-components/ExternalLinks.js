@@ -38,9 +38,12 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { DropDown } from "@docspace/shared/components/drop-down";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
+import { ShareAccessRights } from "@docspace/shared/enums";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
 
 import AccessSelector from "../../../AccessSelector";
-
+import PaidQuotaLimitError from "../../../PaidQuotaLimitError";
 import {
   StyledBlock,
   StyledSubHeader,
@@ -49,6 +52,8 @@ import {
   StyledToggleButton,
   StyledDescription,
 } from "../StyledInvitePanel";
+
+import { getFreeUsersRoleArray, getFreeUsersTypeArray } from "../utils";
 
 const ExternalLinks = ({
   t,
@@ -65,6 +70,7 @@ const ExternalLinks = ({
   activeLink,
   isMobileView,
   getPortalInviteLink,
+  isPaidUserLimit,
 }) => {
   const [isLinksToggling, setIsLinksToggling] = useState(false);
 
@@ -126,14 +132,16 @@ const ExternalLinks = ({
 
   const onSelectAccess = async (access) => {
     let link = null;
-    if (roomId === -1) {
-      link = shareLinks.find((l) => l.access === access.access);
+    const selectedAccess = access.access;
 
-      link.shareLink = await getPortalInviteLink(access.access);
+    if (roomId === -1) {
+      link = shareLinks.find((l) => l.access === selectedAccess);
+
+      link.shareLink = await getPortalInviteLink(selectedAccess);
 
       setActiveLink(link);
     } else {
-      setInvitationLinks(roomId, "Invite", +access.access, shareLinks[0].id);
+      setInvitationLinks(roomId, "Invite", +selectedAccess, shareLinks[0].id);
 
       link = shareLinks[0];
       setActiveLink(shareLinks[0]);
@@ -199,6 +207,9 @@ const ExternalLinks = ({
     },
     [closeActionLinks],
   );
+
+  const availableAccess =
+    roomId === -1 ? getFreeUsersTypeArray() : getFreeUsersRoleArray();
 
   return (
     <StyledBlock noPadding ref={inputsRef}>
@@ -268,6 +279,9 @@ const ExternalLinks = ({
             containerRef={inputsRef}
             isOwner={isOwner}
             isMobileView={isMobileView}
+            isSelectionDisabled={isPaidUserLimit}
+            selectionErrorText={<PaidQuotaLimitError />}
+            availableAccess={availableAccess}
           />
         </StyledInviteInputContainer>
       )}
@@ -276,12 +290,13 @@ const ExternalLinks = ({
 };
 
 export default inject(
-  ({ userStore, dialogsStore, filesStore, peopleStore }) => {
+  ({ userStore, dialogsStore, filesStore, peopleStore, currentQuotaStore }) => {
     const { isOwner } = userStore.user;
     const { invitePanelOptions } = dialogsStore;
     const { setInvitationLinks } = filesStore;
     const { roomId, hideSelector, defaultAccess } = invitePanelOptions;
     const { getPortalInviteLink } = peopleStore.inviteLinksStore;
+    const { isPaidUserLimit } = currentQuotaStore;
 
     return {
       setInvitationLinks,
@@ -290,6 +305,7 @@ export default inject(
       defaultAccess,
       isOwner,
       getPortalInviteLink,
+      isPaidUserLimit,
     };
   },
 )(observer(ExternalLinks));

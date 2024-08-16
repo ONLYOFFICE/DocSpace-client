@@ -29,6 +29,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { DropDownItem } from "../drop-down-item";
 import { Badge } from "../badge";
 import { TOption } from "../combobox";
+import { toastr } from "../toast";
 
 import {
   StyledItemTitle,
@@ -46,6 +47,9 @@ export const AccessRightSelectPure = ({
   advancedOptions,
   selectedOption,
   className,
+  isSelectionDisabled,
+  selectionErrorText,
+  availableAccess,
   ...props
 }: AccessRightSelectProps) => {
   const [currentItem, setCurrentItem] = useState(selectedOption);
@@ -57,6 +61,20 @@ export const AccessRightSelectPure = ({
   const onSelectCurrentItem = useCallback(
     (option: TOption) => {
       if (option) {
+        if (isSelectionDisabled) {
+          let isError =
+            option.access && option.access !== selectedOption.access;
+
+          if (availableAccess && option.access) {
+            isError = availableAccess.every((item) => item !== option.access);
+          }
+
+          if (isError) {
+            toastr.error(selectionErrorText);
+            return;
+          }
+        }
+
         setCurrentItem(option);
         onSelect?.(option);
       }

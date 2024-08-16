@@ -31,9 +31,7 @@ import { useNavigate } from "react-router-dom";
 
 import { ChangeUserTypeDialog } from "../dialogs";
 import { toastr } from "@docspace/shared/components/toast";
-import { Link } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import PaidQuotaLimitError from "../PaidQuotaLimitError";
 
 const ChangeUserTypeEvent = ({
   setVisible,
@@ -46,7 +44,6 @@ const ChangeUserTypeEvent = ({
   getPeopleListItem,
   setInfoPanelSelection,
   needResetUserSelection,
-  isRoomAdmin,
 }) => {
   const { toType, fromType, userIDs, successCallback, abortCallback } =
     peopleDialogData;
@@ -76,16 +73,6 @@ const ChangeUserTypeEvent = ({
     };
   }, [peopleDialogData]);
 
-  const onClickPayments = () => {
-    const paymentPageUrl = combineUrl(
-      "/portal-settings",
-      "/payments/portal-payments",
-    );
-
-    toastr.clear();
-    navigate(paymentPageUrl);
-  };
-
   const onChangeUserType = () => {
     onClosePanel();
     updateUserType(toType, userIDs, peopleFilter, fromType)
@@ -101,20 +88,7 @@ const ChangeUserTypeEvent = ({
         successCallback && successCallback(users);
       })
       .catch((err) => {
-        toastr.error(
-          <>
-            <Text>{t("Common:QuotaPaidUserLimitError")}</Text>
-            {!isRoomAdmin && (
-              <Link color="#5387AD" isHovered={true} onClick={onClickPayments}>
-                {t("Common:PaymentsTitle")}
-              </Link>
-            )}
-          </>,
-          false,
-          0,
-          true,
-          true,
-        );
+        toastr.error(<PaidQuotaLimitError />, false, 0, true, true);
 
         abortCallback && abortCallback();
       })
@@ -170,7 +144,7 @@ export default inject(
       changeUserTypeDialogVisible: visible,
       setChangeUserTypeDialogVisible: setVisible,
     } = dialogsStore;
-    const { isRoomAdmin } = authStore;
+
     const { setInfoPanelSelection } = infoPanelStore;
     const { dialogStore, filterStore, usersStore } = peopleStore;
 
@@ -180,7 +154,6 @@ export default inject(
       usersStore;
     const { setSelected } = peopleStore.selectionStore;
     return {
-      isRoomAdmin,
       needResetUserSelection,
       getPeopleListItem,
       setInfoPanelSelection,

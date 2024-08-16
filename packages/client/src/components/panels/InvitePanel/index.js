@@ -32,7 +32,7 @@ import React, {
   useRef,
 } from "react";
 import { observer, inject } from "mobx-react";
-import { withTranslation } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 
 import { DeviceType, EmployeeType } from "@docspace/shared/enums";
 import { LOADER_TIMEOUT } from "@docspace/shared/constants";
@@ -60,6 +60,10 @@ import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 import InfoBar from "./sub-components/InfoBar";
 import InvitePanelLoader from "./sub-components/InvitePanelLoader";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 const InvitePanel = ({
   folders,
@@ -81,6 +85,11 @@ const InvitePanel = ({
   getUsersList,
   filter,
   currentDeviceType,
+  isRoomAdmin,
+  maxCountManagersByQuota,
+  invitePaidUsersCount,
+  setIsNewUserByCurrentUser,
+  setInvitePaidUsersCount,
 }) => {
   const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
     roomId !== -1,
@@ -245,6 +254,55 @@ const InvitePanel = ({
     return () => document.removeEventListener("keyup", onKeyPress);
   });
 
+  const onClickPayments = () => {
+    const paymentPageUrl = combineUrl(
+      "/portal-settings",
+      "/payments/portal-payments",
+    );
+
+    toastr.clear();
+
+    window.DocSpace.navigate(paymentPageUrl);
+
+    setInvitePanelOptions({
+      visible: false,
+      hideSelector: false,
+      defaultAccess: 1,
+    });
+  };
+
+  const getError = () => {
+    const paymentLink = (
+      <Trans
+        t={t}
+        i18nKey="ChangeUserPermissions"
+        ns="Common"
+        components={{
+          1: (
+            <ColorTheme
+              tag="a"
+              themeId={ThemeId.Link}
+              onClick={onClickPayments}
+              target="_blank"
+            />
+          ),
+        }}
+      />
+    );
+
+    return (
+      <>
+        <Text as="span">
+          {t("Common:PaidUsersExceedsLimit", {
+            count: maxCountManagersByQuota + invitePaidUsersCount,
+            limit: maxCountManagersByQuota,
+          })}
+        </Text>
+        &nbsp;
+        {!isRoomAdmin && paymentLink}
+      </>
+    );
+  };
   const onClickSend = async (e) => {
     const invitations = inviteItems.map((item) => {
       let newItem = {};
@@ -276,7 +334,11 @@ const InvitePanel = ({
         ? await inviteUsers(data)
         : await setRoomSecurity(roomId, data);
 
+      if (!isRooms) {
+        setIsNewUserByCurrentUser(true);
+      }
       setIsLoading(false);
+      setInvitePaidUsersCount(0);
 
       onClose();
       toastr.success(t("Common:UsersInvited"));
@@ -289,7 +351,13 @@ const InvitePanel = ({
         updateInfoPanelMembers(t);
       }
     } catch (err) {
-      toastr.error(err);
+      let error = err;
+
+      if (err?.response?.status === 402) {
+        error = getError();
+      }
+
+      toastr.error(error);
       setIsLoading(false);
     } finally {
       if (roomId === -1) {
@@ -462,6 +530,8 @@ export default inject(
     filesStore,
     dialogsStore,
     infoPanelStore,
+    authStore,
+    currentQuotaStore,
   }) => {
     const { theme, currentDeviceType } = settingsStore;
 
@@ -480,10 +550,17 @@ export default inject(
       setInviteItems,
       setInvitePanelOptions,
       setInviteLanguage,
+      invitePaidUsersCount,
+      setIsNewUserByCurrentUser,
+      setInvitePaidUsersCount,
     } = dialogsStore;
 
     const { getFolderInfo, setRoomSecurity, getRoomSecurityInfo, folders } =
       filesStore;
+
+    const { isRoomAdmin } = authStore;
+
+    const { maxCountManagersByQuota } = currentQuotaStore;
 
     return {
       folders,
@@ -506,6 +583,11 @@ export default inject(
       getUsersList,
       filter,
       currentDeviceType,
+      isRoomAdmin,
+      maxCountManagersByQuota,
+      invitePaidUsersCount,
+      setIsNewUserByCurrentUser,
+      setInvitePaidUsersCount,
     };
   },
 )(

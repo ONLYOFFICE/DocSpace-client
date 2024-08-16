@@ -172,8 +172,7 @@ const ArticleMainButtonContent = (props) => {
     copyPanelVisible,
 
     security,
-    isGracePeriod,
-    setInviteUsersWarningDialogVisible,
+    setQuotaWarningDialogVisible,
     currentDeviceType,
 
     isFrame,
@@ -182,6 +181,8 @@ const ArticleMainButtonContent = (props) => {
     parentRoomType,
     isFolder,
     createFoldersTree,
+    showWarningDialog,
+    isWarningRoomsDialog,
   } = props;
 
   const navigate = useNavigate();
@@ -220,14 +221,14 @@ const ArticleMainButtonContent = (props) => {
   );
 
   const onCreateRoom = React.useCallback(() => {
-    if (isGracePeriod) {
-      setInviteUsersWarningDialogVisible(true);
+    if (isWarningRoomsDialog) {
+      setQuotaWarningDialogVisible(true);
       return;
     }
 
     const event = new Event(Events.ROOM_CREATE);
     window.dispatchEvent(event);
-  }, []);
+  }, [isWarningRoomsDialog]);
 
   const onShowSelectFileDialog = React.useCallback(() => {
     setSelectFileDialogVisible(true);
@@ -289,8 +290,8 @@ const ArticleMainButtonContent = (props) => {
   const onInvite = React.useCallback((e) => {
     const type = e.action;
 
-    if (isGracePeriod) {
-      setInviteUsersWarningDialogVisible(true);
+    if (showWarningDialog(type)) {
+      setQuotaWarningDialogVisible(true);
       return;
     }
 
@@ -908,6 +909,7 @@ export default inject(
     userStore,
     currentTariffStatusStore,
     filesActionsStore,
+    currentQuotaStore,
   }) => {
     const { showArticleLoader } = clientLoadingStore;
     const { mainButtonMobileVisible } = filesStore;
@@ -924,7 +926,7 @@ export default inject(
     const {
       setSelectFileDialogVisible,
       setInvitePanelOptions,
-      setInviteUsersWarningDialogVisible,
+      setQuotaWarningDialogVisible,
       copyPanelVisible,
       moveToPanelVisible,
       restorePanelVisible,
@@ -945,7 +947,8 @@ export default inject(
     const isFolder = selectedFolderStore.isFolder;
 
     const { isAdmin, isOwner, isRoomAdmin } = userStore.user;
-    const { isGracePeriod } = currentTariffStatusStore;
+
+    const { showWarningDialog, isWarningRoomsDialog } = currentQuotaStore;
 
     const { setOformFromFolderId, oformsFilter } = oformsStore;
     const { mainButtonItemsList } = pluginStore;
@@ -955,8 +958,7 @@ export default inject(
     const { createFoldersTree } = filesActionsStore;
 
     return {
-      isGracePeriod,
-      setInviteUsersWarningDialogVisible,
+      setQuotaWarningDialogVisible,
       showText: settingsStore.showText,
       isMobileArticle: settingsStore.isMobileArticle,
 
@@ -1007,6 +1009,9 @@ export default inject(
       selectFileFormRoomDialogVisible,
       setSelectFileFormRoomDialogVisible,
       createFoldersTree,
+
+      showWarningDialog,
+      isWarningRoomsDialog,
     };
   },
 )(

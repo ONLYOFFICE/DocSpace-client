@@ -25,7 +25,6 @@
   "Pay": "Betaal",
   "Payer": "Betaler",
   "PayerDescription": "Deze gebruiker heeft toegang tot de betalingsgegevens en is de enige gebruiker die de quota kan aanpassen en betalingen kan verrichten. De {{productName}}-eigenaar, evenals de betalende beheerder zelf, kan de rol van betalende beheerder opnieuw toewijzen via het Stripe klantenportaal.",
-  "PaymentOverdue": "Kan geen nieuwe gebruikers toevoegen.",
   "PriceCalculation": "Bereken uw prijs",
   "RenewSubscription": "Verleng abonnement op {{planName}} plan",
   "RoomManagerDescription": "Ruimtebeheer en archivering, uitnodiging en beheer van gebruikers. Er kunnen meerdere beheerders aan de kamer worden toegewezen.",
@@ -35,7 +34,6 @@
   "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/maand</3>",
   "UpgradeNow": "Upgrade nu",
   "UpgradePlan": "Upgrade plan",
-  "UpgradePlanInfo": "Nieuwe gebruikers toevoegen betekent dat het maximum aantal leden van de kamer dat in uw huidige tariefplan is toegestaan, wordt overschreden.",
   "UserNotFound": "Gebruiker <1>{{email}}</1> is niet gevonden.",
   "UserNotFoundMatchingEmail": "We konden de gebruiker met de overeenkomende Stripe e-mail niet vinden.",
   "YourPrice": "Uw prijs"

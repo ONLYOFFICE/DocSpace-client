@@ -18,8 +18,18 @@ export const useFeedTranslation = (
     case "FileRenamed":
       return t("InfoPanel:FileRenamed");
     case "FileMoved":
+      if (feed.data.fromParentTitle) {
+        return t("InfoPanel:FileMovedTo", {
+          folderTitle: feed.data.parentTitle,
+        });
+      }
       return t("InfoPanel:FileMoved");
     case "FileCopied":
+      if (feed.data.fromParentTitle) {
+        return t("InfoPanel:FileCopiedTo", {
+          folderTitle: feed.data.parentTitle,
+        });
+      }
       return t("InfoPanel:FileCopied");
     case "FileDeleted":
       return t("InfoPanel:FileDeleted");
@@ -71,9 +81,9 @@ export const useFeedTranslation = (
     case "DeletedRoomTags":
       return t("InfoPanel:DeletedRoomTags");
     case "RoomLogoCreated":
-      return t("InfoPanel:RoomLogoCreated");
+      return t("InfoPanel:RoomLogoChanged");
     case "RoomLogoDeleted":
-      return t("InfoPanel:RoomLogoDeleted");
+      return t("InfoPanel:RoomLogoChanged");
     case "RoomExternalLinkCreated":
       return t("InfoPanel:RoomExternalLinkCreated");
     case "RoomExternalLinkRenamed":
@@ -116,13 +126,13 @@ export const useFeedTranslation = (
     case "RoomCreateUser":
       return t("InfoPanel:RoomCreateUser");
     case "RoomUpdateAccessForUser":
-      return t("InfoPanel:RoomUpdateAccessForUser");
+      return t("InfoPanel:RoomUpdateAccess");
     case "RoomRemoveUser":
       return t("InfoPanel:RoomRemoveUser");
     case "RoomGroupAdded":
       return t("InfoPanel:RoomGroupAdded");
     case "RoomUpdateAccessForGroup":
-      return t("InfoPanel:RoomUpdateAccessForGroup");
+      return t("InfoPanel:RoomUpdateAccess");
     case "RoomGroupRemove":
       return t("InfoPanel:RoomGroupRemove");
     default:

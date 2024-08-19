@@ -1,1 +1,24 @@
-{}
+{
+  "CollaboratorEmptyTitle": "Der Raum ist leer.",
+  "CreateNewFileDescription": "Beginnen Sie Ihre Arbeit im Raum, indem Sie Dateien oder Ordner anlegen",
+  "CreateNewFileTitle": "Eine neue Datei erstellen",
+  "CustomRoomEmptyTitle": "Willkommen im benutzerdefinierten Raum",
+  "EmptyDescription": "Beginnen Sie mit schnellen Aktionen:",
+  "FormFolderDefaultDescription": "Legen Sie PDF-Formulare hier ab oder laden Sie sie von {{productName}} oder einem Gerät hoch.",
+  "FormFolderDefaultTitle": "Noch keine Formulare vorhanden",
+  "FormFolderDefaultUserDescription": "Die von den Administratoren hochgeladenen Formulare werden hier angezeigt.",
+  "FormFolderDefaultUserTitle": "Noch keine Formulare in diesem Ordner",
+  "FormRoomEmptyTitle": "Willkommen im Raum zum Formularausfüllen",
+  "InviteUsersOptionDescription": "Fügen Sie Portalmitglieder zur gemeinsamen Bearbeitung im Raum hinzu",
+  "InviteUsersOptionTitle": "Einladen von Teilnehmern",
+  "ShareOptionDescription": "Kopieren Sie einen Link für den öffentlichen Zugang oder laden Sie andere Benutzer in den Raum ein, um das Ausfüllen des Formulars zu starten.",
+  "ShareOptionTitle": "Raum teilen",
+  "UploadDeviceOptionDescription": "Laden Sie beliebige Dateitypen von Ihrem persönlichen Gerät hoch",
+  "UploadDeviceOptionTitle": "Hochladen von Ihrem Gerät",
+  "UploadDevicePDFFormOptionDescription": "Laden Sie ein fertiges PDF-Formular von Ihrem Gerät in den Raum hoch.",
+  "UploadDevicePDFFormOptionTitle": "Hochladen vom Gerät",
+  "UploadFromPortalDescription": "Laden Sie beliebige Dateien aus Dokumenten oder Räumen hoch",
+  "UploadFromPortalTitle": "Von {{productName}} hochladen",
+  "UploadPDFFormOptionDescription": "Wählen Sie ein fertiges PDF-Formular, das in {{productName}} verfügbar ist, und laden Sie es in den Raum hoch.",
+  "UserEmptyDescription": "Von Administratoren hochgeladene Dateien und Ordner werden hier angezeigt."
+}

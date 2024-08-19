@@ -43,9 +43,7 @@ export const MainContainer = styled.div`
 
   .page_loader {
     position: fixed;
-
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl" ? `right: 50%;` : `left: 50%;`}
+    inset-inline-start: 50%;
   }
 
   .category-item-description {
@@ -54,7 +52,7 @@ export const MainContainer = styled.div`
 
     .link-learn-more {
       display: inline-block;
-      margin: 4px 0 16px 0;
+      margin: 4px 0 16px;
       font-weight: 600;
     }
 

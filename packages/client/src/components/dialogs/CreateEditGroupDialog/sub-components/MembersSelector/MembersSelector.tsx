@@ -24,41 +24,60 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
+import { useTranslation } from "react-i18next";
+
+import { ShareAccessRights } from "@docspace/shared/enums";
+import { Portal } from "@docspace/shared/components/portal";
 import { TUser } from "@docspace/shared/api/people/types";
-import { EditGroupParams, GroupMembers } from "../types";
 
-const compareMembers = (a: GroupMembers, b: GroupMembers): boolean => {
-  if (!a && !b) return true;
-  if (!Array.isArray(a) || !Array.isArray(b)) return false;
-  if (a.length !== b.length) return false;
+import AddUsersPanel from "../../../../panels/AddUsersPanel";
+import { getAccessOptions } from "../../../../panels/InvitePanel/utils";
 
-  const sortCb = (first: TUser, second: TUser) =>
-    first.id < second.id ? -1 : 1;
-  const sortedA = [...a].sort(sortCb);
-  const sortedB = [...b].sort(sortCb);
+type MembersSelectorProps = {
+  isVisible: boolean;
+  onClose: () => void;
+  onParentPanelClose: () => void;
 
-  return !sortedA.some((el, i) => el.id !== sortedB[i].id);
-};
+  addMembers: (members: TUser[]) => void;
+} & (
+  | { checkIfUserInvited: (user: TUser) => boolean; invitedUsers?: undefined }
+  | { invitedUsers: string[]; checkIfUserInvited?: undefined }
+);
 
-const removeManagerFromMembers = (members: GroupMembers, managerId: string) => {
-  return members?.filter((g) => g.id !== managerId) || null;
-};
+export const MembersSelector = ({
+  isVisible,
+  addMembers,
+  onParentPanelClose,
+  onClose,
+  checkIfUserInvited,
+  invitedUsers,
+}: MembersSelectorProps) => {
+  const { t } = useTranslation(["InviteDialog"]);
+  const accessOptions = getAccessOptions(t, 5, false, true);
+  const invitedProps = checkIfUserInvited
+    ? { checkIfUserInvited }
+    : { invitedUsers };
 
-export const compareGroupParams = (
-  prev: EditGroupParams,
-  current: EditGroupParams,
-): boolean => {
-  const equalTitle = prev.groupName === current.groupName;
-  const equalManager = prev.groupManager?.id === current.groupManager?.id;
-
-  const prevGroupMembers = prev.groupManager?.id
-    ? removeManagerFromMembers(prev.groupMembers, prev.groupManager.id)
-    : prev.groupMembers;
-  const currentGroupMembers = current.groupManager?.id
-    ? removeManagerFromMembers(current.groupMembers, current.groupManager.id)
-    : current.groupMembers;
-
-  const equalMembers = compareMembers(prevGroupMembers, currentGroupMembers);
-
-  return equalTitle && equalManager && equalMembers;
+  return (
+    <Portal
+      element={
+        <AddUsersPanel
+          visible={isVisible}
+          onClose={onClose}
+          onParentPanelClose={onParentPanelClose}
+          isMultiSelect
+          setDataItems={addMembers}
+          accessOptions={accessOptions}
+          withAccessRights={false}
+          isEncrypted
+          defaultAccess={ShareAccessRights.FullAccess}
+          withoutBackground
+          withBlur={false}
+          disableDisabledUsers
+          {...invitedProps}
+        />
+      }
+    />
+  );
 };

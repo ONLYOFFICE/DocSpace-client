@@ -448,7 +448,7 @@ class UploadDataStore {
 
     while (index < len) {
       const conversionItem = filesToConversion[index];
-      const { fileId, toFolderId, password } = conversionItem;
+      const { fileId, toFolderId, password, format } = conversionItem;
       const itemPassword = password ? password : null;
       const file = this.files.find((f) => f.fileId === fileId);
       if (file) runInAction(() => (file.inConversion = true));
@@ -460,7 +460,7 @@ class UploadDataStore {
 
       const numberFiles = this.files.filter((f) => f.needConvert).length;
 
-      const res = convertFile(fileId, itemPassword)
+      const res = convertFile(fileId, format, itemPassword)
         .then((res) => res)
         .catch(() => {
           const error = t("FailedToConvert");
@@ -693,7 +693,10 @@ class UploadDataStore {
     let conflicts = await checkIsFileExist(toFolderId, filesArray);
     const folderInfo = await getFolderInfo(toFolderId);
 
-    conflicts = conflicts.map((fileTitle) => ({ title: fileTitle }));
+    conflicts = conflicts.map((fileTitle) => ({
+      title: fileTitle,
+      isFile: true,
+    }));
 
     if (conflicts.length > 0) {
       this.setConflictDialogData(conflicts, {
@@ -1032,6 +1035,10 @@ class UploadDataStore {
     currentFile.path = path;
     if (!currentFile) return resolve();
     const { needConvert } = currentFile;
+
+    const isXML = currentFile.fileInfo?.fileExst?.includes(".xml");
+
+    if (isXML) return resolve();
 
     if (needConvert) {
       runInAction(() => (currentFile.action = "convert"));

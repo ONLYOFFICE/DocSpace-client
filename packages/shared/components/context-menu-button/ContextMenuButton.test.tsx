@@ -32,6 +32,7 @@ import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/vertical-dots.react.svg?u
 
 import { ContextMenuButton } from "./ContextMenuButton";
 import { ContextMenuButtonDisplayType } from "./ContextMenuButton.enums";
+import { globalColors } from "../../themes";
 
 const baseData = () => [
   {
@@ -45,7 +46,7 @@ const baseProps = {
   title: "Actions",
   iconName: VerticalDotsReactSvgUrl,
   size: 16,
-  color: "#A3A9AE",
+  color: globalColors.gray,
   getData: baseData,
   isDisabled: false,
 };

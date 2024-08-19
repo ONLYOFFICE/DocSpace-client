@@ -12,6 +12,8 @@
   "StorageQuotaDescription": "Siz lazımsız faylları silə və ya {{productName}} üçün daha uyğun qiymət planı tapmaq üçün <1>{{clickHere}}</1> edə bilərsiniz.",
   "StorageQuotaExceeded": "Yaddaş kvotası limiti keçib",
   "StorageQuotaHeader": "Yaddaş sahəsinin həcmi keçmək üzrədir : {{currentValue}} / {{maxValue}}",
+  "StorageQuotaUserDescription": "Diskdə yer boşaltmaq üçün lazımsız faylları silə bilərsiniz.",
   "TenantCustomQuotaDescription": "<1>Yaddaş idarəetmə parametrlərində</1> lazımsız faylları silə və ya kvotanı dəyişə bilərsiniz.",
+  "UserQuotaDescription": "<1>{{clickHere}}</1> məhsulunuz üçün daha yaxşı qiymət planı tapmaq üçün {{productName}}.",
   "UserQuotaHeader": "Admin/ekspert istifadəçilərin sayı keçmək üzrədir: {{currentValue}} / {{maxValue}}."
 }

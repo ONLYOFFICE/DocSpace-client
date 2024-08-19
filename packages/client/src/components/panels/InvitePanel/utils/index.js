@@ -29,7 +29,52 @@ import {
   RoomsType,
   EmployeeType,
 } from "@docspace/shared/enums";
+import { globalColors } from "@docspace/shared/themes";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
+
+/**
+ * @param {RoomsType} roomType
+ * @param {(key: string) => string} t
+ * @returns {string}
+ */
+const getRoomAdminDescription = (roomType, t) => {
+  switch (roomType) {
+    case RoomsType.FormRoom:
+      return t("Translations:RoleRoomAdminFormRoomDescription");
+
+    default:
+      return t("Translations:RoleRoomAdminDescription");
+  }
+};
+/**
+ * @param {RoomsType} roomType
+ * @param {(key: string)=> string} t
+ * @returns {string}
+ */
+const getPowerUserDescription = (roomType, t) => {
+  switch (roomType) {
+    case RoomsType.FormRoom:
+      return t("Translations:RolePowerUserFormRoomDescription");
+
+    default:
+      return t("Translations:RolePowerUserDescription");
+  }
+};
+
+/**
+ * @param {RoomsType} roomType
+ * @param {(key: string)=> string} t
+ * @returns {string}
+ */
+const getFormFillerDescription = (roomType, t) => {
+  switch (roomType) {
+    case RoomsType.FormRoom:
+      return t("Translations:RoleFormFillerFormRoomDescription");
+
+    default:
+      return t("Translations:RoleFormFillerDescription");
+  }
+};
 
 export const getAccessOptions = (
   t,
@@ -48,7 +93,7 @@ export const getAccessOptions = (
         productName: t("Common:ProductName"),
       }),
       ...(!standalone && { quota: t("Common:Paid") }),
-      color: "#EDC409",
+      color: globalColors.favoritesStatus,
       access:
         roomType === -1 ? EmployeeType.Admin : ShareAccessRights.FullAccess,
       type: "admin",
@@ -56,9 +101,9 @@ export const getAccessOptions = (
     roomAdmin: {
       key: "roomAdmin",
       label: t("Common:RoomAdmin"),
-      description: t("Translations:RoleRoomAdminDescription"),
+      description: getRoomAdminDescription(roomType, t),
       ...(!standalone && { quota: t("Common:Paid") }),
-      color: "#EDC409",
+      color: globalColors.favoritesStatus,
       access:
         roomType === -1 ? EmployeeType.User : ShareAccessRights.RoomManager,
       type: "manager",
@@ -66,9 +111,9 @@ export const getAccessOptions = (
     collaborator: {
       key: "collaborator",
       label: t("Common:PowerUser"),
-      description: t("Translations:RolePowerUserDescription"),
+      description: getPowerUserDescription(roomType, t),
       ...(!standalone && { quota: t("Common:Paid") }),
-      color: "#EDC409",
+      color: globalColors.favoritesStatus,
       access:
         roomType === -1
           ? EmployeeType.Collaborator
@@ -92,7 +137,7 @@ export const getAccessOptions = (
     formFiller: {
       key: "formFiller",
       label: t("Translations:RoleFormFiller"),
-      description: t("Translations:RoleFormFillerDescription"),
+      description: getFormFillerDescription(roomType, t),
       access: ShareAccessRights.FormFilling,
       type: "user",
     },

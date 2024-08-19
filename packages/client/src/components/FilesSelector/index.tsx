@@ -424,6 +424,7 @@ export default inject(
       isRestore,
       isPanelVisible,
       id,
+      currentFolderId: currentFolderIdProp,
     }: FilesSelectorProps,
   ) => {
     const { id: selectedId, parentId, rootFolderType } = selectedFolderStore;
@@ -551,7 +552,7 @@ export default inject(
       getIcon,
 
       roomsFolderId,
-      currentFolderId: folderId,
+      currentFolderId: folderId || currentFolderIdProp,
       filesSettings,
     };
   },

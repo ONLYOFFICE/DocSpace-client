@@ -12,6 +12,7 @@
   "StorageQuotaDescription": "Ви можете видалити непотрібні файли, або <1>{{clickHere}}</1>, щоб знайти більш підходящий тарифний план для вашого {{productName}}.",
   "StorageQuotaExceeded": "Квоту сховища перевищено",
   "StorageQuotaHeader": "Обсяг сховища скоро буде перевищено: {{currentValue}}/{{maxValue}}",
+  "StorageQuotaUserDescription": "Ви можете видалити непотрібні файли, щоб звільнити місце на диску.",
   "TenantCustomQuotaDescription": "Ви можете видалити непотрібні файли або змінити квоту в <1>Параметрах керування сховищем</1>.",
   "UserQuotaDescription": "<1>{{clickHere}}</1>, щоб знайти кращий тарифний план для вашого {{productName}}.",
   "UserQuotaHeader": "Кількість адміністраторів / досвідчених користувачів скоро буде перевищено: {{currentValue}}/{{maxValue}}."

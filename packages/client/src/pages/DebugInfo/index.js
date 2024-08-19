@@ -45,15 +45,15 @@ const StyledModalDialog = styled(ModalDialog)`
     width: auto;
 
     /* Light theme. */
-    --color-border-default: #d0d7de;
+    --color-border-default: ${(props) => props.theme.dialogs.borderColor};
     --color-border-muted: hsla(210, 18%, 87%, 1);
 
     .modal-footer {
-      padding-right: 4px;
+      padding-inline-end: 4px;
     }
 
     a {
-      color: #4781d1;
+      color: ${(props) => props.theme.dialogs.linkColor};
     }
 
     .debug-info-body,

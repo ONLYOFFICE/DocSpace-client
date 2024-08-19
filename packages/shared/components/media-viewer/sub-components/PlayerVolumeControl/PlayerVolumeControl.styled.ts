@@ -27,11 +27,12 @@
 import styled, { css } from "styled-components";
 
 import { tablet } from "@docspace/shared/utils";
+import { globalColors } from "../../../../themes";
 
 export const PlayerVolumeControlWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 10px;
+  margin-inline-start: 10px;
 `;
 
 export const IconWrapper = styled.div`
@@ -47,7 +48,7 @@ const mobilecss = css`
     -webkit-appearance: none;
     visibility: visible;
     opacity: 1;
-    background: #fff;
+    background: ${globalColors.white};
     height: 10px;
     width: 10px;
     border-radius: 50%;
@@ -60,7 +61,7 @@ const mobilecss = css`
     -webkit-appearance: none;
     visibility: visible;
     opacity: 1;
-    background: #fff;
+    background: ${globalColors.white};
     height: 10px;
     width: 10px;
     border-radius: 50%;
@@ -73,7 +74,7 @@ const mobilecss = css`
     -webkit-appearance: none;
     visibility: visible;
     opacity: 1;
-    background: #fff;
+    background: ${globalColors.white};
     height: 10px;
     width: 10px;
     border-radius: 50%;
@@ -86,10 +87,10 @@ export const VolumeWrapper = styled.div`
   height: 28px;
   display: flex;
   align-items: center;
-  padding-left: 9px;
+  padding-inline-start: 9px;
 
   input {
-    margin-right: 15px;
+    margin-inline-end: 15px;
     width: 80%;
     height: 4px;
 
@@ -100,7 +101,10 @@ export const VolumeWrapper = styled.div`
     border-radius: 5px;
 
     background: rgba(255, 255, 255, 0.3);
-    background-image: linear-gradient(#fff, #fff);
+    background-image: linear-gradient(
+      ${globalColors.white},
+      ${globalColors.white}
+    );
     background-repeat: no-repeat;
 
     &:hover {
@@ -118,7 +122,7 @@ export const VolumeWrapper = styled.div`
     -webkit-appearance: none;
     visibility: hidden;
     opacity: 0;
-    background: #fff;
+    background: ${globalColors.white};
   }
 
   input[type="range"]::-moz-range-thumb {
@@ -127,7 +131,7 @@ export const VolumeWrapper = styled.div`
     -webkit-appearance: none;
     visibility: hidden;
     opacity: 0;
-    background: #fff;
+    background: ${globalColors.white};
   }
 
   input[type="range"]::-ms-fill-upper {
@@ -136,7 +140,7 @@ export const VolumeWrapper = styled.div`
     -webkit-appearance: none;
     visibility: hidden;
     opacity: 0;
-    background: #fff;
+    background: ${globalColors.white};
   }
 
   &:hover {

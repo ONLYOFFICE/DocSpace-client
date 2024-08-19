@@ -30,7 +30,7 @@ import PropTypes from "prop-types";
 
 import MenuIcon from "PUBLIC_DIR/images/menu.react.svg";
 import { mobile } from "@docspace/shared/utils";
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 
 const StyledIconBox = styled.div`
   display: none;
@@ -41,11 +41,8 @@ const StyledIconBox = styled.div`
 
   align-items: center;
 
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `padding-right: 16px;`
-      : `padding-left: 16px;`}
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  padding-inline-start: 16px;
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 `;
 
 const StyledMenuIcon = styled(MenuIcon)`

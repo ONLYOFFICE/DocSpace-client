@@ -43,20 +43,13 @@ export const commonSettingsStyles = css`
     }
 
     .category-item-description {
-      color: #555f65;
+      color: ${(props) => props.theme.client.settings.descriptionColor};
       font-size: 12px;
       max-width: 1024px;
     }
 
     .inherit-title-link {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 7px;
-            `
-          : css`
-              margin-right: 7px;
-            `}
+      margin-inline-end: 7px;
       font-size: 19px;
       font-weight: 600;
     }

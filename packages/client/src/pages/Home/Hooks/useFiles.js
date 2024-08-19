@@ -32,7 +32,7 @@ import FilesFilter from "@docspace/shared/api/files/filter";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import { getGroup } from "@docspace/shared/api/groups";
 import { getUserById } from "@docspace/shared/api/people";
-import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
+import { CREATED_FORM_KEY, MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
 import {
   Events,
@@ -78,6 +78,7 @@ const useFiles = ({
 
   scrollToTop,
   selectedFolderStore,
+  wsCreatedPDFForm,
 }) => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -292,7 +293,15 @@ const useFiles = ({
             );
           } else {
             const folderId = filter.folder;
-            return fetchFiles(folderId, filter);
+            return fetchFiles(folderId, filter)?.finally(() => {
+              const data = sessionStorage.getItem(CREATED_FORM_KEY);
+              if (data) {
+                wsCreatedPDFForm({
+                  data,
+                });
+                sessionStorage.removeItem(CREATED_FORM_KEY);
+              }
+            });
           }
         }
 
@@ -306,7 +315,7 @@ const useFiles = ({
 
           const isFormRoom =
             selectedFolderStore.roomType === RoomsType.FormRoom ||
-            selectedFolderStore.type === FolderType.FormRoom;
+            selectedFolderStore.parentRoomType === FolderType.FormRoom;
 
           const payload = {
             extension: "pdf",

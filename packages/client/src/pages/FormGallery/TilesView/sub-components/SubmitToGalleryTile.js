@@ -82,15 +82,7 @@ const StyledCloseIcon = styled(CrossIcon)`
   position: absolute;
   top: 10px;
   cursor: pointer;
-
-  ${(props) =>
-    props.theme.interfaceDirection === "ltr"
-      ? css`
-          right: 10px;
-        `
-      : css`
-          left: 10px;
-        `}
+  inset-inline-end: 10px;
 
   path {
     fill: ${({ theme }) =>

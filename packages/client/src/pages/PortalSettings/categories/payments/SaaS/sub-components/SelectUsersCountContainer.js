@@ -46,14 +46,7 @@ const StyledBody = styled.div`
     display: flex;
     position: relative;
     margin-top: -8px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: -3px;
-          `
-        : css`
-            margin-left: -3px;
-          `}
+    margin-inline-start: -3px;
     height: 16px;
 
     .slider-track-value_min,
@@ -64,25 +57,11 @@ const StyledBody = styled.div`
 
     .slider-track-value_max {
       position: absolute;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              left: 0;
-            `
-          : css`
-              right: 0;
-            `}
+      inset-inline-end: 0;
     }
     .slider-track-value_min {
       position: absolute;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              right: 0;
-            `
-          : css`
-              left: 0;
-            `}
+      inset-inline-start: 0;
     }
   }
 
@@ -91,8 +70,7 @@ const StyledBody = styled.div`
     height: 60px;
     font-size: 44px;
     text-align: center;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-inline: 20px;
     padding: 0;
     font-weight: 700;
     ${(props) =>
@@ -146,33 +124,18 @@ const StyledBody = styled.div`
     .minus-icon {
       svg {
         top: 44%;
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                right: 28%;
-              `
-            : css`
-                left: 28%;
-              `}
+        inset-inline-start: 28%;
       }
     }
     .plus-icon {
       svg {
         top: 30%;
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                right: 27%;
-              `
-            : css`
-                left: 27%;
-              `}
+        inset-inline-start: 27%;
       }
     }
   }
   .payment-users_count {
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-inline: 20px;
     text-align: center;
     width: 102px;
   }

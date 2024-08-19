@@ -24,57 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
-
-import { Box } from "@docspace/shared/components/box";
-import { Button } from "@docspace/shared/components/button";
+import styled from "styled-components";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Text } from "@docspace/shared/components/text";
 
-import StyledModalDialog from "../styled-containers/StyledModalDialog";
+export const StyledModalDialog = styled(ModalDialog)`
+  .modal-body {
+    padding: 0;
+  }
 
-const ResetConfirmationModal = (props) => {
-  const { t } = useTranslation(["SingleSignOn", "Common"]);
-  const { closeResetModal, confirmationResetModal, confirmReset } = props;
-
-  return (
-    <StyledModalDialog
-      contentHeight="100%"
-      displayType="modal"
-      onClose={closeResetModal}
-      visible={confirmationResetModal}
-    >
-      <ModalDialog.Header>{t("Common:Confirmation")}</ModalDialog.Header>
-
-      <ModalDialog.Body>
-        <Text noSelect>{t("ConfirmationText")}</Text>
-      </ModalDialog.Body>
-
-      <ModalDialog.Footer>
-        <Button
-          id="ok-button"
-          label={t("Common:OKButton")}
-          onClick={confirmReset}
-          primary
-          scale
-          size="normal"
-        />
-        <Button
-          id="cancel-button"
-          label={t("Common:CancelButton")}
-          onClick={closeResetModal}
-          scale
-          size="normal"
-        />
-      </ModalDialog.Footer>
-    </StyledModalDialog>
-  );
-};
-
-export default inject(({ ssoStore }) => {
-  const { closeResetModal, confirmationResetModal, confirmReset } = ssoStore;
-
-  return { closeResetModal, confirmationResetModal, confirmReset };
-})(observer(ResetConfirmationModal));
+  .search-input {
+    margin: 16px 16px 12px;
+  }
+`;

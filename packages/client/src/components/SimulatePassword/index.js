@@ -48,8 +48,7 @@ const StyledBody = styled.div`
   }
   .conversion-input {
     width: 100%;
-    text-align: ${({ theme }) =>
-      theme.interfaceDirection === "rtl" ? `right` : `left`};
+    text-align: start;
   }
 `;
 const SimulatePassword = memo(
@@ -60,8 +59,9 @@ const SimulatePassword = memo(
     isDisabled = false,
     hasError = false,
     forwardedRef,
+    inputValue,
   }) => {
-    const [password, setPassword] = useState("");
+    const [password, setPassword] = useState(inputValue ?? "");
     const [caretPosition, setCaretPosition] = useState();
     const [inputType, setInputType] = useState("password");
 
@@ -142,6 +142,12 @@ const SimulatePassword = memo(
     useEffect(() => {
       isDisabled && inputType !== "password" && setInputType("password");
     }, [isDisabled]);
+
+    useEffect(() => {
+      if (inputValue !== undefined) {
+        setPassword(inputValue);
+      }
+    }, [inputValue]);
 
     return (
       <StyledBody

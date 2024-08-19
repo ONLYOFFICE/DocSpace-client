@@ -37,10 +37,12 @@ const {
   userStore,
   bannerStore,
   settingsStore,
+  currentTariffStatusStore,
 }: {
   userStore: UserStore;
   bannerStore: BannerStore;
   authStore: any;
+  currentTariffStatusStore: any;
   settingsStore: SettingsStore;
 } = store;
 
@@ -49,6 +51,7 @@ export class RootStore {
   userStore = userStore;
   bannerStore = bannerStore;
   settingsStore = settingsStore;
+  currentTariffStatusStore = currentTariffStatusStore;
   spacesStore = new SpacesStore(this.settingsStore);
 }
 

@@ -111,6 +111,7 @@ export const ImageViewer = ({
   const toolbarRef = useRef<ImperativeHandle>(null);
 
   const [scale, setScale] = useState(1);
+  const [showOriginSrc, setShowOriginSrc] = useState(false);
   const [isError, setIsError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [backgroundBlack, setBackgroundBlack] = useState<boolean>(() => false);
@@ -854,18 +855,19 @@ export const ImageViewer = ({
     }
   };
 
-  const onError = useCallback(
-    (e: SyntheticEvent<HTMLImageElement, Event>) => {
-      if (window.ClientConfig?.imageThumbnails && thumbnailSrc && src) {
-        // if thumbnailSrc is unavailable, try to load original image
-        e.currentTarget.src = src;
-        return;
-      }
+  const onError = useCallback(() => {
+    if (
+      window.ClientConfig?.imageThumbnails &&
+      thumbnailSrc &&
+      (src || isTiff)
+    ) {
+      // if thumbnailSrc is unavailable, try to load original image
+      setShowOriginSrc(true);
+      return;
+    }
 
-      setIsError(true);
-    },
-    [src, thumbnailSrc],
-  );
+    setIsError(true);
+  }, [src, thumbnailSrc, isTiff]);
 
   const model = React.useMemo(() => contextModel(true), [contextModel]);
 
@@ -951,6 +953,16 @@ export const ImageViewer = ({
     };
   }, []);
 
+  useLayoutEffect(() => {
+    return () => {
+      if (imgRef.current) {
+        // abort img loading
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        imgRef.current.src = "";
+      }
+    };
+  }, []);
+
   return (
     <>
       {isMobile && !backgroundBlack && mobileDetails}
@@ -973,8 +985,10 @@ export const ImageViewer = ({
           <Image
             draggable="false"
             src={
-              window.ClientConfig?.imageThumbnails && thumbnailSrc
-                ? `${thumbnailSrc}&size=3840x2160`
+              window.ClientConfig?.imageThumbnails &&
+              thumbnailSrc &&
+              !showOriginSrc
+                ? `${thumbnailSrc}&size=3840x2160&view=true`
                 : src
             }
             ref={imgRef}
@@ -982,6 +996,7 @@ export const ImageViewer = ({
             onDoubleClick={handleDoubleTapOrClick}
             onLoad={imageLoaded}
             onError={onError}
+            onContextMenu={(event) => event.preventDefault()}
           />
         </ImageWrapper>
       </ImageViewerContainer>

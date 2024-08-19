@@ -64,6 +64,7 @@ const NextcloudWorkspace = (props: WorkspaceProps) => {
       }
       setIsMigrationInit(true);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!ready) return <SelectFileLoader />;
@@ -81,28 +82,30 @@ const NextcloudWorkspace = (props: WorkspaceProps) => {
   );
 };
 
-export default inject<TStore>(({ settingsStore, importAccountsStore }) => {
-  const {
-    filteredUsers,
-    step,
-    setStep,
-    setWorkspace,
-    migratingWorkspace,
-    migrationPhase,
-    isMigrationInit,
-    setIsMigrationInit,
-  } = importAccountsStore;
-  const { theme } = settingsStore;
+export const Component = inject<TStore>(
+  ({ settingsStore, importAccountsStore }) => {
+    const {
+      filteredUsers,
+      step,
+      setStep,
+      setWorkspace,
+      migratingWorkspace,
+      migrationPhase,
+      isMigrationInit,
+      setIsMigrationInit,
+    } = importAccountsStore;
+    const { theme } = settingsStore;
 
-  return {
-    theme,
-    filteredUsers,
-    step,
-    setStep,
-    setWorkspace,
-    migratingWorkspace,
-    migrationPhase,
-    isMigrationInit,
-    setIsMigrationInit,
-  };
-})(observer(NextcloudWorkspace));
+    return {
+      theme,
+      filteredUsers,
+      step,
+      setStep,
+      setWorkspace,
+      migratingWorkspace,
+      migrationPhase,
+      isMigrationInit,
+      setIsMigrationInit,
+    };
+  },
+)(observer(NextcloudWorkspace));

@@ -63,7 +63,7 @@ const AccessSelector = (props: AccessSelectorProps) => {
       options={accessRights as TOption[]}
       size={ComboBoxSize.content}
       scaled={false}
-      manualWidth="fit-content"
+      manualWidth="auto"
       selectedOption={selectedAccessRight as TOption}
       showDisabledItems
       directionX="right"
@@ -81,7 +81,7 @@ const AccessSelector = (props: AccessSelectorProps) => {
       directionX="right"
       directionY="top"
       fixedDirection={isMobileView}
-      manualWidth={isMobileView ? "fit-content" : `${width}px`}
+      manualWidth={isMobileView ? "auto" : `${width}px`}
       isAside={isMobileView}
       manualY={isMobileView ? "0px" : undefined}
       withoutBackground={isMobileView}

@@ -42,7 +42,7 @@ const InfoWrapper = styled.div`
 const InfoText = styled(Text)`
   max-width: 660px;
   white-space: break-spaces;
-  margin: 0 0 8px 0;
+  margin: 0 0 8px;
   line-height: 20px;
   color: ${(props) => props.theme.client.settings.common.descriptionColor};
 `;
@@ -50,9 +50,10 @@ const InfoText = styled(Text)`
 InfoText.defaultProps = { theme: Base };
 
 const StyledGuideLink = styled(Link)`
-  color: ${(props) => (props.theme.isBase ? "#316DAA" : "#4781D1")};
+  color: ${(props) => props.theme.client.settings.webhooks.linkColor};
+
   &:hover {
-    color: ${(props) => (props.theme.isBase ? "#316DAA" : "#4781D1")};
+    color: ${(props) => props.theme.client.settings.webhooks.linkColor};
   }
 `;
 

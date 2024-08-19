@@ -31,10 +31,11 @@ import { isMobile } from "../../../utils/device";
 
 import { Calendar } from "../../calendar";
 import { ShareCalendarProps } from "../Share.types";
+import { StyledDropDown } from "../Share.styled";
 
 const StyledCalendar = styled(Calendar)`
   position: absolute;
-  right: 32px;
+  inset-inline-end: 32px;
 
   ${(props) =>
     props.isMobile &&
@@ -50,12 +51,15 @@ const ShareCalendar = ({
   closeCalendar,
   calendarRef,
   locale,
+  bodyRef,
+  useDropDown,
 }: ShareCalendarProps) => {
   const selectedDate = moment();
   const maxDate = moment().add(10, "years");
 
-  return (
+  const calendarComponent = (
     <StyledCalendar
+      className="share-link_calendar"
       selectedDate={selectedDate}
       setSelectedDate={onDateSet}
       onChange={closeCalendar}
@@ -65,6 +69,19 @@ const ShareCalendar = ({
       minDate={selectedDate}
       maxDate={maxDate}
     />
+  );
+
+  return useDropDown ? (
+    <StyledDropDown
+      open
+      isDefaultMode
+      forwardedRef={bodyRef}
+      eventTypes={["mousedown"]}
+    >
+      {calendarComponent}
+    </StyledDropDown>
+  ) : (
+    calendarComponent
   );
 };
 

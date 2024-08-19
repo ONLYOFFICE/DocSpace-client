@@ -40,10 +40,7 @@ const StyledInfoPanelToggleWrapper = styled.div<{
   align-items: center;
   justify-content: center;
 
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `padding-left: 20px;`
-      : `padding-right: 20px;`}
+  padding-inline-end: 20px;
 
   .info-panel-toggle-bg {
     height: 32px;

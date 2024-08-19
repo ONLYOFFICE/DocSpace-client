@@ -416,7 +416,7 @@ const Wizard = (props) => {
                 </FieldContainer>
               )}
               <StyledInfo>
-                <Text color="#A3A9AE" fontWeight={400}>
+                <Text className="text" fontWeight={400}>
                   {t("Common:Domain")}
                 </Text>
                 <Text fontWeight={600} className="machine-name">
@@ -424,7 +424,7 @@ const Wizard = (props) => {
                 </Text>
               </StyledInfo>
               <StyledInfo>
-                <Text color="#A3A9AE" fontWeight={400}>
+                <Text className="text" fontWeight={400}>
                   {t("Common:Language")}
                 </Text>
                 <div className="wrapper__language-selector">
@@ -452,7 +452,7 @@ const Wizard = (props) => {
                 </div>
               </StyledInfo>
               <StyledInfo>
-                <Text color="#A3A9AE" fontWeight={400}>
+                <Text className="text" fontWeight={400}>
                   {t("Timezone")}
                 </Text>
                 <ComboBox
@@ -522,54 +522,56 @@ const Wizard = (props) => {
   );
 };
 
-export default inject(({ authStore, settingsStore, wizardStore }) => {
-  const {
-    passwordSettings,
-    wizardToken,
-    timezone,
-    urlLicense,
-    hashSettings,
-    setWizardComplete,
-    getPortalTimezones,
-    getPortalPasswordSettings,
-    theme,
-  } = settingsStore;
+export const WrappedComponent = inject(
+  ({ authStore, settingsStore, wizardStore }) => {
+    const {
+      passwordSettings,
+      wizardToken,
+      timezone,
+      urlLicense,
+      hashSettings,
+      setWizardComplete,
+      getPortalTimezones,
+      getPortalPasswordSettings,
+      theme,
+    } = settingsStore;
 
-  const { language } = authStore;
-  const {
-    isWizardLoaded,
-    machineName,
-    isLicenseRequired,
-    licenseUpload,
-    setIsWizardLoaded,
-    getMachineName,
-    getIsRequiredLicense,
+    const { language } = authStore;
+    const {
+      isWizardLoaded,
+      machineName,
+      isLicenseRequired,
+      licenseUpload,
+      setIsWizardLoaded,
+      getMachineName,
+      getIsRequiredLicense,
 
-    setLicense,
-    resetLicenseUploaded,
-  } = wizardStore;
+      setLicense,
+      resetLicenseUploaded,
+    } = wizardStore;
 
-  return {
-    theme,
-    isLoaded: authStore.isLoaded,
-    culture: language,
-    wizardToken,
-    passwordSettings,
-    timezone,
-    urlLicense,
-    hashSettings,
-    isWizardLoaded,
-    machineName,
-    isLicenseRequired,
-    licenseUpload,
-    setWizardComplete,
-    getPortalPasswordSettings,
-    getPortalTimezones,
-    setIsWizardLoaded,
-    getMachineName,
-    getIsRequiredLicense,
+    return {
+      theme,
+      isLoaded: authStore.isLoaded,
+      culture: language,
+      wizardToken,
+      passwordSettings,
+      timezone,
+      urlLicense,
+      hashSettings,
+      isWizardLoaded,
+      machineName,
+      isLicenseRequired,
+      licenseUpload,
+      setWizardComplete,
+      getPortalPasswordSettings,
+      getPortalTimezones,
+      setIsWizardLoaded,
+      getMachineName,
+      getIsRequiredLicense,
 
-    setLicense,
-    resetLicenseUploaded,
-  };
-})(withCultureNames(observer(Wizard)));
+      setLicense,
+      resetLicenseUploaded,
+    };
+  },
+)(withCultureNames(observer(Wizard)));

@@ -149,7 +149,7 @@ const UsersTableRow = (props: TypeSelectTableRowProps) => {
             size={ComboBoxSize.content}
             displaySelectedOption
             modernView
-            manualWidth="fit-content"
+            manualWidth="auto"
           />
         </div>
       </TableCell>

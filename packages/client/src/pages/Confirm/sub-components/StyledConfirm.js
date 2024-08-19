@@ -25,11 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import {
-  mobile,
-  tablet,
-  getCorrectFourValuesStyle,
-} from "@docspace/shared/utils";
+import { mobile, tablet } from "@docspace/shared/utils";
 
 export const StyledPage = styled.div`
   display: flex;
@@ -45,8 +41,8 @@ export const StyledPage = styled.div`
 
   @media ${mobile} {
     width: 100%;
-    padding: ${({ theme }) =>
-      getCorrectFourValuesStyle("32px 8px 0 16px", theme.interfaceDirection)};
+    padding-block: 32px 0;
+    padding-inline: 16px 8px;
 
     .language-combo-box {
       display: none;
@@ -68,7 +64,7 @@ export const StyledPage = styled.div`
 
   .language-combo-box {
     position: absolute;
-    right: 28px;
+    inset-inline-end: 28px;
     top: 28px;
   }
 `;

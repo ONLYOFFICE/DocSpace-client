@@ -35,6 +35,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { UnavailableStyles } from "../../../utils/commonSettingsStyles";
 import { mobile, tablet } from "@docspace/shared/utils";
 import { Badge } from "@docspace/shared/components/badge";
+import { globalColors } from "@docspace/shared/themes";
 
 const StyledTextInput = styled(TextInput)`
   margin-top: 4px;
@@ -56,11 +57,12 @@ const MainContainer = styled.div`
   .paid-badge {
     cursor: auto;
     margin-bottom: 8px;
-    margin-left: -2px;
+    margin-inline-start: -2px;
   }
 
   .login-history-description {
     color: ${(props) => props.theme.client.settings.common.descriptionColor};
+    padding-bottom: 24px;
   }
 
   .save-cancel {
@@ -74,17 +76,13 @@ const MainContainer = styled.div`
 
   .login-subheader {
     font-size: 13px;
-    color: #657077;
+    color: ${(props) =>
+      props.theme.client.settings.security.loginHistory.subheaderColor};
   }
 
   .latest-text {
     font-size: 13px;
     padding: 20px 0 16px;
-  }
-
-  .download-text {
-    font-size: 13px;
-    padding: 16px 0 24px 0;
   }
 
   .storage-label {
@@ -173,7 +171,6 @@ const HistoryMainContent = (props) => {
     lifetime,
     saveButtonLabel,
     cancelButtonLabel,
-    downloadText,
     setLifetimeAuditSettings,
     securityLifetime,
     content,
@@ -317,7 +314,11 @@ const HistoryMainContent = (props) => {
         <Badge
           className="paid-badge"
           fontWeight="700"
-          backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
+          backgroundColor={
+            theme.isBase
+              ? globalColors.favoritesStatus
+              : globalColors.favoriteStatusDark
+          }
           label={t("Common:Paid")}
           isPaidBadge={true}
         />
@@ -384,9 +385,6 @@ const HistoryMainContent = (props) => {
             />
           </>
         )} */}
-        <Text className="download-text settings_unavailable">
-          {downloadText}
-        </Text>
       </div>
       {content}
       <DownLoadWrapper>

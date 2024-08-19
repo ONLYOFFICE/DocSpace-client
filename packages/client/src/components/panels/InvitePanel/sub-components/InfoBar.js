@@ -35,7 +35,7 @@ import { Text } from "@docspace/shared/components/text";
 const StyledInfoBar = styled.div`
   display: flex;
   background-color: ${(props) => props.theme.infoBar.background};
-  color: #333;
+  color: ${(props) => props.theme.infoBar.textColor};
   font-size: 12px;
   padding: 12px 16px;
   border-radius: 6px;
@@ -55,7 +55,7 @@ const StyledInfoBar = styled.div`
     .header-icon {
       svg {
         path {
-          fill: #ed7309;
+          fill: ${(props) => props.theme.infoBar.iconFill};
         }
       }
     }
@@ -69,7 +69,8 @@ const StyledInfoBar = styled.div`
     font-weight: 400;
   }
   .close-icon {
-    margin: 3px 1px 0px 0px;
+    margin-block: 3px 0;
+    margin-inline: 0 1px;
     path {
       fill: ${({ theme }) => theme.iconButton.color};
     }

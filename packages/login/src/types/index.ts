@@ -44,6 +44,7 @@ export type TDataContext = {
 
 export type GreetingContainersProps = {
   greetingSettings?: string;
+  culture?: string;
 };
 
 export type LoginProps = {
@@ -89,6 +90,8 @@ export type LoginFormProps = {
   cookieSettingsEnabled: boolean;
   clientId?: string;
   client?: IClientProps;
+  ldapDomain?: string;
+  ldapEnabled?: boolean;
 };
 
 export type ForgotPasswordModalDialogProps = {

@@ -44,12 +44,12 @@ export const StyledComboBox = styled(ComboBox)<{ withBorder: boolean }>`
       `};
 
     :hover {
-      border-color: rgb(163, 169, 174);
+      border-color: ${(props) => props.theme.comboBox.button.hoverBorderColor};
     }
   }
 
   .combo-button_selected-icon-container {
-    margin-right: 0px;
+    margin-inline-end: 0px;
   }
   .combo-buttons_arrow-icon {
     margin: 0;

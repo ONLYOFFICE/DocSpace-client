@@ -26,6 +26,7 @@
 
 import styled from "styled-components";
 import { tablet } from "@docspace/shared/utils";
+import { globalColors } from "../../themes";
 
 const StyledPreparationPortal = styled.div<{
   errorMessage?: boolean;
@@ -40,7 +41,7 @@ const StyledPreparationPortal = styled.div<{
     font-size: 23px;
   }
   #text {
-    color: #a3a9ae;
+    color: ${globalColors.gray};
     font-size: 13px;
     line-height: 20px;
     max-width: 480px;

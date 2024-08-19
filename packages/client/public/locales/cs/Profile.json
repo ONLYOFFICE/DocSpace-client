@@ -1,5 +1,6 @@
 {
   "ActiveSessions": "Aktivní relace",
+  "AutoDeleteTitle": "Všechny relace starší než 60 dní budou automaticky odstraněny.",
   "ChangeEmailSuccess": "E-mail byl úspěšně změněn ",
   "ChangePasswordAfterLoggingOut": "Změna hesla po odhlášení",
   "ConnectSocialNetworks": "Připojte své sociální sítě",
@@ -14,7 +15,6 @@
   "InterfaceTheme": "Vzhled prostředí",
   "LightTheme": "Světlý motiv",
   "LogoutActiveConnection": "Odhlášení z aktivního připojení",
-  "LogoutAllActiveConnections": "Odhlášení ze všech aktivních připojení",
   "LogoutAllActiveSessionsDescription": "Všechna aktivní připojení kromě tohoto připojení budou odhlášena, protože jsou právě používána.",
   "LogoutBtn": "Odhlášení",
   "LogoutDescription": "Poznámka. Všechna aktivní připojení kromě tohoto připojení budou odhlášena, protože jsou právě používána.",
@@ -27,5 +27,6 @@
   "SuccessLogout": "Aktivní připojení bylo odhlášeno: {{platform}}, {{browser}}",
   "SystemTheme": "Použít systémový motiv",
   "SystemThemeDescription": "Automatické přepínání mezi světlými a tmavými motivy v souladu s vaším systémem.",
+  "TerminateAllSessions": "Ukončení všech relací kromě aktuální",
   "TwoFactorDescription": "Dvoufázové ověřování prostřednictvím aplikace generující kódy bylo správcem povoleno pro všechny uživatele."
 }

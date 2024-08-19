@@ -27,7 +27,7 @@
 import React, { PropsWithChildren } from "react";
 import styled, { css } from "styled-components";
 
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 
 import type { StyledSocialButtonProps } from "./SocialButton.types";
 
@@ -180,14 +180,7 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
     text-overflow: ${(props) => props.theme.socialButton.text.textOverflow};
     white-space: ${(props) => props.theme.socialButton.text.whiteSpace};
 
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 16px;
-          `
-        : css`
-            padding-right: 16px;
-          `}
+    padding-inline-end: 16px;
   }
 
   svg {
@@ -199,7 +192,8 @@ const StyledSocialButton = styled(ButtonWrapper).attrs((props) => ({
 
     path {
       fill: ${(props) => props.isConnect && props.theme.socialButton.svg.fill};
-      fill: ${(props) => !props.theme.isBase && !props.isConnect && "#FFFFFF"};
+      fill: ${(props) =>
+        !props.theme.isBase && !props.isConnect && globalColors.white};
     }
   }
 

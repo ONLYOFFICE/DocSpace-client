@@ -36,10 +36,7 @@ const StyledOwnerInfo = styled.div`
   margin-bottom: 24px;
 
   .info {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `padding-right: 16px;`
-        : `padding-left: 16px;`}
+    padding-inline-start: 16px;
     display: flex;
     flex-direction: column;
 
@@ -94,10 +91,7 @@ const StyledPeopleSelector = styled.div`
 
     color: ${(props) => props.theme.dialogs.disableText};
 
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: 8px;`
-        : `margin-left: 8px;`}
+    margin-inline-start: 8px;
   }
 `;
 

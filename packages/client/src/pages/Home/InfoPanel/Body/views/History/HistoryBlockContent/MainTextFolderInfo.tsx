@@ -27,6 +27,7 @@
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { TTranslation } from "@docspace/shared/types";
+import { FolderType } from "@docspace/shared/enums";
 import { StyledHistoryBlockMessage } from "../../../styles/history";
 
 type HistoryMainTextFolderInfoProps = {
@@ -40,24 +41,41 @@ const HistoryMainTextFolderInfo = ({
   feed,
   selectedFolderId,
 }: HistoryMainTextFolderInfoProps) => {
-  if (
-    feed.data.parentId === selectedFolderId ||
-    feed.data.toFolderId === selectedFolderId
-  )
+  const {
+    parentId,
+    toFolderId,
+    parentTitle,
+    parentType,
+    fromParentType,
+    fromParentTitle,
+  } = feed.data;
+
+  if (parentId === selectedFolderId || toFolderId === selectedFolderId)
     return null;
 
-  const destination =
-    feed.data.parentType === 0 || feed.data.toParentType === 0
-      ? t("FeedLocationLabel", {
-          folderTitle: feed.data.parentTitle || feed.data.toFolderTitle,
-        })
-      : t("FeedLocationRoomLabel", {
-          folderTitle: feed.data.parentTitle || feed.data.toFolderTitle,
-        });
+  if (!parentTitle) return null;
+
+  const isSection = parentType === FolderType.USER;
+  const isFolder = parentType === FolderType.DEFAULT;
+  const isFromFolder = fromParentType === FolderType.DEFAULT;
+
+  const destination = isFolder
+    ? t("FeedLocationLabel", { folderTitle: parentTitle })
+    : isSection
+      ? t("FeedLocationSectionLabel", { folderTitle: parentTitle })
+      : t("FeedLocationRoomLabel", { folderTitle: parentTitle });
+
+  const sourceDestination = isFromFolder
+    ? t("FeedLocationLabelFrom", { folderTitle: fromParentTitle })
+    : t("FeedLocationRoomLabel", { folderTitle: parentTitle });
+
+  const className = isFromFolder ? "source-folder-label" : "folder-label";
 
   return (
     <StyledHistoryBlockMessage className="message">
-      <span className="folder-label">{destination}</span>
+      <span className={className}>
+        {isFromFolder ? sourceDestination : destination}
+      </span>
     </StyledHistoryBlockMessage>
   );
 };

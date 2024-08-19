@@ -6,7 +6,6 @@
   "AttributeMatchingTooltip": "Kertakirjautumisattribuuttien viestintä Tilit-osion merkintöjen kanssa.",
   "Binding": "Sitova:",
   "CertificateExist": "Saman toimintotyypin sertifikaatti on jo olemassa",
-  "ConfirmationText": "Kaikki syöttämäsi tieto menetetään. Haluatko varmasti jatkaa?",
   "CustomEntryButton": "Mukautetun sisäänkirjautumispainikkeen teksti",
   "CustomEntryTooltip": "Painikkeen kuvateksti, jota käytetään tilaan sisäänkirjautumiseen kertakirjautumispalvelun avulla",
   "DownloadMetadataXML": "Lataa SP-metadata XML",

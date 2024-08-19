@@ -83,11 +83,7 @@ const SettingsContainer = ({
   const renderBody = () => (
     <>
       {!isMobileView && (
-        <HideButton
-          text={t("Settings:LDAP")}
-          value={isSettingsShown}
-          isDisabled={!isLdapAvailable}
-        />
+        <HideButton text={t("Settings:LDAP")} value={isSettingsShown} />
       )}
 
       {isMobileView && <ToggleLDAP />}
@@ -129,20 +125,22 @@ const SettingsContainer = ({
   return <>{renderBody()}</>;
 };
 
-export default inject(({ settingsStore, currentQuotaStore, ldapStore }) => {
-  const { isLdapAvailable } = currentQuotaStore;
-  const { currentDeviceType } = settingsStore;
-  const { isSettingsShown, isCertificateDialogVisible, isLoaded, load } =
-    ldapStore;
+export const SettingsContainerSection = inject(
+  ({ settingsStore, currentQuotaStore, ldapStore }) => {
+    const { isLdapAvailable } = currentQuotaStore;
+    const { currentDeviceType } = settingsStore;
+    const { isSettingsShown, isCertificateDialogVisible, isLoaded, load } =
+      ldapStore;
 
-  const isMobileView = currentDeviceType === DeviceType.mobile;
+    const isMobileView = currentDeviceType === DeviceType.mobile;
 
-  return {
-    isLdapAvailable,
-    isSettingsShown,
-    isMobileView,
-    isCertificateDialogVisible,
-    isLoaded,
-    load,
-  };
-})(observer(SettingsContainer));
+    return {
+      isLdapAvailable,
+      isSettingsShown,
+      isMobileView,
+      isCertificateDialogVisible,
+      isLoaded,
+      load,
+    };
+  },
+)(observer(SettingsContainer));

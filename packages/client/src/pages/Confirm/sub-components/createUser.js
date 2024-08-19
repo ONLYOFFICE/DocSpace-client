@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import SsoReactSvgUrl from "PUBLIC_DIR/images/sso.react.svg?url";
+import SsoReactSvg from "PUBLIC_DIR/images/sso.react.svg";
 
 import React, { useEffect, useState, useCallback } from "react";
 import { withTranslation, Trans } from "react-i18next";
@@ -74,6 +74,8 @@ import LanguageComboboxWrapper from "./LanguageCombobox";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 
 import { setCookie } from "@docspace/shared/utils/cookie";
+import ConfirmRoute from "SRC_DIR/helpers/confirmRoute";
+import { AuthenticatedAction } from "SRC_DIR/helpers/enums";
 
 const DEFAULT_ROOM_TEXT =
   "<strong>{{firstName}} {{lastName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
@@ -320,7 +322,9 @@ const CreateUserForm = (props) => {
       culture: currentCultureName,
     };
 
-    signupOAuth(signupAccount)
+    const confirmKey = linkData.confirmHeader;
+
+    signupOAuth(signupAccount, confirmKey)
       .then(() => {
         const url = roomData.roomId
           ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}/`
@@ -467,7 +471,7 @@ const CreateUserForm = (props) => {
     ? {
         ssoUrl: capabilities?.ssoUrl,
         ssoLabel: capabilities?.ssoLabel,
-        ssoSVG: SsoReactSvgUrl,
+        ssoSVG: SsoReactSvg,
       }
     : {};
 
@@ -483,7 +487,7 @@ const CreateUserForm = (props) => {
           <PortalLogo className="portal-logo" />
           {linkData.type === "LinkInvite" && (
             <div className="tooltip">
-              <Text fontSize="16px">
+              <Text fontSize="16px" as="div" className="invitation-text">
                 {roomName ? (
                   <Trans
                     t={t}
@@ -705,9 +709,7 @@ const CreateUserForm = (props) => {
             {!emailFromLink && (oauthDataExists() || ssoExists()) && (
               <>
                 <div className="line">
-                  <Text color="#A3A9AE" className="or-label">
-                    {t("Common:orContinueWith")}
-                  </Text>
+                  <Text className="or-label">{t("Common:orContinueWith")}</Text>
                 </div>
                 <SocialButtonsGroup
                   providers={providers}
@@ -725,7 +727,7 @@ const CreateUserForm = (props) => {
   );
 };
 
-export default inject(({ settingsStore, authStore }) => {
+const ComponentWrapper = inject(({ settingsStore, authStore }) => {
   const { providers, thirdPartyLogin, capabilities } = authStore;
   const {
     passwordSettings,
@@ -758,3 +760,11 @@ export default inject(({ settingsStore, authStore }) => {
     ),
   ),
 );
+
+export const Component = () => {
+  return (
+    <ConfirmRoute doAuthenticated={AuthenticatedAction.None}>
+      <ComponentWrapper />
+    </ConfirmRoute>
+  );
+};

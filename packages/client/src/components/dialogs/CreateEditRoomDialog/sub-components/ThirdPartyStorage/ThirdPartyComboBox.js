@@ -50,7 +50,7 @@ const StyledStorageLocation = styled.div`
     }
 
     .combo-button {
-      padding-left: 8px;
+      padding-inline-start: 8px;
     }
   }
 
@@ -239,7 +239,7 @@ const ThirdPartyComboBox = ({
           scaled
           withBackdrop={isMobile}
           size="content"
-          manualWidth={"fit-content"}
+          manualWidth={"auto"}
           isMobileView={isMobileOnly}
           directionY="both"
           displaySelectedOption

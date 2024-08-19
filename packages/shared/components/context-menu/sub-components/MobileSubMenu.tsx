@@ -44,9 +44,9 @@ const MobileSubMenu = (props: {
   onLeafClick: (e: React.MouseEvent) => void;
   root?: boolean;
   resetMenu: boolean;
-  onLoad?: () => Promise<ContextMenuModel[]>;
+  mobileSubMenuItems?: ContextMenuModel[];
 }) => {
-  const { onLeafClick, root, resetMenu, onLoad } = props;
+  const { onLeafClick, root, resetMenu, mobileSubMenuItems } = props;
 
   const [submenu, setSubmenu] = useState<null | ContextMenuModel[]>(null);
 
@@ -91,16 +91,12 @@ const MobileSubMenu = (props: {
     }
   });
 
-  const fetchSubMenu = React.useCallback(async () => {
-    const res = await onLoad?.();
-    if (res) setSubmenu(res);
-
-    position();
-  }, [position, setSubmenu, onLoad]);
-
   useEffect(() => {
-    if (onLoad) fetchSubMenu();
-  }, [onLoad, fetchSubMenu]);
+    if (!mobileSubMenuItems?.length) return;
+
+    setSubmenu(mobileSubMenuItems);
+    position();
+  }, [mobileSubMenuItems, mobileSubMenuItems?.length, position]);
 
   const onItemClick = (e: React.MouseEvent, item: ContextMenuType) => {
     const { disabled, url, onClick, items, action } = item;

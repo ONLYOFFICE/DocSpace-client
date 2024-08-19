@@ -49,13 +49,18 @@ import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 const StyledComponent = styled.div`
   .link {
     font-weight: 600;
-    border-bottom: 1px dashed #333333;
-    border-color: ${(props) => !props.isSettingPaid && "#A3A9AE"};
+    border-bottom: ${(props) =>
+      props.theme.client.settings.common.companyInfo.border};
+    border-color: ${(props) =>
+      !props.isSettingPaid &&
+      props.theme.client.settings.common.companyInfo.color};
   }
 
   .description,
   .link {
-    color: ${(props) => !props.isSettingPaid && "#A3A9AE"};
+    color: ${(props) =>
+      !props.isSettingPaid &&
+      props.theme.client.settings.common.companyInfo.color};
   }
 
   .text-input {
@@ -78,7 +83,7 @@ const StyledComponent = styled.div`
   }
 `;
 
-const CompanyInfoSettings = (props) => {
+const CompanyInfoSettingsComponent = (props) => {
   const {
     t,
     isSettingPaid,
@@ -495,38 +500,42 @@ const CompanyInfoSettings = (props) => {
   );
 };
 
-export default inject(({ settingsStore, common, currentQuotaStore }) => {
-  const {
-    setIsLoadedCompanyInfoSettingsData,
-    isLoadedCompanyInfoSettingsData,
-  } = common;
+export const CompanyInfoSettings = inject(
+  ({ settingsStore, common, currentQuotaStore }) => {
+    const {
+      setIsLoadedCompanyInfoSettingsData,
+      isLoadedCompanyInfoSettingsData,
+    } = common;
 
-  const {
-    getCompanyInfoSettings,
+    const {
+      getCompanyInfoSettings,
 
-    companyInfoSettingsIsDefault,
+      companyInfoSettingsIsDefault,
 
-    companyInfoSettingsData,
-    buildVersionInfo,
-    deviceType,
-  } = settingsStore;
+      companyInfoSettingsData,
+      buildVersionInfo,
+      deviceType,
+    } = settingsStore;
 
-  const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
+    const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
 
-  return {
-    getCompanyInfoSettings,
+    return {
+      getCompanyInfoSettings,
 
-    companyInfoSettingsIsDefault,
+      companyInfoSettingsIsDefault,
 
-    companyInfoSettingsData,
-    setIsLoadedCompanyInfoSettingsData,
-    isLoadedCompanyInfoSettingsData,
-    buildVersionInfo,
-    isSettingPaid: isBrandingAndCustomizationAvailable,
-    deviceType,
-  };
-})(
+      companyInfoSettingsData,
+      setIsLoadedCompanyInfoSettingsData,
+      isLoadedCompanyInfoSettingsData,
+      buildVersionInfo,
+      isSettingPaid: isBrandingAndCustomizationAvailable,
+      deviceType,
+    };
+  },
+)(
   withLoading(
-    withTranslation(["Settings", "Common"])(observer(CompanyInfoSettings)),
+    withTranslation(["Settings", "Common"])(
+      observer(CompanyInfoSettingsComponent),
+    ),
   ),
 );

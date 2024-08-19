@@ -44,7 +44,7 @@ const EmptyFolderWrapper = styled.div`
         .first-button {
           display: flex;
           .empty-folder_container-icon {
-            margin-right: 8px;
+            margin-inline-end: 8px;
           }
         }
       }
@@ -57,6 +57,10 @@ const EmptyFolderWrapper = styled.div`
     .second-description {
       margin: 32px 0 24px;
       text-align: center;
+
+      & > span {
+        color: ${(props) => props.theme.filesEmptyContainer.descriptionColor};
+      }
     }
 
     .empty-folder_container-image {
@@ -64,14 +68,8 @@ const EmptyFolderWrapper = styled.div`
     }
 
     .empty-folder_container-icon {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin: 4px 0 0 4px;
-            `
-          : css`
-              margin: 4px 4px 0 0;
-            `}
+      margin-block: 4px 0;
+      margin-inline: 0 4px;
 
       cursor: pointer;
     }

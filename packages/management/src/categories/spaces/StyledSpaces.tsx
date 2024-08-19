@@ -71,14 +71,18 @@ const ConfigurationWrapper = styled.div`
       margin-bottom: 20px;
     }
     &-domain-text {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl"
-          ? `padding-left: 2px;`
-          : `padding-right: 2px;`}
+      padding-inline-end: 2px;
     }
     &-configuration-title {
       padding-bottom: 8px;
     }
+    &-input-subheader {
+      color: ${({ theme }) => theme.management.textColor};
+    }
+  }
+
+  .error-text {
+    color: ${({ theme }) => theme.management.errorColor};
   }
 `;
 

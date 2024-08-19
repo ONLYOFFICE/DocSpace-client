@@ -49,25 +49,29 @@ import type { ComboButtonProps } from "../Combobox.types";
 
 const ComboButton = (props: ComboButtonProps) => {
   const {
-    noBorder,
     onClick,
-    isDisabled,
+
     innerContainer,
-    innerContainerClassName = "innerContainer",
+
     selectedOption,
     optionsLength = 0,
-    withOptions = true,
-    withAdvancedOptions = false,
-    isOpen,
-    scaled = false,
-    size,
+
     comboIcon,
     fillIcon,
-    modernView = false,
-    tabIndex,
-    isLoading,
+
     type,
     plusBadgeValue,
+    noBorder = false,
+    isDisabled = false,
+    withOptions = true,
+    withAdvancedOptions = false,
+    innerContainerClassName = "innerContainer",
+    isOpen = false,
+    size = ComboBoxSize.content,
+    scaled = false,
+    modernView = false,
+    tabIndex = -1,
+    isLoading = false,
   } = props;
 
   const defaultOption = selectedOption?.default;
@@ -172,20 +176,6 @@ const ComboButton = (props: ComboButtonProps) => {
       )}
     </ComboButtonTheme>
   );
-};
-
-ComboButton.defaultProps = {
-  noBorder: false,
-  isDisabled: false,
-  withOptions: true,
-  withAdvancedOptions: false,
-  innerContainerClassName: "innerContainer",
-  isOpen: false,
-  size: ComboBoxSize.content,
-  scaled: false,
-  modernView: false,
-  tabIndex: -1,
-  isLoading: false,
 };
 
 export { ComboButton };

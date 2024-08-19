@@ -55,7 +55,7 @@ const StyledBody = styled.div`
     display: flex;
     align-items: center;
     p {
-      margin-right: 8px;
+      margin-inline-end: 8px;
     }
   }
   svg {

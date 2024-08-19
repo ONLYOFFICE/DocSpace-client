@@ -24,8 +24,41 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const DEFAULT_MIN_COLUMN_SIZE = 110;
-export const SETTINGS_SIZE = 24;
-export const CONTAINER_MARGIN = 25;
-export const MIN_SIZE_FIRST_COLUMN = 210;
-export const TABLE_HEADER_HEIGHT = 40;
+import styled from "styled-components";
+
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { mobile } from "@docspace/shared/utils";
+
+const StyledModalDialog = styled(ModalDialog)`
+  .heading {
+    font-size: 21px;
+  }
+
+  .generate {
+    font-weight: 600;
+  }
+
+  .text-area {
+    width: 488px !important;
+    height: 72px !important;
+    margin-top: 4px;
+
+    &-label {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    @media ${mobile} {
+      width: 100% !important;
+    }
+  }
+  .text-area-label {
+    margin-top: 16px;
+  }
+
+  .modal-combo {
+    margin: 16px 0 0 0;
+  }
+`;
+
+export default StyledModalDialog;

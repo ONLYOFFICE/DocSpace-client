@@ -116,6 +116,13 @@ const LOADER_TIMER = 500;
 let loadingTime;
 let timer;
 
+const systemFolders = [
+  FolderType.InProgress,
+  FolderType.Done,
+  FolderType.SubFolderDone,
+  FolderType.SubFolderInProgress,
+];
+
 class ContextOptionsStore {
   settingsStore;
   dialogsStore;
@@ -181,7 +188,11 @@ class ContextOptionsStore {
   };
 
   onClickLinkFillForm = (item) => {
-    if (!item.startFilling)
+    const isFormRoom =
+      this.selectedFolderStore?.roomType === RoomsType.FormRoom ||
+      this.selectedFolderStore?.parentRoomType === FolderType.FormRoom;
+
+    if (!item.startFilling && item.isPDFForm && !isFormRoom)
       return this.dialogsStore.setFillPDFDialogData(true, item);
 
     return this.gotoDocEditor(false, item);
@@ -409,7 +420,9 @@ class ContextOptionsStore {
 
     const isShared = shared || sharedItem;
 
-    if (isShared && !isArchive) {
+    const isSystemFolder = systemFolders.includes(item.type);
+
+    if (isShared && !isArchive && !isSystemFolder) {
       try {
         const itemLink = item.isFolder
           ? await getFolderLink(item.id)
@@ -965,7 +978,7 @@ class ContextOptionsStore {
     const filterUrlParams = filesFilter.toUrlParams();
     const url = getCategoryUrl(
       this.filesStore.categoryType,
-      filterUrlParams.folder,
+      filesFilter.folder,
     );
 
     navigate(
@@ -1211,6 +1224,8 @@ class ContextOptionsStore {
       );
     }
 
+    const { isPublicRoom } = this.publicRoomStore;
+
     const { contextOptions, isEditing } = item;
 
     const isRootThirdPartyFolder =
@@ -1241,71 +1256,10 @@ class ContextOptionsStore {
       !contextOptions.includes("finalize-version") &&
       contextOptions.includes("show-version-history");
 
-    const versionActions = isDesktop()
-      ? onlyShowVersionHistory
-        ? [
-            {
-              id: "option_show-version-history",
-              key: "show-version-history",
-              label: t("ShowVersionHistory"),
-              icon: HistoryReactSvgUrl,
-              onClick: () =>
-                this.showVersionHistory(
-                  item.id,
-                  item.security,
-                  item?.requestToken,
-                ),
-              disabled: false,
-            },
-          ]
-        : [
-            {
-              id: "option_version",
-              key: "version",
-              label: t("VersionHistory"),
-              icon: HistoryFinalizedReactSvgUrl,
-              items: [
-                {
-                  id: "option_finalize-version",
-                  key: "finalize-version",
-                  label: t("FinalizeVersion"),
-                  icon: HistoryFinalizedReactSvgUrl,
-                  onClick: () =>
-                    isEditing
-                      ? this.onShowEditingToast(t)
-                      : this.finalizeVersion(item.id, item.security),
-                  disabled: false,
-                },
-                {
-                  id: "option_version-history",
-                  key: "show-version-history",
-                  label: t("ShowVersionHistory"),
-                  icon: HistoryReactSvgUrl,
-                  onClick: () =>
-                    this.showVersionHistory(
-                      item.id,
-                      item.security,
-                      item?.requestToken,
-                    ),
-                  disabled: false,
-                },
-              ],
-            },
-          ]
-      : [
+    const versionActions = onlyShowVersionHistory
+      ? [
           {
-            id: "option_finalize-version",
-            key: "finalize-version",
-            label: t("FinalizeVersion"),
-            icon: HistoryFinalizedReactSvgUrl,
-            onClick: () =>
-              isEditing
-                ? this.onShowEditingToast(t)
-                : this.finalizeVersion(item.id),
-            disabled: false,
-          },
-          {
-            id: "option_version-history",
+            id: "option_show-version-history",
             key: "show-version-history",
             label: t("ShowVersionHistory"),
             icon: HistoryReactSvgUrl,
@@ -1317,8 +1271,43 @@ class ContextOptionsStore {
               ),
             disabled: false,
           },
+        ]
+      : [
+          {
+            id: "option_version",
+            key: "version",
+            label: t("VersionHistory"),
+            icon: HistoryFinalizedReactSvgUrl,
+            items: [
+              {
+                id: "option_finalize-version",
+                key: "finalize-version",
+                label: t("FinalizeVersion"),
+                icon: HistoryFinalizedReactSvgUrl,
+                onClick: () =>
+                  isEditing
+                    ? this.onShowEditingToast(t)
+                    : this.finalizeVersion(item.id, item.security),
+                disabled: false,
+              },
+              {
+                id: "option_version-history",
+                key: "show-version-history",
+                label: t("ShowVersionHistory"),
+                icon: HistoryReactSvgUrl,
+                onClick: () =>
+                  this.showVersionHistory(
+                    item.id,
+                    item.security,
+                    item?.requestToken,
+                  ),
+                disabled: false,
+              },
+            ],
+          },
         ];
-    const moveActions = isDesktop()
+
+    const moveActions = !isInfoPanel
       ? [
           {
             id: "option_move-or-copy",
@@ -1403,9 +1392,11 @@ class ContextOptionsStore {
 
     const isArchive = item.rootFolderType === FolderType.Archive;
 
-    const hasShareLinkRights = item.shared
+    const hasShareLinkRights = isPublicRoom
       ? item.security?.Read
-      : item.security?.EditAccess;
+      : item.shared
+        ? item.security.CopySharedLink
+        : item.security?.EditAccess;
 
     const optionsModel = [
       {
@@ -1540,7 +1531,7 @@ class ContextOptionsStore {
           if (primaryLink) {
             copyShareLink(primaryLink.sharedTo.shareLink);
             item.shared
-              ? toastr.success(t("Files:LinkSuccessfullyCopied"))
+              ? toastr.success(t("Common:LinkSuccessfullyCopied"))
               : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
             setShareChanged(true);
           }
@@ -1578,7 +1569,7 @@ class ContextOptionsStore {
         label: t("Common:Info"),
         icon: InfoOutlineReactSvgUrl,
         onClick: () => this.onShowInfoPanel(item),
-        disabled: this.publicRoomStore.isPublicRoom,
+        disabled: isPublicRoom,
       },
       ...pinOptions,
       ...muteOptions,
@@ -1756,8 +1747,7 @@ class ContextOptionsStore {
         label: t("LeaveTheRoom"),
         icon: LeaveRoomSvgUrl,
         onClick: this.onLeaveRoom,
-        disabled:
-          isArchive || !item.inRoom || this.publicRoomStore.isPublicRoom,
+        disabled: isArchive || !item.inRoom || isPublicRoom,
       },
       {
         id: "option_unarchive-room",
@@ -1799,7 +1789,7 @@ class ContextOptionsStore {
     const pluginItems = this.onLoadPlugins(item);
 
     if (pluginItems.length > 0) {
-      if (!isDesktop() || pluginItems.length === 1) {
+      if (pluginItems.length === 1) {
         pluginItems.forEach((plugin) => {
           options.splice(1, 0, {
             id: `option_${plugin.key}`,
@@ -1933,7 +1923,7 @@ class ContextOptionsStore {
       selection.findIndex((k) => k.security.Download) !== -1;
 
     const favoriteItems = selection.filter((k) =>
-      k.contextOptions.includes("mark-as-favorite"),
+      k.contextOptions?.includes("mark-as-favorite"),
     );
 
     const moveItems = selection.filter((k) =>

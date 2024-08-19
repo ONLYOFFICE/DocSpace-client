@@ -115,7 +115,7 @@ const AttributeMapping = (props) => {
           labelVisible={true}
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.firstName}
-          labelText={t("LdapFirstName")}
+          labelText={t("Common:FirstName")}
           isRequired
         >
           <LdapFieldComponent
@@ -126,46 +126,6 @@ const AttributeMapping = (props) => {
             scale
             isDisabled={!isLdapEnabled || isUIDisabled}
             tabIndex={7}
-          />
-        </FieldContainer>
-
-        <FieldContainer
-          style={FIELD_STYLE}
-          isVertical
-          labelVisible={true}
-          errorMessage={t("Common:EmptyFieldError")}
-          hasError={errors.mail}
-          labelText={t("LdapMail")}
-          isRequired
-        >
-          <LdapFieldComponent
-            name={MAIL}
-            hasError={errors.mail}
-            onChange={onChangeValue}
-            value={mail}
-            scale
-            isDisabled={!isLdapEnabled || isUIDisabled}
-            tabIndex={9}
-          />
-        </FieldContainer>
-
-        <FieldContainer
-          style={FIELD_STYLE}
-          isVertical
-          labelVisible={true}
-          hasError={errors.userQuotaLimit}
-          labelText={t("LdapQuota")}
-          tooltipContent={t("LdapUserQuotaTooltip")}
-          inlineHelpButton
-        >
-          <TextInput
-            name={QUOTA}
-            hasError={errors.userQuotaLimit}
-            onChange={onChangeValue}
-            value={userQuotaLimit}
-            scale
-            isDisabled={!isLdapEnabled || isUIDisabled}
-            tabIndex={11}
           />
         </FieldContainer>
 
@@ -193,6 +153,26 @@ const AttributeMapping = (props) => {
           style={FIELD_STYLE}
           isVertical
           labelVisible={true}
+          errorMessage={t("Common:EmptyFieldError")}
+          hasError={errors.mail}
+          labelText={t("LdapMail")}
+          isRequired
+        >
+          <LdapFieldComponent
+            name={MAIL}
+            hasError={errors.mail}
+            onChange={onChangeValue}
+            value={mail}
+            scale
+            isDisabled={!isLdapEnabled || isUIDisabled}
+            tabIndex={9}
+          />
+        </FieldContainer>
+
+        <FieldContainer
+          style={FIELD_STYLE}
+          isVertical
+          labelVisible={true}
           hasError={errors.avatarAttribute}
           labelText={t("LdapAvatar")}
         >
@@ -204,6 +184,26 @@ const AttributeMapping = (props) => {
             scale
             isDisabled={!isLdapEnabled || isUIDisabled}
             tabIndex={10}
+          />
+        </FieldContainer>
+
+        <FieldContainer
+          style={FIELD_STYLE}
+          isVertical
+          labelVisible={true}
+          hasError={errors.userQuotaLimit}
+          labelText={t("LdapQuota")}
+          tooltipContent={t("LdapUserQuotaTooltip")}
+          inlineHelpButton
+        >
+          <TextInput
+            name={QUOTA}
+            hasError={errors.userQuotaLimit}
+            onChange={onChangeValue}
+            value={userQuotaLimit}
+            scale
+            isDisabled={!isLdapEnabled || isUIDisabled}
+            tabIndex={11}
           />
         </FieldContainer>
       </Box>

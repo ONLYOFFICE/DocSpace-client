@@ -76,7 +76,7 @@ const WebhookEventDetails = (props) => {
   );
 };
 
-export default inject(({ webhooksStore }) => {
+export const Component = inject(({ webhooksStore }) => {
   const { fetchEventData, fetchConfigName, configName } = webhooksStore;
 
   return { fetchEventData, fetchConfigName, configName };

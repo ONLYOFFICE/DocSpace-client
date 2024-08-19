@@ -31,7 +31,7 @@ export const GroupMember = styled.div<{ isExpect: boolean }>`
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 8px 0;
+  padding: 8px 16px;
 
   .avatar {
     min-width: 32px;
@@ -42,16 +42,19 @@ export const GroupMember = styled.div<{ isExpect: boolean }>`
     overflow: auto;
   }
 
-  .name-wrapper,
+  .info,
   .role-email {
     display: flex;
+  }
+
+  .info {
+    flex-direction: column;
   }
 
   .name {
     font-weight: 600;
     font-size: 14px;
-    line-height: ${({ theme }) =>
-      theme.interfaceDirection === "rtl" ? `20px` : `16px`};
+    line-height: 16px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -59,11 +62,19 @@ export const GroupMember = styled.div<{ isExpect: boolean }>`
       props.isExpect && `color: ${props.theme.infoPanel.members.isExpectName}`};
   }
 
+  .email {
+    color: ${({ theme }) => theme.sideBarRow.metaDataColor};
+    font-size: 12px;
+    line-height: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
   .me-label {
     font-weight: 600;
     font-size: 14px;
-    line-height: ${({ theme }) =>
-      theme.interfaceDirection === "rtl" ? `20px` : `16px`};
+    line-height: 16px;
     color: ${(props) => props.theme.infoPanel.members.meLabelColor};
     padding-inline-start: 8px;
     margin-inline-start: -8px;

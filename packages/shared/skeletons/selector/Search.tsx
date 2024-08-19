@@ -44,7 +44,12 @@ const SearchLoader = ({
     <RectangleSkeleton
       width="calc(100% - 16px)"
       height="32px"
-      style={{ padding: "0 0 0 16px", marginBottom: "8px", ...style }}
+      style={{
+        paddingBlock: "0",
+        paddingInline: "16px 0",
+        marginBottom: "8px",
+        ...style,
+      }}
       {...rest}
     />
   );

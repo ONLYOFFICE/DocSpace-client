@@ -155,13 +155,6 @@ class FilesActionStore {
     this.isBulkDownload = isBulkDownload;
   };
 
-  isMediaOpen = () => {
-    const { visible, setMediaViewerData, playlist } = this.mediaViewerDataStore;
-    if (visible && playlist.length === 1) {
-      setMediaViewerData({ visible: false, id: null });
-    }
-  };
-
   updateCurrentFolder = (fileIds, folderIds, clearSelection, operationId) => {
     const { clearSecondaryProgressData } =
       this.uploadDataStore.secondaryProgressDataStore;
@@ -390,8 +383,6 @@ class FilesActionStore {
     addActiveItems(null, folderIds, destFolderId);
 
     if (folderIds.length || fileIds.length) {
-      this.isMediaOpen();
-
       try {
         this.filesStore.setOperationAction(true);
         this.setGroupMenuBlocked(true);
@@ -852,7 +843,6 @@ class FilesActionStore {
 
     if (isFile) {
       addActiveItems([itemId], null, destFolderId);
-      this.isMediaOpen();
       return deleteFile(itemId)
         .then(async (res) => {
           if (res[0]?.error) return Promise.reject(res[0].error);
@@ -1458,6 +1448,23 @@ class FilesActionStore {
     const filter = FilesFilter.getDefault();
 
     filter.folder = id;
+
+    if (isRoom) {
+      const key =
+        categoryType === CategoryType.Archive
+          ? `UserFilterArchiveRoom=${this.userStore.user?.id}`
+          : `UserFilterSharedRoom=${this.userStore.user?.id}`;
+
+      const filterStorageSharedRoom =
+        this.userStore.user?.id && localStorage.getItem(key);
+
+      if (filterStorageSharedRoom) {
+        const splitFilter = filterStorageSharedRoom.split(",");
+
+        filter.sortBy = splitFilter[0];
+        filter.sortOrder = splitFilter[1];
+      }
+    }
 
     const url = getCategoryUrl(categoryType, id);
 
@@ -2334,7 +2341,8 @@ class FilesActionStore {
   onMarkAsRead = (item) => this.markAsRead([], [`${item.id}`], item);
 
   openFileAction = (item, t, e) => {
-    const { openDocEditor, isPrivacyFolder, setSelection } = this.filesStore;
+    const { openDocEditor, isPrivacyFolder, setSelection, categoryType } =
+      this.filesStore;
     const { currentDeviceType } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
     const { enablePlugins } = this.settingsStore;
@@ -2384,6 +2392,30 @@ class FilesActionStore {
       );
 
       const filter = FilesFilter.getDefault();
+
+      const filterObj = FilesFilter.getFilter(window.location);
+
+      if (isRoom) {
+        const key =
+          categoryType === CategoryType.Archive
+            ? `UserFilterArchiveRoom=${this.userStore.user?.id}`
+            : `UserFilterSharedRoom=${this.userStore.user?.id}`;
+
+        const filterStorageSharedRoom =
+          this.userStore.user?.id && localStorage.getItem(key);
+
+        if (filterStorageSharedRoom) {
+          const splitFilter = filterStorageSharedRoom.split(",");
+
+          filter.sortBy = splitFilter[0];
+          filter.sortOrder = splitFilter[1];
+        }
+      } else {
+        // For the document section at all levels there is one sorting
+        filter.sortBy = filterObj.sortBy;
+        filter.sortOrder = filterObj.sortOrder;
+      }
+
       filter.folder = id;
 
       const url = `${path}?${filter.toUrlParams()}`;
@@ -2462,6 +2494,9 @@ class FilesActionStore {
     const { clearFiles, setBufferSelection } = this.filesStore;
     const { clearInsideGroup, insideGroupBackUrl } =
       this.peopleStore.groupsStore;
+    const { isLoading } = this.clientLoadingStore;
+
+    if (isLoading) return;
 
     setBufferSelection(null);
 
@@ -2604,6 +2639,11 @@ class FilesActionStore {
     const { navigationPath, rootFolderType } = this.selectedFolderStore;
 
     const filter = FilesFilter.getDefault();
+
+    const filterObj = FilesFilter.getFilter(window.location);
+
+    filter.sortBy = filterObj.sortBy;
+    filter.sortOrder = filterObj.sortOrder;
 
     filter.folder = id;
 

@@ -5,6 +5,7 @@
   "ExpiredCode": "このコードは有効期限が切られています。新しいコードをリクエストして、もう一度ご入力ください。",
   "ForgotPassword": "パスワードをお忘れですか？",
   "InvalidCode": "このコードが無効です。もう一度ご入力ください。",
+  "LDAPUsernamePlaceholder": "{{ldap_domain}}のユーザーネーム",
   "MessageAuthorize": "ログインして続ける",
   "MessageEmailConfirmed": "あなたのメールは正常に作動しました。",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "登録時に使用したメールアドレスを入力してください。パスワード回復の手順がそれに送られます。",
@@ -20,5 +21,7 @@
   "RegistrationEmailWatermark": "メール",
   "RememberHelper": "デフォルトのセッションライフタイムは20分です。このオプションをチェックすると、1年間に設定されます。独自の値を設定するには、「設定」で設定します。",
   "ResendCode": "コードの再送信",
+  "SignInLDAP": "{{ldap_domain}}にサインインする",
+  "SignInLdapHelper": "企業ドメインの認証情報を使用してください",
   "UserIsAlreadyRegistered": "ユーザー<1>{{email}}</1>はすでにこの{{productName}}に登録されています。パスワードを入力するか、前に戻って別のメールアドレスでログインしてください。"
 }

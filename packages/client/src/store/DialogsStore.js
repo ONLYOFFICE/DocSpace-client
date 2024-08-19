@@ -129,6 +129,8 @@ class DialogsStore {
     file: null,
   };
 
+  warningQuotaDialogVisible = false;
+
   constructor(
     authStore,
     treeFoldersStore,
@@ -549,6 +551,10 @@ class DialogsStore {
       visible,
       file,
     };
+  };
+
+  setWarningQuotaDialogVisible = (visible) => {
+    this.warningQuotaDialogVisible = visible;
   };
 
   setRoomLogoCoverDialogVisible = (visible) => {

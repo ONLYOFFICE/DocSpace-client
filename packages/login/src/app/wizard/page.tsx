@@ -33,16 +33,11 @@ import {
   getPortalTimeZones,
   getPortalCultures,
 } from "@/utils/actions";
-import { redirect } from "next/navigation";
 
 async function Page() {
   const settings = await getSettings();
 
   const objectSettings = typeof settings === "string" ? undefined : settings;
-
-  if (!objectSettings || !objectSettings.wizardToken) {
-    redirect("/");
-  }
 
   const [
     passwordSettings,
@@ -65,9 +60,9 @@ async function Page() {
       isRequiredLicense={isRequiredLicense}
       portalCultures={portalCultures}
       portalTimeZones={portalTimeZones}
-      culture={objectSettings.culture}
+      culture={objectSettings?.culture}
       wizardToken={objectSettings?.wizardToken}
-      passwordHash={objectSettings.passwordHash}
+      passwordHash={objectSettings?.passwordHash}
     />
   );
 }

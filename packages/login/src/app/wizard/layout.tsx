@@ -24,17 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
-import { ThemeKeys } from "@docspace/shared/enums";
 import { getBgPattern } from "@docspace/shared/utils/common";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 import SimpleNav from "@/components/SimpleNav";
-
 import { getColorTheme, getSettings } from "@/utils/actions";
 import {
   WizardContent,
@@ -52,12 +49,13 @@ export default async function Layout({
     getColorTheme(),
   ]);
 
-  const cookieStore = cookies();
-
-  const bgPattern = getBgPattern(colorTheme?.selected);
-
   const objectSettings = typeof settings === "string" ? undefined : settings;
 
+  if (!objectSettings || !objectSettings.wizardToken) {
+    redirect("/");
+  }
+
+  const bgPattern = getBgPattern(colorTheme?.selected);
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <SimpleNav isLanguageComboboxVisible={false} />

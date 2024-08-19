@@ -675,10 +675,12 @@ class GroupsStore {
       }
 
       if (getIsInsideGroup() && this.currentGroup?.id === groupId) {
+        const filter = this.insideGroupFilter.clone();
+
         this.setCurrentGroup(res);
-        const members = await api.people.getUserList(
-          this.insideGroupFilter.clone(),
-        );
+        const members = await api.people.getUserList(filter);
+        filter.total = members.total;
+        this.setInsideGroupFilter(filter);
         this.peopleStore.usersStore.setUsers(members.items);
         this.setInsideGroupTempTitle(res.name);
       }

@@ -50,7 +50,6 @@ function ConfirmRoute(props: ConfirmRouteProps) {
     children,
     confirmLinkResult,
     confirmLinkParams,
-    confirmType,
   } = props;
 
   const [stateData, setStateData] = useState<TConfirmRouteContext | undefined>(
@@ -115,11 +114,6 @@ function ConfirmRoute(props: ConfirmRouteProps) {
         notFound();
     }
   }
-
-  if (!confirmType && confirmLinkParams.type)
-    window.location.replace(
-      `/confirm/${confirmLinkParams.type}?${searchParams.toString()}`,
-    );
 
   return (
     <ConfirmRouteContext.Provider

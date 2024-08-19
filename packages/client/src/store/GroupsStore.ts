@@ -152,6 +152,24 @@ class GroupsStore {
     return false;
   }
 
+  get insideGroupIsFiltered() {
+    return (
+      this.insideGroupFilter.activationStatus ||
+      this.insideGroupFilter.employeeStatus ||
+      this.insideGroupFilter.payments ||
+      this.insideGroupFilter.search ||
+      this.insideGroupFilter.role ||
+      this.insideGroupFilter.accountLoginType
+    );
+  }
+
+  get isCurrentGroupEmpty() {
+    return (
+      !this.insideGroupIsFiltered &&
+      this.peopleStore.usersStore.peopleList.length === 0
+    );
+  }
+
   // Inside Group Filter
 
   setInsideGroupFilter = (filter) => {

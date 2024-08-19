@@ -30,6 +30,8 @@ import ConfirmRoute from "@/components/ConfirmRoute";
 import { StyledBody, StyledPage } from "@/components/StyledConfirm.styled";
 import { TConfirmLinkParams } from "@/types";
 import { checkConfirmLink, getSettings } from "@/utils/actions";
+import { ValidationResult } from "@/utils/enums";
+import { redirect } from "next/navigation";
 
 export default async function Layout({
   children,
@@ -54,20 +56,35 @@ export default async function Layout({
     checkConfirmLink(confirmLinkParams),
   ]);
 
+  const isUserExisted =
+    confirmLinkResult?.result == ValidationResult.UserExisted;
+  const isUserUserExcluded =
+    confirmLinkResult?.result == ValidationResult.UserExcluded;
+  const objectSettings = typeof settings === "string" ? undefined : settings;
+
+  if (isUserExisted) {
+    const finalUrl = confirmLinkResult?.roomId
+      ? `/rooms/shared/${confirmLinkResult?.roomId}/filter?folder=${confirmLinkResult?.roomId}`
+      : objectSettings?.defaultPage;
+
+    redirect(finalUrl ?? "/");
+  }
+
+  if (isUserUserExcluded) {
+    redirect(objectSettings?.defaultPage ?? "/");
+  }
+
   return (
     <StyledPage id="confirm-page">
       <StyledBody id="confirm-body">
-        {settings && typeof settings !== "string" && (
-          <ConfirmRoute
-            defaultPage={settings?.defaultPage}
-            socketUrl={settings?.socketUrl}
-            confirmLinkResult={confirmLinkResult}
-            confirmLinkParams={confirmLinkParams}
-            confirmType={type}
-          >
-            {children}
-          </ConfirmRoute>
-        )}
+        <ConfirmRoute
+          defaultPage={objectSettings?.defaultPage}
+          socketUrl={objectSettings?.socketUrl}
+          confirmLinkResult={confirmLinkResult}
+          confirmLinkParams={confirmLinkParams}
+        >
+          {children}
+        </ConfirmRoute>
       </StyledBody>
     </StyledPage>
   );

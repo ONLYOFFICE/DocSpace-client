@@ -37,13 +37,15 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
 import {
   getSettingsThirdParty,
-  getThirdPartyCapabilities,
   uploadBackup,
 } from "@docspace/shared/api/files";
 import i18n from "../i18n";
+import { connectedCloudsTypeTitleTranslation } from "../helpers/filesUtils.js";
+
 const { EveryDayType, EveryWeekType } = AutoBackupPeriod;
 
 class BackupStore {
+  thirdPartyStore = null;
   restoreResource = null;
 
   backupSchedule = {};
@@ -100,11 +102,12 @@ class BackupStore {
   selectedThirdPartyAccount = null;
   connectedThirdPartyAccount = null;
   accounts = [];
-  capabilities = [];
   connectedAccount = [];
 
-  constructor() {
+  constructor(thirdPartyStore) {
     makeAutoObservable(this);
+
+    this.thirdPartyStore = thirdPartyStore;
   }
 
   setConnectedThirdPartyAccount = (account) => {
@@ -195,37 +198,20 @@ class BackupStore {
     return false;
   }
 
-  setThirdPartyAccountsInfo = async () => {
-    const [connectedAccount, capabilities] = await Promise.all([
+  setThirdPartyAccountsInfo = async (t) => {
+    const [connectedAccount, providers] = await Promise.all([
       getSettingsThirdParty(),
-      getThirdPartyCapabilities(),
+      this.thirdPartyStore.fetchConnectingStorages(),
     ]);
 
-    this.setCapabilities(capabilities);
     this.setConnectedThirdPartyAccount(connectedAccount);
-
-    const providerNames = [
-      ["GoogleDrive", i18n.t("Translations:TypeTitleGoogle")],
-      ["Box", i18n.t("Translations:TypeTitleBoxNet")],
-      ["DropboxV2", i18n.t("Translations:TypeTitleDropBox")],
-      ["SharePoint", i18n.t("Translations:TypeTitleSharePoint")],
-      ["OneDrive", i18n.t("Translations:TypeTitleSkyDrive")],
-      ["WebDav", "Nextcloud"],
-      ["WebDav", "ownCloud"],
-      ["kDrive", i18n.t("Translations:TypeTitlekDrive")],
-      ["Yandex", i18n.t("Translations:TypeTitleYandex")],
-      ["WebDav", i18n.t("Translations:TypeTitleWebDav")],
-    ];
 
     let accounts = [],
       selectedAccount = {};
     let index = 0;
-    providerNames.map((item) => {
-      const { account, isConnected } = this.getThirdPartyAccount(
-        item[0],
-        item[1],
-        index,
-      );
+
+    providers.map((item) => {
+      const { account, isConnected } = this.getThirdPartyAccount(item, t);
 
       if (!account) return;
 
@@ -248,28 +234,23 @@ class BackupStore {
     );
   };
 
-  getThirdPartyAccount = (providerKey, serviceTitle, index) => {
-    const accountIndex =
-      this.capabilities &&
-      this.capabilities.findIndex((x) => x[0] === providerKey);
-
-    if (accountIndex === -1) return { account: null, isConnected: false };
+  getThirdPartyAccount = (provider, t) => {
+    const serviceTitle = connectedCloudsTypeTitleTranslation(provider.name, t);
 
     const isConnected =
       this.connectedThirdPartyAccount?.providerKey === "WebDav"
         ? serviceTitle === this.connectedThirdPartyAccount?.title
-        : this.capabilities[accountIndex][0] ===
-          this.connectedThirdPartyAccount?.providerKey;
+        : provider.key === this.connectedThirdPartyAccount?.providerKey;
 
     const account = {
-      key: index.toString(),
+      key: provider.name,
       label: serviceTitle,
       title: serviceTitle,
-      provider_key: this.capabilities[accountIndex][0],
-      ...(this.capabilities[accountIndex][1] && {
-        provider_link: this.capabilities[accountIndex][1],
+      provider_key: provider.key,
+      ...(provider.clientId && {
+        provider_link: provider.clientId,
       }),
-      connected: isConnected,
+      storageIsConnected: isConnected,
       ...(isConnected && {
         provider_id: this.connectedThirdPartyAccount?.providerId,
         id: this.connectedThirdPartyAccount.id,
@@ -279,9 +260,6 @@ class BackupStore {
     return { account, isConnected };
   };
 
-  setCapabilities = (capabilities) => {
-    this.capabilities = capabilities;
-  };
   setThirdPartyAccounts = (accounts) => {
     this.accounts = accounts;
   };

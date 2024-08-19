@@ -83,7 +83,7 @@ const DirectThirdPartyConnection = (props) => {
 
   const onSetSettings = async () => {
     try {
-      await setThirdPartyAccountsInfo();
+      await setThirdPartyAccountsInfo(t);
 
       setState({
         isLoading: false,
@@ -157,7 +157,7 @@ const DirectThirdPartyConnection = (props) => {
         provider_id,
       );
 
-      await setThirdPartyAccountsInfo();
+      await setThirdPartyAccountsInfo(t);
     } catch (e) {
       toastr.error(e);
     }
@@ -167,7 +167,10 @@ const DirectThirdPartyConnection = (props) => {
 
   const onSelectAccount = (options) => {
     const key = options.key;
-    setSelectedThirdPartyAccount({ ...accounts[+key] });
+
+    const account = accounts.find((t) => t.key === key);
+
+    setSelectedThirdPartyAccount(account);
   };
 
   const onDisconnect = () => {
@@ -187,7 +190,7 @@ const DirectThirdPartyConnection = (props) => {
         key: "Disconnect-settings",
         label: t("Common:Disconnect"),
         onClick: onDisconnect,
-        disabled: selectedThirdPartyAccount?.connected ? false : true,
+        disabled: selectedThirdPartyAccount?.storageIsConnected ? false : true,
         icon: AccessNoneReactSvgUrl,
       },
     ];

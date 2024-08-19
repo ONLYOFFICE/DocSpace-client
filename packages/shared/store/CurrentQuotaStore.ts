@@ -244,6 +244,9 @@ class CurrentQuotasStore {
   }
 
   get isRoomsTariffAlmostLimit() {
+    if (this.maxCountRoomsByQuota === PortalFeaturesLimitations.Limitless)
+      return false;
+
     return (
       this.maxCountRoomsByQuota - this.usedRoomsCount <=
         COUNT_FOR_SHOWING_BAR && this.usedRoomsCount < this.maxCountRoomsByQuota
@@ -251,6 +254,9 @@ class CurrentQuotasStore {
   }
 
   get isRoomsTariffLimit() {
+    if (this.maxCountRoomsByQuota === PortalFeaturesLimitations.Limitless)
+      return false;
+
     return (
       this.maxCountRoomsByQuota - this.usedRoomsCount <=
         COUNT_FOR_SHOWING_BAR &&
@@ -259,6 +265,9 @@ class CurrentQuotasStore {
   }
 
   get isStorageTariffAlmostLimit() {
+    if (this.maxTotalSizeByQuota === PortalFeaturesLimitations.Limitless)
+      return false;
+
     return (
       (this.usedTotalStorageSizeCount / this.maxTotalSizeByQuota) * 100 >=
         PERCENTAGE_FOR_SHOWING_BAR &&
@@ -267,6 +276,9 @@ class CurrentQuotasStore {
   }
 
   get isStorageTariffLimit() {
+    if (this.maxTotalSizeByQuota === PortalFeaturesLimitations.Limitless)
+      return false;
+
     return (
       (this.usedTotalStorageSizeCount / this.maxTotalSizeByQuota) * 100 >=
         PERCENTAGE_FOR_SHOWING_BAR &&
@@ -302,6 +314,9 @@ class CurrentQuotasStore {
   }
 
   get isUserTariffAlmostLimit() {
+    if (this.maxCountManagersByQuota === PortalFeaturesLimitations.Limitless)
+      return false;
+
     return (
       this.addedManagersCount > 1 &&
       this.maxCountManagersByQuota - this.addedManagersCount <=
@@ -311,6 +326,9 @@ class CurrentQuotasStore {
   }
 
   get isUserTariffLimit() {
+    if (this.maxCountManagersByQuota === PortalFeaturesLimitations.Limitless)
+      return false;
+
     return this.isPaidUserLimit;
   }
 

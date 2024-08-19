@@ -56,6 +56,7 @@ const EmptyContainer = ({
   isRoot,
   isPublicRoom,
   isEmptyPage,
+  isWarningRoomsDialog,
 }) => {
   //const location = useLocation();
 

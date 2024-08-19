@@ -41,9 +41,12 @@ const Auth = (props) => {
   const { linkData } = props;
   let [searchParams, setSearchParams] = useSearchParams();
   const { t } = useTranslation(["Common"]);
-  let referenceUrl = searchParams.get("referenceUrl");
-  const isFileHandler = referenceUrl.indexOf("filehandler.ashx") !== -1;
-  const isExternalDownloading = referenceUrl.indexOf("action=download") !== -1;
+
+  const referenceUrl = searchParams.get("referenceUrl");
+  const isFileHandler =
+    referenceUrl && referenceUrl.indexOf("filehandler.ashx") !== -1;
+  const isExternalDownloading =
+    referenceUrl && referenceUrl.indexOf("action=download") !== -1;
 
   useEffect(() => {
     loginWithConfirmKey({

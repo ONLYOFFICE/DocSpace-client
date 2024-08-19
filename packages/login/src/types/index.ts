@@ -172,6 +172,7 @@ export type GreetingCreateUserContainerProps = {
   firstName?: string;
   lastName?: string;
   culture?: string;
+  hostName?: string;
 };
 
 export type LoginProps = {

@@ -282,6 +282,7 @@ class GroupsStore {
     filter,
     updateFilter = false,
     withFilterLocalStorage = false,
+    updateCurrentGroup = false,
   ) => {
     this.setInsideGroupLoading(true);
 
@@ -309,7 +310,7 @@ class GroupsStore {
 
     requests.push(api.people.getUserList(filterData));
 
-    if (groupId !== this.currentGroup?.id) {
+    if (updateCurrentGroup || groupId !== this.currentGroup?.id) {
       requests.push(groupsApi.getGroupById(groupId));
     }
 
@@ -327,6 +328,18 @@ class GroupsStore {
     this.setInsideGroupLoading(false);
 
     return Promise.resolve(filteredMembersRes.items);
+  };
+
+  refreshInsideGroup = async () => {
+    if (!this.currentGroup) return;
+
+    await this.fetchGroup(
+      this.currentGroup.id,
+      this.insideGroupFilter,
+      true,
+      false,
+      true,
+    );
   };
 
   get hasMoreInsideGroupUsers() {

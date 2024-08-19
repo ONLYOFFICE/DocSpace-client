@@ -51,16 +51,6 @@ const StyledSsoPage = styled.div`
     margin-bottom: 4px;
   }
 
-  .field-label {
-    display: flex;
-    align-items: center;
-    height: auto;
-    font-weight: 600;
-    line-height: 20px;
-    overflow: visible;
-    white-space: normal;
-  }
-
   .xml-input {
     .field-label-icon {
       margin-bottom: 8px;

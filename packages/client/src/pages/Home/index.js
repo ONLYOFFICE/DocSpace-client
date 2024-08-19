@@ -160,6 +160,7 @@ const PureHome = (props) => {
     getFolderModel,
     scrollToTop,
     isEmptyGroups,
+    isCurrentGroupEmpty,
     wsCreatedPDFForm,
     disableUploadPanelOpen,
   } = props;
@@ -176,7 +177,11 @@ const PureHome = (props) => {
   const isPeopleAccounts = location.pathname.includes("accounts/people");
   const isGroupsAccounts =
     location.pathname.includes("accounts/groups") && !groupId;
-  const isAccountsEmptyFilter = isGroupsAccounts && isEmptyGroups;
+  const isInsideGroup =
+    location.pathname.includes("accounts/groups") && groupId;
+  const isAccountsEmptyFilter =
+    (isGroupsAccounts && isEmptyGroups) ||
+    (isInsideGroup && isCurrentGroupEmpty);
 
   const { onDrop } = useFiles({
     t,
@@ -574,6 +579,7 @@ export default inject(
       fetchGroup,
       groups,
       groupsIsFiltered,
+      isCurrentGroupEmpty,
     } = groupsStore;
     const isEmptyGroups =
       !groupsIsFiltered &&
@@ -692,6 +698,7 @@ export default inject(
       getFolderModel,
       scrollToTop,
       isEmptyGroups,
+      isCurrentGroupEmpty,
       wsCreatedPDFForm,
     };
   },

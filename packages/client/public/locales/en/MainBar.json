@@ -7,7 +7,7 @@
   "PersonalQuotaHeader": "Your personal storage quota exceeded",
   "PersonalQuotaHeaderForAdmins": "Storage quota per user exceeded",
   "PersonalUserQuotaAdminsDescription": "To upload and create new files and folders, please free up disk space, or manage quota per user in the <1>Storage management settings.</1>",
-  "PersonalUserQuotaDescription": "To upload and create new files and folders, please free up disk space, or contact the administrator to increase the storage quota.",
+  "PersonalUserQuotaDescription": "To upload and create new files and folders, please free up disk space, or contact the {{productName}} administrator to increase the storage quota.",
   "RemoveFilesOrClickToUpgrade": "Remove the unnecessary files or <1>click here</1> to upgrade your tariff plan.",
   "RemoveFilesOrContactToUpgrade": "Remove the unnecessary files or contact the {{productName}} administrator to upgrade the tariff plan.",
   "RemoveFilesOrContactToUpgradeQuota": "Remove the unnecessary files or contact the {{productName}} administrator to increase the storage quota.",

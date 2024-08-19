@@ -239,6 +239,7 @@ const contextOptionsStore = new ContextOptionsStore(
   pluginStore,
   infoPanelStore,
   currentTariffStatusStore,
+  currentQuotaStore,
   userStore,
   clientLoadingStore,
 );
@@ -291,6 +292,7 @@ const createEditRoomStore = new CreateEditRoomStore(
   infoPanelStore,
   currentQuotaStore,
   clientLoadingStore,
+  dialogsStore,
 );
 
 const webhooksStore = new WebhooksStore(settingsStore);

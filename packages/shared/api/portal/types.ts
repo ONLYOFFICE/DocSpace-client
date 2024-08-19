@@ -110,15 +110,6 @@ export type TTariff = {
   quotas: TQuotas[];
 };
 
-export type TTenantExtraRes = {
-  customMode: boolean;
-  opensource: boolean;
-  enterprise: boolean;
-  notPaid: boolean;
-  licenseAccept: Date;
-  enableTariffPage: boolean;
-};
-
 export type TRestoreProgress = {
   progress: number;
   error?: TError;

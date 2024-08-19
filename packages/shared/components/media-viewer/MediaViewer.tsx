@@ -64,6 +64,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
     pluginContextMenuItems,
     currentDeviceType,
     isPublicFile = false,
+    autoPlay = false,
 
     t,
     getIcon,
@@ -453,6 +454,7 @@ const MediaViewer = (props: MediaViewerProps): JSX.Element | undefined => {
       playlistPos={playlistPos}
       isPublicFile={isPublicFile}
       isPreviewFile={isPreviewFile}
+      autoPlay={autoPlay}
       currentDeviceType={currentDeviceType}
       onClose={onClose}
       onPrevClick={prevMedia}

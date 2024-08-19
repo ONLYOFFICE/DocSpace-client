@@ -29,14 +29,13 @@ import { useLocation } from "react-router-dom";
 
 // import { inject, observer } from "mobx-react";
 
-import { ContextMenu } from "@docspace/shared/components/context-menu";
-
 import {
   StyledDropZoneBody,
   StyledSpacer,
   StyledSectionBody,
 } from "../Section.styled";
 import { SectionBodyProps } from "../Section.types";
+import SectionContextMenu from "./SectionContextMenu";
 
 const SectionBody = React.memo(
   ({
@@ -53,48 +52,8 @@ const SectionBody = React.memo(
     getContextModel,
   }: SectionBodyProps) => {
     const focusRef = React.useRef<HTMLDivElement | null>(null);
-    const cmRef = React.useRef<null | {
-      show: (e: React.MouseEvent | MouseEvent) => void;
-      hide: (e: React.MouseEvent | MouseEvent) => void;
-      toggle: (e: React.MouseEvent | MouseEvent) => boolean;
-      getVisible: () => boolean;
-    }>(null);
+
     const location = useLocation();
-
-    const [isOpen, setIsOpen] = React.useState(false);
-
-    const onContextMenu = React.useCallback(
-      (e: MouseEvent | React.MouseEvent<Element, MouseEvent>) => {
-        const bodyElem = document.getElementsByClassName(
-          "section-body",
-        )[0] as HTMLDivElement;
-
-        const target = e.target as Node;
-
-        if (
-          !getContextModel ||
-          !getContextModel() ||
-          !bodyElem ||
-          !bodyElem.contains(target)
-        )
-          return;
-
-        e.stopPropagation();
-        e.preventDefault();
-
-        // if (cmRef.current) cmRef.current.toggle(e);
-        if (cmRef.current) {
-          if (!isOpen) cmRef?.current?.show(e);
-          else cmRef?.current?.hide(e);
-          setIsOpen(!isOpen);
-        }
-      },
-      [getContextModel, isOpen],
-    );
-
-    const onHide = () => {
-      setIsOpen(false);
-    };
 
     const focusSectionBody = React.useCallback(() => {
       if (focusRef.current) focusRef.current.focus({ preventScroll: true });
@@ -107,14 +66,6 @@ const SectionBody = React.memo(
       },
       [focusSectionBody],
     );
-
-    React.useEffect(() => {
-      document.addEventListener("contextmenu", onContextMenu);
-
-      return () => {
-        document.removeEventListener("contextmenu", onContextMenu);
-      };
-    }, [onContextMenu]);
 
     React.useEffect(() => {
       if (!autoFocus) return;
@@ -145,16 +96,6 @@ const SectionBody = React.memo(
         }
       : {};
 
-    const contextBlock = (
-      <ContextMenu
-        ref={cmRef}
-        onHide={onHide}
-        getContextModel={getContextModel}
-        withBackdrop
-        model={[]}
-      />
-    );
-
     return uploadFiles ? (
       <StyledDropZoneBody
         isDropZone
@@ -179,7 +120,7 @@ const SectionBody = React.memo(
           </div>
         )}
 
-        {contextBlock}
+        <SectionContextMenu getContextModel={getContextModel} />
       </StyledDropZoneBody>
     ) : (
       <StyledSectionBody
@@ -200,7 +141,7 @@ const SectionBody = React.memo(
         ) : (
           <div className="section-wrapper">{children}</div>
         )}
-        {contextBlock}
+        <SectionContextMenu getContextModel={getContextModel} />
       </StyledSectionBody>
     );
   },

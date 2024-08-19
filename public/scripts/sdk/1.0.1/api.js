@@ -817,7 +817,8 @@
 
         if (loader) {
           loader.remove();
-          this.config.events.onContentReady();
+          this.config.events?.onContentReady &&
+            this.config.events.onContentReady();
         }
       }
     }

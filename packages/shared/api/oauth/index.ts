@@ -273,3 +273,14 @@ export const revokeDeveloperToken = (
     true,
   );
 };
+
+export const introspectDeveloperToken = (token: string) => {
+  const params = new URLSearchParams();
+  params.append("token", token);
+
+  return request(
+    { method: "post", url: "/oauth2/revoke", data: params },
+    false,
+    true,
+  );
+};

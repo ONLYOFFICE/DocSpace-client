@@ -157,3 +157,19 @@ export type TGenerateDeveloperToken = {
   scope: string;
   token_type: string;
 };
+
+export type TIntrospectDeveloperToken = {
+  active: boolean;
+  sub: string;
+  aud: string[];
+  nbf: string;
+  scope: string;
+  iss: string;
+  exp: number;
+  iat: number;
+  jti: string;
+  tid: number;
+  cid: string;
+  client_id: string;
+  token_type: string;
+};

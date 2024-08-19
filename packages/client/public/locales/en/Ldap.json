@@ -36,6 +36,7 @@
   "LdapPortNumber": "Port Number",
   "LdapPortNumberTooltip": "Enter the port number for your LDAP server/Active Directory.",
   "LdapQuota": "User quota",
+  "LdapQuotaInfo": "To be able to use this attribute, enable user quota in the <0>Storage management settings</0>",
   "LdapSecondName": "Second name",
   "LdapSendWelcomeLetter": "Send welcome letter",
   "LdapSendWelcomeLetterTooltip": "If checked all new users will receive welcome letter. Available only when Mail Attribute is mapped to LDAP.",

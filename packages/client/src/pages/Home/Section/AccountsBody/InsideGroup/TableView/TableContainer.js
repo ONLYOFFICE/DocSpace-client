@@ -157,6 +157,7 @@ const Table = ({
   insideGroupIsLoading,
   fetchMoreInsideGroupUsers,
   insideGroupFilterTotal,
+  insideGroupIsFiltered,
   hasMoreInsideGroupUsers,
 }) => {
   const ref = useRef(null);
@@ -177,7 +178,7 @@ const Table = ({
   const isEmptyPage = !insideGroupIsLoading && peopleList.length === 0;
 
   return isEmptyPage ? (
-    <EmptyScreen />
+    <EmptyScreen isEmptyGroup={!insideGroupIsFiltered} />
   ) : (
     <StyledTableContainer useReactWindow={!withPaging} forwardedRef={ref}>
       <TableHeader
@@ -261,6 +262,7 @@ export default inject(
     const {
       insideGroupIsLoading,
       insideGroupFilterTotal,
+      insideGroupIsFiltered,
       hasMoreInsideGroupUsers,
       fetchMoreInsideGroupUsers,
     } = peopleStore.groupsStore;
@@ -286,6 +288,7 @@ export default inject(
       insideGroupIsLoading,
       fetchMoreInsideGroupUsers,
       insideGroupFilterTotal,
+      insideGroupIsFiltered,
       hasMoreInsideGroupUsers,
     };
   },

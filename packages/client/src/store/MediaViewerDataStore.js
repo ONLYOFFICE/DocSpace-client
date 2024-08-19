@@ -47,6 +47,8 @@ class MediaViewerDataStore {
 
   publicRoomStore;
 
+  autoPlay = true;
+
   id = null;
   visible = false;
   previewFile = null;
@@ -60,9 +62,14 @@ class MediaViewerDataStore {
     this.publicRoomStore = publicRoomStore;
   }
 
+  setAutoPlay = (value) => {
+    this.autoPlay = value;
+  };
+
   setMediaViewerData = (mediaData) => {
     this.id = mediaData.id;
     this.visible = mediaData.visible;
+    this.setAutoPlay(true);
 
     if (!mediaData.visible) this.setCurrentItem(null);
   };
@@ -109,6 +116,7 @@ class MediaViewerDataStore {
     )
       return;
 
+    this.setAutoPlay(false);
     this.previewFile = file;
     this.id = file.id;
     this.visible = visible;
@@ -167,6 +175,9 @@ class MediaViewerDataStore {
     if (postionIndex === 0) {
       return;
     }
+
+    this.setAutoPlay(false);
+
     const currentFileId = this.playlist[postionIndex].fileId;
 
     const targetFile = files.find((item) => item.id === currentFileId);
@@ -186,6 +197,8 @@ class MediaViewerDataStore {
     if (currentPlaylistPos === -1) {
       return;
     }
+
+    this.setAutoPlay(false);
 
     const currentFileId = this.playlist[currentPlaylistPos].fileId;
 

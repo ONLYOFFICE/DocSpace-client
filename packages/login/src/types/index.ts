@@ -158,7 +158,6 @@ export interface ConfirmRouteProps {
   children: ReactNode;
   confirmLinkResult: TConfirmLinkResult;
   confirmLinkParams: TConfirmLinkParams;
-  confirmType: string;
 }
 
 export type GreetingContainersProps = {

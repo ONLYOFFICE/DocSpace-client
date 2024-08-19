@@ -235,6 +235,8 @@ class BackupStore {
   };
 
   getThirdPartyAccount = (provider, t) => {
+    if (!provider.connected) return { account: null, isConnected: false };
+
     const serviceTitle = connectedCloudsTypeTitleTranslation(provider.name, t);
 
     const isConnected =

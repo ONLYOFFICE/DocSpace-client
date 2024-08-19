@@ -96,7 +96,7 @@ const InviteInput = ({
   standalone,
   isPaidUserAccess,
   setInvitePaidUsersCount,
-  isPaidUserLimit,
+  isUserTariffLimit,
 }) => {
   const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
@@ -148,7 +148,7 @@ const InviteInput = ({
 
       const itemsArray = addresses.map((address) => {
         if (isPaidAccess) {
-          if (isPaidUserLimit) {
+          if (isUserTariffLimit) {
             const FreeUser = isAccounts
               ? EmployeeType.Guest
               : getTopFreeRole(t, roomType)?.access;
@@ -178,7 +178,7 @@ const InviteInput = ({
     }
 
     if (isPaidAccess) {
-      if (isPaidUserLimit) {
+      if (isUserTariffLimit) {
         const FreeUser = isAccounts
           ? EmployeeType.Guest
           : getTopFreeRole(t, roomType)?.access;
@@ -312,7 +312,11 @@ const InviteInput = ({
           });
         }
 
-        if (isPaidUserLimit && item.isVisitor && isPaidUserRole(item.access)) {
+        if (
+          isUserTariffLimit &&
+          item.isVisitor &&
+          isPaidUserRole(item.access)
+        ) {
           const freeRole = getTopFreeRole(t, roomType)?.access;
 
           if (freeRole) {
@@ -382,7 +386,7 @@ const InviteInput = ({
       }
 
       if (
-        isPaidUserLimit &&
+        isUserTariffLimit &&
         (!u.avatar || u.isVisitor) &&
         isPaidUserRole(u.access)
       ) {
@@ -625,7 +629,7 @@ const InviteInput = ({
           isOwner={isOwner}
           isMobileView={isMobileView}
           {...(roomId === -1 && {
-            isSelectionDisabled: isPaidUserLimit,
+            isSelectionDisabled: isUserTariffLimit,
             selectionErrorText: <PaidQuotaLimitError />,
           })}
         />
@@ -669,7 +673,7 @@ export default inject(
     } = dialogsStore;
 
     const { culture: language, standalone } = settingsStore;
-    const { isPaidUserLimit } = currentQuotaStore;
+    const { isUserTariffLimit } = currentQuotaStore;
     return {
       language,
       setInviteLanguage,
@@ -683,7 +687,7 @@ export default inject(
       standalone,
       isPaidUserAccess,
       setInvitePaidUsersCount,
-      isPaidUserLimit,
+      isUserTariffLimit,
     };
   },
 )(

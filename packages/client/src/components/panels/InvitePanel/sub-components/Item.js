@@ -71,7 +71,7 @@ const Item = ({
   standalone,
   isPaidUserAccess,
   setInvitePaidUsersCount,
-  isPaidUserLimit,
+  isUserTariffLimit,
   roomId,
 }) => {
   const {
@@ -269,7 +269,7 @@ const Item = ({
             isMobileView={isMobileView}
             noBorder
             {...((roomId === -1 || !avatar || isVisitor) && {
-              isSelectionDisabled: isPaidUserLimit,
+              isSelectionDisabled: isUserTariffLimit,
               selectionErrorText: <PaidQuotaLimitError />,
               availableAccess,
             })}
@@ -307,12 +307,12 @@ const Item = ({
 export default inject(({ dialogsStore, currentQuotaStore }) => {
   const { isPaidUserAccess, setInvitePaidUsersCount, invitePanelOptions } =
     dialogsStore;
-  const { isPaidUserLimit } = currentQuotaStore;
+  const { isUserTariffLimit } = currentQuotaStore;
 
   return {
     isPaidUserAccess,
     setInvitePaidUsersCount,
-    isPaidUserLimit,
+    isUserTariffLimit,
     roomId: invitePanelOptions.roomId,
   };
 })(observer(Item));

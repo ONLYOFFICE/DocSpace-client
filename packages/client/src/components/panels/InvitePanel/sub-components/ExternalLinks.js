@@ -70,7 +70,7 @@ const ExternalLinks = ({
   activeLink,
   isMobileView,
   getPortalInviteLink,
-  isPaidUserLimit,
+  isUserTariffLimit,
 }) => {
   const [isLinksToggling, setIsLinksToggling] = useState(false);
 
@@ -279,7 +279,7 @@ const ExternalLinks = ({
             containerRef={inputsRef}
             isOwner={isOwner}
             isMobileView={isMobileView}
-            isSelectionDisabled={isPaidUserLimit}
+            isSelectionDisabled={isUserTariffLimit}
             selectionErrorText={<PaidQuotaLimitError />}
             availableAccess={availableAccess}
           />
@@ -296,7 +296,7 @@ export default inject(
     const { setInvitationLinks } = filesStore;
     const { roomId, hideSelector, defaultAccess } = invitePanelOptions;
     const { getPortalInviteLink } = peopleStore.inviteLinksStore;
-    const { isPaidUserLimit } = currentQuotaStore;
+    const { isUserTariffLimit } = currentQuotaStore;
 
     return {
       setInvitationLinks,
@@ -305,7 +305,7 @@ export default inject(
       defaultAccess,
       isOwner,
       getPortalInviteLink,
-      isPaidUserLimit,
+      isUserTariffLimit,
     };
   },
 )(observer(ExternalLinks));

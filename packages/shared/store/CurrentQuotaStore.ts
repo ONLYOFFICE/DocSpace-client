@@ -329,15 +329,11 @@ class CurrentQuotasStore {
     if (this.maxCountManagersByQuota === PortalFeaturesLimitations.Limitless)
       return false;
 
-    return this.isPaidUserLimit;
-  }
-
-  get isPaidUserLimit() {
     return this.addedManagersCount >= this.maxCountManagersByQuota;
   }
 
   showWarningDialog = (type: number) => {
-    if (type && this.isPaidUserLimit && type !== EmployeeType.Guest)
+    if (type && this.isUserTariffLimit && type !== EmployeeType.Guest)
       return true;
 
     return this.currentTariffStatusStore?.isGracePeriod;

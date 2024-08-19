@@ -149,7 +149,10 @@ const QuotasBar = ({
   };
 
   const getPersonalQuotaDescription = () => {
-    if (!isAdmin) return t("PersonalUserQuotaDescription");
+    if (!isAdmin)
+      return t("PersonalUserQuotaDescription", {
+        productName: t("Common:ProductName"),
+      });
 
     return (
       <Trans

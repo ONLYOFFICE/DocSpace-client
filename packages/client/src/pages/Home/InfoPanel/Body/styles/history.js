@@ -71,7 +71,11 @@ const StyledHistoryBlock = styled.div`
     .title {
       display: flex;
       flex-direction: row;
+      align-items: center;
       gap: 4px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
       .name {
         font-weight: 600;
         font-size: 14px;
@@ -87,7 +91,17 @@ const StyledHistoryBlock = styled.div`
         font-size: 12px;
         color: ${(props) => props.theme.infoPanel.history.dateColor};
       }
+
+      .users-counter {
+        margin-bottom: 1px;
+      }
     }
+  }
+`;
+
+const StyledHistoryDisplaynameBlock = styled.div`
+  .name {
+    color: ${(props) => props.theme.infoPanel.history.subtitleColor};
   }
 `;
 
@@ -95,6 +109,9 @@ const StyledHistoryBlockMessage = styled.div`
   font-weight: 400;
   font-size: 13px;
   line-height: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 
   display: inline-flex;
   gap: 4px;
@@ -137,9 +154,7 @@ const StyledHistoryBlockMessage = styled.div`
 
 const StyledHistoryLink = styled.span`
   display: inline-block;
-
   white-space: normal;
-  margin: 1px 0;
 
   .text {
     font-size: 13px;
@@ -168,16 +183,14 @@ const StyledHistoryBlockTagList = styled.div`
 `;
 
 const StyledHistoryBlockFilesList = styled.div`
-  margin-top: 8px;
   display: flex;
   flex-direction: column;
   padding: 8px 0;
-  background: ${(props) => props.theme.infoPanel.history.fileBlockBg};
   border-radius: 3px;
 `;
 
 const StyledHistoryBlockFile = styled.div`
-  padding: 4px 16px;
+  padding: 4px 0px;
   display: flex;
   gap: 8px;
   flex-direction: row;
@@ -187,15 +200,41 @@ const StyledHistoryBlockFile = styled.div`
   .icon {
     width: 24px;
     height: 24px;
+    margin-inline-end: 5px;
     svg {
       width: 24px;
       height: 24px;
     }
   }
 
+  .item-wrapper,
+  .old-item-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid
+      ${(props) => props.theme.infoPanel.history.itemBorderColor};
+    border-radius: 6px;
+    padding: 6px 8px;
+
+    &:hover {
+      cursor: ${(props) => (props.isFolder ? "auto" : "pointer")};
+      background-color: ${(props) =>
+        !props.isFolder && props.theme.infoPanel.history.fileBackgroundColor};
+    }
+  }
+
+  .old-item-wrapper {
+    border: none;
+    &:hover {
+      cursor: auto;
+      background-color: transparent;
+    }
+  }
+
   .item-title {
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
     display: flex;
     min-width: 0;
     gap: 0;
@@ -224,8 +263,15 @@ const StyledHistoryBlockFile = styled.div`
   }
 
   .location-btn {
-    margin-inline-start: auto;
+    margin-inline-start: 8px;
     min-width: 16px;
+    opacity: 0;
+  }
+
+  &:hover {
+    .location-btn {
+      opacity: 1;
+    }
   }
 `;
 
@@ -237,7 +283,7 @@ const StyledHistoryBlockExpandLink = styled.div`
 
   &.files-list-expand-link {
     margin-top: 8px;
-    margin-inline-start: 20px;
+    margin-inline-start: 5px;
   }
 
   &.user-list-expand-link {
@@ -268,4 +314,5 @@ export {
   StyledHistoryBlockFile,
   StyledHistoryBlockTagList,
   StyledHistoryBlockExpandLink,
+  StyledHistoryDisplaynameBlock,
 };

@@ -23,48 +23,50 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { TTranslation } from "@docspace/shared/types";
 
-import { Tag } from "@docspace/shared/components/tag";
-import { StyledHistoryBlockTagList } from "../../../styles/history";
-import { ActionByTarget } from "../FeedInfo";
-import { Feed } from "./HistoryBlockContent.types";
-
-interface HistoryRoomTagListProps {
+export interface HistoryBlockContentProps {
+  t: TTranslation;
   feed: Feed;
-  actionType: ActionByTarget<"roomTag">;
+  historyWithFileList?: boolean;
 }
 
-const HistoryRoomTagList = ({ feed, actionType }: HistoryRoomTagListProps) => {
-  if (actionType === "create")
-    return (
-      <StyledHistoryBlockTagList>
-        {feed.data?.tags.map((tag: string) => (
-          <Tag
-            className="history-tag"
-            key={tag}
-            label={tag}
-            tag={tag}
-            isNewTag
-          />
-        ))}
-      </StyledHistoryBlockTagList>
-    );
+interface UserData {
+  avatar: string;
+  avatarSmall: string;
+  avatarMedium: string;
+  avatarMax: string;
+  avatarOriginal: string;
+  displayName: string;
+  hasAvatar: boolean;
+  id: string;
+  isAnonim: boolean;
+  profileUrl: string;
+  tags: [];
+  access: string;
+  oldAccess: string;
+  parentId: number;
+  toFolderId: number;
+  parentTitle: string;
+  parentType: number;
+  fromParentType: number;
+  fromParentTitle: string;
+}
 
-  if (actionType === "delete") {
-    return (
-      <StyledHistoryBlockTagList>
-        {feed.data?.tags.map((tag: string) => (
-          <Tag
-            className="history-tag deleted-tag"
-            key={tag}
-            label={tag}
-            tag={tag}
-            isDeleted
-          />
-        ))}
-      </StyledHistoryBlockTagList>
-    );
-  }
-};
+interface RelatedAction {
+  action: UserData;
+  initiator: UserData;
+  date: string;
+  data: UserData;
+}
 
-export default HistoryRoomTagList;
+export interface Feed {
+  action: {
+    id: number;
+    key: string;
+  };
+  data: UserData;
+  date: string;
+  initiator: UserData;
+  related: RelatedAction[];
+}

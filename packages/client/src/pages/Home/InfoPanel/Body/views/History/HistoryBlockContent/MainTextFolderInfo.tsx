@@ -29,10 +29,11 @@ import { inject, observer } from "mobx-react";
 import { TTranslation } from "@docspace/shared/types";
 import { FolderType } from "@docspace/shared/enums";
 import { StyledHistoryBlockMessage } from "../../../styles/history";
+import { Feed } from "./HistoryBlockContent.types";
 
 type HistoryMainTextFolderInfoProps = {
   t: TTranslation;
-  feed: any;
+  feed: Feed;
   selectedFolderId?: number;
 };
 
@@ -80,7 +81,7 @@ const HistoryMainTextFolderInfo = ({
   );
 };
 
-export default inject(({ selectedFolderStore }) => ({
+export default inject<TStore>(({ selectedFolderStore }) => ({
   selectedFolderId: selectedFolderStore.id,
 }))(
   withTranslation(["InfoPanel", "Common", "Translations"])(

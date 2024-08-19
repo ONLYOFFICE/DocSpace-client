@@ -26,20 +26,28 @@
 
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { decode } from "he";
 import { TTranslation } from "@docspace/shared/types";
-import { StyledHistoryBlockMessage } from "../../../styles/history";
-import { useFeedTranslation } from "../useFeedTranslation";
+import { Text } from "@docspace/shared/components/text";
+import { StyledHistoryDisplaynameBlock } from "../../../styles/history";
+import { Feed } from "./HistoryBlockContent.types";
 
 interface HistoryMainTextProps {
   t: TTranslation;
-  feed: any;
+  feed: Feed;
 }
 
 const HistoryMainText = ({ t, feed }: HistoryMainTextProps) => {
   return (
-    <StyledHistoryBlockMessage className="message">
-      <span className="main-message">{useFeedTranslation(t, feed)}</span>{" "}
-    </StyledHistoryBlockMessage>
+    <StyledHistoryDisplaynameBlock className="message">
+      <span className="main-message">
+        <Text className="name">
+          {feed.initiator?.isAnonim
+            ? t("Common:Anonymous")
+            : decode(feed.initiator.displayName)}
+        </Text>
+      </span>
+    </StyledHistoryDisplaynameBlock>
   );
 };
 

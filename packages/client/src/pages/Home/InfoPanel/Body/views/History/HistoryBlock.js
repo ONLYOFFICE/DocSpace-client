@@ -26,16 +26,13 @@
 
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import { Avatar } from "@docspace/shared/components/avatar";
-import { Text } from "@docspace/shared/components/text";
-import DefaultUserAvatarSmall from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 import { StyledHistoryBlock } from "../../styles/history";
-import { getDateTime } from "../../helpers/HistoryHelper";
-import { decode } from "he";
-
+import DefaultUserAvatarSmall from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
+import HistoryTitleBlock from "./HistoryBlockContent/HistoryTitleBlock";
 import HistoryBlockContent from "./HistoryBlockContent";
 
 const HistoryBlock = ({ t, feed, isLastEntity }) => {
-  const { action, initiator, date } = feed;
+  const { action, initiator } = feed;
 
   const isUserAction =
     action.key === "RoomCreateUser" ||
@@ -60,20 +57,7 @@ const HistoryBlock = ({ t, feed, isLastEntity }) => {
         }
       />
       <div className="info">
-        <div className="title">
-          <Text className="name">
-            {initiator?.isAnonim
-              ? t("Common:Anonymous")
-              : decode(initiator.displayName)}
-          </Text>
-          {initiator.isOwner && (
-            <Text className="secondary-info">
-              {t("Common:Owner").toLowerCase()}
-            </Text>
-          )}
-          <Text className="date">{getDateTime(date)}</Text>
-        </div>
-
+        <HistoryTitleBlock t={t} feed={feed} />
         <HistoryBlockContent feed={feed} />
       </div>
     </StyledHistoryBlock>

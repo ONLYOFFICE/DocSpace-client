@@ -25,24 +25,26 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState } from "react";
-import { useNavigate, NavigateFunction } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { decode } from "he";
 import { inject, observer } from "mobx-react";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { Trans, withTranslation } from "react-i18next";
 import { TTranslation } from "@docspace/shared/types";
+import { TSetSelectedFolder } from "../../../../../../../store/SelectedFolderStore";
+import { Feed } from "./HistoryBlockContent.types";
+
 import {
   StyledHistoryBlockExpandLink,
   StyledHistoryLink,
 } from "../../../styles/history";
-import { TSetSelectedFolder } from "../../../../../../../store/SelectedFolderStore.ts";
 
 const EXPANSION_THRESHOLD = 8;
 
 interface HistoryGroupListProps {
   t: TTranslation;
-  feed: any;
+  feed: Feed;
   isVisitor?: boolean;
   isCollaborator?: boolean;
   setPeopleSelection?: (newSelection: any[]) => void;

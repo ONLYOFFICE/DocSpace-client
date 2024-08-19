@@ -5,11 +5,13 @@ import { AnyFeedInfo } from "./FeedInfo";
 export const useFeedTranslation = (
   t: TTranslation,
   feed: { action: { key: AnyFeedInfo["key"] }; data: any },
+  hasRelatedItems: boolean,
 ) => {
   switch (feed.action.key) {
     case "FileCreated":
       return t("InfoPanel:FileCreated");
     case "FileUploaded":
+      if (hasRelatedItems) return t("InfoPanel:FileUploaded").slice(0, -1);
       return t("InfoPanel:FileUploaded");
     case "UserFileUpdated":
       return t("InfoPanel:UserFileUpdated");
@@ -38,10 +40,13 @@ export const useFeedTranslation = (
     case "FolderRenamed":
       return t("InfoPanel:FolderRenamed");
     case "FolderMoved":
+      if (hasRelatedItems) return t("InfoPanel:FolderMoved").slice(0, -1);
       return t("InfoPanel:FolderMoved");
     case "FolderCopied":
+      if (hasRelatedItems) return t("InfoPanel:FolderCopied").slice(0, -1);
       return t("InfoPanel:FolderCopied");
     case "FolderDeleted":
+      if (hasRelatedItems) return t("InfoPanel:FolderDeleted").slice(0, -1);
       return t("InfoPanel:FolderDeleted");
     case "RoomCreated":
       return (
@@ -124,6 +129,7 @@ export const useFeedTranslation = (
         />
       );
     case "RoomCreateUser":
+      if (hasRelatedItems) return t("InfoPanel:RoomCreateUser").slice(0, -1);
       return t("InfoPanel:RoomCreateUser");
     case "RoomUpdateAccessForUser":
       return t("InfoPanel:RoomUpdateAccess");

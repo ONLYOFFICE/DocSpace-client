@@ -24,47 +24,41 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Tag } from "@docspace/shared/components/tag";
-import { StyledHistoryBlockTagList } from "../../../styles/history";
-import { ActionByTarget } from "../FeedInfo";
-import { Feed } from "./HistoryBlockContent.types";
+import { Text } from "@docspace/shared/components/text";
+import { useFeedTranslation } from "../useFeedTranslation";
+import { getDateTime } from "../../../helpers/HistoryHelper";
+import { getFeedInfo } from "../FeedInfo";
+import HistoryUserList from "./UserList";
+import HistoryMainTextFolderInfo from "./MainTextFolderInfo";
 
-interface HistoryRoomTagListProps {
-  feed: Feed;
-  actionType: ActionByTarget<"roomTag">;
-}
+import { HistoryBlockContentProps } from "./HistoryBlockContent.types";
 
-const HistoryRoomTagList = ({ feed, actionType }: HistoryRoomTagListProps) => {
-  if (actionType === "create")
-    return (
-      <StyledHistoryBlockTagList>
-        {feed.data?.tags.map((tag: string) => (
-          <Tag
-            className="history-tag"
-            key={tag}
-            label={tag}
-            tag={tag}
-            isNewTag
-          />
-        ))}
-      </StyledHistoryBlockTagList>
-    );
+const HistoryTitleBlock = ({ t, feed }: HistoryBlockContentProps) => {
+  const { actionType, targetType } = getFeedInfo(feed);
 
-  if (actionType === "delete") {
-    return (
-      <StyledHistoryBlockTagList>
-        {feed.data?.tags.map((tag: string) => (
-          <Tag
-            className="history-tag deleted-tag"
-            key={tag}
-            label={tag}
-            tag={tag}
-            isDeleted
-          />
-        ))}
-      </StyledHistoryBlockTagList>
-    );
-  }
+  const hasRelatedItems = feed.related.length > 0;
+
+  return (
+    <div className="title">
+      {targetType === "user" && actionType === "update" && (
+        <HistoryUserList feed={feed} />
+      )}
+
+      {useFeedTranslation(t, feed, hasRelatedItems)}
+      {hasRelatedItems && (
+        <Text className="users-counter">({feed.related.length + 1}).</Text>
+      )}
+
+      {(targetType === "file" || targetType === "folder") &&
+        actionType !== "delete" && <HistoryMainTextFolderInfo feed={feed} />}
+
+      {feed.related.length === 0 &&
+        targetType === "user" &&
+        actionType !== "update" && <HistoryUserList feed={feed} />}
+
+      <Text className="date">{getDateTime(feed.date)}</Text>
+    </div>
+  );
 };
 
-export default HistoryRoomTagList;
+export default HistoryTitleBlock;

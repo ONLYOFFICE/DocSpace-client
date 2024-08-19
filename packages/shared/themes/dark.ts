@@ -1875,6 +1875,8 @@ const Dark: TTheme = {
       renamedItemColor: gray,
       oldRoleColor: gray,
       messageColor: white,
+      itemBorderColor: grayDarkStrong,
+      fileBackgroundColor: darkGrayLight,
     },
 
     details: {

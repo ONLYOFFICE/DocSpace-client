@@ -25,22 +25,25 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState } from "react";
-import { useNavigate, NavigateFunction } from "react-router-dom";
-import { decode } from "he";
 import { inject, observer } from "mobx-react";
+import { useNavigate, NavigateFunction } from "react-router-dom";
+import { Trans, withTranslation } from "react-i18next";
+import { TTranslation } from "@docspace/shared/types";
+import { decode } from "he";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
+import { Feed } from "./HistoryBlockContent.types";
+
 import {
   StyledHistoryBlockExpandLink,
   StyledHistoryLink,
 } from "../../../styles/history";
-import { Trans, withTranslation } from "react-i18next";
 
 const EXPANSION_THRESHOLD = 8;
 
 interface HistoryUserListProps {
-  t;
-  feed: any;
+  t: TTranslation;
+  feed: Feed;
   openUser?: (user: any, navigate: NavigateFunction) => void;
   isVisitor?: boolean;
   isCollaborator?: boolean;
@@ -88,7 +91,7 @@ const HistoryUserList = ({
             )}
 
             {withComma && ","}
-            <div className="space" />
+            {feed.related.length > 0 && <div className="space" />}
           </StyledHistoryLink>
         );
       })}
@@ -111,7 +114,7 @@ const HistoryUserList = ({
   );
 };
 
-export default inject(({ infoPanelStore, userStore }) => ({
+export default inject<TStore>(({ infoPanelStore, userStore }) => ({
   openUser: infoPanelStore.openUser,
   isVisitor: userStore.user.isVisitor,
   isCollaborator: userStore.user.isCollaborator,

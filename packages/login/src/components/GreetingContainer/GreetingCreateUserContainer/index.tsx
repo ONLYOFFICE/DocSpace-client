@@ -28,7 +28,7 @@
 
 "use client";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
@@ -47,6 +47,7 @@ export const GreetingCreateUserContainer = ({
   firstName,
   lastName,
   culture,
+  hostName,
 }: GreetingCreateUserContainerProps) => {
   const { t } = useTranslation(["Confirm", "Common"]);
   const theme = useTheme();
@@ -58,14 +59,6 @@ export const GreetingCreateUserContainer = ({
     false,
     culture,
   );
-
-  const [hostName, setHostName] = useState("");
-
-  useEffect(() => {
-    if (process) {
-      setHostName(window.location.host);
-    }
-  }, []);
 
   return (
     <GreetingContainer>

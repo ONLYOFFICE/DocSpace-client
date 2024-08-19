@@ -45,7 +45,7 @@ export const ConfirmRouteContext = createContext<TConfirmRouteContext>({
 function ConfirmRoute(props: ConfirmRouteProps) {
   const {
     doAuthenticated = AuthenticatedAction.None,
-    defaultPage,
+    defaultPage = "/",
     socketUrl,
     children,
     confirmLinkResult,
@@ -94,22 +94,33 @@ function ConfirmRoute(props: ConfirmRouteProps) {
         setStateData((val) => ({ ...val, linkData, roomData }));
         break;
       case ValidationResult.Invalid:
+        console.error("invalid link", {
+          confirmLinkParams,
+          validationResult: confirmLinkResult.result,
+        });
+        throw new Error(t("Common:InvalidLink"));
       case ValidationResult.Expired:
         console.error("expired link", {
           confirmLinkParams,
-          confirmLinkResult,
+          validationResult: confirmLinkResult.result,
         });
-        notFound();
+        throw new Error(t("Common:Error"));
       case ValidationResult.TariffLimit:
         console.error("tariff limit", {
           confirmLinkParams,
-          confirmLinkResult,
+          validationResult: confirmLinkResult.result,
         });
         throw new Error(t("Common:QuotaPaidUserLimitError"));
-      default:
-        console.error("expired link", {
+      case ValidationResult.QuotaFailed:
+        console.error("access below quota", {
           confirmLinkParams,
-          confirmLinkResult,
+          validationResult: confirmLinkResult.result,
+        });
+        throw new Error(t("Common:Error"));
+      default:
+        console.error("unknown link", {
+          confirmLinkParams,
+          validationResult: confirmLinkResult.result,
         });
         notFound();
     }

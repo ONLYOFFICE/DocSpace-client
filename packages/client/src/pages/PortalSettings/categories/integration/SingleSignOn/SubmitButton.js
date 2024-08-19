@@ -41,13 +41,11 @@ const SubmitResetButtons = (props) => {
     resetForm,
     confirmationResetModal,
     isSubmitLoading,
-    hasErrors,
-    hasChanges,
     isLoadingXml,
-    enableSso,
     isSSOAvailable,
     closeResetModal,
     confirmReset,
+    isDisabledSaveButton,
   } = props;
 
   return (
@@ -62,9 +60,7 @@ const SubmitResetButtons = (props) => {
         displaySettings={true}
         hasScroll={true}
         isSaving={isSubmitLoading}
-        saveButtonDisabled={
-          !enableSso || hasErrors || !hasChanges || isLoadingXml
-        }
+        saveButtonDisabled={isDisabledSaveButton}
         disableRestoreToDefault={
           isSubmitLoading || isLoadingXml || !isSSOAvailable
         }
@@ -90,12 +86,10 @@ export default inject(({ ssoStore, currentQuotaStore }) => {
     resetForm,
     confirmationResetModal,
     isSubmitLoading,
-    hasErrors,
-    hasChanges,
     isLoadingXml,
-    enableSso,
     closeResetModal,
     confirmReset,
+    isDisabledSaveButton,
   } = ssoStore;
   const { isSSOAvailable } = currentQuotaStore;
 
@@ -106,12 +100,10 @@ export default inject(({ ssoStore, currentQuotaStore }) => {
     resetForm,
     confirmationResetModal,
     isSubmitLoading,
-    hasErrors,
-    hasChanges,
     isLoadingXml,
-    enableSso,
     isSSOAvailable,
     closeResetModal,
     confirmReset,
+    isDisabledSaveButton,
   };
 })(observer(SubmitResetButtons));

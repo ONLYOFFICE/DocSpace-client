@@ -24,12 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { headers } from "next/headers";
+
 import ConfirmRoute from "@/components/ConfirmRoute";
 import { StyledBody, StyledPage } from "@/components/StyledConfirm.styled";
 import { TConfirmLinkParams } from "@/types";
-
 import { checkConfirmLink, getSettings } from "@/utils/actions";
-import { headers } from "next/headers";
 
 export default async function Layout({
   children,

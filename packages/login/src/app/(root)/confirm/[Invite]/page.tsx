@@ -26,7 +26,7 @@
 
 import { notFound } from "next/navigation";
 import dynamic from "next/dynamic";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { LANGUAGE } from "@docspace/shared/constants";
@@ -62,6 +62,9 @@ async function Page({ searchParams, params }: LinkInviteProps) {
   const uid = searchParams.uid;
   const confirmKey = getStringFromSearchParams(searchParams);
 
+  const headersList = headers();
+  const hostName = headersList.get("x-forwarded-host") ?? "";
+
   const [settings, user, thirdParty, capabilities, passwordSettings] =
     await Promise.all([
       getSettings(),
@@ -87,6 +90,7 @@ async function Page({ searchParams, params }: LinkInviteProps) {
               firstName={user?.firstName}
               lastName={user?.lastName}
               culture={culture}
+              hostName={hostName}
             />
             <FormWrapper id="invite-form">
               <CreateUserForm

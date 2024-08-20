@@ -277,6 +277,7 @@ const DirectThirdPartyConnection = (props) => {
           scaledOptions
           showDisabledItems
           displayArrow
+          isDisabled={isDisabledComponent}
         />
 
         {connectedThirdPartyAccount?.id &&

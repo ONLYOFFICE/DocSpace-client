@@ -69,7 +69,11 @@ export const FormWrapper = styled.div<{ bgPattern: string }>`
       max-width: 100%;
       min-width: 100%;
     }
-    p {
+
+    .invitation-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       text-align: center;
     }
   }

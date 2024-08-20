@@ -98,7 +98,7 @@ export const GreetingLoginContainer = ({
 
       {type === "invitation" && (
         <div className="greeting-container">
-          <Text fontSize="16px">
+          <Text fontSize="16px" as="div" className="invitation-text">
             <Trans
               t={t}
               i18nKey={roomName ? "InvitationToRoom" : "InvitationToPortal"}

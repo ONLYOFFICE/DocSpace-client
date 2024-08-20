@@ -53,7 +53,6 @@ class GroupsTableHeader extends React.Component {
         key: "People",
         title: props.t("Common:People"),
         enable: props.peopleAccountsGroupsColumnIsEnabled,
-        default: true,
         sortBy: "membersCount",
         onClick: this.onFilter,
         resizable: true,

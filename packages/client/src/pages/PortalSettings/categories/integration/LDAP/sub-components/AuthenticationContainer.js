@@ -32,6 +32,7 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import LdapFieldComponent from "./LdapFieldComponent";
+import { InputSize, InputType } from "@docspace/shared/components/text-input";
 
 const LOGIN = "login",
   PASSWORD = "password";
@@ -109,6 +110,7 @@ const AuthenticationContainer = ({
           isRequired
         >
           <LdapFieldComponent
+            isPassword
             name={PASSWORD}
             type="password"
             hasError={errors.password}
@@ -117,6 +119,11 @@ const AuthenticationContainer = ({
             isDisabled={!isLdapEnabled || isUIDisabled || !authentication}
             scale
             tabIndex={19}
+            simpleView
+            size={InputSize.small}
+            autoComplete="current-password"
+            inputType={InputType.password}
+            isDisableTooltip
           />
         </FieldContainer>
       </Box>

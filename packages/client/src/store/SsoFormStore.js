@@ -946,6 +946,33 @@ class SsoFormStore {
     );
   }
 
+  get isDisabledSaveButton() {
+    return (
+      !this.enableSso ||
+      this.hasErrors ||
+      !this.hasChanges ||
+      this.isLoadingXml ||
+      this.isRequiredFieldsEmpty
+    );
+  }
+
+  get isRequiredFieldsEmpty() {
+    return (
+      this.entityId.trim().length === 0 ||
+      (this.ssoBinding === BINDING_POST &&
+        this.ssoUrlPost.trim().length === 0) ||
+      (this.sloBinding === BINDING_POST &&
+        this.sloUrlPost.trim().length === 0) ||
+      (this.ssoBinding === BINDING_REDIRECT &&
+        this.ssoUrlRedirect.trim().length === 0) ||
+      (this.sloBinding === BINDING_REDIRECT &&
+        this.sloUrlRedirect.trim().length === 0) ||
+      this.firstName.trim().length === 0 ||
+      this.lastName.trim().length === 0 ||
+      this.email.trim().length === 0
+    );
+  }
+
   scrollToField = () => {
     for (let key in this) {
       if (key.includes("HasError") && this[key] !== false) {

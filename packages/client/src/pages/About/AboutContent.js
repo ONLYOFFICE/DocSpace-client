@@ -125,7 +125,7 @@ const AboutContent = (props) => {
     ? previewData.address
     : companyInfoSettingsData?.address;
 
-  const logo = getLogoUrl(WhiteLabelLogoType.AboutPage, !theme.isBase);
+  const logo = getLogoUrl(WhiteLabelLogoType.AboutPage, !theme.isBase, true);
 
   return (
     companyInfoSettingsData && (

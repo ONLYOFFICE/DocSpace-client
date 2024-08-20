@@ -41,7 +41,6 @@ import {
   isPublicPreview,
 } from "../utils/common";
 import { getCookie, setCookie } from "../utils/cookie";
-import { TTenantExtraRes } from "../api/portal/types";
 import { TenantStatus } from "../enums";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
 import { Nullable, TI18n } from "../types";
@@ -74,8 +73,6 @@ class AuthStore {
   isLogout = false;
 
   isUpdatingTariff = false;
-
-  tenantExtra: Nullable<TTenantExtraRes> = null;
 
   skipRequest = false;
 

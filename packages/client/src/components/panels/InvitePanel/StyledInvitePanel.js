@@ -182,7 +182,7 @@ const StyledRow = styled.div`
   }
 
   .combo-button-label {
-    color: ${(props) => props.theme.text.disableColor};
+    color: ${(props) => props.theme.accessRightSelect.descriptionColor};
   }
   .combo-buttons_expander-icon path {
     fill: ${(props) => props.theme.text.disableColor};

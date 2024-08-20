@@ -27,6 +27,7 @@
 import MenuIcon from "PUBLIC_DIR/images/menu.react.svg";
 
 import styled from "styled-components";
+import { Base } from "@docspace/shared/themes";
 import { mobile } from "@docspace/shared/utils";
 
 export const StyledWrapper = styled.header`
@@ -41,6 +42,8 @@ export const StyledWrapper = styled.header`
     align-items: center;
   }
 `;
+
+StyledWrapper.defaultProps = { theme: Base };
 
 export const StyledHeader = styled.header`
   width: 100%;
@@ -57,9 +60,11 @@ export const StyledMenuIcon = styled(MenuIcon)`
   height: 20px;
 
   path {
-    fill: ${(props) => props.theme.catalog.headerBurgerColor};
+    fill: ${(props) => props.theme.catalog?.headerBurgerColor};
   }
 
   cursor: pointer;
 `;
+
+StyledMenuIcon.defaultProps = { theme: Base };
 

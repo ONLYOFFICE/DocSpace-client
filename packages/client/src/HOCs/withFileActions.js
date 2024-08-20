@@ -160,7 +160,7 @@ export default function withFileActions(WrappedFileItem) {
 
       if (
         e.target?.tagName === "INPUT" ||
-        e.target?.tagName === "SPAN" ||
+        // e.target?.tagName === "SPAN" ||
         e.target?.tagName === "A" ||
         e.target.closest(".checkbox") ||
         e.target.closest(".table-container_row-checkbox") ||

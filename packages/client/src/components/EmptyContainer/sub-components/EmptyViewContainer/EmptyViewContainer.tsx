@@ -44,11 +44,13 @@ const InjectedEmptyViewContainer = inject<
     selectedFolderStore,
     dialogsStore,
     infoPanelStore,
-    currentTariffStatusStore,
     treeFoldersStore,
     clientLoadingStore,
     userStore,
+    currentQuotaStore,
   }): InjectedEmptyViewContainerProps => {
+    const { isWarningRoomsDialog } = currentQuotaStore;
+
     const { myFolderId, myFolder, roomsFolder } = treeFoldersStore;
 
     const { setIsSectionFilterLoading } = clientLoadingStore;
@@ -56,18 +58,14 @@ const InjectedEmptyViewContainer = inject<
     const { onClickInviteUsers, onCreateAndCopySharedLink, inviteUser } =
       contextOptionsStore;
 
-    const { isGracePeriod } = currentTariffStatusStore;
-
     const {
       setIsVisible: setVisibleInfoPanel,
       isVisible: isVisibleInfoPanel,
       setView: setViewInfoPanel,
     } = infoPanelStore;
 
-    const {
-      setSelectFileFormRoomDialogVisible,
-      setInviteUsersWarningDialogVisible,
-    } = dialogsStore;
+    const { setSelectFileFormRoomDialogVisible, setQuotaWarningDialogVisible } =
+      dialogsStore;
 
     const { security, access, rootFolderType } = selectedFolderStore;
 
@@ -81,11 +79,11 @@ const InjectedEmptyViewContainer = inject<
       selectedFolder,
       isVisibleInfoPanel,
       rootFolderType,
-      isGracePeriod,
       myFolderId,
       myFolder,
       roomsFolder,
       userId,
+      isWarningRoomsDialog,
       inviteUser,
       setViewInfoPanel,
       onClickInviteUsers,
@@ -93,7 +91,7 @@ const InjectedEmptyViewContainer = inject<
       setIsSectionFilterLoading,
       onCreateAndCopySharedLink,
       setSelectFileFormRoomDialogVisible,
-      setInviteUsersWarningDialogVisible,
+      setQuotaWarningDialogVisible,
     };
   },
 )(EmptyViewContainer as React.FC<OutEmptyViewContainerProps>);

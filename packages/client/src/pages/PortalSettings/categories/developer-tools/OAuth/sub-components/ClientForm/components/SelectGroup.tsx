@@ -2,6 +2,7 @@ import React from "react";
 
 import { Text } from "@docspace/shared/components/text";
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import { globalColors } from "@docspace/shared/themes";
 
 import { StyledInputGroup } from "../ClientForm.styled";
 
@@ -55,7 +56,8 @@ const SelectGroup = ({
           color=""
           textAlign=""
         >
-          {label} *
+          {label}{" "}
+          <span style={{ color: globalColors.lightErrorStatus }}> *</span>
         </Text>
       </div>
       <div className="select">

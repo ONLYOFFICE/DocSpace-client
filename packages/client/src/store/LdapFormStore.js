@@ -489,7 +489,7 @@ class LdapFormStore {
           completed: true,
           percents: 100,
           certificateConfirmRequest: null,
-          error: "",
+          error: t("Common:UnexpectedError"),
         };
       }
 

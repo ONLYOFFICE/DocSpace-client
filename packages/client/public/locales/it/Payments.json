@@ -25,7 +25,6 @@
   "Pay": "Paga",
   "Payer": "Pagatore",
   "PayerDescription": "Questo utente ha accesso ai dettagli di pagamento ed è l’unico utente che può modificare la quota ed effettuare pagamenti. Il proprietario di {{productName}}, così come lo stesso gestore dei pagamenti, può riassegnare il ruolo di responsabile dei pagamenti utilizzando il portale clienti Stripe.",
-  "PaymentOverdue": "Impossibile aggiungere nuovi utenti.",
   "PriceCalculation": "Calcola il tuo prezzo",
   "RenewSubscription": "Rinnova la sottoscrizione al piano {{planName}}",
   "RoomManagerDescription": "Amministrazione e archiviazione delle stanze, invito e gestione degli utenti. È possibile assegnare più amministratori alla stanza.",
@@ -35,7 +34,6 @@
   "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/mese</3>",
   "UpgradeNow": "Aggiorna ora",
   "UpgradePlan": "Aggiorna il piano",
-  "UpgradePlanInfo": "Aggiungendo nuovi utenti supererai il numero massimo di membri della stanza consentito dal tuo attuale piano tariffario.",
   "UserNotFound": "L’utente <1>{{email}}</1> non è stato trovato.",
   "UserNotFoundMatchingEmail": "Non siamo riusciti a trovare l'utente con l'e-mail Stripe corrispondente.",
   "YourPrice": "Il tuo prezzo"

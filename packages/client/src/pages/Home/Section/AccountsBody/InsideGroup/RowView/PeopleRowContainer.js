@@ -85,6 +85,7 @@ const PeopleRowContainer = ({
   infoPanelVisible,
   withPaging,
   currentDeviceType,
+  insideGroupIsFiltered,
 }) => {
   useViewEffect({
     view: accountsViewAs,
@@ -113,7 +114,7 @@ const PeopleRowContainer = ({
       ))}
     </StyledRowContainer>
   ) : (
-    <EmptyScreen />
+    <EmptyScreen isEmptyGroup={!insideGroupIsFiltered} />
   );
 };
 
@@ -126,7 +127,7 @@ export default inject(({ peopleStore, filesStore, settingsStore }) => {
   } = peopleStore;
   const { theme, withPaging, currentDeviceType } = settingsStore;
   const { isVisible: infoPanelVisible } = infoPanelStore;
-  const { currentGroup } = peopleStore.groupsStore;
+  const { currentGroup, insideGroupIsFiltered } = peopleStore.groupsStore;
   const { peopleList } = usersStore;
 
   return {
@@ -138,5 +139,6 @@ export default inject(({ peopleStore, filesStore, settingsStore }) => {
     infoPanelVisible,
     withPaging,
     currentDeviceType,
+    insideGroupIsFiltered,
   };
 })(observer(PeopleRowContainer));

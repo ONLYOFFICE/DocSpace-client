@@ -25,7 +25,6 @@
   "Pay": "Plačaj",
   "Payer": "Plačnik",
   "PayerDescription": "Ta uporabnik ima dostop do podrobnosti plačila in je edini uporabnik, ki lahko prilagaja račun in izvaja plačila. Lastnik {{productName}} in sam upravitelj plačevanja lahko prerazporedita vlogo upravitelja plačevanja prek portala za stranke Stripe.",
-  "PaymentOverdue": "Novih uporabnikov ni mogoče dodati.",
   "PriceCalculation": "Izračunajte vašo ceno",
   "RenewSubscription": "Obnovi naročnino na {{planName}} paket",
   "RoomManagerDescription": "Administracija in arhiviranje sobe, vabljenje in vodenje uporabnikov. Sobi je mogoče dodeliti več skrbnikov.",
@@ -35,7 +34,6 @@
   "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/mesec</3>",
   "UpgradeNow": "Nadgradi zdaj",
   "UpgradePlan": "Načrt nadgradnje",
-  "UpgradePlanInfo": "Dodajanje novih uporabnikov bo preseglo največje število članov sobe, ki jih omogoča vaš trenutni naročniški paket.",
   "UserNotFound": "Uporabnik <1>{{email}}</1> ni najden.",
   "UserNotFoundMatchingEmail": "Nismo našli uporabnika z ujemajočim se Stripe e-mail naslovom.",
   "YourPrice": "Vaša cena"

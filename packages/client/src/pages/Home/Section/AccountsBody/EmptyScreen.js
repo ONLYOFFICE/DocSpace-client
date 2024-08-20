@@ -40,6 +40,7 @@ const EmptyScreen = ({
   resetInsideGroupFilter,
   setIsLoading,
   theme,
+  isEmptyGroup = false,
 }) => {
   const { t } = useTranslation(["People", "Common"]);
   const isPeopleAccounts = window.location.pathname.includes("accounts/people");
@@ -62,6 +63,16 @@ const EmptyScreen = ({
   ) : (
     <EmptyScreenPersonSvgDark />
   );
+
+  if (isEmptyGroup) {
+    return (
+      <EmptyScreenContainer
+        imageSrc={imageSrc}
+        imageAlt="Empty Screen Filter image"
+        headerText={title}
+      />
+    );
+  }
 
   return (
     <EmptyView

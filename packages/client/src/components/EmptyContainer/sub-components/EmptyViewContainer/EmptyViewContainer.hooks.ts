@@ -109,18 +109,17 @@ export const useOptions = (
     isVisibleInfoPanel,
     isArchiveFolderRoot,
     rootFolderType,
-    isGracePeriod,
     myFolderId,
     myFolder,
     roomsFolder,
     userId,
+    isWarningRoomsDialog,
     setViewInfoPanel,
     onClickInviteUsers,
     setVisibleInfoPanel,
     onCreateAndCopySharedLink,
-    // setIsSectionFilterLoading,
+    setQuotaWarningDialogVisible,
     setSelectFileFormRoomDialogVisible,
-    setInviteUsersWarningDialogVisible,
     inviteUser: inviteRootUser,
   }: EmptyViewContainerProps,
   t: TTranslation,
@@ -173,14 +172,14 @@ export const useOptions = (
   }, [myFolder.rootFolderType, myFolder.title, myFolderId]);
 
   const onCreateRoom = useCallback(() => {
-    if (isGracePeriod) {
-      setInviteUsersWarningDialogVisible(true);
+    if (isWarningRoomsDialog) {
+      setQuotaWarningDialogVisible(true);
       return;
     }
 
     const event = new Event(Events.ROOM_CREATE);
     window.dispatchEvent(event);
-  }, [isGracePeriod, setInviteUsersWarningDialogVisible]);
+  }, [isWarningRoomsDialog, setQuotaWarningDialogVisible]);
 
   const openInfoPanel = useCallback(() => {
     if (!isVisibleInfoPanel) setVisibleInfoPanel?.(true);

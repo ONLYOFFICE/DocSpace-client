@@ -229,17 +229,21 @@ class FilesActionStore {
     let level = { result };
     try {
       folders.forEach((folder) => {
-        folder.path
-          .split("/")
-          .filter((name) => name !== "")
-          .reduce((r, name, i, a) => {
-            if (!r[name]) {
-              r[name] = { result: [] };
-              r.result.push({ name, children: r[name].result });
-            }
+        const folderPath = folder.path.split("/").filter((name) => name !== "");
 
-            return r[name];
-          }, level);
+        folderPath.reduce((r, name, i, a) => {
+          if (!r[name]) {
+            r[name] = { result: [] };
+            r.result.push({
+              name,
+              children: r[name].result,
+              isFile: folderPath.length - 1 === i && !folder.isEmptyDirectory,
+              file: folder,
+            });
+          }
+
+          return r[name];
+        }, level);
       });
     } catch (e) {
       console.error("convertToTree", e);
@@ -247,52 +251,71 @@ class FilesActionStore {
     return result;
   };
 
-  createFolderTree = async (treeList, parentFolderId) => {
+  createFolderTree = async (treeList, parentFolderId, filesList) => {
     if (!treeList || !treeList.length) return;
 
     for (let i = 0; i < treeList.length; i++) {
       const treeNode = treeList[i];
+      const isFile = treeList[i].isFile;
 
       // console.log(
       //   `createFolderTree parent id = ${parentFolderId} name '${treeNode.name}': `,
       //   treeNode.children
       // );
 
+      if (isFile) {
+        treeList[i].file.parentFolderId = parentFolderId;
+        filesList.push(treeList[i].file);
+        continue;
+      }
+
       const folder = await createFolder(parentFolderId, treeNode.name);
       const parentId = folder.id;
 
       if (treeNode.children.length == 0) continue;
 
-      await this.createFolderTree(treeNode.children, parentId);
+      await this.createFolderTree(treeNode.children, parentId, filesList);
     }
+
+    return treeList;
   };
 
-  uploadEmptyFolders = async (emptyFolders, folderId) => {
-    //console.log("uploadEmptyFolders", emptyFolders, folderId);
+  createFoldersTree = async (files, folderId) => {
+    //console.log("createFoldersTree", files, folderId);
 
-    const { secondaryProgressDataStore } = this.uploadDataStore;
-    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
-      secondaryProgressDataStore;
+    const { primaryProgressDataStore } = this.uploadDataStore;
+
+    const { setPrimaryProgressBarData, clearPrimaryProgressData } =
+      primaryProgressDataStore;
 
     const operationId = uniqueid("operation_");
 
     const toFolderId = folderId ? folderId : this.selectedFolderStore.id;
 
-    setSecondaryProgressBarData({
-      icon: "file",
+    const pbData = {
+      icon: "upload",
       visible: true,
       percent: 0,
       label: "",
       alert: false,
-      operationId,
-    });
+    };
 
-    const tree = this.convertToTree(emptyFolders);
-    await this.createFolderTree(tree, toFolderId);
+    setPrimaryProgressBarData({ ...pbData, disableUploadPanelOpen: true });
+
+    const tree = this.convertToTree(files);
+
+    const filesList = [];
+    await this.createFolderTree(tree, toFolderId, filesList);
 
     this.updateCurrentFolder(null, [folderId], null, operationId);
 
-    setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
+    if (!filesList.length) {
+      setTimeout(() => clearPrimaryProgressData(), TIMEOUT);
+    } else {
+      setPrimaryProgressBarData({ ...pbData, disableUploadPanelOpen: false });
+    }
+
+    return filesList;
   };
 
   updateFilesAfterDelete = (operationId) => {
@@ -1796,13 +1819,14 @@ class FilesActionStore {
   archiveRooms = (action) => {
     const {
       setArchiveDialogVisible,
-      setInviteUsersWarningDialogVisible,
+      setQuotaWarningDialogVisible,
       setRestoreRoomDialogVisible,
     } = this.dialogsStore;
-    const { isGracePeriod } = this.currentTariffStatusStore;
 
-    if (action === "unarchive" && isGracePeriod) {
-      setInviteUsersWarningDialogVisible(true);
+    const { isWarningRoomsDialog } = this.currentQuotaStore;
+
+    if (action === "unarchive" && isWarningRoomsDialog) {
+      setQuotaWarningDialogVisible(true);
       return;
     }
 

@@ -18,6 +18,9 @@ export interface OAuthProps {
   previewDialogVisible?: boolean;
   disableDialogVisible?: boolean;
   deleteDialogVisible?: boolean;
+  generateDeveloperTokenDialogVisible?: boolean;
+  revokeDeveloperTokenDialogVisible?: boolean;
+
   isInit: boolean;
   setIsInit: (value: boolean) => void;
 }

@@ -347,7 +347,7 @@ class ProfileActionsStore {
 
     let bookTraining = null;
 
-    if (!isMobile && this.isTeamTrainingAlertAvailable) {
+    if (!isMobile && this.authStore.isTeamTrainingAlertAvailable) {
       bookTraining = {
         key: "user-menu-book-training",
         icon: BookTrainingReactSvgUrl,

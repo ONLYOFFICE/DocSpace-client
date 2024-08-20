@@ -48,8 +48,7 @@ export interface InjectedEmptyViewContainerProps
     >,
     Pick<
       TStore["dialogsStore"],
-      | "setSelectFileFormRoomDialogVisible"
-      | "setInviteUsersWarningDialogVisible"
+      "setSelectFileFormRoomDialogVisible" | "setQuotaWarningDialogVisible"
     >,
     Pick<
       TStore["selectedFolderStore"],
@@ -61,8 +60,8 @@ export interface InjectedEmptyViewContainerProps
     TStore["selectedFolderStore"]["getSelectedFolder"]
   >;
   userId: string | undefined;
-  isGracePeriod: boolean;
   isVisibleInfoPanel: boolean;
+  isWarningRoomsDialog: boolean;
   setVisibleInfoPanel: (arg: boolean) => void;
   setViewInfoPanel: TStore["infoPanelStore"]["setView"];
 }

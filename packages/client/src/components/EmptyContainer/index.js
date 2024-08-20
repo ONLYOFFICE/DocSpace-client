@@ -47,11 +47,9 @@ const EmptyContainer = ({
 
   sectionWidth,
   isRoomNotFoundOrMoved,
-  isGracePeriod,
-  setInviteUsersWarningDialogVisible,
   isRoot,
   isPublicRoom,
-  isEmptyPage,
+  // isEmptyPage,
   roomType,
   parentRoomType,
   folderId,
@@ -92,7 +90,7 @@ export default inject(
     settingsStore,
     filesStore,
     dialogsStore,
-
+    currentQuotaStore,
     selectedFolderStore,
     clientLoadingStore,
     currentTariffStatusStore,
@@ -102,9 +100,6 @@ export default inject(
     const { isErrorRoomNotAvailable, isFiltered } = filesStore;
     const { isLoading } = clientLoadingStore;
 
-    const { isGracePeriod } = currentTariffStatusStore;
-
-    const { setInviteUsersWarningDialogVisible } = dialogsStore;
     const { isPublicRoom } = publicRoomStore;
 
     const isRoomNotFoundOrMoved =
@@ -122,8 +117,6 @@ export default inject(
 
       parentId: selectedFolderStore.parentId,
       isRoomNotFoundOrMoved,
-      isGracePeriod,
-      setInviteUsersWarningDialogVisible,
       type: selectedFolderStore.type,
       isRoot,
       isPublicRoom,

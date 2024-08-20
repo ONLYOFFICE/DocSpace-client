@@ -10,7 +10,9 @@
     "start-prod:internal": "NODE_ENV=production API_HOST=http://127.0.0.1 node server.js",
     "lint": "next lint",
     "clean": "shx rm -rf .next",
-    "deploy": "shx --silent mkdir -p ../../../publish/web/login && shx --silent mkdir -p ../../../publish/web/login/.next && shx --silent mkdir -p ../../../publish/web/login/node_modules && shx --silent mkdir -p ../../../publish/web/login/.next/static && shx cp -r .next/standalone/node_modules/* ../../../publish/web/login/node_modules && shx cp -r .next/static/* ../../../publish/web/login/.next/static    && shx cp -r .next/standalone/packages/login/.next/* ../../../publish/web/login/.next &&  shx cp -f server.prod.js ../../../publish/web/login/server.js"
+    "deploy": "shx --silent mkdir -p ../../../publish/web/login && shx --silent mkdir -p ../../../publish/web/login/.next && shx --silent mkdir -p ../../../publish/web/login/node_modules && shx --silent mkdir -p ../../../publish/web/login/.next/static && shx cp -r .next/standalone/node_modules/* ../../../publish/web/login/node_modules && shx cp -r .next/static/* ../../../publish/web/login/.next/static    && shx cp -r .next/standalone/packages/login/.next/* ../../../publish/web/login/.next &&  shx cp -f server.prod.js ../../../publish/web/login/server.js",
+    "test:e2e": "npx playwright test",
+    "test:e2e:ui": "npx playwright test --ui"
   },
   "dependencies": {
     "@hcaptcha/react-hcaptcha": "^1.10.1",
@@ -25,7 +27,6 @@
     "styled-components": "^5.3.9"
   },
   "devDependencies": {
-    "@playwright/test": "^1.46.0",
     "@svgr/webpack": "^8.1.0",
     "@types/node": "^20",
     "@types/react": "^18.2.53",

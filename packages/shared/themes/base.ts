@@ -29,7 +29,6 @@ import AvatarBaseReactSvgUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
 import { globalColors } from "./globalColors";
 import { CommonTheme } from "./commonTheme";
 import { DEFAULT_FONT_FAMILY } from "../constants";
-import { color } from "storybook-static/sb-manager/chunk-INSKDKQB";
 
 export type TColorScheme = {
   id: number;
@@ -92,6 +91,8 @@ const {
   darkRed,
 
   lightErrorStatus,
+
+  blurLight,
 } = globalColors;
 
 export const getBaseTheme = () => {
@@ -1337,7 +1338,7 @@ export const getBaseTheme = () => {
     },
 
     backdrop: {
-      backgroundColor: "rgba(6, 22, 38, 0.2)",
+      backgroundColor: blurLight,
       unsetBackgroundColor: "unset",
     },
 
@@ -2069,7 +2070,7 @@ export const getBaseTheme = () => {
       sectionHeaderToggleBgActive: grayLight,
 
       backgroundColor: white,
-      blurColor: "rgba(6, 22, 38, 0.2)",
+      blurColor: blurLight,
       borderColor: grayLightMid,
       thumbnailBorderColor: grayLightMid,
       textColor: black,

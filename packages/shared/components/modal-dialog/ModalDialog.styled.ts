@@ -49,14 +49,6 @@ const StyledModal = styled.div<{ modalSwipeOffset?: number; blur?: number }>`
   .loader-wrapper {
     padding: 0 16px 16px;
   }
-
-  .modal-backdrop-active {
-    ${(props) =>
-      props.blur &&
-      css`
-        backdrop-filter: blur(${props.blur}px) !important;
-      `};
-  }
 `;
 
 const Dialog = styled.div`

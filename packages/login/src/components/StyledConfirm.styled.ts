@@ -37,6 +37,8 @@ export const StyledPage = styled.div`
   max-width: 960px;
   box-sizing: border-box;
 
+  user-select: none;
+
   @media ${tablet} {
     padding: 0 16px;
   }

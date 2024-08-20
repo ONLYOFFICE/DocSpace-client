@@ -2,6 +2,6 @@
   "DeepLinkText": "You can open the document on the portal or in the mobile application",
   "OpenInApp": "Open in the app",
   "OpeningDocument": "Opening a document",
-  "StayInBrowser": "Stay in the browser",
-  "RememberChoice": "Remember the choice when opening documents next time"
+  "RememberChoice": "Remember the choice when opening documents next time",
+  "StayInBrowser": "Stay in the browser"
 }

@@ -2,7 +2,7 @@
   "ConfirmEmailDescription": "アクティベーションメールに記載されているリンクを使用してください。アクティベーション用リンクが記載されたメールが届いていませんか？",
   "ConfirmEmailHeader": "{{productName}}の機能を利用するために、メール({{ email }})を有効にしてください。",
   "PersonalUserQuotaAdminsDescription": "新しいファイルやフォルダをアップロードしたり作成したりするには、<1>ストレージ管理設定</1>でディスク領域を解放するか、ユーザーごとに容量制限を管理してください。",
-  "PersonalUserQuotaDescription": "新しいファイルやフォルダをアップロードしたり作成したりするには、ディスクの空き容量を確保するか、管理者に連絡してストレージの容量制限を増やしてください。",
+  "PersonalUserQuotaDescription": "新しいファイルやフォルダをアップロードしたり作成したりするには、ディスクの空き容量を確保するか、{{productName}}の管理者に連絡してストレージの容量制限を増やしてください。",
   "RequestActivation": "もう一度アクティベーションを要求する",
   "RoomQuotaHeader": "このルームは、もうすぐ制限を超えます：{{currentValue}} / {{maxValue}}",
   "StorageAndUserHeader": "ストレージと管理者/パワーユーザーの制限を超えそうです。",

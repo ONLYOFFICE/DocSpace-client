@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Informazioni su",
   "AboutCompanyTitle": "Informazioni sul programma",
   "AccessDenied": " Accesso negato",
@@ -40,6 +40,7 @@
   "ChangeButton": "Cambia",
   "ChangeQuota": "Modifica quota",
   "ChangesSavedSuccessfully": "I cambiamenti sono stati salvati con successo",
+  "ChangeUserPermissions": "Cambia le autorizzazioni per gli utenti per le persone invitate o <1>fai l’upgrade del tuo piano tariffario</1>.",
   "ChooseFromTemplates": "Scegli tra i Modelli",
   "ClearAll": "Cancella tutto",
   "ClearFilter": "Cancella filtro",
@@ -140,6 +141,8 @@
   "DontShowAgain": "Non mostrare più",
   "Download": "Scarica",
   "DownloadApps": "Scaricare applicazioni",
+  "DownloadOperationDescription": "Una volta pronti, puoi trovare i file nella cartella Download del tuo browser e chiudere questa scheda.",
+  "DownloadOperationTitle": "Download dei file in corso",
   "DropzoneTitleExsts": "(JPG o PNG)",
   "DropzoneTitleLink": "Seleziona nuova immagine",
   "DropzoneTitleSecondary": "o trascina il file qui",
@@ -321,6 +324,7 @@
   "Owner": "Proprietario",
   "PageOfTotalPage": "{{page}} di {{totalPage}}",
   "Paid": "A pagamento",
+  "PaidUsersExceedsLimit": "Il numero di amministratori/power users supera il limite: {{count}} / {{limit}}.",
   "Password": "Password",
   "PasswordLimitDigits": "cifre",
   "PasswordLimitMessage": "La password deve contenere",

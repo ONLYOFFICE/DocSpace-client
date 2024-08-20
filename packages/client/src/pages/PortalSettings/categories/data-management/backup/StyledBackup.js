@@ -625,6 +625,12 @@ const StyledBackup = styled.div`
   }
   .backup_third-party-context {
     margin-top: 4px;
+
+    svg {
+      width: 16px;
+      height: 16px;
+      padding: 7px;
+    }
   }
 `;
 const StyledBackupList = styled.div`

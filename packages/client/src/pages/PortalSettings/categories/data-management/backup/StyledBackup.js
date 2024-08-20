@@ -764,6 +764,31 @@ const StyledSettingsHeader = styled.div`
     margin: auto 0;
   }
 `;
+
+const StyledComboBoxItem = styled.div`
+  display: flex;
+
+  .drop-down-item_text {
+    color: ${({ theme, isDisabled }) =>
+      isDisabled ? theme.dropDownItem.disableColor : theme.dropDownItem.color};
+  }
+  .drop-down-item_icon {
+    display: flex;
+    align-items: center;
+
+    div {
+      display: flex;
+    }
+
+    margin-inline-start: auto;
+
+    svg {
+      min-height: 16px;
+      min-width: 16px;
+    }
+  }
+`;
+
 export {
   StyledModules,
   StyledRestoreBackup,
@@ -774,4 +799,5 @@ export {
   StyledAutoBackup,
   StyledStoragesModule,
   StyledSettingsHeader,
+  StyledComboBoxItem,
 };

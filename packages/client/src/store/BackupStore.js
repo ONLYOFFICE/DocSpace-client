@@ -39,13 +39,14 @@ import {
   getSettingsThirdParty,
   uploadBackup,
 } from "@docspace/shared/api/files";
-import i18n from "../i18n";
 import { connectedCloudsTypeTitleTranslation } from "../helpers/filesUtils.js";
 
 const { EveryDayType, EveryWeekType } = AutoBackupPeriod;
 
 class BackupStore {
+  authStore = null;
   thirdPartyStore = null;
+
   restoreResource = null;
 
   backupSchedule = {};
@@ -104,9 +105,10 @@ class BackupStore {
   accounts = [];
   connectedAccount = [];
 
-  constructor(thirdPartyStore) {
+  constructor(authStore, thirdPartyStore) {
     makeAutoObservable(this);
 
+    this.authStore = authStore;
     this.thirdPartyStore = thirdPartyStore;
   }
 
@@ -223,40 +225,48 @@ class BackupStore {
       index++;
     });
 
+    accounts = accounts.sort((storage) => (storage.connected ? -1 : 1));
+
     this.setThirdPartyAccounts(accounts);
 
     console.log(selectedAccount, accounts);
+    const connectedThirdPartyAccount = accounts.findLast((a) => a.connected);
 
     this.setSelectedThirdPartyAccount(
       Object.keys(selectedAccount).length !== 0
         ? selectedAccount
-        : { ...accounts[0] },
+        : connectedThirdPartyAccount,
     );
   };
 
   getThirdPartyAccount = (provider, t) => {
-    if (!provider.connected) return { account: null, isConnected: false };
-
     const serviceTitle = connectedCloudsTypeTitleTranslation(provider.name, t);
+    const serviceLabel = provider.connected
+      ? serviceTitle
+      : `${serviceTitle} (${t("CreateEditRoomDialog:ActivationRequired")})`;
 
     const isConnected =
       this.connectedThirdPartyAccount?.providerKey === "WebDav"
         ? serviceTitle === this.connectedThirdPartyAccount?.title
         : provider.key === this.connectedThirdPartyAccount?.providerKey;
 
+    const isDisabled = !provider.connected && !this.authStore.isAdmin;
+
     const account = {
       key: provider.name,
-      label: serviceTitle,
-      title: serviceTitle,
+      label: serviceLabel,
+      title: serviceLabel,
       provider_key: provider.key,
       ...(provider.clientId && {
         provider_link: provider.clientId,
       }),
       storageIsConnected: isConnected,
+      connected: provider.connected,
       ...(isConnected && {
         provider_id: this.connectedThirdPartyAccount?.providerId,
         id: this.connectedThirdPartyAccount.id,
       }),
+      disabled: isDisabled,
     };
 
     return { account, isConnected };

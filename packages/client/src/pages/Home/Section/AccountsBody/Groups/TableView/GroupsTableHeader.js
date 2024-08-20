@@ -50,6 +50,16 @@ class GroupsTableHeader extends React.Component {
         onClick: this.onFilter,
       },
       {
+        key: "People",
+        title: props.t("Common:People"),
+        enable: props.peopleAccountsGroupsColumnIsEnabled,
+        default: true,
+        sortBy: "membersCount",
+        onClick: this.onFilter,
+        resizable: true,
+        onChange: this.onColumnChange,
+      },
+      {
         key: "Head of Group",
         title: props.t("Common:HeadOfGroup"),
         enable: props.managerAccountsGroupsColumnIsEnabled,
@@ -161,6 +171,8 @@ export default inject(
     setColumnEnable: tableStore.setColumnEnable,
     managerAccountsGroupsColumnIsEnabled:
       tableStore.managerAccountsGroupsColumnIsEnabled,
+    peopleAccountsGroupsColumnIsEnabled:
+      tableStore.peopleAccountsGroupsColumnIsEnabled,
   }),
 )(
   withTranslation(["People", "Common", "PeopleTranslations"])(

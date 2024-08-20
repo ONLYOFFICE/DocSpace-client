@@ -27,6 +27,8 @@ const StyledImage = styled.img`
   height: 32px;
 
   border-radius: 3px;
+
+  object-fit: cover;
 `;
 
 interface NameCellProps {

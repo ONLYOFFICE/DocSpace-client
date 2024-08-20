@@ -242,7 +242,6 @@ const StyledProperties = styled.div`
       gap: 4px;
 
       .property-tag {
-        background: red;
         max-width: 195px;
         margin: 0;
         background: ${(props) => props.theme.infoPanel.details.tagBackground};

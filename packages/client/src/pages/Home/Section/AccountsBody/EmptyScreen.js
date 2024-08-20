@@ -28,10 +28,12 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
+import InviteUserIcon from "PUBLIC_DIR/images/emptyview/invite.user.svg";
+import TrashIcon from "PUBLIC_DIR/images/emptyview/trash.svg";
+import ClearEmptyFilterSvg from "PUBLIC_DIR/images/clear.empty.filter.svg";
+
 import EmptyScreenPersonSvgLight from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.light.svg";
 import EmptyScreenPersonSvgDark from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.dark.svg";
-
-import ClearEmptyFilterSvg from "PUBLIC_DIR/images/clear.empty.filter.svg";
 
 import { EmptyView } from "@docspace/shared/components/empty-view";
 
@@ -41,12 +43,23 @@ const EmptyScreen = ({
   setIsLoading,
   theme,
   isEmptyGroup = false,
+  isRoomAdmin,
+  editGroup,
+  deleteGroup,
+  currentGroup,
 }) => {
-  const { t } = useTranslation(["People", "Common"]);
+  const { t } = useTranslation([
+    "People",
+    "Common",
+    "EmptyView",
+    "DeleteDialog",
+  ]);
   const isPeopleAccounts = window.location.pathname.includes("accounts/people");
 
   const title = t("Common:NotFoundUsers");
-  const description = t("Common:NotFoundUsersDescription");
+  const description = isEmptyGroup
+    ? t("Common:EmptyGroupDescription")
+    : t("Common:NotFoundUsersDescription");
 
   /**
    * @type {React.MouseEventHandler<HTMLAnchorElement>}
@@ -58,43 +71,66 @@ const EmptyScreen = ({
     isPeopleAccounts ? resetFilter() : resetInsideGroupFilter();
   };
 
-  const imageSrc = theme.isBase ? (
+  const icon = theme.isBase ? (
     <EmptyScreenPersonSvgLight />
   ) : (
     <EmptyScreenPersonSvgDark />
   );
 
-  if (isEmptyGroup) {
-    return (
-      <EmptyScreenContainer
-        imageSrc={imageSrc}
-        imageAlt="Empty Screen Filter image"
-        headerText={title}
-      />
-    );
-  }
+  /**
+   * @returns {import("@docspace/shared/components/empty-view").EmptyViewOptionsType}
+   */
+  const getOptions = () => {
+    if (isEmptyGroup) {
+      return [
+        {
+          key: "group-add-user",
+          title: t("Common:AddUsers"),
+          description: t("EmptyView:EmptyGroupAddedUserOptionDescription"),
+          disabled: isRoomAdmin || currentGroup?.isLDAP,
+          icon: <InviteUserIcon />,
+          onClick: () => editGroup(currentGroup),
+        },
+        {
+          key: "delete-group",
+          title: t("DeleteDialog:DeleteGroupTitle"),
+          description: t("EmptyView:EmptyGroupDeleteOptionDescription"),
+          disabled: isRoomAdmin || currentGroup?.isLDAP,
+          icon: <TrashIcon />,
+          onClick: () => deleteGroup(currentGroup, true),
+        },
+      ];
+    }
+
+    return {
+      to: "",
+      description: t("Common:ClearFilter"),
+      icon: <ClearEmptyFilterSvg />,
+      onClick: onResetFilter,
+    };
+  };
 
   return (
     <EmptyView
-      description={description}
+      icon={icon}
       title={title}
-      icon={imageSrc}
-      options={{
-        to: "",
-        description: t("Common:ClearFilter"),
-        icon: <ClearEmptyFilterSvg />,
-        onClick: onResetFilter,
-      }}
+      options={getOptions()}
+      description={description}
     />
   );
 };
 
 export default inject(({ peopleStore, clientLoadingStore, settingsStore }) => {
-  const { resetFilter, groupsStore } = peopleStore;
+  const { resetFilter, groupsStore, userStore } = peopleStore;
 
-  const { resetInsideGroupFilter } = groupsStore;
+  const { resetInsideGroupFilter, editGroup, deleteGroup, currentGroup } =
+    groupsStore;
+
+  console.log({ editGroup });
 
   const { setIsSectionBodyLoading } = clientLoadingStore;
+
+  const isRoomAdmin = userStore?.user?.isRoomAdmin;
 
   const setIsLoading = (param) => {
     setIsSectionBodyLoading(param);
@@ -102,7 +138,10 @@ export default inject(({ peopleStore, clientLoadingStore, settingsStore }) => {
   return {
     resetFilter,
     resetInsideGroupFilter,
-
+    isRoomAdmin,
+    editGroup,
+    deleteGroup,
+    currentGroup,
     setIsLoading,
     theme: settingsStore.theme,
   };

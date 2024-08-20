@@ -41,5 +41,7 @@
   "MigrationDataDescription": "Import data to your {{productName}} from ONLYOFFICE Workspace, Google Workspace, or Nextcloud.",
   "EmptyRootRoomUserTitle": "There are no rooms here yet",
   "EmptyRootRoomUserDescription": "The shared room will appear here.",
-  "EmptyRecentDescription": "Your last viewed or edited docs will be displayed in this section."
+  "EmptyRecentDescription": "Your last viewed or edited docs will be displayed in this section.",
+  "EmptyGroupAddedUserOptionDescription": "Add group members and assign the head",
+  "EmptyGroupDeleteOptionDescription": "If you don't need this group anymore"
 }

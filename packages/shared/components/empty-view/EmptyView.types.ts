@@ -1,4 +1,5 @@
 import type { To } from "react-router-dom";
+import type { ContextMenuModel } from "../context-menu";
 
 export type EmptyViewLinkType = {
   to: To;

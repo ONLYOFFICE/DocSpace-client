@@ -25,7 +25,6 @@
   "Pay": "Pagar",
   "Payer": "Pagador",
   "PayerDescription": "Este usuario tiene acceso a los detalles de pago y es el único que puede ajustar la cuota y realizar pagos. El propietario de {{productName}}, así como el propio gestor de pagos, pueden reasignar el rol de gestor de pagos mediante el portal de cliente de Stripe.",
-  "PaymentOverdue": "No se puede añadir nuevos usuarios.",
   "PriceCalculation": "Calcule su precio",
   "RenewSubscription": "Renovar suscripción al plan {{planName}}",
   "RoomManagerDescription": "Administración y archivado de salas, invitación y gestión de usuarios. Se pueden asignar varios administradores a la sala.",
@@ -35,7 +34,6 @@
   "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/mes</3>",
   "UpgradeNow": "Actualizar ahora",
   "UpgradePlan": "Actualizar plan",
-  "UpgradePlanInfo": "La adición de nuevos usuarios excederá el número máximo de miembros de la sala permitidos por su plan de precios actual.",
   "UserNotFound": "No se ha encontrado el usuario <1>{{email}}</1>.",
   "UserNotFoundMatchingEmail": "No hemos podido encontrar al usuario con el correo electrónico de Stripe correspondiente.",
   "YourPrice": "Su precio"

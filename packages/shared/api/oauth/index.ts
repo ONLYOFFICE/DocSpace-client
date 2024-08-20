@@ -12,6 +12,7 @@ import {
   TConsentData,
   TConsentList,
   TGenerateDeveloperToken,
+  TIntrospectDeveloperToken,
 } from "../../utils/oauth/types";
 
 export const getClient = async (clientId: string): Promise<IClientProps> => {
@@ -269,6 +270,17 @@ export const revokeDeveloperToken = (
 
   return request(
     { method: "post", url: "/oauth2/revoke", data: params },
+    false,
+    true,
+  );
+};
+
+export const introspectDeveloperToken = (token: string) => {
+  const params = new URLSearchParams();
+  params.append("token", token);
+
+  return request<TIntrospectDeveloperToken>(
+    { method: "post", url: "/oauth2/introspect", data: params },
     false,
     true,
   );

@@ -259,3 +259,25 @@ export const getTopFreeRole = (t, roomType) => {
   );
   return freeAccesses[0];
 };
+
+export const isPaidUserRole = (selectedAccess) => {
+  return (
+    selectedAccess === ShareAccessRights.FullAccess ||
+    selectedAccess === ShareAccessRights.Collaborator ||
+    selectedAccess === ShareAccessRights.RoomManager
+  );
+};
+
+export const getFreeUsersTypeArray = () => {
+  return [EmployeeType.Guest];
+};
+
+export const getFreeUsersRoleArray = () => {
+  return [
+    ShareAccessRights.Comment,
+    ShareAccessRights.Editing,
+    ShareAccessRights.FormFilling,
+    ShareAccessRights.ReadOnly,
+    ShareAccessRights.Review,
+  ];
+};

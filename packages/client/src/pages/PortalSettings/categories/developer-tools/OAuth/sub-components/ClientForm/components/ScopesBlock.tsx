@@ -56,6 +56,8 @@ const ScopesBlock = ({
   ) => {
     const isChecked = checkedScopes.includes(name);
 
+    const isWrite = type === "write";
+
     if (!isChecked) {
       setFilteredScopes((val) => {
         val[group].isChecked = true;
@@ -87,6 +89,8 @@ const ScopesBlock = ({
 
       setCheckedScopes((val) => val.filter((v) => v !== name));
     }
+
+    if (isWrite) onAddScope("scopes", name.replace("write", "read"));
 
     onAddScope("scopes", name);
   };

@@ -21,6 +21,10 @@
       "path": "packages/management",
     },
     {
+      "name": "🗂 @docspace/next-management",
+      "path": "packages/next-management",
+    },
+    {
       "name": "📦 @docspace/shared",
       "path": "packages/shared",
     },

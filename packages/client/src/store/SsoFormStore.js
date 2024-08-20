@@ -406,6 +406,7 @@ class SsoFormStore {
       const config = await resetSsoForm();
 
       this.setFields(config);
+      this.hideErrors();
     } catch (err) {
       toastr.error(err);
       console.error(err);

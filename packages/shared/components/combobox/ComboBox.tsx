@@ -173,6 +173,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
     optionStyle,
     style,
     withLabel = true,
+    displayArrow,
   } = props;
 
   const { tabIndex, onClickSelectedItem } = props;
@@ -297,6 +298,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
         isLoading={isLoading}
         type={type}
         plusBadgeValue={plusBadgeValue}
+        displayArrow={displayArrow}
       />
 
       {displayType !== "toggle" && (

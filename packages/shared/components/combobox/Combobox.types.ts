@@ -167,6 +167,7 @@ export interface ComboboxProps {
   title?: string;
   plusBadgeValue?: number;
   withLabel?: boolean;
+  displayArrow?: boolean;
 }
 
 export interface ComboButtonProps {
@@ -189,6 +190,7 @@ export interface ComboButtonProps {
   isLoading?: boolean;
   type?: TCombobox;
   plusBadgeValue?: number;
+  displayArrow?: boolean;
 }
 
 export interface ComboButtonThemeProps extends ComboButtonProps {

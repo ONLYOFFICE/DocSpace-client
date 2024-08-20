@@ -30,9 +30,9 @@ import { withTranslation } from "react-i18next";
 
 import { TableHeader } from "@docspace/shared/components/table";
 import { Events } from "@docspace/shared/enums";
+import { TableVersions } from "SRC_DIR/helpers/constants";
 
-const TABLE_VERSION = "5";
-const TABLE_COLUMNS = `groupsTableColumns_ver-${TABLE_VERSION}`;
+const TABLE_COLUMNS = `groupsTableColumns_ver-${TableVersions.Groups}`;
 
 class GroupsTableHeader extends React.Component {
   constructor(props) {

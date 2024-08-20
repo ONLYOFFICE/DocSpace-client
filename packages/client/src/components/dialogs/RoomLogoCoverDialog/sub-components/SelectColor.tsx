@@ -30,6 +30,7 @@ import styled, { css } from "styled-components";
 import { mobile, tablet } from "@docspace/shared/utils";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";
+import PencilSvgUrl from "PUBLIC_DIR/images/pencil.outline.react.svg?url";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { DropDown } from "@docspace/shared/components/drop-down";
 import { ColorPicker } from "@docspace/shared/components/color-picker";
@@ -45,6 +46,9 @@ const StyledColorItem = styled.div<ColorItemProps>`
   height: 30px;
   margin-top: 8px;
   border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: ${(props) => props.color};
 
   @media ${tablet} {
@@ -52,13 +56,13 @@ const StyledColorItem = styled.div<ColorItemProps>`
     height: 40px;
   }
 
-  ${(props) =>
+  /* ${(props) =>
     props.isEmptyColor &&
     css`
       display: flex;
       justify-content: center;
       align-items: center;
-    `}
+    `} */
 
   ${(props) =>
     props.isSelected &&
@@ -72,8 +76,8 @@ const StyledColorItem = styled.div<ColorItemProps>`
 `;
 
 const SelectedColorItem = styled.div`
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   margin-top: 6px;
   border-radius: 50%;
   border: ${(props) => `solid 2px ${props.color}`};
@@ -99,6 +103,52 @@ const SelectedColorItem = styled.div`
   }
 `;
 
+const CustomSelectedColor = styled.div`
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
+
+  .color-picker-circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: ${(props) => props.color};
+  }
+
+  ${(props) =>
+    props.isSelected &&
+    css`
+      width: 26px;
+      height: 26px;
+
+      border: ${(props) => `solid 2px ${props.color}`};
+    `}
+
+  ${(props) =>
+    !props.isSelected &&
+    css`
+      background-color: ${(props) => props.color};
+    `}
+
+  svg {
+    path {
+      fill: #fff;
+    }
+    &:hover {
+      path {
+        fill: #fff;
+      }
+    }
+  }
+`;
+
 export const SelectColor = ({
   logoColors,
   selectedColor,
@@ -106,15 +156,27 @@ export const SelectColor = ({
   onChangeColor,
 }: SelectColorProps) => {
   const [openColorPicker, setOpenColorPicker] = useState<boolean>(false);
+  const [pickerColor, setPickerColor] = useState<string>("");
 
   const iconRef = useRef(null);
 
   const onApply = (color: string) => {
     setOpenColorPicker(false);
+    setPickerColor(color);
     onChangeColor(color);
   };
 
+  const onOpenColorPicker = () => {
+    if (pickerColor && pickerColor !== selectedColor) {
+      return onChangeColor(pickerColor);
+    }
+    setOpenColorPicker(true);
+  };
+
   const isCustomColor = !logoColors.includes(selectedColor); // add usecallback
+  const isSelectedColorPicker = pickerColor === selectedColor;
+
+  console.log(isSelectedColorPicker);
 
   return (
     <div className="select-color-container">
@@ -133,19 +195,48 @@ export const SelectColor = ({
             />
           ),
         )}
-        <StyledColorItem
-          isEmptyColor
-          isSelected={openColorPicker}
-          ref={iconRef}
-        >
-          <IconButton
-            className="select-color-plus-icon"
-            size={16}
-            iconName={PlusSvgUrl}
-            onClick={() => setOpenColorPicker(true)}
-            isFill
-          />
-        </StyledColorItem>
+        {pickerColor ? (
+          <CustomSelectedColor
+            isSelected={isSelectedColorPicker}
+            color={pickerColor}
+            ref={iconRef}
+          >
+            {isSelectedColorPicker ? (
+              <div className="color-picker-circle">
+                <IconButton
+                  className="select-color-plus-icon"
+                  size={12}
+                  iconName={PencilSvgUrl}
+                  onClick={onOpenColorPicker}
+                  isFill
+                />
+              </div>
+            ) : (
+              <IconButton
+                className="select-color-plus-icon"
+                size={12}
+                iconName={PencilSvgUrl}
+                onClick={onOpenColorPicker}
+                isFill
+              />
+            )}
+          </CustomSelectedColor>
+        ) : (
+          <StyledColorItem
+            isEmptyColor
+            isSelected={openColorPicker}
+            ref={iconRef}
+          >
+            <IconButton
+              className="select-color-plus-icon"
+              size={16}
+              iconName={PlusSvgUrl}
+              onClick={onOpenColorPicker}
+              isFill
+            />
+          </StyledColorItem>
+        )}
+
         <DropDown
           directionX="both"
           forwardedRef={iconRef}
@@ -156,7 +247,7 @@ export const SelectColor = ({
         >
           <DropDownItem className="drop-down-item-hex">
             <ColorPicker
-              id="accent-hex"
+              // id="accent-hex"
               onClose={() => setOpenColorPicker(false)}
               onApply={onApply}
               appliedColor={selectedColor}

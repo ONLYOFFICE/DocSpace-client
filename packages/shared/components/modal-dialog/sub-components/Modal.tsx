@@ -158,12 +158,6 @@ const Modal = ({
             embedded={embedded}
             ref={contentRef}
           >
-            {isCloseable && (
-              <CloseButton
-                currentDisplayType={currentDisplayType}
-                onClick={onClose}
-              />
-            )}
             {isLoading ? (
               currentDisplayType === "modal" ? (
                 <DialogSkeleton
@@ -183,16 +177,16 @@ const Modal = ({
               containerComponent
             ) : (
               <FormWrapper withForm={withForm || false}>
-                {header && (
-                  <StyledHeader
-                    id="modal-header-swipe"
-                    className={
-                      classNames(["modal-header", headerProps.className]) ||
-                      "modal-header"
-                    }
-                    {...headerProps}
-                    currentDisplayType={currentDisplayType}
-                  >
+                <StyledHeader
+                  id="modal-header-swipe"
+                  className={
+                    classNames(["modal-header", headerProps.className]) ||
+                    "modal-header"
+                  }
+                  {...headerProps}
+                  currentDisplayType={currentDisplayType}
+                >
+                  {header && (
                     <Heading
                       level={1}
                       className="heading"
@@ -201,8 +195,15 @@ const Modal = ({
                     >
                       {headerComponent}
                     </Heading>
-                  </StyledHeader>
-                )}
+                  )}
+                  {isCloseable && (
+                    <CloseButton
+                      currentDisplayType={currentDisplayType}
+                      onClick={onClose}
+                    />
+                  )}
+                </StyledHeader>
+
                 {body && (
                   <StyledBody
                     className={

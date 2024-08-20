@@ -77,6 +77,7 @@ import { ConfirmRouteContext } from "../ConfirmRoute";
 import EmailInputForm from "./sub-components/EmailInputForm";
 import RegistrationForm from "./sub-components/RegistrationForm";
 import { RegisterContainer } from "./CreateUserForm.styled";
+import { useRouter } from "next/navigation";
 
 export type CreateUserFormProps = {
   userNameRegex: string;
@@ -103,6 +104,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
   const { linkData, roomData } = useContext(ConfirmRouteContext);
   const { t, i18n } = useTranslation(["Confirm", "Common"]);
   const { currentDeviceType } = useDeviceType();
+  const router = useRouter();
 
   const currentCultureName = i18n.language;
   const isDesktopView = currentDeviceType === DeviceType.desktop;
@@ -234,11 +236,8 @@ const CreateUserForm = (props: CreateUserFormProps) => {
         sessionStorage.setItem("referenceUrl", finalUrl);
       }
 
-      window.location.href = combineUrl(
-        window.ClientConfig?.proxy?.url,
-        "/login",
-        `?loginData=${loginData}`,
-      );
+      router.push(`/?loginData=${loginData}`);
+      //  window.location.href = `/login?loginData=${loginData}`;
     } catch (error) {
       const knownError = error as TError;
       const status =
@@ -462,7 +461,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
 
   const onValidateEmail = (result: TValidate): undefined => {
     setEmailValid(result.isValid);
-    setEmailErrorText(result.errors?.[0]);
+    setEmailErrorText(result.errors?.[0] ?? "");
   };
 
   const onClickBack = () => {

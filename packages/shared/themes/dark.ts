@@ -665,7 +665,7 @@ const Dark: TTheme = {
     color: white,
     disableColor: grayDarkText,
 
-    backgroundColor: black,
+    backgroundColor: darkGrayLight,
     disableBackgroundColor: grayDarkStrong,
 
     width: {

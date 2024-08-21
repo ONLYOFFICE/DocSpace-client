@@ -35,6 +35,7 @@ interface ViewerWrapperProps {
   targetFile?: TFile;
   playlistPos: number;
   userAccess?: boolean;
+  autoPlay: boolean;
   playlist: PlaylistType[];
   currentDeviceType?: DeviceType;
 

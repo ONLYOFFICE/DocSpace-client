@@ -28,6 +28,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { Textarea } from "@docspace/shared/components/textarea";
+import { PasswordInput } from "@docspace/shared/components/password-input";
 
 const LdapFieldComponent = (props) => {
   const {
@@ -37,6 +38,7 @@ const LdapFieldComponent = (props) => {
     setErrorField,
     name,
     onChange,
+    isPassword,
     ...prop
   } = props;
 
@@ -67,6 +69,17 @@ const LdapFieldComponent = (props) => {
 
   if (isTextArea)
     return <Textarea name={name} onChange={onChangeFn} {...prop} />;
+
+  if (isPassword)
+    return (
+      <PasswordInput
+        name={name}
+        onBlur={onBlur}
+        onFocus={onFocus}
+        onChange={onChangeFn}
+        {...prop}
+      />
+    );
 
   return (
     <TextInput

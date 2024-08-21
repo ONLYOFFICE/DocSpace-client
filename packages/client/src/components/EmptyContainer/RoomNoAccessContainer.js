@@ -38,6 +38,7 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 
 import { RoomSearchArea } from "@docspace/shared/enums";
+import { frameCallEvent } from "@docspace/shared/utils/common";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 
@@ -60,6 +61,8 @@ const RoomNoAccessContainer = (props) => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
+    frameCallEvent({ event: "onNoAccess" });
+
     const timer = setTimeout(onGoToShared, 5000);
     return () => clearTimeout(timer);
   }, []);

@@ -182,11 +182,11 @@ class AxiosClient {
     }
   };
 
-  request = (
+  request = <T>(
     options: TReqOption & AxiosRequestConfig,
     skipRedirect = false,
     isOAuth = false,
-  ) => {
+  ): Promise<T> | undefined => {
     const onSuccess = (response: TRes) => {
       const error = this.getResponseError(response);
 
@@ -237,10 +237,12 @@ class AxiosClient {
       }
 
       const loginURL = combineUrl(proxyURL, "/login");
+
       if (!this.isSSR) {
         switch (error.response?.status) {
           case 401: {
-            if (options.skipUnauthorized) return Promise.resolve();
+            if (options.skipUnauthorized || window?.ClientConfig?.isFrame)
+              return Promise.resolve();
             if (options.skipLogout) return Promise.reject(error);
 
             const opt: AxiosRequestConfig = {
@@ -261,14 +263,13 @@ class AxiosClient {
             break;
           case 403: {
             const pathname = window.location.pathname;
-            const isFrame = window?.ClientConfig?.isFrame;
 
             const isArchived = pathname.indexOf("/rooms/archived") !== -1;
 
             const isRooms =
               pathname.indexOf("/rooms/shared") !== -1 || isArchived;
 
-            if (isRooms && !skipRedirect && !isFrame) {
+            if (isRooms && !skipRedirect && !window?.ClientConfig?.isFrame) {
               setTimeout(() => {
                 window.DocSpace.navigate(isArchived ? "/archived" : "/");
               }, 1000);
@@ -295,7 +296,9 @@ class AxiosClient {
 
       return Promise.reject(error);
     };
-    return this.client?.(options).then(onSuccess).catch(onError);
+    return this.client?.(options).then(onSuccess).catch(onError) as
+      | Promise<T>
+      | undefined;
   };
 }
 

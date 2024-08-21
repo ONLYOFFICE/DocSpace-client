@@ -49,20 +49,16 @@ const {
   darkBlack,
 
   lightGrayBlackout,
-  darkGrayBlackout,
   grayLight,
   darkGrayLight,
   lightGrayHover,
-  lightDarkGrayHover,
   grayLightMid,
   grayDarkMid,
   lightGraySelected,
   grayStrong,
-  grayDarkStrong,
   gray,
   grayDark,
   lightGrayDark,
-  darkGrayDark,
   grayText,
   grayDarkText,
   lightBlueMain,
@@ -76,32 +72,21 @@ const {
   mainGreen,
 
   lightErrorStatus,
-  darkErrorStatus,
   favoritesStatus,
   lightStatusWarning,
-  darkStatusWarning,
   lightStatusPositive,
-  darkStatusPositive,
 
   lightIcons,
-  darkIcon,
   link,
-  darkLink,
   blueLightMid,
 
   lightToastDone,
-  darkToastDone,
   lightToastInfo,
-  darkToastInfo,
   lightToastAlert,
-  darkToastAlert,
   lightToastWarning,
-  darkToastWarning,
 
   dndColor,
-  dndDarkColor,
   dndHoverColor,
-  dndDarkHover,
 
   onWhiteColor,
   boxShadowColor,
@@ -2512,9 +2497,8 @@ export const getBaseTheme = () => {
       },
       separator: {
         borderBottom: `1px solid ${grayLightMid} !important`,
-        margin: "6px 16px 6px 16px !important",
+        margin: "6px 16px !important",
         height: "1px !important",
-        width: "calc(100% - 32px) !important",
       },
       text: {
         header: {
@@ -2535,7 +2519,7 @@ export const getBaseTheme = () => {
       background: "none",
       svgFill: black,
       header: {
-        height: "49px",
+        height: "55px",
         borderBottom: `1px solid ${grayLightMid}`,
         marginBottom: "6px",
       },
@@ -2545,7 +2529,7 @@ export const getBaseTheme = () => {
       padding: "0 12px",
       mobile: {
         height: "36px",
-        padding: "0 16px 6px",
+        padding: "6px 16px",
       },
     },
     newContextMenu: {
@@ -2553,7 +2537,6 @@ export const getBaseTheme = () => {
       borderRadius: "6px",
       mobileBorderRadius: "6px 6px 0 0",
       boxShadow: `0px 8px 16px 0px ${boxShadowColor}`,
-      padding: "6px 0px",
       border: "none",
       devices: {
         maxHeight: "calc(100vh - 64px)",

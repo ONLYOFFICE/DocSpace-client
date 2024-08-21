@@ -37,7 +37,6 @@ const {
   black,
   darkBlack,
 
-  lightGrayBlackout,
   darkGrayBlackout,
   grayLight,
   darkGrayLight,
@@ -64,28 +63,21 @@ const {
 
   mainOrange,
 
-  lightErrorStatus,
   darkErrorStatus,
   favoritesStatus,
   lightStatusWarning,
   darkStatusWarning,
-  lightStatusPositive,
   darkStatusPositive,
 
-  lightIcons,
   darkIcon,
   link,
   darkLink,
   blueLightMid,
   bigGrayDarkMid,
 
-  lightToastDone,
   darkToastDone,
-  lightToastInfo,
   darkToastInfo,
-  lightToastAlert,
   darkToastAlert,
-  lightToastWarning,
   darkToastWarning,
 
   dndColor,
@@ -663,9 +655,9 @@ const Dark: TTheme = {
 
   input: {
     color: white,
-    disableColor: grayDarkStrong,
+    disableColor: grayDarkText,
 
-    backgroundColor: black,
+    backgroundColor: darkGrayLight,
     disableBackgroundColor: grayDarkStrong,
 
     width: {
@@ -2499,7 +2491,6 @@ const Dark: TTheme = {
       borderBottom: `1px solid ${grayDarkStrong} !important`,
       margin: "6px 16px 6px 16px !important",
       height: "1px !important",
-      width: "calc(100% - 32px) !important",
     },
     text: {
       header: {
@@ -2520,7 +2511,7 @@ const Dark: TTheme = {
     background: "none",
     svgFill: white,
     header: {
-      height: "49px",
+      height: "55px",
       borderBottom: `1px solid ${grayDarkStrong}`,
       marginBottom: "6px",
     },
@@ -2530,7 +2521,7 @@ const Dark: TTheme = {
     padding: "0 12px",
     mobile: {
       height: "36px",
-      padding: "0 16px 6px",
+      padding: "6px 16px",
     },
   },
   newContextMenu: {
@@ -2538,7 +2529,6 @@ const Dark: TTheme = {
     borderRadius: "6px",
     mobileBorderRadius: "6px 6px 0 0",
     boxShadow: `0px 8px 16px 0px ${boxShadowDarkColor}`,
-    padding: "6px 0px",
     border: `1px solid ${grayDarkStrong}`,
     devices: {
       maxHeight: "calc(100vh - 64px)",

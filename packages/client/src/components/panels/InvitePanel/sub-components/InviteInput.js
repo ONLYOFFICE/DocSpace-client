@@ -42,6 +42,7 @@ import BetaBadge from "../../../BetaBadgeWrapper";
 import { getMembersList } from "@docspace/shared/api/people";
 import {
   AccountsSearchArea,
+  EmployeeType,
   RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
@@ -50,7 +51,7 @@ import { isBetaLanguage } from "@docspace/shared/utils";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
 import AddUsersPanel from "../../AddUsersPanel";
-import { getAccessOptions, getTopFreeRole } from "../utils";
+import { getAccessOptions, getTopFreeRole, isPaidUserRole } from "../utils";
 import AccessSelector from "../../../AccessSelector";
 
 import {
@@ -68,6 +69,7 @@ import {
 
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
+import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 
 const minSearchValue = 2;
 
@@ -92,6 +94,9 @@ const InviteInput = ({
   i18n,
   setCultureKey,
   standalone,
+  isPaidUserAccess,
+  setInvitePaidUsersCount,
+  isUserTariffLimit,
 }) => {
   const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
@@ -131,24 +136,66 @@ const InviteInput = ({
   const toUserItems = (query) => {
     const addresses = parseAddresses(query);
     const uid = () => Math.random().toString(36).slice(-6);
+    let userAccess = selectedAccess;
+
+    const isAccounts = roomId === -1;
+    const isPaidAccess = isAccounts
+      ? isPaidUserAccess(userAccess)
+      : isPaidUserRole(userAccess);
 
     if (addresses.length > 1) {
-      return addresses.map((address) => {
+      let isShowErrorToast = false;
+
+      const itemsArray = addresses.map((address) => {
+        if (isPaidAccess) {
+          if (isUserTariffLimit) {
+            const FreeUser = isAccounts
+              ? EmployeeType.Guest
+              : getTopFreeRole(t, roomType)?.access;
+
+            if (FreeUser) {
+              userAccess = FreeUser;
+              isShowErrorToast = true;
+            }
+          } else {
+            setInvitePaidUsersCount();
+          }
+        }
+
         return {
           email: address.email,
           id: uid(),
-          access: selectedAccess,
+          access: userAccess,
           displayName: address.email,
           errors: address.parseErrors,
           isEmailInvite: true,
         };
       });
+
+      if (isShowErrorToast) toastr.error(<PaidQuotaLimitError />);
+
+      return itemsArray;
+    }
+
+    if (isPaidAccess) {
+      if (isUserTariffLimit) {
+        const FreeUser = isAccounts
+          ? EmployeeType.Guest
+          : getTopFreeRole(t, roomType)?.access;
+
+        if (FreeUser) {
+          userAccess = FreeUser;
+          toastr.error(<PaidQuotaLimitError />);
+        }
+      } else {
+        setInvitePaidUsersCount();
+      }
     }
 
     return {
       email: addresses[0].email,
       id: uid(),
-      access: selectedAccess,
+      access: userAccess,
       displayName: addresses[0].email,
       errors: addresses[0].parseErrors,
       isEmailInvite: true,
@@ -219,10 +266,15 @@ const InviteInput = ({
   };
 
   const removeExist = (items) => {
-    const filtered = items.reduce((unique, o) => {
-      !unique.some((obj) =>
-        obj.isGroup ? obj.id === o.id : obj.email === o.email,
-      ) && unique.push(o);
+    const filtered = items.reduce((unique, current) => {
+      const isUnique = !unique.some((obj) =>
+        obj.isGroup ? obj.id === current.id : obj.email === current.email,
+      );
+
+      if (!isUnique && isPaidUserAccess(current.access))
+        setInvitePaidUsersCount(-1);
+
+      isUnique && unique.push(current);
 
       return unique;
     }, []);
@@ -260,6 +312,18 @@ const InviteInput = ({
           });
         }
 
+        if (
+          isUserTariffLimit &&
+          item.isVisitor &&
+          isPaidUserRole(item.access)
+        ) {
+          const freeRole = getTopFreeRole(t, roomType)?.access;
+
+          if (freeRole) {
+            item.access = freeRole;
+            toastr.error(<PaidQuotaLimitError />);
+          }
+        }
         const items = removeExist([item, ...inviteItems]);
         setInviteItems(items);
       }
@@ -319,6 +383,19 @@ const InviteInput = ({
         u.warning = t("GroupMaxAvailableRoleWarning", {
           roleName: topFreeRole.label,
         });
+      }
+
+      if (
+        isUserTariffLimit &&
+        (!u.avatar || u.isVisitor) &&
+        isPaidUserRole(u.access)
+      ) {
+        const freeRole = getTopFreeRole(t, roomType)?.access;
+
+        if (freeRole) {
+          u.access = freeRole;
+          toastr.error(<PaidQuotaLimitError />);
+        }
       }
     });
 
@@ -551,6 +628,10 @@ const InviteInput = ({
           containerRef={inputsRef}
           isOwner={isOwner}
           isMobileView={isMobileView}
+          {...(roomId === -1 && {
+            isSelectionDisabled: isUserTariffLimit,
+            selectionErrorText: <PaidQuotaLimitError />,
+          })}
         />
 
         {!hideSelector && addUsersPanelVisible && (
@@ -578,31 +659,38 @@ const InviteInput = ({
   );
 };
 
-export default inject(({ settingsStore, dialogsStore, userStore }) => {
-  const { isOwner } = userStore.user;
-  const {
-    invitePanelOptions,
-    setInviteItems,
-    inviteItems,
-    setInviteLanguage,
-    culture,
-  } = dialogsStore;
+export default inject(
+  ({ settingsStore, dialogsStore, userStore, currentQuotaStore }) => {
+    const { isOwner } = userStore.user;
+    const {
+      invitePanelOptions,
+      setInviteItems,
+      inviteItems,
+      setInviteLanguage,
+      culture,
+      setInvitePaidUsersCount,
+      isPaidUserAccess,
+    } = dialogsStore;
 
-  const { culture: language, standalone } = settingsStore;
-
-  return {
-    language,
-    setInviteLanguage,
-    setInviteItems,
-    inviteItems,
-    culture,
-    roomId: invitePanelOptions.roomId,
-    hideSelector: invitePanelOptions.hideSelector,
-    defaultAccess: invitePanelOptions.defaultAccess,
-    isOwner,
-    standalone,
-  };
-})(
+    const { culture: language, standalone } = settingsStore;
+    const { isUserTariffLimit } = currentQuotaStore;
+    return {
+      language,
+      setInviteLanguage,
+      setInviteItems,
+      inviteItems,
+      culture,
+      roomId: invitePanelOptions.roomId,
+      hideSelector: invitePanelOptions.hideSelector,
+      defaultAccess: invitePanelOptions.defaultAccess,
+      isOwner,
+      standalone,
+      isPaidUserAccess,
+      setInvitePaidUsersCount,
+      isUserTariffLimit,
+    };
+  },
+)(
   withCultureNames(
     withTranslation(["InviteDialog", "Common", "Translations"])(
       observer(InviteInput),

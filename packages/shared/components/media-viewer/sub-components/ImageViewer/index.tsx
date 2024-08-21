@@ -996,6 +996,7 @@ export const ImageViewer = ({
             onDoubleClick={handleDoubleTapOrClick}
             onLoad={imageLoaded}
             onError={onError}
+            onContextMenu={(event) => event.preventDefault()}
           />
         </ImageWrapper>
       </ImageViewerContainer>

@@ -112,7 +112,7 @@ const Layout = ({
               <DetailsNavigationHeader />
             ) : currentPath === oauthCreatePath ||
               currentPath === oauthEditPath ? (
-              <OAuthSectionHeader />
+              <OAuthSectionHeader isEdit={currentPath === oauthEditPath} />
             ) : (
               <SectionHeaderContent />
             )}

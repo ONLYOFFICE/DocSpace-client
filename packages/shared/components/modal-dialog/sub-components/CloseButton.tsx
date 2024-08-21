@@ -42,8 +42,11 @@ const StyledCloseButtonWrapper = styled.div<{
   height: 17px;
 
   margin-left: auto;
+  padding-left: 2px;
 
-  cursor: pointer;
+  svg {
+    cursor: pointer;
+  }
 `;
 
 StyledCloseButtonWrapper.defaultProps = { theme: Base };

@@ -52,7 +52,9 @@ const Header = React.memo(
           />
         )}
 
-        <Heading className="heading-text">{headerLabel}</Heading>
+        <Heading className="heading-text" truncate>
+          {headerLabel}
+        </Heading>
       </StyledHeader>
     );
   },

@@ -64,7 +64,7 @@ const StyledSelector = styled.div`
 `;
 
 const StyledHeader = styled.div<{ withoutBorder?: boolean }>`
-  width: calc(100% - 32px);
+  width: calc(100% - 53px);
   min-height: 53px;
   height: 53px;
   max-height: 53px;
@@ -79,9 +79,19 @@ const StyledHeader = styled.div<{ withoutBorder?: boolean }>`
   display: flex;
   align-items: center;
 
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          padding-left: 37px;
+        `
+      : css`
+          padding-right: 37px;
+        `}
+
   .arrow-button {
     cursor: pointer;
     margin-right: 12px;
+    min-width: 17px;
     ${(props) =>
       props.theme.interfaceDirection === "rtl" &&
       css`

@@ -110,6 +110,11 @@ export default async function RootLayout({
       <head>
         <link rel="icon" type="image/x-icon" href="/logo.ashx?logotype=3" />
         <link rel="mask-icon" href="/logo.ashx?logotype=3" />
+        <link
+          rel="apple-touch-icon"
+          sizes="32x32"
+          href="/logo.ashx?logotype=3"
+        />
         <meta charSet="utf-8" />
         <meta
           name="viewport"

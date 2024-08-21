@@ -27,8 +27,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg";
-
 import { Base } from "../../themes";
 import { MOBILE_FOOTER_HEIGHT } from "../../constants";
 import { tablet, mobile } from "../../utils";
@@ -127,53 +125,18 @@ const StyledControlContainer = styled.div`
   justify-content: center;
   z-index: 450;
 
-  top: 18px;
-
   ${(props) =>
-    props.theme.interfaceDirection === "rtl" ? `right: -27px;` : `left: -27px;`}
-
-  @media ${tablet} {
-    display: flex;
-
-    top: 18px;
-
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? `right: -27px;`
-        : `left: -27px;`}
-  }
-
-  @media ${mobile} {
-    display: flex;
-
-    top: -27px;
-    right: 10px;
-    left: unset;
-
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            right: unset;
-            left: 10px;
-          `
-        : css`
-            right: 10px;
-            left: unset;
-          `}
-  }
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          left: 13px;
+          top: 17px;
+        `
+      : css`
+          right: 13px;
+          top: 17px;
+        `}
 `;
 
 StyledControlContainer.defaultProps = { theme: Base };
 
-const StyledCrossIcon = styled(CrossReactSvg)`
-  width: 17px;
-  height: 17px;
-  z-index: 455;
-  path {
-    fill: ${(props) => props.theme.catalog.control.fill};
-  }
-`;
-
-StyledCrossIcon.defaultProps = { theme: Base };
-
-export { StyledAside, StyledControlContainer, StyledCrossIcon };
+export { StyledAside, StyledControlContainer };

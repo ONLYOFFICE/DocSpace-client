@@ -27,13 +27,12 @@
 import React from "react";
 
 import { Scrollbar } from "../scrollbar";
+import { IconButton } from "../icon-button";
 
-import {
-  StyledAside,
-  StyledControlContainer,
-  StyledCrossIcon,
-} from "./Aside.styled";
+import { StyledAside, StyledControlContainer } from "./Aside.styled";
 import { AsideProps } from "./Aside.types";
+
+import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg?url";
 
 const AsidePure = (props: AsideProps) => {
   const {
@@ -47,7 +46,7 @@ const AsidePure = (props: AsideProps) => {
     onClose,
   } = props;
   const contentRef = React.useRef<HTMLElement | null>(null);
-
+  console.log("AsidePure");
   return (
     <StyledAside
       visible={visible}
@@ -58,14 +57,17 @@ const AsidePure = (props: AsideProps) => {
       forwardRef={contentRef}
       data-testid="aside"
     >
-      {/* <CloseButton  displayType="aside" zIndex={zIndex}/> */}
-      {withoutBodyScroll ? children : <Scrollbar>{children}</Scrollbar>}
-
       {visible && (
         <StyledControlContainer className="close-button" onClick={onClose}>
-          <StyledCrossIcon />
+          <IconButton
+            size={17}
+            className="close-button"
+            iconName={CrossReactSvg}
+            isClickable
+          />
         </StyledControlContainer>
       )}
+      {withoutBodyScroll ? children : <Scrollbar>{children}</Scrollbar>}
     </StyledAside>
   );
 };

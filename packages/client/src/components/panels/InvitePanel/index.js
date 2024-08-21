@@ -64,6 +64,8 @@ import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import CrossIconMobile from "PUBLIC_DIR/images/cross.react.svg?url";
 
 const InvitePanel = ({
   folders,
@@ -430,7 +432,7 @@ const InvitePanel = ({
   const invitePanelNode = (
     <>
       <StyledBlock>
-        <StyledHeading>{t("Common:InviteUsers")}</StyledHeading>
+        <StyledHeading truncate>{t("Common:InviteUsers")}</StyledHeading>
       </StyledBlock>
       {invitePanelIsLoding ? (
         <InvitePanelLoader />
@@ -480,7 +482,12 @@ const InvitePanel = ({
       {isMobileView ? (
         <div className="invite_panel" ref={invitePanelRef}>
           <StyledControlContainer onClick={onClose}>
-            <StyledCrossIconMobile />
+            <IconButton
+              size={17}
+              className="close-button"
+              iconName={CrossIconMobile}
+              isClickable
+            />
           </StyledControlContainer>
           {invitePanelNode}
         </div>

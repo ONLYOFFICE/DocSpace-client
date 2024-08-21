@@ -388,11 +388,11 @@ class SsoFormStore {
     this.isSubmitLoading = true;
 
     try {
-      await submitSsoForm(data);
+      const res = await submitSsoForm(data);
       toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
       this.isSubmitLoading = false;
       this.setSpMetadata(true);
-      this.setDefaultSettings(settings);
+      this.setDefaultSettings(res);
       this.setIsSsoEnabled(settings.enableSso);
     } catch (err) {
       toastr.error(err);
@@ -964,9 +964,6 @@ class SsoFormStore {
   }
 
   get isRequiredFieldsEmpty() {
-    console.log("this.ssoBinding", this.ssoBinding);
-    console.log("sloBinding", this.sloBinding);
-
     return (
       this.entityId.trim().length === 0 ||
       (this.ssoBinding === BINDING_POST &&

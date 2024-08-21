@@ -240,12 +240,14 @@ const StyledFilterBlockHeader = styled.div<{ isSelector?: boolean }>`
 
   display: flex;
   align-items: center;
-  justify-content: ${(props) => (props.isSelector ? "start" : "space-between")};
 
   h1 {
     font-weight: 700;
   }
 
+  #filter_search-options-clear {
+    margin-left: 16px;
+  }
   .arrow-button {
     ${(props) =>
       props.theme.interfaceDirection === "rtl"

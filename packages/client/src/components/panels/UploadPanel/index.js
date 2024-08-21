@@ -132,8 +132,8 @@ class UploadPanelComponent extends React.Component {
       >
         <ModalDialog.Header>
           <StyledUploadHeader>
-            <div>{title}</div>
-            <div>
+            <div className="title-container">{title}</div>
+            <div className="icons-container">
               {uploaded && converted ? (
                 <IconButton
                   size={17}

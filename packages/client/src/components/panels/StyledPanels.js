@@ -716,7 +716,18 @@ const StyledUploadHeader = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+
+  .icons-container {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
+  .title-container {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    user-select: none;
+  }
 `;
 
 const StyledUploadBody = styled.div`

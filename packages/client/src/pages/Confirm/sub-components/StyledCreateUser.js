@@ -56,6 +56,7 @@ export const GreetingContainer = styled.div`
   .tooltip {
     p {
       text-align: center;
+      overflow-wrap: break-word;
     }
 
     @media ${mobile} {

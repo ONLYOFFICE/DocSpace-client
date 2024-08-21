@@ -978,9 +978,9 @@ class SsoFormStore {
     for (let key in this) {
       if (key.includes("HasError") && this[key] !== false) {
         const name = key.replace("HasError", "");
-        const element = document.getElementsByName(name)[0];
-        element.focus();
-        element.blur();
+        const element = document.getElementsByName(name)?.[0];
+        element?.focus();
+        element?.blur();
         return;
       }
     }

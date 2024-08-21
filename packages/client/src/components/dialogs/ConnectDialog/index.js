@@ -170,7 +170,7 @@ const PureConnectDialogContainer = (props) => {
         provider_id,
       )
         .then(async () => {
-          await setThirdPartyAccountsInfo();
+          await setThirdPartyAccountsInfo(t);
         })
         .catch((err) => {
           toastr.error(err);

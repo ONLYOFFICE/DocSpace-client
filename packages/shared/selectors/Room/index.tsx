@@ -44,6 +44,7 @@ import { TTranslation } from "../../types";
 
 import { RoomSelectorProps } from "./RoomSelector.types";
 import { convertToItems } from "./RoomSelector.utils";
+import { Aside } from "../../components/aside";
 
 const PAGE_COUNT = 100;
 
@@ -73,6 +74,8 @@ const RoomSelector = ({
   roomType,
 
   disableThirdParty,
+
+  onClose,
 }: RoomSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
@@ -208,7 +211,7 @@ const RoomSelector = ({
       }
     : {};
 
-  return (
+  const SelectorRoom = (
     <Selector
       id={id}
       className={className}
@@ -242,6 +245,16 @@ const RoomSelector = ({
         />
       }
     />
+  );
+
+  if (!onClose) {
+    return SelectorRoom;
+  }
+
+  return (
+    <Aside visible onClose={onClose} withoutBodyScroll>
+      {SelectorRoom}
+    </Aside>
   );
 };
 

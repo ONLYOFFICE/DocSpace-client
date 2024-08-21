@@ -26,8 +26,6 @@
 
 import styled, { css } from "styled-components";
 
-import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
-
 import { tablet, mobile } from "../../utils";
 import { Base } from "../../themes";
 import { TViewAs } from "../../types";
@@ -222,8 +220,18 @@ const StyledFilterBlockHeader = styled.div<{ isSelector?: boolean }>`
   height: 53px;
   min-height: 53px;
 
-  padding: 0 16px;
   margin: 0;
+
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          padding-right: 16px;
+          padding-left: 37px;
+        `
+      : css`
+          padding-left: 16px;
+          padding-right: 37px;
+        `}
 
   box-sizing: border-box;
 
@@ -504,44 +512,19 @@ const StyledControlContainer = styled.div`
   justify-content: center;
   z-index: 450;
 
-  top: 14px;
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
-          right: -34px;
+          left: 13px;
+          top: 17px;
         `
       : css`
-          left: -34px;
+          right: 13px;
+          top: 17px;
         `}
-
-  @media ${mobile} {
-    top: -34px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: 10px;
-            right: unset;
-          `
-        : css`
-            right: 10px;
-
-            left: unset;
-          `}
-  }
 `;
 
 StyledControlContainer.defaultProps = { theme: Base };
-
-const StyledCrossIcon = styled(CrossIcon)`
-  width: 17px;
-  height: 17px;
-  z-index: 455;
-  path {
-    fill: ${(props) => props.theme.catalog.control.fill};
-  }
-`;
-
-StyledCrossIcon.defaultProps = { theme: Base };
 
 const selectedViewIcon = css`
   svg {
@@ -727,7 +710,6 @@ export {
   StyledFilterBlockItemSeparator,
   StyledFilterBlockFooter,
   StyledControlContainer,
-  StyledCrossIcon,
 };
 
 export { StyledFilterInput, StyledSearchInput, StyledButton };

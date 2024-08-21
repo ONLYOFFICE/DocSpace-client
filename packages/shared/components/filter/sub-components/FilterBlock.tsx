@@ -28,6 +28,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import ClearReactSvgUrl from "PUBLIC_DIR/images/clear.react.svg?url";
+import CrossIcon from "PUBLIC_DIR/images/cross.react.svg?url";
 
 import GroupsSelector from "../../../selectors/Groups";
 import PeopleSelector from "../../../selectors/People";
@@ -45,7 +46,6 @@ import { TSelectorItem } from "../../selector";
 
 import {
   StyledControlContainer,
-  StyledCrossIcon,
   StyledFilterBlock,
   StyledFilterBlockFooter,
   StyledFilterBlockHeader,
@@ -481,7 +481,7 @@ const FilterBlock = ({
   const showFooter = isLoading ? false : isEqualFilter();
   const showClearFilterBtn =
     !isLoading && (selectedFilterValue.length > 0 || filterValues.length > 0);
-
+  console.log("showSelector.type", showSelector.type);
   const filterBlockComponent = (
     <>
       {showSelector.show ? (
@@ -500,6 +500,7 @@ const FilterBlock = ({
                 withoutBackButton: false,
               }}
               currentUserId={userId}
+              onClose={hideFilterBlock}
             />
           ) : showSelector.type === FilterSelectorTypes.groups ? (
             <GroupsSelector
@@ -511,6 +512,7 @@ const FilterBlock = ({
                 headerLabel: selectorLabel,
                 withoutBackButton: false,
               }}
+              onClose={hideFilterBlock}
             />
           ) : (
             <RoomSelector
@@ -525,11 +527,9 @@ const FilterBlock = ({
               isMultiSelect={false}
               withSearch
               disableThirdParty={disableThirdParty}
+              onClose={hideFilterBlock}
             />
           )}
-          <StyledControlContainer onClick={hideFilterBlock}>
-            <StyledCrossIcon />
-          </StyledControlContainer>
         </StyledFilterBlock>
       ) : (
         <StyledFilterBlock>
@@ -546,6 +546,15 @@ const FilterBlock = ({
                 size={17}
               />
             )}
+
+            <StyledControlContainer onClick={hideFilterBlock}>
+              <IconButton
+                size={17}
+                className="close-button"
+                iconName={CrossIcon}
+                isClickable
+              />
+            </StyledControlContainer>
           </StyledFilterBlockHeader>
           <div className="filter-body">
             {isLoading ? (
@@ -598,10 +607,6 @@ const FilterBlock = ({
               isDisabled={isLoading}
             />
           </StyledFilterBlockFooter>
-
-          <StyledControlContainer id="filter_close" onClick={hideFilterBlock}>
-            <StyledCrossIcon />
-          </StyledControlContainer>
         </StyledFilterBlock>
       )}
 

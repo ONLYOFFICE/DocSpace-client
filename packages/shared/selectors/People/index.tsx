@@ -52,6 +52,7 @@ import { AvatarRole } from "../../components/avatar";
 import { Text } from "../../components/text";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";
+import { Aside } from "../../components/aside";
 
 const toListItem = (
   item: TUser,
@@ -142,6 +143,7 @@ const PeopleSelector = ({
 
   emptyScreenHeader,
   emptyScreenDescription,
+  onClose,
 }: PeopleSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
@@ -377,7 +379,7 @@ const PeopleSelector = ({
     );
   };
 
-  return (
+  const SelectorUser = (
     <Selector
       id={id}
       alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}
@@ -413,6 +415,15 @@ const PeopleSelector = ({
       onSelect={onSelect}
       {...infoProps}
     />
+  );
+  if (!onClose) {
+    return SelectorUser;
+  }
+
+  return (
+    <Aside visible onClose={onClose} withoutBodyScroll>
+      {SelectorUser}
+    </Aside>
   );
 };
 

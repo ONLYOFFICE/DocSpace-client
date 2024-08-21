@@ -63,7 +63,10 @@ const StyledSelector = styled.div`
   overflow: hidden;
 `;
 
-const StyledHeader = styled.div<{ withoutBorder?: boolean }>`
+const StyledHeader = styled.div<{
+  withoutBorder?: boolean;
+  withoutIcon: boolean;
+}>`
   width: calc(100% - 53px);
   min-height: 53px;
   height: 53px;
@@ -78,15 +81,6 @@ const StyledHeader = styled.div<{ withoutBorder?: boolean }>`
 
   display: flex;
   align-items: center;
-
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          padding-left: 37px;
-        `
-      : css`
-          padding-right: 37px;
-        `}
 
   .arrow-button {
     cursor: pointer;

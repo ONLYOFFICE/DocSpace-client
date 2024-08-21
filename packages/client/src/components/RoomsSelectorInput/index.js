@@ -111,6 +111,7 @@ const RoomsSelectorInput = (props) => {
     />
   );
 
+  console.log("ROOMS");
   return (
     <StyledBodyWrapper maxWidth={maxWidth} className={className}>
       <FileInput

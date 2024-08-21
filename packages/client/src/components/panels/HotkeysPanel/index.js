@@ -92,7 +92,9 @@ const HotkeyPanel = ({
         withoutBodyScroll={true}
       >
         <div className="hotkeys_header">
-          <Heading className="hotkeys_heading">{t("Common:Hotkeys")}</Heading>
+          <Heading className="hotkeys_heading" truncate>
+            {t("Common:Hotkeys")}
+          </Heading>
         </div>
         <StyledScrollbar ref={scrollRef}>
           <Heading className="hotkeys_sub-header">

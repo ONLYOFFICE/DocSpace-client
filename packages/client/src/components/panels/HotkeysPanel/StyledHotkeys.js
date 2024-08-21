@@ -44,8 +44,18 @@ const StyledHotkeysPanel = styled.div`
   }
 
   .hotkeys_header {
-    padding: 0 16px;
     border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
+
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            padding-right: 16px;
+            padding-left: 37px;
+          `
+        : css`
+            padding-left: 16px;
+            padding-right: 37px;
+          `}
 
     .hotkeys_heading {
       font-weight: 700;

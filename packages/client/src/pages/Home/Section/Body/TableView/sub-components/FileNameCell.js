@@ -89,18 +89,10 @@ const FileNameCell = ({
         dir="auto"
       >
         {titleWithoutExt}
+        {displayFileExtension && (
+          <span className="item-file-exst">{fileExst}</span>
+        )}
       </Link>
-
-      {displayFileExtension && (
-        <Text
-          className="item-file-exst"
-          fontWeight="600"
-          fontSize="13px"
-          color={theme.filesSection.tableView.fileExstColor}
-        >
-          {fileExst}
-        </Text>
-      )}
     </>
   );
 };

@@ -86,15 +86,16 @@ const SimpleFilesTileContent = styled(TileContent)`
   .item-file-name {
     max-height: 100%;
     line-height: 20px;
-    max-width: 100px;
+
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
-    display: block;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
   }
 
   .item-file-exst {
-    margin-bottom: 1px;
+    color: ${(props) => props.theme.filesSection.tableView.fileExstColor};
   }
 
   ${({ isRooms }) =>
@@ -148,17 +149,10 @@ const FilesTileContent = ({
           isTextOverflow
         >
           {titleWithoutExt}
+          {displayFileExtension && (
+            <span className="item-file-exst">{fileExst}</span>
+          )}
         </Link>
-        {displayFileExtension && (
-          <Text
-            className="item-file-exst"
-            fontWeight="600"
-            fontSize="13px"
-            color={theme.filesSection.tableView.fileExstColor}
-          >
-            {fileExst}
-          </Text>
-        )}
       </SimpleFilesTileContent>
     </>
   );

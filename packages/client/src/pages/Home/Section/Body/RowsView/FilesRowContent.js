@@ -64,10 +64,6 @@ const SimpleFilesRowContent = styled(RowContent)`
     }
   }
 
-  .rowMainContainer {
-    margin-inline-end: ${(props) => props.displayFileExtension && "0px"};
-  }
-
   .row_update-text {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -95,25 +91,24 @@ const SimpleFilesRowContent = styled(RowContent)`
 
   .row-content-link {
     padding-block: 12px 0;
-    padding-inline: ${(props) => !props.displayFileExtension && "0px 12px"};
+    padding-inline: 0 12px;
     margin-top: ${(props) =>
       props.theme.interfaceDirection === "rtl" ? "-14px" : "-12px"};
+  }
+
+  .item-file-exst {
+    color: ${(props) => props.theme.filesSection.tableView.fileExstColor};
   }
 
   @media ${tablet} {
     .row-main-container-wrapper {
       display: flex;
-      align-items: center;
+      justify-content: space-between;
       max-width: inherit;
-    }
-
-    .mainIcons {
-      margin-bottom: ${(props) => props.displayFileExtension && "4px"};
     }
 
     .badges {
       flex-direction: row-reverse;
-      padding-inline: ${(props) => props.displayFileExtension && "0px 12px"};
     }
 
     .tablet-badge {
@@ -150,10 +145,6 @@ const SimpleFilesRowContent = styled(RowContent)`
     .new-items,
     .tablet-badge {
       margin: 0;
-    }
-
-    .mainIcons {
-      margin-bottom: ${(props) => props.displayFileExtension && "0px"};
     }
 
     .can-convert {
@@ -270,7 +261,6 @@ const FilesRowContent = ({
         isMobile={!isTablet()}
         isFile={fileExst || contentLength}
         sideColor={theme.filesSection.rowView.sideColor}
-        displayFileExtension={displayFileExtension}
       >
         <Link
           className="row-content-link"
@@ -285,20 +275,13 @@ const FilesRowContent = ({
           dir="auto"
         >
           {titleWithoutExt}
+          {displayFileExtension && (
+            <span className="item-file-exst">{fileExst}</span>
+          )}
         </Link>
         <div className="badges">
           {badgesComponent}
           {!isRoom && !isRooms && quickButtons}
-          {displayFileExtension && (
-            <Text
-              className="item-file-exst"
-              fontWeight="600"
-              fontSize="15px"
-              color={theme.filesSection.tableView.fileExstColor}
-            >
-              {fileExst}
-            </Text>
-          )}
         </div>
 
         {mainInfo && (

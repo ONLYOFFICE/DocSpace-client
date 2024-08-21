@@ -202,13 +202,11 @@ const StyledTableRow = styled(TableRow)`
 
   .item-file-name {
     padding-block: 14px;
-    padding-inline: ${(props) =>
-      props.displayFileExtension ? "0px" : "0 8px"};
+    padding-inline: 0 8px;
   }
 
   .item-file-exst {
-    padding-inline: 0 8px;
-    margin-bottom: 1px;
+    color: ${(props) => props.theme.filesSection.tableView.fileExstColor};
   }
 
   ${(props) =>

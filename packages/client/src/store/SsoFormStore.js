@@ -903,8 +903,14 @@ class SsoFormStore {
 
   checkRequiredFields = () => {
     this.setError("entityId", this.entityId);
-    this.setError("ssoUrlPost", this.ssoUrlPost);
-    this.setError("sloUrlPost", this.sloUrlPost);
+    this.ssoBinding === BINDING_POST &&
+      this.setError("ssoUrlPost", this.ssoUrlPost);
+    this.ssoBinding === BINDING_REDIRECT &&
+      this.setError("ssoUrlRedirect", this.ssoUrlRedirect);
+    this.sloBinding === BINDING_POST &&
+      this.setError("sloUrlPost", this.sloUrlPost);
+    this.sloBinding === BINDING_REDIRECT &&
+      this.setError("sloUrlRedirect", this.sloUrlRedirect);
     this.setError("firstName", this.firstName);
     this.setError("lastName", this.lastName);
     this.setError("email", this.email);
@@ -958,6 +964,9 @@ class SsoFormStore {
   }
 
   get isRequiredFieldsEmpty() {
+    console.log("this.ssoBinding", this.ssoBinding);
+    console.log("sloBinding", this.sloBinding);
+
     return (
       this.entityId.trim().length === 0 ||
       (this.ssoBinding === BINDING_POST &&

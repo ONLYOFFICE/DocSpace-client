@@ -28,7 +28,7 @@ import { makeAutoObservable } from "mobx";
 import { isMobile } from "@docspace/shared/utils";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { TUser, TUserGroup } from "@docspace/shared/api/people/types";
-import { TABLE_HEADER_HEIGHT } from "@docspace/shared/utils/device";
+import { TABLE_HEADER_HEIGHT } from "@docspace/shared/components/table/Table.constants";
 
 type AccountsType = TUser | TUserGroup;
 

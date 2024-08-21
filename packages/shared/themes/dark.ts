@@ -37,7 +37,6 @@ const {
   black,
   darkBlack,
 
-  lightGrayBlackout,
   darkGrayBlackout,
   grayLight,
   darkGrayLight,
@@ -64,28 +63,21 @@ const {
 
   mainOrange,
 
-  lightErrorStatus,
   darkErrorStatus,
   favoritesStatus,
   lightStatusWarning,
   darkStatusWarning,
-  lightStatusPositive,
   darkStatusPositive,
 
-  lightIcons,
   darkIcon,
   link,
   darkLink,
   blueLightMid,
   bigGrayDarkMid,
 
-  lightToastDone,
   darkToastDone,
-  lightToastInfo,
   darkToastInfo,
-  lightToastAlert,
   darkToastAlert,
-  lightToastWarning,
   darkToastWarning,
 
   dndColor,
@@ -665,7 +657,7 @@ const Dark: TTheme = {
     color: white,
     disableColor: grayDarkText,
 
-    backgroundColor: black,
+    backgroundColor: darkGrayLight,
     disableBackgroundColor: grayDarkStrong,
 
     width: {

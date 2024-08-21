@@ -259,15 +259,16 @@ StyledContent.defaultProps = { theme: Base };
 const StyledHeaderContent = styled.div`
   display: flex;
   align-items: center;
-  padding: 0 16px;
 
   ${(props) =>
     props.theme.interfaceDirection === "rtl"
       ? css`
-          margin-left: -16px;
+          padding-right: 16px;
+          padding-left: 37px;
         `
       : css`
-          margin-right: -16px;
+          padding-left: 16px;
+          padding-right: 37px;
         `}
 
   border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};

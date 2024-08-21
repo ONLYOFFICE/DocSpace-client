@@ -54,10 +54,7 @@ export const GreetingContainer = styled.div`
   }
 
   .tooltip {
-    .invitation-text {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    p {
       text-align: center;
     }
 

@@ -59,7 +59,7 @@ import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
-import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
+import { Link } from "@docspace/shared/components/link";
 import { globalColors } from "@docspace/shared/themes";
 
 class UploadDataStore {
@@ -1583,8 +1583,6 @@ class UploadDataStore {
                   <Link
                     isHovered
                     color={globalColors.link}
-                    type={LinkType.action}
-                    target={LinkTarget.self}
                     onClick={() => {
                       toastr.clear();
                       this.setUploadPanelVisible(true);

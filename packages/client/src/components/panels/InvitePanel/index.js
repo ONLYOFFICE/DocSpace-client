@@ -431,9 +431,11 @@ const InvitePanel = ({
 
   const invitePanelNode = (
     <>
-      <StyledBlock>
-        <StyledHeading truncate>{t("Common:InviteUsers")}</StyledHeading>
-      </StyledBlock>
+      {isMobileView && (
+        <StyledBlock>
+          <StyledHeading truncate>{t("Common:InviteUsers")}</StyledHeading>
+        </StyledBlock>
+      )}
       {invitePanelIsLoding ? (
         <InvitePanelLoader />
       ) : (
@@ -505,6 +507,7 @@ const InvitePanel = ({
             onClose={onClose}
             withoutBodyScroll
             zIndex={310}
+            header={t("Common:InviteUsers")}
           >
             {invitePanelNode}
           </Aside>

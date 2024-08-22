@@ -73,6 +73,7 @@ export type BreadCrumbsProps = {
 
 export type HeaderProps = {
   headerLabel: string;
+  onCloseClick: () => void;
 } & THeaderBackButton;
 
 export type TSelectorHeader =

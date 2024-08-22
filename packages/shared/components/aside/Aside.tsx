@@ -41,6 +41,7 @@ const AsidePure = (props: AsideProps) => {
     contentPaddingBottom,
     withoutBodyScroll = false,
     onClose,
+    withoutHeader = false,
     ...rest
   } = props;
   const contentRef = React.useRef<HTMLElement | null>(null);
@@ -55,7 +56,7 @@ const AsidePure = (props: AsideProps) => {
       forwardRef={contentRef}
       data-testid="aside"
     >
-      <AsideHeader onCloseClick={onClose} {...rest} />
+      {!withoutHeader && <AsideHeader onCloseClick={onClose} {...rest} />}
       {withoutBodyScroll ? children : <Scrollbar>{children}</Scrollbar>}
     </StyledAside>
   );

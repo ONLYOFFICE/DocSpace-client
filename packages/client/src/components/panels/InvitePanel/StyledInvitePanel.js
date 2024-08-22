@@ -140,6 +140,9 @@ const StyledBlock = styled.div`
 
 StyledBlock.defaultProps = { theme: Base };
 
+const StyledExternalLink = styled.div`
+  border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
+`;
 const StyledInviteUserBody = styled.div`
   display: flex;
   flex-direction: column;
@@ -616,4 +619,5 @@ export {
   StyledInviteLanguage,
   StyledControlContainer,
   StyledInviteUserBody,
+  StyledExternalLink,
 };

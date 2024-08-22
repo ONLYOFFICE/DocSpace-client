@@ -34,6 +34,7 @@ export interface AsideProps {
   withoutBodyScroll?: boolean;
   onClose: () => void;
 
+  withoutHeader: boolean;
   header: AsideHeaderProps["header"];
   isBackButton?: AsideHeaderProps["isBackButton"];
   isCloseable?: AsideHeaderProps["isCloseable"];

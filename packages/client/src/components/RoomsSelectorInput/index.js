@@ -105,13 +105,12 @@ const RoomsSelectorInput = (props) => {
       submitButtonLabel={submitButtonLabel}
       onSubmit={handleOnSubmit}
       withHeader={withHeader}
-      headerProps={headerProps}
+      headerProps={{ ...headerProps, onCloseClick: onClose }}
       setIsDataReady={setIsDataReady}
       roomType={roomType}
     />
   );
 
-  console.log("ROOMS");
   return (
     <StyledBodyWrapper maxWidth={maxWidth} className={className}>
       <FileInput
@@ -138,6 +137,7 @@ const RoomsSelectorInput = (props) => {
         withoutBodyScroll
         zIndex={310}
         onClose={onClose}
+        withoutHeader
       >
         {SelectorBody}
       </Aside>

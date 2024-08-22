@@ -44,7 +44,6 @@ import { TTranslation } from "../../types";
 
 import { RoomSelectorProps } from "./RoomSelector.types";
 import { convertToItems } from "./RoomSelector.utils";
-import { Aside } from "../../components/aside";
 
 const PAGE_COUNT = 100;
 
@@ -211,7 +210,7 @@ const RoomSelector = ({
       }
     : {};
 
-  const SelectorRoom = (
+  return (
     <Selector
       id={id}
       className={className}
@@ -245,16 +244,6 @@ const RoomSelector = ({
         />
       }
     />
-  );
-
-  if (!onClose) {
-    return SelectorRoom;
-  }
-
-  return (
-    <Aside visible onClose={onClose} withoutBodyScroll>
-      {SelectorRoom}
-    </Aside>
   );
 };
 

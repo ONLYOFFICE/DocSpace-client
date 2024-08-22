@@ -139,4 +139,31 @@ const StyledControlContainer = styled.div`
 
 StyledControlContainer.defaultProps = { theme: Base };
 
-export { StyledAside, StyledControlContainer };
+const StyledHeaderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 16px;
+  height: 53px;
+
+  .additional-icons-container {
+    display: flex;
+    margin-inline: 16px 16px;
+    gap: 16px;
+  }
+  .arrow-button {
+    margin-inline: 0 12px;
+  }
+  .close-button {
+    margin-inline: auto 0;
+  }
+  ::after {
+    content: "";
+    border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 53px;
+  }
+`;
+export { StyledAside, StyledControlContainer, StyledHeaderContainer };

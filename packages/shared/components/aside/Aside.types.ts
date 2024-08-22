@@ -33,8 +33,22 @@ export interface AsideProps {
   children: React.ReactNode;
   withoutBodyScroll?: boolean;
   onClose: () => void;
-}
 
+  header: AsideHeaderProps["header"];
+  isBackButton?: AsideHeaderProps["isBackButton"];
+  isCloseable?: AsideHeaderProps["isCloseable"];
+  hederIcons?: AsideHeaderProps["hederIcons"];
+  onBackClick?: AsideHeaderProps["onBackClick"];
+  onCloseClick?: AsideHeaderProps["onCloseClick"];
+}
+export interface AsideHeaderProps {
+  header: string;
+  isBackButton?: boolean;
+  isCloseable?: boolean;
+  hederIcons?: { id: string; url: string; onClick: () => void }[];
+  onBackClick?: () => void;
+  onCloseClick?: () => void;
+}
 export interface StyledAsideProps {
   visible: boolean;
   scale?: boolean;

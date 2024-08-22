@@ -24,43 +24,66 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
+import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg?url";
 
-import { Scrollbar } from "../scrollbar";
-import { StyledAside } from "./Aside.styled";
-import { AsideProps } from "./Aside.types";
-import { AsideHeader } from "./AsideHeader";
+import { IconButton } from "../icon-button";
+import { Text } from "../text";
+import { AsideHeaderProps } from "./Aside.types";
+import { StyledHeaderContainer } from "./Aside.styled";
 
-const AsidePure = (props: AsideProps) => {
+const AsideHeader = (props: AsideHeaderProps) => {
   const {
-    visible,
-    children,
-    scale = false,
-    zIndex = 400,
-    className,
-    contentPaddingBottom,
-    withoutBodyScroll = false,
-    onClose,
-    ...rest
+    isBackButton = false,
+    onBackClick,
+    onCloseClick,
+    header,
+    hederIcons = [],
+    isCloseable = true,
   } = props;
-  const contentRef = React.useRef<HTMLElement | null>(null);
+
+  const backButtonRender = (
+    <IconButton
+      className="arrow-button"
+      iconName={ArrowPathReactSvgUrl}
+      size={17}
+      onClick={onBackClick}
+    />
+  );
+
+  const closeIconRender = (
+    <IconButton
+      size={17}
+      className="close-button"
+      iconName={CrossReactSvg}
+      onClick={onCloseClick}
+      isClickable
+    />
+  );
 
   return (
-    <StyledAside
-      visible={visible}
-      scale={scale}
-      zIndex={zIndex}
-      contentPaddingBottom={contentPaddingBottom}
-      className={`${className} not-selectable aside`}
-      forwardRef={contentRef}
-      data-testid="aside"
-    >
-      <AsideHeader onCloseClick={onClose} {...rest} />
-      {withoutBodyScroll ? children : <Scrollbar>{children}</Scrollbar>}
-    </StyledAside>
+    <StyledHeaderContainer>
+      {isBackButton && backButtonRender}
+      <Text fontSize="21px" fontWeight={700}>
+        {header}
+      </Text>
+      {hederIcons.length > 0 && (
+        <div className="additional-icons-container">
+          {hederIcons.map((item) => (
+            <IconButton
+              key={item.id}
+              size={17}
+              className="close-button"
+              iconName={item.url}
+              onClick={item.onClick}
+              isClickable
+            />
+          ))}
+        </div>
+      )}
+      {isCloseable && closeIconRender}
+    </StyledHeaderContainer>
   );
 };
 
-const Aside = React.memo(AsidePure);
-
-export { Aside };
+export { AsideHeader };

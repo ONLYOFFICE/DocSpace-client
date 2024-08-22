@@ -25,6 +25,7 @@ import { TTranslation } from "@docspace/shared/types";
 import { ContextMenuModel } from "@docspace/shared/components/context-menu";
 
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
+import { Tag } from "@docspace/shared/components/tag";
 
 const StyledContainer = styled.div<{
   showDescription: boolean;
@@ -116,6 +117,23 @@ const StyledContainer = styled.div<{
       margin: 0 8px;
 
       background: ${(props) => props.theme.oauth.infoDialog.separatorColor};
+    }
+  }
+
+  .property-tag_list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+
+    .property-tag {
+      max-width: 195px;
+      margin: 0;
+      background: ${(props) => props.theme.infoPanel.details.tagBackground};
+      p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
   }
 `;
@@ -288,7 +306,6 @@ const InfoDialog = ({
               )}
             </>
           )}
-
           <Text
             className="block-header"
             fontSize="14px"
@@ -299,7 +316,6 @@ const InfoDialog = ({
           >
             {t("Common:Website")}
           </Text>
-
           <Link
             fontSize="13px"
             lineHeight="15px"
@@ -311,7 +327,21 @@ const InfoDialog = ({
           >
             {client?.websiteUrl}
           </Link>
-
+          <Text
+            className="block-header"
+            fontSize="14px"
+            lineHeight="16px"
+            fontWeight="600"
+            noSelect
+            truncate
+          >
+            {t("Scopes")}
+          </Text>{" "}
+          <ScopeList
+            selectedScopes={client?.scopes || []}
+            scopes={scopeList || []}
+            t={t}
+          />
           <Text
             className="block-header"
             fontSize="14px"
@@ -322,11 +352,16 @@ const InfoDialog = ({
           >
             {t("Access")}
           </Text>
-          <ScopeList
-            selectedScopes={client?.scopes || []}
-            scopes={scopeList || []}
-            t={t}
-          />
+          <div className="property-tag_list">
+            {client?.scopes.map((scope) => (
+              <Tag
+                key={scope}
+                tag={scope}
+                className="property-tag"
+                label={scope}
+              />
+            ))}
+          </div>
           {isProfile && (
             <>
               <Text
@@ -351,7 +386,6 @@ const InfoDialog = ({
               </Text>
             </>
           )}
-
           <Text
             className="block-header"
             fontSize="14px"
@@ -362,7 +396,6 @@ const InfoDialog = ({
           >
             {t("SupportAndLegalInfo")}
           </Text>
-
           <Text
             className="privacy-block"
             fontSize="13px"

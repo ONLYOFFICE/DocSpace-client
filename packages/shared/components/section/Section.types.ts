@@ -145,3 +145,7 @@ export interface SectionProps {
   isDesktop?: boolean;
   getContextModel?: () => ContextMenuModel[];
 }
+
+export interface SectionContextMenuProps {
+  getContextModel: () => ContextMenuModel[];
+}

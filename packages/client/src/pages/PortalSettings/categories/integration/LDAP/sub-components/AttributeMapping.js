@@ -26,7 +26,8 @@
 
 import React, { useRef } from "react";
 import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 import { Box } from "@docspace/shared/components/box";
 import { TextInput } from "@docspace/shared/components/text-input";
@@ -39,6 +40,8 @@ import { FieldContainer } from "@docspace/shared/components/field-container";
 import AccessSelector from "SRC_DIR/components/AccessSelector";
 import { isMobile } from "@docspace/shared/utils";
 import LdapFieldComponent from "./LdapFieldComponent";
+import { Link } from "@docspace/shared/components/link";
+import { globalColors } from "@docspace/shared/themes";
 
 const FIRST_NAME = "firstName",
   SECOND_NAME = "secondName",
@@ -68,9 +71,13 @@ const AttributeMapping = (props) => {
 
     isLdapEnabled,
     isUIDisabled,
+
+    isDefaultUsersQuotaSet,
   } = props;
 
   const { t } = useTranslation("Ldap");
+
+  const navigate = useNavigate();
 
   const inputsRef = useRef();
 
@@ -98,6 +105,10 @@ const AttributeMapping = (props) => {
 
   const onChangeUserType = (option) => {
     setUserType(option.access);
+  };
+
+  const goToStarageManagement = () => {
+    navigate("/portal-settings/management/disk-space");
   };
 
   return (
@@ -202,9 +213,32 @@ const AttributeMapping = (props) => {
             onChange={onChangeValue}
             value={userQuotaLimit}
             scale
-            isDisabled={!isLdapEnabled || isUIDisabled}
+            isDisabled={
+              !isDefaultUsersQuotaSet || !isLdapEnabled || isUIDisabled
+            }
             tabIndex={11}
           />
+          {!isDefaultUsersQuotaSet && (
+            <Text
+              as={"span"}
+              fontWeight={400}
+              fontSize="12px"
+              lineHeight="16px"
+            >
+              <Trans
+                t={t}
+                i18nKey="LdapQuotaInfo"
+                ns="Ldap"
+                components={[
+                  <Link
+                    type="action"
+                    color={globalColors.link}
+                    onClick={goToStarageManagement}
+                  />,
+                ]}
+              />
+            </Text>
+          )}
         </FieldContainer>
       </Box>
       <Box marginProp="24px 0 24px 0">
@@ -250,7 +284,7 @@ const AttributeMapping = (props) => {
   );
 };
 
-export default inject(({ ldapStore }) => {
+export default inject(({ ldapStore, currentQuotaStore }) => {
   const {
     setMail,
     setFirstName,
@@ -274,6 +308,8 @@ export default inject(({ ldapStore }) => {
     userType,
   } = requiredSettings;
 
+  const { isDefaultUsersQuotaSet } = currentQuotaStore;
+
   return {
     setFirstName,
     setSecondName,
@@ -292,5 +328,7 @@ export default inject(({ ldapStore }) => {
     errors,
     isLdapEnabled,
     isUIDisabled,
+
+    isDefaultUsersQuotaSet,
   };
 })(observer(AttributeMapping));

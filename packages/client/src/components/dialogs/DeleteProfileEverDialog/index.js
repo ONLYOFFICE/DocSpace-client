@@ -26,16 +26,18 @@
 
 import React from "react";
 import PropTypes from "prop-types";
+import { matchPath } from "react-router";
+import { withTranslation } from "react-i18next";
+
 import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { withTranslation } from "react-i18next";
+import { mobileMore } from "@docspace/shared/utils";
 import api from "@docspace/shared/api";
 
 import ModalDialogContainer from "../ModalDialogContainer";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
-import { mobileMore } from "@docspace/shared/utils";
 import BodyComponent from "./sub-components/BodyComponent";
 
 const { deleteUser } = api.people;
@@ -108,6 +110,7 @@ const DeleteProfileEverDialogComponent = (props) => {
     removeUser,
     userIds,
     filter,
+    refreshInsideGroup,
     setSelected,
     deleteWithoutReassign,
     onlyOneUser,
@@ -123,15 +126,22 @@ const DeleteProfileEverDialogComponent = (props) => {
 
   const areUsersOnly = usersToDelete.every((user) => user.isVisitor);
 
+  const isInsideGroup = matchPath(
+    "/accounts/groups/:groupId/filter",
+    location.pathname,
+  );
+
   const onDeleteUser = (id) => {
     setIsRequestRunning(true);
 
     deleteUser(id)
       .then(() => {
+        return isInsideGroup
+          ? refreshInsideGroup()
+          : getUsersList(filter, true);
+      })
+      .then(() => {
         toastr.success(t("SuccessfullyDeleteUserInfoMessage"));
-        getUsersList(filter, true);
-
-        return;
       })
       .catch((error) => toastr.error(error))
       .finally(() => {
@@ -142,7 +152,7 @@ const DeleteProfileEverDialogComponent = (props) => {
   };
   const onDeleteUsers = (ids) => {
     setIsRequestRunning(true);
-    removeUser(ids, filter)
+    removeUser(ids, filter, isInsideGroup)
       .then(() => {
         toastr.success(t("DeleteGroupUsersSuccessMessage"));
       })
@@ -239,6 +249,7 @@ DeleteProfileEverDialog.propTypes = {
 
 export default inject(({ peopleStore }, { users }) => {
   const { dialogStore, selectionStore, filterStore, usersStore } = peopleStore;
+  const { refreshInsideGroup } = peopleStore.groupsStore;
 
   const { getUsersList, needResetUserSelection } = peopleStore.usersStore;
 
@@ -272,6 +283,7 @@ export default inject(({ peopleStore }, { users }) => {
     removeUser: usersStore.removeUser,
     needResetUserSelection,
     filter: filterStore.filter,
+    refreshInsideGroup,
     getUsersList,
     deleteWithoutReassign,
     onlyOneUser,

@@ -1,5 +1,4 @@
 {
-  "PDFFormDialogTitle": "نموذج PDF جاهز للتعبئة",
   "PDFFormEditDialogDescription": "هل تريد التبديل إلى وضع تحرير النموذج؟ يرجى ملاحظة أن النموذج لن يكون متاحًا لتعبئته بعد الآن وستحتاج إلى النقر على بدء  التعبئة مرة أخرى بعد التحرير لتعبئته.",
   "PDFFormEditDialogTitle": "تحرير النموذج",
   "PDFFormIsReadyToast": "نموذج PDF <1>{{filename}}</1>  جاهز للتعبئة.",

@@ -109,7 +109,7 @@ const HistoryGroupList = ({
             )}
 
             {withComma && ","}
-            <div className="space" />
+            {feed.related.length > 0 && <div className="space" />}
           </StyledHistoryLink>
         );
       })}

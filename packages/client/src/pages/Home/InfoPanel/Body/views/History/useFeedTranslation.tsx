@@ -136,6 +136,7 @@ export const useFeedTranslation = (
     case "RoomRemoveUser":
       return t("InfoPanel:RoomRemoveUser");
     case "RoomGroupAdded":
+      if (hasRelatedItems) return t("InfoPanel:RoomGroupAdded").slice(0, -1);
       return t("InfoPanel:RoomGroupAdded");
     case "RoomUpdateAccessForGroup":
       return t("InfoPanel:RoomUpdateAccess");

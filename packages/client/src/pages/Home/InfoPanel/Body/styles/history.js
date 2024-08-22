@@ -53,9 +53,8 @@ const StyledHistoryBlock = styled.div`
   padding: 8px 0;
 
   ${({ withBottomDivider, theme }) =>
-    withBottomDivider
-      ? ` border-bottom: solid 1px ${theme.infoPanel.borderColor}; `
-      : ` margin-bottom: 12px; `}
+    withBottomDivider &&
+    ` border-bottom: solid 1px ${theme.infoPanel.borderColor}; `}
 
   .avatar {
     min-width: 32px;
@@ -86,6 +85,7 @@ const StyledHistoryBlock = styled.div`
       .date {
         white-space: nowrap;
         display: inline-block;
+        align-self: flex-start;
         margin-inline-start: auto;
         font-weight: 600;
         font-size: 12px;
@@ -95,6 +95,12 @@ const StyledHistoryBlock = styled.div`
       .users-counter {
         margin-bottom: 1px;
       }
+    }
+
+    .action-title {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 `;
@@ -154,7 +160,9 @@ const StyledHistoryBlockMessage = styled.div`
 
 const StyledHistoryLink = styled.span`
   display: inline-block;
-  white-space: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   .text {
     font-size: 13px;
@@ -166,6 +174,7 @@ const StyledHistoryLink = styled.span`
     text-decoration: underline;
     text-decoration-style: dashed;
     text-underline-offset: 2px;
+    margin-bottom: -5px;
   }
 
   .space {
@@ -212,6 +221,9 @@ const StyledHistoryBlockFile = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     border: 1px solid
       ${(props) => props.theme.infoPanel.history.itemBorderColor};
     border-radius: 6px;
@@ -288,6 +300,8 @@ const StyledHistoryBlockExpandLink = styled.div`
 
   &.user-list-expand-link {
     display: inline-block;
+    position: relative;
+    top: -3px;
   }
 
   strong {

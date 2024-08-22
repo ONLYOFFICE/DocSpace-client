@@ -29,6 +29,8 @@ import { useFeedTranslation } from "../useFeedTranslation";
 import { getDateTime } from "../../../helpers/HistoryHelper";
 import { getFeedInfo } from "../FeedInfo";
 import HistoryUserList from "./UserList";
+import HistoryGroupList from "./GroupList";
+import HistoryRoomExternalLink from "./RoomExternalLink";
 import HistoryMainTextFolderInfo from "./MainTextFolderInfo";
 
 import { HistoryBlockContentProps } from "./HistoryBlockContent.types";
@@ -44,10 +46,28 @@ const HistoryTitleBlock = ({ t, feed }: HistoryBlockContentProps) => {
         <HistoryUserList feed={feed} />
       )}
 
-      {useFeedTranslation(t, feed, hasRelatedItems)}
+      {targetType === "group" && actionType === "update" && (
+        <>
+          {t("Common:Group")}
+          <HistoryGroupList feed={feed} />
+        </>
+      )}
+
+      <div className="action-title">
+        <Text truncate>{useFeedTranslation(t, feed, hasRelatedItems)}</Text>
+      </div>
+
       {hasRelatedItems && (
         <Text className="users-counter">({feed.related.length + 1}).</Text>
       )}
+
+      {targetType === "roomExternalLink" && actionType === "create" && (
+        <HistoryRoomExternalLink feedData={feed.data} />
+      )}
+
+      {feed.related.length === 0 &&
+        targetType === "group" &&
+        actionType !== "update" && <HistoryGroupList feed={feed} />}
 
       {(targetType === "file" || targetType === "folder") &&
         actionType !== "delete" && <HistoryMainTextFolderInfo feed={feed} />}

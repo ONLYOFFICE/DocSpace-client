@@ -98,7 +98,6 @@ const HistoryItemList = ({
     <StyledHistoryBlockFilesList>
       {items.map((item, i) => {
         if (!isExpanded && i > EXPANSION_THRESHOLD - 1) return null;
-        console.log("item", item);
         return (
           <>
             <StyledHistoryBlockFile

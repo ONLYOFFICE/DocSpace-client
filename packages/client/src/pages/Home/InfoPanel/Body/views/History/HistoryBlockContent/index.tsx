@@ -28,7 +28,6 @@ import { inject, observer } from "mobx-react";
 import HistoryUserList from "./UserList";
 import HistoryMainText from "./MainText";
 import HistoryItemList from "./ItemList";
-import HistoryRoomExternalLink from "./RoomExternalLink";
 import HistoryGroupList from "./GroupList";
 import HistoryUserGroupRoleChange from "./UserGroupRoleChange";
 import HistoryRoomTagList from "./RoomTagList";
@@ -44,18 +43,6 @@ const HistoryBlockContent = ({
 
   return (
     <>
-      {targetType === "group" && actionType === "update" && (
-        <HistoryGroupList feed={feed} />
-      )}
-
-      {targetType === "roomExternalLink" && actionType === "create" && (
-        <HistoryRoomExternalLink feedData={feed.data} />
-      )}
-
-      {targetType === "group" && actionType !== "update" && (
-        <HistoryGroupList feed={feed} />
-      )}
-
       {(targetType === "user" || targetType === "group") &&
         actionType === "update" && <HistoryUserGroupRoleChange feed={feed} />}
 
@@ -69,6 +56,10 @@ const HistoryBlockContent = ({
             targetType={targetType}
           />
         )}
+
+      {feed.related.length > 0 &&
+        targetType === "group" &&
+        actionType !== "update" && <HistoryGroupList feed={feed} />}
 
       {feed.related.length > 0 &&
         targetType === "user" &&

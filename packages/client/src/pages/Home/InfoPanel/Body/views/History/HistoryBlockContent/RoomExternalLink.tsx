@@ -98,7 +98,7 @@ const HistoryRoomExternalLink = ({
   return (
     <StyledHistoryLink>
       {canEditLink ? (
-        <Link className="text link" onClick={onEditLink}>
+        <Link className="text link" onClick={onEditLink} isTextOverflow>
           {decode((feedData.title || feedData.sharedTo?.title) ?? "")}
         </Link>
       ) : (

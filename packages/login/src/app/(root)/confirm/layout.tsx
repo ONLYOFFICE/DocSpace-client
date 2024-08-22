@@ -27,7 +27,7 @@
 import { headers } from "next/headers";
 
 import ConfirmRoute from "@/components/ConfirmRoute";
-import { StyledBody, StyledPage } from "@/components/StyledConfirm.styled";
+import { StyledBody } from "@/components/Confirm.styled";
 import { TConfirmLinkParams } from "@/types";
 import { checkConfirmLink, getSettings } from "@/utils/actions";
 import { ValidationResult } from "@/utils/enums";
@@ -75,17 +75,15 @@ export default async function Layout({
   }
 
   return (
-    <StyledPage id="confirm-page">
-      <StyledBody id="confirm-body">
-        <ConfirmRoute
-          defaultPage={objectSettings?.defaultPage}
-          socketUrl={objectSettings?.socketUrl}
-          confirmLinkResult={confirmLinkResult}
-          confirmLinkParams={confirmLinkParams}
-        >
-          {children}
-        </ConfirmRoute>
-      </StyledBody>
-    </StyledPage>
+    <StyledBody id="confirm-body">
+      <ConfirmRoute
+        defaultPage={objectSettings?.defaultPage}
+        socketUrl={objectSettings?.socketUrl}
+        confirmLinkResult={confirmLinkResult}
+        confirmLinkParams={confirmLinkParams}
+      >
+        {children}
+      </ConfirmRoute>
+    </StyledBody>
   );
 }

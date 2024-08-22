@@ -1,6 +1,6 @@
 {
   "ArchivedRoomsOrContact": "Vous pouvez archiver les salles inutiles ou contacter l'administrateur de {{productName}} pour mettre à niveau le plan tarifaire.",
-  "ClickToUpgradeTariff": "<Cliquez ici</1> pour augmenter votre plan tarifaire.",
+  "ClickToUpgradeTariff": "<1>Cliquez ici</1> pour augmenter votre plan tarifaire.",
   "ConfirmEmailDescription": "Utilisez le lien fourni dans l’e-mail d’activation. Vous n’avez pas reçu d’e-mail contenant le lien d’activation ?",
   "ConfirmEmailHeader": "Veuillez activer votre adresse e-mail ({{ email }}) pour accéder aux fonctionnalités de {{productName}}.",
   "ContactToUpgradeTariff": "Contactez l'administrateur de {{productName}} pour augmenter le plan tarifaire.",

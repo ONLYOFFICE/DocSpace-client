@@ -256,40 +256,6 @@ const StyledContent = styled.div`
 
 StyledContent.defaultProps = { theme: Base };
 
-const StyledHeaderContent = styled.div`
-  display: flex;
-  align-items: center;
-
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          padding-right: 16px;
-          padding-left: 37px;
-        `
-      : css`
-          padding-left: 16px;
-          padding-right: 37px;
-        `}
-
-  border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
-
-  .files-operations-header,
-  .sharing_panel-header {
-    font-weight: 700;
-    margin: 14px 0;
-  }
-
-  @media ${desktop} {
-    .files-operations-header,
-    .sharing_panel-header {
-      margin: 12px 0;
-      font-size: 18px;
-    }
-  }
-`;
-
-StyledHeaderContent.defaultProps = { theme: Base };
-
 const StyledBody = styled.div`
   &.files-operations-body {
     ${(props) =>
@@ -726,7 +692,6 @@ export {
   StyledEmbeddingPanel,
   StyledVersionHistoryPanel,
   StyledContent,
-  StyledHeaderContent,
   StyledBody,
   StyledFooter,
   StyledLinkRow,

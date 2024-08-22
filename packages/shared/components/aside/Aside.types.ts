@@ -43,7 +43,7 @@ export interface AsideProps {
   onCloseClick?: AsideHeaderProps["onCloseClick"];
 }
 export interface AsideHeaderProps {
-  header: string;
+  header: string | React.ReactNode;
   className?: string;
   id?: string;
   isBackButton?: boolean;

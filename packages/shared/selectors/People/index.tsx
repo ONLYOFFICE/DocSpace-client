@@ -142,7 +142,6 @@ const PeopleSelector = ({
 
   emptyScreenHeader,
   emptyScreenDescription,
-  onClose,
 }: PeopleSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 

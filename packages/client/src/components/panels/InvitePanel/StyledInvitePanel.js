@@ -125,17 +125,7 @@ const ScrollList = styled.div`
 
 const StyledBlock = styled.div`
   border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
-
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          padding-right: 16px;
-          padding-left: 37px;
-        `
-      : css`
-          padding-left: 16px;
-          padding-right: 37px;
-        `}
+  padding-inline: 16px 37px;
 `;
 
 StyledBlock.defaultProps = { theme: Base };
@@ -525,16 +515,8 @@ const StyledControlContainer = styled.div`
   z-index: 450;
 
   @media ${mobile} {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: 13px;
-            top: 17px;
-          `
-        : css`
-            right: 13px;
-            top: 17px;
-          `}
+    top: 17px;
+    inset-inline-end: 16px;
   }
 `;
 const StyledInviteLanguage = styled.div`

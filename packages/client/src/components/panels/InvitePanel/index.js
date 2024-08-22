@@ -50,7 +50,6 @@ import {
   StyledInvitePanel,
   StyledButtons,
   StyledControlContainer,
-  StyledCrossIconMobile,
 } from "./StyledInvitePanel";
 
 import ItemsList from "./sub-components/ItemsList";

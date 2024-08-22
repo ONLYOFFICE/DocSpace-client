@@ -151,7 +151,7 @@ const StyledHeaderContainer = styled.div`
     border-bottom: 1px solid rgb(236, 238, 241);
     width: calc(100% + 32px);
     position: absolute;
-    left: -16px;
+    inset-inline-end: -16px;
     bottom: 0;
   }
 `;

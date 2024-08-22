@@ -43,7 +43,7 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
     className,
 
     headerProps,
-    onClose,
+
     onSubmit,
   } = props;
 

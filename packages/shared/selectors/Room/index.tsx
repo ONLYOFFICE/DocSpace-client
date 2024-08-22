@@ -73,8 +73,6 @@ const RoomSelector = ({
   roomType,
 
   disableThirdParty,
-
-  onClose,
 }: RoomSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 

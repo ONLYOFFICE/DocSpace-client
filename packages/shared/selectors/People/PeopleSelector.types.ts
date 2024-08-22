@@ -64,5 +64,4 @@ export type PeopleSelectorProps = TSelectorHeader &
 
     emptyScreenHeader?: string;
     emptyScreenDescription?: string;
-    onClose?: () => void;
   };

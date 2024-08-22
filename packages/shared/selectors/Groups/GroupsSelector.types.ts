@@ -33,7 +33,6 @@ import { TSelectorItem } from "../../components/selector";
 export type GroupsSelectorProps = TSelectorHeader & {
   id?: string;
   className?: string;
-  onClose?: () => void;
   onSubmit: (
     selectedItems: TSelectorItem[],
     access?: TAccessRight | null,

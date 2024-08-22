@@ -33,6 +33,7 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { EmailInput, TValidate } from "@docspace/shared/components/email-input";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { InputSize, InputType } from "@docspace/shared/components/text-input";
+import { Text } from "@docspace/shared/components/text";
 
 type EmailInputFormProps = {
   ref: Ref<HTMLInputElement>;
@@ -68,6 +69,9 @@ const EmailInputForm = ({
 
   return (
     <div className="email-container">
+      <Text fontSize="16px" fontWeight="600" className="sign-in-subtitle">
+        {t("EnterEmail")}
+      </Text>
       <FieldContainer
         className="form-field"
         isVertical={true}

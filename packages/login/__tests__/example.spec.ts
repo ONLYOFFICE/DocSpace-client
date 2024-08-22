@@ -1,7 +1,7 @@
-import { expect, test } from "@docspace/shared/__mocks__/e2e";
+import { expect, test } from "@playwright/test";
 
 test("has title", async ({ page }) => {
-  await page.goto("http://192.168.0.16/login");
+  await page.goto("http://192.168.0.16:5011/login");
 
   // // Expect a title "to contain" a substring.
   // await expect(page).toHaveTitle(/Playwright/);

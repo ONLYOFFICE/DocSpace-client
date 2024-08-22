@@ -53,6 +53,9 @@ import {
 } from "@/types";
 import { TScope } from "@docspace/shared/utils/oauth/types";
 import { transformToClientProps } from "@docspace/shared/utils/oauth";
+import { getMockSettingsResponse } from "@docspace/shared/__mocks__/e2e";
+
+const IS_TEST = process.env.TEST;
 
 export const checkIsAuthenticated = async () => {
   const [request] = createRequest(["/authentication"], [["", ""]], "GET");
@@ -73,7 +76,9 @@ export async function getSettings() {
     "GET",
   );
 
-  const settingsRes = await fetch(getSettings);
+  const settingsRes = IS_TEST
+    ? getMockSettingsResponse(true)
+    : await fetch(getSettings);
 
   if (settingsRes.status === 403) return `access-restricted`;
 

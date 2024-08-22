@@ -24,15 +24,41 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import moment from "moment";
+
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { Text } from "@docspace/shared/components/text";
 import { TStatusInRoom } from "@docspace/shared/utils/socket";
+import { useTranslation } from "react-i18next";
 
 interface StatusProps {
   statusInRoom?: TStatusInRoom;
 }
 
+const getLastSeenStatus = (date: string, locale: string) => {
+  if (!date) return "offline";
+  const dateObj = new Date(date).toISOString();
+
+  const momentDate = moment(dateObj).locale(locale);
+  let dateFormat = "DD MMMM";
+
+  if (momentDate.year() !== moment().year()) {
+    dateFormat = "DD.MM.YYYY";
+  }
+
+  const formattedDate = momentDate.isSame(new Date(), "day")
+    ? "Today"
+    : momentDate.format(dateFormat);
+
+  const formattedTime = momentDate.format("LT");
+
+  // return t("LastSeenAt", { date: formattedDate, time: formattedTime });
+  return `Last seen ${formattedDate} at ${formattedTime}`;
+};
+
 export const Status = (props: StatusProps) => {
+  const { i18n } = useTranslation();
+
   const { statusInRoom } = props;
 
   if (!statusInRoom) {
@@ -41,10 +67,15 @@ export const Status = (props: StatusProps) => {
     );
   }
 
+  const statusText =
+    statusInRoom.status === "online"
+      ? "online"
+      : getLastSeenStatus(statusInRoom.date, i18n.language);
+
   return (
     <div className="status-wrapper">
       {statusInRoom.status === "online" && <div className="status-indicator" />}
-      <Text className="status-text">{statusInRoom.status}</Text>
+      <Text className="status-text">{statusText}</Text>
     </div>
   );
 };

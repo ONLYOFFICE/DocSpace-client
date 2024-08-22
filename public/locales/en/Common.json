@@ -161,6 +161,7 @@
   "EmptyRoomsDescription": "Please create the first room in My rooms.",
   "EmptyRoomsHeader": "No rooms here yet",
   "Enable": "Enable",
+  "EnableThirdPartyIntegration": "Please ask a {{productName}} owner or administrator to enable the corresponding service in the Integration section of the {{productName}} Settings.",
   "EncryptingFile": "Encrypting file",
   "EncryptionFilePreparing": "Preparing file for encryption",
   "EncryptionKeysReload": "Encryption keys must be re-entered",
@@ -513,6 +514,5 @@
   "Website": "Website",
   "Yes": "Yes",
   "Yesterday": "Yesterday",
-  "You": "You",
-  "EnableThirdPartyIntegration": "Please ask a DocSpace owner or administrator to enable the corresponding service in the Integration section of the DocSpace Settings."
+  "You": "You"
 }

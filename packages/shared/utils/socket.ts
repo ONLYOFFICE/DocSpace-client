@@ -48,6 +48,37 @@ type TOptQuota =
   | { customQuotaFeature: string; usedSpace: number; quotaLimit: number }
   | { customQuotaFeature?: never; usedSpace?: never; quotaLimit?: never };
 
+export type TStatus = "online" | "offline";
+
+export type TSession = {
+  id: number;
+  platform: string;
+  browser: string;
+  ip: string;
+};
+
+export type TLeaveInRoomData = {
+  userId: string;
+  date: string;
+};
+
+export type TStatusInRoomBase = {
+  page: string;
+  userId: string;
+  sessions: TSession[];
+};
+
+export type TStatusInRoomOnline = TStatusInRoomBase & {
+  status: Extract<TStatus, "online">;
+};
+
+export type TStatusInRoomOffline = TStatusInRoomBase & {
+  status: Extract<TStatus, "offline">;
+  date: string;
+};
+
+export type TStatusInRoom = TStatusInRoomOnline | TStatusInRoomOffline;
+
 export type TOptSocket = {
   featureId: string;
   value: number;

@@ -26,14 +26,14 @@
 
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 
 import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 
 import { TResponse } from "@/types";
-import useError from "@/hooks/useError";
 
+import useError from "@/hooks/useError";
 import useRootInit from "@/hooks/useRootInit";
 import useDeepLink from "@/hooks/useDeepLink";
 import useSelectFileDialog from "@/hooks/useSelectFileDialog";
@@ -46,6 +46,7 @@ import useStartFillingSelectDialog from "@/hooks/useStartFillingSelectDialog";
 
 import DeepLink from "./deep-link";
 import Editor from "./Editor";
+
 import SelectFileDialog from "./SelectFileDialog";
 import SelectFolderDialog from "./SelectFolderDialog";
 import SharingDialog from "./ShareDialog";
@@ -64,7 +65,6 @@ const Root = ({
   doc,
   fileId,
   hash,
-  timer,
 }: TResponse) => {
   const editorRef = React.useRef<null | HTMLElement>(null);
 
@@ -80,11 +80,6 @@ const Root = ({
     error?.status === "quota-exception";
 
   const { t } = useTranslation(["Editor", "Common"]);
-
-  useEffect(() => {
-    console.log("editor timer: ", timer);
-    console.log("openEdit timer: ", config?.timer);
-  }, [config?.timer, timer]);
 
   useRootInit({
     documentType: config?.documentType,

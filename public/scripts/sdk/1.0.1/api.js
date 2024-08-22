@@ -489,7 +489,7 @@
           path = `/doceditor/?fileId=${config.id}&editorType=${config.editorType}&editorGoBack=${goBack}&customization=${customization}`;
 
           if (config.requestToken) {
-            path = `${path}&share=${config.requestToken}`;
+            path = `${path}&share=${config.requestToken}&is_file=true`;
           }
 
           break;
@@ -515,7 +515,7 @@
           path = `/doceditor/?fileId=${config.id}&editorType=${config.editorType}&action=view&editorGoBack=${goBack}&customization=${customization}`;
 
           if (config.requestToken) {
-            path = `${path}&share=${config.requestToken}`;
+            path = `${path}&share=${config.requestToken}&is_file=true`;
           }
 
           break;

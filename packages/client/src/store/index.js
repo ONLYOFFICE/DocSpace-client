@@ -98,7 +98,7 @@ const paymentStore = new PaymentStore(
 );
 const wizardStore = new WizardStore();
 const confirmStore = new ConfirmStore();
-const backupStore = new BackupStore();
+const backupStore = new BackupStore(authStore, thirdPartyStore);
 const commonStore = new CommonStore(settingsStore);
 
 const ssoStore = new SsoFormStore();

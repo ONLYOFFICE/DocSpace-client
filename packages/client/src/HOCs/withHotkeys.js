@@ -169,6 +169,10 @@ const withHotkeys = (Component) => {
     };
 
     const onPaste = async (e) => {
+      const someDialogIsOpen = checkDialogsOpen();
+
+      if (someDialogIsOpen) return;
+
       uploadClipboardFiles(t, e);
     };
 

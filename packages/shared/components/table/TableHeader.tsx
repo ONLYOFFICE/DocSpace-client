@@ -38,14 +38,12 @@ import {
 import { TTableColumn, TableHeaderProps } from "./Table.types";
 import { TableSettings } from "./sub-components/TableSettings";
 import { TableHeaderCell } from "./sub-components/TableHeaderCell";
+import { checkingForUnfixedSize, getSubstring } from "./Table.utils";
 import {
   DEFAULT_MIN_COLUMN_SIZE,
-  MIN_SIZE_FIRST_COLUMN,
   SETTINGS_SIZE,
-  HANDLE_OFFSET,
-  checkingForUnfixedSize,
-  getSubstring,
-} from "./Table.utils";
+  MIN_SIZE_FIRST_COLUMN,
+} from "./Table.constants";
 import { isDesktop } from "../../utils";
 
 class TableHeaderComponent extends React.Component<

@@ -24,30 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { Base } from "../../themes";
-import { BackdropProps } from "./Backdrop.types";
-
-const StyledBackdrop = styled.div<BackdropProps & { needBackground: boolean }>`
-  background-color: ${(props) =>
-    props.needBackground
-      ? props.theme.backdrop.backgroundColor
-      : props.theme.backdrop.unsetBackgroundColor};
-
-  display: ${(props) => (props.visible ? "block" : "none")};
-  height: 100vh;
-  position: fixed;
-  width: 100vw;
-
-  z-index: ${(props) => props.zIndex};
-  left: 0;
-  top: 0;
-  cursor: ${(props) =>
-    props.needBackground && !props.isModalDialog ? "pointer" : "default"};
-`;
-
-StyledBackdrop.defaultProps = {
-  theme: Base,
-};
-
-export default StyledBackdrop;
+export const DEFAULT_MIN_COLUMN_SIZE = 110;
+export const SETTINGS_SIZE = 24;
+export const MIN_SIZE_FIRST_COLUMN = 210;
+export const TABLE_HEADER_HEIGHT = 40;

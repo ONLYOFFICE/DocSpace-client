@@ -12,7 +12,7 @@
   "RemoveFilesOrContactToUpgrade": "Entfernen Sie die nicht benötigten Dateien oder wenden Sie sich an den {{productName}}-Administrator, um den Tarifplan zu aktualisieren.",
   "RemoveFilesOrContactToUpgradeQuota": "Entfernen Sie die nicht benötigten Dateien oder wenden Sie sich an den Administrator von {{productName}}, um die Speicherquo­te zu erhöhen.",
   "RequestActivation": "Erneute Aktivierung anfordern",
-  "RoomQuotaDescription": " Sie können die nicht benötigten Räume archivieren oder <1>hier klicken</1>, um einen passenderen Preisplan für Ihr {{ProduktName}} zu finden.",
+  "RoomQuotaDescription": " Sie können die nicht benötigten Räume archivieren oder <1>hier klicken</1>, um einen passenderen Preisplan für Ihr {{productName}} zu finden.",
   "RoomQuotaHeader": "Die Anzahl von Räumen wird bald überschritten sein: {{currentValue}} / {{maxValue}}",
   "RoomQuotaHeaderLimit": "Das Limit für die Anzahl der Räume ist erreicht: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Das Limit für Speicherplatz und Anzahl der Räume wird bald überschritten",

@@ -12,7 +12,7 @@
   "RemoveFilesOrContactToUpgrade": "Eliminați fișierele inutile sau contactați administratorul {{productName}} pentru a selecta un alt plan tarifar.",
   "RemoveFilesOrContactToUpgradeQuota": "Eliminați fișierele inutile sau contactați administratorul {{productName}} pentru a crește cota spațiului de stocare.",
   "RequestActivation": "Solicitaţi activarea din nou",
-  "RoomQuotaDescription": "Puteţi arhiva sălile inutile sau <1>{{{apăsați aici}}</1> pentru a găsi un abonament mai potrivit pentru {{productName}} .",
+  "RoomQuotaDescription": "Puteţi arhiva sălile inutile sau <1>apăsați aici</1> pentru a găsi un abonament mai potrivit pentru {{productName}} .",
   "RoomQuotaHeader": "Cota sălilor este pe punctul de a fi depăşită: {{currentValue}} / {{maxValue}}",
   "RoomQuotaHeaderLimit": "Limita maximă permisă de săli a fost atinsă: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Limita maximă permisă de stocare și de săli este pe punctul de a fi depăşit",

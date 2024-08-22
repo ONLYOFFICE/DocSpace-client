@@ -24,56 +24,73 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { redirect } from "next/navigation";
+import dynamic from "next/dynamic";
 
-import { getBgPattern } from "@docspace/shared/utils/common";
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
-import SimpleNav from "@/components/SimpleNav";
-import { getColorTheme, getSettings } from "@/utils/actions";
-import {
-  WizardContent,
-  WizardFormWrapper,
-} from "@/components/Wizard/Wizard.styled";
 import { GreetingContainer } from "@/components/GreetingContainer";
+import WizardForm from "@/components/WizardForm";
+import {
+  getMachineName,
+  getPortalPasswordSettings,
+  getIsLicenseRequired,
+  getSettings,
+  getPortalTimeZones,
+  getPortalCultures,
+} from "@/utils/actions";
 
-export default async function Layout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const [settings, colorTheme] = await Promise.all([
-    getSettings(),
-    getColorTheme(),
-  ]);
+const LanguageComboboxWrapper = dynamic(
+  () => import("@/components/LanguageCombobox"),
+  {
+    ssr: false,
+  },
+);
+
+async function Page() {
+  const settings = await getSettings();
 
   const objectSettings = typeof settings === "string" ? undefined : settings;
 
-  if (!objectSettings || !objectSettings.wizardToken) {
-    redirect("/");
-  }
+  const [
+    passwordSettings,
+    machineName,
+    isRequiredLicense,
+    portalTimeZones,
+    portalCultures,
+  ] = await Promise.all([
+    getPortalPasswordSettings(objectSettings?.wizardToken),
+    getMachineName(objectSettings?.wizardToken),
+    getIsLicenseRequired(),
+    getPortalTimeZones(objectSettings?.wizardToken),
+    getPortalCultures(),
+  ]);
 
-  const bgPattern = getBgPattern(colorTheme?.selected);
   return (
-    <div style={{ width: "100%", height: "100%" }}>
-      <SimpleNav isLanguageComboboxVisible={false} />
-
-      <WizardFormWrapper id="wizard-page" bgPattern={bgPattern}>
-        <div className="bg-cover" />
-        <Scrollbar id="customScrollBar">
-          <WizardContent>
-            <ColorTheme themeId={ThemeId.LinkForgotPassword}>
-              <GreetingContainer
-                greetingSettings={objectSettings?.greetingSettings}
-                welcomeTitle="Wizard:WelcomeTitle"
-              />
-              <FormWrapper id="wizard-form">{children}</FormWrapper>
-            </ColorTheme>
-          </WizardContent>
-        </Scrollbar>
-      </WizardFormWrapper>
-    </div>
+    <>
+      <LanguageComboboxWrapper />
+      <ColorTheme themeId={ThemeId.LinkForgotPassword}>
+        <>
+          <GreetingContainer
+            greetingSettings={objectSettings?.greetingSettings}
+            welcomeTitle="Wizard:WelcomeTitle"
+          />
+          <FormWrapper id="wizard-form">
+            <WizardForm
+              passwordSettings={passwordSettings}
+              machineName={machineName}
+              isRequiredLicense={isRequiredLicense}
+              portalCultures={portalCultures}
+              portalTimeZones={portalTimeZones}
+              culture={objectSettings?.culture}
+              wizardToken={objectSettings?.wizardToken}
+              passwordHash={objectSettings?.passwordHash}
+            />
+          </FormWrapper>
+        </>
+      </ColorTheme>
+    </>
   );
 }
+
+export default Page;

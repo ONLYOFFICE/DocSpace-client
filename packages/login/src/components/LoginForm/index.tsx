@@ -439,6 +439,9 @@ const LoginForm = ({
 
   return (
     <form className="auth-form-container">
+      <Text fontSize="16px" fontWeight="600" className="sign-in-subtitle">
+        {t("Common:SignIn")}
+      </Text>
       {client && (
         <OAuthClientInfo
           name={client.name}

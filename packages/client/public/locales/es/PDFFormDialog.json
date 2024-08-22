@@ -1,4 +1,5 @@
 {
+  "PDFform": "Formulario PDF",
   "PDFFormEditDialogDescription": "¿Desea cambiar al modo de edición de formularios? Por favor, tenga en cuenta que el formulario ya no estará disponible para rellenarlo y tendrá que volver a hacer clic en el botón Empezar a rellenar después de editarlo para rellenarlo.",
   "PDFFormEditDialogTitle": "Edición del formulario",
   "PDFFormIsReadyToast": "El formulario PDF <1>{{filename}}</1> está listo para ser rellenado.",

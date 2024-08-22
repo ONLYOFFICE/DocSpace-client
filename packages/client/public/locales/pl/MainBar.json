@@ -2,7 +2,7 @@
   "ConfirmEmailDescription": "Użyj linku otrzymanego w e-mailu aktywacyjnym. E-mail z linkiem aktywacyjnym nie dotarł?",
   "ConfirmEmailHeader": "Aktywuj swój adres e-mail ({{ email }}), aby uzyskać dostęp do funkcji {{productName}}.",
   "PersonalUserQuotaAdminsDescription": "Aby móc przesyłać i tworzyć nowe pliki oraz katalogi, zwolnij miejsce na dysku lub zmień limit pamięci na użytkownika w <1>ustawieniach zarządzania pamięcią.</1>",
-  "PersonalUserQuotaDescription": "Aby móc przesyłać i tworzyć nowe pliki oraz katalogi, zwolnij miejsce na dysku lub skontaktuj się z administratorem, aby zwiększyć limit pamięci.",
+  "PersonalUserQuotaDescription": "Aby móc przesyłać i tworzyć nowe pliki oraz katalogi, zwolnij miejsce na dysku lub skontaktuj się z administratorem {{productName}}, aby zwiększyć limit pamięci.",
   "RequestActivation": "Poproś o aktywację jeszcze raz",
   "RoomQuotaHeader": "Liczba pokoi zostanie niedługo przekroczona: {{currentValue}} / {{maxValue}}",
   "StorageAndUserHeader": "Limity pamięci/użytkowników z większą liczbą uprawnień zostaną wkrótce przekroczone.",

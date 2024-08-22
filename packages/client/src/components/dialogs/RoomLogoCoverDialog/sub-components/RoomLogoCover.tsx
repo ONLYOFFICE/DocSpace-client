@@ -28,11 +28,11 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 
-import { mobile, tablet } from "@docspace/shared/utils";
+import { mobile, tablet, isMobile } from "@docspace/shared/utils";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 import { CustomLogo } from "./CustomLogo";
-import { SelectColor } from "./SelectColor";
+import { SelectColor } from "./SelectColor/SelectColor";
 import { SelectIcon } from "./SelectIcon";
 
 const logoColors = [
@@ -96,29 +96,41 @@ const RoomLogoCover = (props) => {
 
   const scrollRef = useRef(null);
 
+  const selectContainerBody = (
+    <>
+      <div className="color-select-container">
+        <SelectColor
+          t={t}
+          selectedColor={color}
+          logoColors={logoColors}
+          onChangeColor={setColor}
+        />
+      </div>
+      <div className="icon-select-container">
+        <SelectIcon
+          t={t}
+          withoutIcon={withoutIcon}
+          setIcon={setIcon}
+          setWithoutIcon={setWithoutIcon}
+        />
+      </div>
+    </>
+  );
+
   return (
     <RoomLogoCoverContainer>
       <div className="room-logo-container">
         <CustomLogo icon={icon} color={color} withoutIcon={withoutIcon} />
       </div>
-      <Scrollbar style={{ height: "400px" }} ref={scrollRef}>
-        <div className="color-select-container">
-          <SelectColor
-            t={t}
-            selectedColor={color}
-            logoColors={logoColors}
-            onChangeColor={setColor}
-          />
-        </div>
-        <div className="icon-select-container">
-          <SelectIcon
-            t={t}
-            withoutIcon={withoutIcon}
-            setIcon={setIcon}
-            setWithoutIcon={setWithoutIcon}
-          />
-        </div>
-      </Scrollbar>
+      <div className="select-container">
+        {isMobile() ? (
+          selectContainerBody
+        ) : (
+          <Scrollbar ref={scrollRef} style={{ height: "400px" }}>
+            {selectContainerBody}
+          </Scrollbar>
+        )}
+      </div>
     </RoomLogoCoverContainer>
   );
 };

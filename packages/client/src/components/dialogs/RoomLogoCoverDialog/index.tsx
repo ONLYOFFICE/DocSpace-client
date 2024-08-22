@@ -31,7 +31,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { mobile, tablet } from "@docspace/shared/utils";
+import { mobile, tablet, isMobile } from "@docspace/shared/utils";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import RoomLogoCover from "./sub-components/RoomLogoCover";
 
@@ -44,13 +44,16 @@ const StyledModalDialog = styled(ModalDialog)`
       width: 464px;
     }
 
-    @media ${mobile} {
-      width: 100vw;
-    }
-
     .modal-body {
       padding: 0;
       padding-left: 14px;
+    }
+
+    @media ${mobile} {
+      width: 100vw;
+      .modal-body {
+        padding: 0px 16px 8px;
+      }
     }
   }
 `;
@@ -62,7 +65,8 @@ const RoomLogoCoverDialog = () => {
       visible
       autoMaxHeight
       // onClose={onClose}
-      displayType={ModalDialogType.modal}
+      displayType={isMobile() ? ModalDialogType.aside : ModalDialogType.modal}
+      withBodyScroll
     >
       <ModalDialog.Header>{t("RoomCover")}</ModalDialog.Header>
       <ModalDialog.Body>

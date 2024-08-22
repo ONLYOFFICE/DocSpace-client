@@ -46,9 +46,11 @@ export const RegisterContainer = styled.div<{
     width: 100%;
     align-items: center;
     color: ${(props) => props.theme.invitePage.borderColor};
-    padding-top: 35px;
-    padding-bottom: 0;
-    margin-bottom: 32px;
+    padding: 32px 0;
+
+    @media ${mobile} {
+      padding: 24px 0;
+    }
   }
 
   .line:before,
@@ -66,7 +68,7 @@ export const RegisterContainer = styled.div<{
     width: 100%;
 
     .password-field{
-        margin-bottom: 24px;
+      margin-bottom: 24px;
     }
 
     .email-container{
@@ -82,43 +84,5 @@ export const RegisterContainer = styled.div<{
 
   .password-field-wrapper {
     min-width: 100%;
-  }
-
-  .greeting-user-container{
-    margin-bottom: 32px;
-    p{
-      text-align: center;
-    }
-    .back-sign-in-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-
-      margin-bottom: 16px;
-      .back-button {
-        position: absolute;
-        max-width: 60px;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        inset-inline-start: 0;
-        display: flex;
-        gap: 4px;
-
-        svg {
-          ${(props) =>
-            props.theme.interfaceDirection === "rtl" &&
-            " transform: rotate(180deg)"};
-        }
-
-        p {
-          color: ${(props) => props.theme.login.backTitle.color};
-        }
-
-        p:hover {
-          cursor: pointer;
-        }
-      }
-    }
   }
 }`;

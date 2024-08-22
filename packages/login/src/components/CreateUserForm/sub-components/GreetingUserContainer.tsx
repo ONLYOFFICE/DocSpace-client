@@ -51,10 +51,10 @@ export const GreetingUserContainer = ({
   const { t } = useTranslation(["Confirm", "Common"]);
 
   return (
-    <div className="greeting-user-container">
-      <div className="back-sign-in-container">
+    <div className="invitation-info-container">
+      <div className="sign-in-container">
         {type === "LinkInvite" && !emailFromLink && (
-          <div className="back-button">
+          <div className="back-title">
             <IconButton size={16} iconName={ArrowIcon} onClick={onClickBack} />
             <Text fontWeight={600} onClick={onClickBack}>
               {t("Common:Back")}

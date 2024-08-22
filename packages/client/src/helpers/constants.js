@@ -85,7 +85,7 @@ export const TableVersions = Object.freeze({
   Files: "3",
   People: "3",
   Trash: "4",
-  Groups: "5",
+  Groups: "6",
   InsideGroup: "6",
   Recent: "1",
 });
@@ -168,4 +168,15 @@ export const SortByFieldName = Object.freeze({
   RoomType: "roomType",
   LastOpened: "LastOpened",
   UsedSpace: "usedspace",
+});
+
+export const ThirdPartyServicesUrlName = Object.freeze({
+  GoogleDrive: "google",
+  Box: "box",
+  Dropbox: "dropbox",
+  OneDrive: "skydrive",
+  Nextcloud: "nextcloud",
+  kDrive: "kdrive",
+  ownCloud: "owncloud",
+  WebDav: "webdav",
 });

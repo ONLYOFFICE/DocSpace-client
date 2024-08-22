@@ -56,7 +56,6 @@ const StyledInvitePanel = styled.div`
     height: auto;
     width: auto;
     background: ${(props) => props.theme.infoPanel.blurColor};
-    backdrop-filter: blur(3px);
     z-index: 309;
     position: fixed;
     inset: 0;

@@ -37,7 +37,6 @@ const {
   black,
   darkBlack,
 
-  darkGrayBlackout,
   grayLight,
   darkGrayLight,
   lightGrayHover,
@@ -104,6 +103,8 @@ const {
   darkScrollActive,
   silver,
   highlandGray,
+
+  blurDark,
 } = globalColors;
 
 const Dark: TTheme = {
@@ -609,7 +610,7 @@ const Dark: TTheme = {
         r: 27,
         g: 27,
         b: 27,
-        a: 0.4,
+        a: 0.6,
       },
       blur: 9,
     },
@@ -1269,7 +1270,7 @@ const Dark: TTheme = {
   },
 
   backdrop: {
-    backgroundColor: darkGrayBlackout,
+    backgroundColor: blurDark,
     unsetBackgroundColor: "unset",
   },
 
@@ -1823,7 +1824,7 @@ const Dark: TTheme = {
     sectionHeaderToggleBgActive: black,
 
     backgroundColor: black,
-    blurColor: darkGrayBlackout,
+    blurColor: blurDark,
     borderColor: grayDarkStrong,
     thumbnailBorderColor: grayLightMid,
     textColor: white,

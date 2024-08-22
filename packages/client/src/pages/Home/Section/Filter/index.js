@@ -2021,6 +2021,13 @@ const SectionFilterContent = ({
         default: true,
       };
 
+      const people = {
+        id: "sort-by_people",
+        key: "membersCount",
+        label: t("Common:People"),
+        default: true,
+      };
+
       const manager = {
         id: "sort-by_manager",
         key: "manager",
@@ -2028,7 +2035,7 @@ const SectionFilterContent = ({
         default: true,
       };
 
-      groupsOptions.push(title, manager);
+      groupsOptions.push(title, people, manager);
 
       return groupsOptions;
     }

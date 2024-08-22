@@ -38,12 +38,12 @@ const LoginContainer = styled.div<{
   display: flex;
   flex-direction: column;
   align-items: center;
-  //margin: 56px auto 0 auto;
   max-width: 960px;
   z-index: 0;
 
+  margin-top: 56px;
   margin-bottom: ${(props) =>
-    props.isRegisterContainerVisible ? "100px" : "16px"};
+    props.isRegisterContainerVisible ? "100px" : "56px"};
 
   .remember-wrapper {
     max-width: 170px;
@@ -64,7 +64,10 @@ const LoginContainer = styled.div<{
   @media ${mobile} {
     margin-inline: auto;
     max-width: 100%;
-    width: calc(100% - 32px);
+    width: calc(100% - 24px);
+    padding-inline: 16px 8px;
+
+    margin: 0 auto;
   }
 
   .socialButton {
@@ -94,7 +97,7 @@ const LoginContainer = styled.div<{
     color: ${(props) => props.theme.login.headerColor};
 
     @media ${mobile} {
-      padding-top: 32px;
+      padding-top: 34px;
     }
   }
 
@@ -113,6 +116,10 @@ const LoginContainer = styled.div<{
     align-items: center;
     color: ${(props) => props.theme.login.orLineColor};
     padding: 32px 0;
+
+    @media ${mobile} {
+      padding: 24px 0;
+    }
   }
 
   .line:before,

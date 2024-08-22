@@ -145,6 +145,7 @@ const StyledHeaderContainer = styled.div`
   justify-content: space-between;
   margin: 0 16px;
   height: 53px;
+  position: relative;
 
   .additional-icons-container {
     display: flex;
@@ -156,14 +157,27 @@ const StyledHeaderContainer = styled.div`
   }
   .close-button {
     margin-inline: auto 0;
+    min-width: 17px;
+  }
+  .header-component {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   ::after {
     content: "";
+    border-bottom: 1px solid rgb(236, 238, 241);
+    width: calc(100% + 32px);
+    position: absolute;
+    left: -16px;
+    bottom: 0;
+
+    /* content: "";
     border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
     width: 100%;
     position: fixed;
     left: 0;
-    top: 53px;
+    top: 53px; */
   }
 `;
 export { StyledAside, StyledControlContainer, StyledHeaderContainer };

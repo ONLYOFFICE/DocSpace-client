@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { AsideHeaderProps } from "../aside/Aside.types";
 import { ModalDialogType } from "./ModalDialog.enums";
 
 export type ModalDialogTypeDetailed = {
@@ -160,4 +161,9 @@ export interface ModalSubComponentsProps {
   embedded?: boolean;
   withForm?: boolean;
   blur?: number;
+
+  isBackButton?: AsideHeaderProps["isBackButton"];
+  headerIcons?: AsideHeaderProps["headerIcons"];
+  onBackClick?: AsideHeaderProps["onBackClick"];
+  onCloseClick?: AsideHeaderProps["onCloseClick"];
 }

@@ -37,17 +37,20 @@ export interface AsideProps {
   header: AsideHeaderProps["header"];
   isBackButton?: AsideHeaderProps["isBackButton"];
   isCloseable?: AsideHeaderProps["isCloseable"];
-  hederIcons?: AsideHeaderProps["hederIcons"];
+  headerIcons?: AsideHeaderProps["headerIcons"];
   onBackClick?: AsideHeaderProps["onBackClick"];
   onCloseClick?: AsideHeaderProps["onCloseClick"];
 }
 export interface AsideHeaderProps {
   header: string;
+  className?: string;
+  id?: string;
   isBackButton?: boolean;
   isCloseable?: boolean;
-  hederIcons?: { id: string; url: string; onClick: () => void }[];
+  headerIcons?: { key: string; url: string; onClick: () => void }[];
   onBackClick?: () => void;
   onCloseClick?: () => void;
+  style?: React.CSSProperties;
 }
 export interface StyledAsideProps {
   visible: boolean;

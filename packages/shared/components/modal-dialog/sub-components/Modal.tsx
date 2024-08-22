@@ -30,18 +30,15 @@ import { isIOS, isMobileOnly, isSafari } from "react-device-detect";
 import { classNames } from "../../../utils";
 import { DialogSkeleton, DialogAsideSkeleton } from "../../../skeletons";
 
-import { Heading, HeadingSize } from "../../heading";
 import { Scrollbar } from "../../scrollbar";
-
+import { AsideHeader } from "../../aside";
 import {
   StyledModal,
-  StyledHeader,
   Content,
   Dialog,
   StyledBody,
   StyledFooter,
 } from "../ModalDialog.styled";
-import { CloseButton } from "./CloseButton";
 import { ModalBackdrop } from "./ModalBackdrop";
 import { FormWrapper } from "./FormWrapper";
 import { ModalSubComponentsProps } from "../ModalDialog.types";
@@ -68,10 +65,12 @@ const Modal = ({
   modalSwipeOffset,
   containerVisible,
   isDoubleFooterLine,
-  isCloseable,
+
   embedded,
   withForm,
   blur,
+
+  ...rest
 }: ModalSubComponentsProps) => {
   const contentRef = React.useRef<null | HTMLDivElement>(null);
 
@@ -177,32 +176,21 @@ const Modal = ({
               containerComponent
             ) : (
               <FormWrapper withForm={withForm || false}>
-                <StyledHeader
-                  id="modal-header-swipe"
-                  className={
-                    classNames(["modal-header", headerProps.className]) ||
-                    "modal-header"
-                  }
-                  {...headerProps}
-                  currentDisplayType={currentDisplayType}
-                >
-                  {header && (
-                    <Heading
-                      level={1}
-                      className="heading"
-                      size={HeadingSize.medium}
-                      truncate
-                    >
-                      {headerComponent}
-                    </Heading>
-                  )}
-                  {isCloseable && (
-                    <CloseButton
-                      currentDisplayType={currentDisplayType}
-                      onClick={onClose}
-                    />
-                  )}
-                </StyledHeader>
+                {header && (
+                  <AsideHeader
+                    id="modal-header-swipe"
+                    className={
+                      classNames(["modal-header", headerProps.className]) ||
+                      "modal-header"
+                    }
+                    header={headerComponent}
+                    onCloseClick={onClose}
+                    {...(currentDisplayType === "modal" && {
+                      style: { marginBottom: "16px" },
+                    })}
+                    {...rest}
+                  />
+                )}
 
                 {body && (
                   <StyledBody

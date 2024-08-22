@@ -38,8 +38,11 @@ const AsideHeader = (props: AsideHeaderProps) => {
     onBackClick,
     onCloseClick,
     header,
-    hederIcons = [],
+    headerIcons = [],
     isCloseable = true,
+    className,
+    id,
+    style,
   } = props;
 
   const backButtonRender = (
@@ -62,16 +65,20 @@ const AsideHeader = (props: AsideHeaderProps) => {
   );
 
   return (
-    <StyledHeaderContainer>
+    <StyledHeaderContainer id={id} className={className} style={style}>
       {isBackButton && backButtonRender}
-      <Text fontSize="21px" fontWeight={700}>
-        {header}
-      </Text>
-      {hederIcons.length > 0 && (
+      {typeof header === "string" ? (
+        <Text fontSize="21px" fontWeight={700} className="header-component">
+          {header}
+        </Text>
+      ) : (
+        header
+      )}
+      {headerIcons.length > 0 && (
         <div className="additional-icons-container">
-          {hederIcons.map((item) => (
+          {headerIcons.map((item) => (
             <IconButton
-              key={item.id}
+              key={item.key}
               size={17}
               className="close-button"
               iconName={item.url}

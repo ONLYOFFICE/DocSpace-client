@@ -28,6 +28,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { useContext, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { getCookie } from "@docspace/shared/utils";
@@ -36,6 +37,7 @@ import AppLoader from "@docspace/shared/components/app-loader";
 import { frameCallEvent } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { loginWithConfirmKey } from "@docspace/shared/api/user";
+import OperationContainer from "@docspace/shared/components/operation-container";
 
 import { TError } from "@/types";
 
@@ -43,9 +45,16 @@ import { ConfirmRouteContext } from "../ConfirmRoute";
 
 const AuthHandler = () => {
   let searchParams = useSearchParams();
+  const { t } = useTranslation(["Common"]);
 
   const { linkData } = useContext(ConfirmRouteContext);
   const { email = "", key = "" } = linkData;
+
+  const referenceUrl = searchParams.get("referenceUrl");
+  const isFileHandler =
+    referenceUrl && referenceUrl.indexOf("filehandler.ashx") !== -1;
+  const isExternalDownloading =
+    referenceUrl && referenceUrl.indexOf("action=download") !== -1;
 
   useEffect(() => {
     async function loginWithKey() {
@@ -60,8 +69,6 @@ const AuthHandler = () => {
         //console.log("Login with confirm key success", res);
         frameCallEvent({ event: "onAuthSuccess" });
 
-        const url = searchParams.get("referenceUrl");
-
         const redirectUrl = getCookie("x-redirect-authorization-uri");
 
         deleteCookie("x-redirect-authorization-uri");
@@ -71,20 +78,24 @@ const AuthHandler = () => {
           return;
         }
 
-        if (url && url.includes("oauth2")) {
+        if (referenceUrl && referenceUrl.includes("oauth2")) {
           const newUrl = location.search.split("referenceUrl=")[1];
 
           window.location.replace(newUrl);
           return;
         }
 
-        if (url) {
+        if (referenceUrl) {
           try {
-            new URL(url);
-            return window.location.replace(url);
+            new URL(referenceUrl);
+            if (isFileHandler && isExternalDownloading) {
+              return;
+            } else {
+              return window.location.replace(referenceUrl);
+            }
           } catch {
             return window.location.replace(
-              combineUrl(window.location.origin, url),
+              combineUrl(window.location.origin, referenceUrl),
             );
           }
         }
@@ -113,7 +124,15 @@ const AuthHandler = () => {
     loginWithKey();
   });
 
-  return <AppLoader />;
+  return isFileHandler && isExternalDownloading ? (
+    <OperationContainer
+      url={referenceUrl}
+      title={t("DownloadOperationTitle")}
+      description={t("DownloadOperationDescription")}
+    />
+  ) : (
+    <AppLoader />
+  );
 };
 
 export default AuthHandler;

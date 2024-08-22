@@ -72,6 +72,7 @@ export const ContentWrapper = styled.div<{ bgPattern: string }>`
 
     p {
       text-align: center;
+      overflow-wrap: break-word;
 
       @media ${mobile} {
         margin-top: 32px;

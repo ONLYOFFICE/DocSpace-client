@@ -47,7 +47,7 @@ const RoomsItemHeader = ({
   setIsMobileHidden,
   isGracePeriod,
   setInvitePanelOptions,
-  setInviteUsersWarningDialogVisible,
+  setQuotaWarningDialogVisible,
   roomsView,
   setSelection,
   setBufferSelection,
@@ -86,7 +86,7 @@ const RoomsItemHeader = ({
     const parentRoomId = infoPanelSelection.id;
 
     if (isGracePeriod) {
-      setInviteUsersWarningDialogVisible(true);
+      setQuotaWarningDialogVisible(true);
       return;
     }
 
@@ -188,8 +188,7 @@ export default inject(
       isGracePeriod: currentTariffStatusStore.isGracePeriod,
 
       setInvitePanelOptions: dialogsStore.setInvitePanelOptions,
-      setInviteUsersWarningDialogVisible:
-        dialogsStore.setInviteUsersWarningDialogVisible,
+      setQuotaWarningDialogVisible: dialogsStore.setQuotaWarningDialogVisible,
 
       setSelection: filesStore.setSelection,
       setBufferSelection: filesStore.setBufferSelection,

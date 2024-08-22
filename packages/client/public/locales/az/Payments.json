@@ -25,7 +25,6 @@
   "Pay": "Ödəyin",
   "Payer": "Ödəyici",
   "PayerDescription": "Bu istifadəçi ödəniş təfərrüatlarına daxil ola bilər və kvota təyin edib ödəniş edə bilən yeganə istifadəçidir. {{productName}} sahibi və ödəniş meneceri özləri Stripe müştəri portalından istifadə edərək ödəniş meneceri rolunu yenidən təyin edə bilərlər.",
-  "PaymentOverdue": "Yeni istifadəçilər əlavə etmək mümkün deyil.",
   "PriceCalculation": "Qiymətinizi hesablayın",
   "RenewSubscription": "{{planName}} Plan abunəliyini yeniləyin",
   "RoomManagerDescription": "Otağın idarə edilməsi və arxivləşdirilməsi, istifadəçi dəvəti və idarə edilməsi. Otağa bir neçə admin təyin edilə bilər.",
@@ -35,7 +34,6 @@
   "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/ay</3>",
   "UpgradeNow": "İndi yeniləyin",
   "UpgradePlan": "Planı yeniləyin",
-  "UpgradePlanInfo": "Yeni istifadəçilərin əlavə edilməsi cari qiymət planınızın icazə verdiyi otaq üzvlərinin maksimum sayını keçəcək.",
   "UserNotFound": "İstifadəçi <1>{{email}}</1> tapılmadı.",
   "UserNotFoundMatchingEmail": "Uyğun Stripe e-poçtu olan istifadəçini tapa bilmədik.",
   "YourPrice": "Qiymətiniz"

@@ -102,7 +102,7 @@ const paymentStore = new PaymentStore(
 );
 const wizardStore = new WizardStore();
 const confirmStore = new ConfirmStore();
-const backupStore = new BackupStore();
+const backupStore = new BackupStore(authStore, thirdPartyStore);
 const commonStore = new CommonStore(settingsStore);
 
 const ssoStore = new SsoFormStore();
@@ -239,6 +239,7 @@ const contextOptionsStore = new ContextOptionsStore(
   pluginStore,
   infoPanelStore,
   currentTariffStatusStore,
+  currentQuotaStore,
   userStore,
   clientLoadingStore,
 );
@@ -291,6 +292,7 @@ const createEditRoomStore = new CreateEditRoomStore(
   infoPanelStore,
   currentQuotaStore,
   clientLoadingStore,
+  dialogsStore,
 );
 
 const webhooksStore = new WebhooksStore(settingsStore);

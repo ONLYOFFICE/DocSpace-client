@@ -37,8 +37,6 @@ const {
   black,
   darkBlack,
 
-  lightGrayBlackout,
-  darkGrayBlackout,
   grayLight,
   darkGrayLight,
   lightGrayHover,
@@ -64,28 +62,21 @@ const {
 
   mainOrange,
 
-  lightErrorStatus,
   darkErrorStatus,
   favoritesStatus,
   lightStatusWarning,
   darkStatusWarning,
-  lightStatusPositive,
   darkStatusPositive,
 
-  lightIcons,
   darkIcon,
   link,
   darkLink,
   blueLightMid,
   bigGrayDarkMid,
 
-  lightToastDone,
   darkToastDone,
-  lightToastInfo,
   darkToastInfo,
-  lightToastAlert,
   darkToastAlert,
-  lightToastWarning,
   darkToastWarning,
 
   dndColor,
@@ -112,6 +103,8 @@ const {
   darkScrollActive,
   silver,
   highlandGray,
+
+  blurDark,
 } = globalColors;
 
 const Dark: TTheme = {
@@ -617,7 +610,7 @@ const Dark: TTheme = {
         r: 27,
         g: 27,
         b: 27,
-        a: 0.4,
+        a: 0.6,
       },
       blur: 9,
     },
@@ -665,7 +658,7 @@ const Dark: TTheme = {
     color: white,
     disableColor: grayDarkText,
 
-    backgroundColor: black,
+    backgroundColor: darkGrayLight,
     disableBackgroundColor: grayDarkStrong,
 
     width: {
@@ -1277,7 +1270,7 @@ const Dark: TTheme = {
   },
 
   backdrop: {
-    backgroundColor: darkGrayBlackout,
+    backgroundColor: blurDark,
     unsetBackgroundColor: "unset",
   },
 
@@ -1831,7 +1824,7 @@ const Dark: TTheme = {
     sectionHeaderToggleBgActive: black,
 
     backgroundColor: black,
-    blurColor: darkGrayBlackout,
+    blurColor: blurDark,
     borderColor: grayDarkStrong,
     thumbnailBorderColor: grayLightMid,
     textColor: white,

@@ -12,14 +12,20 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
-import { InputBlock } from "@docspace/shared/components/input-block";
-import { InputSize, InputType } from "@docspace/shared/components/text-input";
 
-import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
+import {
+  InputSize,
+  InputType,
+  TextInput,
+} from "@docspace/shared/components/text-input";
 import { UserStore } from "@docspace/shared/store/UserStore";
 
+import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
+import { introspectDeveloperToken } from "@docspace/shared/api/oauth";
+import { FieldContainer } from "@docspace/shared/components/field-container";
+
 const StyledContainer = styled.div`
-  p {
+  .warning-text {
     margin-bottom: 16px;
   }
 `;
@@ -38,11 +44,15 @@ const GenerateDeveloperTokenDialog = ({
   // const {} = useTranslation(["OAuth", "Common"]);
 
   const [token, setToken] = React.useState("");
+  const [isValidToken, setIsValidToken] = React.useState(false);
+  const [tokenError, setTokenError] = React.useState("");
 
   const [requestRunning, setRequestRunning] = React.useState(false);
 
+  const timerRef = React.useRef<null | NodeJS.Timeout>(null);
+
   const onRevoke = async () => {
-    if (!token || !client || requestRunning) return;
+    if (!token || !isValidToken || !client || requestRunning) return;
 
     try {
       const { clientId, clientSecret } = client;
@@ -62,8 +72,41 @@ const GenerateDeveloperTokenDialog = ({
     }
   };
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
+
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+
+    if (!value) {
+      setIsValidToken(false);
+      setTokenError("");
+      setToken("");
+      return;
+    }
+
+    timerRef.current = setTimeout(async () => {
+      try {
+        const data = await introspectDeveloperToken(value);
+
+        if (!data) return;
+
+        const { active, client_id: clientId } = data;
+
+        if (active && clientId === client?.clientId) {
+          setIsValidToken(true);
+          setTokenError("");
+          return;
+        }
+
+        setIsValidToken(false);
+        setTokenError("Invalid token");
+      } catch (err) {
+        setIsValidToken(false);
+        setTokenError("Invalid token");
+      }
+    }, 200);
 
     setToken(value);
   };
@@ -85,15 +128,23 @@ const GenerateDeveloperTokenDialog = ({
       <ModalDialog.Header>Revoke developer token</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledContainer>
-          <Text>Warning text</Text>
-          <InputBlock
-            value={token}
-            scale
-            placeholder="Enter developer token"
-            type={InputType.text}
-            size={InputSize.base}
-            onChange={onChange}
-          />
+          <Text className="warning-text">Warning text</Text>
+          <FieldContainer
+            hasError={!!tokenError}
+            errorMessage={tokenError}
+            removeMargin
+          >
+            <TextInput
+              value={token}
+              scale
+              placeholder="Enter developer token"
+              type={InputType.text}
+              size={InputSize.base}
+              onChange={onChange}
+              maxLength={10000}
+              hasError={!!tokenError}
+            />
+          </FieldContainer>
         </StyledContainer>
       </ModalDialog.Body>
       <ModalDialog.Footer>
@@ -102,7 +153,7 @@ const GenerateDeveloperTokenDialog = ({
           primary
           scale
           onClick={onRevoke}
-          isDisabled={!token}
+          isDisabled={!token || !isValidToken}
           isLoading={requestRunning}
           size={ButtonSize.small}
         />

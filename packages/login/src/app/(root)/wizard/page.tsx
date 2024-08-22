@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import dynamic from "next/dynamic";
-
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
@@ -39,13 +37,6 @@ import {
   getPortalTimeZones,
   getPortalCultures,
 } from "@/utils/actions";
-
-const LanguageComboboxWrapper = dynamic(
-  () => import("@/components/LanguageCombobox"),
-  {
-    ssr: false,
-  },
-);
 
 async function Page() {
   const settings = await getSettings();
@@ -67,29 +58,26 @@ async function Page() {
   ]);
 
   return (
-    <>
-      <LanguageComboboxWrapper />
-      <ColorTheme themeId={ThemeId.LinkForgotPassword}>
-        <>
-          <GreetingContainer
-            greetingSettings={objectSettings?.greetingSettings}
-            welcomeTitle="Wizard:WelcomeTitle"
+    <ColorTheme themeId={ThemeId.LinkForgotPassword}>
+      <>
+        <GreetingContainer
+          greetingSettings={objectSettings?.greetingSettings}
+          welcomeTitle="Wizard:WelcomeTitle"
+        />
+        <FormWrapper id="wizard-form">
+          <WizardForm
+            passwordSettings={passwordSettings}
+            machineName={machineName}
+            isRequiredLicense={isRequiredLicense}
+            portalCultures={portalCultures}
+            portalTimeZones={portalTimeZones}
+            culture={objectSettings?.culture}
+            wizardToken={objectSettings?.wizardToken}
+            passwordHash={objectSettings?.passwordHash}
           />
-          <FormWrapper id="wizard-form">
-            <WizardForm
-              passwordSettings={passwordSettings}
-              machineName={machineName}
-              isRequiredLicense={isRequiredLicense}
-              portalCultures={portalCultures}
-              portalTimeZones={portalTimeZones}
-              culture={objectSettings?.culture}
-              wizardToken={objectSettings?.wizardToken}
-              passwordHash={objectSettings?.passwordHash}
-            />
-          </FormWrapper>
-        </>
-      </ColorTheme>
-    </>
+        </FormWrapper>
+      </>
+    </ColorTheme>
   );
 }
 

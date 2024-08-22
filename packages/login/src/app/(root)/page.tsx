@@ -42,14 +42,6 @@ import { GreetingLoginContainer } from "@/components/GreetingContainer";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { cookies } from "next/headers";
-import dynamic from "next/dynamic";
-
-const LanguageComboboxWrapper = dynamic(
-  () => import("@/components/LanguageCombobox"),
-  {
-    ssr: false,
-  },
-);
 
 async function Page({
   searchParams,
@@ -91,7 +83,6 @@ async function Page({
 
   return (
     <>
-      <LanguageComboboxWrapper />
       {settings && typeof settings !== "string" && (
         <ColorTheme
           themeId={ThemeId.LinkForgotPassword}

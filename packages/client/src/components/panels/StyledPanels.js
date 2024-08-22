@@ -712,24 +712,6 @@ const StyledLink = styled(Link)`
 
 StyledModalRowContainer.defaultProps = { theme: Base };
 
-const StyledUploadHeader = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-
-  .icons-container {
-    margin-left: 16px;
-    margin-right: 16px;
-  }
-
-  .title-container {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    user-select: none;
-  }
-`;
-
 const StyledUploadBody = styled.div`
   width: calc(100% + 16px);
   height: 100%;
@@ -751,6 +733,5 @@ export {
   StyledModalRowContainer,
   StyledLink,
   StyledNewFilesBody,
-  StyledUploadHeader,
   StyledUploadBody,
 };

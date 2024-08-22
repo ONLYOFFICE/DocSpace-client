@@ -216,56 +216,6 @@ const StyledFilterBlock = styled.div`
 
 StyledFilterBlock.defaultProps = { theme: Base };
 
-const StyledFilterBlockHeader = styled.div<{ isSelector?: boolean }>`
-  height: 53px;
-  min-height: 53px;
-
-  margin: 0;
-
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          padding-right: 16px;
-          padding-left: 37px;
-        `
-      : css`
-          padding-left: 16px;
-          padding-right: 37px;
-        `}
-
-  box-sizing: border-box;
-
-  border-bottom: ${(props) =>
-    props.isSelector ? "none" : props.theme.filterInput.filter.border};
-
-  display: flex;
-  align-items: center;
-
-  h1 {
-    font-weight: 700;
-  }
-
-  #filter_search-options-clear {
-    margin-left: 16px;
-  }
-  .arrow-button {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 12px;
-          `
-        : css`
-            margin-right: 12px;
-          `}
-  }
-
-  svg {
-    cursor: pointer;
-  }
-`;
-
-StyledFilterBlockHeader.defaultProps = { theme: Base };
-
 const StyledFilterBlockItem = styled.div<{
   withoutHeader: boolean;
   isFirst?: boolean;
@@ -500,34 +450,6 @@ const StyledFilterBlockFooter = styled.div`
 
 StyledFilterBlockFooter.defaultProps = { theme: Base };
 
-const StyledControlContainer = styled.div`
-  display: flex;
-
-  width: 24px;
-  height: 24px;
-  position: absolute;
-
-  border-radius: 100px;
-  cursor: pointer;
-
-  align-items: center;
-  justify-content: center;
-  z-index: 450;
-
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          left: 13px;
-          top: 17px;
-        `
-      : css`
-          right: 13px;
-          top: 17px;
-        `}
-`;
-
-StyledControlContainer.defaultProps = { theme: Base };
-
 const selectedViewIcon = css`
   svg {
     path {
@@ -697,7 +619,6 @@ StyledSortButton.defaultProps = { theme: Base };
 export {
   StyledSortButton,
   StyledFilterBlock,
-  StyledFilterBlockHeader,
   StyledFilterBlockItem,
   StyledFilterBlockItemHeader,
   StyledFilterBlockItemContent,
@@ -711,7 +632,6 @@ export {
   StyledFilterBlockItemCheckboxContainer,
   StyledFilterBlockItemSeparator,
   StyledFilterBlockFooter,
-  StyledControlContainer,
 };
 
 export { StyledFilterInput, StyledSearchInput, StyledButton };

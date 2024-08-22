@@ -143,7 +143,7 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
     [searchValue],
   );
 
-  const SelectorGroups = (
+  return (
     <Selector
       id={id}
       className={className}
@@ -186,16 +186,6 @@ const GroupsSelector = (props: GroupsSelectorProps) => {
         />
       }
     />
-  );
-
-  if (!onClose) {
-    return SelectorGroups;
-  }
-
-  return (
-    <Aside visible onClose={onClose} withoutBodyScroll>
-      {SelectorGroups}
-    </Aside>
   );
 };
 

@@ -28,7 +28,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import ClearReactSvgUrl from "PUBLIC_DIR/images/clear.react.svg?url";
-import CrossIcon from "PUBLIC_DIR/images/cross.react.svg?url";
 
 import GroupsSelector from "../../../selectors/Groups";
 import PeopleSelector from "../../../selectors/People";
@@ -38,18 +37,11 @@ import { FilterBlockLoader } from "../../../skeletons/filter";
 
 import { Backdrop } from "../../backdrop";
 import { Button, ButtonSize } from "../../button";
-import { Heading, HeadingLevel, HeadingSize } from "../../heading";
-import { IconButton } from "../../icon-button";
 import { Scrollbar } from "../../scrollbar";
 import { Portal } from "../../portal";
 import { TSelectorItem } from "../../selector";
 
-import {
-  StyledControlContainer,
-  StyledFilterBlock,
-  StyledFilterBlockFooter,
-  StyledFilterBlockHeader,
-} from "../Filter.styled";
+import { StyledFilterBlock, StyledFilterBlockFooter } from "../Filter.styled";
 
 import { FilterBlockProps, TGroupItem, TItem } from "../Filter.types";
 import {
@@ -58,6 +50,7 @@ import {
 } from "../Filter.utils";
 
 import FilterBlockItem from "./FilterBlockItem";
+import { AsideHeader } from "../../aside";
 
 const FilterBlock = ({
   selectedFilterValue,
@@ -481,7 +474,7 @@ const FilterBlock = ({
   const showFooter = isLoading ? false : isEqualFilter();
   const showClearFilterBtn =
     !isLoading && (selectedFilterValue.length > 0 || filterValues.length > 0);
-  console.log("showSelector.type", showSelector.type);
+
   const filterBlockComponent = (
     <>
       {showSelector.show ? (
@@ -496,6 +489,7 @@ const FilterBlock = ({
               withHeader
               headerProps={{
                 onBackClick: onArrowClick,
+                onCloseClick: hideFilterBlock,
                 headerLabel: selectorLabel,
                 withoutBackButton: false,
               }}
@@ -509,6 +503,7 @@ const FilterBlock = ({
               withHeader
               headerProps={{
                 onBackClick: onArrowClick,
+                onCloseClick: hideFilterBlock,
                 headerLabel: selectorLabel,
                 withoutBackButton: false,
               }}
@@ -521,6 +516,7 @@ const FilterBlock = ({
               withHeader
               headerProps={{
                 onBackClick: onArrowClick,
+                onCloseClick: hideFilterBlock,
                 headerLabel: selectorLabel,
                 withoutBackButton: false,
               }}
@@ -533,29 +529,20 @@ const FilterBlock = ({
         </StyledFilterBlock>
       ) : (
         <StyledFilterBlock>
-          <StyledFilterBlockHeader>
-            <Heading size={HeadingSize.medium} level={HeadingLevel.h1}>
-              {filterHeader}
-            </Heading>
-            {showClearFilterBtn && (
-              <IconButton
-                id="filter_search-options-clear"
-                iconName={ClearReactSvgUrl}
-                isFill
-                onClick={onClearFilter}
-                size={17}
-              />
-            )}
+          <AsideHeader
+            header={filterHeader}
+            onCloseClick={hideFilterBlock}
+            {...(showClearFilterBtn && {
+              headerIcons: [
+                {
+                  key: "filter-icon",
+                  url: ClearReactSvgUrl,
+                  onClick: onClearFilter,
+                },
+              ],
+            })}
+          />
 
-            <StyledControlContainer onClick={hideFilterBlock}>
-              <IconButton
-                size={17}
-                className="close-button"
-                iconName={CrossIcon}
-                isClickable
-              />
-            </StyledControlContainer>
-          </StyledFilterBlockHeader>
           <div className="filter-body">
             {isLoading ? (
               <FilterBlockLoader

@@ -84,17 +84,10 @@ const SimpleNav = ({
     culture,
   );
 
-  let isComboboxVisible = isLanguageComboboxVisible;
-
-  const searchParamType = useSearchParams().get("type") ?? "";
-  if (TYPE_LINK_WITHOUT_LNG_COMBOBOX?.includes(searchParamType)) {
-    isComboboxVisible = false;
-  }
-
   return (
     <StyledSimpleNav id="login-header">
       <img className="logo" src={logoUrl} alt="logo-url" />
-      {isComboboxVisible && <LanguageComboboxWrapper />}
+      {isLanguageComboboxVisible && <LanguageComboboxWrapper />}
     </StyledSimpleNav>
   );
 };

@@ -26,14 +26,23 @@
 
 import React from "react";
 
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 
 import { getBgPattern } from "@docspace/shared/utils/common";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 import SimpleNav from "@/components/SimpleNav";
-import { getColorTheme, getSettings } from "@/utils/actions";
+import { getColorTheme, getPortalCultures, getSettings } from "@/utils/actions";
 import { ContentWrapper, StyledPage } from "@/components/Layout.styled";
+import dynamic from "next/dynamic";
+import { TYPE_LINK_WITHOUT_LNG_COMBOBOX } from "@/utils/constants";
+
+const LanguageComboboxWrapper = dynamic(
+  () => import("@/components/LanguageCombobox"),
+  {
+    ssr: false,
+  },
+);
 
 export default async function Layout({
   children,
@@ -52,13 +61,25 @@ export default async function Layout({
   const culture =
     cookies().get("asc_language")?.value ?? objectSettings?.culture;
 
+  const hdrs = headers();
+  const type = hdrs.get("x-confirm-type") ?? "";
+
+  let isComboboxVisible = true;
+  if (TYPE_LINK_WITHOUT_LNG_COMBOBOX?.includes(type)) {
+    isComboboxVisible = false;
+  }
+
   return (
     <div style={{ width: "100%", height: "100%" }}>
-      <SimpleNav culture={culture} />
-
+      <SimpleNav
+        culture={culture}
+        isLanguageComboboxVisible={isComboboxVisible}
+      />
       <ContentWrapper id="content-wrapper" bgPattern={bgPattern}>
         <div className="bg-cover" />
         <Scrollbar id="customScrollBar">
+          {isComboboxVisible && <LanguageComboboxWrapper />}
+
           <StyledPage id="styled-page">{children}</StyledPage>
         </Scrollbar>
       </ContentWrapper>

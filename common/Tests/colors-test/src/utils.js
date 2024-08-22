@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2010-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,32 +24,49 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { Base } from "../../themes";
-import { BackdropProps } from "./Backdrop.types";
+import path from "path";
+import fs from "fs";
 
-const StyledBackdrop = styled.div<BackdropProps & { needBackground: boolean }>`
-  background-color: ${(props) =>
-    props.needBackground
-      ? props.theme.backdrop.backgroundColor
-      : props.theme.backdrop.unsetBackgroundColor};
+const hexColorPattern = /#(?:[0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})\b/g;
 
-  display: ${(props) => (props.visible ? "block" : "none")};
-  height: 100vh;
-  position: fixed;
-  width: 100vw;
+export function findHexColorsInFile(filePath) {
+  const content = fs.readFileSync(filePath, "utf-8");
+  const matches = content.match(hexColorPattern);
+  return matches || [];
+}
 
-  z-index: ${(props) => props.zIndex};
+export function searchDirectoryForHexColors(
+  directory,
+  excludeFiles = [],
+  excludeDirs = []
+) {
+  let hexColors = {};
 
-  // doesn't require mirroring for RTL
-  left: 0;
-  top: 0;
-  cursor: ${(props) =>
-    props.needBackground && !props.isModalDialog ? "pointer" : "default"};
-`;
+  function walkDirectory(currentPath) {
+    const items = fs.readdirSync(currentPath);
 
-StyledBackdrop.defaultProps = {
-  theme: Base,
-};
+    items.forEach((item) => {
+      const fullPath = path.join(currentPath, item);
+      const isDirectory = fs.statSync(fullPath).isDirectory();
 
-export default StyledBackdrop;
+      if (isDirectory) {
+        if (!excludeDirs.includes(fullPath)) {
+          walkDirectory(fullPath);
+        }
+      } else {
+        if (
+          !excludeFiles.includes(fullPath) &&
+          /\.(js|ts|jsx|tsx)$/.test(item)
+        ) {
+          const matches = findHexColorsInFile(fullPath);
+          if (matches.length > 0) {
+            hexColors[fullPath] = matches;
+          }
+        }
+      }
+    });
+  }
+
+  walkDirectory(directory);
+  return hexColors;
+}

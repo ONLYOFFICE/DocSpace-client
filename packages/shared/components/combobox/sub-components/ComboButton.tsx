@@ -72,11 +72,12 @@ const ComboButton = (props: ComboButtonProps) => {
     modernView = false,
     tabIndex = -1,
     isLoading = false,
+    displayArrow: displayArrowProp,
   } = props;
 
   const defaultOption = selectedOption?.default;
   // const isSelected = selectedOption?.key !== 0;
-  const displayArrow = withOptions || withAdvancedOptions;
+  const displayArrow = withOptions || withAdvancedOptions || displayArrowProp;
 
   const comboButtonClassName = `combo-button combo-button_${isOpen ? "open" : "closed"}`;
 

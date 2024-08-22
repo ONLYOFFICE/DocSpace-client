@@ -126,6 +126,14 @@ const StyledHeaderContainer = styled.div`
     margin-inline: 16px 16px;
     gap: 16px;
   }
+
+  .heading {
+    font-family: ${(props) => props.theme.fontFamily};
+    color: ${(props) => props.theme.modalDialog.textColor};
+    font-weight: 700;
+    font-size: 21px;
+  }
+
   .arrow-button {
     margin-inline: 0 12px;
   }
@@ -145,13 +153,6 @@ const StyledHeaderContainer = styled.div`
     position: absolute;
     left: -16px;
     bottom: 0;
-
-    /* content: "";
-    border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
-    width: 100%;
-    position: fixed;
-    left: 0;
-    top: 53px; */
   }
 `;
 export { StyledAside, StyledHeaderContainer };

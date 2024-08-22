@@ -32,7 +32,7 @@ import { Text } from "../text";
 import { AsideHeaderProps } from "./Aside.types";
 import { StyledHeaderContainer } from "./Aside.styled";
 import { RectangleSkeleton } from "../../skeletons/rectangle";
-
+import { Heading, HeadingSize } from "../heading";
 const AsideHeader = (props: AsideHeaderProps) => {
   const {
     isBackButton = false,
@@ -66,6 +66,8 @@ const AsideHeader = (props: AsideHeaderProps) => {
     />
   );
 
+  // TODO: Heading is temporary until all dialogues are checked
+
   const mainComponent = (
     <>
       {isBackButton && backButtonRender}
@@ -74,7 +76,9 @@ const AsideHeader = (props: AsideHeaderProps) => {
           {header}
         </Text>
       ) : (
-        header
+        <Heading className="heading" size={HeadingSize.medium} truncate>
+          {header}
+        </Heading>
       )}
       {headerIcons.length > 0 && (
         <div className="additional-icons-container">

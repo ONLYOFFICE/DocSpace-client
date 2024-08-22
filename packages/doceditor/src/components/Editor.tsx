@@ -51,7 +51,6 @@ import {
 } from "@/utils/events";
 import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
-import useFilesSettings from "@/hooks/useFilesSettings";
 
 type IConfigType = IConfig & {
   events?: {
@@ -77,6 +76,8 @@ const Editor = ({
   errorMessage,
   isSkipError,
 
+  filesSettings,
+
   onDownloadAs,
   onSDKRequestSharingSettings,
   onSDKRequestSaveAs,
@@ -89,7 +90,6 @@ const Editor = ({
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
 
   const searchParams = useSearchParams();
-  const { filesSettings } = useFilesSettings({});
 
   const openOnNewPage = IS_ZOOM ? false : !filesSettings?.openEditorInSameTab;
 

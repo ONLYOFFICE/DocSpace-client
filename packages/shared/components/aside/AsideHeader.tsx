@@ -90,6 +90,7 @@ const AsideHeader = (props: AsideHeaderProps) => {
           ))}
         </div>
       )}
+      {isCloseable && closeIconRender}
     </>
   );
 
@@ -98,7 +99,6 @@ const AsideHeader = (props: AsideHeaderProps) => {
   return (
     <StyledHeaderContainer id={id} className={className} style={style}>
       {isLoading ? loaderComponent : mainComponent}
-      {isCloseable && closeIconRender}
     </StyledHeaderContainer>
   );
 };

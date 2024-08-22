@@ -2,7 +2,7 @@
   "ConfirmEmailDescription": "Utilizar a ligação fornecida no e-mail de ativação. Ainda não recebeu um e-mail com o link de ativação?",
   "ConfirmEmailHeader": "Por favor, confirme o seu email ({{ email }}) para ter acesso às funcionalidades do {{productName}}.",
   "PersonalUserQuotaAdminsDescription": "Para fazer upload e criar novos arquivos e pastas, libere espaço em disco ou gerencie a cota por usuário nas <1>Configurações de gerenciamento de armazenamento.</1>",
-  "PersonalUserQuotaDescription": "Para fazer upload e criar novos arquivos e pastas, libere espaço em disco ou entre em contato com o administrador para aumentar a cota de armazenamento.",
+  "PersonalUserQuotaDescription": "Para fazer upload e criar novos arquivos e pastas, libere espaço em disco ou entre em contato com o administrador do {{productName}} para aumentar a cota de armazenamento.",
   "RequestActivation": "Solicitar a ativação novamente",
   "RoomQuotaHeader": "Salas que estão prestes a ser excedidas: {{currentValue}} / {{maxValue}}",
   "StorageAndUserHeader": "Os limites para o armazenamento e para o número de administradores/utilizadores com poder estão prestes a ser excedidos.",

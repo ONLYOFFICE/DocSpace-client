@@ -107,9 +107,10 @@ const AboutContent = (props) => {
     previewData,
     standalone,
     licenseUrl,
+    isEnterprise,
   } = props;
   const { t } = useTranslation(["About", "Common"]);
-  const isCommercial = !standalone;
+  const isCommercial = !standalone || isEnterprise;
   const license = isCommercial ? t("Common:Commercial") : "AGPL-3.0";
   const linkRepo = "https://github.com/ONLYOFFICE/DocSpace";
   const linkDocs = "https://github.com/ONLYOFFICE/DocumentServer";
@@ -291,14 +292,16 @@ const AboutContent = (props) => {
   );
 };
 
-export default inject(({ settingsStore }) => {
+export default inject(({ settingsStore, currentTariffStatusStore }) => {
   const { theme, companyInfoSettingsData, standalone, licenseUrl } =
     settingsStore;
+  const { isEnterprise } = currentTariffStatusStore;
 
   return {
     theme,
     companyInfoSettingsData,
     standalone,
     licenseUrl,
+    isEnterprise,
   };
 })(observer(AboutContent));

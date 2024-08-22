@@ -31,6 +31,7 @@ import { IconButton } from "../icon-button";
 import { Text } from "../text";
 import { AsideHeaderProps } from "./Aside.types";
 import { StyledHeaderContainer } from "./Aside.styled";
+import { RectangleSkeleton } from "../../skeletons/rectangle";
 
 const AsideHeader = (props: AsideHeaderProps) => {
   const {
@@ -43,6 +44,7 @@ const AsideHeader = (props: AsideHeaderProps) => {
     className,
     id,
     style,
+    isLoading,
   } = props;
 
   const backButtonRender = (
@@ -64,8 +66,8 @@ const AsideHeader = (props: AsideHeaderProps) => {
     />
   );
 
-  return (
-    <StyledHeaderContainer id={id} className={className} style={style}>
+  const mainComponent = (
+    <>
       {isBackButton && backButtonRender}
       {typeof header === "string" ? (
         <Text fontSize="21px" fontWeight={700} className="header-component">
@@ -88,6 +90,14 @@ const AsideHeader = (props: AsideHeaderProps) => {
           ))}
         </div>
       )}
+    </>
+  );
+
+  const loaderComponent = <RectangleSkeleton height="28" width="100%" />;
+
+  return (
+    <StyledHeaderContainer id={id} className={className} style={style}>
+      {isLoading ? loaderComponent : mainComponent}
       {isCloseable && closeIconRender}
     </StyledHeaderContainer>
   );

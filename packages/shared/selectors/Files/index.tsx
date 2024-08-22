@@ -476,7 +476,10 @@ const FilesSelectorComponent = ({
   ]);
 
   const headerProps: TSelectorHeader = withHeader
-    ? { withHeader, headerProps: { headerLabel } }
+    ? {
+        withHeader,
+        headerProps: { headerLabel, onCloseClick: onCancel },
+      }
     : {};
 
   const withSearch = withSearchProp
@@ -617,6 +620,7 @@ const FilesSelectorComponent = ({
         withoutBodyScroll
         zIndex={310}
         onClose={onCancel}
+        withoutHeader
       >
         {SelectorBody}
       </Aside>

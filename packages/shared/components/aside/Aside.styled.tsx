@@ -118,6 +118,7 @@ const StyledHeaderContainer = styled.div`
   justify-content: space-between;
   margin: 0 16px;
   height: 53px;
+  min-height: 53px;
   position: relative;
 
   .additional-icons-container {

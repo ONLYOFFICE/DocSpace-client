@@ -27,7 +27,7 @@
 "use client";
 
 import React from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 import { DocumentEditor } from "@onlyoffice/document-editor-react";
@@ -88,7 +88,6 @@ const Editor = ({
 }: EditorProps) => {
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
 
-  const router = useRouter();
   const searchParams = useSearchParams();
   const { filesSettings } = useFilesSettings({});
 

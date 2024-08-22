@@ -25,11 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 "use client";
+import dynamic from "next/dynamic";
 
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
+const ErrorContainer = dynamic(
+  () => import("@docspace/shared/components/error-container/ErrorContainer"),
+  {
+    ssr: false,
+  },
+);
 
 import { TResponse } from "@/types";
 
@@ -44,15 +50,31 @@ import useFilesSettings from "@/hooks/useFilesSettings";
 import useUpdateSearchParamId from "@/hooks/useUpdateSearchParamId";
 import useStartFillingSelectDialog from "@/hooks/useStartFillingSelectDialog";
 
-import DeepLink from "./deep-link";
 import Editor from "./Editor";
 
-import SelectFileDialog from "./SelectFileDialog";
-import SelectFolderDialog from "./SelectFolderDialog";
-import SharingDialog from "./ShareDialog";
+const DeepLink = dynamic(() => import("./deep-link"), {
+  ssr: false,
+});
+const SelectFileDialog = dynamic(() => import("./SelectFileDialog"), {
+  ssr: false,
+});
+const SelectFolderDialog = dynamic(() => import("./SelectFolderDialog"), {
+  ssr: false,
+});
+const SharingDialog = dynamic(() => import("./ShareDialog"), {
+  ssr: false,
+});
+const StartFillingSelectorDialog = dynamic(
+  () => import("./StartFillingSelectDialog"),
+  {
+    ssr: false,
+  },
+);
+const ConflictResolveDialog = dynamic(() => import("./ConflictResolveDialog"), {
+  ssr: false,
+});
+
 import { calculateAsideHeight } from "@/utils";
-import StartFillingSelectorDialog from "./StartFillingSelectDialog";
-import ConflictResolveDialog from "./ConflictResolveDialog";
 
 const Root = ({
   settings,

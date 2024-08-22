@@ -39,7 +39,7 @@ import { TError } from "@/types";
 import { URL_ONLYOFFICE } from "@/utils/constants";
 
 import { ConfirmRouteContext } from "../ConfirmRoute";
-import { ButtonsWrapper } from "../StyledConfirm.styled";
+import { ButtonsWrapper } from "../Confirm.styled";
 
 type RemovePortalFormProps = {
   siteUrl?: string;

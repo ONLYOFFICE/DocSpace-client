@@ -38,7 +38,7 @@ import { continuePortal } from "@docspace/shared/api/portal";
 import { TError } from "@/types";
 
 import { ConfirmRouteContext } from "../ConfirmRoute";
-import { ButtonsWrapper } from "../StyledConfirm.styled";
+import { ButtonsWrapper } from "../Confirm.styled";
 
 const ContinuePortalForm = () => {
   const { t } = useTranslation(["Confirm", "Common"]);

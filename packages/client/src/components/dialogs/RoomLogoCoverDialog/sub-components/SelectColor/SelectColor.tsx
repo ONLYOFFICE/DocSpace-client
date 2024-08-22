@@ -27,127 +27,27 @@
 import React, { useState, useRef } from "react";
 import styled, { css } from "styled-components";
 
-import { mobile, tablet } from "@docspace/shared/utils";
+import { mobile, tablet, isMobile } from "@docspace/shared/utils";
+
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
 import { IconButton } from "@docspace/shared/components/icon-button";
+
 import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";
 import PencilSvgUrl from "PUBLIC_DIR/images/pencil.outline.react.svg?url";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { DropDown } from "@docspace/shared/components/drop-down";
 import { ColorPicker } from "@docspace/shared/components/color-picker";
-import { SelectColorProps } from "../RoomLogoCoverDialog.types";
+import { SelectColorProps } from "../../RoomLogoCoverDialog.types";
 
-interface ColorItemProps {
-  isEmptyColor?: boolean;
-  isSelected?: boolean;
-}
-
-const StyledColorItem = styled.div<ColorItemProps>`
-  width: 30px;
-  height: 30px;
-  margin-top: 8px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: ${(props) => props.color};
-
-  @media ${tablet} {
-    width: 40px;
-    height: 40px;
-  }
-
-  /* ${(props) =>
-    props.isEmptyColor &&
-    css`
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    `} */
-
-  ${(props) =>
-    props.isSelected &&
-    css`
-      background-color: #f3f4f4;
-    `}
-
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-const SelectedColorItem = styled.div`
-  width: 26px;
-  height: 26px;
-  margin-top: 6px;
-  border-radius: 50%;
-  border: ${(props) => `solid 2px ${props.color}`};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  @media ${tablet} {
-    width: 36px;
-    height: 36px;
-  }
-
-  .circle {
-    width: 20px;
-    height: 20px;
-    background-color: ${(props) => props.color};
-    border-radius: 50%;
-
-    @media ${tablet} {
-      width: 28px;
-      height: 28px;
-    }
-  }
-`;
-
-const CustomSelectedColor = styled.div`
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 8px;
-
-  .color-picker-circle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: ${(props) => props.color};
-  }
-
-  ${(props) =>
-    props.isSelected &&
-    css`
-      width: 26px;
-      height: 26px;
-
-      border: ${(props) => `solid 2px ${props.color}`};
-    `}
-
-  ${(props) =>
-    !props.isSelected &&
-    css`
-      background-color: ${(props) => props.color};
-    `}
-
-  svg {
-    path {
-      fill: #fff;
-    }
-    &:hover {
-      path {
-        fill: #fff;
-      }
-    }
-  }
-`;
+import {
+  StyledModalDialog,
+  StyledColorItem,
+  SelectedColorItem,
+  CustomSelectedColor,
+} from "./SelectColor.styled";
 
 export const SelectColor = ({
   logoColors,
@@ -173,10 +73,7 @@ export const SelectColor = ({
     setOpenColorPicker(true);
   };
 
-  const isCustomColor = !logoColors.includes(selectedColor); // add usecallback
   const isSelectedColorPicker = pickerColor === selectedColor;
-
-  console.log(isSelectedColorPicker);
 
   return (
     <div className="select-color-container">
@@ -236,26 +133,45 @@ export const SelectColor = ({
             />
           </StyledColorItem>
         )}
-
-        <DropDown
-          directionX="both"
-          forwardedRef={iconRef}
-          withBackdrop={false}
-          isDefaultMode
-          open={openColorPicker}
-          clickOutsideAction={() => setOpenColorPicker(false)}
-        >
-          <DropDownItem className="drop-down-item-hex">
-            <ColorPicker
-              // id="accent-hex"
-              onClose={() => setOpenColorPicker(false)}
-              onApply={onApply}
-              appliedColor={selectedColor}
-              applyButtonLabel={t("Common:ApplyButton")}
-              cancelButtonLabel={t("Common:CancelButton")}
-            />
-          </DropDownItem>
-        </DropDown>
+        {isMobile() ? (
+          <StyledModalDialog
+            displayType={ModalDialogType.modal}
+            visible={openColorPicker}
+            onClose={() => setOpenColorPicker(false)}
+            blur={8}
+          >
+            <ModalDialog.Body>
+              <ColorPicker
+                id="buttons-hex"
+                onClose={() => setOpenColorPicker(false)}
+                onApply={onApply}
+                appliedColor={selectedColor}
+                applyButtonLabel={t("Common:ApplyButton")}
+                cancelButtonLabel={t("Common:CancelButton")}
+              />
+            </ModalDialog.Body>
+          </StyledModalDialog>
+        ) : (
+          <DropDown
+            directionX="both"
+            forwardedRef={iconRef}
+            withBackdrop={false}
+            isDefaultMode
+            open={openColorPicker}
+            clickOutsideAction={() => setOpenColorPicker(false)}
+          >
+            <DropDownItem className="drop-down-item-hex">
+              <ColorPicker
+                id="accent-hex"
+                onClose={() => setOpenColorPicker(false)}
+                onApply={onApply}
+                appliedColor={selectedColor}
+                applyButtonLabel={t("Common:ApplyButton")}
+                cancelButtonLabel={t("Common:CancelButton")}
+              />
+            </DropDownItem>
+          </DropDown>
+        )}
       </div>
     </div>
   );

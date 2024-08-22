@@ -65,7 +65,7 @@ export const GreetingCreateUserContainer = ({
       <img src={logoUrl} className="portal-logo" alt="greeting-logo" />
       {type === "LinkInvite" && (
         <div className="tooltip">
-          <Text fontSize="16px" as="div" className="invitation-text">
+          <Text fontSize="16px">
             {roomData.title ? (
               <Trans
                 t={t}

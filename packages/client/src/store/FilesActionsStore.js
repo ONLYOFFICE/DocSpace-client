@@ -2476,7 +2476,15 @@ class FilesActionStore {
           ? getObjectByLocation(shareWebUrl)?.share
           : "";
 
-        return openDocEditor(id, false, shareKey);
+        const isPDF = item.fileExst === ".pdf";
+
+        const canEditForm =
+          isPDF &&
+          item.isPDFForm &&
+          item.security?.EditForm &&
+          !item.startFilling;
+
+        return openDocEditor(id, false, shareKey, canEditForm);
       }
 
       if (isMediaOrImage) {

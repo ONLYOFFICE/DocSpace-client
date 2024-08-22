@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2010-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,32 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { Base } from "../../themes";
-import { BackdropProps } from "./Backdrop.types";
+import fs from "fs";
+import { searchDirectoryForHexColors } from "./utils.js";
+import { excludeDirs, excludeFiles } from "./exclude.js";
+import { generateReport } from "./report.js";
 
-const StyledBackdrop = styled.div<BackdropProps & { needBackground: boolean }>`
-  background-color: ${(props) =>
-    props.needBackground
-      ? props.theme.backdrop.backgroundColor
-      : props.theme.backdrop.unsetBackgroundColor};
+const directoryPath = "../../../packages";
+const reportName = `colors_report_${new Date().toJSON()}.html`;
 
-  display: ${(props) => (props.visible ? "block" : "none")};
-  height: 100vh;
-  position: fixed;
-  width: 100vw;
+const hexColorsFound = searchDirectoryForHexColors(
+  directoryPath,
+  excludeFiles,
+  excludeDirs
+);
 
-  z-index: ${(props) => props.zIndex};
-
-  // doesn't require mirroring for RTL
-  left: 0;
-  top: 0;
-  cursor: ${(props) =>
-    props.needBackground && !props.isModalDialog ? "pointer" : "default"};
-`;
-
-StyledBackdrop.defaultProps = {
-  theme: Base,
-};
-
-export default StyledBackdrop;
+const htmlReport = generateReport(hexColorsFound);
+fs.writeFileSync(reportName, htmlReport, "utf-8");

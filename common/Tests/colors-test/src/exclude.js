@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2010-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,32 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { Base } from "../../themes";
-import { BackdropProps } from "./Backdrop.types";
+export const excludeFiles = ["../../../packages/shared/utils/encoder.ts"];
 
-const StyledBackdrop = styled.div<BackdropProps & { needBackground: boolean }>`
-  background-color: ${(props) =>
-    props.needBackground
-      ? props.theme.backdrop.backgroundColor
-      : props.theme.backdrop.unsetBackgroundColor};
-
-  display: ${(props) => (props.visible ? "block" : "none")};
-  height: 100vh;
-  position: fixed;
-  width: 100vw;
-
-  z-index: ${(props) => props.zIndex};
-
-  // doesn't require mirroring for RTL
-  left: 0;
-  top: 0;
-  cursor: ${(props) =>
-    props.needBackground && !props.isModalDialog ? "pointer" : "default"};
-`;
-
-StyledBackdrop.defaultProps = {
-  theme: Base,
-};
-
-export default StyledBackdrop;
+export const excludeDirs = [
+  "../../../packages/client/node_modules",
+  "../../../packages/shared/node_modules",
+  "../../../packages/login/node_modules",
+  "../../../packages/doceditor/node_modules",
+  "../../../packages/management/node_modules",
+  "../../../packages/doceditor/.next",
+  "../../../packages/login/.next",
+  "../../../packages/login/dist",
+  "../../../packages/shared/themes",
+];

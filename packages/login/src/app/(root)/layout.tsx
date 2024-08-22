@@ -26,13 +26,14 @@
 
 import React from "react";
 
+import { cookies } from "next/headers";
+
 import { getBgPattern } from "@docspace/shared/utils/common";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 import SimpleNav from "@/components/SimpleNav";
 import { getColorTheme, getSettings } from "@/utils/actions";
-import { cookies } from "next/headers";
-import { ContentWrapper, FormWrapper } from "@/components/StyledLayout.styled";
+import { ContentWrapper, StyledPage } from "@/components/Layout.styled";
 
 export default async function Layout({
   children,
@@ -55,12 +56,12 @@ export default async function Layout({
     <div style={{ width: "100%", height: "100%" }}>
       <SimpleNav culture={culture} />
 
-      <FormWrapper id="form-wrapper" bgPattern={bgPattern}>
+      <ContentWrapper id="content-wrapper" bgPattern={bgPattern}>
         <div className="bg-cover" />
         <Scrollbar id="customScrollBar">
-          <ContentWrapper id="content-wrapper">{children}</ContentWrapper>
+          <StyledPage id="styled-page">{children}</StyledPage>
         </Scrollbar>
-      </FormWrapper>
+      </ContentWrapper>
     </div>
   );
 }

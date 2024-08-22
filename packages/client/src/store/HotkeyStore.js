@@ -37,7 +37,7 @@ import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-fil
 import config from "PACKAGE_FILE";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { encryptionUploadDialog } from "../helpers/encryptionUploadDialog";
-import { TABLE_HEADER_HEIGHT } from "@docspace/shared/utils/device";
+import { TABLE_HEADER_HEIGHT } from "@docspace/shared/components/table/Table.constants";
 
 class HotkeyStore {
   filesStore;
@@ -683,9 +683,8 @@ class HotkeyStore {
   };
 
   uploadClipboardFiles = async (t, event) => {
-    const { uploadEmptyFolders } = this.filesActionsStore;
+    const { createFoldersTree } = this.filesActionsStore;
     const { startUpload } = this.uploadDataStore;
-    const currentFolderId = this.selectedFolderStore.id;
 
     if (this.filesStore.hotkeysClipboard.length) {
       return this.moveFilesFromClipboard(t);
@@ -693,16 +692,9 @@ class HotkeyStore {
 
     const files = await getFilesFromEvent(event);
 
-    const emptyFolders = files.filter((f) => f.isEmptyDirectory);
-
-    if (emptyFolders.length > 0) {
-      uploadEmptyFolders(emptyFolders, currentFolderId).then(() => {
-        const onlyFiles = files.filter((f) => !f.isEmptyDirectory);
-        if (onlyFiles.length > 0) startUpload(onlyFiles, currentFolderId, t);
-      });
-    } else {
-      startUpload(files, currentFolderId, t);
-    }
+    createFoldersTree(files, uploadToFolder).then((f) => {
+      if (f.length > 0) startUpload(f, null, t);
+    });
   };
 
   get countTilesInRow() {

@@ -139,6 +139,7 @@ class ContextOptionsStore {
   pluginStore;
   infoPanelStore;
   currentTariffStatusStore;
+  currentQuotaStore;
   userStore;
   clientLoadingStore;
 
@@ -160,6 +161,7 @@ class ContextOptionsStore {
     pluginStore,
     infoPanelStore,
     currentTariffStatusStore,
+    currentQuotaStore,
     userStore,
     clientLoadingStore,
   ) {
@@ -179,6 +181,7 @@ class ContextOptionsStore {
     this.pluginStore = pluginStore;
     this.infoPanelStore = infoPanelStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
+    this.currentQuotaStore = currentQuotaStore;
     this.userStore = userStore;
     this.clientLoadingStore = clientLoadingStore;
   }
@@ -556,16 +559,12 @@ class ContextOptionsStore {
     this.dialogsStore.setDownloadDialogVisible(true);
   };
 
-  onClickCreateRoom = (item) => {
-    this.filesActionsStore.setProcessCreatingRoomFromData(true);
-    const event = new Event(Events.ROOM_CREATE);
-    if (item && item.isFolder) {
-      event.title = item.title;
-    }
-    window.dispatchEvent(event);
-  };
-
   onDuplicate = (item) => {
+    if (this.currentQuotaStore.isWarningRoomsDialog) {
+      this.dialogsStore.setQuotaWarningDialogVisible(true);
+      return;
+    }
+
     this.filesActionsStore.duplicateAction(item);
   };
 
@@ -862,7 +861,7 @@ class ContextOptionsStore {
     const { isGracePeriod } = this.currentTariffStatusStore;
 
     if (isGracePeriod) {
-      this.dialogsStore.setInviteUsersWarningDialogVisible(true);
+      this.dialogsStore.setQuotaWarningDialogVisible(true);
     } else {
       this.dialogsStore.setInvitePanelOptions({
         visible: true,
@@ -883,15 +882,15 @@ class ContextOptionsStore {
   onClickArchive = (e) => {
     const data = (e.currentTarget && e.currentTarget.dataset) || e;
     const { action } = data;
-    const { isGracePeriod } = this.currentTariffStatusStore;
+    const { isWarningRoomsDialog } = this.currentQuotaStore;
     const {
       setArchiveDialogVisible,
       setRestoreRoomDialogVisible,
-      setInviteUsersWarningDialogVisible,
+      setQuotaWarningDialogVisible,
     } = this.dialogsStore;
 
-    if (action === "unarchive" && isGracePeriod) {
-      setInviteUsersWarningDialogVisible(true);
+    if (action === "unarchive" && isWarningRoomsDialog) {
+      setQuotaWarningDialogVisible(true);
       return;
     }
 
@@ -1105,7 +1104,7 @@ class ContextOptionsStore {
   onRestoreAllArchiveAction = () => {
     const { activeFiles, activeFolders } = this.filesStore;
     const {
-      setInviteUsersWarningDialogVisible,
+      setQuotaWarningDialogVisible,
       setRestoreAllArchive,
       setRestoreRoomDialogVisible,
     } = this.dialogsStore;
@@ -1114,8 +1113,8 @@ class ContextOptionsStore {
 
     if (isExistActiveItems) return;
 
-    if (this.currentTariffStatusStore.isGracePeriod) {
-      setInviteUsersWarningDialogVisible(true);
+    if (this.currentQuotaStore.isWarningRoomsDialog) {
+      setQuotaWarningDialogVisible(true);
       return;
     }
 
@@ -1667,7 +1666,7 @@ class ContextOptionsStore {
         key: "create-room",
         label: t("Files:CreateRoom"),
         icon: CatalogRoomsReactSvgUrl,
-        onClick: () => this.onClickCreateRoom(item),
+        onClick: () => this.onCreateRoom(item, true),
         disabled: !item.security?.CreateRoomFrom,
       },
       {
@@ -1980,7 +1979,7 @@ class ContextOptionsStore {
         key: "create-room",
         label: t("Files:CreateRoom"),
         icon: CatalogRoomsReactSvgUrl,
-        onClick: this.onClickCreateRoom,
+        onClick: () => this.onCreateRoom(null, true),
         disabled: !selection.security?.CreateRoomFrom,
       },
       {
@@ -2077,13 +2076,13 @@ class ContextOptionsStore {
   };
 
   onInvite = (e) => {
-    const { setInviteUsersWarningDialogVisible, setInvitePanelOptions } =
+    const { setQuotaWarningDialogVisible, setInvitePanelOptions } =
       this.dialogsStore;
 
     const type = e.item["data-type"];
 
-    if (this.currentTariffStatusStore.isGracePeriod) {
-      setInviteUsersWarningDialogVisible(true);
+    if (this.currentQuotaStore.showWarningDialog(type)) {
+      setQuotaWarningDialogVisible(true);
       return;
     }
 
@@ -2108,13 +2107,22 @@ class ContextOptionsStore {
     window.dispatchEvent(event);
   };
 
-  onCreateRoom = () => {
-    if (this.currentTariffStatusStore.isGracePeriod) {
-      this.dialogsStore.setInviteUsersWarningDialogVisible(true);
+  onCreateRoom = (item, fromItem) => {
+    if (this.currentQuotaStore.isWarningRoomsDialog) {
+      this.dialogsStore.setQuotaWarningDialogVisible(true);
       return;
     }
 
+    if (fromItem) {
+      this.filesActionsStore.setProcessCreatingRoomFromData(true);
+    }
+
     const event = new Event(Events.ROOM_CREATE);
+
+    if (item && item.isFolder) {
+      event.title = item.title;
+    }
+
     window.dispatchEvent(event);
   };
 

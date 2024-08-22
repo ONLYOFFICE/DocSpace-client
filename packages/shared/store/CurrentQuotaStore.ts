@@ -34,7 +34,7 @@ import {
 
 import { toastr } from "../components/toast";
 import { TData } from "../components/toast/Toast.type";
-import { PortalFeaturesLimitations } from "../enums";
+import { EmployeeType, PortalFeaturesLimitations } from "../enums";
 import api from "../api";
 import { TPaymentFeature, TPaymentQuota } from "../api/portal/types";
 import {
@@ -49,19 +49,25 @@ import {
 } from "../constants";
 import { Nullable } from "../types";
 import { UserStore } from "./UserStore";
-
+import { CurrentTariffStatusStore } from "./CurrentTariffStatusStore";
 class CurrentQuotasStore {
   currentPortalQuota: Nullable<TPaymentQuota> = null;
 
   userStore: UserStore | null = null;
 
+  currentTariffStatusStore: CurrentTariffStatusStore | null = null;
+
   currentPortalQuotaFeatures: TPaymentFeature[] = [];
 
   isLoaded = false;
 
-  constructor(userStoreConst: UserStore) {
+  constructor(
+    userStoreConst: UserStore,
+    currentTariffStatusStore: CurrentTariffStatusStore,
+  ) {
     makeAutoObservable(this);
     this.userStore = userStoreConst;
+    this.currentTariffStatusStore = currentTariffStatusStore;
   }
 
   setIsLoaded = (isLoaded: boolean) => {
@@ -237,23 +243,51 @@ class CurrentQuotasStore {
     return result?.value;
   }
 
-  get showRoomQuotaBar() {
+  get isRoomsTariffAlmostLimit() {
+    if (this.maxCountRoomsByQuota === PortalFeaturesLimitations.Limitless)
+      return false;
+
+    return (
+      this.maxCountRoomsByQuota - this.usedRoomsCount <=
+        COUNT_FOR_SHOWING_BAR && this.usedRoomsCount < this.maxCountRoomsByQuota
+    );
+  }
+
+  get isRoomsTariffLimit() {
+    if (this.maxCountRoomsByQuota === PortalFeaturesLimitations.Limitless)
+      return false;
+
     return (
       this.maxCountRoomsByQuota - this.usedRoomsCount <=
         COUNT_FOR_SHOWING_BAR &&
-      this.maxCountRoomsByQuota > 0 &&
-      this.maxCountRoomsByQuota >= this.usedRoomsCount
+      this.usedRoomsCount >= this.maxCountRoomsByQuota
     );
   }
 
-  get showStorageQuotaBar() {
+  get isStorageTariffAlmostLimit() {
+    if (this.maxTotalSizeByQuota === PortalFeaturesLimitations.Limitless)
+      return false;
+
     return (
       (this.usedTotalStorageSizeCount / this.maxTotalSizeByQuota) * 100 >=
-      PERCENTAGE_FOR_SHOWING_BAR
+        PERCENTAGE_FOR_SHOWING_BAR &&
+      this.usedTotalStorageSizeCount < this.maxTotalSizeByQuota
     );
   }
 
-  get showTenantCustomQuotaBar() {
+  get isStorageTariffLimit() {
+    if (this.maxTotalSizeByQuota === PortalFeaturesLimitations.Limitless)
+      return false;
+
+    return (
+      (this.usedTotalStorageSizeCount / this.maxTotalSizeByQuota) * 100 >=
+        PERCENTAGE_FOR_SHOWING_BAR &&
+      this.usedTotalStorageSizeCount >= this.maxTotalSizeByQuota
+    );
+  }
+
+  // For standalone mode
+  get isStorageQuotaAlmostLimit() {
     if (!this.isTenantCustomQuotaSet || this.tenantCustomQuota === undefined)
       return false;
 
@@ -261,20 +295,57 @@ class CurrentQuotasStore {
 
     return (
       (this.usedTotalStorageSizeCount / this.tenantCustomQuota) * 100 >=
-      PERCENTAGE_FOR_SHOWING_BAR
+        PERCENTAGE_FOR_SHOWING_BAR &&
+      this.tenantCustomQuota > this.usedTotalStorageSizeCount
     );
   }
 
-  get showUserQuotaBar() {
+  get isStorageQuotaLimit() {
+    if (!this.isTenantCustomQuotaSet || this.tenantCustomQuota === undefined)
+      return false;
+
+    if (+this.tenantCustomQuota === -1) return false;
+
+    return (
+      (this.usedTotalStorageSizeCount / this.tenantCustomQuota) * 100 >=
+        PERCENTAGE_FOR_SHOWING_BAR &&
+      this.tenantCustomQuota <= this.usedTotalStorageSizeCount
+    );
+  }
+
+  get isUserTariffAlmostLimit() {
+    if (this.maxCountManagersByQuota === PortalFeaturesLimitations.Limitless)
+      return false;
+
     return (
       this.addedManagersCount > 1 &&
       this.maxCountManagersByQuota - this.addedManagersCount <=
         COUNT_FOR_SHOWING_BAR &&
-      this.maxCountManagersByQuota >= this.addedManagersCount
+      this.maxCountManagersByQuota > this.addedManagersCount
     );
   }
 
-  get showUserPersonalQuotaBar() {
+  get isUserTariffLimit() {
+    if (this.maxCountManagersByQuota === PortalFeaturesLimitations.Limitless)
+      return false;
+
+    return this.addedManagersCount >= this.maxCountManagersByQuota;
+  }
+
+  showWarningDialog = (type: number) => {
+    if (type && this.isUserTariffLimit && type !== EmployeeType.Guest)
+      return true;
+
+    return this.currentTariffStatusStore?.isGracePeriod;
+  };
+
+  get isWarningRoomsDialog() {
+    return (
+      this.currentTariffStatusStore?.isGracePeriod || this.isRoomsTariffLimit
+    );
+  }
+
+  get isPersonalQuotaLimit() {
     const personalQuotaLimitReached = this.userStore?.personalQuotaLimitReached;
 
     if (!this.isDefaultUsersQuotaSet) return false;

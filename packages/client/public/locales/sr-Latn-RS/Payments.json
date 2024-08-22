@@ -25,7 +25,6 @@
   "Pay": "Plati",
   "Payer": "Platilac",
   "PayerDescription": "Ovaj korisnik ima pristup detaljima plaćanja i jedini je korisnik koji može da prilagodi kvotu i izvrši plaćanja. Vlasnik {{productName}}-a, kao i sam menadžer plaćanja, mogu da ponovo dodele ulogu menadžera plaćanja koristeći portal za korisnike Stripe.",
-  "PaymentOverdue": "Nemoguće dodati nove korisnike.",
   "PriceCalculation": "Izračunaj svoju cenu",
   "RenewSubscription": "Obnovite pretplatu na plan {{planName}}",
   "RoomManagerDescription": "Administracija i arhiviranje prostorija, pozivanje korisnika i upravljanje. Nekoliko administratora može biti dodeljeno sobi.",
@@ -35,7 +34,6 @@
   "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/mesec</3>",
   "UpgradeNow": "Nadogradi sada",
   "UpgradePlan": "Plan nadogradnje",
-  "UpgradePlanInfo": "Dodajući nove korisnike prekoračićete maksimalni broj dozvoljenih članova sobe po vašem trenutnom cenovnom planu.",
   "UserNotFound": "Korisnik <1>{{email}}</1> nije pronađen.",
   "UserNotFoundMatchingEmail": "Nismo mogli da pronađemo korisnika sa poklapajućim Stripe email-om.",
   "YourPrice": "Vaša cena"

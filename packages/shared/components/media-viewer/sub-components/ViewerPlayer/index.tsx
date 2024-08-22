@@ -81,6 +81,7 @@ export const ViewerPlayer = ({
   isVideo,
   isError,
   devices,
+  autoPlay,
   audioIcon,
   errorTitle,
   isLastImage,
@@ -643,6 +644,7 @@ export const ViewerPlayer = ({
             playsInline
             ref={videoRef}
             hidden={isAudio}
+            autoPlay={autoPlay}
             preload="metadata"
             style={omit(style, ["x", "y"])}
             src={thumbnailSrc ? src : `${src}#t=0.001`}

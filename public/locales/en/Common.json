@@ -38,6 +38,7 @@
   "Bytes": "bytes",
   "CancelButton": "Cancel",
   "ChangeButton": "Change",
+  "ChangeUserPermissions": "Change user permissions to the invited people or <1>upgrade your tariff plan</1>.",
   "ChangeQuota": "Change quota",
   "ChangesSavedSuccessfully": "Changes saved successfully",
   "ChooseFromTemplates": "Choose from Templates",
@@ -141,6 +142,8 @@
   "DontShowAgain": "Don't show again",
   "Download": "Download",
   "DownloadApps": "Download applications",
+  "DownloadOperationTitle": "File downloading in progress",
+  "DownloadOperationDescription": "Once ready, you can find the files in your browser's download folder and close this tab.",
   "DropzoneTitleExsts": "(JPG or PNG)",
   "DropzoneTitleLink": "Select new image",
   "DropzoneTitleSecondary": "or drop file here",
@@ -339,6 +342,7 @@
   "Owner": "Owner",
   "PageOfTotalPage": "{{page}} of {{totalPage}}",
   "Paid": "Paid",
+  "PaidUsersExceedsLimit": "The number of admins/power users exceeds the limit: {{count}} / {{limit}}.",
   "Password": "Password",
   "PasswordLimitDigits": "digits",
   "PasswordLimitMessage": "Password must contain",
@@ -529,5 +533,6 @@
   "Website": "Website",
   "Yes": "Yes",
   "Yesterday": "Yesterday",
-  "You": "You"
+  "You": "You",
+  "EnableThirdPartyIntegration": "Please ask a DocSpace owner or administrator to enable the corresponding service in the Integration section of the DocSpace Settings."
 }

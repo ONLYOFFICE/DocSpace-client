@@ -26,15 +26,16 @@
 
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { Text } from "@docspace/shared/components/text";
+import { TStatusInRoom } from "@docspace/shared/utils/socket";
 
 interface StatusProps {
-  status?: string;
+  statusInRoom?: TStatusInRoom;
 }
 
 export const Status = (props: StatusProps) => {
-  const { status } = props;
+  const { statusInRoom } = props;
 
-  if (!status) {
+  if (!statusInRoom) {
     return (
       <RectangleSkeleton width="70" height="12" className="status-loader" />
     );
@@ -42,8 +43,8 @@ export const Status = (props: StatusProps) => {
 
   return (
     <div className="status-wrapper">
-      {status === "online" && <div className="status-indicator" />}
-      <Text className="status-text">{status}</Text>
+      {statusInRoom.status === "online" && <div className="status-indicator" />}
+      <Text className="status-text">{statusInRoom.status}</Text>
     </div>
   );
 };

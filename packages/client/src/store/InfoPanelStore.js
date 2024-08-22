@@ -118,7 +118,14 @@ class InfoPanelStore {
     });
 
     socketHelper.on("enter-in-room", this.updateMemberStatus);
-    socketHelper.on("leave-in-room", this.updateMemberStatus);
+    socketHelper.on("leave-in-room", (data) => {
+      const statusInRoom = this.statusesInRoomMap.get(data.userId);
+      if (!statusInRoom) return;
+
+      const newStatusInRoom = { ...statusInRoom, status: "offline", ...data };
+
+      this.updateMemberStatus(newStatusInRoom);
+    });
   }
 
   // Setters
@@ -844,11 +851,11 @@ class InfoPanelStore {
   };
 
   setStatusesInRoomMap = (statuses) => {
-    this.statusesInRoomMap = new Map(statuses.map((s) => [s.id, s]));
+    this.statusesInRoomMap = new Map(statuses.map((s) => [s.userId, s]));
   };
 
   updateMemberStatus = (status) => {
-    this.statusesInRoomMap.set(status.id, status);
+    this.statusesInRoomMap.set(status.userId, status);
   };
 }
 

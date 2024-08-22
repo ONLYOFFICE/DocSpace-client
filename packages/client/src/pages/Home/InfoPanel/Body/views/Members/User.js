@@ -357,7 +357,7 @@ const User = ({
             <div className="me-label">&nbsp;{`(${t("Common:MeLabel")})`}</div>
           )}
         </div>
-        {showStatus && <Status status={statusInRoom?.status} />}
+        {showStatus && <Status statusInRoom={statusInRoom} />}
         {/*{!user.isGroup && (*/}
         {/*  <div className="role-email" style={{ display: "flex" }}>*/}
         {/*    <Text*/}

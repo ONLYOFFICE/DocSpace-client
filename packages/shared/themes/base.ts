@@ -2098,7 +2098,7 @@ export const getBaseTheme = () => {
         roleSelectorColor: "#a3a9ae",
         disabledRoleSelectorColor: "#a3a9ae",
         roleSelectorArrowColor: "#a3a9ae",
-        createLink: "#a3a9ae",
+        createLink: black,
         linkAccessComboboxExpired: "#a3a9ae",
       },
 

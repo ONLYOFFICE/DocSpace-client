@@ -32,11 +32,14 @@ import { Base } from "@docspace/shared/themes";
 import { mobile } from "@docspace/shared/utils/device";
 
 export const LoginContent = styled.div`
-  margin-top: 88px;
+  min-height: calc(100vh - 112px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
   @media ${mobile} {
     width: 100%;
-    margin-top: 34px;
   }
 `;
 

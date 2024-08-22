@@ -31,14 +31,14 @@ async function Page() {
   const settings = await getSettings();
 
   return (
-    <div className="content-center">
+    <>
       {settings && typeof settings !== "string" && (
         <ProfileRemoveForm
           greetingSettings={settings.greetingSettings}
           legalTerms={settings.legalTerms}
         />
       )}
-    </div>
+    </>
   );
 }
 

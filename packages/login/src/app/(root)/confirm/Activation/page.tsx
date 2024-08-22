@@ -48,7 +48,7 @@ async function Page({ searchParams }: ActivationProps) {
   ]);
 
   return (
-    <div className="content-top">
+    <>
       {settings && typeof settings !== "string" && (
         <>
           <GreetingCreateUserContainer type={type} hostName={hostName} />
@@ -60,7 +60,7 @@ async function Page({ searchParams }: ActivationProps) {
           </FormWrapper>
         </>
       )}
-    </div>
+    </>
   );
 }
 

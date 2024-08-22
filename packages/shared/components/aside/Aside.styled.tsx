@@ -112,33 +112,6 @@ const StyledAside = styled(Container)`
 `;
 StyledAside.defaultProps = { theme: Base };
 
-const StyledControlContainer = styled.div`
-  display: flex;
-
-  width: 17px;
-  height: 17px;
-  position: absolute;
-
-  cursor: pointer;
-
-  align-items: center;
-  justify-content: center;
-  z-index: 450;
-
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          left: 13px;
-          top: 17px;
-        `
-      : css`
-          right: 13px;
-          top: 17px;
-        `}
-`;
-
-StyledControlContainer.defaultProps = { theme: Base };
-
 const StyledHeaderContainer = styled.div`
   display: flex;
   align-items: center;
@@ -180,4 +153,4 @@ const StyledHeaderContainer = styled.div`
     top: 53px; */
   }
 `;
-export { StyledAside, StyledControlContainer, StyledHeaderContainer };
+export { StyledAside, StyledHeaderContainer };

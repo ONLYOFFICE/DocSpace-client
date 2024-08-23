@@ -3194,6 +3194,17 @@ const Dark: TTheme = {
   publicRoom: {
     border: `1px solid ${lightGraySelected}`,
   },
+
+  logoCover: {
+    selectColor: {
+      backgroundColor: lightDarkGrayHover,
+    },
+    textColor: darkGrayDark,
+    selectedBackgroundColor: grayDarkMid,
+    selectedBorderColor: grayDarkMid,
+    backgroundColor: black,
+    borderColor: grayDarkStrong,
+  },
 };
 
 export default Dark;

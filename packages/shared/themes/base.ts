@@ -3206,6 +3206,18 @@ export const getBaseTheme = () => {
     publicRoom: {
       border: `1px solid ${lightGraySelected}`,
     },
+
+    logoCover: {
+      selectColor: {
+        backgroundColor: lightGrayHover,
+      },
+
+      textColor: lightGrayDark,
+      selectedBackgroundColor: grayLightMid,
+      selectedBorderColor: grayLightMid,
+      backgroundColor: white,
+      borderColor: grayLightMid,
+    },
   };
 };
 

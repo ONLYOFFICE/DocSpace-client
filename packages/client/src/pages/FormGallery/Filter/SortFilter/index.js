@@ -109,7 +109,9 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
                   isSelected={oformsFilter.sortBy === item.key}
                   isDescending={oformsFilter.sortOrder === "desc"}
                 >
-                  <Text fontWeight={600}>{item.label}</Text>
+                  <Text fontWeight={600} truncate>
+                    {item.label}
+                  </Text>
                   <SortDesc className="sortorder-arrow" />
                 </Styled.SortDropdownItem>
               ))}

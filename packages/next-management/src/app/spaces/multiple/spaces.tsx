@@ -29,14 +29,15 @@ import { StyledRowContainer } from "./multiple.styled";
 
 interface IProps {
   portals: TPortals[];
+  tenantAlias?: string;
 }
 
-export const Spaces = ({ portals }: IProps) => {
+export const Spaces = ({ portals, tenantAlias }: IProps) => {
   console.log("portals", portals);
   return (
     <StyledRowContainer useReactWindow={false}>
       {portals.map((item) => (
-        <SpacesRow key={item.tenantId} item={item} />
+        <SpacesRow key={item.tenantId} item={item} tenantAlias={tenantAlias} />
       ))}
     </StyledRowContainer>
   );

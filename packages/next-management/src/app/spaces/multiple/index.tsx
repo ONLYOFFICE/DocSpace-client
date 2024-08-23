@@ -34,13 +34,18 @@ import { StyledWrapper } from "./multiple.styled";
 interface IProps {
   baseDomain: string;
   portals: TPortals[];
+  tenantAlias?: string;
 }
 
-export const MultipleSpaces = ({ baseDomain, portals }: IProps) => {
+export const MultipleSpaces = ({
+  baseDomain,
+  portals,
+  tenantAlias,
+}: IProps) => {
   return (
     <StyledWrapper>
       <Header />
-      <Spaces portals={portals} />
+      <Spaces portals={portals} tenantAlias={tenantAlias} />
       <DomainSettings baseDomain={baseDomain} />
     </StyledWrapper>
   );

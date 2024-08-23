@@ -2,7 +2,7 @@
   "ConfirmEmailDescription": "Izmantojiet aktivizēšanas e-pasta ziņojumā norādīto saiti. Vai neesat saņēmis e-pasta ziņojumu ar aktivizēšanas saiti?",
   "ConfirmEmailHeader": "Lūdzu, aktivizējiet savu e-pastu ({{ email }}), lai piekļūtu {{productName}} funkcijām.",
   "PersonalUserQuotaAdminsDescription": "Lai augšupielādētu un izveidotu jaunus failus un mapes, atbrīvojiet vietu diskā vai pārvaldiet kvotu katram lietotājam <1>Krātuves pārvaldības iestatījumos.</1>",
-  "PersonalUserQuotaDescription": "Lai augšupielādētu un izveidotu jaunus failus un mapes, atbrīvojiet vietu diskā vai sazinieties ar administratoru, lai palielinātu krātuves kvotu.",
+  "PersonalUserQuotaDescription": "Lai augšupielādētu un izveidotu jaunus failus un mapes, atbrīvojiet vietu diskā vai sazinieties ar administratoru {{productName}}, lai palielinātu krātuves kvotu.",
   "RequestActivation": "Vēreiz pieprasīt aktivizāciju",
   "RoomQuotaHeader": "Tūlīt tiks pārsniegtas telpas: {{currentValue}} / {{maxValue}}",
   "StorageAndUserHeader": "Tūlīt tiks pārsniegti krātuves un administratoru/prasmīgo lietotāju ierobežojumi.",

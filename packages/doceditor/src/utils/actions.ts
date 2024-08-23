@@ -65,8 +65,6 @@ export async function getFillingSession(
   );
 
   try {
-    console.log({ request });
-
     const response = await fetch(request);
 
     if (response.ok) return await response.json();

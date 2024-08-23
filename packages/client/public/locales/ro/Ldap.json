@@ -36,6 +36,7 @@
   "LdapPortNumber": "Număr port",
   "LdapPortNumberTooltip": "Introduceți numărul de port pentru serverul dvs  LDAP/Active Directory.",
   "LdapQuota": "Cotă de utilizatori ",
+  "LdapQuotaInfo": "Pentru a putea folosi acest atribut, activați cotă de stocare pentru utilizatori în secțiunea <0>Setările de gestionare a spațiului de stocare</0>",
   "LdapSecondName": "Al doilea nume",
   "LdapSendWelcomeLetter": "Trimite scrisoarea de bun venit",
   "LdapSendWelcomeLetterTooltip": "Dacă opțiunea este bifată, toți utilizatorii noi vor primi o scrisoare de bun venit. Această opțiune este disponibilă numai dacă Atributul Mail este mapat la LDAP.",
@@ -66,6 +67,7 @@
   "LdapUserDNTooltip": "Introduceți un nume distinct în repertoarul care conține utilizatorii pe care le doriți să adăugați.",
   "LdapUserFilter": "Filtru de utilizator",
   "LdapUserFilterTooltip": "Folosiți filtru de căutare LDAP pentru a selecta utilizatorii pentru importul.",
+  "LdapUserQuotaTooltip": "Pentru stabilirea cotei de stocare pentru acest utilizator, adăugați atributul în repertoarul LDAP (de exemplu, UsersQuotaLimit) și introduceți o valoare întreagă pentru acest atribut. Cota va fi afișată în octeți. Aici, indicați numai numele atributului. Acest atribut va fi aplicat numai la prima configurare și poate fi modificat manual mai târziu în secțiunea Conturi.",
   "LdapUsersType": "Tip utilizator",
   "LdapUsersTypeInfo": "Utilizatorii pot accesa doar sălile în care sunt invitaţi de către administratori și nu pot crea săli proprii, foldere sau fișiere. Selecționați un alt tip de mai jos pentru a oferi mai multe permisiuni. De asemenea, puteți schimba tipul de utilizator manual în secțiunea Conturi.",
   "LdapUserTypeTooltip": "Toți utilizatorii vor fi adăugate în {{productName}} cu tipul selectat."

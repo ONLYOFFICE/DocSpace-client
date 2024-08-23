@@ -23,8 +23,12 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { useContext } from "react";
 
 import { observer, inject } from "mobx-react";
+
+import { Context } from "@docspace/shared/utils";
+
 import EmptyFilterContainer from "./EmptyFilterContainer";
 import RoomNoAccessContainer from "./RoomNoAccessContainer";
 
@@ -45,7 +49,6 @@ const EmptyContainer = ({
   theme,
   type,
 
-  sectionWidth,
   isRoomNotFoundOrMoved,
   isRoot,
   isPublicRoom,
@@ -56,6 +59,8 @@ const EmptyContainer = ({
   isArchiveFolderRoot,
 }) => {
   const isRoom = !!roomType;
+
+  const { sectionWidth } = useContext(Context);
 
   linkStyles.color = theme.filesEmptyContainer.linkColor;
 

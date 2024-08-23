@@ -43,6 +43,7 @@ import { StyledInfoPanelHeader } from "./styles/common";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 import { FolderType } from "@docspace/shared/enums";
+import { AsideHeader } from "@docspace/shared/components/aside";
 
 const InfoPanelHeaderContent = (props) => {
   const {
@@ -194,25 +195,11 @@ const InfoPanelHeaderContent = (props) => {
 
   return (
     <StyledInfoPanelHeader isTablet={isTablet} withTabs={withTabs}>
-      <div className="main">
-        <Text className="header-text" fontSize="21px" fontWeight="700">
-          {t("Common:Info")}
-        </Text>
-
-        {!isTablet && (
-          <div className="info-panel-toggle-bg">
-            <IconButton
-              isStroke
-              size="17"
-              onClick={closeInfoPanel}
-              iconName={CrossReactSvgUrl}
-              title={t("Common:InfoPanel")}
-              className="info-panel-toggle"
-              id="info-panel-toggle--close"
-            />
-          </div>
-        )}
-      </div>
+      <AsideHeader
+        header={t("Common:Info")}
+        onCloseClick={closeInfoPanel}
+        withoutBorder
+      />
 
       {withTabs && (
         <div className="tabs">

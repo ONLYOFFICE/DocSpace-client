@@ -29,7 +29,7 @@ import { Base } from "@docspace/shared/themes";
 import { tablet } from "@docspace/shared/utils";
 
 const getHeaderHeight = ({ withTabs, isTablet }) => {
-  let res = isTablet ? 53 : 69;
+  let res = isTablet ? 54 : 70;
   if (withTabs) res += 32;
   return `${res}px`;
 };
@@ -54,40 +54,6 @@ const StyledInfoPanelHeader = styled.div`
   flex-direction: column;
   border-bottom: ${(props) =>
     props.withTabs ? "none" : `1px solid ${props.theme.infoPanel.borderColor}`};
-  .main {
-    height: ${(props) => getMainHeight(props)};
-    min-height: ${(props) => getMainHeight(props)};
-    @media ${tablet} {
-      height: ${(props) => getMainHeight({ ...props, isTablet: true })};
-      min-height: ${(props) => getMainHeight({ ...props, isTablet: true })};
-    }
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    .header-text {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: 20px;
-            `
-          : css`
-              margin-left: 20px;
-            `}
-    }
-  }
-
-  .info-panel-toggle-bg {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 20px;
-          `
-        : css`
-            margin-right: 20px;
-          `}
-  }
 
   .tabs {
     display: flex;

@@ -112,7 +112,7 @@ const StyledAside = styled(Container)`
 `;
 StyledAside.defaultProps = { theme: Base };
 
-const StyledHeaderContainer = styled.div`
+const StyledHeaderContainer = styled.div<{ withoutBorder?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -136,6 +136,11 @@ const StyledHeaderContainer = styled.div`
 
   .arrow-button {
     margin-inline: 0 12px;
+
+    svg {
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl" && `transform: scaleX(-1);`}
+    }
   }
   .close-button {
     margin-inline: auto 0;

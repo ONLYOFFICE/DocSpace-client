@@ -166,6 +166,7 @@
   "EmptyRoomsDescription": "Please create the first room in My rooms.",
   "EmptyRoomsHeader": "No rooms here yet",
   "Enable": "Enable",
+  "EnableThirdPartyIntegration": "Please ask a DocSpace owner or administrator to enable the corresponding service in the Integration section of the DocSpace Settings.",
   "EncryptingFile": "Encrypting file",
   "EncryptionFilePreparing": "Preparing file for encryption",
   "EncryptionKeysReload": "Encryption keys must be re-entered",
@@ -310,6 +311,8 @@
   "Next": "Next",
   "No": "No",
   "NoFindingsFound": "No findings found",
+  "NoGroupsHere": "No groups here",
+  "ThisSectionIsEmpty": "This section is empty",
   "NoRoomsFound": "No rooms found",
   "NotFoundGroups": "No groups found",
   "NotFoundGroupsDescription": "No groups match your search. Please adjust your search parameters or clear the search field to view the full list of groups.",
@@ -335,8 +338,8 @@
   "OAuthRoomsWriteDescription": "View and manage all rooms",
   "OCT": "OCT",
   "OFORMsGallery": "Form Gallery",
-  "OkButton": "Ok",
   "OKButton": "OK",
+  "OkButton": "Ok",
   "Or": "or",
   "orContinueWith": "or continue with",
   "OrganizationName": "ONLYOFFICE",
@@ -537,6 +540,5 @@
   "Website": "Website",
   "Yes": "Yes",
   "Yesterday": "Yesterday",
-  "You": "You",
-  "EnableThirdPartyIntegration": "Please ask a DocSpace owner or administrator to enable the corresponding service in the Integration section of the DocSpace Settings."
+  "You": "You"
 }

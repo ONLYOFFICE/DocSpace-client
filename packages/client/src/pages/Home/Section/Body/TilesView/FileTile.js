@@ -90,8 +90,6 @@ const FileTile = (props) => {
 
   // const { sectionWidth } = useContext(Context);
 
-  console.log("Render");
-
   const { columnCount, thumbSize } = useContext(FileTileContext);
 
   const temporaryExtension =

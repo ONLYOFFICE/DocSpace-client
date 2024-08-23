@@ -283,11 +283,11 @@ const LoginForm = ({
         PasswordHash: hash,
       });
 
-      // if (portals.length === 1) {
-      //   window.open(`${portals[0].portalLink}`, "_self");
+      if (portals.length === 1) {
+        window.open(`${portals[0].portalLink}`, "_self");
 
-      //   return;
-      // }
+        return;
+      }
 
       const searchParams = new URLSearchParams();
 

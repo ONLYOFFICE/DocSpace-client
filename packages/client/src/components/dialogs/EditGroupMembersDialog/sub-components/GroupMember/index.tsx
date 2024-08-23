@@ -59,7 +59,7 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation("Common");
 
-  const userRole = user.isOwner
+  const userRole = member.owner
     ? getUserRoleOptions(t).portalAdmin
     : getUserRoleOptionsByUserAccess(
         t,
@@ -73,6 +73,10 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
   );
 
   const userRoleOptions = filterUserRoleOptions(fullRoomRoleOptions, user);
+
+  const hasIndividualRightsInRoom =
+    member.owner ||
+    (member.userAccess && member.userAccess !== member.groupAccess);
 
   let type;
   if (user.isOwner) type = "owner";
@@ -146,20 +150,18 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
       </div>
 
       <div className="individual-rights-tooltip">
-        {member.userAccess &&
-          member.userAccess !== member.groupAccess &&
-          !user.isOwner && (
-            <HelpButton
-              place="left"
-              offsetRight={0}
-              openOnClick={false}
-              tooltipContent={
-                <Text fontSize="12px" fontWeight={600}>
-                  {t("PeopleTranslations:IndividualRights")}
-                </Text>
-              }
-            />
-          )}
+        {hasIndividualRightsInRoom && (
+          <HelpButton
+            place="left"
+            offsetRight={0}
+            openOnClick={false}
+            tooltipContent={
+              <Text fontSize="12px" fontWeight={600}>
+                {t("PeopleTranslations:IndividualRights")}
+              </Text>
+            }
+          />
+        )}
       </div>
 
       {userRole && userRoleOptions && (

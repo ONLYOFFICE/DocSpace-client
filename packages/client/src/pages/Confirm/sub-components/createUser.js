@@ -74,6 +74,7 @@ import LanguageComboboxWrapper from "./LanguageCombobox";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 
 import { setCookie } from "@docspace/shared/utils/cookie";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 const DEFAULT_ROOM_TEXT =
   "<strong>{{firstName}} {{lastName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
@@ -473,6 +474,37 @@ const CreateUserForm = (props) => {
       }
     : {};
 
+  const termsConditionsComponent = (
+    <div className="terms-conditions">
+      <Text fontSize={"12px"} textAlign="center">
+        <Trans
+          t={t}
+          ns="Confirm"
+          i18nKey="TermsAndConditions"
+          components={{
+            1: (
+              <ColorTheme
+                tag="a"
+                themeId={ThemeId.Link}
+                href={"#"}
+                target="_blank"
+                fontSize={"12px"}
+              />
+            ),
+            2: (
+              <ColorTheme
+                tag="a"
+                themeId={ThemeId.Link}
+                href={"#"}
+                target="_blank"
+                fontSize={"12px"}
+              />
+            ),
+          }}
+        />
+      </Text>
+    </div>
+  );
   return (
     <StyledPage>
       <LanguageComboboxWrapper
@@ -686,6 +718,8 @@ const CreateUserForm = (props) => {
                       tooltipAllowedCharacters={`${t("Common:AllowedCharacters")}: ${ALLOWED_PASSWORD_CHARACTERS}`}
                     />
                   </FieldContainer>
+
+                  {termsConditionsComponent}
 
                   <Button
                     className="login-button"

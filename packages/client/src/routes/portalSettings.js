@@ -183,7 +183,10 @@ const PortalSettingsRoutes = {
     },
     {
       path: "security/sessions",
-      element: <SecuritySettings />,
+      lazy: () =>
+        componentLoader(
+          () => import("SRC_DIR/pages/PortalSettings/categories/security"),
+        ),
     },
     {
       path: "security/access-portal/tfa",

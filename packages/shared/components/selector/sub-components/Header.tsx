@@ -36,7 +36,9 @@ const Header = React.memo(
     withoutBackButton,
     headerLabel,
     withoutBorder,
+    isCloseable,
   }: HeaderProps) => {
+    console.log("isCloseable", isCloseable);
     return (
       <AsideHeader
         header={headerLabel}
@@ -46,6 +48,7 @@ const Header = React.memo(
         onBackClick={onBackClick}
         onCloseClick={onCloseClick}
         withoutBorder={withoutBorder}
+        isCloseable={isCloseable}
       />
     );
   },

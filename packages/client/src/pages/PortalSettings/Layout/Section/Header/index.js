@@ -138,8 +138,6 @@ export const StyledContainer = styled.div`
       border-image-source: none;
       border-bottom: 1px solid
         ${(props) => props.theme.filesSection.tableView.row.borderColor};
-      box-shadow: ${(props) =>
-        props.theme.profile.activeSessions.boxShadowColor};
       padding: 0px;
     }
 

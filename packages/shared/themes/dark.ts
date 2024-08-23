@@ -3031,8 +3031,8 @@ const Dark: TTheme = {
       sortHeaderColor: grayDarkStrong,
       tableCellColor: grayDark,
       dividerColor: grayDarkStrong,
-      iconColor: "#858585",
-      subtitleColor: "#858585",
+      textOnlineColor: darkStatusPositive,
+      subtitleColor: grayDark,
     },
   },
 

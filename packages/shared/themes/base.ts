@@ -3043,6 +3043,8 @@ export const getBaseTheme = () => {
         sortHeaderColor: grayStrong,
         tableCellColor: gray,
         dividerColor: grayStrong,
+        textOnlineColor: lightStatusPositive,
+        subtitleColor: lightGrayDark,
       },
     },
 

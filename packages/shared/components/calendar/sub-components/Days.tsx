@@ -38,6 +38,7 @@ export const Days = ({
   minDate,
   maxDate,
   isMobile,
+  isScroll,
 }: DaysProps) => {
   return (
     <>
@@ -56,6 +57,7 @@ export const Days = ({
         minDate={minDate}
         maxDate={maxDate}
         isMobile={isMobile}
+        isScroll={isScroll}
       />
     </>
   );

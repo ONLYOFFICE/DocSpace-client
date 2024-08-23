@@ -78,6 +78,7 @@ ButtonsContainer.displayName = "ButtonsContainer";
 const CalendarContainer = styled.div<{
   isMobile?: boolean;
   big?: boolean;
+  isScroll?: boolean;
 }>`
   ${(props) =>
     !props.isMobile &&
@@ -109,19 +110,37 @@ const CalendarContainer = styled.div<{
     props.big ? "repeat(4, 1fr)" : "repeat(7, 1fr)"};
   box-sizing: border-box;
   padding: ${(props) => (props.big ? "14px 6px 6px 6px" : "0 6px")};
+  ${(props) =>
+    props.isScroll &&
+    css`
+      margin-bottom: 28px;
+    `};
 `;
 
 CalendarContainer.defaultProps = { theme: Base };
 
-const Container = styled.div<{ isMobile?: boolean }>`
+const Container = styled.div<{ isMobile?: boolean; isScroll?: boolean }>`
   box-sizing: border-box;
   width: ${(props) => (props.isMobile ? "100%" : "362px")};
   height: ${(props) => (props.isMobile ? "420px" : "376px")};
-  padding: ${(props) => (props.isMobile ? "16px" : "30px 28px 28px 28px")};
+  padding: ${(props) =>
+    props.isMobile
+      ? "16px"
+      : props.isScroll
+        ? "0px 0px 0px 28px"
+        : "30px 28px 28px 28px"};
   box-shadow: ${(props) => props.theme.calendar.boxShadow};
   border-radius: 6px;
   z-index: 320;
   background-color: ${(props) => props.theme.backgroundColor};
+
+  ${(props) =>
+    props.isScroll &&
+    css`
+      header {
+        padding: 30px 23px 0 12px !important;
+      }
+    `};
 `;
 
 Container.defaultProps = { theme: Base };
@@ -317,6 +336,7 @@ Weekday.defaultProps = { theme: Base };
 const StyledContainerTheme = styled(Container)<{
   $currentColorScheme?: TColorScheme;
   isMobile?: boolean;
+  isScroll?: boolean;
 }>`
   ${HeaderActionIcon} {
     border-color: ${(props) => props.$currentColorScheme?.main?.accent};

@@ -2,10 +2,12 @@ import IconCalendar from "PUBLIC_DIR/images/calendar.info.panel.react.svg?url";
 import { useState, useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
 import moment from "moment";
-import {Calendar} from "@docspace/shared/components/calendar"
-import { Portal } from "@docspace/shared/components/portal";
+import { Calendar } from "@docspace/shared/components/calendar";
 import { isMobile } from "@docspace/shared/utils";
 import { ReactSVG } from "react-svg";
+
+const heightCalendar = 376;
+const heightCalendarMobile = 420;
 
 const StyledCalendarComponent = styled.div`
   position: relative;
@@ -17,8 +19,10 @@ const StyledCalendarComponent = styled.div`
 
 const StyledCalendar = styled(Calendar)`
   position: absolute;
-  top: 134px;
-  right: 16px;
+  top: 20px;
+  right: -30px;
+
+  height: ${(props) => props.height + "px"};
 
   ${(props) =>
     props.isMobile &&
@@ -27,23 +31,41 @@ const StyledCalendar = styled(Calendar)`
       bottom: 0;
       top: auto;
       right: auto;
+      left: 0;
+      height: ${heightCalendarMobile + "px"};
     `}
 `;
 
 const CalendarComponent = ({ roomCreationDate, setCalendarDay }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [height, setHeight] = useState(heightCalendar);
 
   const calendarRef = useRef();
   const calendarButtonRef = useRef();
 
   useEffect(() => {
     document.addEventListener("click", handleClick, { capture: true });
+    window.addEventListener("resize", onChangeHeight);
+    onChangeHeight();
+
     return () => {
       document.removeEventListener("click", handleClick, { capture: true });
+      window.removeEventListener("resize", onChangeHeight);
       setCalendarDay(null);
     };
   }, []);
+
+  const onChangeHeight = () => {
+    const hightTop = calendarButtonRef?.current?.getBoundingClientRect().top;
+    const hightIconCalendar = 20;
+    const hightWindow = document.documentElement.clientHeight;
+    const hightScroll = hightWindow - hightIconCalendar - hightTop;
+
+    if (hightScroll !== heightCalendar && hightScroll > heightCalendar) {
+      setHeight(heightCalendar);
+    } else setHeight(hightScroll);
+  };
 
   const handleClick = (e) => {
     !calendarButtonRef?.current?.contains(e.target) &&
@@ -74,17 +96,15 @@ const CalendarComponent = ({ roomCreationDate, setCalendarDay }) => {
       </div>
 
       {isOpen && (
-        <Portal
-          element={
-            <StyledCalendar
-              setSelectedDate={onDateSet}
-              selectedDate={selectedDate}
-              minDate={new Date(formattedRoomCreationDate)}
-              maxDate={new Date()}
-              forwardedRef={calendarRef}
-              isMobile={isMobile()}
-            />
-          }
+        <StyledCalendar
+          height={height}
+          setSelectedDate={onDateSet}
+          selectedDate={selectedDate}
+          minDate={new Date(formattedRoomCreationDate)}
+          maxDate={new Date()}
+          forwardedRef={calendarRef}
+          isMobile={isMobile()}
+          isScroll={!isMobile()}
         />
       )}
     </StyledCalendarComponent>

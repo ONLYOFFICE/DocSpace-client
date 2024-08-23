@@ -38,6 +38,7 @@ export const YearsBody = ({
   minDate,
   maxDate,
   isMobile,
+  isScroll,
 }: YearsProps) => {
   const years = getCalendarYears(observedDate);
   const yearElements = getYearElements(
@@ -51,7 +52,7 @@ export const YearsBody = ({
   );
 
   return (
-    <CalendarContainer big isMobile={isMobile}>
+    <CalendarContainer big isMobile={isMobile} isScroll={isScroll}>
       {yearElements}
     </CalendarContainer>
   );

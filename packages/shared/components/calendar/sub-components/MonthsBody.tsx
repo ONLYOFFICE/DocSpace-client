@@ -37,6 +37,7 @@ export const MonthsBody = ({
   minDate,
   maxDate,
   isMobile,
+  isScroll,
 }: MonthsBodyProps) => {
   const months = getCalendarMonths(observedDate);
   const monthsElements = getMonthElements(
@@ -50,7 +51,7 @@ export const MonthsBody = ({
   );
 
   return (
-    <CalendarContainer big isMobile={isMobile}>
+    <CalendarContainer big isMobile={isMobile} isScroll={isScroll}>
       {monthsElements}
     </CalendarContainer>
   );

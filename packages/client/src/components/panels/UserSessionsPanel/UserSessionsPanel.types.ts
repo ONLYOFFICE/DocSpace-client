@@ -49,6 +49,7 @@ export interface LastSessionBlockProps {
 export interface AllSessionsBlockProps {
   t: TTranslation;
   isLoading?: boolean;
+  isDisabled: boolean;
   items?: IAllSessions;
   onClickLogoutAllExceptThis?: (
     t: TTranslation,
@@ -67,6 +68,7 @@ export interface SessionsRowProps {
   t: TTranslation;
   item: ISessions | IConnections;
   connections?: IConnections;
+  setIsDisabled: (disabled: boolean) => void;
   sectionWidth: number;
   setLogoutDialogVisible?: (visible: boolean) => void;
   setPlatformData?: (item: ISessions) => void;

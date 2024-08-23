@@ -155,6 +155,8 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   }, []);
 
   useEffect(() => {
+    if (!socketHelper.isEnabled) return;
+
     socketHelper.emit({
       command: "subscribeToPortal",
     });

@@ -23,7 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
+import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { Row } from "@docspace/shared/components/row";
 import { IconButton } from "@docspace/shared/components/icon-button";
@@ -42,16 +42,21 @@ const SessionsRow = (props: SessionsRowProps) => {
   const {
     item,
     connections,
+    setIsDisabled,
     setLogoutDialogVisible = () => {},
     setPlatformData = () => {},
   } = props;
+
+  const isEqualSession = item.id === connections?.id;
+
+  useEffect(() => {
+    setIsDisabled(isEqualSession);
+  }, [isEqualSession, setIsDisabled]);
 
   const onClickDisable = () => {
     setLogoutDialogVisible(true);
     setPlatformData(item);
   };
-
-  const isEqualSession = item.id === connections?.id;
 
   const contentElement = !isEqualSession && (
     <IconButton
@@ -75,7 +80,7 @@ const SessionsRow = (props: SessionsRowProps) => {
 
 export default inject<TStore>(({ setup, peopleStore }) => {
   const { setLogoutDialogVisible, setPlatformModalData } = setup;
-  const { platformData, setPlatformData, items } =
+  const { platformData, setPlatformData, items, setIsDisabled } =
     peopleStore.selectionStore as unknown as SelectionPeopleStore;
 
   return {
@@ -84,5 +89,6 @@ export default inject<TStore>(({ setup, peopleStore }) => {
     setPlatformModalData,
     platformData,
     setPlatformData,
+    setIsDisabled,
   };
 })(observer(SessionsRow));

@@ -66,6 +66,7 @@ const AllSessionsBlock = (props: AllSessionsBlockProps) => {
   const {
     t,
     isLoading,
+    isDisabled,
     items = {} as IAllSessions,
     onClickLogoutAllExceptThis = () => {},
   } = props;
@@ -75,7 +76,9 @@ const AllSessionsBlock = (props: AllSessionsBlockProps) => {
   const sessions = items.sessions || items.connections;
 
   const filteredSessions = sessions
-    .filter((session) => session.status === "offline")
+    .filter(
+      (session) => session.status === "offline" && session.id !== exceptId,
+    )
     .reverse();
 
   return (
@@ -89,6 +92,7 @@ const AllSessionsBlock = (props: AllSessionsBlockProps) => {
             size={ButtonSize.small}
             onClick={() => onClickLogoutAllExceptThis(t, exceptId, displayName)}
             scale
+            isDisabled={isDisabled}
             isLoading={isLoading}
           />
         ) : (
@@ -107,10 +111,11 @@ const AllSessionsBlock = (props: AllSessionsBlockProps) => {
 };
 
 export default inject<TStore>(({ peopleStore }) => {
-  const { getItems, isLoading, onClickLogoutAllExceptThis } =
+  const { getItems, isLoading, onClickLogoutAllExceptThis, isDisabled } =
     peopleStore.selectionStore as unknown as SelectionPeopleStore;
 
   return {
+    isDisabled,
     items: getItems,
     isLoading,
     onClickLogoutAllExceptThis,

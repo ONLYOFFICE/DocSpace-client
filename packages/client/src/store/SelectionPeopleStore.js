@@ -39,6 +39,7 @@ class SelectionStore {
   items;
   platformData = [];
   isLoading = false;
+  isDisabled = false;
   selection = [];
   selectionUsersRights = {
     isVisitor: 0,
@@ -495,6 +496,10 @@ class SelectionStore {
 
   setFromDateAgo = (id, value) => {
     this.fromDateAgo[id] = value;
+  };
+
+  setIsDisabled = (isDisabled) => {
+    this.isDisabled = isDisabled;
   };
 
   getFromDateAgo = (sessionId) => {

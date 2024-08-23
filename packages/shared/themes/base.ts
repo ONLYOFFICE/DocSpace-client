@@ -2359,6 +2359,8 @@ export const getBaseTheme = () => {
     },
 
     emptyView: {
+      linkColor: lightBlueMain,
+
       items: {
         hoverColor: grayLight,
         pressColor: lightGraySelected,

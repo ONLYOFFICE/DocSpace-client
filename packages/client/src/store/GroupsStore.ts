@@ -558,6 +558,19 @@ class GroupsStore {
     ];
   };
 
+  deleteGroup = (item: TGroup, forInsideGroup: boolean) => {
+    if (forInsideGroup) {
+      this.setBufferSelection(item);
+    }
+    this.onDeleteClick(item.name);
+  };
+
+  editGroup = (item: TGroup) => {
+    const event: Event & { item?: TGroup } = new Event(Events.GROUP_EDIT);
+    event.item = item;
+    window.dispatchEvent(event);
+  };
+
   getGroupContextOptions = (
     t,
     item,
@@ -575,11 +588,7 @@ class GroupsStore {
           label: t("PeopleTranslations:EditGroup"),
           title: t("PeopleTranslations:EditGroup"),
           icon: PencilReactSvgUrl,
-          onClick: () => {
-            const event = new Event(Events.GROUP_EDIT);
-            event.item = item;
-            window.dispatchEvent(event);
-          },
+          onClick: () => this.editGroup(item),
         },
       !forInfoPanel && {
         id: "info",
@@ -613,12 +622,7 @@ class GroupsStore {
           label: t("Common:Delete"),
           title: t("Common:Delete"),
           icon: TrashReactSvgUrl,
-          onClick: () => {
-            if (forInsideGroup) {
-              this.setBufferSelection(item);
-            }
-            this.onDeleteClick(item.name);
-          },
+          onClick: () => this.deleteGroup(item, forInsideGroup),
         },
     ];
   };

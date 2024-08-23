@@ -126,7 +126,7 @@ const RoomLogoCover = (props) => {
         {isMobile() ? (
           selectContainerBody
         ) : (
-          <Scrollbar ref={scrollRef} style={{ height: "400px" }}>
+          <Scrollbar ref={scrollRef} style={{ height: "378px" }}>
             {selectContainerBody}
           </Scrollbar>
         )}

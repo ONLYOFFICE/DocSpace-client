@@ -45,7 +45,7 @@ async function Page({ searchParams }: TfaAuthProps) {
   ]);
 
   return (
-    <div className="content-center">
+    <>
       {settings && typeof settings !== "string" && (
         <>
           <GreetingContainer />
@@ -57,7 +57,7 @@ async function Page({ searchParams }: TfaAuthProps) {
           </FormWrapper>
         </>
       )}
-    </div>
+    </>
   );
 }
 

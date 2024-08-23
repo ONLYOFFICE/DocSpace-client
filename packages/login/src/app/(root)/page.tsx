@@ -33,7 +33,7 @@ import {
   getSSO,
   getThirdPartyProviders,
 } from "@/utils/actions";
-import Login, { LoginContent } from "@/components/Login";
+import Login from "@/components/Login";
 import LoginForm from "@/components/LoginForm";
 import ThirdParty from "@/components/ThirdParty";
 import RecoverAccess from "@/components/RecoverAccess";
@@ -42,14 +42,6 @@ import { GreetingLoginContainer } from "@/components/GreetingContainer";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { cookies } from "next/headers";
-import dynamic from "next/dynamic";
-
-const LanguageComboboxWrapper = dynamic(
-  () => import("@/components/LanguageCombobox"),
-  {
-    ssr: false,
-  },
-);
 
 async function Page({
   searchParams,
@@ -91,17 +83,17 @@ async function Page({
 
   return (
     <>
-      <LanguageComboboxWrapper />
       {settings && typeof settings !== "string" && (
         <ColorTheme
           themeId={ThemeId.LinkForgotPassword}
           isRegisterContainerVisible={isRegisterContainerVisible}
         >
-          <LoginContent>
+          <>
             <GreetingLoginContainer
               greetingSettings={settings.greetingSettings}
               culture={culture}
             />
+
             <FormWrapper id="login-form">
               <Login>
                 <LoginForm
@@ -147,7 +139,7 @@ async function Page({
                 )}
               </Login>
             </FormWrapper>
-          </LoginContent>
+          </>
         </ColorTheme>
       )}
     </>

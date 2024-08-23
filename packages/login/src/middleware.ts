@@ -49,21 +49,31 @@ export function middleware(request: NextRequest) {
   }
 
   if (request.nextUrl.pathname.includes("confirm")) {
-    const queryType = request.nextUrl.searchParams.get("type");
-
+    const searchParams = new URLSearchParams(request.nextUrl.searchParams);
+    const queryType = searchParams.get("type") ?? "";
     const posSeparator = request.nextUrl.pathname.lastIndexOf("/");
     const type = !!posSeparator
       ? request.nextUrl.pathname?.slice(posSeparator + 1)
-      : "";
-    requestHeaders.set("x-confirm-type", type);
-    requestHeaders.set(
-      "x-confirm-query",
-      request.nextUrl.searchParams.toString(),
-    );
+      : queryType;
 
-    return NextResponse.rewrite(
-      `${request.nextUrl.origin}/login/confirm/${queryType}${request.nextUrl.search}`,
-      { headers: requestHeaders },
+    let queryString: string;
+    if (queryType) {
+      searchParams.set("type", type);
+      queryString = searchParams.toString();
+    } else {
+      queryString = `type=${type}&${searchParams.toString()}`;
+    }
+
+    requestHeaders.set("x-confirm-type", type);
+    requestHeaders.set("x-confirm-query", searchParams.toString());
+
+    const confirmUrl = `${request.nextUrl.origin}/login/confirm/${type}?${queryString}`;
+    if (request.nextUrl.toString() == confirmUrl) {
+      return NextResponse.rewrite(confirmUrl, { headers: requestHeaders });
+    }
+
+    return NextResponse.redirect(
+      `${request.nextUrl.origin}/confirm/${type}?${queryString}`,
     );
   }
 

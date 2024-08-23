@@ -29,16 +29,14 @@
 
 import React from "react";
 import styled, { useTheme } from "styled-components";
-import { useSearchParams } from "next/navigation";
 
+import { TPortalCultures } from "@docspace/shared/api/settings/types";
 import { mobile } from "@docspace/shared/utils/device";
 import { getLogoUrl } from "@docspace/shared/utils/common";
 import { Base } from "@docspace/shared/themes";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 
 import LanguageComboboxWrapper from "./LanguageCombobox";
-
-import { TYPE_LINK_WITHOUT_LNG_COMBOBOX } from "@/utils/constants";
 
 const StyledSimpleNav = styled.div`
   display: none;
@@ -66,11 +64,13 @@ StyledSimpleNav.defaultProps = { theme: Base };
 
 interface SimpleNavProps {
   culture?: string;
+  initialCultures?: TPortalCultures;
   isLanguageComboboxVisible?: boolean;
 }
 
 const SimpleNav = ({
   culture,
+  initialCultures,
   isLanguageComboboxVisible = true,
 }: SimpleNavProps) => {
   const theme = useTheme();
@@ -84,17 +84,12 @@ const SimpleNav = ({
     culture,
   );
 
-  let isComboboxVisible = isLanguageComboboxVisible;
-
-  const searchParamType = useSearchParams().get("type") ?? "";
-  if (TYPE_LINK_WITHOUT_LNG_COMBOBOX?.includes(searchParamType)) {
-    isComboboxVisible = false;
-  }
-
   return (
     <StyledSimpleNav id="login-header">
       <img className="logo" src={logoUrl} alt="logo-url" />
-      {isComboboxVisible && <LanguageComboboxWrapper />}
+      {isLanguageComboboxVisible && (
+        <LanguageComboboxWrapper initialCultures={initialCultures} />
+      )}
     </StyledSimpleNav>
   );
 };

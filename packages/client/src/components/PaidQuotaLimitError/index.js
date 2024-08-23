@@ -23,53 +23,56 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 
-import WizardForm from "@/components/WizardForm";
-import {
-  getMachineName,
-  getPortalPasswordSettings,
-  getIsLicenseRequired,
-  getSettings,
-  getPortalTimeZones,
-  getPortalCultures,
-} from "@/utils/actions";
-import { redirect } from "next/navigation";
+import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { toastr } from "@docspace/shared/components/toast";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
-async function Page() {
-  const settings = await getSettings();
+const PaidQuotaLimitError = ({
+  isRoomAdmin,
+  setInvitePanelOptions,
+  invitePanelVisible,
+}) => {
+  const { t } = useTranslation();
 
-  const objectSettings = typeof settings === "string" ? undefined : settings;
+  const onClickPayments = () => {
+    const paymentPageUrl = combineUrl(
+      "/portal-settings",
+      "/payments/portal-payments",
+    );
 
-  if (!objectSettings || !objectSettings.wizardToken) {
-    redirect("/");
-  }
+    toastr.clear();
+    window.DocSpace.navigate(paymentPageUrl);
 
-  const [
-    passwordSettings,
-    machineName,
-    isRequiredLicense,
-    portalTimeZones,
-    portalCultures,
-  ] = await Promise.all([
-    getPortalPasswordSettings(objectSettings?.wizardToken),
-    getMachineName(objectSettings?.wizardToken),
-    getIsLicenseRequired(),
-    getPortalTimeZones(objectSettings?.wizardToken),
-    getPortalCultures(),
-  ]);
+    invitePanelVisible &&
+      setInvitePanelOptions({
+        visible: false,
+        hideSelector: false,
+        defaultAccess: 1,
+      });
+  };
 
   return (
-    <WizardForm
-      passwordSettings={passwordSettings}
-      machineName={machineName}
-      isRequiredLicense={isRequiredLicense}
-      portalCultures={portalCultures}
-      portalTimeZones={portalTimeZones}
-      culture={objectSettings.culture}
-      wizardToken={objectSettings?.wizardToken}
-      passwordHash={objectSettings.passwordHash}
-    />
+    <>
+      <Text>{t("Common:QuotaPaidUserLimitError")}</Text>
+      {!isRoomAdmin && (
+        <Link color="#5387AD" isHovered={true} onClick={onClickPayments}>
+          {t("Common:PaymentsTitle")}
+        </Link>
+      )}
+    </>
   );
-}
+};
 
-export default Page;
+export default inject(({ authStore, dialogsStore }) => {
+  const { isRoomAdmin } = authStore;
+  const { setInvitePanelOptions, invitePanelOptions } = dialogsStore;
+  return {
+    isRoomAdmin,
+    setInvitePanelOptions,
+    invitePanelVisible: invitePanelOptions.visible,
+  };
+})(observer(PaidQuotaLimitError));

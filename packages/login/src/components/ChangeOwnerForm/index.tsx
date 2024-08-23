@@ -37,7 +37,7 @@ import { ownerChange } from "@docspace/shared/api/settings";
 import { TError } from "@/types";
 
 import { ConfirmRouteContext } from "../ConfirmRoute";
-import { ButtonsWrapper } from "../StyledConfirm.styled";
+import { ButtonsWrapper } from "../Confirm.styled";
 
 type ChangeOwnerFormProps = {
   newOwner?: string;

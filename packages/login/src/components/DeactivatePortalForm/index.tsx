@@ -38,7 +38,7 @@ import { suspendPortal } from "@docspace/shared/api/portal";
 import { TError } from "@/types";
 import { URL_ONLYOFFICE } from "@/utils/constants";
 
-import { ButtonsWrapper } from "../StyledConfirm.styled";
+import { ButtonsWrapper } from "../Confirm.styled";
 import { ConfirmRouteContext } from "../ConfirmRoute";
 
 type DeactivatePortalProps = {

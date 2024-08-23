@@ -24,12 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import ConfirmRoute from "@/components/ConfirmRoute";
-import { StyledBody, StyledPage } from "@/components/StyledConfirm.styled";
-import { TConfirmLinkParams } from "@/types";
-
-import { checkConfirmLink, getSettings } from "@/utils/actions";
 import { headers } from "next/headers";
+
+import ConfirmRoute from "@/components/ConfirmRoute";
+import { StyledBody } from "@/components/Confirm.styled";
+import { TConfirmLinkParams } from "@/types";
+import { checkConfirmLink, getSettings } from "@/utils/actions";
+import { ValidationResult } from "@/utils/enums";
+import { redirect } from "next/navigation";
 
 export default async function Layout({
   children,
@@ -39,6 +41,8 @@ export default async function Layout({
   const hdrs = headers();
   const searchParams = hdrs.get("x-confirm-query") ?? "";
   const type = hdrs.get("x-confirm-type") ?? "";
+  const hostName = hdrs.get("x-forwarded-host") ?? "";
+  const proto = hdrs.get("x-forwarded-proto");
 
   const queryParams = Object.fromEntries(
     new URLSearchParams(searchParams.toString()),
@@ -54,21 +58,34 @@ export default async function Layout({
     checkConfirmLink(confirmLinkParams),
   ]);
 
+  const isUserExisted =
+    confirmLinkResult?.result == ValidationResult.UserExisted;
+  const isUserUserExcluded =
+    confirmLinkResult?.result == ValidationResult.UserExcluded;
+  const objectSettings = typeof settings === "string" ? undefined : settings;
+
+  if (isUserExisted) {
+    const finalUrl = confirmLinkResult?.roomId
+      ? `${proto}://${hostName}/rooms/shared/${confirmLinkResult?.roomId}/filter?folder=${confirmLinkResult?.roomId}`
+      : objectSettings?.defaultPage;
+
+    redirect(finalUrl ?? "/");
+  }
+
+  if (isUserUserExcluded) {
+    redirect(objectSettings?.defaultPage ?? "/");
+  }
+
   return (
-    <StyledPage id="confirm-page">
-      <StyledBody id="confirm-body">
-        {settings && typeof settings !== "string" && (
-          <ConfirmRoute
-            defaultPage={settings?.defaultPage}
-            socketUrl={settings?.socketUrl}
-            confirmLinkResult={confirmLinkResult}
-            confirmLinkParams={confirmLinkParams}
-            confirmType={type}
-          >
-            {children}
-          </ConfirmRoute>
-        )}
-      </StyledBody>
-    </StyledPage>
+    <StyledBody id="confirm-body">
+      <ConfirmRoute
+        defaultPage={objectSettings?.defaultPage}
+        socketUrl={objectSettings?.socketUrl}
+        confirmLinkResult={confirmLinkResult}
+        confirmLinkParams={confirmLinkParams}
+      >
+        {children}
+      </ConfirmRoute>
+    </StyledBody>
   );
 }

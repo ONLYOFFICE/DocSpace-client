@@ -29,8 +29,6 @@ export const globalColors = {
   black: "#333333",
   darkBlack: "#000",
 
-  lightGrayBlackout: "rgba(6, 22, 38, 0.2)",
-  darkGrayBlackout: "rgba(27, 27, 27, 0.4)",
   grayLight: "#F8F9F9",
   darkGrayLight: "#282828",
   lightGrayHover: "#F3F4F4",
@@ -68,6 +66,9 @@ export const globalColors = {
   mainBlueLight: "#13B7EC",
   secondBlue: "#11A3D4",
   mainYellow: "#FFD30F",
+
+  blurLight: "rgba(6, 22, 38, 0.2)",
+  blurDark: "rgba(27, 27, 27, 0.6)",
 
   lightErrorStatus: "#F24724",
   darkErrorStatus: "#E06451",

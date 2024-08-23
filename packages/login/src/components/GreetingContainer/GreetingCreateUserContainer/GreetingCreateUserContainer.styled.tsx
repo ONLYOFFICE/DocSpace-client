@@ -36,42 +36,28 @@ export const GreetingContainer = styled.div`
   height: 100%;
   width: ${DESKTOP_WIDTH}px;
 
-  margin-bottom: 32px;
-
   @media ${tablet} {
     width: 100%;
     max-width: ${TABLET_WIDTH}px;
   }
 
+  .portal-logo{
+    padding-bottom: 40px;
+  }
+
   .tooltip {
-    .invitation-text {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+  margin-bottom: 40px;
+
+    p {
       text-align: center;
     }
 
     @media ${mobile} {
+      margin-top: 0;
+
       padding: 0 25px;
     }
   }
 
-  .portal-logo {
-    width: 100%;
-    max-width: 386px;
-    height: 44px;
-    margin: 0 auto;
-    padding-bottom: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    .injected-svg {
-      height: 26.56px;
-    }
-
-    @media ${mobile} {
-      display: none;
-    }
   }
 `;

@@ -41,7 +41,7 @@ const useOperations = ({
   itemsSelectionTitle,
   secondaryProgressDataStoreIcon,
   itemsSelectionLength,
-
+  disableUploadPanelOpen,
   setItemsSelectionTitle,
 }) => {
   const prevProps = React.useRef({
@@ -74,6 +74,7 @@ const useOperations = ({
   }, [isProgressFinished]);
 
   const showUploadPanel = () => {
+    if (disableUploadPanelOpen) return;
     setUploadPanelVisible(true);
 
     if (primaryProgressDataVisible && uploaded && converted)

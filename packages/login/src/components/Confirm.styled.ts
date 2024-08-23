@@ -29,26 +29,24 @@
 import styled from "styled-components";
 import { mobile, tablet } from "@docspace/shared/utils";
 
-export const StyledPage = styled.div`
+export const StyledBody = styled.div`
+  margin: 56px auto;
+  max-width: 480px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 auto;
-  max-width: 960px;
-  box-sizing: border-box;
 
   @media ${tablet} {
     padding: 0 16px;
   }
 
   @media ${mobile} {
-    width: 100%;
+    margin: 0 auto;
+    min-height: 100%;
+    max-width: 100%;
+    width: calc(100% - 24px);
     padding-block: 32px 0;
     padding-inline: 16px 8px;
-
-    .language-combo-box {
-      display: none;
-    }
   }
 
   .subtitle {
@@ -57,7 +55,6 @@ export const StyledPage = styled.div`
 
   .password-form {
     width: 100%;
-    margin-bottom: 8px;
   }
 
   .language-combo-box {
@@ -69,44 +66,6 @@ export const StyledPage = styled.div`
   .pageLoader {
     display: flex;
     justify-content: center;
-  }
-`;
-
-export const StyledBody = styled.div`
-  min-height: 100vh;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-
-  .content-center {
-    min-height: calc(100vh - 112px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 56px auto;
-
-    @media ${mobile} {
-      justify-content: start;
-      margin: 0 auto;
-      min-height: 100%;
-    }
-  }
-
-  .content-top {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 88px auto;
-
-    @media ${mobile} {
-      margin: 0 auto;
-    }
-  }
-
-  @media ${mobile} {
-    width: 100%;
-    margin: 0 auto;
-    min-height: 100%;
   }
 
   .logo-wrapper {
@@ -138,9 +97,25 @@ export const StyledBody = styled.div`
     align-items: center;
     justify-content: center;
     padding-bottom: 40px;
+    width: 100%;
+    height: 44px;
 
     @media ${mobile} {
       display: none;
+    }
+  }
+
+  button {
+    margin-top: 8px;
+  }
+
+  .subtitle + button {
+    margin-top: 0;
+  }
+
+  .subtitle + div {
+    button {
+      margin-top: 0;
     }
   }
 
@@ -171,10 +146,6 @@ export const StyledBody = styled.div`
 
   .app-code-text {
     margin-bottom: 8px;
-  }
-
-  .app-code-continue-btn {
-    margin-top: 8px;
   }
 `;
 

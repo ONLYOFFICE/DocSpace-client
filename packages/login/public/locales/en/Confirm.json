@@ -14,6 +14,7 @@
   "EnterAppCodeDescription": "Enter 6-digit generated code from your app. If you don't have access to your phone, use the backup codes.",
   "EnterAppCodeTitle": "Enter code from authentication app",
   "EnterCodePlaceholder": "Enter code",
+  "EnterEmail": "Enter email",
   "EnterPhone": "Enter mobile phone number",
   "GetCode": "Get code",
   "LoginRegistryButton": "Join",

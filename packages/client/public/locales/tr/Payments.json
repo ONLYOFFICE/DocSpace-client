@@ -25,7 +25,6 @@
   "Pay": "Öde",
   "Payer": "Ödeyen",
   "PayerDescription": "Bu kullanıcının ödeme detaylarına erişimi vardır ve kotayı ayarlayıp ödeme yapabilen tek kullanıcıdır. {{productName}} sahibi ve ödeme yöneticisinin kendisi, Stripe müşteri portalını kullanarak ödeme yöneticisi rolünü yeniden atayabilir.",
-  "PaymentOverdue": "Yeni kullanıcılar eklenemiyor.",
   "PriceCalculation": "Fiyatını hesapla",
   "RenewSubscription": "{{planName}} planı aboneliğini yenile",
   "RoomManagerDescription": "Oda yönetimi ve arşivleme, kullanıcı daveti ve yönetimi. Odaya birkaç yönetici atanabilir.",
@@ -35,7 +34,6 @@
   "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/ay</3>",
   "UpgradeNow": "Şimdi Yükselt",
   "UpgradePlan": "Yükseltme planı",
-  "UpgradePlanInfo": "Yeni kullanıcılar eklemek, mevcut fiyatlandırma planınızın izin verdiği maksimum oda üyesi sayısını aşacaktır.",
   "UserNotFound": "<1>{{email}}</1> kullanıcısı bulunamad.",
   "UserNotFoundMatchingEmail": "Eşleşen Stripe e-postasına sahip kullanıcıyı bulamadık.",
   "YourPrice": "Ücret"

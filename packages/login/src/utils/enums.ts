@@ -60,14 +60,21 @@ export enum OAuth2ErrorKey {
 }
 
 export const enum AuthenticatedAction {
-    None = 0,
-    Logout = 1,
-    Redirect = 2,
-  }
+  None = 0,
+  Logout = 1,
+  Redirect = 2,
+}
 
-  export const enum ValidationResult {
-    Ok = 0,
-    Invalid = 1,
-    Expired = 2,
-    TariffLimit = 3,
-  }
+/**
+ * Enum for result of validation confirm link.
+ * @readonly
+ */
+export const enum ValidationResult {
+  Ok = 0,
+  Invalid = 1,
+  Expired = 2,
+  TariffLimit = 3,
+  UserExisted = 4,
+  UserExcluded = 5,
+  QuotaFailed = 6,
+}

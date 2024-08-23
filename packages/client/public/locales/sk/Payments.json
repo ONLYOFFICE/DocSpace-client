@@ -25,7 +25,6 @@
   "Pay": "Zaplatiť",
   "Payer": "Platiteľ",
   "PayerDescription": "Tento používateľ má prístup k detailom platby a je jediným používateľom, ktorý môže nastaviť kvótu a vykonávať platby. Vlastník {{productName}}, ako aj samotný správca platieb, môže rolu správcu platieb zmeniť pomocou zákazníckeho portálu Stripe.",
-  "PaymentOverdue": "Nie je možné pridávať nových používateľov.",
   "PriceCalculation": "Vypočítajte svoju cenu",
   "RenewSubscription": "Obnovte predplatné plánu {{planName}}",
   "RoomManagerDescription": "Administrácia a archivácia miestností, pozývanie a správa užívateľov. K miestnosti je možné priradiť niekoľko administrátorov.",
@@ -35,7 +34,6 @@
   "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/mesiac</3>",
   "UpgradeNow": "Aktualizovať teraz",
   "UpgradePlan": "Aktualizovať plán",
-  "UpgradePlanInfo": "Pridaním nových používateľov prekročíte maximálny počet členov v miestnosti povolený vaším aktuálnym cenovým plánom.",
   "UserNotFound": "Používateľ <1>{{email}}</1> sa nenašiel.",
   "UserNotFoundMatchingEmail": "Nepodarilo sa nám nájsť používateľa so zodpovedajúcou e-mailovou adresou Stripe.",
   "YourPrice": "Vaša cena"

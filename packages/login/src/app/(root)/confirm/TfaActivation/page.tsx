@@ -48,7 +48,7 @@ async function Page({ searchParams }: TfaActivationProps) {
   ]);
 
   return (
-    <div className="content-center">
+    <>
       {settings && typeof settings !== "string" && (
         <StyledForm className="set-app-container">
           <TfaActivationForm
@@ -59,7 +59,7 @@ async function Page({ searchParams }: TfaActivationProps) {
           />
         </StyledForm>
       )}
-    </div>
+    </>
   );
 }
 

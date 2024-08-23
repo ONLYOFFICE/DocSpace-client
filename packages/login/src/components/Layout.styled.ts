@@ -29,9 +29,9 @@
 import styled from "styled-components";
 
 import { Base } from "@docspace/shared/themes";
-import { mobile, tablet } from "@docspace/shared/utils/device";
+import { mobile, tablet } from "@docspace/shared/utils";
 
-export const FormWrapper = styled.div<{ bgPattern: string }>`
+export const ContentWrapper = styled.div<{ bgPattern: string }>`
   width: 100%;
   height: 100dvh;
 
@@ -69,8 +69,14 @@ export const FormWrapper = styled.div<{ bgPattern: string }>`
       max-width: 100%;
       min-width: 100%;
     }
+
     p {
       text-align: center;
+      overflow-wrap: break-word;
+
+      @media ${mobile} {
+        margin-top: 32px;
+      }
     }
   }
 
@@ -88,15 +94,38 @@ export const FormWrapper = styled.div<{ bgPattern: string }>`
     margin-bottom: 32px;
   }
 
+  .sign-in-subtitle {
+    margin-bottom: 32px;
+    text-align: center;
+
+    @media ${mobile} {
+      margin-bottom: 24px;
+    }
+  }
+
   .invitation-info-container {
-    margin-bottom: 16px;
+    margin-bottom: 32px;
+
+    @media ${mobile} {
+      margin-bottom: 24px;
+    }
+
+    p {
+      text-align: center;
+    }
+
     .sign-in-container {
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
 
-      margin-bottom: 16px;
+      margin-bottom: 32px;
+
+      @media ${mobile} {
+        margin-bottom: 24px;
+      }
+
       .back-title {
         position: absolute;
         text-overflow: ellipsis;
@@ -125,22 +154,22 @@ export const FormWrapper = styled.div<{ bgPattern: string }>`
   }
 `;
 
-FormWrapper.defaultProps = { theme: Base };
+ContentWrapper.defaultProps = { theme: Base };
 
-export const ContentWrapper = styled.div`
-  flex: 1 0 auto;
-  flex-direction: column;
+export const StyledPage = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  height: 100%;
+  max-width: 960px;
+  box-sizing: border-box;
+  min-height: 100vh;
+
+  user-select: none;
 
   @media ${mobile} {
     justify-content: start;
+    min-height: 100%;
   }
 `;
-
-ContentWrapper.defaultProps = { theme: Base };

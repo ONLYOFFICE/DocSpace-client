@@ -156,6 +156,7 @@ const GenerateDeveloperTokenDialog = ({
                 iconName={CopyReactSvgUrl}
                 onIconClick={onCopyClick}
                 type={InputType.text}
+                maxLength={10000}
               />
               <Text className="dates">
                 Created: {dates.created}

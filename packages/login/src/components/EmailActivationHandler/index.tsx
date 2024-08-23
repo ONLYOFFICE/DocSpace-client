@@ -27,7 +27,6 @@
 "use client";
 
 import { useContext, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import AppLoader from "@docspace/shared/components/app-loader";
@@ -41,19 +40,19 @@ const EmailActivationHandler = () => {
   const [error, setError] = useState<string>();
 
   const { linkData } = useContext(ConfirmRouteContext);
-  const router = useRouter();
 
-  const { email, uid = "", key = "" } = linkData;
+  const { email, uid = "", confirmHeader = "" } = linkData;
 
   useEffect(() => {
     async function changeActivationStatus() {
-      await updateActivationStatus(
-        EmployeeActivationStatus.Activated,
-        uid,
-        key,
-      );
-      window.location.replace(`/login?confirmedEmail=${email}`);
       try {
+        const res = await updateActivationStatus(
+          EmployeeActivationStatus.Activated,
+          uid,
+          confirmHeader,
+        );
+
+        window.location.replace(`/login?confirmedEmail=${email}`);
       } catch (error) {
         const knownError = error as TError;
         let errorMessage: string;
@@ -72,7 +71,7 @@ const EmailActivationHandler = () => {
     }
 
     changeActivationStatus();
-  }, [email, key, uid, router]);
+  }, [email, uid, confirmHeader]);
 
   if (error) {
     console.error(error);

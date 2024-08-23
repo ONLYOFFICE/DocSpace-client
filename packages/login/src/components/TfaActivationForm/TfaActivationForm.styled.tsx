@@ -42,7 +42,7 @@ export const StyledForm = styled(Box)`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 32px;
+    gap: 0;
   }
 
   @media ${mobile} {
@@ -66,6 +66,7 @@ export const StyledForm = styled(Box)`
     width: auto;
 
     @media ${tablet} {
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -78,7 +79,7 @@ export const StyledForm = styled(Box)`
 
   .set-app-description {
     width: 100%;
-    max-width: 500px;
+    max-width: 480px;
 
     .portal-logo {
       margin: 0 auto;
@@ -88,11 +89,11 @@ export const StyledForm = styled(Box)`
   }
 
   .set-app-title {
-    margin-bottom: 14px;
+    margin-bottom: 8px;
   }
 
   .set-app-text {
-    margin-top: 14px;
+    margin-top: 8px;
   }
 
   .qrcode-wrapper {
@@ -106,9 +107,5 @@ export const StyledForm = styled(Box)`
     @media ${mobile} {
       display: none;
     }
-  }
-
-  .app-code-continue-btn {
-    margin-top: 8px;
   }
 `;

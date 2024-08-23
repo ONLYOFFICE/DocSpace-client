@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { headers } from "next/headers";
+
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 import { getPortalPasswordSettings, getSettings } from "@/utils/actions";
@@ -37,16 +39,19 @@ type ActivationProps = {
 async function Page({ searchParams }: ActivationProps) {
   const type = searchParams.type;
 
+  const headersList = headers();
+  const hostName = headersList.get("x-forwarded-host") ?? "";
+
   const [settings, passwordSettings] = await Promise.all([
     getSettings(),
     getPortalPasswordSettings(),
   ]);
 
   return (
-    <div className="content-top">
+    <>
       {settings && typeof settings !== "string" && (
         <>
-          <GreetingCreateUserContainer type={type} />
+          <GreetingCreateUserContainer type={type} hostName={hostName} />
           <FormWrapper id="activation-form">
             <ActivateUserForm
               passwordHash={settings.passwordHash}
@@ -55,7 +60,7 @@ async function Page({ searchParams }: ActivationProps) {
           </FormWrapper>
         </>
       )}
-    </div>
+    </>
   );
 }
 

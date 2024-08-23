@@ -26,9 +26,8 @@
 
 import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
-
 import { observer, inject } from "mobx-react";
+
 import FilesRowContainer from "./RowsView/FilesRowContainer";
 import FilesTileContainer from "./TilesView/FilesTileContainer";
 import EmptyContainer from "../../../../components/EmptyContainer";
@@ -37,7 +36,6 @@ import TableView from "./TableView/TableContainer";
 import withHotkeys from "../../../../HOCs/withHotkeys";
 import {
   clearEdgeScrollingTimer,
-  Consumer,
   isMobile,
   isTablet,
   onEdgeScrolling,
@@ -307,36 +305,18 @@ const SectionBodyContent = (props) => {
 
   if (isEmptyFilesList && movingInProgress) return <></>;
 
-  const showEmptyPage = isEmptyFilesList;
+  if (isEmptyFilesList) return <EmptyContainer isEmptyPage={isEmptyPage} />;
 
   return (
-    <Consumer>
-      {(context) =>
-        showEmptyPage ? (
-          <>
-            <EmptyContainer
-              sectionWidth={context.sectionWidth}
-              isEmptyPage={isEmptyPage}
-            />
-          </>
-        ) : viewAs === "tile" ? (
-          <>
-            <FilesTileContainer sectionWidth={context.sectionWidth} t={t} />
-          </>
-        ) : viewAs === "table" ? (
-          <>
-            <TableView sectionWidth={context.sectionWidth} tReady={tReady} />
-          </>
-        ) : (
-          <>
-            <FilesRowContainer
-              sectionWidth={context.sectionWidth}
-              tReady={tReady}
-            />
-          </>
-        )
-      }
-    </Consumer>
+    <>
+      {viewAs === "tile" ? (
+        <FilesTileContainer t={t} />
+      ) : viewAs === "table" ? (
+        <TableView tReady={tReady} />
+      ) : (
+        <FilesRowContainer tReady={tReady} />
+      )}
+    </>
   );
 };
 

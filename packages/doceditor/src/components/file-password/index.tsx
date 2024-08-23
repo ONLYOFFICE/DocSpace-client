@@ -178,7 +178,7 @@ const FilePassword = ({ shareKey, title, entryTitle }: FilePasswordProps) => {
                       id="password"
                       inputName="password"
                       placeholder={t("Common:Password")}
-                      type={InputType.password}
+                      inputType={InputType.password}
                       inputValue={password}
                       hasError={!!errorMessage}
                       size={InputSize.large}

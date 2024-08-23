@@ -1,5 +1,5 @@
 {
-  "ArchivedRoomsOrContact": "You can archived the unnecessary rooms or contact the {{productName}} administrator to upgrade the tariff plan.",
+  "ArchivedRoomsOrContact": "You can archive the unnecessary rooms or contact the {{productName}} administrator to upgrade the tariff plan.",
   "ClickToUpgradeTariff": "<1>Click here</1> to upgrade your tariff plan.",
   "ConfirmEmailDescription": "Use the link provided in the activation email. Haven't received an email with the activation link?",
   "ConfirmEmailHeader": "Please activate your email ({{ email }}) to get access to the {{productName}} features.",

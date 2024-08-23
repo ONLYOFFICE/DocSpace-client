@@ -2,7 +2,7 @@
   "ConfirmEmailDescription": "Koristite vezu datu u email-u za aktivaciju. Niste dobili email sa linkom za aktivaciju?",
   "ConfirmEmailHeader": "Aktivirajte svoju email ({{ email }}) da biste dobili pristup funkcijama {{productName}}-a.",
   "PersonalUserQuotaAdminsDescription": "Da biste otpremili i kreirali nove datoteke i foldere, oslobodite prostor na disku ili upravljajte kvotom po korisniku u <1>Storage management settings</1>",
-  "PersonalUserQuotaDescription": "Da biste otpremili i kreirali nove datoteke i fascikle, oslobodite prostor na disku ili kontaktirajte administratora da poveća kvotu za skladištenje.",
+  "PersonalUserQuotaDescription": "Da biste otpremili i kreirali nove datoteke i fascikle, oslobodite prostor na disku ili kontaktirajte administratora {{productName}} da poveća kvotu za skladištenje.",
   "RequestActivation": "Zatraži aktivaciju još jednom",
   "RoomQuotaHeader": "Broj soba će uskoro biti prekoračen: {{currentValue}} / {{maxValue}}",
   "StorageAndUserHeader": "Ograničenja skladišta i administratora/naprednih korisnika će uskoro biti prekoračena.",

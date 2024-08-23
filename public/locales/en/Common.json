@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "About",
   "AboutCompanyTitle": "About this program",
   "AccessDenied": "Access denied",
@@ -38,9 +38,9 @@
   "Bytes": "bytes",
   "CancelButton": "Cancel",
   "ChangeButton": "Change",
-  "ChangeUserPermissions": "Change user permissions to the invited people or <1>upgrade your tariff plan</1>.",
   "ChangeQuota": "Change quota",
   "ChangesSavedSuccessfully": "Changes saved successfully",
+  "ChangeUserPermissions": "Change user permissions to the invited people or <1>upgrade your tariff plan</1>.",
   "ChooseFromTemplates": "Choose from Templates",
   "ClearAll": "Clear all",
   "ClearFilter": "Clear filter",
@@ -52,6 +52,7 @@
   "ComingSoon": "Coming soon",
   "Comment": "Comment",
   "Comments": "Comments",
+  "Commercial": "Commercial",
   "Common": "Common",
   "CommonFiles": "Common files",
   "CompanyName": "Company name",
@@ -141,8 +142,8 @@
   "DontShowAgain": "Don't show again",
   "Download": "Download",
   "DownloadApps": "Download applications",
-  "DownloadOperationTitle": "File downloading in progress",
   "DownloadOperationDescription": "Once ready, you can find the files in your browser's download folder and close this tab.",
+  "DownloadOperationTitle": "File downloading in progress",
   "DropzoneTitleExsts": "(JPG or PNG)",
   "DropzoneTitleLink": "Select new image",
   "DropzoneTitleSecondary": "or drop file here",
@@ -161,6 +162,7 @@
   "EmptyRoomsDescription": "Please create the first room in My rooms.",
   "EmptyRoomsHeader": "No rooms here yet",
   "Enable": "Enable",
+  "EnableThirdPartyIntegration": "Please ask a {{productName}} owner or administrator to enable the corresponding service in the Integration section of the {{productName}} Settings.",
   "EncryptingFile": "Encrypting file",
   "EncryptionFilePreparing": "Preparing file for encryption",
   "EncryptionKeysReload": "Encryption keys must be re-entered",
@@ -513,6 +515,5 @@
   "Website": "Website",
   "Yes": "Yes",
   "Yesterday": "Yesterday",
-  "You": "You",
-  "EnableThirdPartyIntegration": "Please ask a DocSpace owner or administrator to enable the corresponding service in the Integration section of the DocSpace Settings."
+  "You": "You"
 }

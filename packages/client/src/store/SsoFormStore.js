@@ -388,11 +388,11 @@ class SsoFormStore {
     this.isSubmitLoading = true;
 
     try {
-      await submitSsoForm(data);
+      const res = await submitSsoForm(data);
       toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
       this.isSubmitLoading = false;
       this.setSpMetadata(true);
-      this.setDefaultSettings(settings);
+      this.setDefaultSettings(res);
       this.setIsSsoEnabled(settings.enableSso);
     } catch (err) {
       toastr.error(err);
@@ -903,8 +903,14 @@ class SsoFormStore {
 
   checkRequiredFields = () => {
     this.setError("entityId", this.entityId);
-    this.setError("ssoUrlPost", this.ssoUrlPost);
-    this.setError("sloUrlPost", this.sloUrlPost);
+    this.ssoBinding === BINDING_POST &&
+      this.setError("ssoUrlPost", this.ssoUrlPost);
+    this.ssoBinding === BINDING_REDIRECT &&
+      this.setError("ssoUrlRedirect", this.ssoUrlRedirect);
+    this.sloBinding === BINDING_POST &&
+      this.setError("sloUrlPost", this.sloUrlPost);
+    this.sloBinding === BINDING_REDIRECT &&
+      this.setError("sloUrlRedirect", this.sloUrlRedirect);
     this.setError("firstName", this.firstName);
     this.setError("lastName", this.lastName);
     this.setError("email", this.email);
@@ -978,9 +984,9 @@ class SsoFormStore {
     for (let key in this) {
       if (key.includes("HasError") && this[key] !== false) {
         const name = key.replace("HasError", "");
-        const element = document.getElementsByName(name)[0];
-        element.focus();
-        element.blur();
+        const element = document.getElementsByName(name)?.[0];
+        element?.focus();
+        element?.blur();
         return;
       }
     }

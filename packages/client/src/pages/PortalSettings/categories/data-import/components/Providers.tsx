@@ -100,9 +100,9 @@ const Providers = (props: ProvidersProps) => {
           >
             <ReactSVG src={workspace.logo} className="workspace-logo" />
             <Link
+              className="link"
               type={LinkType.page}
               fontWeight="600"
-              color="#4781D1"
               isHovered
               isTextOverflow
             >
@@ -114,18 +114,20 @@ const Providers = (props: ProvidersProps) => {
     </WorkspacesContainer>
   );
 };
-export default inject<TStore>(({ settingsStore, importAccountsStore }) => {
-  const { services, setServices, getMigrationList, setWorkspace } =
-    importAccountsStore;
+export const Component = inject<TStore>(
+  ({ settingsStore, importAccountsStore }) => {
+    const { services, setServices, getMigrationList, setWorkspace } =
+      importAccountsStore;
 
-  const { theme } = settingsStore;
+    const { theme } = settingsStore;
 
-  return {
-    services,
-    setServices,
-    getMigrationList,
+    return {
+      services,
+      setServices,
+      getMigrationList,
 
-    theme,
-    setWorkspace,
-  };
-})(observer(Providers));
+      theme,
+      setWorkspace,
+    };
+  },
+)(observer(Providers));

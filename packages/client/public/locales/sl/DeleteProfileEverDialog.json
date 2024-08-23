@@ -3,6 +3,8 @@
   "CannotReassignFiles": "Če izbrišete več uporabnikov hkrati, ne morete dodeliti njihovih datotek drugim uporabnikom.",
   "DeleteGroupUsersSuccessMessage": "Uporabniki so bili uspešno izbrisani.",
   "DeleteMyDocumentsUser": "Vse osebne datoteke in mape v razdelku Dokumenti tega uporabnika bodo trajno izbrisane.",
+  "DeletePersonalData": "Osebni podatki, vse osebne datoteke in mape v razdelkih Dokumenti in Koš* izbranih uporabnikov bodo trajno izbrisani. Datoteke in mape izbranih uporabnikov, shranjene v skupnih razdelkih*, kot so sobe, bodo ostale v {{productName}}.",
+  "DeletePersonalDataApplicable": "*Velja za izbrane uporabnike, ki imajo takšne datoteke in mape.",
   "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Sobe, ki jih je ustvaril ta uporabnik, in dokumenti, shranjeni v teh sobah, bodo samodejno dodeljeni skrbniku, ki izvede brisanje: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Podatke znova dodelite ročno, da izberete drugega ciljnega uporabnika za ponovno dodelitev.",
   "DeleteUser": "Izbriši uporabnika",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> bo izbrisan. Tega dejanja ni mogoče razveljaviti.",

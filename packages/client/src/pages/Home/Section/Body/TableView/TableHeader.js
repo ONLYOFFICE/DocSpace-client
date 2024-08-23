@@ -109,17 +109,10 @@ class FilesTableHeader extends React.Component {
           onChange: this.onColumnChange,
           onClick: this.onRoomsFilter,
         },
-        {
-          key: "QuickButtons",
-          title: "",
-          enable: this.props.roomColumnQuickButtonsIsEnabled,
-          defaultSize: 52,
-          resizable: false,
-        },
       ];
 
       showStorageInfo &&
-        columns.splice(columns.length - 1, 0, {
+        columns.splice(columns.length, 0, {
           key: "Storage",
           title:
             isDefaultRoomsQuotaSet && !isArchiveFolder
@@ -199,13 +192,6 @@ class FilesTableHeader extends React.Component {
           // onClick: this.onFilter,
           onChange: this.onColumnChange,
         },
-        {
-          key: "QuickButtons",
-          title: "",
-          enable: this.props.quickButtonsColumnIsEnabled,
-          defaultSize: 52,
-          resizable: false,
-        },
       ];
       defaultColumns.push(...columns);
     } else if (isRecentTab) {
@@ -278,13 +264,6 @@ class FilesTableHeader extends React.Component {
           // onClick: this.onFilter,
           onChange: this.onColumnChange,
         },
-        {
-          key: "QuickButtons",
-          title: "",
-          enable: this.props.quickButtonsColumnIsEnabled,
-          defaultSize: 52,
-          resizable: false,
-        },
       ];
       defaultColumns.push(...columns);
     } else {
@@ -348,13 +327,6 @@ class FilesTableHeader extends React.Component {
           // onClick: this.onFilter,
           onChange: this.onColumnChange,
         },
-        {
-          key: "QuickButtons",
-          title: "",
-          enable: this.props.quickButtonsColumnIsEnabled,
-          defaultSize: 52,
-          resizable: false,
-        },
       ];
       defaultColumns.push(...columns);
     }
@@ -379,6 +351,7 @@ class FilesTableHeader extends React.Component {
         columnInfoPanelStorageName,
         sortBy,
         sortOrder,
+        isRecentTab,
       });
     } else {
       this.state = {
@@ -388,6 +361,7 @@ class FilesTableHeader extends React.Component {
         columnInfoPanelStorageName,
         sortBy,
         sortOrder,
+        isRecentTab,
       };
     }
   };
@@ -447,7 +421,7 @@ class FilesTableHeader extends React.Component {
       isTrashFolder !== prevProps.isTrashFolder ||
       columnStorageName !== prevProps.columnStorageName ||
       columnInfoPanelStorageName !== prevProps.columnInfoPanelStorageName ||
-      isRecentTab !== prevProps.isRecentTab ||
+      isRecentTab !== this.state.isRecentTab ||
       showStorageInfo !== prevProps.showStorageInfo ||
       sortBy !== this.state.sortBy ||
       sortOrder !== this.state.sortOrder
@@ -637,14 +611,12 @@ export default inject(
       sizeTrashColumnIsEnabled,
       typeColumnIsEnabled,
       typeTrashColumnIsEnabled,
-      quickButtonsColumnIsEnabled,
       lastOpenedColumnIsEnabled,
 
       roomColumnNameIsEnabled,
       roomColumnTypeIsEnabled,
       roomColumnTagsIsEnabled,
       roomColumnOwnerIsEnabled,
-      roomColumnQuickButtonsIsEnabled,
       roomColumnActivityIsEnabled,
       roomQuotaColumnIsEnable,
 
@@ -688,14 +660,12 @@ export default inject(
       sizeTrashColumnIsEnabled,
       typeColumnIsEnabled,
       typeTrashColumnIsEnabled,
-      quickButtonsColumnIsEnabled,
       lastOpenedColumnIsEnabled,
 
       roomColumnNameIsEnabled,
       roomColumnTypeIsEnabled,
       roomColumnTagsIsEnabled,
       roomColumnOwnerIsEnabled,
-      roomColumnQuickButtonsIsEnabled,
       roomColumnActivityIsEnabled,
       roomQuotaColumnIsEnable,
 

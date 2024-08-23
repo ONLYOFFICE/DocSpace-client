@@ -219,8 +219,8 @@ const StyledProperties = styled.div`
     grid-template-columns: 120px 1fr;
     grid-column-gap: 24px;
 
-    -webkit-box-align: center;
-    align-items: center;
+    -webkit-box-align: baseline;
+    align-items: baseline;
 
     .property-title {
       font-size: 13px;
@@ -242,7 +242,6 @@ const StyledProperties = styled.div`
       gap: 4px;
 
       .property-tag {
-        background: red;
         max-width: 195px;
         margin: 0;
         background: ${(props) => props.theme.infoPanel.details.tagBackground};

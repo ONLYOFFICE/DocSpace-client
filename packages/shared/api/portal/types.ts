@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { TError } from "../../utils/axiosClient";
 import { TariffState } from "../../enums";
 
 export type TQuotas = { id: number; quantity: number };
@@ -37,6 +38,8 @@ export type TPortalTariff = {
   customerId: string;
   portalStatus?: number;
   quotas: TQuotas[];
+  enterprise: boolean;
+  openSource: boolean;
 };
 
 export type TPaymentFeature = {
@@ -107,27 +110,7 @@ export type TTariff = {
   quotas: TQuotas[];
 };
 
-export type TTenantExtraRes = {
-  customMode: boolean;
-  opensource: boolean;
-  enterprise: boolean;
-  notPaid: boolean;
-  licenseAccept: Date;
-  enableTariffPage: boolean;
-};
-
-export type TTenantExtra = {
-  customMode: boolean;
-  opensource: boolean;
-  enterprise: boolean;
-  tariff: TTariff;
-  quota: TPaymentQuota;
-  notPaid: boolean;
-  licenseAccept: Date;
-  enableTariffPage: boolean;
-};
-
 export type TRestoreProgress = {
   progress: number;
-  error?: any;
+  error?: TError;
 };

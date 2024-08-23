@@ -1,1 +1,24 @@
-{}
+{
+  "CollaboratorEmptyTitle": "Această sală este vidă.",
+  "CreateNewFileDescription": "Creaţi fişiere şi foldere pentru a începe lucrul în sala",
+  "CreateNewFileTitle": "Crearea unui fişier nou",
+  "CustomRoomEmptyTitle": "Bun venit în Sala particularizată",
+  "EmptyDescription": "Începeţi cu acţiuni rapide:",
+  "FormFolderDefaultDescription": "Glisați și fixați formulare PDF aici sau încărcați  de pe {{productName}} sau de pe dispozitivul. ",
+  "FormFolderDefaultTitle": "Niciun formular deocamdată aici",
+  "FormFolderDefaultUserDescription": "Formularele încărcate de administratorul vor fi afișate aici.",
+  "FormFolderDefaultUserTitle": "Niciun formular în acest folder deocamdată",
+  "FormRoomEmptyTitle": "Bun venit în Sala de completare a formularelor",
+  "InviteUsersOptionDescription": "Adăugați membrii portalului pentru editarea colaborativă în sală.",
+  "InviteUsersOptionTitle": "Invitare Participanţi",
+  "ShareOptionDescription": "Copiați linkul public sau invitați alți utilizatori în sala pentru a proceda la completarea formularului.",
+  "ShareOptionTitle": "Partajare sală",
+  "UploadDeviceOptionDescription": "Încărcați orice tip de fișier de pe dispozitivul dvs personal",
+  "UploadDeviceOptionTitle": "Încărcare de pe dispozitivul dvs",
+  "UploadDevicePDFFormOptionDescription": "Încărcați un formular PDF pregătit în sala de pe dispozitivul dvs.",
+  "UploadDevicePDFFormOptionTitle": "Încărcare de pe dispozitivul",
+  "UploadFromPortalDescription": "Încărcați orice tip de fișier din secțiuni Documente sau Săli",
+  "UploadFromPortalTitle": "Încărcare de pe {{productName}}",
+  "UploadPDFFormOptionDescription": "Selectați un formular PDF existent de pe {{productName}} și încărcați-l în sala.",
+  "UserEmptyDescription": "Fişierele şi folderele care au fost încărcate de administratori vor apărea aici."
+}

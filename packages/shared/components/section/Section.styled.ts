@@ -37,7 +37,7 @@ import {
   desktop,
   NoUserSelect,
 } from "../../utils";
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 import { TViewAs } from "../../types";
 
 import { Scrollbar } from "../scrollbar";
@@ -70,7 +70,6 @@ const StyledInfoPanelWrapper = styled.div.attrs(({ id }) => ({
   height: auto;
   width: auto;
   background: ${(props) => props.theme.infoPanel.blurColor};
-  backdrop-filter: blur(3px);
   z-index: 300;
   @media ${tablet} {
     z-index: 309;
@@ -517,7 +516,7 @@ const StyledSectionHeader = styled.div<{ isFormGallery?: boolean }>`
 
     .header-container {
       margin-bottom: 1px;
-      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      -webkit-tap-highlight-color: ${globalColors.tapHighlight};
     }
   }
 

@@ -25,7 +25,6 @@
   "Pay": "Thanh toán",
   "Payer": "Người thanh toán",
   "PayerDescription": "Người dùng này có quyền truy cập vào thông tin thanh toán và là người dùng duy nhất có thể điều chỉnh định mức và thực hiện thanh toán. Chủ sở hữu {{productName}}, cũng như chính người quản lý thanh toán, có thể chỉ định lại vai trò người quản lý thanh toán bằng cổng thông tin khách hàng Stripe.",
-  "PaymentOverdue": "Không thể thêm người dùng mới.",
   "PriceCalculation": "Tính phí của bạn",
   "RenewSubscription": "Gia hạn gói dịch vụ {{planName}}",
   "RoomManagerDescription": "Quản trị và lưu trữ phòng, mời và quản lý người dùng. Một số quản trị viên có thể được chỉ định vào phòng.",
@@ -35,7 +34,6 @@
   "TotalPricePerMonth": "<1>{{currencySymbol}} </1><2>{{price}} </2><3>/tháng</3>",
   "UpgradeNow": "Nâng cấp ngay",
   "UpgradePlan": "Nâng cấp gói dịch vụ",
-  "UpgradePlanInfo": "Việc thêm người dùng mới sẽ vượt quá số lượng thành viên tối đa được phép trong phòng theo gói dịch vụ hiện tại của bạn.",
   "UserNotFound": "Không tìm thấy người dùng<1>{{email}}</1>.",
   "UserNotFoundMatchingEmail": "Chúng tôi không thể tìm thấy người dùng có e-mail Stripe phù hợp.",
   "YourPrice": "Phí thanh toán của bạn"

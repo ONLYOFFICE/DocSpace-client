@@ -51,10 +51,9 @@ export const LogoutSessionDialog = ({
       visible={visible}
       onClose={onClose}
       displayType={ModalDialogType.modal}
+      autoMaxHeight
     >
-      <ModalDialog.Header>
-        {t("Profile:LogoutActiveConnection")}
-      </ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:LogoutButton")}</ModalDialog.Header>
       <ModalDialog.Body>
         {t("Profile:LogoutFrom", {
           platform: data.platform,

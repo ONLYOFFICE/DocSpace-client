@@ -32,6 +32,7 @@ import { Text } from "@docspace/shared/components/text";
 import { RowContent } from "@docspace/shared/components/row-content";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
+import { globalColors } from "@docspace/shared/themes";
 
 const StyledRowContent = styled(RowContent)`
   .rowMainContainer {
@@ -66,7 +67,11 @@ const SessionsRowContent = ({
         {platform} <span className="session-browser">{`(${browser})`}</span>
       </Text>
       {isMobile() && showTickIcon && (
-        <IconButton size={12} iconName={TickSvgUrl} color="#20D21F" />
+        <IconButton
+          size={12}
+          iconName={TickSvgUrl}
+          color={globalColors.tickColor}
+        />
       )}
       <Text truncate>{convertTime(date)}</Text>
       {(country || city) && (

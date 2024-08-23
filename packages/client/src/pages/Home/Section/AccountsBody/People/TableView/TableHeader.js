@@ -141,25 +141,17 @@ class PeopleTableHeader extends React.Component {
     const { filter, setFilter, setIsLoading, navigate, location } = this.props;
     const newFilter = filter.clone();
 
-    if (newFilter.sortBy === sortBy && sortBy !== "AZ") {
+    if (
+      newFilter.sortBy === sortBy ||
+      (sortBy === "AZ" && newFilter.sortBy === "displayname")
+    ) {
       newFilter.sortOrder =
         newFilter.sortOrder === "ascending" ? "descending" : "ascending";
     } else {
       newFilter.sortBy = sortBy;
 
       if (sortBy === "AZ") {
-        if (
-          newFilter.sortBy !== "lastname" &&
-          newFilter.sortBy !== "firstname"
-        ) {
-          newFilter.sortBy = "firstname";
-        } else if (newFilter.sortBy === "lastname") {
-          newFilter.sortBy = "firstname";
-        } else {
-          newFilter.sortBy = "lastname";
-        }
-        newFilter.sortOrder =
-          newFilter.sortOrder === "ascending" ? "descending" : "ascending";
+        newFilter.sortBy = "displayname";
       }
     }
 
@@ -186,10 +178,7 @@ class PeopleTableHeader extends React.Component {
     } = this.props;
     const { sortOrder } = filter;
 
-    const sortBy =
-      filter.sortBy === "firstname" || filter.sortBy === "lastname"
-        ? "AZ"
-        : filter.sortBy;
+    const sortBy = filter.sortBy === "displayname" ? "AZ" : filter.sortBy;
 
     return (
       <TableHeader

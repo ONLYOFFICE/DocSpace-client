@@ -1,1 +1,12 @@
-{}
+{
+  "BackToRoom": "Odaya geri dön",
+  "CheckReadyForms": "Hazır formları kontrol edin",
+  "Description": "Formunuz tamamlandı ve kaydedildi",
+  "DescriptionForAnonymous": "Benzersiz bir numara atanmış olan doldurulmuş PDF formunu gönderdiniz. Durumu kontrol etmek için, atanan numarayla form sahibi ile iletişime geçin.",
+  "DescriptionForRegisteredUser": "Doldurulan PDF formu kaydedilir ve Tamamlandı klasöründe sizin için kullanılabilir durumdadır. Durumu kontrol etmek için, atanan numarayla form sahibi ile iletişime geçin.",
+  "FillItOutAgain": "Tekrar doldurun",
+  "FormCompletedSuccessfully": "Form tamamlandı",
+  "FormNumber": "Form numarası:",
+  "FormOwner": "Form sahibi",
+  "Title": "Form tamamlandı"
+}

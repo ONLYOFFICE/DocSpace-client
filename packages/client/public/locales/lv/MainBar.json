@@ -1,18 +1,12 @@
 {
-  "ClickHere": "Noklikšķiniet šeit",
   "ConfirmEmailDescription": "Izmantojiet aktivizēšanas e-pasta ziņojumā norādīto saiti. Vai neesat saņēmis e-pasta ziņojumu ar aktivizēšanas saiti?",
   "ConfirmEmailHeader": "Lūdzu, aktivizējiet savu e-pastu ({{ email }}), lai piekļūtu {{productName}} funkcijām.",
   "PersonalUserQuotaAdminsDescription": "Lai augšupielādētu un izveidotu jaunus failus un mapes, atbrīvojiet vietu diskā vai pārvaldiet kvotu katram lietotājam <1>Krātuves pārvaldības iestatījumos.</1>",
   "PersonalUserQuotaDescription": "Lai augšupielādētu un izveidotu jaunus failus un mapes, atbrīvojiet vietu diskā vai sazinieties ar administratoru, lai palielinātu krātuves kvotu.",
   "RequestActivation": "Vēreiz pieprasīt aktivizāciju",
-  "RoomQuotaDescription": "Varat arhivēt nevajadzīgās telpas vai <1>{{clickHere}}</1>, lai atrastu savam {{productName}} piemērotāku cenu plānu.",
   "RoomQuotaHeader": "Tūlīt tiks pārsniegtas telpas: {{currentValue}} / {{maxValue}}",
-  "StorageAndRoomHeader": "Drīz tiks pārsniegti krātuves un telpu ierobežojumi.",
   "StorageAndUserHeader": "Tūlīt tiks pārsniegti krātuves un administratoru/prasmīgo lietotāju ierobežojumi.",
-  "StorageQuotaDescription": "Varat noņemt nevajadzīgos failus vai <1>{{clickHere}}</1>, lai atrastu savam {{productName}} piemērotāku cenu plānu.",
-  "StorageQuotaExceeded": "Pārsniegta krātuves kvota",
   "StorageQuotaHeader": "Tūlīt tiks pārsniegts krātuves vietas apjoms: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Jūs varat noņemt nevajadzīgos failus vai mainīt kvotu <1>Krātuves pārvaldības iestatījumos.</1>",
-  "UserQuotaDescription": "<1>{{clickHere}}</1>, lai atrastu labāku cenu plānu savam {{productName}}.",
   "UserQuotaHeader": "Tūlīt tiks pārsniegts administratoru/prasmīgo lietotāju skaits:{{currentValue}}/{{maxValue}}."
 }

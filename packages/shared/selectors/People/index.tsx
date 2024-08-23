@@ -52,6 +52,7 @@ import { AvatarRole } from "../../components/avatar";
 import { Text } from "../../components/text";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";
+import { globalColors } from "../../themes";
 
 const toListItem = (
   item: TUser,
@@ -366,7 +367,7 @@ const PeopleSelector = ({
               fontSize="12px"
               noSelect
               truncate
-              color="#A3A9AE"
+              color={globalColors.gray}
               dir="auto"
             >
               {`${userType} | ${email}`}

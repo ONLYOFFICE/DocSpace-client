@@ -1,5 +1,6 @@
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
+import { globalColors } from "@docspace/shared/themes";
 
 import {
   StyledRowContent,
@@ -28,7 +29,7 @@ export const RowContent = ({
           </Text>
         </FlexWrapper>
 
-        <Text fontWeight={600} fontSize="12px" color="#A3A9AE">
+        <Text fontWeight={600} fontSize="12px" color={globalColors.gray}>
           {item.description}
         </Text>
       </ContentWrapper>

@@ -820,6 +820,10 @@ class FilesStore {
     this.activeFiles = items;
   };
 
+  updateActiveFolders = (items) => {
+    this.activeFolders = items;
+  };
+
   clearFiles = () => {
     this.setFolders([]);
     this.setFiles([]);
@@ -2172,7 +2176,7 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["download"]);
       }
 
-      if (!isPdf || item.startFilling || item.isForm) {
+      if (!isPdf || (shouldFillForm && canFillForm)) {
         fileOptions = this.removeOptions(fileOptions, ["open-pdf"]);
       }
 

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 
 const StyledLabel = styled.label<{
   isDisabled: boolean;
@@ -37,11 +37,13 @@ const StyledLabel = styled.label<{
   position: relative;
   margin: 0;
 
+  line-height: 16px;
+
   user-select: none;
   -o-user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   .checkbox {
     margin-inline-end: 12px;

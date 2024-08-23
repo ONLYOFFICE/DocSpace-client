@@ -191,7 +191,7 @@ const ClientContent = (props) => {
   );
 };
 
-const Client = inject(
+export const Client = inject(
   ({
     authStore,
     clientLoadingStore,
@@ -262,5 +262,3 @@ const Client = inject(
     };
   },
 )(withTranslation("Common")(observer(ClientContent)));
-
-export default () => <Client />;

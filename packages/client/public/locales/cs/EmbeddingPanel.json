@@ -1,4 +1,11 @@
 {
+  "CodeSuccessfullyCopied": "Kód pro vložení úspěšně zkopírovaný do schránky",
+  "ContentRestricted": "Kopírování obsahu, stahování souborů a tisk jsou omezeny.",
+  "DisplaySettings": "Nastavení displeje",
+  "EmbeddingBarAllowList": "Přidejte URL adresu webové stránky pro vložení do seznamu <1>povolených</1>.",
+  "EmbeddingBarDescription": "Vkládání bude fungovat pouze pro adresy URL zadané správcem {{productName}} v nastavení JavaScript SDK.",
   "Height": "Výška",
+  "Link": "Odkaz",
+  "LinkProtectedWithPassword": "Odkaz je chráněn heslem.",
   "Width": "Šířka"
 }

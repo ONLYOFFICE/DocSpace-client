@@ -32,6 +32,7 @@ import { isSeparator } from "@docspace/shared/utils/typeGuards";
 
 import { StyledErrorToolbar, StyledMediaError } from "./MessageError.styled";
 import type PlayerMessageErrorProps from "./MessageError.props";
+import { globalColors } from "../../../../themes";
 
 export const MessageError = ({
   model,
@@ -46,7 +47,12 @@ export const MessageError = ({
   return (
     <div>
       <StyledMediaError>
-        <Text fontSize="15px" color="#fff" textAlign="center" className="title">
+        <Text
+          fontSize="15px"
+          color={globalColors.white}
+          textAlign="center"
+          className="title"
+        >
           {errorTitle}
         </Text>
       </StyledMediaError>

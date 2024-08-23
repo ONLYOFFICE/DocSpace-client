@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2010-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,41 +24,49 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TUser } from "@docspace/shared/api/people/types";
-import { EditGroupParams, GroupMembers } from "../types";
+import path from "path";
+import fs from "fs";
 
-const compareMembers = (a: GroupMembers, b: GroupMembers): boolean => {
-  if (!a && !b) return true;
-  if (!Array.isArray(a) || !Array.isArray(b)) return false;
-  if (a.length !== b.length) return false;
+const hexColorPattern = /#(?:[0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})\b/g;
 
-  const sortCb = (first: TUser, second: TUser) =>
-    first.id < second.id ? -1 : 1;
-  const sortedA = [...a].sort(sortCb);
-  const sortedB = [...b].sort(sortCb);
+export function findHexColorsInFile(filePath) {
+  const content = fs.readFileSync(filePath, "utf-8");
+  const matches = content.match(hexColorPattern);
+  return matches || [];
+}
 
-  return !sortedA.some((el, i) => el.id !== sortedB[i].id);
-};
+export function searchDirectoryForHexColors(
+  directory,
+  excludeFiles = [],
+  excludeDirs = []
+) {
+  let hexColors = {};
 
-const removeManagerFromMembers = (members: GroupMembers, managerId: string) => {
-  return members?.filter((g) => g.id !== managerId) || null;
-};
+  function walkDirectory(currentPath) {
+    const items = fs.readdirSync(currentPath);
 
-export const compareGroupParams = (
-  prev: EditGroupParams,
-  current: EditGroupParams,
-): boolean => {
-  const equalTitle = prev.groupName === current.groupName;
-  const equalManager = prev.groupManager?.id === current.groupManager?.id;
+    items.forEach((item) => {
+      const fullPath = path.join(currentPath, item);
+      const isDirectory = fs.statSync(fullPath).isDirectory();
 
-  const prevGroupMembers = prev.groupManager?.id
-    ? removeManagerFromMembers(prev.groupMembers, prev.groupManager.id)
-    : prev.groupMembers;
-  const currentGroupMembers = current.groupManager?.id
-    ? removeManagerFromMembers(current.groupMembers, current.groupManager.id)
-    : current.groupMembers;
+      if (isDirectory) {
+        if (!excludeDirs.includes(fullPath)) {
+          walkDirectory(fullPath);
+        }
+      } else {
+        if (
+          !excludeFiles.includes(fullPath) &&
+          /\.(js|ts|jsx|tsx)$/.test(item)
+        ) {
+          const matches = findHexColorsInFile(fullPath);
+          if (matches.length > 0) {
+            hexColors[fullPath] = matches;
+          }
+        }
+      }
+    });
+  }
 
-  const equalMembers = compareMembers(prevGroupMembers, currentGroupMembers);
-
-  return equalTitle && equalManager && equalMembers;
-};
+  walkDirectory(directory);
+  return hexColors;
+}

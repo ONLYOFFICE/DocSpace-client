@@ -31,6 +31,7 @@ import { Text } from "../text";
 import { Tooltip } from ".";
 
 // import TooltipDocs from "./Tooltip.mdx";
+import { globalColors } from "../../themes";
 
 const meta = {
   title: "Components/Tooltip",
@@ -70,7 +71,7 @@ export const Default: Story = {
                 {content}
               </Text>
 
-              <Text color="#A3A9AE" fontSize="13px">
+              <Text color={globalColors.gray} fontSize="13px">
                 BobJohnston@gmail.com
               </Text>
 
@@ -133,7 +134,7 @@ export const AllTooltip: Story = {
               Bob Johnston
             </Text>
 
-            <Text color="#A3A9AE" fontSize="13px">
+            <Text color={globalColors.gray} fontSize="13px">
               BobJohnston@gmail.com
             </Text>
 
@@ -173,7 +174,7 @@ export const AllTooltip: Story = {
                   {arrayUsers[+content].name}
                 </Text>
 
-                <Text color="#A3A9AE" fontSize="13px">
+                <Text color={globalColors.gray} fontSize="13px">
                   {arrayUsers[+content].email}
                 </Text>
 

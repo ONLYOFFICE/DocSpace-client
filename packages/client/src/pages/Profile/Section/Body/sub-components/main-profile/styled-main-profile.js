@@ -145,7 +145,7 @@ export const StyledInfo = styled.div`
     min-width: 12px;
 
     svg path {
-      fill: ${(props) => props.theme.isBase && `#657077`};
+      fill: ${(props) => props.theme.profile.main.iconFill};
     }
   }
 
@@ -251,7 +251,7 @@ export const StyledInfo = styled.div`
           font-size: 12px !important;
           line-height: 16px !important;
           white-space: nowrap;
-          color: rgb(163, 169, 174);
+          color: ${(props) => props.theme.profile.main.mobileLabel};
         }
 
         .mobile-profile-label-field {
@@ -274,7 +274,7 @@ export const StyledInfo = styled.div`
           min-width: 12px;
 
           svg path {
-            fill: ${(props) => props.theme.isBase && `#657077`};
+            fill: ${(props) => props.theme.profile.main.iconFill};
           }
         }
 

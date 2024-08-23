@@ -33,10 +33,10 @@ import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { DataImportProps, InjectedDataImportProps } from "./types";
 
-import Providers from "./components/Providers";
-import NextcloudWorkspace from "./NextcloudWorkspace";
-import GoogleWorkspace from "./GoogleWorkspace";
-import OnlyofficeWorkspace from "./OnlyofficeWorkspace";
+import { Component as Providers } from "./components/Providers";
+import { Component as NextcloudWorkspace } from "./NextcloudWorkspace";
+import { Component as GoogleWorkspace } from "./GoogleWorkspace";
+import { Component as OnlyofficeWorkspace } from "./OnlyofficeWorkspace";
 
 const DataImport = (props: DataImportProps) => {
   const {
@@ -137,7 +137,7 @@ const DataImport = (props: DataImportProps) => {
   );
 };
 
-export default inject<TStore>(
+export const Component = inject<TStore>(
   ({ settingsStore, setup, importAccountsStore }) => {
     const {
       getMigrationStatus,

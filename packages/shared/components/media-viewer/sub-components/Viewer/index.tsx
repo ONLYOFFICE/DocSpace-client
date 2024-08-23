@@ -59,6 +59,7 @@ export const Viewer = (props: ViewerProps) => {
     fileUrl,
     toolbar,
     playlist,
+    autoPlay,
     audioIcon,
     errorTitle,
     targetFile,
@@ -277,6 +278,7 @@ export const Viewer = (props: ViewerProps) => {
         <ViewerPlayer
           isError={isError}
           src={fileUrl}
+          autoPlay={autoPlay}
           devices={devices}
           isAudio={isAudio}
           isVideo={isVideo}

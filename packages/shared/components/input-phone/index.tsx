@@ -267,7 +267,6 @@
 //         // @ts-expect-error TS(2322): Type '{ children: any; className: string; color: s... Remove this comment to see the full error message
 //         <Text
 //           className="phone-input_error-text"
-//           color="#f21c0e"
 //           fontSize="11px"
 //           lineHeight="14px"
 //         >

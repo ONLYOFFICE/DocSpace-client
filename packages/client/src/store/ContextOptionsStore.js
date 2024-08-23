@@ -139,6 +139,7 @@ class ContextOptionsStore {
   pluginStore;
   infoPanelStore;
   currentTariffStatusStore;
+  currentQuotaStore;
   userStore;
   clientLoadingStore;
 
@@ -160,6 +161,7 @@ class ContextOptionsStore {
     pluginStore,
     infoPanelStore,
     currentTariffStatusStore,
+    currentQuotaStore,
     userStore,
     clientLoadingStore,
   ) {
@@ -179,6 +181,7 @@ class ContextOptionsStore {
     this.pluginStore = pluginStore;
     this.infoPanelStore = infoPanelStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
+    this.currentQuotaStore = currentQuotaStore;
     this.userStore = userStore;
     this.clientLoadingStore = clientLoadingStore;
   }
@@ -188,7 +191,11 @@ class ContextOptionsStore {
   };
 
   onClickLinkFillForm = (item) => {
-    if (!item.startFilling && item.isPDFForm)
+    const isFormRoom =
+      this.selectedFolderStore?.roomType === RoomsType.FormRoom ||
+      this.selectedFolderStore?.parentRoomType === FolderType.FormRoom;
+
+    if (!item.startFilling && item.isPDFForm && !isFormRoom)
       return this.dialogsStore.setFillPDFDialogData(true, item);
 
     return this.gotoDocEditor(false, item);
@@ -552,16 +559,12 @@ class ContextOptionsStore {
     this.dialogsStore.setDownloadDialogVisible(true);
   };
 
-  onClickCreateRoom = (item) => {
-    this.filesActionsStore.setProcessCreatingRoomFromData(true);
-    const event = new Event(Events.ROOM_CREATE);
-    if (item && item.isFolder) {
-      event.title = item.title;
-    }
-    window.dispatchEvent(event);
-  };
-
   onDuplicate = (item) => {
+    if (this.currentQuotaStore.isWarningRoomsDialog) {
+      this.dialogsStore.setQuotaWarningDialogVisible(true);
+      return;
+    }
+
     this.filesActionsStore.duplicateAction(item);
   };
 
@@ -858,7 +861,7 @@ class ContextOptionsStore {
     const { isGracePeriod } = this.currentTariffStatusStore;
 
     if (isGracePeriod) {
-      this.dialogsStore.setInviteUsersWarningDialogVisible(true);
+      this.dialogsStore.setQuotaWarningDialogVisible(true);
     } else {
       this.dialogsStore.setInvitePanelOptions({
         visible: true,
@@ -879,15 +882,15 @@ class ContextOptionsStore {
   onClickArchive = (e) => {
     const data = (e.currentTarget && e.currentTarget.dataset) || e;
     const { action } = data;
-    const { isGracePeriod } = this.currentTariffStatusStore;
+    const { isWarningRoomsDialog } = this.currentQuotaStore;
     const {
       setArchiveDialogVisible,
       setRestoreRoomDialogVisible,
-      setInviteUsersWarningDialogVisible,
+      setQuotaWarningDialogVisible,
     } = this.dialogsStore;
 
-    if (action === "unarchive" && isGracePeriod) {
-      setInviteUsersWarningDialogVisible(true);
+    if (action === "unarchive" && isWarningRoomsDialog) {
+      setQuotaWarningDialogVisible(true);
       return;
     }
 
@@ -1101,7 +1104,7 @@ class ContextOptionsStore {
   onRestoreAllArchiveAction = () => {
     const { activeFiles, activeFolders } = this.filesStore;
     const {
-      setInviteUsersWarningDialogVisible,
+      setQuotaWarningDialogVisible,
       setRestoreAllArchive,
       setRestoreRoomDialogVisible,
     } = this.dialogsStore;
@@ -1110,8 +1113,8 @@ class ContextOptionsStore {
 
     if (isExistActiveItems) return;
 
-    if (this.currentTariffStatusStore.isGracePeriod) {
-      setInviteUsersWarningDialogVisible(true);
+    if (this.currentQuotaStore.isWarningRoomsDialog) {
+      setQuotaWarningDialogVisible(true);
       return;
     }
 
@@ -1220,6 +1223,8 @@ class ContextOptionsStore {
       );
     }
 
+    const { isPublicRoom } = this.publicRoomStore;
+
     const { contextOptions, isEditing } = item;
 
     const isRootThirdPartyFolder =
@@ -1250,71 +1255,10 @@ class ContextOptionsStore {
       !contextOptions.includes("finalize-version") &&
       contextOptions.includes("show-version-history");
 
-    const versionActions = isDesktop()
-      ? onlyShowVersionHistory
-        ? [
-            {
-              id: "option_show-version-history",
-              key: "show-version-history",
-              label: t("ShowVersionHistory"),
-              icon: HistoryReactSvgUrl,
-              onClick: () =>
-                this.showVersionHistory(
-                  item.id,
-                  item.security,
-                  item?.requestToken,
-                ),
-              disabled: false,
-            },
-          ]
-        : [
-            {
-              id: "option_version",
-              key: "version",
-              label: t("VersionHistory"),
-              icon: HistoryFinalizedReactSvgUrl,
-              items: [
-                {
-                  id: "option_finalize-version",
-                  key: "finalize-version",
-                  label: t("FinalizeVersion"),
-                  icon: HistoryFinalizedReactSvgUrl,
-                  onClick: () =>
-                    isEditing
-                      ? this.onShowEditingToast(t)
-                      : this.finalizeVersion(item.id, item.security),
-                  disabled: false,
-                },
-                {
-                  id: "option_version-history",
-                  key: "show-version-history",
-                  label: t("ShowVersionHistory"),
-                  icon: HistoryReactSvgUrl,
-                  onClick: () =>
-                    this.showVersionHistory(
-                      item.id,
-                      item.security,
-                      item?.requestToken,
-                    ),
-                  disabled: false,
-                },
-              ],
-            },
-          ]
-      : [
+    const versionActions = onlyShowVersionHistory
+      ? [
           {
-            id: "option_finalize-version",
-            key: "finalize-version",
-            label: t("FinalizeVersion"),
-            icon: HistoryFinalizedReactSvgUrl,
-            onClick: () =>
-              isEditing
-                ? this.onShowEditingToast(t)
-                : this.finalizeVersion(item.id),
-            disabled: false,
-          },
-          {
-            id: "option_version-history",
+            id: "option_show-version-history",
             key: "show-version-history",
             label: t("ShowVersionHistory"),
             icon: HistoryReactSvgUrl,
@@ -1326,8 +1270,43 @@ class ContextOptionsStore {
               ),
             disabled: false,
           },
+        ]
+      : [
+          {
+            id: "option_version",
+            key: "version",
+            label: t("VersionHistory"),
+            icon: HistoryFinalizedReactSvgUrl,
+            items: [
+              {
+                id: "option_finalize-version",
+                key: "finalize-version",
+                label: t("FinalizeVersion"),
+                icon: HistoryFinalizedReactSvgUrl,
+                onClick: () =>
+                  isEditing
+                    ? this.onShowEditingToast(t)
+                    : this.finalizeVersion(item.id, item.security),
+                disabled: false,
+              },
+              {
+                id: "option_version-history",
+                key: "show-version-history",
+                label: t("ShowVersionHistory"),
+                icon: HistoryReactSvgUrl,
+                onClick: () =>
+                  this.showVersionHistory(
+                    item.id,
+                    item.security,
+                    item?.requestToken,
+                  ),
+                disabled: false,
+              },
+            ],
+          },
         ];
-    const moveActions = isDesktop()
+
+    const moveActions = !isInfoPanel
       ? [
           {
             id: "option_move-or-copy",
@@ -1412,9 +1391,11 @@ class ContextOptionsStore {
 
     const isArchive = item.rootFolderType === FolderType.Archive;
 
-    const hasShareLinkRights = item.shared
+    const hasShareLinkRights = isPublicRoom
       ? item.security?.Read
-      : item.security?.EditAccess;
+      : item.shared
+        ? item.security.CopySharedLink
+        : item.security?.EditAccess;
 
     const optionsModel = [
       {
@@ -1549,7 +1530,7 @@ class ContextOptionsStore {
           if (primaryLink) {
             copyShareLink(primaryLink.sharedTo.shareLink);
             item.shared
-              ? toastr.success(t("Files:LinkSuccessfullyCopied"))
+              ? toastr.success(t("Common:LinkSuccessfullyCopied"))
               : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
             setShareChanged(true);
           }
@@ -1587,7 +1568,7 @@ class ContextOptionsStore {
         label: t("Common:Info"),
         icon: InfoOutlineReactSvgUrl,
         onClick: () => this.onShowInfoPanel(item),
-        disabled: this.publicRoomStore.isPublicRoom,
+        disabled: isPublicRoom,
       },
       ...pinOptions,
       ...muteOptions,
@@ -1685,7 +1666,7 @@ class ContextOptionsStore {
         key: "create-room",
         label: t("Files:CreateRoom"),
         icon: CatalogRoomsReactSvgUrl,
-        onClick: () => this.onClickCreateRoom(item),
+        onClick: () => this.onCreateRoom(item, true),
         disabled: !item.security?.CreateRoomFrom,
       },
       {
@@ -1765,8 +1746,7 @@ class ContextOptionsStore {
         label: t("LeaveTheRoom"),
         icon: LeaveRoomSvgUrl,
         onClick: this.onLeaveRoom,
-        disabled:
-          isArchive || !item.inRoom || this.publicRoomStore.isPublicRoom,
+        disabled: isArchive || !item.inRoom || isPublicRoom,
       },
       {
         id: "option_unarchive-room",
@@ -1808,7 +1788,7 @@ class ContextOptionsStore {
     const pluginItems = this.onLoadPlugins(item);
 
     if (pluginItems.length > 0) {
-      if (!isDesktop() || pluginItems.length === 1) {
+      if (pluginItems.length === 1) {
         pluginItems.forEach((plugin) => {
           options.splice(1, 0, {
             id: `option_${plugin.key}`,
@@ -1999,7 +1979,7 @@ class ContextOptionsStore {
         key: "create-room",
         label: t("Files:CreateRoom"),
         icon: CatalogRoomsReactSvgUrl,
-        onClick: this.onClickCreateRoom,
+        onClick: () => this.onCreateRoom(null, true),
         disabled: !selection.security?.CreateRoomFrom,
       },
       {
@@ -2096,13 +2076,13 @@ class ContextOptionsStore {
   };
 
   onInvite = (e) => {
-    const { setInviteUsersWarningDialogVisible, setInvitePanelOptions } =
+    const { setQuotaWarningDialogVisible, setInvitePanelOptions } =
       this.dialogsStore;
 
     const type = e.item["data-type"];
 
-    if (this.currentTariffStatusStore.isGracePeriod) {
-      setInviteUsersWarningDialogVisible(true);
+    if (this.currentQuotaStore.showWarningDialog(type)) {
+      setQuotaWarningDialogVisible(true);
       return;
     }
 
@@ -2127,13 +2107,22 @@ class ContextOptionsStore {
     window.dispatchEvent(event);
   };
 
-  onCreateRoom = () => {
-    if (this.currentTariffStatusStore.isGracePeriod) {
-      this.dialogsStore.setInviteUsersWarningDialogVisible(true);
+  onCreateRoom = (item, fromItem) => {
+    if (this.currentQuotaStore.isWarningRoomsDialog) {
+      this.dialogsStore.setQuotaWarningDialogVisible(true);
       return;
     }
 
+    if (fromItem) {
+      this.filesActionsStore.setProcessCreatingRoomFromData(true);
+    }
+
     const event = new Event(Events.ROOM_CREATE);
+
+    if (item && item.isFolder) {
+      event.title = item.title;
+    }
+
     window.dispatchEvent(event);
   };
 

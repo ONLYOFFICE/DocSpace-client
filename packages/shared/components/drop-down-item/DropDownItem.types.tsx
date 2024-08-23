@@ -75,4 +75,6 @@ export interface DropDownItemProps {
   isBeta?: boolean;
   additionalElement?: React.ReactNode;
   setOpen?: (open: boolean) => void;
+  height?: number;
+  heightTablet?: number;
 }

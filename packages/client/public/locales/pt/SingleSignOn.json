@@ -6,7 +6,6 @@
   "AttributeMatchingTooltip": "A correspondência dos atributos do Início de Sessão Único às entradas da secção \"Contas”.",
   "Binding": "Vinculativo:",
   "CertificateExist": "Já existe um certificado com o mesmo tipo de acção",
-  "ConfirmationText": "Todos os dados que introduziu serão perdidos. Tem a certeza que quer proceder?",
   "CustomEntryButton": "Legenda dos botões personalizados para iniciar sessão",
   "CustomEntryTooltip": "A legenda do botão utilizado para aceder ao espaço com o serviço de Início de Sessão Único",
   "DownloadMetadataXML": "Transferir a metadata do SP XML",

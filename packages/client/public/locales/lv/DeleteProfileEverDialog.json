@@ -3,6 +3,8 @@
   "CannotReassignFiles": "Ja vienlaikus izdzēšat vairākus lietotājus, jūs nevarat atkārtoti piešķirt viņu failus citiem lietotājiem.",
   "DeleteGroupUsersSuccessMessage": "Lietotāji ir veiksmīgi izdzēsti.",
   "DeleteMyDocumentsUser": "Visi šī lietotāja personiskie faili un mapes sadaļā Mani dokumenti tiks neatgriezeniski izdzēsti.",
+  "DeletePersonalData": "Personas dati, visi personas faili un mapes atlasīto lietotāju sadaļās Dokumenti un Atkritne * tiks neatgriezeniski izdzēsti. Atlasīto lietotāju faili un mapes, kas tiek glabātas kopējās sadaļās*, piemēram, telpās, paliks {{productName}}.",
+  "DeletePersonalDataApplicable": "*Attiecas uz atlasītajiem lietotājiem, kuriem ir šādi faili un mapes.",
   "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Šī lietotāja izveidotās telpas un šajās telpās glabātie dokumenti tiks automātiski piešķirti administratoram, kurš izdzēsīs: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Manuāli atkārtoti piešķiriet datus, lai atkārtotai piešķiršanai izvēlētos citu mērķa lietotāju.",
   "DeleteUser": "Dzēst lietotāju",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> tiks izdzēsts. Šo darbību nevar atsaukt.",

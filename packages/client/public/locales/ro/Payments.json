@@ -25,7 +25,6 @@
   "Pay": "Plată",
   "Payer": "Plătitor",
   "PayerDescription": "Acest utilizator are acces la detalii de plată şi este singurul utilizator care poate seta cota şi efectua plăţi. Proprietarul {{productName}}, precum şi mesagerul plătitor, pot reatribui rolul de manager plătitor folosind portalul de client Stripe.",
-  "PaymentOverdue": "Imposibil de adăugat utilizatori noi.",
   "PriceCalculation": "Calculaţi preţul",
   "RenewSubscription": "Reînnoiți abonamentul {{planName}}",
   "RoomManagerDescription": "Administrarea şi arhivarea sălii, invitaţia şi gestionarea utilizatorilor. Mai mulţi administratori pot fi desemnaţi pentru o sală.",
@@ -35,7 +34,6 @@
   "TotalPricePerMonth": "<1>{{currencySymbol}}</1><2>{{price}}</2><3>/lună</3>",
   "UpgradeNow": "Upgrade acum",
   "UpgradePlan": "Actualizare abonament",
-  "UpgradePlanInfo": "Dacă adăugaţi noi utilizatori, va depăşi numărul maxim permis de vizitatori într-o sală conform planului tarifar al abonamentului dvs.",
   "UserNotFound": "Utilizatorul <1>{{email}}</1> nu a fost găsit.",
   "UserNotFoundMatchingEmail": "Nu s-a găsit utilizatorul cu un e-mail Stripe potrivit.",
   "YourPrice": "Preţul dvs."

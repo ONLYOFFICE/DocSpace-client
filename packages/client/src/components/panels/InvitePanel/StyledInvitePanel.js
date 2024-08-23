@@ -56,7 +56,6 @@ const StyledInvitePanel = styled.div`
     height: auto;
     width: auto;
     background: ${(props) => props.theme.infoPanel.blurColor};
-    backdrop-filter: blur(3px);
     z-index: 309;
     position: fixed;
     inset: 0;
@@ -112,6 +111,10 @@ const StyledInviteUserBody = styled.div`
   display: flex;
   flex-direction: column;
   overflow: auto;
+
+  .about-label {
+    color: ${(props) => props.theme.filesPanels.invite.textColor};
+  }
 `;
 
 const StyledHeading = styled(Heading)`
@@ -178,7 +181,7 @@ const StyledRow = styled.div`
   }
 
   .combo-button-label {
-    color: ${(props) => props.theme.text.disableColor};
+    color: ${(props) => props.theme.accessRightSelect.descriptionColor};
   }
   .combo-buttons_expander-icon path {
     fill: ${(props) => props.theme.text.disableColor};
@@ -201,7 +204,7 @@ const StyledInviteInput = styled.div`
   }
 
   display: flex;
-  border: 1px solid rgb(208, 213, 218);
+  border: ${(props) => props.theme.filesPanels.invite.border};
   border-radius: 3px;
 
   .copy-link-icon {
@@ -329,7 +332,7 @@ const StyledDropDown = styled(DropDown)`
       gap: 4px;
 
       p {
-        color: #4781d1;
+        color: ${(props) => props.theme.filesPanels.invite.addButtonColor};
       }
 
       svg {
@@ -337,7 +340,7 @@ const StyledDropDown = styled(DropDown)`
           theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"};
 
         path {
-          fill: #4781d1;
+          fill: ${(props) => props.theme.filesPanels.invite.addButtonColor};
         }
       }
     }

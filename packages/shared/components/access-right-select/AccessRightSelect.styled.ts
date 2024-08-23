@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { Base } from "../../themes";
 import { mobile } from "../../utils";
@@ -35,6 +35,25 @@ const StyledWrapper = styled(ComboBox)`
   .combo-button {
     padding-inline: 8px;
   }
+
+  ${({ type, theme }) =>
+    type === "onlyIcon" &&
+    css`
+      .combo-button {
+        padding-right: 4px;
+      }
+
+      .combo-button_selected-icon-container {
+        margin-right: 0px;
+      }
+
+      .combo-buttons_arrow-icon,
+      .combo-button_selected-icon-container {
+        svg path {
+          fill: ${theme.iconButton.color};
+        }
+      }
+    `}
 
   @media ${mobile} {
     .backdrop-active {
@@ -77,8 +96,16 @@ const StyledItemDescription = styled.div`
 
 StyledItemDescription.defaultProps = { theme: Base };
 
-const StyledItemIcon = styled.img`
+const StyledItemIcon = styled.img<{ isShortenIcon?: boolean }>`
   margin-inline-end: 8px;
+
+  ${({ isShortenIcon }) =>
+    isShortenIcon &&
+    css`
+      padding-top: 2px;
+      width: 12px;
+      height: 12px;
+    `}
 `;
 
 const StyledItemContent = styled.div`

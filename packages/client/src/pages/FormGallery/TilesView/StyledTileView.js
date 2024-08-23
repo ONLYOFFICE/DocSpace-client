@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 import TileContent from "./sub-components/TileContent";
 import { ContextMenu } from "@docspace/shared/components/context-menu";
 
@@ -51,14 +51,17 @@ const StyledTile = styled.div`
   width: 100%;
   border: ${(props) => props.theme.filesSection.tilesView.tile.border};
   border-radius: 6px;
-  ${(props) => props.showHotkeyBorder && "border-color: #2DA7DB"};
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  ${(props) =>
+    props.showHotkeyBorder && `border-color: ${globalColors.lightSecondMain}`};
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   ${(props) => props.isSelected && checkedStyle}
 
   &:before,
   &:after {
-    ${(props) => props.showHotkeyBorder && "border-color: #2DA7DB"};
+    ${(props) =>
+      props.showHotkeyBorder &&
+      `border-color: ${globalColors.lightSecondMain}`};
   }
 
   &:before,

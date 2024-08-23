@@ -1,1 +1,24 @@
-{}
+{
+  "CollaboratorEmptyTitle": "Huone on tyhjä. ",
+  "CreateNewFileDescription": "Aloita huoneessa työskentely luomalla tiedostoja tai kansioita.",
+  "CreateNewFileTitle": "Luo uusi tiedosto",
+  "CustomRoomEmptyTitle": "Tervetuloa Custom-huoneeseen",
+  "EmptyDescription": "Aloita nopeilla toimilla:",
+  "FormFolderDefaultDescription": "Pudota PDF-lomakkeet tähän tai lataa {{productName}}:sta tai laitteelta.",
+  "FormFolderDefaultTitle": "Täällä ei ole vielä lomakkeita",
+  "FormFolderDefaultUserDescription": "Pääkäyttäjien lataamat lomakkeet ilmestyvät tänne.",
+  "FormFolderDefaultUserTitle": "Tässä kansiossa ei ole vielä lomakkeita",
+  "FormRoomEmptyTitle": "Tervetuloa Lomakkeen täyttöhuoneeseen",
+  "InviteUsersOptionDescription": "Lisää portaalin jäseniä huoneeseen yhteistä muokkausta varten",
+  "InviteUsersOptionTitle": "Kutsutaan osallistujia",
+  "ShareOptionDescription": "Kopioi julkinen pääsylinkki tai kutsu muita käyttäjiä huoneeseen aloittaaksesi lomakkeen täyttöprosessi.",
+  "ShareOptionTitle": "Jaa huone",
+  "UploadDeviceOptionDescription": "Lataa minkä tahansa tyyppisiä tiedostoja henkilökohtaisesta laitteestasi",
+  "UploadDeviceOptionTitle": "Lataa laitteestasi",
+  "UploadDevicePDFFormOptionDescription": "Lataa huoneeseen valmis PDF-lomake laitteestasi.",
+  "UploadDevicePDFFormOptionTitle": "Lataa laitteesta",
+  "UploadFromPortalDescription": "Lataa minkä tahansa tyyppisiä tiedostoja Asiakirjoista tai Huoneista",
+  "UploadFromPortalTitle": "Lataa {{productName}}:sta",
+  "UploadPDFFormOptionDescription": "Valitse valmis PDF-lomake, joka on {{productName}}:ssa ja lataa se huoneeseen.",
+  "UserEmptyDescription": "Pääkäyttäjien lataamat tiedostot ja kansiot ilmestyvät tänne."
+}

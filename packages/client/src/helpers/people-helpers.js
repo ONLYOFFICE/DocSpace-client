@@ -27,7 +27,8 @@
 import React from "react";
 import { Trans } from "react-i18next";
 import MailReactSvgUrl from "PUBLIC_DIR/images/mail.react.svg?url";
-import { find, cloneDeep } from "lodash";
+import cloneDeep from "lodash/cloneDeep";
+import find from "lodash/find";
 import {
   EmployeeActivationStatus,
   EmployeeStatus,

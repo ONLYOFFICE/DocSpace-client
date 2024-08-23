@@ -54,7 +54,7 @@ import {
   ConflictResolveDialog,
   ConvertDialog,
   CreateRoomDialog,
-  InviteUsersWarningDialog,
+  InviteQuotaWarningDialog,
   CreateRoomConfirmDialog,
   ChangeUserTypeDialog,
   SubmitToFormGallery,
@@ -82,6 +82,7 @@ import { SharePDFFormDialog } from "../dialogs/SharePDFFormDialog";
 import { SessionsPanel } from "../panels/UserSessionsPanel";
 import { FillPDFDialog } from "../dialogs/FillPDFDialog";
 import { ShareCollectSelector } from "../ShareCollectSelector";
+import { saveToLocalStorage } from "SRC_DIR/pages/PortalSettings/utils";
 
 const Panels = (props) => {
   const {
@@ -115,7 +116,7 @@ const Panels = (props) => {
     confirmDialogIsLoading,
     restoreAllPanelVisible,
     archiveDialogVisible,
-    inviteUsersWarningDialogVisible,
+    inviteQuotaWarningDialogVisible,
     preparationPortalDialogVisible,
     changeUserTypeDialogVisible,
     restoreRoomDialogVisible,
@@ -139,6 +140,10 @@ const Panels = (props) => {
     selectFileFormRoomOpenRoot,
     fillPDFDialogData,
     shareCollectSelector,
+
+    setQuotaWarningDialogVisible,
+    resetQuotaItem,
+    isShowWarningDialog,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -193,6 +198,17 @@ const Panels = (props) => {
       window.removeEventListener(Events.Share_PDF_Form, handleSharePDFForm);
     };
   }, [handleSharePDFForm]);
+
+  useEffect(() => {
+    if (isShowWarningDialog) {
+      setQuotaWarningDialogVisible(true);
+
+      resetQuotaItem();
+    }
+    return () => {
+      resetQuotaItem();
+    };
+  }, [isShowWarningDialog]);
 
   return [
     settingsPluginDialogVisible && (
@@ -277,8 +293,8 @@ const Panels = (props) => {
     ),
     archiveDialogVisible && <ArchiveDialog key="archive-dialog" />,
     restoreRoomDialogVisible && <RestoreRoomDialog key="archive-dialog" />,
-    inviteUsersWarningDialogVisible && (
-      <InviteUsersWarningDialog key="invite-users-warning-dialog" />
+    inviteQuotaWarningDialogVisible && (
+      <InviteQuotaWarningDialog key="invite-users-warning-dialog" />
     ),
     preparationPortalDialogVisible && (
       <PreparationPortalDialog key="preparation-portal-dialog" />
@@ -334,7 +350,7 @@ export default inject(
     backup,
     createEditRoomStore,
     pluginStore,
-    filesStore,
+    currentQuotaStore,
     filesActionsStore,
   }) => {
     const {
@@ -367,7 +383,7 @@ export default inject(
       selectFileFormRoomFilterParam,
       setSelectFileFormRoomDialogVisible,
       invitePanelOptions,
-      inviteUsersWarningDialogVisible,
+      inviteQuotaWarningDialogVisible,
       changeUserTypeDialogVisible,
       changeQuotaDialogVisible,
       submitToGalleryDialogVisible,
@@ -385,6 +401,12 @@ export default inject(
       selectFileFormRoomOpenRoot,
       fillPDFDialogData,
       shareCollectSelector,
+
+      setQuotaWarningDialogVisible,
+      setIsNewRoomByCurrentUser,
+      setIsNewUserByCurrentUser,
+      isNewUserByCurrentUser,
+      isNewRoomByCurrentUser,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -394,12 +416,30 @@ export default inject(
     const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
     const { hotkeyPanelVisible } = settingsStore;
     const { confirmDialogIsLoading } = createEditRoomStore;
+    const { isRoomsTariffAlmostLimit, isUserTariffAlmostLimit } =
+      currentQuotaStore;
 
     const {
       settingsPluginDialogVisible,
       deletePluginDialogVisible,
       pluginDialogVisible,
     } = pluginStore;
+
+    const isAccounts = window.location.href.indexOf("accounts/people") !== -1;
+    const resetQuotaItem = () => {
+      if (isNewUserByCurrentUser) setIsNewUserByCurrentUser(false);
+      if (isNewRoomByCurrentUser) setIsNewRoomByCurrentUser(false);
+    };
+
+    const closeItems = JSON.parse(localStorage.getItem("warning-dialog")) || [];
+
+    const isShowWarningDialog = isAccounts
+      ? isUserTariffAlmostLimit &&
+        !closeItems.includes("user-quota") &&
+        isNewUserByCurrentUser
+      : isRoomsTariffAlmostLimit &&
+        !closeItems.includes("room-quota") &&
+        isNewRoomByCurrentUser;
 
     return {
       preparationPortalDialogVisible,
@@ -432,7 +472,7 @@ export default inject(
       restoreAllPanelVisible,
       invitePanelVisible: invitePanelOptions.visible,
       archiveDialogVisible,
-      inviteUsersWarningDialogVisible,
+      inviteQuotaWarningDialogVisible,
       confirmDialogIsLoading,
       changeUserTypeDialogVisible,
       restoreRoomDialogVisible,
@@ -456,6 +496,10 @@ export default inject(
       selectFileFormRoomOpenRoot,
       fillPDFDialogData,
       shareCollectSelector,
+
+      setQuotaWarningDialogVisible,
+      resetQuotaItem,
+      isShowWarningDialog,
     };
   },
 )(observer(Panels));

@@ -142,6 +142,7 @@ const CheckboxPure = ({
             title={title}
             truncate={truncate}
             className="checkbox-text"
+            lineHeight="16px"
           >
             {label}
           </Text>

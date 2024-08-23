@@ -46,8 +46,6 @@ class CurrentTariffStatusStore {
 
   language: string = "en";
 
-  isEnterprise: boolean = false;
-
   constructor() {
     makeAutoObservable(this);
   }
@@ -56,13 +54,17 @@ class CurrentTariffStatusStore {
     this.language = language;
   };
 
-  setIsEnterprise = (isEnterprise: boolean) => {
-    this.isEnterprise = isEnterprise;
-  };
-
   setIsLoaded = (isLoaded: boolean) => {
     this.isLoaded = isLoaded;
   };
+
+  get isEnterprise() {
+    return this.portalTariffStatus?.enterprise;
+  }
+
+  get isCommunity() {
+    return this.portalTariffStatus?.openSource;
+  }
 
   get isGracePeriod() {
     return this.portalTariffStatus?.state === TariffState.Delay;
@@ -164,19 +166,12 @@ class CurrentTariffStatusStore {
     return getDaysLeft(this.dueDate);
   }
 
-  setPortalTariffValue = async (res: TPortalTariff) => {
-    this.portalTariffStatus = res;
+  fetchPortalTariff = async (refresh?: boolean) => {
+    return api.portal.getPortalTariff(refresh).then((res) => {
+      if (!res) return;
 
-    this.setIsLoaded(true);
-  };
-
-  setPortalTariff = async () => {
-    const res = await api.portal.getPortalTariff();
-
-    if (!res) return;
-
-    runInAction(() => {
       this.portalTariffStatus = res;
+      this.setIsLoaded(true);
     });
   };
 }

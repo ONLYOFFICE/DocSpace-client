@@ -1,1 +1,24 @@
-{}
+{
+  "CollaboratorEmptyTitle": "Սենյակը դատարկ է։",
+  "CreateNewFileDescription": "Սկսեք աշխատել սենյակում՝ ստեղծելով ֆայլեր կամ թղթապանակներ",
+  "CreateNewFileTitle": "Ստեղծել նոր ֆայլ",
+  "CustomRoomEmptyTitle": "Բարի գալուստ Հարմարեցված սենյակ",
+  "EmptyDescription": "Սկսել արագ գործողություններից՝",
+  "FormFolderDefaultDescription": "Թողեք PDF ձևերը այստեղ կամ վերբեռնեք {{productName}}-ից կամ սարքից:",
+  "FormFolderDefaultTitle": "Այստեղ դեռ ձևեր չկան",
+  "FormFolderDefaultUserDescription": "Ադմինիստրատորների կողմից վերբեռնված ձևերը կհայտնվեն այստեղ:",
+  "FormFolderDefaultUserTitle": "Այս թղթապանակում դեռ ձևեր չկան",
+  "FormRoomEmptyTitle": "Բարի գալուստ Ձևաթղթերի լրացման սենյակ",
+  "InviteUsersOptionDescription": "Ավելացնել պորտալի անդամներ սենյակում համատեղ խմբագրման համար",
+  "InviteUsersOptionTitle": "Հրավիրելով Ներկաներին",
+  "ShareOptionDescription": "Պատճենեք հանրային մուտքի հղումը կամ հրավիրեք այլ օգտվողների սենյակ՝ ձևաթղթերի լրացման գործընթացը սկսելու համար:",
+  "ShareOptionTitle": "Կիսվել սենյակով",
+  "UploadDeviceOptionDescription": "Վերբեռնել ցանկացած տեսակի ֆայլ ձեր անձնական սարքից",
+  "UploadDeviceOptionTitle": "Վերբեռնեք ձեր Սարքից",
+  "UploadDevicePDFFormOptionDescription": "Վերբեռնեք պատրաստի PDF ձևը սենյակ ձեր սարքից:",
+  "UploadDevicePDFFormOptionTitle": "Վերբեռնել սարքից",
+  "UploadFromPortalDescription": "Վերբեռնել ցանկացած տեսակի ֆայլ փաստաթղթերից կամ սենյակներից",
+  "UploadFromPortalTitle": "Վերբեռնում {{productName}}-ից",
+  "UploadPDFFormOptionDescription": "Ընտրել պատրաստ PDF ձևը, որը հասանելի է {{productName}}-ում և վերբեռնեք այն սենյակ:",
+  "UserEmptyDescription": "Ադմինիստրատորների կողմից վերբեռնված ֆայլերը և թղթապանակները կհայտնվեն այստեղ:"
+}

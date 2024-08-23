@@ -81,6 +81,7 @@ const StyledDropdown = styled.div<{
     props.zIndex ? props.zIndex : props.theme.dropDown.zIndex};
   display: ${(props) =>
     props.open ? (props.columnCount ? "block" : "table") : "none"};
+  table-layout: fixed;
 
   ${(props) =>
     !props.isDropdownReady &&

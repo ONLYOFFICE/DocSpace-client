@@ -152,6 +152,24 @@ class GroupsStore {
     return false;
   }
 
+  get insideGroupIsFiltered() {
+    return (
+      this.insideGroupFilter.activationStatus ||
+      this.insideGroupFilter.employeeStatus ||
+      this.insideGroupFilter.payments ||
+      this.insideGroupFilter.search ||
+      this.insideGroupFilter.role ||
+      this.insideGroupFilter.accountLoginType
+    );
+  }
+
+  get isCurrentGroupEmpty() {
+    return (
+      !this.insideGroupIsFiltered &&
+      this.peopleStore.usersStore.peopleList.length === 0
+    );
+  }
+
   // Inside Group Filter
 
   setInsideGroupFilter = (filter) => {
@@ -282,6 +300,7 @@ class GroupsStore {
     filter,
     updateFilter = false,
     withFilterLocalStorage = false,
+    updateCurrentGroup = false,
   ) => {
     this.setInsideGroupLoading(true);
 
@@ -309,7 +328,7 @@ class GroupsStore {
 
     requests.push(api.people.getUserList(filterData));
 
-    if (groupId !== this.currentGroup?.id) {
+    if (updateCurrentGroup || groupId !== this.currentGroup?.id) {
       requests.push(groupsApi.getGroupById(groupId));
     }
 
@@ -327,6 +346,18 @@ class GroupsStore {
     this.setInsideGroupLoading(false);
 
     return Promise.resolve(filteredMembersRes.items);
+  };
+
+  refreshInsideGroup = async () => {
+    if (!this.currentGroup) return;
+
+    await this.fetchGroup(
+      this.currentGroup.id,
+      this.insideGroupFilter,
+      true,
+      false,
+      true,
+    );
   };
 
   get hasMoreInsideGroupUsers() {
@@ -432,6 +463,10 @@ class GroupsStore {
   };
 
   onDeleteGroup = async (t, groupId) => {
+    const { getIsInsideGroup, setInfoPanelSelectedGroup } = this.infoPanelStore;
+    const isDeletingCurrentGroup =
+      getIsInsideGroup() && this.currentGroup?.id === groupId;
+
     this.setIsLoading(true);
 
     if (!groupId) {
@@ -447,6 +482,12 @@ class GroupsStore {
       this.infoPanelStore.setInfoPanelSelection(null);
       this.setIsLoading(false);
       this.peopleStore.dialogStore.setDeleteGroupDialogVisible(false);
+
+      if (isDeletingCurrentGroup) {
+        setInfoPanelSelectedGroup(null);
+        this.setBufferSelection(null);
+        window.DocSpace.navigate(`accounts/groups`);
+      }
     } catch (err) {
       toastr.error(err.message);
       console.error(err);
@@ -572,7 +613,12 @@ class GroupsStore {
           label: t("Common:Delete"),
           title: t("Common:Delete"),
           icon: TrashReactSvgUrl,
-          onClick: () => this.onDeleteClick(item.name),
+          onClick: () => {
+            if (forInsideGroup) {
+              this.setBufferSelection(item);
+            }
+            this.onDeleteClick(item.name);
+          },
         },
     ];
   };
@@ -622,7 +668,7 @@ class GroupsStore {
   updateGroup = async (
     groupId: string,
     groupName: string,
-    groupManagerId: string,
+    groupManagerId: string | undefined,
     membersToAdd: string[],
     membersToRemove: string[],
   ) => {
@@ -647,16 +693,18 @@ class GroupsStore {
       }
 
       if (getIsInsideGroup() && this.currentGroup?.id === groupId) {
+        const filter = this.insideGroupFilter.clone();
+
         this.setCurrentGroup(res);
-        const members = await api.people.getUserList(
-          this.insideGroupFilter.clone(),
-        );
+        const members = await api.people.getUserList(filter);
+        filter.total = members.total;
+        this.setInsideGroupFilter(filter);
         this.peopleStore.usersStore.setUsers(members.items);
         this.setInsideGroupTempTitle(res.name);
       }
 
       if (infoPanelSelection?.id === res.id) {
-        setInfoPanelSelection({ ...infoPanelSelection, ...res });
+        setInfoPanelSelection(res);
         setInfoPanelSelectedGroup(res);
       }
     } catch (err: any) {

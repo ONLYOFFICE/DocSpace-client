@@ -25,20 +25,33 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Loader } from "@docspace/shared/components/loader";
 import Section from "@docspace/shared/components/section";
 import { getCookie, deleteCookie } from "@docspace/shared/utils/cookie";
+import OperationContainer from "@docspace/shared/components/operation-container";
 import { loginWithConfirmKey } from "@docspace/shared/api/user";
 import { useSearchParams, useLocation } from "react-router-dom";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { toastr } from "@docspace/shared/components/toast";
 import { frameCallEvent } from "@docspace/shared/utils/common";
 import SectionWrapper from "SRC_DIR/components/Section";
+import ConfirmRoute from "SRC_DIR/helpers/confirmRoute";
+import { AuthenticatedAction } from "SRC_DIR/helpers/enums";
+
 const Auth = (props) => {
   //console.log("Auth render");
   const { linkData } = props;
   let [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
+  const { t } = useTranslation(["Common"]);
+
+  const referenceUrl = searchParams.get("referenceUrl");
+  const isFileHandler =
+    referenceUrl && referenceUrl.indexOf("filehandler.ashx") !== -1;
+  const isExternalDownloading =
+    referenceUrl && referenceUrl.indexOf("action=download") !== -1;
+
   useEffect(() => {
     loginWithConfirmKey({
       ConfirmData: {
@@ -50,8 +63,6 @@ const Auth = (props) => {
         //console.log("Login with confirm key success", res);
         frameCallEvent({ event: "onAuthSuccess" });
 
-        const url = searchParams.get("referenceUrl");
-
         const redirectUrl = getCookie("x-redirect-authorization-uri");
 
         deleteCookie("x-redirect-authorization-uri");
@@ -61,20 +72,24 @@ const Auth = (props) => {
           return;
         }
 
-        if (url && url.includes("oauth2")) {
+        if (referenceUrl && referenceUrl.includes("oauth2")) {
           const newUrl = location.search.split("referenceUrl=")[1];
 
           window.location.replace(newUrl);
           return;
         }
 
-        if (url) {
+        if (referenceUrl) {
           try {
-            new URL(url);
-            return window.location.replace(url);
+            new URL(referenceUrl);
+            if (isFileHandler && isExternalDownloading) {
+              return;
+            } else {
+              return window.location.replace(referenceUrl);
+            }
           } catch {
             return window.location.replace(
-              combineUrl(window.location.origin, url),
+              combineUrl(window.location.origin, referenceUrl),
             );
           }
         }
@@ -88,7 +103,15 @@ const Auth = (props) => {
       });
   });
 
-  return <Loader className="pageLoader" type="rombs" size="40px" />;
+  return isFileHandler && isExternalDownloading ? (
+    <OperationContainer
+      url={referenceUrl}
+      title={t("DownloadOperationTitle")}
+      description={t("DownloadOperationDescription")}
+    />
+  ) : (
+    <Loader className="pageLoader" type="rombs" size="40px" />
+  );
 };
 
 const AuthPage = (props) => (
@@ -99,4 +122,10 @@ const AuthPage = (props) => (
   </SectionWrapper>
 );
 
-export default AuthPage;
+export const Component = () => {
+  return (
+    <ConfirmRoute doAuthenticated={AuthenticatedAction.Logout}>
+      <AuthPage />
+    </ConfirmRoute>
+  );
+};

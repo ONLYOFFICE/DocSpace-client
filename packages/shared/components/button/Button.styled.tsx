@@ -28,7 +28,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 import { NoUserSelect } from "../../utils";
-import { Base, TTheme } from "../../themes";
+import { Base, TTheme, globalColors } from "../../themes";
 import { ButtonProps, ButtonThemeProps } from "./Button.types";
 import { ButtonSize } from "./Button.enums";
 
@@ -211,7 +211,7 @@ const StyledButton = styled(ButtonWrapper).attrs((props: ButtonProps) => ({
   overflow: ${(props) => props.theme.button.overflow};
   text-overflow: ${(props) => props.theme.button.textOverflow};
   white-space: ${(props) => props.theme.button.whiteSpace};
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   ${(props) =>
     !props.isDisabled &&

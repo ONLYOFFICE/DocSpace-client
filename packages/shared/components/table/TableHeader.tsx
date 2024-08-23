@@ -38,14 +38,12 @@ import {
 import { TTableColumn, TableHeaderProps } from "./Table.types";
 import { TableSettings } from "./sub-components/TableSettings";
 import { TableHeaderCell } from "./sub-components/TableHeaderCell";
+import { checkingForUnfixedSize, getSubstring } from "./Table.utils";
 import {
   DEFAULT_MIN_COLUMN_SIZE,
-  MIN_SIZE_FIRST_COLUMN,
   SETTINGS_SIZE,
-  HANDLE_OFFSET,
-  checkingForUnfixedSize,
-  getSubstring,
-} from "./Table.utils";
+  MIN_SIZE_FIRST_COLUMN,
+} from "./Table.constants";
 import { isDesktop } from "../../utils";
 
 class TableHeaderComponent extends React.Component<
@@ -79,6 +77,7 @@ class TableHeaderComponent extends React.Component<
       columnInfoPanelStorageName,
       sortBy,
       sorted,
+      resetColumnsSize,
     } = this.props;
 
     if (columnStorageName === prevProps.columnStorageName) {
@@ -104,6 +103,13 @@ class TableHeaderComponent extends React.Component<
           return this.resetColumns();
         }
       }
+    }
+
+    const storageSize =
+      !resetColumnsSize && localStorage.getItem(columnStorageName);
+
+    if (columns.length !== prevProps.columns.length && !storageSize) {
+      return this.resetColumns();
     }
 
     this.onResize();
@@ -224,6 +230,7 @@ class TableHeaderComponent extends React.Component<
     const maxSize = Math.max.apply(Math, clearSize);
 
     const defaultSize = columns[activeColumnIndex - 1].defaultSize;
+
     const indexOfMaxSize = clearSize.findLastIndex((s) => s === maxSize);
 
     const addedColumn = 1;
@@ -412,7 +419,7 @@ class TableHeaderComponent extends React.Component<
 
     if (!container) return;
 
-    const containerWidth = +container.clientWidth;
+    const containerWidth = container.getBoundingClientRect().width;
 
     const defaultWidth = tableContainer
       .map((column) => getSubstring(column))

@@ -17,7 +17,6 @@
   "LastSession": "Last session",
   "LightTheme": "Light theme",
   "LogoutActiveConnection": "Log out from active connection",
-  "LogoutAllActiveConnections": "Log out from all active connections",
   "LogoutFromAllSessions": "Log out from all sessions",
   "LogoutAllActiveSessionsDescription": "All active connections except this connection will be logged out, as it is currently in use.",
   "LogoutDescription": "Note. All active connections except this connection will be logged out, as it is currently in use.",

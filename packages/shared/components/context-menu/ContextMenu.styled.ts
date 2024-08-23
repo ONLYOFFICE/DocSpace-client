@@ -25,22 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base, TTheme } from "../../themes";
-import { tablet, mobile, getCorrectFourValuesStyle } from "../../utils";
-
-const styledTabletView = css<{ articleWidth: number }>`
-  position: fixed;
-  width: ${(props) => props.theme.newContextMenu.devices.tabletWidth};
-  max-width: ${(props) => props.theme.newContextMenu.devices.tabletWidth};
-  max-height: ${(props) => props.theme.newContextMenu.devices.maxHeight};
-  inset-inline-start: ${(props) =>
-    props.articleWidth
-      ? `${props.articleWidth}px`
-      : props.theme.newContextMenu.devices.left};
-  inset-inline-end: ${(props) => props.theme.newContextMenu.devices.right};
-  bottom: ${(props) => props.theme.newContextMenu.devices.bottom};
-  margin: ${(props) => props.theme.newContextMenu.devices.margin};
-`;
+import { Base, TTheme, globalColors } from "../../themes";
+import { mobile, getCorrectFourValuesStyle } from "../../utils";
 
 const styledMobileView = css`
   position: fixed;
@@ -97,14 +83,13 @@ const StyledContextMenu = styled.div<{
     box-shadow: ${(props) => props.theme.newContextMenu.boxShadow};
     -moz-box-shadow: ${(props) => props.theme.newContextMenu.boxShadow};
     -webkit-box-shadow: ${(props) => props.theme.newContextMenu.boxShadow};
-    padding: ${(props) => props.theme.newContextMenu.padding};
 
-    @media ${tablet} {
-      ${(props) => props.changeView && styledTabletView}
-    }
+    .scroll-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
 
-    @media ${mobile} {
-      ${(props) => props.changeView && styledMobileView}
+      padding-inline-end: 0 !important;
     }
   }
 
@@ -124,7 +109,7 @@ const StyledContextMenu = styled.div<{
     box-sizing: border-box;
     background: none;
     outline: 0 !important;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
     .icon-wrapper {
       display: flex;
@@ -205,7 +190,6 @@ const StyledContextMenu = styled.div<{
     box-shadow: ${(props) => props.theme.dropDown.boxShadow};
     -moz-box-shadow: ${(props) => props.theme.dropDown.boxShadow};
     -webkit-box-shadow: ${(props) => props.theme.dropDown.boxShadow};
-    padding: 4px 0px;
 
     white-space: nowrap;
     overflow: hidden;
@@ -226,13 +210,13 @@ const StyledContextMenu = styled.div<{
     position: relative;
     border: ${(props) => props.theme.dropDownItem.border};
     margin: ${(props) => props.theme.dropDownItem.margin};
-    padding: ${(props) => props.theme.dropDownItem.padding};
+    padding: 0 16px;
     font-family: ${(props) => props.theme.fontFamily};
     font-style: normal;
     background: none;
     user-select: none;
     outline: 0 !important;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
     font-weight: ${(props) => props.theme.dropDownItem.fontWeight};
     font-size: ${(props) => props.theme.dropDownItem.fontSize};
@@ -240,10 +224,6 @@ const StyledContextMenu = styled.div<{
     text-transform: none;
 
     -webkit-touch-callout: none;
-
-    @media ${tablet} {
-      padding: 0 16px;
-    }
 
     &:hover {
       background-color: ${(props) =>
@@ -275,7 +255,7 @@ const StyledContextMenu = styled.div<{
     cursor: default !important;
     margin: ${(props) => props.theme.menuItem.separator.margin};
     height: ${(props) => props.theme.menuItem.separator.height};
-    width: ${(props) => props.theme.menuItem.separator.width};
+
     &:hover {
       cursor: default !important;
     }
@@ -284,6 +264,14 @@ const StyledContextMenu = styled.div<{
   .p-contextmenu .p-menuitem {
     position: relative;
     margin: ${(props) => props.theme.dropDownItem.margin};
+
+    max-width: calc(-32px + 100vw);
+    width: fit-content;
+    min-width: inherit;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .p-contextmenu .scroll-body .p-menuitem {
@@ -361,10 +349,47 @@ const StyledContextMenu = styled.div<{
     opacity: 1;
     transition: opacity 250ms;
   }
+
+  .p-contextmenu {
+    @media ${mobile} {
+      ${(props) => props.changeView && styledMobileView}
+    }
+
+    @media not ${mobile} {
+      max-width: calc(100vw - 32px);
+    }
+  }
+
+  .p-contextmenu ul {
+    @media not ${mobile} {
+      max-width: calc(100vw - 32px);
+    }
+  }
 `;
 
 StyledContextMenu.defaultProps = {
   theme: Base,
 };
+
+export const StyledList = styled.ul<{
+  listHeight: number;
+  widthSubMenu: null | number;
+}>`
+  & > :first-child {
+    .scroll-body {
+      height: ${(props) => `${props.listHeight}px`};
+    }
+  }
+
+  & > :nth-child(1) {
+    ${(props) =>
+      props.widthSubMenu &&
+      css`
+        .p-menuitem {
+          max-width: ${`${props.widthSubMenu}px`};
+        }
+      `}
+  }
+`;
 
 export { StyledContextMenu };

@@ -542,7 +542,7 @@ class SelectionStore {
     }
 
     return this.dataFromSocket.reduce((indexes, data, index) => {
-      if (userIds.includes(data.id)) {
+      if (userIds.includes(data.userId)) {
         indexes.push(index);
       }
       return indexes;
@@ -555,10 +555,10 @@ class SelectionStore {
     const status = "offline";
 
     const currentSesstionIndex = this.sessionsData.findIndex(
-      ({ id }) => id === userId,
+      ({ userId }) => userId === userId,
     );
 
-    const index = newData.findIndex((data) => data.id === userId);
+    const index = newData.findIndex((data) => data.userId === userId);
 
     if (currentSesstionIndex !== -1) {
       this.sessionsData[currentSesstionIndex] = {
@@ -641,9 +641,9 @@ class SelectionStore {
 
   updateDataFromSocket = (data) => {
     const newArr = [...this.dataFromSocket];
-    const index = newArr.findIndex(({ id }) => id === data.id);
+    const index = newArr.findIndex(({ userId }) => userId === data.userId);
     const currentSesstionIndex = this.sessionsData.findIndex(
-      ({ id }) => id === data.id,
+      ({ userId }) => userId === data.userId,
     );
     const { sessions, status } = data;
 
@@ -686,7 +686,7 @@ class SelectionStore {
 
   get allSessions() {
     const dataFromSocketMap = new Map(
-      this.dataFromSocket.map((data) => [data.id, data]),
+      this.dataFromSocket.map((data) => [data.userId, data]),
     );
 
     const sessions = this.sessionsData.map((session) => {

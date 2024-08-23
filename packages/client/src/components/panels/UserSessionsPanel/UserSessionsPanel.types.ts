@@ -49,7 +49,7 @@ export interface LastSessionBlockProps {
 export interface AllSessionsBlockProps {
   t: TTranslation;
   isLoading?: boolean;
-  isDisabled: boolean;
+  isDisabled?: boolean;
   items?: IAllSessions;
   onClickLogoutAllExceptThis?: (
     t: TTranslation,

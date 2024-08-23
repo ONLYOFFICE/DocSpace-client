@@ -223,7 +223,7 @@ const ContextMenuButtonPure = ({
   };
 
   const iconButtonName = state.isOpen && iconOpenName ? iconOpenName : iconName;
-  console.log("displayType", displayType);
+
   return (
     <StyledOuter
       ref={ref}

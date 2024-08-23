@@ -95,7 +95,7 @@ const useSocketHelper = ({ socketUrl, user }: UseSocketHelperProps) => {
     });
 
     setSocketHelper(socketIOHelper);
-  }, [socketHelper, socketUrl]);
+  }, [socketHelper, socketUrl, user?.id, user?.loginEventId]);
 
   return { socketHelper };
 };

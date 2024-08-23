@@ -57,6 +57,7 @@ const GroupsTableView = ({
   groupsIsFiltered,
   groupsFilterTotal,
 
+  peopleAccountsGroupsColumnIsEnabled,
   managerAccountsGroupsColumnIsEnabled,
 }) => {
   const ref = useRef(null);
@@ -110,6 +111,9 @@ const GroupsTableView = ({
             managerAccountsGroupsColumnIsEnabled={
               managerAccountsGroupsColumnIsEnabled
             }
+            peopleAccountsGroupsColumnIsEnabled={
+              peopleAccountsGroupsColumnIsEnabled
+            }
           />
         ))}
       </TableBody>
@@ -155,7 +159,10 @@ export default inject(
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
-    const { managerAccountsGroupsColumnIsEnabled } = tableStore;
+    const {
+      managerAccountsGroupsColumnIsEnabled,
+      peopleAccountsGroupsColumnIsEnabled,
+    } = tableStore;
 
     return {
       groups,
@@ -177,6 +184,7 @@ export default inject(
       groupsIsFiltered,
       groupsFilterTotal,
 
+      peopleAccountsGroupsColumnIsEnabled,
       managerAccountsGroupsColumnIsEnabled,
     };
   },

@@ -1,11 +1,11 @@
 {
   "CodeSuccessfullyCopied": "挿入するコードが正常にクリップボードにコピーされました",
-  "ContentRestricted": " コンテンツのコピー、ファイルのダウンロード、印刷が制限されています。",
+  "ContentRestricted": "コンテンツのコピー、ファイルのダウンロード、印刷が制限されています。",
   "DisplaySettings": "表示設定",
   "EmbeddingBarAllowList": "<1>許可リスト</1>に埋め込み用のウェブサイトURLを追加してください。",
-  "EmbeddingBarDescription": " 埋め込みは、JavaScript SDKの設定で{{productName}}管理者が指定したURLに対してのみ機能します。",
+  "EmbeddingBarDescription": "埋め込みは、JavaScript SDKの設定で{{productName}}管理者が指定したURLに対してのみ機能します。",
   "Height": "高さ",
-  "Link": " リンク",
-  "LinkProtectedWithPassword": " リンクはパスワードで保護されています。",
+  "Link": "リンク",
+  "LinkProtectedWithPassword": "リンクはパスワードで保護されています。",
   "Width": "幅"
 }

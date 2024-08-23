@@ -159,6 +159,10 @@ class InfoPanelStore {
     this.fileView = infoHistory;
   };
 
+  /**
+   * @param {infoMembers | infoHistory | infoDetails} view
+   * @returns {void}
+   */
   setView = (view) => {
     this.roomsView = view;
     this.fileView = view === infoMembers ? infoDetails : view;

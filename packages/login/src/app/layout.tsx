@@ -37,6 +37,7 @@ import { Providers } from "@/providers";
 import { getColorTheme, getConfig, getSettings } from "@/utils/actions";
 
 import "../styles/globals.scss";
+import Scripts from "@/components/Scripts";
 
 export default async function RootLayout({
   children,
@@ -111,6 +112,11 @@ export default async function RootLayout({
       <head>
         <link rel="icon" type="image/x-icon" href="/logo.ashx?logotype=3" />
         <link rel="mask-icon" href="/logo.ashx?logotype=3" />
+        <link
+          rel="apple-touch-icon"
+          sizes="32x32"
+          href="/logo.ashx?logotype=3"
+        />
         <meta charSet="utf-8" />
         <meta
           name="viewport"
@@ -132,6 +138,7 @@ export default async function RootLayout({
             {children}
           </Providers>
         </StyledComponentsRegistry>
+        <Scripts />
       </body>
     </html>
   );

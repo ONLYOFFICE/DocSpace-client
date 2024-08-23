@@ -2,7 +2,7 @@
   "ConfirmEmailDescription": "Aktivasyon e-postasında verilen bağlantıyı kullanın. Etkinleştirme bağlantısını içeren bir e-posta almadınız mı?",
   "ConfirmEmailHeader": "{{productName}} özelliklerine erişmek için lütfen e-postanızı ({{ email }}) etkinleştirin.",
   "PersonalUserQuotaAdminsDescription": "Yeni dosya ve klasörler yüklemek ve oluşturmak için lütfen disk alanını boşaltın veya <1>Depolama yönetimi ayarlarında</1> kullanıcı başına kotayı yönetin.",
-  "PersonalUserQuotaDescription": "Yeni dosya ve klasörler yüklemek ve oluşturmak için lütfen disk alanını boşaltın veya depolama kotasını artırmak için yöneticiyle iletişime geçin.",
+  "PersonalUserQuotaDescription": "Yeni dosya ve klasörler yüklemek ve oluşturmak için lütfen disk alanını boşaltın veya depolama kotasını artırmak için {{productName}} yöneticiyle iletişime geçin.",
   "RequestActivation": "Tekrar aktivasyon iste",
   "RoomQuotaHeader": "Odalar aşılmak üzere: {{currentValue}} / {{maxValue}}",
   "StorageAndUserHeader": "Depolama ve yöneticiler/uzman kullanıcılar limitleri aşılmak üzere.",

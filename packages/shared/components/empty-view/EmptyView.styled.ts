@@ -13,7 +13,11 @@ export const EmptyViewWrapper = styled.div`
   flex-direction: column;
   gap: 18px;
 
-  padding-top: 31px;
+  padding-top: 61px;
+
+  @media ${mobile} {
+    padding-top: 40px;
+  }
 `;
 
 export const EmptyViewHeader = styled.div`
@@ -49,6 +53,39 @@ export const EmptyViewBody = styled.div`
   gap: 8px;
 
   width: 100%;
+
+  &:has(> .ev-link) {
+    align-items: center;
+    margin-top: 2px;
+  }
+
+  .ev-link {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: nowrap;
+
+    max-width: fit-content;
+    text-decoration: none;
+
+    color: ${(props) => props.theme.emptyView.linkColor};
+
+    svg {
+      color: inherit;
+      g {
+        fill: currentColor;
+      }
+      flex-shrink: 0;
+    }
+
+    span {
+      font-weight: 600;
+      font-size: 13px;
+      line-height: 15px;
+      text-decoration: underline dotted;
+      text-underline-offset: 2px;
+    }
+  }
 `;
 
 export const EmptyViewItemWrapper = styled.div`

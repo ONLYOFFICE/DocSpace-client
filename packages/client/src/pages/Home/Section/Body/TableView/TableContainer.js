@@ -28,13 +28,20 @@ import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import elementResizeDetectorMaker from "element-resize-detector";
-import React, { useEffect, useRef, useCallback, useMemo } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useCallback,
+  useMemo,
+  useContext,
+} from "react";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { Base } from "@docspace/shared/themes";
 import { TableContainer } from "@docspace/shared/components/table";
 import { TableBody } from "@docspace/shared/components/table";
+import { Context } from "@docspace/shared/utils";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
@@ -104,7 +111,6 @@ const elementResizeDetector = elementResizeDetectorMaker({
 
 const Table = ({
   filesList,
-  sectionWidth,
   viewAs,
   setViewAs,
   setFirsElemChecked,
@@ -124,6 +130,8 @@ const Table = ({
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
+
+  const { sectionWidth } = useContext(Context);
 
   const ref = useRef(null);
   const tagRef = useRef(null);

@@ -107,6 +107,8 @@ const {
   lightScrollActive,
   silver,
   highlandGray,
+
+  blurLight,
 } = globalColors;
 
 export const getBaseTheme = () => {
@@ -1279,7 +1281,7 @@ export const getBaseTheme = () => {
     },
 
     backdrop: {
-      backgroundColor: lightGrayBlackout,
+      backgroundColor: blurLight,
       unsetBackgroundColor: "unset",
     },
 
@@ -1831,7 +1833,7 @@ export const getBaseTheme = () => {
       sectionHeaderToggleBgActive: grayLight,
 
       backgroundColor: white,
-      blurColor: lightGrayBlackout,
+      blurColor: blurLight,
       borderColor: grayLightMid,
       thumbnailBorderColor: grayLightMid,
       textColor: black,
@@ -1860,7 +1862,7 @@ export const getBaseTheme = () => {
         roleSelectorColor: gray,
         disabledRoleSelectorColor: gray,
         roleSelectorArrowColor: gray,
-        createLink: gray,
+        createLink: black,
         linkAccessComboboxExpired: gray,
         crossFill: lightGrayDark,
       },
@@ -2358,6 +2360,8 @@ export const getBaseTheme = () => {
     },
 
     emptyView: {
+      linkColor: lightBlueMain,
+
       items: {
         hoverColor: grayLight,
         pressColor: lightGraySelected,

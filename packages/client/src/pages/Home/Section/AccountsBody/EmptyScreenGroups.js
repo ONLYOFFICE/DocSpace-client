@@ -24,20 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import EmptyScreenGroupSvgUrl from "PUBLIC_DIR/images/empty_screen_groups.svg?url";
-import EmptyScreenGroupSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_groups_dark.svg?url";
-import PlusSvgUrl from "PUBLIC_DIR/images/plus.svg?url";
+import EmptyGroupLightIcon from "PUBLIC_DIR/images/emptyview/empty.groups.light.svg";
+import EmptyGroupDarkIcon from "PUBLIC_DIR/images/emptyview/empty.groups.dark.svg";
+import EmptyScreenPersonSvgLight from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.light.svg";
+import EmptyScreenPersonSvgDark from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.dark.svg";
+
+import ClearEmptyFilterSvg from "PUBLIC_DIR/images/clear.empty.filter.svg";
+import GroupIcon from "PUBLIC_DIR/images/emptyview/group.svg";
+
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 
-import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { Link } from "@docspace/shared/components/link";
-import { Box } from "@docspace/shared/components/box";
-import { Grid } from "@docspace/shared/components/grid";
 import { Events } from "@docspace/shared/enums";
+import { EmptyView } from "@docspace/shared/components/empty-view";
 
 const EmptyScreenGroups = ({
   isRoomAdmin,
@@ -46,92 +46,80 @@ const EmptyScreenGroups = ({
   setIsLoading,
   theme,
 }) => {
-  const { t } = useTranslation(["People", "PeopleTranslations", "Common"]);
+  const { t } = useTranslation([
+    "People",
+    "PeopleTranslations",
+    "EmptyView",
+    "Common",
+  ]);
 
   const onCreateRoom = () => {
     const event = new Event(Events.GROUP_CREATE);
     window.dispatchEvent(event);
   };
 
-  const onResetFilter = () => {
+  const onResetFilter = (event) => {
+    event.preventDefault();
     setIsLoading(true);
     resetGroupsFilter();
   };
 
-  const imageSrc = theme.isBase
-    ? EmptyScreenGroupSvgUrl
-    : EmptyScreenGroupSvgDarkUrl;
+  const title = groupsIsFiltered
+    ? t("Common:NotFoundGroups")
+    : t("Common:NoGroupsHere");
+
+  const getIcon = () => {
+    if (groupsIsFiltered) {
+      return theme.isBase ? (
+        <EmptyScreenPersonSvgLight />
+      ) : (
+        <EmptyScreenPersonSvgDark />
+      );
+    }
+
+    return theme.isBase ? <EmptyGroupLightIcon /> : <EmptyGroupDarkIcon />;
+  };
+
+  const getDescription = () => {
+    if (groupsIsFiltered) return t("Common:GroupsNotFoundDescription");
+
+    return t("Common:ThisSectionIsEmpty");
+  };
+
+  /**
+   * @returns {import("@docspace/shared/components/empty-view").EmptyViewOptionsType}
+   */
+  const getOptions = () => {
+    if (groupsIsFiltered) {
+      return {
+        to: "",
+        description: t("Common:ClearFilter"),
+        icon: <ClearEmptyFilterSvg />,
+        onClick: onResetFilter,
+      };
+    }
+
+    if (isRoomAdmin) return [];
+
+    return [
+      {
+        key: "create-group-option",
+        title: t("PeopleTranslations:CreateGroup"),
+        description: t("EmptyView:EmptyGroupsCreateGroupOptionDescription"),
+        icon: <GroupIcon />,
+        disabled: isRoomAdmin,
+        onClick: onCreateRoom,
+      },
+    ];
+  };
 
   return (
-    <>
-      <EmptyScreenContainer
-        imageSrc={imageSrc}
-        imageAlt="Empty Screen Filter image"
-        headerText={
-          !groupsIsFiltered
-            ? t("Common:EmptyGroupsHeader")
-            : t("Common:NotFoundGroups")
-        }
-        descriptionText={
-          !groupsIsFiltered
-            ? !isRoomAdmin
-              ? t("Common:EmptyGroupsDescription")
-              : ""
-            : t("Common:NotFoundGroupsDescription")
-        }
-        buttons={
-          <Grid gridColumnGap="8px" columnsProp={["12px 1fr"]}>
-            {groupsIsFiltered ? (
-              <>
-                <Box>
-                  <IconButton
-                    className="empty-folder_container-icon"
-                    size="12"
-                    onClick={onResetFilter}
-                    iconName={ClearEmptyFilterSvgUrl}
-                    isFill
-                  />
-                </Box>
-                <Box marginProp="-4px 0 0 0">
-                  <Link
-                    type="action"
-                    isHovered={true}
-                    fontWeight="600"
-                    onClick={onResetFilter}
-                  >
-                    {t("Common:ClearFilter")}
-                  </Link>
-                </Box>
-              </>
-            ) : (
-              !isRoomAdmin && (
-                <>
-                  <Box>
-                    <IconButton
-                      className="empty-folder_container-icon"
-                      size="12"
-                      onClick={onCreateRoom}
-                      iconName={PlusSvgUrl}
-                      isFill
-                    />
-                  </Box>
-                  <Box marginProp="-4px 0 0 0">
-                    <Link
-                      type="action"
-                      isHovered={true}
-                      fontWeight="600"
-                      onClick={onCreateRoom}
-                    >
-                      {t("PeopleTranslations:CreateGroup")}
-                    </Link>
-                  </Box>
-                </>
-              )
-            )}
-          </Grid>
-        }
-      />
-    </>
+    <EmptyView
+      title={title}
+      description={getDescription()}
+      icon={getIcon()}
+      options={getOptions()}
+    />
   );
 };
 

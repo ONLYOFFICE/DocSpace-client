@@ -117,6 +117,7 @@
   "OpenLocation": "Ordner öffnen",
   "PasswordAccess": "Zugang mit Passwort",
   "PasswordLink": "Fügen Sie ein Passwort hinzu, um Ihren Link zu schützen.",
+  "PasswordProtectedFiles": "Bitte <0>geben Sie ein Passwort ein</0> für die geschützten Dateien, um fortzufahren",
   "PasswordSuccessfullyCopied": "Passwort erfolgreich kopiert",
   "Pin": "Anstecken",
   "PinToTop": "Oben anstecken",

@@ -2075,13 +2075,15 @@ class ContextOptionsStore {
     return newOptions;
   };
 
-  onInvite = (e) => {
+  /**
+   * @param {EmployeeType} userType
+   * @returns {void}
+   */
+  inviteUser = (userType) => {
     const { setQuotaWarningDialogVisible, setInvitePanelOptions } =
       this.dialogsStore;
 
-    const type = e.item["data-type"];
-
-    if (this.currentQuotaStore.showWarningDialog(type)) {
+    if (this.currentQuotaStore.showWarningDialog(userType)) {
       setQuotaWarningDialogVisible(true);
       return;
     }
@@ -2090,8 +2092,13 @@ class ContextOptionsStore {
       visible: true,
       roomId: -1,
       hideSelector: true,
-      defaultAccess: type,
+      defaultAccess: userType,
     });
+  };
+
+  onInvite = (e) => {
+    const type = e.item["data-type"];
+    this.inviteUser(type);
   };
 
   onInviteAgain = (t) => {

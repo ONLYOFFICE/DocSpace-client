@@ -27,6 +27,7 @@
 import React from "react";
 
 import styled, { css } from "styled-components";
+import hexRgb from "hex-rgb";
 import { mobile, tablet } from "@docspace/shared/utils";
 
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
@@ -47,19 +48,20 @@ const StyledWithoutIcon = styled.div<WithoutIconProps>`
   font-weight: 600;
   line-height: 20px;
   user-select: none;
-  padding: 4px 16px;
-  color: #657077;
-  background-color: #eceef1;
-  border: 1px solid rgb(236, 238, 241);
+  padding: 3px 15px;
+  color: ${(props) => props.theme.logoCover.textColor};
+  background-color: ${(props) => props.theme.logoCover.selectedBackgroundColor};
+  border: 1px solid ${(props) => props.theme.logoCover.selectedBorderColor};
   border-radius: 16px;
   &:hover {
     cursor: pointer;
   }
 
   ${(props) =>
-    props.isSelected &&
+    !props.isSelected &&
     css`
-      background-color: #fff;
+      background-color: ${(props) => props.theme.logoCover.backgroundColor};
+      border: 1px solid ${(props) => props.theme.logoCover.borderColor};
     `}
 `;
 
@@ -111,6 +113,7 @@ export const SelectIcon = ({
               className="cover-icon"
               size={20}
               alt="cover-icon"
+              color={"#657077"}
             />
           </StyledIconContainer>
         ))}

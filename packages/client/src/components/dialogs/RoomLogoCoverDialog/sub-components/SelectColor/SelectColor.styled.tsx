@@ -86,7 +86,8 @@ const StyledColorItem = styled.div<ColorItemProps>`
   ${(props) =>
     props.isSelected &&
     css`
-      background-color: #f3f4f4;
+      background-color: ${(props) =>
+        props.theme.logoCover.selectColor.backgroundColor};
     `}
 
   &:hover {

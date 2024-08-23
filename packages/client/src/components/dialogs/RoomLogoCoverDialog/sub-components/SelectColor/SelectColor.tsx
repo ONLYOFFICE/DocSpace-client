@@ -25,9 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState, useRef } from "react";
-import styled, { css } from "styled-components";
 
-import { mobile, tablet, isMobile } from "@docspace/shared/utils";
+import { isMobile } from "@docspace/shared/utils";
 
 import {
   ModalDialog,

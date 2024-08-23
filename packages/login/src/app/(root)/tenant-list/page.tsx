@@ -1,5 +1,10 @@
+import { cookies } from "next/headers";
+
+import { GreetingLoginContainer } from "@/components/GreetingContainer";
 import TenantList from "@/components/TenantList";
 import { getSettings } from "@/utils/actions";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { LANGUAGE } from "@docspace/shared/constants";
 
 export default async function Page({
   searchParams,
@@ -11,13 +16,33 @@ export default async function Page({
   const { portals } = JSON.parse(searchParams.portals);
   const clientId = searchParams.clientId;
 
-  if (typeof settings !== "object") return;
+  const isRegisterContainerVisible =
+    typeof settings === "string" ? undefined : settings?.enabledJoin;
 
+  const settingsCulture =
+    typeof settings === "string" ? undefined : settings?.culture;
+
+  const culture = cookies().get(LANGUAGE)?.value ?? settingsCulture;
   return (
-    <TenantList
-      portals={portals}
-      clientId={clientId}
-      baseDomain={settings.baseDomain}
-    />
+    <>
+      {settings && typeof settings !== "string" && (
+        <ColorTheme
+          themeId={ThemeId.LinkForgotPassword}
+          isRegisterContainerVisible={isRegisterContainerVisible}
+        >
+          <>
+            <GreetingLoginContainer
+              greetingSettings={settings?.greetingSettings}
+              culture={culture}
+            />
+            <TenantList
+              portals={portals}
+              clientId={clientId}
+              baseDomain={settings.baseDomain}
+            />
+          </>
+        </ColorTheme>
+      )}
+    </>
   );
 }

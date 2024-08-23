@@ -283,11 +283,11 @@ const LoginForm = ({
         PasswordHash: hash,
       });
 
-      if (portals.length === 1) {
-        window.open(`${portals[0].portalLink}`, "_self");
+      // if (portals.length === 1) {
+      //   window.open(`${portals[0].portalLink}`, "_self");
 
-        return;
-      }
+      //   return;
+      // }
 
       const searchParams = new URLSearchParams();
 
@@ -319,7 +319,7 @@ const LoginForm = ({
         }
         return res;
       })
-      .then((res: string | object) => {
+      .then((res?: string | object) => {
         const isConfirm = typeof res === "string" && res.includes("confirm");
         const redirectPath =
           referenceUrl || sessionStorage.getItem("referenceUrl");
@@ -439,7 +439,7 @@ const LoginForm = ({
 
   return (
     <form className="auth-form-container">
-      {!emailFromInvitation && (
+      {!emailFromInvitation && !client && (
         <Text fontSize="16px" fontWeight="600" className="sign-in-subtitle">
           {t("Common:LoginButton")}
         </Text>

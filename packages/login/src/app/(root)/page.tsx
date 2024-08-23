@@ -106,36 +106,25 @@ async function Page({
                   ldapDomain={capabilities?.ldapDomain}
                   ldapEnabled={capabilities?.ldapEnabled || false}
                 />
-                <ThirdParty
-                  thirdParty={thirdParty}
-                  capabilities={capabilities}
-                  ssoExists={ssoExists}
-                  ssoUrl={ssoUrl}
-                  hideAuthPage={hideAuthPage}
-                  oauthDataExists={oauthDataExists}
-                />
+                {!clientId && (
+                  <ThirdParty
+                    thirdParty={thirdParty}
+                    capabilities={capabilities}
+                    ssoExists={ssoExists}
+                    ssoUrl={ssoUrl}
+                    hideAuthPage={hideAuthPage}
+                    oauthDataExists={oauthDataExists}
+                  />
+                )}
                 {settings.enableAdmMess && <RecoverAccess />}
                 {settings.enabledJoin && (
-                  <>
-                    <Register
-                      id="login_register"
-                      enabledJoin
-                      trustedDomains={settings.trustedDomains}
-                      trustedDomainsType={settings.trustedDomainsType}
-                      isAuthenticated={false}
-                    />
-                    {!clientId && <ThirdParty />}
-                    {settings.enableAdmMess && <RecoverAccess />}
-                    {settings.enabledJoin && (
-                      <Register
-                        id="login_register"
-                        enabledJoin
-                        trustedDomains={settings.trustedDomains}
-                        trustedDomainsType={settings.trustedDomainsType}
-                        isAuthenticated={false}
-                      />
-                    )}
-                  </>
+                  <Register
+                    id="login_register"
+                    enabledJoin
+                    trustedDomains={settings.trustedDomains}
+                    trustedDomainsType={settings.trustedDomainsType}
+                    isAuthenticated={false}
+                  />
                 )}
               </Login>
             </FormWrapper>

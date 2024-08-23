@@ -30,8 +30,11 @@ import React, {
   useCallback,
   useState,
   useMemo,
+  useContext,
 } from "react";
 import { inject, observer } from "mobx-react";
+
+import { Context } from "@docspace/shared/utils";
 
 import FileTile from "./FileTile";
 import { FileTileProvider } from "./FileTile.provider";
@@ -50,6 +53,8 @@ const FilesTileContainer = ({
   const isMountedRef = useRef(true);
   const [thumbSize, setThumbSize] = useState("");
   const [columnCount, setColumnCount] = useState(null);
+
+  const { sectionWidth } = useContext(Context);
 
   useEffect(() => {
     return () => {
@@ -126,7 +131,7 @@ const FilesTileContainer = ({
         />
       );
     });
-  }, [filesList, onSetTileRef]);
+  }, [filesList, onSetTileRef, sectionWidth]);
 
   return (
     <FileTileProvider columnCount={columnCount} thumbSize={thumbSize}>

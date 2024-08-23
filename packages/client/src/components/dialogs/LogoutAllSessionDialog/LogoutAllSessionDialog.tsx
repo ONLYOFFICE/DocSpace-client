@@ -119,10 +119,10 @@ export const LogoutAllSessionDialog = ({
       visible={visible}
       onClose={onClose}
       displayType={ModalDialogType.modal}
+      autoMaxHeight
     >
-      <ModalDialog.Header>
-        {t("Profile:LogoutAllActiveConnections")}
-      </ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:LogoutButton")}</ModalDialog.Header>
+
       <ModalDialog.Body>
         {bodySubtitle}
         {bodyText}

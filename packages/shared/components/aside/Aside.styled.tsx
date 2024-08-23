@@ -148,7 +148,8 @@ const StyledHeaderContainer = styled.div`
   }
   ::after {
     content: "";
-    border-bottom: 1px solid rgb(236, 238, 241);
+    border-bottom: ${(props) =>
+      `1px solid ${props.theme.modalDialog.headerBorderColor}`};
     width: calc(100% + 32px);
     position: absolute;
     inset-inline-end: -16px;

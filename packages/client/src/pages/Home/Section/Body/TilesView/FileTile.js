@@ -30,7 +30,7 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
-import { Context } from "@docspace/shared/utils";
+// import { Context } from "@docspace/shared/utils";
 
 import Tile from "./sub-components/Tile";
 import FilesTileContent from "./FilesTileContent";
@@ -88,7 +88,9 @@ const FileTile = (props) => {
     badgeUrl,
   } = props;
 
-  const { sectionWidth } = useContext(Context);
+  // const { sectionWidth } = useContext(Context);
+
+  console.log("Render");
 
   const { columnCount, thumbSize } = useContext(FileTileContext);
 
@@ -151,7 +153,7 @@ const FileTile = (props) => {
               : thumbnailUrl
           }
           element={element}
-          sectionWidth={sectionWidth}
+          // sectionWidth={sectionWidth}
           contentElement={quickButtonsComponent}
           onSelect={onContentFileSelect}
           tileContextClick={fileContextClick}
@@ -183,7 +185,7 @@ const FileTile = (props) => {
         >
           <FilesTileContent
             item={item}
-            sectionWidth={sectionWidth}
+            // sectionWidth={sectionWidth}
             onFilesClick={onFilesClick}
           />
           {badgesComponent}

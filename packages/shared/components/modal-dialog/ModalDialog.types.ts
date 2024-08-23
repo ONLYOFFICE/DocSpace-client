@@ -135,7 +135,7 @@ export interface ModalDialogBackdropProps {
   modalSwipeOffset?: number;
 }
 
-export interface ModalSubComponentsProps {
+export type ModalSubComponentsProps = AsideHeaderProps & {
   id?: string;
   style?: React.CSSProperties;
   className?: string;
@@ -161,9 +161,4 @@ export interface ModalSubComponentsProps {
   embedded?: boolean;
   withForm?: boolean;
   blur?: number;
-
-  isBackButton?: AsideHeaderProps["isBackButton"];
-  headerIcons?: AsideHeaderProps["headerIcons"];
-  onBackClick?: AsideHeaderProps["onBackClick"];
-  onCloseClick?: AsideHeaderProps["onCloseClick"];
-}
+};

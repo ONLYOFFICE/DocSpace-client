@@ -38,7 +38,6 @@ const Header = React.memo(
     withoutBorder,
     isCloseable,
   }: HeaderProps) => {
-    console.log("isCloseable", isCloseable);
     return (
       <AsideHeader
         header={headerLabel}

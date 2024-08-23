@@ -33,6 +33,7 @@ import { AsideHeaderProps } from "./Aside.types";
 import { StyledHeaderContainer } from "./Aside.styled";
 import { RectangleSkeleton } from "../../skeletons/rectangle";
 import { Heading, HeadingSize } from "../heading";
+
 const AsideHeader = (props: AsideHeaderProps) => {
   const {
     isBackButton = false,

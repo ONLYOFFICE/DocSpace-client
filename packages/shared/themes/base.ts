@@ -1862,7 +1862,7 @@ export const getBaseTheme = () => {
         roleSelectorColor: gray,
         disabledRoleSelectorColor: gray,
         roleSelectorArrowColor: gray,
-        createLink: gray,
+        createLink: black,
         linkAccessComboboxExpired: gray,
         crossFill: lightGrayDark,
       },

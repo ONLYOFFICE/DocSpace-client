@@ -43,7 +43,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { getUserRoleOptions } from "@docspace/shared/utils/room-members/getUserRoleOptions";
 import { ShareAccessRights } from "@docspace/shared/enums";
-import { getUserRole } from "@docspace/shared/utils/common";
+import { getUserRole, getUserTypeLabel } from "@docspace/shared/utils/common";
 import { TGroupMemberInvitedInRoom } from "@docspace/shared/api/groups/types";
 
 import * as Styled from "./index.styled";
@@ -86,6 +86,11 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
   else type = "user";
 
   const role = getUserRole(user, userRole?.type);
+
+  const typeLabel = getUserTypeLabel(
+    role as "owner" | "admin" | "user" | "collaborator" | "manager",
+    t,
+  );
 
   let selectedUserRoleCBOption;
   if (user.isOwner)
@@ -144,7 +149,8 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
             {decode(user.displayName)}
           </Text>
           <Text className="email" noSelect>
-            {user.email}
+            <span dir="auto">{typeLabel}</span> |{" "}
+            <span dir="ltr">{user.email}</span>
           </Text>
         </div>
       </div>

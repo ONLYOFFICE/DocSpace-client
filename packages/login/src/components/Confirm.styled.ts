@@ -31,6 +31,10 @@ import { mobile, tablet } from "@docspace/shared/utils";
 
 export const StyledBody = styled.div`
   margin: 56px auto;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   @media ${tablet} {
     padding: 0 16px;

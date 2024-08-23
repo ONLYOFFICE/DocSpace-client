@@ -41,6 +41,8 @@ export default async function Layout({
   const hdrs = headers();
   const searchParams = hdrs.get("x-confirm-query") ?? "";
   const type = hdrs.get("x-confirm-type") ?? "";
+  const hostName = hdrs.get("x-forwarded-host") ?? "";
+  const proto = hdrs.get("x-forwarded-proto");
 
   const queryParams = Object.fromEntries(
     new URLSearchParams(searchParams.toString()),
@@ -64,7 +66,7 @@ export default async function Layout({
 
   if (isUserExisted) {
     const finalUrl = confirmLinkResult?.roomId
-      ? `/rooms/shared/${confirmLinkResult?.roomId}/filter?folder=${confirmLinkResult?.roomId}`
+      ? `${proto}://${hostName}/rooms/shared/${confirmLinkResult?.roomId}/filter?folder=${confirmLinkResult?.roomId}`
       : objectSettings?.defaultPage;
 
     redirect(finalUrl ?? "/");

@@ -69,16 +69,24 @@ export default async function Layout({
     isComboboxVisible = false;
   }
 
+  let cultures;
+  if (isComboboxVisible) {
+    cultures = await getPortalCultures();
+  }
+
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <SimpleNav
         culture={culture}
+        initialCultures={cultures}
         isLanguageComboboxVisible={isComboboxVisible}
       />
       <ContentWrapper id="content-wrapper" bgPattern={bgPattern}>
         <div className="bg-cover" />
         <Scrollbar id="customScrollBar">
-          {isComboboxVisible && <LanguageComboboxWrapper />}
+          {isComboboxVisible && (
+            <LanguageComboboxWrapper initialCultures={cultures} />
+          )}
 
           <StyledPage id="styled-page">{children}</StyledPage>
         </Scrollbar>

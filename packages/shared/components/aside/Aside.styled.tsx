@@ -146,14 +146,18 @@ const StyledHeaderContainer = styled.div`
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  ::after {
-    content: "";
-    border-bottom: ${(props) =>
-      `1px solid ${props.theme.modalDialog.headerBorderColor}`};
-    width: calc(100% + 32px);
-    position: absolute;
-    inset-inline-end: -16px;
-    bottom: 0;
-  }
+  ${(props) =>
+    !props.withoutBorder &&
+    css`
+      ::after {
+        content: "";
+        border-bottom: ${(props) =>
+          `1px solid ${props.theme.modalDialog.headerBorderColor}`};
+        width: calc(100% + 32px);
+        position: absolute;
+        inset-inline-end: -16px;
+        bottom: 0;
+      }
+    `}
 `;
 export { StyledAside, StyledHeaderContainer };

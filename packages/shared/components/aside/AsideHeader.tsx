@@ -45,6 +45,7 @@ const AsideHeader = (props: AsideHeaderProps) => {
     id,
     style,
     isLoading,
+    withoutBorder = false,
   } = props;
 
   const backButtonRender = (
@@ -101,7 +102,12 @@ const AsideHeader = (props: AsideHeaderProps) => {
   const loaderComponent = <RectangleSkeleton height="28" width="100%" />;
 
   return (
-    <StyledHeaderContainer id={id} className={className} style={style}>
+    <StyledHeaderContainer
+      id={id}
+      className={className}
+      style={style}
+      withoutBorder={withoutBorder}
+    >
       {isLoading ? loaderComponent : mainComponent}
     </StyledHeaderContainer>
   );

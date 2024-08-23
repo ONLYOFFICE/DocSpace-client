@@ -53,6 +53,7 @@ export interface AsideHeaderProps {
   onCloseClick?: () => void;
   style?: React.CSSProperties;
   isLoading?: boolean;
+  withoutBorder?: boolean;
 }
 export interface StyledAsideProps {
   visible: boolean;

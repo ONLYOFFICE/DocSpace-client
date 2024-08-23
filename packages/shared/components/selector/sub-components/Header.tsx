@@ -35,6 +35,7 @@ const Header = React.memo(
     onCloseClick,
     withoutBackButton,
     headerLabel,
+    withoutBorder,
   }: HeaderProps) => {
     return (
       <AsideHeader
@@ -44,6 +45,7 @@ const Header = React.memo(
         }
         onBackClick={onBackClick}
         onCloseClick={onCloseClick}
+        withoutBorder={withoutBorder}
       />
     );
   },

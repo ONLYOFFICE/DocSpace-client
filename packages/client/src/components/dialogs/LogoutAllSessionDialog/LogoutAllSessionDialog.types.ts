@@ -45,6 +45,7 @@ export interface LogoutAllSessionDialogProps {
     t: TTranslation,
     userIds: string[],
     displayName: string,
+    isChecked: boolean,
   ) => void;
   onLogoutAllExceptThis: (
     t: TTranslation,

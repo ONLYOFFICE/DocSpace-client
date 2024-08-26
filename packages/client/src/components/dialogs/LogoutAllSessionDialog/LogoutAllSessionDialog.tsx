@@ -44,8 +44,6 @@ export const LogoutAllSessionDialog = ({
   isLoading,
   userIds,
   displayName,
-  selection,
-  bufferSelection,
   onClose,
   onClosePanel,
   onRemoveAllSessions,
@@ -53,7 +51,6 @@ export const LogoutAllSessionDialog = ({
   isSeveralSelection,
   onLogoutAllUsers,
   onLogoutAllSessions,
-  onLogoutAllExceptThis,
 }: LogoutAllSessionDialogProps) => {
   const [isChecked, setIsChecked] = useState(false);
   const isProfile = window.location.pathname.includes("/profile");
@@ -61,21 +58,10 @@ export const LogoutAllSessionDialog = ({
   const onChangeCheckbox = () => setIsChecked((prev) => !prev);
 
   const onClickLogout = () => {
-    const selectionId = selection[0]?.connections[0]?.id;
-    const bufferSelectionId = bufferSelection?.connections[0]?.id;
-    const exceptId = selectionId || bufferSelectionId;
-
     try {
-      if (!isChecked) {
-        if (isSeveralSelection) {
-          onLogoutAllUsers(t, userIds);
-        } else {
-          onLogoutAllSessions(t, userIds, displayName);
-        }
-        onClosePanel();
-      } else {
-        onLogoutAllExceptThis(t, exceptId, displayName);
-      }
+      if (isChecked) onLogoutAllSessions(t, userIds, displayName, isChecked);
+      if (!isChecked || isSeveralSelection) onLogoutAllUsers(t, userIds);
+      onClosePanel();
     } catch (error) {
       toastr.error(error as TData);
     } finally {
@@ -105,9 +91,14 @@ export const LogoutAllSessionDialog = ({
       <Text style={{ margin: "15px 0px" }}>
         {t("Profile:DescriptionForSecurity")}
       </Text>
+
       <Checkbox
-        style={{ display: "inline-flex" }}
-        label={t("Profile:ChangePasswordAfterLoggingOut")}
+        style={{ alignItems: "flex-start" }}
+        label={
+          isProfile
+            ? t("Profile:ChangePasswordAfterLoggingOut")
+            : t("Settings:ResetPasswordDecription")
+        }
         isChecked={isChecked}
         onChange={onChangeCheckbox}
       />

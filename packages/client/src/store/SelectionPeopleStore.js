@@ -721,12 +721,12 @@ class SelectionStore {
     }
   };
 
-  onClickLogoutAllSessions = async (t, userId, displayName) => {
+  onClickLogoutAllSessions = async (t, userId, displayName, changePassword) => {
     const { removeAllActiveSessionsById } = this.settingsSetupStore;
 
     try {
       this.setIsLoading(true);
-      await removeAllActiveSessionsById(userId);
+      await removeAllActiveSessionsById(userId, changePassword);
 
       const newData = {
         ...this.items,

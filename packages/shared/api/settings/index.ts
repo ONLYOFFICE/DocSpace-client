@@ -895,11 +895,14 @@ export function getUserSessionsById(userId) {
   });
 }
 
-export function removeAllActiveSessionsById(userId) {
+export function removeAllActiveSessionsById(
+  userId: string,
+  changePassword: boolean,
+) {
   return request({
     method: "put",
     url: `/security/activeconnections/logoutall/${userId}`,
-    data: { userId },
+    data: { userId, changePassword },
   });
 }
 

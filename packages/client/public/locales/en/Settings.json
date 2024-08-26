@@ -213,6 +213,7 @@
   "QuotasDescription": "Here, you can set storage quota for users and rooms. <1>Help Center.</1>",
   "Recalculate": "Recalculate",
   "RecoveryFileNotSelected": "Recovery error. Recovery file not selected.",
+  "ResetPasswordDecription": "Reset password and send the password changing instructions to the user email",
   "RestoreBackup": "Restore",
   "RestoreBackupDescription": "Use this option to restore your space from the previously saved backup file.",
   "RestoreBackupResetInfoWarningText": "All current passwords will be reset. {{productName}} users will get an email with the access restoration link.",

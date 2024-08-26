@@ -1,20 +1,29 @@
 import { expect, test } from "@playwright/test";
 
-test("has title", async ({ page }) => {
-  await page.goto("http://192.168.0.16:5011/login");
+import BackgroundPatternReactSvgUrl from "PUBLIC_DIR/images/background.pattern.react.svg?url";
 
-  // // Expect a title "to contain" a substring.
-  // await expect(page).toHaveTitle(/Playwright/);
+test("render wizard", async ({ page }) => {
+  await page.route("*/**/api/2.0/settings/wizard/complete", async (route) => {
+    const json = [
+      {
+        status: 0,
+        response: {
+          Completed: true,
+        },
+      },
+    ];
+    await route.fulfill({ json });
+  });
+
+  await page.goto("/login/wizard");
+
+  await page.fill("[name='wizard-email']", "email@mail.ru");
+  await page
+    .getByTestId("password-input")
+    .getByTestId("text-input")
+    .fill("qwerty123");
+  await page.getByTestId("checkbox").click();
+  await page.getByTestId("button").click();
+
+  await expect(page).toHaveURL(/.*\//);
 });
-
-// test("get started link", async ({ page }) => {
-//   await page.goto("https://playwright.dev/");
-
-//   // Click the get started link.
-//   await page.getByRole("link", { name: "Get started" }).click();
-
-//   // Expects page to have a heading with the name of Installation.
-//   await expect(
-//     page.getByRole("heading", { name: "Installation" }),
-//   ).toBeVisible();
-// });

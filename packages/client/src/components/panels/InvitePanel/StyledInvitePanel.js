@@ -385,7 +385,6 @@ StyledCrossIcon.defaultProps = { theme: Base };
 
 const StyledDeleteIcon = styled(DeleteIcon)`
   cursor: pointer;
-  margin-inline-start: auto;
 
   ${iconStyles}
 `;
@@ -484,6 +483,14 @@ const StyledInviteLanguage = styled.div`
 `;
 
 StyledCrossIcon.defaultProps = { theme: Base };
+
+const ErrorWrapper = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 12px;
+  margin-inline-start: auto;
+`;
+
 export {
   StyledInvitePanel,
   StyledRow,
@@ -508,4 +515,5 @@ export {
   StyledInviteLanguage,
   StyledInviteUserBody,
   StyledExternalLink,
+  ErrorWrapper,
 };

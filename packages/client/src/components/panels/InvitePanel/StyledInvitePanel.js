@@ -440,14 +440,6 @@ StyledCrossIcon.defaultProps = { theme: Base };
 
 const StyledDeleteIcon = styled(DeleteIcon)`
   cursor: pointer;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: auto;
-        `
-      : css`
-          margin-left: auto;
-        `}
 
   ${iconStyles}
 `;
@@ -584,6 +576,14 @@ const StyledCrossIconMobile = styled(CrossIconMobile)`
 `;
 
 StyledCrossIcon.defaultProps = { theme: Base };
+
+const ErrorWrapper = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 12px;
+  margin-inline-start: auto;
+`;
+
 export {
   StyledBlock,
   StyledHeading,
@@ -611,4 +611,5 @@ export {
   StyledControlContainer,
   StyledCrossIconMobile,
   StyledInviteUserBody,
+  ErrorWrapper,
 };

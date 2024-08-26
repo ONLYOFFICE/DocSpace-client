@@ -123,13 +123,6 @@ const ScrollList = styled.div`
   }
 `;
 
-const StyledBlock = styled.div`
-  border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
-  padding-inline: 16px 37px;
-`;
-
-StyledBlock.defaultProps = { theme: Base };
-
 const StyledExternalLink = styled.div`
   border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
 `;
@@ -137,11 +130,6 @@ const StyledInviteUserBody = styled.div`
   display: flex;
   flex-direction: column;
   overflow: auto;
-`;
-
-const StyledHeading = styled(Heading)`
-  font-weight: 700;
-  font-size: 18px;
 `;
 
 const StyledSubHeader = styled(Heading)`
@@ -503,22 +491,6 @@ const StyledToggleButton = styled(ToggleButton)`
   margin-top: -4px;
 `;
 
-const StyledControlContainer = styled.div`
-  width: 17px;
-  height: 17px;
-  position: absolute;
-
-  cursor: pointer;
-
-  align-items: center;
-  justify-content: center;
-  z-index: 450;
-
-  @media ${mobile} {
-    top: 17px;
-    inset-inline-end: 16px;
-  }
-`;
 const StyledInviteLanguage = styled.div`
   padding-left: 16px;
   padding-right: 16px;
@@ -576,8 +548,6 @@ const StyledInviteLanguage = styled.div`
 
 StyledCrossIcon.defaultProps = { theme: Base };
 export {
-  StyledBlock,
-  StyledHeading,
   StyledInvitePanel,
   StyledRow,
   StyledSubHeader,
@@ -599,7 +569,6 @@ export {
   StyledToggleButton,
   StyledDescription,
   StyledInviteLanguage,
-  StyledControlContainer,
   StyledInviteUserBody,
   StyledExternalLink,
 };

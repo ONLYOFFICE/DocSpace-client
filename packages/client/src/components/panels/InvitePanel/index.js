@@ -38,19 +38,13 @@ import { DeviceType, EmployeeType } from "@docspace/shared/enums";
 import { LOADER_TIMEOUT } from "@docspace/shared/constants";
 
 import { Backdrop } from "@docspace/shared/components/backdrop";
-import { Aside } from "@docspace/shared/components/aside";
+import { Aside, AsideHeader } from "@docspace/shared/components/aside";
 import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { Portal } from "@docspace/shared/components/portal";
 import { isDesktop, isMobile, size } from "@docspace/shared/utils";
 
-import {
-  StyledBlock,
-  StyledHeading,
-  StyledInvitePanel,
-  StyledButtons,
-  StyledControlContainer,
-} from "./StyledInvitePanel";
+import { StyledInvitePanel, StyledButtons } from "./StyledInvitePanel";
 
 import ItemsList from "./sub-components/ItemsList";
 import InviteInput from "./sub-components/InviteInput";
@@ -59,12 +53,10 @@ import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 import InfoBar from "./sub-components/InfoBar";
 import InvitePanelLoader from "./sub-components/InvitePanelLoader";
-import { Link } from "@docspace/shared/components/link";
+
 import { Text } from "@docspace/shared/components/text";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import CrossIconMobile from "PUBLIC_DIR/images/cross.react.svg?url";
 
 const InvitePanel = ({
   folders,
@@ -430,11 +422,6 @@ const InvitePanel = ({
 
   const invitePanelNode = (
     <>
-      {isMobileView && (
-        <StyledBlock>
-          <StyledHeading truncate>{t("Common:InviteUsers")}</StyledHeading>
-        </StyledBlock>
-      )}
       {invitePanelIsLoding ? (
         <InvitePanelLoader />
       ) : (
@@ -482,14 +469,11 @@ const InvitePanel = ({
     >
       {isMobileView ? (
         <div className="invite_panel" ref={invitePanelRef}>
-          <StyledControlContainer onClick={onClose}>
-            <IconButton
-              size={17}
-              className="close-button"
-              iconName={CrossIconMobile}
-              isClickable
-            />
-          </StyledControlContainer>
+          <AsideHeader
+            header={t("Common:InviteUsers")}
+            onCloseClick={onClose}
+          />
+
           {invitePanelNode}
         </div>
       ) : (

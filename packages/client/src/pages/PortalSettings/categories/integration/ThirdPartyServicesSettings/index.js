@@ -111,9 +111,9 @@ const RootContainer = styled(Box)`
 class ThirdPartyServices extends React.Component {
   constructor(props) {
     super(props);
-    const { t } = props;
+    const { t, tReady } = props;
 
-    setDocumentTitle(`${t("ThirdPartyAuthorization")}`);
+    if (tReady) setDocumentTitle(`${t("ThirdPartyAuthorization")}`);
 
     this.state = {
       dialogVisible: false,
@@ -133,6 +133,12 @@ class ThirdPartyServices extends React.Component {
     } else {
       getConsumers().finally(() => hideLoader());
     }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { t, tReady } = this.props;
+    if (prevProps.tReady !== tReady && tReady)
+      setDocumentTitle(t("ThirdPartyAuthorization"));
   }
 
   onChangeLoading = (status) => {

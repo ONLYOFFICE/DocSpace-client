@@ -38,7 +38,6 @@ import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { mobile, commonIconsStyles } from "@docspace/shared/utils";
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
-import CrossIconMobile from "PUBLIC_DIR/images/cross.react.svg";
 import DeleteIcon from "PUBLIC_DIR/images/mobile.actions.remove.react.svg";
 import { isMobile, desktop, commonInputStyles } from "@docspace/shared/utils";
 import Base from "@docspace/shared/themes/base";
@@ -124,22 +123,13 @@ const ScrollList = styled.div`
   }
 `;
 
-const StyledBlock = styled.div`
-  padding: ${(props) => (props.noPadding ? "0px" : "0 16px")};
+const StyledExternalLink = styled.div`
   border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
 `;
-
-StyledBlock.defaultProps = { theme: Base };
-
 const StyledInviteUserBody = styled.div`
   display: flex;
   flex-direction: column;
   overflow: auto;
-`;
-
-const StyledHeading = styled(Heading)`
-  font-weight: 700;
-  font-size: 18px;
 `;
 
 const StyledSubHeader = styled(Heading)`
@@ -493,25 +483,6 @@ const StyledToggleButton = styled(ToggleButton)`
   margin-top: -4px;
 `;
 
-const StyledControlContainer = styled.div`
-  width: 17px;
-  height: 17px;
-  position: absolute;
-
-  cursor: pointer;
-
-  align-items: center;
-  justify-content: center;
-  z-index: 450;
-
-  @media ${mobile} {
-    display: flex;
-
-    top: -27px;
-    right: 10px;
-    left: unset;
-  }
-`;
 const StyledInviteLanguage = styled.div`
   padding-left: 16px;
   padding-right: 16px;
@@ -566,14 +537,6 @@ const StyledInviteLanguage = styled.div`
     gap: 2px;
   }
 `;
-const StyledCrossIconMobile = styled(CrossIconMobile)`
-  width: 17px;
-  height: 17px;
-  z-index: 455;
-  path {
-    fill: ${(props) => props.theme.catalog.control.fill};
-  }
-`;
 
 StyledCrossIcon.defaultProps = { theme: Base };
 
@@ -585,8 +548,6 @@ const ErrorWrapper = styled.div`
 `;
 
 export {
-  StyledBlock,
-  StyledHeading,
   StyledInvitePanel,
   StyledRow,
   StyledSubHeader,
@@ -608,8 +569,7 @@ export {
   StyledToggleButton,
   StyledDescription,
   StyledInviteLanguage,
-  StyledControlContainer,
-  StyledCrossIconMobile,
   StyledInviteUserBody,
+  StyledExternalLink,
   ErrorWrapper,
 };

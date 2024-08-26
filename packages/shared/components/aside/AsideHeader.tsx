@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
-import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg?url";
+import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 
 import { IconButton } from "../icon-button";
 import { Text } from "../text";
@@ -62,7 +62,7 @@ const AsideHeader = (props: AsideHeaderProps) => {
     <IconButton
       size={17}
       className="close-button"
-      iconName={CrossReactSvg}
+      iconName={CrossReactSvgUrl}
       onClick={onCloseClick}
       isClickable
     />

@@ -27,13 +27,9 @@
 import React from "react";
 
 import { Scrollbar } from "../scrollbar";
-
-import {
-  StyledAside,
-  StyledControlContainer,
-  StyledCrossIcon,
-} from "./Aside.styled";
+import { StyledAside } from "./Aside.styled";
 import { AsideProps } from "./Aside.types";
+import { AsideHeader } from "./AsideHeader";
 
 const AsidePure = (props: AsideProps) => {
   const {
@@ -45,6 +41,8 @@ const AsidePure = (props: AsideProps) => {
     contentPaddingBottom,
     withoutBodyScroll = false,
     onClose,
+    withoutHeader = false,
+    ...rest
   } = props;
   const contentRef = React.useRef<HTMLElement | null>(null);
 
@@ -58,14 +56,8 @@ const AsidePure = (props: AsideProps) => {
       forwardRef={contentRef}
       data-testid="aside"
     >
-      {/* <CloseButton  displayType="aside" zIndex={zIndex}/> */}
+      {!withoutHeader && <AsideHeader onCloseClick={onClose} {...rest} />}
       {withoutBodyScroll ? children : <Scrollbar>{children}</Scrollbar>}
-
-      {visible && (
-        <StyledControlContainer className="close-button" onClick={onClose}>
-          <StyledCrossIcon />
-        </StyledControlContainer>
-      )}
     </StyledAside>
   );
 };

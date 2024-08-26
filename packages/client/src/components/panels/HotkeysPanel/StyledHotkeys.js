@@ -43,16 +43,6 @@ const StyledHotkeysPanel = styled.div`
     }
   }
 
-  .hotkeys_header {
-    padding: 0 16px;
-    border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
-
-    .hotkeys_heading {
-      font-weight: 700;
-      font-size: 18px;
-    }
-  }
-
   .hotkeys_sub-header {
     font-weight: 700;
     font-size: 16px;

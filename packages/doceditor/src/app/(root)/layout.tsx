@@ -55,17 +55,13 @@ export default async function RootLayout({
     return <></>;
   }
 
-  const startDate = new Date();
   const [user, settings, colorTheme] = await Promise.all([
     getUser(),
     getSettings(),
     getColorTheme(),
   ]);
-  const timer = new Date().getTime() - startDate.getTime();
 
   if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
-
-  const api_host = process.env.API_HOST?.trim();
 
   return (
     <html lang="en" translate="no">
@@ -82,11 +78,7 @@ export default async function RootLayout({
       </head>
       <body>
         <StyledComponentsRegistry>
-          <Providers
-            contextData={{ user, settings, systemTheme, colorTheme }}
-            api_host={api_host}
-            timer={timer}
-          >
+          <Providers contextData={{ user, settings, systemTheme, colorTheme }}>
             {children}
           </Providers>
         </StyledComponentsRegistry>

@@ -2,7 +2,7 @@
   "ConfirmEmailDescription": "Aktivləşdirmə e-məktubunda göndərilən keçiddən istifadə edin. Aktivləşdirmə linki olan e-məktub almamısınız?",
   "ConfirmEmailHeader": "Lütfən, {{productName}} xüsusiyyətlərinə daxil olmaq üçün e-poçtunuzu ({{ email }}) aktiv edin.",
   "PersonalUserQuotaAdminsDescription": "Yeni fayl və qovluqları yükləmək və yaratmaq üçün zəhmət olmasa, diskdə yer boşaldın və ya <1>Yaddaş idarəetmə parametrlərində</1> hər istifadəçi kvotasını idarə edin.",
-  "PersonalUserQuotaDescription": "Yeni fayl və qovluqları yükləmək və yaratmaq üçün diskdə yer boşaldın və ya yaddaş kvotasını artırmaq üçün administratorla əlaqə saxlayın.",
+  "PersonalUserQuotaDescription": "Yeni fayl və qovluqları yükləmək və yaratmaq üçün diskdə yer boşaldın və ya yaddaş kvotasını artırmaq üçün {{productName}} administratorla əlaqə saxlayın.",
   "RequestActivation": "Yenidən aktivləşdirmə tələb edin",
   "RoomQuotaHeader": "Otaqlar keçmək üzrədir: {{currentValue}} / {{maxValue}}",
   "StorageAndUserHeader": "Yaddaş və administratorlar/ekspert istifadəçilər limitləri aşmaq üzrədir.",

@@ -43,6 +43,7 @@ import {
   DEFAULT_MIN_COLUMN_SIZE,
   SETTINGS_SIZE,
   MIN_SIZE_FIRST_COLUMN,
+  HANDLE_OFFSET,
 } from "./Table.constants";
 import { isDesktop } from "../../utils";
 

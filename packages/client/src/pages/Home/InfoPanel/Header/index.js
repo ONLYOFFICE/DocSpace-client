@@ -199,6 +199,7 @@ const InfoPanelHeaderContent = (props) => {
         header={t("Common:Info")}
         onCloseClick={closeInfoPanel}
         withoutBorder
+        className="header-text"
       />
 
       {withTabs && (

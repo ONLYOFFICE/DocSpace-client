@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import {
   ModalDialog,
@@ -38,7 +38,6 @@ import RoomLogoCover from "./sub-components/RoomLogoCover";
 const StyledModalDialog = styled(ModalDialog)`
   #modal-dialog {
     width: 422px;
-    min-height: 648px;
 
     @media ${tablet} {
       width: 464px;

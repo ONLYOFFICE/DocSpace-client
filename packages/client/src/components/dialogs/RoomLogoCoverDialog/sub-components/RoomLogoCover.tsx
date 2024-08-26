@@ -35,6 +35,8 @@ import { CustomLogo } from "./CustomLogo";
 import { SelectColor } from "./SelectColor/SelectColor";
 import { SelectIcon } from "./SelectIcon";
 
+import { RoomLogoCoverProps } from "../RoomLogoCoverDialog.types";
+
 const logoColors = [
   "#FF6680",
   "#FF8F40",
@@ -82,12 +84,17 @@ const RoomLogoCoverContainer = styled.div`
     }
   }
 
+  .cover-icon-container,
+  .color-name {
+    user-select: none;
+  }
+
   .select-color-container {
     margin-bottom: 14px;
   }
 `;
 
-const RoomLogoCover = (props) => {
+const RoomLogoCover = ({ isBaseTheme }: RoomLogoCoverProps) => {
   const { t } = useTranslation(["Common", "CreateEditRoomDialog"]);
 
   const [color, setColor] = useState<string>(logoColors[3]); // set room icon default color
@@ -120,7 +127,12 @@ const RoomLogoCover = (props) => {
   return (
     <RoomLogoCoverContainer>
       <div className="room-logo-container">
-        <CustomLogo icon={icon} color={color} withoutIcon={withoutIcon} />
+        <CustomLogo
+          isBaseTheme={isBaseTheme}
+          icon={icon}
+          color={color}
+          withoutIcon={withoutIcon}
+        />
       </div>
       <div className="select-container">
         {isMobile() ? (
@@ -136,9 +148,9 @@ const RoomLogoCover = (props) => {
 };
 
 export default inject<TStore>(({ settingsStore }) => {
-  const { appearanceTheme } = settingsStore;
+  const { theme } = settingsStore;
 
   return {
-    appearanceTheme,
+    isBaseTheme: theme?.isBase,
   };
 })(observer(RoomLogoCover));

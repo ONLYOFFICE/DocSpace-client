@@ -27,10 +27,15 @@
 import { Dispatch, SetStateAction } from "react";
 import type { TTranslation } from "@docspace/shared/types";
 
+export interface RoomLogoCoverProps {
+  isBaseTheme: boolean;
+}
+
 export interface CustomLogoProps {
   color?: string;
   icon?: string;
   withoutIcon: boolean;
+  isBaseTheme: boolean;
 }
 
 export interface SelectColorProps {

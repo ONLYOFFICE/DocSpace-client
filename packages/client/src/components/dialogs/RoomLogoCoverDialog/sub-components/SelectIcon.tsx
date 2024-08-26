@@ -27,8 +27,7 @@
 import React from "react";
 
 import styled, { css } from "styled-components";
-import hexRgb from "hex-rgb";
-import { mobile, tablet } from "@docspace/shared/utils";
+import { tablet } from "@docspace/shared/utils";
 
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { SelectIconProps } from "../RoomLogoCoverDialog.types";
@@ -53,6 +52,11 @@ const StyledWithoutIcon = styled.div<WithoutIconProps>`
   background-color: ${(props) => props.theme.logoCover.selectedBackgroundColor};
   border: 1px solid ${(props) => props.theme.logoCover.selectedBorderColor};
   border-radius: 16px;
+
+  @media ${tablet} {
+    padding: 5px 21px;
+  }
+
   &:hover {
     cursor: pointer;
   }
@@ -102,7 +106,7 @@ export const SelectIcon = ({
     <div>
       <div className="color-name">{t("CreateEditRoomDialog:Icon")}</div>
       <StyledWithoutIcon onClick={toggleWithoutIcon} isSelected={withoutIcon}>
-        Without icon
+        {t("WithoutIcon")}
       </StyledWithoutIcon>
       <div className="cover-icon-container">
         {RoomCoverIcons.map((icon) => (

@@ -25,12 +25,18 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import hexRgb from "hex-rgb";
 import { ReactSVG } from "react-svg";
 import { Text } from "@docspace/shared/components/text";
 import { CustomLogoProps } from "../RoomLogoCoverDialog.types";
 
-const StyledLogo = styled.div`
+interface StyledLogoProps {
+  isBase: boolean;
+  color: string;
+}
+
+const StyledLogo = styled.div<StyledLogoProps>`
   background-color: ${(props) => props.color};
   width: 96px;
   height: 96px;
@@ -53,11 +59,34 @@ const StyledLogo = styled.div`
     color: #fff;
     font-size: 41px;
   }
+
+  ${(props) =>
+    !props.isBase &&
+    css`
+      background-color: ${hexRgb(props.color, { alpha: 0.09, format: "css" })};
+
+      .custom-logo-cover {
+        svg {
+          path {
+            fill: ${props.color};
+          }
+        }
+      }
+
+      .logo-cover-text {
+        color: ${props.color};
+      }
+    `}
 `;
 
-export const CustomLogo = ({ color, icon, withoutIcon }: CustomLogoProps) => {
+export const CustomLogo = ({
+  color,
+  icon,
+  withoutIcon,
+  isBaseTheme,
+}: CustomLogoProps) => {
   return (
-    <StyledLogo color={color}>
+    <StyledLogo color={color} isBase={isBaseTheme}>
       {withoutIcon ? (
         <Text
           className="logo-cover-text"

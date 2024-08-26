@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2010-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,30 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+export const excludeFiles = ["../../../packages/shared/utils/encoder.ts"];
 
-import { Header } from "./header";
-import { Spaces } from "./spaces";
-import { DomainSettings } from "./domain-settings";
-import { StyledWrapper } from "./multiple.styled";
-
-interface IProps {
-  baseDomain: string;
-  portals: TPortals[];
-  tenantAlias?: string;
-}
-
-export const MultipleSpaces = ({
-  baseDomain,
-  portals,
-  tenantAlias,
-}: IProps) => {
-  return (
-    <StyledWrapper>
-      <Header />
-      <Spaces portals={portals} tenantAlias={tenantAlias} />
-      <DomainSettings baseDomain={baseDomain} />
-    </StyledWrapper>
-  );
-};
-
+export const excludeDirs = [
+  "../../../packages/client/node_modules",
+  "../../../packages/shared/node_modules",
+  "../../../packages/login/node_modules",
+  "../../../packages/doceditor/node_modules",
+  "../../../packages/management/node_modules",
+  "../../../packages/doceditor/.next",
+  "../../../packages/login/.next",
+  "../../../packages/login/dist",
+  "../../../packages/shared/themes",
+];

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2010-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,30 +24,49 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import path from "path";
+import fs from "fs";
 
-import { Header } from "./header";
-import { Spaces } from "./spaces";
-import { DomainSettings } from "./domain-settings";
-import { StyledWrapper } from "./multiple.styled";
+const hexColorPattern = /#(?:[0-9A-Fa-f]{6}|[0-9A-Fa-f]{3})\b/g;
 
-interface IProps {
-  baseDomain: string;
-  portals: TPortals[];
-  tenantAlias?: string;
+export function findHexColorsInFile(filePath) {
+  const content = fs.readFileSync(filePath, "utf-8");
+  const matches = content.match(hexColorPattern);
+  return matches || [];
 }
 
-export const MultipleSpaces = ({
-  baseDomain,
-  portals,
-  tenantAlias,
-}: IProps) => {
-  return (
-    <StyledWrapper>
-      <Header />
-      <Spaces portals={portals} tenantAlias={tenantAlias} />
-      <DomainSettings baseDomain={baseDomain} />
-    </StyledWrapper>
-  );
-};
+export function searchDirectoryForHexColors(
+  directory,
+  excludeFiles = [],
+  excludeDirs = []
+) {
+  let hexColors = {};
 
+  function walkDirectory(currentPath) {
+    const items = fs.readdirSync(currentPath);
+
+    items.forEach((item) => {
+      const fullPath = path.join(currentPath, item);
+      const isDirectory = fs.statSync(fullPath).isDirectory();
+
+      if (isDirectory) {
+        if (!excludeDirs.includes(fullPath)) {
+          walkDirectory(fullPath);
+        }
+      } else {
+        if (
+          !excludeFiles.includes(fullPath) &&
+          /\.(js|ts|jsx|tsx)$/.test(item)
+        ) {
+          const matches = findHexColorsInFile(fullPath);
+          if (matches.length > 0) {
+            hexColors[fullPath] = matches;
+          }
+        }
+      }
+    });
+  }
+
+  walkDirectory(directory);
+  return hexColors;
+}

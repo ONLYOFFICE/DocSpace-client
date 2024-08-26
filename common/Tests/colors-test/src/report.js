@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2010-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,30 +24,44 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+export function generateReport(hexColorsFound) {
+  let htmlReport = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colors report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        h3 { margin-top: 8px; }
+        ul { list-style-type: none; padding: 0; }
+        li { margin-bottom: 4px; }
+        .color-box { display: inline-block; width: 16px; height: 16px; margin-right: 8px; vertical-align: middle; }
+    </style>
+</head>
+<body>
+    <h1>Colors Report</h1>
+    <p>Found colors in the following files:</p>
+`;
 
-import { Header } from "./header";
-import { Spaces } from "./spaces";
-import { DomainSettings } from "./domain-settings";
-import { StyledWrapper } from "./multiple.styled";
+  Object.keys(hexColorsFound).forEach((file) => {
+    htmlReport += `<h3>File: ${file}</h3><ul>`;
+    hexColorsFound[file].forEach((color) => {
+      htmlReport += `
+            <li>
+                <div class="color-box" style="background-color: ${color};"></div>
+                ${color}
+            </li>`;
+    });
+    htmlReport += "</ul>";
+  });
 
-interface IProps {
-  baseDomain: string;
-  portals: TPortals[];
-  tenantAlias?: string;
+  htmlReport += `
+    <p>Total files with colors: ${Object.keys(hexColorsFound).length}</p>
+</body>
+</html>`;
+
+  return htmlReport;
 }
-
-export const MultipleSpaces = ({
-  baseDomain,
-  portals,
-  tenantAlias,
-}: IProps) => {
-  return (
-    <StyledWrapper>
-      <Header />
-      <Spaces portals={portals} tenantAlias={tenantAlias} />
-      <DomainSettings baseDomain={baseDomain} />
-    </StyledWrapper>
-  );
-};
-

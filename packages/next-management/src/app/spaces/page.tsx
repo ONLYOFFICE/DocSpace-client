@@ -55,6 +55,7 @@ const SpacesPage = async () => {
       <MultipleSpaces
         baseDomain={settings.baseDomain}
         portals={portals.tenants}
+        tenantAlias={settings.tenantAlias}
       />
     );
   return <ConfigurationSpaces domainValidator={domainValidator} />;

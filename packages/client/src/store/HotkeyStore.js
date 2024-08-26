@@ -37,7 +37,7 @@ import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-fil
 import config from "PACKAGE_FILE";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { encryptionUploadDialog } from "../helpers/encryptionUploadDialog";
-import { TABLE_HEADER_HEIGHT } from "@docspace/shared/utils/device";
+import { TABLE_HEADER_HEIGHT } from "@docspace/shared/components/table/Table.constants";
 
 class HotkeyStore {
   filesStore;

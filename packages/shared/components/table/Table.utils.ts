@@ -24,10 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const MIN_SIZE_FIRST_COLUMN = 210;
-export const DEFAULT_MIN_COLUMN_SIZE = 110;
-export const SETTINGS_SIZE = 24;
-export const HANDLE_OFFSET = 8;
+import { SETTINGS_SIZE } from "./Table.constants";
 
 export const getSubstring = (str: string) => +str.substring(0, str.length - 2);
 

@@ -31,7 +31,7 @@ import { getConvertedSize } from "@docspace/shared/utils/common";
 
 import { StyledRowContent } from "./multiple.styled";
 
-export const RowContent = ({ item }) => {
+export const RowContent = ({ item, tenantAlias }) => {
   const { t } = useTranslation(["Management", "Common", "Settings"]);
 
   const { roomAdminCount, usersCount, roomsCount, usedSize } =
@@ -47,6 +47,8 @@ export const RowContent = ({ item }) => {
 
   const storageSpace =
     customQuota >= 0 ? `${usedStorage}/${maxStorage}` : `${usedStorage}`;
+
+  const isCurrentPortal = tenantAlias === item.portalName;
 
   return (
     <StyledRowContent
@@ -69,7 +71,7 @@ export const RowContent = ({ item }) => {
         color="#A3A9AE"
         className="spaces_row-current"
       >
-        {/*isCurrentPortal && t("CurrentSpace")*/}
+        {isCurrentPortal && t("CurrentSpace")}
       </Text>
       <Text fontSize="12px" as="div" fontWeight={600} truncate={true}>
         {`${t("PortalStats", {

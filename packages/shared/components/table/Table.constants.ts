@@ -24,30 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
-
-import { Header } from "./header";
-import { Spaces } from "./spaces";
-import { DomainSettings } from "./domain-settings";
-import { StyledWrapper } from "./multiple.styled";
-
-interface IProps {
-  baseDomain: string;
-  portals: TPortals[];
-  tenantAlias?: string;
-}
-
-export const MultipleSpaces = ({
-  baseDomain,
-  portals,
-  tenantAlias,
-}: IProps) => {
-  return (
-    <StyledWrapper>
-      <Header />
-      <Spaces portals={portals} tenantAlias={tenantAlias} />
-      <DomainSettings baseDomain={baseDomain} />
-    </StyledWrapper>
-  );
-};
-
+export const DEFAULT_MIN_COLUMN_SIZE = 110;
+export const SETTINGS_SIZE = 24;
+export const MIN_SIZE_FIRST_COLUMN = 210;
+export const TABLE_HEADER_HEIGHT = 40;

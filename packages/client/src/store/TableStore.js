@@ -78,6 +78,7 @@ class TableStore {
   emailAccountsColumnIsEnabled = true;
   storageAccountsColumnIsEnabled = true;
 
+  peopleAccountsGroupsColumnIsEnabled = true;
   managerAccountsGroupsColumnIsEnabled = true;
 
   typeAccountsInsideGroupColumnIsEnabled = true;
@@ -157,6 +158,8 @@ class TableStore {
   setAccountsColumnStorage = (enable) =>
     (this.storageAccountsColumnIsEnabled = enable);
 
+  setAccountsGroupsColumnPeople = (enable) =>
+    (this.peopleAccountsGroupsColumnIsEnabled = enable);
   setAccountsGroupsColumnManager = (enable) =>
     (this.managerAccountsGroupsColumnIsEnabled = enable);
 
@@ -204,6 +207,7 @@ class TableStore {
       }
 
       if (getIsAccountsGroups()) {
+        this.setAccountsGroupsColumnPeople(splitColumns.includes("People"));
         this.setAccountsGroupsColumnManager(
           splitColumns.includes("Head of Group"),
         );
@@ -335,6 +339,12 @@ class TableStore {
         getIsAccountsPeople()
           ? this.setAccountsColumnStorage(!this.storageAccountsColumnIsEnabled)
           : this.setRoomColumnQuota(!this.roomQuotaColumnIsEnable);
+        return;
+
+      case "People":
+        this.setAccountsGroupsColumnPeople(
+          !this.peopleAccountsGroupsColumnIsEnabled,
+        );
         return;
 
       case "Head of Group":

@@ -1,4 +1,4 @@
-// (c) Copyright Ascensio System SIA 2009-2024
+// (c) Copyright Ascensio System SIA 2010-2024
 //
 // This program is a free software product.
 // You can redistribute it and/or modify it under the terms
@@ -24,30 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-"use client";
+import fs from "fs";
+import { searchDirectoryForHexColors } from "./utils.js";
+import { excludeDirs, excludeFiles } from "./exclude.js";
+import { generateReport } from "./report.js";
 
-import { Header } from "./header";
-import { Spaces } from "./spaces";
-import { DomainSettings } from "./domain-settings";
-import { StyledWrapper } from "./multiple.styled";
+const directoryPath = "../../../packages";
+const reportName = `colors_report_${new Date().toJSON()}.html`;
 
-interface IProps {
-  baseDomain: string;
-  portals: TPortals[];
-  tenantAlias?: string;
-}
+const hexColorsFound = searchDirectoryForHexColors(
+  directoryPath,
+  excludeFiles,
+  excludeDirs
+);
 
-export const MultipleSpaces = ({
-  baseDomain,
-  portals,
-  tenantAlias,
-}: IProps) => {
-  return (
-    <StyledWrapper>
-      <Header />
-      <Spaces portals={portals} tenantAlias={tenantAlias} />
-      <DomainSettings baseDomain={baseDomain} />
-    </StyledWrapper>
-  );
-};
-
+const htmlReport = generateReport(hexColorsFound);
+fs.writeFileSync(reportName, htmlReport, "utf-8");

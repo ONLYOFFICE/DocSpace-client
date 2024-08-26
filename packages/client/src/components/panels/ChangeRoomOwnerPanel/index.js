@@ -120,6 +120,7 @@ const ChangeRoomOwner = (props) => {
         className="header_aside-panel"
         visible={visible}
         onClose={onClose}
+        withoutHeader
         withoutBodyScroll
       >
         <PeopleSelector
@@ -133,6 +134,7 @@ const ChangeRoomOwner = (props) => {
           disableSubmitButton={false}
           withHeader
           headerProps={{
+            onCloseClick: onClose,
             onBackClick,
             withoutBackButton: !showBackButton,
             headerLabel: t("Files:ChangeTheRoomOwner"),

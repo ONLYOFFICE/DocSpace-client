@@ -26,8 +26,6 @@
 
 import styled, { css } from "styled-components";
 
-import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
-
 import { tablet, mobile } from "../../utils";
 import { Base, globalColors } from "../../themes";
 import { TViewAs } from "../../types";
@@ -196,37 +194,6 @@ const StyledFilterBlock = styled.div`
 `;
 
 StyledFilterBlock.defaultProps = { theme: Base };
-
-const StyledFilterBlockHeader = styled.div<{ isSelector?: boolean }>`
-  height: 53px;
-  min-height: 53px;
-
-  padding: 0 16px;
-  margin: 0;
-
-  box-sizing: border-box;
-
-  border-bottom: ${(props) =>
-    props.isSelector ? "none" : props.theme.filterInput.filter.border};
-
-  display: flex;
-  align-items: center;
-  justify-content: ${(props) => (props.isSelector ? "start" : "space-between")};
-
-  h1 {
-    font-weight: 700;
-  }
-
-  .arrow-button {
-    margin-inline-end: 12px;
-  }
-
-  svg {
-    cursor: pointer;
-  }
-`;
-
-StyledFilterBlockHeader.defaultProps = { theme: Base };
 
 const StyledFilterBlockItem = styled.div<{
   withoutHeader: boolean;
@@ -400,42 +367,6 @@ const StyledFilterBlockFooter = styled.div`
 
 StyledFilterBlockFooter.defaultProps = { theme: Base };
 
-const StyledControlContainer = styled.div`
-  display: flex;
-
-  width: 24px;
-  height: 24px;
-  position: absolute;
-
-  border-radius: 100px;
-  cursor: pointer;
-
-  align-items: center;
-  justify-content: center;
-  z-index: 450;
-
-  top: 14px;
-  inset-inline-start: -34px;
-
-  @media ${mobile} {
-    top: -34px;
-    inset-inline: unset 10px;
-  }
-`;
-
-StyledControlContainer.defaultProps = { theme: Base };
-
-const StyledCrossIcon = styled(CrossIcon)`
-  width: 17px;
-  height: 17px;
-  z-index: 455;
-  path {
-    fill: ${(props) => props.theme.catalog.control.fill};
-  }
-`;
-
-StyledCrossIcon.defaultProps = { theme: Base };
-
 const selectedViewIcon = css`
   svg {
     path {
@@ -591,7 +522,6 @@ StyledSortButton.defaultProps = { theme: Base };
 export {
   StyledSortButton,
   StyledFilterBlock,
-  StyledFilterBlockHeader,
   StyledFilterBlockItem,
   StyledFilterBlockItemHeader,
   StyledFilterBlockItemContent,
@@ -605,8 +535,6 @@ export {
   StyledFilterBlockItemCheckboxContainer,
   StyledFilterBlockItemSeparator,
   StyledFilterBlockFooter,
-  StyledControlContainer,
-  StyledCrossIcon,
 };
 
 export { StyledFilterInput, StyledSearchInput, StyledButton };

@@ -25,9 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled from "styled-components";
-
-import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg";
+import styled, { css } from "styled-components";
 
 import { Base } from "../../themes";
 import { MOBILE_FOOTER_HEIGHT } from "../../constants";
@@ -50,15 +48,20 @@ const StyledAside = styled(Container)`
   position: fixed;
   top: ${(props) => props.theme.aside.top};
 
-  inset-inline-end: ${({ theme }) => theme.aside.right};
-  transform: translateX(
-    ${({ visible, scale, theme }) => {
-      if (visible) return "0";
-
-      const value = scale ? "100%" : "480px";
-      return theme.interfaceDirection === "rtl" ? `-${value}` : value;
-    }}
-  );
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          left: ${props.theme.aside.right};
+          transform: translateX(
+            ${props.visible ? "0" : props.scale ? "-100%" : "-480px"}
+          );
+        `
+      : css`
+          right: ${props.theme.aside.right};
+          transform: translateX(
+            ${props.visible ? "0" : props.scale ? "100%" : "480px"}
+          );
+        `}
 
   transition: ${(props) => props.theme.aside.transition};
   width: ${(props) => (props.scale ? "100%" : "480px")};
@@ -67,6 +70,19 @@ const StyledAside = styled(Container)`
 
   @media ${tablet} {
     max-width: calc(100% - 69px);
+
+    ${(props) =>
+      props.theme.interfaceDirection === "rtl"
+        ? css`
+            transform: translateX(
+              ${props.visible ? "0" : props.scale ? "-100%" : "-480px"}
+            );
+          `
+        : css`
+            transform: translateX(
+              ${props.visible ? "0" : props.scale ? "100%" : "480px"}
+            );
+          `}
   }
 
   @media ${mobile} {
@@ -96,50 +112,57 @@ const StyledAside = styled(Container)`
 `;
 StyledAside.defaultProps = { theme: Base };
 
-const StyledControlContainer = styled.div`
+const StyledHeaderContainer = styled.div<{ withoutBorder?: boolean }>`
   display: flex;
-
-  width: 17px;
-  height: 17px;
-  position: absolute;
-
-  cursor: pointer;
-
   align-items: center;
-  justify-content: center;
-  z-index: 450;
+  justify-content: space-between;
+  margin: 0 16px;
+  height: 53px;
+  min-height: 53px;
+  position: relative;
 
-  top: 18px;
-
-  inset-inline-start: -27px;
-
-  @media ${tablet} {
+  .additional-icons-container {
     display: flex;
-
-    top: 18px;
+    margin-inline: 16px 16px;
+    gap: 16px;
   }
 
-  @media ${mobile} {
-    display: flex;
-
-    top: -27px;
-
-    inset-inline-end: 10px;
-    inset-inline-start: unset;
+  .heading {
+    font-family: ${(props) => props.theme.fontFamily};
+    color: ${(props) => props.theme.modalDialog.textColor};
+    font-weight: 700;
+    font-size: 21px;
   }
+
+  .arrow-button {
+    margin-inline: 0 12px;
+
+    svg {
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl" && `transform: scaleX(-1);`}
+    }
+  }
+  .close-button {
+    margin-inline: auto 0;
+    min-width: 17px;
+  }
+  .header-component {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  ${(props) =>
+    !props.withoutBorder &&
+    css`
+      ::after {
+        content: "";
+        border-bottom: ${(props) =>
+          `1px solid ${props.theme.modalDialog.headerBorderColor}`};
+        width: calc(100% + 32px);
+        position: absolute;
+        inset-inline-end: -16px;
+        bottom: 0;
+      }
+    `}
 `;
-
-StyledControlContainer.defaultProps = { theme: Base };
-
-const StyledCrossIcon = styled(CrossReactSvg)`
-  width: 17px;
-  height: 17px;
-  z-index: 455;
-  path {
-    fill: ${(props) => props.theme.catalog.control.fill};
-  }
-`;
-
-StyledCrossIcon.defaultProps = { theme: Base };
-
-export { StyledAside, StyledControlContainer, StyledCrossIcon };
+export { StyledAside, StyledHeaderContainer };

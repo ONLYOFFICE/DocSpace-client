@@ -24,13 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/17/cross.react.svg?url";
 import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { Text } from "@docspace/shared/components/text";
 
 import { Tabs } from "@docspace/shared/components/tabs";
 import {
@@ -43,6 +39,7 @@ import { StyledInfoPanelHeader } from "./styles/common";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 import { FolderType } from "@docspace/shared/enums";
+import { AsideHeader } from "@docspace/shared/components/aside";
 
 const InfoPanelHeaderContent = (props) => {
   const {
@@ -194,25 +191,12 @@ const InfoPanelHeaderContent = (props) => {
 
   return (
     <StyledInfoPanelHeader isTablet={isTablet} withTabs={withTabs}>
-      <div className="main">
-        <Text className="header-text" fontSize="21px" fontWeight="700">
-          {t("Common:Info")}
-        </Text>
-
-        {!isTablet && (
-          <div className="info-panel-toggle-bg">
-            <IconButton
-              isStroke
-              size="17"
-              onClick={closeInfoPanel}
-              iconName={CrossReactSvgUrl}
-              title={t("Common:InfoPanel")}
-              className="info-panel-toggle"
-              id="info-panel-toggle--close"
-            />
-          </div>
-        )}
-      </div>
+      <AsideHeader
+        header={t("Common:Info")}
+        onCloseClick={closeInfoPanel}
+        withoutBorder
+        className="header-text"
+      />
 
       {withTabs && (
         <div className="tabs">

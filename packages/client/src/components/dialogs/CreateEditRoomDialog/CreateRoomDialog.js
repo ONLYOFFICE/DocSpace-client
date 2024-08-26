@@ -33,7 +33,6 @@ import TagHandler from "./handlers/TagHandler";
 
 import SetRoomParams from "./sub-components/SetRoomParams";
 import RoomTypeList from "./sub-components/RoomTypeList";
-import DialogHeader from "./sub-components/DialogHeader";
 
 const StyledModalDialog = styled(ModalDialog)`
   .header-with-button {
@@ -161,6 +160,10 @@ const CreateRoomDialog = ({
     onClose();
   };
 
+  const dialogHeader = roomParams.type
+    ? t("ChooseRoomType")
+    : t("Files:CreateRoom");
+
   return (
     <StyledModalDialog
       displayType="aside"
@@ -170,14 +173,10 @@ const CreateRoomDialog = ({
       isScrollLocked={isScrollLocked}
       withFooterBorder
       isOauthWindowOpen={isOauthWindowOpen}
+      isBackButton={roomParams.type}
+      onBackClick={goBack}
     >
-      <ModalDialog.Header>
-        <DialogHeader
-          disabledIcon={Boolean(startRoomType)}
-          isChooseRoomType={!roomParams.type}
-          onArrowClick={goBack}
-        />
-      </ModalDialog.Header>
+      <ModalDialog.Header>{dialogHeader}</ModalDialog.Header>
 
       <ModalDialog.Body>
         {!roomParams.type ? (

@@ -97,11 +97,7 @@ const ChangePricingPlanDialog = ({
       isLarge
       isLoading={!ready}
     >
-      <ModalDialog.Header>
-        <Text isBold fontSize="21px">
-          {t("ChangePricingPlan")}
-        </Text>
-      </ModalDialog.Header>
+      <ModalDialog.Header>{t("ChangePricingPlan")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text fontSize="13px" isBold className="cannot-downgrade-plan">
           {t("CannotChangePlan")}

@@ -53,7 +53,19 @@ import {
 } from "@/types";
 import { TScope } from "@docspace/shared/utils/oauth/types";
 import { transformToClientProps } from "@docspace/shared/utils/oauth";
-import { getMockSettingsResponse } from "@docspace/shared/__mocks__/e2e";
+import {
+  colorThemeSuccess,
+  getMockSettingsResponse,
+  isLicenseRequiredSuccess,
+  machineNameSuccess,
+  portalCulturesSuccess,
+  settingsPasswordSuccess,
+  settingsSuccessNoAuthWizard,
+} from "@docspace/shared/__mocks__/e2e";
+import {
+  getMockResponse,
+  portalTimeZonesSuccess,
+} from "@docspace/shared/__mocks__/e2e/settings";
 
 const IS_TEST = process.env.TEST;
 
@@ -77,7 +89,7 @@ export async function getSettings() {
   );
 
   const settingsRes = IS_TEST
-    ? getMockSettingsResponse(true)
+    ? getMockResponse(settingsSuccessNoAuthWizard)
     : await fetch(getSettings);
 
   if (settingsRes.status === 403) return `access-restricted`;
@@ -114,7 +126,9 @@ export async function getColorTheme() {
     "GET",
   );
 
-  const res = await fetch(getColorTheme);
+  const res = IS_TEST
+    ? getMockResponse(colorThemeSuccess)
+    : await fetch(getColorTheme);
 
   if (!res.ok) return;
 
@@ -216,7 +230,9 @@ export async function getPortalCultures() {
     "GET",
   );
 
-  const res = await fetch(getPortalCultures);
+  const res = IS_TEST
+    ? getMockResponse(portalCulturesSuccess)
+    : await fetch(getPortalCultures);
 
   if (!res.ok) return;
 
@@ -282,8 +298,9 @@ export async function getPortalPasswordSettings(
     [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
     "GET",
   );
-
-  const res = await fetch(getPortalPasswordSettings);
+  const res = IS_TEST
+    ? getMockResponse(settingsPasswordSuccess)
+    : await fetch(getPortalPasswordSettings);
 
   if (!res.ok) return;
 
@@ -322,7 +339,9 @@ export async function getMachineName(confirmKey: string | null = null) {
     "GET",
   );
 
-  const res = await fetch(getMachineName);
+  const res = IS_TEST
+    ? getMockResponse(machineNameSuccess)
+    : await fetch(getMachineName);
 
   if (!res.ok) throw new Error(res.statusText);
 
@@ -338,7 +357,9 @@ export async function getIsLicenseRequired() {
     "GET",
   );
 
-  const res = await fetch(getIsLicenseRequired);
+  const res = IS_TEST
+    ? getMockResponse(isLicenseRequiredSuccess)
+    : await fetch(getIsLicenseRequired);
 
   if (!res.ok) throw new Error(res.statusText);
 
@@ -354,7 +375,9 @@ export async function getPortalTimeZones(confirmKey: string | null = null) {
     "GET",
   );
 
-  const res = await fetch(getPortalTimeZones);
+  const res = IS_TEST
+    ? getMockResponse(portalTimeZonesSuccess)
+    : await fetch(getPortalTimeZones);
 
   if (!res.ok) throw new Error(res.statusText);
 

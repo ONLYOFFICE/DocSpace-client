@@ -117,6 +117,7 @@
   "OpenLocation": "Konumu aç",
   "PasswordAccess": "Şifre erişimi",
   "PasswordLink": "Bağlantınızı korumak için bir şifre ekleyin.",
+  "PasswordProtectedFiles": "Devam etmek için lütfen korunan dosyalar için <0>bir şifre girin</0>",
   "PasswordSuccessfullyCopied": "Şifre başarıyla kopyalandı",
   "Pin": "Sabitle",
   "PinToTop": "En üste sabitle",

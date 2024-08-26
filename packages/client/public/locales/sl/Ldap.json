@@ -36,6 +36,7 @@
   "LdapPortNumber": "Številka vrat",
   "LdapPortNumberTooltip": "Vnesi številko vrat za vaš strežnik LDAP/Active Directory.",
   "LdapQuota": "Uporabniška kvota",
+  "LdapQuotaInfo": "Če želite uporabiti ta atribut, omogočite uporabniško kvoto v <0>nastavitvah upravljanja shrambe</0>",
   "LdapSecondName": "Drugo ime",
   "LdapSendWelcomeLetter": "Pošlji pozdravno pismo",
   "LdapSendWelcomeLetterTooltip": "Če je označeno, bodo vsi novi uporabniki prejeli pozdravno pismo. Na voljo samo, če je poštni atribut preslikan v LDAP.",
@@ -66,6 +67,7 @@
   "LdapUserDNTooltip": "Vnesi enoznačno ime v imenik z uporabniki, ki jih želiš dodati.",
   "LdapUserFilter": "Uporabniški Filter",
   "LdapUserFilterTooltip": "Uporabi iskalni filter LDAP, da izbereš uporabnike, ki jih je potrebno uvoziti.",
+  "LdapUserQuotaTooltip": "Če želite nastaviti kvoto prostora za shranjevanje za uporabnika, dodajte atribut v imenik LDAP (na primer UsersQuotaLimit) in vnesite celoštevilčno vrednost za ta atribut. Prikazala bo vrednost kvote v bajtih. Tukaj navedite samo ime atributa. Ta atribut bo uporabljen samo med prvo nastavitvijo in ga je mogoče pozneje spremeniti ročno v razdelku Računi.",
   "LdapUsersType": "Uporabniški tip",
   "LdapUsersTypeInfo": "Uporabniki lahko dostopajo samo do sob, v katere jih povabijo skrbniki, in ne morejo ustvariti lastnih sob, map ali datotek. Spodaj izberi drug tip, da omogočiš več dovoljenj. V nasprotnem primeru lahko vrsto spremeniš ročno v razdelku Računi.",
   "LdapUserTypeTooltip": "Vsi uporabniki bodo dodani v {{productName}} z izbranim tipom."

@@ -117,6 +117,7 @@
   "OpenLocation": "Avaa sijainti",
   "PasswordAccess": "Salasanapääsy",
   "PasswordLink": "Lisää salasana suojataksesi linkkiäsi.",
+  "PasswordProtectedFiles": "<0>Syötä salasana<0> suojatuille tiedostoille jatkaaksesi",
   "PasswordSuccessfullyCopied": "Salasana onnistuneesti kopioitu ",
   "Pin": "Kiinnitä",
   "PinToTop": "Kiinnitä yläreunaan",

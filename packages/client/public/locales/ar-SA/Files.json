@@ -117,6 +117,7 @@
   "OpenLocation": "افتح الموقع",
   "PasswordAccess": "إمكانية الوصول لكلمة المرور",
   "PasswordLink": "إضافة كلمة مرور لحماية الرابط الخاص بك",
+  "PasswordProtectedFiles": "يتجاوز عدد المسؤولين/المستخدمين المميزين الحد الأقصى: {{count}} / {{limit}}.",
   "PasswordSuccessfullyCopied": "تم نسخ كلمة المرور بنجاح",
   "Pin": "تثبيت",
   "PinToTop": "تثبيت في أعلى الصفحة",

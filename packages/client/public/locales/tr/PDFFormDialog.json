@@ -1,4 +1,5 @@
 {
+  "PDFform": "PDF formu",
   "PDFFormEditDialogDescription": "Form düzenleme moduna geçmek istiyor musunuz? Lütfen formun artık doldurulamayacağını ve doldurmak için düzenledikten sonra Doldurmaya başla düğmesine tekrar tıklamanız gerekeceğini unutmayın.",
   "PDFFormEditDialogTitle": "Form düzenleme",
   "PDFFormIsReadyToast": "PDF formu <1>{{filename}}</1> doldurulmaya hazır.",

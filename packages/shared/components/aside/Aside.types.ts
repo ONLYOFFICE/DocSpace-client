@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export interface AsideProps {
+export type AsideProps = AsideHeaderProps & {
   visible: boolean;
   scale?: boolean;
   className?: string;
@@ -33,8 +33,22 @@ export interface AsideProps {
   children: React.ReactNode;
   withoutBodyScroll?: boolean;
   onClose: () => void;
-}
 
+  withoutHeader: boolean;
+};
+export interface AsideHeaderProps {
+  header: string | React.ReactNode;
+  className?: string;
+  id?: string;
+  isBackButton?: boolean;
+  isCloseable?: boolean;
+  headerIcons?: { key: string; url: string; onClick: () => void }[];
+  onBackClick?: () => void;
+  onCloseClick?: () => void;
+  style?: React.CSSProperties;
+  isLoading?: boolean;
+  withoutBorder?: boolean;
+}
 export interface StyledAsideProps {
   visible: boolean;
   scale?: boolean;

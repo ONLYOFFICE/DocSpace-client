@@ -257,6 +257,8 @@ class SettingsStore {
 
   apiDocsLink = null;
 
+  licenseUrl = null;
+
   bookTrainingEmail = null;
 
   hotkeyPanelVisible = false;

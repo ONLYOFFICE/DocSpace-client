@@ -1862,7 +1862,7 @@ export const getBaseTheme = () => {
         roleSelectorColor: gray,
         disabledRoleSelectorColor: gray,
         roleSelectorArrowColor: gray,
-        createLink: gray,
+        createLink: black,
         linkAccessComboboxExpired: gray,
         crossFill: lightGrayDark,
       },
@@ -2359,6 +2359,8 @@ export const getBaseTheme = () => {
     },
 
     emptyView: {
+      linkColor: lightBlueMain,
+
       items: {
         hoverColor: grayLight,
         pressColor: lightGraySelected,

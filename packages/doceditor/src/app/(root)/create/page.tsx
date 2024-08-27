@@ -25,13 +25,19 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { permanentRedirect, redirect } from "next/navigation";
+import dynamic from "next/dynamic";
 
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
+import { EditorConfigErrorType } from "@docspace/shared/enums";
 
 import { createFile, fileCopyAs, getEditorUrl } from "@/utils/actions";
-import CreateFileError from "@/components/CreateFileError";
-import Editor from "@/components/Editor";
-import { EditorConfigErrorType } from "@docspace/shared/enums";
+
+const Editor = dynamic(() => import("@/components/Editor"), {
+  ssr: false,
+});
+const CreateFileError = dynamic(() => import("@/components/CreateFileError"), {
+  ssr: false,
+});
 
 type TSearchParams = {
   parentId: string;

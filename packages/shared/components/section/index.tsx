@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React from "react";
+import React, { useEffect, useMemo } from "react";
 
 import { Provider } from "../../utils";
 import { DeviceType } from "../../enums";
@@ -153,6 +153,16 @@ const Section = (props: SectionProps) => {
     isSectionBodyAvailable ||
     isSectionPagingAvailable;
 
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const computedStyles = window.getComputedStyle(containerRef.current, null);
+    const width = +computedStyles.getPropertyValue("width").replace("px", "");
+    const height = +computedStyles.getPropertyValue("height").replace("px", "");
+
+    setSectionSize(() => ({ width, height }));
+  }, [isInfoPanelVisible]);
+
   const onResize = React.useCallback(() => {
     if (timerRef.current) clearTimeout(timerRef.current);
 
@@ -188,14 +198,17 @@ const Section = (props: SectionProps) => {
 
   const showTwoProgress = showPrimaryProgressBar && showSecondaryProgressBar;
 
+  const providerValue = useMemo(
+    () => ({
+      sectionWidth: sectionSize.width,
+      sectionHeight: sectionSize.height,
+    }),
+    [sectionSize.width, sectionSize.height],
+  );
+
   return (
     isSectionAvailable && (
-      <Provider
-        value={{
-          sectionWidth: sectionSize.width,
-          sectionHeight: sectionSize.height,
-        }}
-      >
+      <Provider value={providerValue}>
         <SectionContainer
           viewAs={viewAs}
           ref={containerRef}

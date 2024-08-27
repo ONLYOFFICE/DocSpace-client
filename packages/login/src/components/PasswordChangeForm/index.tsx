@@ -182,6 +182,7 @@ const PasswordChangeForm = ({
             )}`}
             generatePasswordTitle={t("Wizard:GeneratePassword")}
             tooltipAllowedCharacters={`${t("Common:AllowedCharacters")}: ${ALLOWED_PASSWORD_CHARACTERS}`}
+            isAutoFocussed={true}
           />
         </FieldContainer>
       </div>

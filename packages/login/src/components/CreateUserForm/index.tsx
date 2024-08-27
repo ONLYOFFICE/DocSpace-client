@@ -50,7 +50,6 @@ import {
   LANGUAGE,
   PROVIDERS_DATA,
 } from "@docspace/shared/constants";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
   createPasswordHash,
   getLoginLink,
@@ -192,7 +191,12 @@ const CreateUserForm = (props: CreateUserFormProps) => {
   }, [authCallback]);
 
   const onContinue = async () => {
-    if (!emailValid) {
+    if (!email.trim()) {
+      setEmailValid(false);
+      setIsEmailErrorShow(true);
+    }
+
+    if (!emailValid || !email.trim()) {
       setIsEmailErrorShow(true);
       return;
     }
@@ -237,7 +241,6 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       }
 
       router.push(`/?loginData=${loginData}`);
-      //  window.location.href = `/login?loginData=${loginData}`;
     } catch (error) {
       const knownError = error as TError;
       const status =
@@ -327,6 +330,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       }
 
       console.error("confirm error", errorMessage);
+      toastr.error(errorMessage);
       setIsEmailErrorShow(true);
       setEmailErrorText(errorMessage);
       setEmailValid(false);

@@ -211,15 +211,20 @@ class FilesTableHeader extends React.Component {
     } else if (isRecentTab) {
       const authorBlock = !isPublicRoom
         ? {
-            key: "Author",
+            key: "AuthorRecent",
             title: t("ByAuthor"),
-            enable: this.props.authorColumnIsEnabled,
+            enable: this.props.authorRecentColumnIsEnabled,
             resizable: true,
             sortBy: SortByFieldName.Author,
             // onClick: this.onFilter,
             onChange: this.onColumnChange,
           }
         : {};
+
+      console.log(
+        "getTableColumns modifiedRecentColumnIsEnabled",
+        this.props.modifiedRecentColumnIsEnabled,
+      );
 
       const columns = [
         {
@@ -232,11 +237,12 @@ class FilesTableHeader extends React.Component {
           minWidth: 210,
           onClick: this.onFilter,
         },
+
         { ...authorBlock },
         {
-          key: "Created",
+          key: "CreatedRecent",
           title: t("ByCreation"),
-          enable: this.props.createdColumnIsEnabled,
+          enable: this.props.createdRecentColumnIsEnabled,
           resizable: true,
           sortBy: SortByFieldName.CreationDate,
           // onClick: this.onFilter,
@@ -252,27 +258,27 @@ class FilesTableHeader extends React.Component {
           onChange: this.onColumnChange,
         },
         {
-          key: "Modified",
+          key: "ModifiedRecent",
           title: t("ByLastModified"),
-          enable: this.props.modifiedColumnIsEnabled,
+          enable: this.props.modifiedRecentColumnIsEnabled,
           resizable: true,
           sortBy: SortByFieldName.ModifiedDate,
           // onClick: this.onFilter,
           onChange: this.onColumnChange,
         },
         {
-          key: "Size",
+          key: "SizeRecent",
           title: t("Common:Size"),
-          enable: this.props.sizeColumnIsEnabled,
+          enable: this.props.sizeRecentColumnIsEnabled,
           resizable: true,
           sortBy: SortByFieldName.Size,
           onClick: this.onFilter,
           onChange: this.onColumnChange,
         },
         {
-          key: "Type",
+          key: "TypeRecent",
           title: t("Common:Type"),
-          enable: this.props.typeColumnIsEnabled,
+          enable: this.props.typeRecentColumnIsEnabled,
           resizable: true,
           sortBy: SortByFieldName.Type,
           // onClick: this.onFilter,
@@ -359,7 +365,11 @@ class FilesTableHeader extends React.Component {
       defaultColumns.push(...columns);
     }
 
-    let columns = getColumns(defaultColumns);
+    console.log("call getColumns defaultColumns", defaultColumns);
+
+    let columns = getColumns(defaultColumns, isRecentTab);
+
+    console.log("getTableColumns columns", columns);
     const storageColumns = localStorage.getItem(tableStorageName);
     const splitColumns = storageColumns && storageColumns.split(",");
     const resetColumnsSize =
@@ -371,6 +381,11 @@ class FilesTableHeader extends React.Component {
     const sortOrder = isRooms ? roomsFilter.sortOrder : filter.sortOrder;
 
     this.setTableColumns(tableColumns);
+    console.log(
+      "fromUpdate this.props.modifiedRecentColumnIsEnabled",
+      fromUpdate,
+      this.props.modifiedRecentColumnIsEnabled,
+    );
     if (fromUpdate) {
       this.setState({
         columns,
@@ -454,6 +469,17 @@ class FilesTableHeader extends React.Component {
       sortBy !== this.state.sortBy ||
       sortOrder !== this.state.sortOrder
     ) {
+      console.log(
+        "isRecentTab this.state.isRecentTab",
+        isRecentTab,
+        this.state.isRecentTab,
+      );
+      console.log("sortBy this.state.sortBy", sortBy, this.state.sortBy);
+      console.log(
+        "sortOrder this.state.sortOrder",
+        sortOrder,
+        this.state.sortOrder,
+      );
       return this.getTableColumns(true);
     }
 
@@ -464,6 +490,12 @@ class FilesTableHeader extends React.Component {
       if (columnIndex === -1) return;
 
       columns[columnIndex].enable = this.props.withContent;
+      console.log(
+        "componentDidUpdate  columns[columnIndex].enable",
+        columns[columnIndex].enable,
+        this.props.withContent,
+      );
+
       this.setState({ columns });
     }
 
@@ -482,10 +514,11 @@ class FilesTableHeader extends React.Component {
 
   onColumnChange = (key) => {
     const { columns } = this.state;
-
+    console.log("onColumnChange columns", columns);
     const columnIndex = columns.findIndex((c) => c.key === key);
     if (columnIndex === -1) return;
 
+    console.log("onColumnChange setColumnEnable", key);
     this.props.setColumnEnable(key);
 
     columns[columnIndex].enable = !columns[columnIndex].enable;
@@ -650,6 +683,12 @@ export default inject(
       roomColumnActivityIsEnabled,
       roomQuotaColumnIsEnable,
 
+      authorRecentColumnIsEnabled,
+      modifiedRecentColumnIsEnabled,
+      createdRecentColumnIsEnabled,
+      sizeRecentColumnIsEnabled,
+      typeRecentColumnIsEnabled,
+
       getColumns,
       setColumnEnable,
     } = tableStore;
@@ -700,6 +739,12 @@ export default inject(
       roomColumnQuickButtonsIsEnabled,
       roomColumnActivityIsEnabled,
       roomQuotaColumnIsEnable,
+
+      authorRecentColumnIsEnabled,
+      modifiedRecentColumnIsEnabled,
+      createdRecentColumnIsEnabled,
+      sizeRecentColumnIsEnabled,
+      typeRecentColumnIsEnabled,
 
       getColumns,
       setColumnEnable,

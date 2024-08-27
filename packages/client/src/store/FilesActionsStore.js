@@ -2538,7 +2538,9 @@ class FilesActionStore {
 
     const urlFilter = getObjectByLocation(window.DocSpace.location);
 
-    const isArchivedRoom = !!(CategoryType.Archive && urlFilter?.folder);
+    const isArchivedRoom = !!(
+      CategoryType.Archive === categoryType && urlFilter?.folder
+    );
 
     if (this.publicRoomStore.isPublicRoom) {
       return this.backToParentFolder();

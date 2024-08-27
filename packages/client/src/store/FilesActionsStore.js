@@ -2561,10 +2561,11 @@ class FilesActionStore {
       return this.moveToRoomsPage();
     }
 
-    if (
-      categoryType === CategoryType.Personal ||
-      categoryType === CategoryType.Trash
-    ) {
+    if (categoryType === CategoryType.Trash) {
+      return;
+    }
+
+    if (categoryType === CategoryType.Personal) {
       return this.backToParentFolder();
     }
 

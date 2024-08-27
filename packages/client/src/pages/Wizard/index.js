@@ -91,7 +91,7 @@ const Wizard = (props) => {
     getIsRequiredLicense,
     getPortalTimezones,
     machineName,
-    urlLicense,
+    sofwareLicense,
     theme,
     cultureNames,
     culture,
@@ -497,8 +497,8 @@ const Wizard = (props) => {
                   fontSize="13px"
                   target="_blank"
                   href={
-                    urlLicense
-                      ? urlLicense
+                    sofwareLicense
+                      ? sofwareLicense
                       : "https://gnu.org/licenses/gpl-3.0.html"
                   }
                 >
@@ -527,7 +527,7 @@ export default inject(({ authStore, settingsStore, wizardStore }) => {
     passwordSettings,
     wizardToken,
     timezone,
-    urlLicense,
+    sofwareLicense,
     hashSettings,
     setWizardComplete,
     getPortalTimezones,
@@ -556,7 +556,7 @@ export default inject(({ authStore, settingsStore, wizardStore }) => {
     wizardToken,
     passwordSettings,
     timezone,
-    urlLicense,
+    sofwareLicense,
     hashSettings,
     isWizardLoaded,
     machineName,

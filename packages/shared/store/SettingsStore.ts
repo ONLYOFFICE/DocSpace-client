@@ -162,8 +162,6 @@ class SettingsStore {
 
   enabledJoin = false;
 
-  urlLicense = "https://gnu.org/licenses/gpl-3.0.html";
-
   urlSupport = "https://helpdesk.onlyoffice.com/";
 
   forumLink = null;
@@ -257,7 +255,7 @@ class SettingsStore {
 
   apiDocsLink = null;
 
-  licenseUrl = null;
+  sofwareLicense = null;
 
   bookTrainingEmail = null;
 

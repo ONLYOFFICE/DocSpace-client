@@ -257,6 +257,10 @@ class SettingsStore {
 
   sofwareLicense = null;
 
+  legalTerms = null;
+
+  privacyStatement = null;
+
   bookTrainingEmail = null;
 
   hotkeyPanelVisible = false;

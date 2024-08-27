@@ -114,6 +114,9 @@ const CreateUserForm = (props) => {
     defaultPage,
     cultures,
     i18n,
+
+    legalTerms,
+    privacyStatement,
   } = props;
 
   const currentCultureName = i18n.language;
@@ -486,7 +489,7 @@ const CreateUserForm = (props) => {
               <ColorTheme
                 tag="a"
                 themeId={ThemeId.Link}
-                href={"#"}
+                href={legalTerms}
                 target="_blank"
                 fontSize={"12px"}
               />
@@ -495,7 +498,7 @@ const CreateUserForm = (props) => {
               <ColorTheme
                 tag="a"
                 themeId={ThemeId.Link}
-                href={"#"}
+                href={privacyStatement}
                 target="_blank"
                 fontSize={"12px"}
               />
@@ -772,6 +775,8 @@ export default inject(({ settingsStore, authStore }) => {
     currentColorScheme,
     userNameRegex,
     cultures,
+    legalTerms,
+    privacyStatement,
   } = settingsStore;
   return {
     settings: passwordSettings,
@@ -786,6 +791,9 @@ export default inject(({ settingsStore, authStore }) => {
     currentColorScheme,
     userNameRegex,
     cultures,
+
+    legalTerms,
+    privacyStatement,
   };
 })(
   withCultureNames(

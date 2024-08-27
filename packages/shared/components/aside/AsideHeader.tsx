@@ -57,6 +57,8 @@ const AsideHeader = (props: AsideHeaderProps) => {
       iconName={ArrowPathReactSvgUrl}
       size={17}
       onClick={onBackClick}
+      isFill
+      isClickable
     />
   );
 
@@ -67,6 +69,7 @@ const AsideHeader = (props: AsideHeaderProps) => {
       iconName={CrossReactSvgUrl}
       onClick={onCloseClick}
       isClickable
+      isStroke
     />
   );
 
@@ -94,6 +97,7 @@ const AsideHeader = (props: AsideHeaderProps) => {
               iconName={item.url}
               onClick={item.onClick}
               isClickable
+              isFill
             />
           ))}
         </div>

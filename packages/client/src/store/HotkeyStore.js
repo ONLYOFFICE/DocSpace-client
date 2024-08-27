@@ -692,7 +692,7 @@ class HotkeyStore {
 
     const files = await getFilesFromEvent(event);
 
-    createFoldersTree(files, uploadToFolder).then((f) => {
+    createFoldersTree(files).then((f) => {
       if (f.length > 0) startUpload(f, null, t);
     });
   };

@@ -30,45 +30,21 @@ import React, {
   useCallback,
   useState,
   useMemo,
+  useContext,
 } from "react";
 import { inject, observer } from "mobx-react";
-import elementResizeDetectorMaker from "element-resize-detector";
-import TileContainer from "./sub-components/TileContainer";
+
+import { Context } from "@docspace/shared/utils";
+
 import FileTile from "./FileTile";
+import { FileTileProvider } from "./FileTile.provider";
+import { elementResizeDetector, getThumbSize } from "./FileTile.utils";
 
-const getThumbSize = (width) => {
-  let imgWidth = 216;
-
-  if (width >= 240 && width < 264) {
-    imgWidth = 240;
-  } else if (width >= 264 && width < 288) {
-    imgWidth = 264;
-  } else if (width >= 288 && width < 312) {
-    imgWidth = 288;
-  } else if (width >= 312 && width < 336) {
-    imgWidth = 312;
-  } else if (width >= 336 && width < 360) {
-    imgWidth = 336;
-  } else if (width >= 360 && width < 400) {
-    imgWidth = 360;
-  } else if (width >= 400 && width < 440) {
-    imgWidth = 400;
-  } else if (width >= 440) {
-    imgWidth = 440;
-  }
-
-  return `${imgWidth}x156`;
-};
-
-const elementResizeDetector = elementResizeDetectorMaker({
-  strategy: "scroll",
-  callOnAdd: false,
-});
+import TileContainer from "./sub-components/TileContainer";
 
 const FilesTileContainer = ({
   filesList,
   t,
-  sectionWidth,
   withPaging,
   thumbnails1280x720,
 }) => {
@@ -77,6 +53,8 @@ const FilesTileContainer = ({
   const isMountedRef = useRef(true);
   const [thumbSize, setThumbSize] = useState("");
   const [columnCount, setColumnCount] = useState(null);
+
+  const { sectionWidth } = useContext(Context);
 
   useEffect(() => {
     return () => {
@@ -139,10 +117,7 @@ const FilesTileContainer = ({
           }
           item={item}
           itemIndex={index}
-          sectionWidth={sectionWidth}
           selectableRef={onSetTileRef}
-          thumbSize={thumbSize}
-          columnCount={columnCount}
           withRef={true}
         />
       ) : (
@@ -153,24 +128,23 @@ const FilesTileContainer = ({
           }
           item={item}
           itemIndex={index}
-          sectionWidth={sectionWidth}
-          thumbSize={thumbSize}
-          columnCount={columnCount}
         />
       );
     });
-  }, [filesList, sectionWidth, onSetTileRef, thumbSize, columnCount]);
+  }, [filesList, onSetTileRef, sectionWidth]);
 
   return (
-    <TileContainer
-      className="tile-container"
-      draggable
-      useReactWindow={!withPaging}
-      headingFolders={t("Translations:Folders")}
-      headingFiles={t("Translations:Files")}
-    >
-      {filesListNode}
-    </TileContainer>
+    <FileTileProvider columnCount={columnCount} thumbSize={thumbSize}>
+      <TileContainer
+        className="tile-container"
+        draggable
+        useReactWindow={!withPaging}
+        headingFolders={t("Translations:Folders")}
+        headingFiles={t("Translations:Files")}
+      >
+        {filesListNode}
+      </TileContainer>
+    </FileTileProvider>
   );
 };
 

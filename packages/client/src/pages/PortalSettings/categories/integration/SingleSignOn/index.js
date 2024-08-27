@@ -55,13 +55,16 @@ const SingleSignOn = (props) => {
     isInit,
     currentDeviceType,
   } = props;
-  const { t } = useTranslation(["SingleSignOn", "Settings"]);
+  const { t, ready } = useTranslation(["SingleSignOn", "Settings"]);
   const isMobileView = currentDeviceType === DeviceType.mobile;
 
   useEffect(() => {
     isSSOAvailable && !isInit && init();
-    setDocumentTitle(t("Settings:SingleSignOn"));
   }, []);
+
+  useEffect(() => {
+    if (ready) setDocumentTitle(t("Settings:SingleSignOn"));
+  }, [ready]);
 
   if (!isInit && !isMobileView && isSSOAvailable) return <SSOLoader />;
 

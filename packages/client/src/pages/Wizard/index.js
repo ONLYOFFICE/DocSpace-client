@@ -496,11 +496,7 @@ const Wizard = (props) => {
                   }
                   fontSize="13px"
                   target="_blank"
-                  href={
-                    sofwareLicense
-                      ? sofwareLicense
-                      : "https://gnu.org/licenses/gpl-3.0.html"
-                  }
+                  href={sofwareLicense}
                 >
                   {t("LicenseLink")}
                 </Link>

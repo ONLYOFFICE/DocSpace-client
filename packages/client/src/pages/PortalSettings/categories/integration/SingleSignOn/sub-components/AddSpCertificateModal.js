@@ -84,6 +84,7 @@ const AddSpCertificateModal = (props) => {
           value={spCertificate}
           isDisabled={isGeneratedCertificate}
           placeholder={t("PlaceholderCert")}
+          heightTextArea="72px"
         />
 
         <Text isBold className="text-area-label" noSelect>
@@ -98,6 +99,7 @@ const AddSpCertificateModal = (props) => {
           value={spPrivateKey}
           isDisabled={isGeneratedCertificate}
           placeholder={t("PlaceholderCert")}
+          heightTextArea="72px"
         />
 
         <ModalComboBox

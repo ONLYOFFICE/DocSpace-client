@@ -1606,13 +1606,16 @@ class FilesStore {
               (data.current.rootFolderType === Rooms ||
                 data.current.rootFolderType === Archive);
 
-            let shared;
+            let shared, quotaLimit, usedSpace;
             if (idx === 1) {
               let room = data.current;
 
               if (!isCurrentFolder) {
                 room = await api.files.getFolderInfo(folderId);
+
                 shared = room.shared;
+                quotaLimit = room.quotaLimit;
+                usedSpace = room.usedSpace;
 
                 this.infoPanelStore.setInfoPanelRoom(room);
               }
@@ -1631,6 +1634,8 @@ class FilesStore {
               roomType,
               isRootRoom,
               shared,
+              quotaLimit,
+              usedSpace,
             };
           }),
         ).then((res) => {

@@ -45,6 +45,7 @@ import BonusItem from "./BonusItem";
 import AccountsItem from "./AccountsItem";
 
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
+import { toastr } from "@docspace/shared/components/toast";
 
 const StyledDragAndDrop = styled(DragAndDrop)`
   display: contents;
@@ -88,9 +89,13 @@ const Item = ({
     (files, uploadToFolder) => {
       dragging && setDragging(false);
 
-      createFoldersTree(files, uploadToFolder).then((f) => {
-        if (f.length > 0) startUpload(f, null, t);
-      });
+      createFoldersTree(t, files, uploadToFolder)
+        .then((f) => {
+          if (f.length > 0) startUpload(f, null, t);
+        })
+        .catch((err) => {
+          toastr.error(err);
+        });
     },
     [t, dragging, setDragging, startUpload, createFoldersTree],
   );

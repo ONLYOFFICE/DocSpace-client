@@ -45,6 +45,7 @@ import { useParams } from "react-router-dom";
 
 import { getCategoryType, getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
+import { toastr } from "@docspace/shared/components/toast";
 
 const useFiles = ({
   t,
@@ -118,9 +119,13 @@ const useFiles = ({
 
     if (disableDrag) return;
 
-    createFoldersTree(files, uploadToFolder).then((f) => {
-      if (f.length > 0) startUpload(f, null, t);
-    });
+    createFoldersTree(t, files, uploadToFolder)
+      .then((f) => {
+        if (f.length > 0) startUpload(f, null, t);
+      })
+      .catch((err) => {
+        toastr.error(err);
+      });
   };
 
   React.useEffect(() => {

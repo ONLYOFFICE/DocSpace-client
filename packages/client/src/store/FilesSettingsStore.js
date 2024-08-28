@@ -44,6 +44,8 @@ import {
   getIconPathByFolderType,
   isPublicPreview,
 } from "@docspace/shared/utils/common";
+import { toastr } from "@docspace/shared/components/toast";
+
 class FilesSettingsStore {
   thirdPartyStore;
   treeFoldersStore;
@@ -218,7 +220,8 @@ class FilesSettingsStore {
   setDisplayFileExtension = (data) => {
     api.files
       .enableDisplayFileExtension(data)
-      .then((res) => this.setFilesSetting("displayFileExtension", res));
+      .then((res) => this.setFilesSetting("displayFileExtension", res))
+      .catch((e) => toastr.error(e));
   };
 
   setOpenEditorInSameTab = (data) => {

@@ -35,7 +35,7 @@ import { Text } from "../text";
 import PortalLogo from "../portal-logo/PortalLogo";
 
 const OperationContainer = (props: IOperationContainer) => {
-  const { url, title, description } = props;
+  const { url, authorized, title, description } = props;
 
   const theme = useTheme();
 
@@ -46,8 +46,8 @@ const OperationContainer = (props: IOperationContainer) => {
   );
 
   useEffect(() => {
-    if (url) window.location.replace(url);
-  }, [url]);
+    if (url && authorized) window.location.replace(url);
+  }, [url, authorized]);
 
   return (
     <StyledOperationContainer>

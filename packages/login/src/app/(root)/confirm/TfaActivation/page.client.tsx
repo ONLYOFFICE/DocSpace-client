@@ -57,9 +57,8 @@ import {
   TFA_WIN_APP_URL,
 } from "@/utils/constants";
 import { TError } from "@/types";
-
-import { ConfirmRouteContext } from "../ConfirmRoute";
-import { GreetingContainer } from "../GreetingContainer";
+import { ConfirmRouteContext } from "@/components/ConfirmRoute";
+import { GreetingContainer } from "@/components/GreetingContainer";
 
 type TfaActivationFormProps = {
   secretKey: string;

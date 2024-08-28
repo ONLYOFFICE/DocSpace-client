@@ -24,14 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import TfaActivationForm from "@/components/TfaActivationForm";
-import { StyledForm } from "@/components/TfaActivationForm/TfaActivationForm.styled";
 import { getStringFromSearchParams } from "@/utils";
 import {
   getSettings,
   getTfaSecretKeyAndQR,
   getUserFromConfirm,
 } from "@/utils/actions";
+
+import { StyledForm } from "./page.styled";
+import TfaActivationForm from "./page.client";
 
 type TfaActivationProps = {
   searchParams: { [key: string]: string };

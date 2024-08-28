@@ -27,36 +27,29 @@
 "use client";
 
 import { useContext, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
-import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
-import { ownerChange } from "@docspace/shared/api/settings";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { continuePortal } from "@docspace/shared/api/portal";
 
 import { TError } from "@/types";
+import { ConfirmRouteContext } from "@/components/ConfirmRoute";
+import { ButtonsWrapper } from "@/components/Confirm.styled";
 
-import { ConfirmRouteContext } from "../ConfirmRoute";
-import { ButtonsWrapper } from "../Confirm.styled";
-
-type ChangeOwnerFormProps = {
-  newOwner?: string;
-};
-
-const ChangeOwnerForm = ({ newOwner }: ChangeOwnerFormProps) => {
+const ContinuePortalForm = () => {
   const { t } = useTranslation(["Confirm", "Common"]);
   const { linkData } = useContext(ConfirmRouteContext);
 
-  const ownerId = linkData.uid ?? "";
-  const confirmKey = linkData.confirmHeader ?? "";
+  const [isReactivate, setIsReactivate] = useState(false);
 
-  const [isOwnerChanged, setIsOwnerChanged] = useState(false);
-
-  const onChangeOwnerClick = async () => {
+  const onRestoreClick = async () => {
     try {
-      await ownerChange(ownerId, confirmKey);
-      setIsOwnerChanged(true);
-      setTimeout(() => (location.href = "/"), 10000);
+      await continuePortal(linkData.confirmHeader);
+      setIsReactivate(true);
+      setTimeout(() => (window.location.href = "/"), 10000);
     } catch (error) {
       const knownError = error as TError;
       let errorMessage: string;
@@ -82,17 +75,20 @@ const ChangeOwnerForm = ({ newOwner }: ChangeOwnerFormProps) => {
 
   return (
     <>
-      {isOwnerChanged ? (
+      {isReactivate ? (
         <Text>
-          {t("ConfirmOwnerPortalSuccessMessage", {
-            productName: t("Common:ProductName"),
-          })}
+          <Trans t={t} i18nKey="SuccessReactivate" ns="Confirm">
+            Your account has been successfully reactivated. In 10 seconds you
+            will be redirected to the
+            <Link isHovered href="/">
+              portal
+            </Link>
+          </Trans>
         </Text>
       ) : (
         <>
           <Text className="subtitle">
-            {t("ConfirmOwnerPortalTitle", {
-              newOwner: newOwner,
+            {t("PortalContinueTitle", {
               productName: t("Common:ProductName"),
             })}
           </Text>
@@ -101,17 +97,15 @@ const ChangeOwnerForm = ({ newOwner }: ChangeOwnerFormProps) => {
               primary
               scale
               size={ButtonSize.medium}
-              label={t("Common:SaveButton")}
-              tabIndex={2}
-              isDisabled={false}
-              onClick={onChangeOwnerClick}
+              label={t("Reactivate")}
+              tabIndex={1}
+              onClick={onRestoreClick}
             />
             <Button
               scale
               size={ButtonSize.medium}
               label={t("Common:CancelButton")}
-              tabIndex={2}
-              isDisabled={false}
+              tabIndex={1}
               onClick={onCancelClick}
             />
           </ButtonsWrapper>
@@ -121,4 +115,4 @@ const ChangeOwnerForm = ({ newOwner }: ChangeOwnerFormProps) => {
   );
 };
 
-export default ChangeOwnerForm;
+export default ContinuePortalForm;

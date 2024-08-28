@@ -26,41 +26,36 @@
 
 "use client";
 
-import { Trans, useTranslation } from "react-i18next";
 import { useContext, useState } from "react";
+import { useTranslation } from "react-i18next";
 
-import { Link } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
-import { deletePortal } from "@docspace/shared/api/portal";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
+import { ownerChange } from "@docspace/shared/api/settings";
 
 import { TError } from "@/types";
-import { URL_ONLYOFFICE } from "@/utils/constants";
+import { ConfirmRouteContext } from "@/components/ConfirmRoute";
+import { ButtonsWrapper } from "@/components/Confirm.styled";
 
-import { ConfirmRouteContext } from "../ConfirmRoute";
-import { ButtonsWrapper } from "../Confirm.styled";
-
-type RemovePortalFormProps = {
-  siteUrl?: string;
+type ChangeOwnerFormProps = {
+  newOwner?: string;
 };
 
-const RemovePortalForm = ({ siteUrl }: RemovePortalFormProps) => {
+const ChangeOwnerForm = ({ newOwner }: ChangeOwnerFormProps) => {
   const { t } = useTranslation(["Confirm", "Common"]);
   const { linkData } = useContext(ConfirmRouteContext);
 
-  const [isRemoved, setIsRemoved] = useState(false);
+  const ownerId = linkData.uid ?? "";
+  const confirmKey = linkData.confirmHeader ?? "";
 
-  const url = siteUrl ? siteUrl : URL_ONLYOFFICE;
+  const [isOwnerChanged, setIsOwnerChanged] = useState(false);
 
-  const onDeleteClick = async () => {
+  const onChangeOwnerClick = async () => {
     try {
-      const res = await deletePortal(linkData.confirmHeader);
-      setIsRemoved(true);
-      setTimeout(
-        () => (location.href = res && typeof res === "string" ? res : url),
-        10000,
-      );
+      await ownerChange(ownerId, confirmKey);
+      setIsOwnerChanged(true);
+      setTimeout(() => (location.href = "/"), 10000);
     } catch (error) {
       const knownError = error as TError;
       let errorMessage: string;
@@ -86,20 +81,17 @@ const RemovePortalForm = ({ siteUrl }: RemovePortalFormProps) => {
 
   return (
     <>
-      {isRemoved ? (
+      {isOwnerChanged ? (
         <Text>
-          <Trans t={t} i18nKey="SuccessRemoved" ns="Confirm">
-            Your account has been successfully removed. In 10 seconds you will
-            be redirected to the
-            <Link isHovered href={url}>
-              site
-            </Link>
-          </Trans>
+          {t("ConfirmOwnerPortalSuccessMessage", {
+            productName: t("Common:ProductName"),
+          })}
         </Text>
       ) : (
         <>
           <Text className="subtitle">
-            {t("PortalRemoveTitle", {
+            {t("ConfirmOwnerPortalTitle", {
+              newOwner: newOwner,
               productName: t("Common:ProductName"),
             })}
           </Text>
@@ -108,15 +100,17 @@ const RemovePortalForm = ({ siteUrl }: RemovePortalFormProps) => {
               primary
               scale
               size={ButtonSize.medium}
-              label={t("Common:Delete")}
-              tabIndex={1}
-              onClick={onDeleteClick}
+              label={t("Common:SaveButton")}
+              tabIndex={2}
+              isDisabled={false}
+              onClick={onChangeOwnerClick}
             />
             <Button
               scale
               size={ButtonSize.medium}
               label={t("Common:CancelButton")}
-              tabIndex={1}
+              tabIndex={2}
+              isDisabled={false}
               onClick={onCancelClick}
             />
           </ButtonsWrapper>
@@ -126,4 +120,4 @@ const RemovePortalForm = ({ siteUrl }: RemovePortalFormProps) => {
   );
 };
 
-export default RemovePortalForm;
+export default ChangeOwnerForm;

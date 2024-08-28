@@ -38,9 +38,8 @@ import { toastr } from "@docspace/shared/components/toast";
 import { deleteSelf } from "@docspace/shared/api/people";
 
 import { TError } from "@/types";
-
-import { GreetingContainer } from "../GreetingContainer";
-import { ConfirmRouteContext } from "../ConfirmRoute";
+import { ConfirmRouteContext } from "@/components/ConfirmRoute";
+import { GreetingContainer } from "@/components/GreetingContainer";
 
 type ProfileRemoveFormProps = {
   legalTerms: string;

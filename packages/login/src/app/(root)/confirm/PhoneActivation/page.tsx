@@ -28,7 +28,8 @@ import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 import { GreetingContainer } from "@/components/GreetingContainer";
 import { getSettings } from "@/utils/actions";
-import ChangePhoneForm from "@/components/ChangePhoneForm";
+
+import ChangePhoneForm from "./page.client";
 
 async function Page() {
   const settings = await getSettings();

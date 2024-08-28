@@ -29,28 +29,34 @@
 import { useContext, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
-import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
-import { toastr } from "@docspace/shared/components/toast";
+import { Link } from "@docspace/shared/components/link";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { continuePortal } from "@docspace/shared/api/portal";
+import { toastr } from "@docspace/shared/components/toast";
+import { suspendPortal } from "@docspace/shared/api/portal";
 
 import { TError } from "@/types";
+import { URL_ONLYOFFICE } from "@/utils/constants";
+import { ConfirmRouteContext } from "@/components/ConfirmRoute";
+import { ButtonsWrapper } from "@/components/Confirm.styled";
 
-import { ConfirmRouteContext } from "../ConfirmRoute";
-import { ButtonsWrapper } from "../Confirm.styled";
+type DeactivatePortalProps = {
+  siteUrl?: string;
+};
 
-const ContinuePortalForm = () => {
+const DeactivatePortalForm = ({ siteUrl }: DeactivatePortalProps) => {
   const { t } = useTranslation(["Confirm", "Common"]);
   const { linkData } = useContext(ConfirmRouteContext);
 
-  const [isReactivate, setIsReactivate] = useState(false);
+  const [isDeactivate, setIsDeactivate] = useState(false);
 
-  const onRestoreClick = async () => {
+  const url = siteUrl ? siteUrl : URL_ONLYOFFICE;
+
+  const onDeactivateClick = async () => {
     try {
-      await continuePortal(linkData.confirmHeader);
-      setIsReactivate(true);
-      setTimeout(() => (window.location.href = "/"), 10000);
+      await suspendPortal(linkData.confirmHeader);
+      setIsDeactivate(true);
+      setTimeout(() => (window.location.href = url), 10000);
     } catch (error) {
       const knownError = error as TError;
       let errorMessage: string;
@@ -76,31 +82,31 @@ const ContinuePortalForm = () => {
 
   return (
     <>
-      {isReactivate ? (
+      {isDeactivate ? (
         <Text>
-          <Trans t={t} i18nKey="SuccessReactivate" ns="Confirm">
-            Your account has been successfully reactivated. In 10 seconds you
+          <Trans t={t} i18nKey="SuccessDeactivate" ns="Confirm">
+            Your account has been successfully deactivated. In 10 seconds you
             will be redirected to the
-            <Link isHovered href="/">
-              portal
+            <Link isHovered href={url}>
+              site
             </Link>
           </Trans>
         </Text>
       ) : (
         <>
           <Text className="subtitle">
-            {t("PortalContinueTitle", {
+            {t("PortalDeactivateTitle", {
               productName: t("Common:ProductName"),
             })}
           </Text>
           <ButtonsWrapper>
             <Button
-              primary
               scale
+              primary
               size={ButtonSize.medium}
-              label={t("Reactivate")}
+              label={t("Common:Deactivate")}
               tabIndex={1}
-              onClick={onRestoreClick}
+              onClick={onDeactivateClick}
             />
             <Button
               scale
@@ -116,4 +122,4 @@ const ContinuePortalForm = () => {
   );
 };
 
-export default ContinuePortalForm;
+export default DeactivatePortalForm;

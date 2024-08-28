@@ -40,8 +40,7 @@ import { loginWithConfirmKey } from "@docspace/shared/api/user";
 import OperationContainer from "@docspace/shared/components/operation-container";
 
 import { TError } from "@/types";
-
-import { ConfirmRouteContext } from "../ConfirmRoute";
+import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 
 const AuthHandler = () => {
   let searchParams = useSearchParams();

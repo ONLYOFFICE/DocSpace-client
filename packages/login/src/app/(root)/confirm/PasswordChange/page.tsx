@@ -27,8 +27,9 @@
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 import { GreetingContainer } from "@/components/GreetingContainer";
-import PasswordChangeForm from "@/components/PasswordChangeForm";
 import { getPortalPasswordSettings, getSettings } from "@/utils/actions";
+
+import PasswordChangeForm from "./page.client";
 
 async function Page() {
   const [settings, passwordSettings] = await Promise.all([

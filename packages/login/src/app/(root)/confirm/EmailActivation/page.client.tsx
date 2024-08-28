@@ -28,24 +28,30 @@
 
 import { useContext, useEffect, useState } from "react";
 
+import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import AppLoader from "@docspace/shared/components/app-loader";
-import { changeEmail } from "@docspace/shared/api/people";
+import { updateActivationStatus } from "@docspace/shared/api/people";
 
 import { TError } from "@/types";
+import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 
-import { ConfirmRouteContext } from "../ConfirmRoute";
-
-const EmailChangeHandler = () => {
+const EmailActivationHandler = () => {
   const [error, setError] = useState<string>();
 
   const { linkData } = useContext(ConfirmRouteContext);
-  const { email = "", uid = "", key = "" } = linkData;
+
+  const { email, uid = "", confirmHeader = "" } = linkData;
 
   useEffect(() => {
-    async function emailChange() {
+    async function changeActivationStatus() {
       try {
-        await changeEmail(uid, email, key);
-        window.location.replace(`/profile?email_change=success`);
+        const res = await updateActivationStatus(
+          EmployeeActivationStatus.Activated,
+          uid,
+          confirmHeader,
+        );
+
+        window.location.replace(`/login?confirmedEmail=${email}`);
       } catch (error) {
         const knownError = error as TError;
         let errorMessage: string;
@@ -63,8 +69,8 @@ const EmailChangeHandler = () => {
       }
     }
 
-    emailChange();
-  }, [email, uid, key]);
+    changeActivationStatus();
+  }, [email, uid, confirmHeader]);
 
   if (error) {
     console.error(error);
@@ -74,4 +80,4 @@ const EmailChangeHandler = () => {
   return <AppLoader />;
 };
 
-export default EmailChangeHandler;
+export default EmailActivationHandler;

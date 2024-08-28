@@ -37,6 +37,7 @@ import {
   useState,
 } from "react";
 import { useTranslation } from "react-i18next";
+import { useRouter } from "next/navigation";
 
 import {
   TCapabilities,
@@ -71,12 +72,10 @@ import {
 import SsoReactSvg from "PUBLIC_DIR/images/sso.react.svg";
 
 import useDeviceType from "@/hooks/useDeviceType";
-
-import { ConfirmRouteContext } from "../ConfirmRoute";
-import EmailInputForm from "./sub-components/EmailInputForm";
-import RegistrationForm from "./sub-components/RegistrationForm";
-import { RegisterContainer } from "./CreateUserForm.styled";
-import { useRouter } from "next/navigation";
+import { ConfirmRouteContext } from "@/components/ConfirmRoute";
+import { RegisterContainer } from "@/components/RegisterContainer.styled";
+import EmailInputForm from "./_sub-components/EmailInputForm";
+import RegistrationForm from "./_sub-components/RegistrationForm";
 
 export type CreateUserFormProps = {
   userNameRegex: string;

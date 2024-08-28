@@ -26,38 +26,40 @@
 
 "use client";
 
-import { useContext, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
+import { useContext, useState } from "react";
 
-import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { deletePortal } from "@docspace/shared/api/portal";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
-import { suspendPortal } from "@docspace/shared/api/portal";
 
 import { TError } from "@/types";
 import { URL_ONLYOFFICE } from "@/utils/constants";
+import { ConfirmRouteContext } from "@/components/ConfirmRoute";
+import { ButtonsWrapper } from "@/components/Confirm.styled";
 
-import { ButtonsWrapper } from "../Confirm.styled";
-import { ConfirmRouteContext } from "../ConfirmRoute";
-
-type DeactivatePortalProps = {
+type RemovePortalFormProps = {
   siteUrl?: string;
 };
 
-const DeactivatePortalForm = ({ siteUrl }: DeactivatePortalProps) => {
+const RemovePortalForm = ({ siteUrl }: RemovePortalFormProps) => {
   const { t } = useTranslation(["Confirm", "Common"]);
   const { linkData } = useContext(ConfirmRouteContext);
 
-  const [isDeactivate, setIsDeactivate] = useState(false);
+  const [isRemoved, setIsRemoved] = useState(false);
 
   const url = siteUrl ? siteUrl : URL_ONLYOFFICE;
 
-  const onDeactivateClick = async () => {
+  const onDeleteClick = async () => {
     try {
-      await suspendPortal(linkData.confirmHeader);
-      setIsDeactivate(true);
-      setTimeout(() => (window.location.href = url), 10000);
+      const res = await deletePortal(linkData.confirmHeader);
+      setIsRemoved(true);
+      setTimeout(
+        () => (location.href = res && typeof res === "string" ? res : url),
+        10000,
+      );
     } catch (error) {
       const knownError = error as TError;
       let errorMessage: string;
@@ -83,11 +85,11 @@ const DeactivatePortalForm = ({ siteUrl }: DeactivatePortalProps) => {
 
   return (
     <>
-      {isDeactivate ? (
+      {isRemoved ? (
         <Text>
-          <Trans t={t} i18nKey="SuccessDeactivate" ns="Confirm">
-            Your account has been successfully deactivated. In 10 seconds you
-            will be redirected to the
+          <Trans t={t} i18nKey="SuccessRemoved" ns="Confirm">
+            Your account has been successfully removed. In 10 seconds you will
+            be redirected to the
             <Link isHovered href={url}>
               site
             </Link>
@@ -96,18 +98,18 @@ const DeactivatePortalForm = ({ siteUrl }: DeactivatePortalProps) => {
       ) : (
         <>
           <Text className="subtitle">
-            {t("PortalDeactivateTitle", {
+            {t("PortalRemoveTitle", {
               productName: t("Common:ProductName"),
             })}
           </Text>
           <ButtonsWrapper>
             <Button
-              scale
               primary
+              scale
               size={ButtonSize.medium}
-              label={t("Common:Deactivate")}
+              label={t("Common:Delete")}
               tabIndex={1}
-              onClick={onDeactivateClick}
+              onClick={onDeleteClick}
             />
             <Button
               scale
@@ -123,4 +125,4 @@ const DeactivatePortalForm = ({ siteUrl }: DeactivatePortalProps) => {
   );
 };
 
-export default DeactivatePortalForm;
+export default RemovePortalForm;

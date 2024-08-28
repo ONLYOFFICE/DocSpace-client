@@ -53,10 +53,9 @@ import {
 } from "@docspace/shared/api/people";
 
 import { TActivateConfirmUser, TError } from "@/types";
-
-import { RegisterContainer } from "../CreateUserForm/CreateUserForm.styled";
-import { GreetingUserContainer } from "../CreateUserForm/sub-components/GreetingUserContainer";
-import { ConfirmRouteContext } from "../ConfirmRoute";
+import { ConfirmRouteContext } from "@/components/ConfirmRoute";
+import { RegisterContainer } from "@/components/RegisterContainer.styled";
+import { GreetingUserContainer } from "@/components/GreetingContainer";
 
 type ActivateUserFormPorps = {
   passwordHash: TPasswordHash;

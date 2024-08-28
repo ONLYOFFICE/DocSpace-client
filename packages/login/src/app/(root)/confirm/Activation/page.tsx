@@ -27,10 +27,10 @@
 import { headers } from "next/headers";
 
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
-
 import { getPortalPasswordSettings, getSettings } from "@/utils/actions";
-import ActivateUserForm from "@/components/ActivateUserForm";
 import { GreetingCreateUserContainer } from "@/components/GreetingContainer";
+
+import ActivateUserForm from "./page.client";
 
 type ActivationProps = {
   searchParams: { [key: string]: string };

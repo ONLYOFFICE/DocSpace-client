@@ -46,7 +46,7 @@ import { changePassword } from "@docspace/shared/api/people";
 import { ButtonKeys } from "@docspace/shared/enums";
 
 import { TError } from "@/types";
-import { ConfirmRouteContext } from "../ConfirmRoute";
+import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 
 type PasswordChangeFormProps = {
   passwordHash: TPasswordHash;

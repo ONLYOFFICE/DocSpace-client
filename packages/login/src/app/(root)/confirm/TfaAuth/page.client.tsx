@@ -46,8 +46,7 @@ import { TPasswordHash } from "@docspace/shared/api/settings/types";
 import { ButtonKeys } from "@docspace/shared/enums";
 
 import { TError } from "@/types";
-
-import { ConfirmRouteContext } from "../ConfirmRoute";
+import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 
 type TfaAuthFormProps = {
   passwordHash: TPasswordHash;

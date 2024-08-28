@@ -41,8 +41,7 @@ import {
 import { ALLOWED_PASSWORD_CHARACTERS } from "@docspace/shared/constants";
 
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
-
-import { GreetingUserContainer } from "./GreetingUserContainer";
+import { GreetingUserContainer } from "@/components/GreetingContainer";
 
 type RegistrationFormProps = {
   isLoading: boolean;

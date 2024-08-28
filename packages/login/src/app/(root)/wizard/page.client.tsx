@@ -86,7 +86,7 @@ import {
   StyledInfo,
   StyledLink,
   WizardContainer,
-} from "./WizardForm.styled";
+} from "./page.styled";
 
 type WizardFormProps = {
   passwordSettings?: TPasswordSettings;

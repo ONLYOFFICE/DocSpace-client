@@ -28,7 +28,6 @@ import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 import { GreetingContainer } from "@/components/GreetingContainer";
-import WizardForm from "@/components/WizardForm";
 import {
   getMachineName,
   getPortalPasswordSettings,
@@ -37,6 +36,8 @@ import {
   getPortalTimeZones,
   getPortalCultures,
 } from "@/utils/actions";
+
+import WizardForm from "./page.client";
 
 async function Page() {
   const settings = await getSettings();

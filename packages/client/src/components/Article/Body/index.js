@@ -28,7 +28,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import { DeviceType, RoomSearchArea } from "@docspace/shared/enums";
 import Items from "./Items";
@@ -43,9 +43,7 @@ import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { showProgress } from "@docspace/shared/utils/common";
-import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 
 const ArticleBodyContent = (props) => {
   const {
@@ -77,18 +75,13 @@ const ArticleBodyContent = (props) => {
     isFrame,
   } = props;
 
-  const navigate = useNavigate();
   const location = useLocation();
 
   const [disableBadgeClick, setDisableBadgeClick] = React.useState(false);
   const [activeItemId, setActiveItemId] = React.useState(null);
 
-  const isAccounts = location.pathname.includes("accounts/filter");
-
-  const onClick = React.useCallback(
-    (e, folderId, title, rootFolderType, canCreate) => {
-      const { toggleArticleOpen } = props;
-
+  const getLinkData = React.useCallback(
+    (folderId, title, rootFolderType, canCreate) => {
       let params = null;
       let path = ``;
 
@@ -99,8 +92,6 @@ const ArticleBodyContent = (props) => {
         rootFolderType,
         canCreate,
       };
-
-      let withTimer = !!selectedFolderId;
 
       switch (folderId) {
         case myFolderId:
@@ -155,17 +146,7 @@ const ArticleBodyContent = (props) => {
           params = accountsFilter.toUrlParams();
           path = getCategoryUrl(CategoryType.Accounts);
 
-          withTimer = false;
-
           break;
-        case "settings":
-          path = getCategoryUrl(CategoryType.Settings);
-          navigate(path);
-
-          if (currentDeviceType === DeviceType.mobile) {
-            toggleArticleOpen();
-          }
-          return;
         case roomsFolderId:
         default:
           const roomsFilter = RoomsFilter.getDefault(
@@ -181,15 +162,32 @@ const ArticleBodyContent = (props) => {
 
       path += `?${params}&date=${new Date().getTime()}`;
 
-      if (openingNewTab(path, e)) return;
+      return { path, state };
+    },
+    [
+      roomsFolderId,
+      archiveFolderId,
+      myFolderId,
+      recycleBinFolderId,
+      activeItemId,
+    ],
+  );
 
-      if (folderId === "accounts" || folderId === "settings") clearFiles();
+  const onClick = React.useCallback(
+    (e, folderId) => {
+      if (e?.ctrlKey || e?.metaKey || e?.shiftKey || e?.button) return;
 
-      setSelection && setSelection([]);
+      const { toggleArticleOpen } = props;
+
+      const isAccountsClick = folderId === "accounts";
+
+      let withTimer = isAccountsClick ? false : !!selectedFolderId;
+
+      if (isAccountsClick) clearFiles();
+
+      setSelection?.([]);
 
       setIsLoading(true, withTimer);
-
-      navigate(path, { state });
 
       if (currentDeviceType === DeviceType.mobile) {
         toggleArticleOpen();
@@ -202,7 +200,7 @@ const ArticleBodyContent = (props) => {
       recycleBinFolderId,
       activeItemId,
       selectedFolderId,
-      isAccounts,
+
       setSelection,
     ],
   );
@@ -281,6 +279,7 @@ const ArticleBodyContent = (props) => {
       <Items
         onClick={onClick}
         onBadgeClick={onShowNewFilesPanel}
+        getLinkData={getLinkData}
         showText={showText}
         onHide={toggleArticleOpen}
         activeItemId={activeItemId}

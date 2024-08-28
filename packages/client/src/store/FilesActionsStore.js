@@ -79,7 +79,11 @@ import { CategoryType } from "SRC_DIR/helpers/constants";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
 import AccountsFilter from "@docspace/shared/api/people/filter";
 import { RoomSearchArea, UrlActionType } from "@docspace/shared/enums";
-import { getObjectByLocation } from "@docspace/shared/utils/common";
+import {
+  getConvertedQuota,
+  getConvertedSize,
+  getObjectByLocation,
+} from "@docspace/shared/utils/common";
 import uniqueid from "lodash/uniqueId";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import {
@@ -280,13 +284,41 @@ class FilesActionStore {
     return treeList;
   };
 
-  createFoldersTree = async (files, folderId) => {
+  createFoldersTree = async (t, files, folderId) => {
     //console.log("createFoldersTree", files, folderId);
 
-    const { primaryProgressDataStore } = this.uploadDataStore;
-
     const { setPrimaryProgressBarData, clearPrimaryProgressData } =
-      primaryProgressDataStore;
+      this.uploadDataStore.primaryProgressDataStore;
+
+    const roomFolder = this.selectedFolderStore.navigationPath.find(
+      (r) => r.isRoom,
+    );
+
+    const withoutHiddenFiles = Object.values(files).filter((f) => {
+      const isHidden = /(^|\/)\.[^\/\.]/g.test(f.name);
+
+      return !isHidden;
+    });
+
+    if (roomFolder && roomFolder.quotaLimit) {
+      const freeSpace = roomFolder.quotaLimit - roomFolder.usedSpace;
+
+      const filesSize = withoutHiddenFiles.reduce((acc, file) => {
+        return acc + file.size;
+      }, 0);
+
+      if (filesSize > freeSpace) {
+        clearPrimaryProgressData();
+
+        const size = getConvertedSize(t, roomFolder.quotaLimit);
+
+        throw new Error(
+          t("Common:RoomSpaceQuotaExceeded", {
+            size,
+          }),
+        );
+      }
+    }
 
     const operationId = uniqueid("operation_");
 
@@ -302,7 +334,7 @@ class FilesActionStore {
 
     setPrimaryProgressBarData({ ...pbData, disableUploadPanelOpen: true });
 
-    const tree = this.convertToTree(files);
+    const tree = this.convertToTree(withoutHiddenFiles);
 
     const filesList = [];
     await this.createFolderTree(tree, toFolderId, filesList);

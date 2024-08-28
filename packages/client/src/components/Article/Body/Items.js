@@ -45,6 +45,7 @@ import BonusItem from "./BonusItem";
 import AccountsItem from "./AccountsItem";
 
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
+import { toastr } from "@docspace/shared/components/toast";
 
 const StyledDragAndDrop = styled(DragAndDrop)`
   display: contents;
@@ -75,6 +76,7 @@ const Item = ({
   iconBadge,
   folderId,
   currentColorScheme,
+  getLinkData,
 }) => {
   const [isDragActive, setIsDragActive] = useState(false);
 
@@ -87,9 +89,13 @@ const Item = ({
     (files, uploadToFolder) => {
       dragging && setDragging(false);
 
-      createFoldersTree(files, uploadToFolder).then((f) => {
-        if (f.length > 0) startUpload(f, null, t);
-      });
+      createFoldersTree(t, files, uploadToFolder)
+        .then((f) => {
+          if (f.length > 0) startUpload(f, null, t);
+        })
+        .catch((err) => {
+          toastr.error(err);
+        });
     },
     [t, dragging, setDragging, startUpload, createFoldersTree],
   );
@@ -126,16 +132,22 @@ const Item = ({
     (e, folderId) => {
       setBufferSelection(null);
 
-      onClick &&
-        onClick(
-          e,
-          folderId,
-          item.title,
-          item.rootFolderType,
-          item.security.Create,
-        );
+      onClick?.(
+        e,
+        folderId,
+        item.title,
+        item.rootFolderType,
+        item.security.Create,
+      );
     },
     [onClick, item.title, item.rootFolderType],
+  );
+
+  const linkData = getLinkData(
+    item.id,
+    item.title,
+    item.rootFolderType,
+    item.security.Create,
   );
 
   return (
@@ -170,6 +182,7 @@ const Item = ({
         onClickBadge={onBadgeClick}
         iconBadge={iconBadge}
         badgeTitle={labelBadge ? "" : t("EmptyRecycleBin")}
+        linkData={linkData}
         $currentColorScheme={currentColorScheme}
       />
     </StyledDragAndDrop>
@@ -215,6 +228,8 @@ const Items = ({
   currentDeviceType,
   folderAccess,
   currentColorScheme,
+
+  getLinkData,
 }) => {
   const getEndOfBlock = React.useCallback((item) => {
     switch (item.key) {
@@ -329,6 +344,7 @@ const Items = ({
             getEndOfBlock={getEndOfBlock}
             showText={showText}
             onClick={onClick}
+            getLinkData={getLinkData}
             onMoveTo={isTrash ? onRemove : onMoveTo}
             onBadgeClick={isTrash ? onEmptyTrashAction : onBadgeClick}
             showDragItems={showDragItems}
@@ -341,16 +357,6 @@ const Items = ({
         );
       });
 
-      /*if (!firstLoad && !isVisitor)
-        items.splice(
-          3,
-          0,
-          <SettingsItem
-            key="settings-item"
-            onClick={onClick}
-            isActive={activeItemId === "settings"}
-          />
-        );*/
       if (!isVisitor && !isCollaborator)
         items.splice(
           3,
@@ -358,6 +364,7 @@ const Items = ({
           <AccountsItem
             key="accounts-item"
             onClick={onClick}
+            getLinkData={getLinkData}
             isActive={activeItemId === "accounts"}
           />,
         );
@@ -375,6 +382,7 @@ const Items = ({
       dragging,
       getFolderIcon,
       onClick,
+      getLinkData,
       onMoveTo,
       getEndOfBlock,
       onBadgeClick,

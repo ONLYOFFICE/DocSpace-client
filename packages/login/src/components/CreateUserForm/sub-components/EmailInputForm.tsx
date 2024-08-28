@@ -70,7 +70,7 @@ const EmailInputForm = ({
   return (
     <div className="email-container">
       <Text fontSize="16px" fontWeight="600" className="sign-in-subtitle">
-        {t("EnterEmail")}
+        {t("EnterEmailHeader")}
       </Text>
       <FieldContainer
         className="form-field"

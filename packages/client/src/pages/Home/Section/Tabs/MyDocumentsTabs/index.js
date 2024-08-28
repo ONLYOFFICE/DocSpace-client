@@ -39,6 +39,7 @@ const MyDocumentsTabs = ({
   showBodyLoader,
   isRoot,
   user,
+  setChangeDocumentsTabs,
 }) => {
   const { t } = useTranslation(["Common", "Files"]);
 
@@ -77,6 +78,7 @@ const MyDocumentsTabs = ({
       filter.searchArea = 3;
     } else filter.searchArea = null;
 
+    setChangeDocumentsTabs(true);
     setFilter(filter);
     window.DocSpace.navigate(`${url}?${filter.toUrlParams()}`);
   };
@@ -96,11 +98,19 @@ const MyDocumentsTabs = ({
 };
 
 export default inject(
-  ({ treeFoldersStore, filesStore, clientLoadingStore, userStore }) => {
+  ({
+    treeFoldersStore,
+    filesStore,
+    clientLoadingStore,
+    userStore,
+    selectedFolderStore,
+  }) => {
     const { isPersonalRoom, isRecentTab, isRoot } = treeFoldersStore;
     const { setFilter } = filesStore;
     const { showBodyLoader } = clientLoadingStore;
     const { user } = userStore;
+    const { setChangeDocumentsTabs } = selectedFolderStore;
+
     return {
       isPersonalRoom,
       isRecentTab,
@@ -108,6 +118,7 @@ export default inject(
       showBodyLoader,
       isRoot,
       user,
+      setChangeDocumentsTabs,
     };
   },
 )(observer(MyDocumentsTabs));

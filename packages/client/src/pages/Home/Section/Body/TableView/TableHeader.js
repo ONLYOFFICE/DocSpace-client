@@ -453,10 +453,13 @@ class FilesTableHeader extends React.Component {
       showStorageInfo,
       roomsFilter,
       filter,
+      changeDocumentsTabs,
     } = this.props;
 
     const sortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
     const sortOrder = isRooms ? roomsFilter.sortOrder : filter.sortOrder;
+
+    const tabChangeCompleted = !(this.state.isRecentTab && changeDocumentsTabs);
 
     if (
       isArchiveFolder !== prevProps.isArchiveFolder ||
@@ -466,20 +469,9 @@ class FilesTableHeader extends React.Component {
       columnInfoPanelStorageName !== prevProps.columnInfoPanelStorageName ||
       isRecentTab !== this.state.isRecentTab ||
       showStorageInfo !== prevProps.showStorageInfo ||
-      sortBy !== this.state.sortBy ||
-      sortOrder !== this.state.sortOrder
+      (tabChangeCompleted && sortBy !== this.state.sortBy) ||
+      (tabChangeCompleted && sortOrder !== this.state.sortOrder)
     ) {
-      console.log(
-        "isRecentTab this.state.isRecentTab",
-        isRecentTab,
-        this.state.isRecentTab,
-      );
-      console.log("sortBy this.state.sortBy", sortBy, this.state.sortBy);
-      console.log(
-        "sortOrder this.state.sortOrder",
-        sortOrder,
-        this.state.sortOrder,
-      );
       return this.getTableColumns(true);
     }
 
@@ -694,6 +686,7 @@ export default inject(
     } = tableStore;
 
     const { isPublicRoom, publicRoomKey } = publicRoomStore;
+    const { changeDocumentsTabs } = selectedFolderStore;
 
     return {
       setRoomsFilter,
@@ -758,6 +751,7 @@ export default inject(
       isDefaultRoomsQuotaSet,
       showStorageInfo,
       isArchiveFolder,
+      changeDocumentsTabs,
     };
   },
 )(

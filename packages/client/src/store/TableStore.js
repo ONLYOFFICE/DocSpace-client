@@ -219,7 +219,6 @@ class TableStore {
         getIsAccountsGroups,
         getIsAccountsInsideGroup,
       } = this.treeFoldersStore;
-
       const isRooms = isRoomsFolder || isArchiveFolder;
 
       if (isRooms) {
@@ -436,7 +435,6 @@ class TableStore {
 
       for (let col of defaultColumns) {
         const column = splitColumns.find((key) => key === col.key);
-
         column ? (col.enable = true) : (col.enable = false);
 
         columns.push(col);

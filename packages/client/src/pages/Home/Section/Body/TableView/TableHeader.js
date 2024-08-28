@@ -361,7 +361,6 @@ class FilesTableHeader extends React.Component {
     }
 
     let columns = getColumns(defaultColumns, isRecentTab);
-
     const storageColumns = localStorage.getItem(tableStorageName);
     const splitColumns = storageColumns && storageColumns.split(",");
     const resetColumnsSize =
@@ -373,7 +372,6 @@ class FilesTableHeader extends React.Component {
     const sortOrder = isRooms ? roomsFilter.sortOrder : filter.sortOrder;
 
     this.setTableColumns(tableColumns);
-
     if (fromUpdate) {
       this.setState({
         columns,
@@ -470,7 +468,6 @@ class FilesTableHeader extends React.Component {
       if (columnIndex === -1) return;
 
       columns[columnIndex].enable = this.props.withContent;
-
       this.setState({ columns });
     }
 

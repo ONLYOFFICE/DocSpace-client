@@ -97,11 +97,7 @@ const RegisterModalDialog = ({
       onClose={onRegisterModalClose}
       isLarge
     >
-      <ModalDialog.Header>
-        <Text isBold fontSize="21px">
-          {t("RegisterTitle")}
-        </Text>
-      </ModalDialog.Header>
+      <ModalDialog.Header>{t("RegisterTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text key="text-body" isBold={false} fontSize="13px" noSelect>
           {getDomainsBlock()}

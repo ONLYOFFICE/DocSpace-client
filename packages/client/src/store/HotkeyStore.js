@@ -692,9 +692,13 @@ class HotkeyStore {
 
     const files = await getFilesFromEvent(event);
 
-    createFoldersTree(files, uploadToFolder).then((f) => {
-      if (f.length > 0) startUpload(f, null, t);
-    });
+    createFoldersTree(t, files)
+      .then((f) => {
+        if (f.length > 0) startUpload(f, null, t);
+      })
+      .catch((err) => {
+        toastr.error(err);
+      });
   };
 
   get countTilesInRow() {

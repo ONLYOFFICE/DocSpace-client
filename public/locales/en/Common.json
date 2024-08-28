@@ -516,5 +516,6 @@
   "Website": "Website",
   "Yes": "Yes",
   "Yesterday": "Yesterday",
-  "You": "You"
+  "You": "You",
+  "RoomSpaceQuotaExceeded": "Room space quota exceeded ({{size}})."
 }

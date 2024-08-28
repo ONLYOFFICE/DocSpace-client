@@ -227,6 +227,7 @@ const DataReassignmentDialog = ({
             withCancelButton
             cancelButtonLabel=""
             headerProps={{
+              onCloseClick: onClose,
               onBackClick: onClosePeopleSelector,
               withoutBackButton: false,
               headerLabel: "",

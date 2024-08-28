@@ -49,6 +49,7 @@ import {
   StyledHelpButton,
   StyledDeleteIcon,
   StyledInviteUserBody,
+  ErrorWrapper,
 } from "../StyledInvitePanel";
 import { filterGroupRoleOptions, filterUserRoleOptions } from "SRC_DIR/helpers";
 import AccessSelector from "../../../AccessSelector";
@@ -229,7 +230,7 @@ const Item = ({
       </StyledInviteUserBody>
 
       {hasError ? (
-        <>
+        <ErrorWrapper>
           <StyledHelpButton
             iconName={InfoEditReactSvgUrl}
             displayType="auto"
@@ -244,7 +245,7 @@ const Item = ({
             size="medium"
             onClick={removeItem}
           />
-        </>
+        </ErrorWrapper>
       ) : (
         <>
           {warning && (

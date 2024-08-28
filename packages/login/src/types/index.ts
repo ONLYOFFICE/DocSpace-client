@@ -65,6 +65,8 @@ export type TTimeZoneOption = {
   label: string;
 };
 
+export type TPortal = { portalLink: string; portalName: string };
+
 export type TCulturesOption =
   | {
       isBeta?: boolean;

@@ -143,7 +143,6 @@ class TableStore {
   };
 
   setModifiedRecentColumn = (enable) => {
-    console.log("setModifiedRecentColumn", enable);
     this.modifiedRecentColumnIsEnabled = enable;
   };
 
@@ -211,8 +210,6 @@ class TableStore {
         ? frameTableColumns.split(",")
         : null;
 
-    console.log("splitColumns", splitColumns);
-
     if (splitColumns) {
       const {
         isRoomsFolder,
@@ -221,20 +218,9 @@ class TableStore {
         getIsAccountsPeople,
         getIsAccountsGroups,
         getIsAccountsInsideGroup,
-        // isRecentTab,
-        // isRecentFolder,
       } = this.treeFoldersStore;
 
       const isRooms = isRoomsFolder || isArchiveFolder;
-
-      // console.log(
-      //   "getIsAccountsPeople getIsAccountsGroups getIsAccountsInsideGroup",
-      //   getIsAccountsPeople(),
-      //   getIsAccountsGroups(),
-      //   getIsAccountsInsideGroup(),
-      // );
-
-      // console.log("isRooms  isTrashFolder", isRooms, isTrashFolder);
 
       if (isRooms) {
         this.setRoomColumnType(splitColumns.includes("Type"));
@@ -281,15 +267,7 @@ class TableStore {
         return;
       }
 
-      console.log("setColumnsEnable isRecentTab", isRecentTab);
-      console.log("window.location", window.location);
-
       if (isRecentTab) {
-        console.log(
-          "call setModifiedRecentColumn",
-          splitColumns.includes("ModifiedRecent"),
-        );
-
         this.setModifiedRecentColumn(splitColumns.includes("ModifiedRecent"));
         this.setAuthorRecentColumn(splitColumns.includes("AuthorRecent"));
         this.setCreatedRecentColumn(splitColumns.includes("CreatedRecent"));
@@ -454,11 +432,6 @@ class TableStore {
     const columns = [];
 
     if (splitColumns) {
-      console.log(
-        "getColumns defaultColumns splitColumns",
-        defaultColumns,
-        splitColumns,
-      );
       this.setColumnsEnable(null, isRecentTab);
 
       for (let col of defaultColumns) {
@@ -470,7 +443,6 @@ class TableStore {
       }
       return columns;
     } else if (isFrame && frameTableColumns) {
-      console.log("2");
       this.setColumnsEnable(frameTableColumns);
 
       const frameTableArray = frameTableColumns.split(",");

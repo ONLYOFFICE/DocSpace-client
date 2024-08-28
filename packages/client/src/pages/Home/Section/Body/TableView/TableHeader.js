@@ -221,11 +221,6 @@ class FilesTableHeader extends React.Component {
           }
         : {};
 
-      console.log(
-        "getTableColumns modifiedRecentColumnIsEnabled",
-        this.props.modifiedRecentColumnIsEnabled,
-      );
-
       const columns = [
         {
           key: "Name",
@@ -365,11 +360,8 @@ class FilesTableHeader extends React.Component {
       defaultColumns.push(...columns);
     }
 
-    console.log("call getColumns defaultColumns", defaultColumns);
-
     let columns = getColumns(defaultColumns, isRecentTab);
 
-    console.log("getTableColumns columns", columns);
     const storageColumns = localStorage.getItem(tableStorageName);
     const splitColumns = storageColumns && storageColumns.split(",");
     const resetColumnsSize =
@@ -381,11 +373,7 @@ class FilesTableHeader extends React.Component {
     const sortOrder = isRooms ? roomsFilter.sortOrder : filter.sortOrder;
 
     this.setTableColumns(tableColumns);
-    console.log(
-      "fromUpdate this.props.modifiedRecentColumnIsEnabled",
-      fromUpdate,
-      this.props.modifiedRecentColumnIsEnabled,
-    );
+
     if (fromUpdate) {
       this.setState({
         columns,
@@ -482,11 +470,6 @@ class FilesTableHeader extends React.Component {
       if (columnIndex === -1) return;
 
       columns[columnIndex].enable = this.props.withContent;
-      console.log(
-        "componentDidUpdate  columns[columnIndex].enable",
-        columns[columnIndex].enable,
-        this.props.withContent,
-      );
 
       this.setState({ columns });
     }
@@ -506,11 +489,10 @@ class FilesTableHeader extends React.Component {
 
   onColumnChange = (key) => {
     const { columns } = this.state;
-    console.log("onColumnChange columns", columns);
+
     const columnIndex = columns.findIndex((c) => c.key === key);
     if (columnIndex === -1) return;
 
-    console.log("onColumnChange setColumnEnable", key);
     this.props.setColumnEnable(key);
 
     columns[columnIndex].enable = !columns[columnIndex].enable;

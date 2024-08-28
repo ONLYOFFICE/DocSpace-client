@@ -2,7 +2,7 @@
   "AddManually": "Pievienot manuāli",
   "AddManuallyDescriptionAccounts": "Uzaicināt jaunus lietotājus uz {{productName}} personīgi pa e-pastu",
   "AddManuallyDescriptionRoom": "Pievienot telpā esošos {{productName}} lietotājus, izmantojot vārdus, vai uzaicināt jaunus lietotājus personīgi pa e-pastu",
-  "EmailErrorMessage": "E- pasta adrese ir nederīga. Jūs varat rediģēt e-pastu, noklikšķinot uz tā.",
+  "EmailErrorMessage": "E- pasta adrese ir nederīga. Jūs varat rediģēt e-pastu, veicot dubultklikšķi uz tā.",
   "GroupMaxAvailableRoleWarning": "Grupas var pievienot telpai ar maksimālo {{roleName}} lomu. Tomēr jūs varat mainīt atsevišķu lietotāju lomu grupā pēc tam, kad tā ir veiksmīgi pievienota.",
   "InvitationLanguage": "Uzaicinājuma valoda",
   "InviteAccountSearchPlaceholder": "Uzaicināt personas pa e-pastu",

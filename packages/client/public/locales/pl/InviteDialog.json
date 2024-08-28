@@ -2,7 +2,7 @@
   "AddManually": "Dodaj ręcznie",
   "AddManuallyDescriptionAccounts": "Zaproś nowych użytkowników do {{productName}} osobiście poprzez wiadomość e-mail",
   "AddManuallyDescriptionRoom": "Dodaj istniejących użytkowników {{productName}} do pokoju za pomocą nazw lub zaproś nowych użytkowników osobiście za pośrednictwem poczty elektronicznej",
-  "EmailErrorMessage": "Niepoprawny adres e-mail Możesz poprawić adres e-mail klikając go.",
+  "EmailErrorMessage": "Niepoprawny adres e-mail. Możesz poprawić adres e-mail klikając go dwukrotnie.",
   "GroupMaxAvailableRoleWarning": "Grupy mogą zostać dodane do pokoju z maksymalną rolą {{roleName}}. Możesz jednak zmienić role poszczególnych użytkowników w grupie po jej pomyślnym dodaniu.",
   "InvitationLanguage": "Język zaproszenia",
   "InviteAccountSearchPlaceholder": "Zaproś ludzi poprzez e-mail",

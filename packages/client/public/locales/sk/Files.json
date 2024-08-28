@@ -117,6 +117,7 @@
   "OpenLocation": "Otvoriť umiestnenie",
   "PasswordAccess": "Prístup je chránený heslom",
   "PasswordLink": "Pridajte heslo na ochranu vášho odkazu.",
+  "PasswordProtectedFiles": "Prosím <0>zadajte heslo</0> pre chránené súbory, aby ste mohli pokračovať",
   "PasswordSuccessfullyCopied": "Heslo úspešne skopírované",
   "Pin": "Pripnúť",
   "PinToTop": "Pripnúť hore",

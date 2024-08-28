@@ -3064,6 +3064,8 @@ export const getBaseTheme = () => {
           linkColor: link,
 
           sso: {
+            textColor: gray,
+            errorColor: lightErrorStatus,
             toggleContentBackground: grayLight,
             iconButton: black,
             iconButtonDisabled: gray,

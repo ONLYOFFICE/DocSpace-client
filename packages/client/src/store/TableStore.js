@@ -78,7 +78,7 @@ class TableStore {
 
   authorTrashColumnIsEnabled = true;
   createdTrashColumnIsEnabled = false;
-  sizeTrashColumnIsEnabled = false;
+  sizeTrashColumnIsEnabled = true;
   typeTrashColumnIsEnabled = false;
 
   typeAccountsColumnIsEnabled = true;

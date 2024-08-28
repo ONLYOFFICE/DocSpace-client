@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -30,6 +29,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useTranslation, Trans } from "react-i18next";
+import { useRouter } from "next/navigation";
 
 import ScopeList from "@docspace/shared/utils/oauth/ScopeList";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
@@ -44,10 +44,9 @@ import { deleteCookie } from "@docspace/shared/utils/cookie";
 import { IClientProps, TScope } from "@docspace/shared/utils/oauth/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import api from "@docspace/shared/api";
-
-import OAuthClientInfo from "./ConsentInfo";
-import { useRouter } from "next/navigation";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
+
+import OAuthClientInfo from "../../../components/ConsentInfo";
 
 const StyledButtonContainer = styled.div`
   margin-top: 32px;

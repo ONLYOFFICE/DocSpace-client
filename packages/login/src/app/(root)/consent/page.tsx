@@ -23,13 +23,13 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
 import { cookies } from "next/headers";
 
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { LANGUAGE } from "@docspace/shared/constants";
 
-import Consent from "@/components/Consent";
 import {
   getOAuthClient,
   getScopeList,
@@ -37,6 +37,8 @@ import {
   getUser,
 } from "@/utils/actions";
 import { GreetingLoginContainer } from "@/components/GreetingContainer";
+
+import Consent from "./page.client";
 
 async function Page({
   searchParams,

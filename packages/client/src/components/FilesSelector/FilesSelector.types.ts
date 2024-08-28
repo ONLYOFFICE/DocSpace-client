@@ -29,12 +29,15 @@ import {
   TFilesSettings,
   TFolder,
 } from "@docspace/shared/api/files/types";
-import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
+import {
+  TBreadCrumb,
+  TSelectorHeader,
+} from "@docspace/shared/components/selector/Selector.types";
 import { DeviceType } from "@docspace/shared/enums";
 import { TTheme } from "@docspace/shared/themes";
 import SocketIOHelper from "@docspace/shared/utils/socket";
 
-export type FilesSelectorProps = {
+export type FilesSelectorProps = TSelectorHeader & {
   isPanelVisible: boolean;
   // withoutImmediatelyClose: boolean;
   isThirdParty: boolean;

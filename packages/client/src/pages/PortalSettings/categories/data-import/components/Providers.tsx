@@ -41,6 +41,7 @@ import NextcloudWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.nextc
 import WorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.onlyoffice.react.svg?url";
 
 import { LinkType } from "@docspace/shared/components/link/Link.enums";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import DataImportLoader from "../sub-components/DataImportLoader";
 import { WorkspacesContainer } from "../StyledDataImport";
 import { ProvidersProps, InjectedProvidersProps } from "../types";
@@ -51,7 +52,7 @@ const Providers = (props: ProvidersProps) => {
 
   const [areProvidersReady, setAreProvidersReady] = useState(false);
 
-  const { t } = useTranslation(["Settings"]);
+  const { t, ready } = useTranslation(["Settings"]);
 
   const workspaces = useMemo(() => {
     const logos = {
@@ -79,6 +80,10 @@ const Providers = (props: ProvidersProps) => {
   useEffect(() => {
     handleMigrationCheck();
   }, [handleMigrationCheck]);
+
+  useEffect(() => {
+    if (ready) setDocumentTitle(t("DataImport"));
+  }, [ready, t]);
 
   if (!areProvidersReady) return <DataImportLoader />;
   return (

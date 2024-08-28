@@ -63,8 +63,11 @@ const StyledSelector = styled.div`
   overflow: hidden;
 `;
 
-const StyledHeader = styled.div<{ withoutBorder?: boolean }>`
-  width: calc(100% - 32px);
+const StyledHeader = styled.div<{
+  withoutBorder?: boolean;
+  withoutIcon: boolean;
+}>`
+  width: calc(100% - 53px);
   min-height: 53px;
   height: 53px;
   max-height: 53px;
@@ -82,6 +85,7 @@ const StyledHeader = styled.div<{ withoutBorder?: boolean }>`
   .arrow-button {
     cursor: pointer;
     margin-inline-end: 12px;
+    min-width: 17px;
 
     svg {
       ${({ theme }) =>

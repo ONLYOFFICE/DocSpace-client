@@ -44,6 +44,8 @@ import {
   getIconPathByFolderType,
   isPublicPreview,
 } from "@docspace/shared/utils/common";
+import { toastr } from "@docspace/shared/components/toast";
+
 class FilesSettingsStore {
   thirdPartyStore;
   treeFoldersStore;
@@ -192,12 +194,14 @@ class FilesSettingsStore {
   setStoreOriginal = (data, setting) =>
     api.files
       .storeOriginal(data)
-      .then((res) => this.setFilesSetting(setting, res));
+      .then((res) => this.setFilesSetting(setting, res))
+      .catch((e) => toastr.error(e));
 
   setConfirmDelete = (data, setting) =>
     api.files
       .changeDeleteConfirm(data)
-      .then((res) => this.setFilesSetting(setting, res));
+      .then((res) => this.setFilesSetting(setting, res))
+      .catch((e) => toastr.error(e));
 
   setStoreForceSave = (data) =>
     api.files.storeForceSave(data).then((res) => this.setStoreForcesave(res));
@@ -211,13 +215,15 @@ class FilesSettingsStore {
   setKeepNewFileName = (data) => {
     api.files
       .changeKeepNewFileName(data)
-      .then((res) => this.setFilesSetting("keepNewFileName", res));
+      .then((res) => this.setFilesSetting("keepNewFileName", res))
+      .catch((e) => toastr.error(e));
   };
 
   setOpenEditorInSameTab = (data) => {
     api.files
       .changeOpenEditorInSameTab(data)
-      .then((res) => this.setFilesSetting("openEditorInSameTab", res));
+      .then((res) => this.setFilesSetting("openEditorInSameTab", res))
+      .catch((e) => toastr.error(e));
   };
 
   setEnableThirdParty = async (data, setting) => {

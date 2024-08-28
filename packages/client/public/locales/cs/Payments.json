@@ -29,7 +29,7 @@
   "NewUsersWillExceedMembersLimit": "Přidání nových placených uživatelů není možné, protože je dosažen limit pro počet administrátorů zahrnutých ve vašem aktuálním tarifu.",
   "NotPossibleRoomRestoring": "Obnovení této místnosti není možné, protože je dosažen limit pro počet místností zahrnutých ve vašem aktuálním plánu.",
   "NumberOfRoomsAccordingToTariff": "Počet místností podle vašeho tarifního plánu: {{currentValue}}/{{maxValue}}",
-  "NumberOfUsersAccordingToTariff": "Počet administrátorů/pokročilých uživatelů podle vašeho tarifního plánu: {currentValue}}/{{maxValue}}",
+  "NumberOfUsersAccordingToTariff": "Počet administrátorů/pokročilých uživatelů podle vašeho tarifního plánu: {{currentValue}}/{{maxValue}}",
   "Pay": "Platit",
   "Payer": "Plátce",
   "PayerDescription": "Tento uživatel má přístup k platebním údajům a je jediným uživatelem, který může upravovat kvóty a provádět platby. Vlastník {{productName}}, stejně jako samotný správce platby, může roli správce platby přeřadit pomocí zákaznického prostoru Stripe.",

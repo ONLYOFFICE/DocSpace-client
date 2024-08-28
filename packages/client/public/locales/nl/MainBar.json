@@ -12,7 +12,7 @@
   "RemoveFilesOrContactToUpgrade": "Verwijder de overbodige bestanden of neem contact op met de {{productName}} beheerder om het tariefplan te upgraden.",
   "RemoveFilesOrContactToUpgradeQuota": "Verwijder de onnodige bestanden of neem contact op met de {{productName}} beheerder om de opslagquota te verhogen.",
   "RequestActivation": "Activatie opnieuw aanvragen",
-  "RoomQuotaDescription": "U kunt de overbodige kamers archiveren of <1>click here</1> </1> om een meer geschikt prijsplan voor uw {productName}}. te vinden.",
+  "RoomQuotaDescription": "U kunt de overbodige kamers archiveren of <1>click here</1> om een meer geschikt prijsplan voor uw {{productName}}. te vinden.",
   "RoomQuotaHeader": "Kamers staat op het punt overschreden te worden: {{currentValue}} / {{maxValue}}",
   "RoomQuotaHeaderLimit": "De limiet is bereikt voor het aantal kamers: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "De limiet voor opslagruimte en het aantal kamers wordt bijna overschreden",

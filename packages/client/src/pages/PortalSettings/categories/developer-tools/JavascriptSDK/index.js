@@ -41,22 +41,9 @@ import { Text } from "@docspace/shared/components/text";
 import CSP from "./sub-components/csp";
 import PresetTile from "./sub-components/PresetTile";
 
-import PortalImg from "PUBLIC_DIR/images/sdk-presets_portal.react.svg?url";
-import PublicRoomImg from "PUBLIC_DIR/images/sdk-presets_public-room.react.svg?url";
-import RoomSelectorImg from "PUBLIC_DIR/images/sdk-presets_room-selector.react.svg?url";
-import FileSelectorImg from "PUBLIC_DIR/images/sdk-presets_file-selector.react.svg?url";
-import EditorImg from "PUBLIC_DIR/images/sdk-presets_editor.react.svg?url";
-import ViewerImg from "PUBLIC_DIR/images/sdk-presets_viewer.react.svg?url";
-import CustomImg from "PUBLIC_DIR/images/sdk-presets_custom.react.svg?url";
-
-import PortalImgDark from "PUBLIC_DIR/images/sdk-presets_portal_dark.react.svg?url";
-import PublicRoomImgDark from "PUBLIC_DIR/images/sdk-presets_public-room_dark.react.svg?url";
-import RoomSelectorImgDark from "PUBLIC_DIR/images/sdk-presets_room-selector_dark.react.svg?url";
-import FileSelectorImgDark from "PUBLIC_DIR/images/sdk-presets_file-selector_dark.react.svg?url";
-import EditorImgDark from "PUBLIC_DIR/images/sdk-presets_editor_dark.react.svg?url";
-import ViewerImgDark from "PUBLIC_DIR/images/sdk-presets_viewer_dark.react.svg?url";
-import CustomImgDark from "PUBLIC_DIR/images/sdk-presets_custom_dark.react.svg?url";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+
+import { getSDKImagesUrls } from "./utils";
 
 const SDKContainer = styled(Box)`
   @media ${tablet} {
@@ -140,43 +127,45 @@ const PortalIntegration = (props) => {
   const navigateToEditor = () => navigate("editor");
   const navigateToViewer = () => navigate("viewer");
 
+  const sdkImages = getSDKImagesUrls(theme.isBase, true);
+
   const presetsData = [
     {
       title: t("Common:ProductName"),
       description: t("PortalDescription", {
         productName: t("Common:ProductName"),
       }),
-      image: theme.isBase ? PortalImg : PortalImgDark,
+      image: sdkImages.Portal,
       handleOnClick: navigateToPortal,
     },
     {
       title: t("Common:PublicRoom"),
       description: t("PublicRoomDescription"),
-      image: theme.isBase ? PublicRoomImg : PublicRoomImgDark,
+      image: sdkImages.PublicRoom,
       handleOnClick: navigateToPublicRoom,
     },
     {
       title: t("Common:Editor"),
       description: t("EditorDescription"),
-      image: theme.isBase ? EditorImg : EditorImgDark,
+      image: sdkImages.Editor,
       handleOnClick: navigateToEditor,
     },
     {
       title: t("Viewer"),
       description: t("ViewerDescription"),
-      image: theme.isBase ? ViewerImg : ViewerImgDark,
+      image: sdkImages.Viewer,
       handleOnClick: navigateToViewer,
     },
     {
       title: t("RoomSelector"),
       description: t("RoomSelectorDescription"),
-      image: theme.isBase ? RoomSelectorImg : RoomSelectorImgDark,
+      image: sdkImages.RoomSelector,
       handleOnClick: navigateToRoomSelector,
     },
     {
       title: t("FileSelector"),
       description: t("FileSelectorDescription"),
-      image: theme.isBase ? FileSelectorImg : FileSelectorImgDark,
+      image: sdkImages.FileSelector,
       handleOnClick: navigateToFileSelector,
     },
     {
@@ -184,7 +173,7 @@ const PortalIntegration = (props) => {
       description: t("CustomDescription", {
         productName: t("Common:ProductName"),
       }),
-      image: theme.isBase ? CustomImg : CustomImgDark,
+      image: sdkImages.Custom,
       handleOnClick: navigateToCustom,
     },
   ];

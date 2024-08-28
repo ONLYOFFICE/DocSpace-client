@@ -91,7 +91,12 @@ const PresetTile = (props) => {
         <Text fontSize="16px" lineHeight="22px" fontWeight={700}>
           {title}
         </Text>
-        <ReactSVG src={image} />
+        <ReactSVG
+          src={image}
+          beforeInjection={(svg) => {
+            svg.setAttribute("style", "width: 100%; height: auto");
+          }}
+        />
         <Text lineHeight="20px">{description}</Text>
       </div>
 

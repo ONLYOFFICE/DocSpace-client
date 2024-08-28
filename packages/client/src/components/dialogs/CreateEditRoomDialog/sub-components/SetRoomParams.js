@@ -44,10 +44,13 @@ import { ImageEditor } from "@docspace/shared/components/image-editor";
 import PreviewTile from "@docspace/shared/components/image-editor/PreviewTile";
 import { Text } from "@docspace/shared/components/text";
 
+import ItemIcon from "@docspace/client/src/components/ItemIcon";
+
 import ChangeRoomOwner from "./ChangeRoomOwner";
 import RoomQuota from "./RoomQuota";
 import { RoomsType } from "@docspace/shared/enums";
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
+import { isMobile, mobile } from "@docspace/shared/utils";
 
 const StyledSetRoomParams = styled.div`
   display: flex;
@@ -73,6 +76,27 @@ const StyledSetRoomParams = styled.div`
         margin-bottom: 24px;
       `};
   }
+
+  .logo-name-container {
+    display: flex;
+    align-items: end;
+    gap: 16px;
+
+    @media ${mobile} {
+      flex-direction: column;
+      align-items: center;
+    }
+    .room-title {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 37px;
+      user-select: none;
+      @media ${mobile} {
+        font-size: 42px;
+        line-height: 56px;
+      }
+    }
+  }
 `;
 
 const SetRoomParams = ({
@@ -97,6 +121,7 @@ const SetRoomParams = ({
   folderFormValidation,
   disabledChangeRoomType,
   maxImageUploadSize,
+  bufferSelection,
 }) => {
   const [previewIcon, setPreviewIcon] = useState(null);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
@@ -147,8 +172,52 @@ const SetRoomParams = ({
     });
   };
 
+  const element = (
+    <ItemIcon
+      id={bufferSelection.id}
+      fileExst={bufferSelection.fileExst}
+      isRoom={bufferSelection.isRoom}
+      title={bufferSelection.title}
+      logo={bufferSelection.logo.medium}
+      color={bufferSelection.logo?.color}
+      size={isMobile() ? "96px" : "64px"}
+      withEditing={true}
+    />
+  );
+
   return (
     <StyledSetRoomParams disableImageRescaling={disableImageRescaling}>
+      <div className="logo-name-container">
+        {element}
+        <InputParam
+          id="shared_room-name"
+          title={`${t("Common:Name")}:`}
+          placeholder={t("Common:EnterName")}
+          value={roomParams.title}
+          onChange={onChangeName}
+          isDisabled={isDisabled}
+          isValidTitle={isValidTitle}
+          isWrongTitle={isWrongTitle}
+          onFocus={() => setForceHideRoomTypeDropdown(true)}
+          onBlur={() => setForceHideRoomTypeDropdown(false)}
+          errorMessage={
+            isWrongTitle
+              ? t("Files:ContainsSpecCharacter")
+              : t("Common:RequiredField")
+          }
+          onKeyUp={onKeyUp}
+          isAutoFocussed={true}
+        />
+      </div>
+
+      <TagInput
+        t={t}
+        tagHandler={tagHandler}
+        setIsScrollLocked={setIsScrollLocked}
+        isDisabled={isDisabled}
+        onFocus={() => setForceHideRoomTypeDropdown(true)}
+        onBlur={() => setForceHideRoomTypeDropdown(false)}
+      />
       {isEdit || disabledChangeRoomType ? (
         <RoomType t={t} roomType={roomParams.type} type="displayItem" />
       ) : (
@@ -171,34 +240,6 @@ const SetRoomParams = ({
           isDisabled={isDisabled}
         />
       )}
-      <InputParam
-        id="shared_room-name"
-        title={`${t("Common:Name")}:`}
-        placeholder={t("Common:EnterName")}
-        value={roomParams.title}
-        onChange={onChangeName}
-        isDisabled={isDisabled}
-        isValidTitle={isValidTitle}
-        isWrongTitle={isWrongTitle}
-        onFocus={() => setForceHideRoomTypeDropdown(true)}
-        onBlur={() => setForceHideRoomTypeDropdown(false)}
-        errorMessage={
-          isWrongTitle
-            ? t("Files:ContainsSpecCharacter")
-            : t("Common:RequiredField")
-        }
-        onKeyUp={onKeyUp}
-        isAutoFocussed={true}
-      />
-
-      <TagInput
-        t={t}
-        tagHandler={tagHandler}
-        setIsScrollLocked={setIsScrollLocked}
-        isDisabled={isDisabled}
-        onFocus={() => setForceHideRoomTypeDropdown(true)}
-        onBlur={() => setForceHideRoomTypeDropdown(false)}
-      />
 
       {/* //TODO: Uncomment when private rooms are done
       {!isEdit && (
@@ -268,19 +309,24 @@ const SetRoomParams = ({
   );
 };
 
-export default inject(({ settingsStore, dialogsStore, currentQuotaStore }) => {
-  const { isDefaultRoomsQuotaSet } = currentQuotaStore;
+export default inject(
+  ({ settingsStore, dialogsStore, currentQuotaStore, filesStore }) => {
+    const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 
-  const { setChangeRoomOwnerIsVisible } = dialogsStore;
-  const { folderFormValidation, maxImageUploadSize } = settingsStore;
+    const { bufferSelection } = filesStore;
 
-  return {
-    isDefaultRoomsQuotaSet,
-    folderFormValidation,
-    setChangeRoomOwnerIsVisible,
-    maxImageUploadSize,
-  };
-})(
+    const { setChangeRoomOwnerIsVisible } = dialogsStore;
+    const { folderFormValidation, maxImageUploadSize } = settingsStore;
+
+    return {
+      isDefaultRoomsQuotaSet,
+      folderFormValidation,
+      setChangeRoomOwnerIsVisible,
+      maxImageUploadSize,
+      bufferSelection,
+    };
+  },
+)(
   observer(
     withTranslation(["CreateEditRoomDialog", "Translations", "Common"])(
       withLoader(SetRoomParams)(<SetRoomParamsLoader />),

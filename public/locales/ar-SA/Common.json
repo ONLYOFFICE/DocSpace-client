@@ -40,7 +40,7 @@
   "ChangeButton": "تغيير",
   "ChangeQuota": "تغيير الحصة",
   "ChangesSavedSuccessfully": "تم حفظ التغييرات بنجاح",
-  "ChangeUserPermissions": "تذكر هذا الاختيار عند فتح المستندات في المرة القادمة",
+  "ChangeUserPermissions": "غيّر أذونات المستخدم للأشخاص المدعوين أو <1>قم بترقية خطة التعريف الخاصة بك</1>.",
   "ChooseFromTemplates": "اختر من القوالب",
   "ClearAll": "إزالة الكل",
   "ClearFilter": "إزالة الفلتر",

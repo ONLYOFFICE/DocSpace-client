@@ -115,7 +115,7 @@ const ConflictResolve = (props: ConflictResolveProps) => {
     >
       <ModalDialog.Header>{headerLabel}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text truncate className="message">
+        <Text truncate className="message conflict-resolve_file-name ">
           {messageText}
         </Text>
         <Text className="select-action">{selectActionText}</Text>

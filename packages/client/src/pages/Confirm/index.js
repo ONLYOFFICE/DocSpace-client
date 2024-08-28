@@ -24,13 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { Outlet } from "react-router-dom";
 
-const Confirm = () => {
+import ErrorBoundaryWrapper from "SRC_DIR/components/ErrorBoundaryWrapper";
+
+export const Component = () => {
   //console.log("Confirm render");
 
-  return <Outlet />;
+  return (
+    <ErrorBoundaryWrapper>
+      <Outlet />
+    </ErrorBoundaryWrapper>
+  );
 };
-
-export default Confirm;

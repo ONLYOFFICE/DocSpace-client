@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
+import { globalColors } from "../../../../themes";
 
 export const PlayerDesktopContextMenuWrapper = styled.div`
   position: relative;
@@ -39,17 +40,17 @@ export const PlayerDesktopContextMenuWrapper = styled.div`
   }
 
   & > svg {
-    padding-left: 19px;
+    padding-inline-start: 19px;
     padding-bottom: 3px;
     width: 18px;
     height: 20px;
 
     path {
-      fill: #fff;
+      fill: ${globalColors.white};
     }
 
     rect {
-      stroke: #fff;
+      stroke: ${globalColors.white};
     }
   }
 `;
@@ -66,7 +67,7 @@ export const DownloadIconWrapper = styled.div`
 
   svg {
     path {
-      fill: #fff;
+      fill: ${globalColors.white};
     }
   }
 `;

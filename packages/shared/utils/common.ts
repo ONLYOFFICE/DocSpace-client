@@ -272,8 +272,13 @@ export function showLoader() {
   if (isMobile) return;
 
   hideLoader();
-
   timer = setTimeout(() => TopLoaderService.start(), 500);
+}
+
+export function showProgress() {
+  if (isMobile) return;
+  TopLoaderService.cancel();
+  TopLoaderService.start();
 }
 
 export function isMe(user: TUser, userName: string) {
@@ -1098,8 +1103,9 @@ export function getLogoUrl(
   logoType: WhiteLabelLogoType,
   dark: boolean = false,
   def: boolean = false,
+  culture?: string,
 ) {
-  return `/logo.ashx?logotype=${logoType}&dark=${dark}&default=${def}`;
+  return `/logo.ashx?logotype=${logoType}&dark=${dark}&default=${def}${culture ? `&culture=${culture}` : ""}`;
 }
 
 export const getUserTypeName = (

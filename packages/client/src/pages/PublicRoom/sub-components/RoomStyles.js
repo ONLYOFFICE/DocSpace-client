@@ -26,28 +26,34 @@
 
 import styled, { css } from "styled-components";
 import { mobile, tablet } from "@docspace/shared/utils";
+import BackgroundPatternReactSvgUrl from "PUBLIC_DIR/images/background.pattern.react.svg?url";
 
 export const StyledPage = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
-  max-width: 960px;
-  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+
+  background-image: url("${BackgroundPatternReactSvgUrl}");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+
+  .public-room-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 960px;
+    box-sizing: border-box;
+  }
 
   @media ${tablet} {
     padding: 0 16px;
   }
 
   @media ${mobile} {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding: 0 16px 0 8px;
-          `
-        : css`
-            padding: 0 8px 0 16px;
-          `}
+    padding-block: 0;
+    padding-inline: 16px 8px;
+    background-image: none;
   }
 
   .subtitle {
@@ -64,12 +70,14 @@ export const StyledPage = styled.div`
   }
 
   .public-room-content {
+    width: 100%;
     padding-top: 9%;
     justify-content: unset;
     min-height: unset;
 
     .public-room-text {
       margin: 8px 0;
+      white-space: wrap;
     }
 
     .public-room-name {
@@ -82,12 +90,6 @@ export const StyledPage = styled.div`
     .public-room-icon {
       min-width: 32px;
       min-height: 32px;
-    }
-
-    .public-room-text {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
   }
 `;

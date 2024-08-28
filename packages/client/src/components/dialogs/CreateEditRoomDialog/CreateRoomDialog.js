@@ -33,7 +33,6 @@ import TagHandler from "./handlers/TagHandler";
 
 import SetRoomParams from "./sub-components/SetRoomParams";
 import RoomTypeList from "./sub-components/RoomTypeList";
-import DialogHeader from "./sub-components/DialogHeader";
 import TemplateBody from "./sub-components/TemplateBody";
 import { RoomsType } from "@docspace/shared/enums";
 
@@ -189,6 +188,10 @@ const CreateRoomDialog = ({
   const isTemplate =
     roomParams.type === RoomsType.TemplateRoom && !isTemplateSelected;
 
+  const dialogHeader = roomParams.type
+    ? t("ChooseRoomType")
+    : t("Files:CreateRoom");
+
   return (
     <StyledModalDialog
       displayType="aside"
@@ -199,15 +202,10 @@ const CreateRoomDialog = ({
       withFooterBorder
       isOauthWindowOpen={isOauthWindowOpen}
       isTemplate={isTemplate}
+      isBackButton={roomParams.type}
+      onBackClick={goBack}
     >
-      <ModalDialog.Header>
-        <DialogHeader
-          disabledIcon={Boolean(startRoomType)}
-          isChooseRoomType={!roomParams.type}
-          onArrowClick={goBack}
-          isTemplate={isTemplate}
-        />
-      </ModalDialog.Header>
+      <ModalDialog.Header>{dialogHeader}</ModalDialog.Header>
 
       <ModalDialog.Body>
         {!roomParams.type ? (

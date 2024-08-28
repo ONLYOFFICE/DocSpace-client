@@ -24,7 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { getOAuthClient, getSettings } from "@/utils/actions";
+import { PROVIDERS_DATA } from "@docspace/shared/constants";
+
+import {
+  getOAuthClient,
+  getCapabilities,
+  getSettings,
+  getSSO,
+  getThirdPartyProviders,
+} from "@/utils/actions";
 import Login from "@/components/Login";
 import LoginForm from "@/components/LoginForm";
 import ThirdParty from "@/components/ThirdParty";
@@ -39,10 +47,28 @@ async function Page({
 }) {
   const clientId = searchParams.client_id;
 
-  const [settings, client] = await Promise.all([
-    getSettings(),
-    clientId ? getOAuthClient(clientId) : undefined,
-  ]);
+  const [settings, thirdParty, capabilities, ssoSettings, client] =
+    await Promise.all([
+      getSettings(),
+      getThirdPartyProviders(),
+      getCapabilities(),
+      getSSO(),
+      clientId ? getOAuthClient(clientId) : undefined,
+    ]);
+
+  const ssoUrl = capabilities ? capabilities.ssoUrl : "";
+  const hideAuthPage = ssoSettings ? ssoSettings.hideAuthPage : false;
+  const ssoExists = !!ssoUrl;
+  const oauthDataExists =
+    !capabilities?.oauthEnabled || !thirdParty || thirdParty.length === 0
+      ? false
+      : thirdParty
+          .map((item) => {
+            if (!(item.provider in PROVIDERS_DATA)) return undefined;
+
+            return item;
+          })
+          .some((item) => !!item);
 
   return (
     <FormWrapper id="login-form">
@@ -56,17 +82,39 @@ async function Page({
               client={client}
               reCaptchaPublicKey={settings?.recaptchaPublicKey}
               reCaptchaType={settings?.recaptchaType}
+              ldapDomain={capabilities?.ldapDomain}
+              ldapEnabled={capabilities?.ldapEnabled || false}
             />
-            {!clientId && <ThirdParty />}
+            <ThirdParty
+              thirdParty={thirdParty}
+              capabilities={capabilities}
+              ssoExists={ssoExists}
+              ssoUrl={ssoUrl}
+              hideAuthPage={hideAuthPage}
+              oauthDataExists={oauthDataExists}
+            />
             {settings.enableAdmMess && <RecoverAccess />}
-            {settings.enabledJoin && !clientId && (
-              <Register
-                id="login_register"
-                enabledJoin
-                trustedDomains={settings.trustedDomains}
-                trustedDomainsType={settings.trustedDomainsType}
-                isAuthenticated={false}
-              />
+            {settings.enabledJoin && (
+              <>
+                <Register
+                  id="login_register"
+                  enabledJoin
+                  trustedDomains={settings.trustedDomains}
+                  trustedDomainsType={settings.trustedDomainsType}
+                  isAuthenticated={false}
+                />
+                {!clientId && <ThirdParty />}
+                {settings.enableAdmMess && <RecoverAccess />}
+                {settings.enabledJoin && !clientId && (
+                  <Register
+                    id="login_register"
+                    enabledJoin
+                    trustedDomains={settings.trustedDomains}
+                    trustedDomainsType={settings.trustedDomainsType}
+                    isAuthenticated={false}
+                  />
+                )}
+              </>
             )}
           </>
         )}

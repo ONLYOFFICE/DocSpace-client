@@ -28,7 +28,7 @@ import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { useLocation, useParams } from "react-router-dom";
 
 import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
@@ -50,49 +50,32 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import TariffBar from "SRC_DIR/components/TariffBar";
+import { globalColors } from "@docspace/shared/themes";
+import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
 
 const StyledContainer = styled.div`
   width: 100%;
   min-height: 33px;
 
   .table-container_group-menu {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin: 0 -20px 0 0;
-          `
-        : css`
-            margin: 0 0 0 -20px;
-          `}
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    margin-block: 0;
+    margin-inline: -20px 0;
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
     width: calc(100% + 40px);
     height: 68px;
 
     @media ${tablet} {
       height: 61px;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin: 0 -16px 0 0;
-            `
-          : css`
-              margin: 0 0 0 -16px;
-            `}
+      margin-block: 0;
+      margin-inline: -16px 0;
       width: calc(100% + 32px);
     }
 
     @media ${mobile} {
       height: 52px !important;
-
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin: 0 -16px 0 0;
-            `
-          : css`
-              margin: 0 0 0 -16px;
-            `}
+      margin-block: 0;
+      margin-inline: -16px 0;
       width: calc(100% + 32px);
     }
   }
@@ -225,6 +208,8 @@ const SectionHeaderContent = (props) => {
     onEmptyTrashAction,
     getHeaderOptions,
     setBufferSelection,
+    setGroupsBufferSelection,
+    createFoldersTree,
   } = props;
 
   const location = useLocation();
@@ -239,8 +224,12 @@ const SectionHeaderContent = (props) => {
   const isSettingsPage = location.pathname.includes("/settings");
 
   const onFileChange = React.useCallback(
-    (e) => {
-      startUpload(e.target.files, null, t);
+    async (e) => {
+      const files = await getFilesFromEvent(e);
+
+      createFoldersTree(files).then((f) => {
+        if (f.length > 0) startUpload(f, null, t);
+      });
     },
     [startUpload, t],
   );
@@ -260,7 +249,9 @@ const SectionHeaderContent = (props) => {
   };
 
   const onContextOptionsClick = () => {
-    setBufferSelection(selectedFolder);
+    isInsideGroup
+      ? setGroupsBufferSelection(currentGroup)
+      : setBufferSelection(selectedFolder);
   };
 
   const onSelect = (e) => {
@@ -644,6 +635,7 @@ export default inject(
       moveToRoomsPage,
       onClickBack,
       moveToPublicRoom,
+      createFoldersTree,
     } = filesActionsStore;
 
     const { setIsVisible, isVisible } = infoPanelStore;
@@ -663,6 +655,7 @@ export default inject(
       currentGroup,
       getGroupContextOptions,
       setSelected: setGroupsSelected,
+      setBufferSelection: setGroupsBufferSelection,
       insideGroupTempTitle,
     } = peopleStore.groupsStore;
 
@@ -779,7 +772,6 @@ export default inject(
       moveToRoomsPage,
       onClickBack,
       isPublicRoomType,
-      isCustomRoomType,
       isPublicRoom,
 
       moveToPublicRoom,
@@ -816,6 +808,8 @@ export default inject(
       onEmptyTrashAction,
       getHeaderOptions,
       setBufferSelection,
+      setGroupsBufferSelection,
+      createFoldersTree,
     };
   },
 )(

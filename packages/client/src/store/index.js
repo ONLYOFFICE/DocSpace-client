@@ -80,6 +80,7 @@ import ImportAccountsStore from "./ImportAccountsStore";
 import PluginStore from "./PluginStore";
 import InfoPanelStore from "./InfoPanelStore";
 import CampaignsStore from "./CampaignsStore";
+import EditGroupStore from "./EditGroupStore";
 
 import OAuthStore from "./OAuthStore";
 
@@ -101,7 +102,7 @@ const paymentStore = new PaymentStore(
 );
 const wizardStore = new WizardStore();
 const confirmStore = new ConfirmStore();
-const backupStore = new BackupStore();
+const backupStore = new BackupStore(authStore, thirdPartyStore);
 const commonStore = new CommonStore(settingsStore);
 
 const ssoStore = new SsoFormStore();
@@ -238,6 +239,7 @@ const contextOptionsStore = new ContextOptionsStore(
   pluginStore,
   infoPanelStore,
   currentTariffStatusStore,
+  currentQuotaStore,
   userStore,
   clientLoadingStore,
 );
@@ -261,6 +263,7 @@ const profileActionsStore = new ProfileActionsStore(
   pluginStore,
   userStore,
   settingsStore,
+  currentTariffStatusStore,
 );
 
 peopleStore.profileActionsStore = profileActionsStore;
@@ -289,6 +292,7 @@ const createEditRoomStore = new CreateEditRoomStore(
   infoPanelStore,
   currentQuotaStore,
   clientLoadingStore,
+  dialogsStore,
 );
 
 const webhooksStore = new WebhooksStore(settingsStore);
@@ -302,6 +306,8 @@ const storageManagement = new StorageManagement(
 );
 
 const campaignsStore = new CampaignsStore(settingsStore, userStore);
+
+const editGroupStore = new EditGroupStore(peopleStore);
 
 const store = {
   authStore,
@@ -358,6 +364,7 @@ const store = {
   pluginStore,
   storageManagement,
   campaignsStore,
+  editGroupStore,
 };
 
 export default store;

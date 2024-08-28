@@ -1,4 +1,5 @@
 {
+  "Desc": "Bitte richten Sie die {{productName}}-Registrierungsdaten ein.",
   "ErrorEmail": "Ungültige E-Mail-Adresse",
   "ErrorInitWizard": "Der Dienst ist momentan nicht verfügbar, versuchen Sie es später erneut.",
   "ErrorInitWizardButton": "Erneut versuchen",

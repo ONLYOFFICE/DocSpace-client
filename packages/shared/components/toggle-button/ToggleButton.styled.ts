@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 import { NoUserSelect } from "../../utils";
 
 import {
@@ -43,7 +43,7 @@ const ToggleButtonContainer = styled.label<StyledToggleButtonProps>`
   -webkit-appearance: none;
   align-items: start;
   outline: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   ${NoUserSelect};
 
@@ -122,7 +122,7 @@ ToggleButtonContainer.defaultProps = { theme: Base };
 const HiddenInput = styled.input`
   opacity: 0.0001;
   position: absolute;
-  right: 0;
+  inset-inline-end: 0;
   z-index: -1;
 `;
 
@@ -139,7 +139,10 @@ const ContainerToggleButtonTheme = styled(
           }
 
           circle {
-            fill: ${(isChecked && isDisabled && theme.isBase && "#FFFFFF") ||
+            fill: ${(isChecked &&
+              isDisabled &&
+              theme.isBase &&
+              globalColors.white) ||
             (isChecked && $currentColorScheme.text?.accent)};
           }
         }

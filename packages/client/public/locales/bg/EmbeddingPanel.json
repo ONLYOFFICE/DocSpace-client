@@ -1,4 +1,11 @@
 {
+  "CodeSuccessfullyCopied": "Кодът за вкарване е успешно копиран в клипборда",
+  "ContentRestricted": "Копирането на съдържание, изтеглянето и отпечатването на файлове са ограничени.",
+  "DisplaySettings": "Настройки на дисплея",
+  "EmbeddingBarAllowList": "Добавете URL адреса на уебсайта за вграждане към <1>списъка с разрешени</1>.",
+  "EmbeddingBarDescription": "Вграждането работи само за URL адресите, посочени от администратора на {{productName}} в настройките на JavaScript SDK.",
   "Height": "Височина",
+  "Link": "Линк",
+  "LinkProtectedWithPassword": "Този линк е защитен с парола.",
   "Width": "Ширина"
 }

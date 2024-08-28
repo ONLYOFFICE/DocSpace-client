@@ -1,5 +1,6 @@
 {
   "ActiveSessions": "Ակտիվ սեսիաներ",
+  "AutoDeleteTitle": "60 օրից բոլոր հին սեանսները ինքնաբերաբար կջնջվեն։",
   "ChangeEmailSuccess": "Էլփոստը հաջողությամբ փոխվել է",
   "ChangePasswordAfterLoggingOut": "Դուրս գալուց հետո փոխեք գաղտնաբառը",
   "ConnectSocialNetworks": "Միացրեք ձեր սոցիալական ցանցերը",
@@ -14,7 +15,6 @@
   "InterfaceTheme": "Միջերեսի ոճ",
   "LightTheme": "Բաց ոճ",
   "LogoutActiveConnection": "Դուրս եկեք ակտիվ կապից",
-  "LogoutAllActiveConnections": "Դուրս եկեք բոլոր ակտիվ կապերից",
   "LogoutAllActiveSessionsDescription": "Բոլոր ակտիվ կապերը, բացի այս կապից, դուրս կգրվեն, քանի որ այն ներկայումս օգտագործվում է:",
   "LogoutBtn": "Դուրս գալ",
   "LogoutDescription": "Նշում. Բոլոր ակտիվ կապերը, բացի այս կապից, դուրս կգրվեն, քանի որ այն ներկայումս օգտագործվում է:",
@@ -27,5 +27,6 @@
   "SuccessLogout": "Ակտիվ կապը դուրս է եկել՝ {{platform}}, {{browser}}",
   "SystemTheme": "Օգտագործեք համակարգի ոճը",
   "SystemThemeDescription": "Ավտոմատ կերպով անցեք բաց և մուգ ոճերի միջև, երբ ձեր համակարգը դա անում է:",
+  "TerminateAllSessions": "Դադարեցնել բոլոր սեանսները, բացի ընթացիկից",
   "TwoFactorDescription": "Ադմինիստրատորի կողմից բոլոր օգտատերերի համար միացվել է իսկորոշման նույնականացումը կոդ ստեղծող հավելվածի միջոցով:"
 }

@@ -63,21 +63,14 @@ export default function withFileActions(WrappedFileItem) {
     };
 
     onDropZoneUpload = (files, uploadToFolder) => {
-      const { t, dragging, setDragging, startUpload, uploadEmptyFolders } =
+      const { t, dragging, setDragging, startUpload, createFoldersTree } =
         this.props;
 
       dragging && setDragging(false);
 
-      const emptyFolders = files.filter((f) => f.isEmptyDirectory);
-
-      if (emptyFolders.length > 0) {
-        uploadEmptyFolders(emptyFolders, uploadToFolder).then(() => {
-          const onlyFiles = files.filter((f) => !f.isEmptyDirectory);
-          if (onlyFiles.length > 0) startUpload(onlyFiles, uploadToFolder, t);
-        });
-      } else {
-        startUpload(files, uploadToFolder, t);
-      }
+      createFoldersTree(files, uploadToFolder).then((f) => {
+        if (f.length > 0) startUpload(f, null, t);
+      });
     };
 
     onDrop = (items) => {
@@ -168,7 +161,7 @@ export default function withFileActions(WrappedFileItem) {
 
       if (
         e.target?.tagName === "INPUT" ||
-        e.target?.tagName === "SPAN" ||
+        // e.target?.tagName === "SPAN" ||
         e.target?.tagName === "A" ||
         e.target.closest(".checkbox") ||
         e.target.closest(".table-container_row-checkbox") ||
@@ -288,12 +281,12 @@ export default function withFileActions(WrappedFileItem) {
         isRecentTab,
         canDrag,
       } = this.props;
-      const { access, id } = item;
+      const { id, security } = item;
 
       const isDragging =
         !isDisabledDropItem &&
         isFolder &&
-        access < 2 &&
+        security?.MoveTo &&
         !isTrashFolder &&
         !isPrivacy;
 
@@ -385,7 +378,7 @@ export default function withFileActions(WrappedFileItem) {
         onSelectItem,
         //setNewBadgeCount,
         openFileAction,
-        uploadEmptyFolders,
+        createFoldersTree,
       } = filesActionsStore;
       const { setSharingPanelVisible } = dialogsStore;
       const {
@@ -489,7 +482,7 @@ export default function withFileActions(WrappedFileItem) {
         dragging,
         setDragging,
         startUpload,
-        uploadEmptyFolders,
+        createFoldersTree,
         draggable,
         setTooltipPosition,
         setStartDrag,

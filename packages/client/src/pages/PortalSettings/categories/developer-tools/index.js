@@ -46,6 +46,8 @@ import OAuth from "./OAuth";
 
 import SSOLoader from "./sub-components/ssoLoader";
 
+import { globalColors } from "@docspace/shared/themes";
+
 const DeveloperToolsWrapper = (props) => {
   const { currentDeviceType, identityServerEnabled } = props;
   const navigate = useNavigate();
@@ -148,7 +150,7 @@ const DeveloperToolsWrapper = (props) => {
   );
 };
 
-export default inject(({ setup, settingsStore, authStore }) => {
+export const Component = inject(({ setup, settingsStore, authStore }) => {
   const { initSettings } = setup;
 
   const { identityServerEnabled } = authStore.capabilities;

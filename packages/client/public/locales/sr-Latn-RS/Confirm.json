@@ -7,6 +7,7 @@
   "DeleteProfileBtn": "Obriši moj nalog",
   "DeleteProfileConfirmation": "Pažnja! Spremate se da obrišete svoj nalog.",
   "DeleteProfileConfirmationInfo": "Klikom na \"Delete my account\" slažete se sa našim <1>Privacy policy.</1>",
+  "DeleteProfileSuccessDescription": "Vaš {{productName}} nalog je uspešno onemogućen. {{productName}} vlasnik ili administrator može trajno obrisati vaš onemogućen nalog.",
   "DeleteProfileSuccessMessage": "Vaš nalog je uspešno obrisan.",
   "DeleteProfileSuccessMessageInfo": "Pogledajte naš <1>Privacy policy</1> da naučite više o brisanju vašeg naloga i podacima povezanim sa njim.",
   "EmailAndPasswordCopiedToClipboard": "Email i lozinka kopirani u privremenu memoriju",

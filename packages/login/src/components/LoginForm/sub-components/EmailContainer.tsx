@@ -54,7 +54,7 @@ interface IEmailContainer {
   onBlurEmail: () => void;
   onValidateEmail: (res: TValidate) => undefined;
   isLdapLogin: boolean;
-  ldapDomain: string;
+  ldapDomain?: string;
 }
 
 const EmailContainer = ({
@@ -98,8 +98,8 @@ const EmailContainer = ({
             defaults={DEFAULT_EMAIL_TEXT}
             values={{
               email: emailFromInvitation,
+              productName: t("Common:ProductName"),
             }}
-            productName={t("Common:ProductName")}
             components={{
               1: (
                 <Link

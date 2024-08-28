@@ -246,6 +246,11 @@ const Sdk = ({
 
   if (!frameConfig) return;
 
+  const selectorOpenRoot =
+    selectorType !== "userFolderOnly" &&
+    selectorType !== "roomsOnly" &&
+    !frameConfig?.id;
+
   switch (mode) {
     case "room-selector":
       const cancelButtonProps = frameConfig?.showSelectorCancel
@@ -257,7 +262,10 @@ const Sdk = ({
         : {};
 
       const headerProps = frameConfig?.showSelectorHeader
-        ? { withHeader: true, headerProps: { headerLabel: "" } }
+        ? {
+            withHeader: true,
+            headerProps: { headerLabel: "", isCloseable: false },
+          }
         : {};
 
       component = (
@@ -294,7 +302,9 @@ const Sdk = ({
           acceptButtonLabel={frameConfig?.acceptButtonLabel}
           cancelButtonLabel={frameConfig?.cancelButtonLabel}
           currentFolderId={frameConfig?.id}
+          openRoot={selectorOpenRoot}
           descriptionText={formatsDescription[frameConfig?.filterParam] || ""}
+          headerProps={{ isCloseable: false }}
         />
       );
       break;
@@ -305,7 +315,7 @@ const Sdk = ({
   return component;
 };
 
-export default inject(
+export const Component = inject(
   ({
     authStore,
     settingsStore,

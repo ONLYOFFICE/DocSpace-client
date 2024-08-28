@@ -36,18 +36,12 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { convertTime } from "@docspace/shared/utils/convertTime";
 import RemoveSessionSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 import TickSvgUrl from "PUBLIC_DIR/images/tick.svg?url";
+import { globalColors } from "@docspace/shared/themes";
 
 const StyledTableRow = styled(TableRow)`
   .session-platform {
     font-weight: 600;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 5px;
-          `
-        : css`
-            margin-right: 5px;
-          `}
+    margin-inline-end: 5px;
   }
 
   .session-info {
@@ -65,14 +59,7 @@ const StyledTableRow = styled(TableRow)`
   }
 
   .tick-icon {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 8px;
-          `
-        : css`
-            margin-left: 8px;
-          `}
+    margin-inline-start: 8px;
   }
 
   .remove-cell {
@@ -114,7 +101,7 @@ const SessionsTableRow = (props) => {
           <IconButton
             size={12}
             className="tick-icon"
-            color="#20D21F"
+            color={globalColors.tickColor}
             iconName={TickSvgUrl}
           />
         )}

@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 
 const FillingStatusContainer = styled.div<{
   isDone?: boolean;
@@ -36,33 +36,32 @@ const FillingStatusContainer = styled.div<{
   padding: 10px;
 
   .status-done-text {
-    color: ${(props) => (props.isDone ? "#4781D1" : "#A3A9AE")};
+    color: ${(props) =>
+      props.isDone ? globalColors.lightBlueMain : globalColors.gray};
   }
 
   .status-done-icon {
     circle,
     path {
-      stroke: ${(props) => (props.isDone ? "#4781D1" : "#A3A9AE")};
+      stroke: ${(props) =>
+        props.isDone ? globalColors.lightBlueMain : globalColors.gray};
     }
   }
 
   .status-interrupted-text {
-    color: ${(props) => props.isInterrupted && "#F2675A"};
+    color: ${(props) => props.isInterrupted && globalColors.mainRed};
   }
 
   .status-interrupted-icon {
     circle,
     path {
-      stroke: ${(props) => props.isInterrupted && "#F2675A"};
+      stroke: ${(props) => props.isInterrupted && globalColors.mainRed};
     }
   }
 
   .status-done-icon,
   .status-interrupted-icon {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? `margin-left: 10px;`
-        : `margin-right: 10px;`}
+    margin-inline-end: 10px;
   }
 `;
 
@@ -85,9 +84,10 @@ const AccordionItem = styled.div<{
 
     .user-avatar {
       padding: 1px;
-      border: 2px solid #a3a9ae;
+      border: 2px solid ${globalColors.gray};
       border-color: ${(props) =>
-        (props.isDone && "#4781D1") || (props.isInterrupted && "#F2675A")};
+        (props.isDone && globalColors.lightBlueMain) ||
+        (props.isInterrupted && globalColors.mainRed)};
       border-radius: 50%;
     }
 
@@ -96,7 +96,8 @@ const AccordionItem = styled.div<{
     }
 
     .accordion-role {
-      color: ${(props) => (props.theme.isBase ? "#657077" : "#FFFFFF99")};
+      color: ${(props) =>
+        props.theme.isBase ? globalColors.lightGrayDark : "#FFFFFF99"};
     }
 
     .arrow-icon {
@@ -107,7 +108,8 @@ const AccordionItem = styled.div<{
       transform: ${(props) =>
         props.isOpen ? "rotate(270deg)" : "rotate(90deg)"};
       path {
-        fill: ${(props) => (props.isOpen ? "#4781d1" : "#A3A9AE")};
+        fill: ${(props) =>
+          props.isOpen ? globalColors.lightBlueMain : globalColors.gray};
       }
     }
   }
@@ -117,10 +119,7 @@ const AccordionItem = styled.div<{
     align-items: center;
     justify-content: space-between;
 
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? `padding-right: 15px;`
-        : `padding-left: 15px;`}
+    padding-inline-start: 15px;
   }
 
   .accordion-item-wrapper {
@@ -129,36 +128,32 @@ const AccordionItem = styled.div<{
     min-height: 40px;
     margin: ${(props) => (props.isDone || props.isInterrupted ? "0" : "2px 0")};
 
-    ${(props) => {
+    border-inline-start: ${(props) => {
       const borderValue = `2px ${
         props.isDone || props.isInterrupted ? "solid" : "dashed"
-      } #A3A9AE;`;
+      } ${globalColors.gray};`;
 
-      return props.theme.interfaceDirection === "rtl"
-        ? `border-right: ${borderValue}`
-        : `border-left: ${borderValue}`;
-    }}
+      return borderValue;
+    }};
     border-color: ${(props) =>
-      (props.isDone && "#4781D1") || (props.isInterrupted && "#F2675A")};
+      (props.isDone && globalColors.lightBlueMain) ||
+      (props.isInterrupted && globalColors.mainRed)};
 
     .status-text {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? `margin-right: 15px;`
-          : `margin-left: 15px;`}
-      color: ${(props) => (props.theme.isBase ? "#657077" : "#FFFFFF99")};
+      margin-inline-start: 15px;
+      color: ${(props) =>
+        props.theme.isBase ? globalColors.lightGrayDark : "#FFFFFF99"};
     }
 
     .status-date {
-      color: ${(props) => (props.theme.isBase ? "#657077" : "#FFFFFF99")};
+      color: ${(props) =>
+        props.theme.isBase ? globalColors.lightGrayDark : "#FFFFFF99"};
     }
 
     .filled-status-text {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? `margin-right: 15px;`
-          : `margin-left: 15px;`}
-      color: ${(props) => (props.isDone ? "#4781D1" : "#657077")};
+      margin-inline-start: 15px;
+      color: ${(props) =>
+        props.isDone ? globalColors.lightBlueMain : globalColors.lightGrayDark};
     }
   }
 `;

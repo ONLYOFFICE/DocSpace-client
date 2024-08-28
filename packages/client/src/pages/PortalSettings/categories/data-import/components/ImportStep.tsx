@@ -180,6 +180,7 @@ const ImportStep = (props: ImportStepProps) => {
           workspace: t("Common:ProductName"),
           sectionIcon: RoomsIcon,
         }}
+        isDisabled={false}
       />
       <ImportSection
         isChecked={importOptions.importCommonFiles}

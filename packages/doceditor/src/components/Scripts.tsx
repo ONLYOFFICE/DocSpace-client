@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+/* eslint-disable @next/next/no-before-interactive-script-outside-document */
+
 import Script from "next/script";
 
 import runtime from "../../../runtime.json";
@@ -35,9 +37,11 @@ const Scripts = () => {
     <>
       <Script
         id="browser-detector"
+        // strategy="beforeInteractive"
         src={`/static/scripts/browserDetector.js?hash=${runtime?.checksums?.["browserDetector.js"] ?? hashDate}`}
       />
-      <Script id="portal-config">
+
+      <Script id="portal-config" strategy="beforeInteractive">
         {`
           console.log("It's DocEditor INIT");
           fetch("/static/scripts/config.json?hash=${runtime?.checksums["config.json"] ?? hashDate}")

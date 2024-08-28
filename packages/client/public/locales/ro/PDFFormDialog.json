@@ -1,1 +1,7 @@
-{}
+{
+  "PDFform": "Formular PDF",
+  "PDFFormEditDialogDescription": "Doriți să comutați la modul de editare a formularului? Vă rugăm să rețineți că formularul nu va mai fi disponibil pentru completare și odată ce formularul este editat, trebuie să faceți din nou un clic pe Începe completarea pentru a-l completa.",
+  "PDFFormEditDialogTitle": "Editare formular",
+  "PDFFormIsReadyToast": "Formularul PDF <1>{{filename}}</1> este gata să fie completat.",
+  "PDFFormSuccessfullyCreatedDescription": "Formularul dvs PDF este gata să fie completat. Copiați linkul public pentru a începe completarea formularului sau invitați alți utilizatori în sala."
+}

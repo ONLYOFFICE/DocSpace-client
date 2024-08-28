@@ -58,7 +58,6 @@ class TableStore {
   roomColumnTypeIsEnabled = false;
   roomColumnTagsIsEnabled = true;
   roomColumnOwnerIsEnabled = false;
-  roomColumnQuickButtonsIsEnabled = true;
   roomColumnActivityIsEnabled = true;
   roomQuotaColumnIsEnable = false;
 
@@ -70,7 +69,6 @@ class TableStore {
   modifiedColumnIsEnabled = true;
   sizeColumnIsEnabled = true;
   typeColumnIsEnabled = true;
-  quickButtonsColumnIsEnabled = true;
   lastOpenedColumnIsEnabled = true;
   contentColumnsIsEnabled = true;
 
@@ -84,6 +82,7 @@ class TableStore {
   emailAccountsColumnIsEnabled = true;
   storageAccountsColumnIsEnabled = true;
 
+  peopleAccountsGroupsColumnIsEnabled = true;
   managerAccountsGroupsColumnIsEnabled = true;
 
   typeAccountsInsideGroupColumnIsEnabled = true;
@@ -151,10 +150,6 @@ class TableStore {
     this.typeColumnIsEnabled = enable;
   };
 
-  setQuickButtonsColumn = (enable) => {
-    this.quickButtonsColumnIsEnabled = enable;
-  };
-
   setAuthorTrashColumn = (enable) => (this.authorTrashColumnIsEnabled = enable);
   setCreatedTrashColumn = (enable) =>
     (this.createdTrashColumnIsEnabled = enable);
@@ -171,6 +166,8 @@ class TableStore {
   setAccountsColumnStorage = (enable) =>
     (this.storageAccountsColumnIsEnabled = enable);
 
+  setAccountsGroupsColumnPeople = (enable) =>
+    (this.peopleAccountsGroupsColumnIsEnabled = enable);
   setAccountsGroupsColumnManager = (enable) =>
     (this.managerAccountsGroupsColumnIsEnabled = enable);
 
@@ -226,6 +223,7 @@ class TableStore {
       }
 
       if (getIsAccountsGroups()) {
+        this.setAccountsGroupsColumnPeople(splitColumns.includes("People"));
         this.setAccountsGroupsColumnManager(
           splitColumns.includes("Head of Group"),
         );
@@ -248,7 +246,6 @@ class TableStore {
         this.setErasureColumn(splitColumns.includes("Erasure"));
         this.setSizeTrashColumn(splitColumns.includes("SizeTrash"));
         this.setTypeTrashColumn(splitColumns.includes("TypeTrash"));
-        this.setQuickButtonsColumn(splitColumns.includes("QuickButtons"));
         return;
       }
 
@@ -257,7 +254,6 @@ class TableStore {
       this.setCreatedColumn(splitColumns.includes("Created"));
       this.setSizeColumn(splitColumns.includes("Size"));
       this.setTypeColumn(splitColumns.includes("Type"));
-      this.setQuickButtonsColumn(splitColumns.includes("QuickButtons"));
       this.setLastOpenedColumn(splitColumns.includes("LastOpened"));
     }
   };
@@ -334,10 +330,6 @@ class TableStore {
         this.setTypeTrashColumn(!this.typeTrashColumnIsEnabled);
         return;
 
-      case "QuickButtons":
-        this.setQuickButtonsColumn(!this.quickButtonsColumnIsEnabled);
-        return;
-
       case "Owner":
         this.setRoomColumnOwner(!this.roomColumnOwnerIsEnabled);
         return;
@@ -366,6 +358,12 @@ class TableStore {
         getIsAccountsPeople()
           ? this.setAccountsColumnStorage(!this.storageAccountsColumnIsEnabled)
           : this.setRoomColumnQuota(!this.roomQuotaColumnIsEnable);
+        return;
+
+      case "People":
+        this.setAccountsGroupsColumnPeople(
+          !this.peopleAccountsGroupsColumnIsEnabled,
+        );
         return;
 
       case "Head of Group":

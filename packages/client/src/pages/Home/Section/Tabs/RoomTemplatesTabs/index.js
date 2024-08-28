@@ -35,7 +35,7 @@ import { RoomSearchArea } from "@docspace/shared/enums";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 
-const RoomTemplatesSubMenu = ({ setFilter, showBodyLoader, showSubmenu }) => {
+const RoomTemplatesSubMenu = ({ setFilter, showBodyLoader, showTabs }) => {
   const { t } = useTranslation(["Common"]);
 
   const tabs = [
@@ -74,7 +74,7 @@ const RoomTemplatesSubMenu = ({ setFilter, showBodyLoader, showSubmenu }) => {
       ? 0
       : 1;
 
-  if (showSubmenu && showBodyLoader) return <SectionSubmenuSkeleton />;
+  if (showTabs && showBodyLoader) return <SectionSubmenuSkeleton />;
 
   return showTabs ? (
     <Tabs items={tabs} selectedItemId={startSelectId} onSelect={onSelect} />
@@ -95,7 +95,7 @@ export default inject(
     return {
       setFilter,
       showBodyLoader,
-      showSubmenu:
+      showTabs:
         (isRoomsFolderRoot || isTemplatesFolderRoot) &&
         selectedFolderStore.security?.Create,
     };

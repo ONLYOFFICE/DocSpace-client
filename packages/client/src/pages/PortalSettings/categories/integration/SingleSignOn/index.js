@@ -32,8 +32,8 @@ import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 
 import HideButton from "./sub-components/HideButton";
-import SPSettings from "./SPSettings";
-import ProviderMetadata from "./ProviderMetadata";
+import { SPSettingsSection } from "./SPSettings";
+import { ProviderMetadataSection } from "./ProviderMetadata";
 import StyledSsoPage from "./styled-containers/StyledSsoPageContainer";
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
 import ToggleSSO from "./sub-components/ToggleSSO";
@@ -55,13 +55,16 @@ const SingleSignOn = (props) => {
     isInit,
     currentDeviceType,
   } = props;
-  const { t } = useTranslation(["SingleSignOn", "Settings"]);
+  const { t, ready } = useTranslation(["SingleSignOn", "Settings"]);
   const isMobileView = currentDeviceType === DeviceType.mobile;
 
   useEffect(() => {
     isSSOAvailable && !isInit && init();
-    setDocumentTitle(t("Settings:SingleSignOn"));
   }, []);
+
+  useEffect(() => {
+    if (ready) setDocumentTitle(t("Settings:SingleSignOn"));
+  }, [ready]);
 
   if (!isInit && !isMobileView && isSSOAvailable) return <SSOLoader />;
 
@@ -69,7 +72,6 @@ const SingleSignOn = (props) => {
     <StyledSsoPage
       hideSettings={serviceProviderSettings}
       hideMetadata={spMetadata}
-      isSettingPaid={isSSOAvailable}
     >
       <Text className="intro-text settings_unavailable" noSelect>
         {t("SsoIntro")}
@@ -88,10 +90,10 @@ const SingleSignOn = (props) => {
             })}
             label={SERVICE_PROVIDER_SETTINGS}
             value={serviceProviderSettings}
-            isDisabled={!isSSOAvailable}
+            //isDisabled={!isSSOAvailable}
           />
 
-          <SPSettings />
+          <SPSettingsSection />
           <StyledSettingsSeparator />
 
           <HideButton
@@ -101,11 +103,11 @@ const SingleSignOn = (props) => {
             })}
             label={SP_METADATA}
             value={spMetadata}
-            isDisabled={!isSSOAvailable}
+            //isDisabled={!isSSOAvailable}
           />
 
           <Box className="sp-metadata">
-            <ProviderMetadata />
+            <ProviderMetadataSection />
           </Box>
         </>
       )}

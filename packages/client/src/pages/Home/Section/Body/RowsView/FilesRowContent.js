@@ -48,7 +48,6 @@ import {
   connectedCloudsTypeTitleTranslation,
   getFileTypeName,
   getRoomTypeName,
-  getDefaultRoomName,
 } from "../../../../../helpers/filesUtils";
 
 import { SortByFieldName } from "SRC_DIR/helpers/constants";
@@ -60,14 +59,7 @@ const SimpleFilesRowContent = styled(RowContent)`
     width: 100%;
     max-width: min-content;
     min-width: inherit;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 0px;
-          `
-        : css`
-            margin-right: 0px;
-          `}
+    margin-inline-end: 0;
 
     @media ${desktop} {
       margin-top: 0px;
@@ -82,30 +74,17 @@ const SimpleFilesRowContent = styled(RowContent)`
   .new-items {
     min-width: 12px;
     width: max-content;
-    margin: 0 -2px -2px -2px;
+    margin: 0 -2px -2px;
   }
 
   .badge-version {
     width: max-content;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin: -2px -2px -2px 6px;
-          `
-        : css`
-            margin: -2px 6px -2px -2px;
-          `}
+    margin-block: -2px;
+    margin-inline: -2px 6px;
   }
 
   .bagde_alert {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 8px;
-          `
-        : css`
-            margin-right: 8px;
-          `}
+    margin-inline-end: 8px;
   }
 
   .badge-new-version {
@@ -113,16 +92,10 @@ const SimpleFilesRowContent = styled(RowContent)`
   }
 
   .row-content-link {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding: 12px 0px 0px 12px;
-          `
-        : css`
-            padding: 12px 12px 0px 0px;
-          `}
+    padding-block: 12px 0;
+    padding-inline: 0 12px;
     margin-top: ${(props) =>
-      props.theme.interfaceDirection === "rtl" ? "-14px" : "-12px"}
+      props.theme.interfaceDirection === "rtl" ? "-14px" : "-12px"};
   }
 
   @media ${tablet} {
@@ -143,37 +116,17 @@ const SimpleFilesRowContent = styled(RowContent)`
     .tablet-edit,
     .can-convert {
       margin-top: 6px;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 24px;
-            `
-          : css`
-              margin-right: 24px;
-            `}
+      margin-inline-end: 24px;
     }
 
     .badge-version {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 22px;
-            `
-          : css`
-              margin-right: 22px;
-            `}
+      margin-inline-end: 22px;
     }
 
     .new-items {
       min-width: 16px;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin: 5px 0 0 24px;
-            `
-          : css`
-              margin: 5px 24px 0 0;
-            `}
+      margin-block: 5px 0;
+      margin-inline: 0 24px;
     }
   }
 
@@ -197,7 +150,7 @@ const SimpleFilesRowContent = styled(RowContent)`
     }
 
     .row-content-link {
-      padding: 12px 0px 0px 0px;
+      padding: 12px 0px 0px;
     }
   }
 `;
@@ -256,7 +209,7 @@ const FilesRowContent = ({
         return getFileTypeName(fileType);
 
       case SortByFieldName.RoomType:
-        return getDefaultRoomName(roomType, t);
+        return getRoomTypeName(roomType, t);
 
       case SortByFieldName.Tags:
         if (tags?.length === 0) return "";

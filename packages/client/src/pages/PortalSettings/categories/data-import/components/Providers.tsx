@@ -41,6 +41,7 @@ import NextcloudWorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.nextc
 import WorkspaceDarkSvgUrl from "PUBLIC_DIR/images/dark.workspace.onlyoffice.react.svg?url";
 
 import { LinkType } from "@docspace/shared/components/link/Link.enums";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import DataImportLoader from "../sub-components/DataImportLoader";
 import { WorkspacesContainer } from "../StyledDataImport";
 import { ProvidersProps, InjectedProvidersProps } from "../types";
@@ -51,7 +52,7 @@ const Providers = (props: ProvidersProps) => {
 
   const [areProvidersReady, setAreProvidersReady] = useState(false);
 
-  const { t } = useTranslation(["Settings"]);
+  const { t, ready } = useTranslation(["Settings"]);
 
   const workspaces = useMemo(() => {
     const logos = {
@@ -80,6 +81,10 @@ const Providers = (props: ProvidersProps) => {
     handleMigrationCheck();
   }, [handleMigrationCheck]);
 
+  useEffect(() => {
+    if (ready) setDocumentTitle(t("DataImport"));
+  }, [ready, t]);
+
   if (!areProvidersReady) return <DataImportLoader />;
   return (
     <WorkspacesContainer>
@@ -100,9 +105,9 @@ const Providers = (props: ProvidersProps) => {
           >
             <ReactSVG src={workspace.logo} className="workspace-logo" />
             <Link
+              className="link"
               type={LinkType.page}
               fontWeight="600"
-              color="#4781D1"
               isHovered
               isTextOverflow
             >
@@ -114,18 +119,20 @@ const Providers = (props: ProvidersProps) => {
     </WorkspacesContainer>
   );
 };
-export default inject<TStore>(({ settingsStore, importAccountsStore }) => {
-  const { services, setServices, getMigrationList, setWorkspace } =
-    importAccountsStore;
+export const Component = inject<TStore>(
+  ({ settingsStore, importAccountsStore }) => {
+    const { services, setServices, getMigrationList, setWorkspace } =
+      importAccountsStore;
 
-  const { theme } = settingsStore;
+    const { theme } = settingsStore;
 
-  return {
-    services,
-    setServices,
-    getMigrationList,
+    return {
+      services,
+      setServices,
+      getMigrationList,
 
-    theme,
-    setWorkspace,
-  };
-})(observer(Providers));
+      theme,
+      setWorkspace,
+    };
+  },
+)(observer(Providers));

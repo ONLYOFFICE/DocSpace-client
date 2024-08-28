@@ -47,11 +47,15 @@ const PluginSDK = ({
   isEmptyList,
   theme,
 }) => {
-  const { t } = useTranslation(["WebPlugins", "VersionHistory", "Common"]);
+  const { t, ready } = useTranslation([
+    "WebPlugins",
+    "VersionHistory",
+    "Common",
+  ]);
 
   React.useEffect(() => {
-    setDocumentTitle(t("WebPlugins:PluginSDK"));
-  }, []);
+    if (ready) setDocumentTitle(t("WebPlugins:PluginSDK"));
+  }, [ready]);
 
   const isMobile = currentDeviceType === "mobile";
 

@@ -37,16 +37,7 @@ const StyledContainer = styled.div`
   align-items: center;
 
   .arrow-button {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: -8px;
-            margin-left: 15px;
-          `
-        : css`
-            margin-left: -8px;
-            margin-right: 15px;
-          `}
+    margin-inline: -8px 15px;
     min-width: 17px;
 
     svg {
@@ -55,25 +46,15 @@ const StyledContainer = styled.div`
     }
 
     @media ${tablet} {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl"
-          ? css`
-              padding: 8px 8px 8px 0;
-              margin-right: -8px;
-            `
-          : css`
-              padding: 8px 0 8px 8px;
-              margin-left: -8px;
-            `}
+      padding-block: 8px;
+      padding-inline: 8px 0;
+      margin-inline-start: -8px;
     }
   }
 
   .headline-header {
     @media ${desktop} {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl"
-          ? `margin-right: -9px;`
-          : `margin-left: -9px;`}
+      margin-inline-start: -9px;
     }
   }
 `;
@@ -86,8 +67,6 @@ const SectionHeaderContent = (props) => {
       <IconButton
         iconName={ArrowPathReactSvgUrl}
         size="17"
-        // color="#A3A9AE"
-        // hoverColor="#657077"
         isFill={true}
         onClick={onClickBack}
         className="arrow-button"

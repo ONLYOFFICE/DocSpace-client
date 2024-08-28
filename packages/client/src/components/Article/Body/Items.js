@@ -68,7 +68,7 @@ const Item = ({
   onBadgeClick,
   showDragItems,
   startUpload,
-  uploadEmptyFolders,
+  createFoldersTree,
   setDragging,
   showBadge,
   labelBadge,
@@ -86,18 +86,12 @@ const Item = ({
   const onDropZoneUpload = React.useCallback(
     (files, uploadToFolder) => {
       dragging && setDragging(false);
-      const emptyFolders = files.filter((f) => f.isEmptyDirectory);
 
-      if (emptyFolders.length > 0) {
-        uploadEmptyFolders(emptyFolders, uploadToFolder).then(() => {
-          const onlyFiles = files.filter((f) => !f.isEmptyDirectory);
-          if (onlyFiles.length > 0) startUpload(onlyFiles, uploadToFolder, t);
-        });
-      } else {
-        startUpload(files, uploadToFolder, t);
-      }
+      createFoldersTree(files, uploadToFolder).then((f) => {
+        if (f.length > 0) startUpload(f, null, t);
+      });
     },
-    [t, dragging, setDragging, startUpload, uploadEmptyFolders],
+    [t, dragging, setDragging, startUpload, createFoldersTree],
   );
 
   const onDrop = React.useCallback(
@@ -193,7 +187,7 @@ const Items = ({
   dragging,
   setDragging,
   startUpload,
-  uploadEmptyFolders,
+  createFoldersTree,
   isVisitor,
   isCollaborator,
   isAdmin,
@@ -326,7 +320,7 @@ const Items = ({
             t={t}
             setDragging={setDragging}
             startUpload={startUpload}
-            uploadEmptyFolders={uploadEmptyFolders}
+            createFoldersTree={createFoldersTree}
             item={item}
             setBufferSelection={setBufferSelection}
             dragging={dragging}
@@ -388,7 +382,7 @@ const Items = ({
       showText,
       setDragging,
       startUpload,
-      uploadEmptyFolders,
+      createFoldersTree,
       trashIsEmpty,
       isAdmin,
       isVisitor,
@@ -421,9 +415,11 @@ export default inject(
     clientLoadingStore,
     userStore,
     settingsStore,
+    currentTariffStatusStore,
   }) => {
-    const { isCommunity, isPaymentPageAvailable, currentDeviceType } =
-      authStore;
+    const { isPaymentPageAvailable, currentDeviceType } = authStore;
+    const { isCommunity } = currentTariffStatusStore;
+
     const { showText, currentColorScheme } = settingsStore;
 
     const {
@@ -447,7 +443,7 @@ export default inject(
     const { id, access: folderAccess } = selectedFolderStore;
     const {
       moveDragItems,
-      uploadEmptyFolders,
+      createFoldersTree,
       deleteAction,
       emptyTrashInProgress,
     } = filesActionsStore;
@@ -476,7 +472,7 @@ export default inject(
       setBufferSelection,
       deleteAction,
       startUpload,
-      uploadEmptyFolders,
+      createFoldersTree,
       setEmptyTrashDialogVisible,
       trashIsEmpty,
 

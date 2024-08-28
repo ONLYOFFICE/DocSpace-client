@@ -29,7 +29,7 @@ import styled from "styled-components";
 import { mobile } from "@docspace/shared/utils";
 
 import { DropDown } from "@docspace/shared/components/drop-down";
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 
 const StyledDropDownWrapper = styled.div`
   width: 100%;
@@ -43,7 +43,7 @@ const StyledDropDown = styled(DropDown)`
     props.theme.createEditRoomDialog.dropdown.background};
   border: 1px solid
     ${(props) => props.theme.createEditRoomDialog.dropdown.borderColor};
-  box-shadow: 0px 12px 40px rgba(4, 15, 27, 0.12);
+  box-shadow: 0px 12px 40px ${globalColors.popupShadow};
   border-radius: 3px;
   overflow: hidden;
   ${(props) => !props.hasItems && "visibility: hidden"};

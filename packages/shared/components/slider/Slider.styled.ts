@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 import { SliderThemeProps } from "./Slider.types";
 
 const StyledSlider = styled.input.attrs((props: SliderThemeProps) => ({
@@ -46,8 +46,8 @@ const StyledSlider = styled.input.attrs((props: SliderThemeProps) => ({
     props.withPouring &&
     css`
       background-image: ${props.isDisabled
-        ? `linear-gradient(#A6DCF2, #A6DCF2)`
-        : `linear-gradient(#2da7db, #2da7db)`};
+        ? `linear-gradient(${globalColors.lightSecondMainDisabled}, ${globalColors.lightSecondMainDisabled})`
+        : `linear-gradient(${globalColors.lightSecondMain}, ${globalColors.lightSecondMain})`};
     `}
 
   background-size: ${(props) => `${props.sizeProp} 100%`};
@@ -195,12 +195,13 @@ const StyledSliderTheme = styled(StyledSlider)<SliderThemeProps>`
     props.withPouring &&
     ((props.theme.isBase &&
       `linear-gradient( ${props.$currentColorScheme?.main?.accent}, ${props.$currentColorScheme?.main?.accent})`) ||
-      (!props.theme.isBase && `linear-gradient(#FFFFFF, #FFFFFF)`))};
+      (!props.theme.isBase &&
+        `linear-gradient(${globalColors.white}, ${globalColors.white})`))};
 
   &::-webkit-slider-thumb {
     background: ${(props) =>
       (props.theme.isBase && props.$currentColorScheme?.main?.accent) ||
-      (!props.theme.isBase && "#FFFFFF")};
+      (!props.theme.isBase && globalColors.white)};
     box-shadow: ${(props) =>
       !props.theme.isBase && "0px 3px 12px rgba(0, 0, 0, 0.25); !important"};
   }
@@ -210,7 +211,8 @@ const StyledSliderTheme = styled(StyledSlider)<SliderThemeProps>`
       props.withPouring &&
       ((props.theme.isBase &&
         `linear-gradient( ${props.$currentColorScheme?.main?.accent}, ${props.$currentColorScheme?.main?.accent})`) ||
-        (!props.theme.isBase && `linear-gradient(#FFFFFF, #FFFFFF)`))};
+        (!props.theme.isBase &&
+          `linear-gradient(${globalColors.white}, ${globalColors.white})`))};
   }
 
   ${(props) =>

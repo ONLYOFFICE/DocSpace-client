@@ -29,7 +29,7 @@ import styled, { css } from "styled-components";
 
 import { Text } from "../text";
 
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 
 const StyledTag = styled.div<{
   tagMaxWidth?: string;
@@ -50,15 +50,7 @@ const StyledTag = styled.div<{
   box-sizing: border-box;
 
   padding: 2px 10px;
-
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-left: ${props.isLast ? "0" : "4px"};
-        `
-      : css`
-          margin-right: ${props.isLast ? "0" : "4px"};
-        `}
+  margin-inline-end: ${({ isLast }) => (isLast ? "0" : "4px")};
 
   background: ${(props) =>
     props.isDisabled
@@ -89,14 +81,7 @@ const StyledTag = styled.div<{
     `}
 
   .tag-icon {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 12px;
-          `
-        : css`
-            margin-left: 12px;
-          `}
+    margin-inline-start: 12px;
 
     cursor: pointer;
   }
@@ -111,11 +96,11 @@ const StyledTag = styled.div<{
       css`
         svg {
           path[fill] {
-            fill: #fff;
+            fill: ${globalColors.white};
         }
 
           path[stroke] {
-            stroke: #fff;
+            stroke: ${globalColors.white};
           }
         `}
     }

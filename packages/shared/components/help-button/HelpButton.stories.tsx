@@ -69,10 +69,10 @@ export const Default: Story = {
 
 const AutoTemplate = (args: HelpButtonProps) => {
   return (
-    <div style={{ marginTop: "20px", marginLeft: "100px" }}>
+    <div style={{ marginTop: "20px", marginInlineStart: "100px" }}>
       <HelpButton
         {...args}
-        style={{ left: "20px" }}
+        style={{ insetInlineStart: "20px" }}
         tooltipContent={
           <>
             <p>You can put every thing here</p>

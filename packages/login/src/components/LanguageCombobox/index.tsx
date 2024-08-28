@@ -33,10 +33,10 @@ import { setLanguageForUnauthorized } from "@docspace/shared/utils/common";
 import { LanguageCombobox } from "@docspace/shared/components/language-combobox";
 import { DeviceType } from "@docspace/shared/enums";
 import { Nullable } from "@docspace/shared/types";
+import { getPortalCultures } from "@docspace/shared/api/settings";
 import { TPortalCultures } from "@docspace/shared/api/settings/types";
 
 import useDeviceType from "@/hooks/useDeviceType";
-import { getPortalCultures } from "@/utils/actions";
 
 const LanguageComboboxWrapper = () => {
   const { i18n } = useTranslation(["Login", "Common"]);
@@ -70,7 +70,7 @@ const LanguageComboboxWrapper = () => {
       onSelectLanguage={onLanguageSelect}
       cultures={cultures}
       selectedCulture={currentCulture}
-      withBorder={false}
+      withBorder={!isMobileView}
       isMobileView={isMobileView}
     />
   );

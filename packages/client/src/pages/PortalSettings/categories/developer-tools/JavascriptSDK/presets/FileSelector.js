@@ -438,12 +438,13 @@ const FileSelector = (props) => {
   );
 };
 
-export default inject(({ settingsStore, publicRoomStore }) => {
+export const Component = inject(({ settingsStore, publicRoomStore }) => {
   const { theme } = settingsStore;
   const { fetchExternalLinks } = publicRoomStore;
 
   return {
     theme,
+
     fetchExternalLinks,
   };
 })(

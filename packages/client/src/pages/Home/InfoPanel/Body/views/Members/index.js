@@ -29,7 +29,7 @@ import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { toastr } from "@docspace/shared/components/toast";
 
-import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
+import { RoomsType } from "@docspace/shared/enums";
 import { LINKS_LIMIT_COUNT } from "@docspace/shared/constants";
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
 import MembersHelper from "../../helpers/MembersHelper";
@@ -187,6 +187,8 @@ const Members = ({
           key="general-link"
           link={primaryLink}
           setIsScrollLocked={setIsScrollLocked}
+          isShareLink
+          isPrimaryLink
         />,
       );
     }
@@ -198,6 +200,7 @@ const Members = ({
             link={link}
             key={link?.sharedTo?.id}
             setIsScrollLocked={setIsScrollLocked}
+            isShareLink
           />,
         );
       });
@@ -207,6 +210,7 @@ const Members = ({
           key="create-additional-link"
           className="additional-link"
           onClick={onAddNewLink}
+          isShareLink
         >
           <div className="create-link-icon">
             <IconButton size={12} iconName={PlusIcon} isDisabled />

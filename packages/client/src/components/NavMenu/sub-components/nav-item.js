@@ -32,14 +32,10 @@ import styled, { css } from "styled-components";
 import { Badge } from "@docspace/shared/components/badge";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
-import {
-  commonIconsStyles,
-  getCorrectFourValuesStyle,
-  tablet,
-} from "@docspace/shared/utils";
+import { commonIconsStyles, tablet } from "@docspace/shared/utils";
 
 import MenuIcon from "PUBLIC_DIR/images/menu.react.svg";
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 
 const NavItemSeparator = styled.div`
   border-bottom: 1px ${(props) => (props.dashed ? "dashed" : "solid")}
@@ -54,8 +50,8 @@ const NavItemWrapper = styled(Link)`
   min-width: 48px;
   min-height: 50px;
   align-items: center;
-  padding: ${({ theme }) =>
-    getCorrectFourValuesStyle("0 16px 0 20px", theme.interfaceDirection)};
+  padding-block: 0;
+  padding-inline: 20px 16px;
   cursor: pointer;
   position: relative;
   box-sizing: border-box;
@@ -93,16 +89,16 @@ const NavItemWrapper = styled(Link)`
     `}
 
   @media ${tablet} {
-    padding: ${({ theme }) =>
-      getCorrectFourValuesStyle("0 16px 0 16px", theme.interfaceDirection)};
+    padding-block: 0;
+    padding-inline: 16px;
   }
 `;
 
 NavItemWrapper.defaultProps = { theme: Base };
 
 const NavItemLabel = styled(Text)`
-  margin: ${({ theme }) =>
-    getCorrectFourValuesStyle("0 auto 0 16px", theme.interfaceDirection)};
+  margin-block: 0;
+  margin-inline: 16px auto;
 
   display: ${(props) => (props.opened ? "block" : "none")};
   color: ${(props) =>
@@ -117,8 +113,8 @@ const badgeCss = css`
   position: absolute;
   top: 2px;
 
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl" ? `left: 4px;` : `right: 4px;`}
+  inset-inline-end: 4px;
+
   overflow: inherit;
 `;
 
@@ -127,18 +123,16 @@ const NavItemBadge = styled(Badge)`
 `;
 
 const VersionBadge = styled.div`
-  background-color: #3cb55b;
+  background-color: ${globalColors.lightStatusPositive};
   border-radius: 5px;
-  color: #ffffff;
+  color: ${globalColors.white};
   display: inline-block;
   font-size: 10px;
   line-height: 8px;
   padding: 3px 6px;
   position: absolute;
   top: -5px;
-
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl" ? `right: 10px;` : `left: 10px;`}
+  inset-inline-start: 10px;
 `;
 
 const StyledMenuIcon = styled(MenuIcon)`

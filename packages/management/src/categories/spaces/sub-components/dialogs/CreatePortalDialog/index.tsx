@@ -49,10 +49,7 @@ const StyledModal = styled(ModalDialogContainer)`
 
   .cancel-btn {
     display: inline-block;
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: 8px;`
-        : `margin-left: 8px;`}
+    margin-inline-start: 8px;
   }
 
   .create-portal-checkbox {
@@ -61,6 +58,14 @@ const StyledModal = styled(ModalDialogContainer)`
 
   .create-portal-input {
     width: 100%;
+  }
+
+  .error-text {
+    color: ${({ theme }) => theme.management.errorColor};
+  }
+
+  .sub-text {
+    color: ${({ theme }) => theme.management.textColor};
   }
 `;
 
@@ -110,7 +115,7 @@ const CreatePortalDialog = () => {
       name,
       domainValidator,
       setRegisterError,
-      t
+      t,
     );
 
     if (isValidPortalName) {
@@ -170,15 +175,15 @@ const CreatePortalDialog = () => {
             className="create-portal-input"
           />
           <div>
-            <Text fontSize="12px" fontWeight="400" color="#F24724">
+            <Text className="error-text" fontSize="12px" fontWeight="400">
               {registerError}
             </Text>
           </div>
           <div style={{ marginTop: "6px", wordWrap: "break-word" }}>
             <Text
+              className="sub-text"
               fontSize="12px"
               fontWeight="400"
-              color="#A3A9AE"
             >{`${name}.${baseDomain}`}</Text>
           </div>
         </div>

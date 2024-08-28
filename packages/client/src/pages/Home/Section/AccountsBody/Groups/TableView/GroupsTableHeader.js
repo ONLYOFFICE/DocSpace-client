@@ -30,9 +30,9 @@ import { withTranslation } from "react-i18next";
 
 import { TableHeader } from "@docspace/shared/components/table";
 import { Events } from "@docspace/shared/enums";
+import { TableVersions } from "SRC_DIR/helpers/constants";
 
-const TABLE_VERSION = "5";
-const TABLE_COLUMNS = `groupsTableColumns_ver-${TABLE_VERSION}`;
+const TABLE_COLUMNS = `groupsTableColumns_ver-${TableVersions.Groups}`;
 
 class GroupsTableHeader extends React.Component {
   constructor(props) {
@@ -50,6 +50,15 @@ class GroupsTableHeader extends React.Component {
         onClick: this.onFilter,
       },
       {
+        key: "People",
+        title: props.t("Common:People"),
+        enable: props.peopleAccountsGroupsColumnIsEnabled,
+        sortBy: "membersCount",
+        onClick: this.onFilter,
+        resizable: true,
+        onChange: this.onColumnChange,
+      },
+      {
         key: "Head of Group",
         title: props.t("Common:HeadOfGroup"),
         enable: props.managerAccountsGroupsColumnIsEnabled,
@@ -61,6 +70,8 @@ class GroupsTableHeader extends React.Component {
     ];
 
     const columns = props.getColumns(defaultColumns);
+    const tableColumns = columns.map((c) => c.enable && c.key);
+    this.setTableColumns(tableColumns);
 
     this.state = { columns };
   }
@@ -77,7 +88,7 @@ class GroupsTableHeader extends React.Component {
     this.setState({ columns });
 
     const tableColumns = columns.map((c) => c.enable && c.key);
-    localStorage.setItem(`${TABLE_COLUMNS}=${this.props.userId}`, tableColumns);
+    this.setTableColumns(tableColumns);
 
     const event = new Event(Events.CHANGE_COLUMN);
     window.dispatchEvent(event);
@@ -101,6 +112,10 @@ class GroupsTableHeader extends React.Component {
     setIsLoading(true);
     setFilter(newFilter);
     navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
+  };
+
+  setTableColumns = (tableColumns) => {
+    localStorage.setItem(`${TABLE_COLUMNS}=${this.props.userId}`, tableColumns);
   };
 
   render() {
@@ -155,6 +170,8 @@ export default inject(
     setColumnEnable: tableStore.setColumnEnable,
     managerAccountsGroupsColumnIsEnabled:
       tableStore.managerAccountsGroupsColumnIsEnabled,
+    peopleAccountsGroupsColumnIsEnabled:
+      tableStore.peopleAccountsGroupsColumnIsEnabled,
   }),
 )(
   withTranslation(["People", "Common", "PeopleTranslations"])(

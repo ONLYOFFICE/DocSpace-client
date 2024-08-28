@@ -29,7 +29,7 @@
 import styled, { css } from "styled-components";
 import { ToastContainer } from "react-toastify";
 
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 import { tablet, mobile } from "../../utils";
 
 import { IconButton } from "../icon-button";
@@ -45,15 +45,9 @@ const StyledToastContainer = styled(ToastContainer)<{ $topOffset: number }>`
   color: ${(props) => props.theme.toast.color};
   top: ${(props) =>
     `${parseInt(props.theme.toast.top, 10) + props.$topOffset}px`};
-  right: ${(props) => props.theme.toast.right};
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl" &&
-    css`
-      left: ${props.theme.toast.right};
-      right: auto;
-    `}
+  inset-inline-end: ${(props) => props.theme.toast.right};
   margin-top: ${(props) => props.theme.toast.marginTop};
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   .Toastify__progress-bar--animated {
     animation: Toastify__trackProgress linear 1 forwards;
@@ -182,7 +176,7 @@ const StyledToastContainer = styled(ToastContainer)<{ $topOffset: number }>`
     min-height: ${(props) => props.theme.toast.main.minHeight};
     font: normal 12px ${(props) => props.theme.fontFamily};
     width: ${(props) => props.theme.toast.main.width};
-    right: ${(props) => props.theme.toast.main.right};
+    inset-inline-end: ${(props) => props.theme.toast.main.right};
 
     transition: ${(props) => props.theme.toast.main.transition};
 
@@ -211,19 +205,12 @@ const StyledToastContainer = styled(ToastContainer)<{ $topOffset: number }>`
   }
 
   @media ${tablet} {
-    right: 16px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl" &&
-      css`
-        left: 16px;
-        right: auto;
-      `}
+    inset-inline-end: 16px;
   }
 
   @media only screen and (${mobile}) {
-    left: 0;
+    inset-inline: 0;
     margin: auto;
-    right: 0;
     width: 100%;
     max-width: calc(100% - 32px);
 

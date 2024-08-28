@@ -32,10 +32,9 @@ import {
   TPortal,
   TPortalTariff,
   TRestoreProgress,
-  TTenantExtra,
 } from "./types";
 
-export function getShortenedLink(link) {
+export function getShortenedLink(link: string) {
   return request({
     method: "put",
     url: "/portal/getshortenlink",
@@ -43,13 +42,13 @@ export function getShortenedLink(link) {
   });
 }
 
-export function getInvitationLink(type) {
-  return request({
+export async function getInvitationLink(type: EmployeeType) {
+  const res = await request({
     method: "get",
     url: `/portal/users/invite/${type}`,
-  }).then((link) => {
-    return Promise.resolve(link);
   });
+
+  return res;
 }
 
 export function getInvitationLinks() {
@@ -256,16 +255,6 @@ export async function getPortalPaymentQuotas() {
   return res;
 }
 
-export async function getPortalTenantExtra(refresh: boolean) {
-  const params = refresh ? { refresh: true } : {};
-  const res = (await request({
-    method: "get",
-    url: "/portal/tenantextra",
-    params,
-  })) as TTenantExtra;
-
-  return res;
-}
 export async function getPortalQuota(refresh = false) {
   const params = refresh ? { refresh: true } : {};
   // console.log("getPortalQuota", { params });

@@ -443,6 +443,9 @@ class FilesTableHeader extends React.Component {
       columnStorageName,
       columnInfoPanelStorageName,
       tableStorageName,
+      isRooms,
+      filter,
+      roomsFilter,
     } = this.props;
 
     const defaultColumns = this.getDefaultColumns();
@@ -455,6 +458,9 @@ class FilesTableHeader extends React.Component {
 
     const tableColumns = columns.map((c) => c.enable && c.key);
 
+    const sortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
+    const sortOrder = isRooms ? roomsFilter.sortOrder : filter.sortOrder;
+
     this.setTableColumns(tableColumns);
     if (fromUpdate) {
       this.setState({
@@ -462,6 +468,9 @@ class FilesTableHeader extends React.Component {
         resetColumnsSize,
         columnStorageName,
         columnInfoPanelStorageName,
+        sortBy,
+        sortOrder,
+        // isRecentTab,
       });
     } else {
       this.state = {
@@ -469,9 +478,13 @@ class FilesTableHeader extends React.Component {
         resetColumnsSize,
         columnStorageName,
         columnInfoPanelStorageName,
+        sortBy,
+        sortOrder,
+        // isRecentTab,
       };
     }
   };
+
   setTableColumns = (tableColumns) => {
     localStorage.setItem(this.props.tableStorageName, tableColumns);
   };
@@ -514,7 +527,12 @@ class FilesTableHeader extends React.Component {
       isRecentTab,
       isArchiveFolder,
       showStorageInfo,
+      roomsFilter,
+      filter,
     } = this.props;
+
+    const sortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
+    const sortOrder = isRooms ? roomsFilter.sortOrder : filter.sortOrder;
 
     if (
       isArchiveFolder !== prevProps.isArchiveFolder ||
@@ -522,13 +540,16 @@ class FilesTableHeader extends React.Component {
       isTrashFolder !== prevProps.isTrashFolder ||
       columnStorageName !== prevProps.columnStorageName ||
       columnInfoPanelStorageName !== prevProps.columnInfoPanelStorageName ||
-      isRecentTab !== prevProps.isRecentTab ||
-      showStorageInfo !== prevProps.showStorageInfo
+      isRecentTab !== prevProps.isRecentTab || // isRecentTab !== this.state.isRecentTab ||
+      showStorageInfo !== prevProps.showStorageInfo ||
+      sortBy !== this.state.sortBy ||
+      sortOrder !== this.state.sortOrder
     ) {
       return this.getTableColumns(true);
     }
 
     const { columns } = this.state;
+
     if (this.props.withContent !== prevProps.withContent) {
       const columnIndex = columns.findIndex((c) => c.key === "Share");
       if (columnIndex === -1) return;
@@ -617,9 +638,6 @@ class FilesTableHeader extends React.Component {
       t,
       containerRef,
       isHeaderChecked,
-      filter,
-      roomsFilter,
-      isRooms,
       firstElemChecked,
       sortingVisible,
       infoPanelVisible,
@@ -636,10 +654,9 @@ class FilesTableHeader extends React.Component {
       resetColumnsSize,
       columnStorageName,
       columnInfoPanelStorageName,
+      sortBy,
+      sortOrder,
     } = this.state;
-
-    const sortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
-    const sortOrder = isRooms ? roomsFilter.sortOrder : filter.sortOrder;
 
     return (
       <TableHeader
@@ -713,14 +730,12 @@ export default inject(
       sizeTrashColumnIsEnabled,
       typeColumnIsEnabled,
       typeTrashColumnIsEnabled,
-      quickButtonsColumnIsEnabled,
       lastOpenedColumnIsEnabled,
 
       roomColumnNameIsEnabled,
       roomColumnTypeIsEnabled,
       roomColumnTagsIsEnabled,
       roomColumnOwnerIsEnabled,
-      roomColumnQuickButtonsIsEnabled,
       roomColumnActivityIsEnabled,
       roomQuotaColumnIsEnable,
 
@@ -764,14 +779,12 @@ export default inject(
       sizeTrashColumnIsEnabled,
       typeColumnIsEnabled,
       typeTrashColumnIsEnabled,
-      quickButtonsColumnIsEnabled,
       lastOpenedColumnIsEnabled,
 
       roomColumnNameIsEnabled,
       roomColumnTypeIsEnabled,
       roomColumnTagsIsEnabled,
       roomColumnOwnerIsEnabled,
-      roomColumnQuickButtonsIsEnabled,
       roomColumnActivityIsEnabled,
       roomQuotaColumnIsEnable,
 

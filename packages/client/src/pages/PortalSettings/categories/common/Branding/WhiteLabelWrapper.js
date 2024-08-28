@@ -26,7 +26,7 @@
 
 import React, { useEffect } from "react";
 import { Provider as MobxProvider } from "mobx-react";
-import store from "client/store";
+import store from "SRC_DIR/store";
 import CommonWhiteLabel from "./CommonWhiteLabel";
 
 const { authStore } = store;

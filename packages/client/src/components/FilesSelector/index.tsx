@@ -140,6 +140,7 @@ const FilesSelectorWrapper = ({
   openRoot,
 
   filesSettings,
+  headerProps,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -392,6 +393,7 @@ const FilesSelectorWrapper = ({
       getFilesArchiveError={getFilesArchiveError}
       withCreate={(isMove || isCopy || isRestore || isRestoreAll) ?? false}
       filesSettings={filesSettings}
+      headerProps={headerProps}
     />
   );
 };
@@ -424,6 +426,7 @@ export default inject(
       isRestore,
       isPanelVisible,
       id,
+      currentFolderId: currentFolderIdProp,
     }: FilesSelectorProps,
   ) => {
     const { id: selectedId, parentId, rootFolderType } = selectedFolderStore;
@@ -551,7 +554,7 @@ export default inject(
       getIcon,
 
       roomsFolderId,
-      currentFolderId: folderId,
+      currentFolderId: folderId || currentFolderIdProp,
       filesSettings,
     };
   },

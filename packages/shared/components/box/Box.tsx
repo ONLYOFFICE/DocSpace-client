@@ -29,12 +29,15 @@ import { BoxProps } from "./Box.types";
 import { StyledBox } from "./Box.styled";
 
 function Box(props: BoxProps) {
-  const { as } = props;
-  return <StyledBox {...props} as={as || "div"} data-testid="box" />;
+  const { as, displayProp = "block" } = props;
+  return (
+    <StyledBox
+      {...props}
+      displayProp={displayProp}
+      as={as || "div"}
+      data-testid="box"
+    />
+  );
 }
-
-Box.defaultProps = {
-  displayProp: "block",
-};
 
 export { Box };

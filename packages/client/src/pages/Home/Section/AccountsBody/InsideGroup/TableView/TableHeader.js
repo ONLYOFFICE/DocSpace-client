@@ -102,6 +102,8 @@ class InsideGroupTableHeader extends React.Component {
       });
 
     const columns = props.getColumns(defaultColumns);
+    const tableColumns = columns.map((c) => c.enable && c.key);
+    this.setTableColumns(tableColumns);
 
     this.state = { columns };
   }
@@ -118,7 +120,7 @@ class InsideGroupTableHeader extends React.Component {
     this.setState({ columns });
 
     const tableColumns = columns.map((c) => c.enable && c.key);
-    localStorage.setItem(`${TABLE_COLUMNS}=${this.props.userId}`, tableColumns);
+    this.setTableColumns(tableColumns);
 
     const event = new Event(Events.CHANGE_COLUMN);
 
@@ -136,15 +138,8 @@ class InsideGroupTableHeader extends React.Component {
       newFilter.sortBy = sortBy;
 
       if (sortBy === "AZ") {
-        if (
-          newFilter.sortBy !== "lastname" &&
-          newFilter.sortBy !== "firstname"
-        ) {
-          newFilter.sortBy = "firstname";
-        } else if (newFilter.sortBy === "lastname") {
-          newFilter.sortBy = "firstname";
-        } else {
-          newFilter.sortBy = "lastname";
+        if (newFilter.sortBy !== "displayname") {
+          newFilter.sortBy = "displayname";
         }
         newFilter.sortOrder =
           newFilter.sortOrder === "ascending" ? "descending" : "ascending";
@@ -154,6 +149,10 @@ class InsideGroupTableHeader extends React.Component {
     setIsLoading(true);
     setFilter(newFilter);
     navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
+  };
+
+  setTableColumns = (tableColumns) => {
+    localStorage.setItem(`${TABLE_COLUMNS}=${this.props.userId}`, tableColumns);
   };
 
   render() {
@@ -170,10 +169,7 @@ class InsideGroupTableHeader extends React.Component {
     } = this.props;
     const { sortOrder } = filter;
 
-    const sortBy =
-      filter.sortBy === "firstname" || filter.sortBy === "lastname"
-        ? "AZ"
-        : filter.sortBy;
+    const sortBy = filter.sortBy === "displayname" ? "AZ" : filter.sortBy;
 
     return (
       <TableHeader

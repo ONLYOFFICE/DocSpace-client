@@ -47,12 +47,12 @@ const RoomsItemHeader = ({
   setIsMobileHidden,
   isGracePeriod,
   setInvitePanelOptions,
-  setInviteUsersWarningDialogVisible,
+  setQuotaWarningDialogVisible,
   roomsView,
   setSelection,
   setBufferSelection,
   isArchive,
-  hasLinks,
+  isShared,
   showSearchBlock,
   setShowSearchBlock,
   roomType,
@@ -70,7 +70,7 @@ const RoomsItemHeader = ({
     (selection.roomType === RoomsType.PublicRoom ||
       selection.roomType === RoomsType.FormRoom ||
       selection.roomType === RoomsType.CustomRoom) &&
-    hasLinks;
+    isShared;
 
   const badgeUrl = showPlanetIcon ? Planet12ReactSvgUrl : null;
   const isRoomMembersPanel = selection?.isRoom && roomsView === "info_members";
@@ -86,7 +86,7 @@ const RoomsItemHeader = ({
     const parentRoomId = infoPanelSelection.id;
 
     if (isGracePeriod) {
-      setInviteUsersWarningDialogVisible(true);
+      setQuotaWarningDialogVisible(true);
       return;
     }
 
@@ -161,7 +161,6 @@ export default inject(
     selectedFolderStore,
     filesStore,
     infoPanelStore,
-    publicRoomStore,
   }) => {
     const {
       infoPanelSelection,
@@ -170,7 +169,6 @@ export default inject(
       showSearchBlock,
       setShowSearchBlock,
     } = infoPanelStore;
-    const { externalLinks } = publicRoomStore;
 
     const selection = infoPanelSelection.length > 1 ? null : infoPanelSelection;
     const isArchive = selection?.rootFolderType === FolderType.Archive;
@@ -190,13 +188,12 @@ export default inject(
       isGracePeriod: currentTariffStatusStore.isGracePeriod,
 
       setInvitePanelOptions: dialogsStore.setInvitePanelOptions,
-      setInviteUsersWarningDialogVisible:
-        dialogsStore.setInviteUsersWarningDialogVisible,
+      setQuotaWarningDialogVisible: dialogsStore.setQuotaWarningDialogVisible,
 
       setSelection: filesStore.setSelection,
       setBufferSelection: filesStore.setBufferSelection,
       isArchive,
-      hasLinks: externalLinks.length,
+      isShared: selection?.shared,
       roomType,
     };
   },

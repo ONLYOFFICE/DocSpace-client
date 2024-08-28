@@ -42,7 +42,7 @@ import {
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import HeaderCatalogBurger from "./header-catalog-burger";
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 
 const Header = styled.header`
   display: flex;
@@ -59,14 +59,14 @@ const Header = styled.header`
     display: flex;
     align-items: center;
     justify-items: center;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
     ${NoUserSelect}
   }
 
   .header-logo-icon {
     position: absolute;
-    right: 50%; /* Just centering. Does not require rtl mirroring */
+    right: 50%; /* Does not require rtl mirroring */
     transform: translateX(50%);
     height: 24px;
     cursor: pointer;
@@ -83,11 +83,7 @@ const Header = styled.header`
 
   .header-items-wrapper {
     display: flex;
-
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: 82px;`
-        : `margin-left: 82px;`}
+    margin-inline-start: 82px;
   }
 `;
 
@@ -121,17 +117,13 @@ const StyledNavigationIconsWrapper = styled.div`
   height: 20px;
   position: absolute;
 
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `right: ${isMobile ? "254px" : "275px"};`
-      : `left: ${isMobile ? "254px" : "275px"};`}
+  inset-inline-start: ${isMobile ? "254px" : "275px"};
   display: ${isMobileOnly ? "none" : "flex"};
   justify-content: flex-start;
   align-items: center;
 
   @media ${tablet} {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl" ? `right: 254px;` : `left: 254px;`}
+    inset-inline-start: 254px;
   }
 
   @media ${mobile} {

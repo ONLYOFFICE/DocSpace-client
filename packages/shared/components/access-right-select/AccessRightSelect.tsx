@@ -29,6 +29,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { DropDownItem } from "../drop-down-item";
 import { Badge } from "../badge";
 import { TOption } from "../combobox";
+import { toastr } from "../toast";
 
 import {
   StyledItemTitle,
@@ -46,6 +47,10 @@ export const AccessRightSelectPure = ({
   advancedOptions,
   selectedOption,
   className,
+  type,
+  isSelectionDisabled,
+  selectionErrorText,
+  availableAccess,
   ...props
 }: AccessRightSelectProps) => {
   const [currentItem, setCurrentItem] = useState(selectedOption);
@@ -57,6 +62,20 @@ export const AccessRightSelectPure = ({
   const onSelectCurrentItem = useCallback(
     (option: TOption) => {
       if (option) {
+        if (isSelectionDisabled) {
+          let isError =
+            option.access && option.access !== selectedOption.access;
+
+          if (availableAccess && option.access) {
+            isError = availableAccess.every((item) => item !== option.access);
+          }
+
+          if (isError) {
+            toastr.error(selectionErrorText);
+            return;
+          }
+        }
+
         setCurrentItem(option);
         onSelect?.(option);
       }
@@ -76,7 +95,12 @@ export const AccessRightSelectPure = ({
           onClick={() => onSelectCurrentItem(item)}
         >
           <StyledItem>
-            {item.icon && <StyledItemIcon src={item.icon} />}
+            {item.icon && (
+              <StyledItemIcon
+                src={item.icon}
+                isShortenIcon={type === "onlyIcon"}
+              />
+            )}
             <StyledItemContent>
               <StyledItemTitle>
                 {item.label}
@@ -108,6 +132,7 @@ export const AccessRightSelectPure = ({
   return (
     <StyledWrapper
       className={className}
+      type={type}
       advancedOptions={formattedOptions}
       onSelect={onSelectCurrentItem}
       options={[]}
@@ -116,7 +141,7 @@ export const AccessRightSelectPure = ({
           icon: currentItem?.icon,
           default: true,
           key: currentItem?.key,
-          label: currentItem?.label,
+          label: type === "onlyIcon" ? "" : currentItem?.label,
         } as TOption
       }
       forceCloseClickOutside

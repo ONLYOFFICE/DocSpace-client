@@ -29,7 +29,7 @@ import { isMobile } from "react-device-detect";
 
 import { mobile, tablet } from "../../utils";
 
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";
 import { FloatingButton } from "../floating-button";
@@ -39,7 +39,7 @@ const StyledFloatingButton = styled(FloatingButton)`
   position: relative;
   z-index: 1010;
   background: ${(props) => props.theme.mainButtonMobile.buttonColor};
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   .circle__background {
     background: ${(props) => props.theme.mainButtonMobile.buttonColor};
@@ -90,13 +90,8 @@ const mobileDropDown = css`
     width: ${(props) => props.theme.mainButtonMobile.dropDown.mobile.width};
   }
 
-  right: ${(props) => props.theme.mainButtonMobile.dropDown.mobile.right};
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl" &&
-    css`
-      left: ${props.theme.mainButtonMobile.dropDown.mobile.right};
-      right: unset;
-    `}
+  inset-inline-end: ${(props) =>
+    props.theme.mainButtonMobile.dropDown.mobile.right};
   bottom: ${(props) => props.theme.mainButtonMobile.dropDown.mobile.bottom};
 
   .dialog-background-scroll {
@@ -117,14 +112,7 @@ const StyledDropDown = styled(DropDown)<{ heightProp?: string }>`
   width: ${(props) => props.theme.mainButtonMobile.dropDown.width};
   max-width: calc(100vw - 48px);
 
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          left: ${props.theme.mainButtonMobile.dropDown.right};
-        `
-      : css`
-          right: ${props.theme.mainButtonMobile.dropDown.right};
-        `}
+  inset-inline-end: ${({ theme }) => theme.mainButtonMobile.dropDown.right};
   bottom: ${(props) => props.theme.mainButtonMobile.dropDown.bottom};
 
   z-index: ${(props) => props.theme.mainButtonMobile.dropDown.zIndex};
@@ -146,10 +134,7 @@ const StyledDropDown = styled(DropDown)<{ heightProp?: string }>`
 
   .section-scroll,
   .scroll-body {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `padding-left: 0px !important;`
-        : `padding-right: 0px !important;`}
+    padding-inline-end: 0px !important;
   }
 
   .separator-wrapper {
@@ -215,10 +200,7 @@ const StyledButtonOptions = styled.div<{ withoutButton?: boolean }>`
   color: ${(props) => props.theme.mainButtonMobile.buttonOptions.color};
 
   .sublevel {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `padding-right: 48px;`
-        : `padding-left: 48px;`}
+    padding-inline-start: 48px;
   }
   .main-button_drop-down {
     color: ${(props) => props.theme.mainButtonMobile.dropDown.buttonColor};
@@ -252,10 +234,7 @@ const StyledContainerAction = styled.div`
   padding: 16px 0px;
 
   .sublevel {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `padding-right: 48px;`
-        : `padding-left: 48px;`}
+    padding-inline-start: 48px;
   }
 `;
 
@@ -337,13 +316,7 @@ const StyledProgressBarContainer = styled.div<{ isUploading?: boolean }>`
         color: ${(props) => props.theme.mainButtonMobile.textColor};
 
         text-align: right;
-        margin-right: 12px;
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl" &&
-          css`
-            margin-left: 12px;
-            margin-right: 0px;
-          `}
+        margin-inline-end: 12px;
       }
 
       .progress_icon {
@@ -382,8 +355,7 @@ const StyledAlertIcon = styled.div`
   width: 12px;
   height: 12px;
   top: 10px;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl" ? "left: 10px;" : "right: 10px;"}
+  inset-inline-end: 10px;
 `;
 
 StyledBar.defaultProps = { theme: Base };
@@ -406,15 +378,12 @@ export {
 const getDefaultProgressStyles = ({
   $currentColorScheme,
   theme,
-  error,
 }: ProgressBarMobileDefaultStyles) =>
   $currentColorScheme &&
   css`
-    background: ${error
-      ? theme.mainButtonMobile.bar.errorBackground
-      : theme.isBase
-        ? $currentColorScheme?.main?.accent
-        : "#FFFFFF"};
+    background: ${
+      theme.isBase ? $currentColorScheme?.main?.accent : globalColors.white
+    }};
   `;
 
 const StyledProgressBarTheme = styled(StyledBar)(getDefaultProgressStyles);

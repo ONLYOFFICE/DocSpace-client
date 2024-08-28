@@ -248,7 +248,7 @@ export const enum FolderType {
   ReadOnlyRoom = 18,
   CustomRoom = 19,
   Archive = 20,
-
+  PublicRoom = 22,
   Done = 25,
   InProgress = 26,
   SubFolderDone = 27,
@@ -614,4 +614,13 @@ export enum FileExtensions {
   DOCXF = "docxf",
   XLSX = "xlsx",
   PPTX = "pptx",
+}
+
+export enum ValidationStatus {
+  Ok = 0,
+  Invalid = 1,
+  Expired = 2,
+  Password = 3,
+  InvalidPassword = 4,
+  ExternalAccessDenied = 5,
 }

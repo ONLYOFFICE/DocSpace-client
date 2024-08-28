@@ -46,7 +46,7 @@ const PROVIDER_URL = "https://idpservice/idp";
 
 const StyledWrapper = styled.div`
   .radio-button-group {
-    margin-left: 24px;
+    margin-inline-start: 24px;
   }
 `;
 

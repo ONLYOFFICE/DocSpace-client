@@ -57,7 +57,7 @@ const StyledModalDialog = styled(ModalDialog)`
   }
 
   .modal-combo {
-    margin: 16px 0 0 0;
+    margin: 16px 0 0;
   }
 `;
 

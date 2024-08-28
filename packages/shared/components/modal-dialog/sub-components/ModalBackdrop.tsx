@@ -31,17 +31,6 @@ import { TTheme } from "@docspace/shared/themes";
 import { mobile } from "../../../utils";
 import { ModalDialogBackdropProps } from "../ModalDialog.types";
 
-const backdropFilter = (props: {
-  theme: TTheme;
-  modalSwipeOffset?: number;
-}) => {
-  const blur = props.theme.modalDialog.backdrop.blur;
-  const swipeOffset = props.modalSwipeOffset;
-
-  if (!swipeOffset) return `blur(${blur}px)`;
-  return `blur(${blur + swipeOffset * (blur / 120)}px)`;
-};
-
 const backdropBackground = (props: {
   theme: TTheme;
   modalSwipeOffset?: number;
@@ -56,8 +45,6 @@ const backdropBackground = (props: {
 const StyledModalBackdrop = styled.div.attrs(
   (props: { theme: TTheme; modalSwipeOffset?: number; zIndex?: number }) => ({
     style: {
-      backdropFilter: backdropFilter(props),
-      WebkitBackdropFilter: backdropFilter(props),
       background: backdropBackground(props),
     },
   }),
@@ -69,6 +56,7 @@ const StyledModalBackdrop = styled.div.attrs(
   width: 100vw;
   overflow: hidden;
   position: fixed;
+  // doesn't require mirroring for RTL
   left: 0;
   top: 0;
 

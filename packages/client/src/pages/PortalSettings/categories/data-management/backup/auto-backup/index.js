@@ -59,6 +59,7 @@ import { Link } from "@docspace/shared/components/link";
 import { getSettingsThirdParty } from "@docspace/shared/api/files";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { isManagement } from "@docspace/shared/utils/common";
+import { globalColors } from "@docspace/shared/themes";
 
 const { DocumentModuleType, ResourcesModuleType, StorageModuleType } =
   BackupStorageType;
@@ -66,7 +67,7 @@ const { EveryDayType, EveryWeekType, EveryMonthType } = AutoBackupPeriod;
 class AutomaticBackup extends React.PureComponent {
   constructor(props) {
     super(props);
-    const { t, language } = props;
+    const { t, tReady, language } = props;
     moment.locale(language);
 
     this.state = {
@@ -96,7 +97,7 @@ class AutomaticBackup extends React.PureComponent {
     this.maxNumberCopiesArray = [];
     this.weekdaysLabelArray = [];
 
-    setDocumentTitle(t("AutoBackup"));
+    if (tReady) setDocumentTitle(t("AutoBackup"));
 
     this.getTime();
     this.getMonthNumbers();
@@ -168,6 +169,12 @@ class AutomaticBackup extends React.PureComponent {
     if (Object.keys(rootFoldersTitles).length === 0) fetchTreeFolders();
 
     this.setBasicSettings();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { t, tReady } = this.props;
+    if (prevProps.tReady !== tReady && tReady)
+      setDocumentTitle(t("AutoBackup"));
   }
 
   componentWillUnmount() {
@@ -505,7 +512,11 @@ class AutomaticBackup extends React.PureComponent {
               </Text>
               {!isEnableAuto && (
                 <Badge
-                  backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
+                  backgroundColor={
+                    theme.isBase
+                      ? globalColors.favoritesStatus
+                      : globalColors.favoriteStatusDark
+                  }
                   label={t("Common:Paid")}
                   fontWeight="700"
                   className="auto-backup_badge"

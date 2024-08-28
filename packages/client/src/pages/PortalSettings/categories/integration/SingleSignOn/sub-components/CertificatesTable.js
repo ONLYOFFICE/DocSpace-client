@@ -97,7 +97,7 @@ const CertificatesTable = (props) => {
           </div>
           <div className="column-row">
             <Text
-              color="#a3a9ae"
+              className="description"
               fontSize="12px"
               fontWeight={600}
               lineHeight="16px"

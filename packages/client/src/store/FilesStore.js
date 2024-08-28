@@ -53,6 +53,7 @@ import config from "PACKAGE_FILE";
 import { thumbnailStatuses } from "@docspace/client/src/helpers/filesConstants";
 import { getDaysRemaining } from "@docspace/shared/utils/common";
 import {
+  LOADER_TIMEOUT,
   MEDIA_VIEW_URL,
   PDF_FORM_DIALOG_KEY,
   ROOMS_PROVIDER_TYPE_NAME,
@@ -72,7 +73,7 @@ import debounce from "lodash.debounce";
 import clone from "lodash/clone";
 import Queue from "queue-promise";
 import { parseHistory } from "SRC_DIR/pages/Home/InfoPanel/Body/helpers/HistoryHelper";
-
+import { toJSON } from "@docspace/shared/api/rooms/filter";
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = localStorage.getItem("viewAs");
 
@@ -380,7 +381,7 @@ class FilesStore {
     socketHelper.on("s:modify-room", (option) => {
       switch (option.cmd) {
         case "create-form":
-          this.wsCreatedPDFForm(option);
+          setTimeout(() => this.wsCreatedPDFForm(option), LOADER_TIMEOUT * 2);
           break;
 
         default:
@@ -817,6 +818,10 @@ class FilesStore {
 
   updateActiveFiles = (items) => {
     this.activeFiles = items;
+  };
+
+  updateActiveFolders = (items) => {
+    this.activeFolders = items;
   };
 
   clearFiles = () => {
@@ -1300,10 +1305,24 @@ class FilesStore {
   };
 
   //TODO: FILTER
-  setFilesFilter = (filter) => {
-    if (!this.publicRoomStore.isPublicRoom) {
-      const key = `UserFilter=${this.userStore.user?.id}`;
-      const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
+  setFilesFilter = (filter, folderId = null) => {
+    const { recycleBinFolderId } = this.treeFoldersStore;
+
+    const key =
+      this.categoryType === CategoryType.Archive
+        ? `UserFilterArchiveRoom=${this.userStore.user?.id}`
+        : this.categoryType === CategoryType.SharedRoom
+          ? `UserFilterSharedRoom=${this.userStore.user?.id}`
+          : folderId === "recent"
+            ? `UserFilterRecent=${this.userStore.user?.id}`
+            : +folderId === recycleBinFolderId
+              ? `UserFilterTrash=${this.userStore.user?.id}`
+              : !this.publicRoomStore.isPublicRoom
+                ? `UserFilter=${this.userStore.user?.id}`
+                : null;
+
+    if (key) {
+      const value = `${filter.sortBy},${filter.sortOrder}`;
       localStorage.setItem(key, value);
     }
 
@@ -1329,6 +1348,21 @@ class FilesStore {
 
   setRoomsFilter = (filter) => {
     if (!this.settingsStore.withPaging) filter.pageCount = 100;
+
+    const isArchive = this.categoryType === CategoryType.Archive;
+
+    const key = isArchive
+      ? `UserRoomsArchivedFilter=${this.userStore.user?.id}`
+      : `UserRoomsSharedFilter=${this.userStore.user?.id}`;
+
+    const sharedStorageFilter = JSON.parse(localStorage.getItem(key));
+    if (sharedStorageFilter) {
+      sharedStorageFilter.sortBy = filter.sortBy;
+      sharedStorageFilter.sortOrder = filter.sortOrder;
+
+      const value = toJSON(sharedStorageFilter);
+      localStorage.setItem(key, value);
+    }
 
     // this.setFilterUrl(filter, true);
     this.roomsFilter = filter;
@@ -1463,8 +1497,7 @@ class FilesStore {
       const splitFilter = filterStorageItem.split(",");
 
       filterData.sortBy = splitFilter[0];
-      filterData.pageCount = +splitFilter[1];
-      filterData.sortOrder = splitFilter[2];
+      filterData.sortOrder = splitFilter[1];
     }
 
     if (!this.settingsStore.withPaging) {
@@ -1540,7 +1573,7 @@ class FilesStore {
           //save filter for after closing preview change url
           this.setTempFilter(filterData);
         } else {
-          this.setFilesFilter(filterData); //TODO: FILTER
+          this.setFilesFilter(filterData, folderId); //TODO: FILTER
         }
 
         const isPrivacyFolder =
@@ -1723,6 +1756,8 @@ class FilesStore {
         ].includes(err?.response?.status);
 
         if (isUserError && !isThirdPartyError) {
+          if (isPublicRoom()) return Promise.reject(err);
+
           this.setIsErrorRoomNotAvailable(true);
         } else {
           if (axios.isCancel(err)) {
@@ -2142,7 +2177,7 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["download"]);
       }
 
-      if (!isPdf || item.startFilling || item.isForm) {
+      if (!isPdf || (shouldFillForm && canFillForm)) {
         fileOptions = this.removeOptions(fileOptions, ["open-pdf"]);
       }
 
@@ -3487,6 +3522,7 @@ class FilesStore {
         type,
         hasDraft,
         isForm,
+        isPDFForm: item.isForm,
         requestToken,
         lastOpened,
         quotaLimit,
@@ -3980,19 +4016,6 @@ class FilesStore {
 
   openDocEditor = (id, preview = false, shareKey = null, editForm = false) => {
     const { openOnNewPage } = this.filesSettingsStore;
-    const foundIndex = this.files.findIndex((x) => x.id === id);
-    const file = foundIndex !== -1 ? this.files[foundIndex] : undefined;
-    if (
-      file &&
-      !preview &&
-      file.rootFolderType !== FolderType.Archive &&
-      file.fileExst !== ".oform"
-    ) {
-      const newStatus = file.fileStatus | FileStatus.IsEditing;
-
-      this.updateSelectionStatus(id, newStatus, true);
-      this.updateFileStatus(foundIndex, newStatus);
-    }
 
     const share = shareKey ? shareKey : this.publicRoomStore.publicRoomKey;
 

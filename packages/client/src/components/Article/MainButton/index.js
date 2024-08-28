@@ -67,9 +67,10 @@ import {
 import styled, { css } from "styled-components";
 
 import { resendInvitesAgain } from "@docspace/shared/api/people";
-import { getCorrectFourValuesStyle } from "@docspace/shared/utils";
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isTablet } from "react-device-detect";
+import { globalColors } from "@docspace/shared/themes";
+import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
 
 const StyledButton = styled(Button)`
   font-weight: 700;
@@ -115,13 +116,13 @@ const StyledButton = styled(Button)`
     justify-content: space-between;
     vertical-align: middle;
     box-sizing: border-box;
-    padding: ${({ theme }) =>
-      getCorrectFourValuesStyle("5px 14px 5px 12px", theme.interfaceDirection)};
+    padding-block: 5px;
+    padding-inline: 12px 14px;
     line-height: 22px;
     border-radius: 3px;
 
     user-select: none;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
   }
 `;
 
@@ -171,8 +172,7 @@ const ArticleMainButtonContent = (props) => {
     copyPanelVisible,
 
     security,
-    isGracePeriod,
-    setInviteUsersWarningDialogVisible,
+    setQuotaWarningDialogVisible,
     currentDeviceType,
 
     isFrame,
@@ -180,6 +180,9 @@ const ArticleMainButtonContent = (props) => {
 
     parentRoomType,
     isFolder,
+    createFoldersTree,
+    showWarningDialog,
+    isWarningRoomsDialog,
   } = props;
 
   const navigate = useNavigate();
@@ -218,14 +221,14 @@ const ArticleMainButtonContent = (props) => {
   );
 
   const onCreateRoom = React.useCallback(() => {
-    if (isGracePeriod) {
-      setInviteUsersWarningDialogVisible(true);
+    if (isWarningRoomsDialog) {
+      setQuotaWarningDialogVisible(true);
       return;
     }
 
     const event = new Event(Events.ROOM_CREATE);
     window.dispatchEvent(event);
-  }, []);
+  }, [isWarningRoomsDialog]);
 
   const onShowSelectFileDialog = React.useCallback(() => {
     setSelectFileDialogVisible(true);
@@ -239,8 +242,12 @@ const ArticleMainButtonContent = (props) => {
   );
 
   const onFileChange = React.useCallback(
-    (e) => {
-      startUpload(e.target.files, null, t);
+    async (e) => {
+      const files = await getFilesFromEvent(e);
+
+      createFoldersTree(files).then((f) => {
+        if (f.length > 0) startUpload(f, null, t);
+      });
     },
     [startUpload, t],
   );
@@ -249,7 +256,7 @@ const ArticleMainButtonContent = (props) => {
     if (isPrivacy) {
       encryptionUploadDialog((encryptedFile, encrypted) => {
         encryptedFile.encrypted = encrypted;
-        startUpload([encryptedFile], null, t);
+        startUpload([encryptedFile], null, t); // TODO: createFoldersTree
       });
     } else {
       inputFilesElement.current.click();
@@ -283,8 +290,8 @@ const ArticleMainButtonContent = (props) => {
   const onInvite = React.useCallback((e) => {
     const type = e.action;
 
-    if (isGracePeriod) {
-      setInviteUsersWarningDialogVisible(true);
+    if (showWarningDialog(type)) {
+      setQuotaWarningDialogVisible(true);
       return;
     }
 
@@ -901,6 +908,8 @@ export default inject(
     versionHistoryStore,
     userStore,
     currentTariffStatusStore,
+    filesActionsStore,
+    currentQuotaStore,
   }) => {
     const { showArticleLoader } = clientLoadingStore;
     const { mainButtonMobileVisible } = filesStore;
@@ -917,7 +926,7 @@ export default inject(
     const {
       setSelectFileDialogVisible,
       setInvitePanelOptions,
-      setInviteUsersWarningDialogVisible,
+      setQuotaWarningDialogVisible,
       copyPanelVisible,
       moveToPanelVisible,
       restorePanelVisible,
@@ -938,16 +947,18 @@ export default inject(
     const isFolder = selectedFolderStore.isFolder;
 
     const { isAdmin, isOwner, isRoomAdmin } = userStore.user;
-    const { isGracePeriod } = currentTariffStatusStore;
+
+    const { showWarningDialog, isWarningRoomsDialog } = currentQuotaStore;
 
     const { setOformFromFolderId, oformsFilter } = oformsStore;
     const { mainButtonItemsList } = pluginStore;
 
     const { frameConfig, isFrame } = settingsStore;
 
+    const { createFoldersTree } = filesActionsStore;
+
     return {
-      isGracePeriod,
-      setInviteUsersWarningDialogVisible,
+      setQuotaWarningDialogVisible,
       showText: settingsStore.showText,
       isMobileArticle: settingsStore.isMobileArticle,
 
@@ -997,6 +1008,10 @@ export default inject(
       isFolder,
       selectFileFormRoomDialogVisible,
       setSelectFileFormRoomDialogVisible,
+      createFoldersTree,
+
+      showWarningDialog,
+      isWarningRoomsDialog,
     };
   },
 )(

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useMemo } from "react";
 
 import styled, { css } from "styled-components";
 
@@ -36,6 +36,8 @@ import { Text } from "../text";
 
 import { IconButton } from "../icon-button";
 import { classNames } from "../../utils";
+
+import { getRoomTitle } from "./RoomIcon.utils";
 
 const StyledIcon = styled.div<{
   size: string;
@@ -207,17 +209,7 @@ const RoomIcon = ({
 }: RoomIconProps) => {
   const [correctImage, setCorrectImage] = React.useState(true);
 
-  const titleWithoutNumberDuplicate = title?.replace(/\(\d+\)/, "");
-  const titleWithoutSpaces = titleWithoutNumberDuplicate
-    ?.replace(/\s+/g, " ")
-    ?.trim();
-  const indexAfterLastSpace = titleWithoutSpaces?.lastIndexOf(" ");
-  const secondCharacter =
-    !titleWithoutSpaces || indexAfterLastSpace === -1
-      ? ""
-      : titleWithoutSpaces[indexAfterLastSpace + 1];
-
-  const roomTitle = title && (title[0] + secondCharacter).toUpperCase();
+  const roomTitle = useMemo(() => getRoomTitle(title ?? ""), [title]);
 
   const prefetchImage = React.useCallback(() => {
     if (!imgSrc) return;

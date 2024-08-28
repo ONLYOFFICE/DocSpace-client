@@ -3,6 +3,8 @@
   "CannotReassignFiles": "Se elimini più utenti contemporaneamente, non potrai riassegnare i loro file ad altri utenti.",
   "DeleteGroupUsersSuccessMessage": "Gli utenti sono stati eliminati con successo.",
   "DeleteMyDocumentsUser": "Tutti i file e le cartelle personali nella sezione I Documenti di questo utente verranno eliminati definitivamente.",
+  "DeletePersonalData": " I dati personali, tutti i file e le cartelle personali presenti nelle sezioni Documenti e Cestino* degli utenti selezionati verranno eliminati definitivamente. I file e le cartelle degli utenti selezionati archiviati nelle sezioni comuni* come le stanze rimarranno in {{productName}}.",
+  "DeletePersonalDataApplicable": "*Applicabile agli utenti selezionati che dispongono di tali file e cartelle.",
   "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Le stanze create da questo utente e i documenti archiviati in queste stanze verranno riassegnati automaticamente a un amministratore che esegue l'eliminazione: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Riassegna manualmente i dati per scegliere un altro utente per la riassegnazione.",
   "DeleteUser": "Elimina utente",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> verrà eliminato. Questa azione non può essere annullata.",

@@ -27,7 +27,7 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-import BackupPage from "client/BackupPage";
+import { Component } from "client/BackupPage";
 import { setDocumentTitle } from "SRC_DIR/utils";
 
 const Backup = () => {
@@ -37,7 +37,7 @@ const Backup = () => {
     setDocumentTitle(t("Backup"));
   }, []);
 
-  return <BackupPage />;
+  return <Component />;
 };
 
 export default Backup;

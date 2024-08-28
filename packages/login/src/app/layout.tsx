@@ -26,6 +26,7 @@
 
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
+
 import { Toast } from "@docspace/shared/components/toast";
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 import { TenantStatus, ThemeKeys } from "@docspace/shared/enums";
@@ -36,6 +37,7 @@ import { Providers } from "@/providers";
 import { getColorTheme, getConfig, getSettings } from "@/utils/actions";
 
 import "../styles/globals.scss";
+import Scripts from "@/components/Scripts";
 
 export default async function RootLayout({
   children,
@@ -58,18 +60,10 @@ export default async function RootLayout({
 
   let redirectUrl = "";
 
-  const timers = { otherOperations: 0 };
-
-  const startOtherOperationsDate = new Date();
-
-  const [settings, colorTheme, config] = await Promise.all([
+  const [settings, colorTheme] = await Promise.all([
     getSettings(),
     getColorTheme(),
-    getConfig(),
   ]);
-
-  timers.otherOperations =
-    new Date().getTime() - startOtherOperationsDate.getTime();
 
   if (settings === "access-restricted") redirectUrl = `/${settings}`;
 
@@ -118,6 +112,11 @@ export default async function RootLayout({
       <head>
         <link rel="icon" type="image/x-icon" href="/logo.ashx?logotype=3" />
         <link rel="mask-icon" href="/logo.ashx?logotype=3" />
+        <link
+          rel="apple-touch-icon"
+          sizes="32x32"
+          href="/logo.ashx?logotype=3"
+        />
         <meta charSet="utf-8" />
         <meta
           name="viewport"
@@ -139,6 +138,7 @@ export default async function RootLayout({
             {children}
           </Providers>
         </StyledComponentsRegistry>
+        <Scripts />
       </body>
     </html>
   );

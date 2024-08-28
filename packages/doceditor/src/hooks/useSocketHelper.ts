@@ -29,12 +29,14 @@
 import React from "react";
 
 import SocketIOHelper from "@docspace/shared/utils/socket";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { getRestoreProgress } from "@docspace/shared/api/portal";
+import { getUser } from "@docspace/shared/api/people";
 import { EDITOR_ID } from "@docspace/shared/constants";
 
 import { UseSocketHelperProps } from "@/types";
 
-const useSocketHelper = ({ socketUrl }: UseSocketHelperProps) => {
+const useSocketHelper = ({ socketUrl, user }: UseSocketHelperProps) => {
   const [socketHelper, setSocketHelper] = React.useState<SocketIOHelper | null>(
     null,
   );
@@ -46,6 +48,11 @@ const useSocketHelper = ({ socketUrl }: UseSocketHelperProps) => {
     socketIOHelper.emit({
       command: "subscribe",
       data: { roomParts: "backup-restore" },
+    });
+
+    socketIOHelper.emit({
+      command: "subscribe",
+      data: { roomParts: user?.id || "" },
     });
 
     socketIOHelper.on("restore-backup", async () => {
@@ -69,11 +76,28 @@ const useSocketHelper = ({ socketUrl }: UseSocketHelperProps) => {
       }
     });
 
+    socketIOHelper.on("s:logout-session", async (loginEventId) => {
+      console.log(`[WS] "logout-session"`, loginEventId, user?.loginEventId);
+
+      if (
+        Number(loginEventId) === user?.loginEventId ||
+        Number(loginEventId) === 0
+      ) {
+        const docEditor =
+          typeof window !== "undefined" &&
+          window.DocEditor?.instances[EDITOR_ID];
+
+        docEditor?.requestClose();
+        window.location.replace(
+          combineUrl(window.ClientConfig?.proxy?.url, "/login"),
+        );
+      }
+    });
+
     setSocketHelper(socketIOHelper);
-  }, [socketHelper, socketUrl]);
+  }, [socketHelper, socketUrl, user?.id, user?.loginEventId]);
 
   return { socketHelper };
 };
 
 export default useSocketHelper;
-

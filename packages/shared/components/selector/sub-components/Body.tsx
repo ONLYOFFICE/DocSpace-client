@@ -125,7 +125,9 @@ const Body = ({
 
   const onBodyResize = React.useCallback(() => {
     if (bodyRef && bodyRef.current) {
-      setBodyHeight(bodyRef.current.offsetHeight);
+      setTimeout(() => {
+        setBodyHeight(bodyRef.current!.offsetHeight);
+      }, 20);
     }
   }, []);
 
@@ -190,7 +192,7 @@ const Body = ({
   if (withInfoBar) {
     const infoEl = document.querySelector(".selector_info-bar");
     if (infoEl) {
-      const height = infoEl.getClientRects()[0].height;
+      const height = infoEl.getClientRects()[0].height + CONTAINER_PADDING;
       listHeight -= height;
     }
   }
@@ -217,7 +219,9 @@ const Body = ({
             : FOOTER_HEIGHT
       }
       className="selector_body"
-      headerHeight={HEADER_HEIGHT}
+      headerHeight={
+        withTabs ? HEADER_HEIGHT : HEADER_HEIGHT + CONTAINER_PADDING
+      }
       footerVisible={footerVisible}
       withHeader={withHeader}
       withTabs={withTabs}

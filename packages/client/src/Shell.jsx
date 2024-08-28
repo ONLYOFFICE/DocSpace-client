@@ -43,6 +43,7 @@ import { DeviceType, IndexedDBStores } from "@docspace/shared/enums";
 import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
 import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 import { sendToastReport } from "@docspace/shared/utils/crashReport";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import config from "PACKAGE_FILE";
 
@@ -77,6 +78,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     userTheme,
     //user,
     userId,
+    userLoginEventId,
     currentDeviceType,
     timezone,
     showArticleLoader,
@@ -86,6 +88,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     version,
     pagesWithoutNavMenu,
     isFrame,
+    barTypeInFrame,
   } = rest;
 
   const theme = useTheme();
@@ -134,6 +137,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       command: "subscribe",
       data: { roomParts: "backup-restore" },
     });
+
     socketHelper.on("restore-backup", () => {
       getRestoreProgress()
         .then((response) => {
@@ -159,7 +163,27 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       command: "subscribe",
       data: { roomParts: "QUOTA", individual: true },
     });
-  }, [socketHelper]);
+
+    socketHelper.emit({
+      command: "subscribe",
+      data: { roomParts: userId },
+    });
+
+    socketHelper.on("s:logout-session", (loginEventId) => {
+      console.log(`[WS] "logout-session"`, loginEventId, userLoginEventId);
+
+      if (userLoginEventId === loginEventId || loginEventId === 0) {
+        window.location.replace(
+          combineUrl(window.ClientConfig?.proxy?.url, "/login"),
+        );
+      }
+    });
+  }, [
+    socketHelper,
+    userLoginEventId,
+    setPreparationPortalDialogVisible,
+    userId,
+  ]);
 
   const { t, ready } = useTranslation(["Common"]); //TODO: if enable banner ["Common", "SmartBanner"]
 
@@ -434,7 +458,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       <DialogsWrapper t={t} />
 
       <Main isDesktop={isDesktop}>
-        {!isFrame && <MainBar />}
+        {barTypeInFrame !== "none" && <MainBar />}
         <div className="main-container">
           <Outlet />
         </div>
@@ -533,6 +557,7 @@ const ShellWrapper = inject(
       setSnackbarExist,
       userTheme: isFrame ? frameConfig?.theme : userTheme,
       userId: userStore?.user?.id,
+      userLoginEventId: userStore?.user?.loginEventId,
       currentDeviceType,
       showArticleLoader: clientLoadingStore.showArticleLoader,
       setPortalTariff,
@@ -541,6 +566,7 @@ const ShellWrapper = inject(
       version,
       pagesWithoutNavMenu,
       isFrame,
+      barTypeInFrame: frameConfig?.showHeaderBanner,
     };
   },
 )(observer(Shell));

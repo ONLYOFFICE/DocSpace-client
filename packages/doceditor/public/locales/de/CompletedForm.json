@@ -1,1 +1,12 @@
-{}
+{
+  "BackToRoom": "Zurück zum Raum",
+  "CheckReadyForms": "Fertige Formulare prüfen",
+  "Description": "Ihr Formular ist ausgefüllt und gespeichert",
+  "DescriptionForAnonymous": "Sie haben das ausgefüllte PDF-Formular eingereicht, dem eine eindeutige Nummer zugewiesen wurde. Um den Status zu überprüfen, wenden Sie sich an den Formularinhaber und geben Sie die zugewiesene Nummer an.",
+  "DescriptionForRegisteredUser": "Das ausgefüllte PDF-Formular wird gespeichert und steht Ihnen im Ordner \"Kom­plett\" zur Verfügung. Um den Status zu überprüfen, wenden Sie sich an den Formularinhaber und geben Sie die zugewiesene Nummer an.",
+  "FillItOutAgain": "Erneut ausfüllen",
+  "FormCompletedSuccessfully": "Formular erfolgreich ausgefüllt",
+  "FormNumber": "Formularnummer:",
+  "FormOwner": "Formularinhaber",
+  "Title": "Das Formular ist ausgefüllt"
+}

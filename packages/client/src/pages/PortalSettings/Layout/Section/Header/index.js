@@ -40,6 +40,7 @@ import LoaderSectionHeader from "../loaderSectionHeader";
 import { mobile, tablet, desktop, isMobile } from "@docspace/shared/utils";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { Badge } from "@docspace/shared/components/badge";
+import { globalColors } from "@docspace/shared/themes";
 import {
   getKeyByLink,
   settingsTree,
@@ -57,14 +58,7 @@ export const HeaderContainer = styled.div`
     display: flex;
     align-items: center;
     .settings-section_badge {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: 8px;
-            `
-          : css`
-              margin-left: 8px;
-            `}
+      margin-inline-start: 8px;
       cursor: auto;
     }
 
@@ -73,36 +67,19 @@ export const HeaderContainer = styled.div`
       white-space: nowrap;
       overflow: hidden;
       color: ${(props) => props.theme.client.settings.headerTitleColor};
-      display: flex;
-      align-items: center;
     }
   }
   .action-wrapper {
     flex-grow: 1;
 
     .action-button {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: auto;
-            `
-          : css`
-              margin-left: auto;
-            `}
+      margin-inline-start: auto;
     }
   }
 
   .arrow-button {
     flex-shrink: 0;
-
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 12px;
-          `
-        : css`
-            margin-right: 12px;
-          `}
+    margin-inline-end: 12px;
 
     svg {
       ${({ theme }) =>
@@ -110,16 +87,8 @@ export const HeaderContainer = styled.div`
     }
 
     @media ${tablet} {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              padding: 8px 8px 8px 0;
-              margin-right: -8px;
-            `
-          : css`
-              padding: 8px 0 8px 8px;
-              margin-left: -8px;
-            `}
+      padding-block: 8px;
+      padding-inline: 8px 0;
     }
   }
 
@@ -145,14 +114,7 @@ export const HeaderContainer = styled.div`
   }
 
   .tariff-bar {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: auto;
-          `
-        : css`
-            margin-left: auto;
-          `}
+    margin-inline-start: auto;
   }
 `;
 
@@ -371,17 +333,10 @@ const SectionHeaderContent = (props) => {
         <LoaderSectionHeader />
       ) : (
         <HeaderContainer>
-          {!isCategoryOrHeader && arrayOfParams[0] && (
-            <IconButton
-              iconName={ArrowPathReactSvgUrl}
-              size="17"
-              isFill={true}
-              onClick={onBackToParent}
-              className="arrow-button"
-            />
-          )}
-          <Headline type="content" truncate={true}>
-            {isMobile() && isServicePage && (
+          {!isCategoryOrHeader &&
+            arrayOfParams[0] &&
+            (isMobile() ||
+              window.location.href.indexOf("/javascript-sdk/") > -1) && (
               <IconButton
                 iconName={ArrowPathReactSvgUrl}
                 size="17"
@@ -390,11 +345,16 @@ const SectionHeaderContent = (props) => {
                 className="arrow-button"
               />
             )}
+          <Headline type="content" truncate={true}>
             <div className="settings-section_header">
               <div className="header">{translatedHeader}</div>
               {isNeedPaidIcon ? (
                 <Badge
-                  backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
+                  backgroundColor={
+                    theme.isBase
+                      ? globalColors.favoritesStatus
+                      : globalColors.favoriteStatusDark
+                  }
                   label={t("Common:Paid")}
                   fontWeight="700"
                   className="settings-section_badge"

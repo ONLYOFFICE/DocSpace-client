@@ -39,10 +39,14 @@ import ReCAPTCHA from "react-google-recaptcha";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { useTheme } from "styled-components";
 import { useSearchParams, useRouter } from "next/navigation";
+import { Id } from "react-toastify";
 
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { createPasswordHash } from "@docspace/shared/utils/common";
+import {
+  createPasswordHash,
+  frameCallCommand,
+} from "@docspace/shared/utils/common";
 import { checkPwd } from "@docspace/shared/utils/desktop";
 import { login } from "@docspace/shared/utils/loginUtils";
 import { toastr } from "@docspace/shared/components/toast";
@@ -72,6 +76,8 @@ import OAuthClientInfo from "../ConsentInfo";
 
 // import { gitAvailablePortals } from "@/utils/actions";
 
+let showToastr = true;
+
 const LoginForm = ({
   hashSettings,
   cookieSettingsEnabled,
@@ -79,10 +85,12 @@ const LoginForm = ({
   clientId,
   client,
   reCaptchaType,
+  ldapDomain,
+  ldapEnabled,
 }: LoginFormProps) => {
-  const { isLoading, isModalOpen, ldapDomain } = useContext(LoginValueContext);
+  const { isLoading, isModalOpen } = useContext(LoginValueContext);
   const { setIsLoading } = useContext(LoginDispatchContext);
-  const toastId = useRef(null);
+  const toastId = useRef<Id>();
 
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -116,7 +124,9 @@ const LoginForm = ({
   const [password, setPassword] = useState("");
 
   const [isChecked, setIsChecked] = useState(false);
-  const [isLdapLoginChecked, setIsLdapLoginChecked] = useState(!!ldapDomain);
+  const [isLdapLoginChecked, setIsLdapLoginChecked] = useState(
+    ldapEnabled || false,
+  );
   const [isCaptcha, setIsCaptcha] = useState(false);
   const [isCaptchaSuccessful, setIsCaptchaSuccess] = useState(false);
   const [isCaptchaError, setIsCaptchaError] = useState(false);
@@ -129,6 +139,7 @@ const LoginForm = ({
 
     setIdentifier(email);
     setEmailFromInvitation(email);
+    frameCallCommand("setIsLoaded");
   }, [loginData]);
 
   const authCallback = useCallback(
@@ -175,10 +186,6 @@ const LoginForm = ({
   );
 
   useEffect(() => {
-    setIsLdapLoginChecked(!!ldapDomain);
-  }, [ldapDomain]);
-
-  useEffect(() => {
     const profile = localStorage.getItem("profile");
     if (!profile) return;
 
@@ -204,8 +211,7 @@ const LoginForm = ({
       !toastr.isActive(toastId.current || "confirm-email-toast")
     )
       toastId.current = toastr.success(text);
-    if (authError && ready) toastr.error(t("Common:ProviderLoginError"));
-  }, [message, confirmedEmail, t, ready, authError, authCallback]);
+  }, [message, confirmedEmail, t, ready, authCallback]);
 
   const onChangeLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
     //console.log("onChangeLogin", e.target.value);
@@ -426,6 +432,11 @@ const LoginForm = ({
 
   const passwordErrorMessage = errorMessage();
 
+  if (authError && ready) {
+    if (showToastr) toastr.error(t("Common:ProviderLoginError"));
+    showToastr = false;
+  }
+
   return (
     <form className="auth-form-container">
       {client && (
@@ -463,7 +474,7 @@ const LoginForm = ({
         onChangeCheckbox={onChangeCheckbox}
       />
 
-      {ldapDomain && (
+      {ldapDomain && ldapEnabled && (
         <LDAPContainer
           ldapDomain={ldapDomain}
           isLdapLoginChecked={isLdapLoginChecked}

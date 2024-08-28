@@ -64,6 +64,7 @@ const MainContainer = styled.div`
 
   .warning-text {
     margin-bottom: 9px;
+    color: ${(props) => props.theme.client.settings.security.ip.errorColor};
   }
 
   .save-cancel-buttons {
@@ -287,12 +288,7 @@ const IpSecurity = (props) => {
 
       {enable && (
         <>
-          <Text
-            color="#F21C0E"
-            fontSize="16px"
-            fontWeight="700"
-            className="warning-text"
-          >
+          <Text fontSize="16px" fontWeight="700" className="warning-text">
             {t("Common:Warning")}
           </Text>
           <Text className="ip-security_warning">
@@ -319,7 +315,7 @@ const IpSecurity = (props) => {
   );
 };
 
-export default inject(({ settingsStore, setup }) => {
+export const IpSecuritySection = inject(({ settingsStore, setup }) => {
   const {
     ipRestrictionEnable,
     setIpRestrictionsEnable,

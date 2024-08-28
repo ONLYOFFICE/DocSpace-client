@@ -42,6 +42,7 @@ import { Badge } from "@docspace/shared/components/badge";
 import { toastr } from "@docspace/shared/components/toast";
 import { Button } from "@docspace/shared/components/button";
 import { isMobile } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
 
 import ConsumerItem from "./sub-components/consumerItem";
 import ConsumerModalDialog from "./sub-components/consumerModalDialog";
@@ -79,7 +80,8 @@ const RootContainer = styled(Box)`
 
     border-radius: 6px;
     min-height: 116px;
-    padding: 12px 12px 8px 20px;
+    padding-block: 12px 8px;
+    padding-inline: 20px 12px;
   }
 
   .request-block {
@@ -111,9 +113,9 @@ const RootContainer = styled(Box)`
 class ThirdPartyServices extends React.Component {
   constructor(props) {
     super(props);
-    const { t } = props;
+    const { t, tReady } = props;
 
-    setDocumentTitle(`${t("ThirdPartyAuthorization")}`);
+    if (tReady) setDocumentTitle(`${t("ThirdPartyAuthorization")}`);
 
     this.state = {
       dialogVisible: false,
@@ -133,6 +135,12 @@ class ThirdPartyServices extends React.Component {
     } else {
       getConsumers().finally(() => hideLoader());
     }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { t, tReady } = this.props;
+    if (prevProps.tReady !== tReady && tReady)
+      setDocumentTitle(t("ThirdPartyAuthorization"));
   }
 
   onChangeLoading = (status) => {
@@ -294,7 +302,11 @@ class ThirdPartyServices extends React.Component {
                   </Text>
                   <Badge
                     className="paid-badge"
-                    backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
+                    backgroundColor={
+                      theme.isBase
+                        ? globalColors.favoritesStatus
+                        : globalColors.favoriteStatusDark
+                    }
                     fontWeight="700"
                     label={t("Common:Paid")}
                     isPaidBadge={true}

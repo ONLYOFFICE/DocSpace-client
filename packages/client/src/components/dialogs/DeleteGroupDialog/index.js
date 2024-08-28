@@ -66,7 +66,7 @@ const DeleteGroupDialog = (props) => {
       if (hasMoreGroups) {
         onDeleteAllGroups(t);
       } else {
-        onDeleteGroup(t, bufferSelection?.id || selection[0].id);
+        onDeleteGroup(t, bufferSelection?.id || selection[0]?.id);
       }
     } catch (err) {
       toastr.error(err.message);

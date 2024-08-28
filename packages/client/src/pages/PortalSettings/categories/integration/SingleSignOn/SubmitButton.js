@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
 
-import ResetConfirmationModal from "./sub-components/ResetConfirmationModal";
+import ResetConfirmationModal from "SRC_DIR/components/dialogs/ResetConfirmationDialog/ResetConfirmationModal";
 
 const SubmitResetButtons = (props) => {
   const { t } = useTranslation(["SingleSignOn", "Settings", "Common"]);
@@ -41,10 +41,11 @@ const SubmitResetButtons = (props) => {
     resetForm,
     confirmationResetModal,
     isSubmitLoading,
-    hasErrors,
-    hasChanges,
     isLoadingXml,
-    enableSso,
+    isSSOAvailable,
+    closeResetModal,
+    confirmReset,
+    isDisabledSaveButton,
   } = props;
 
   return (
@@ -55,23 +56,29 @@ const SubmitResetButtons = (props) => {
         onCancelClick={isSsoEnabled ? openResetModal : resetForm}
         showReminder={true}
         saveButtonLabel={t("Common:SaveButton")}
-        cancelButtonLabel={t("Common:Restore")}
+        cancelButtonLabel={t("Settings:DefaultSettings")}
         displaySettings={true}
         hasScroll={true}
         isSaving={isSubmitLoading}
-        saveButtonDisabled={
-          !enableSso || hasErrors || !hasChanges || isLoadingXml
+        saveButtonDisabled={isDisabledSaveButton}
+        disableRestoreToDefault={
+          isSubmitLoading || isLoadingXml || !isSSOAvailable
         }
-        cancelEnable={!(isSubmitLoading || isLoadingXml)}
         additionalClassSaveButton="save-button"
         additionalClassCancelButton="restore-button"
       />
-      {confirmationResetModal && <ResetConfirmationModal />}
+      {confirmationResetModal && (
+        <ResetConfirmationModal
+          closeResetModal={closeResetModal}
+          confirmReset={confirmReset}
+          confirmationResetModal={confirmationResetModal}
+        />
+      )}
     </>
   );
 };
 
-export default inject(({ ssoStore }) => {
+export default inject(({ ssoStore, currentQuotaStore }) => {
   const {
     saveSsoSettings,
     isSsoEnabled,
@@ -79,11 +86,12 @@ export default inject(({ ssoStore }) => {
     resetForm,
     confirmationResetModal,
     isSubmitLoading,
-    hasErrors,
-    hasChanges,
     isLoadingXml,
-    enableSso,
+    closeResetModal,
+    confirmReset,
+    isDisabledSaveButton,
   } = ssoStore;
+  const { isSSOAvailable } = currentQuotaStore;
 
   return {
     saveSsoSettings,
@@ -92,9 +100,10 @@ export default inject(({ ssoStore }) => {
     resetForm,
     confirmationResetModal,
     isSubmitLoading,
-    hasErrors,
-    hasChanges,
     isLoadingXml,
-    enableSso,
+    isSSOAvailable,
+    closeResetModal,
+    confirmReset,
+    isDisabledSaveButton,
   };
 })(observer(SubmitResetButtons));

@@ -72,6 +72,7 @@ const toListItem = (
   invitedUsers?: string[],
   disableDisabledUsers?: boolean,
   isRoom?: boolean,
+  checkIfUserInvited?: (user: TUser) => void,
 ) => {
   if ("displayName" in item) {
     const {
@@ -88,13 +89,16 @@ const toListItem = (
       isRoomAdmin,
       status,
       shared,
+      groups,
     } = item;
 
     const role = getUserRole(item);
 
     const userAvatar = hasAvatar ? avatar : DefaultUserPhoto;
 
-    const isInvited = invitedUsers?.includes(id) || (isRoom && shared);
+    const isInvited = checkIfUserInvited
+      ? checkIfUserInvited(item)
+      : invitedUsers?.includes(id) || (isRoom && shared);
 
     const isDisabled =
       disableDisabledUsers && status === EmployeeStatus.Disabled;
@@ -118,6 +122,7 @@ const toListItem = (
       isRoomAdmin,
       isDisabled: isInvited || isDisabled,
       disabledText,
+      groups,
     } as TSelectorItem;
   }
 
@@ -164,6 +169,7 @@ type AddUsersPanelProps = TSelectorInfo & {
 
   invitedUsers?: string[];
   disableDisabledUsers?: boolean;
+  checkIfUserInvited?: (user: TUser) => boolean;
 
   roomId?: string | number;
   withGroups?: boolean;
@@ -195,6 +201,7 @@ const AddUsersPanel = ({
   withInfo,
   withInfoBadge,
   setActiveTabId: setActiveTabIdProp,
+  checkIfUserInvited,
 }: AddUsersPanelProps) => {
   const theme = useTheme();
   const { t } = useTranslation([
@@ -291,6 +298,7 @@ const AddUsersPanel = ({
         newItem.isCollaborator = user.isCollaborator;
         newItem.isRoomAdmin = user.isRoomAdmin;
         newItem.email = user.email;
+        newItem.groups = user.groups;
       }
 
       items.push(newItem);
@@ -376,7 +384,14 @@ const AddUsersPanel = ({
       const totalDifferent = startIndex ? response.total - totalRef.current : 0;
 
       const items = response.items.map((item) =>
-        toListItem(item, t, invitedUsers, disableDisabledUsers, !!roomId),
+        toListItem(
+          item,
+          t,
+          invitedUsers,
+          disableDisabledUsers,
+          !!roomId,
+          checkIfUserInvited,
+        ),
       );
       const newTotal = response.total - totalDifferent;
 
@@ -458,7 +473,7 @@ const AddUsersPanel = ({
               fontSize="12px"
               noSelect
               truncate
-              color="#A3A9AE"
+              color={theme.filesPanels.addUsers.textColor}
               dir="auto"
             >
               {`${userType} | ${email}`}
@@ -532,6 +547,7 @@ const AddUsersPanel = ({
         visible={visible}
         onClose={onClosePanels}
         withoutBodyScroll
+        withoutHeader
       >
         <Selector
           withHeader
@@ -542,6 +558,7 @@ const AddUsersPanel = ({
             withoutBackButton: false,
             withoutBorder: true,
             onBackClick,
+            onCloseClick: onClosePanels,
           }}
           onSelect={onSelect}
           renderCustomItem={renderCustomItem}
@@ -591,6 +608,7 @@ const AddUsersPanel = ({
           isSearchLoading={isInit}
           rowLoader={
             <RowLoader
+              style={{ paddingInlineEnd: 0 }}
               isUser
               count={15}
               isContainer={isLoading}

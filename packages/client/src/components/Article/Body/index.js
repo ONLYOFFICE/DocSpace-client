@@ -44,6 +44,7 @@ import { CategoryType } from "SRC_DIR/helpers/constants";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { showProgress } from "@docspace/shared/utils/common";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 
 const ArticleBodyContent = (props) => {
@@ -105,6 +106,17 @@ const ArticleBodyContent = (props) => {
         case myFolderId:
           const myFilter = FilesFilter.getDefault();
           myFilter.folder = folderId;
+
+          const filterStorageItem =
+            userId && localStorage.getItem(`UserFilter=${userId}`);
+
+          if (filterStorageItem) {
+            const splitFilter = filterStorageItem.split(",");
+
+            myFilter.sortBy = splitFilter[0];
+            myFilter.sortOrder = splitFilter[1];
+          }
+
           params = myFilter.toUrlParams();
 
           path = getCategoryUrl(CategoryType.Personal);
@@ -123,6 +135,17 @@ const ArticleBodyContent = (props) => {
         case recycleBinFolderId:
           const recycleBinFilter = FilesFilter.getDefault();
           recycleBinFilter.folder = folderId;
+
+          const filterStorageTrash =
+            userId && localStorage.getItem(`UserFilterTrash=${userId}`);
+
+          if (filterStorageTrash) {
+            const splitFilterTrash = filterStorageTrash.split(",");
+
+            recycleBinFilter.sortBy = splitFilterTrash[0];
+            recycleBinFilter.sortOrder = splitFilterTrash[1];
+          }
+
           params = recycleBinFilter.toUrlParams();
           path = getCategoryUrl(CategoryType.Trash);
 
@@ -165,6 +188,7 @@ const ArticleBodyContent = (props) => {
       setSelection && setSelection([]);
 
       setIsLoading(true, withTimer);
+
       navigate(path, { state });
 
       if (currentDeviceType === DeviceType.mobile) {
@@ -292,6 +316,8 @@ export default inject(
 
     const setIsLoading = (param, withTimer) => {
       setIsSectionFilterLoading(param, withTimer);
+
+      if (param && withTimer) showProgress();
     };
 
     const { roomsFolderId, archiveFolderId, myFolderId, recycleBinFolderId } =

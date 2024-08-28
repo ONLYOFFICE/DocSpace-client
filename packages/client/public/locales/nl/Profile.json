@@ -1,5 +1,6 @@
 {
   "ActiveSessions": "Actieve Sessies",
+  "AutoDeleteTitle": "Alle sessies die ouder zijn dan 60 dagen worden automatisch verwijderd.",
   "ChangeEmailSuccess": "E-mail is met succes gewijzigd ",
   "ChangePasswordAfterLoggingOut": "Wachtwoord wijzigen na uitloggen",
   "ConnectSocialNetworks": "Sluit uw sociale netwerken aan",
@@ -14,7 +15,6 @@
   "InterfaceTheme": "Interface thema",
   "LightTheme": "Licht thema",
   "LogoutActiveConnection": "Uitloggen van actieve verbinding",
-  "LogoutAllActiveConnections": "Uitloggen bij alle actieve verbindingen",
   "LogoutAllActiveSessionsDescription": "Alle actieve verbindingen behalve deze verbinding worden uitgelogd, omdat deze momenteel in gebruik is.",
   "LogoutBtn": "Uitloggen",
   "LogoutDescription": "Opmerking. Alle actieve verbindingen behalve deze verbinding worden uitgelogd, omdat deze momenteel in gebruik is.",
@@ -27,5 +27,6 @@
   "SuccessLogout": "De actieve verbinding werd afgemeld: {{platform}}, {{browser}}",
   "SystemTheme": "Gebruik systeemthema",
   "SystemThemeDescription": "Schakelt automatisch tussen lichte en donkere thema's wanneer uw systeem dat doet.",
+  "TerminateAllSessions": "Beëindig alle sessies behalve de huidige",
   "TwoFactorDescription": "Twee-factor authenticatie via een code-genererende app was ingeschakeld voor alle gebruikers door de beheerder."
 }

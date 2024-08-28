@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+import React from "react";
+import styled from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { Box } from "@docspace/shared/components/box";
 import { RowContent } from "@docspace/shared/components/row-content";
@@ -39,14 +40,7 @@ const StyledRowContent = styled(RowContent)`
   }
 
   .username {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 5px;
-          `
-        : css`
-            margin-right: 5px;
-          `}
+    margin-inline-end: 5px;
     font-size: 14px;
     font-weight: 600;
     color: ${(props) => props.theme.client.settings.migration.subtitleColor};

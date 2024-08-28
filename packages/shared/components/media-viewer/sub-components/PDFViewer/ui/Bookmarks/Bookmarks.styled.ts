@@ -25,10 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
+import { globalColors } from "../../../../../../themes";
 
 export const List = styled.ul`
-  padding-left: 16px;
-  padding-right: 30px;
+  padding-inline-start: 16px;
+  padding-inline-end: 30px;
 
   list-style: none;
   margin-top: 0px;
@@ -38,8 +39,8 @@ export const List = styled.ul`
 `;
 
 export const Item = styled.li`
-  color: #ffffff;
-  padding: 1px 16px 0 16px;
+  color: ${globalColors.white};
+  padding: 1px 16px 0;
   font-weight: 400;
   font-size: 13px;
   line-height: 20px;
@@ -50,13 +51,13 @@ export const Item = styled.li`
 
   @media (hover: hover) {
     :hover {
-      background: #474747;
+      background: ${globalColors.grayDarkStrong};
     }
   }
 `;
 
 export const Text = styled.p`
   margin: 0;
-  border-bottom: 1px solid #474747;
+  border-bottom: 1px solid ${globalColors.grayDarkStrong};
   padding: 6px 0;
 `;

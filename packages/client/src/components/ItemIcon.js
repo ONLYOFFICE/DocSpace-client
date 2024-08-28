@@ -24,12 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React, { useState } from "react";
 import SecuritySvgUrl from "PUBLIC_DIR/images/security.svg?url";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import { Base } from "@docspace/shared/themes";
 import { NoUserSelect } from "@docspace/shared/utils";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
+import { IconButton } from "@docspace/shared/components/icon-button";
+import { DropDown } from "@docspace/shared/components/drop-down";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+
+import EditPenSvgUrl from "PUBLIC_DIR/images/icons/12/pen-edit.react.svg?url";
+import PenSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
+import UploadPenSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 
 const IconWrapper = styled.div`
   ${(props) =>
@@ -60,6 +68,25 @@ const IconWrapper = styled.div`
   }
 `;
 
+const EditWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background-color: #eceef1; // add global color
+  border-radius: 50%;
+  position: absolute;
+  bottom: -6px;
+  right: -6px;
+
+  .open-edit-logo-icon {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+`;
+
 IconWrapper.defaultProps = { theme: Base };
 
 const EncryptedFileIcon = styled.div`
@@ -81,9 +108,20 @@ const ItemIcon = ({
   color,
   isArchive,
   badgeUrl,
+  size,
+  withEditing,
 }) => {
   const isLoadedRoomIcon = !!logo?.medium;
   const showDefaultRoomIcon = !isLoadedRoomIcon && isRoom;
+  const [editLogoOpen, setEditLogoOpen] = useState(false);
+
+  const toggleEditLogo = () => {
+    setEditLogoOpen(!editLogoOpen);
+  };
+
+  const closeEditLogo = () => {
+    setEditLogoOpen(false);
+  };
 
   return (
     <>
@@ -91,12 +129,42 @@ const ItemIcon = ({
         <RoomIcon
           color={color}
           title={title}
+          size={size}
           isArchive={isArchive}
           showDefault={showDefaultRoomIcon}
           imgClassName="react-svg-icon"
           imgSrc={isRoom ? logo?.medium : icon}
           badgeUrl={badgeUrl ? badgeUrl : ""}
         />
+        {withEditing && (
+          <EditWrapper>
+            <IconButton
+              className="open-edit-logo-icon"
+              size={12}
+              iconName={EditPenSvgUrl}
+              onClick={toggleEditLogo}
+              isFill
+            />
+            <DropDown
+              open={editLogoOpen}
+              clickOutsideAction={closeEditLogo}
+              withBackdrop={false}
+              isDefaultMode={false}
+              fixedDirection={true}
+            >
+              <DropDownItem
+                label={`Upload picture`}
+                icon={UploadPenSvgUrl}
+                //   onClick={() => shareEmail(activeLink[0])}
+              />
+              <DropDownItem
+                label={`Customize cover`}
+                icon={PenSvgUrl}
+                //     onClick={() => shareTwitter(activeLink[0])}
+              />
+            </DropDown>
+          </EditWrapper>
+        )}
       </IconWrapper>
       {isPrivacy && fileExst && <EncryptedFileIcon isEdit={false} />}
     </>

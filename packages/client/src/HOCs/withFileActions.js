@@ -29,6 +29,7 @@ import { inject, observer } from "mobx-react";
 
 import { DeviceType, RoomsType } from "@docspace/shared/enums";
 import Planet12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/planet.react.svg?url";
+import { toastr } from "@docspace/shared/components/toast";
 
 export default function withFileActions(WrappedFileItem) {
   class WithFileActions extends React.Component {
@@ -67,9 +68,13 @@ export default function withFileActions(WrappedFileItem) {
 
       dragging && setDragging(false);
 
-      createFoldersTree(files, uploadToFolder).then((f) => {
-        if (f.length > 0) startUpload(f, null, t);
-      });
+      createFoldersTree(t, files, uploadToFolder)
+        .then((f) => {
+          if (f.length > 0) startUpload(f, null, t);
+        })
+        .catch((err) => {
+          toastr.error(err);
+        });
     };
 
     onDrop = (items) => {

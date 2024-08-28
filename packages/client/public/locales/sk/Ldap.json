@@ -36,6 +36,7 @@
   "LdapPortNumber": "Číslo portu",
   "LdapPortNumberTooltip": "Zadajte číslo portu pre server LDAP/Active Directory.",
   "LdapQuota": "Kvóta používateľa",
+  "LdapQuotaInfo": "Aby ste mohli používať tento atribút, povoľte kvóty používateľov v <0>nastaveniach úložísk</0>.",
   "LdapSecondName": "Druhé meno",
   "LdapSendWelcomeLetter": "Poslať uvítací list",
   "LdapSendWelcomeLetterTooltip": "Ak je táto možnosť zapnutá, všetci noví používatelia dostanú uvítací list. Táto možnosť je dostupná len vtedy, keď je atribút Pošta namapovaný na LDAP.",
@@ -66,6 +67,7 @@
   "LdapUserDNTooltip": "Zadajte rozlišujúci názov priečinka, ktorý obsahuje používateľov, ktorých chcete pridať.",
   "LdapUserFilter": "Filter používateľov",
   "LdapUserFilterTooltip": "Pomocou filtra na vyhľadávanie LDAP vyberte používateľov, ktorí musia byť importovaní.",
+  "LdapUserQuotaTooltip": "Ak chcete nastaviť kvótu úložiska pre používateľa, pridajte atribút v priečinku LDAP (napríklad UsersQuotaLimit) a zadajte celočíselnú hodnotu tohto atribútu. Zobrazí sa hodnota kvóty v bajtoch. Tu zadajte iba názov atribútu. Tento atribút sa použije len počas prvého nastavenia a neskôr ho môžete zmeniť ručne v časti Účty.",
   "LdapUsersType": "Typ používateľov",
   "LdapUsersTypeInfo": "Používatelia majú prístup len do miestností, do ktorých ich pozvali administrátori, a nemôžu vytvárať vlastné miestnosti, priečinky alebo súbory. Vyberte iný typ nižšie, ak chcete poskytnúť viac oprávnení. V opačnom prípade môžete typ zmeniť ručne v časti Účty.",
   "LdapUserTypeTooltip": "Všetci používatelia budú pridaní do {{productName}} so zvoleným typom."

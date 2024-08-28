@@ -161,6 +161,7 @@
   "EmptyRoomsDescription": "Пожалуйста, создайте первую комнату в Моих комнатах.",
   "EmptyRoomsHeader": "Здесь пока нет комнат",
   "Enable": "Включить",
+  "EnableThirdPartyIntegration": "Попросите владельца или администратора {{productName}} подключить соответствующий сервис в разделе «Интеграция» настроек {{productName}}.",
   "EncryptingFile": "Шифрование файла",
   "EncryptionFilePreparing": "Подготовка файла к шифрованию",
   "EncryptionKeysReload": "Ключи шифрования необходимо ввести повторно",

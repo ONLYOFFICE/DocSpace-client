@@ -161,6 +161,7 @@
   "EmptyRoomsDescription": "Ti preghiamo di creare la prima stanza in Le mie stanze.",
   "EmptyRoomsHeader": "Ancora nessuna stanza qui",
   "Enable": "Attiva",
+  "EnableThirdPartyIntegration": "Chiedi al proprietario o all'amministratore di {{productName}} di abilitare il servizio corrispondente nella sezione Integrazione delle Impostazioni di {{productName}}.",
   "EncryptingFile": "Crittografia di file",
   "EncryptionFilePreparing": "Preparazione di file per crittografia",
   "EncryptionKeysReload": "Le chiavi di crittografia devono essere reinserite",

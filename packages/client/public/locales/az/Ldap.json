@@ -36,6 +36,7 @@
   "LdapPortNumber": "Port Nömrəsi",
   "LdapPortNumberTooltip": "LDAP serverinizin/Aktiv Direktiv port nömrəsini daxil edin.",
   "LdapQuota": "İstifadəçi kvotası",
+  "LdapQuotaInfo": "Bu funksiyadan istifadə etmək üçün <0>Yaddaş idarəetmə ayarlarında</0> istifadəçi kvotasını aktiv edin",
   "LdapSecondName": "Soyad",
   "LdapSendWelcomeLetter": "Xoş gəlmisiniz məktubu göndərin",
   "LdapSendWelcomeLetterTooltip": "İşarələndikdə bütün yeni istifadəçilərə xoş gəlmisiniz məktubu göndəriləcək. Yalnız Mail Xüsusiyyəti LDAP-a uyğunlaşdırıldıqda əlçatandır.",
@@ -66,6 +67,7 @@
   "LdapUserDNTooltip": "Əlavə etmək istədiyiniz istifadəçilərin olduğu qovluğa seçilən adı daxil edin.",
   "LdapUserFilter": "İstifadəçi Filtri",
   "LdapUserFilterTooltip": "İdxal edilməli olan istifadəçiləri seçmək üçün LDAP axtarış filtrindən istifadə edin.",
+  "LdapUserQuotaTooltip": "İstifadəçi üçün yaddaş kvotası təyin etmək üçün LDAP qovluğuna atribut əlavə edin (məsələn, UsersQuotaLimit) və bu atribut üçün tam dəyər daxil edin. O, kvota dəyərini baytla göstərəcək. Burada yalnız atribut adını göstərin. Bu funksiya yalnız ilkin quraşdırma zamanı həyata keçiriləcək və daha sonra Hesablar bölməsində əl ilə dəyişdirilə bilər.",
   "LdapUsersType": "İstifadəçi növü",
   "LdapUsersTypeInfo": "İstifadəçilər yalnız administratorlar tərəfindən dəvət olunduqları otaqlara daxil ola bilər və öz otaqları, qovluqları və ya fayllarını yarada bilməzlər. Daha çox icazə təmin etmək üçün aşağıda başqa növ seçin. Əks halda, Hesablar bölməsində növü əl ilə dəyişə bilərsiniz.",
   "LdapUserTypeTooltip": "Bütün istifadəçilər seçilmiş növlə {{productName}} –a əlavə olunacaq."

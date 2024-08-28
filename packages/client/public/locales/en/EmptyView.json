@@ -3,6 +3,8 @@
   "CollaboratorEmptyTitle": "The room is empty.",
   "CreateDocument": "Create a new document",
   "CreateDocumentDescription": "Take advantage of vast word processing functionality.",
+  "CreateForm": "Create a new PDF form",
+  "CreateFormDescription": "Collect votes, get opinions and store data using PDF forms",
   "CreateNewFileDescription": "Start working in the room by creating files or folders",
   "CreateNewFileTitle": "Create a new file",
   "CreatePresentation": "Create a new presentation",

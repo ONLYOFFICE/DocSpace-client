@@ -4,6 +4,7 @@ import { useNavigate, LinkProps } from "react-router-dom";
 
 import {
   Events,
+  FileExtensions,
   FilesSelectorFilterTypes,
   FilterType,
   RoomSearchArea,
@@ -216,10 +217,13 @@ export const useOptions = (
     (extension: ExtensiontionType, withoutDialog?: boolean) => {
       const event: CreateEvent = new Event(Events.CREATE);
 
+      const edit = extension === FileExtensions.PDF;
+
       const payload = {
         id: -1,
         extension,
         withoutDialog,
+        edit,
       };
       event.payload = payload;
 

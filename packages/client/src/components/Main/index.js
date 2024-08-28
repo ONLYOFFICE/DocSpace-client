@@ -76,10 +76,12 @@ const Main = (props) => {
       if (mainBarVisible && isMobileUtils()) {
         const mainBar = document.getElementById("main-bar");
 
-        if (!mainBar.offsetHeight)
-          return (updateSizeRef.current = setTimeout(() => onResize(), 0));
+        if (mainBar) {
+          if (!mainBar?.offsetHeight)
+            return (updateSizeRef.current = setTimeout(() => onResize(), 0));
 
-        correctHeight -= mainBar.offsetHeight;
+          correctHeight -= mainBar?.offsetHeight;
+        }
       }
 
       const isTouchDevice =

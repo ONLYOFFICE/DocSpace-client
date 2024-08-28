@@ -26,6 +26,7 @@
 
 import { headers } from "next/headers";
 import Script from "next/script";
+import dynamic from "next/dynamic";
 
 import { getSelectorsByUserAgent } from "react-device-detect";
 
@@ -34,7 +35,10 @@ import { ValidationStatus } from "@docspace/shared/enums";
 import { getData, validatePublicRoomKey } from "@/utils/actions";
 import { RootPageProps } from "@/types";
 import Root from "@/components/Root";
-import FilePassword from "@/components/file-password";
+
+const FilePassword = dynamic(() => import("@/components/file-password"), {
+  ssr: false,
+});
 
 const initialSearchParams: RootPageProps["searchParams"] = {
   fileId: undefined,

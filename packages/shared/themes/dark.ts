@@ -3043,6 +3043,8 @@ const Dark: TTheme = {
         linkColor: "#E06A1B",
 
         sso: {
+          textColor: grayDark,
+          errorColor: darkErrorStatus,
           toggleContentBackground: "#474747",
           iconButton: white,
           iconButtonDisabled: "#333",

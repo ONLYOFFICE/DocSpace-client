@@ -70,9 +70,9 @@ class ManualBackup extends React.Component {
 
     this.timerId = null;
 
-    const { t } = props;
+    const { t, tReady } = props;
 
-    setDocumentTitle(t("DataBackup"));
+    if (tReady) setDocumentTitle(t("DataBackup"));
 
     this.state = {
       selectedFolder: "",
@@ -148,6 +148,13 @@ class ManualBackup extends React.Component {
 
     if (Object.keys(rootFoldersTitles).length === 0) fetchTreeFolders();
     this.setBasicSettings();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { t, tReady } = this.props;
+
+    if (prevProps.tReady !== tReady && tReady)
+      setDocumentTitle(t("DataBackup"));
   }
 
   componentWillUnmount() {

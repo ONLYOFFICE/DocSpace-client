@@ -92,6 +92,7 @@ const SimpleFilesTileContent = styled(TileContent)`
     -webkit-line-clamp: 2;
     display: -webkit-box;
     -webkit-box-orient: vertical;
+    text-align: start;
   }
 
   .item-file-exst {
@@ -147,6 +148,7 @@ const FilesTileContent = ({
           {...linkStyles}
           color={theme.filesSection.tilesView.color}
           isTextOverflow
+          dir="auto"
         >
           {titleWithoutExt}
           {displayFileExtension && (

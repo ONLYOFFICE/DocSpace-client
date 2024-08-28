@@ -2054,6 +2054,12 @@ const SectionFilterContent = ({
       label: t("Common:LastModifiedDate"),
       default: true,
     };
+    const activityDate = {
+      id: "sort-by_activity",
+      key: SortByFieldName.ModifiedDate,
+      label: t("Common:LastActivityDate"),
+      default: true,
+    };
     const lastOpenedDate = {
       id: "sort-by_last-opened",
       key: SortByFieldName.LastOpened,
@@ -2129,7 +2135,7 @@ const SectionFilterContent = ({
       commonOptions.push(roomType);
       commonOptions.push(tags);
       commonOptions.push(owner);
-      commonOptions.push(modifiedDate);
+      commonOptions.push(activityDate);
       showStorageInfo && commonOptions.push(sortByStorage);
     } else if (isTrash) {
       // commonOptions.push(authorOption);

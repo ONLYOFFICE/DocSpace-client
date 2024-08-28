@@ -102,7 +102,7 @@ class FilesTableHeader extends React.Component {
         },
         {
           key: "Activity",
-          title: t("ByLastModified"),
+          title: t("LastActivity"),
           enable: this.props.roomColumnActivityIsEnabled,
           resizable: true,
           sortBy: SortByFieldName.ModifiedDate,

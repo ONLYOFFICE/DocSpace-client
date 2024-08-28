@@ -2,7 +2,7 @@
   "AddManually": "Dodaj ručno",
   "AddManuallyDescriptionAccounts": "Pozovi nove korisnike na {{productName}} lično putem email-a.",
   "AddManuallyDescriptionRoom": "Dodajte postojeće korisnike {{productName}}-a u sobu koristeći njihova imena ili pozovite nove korisnike lično putem email-a.",
-  "EmailErrorMessage": "Email adresa nije važeća. Možete urediti email klikom na njega.",
+  "EmailErrorMessage": "Email adresa nije važeća. Možete urediti email dvostrukim klikom na njega.",
   "GroupMaxAvailableRoleWarning": "Grupe se mogu dodati u prostoriju sa {{roleName}} ulogom kao maksimum. Međutim, možete promeniti ulogu pojedinačnih korisnika u grupi nakon uspešnog dodavanja. ",
   "InvitationLanguage": "Jezik pozivnice",
   "InviteAccountSearchPlaceholder": "Pozovi ljude preko email-a",

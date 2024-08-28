@@ -2,7 +2,7 @@
   "AddManually": "Lisää manuaalisesti",
   "AddManuallyDescriptionAccounts": "Kutsu uusia käyttäjiä {{productName}}:n henkilökohtaisesti sähköpostilla",
   "AddManuallyDescriptionRoom": "Lisää olemassa olevat {{productName}}-käyttäjät huoneeseen käyttämällä nimiä tai kutsu uudet käyttäjät henkilökohtaisesti sähköpostin kautta",
-  "EmailErrorMessage": "Sähköpostiosoite ei ole olemassa. Voit muokata sähköpostia klikkaamalla sitä.",
+  "EmailErrorMessage": "Sähköpostiosoite ei ole olemassa. Voit muokata sähköpostia kaksoisnapsauttamalla sitä.",
   "GroupMaxAvailableRoleWarning": "Maksimimäärän ryhmiä voi nyt lisätä huoneeseen {{roleName}}-roolissa. Voit kuitenkin muuttaa yksittäisten käyttäjien rooleja ryhmässä sen jälkeen, kun se on lisätty.",
   "InvitationLanguage": "Kutsukieli",
   "InviteAccountSearchPlaceholder": "Kutsu ihmisiä sähköpostilla",

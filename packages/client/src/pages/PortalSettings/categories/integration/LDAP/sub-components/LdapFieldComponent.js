@@ -39,7 +39,7 @@ const LdapFieldComponent = (props) => {
     name,
     onChange,
     isPassword,
-    ...prop
+    ...rest
   } = props;
 
   const onChangeFn = (e) => {
@@ -54,12 +54,12 @@ const LdapFieldComponent = (props) => {
     onChange && onChange(e);
   };
 
-  const onFocus = (e) => {
-    const name = e.target.name;
-    if (errors[name]) {
-      removeErrorField(name);
-    }
-  };
+  // const onFocus = (e) => {
+  //   const name = e.target.name;
+  //   if (errors[name]) {
+  //     removeErrorField(name);
+  //   }
+  // };
 
   const onBlur = (e) => {
     if (e.target.value.trim() === "") {
@@ -68,16 +68,16 @@ const LdapFieldComponent = (props) => {
   };
 
   if (isTextArea)
-    return <Textarea name={name} onChange={onChangeFn} {...prop} />;
+    return <Textarea name={name} onChange={onChangeFn} {...rest} />;
 
   if (isPassword)
     return (
       <PasswordInput
-        name={name}
+        inputName={name}
         onBlur={onBlur}
-        onFocus={onFocus}
+        //onFocus={onFocus}
         onChange={onChangeFn}
-        {...prop}
+        {...rest}
       />
     );
 
@@ -85,9 +85,9 @@ const LdapFieldComponent = (props) => {
     <TextInput
       name={name}
       onBlur={onBlur}
-      onFocus={onFocus}
+      //onFocus={onFocus}
       onChange={onChangeFn}
-      {...prop}
+      {...rest}
     />
   );
 };

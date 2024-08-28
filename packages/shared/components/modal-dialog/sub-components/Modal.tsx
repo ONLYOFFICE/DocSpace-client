@@ -131,7 +131,6 @@ const Modal = ({
         className={visible ? "modal-backdrop-active backdrop-active" : ""}
         visible
         zIndex={zIndex}
-        modalSwipeOffset={modalSwipeOffset}
       >
         <Dialog
           id="modal-onMouseDown-close"

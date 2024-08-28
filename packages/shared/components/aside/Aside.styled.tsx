@@ -27,8 +27,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg";
-
 import { Base } from "../../themes";
 import { MOBILE_FOOTER_HEIGHT } from "../../constants";
 import { tablet, mobile } from "../../utils";
@@ -114,66 +112,57 @@ const StyledAside = styled(Container)`
 `;
 StyledAside.defaultProps = { theme: Base };
 
-const StyledControlContainer = styled.div`
+const StyledHeaderContainer = styled.div<{ withoutBorder?: boolean }>`
   display: flex;
-
-  width: 17px;
-  height: 17px;
-  position: absolute;
-
-  cursor: pointer;
-
   align-items: center;
-  justify-content: center;
-  z-index: 450;
+  justify-content: space-between;
+  margin: 0 16px;
+  height: 53px;
+  min-height: 53px;
+  position: relative;
 
-  top: 18px;
+  .additional-icons-container {
+    display: flex;
+    margin-inline: 16px 16px;
+    gap: 16px;
+  }
 
+  .heading {
+    font-family: ${(props) => props.theme.fontFamily};
+    color: ${(props) => props.theme.modalDialog.textColor};
+    font-weight: 700;
+    font-size: 21px;
+  }
+
+  .arrow-button {
+    margin-inline: 0 12px;
+
+    svg {
+      ${({ theme }) =>
+        theme.interfaceDirection === "rtl" && `transform: scaleX(-1);`}
+    }
+  }
+  .close-button {
+    margin-inline: auto 0;
+    min-width: 17px;
+  }
+  .header-component {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
   ${(props) =>
-    props.theme.interfaceDirection === "rtl" ? `right: -27px;` : `left: -27px;`}
-
-  @media ${tablet} {
-    display: flex;
-
-    top: 18px;
-
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? `right: -27px;`
-        : `left: -27px;`}
-  }
-
-  @media ${mobile} {
-    display: flex;
-
-    top: -27px;
-    right: 10px;
-    left: unset;
-
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            right: unset;
-            left: 10px;
-          `
-        : css`
-            right: 10px;
-            left: unset;
-          `}
-  }
+    !props.withoutBorder &&
+    css`
+      ::after {
+        content: "";
+        border-bottom: ${(props) =>
+          `1px solid ${props.theme.modalDialog.headerBorderColor}`};
+        width: calc(100% + 32px);
+        position: absolute;
+        inset-inline-end: -16px;
+        bottom: 0;
+      }
+    `}
 `;
-
-StyledControlContainer.defaultProps = { theme: Base };
-
-const StyledCrossIcon = styled(CrossReactSvg)`
-  width: 17px;
-  height: 17px;
-  z-index: 455;
-  path {
-    fill: ${(props) => props.theme.catalog.control.fill};
-  }
-`;
-
-StyledCrossIcon.defaultProps = { theme: Base };
-
-export { StyledAside, StyledControlContainer, StyledCrossIcon };
+export { StyledAside, StyledHeaderContainer };

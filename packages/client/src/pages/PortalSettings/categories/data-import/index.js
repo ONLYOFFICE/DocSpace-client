@@ -54,6 +54,7 @@ const DataImport = ({
   getMigrationStatus,
   isMigrationInit,
   setIsMigrationInit,
+  tReady,
 }) => {
   const navigate = useNavigate();
 
@@ -109,9 +110,12 @@ const DataImport = ({
   };
 
   useEffect(() => {
-    setDocumentTitle(t("DataImport"));
     handleMigrationCheck();
   }, []);
+
+  useEffect(() => {
+    if (tReady) setDocumentTitle(t("DataImport"));
+  }, [tReady]);
 
   const redirectToWorkspace = (title) => {
     switch (title) {

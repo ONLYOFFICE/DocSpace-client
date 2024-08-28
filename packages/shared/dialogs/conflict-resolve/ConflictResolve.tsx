@@ -115,7 +115,9 @@ const ConflictResolve = (props: ConflictResolveProps) => {
     >
       <ModalDialog.Header>{headerLabel}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text className="message">{messageText}</Text>
+        <Text truncate className="message conflict-resolve_file-name ">
+          {messageText}
+        </Text>
         <Text className="select-action">{selectActionText}</Text>
         <RadioButtonGroup
           className="conflict-resolve-radio-button"

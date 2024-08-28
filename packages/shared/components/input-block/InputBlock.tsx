@@ -160,23 +160,25 @@ const InputBlock = ({
         forwardedRef={forwardedRef}
       />
 
-      <div className="append">
-        <StyledIconBlock
-          className={`input-block-icon ${iconButtonClassName}`}
-          onClick={onIconClickAction}
-          isClickable={!!onIconClick}
-        >
-          <IconButton
-            size={iconButtonSize}
-            iconNode={iconNode}
-            iconName={iconName || ""}
-            isFill={isIconFill}
-            isClickable={typeof onIconClick === "function"}
-            color={iconColor}
-            hoverColor={hoverColor}
-          />
-        </StyledIconBlock>
-      </div>
+      {!isDisabled && (
+        <div className="append">
+          <StyledIconBlock
+            className={`input-block-icon ${iconButtonClassName}`}
+            onClick={onIconClickAction}
+            isClickable={!!onIconClick}
+          >
+            <IconButton
+              size={iconButtonSize}
+              iconNode={iconNode}
+              iconName={iconName || ""}
+              isFill={isIconFill}
+              isClickable={typeof onIconClick === "function"}
+              color={iconColor}
+              hoverColor={hoverColor}
+            />
+          </StyledIconBlock>
+        </div>
+      )}
     </StyledInputGroup>
   );
 };

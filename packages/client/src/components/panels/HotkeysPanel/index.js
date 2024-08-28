@@ -90,10 +90,8 @@ const HotkeyPanel = ({
         visible={visible}
         onClose={onClose}
         withoutBodyScroll={true}
+        header={t("Common:Hotkeys")}
       >
-        <div className="hotkeys_header">
-          <Heading className="hotkeys_heading">{t("Common:Hotkeys")}</Heading>
-        </div>
         <StyledScrollbar ref={scrollRef}>
           <Heading className="hotkeys_sub-header">
             {t("HotkeysNavigation")}

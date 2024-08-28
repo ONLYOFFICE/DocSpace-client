@@ -2538,7 +2538,9 @@ class FilesActionStore {
 
     const urlFilter = getObjectByLocation(window.DocSpace.location);
 
-    const isArchivedRoom = !!(CategoryType.Archive && urlFilter?.folder);
+    const isArchivedRoom = !!(
+      CategoryType.Trash !== categoryType && urlFilter?.folder
+    );
 
     if (this.publicRoomStore.isPublicRoom) {
       return this.backToParentFolder();
@@ -2559,10 +2561,11 @@ class FilesActionStore {
       return this.moveToRoomsPage();
     }
 
-    if (
-      categoryType === CategoryType.Personal ||
-      categoryType === CategoryType.Trash
-    ) {
+    if (categoryType === CategoryType.Trash) {
+      return;
+    }
+
+    if (categoryType === CategoryType.Personal) {
       return this.backToParentFolder();
     }
 

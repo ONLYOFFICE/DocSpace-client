@@ -24,8 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import React, { useEffect } from "react";
+import { useTheme } from "styled-components";
 
 import DownloadingReactSvg from "PUBLIC_DIR/images/downloading.react.svg";
+import DownloadingDarkReactSvg from "PUBLIC_DIR/images/downloading.dark.react.svg";
 
 import { StyledOperationContainer } from "./OperationContainer.styled";
 import { IOperationContainer } from "./OperationContainer.types";
@@ -35,6 +37,14 @@ import PortalLogo from "../portal-logo/PortalLogo";
 const OperationContainer = (props: IOperationContainer) => {
   const { url, title, description } = props;
 
+  const theme = useTheme();
+
+  const logo = theme.isBase ? (
+    <DownloadingReactSvg className="operation-logo" />
+  ) : (
+    <DownloadingDarkReactSvg className="operation-logo" />
+  );
+
   useEffect(() => {
     if (url) window.location.replace(url);
   }, [url]);
@@ -42,7 +52,7 @@ const OperationContainer = (props: IOperationContainer) => {
   return (
     <StyledOperationContainer>
       <PortalLogo isResizable />
-      <DownloadingReactSvg className="operation-logo" />
+      {logo}
       <Text className="operation-title" fontWeight={700} fontSize="23px">
         {title}
       </Text>

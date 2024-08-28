@@ -255,11 +255,7 @@ class SettingsStore {
 
   apiDocsLink = null;
 
-  sofwareLicense = null;
-
-  legalTerms = null;
-
-  privacyStatement = null;
+  licenseUrl = null;
 
   bookTrainingEmail = null;
 

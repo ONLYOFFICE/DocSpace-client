@@ -91,7 +91,7 @@ const Wizard = (props) => {
     getIsRequiredLicense,
     getPortalTimezones,
     machineName,
-    sofwareLicense,
+    licenseUrl,
     theme,
     cultureNames,
     culture,
@@ -496,7 +496,7 @@ const Wizard = (props) => {
                   }
                   fontSize="13px"
                   target="_blank"
-                  href={sofwareLicense}
+                  href={licenseUrl}
                 >
                   {t("LicenseLink")}
                 </Link>
@@ -523,7 +523,7 @@ export default inject(({ authStore, settingsStore, wizardStore }) => {
     passwordSettings,
     wizardToken,
     timezone,
-    sofwareLicense,
+    licenseUrl,
     hashSettings,
     setWizardComplete,
     getPortalTimezones,
@@ -552,7 +552,7 @@ export default inject(({ authStore, settingsStore, wizardStore }) => {
     wizardToken,
     passwordSettings,
     timezone,
-    sofwareLicense,
+    licenseUrl,
     hashSettings,
     isWizardLoaded,
     machineName,

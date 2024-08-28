@@ -106,7 +106,7 @@ const AboutContent = (props) => {
     companyInfoSettingsData,
     previewData,
     standalone,
-    sofwareLicense,
+    licenseUrl,
     isEnterprise,
   } = props;
   const { t } = useTranslation(["About", "Common"]);
@@ -214,7 +214,7 @@ const AboutContent = (props) => {
               className="row-el"
               fontSize="13px"
               fontWeight="600"
-              href={sofwareLicense}
+              href={licenseUrl}
               target="_blank"
               enableUserSelect
             >
@@ -293,7 +293,7 @@ const AboutContent = (props) => {
 };
 
 export default inject(({ settingsStore, currentTariffStatusStore }) => {
-  const { theme, companyInfoSettingsData, standalone, sofwareLicense } =
+  const { theme, companyInfoSettingsData, standalone, licenseUrl } =
     settingsStore;
   const { isEnterprise } = currentTariffStatusStore;
 
@@ -301,7 +301,7 @@ export default inject(({ settingsStore, currentTariffStatusStore }) => {
     theme,
     companyInfoSettingsData,
     standalone,
-    sofwareLicense,
+    licenseUrl,
     isEnterprise,
   };
 })(observer(AboutContent));

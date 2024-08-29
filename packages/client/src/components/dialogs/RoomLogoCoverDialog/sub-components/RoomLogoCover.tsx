@@ -31,6 +31,8 @@ import styled from "styled-components";
 import { mobile, tablet, isMobile } from "@docspace/shared/utils";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
+import { getRoomTitle } from "@docspace/shared/components/room-icon/RoomIcon.utils";
+
 import { CustomLogo } from "./CustomLogo";
 import { SelectColor } from "./SelectColor/SelectColor";
 import { SelectIcon } from "./SelectIcon";
@@ -94,11 +96,15 @@ const RoomLogoCoverContainer = styled.div`
   }
 `;
 
-const RoomLogoCover = ({ isBaseTheme }: RoomLogoCoverProps) => {
+const RoomLogoCover = ({ isBaseTheme, logo, title }: RoomLogoCoverProps) => {
   const { t } = useTranslation(["Common", "CreateEditRoomDialog"]);
 
-  const [color, setColor] = useState<string>(logoColors[3]); // set room icon default color
-  const [icon, setIcon] = useState<string>("Aa");
+  const roomTitle = React.useMemo(() => getRoomTitle(title ?? ""), [title]);
+
+  const roomColor = logo.color ? `#${logo.color}` : logoColors[0];
+
+  const [color, setColor] = useState<string>(roomColor);
+  const [icon, setIcon] = useState<string>(roomTitle);
   const [withoutIcon, setWithoutIcon] = useState<boolean>(true);
 
   const scrollRef = useRef(null);
@@ -132,6 +138,7 @@ const RoomLogoCover = ({ isBaseTheme }: RoomLogoCoverProps) => {
           icon={icon}
           color={color}
           withoutIcon={withoutIcon}
+          roomTitle={roomTitle}
         />
       </div>
       <div className="select-container">
@@ -147,10 +154,13 @@ const RoomLogoCover = ({ isBaseTheme }: RoomLogoCoverProps) => {
   );
 };
 
-export default inject<TStore>(({ settingsStore }) => {
+export default inject<TStore>(({ settingsStore, filesStore }) => {
   const { theme } = settingsStore;
+  const { bufferSelection } = filesStore;
 
   return {
     isBaseTheme: theme?.isBase,
+    logo: bufferSelection?.logo,
+    title: bufferSelection?.title,
   };
 })(observer(RoomLogoCover));

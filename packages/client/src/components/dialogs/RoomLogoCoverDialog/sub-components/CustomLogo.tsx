@@ -84,6 +84,7 @@ export const CustomLogo = ({
   icon,
   withoutIcon,
   isBaseTheme,
+  roomTitle,
 }: CustomLogoProps) => {
   return (
     <StyledLogo color={color} isBase={isBaseTheme}>
@@ -94,7 +95,7 @@ export const CustomLogo = ({
           color="#fff"
           fontWeight={700}
         >
-          Aa
+          {roomTitle}
         </Text>
       ) : (
         <ReactSVG className="custom-logo-cover" src={icon} alt="icon" />

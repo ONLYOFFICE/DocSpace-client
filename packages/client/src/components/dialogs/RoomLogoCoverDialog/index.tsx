@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { inject, observer } from "mobx-react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import {
@@ -57,13 +58,17 @@ const StyledModalDialog = styled(ModalDialog)`
   }
 `;
 
-const RoomLogoCoverDialog = () => {
+const RoomLogoCoverDialog = ({ setRoomLogoCoverDialogVisible }) => {
   const { t } = useTranslation(["Common"]);
+
+  const onCloseRoomLogo = () => {
+    setRoomLogoCoverDialogVisible(false);
+  };
   return (
     <StyledModalDialog
       visible
       autoMaxHeight
-      // onClose={onClose}
+      onClose={onCloseRoomLogo}
       displayType={isMobile() ? ModalDialogType.aside : ModalDialogType.modal}
       withBodyScroll
     >
@@ -84,7 +89,7 @@ const RoomLogoCoverDialog = () => {
         <Button
           scale
           tabIndex={0}
-          // onClick={onClose}
+          onClick={onCloseRoomLogo}
           size={ButtonSize.normal}
           label={t("Common:CancelButton")}
         />
@@ -93,4 +98,8 @@ const RoomLogoCoverDialog = () => {
   );
 };
 
-export default RoomLogoCoverDialog;
+export default inject<TStore>(({ dialogsStore }) => {
+  return {
+    setRoomLogoCoverDialogVisible: dialogsStore.setRoomLogoCoverDialogVisible,
+  };
+})(observer(RoomLogoCoverDialog));

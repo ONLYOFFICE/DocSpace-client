@@ -190,9 +190,14 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
               isLoading={isLoading}
             />
           ) : (
-            <div className="disabled-role-combobox" title={t("Common:Role")}>
+            <Text
+              className="disabled-role-combobox"
+              title={t("Common:Role")}
+              fontWeight={600}
+              noSelect
+            >
               {userRole.label}
-            </div>
+            </Text>
           )}
         </div>
       )}

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Loader } from "@docspace/shared/components/loader";
 import Section from "@docspace/shared/components/section";
@@ -45,6 +45,8 @@ const Auth = (props) => {
   let [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
   const { t } = useTranslation(["Common"]);
+
+  const [authorized, setAuthorized] = useState(false);
 
   const referenceUrl = searchParams.get("referenceUrl");
   const isFileHandler =
@@ -83,6 +85,7 @@ const Auth = (props) => {
           try {
             new URL(referenceUrl);
             if (isFileHandler && isExternalDownloading) {
+              setAuthorized(true);
               return;
             } else {
               return window.location.replace(referenceUrl);
@@ -106,6 +109,7 @@ const Auth = (props) => {
   return isFileHandler && isExternalDownloading ? (
     <OperationContainer
       url={referenceUrl}
+      authorized={authorized}
       title={t("DownloadOperationTitle")}
       description={t("DownloadOperationDescription")}
     />

@@ -2841,6 +2841,7 @@ export const getBaseTheme = () => {
           textColor: gray,
           sso: {
             textColor: gray,
+            errorColor: lightErrorStatus,
             toggleContentBackground: grayLight,
             iconButton: black,
             iconButtonDisabled: gray,

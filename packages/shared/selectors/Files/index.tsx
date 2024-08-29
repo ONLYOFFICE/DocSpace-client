@@ -277,6 +277,7 @@ const FilesSelectorComponent = ({
           });
 
           setSelectedItemId(item.id);
+          setSelectedFileInfo(null);
           if (item.isRoom) {
             setSelectedItemType("rooms");
           } else {

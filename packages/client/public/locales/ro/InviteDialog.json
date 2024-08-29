@@ -2,7 +2,7 @@
   "AddManually": "Adăugați manual",
   "AddManuallyDescriptionAccounts": "Invitaţi utilizatori noi la {{productName}} personal prin email",
   "AddManuallyDescriptionRoom": "Adăugaţi utilizatorii existenți ai {{productName}} în sala folosind numele sau invitaţi utilizatorii personal prin e-mail",
-  "EmailErrorMessage": "Adresa de email nu este valabilă Puteţi modifica adresa de email făcând clic dreapta pe aceasta.",
+  "EmailErrorMessage": "Adresa de email nu este valabilă. Puteţi modifica adresa de email făcând dublu clic pe acesta.",
   "GroupMaxAvailableRoleWarning": "Grupuri pot fi adăugate la o sală cu un rol maxim {{roleName}}. Cu toate acestea, puteți modifica rolul pentru utilizatori din grup în mod individual odată ce grupul a fost adăugat cu succes.",
   "InvitationLanguage": "Invitația în limba",
   "InviteAccountSearchPlaceholder": "Invitaţi persoane după email",

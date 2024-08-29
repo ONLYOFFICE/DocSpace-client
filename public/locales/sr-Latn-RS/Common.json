@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "U vezi sa",
   "AboutCompanyTitle": "U vezi ovog programa",
   "AccessDenied": "Pristup odbijen",
@@ -40,6 +40,7 @@
   "ChangeButton": "Promeni",
   "ChangeQuota": "Promeni kvotu",
   "ChangesSavedSuccessfully": "Promene uspešno sačuvane",
+  "ChangeUserPermissions": "Promenite dozvole korisnicima koje ste pozvali ili <1>nadogradite svoj tarifni plan</1>.",
   "ChooseFromTemplates": "Izaberi iz Šablona",
   "ClearAll": "Obriši sve",
   "ClearFilter": "Obriši filter",
@@ -59,7 +60,6 @@
   "ConflictResolveSelectAction": "Molim vas odaberite akciju:",
   "Connect": "Poveži",
   "Content": "Sadržaj",
-  "Context": "Kontekst",
   "ContinueButton": "Nastavi",
   "ContinueWith": "Nastavi sa",
   "Copy": "Kopiraj",
@@ -140,6 +140,8 @@
   "DontShowAgain": "Ne prikazuj ponovo",
   "Download": "Preuzmi",
   "DownloadApps": "Preuzmi aplikacije",
+  "DownloadOperationDescription": "Promenite dozvole korisnicima koje ste pozvali ili <1>nadogradite svoj tarifni plan</1>.",
+  "DownloadOperationTitle": "Preuzimanje datoteke je u toku",
   "DropzoneTitleExsts": "(JPG ili PNG)",
   "DropzoneTitleLink": "Odaberi novu sliku",
   "DropzoneTitleSecondary": "ili spusti datoteku ovde",
@@ -322,6 +324,7 @@
   "Owner": "Vlasnik",
   "PageOfTotalPage": "{{page}} od {{totalPage}}",
   "Paid": "Plaćeno",
+  "PaidUsersExceedsLimit": "Broj admina/naprednih korisnika prelazi limit: {{count}} / {{limit}}.",
   "Password": "Lozinka",
   "PasswordLimitDigits": "cifre",
   "PasswordLimitMessage": "Lozinka mora da sadrži",

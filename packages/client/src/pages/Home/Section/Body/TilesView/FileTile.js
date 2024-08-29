@@ -24,14 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
+
 import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
+// import { Context } from "@docspace/shared/utils";
 
 import Tile from "./sub-components/Tile";
 import FilesTileContent from "./FilesTileContent";
+import { FileTileContext } from "./FileTile.provider";
 
 import withFileActions from "../../../../../HOCs/withFileActions";
 import withQuickButtons from "../../../../../HOCs/withQuickButtons";
@@ -45,7 +48,6 @@ const StyledDragAndDrop = styled(DragAndDrop)`
 const FileTile = (props) => {
   const {
     item,
-    sectionWidth,
     dragging,
     onContentFileSelect,
     fileContextClick,
@@ -70,12 +72,12 @@ const FileTile = (props) => {
     t,
     getContextModel,
     onHideContextMenu,
-    thumbSize,
+    // thumbSize,
     setSelection,
     id,
     onSelectTag,
     onSelectOption,
-    columnCount,
+    // columnCount,
     isRooms,
     withCtrlSelect,
     withShiftSelect,
@@ -85,6 +87,10 @@ const FileTile = (props) => {
     onDragLeave,
     badgeUrl,
   } = props;
+
+  // const { sectionWidth } = useContext(Context);
+
+  const { columnCount, thumbSize } = useContext(FileTileContext);
 
   const temporaryExtension =
     item.id === -1 ? `.${item.fileExst}` : item.fileExst;
@@ -145,7 +151,7 @@ const FileTile = (props) => {
               : thumbnailUrl
           }
           element={element}
-          sectionWidth={sectionWidth}
+          // sectionWidth={sectionWidth}
           contentElement={quickButtonsComponent}
           onSelect={onContentFileSelect}
           tileContextClick={fileContextClick}
@@ -177,7 +183,7 @@ const FileTile = (props) => {
         >
           <FilesTileContent
             item={item}
-            sectionWidth={sectionWidth}
+            // sectionWidth={sectionWidth}
             onFilesClick={onFilesClick}
           />
           {badgesComponent}

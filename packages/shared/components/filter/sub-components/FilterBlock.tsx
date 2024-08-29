@@ -37,19 +37,11 @@ import { FilterBlockLoader } from "../../../skeletons/filter";
 
 import { Backdrop } from "../../backdrop";
 import { Button, ButtonSize } from "../../button";
-import { Heading, HeadingLevel, HeadingSize } from "../../heading";
-import { IconButton } from "../../icon-button";
 import { Scrollbar } from "../../scrollbar";
 import { Portal } from "../../portal";
 import { TSelectorItem } from "../../selector";
 
-import {
-  StyledControlContainer,
-  StyledCrossIcon,
-  StyledFilterBlock,
-  StyledFilterBlockFooter,
-  StyledFilterBlockHeader,
-} from "../Filter.styled";
+import { StyledFilterBlock, StyledFilterBlockFooter } from "../Filter.styled";
 
 import { FilterBlockProps, TGroupItem, TItem } from "../Filter.types";
 import {
@@ -58,6 +50,7 @@ import {
 } from "../Filter.utils";
 
 import FilterBlockItem from "./FilterBlockItem";
+import { AsideHeader } from "../../aside";
 
 const FilterBlock = ({
   selectedFilterValue,
@@ -496,10 +489,12 @@ const FilterBlock = ({
               withHeader
               headerProps={{
                 onBackClick: onArrowClick,
+                onCloseClick: hideFilterBlock,
                 headerLabel: selectorLabel,
                 withoutBackButton: false,
               }}
               currentUserId={userId}
+              onClose={hideFilterBlock}
             />
           ) : showSelector.type === FilterSelectorTypes.groups ? (
             <GroupsSelector
@@ -508,9 +503,11 @@ const FilterBlock = ({
               withHeader
               headerProps={{
                 onBackClick: onArrowClick,
+                onCloseClick: hideFilterBlock,
                 headerLabel: selectorLabel,
                 withoutBackButton: false,
               }}
+              onClose={hideFilterBlock}
             />
           ) : (
             <RoomSelector
@@ -519,34 +516,33 @@ const FilterBlock = ({
               withHeader
               headerProps={{
                 onBackClick: onArrowClick,
+                onCloseClick: hideFilterBlock,
                 headerLabel: selectorLabel,
                 withoutBackButton: false,
               }}
               isMultiSelect={false}
               withSearch
               disableThirdParty={disableThirdParty}
+              onClose={hideFilterBlock}
             />
           )}
-          <StyledControlContainer onClick={hideFilterBlock}>
-            <StyledCrossIcon />
-          </StyledControlContainer>
         </StyledFilterBlock>
       ) : (
         <StyledFilterBlock>
-          <StyledFilterBlockHeader>
-            <Heading size={HeadingSize.medium} level={HeadingLevel.h1}>
-              {filterHeader}
-            </Heading>
-            {showClearFilterBtn && (
-              <IconButton
-                id="filter_search-options-clear"
-                iconName={ClearReactSvgUrl}
-                isFill
-                onClick={onClearFilter}
-                size={17}
-              />
-            )}
-          </StyledFilterBlockHeader>
+          <AsideHeader
+            header={filterHeader}
+            onCloseClick={hideFilterBlock}
+            {...(showClearFilterBtn && {
+              headerIcons: [
+                {
+                  key: "filter-icon",
+                  url: ClearReactSvgUrl,
+                  onClick: onClearFilter,
+                },
+              ],
+            })}
+          />
+
           <div className="filter-body">
             {isLoading ? (
               <FilterBlockLoader
@@ -598,10 +594,6 @@ const FilterBlock = ({
               isDisabled={isLoading}
             />
           </StyledFilterBlockFooter>
-
-          <StyledControlContainer id="filter_close" onClick={hideFilterBlock}>
-            <StyledCrossIcon />
-          </StyledControlContainer>
         </StyledFilterBlock>
       )}
 

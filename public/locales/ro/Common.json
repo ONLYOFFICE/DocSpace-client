@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Informații",
   "AboutCompanyTitle": "Despre aplicația",
   "AccessDenied": "Acces refuzat ",
@@ -40,6 +40,7 @@
   "ChangeButton": "Modifică",
   "ChangeQuota": "Modificare cotă",
   "ChangesSavedSuccessfully": "Modificările au fost salvate cu succes",
+  "ChangeUserPermissions": "Schimbaţi permisiuni de acces acordate invitaților sau <1>sau selectaţi un alt plan tarifar</1>.",
   "ChooseFromTemplates": "Alegeţi din Șabloane",
   "ClearAll": "Golire totală",
   "ClearFilter": "Golire filtru",
@@ -59,7 +60,6 @@
   "ConflictResolveSelectAction": "Selectați acțiune:",
   "Connect": "Adaugă cont",
   "Content": "Conținut",
-  "Context": "Context",
   "ContinueButton": "Continuare",
   "ContinueWith": "Continuare cu",
   "Copy": "Copiere",
@@ -141,6 +141,8 @@
   "DontShowAgain": "Nu mai afișa din nou",
   "Download": "Descărcare",
   "DownloadApps": "Descărcare aplicații",
+  "DownloadOperationDescription": "Odata ce va fi gata, fișeirele vor fi disponibile în dosarul de descărcări din browser-ul și puteți închide acestă filă.",
+  "DownloadOperationTitle": "Fișierul în curs de descărcare",
   "DropzoneTitleExsts": "(JPG sau PNG)",
   "DropzoneTitleLink": "Selectează o imagine nouă",
   "DropzoneTitleSecondary": "sau fixaţi aici fişierul",
@@ -324,6 +326,7 @@
   "Owner": "Proprietar",
   "PageOfTotalPage": "{{page}} din {{totalPage}}",
   "Paid": "Plătit",
+  "PaidUsersExceedsLimit": "Număr de administratori/utilizatori avansați depășește limita permisă {{count}} / {{limit}}.",
   "Password": "Parola",
   "PasswordLimitDigits": "cifre",
   "PasswordLimitMessage": "Parola trebuie să conțină",

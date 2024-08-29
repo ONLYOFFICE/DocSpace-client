@@ -117,6 +117,7 @@
   "OpenLocation": "Apri posizione",
   "PasswordAccess": "Accesso tramite password",
   "PasswordLink": "Aggiungi una password per proteggere il tuo link.",
+  "PasswordProtectedFiles": "Sei pregato di <0>inserire la password</0> dei file protetti per continuare",
   "PasswordSuccessfullyCopied": "Password copiata con successo",
   "Pin": "Fissa",
   "PinToTop": "Fissa in alto",

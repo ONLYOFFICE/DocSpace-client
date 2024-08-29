@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Sobre",
   "AboutCompanyTitle": "Sobre este programa",
   "AccessDenied": "Acesso negado",
@@ -40,6 +40,7 @@
   "ChangeButton": "Trocar",
   "ChangeQuota": "Alterar cota",
   "ChangesSavedSuccessfully": "Alterações guardadas com êxito",
+  "ChangeUserPermissions": "Alterar as permissões de utilizador para as pessoas convidadas ou <1>atualizar o seu plano tarifário</1>.",
   "ChooseFromTemplates": "Escolha entre os modelos",
   "ClearAll": "Limpar tudo",
   "ClearFilter": "Limpar filtro",
@@ -59,7 +60,6 @@
   "ConflictResolveSelectAction": "Selecione a ação:",
   "Connect": "Ligar",
   "Content": "Conteúdo",
-  "Context": "Contexto",
   "ContinueButton": "Continuar",
   "ContinueWith": "Continue com",
   "Copy": "Copiar",
@@ -141,6 +141,8 @@
   "DontShowAgain": "Não mostre novamente",
   "Download": "Download",
   "DownloadApps": "Transferir aplicações",
+  "DownloadOperationDescription": "Quando estiver pronto, pode encontrar os ficheiros na pasta de transferências do seu browser e fechar este separador.",
+  "DownloadOperationTitle": "Descarregamento de ficheiros em curso",
   "DropzoneTitleExsts": "(JPG ou PNG)",
   "DropzoneTitleLink": "Selecionar uma nova imagem",
   "DropzoneTitleSecondary": "ou arraste o ficheiro para aqui",
@@ -324,6 +326,7 @@
   "Owner": "Proprietário",
   "PageOfTotalPage": "{{page}} de {{totalPage}}",
   "Paid": "Pago",
+  "PaidUsersExceedsLimit": "O número de administradores/utilizadores avançados excede o limite: {{count}} / {{limit}}.",
   "Password": "Palavra-chave",
   "PasswordLimitDigits": "dígitos",
   "PasswordLimitMessage": "A palavra-chave tem de conter",

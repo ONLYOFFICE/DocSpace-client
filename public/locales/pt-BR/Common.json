@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Sobre",
   "AboutCompanyTitle": "Sobre este programa",
   "AccessDenied": "Acesso negado",
@@ -40,6 +40,7 @@
   "ChangeButton": "Trocar",
   "ChangeQuota": "Alterar cota",
   "ChangesSavedSuccessfully": "Mudanças salvas com sucesso",
+  "ChangeUserPermissions": "Altere as permissões de usuário para as pessoas convidadas ou <1>atualize seu plano tarifário</1>.",
   "ChooseFromTemplates": "Escolha entre os modelos",
   "ClearAll": "Limpar tudo",
   "ClearFilter": "Filtro limpo",
@@ -59,7 +60,6 @@
   "ConflictResolveSelectAction": "Selecione a ação:",
   "Connect": "Conectar",
   "Content": "Conteúdo",
-  "Context": "Contexto",
   "ContinueButton": "Continue",
   "ContinueWith": "Continue com",
   "Copy": "Copiar",
@@ -141,6 +141,8 @@
   "DontShowAgain": "Não mostre novamente",
   "Download": "Baixar",
   "DownloadApps": "Baixar aplicativos",
+  "DownloadOperationDescription": "Quando estiver pronto, você pode encontrar os arquivos na pasta de download do seu navegador e fechar esta aba.",
+  "DownloadOperationTitle": "Download do arquivo em andamento",
   "DropzoneTitleExsts": "(JPG ou PNG)",
   "DropzoneTitleLink": "Selecione nova imagem",
   "DropzoneTitleSecondary": "ou solte o arquivo aqui",
@@ -324,6 +326,7 @@
   "Owner": "Proprietário",
   "PageOfTotalPage": "{{page}} de {{totalPage}}",
   "Paid": "Pago",
+  "PaidUsersExceedsLimit": "O número de administradores/usuários avançados excede o limite: {{count}} / {{limit}}.",
   "Password": "Senha",
   "PasswordLimitDigits": "dígitos",
   "PasswordLimitMessage": "Senha deve conter",

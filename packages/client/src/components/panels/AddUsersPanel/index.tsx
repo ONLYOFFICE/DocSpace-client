@@ -529,6 +529,7 @@ const AddUsersPanel = ({
         visible={visible}
         onClose={onClosePanels}
         withoutBodyScroll
+        withoutHeader
       >
         <Selector
           withHeader
@@ -539,6 +540,7 @@ const AddUsersPanel = ({
             withoutBackButton: false,
             withoutBorder: true,
             onBackClick,
+            onCloseClick: onClosePanels,
           }}
           onSelect={onSelect}
           renderCustomItem={renderCustomItem}

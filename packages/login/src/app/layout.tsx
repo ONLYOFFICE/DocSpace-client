@@ -37,6 +37,7 @@ import { Providers } from "@/providers";
 import { getColorTheme, getConfig, getSettings } from "@/utils/actions";
 
 import "../styles/globals.scss";
+import Scripts from "@/components/Scripts";
 
 export default async function RootLayout({
   children,
@@ -137,6 +138,7 @@ export default async function RootLayout({
             {children}
           </Providers>
         </StyledComponentsRegistry>
+        <Scripts />
       </body>
     </html>
   );

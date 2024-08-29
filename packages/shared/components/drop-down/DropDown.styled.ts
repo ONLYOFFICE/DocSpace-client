@@ -54,6 +54,7 @@ const StyledDropdown = styled.div<{
   `}
   height: fit-content;
   position: absolute;
+  overflow: hidden;
 
   ${(props) => props.manualWidth && `width: ${props.manualWidth};`}
   ${(props) =>

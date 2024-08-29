@@ -36,6 +36,7 @@
   "LdapPortNumber": "Número de puerto",
   "LdapPortNumberTooltip": "Introduzca el número de puerto de su servidor LDAP/Active Directory.",
   "LdapQuota": "Cuota de usuarios",
+  "LdapQuotaInfo": "Para poder utilizar este atributo, active la cuota de usuarios en <0>Configuración de la gestión de almacenamiento</0>.",
   "LdapSecondName": "Segundo nombre",
   "LdapSendWelcomeLetter": "Enviar carta de bienvenida",
   "LdapSendWelcomeLetterTooltip": "Si se marca, todos los usuarios nuevos recibirán una carta de bienvenida. Disponible sólo cuando el atributo de correo está asignado a LDAP.",
@@ -66,6 +67,7 @@
   "LdapUserDNTooltip": "Introduzca el nombre distinguido del directorio que contiene los usuarios que desea añadir.",
   "LdapUserFilter": "Filtro de usuario",
   "LdapUserFilterTooltip": "Utilice el filtro LDAP de búsqueda para seleccionar los usuarios que deben importarse.",
+  "LdapUserQuotaTooltip": "Para establecer una cuota de almacenamiento para el usuario, añada un atributo en el directorio LDAP (por ejemplo, UsersQuotaLimit) e introduzca un valor entero para este atributo. Se mostrará el valor de la cuota en bytes. Aquí especifique solo el nombre del atributo. Este atributo se aplicará únicamente durante la primera configuración y podrá modificarse posteriormente de forma manual en la sección Cuentas.",
   "LdapUsersType": "Tipo de usuario",
   "LdapUsersTypeInfo": "Los usuarios sólo pueden acceder a las salas a las que son invitados por los administradores, y no pueden crear sus propias salas, carpetas o archivos. Seleccione otro tipo a continuación para proporcionar más permisos. Si no, puede cambiar el tipo manualmente en la sección Cuentas.",
   "LdapUserTypeTooltip": "Todos los usuarios se añadirán a {{productName}} con el tipo seleccionado."

@@ -26,14 +26,7 @@
 
 import { getRestoreProgress } from "../../api/portal";
 
-const baseSecondMultiplicationFactor = 400;
-const baseThirdMultiplicationFactor = 180;
-const baseFirstMultiplicationFactor = 700;
-const unSizeMultiplicationFactor = 3;
-const thirdBound = 98;
-
 let prevProgress: number = 0;
-let requestsCount: number = 0;
 
 export const clearLocalStorage = () => {
   [
@@ -44,208 +37,48 @@ export const clearLocalStorage = () => {
     "LocalCopyThirdPartyStorageValues",
   ].forEach((k) => localStorage.removeItem(k));
 };
-export const reachingSecondBoundary = (
-  percentage: number,
-  secondBound: number,
-  progressTimerId: ReturnType<typeof setInterval> | null,
-  setPercent: (progress: number) => void,
-) => {
-  let progress = percentage;
-
-  const delay = baseSecondMultiplicationFactor * unSizeMultiplicationFactor;
-
-  if (progressTimerId) return;
-
-  progressTimerId = setInterval(() => {
-    progress += 1;
-
-    if (progress !== secondBound) setPercent(progress);
-    else {
-      if (progressTimerId) clearInterval(progressTimerId);
-      progressTimerId = null;
-    }
-  }, delay);
-};
-export const reachingThirdBoundary = (
-  percentage: number,
-  progressTimerId: ReturnType<typeof setInterval> | null,
-  setPercent: (progress: number) => void,
-) => {
-  let progress = percentage;
-  const delay = baseThirdMultiplicationFactor * unSizeMultiplicationFactor;
-  if (progressTimerId) return;
-
-  progressTimerId = setInterval(() => {
-    progress += 1;
-
-    if (progress < thirdBound) setPercent(progress);
-    else {
-      if (progressTimerId) clearInterval(progressTimerId);
-      progressTimerId = null;
-    }
-  }, delay);
-};
-
-export const reachingFirstBoundary = (
-  percentage: number,
-  firstBound: number,
-  progressTimerId: ReturnType<typeof setInterval> | null,
-  setPercent: (progress: number) => void,
-) => {
-  let progress = percentage;
-  const delay = baseFirstMultiplicationFactor * unSizeMultiplicationFactor;
-
-  if (progressTimerId) return;
-
-  progressTimerId = setInterval(() => {
-    progress += 1;
-
-    if (progress !== firstBound) setPercent(progress);
-    else {
-      if (progressTimerId) clearInterval(progressTimerId);
-      progressTimerId = null;
-    }
-  }, delay);
-};
 
 export const returnToPortal = () => {
   setTimeout(() => {
     window.location.replace("/");
   }, 5000);
 };
-
-export const getIntervalProgress = async (
-  setErrorMessage: (err: any) => void,
-  clearAllIntervals: VoidFunction,
+export const clearAllIntervals = (
   timerId: ReturnType<typeof setInterval> | null,
-  progressTimerId: ReturnType<typeof setInterval> | null,
+) => {
+  if (timerId) clearInterval(timerId);
+
+  timerId = null;
+};
+export const getIntervalProgress = async (
+  setMessage: (err?: unknown) => void,
   setPercent: (progress: number) => void,
-  errorInternalServer: string,
+  timerId: ReturnType<typeof setInterval> | null,
 ) => {
   try {
     const response = await getRestoreProgress();
 
-    if (!response) {
-      setErrorMessage(errorInternalServer);
-      clearAllIntervals();
-      return;
-    }
+    if (!response || response.error) {
+      if (response?.error) setMessage(response.error);
+      else setMessage();
 
-    if (response.error) {
-      if (timerId) clearInterval(timerId);
-      if (progressTimerId) clearInterval(progressTimerId);
-
-      progressTimerId = null;
-      timerId = null;
-      setErrorMessage(response.error);
-
+      clearAllIntervals(timerId);
       return;
     }
 
     const currProgress = response.progress;
-    console.log("prevProgress", prevProgress);
-    if (currProgress > 0 && prevProgress !== currProgress) {
-      setPercent(currProgress);
 
-      if (progressTimerId) clearInterval(progressTimerId);
-      progressTimerId = null;
-    }
+    if (prevProgress !== currProgress) setPercent(currProgress);
 
     prevProgress = currProgress;
 
     if (currProgress === 100) {
-      clearAllIntervals();
+      clearAllIntervals(timerId);
       clearLocalStorage();
       returnToPortal();
     }
-  } catch (error: any) {
-    clearAllIntervals();
-    setErrorMessage(error);
-  }
-};
-
-export const getRecoveryProgress = async (
-  setErrorMessage: (err: any) => void,
-  errorInternalServer: string,
-  timerId: ReturnType<typeof setInterval> | null,
-  progressTimerId: ReturnType<typeof setInterval> | null,
-  firstBound: number,
-  setPercent: (progress: number) => void,
-  clearAllIntervals: VoidFunction,
-) => {
-  const getMessage = (error: any) => {
-    if (typeof error !== "object") return error;
-
-    return (
-      error?.response?.data?.error?.message ||
-      error?.statusText ||
-      error?.message ||
-      t("Common:ErrorInternalServer")
-    );
-  };
-
-  try {
-    const response = await getRestoreProgress();
-
-    if (!response) {
-      setErrorMessage(errorInternalServer);
-      return;
-    }
-
-    const { progress, error } = response;
-
-    if (error) {
-      setErrorMessage(error);
-
-      return;
-    }
-
-    if (progress === 100) {
-      returnToPortal();
-      clearLocalStorage();
-    } else {
-      timerId = setInterval(
-        () =>
-          getIntervalProgress(
-            setErrorMessage,
-            clearAllIntervals,
-            timerId,
-            progressTimerId,
-            setPercent,
-            errorInternalServer,
-          ),
-        1000,
-      );
-      if (progress < firstBound)
-        reachingFirstBoundary(
-          progress,
-          firstBound,
-          progressTimerId,
-          setPercent,
-        );
-    }
-
-    setPercent(progress);
   } catch (err: unknown) {
-    const knownError = err as { response: { status: number } };
-
-    const status = knownError?.response?.status;
-    const needCreationTableTime = status === 404;
-
-    if (needCreationTableTime && requestsCount < 3) {
-      requestsCount += 1;
-      getRecoveryProgress(
-        setErrorMessage,
-        errorInternalServer,
-        timerId,
-        progressTimerId,
-        firstBound,
-        setPercent,
-        clearAllIntervals,
-      );
-      return;
-    }
-
-    setErrorMessage(getMessage(err));
+    clearAllIntervals(timerId);
+    setMessage(err);
   }
 };

@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Giới thiệu",
   "AboutCompanyTitle": "Giới thiệu về chương trình này",
   "AccessDenied": "Truy cập bị từ chối",
@@ -40,6 +40,7 @@
   "ChangeButton": "Thay đổi",
   "ChangeQuota": "Thay đổi định mức",
   "ChangesSavedSuccessfully": "Đã lưu thay đổi thành công",
+  "ChangeUserPermissions": "Thay đổi quyền của người dùng thành những người được mời hoặc <1>nâng cấp gói dịch vụ của bạn </1>.",
   "ChooseFromTemplates": "Chọn từ Mẫu",
   "ClearAll": "Xóa tất cả",
   "ClearFilter": "Xóa bộ lọc",
@@ -59,7 +60,6 @@
   "ConflictResolveSelectAction": "Vui lòng chọn hành động:",
   "Connect": "Kết nối",
   "Content": "Nội dung",
-  "Context": "Bối cảnh",
   "ContinueButton": "Tiếp tục",
   "ContinueWith": "Tiếp tục với",
   "Copy": "Sao chép",
@@ -141,6 +141,8 @@
   "DontShowAgain": "Không hiển thị lại",
   "Download": "Tải xuống",
   "DownloadApps": "Tải ứng dụng xuống",
+  "DownloadOperationDescription": "Khi đã sẵn sàng, bạn có thể tìm thấy các tập tin trong thư mục tải xuống của trình duyệt và đóng tab này.",
+  "DownloadOperationTitle": "Đang tải tập tin xuống",
   "DropzoneTitleExsts": "(JPG hoặc PNG)",
   "DropzoneTitleLink": "Chọn hình ảnh mới",
   "DropzoneTitleSecondary": "hoặc thả tập tin vào đây",
@@ -324,6 +326,7 @@
   "Owner": "Chủ sở hữu",
   "PageOfTotalPage": "{{page}} trên {{totalPage}}",
   "Paid": "Đã thanh toán",
+  "PaidUsersExceedsLimit": "Số lượng quản trị viên/người dùng cấp cao vượt quá giới hạn: {{count}} / {{limit}}.",
   "Password": "Mật khẩu",
   "PasswordLimitDigits": "chữ số",
   "PasswordLimitMessage": "Mật khẩu cần phải bao gồm",

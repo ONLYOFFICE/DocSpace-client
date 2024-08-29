@@ -42,13 +42,7 @@ const backdropBackground = (props: {
   return `rgba(${r}, ${g}, ${b}, ${a + swipeOffset * (a / 120)})`;
 };
 
-const StyledModalBackdrop = styled.div.attrs(
-  (props: { theme: TTheme; modalSwipeOffset?: number; zIndex?: number }) => ({
-    style: {
-      background: backdropBackground(props),
-    },
-  }),
-)<{ modalSwipeOffset?: number; zIndex?: number }>`
+const StyledModalBackdrop = styled.div<{ zIndex?: number }>`
   display: block;
   height: 100%;
   min-height: fill-available;
@@ -60,6 +54,7 @@ const StyledModalBackdrop = styled.div.attrs(
   left: 0;
   top: 0;
 
+  background: ${(props) => props.theme.backdrop.backgroundColor};
   z-index: ${(props) => props.zIndex};
 
   @media ${mobile} {
@@ -76,15 +71,10 @@ const StyledModalBackdrop = styled.div.attrs(
 const ModalBackdrop = ({
   className,
   zIndex,
-  modalSwipeOffset,
   children,
 }: ModalDialogBackdropProps) => {
   return (
-    <StyledModalBackdrop
-      zIndex={zIndex}
-      className={className}
-      modalSwipeOffset={modalSwipeOffset}
-    >
+    <StyledModalBackdrop zIndex={zIndex} className={className}>
       {children}
     </StyledModalBackdrop>
   );

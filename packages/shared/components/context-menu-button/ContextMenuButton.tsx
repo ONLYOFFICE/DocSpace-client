@@ -38,13 +38,11 @@ import { DropDown } from "../drop-down";
 import { IconButton } from "../icon-button";
 import { Backdrop } from "../backdrop";
 import { Aside } from "../aside";
-import { Heading, HeadingLevel, HeadingSize } from "../heading";
 import { Link } from "../link";
 import { ContextMenuModel } from "../context-menu";
 
 import {
   StyledBodyContent,
-  StyledHeaderContent,
   StyledContent,
   StyledOuter,
 } from "./ContextMenuButton.styled";
@@ -297,9 +295,10 @@ const ContextMenuButtonPure = ({
               scale={false}
               zIndex={310}
               onClose={onCloseAction}
+              header={asideHeader}
             >
               <StyledContent>
-                <StyledHeaderContent>
+                {/* <StyledHeaderContent>
                   <Heading
                     className="header"
                     size={HeadingSize.medium}
@@ -308,7 +307,7 @@ const ContextMenuButtonPure = ({
                   >
                     {asideHeader}
                   </Heading>
-                </StyledHeaderContent>
+                </StyledHeaderContent> */}
                 <StyledBodyContent>
                   {state.data.map(
                     (item: ContextMenuModel, index: number) =>

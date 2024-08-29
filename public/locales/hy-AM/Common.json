@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Մասին",
   "AboutCompanyTitle": "Ծրագրի մասին",
   "AccessDenied": "Մուտքն արգելված է",
@@ -40,6 +40,7 @@
   "ChangeButton": "Փոխել",
   "ChangeQuota": "Փոխել քվոտան",
   "ChangesSavedSuccessfully": "Փոփոխությունները հաջողությամբ պահպանվեցին",
+  "ChangeUserPermissions": "Փոխեք օգտատիրոջ թույլտվությունները հրավիրված մարդկանց կամ <1> թարմացրեք ձեր սակագնային պլանը</1>.",
   "ChooseFromTemplates": "Ընտրել ձևանմուշներից",
   "ClearAll": "Մաքրել բոլորը",
   "ClearFilter": "Մաքրել զտիչը",
@@ -59,7 +60,6 @@
   "ConflictResolveSelectAction": "Խնդրում ենք ընտրել գործողությունը:",
   "Connect": "Կապակցվել",
   "Content": "Բովանդակություն",
-  "Context": "Համատեքստ",
   "ContinueButton": "Շարունակել",
   "ContinueWith": "Շարունակել",
   "Copy": "Պատճենել",
@@ -141,6 +141,8 @@
   "DontShowAgain": "Այլևս ցույց չտալ",
   "Download": "Ներբեռնել",
   "DownloadApps": "Ներբեռնեք հավելվածները",
+  "DownloadOperationDescription": "Պատրաստ լինելուց հետո դուք կարող եք գտնել ֆայլերը ձեր բրաուզերի ներբեռնման թղթապանակում և փակել այս ներդիրը:",
+  "DownloadOperationTitle": "Ֆայլի ներբեռնումն ընթացքի մեջ է",
   "DropzoneTitleExsts": "(JPG կամ PNG)",
   "DropzoneTitleLink": "Ընտրել նոր նկար",
   "DropzoneTitleSecondary": "կամ թողնել ֆայլը այստեղ",
@@ -324,6 +326,7 @@
   "Owner": "Սեփականատեր",
   "PageOfTotalPage": "{{page}} {{totalPage}}-ի",
   "Paid": "Վճարովի",
+  "PaidUsersExceedsLimit": "Ադմինիստրատորների/հզոր օգտատերերի թիվը գերազանցում է սահմանը՝ {{count}} / {{limit}}:",
   "Password": "Գաղտնաբառ",
   "PasswordLimitDigits": "թվանիշեր",
   "PasswordLimitMessage": "Գաղտնաբառը պետք է պարունակի",

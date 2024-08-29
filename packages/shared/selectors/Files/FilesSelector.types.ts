@@ -28,6 +28,7 @@ import { TSelectorItem } from "../../components/selector";
 import {
   TBreadCrumb,
   TInfoBar,
+  TSelectorHeader,
 } from "../../components/selector/Selector.types";
 import {
   TFileSecurity,
@@ -143,7 +144,8 @@ export type TSelectedFileInfo = {
 
 export type TGetIcon = (size: number, fileExst: string) => string;
 
-export type FilesSelectorProps = TInfoBar &
+export type FilesSelectorProps = TSelectorHeader &
+  TInfoBar &
   (
     | {
         getIcon: TGetIcon;

@@ -26,6 +26,21 @@
 
 import { TColorScheme } from "../../themes";
 
+export type TArticleLinkDataState =
+  | {
+      title: string;
+      isRoot: boolean;
+      isPublicRoomType: boolean;
+      rootFolderType: number;
+      canCreate: boolean;
+    }
+  | {};
+
+export type TArticleLinkData = {
+  path: string;
+  state: TArticleLinkDataState;
+};
+
 export interface ArticleItemProps {
   /** Accepts className */
   className?: string;
@@ -70,4 +85,5 @@ export interface ArticleItemProps {
   badgeTitle?: string;
   $currentColorScheme?: TColorScheme;
   title?: string;
+  linkData: TArticleLinkData;
 }

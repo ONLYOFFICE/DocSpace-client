@@ -262,7 +262,10 @@ const Sdk = ({
         : {};
 
       const headerProps = frameConfig?.showSelectorHeader
-        ? { withHeader: true, headerProps: { headerLabel: "" } }
+        ? {
+            withHeader: true,
+            headerProps: { headerLabel: "", isCloseable: false },
+          }
         : {};
 
       component = (
@@ -301,6 +304,7 @@ const Sdk = ({
           currentFolderId={frameConfig?.id}
           openRoot={selectorOpenRoot}
           descriptionText={formatsDescription[frameConfig?.filterParam] || ""}
+          headerProps={{ isCloseable: false }}
         />
       );
       break;

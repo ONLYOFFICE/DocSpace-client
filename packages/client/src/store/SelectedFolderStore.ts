@@ -147,6 +147,8 @@ class SelectedFolderStore {
 
   isCustomQuota: boolean | undefined;
 
+  changeDocumentsTabs = false;
+
   constructor(settingsStore: SettingsStore) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -256,6 +258,10 @@ class SelectedFolderStore {
     this.shared = shared;
   };
 
+  setChangeDocumentsTabs = (changeDocumentsTabs: boolean) => {
+    this.changeDocumentsTabs = changeDocumentsTabs;
+  };
+
   updateEditedSelectedRoom = (title = this.title, tags = this.tags) => {
     this.title = title;
     this.tags = tags;
@@ -352,6 +358,8 @@ class SelectedFolderStore {
           this[key] = item;
         }
       });
+
+      this.setChangeDocumentsTabs(false);
     }
 
     selectedFolder?.pathParts?.forEach((value) => {

@@ -89,25 +89,25 @@ const ProfileRemoveForm = ({
     return (
       <>
         <GreetingContainer welcomeTitle="Confirm:DeleteProfileSuccessMessage" />
-        <Text fontSize="16px" fontWeight="600" className="confirm-subtitle">
-          {t("DeleteProfileSuccessDescription", {
-            productName: t("Common:ProductName"),
-          })}
-          <Trans i18nKey="DeleteProfileSuccessMessageInfo" ns="Confirm" t={t}>
-            Please check our
-            <Link
-              fontSize="16px"
-              fontWeight="600"
-              type={LinkType.page}
-              href={legalTerms}
-              color={currentColorScheme?.main?.accent}
-              target={LinkTarget.blank}
-            >
-              Privacy policy
-            </Link>
-            to learn more about deleting your account and associated data.
-          </Trans>
-        </Text>
+        <FormWrapper>
+          <Text>
+            {t("DeleteProfileSuccessDescription", {
+              productName: t("Common:ProductName"),
+            })}
+            <Trans i18nKey="DeleteProfileSuccessMessageInfo" ns="Confirm" t={t}>
+              Please check our
+              <Link
+                type={LinkType.page}
+                href={legalTerms}
+                color={currentColorScheme?.main?.accent}
+                target={LinkTarget.blank}
+              >
+                Privacy policy
+              </Link>
+              to learn more about deleting your account and associated data.
+            </Trans>
+          </Text>
+        </FormWrapper>
       </>
     );
   }

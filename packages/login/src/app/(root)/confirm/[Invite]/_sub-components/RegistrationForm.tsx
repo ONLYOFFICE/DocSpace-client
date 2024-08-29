@@ -27,7 +27,7 @@
 "use client";
 
 import { ChangeEvent, KeyboardEvent, useContext } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 import { TPasswordSettings } from "@docspace/shared/api/settings/types";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
@@ -39,6 +39,9 @@ import {
   TextInput,
 } from "@docspace/shared/components/text-input";
 import { ALLOWED_PASSWORD_CHARACTERS } from "@docspace/shared/constants";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { LinkTarget } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
 
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import { GreetingUserContainer } from "@/components/GreetingContainer";
@@ -68,6 +71,9 @@ type RegistrationFormProps = {
 
   onClickBack(): void;
   onSubmit(): void;
+
+  licenseUrl: string;
+  legalTerms: string;
 };
 
 const RegistrationForm = ({
@@ -95,10 +101,45 @@ const RegistrationForm = ({
 
   onClickBack,
   onSubmit,
+
+  licenseUrl,
+  legalTerms,
 }: RegistrationFormProps) => {
   const { t } = useTranslation(["Confirm", "Common"]);
 
   const { linkData } = useContext(ConfirmRouteContext);
+
+  const termsConditionsComponent = (
+    <div className="terms-conditions">
+      <Text fontSize={"12px"} textAlign="center">
+        <Trans
+          t={t}
+          ns="Confirm"
+          i18nKey="TermsAndConditions"
+          components={{
+            1: (
+              <ColorTheme
+                tag="a"
+                themeId={ThemeId.Link}
+                href={licenseUrl}
+                target={LinkTarget.blank}
+                fontSize={"12px"}
+              />
+            ),
+            2: (
+              <ColorTheme
+                tag="a"
+                themeId={ThemeId.Link}
+                href={legalTerms}
+                target={LinkTarget.blank}
+                fontSize={"12px"}
+              />
+            ),
+          }}
+        />
+      </Text>
+    </div>
+  );
 
   return (
     <div>
@@ -201,6 +242,8 @@ const RegistrationForm = ({
           tooltipAllowedCharacters={`${t("Common:AllowedCharacters")}: ${ALLOWED_PASSWORD_CHARACTERS}`}
         />
       </FieldContainer>
+
+      {termsConditionsComponent}
 
       <Button
         className="login-button"

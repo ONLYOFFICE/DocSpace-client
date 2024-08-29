@@ -80,6 +80,8 @@ import RegistrationForm from "./_sub-components/RegistrationForm";
 export type CreateUserFormProps = {
   userNameRegex: string;
   passwordHash: TPasswordHash;
+  licenseUrl: string;
+  legalTerms: string;
   defaultPage?: string;
   passwordSettings?: TPasswordSettings;
   capabilities?: TCapabilities;
@@ -98,6 +100,8 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     thirdPartyProviders,
     firstName,
     lastName,
+    licenseUrl,
+    legalTerms,
   } = props;
   const { linkData, roomData } = useContext(ConfirmRouteContext);
   const { t, i18n } = useTranslation(["Confirm", "Common"]);
@@ -510,6 +514,8 @@ const CreateUserForm = (props: CreateUserFormProps) => {
             passwordValid={passwordValid}
             passwordSettings={passwordSettings}
             password={password}
+            legalTerms={legalTerms}
+            licenseUrl={licenseUrl}
             onChangeFname={onChangeFname}
             onChangeSname={onChangeSname}
             onChangePassword={onChangePassword}

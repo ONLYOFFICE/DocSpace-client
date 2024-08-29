@@ -91,6 +91,8 @@ async function Page({ searchParams, params }: LinkInviteProps) {
               passwordSettings={passwordSettings}
               capabilities={capabilities}
               thirdPartyProviders={thirdParty}
+              legalTerms={settings.legalTerms}
+              licenseUrl={settings.licenseUrl}
             />
           </FormWrapper>
         </>

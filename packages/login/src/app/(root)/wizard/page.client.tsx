@@ -78,7 +78,6 @@ import { TCulturesOption, TError, TTimeZoneOption } from "@/types";
 import {
   DEFAULT_SELECT_LANGUAGE,
   DEFAULT_SELECT_TIMEZONE,
-  URL_LICENSE,
 } from "@/utils/constants";
 
 import {
@@ -98,6 +97,7 @@ type WizardFormProps = {
   culture?: string;
   wizardToken?: string;
   passwordHash?: TPasswordHash;
+  licenseUrl?: string;
 };
 
 const emailSettings = new EmailSettings();
@@ -105,6 +105,7 @@ emailSettings.allowDomainPunycode = true;
 
 function WizardForm(props: WizardFormProps) {
   const {
+    licenseUrl,
     passwordSettings,
     machineName,
     isRequiredLicense,
@@ -509,7 +510,7 @@ function WizardForm(props: WizardFormProps) {
           }
           fontSize="13px"
           target={LinkTarget.blank}
-          href={URL_LICENSE}
+          href={licenseUrl}
         >
           {t("LicenseLink")}
         </Link>

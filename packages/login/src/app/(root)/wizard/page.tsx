@@ -72,6 +72,7 @@ async function Page() {
             isRequiredLicense={isRequiredLicense}
             portalCultures={portalCultures}
             portalTimeZones={portalTimeZones}
+            licenseUrl={objectSettings?.licenseUrl}
             culture={objectSettings?.culture}
             wizardToken={objectSettings?.wizardToken}
             passwordHash={objectSettings?.passwordHash}

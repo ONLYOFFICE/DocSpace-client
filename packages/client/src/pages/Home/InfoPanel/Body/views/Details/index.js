@@ -35,6 +35,8 @@ import { Text } from "@docspace/shared/components/text";
 import DetailsHelper from "../../helpers/DetailsHelper.js";
 import { StyledNoThumbnail, StyledThumbnail } from "../../styles/details.js";
 import { StyledProperties, StyledSubtitle } from "../../styles/common.js";
+
+import ItemIcon from "@docspace/client/src/components/ItemIcon";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 const Details = ({
   t,
@@ -118,12 +120,13 @@ const Details = ({
         </StyledThumbnail>
       ) : (
         <StyledNoThumbnail>
-          <RoomIcon
+          <ItemIcon
             color={selection.logo?.color}
             title={selection.title}
             isArchive={isArchive}
             size="96px"
             radius="16px"
+            isRoom={selection.isRoom}
             showDefault={showDefaultRoomIcon}
             imgClassName={`no-thumbnail-img ${selection.isRoom && "is-room"} ${
               selection.isRoom &&
@@ -131,7 +134,8 @@ const Details = ({
               selection.logo?.large &&
               "custom-logo"
             }`}
-            imgSrc={currentIcon}
+            logo={{ medium: currentIcon }}
+            withEditing={true}
           />
         </StyledNoThumbnail>
       )}

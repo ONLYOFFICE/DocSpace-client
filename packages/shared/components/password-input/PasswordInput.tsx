@@ -32,6 +32,7 @@ import React, {
   ChangeEvent,
   FocusEvent,
   MouseEvent,
+  useEffect,
 } from "react";
 import { TooltipRefProps } from "react-tooltip";
 
@@ -109,6 +110,16 @@ const PasswordInput = React.forwardRef(
     }: PasswordInputProps,
     ref,
   ) => {
+    const usePrevious = (value: string) => {
+      const inputValueRef = useRef<string>();
+      useEffect(() => {
+        inputValueRef.current = value;
+      });
+      return inputValueRef.current;
+    };
+
+    const prevInputValue = usePrevious(inputValue ?? "");
+
     const [state, setState] = useState({
       type: inputType,
       value: inputValue,
@@ -275,6 +286,8 @@ const PasswordInput = React.forwardRef(
     const setPasswordSettings = useCallback(
       (newPassword: string) => {
         let newValue;
+
+        if (!state.value) return newPassword;
 
         const oldPassword = state.value ?? "";
         const oldPasswordLength = oldPassword.length;
@@ -464,6 +477,14 @@ const PasswordInput = React.forwardRef(
           .setSelectionRange(caretPosition, caretPosition);
       }
     }, [caretPosition, state.type, state.value, isSimulateType]);
+
+    useEffect(() => {
+      if (inputValue !== prevInputValue) {
+        onChangeAction?.({
+          target: { value: inputValue },
+        } as ChangeEvent<HTMLInputElement>);
+      }
+    }, [inputValue, prevInputValue, onChangeAction]);
 
     React.useImperativeHandle(
       ref,

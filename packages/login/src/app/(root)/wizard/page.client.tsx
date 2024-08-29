@@ -74,7 +74,7 @@ import {
 
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
 
-import { TCulturesOption, TTimeZoneOption } from "@/types";
+import { TCulturesOption, TError, TTimeZoneOption } from "@/types";
 import {
   DEFAULT_SELECT_LANGUAGE,
   DEFAULT_SELECT_TIMEZONE,
@@ -87,6 +87,7 @@ import {
   StyledLink,
   WizardContainer,
 } from "./page.styled";
+import { toastr } from "@docspace/shared/components/toast";
 
 type WizardFormProps = {
   passwordSettings?: TPasswordSettings;
@@ -133,7 +134,6 @@ function WizardForm(props: WizardFormProps) {
   const [agreeTerms, setAgreeTerms] = useState(false);
   const [hasErrorAgree, setHasErrorAgree] = useState(false);
   const [isCreated, setIsCreated] = useState(false);
-  const [error, setError] = useState<unknown>();
 
   const { t, i18n } = useTranslation(["Wizard", "Common"]);
   const theme = useTheme();
@@ -179,8 +179,6 @@ function WizardForm(props: WizardFormProps) {
           icon: culture.icon,
         })),
       );
-
-      console.log("select", select);
 
       if (select.length === 0) {
         setSelectedLanguage(DEFAULT_SELECT_LANGUAGE);
@@ -316,15 +314,24 @@ function WizardForm(props: WizardFormProps) {
 
       window.location.replace("/");
     } catch (error) {
-      setError(error);
+      const knownError = error as TError;
+      let errorMessage: string;
+
+      if (typeof knownError === "object") {
+        errorMessage =
+          knownError?.response?.data?.error?.message ||
+          knownError?.statusText ||
+          knownError?.message ||
+          "";
+      } else {
+        errorMessage = knownError;
+      }
+
+      toastr.error(errorMessage);
+      console.error(errorMessage);
       setIsCreated(false);
     }
   };
-
-  if (error) {
-    console.error(error);
-    throw new Error(t("ErrorInitWizard"));
-  }
 
   return (
     <WizardContainer>

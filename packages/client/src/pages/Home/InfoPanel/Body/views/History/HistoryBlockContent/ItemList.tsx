@@ -30,9 +30,11 @@ import { Trans, withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { IconButton } from "@docspace/shared/components/icon-button";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { ReactSVG } from "react-svg";
 import { TTranslation } from "@docspace/shared/types";
 import { getFileExtension } from "@docspace/shared/utils/common";
+import config from "PACKAGE_FILE";
 import {
   StyledHistoryBlockExpandLink,
   StyledHistoryBlockFile,
@@ -77,6 +79,8 @@ const HistoryItemList = ({
 
   const onExpand = () => setIsExpanded(true);
 
+  const isFolder = targetType === "folder";
+
   const items = [
     feed.data,
     ...feed.related.map((relatedFeeds) => relatedFeeds.data),
@@ -85,13 +89,26 @@ const HistoryItemList = ({
       ...item,
       title: nameWithoutExtension!(item.title || item.newTitle),
       fileExst: getFileExtension(item.title || item.newTitle),
-      isFolder: targetType === "folder",
+      isFolder,
     };
   });
 
   const oldItem = actionType === "rename" && {
     title: nameWithoutExtension!(feed.data.oldTitle),
     fileExst: getFileExtension(feed.data.oldTitle),
+  };
+
+  const handleOpenFile = (item) => {
+    return (
+      !isFolder &&
+      window.open(
+        combineUrl(
+          window.ClientConfig?.proxy?.url,
+          config.homepage,
+          `/doceditor?fileId=${item.id}`,
+        ),
+      )
+    );
   };
 
   return (
@@ -105,7 +122,10 @@ const HistoryItemList = ({
               isFolder={item.isFolder}
               key={`${feed.action.id}_${item.id}`}
             >
-              <div className="item-wrapper">
+              <div
+                className="item-wrapper"
+                onClick={() => handleOpenFile(item)}
+              >
                 <ReactSVG
                   className="icon"
                   src={getInfoPanelItemIcon!(item, 24)}

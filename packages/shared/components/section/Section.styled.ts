@@ -49,7 +49,7 @@ const StyledScrollbar = styled(Scrollbar)<{ $isScrollLocked?: boolean }>`
   ${({ $isScrollLocked }) =>
     $isScrollLocked &&
     css`
-      & .scroll-wrapper > .scroller {
+      &:first-child > .scroll-wrapper > .scroller {
         overflow: hidden !important;
         ${(props) =>
           props.theme.interfaceDirection === "rtl"
@@ -62,7 +62,7 @@ const StyledScrollbar = styled(Scrollbar)<{ $isScrollLocked?: boolean }>`
       }
       ${isMobileOnly &&
       css`
-        & .scroll-wrapper > .scroller {
+        &:first-child > .scroll-wrapper > .scroller {
           ${(props) =>
             props.theme.interfaceDirection === "rtl"
               ? css`

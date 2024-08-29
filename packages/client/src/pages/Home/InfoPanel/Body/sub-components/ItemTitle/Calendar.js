@@ -34,9 +34,17 @@ const StyledCalendar = styled(Calendar)`
       left: 0;
       height: ${heightCalendarMobile + "px"};
     `}
+
+  .track-vertical {
+    height: 100% !important;
+  }
 `;
 
-const CalendarComponent = ({ roomCreationDate, setCalendarDay }) => {
+const CalendarComponent = ({
+  roomCreationDate,
+  setCalendarDay,
+  setIsScrollLocked,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [height, setHeight] = useState(heightCalendar);
@@ -55,6 +63,11 @@ const CalendarComponent = ({ roomCreationDate, setCalendarDay }) => {
       setCalendarDay(null);
     };
   }, []);
+
+  useEffect(() => {
+    if (isOpen && height < heightCalendar) setIsScrollLocked(true);
+    if (!isOpen) setIsScrollLocked(false);
+  }, [isOpen, height, heightCalendar]);
 
   const onChangeHeight = () => {
     const hightTop = calendarButtonRef?.current?.getBoundingClientRect().top;

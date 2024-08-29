@@ -63,6 +63,7 @@ const RoomsItemHeader = ({
   openHistory,
   setShowSearchBlock,
   roomType,
+  setIsScrollLocked,
 }) => {
   const itemTitleRef = useRef();
 
@@ -153,6 +154,7 @@ const RoomsItemHeader = ({
           <CalendarComponent
             setCalendarDay={setCalendarDay}
             roomCreationDate={selection.created}
+            setIsScrollLocked={setIsScrollLocked}
           />
         )}
         <RoomsContextBtn
@@ -181,6 +183,7 @@ export default inject(
       showSearchBlock,
       setShowSearchBlock,
       setCalendarDay,
+      setIsScrollLocked,
     } = infoPanelStore;
     const { externalLinks } = publicRoomStore;
 
@@ -211,6 +214,7 @@ export default inject(
       hasLinks: externalLinks.length,
       setCalendarDay,
       roomType,
+      setIsScrollLocked,
     };
   },
 )(

@@ -394,6 +394,7 @@
   "RoomAdmin": "Skrbnik sobe",
   "RoomList": "Spisek sob",
   "Rooms": "Săli",
+  "RoomSpaceQuotaExceeded": "Kvota prostora v sobi je presežena ({{size}})",
   "SameEmail": "Ne morete uporabljati istega e-mail naslova",
   "SaveButton": "Shrani",
   "SaveHereButton": "Shrani tukaj",

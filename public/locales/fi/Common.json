@@ -394,6 +394,7 @@
   "RoomAdmin": "Huoneen järjestelmänvalvoja",
   "RoomList": "Huonelista",
   "Rooms": "Huoneet",
+  "RoomSpaceQuotaExceeded": "Huonetilakiintiö ylitetty ({{size}})",
   "SameEmail": "Et voi käyttää samaa sähköpostiosoitetta",
   "SaveButton": "Tallenna",
   "SaveHereButton": "Tallenna tähän",

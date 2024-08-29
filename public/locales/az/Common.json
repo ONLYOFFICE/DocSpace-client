@@ -394,6 +394,7 @@
   "RoomAdmin": "Otaq admini",
   "RoomList": "Otaq siyahısı",
   "Rooms": "Otaqlar",
+  "RoomSpaceQuotaExceeded": "Otaq sahəsi kvota limitini keçib ({{size}})",
   "SameEmail": "Eyni elektron poçtu istifadəd edə bilməzsiniz",
   "SaveButton": "Yadda saxlayın",
   "SaveHereButton": "Burada yadda saxlayın",

@@ -19,6 +19,7 @@
   "StorageAndRoomLimitHeader": "Das Limit für Speicherplatz und Anzahl der Räume ist erreicht",
   "StorageAndUserHeader": "Limits für Speicherplatz und Admins/Power-User werden bald überschritten sein.",
   "StorageAndUserTariffLimitHeader": "Das Limit für Speicherplatz und Anzahl der Administratoren/Power-User ist erreicht",
+  "StorageLimitHeader": "Das Speicherplatzlimit ist erreicht: {{currentValue}} / {{maxValue}}",
   "StorageQuotaHeader": "Das Speicherplatzlimit wird bald überschritten: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Sie können unnötige Dateien entfernen oder die Quote in den <1>Speicherverwaltungseinstellungen</1> ändern",
   "UserQuotaHeader": "Die Anzahl der Admins/Power-User wird bald überschritten sein: {{currentValue}} / {{maxValue}}.",

@@ -394,6 +394,7 @@
   "RoomAdmin": "Administrador de Salas",
   "RoomList": "Lista de Salas",
   "Rooms": "Salas",
+  "RoomSpaceQuotaExceeded": "Cota de espaço da sala excedida ({{size}})",
   "SameEmail": "Não pode usar o mesmo e-mail",
   "SaveButton": "Guardar",
   "SaveHereButton": "Guardar aqui",

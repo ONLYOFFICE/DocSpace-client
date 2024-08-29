@@ -394,6 +394,7 @@
   "RoomAdmin": "Kamer beheerder",
   "RoomList": "Kamerlijst",
   "Rooms": "Kamers",
+  "RoomSpaceQuotaExceeded": "Kamer ruimte quota overschreden ({{size}})",
   "SameEmail": "U kunt niet hetzelfde e-mailadres gebruiken",
   "SaveButton": "Opslaan",
   "SaveHereButton": "Hier opslaan",

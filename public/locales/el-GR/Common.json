@@ -394,6 +394,7 @@
   "RoomAdmin": "Διαχειριστής δωματίου",
   "RoomList": "Λίστα δωματίων",
   "Rooms": "Δωμάτια",
+  "RoomSpaceQuotaExceeded": "Υπέρβαση της ποσόστωσης χώρου δωματίου ({{size}})",
   "SameEmail": "Δεν μπορείτε να χρησιμοποιήσετε το ίδιο email",
   "SaveButton": "Αποθήκευση",
   "SaveHereButton": "Αποθήκευση εδώ",

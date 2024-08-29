@@ -30,5 +30,6 @@
   "SignUp": "Registrarse",
   "SuccessDeactivate": "Su cuenta se ha desactivado correctamente. En 10 segundos será redirigido al <1>sitio</1>.",
   "SuccessReactivate": "Su cuenta se ha reactivado correctamente. En 10 segundos será redirigido al <1>portal</1>.",
-  "SuccessRemoved": "Su cuenta ha sido eliminada correctamente. En 10 segundos será redirigido a <1>site</1>."
+  "SuccessRemoved": "Su cuenta ha sido eliminada correctamente. En 10 segundos será redirigido a <1>site</1>.",
+  "TermsAndConditions": "Al continuar, usted entiende y acepta nuestros <1>Términos y condiciones</1> y <2>Declaración de privacidad</2>."
 }

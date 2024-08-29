@@ -60,7 +60,7 @@ export interface PasswordInputProps {
   /** Input value */
   inputValue?: string;
   /** Sets a callback function that is triggered on PasswordInput */
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>, value?: string) => void;
   /** Default event that is triggered when the button is already pressed but not released */
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   /** Event that is triggered when the focused item is lost  */
@@ -135,4 +135,8 @@ export interface PasswordInputProps {
   isFullWidth?: boolean;
   /** Focus the input field on initial render */
   isAutoFocussed?: boolean;
+  /** Indicating the password type simulation. Disables the browser password window */
+  isSimulateType?: boolean;
+  /** Sets simulate input symbol */
+  simulateSymbol: string;
 }

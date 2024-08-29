@@ -74,6 +74,11 @@ export const RegisterContainer = styled.div<{
     .email-container{
       ${(props) => props.registrationForm && "display:none"};
     }
+
+    .terms-conditions{
+      margin: 20px 0;
+    }
+
     @media ${tablet} {
       width: 100%;
     }

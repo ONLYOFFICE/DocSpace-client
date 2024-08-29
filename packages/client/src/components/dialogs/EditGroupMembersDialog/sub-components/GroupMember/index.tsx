@@ -172,7 +172,7 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
 
       {userRole && userRoleOptions && (
         <div className="role-wrapper">
-          {member.canEditAccess && !user.isOwner ? (
+          {member.canEditAccess ? (
             <ComboBox
               className="role-combobox"
               selectedOption={userRole}

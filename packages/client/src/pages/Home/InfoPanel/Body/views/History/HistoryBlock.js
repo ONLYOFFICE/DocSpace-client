@@ -44,7 +44,7 @@ const HistoryBlock = ({ t, feed, isLastEntity }) => {
 
   return (
     <StyledHistoryBlock
-      className={json.ModifiedDate}
+      className={date}
       withBottomDivider={!isLastEntity}
       isUserAction={isUserAction}
     >

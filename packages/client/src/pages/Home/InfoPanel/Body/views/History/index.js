@@ -96,8 +96,8 @@ const History = ({
       if (dateCoincidingWithCalendarDay) return false;
 
       item.feeds.every((feed) => {
-        if (feed.json.ModifiedDate.slice(0, 10) === calendarDay) {
-          dateCoincidingWithCalendarDay = feed.json.ModifiedDate;
+        if (feed.date.slice(0, 10) === calendarDay) {
+          dateCoincidingWithCalendarDay = feed.date;
         }
       });
 
@@ -125,7 +125,7 @@ const History = ({
       if (nearestNewerDate) return false;
 
       item.feeds.every((feed) => {
-        const date = new Date(feed.json.ModifiedDate);
+        const date = new Date(feed.date);
 
         //Stop checking all entries for one day
         if (date > calendarDayModified) return false;
@@ -134,12 +134,11 @@ const History = ({
         if (date < calendarDayModified) {
           //If there are no nearby new entries in the post history, then scroll to the last one
           if (indexItem === 0) {
-            nearestNewerDate = feed.json.ModifiedDate;
+            nearestNewerDate = feed.date;
             return false;
           }
 
-          nearestNewerDate =
-            selectionHistory[indexItem - 1].feeds[0].json.ModifiedDate;
+          nearestNewerDate = selectionHistory[indexItem - 1].feeds[0].date;
         }
       });
 

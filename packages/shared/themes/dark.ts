@@ -3064,6 +3064,7 @@ const Dark: TTheme = {
 
   itemIcon: {
     borderColor: grayDarkStrong,
+    editIconColor: grayDarkMid,
   },
 
   invitePage: {

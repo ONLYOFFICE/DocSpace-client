@@ -74,7 +74,7 @@ const EditWrapper = styled.div`
   justify-content: center;
   width: 24px;
   height: 24px;
-  background-color: #eceef1; // add global color
+  background-color: ${(props) => props.theme.itemIcon.editIconColor};
   border-radius: 50%;
   position: absolute;
   bottom: -6px;
@@ -110,6 +110,9 @@ const ItemIcon = ({
   badgeUrl,
   size,
   withEditing,
+  setRoomLogoCoverDialogVisible,
+  showDefault,
+  imgClassName,
 }) => {
   const isLoadedRoomIcon = !!logo?.medium;
   const showDefaultRoomIcon = !isLoadedRoomIcon && isRoom;
@@ -123,6 +126,10 @@ const ItemIcon = ({
     setEditLogoOpen(false);
   };
 
+  const openCustomizeCover = () => {
+    setRoomLogoCoverDialogVisible(true);
+    closeEditLogo();
+  };
   return (
     <>
       <IconWrapper isRoom={isRoom}>
@@ -131,8 +138,8 @@ const ItemIcon = ({
           title={title}
           size={size}
           isArchive={isArchive}
-          showDefault={showDefaultRoomIcon}
-          imgClassName="react-svg-icon"
+          showDefault={showDefault || showDefaultRoomIcon}
+          imgClassName={imgClassName || "react-svg-icon"}
           imgSrc={isRoom ? logo?.medium : icon}
           badgeUrl={badgeUrl ? badgeUrl : ""}
         />
@@ -160,7 +167,7 @@ const ItemIcon = ({
               <DropDownItem
                 label={`Customize cover`}
                 icon={PenSvgUrl}
-                //     onClick={() => shareTwitter(activeLink[0])}
+                onClick={openCustomizeCover}
               />
             </DropDown>
           </EditWrapper>
@@ -171,8 +178,9 @@ const ItemIcon = ({
   );
 };
 
-export default inject(({ treeFoldersStore }) => {
+export default inject(({ treeFoldersStore, dialogsStore }) => {
   return {
     isPrivacy: treeFoldersStore.isPrivacyFolder,
+    setRoomLogoCoverDialogVisible: dialogsStore.setRoomLogoCoverDialogVisible,
   };
 })(observer(ItemIcon));

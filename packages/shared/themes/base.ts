@@ -3076,6 +3076,7 @@ export const getBaseTheme = () => {
 
     itemIcon: {
       borderColor: grayLightMid,
+      editIconColor: grayLightMid,
     },
 
     invitePage: {

@@ -86,6 +86,15 @@ const StyledSetRoomParams = styled.div`
       flex-direction: column;
       align-items: center;
     }
+
+    .react-svg-icon {
+      width: 64px;
+      height: 64px;
+      @media ${mobile} {
+        width: 96px;
+        height: 96px;
+      }
+    }
     .room-title {
       font-size: 32px;
       font-weight: 700;
@@ -178,7 +187,7 @@ const SetRoomParams = ({
       fileExst={bufferSelection.fileExst}
       isRoom={bufferSelection.isRoom}
       title={bufferSelection.title}
-      logo={bufferSelection.logo.medium}
+      logo={{ medium: bufferSelection.logo?.large }}
       color={bufferSelection.logo?.color}
       size={isMobile() ? "96px" : "64px"}
       withEditing={true}

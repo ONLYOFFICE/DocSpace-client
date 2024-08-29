@@ -62,7 +62,6 @@
   "ConflictResolveSelectAction": "Please select the action:",
   "Connect": "Connect",
   "Content": "Content",
-  "Context": "Context",
   "ContinueButton": "Continue",
   "ContinueWith": "Continue with",
   "Copy": "Copy",
@@ -249,6 +248,7 @@
   "InviteUsers": "Invite users",
   "Kilobyte": "KB",
   "Language": "Language",
+  "LastActivityDate": "Last activity date",
   "LastModifiedDate": "Last modified date",
   "LastName": "Last name",
   "LatePayment": "Late payment",
@@ -542,6 +542,6 @@
   "Yes": "Yes",
   "Yesterday": "Yesterday",
   "You": "You",
-  "Deactivate": "Deactivate",
-  "EnableThirdPartyIntegration": "Please ask a DocSpace owner or administrator to enable the corresponding service in the Integration section of the DocSpace Settings."
+  "RoomSpaceQuotaExceeded": "Room space quota exceeded ({{size}}).",
+  "Deactivate": "Deactivate"
 }

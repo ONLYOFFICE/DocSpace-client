@@ -68,18 +68,11 @@ const ArticleBodyContent = () => {
   }, []);
 
   const onClickItem = (item: TSettingsTreeItem, e: React.MouseEvent) => {
-    const path = item.link;
-    const url = combineUrl(PROXY_BASE_URL, path);
-
-    if (openingNewTab(url, e)) return;
-
     setSelectedKey(item?.key);
 
     if (isMobileOnly || isMobile()) {
       toggleArticleOpen();
     }
-
-    navigate(path);
   };
 
   const catalogItems = () => {
@@ -108,6 +101,7 @@ const ArticleBodyContent = () => {
           onClick={(e) => onClickItem(item, e)}
           folderId={item.id}
           $currentColorScheme={currentColorScheme}
+          linkData={{ path: item.link, state: {} }}
         />
       );
     });

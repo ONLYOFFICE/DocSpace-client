@@ -37,6 +37,7 @@ import {
   ConflictResolveDialogProps,
   TActiveItem,
 } from "./ConflictResolveDialog.types";
+import { Text } from "@docspace/shared/components/text";
 
 const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
   const {
@@ -217,7 +218,7 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
         ns="Common"
         i18nKey="FileActionRequired"
         values={{ fileName: items[0].title }}
-        components={{ 1: <span className="bold" /> }}
+        components={{ 1: <span className="bold truncate" /> }}
       />
     );
 

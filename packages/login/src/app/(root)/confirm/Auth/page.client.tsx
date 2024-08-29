@@ -27,7 +27,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/shared/components/toast";
@@ -45,6 +45,8 @@ import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 const AuthHandler = () => {
   let searchParams = useSearchParams();
   const { t } = useTranslation(["Common"]);
+
+  const [authorized, setAuthorized] = useState(false);
 
   const { linkData } = useContext(ConfirmRouteContext);
   const { email = "", key = "" } = linkData;
@@ -88,6 +90,7 @@ const AuthHandler = () => {
           try {
             new URL(referenceUrl);
             if (isFileHandler && isExternalDownloading) {
+              setAuthorized(true);
               return;
             } else {
               return window.location.replace(referenceUrl);
@@ -126,6 +129,7 @@ const AuthHandler = () => {
   return isFileHandler && isExternalDownloading ? (
     <OperationContainer
       url={referenceUrl}
+      authorized={authorized}
       title={t("DownloadOperationTitle")}
       description={t("DownloadOperationDescription")}
     />

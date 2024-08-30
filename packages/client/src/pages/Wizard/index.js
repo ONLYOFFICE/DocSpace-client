@@ -189,7 +189,7 @@ const Wizard = (props) => {
     if (!wizardToken)
       navigate(combineUrl(window.ClientConfig?.proxy?.url, "/"));
     else fetchData();
-  }, []);
+  }, [wizardToken]);
 
   const onEmailChangeHandler = (result) => {
     console.log(result);

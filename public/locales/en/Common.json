@@ -396,6 +396,7 @@
   "RoomAdmin": "Room admin",
   "RoomList": "Room list",
   "Rooms": "Rooms",
+  "RoomSpaceQuotaExceeded": "Room space quota exceeded ({{size}}).",
   "SameEmail": "You can't use the same email address",
   "SaveButton": "Save",
   "SaveHereButton": "Save here",
@@ -515,6 +516,5 @@
   "Website": "Website",
   "Yes": "Yes",
   "Yesterday": "Yesterday",
-  "You": "You",
-  "RoomSpaceQuotaExceeded": "Room space quota exceeded ({{size}})."
+  "You": "You"
 }

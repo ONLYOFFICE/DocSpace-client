@@ -393,6 +393,7 @@
   "RoomAdmin": "Quản trị viên phòng",
   "RoomList": "Danh sách phòng",
   "Rooms": "Phòng",
+  "RoomSpaceQuotaExceeded": "Đã vượt quá hạn mức không gian phòng ({{size}})",
   "SameEmail": "Bạn không thể sử dụng cùng một email",
   "SaveButton": "Lưu",
   "SaveHereButton": "Lưu ở đây",

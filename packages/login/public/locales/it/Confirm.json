@@ -30,5 +30,6 @@
   "SignUp": "Iscriviti",
   "SuccessDeactivate": "Il tuo account è stato disattivato con successo. In 10 secondi verrai reindirizzato al <1>sito</1>.",
   "SuccessReactivate": "Il tuo account è stato riattivato con successo. In 10 secondi verrai reindirizzato al <1>portale</1>.",
-  "SuccessRemoved": "Il tuo account è stato rimosso con successo. In 10 secondi verrai reindirizzato al <1>sito</1>."
+  "SuccessRemoved": "Il tuo account è stato rimosso con successo. In 10 secondi verrai reindirizzato al <1>sito</1>.",
+  "TermsAndConditions": "Continuando, comprendi e accetti i nostri <1>Termini e condizioni</1> e l'<2>Informativa sulla privacy</2>."
 }

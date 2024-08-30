@@ -393,6 +393,7 @@
   "RoomAdmin": "Administrator pokoju",
   "RoomList": "Lista pokoi",
   "Rooms": "Pokoje",
+  "RoomSpaceQuotaExceeded": "Przekroczono limit pamięci pokoju ({{size}})",
   "SameEmail": "Nie można użyć tego samego adresu e-mail",
   "SaveButton": "Zapisz",
   "SaveHereButton": "Zapisz tutaj",

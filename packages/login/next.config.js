@@ -109,6 +109,12 @@ module.exports = {
     // Modify the file loader rule to ignore *.svg, since we have it handled now.
     fileLoaderRule.exclude = /\.svg$/i;
 
+    if (config?.output?.filename)
+      config.output.filename = config.output.filename?.replace(
+        "[chunkhash]",
+        `[contenthash]`,
+      );
+
     return config;
   },
   ...nextConfig,

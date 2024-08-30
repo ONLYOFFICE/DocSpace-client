@@ -393,6 +393,7 @@
   "RoomAdmin": "Oda yöneticisi",
   "RoomList": "Oda listesi",
   "Rooms": "Odalar",
+  "RoomSpaceQuotaExceeded": "Oda alanı kotası aşıldı ({{size}})",
   "SameEmail": "Aynı e-postayı kullanamazsınız",
   "SaveButton": "Kaydet",
   "SaveHereButton": "Buraya kaydet",

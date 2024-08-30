@@ -393,6 +393,7 @@
   "RoomAdmin": "Administrátor miestnosti",
   "RoomList": "Zoznam miestností",
   "Rooms": "Miestností",
+  "RoomSpaceQuotaExceeded": "Kvóta priestoru v miestnosti bola prekročená ({{size}})",
   "SameEmail": "Nemôžete použiť ten istý e-mail",
   "SaveButton": "Uložiť",
   "SaveHereButton": "Uložiť tu",

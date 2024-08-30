@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { redirect } from "next/navigation";
+
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
@@ -43,6 +45,10 @@ async function Page() {
   const settings = await getSettings();
 
   const objectSettings = typeof settings === "string" ? undefined : settings;
+
+  if (!objectSettings || !objectSettings.wizardToken) {
+    redirect("/");
+  }
 
   const [
     passwordSettings,

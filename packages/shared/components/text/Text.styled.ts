@@ -85,6 +85,8 @@ export const StyledAutoDirSpan = styled.span`
   pointer-events: none;
   width: inherit;
   max-width: inherit;
+  -webkit-line-clamp: inherit;
+  -webkit-box-orient: inherit;
 `;
 
 export default StyledText;

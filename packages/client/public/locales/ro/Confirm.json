@@ -30,5 +30,6 @@
   "SignUp": "Conectare",
   "SuccessDeactivate": "Contul dvs a fost dezactivat cu succes. Veţi fi redirecţionat în 10 secunde către <1>site-ul</1>.",
   "SuccessReactivate": "Contul dvs a fost reactivat cu succes. Veți fi redirecționat către <1>portal</1> după 10 secunde.",
-  "SuccessRemoved": "Contul dvs a fost eliminat cu succes. Veţi fi redirecţionat în 10 secunde către <1>site-ul</1>."
+  "SuccessRemoved": "Contul dvs a fost eliminat cu succes. Veţi fi redirecţionat în 10 secunde către <1>site-ul</1>.",
+  "TermsAndConditions": "Dacă continuați, acceptați că sunteți de acord cu <1>Termenii si conditiile de utilizare</1> și <2>Politica de confidentialitate</2> a companiei."
 }

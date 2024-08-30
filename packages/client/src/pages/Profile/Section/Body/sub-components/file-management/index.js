@@ -64,6 +64,9 @@ const FileManagement = ({
 
   openEditorInSameTab,
   setOpenEditorInSameTab,
+
+  displayFileExtension,
+  setDisplayFileExtension,
 }) => {
   const { t, ready } = useTranslation(["FilesSettings", "Common"]);
 
@@ -89,6 +92,10 @@ const FileManagement = ({
   const onChangeKeepNewFileName = React.useCallback(() => {
     setKeepNewFileName(!keepNewFileName);
   }, [setKeepNewFileName, keepNewFileName]);
+
+  const onChangeDisplayFileExtension = React.useCallback(() => {
+    setDisplayFileExtension(!displayFileExtension);
+  }, [setDisplayFileExtension, displayFileExtension]);
 
   const onChangeOpenEditorInSameTab = React.useCallback(() => {
     setOpenEditorInSameTab(!openEditorInSameTab);
@@ -174,6 +181,16 @@ const FileManagement = ({
             </Text>
           </div>
         )}
+        {!isVisitor && (
+          <div className="toggle-btn-wrapper">
+            <ToggleButton
+              className="display-file-extension toggle-btn"
+              onChange={onChangeDisplayFileExtension}
+              isChecked={displayFileExtension}
+            />
+            <Text>{t("DisplayFileExtension")}</Text>
+          </div>
+        )}
       </Box>
 
       {/* <Box className="settings-section">
@@ -256,6 +273,9 @@ export default inject(({ userStore, filesSettingsStore, treeFoldersStore }) => {
 
     openEditorInSameTab,
     setOpenEditorInSameTab,
+
+    displayFileExtension,
+    setDisplayFileExtension,
   } = filesSettingsStore;
 
   const { myFolderId, commonFolderId } = treeFoldersStore;
@@ -290,5 +310,8 @@ export default inject(({ userStore, filesSettingsStore, treeFoldersStore }) => {
 
     openEditorInSameTab,
     setOpenEditorInSameTab,
+
+    displayFileExtension,
+    setDisplayFileExtension,
   };
 })(observer(FileManagement));

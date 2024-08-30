@@ -92,6 +92,7 @@ export interface ModalDialogProps {
   embedded?: boolean;
   withForm?: boolean;
   withoutPadding?: boolean;
+  hideContent?: boolean;
   blur?: number;
 }
 
@@ -162,5 +163,6 @@ export type ModalSubComponentsProps = AsideHeaderProps & {
   embedded?: boolean;
   withForm?: boolean;
   withoutPadding?: boolean;
+  hideContent?: boolean;
   blur?: number;
 };

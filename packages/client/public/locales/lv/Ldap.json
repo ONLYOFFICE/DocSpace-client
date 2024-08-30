@@ -36,6 +36,7 @@
   "LdapPortNumber": "Porta numurs:",
   "LdapPortNumberTooltip": "Ievadiet sava LDAP servera/Active Directory porta numuru.",
   "LdapQuota": "Lietotāju kvota",
+  "LdapQuotaInfo": "Lai varētu izmantot šo atribūtu, sadaļā <0>Krātuves pārvaldības iestatījumi</0> iespējojiet lietotāja kvotu",
   "LdapSecondName": "Uzvārds",
   "LdapSendWelcomeLetter": "Sūtīt sveiciena vēstuli",
   "LdapSendWelcomeLetterTooltip": "Ja atzīmēts, visi jaunie lietotāji saņems sveiciena vēstuli. Pieejams tikai tad, ja pasta atribūts ir kartēts LDAP.",
@@ -66,6 +67,7 @@
   "LdapUserDNTooltip": "Ievadiet atšķirīgo nosaukumu direktorijā, kurā ir lietotāji, kurus vēlaties pievienot.",
   "LdapUserFilter": "Lietotāju filtrs",
   "LdapUserFilterTooltip": "Izmantojiet meklēšanas LDAP filtru, lai atlasītu importējamos lietotājus.",
+  "LdapUserQuotaTooltip": "Lai iestatītu lietotāja krātuves kvotu, pievienojiet atribūtu LDAP direktorijā (piemēram, UsersQuotaLimit) un ievadiet šim atribūtam veselu skaitļa vērtību. Tas parādīs kvotas vērtību baitos. Šeit norādiet tikai atribūta nosaukumu. Šis atribūts tiks lietots tikai pirmās iestatīšanas laikā, un vēlāk to varēs mainīt manuāli sadaļā Konti.",
   "LdapUsersType": "Lietotāju veids",
   "LdapUsersTypeInfo": "Lietotāji var piekļūt tikai tām telpām, uz kurām viņus uzaicina administratori, un nevar izveidot savas telpas, mapes vai failus. Atlasiet citu veidu zemāk, lai nodrošinātu vairāk atļauju. Pretējā gadījumā veidu varat mainīt manuāli sadaļā Konti.",
   "LdapUserTypeTooltip": "Visi lietotāji tiks pievienoti {{productName}} ar atlasīto tipu."

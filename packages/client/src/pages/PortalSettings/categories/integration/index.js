@@ -70,14 +70,14 @@ const IntegrationWrapper = (props) => {
       content: <LDAP />,
     },
     {
-      id: "third-party-services",
-      name: t("Translations:ThirdPartyTitle"),
-      content: <ThirdParty />,
-    },
-    {
       id: "sso",
       name: t("SingleSignOn"),
       content: <SSO />,
+    },
+    {
+      id: "third-party-services",
+      name: t("Translations:ThirdPartyTitle"),
+      content: <ThirdParty />,
     },
     {
       id: "smtp-settings",
@@ -103,7 +103,7 @@ const IntegrationWrapper = (props) => {
       </Box>
     );
 
-    data.splice(1, 0, {
+    data.splice(2, 0, {
       id: "plugins",
       name: pluginLabel,
       content: <PluginPage />,

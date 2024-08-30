@@ -62,7 +62,6 @@
   "ConflictResolveSelectAction": "Please select the action:",
   "Connect": "Connect",
   "Content": "Content",
-  "Context": "Context",
   "ContinueButton": "Continue",
   "ContinueWith": "Continue with",
   "Copy": "Copy",
@@ -249,6 +248,7 @@
   "InviteUsers": "Invite users",
   "Kilobyte": "KB",
   "Language": "Language",
+  "LastActivityDate": "Last activity date",
   "LastModifiedDate": "Last modified date",
   "LastName": "Last name",
   "LatePayment": "Late payment",
@@ -541,5 +541,6 @@
   "Website": "Website",
   "Yes": "Yes",
   "Yesterday": "Yesterday",
-  "You": "You"
+  "You": "You",
+  "RoomSpaceQuotaExceeded": "Room space quota exceeded ({{size}})."
 }

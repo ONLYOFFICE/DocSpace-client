@@ -30,12 +30,13 @@ import FileSvgUrl from "PUBLIC_DIR/images/icons/32/file.svg?url";
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import moment from "moment-timezone";
+import { ReactSVG } from "react-svg";
 
 import { Text } from "@docspace/shared/components/text";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 
 import StyledCertificatesTable from "../styled-containers/StyledCertificatesTable";
-import { ReactSVG } from "react-svg";
 
 const CertificatesTable = (props) => {
   const { t } = useTranslation(["SingleSignOn", "Common"]);
@@ -50,7 +51,6 @@ const CertificatesTable = (props) => {
   } = props;
 
   const renderRow = (certificate, index) => {
-    console.log(prefix, index);
     const onEdit = () => {
       prefix === "sp"
         ? setSpCertificate(certificate, index, true)
@@ -86,6 +86,8 @@ const CertificatesTable = (props) => {
       return `${new Date(date).toLocaleDateString()}`;
     };
 
+    const isExpired = moment().isAfter(moment(certificate.expiredDate));
+
     return (
       <div key={`certificate-${index}`} className="row">
         <ReactSVG src={FileSvgUrl} />
@@ -97,7 +99,7 @@ const CertificatesTable = (props) => {
           </div>
           <div className="column-row">
             <Text
-              className="description"
+              className={isExpired ? "error-description" : "description"}
               fontSize="12px"
               fontWeight={600}
               lineHeight="16px"

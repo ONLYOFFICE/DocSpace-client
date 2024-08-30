@@ -1,4 +1,5 @@
 {
+  "PDFform": "PDF obrazac",
   "PDFFormEditDialogDescription": "Da li želite da pređete na režim za uređivanje obrasca? Imajte na umu da obrazac više neće biti dostupan za popunjavanje i da ćete morati ponovo da kliknete na dugme Započni popunjavanje nakon uređivanja da biste ga popunili.",
   "PDFFormEditDialogTitle": "Uređivanje Formulara",
   "PDFFormIsReadyToast": "PDF formular  <1>{{filename}}</1> je spreman da bude popunjen.",

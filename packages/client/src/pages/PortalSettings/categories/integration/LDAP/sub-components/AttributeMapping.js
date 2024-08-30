@@ -73,6 +73,8 @@ const AttributeMapping = (props) => {
     isUIDisabled,
 
     isDefaultUsersQuotaSet,
+
+    currentColorScheme,
   } = props;
 
   const { t } = useTranslation("Ldap");
@@ -232,7 +234,7 @@ const AttributeMapping = (props) => {
                 components={[
                   <Link
                     type="action"
-                    color={globalColors.link}
+                    color={currentColorScheme.main.accent}
                     onClick={goToStarageManagement}
                   />,
                 ]}
@@ -284,7 +286,7 @@ const AttributeMapping = (props) => {
   );
 };
 
-export default inject(({ ldapStore, currentQuotaStore }) => {
+export default inject(({ ldapStore, currentQuotaStore, settingsStore }) => {
   const {
     setMail,
     setFirstName,
@@ -310,6 +312,8 @@ export default inject(({ ldapStore, currentQuotaStore }) => {
 
   const { isDefaultUsersQuotaSet } = currentQuotaStore;
 
+  const { currentColorScheme } = settingsStore;
+
   return {
     setFirstName,
     setSecondName,
@@ -330,5 +334,6 @@ export default inject(({ ldapStore, currentQuotaStore }) => {
     isUIDisabled,
 
     isDefaultUsersQuotaSet,
+    currentColorScheme,
   };
 })(observer(AttributeMapping));

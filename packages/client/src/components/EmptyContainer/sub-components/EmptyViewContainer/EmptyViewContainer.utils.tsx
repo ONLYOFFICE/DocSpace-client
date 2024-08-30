@@ -171,6 +171,7 @@ export const getRootDesctiption = (
   t: TTranslation,
   access: AccessType,
   rootFolderType: Nullable<FolderType>,
+  isPublicRoom: boolean,
 ) => {
   return match([rootFolderType, access])
     .with([FolderType.Rooms, ShareAccessRights.None], () =>
@@ -179,6 +180,13 @@ export const getRootDesctiption = (
     .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>
       t("EmptyView:EmptyRootRoomUserDescription"),
     )
+    .with([FolderType.Rooms, P.when(() => isPublicRoom)], () => (
+      <>
+        <span>{t("Files:RoomEmptyAtTheMoment")}</span>
+        <br />
+        <span>{t("Files:FilesWillAppearHere")}</span>
+      </>
+    ))
     .with([FolderType.USER, ShareAccessRights.None], () =>
       t("EmptyView:DefaultFolderDescription"),
     )
@@ -267,10 +275,15 @@ export const getRootTitle = (
   rootFolderType: Nullable<FolderType>,
 ) => {
   return match([rootFolderType, access])
-    .with([FolderType.Rooms, ShareAccessRights.None], () =>
-      t("Files:EmptyRootRoomHeader", {
-        productName: t("Common:ProductName"),
-      }),
+    .with(
+      [
+        FolderType.Rooms,
+        P.union(ShareAccessRights.None, ShareAccessRights.ReadOnly),
+      ],
+      () =>
+        t("Files:EmptyRootRoomHeader", {
+          productName: t("Common:ProductName"),
+        }),
     )
     .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>
       t("EmptyView:EmptyRootRoomUserTitle"),
@@ -401,12 +414,17 @@ export const getRootIcom = (
     .with([FolderType.Rooms, ShareAccessRights.None], () =>
       isBaseTheme ? <EmptyRoomsRootLightIcon /> : <EmptyRoomsRootDarkIcon />,
     )
-    .with([FolderType.Rooms, ShareAccessRights.DenyAccess], () =>
-      isBaseTheme ? (
-        <EmptyRoomsRootUserLightIcon />
-      ) : (
-        <EmptyRoomsRootUserDarkIcon />
-      ),
+    .with(
+      [
+        FolderType.Rooms,
+        P.union(ShareAccessRights.DenyAccess, ShareAccessRights.ReadOnly),
+      ],
+      () =>
+        isBaseTheme ? (
+          <EmptyRoomsRootUserLightIcon />
+        ) : (
+          <EmptyRoomsRootUserDarkIcon />
+        ),
     )
     .with([FolderType.USER, ShareAccessRights.None], () =>
       isBaseTheme ? <DefaultFolderLight /> : <DefaultFolderDark />,

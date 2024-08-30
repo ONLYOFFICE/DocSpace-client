@@ -12,7 +12,7 @@ export type EmptyViewLinkType = {
 export type EmptyViewItemType = {
   key: React.Key;
   title: string;
-  description: string;
+  description: React.ReactNode;
   icon: React.ReactElement;
   onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   disabled?: boolean;

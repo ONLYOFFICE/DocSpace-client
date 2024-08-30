@@ -211,7 +211,9 @@ const RegistrationForm = ({
         isVertical={true}
         labelVisible={false}
         hasError={isPasswordErrorShow && !passwordValid}
-        errorMessage={t("Common:IncorrectPassword")}
+        errorMessage={
+          password ? t("Common:IncorrectPassword") : t("Common:RequiredField")
+        }
       >
         <PasswordInput
           simpleView={false}

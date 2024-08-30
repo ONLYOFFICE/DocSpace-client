@@ -393,6 +393,7 @@
   "RoomAdmin": "Telpas administrators",
   "RoomList": "Telpu saraksts",
   "Rooms": "Telpas",
+  "RoomSpaceQuotaExceeded": "Pārsniegta telpas vietas kvota ({{size}})",
   "SameEmail": "Jūs nevarat izmantot to pašu e-pastu",
   "SaveButton": "Saglabāt",
   "SaveHereButton": "Saglabāt šeit",

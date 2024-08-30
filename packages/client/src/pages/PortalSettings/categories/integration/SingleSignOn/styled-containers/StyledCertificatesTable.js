@@ -73,6 +73,10 @@ const StyledCertificatesTable = styled.div`
           color: ${(props) =>
             props.theme.client.settings.integration.sso.textColor};
         }
+        .error-description {
+          color: ${(props) =>
+            props.theme.client.settings.integration.sso.errorColor};
+        }
       }
     }
 

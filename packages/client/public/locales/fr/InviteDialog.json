@@ -2,7 +2,7 @@
   "AddManually": "Ajouter manuellement",
   "AddManuallyDescriptionAccounts": "Invitez personnellement de nouveaux utilisateurs à {{productName}} par e-mail",
   "AddManuallyDescriptionRoom": "Ajoutez des utilisateurs existants de {{productName}} à la salle en utilisant les noms ou invitez de nouveaux utilisateurs personnellement par e-mail",
-  "EmailErrorMessage": "L’adresse e-mail n’est pas valide. Vous pouvez modifier l’e-mail en cliquant dessus.",
+  "EmailErrorMessage": "L’adresse e-mail n’est pas valide. Vous pouvez modifier l’e-mail en double-cliquant dessus.",
   "GroupMaxAvailableRoleWarning": "Les groupes peuvent être ajoutés à une salle avec le rôle {{roleName}} comme maximum. Cependant, vous pouvez modifier le rôle des utilisateurs individuels du groupe une fois que celui-ci a été ajouté avec succès.",
   "InvitationLanguage": "Langue de l'invitation",
   "InviteAccountSearchPlaceholder": "Inviter des personnes par e-mail",

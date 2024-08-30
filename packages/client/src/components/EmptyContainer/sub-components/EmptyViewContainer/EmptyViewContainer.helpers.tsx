@@ -10,6 +10,7 @@ import {
   ShareAccessRights,
 } from "@docspace/shared/enums";
 
+import UploadPDFFormIcon from "PUBLIC_DIR/images/emptyview/upload.pdf.form.svg";
 import CreateNewFormIcon from "PUBLIC_DIR/images/emptyview/create.new.form.svg";
 import CreateNewSpreadsheetIcon from "PUBLIC_DIR/images/emptyview/create.new.spreadsheet.svg";
 import CreateNewPresentation from "PUBLIC_DIR/images/emptyview/create.new.presentation.svg";
@@ -232,6 +233,15 @@ export const getOptions = (
     disabled: false,
   };
 
+  const createForm = {
+    title: t("EmptyView:CreateForm"),
+    description: t("EmptyView:CreateFormDescription"),
+    icon: <UploadPDFFormIcon />,
+    key: "create-form-option",
+    onClick: () => actions.onCreate("pdf"),
+    disabled: false,
+  };
+
   const createRoom = {
     title: t("EmptyView:CreateRoomTitleOption"),
     description: t("EmptyView:CreateRoomDescriotionOption"),
@@ -316,6 +326,7 @@ export const getOptions = (
         createDoc,
         createSpreadsheet,
         createPresentation,
+        createForm,
       ])
       .with([FolderType.Recent, P._], () => ({
         ...actions.onGoToPersonal(),
@@ -360,6 +371,7 @@ export const getOptions = (
         createDoc,
         createSpreadsheet,
         createPresentation,
+        createForm,
       ])
       .otherwise(() => []);
   }

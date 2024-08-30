@@ -27,11 +27,10 @@
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { observer, inject } from "mobx-react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Aside } from "@docspace/shared/components/aside";
-import { Heading } from "@docspace/shared/components/heading";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import AllSessionsBlock from "./AllSessionsBlock";
 import LastSessionBlock from "./LastSessionBlock";
@@ -41,26 +40,8 @@ import { UserSessionsPanelProps } from "./UserSessionsPanel.types";
 const StyledSessionsPanel = styled.div`
   .user-sessions-panel {
     .scroll-body {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              padding-left: 0px !important;
-            `
-          : css`
-              padding-right: 0px !important;
-            `}
+      padding-inline-end: 0px !important;
     }
-  }
-`;
-
-const StyledHeaderContent = styled.div`
-  padding: 0px 16px;
-  border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
-
-  .user-sessions-panel-heading {
-    font-weight: 700;
-    font-size: 21px;
-    margin: 12px 0px;
   }
 `;
 
@@ -86,13 +67,9 @@ export const UserSessionsPanel = (props: UserSessionsPanelProps) => {
         className="user-sessions-panel"
         visible={visible}
         onClose={onClose}
+        withoutHeader={false}
+        header={t("Profile:ActiveSessions")}
       >
-        <StyledHeaderContent>
-          <Heading className="user-sessions-panel-heading">
-            {t("Profile:ActiveSessions")}
-          </Heading>
-        </StyledHeaderContent>
-
         <StyledScrollbar ref={scrollRef}>
           <LastSessionBlock t={t} />
           <AllSessionsBlock t={t} />

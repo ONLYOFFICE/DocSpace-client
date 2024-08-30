@@ -40,6 +40,7 @@ export const useEmptyView = (
     isRootEmptyPage,
     isArchiveFolderRoot,
     rootFolderType,
+    isPublicRoom,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
@@ -56,6 +57,7 @@ export const useEmptyView = (
       isArchiveFolderRoot,
       isRootEmptyPage,
       rootFolderType,
+      isPublicRoom,
     );
     const title = getTitle(
       type,
@@ -91,6 +93,7 @@ export const useEmptyView = (
     isRootEmptyPage,
     isArchiveFolderRoot,
     rootFolderType,
+    isPublicRoom,
   ]);
 
   return emptyViewOptions;

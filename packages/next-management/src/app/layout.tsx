@@ -35,6 +35,7 @@ import { getSettings, getUser, getColorTheme } from "@/lib/actions";
 import Providers from "@/providers";
 
 import { LayoutWrapper } from "@/components/layout";
+import { ManagementDialogs } from "@/dialogs";
 
 import "@/styles/globals.scss";
 
@@ -68,6 +69,7 @@ export default async function RootLayout({
       <body>
         <StyledComponentsRegistry>
           <Providers contextData={{ user, settings, systemTheme, colorTheme }}>
+            <ManagementDialogs />
             <LayoutWrapper>{children}</LayoutWrapper>
           </Providers>
         </StyledComponentsRegistry>

@@ -1,10 +1,11 @@
 import { cookies } from "next/headers";
 
 import { GreetingLoginContainer } from "@/components/GreetingContainer";
-import TenantList from "@/components/TenantList";
 import { getSettings } from "@/utils/actions";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { LANGUAGE } from "@docspace/shared/constants";
+
+import TenantList from "./page.client";
 
 export default async function Page({
   searchParams,

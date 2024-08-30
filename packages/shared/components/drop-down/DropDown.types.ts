@@ -101,6 +101,7 @@ export interface VirtualListProps {
   >;
   enableKeyboardEvents: boolean;
   getItemSize: (index: number) => number;
+  isDropdownReady: boolean;
 }
 
 export interface RowProps {

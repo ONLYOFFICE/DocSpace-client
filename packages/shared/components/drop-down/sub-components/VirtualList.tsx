@@ -50,14 +50,16 @@ function VirtualList({
   isNoFixedHeightOptions,
   getItemSize,
   enableKeyboardEvents,
+  isDropdownReady,
 }: VirtualListProps) {
   const ref = useRef<VariableSizeList>(null);
+  const focusTrapRef = useRef<HTMLDivElement>(null);
 
   const activeIndex = useMemo(() => {
     let foundIndex = -1;
     React.Children.forEach(cleanChildren, (child, index) => {
       const props = child && React.isValidElement(child) && child.props;
-      if (props?.disabled) foundIndex = index;
+      if (props?.isSelected) foundIndex = index;
     });
     return foundIndex;
   }, [cleanChildren]);
@@ -67,9 +69,10 @@ function VirtualList({
 
   const onKeyDown = useCallback(
     (event: KeyboardEvent) => {
-      if (!ref.current || !isOpen) return;
+      if (!focusTrapRef.current || !isOpen) return;
 
       event.preventDefault();
+      event.stopPropagation();
 
       let index = currentIndexRef.current;
 
@@ -96,26 +99,27 @@ function VirtualList({
 
       setCurrentIndex(index);
       currentIndexRef.current = index;
-      ref.current.scrollToItem(index, "smart");
+      // ref.current.scrollToItem(index, "smart");
     },
     [isOpen, children],
   );
 
   useEffect(() => {
-    if (isOpen && maxHeight && enableKeyboardEvents) {
-      window.addEventListener("keydown", onKeyDown);
+    if (isOpen && isDropdownReady && enableKeyboardEvents) {
+      focusTrapRef.current?.focus();
+      focusTrapRef.current?.addEventListener("keydown", onKeyDown);
     }
 
     const refVar = ref.current;
 
     return () => {
-      window.removeEventListener("keydown", onKeyDown);
+      focusTrapRef.current?.removeEventListener("keydown", onKeyDown);
 
       if (itemCount > 0 && refVar) {
         setCurrentIndex(activeIndex);
         currentIndexRef.current = activeIndex;
 
-        refVar.scrollToItem(activeIndex, "smart");
+        // refVar.scrollToItem(activeIndex, "smart");
       }
     };
   }, [
@@ -126,6 +130,7 @@ function VirtualList({
     children,
     onKeyDown,
     itemCount,
+    isDropdownReady,
   ]);
 
   const handleMouseMove = useCallback((index: number) => {
@@ -135,28 +140,62 @@ function VirtualList({
     currentIndexRef.current = index;
   }, []);
 
-  if (!maxHeight) return cleanChildren || children;
+  const items = cleanChildren || children;
 
-  return isNoFixedHeightOptions ? (
-    <Scrollbar style={{ height: maxHeight }}>{cleanChildren}</Scrollbar>
-  ) : (
-    <VariableSizeList
-      ref={ref}
-      width={width}
-      itemCount={itemCount}
-      itemSize={getItemSize}
-      height={calculatedHeight}
-      itemData={{
-        children: cleanChildren,
-        theme,
-        activeIndex,
-        activedescendant: currentIndex,
-        handleMouseMove,
-      }}
-      outerElementType={Scrollbar}
+  if (!maxHeight)
+    return (
+      <div
+        className="focus-trap"
+        style={{ outline: "none" }}
+        ref={focusTrapRef}
+        tabIndex={0}
+      >
+        {items?.map((item, index) => (
+          <Row
+            key={index}
+            data={{
+              children: cleanChildren,
+              theme,
+              activeIndex,
+              activedescendant: currentIndex,
+              handleMouseMove,
+            }}
+            index={index}
+            style={{}}
+          />
+        ))}
+      </div>
+    );
+
+  return (
+    <div
+      className="focus-trap"
+      style={{ outline: "none" }}
+      ref={focusTrapRef}
+      tabIndex={0}
     >
-      {Row}
-    </VariableSizeList>
+      {isNoFixedHeightOptions ? (
+        <Scrollbar style={{ height: maxHeight }}>{cleanChildren}</Scrollbar>
+      ) : (
+        <VariableSizeList
+          ref={ref}
+          width={width}
+          itemCount={itemCount}
+          itemSize={getItemSize}
+          height={calculatedHeight}
+          itemData={{
+            children: cleanChildren,
+            theme,
+            activeIndex,
+            activedescendant: currentIndex,
+            handleMouseMove,
+          }}
+          outerElementType={Scrollbar}
+        >
+          {Row}
+        </VariableSizeList>
+      )}
+    </div>
   );
 }
 

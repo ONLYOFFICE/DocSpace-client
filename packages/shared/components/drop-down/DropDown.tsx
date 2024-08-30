@@ -433,6 +433,7 @@ const DropDown = ({
             getItemSize={getItemSize}
             isOpen={open || false}
             enableKeyboardEvents={enableKeyboardEvents || false}
+            isDropdownReady={state.isDropdownReady}
           >
             {children}
           </VirtualList>

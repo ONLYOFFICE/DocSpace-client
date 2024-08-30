@@ -2034,7 +2034,7 @@ const Dark: TTheme = {
         linkColor: white,
         textColor: grayDark,
       },
-      fileExstColor: "#a3a9ae",
+      fileExstColor: gray,
 
       row: {
         checkboxChecked: `linear-gradient(to right, ${black} 24px, ${grayDarkStrong} 24px)`,

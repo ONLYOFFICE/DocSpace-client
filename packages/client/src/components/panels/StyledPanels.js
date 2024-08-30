@@ -25,10 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { Link } from "@docspace/shared/components/link";
 import { desktop, mobile, tablet } from "@docspace/shared/utils";
-import { isMobile } from "react-device-detect";
 import { Base, globalColors } from "@docspace/shared/themes";
 
 const PanelStyles = css`
@@ -83,45 +81,6 @@ const StyledAsidePanel = styled.div`
 `;
 
 StyledAsidePanel.defaultProps = { theme: Base };
-
-const StyledVersionHistoryPanel = styled.div`
-  ${PanelStyles}
-
-  .version-history-modal-dialog {
-    transition: unset;
-    transform: translateX(${(props) => (props.visible ? "0" : "480px")});
-    width: 480px;
-    max-width: 480px;
-  }
-
-  .version-history-panel-header {
-    height: 53px;
-    margin-inline-start: 0;
-    .version-history-panel-heading {
-      font-weight: 700;
-      margin-bottom: 13px;
-      margin-top: 12px;
-    }
-  }
-
-  .version-history-panel-body {
-    padding-bottom: ${(props) => (props.isLoading ? "0px" : null)};
-    margin-inline-start: 16px;
-
-    height: calc(100% - 53px);
-    box-sizing: border-box;
-
-    .version-comment-wrapper {
-      margin-inline-start: 85px;
-    }
-
-    .version_edit-comment {
-      padding-inline-start: 7px;
-    }
-  }
-`;
-
-StyledVersionHistoryPanel.defaultProps = { theme: Base };
 
 const StyledEmbeddingPanel = styled.div`
   ${PanelStyles}
@@ -179,6 +138,9 @@ const StyledContent = styled.div`
 StyledContent.defaultProps = { theme: Base };
 
 const StyledBody = styled.div`
+  height: 100%;
+  width: 100%;
+
   &.files-operations-body {
     padding-block: 0;
     padding-inline: 16px 0;
@@ -513,7 +475,6 @@ const StyledUploadBody = styled.div`
 export {
   StyledAsidePanel,
   StyledEmbeddingPanel,
-  StyledVersionHistoryPanel,
   StyledContent,
   StyledBody,
   StyledFooter,

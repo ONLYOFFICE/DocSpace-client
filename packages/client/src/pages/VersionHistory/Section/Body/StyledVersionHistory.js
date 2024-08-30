@@ -238,6 +238,7 @@ const StyledVersionRow = styled(Row)`
   }
 
   .version-comment-wrapper {
+    margin-inline-start: 85px;
     white-space: normal !important;
 
     .version_text {

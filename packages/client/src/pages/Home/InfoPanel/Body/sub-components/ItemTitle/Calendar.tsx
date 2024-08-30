@@ -17,12 +17,14 @@ const StyledCalendarComponent = styled.div`
   }
 `;
 
-const StyledCalendar = styled(Calendar)`
+const StyledCalendar = styled(Calendar)<{
+  height: number;
+}>`
   position: absolute;
   top: 20px;
   right: -30px;
 
-  height: ${(props) => props.height + "px"};
+  height: ${(props) => `${props.height}px`};
 
   ${(props) =>
     props.isMobile &&
@@ -32,7 +34,7 @@ const StyledCalendar = styled(Calendar)`
       top: auto;
       right: auto;
       left: 0;
-      height: ${heightCalendarMobile + "px"};
+      height: ${`${heightCalendarMobile}px`};
     `}
 
   .track-vertical {
@@ -40,17 +42,54 @@ const StyledCalendar = styled(Calendar)`
   }
 `;
 
+interface CalendarProps {
+  roomCreationDate: string;
+  setCalendarDay: (value: null | string) => void;
+  setIsScrollLocked: (value: boolean) => void;
+  locale: string;
+}
+
 const CalendarComponent = ({
   roomCreationDate,
   setCalendarDay,
   setIsScrollLocked,
-}) => {
+  locale,
+}: CalendarProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState<moment.Moment>();
+
   const [height, setHeight] = useState(heightCalendar);
 
-  const calendarRef = useRef();
-  const calendarButtonRef = useRef();
+  const calendarRef = useRef<HTMLDivElement | null>(null);
+  const calendarButtonRef = useRef<HTMLDivElement>(null);
+
+  const handleClick = (e: MouseEvent) => {
+    if (!calendarButtonRef?.current || !calendarRef?.current) return;
+
+    const calendarButtonElem = calendarButtonRef.current;
+    const calendarElem = calendarRef.current as HTMLElement;
+
+    if (
+      !calendarButtonElem.contains(e.target as Node) &&
+      !calendarElem.contains(e.target as Node)
+    )
+      setIsOpen(false);
+  };
+
+  const onChangeHeight = () => {
+    if (!calendarButtonRef?.current) return;
+
+    const calendarButtonElem = calendarButtonRef.current as HTMLElement;
+
+    const hightTop = calendarButtonElem.getBoundingClientRect().top;
+    const hightIconCalendar = 20;
+    const hightWindow = document.documentElement.clientHeight;
+    const hightScroll = hightWindow - hightIconCalendar - hightTop;
+
+    if (hightScroll !== heightCalendar && hightScroll > heightCalendar) {
+      setHeight(heightCalendar);
+    } else setHeight(hightScroll);
+  };
 
   useEffect(() => {
     document.addEventListener("click", handleClick, { capture: true });
@@ -62,35 +101,20 @@ const CalendarComponent = ({
       window.removeEventListener("resize", onChangeHeight);
       setCalendarDay(null);
     };
-  }, []);
+  }, [setCalendarDay]);
 
   useEffect(() => {
     if (isOpen && height < heightCalendar) setIsScrollLocked(true);
     if (!isOpen) setIsScrollLocked(false);
-  }, [isOpen, height, heightCalendar]);
-
-  const onChangeHeight = () => {
-    const hightTop = calendarButtonRef?.current?.getBoundingClientRect().top;
-    const hightIconCalendar = 20;
-    const hightWindow = document.documentElement.clientHeight;
-    const hightScroll = hightWindow - hightIconCalendar - hightTop;
-
-    if (hightScroll !== heightCalendar && hightScroll > heightCalendar) {
-      setHeight(heightCalendar);
-    } else setHeight(hightScroll);
-  };
-
-  const handleClick = (e) => {
-    !calendarButtonRef?.current?.contains(e.target) &&
-      !calendarRef?.current?.contains(e.target) &&
-      setIsOpen(false);
-  };
+  }, [isOpen, height, setIsScrollLocked]);
 
   const toggleCalendar = () => setIsOpen((open) => !open);
 
-  const onDateSet = (date) => {
+  const onDateSet = (date: moment.Moment) => {
+    if (!date) return;
     const formattedDate = moment(date.format("YYYY-MM-DD"));
     setSelectedDate(date);
+    // eslint-disable-next-line no-underscore-dangle
     setCalendarDay(formattedDate._i);
     setIsOpen(false);
   };
@@ -112,12 +136,13 @@ const CalendarComponent = ({
         <StyledCalendar
           height={height}
           setSelectedDate={onDateSet}
-          selectedDate={selectedDate}
+          selectedDate={selectedDate ?? moment()}
           minDate={new Date(formattedRoomCreationDate)}
           maxDate={new Date()}
           forwardedRef={calendarRef}
           isMobile={isMobile()}
           isScroll={!isMobile()}
+          locale={locale}
         />
       )}
     </StyledCalendarComponent>

@@ -64,6 +64,7 @@ const RoomsItemHeader = ({
   setShowSearchBlock,
   roomType,
   setIsScrollLocked,
+  i18n,
 }) => {
   const itemTitleRef = useRef();
 
@@ -155,6 +156,7 @@ const RoomsItemHeader = ({
             setCalendarDay={setCalendarDay}
             roomCreationDate={selection.created}
             setIsScrollLocked={setIsScrollLocked}
+            locale={i18n.language}
           />
         )}
         <RoomsContextBtn

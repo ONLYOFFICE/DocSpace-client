@@ -40,7 +40,7 @@ import {
   VersionHistoryPanel,
   ChangeOwnerPanel,
   NewFilesPanel,
-  HotkeyPanel,
+  HotkeysPanel,
   InvitePanel,
   EditLinkPanel,
   EmbeddingPanel,
@@ -284,7 +284,7 @@ const Panels = (props) => {
       />
     ),
 
-    hotkeyPanelVisible && <HotkeyPanel key="hotkey-panel" />,
+    hotkeyPanelVisible && <HotkeysPanel key="hotkey-panel" />,
     invitePanelVisible && <InvitePanel key="invite-panel" />,
     convertPasswordDialogVisible && (
       <ConvertPasswordDialog key="convert-password-dialog" />

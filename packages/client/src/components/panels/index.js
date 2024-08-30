@@ -30,7 +30,7 @@ import NewFilesPanel from "./NewFilesPanel";
 import VersionHistoryPanel from "./VersionHistoryPanel";
 import ChangeOwnerPanel from "./ChangeOwnerPanel";
 import UploadPanel from "./UploadPanel";
-import HotkeyPanel from "./HotkeysPanel";
+import HotkeysPanel from "./HotkeysPanel";
 import InvitePanel from "./InvitePanel";
 import EditLinkPanel from "./EditLinkPanel";
 
@@ -41,7 +41,7 @@ export {
   VersionHistoryPanel,
   ChangeOwnerPanel,
   UploadPanel,
-  HotkeyPanel,
+  HotkeysPanel,
   InvitePanel,
   EditLinkPanel,
 };

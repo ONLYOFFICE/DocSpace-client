@@ -73,6 +73,7 @@ class FilesSettingsStore {
   chunkUploadSize = 1024 * 1023; // 1024 * 1023; //~0.999mb
   maxUploadThreadCount = 15;
   maxUploadFilesCount = 5;
+  displayFileExtension = null;
 
   settingsIsLoaded = false;
 
@@ -216,6 +217,13 @@ class FilesSettingsStore {
     api.files
       .changeKeepNewFileName(data)
       .then((res) => this.setFilesSetting("keepNewFileName", res))
+      .catch((e) => toastr.error(e));
+  };
+
+  setDisplayFileExtension = (data) => {
+    api.files
+      .enableDisplayFileExtension(data)
+      .then((res) => this.setFilesSetting("displayFileExtension", res))
       .catch((e) => toastr.error(e));
   };
 

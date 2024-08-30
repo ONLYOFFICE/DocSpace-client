@@ -69,6 +69,7 @@ const Modal = ({
   embedded,
   withForm,
   blur,
+  withoutPadding,
 
   ...rest
 }: ModalSubComponentsProps) => {
@@ -201,6 +202,7 @@ const Modal = ({
                     isScrollLocked={isScrollLocked}
                     hasFooter={!!footer}
                     currentDisplayType={currentDisplayType}
+                    withoutPadding={withoutPadding}
                     {...bodyProps}
                     {...iOSActions}
                     // embedded={embedded}

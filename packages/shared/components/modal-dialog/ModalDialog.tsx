@@ -87,6 +87,7 @@ const ModalDialog = ({
   withBodyScroll = false,
   withFooterBorder = false,
   containerVisible = false,
+  withoutPadding = false,
 
   ...rest
 }: ModalDialogProps) => {
@@ -175,6 +176,7 @@ const ModalDialog = ({
           isCloseable={isCloseable && !embedded}
           embedded={embedded}
           blur={blur}
+          withoutPadding={withoutPadding}
           {...rest}
         />
       }

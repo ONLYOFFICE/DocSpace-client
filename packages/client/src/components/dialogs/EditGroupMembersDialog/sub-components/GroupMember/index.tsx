@@ -172,7 +172,7 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
 
       {userRole && userRoleOptions && (
         <div className="role-wrapper">
-          {member.canEditAccess && !user.isOwner ? (
+          {member.canEditAccess ? (
             <ComboBox
               className="role-combobox"
               selectedOption={userRole}
@@ -190,9 +190,14 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
               isLoading={isLoading}
             />
           ) : (
-            <div className="disabled-role-combobox" title={t("Common:Role")}>
+            <Text
+              className="disabled-role-combobox"
+              title={t("Common:Role")}
+              fontWeight={600}
+              noSelect
+            >
               {userRole.label}
-            </div>
+            </Text>
           )}
         </div>
       )}

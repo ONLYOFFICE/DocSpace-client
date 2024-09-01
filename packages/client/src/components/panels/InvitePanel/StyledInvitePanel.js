@@ -366,7 +366,12 @@ const StyledDropDown = styled(DropDown)`
       gap: 4px;
 
       p {
-        color: #4781d1;
+        color: ${(props) => props.theme.currentColorScheme.main.accent};
+        ${(props) =>
+          props.isRequestRunning &&
+          css`
+            opacity: 0.65;
+          `}
       }
 
       svg {
@@ -374,7 +379,12 @@ const StyledDropDown = styled(DropDown)`
           theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"};
 
         path {
-          fill: #4781d1;
+          fill: ${(props) => props.theme.currentColorScheme.main.accent};
+          ${(props) =>
+            props.isRequestRunning &&
+            css`
+              opacity: 0.65;
+            `}
         }
       }
     }

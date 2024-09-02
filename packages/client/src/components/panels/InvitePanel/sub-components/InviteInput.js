@@ -116,7 +116,6 @@ const InviteInput = ({
   const [searchRequestRunning, setSearchRequestRunning] = useState(false);
 
   const searchRef = useRef();
-  // const searchRequestRunning = useRef(false);
   const prevDropDownContent = useRef(null);
 
   useEffect(() => {
@@ -288,6 +287,8 @@ const InviteInput = ({
       isBlocked = regex.test(part) ? false : isBlocked;
     });
 
+    console.log("set here", isBlocked);
+
     setIsAddEmailPanelBlocked(isBlocked);
 
     setSearchRequestRunning(false);
@@ -413,11 +414,7 @@ const InviteInput = ({
   };
 
   const addEmail = () => {
-    if (!inputValue.trim()) return;
-
-    if (searchRequestRunning.current) {
-      return setTimeout(addEmail, 100);
-    }
+    if (!inputValue.trim() || searchRequestRunning) return;
 
     const items = toUserItems(inputValue);
 
@@ -530,7 +527,7 @@ const InviteInput = ({
   const dropDownContent = useMemo(() => {
     const partsLength = getParts(inputValue).length;
 
-    if (searchRequestRunning.current && prevDropDownContent.current) {
+    if (searchRequestRunning && prevDropDownContent.current) {
       return prevDropDownContent.current;
     }
 

@@ -480,7 +480,8 @@ export const enum ParseErrorTypes {
 }
 
 export const enum ButtonKeys {
-  enter = "enter",
+  enter = "Enter",
+  numpadEnter = "NumpadEnter",
   esc = "Escape",
   tab = "Tab",
 }

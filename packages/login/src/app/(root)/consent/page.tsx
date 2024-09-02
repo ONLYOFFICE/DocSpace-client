@@ -24,10 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { IClientProps } from "@docspace/shared/utils/oauth/types";
+import { cookies } from "next/headers";
 
-import Consent from "@/components/Consent";
-import { getOAuthClient, getScopeList, getUser } from "@/utils/actions";
+import { IClientProps } from "@docspace/shared/utils/oauth/types";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { LANGUAGE } from "@docspace/shared/constants";
+
+import {
+  getOAuthClient,
+  getScopeList,
+  getSettings,
+  getUser,
+} from "@/utils/actions";
+import { GreetingLoginContainer } from "@/components/GreetingContainer";
+
+import Consent from "./page.client";
 
 async function Page({
   searchParams,
@@ -35,17 +46,45 @@ async function Page({
   searchParams: { [key: string]: string };
 }) {
   const clientId = searchParams.clientId ?? searchParams.client_id;
-  const [client, scopes, user] = await Promise.all([
+  const [client, scopes, user, settings] = await Promise.all([
     getOAuthClient(clientId),
     getScopeList(),
     getUser(),
+    getSettings(),
   ]);
 
   if (!client || (client && !("clientId" in client)) || !scopes || !user)
     return "";
 
+  const isRegisterContainerVisible =
+    typeof settings === "string" ? undefined : settings?.enabledJoin;
+
+  const settingsCulture =
+    typeof settings === "string" ? undefined : settings?.culture;
+
+  const culture = cookies().get(LANGUAGE)?.value ?? settingsCulture;
+
   return (
-    <Consent client={client as IClientProps} scopes={scopes} user={user} />
+    <>
+      {settings && typeof settings !== "string" && (
+        <ColorTheme
+          themeId={ThemeId.LinkForgotPassword}
+          isRegisterContainerVisible={isRegisterContainerVisible}
+        >
+          <>
+            <GreetingLoginContainer
+              greetingSettings={settings?.greetingSettings}
+              culture={culture}
+            />
+            <Consent
+              client={client as IClientProps}
+              scopes={scopes}
+              user={user}
+            />
+          </>
+        </ColorTheme>
+      )}
+    </>
   );
 }
 

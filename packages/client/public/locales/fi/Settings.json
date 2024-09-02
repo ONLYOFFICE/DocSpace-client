@@ -89,7 +89,6 @@
   "DataImportComplete": "Tietojen tuonti suoritettu",
   "DataImportDescription": "Tuo {{organizationName}} {{productName}}:n tiedot kolmannen osapuolen palvelusta Tietojen tuonti mahdollistaa tietojen siirron esim. käyttäjien, heidän henkilökohtaiset ja jaetut asiakirjat.",
   "DataImportProcessing": "Tietojen tuonnin prosessointi",
-  "Deactivate": "Poista käytöstä",
   "DeactivateOrDeletePortal": "Ota tila pois käytöstä tai poista se.",
   "DefaultSettings": "Oletusasetukset",
   "DefineQuotaPerRoom": "Määritä kiintiö per huone",

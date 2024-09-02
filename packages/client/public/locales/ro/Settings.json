@@ -89,7 +89,6 @@
   "DataImportComplete": "Import date finalizat",
   "DataImportDescription": "Importul datelor din serviciu terță parte în spațiu {{organizationName}} {{productName}}. Importul datelor permite de a transfera datele, precum toți utilizatori, documentele lor personale și partajate.",
   "DataImportProcessing": "Procesare import date",
-  "Deactivate": "Dezactivare",
   "DeactivateOrDeletePortal": "Dezactivarea sau ștergerea spațiului.",
   "DefaultSettings": "Setări implicite",
   "DefineQuotaPerRoom": "Stabilire cotă per sală",

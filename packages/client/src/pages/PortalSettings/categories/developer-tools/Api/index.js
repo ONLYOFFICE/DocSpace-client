@@ -32,7 +32,7 @@ import { inject, observer } from "mobx-react";
 import { mobile } from "@docspace/shared/utils";
 import { Button } from "@docspace/shared/components/button";
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
-import ConfirmWrapper from "../../../../Confirm/ConfirmWrapper";
+import ConfirmWrapper from "SRC_DIR/components/ConfirmWrapper";
 
 import ApiSvgUrl from "PUBLIC_DIR/images/settings.api.svg?url";
 import ApiDarkSvgUrl from "PUBLIC_DIR/images/settings.api.dark.svg?url";

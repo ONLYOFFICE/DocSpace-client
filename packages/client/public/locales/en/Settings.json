@@ -91,7 +91,6 @@
   "DataImportComplete": "Data import complete",
   "DataImportDescription": "Import data from a third party service to {{organizationName}} {{productName}}. Data import allows transferring data such as all users, their personal and shared documents.",
   "DataImportProcessing": "Processing of data import",
-  "Deactivate": "Deactivate",
   "DeactivateOrDeletePortal": "Deactivate or delete space.",
   "DefaultSettings": "Default settings",
   "DefineQuotaPerRoom": "Define quota per room",

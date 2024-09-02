@@ -89,7 +89,6 @@
   "DataImportComplete": "データのインポート完了",
   "DataImportDescription": "サードパーティサービスから{{organizationName}} {{productName}}にデータをインポートします。データのインポートは、すべてのユーザー、その個人、共有ドキュメントなどのデータを転送することができます。",
   "DataImportProcessing": "データのインポート処理中",
-  "Deactivate": "停止する",
   "DeactivateOrDeletePortal": "スペースを無効にする、または削除する。",
   "DefaultSettings": "デフォルトの設定",
   "DefineQuotaPerRoom": "ルームごとの容量制限を定義する ",

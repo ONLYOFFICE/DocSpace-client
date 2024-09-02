@@ -89,7 +89,6 @@
   "DataImportComplete": "Uvoz podatkov zaključen",
   "DataImportDescription": "Uvozite podatke iz storitve tretjih oseb v {{organizationName}} {{productName}}. Uvoz podatkov omogoča prenos podatkov, kot so vsi uporabniki, njihovi osebni in skupni dokumenti.",
   "DataImportProcessing": "Obdelava uvoza podatkov",
-  "Deactivate": "Deaktiviraj",
   "DeactivateOrDeletePortal": "Deaktivirajte ali izbrišite prostor.",
   "DefaultSettings": "Privzete nastavitve",
   "DefineQuotaPerRoom": "Določitev kvote na sobo",

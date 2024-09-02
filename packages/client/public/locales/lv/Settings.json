@@ -89,7 +89,6 @@
   "DataImportComplete": "Datu importēšana ir pabeigta",
   "DataImportDescription": "Importējiet datus no trešās puses pakalpojuma {{organizationName}} {{productName}}. Datu importēšana ļauj pārsūtīt datus, piemēram, visus lietotājus, viņu personīgos un kopīgotos dokumentus.",
   "DataImportProcessing": "Datu importēšanas apstrāde",
-  "Deactivate": "Deaktivēt",
   "DeactivateOrDeletePortal": "Deaktivizēt vai dzēst portālu.",
   "DefaultSettings": "Noklusējuma uzstādījumi",
   "DefineQuotaPerRoom": "Definējiet kvotu katrai telpai",

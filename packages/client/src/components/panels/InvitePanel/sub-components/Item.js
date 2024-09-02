@@ -198,8 +198,6 @@ const Item = ({
   const saveEdit = async (e) => {
     if (searchRequestRunning) return;
 
-    console.log(isSharedUser);
-
     if (isSharedUser) {
       return toastr.warning(t("UsersAlreadyAdded"));
     }

@@ -27,6 +27,7 @@
 import React, { useMemo } from "react";
 
 import { Text } from "../text";
+import EditIcon from "./sub-components/EditIcon";
 
 import { IconButton } from "../icon-button";
 import { classNames } from "../../utils";
@@ -48,6 +49,9 @@ const RoomIcon = ({
   badgeUrl,
   onBadgeClick,
   className,
+  withEditing,
+  hoverSrc,
+  model,
 }: RoomIconProps) => {
   const [correctImage, setCorrectImage] = React.useState(true);
 
@@ -77,18 +81,26 @@ const RoomIcon = ({
       wrongImage={!correctImage}
       className={className}
       data-testid="room-icon"
+      withHover={!!hoverSrc}
     >
       {showDefault || !correctImage ? (
         <>
-          <div className="room-background" />
+          <div className="room-background hover-class" />
           <Text className="room-title">{roomTitle}</Text>
         </>
       ) : (
         <img
-          className={classNames([imgClassName, "not-selectable"])}
+          className={classNames([
+            imgClassName,
+            "hover-class",
+            "not-selectable",
+          ])}
           src={imgSrc}
           alt="room icon"
         />
+      )}
+      {hoverSrc && (
+        <img className="room-icon_hover" src={hoverSrc} alt="room icon" />
       )}
 
       {badgeUrl && (
@@ -102,6 +114,7 @@ const RoomIcon = ({
           />
         </div>
       )}
+      {withEditing && <EditIcon model={model} />}
     </StyledIcon>
   );
 };

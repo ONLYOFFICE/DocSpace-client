@@ -31,13 +31,8 @@ import styled, { css } from "styled-components";
 import { Base } from "@docspace/shared/themes";
 import { NoUserSelect } from "@docspace/shared/utils";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { DropDown } from "@docspace/shared/components/drop-down";
-import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 
 import EditPenSvgUrl from "PUBLIC_DIR/images/icons/12/pen-edit.react.svg?url";
-import PenSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
-import UploadPenSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 
 const IconWrapper = styled.div`
   ${(props) =>
@@ -68,25 +63,6 @@ const IconWrapper = styled.div`
   }
 `;
 
-const EditWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  background-color: ${(props) => props.theme.itemIcon.editIconColor};
-  border-radius: 50%;
-  position: absolute;
-  bottom: -6px;
-  right: -6px;
-
-  .open-edit-logo-icon {
-    &:hover {
-      cursor: pointer;
-    }
-  }
-`;
-
 IconWrapper.defaultProps = { theme: Base };
 
 const EncryptedFileIcon = styled.div`
@@ -110,26 +86,13 @@ const ItemIcon = ({
   badgeUrl,
   size,
   withEditing,
-  setRoomLogoCoverDialogVisible,
   showDefault,
   imgClassName,
+  model,
 }) => {
   const isLoadedRoomIcon = !!logo?.medium;
   const showDefaultRoomIcon = !isLoadedRoomIcon && isRoom;
-  const [editLogoOpen, setEditLogoOpen] = useState(false);
 
-  const toggleEditLogo = () => {
-    setEditLogoOpen(!editLogoOpen);
-  };
-
-  const closeEditLogo = () => {
-    setEditLogoOpen(false);
-  };
-
-  const openCustomizeCover = () => {
-    setRoomLogoCoverDialogVisible(true);
-    closeEditLogo();
-  };
   return (
     <>
       <IconWrapper isRoom={isRoom}>
@@ -142,45 +105,15 @@ const ItemIcon = ({
           imgClassName={imgClassName || "react-svg-icon"}
           imgSrc={isRoom ? logo?.medium : icon}
           badgeUrl={badgeUrl ? badgeUrl : ""}
+          withEditing={withEditing}
+          model={model}
         />
-        {withEditing && (
-          <EditWrapper>
-            <IconButton
-              className="open-edit-logo-icon"
-              size={12}
-              iconName={EditPenSvgUrl}
-              onClick={toggleEditLogo}
-              isFill
-            />
-            <DropDown
-              open={editLogoOpen}
-              clickOutsideAction={closeEditLogo}
-              withBackdrop={false}
-              isDefaultMode={false}
-              fixedDirection={true}
-            >
-              <DropDownItem
-                label={`Upload picture`}
-                icon={UploadPenSvgUrl}
-                //   onClick={() => shareEmail(activeLink[0])}
-              />
-              <DropDownItem
-                label={`Customize cover`}
-                icon={PenSvgUrl}
-                onClick={openCustomizeCover}
-              />
-            </DropDown>
-          </EditWrapper>
-        )}
       </IconWrapper>
       {isPrivacy && fileExst && <EncryptedFileIcon isEdit={false} />}
     </>
   );
 };
 
-export default inject(({ treeFoldersStore, dialogsStore }) => {
-  return {
-    isPrivacy: treeFoldersStore.isPrivacyFolder,
-    setRoomLogoCoverDialogVisible: dialogsStore.setRoomLogoCoverDialogVisible,
-  };
+export default inject(({ treeFoldersStore }) => {
+  return { isPrivacy: treeFoldersStore.isPrivacyFolder };
 })(observer(ItemIcon));

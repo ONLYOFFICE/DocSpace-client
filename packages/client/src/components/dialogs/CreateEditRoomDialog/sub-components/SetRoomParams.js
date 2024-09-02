@@ -44,6 +44,9 @@ import { ImageEditor } from "@docspace/shared/components/image-editor";
 import PreviewTile from "@docspace/shared/components/image-editor/PreviewTile";
 import { Text } from "@docspace/shared/components/text";
 
+import PenSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
+import UploadPenSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
+
 import ItemIcon from "@docspace/client/src/components/ItemIcon";
 
 import ChangeRoomOwner from "./ChangeRoomOwner";
@@ -131,6 +134,7 @@ const SetRoomParams = ({
   disabledChangeRoomType,
   maxImageUploadSize,
   bufferSelection,
+  setRoomLogoCoverDialogVisible,
 }) => {
   const [previewIcon, setPreviewIcon] = useState(null);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
@@ -180,6 +184,18 @@ const SetRoomParams = ({
       ...{ createAsNewFolder: !createNewFolderIsChecked },
     });
   };
+  const model = [
+    {
+      label: "UploadPicture",
+      icon: UploadPenSvgUrl,
+      onClick: () => {},
+    },
+    {
+      label: "CustomizeCover",
+      icon: PenSvgUrl,
+      onClick: () => setRoomLogoCoverDialogVisible(true),
+    },
+  ];
 
   const element = (
     <ItemIcon
@@ -191,6 +207,7 @@ const SetRoomParams = ({
       color={bufferSelection.logo?.color}
       size={isMobile() ? "96px" : "64px"}
       withEditing={true}
+      model={model}
     />
   );
 
@@ -324,7 +341,8 @@ export default inject(
 
     const { bufferSelection } = filesStore;
 
-    const { setChangeRoomOwnerIsVisible } = dialogsStore;
+    const { setChangeRoomOwnerIsVisible, setRoomLogoCoverDialogVisible } =
+      dialogsStore;
     const { folderFormValidation, maxImageUploadSize } = settingsStore;
 
     return {
@@ -333,6 +351,7 @@ export default inject(
       setChangeRoomOwnerIsVisible,
       maxImageUploadSize,
       bufferSelection,
+      setRoomLogoCoverDialogVisible,
     };
   },
 )(

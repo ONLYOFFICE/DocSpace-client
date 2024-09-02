@@ -1,12 +1,13 @@
 import styled, { css } from "styled-components";
 import { Base } from "../../themes";
 
-export const StyledIcon = styled.div<{
+const StyledIcon = styled.div<{
   size: string;
   radius: string;
   isArchive?: boolean;
   color?: string;
   wrongImage: boolean;
+  withHover: boolean;
 }>`
   display: flex;
   justify-content: center;
@@ -35,6 +36,9 @@ export const StyledIcon = styled.div<{
     font-size: 14px;
     font-weight: 700;
     line-height: 16px;
+    transition: all 0.2s ease;
+    opacity: 1;
+    transform: translateY(0);
     color: ${(props) =>
       props.wrongImage && props.theme.isBase ? "#333333" : "#ffffff"};
     position: relative;
@@ -67,6 +71,56 @@ export const StyledIcon = styled.div<{
       }
     }
   }
+
+  .room-icon_hover {
+    position: absolute;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.2s ease;
+  }
+
+  ${(props) =>
+    props.withHover &&
+    css`
+      cursor: pointer;
+
+      &:hover {
+        .hover-class {
+          filter: brightness(80%);
+        }
+
+        .room-icon_hover {
+          opacity: 1;
+          transform: translateY(0px);
+        }
+
+        .room-title {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+      }
+    `}
 `;
 
 StyledIcon.defaultProps = { theme: Base };
+
+const EditWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background-color: ${(props) => props.theme.itemIcon.editIconColor};
+  border-radius: 50%;
+  position: absolute;
+  bottom: -6px;
+  right: -6px;
+
+  .open-edit-logo-icon {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+`;
+
+export { StyledIcon, EditWrapper };

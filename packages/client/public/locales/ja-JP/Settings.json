@@ -175,6 +175,7 @@
   "NewColorScheme": "新しいカラースキーム",
   "NextStep": "次のステップ",
   "NoEmail": "NO EMAIL",
+  "NoEventsHereYet": "まだイベントはありません",
   "NoUsersInBackup": "ユーザが見つかりません。再試行するか、他のバックアップファイルをアップロードしてください。",
   "NumberOfActiveEmployees": "アクティブな社員数：{{count}}",
   "NumberOfAttempts": "試行回数",

@@ -13,28 +13,32 @@ import { OAuthProps } from "./OAuth.types";
 
 import InfoDialog from "./sub-components/InfoDialog";
 import PreviewDialog from "./sub-components/PreviewDialog";
-import OAuthLoader from "./sub-components/List/Loader";
-import DisableDialog from "./sub-components/DisableDialog";
-import DeleteDialog from "./sub-components/DeleteDialog";
-import OAuthEmptyScreen from "./sub-components/EmptyScreen";
-import List from "./sub-components/List";
 import GenerateDeveloperTokenDialog from "./sub-components/GenerateDeveloperTokenDialog";
 import RevokeDeveloperTokenDialog from "./sub-components/RevokeDeveloperTokenDialog";
+import DisableDialog from "./sub-components/DisableDialog";
+import DeleteDialog from "./sub-components/DeleteDialog";
+import OAuthLoader from "./sub-components/List/Loader";
+import OAuthEmptyScreen from "./sub-components/EmptyScreen";
+import List from "./sub-components/List";
 
 const MIN_LOADER_TIME = 500;
 
 const OAuth = ({
+  isEmptyClientList,
   clientList,
   viewAs,
-  isEmptyClientList,
+
   setViewAs,
   fetchClients,
   fetchScopes,
+
   currentDeviceType,
-  infoDialogVisible,
-  previewDialogVisible,
+
   isInit,
   setIsInit,
+
+  infoDialogVisible,
+  previewDialogVisible,
   disableDialogVisible,
   deleteDialogVisible,
   generateDeveloperTokenDialogVisible,

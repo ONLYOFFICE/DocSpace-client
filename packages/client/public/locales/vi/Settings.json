@@ -89,7 +89,6 @@
   "DataImportComplete": "Nhập dữ liệu đã hoàn thành",
   "DataImportDescription": "Nhập dữ liệu từ dịch vụ của bên thứ ba vào {{organizationName}} {{productName}}. Việc nhập dữ liệu cho phép chuyển dữ liệu như tất cả người dùng, tài liệu cá nhân và tài liệu dùng chung của họ.",
   "DataImportProcessing": "Đang xử lý nhập dữ liệu",
-  "Deactivate": "Vô hiệu hóa",
   "DeactivateOrDeletePortal": "Vô hiệu hóa hoặc xóa không gian.",
   "DefaultSettings": "Cài đặt mặc định",
   "DefineQuotaPerRoom": "Xác định hạn mức cho mỗi phòng",

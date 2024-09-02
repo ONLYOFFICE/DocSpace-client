@@ -89,7 +89,6 @@
   "DataImportComplete": "Импорт данных завершен",
   "DataImportDescription": "Импорт данных из стороннего сервиса в {{organizationName}} {{productName}}. Импорт данных позволяет передавать такие данные, как все пользователи, их личные и общие документы.",
   "DataImportProcessing": "Обработка импорта данных",
-  "Deactivate": "Деактивировать",
   "DeactivateOrDeletePortal": "Деактивировать или удалить портал.",
   "DefaultSettings": "По умолчанию",
   "DefineQuotaPerRoom": "Определить квоту на комнату",

@@ -89,7 +89,6 @@
   "DataImportComplete": "Import dat dokončen",
   "DataImportDescription": "Import dat ze služby třetí strany do {{organizationName}} {{productName}}. Import dat umožňuje přenést data, jako jsou všichni uživatelé, jejich osobní a sdílené dokumenty.",
   "DataImportProcessing": "Zpracování importu dat",
-  "Deactivate": "Deaktivace",
   "DeactivateOrDeletePortal": "Deaktivovat nebo odstranit prostor.",
   "DefaultSettings": "Výchozí nastavení",
   "DefineQuotaPerRoom": "Definice kvóty na pokoj",

@@ -54,26 +54,28 @@ import {
   StyledTooltipItem,
 } from "./PasswordInput.styled";
 import {
+  PasswordInputHandle,
   PasswordInputProps,
   TPasswordSettings,
   TPasswordValidation,
+  TState,
 } from "./PasswordInput.types";
 import { globalColors } from "../../themes";
 
-const PasswordInput = React.forwardRef(
+const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
   (
     {
       inputType = InputType.password,
       inputValue,
       clipActionResource,
       emailInputName,
+      passwordSettings,
       onBlur,
       onKeyDown,
       onValidateInput,
       onChange,
       isDisabled,
       simpleView,
-      passwordSettings,
       generatorSpecial,
 
       clipCopiedResource,
@@ -104,10 +106,10 @@ const PasswordInput = React.forwardRef(
       tooltipOffsetTop,
       isAutoFocussed,
       tooltipAllowedCharacters,
-    }: PasswordInputProps,
+    },
     ref,
   ) => {
-    const [state, setState] = useState({
+    const [state, setState] = useState<TState>({
       type: inputType,
       value: inputValue,
       copyLabel: clipActionResource,

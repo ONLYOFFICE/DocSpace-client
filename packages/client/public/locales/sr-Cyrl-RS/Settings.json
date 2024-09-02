@@ -89,7 +89,6 @@
   "DataImportComplete": "Увоз података завршен",
   "DataImportDescription": "Увезите податке из услуге трец́е стране у {{organizationName}} {{productName}}. Увоз података омогуц́ава пренос података као што су сви корисници, њихови лични и заједнички документи.",
   "DataImportProcessing": "Обрада увоза података",
-  "Deactivate": "Деактивирај",
   "DeactivateOrDeletePortal": "Деактивирај или обриши простор.",
   "DefaultSettings": "Подразумевана подешавања",
   "DefineQuotaPerRoom": "Дефиниши квоту по соби",

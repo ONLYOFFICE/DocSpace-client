@@ -89,7 +89,6 @@
   "DataImportComplete": "Datenimport abgeschlossen",
   "DataImportDescription": "Importieren Sie Daten von einem Drittanbieterdienst in {{organizationName}} {{productName}}. Der Datenimport ermöglicht die Übertragung von Daten wie allen Benutzern, ihren persönlichen und freigegebenen Dokumenten.",
   "DataImportProcessing": "Verarbeitung des Datenimports",
-  "Deactivate": "Deaktivieren",
   "DeactivateOrDeletePortal": "Deaktivieren oder entfernen Sie den Bereich.",
   "DefaultSettings": "Standardeinstellungen",
   "DefineQuotaPerRoom": "Quote pro Raum definieren",

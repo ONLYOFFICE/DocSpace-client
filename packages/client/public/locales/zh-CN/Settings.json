@@ -89,7 +89,6 @@
   "DataImportComplete": "数据导入完成",
   "DataImportDescription": "将数据从第三方服务导入 {{organizationName}}{{productName}}。数据导入允许传输数据，例如所有用户、他们的个人和共享文档。",
   "DataImportProcessing": "数据导入处理",
-  "Deactivate": "停用",
   "DeactivateOrDeletePortal": "停用或删除空间。",
   "DefaultSettings": "默认设置",
   "DefineQuotaPerRoom": "设置每个房间的额度",

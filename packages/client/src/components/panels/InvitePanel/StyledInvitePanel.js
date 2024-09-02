@@ -169,13 +169,6 @@ const StyledRow = styled.div`
   .warning {
     margin-inline-start: auto;
   }
-
-  .combo-button-label {
-    color: ${(props) => props.theme.accessRightSelect.descriptionColor};
-  }
-  .combo-buttons_expander-icon path {
-    fill: ${(props) => props.theme.text.disableColor};
-  }
 `;
 
 const StyledInviteInput = styled.div`
@@ -322,7 +315,12 @@ const StyledDropDown = styled(DropDown)`
       gap: 4px;
 
       p {
-        color: ${(props) => props.theme.filesPanels.invite.addButtonColor};
+        color: ${(props) => props.theme.currentColorScheme.main.accent};
+        ${(props) =>
+          props.isRequestRunning &&
+          css`
+            opacity: 0.65;
+          `}
       }
 
       svg {
@@ -330,7 +328,12 @@ const StyledDropDown = styled(DropDown)`
           theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"};
 
         path {
-          fill: ${(props) => props.theme.filesPanels.invite.addButtonColor};
+          fill: ${(props) => props.theme.currentColorScheme.main.accent};
+          ${(props) =>
+            props.isRequestRunning &&
+            css`
+              opacity: 0.65;
+            `}
         }
       }
     }

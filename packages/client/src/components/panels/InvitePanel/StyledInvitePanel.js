@@ -191,13 +191,6 @@ const StyledRow = styled.div`
   .warning {
     margin-inline-start: auto;
   }
-
-  .combo-button-label {
-    color: ${(props) => props.theme.accessRightSelect.descriptionColor};
-  }
-  .combo-buttons_expander-icon path {
-    fill: ${(props) => props.theme.text.disableColor};
-  }
 `;
 
 const StyledInviteInput = styled.div`

@@ -224,9 +224,13 @@ class AxiosClient {
       if (!this.isSSR) {
         switch (error.response?.status) {
           case 401: {
-            if (options.skipUnauthorized || window?.ClientConfig?.isFrame)
-              return Promise.resolve();
+            if (options.skipUnauthorized) return Promise.resolve();
+
             if (options.skipLogout) return Promise.reject(error);
+
+            if (window?.ClientConfig?.isFrame) {
+              break;
+            }
 
             const opt: AxiosRequestConfig = {
               method: "POST",
@@ -269,6 +273,7 @@ class AxiosClient {
 
         return Promise.reject(error);
       }
+
       switch (error.response?.status) {
         case 401:
           return Promise.resolve();

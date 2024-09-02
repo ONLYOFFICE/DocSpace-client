@@ -393,6 +393,7 @@
   "RoomAdmin": "Админ собе",
   "RoomList": "Листа собе",
   "Rooms": "Собе",
+  "RoomSpaceQuotaExceeded": "Квота простора за собу прекорачена ({{size}})",
   "SameEmail": "Не можете користити исту емаил адресу",
   "SaveButton": "Сачувај",
   "SaveHereButton": "Сачувај овде",

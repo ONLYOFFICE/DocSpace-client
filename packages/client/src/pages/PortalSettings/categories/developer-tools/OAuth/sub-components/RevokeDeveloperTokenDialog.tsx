@@ -60,7 +60,7 @@ const GenerateDeveloperTokenDialog = ({
       setToken("");
       setRevokeDeveloperTokenDialogVisible?.(false);
 
-      toastr.success(t("OAuth:TokenSuccessfullyRemoved"));
+      toastr.success(t("OAuth:TokenRevokedSuccessfully"));
     } catch (e) {
       toastr.error(e as TData);
     }

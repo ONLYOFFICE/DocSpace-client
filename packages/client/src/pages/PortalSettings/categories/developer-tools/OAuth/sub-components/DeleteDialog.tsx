@@ -30,6 +30,11 @@ const DeleteClientDialog = (props: DeleteClientDialogProps) => {
 
       setIsRequestRunning(true);
       onClose?.();
+      toastr.success(
+        isGroup
+          ? t("OAuth:ApplicationsDeletedSuccessfully")
+          : t("OAuth:ApplicationDeletedSuccessfully"),
+      );
     } catch (error: unknown) {
       const e = error as TData;
       toastr.error(e);
@@ -44,9 +49,19 @@ const DeleteClientDialog = (props: DeleteClientDialogProps) => {
       onClose={onClose}
       displayType={ModalDialogType.modal}
     >
-      <ModalDialog.Header>{t("DeleteHeader")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {isGroup ? t("DeleteApplications") : t("DeleteApplication")}
+      </ModalDialog.Header>
       <ModalDialog.Body>
-        <Trans t={t} i18nKey="DeleteDescription" ns="OAuth" />
+        <Trans
+          t={t}
+          i18nKey={
+            isGroup
+              ? "DeleteApplicationsDescription"
+              : "DeleteApplicationDescription"
+          }
+          ns="OAuth"
+        />
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

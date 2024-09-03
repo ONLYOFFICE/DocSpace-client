@@ -33,6 +33,7 @@ const TableView = ({
   hasNextPage,
   itemCount,
   fetchNextClients,
+  isGroupDialogVisible,
 }: TableViewProps) => {
   const tableRef = React.useRef<HTMLDivElement>(null);
   const tagRef = React.useRef<HTMLDivElement | null>(null);
@@ -76,6 +77,8 @@ const TableView = ({
 
   const clickOutside = React.useCallback(
     (e: MouseEvent) => {
+      if (isGroupDialogVisible) return;
+
       const target = e.target as HTMLElement;
       if (!target) return;
       if (
@@ -88,7 +91,7 @@ const TableView = ({
 
       setSelection?.("");
     },
-    [setSelection],
+    [setSelection, isGroupDialogVisible],
   );
 
   React.useEffect(() => {
@@ -165,7 +168,11 @@ export default inject(
       hasNextPage,
       itemCount,
       fetchNextClients,
+      disableDialogVisible,
+      deleteDialogVisible,
     } = oauthStore;
+
+    const isGroupDialogVisible = disableDialogVisible || deleteDialogVisible;
 
     return {
       viewAs,
@@ -180,6 +187,7 @@ export default inject(
       hasNextPage,
       itemCount,
       fetchNextClients,
+      isGroupDialogVisible,
     };
   },
 )(observer(TableView));

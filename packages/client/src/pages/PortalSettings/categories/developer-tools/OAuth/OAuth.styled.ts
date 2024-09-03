@@ -183,10 +183,6 @@ export const StyledInfoContainer = styled.div<{
 StyledInfoContainer.defaultProps = { theme: Base };
 
 export const StyledGenerateDevelopTokenContainer = styled.div`
-  p {
-    margin-bottom: 16px;
-  }
-
   .dates {
     margin-top: 16px;
     margin-bottom: 0;

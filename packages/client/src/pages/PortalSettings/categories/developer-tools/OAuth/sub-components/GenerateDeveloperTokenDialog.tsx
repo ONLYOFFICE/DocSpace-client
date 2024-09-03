@@ -2,7 +2,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTheme } from "styled-components";
 import { i18n } from "i18next";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import copy from "copy-to-clipboard";
 import moment from "moment-timezone";
 
@@ -19,7 +19,7 @@ import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { InputBlock } from "@docspace/shared/components/input-block";
 import { InputSize, InputType } from "@docspace/shared/components/text-input";
 import { UserStore } from "@docspace/shared/store/UserStore";
-import { globalColors } from "@docspace/shared/themes";
+import { Link } from "@docspace/shared/components/link";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 
@@ -47,9 +47,14 @@ const GenerateDeveloperTokenDialog = ({
 
   setGenerateDeveloperTokenDialogVisible,
 }: GenerateDeveloperTokenDialogProps) => {
-  const { i18n: i18nParam } = useTranslation(["OAuth", "Common"]);
-
+  const { i18n: i18nParam, t } = useTranslation([
+    "OAuth",
+    "Common",
+    "Webhooks",
+    "Files",
+  ]);
   const theme = useTheme();
+
   const [token, setToken] = React.useState("");
   const [dates, setDates] = React.useState({
     created: getDate(new Date(), i18nParam),
@@ -57,8 +62,46 @@ const GenerateDeveloperTokenDialog = ({
   });
   const [requestRunning, setRequestRunning] = React.useState(false);
 
+  const onCopyClick = async () => {
+    copy(token);
+    toastr.success("Copied");
+  };
+
+  const onClose = async () => {
+    if (requestRunning) return;
+
+    setGenerateDeveloperTokenDialogVisible?.(false);
+  };
+
+  const onRevoke = async () => {
+    if (requestRunning || !token) return;
+
+    setRequestRunning(true);
+
+    await api.oauth.revokeDeveloperToken(
+      token,
+      client!.clientId,
+      client!.clientSecret,
+    );
+
+    setRequestRunning(false);
+
+    toastr.success(t("TokenRevokedSuccessfully"));
+
+    setToken("");
+
+    onClose();
+  };
+
   const onGenerate = async () => {
-    if (token || !client || requestRunning) return;
+    if (!client || requestRunning) return;
+
+    if (token) {
+      onCopyClick();
+      onClose();
+
+      return;
+    }
 
     try {
       const { clientId, clientSecret, scopes } = client;
@@ -95,16 +138,6 @@ const GenerateDeveloperTokenDialog = ({
     }
   };
 
-  const onCopyClick = async () => {
-    copy(token);
-    toastr.success("Copied");
-  };
-
-  const onClose = () => {
-    if (requestRunning) return;
-
-    setGenerateDeveloperTokenDialogVisible?.(false);
-  };
   return (
     <ModalDialog
       visible
@@ -113,35 +146,49 @@ const GenerateDeveloperTokenDialog = ({
       autoMaxHeight
       scale
     >
-      <ModalDialog.Header>Generate developer token</ModalDialog.Header>
+      <ModalDialog.Header>
+        {token ? t("Token") : t("GenerateToken")}
+      </ModalDialog.Header>
       <ModalDialog.Body>
         <StyledGenerateDevelopTokenContainer>
-          <Text>
-            By generating an developer access token, you will be able to make
-            API calls for your own account without going through the
-            authorization flow. To obtain access tokens for other users, use the
-            standard OAuth flow.
-          </Text>
-          <Text>
-            For scoped apps, the token will have the same scope as the app.
-          </Text>
-          {token ? (
+          {!token ? (
             <>
-              <Text
-                color={
-                  theme.isBase
-                    ? globalColors.lightErrorStatus
-                    : globalColors.darkErrorStatus
-                }
-              >
-                This access token can be used to access your account ({email})
-                via the API. Don`t share your access token with anyone.
+              <Text style={{ marginBottom: "16px" }} noSelect>
+                {t("OAuth:GenerateTokenDescription")}
+              </Text>
+              <Text style={{ marginBottom: "16px" }} noSelect>
+                {t("OAuth:GenerateTokenScope")}
+              </Text>
+              <Text noSelect>
+                <Trans t={t} i18nKey="GenerateTokenNote" ns="OAuth" />
+              </Text>
+            </>
+          ) : (
+            <>
+              <Text style={{ marginBottom: "16px" }}>
+                <Trans
+                  t={t}
+                  ns="OAuth"
+                  i18nKey="GenerateTokenWarning"
+                  values={{
+                    supportEmail: email,
+                  }}
+                  components={{
+                    1: (
+                      <Link
+                        href={`mailto:${email}`}
+                        color={theme?.currentColorScheme?.main?.accent}
+                      />
+                    ),
+                  }}
+                >
+                  {`This token can be used to access your account (<1>{{supportEmail}}</1>) via API calls. Don't share it with anyone. Make sure you copy this token now as you won't see it again.`}
+                </Trans>
               </Text>
               <InputBlock
                 value={token}
                 scale
                 isReadOnly
-                isDisabled
                 size={InputSize.base}
                 iconName={CopyReactSvgUrl}
                 onIconClick={onCopyClick}
@@ -149,29 +196,32 @@ const GenerateDeveloperTokenDialog = ({
                 maxLength={10000}
               />
               <Text className="dates">
-                Created: {dates.created}
+                <strong>{t("Files:ByCreation")}</strong>: {dates.created}
                 <br />
-                Expires: {dates.expires}{" "}
+                <strong>{t("Expires")}</strong>: {dates.expires}
               </Text>
             </>
-          ) : null}
+          )}
         </StyledGenerateDevelopTokenContainer>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
-          label="Generate developer token"
+          label={
+            token
+              ? `${t("Common:Copy")} & ${t("Common:CancelButton")}`
+              : t("Webhooks:Generate")
+          }
           primary
           scale
           onClick={onGenerate}
-          isDisabled={!!token}
           isLoading={requestRunning}
-          size={ButtonSize.small}
+          size={ButtonSize.normal}
         />
         <Button
-          label="Cancel"
+          label={token ? t("Revoke") : t("Common:CancelButton")}
           scale
-          onClick={onClose}
-          size={ButtonSize.small}
+          onClick={token ? onRevoke : onClose}
+          size={ButtonSize.normal}
           isDisabled={requestRunning}
         />
       </ModalDialog.Footer>

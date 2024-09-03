@@ -55,17 +55,15 @@ import { TScope } from "@docspace/shared/utils/oauth/types";
 import { transformToClientProps } from "@docspace/shared/utils/oauth";
 import {
   colorThemeSuccess,
-  getMockSettingsResponse,
-  isLicenseRequiredSuccess,
+  getMockResponse,
+  isLicenseRequiredFalseSuccess,
   machineNameSuccess,
   portalCulturesSuccess,
-  settingsPasswordSuccess,
-  settingsSuccessNoAuthWizard,
-} from "@docspace/shared/__mocks__/e2e";
-import {
-  getMockResponse,
   portalTimeZonesSuccess,
-} from "@docspace/shared/__mocks__/e2e/settings";
+  settingsPasswordSuccess,
+  settingsSuccessWithAuthWizard,
+} from "@docspace/shared/__mocks__/e2e";
+
 
 const IS_TEST = process.env.TEST;
 
@@ -89,7 +87,7 @@ export async function getSettings() {
   );
 
   const settingsRes = IS_TEST
-    ? getMockResponse(settingsSuccessNoAuthWizard)
+    ? getMockResponse(settingsSuccessWithAuthWizard)
     : await fetch(getSettings);
 
   if (settingsRes.status === 403) return `access-restricted`;
@@ -358,7 +356,7 @@ export async function getIsLicenseRequired() {
   );
 
   const res = IS_TEST
-    ? getMockResponse(isLicenseRequiredSuccess)
+    ? getMockResponse(isLicenseRequiredFalseSuccess, headers())
     : await fetch(getIsLicenseRequired);
 
   if (!res.ok) throw new Error(res.statusText);

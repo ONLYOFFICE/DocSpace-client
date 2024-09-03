@@ -8,7 +8,7 @@ import { ViewAsType } from "SRC_DIR/store/OAuthStore";
 import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
 
 import { OAuthContainer } from "../../OAuth.styled";
-import { StyledContainer } from ".";
+import { StyledContainer } from "./List.styled";
 
 const OAuthLoader = ({
   viewAs,

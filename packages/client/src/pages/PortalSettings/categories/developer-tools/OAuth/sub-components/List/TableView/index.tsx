@@ -7,8 +7,8 @@ import { TableBody } from "@docspace/shared/components/table";
 
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 
-import Row from "./Row";
-import Header from "./Header";
+import Row from "./sub-components/Row";
+import Header from "./sub-components/Header";
 
 import { TableViewProps } from "./TableView.types";
 import { TableWrapper } from "./TableView.styled";

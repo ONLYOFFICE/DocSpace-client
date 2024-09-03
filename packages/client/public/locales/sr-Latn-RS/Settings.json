@@ -169,8 +169,6 @@
   "ManagementCategorySecurity": "Bezbednost",
   "ManualBackupDescription": "Koristite ovu opciju ako želite da svi podaci budu sadržani u prostoru kao datoteka.",
   "MaxCopies": "{{copiesCount}} - maksimalni broj rezervnih kopija",
-  "MemoryQuotaDisabled": "Kvota memorije je uspešno onemogućena.",
-  "MemoryQuotaEnabled": "Kvota memorije je uspešno omogućena.",
   "Migration": "Migracija",
   "NewColorScheme": "Nova šema boja",
   "NextStep": "Sledeći korak",

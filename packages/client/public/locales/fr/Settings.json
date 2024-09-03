@@ -169,8 +169,6 @@
   "ManagementCategorySecurity": "Sécurité",
   "ManualBackupDescription": "Utilisez cette option si vous souhaitez obtenir toutes les données de l’espace en tant que fichier.",
   "MaxCopies": "{{copiesCount}} - nombre maximum de copies de sauvegarde",
-  "MemoryQuotaDisabled": "Quota de mémoire a été désactivé avec succès.",
-  "MemoryQuotaEnabled": "Quota de mémoire a été activé avec succès.",
   "Migration": "Migration",
   "NewColorScheme": "Nouvelle palette de couleurs",
   "NextStep": "Étape suivante",

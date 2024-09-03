@@ -169,8 +169,6 @@
   "ManagementCategorySecurity": "보안",
   "ManualBackupDescription": "스페이스에 포함된 모든 데이터를 파일로 가져오려면 이 옵션을 사용하세요.",
   "MaxCopies": "{{copiesCount}} - 최대 백업 복사본 수",
-  "MemoryQuotaDisabled": "메모리 할당량이 비활성화되었습니다.",
-  "MemoryQuotaEnabled": "메모리 할당량이 활성화되었습니다.",
   "Migration": "마이그레이션",
   "NewColorScheme": "새로운 색 구성표",
   "NextStep": "다음 단계",

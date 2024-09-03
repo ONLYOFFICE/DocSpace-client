@@ -421,7 +421,7 @@ class ContextOptionsStore {
     const { href } = item;
     const sharedItem = navigationPath.find((r) => r.shared);
 
-    const isShared = shared || sharedItem;
+    const isShared = shared || sharedItem || item.shared;
 
     const isSystemFolder = systemFolders.includes(item.type);
 

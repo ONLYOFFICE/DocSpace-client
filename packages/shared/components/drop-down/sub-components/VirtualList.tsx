@@ -84,6 +84,7 @@ function VirtualList({
           index -= 1;
           break;
         case "Enter":
+          console.log({ children, cleanChildren });
           return (
             children &&
             Array.isArray(children) &&

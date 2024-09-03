@@ -29,8 +29,10 @@ import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
 import OauthRevokeSvgUrl from "PUBLIC_DIR/images/oauth.revoke.svg?url";
-import SettingsIcon from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
-import DeleteIcon from "PUBLIC_DIR/images/delete.react.svg?url";
+import SettingsIconUrl from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
+import DeleteIconUrl from "PUBLIC_DIR/images/delete.react.svg?url";
+import GenerateIconUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
+import RevokeIconUrl from "PUBLIC_DIR/images/revoke.react.svg?url";
 
 const PAGE_LIMIT = 100;
 
@@ -597,26 +599,16 @@ class OAuthStore implements OAuthStoreProps {
       icon: ExternalLinkReactSvgUrl,
       label: t("Files:Open"),
       onClick: () => window.open(item.websiteUrl, "_blank"),
-      isDisabled: isInfo,
+      disabled: isInfo,
     };
 
     const infoOption = {
       key: "info",
-      icon: SettingsIcon,
+      icon: SettingsIconUrl,
       label: t("Common:Info"),
       onClick: onShowInfo,
-      isDisabled: isInfo,
+      disabled: isInfo,
     };
-
-    const revokeOptions = [
-      {
-        key: "revoke",
-        icon: OauthRevokeSvgUrl,
-        label: t("Revoke"),
-        onClick: onRevoke,
-        isDisabled: false,
-      },
-    ];
 
     if (!isSettings) {
       const items: ContextMenuModel[] = [];
@@ -632,7 +624,13 @@ class OAuthStore implements OAuthStoreProps {
         });
       }
 
-      items.push(...revokeOptions);
+      items.push({
+        key: "revoke",
+        icon: OauthRevokeSvgUrl,
+        label: t("Revoke"),
+        onClick: onRevoke,
+        disabled: false,
+      });
 
       return items;
     }
@@ -681,6 +679,7 @@ class OAuthStore implements OAuthStoreProps {
 
           this.setActiveClient("");
           this.setSelection("");
+          toastr.success(t("OAuth:ApplicationsEnabledSuccessfully"));
         } catch (e) {
           const err = e as TData;
           toastr.error(err);
@@ -693,7 +692,7 @@ class OAuthStore implements OAuthStoreProps {
         this.setActiveClient("");
         this.setSelection("");
 
-        // TODO OAuth, show toast
+        toastr.success(t("OAuth:ApplicationEnabledSuccessfully"));
       }
     };
 
@@ -727,28 +726,24 @@ class OAuthStore implements OAuthStoreProps {
 
     const generateDeveloperTokenOption = {
       key: "generate-token",
-      icon: EnableReactSvgUrl,
-      label: "Generate developer token",
+      icon: GenerateIconUrl,
+      label: t("OAuth:GenerateToken"),
       onClick: onGenerateDeveloperToken,
     };
 
     const revokeDeveloperTokenOption = {
       key: "revoke-token",
-      icon: EnableReactSvgUrl,
-      label: "Revoke developer token",
+      icon: RevokeIconUrl,
+      label: t("OAuth:RevokeDialogHeader"),
       onClick: onRevokeDeveloperToken,
     };
 
-    const contextOptions = [
-      {
-        key: "Separator dropdownItem",
-        isSeparator: true,
-      },
+    const contextOptions: ContextMenuModel[] = [
       {
         key: "delete",
         label: t("Common:Delete"),
-        icon: DeleteIcon,
-        onClick: () => onDelete(),
+        icon: DeleteIconUrl,
+        onClick: onDelete,
       },
     ];
 
@@ -767,6 +762,11 @@ class OAuthStore implements OAuthStoreProps {
       } else {
         contextOptions.unshift(enableOption);
       }
+
+      contextOptions.unshift({
+        key: "Separator dropdownItem",
+        isSeparator: true,
+      });
     } else {
       if (item.enabled) {
         contextOptions.unshift(disableOption);
@@ -774,8 +774,18 @@ class OAuthStore implements OAuthStoreProps {
         contextOptions.unshift(enableOption);
       }
 
+      contextOptions.unshift({
+        key: "Separator dropdownItem",
+        isSeparator: true,
+      });
+
       contextOptions.unshift(revokeDeveloperTokenOption);
       contextOptions.unshift(generateDeveloperTokenOption);
+
+      contextOptions.unshift({
+        key: "Separator-2 dropdownItem",
+        isSeparator: true,
+      });
 
       if (!isInfo) contextOptions.unshift(infoOption);
       contextOptions.unshift(authButtonOption);

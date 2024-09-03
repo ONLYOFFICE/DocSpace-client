@@ -8,7 +8,7 @@ import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
-import { OAuthContainer } from "./StyledOAuth";
+import { OAuthContainer } from "./OAuth.styled";
 import { OAuthProps } from "./OAuth.types";
 
 import InfoDialog from "./sub-components/InfoDialog";
@@ -126,33 +126,40 @@ export default inject(
   }) => {
     const { currentDeviceType } = settingsStore;
     const {
-      viewAs,
-      setViewAs,
-      clientList,
       isEmptyClientList,
+      clientList,
+      viewAs,
+
+      setViewAs,
       fetchClients,
       fetchScopes,
-      infoDialogVisible,
-      previewDialogVisible,
+
       isInit,
       setIsInit,
+
+      infoDialogVisible,
+      previewDialogVisible,
       disableDialogVisible,
       deleteDialogVisible,
       generateDeveloperTokenDialogVisible,
       revokeDeveloperTokenDialogVisible,
     } = oauthStore;
     return {
-      viewAs,
-      setViewAs,
-      clientList,
       isEmptyClientList,
+      clientList,
+      viewAs,
+
+      setViewAs,
       fetchClients,
-      currentDeviceType,
-      infoDialogVisible,
-      previewDialogVisible,
       fetchScopes,
+
+      currentDeviceType,
+
       isInit,
       setIsInit,
+
+      infoDialogVisible,
+      previewDialogVisible,
       disableDialogVisible,
       deleteDialogVisible,
       generateDeveloperTokenDialogVisible,

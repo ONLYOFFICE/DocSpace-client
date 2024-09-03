@@ -1,6 +1,6 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-import styled, { useTheme } from "styled-components";
+import { useTheme } from "styled-components";
 import { i18n } from "i18next";
 import { useTranslation } from "react-i18next";
 import copy from "copy-to-clipboard";
@@ -18,23 +18,13 @@ import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { InputBlock } from "@docspace/shared/components/input-block";
 import { InputSize, InputType } from "@docspace/shared/components/text-input";
+import { UserStore } from "@docspace/shared/store/UserStore";
+import { globalColors } from "@docspace/shared/themes";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
-import { UserStore } from "@docspace/shared/store/UserStore";
-import { globalColors } from "@docspace/shared/themes";
-
-const StyledContainer = styled.div`
-  p {
-    margin-bottom: 16px;
-  }
-
-  .dates {
-    margin-top: 16px;
-    margin-bottom: 0;
-  }
-`;
+import { StyledGenerateDevelopTokenContainer } from "../OAuth.styled";
 
 type GenerateDeveloperTokenDialogProps = {
   client?: IClientProps;
@@ -125,7 +115,7 @@ const GenerateDeveloperTokenDialog = ({
     >
       <ModalDialog.Header>Generate developer token</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledContainer>
+        <StyledGenerateDevelopTokenContainer>
           <Text>
             By generating an developer access token, you will be able to make
             API calls for your own account without going through the
@@ -165,7 +155,7 @@ const GenerateDeveloperTokenDialog = ({
               </Text>
             </>
           ) : null}
-        </StyledContainer>
+        </StyledGenerateDevelopTokenContainer>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

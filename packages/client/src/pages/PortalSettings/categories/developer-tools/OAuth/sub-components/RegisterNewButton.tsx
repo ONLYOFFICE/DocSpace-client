@@ -10,7 +10,7 @@ export interface RegisterNewButtonProps {
 }
 
 const RegisterNewButton = ({ currentDeviceType }: RegisterNewButtonProps) => {
-  const { t } = useTranslation(["OAuth", "Common"]);
+  const { t } = useTranslation(["OAuth"]);
 
   const navigate = useNavigate();
 

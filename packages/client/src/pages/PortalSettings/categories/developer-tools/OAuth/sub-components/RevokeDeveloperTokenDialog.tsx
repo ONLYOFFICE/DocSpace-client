@@ -1,8 +1,10 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 
 import api from "@docspace/shared/api";
+import { introspectDeveloperToken } from "@docspace/shared/api/oauth";
+import { FieldContainer } from "@docspace/shared/components/field-container";
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
 import {
   ModalDialog,
@@ -21,14 +23,6 @@ import {
 import { UserStore } from "@docspace/shared/store/UserStore";
 
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
-import { introspectDeveloperToken } from "@docspace/shared/api/oauth";
-import { FieldContainer } from "@docspace/shared/components/field-container";
-
-const StyledContainer = styled.div`
-  .warning-text {
-    margin-bottom: 16px;
-  }
-`;
 
 type GenerateDeveloperTokenDialogProps = {
   client?: IClientProps;
@@ -41,7 +35,7 @@ const GenerateDeveloperTokenDialog = ({
 
   setRevokeDeveloperTokenDialogVisible,
 }: GenerateDeveloperTokenDialogProps) => {
-  // const {} = useTranslation(["OAuth", "Common"]);
+  const { t } = useTranslation(["OAuth", "Common"]);
 
   const [token, setToken] = React.useState("");
   const [isValidToken, setIsValidToken] = React.useState(false);
@@ -66,7 +60,7 @@ const GenerateDeveloperTokenDialog = ({
       setToken("");
       setRevokeDeveloperTokenDialogVisible?.(false);
 
-      toastr.success("Revoked");
+      toastr.success(t("OAuth:TokenSuccessfullyRemoved"));
     } catch (e) {
       toastr.error(e as TData);
     }
@@ -101,10 +95,11 @@ const GenerateDeveloperTokenDialog = ({
         }
 
         setIsValidToken(false);
-        setTokenError("Invalid token");
+        setTokenError(t("OAuth:InvalidToken"));
       } catch (err) {
         setIsValidToken(false);
-        setTokenError("Invalid token");
+        setTokenError(t("OAuth:InvalidToken"));
+        toastr.warning(err as unknown as string);
       }
     }, 200);
 
@@ -125,10 +120,15 @@ const GenerateDeveloperTokenDialog = ({
       autoMaxHeight
       scale
     >
-      <ModalDialog.Header>Revoke developer token</ModalDialog.Header>
+      <ModalDialog.Header>{t("OAuth:RevokeDialogHeader")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledContainer>
-          <Text className="warning-text">Warning text</Text>
+        <div>
+          <Text style={{ marginBottom: "16px" }} noSelect>
+            {t("OAuth:RevokeDialogDescription")}
+          </Text>
+          <Text style={{ marginBottom: "16px" }} noSelect>
+            {t("OAuth:RevokeDialogEnterToken")}
+          </Text>
           <FieldContainer
             hasError={!!tokenError}
             errorMessage={tokenError}
@@ -137,7 +137,7 @@ const GenerateDeveloperTokenDialog = ({
             <TextInput
               value={token}
               scale
-              placeholder="Enter developer token"
+              placeholder={t("OAuth:EnterToken")}
               type={InputType.text}
               size={InputSize.base}
               onChange={onChange}
@@ -145,23 +145,23 @@ const GenerateDeveloperTokenDialog = ({
               hasError={!!tokenError}
             />
           </FieldContainer>
-        </StyledContainer>
+        </div>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
-          label="Revoke"
+          label={t("OAuth:Revoke")}
           primary
           scale
           onClick={onRevoke}
           isDisabled={!token || !isValidToken}
           isLoading={requestRunning}
-          size={ButtonSize.small}
+          size={ButtonSize.normal}
         />
         <Button
-          label="Cancel"
+          label={t("Common:Cancel")}
           scale
           onClick={onClose}
-          size={ButtonSize.small}
+          size={ButtonSize.normal}
           isDisabled={requestRunning}
         />
       </ModalDialog.Footer>

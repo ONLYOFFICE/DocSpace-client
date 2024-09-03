@@ -12,13 +12,14 @@ import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 
 interface DisableClientDialogProps {
   isVisible?: boolean;
+  isGroup?: boolean;
   onClose?: () => void;
   onDisable?: () => Promise<void>;
 }
 
 const DisableClientDialog = (props: DisableClientDialogProps) => {
   const { t, ready } = useTranslation(["OAuth", "Common"]);
-  const { isVisible, onClose, onDisable } = props;
+  const { isVisible, isGroup, onClose, onDisable } = props;
 
   const [isRequestRunning, setIsRequestRunning] = React.useState(false);
 
@@ -28,6 +29,11 @@ const DisableClientDialog = (props: DisableClientDialogProps) => {
       await onDisable?.();
 
       setIsRequestRunning(true);
+      toastr.success(
+        isGroup
+          ? t("OAuth:ApplicationsDisabledSuccessfully")
+          : t("OAuth:ApplicationDisabledSuccessfully"),
+      );
       onClose?.();
     } catch (error: unknown) {
       const e = error as TData;
@@ -43,9 +49,19 @@ const DisableClientDialog = (props: DisableClientDialogProps) => {
       onClose={onClose}
       displayType={ModalDialogType.modal}
     >
-      <ModalDialog.Header>{t("DisableApplication")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {isGroup ? t("DisableApplications") : t("DisableApplication")}
+      </ModalDialog.Header>
       <ModalDialog.Body>
-        <Trans t={t} i18nKey="DisableApplicationDescription" ns="OAuth" />
+        <Trans
+          t={t}
+          i18nKey={
+            isGroup
+              ? "DisableApplicationsDescription"
+              : "DisableApplicationDescription"
+          }
+          ns="OAuth"
+        />
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -75,6 +91,8 @@ const DisableClientDialog = (props: DisableClientDialogProps) => {
 export default inject(({ oauthStore }: { oauthStore: OAuthStoreProps }) => {
   const {
     bufferSelection,
+    selection,
+
     setDisableDialogVisible,
     setActiveClient,
     setSelection,
@@ -82,18 +100,37 @@ export default inject(({ oauthStore }: { oauthStore: OAuthStoreProps }) => {
     disableDialogVisible,
   } = oauthStore;
 
+  const isGroup = !!selection.length;
+
   const onClose = () => {
     setDisableDialogVisible(false);
   };
 
   const onDisable = async () => {
-    if (!bufferSelection) return;
+    if (isGroup) {
+      const actions: Promise<void>[] = [];
 
-    setActiveClient(bufferSelection.clientId);
-    await changeClientStatus(bufferSelection.clientId, false);
-    setActiveClient("");
-    setSelection("");
+      selection.forEach((item) => {
+        const disable = async () => {
+          setActiveClient(item);
+          await changeClientStatus(item, false);
+        };
+
+        actions.push(disable());
+      });
+
+      await Promise.all(actions);
+
+      setActiveClient("");
+      setSelection("");
+    } else {
+      if (!bufferSelection) return;
+      setActiveClient(bufferSelection.clientId);
+      await changeClientStatus(bufferSelection.clientId, false);
+      setActiveClient("");
+      setSelection("");
+    }
   };
 
-  return { isVisible: disableDialogVisible, onClose, onDisable };
+  return { isVisible: disableDialogVisible, isGroup, onClose, onDisable };
 })(observer(DisableClientDialog));

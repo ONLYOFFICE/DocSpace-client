@@ -1,5 +1,6 @@
-import { Base } from "@docspace/shared/themes";
 import styled from "styled-components";
+
+import { Base } from "@docspace/shared/themes";
 
 export const OAuthContainer = styled.div`
   width: 100%;
@@ -19,6 +20,8 @@ export const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+
+  padding-top: 16px;
 `;
 
 export const StyledPreviewContainer = styled.div`
@@ -36,7 +39,7 @@ export const StyledPreviewContainer = styled.div`
   justify-content: center;
 
   .social-button {
-    max-width: 226px;
+    max-width: fit-content;
 
     padding: 11px 16px;
 
@@ -78,7 +81,7 @@ export const StyledInfoContainer = styled.div<{
 
   box-sizing: border-box;
 
-  padding-top: 8px;
+  padding-top: 16px;
 
   display: flex;
   flex-direction: column;

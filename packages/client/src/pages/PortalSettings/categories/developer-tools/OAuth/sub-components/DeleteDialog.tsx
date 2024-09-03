@@ -115,6 +115,8 @@ export default inject(({ oauthStore }: { oauthStore: OAuthStoreProps }) => {
 
       setActiveClient("");
       setSelection("");
+
+      return;
     }
     if (!bufferSelection) return;
     setActiveClient(bufferSelection.clientId);

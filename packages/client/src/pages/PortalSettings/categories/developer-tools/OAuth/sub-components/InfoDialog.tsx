@@ -93,6 +93,7 @@ const InfoDialog = ({
       visible={visible}
       displayType={ModalDialogType.aside}
       onClose={onClose}
+      withBodyScroll
     >
       <ModalDialog.Header>{t("Common:Info")}</ModalDialog.Header>
       <ModalDialog.Body>

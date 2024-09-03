@@ -7,6 +7,7 @@ import { ModalDialogType } from "@docspace/shared/components/modal-dialog/ModalD
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
+import { Text } from "@docspace/shared/components/text";
 
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 
@@ -53,15 +54,19 @@ const DisableClientDialog = (props: DisableClientDialogProps) => {
         {isGroup ? t("DisableApplications") : t("DisableApplication")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <Trans
-          t={t}
-          i18nKey={
-            isGroup
-              ? "DisableApplicationsDescription"
-              : "DisableApplicationDescription"
-          }
-          ns="OAuth"
-        />
+        <Text style={{ marginBottom: "16px" }}>
+          <Trans
+            t={t}
+            i18nKey={
+              isGroup
+                ? "DisableApplicationsDescription"
+                : "DisableApplicationDescription"
+            }
+            ns="OAuth"
+          />
+        </Text>
+
+        <Trans t={t} i18nKey="DisableApplicationNote" ns="OAuth" />
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

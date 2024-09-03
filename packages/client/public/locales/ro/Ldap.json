@@ -41,7 +41,6 @@
   "LdapSendWelcomeLetter": "Trimite scrisoarea de bun venit",
   "LdapSendWelcomeLetterTooltip": "Dacă opțiunea este bifată, toți utilizatorii noi vor primi o scrisoare de bun venit. Această opțiune este disponibilă numai dacă Atributul Mail este mapat la LDAP.",
   "LdapServer": "Server",
-  "LdapServerTooltip": "Introduceți adresa URL a serverului LDAP fără numărul de port, de ex. LDAP://mycompany.com.",
   "LdapSettings": "Setări LDAP",
   "LdapSettingsCertCnNoMatch": "Nume de certificat nu se potrivește cu nume de gazdă",
   "LdapSettingsCertExpired": "Certificatul a expirat",

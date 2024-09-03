@@ -36,6 +36,7 @@ import { EditWrapper } from "../RoomIcon.styled";
 
 const EditIcon = ({ model }) => {
   const [openEditLogo, setOpenLogoEdit] = React.useState<boolean>(false);
+  // console.log('log model', model);
 
   const onToggleOpenEditLogo = () => setOpenLogoEdit(!openEditLogo);
   return (

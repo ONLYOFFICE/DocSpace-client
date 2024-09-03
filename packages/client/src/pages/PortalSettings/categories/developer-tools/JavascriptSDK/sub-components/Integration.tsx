@@ -64,7 +64,7 @@ export const Integration = (props) => {
       <Link
         className="link"
         // href={`mailto:${email}`}
-        noHover
+        // noHover
         color={currentColorScheme.main?.accent}
         // title={"email"}
       >

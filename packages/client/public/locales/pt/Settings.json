@@ -169,8 +169,6 @@
   "ManagementCategorySecurity": "Segurança",
   "ManualBackupDescription": "Utilize esta opção se quer obter todos os dados do espaço num ficheiro.",
   "MaxCopies": "{{copiesCount}} - número máximo de cópias de segurança",
-  "MemoryQuotaDisabled": "A cota de memória foi desativada com sucesso.",
-  "MemoryQuotaEnabled": "A cota de memória foi habilitada com sucesso.",
   "Migration": "Migração",
   "NewColorScheme": "Novo esquema de cores",
   "NextStep": "Próxima Etapa",

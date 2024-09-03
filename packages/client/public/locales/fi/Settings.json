@@ -169,8 +169,6 @@
   "ManagementCategorySecurity": "Turvallisuus",
   "ManualBackupDescription": "Käytä tätä, jos haluat tallettaa sivuston kaiken sisällön tiedostoon.",
   "MaxCopies": "{{copiesCount}} - varmuuskopioiden enimmäismäärä",
-  "MemoryQuotaDisabled": "Muistikiintiö on otettu onnistuneesti pois käytöstä.",
-  "MemoryQuotaEnabled": "Muistikiintiö on onnistuneesti otettu käyttöön.",
   "Migration": "Migraatio",
   "NewColorScheme": "Uusi väriteema",
   "NextStep": "Seuraava vaihe",

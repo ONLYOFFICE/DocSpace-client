@@ -1,8 +1,6 @@
-[
-  {
-    "status": 0,
-    "response": {
-      "Completed": true
-    }
+{
+  "status": 0,
+  "response": {
+    "Completed": true
   }
-]
+}

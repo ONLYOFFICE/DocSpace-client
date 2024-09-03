@@ -38,4 +38,8 @@ export const endpoints: TEndpoints = {
     url: "*/**/api/2.0/settings/wizard/complete",
     pathToData: "settings/complete",
   },
+  license: {
+    url: "*/**/api/2.0/settings/license",
+    pathToData: "settings/license",
+  },
 };

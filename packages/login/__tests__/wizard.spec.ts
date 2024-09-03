@@ -24,8 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import path from "path";
 import { expect, test } from "./fixtures/base";
 import { endpoints } from "./mocking/endpoints";
+
+test("wizard render", async ({ page, mockRequest }) => {
+  await page.goto("/login/wizard");
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "wizard",
+    "wizard-render.png",
+  ]);
+});
 
 test("wizard success", async ({ page, mockRequest }) => {
   await mockRequest.router(endpoints.complete);
@@ -74,4 +85,33 @@ test("wizard error", async ({ page, mockRequest }) => {
     "wizard",
     "wizard-error.png",
   ]);
+});
+
+test("wizard with license success", async ({ page, mockRequest }) => {
+  await page.route("*/**/login/wizard", async (route) => {
+    await route.continue({
+      headers: {
+        "x-test-data-license-required": "true",
+      },
+    });
+  });
+  await mockRequest.router(endpoints.complete);
+
+  await page.goto("/login/wizard");
+
+  await page.fill("[name='wizard-email']", "email@mail.ru");
+  await page
+    .getByTestId("password-input")
+    .getByTestId("text-input")
+    .fill("qwerty123");
+  await page.getByTestId("checkbox").click();
+
+  const fileChooserPromise = page.waitForEvent("filechooser");
+  await page.getByTestId("file-input").click();
+  const fileChooser = await fileChooserPromise;
+  await fileChooser.setFiles(path.join(__dirname, "example.lic"));
+
+  await page.getByTestId("button").click();
+
+  await expect(page).toHaveURL(/.*\//);
 });

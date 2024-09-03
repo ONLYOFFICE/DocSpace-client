@@ -89,7 +89,6 @@
   "DataImportComplete": "Məlumat idxalı tamamlandı",
   "DataImportDescription": "Üçüncü tərəf xidmətindən {{organizationName}} {{productName}}-ə məlumatları idxal edin. Məlumatların idxalı bütün istifadəçilər, şəxsi və paylaşılan sənədlər kimi məlumatların ötürülməsinə imkan verir.",
   "DataImportProcessing": "Məlumatların idxalının emalı",
-  "Deactivate": "Deaktiv edin",
   "DeactivateOrDeletePortal": "Sahəni deaktivləşdirin və ya silin",
   "DefaultSettings": "Defolt parametrlər",
   "DefineQuotaPerRoom": "Otaq üçün kvota müəyyənləşdirin",

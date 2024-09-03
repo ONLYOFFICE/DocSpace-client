@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { PROVIDERS_DATA } from "@docspace/shared/constants";
+import { LANGUAGE, PROVIDERS_DATA } from "@docspace/shared/constants";
 
 import {
   getOAuthClient,
@@ -38,7 +38,10 @@ import LoginForm from "@/components/LoginForm";
 import ThirdParty from "@/components/ThirdParty";
 import RecoverAccess from "@/components/RecoverAccess";
 import Register from "@/components/Register";
+import { GreetingLoginContainer } from "@/components/GreetingContainer";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { cookies } from "next/headers";
 
 async function Page({
   searchParams,
@@ -70,42 +73,51 @@ async function Page({
           })
           .some((item) => !!item);
 
+  const isRegisterContainerVisible =
+    typeof settings === "string" ? undefined : settings?.enabledJoin;
+
+  const settingsCulture =
+    typeof settings === "string" ? undefined : settings?.culture;
+
+  const culture = cookies().get(LANGUAGE)?.value ?? settingsCulture;
+
   return (
-    <FormWrapper id="login-form">
-      <Login>
-        {settings && typeof settings !== "string" && (
+    <>
+      {settings && typeof settings !== "string" && (
+        <ColorTheme
+          themeId={ThemeId.LinkForgotPassword}
+          isRegisterContainerVisible={isRegisterContainerVisible}
+        >
           <>
-            <LoginForm
-              hashSettings={settings?.passwordHash}
-              cookieSettingsEnabled={settings?.cookieSettingsEnabled}
-              clientId={clientId}
-              client={client}
-              reCaptchaPublicKey={settings?.recaptchaPublicKey}
-              reCaptchaType={settings?.recaptchaType}
-              ldapDomain={capabilities?.ldapDomain}
-              ldapEnabled={capabilities?.ldapEnabled || false}
+            <GreetingLoginContainer
+              greetingSettings={settings.greetingSettings}
+              culture={culture}
             />
-            <ThirdParty
-              thirdParty={thirdParty}
-              capabilities={capabilities}
-              ssoExists={ssoExists}
-              ssoUrl={ssoUrl}
-              hideAuthPage={hideAuthPage}
-              oauthDataExists={oauthDataExists}
-            />
-            {settings.enableAdmMess && <RecoverAccess />}
-            {settings.enabledJoin && (
-              <>
-                <Register
-                  id="login_register"
-                  enabledJoin
-                  trustedDomains={settings.trustedDomains}
-                  trustedDomainsType={settings.trustedDomainsType}
-                  isAuthenticated={false}
+
+            <FormWrapper id="login-form">
+              <Login>
+                <LoginForm
+                  hashSettings={settings?.passwordHash}
+                  cookieSettingsEnabled={settings?.cookieSettingsEnabled}
+                  clientId={clientId}
+                  client={client}
+                  reCaptchaPublicKey={settings?.recaptchaPublicKey}
+                  reCaptchaType={settings?.recaptchaType}
+                  ldapDomain={capabilities?.ldapDomain}
+                  ldapEnabled={capabilities?.ldapEnabled || false}
                 />
-                {!clientId && <ThirdParty />}
+                {!clientId && (
+                  <ThirdParty
+                    thirdParty={thirdParty}
+                    capabilities={capabilities}
+                    ssoExists={ssoExists}
+                    ssoUrl={ssoUrl}
+                    hideAuthPage={hideAuthPage}
+                    oauthDataExists={oauthDataExists}
+                  />
+                )}
                 {settings.enableAdmMess && <RecoverAccess />}
-                {settings.enabledJoin && !clientId && (
+                {settings.enabledJoin && (
                   <Register
                     id="login_register"
                     enabledJoin
@@ -114,12 +126,12 @@ async function Page({
                     isAuthenticated={false}
                   />
                 )}
-              </>
-            )}
+              </Login>
+            </FormWrapper>
           </>
-        )}
-      </Login>
-    </FormWrapper>
+        </ColorTheme>
+      )}
+    </>
   );
 }
 

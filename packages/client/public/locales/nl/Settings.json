@@ -89,7 +89,6 @@
   "DataImportComplete": "Gegevens importeren voltooid",
   "DataImportDescription": "Importeer gegevens van een externe service naar {{organizationName}} {{productName}}. Gegevensimport maakt het mogelijk om gegevens over te zetten, zoals alle gebruikers, hun persoonlijke en gedeelde documenten.",
   "DataImportProcessing": "Verwerking van geïmporteerde gegevens",
-  "Deactivate": "Deactiveer",
   "DeactivateOrDeletePortal": "Ruimte deactiveren of verwijderen.",
   "DefaultSettings": "Standaardinstellingen",
   "DefineQuotaPerRoom": "Bepaal quota per kamer",

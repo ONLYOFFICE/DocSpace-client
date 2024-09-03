@@ -89,7 +89,6 @@
   "DataImportComplete": "데이터 가져오기 완료",
   "DataImportDescription": "제3자 서비스의 데이터를 {{organizationName}} {{productName}}로 가져오기하세요. 데이터 가져오기를 통해 모든 사용자와 그들의 개인 및 공유 문서와 같은 데이터를 전송할 수 있습니다.",
   "DataImportProcessing": "데이터 가져오기 처리 중",
-  "Deactivate": "비활성화",
   "DeactivateOrDeletePortal": "스페이스 비활성화 또는 삭제.",
   "DefaultSettings": "기본 설정",
   "DefineQuotaPerRoom": "방당 할당량 정의",

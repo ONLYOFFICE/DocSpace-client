@@ -56,6 +56,7 @@ export const createRequest = (
   apiSystem?: boolean,
 ) => {
   const hdrs = new Headers(headers());
+  hdrs.delete("content-length");
   const cookieStore = cookies();
 
   const apiURL = getAPIUrl(apiSystem);

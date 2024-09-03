@@ -86,7 +86,6 @@
   "DataImportComplete": "ການນໍາເຂົ້າຂໍ້ມູນສໍາເລັດ",
   "DataImportDescription": "ນຳເຂົ້າຂໍ້ມູນຈາກບໍລິການພາກສ່ວນທີສາມໄປຫາ {{organizationName}} {{productName}}. ການນໍາເຂົ້າຂໍ້ມູນອະນຸຍາດໃຫ້ໂອນຂໍ້ມູນເຊັ່ນຜູ້ໃຊ້ທັງຫມົດ, ສ່ວນບຸກຄົນແລະເອກະສານທີ່ແບ່ງປັນ.",
   "DataImportProcessing": "ການປະມວນຜົນການນໍາເຂົ້າຂໍ້ມູນ",
-  "Deactivate": "ປິດໃຊ້ງານ",
   "DeactivateOrDeletePortal": "ປິດການນຳໃຊ້ ຫຼື ລືບສາຍ.",
   "DefaultSettings": "ການຕັ້ງຄ່າເລີ່ມຕົ້ນ",
   "DefineQuotaPerRoom": "ກຳນົດໂຄຕ້າຕໍ່ຫ້ອງ",

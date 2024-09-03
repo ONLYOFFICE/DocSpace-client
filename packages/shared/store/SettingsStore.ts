@@ -96,6 +96,8 @@ const isDesktopEditors = window.AscDesktopEditor !== undefined;
 const systemTheme = getSystemTheme();
 
 class SettingsStore {
+  isFirstLoaded = false;
+
   isLoading = false;
 
   interfaceDirection = "";
@@ -161,8 +163,6 @@ class SettingsStore {
   enableAdmMess = false;
 
   enabledJoin = false;
-
-  urlLicense = "https://gnu.org/licenses/gpl-3.0.html";
 
   urlSupport = "https://helpdesk.onlyoffice.com/";
 
@@ -256,6 +256,8 @@ class SettingsStore {
   helpLink = null;
 
   apiDocsLink = null;
+
+  licenseUrl = null;
 
   bookTrainingEmail = null;
 
@@ -659,6 +661,7 @@ class SettingsStore {
 
     this.setIsLoading(false);
     this.setIsLoaded(true);
+    this.setIsFirstLoaded(true);
   };
 
   setRoomsMode = (mode: boolean) => {
@@ -671,6 +674,10 @@ class SettingsStore {
 
   setIsLoaded = (isLoaded: boolean) => {
     this.isLoaded = isLoaded;
+  };
+
+  setIsFirstLoaded = (isFirstLoaded: boolean) => {
+    this.isFirstLoaded = isFirstLoaded;
   };
 
   setCultures = (cultures: string[]) => {

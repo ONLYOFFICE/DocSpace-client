@@ -1,5 +1,5 @@
-import type { TFolderSecurity } from "@docspace/shared/api/files/types";
-import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
+import type { NavigateFunction, LinkProps } from "react-router-dom";
+
 import type {
   FilesSelectorFilterTypes,
   FilterType,
@@ -11,7 +11,14 @@ import type { Nullable } from "@docspace/shared/types";
 
 export type UploadType = "pdf" | "file" | "folder";
 
-export type ExtensiontionType = "docx" | "xlsx" | "pptx" | "pdf" | undefined;
+export type FolderExtensiontionType = undefined;
+
+export type ExtensiontionType =
+  | "docx"
+  | "xlsx"
+  | "pptx"
+  | "pdf"
+  | FolderExtensiontionType;
 
 export type CreateEvent = Event & {
   payload?: {
@@ -21,24 +28,50 @@ export type CreateEvent = Event & {
   };
 };
 
-export interface EmptyViewContainerProps {
+export type AccessType = Nullable<ShareAccessRights> | undefined;
+
+export interface OutEmptyViewContainerProps {
   type: RoomsType;
   folderId: number;
-  access?: Nullable<ShareAccessRights>;
-  security?: Nullable<TFolderSecurity | TRoomSecurity>;
+
   parentRoomType: Nullable<FolderType>;
   folderType: Nullable<FolderType>;
   isFolder: boolean;
   isArchiveFolderRoot: boolean;
-  onClickInviteUsers?: (folderId: string | number, roomType: RoomsType) => void;
-  setSelectFileFormRoomDialogVisible?: TStore["dialogsStore"]["setSelectFileFormRoomDialogVisible"];
-  onCreateAndCopySharedLink?: TStore["contextOptionsStore"]["onCreateAndCopySharedLink"];
-  selectedFolder?: ReturnType<
-    TStore["selectedFolderStore"]["getSelectedFolder"]
-  >;
+  isRootEmptyPage: boolean;
 }
 
+export interface InjectedEmptyViewContainerProps
+  extends Pick<
+      TStore["contextOptionsStore"],
+      "inviteUser" | "onCreateAndCopySharedLink" | "onClickInviteUsers"
+    >,
+    Pick<
+      TStore["dialogsStore"],
+      "setSelectFileFormRoomDialogVisible" | "setQuotaWarningDialogVisible"
+    >,
+    Pick<
+      TStore["selectedFolderStore"],
+      "access" | "security" | "rootFolderType"
+    >,
+    Pick<TStore["treeFoldersStore"], "myFolder" | "myFolderId" | "roomsFolder">,
+    Pick<TStore["clientLoadingStore"], "setIsSectionFilterLoading"> {
+  selectedFolder: ReturnType<
+    TStore["selectedFolderStore"]["getSelectedFolder"]
+  >;
+  userId: string | undefined;
+  isVisibleInfoPanel: boolean;
+  isWarningRoomsDialog: boolean;
+  setVisibleInfoPanel: (arg: boolean) => void;
+  setViewInfoPanel: TStore["infoPanelStore"]["setView"];
+  isPublicRoom: boolean;
+}
+
+export type EmptyViewContainerProps = OutEmptyViewContainerProps &
+  InjectedEmptyViewContainerProps;
+
 export type OptionActions = {
+  navigate: NavigateFunction;
   inviteUser: VoidFunction;
   onCreate: (extension: ExtensiontionType, withoutDialog?: boolean) => void;
   uploadFromDocspace: (
@@ -47,4 +80,9 @@ export type OptionActions = {
   ) => void;
   onUploadAction: (type: UploadType) => void;
   createAndCopySharedLink: VoidFunction;
+  openInfoPanel: VoidFunction;
+  onCreateRoom: VoidFunction;
+  inviteRootUser: TStore["contextOptionsStore"]["inviteUser"];
+  onGoToPersonal: () => LinkProps;
+  onGoToShared: () => LinkProps;
 };

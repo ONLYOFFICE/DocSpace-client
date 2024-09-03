@@ -247,7 +247,7 @@ export const enum FolderType {
   ReadOnlyRoom = 18,
   CustomRoom = 19,
   Archive = 20,
-
+  PublicRoom = 22,
   Done = 25,
   InProgress = 26,
   SubFolderDone = 27,
@@ -480,7 +480,8 @@ export const enum ParseErrorTypes {
 }
 
 export const enum ButtonKeys {
-  enter = "enter",
+  enter = "Enter",
+  numpadEnter = "NumpadEnter",
   esc = "Escape",
   tab = "Tab",
 }

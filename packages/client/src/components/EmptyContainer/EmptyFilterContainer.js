@@ -23,19 +23,24 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
-import EmptyScreenFilterAltSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt.svg?url";
-import EmptyScreenFilterAltDarkSvgUrl from "PUBLIC_DIR/images/empty_screen_filter_alt_dark.svg?url";
-import ClearEmptyFilterSvgUrl from "PUBLIC_DIR/images/clear.empty.filter.svg?url";
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import EmptyContainer from "./EmptyContainer";
-import FilesFilter from "@docspace/shared/api/files/filter";
+
+import ClearEmptyFilterSvg from "PUBLIC_DIR/images/clear.empty.filter.svg";
+
+import EmptyFilterRoomsLightIcon from "PUBLIC_DIR/images/emptyFilter/empty.filter.rooms.light.svg";
+import EmptyFilterRoomsDarkIcon from "PUBLIC_DIR/images/emptyFilter/empty.filter.rooms.dark.svg";
+
+import EmptyFilterFilesLightIcon from "PUBLIC_DIR/images/emptyFilter/empty.filter.files.light.svg";
+import EmptyFilterFilesDarkIcon from "PUBLIC_DIR/images/emptyFilter/empty.filter.files.dark.svg";
+
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import { Link } from "@docspace/shared/components/link";
+import FilesFilter from "@docspace/shared/api/files/filter";
+import { EmptyView } from "@docspace/shared/components/empty-view";
+
+// import EmptyContainer from "./EmptyContainer";
 
 const EmptyFilterContainer = ({
   t,
@@ -55,12 +60,32 @@ const EmptyFilterContainer = ({
   const navigate = useNavigate();
   const location = useLocation();
 
-  const subheadingText = t("EmptyFilterSubheadingText");
   const descriptionText = isRooms
-    ? t("Common:SearchEmptyRoomsDescription")
-    : t("Common:EmptyFilterDescriptionText");
+    ? t("Common:EmptyFilterRoomsDescription")
+    : t("Common:EmptyFilterFilesDescription");
 
-  const onResetFilter = () => {
+  const getIconURL = () => {
+    if (isRooms)
+      return theme.isBase ? (
+        <EmptyFilterRoomsLightIcon />
+      ) : (
+        <EmptyFilterRoomsDarkIcon />
+      );
+
+    return theme.isBase ? (
+      <EmptyFilterFilesLightIcon />
+    ) : (
+      <EmptyFilterFilesDarkIcon />
+    );
+  };
+
+  /**
+   * @param {React.MouseEvent<HTMLAnchorElement, MouseEvent>} event
+   * @returns {void}
+   */
+  const onResetFilter = (event) => {
+    event.preventDefault();
+
     setIsLoading(true);
 
     if (isArchiveFolder) {
@@ -86,31 +111,21 @@ const EmptyFilterContainer = ({
     }
   };
 
-  const buttons = (
-    <div className="empty-folder_container-links">
-      <IconButton
-        className="empty-folder_container-icon"
-        size="12"
-        onClick={onResetFilter}
-        iconName={ClearEmptyFilterSvgUrl}
-        isFill
-      />
-      <Link onClick={onResetFilter} {...linkStyles}>
-        {t("Common:ClearFilter")}
-      </Link>
-    </div>
-  );
+  const options = {
+    to: "",
+    description: t("Common:ClearFilter"),
+    icon: <ClearEmptyFilterSvg />,
+    onClick: onResetFilter,
+  };
 
-  const imageSrc = theme.isBase
-    ? EmptyScreenFilterAltSvgUrl
-    : EmptyScreenFilterAltDarkSvgUrl;
+  const imageSrc = getIconURL();
 
   return (
-    <EmptyContainer
-      headerText={t("Common:NotFoundTitle")}
-      descriptionText={descriptionText}
-      imageSrc={imageSrc}
-      buttons={buttons}
+    <EmptyView
+      icon={imageSrc}
+      title={t("Common:NoFindingsFound")}
+      options={options}
+      description={descriptionText}
     />
   );
 };

@@ -242,7 +242,9 @@ const ThirdPartyComboBox = ({
   const getTextTooltip = () => {
     return (
       <Text fontSize="12px" noSelect>
-        {t("Common:EnableThirdPartyIntegration")}
+        {t("Common:EnableThirdPartyIntegration", {
+          productName: t("Common:ProductName"),
+        })}
       </Text>
     );
   };

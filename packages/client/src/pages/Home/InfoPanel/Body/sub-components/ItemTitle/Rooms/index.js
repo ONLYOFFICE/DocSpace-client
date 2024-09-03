@@ -27,6 +27,7 @@
 import { useRef } from "react";
 import { withTranslation } from "react-i18next";
 
+import { getTitleWithoutExtension } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
 import { inject, observer } from "mobx-react";
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
@@ -57,6 +58,7 @@ const RoomsItemHeader = ({
   showSearchBlock,
   setShowSearchBlock,
   roomType,
+  displayFileExtension,
 }) => {
   const itemTitleRef = useRef();
 
@@ -75,6 +77,13 @@ const RoomsItemHeader = ({
 
   const badgeUrl = showPlanetIcon ? Planet12ReactSvgUrl : null;
   const isRoomMembersPanel = selection?.isRoom && roomsView === "info_members";
+
+  const isFile = !!selection.fileExst;
+  let title = selection.title;
+
+  if (isFile) {
+    title = getTitleWithoutExtension(selection, false);
+  }
 
   const onSelectItem = () => {
     setSelection([]);
@@ -108,7 +117,7 @@ const RoomsItemHeader = ({
       <div className="item-icon">
         <RoomIcon
           color={selection.logo?.color}
-          title={selection.title}
+          title={title}
           isArchive={isArchive}
           showDefault={showDefaultRoomIcon}
           imgClassName={`icon ${selection.isRoom && "is-room"}`}
@@ -118,8 +127,11 @@ const RoomsItemHeader = ({
         />
       </div>
 
-      <Text className="text" title={selection.title}>
-        {selection.title}
+      <Text className="text" title={title} dir="auto">
+        {title}
+        {isFile && displayFileExtension && (
+          <span className="file-extension">{selection.fileExst}</span>
+        )}
       </Text>
 
       <div className="info_title-icons">
@@ -163,6 +175,7 @@ export default inject(
     selectedFolderStore,
     filesStore,
     infoPanelStore,
+    filesSettingsStore,
   }) => {
     const {
       infoPanelSelection,
@@ -171,6 +184,8 @@ export default inject(
       showSearchBlock,
       setShowSearchBlock,
     } = infoPanelStore;
+
+    const { displayFileExtension } = filesSettingsStore;
 
     const selection = infoPanelSelection.length > 1 ? null : infoPanelSelection;
     const isArchive = selection?.rootFolderType === FolderType.Archive;
@@ -197,6 +212,8 @@ export default inject(
       isArchive,
       isShared: selection?.shared,
       roomType,
+
+      displayFileExtension,
     };
   },
 )(

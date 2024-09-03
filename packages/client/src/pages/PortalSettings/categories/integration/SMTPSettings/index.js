@@ -57,8 +57,6 @@ const SMTPSettings = (props) => {
     setIsInit(true);
   };
   useEffect(() => {
-    setDocumentTitle(t("Settings:SMTPSettings"));
-
     timerId = setTimeout(() => {
       setIsLoading(true);
     }, 400);
@@ -70,6 +68,10 @@ const SMTPSettings = (props) => {
       timerId = null;
     };
   }, []);
+
+  useEffect(() => {
+    if (ready) setDocumentTitle(t("Settings:SMTPSettings"));
+  }, [ready]);
 
   const isLoadingContent = isLoading || !ready;
 

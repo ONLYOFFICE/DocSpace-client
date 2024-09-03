@@ -64,5 +64,8 @@ export interface PublicRouteProps
     Pick<AuthStore, "isAuthenticated">,
     Pick<
       SettingsStore,
-      "wizardCompleted" | "tenantStatus" | "isPortalDeactivate"
+      | "wizardCompleted"
+      | "tenantStatus"
+      | "isPortalDeactivate"
+      | "isFirstLoaded"
     > {}

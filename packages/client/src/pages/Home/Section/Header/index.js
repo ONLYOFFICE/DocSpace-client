@@ -52,6 +52,7 @@ import {
 import TariffBar from "SRC_DIR/components/TariffBar";
 import { globalColors } from "@docspace/shared/themes";
 import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
+import { toastr } from "@docspace/shared/components/toast";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -226,9 +227,13 @@ const SectionHeaderContent = (props) => {
     async (e) => {
       const files = await getFilesFromEvent(e);
 
-      createFoldersTree(files).then((f) => {
-        if (f.length > 0) startUpload(f, null, t);
-      });
+      createFoldersTree(t, files)
+        .then((f) => {
+          if (f.length > 0) startUpload(f, null, t);
+        })
+        .catch((err) => {
+          toastr.error(err);
+        });
     },
     [startUpload, t],
   );

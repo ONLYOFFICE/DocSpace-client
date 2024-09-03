@@ -29,10 +29,6 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { globalColors } from "@docspace/shared/themes";
 
 const StyledModalDialog = styled(ModalDialog)`
-  .modal-header {
-    margin: 0;
-  }
-
   .modal-body {
     padding: 0;
   }

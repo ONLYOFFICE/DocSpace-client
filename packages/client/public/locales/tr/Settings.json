@@ -89,7 +89,6 @@
   "DataImportComplete": "Veri içe aktarma tamamlandı",
   "DataImportDescription": "Üçüncü taraf bir hizmetten {{organizationName}} {{productName}}’e veri aktarın. Veri içe aktarma, tüm kullanıcılar, kişisel ve paylaşılan belgeler gibi verilerin aktarılmasını sağlar.",
   "DataImportProcessing": "Veri içe aktarma işlemi",
-  "Deactivate": "Devre dışı bırak",
   "DeactivateOrDeletePortal": "Alanı devre dışı bırak veya sil.",
   "DefaultSettings": "Varsayılan Ayarlar",
   "DefineQuotaPerRoom": "Oda başına kota tanımla",

@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "について",
   "AboutCompanyTitle": "本プログラムについて",
   "AccessDenied": "アクセス拒否",
@@ -40,6 +40,7 @@
   "ChangeButton": "変更",
   "ChangeQuota": "容量制限の変更",
   "ChangesSavedSuccessfully": "変更の保存に成功",
+  "ChangeUserPermissions": "招待した人へのユーザー権限を変更するか、<1>料金プランをアップグレード</1>します。",
   "ChooseFromTemplates": " テンプレートから選択",
   "ClearAll": "すべてクリア",
   "ClearFilter": "フィルターのクリア",
@@ -51,6 +52,7 @@
   "ComingSoon": "近日公開",
   "Comment": "コメント",
   "Comments": "コメント",
+  "Commercial": "商用",
   "Common": "共通",
   "CommonFiles": "共通のファイル",
   "CompanyName": "企業名",
@@ -59,7 +61,6 @@
   "ConflictResolveSelectAction": "アクションをお選びください：",
   "Connect": "接続",
   "Content": "コンテンツ",
-  "Context": "コンテキスト",
   "ContinueButton": "続ける",
   "ContinueWith": "次の設定で進む",
   "Copy": "コピー",
@@ -140,6 +141,8 @@
   "DontShowAgain": "再表示しない",
   "Download": "ダウンロード",
   "DownloadApps": "アプリをダウンロードする",
+  "DownloadOperationDescription": "準備ができたら、ブラウザのダウンロードフォルダからファイルを見つけ、このタブを閉じます。",
+  "DownloadOperationTitle": "ファイルのダウンロード中です",
   "DropzoneTitleExsts": "(JPG または PNG)",
   "DropzoneTitleLink": "新しい画像を選択する",
   "DropzoneTitleSecondary": "、またはファイルをドロップしてください",
@@ -158,6 +161,7 @@
   "EmptyRoomsDescription": "私のルーム」に最初のルームを作成してください。",
   "EmptyRoomsHeader": "ここにはまだルームがありません",
   "Enable": "有効",
+  "EnableThirdPartyIntegration": "{{productName}}の所有者または管理者に、{{productName}}設定の統合セクションで対応するサービスを有効にするよう依頼してください。",
   "EncryptingFile": "ファイルの暗号化",
   "EncryptionFilePreparing": "暗号化するファイルの準備",
   "EncryptionKeysReload": "暗号化キーの再入力が必要",
@@ -239,6 +243,7 @@
   "InviteUsers": "ユーザーを招待する",
   "Kilobyte": "KB",
   "Language": "言語",
+  "LastActivityDate": "最終アクティビティ日",
   "LastModifiedDate": "変更日",
   "LastName": "姓",
   "LatePayment": "延滞料",
@@ -321,6 +326,7 @@
   "Owner": "所有者",
   "PageOfTotalPage": "{{page}}の{{totalPage}}",
   "Paid": "有料",
+  "PaidUsersExceedsLimit": "管理者/パワーユーザーの数が制限を超えています：{{count}} / {{limit}}。",
   "Password": "パスワード",
   "PasswordLimitDigits": "桁",
   "PasswordLimitMessage": "パスワードには、以下が含まれていなければなりません。",
@@ -390,6 +396,7 @@
   "RoomAdmin": "ルームの管理者",
   "RoomList": "ルーム一覧",
   "Rooms": "ルーム",
+  "RoomSpaceQuotaExceeded": "ルームの容量制限を超えています({{size}})",
   "SameEmail": "同じメールを使用することはできません",
   "SaveButton": "保存",
   "SaveHereButton": "ここで保存",
@@ -509,5 +516,6 @@
   "Website": "ウェブサイト",
   "Yes": "はい",
   "Yesterday": "昨日",
-  "You": "あなた"
+  "You": "あなた",
+  "Deactivate": "停止する"
 }

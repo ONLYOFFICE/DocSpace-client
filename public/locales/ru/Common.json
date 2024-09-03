@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "О программе",
   "AboutCompanyTitle": "О программе",
   "AccessDenied": "Доступ запрещен",
@@ -40,6 +40,7 @@
   "ChangeButton": "Изменить",
   "ChangeQuota": "Изменить квоту",
   "ChangesSavedSuccessfully": "Изменения успешно сохранены",
+  "ChangeUserPermissions": "Измените права доступа приглашенных пользователей или <1>обновите тарифный план</1>.",
   "ChooseFromTemplates": "Выбрать из шаблонов",
   "ClearAll": "Очистить все",
   "ClearFilter": "Очистить фильтр",
@@ -51,6 +52,7 @@
   "ComingSoon": "Скоро появится",
   "Comment": "Комментирование",
   "Comments": "Комментарии",
+  "Commercial": "Коммерческая",
   "Common": "Общие",
   "CommonFiles": "Общие файлы",
   "CompanyName": "Название компании",
@@ -59,7 +61,6 @@
   "ConflictResolveSelectAction": "Пожалуйста, выберите действие:",
   "Connect": "Подключить",
   "Content": "Контент",
-  "Context": "Контекст",
   "ContinueButton": "Продолжить",
   "ContinueWith": "Продолжить с",
   "Copy": "Копировать",
@@ -140,6 +141,8 @@
   "DontShowAgain": "Больше не показывать",
   "Download": "Скачать",
   "DownloadApps": "Скачать приложения",
+  "DownloadOperationDescription": "Когда все будет готово, вы сможете найти файлы в папке загрузок вашего браузера и закрыть эту вкладку.",
+  "DownloadOperationTitle": "Идет загрузка файла",
   "DropzoneTitleExsts": "(JPG или PNG)",
   "DropzoneTitleLink": "Выбрать новое изображение",
   "DropzoneTitleSecondary": "или перетащите файл сюда",
@@ -158,6 +161,7 @@
   "EmptyRoomsDescription": "Пожалуйста, создайте первую комнату в Моих комнатах.",
   "EmptyRoomsHeader": "Здесь пока нет комнат",
   "Enable": "Включить",
+  "EnableThirdPartyIntegration": "Попросите владельца или администратора {{productName}} подключить соответствующий сервис в разделе «Интеграция» настроек {{productName}}.",
   "EncryptingFile": "Шифрование файла",
   "EncryptionFilePreparing": "Подготовка файла к шифрованию",
   "EncryptionKeysReload": "Ключи шифрования необходимо ввести повторно",
@@ -239,6 +243,7 @@
   "InviteUsers": "Пригласить пользователей",
   "Kilobyte": "Кб",
   "Language": "Язык",
+  "LastActivityDate": "Дата последней активности",
   "LastModifiedDate": "Дата последнего изменения",
   "LastName": "Фамилия",
   "LatePayment": "Просроченная оплата",
@@ -321,6 +326,7 @@
   "Owner": "Владелец",
   "PageOfTotalPage": "{{page}} из {{totalPage}}",
   "Paid": "Платный",
+  "PaidUsersExceedsLimit": "Количество администраторов/опытных пользователей превышает лимит: {{count}} / {{limit}}.",
   "Password": "Пароль",
   "PasswordLimitDigits": "цифры",
   "PasswordLimitMessage": "Пароль должен содержать",
@@ -390,6 +396,7 @@
   "RoomAdmin": "Администратор комнаты",
   "RoomList": "Список комнат",
   "Rooms": "Комнаты",
+  "RoomSpaceQuotaExceeded": "Превышена квота пространства на комнату ({{size}})",
   "SameEmail": "Email совпадает с текущим",
   "SaveButton": "Сохранить",
   "SaveHereButton": "Сохранить сюда",
@@ -510,5 +517,6 @@
   "WithoutIcon": "Без иконки",
   "Yes": "Да",
   "Yesterday": "Вчера",
-  "You": "Вы"
+  "You": "Вы",
+  "Deactivate": "Деактивировать"
 }

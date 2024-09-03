@@ -89,7 +89,6 @@
   "DataImportComplete": "Import danych został zakończony",
   "DataImportDescription": "Importuj dane z usługi podmiotu trzeciego do {{organizationName}} {{productName}}. Import danych umożliwia transfer danych, takich jak wszyscy użytkownicy oraz ich prywatne i współdzielone dokumenty.",
   "DataImportProcessing": "Przetwarzanie importu danych",
-  "Deactivate": "Dezaktywuj",
   "DeactivateOrDeletePortal": "Dezaktywuj lub usuń portal.",
   "DefaultSettings": "Ustawienia domyślne",
   "DefineQuotaPerRoom": "Zdefiniuj limit na pokój",

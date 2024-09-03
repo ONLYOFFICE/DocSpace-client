@@ -30,6 +30,7 @@ import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 
 import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
 
 import TileContent from "./sub-components/TileContent";
 import withContent from "../../../../../HOCs/withContent";
@@ -42,7 +43,8 @@ const SimpleFilesTileContent = styled(TileContent)`
   .row-main-container {
     height: auto;
     max-width: 100%;
-    align-self: flex-end;
+    display: flex;
+    align-items: flex-end;
   }
 
   .main-icons {
@@ -90,6 +92,11 @@ const SimpleFilesTileContent = styled(TileContent)`
     -webkit-line-clamp: 2;
     display: -webkit-box;
     -webkit-box-orient: vertical;
+    text-align: start;
+  }
+
+  .item-file-exst {
+    color: ${(props) => props.theme.filesSection.tableView.fileExstColor};
   }
 
   ${({ isRooms }) =>
@@ -117,6 +124,7 @@ const FilesTileContent = ({
   theme,
   isRooms,
   currentDeviceType,
+  displayFileExtension,
 }) => {
   const { fileExst, title, viewAccessibility } = item;
 
@@ -140,8 +148,12 @@ const FilesTileContent = ({
           {...linkStyles}
           color={theme.filesSection.tilesView.color}
           isTextOverflow
+          dir="auto"
         >
           {titleWithoutExt}
+          {displayFileExtension && (
+            <span className="item-file-exst">{fileExst}</span>
+          )}
         </Link>
       </SimpleFilesTileContent>
     </>

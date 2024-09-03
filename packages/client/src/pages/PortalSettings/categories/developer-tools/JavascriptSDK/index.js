@@ -118,7 +118,7 @@ const PresetsContainer = styled.div`
 `;
 
 const PortalIntegration = (props) => {
-  const { t, currentColorScheme, sdkLink, theme } = props;
+  const { t, currentColorScheme, sdkLink, theme, tReady } = props;
 
   const isSmall = useRef(
     (() => {
@@ -129,8 +129,6 @@ const PortalIntegration = (props) => {
   );
 
   const [isFlex, setIsFlex] = useState(isSmall.current);
-
-  setDocumentTitle(t("JavascriptSdk"));
 
   const navigate = useNavigate();
 
@@ -190,6 +188,10 @@ const PortalIntegration = (props) => {
       handleOnClick: navigateToCustom,
     },
   ];
+
+  useEffect(() => {
+    if (tReady) setDocumentTitle(t("JavascriptSdk"));
+  }, [tReady]);
 
   const onResize = (entries) => {
     const belowThreshold = entries[0].contentRect.width <= 600;

@@ -24,32 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, {
-  useEffect,
-  useState,
-  useCallback,
-  useMemo,
-  useRef,
-} from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
 
-import { DeviceType, EmployeeType } from "@docspace/shared/enums";
+import { EmployeeType, RoomsType } from "@docspace/shared/enums";
 import { LOADER_TIMEOUT } from "@docspace/shared/constants";
 
-import { Backdrop } from "@docspace/shared/components/backdrop";
-import { Aside, AsideHeader } from "@docspace/shared/components/aside";
 import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
-import { Portal } from "@docspace/shared/components/portal";
-import { isDesktop, isMobile, size } from "@docspace/shared/utils";
-
-import { StyledInvitePanel, StyledButtons } from "./StyledInvitePanel";
+import { isDesktop, isMobile } from "@docspace/shared/utils";
 
 import ItemsList from "./sub-components/ItemsList";
 import InviteInput from "./sub-components/InviteInput";
 import ExternalLinks from "./sub-components/ExternalLinks";
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 import InfoBar from "./sub-components/InfoBar";
 import InvitePanelLoader from "./sub-components/InvitePanelLoader";
@@ -57,6 +45,12 @@ import InvitePanelLoader from "./sub-components/InvitePanelLoader";
 import { Text } from "@docspace/shared/components/text";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
+import { getAccessOptions } from "./utils";
+import AddUsersPanel from "../AddUsersPanel";
 
 const InvitePanel = ({
   folders,
@@ -77,12 +71,14 @@ const InvitePanel = ({
   setInviteLanguage,
   getUsersList,
   filter,
-  currentDeviceType,
   isRoomAdmin,
   maxCountManagersByQuota,
   invitePaidUsersCount,
   setIsNewUserByCurrentUser,
   setInvitePaidUsersCount,
+  isOwner,
+  standalone,
+  hideSelector,
 }) => {
   const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
     roomId !== -1,
@@ -102,11 +98,15 @@ const InvitePanel = ({
 
   const onCloseBar = () => setInfoBarIsVisible(false);
 
+  const [selectedAccess, setSelectedAccess] = useState(defaultAccess);
+
   const inputsRef = useRef();
   const invitePanelBodyRef = useRef();
   const invitePanelWrapper = useRef(null);
   const invitePanelRef = useRef(null);
   const loaderRef = useRef();
+
+  const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
   const onChangeExternalLinksVisible = (visible) => {
     setExternalLinksVisible(visible);
@@ -420,100 +420,113 @@ const InvitePanel = ({
     invitePanelBodyRef,
   ]);
 
-  const invitePanelNode = (
-    <>
-      {invitePanelIsLoding ? (
-        <InvitePanelLoader />
-      ) : (
-        <>
-          {scrollAllPanelContent ? (
-            <div className="invite-panel-body" ref={invitePanelBodyRef}>
-              <Scrollbar>{bodyInvitePanel}</Scrollbar>
-            </div>
-          ) : (
-            bodyInvitePanel
-          )}
-
-          <StyledButtons>
-            <Button
-              className="send-invitation"
-              scale={true}
-              size={"normal"}
-              isDisabled={hasErrors || !hasInvitedUsers}
-              primary
-              onClick={onClickSend}
-              label={t("SendInvitation")}
-              isLoading={isLoading}
-            />
-            <Button
-              className="cancel-button"
-              scale={true}
-              size={"normal"}
-              onClick={onClose}
-              label={t("Common:CancelButton")}
-              isDisabled={isLoading}
-            />
-          </StyledButtons>
-        </>
-      )}
-    </>
-  );
-
-  const invitePanelComponent = (
-    <StyledInvitePanel
-      id="InvitePanelWrapper"
-      hasInvitedUsers={hasInvitedUsers}
-      scrollAllPanelContent={scrollAllPanelContent}
-      addUsersPanelVisible={addUsersPanelVisible}
-      ref={invitePanelWrapper}
-    >
-      {isMobileView ? (
-        <div className="invite_panel" ref={invitePanelRef}>
-          <AsideHeader
-            header={t("Common:InviteUsers")}
-            onCloseClick={onClose}
-          />
-
-          {invitePanelNode}
-        </div>
-      ) : (
-        <>
-          <Backdrop
-            onClick={onClose}
-            visible={visible}
-            isAside={true}
-            zIndex={currentDeviceType === DeviceType.mobile ? 10 : 210}
-          />
-          <Aside
-            className="invite_panel"
-            visible={visible}
-            onClose={onClose}
-            withoutBodyScroll
-            zIndex={310}
-            header={t("Common:InviteUsers")}
-          >
-            {invitePanelNode}
-          </Aside>
-        </>
-      )}
-    </StyledInvitePanel>
-  );
-
-  const renderPortalInvitePanel = () => {
-    const rootElement = document.getElementById("root");
-
-    return (
-      <Portal
-        element={invitePanelComponent}
-        appendTo={rootElement}
-        visible={visible}
-      />
-    );
+  const closeUsersPanel = () => {
+    setAddUsersPanelVisible(false);
   };
 
-  return currentDeviceType === DeviceType.mobile
-    ? renderPortalInvitePanel()
-    : invitePanelComponent;
+  const addItems = (users) => {
+    const topFreeRole = getTopFreeRole(t, roomType);
+    users.forEach((u) => {
+      if (u.isGroup && checkIfAccessPaid(u.access)) {
+        u.access = topFreeRole.access;
+        u.warning = t("GroupMaxAvailableRoleWarning", {
+          roleName: topFreeRole.label,
+        });
+      }
+
+      if (
+        isUserTariffLimit &&
+        (!u.avatar || u.isVisitor) &&
+        isPaidUserRole(u.access)
+      ) {
+        const freeRole = getTopFreeRole(t, roomType)?.access;
+
+        if (freeRole) {
+          u.access = freeRole;
+          toastr.error(<PaidQuotaLimitError />);
+        }
+      }
+    });
+
+    const items = [...users, ...inviteItems];
+
+    const filtered = removeExist(items);
+
+    setInviteItems(filtered);
+    setInputValue("");
+    setUsersList([]);
+  };
+
+  const accessOptions = getAccessOptions(
+    t,
+    roomType,
+    false,
+    true,
+    isOwner,
+    standalone,
+  );
+
+  const invitedUsers = useMemo(
+    () => inviteItems.map((item) => item.id),
+    [inviteItems],
+  );
+
+  return (
+    <ModalDialog
+      visible={visible}
+      onClose={onClose}
+      displayType={ModalDialogType.aside}
+      containerVisible={!hideSelector && addUsersPanelVisible}
+      isLoading={invitePanelIsLoding}
+    >
+      {!hideSelector && addUsersPanelVisible && (
+        <ModalDialog.Container>
+          <AddUsersPanel
+            onParentPanelClose={onClose}
+            onClose={closeUsersPanel}
+            visible={addUsersPanelVisible}
+            tempDataItems={inviteItems}
+            setDataItems={addItems}
+            accessOptions={accessOptions}
+            isMultiSelect
+            isEncrypted
+            defaultAccess={selectedAccess}
+            withoutBackground={isMobileView}
+            withBlur={!isMobileView}
+            roomId={roomId}
+            withGroups={!isPublicRoomType}
+            withAccessRights
+            invitedUsers={invitedUsers}
+            disableDisabledUsers
+            useAside={false}
+          />
+        </ModalDialog.Container>
+      )}
+
+      <ModalDialog.Header>{t("Common:InviteUsers")}</ModalDialog.Header>
+      <ModalDialog.Body>{bodyInvitePanel}</ModalDialog.Body>
+      <ModalDialog.Footer>
+        <Button
+          className="send-invitation"
+          scale={true}
+          size={"normal"}
+          isDisabled={hasErrors || !hasInvitedUsers}
+          primary
+          onClick={onClickSend}
+          label={t("SendInvitation")}
+          isLoading={isLoading}
+        />
+        <Button
+          className="cancel-button"
+          scale={true}
+          size={"normal"}
+          onClick={onClose}
+          label={t("Common:CancelButton")}
+          isDisabled={isLoading}
+        />
+      </ModalDialog.Footer>
+    </ModalDialog>
+  );
 };
 
 export default inject(
@@ -525,8 +538,9 @@ export default inject(
     infoPanelStore,
     authStore,
     currentQuotaStore,
+    userStore,
   }) => {
-    const { theme, currentDeviceType } = settingsStore;
+    const { theme, standalone } = settingsStore;
 
     const { getUsersByQuery, inviteUsers, getUsersList } =
       peopleStore.usersStore;
@@ -555,6 +569,8 @@ export default inject(
 
     const { maxCountManagersByQuota } = currentQuotaStore;
 
+    const { isOwner } = userStore.user;
+
     return {
       folders,
       setInviteLanguage,
@@ -575,12 +591,14 @@ export default inject(
       isRoomMembersPanelOpen,
       getUsersList,
       filter,
-      currentDeviceType,
       isRoomAdmin,
       maxCountManagersByQuota,
       invitePaidUsersCount,
       setIsNewUserByCurrentUser,
       setInvitePaidUsersCount,
+      isOwner,
+      standalone,
+      hideSelector: invitePanelOptions.hideSelector,
     };
   },
 )(

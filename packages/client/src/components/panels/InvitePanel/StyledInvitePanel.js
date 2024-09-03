@@ -115,7 +115,6 @@ const StyledInviteUserBody = styled.div`
 const StyledSubHeader = styled(Heading)`
   font-weight: 700;
   font-size: 16px;
-  padding-inline: 16px;
   margin: 16px 0 8px;
 
   ${(props) =>
@@ -128,7 +127,6 @@ const StyledSubHeader = styled(Heading)`
 `;
 
 const StyledDescription = styled(Text)`
-  padding-inline: 16px;
   color: ${(props) =>
     props.theme.createEditRoomDialog.commonParam.descriptionColor};
   margin-bottom: 16px;
@@ -181,7 +179,6 @@ const StyledRow = styled.div`
 const StyledInviteInput = styled.div`
   ${fillAvailableWidth}
 
-  margin-inline-start: 16px;
   margin-inline-end: ${(props) => (props.hideSelector ? "16px" : "8px")};
 
   .input-link {
@@ -291,6 +288,10 @@ const StyledInviteInputContainer = styled.div`
         }
       }
     }
+  }
+
+  .access-selector {
+    margin-inline-end: 0;
   }
 `;
 
@@ -430,7 +431,6 @@ const StyledToggleButton = styled(ToggleButton)`
 `;
 
 const StyledInviteLanguage = styled.div`
-  padding-inline: 16px;
   margin-top: -12px;
   display: flex;
   align-items: center;

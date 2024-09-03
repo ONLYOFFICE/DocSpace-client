@@ -28,7 +28,7 @@ import path from "path";
 import { expect, test } from "./fixtures/base";
 import { endpoints } from "./mocking/endpoints";
 
-test("wizard render", async ({ page, mockRequest }) => {
+test("wizard render", async ({ page }) => {
   await page.goto("/login/wizard");
 
   await expect(page).toHaveScreenshot([
@@ -57,8 +57,8 @@ test("wizard success", async ({ page, mockRequest }) => {
   ]);
 
   await page.getByTestId("button").click();
+  await page.waitForURL("/", { waitUntil: "load" });
 
-  await expect(page).toHaveURL(/.*\//);
   await expect(page).toHaveScreenshot([
     "desktop",
     "wizard",
@@ -88,6 +88,7 @@ test("wizard error", async ({ page, mockRequest }) => {
 });
 
 test("wizard with license success", async ({ page, mockRequest }) => {
+  //TODO: remove this route when MSW the server is added
   await page.route("*/**/login/wizard", async (route) => {
     await route.continue({
       headers: {
@@ -95,8 +96,9 @@ test("wizard with license success", async ({ page, mockRequest }) => {
       },
     });
   });
-  await mockRequest.router(endpoints.complete);
 
+  await mockRequest.router(endpoints.complete);
+  await mockRequest.router(endpoints.license);
   await page.goto("/login/wizard");
 
   await page.fill("[name='wizard-email']", "email@mail.ru");
@@ -104,14 +106,55 @@ test("wizard with license success", async ({ page, mockRequest }) => {
     .getByTestId("password-input")
     .getByTestId("text-input")
     .fill("qwerty123");
-  await page.getByTestId("checkbox").click();
 
   const fileChooserPromise = page.waitForEvent("filechooser");
   await page.getByTestId("file-input").click();
   const fileChooser = await fileChooserPromise;
-  await fileChooser.setFiles(path.join(__dirname, "example.lic"));
+  await fileChooser.setFiles(path.join(__dirname, "files", "example.lic"));
+
+  await page.getByTestId("checkbox").click();
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "wizard",
+    "wizard-with-license-success.png",
+  ]);
 
   await page.getByTestId("button").click();
 
-  await expect(page).toHaveURL(/.*\//);
+  await page.waitForURL("/", { waitUntil: "load" });
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "wizard",
+    "wizard-with-license-success-redirect.png",
+  ]);
+});
+
+test("wizard with license error", async ({ page }) => {
+  //TODO: remove this route when MSW the server is added
+  await page.route("*/**/login/wizard", async (route) => {
+    await route.continue({
+      headers: {
+        "x-test-data-license-required": "true",
+      },
+    });
+  });
+
+  await page.goto("/login/wizard");
+
+  await page.fill("[name='wizard-email']", "email@123");
+  await page
+    .getByTestId("password-input")
+    .getByTestId("text-input")
+    .fill("123");
+  await page.getByTestId("checkbox").click();
+
+  await page.getByTestId("button").click();
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "wizard",
+    "wizard-with-license-error.png",
+  ]);
 });

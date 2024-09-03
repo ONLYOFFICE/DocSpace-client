@@ -172,6 +172,7 @@ const StyledScopesContainer = styled.div`
 
   display: grid;
   grid-template-columns: 1fr max-content max-content;
+  grid-auto-rows: max-content;
 
   align-items: center;
 
@@ -201,6 +202,7 @@ StyledScopesContainer.defaultProps = { theme: Base };
 const StyledScopesName = styled.div`
   display: flex;
 
+  align-content: flex-start;
   flex-direction: column;
 
   .scope-name {

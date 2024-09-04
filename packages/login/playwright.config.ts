@@ -35,6 +35,12 @@ export default defineConfig({
     trace: "on-first-retry",
   },
   snapshotPathTemplate: "{testDir}/screenshots{/projectName}/{arg}{ext}",
+  expect: {
+    toHaveScreenshot: {
+      maxDiffPixelRatio: 0.01,
+      maxDiffPixels: 10,
+    },
+  },
 
   /* Configure projects for major browsers */
   projects: [

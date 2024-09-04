@@ -134,7 +134,7 @@ const SetRoomParams = ({
   disabledChangeRoomType,
   maxImageUploadSize,
   bufferSelection,
-  setRoomLogoCoverDialogVisible,
+  getLogoCoverModel,
 }) => {
   const [previewIcon, setPreviewIcon] = useState(null);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
@@ -184,30 +184,29 @@ const SetRoomParams = ({
       ...{ createAsNewFolder: !createNewFolderIsChecked },
     });
   };
-  const model = [
-    {
-      label: "UploadPicture",
-      icon: UploadPenSvgUrl,
-      onClick: () => {},
-    },
-    {
-      label: "CustomizeCover",
-      icon: PenSvgUrl,
-      onClick: () => setRoomLogoCoverDialogVisible(true),
-    },
-  ];
 
-  const element = (
+  const hasImage = bufferSelection?.logo?.original;
+  const model = getLogoCoverModel(t, hasImage);
+
+  const element = isEdit ? (
     <ItemIcon
-      id={bufferSelection.id}
-      fileExst={bufferSelection.fileExst}
-      isRoom={bufferSelection.isRoom}
-      title={bufferSelection.title}
-      logo={{ medium: bufferSelection.logo?.large }}
-      color={bufferSelection.logo?.color}
+      id={bufferSelection?.id}
+      fileExst={bufferSelection?.fileExst}
+      isRoom={bufferSelection?.isRoom}
+      title={bufferSelection?.title}
+      logo={{ medium: bufferSelection?.logo?.large }}
+      showDefault={!bufferSelection?.logo?.large}
+      color={bufferSelection?.logo?.color}
       size={isMobile() ? "96px" : "64px"}
       withEditing={true}
       model={model}
+    />
+  ) : (
+    <ItemIcon
+      id={bufferSelection?.id}
+      title={roomParams.title}
+      showDefault={true}
+      size={isMobile() ? "96px" : "64px"}
     />
   );
 
@@ -341,8 +340,7 @@ export default inject(
 
     const { bufferSelection } = filesStore;
 
-    const { setChangeRoomOwnerIsVisible, setRoomLogoCoverDialogVisible } =
-      dialogsStore;
+    const { setChangeRoomOwnerIsVisible, getLogoCoverModel } = dialogsStore;
     const { folderFormValidation, maxImageUploadSize } = settingsStore;
 
     return {
@@ -351,13 +349,16 @@ export default inject(
       setChangeRoomOwnerIsVisible,
       maxImageUploadSize,
       bufferSelection,
-      setRoomLogoCoverDialogVisible,
+      getLogoCoverModel,
     };
   },
 )(
   observer(
-    withTranslation(["CreateEditRoomDialog", "Translations", "Common"])(
-      withLoader(SetRoomParams)(<SetRoomParamsLoader />),
-    ),
+    withTranslation([
+      "CreateEditRoomDialog",
+      "Translations",
+      "Common",
+      "RoomLogoCover",
+    ])(withLoader(SetRoomParams)(<SetRoomParamsLoader />)),
   ),
 );

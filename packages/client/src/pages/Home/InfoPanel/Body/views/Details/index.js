@@ -51,6 +51,7 @@ const Details = ({
   isArchive,
   isDefaultRoomsQuotaSet,
   setNewInfoPanelSelection,
+  getLogoCoverModel,
 }) => {
   const [itemProperties, setItemProperties] = useState([]);
 
@@ -101,6 +102,9 @@ const Details = ({
   const isLoadedRoomIcon = !!selection.logo?.large;
   const showDefaultRoomIcon = !isLoadedRoomIcon && selection.isRoom;
 
+  const hasImage = selection?.logo?.original;
+  const model = getLogoCoverModel(t, hasImage);
+
   return (
     <>
       {selection.thumbnailUrl && !isThumbnailError ? (
@@ -135,6 +139,7 @@ const Details = ({
               "custom-logo"
             }`}
             logo={{ medium: currentIcon }}
+            model={model}
             withEditing={true}
           />
         </StyledNoThumbnail>
@@ -172,6 +177,7 @@ export default inject(
     infoPanelStore,
     userStore,
     currentQuotaStore,
+    dialogsStore,
   }) => {
     const {
       infoPanelSelection,
@@ -203,6 +209,15 @@ export default inject(
       isArchive,
       isDefaultRoomsQuotaSet,
       setNewInfoPanelSelection,
+      getLogoCoverModel: dialogsStore.getLogoCoverModel,
     };
   },
-)(withTranslation(["InfoPanel", "Common", "Translations", "Files"])(Details));
+)(
+  withTranslation([
+    "InfoPanel",
+    "Common",
+    "Translations",
+    "Files",
+    "RoomLogoCover",
+  ])(Details),
+);

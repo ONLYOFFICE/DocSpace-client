@@ -34,6 +34,10 @@ import {
 import { makeAutoObservable, runInAction } from "mobx";
 import { Events } from "@docspace/shared/enums";
 
+import TrashIconSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
+import PenSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
+import UploadSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
+
 class DialogsStore {
   authStore;
   treeFoldersStore;
@@ -595,6 +599,28 @@ class DialogsStore {
 
   setRoomLogoCoverDialogVisible = (visible) => {
     this.roomLogoCoverDialogVisible = visible;
+  };
+
+  getLogoCoverModel = (t, hasImage) => {
+    return [
+      {
+        label: t("RoomLogoCover:UploadPicture"),
+        icon: UploadSvgUrl,
+        onClick: () => {},
+      },
+
+      hasImage
+        ? {
+            label: t("Common:Delete"),
+            icon: TrashIconSvgUrl,
+            onClick: () => {},
+          }
+        : {
+            label: t("RoomLogoCover:CustomizeCover"),
+            icon: PenSvgUrl,
+            onClick: () => this.setRoomLogoCoverDialogVisible(true),
+          },
+    ];
   };
 }
 

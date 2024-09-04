@@ -34,6 +34,10 @@ import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
 import Planet12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/planet.react.svg?url";
 import Camera10ReactSvgUrl from "PUBLIC_DIR/images/icons/10/cover.camera.react.svg?url";
 import SearchIconReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
+
+import PenSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
+import UploadPenSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
+
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { StyledTitle } from "../../../styles/common";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
@@ -59,6 +63,7 @@ const RoomsItemHeader = ({
   setShowSearchBlock,
   roomType,
   displayFileExtension,
+  getLogoCoverModel,
 }) => {
   const itemTitleRef = useRef();
 
@@ -109,6 +114,9 @@ const RoomsItemHeader = ({
   };
 
   const onSearchClick = () => setShowSearchBlock(true);
+  const hasImage = selection?.logo?.original;
+  const model = getLogoCoverModel(t, hasImage);
+  console.log(model);
 
   return (
     <StyledTitle ref={itemTitleRef}>
@@ -124,6 +132,7 @@ const RoomsItemHeader = ({
           imgSrc={icon}
           badgeUrl={badgeUrl ? badgeUrl : ""}
           hoverSrc={Camera10ReactSvgUrl}
+          model={model}
         />
       </div>
 
@@ -206,6 +215,7 @@ export default inject(
 
       setInvitePanelOptions: dialogsStore.setInvitePanelOptions,
       setQuotaWarningDialogVisible: dialogsStore.setQuotaWarningDialogVisible,
+      getLogoCoverModel: dialogsStore.getLogoCoverModel,
 
       setSelection: filesStore.setSelection,
       setBufferSelection: filesStore.setBufferSelection,
@@ -223,5 +233,6 @@ export default inject(
     "Translations",
     "InfoPanel",
     "SharingPanel",
+    "RoomLogoCover",
   ])(observer(RoomsItemHeader)),
 );

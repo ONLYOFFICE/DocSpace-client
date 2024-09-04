@@ -311,8 +311,8 @@ const DropDown = ({
   const getItemHeight = (item: React.ReactElement) => {
     const isTabletDevice = isTablet();
 
-    const height = item?.props.height;
-    const heightTablet = item?.props.heightTablet;
+    const height = item?.props.height ?? 32;
+    const heightTablet = item?.props.heightTablet ?? 36;
 
     if (item && item.props.isSeparator) {
       return isTabletDevice ? 16 : 12;

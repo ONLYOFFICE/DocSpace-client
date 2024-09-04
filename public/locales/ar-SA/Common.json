@@ -396,6 +396,7 @@
   "RoomAdmin": "مسؤول الغرفة",
   "RoomList": "قائمة الغرف",
   "Rooms": "غرف",
+  "RoomSpaceQuotaExceeded": "({{size}}) تم تجاوز حصة مساحة الغرفة",
   "SameEmail": "لا يمكنك استخدام نفس عنوان البريد الإلكتروني",
   "SaveButton": "حفظ",
   "SaveHereButton": "احفظ هنا",
@@ -516,5 +517,6 @@
   "Website": "موقع إلكتروني",
   "Yes": "نعم",
   "Yesterday": "أمس",
-  "You": "أنت"
+  "You": "أنت",
+  "Deactivate": "تعطيل"
 }

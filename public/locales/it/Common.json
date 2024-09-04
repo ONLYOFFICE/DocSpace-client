@@ -52,6 +52,7 @@
   "ComingSoon": "Prossimamente",
   "Comment": "Commento",
   "Comments": "Commenti",
+  "Commercial": "Commerciale",
   "Common": "Comune",
   "CommonFiles": "File comuni",
   "CompanyName": "Nome azienda",
@@ -244,6 +245,7 @@
   "IpAddress": "Indirizzo IP",
   "Kilobyte": "KB",
   "Language": "Lingua",
+  "LastActivityDate": "Data dell'ultima attività",
   "LastModifiedDate": "Data ultima modifica",
   "LastName": "Cognome",
   "LatePayment": "Pagamento in ritardo",
@@ -397,6 +399,7 @@
   "RoomAdmin": "Amministratore della stanza",
   "RoomList": "Elenco delle stanze",
   "Rooms": "Stanze",
+  "RoomSpaceQuotaExceeded": "È stata superata la quota di spazio delle stanza ({{size}})",
   "SameEmail": "Non puoi usare la stessa email",
   "SaveButton": "Salva",
   "SaveHereButton": "Salvare qui",
@@ -517,5 +520,6 @@
   "Website": "Sito web",
   "Yes": "Sì",
   "Yesterday": "Ieri",
-  "You": "Tu"
+  "You": "Tu",
+  "Deactivate": "Disattiva"
 }

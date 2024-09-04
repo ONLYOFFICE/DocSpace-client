@@ -52,6 +52,7 @@
   "ComingSoon": "Em breve",
   "Comment": "Comentário",
   "Comments": "Comentários",
+  "Commercial": "Comercial",
   "Common": "Comum",
   "CommonFiles": "Arquivos comuns",
   "CompanyName": "Nome da empresa",
@@ -243,6 +244,7 @@
   "IpAddress": "Endereço IP",
   "Kilobyte": "KB",
   "Language": "Idioma",
+  "LastActivityDate": "Data da última atividade",
   "LastModifiedDate": "Data da última modificação",
   "LastName": "Sobrenome",
   "LatePayment": "Atraso no pagamento",
@@ -396,6 +398,7 @@
   "RoomAdmin": "Administrador da sala",
   "RoomList": "Lista de salas",
   "Rooms": "Salas",
+  "RoomSpaceQuotaExceeded": "Cota de espaço da sala excedida ({{size}})",
   "SameEmail": "Você não pode usar o mesmo e-mail",
   "SaveButton": "Salvar",
   "SaveHereButton": "Salvar aqui",
@@ -516,5 +519,6 @@
   "Website": "Site",
   "Yes": "Sim",
   "Yesterday": "Ontem",
-  "You": "Você"
+  "You": "Você",
+  "Deactivate": "Desativar"
 }

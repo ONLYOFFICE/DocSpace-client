@@ -396,6 +396,7 @@
   "RoomAdmin": "Huoneen järjestelmänvalvoja",
   "RoomList": "Huonelista",
   "Rooms": "Huoneet",
+  "RoomSpaceQuotaExceeded": "Huonetilakiintiö ylitetty ({{size}})",
   "SameEmail": "Et voi käyttää samaa sähköpostiosoitetta",
   "SaveButton": "Tallenna",
   "SaveHereButton": "Tallenna tähän",
@@ -516,5 +517,6 @@
   "Website": "Sivusto",
   "Yes": "Kyllä",
   "Yesterday": "Eilen",
-  "You": "Sinä"
+  "You": "Sinä",
+  "Deactivate": "Poista käytöstä"
 }

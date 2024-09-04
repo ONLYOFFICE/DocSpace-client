@@ -110,8 +110,17 @@ const StyledTitle = styled.div`
     line-height: 22px;
     max-height: 44px;
     margin: 0 8px;
+
     overflow: hidden;
     text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-align: start;
+  }
+
+  .file-extension {
+    color: ${(props) => props.theme.filesSection.tableView.fileExstColor};
   }
 
   .free-label {

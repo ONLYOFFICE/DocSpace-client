@@ -52,6 +52,7 @@
   "ComingSoon": "Շուտով",
   "Comment": "Մեկնաբանություն",
   "Comments": "Մեկնաբանություններ",
+  "Commercial": "Կոմերցիոն",
   "Common": "Ընդհանուր",
   "CommonFiles": "Ընդհանուր ֆայլեր",
   "CompanyName": "Ընկերության անվանում",
@@ -243,6 +244,7 @@
   "IpAddress": "IP հասցե",
   "Kilobyte": "ԿԲ",
   "Language": "Լեզու",
+  "LastActivityDate": "Վերջին գործողության ամսաթիվը",
   "LastModifiedDate": "Վերջին փոփոխության ամսաթիվը",
   "LastName": "Վերջին անունը",
   "LatePayment": "Վերջին վճարումը",
@@ -396,6 +398,7 @@
   "RoomAdmin": "Սենյակի ադմին",
   "RoomList": "Սենյակների ցուցակ",
   "Rooms": "Սենյակներ",
+  "RoomSpaceQuotaExceeded": "Սենյակի տարածքի չափաբաժինը գերազանցվել է ({{size}})",
   "SameEmail": "Դուք չեք կարող օգտագործել նույն էլփոստի հասցեն",
   "SaveButton": "Պահպանել",
   "SaveHereButton": "Պահպանեք այստեղ",
@@ -516,5 +519,6 @@
   "Website": "Վեբ կայք",
   "Yes": "Այո",
   "Yesterday": "Երեկ",
-  "You": "Դու"
+  "You": "Դու",
+  "Deactivate": "Ապագործունացնել"
 }

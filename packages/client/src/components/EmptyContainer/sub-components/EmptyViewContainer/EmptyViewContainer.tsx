@@ -48,8 +48,10 @@ const InjectedEmptyViewContainer = inject<
     clientLoadingStore,
     userStore,
     currentQuotaStore,
+    publicRoomStore,
   }): InjectedEmptyViewContainerProps => {
     const { isWarningRoomsDialog } = currentQuotaStore;
+    const { isPublicRoom } = publicRoomStore;
 
     const { myFolderId, myFolder, roomsFolder } = treeFoldersStore;
 
@@ -83,6 +85,7 @@ const InjectedEmptyViewContainer = inject<
       myFolder,
       roomsFolder,
       userId,
+      isPublicRoom,
       isWarningRoomsDialog,
       inviteUser,
       setViewInfoPanel,

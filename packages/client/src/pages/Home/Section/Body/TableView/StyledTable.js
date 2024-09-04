@@ -205,6 +205,10 @@ const StyledTableRow = styled(TableRow)`
     padding-inline: 0 8px;
   }
 
+  .item-file-exst {
+    color: ${(props) => props.theme.filesSection.tableView.fileExstColor};
+  }
+
   ${(props) =>
     props.isHighlight &&
     css`

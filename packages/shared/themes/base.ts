@@ -2044,6 +2044,7 @@ export const getBaseTheme = () => {
           linkColor: black,
           textColor: gray,
         },
+        fileExstColor: gray,
 
         row: {
           checkboxChecked: `linear-gradient(to right, ${lightGrayHover} 24px, ${grayLightMid} 24px)`,

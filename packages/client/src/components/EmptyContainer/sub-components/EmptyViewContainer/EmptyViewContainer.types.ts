@@ -64,6 +64,7 @@ export interface InjectedEmptyViewContainerProps
   isWarningRoomsDialog: boolean;
   setVisibleInfoPanel: (arg: boolean) => void;
   setViewInfoPanel: TStore["infoPanelStore"]["setView"];
+  isPublicRoom: boolean;
 }
 
 export type EmptyViewContainerProps = OutEmptyViewContainerProps &

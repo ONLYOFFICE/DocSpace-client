@@ -25,6 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import axios, { AxiosRequestConfig } from "axios";
+
+import { Nullable } from "../../types";
 import { TWhiteLabel } from "../../utils/whiteLabelHelper";
 import { request } from "../client";
 import {
@@ -77,7 +79,9 @@ export async function getPortalCultures() {
   return res;
 }
 
-export async function getPortalPasswordSettings(confirmKey = null) {
+export async function getPortalPasswordSettings(
+  confirmKey: Nullable<string> = null,
+) {
   const options: AxiosRequestConfig = {
     method: "get",
     url: "/settings/security/password",
@@ -535,7 +539,10 @@ export function dataReassignmentTerminate(userId) {
   });
 }
 
-export function ownerChange(ownerId, confirmKey = null) {
+export function ownerChange(
+  ownerId: string,
+  confirmKey: Nullable<string> = null,
+) {
   const data = { ownerId };
 
   const options = {
@@ -715,7 +722,7 @@ export function getTfaSecretKeyAndQR(confirmKey = null) {
   return request(options);
 }
 
-export function validateTfaCode(code, confirmKey = null) {
+export function validateTfaCode(code, confirmKey: Nullable<string> = null) {
   const data = {
     code,
   };

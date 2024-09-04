@@ -50,8 +50,6 @@ const RoomNoAccessContainer = (props) => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    frameCallEvent({ event: "onNoAccess" });
-
     const timer = setTimeout(onGoToShared, 5000);
     return () => clearTimeout(timer);
   }, []);

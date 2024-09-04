@@ -421,7 +421,7 @@ class ContextOptionsStore {
     const { href } = item;
     const sharedItem = navigationPath.find((r) => r.shared);
 
-    const isShared = shared || sharedItem;
+    const isShared = shared || sharedItem || item.shared;
 
     const isSystemFolder = systemFolders.includes(item.type);
 
@@ -2417,7 +2417,7 @@ class ContextOptionsStore {
     }
 
     const createNewDoc = {
-      id: "personal_new-documnet",
+      id: "personal_new-document",
       key: "new-document",
       label: t("Common:NewDocument"),
       onClick: () => this.onCreate("docx"),

@@ -179,6 +179,9 @@ class TreeFoldersStore {
     return this.rootFoldersTitles[FolderType.TRASH]?.id;
   }
 
+  /**
+   * @type {import("@docspace/shared/api/files/types").TFolder=}
+   */
   get myFolder() {
     return this.treeFolders.find((x) => x.rootFolderType === FolderType.USER);
   }
@@ -196,7 +199,9 @@ class TreeFoldersStore {
   get recentFolder() {
     return this.treeFolders.find((x) => x.rootFolderType === FolderType.Recent);
   }
-
+  /**
+   * @type {import("@docspace/shared/api/rooms/types").TRoom=}
+   */
   get roomsFolder() {
     return this.treeFolders.find((x) => x.rootFolderType === FolderType.Rooms);
   }

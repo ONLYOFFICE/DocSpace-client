@@ -396,6 +396,7 @@
   "RoomAdmin": "Oda yöneticisi",
   "RoomList": "Oda listesi",
   "Rooms": "Odalar",
+  "RoomSpaceQuotaExceeded": "Oda alanı kotası aşıldı ({{size}})",
   "SameEmail": "Aynı e-postayı kullanamazsınız",
   "SaveButton": "Kaydet",
   "SaveHereButton": "Buraya kaydet",
@@ -516,5 +517,6 @@
   "Website": "İnternet Sitesi",
   "Yes": "Evet",
   "Yesterday": "Dün",
-  "You": "Siz"
+  "You": "Siz",
+  "Deactivate": "Devre dışı bırak"
 }

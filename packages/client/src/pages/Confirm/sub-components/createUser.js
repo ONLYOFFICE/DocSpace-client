@@ -189,25 +189,6 @@ const CreateUserForm = (props) => {
     const headerKey = linkData.confirmHeader;
 
     try {
-      const toBinaryStr = (str) => {
-        const encoder = new TextEncoder();
-        const charCodes = encoder.encode(str);
-        return String.fromCharCode(...charCodes);
-      };
-
-      const loginData = window.btoa(
-        toBinaryStr(
-          JSON.stringify({
-            type: "invitation",
-            email,
-            roomName,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            linkData: linkData,
-          }),
-        ),
-      );
-
       await getUserByEmail(email, headerKey);
 
       setCookie(LANGUAGE, currentCultureName, {
@@ -222,10 +203,20 @@ const CreateUserForm = (props) => {
         sessionStorage.setItem("referenceUrl", finalUrl);
       }
 
+      const loginData = JSON.stringify({
+        type: "invitation",
+        email,
+        roomName,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        linkData: linkData,
+      });
+
+      sessionStorage.setItem("loginData", loginData);
+
       window.location.href = combineUrl(
         window.ClientConfig?.proxy?.url,
         "/login",
-        `?loginData=${loginData}`,
       );
     } catch (err) {
       console.error(err);

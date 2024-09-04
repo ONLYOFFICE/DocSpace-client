@@ -106,21 +106,12 @@ export const getMessageKeyTranslate = (t: TTranslation, message: string) => {
   }
 };
 
-export const getInvitationLinkData = (encodeString: string) => {
-  const fromBinaryStr = (encodeString: string) => {
-    const decodeStr = atob(encodeString);
+export const getInvitationLinkData = () => {
+  const loginData = sessionStorage.getItem("loginData");
 
-    const decoder = new TextDecoder();
-    const charCodeArray = Uint8Array.from(
-      { length: decodeStr.length },
-      (element, index) => decodeStr.charCodeAt(index),
-    );
+  if (!loginData) return;
 
-    return decoder.decode(charCodeArray);
-  };
-
-  const decodeString = fromBinaryStr(encodeString);
-  const queryParams = JSON.parse(decodeString) as {
+  const queryParams = JSON.parse(loginData) as {
     email: string;
     roomName: string;
     firstName: string;
@@ -137,22 +128,16 @@ export const getInvitationLinkData = (encodeString: string) => {
   return queryParams;
 };
 
-export const getEmailFromInvitation = (encodeString: Nullable<string>) => {
-  if (!encodeString) return "";
-
-  const queryParams = getInvitationLinkData(encodeString);
+export const getEmailFromInvitation = () => {
+  const queryParams = getInvitationLinkData();
 
   if (!queryParams || !queryParams.email) return "";
 
   return queryParams.email;
 };
 
-export const getConfirmDataFromInvitation = (
-  encodeString: Nullable<string>,
-) => {
-  if (!encodeString) return "";
-
-  const queryParams = getInvitationLinkData(encodeString);
+export const getConfirmDataFromInvitation = () => {
+  const queryParams = getInvitationLinkData();
 
   if (!queryParams || !queryParams.linkData) return {};
 

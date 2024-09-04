@@ -24,14 +24,51 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ArticleStore } from "./articleStore";
-import { SpacesStore } from "./spacesStore";
+import { makeAutoObservable } from "mobx";
+import {
+  getDomainName,
+  setDomainName,
+  setPortalName,
+  createNewPortal,
+  checkDomain,
+} from "@docspace/shared/api/management";
 
-const articleStore = new ArticleStore();
-const spacesStore = new SpacesStore();
+export class SpacesStore {
+  createPortalDialogVisible = false;
+  deletePortalDialogVisible = false;
+  domainDialogVisible = false;
+  spaceCreatedDialogVisible = false;
 
-export const RootStore = {
-  articleStore,
-  spacesStore,
-};
+  referenceLink: URL | string = "";
+
+  currentPortal = false;
+
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  setCurrentPortal = (portal) => {
+    this.currentPortal = portal;
+  };
+
+  setReferenceLink = (link: URL | string) => {
+    this.referenceLink = link;
+  };
+
+  setCreatePortalDialogVisible = (createPortalDialogVisible: boolean) => {
+    this.createPortalDialogVisible = createPortalDialogVisible;
+  };
+
+  setChangeDomainDialogVisible = (domainDialogVisible: boolean) => {
+    this.domainDialogVisible = domainDialogVisible;
+  };
+
+  setDeletePortalDialogVisible = (deletePortalDialogVisible: boolean) => {
+    this.deletePortalDialogVisible = deletePortalDialogVisible;
+  };
+
+  setSpaceCreatedDialogVisible = (spaceCreatedDialogVisible: boolean) => {
+    this.spaceCreatedDialogVisible = spaceCreatedDialogVisible;
+  };
+}
 

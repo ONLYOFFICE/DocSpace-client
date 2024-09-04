@@ -41,7 +41,6 @@
   "LdapSendWelcomeLetter": "Gửi thư chào mừng",
   "LdapSendWelcomeLetterTooltip": "Nếu được chọn, tất cả người dùng mới sẽ nhận được thư chào mừng. Chỉ khả dụng khi Thuộc Tính Thư được ánh xạ tới LDAP.",
   "LdapServer": "Máy chủ",
-  "LdapServerTooltip": "Nhập URL máy chủ LDAP mà không có số cổng, ví dụ: LDAP://mycompany.com.",
   "LdapSettings": "Cài đặt LDAP",
   "LdapSettingsCertCnNoMatch": "Tên chứng chỉ không khớp với tên máy chủ",
   "LdapSettingsCertExpired": "Chứng chỉ đã hết hạn",

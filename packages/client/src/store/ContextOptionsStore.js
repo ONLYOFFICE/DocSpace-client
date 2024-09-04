@@ -2436,7 +2436,7 @@ class ContextOptionsStore {
     }
 
     const createNewDoc = {
-      id: "personal_new-documnet",
+      id: "personal_new-document",
       key: "new-document",
       label: t("Common:NewDocument"),
       onClick: () => this.onCreate("docx"),

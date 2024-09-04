@@ -43,7 +43,7 @@
   "LdapSendWelcomeLetter": "Send welcome letter",
   "LdapSendWelcomeLetterTooltip": "If checked all new users will receive welcome letter. Available only when Mail Attribute is mapped to LDAP.",
   "LdapServer": "Server",
-  "LdapServerTooltip": "Enter the LDAP server URL without the port number, e.g. LDAP://mycompany.com.",
+  "LdapServerTooltip": "Enter the LDAP server without the port number.",
   "LdapSettings": "LDAP settings",
   "LdapSettingsCertCnNoMatch": "Certificate name does not match hostname",
   "LdapSettingsCertExpired": "Certificate is expired",

@@ -25,13 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable } from "mobx";
-import {
-  getDomainName,
-  setDomainName,
-  setPortalName,
-  createNewPortal,
-  checkDomain,
-} from "@docspace/shared/api/management";
 
 export class SpacesStore {
   createPortalDialogVisible = false;

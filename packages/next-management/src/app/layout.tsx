@@ -69,11 +69,7 @@ export default async function RootLayout({
       <body>
         <StyledComponentsRegistry>
           <Providers contextData={{ user, settings, systemTheme, colorTheme }}>
-            <ManagementDialogs
-              settings={settings}
-              user={user}
-              colorTheme={colorTheme}
-            />
+            <ManagementDialogs settings={settings} user={user} />
             <LayoutWrapper>{children}</LayoutWrapper>
           </Providers>
         </StyledComponentsRegistry>

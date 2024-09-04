@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import toLower from "lodash/toLower";
 
@@ -45,11 +46,16 @@ import {
 } from "@docspace/shared/api/management";
 
 import useDeviceType from "@/hooks/useDeviceType";
+import { useStores } from "@/hooks/useStores";
 import { StyledBody } from "./configuration.styled";
 
 export const Body = ({ domainValidator }) => {
   const { t } = useTranslation(["Management", "Common"]);
+  const router = useRouter();
   const { currentDeviceType } = useDeviceType();
+  const { spacesStore } = useStores();
+  const { setReferenceLink, setSpaceCreatedDialogVisible } = spacesStore;
+
   const [domain, setDomain] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [portalNameError, setPortalNameError] = useState<string>("");
@@ -81,7 +87,6 @@ export const Body = ({ domainValidator }) => {
   };
 
   const onConnectClick = async () => {
-    console.log("onConnectClick");
     if (window?.DocSpaceConfig?.management?.checkDomain) {
       setIsLoading(true);
       const checkDomainResult = await checkDomain(`${name}.${domain}`).finally(
@@ -106,11 +111,15 @@ export const Body = ({ domainValidator }) => {
       try {
         setIsLoading(true);
         await setDomainName(domain);
-        await setPortalName(name);
+        await setPortalName(name).then((result) => {
+          setReferenceLink(result);
+          setSpaceCreatedDialogVisible(true);
+        });
       } catch (err) {
         console.error(err);
       } finally {
         setIsLoading(false);
+        router.refresh();
       }
     }
   };

@@ -28,20 +28,33 @@ import { ReactSVG } from "react-svg";
 import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 
+import { TColorScheme, TTheme } from "@docspace/shared/themes";
+import { TTranslation } from "@docspace/shared/types";
+
 import ZoomIcon from "PUBLIC_DIR/images/zoom.integration.react.svg?url";
 import WordpressIcon from "PUBLIC_DIR/images/wordpress.integration.react.svg?url";
 import DrupalIcon from "PUBLIC_DIR/images/drupal.integration.react.svg?url";
+import ArrowIcon from "PUBLIC_DIR/images/arrow.integration.react.svg?url";
 
 import {
   IntegrationContainer,
   CategoryHeader,
 } from "./StyledPortalIntegration";
 
-export const Integration = (props) => {
+const allConnectors = "https://www.onlyoffice.com/all-connectors.aspx";
+const zoom = "https://www.onlyoffice.com/office-for-zoom.aspx";
+const wordPress = "https://www.onlyoffice.com/office-for-wordpress.aspx";
+const drupal = "https://www.onlyoffice.com/office-for-drupal.aspx";
+
+export const Integration = (props: {
+  t: TTranslation;
+  theme: TTheme;
+  currentColorScheme: TColorScheme;
+}) => {
   const { t, theme, currentColorScheme } = props;
 
   return (
-    <IntegrationContainer theme={theme}>
+    <IntegrationContainer theme={theme} color={currentColorScheme.main?.accent}>
       <CategoryHeader className="integration-header">
         {t("IntegrationExamples")}
       </CategoryHeader>
@@ -50,26 +63,47 @@ export const Integration = (props) => {
       </Text>
       <div className="icons">
         <div className="icon" title="Zoom">
-          <ReactSVG className="icon-zoom" src={ZoomIcon} />
+          <ReactSVG
+            className="icon-zoom"
+            src={ZoomIcon}
+            onClick={() => window.open(zoom, "_blank")}
+          />
         </div>
 
         <div className="icon" title="WordPress">
-          <ReactSVG className="icon-wordpress" src={WordpressIcon} />
+          <ReactSVG
+            className="icon-wordpress"
+            src={WordpressIcon}
+            onClick={() => window.open(wordPress, "_blank")}
+          />
         </div>
 
         <div className="icon" title="Drupal">
-          <ReactSVG className="icon-drupal" src={DrupalIcon} />
+          <ReactSVG
+            className="icon-drupal"
+            src={DrupalIcon}
+            onClick={() => window.open(drupal, "_blank")}
+          />
         </div>
       </div>
-      <Link
-        className="link"
-        // href={`mailto:${email}`}
-        // noHover
-        color={currentColorScheme.main?.accent}
-        // title={"email"}
-      >
-        See all connectors
-      </Link>
+      <div className="link-container">
+        <Link
+          className="link"
+          noHover
+          color={currentColorScheme.main?.accent}
+          onClick={() => window.open(allConnectors, "_blank")}
+        >
+          {t("SeeAllConnectors")}
+        </Link>
+
+        <div className="icon">
+          <ReactSVG
+            className="icon-arrow"
+            src={ArrowIcon}
+            onClick={() => window.open(allConnectors, "_blank")}
+          />
+        </div>
+      </div>
     </IntegrationContainer>
   );
 };

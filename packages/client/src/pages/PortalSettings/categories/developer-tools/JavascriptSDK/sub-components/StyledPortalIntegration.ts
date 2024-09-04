@@ -30,6 +30,7 @@ import { mobile, tablet } from "@docspace/shared/utils/device";
 import { isMobile } from "react-device-detect";
 
 import { Box } from "@docspace/shared/components/box";
+import { globalColors } from "@docspace/shared/themes";
 
 const SDKContainer = styled(Box)`
   @media ${tablet} {
@@ -90,7 +91,7 @@ const PresetsContainer = styled.div`
   }
 `;
 
-const IntegrationContainer = styled.div`
+const IntegrationContainer = styled.div<{ color: string }>`
   .integration-header {
     margin-bottom: 8px;
     margin-top: 36px;
@@ -106,31 +107,31 @@ const IntegrationContainer = styled.div`
         !props.theme.isBase &&
         css`
           svg rect {
-            fill: rgba(255, 255, 255, 0.1);
-            fill-opacity: 1;
+            fill: ${globalColors.white};
+            fill-opacity: 0.1;
           }
 
           .icon-zoom {
             path {
-              fill: rgba(255, 255, 255, 1);
+              fill: ${globalColors.white};
             }
           }
 
           .icon-wordpress {
             path:not(:last-child) {
-              fill: rgba(255, 255, 255, 1);
+              fill: ${globalColors.white};
             }
           }
 
           .icon-drupal {
             path:first-child {
-              fill: rgba(255, 255, 255, 1);
+              fill: ${globalColors.white};
             }
 
             path:nth-child(4),
             path:nth-child(5),
             path:nth-child(6) {
-              fill: rgba(61, 61, 61, 1);
+              fill: ${globalColors.lightDarkGrayHover};
             }
           }
         `}
@@ -141,10 +142,29 @@ const IntegrationContainer = styled.div`
     }
   }
 
-  .link {
-    text-decoration: underline;
-    font-weight: 600;
-    line-height: 15px;
+  .link-container {
+    display: flex;
+    gap: 4px;
+
+    .link {
+      text-decoration: underline;
+      font-weight: 600;
+      line-height: 15px;
+    }
+
+    .icon-arrow {
+      :hover {
+        cursor: pointer;
+      }
+    }
+
+    .icon-arrow rect {
+      fill: unset;
+    }
+
+    .icon-arrow path {
+      fill: ${(props) => props.color};
+    }
   }
 `;
 

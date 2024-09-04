@@ -30,14 +30,13 @@ import { useTranslation } from "react-i18next";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
-import ModalDialogContainer from "../ModalDialogContainer";
 
 const PortalRenamingDialog = (props) => {
   const { t, ready } = useTranslation(["Settings", "Common"]);
   const { visible, onClose, onSave, isSaving } = props;
 
   return (
-    <ModalDialogContainer
+    <ModalDialog
       isLoading={!ready}
       visible={visible}
       onClose={onClose}
@@ -72,7 +71,7 @@ const PortalRenamingDialog = (props) => {
           tabIndex={4}
         />
       </ModalDialog.Footer>
-    </ModalDialogContainer>
+    </ModalDialog>
   );
 };
 

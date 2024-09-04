@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import PropTypes from "prop-types";
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
@@ -32,7 +31,6 @@ import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import ModalDialogContainer from "../ModalDialogContainer";
 
 const ResetApplicationDialogComponent = (props) => {
   const { t, resetTfaApp, id, onClose, tReady, visible } = props;
@@ -51,11 +49,7 @@ const ResetApplicationDialogComponent = (props) => {
   };
 
   return (
-    <ModalDialogContainer
-      isLoading={!tReady}
-      visible={visible}
-      onClose={onClose}
-    >
+    <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
       <ModalDialog.Header>{t("ResetApplicationTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text>{t("ResetApplicationDescription")}</Text>
@@ -78,7 +72,7 @@ const ResetApplicationDialogComponent = (props) => {
           onClick={onClose}
         />
       </ModalDialog.Footer>
-    </ModalDialogContainer>
+    </ModalDialog>
   );
 };
 

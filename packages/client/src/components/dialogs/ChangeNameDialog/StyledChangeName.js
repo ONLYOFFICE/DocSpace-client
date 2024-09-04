@@ -24,11 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import ModalDialogContainer from "../ModalDialogContainer";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import styled from "styled-components";
 
-export const ChangeNameContainer = styled(ModalDialogContainer)`
+export const ChangeNameContainer = styled(ModalDialog)`
   #modal-dialog {
     max-height: none;
   }

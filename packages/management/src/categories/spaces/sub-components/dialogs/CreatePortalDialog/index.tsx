@@ -26,7 +26,6 @@
 
 import React from "react";
 import styled from "styled-components";
-import ModalDialogContainer from "@docspace/client/src/components/dialogs/ModalDialogContainer";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
@@ -38,7 +37,7 @@ import toLower from "lodash/toLower";
 import { useStore } from "SRC_DIR/store";
 import { validatePortalName } from "@docspace/shared/utils/common";
 
-const StyledModal = styled(ModalDialogContainer)`
+const StyledModal = styled(ModalDialog)`
   #modal-dialog {
     min-height: 326px;
   }
@@ -115,7 +114,7 @@ const CreatePortalDialog = () => {
       name,
       domainValidator,
       setRegisterError,
-      t,
+      t
     );
 
     if (isValidPortalName) {

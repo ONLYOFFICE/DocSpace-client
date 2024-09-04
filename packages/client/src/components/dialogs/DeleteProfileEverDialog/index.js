@@ -35,14 +35,13 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { mobileMore } from "@docspace/shared/utils";
 import api from "@docspace/shared/api";
 
-import ModalDialogContainer from "../ModalDialogContainer";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import BodyComponent from "./sub-components/BodyComponent";
 
 const { deleteUser } = api.people;
 
-const StyledModalDialogContainer = styled(ModalDialogContainer)`
+const StyledModalDialogContainer = styled(ModalDialog)`
   #modal-dialog {
     ${(props) =>
       props.needReassignData &&

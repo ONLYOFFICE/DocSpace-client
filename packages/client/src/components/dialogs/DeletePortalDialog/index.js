@@ -24,16 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { Trans, useTranslation } from "react-i18next";
-
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
-
 import { sendDeletePortalEmail } from "@docspace/shared/api/portal";
-
-import ModalDialogContainer from "../ModalDialogContainer";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 const DeletePortalDialog = (props) => {
@@ -53,7 +48,7 @@ const DeletePortalDialog = (props) => {
   };
 
   return (
-    <ModalDialogContainer
+    <ModalDialog
       isLoading={!ready}
       visible={visible}
       onClose={onClose}
@@ -98,7 +93,7 @@ const DeletePortalDialog = (props) => {
           onClick={onClose}
         />
       </ModalDialog.Footer>
-    </ModalDialogContainer>
+    </ModalDialog>
   );
 };
 

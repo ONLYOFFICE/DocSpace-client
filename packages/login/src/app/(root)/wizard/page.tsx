@@ -72,8 +72,10 @@ async function Page() {
             portalCultures={portalCultures}
             portalTimeZones={portalTimeZones}
             culture={objectSettings?.culture}
+            forumLink={objectSettings?.forumLink}
             wizardToken={objectSettings?.wizardToken}
             passwordHash={objectSettings?.passwordHash}
+            documentationEmail={objectSettings?.documentationEmail}
           />
         </FormWrapper>
       </>

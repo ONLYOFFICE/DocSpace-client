@@ -2,7 +2,7 @@
   "AddManually": "අතින් යොදන්න",
   "AddManuallyDescriptionAccounts": "වි-තැපෑලෙන් පෞද්ගලිකව {{productName}} වෙත නව පරිශ්‍රීලකයින්ට ආරාධනා කරන්න",
   "AddManuallyDescriptionRoom": "දැනට සිටින {{productName}} පරිශ්‍රීලකයින්ගේ නම් භාවිතයෙන් කාමරයකට එක් කරන්න හෝ වෙනත් අයට වි-තැපෑලකින් පෞද්ගලිකව ආරාධනා කරන්න",
-  "EmailErrorMessage": "වි-තැපැල් ලිපිනය වලංගු නොවේ. ඔබට එය මත එබීමෙන් සංශෝධනය කිරීමට හැකිය.",
+  "EmailErrorMessage": "වි-තැපැල් ලිපිනය වලංගු නොවේ. ඔබට එය මත දෙවරක් ක්ලික් කිරීමෙන් ඊමේල් සංස්කරණය කළ හැකිය.",
   "InvitationLanguage": "ආරාධන භාෂාව",
   "InviteAccountSearchPlaceholder": "වි-තැපෑලෙන් ආරාධනය",
   "InviteRoomSearchPlaceholder": "නමින් හෝ වි-තැපෑලෙන් ආරාධනා කරන්න",

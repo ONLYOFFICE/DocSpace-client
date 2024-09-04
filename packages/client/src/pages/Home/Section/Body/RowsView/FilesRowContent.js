@@ -96,6 +96,10 @@ const SimpleFilesRowContent = styled(RowContent)`
       props.theme.interfaceDirection === "rtl" ? "-14px" : "-12px"};
   }
 
+  .item-file-exst {
+    color: ${(props) => props.theme.filesSection.tableView.fileExstColor};
+  }
+
   @media ${tablet} {
     .row-main-container-wrapper {
       display: flex;
@@ -173,6 +177,7 @@ const FilesRowContent = ({
   isDefaultRoomsQuotaSet,
   isStatisticsAvailable,
   showStorageInfo,
+  displayFileExtension,
 }) => {
   const {
     contentLength,
@@ -232,20 +237,21 @@ const FilesRowContent = ({
     }
   };
 
-  const additionalComponent = () => {
-    if (isRooms) return getRoomTypeName(item.roomType, t);
+  // const additionalComponent = () => {
+  //   if (isRooms) return getRoomTypeName(item.roomType, t);
 
-    if (!fileExst && !contentLength && !providerKey)
-      return `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(
-        "Translations:Files",
-      )}`;
+  //   if (!fileExst && !contentLength && !providerKey)
+  //     return `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(
+  //       "Translations:Files",
+  //     )}`;
 
-    if (fileExst) return `${fileExst.toUpperCase().replace(/^\./, "")}`;
+  //   if (fileExst) return `${fileExst.toUpperCase().replace(/^\./, "")}`;
 
-    return "";
-  };
+  //   return "";
+  // };
 
-  const additionalInfo = additionalComponent();
+  // const additionalInfo = additionalComponent();
+
   const mainInfo = contentComponent();
 
   return (
@@ -269,6 +275,9 @@ const FilesRowContent = ({
           dir="auto"
         >
           {titleWithoutExt}
+          {displayFileExtension && (
+            <span className="item-file-exst">{fileExst}</span>
+          )}
         </Link>
         <div className="badges">
           {badgesComponent}
@@ -287,7 +296,7 @@ const FilesRowContent = ({
           </Text>
         )}
 
-        {additionalInfo && (
+        {/* {additionalInfo && (
           <Text
             containerMinWidth="90px"
             containerWidth="10%"
@@ -299,7 +308,7 @@ const FilesRowContent = ({
           >
             {additionalInfo}
           </Text>
-        )}
+        )} */}
       </SimpleFilesRowContent>
     </>
   );

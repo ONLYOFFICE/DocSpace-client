@@ -59,7 +59,7 @@ class AuditTableHeader extends React.Component {
       },
       {
         key: "Room",
-        title: t("Common:Context"),
+        title: t("Common:Location"),
         enable: true,
         resizable: true,
         onChange: this.onColumnChange,

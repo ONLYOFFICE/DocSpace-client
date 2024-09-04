@@ -40,7 +40,6 @@ const StyledModalDialog = styled(ModalDialog)`
 
   .text-area {
     width: 488px !important;
-    height: 72px !important;
     margin-top: 4px;
 
     &-label {

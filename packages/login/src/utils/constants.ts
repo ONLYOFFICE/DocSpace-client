@@ -48,8 +48,6 @@ export const DEFAULT_SELECT_LANGUAGE: TOption = {
 
 export const URL_ONLYOFFICE = "https://onlyoffice.com";
 
-export const URL_LICENSE = "https://gnu.org/licenses/gpl-3.0.html";
-
 export const TFA_ANDROID_APP_URL =
   "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2";
 export const TFA_IOS_APP_URL =

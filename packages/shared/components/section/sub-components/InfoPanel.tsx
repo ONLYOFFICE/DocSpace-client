@@ -29,12 +29,7 @@ import React, { useEffect, useRef } from "react";
 import { DeviceType } from "../../../enums";
 import { Portal } from "../../portal";
 
-import {
-  StyledInfoPanelWrapper,
-  StyledInfoPanel,
-  StyledControlContainer,
-  StyledCrossIcon,
-} from "../Section.styled";
+import { StyledInfoPanelWrapper, StyledInfoPanel } from "../Section.styled";
 import { InfoPanelProps } from "../Section.types";
 
 const InfoPanel = ({
@@ -48,8 +43,6 @@ const InfoPanel = ({
   currentDeviceType,
 }: InfoPanelProps) => {
   const infoPanelRef = useRef<null | HTMLDivElement>(null);
-
-  const closeInfoPanel = () => setIsVisible?.(false);
 
   useEffect(() => {
     const onMouseDown = (e: MouseEvent) => {
@@ -74,13 +67,7 @@ const InfoPanel = ({
       id="InfoPanelWrapper"
       ref={infoPanelRef}
     >
-      <StyledInfoPanel>
-        <StyledControlContainer onClick={closeInfoPanel}>
-          <StyledCrossIcon />
-        </StyledControlContainer>
-
-        {children}
-      </StyledInfoPanel>
+      <StyledInfoPanel>{children}</StyledInfoPanel>
     </StyledInfoPanelWrapper>
   );
 

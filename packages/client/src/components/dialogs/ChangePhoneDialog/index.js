@@ -53,7 +53,8 @@ class ChangePhoneDialogComponent extends React.Component {
   };
 
   render() {
-    console.log("ChangePhoneDialog render");
+    // console.log("ChangePhoneDialog render");
+
     const { t, tReady, visible, onClose } = this.props;
     const { isRequestRunning } = this.state;
 

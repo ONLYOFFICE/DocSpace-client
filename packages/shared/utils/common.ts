@@ -620,13 +620,18 @@ export const frameCallCommand = (
   );
 };
 
+// Done in a similar way to server code
+// https://github.com/ONLYOFFICE/DocSpace-server/blob/master/common/ASC.Common/Utils/CommonFileSizeComment.cs
 export const getPowerFromBytes = (bytes: number, maxPower = 6) => {
   const power = Math.floor(Math.log(bytes) / Math.log(1024));
   return power <= maxPower ? power : maxPower;
 };
 
 export const getSizeFromBytes = (bytes: number, power: number) => {
-  return Math.floor(bytes / 1024 ** power);
+  const size = bytes / 1024 ** power;
+  const truncateToTwo = Math.trunc(size * 100) / 100;
+
+  return truncateToTwo;
 };
 
 export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
@@ -652,6 +657,8 @@ export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
 
   return `${resultSize} ${sizeNames[power]}`;
 };
+
+//
 
 export const getConvertedQuota = (
   t: (key: string) => string,
@@ -679,7 +686,8 @@ export const getSpaceQuotaAsText = (
 };
 
 export const conversionToBytes = (size: number, power: number) => {
-  const value = Math.floor(size) * 1024 ** power;
+  const value = Math.ceil(size * 1024 ** power);
+
   return value.toString();
 };
 

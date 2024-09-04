@@ -73,13 +73,13 @@ const StyledContent = styled.div`
 `;
 StyledContent.defaultProps = { theme: Base };
 
-const StyledHeaderContent = styled.div`
-  display: flex;
-  align-items: center;
-  border-bottom: ${(props) =>
-    props.theme.contextMenuButton.headerContent.borderBottom};
-`;
-StyledHeaderContent.defaultProps = { theme: Base };
+// const StyledHeaderContent = styled.div`
+//   display: flex;
+//   align-items: center;
+//   border-bottom: ${(props) =>
+//     props.theme.contextMenuButton.headerContent.borderBottom};
+// `;
+// StyledHeaderContent.defaultProps = { theme: Base };
 
 const StyledBodyContent = styled.div`
   position: relative;
@@ -101,4 +101,4 @@ const StyledBodyContent = styled.div`
 `;
 StyledBodyContent.defaultProps = { theme: Base };
 
-export { StyledBodyContent, StyledHeaderContent, StyledContent, StyledOuter };
+export { StyledBodyContent, StyledContent, StyledOuter };

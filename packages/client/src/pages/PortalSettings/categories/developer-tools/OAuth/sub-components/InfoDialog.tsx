@@ -426,7 +426,7 @@ const InfoDialog = ({
               type={LinkType.action}
               target={LinkTarget.blank}
             >
-              {t("Terms of Service")}
+              {t("TermsOfService")}
             </Link>
           </Text>
           {!isProfile && (

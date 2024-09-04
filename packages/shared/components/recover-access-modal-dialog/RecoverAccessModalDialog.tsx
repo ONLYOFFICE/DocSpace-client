@@ -127,11 +127,7 @@ const RecoverAccessModalDialog: React.FC<IRecoverAccessModalDialogProps> = ({
       onClose={onRecoverModalClose}
       displayType={ModalDialogType.modal}
     >
-      <ModalDialog.Header>
-        <Text isBold fontSize="21px">
-          {t("Common:RecoverTitle")}
-        </Text>
-      </ModalDialog.Header>
+      <ModalDialog.Header>{t("Common:RecoverTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text
           key="text-body"

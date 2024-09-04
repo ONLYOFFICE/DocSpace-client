@@ -65,7 +65,10 @@ export default async function Layout({
   const type = hdrs.get("x-confirm-type") ?? "";
 
   let isComboboxVisible = true;
-  if (TYPE_LINK_WITHOUT_LNG_COMBOBOX?.includes(type)) {
+  if (
+    TYPE_LINK_WITHOUT_LNG_COMBOBOX?.includes(type) ||
+    objectSettings?.wizardToken
+  ) {
     isComboboxVisible = false;
   }
 

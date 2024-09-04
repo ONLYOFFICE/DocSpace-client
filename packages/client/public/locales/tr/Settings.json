@@ -168,8 +168,6 @@
   "ManagementCategorySecurity": "Güvenlik",
   "ManualBackupDescription": "Alanda bulunan tüm verileri dosya olarak almak istiyorsanız bu seçeneği kullanın.",
   "MaxCopies": "{{copiesCount}} - maksimum yedek kopya sayısı",
-  "MemoryQuotaDisabled": "Bellek kotası başarıyla devre dışı bırakıldı.",
-  "MemoryQuotaEnabled": "Bellek kotası başarıyla etkinleştirildi.",
   "Migration": "Yer Değiştirme",
   "NewColorScheme": "Yeni renk şeması",
   "NextStep": "Sonraki adım",

@@ -34,7 +34,6 @@ import { toastr } from "@docspace/shared/components/toast";
 import { setTenantQuotaSettings } from "@docspace/shared/api/settings";
 
 import QuotaForm from "../../../components/QuotaForm";
-import StyledModalDialog from "./StyledComponent";
 
 const ChangeStorageQuotaDialog = (props) => {
   const {
@@ -115,7 +114,7 @@ const ChangeStorageQuotaDialog = (props) => {
   };
 
   return (
-    <StyledModalDialog visible={isVisible} onClose={onCloseClick}>
+    <ModalDialog visible={isVisible} onClose={onCloseClick}>
       <ModalDialog.Header>
         {isDisableQuota
           ? t("Common:DisableStorageQuota")
@@ -159,7 +158,7 @@ const ChangeStorageQuotaDialog = (props) => {
           scale
         />
       </ModalDialog.Footer>
-    </StyledModalDialog>
+    </ModalDialog>
   );
 };
 

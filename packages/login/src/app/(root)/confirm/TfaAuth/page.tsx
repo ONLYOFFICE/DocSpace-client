@@ -27,9 +27,10 @@
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 import { GreetingContainer } from "@/components/GreetingContainer";
-import TfaAuthForm from "@/components/TfaAuthForm";
 import { getStringFromSearchParams } from "@/utils";
 import { getSettings, getUserFromConfirm } from "@/utils/actions";
+
+import TfaAuthForm from "./page.client";
 
 type TfaAuthProps = {
   searchParams: { [key: string]: string };

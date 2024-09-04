@@ -28,7 +28,8 @@ import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 import { GreetingContainer } from "@/components/GreetingContainer";
 import { getCompanyInfoSettings, getSettings } from "@/utils/actions";
-import DeactivatePortalForm from "@/components/DeactivatePortalForm";
+
+import DeactivatePortalForm from "./page.client";
 
 async function Page() {
   const [settings, companyInfoSettings] = await Promise.all([

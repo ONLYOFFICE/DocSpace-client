@@ -26,6 +26,7 @@
 
 export interface IOperationContainer {
   url?: string;
+  authorized: boolean;
   title: string;
   description: string;
 }

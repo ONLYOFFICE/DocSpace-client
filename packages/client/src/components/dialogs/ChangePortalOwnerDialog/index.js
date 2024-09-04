@@ -154,6 +154,7 @@ const ChangePortalOwnerDialog = ({
             disableSubmitButton={false}
             withHeader
             headerProps={{
+              onCloseClick: onCloseAction,
               onBackClick,
               withoutBackButton: false,
               headerLabel: "",

@@ -168,8 +168,6 @@
   "ManagementCategorySecurity": "Sicherheit",
   "ManualBackupDescription": "Nutzen Sie diese Option, wenn Sie alle im Bereich enthaltenen Daten als Datei erhalten möchten.",
   "MaxCopies": "{{copiesCount}} - maximale Anzahl von Sicherungskopien",
-  "MemoryQuotaDisabled": "Die Speicherquote wurde erfolgreich deaktiviert.",
-  "MemoryQuotaEnabled": "Die Speicherquote wurde erfolgreich aktiviert.",
   "Migration": "Migration",
   "NewColorScheme": "Neues Farbschema",
   "NextStep": "Nächster Schritt",

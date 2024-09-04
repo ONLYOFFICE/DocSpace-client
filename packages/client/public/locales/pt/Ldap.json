@@ -41,7 +41,6 @@
   "LdapSendWelcomeLetter": "Enviar carta de boas-vindas",
   "LdapSendWelcomeLetterTooltip": "Se marcado, todos os novos usuários receberão uma carta de boas-vindas. Disponível somente quando o Atributo de Correio estiver mapeado para LDAP.",
   "LdapServer": "Servidor",
-  "LdapServerTooltip": "Insira o URL do servidor LDAP sem o número da porta, por exemplo. LDAP://minhaempresa.com.",
   "LdapSettings": "Configurações LDAP",
   "LdapSettingsCertCnNoMatch": "O nome do certificado não corresponde ao nome do host",
   "LdapSettingsCertExpired": "O certificado expirou",

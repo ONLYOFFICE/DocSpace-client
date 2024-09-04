@@ -41,7 +41,6 @@
   "LdapSendWelcomeLetter": "ウェルカムレターの送信",
   "LdapSendWelcomeLetterTooltip": "チェックした場合、すべての新規ユーザにウェルカムレターが送信されます。メール属性がLDAPにマッピングされている場合のみ有効です。",
   "LdapServer": "サーバ",
-  "LdapServerTooltip": "LDAPサーバーのURLをポート番号なしで入力してください。例：LDAP://mycompany.com",
   "LdapSettings": "LDAP設定",
   "LdapSettingsCertCnNoMatch": "証明書名がホスト名と一致しません",
   "LdapSettingsCertExpired": "証明書の有効期限が切れています",

@@ -111,13 +111,13 @@ const Sdk = ({
 
   useEffect(() => {
     if (window.parent && !frameConfig?.frameId && isLoaded) {
-      callCommand("setConfig");
+      callCommand();
     }
   }, [callCommand, isLoaded]);
 
   useEffect(() => {
     if (isDataReady) {
-      callCommandLoad("setIsLoaded");
+      callCommandLoad();
     }
   }, [callCommandLoad, isDataReady]);
 

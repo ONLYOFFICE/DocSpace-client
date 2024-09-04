@@ -41,7 +41,6 @@
   "LdapSendWelcomeLetter": "Lähetä tervetulokirje",
   "LdapSendWelcomeLetterTooltip": "Jos valittu, kaikki käyttäjät saavat tervetulokirjeen. Mahdollinen ainoastaan, kun Postiattribuutti on kartoitettu LDAP:hen.",
   "LdapServer": "Palvelin",
-  "LdapServerTooltip": "Syötä LDAP-palvelimen URL ilman portin numeroa, esimerkiksi LDAP://mycompany.com.",
   "LdapSettings": "LDAP-asetukset",
   "LdapSettingsCertCnNoMatch": "Sertifikaatin nimi ei täsmää isäntänimen kanssa",
   "LdapSettingsCertExpired": "Sertifikaatti on vanhentunut",

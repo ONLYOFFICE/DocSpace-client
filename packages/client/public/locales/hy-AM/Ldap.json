@@ -41,7 +41,6 @@
   "LdapSendWelcomeLetter": "Ուղարկել ողջույնի նամակ",
   "LdapSendWelcomeLetterTooltip": "Եթե ​​նշված է, բոլոր նոր օգտվողները կստանան ողջույնի նամակ: Հասանելի է միայն այն դեպքում, երբ Փոստի հատկանիշը քարտեզագրված է LDAP-ին:",
   "LdapServer": "Սերվեր",
-  "LdapServerTooltip": "Մուտքագրեք LDAP սերվերի URL-ը առանց պորտի համարի, օրինակ՝ LDAP://mycompany.com",
   "LdapSettings": "LDAP կարգավորումներ",
   "LdapSettingsCertCnNoMatch": "Վկայագրի անունը չի համընկնում հյուրընկալողի անվան հետ",
   "LdapSettingsCertExpired": "Վկայականը ժամկետանց է",

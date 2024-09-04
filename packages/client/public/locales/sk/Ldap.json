@@ -41,7 +41,6 @@
   "LdapSendWelcomeLetter": "Poslať uvítací list",
   "LdapSendWelcomeLetterTooltip": "Ak je táto možnosť zapnutá, všetci noví používatelia dostanú uvítací list. Táto možnosť je dostupná len vtedy, keď je atribút Pošta namapovaný na LDAP.",
   "LdapServer": "Server",
-  "LdapServerTooltip": "Zadajte URL servera LDAP bez čísla portu, napríklad LDAP://mycompany.com.",
   "LdapSettings": "Nastavenia LDAP",
   "LdapSettingsCertCnNoMatch": "Názov certifikátu sa nezhoduje s menom hostiteľa",
   "LdapSettingsCertExpired": "Platnosť certifikátu vypršala",

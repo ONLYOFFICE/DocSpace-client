@@ -41,7 +41,6 @@
   "LdapSendWelcomeLetter": "Envoyer une lettre de bienvenue",
   "LdapSendWelcomeLetterTooltip": "Si cette option est cochée, tous les nouveaux utilisateurs recevront une lettre de bienvenue. Cette option n'est disponible que lorsque l'attribut Mail est associé à LDAP.",
   "LdapServer": "Server",
-  "LdapServerTooltip": "Entrez l'URL du serveur LDAP sans numéro de port, par exemple LDAP://mycompany.com.",
   "LdapSettings": "Paramètres LDAP",
   "LdapSettingsCertCnNoMatch": "Le nom du certificat ne correspond pas au nom d'hôte",
   "LdapSettingsCertExpired": "Le certificat a expiré",

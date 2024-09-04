@@ -42,6 +42,14 @@ const CreateFileError = ({
   const message = error.message ?? error ?? "";
 
   React.useEffect(() => {
+    if ("status" in error && error?.status === 401) {
+      sessionStorage.setItem(
+        "referenceUrl",
+        "http://192.168.0.17/doceditor/create?parentId=1&fileTitle=New+document.docx&open=true&id=-1&hash=1725440148560",
+      );
+
+      return window.location.replace(`${window.location.origin}/login`);
+    }
     if (fromFile && message.includes("password")) {
       const searchParams = new URLSearchParams();
       searchParams.append("createError", JSON.stringify({ fileInfo }));
@@ -52,7 +60,7 @@ const CreateFileError = ({
     } else {
       throw new Error(message);
     }
-  }, [fileInfo, fromFile, message]);
+  }, [fileInfo, fromFile, message, error]);
 
   return null;
 };

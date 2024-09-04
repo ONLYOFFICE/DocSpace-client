@@ -75,11 +75,12 @@ const ChangeRoomOwner = (props) => {
     visible,
     setIsVisible,
     showBackButton,
-    setRoomParams,
+    onOwnerChange,
     roomOwnerId,
     changeRoomOwner,
     userId,
     updateInfoPanelSelection,
+    useModal = true,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -91,7 +92,7 @@ const ChangeRoomOwner = (props) => {
     isChecked,
   ) => {
     if (showBackButton) {
-      setRoomParams && setRoomParams(user[0]);
+      onOwnerChange && onOwnerChange(user[0]);
     } else {
       setIsLoading(true);
 
@@ -103,6 +104,7 @@ const ChangeRoomOwner = (props) => {
   };
 
   const onClose = () => {
+    if (props.onClose) props.onClose();
     setIsVisible(false);
   };
 
@@ -113,7 +115,45 @@ const ChangeRoomOwner = (props) => {
   const filter = new Filter();
   filter.role = [EmployeeType.Admin, EmployeeType.User];
 
-  return (
+  const selectorComponent = (
+    <PeopleSelector
+      withCancelButton
+      cancelButtonLabel=""
+      onCancel={onClose}
+      onSubmit={onChangeRoomOwner}
+      submitButtonLabel={
+        showBackButton ? t("Common:SelectAction") : t("Files:AssignOwner")
+      }
+      disableSubmitButton={false}
+      withHeader
+      headerProps={{
+        onCloseClick: onClose,
+        onBackClick,
+        withoutBackButton: !showBackButton,
+        headerLabel: t("Files:ChangeTheRoomOwner"),
+      }}
+      filter={filter}
+      isLoading={isLoading}
+      withFooterCheckbox={!showBackButton}
+      footerCheckboxLabel={t("Files:LeaveTheRoom")}
+      isChecked={!showBackButton}
+      withOutCurrentAuthorizedUser
+      filterUserId={roomOwnerId}
+      currentUserId={userId}
+      disableDisabledUsers
+      withInfo
+      infoText={t("CreateEditRoomDialog:PeopleSelectorInfo", {
+        productName: t("Common:ProductName"),
+      })}
+      emptyScreenHeader={t("Common:NotFoundUsers")}
+      emptyScreenDescription={t("CreateEditRoomDialog:PeopleSelectorInfo", {
+        productName: t("Common:ProductName"),
+      })}
+      className="change-owner_people-selector"
+    />
+  );
+
+  return useModal ? (
     <ModalDialog
       isLoading={!tReady}
       visible={visible}
@@ -123,47 +163,12 @@ const ChangeRoomOwner = (props) => {
     >
       <ModalDialog.Body>
         <StyledChangeRoomOwner showBackButton={showBackButton}>
-          <PeopleSelector
-            withCancelButton
-            cancelButtonLabel=""
-            onCancel={onClose}
-            onSubmit={onChangeRoomOwner}
-            submitButtonLabel={
-              showBackButton ? t("Common:SelectAction") : t("Files:AssignOwner")
-            }
-            disableSubmitButton={false}
-            withHeader
-            headerProps={{
-              onCloseClick: onClose,
-              onBackClick,
-              withoutBackButton: !showBackButton,
-              headerLabel: t("Files:ChangeTheRoomOwner"),
-            }}
-            filter={filter}
-            isLoading={isLoading}
-            withFooterCheckbox={!showBackButton}
-            footerCheckboxLabel={t("Files:LeaveTheRoom")}
-            isChecked={!showBackButton}
-            withOutCurrentAuthorizedUser
-            filterUserId={roomOwnerId}
-            currentUserId={userId}
-            disableDisabledUsers
-            withInfo
-            infoText={t("CreateEditRoomDialog:PeopleSelectorInfo", {
-              productName: t("Common:ProductName"),
-            })}
-            emptyScreenHeader={t("Common:NotFoundUsers")}
-            emptyScreenDescription={t(
-              "CreateEditRoomDialog:PeopleSelectorInfo",
-              {
-                productName: t("Common:ProductName"),
-              },
-            )}
-            className="change-owner_people-selector"
-          />
+          {selectorComponent}
         </StyledChangeRoomOwner>
       </ModalDialog.Body>
     </ModalDialog>
+  ) : (
+    selectorComponent
   );
 };
 
@@ -176,11 +181,8 @@ export default inject(
     userStore,
     infoPanelStore,
   }) => {
-    const {
-      changeRoomOwnerIsVisible,
-      setChangeRoomOwnerIsVisible,
-      changeRoomOwnerData,
-    } = dialogsStore;
+    const { changeRoomOwnerIsVisible, setChangeRoomOwnerIsVisible } =
+      dialogsStore;
     const { selection, bufferSelection } = filesStore;
     const { updateInfoPanelSelection } = infoPanelStore;
 
@@ -195,8 +197,6 @@ export default inject(
     return {
       visible: changeRoomOwnerIsVisible,
       setIsVisible: setChangeRoomOwnerIsVisible,
-      showBackButton: changeRoomOwnerData.showBackButton,
-      setRoomParams: changeRoomOwnerData.setRoomParams,
       roomOwnerId: room?.createdBy?.id,
       changeRoomOwner: filesActionsStore.changeRoomOwner,
       userId: id,

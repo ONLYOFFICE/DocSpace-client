@@ -43,10 +43,7 @@ const CreateFileError = ({
 
   React.useEffect(() => {
     if ("status" in error && error?.status === 401) {
-      sessionStorage.setItem(
-        "referenceUrl",
-        "http://192.168.0.17/doceditor/create?parentId=1&fileTitle=New+document.docx&open=true&id=-1&hash=1725440148560",
-      );
+      sessionStorage.setItem("referenceUrl", window.location.href);
 
       return window.location.replace(`${window.location.origin}/login`);
     }

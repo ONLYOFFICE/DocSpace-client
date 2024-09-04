@@ -153,8 +153,6 @@
   "ManagementCategorySecurity": "ආරක්‍ෂාව",
   "ManualBackupDescription": "ඔබට අවකාශයේ අඩංගු සියළුම දත්ත ගොනුවක් ලෙස ගැනීමට වුවමනා නම් මෙම විකල්පය භාවිතා කරන්න.",
   "MaxCopies": "{{copiesCount}} - උපරිම උපස්ථ පිටපත් ගණන",
-  "MemoryQuotaDisabled": "මතක සලාකය අබල කර ඇත.",
-  "MemoryQuotaEnabled": "මතක සලාකය සබල කර ඇත.",
   "Migration": "සංක්‍රමණය",
   "NewColorScheme": "නව වර්ණ පරිපාටිය",
   "NextStep": "ඊළඟ පියවර",

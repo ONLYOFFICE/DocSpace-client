@@ -41,7 +41,6 @@
   "LdapSendWelcomeLetter": "Stuur welkomstbrief",
   "LdapSendWelcomeLetterTooltip": "Als u deze optie aanvinkt, ontvangen alle nieuwe gebruikers een welkomstbrief. Alleen beschikbaar wanneer Mail Attribute is gekoppeld aan LDAP.",
   "LdapServer": "Server",
-  "LdapServerTooltip": "Voer de URL van de LDAP\\ server in zonder het poortnummer, bijv. LDAP://mijnbedrijf.com.",
   "LdapSettings": "LDAP instellingen",
   "LdapSettingsCertCnNoMatch": "Certificaatnaam komt niet overeen met hostnaam",
   "LdapSettingsCertExpired": "Certificaat is verlopen",

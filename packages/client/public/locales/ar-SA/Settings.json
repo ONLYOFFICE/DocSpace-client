@@ -168,8 +168,6 @@
   "ManagementCategorySecurity": "حماية",
   "ManualBackupDescription": "استخدم هذا الخيار إذا كنت تريد الحصول على جميع البيانات الموجودة في الاستضافة كملف.",
   "MaxCopies": "{{copiesCount}} - الحد الأقصى لعدد النسخ الاحتياطية",
-  "MemoryQuotaDisabled": "تم تعطيل حصة الذاكرة بنجاح. ",
-  "MemoryQuotaEnabled": "تم تفعيل حصة الذاكرة بنجاح.",
   "Migration": "الترحيل",
   "NewColorScheme": "نظام ألوان جديد",
   "NextStep": "الخطوة التالية",

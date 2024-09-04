@@ -41,7 +41,6 @@
   "LdapSendWelcomeLetter": "إرسال رسالة ترحيب",
   "LdapSendWelcomeLetterTooltip": "إذا تم تحديده، فسيتلقى جميع المستخدمين الجدد خطاب ترحيب. يتوفر فقط عند تعيين ميزة البريد إلى LDAP.",
   "LdapServer": "الخادم",
-  "LdapServerTooltip": "أدخل عنوان URL لخادم LDAP بدون رقم البوابة، على سبيل المثال. LDAP://mycompany.com.",
   "LdapSettings": "إعدادات LDAP",
   "LdapSettingsCertCnNoMatch": "اسم الشهادة لا يتطابق مع اسم المضيف",
   "LdapSettingsCertExpired": "انتهت صلاحية الشهادة",

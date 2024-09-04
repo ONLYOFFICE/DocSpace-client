@@ -464,14 +464,15 @@ function WizardForm(props: WizardFormProps) {
             fillIcon={false}
             modernView={true}
           />
-
-          <BetaBadge
-            withOutFeedbackLink
-            place="bottom"
-            forumLink={forumLink}
-            currentDeviceType={currentDeviceType}
-            documentationEmail={documentationEmail}
-          />
+          {selectedLanguage?.isBeta && (
+            <BetaBadge
+              withOutFeedbackLink
+              place="bottom"
+              forumLink={forumLink}
+              currentDeviceType={currentDeviceType}
+              documentationEmail={documentationEmail}
+            />
+          )}
         </div>
       </StyledInfo>
 

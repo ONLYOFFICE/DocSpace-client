@@ -50,8 +50,10 @@ import { TUser } from "../../api/people/types";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 import { AvatarRole } from "../../components/avatar";
 import { Text } from "../../components/text";
+import { Box } from "../../components/box";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";
+import { StyledSendClockIcon } from "./PeopleSelector.styled";
 
 const toListItem = (
   item: TUser,
@@ -100,6 +102,7 @@ const toListItem = (
     hasAvatar,
     isDisabled: isInvited || isDisabled,
     disabledText,
+    status,
   };
 
   return i;
@@ -345,19 +348,23 @@ const PeopleSelector = ({
     userType?: string,
     email?: string,
     isGroup?: boolean,
+    status?: EmployeeStatus,
   ) => {
     return (
       <div style={{ width: "100%" }}>
-        <Text
-          className="label"
-          fontWeight={600}
-          fontSize="14px"
-          noSelect
-          truncate
-          dir="auto"
-        >
-          {label}
-        </Text>
+        <Box displayProp="flex" alignItems="center" gapProp="8px">
+          <Text
+            className="label"
+            fontWeight={600}
+            fontSize="14px"
+            noSelect
+            truncate
+            dir="auto"
+          >
+            {label}
+          </Text>
+          {status === EmployeeStatus.Pending && <StyledSendClockIcon />}
+        </Box>
         {!isGroup && (
           <div style={{ display: "flex" }}>
             <Text

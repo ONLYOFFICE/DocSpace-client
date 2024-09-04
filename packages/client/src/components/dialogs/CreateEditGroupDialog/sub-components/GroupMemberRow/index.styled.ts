@@ -44,8 +44,8 @@ export const GroupMemberRow = styled.div<{}>`
     align-items: flex-start;
     justify-content: center;
     padding: 9px 0;
-    width: 100%;
     overflow: hidden;
+    margin-inline-end: 16px;
 
     .name {
       color: ${({ theme }) => theme.sideBarRow.titleColor};

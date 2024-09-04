@@ -26,6 +26,11 @@
 
 import styled from "styled-components";
 
+import SendClockIcon from "PUBLIC_DIR/images/send.clock.react.svg";
+
+import { commonIconsStyles } from "../../utils";
+import { globalColors } from "../../themes";
+
 const StyledUserTooltip = styled.div`
   width: 233px;
   min-height: 63px;
@@ -41,6 +46,15 @@ const StyledUserTooltip = styled.div`
     .email-text {
       padding-bottom: 8px;
     }
+  }
+`;
+
+export const StyledSendClockIcon = styled(SendClockIcon)`
+  min-width: 12px;
+
+  ${commonIconsStyles}
+  path {
+    fill: ${globalColors.gray};
   }
 `;
 

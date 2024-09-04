@@ -61,6 +61,9 @@ import { TUser } from "@docspace/shared/api/people/types";
 import { TGroup } from "@docspace/shared/api/groups/types";
 import { MIN_LOADER_TIMER } from "@docspace/shared/selectors/Files/FilesSelector.constants";
 import { TTranslation } from "@docspace/shared/types";
+import { Box } from "@docspace/shared/components/box";
+
+import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 
 const PEOPLE_TAB_ID = "0";
 const GROUP_TAB_ID = "1";
@@ -120,6 +123,7 @@ const toListItem = (
       isCollaborator,
       isRoomAdmin,
       isDisabled: isInvited || isDisabled,
+      status,
       disabledText,
       groups,
     } as TSelectorItem;
@@ -293,6 +297,7 @@ const AddUsersPanel = ({
         newItem.isRoomAdmin = user.isRoomAdmin;
         newItem.email = user.email;
         newItem.groups = user.groups;
+        newItem.status = user.status;
       }
 
       items.push(newItem);
@@ -436,6 +441,7 @@ const AddUsersPanel = ({
     userType?: string,
     email?: string,
     isGroup?: boolean,
+    status?: EmployeeStatus,
   ) => {
     return (
       <div
@@ -445,16 +451,19 @@ const AddUsersPanel = ({
           marginInlineEnd: "16px",
         }}
       >
-        <Text
-          className="label"
-          fontWeight={600}
-          fontSize="14px"
-          noSelect
-          truncate
-          dir="auto"
-        >
-          {label}
-        </Text>
+        <Box displayProp="flex" alignItems="center" gapProp="8px">
+          <Text
+            className="label"
+            fontWeight={600}
+            fontSize="14px"
+            noSelect
+            truncate
+            dir="auto"
+          >
+            {label}
+          </Text>
+          {status === EmployeeStatus.Pending && <StyledSendClockIcon />}
+        </Box>
         {!isGroup && (
           <div style={{ display: "flex" }}>
             <Text

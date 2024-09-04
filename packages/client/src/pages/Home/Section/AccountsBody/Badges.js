@@ -35,8 +35,8 @@ import { PaymentsType, AccountLoginType } from "@docspace/shared/enums";
 import { Badge } from "@docspace/shared/components/badge";
 import { commonIconsStyles } from "@docspace/shared/utils";
 
-import SendClockIcon from "PUBLIC_DIR/images/send.clock.react.svg";
 import CatalogSpamIcon from "PUBLIC_DIR/images/catalog.spam.react.svg";
+import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 
 const StyledBadgesContainer = styled.div`
   height: 100%;
@@ -72,12 +72,6 @@ const StyledPaidBadge = styled(Badge)`
         `}
 `;
 
-const StyledSendClockIcon = styled(SendClockIcon)`
-  ${commonIconsStyles}
-  path {
-    fill: #a3a9ae;
-  }
-`;
 const StyledCatalogSpamIcon = styled(CatalogSpamIcon)`
   ${commonIconsStyles}
   path {

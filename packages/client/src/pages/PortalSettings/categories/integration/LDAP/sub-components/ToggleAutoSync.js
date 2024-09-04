@@ -25,15 +25,50 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { Box } from "@docspace/shared/components/box";
+
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Badge } from "@docspace/shared/components/badge";
 import { toastr } from "@docspace/shared/components/toast";
+import { mobile } from "@docspace/shared/utils";
+import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 
-const borderProp = { radius: "6px" };
+const StyledWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding: 12px;
+  margin-top: 20px;
+  border-radius: 6px;
+  background: ${(props) =>
+    props.theme.client.settings.integration.sso.toggleContentBackground};
+
+  @media ${mobile} {
+    margin-bottom: 24px;
+  }
+
+  .toggle {
+    position: static;
+    margin-top: 1px;
+  }
+
+  .toggle-caption {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    .toggle-caption_title {
+      display: flex;
+      .toggle-caption_title_badge {
+        margin-inline-start: 4px;
+        cursor: auto;
+      }
+    }
+  }
+
+  ${(props) => !props.isLdapAvailable && UnavailableStyles}
+`;
 
 const ToggleAutoSync = ({
   theme,
@@ -62,55 +97,44 @@ const ToggleAutoSync = ({
   );
 
   return (
-    <>
-      <Box
-        backgroundProp={
-          theme.client.settings.integration.sso.toggleContentBackground
-        }
-        borderProp={borderProp}
-        displayProp="flex"
-        flexDirection="row"
-        marginProp={"20px 0 0 0"}
-        paddingProp="12px"
-      >
-        <ToggleButton
-          className="toggle"
-          isChecked={isCronEnabled}
-          onChange={onChangeToggle}
-          isDisabled={!isLdapEnabledOnServer || isUIDisabled}
-        />
+    <StyledWrapper isLdapAvailable={isLdapAvailable}>
+      <ToggleButton
+        className="toggle"
+        isChecked={isCronEnabled}
+        onChange={onChangeToggle}
+        isDisabled={!isLdapEnabledOnServer || isUIDisabled}
+      />
 
-        <div className="toggle-caption">
-          <div className="toggle-caption_title">
-            <Text
-              fontWeight={600}
-              lineHeight="20px"
-              noSelect
-              className="settings_unavailable"
-            >
-              {t("LdapAutoSyncToggle")}
-            </Text>
-            {!isLdapAvailable && (
-              <Badge
-                backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
-                label={t("Common:Paid")}
-                className="toggle-caption_title_badge"
-                isPaidBadge={true}
-              />
-            )}
-          </div>
+      <div className="toggle-caption">
+        <div className="toggle-caption_title">
           <Text
-            fontSize="12px"
-            fontWeight={400}
-            lineHeight="16px"
-            className="settings_unavailable"
+            fontWeight={600}
+            lineHeight="20px"
             noSelect
+            className="settings_unavailable"
           >
-            {t("LdapAutoSyncToggleDescription")}
+            {t("LdapAutoSyncToggle")}
           </Text>
+          {!isLdapAvailable && (
+            <Badge
+              backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
+              label={t("Common:Paid")}
+              className="toggle-caption_title_badge"
+              isPaidBadge={true}
+            />
+          )}
         </div>
-      </Box>
-    </>
+        <Text
+          fontSize="12px"
+          fontWeight={400}
+          lineHeight="16px"
+          className="settings_unavailable"
+          noSelect
+        >
+          {t("LdapAutoSyncToggleDescription")}
+        </Text>
+      </div>
+    </StyledWrapper>
   );
 };
 

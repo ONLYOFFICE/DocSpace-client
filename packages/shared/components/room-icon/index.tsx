@@ -26,14 +26,20 @@
 
 import React, { useMemo } from "react";
 
+import EditPenSvgUrl from "PUBLIC_DIR/images/icons/12/pen-edit.react.svg?url";
+
+import { DropDown } from "@docspace/shared/components/drop-down";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+
+import { useClickOutside } from "@docspace/shared/utils/useClickOutside";
+
 import { Text } from "../text";
-import EditIcon from "./sub-components/EditIcon";
 
 import { IconButton } from "../icon-button";
 import { classNames } from "../../utils";
 
 import { getRoomTitle } from "./RoomIcon.utils";
-import { StyledIcon } from "./RoomIcon.styled";
+import { StyledIcon, EditWrapper } from "./RoomIcon.styled";
 
 import type { RoomIconProps } from "./RoomIcon.types";
 
@@ -55,7 +61,41 @@ const RoomIcon = ({
 }: RoomIconProps) => {
   const [correctImage, setCorrectImage] = React.useState(true);
 
+  const [openEditLogo, setOpenLogoEdit] = React.useState<boolean>(false);
+
+  const onToggleOpenEditLogo = () => setOpenLogoEdit(!openEditLogo);
+
+  const iconRef = React.useRef<HTMLLIElement>(null);
+
+  useClickOutside(iconRef, () => {
+    setOpenLogoEdit(false);
+  });
+
   const roomTitle = useMemo(() => getRoomTitle(title ?? ""), [title]);
+
+  const dropdownElement = (
+    <DropDown
+      open={openEditLogo}
+      clickOutsideAction={() => setOpenLogoEdit(false)}
+      withBackdrop={false}
+      isDefaultMode={false}
+    >
+      {model?.map((option, i) => {
+        const optionOnClickAction = () => {
+          setOpenLogoEdit(false);
+          option.onClick();
+        };
+        return (
+          <DropDownItem
+            key={i}
+            label={option.label}
+            icon={option.icon}
+            onClick={optionOnClickAction}
+          />
+        );
+      })}
+    </DropDown>
+  );
 
   const prefetchImage = React.useCallback(() => {
     if (!imgSrc) return;
@@ -74,6 +114,7 @@ const RoomIcon = ({
 
   return (
     <StyledIcon
+      ref={iconRef}
       color={color}
       size={size}
       radius={radius}
@@ -99,8 +140,12 @@ const RoomIcon = ({
           alt="room icon"
         />
       )}
+
       {hoverSrc && (
-        <img className="room-icon_hover" src={hoverSrc} alt="room icon" />
+        <div className="room-icon-container" onClick={onToggleOpenEditLogo}>
+          <img className="room-icon_hover" src={hoverSrc} alt="room icon" />
+          {dropdownElement}
+        </div>
       )}
 
       {badgeUrl && (
@@ -114,7 +159,19 @@ const RoomIcon = ({
           />
         </div>
       )}
-      {withEditing && <EditIcon model={model} />}
+
+      {withEditing && (
+        <EditWrapper>
+          <IconButton
+            className="open-edit-logo-icon"
+            size={12}
+            iconName={EditPenSvgUrl}
+            onClick={onToggleOpenEditLogo}
+            isFill
+          />
+          {dropdownElement}
+        </EditWrapper>
+      )}
     </StyledIcon>
   );
 };

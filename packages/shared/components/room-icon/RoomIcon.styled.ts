@@ -72,6 +72,15 @@ const StyledIcon = styled.div<{
     }
   }
 
+  .room-icon-container {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .room-icon_hover {
     position: absolute;
     opacity: 0;

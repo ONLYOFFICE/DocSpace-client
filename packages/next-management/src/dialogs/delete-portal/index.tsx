@@ -29,6 +29,7 @@
 import React from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { observer } from "mobx-react";
+import { useTheme } from "styled-components";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import {
@@ -40,8 +41,8 @@ import { Link } from "@docspace/shared/components/link";
 import { useStores } from "@/hooks/useStores";
 
 export const DeletePortalDialog = observer(() => {
-  const { spacesStore, settingsStore } = useStores();
-  const { currentColorScheme } = settingsStore;
+  const { spacesStore } = useStores();
+  const { currentColorScheme } = useTheme();
 
   const {
     currentPortal,

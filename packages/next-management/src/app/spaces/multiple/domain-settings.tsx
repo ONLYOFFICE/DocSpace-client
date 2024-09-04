@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
-
+import { observer } from "mobx-react";
 import { DeviceType } from "@docspace/shared/enums";
 import { Text } from "@docspace/shared/components/text";
 import { FieldContainer } from "@docspace/shared/components/field-container";
@@ -37,6 +37,7 @@ import {
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 
 import useDeviceType from "@/hooks/useDeviceType";
+import { useStores } from "@/hooks/useStores";
 
 import { StyledDomainSettings } from "./multiple.styled";
 
@@ -44,11 +45,15 @@ interface IProps {
   baseDomain: string;
 }
 
-export const DomainSettings = ({ baseDomain }: IProps) => {
+export const DomainSettings = observer(({ baseDomain }: IProps) => {
   const { t } = useTranslation(["Management", "Common"]);
   const { currentDeviceType } = useDeviceType();
+  const { spacesStore } = useStores();
+  const { setChangeDomainDialogVisible } = spacesStore;
 
-  const onEditButtonClick = () => {};
+  const onEditButtonClick = () => {
+    setChangeDomainDialogVisible(true);
+  };
 
   return (
     <StyledDomainSettings>
@@ -82,5 +87,5 @@ export const DomainSettings = ({ baseDomain }: IProps) => {
       />
     </StyledDomainSettings>
   );
-};
+});
 

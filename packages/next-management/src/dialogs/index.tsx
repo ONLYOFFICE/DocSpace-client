@@ -34,7 +34,7 @@ import { CreatePortalDialog } from "./create-portal";
 import { DeletePortalDialog } from "./delete-portal";
 import { SpaceCreatedDialog } from "./space-created";
 
-export const ManagementDialogs = observer(() => {
+export const ManagementDialogs = observer(({ settings, user, colorTheme }) => {
   const { spacesStore } = useStores();
   const {
     domainDialogVisible,
@@ -43,11 +43,23 @@ export const ManagementDialogs = observer(() => {
     spaceCreatedDialogVisible,
   } = spacesStore;
 
+  const { tenantAlias, baseDomain, domainValidator } = settings;
+
+  console.log("colorTheme", colorTheme);
   return (
     <>
       {domainDialogVisible && <ChangeDomainDialog />}
-      {createPortalDialogVisible && <CreatePortalDialog />}
-      {deletePortalDialogVisible && <DeletePortalDialog />}
+      {createPortalDialogVisible && (
+        <CreatePortalDialog
+          tenantAlias={tenantAlias}
+          baseDomain={baseDomain}
+          domainValidator={domainValidator}
+          user={user}
+        />
+      )}
+      {deletePortalDialogVisible && (
+        <DeletePortalDialog colorTheme={colorTheme} />
+      )}
       {spaceCreatedDialogVisible && <SpaceCreatedDialog />}
     </>
   );

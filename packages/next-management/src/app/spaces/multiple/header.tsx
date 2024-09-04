@@ -25,17 +25,23 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
+import { observer } from "mobx-react";
 
 import { DeviceType } from "@docspace/shared/enums";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 
 import useDeviceType from "@/hooks/useDeviceType";
+import { useStores } from "@/hooks/useStores";
 
-export const Header = () => {
+export const Header = observer(() => {
   const { t } = useTranslation(["Management"]);
   const { currentDeviceType } = useDeviceType();
+  const { spacesStore } = useStores();
+  const { setCreatePortalDialogVisible } = spacesStore;
 
-  const onNewSpaceClick = () => {};
+  const onNewSpaceClick = () => {
+    setCreatePortalDialogVisible(true);
+  };
 
   return (
     <Button
@@ -50,5 +56,5 @@ export const Header = () => {
       scale={false}
     />
   );
-};
+});
 

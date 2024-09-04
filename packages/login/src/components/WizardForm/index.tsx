@@ -56,7 +56,7 @@ import {
   ComboBoxSize,
   TOption,
 } from "@docspace/shared/components/combobox";
-import BetaBadge from "@docspace/client/src/components/BetaBadgeWrapper";
+import { BetaBadge } from "@docspace/shared/components/beta-badge";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import api from "@docspace/shared/api";
@@ -94,6 +94,9 @@ type WizardFormProps = {
   isRequiredLicense?: boolean;
   portalTimeZones?: TTimeZone[];
   portalCultures?: TPortalCultures;
+
+  forumLink?: string;
+  documentationEmail?: string;
   culture?: string;
   wizardToken?: string;
   passwordHash?: TPasswordHash;
@@ -112,6 +115,8 @@ function WizardForm(props: WizardFormProps) {
     culture,
     wizardToken,
     passwordHash,
+    forumLink,
+    documentationEmail,
   } = props;
 
   const [selectedTimezone, setSelectedTimezone] = useState<TTimeZoneOption>(
@@ -451,9 +456,14 @@ function WizardForm(props: WizardFormProps) {
             fillIcon={false}
             modernView={true}
           />
-          {selectedLanguage?.isBeta && (
-            <BetaBadge withOutFeedbackLink place="bottom" />
-          )}
+
+          <BetaBadge
+            withOutFeedbackLink
+            place="bottom"
+            forumLink={forumLink}
+            currentDeviceType={currentDeviceType}
+            documentationEmail={documentationEmail}
+          />
         </div>
       </StyledInfo>
 

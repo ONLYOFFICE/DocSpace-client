@@ -102,7 +102,6 @@ test("wizard error", async ({ page, mockRequest }) => {
     .getByTestId("password-input")
     .getByTestId("text-input")
     .fill("123");
-  await page.getByTestId("checkbox").click();
 
   await page.getByTestId("button").click();
 

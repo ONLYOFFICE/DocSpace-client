@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
@@ -43,7 +43,9 @@ import { dataUrlToFile } from "@docspace/shared/utils/dataUrlToFile";
 
 import DefaultUserAvatarMax from "PUBLIC_DIR/images/default_user_photo_size_200-200.png";
 
-const StyledModalDialog = styled(ModalDialog)`
+const StyledBodyContent = styled.div`
+  display: contents;
+
   .wrapper-image-editor {
     width: 100%;
     display: flex;
@@ -124,7 +126,7 @@ const AvatarEditorDialog = (props) => {
   };
 
   return (
-    <StyledModalDialog
+    <ModalDialog
       displayType="aside"
       withBodyScroll
       visible={visible}
@@ -137,18 +139,20 @@ const AvatarEditorDialog = (props) => {
         </Text>
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <ImageEditor
-          t={t}
-          className="wrapper-image-editor"
-          classNameWrapperImageCropper="avatar-editor"
-          image={avatar}
-          setPreview={setPreview}
-          onChangeImage={onChangeAvatar}
-          Preview={
-            <AvatarPreview avatar={preview} userName={profile.displayName} />
-          }
-          maxImageSize={maxImageUploadSize}
-        />
+        <StyledBodyContent>
+          <ImageEditor
+            t={t}
+            className="wrapper-image-editor"
+            classNameWrapperImageCropper="avatar-editor"
+            image={avatar}
+            setPreview={setPreview}
+            onChangeImage={onChangeAvatar}
+            Preview={
+              <AvatarPreview avatar={preview} userName={profile.displayName} />
+            }
+            maxImageSize={maxImageUploadSize}
+          />
+        </StyledBodyContent>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -170,7 +174,7 @@ const AvatarEditorDialog = (props) => {
           onClick={onClose}
         />
       </ModalDialog.Footer>
-    </StyledModalDialog>
+    </ModalDialog>
   );
 };
 

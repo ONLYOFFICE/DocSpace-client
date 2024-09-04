@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useTranslation, Trans } from "react-i18next";
@@ -36,7 +35,7 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { inject, observer } from "mobx-react";
 import { getConvertedSize } from "@docspace/shared/utils/common";
 
-const StyledBodyContent = styled(ModalDialog)`
+const StyledBodyContent = styled.div`
   display: contents;
 
   .cannot-downgrade-plan {

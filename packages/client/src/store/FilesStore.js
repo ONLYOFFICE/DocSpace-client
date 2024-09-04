@@ -2128,7 +2128,7 @@ class FilesStore {
         "sharing-settings",
         "embedding-settings",
         // "external-link",
-        "owner-change",
+        // "owner-change",
         // "link-for-portal-users",
         "send-by-email",
         "docu-sign",
@@ -2382,14 +2382,6 @@ class FilesStore {
         }
       }
 
-      if (!this.canShareOwnerChange(item)) {
-        fileOptions = this.removeOptions(fileOptions, ["owner-change"]);
-      }
-
-      if (isThirdPartyItem) {
-        fileOptions = this.removeOptions(fileOptions, ["owner-change"]);
-      }
-
       if (!hasNew) {
         fileOptions = this.removeOptions(fileOptions, ["mark-read"]);
       }
@@ -2584,7 +2576,7 @@ class FilesStore {
         // "separator0",
         "sharing-settings",
         "link-for-room-members",
-        "owner-change",
+        // "owner-change",
         "show-info",
         // "link-for-portal-users",
         "separator1",
@@ -2684,10 +2676,6 @@ class FilesStore {
         }
       }
 
-      if (!this.canShareOwnerChange(item)) {
-        folderOptions = this.removeOptions(folderOptions, ["owner-change"]);
-      }
-
       if (!hasNew) {
         folderOptions = this.removeOptions(folderOptions, ["mark-read"]);
       }
@@ -2701,7 +2689,6 @@ class FilesStore {
       //   ]);
 
       // if (isThirdPartyItem) {
-      //   folderOptions = this.removeOptions(folderOptions, ["owner-change"]);
 
       //   if (isShareFolder) {
       //     folderOptions = this.removeOptions(folderOptions, [
@@ -3094,20 +3081,6 @@ class FilesStore {
     const filesLength = this.files ? this.files.length : 0;
     const foldersLength = this.folders ? this.folders.length : 0;
     return filesLength + foldersLength;
-  };
-
-  canShareOwnerChange = (item) => {
-    const userId = this.userStore.user && this.userStore.user.id;
-
-    if (item.providerKey || !this.hasCommonFolder) {
-      return false;
-    } else if (this.authStore.isAdmin) {
-      return true;
-    } else if (item.createdBy.id === userId) {
-      return true;
-    } else {
-      return false;
-    }
   };
 
   get canShare() {

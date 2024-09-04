@@ -42,7 +42,6 @@ class DialogsStore {
   versionHistoryStore;
   infoPanelStore;
 
-  ownerPanelVisible = false;
   moveToPanelVisible = false;
   restorePanelVisible = false;
   copyPanelVisible = false;
@@ -170,10 +169,6 @@ class DialogsStore {
 
   setIsFolderActions = (isFolderActions) => {
     this.isFolderActions = isFolderActions;
-  };
-
-  setChangeOwnerPanelVisible = (ownerPanelVisible) => {
-    this.ownerPanelVisible = ownerPanelVisible;
   };
 
   setMoveToPanelVisible = (visible) => {

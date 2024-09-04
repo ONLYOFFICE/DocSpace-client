@@ -38,7 +38,6 @@ import {
 import {
   UploadPanel,
   VersionHistoryPanel,
-  ChangeOwnerPanel,
   NewFilesPanel,
   HotkeysPanel,
   InvitePanel,
@@ -86,7 +85,6 @@ import { saveToLocalStorage } from "SRC_DIR/pages/PortalSettings/utils";
 const Panels = (props) => {
   const {
     uploadPanelVisible,
-    ownerPanelVisible,
     copyPanelVisible,
     moveToPanelVisible,
     restorePanelVisible,
@@ -225,7 +223,6 @@ const Panels = (props) => {
       <PluginDialog isVisible={pluginDialogVisible} key={"plugin-dialog"} />
     ),
     uploadPanelVisible && <UploadPanel key="upload-panel" />,
-    ownerPanelVisible && <ChangeOwnerPanel key="change-owner-panel" />,
     (moveToPanelVisible ||
       copyPanelVisible ||
       restorePanelVisible ||
@@ -350,7 +347,6 @@ export default inject(
     filesActionsStore,
   }) => {
     const {
-      ownerPanelVisible,
       copyPanelVisible,
       moveToPanelVisible,
       restorePanelVisible,
@@ -439,7 +435,6 @@ export default inject(
     return {
       preparationPortalDialogVisible,
       uploadPanelVisible,
-      ownerPanelVisible,
       copyPanelVisible,
       moveToPanelVisible,
       restorePanelVisible,

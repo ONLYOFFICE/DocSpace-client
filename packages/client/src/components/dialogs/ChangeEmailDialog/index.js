@@ -26,6 +26,7 @@
 
 import React from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
@@ -34,11 +35,17 @@ import { FieldContainer } from "@docspace/shared/components/field-container";
 import { toastr } from "@docspace/shared/components/toast";
 
 import { withTranslation } from "react-i18next";
-import ModalDialogContainer from "../ModalDialogContainer";
 import { sendInstructionsToChangeEmail } from "@docspace/shared/api/people";
 
 import { ErrorKeys } from "@docspace/shared/enums";
 import { inject, observer } from "mobx-react";
+
+const StyledBodyContent = styled.div`
+  .text-body {
+    margin-bottom: 16px;
+  }
+`;
+
 class ChangeEmailDialogComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -178,7 +185,7 @@ class ChangeEmailDialogComponent extends React.Component {
     const { isRequestRunning, email, errorMessage, hasError } = this.state;
 
     return (
-      <ModalDialogContainer
+      <ModalDialog
         isLoading={!tReady}
         visible={visible}
         onClose={this.onClose}
@@ -186,7 +193,7 @@ class ChangeEmailDialogComponent extends React.Component {
       >
         <ModalDialog.Header>{t("EmailChangeTitle")}</ModalDialog.Header>
         <ModalDialog.Body className="email-dialog-body">
-          <>
+          <StyledBodyContent>
             <Text className="text-body">{t("EmailActivationDescription")}</Text>
             <FieldContainer
               isVertical
@@ -208,7 +215,7 @@ class ChangeEmailDialogComponent extends React.Component {
                 placeholder={t("EnterEmail")}
               />
             </FieldContainer>
-          </>
+          </StyledBodyContent>
         </ModalDialog.Body>
         <ModalDialog.Footer>
           <Button
@@ -231,7 +238,7 @@ class ChangeEmailDialogComponent extends React.Component {
             isDisabled={isRequestRunning}
           />
         </ModalDialog.Footer>
-      </ModalDialogContainer>
+      </ModalDialog>
     );
   }
 }

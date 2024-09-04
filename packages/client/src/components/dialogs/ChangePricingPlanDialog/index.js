@@ -36,14 +36,13 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { inject, observer } from "mobx-react";
 import { getConvertedSize } from "@docspace/shared/utils/common";
 
-const ModalDialogContainer = styled(ModalDialog)`
+const StyledBodyContent = styled(ModalDialog)`
+  display: contents;
+
   .cannot-downgrade-plan {
     margin-bottom: 16px;
   }
 
-  .downgrade-plan-wrapper {
-    display: flex;
-  }
   .save-or-change {
     margin-top: 16px;
   }
@@ -90,7 +89,7 @@ const ChangePricingPlanDialog = ({
   );
 
   return (
-    <ModalDialogContainer
+    <ModalDialog
       visible={visible}
       onClose={onCloseModal}
       autoMaxHeight
@@ -99,16 +98,18 @@ const ChangePricingPlanDialog = ({
     >
       <ModalDialog.Header>{t("ChangePricingPlan")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text fontSize="13px" isBold className="cannot-downgrade-plan">
-          {t("CannotChangePlan")}
-        </Text>
-        {planUsersLimitations}
-        <br />
-        {storagePlanLimitations}
+        <StyledBodyContent>
+          <Text fontSize="13px" isBold className="cannot-downgrade-plan">
+            {t("CannotChangePlan")}
+          </Text>
+          {planUsersLimitations}
+          <br />
+          {storagePlanLimitations}
 
-        <Text fontSize="13px" className="save-or-change">
-          {t("SaveOrChange")}
-        </Text>
+          <Text fontSize="13px" className="save-or-change">
+            {t("SaveOrChange")}
+          </Text>
+        </StyledBodyContent>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -120,7 +121,7 @@ const ChangePricingPlanDialog = ({
           tabIndex={3}
         />
       </ModalDialog.Footer>
-    </ModalDialogContainer>
+    </ModalDialog>
   );
 };
 

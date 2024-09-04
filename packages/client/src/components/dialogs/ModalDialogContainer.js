@@ -159,12 +159,6 @@ const ModalDialogContainer = styled(ModalDialog)`
     }
   }
 
-  .email-dialog-body {
-    .text-body {
-      margin-bottom: 16px;
-    }
-  }
-
   .change-name-dialog-body {
     display: flex;
     flex-direction: column;

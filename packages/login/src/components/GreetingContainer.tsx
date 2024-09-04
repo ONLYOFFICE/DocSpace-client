@@ -29,7 +29,6 @@
 
 import React, { useLayoutEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { useSearchParams } from "next/navigation";
 import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
@@ -54,8 +53,6 @@ const GreetingContainer = ({
     culture,
   );
 
-  const searchParams = useSearchParams();
-
   const [invitationLinkData, setInvitationLinkData] = useState({
     email: "",
     roomName: "",
@@ -65,19 +62,12 @@ const GreetingContainer = ({
   });
 
   useLayoutEffect(() => {
-    if (!searchParams) return;
-
-    const encodeString = searchParams.get("loginData");
-
-    if (!encodeString) return;
-
-    const queryParams = getInvitationLinkData(encodeString);
+    const queryParams = getInvitationLinkData();
 
     if (!queryParams) return;
 
     setInvitationLinkData(queryParams);
-    window.history.replaceState({}, document.title, window.location.pathname);
-  }, [searchParams]);
+  }, []);
 
   const { type, roomName, firstName, lastName } = invitationLinkData;
 

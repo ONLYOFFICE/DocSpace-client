@@ -101,7 +101,7 @@ const RoomLogoCover = ({ isBaseTheme, logo, title }: RoomLogoCoverProps) => {
 
   const roomTitle = React.useMemo(() => getRoomTitle(title ?? ""), [title]);
 
-  const roomColor = logo.color ? `#${logo.color}` : logoColors[0];
+  const roomColor = logo?.color ? `#${logo.color}` : logoColors[0];
 
   const [color, setColor] = useState<string>(roomColor);
   const [icon, setIcon] = useState<string>(roomTitle);

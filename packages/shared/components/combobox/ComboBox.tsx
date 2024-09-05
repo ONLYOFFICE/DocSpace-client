@@ -34,6 +34,7 @@ import { ComboButton } from "./sub-components/ComboButton";
 import { StyledComboBox } from "./Combobox.styled";
 import { ComboBoxSize } from "./Combobox.enums";
 import type { ComboboxProps, TOption } from "./Combobox.types";
+import { extractChildrenFromReactFragment } from "./Combobox.utils";
 
 const compare = (prevProps: ComboboxProps, nextProps: ComboboxProps) => {
   const needUpdate = equal(prevProps, nextProps);
@@ -233,7 +234,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
   const disableMobileView = optionsCount < 4 || hideMobileView;
 
   const dropDownBody =
-    (advancedOptions as React.ReactNode) ||
+    extractChildrenFromReactFragment(advancedOptions) ||
     (options.map((option: TOption) => {
       const disabled =
         option.disabled ||

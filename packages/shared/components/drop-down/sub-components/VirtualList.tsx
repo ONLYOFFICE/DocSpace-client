@@ -89,7 +89,7 @@ function VirtualList({
             Array.isArray(children) &&
             children[index] &&
             React.isValidElement(children?.[index]) &&
-            children?.[index]?.props?.onClick()
+            children?.[index]?.props?.onClick?.()
           );
         default:
           return;
@@ -132,6 +132,11 @@ function VirtualList({
     itemCount,
     isDropdownReady,
   ]);
+
+  useEffect(() => {
+    setCurrentIndex(activeIndex);
+    currentIndexRef.current = activeIndex;
+  }, [activeIndex]);
 
   const handleMouseMove = useCallback((index: number) => {
     if (currentIndexRef.current === index) return;

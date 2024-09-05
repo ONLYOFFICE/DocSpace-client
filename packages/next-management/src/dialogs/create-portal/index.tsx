@@ -30,6 +30,7 @@ import React from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
+import { useRouter } from "next/navigation";
 import toLower from "lodash/toLower";
 
 import { Text } from "@docspace/shared/components/text";
@@ -89,6 +90,7 @@ export const CreatePortalDialog = observer(
     const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
     const { spacesStore } = useStores();
+    const router = useRouter();
 
     const {
       createPortalDialogVisible: visible,
@@ -145,7 +147,10 @@ export const CreatePortalDialog = observer(
           .catch((error) => {
             setRegisterError(error?.response?.data?.message);
           })
-          .finally(() => setIsLoading(false));
+          .finally(() => {
+            setIsLoading(false);
+            router.refresh();
+          });
       }
     };
 

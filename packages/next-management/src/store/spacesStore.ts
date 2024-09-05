@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable } from "mobx";
+import { createNewPortal } from "@docspace/shared/api/management";
 
 export class SpacesStore {
   createPortalDialogVisible = false;
@@ -46,6 +47,11 @@ export class SpacesStore {
 
   setReferenceLink = (link: URL | string) => {
     this.referenceLink = link;
+  };
+
+  createNewPortal = async (data: TNewPortalData) => {
+    const register = await createNewPortal(data);
+    return register;
   };
 
   setCreatePortalDialogVisible = (createPortalDialogVisible: boolean) => {

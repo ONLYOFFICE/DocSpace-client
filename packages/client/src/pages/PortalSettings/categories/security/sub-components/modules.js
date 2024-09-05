@@ -39,7 +39,7 @@ const ProjectsContainer = styled.div`
 `;
 
 const RadioButtonContainer = styled.div`
-  margin-right: 150px;
+  margin-inline-end: 150px;
   margin-bottom: 16px;
   width: 310px;
 `;
@@ -54,11 +54,11 @@ const ToggleContentContainer = styled.div`
   }
 
   .remove_icon {
-    margin-left: 120px;
+    margin-inline-start: 120px;
   }
 
   .button_style {
-    margin-right: 16px;
+    margin-inline-end: 16px;
   }
 
   .advanced-selector {

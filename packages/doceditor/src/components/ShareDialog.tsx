@@ -39,7 +39,7 @@ import { TFile } from "@docspace/shared/api/files/types";
 
 const StyledWrapper = styled.div`
   ${NoUserSelect}
-
+  margin-top: 16px;
   height: 100%;
   display: flex;
   flex-direction: column;

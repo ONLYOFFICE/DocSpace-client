@@ -27,14 +27,18 @@
 import Filter from "./filter";
 
 import { request } from "../client";
-import { checkFilterInstance } from "../../utils/common";
-import { TGroup } from "./types";
+import { checkFilterInstance, toUrlParams } from "../../utils/common";
+import {
+  TGetGroupMembersInRoom,
+  TGetGroupMembersInRoomFilter,
+  TGroup,
+} from "./types";
 
 // * Create
 
 export const createGroup = (
   groupName: string,
-  groupManager: string,
+  groupManager: string | undefined,
   members: string[],
 ) => {
   return request({
@@ -45,7 +49,7 @@ export const createGroup = (
       groupManager,
       members,
     },
-  });
+  }) as Promise<TGroup>;
 };
 
 // * Read
@@ -65,12 +69,16 @@ export const getGroups = (filter = Filter.getDefault()) => {
   });
 };
 
-export const getGroupById = (groupId: string, signal: AbortSignal) => {
+export const getGroupById = (
+  groupId: string,
+  includeMembers: boolean = false,
+  signal?: AbortSignal,
+) => {
   return request({
     method: "get",
-    url: `/group/${groupId}`,
+    url: `/group/${groupId}?includeMembers=${includeMembers}`,
     signal,
-  });
+  }) as Promise<TGroup>;
 };
 
 export const getGroupsByName = async (
@@ -104,11 +112,14 @@ export const getGroupsByUserId = (userId: string) => {
 export const getGroupMembersInRoom = (
   folderId: string | number,
   groupId: string,
+  filter: TGetGroupMembersInRoomFilter,
 ) => {
+  const url = `/files/folder/${folderId}/group/${groupId}/share?${toUrlParams(filter, false)}`;
+
   return request({
     method: "get",
-    url: `/files/folder/${folderId}/group/${groupId}/share`,
-  });
+    url,
+  }) as Promise<TGetGroupMembersInRoom>;
 };
 
 // * Update
@@ -116,7 +127,7 @@ export const getGroupMembersInRoom = (
 export const updateGroup = (
   groupId: string,
   groupName: string,
-  groupManager: string,
+  groupManager: string | undefined,
   membersToAdd: string[],
   membersToRemove: string[],
 ) => {
@@ -133,6 +144,14 @@ export const addGroupMembers = (groupId: string, members: string) => {
     url: `/group/${groupId}/members`,
     data: { members },
   });
+};
+
+export const removeGroupMembers = (groupId: string, membersIds: string[]) => {
+  return request({
+    method: "delete",
+    url: `/group/${groupId}/members`,
+    data: { id: groupId, members: membersIds },
+  }) as Promise<TGroup>;
 };
 
 // * Delete

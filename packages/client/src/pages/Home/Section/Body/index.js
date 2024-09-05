@@ -26,16 +26,20 @@
 
 import React, { useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
-
 import { observer, inject } from "mobx-react";
+
 import FilesRowContainer from "./RowsView/FilesRowContainer";
 import FilesTileContainer from "./TilesView/FilesTileContainer";
 import EmptyContainer from "../../../../components/EmptyContainer";
 import withLoader from "../../../../HOCs/withLoader";
 import TableView from "./TableView/TableContainer";
 import withHotkeys from "../../../../HOCs/withHotkeys";
-import { Consumer, isMobile, isTablet } from "@docspace/shared/utils";
+import {
+  clearEdgeScrollingTimer,
+  isMobile,
+  isTablet,
+  onEdgeScrolling,
+} from "@docspace/shared/utils";
 import { isElementInViewport } from "@docspace/shared/utils/common";
 
 import { DeviceType, VDRIndexingAction } from "@docspace/shared/enums";
@@ -203,6 +207,7 @@ const SectionBodyContent = (props) => {
       setDragging(true);
     }
 
+    onEdgeScrolling(e);
     setTooltipPosition(e.pageX, e.pageY);
     const wrapperElement = document.elementFromPoint(e.clientX, e.clientY);
     if (!wrapperElement) {
@@ -284,6 +289,7 @@ const SectionBodyContent = (props) => {
   };
 
   const onMouseUp = (e) => {
+    clearEdgeScrollingTimer();
     setStartDrag(false);
 
     droppableSeparator && droppableSeparator.remove();
@@ -376,36 +382,18 @@ const SectionBodyContent = (props) => {
 
   if (isEmptyFilesList && movingInProgress) return <></>;
 
-  const showEmptyPage = isEmptyFilesList;
+  if (isEmptyFilesList) return <EmptyContainer isEmptyPage={isEmptyPage} />;
 
   return (
-    <Consumer>
-      {(context) =>
-        showEmptyPage ? (
-          <>
-            <EmptyContainer
-              sectionWidth={context.sectionWidth}
-              isEmptyPage={isEmptyPage}
-            />
-          </>
-        ) : viewAs === "tile" ? (
-          <>
-            <FilesTileContainer sectionWidth={context.sectionWidth} t={t} />
-          </>
-        ) : viewAs === "table" ? (
-          <>
-            <TableView sectionWidth={context.sectionWidth} tReady={tReady} />
-          </>
-        ) : (
-          <>
-            <FilesRowContainer
-              sectionWidth={context.sectionWidth}
-              tReady={tReady}
-            />
-          </>
-        )
-      }
-    </Consumer>
+    <>
+      {viewAs === "tile" ? (
+        <FilesTileContainer t={t} />
+      ) : viewAs === "table" ? (
+        <TableView tReady={tReady} />
+      ) : (
+        <FilesRowContainer tReady={tReady} />
+      )}
+    </>
   );
 };
 

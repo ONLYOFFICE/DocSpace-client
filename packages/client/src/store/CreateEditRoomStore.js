@@ -52,6 +52,7 @@ class CreateEditRoomStore {
   watermarksSettings = {};
   initialWatermarksSettings = {};
   isImageType = false;
+  dialogsStore = null;
 
   constructor(
     filesStore,
@@ -63,6 +64,7 @@ class CreateEditRoomStore {
     infoPanelStore,
     currentQuotaStore,
     clientLoadingStore,
+    dialogsStore,
   ) {
     makeAutoObservable(this);
 
@@ -75,6 +77,7 @@ class CreateEditRoomStore {
     this.infoPanelStore = infoPanelStore;
     this.currentQuotaStore = currentQuotaStore;
     this.clientLoadingStore = clientLoadingStore;
+    this.dialogsStore = dialogsStore;
   }
 
   setRoomParams = (roomParams) => {
@@ -93,8 +96,8 @@ class CreateEditRoomStore {
     this.onClose = onClose;
   };
 
-  setRoomIsCreated = (onClose) => {
-    this.onClose = onClose;
+  setIsRoomCreatedByCurrentUser = (value) => {
+    this.isRoomCreatedByCurrentUser = value;
   };
 
   setInitialWatermarks = (watermarksSettings) => {
@@ -267,6 +270,8 @@ class CreateEditRoomStore {
           ? await createRoomInThirdpary(storageFolderId, createRoomData)
           : await createRoom(createRoomData);
 
+      this.dialogsStore.setIsNewRoomByCurrentUser(true);
+
       room.isLogoLoading = true;
 
       const actions = [];
@@ -286,6 +291,8 @@ class CreateEditRoomStore {
       for (let i = 0; i < createTagsData.length; i++) {
         actions.push(createTag(createTagsData[i]));
       }
+
+      if (!!actions.length) await Promise.all(actions);
 
       // add new tags to room
       if (!!addTagsData.length)
@@ -326,7 +333,9 @@ class CreateEditRoomStore {
               ? [bufferSelection]
               : [];
 
-        preparingDataForCopyingToRoom(room.id, selections, t);
+        preparingDataForCopyingToRoom(room.id, selections, t).catch((error) =>
+          toastr.error(error),
+        );
       }
 
       this.roomIsCreated = true;

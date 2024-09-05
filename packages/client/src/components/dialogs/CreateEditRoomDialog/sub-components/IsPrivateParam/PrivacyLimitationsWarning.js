@@ -30,7 +30,6 @@ import styled from "styled-components";
 import { ReactSVG } from "react-svg";
 
 import { Base } from "@docspace/shared/themes";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledPrivacyLimitationsWarning = styled.div`
   box-sizing: border-box;
@@ -106,7 +105,7 @@ const PrivacyLimitationsWarning = ({ t }) => {
       </div>
       <div className="warning-description">
         {t("MakeRoomPrivateLimitationsWarningDescription", {
-          productName: PRODUCT_NAME,
+          productName: t("Common:ProductName"),
         })}
       </div>
       <div className="warning-link">{t("Common:LearnMore")}</div>

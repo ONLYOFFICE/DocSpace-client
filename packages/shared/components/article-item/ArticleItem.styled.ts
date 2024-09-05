@@ -27,7 +27,7 @@
 import styled, { css } from "styled-components";
 import { isMobile } from "react-device-detect";
 
-import { Base, TColorScheme } from "../../themes";
+import { Base, TColorScheme, globalColors } from "../../themes";
 import { tablet } from "../../utils";
 
 import { Text } from "../text";
@@ -36,13 +36,8 @@ const badgeWithoutText = css`
   position: absolute;
 
   top: ${(props) => props.theme.catalogItem.badgeWithoutText.position};
-  right: ${(props) => props.theme.catalogItem.badgeWithoutText.position};
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl" &&
-    css`
-      left: ${props.theme.catalogItem.badgeWithoutText.position};
-      right: auto;
-    `}
+  inset-inline-end: ${({ theme }) =>
+    theme.catalogItem.badgeWithoutText.position};
   border-radius: 1000px;
 
   background-color: ${(props) =>
@@ -78,7 +73,7 @@ const StyledArticleItemHeaderContainer = styled.div<{
     font-weight: 600;
     font-size: 11px;
     line-height: 14px;
-    color: #a3a9ae;
+    color: ${(props) => props.theme.catalogItem.header.color};
   }
 
   @media ${tablet} {
@@ -98,7 +93,7 @@ const StyledArticleItemHeaderContainer = styled.div<{
           line-height: 1px;
           height: 1px;
 
-          background: #d0d5da;
+          background: ${props.theme.catalogItem.header.background};
         }
       `}
   }
@@ -107,15 +102,10 @@ const StyledArticleItemHeaderContainer = styled.div<{
 const StyledArticleItemBadgeWrapper = styled.div<{ showText?: boolean }>`
   z-index: 3;
 
-  margin-left: ${(props) => props.theme.catalogItem.badgeWrapper.marginLeft};
-  margin-right: ${(props) => props.theme.catalogItem.badgeWrapper.marginRight};
-
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl" &&
-    css`
-      margin-right: ${props.theme.catalogItem.badgeWrapper.marginLeft};
-      margin-left: ${props.theme.catalogItem.badgeWrapper.marginRight};
-    `}
+  margin-inline-start: ${(props) =>
+    props.theme.catalogItem.badgeWrapper.marginLeft};
+  margin-inline-end: ${(props) =>
+    props.theme.catalogItem.badgeWrapper.marginRight};
 
   div {
     display: flex;
@@ -130,7 +120,7 @@ const StyledArticleItemBadgeWrapper = styled.div<{ showText?: boolean }>`
     width: ${(props) => props.theme.catalogItem.badgeWrapper.tablet.width};
     min-width: ${(props) => props.theme.catalogItem.badgeWrapper.tablet.width};
     height: ${(props) => props.theme.catalogItem.badgeWrapper.tablet.height};
-    margin-right: ${(props) =>
+    margin-inline-end: ${(props) =>
       props.theme.catalogItem.badgeWrapper.tablet.marginRight};
   }
 
@@ -169,13 +159,7 @@ StyledArticleItemBadgeWrapper.defaultProps = { theme: Base };
 const StyledArticleItemInitialText = styled(Text)`
   position: absolute;
   top: 2px;
-  left: 0;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl" &&
-    css`
-      left: auto;
-      right: 0;
-    `}
+  inset-inline-start: 0;
   text-align: center;
   width: ${(props) => props.theme.catalogItem.initialText.width};
   line-height: ${(props) => props.theme.catalogItem.initialText.lineHeight};
@@ -199,14 +183,7 @@ StyledArticleItemInitialText.defaultProps = { theme: Base };
 const StyledArticleItemText = styled(Text)<{ isActive?: boolean }>`
   width: ${(props) => props.theme.catalogItem.text.width};
 
-  margin-left: ${(props) => props.theme.catalogItem.text.marginLeft};
-
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl" &&
-    css`
-      margin-left: 0;
-      margin-right: ${props.theme.catalogItem.text.marginLeft};
-    `}
+  margin-inline-start: ${(props) => props.theme.catalogItem.text.marginLeft};
 
   line-height: ${(props) => props.theme.catalogItem.text.lineHeight};
 
@@ -228,7 +205,8 @@ const StyledArticleItemText = styled(Text)<{ isActive?: boolean }>`
   text-overflow: ellipsis;
 
   @media ${tablet} {
-    margin-left: ${(props) => props.theme.catalogItem.text.tablet.marginLeft};
+    margin-inline-start: ${(props) =>
+      props.theme.catalogItem.text.tablet.marginLeft};
     line-height: ${(props) => props.theme.catalogItem.text.tablet.lineHeight};
     font-size: ${(props) => props.theme.catalogItem.text.tablet.fontSize};
     font-weight: ${(props) => props.theme.catalogItem.text.tablet.fontWeight};
@@ -295,14 +273,7 @@ const StyledArticleItemSibling = styled.div<{
 }>`
   position: absolute;
   top: 0;
-  left: 0;
-
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl" &&
-    css`
-      left: auto;
-      right: 0;
-    `}
+  inset-inline-start: 0;
 
   width: 100%;
   height: 100%;
@@ -372,7 +343,7 @@ const StyledArticleItemContainer = styled.div<{
       props.theme.catalogItem.container.tablet.marginBottom};
   }
 
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
   .catalog-item__icon {
     display: none;

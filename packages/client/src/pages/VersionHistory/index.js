@@ -31,7 +31,6 @@ import { SectionHeaderSkeleton } from "@docspace/shared/skeletons/sections";
 import { withTranslation } from "react-i18next";
 
 import { SectionHeaderContent, SectionBodyContent } from "./Section";
-//import { setDocumentTitle } from "@docspace/client/src/helpers/filesUtils";
 import { inject, observer } from "mobx-react";
 import SectionWrapper from "SRC_DIR/components/Section";
 class PureVersionHistory extends React.Component {

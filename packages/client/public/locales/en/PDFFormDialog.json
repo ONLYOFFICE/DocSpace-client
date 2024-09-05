@@ -1,8 +1,7 @@
 {
-  "PDFFormDialogTitle": "Ready-to-fill-out PDF form",
+  "PDFform": "PDF form",
   "PDFFormEditDialogDescription": "Do you want to switch to the form editing mode? Please note that the form will no longer be available for filling out and you will need to click the Start filling button again after editing to fill it out.",
   "PDFFormEditDialogTitle": "Form editing",
-  "PDFFormInviteDescription": "Your PDF form is ready to be filled out. Copy public link to start the form filling process or Invite other users to this room.",
   "PDFFormIsReadyToast": "PDF form <1>{{filename}}</1> is ready to be filled out.",
-  "PDFFormSuccessfullyCreatedDescription": "Your PDF form is ready to be filled out. Start collecting completed form copies from other users."
+  "PDFFormSuccessfullyCreatedDescription": "Your PDF form is ready to be filled out. Copy public link to start the form filling process or Invite other users to this room."
 }

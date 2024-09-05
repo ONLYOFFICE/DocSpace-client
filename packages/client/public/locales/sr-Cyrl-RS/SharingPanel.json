@@ -3,6 +3,5 @@
   "FormFilling": "Попуњавање обрасца",
   "LinkName": "Име линка",
   "ShareEmailBody": "Добили сте приступ документу {{itemName}}. Кликните на линк испод да отворите документ одмах: {{shareLink}}.",
-  "ShareEmailSubject": "Добили сте приступ {{itemName}} документу",
-  "SharingSettingsTitle": "Дељење подешавања"
+  "ShareEmailSubject": "Добили сте приступ {{itemName}} документу"
 }

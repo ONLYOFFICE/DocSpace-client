@@ -43,7 +43,7 @@ import {
   TAccessRight,
   TSelectorAccessRights,
   TSelectorCancelButton,
-  TWithTabs,
+  TSelectorTabs,
 } from "@docspace/shared/components/selector/Selector.types";
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
@@ -61,7 +61,6 @@ import { TUser } from "@docspace/shared/api/people/types";
 import { TGroup } from "@docspace/shared/api/groups/types";
 import { MIN_LOADER_TIMER } from "@docspace/shared/selectors/Files/FilesSelector.constants";
 import { TTranslation } from "@docspace/shared/types";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const PEOPLE_TAB_ID = "0";
 const GROUP_TAB_ID = "1";
@@ -72,6 +71,7 @@ const toListItem = (
   invitedUsers?: string[],
   disableDisabledUsers?: boolean,
   isRoom?: boolean,
+  checkIfUserInvited?: (user: TUser) => void,
 ) => {
   if ("displayName" in item) {
     const {
@@ -88,13 +88,16 @@ const toListItem = (
       isRoomAdmin,
       status,
       shared,
+      groups,
     } = item;
 
     const role = getUserRole(item);
 
     const userAvatar = hasAvatar ? avatar : DefaultUserPhoto;
 
-    const isInvited = invitedUsers?.includes(id) || (isRoom && shared);
+    const isInvited = checkIfUserInvited
+      ? checkIfUserInvited(item)
+      : invitedUsers?.includes(id) || (isRoom && shared);
 
     const isDisabled =
       disableDisabledUsers && status === EmployeeStatus.Disabled;
@@ -118,6 +121,7 @@ const toListItem = (
       isRoomAdmin,
       isDisabled: isInvited || isDisabled,
       disabledText,
+      groups,
     } as TSelectorItem;
   }
 
@@ -163,6 +167,7 @@ type AddUsersPanelProps = {
 
   invitedUsers?: string[];
   disableDisabledUsers?: boolean;
+  checkIfUserInvited?: (user: TUser) => boolean;
 
   roomId?: string | number;
   withGroups?: boolean;
@@ -190,6 +195,7 @@ const AddUsersPanel = ({
 
   invitedUsers,
   disableDisabledUsers,
+  checkIfUserInvited,
 }: AddUsersPanelProps) => {
   const theme = useTheme();
   const { t } = useTranslation([
@@ -286,6 +292,7 @@ const AddUsersPanel = ({
         newItem.isCollaborator = user.isCollaborator;
         newItem.isRoomAdmin = user.isRoomAdmin;
         newItem.email = user.email;
+        newItem.groups = user.groups;
       }
 
       items.push(newItem);
@@ -367,7 +374,14 @@ const AddUsersPanel = ({
       const totalDifferent = startIndex ? response.total - totalRef.current : 0;
 
       const items = response.items.map((item) =>
-        toListItem(item, t, invitedUsers, disableDisabledUsers, !!roomId),
+        toListItem(
+          item,
+          t,
+          invitedUsers,
+          disableDisabledUsers,
+          !!roomId,
+          checkIfUserInvited,
+        ),
       );
       const newTotal = response.total - totalDifferent;
 
@@ -449,7 +463,7 @@ const AddUsersPanel = ({
               fontSize="12px"
               noSelect
               truncate
-              color="#A3A9AE"
+              color={theme.filesPanels.addUsers.textColor}
               dir="auto"
             >
               {`${userType} | ${email}`}
@@ -479,7 +493,7 @@ const AddUsersPanel = ({
       }
     : {};
 
-  const withTabsProps: TWithTabs = withGroups
+  const withTabsProps: TSelectorTabs = withGroups
     ? {
         withTabs: true,
         tabsData: [
@@ -515,6 +529,7 @@ const AddUsersPanel = ({
         visible={visible}
         onClose={onClosePanels}
         withoutBodyScroll
+        withoutHeader
       >
         <Selector
           withHeader
@@ -523,7 +538,9 @@ const AddUsersPanel = ({
             // Todo: Update groups empty screen texts when they are ready
             headerLabel: t("Common:ListAccounts"),
             withoutBackButton: false,
+            withoutBorder: true,
             onBackClick,
+            onCloseClick: onClosePanels,
           }}
           onSelect={onSelect}
           renderCustomItem={renderCustomItem}
@@ -548,7 +565,9 @@ const AddUsersPanel = ({
           }
           emptyScreenDescription={
             activeTabId === PEOPLE_TAB_ID
-              ? t("Common:EmptyDescription", { productName: PRODUCT_NAME })
+              ? t("Common:EmptyDescription", {
+                  productName: t("Common:ProductName"),
+                })
               : t("Common:GroupsNotFoundDescription")
           }
           searchEmptyScreenImage={emptyScreenImage}
@@ -571,6 +590,7 @@ const AddUsersPanel = ({
           isSearchLoading={isInit}
           rowLoader={
             <RowLoader
+              style={{ paddingInlineEnd: 0 }}
               isUser
               count={15}
               isContainer={isLoading}

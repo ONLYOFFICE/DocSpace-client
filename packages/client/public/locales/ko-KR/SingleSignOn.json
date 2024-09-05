@@ -6,7 +6,6 @@
   "AttributeMatchingTooltip": "'계정' 섹션의 항목에 대한싱글 사인온 속성의 대응.",
   "Binding": "바인딩:",
   "CertificateExist": "동일한 작업 유형의 인증서가 이미 존재합니다",
-  "ConfirmationText": "입력한 모든 데이터가 손실됩니다. 정말로 계속하시겠습니까?",
   "CustomEntryButton": "사용자 지정 버튼 캡션",
   "CustomEntryTooltip": "싱글 사인온 서비스로 공간에 로그인하는 데 사용되는 버튼의 캡션",
   "DownloadMetadataXML": "SP 메타데이터 XML 다운로드",

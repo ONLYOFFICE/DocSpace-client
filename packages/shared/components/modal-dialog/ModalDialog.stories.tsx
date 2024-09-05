@@ -32,6 +32,7 @@ import { Button, ButtonSize } from "../button";
 import { ModalDialog } from "./ModalDialog";
 import { ModalDialogType } from "./ModalDialog.enums";
 import { ModalDialogProps } from "./ModalDialog.types";
+import { globalColors } from "../../themes";
 
 const meta = {
   title: "Components/ModalDialog",
@@ -68,7 +69,10 @@ const Template = ({ ...args }: ModalDialogProps) => {
         <ModalDialog.Body>
           <span>
             Send the password change instruction to the{" "}
-            <a style={{ color: "#5299E0" }} href="mailto:asc@story.book">
+            <a
+              style={{ color: globalColors.lightSecondMain }}
+              href="mailto:asc@story.book"
+            >
               asc@story.book
             </a>{" "}
             email address

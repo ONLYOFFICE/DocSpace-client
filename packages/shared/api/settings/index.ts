@@ -25,6 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import axios, { AxiosRequestConfig } from "axios";
+
+import { Nullable } from "../../types";
 import { TWhiteLabel } from "../../utils/whiteLabelHelper";
 import { request } from "../client";
 import {
@@ -46,6 +48,10 @@ import {
   TThirdPartyProvider,
   TPaymentSettings,
   TGetSsoSettings,
+  TWorkspaceService,
+  TWorkspaceStatusResponse,
+  TMigrationData,
+  TSendWelcomeEmailData,
   TPortalCultures,
 } from "./types";
 
@@ -73,7 +79,9 @@ export async function getPortalCultures() {
   return res;
 }
 
-export async function getPortalPasswordSettings(confirmKey = null) {
+export async function getPortalPasswordSettings(
+  confirmKey: Nullable<string> = null,
+) {
   const options: AxiosRequestConfig = {
     method: "get",
     url: "/settings/security/password",
@@ -407,16 +415,10 @@ export async function getCustomSchemaList() {
 }
 
 export function setAdditionalResources(
-  feedbackAndSupportEnabled,
-  videoGuidesEnabled,
-  helpCenterEnabled,
+  additionalResources: TAdditionalResources,
 ) {
   const data = {
-    settings: {
-      helpCenterEnabled,
-      feedbackAndSupportEnabled,
-      videoGuidesEnabled,
-    },
+    settings: additionalResources,
   };
 
   return request({
@@ -537,7 +539,10 @@ export function dataReassignmentTerminate(userId) {
   });
 }
 
-export function ownerChange(ownerId, confirmKey = null) {
+export function ownerChange(
+  ownerId: string,
+  confirmKey: Nullable<string> = null,
+) {
   const data = { ownerId };
 
   const options = {
@@ -717,7 +722,7 @@ export function getTfaSecretKeyAndQR(confirmKey = null) {
   return request(options);
 }
 
-export function validateTfaCode(code, confirmKey = null) {
+export function validateTfaCode(code, confirmKey: Nullable<string> = null) {
   const data = {
     code,
   };
@@ -881,13 +886,6 @@ export function getStorageRegions() {
     url: "/settings/storage/s3/regions",
   };
   return request(options);
-}
-
-export function getPortalQuota() {
-  return request({
-    method: "get",
-    url: `/settings/quota`,
-  });
 }
 
 export function getAllActiveSessions() {
@@ -1088,28 +1086,30 @@ export function getSendingTestMailStatus() {
   });
 }
 
-export function migrationList() {
-  return request({
+export async function migrationList() {
+  const res = (await request({
     method: "get",
     url: `/migration/list`,
-  });
+  })) as TWorkspaceService[];
+  return res;
 }
 
-export function migrationName(name) {
+export function initMigration(name: TWorkspaceService) {
   return request({
     method: "post",
     url: `/migration/init/${name}`,
   });
 }
 
-export function migrationStatus() {
-  return request({
+export async function migrationStatus() {
+  const res = (await request({
     method: "get",
     url: `/migration/status`,
-  });
+  })) as TWorkspaceStatusResponse;
+  return res;
 }
 
-export function migrateFile(data) {
+export function migrateFile(data: TMigrationData) {
   return request({
     method: "post",
     url: `/migration/migrate`,
@@ -1148,11 +1148,13 @@ export function migrationClear() {
   });
 }
 
-export function migrationLog() {
-  return axios.get("/api/2.0/migration/logs");
+export async function migrationLog() {
+  const response = await axios.get("/api/2.0/migration/logs");
+  if (!response || !response.data) return null;
+  return response.data as string;
 }
 
-export function migrationFinish(data) {
+export function migrationFinish(data: TSendWelcomeEmailData) {
   return request({
     method: "post",
     url: `/migration/finish`,

@@ -1,7 +1,11 @@
 {
-  "Auto": "Tự động",
-  "CodeCopySuccess": "Mã đã được sao chép vào bộ nhớ tạm",
-  "EmbedCode": "Mã nhúng",
+  "CodeSuccessfullyCopied": "Mã để chèn được sao chép thành công vào bộ nhớ tạm",
+  "ContentRestricted": "Việc sao chép, tải xuống và in tập tin bị hạn chế.",
+  "DisplaySettings": "Cài đặt hiển thị",
+  "EmbeddingBarAllowList": "Thêm URL trang web để nhúng vào <1> danh sách cho phép </1>.",
+  "EmbeddingBarDescription": "Việc nhúng sẽ chỉ hoạt động đối với các URL do quản trị viên {{productName}} chỉ định trong cài đặt SDK JavaScript.",
   "Height": "Chiều cao",
+  "Link": "Liên kết",
+  "LinkProtectedWithPassword": "Liên kết được bảo vệ bằng mật khẩu.",
   "Width": "Chiều rộng"
 }

@@ -53,5 +53,6 @@ export interface TagsProps {
   /** Accepts css style */
   style?: React.CSSProperties;
   /** Accepts the function that is called when the tag is selected */
-  onSelectTag?: (tag?: object) => void;
+  onSelectTag: (tag?: object) => void;
+  removeTagIcon?: boolean;
 }

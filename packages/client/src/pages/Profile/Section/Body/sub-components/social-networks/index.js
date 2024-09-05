@@ -45,18 +45,16 @@ import { StyledWrapper } from "./styled-social-networks";
 
 const SocialNetworks = (props) => {
   const { t } = useTranslation(["Profile", "Common"]);
-  const {
-    providers,
-    setProviders,
-    isOAuthAvailable,
-    //setPortalQuota
-  } = props;
+  const { providers, setProviders, getCapabilities, capabilities } = props;
 
   const fetchData = async () => {
     try {
-      const data = await getAuthProviders();
-      //if (typeof isOAuthAvailable === "undefined") await setPortalQuota();
-      setProviders(data);
+      const [providers] = await Promise.all([
+        getAuthProviders(),
+        getCapabilities(),
+      ]);
+
+      setProviders(providers);
     } catch (e) {
       console.error(e);
     }
@@ -144,7 +142,7 @@ const SocialNetworks = (props) => {
       return (
         <div key={`${item.provider}ProviderItem`}>
           <SocialButton
-            iconName={icon}
+            IconComponent={icon}
             label={getProviderTranslation(label, t, item.linked)}
             $iconOptions={iconOptions}
             onClick={onClick}
@@ -155,7 +153,8 @@ const SocialNetworks = (props) => {
       );
     });
 
-  if (!isOAuthAvailable) return <></>;
+  if (!capabilities?.oauthEnabled) return <></>;
+
   if (providers.length === 0) return <></>;
 
   return (
@@ -168,19 +167,15 @@ const SocialNetworks = (props) => {
   );
 };
 
-export default inject(({ currentQuotaStore, peopleStore }) => {
+export default inject(({ authStore, peopleStore }) => {
   const { usersStore } = peopleStore;
   const { providers, setProviders } = usersStore;
-
-  const {
-    isOAuthAvailable,
-    //setPortalQuota
-  } = currentQuotaStore;
+  const { getCapabilities, capabilities } = authStore;
 
   return {
     providers,
     setProviders,
-    isOAuthAvailable,
-    //   setPortalQuota,
+    getCapabilities,
+    capabilities,
   };
 })(observer(SocialNetworks));

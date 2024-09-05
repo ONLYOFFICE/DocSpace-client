@@ -1,1 +1,24 @@
-{}
+{
+  "CollaboratorEmptyTitle": "ルームは空です。",
+  "CreateNewFileDescription": "ファイルやフォルダを作成して、ルームで作業を開始する",
+  "CreateNewFileTitle": "新しいファイルを作成",
+  "CustomRoomEmptyTitle": "カスタムルームへようこそ",
+  "EmptyDescription": "クイックアクションで始めましょう：",
+  "FormFolderDefaultDescription": "PDF フォームをここにドロップするか、{{productName}} またはデバイスからアップロードしてください。",
+  "FormFolderDefaultTitle": "フォームはまだありません",
+  "FormFolderDefaultUserDescription": "管理者がアップロードしたフォームは、ここに表示されます。",
+  "FormFolderDefaultUserTitle": "このフォルダにはまだフォームはありません",
+  "FormRoomEmptyTitle": "フォーム記入ルームへようこそ",
+  "InviteUsersOptionDescription": "ルームで共同編集するためのポータルメンバーの追加",
+  "InviteUsersOptionTitle": "参加者の招待",
+  "ShareOptionDescription": "フォーム記入プロセスを開始するために、公開アクセスリンクをコピーするか、他のユーザーをルームに招待する。",
+  "ShareOptionTitle": "ルームの共有",
+  "UploadDeviceOptionDescription": "個人デバイスからのファイルアップロード",
+  "UploadDeviceOptionTitle": "デバイスからのアップロード",
+  "UploadDevicePDFFormOptionDescription": "お使いのデバイスからルームにPDFフォームをアップロードする。",
+  "UploadDevicePDFFormOptionTitle": "デバイスからのアップロード",
+  "UploadFromPortalDescription": "ドキュメントまたはルームから任意のファイルをアップロード",
+  "UploadFromPortalTitle": "{{productName}}からアップロード",
+  "UploadPDFFormOptionDescription": "{{productName}}で利用可能なPDFフォームを選択し、ルームにアップロードする。",
+  "UserEmptyDescription": "管理者がアップロードしたファイルやフォルダはここに表示されます。"
+}

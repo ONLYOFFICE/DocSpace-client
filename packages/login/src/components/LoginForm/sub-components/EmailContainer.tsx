@@ -38,7 +38,6 @@ import {
   TextInput,
 } from "@docspace/shared/components/text-input";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 import ArrowIcon from "PUBLIC_DIR/images/arrow.left.react.svg?url";
 
@@ -55,7 +54,7 @@ interface IEmailContainer {
   onBlurEmail: () => void;
   onValidateEmail: (res: TValidate) => undefined;
   isLdapLogin: boolean;
-  ldapDomain: string;
+  ldapDomain?: string;
 }
 
 const EmailContainer = ({
@@ -99,8 +98,8 @@ const EmailContainer = ({
             defaults={DEFAULT_EMAIL_TEXT}
             values={{
               email: emailFromInvitation,
+              productName: t("Common:ProductName"),
             }}
-            portalName={PRODUCT_NAME}
             components={{
               1: (
                 <Link
@@ -158,7 +157,7 @@ const EmailContainer = ({
           isAutoFocussed={true}
           tabIndex={1}
           isDisabled={isLoading}
-          autoComplete="off"
+          autoComplete="username"
           onChange={onChangeLogin}
           onBlur={onBlurEmail}
           onValidateInput={onValidateEmail}

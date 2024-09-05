@@ -41,6 +41,8 @@ import FileManagement from "./sub-components/file-management";
 import InterfaceTheme from "./sub-components/interface-theme";
 
 import { tablet } from "@docspace/shared/utils";
+import { DeviceType } from "@docspace/shared/enums";
+import AuthorizedApps from "./sub-components/authorized-apps";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
 
 const Wrapper = styled.div`
@@ -57,13 +59,19 @@ const Wrapper = styled.div`
 const StyledTabs = styled(Tabs)`
   > .sticky {
     z-index: 201;
-    margin-inline-end: -17px;
-    padding-inline-end: 17px;
+    margin-inline-end: -16px;
+    padding-inline-end: 16px;
   }
 `;
 
 const SectionBodyContent = (props) => {
-  const { showProfileLoader, profile, currentDeviceType, t } = props;
+  const {
+    showProfileLoader,
+    profile,
+    currentDeviceType,
+    identityServerEnabled,
+    t,
+  } = props;
   const navigate = useNavigate();
 
   const data = [
@@ -83,6 +91,14 @@ const SectionBodyContent = (props) => {
       content: <InterfaceTheme />,
     },
   ];
+
+  if (identityServerEnabled) {
+    data.push({
+      id: "authorized-apps",
+      name: t("OAuth:AuthorizedApps"),
+      content: <AuthorizedApps />,
+    });
+  }
 
   if (!profile?.isVisitor)
     data.splice(2, 0, {
@@ -120,16 +136,21 @@ const SectionBodyContent = (props) => {
   );
 };
 
-export default inject(({ settingsStore, peopleStore, clientLoadingStore }) => {
-  const { showProfileLoader } = clientLoadingStore;
-  const { targetUser: profile } = peopleStore.targetUserStore;
+export default inject(
+  ({ settingsStore, peopleStore, clientLoadingStore, authStore }) => {
+    const { showProfileLoader } = clientLoadingStore;
+    const { targetUser: profile } = peopleStore.targetUserStore;
 
-  return {
-    profile,
-    currentDeviceType: settingsStore.currentDeviceType,
-    showProfileLoader,
-  };
-})(
+    const { identityServerEnabled } = authStore.capabilities;
+
+    return {
+      profile,
+      currentDeviceType: settingsStore.currentDeviceType,
+      showProfileLoader,
+      identityServerEnabled,
+    };
+  },
+)(
   observer(
     withTranslation([
       "Profile",
@@ -141,6 +162,7 @@ export default inject(({ settingsStore, peopleStore, clientLoadingStore }) => {
       "DeleteSelfProfileDialog",
       "Notifications",
       "ConnectDialog",
+      "OAuth",
     ])(SectionBodyContent),
   ),
 );

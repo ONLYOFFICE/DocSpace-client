@@ -42,7 +42,6 @@ import { DeviceType } from "@docspace/shared/enums";
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import LoaderAdditionalResources from "../sub-components/loaderAdditionalResources";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const mobileCSS = css`
   margin-top: 0px;
@@ -81,18 +80,11 @@ const StyledComponent = styled.div`
   }
 
   .checkbox {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 9px;
-          `
-        : css`
-            margin-right: 9px;
-          `}
+    margin-inline-end: 9px;
   }
 `;
 
-const AdditionalResources = (props) => {
+const AdditionalResourcesComponent = (props) => {
   const {
     t,
     tReady,
@@ -188,12 +180,14 @@ const AdditionalResources = (props) => {
   const onSave = useCallback(async () => {
     setIsLoading(true);
 
+    const settings = JSON.parse(JSON.stringify(additionalResourcesData));
+
+    settings.feedbackAndSupportEnabled = feedbackAndSupportEnabled;
+    settings.videoGuidesEnabled = videoGuidesEnabled;
+    settings.helpCenterEnabled = helpCenterEnabled;
+
     await api.settings
-      .setAdditionalResources(
-        feedbackAndSupportEnabled,
-        videoGuidesEnabled,
-        helpCenterEnabled,
-      )
+      .setAdditionalResources(settings)
       .then(() => {
         toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
       })
@@ -278,7 +272,7 @@ const AdditionalResources = (props) => {
         </div>
         <div className="settings_unavailable additional-description">
           {t("Settings:AdditionalResourcesDescription", {
-            productName: PRODUCT_NAME,
+            productName: t("Common:ProductName"),
           })}
         </div>
         <div className="branding-checkbox">
@@ -326,32 +320,36 @@ const AdditionalResources = (props) => {
   );
 };
 
-export default inject(({ settingsStore, common, currentQuotaStore }) => {
-  const { setIsLoadedAdditionalResources, isLoadedAdditionalResources } =
-    common;
+export const AdditionalResources = inject(
+  ({ settingsStore, common, currentQuotaStore }) => {
+    const { setIsLoadedAdditionalResources, isLoadedAdditionalResources } =
+      common;
 
-  const {
-    getAdditionalResources,
+    const {
+      getAdditionalResources,
 
-    additionalResourcesData,
-    additionalResourcesIsDefault,
-    deviceType,
-  } = settingsStore;
+      additionalResourcesData,
+      additionalResourcesIsDefault,
+      deviceType,
+    } = settingsStore;
 
-  const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
+    const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
 
-  return {
-    getAdditionalResources,
+    return {
+      getAdditionalResources,
 
-    additionalResourcesData,
-    additionalResourcesIsDefault,
-    setIsLoadedAdditionalResources,
-    isLoadedAdditionalResources,
-    isSettingPaid: isBrandingAndCustomizationAvailable,
-    deviceType,
-  };
-})(
+      additionalResourcesData,
+      additionalResourcesIsDefault,
+      setIsLoadedAdditionalResources,
+      isLoadedAdditionalResources,
+      isSettingPaid: isBrandingAndCustomizationAvailable,
+      deviceType,
+    };
+  },
+)(
   withLoading(
-    withTranslation(["Settings", "Common"])(observer(AdditionalResources)),
+    withTranslation(["Settings", "Common"])(
+      observer(AdditionalResourcesComponent),
+    ),
   ),
 );

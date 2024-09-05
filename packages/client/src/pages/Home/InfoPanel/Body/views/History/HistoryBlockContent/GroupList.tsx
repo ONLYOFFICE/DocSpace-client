@@ -36,6 +36,7 @@ import {
   StyledHistoryBlockExpandLink,
   StyledHistoryLink,
 } from "../../../styles/history";
+import { TSetSelectedFolder } from "../../../../../../../store/SelectedFolderStore.ts";
 
 const EXPANSION_THRESHOLD = 8;
 
@@ -48,6 +49,7 @@ interface HistoryGroupListProps {
   setPeopleBufferSelection?: (newBufferSelection: any) => void;
   setFilesSelection?: (newSelection: any[]) => void;
   setFilesBufferSelection?: (newBufferSelection: any) => void;
+  setSelectedFolder?: (selectedFolder: TSetSelectedFolder | null) => void;
 }
 
 const HistoryGroupList = ({
@@ -59,6 +61,7 @@ const HistoryGroupList = ({
   setPeopleBufferSelection,
   setFilesSelection,
   setFilesBufferSelection,
+  setSelectedFolder,
 }: HistoryGroupListProps) => {
   const navigate = useNavigate();
 
@@ -73,6 +76,7 @@ const HistoryGroupList = ({
   ];
 
   const onGroupClick = (groupId: string) => {
+    setSelectedFolder?.(t, null);
     setPeopleSelection?.([]);
     setPeopleBufferSelection?.(null);
     setFilesSelection?.([]);
@@ -126,11 +130,16 @@ const HistoryGroupList = ({
   );
 };
 
-export default inject(({ userStore, peopleStore, filesStore }) => ({
-  isVisitor: userStore.user.isVisitor,
-  isCollaborator: userStore.user.isCollaborator,
-  setPeopleSelection: peopleStore.selectionStore.setSelection,
-  setPeopleBufferSelection: peopleStore.selectionStore.setBufferSelection,
-  setFilesSelection: filesStore.setSelection,
-  setFilesBufferSelection: filesStore.setBufferSelection,
-}))(withTranslation(["InfoPanel"])(observer(HistoryGroupList)));
+export default inject<TStore>(
+  ({ userStore, peopleStore, filesStore, selectedFolderStore }) => {
+    return {
+      isVisitor: userStore.user.isVisitor,
+      isCollaborator: userStore.user.isCollaborator,
+      setPeopleSelection: peopleStore.selectionStore.setSelection,
+      setPeopleBufferSelection: peopleStore.selectionStore.setBufferSelection,
+      setFilesSelection: filesStore.setSelection,
+      setFilesBufferSelection: filesStore.setBufferSelection,
+      setSelectedFolder: selectedFolderStore.setSelectedFolder,
+    };
+  },
+)(withTranslation(["InfoPanel"])(observer(HistoryGroupList)));

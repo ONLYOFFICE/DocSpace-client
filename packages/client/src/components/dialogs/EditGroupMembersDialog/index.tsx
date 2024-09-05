@@ -24,23 +24,33 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { inject, observer } from "mobx-react";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { observer, inject } from "mobx-react";
-import { useState, useEffect, useTransition } from "react";
 import { getGroupMembersInRoom } from "@docspace/shared/api/groups";
-import { useTranslation } from "react-i18next";
 import { InputSize } from "@docspace/shared/components/text-input";
 import { SearchInput } from "@docspace/shared/components/search-input";
-import GroupMember from "./GroupMember";
+import { Text } from "@docspace/shared/components/text";
+import {
+  TGroup,
+  TGroupMemberInvitedInRoom,
+} from "@docspace/shared/api/groups/types";
+
 import EmptyContainer from "./EmptyContainer";
+import GroupMembersList from "./sub-components/GroupMembersList/GroupMembersList";
+import { StyledModalDialog } from "./EditGroupMembersDialog.styled";
+import { ModalBodyLoader } from "./sub-components/ModalBodyLoader/ModalBodyLoader";
+import { MIN_LOADER_TIMER } from "@docspace/shared/selectors/Files/FilesSelector.constants";
 
 interface EditGroupMembersProps {
   visible: boolean;
   setVisible: (visible: boolean) => void;
-  group: any;
+  group: TGroup;
   infoPanelSelection: any;
 }
 
@@ -53,33 +63,63 @@ const EditGroupMembers = ({
   const { t } = useTranslation(["Common"]);
 
   const [searchValue, setSearchValue] = useState<string>("");
-  const onChangeSearchValue = (newValue: string) => {
-    setSearchValue(newValue);
-  };
-  const onClearSearch = () => onChangeSearchValue("");
+  const [total, setTotal] = useState(0);
+  const [groupMembers, setGroupMembers] = useState<
+    TGroupMemberInvitedInRoom[] | null
+  >(null);
+  const [isSearchResultLoading, setIsSearchResultLoading] = useState(false);
+  const [isNextPageLoading, setIsNextPageLoading] = useState(false);
 
-  const [groupMembers, setGroupMembers] = useState<any[] | null>(null);
-  const filteredGroupMembers = groupMembers?.filter((groupMember) =>
-    groupMember.user.displayName.includes(searchValue),
-  );
-  const [, startTransition] = useTransition();
+  const onChangeSearchValue = (value: string) => {
+    setIsSearchResultLoading(true);
+    setSearchValue(value.trim());
+  };
+
+  const onClearSearch = () => onChangeSearchValue("");
 
   const onClose = () => setVisible(false);
 
-  const isSearchListEmpty =
-    filteredGroupMembers && !filteredGroupMembers.length;
-  const hasMembers = filteredGroupMembers && filteredGroupMembers.length !== 0;
+  const loadNextPage = async (startIndex: number) => {
+    const startLoadingTime = new Date();
+
+    try {
+      setIsNextPageLoading(true);
+      const filter = { startIndex, count: 100, filterValue: searchValue };
+
+      const data = await getGroupMembersInRoom(
+        infoPanelSelection.id,
+        group.id,
+        filter,
+      );
+
+      setTotal(data.total);
+      if (startIndex === 0 || !groupMembers) {
+        setGroupMembers(data.items);
+      } else {
+        setGroupMembers([...groupMembers, ...data.items]);
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      const nowDate = new Date();
+      const diff = Math.abs(nowDate.getTime() - startLoadingTime.getTime());
+
+      if (diff < MIN_LOADER_TIMER) {
+        setTimeout(() => {
+          setIsSearchResultLoading(false);
+        }, MIN_LOADER_TIMER - diff);
+      } else {
+        setIsSearchResultLoading(false);
+      }
+      setIsNextPageLoading(false);
+      // setIsSearchResultLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchGroup = async () => {
-      if (!group) return;
-
-      getGroupMembersInRoom(infoPanelSelection.id, group.id)!
-        .then((data: any) => startTransition(() => setGroupMembers(data.items)))
-        .catch((err: any) => console.error(err));
-    };
-    fetchGroup();
-  }, [group, infoPanelSelection.id]);
+    loadNextPage(0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchValue]);
 
   if (!infoPanelSelection?.isRoom) {
     onClose();
@@ -87,37 +127,52 @@ const EditGroupMembers = ({
   }
 
   return (
-    <ModalDialog
+    <StyledModalDialog
       visible={visible}
       onClose={onClose}
       displayType={ModalDialogType.aside}
     >
-      <ModalDialog.Header>{group.name}</ModalDialog.Header>
+      <ModalDialog.Header>
+        <Text fontSize="21px" fontWeight={700} noSelect>
+          {group.name}
+        </Text>
+      </ModalDialog.Header>
 
       <ModalDialog.Body>
-        <SearchInput
-          className="search-input"
-          placeholder={t("PeopleTranslations:SearchByGroupMembers")}
-          value={searchValue}
-          onChange={onChangeSearchValue}
-          onClearSearch={onClearSearch}
-          size={InputSize.base}
-        />
+        {!groupMembers ? (
+          <ModalBodyLoader withSearch />
+        ) : (
+          <>
+            <SearchInput
+              className="search-input"
+              placeholder={t("PeopleTranslations:SearchByGroupMembers")}
+              value={searchValue}
+              onChange={onChangeSearchValue}
+              onClearSearch={onClearSearch}
+              size={InputSize.base}
+            />
 
-        <div style={{ height: "12px", width: "100%" }} />
-
-        {isSearchListEmpty && <EmptyContainer />}
-
-        {hasMembers &&
-          filteredGroupMembers.map(({ user, ...rest }) => (
-            <GroupMember t={t} key={user.id} user={{ ...user, ...rest }} />
-          ))}
+            {isSearchResultLoading ? (
+              <ModalBodyLoader withSearch={false} />
+            ) : !groupMembers.length ? (
+              <EmptyContainer />
+            ) : (
+              <GroupMembersList
+                members={groupMembers}
+                loadNextPage={loadNextPage}
+                hasNextPage={groupMembers.length < total}
+                total={total}
+                isNextPageLoading={isNextPageLoading}
+              />
+            )}
+          </>
+        )}
       </ModalDialog.Body>
-    </ModalDialog>
+    </StyledModalDialog>
   );
 };
 
-export default inject(({ infoPanelStore, userStore, dialogsStore }) => ({
+export default inject(({ infoPanelStore, userStore, dialogsStore }: any) => ({
   infoPanelSelection: infoPanelStore.infoPanelSelection,
   selfId: userStore.user.id,
   group: dialogsStore.editMembersGroup,

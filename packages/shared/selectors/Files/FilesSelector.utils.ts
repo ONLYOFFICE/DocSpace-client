@@ -173,3 +173,11 @@ export const convertRoomsToItems: (
 
   return items;
 };
+
+export const getDefaultBreadCrumb = (t: TTranslation) => {
+  return {
+    label: t("Common:ProductName"),
+    id: 0,
+    isRoom: false,
+  };
+};

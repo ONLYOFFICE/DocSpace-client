@@ -83,7 +83,11 @@ class ThirdPartyStore {
       isOauth: storage.oauth,
       oauthHref: storage.redirectUrl,
       category: storage.name,
+      requiredConnectionUrl: storage.requiredConnectionUrl,
+      clientId: storage.clientId,
     }));
+
+    return res;
   };
 
   saveThirdParty = (

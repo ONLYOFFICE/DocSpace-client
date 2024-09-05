@@ -28,7 +28,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 import { commonInputStyles } from "../../utils";
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 
 const StyledIconBlock = styled.div<{
   isDisabled?: boolean;
@@ -40,15 +40,9 @@ const StyledIconBlock = styled.div<{
     props.isDisabled || !props.isClickable ? "default" : "pointer"};
 
   height: ${(props) => props.theme.inputBlock.height};
-  padding-right: ${(props) => props.theme.inputBlock.paddingRight};
-  padding-left: ${(props) => props.theme.inputBlock.paddingLeft};
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl" &&
-    css`
-      padding-left: ${props.theme.inputBlock.paddingRight};
-      padding-right: ${props.theme.inputBlock.paddingLeft};
-    `}
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  padding-inline-end: ${(props) => props.theme.inputBlock.paddingRight};
+  padding-inline-start: ${(props) => props.theme.inputBlock.paddingLeft};
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 `;
 StyledIconBlock.defaultProps = { theme: Base };
 
@@ -87,7 +81,7 @@ const StyledInputGroup = styled(CustomInputGroup)`
   input:-webkit-autofill:focus,
   input:-webkit-autofill:active {
     -webkit-background-clip: text;
-    -webkit-text-fill-color: #ffffff;
+    -webkit-text-fill-color: ${globalColors.white};
     transition: background-color 5000s ease-in-out 0s;
     box-shadow: inset 0 0 20px 20px #23232329;
   }

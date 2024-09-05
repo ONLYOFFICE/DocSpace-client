@@ -70,7 +70,9 @@ class ManualBackup extends React.Component {
 
     this.timerId = null;
 
-    setDocumentTitle(props.t("DataBackup"));
+    const { t, tReady } = props;
+
+    if (tReady) setDocumentTitle(t("DataBackup"));
 
     this.state = {
       selectedFolder: "",
@@ -146,6 +148,13 @@ class ManualBackup extends React.Component {
 
     if (Object.keys(rootFoldersTitles).length === 0) fetchTreeFolders();
     this.setBasicSettings();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { t, tReady } = this.props;
+
+    if (prevProps.tReady !== tReady && tReady)
+      setDocumentTitle(t("DataBackup"));
   }
 
   componentWillUnmount() {
@@ -335,7 +344,7 @@ class ManualBackup extends React.Component {
                   onClick={this.onClickDownloadBackup}
                   isDisabled={false}
                   size={buttonSize}
-                  style={{ marginLeft: "8px" }}
+                  style={{ marginInlineStart: "8px" }}
                 />
               )}
               {!isMaxProgress && (
@@ -343,7 +352,7 @@ class ManualBackup extends React.Component {
                   label={t("Common:CopyOperation") + "..."}
                   isDisabled={true}
                   size={buttonSize}
-                  style={{ marginLeft: "8px" }}
+                  style={{ marginInlineStart: "8px" }}
                 />
               )}
             </div>

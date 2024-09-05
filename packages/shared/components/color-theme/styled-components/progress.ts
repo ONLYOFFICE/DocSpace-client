@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base } from "../../../themes";
+import { Base, globalColors } from "../../../themes";
 
 import StyledPreparationPortalProgress from "../sub-components/StyledPreparationPortalProgress";
 import { ProgressColorTheme } from "../ColorTheme.types";
@@ -36,7 +36,7 @@ const getDefaultStyles = ({ $currentColorScheme, theme }: ProgressColorTheme) =>
     .preparation-portal_progress-line {
       background: ${theme.isBase
         ? $currentColorScheme.main?.accent
-        : "#FFFFFF"};
+        : globalColors.white};
     }
   `;
 

@@ -1,1 +1,7 @@
-{}
+{
+  "PDFform": "Formulaire PDF",
+  "PDFFormEditDialogDescription": "Souhaitez-vous passer au mode d'édition du formulaire ? Veuillez noter que le formulaire ne sera plus disponible pour être rempli et que vous devrez cliquer à nouveau sur le bouton Commencer à remplir après l'édition pour le remplir.",
+  "PDFFormEditDialogTitle": "Édition de formulaires",
+  "PDFFormIsReadyToast": "Le formulaire PDF <1>{{filename}}</1> est prêt à être rempli.",
+  "PDFFormSuccessfullyCreatedDescription": "Votre formulaire PDF est prêt à être rempli. Copiez le lien public pour commencer à remplir le formulaire ou invitez d'autres utilisateurs dans cette salle."
+}

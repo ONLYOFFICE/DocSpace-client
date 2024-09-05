@@ -14,7 +14,6 @@ import delay from "lodash/delay";
 import { toastr } from "@docspace/shared/components/toast";
 
 const constants = {
-  NULL_PERCENT: 0,
   SSL_LDAP_PORT: 636,
   DEFAULT_LDAP_PORT: 389,
   GET_STATUS_TIMEOUT: 1000,
@@ -92,6 +91,8 @@ class LdapFormStore {
 
   currentQuotaStore = null;
 
+  confirmationResetModal = false;
+
   constructor(currentQuotaStore) {
     makeAutoObservable(this);
 
@@ -150,7 +151,7 @@ class LdapFormStore {
       mail: MailAttribute,
       avatarAttribute: AvatarAttribute,
       userQuotaLimit: UserQuotaLimit,
-      userType: EmployeeType.Collaborator,
+      userType: EmployeeType.Guest,
     };
 
     this.authentication = authentication;
@@ -165,7 +166,7 @@ class LdapFormStore {
     this.groupAttribute = groupAttribute;
     this.groupNameAttribute = groupNameAttribute;
 
-    this.login = login;
+    this.login = login || "";
     this.password = password || "";
   };
 
@@ -206,6 +207,7 @@ class LdapFormStore {
 
     runInAction(() => {
       this.isLoaded = true;
+      this.errors = {};
     });
 
     if (
@@ -229,6 +231,14 @@ class LdapFormStore {
 
   setUserDN = (userDN) => {
     this.requiredSettings.userDN = userDN;
+  };
+
+  removeErrorField = (fieldName) => {
+    delete this.errors[fieldName];
+  };
+
+  setErrorField = (fieldName) => {
+    this.errors[fieldName] = true;
   };
 
   setLoginAttribute = (loginAttribute) => {
@@ -368,17 +378,8 @@ class LdapFormStore {
     this.errors = {};
 
     if (!toDefault && !turnOff) {
-      if (this.authentication) {
-        this.errors.login = this.login.trim() === "";
-        this.errors.password = this.password.trim() === "";
-
-        isErrorExist = this.errors.login || this.errors.password;
-      }
-
       for (var key in this.requiredSettings) {
-        // console.log({ key });
         if (
-          this.requiredSettings[key] &&
           typeof this.requiredSettings[key] == "string" &&
           this.requiredSettings[key].trim() === ""
         ) {
@@ -387,7 +388,33 @@ class LdapFormStore {
         }
       }
 
-      if (isErrorExist) return;
+      if (this.groupMembership) {
+        const groupFields = [
+          ["groupDN", this.groupDN],
+          ["userAttribute", this.userAttribute],
+          ["groupFilter", this.groupFilter],
+          ["groupAttribute", this.groupAttribute],
+          ["groupNameAttribute", this.groupNameAttribute],
+        ];
+
+        for (var key of groupFields) {
+          if (key[1].trim() === "") {
+            this.errors[key[0]] = true;
+          }
+        }
+      }
+
+      if (this.authentication) {
+        this.errors.login = this.login.trim() === "";
+        this.errors.password = this.password.trim() === "";
+
+        isErrorExist = this.errors.login || this.errors.password;
+      }
+
+      if (isErrorExist) {
+        this.scrollToField();
+        return;
+      }
     }
 
     const settings = this.getSettings();
@@ -400,6 +427,16 @@ class LdapFormStore {
         () => this.checkStatus(t, toDefault),
         constants.GET_STATUS_TIMEOUT,
       );
+    }
+  };
+
+  scrollToField = () => {
+    for (let key in this.errors) {
+      const element = document.getElementsByName(key)?.[0];
+
+      element?.focus();
+      element?.blur();
+      return;
     }
   };
 
@@ -452,7 +489,7 @@ class LdapFormStore {
           completed: true,
           percents: 100,
           certificateConfirmRequest: null,
-          error: "",
+          error: t("Common:UnexpectedError"),
         };
       }
 
@@ -481,7 +518,6 @@ class LdapFormStore {
         toastr.success(t("Common:SuccessfullyCompletedOperation"));
       }
     } catch (error) {
-      console.error(error);
       toastr.error(error);
       this.endProcess();
     }
@@ -568,6 +604,15 @@ class LdapFormStore {
 
   setIsSslEnabled = (enabled) => {
     this.isSslEnabled = enabled;
+
+    if (
+      this.requiredSettings.portNumber == constants.DEFAULT_LDAP_PORT ||
+      this.requiredSettings.portNumber == constants.SSL_LDAP_PORT
+    ) {
+      this.setPortNumber(
+        enabled ? constants.SSL_LDAP_PORT : constants.DEFAULT_LDAP_PORT,
+      );
+    }
   };
 
   get isCronEnabled() {
@@ -584,6 +629,10 @@ class LdapFormStore {
   };
 
   getSettings = () => {
+    const clearServer = this.requiredSettings.server.replace(
+      /((https?|ldaps?):\/\/)/gi,
+      "",
+    );
     return {
       EnableLdapAuthentication: this.isLdapEnabled,
       AcceptCertificate: this.acceptCertificate,
@@ -591,7 +640,7 @@ class LdapFormStore {
       StartTls: this.isTlsEnabled,
       Ssl: this.isSslEnabled,
       SendWelcomeEmail: this.isSendWelcomeEmail,
-      Server: this.requiredSettings.server,
+      Server: clearServer,
       UserDN: this.requiredSettings.userDN,
       PortNumber: this.requiredSettings.portNumber,
       UserFilter: this.requiredSettings.userFilter,
@@ -624,6 +673,14 @@ class LdapFormStore {
       error: "",
       source: "",
     };
+  };
+
+  openResetModal = () => {
+    this.confirmationResetModal = true;
+  };
+
+  closeResetModal = () => {
+    this.confirmationResetModal = false;
   };
 
   get hasChanges() {

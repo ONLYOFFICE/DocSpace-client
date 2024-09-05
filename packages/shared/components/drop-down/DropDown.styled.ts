@@ -54,6 +54,7 @@ const StyledDropdown = styled.div<{
   `}
   height: fit-content;
   position: absolute;
+  overflow: hidden;
 
   ${(props) => props.manualWidth && `width: ${props.manualWidth};`}
   ${(props) =>
@@ -70,29 +71,18 @@ const StyledDropdown = styled.div<{
   ${(props) =>
     props.directionX === "right" &&
     !props.directionXStylesDisabled &&
-    (props.theme.interfaceDirection === "rtl"
-      ? css`
-          left: ${props.manualX || "0px"};
-        `
-      : css`
-          right: ${props.manualX || "0px"};
-        `)}
+    `inset-inline-end: ${props.manualX || "0px"};`}
 
   ${(props) =>
     props.directionX === "left" &&
     !props.directionXStylesDisabled &&
-    (props.theme.interfaceDirection === "rtl"
-      ? css`
-          right: ${props.manualX || "0px"};
-        `
-      : css`
-          left: ${props.manualX || "0px"};
-        `)}
+    `inset-inline-start: ${props.manualX || "0px"};`}
 
   z-index: ${(props) =>
     props.zIndex ? props.zIndex : props.theme.dropDown.zIndex};
   display: ${(props) =>
     props.open ? (props.columnCount ? "block" : "table") : "none"};
+  table-layout: fixed;
 
   ${(props) =>
     !props.isDropdownReady &&
@@ -110,8 +100,6 @@ const StyledDropdown = styled.div<{
   -moz-box-shadow: ${(props) => props.theme.dropDown.boxShadow};
   -webkit-box-shadow: ${(props) => props.theme.dropDown.boxShadow};
 
-  padding: ${(props) =>
-    !props.maxHeight && props.itemCount && props.itemCount > 1 && `4px 0px`};
   ${(props) =>
     props.columnCount &&
     `
@@ -122,10 +110,7 @@ const StyledDropdown = styled.div<{
 
   .scroll-drop-down-item {
     .scroll-body {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? `padding-left: 0 !important;`
-          : `padding-right: 0 !important;`}
+      padding-inline-end: 0 !important;
     }
   }
   &.download-dialog-dropDown {
@@ -138,7 +123,7 @@ const StyledDropdown = styled.div<{
       css`
         top: auto !important;
         bottom: 0;
-        ${props.theme.interfaceDirection === "rtl" ? `right: 0;` : `left: 0;`}
+        inset-inline-start: 0;
         width: 100%;
       `}
   }

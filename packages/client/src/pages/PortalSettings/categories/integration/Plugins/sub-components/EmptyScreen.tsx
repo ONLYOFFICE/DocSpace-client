@@ -27,11 +27,11 @@
 import React from "react";
 import styled from "styled-components";
 
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 import { Text } from "@docspace/shared/components/text";
+import { mobile } from "@docspace/shared/utils";
 
-import EmptyScreenPluginsUrl from "PUBLIC_DIR/images/empty_screen_plugins.svg?url";
-import EmptyScreenPluginsDarkUrl from "PUBLIC_DIR/images/empty_screen_plugins_dark.svg?url";
+import EmptyScreenPluginsUrl from "PUBLIC_DIR/images/emptyview/empty.plugins.light.svg?url";
+import EmptyScreenPluginsDarkUrl from "PUBLIC_DIR/images/emptyview/empty.plugins.dark.svg?url";
 
 import EmptyFolderContainer from "SRC_DIR/components/EmptyContainer/EmptyContainer";
 import { PluginsEmptyScreen } from "../Plugins.types";
@@ -41,6 +41,18 @@ import Dropzone from "./Dropzone";
 const StyledEmptyScreen = styled(EmptyFolderContainer)`
   .ec-buttons {
     width: 100%;
+  }
+
+  .ec-image {
+    width: 200px;
+    height: 140px;
+  }
+
+  @media ${mobile} {
+    .ec-image {
+      width: 150px;
+      height: 105px;
+    }
   }
 `;
 
@@ -54,7 +66,8 @@ const EmptyScreen = ({ t, theme, withUpload, onDrop }: PluginsEmptyScreen) => {
       headerText={t("NoPlugins")}
       descriptionText={
         <Text>
-          {withUpload && t("UploadDescription", { productName: PRODUCT_NAME })}
+          {withUpload &&
+            t("UploadDescription", { productName: t("Common:ProductName") })}
         </Text>
       }
       style={{ gridColumnGap: "39px" }}

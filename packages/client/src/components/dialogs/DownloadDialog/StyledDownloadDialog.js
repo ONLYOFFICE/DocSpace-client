@@ -67,7 +67,7 @@ const StyledDownloadContent = styled.div`
         isOpen ? "rotate(270deg)" : "rotate(90deg)"};
       svg {
         path {
-          fill: #333;
+          fill: ${(props) => props.theme.downloadDialog.iconFill};
         }
       }
     }
@@ -118,16 +118,13 @@ const StyledDownloadContent = styled.div`
       .download-dialog-link {
         width: max-content;
         a {
-          ${({ theme }) =>
-            theme.interfaceDirection === "rtl"
-              ? `padding-left: 0;`
-              : `padding-right: 0;`}
+          padding-inline-end: 0;
           text-underline-offset: 1px;
         }
       }
       .download-dialog-other-text {
         text-align: end;
-        color: #a3a9ae;
+        color: ${(props) => props.theme.downloadDialog.textColor};
       }
     }
   }

@@ -29,14 +29,7 @@ import { Text } from "@docspace/shared/components/text";
 
 const StyledText = styled(Text)`
   display: inline-block;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-left: 12px;
-        `
-      : css`
-          margin-right: 12px;
-        `}
+  margin-inline-end: 12px;
 `;
 
 const StyledTypeCell = styled(StyledText)`
@@ -73,14 +66,7 @@ const StyledAuthorCell = styled.div`
     width: 16px;
     min-width: 16px;
     height: 16px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 8px;
-          `
-        : css`
-            margin-right: 8px;
-          `}
+    margin-inline-end: 8px;
   }
 `;
 

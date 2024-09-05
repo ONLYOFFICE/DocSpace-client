@@ -32,10 +32,10 @@ import {
   TPortal,
   TPortalTariff,
   TRestoreProgress,
-  TTenantExtra,
 } from "./types";
+import { Nullable } from "../../types";
 
-export function getShortenedLink(link) {
+export function getShortenedLink(link: string) {
   return request({
     method: "put",
     url: "/portal/getshortenlink",
@@ -43,13 +43,13 @@ export function getShortenedLink(link) {
   });
 }
 
-export function getInvitationLink(type) {
-  return request({
+export async function getInvitationLink(type: EmployeeType) {
+  const res = await request({
     method: "get",
     url: `/portal/users/invite/${type}`,
-  }).then((link) => {
-    return Promise.resolve(link);
   });
+
+  return res;
 }
 
 export function getInvitationLinks() {
@@ -214,7 +214,7 @@ export function sendDeletePortalEmail() {
   });
 }
 
-export function suspendPortal(confirmKey = null) {
+export function suspendPortal(confirmKey: Nullable<string> = null) {
   const options = {
     method: "put",
     url: "/portal/suspend",
@@ -225,7 +225,7 @@ export function suspendPortal(confirmKey = null) {
   return request(options);
 }
 
-export function continuePortal(confirmKey = null) {
+export function continuePortal(confirmKey: Nullable<string> = null) {
   const options = {
     method: "put",
     url: "/portal/continue",
@@ -236,7 +236,7 @@ export function continuePortal(confirmKey = null) {
   return request(options);
 }
 
-export function deletePortal(confirmKey = null) {
+export function deletePortal(confirmKey: Nullable<string> = null) {
   const options = {
     method: "delete",
     url: "/portal/delete",
@@ -256,16 +256,6 @@ export async function getPortalPaymentQuotas() {
   return res;
 }
 
-export async function getPortalTenantExtra(refresh: boolean) {
-  const params = refresh ? { refresh: true } : {};
-  const res = (await request({
-    method: "get",
-    url: "/portal/tenantextra",
-    params,
-  })) as TTenantExtra;
-
-  return res;
-}
 export async function getPortalQuota(refresh = false) {
   const params = refresh ? { refresh: true } : {};
   // console.log("getPortalQuota", { params });

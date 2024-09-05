@@ -187,6 +187,7 @@ class SsoFormStore {
     } else {
       this.enableSso = false;
       !this.hasErrors && this.entityId.trim() !== "" && this.saveSsoSettings(t);
+      this.hideErrors();
     }
 
     for (let key in this) {
@@ -273,6 +274,7 @@ class SsoFormStore {
       this.isLoadingXml = true;
       const response = await loadXmlMetadata(data);
       this.setFieldsFromMetaData(response.data.meta);
+      this.hideErrors();
       this.isLoadingXml = false;
     } catch (err) {
       this.isLoadingXml = false;
@@ -291,6 +293,7 @@ class SsoFormStore {
       this.isLoadingXml = true;
       const response = await uploadXmlMetadata(data);
       this.setFieldsFromMetaData(response.data.meta);
+      this.hideErrors();
       this.isLoadingXml = false;
     } catch (err) {
       this.isLoadingXml = false;
@@ -377,6 +380,8 @@ class SsoFormStore {
     };
   };
   saveSsoSettings = async (t) => {
+    this.checkRequiredFields();
+
     const settings = this.getSettings();
     const data = { serializeSettings: JSON.stringify(settings) };
 
@@ -386,9 +391,7 @@ class SsoFormStore {
       await submitSsoForm(data);
       toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
       this.isSubmitLoading = false;
-      this.setSpMetadata(true);
-      this.setDefaultSettings(settings);
-      this.setIsSsoEnabled(settings.enableSso);
+      this.load();
     } catch (err) {
       toastr.error(err);
       console.error(err);
@@ -401,6 +404,7 @@ class SsoFormStore {
       const config = await resetSsoForm();
 
       this.setFields(config);
+      this.hideErrors();
     } catch (err) {
       toastr.error(err);
       console.error(err);
@@ -877,6 +881,15 @@ class SsoFormStore {
     this.errorMessage = null;
   };
 
+  hideErrors = () => {
+    for (let key in this) {
+      if (key.includes("HasError") && this[key] !== false) {
+        console.log("key", key);
+        this[key] = false;
+      }
+    }
+  };
+
   validate = (string) => {
     if (string.trim().length === 0) throw new Error("EmptyFieldError");
     else return true;
@@ -886,9 +899,29 @@ class SsoFormStore {
     window.open("/sso/metadata", "_blank");
   };
 
+  checkRequiredFields = () => {
+    this.setError("spLoginLabel", this.spLoginLabel);
+    this.setError("entityId", this.entityId);
+    this.ssoBinding === BINDING_POST &&
+      this.setError("ssoUrlPost", this.ssoUrlPost);
+    this.ssoBinding === BINDING_REDIRECT &&
+      this.setError("ssoUrlRedirect", this.ssoUrlRedirect);
+    this.sloBinding === BINDING_POST &&
+      this.setError("sloUrlPost", this.sloUrlPost);
+    this.sloBinding === BINDING_REDIRECT &&
+      this.setError("sloUrlRedirect", this.sloUrlRedirect);
+    this.setError("firstName", this.firstName);
+    this.setError("lastName", this.lastName);
+    this.setError("email", this.email);
+
+    if (this.hasErrors) {
+      this.scrollToField();
+    }
+  };
+
   get hasErrors() {
     for (let key in this) {
-      if (key.includes("ErrorMessage") && this[key] !== null) return true;
+      if (key.includes("HasError") && this[key] !== false) return true;
     }
     return false;
   }
@@ -918,6 +951,46 @@ class SsoFormStore {
         cert.action === SSO_ENCRYPT || cert.action === SSO_SIGNING_ENCRYPT,
     );
   }
+
+  get isDisabledSaveButton() {
+    return (
+      !this.enableSso ||
+      this.hasErrors ||
+      !this.hasChanges ||
+      this.isLoadingXml ||
+      this.isRequiredFieldsEmpty
+    );
+  }
+
+  get isRequiredFieldsEmpty() {
+    return (
+      this.spLoginLabel.trim().length === 0 ||
+      this.entityId.trim().length === 0 ||
+      (this.ssoBinding === BINDING_POST &&
+        this.ssoUrlPost.trim().length === 0) ||
+      (this.sloBinding === BINDING_POST &&
+        this.sloUrlPost.trim().length === 0) ||
+      (this.ssoBinding === BINDING_REDIRECT &&
+        this.ssoUrlRedirect.trim().length === 0) ||
+      (this.sloBinding === BINDING_REDIRECT &&
+        this.sloUrlRedirect.trim().length === 0) ||
+      this.firstName.trim().length === 0 ||
+      this.lastName.trim().length === 0 ||
+      this.email.trim().length === 0
+    );
+  }
+
+  scrollToField = () => {
+    for (let key in this) {
+      if (key.includes("HasError") && this[key] !== false) {
+        const name = key.replace("HasError", "");
+        const element = document.getElementsByName(name)?.[0];
+        element?.focus();
+        element?.blur();
+        return;
+      }
+    }
+  };
 }
 
 export default SsoFormStore;

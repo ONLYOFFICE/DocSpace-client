@@ -43,8 +43,7 @@ const StyledImageCropper = styled.div<{ disableImageRescaling?: boolean }>`
       height: 216px;
       top: 0;
       bottom: 0;
-      left: 0;
-      right: 0;
+      inset-inline: 0;
       svg {
         opacity: 0.2;
         path {

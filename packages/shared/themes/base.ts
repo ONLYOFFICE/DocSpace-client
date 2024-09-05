@@ -29,7 +29,6 @@ import AvatarBaseReactSvgUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
 import { globalColors } from "./globalColors";
 import { CommonTheme } from "./commonTheme";
 import { DEFAULT_FONT_FAMILY } from "../constants";
-import { color } from "storybook-static/sb-manager/chunk-INSKDKQB";
 
 export type TColorScheme = {
   id: number;
@@ -45,53 +44,71 @@ export type TColorScheme = {
 };
 
 const {
-  black,
   white,
-
-  grayLight,
-  grayLightMid,
-  grayMid,
-
-  gray,
-  grayMain,
-  shuttleGrey,
-
-  blueMain,
-
-  blueDenim,
-  blueDenimTransparent,
-  blueMaya,
-  blueSky,
-
-  orangeMain,
-
-  orangePressed,
-
-  link,
-
-  warningColor,
-  red,
-  blueLightMid,
-
-  cyanBlueDarkShade,
-  lightCumulus,
-  lightMediumGoldenrod,
-  activeSuccess,
-  activeError,
-  activeInfo,
-  activeWarning,
-  hoverSuccess,
-  hoverError,
-  hoverInfo,
-  hoverWarning,
+  black,
   darkBlack,
-  silver,
-  lightHover,
-  strongBlue,
-  lightGrayishStrongBlue,
-  darkRed,
+
+  lightGrayBlackout,
+  grayLight,
+  darkGrayLight,
+  lightGrayHover,
+  grayLightMid,
+  grayDarkMid,
+  lightGraySelected,
+  grayStrong,
+  gray,
+  grayDark,
+  lightGrayDark,
+  grayText,
+  grayDarkText,
+  lightBlueMain,
+  lightBlueMainHover,
+  lightBlueMainDisabled,
+  lightBlueMainPressed,
+  lightSecondMain,
+  lightSecondMainHover,
+  lightSecondMainDisabled,
+
+  mainGreen,
 
   lightErrorStatus,
+  favoritesStatus,
+  lightStatusWarning,
+  lightStatusPositive,
+
+  lightIcons,
+  link,
+  blueLightMid,
+
+  lightToastDone,
+  lightToastInfo,
+  lightToastAlert,
+  lightToastWarning,
+
+  dndColor,
+  dndHoverColor,
+
+  onWhiteColor,
+  boxShadowColor,
+  loaderLight,
+
+  editorGreenColor,
+  editorBlueColor,
+  editorOrangeColor,
+  editorRedColor,
+  windowsColor,
+  linuxColor,
+  androidColor,
+  badgeShadow,
+  popupShadow,
+  menuShadow,
+  lightScroll,
+  lightScrollHover,
+  lightScrollActive,
+  silver,
+  highlandGray,
+
+  blurLight,
 } = globalColors;
 
 export const getBaseTheme = () => {
@@ -107,7 +124,7 @@ export const getBaseTheme = () => {
     text: {
       color: black,
       disableColor: gray,
-      emailColor: "#a3a9ae",
+      emailColor: gray,
       fontWeight: "normal",
       fontWeightBold: "bold",
     },
@@ -125,10 +142,10 @@ export const getBaseTheme = () => {
       color: black,
     },
 
-    backgroundAndSubstrateColor: "#F8F9F9",
+    backgroundAndSubstrateColor: grayLight,
 
     betaBadgeTooltip: {
-      boxShadowColor: "rgba(4, 15, 27, 0.12)",
+      boxShadowColor: badgeShadow,
     },
 
     button: {
@@ -184,7 +201,7 @@ export const getBaseTheme = () => {
         base: black,
         baseHover: black,
         baseActive: black,
-        baseDisabled: grayMid,
+        baseDisabled: grayStrong,
         primary: white,
         primaryHover: white,
         primaryActive: white,
@@ -197,26 +214,26 @@ export const getBaseTheme = () => {
         baseActive: grayLightMid,
         baseDisabled: grayLight,
 
-        primary: blueDenim,
-        primaryHover: blueDenimTransparent,
-        primaryActive: blueMaya,
-        primaryDisabled: blueSky,
+        primary: lightSecondMain,
+        primaryHover: lightSecondMainHover,
+        primaryActive: `linear-gradient(0deg, ${lightSecondMain}, ${lightSecondMain}),linear-gradient(0deg, ${onWhiteColor}, ${onWhiteColor})`,
+        primaryDisabled: lightSecondMainDisabled,
       },
 
       border: {
-        base: `1px solid ${globalColors.grayMid}`,
-        baseHover: `1px solid ${blueDenim}`,
-        baseActive: `1px solid ${globalColors.grayMid}`,
+        base: `1px solid ${globalColors.grayStrong}`,
+        baseHover: `1px solid ${lightSecondMain}`,
+        baseActive: `1px solid ${globalColors.grayStrong}`,
         baseDisabled: `1px solid ${globalColors.grayLightMid}`,
 
-        primary: `1px solid ${blueDenim}`,
-        primaryHover: `1px solid ${blueDenimTransparent}`,
-        primaryActive: `1px solid ${blueMaya}`,
-        primaryDisabled: `1px solid ${blueSky}`,
+        primary: `1px solid ${lightSecondMain}`,
+        primaryHover: `1px solid ${lightSecondMainHover}`,
+        primaryActive: `1px solid linear-gradient(0deg, ${lightSecondMain}, ${lightSecondMain}),linear-gradient(0deg, ${onWhiteColor}, ${onWhiteColor})`,
+        primaryDisabled: `1px solid ${lightSecondMainDisabled}`,
       },
 
       loader: {
-        base: blueDenim,
+        base: lightSecondMain,
         primary: white,
       },
     },
@@ -228,25 +245,22 @@ export const getBaseTheme = () => {
       margin: "0",
       lineHeight: "56px",
       fontWeight: "700",
-      borderBottom: `1px solid ${globalColors.lightGrayishBlue}`,
       padding: "0 16px 16px",
       bodyPadding: "16px 0",
     },
 
     mainButtonMobile: {
-      textColor: grayMain,
+      textColor: lightGrayDark,
 
-      buttonColor: orangeMain,
+      buttonColor: lightStatusWarning,
       iconFill: white,
 
       circleBackground: white,
 
-      mobileProgressBarBackground: "rgb(48%, 58%, 69%, 0.4)",
+      mobileProgressBarBackground: grayStrong,
 
       bar: {
-        errorBackground: orangePressed,
-
-        icon: "#A3A9AE",
+        icon: gray,
       },
 
       buttonWrapper: {
@@ -279,7 +293,7 @@ export const getBaseTheme = () => {
         separatorBackground: white,
 
         buttonColor: white,
-        hoverButtonColor: "#3a6c9e",
+        hoverButtonColor: lightBlueMainPressed,
 
         backgroundActionMobile: blueLightMid,
       },
@@ -290,10 +304,10 @@ export const getBaseTheme = () => {
     },
 
     mainButton: {
-      backgroundColor: "#4781D1",
-      disableBackgroundColor: "rgba(71, 129, 209, 0.6)",
-      hoverBackgroundColor: "rgba(71, 129, 209, .85)",
-      clickBackgroundColor: "#4074BC",
+      backgroundColor: lightBlueMain,
+      disableBackgroundColor: lightBlueMainDisabled,
+      hoverBackgroundColor: lightBlueMainHover,
+      clickBackgroundColor: lightBlueMainPressed,
 
       padding: "5px 14px 5px 12px",
       borderRadius: "3px",
@@ -341,26 +355,26 @@ export const getBaseTheme = () => {
       outline: "none",
       width: "100%",
 
-      border: "1px solid #D0D5DA",
+      border: `1px solid ${grayStrong}`,
       background: white,
 
       borderConnect: "none",
-      connectBackground: "#3B72A7",
+      connectBackground: lightIcons,
 
-      disableBackgroundColor: "#F8F9F9",
+      disableBackgroundColor: grayLight,
 
       hoverBackground: white,
-      hoverBorder: "1px solid #5299E0",
-      hoverConnectBackground: "#316DAA",
+      hoverBorder: `1px solid ${lightSecondMain}`,
+      hoverConnectBackground: link,
       hoverConnectBorder: "none",
 
-      activeBorder: "1px solid #D0D5DA",
-      activeBackground: "#ECEEF1",
+      activeBorder: `1px solid ${grayStrong}`,
+      activeBackground: grayLightMid,
       activeConnectBorder: "none",
-      activeConnectBackground: "#265A8F",
+      activeConnectBackground: blueLightMid,
 
-      color: "rgba(0, 0, 0, 0.54)",
-      disableColor: "#333333",
+      color: gray,
+      disableColor: black,
       disabledSvgColor: "none",
 
       text: {
@@ -374,7 +388,7 @@ export const getBaseTheme = () => {
         overflow: "hidden",
         textOverflow: "ellipsis",
         whiteSpace: "nowrap",
-        color: "#A3A9AE",
+        color: gray,
         hoverColor: black,
         connectColor: white,
       },
@@ -415,7 +429,7 @@ export const getBaseTheme = () => {
     groupButtonsMenu: {
       top: "0",
       background: white,
-      boxShadow: " 0px 10px 18px -8px rgba(0, 0, 0, 0.100306)",
+      boxShadow: `0px 10px 18px -8px ${menuShadow}`,
       height: "48px",
       tabletHeight: "56px",
       padding: "0 18px 19px 0",
@@ -430,23 +444,23 @@ export const getBaseTheme = () => {
         width: "20px",
         height: "20px",
         padding: "8px",
-        hoverBackgroundColor: cyanBlueDarkShade,
-        backgroundColor: grayMid,
+        hoverBackgroundColor: grayText,
+        backgroundColor: grayStrong,
       },
     },
 
     iconButton: {
       color: gray,
-      hoverColor: grayMain,
+      hoverColor: lightGrayDark,
     },
     selectorAddButton: {
       background: grayLightMid,
-      hoverBackground: lightGrayishStrongBlue,
-      activeBackground: grayMid,
+      hoverBackground: lightGraySelected,
+      activeBackground: grayStrong,
 
-      iconColor: grayMain,
-      iconColorHover: grayMain,
-      iconColorActive: grayMain,
+      iconColor: lightGrayDark,
+      iconColorHover: lightGrayDark,
+      iconColorActive: lightGrayDark,
 
       border: `none`,
       boxSizing: "border-box",
@@ -454,7 +468,7 @@ export const getBaseTheme = () => {
       height: " 32px",
       width: "32px",
       padding: "10px",
-      color: grayMain,
+      color: lightGrayDark,
       hoverColor: black,
     },
 
@@ -468,39 +482,13 @@ export const getBaseTheme = () => {
       unsavedColor: gray,
     },
 
-    selectedItem: {
-      background: grayLight,
-      border: `1px solid ${globalColors.grayLightMid}`,
-      borderRadius: "3px",
-
-      textBox: {
-        padding: "0 8px",
-        height: "32px",
-        alignItems: "center",
-        borderRight: `1px solid ${globalColors.grayLightMid}`,
-      },
-
-      text: {
-        color: cyanBlueDarkShade,
-        disabledColor: grayMid,
-      },
-
-      closeButton: {
-        alignItems: "center",
-        padding: "0 8px",
-        color: "#979797",
-        colorHover: cyanBlueDarkShade,
-        backgroundColor: grayLightMid,
-      },
-    },
-
     checkbox: {
       fillColor: white,
-      borderColor: grayMid,
+      borderColor: grayStrong,
       arrowColor: black,
       indeterminateColor: black,
 
-      disableArrowColor: grayMid,
+      disableArrowColor: grayStrong,
       disableBorderColor: grayLightMid,
       disableFillColor: grayLight,
       disableIndeterminateColor: gray,
@@ -508,43 +496,22 @@ export const getBaseTheme = () => {
       hoverBorderColor: gray,
       hoverIndeterminateColor: black,
 
-      pressedBorderColor: grayMid,
+      pressedBorderColor: grayStrong,
       pressedFillColor: grayLightMid,
 
       focusColor: gray,
 
-      errorColor: "#F21C0E",
+      errorColor: lightErrorStatus,
     },
-
-    // slider: {
-    //   sliderBarColorProgress: blueMain,
-    //   sliderBarColorProgressDisabled: grayMid,
-    //   sliderBarColor: grayLightMid,
-    //   sliderBarDisableColor: grayLightMid,
-
-    //   sliderBarBorderActive: `1px solid ${globalColors.grayMid}`,
-    //   sliderBarBorderDisable: `1px solid ${globalColors.grayMid}`,
-
-    //   thumbFillDisable: grayLightMid,
-    //   thumbFillActive: grayLightMid,
-
-    //   thumbBorderColorActive: `1px solid ${globalColors.gray}`,
-    //   thumbBorderColorDisable: `1px solid ${globalColors.grayMid}`,
-
-    //   sliderWidth: "202px",
-
-    //   arrowHover: blueMain,
-    //   arrowColor: grayMid,
-    // },
 
     viewSelector: {
       fillColor: white,
       checkedFillColor: gray,
       fillColorDisabled: grayLight,
       disabledFillColor: grayLightMid,
-      disabledFillColorInner: grayMid,
+      disabledFillColorInner: grayStrong,
       hoverBorderColor: gray,
-      borderColor: grayMid,
+      borderColor: grayStrong,
     },
 
     radioButton: {
@@ -557,33 +524,19 @@ export const getBaseTheme = () => {
       disableBackground: grayLight,
 
       fillColor: black,
-      borderColor: grayMid,
+      borderColor: grayStrong,
 
-      disableFillColor: grayMid,
+      disableFillColor: grayStrong,
       disableBorderColor: grayLightMid,
 
       hoverBorderColor: gray,
-    },
-
-    requestLoader: {
-      backgroundColor: white,
-      border: `1px solid ${globalColors.veryLightGrey}`,
-      overflow: "hidden",
-      padding: "5px 10px",
-      lineHeight: "16px",
-      borderRadius: "5px",
-      boxShadow: "0 2px 8px rgba(0, 0, 0, 0.3)",
-
-      marginRight: "10px",
-      top: "10px",
-      width: "100%",
     },
 
     row: {
       minHeight: "47px",
       width: "100%",
       borderBottom: globalColors.grayLightMid,
-      backgroundColor: globalColors.lightHover,
+      backgroundColor: globalColors.lightGrayHover,
       minWidth: "160px",
       overflow: "hidden",
       textOverflow: "ellipsis",
@@ -635,14 +588,14 @@ export const getBaseTheme = () => {
       lineHeight: "0.8",
       overflow: "hidden",
       color: white,
-      backgroundColor: orangeMain,
-      disableBackgroundColor: "#A3A9AE",
+      backgroundColor: lightStatusWarning,
+      disableBackgroundColor: gray,
     },
 
     scrollbar: {
-      bgColor: "rgba(6, 22, 38, 0.16)",
-      hoverBgColor: "rgba(6, 22, 38, 0.32)",
-      pressBgColor: "rgba(6, 22, 38, 0.5)",
+      bgColor: lightScroll,
+      hoverBgColor: lightScrollHover,
+      pressBgColor: lightScrollActive,
       paddingInlineEnd: "17px !important",
       paddingInlineEndMobile: "8px !important",
     },
@@ -657,7 +610,7 @@ export const getBaseTheme = () => {
       margin: " 0 auto",
       minHeight: "100%",
 
-      colorDisabledFileIcons: "#f3f4f4",
+      colorDisabledFileIcons: lightGrayHover,
 
       backdrop: {
         backgroundRGBA: {
@@ -685,12 +638,7 @@ export const getBaseTheme = () => {
         },
       },
 
-      header: {
-        borderBottom: `1px solid ${globalColors.lightGrayishBlue}`,
-      },
-
       closeButton: {
-        // backgroundColor: "#9a9ea3",
         fillColor: white,
       },
     },
@@ -714,7 +662,7 @@ export const getBaseTheme = () => {
 
     input: {
       color: black,
-      disableColor: grayMid,
+      disableColor: grayStrong,
 
       backgroundColor: white,
       disableBackgroundColor: grayLight,
@@ -732,19 +680,19 @@ export const getBaseTheme = () => {
       boxSizing: "border-box",
       border: "solid 1px",
 
-      borderColor: grayMid,
-      errorBorderColor: "#F21C0E",
-      warningBorderColor: warningColor,
+      borderColor: grayStrong,
+      errorBorderColor: lightErrorStatus,
+      warningBorderColor: lightStatusWarning,
       disabledBorderColor: grayLightMid,
 
       hoverBorderColor: gray,
-      hoverErrorBorderColor: red,
-      hoverWarningBorderColor: warningColor,
+      hoverErrorBorderColor: lightErrorStatus,
+      hoverWarningBorderColor: lightStatusWarning,
       hoverDisabledBorderColor: grayLightMid,
 
-      focusBorderColor: blueMain,
-      focusErrorBorderColor: red,
-      focusWarningBorderColor: warningColor,
+      focusBorderColor: lightSecondMain,
+      focusErrorBorderColor: lightErrorStatus,
+      focusWarningBorderColor: lightStatusWarning,
       focusDisabledBorderColor: grayLightMid,
     },
 
@@ -808,10 +756,10 @@ export const getBaseTheme = () => {
     },
 
     passwordInput: {
-      disableColor: grayMid,
+      disableColor: grayStrong,
       color: gray,
 
-      iconColor: grayMid,
+      iconColor: grayStrong,
       hoverIconColor: gray,
 
       hoverColor: gray,
@@ -854,19 +802,19 @@ export const getBaseTheme = () => {
       fontSize: "14px",
       fontWeight: "600",
 
-      iconColor: grayMid,
-      hoverIconColor: grayMid,
+      iconColor: grayStrong,
+      hoverIconColor: grayStrong,
     },
 
     inputPhone: {
-      activeBorderColor: "#2da7db",
-      inactiveBorderColor: "#d0d5da",
-      errorBorderColor: "#f21c0e",
-      backgroundColor: "#fff",
-      color: "#33333",
-      scrollBackground: "#a3a9ae",
-      placeholderColor: "#a3a9ae",
-      dialCodeColor: "#a3a9ae",
+      activeBorderColor: lightSecondMain,
+      inactiveBorderColor: grayStrong,
+      errorBorderColor: lightErrorStatus,
+      backgroundColor: white,
+      color: black,
+      scrollBackground: gray,
+      placeholderColor: gray,
+      dialCodeColor: gray,
       width: "320px",
       height: "44px",
     },
@@ -874,7 +822,7 @@ export const getBaseTheme = () => {
     textInput: {
       fontWeight: "normal",
       placeholderColor: gray,
-      disablePlaceholderColor: grayMid,
+      disablePlaceholderColor: grayStrong,
 
       transition: "all 0.2s ease 0s",
       appearance: "none",
@@ -919,23 +867,23 @@ export const getBaseTheme = () => {
       padding: "2px 0px 2px 2px",
       margin: "0",
 
-      borderColor: blueMain,
+      borderColor: lightSecondMain,
 
       iconColor: gray,
-      hoverIconColor: grayMain,
+      hoverIconColor: lightGrayDark,
     },
 
     textArea: {
       disabledColor: grayLight,
 
-      focusBorderColor: blueMain,
-      focusErrorBorderColor: red,
+      focusBorderColor: lightSecondMain,
+      focusErrorBorderColor: lightErrorStatus,
       focusOutline: "none",
 
       scrollWidth: "100%",
       scrollHeight: "91px",
 
-      numerationColor: "#A3A9AE",
+      numerationColor: gray,
 
       copyIconFilter:
         "invert(71%) sepia(1%) saturate(1597%) hue-rotate(166deg) brightness(100%) contrast(73%)",
@@ -975,17 +923,17 @@ export const getBaseTheme = () => {
       },
 
       color: {
-        default: "#A3A9AE",
-        hover: "#555F65",
-        active: "#333333",
-        focus: "#333333",
+        default: gray,
+        hover: grayText,
+        active: black,
+        focus: black,
       },
 
       background: {
         default: "transparent",
-        hover: "#ECEEF1",
-        active: "#D0D5DA",
-        focus: "#DFE2E3",
+        hover: grayLightMid,
+        active: grayStrong,
+        focus: lightGraySelected,
       },
 
       caret: {
@@ -1007,14 +955,14 @@ export const getBaseTheme = () => {
 
     tooltip: {
       borderRadius: "6px",
-      boxShadow: "0px 10px 15px rgba(4, 15, 27, 0.12)",
+      boxShadow: `0px 10px 15px ${popupShadow}`,
       opacity: "1",
       padding: "8px 12px",
       pointerEvents: "auto",
       maxWidth: "340px",
       color: white,
       textColor: black,
-      backgroundColor: "#F8F9F9",
+      backgroundColor: grayLight,
 
       before: {
         border: "none",
@@ -1069,7 +1017,7 @@ export const getBaseTheme = () => {
       },
 
       errorLabel: {
-        color: "#F21C0E",
+        color: lightErrorStatus,
       },
     },
 
@@ -1128,8 +1076,8 @@ export const getBaseTheme = () => {
       },
 
       imageContainer: {
-        backgroundImage: blueMain,
-        background: grayMid,
+        backgroundImage: lightSecondMain,
+        background: grayStrong,
         groupBackground: grayLightMid,
         borderRadius: "50%",
         height: "100%",
@@ -1144,19 +1092,19 @@ export const getBaseTheme = () => {
       },
 
       administrator: {
-        fill: orangeMain,
+        fill: lightStatusWarning,
         stroke: darkBlack,
         color: white,
       },
 
       guest: {
-        fill: "#3B72A7",
+        fill: lightIcons,
         stroke: darkBlack,
         color: white,
       },
 
       owner: {
-        fill: "#EDC409",
+        fill: favoritesStatus,
         stroke: darkBlack,
         color: white,
       },
@@ -1178,8 +1126,8 @@ export const getBaseTheme = () => {
       },
 
       icon: {
-        background: "#ECEEF1",
-        color: "#A3A9AE",
+        background: grayLightMid,
+        color: gray,
       },
 
       width: {
@@ -1233,23 +1181,23 @@ export const getBaseTheme = () => {
           marginTop: "-9.4px",
           width: "24px",
           height: "24px",
-          background: blueMain,
-          disabledBackground: "#A6DCF2",
+          background: lightSecondMain,
+          disabledBackground: lightSecondMainDisabled,
           borderWidth: "6px",
           borderStyle: "solid",
           borderColor: `${white}`,
           borderRadius: "30px",
-          boxShadow: "0px 5px 20px rgba(4, 15, 27, 0.13)",
+          boxShadow: `0px 5px 20px ${popupShadow}`,
         },
 
         thumb: {
           width: "24px",
           height: "24px",
-          background: blueMain,
+          background: lightSecondMain,
           border: `6px solid ${white}`,
           borderRadius: "30px",
           marginTop: "0px",
-          boxShadow: "0px 5px 20px rgba(4, 15, 27, 0.13)",
+          boxShadow: `0px 5px 20px ${popupShadow}`,
         },
 
         rangeTrack: {
@@ -1263,10 +1211,10 @@ export const getBaseTheme = () => {
         rangeThumb: {
           width: "14px",
           height: "14px",
-          background: blueMain,
+          background: lightSecondMain,
           border: `6px solid ${white}`,
           borderRadius: "30px",
-          boxShadow: "0px 5px 20px rgba(4, 15, 27, 0.13)",
+          boxShadow: `0px 5px 20px ${popupShadow}`,
         },
 
         track: {
@@ -1279,7 +1227,7 @@ export const getBaseTheme = () => {
         },
 
         trackNumber: {
-          color: "#A3A9AE",
+          color: gray,
         },
 
         fillLower: {
@@ -1295,10 +1243,6 @@ export const getBaseTheme = () => {
           border: `1.4px solid ${grayLightMid}`,
           borderRadius: "11.2px",
         },
-      },
-
-      dropZone: {
-        border: `1px dashed ${silver}`,
       },
 
       container: {
@@ -1337,80 +1281,25 @@ export const getBaseTheme = () => {
     },
 
     backdrop: {
-      backgroundColor: "rgba(6, 22, 38, 0.2)",
+      backgroundColor: blurLight,
       unsetBackgroundColor: "unset",
     },
 
-    treeMenu: {
-      disabledColor: "#767676",
-    },
-
-    treeNode: {
-      background: "#f3f4f4",
-      disableColor: "#A3A9AE",
-
-      dragging: {
-        draggable: {
-          background: lightCumulus,
-          hoverBackgroundColor: lightMediumGoldenrod,
-          borderRadius: "3px",
-        },
-
-        title: {
-          width: "85%",
-        },
-      },
-      icon: {
-        color: grayMain,
-      },
-
-      draggable: {
-        color: cyanBlueDarkShade,
-        dragOverBackgroundColor: strongBlue,
-        border: `1px ${strongBlue} solid`,
-        dragOverColor: white,
-
-        gapTop: {
-          borderTop: `2px blue solid`,
-        },
-
-        gapBottom: {
-          borderBottom: `2px blue solid`,
-        },
-      },
-
-      contentWrapper: {
-        color: darkRed,
-      },
-
-      title: {
-        color: cyanBlueDarkShade,
-      },
-
-      selected: {
-        background: lightGrayishStrongBlue,
-        hoverBackgroundColor: lightGrayishStrongBlue,
-        borderRadius: "3px",
-      },
-
-      checkbox: {
-        border: `2px solid ${white}`,
-        borderTop: 0,
-        borderLeft: 0,
-      },
-    },
-
     progressBar: {
-      backgroundColor: "#F3F4F4",
+      backgroundColor: lightGrayHover,
+
+      animation: {
+        background: lightBlueMain,
+      },
 
       percent: {
-        background: "#4781D1",
+        background: lightBlueMain,
       },
 
       color: {
         error: lightErrorStatus,
         status: black,
-    },
+      },
     },
 
     dropDown: {
@@ -1419,7 +1308,7 @@ export const getBaseTheme = () => {
       zIndex: "400",
       background: white,
       borderRadius: "6px",
-      boxShadow: "0px 8px 16px 0px #040F1B14",
+      boxShadow: `0px 8px 16px 0px ${boxShadowColor}`,
       border: "none",
     },
 
@@ -1429,7 +1318,7 @@ export const getBaseTheme = () => {
       backgroundColor: white,
       hoverBackgroundColor: grayLight,
       hoverDisabledBackgroundColor: white,
-      selectedBackgroundColor: lightHover,
+      selectedBackgroundColor: lightGrayHover,
       fontWeight: "600",
       fontSize: "13px",
       width: "100%",
@@ -1462,16 +1351,16 @@ export const getBaseTheme = () => {
 
     toast: {
       active: {
-        success: activeSuccess,
-        error: activeError,
-        info: activeInfo,
-        warning: activeWarning,
+        success: lightToastDone,
+        error: lightToastWarning,
+        info: lightToastInfo,
+        warning: lightToastAlert,
       },
       hover: {
-        success: hoverSuccess,
-        error: hoverError,
-        info: hoverInfo,
-        warning: hoverWarning,
+        success: lightToastDone,
+        error: lightToastWarning,
+        info: lightToastInfo,
+        warning: lightToastAlert,
       },
       border: {
         success: "none",
@@ -1502,7 +1391,7 @@ export const getBaseTheme = () => {
 
       main: {
         marginBottom: "1rem",
-        boxShadow: "0px 10px 16px -12px rgba(0, 0, 0, 0.3)",
+        boxShadow: `0px 10px 16px -12px ${popupShadow}`,
         maxHeight: "800px",
         overflow: "hidden",
         borderRadius: "6px",
@@ -1554,7 +1443,7 @@ export const getBaseTheme = () => {
     },
 
     loader: {
-      color: shuttleGrey,
+      color: loaderLight,
       size: "40px",
       marginRight: "2px",
       borderRadius: "50%",
@@ -1563,80 +1452,30 @@ export const getBaseTheme = () => {
     rombsLoader: {
       blue: {
         colorStep_1: "#F2CBBF",
-        colorStep_2: "#fff",
+        colorStep_2: white,
         colorStep_3: "#E6E4E4",
         colorStep_4: "#D2D2D2",
       },
       red: {
         colorStep_1: "#BFE8F8",
-        colorStep_2: "#fff",
+        colorStep_2: white,
         colorStep_3: "#EFEFEF",
       },
       green: {
         colorStep_1: "#CBE0AC",
-        colorStep_2: "#fff",
+        colorStep_2: white,
         colorStep_3: "#EFEFEF",
         colorStep_4: "#E6E4E4",
       },
     },
 
     dialogLoader: {
-      borderBottom: "1px solid rgb(222, 226, 230)",
+      borderBottom: `1px solid ${loaderLight}`,
     },
-
-    // dropDownItem: {
-    //   width: "100%",
-    //   maxWidth: "240px",
-    //   border: "none",
-    //   cursor: "pointer",
-    //   padding: "0px 16px",
-    //   lineHeight: "32px",
-    //   textAlign: "left",
-    //   background: "none",
-    //   textDecoration: "none",
-    //   fontStyle: "normal",
-    //   fontWeight: "600",
-    //   fontSize: "13px",
-
-    //   whiteSpace: "nowrap",
-    //   overflow: "hidden",
-    //   textOverflow: "ellipsis",
-
-    //   outline: "none",
-    //   color: black,
-    //   textTransform: "none",
-
-    //   hoverBackgroundColor: grayLight,
-    //   noHoverBackgroundColor: white,
-
-    //   header: {
-    //     color: gray,
-    //     hoverCursor: "default",
-    //     hoverBackgroundColor: "white",
-    //     textTransform: "uppercase",
-    //   },
-
-    //   disabled: {
-    //     color: gray,
-    //     hoverCursor: "default",
-    //     hoverBackgroundColor: "white",
-    //   },
-
-    //   separator: {
-    //     padding: "0px 16px",
-    //     border: `0.5px solid ${grayLightMid}`,
-    //     cursor: "default",
-    //     margin: "6px 16px 6px",
-    //     lineHeight: "1px",
-    //     height: "1px",
-    //     width: "calc(100% - 32px)",
-    //   },
-
-    //   tablet: { lineHeight: "36px" },
 
     comboBox: {
       padding: "6px 0px",
-      background: lightGrayishStrongBlue,
+      background: lightGraySelected,
 
       width: {
         base: "173px",
@@ -1668,32 +1507,32 @@ export const getBaseTheme = () => {
         selectPaddingRight: "6px",
 
         color: black,
-        disabledColor: grayMid,
+        disabledColor: grayStrong,
         background: white,
         backgroundWithBorder: "none",
         backgroundModernView: "none",
 
-        border: `1px solid ${grayMid}`,
+        border: `1px solid ${grayStrong}`,
         borderRadius: "3px",
-        borderColor: blueMain,
-        openBorderColor: blueMain,
+        borderColor: lightSecondMain,
+        openBorderColor: lightSecondMain,
         disabledBorderColor: grayLightMid,
         disabledBackground: grayLight,
 
         hoverBorderColor: gray,
-        hoverBorderColorOpen: blueMain,
+        hoverBorderColorOpen: lightSecondMain,
         hoverDisabledBorderColor: grayLightMid,
 
-        hoverBackgroundModernView: "#ECEEF1",
-        activeBackgroundModernView: "#D0D5DA",
-        focusBackgroundModernView: "#DFE2E3",
+        hoverBackgroundModernView: grayLightMid,
+        activeBackgroundModernView: grayStrong,
+        focusBackgroundModernView: lightGraySelected,
       },
 
       label: {
         marginRightWithBorder: "13px",
         marginRight: "4px",
 
-        disabledColor: grayMid,
+        disabledColor: grayStrong,
         color: black,
         alternativeColor: gray,
         selectedColor: black,
@@ -1708,9 +1547,9 @@ export const getBaseTheme = () => {
         width: "16px",
         height: "16px",
 
-        defaultDisabledColor: grayMid,
+        defaultDisabledColor: grayStrong,
         defaultColor: gray,
-        disabledColor: grayMid,
+        disabledColor: grayStrong,
         color: black,
         selectedColor: black,
       },
@@ -1718,7 +1557,7 @@ export const getBaseTheme = () => {
       plusBadge: {
         color: white,
         bgColor: gray,
-        selectedBgColor: grayMain,
+        selectedBgColor: lightGrayDark,
       },
     },
 
@@ -1738,9 +1577,9 @@ export const getBaseTheme = () => {
     },
 
     toggleButton: {
-      fillColorDefault: "#4781D1",
-      fillColorOff: "#D0D5DA",
-      hoverFillColorOff: "#A3A9AE",
+      fillColorDefault: lightBlueMain,
+      fillColorOff: grayStrong,
+      hoverFillColorOff: gray,
       fillCircleColor: white,
       fillCircleColorOff: white,
     },
@@ -1757,7 +1596,7 @@ export const getBaseTheme = () => {
         margin: "0",
         lineHeight: "56px",
         fontWeight: "700",
-        borderBottom: `1px solid ${globalColors.lightGrayishBlue}`,
+        borderBottom: `1px solid ${grayStrong}`,
       },
 
       bodyContent: {
@@ -1766,17 +1605,17 @@ export const getBaseTheme = () => {
     },
 
     calendar: {
-      color: "#333333",
-      disabledColor: "#DFE2E3",
-      pastColor: "#A3A9AE",
-      onHoverBackground: "#f3f4f4",
-      titleColor: "#555F65",
-      outlineColor: "#eceef1",
-      arrowColor: "#555f65",
-      disabledArrow: "#A3A9AE",
-      weekdayColor: "#A3A9AE",
-      accent: "#4781d1",
-      boxShadow: "0px 12px 40px rgba(4, 15, 27, 0.12)",
+      color: black,
+      disabledColor: lightGraySelected,
+      pastColor: gray,
+      onHoverBackground: lightGrayHover,
+      titleColor: grayText,
+      outlineColor: grayLightMid,
+      arrowColor: grayText,
+      disabledArrow: gray,
+      weekdayColor: gray,
+      accent: lightBlueMain,
+      boxShadow: `0px 12px 40px ${popupShadow}`,
     },
 
     datePicker: {
@@ -1785,14 +1624,14 @@ export const getBaseTheme = () => {
       contentPadding: "0 16px 16px",
       bodyPadding: "16px 0",
       backgroundColor: white,
-      inputBorder: blueMain,
+      inputBorder: lightSecondMain,
       iconPadding: "8px 8px 7px 0px",
 
       contentMaxWidth: "500px",
       contentLineHeight: "56px",
       contentFontWeight: "700",
 
-      borderBottom: `1px solid ${globalColors.lightGrayishBlue}`,
+      borderBottom: `1px solid ${grayStrong}`,
     },
 
     aside: {
@@ -1810,122 +1649,53 @@ export const getBaseTheme = () => {
 
     dragAndDrop: {
       height: "100%",
-      border: `1px solid ${globalColors.darkSilver}`,
       transparentBorder: "1px solid transparent",
-      acceptBackground: lightMediumGoldenrod,
-      background: lightCumulus,
+      acceptBackground: dndHoverColor,
+      background: dndColor,
     },
 
-    // phoneInput: {
-    //   width: "304px",
-    //   height: "44px",
-    //   itemTextColor: black,
-    //   itemBackgroundColor: white,
-    //   itemHoverColor: grayLightMid,
-    //   scrollBackground: "rgba(0, 0, 0, 0.1)",
-    //   placeholderColor: gray,
-    // },
-
-    // squareButton: {
-    //   height: "32px",
-    //   width: "32px",
-    //   color: gray,
-    //   backgroundColor: white,
-    //   border: `1px solid ${grayMid}`,
-    //   borderRadius: "3px",
-    //   outline: "none",
-    //   hover: {
-    //     backgroundColor: white,
-    //     border: `1px solid ${gray}`,
-    //   },
-    //   click: {
-    //     backgroundColor: grayLightMid,
-    //     border: `1px solid ${gray}`,
-    //   },
-    //   disable: {
-    //     backgroundColor: grayLight,
-    //     border: `1px solid ${grayLightMid}`,
-    //   },
-    //   crossShape: {
-    //     color: graySilver,
-    //     disable: {
-    //       color: gray,
-    //     },
-    //   },
-    // },
-
-    // roundButton: {
-    //   height: "40px",
-    //   width: "40px",
-    //   backgroundColor: grayLight,
-    //   borderRadius: {
-    //     plus: "112px",
-    //     minus: "81px",
-    //   },
-    //   borderStyle: "none",
-    //   outline: "none",
-    //   hover: {
-    //     backgroundColor: grayLightMid,
-    //   },
-    //   click: {
-    //     backgroundColor: grayMid,
-    //   },
-    //   disable: {
-    //     backgroundColor: grayLight,
-    //   },
-    //   plus: {
-    //     color: grayMid,
-    //     disable: {
-    //       color: black,
-    //     },
-    //   },
-    // },
-
     catalog: {
-      background: "#f8f9f9",
+      background: grayLight,
 
       header: {
-        borderBottom: "1px solid #eceef1",
-        iconFill: "#657077",
+        borderBottom: `1px solid ${grayLightMid}`,
+        iconFill: lightGrayDark,
       },
       control: {
-        background: "#9a9ea3",
-        fill: "#ffffff",
+        fill: white,
       },
 
-      headerBurgerColor: "#657077",
+      headerBurgerColor: lightGrayDark,
 
-      verticalLine: "1px solid #eceef1",
+      verticalLine: `1px solid ${grayLightMid}`,
 
       profile: {
-        borderTop: "1px solid #eceef1",
-        background: "#f3f4f4",
+        borderTop: `1px solid ${grayLightMid}`,
+        background: lightGrayHover,
       },
 
       paymentAlert: {
-        color: "#ed7309",
-        warningColor: "#F21C0E",
-      },
-
-      teamTrainingAlert: {
-        titleColor: "#388BDE",
-        borderColor: "#388BDE",
-        linkColor: "#5299E0",
+        color: lightStatusWarning,
+        warningColor: lightErrorStatus,
       },
     },
 
     alertComponent: {
-      descriptionColor: "#555F65",
-      iconColor: "#657077",
+      descriptionColor: grayText,
+      iconColor: lightGrayDark,
     },
 
     catalogItem: {
+      header: {
+        color: gray,
+        background: grayStrong,
+      },
       container: {
         width: "100%",
         height: "36px",
         padding: "0 12px",
         marginBottom: "16px",
-        background: "#fff",
+        background: white,
         tablet: {
           height: "44px",
           padding: "0 12px",
@@ -1934,7 +1704,7 @@ export const getBaseTheme = () => {
       },
       sibling: {
         active: {
-          background: lightGrayishStrongBlue,
+          background: lightGraySelected,
         },
         hover: {
           background: grayLightMid,
@@ -1945,8 +1715,8 @@ export const getBaseTheme = () => {
           width: "16px",
           height: "16px",
 
-          fill: "#657077",
-          isActiveFill: "#4781D1",
+          fill: lightGrayDark,
+          isActiveFill: lightBlueMain,
           tablet: {
             width: "20px",
             height: "20px",
@@ -1957,8 +1727,8 @@ export const getBaseTheme = () => {
         width: "100%",
         marginLeft: "8px",
         lineHeight: "20px",
-        color: cyanBlueDarkShade,
-        isActiveColor: "#4781D1",
+        color: grayText,
+        isActiveColor: lightBlueMain,
         fontSize: "13px",
         fontWeight: 600,
         tablet: {
@@ -1991,242 +1761,231 @@ export const getBaseTheme = () => {
         },
       },
       badgeWithoutText: {
-        backgroundColor: orangeMain,
+        backgroundColor: lightStatusWarning,
 
         size: "8px",
         position: "-4px",
       },
-      trashIconFill: "#A3A9AE",
+      trashIconFill: gray,
     },
 
     navigation: {
       expanderColor: black,
       background: white,
-      rootFolderTitleColor: "#A3A9AE",
-      boxShadow: "0px 8px 16px 0px #040F1B14",
+      rootFolderTitleColor: gray,
+      boxShadow: `0px 8px 16px 0px ${boxShadowColor}`,
       lifetimeIconFill: "#f2675a",
       lifetimeIconStroke: "#f2675a",
 
       icon: {
-        fill: "#316DAA",
-        stroke: "#DFE2E3",
+        fill: link,
+        stroke: lightGraySelected,
       },
     },
 
     nav: {
-      backgroundColor: "#0F4071",
+      backgroundColor: lightBlueMain,
     },
 
     navItem: {
-      baseColor: "#7A95B0",
+      baseColor: lightSecondMain,
       activeColor: white,
-      separatorColor: "#3E668D",
+      separatorColor: lightSecondMainHover,
 
       wrapper: {
-        hoverBackground: "#0d3760",
+        hoverBackground: lightBlueMainHover,
       },
     },
 
     header: {
-      backgroundColor: "#F8F9F9",
-      recoveryColor: "#657077",
-      linkColor: "#657077",
+      backgroundColor: grayLight,
+      recoveryColor: lightGrayDark,
+      linkColor: lightGrayDark,
       productColor: white,
       height: "48px",
     },
 
     menuContainer: {
-      background: "#F3F4F4",
+      background: lightGrayHover,
       color: black,
     },
 
     article: {
       background: grayLight,
       pinBorderColor: grayLightMid,
-      catalogItemHeader: "#A3A9AE",
-      catalogItemText: "#555F65",
-      catalogItemActiveBackground: "#DFE2E3",
-      catalogShowText: "#657077",
+      catalogItemHeader: gray,
+      catalogItemText: grayText,
+      catalogItemActiveBackground: lightGraySelected,
+      catalogShowText: lightGrayDark,
     },
 
     section: {
-      toggler: {
-        background: white,
-        fill: gray,
-        boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.13)",
-      },
-
       header: {
         backgroundColor: white,
-        background: `linear-gradient(180deg,#ffffff 2.81%,rgba(255, 255, 255, 0.91) 63.03%,rgba(255, 255, 255, 0) 100%)`,
-        trashErasureLabelBackground: "#f8f9f9",
-        trashErasureLabelText: "#555f65",
+        background: `linear-gradient(180deg, ${white} 2.81%,${grayDarkText} 63.03%,rgba(255, 255, 255, 0) 100%)`,
+        trashErasureLabelBackground: grayLight,
+        trashErasureLabelText: grayText,
       },
     },
 
     infoPanel: {
       sectionHeaderToggleIcon: gray,
-      sectionHeaderToggleIconActive: "#3B72A7",
+      sectionHeaderToggleIconActive: lightIcons,
       sectionHeaderToggleBg: "transparent",
       sectionHeaderToggleBgActive: grayLight,
 
       backgroundColor: white,
-      blurColor: "rgba(6, 22, 38, 0.2)",
+      blurColor: blurLight,
       borderColor: grayLightMid,
       thumbnailBorderColor: grayLightMid,
       textColor: black,
-      errorColor: "#F21C0E",
+      errorColor: lightErrorStatus,
 
       closeButtonWrapperPadding: "0px",
       closeButtonIcon: white,
       closeButtonSize: "17px",
-      closeButtonBg: "transparent",
+
+      nameColor: grayDark,
+      avatarColor: grayText,
 
       links: {
-        iconColor: "#3B72A7",
-        iconErrorColor: "#F24724",
-        primaryColor: "#555F65",
+        color: lightBlueMain,
+        iconColor: lightIcons,
+        iconErrorColor: lightErrorStatus,
+        primaryColor: grayText,
       },
 
       members: {
-        iconColor: "#A3A9AE",
-        iconHoverColor: "#657077",
-        isExpectName: "#A3A9AE",
-        subtitleColor: "#a3a9ae",
-        meLabelColor: "#a3a9ae",
-        roleSelectorColor: "#a3a9ae",
-        disabledRoleSelectorColor: "#a3a9ae",
-        roleSelectorArrowColor: "#a3a9ae",
-        createLink: "#a3a9ae",
-        linkAccessComboboxExpired: "#a3a9ae",
+        iconColor: gray,
+        iconHoverColor: lightGrayDark,
+        isExpectName: gray,
+        subtitleColor: gray,
+        meLabelColor: gray,
+        roleSelectorColor: gray,
+        disabledRoleSelectorColor: gray,
+        roleSelectorArrowColor: gray,
+        createLink: black,
+        linkAccessComboboxExpired: gray,
+        crossFill: lightGrayDark,
       },
 
       history: {
-        subtitleColor: "#a3a9ae",
-        fileBlockBg: "#f8f9f9",
-        dateColor: "#A3A9AE",
-        fileExstColor: "#A3A9AE",
-        locationIconColor: "#A3A9AE",
-        folderLabelColor: "#A3A9AE",
-        renamedItemColor: "#A3A9AE",
-        oldRoleColor: "#657077",
+        subtitleColor: gray,
+        fileBlockBg: grayLight,
+        dateColor: gray,
+        fileExstColor: gray,
+        locationIconColor: gray,
+        folderLabelColor: gray,
+        renamedItemColor: gray,
+        oldRoleColor: lightGrayDark,
+        messageColor: black,
       },
 
       details: {
         customLogoBorderColor: grayLightMid,
-        commentEditorIconColor: "#333",
-        tagBackground: "#ECEEF1",
+        commentEditorIconColor: black,
+        tagBackground: grayLightMid,
       },
 
       gallery: {
-        borderColor: "#d0d5da",
-        descriptionColor: "#657077",
+        borderColor: grayStrong,
+        descriptionColor: lightGrayDark,
       },
 
       search: {
-        boxShadow: "0px 5px 20px 0px rgba(4, 15, 27, 0.07)",
+        boxShadow: `0px 5px 20px 0px ${menuShadow}`,
+      },
+
+      groups: {
+        textColor: gray,
+        tagColor: grayStrong,
       },
     },
 
     filesArticleBody: {
-      background: lightGrayishStrongBlue,
-      panelBackground: lightGrayishStrongBlue,
+      background: lightGraySelected,
+      panelBackground: lightGraySelected,
 
-      fill: grayMain,
+      fill: lightGrayDark,
       expanderColor: "dimgray",
       downloadAppList: {
-        textColor: "#A3A9AE",
-        color: "#CDCFD1",
-        winHoverColor: "#3785D3",
-        macHoverColor: "#000",
-        linuxHoverColor: "#FFB800",
-        androidHoverColor: "#9BD71C",
-        iosHoverColor: "#000",
-      },
-      thirdPartyList: {
-        color: "#818b91",
-        linkColor: cyanBlueDarkShade,
+        textColor: gray,
+        color: gray,
+        winHoverColor: windowsColor,
+        macHoverColor: darkBlack,
+        linuxHoverColor: linuxColor,
+        androidHoverColor: androidColor,
+        iosHoverColor: darkBlack,
       },
       devTools: {
-        border: "1px solid #DFE2E3",
-        color: "#A3A9AE",
+        border: `1px solid ${lightGraySelected}`,
+        color: gray,
       },
     },
 
     peopleArticleBody: {
-      iconColor: grayMain,
+      iconColor: lightGrayDark,
       expanderColor: "dimgray",
     },
 
     peopleTableRow: {
-      fill: "#3b72a7",
-
       nameColor: black,
       pendingNameColor: gray,
 
       sideInfoColor: gray,
-      pendingSideInfoColor: grayMid,
+      pendingSideInfoColor: grayStrong,
     },
 
     filterInput: {
       button: {
-        border: "1px solid #d0d5da",
-        hoverBorder: "1px solid #a3a9ae",
+        border: `1px solid ${grayStrong}`,
+        hoverBorder: `1px solid ${gray}`,
 
-        openBackground: "#a3a9ae",
+        openBackground: gray,
 
-        openFill: "#ffffff",
+        openFill: white,
       },
 
       filter: {
-        background: "#ffffff",
-        border: "1px solid #eceef1",
-        color: "#a3a9ae",
+        background: white,
+        border: `1px solid ${grayLightMid}`,
+        color: gray,
 
-        separatorColor: "#eceef1",
-        indicatorColor: "#ED7309",
+        separatorColor: grayLightMid,
+        indicatorColor: lightStatusWarning,
 
         selectedItem: {
-          background: "#265a8f",
-          border: "#265a8f",
-          color: "#ffffff",
+          background: blueLightMid,
+          border: blueLightMid,
+          color: white,
         },
       },
 
       sort: {
-        background: "#ffffff",
-        hoverBackground: "#f8f9f9",
-        selectedViewIcon: "#dfe2e3",
-        viewIcon: "#a3a9ae",
-        sortFill: "#657077",
+        background: white,
+        hoverBackground: grayLight,
+        selectedViewIcon: lightGraySelected,
+        viewIcon: gray,
+        sortFill: lightGrayDark,
 
         tileSortFill: black,
         tileSortColor: black,
       },
 
       selectedItems: {
-        background: "#eceef1",
-        hoverBackground: "#F3F4F4",
+        background: grayLightMid,
+        hoverBackground: lightGrayHover,
       },
-    },
-
-    profileInfo: {
-      color: "#83888d",
-      iconButtonColor: black,
-      linkColor: gray,
-
-      tooltipLinkColor: black,
-      iconColor: "#C96C27",
     },
 
     updateUserForm: {
       tooltipTextColor: black,
-      borderTop: "1px solid #eceef1",
+      borderTop: `1px solid ${grayLightMid}`,
     },
 
     tableContainer: {
-      borderRight: `2px solid ${grayMid}`,
-      hoverBorderColor: grayMain,
+      borderRight: `2px solid ${grayStrong}`,
+      hoverBorderColor: lightGrayDark,
       tableCellBorder: `1px solid ${grayLightMid}`,
 
       indexingSeparator: "#4781D1",
@@ -2234,28 +1993,28 @@ export const getBaseTheme = () => {
       groupMenu: {
         background: white,
         borderBottom: "1px solid transparent",
-        borderRight: `1px solid ${grayMid}`,
-        boxShadow: "0px 5px 20px rgba(4, 15, 27, 7%)",
+        borderRight: `1px solid ${grayStrong}`,
+        boxShadow: `0px 5px 20px ${menuShadow}`,
       },
 
       header: {
         background: white,
         borderBottom: `1px solid ${grayLightMid}`,
         textColor: gray,
-        activeTextColor: grayMain,
-        hoverTextColor: grayMain,
+        activeTextColor: lightGrayDark,
+        hoverTextColor: lightGrayDark,
 
         iconColor: gray,
-        activeIconColor: grayMain,
-        hoverIconColor: grayMain,
+        activeIconColor: lightGrayDark,
+        hoverIconColor: lightGrayDark,
 
         borderImageSource: `linear-gradient(to right,${white} 21px,${grayLightMid} 21px,${grayLightMid} calc(100% - 20px),${white} calc(100% - 20px))`,
         borderHoverImageSource: `linear-gradient(to right,${white} 0px,${grayLightMid} 0px,${grayLightMid} 100% ,${white} 100%)`,
 
         lengthenBorderImageSource: `linear-gradient(to right, ${grayLightMid}, ${grayLightMid})`,
-        hotkeyBorderBottom: `1px solid ${globalColors.blueMain}`,
+        hotkeyBorderBottom: `1px solid ${lightSecondMain}`,
 
-        settingsIconDisableColor: "#D0D5DA",
+        settingsIconDisableColor: grayStrong,
       },
 
       tableCell: {
@@ -2265,23 +2024,23 @@ export const getBaseTheme = () => {
 
     filesSection: {
       rowView: {
-        checkedBackground: "#f3f4f4",
+        checkedBackground: lightGrayHover,
 
-        draggingBackground: lightCumulus,
-        draggingHoverBackground: lightMediumGoldenrod,
+        draggingBackground: dndColor,
+        draggingHoverBackground: dndHoverColor,
 
         shareButton: {
-          color: grayMain,
-          fill: grayMain,
+          color: lightGrayDark,
+          fill: lightGrayDark,
         },
 
         sideColor: gray,
         linkColor: black,
         textColor: gray,
 
-        editingIconColor: "#3b72a7",
-        shareHoverColor: "#3b72a7",
-        pinColor: "#3b72a7",
+        editingIconColor: lightIcons,
+        shareHoverColor: lightIcons,
+        pinColor: lightIcons,
       },
 
       tableView: {
@@ -2289,17 +2048,18 @@ export const getBaseTheme = () => {
           linkColor: black,
           textColor: gray,
         },
+        fileExstColor: gray,
 
         row: {
-          checkboxChecked: `linear-gradient(to right, #f3f4f4 24px, ${grayLightMid} 24px)`,
-          checkboxDragging: `linear-gradient(to right, ${lightCumulus} 24px, ${grayLightMid} 24px)`,
-          checkboxDraggingHover: `linear-gradient(to right,rgb(239, 239, 178) 24px, ${grayLightMid} 24px)`,
+          checkboxChecked: `linear-gradient(to right, ${lightGrayHover} 24px, ${grayLightMid} 24px)`,
+          checkboxDragging: `linear-gradient(to right, ${dndColor} 24px, ${grayLightMid} 24px)`,
+          checkboxDraggingHover: `linear-gradient(to right, ${dndHoverColor} 24px, ${grayLightMid} 24px)`,
 
-          contextMenuWrapperChecked: `linear-gradient(to left, #f3f4f4 24px, ${grayLightMid} 24px)`,
-          contextMenuWrapperDragging: `border-image-source: linear-gradient(to left, ${lightCumulus} 24px, ${grayLightMid} 24px)`,
-          contextMenuWrapperDraggingHover: `linear-gradient(to left,rgb(239, 239, 178) 24px,${grayLightMid} 24px)`,
+          contextMenuWrapperChecked: `linear-gradient(to left, ${lightGrayHover} 24px, ${grayLightMid} 24px)`,
+          contextMenuWrapperDragging: `border-image-source: linear-gradient(to left, ${dndColor} 24px, ${grayLightMid} 24px)`,
+          contextMenuWrapperDraggingHover: `linear-gradient(to left, ${dndHoverColor} 24px,${grayLightMid} 24px)`,
 
-          backgroundActive: `#F3F4F4`,
+          backgroundActive: lightGrayHover,
           indexUpdate: `#F2F6FC`,
           indexActive: `#E4ECF8`,
 
@@ -2311,25 +2071,26 @@ export const getBaseTheme = () => {
 
           borderHover: gray,
           sideColor: gray,
-          shareHoverColor: "#3b72a7",
+          shareHoverColor: lightIcons,
 
-          borderImageRight:
-            "linear-gradient(to right, #ffffff 25px,#eceef1 24px)",
-          borderImageLeft:
-            "linear-gradient(to left, #ffffff 24px,#eceef1 24px)",
+          borderImageRight: `linear-gradient(to right, ${white} 25px, ${grayLightMid} 24px)`,
+          borderImageLeft: `linear-gradient(to left, ${white} 24px, ${grayLightMid} 24px)`,
 
-          borderColor: "#ECEEf1",
-          borderColorTransition: "#f3f4f4",
+          borderColor: grayLightMid,
+          borderColorTransition: lightGrayHover,
+
+          color: black,
+          backgroundGroup: grayLightMid,
         },
       },
 
       tilesView: {
         tile: {
-          draggingColor: lightCumulus,
-          draggingHoverColor: lightMediumGoldenrod,
-          checkedColor: "#f3f4f4",
-          roomsCheckedColor: "#f3f4f4",
-          border: `1px solid ${grayMid}`,
+          draggingColor: dndColor,
+          draggingHoverColor: dndHoverColor,
+          checkedColor: lightGrayHover,
+          roomsCheckedColor: lightGrayHover,
+          border: `1px solid ${grayStrong}`,
           backgroundBadgeColor: white,
           backgroundColor: white,
           borderRadius: "6px",
@@ -2346,7 +2107,7 @@ export const getBaseTheme = () => {
         textColor: gray,
       },
 
-      animationColor: "rgba(82, 153, 224, 0.16)",
+      animationColor: lightSecondMain,
     },
 
     advancedSelector: {
@@ -2357,8 +2118,8 @@ export const getBaseTheme = () => {
       borderLeft: `1px solid ${grayLightMid}`,
 
       searcher: {
-        hoverBorderColor: grayMid,
-        focusBorderColor: blueMain,
+        hoverBorderColor: grayStrong,
+        focusBorderColor: lightSecondMain,
         placeholderColor: gray,
       },
     },
@@ -2367,40 +2128,40 @@ export const getBaseTheme = () => {
       border: `1px solid ${grayLightMid}`,
 
       breadCrumbs: {
-        prevItemColor: "#657077",
-        arrowRightColor: "#657077",
+        prevItemColor: lightGrayDark,
+        arrowRightColor: lightGrayDark,
       },
 
       info: {
-        backgroundColor: "#f8f9f9",
-        color: "#555f65",
+        backgroundColor: grayLight,
+        color: grayText,
       },
 
-      bodyDescriptionText: "#A3A9AE",
+      bodyDescriptionText: gray,
 
       item: {
         hoverBackground: grayLight,
-        selectedBackground: lightHover,
+        selectedBackground: lightGrayHover,
 
-        inputButtonBorder: "#D0D5DA",
-        inputButtonBorderHover: grayMain,
+        inputButtonBorder: grayStrong,
+        inputButtonBorderHover: lightGrayDark,
 
-        disableTextColor: "#A3A9AE",
+        disableTextColor: gray,
       },
 
       emptyScreen: {
-        descriptionColor: cyanBlueDarkShade,
+        descriptionColor: grayText,
 
-        buttonColor: "#657077",
-        hoverButtonColor: "#333333",
-        pressedButtonColor: "#555F65",
+        buttonColor: lightGrayDark,
+        hoverButtonColor: black,
+        pressedButtonColor: grayText,
       },
     },
 
     floatingButton: {
-      backgroundColor: "#3B72A7",
+      backgroundColor: lightIcons,
       color: white,
-      boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.13)",
+      boxShadow: `0px 5px 20px ${popupShadow}`,
       fill: white,
 
       alert: {
@@ -2410,171 +2171,169 @@ export const getBaseTheme = () => {
     },
 
     mediaViewer: {
-      color: "#d1d1d1",
-      background: "rgba(17, 17, 17, 0.867)",
-      backgroundColor: "rgba(11, 11, 11, 0.7)",
+      color: grayStrong,
+      backgroundColor: highlandGray,
       fill: white,
       titleColor: white,
       iconColor: white,
 
       controlBtn: {
-        backgroundColor: "rgba(200, 200, 200, 0.2)",
+        backgroundColor: silver,
       },
 
       imageViewer: {
-        backgroundColor: "rgba(200, 200, 200, 0.2)",
-        inactiveBackgroundColor: "rgba(11,11,11,0.7)",
+        backgroundColor: silver,
+        inactiveBackgroundColor: highlandGray,
         fill: white,
       },
 
       progressBar: {
-        background: "#d1d1d1",
-        backgroundColor: "rgba(200, 200, 200, 0.2)",
+        background: grayStrong,
+        backgroundColor: silver,
       },
 
       scrollButton: {
-        backgroundColor: "rgba(11, 11, 11, 0.7)",
-        background: "rgba(200, 200, 200, 0.2)",
+        backgroundColor: highlandGray,
+        background: silver,
         border: `solid ${white}`,
       },
 
       videoViewer: {
         fill: white,
         stroke: white,
-        color: "#d1d1d1",
+        color: grayStrong,
         colorError: white,
         backgroundColorError: darkBlack,
-        backgroundColor: "rgba(11, 11, 11, 0.7)",
-        background: "rgba(200, 200, 200, 0.2)",
+        backgroundColor: highlandGray,
+        background: silver,
       },
-    },
-
-    connectCloud: {
-      connectBtnContent: black,
-      connectBtnTextBg: white,
-      connectBtnIconBg: white,
-      connectBtnTextBorder: grayMid,
-      connectBtnIconBorder: grayMid,
     },
 
     createEditRoomDialog: {
       commonParam: {
-        descriptionColor: "#a3a9ae",
-        textColor: "#657077",
+        descriptionColor: gray,
+        textColor: lightGrayDark,
       },
 
       roomType: {
         listItem: {
           background: "none",
-          hoverBackground: "#F8F9F9",
-          borderColor: "#ECEEF1",
-          descriptionText: "#A3A9AE",
+          hoverBackground: grayLight,
+          borderColor: grayLightMid,
+          descriptionText: gray,
         },
         dropdownButton: {
           background: "none",
-          hoverBackground: "#F8F9F9",
-          borderColor: "#ECEEF1",
-          isOpenBorderColor: "#2DA7DB",
-          descriptionText: "#A3A9AE",
+          hoverBackground: grayLight,
+          borderColor: grayLightMid,
+          descriptionText: gray,
         },
         dropdownItem: {
-          background: "#ffffff",
-          hoverBackground: "#F8F9F9",
-          descriptionText: "#A3A9AE",
+          background: white,
+          hoverBackground: grayLight,
+          descriptionText: gray,
         },
         displayItem: {
-          background: "#f8f8f8",
-          borderColor: "#f8f8f8",
-          descriptionText: "#555F65",
+          background: grayLight,
+          borderColor: grayLight,
+          descriptionText: grayText,
         },
       },
 
       roomTypeDropdown: {
         desktop: {
-          background: "#ffffff",
-          borderColor: "#d0d5da",
+          background: white,
+          borderColor: grayStrong,
         },
         mobile: {
-          background: "#ffffff",
+          background: white,
         },
       },
 
       permanentSettings: {
-        background: "#f8f9f9",
-        isPrivateIcon: "#35ad17",
-        descriptionColor: "#555f65",
+        background: grayLight,
+        isPrivateIcon: lightStatusPositive,
+        descriptionColor: grayText,
       },
 
       dropdown: {
-        background: "#ffffff",
-        borderColor: "#d0d5da",
+        background: white,
+        borderColor: grayStrong,
         item: {
-          hoverBackground: "#f3f4f4",
+          hoverBackground: lightGrayHover,
         },
       },
 
       isPrivate: {
         limitations: {
-          background: "#f8f9f9",
-          iconColor: "#ed7309",
-          titleColor: "#ed7309",
-          descriptionColor: "#555f65",
-          linkColor: "#555f65",
+          background: grayLight,
+          iconColor: lightStatusWarning,
+          titleColor: lightStatusWarning,
+          descriptionColor: grayText,
+          linkColor: grayText,
         },
       },
 
       thirdpartyStorage: {
         combobox: {
-          background: "#ffffff",
-          dropdownBorderColor: "#d0d5da",
-          hoverDropdownBorderColor: "#a3a9ae",
-          isOpenDropdownBorderColor: "#2DA7DB",
-          arrowFill: "#a3a9ae",
+          background: white,
+          dropdownBorderColor: grayStrong,
+          hoverDropdownBorderColor: gray,
+          isOpenDropdownBorderColor: lightSecondMain,
+          arrowFill: gray,
         },
         folderInput: {
-          background: "#ffffff",
-          borderColor: "#d0d5da",
-          hoverBorderColor: "#a3a9ae",
-          focusBorderColor: "#35abd8",
-          rootLabelColor: "#a3a9ae",
-          iconFill: "#657177",
+          background: white,
+          borderColor: grayStrong,
+          hoverBorderColor: gray,
+          rootLabelColor: gray,
+          iconFill: lightGrayDark,
         },
       },
 
       iconCropper: {
-        gridColor: "#333333",
+        gridColor: black,
         deleteButton: {
-          background: "#f8f9f9",
-          hoverBackground: "#f3f4f4",
-          borderColor: "#f8f9f9",
-          hoverBorderColor: "#f3f4f4",
-          color: "#555f65",
-          iconColor: "#657077",
+          background: grayLight,
+          hoverBackground: lightGrayHover,
+          borderColor: grayLight,
+          hoverBorderColor: lightGrayHover,
+          color: grayText,
+          iconColor: lightGrayDark,
         },
       },
 
       previewTile: {
-        background: "#ffffff",
-        borderColor: "#d0d5da",
-        iconBorderColor: "#eceef1",
+        background: white,
+        borderColor: grayStrong,
+        iconBorderColor: grayLightMid,
       },
 
       dropzone: {
-        borderColor: "#eceef1",
-        linkMainColor: "#316daa",
-        linkSecondaryColor: "#333333",
-        exstsColor: "#a3a9ae",
+        borderColor: grayLightMid,
+        linkMainColor: link,
+        linkSecondaryColor: black,
+        exstsColor: gray,
+      },
+      helpButton: {
+        background: gray,
+        fill: white,
       },
     },
 
+    createEditGroupDialog: {
+      textColor: gray,
+      iconFill: gray,
+    },
+
     filesThirdPartyDialog: {
-      border: "1px solid #d1d1d1",
+      border: `1px solid ${grayStrong}`,
     },
 
     connectedClouds: {
-      color: "#657077",
-      borderBottom: `1px solid #eceef1`,
-      borderRight: `1px solid #d0d5da`,
+      color: lightGrayDark,
+      borderBottom: `1px solid ${grayLightMid}`,
+      borderRight: `1px solid ${grayStrong}`,
     },
 
     filesModalDialog: {
@@ -2583,35 +2342,38 @@ export const getBaseTheme = () => {
 
     filesDragTooltip: {
       background: white,
-      boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.13)",
+      boxShadow: `0px 5px 20px ${popupShadow}`,
       color: gray,
     },
 
     filesEmptyContainer: {
-      linkColor: cyanBlueDarkShade,
+      linkColor: grayText,
       privateRoom: {
-        linkColor: "#116d9d",
+        linkColor: link,
       },
+      descriptionColor: lightGrayDark,
     },
 
     emptyContent: {
       header: {
-        color: "#333333",
+        color: black,
       },
 
       description: {
-        color: cyanBlueDarkShade,
+        color: grayText,
       },
       button: {
-        colorLink: "#657077",
-        colorText: "#555F65",
+        colorLink: lightGrayDark,
+        colorText: grayText,
       },
     },
 
     emptyView: {
+      linkColor: lightBlueMain,
+
       items: {
         hoverColor: grayLight,
-        pressColor: lightGrayishStrongBlue,
+        pressColor: lightGraySelected,
       },
     },
 
@@ -2630,6 +2392,7 @@ export const getBaseTheme = () => {
       addUsers: {
         iconColor: gray,
         arrowColor: darkBlack,
+        textColor: gray,
       },
 
       changeOwner: {
@@ -2638,9 +2401,12 @@ export const getBaseTheme = () => {
       },
 
       embedding: {
-        textAreaColor: "#AEAEAE",
+        textAreaColor: gray,
         iconColor: black,
         color: gray,
+        border: `1px solid ${grayDarkMid}`,
+        linkBackground: blueLightMid,
+        linkColor: white,
       },
 
       versionHistory: {
@@ -2650,7 +2416,7 @@ export const getBaseTheme = () => {
       content: {
         backgroundColor: white,
         fill: gray,
-        disabledFill: grayMid,
+        disabledFill: grayStrong,
       },
 
       body: {
@@ -2666,20 +2432,11 @@ export const getBaseTheme = () => {
       linkRow: {
         backgroundColor: grayLight,
         fill: gray,
-        disabledFill: grayMid,
+        disabledFill: grayStrong,
       },
 
       selectFolder: {
         color: gray,
-      },
-
-      selectFile: {
-        color: gray,
-        background: grayLight,
-        borderBottom: `1px solid ${grayLightMid}`,
-        borderRight: `1px solid ${globalColors.lightGrayishBlue}`,
-
-        buttonsBackground: white,
       },
 
       filesList: {
@@ -2691,26 +2448,26 @@ export const getBaseTheme = () => {
       modalRow: {
         backgroundColor: grayLightMid,
         fill: gray,
-        disabledFill: grayMid,
+        disabledFill: grayStrong,
       },
 
       sharing: {
         color: gray,
         fill: gray,
-        loadingFill: grayMid,
+        loadingFill: grayStrong,
 
-        borderBottom: "1px solid #eceef1",
-        borderTop: "1px solid #eceef1",
-        externalLinkBackground: "#f8f9f9",
-        externalLinkSvg: "#333333",
+        borderBottom: `1px solid ${grayLightMid}`,
+        borderTop: `1px solid ${grayLightMid}`,
+        externalLinkBackground: grayLight,
+        externalLinkSvg: black,
 
-        internalLinkBorder: "1px dashed #333333",
+        internalLinkBorder: `1px dashed ${black}`,
 
-        itemBorder: "1px dashed #333333",
+        itemBorder: `1px dashed ${black}`,
 
-        itemOwnerColor: "rgb(163, 169, 174)",
+        itemOwnerColor: gray,
 
-        backgroundButtons: "#FFFFFF",
+        backgroundButtons: white,
 
         dropdownColor: black,
 
@@ -2722,17 +2479,23 @@ export const getBaseTheme = () => {
 
       upload: {
         color: gray,
-        tooltipColor: lightCumulus,
+        tooltipColor: lightToastInfo,
+        iconColor: lightErrorStatus,
 
         shareButton: {
           color: gray,
-          sharedColor: grayMain,
+          sharedColor: lightGrayDark,
         },
 
         loadingButton: {
-          color: blueMain,
+          color: lightSecondMain,
           background: white,
         },
+      },
+      invite: {
+        textColor: gray,
+        addButtonColor: lightBlueMain,
+        border: `1px solid ${grayStrong}`,
       },
     },
 
@@ -2747,9 +2510,8 @@ export const getBaseTheme = () => {
       },
       separator: {
         borderBottom: `1px solid ${grayLightMid} !important`,
-        margin: "6px 16px 6px 16px !important",
+        margin: "6px 16px !important",
         height: "1px !important",
-        width: "calc(100% - 32px) !important",
       },
       text: {
         header: {
@@ -2770,7 +2532,7 @@ export const getBaseTheme = () => {
       background: "none",
       svgFill: black,
       header: {
-        height: "49px",
+        height: "55px",
         borderBottom: `1px solid ${grayLightMid}`,
         marginBottom: "6px",
       },
@@ -2780,15 +2542,14 @@ export const getBaseTheme = () => {
       padding: "0 12px",
       mobile: {
         height: "36px",
-        padding: "0 16px 6px",
+        padding: "6px 16px",
       },
     },
     newContextMenu: {
       background: white,
       borderRadius: "6px",
       mobileBorderRadius: "6px 6px 0 0",
-      boxShadow: "0px 8px 16px 0px #040F1B14",
-      padding: "6px 0px",
+      boxShadow: `0px 8px 16px 0px ${boxShadowColor}`,
       border: "none",
       devices: {
         maxHeight: "calc(100vh - 64px)",
@@ -2801,14 +2562,14 @@ export const getBaseTheme = () => {
       },
     },
     filesSettings: {
-      color: cyanBlueDarkShade,
+      color: grayText,
 
       linkColor: black,
     },
 
     filesBadges: {
       iconColor: gray,
-      hoverIconColor: "#3B72A7",
+      hoverIconColor: lightIcons,
 
       color: white,
       backgroundColor: white,
@@ -2817,16 +2578,21 @@ export const getBaseTheme = () => {
       badgeBackgroundColor: gray,
     },
 
+    accountsBadges: {
+      pendingColor: gray,
+      disabledColor: lightErrorStatus,
+    },
+
     filesEditingWrapper: {
       color: black,
-      border: `1px solid ${grayMid}`,
+      border: `1px solid ${grayStrong}`,
       borderBottom: `1px solid ${grayLightMid}`,
 
       tile: {
-        background: globalColors.lightHover,
+        background: globalColors.lightGrayHover,
         itemBackground: white,
-        itemBorder: grayMid,
-        itemActiveBorder: blueMain,
+        itemBorder: grayStrong,
+        itemActiveBorder: lightSecondMain,
       },
 
       row: {
@@ -2834,29 +2600,30 @@ export const getBaseTheme = () => {
       },
 
       fill: gray,
-      hoverFill: grayMain,
+      hoverFill: lightGrayDark,
+      disabledBackground: white,
     },
 
     filesIcons: {
-      fill: "#3b72a7",
-      hoverFill: "#3b72a7",
+      fill: lightIcons,
+      hoverFill: lightIcons,
     },
 
     filesQuickButtons: {
       color: gray,
-      sharedColor: "#3b72a7",
-      hoverColor: "#3b72a7",
+      sharedColor: lightIcons,
+      hoverColor: lightIcons,
     },
 
     filesSharedButton: {
       color: gray,
-      sharedColor: grayMain,
+      sharedColor: lightGrayDark,
     },
 
     filesPrivateRoom: {
-      borderBottom: "1px solid #d3d3d3",
-      linkColor: "#116d9d",
-      textColor: "#83888D",
+      borderBottom: `1px solid ${grayLightMid}`,
+      linkColor: link,
+      textColor: grayText,
     },
 
     filesVersionHistory: {
@@ -2870,24 +2637,25 @@ export const getBaseTheme = () => {
         stroke: gray,
         fill: gray,
         defaultFill: white,
-        badgeFill: orangeMain,
+        badgeFill: lightStatusWarning,
       },
 
       versionList: {
-        fill: grayMid,
-        stroke: grayMid,
-        color: grayMid,
+        fill: grayStrong,
+        stroke: grayStrong,
+        color: grayStrong,
       },
+      commentColor: gray,
     },
 
     login: {
       linkColor: link,
       textColor: gray,
-      navBackground: "#F8F9F9",
+      navBackground: grayLight,
       headerColor: black,
-      helpButton: "#A3A9AE",
-      orLineColor: "#ECEEF1",
-      orTextColor: "#A3A9AE",
+      helpButton: gray,
+      orLineColor: grayLightMid,
+      orTextColor: gray,
       titleColor: black,
 
       register: {
@@ -2905,14 +2673,8 @@ export const getBaseTheme = () => {
       },
 
       backTitle: {
-        color: "#A3A9AE",
+        color: gray,
       },
-    },
-
-    facebookButton: {
-      background: white,
-      border: "1px solid #1877f2",
-      color: "#1877f2",
     },
 
     peopleSelector: {
@@ -2921,7 +2683,7 @@ export const getBaseTheme = () => {
 
     peopleWithContent: {
       color: gray,
-      pendingColor: grayMid,
+      pendingColor: grayStrong,
     },
 
     peopleDialogs: {
@@ -2930,7 +2692,7 @@ export const getBaseTheme = () => {
       },
 
       deleteUser: {
-        textColor: red,
+        textColor: lightErrorStatus,
       },
 
       deleteSelf: {
@@ -2943,18 +2705,20 @@ export const getBaseTheme = () => {
     },
 
     downloadDialog: {
-      background: "#f8f9f9",
+      background: grayLight,
+      textColor: gray,
+      iconFill: black,
     },
 
     client: {
       about: {
-        linkColor: blueMain,
-        border: "1px solid lightgray",
+        linkColor: lightSecondMain,
+        border: `1px solid ${gray}`,
         logoColor: black,
       },
 
       comingSoon: {
-        linkColor: cyanBlueDarkShade,
+        linkColor: grayText,
         linkIconColor: black,
         backgroundColor: white,
         foregroundColor: white,
@@ -2962,39 +2726,31 @@ export const getBaseTheme = () => {
 
       confirm: {
         activateUser: {
-          textColor: "#116d9d",
-          textColorError: red,
+          textColor: link,
+          textColorError: lightErrorStatus,
         },
         change: {
-          titleColor: "#116d9d",
+          titleColor: link,
         },
       },
 
       home: {
         logoColor: black,
-        textColorError: red,
+        textColorError: lightErrorStatus,
       },
 
       payments: {
         linkColor: link,
-        delayColor: "#F21C0E",
-      },
-
-      paymentsEnterprise: {
-        background: grayLight,
-
-        buttonBackground: "#edf2f7",
-
-        linkColor: link,
-        headerColor: orangePressed,
+        delayColor: lightErrorStatus,
       },
 
       settings: {
         iconFill: black,
-        headerTitleColor: "#333333",
-        trashIcon: "#A3A9AE",
+        headerTitleColor: black,
+        descriptionColor: grayText,
+        trashIcon: gray,
         article: {
-          titleColor: grayMain,
+          titleColor: lightGrayDark,
           fillIcon: "dimgray",
           expanderColor: "dimgray",
         },
@@ -3003,39 +2759,48 @@ export const getBaseTheme = () => {
 
         security: {
           arrowFill: black,
-          descriptionColor: cyanBlueDarkShade,
+          descriptionColor: grayText,
+
+          tfa: {
+            textColor: gray,
+          },
 
           admins: {
             backgroundColor: black,
-            backgroundColorWrapper: blueMain,
-            roleColor: grayMid,
+            backgroundColorWrapper: lightSecondMain,
+            roleColor: grayStrong,
 
             color: link,
             departmentColor: gray,
 
-            tooltipColor: lightCumulus,
+            tooltipColor: lightToastInfo,
 
             nameColor: black,
             pendingNameColor: gray,
 
             textColor: white,
-            iconColor: blueMain,
+            iconColor: lightSecondMain,
           },
 
           owner: {
             backgroundColor: grayLight,
             linkColor: link,
             departmentColor: gray,
-            tooltipColor: lightCumulus,
+            tooltipColor: lightToastInfo,
           },
           auditTrail: {
-            sideColor: "#A3A9AE",
-            nameColor: "#333333",
+            sideColor: gray,
+            nameColor: black,
             downloadReportDescriptionColor: gray,
           },
           loginHistory: {
-            sideColor: "#A3A9AE",
-            nameColor: "#333333",
+            sideColor: gray,
+            nameColor: black,
+            textColor: gray,
+            subheaderColor: lightGrayDark,
+          },
+          ip: {
+            errorColor: lightErrorStatus,
           },
         },
 
@@ -3044,232 +2809,278 @@ export const getBaseTheme = () => {
           linkColorHelp: link,
           tooltipLinkColor: black,
           arrowColor: black,
-          descriptionColor: grayMain,
-          brandingDescriptionColor: "#657077",
+          descriptionColor: lightGrayDark,
+          brandingDescriptionColor: lightGrayDark,
+
+          appearance: {
+            themeAddBackground: grayLightMid,
+            accentBoxBackground: grayLightMid,
+            buttonBoxBackground: grayLightMid,
+            iconFill: gray,
+            addThemeBackground: grayStrong,
+          },
 
           whiteLabel: {
-            borderImg: "1px solid #d1d1d1",
+            borderImg: `1px solid ${grayStrong}`,
 
             backgroundColorWhite: white,
-            backgroundColorLight: "#F8F9F9",
-            backgroundColorDark: "#282828",
-            greenBackgroundColor: "#40865C",
-            blueBackgroundColor: "#446995",
-            orangeBackgroundColor: "#AA5252",
+            backgroundColorLight: grayLight,
+            backgroundColorDark: darkGrayLight,
+            greenBackgroundColor: editorGreenColor,
+            blueBackgroundColor: editorBlueColor,
+            orangeBackgroundColor: editorOrangeColor,
+            redBackgroundColor: editorRedColor,
 
             dataFontColor: white,
             dataFontColorBlack: black,
           },
+
+          companyInfo: {
+            border: `1px dashed ${black}`,
+            color: gray,
+          },
+
+          dns: {
+            errorColor: lightErrorStatus,
+          },
         },
 
         integration: {
-          separatorBorder: `1px solid ${grayMid}`,
+          separatorBorder: `1px solid ${grayStrong}`,
           linkColor: link,
-
+          textColor: gray,
           sso: {
+            textColor: gray,
+            errorColor: lightErrorStatus,
             toggleContentBackground: grayLight,
             iconButton: black,
             iconButtonDisabled: gray,
-            border: "1px solid #eceef1",
+            border: `1px solid ${grayStrong}`,
           },
-
+          ldap: {
+            border: `1px solid ${grayLightMid}`,
+            errorBorder: `1px solid ${lightErrorStatus}`,
+            certificateBackground: grayLight,
+            textColor: gray,
+            errorColor: lightErrorStatus,
+          },
           smtp: {
-            requirementColor: "#F21C0E",
+            requirementColor: lightErrorStatus,
           },
         },
 
         backup: {
-          rectangleBackgroundColor: "#f8f9f9",
-          separatorBorder: "1px solid #eceef1",
-          warningColor: "#f21c0e",
-          textColor: "#A3A9AE",
-          backupCheckedListItemBackground: "#F3F4F4",
+          rectangleBackgroundColor: grayLight,
+          separatorBorder: `1px solid ${grayLightMid}`,
+          warningColor: lightErrorStatus,
+          textColor: gray,
+          backupCheckedListItemBackground: lightGrayHover,
         },
 
         payment: {
-          priceColor: "#555F65",
-          storageSizeTitle: "#A3A9AE",
+          priceColor: grayText,
+          storageSizeTitle: gray,
 
-          backgroundColor: "#f8f9f9",
-          linkColor: "#316DAA",
-          tariffText: "#555F65",
-          border: "1px solid #f8f9f9",
-          backgroundBenefitsColor: "#f8f9f9",
-          rectangleColor: "#f3f4f4",
+          backgroundColor: grayLight,
+          linkColor: link,
+          tariffText: grayText,
+          border: `1px solid ${grayLight}`,
+          backgroundBenefitsColor: grayLight,
+          rectangleColor: lightGrayHover,
 
           priceContainer: {
-            backgroundText: "#f3f4f4",
+            backgroundText: lightGrayHover,
             background: "transparent",
-            border: "1px solid #d0d5da",
-            featureTextColor: "#A3A9AE",
+            border: `1px solid ${grayStrong}`,
+            featureTextColor: gray,
 
-            disableColor: "#A3A9AE",
-            trackNumberColor: "#A3A9AE",
-            disablePriceColor: "#A3A9AE",
+            disableColor: gray,
+            trackNumberColor: gray,
+            disablePriceColor: gray,
           },
 
           benefitsContainer: {
-            iconsColor: "#657077",
+            iconsColor: lightGrayDark,
           },
 
           contactContainer: {
-            textColor: "#A3A9AE",
-            linkColor: "#657077",
+            textColor: gray,
+            linkColor: lightGrayDark,
           },
 
-          warningColor: "#F21C0E",
-          color: "#F97A0B",
+          warningColor: lightErrorStatus,
+          color: lightStatusWarning,
         },
 
         migration: {
-          descriptionColor: grayMain,
-          subtitleColor: "#333333",
-          workspaceBackground: "#FFFFFF",
-          workspaceBorder: "1px solid #d0d5da",
-          stepDescriptionColor: "#333333",
-          fileInputIconColor: "#A3A9AE",
-          infoBlockBackground: "#f8f9f9",
-          infoBlockTextColor: "#555F65",
-          errorTextColor: "#F21C0E",
-          existingTextColor: "#2db482",
-          tableHeaderText: "#A3A9AE",
-          tableRowHoverColor: "#F3F4F4",
-          tableRowTextColor: "#A3A9AE",
-          comboBoxLabelColor: "#333333",
-          importSectionBackground: "#F8F9F9",
-          importSectionTextColor: "#A3A9AE",
-          importItemBackground: "#eceef1",
-          importItemDisableBackground: "#F3F4F4",
-          importItemTextColor: "#555f65",
-          importItemDisableTextColor: "#A3A9AE",
-          importItemDescription: "#333333",
-          importIconColor: "#657077",
-          groupMenuBackground: "#fff",
-          groupMenuBorder: "1px solid #fff",
-          groupMenuBoxShadow: "rgba(4, 15, 27, 0.07) 0px 5px 5px 0px",
+          descriptionColor: lightGrayDark,
+          subtitleColor: black,
+          workspaceBackground: white,
+          workspaceBorder: `1px solid ${grayStrong}`,
+          workspaceHover: lightBlueMain,
+          stepDescriptionColor: black,
+          fileInputIconColor: gray,
+          infoBlockBackground: grayLight,
+          infoBlockTextColor: grayText,
+          errorTextColor: lightErrorStatus,
+          existingTextColor: mainGreen,
+          tableHeaderText: gray,
+          tableRowHoverColor: lightGrayHover,
+          tableRowTextColor: gray,
+          comboBoxLabelColor: black,
+          importSectionBackground: grayLight,
+          importSectionTextColor: gray,
+          importItemBackground: grayLightMid,
+          importItemDisableBackground: lightGrayHover,
+          importItemTextColor: grayText,
+          importItemDisableTextColor: gray,
+          importItemDescription: black,
+          importIconColor: lightGrayDark,
+          groupMenuBackground: white,
+          groupMenuBorder: `1px solid ${white}`,
+          groupMenuBoxShadow: `${menuShadow} 0px 5px 5px 0px`,
+          linkColor: lightBlueMain,
+          background: grayLight,
         },
         storageManagement: {
-          grayBackgroundText: "#555F65",
-          descriptionColor: "#657077",
+          grayBackgroundText: grayText,
+          descriptionColor: lightGrayDark,
+          dividerColor: grayLightMid,
+        },
+        deleteData: {
+          borderTop: `1px solid ${grayLightMid}`,
+        },
+        webhooks: {
+          border: `1px solid ${grayLightMid}`,
+          historyRowBackground: lightGrayHover,
+          tableCellBackground: lightGrayHover,
+          barBackground: grayLight,
+          color: gray,
+          linkColor: link,
+          spanBackground: lightBlueMain,
+          filterBorder: `1px solid ${grayStrong}`,
+          toastBackground: lightToastWarning,
+          background: grayLight,
         },
       },
 
       wizard: {
-        linkColor: "#116d9d",
-        generatePasswordColor: "#657077",
+        linkColor: link,
+        generatePasswordColor: lightGrayDark,
+        textColor: gray,
       },
     },
 
-    campaignsBanner: {
-      border: "1px solid #d1d1d1",
-      color: darkBlack,
-
-      btnColor: white,
-      btnBackgroundActive: blueMain,
-    },
-
     tileLoader: {
-      border: `1px solid ${grayMid}`,
+      border: `1px solid ${grayStrong}`,
 
       background: white,
     },
 
     errorContainer: {
       background: white,
-      bodyText: "#A3A9AE",
+      bodyText: gray,
+      linkColor: link,
     },
 
     editor: {
-      color: "#555f65",
+      color: grayText,
       background: white,
     },
 
     tabs: {
       gradientColor: white,
-      lineColor: "#eceef1",
+      lineColor: grayLightMid,
 
-      textColorPrimary: "#657077",
+      textColorPrimary: lightGrayDark,
       activeTextColorPrimary: "",
-      hoverTextColorPrimary: "#A3A9AE",
-      pressedTextColorPrimary: "#555F65",
+      hoverTextColorPrimary: gray,
+      pressedTextColorPrimary: grayText,
       backgroundColorPrimary: white,
 
-      textColorSecondary: "#333333",
+      textColorSecondary: black,
       activeTextColorSecondary: white,
 
       backgroundColorSecondary: white,
-      hoverBackgroundColorSecondary: "#F3F4F4",
-      pressedBackgroundColorSecondary: "#ECEEF1",
-      activeBackgroundColorSecondary: "#265A8F",
+      hoverBackgroundColorSecondary: lightGrayHover,
+      pressedBackgroundColorSecondary: grayLightMid,
+      activeBackgroundColorSecondary: blueLightMid,
     },
 
     hotkeys: {
       key: {
-        color: grayMain,
+        color: lightGrayDark,
       },
     },
 
     tag: {
       color: black,
-      deletedColor: "#A3A9AE",
-      background: "#f3f4f4",
-      hoverBackground: "#eceef1",
-      disabledBackground: "#f8f9f9",
-      deletedBackground: "#F8F9F9",
+      deletedColor: gray,
+      background: grayLightMid,
+      hoverBackground: lightGraySelected,
+      disabledBackground: grayLightMid,
+      deletedBackground: grayLight,
       defaultTagColor: black,
-      newTagBackground: "#eceef1",
-      newTagHoverBackground: "#F3F4F4",
+      newTagBackground: grayLightMid,
+      newTagHoverBackground: lightGrayHover,
     },
 
     profile: {
       main: {
-        background: "#F8F9F9",
+        background: grayLight,
         textColor: black,
 
-        descriptionTextColor: "#A3A9AE",
-        pendingEmailTextColor: "#A3A9AE",
+        descriptionTextColor: gray,
+        pendingEmailTextColor: gray,
 
-        mobileRowBackground: "#F8F9F9",
+        mobileRowBackground: grayLight,
+
+        iconFill: lightGrayDark,
+        mobileLabel: gray,
+      },
+      login: {
+        textColor: gray,
       },
       themePreview: {
-        descriptionColor: "#A3A9AE",
-        border: "1px solid #eceef1",
+        descriptionColor: gray,
+        border: `1px solid ${grayLightMid}`,
       },
       notifications: {
-        textDescriptionColor: "#A3A9AE",
+        textDescriptionColor: gray,
       },
-    activeSessions: {
-      color: "#333",
-      borderColor: "#eceef1",
-      tickIconColor: "#35AD17",
-      removeIconColor: "#A3A9AE",
-      sortHeaderColor: "#d0d5da",
-        tableCellColor: "#a3a9ae",
-        dividerColor: "#D0D5DA",
-    },
+      activeSessions: {
+        color: black,
+        borderColor: grayLightMid,
+        tickIconColor: lightStatusPositive,
+        removeIconColor: gray,
+        sortHeaderColor: grayStrong,
+        tableCellColor: gray,
+        dividerColor: grayStrong,
+      },
     },
 
     formWrapper: {
       background: white,
-      boxShadow: "0px 5px 20px rgba(4, 15, 27, 0.07)",
+      boxShadow: `0px 5px 20px ${popupShadow}`,
     },
 
     preparationPortalProgress: {
-      backgroundColor: "#F3F4F4",
-      colorPercentSmall: "#333333",
-      colorPercentBig: "#FFFFFF",
-      errorTextColor: "#F21C0E",
-      descriptionTextColor: "#A3A9AE",
+      backgroundColor: lightGrayHover,
+      colorPercentSmall: black,
+      colorPercentBig: white,
+      errorTextColor: lightErrorStatus,
+      descriptionTextColor: gray,
     },
 
     codeInput: {
       background: white,
-      border: "1px solid #d0d5da",
+      border: `1px solid ${grayStrong}`,
       color: black,
-      lineColor: "#C4C4C4",
-      disabledBackground: "#F8F9F9",
-      disabledBorder: "1px solid #ECEEF1",
-      disabledColor: "#A3A9AE",
+      lineColor: grayStrong,
+      disabledBackground: grayLight,
+      disabledBorder: `1px solid ${grayLightMid}`,
+      disabledColor: gray,
+      focusBorder: `1px solid ${lightSecondMain}`,
     },
 
     accessRightSelect: {
@@ -3281,71 +3092,97 @@ export const getBaseTheme = () => {
     },
 
     invitePage: {
-      borderColor: "#eceef1",
+      borderColor: grayLightMid,
+      textColor: gray,
     },
 
     portalUnavailable: {
-      textDescriptionColor: "#A3A9AE",
+      textDescriptionColor: gray,
     },
 
     deepLink: {
-      navBackground: "#f8f9f9",
-      fileTileBackground: "#f3f4f4",
+      navBackground: grayLight,
+      fileTileBackground: lightGrayHover,
     },
 
     emailChips: {
-      borderColor: "#A3A9AE",
-      dashedBorder: "1px dashed #5299E0",
+      borderColor: gray,
+      dashedBorder: `1px dashed ${lightSecondMain}`,
     },
 
     dialogs: {
-      disableText: "#A3A9AE",
+      disableText: gray,
+      errorText: lightErrorStatus,
+      linkColor: lightBlueMain,
+      borderColor: grayLightMid,
     },
 
     editLink: {
       text: {
-        color: "#A3A9AE",
-        errorColor: "#F21C0E",
+        color: gray,
+        errorColor: lightErrorStatus,
       },
+      requiredColor: lightErrorStatus,
     },
 
     oformGallery: {
       errorView: {
-        subHeaderTextColor: "#555F65",
+        subHeaderTextColor: grayText,
       },
       submitToGalleryTile: {
-        bodyText: "#555F65",
-        closeIconFill: "#657077",
+        bodyText: grayText,
+        closeIconFill: lightGrayDark,
       },
     },
 
     infoBlock: {
-      background: "#F8F9F9",
-      headerColor: "#333",
-      descriptionColor: "#555F65",
+      background: grayLight,
+      headerColor: black,
+      descriptionColor: grayText,
     },
 
     infoBar: {
-      background: "#f8f9f9",
+      background: grayLight,
       title: black,
-      description: cyanBlueDarkShade,
+      description: grayText,
+      textColor: black,
+      iconFill: lightStatusWarning,
     },
 
     roomIcon: {
-      backgroundArchive: "#A3A9AE",
+      backgroundArchive: gray,
       opacityBackground: "1",
     },
 
     plugins: {
-      borderColor: "#D0D5DA",
-      pluginName: "#5C5C5C",
-      descriptionColor: "#657077",
+      borderColor: grayStrong,
+      pluginName: grayDarkText,
+      descriptionColor: lightGrayDark,
+      color: grayDark,
     },
-
+    oauth: {
+      previewDialog: {
+        border: `1px solid ${grayLightMid}`,
+      },
+      infoDialog: {
+        descLinkColor: lightGrayDark,
+        blockHeaderColor: gray,
+        separatorColor: black,
+      },
+      list: {
+        descriptionColor: gray,
+      },
+      clientForm: {
+        descriptionColor: gray,
+        headerBorder: `1px solid ${grayStrong}`,
+        scopeDesc: gray,
+      },
+    },
     sdkPresets: {
-      borderColor: "#d0d5da",
-      secondaryColor: "#657077",
-      previewBackgroundColor: "#F3F4F4",
+      borderColor: grayStrong,
+      secondaryColor: lightGrayDark,
+      previewBackgroundColor: lightGrayHover,
+      linkHelpColor: lightGrayDark,
     },
     sideBarRow: {
       titleColor: black,
@@ -3353,17 +3190,34 @@ export const getBaseTheme = () => {
     },
 
     dateTimePicker: {
-      colorClockIcon: "#657077",
+      colorClockIcon: lightGrayDark,
     },
 
     embeddingPanel: {
-      descriptionTextColor: "#657077",
-      iconColor: "#657077",
+      descriptionTextColor: lightGrayDark,
+      iconColor: lightGrayDark,
     },
 
     completedForm: {
-      linkColor: "#4781D1",
+      linkColor: lightBlueMain,
       descriptionColor: gray,
+
+      labelColor: gray,
+
+      box: {
+        background: globalColors.grayLight,
+      },
+    },
+
+    management: {
+      textColor: gray,
+      errorColor: lightErrorStatus,
+      sideColor: gray,
+      nameColor: grayStrong,
+    },
+
+    publicRoom: {
+      border: `1px solid ${lightGraySelected}`,
     },
   };
 };

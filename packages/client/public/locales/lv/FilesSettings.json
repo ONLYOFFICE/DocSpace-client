@@ -6,6 +6,7 @@
   "DisplayTemplates": "Rādīt veidnes",
   "IntermediateVersion": "Saglabājiet visas saglabātās starpnieka versijas",
   "KeepIntermediateVersion": "Rediģēšanas laikā saglabājiet starpnieka versijas",
+  "OpenSameTab": "Atvērt {{organizationName}} redaktoru tajā pašā cilnē",
   "OriginalCopy": "Saglabājiet faila kopiju arī sākotnējā formātā",
   "StoringFileVersion": "Failu versiju uzglabāšana",
   "ThirdPartyAccounts": "Trešo personu konti",

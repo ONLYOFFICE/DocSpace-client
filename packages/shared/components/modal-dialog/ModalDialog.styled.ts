@@ -49,14 +49,6 @@ const StyledModal = styled.div<{ modalSwipeOffset?: number; blur?: number }>`
   .loader-wrapper {
     padding: 0 16px 16px;
   }
-
-  .modal-backdrop-active {
-    ${(props) =>
-      props.blur &&
-      css`
-        backdrop-filter: blur(${props.blur}px) !important;
-      `};
-  }
 `;
 
 const Dialog = styled.div`
@@ -129,15 +121,15 @@ const Content = styled.div.attrs((props: { modalSwipeOffset?: number }) => ({
           top: 0;
           bottom: 0;
 
-          ${props.theme.interfaceDirection === "rtl"
-            ? css<{ visible?: boolean }>`
-                left: 0;
-                transform: translateX(${props.visible ? "0" : "-100%"});
-              `
-            : css<{ visible?: boolean }>`
-                right: 0;
-                transform: translateX(${props.visible ? "0" : "100%"});
-              `}
+          inset-inline-end: 0;
+
+          transform: translateX(
+            ${props.visible
+              ? "0"
+              : props.theme.interfaceDirection === "rtl"
+                ? "-100%"
+                : "100%"}
+          );
 
           transition: transform 0.3s ease-in-out;
 
@@ -145,31 +137,12 @@ const Content = styled.div.attrs((props: { modalSwipeOffset?: number }) => ({
             transform: translateY(${props.visible ? "0" : "100%"});
             height: calc(100% - 64px);
             width: 100%;
-            left: 0;
-
+            inset-inline: 0;
             top: ${props.embedded ? "0" : "auto"};
-            right: 0;
             top: auto;
             bottom: 0;
           }
         `}
-`;
-
-const StyledHeader = styled.div`
-  display: flex;
-  align-items: center;
-  border-bottom: ${(props) =>
-    `1px solid ${props.theme.modalDialog.headerBorderColor}`};
-  margin-bottom: 16px;
-  height: 52px;
-  padding: 0 16px 0;
-
-  .heading {
-    font-family: ${(props) => props.theme.fontFamily};
-    color: ${(props) => props.theme.modalDialog.textColor};
-    font-weight: 700;
-    font-size: 21px;
-  }
 `;
 
 const StyledBody = styled(Box)<{
@@ -186,23 +159,14 @@ const StyledBody = styled(Box)<{
   white-space: pre-line;
 
   #modal-scroll > .scroll-wrapper > .scroller > .scroll-body {
-    ${(props) =>
-      isMobile && props.theme.interfaceDirection === "rtl"
-        ? `margin-left: 0 !important;`
-        : `margin-right: 0 !important;`}
+    margin-inline-end: 0 !important;
 
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? `padding-left: 16px !important;`
-        : `padding-right: 16px !important;`}
+    padding-inline-end: 16px !important;
 
     ${(props) =>
       props.isScrollLocked &&
       css`
-        ${props.theme.interfaceDirection === "rtl"
-          ? `margin-left: 0 !important;`
-          : `margin-right: 0 !important;`}
-
+        margin-inline-end: 0 !important;
         overflow: hidden !important;
       `}
   }
@@ -210,10 +174,7 @@ const StyledBody = styled(Box)<{
   ${(props) =>
     props.currentDisplayType === "aside" &&
     css<{ withBodyScroll?: boolean }>`
-      ${props.theme.interfaceDirection === "rtl"
-        ? `margin-left: ${props.withBodyScroll ? "-16px" : "0"};`
-        : `margin-right: ${props.withBodyScroll ? "-16px" : "0"};`}
-
+      margin-inline-end: ${props.withBodyScroll ? "-16px" : "0"};
       padding-bottom: 8px;
       height: 100%;
       min-height: auto;
@@ -248,7 +209,6 @@ const StyledFooter = styled.div<{
 `;
 
 Dialog.defaultProps = { theme: Base };
-StyledHeader.defaultProps = { theme: Base };
 Content.defaultProps = { theme: Base };
 
-export { StyledModal, StyledHeader, Content, Dialog, StyledBody, StyledFooter };
+export { StyledModal, Content, Dialog, StyledBody, StyledFooter };

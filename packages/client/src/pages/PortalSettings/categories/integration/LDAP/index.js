@@ -38,15 +38,14 @@ import StyledLdapPage from "./styled-components/StyledLdapPage";
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
 
 import ToggleLDAP from "./sub-components/ToggleLDAP";
-import SyncContainer from "./sub-components/SyncContainer";
+import { SyncContainerSection } from "./sub-components/SyncContainer";
 import LdapMobileView from "./sub-components/LdapMobileView";
-import SettingsContainer from "./sub-components/SettingsContainer";
+import { SettingsContainerSection } from "./sub-components/SettingsContainer";
 import LdapLoader from "./sub-components/LdapLoader";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const LDAP = ({
   ldapSettingsUrl,
-  theme,
   currentColorScheme,
   isLdapAvailable,
   load,
@@ -60,7 +59,7 @@ const LDAP = ({
   useEffect(() => {
     isLdapAvailable && load(t);
     onCheckView();
-    setDocumentTitle(t("Settings:ManagementCategoryIntegration"));
+    setDocumentTitle(t("Ldap:LdapSettings"));
     window.addEventListener("resize", onCheckView);
 
     return () => window.removeEventListener("resize", onCheckView);
@@ -76,11 +75,7 @@ const LDAP = ({
 
   if (!isLoaded && isLdapAvailable) return <LdapLoader />;
   return (
-    <StyledLdapPage
-      isSmallWindow={isSmallWindow}
-      theme={theme}
-      isSettingPaid={isLdapAvailable}
-    >
+    <StyledLdapPage isSmallWindow={isSmallWindow}>
       <Text className="intro-text settings_unavailable">{t("LdapIntro")}</Text>
       <Box marginProp="8px 0 24px 0">
         <Link
@@ -102,11 +97,11 @@ const LDAP = ({
         <>
           <ToggleLDAP />
 
-          <SettingsContainer />
+          <SettingsContainerSection />
 
           <StyledSettingsSeparator />
 
-          <SyncContainer />
+          <SyncContainerSection />
         </>
       )}
     </StyledLdapPage>
@@ -115,7 +110,7 @@ const LDAP = ({
 
 export default inject(({ ldapStore, settingsStore, currentQuotaStore }) => {
   const { isLdapAvailable } = currentQuotaStore;
-  const { ldapSettingsUrl, theme, currentColorScheme, currentDeviceType } =
+  const { ldapSettingsUrl, currentColorScheme, currentDeviceType } =
     settingsStore;
   const { load, isLdapEnabled, isLoaded } = ldapStore;
 
@@ -123,7 +118,6 @@ export default inject(({ ldapStore, settingsStore, currentQuotaStore }) => {
 
   return {
     ldapSettingsUrl,
-    theme,
     currentColorScheme,
     isLdapAvailable,
     load,

@@ -6,7 +6,6 @@
   "AttributeMatchingTooltip": "Die Entsprechung der Single-Sign-On-Attribute zu den Einträgen des Bereichs «Konten».",
   "Binding": "Bindung:",
   "CertificateExist": "Es gibt bereits ein Zertifikat mit gleichem Aktionstyp",
-  "ConfirmationText": "Alle von Ihnen eingegebenen Daten gehen verloren. Sind Sie sicher, dass Sie fortfahren möchten?",
   "CustomEntryButton": "Benutzerdefinierte Beschriftung der Anmeldeschaltfläche",
   "CustomEntryTooltip": "Die Beschriftung für die Schaltfläche, die für die Anmeldung im Bereich mit dem Single Sign-On-Dienst verwendet wird",
   "DownloadMetadataXML": "XML mit SP-Metadaten herunterladen",

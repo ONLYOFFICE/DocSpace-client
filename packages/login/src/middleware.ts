@@ -26,9 +26,12 @@
 
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { OAuth2ErrorKey } from "./utils/enums";
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
+  const requestHeaders = new Headers(request.headers);
+
   const host = request.headers.get("x-forwarded-host");
   const proto = request.headers.get("x-forwarded-proto");
 
@@ -36,18 +39,83 @@ export function middleware(request: NextRequest) {
 
   if (request.nextUrl.pathname === "/health") {
     console.log("Get login health check for portal: ", redirectUrl);
-    return NextResponse.json({ status: "healthy" }, { status: 200 });
+
+    requestHeaders.set("x-health-check", "true");
+
+    return NextResponse.json(
+      { status: "healthy" },
+      { status: 200, headers: requestHeaders },
+    );
+  }
+
+  if (request.nextUrl.pathname.includes("confirm")) {
+    const searchParams = new URLSearchParams(request.nextUrl.searchParams);
+    const queryType = searchParams.get("type") ?? "";
+    const posSeparator = request.nextUrl.pathname.lastIndexOf("/");
+    const type = !!posSeparator
+      ? request.nextUrl.pathname?.slice(posSeparator + 1)
+      : queryType;
+
+    let queryString: string;
+    if (queryType) {
+      searchParams.set("type", type);
+      queryString = searchParams.toString();
+    } else {
+      queryString = `type=${type}&${searchParams.toString()}`;
+    }
+
+    requestHeaders.set("x-confirm-type", type);
+    requestHeaders.set("x-confirm-query", searchParams.toString());
+
+    const confirmUrl = `${request.nextUrl.origin}/login/confirm/${type}?${queryString}`;
+    if (request.nextUrl.toString() == confirmUrl) {
+      return NextResponse.rewrite(confirmUrl, { headers: requestHeaders });
+    }
+
+    return NextResponse.redirect(
+      `${request.nextUrl.origin}/confirm/${type}?${queryString}`,
+    );
   }
 
   const isAuth = !!request.cookies.get("asc_auth_key")?.value;
 
-  const url = request.nextUrl.clone();
-  url.pathname = "/";
+  const isOAuth = request.nextUrl.searchParams.get("type") === "oauth2";
+  const oauthClientId =
+    request.nextUrl.searchParams.get("client_id") ??
+    request.nextUrl.searchParams.get("clientId");
+  if (isOAuth || oauthClientId) {
+    if (oauthClientId === "error")
+      return NextResponse.redirect(`${redirectUrl}/login/error`);
 
-  if (isAuth && redirectUrl) return NextResponse.redirect(redirectUrl);
+    const error = request.nextUrl.searchParams.get("error");
+
+    if (error && error !== OAuth2ErrorKey.missing_asc_cookie_error) {
+      return NextResponse.redirect(
+        `${redirectUrl}/login/error?oauthMessageKey=${error}`,
+      );
+    }
+
+    if (isAuth && !request.nextUrl.pathname.includes("consent")) {
+      return NextResponse.redirect(
+        `${redirectUrl}/login/consent${request.nextUrl.search}`,
+      );
+    }
+  } else {
+    const url = request.nextUrl.clone();
+    url.pathname = "/";
+
+    if (isAuth && redirectUrl) return NextResponse.redirect(redirectUrl);
+  }
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/health", "/", "/not-found"],
+  matcher: [
+    "/health",
+    "/",
+    "/not-found",
+    "/consent",
+    "/login",
+    "/confirm/:path*",
+  ],
 };

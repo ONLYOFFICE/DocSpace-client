@@ -26,6 +26,7 @@
 
 import { useRef } from "react";
 import { withTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
 import { Tooltip } from "@docspace/shared/components/tooltip";
@@ -37,6 +38,7 @@ import Badges from "@docspace/client/src/pages/Home/Section/AccountsBody/Badges"
 import { StyledAccountsItemTitle } from "../../styles/accounts";
 
 import { decode } from "he";
+import { globalColors } from "@docspace/shared/themes";
 
 const AccountsItemTitle = ({
   t,
@@ -48,6 +50,7 @@ const AccountsItemTitle = ({
     return <></>;
   }
 
+  const theme = useTheme();
   const itemTitleRef = useRef();
 
   const isPending =
@@ -112,8 +115,12 @@ const AccountsItemTitle = ({
               id="sso-badge-info-panel"
               className="sso-badge"
               label={t("Common:SSO")}
-              color={"#FFFFFF"}
-              backgroundColor="#22C386"
+              color={globalColors.white}
+              backgroundColor={
+                theme.isBase
+                  ? globalColors.secondGreen
+                  : globalColors.secondGreenDark
+              }
               fontSize={"9px"}
               fontWeight={800}
               noHover
@@ -131,8 +138,12 @@ const AccountsItemTitle = ({
               id="ldap-badge-info-panel"
               className="ldap-badge"
               label={t("Common:LDAP")}
-              color={"#FFFFFF"}
-              backgroundColor="#8570BD"
+              color={globalColors.white}
+              backgroundColor={
+                theme.isBase
+                  ? globalColors.secondPurple
+                  : globalColors.secondPurpleDark
+              }
               fontSize={"9px"}
               fontWeight={800}
               noHover

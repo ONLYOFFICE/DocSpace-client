@@ -33,14 +33,11 @@ import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { ConflictResolveType } from "@docspace/shared/enums";
 
-import DialogsStore from "SRC_DIR/store/DialogsStore";
-import UploadDataStore from "SRC_DIR/store/UploadDataStore";
-import FilesStore from "SRC_DIR/store/FilesStore";
-
 import {
   ConflictResolveDialogProps,
   TActiveItem,
 } from "./ConflictResolveDialog.types";
+import { Text } from "@docspace/shared/components/text";
 
 const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
   const {
@@ -54,6 +51,7 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     setActiveFiles,
     setActiveFolders,
     updateActiveFiles,
+    updateActiveFolders,
     setSelected,
     setMoveToPanelVisible,
     setRestorePanelVisible,
@@ -61,6 +59,12 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     setRestoreAllPanelVisible,
     setMoveToPublicRoomVisible,
     handleFilesUpload,
+    setShareCollectSelector,
+    openFileAction,
+    isFileDialog,
+    isFolderDialog,
+    files,
+    folders,
   } = props;
 
   const { t, ready } = useTranslation(["Common"]);
@@ -70,10 +74,11 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     folderIds,
     fileIds,
     deleteAfter,
-    folderTitle,
     isCopy,
     translations,
     isUploadConflict,
+    selectedFolder,
+    fromShareCollectSelector,
   } = conflictResolveDialogData;
 
   const onClose = () => {
@@ -87,6 +92,7 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     setCopyPanelVisible(false);
     setRestoreAllPanelVisible(false);
     setMoveToPublicRoomVisible(false);
+    setShareCollectSelector(false);
   };
 
   const differenceArray = (
@@ -114,16 +120,23 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
 
   const onAcceptType = async (conflictResolveType: ConflictResolveType) => {
     let newFileIds = fileIds;
+    let newFolderIds = folderIds;
     let newActiveFiles = activeFiles;
+    let newActiveFolders = activeFolders;
     if (conflictResolveType === ConflictResolveType.Skip) {
-      items.forEach((item) => {
-        newFileIds = newFileIds.filter((x) => x !== item.id);
-        newActiveFiles = newActiveFiles.filter((f) => f.id !== item.id);
+      files.forEach((file) => {
+        newFileIds = newFileIds.filter((x) => x !== file.id);
+        newActiveFiles = newActiveFiles.filter((f) => f.id !== file.id);
+      });
+      folders.forEach((folder) => {
+        newFolderIds = newFolderIds.filter((x) => x !== folder.id);
+        newActiveFolders = newActiveFolders.filter((f) => f.id !== folder.id);
       });
     }
 
     updateActiveFiles(newActiveFiles);
-    if (!folderIds.length && !newFileIds.length) {
+    updateActiveFolders(newActiveFiles);
+    if (!newFolderIds.length && !newFileIds.length) {
       setSelected("none");
       onClosePanels();
       return;
@@ -142,6 +155,10 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     setSelected("none");
     onClosePanels();
     try {
+      if (fromShareCollectSelector) {
+        openFileAction(selectedFolder, t);
+      }
+
       sessionStorage.setItem("filesSelectorPath", `${destFolderId}`);
       await itemOperationToFolder(data);
     } catch (error: unknown) {
@@ -194,29 +211,87 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
     }
   };
 
-  const messageText =
-    items.length === 1 ? (
+  const getMessageText = () => {
+    const singleFileMessage = (
       <Trans
         t={t}
         ns="Common"
-        i18nKey="ConflictResolveDescription"
-        values={{ file: items[0].title, folder: folderTitle }}
-        components={{ 1: <span className="bold" /> }}
+        i18nKey="FileActionRequired"
+        values={{ fileName: items[0].title }}
+        components={{ 1: <span className="bold truncate" /> }}
       />
-    ) : (
+    );
+
+    const singleFolderMessage = (
       <Trans
         t={t}
         ns="Common"
-        i18nKey="ConflictResolveDescriptionFiles"
-        values={{ filesCount: items.length, folder: folderTitle }}
+        i18nKey="FolderActionRequired"
+        values={{ folderName: items[0].title }}
         components={{ 1: <span className="bold" /> }}
       />
     );
 
+    return isFileDialog
+      ? items.length === 1
+        ? singleFileMessage
+        : t("Common:FilesAlreadyContains")
+      : isFolderDialog
+        ? items.length === 1
+          ? singleFolderMessage
+          : t("Common:FoldersAlreadyContains")
+        : t("Common:FilesAndFoldersAlreadyContains");
+  };
+
+  const getOverwriteTitle = () => {
+    return isFileDialog
+      ? t("Common:OverwriteTitle")
+      : isFolderDialog
+        ? t("Common:MergeFolders")
+        : t("Common:MergeAndOverwrite");
+  };
+
+  const getOverwriteDescription = () => {
+    return isFileDialog
+      ? t("Common:OverwriteDescription")
+      : isFolderDialog
+        ? t("Common:MergeFoldersDescription")
+        : t("Common:MultiplyOverwrite");
+  };
+
+  const getDuplicateTitle = () => {
+    return isFileDialog
+      ? t("Common:CreateFileCopy")
+      : isFolderDialog
+        ? t("Common:CopyAndKeepBothFolders")
+        : t("Common:CopyAndKeepAll");
+  };
+  const getDuplicateDescription = () => {
+    return isFileDialog
+      ? t("Common:CreateDescription")
+      : isFolderDialog
+        ? t("Common:CreateFolderDescription")
+        : t("Common:FoldersAndFilesWillBeCopied");
+  };
+  const getSkipDescription = () => {
+    return isFileDialog
+      ? t("Common:SkipDescription")
+      : isFolderDialog
+        ? t("Common:SkipFolderDescription")
+        : t("Common:FilesAndFolderWillNotBeCopied");
+  };
+
+  const messageText = getMessageText();
+  const overwriteTitle = getOverwriteTitle();
+  const overwriteDescription = getOverwriteDescription();
+  const duplicateTitle = getDuplicateTitle();
+  const duplicateDescription = getDuplicateDescription();
+  const skipDescription = getSkipDescription();
+
   return (
     <ConflictResolve
       visible={visible}
-      headerLabel={t("Common:ConflictResolveTitle")}
+      headerLabel={t("Common:ActionRequired")}
       isLoading={!ready}
       onSubmit={isUploadConflict ? onAcceptUploadType : onAcceptType}
       onClose={onCloseDialog}
@@ -224,26 +299,18 @@ const ConflictResolveDialog = (props: ConflictResolveDialogProps) => {
       submitButtonLabel={t("OKButton")}
       messageText={messageText}
       selectActionText={t("Common:ConflictResolveSelectAction")}
-      overwriteTitle={t("Common:OverwriteTitle")}
-      overwriteDescription={t("Common:OverwriteDescription")}
-      duplicateTitle={t("CreateFileCopy")}
-      duplicateDescription={t("Common:CreateDescription")}
+      overwriteTitle={overwriteTitle}
+      overwriteDescription={overwriteDescription}
+      duplicateTitle={duplicateTitle}
+      duplicateDescription={duplicateDescription}
       skipTitle={t("Common:SkipTitle")}
-      skipDescription={t("Common:SkipDescription")}
+      skipDescription={skipDescription}
     />
   );
 };
 
-export default inject(
-  ({
-    dialogsStore,
-    uploadDataStore,
-    filesStore,
-  }: {
-    dialogsStore: DialogsStore;
-    uploadDataStore: UploadDataStore;
-    filesStore: FilesStore;
-  }) => {
+export default inject<TStore>(
+  ({ dialogsStore, uploadDataStore, filesStore, filesActionsStore }) => {
     const {
       conflictResolveDialogVisible: visible,
       setConflictResolveDialogVisible,
@@ -254,7 +321,10 @@ export default inject(
       setRestoreAllPanelVisible,
       setCopyPanelVisible,
       setMoveToPublicRoomVisible,
+      setShareCollectSelector,
     } = dialogsStore;
+
+    const { openFileAction } = filesActionsStore;
 
     const { itemOperationToFolder, handleFilesUpload } = uploadDataStore;
     const {
@@ -263,8 +333,20 @@ export default inject(
       setActiveFiles,
       setActiveFolders,
       updateActiveFiles,
+      updateActiveFolders,
       setSelected,
     } = filesStore;
+
+    const files = items
+      ? items.filter((f) => {
+          if (f.isFile || f.fileExst || f.contentLength) return f;
+        })
+      : [];
+    const folders = items
+      ? items.filter((f) => {
+          if (!f.fileExst && !f.contentLength && !f.isFile) return f;
+        })
+      : [];
 
     return {
       items,
@@ -277,6 +359,7 @@ export default inject(
       setActiveFiles,
       setActiveFolders,
       updateActiveFiles,
+      updateActiveFolders,
       setSelected,
       setMoveToPanelVisible,
       setRestorePanelVisible,
@@ -284,6 +367,12 @@ export default inject(
       setCopyPanelVisible,
       setMoveToPublicRoomVisible,
       handleFilesUpload,
+      setShareCollectSelector,
+      openFileAction,
+      files,
+      folders,
+      isFileDialog: !folders.length,
+      isFolderDialog: !files.length,
     };
   },
 )(observer(ConflictResolveDialog));

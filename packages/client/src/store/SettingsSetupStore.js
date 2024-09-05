@@ -46,6 +46,7 @@ class SettingsSetupStore {
   settingsStore = null;
   tfaStore = null;
   thirdPartyStore = null;
+  filesSettingsStore = null;
   isInit = false;
   logoutDialogVisible = false;
   logoutAllDialogVisible = false;
@@ -111,12 +112,19 @@ class SettingsSetupStore {
   currentSession = [];
   platformModalData = {};
 
-  constructor(tfaStore, authStore, settingsStore, thirdPartyStore) {
+  constructor(
+    tfaStore,
+    authStore,
+    settingsStore,
+    thirdPartyStore,
+    filesSettingsStore,
+  ) {
     this.selectionStore = new SelectionStore(this);
     this.authStore = authStore;
     this.tfaStore = tfaStore;
     this.settingsStore = settingsStore;
     this.thirdPartyStore = thirdPartyStore;
+    this.filesSettingsStore = filesSettingsStore;
     makeAutoObservable(this);
   }
 
@@ -433,16 +441,21 @@ class SettingsSetupStore {
   };
 
   getLoginHistoryReport = async () => {
+    const { openOnNewPage } = this.filesSettingsStore;
     const res = await api.settings.getLoginHistoryReport();
-    setTimeout(() => window.open(res), 100); //hack for ios
+    setTimeout(() => window.open(res, openOnNewPage ? "_blank" : "_self"), 100); //hack for ios
     return this.setAuditTrailReport(res);
   };
 
   getAuditTrailReport = async () => {
+    const { openOnNewPage } = this.filesSettingsStore;
     try {
       this.setIsLoadingDownloadReport(true);
       const res = await api.settings.getAuditTrailReport();
-      setTimeout(() => window.open(res), 100); //hack for ios
+      setTimeout(
+        () => window.open(res, openOnNewPage ? "_blank" : "_self"),
+        100,
+      ); //hack for ios
       return this.setAuditTrailReport(res);
     } catch (error) {
       console.error(error);
@@ -573,7 +586,6 @@ class SettingsSetupStore {
   };
 
   getSessions = () => {
-    if (this.sessionsIsInit) return;
     this.getAllSessions().then((res) => {
       this.setSessions(res.items);
       this.currentSession = res.loginEvent;

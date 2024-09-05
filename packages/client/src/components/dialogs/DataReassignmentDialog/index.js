@@ -178,7 +178,9 @@ const DataReassignmentDialog = ({
         toastr.error(error?.response?.data?.error?.message);
       })
       .finally(() => {
-        needResetUserSelection && setSelected("close");
+        if (isDeleteProfile || needResetUserSelection) {
+          setSelected("close");
+        }
       });
   };
 
@@ -225,6 +227,7 @@ const DataReassignmentDialog = ({
             withCancelButton
             cancelButtonLabel=""
             headerProps={{
+              onCloseClick: onClose,
               onBackClick: onClosePeopleSelector,
               withoutBackButton: false,
               headerLabel: "",

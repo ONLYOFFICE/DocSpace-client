@@ -40,6 +40,7 @@ import ButtonPlusIcon from "PUBLIC_DIR/images/actions.button.plus.react.svg";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 
 import { isMobile, isTablet } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
 
 const Preview = (props) => {
   const {
@@ -366,8 +367,21 @@ const Preview = (props) => {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <rect x="4" y="6" width="20" height="20" rx="2" fill="#11A3D4" />
-              <circle cx="24" cy="6" r="5" fill="#11A3D4" stroke="#F8F9F9" />
+              <rect
+                x="4"
+                y="6"
+                width="20"
+                height="20"
+                rx="2"
+                fill={globalColors.secondBlue}
+              />
+              <circle
+                cx="24"
+                cy="6"
+                r="5"
+                fill={globalColors.secondBlue}
+                stroke={globalColors.grayLight}
+              />
             </svg>
             <RectangleSkeleton
               animate={false}

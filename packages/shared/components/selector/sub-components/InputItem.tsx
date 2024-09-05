@@ -30,6 +30,7 @@ import AcceptIconSvgUrl from "PUBLIC_DIR/images/selector.input.accept.svg?url";
 import CancelIconSvgUrl from "PUBLIC_DIR/images/selector.input.cancel.svg?url";
 
 import { RoomsType } from "../../../enums";
+import { Nullable } from "../../../types";
 
 import { InputSize, InputType, TextInput } from "../../text-input";
 import { IconButton } from "../../icon-button";
@@ -51,6 +52,7 @@ const InputItem = ({
   placeholder,
 
   setInputItemVisible,
+  setSavedInputValue,
 }: {
   defaultInputValue: string;
   onAcceptInput: (value: string) => void;
@@ -64,20 +66,30 @@ const InputItem = ({
   roomType?: RoomsType;
 
   setInputItemVisible: (value: boolean) => void;
+  setSavedInputValue: (value: Nullable<string>) => void;
 }) => {
   const [value, setValue] = React.useState(defaultInputValue);
 
   const requestRunning = React.useRef<boolean>(false);
+  const canceled = React.useRef<boolean>(false);
   const inputRef = React.useRef<HTMLInputElement | null>(null);
 
   const onAcceptInputAction = React.useCallback(async () => {
     if (requestRunning.current || !value) return;
-
+    setSavedInputValue(null);
     requestRunning.current = true;
+
     await onAcceptInput(value);
 
+    canceled.current = true;
     requestRunning.current = false;
-  }, [onAcceptInput, value]);
+  }, [onAcceptInput, setSavedInputValue, value]);
+
+  const onCancelInputAction = React.useCallback(() => {
+    canceled.current = true;
+    setSavedInputValue(null);
+    onCancelInput();
+  }, [onCancelInput, setSavedInputValue]);
 
   React.useEffect(() => {
     setInputItemVisible(true);
@@ -88,9 +100,15 @@ const InputItem = ({
   }, [setInputItemVisible]);
 
   React.useEffect(() => {
+    return () => {
+      if (!canceled.current) setSavedInputValue(value);
+    };
+  }, [setSavedInputValue, value]);
+
+  React.useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Enter") onAcceptInputAction();
-      else if (e.key === "Escape") onCancelInput();
+      else if (e.key === "Escape") onCancelInputAction();
     };
 
     window.addEventListener("keydown", onKeyDown);
@@ -98,7 +116,7 @@ const InputItem = ({
     return () => {
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [onAcceptInputAction, onCancelInput]);
+  }, [onAcceptInputAction, onCancelInputAction]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newVal = e.target.value;
@@ -151,7 +169,7 @@ const InputItem = ({
       <StyledInputWrapper onClick={onAcceptInputAction}>
         <IconButton iconName={AcceptIconSvgUrl} size={16} />
       </StyledInputWrapper>
-      <StyledInputWrapper onClick={onCancelInput}>
+      <StyledInputWrapper onClick={onCancelInputAction}>
         <IconButton iconName={CancelIconSvgUrl} size={16} />
       </StyledInputWrapper>
     </StyledItem>

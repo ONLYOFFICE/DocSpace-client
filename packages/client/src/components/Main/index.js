@@ -57,11 +57,10 @@ const Main = (props) => {
 
   React.useEffect(() => {
     window.addEventListener("resize", onResize);
-    window.visualViewport.addEventListener("resize", onResize);
 
     return () => {
-      window.addEventListener("resize", onResize);
-      window.visualViewport.removeEventListener("resize", onResize);
+      window.removeEventListener("resize", onResize);
+
       clearTimeout(updateSizeRef.current);
     };
   }, [onResize, isFrame]);
@@ -77,10 +76,12 @@ const Main = (props) => {
       if (mainBarVisible && isMobileUtils()) {
         const mainBar = document.getElementById("main-bar");
 
-        if (!mainBar.offsetHeight)
-          return (updateSizeRef.current = setTimeout(() => onResize(), 0));
+        if (mainBar) {
+          if (!mainBar?.offsetHeight)
+            return (updateSizeRef.current = setTimeout(() => onResize(), 0));
 
-        correctHeight -= mainBar.offsetHeight;
+          correctHeight -= mainBar?.offsetHeight;
+        }
       }
 
       const isTouchDevice =

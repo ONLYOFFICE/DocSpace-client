@@ -52,10 +52,11 @@ import {
   Container,
   ControlsSection,
 } from "./StyledPresets";
-import { PRODUCT_NAME, SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const DocSpace = (props) => {
-  const { t, setDocumentTitle, theme } = props;
+  const { t, theme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -113,8 +114,10 @@ const DocSpace = (props) => {
 
   return (
     <PresetWrapper
-      description={t("PortalDescription", { productName: PRODUCT_NAME })}
-      header={t("CreateSamplePortal", { productName: PRODUCT_NAME })}
+      description={t("PortalDescription", {
+        productName: t("Common:ProductName"),
+      })}
+      header={t("CreateSamplePortal", { productName: t("Common:ProductName") })}
     >
       <Container>
         <PreviewBlock
@@ -155,13 +158,11 @@ const DocSpace = (props) => {
   );
 };
 
-export default inject(({ authStore, settingsStore }) => {
-  const { setDocumentTitle } = authStore;
+export const Component = inject(({ settingsStore }) => {
   const { theme } = settingsStore;
 
   return {
     theme,
-    setDocumentTitle,
   };
 })(
   withTranslation([

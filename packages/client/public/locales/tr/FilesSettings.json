@@ -6,6 +6,7 @@
   "DisplayTemplates": "Şablonları Görüntüle",
   "IntermediateVersion": "Kaydedilen tüm ara sürümleri sakla",
   "KeepIntermediateVersion": "Düzenleme yaparken ara sürümleri koru",
+  "OpenSameTab": "Aynı sekmede {{organizationName}} düzenleyicisini açın",
   "OriginalCopy": "Dosya kopyasını da orijinal türünde kaydet",
   "StoringFileVersion": "Dosya sürümleri depolanıyor",
   "ThirdPartyAccounts": "Üçüncü taraf hesapları",

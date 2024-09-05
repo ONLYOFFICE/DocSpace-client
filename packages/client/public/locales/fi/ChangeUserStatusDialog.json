@@ -1,7 +1,11 @@
 {
   "DisableGeneralDescription": "Voit tarvittaessa myöhemmin poistaa tai ottaa käyttöön käytöstä poistetut käyttäjät. Huomioi, että et voi poistaa käytöstä Omistajaa etkä itseäsi.",
   "DisableUser": "Poista käyttäjä käytöstä",
+  "DisableUserDescription": "Jos otat tämän käyttäjän pois käytöstä, he eivät voi kirjautua {{productName}}:een, mutta heidän asiakirjansa ja tietonsa säilyvät.",
   "DisableUsers": "Ota käyttäjät pois käytöstä ",
+  "DisableUsersDescription": "Jos otat nämä käyttäjät pois käytöstä, he eivät voi kirjautua {{productName}}:een, mutta heidän asiakirjansa ja tietonsa säilyvät.",
   "EnableUser": "Ota käyttäjä takaisin käyttöön",
-  "EnableUsers": "Ota käyttäjät takaisin käyttöön"
+  "EnableUserDescription": "Jos otat tämän käyttäjän käyttöön, hän voi taas kirjautua {{productName}}:een ja pääsee käsiksi heidän asiakirjoihinsa ja tietoihinsa.",
+  "EnableUsers": "Ota käyttäjät takaisin käyttöön",
+  "EnableUsersDescription": "Jos otat nämä käyttäjät käyttöön, he voivat taas kirjautua {{productName}}:een ja pääsevät käsiksi asiakirjoihinsa ja tietoihinsa."
 }

@@ -1,1 +1,24 @@
-{}
+{
+  "CollaboratorEmptyTitle": "룸이 비어 있습니다.",
+  "CreateNewFileDescription": "파일 또는 폴더를 생성하여 룸에서 작업을 시작하세요",
+  "CreateNewFileTitle": "새 파일 생성",
+  "CustomRoomEmptyTitle": "커스텀 룸에 오신 것을 환영합니다",
+  "EmptyDescription": "빠른 작업으로 시작하세요:",
+  "FormFolderDefaultDescription": "PDF 양식을 여기에 드롭하거나 {{productName}} 또는 장치에서 업로드하세요. ",
+  "FormFolderDefaultTitle": "아직 여기에 양식이 없습니다",
+  "FormFolderDefaultUserDescription": "관리자가 업로드한 양식이 여기에 표시됩니다.",
+  "FormFolderDefaultUserTitle": "아직 이 폴더에 양식이 없습니다",
+  "FormRoomEmptyTitle": "양식 작성 룸에 오신 것을 환영합니다",
+  "InviteUsersOptionDescription": "룸에 공동 편집을 하기 위한 포털 구성원을 추가하세요",
+  "InviteUsersOptionTitle": "참석자 초대",
+  "ShareOptionDescription": "액세스 링크를 복사하거나 다른 사용자를 룸에 초대하여 양식 작성 프로세스를 시작하세요.",
+  "ShareOptionTitle": "룸 공유",
+  "UploadDeviceOptionDescription": "개인 장치에서 모든 유형의 파일 업로드",
+  "UploadDeviceOptionTitle": "장치에서 업로드",
+  "UploadDevicePDFFormOptionDescription": "장치에서 준비된 PDF 양식을 룸에 업로드하세요.",
+  "UploadDevicePDFFormOptionTitle": "장치에서 업로드",
+  "UploadFromPortalDescription": "문서 또는 룸에서 모든 유형의 파일을 업로드",
+  "UploadFromPortalTitle": "{{productName}}에서 업로드",
+  "UploadPDFFormOptionDescription": "{{productName}}에서 이용 가능한 PDF 양식을 선택하여 룸에 업로드하세요. ",
+  "UserEmptyDescription": "관리자가 업로드한 파일 및 폴더가 여기에 표시됩니다."
+}

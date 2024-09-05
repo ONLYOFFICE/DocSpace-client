@@ -142,3 +142,17 @@ export const checkDomain = async (domain: string) => {
   });
   return res;
 };
+
+export const getAvailablePortals = async (data: {
+  Email: string;
+  PasswordHash: string;
+}) => {
+  const res = (await request({
+    baseURL,
+    method: "post",
+    url: `/portal/signin?Email=${data.Email}&PasswordHash=${data.PasswordHash}`,
+    data,
+  })) as { tenants: { portalLink: string; portalName: string }[] };
+
+  return res.tenants;
+};

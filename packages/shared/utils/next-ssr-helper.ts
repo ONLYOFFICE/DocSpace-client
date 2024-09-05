@@ -39,10 +39,10 @@ export const getBaseUrl = () => {
   return baseURL;
 };
 
-export const getAPIUrl = () => {
+export const getAPIUrl = (apiSystem?: boolean) => {
   const baseUrl = process.env.API_HOST?.trim() ?? getBaseUrl();
 
-  const baseAPIUrl = `${baseUrl}/${API_PREFIX}`;
+  const baseAPIUrl = `${baseUrl}/${!apiSystem ? API_PREFIX : "apisystem"}`;
 
   return baseAPIUrl;
 };
@@ -52,11 +52,13 @@ export const createRequest = (
   newHeaders: [string, string][],
   method: string,
   body?: string,
+  apiSystem?: boolean,
 ) => {
   const hdrs = new Headers(headers());
+  hdrs.delete("content-length");
   const cookieStore = cookies();
 
-  const apiURL = getAPIUrl();
+  const apiURL = getAPIUrl(apiSystem);
 
   newHeaders.forEach((hdr) => {
     if (hdr[0]) hdrs.set(hdr[0], hdr[1]);
@@ -66,9 +68,27 @@ export const createRequest = (
 
   if (baseURL && process.env.API_HOST?.trim()) hdrs.set("origin", baseURL);
 
+  // hdrs.set("x-docspace-address", baseURL);
+
   const authToken = cookieStore.get("asc_auth_key")?.value;
 
   if (authToken) hdrs.set("Authorization", authToken);
+
+  cookieStore
+    .getAll()
+    .map((c) => {
+      if (c.name.includes("sharelink")) {
+        return c;
+      }
+
+      return false;
+    })
+    .filter((v) => !!v)
+    .forEach((value) => {
+      hdrs.set(value.name, value.value);
+
+      return value;
+    });
 
   const urls = paths.map((path) => `${apiURL}${path}`);
 

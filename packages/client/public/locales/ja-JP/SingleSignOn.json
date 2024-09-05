@@ -6,7 +6,6 @@
   "AttributeMatchingTooltip": "シングルサインオンの属性と「アカウント」セクションの項目との対応関係。",
   "Binding": "バインド",
   "CertificateExist": "同じアクションタイプを持つ証明書が既に存在しています。",
-  "ConfirmationText": "入力したデータはすべて失われます。このまま続けますか？",
   "CustomEntryButton": "カスタムログインボタンのキャプション",
   "CustomEntryTooltip": "シングルサインオンサービスを利用してスペースにログインする際に使用するボタンのキャプション",
   "DownloadMetadataXML": "SPメタデータXMLのダウンロード",

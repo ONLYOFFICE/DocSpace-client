@@ -78,7 +78,6 @@ class InfoPanelStore {
 
   infoPanelSelection = null;
   selectionHistory = null;
-  selectionHistory = null;
 
   roomsView = infoMembers;
   fileView = infoHistory;
@@ -94,7 +93,6 @@ class InfoPanelStore {
   publicRoomStore = null;
 
   infoPanelMembers = null;
-  infoPanelSelection = null;
   infoPanelRoom = null;
   membersIsLoading = false;
   isMembersPanelUpdating = false;
@@ -122,7 +120,8 @@ class InfoPanelStore {
   setIsVisible = (bool) => {
     if (
       (this.infoPanelSelectedItems.length &&
-        !this.infoPanelSelectedItems[0]?.isRoom) ||
+        !this.infoPanelSelectedItems[0]?.isRoom &&
+        !this.infoPanelSelectedItems[0]?.inRoom) ||
       (this.selectedFolderStore && !this.selectedFolderStore?.inRoom)
     ) {
       this.setView(infoDetails);
@@ -161,6 +160,10 @@ class InfoPanelStore {
     this.fileView = infoHistory;
   };
 
+  /**
+   * @param {infoMembers | infoHistory | infoDetails} view
+   * @returns {void}
+   */
   setView = (view) => {
     this.roomsView = view;
     this.fileView = view === infoMembers ? infoDetails : view;
@@ -298,9 +301,6 @@ class InfoPanelStore {
       ...infoPanelSelection,
       isRoom: infoPanelSelection.isRoom || !!infoPanelSelection.roomType,
       icon: this.getInfoPanelItemIcon(infoPanelSelection, 32),
-      canCopyPublicLink:
-        infoPanelSelection.access === ShareAccessRights.RoomManager ||
-        infoPanelSelection.access === ShareAccessRights.None,
     };
   };
 

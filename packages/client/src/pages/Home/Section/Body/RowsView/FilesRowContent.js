@@ -43,9 +43,12 @@ import { RowContent } from "@docspace/shared/components/row-content";
 import withContent from "../../../../../HOCs/withContent";
 
 import { Base } from "@docspace/shared/themes";
-import { ROOMS_TYPE_TRANSLATIONS } from "@docspace/shared/constants";
 
-import { getFileTypeName } from "../../../../../helpers/filesUtils";
+import {
+  connectedCloudsTypeTitleTranslation,
+  getFileTypeName,
+  getRoomTypeName,
+} from "../../../../../helpers/filesUtils";
 import { SortByFieldName } from "SRC_DIR/helpers/constants";
 import { getSpaceQuotaAsText } from "@docspace/shared/utils/common";
 
@@ -54,14 +57,7 @@ const SimpleFilesRowContent = styled(RowContent)`
     width: 100%;
     max-width: min-content;
     min-width: inherit;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 0px;
-          `
-        : css`
-            margin-right: 0px;
-          `}
+    margin-inline-end: 0;
 
     @media ${desktop} {
       margin-top: 0px;
@@ -76,30 +72,17 @@ const SimpleFilesRowContent = styled(RowContent)`
   .new-items {
     min-width: 12px;
     width: max-content;
-    margin: 0 -2px -2px -2px;
+    margin: 0 -2px -2px;
   }
 
   .badge-version {
     width: max-content;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin: -2px -2px -2px 6px;
-          `
-        : css`
-            margin: -2px 6px -2px -2px;
-          `}
+    margin-block: -2px;
+    margin-inline: -2px 6px;
   }
 
   .bagde_alert {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 8px;
-          `
-        : css`
-            margin-right: 8px;
-          `}
+    margin-inline-end: 8px;
   }
 
   .badge-new-version {
@@ -107,16 +90,14 @@ const SimpleFilesRowContent = styled(RowContent)`
   }
 
   .row-content-link {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding: 12px 0px 0px 12px;
-          `
-        : css`
-            padding: 12px 12px 0px 0px;
-          `}
+    padding-block: 12px 0;
+    padding-inline: 0 12px;
     margin-top: ${(props) =>
-      props.theme.interfaceDirection === "rtl" ? "-14px" : "-12px"}
+      props.theme.interfaceDirection === "rtl" ? "-14px" : "-12px"};
+  }
+
+  .item-file-exst {
+    color: ${(props) => props.theme.filesSection.tableView.fileExstColor};
   }
 
   @media ${tablet} {
@@ -137,37 +118,17 @@ const SimpleFilesRowContent = styled(RowContent)`
     .tablet-edit,
     .can-convert {
       margin-top: 6px;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 24px;
-            `
-          : css`
-              margin-right: 24px;
-            `}
+      margin-inline-end: 24px;
     }
 
     .badge-version {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 22px;
-            `
-          : css`
-              margin-right: 22px;
-            `}
+      margin-inline-end: 22px;
     }
 
     .new-items {
       min-width: 16px;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin: 5px 0 0 24px;
-            `
-          : css`
-              margin: 5px 24px 0 0;
-            `}
+      margin-block: 5px 0;
+      margin-inline: 0 24px;
     }
   }
 
@@ -191,7 +152,7 @@ const SimpleFilesRowContent = styled(RowContent)`
     }
 
     .row-content-link {
-      padding: 12px 0px 0px 0px;
+      padding: 12px 0px 0px;
     }
   }
 `;
@@ -217,6 +178,7 @@ const FilesRowContent = ({
   isStatisticsAvailable,
   showStorageInfo,
   isIndexing,
+  displayFileExtension,
 }) => {
   const {
     contentLength,
@@ -255,6 +217,18 @@ const FilesRowContent = ({
           return elem;
         });
 
+      case SortByFieldName.UsedSpace:
+        if (providerKey)
+          return connectedCloudsTypeTitleTranslation(providerKey, t);
+        if (usedSpace === undefined) return "";
+
+        return getSpaceQuotaAsText(
+          t,
+          usedSpace,
+          quotaLimit,
+          isDefaultRoomsQuotaSet,
+        );
+
       default:
         if (isTrashFolder)
           return t("Files:DaysRemaining", {
@@ -265,37 +239,21 @@ const FilesRowContent = ({
     }
   };
 
-  const additionalComponent = () => {
-    if (
-      isRooms &&
-      isStatisticsAvailable &&
-      showStorageInfo &&
-      usedSpace !== undefined
-    ) {
-      let value = t(ROOMS_TYPE_TRANSLATIONS[item.roomType]);
-      const spaceQuota = getSpaceQuotaAsText(
-        t,
-        usedSpace,
-        quotaLimit,
-        isDefaultRoomsQuotaSet,
-      );
+  // const additionalComponent = () => {
+  //   if (isRooms) return getRoomTypeName(item.roomType, t);
 
-      if (!isMobile()) value = `${value} | ${spaceQuota}`;
+  //   if (!fileExst && !contentLength && !providerKey)
+  //     return `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(
+  //       "Translations:Files",
+  //     )}`;
 
-      return value;
-    }
+  //   if (fileExst) return `${fileExst.toUpperCase().replace(/^\./, "")}`;
 
-    if (!fileExst && !contentLength && !providerKey)
-      return `${foldersCount} ${t("Translations:Folders")} | ${filesCount} ${t(
-        "Translations:Files",
-      )}`;
+  //   return "";
+  // };
 
-    if (fileExst) return `${fileExst.toUpperCase().replace(/^\./, "")}`;
+  // const additionalInfo = additionalComponent();
 
-    return "";
-  };
-
-  const additionalInfo = additionalComponent();
   const mainInfo = contentComponent();
 
   return (
@@ -319,6 +277,9 @@ const FilesRowContent = ({
           dir="auto"
         >
           {titleWithoutExt}
+          {displayFileExtension && (
+            <span className="item-file-exst">{fileExst}</span>
+          )}
         </Link>
         <div className="badges">
           {badgesComponent}
@@ -348,17 +309,19 @@ const FilesRowContent = ({
           </Text>
         )}
 
-        <Text
-          containerMinWidth="90px"
-          containerWidth="10%"
-          as="div"
-          className="row-content-text"
-          fontSize="12px"
-          fontWeight={400}
-          truncate={true}
-        >
-          {additionalInfo}
-        </Text>
+        {/* {additionalInfo && (
+          <Text
+            containerMinWidth="90px"
+            containerWidth="10%"
+            as="div"
+            className="row-content-text"
+            fontSize="12px"
+            fontWeight={400}
+            truncate={true}
+          >
+            {additionalInfo}
+          </Text>
+        )} */}
       </SimpleFilesRowContent>
     </>
   );
@@ -395,7 +358,7 @@ export default inject(
   },
 )(
   observer(
-    withTranslation(["Files", "Translations", "Notifications"])(
+    withTranslation(["Files", "Translations", "Notifications", "Common"])(
       withContent(FilesRowContent),
     ),
   ),

@@ -27,6 +27,7 @@
 import { useRef } from "react";
 import { withTranslation } from "react-i18next";
 
+import { getTitleWithoutExtension } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
 import { inject, observer } from "mobx-react";
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
@@ -52,12 +53,12 @@ const RoomsItemHeader = ({
   setIsMobileHidden,
   isGracePeriod,
   setInvitePanelOptions,
-  setInviteUsersWarningDialogVisible,
+  setQuotaWarningDialogVisible,
   roomsView,
   setSelection,
   setBufferSelection,
   isArchive,
-  hasLinks,
+  isShared,
   showSearchBlock,
   setCalendarDay,
   openHistory,
@@ -65,6 +66,7 @@ const RoomsItemHeader = ({
   roomType,
   setIsScrollLocked,
   i18n,
+  displayFileExtension,
 }) => {
   const itemTitleRef = useRef();
 
@@ -79,10 +81,17 @@ const RoomsItemHeader = ({
     (selection.roomType === RoomsType.PublicRoom ||
       selection.roomType === RoomsType.FormRoom ||
       selection.roomType === RoomsType.CustomRoom) &&
-    hasLinks;
+    isShared;
 
   const badgeUrl = showPlanetIcon ? Planet12ReactSvgUrl : null;
   const isRoomMembersPanel = selection?.isRoom && roomsView === "info_members";
+
+  const isFile = !!selection.fileExst;
+  let title = selection.title;
+
+  if (isFile) {
+    title = getTitleWithoutExtension(selection, false);
+  }
 
   const onSelectItem = () => {
     setSelection([]);
@@ -95,7 +104,7 @@ const RoomsItemHeader = ({
     const parentRoomId = infoPanelSelection.id;
 
     if (isGracePeriod) {
-      setInviteUsersWarningDialogVisible(true);
+      setQuotaWarningDialogVisible(true);
       return;
     }
 
@@ -116,7 +125,7 @@ const RoomsItemHeader = ({
       <div className="item-icon">
         <RoomIcon
           color={selection.logo?.color}
-          title={selection.title}
+          title={title}
           isArchive={isArchive}
           showDefault={showDefaultRoomIcon}
           imgClassName={`icon ${selection.isRoom && "is-room"}`}
@@ -125,7 +134,12 @@ const RoomsItemHeader = ({
         />
       </div>
 
-      <Text className="text">{selection.title}</Text>
+      <Text className="text" title={title} dir="auto">
+        {title}
+        {isFile && displayFileExtension && (
+          <span className="file-extension">{selection.fileExst}</span>
+        )}
+      </Text>
 
       <div className="info_title-icons">
         {isRoomMembersPanel && (
@@ -176,6 +190,7 @@ export default inject(
     selectedFolderStore,
     filesStore,
     infoPanelStore,
+    filesSettingsStore,
     publicRoomStore,
   }) => {
     const {
@@ -187,6 +202,8 @@ export default inject(
       setCalendarDay,
       setIsScrollLocked,
     } = infoPanelStore;
+
+    const { displayFileExtension } = filesSettingsStore;
     const { externalLinks } = publicRoomStore;
 
     const selection = infoPanelSelection.length > 1 ? null : infoPanelSelection;
@@ -207,8 +224,7 @@ export default inject(
       isGracePeriod: currentTariffStatusStore.isGracePeriod,
 
       setInvitePanelOptions: dialogsStore.setInvitePanelOptions,
-      setInviteUsersWarningDialogVisible:
-        dialogsStore.setInviteUsersWarningDialogVisible,
+      setQuotaWarningDialogVisible: dialogsStore.setQuotaWarningDialogVisible,
 
       setSelection: filesStore.setSelection,
       setBufferSelection: filesStore.setBufferSelection,
@@ -217,6 +233,10 @@ export default inject(
       setCalendarDay,
       roomType,
       setIsScrollLocked,
+      isShared: selection?.shared,
+      roomType,
+
+      displayFileExtension,
     };
   },
 )(

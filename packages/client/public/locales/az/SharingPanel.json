@@ -3,6 +3,5 @@
   "FormFilling": "Formanın doldurulması",
   "LinkName": "Keçid adı",
   "ShareEmailBody": "Sizə {{itemName}} sənədinə giriş icazəsi verildi. Sənədi hazırda açmaq üçün aşağıdakı linki klikləyin: {{shareLink}}.",
-  "ShareEmailSubject": "Sizə {{itemName}} sənədinə giriş icazəsi verildi ",
-  "SharingSettingsTitle": "Paylaşma sazlamaları"
+  "ShareEmailSubject": "Sizə {{itemName}} sənədinə giriş icazəsi verildi "
 }

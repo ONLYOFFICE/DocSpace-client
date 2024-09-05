@@ -60,8 +60,13 @@ const PureConnectDialogContainer = (props) => {
     saveAfterReconnectOAuth,
     setSaveAfterReconnectOAuth,
     setThirdPartyAccountsInfo,
+    connectingStorages,
   } = props;
   const { title, link, token, provider_id, provider_key, key } = item;
+
+  const connectItem = connectingStorages.find(
+    (el) => el.providerKey === provider_key,
+  );
 
   const provider = providers.find((el) => el.provider_id === item.provider_id);
   const folderTitle = provider ? provider.customer_title : title;
@@ -81,11 +86,7 @@ const PureConnectDialogContainer = (props) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const isAccount = !!link;
-  const showUrlField =
-    provider_key === "SharePoint" ||
-    key === "SharePoint" ||
-    (!isConnectDialogReconnect &&
-      (provider_key === "WebDav" || key === "WebDav"));
+  const showUrlField = !!connectItem?.requiredConnectionUrl;
 
   const header = isConnectDialogReconnect
     ? t("Common:ReconnectStorage")
@@ -169,7 +170,7 @@ const PureConnectDialogContainer = (props) => {
         provider_id,
       )
         .then(async () => {
-          await setThirdPartyAccountsInfo();
+          await setThirdPartyAccountsInfo(t);
         })
         .catch((err) => {
           toastr.error(err);
@@ -416,6 +417,7 @@ export default inject(
       saveThirdParty,
       openConnectWindow,
       fetchThirdPartyProviders,
+      connectingStorages,
     } = filesSettingsStore.thirdPartyStore;
     const { folderFormValidation } = settingsStore;
 
@@ -458,6 +460,7 @@ export default inject(
       setSaveAfterReconnectOAuth,
       setIsConnectDialogReconnect,
       setThirdPartyAccountsInfo,
+      connectingStorages,
     };
   },
 )(observer(ConnectDialog));

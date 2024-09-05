@@ -35,7 +35,6 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
 import { inject, observer } from "mobx-react";
 import { getConvertedSize } from "@docspace/shared/utils/common";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const ModalDialogContainer = styled(ModalDialog)`
   .cannot-downgrade-plan {
@@ -73,7 +72,7 @@ const ChangePricingPlanDialog = ({
         You wish to downgrade the team to
         <strong>{{ usersCount: managersCount }}</strong>
         admins/power users, and current number of such users in your
-        {{ productName: PRODUCT_NAME }} is
+        {{ productName: t("Common:ProductName") }} is
         <strong>{{ currentUsersCount: addedManagersCount }}</strong>
       </Trans>
     </Text>
@@ -98,11 +97,7 @@ const ChangePricingPlanDialog = ({
       isLarge
       isLoading={!ready}
     >
-      <ModalDialog.Header>
-        <Text isBold fontSize="21px">
-          {t("ChangePricingPlan")}
-        </Text>
-      </ModalDialog.Header>
+      <ModalDialog.Header>{t("ChangePricingPlan")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text fontSize="13px" isBold className="cannot-downgrade-plan">
           {t("CannotChangePlan")}

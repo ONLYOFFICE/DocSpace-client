@@ -112,6 +112,9 @@ declare global {
         url?: string;
       };
       imageThumbnails?: boolean;
+      oauth2: {
+        origin: string;
+      };
       editor?: {
         requestClose: boolean;
       };

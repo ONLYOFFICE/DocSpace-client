@@ -5,6 +5,7 @@
   "ExpiredCode": "Codul nu mai este valabil. Solicitați un nou cod și încercați din nou.",
   "ForgotPassword": "Ați uitat parola?",
   "InvalidCode": "Codul nevalid. Încercaţi din nou.",
+  "LDAPUsernamePlaceholder": "Nume de utilizator al {{ldap_domain}}",
   "MessageAuthorize": "Trebuie să vă conectați cu contul pentru a continua",
   "MessageEmailConfirmed": "Adresa dvs. de e-mail activată cu succes.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Introduceți email cu care ai creat contul. Instrucțiunile pentru recuperarea parolei vor fi trimise pe adresa dvs. de email.",
@@ -20,5 +21,7 @@
   "RegistrationEmailWatermark": "E-mail",
   "RememberHelper": "Durata sesiunii implicită este de 20 de minute. Bifați caseta de selectare pentru a prelungi durata până la un an. Pentru stabilirea perioadei personalizate, accesați Setările.",
   "ResendCode": "Retrimite codul",
+  "SignInLDAP": "Conectare la: {{ldap_domain}}",
+  "SignInLdapHelper": "Utilizați datele de autentificare pentru domeniul corporativ",
   "UserIsAlreadyRegistered": "Utilizatorul <1>{{email}}</1> este deja înregistrat în acest spațiu {{productName}}, introduceţi parola dvs sau reveniți pentru a continua cu un alt e-mail."
 }

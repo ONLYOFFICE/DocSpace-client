@@ -140,7 +140,7 @@ const Footer = React.memo(
             isDisabled={
               !withFooterInput
                 ? disableSubmitButton
-                : disableSubmitButton && !currentFooterInputValue.trim()
+                : disableSubmitButton || !currentFooterInputValue.trim()
             }
             onClick={onSubmit}
           />

@@ -24,13 +24,57 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 import {
   ShareAccessRights,
   RoomsType,
   EmployeeType,
 } from "@docspace/shared/enums";
+import { globalColors } from "@docspace/shared/themes";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
+
+/**
+ * @param {RoomsType} roomType
+ * @param {(key: string) => string} t
+ * @returns {string}
+ */
+const getRoomAdminDescription = (roomType, t) => {
+  switch (roomType) {
+    case RoomsType.FormRoom:
+      return t("Translations:RoleRoomAdminFormRoomDescription");
+
+    default:
+      return t("Translations:RoleRoomAdminDescription");
+  }
+};
+/**
+ * @param {RoomsType} roomType
+ * @param {(key: string)=> string} t
+ * @returns {string}
+ */
+const getPowerUserDescription = (roomType, t) => {
+  switch (roomType) {
+    case RoomsType.FormRoom:
+      return t("Translations:RolePowerUserFormRoomDescription");
+
+    default:
+      return t("Translations:RolePowerUserDescription");
+  }
+};
+
+/**
+ * @param {RoomsType} roomType
+ * @param {(key: string)=> string} t
+ * @returns {string}
+ */
+const getFormFillerDescription = (roomType, t) => {
+  switch (roomType) {
+    case RoomsType.FormRoom:
+      return t("Translations:RoleFormFillerFormRoomDescription");
+
+    default:
+      return t("Translations:RoleFormFillerDescription");
+  }
+};
 
 export const getAccessOptions = (
   t,
@@ -44,12 +88,12 @@ export const getAccessOptions = (
   const accesses = {
     portalAdmin: {
       key: "portalAdmin",
-      label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
+      label: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
       description: t("Translations:RolePortalAdminDescription", {
-        productName: PRODUCT_NAME,
+        productName: t("Common:ProductName"),
       }),
       ...(!standalone && { quota: t("Common:Paid") }),
-      color: "#EDC409",
+      color: globalColors.favoritesStatus,
       access:
         roomType === -1 ? EmployeeType.Admin : ShareAccessRights.FullAccess,
       type: "admin",
@@ -57,9 +101,9 @@ export const getAccessOptions = (
     roomAdmin: {
       key: "roomAdmin",
       label: t("Common:RoomAdmin"),
-      description: t("Translations:RoleRoomAdminDescription"),
+      description: getRoomAdminDescription(roomType, t),
       ...(!standalone && { quota: t("Common:Paid") }),
-      color: "#EDC409",
+      color: globalColors.favoritesStatus,
       access:
         roomType === -1 ? EmployeeType.User : ShareAccessRights.RoomManager,
       type: "manager",
@@ -67,9 +111,9 @@ export const getAccessOptions = (
     collaborator: {
       key: "collaborator",
       label: t("Common:PowerUser"),
-      description: t("Translations:RolePowerUserDescription"),
+      description: getPowerUserDescription(roomType, t),
       ...(!standalone && { quota: t("Common:Paid") }),
-      color: "#EDC409",
+      color: globalColors.favoritesStatus,
       access:
         roomType === -1
           ? EmployeeType.Collaborator
@@ -93,7 +137,7 @@ export const getAccessOptions = (
     formFiller: {
       key: "formFiller",
       label: t("Translations:RoleFormFiller"),
-      description: t("Translations:RoleFormFillerDescription"),
+      description: getFormFillerDescription(roomType, t),
       access: ShareAccessRights.FormFilling,
       type: "user",
     },
@@ -214,4 +258,26 @@ export const getTopFreeRole = (t, roomType) => {
     (item) => !checkIfAccessPaid(item.access) && item.key !== "s1",
   );
   return freeAccesses[0];
+};
+
+export const isPaidUserRole = (selectedAccess) => {
+  return (
+    selectedAccess === ShareAccessRights.FullAccess ||
+    selectedAccess === ShareAccessRights.Collaborator ||
+    selectedAccess === ShareAccessRights.RoomManager
+  );
+};
+
+export const getFreeUsersTypeArray = () => {
+  return [EmployeeType.Guest];
+};
+
+export const getFreeUsersRoleArray = () => {
+  return [
+    ShareAccessRights.Comment,
+    ShareAccessRights.Editing,
+    ShareAccessRights.FormFilling,
+    ShareAccessRights.ReadOnly,
+    ShareAccessRights.Review,
+  ];
 };

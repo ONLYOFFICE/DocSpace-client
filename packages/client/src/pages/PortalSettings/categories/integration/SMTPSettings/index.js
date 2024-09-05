@@ -38,12 +38,8 @@ import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 let timerId = null;
 const SMTPSettings = (props) => {
-  const {
-    setInitSMTPSettings,
-    organizationName,
-    currentColorScheme,
-    integrationSettingsUrl,
-  } = props;
+  const { setInitSMTPSettings, currentColorScheme, integrationSettingsUrl } =
+    props;
 
   const { t, ready } = useTranslation([
     "SMTPSettings",
@@ -61,8 +57,6 @@ const SMTPSettings = (props) => {
     setIsInit(true);
   };
   useEffect(() => {
-    setDocumentTitle(t("Settings:SMTPSettings"));
-
     timerId = setTimeout(() => {
       setIsLoading(true);
     }, 400);
@@ -75,6 +69,10 @@ const SMTPSettings = (props) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (ready) setDocumentTitle(t("Settings:SMTPSettings"));
+  }, [ready]);
+
   const isLoadingContent = isLoading || !ready;
 
   if (!isLoading && !isInit) return <></>;
@@ -85,7 +83,9 @@ const SMTPSettings = (props) => {
     <StyledComponent>
       <div className="smtp-settings_main-title">
         <Text className="smtp-settings_description">
-          {t("Settings:SMTPSettingsDescription", { organizationName })}
+          {t("Settings:SMTPSettingsDescription", {
+            organizationName: t("Common:OrganizationName"),
+          })}
         </Text>
         <Link
           className="link-learn-more"
@@ -104,13 +104,11 @@ const SMTPSettings = (props) => {
 };
 
 export default inject(({ settingsStore, setup }) => {
-  const { organizationName, currentColorScheme, integrationSettingsUrl } =
-    settingsStore;
+  const { currentColorScheme, integrationSettingsUrl } = settingsStore;
   const { setInitSMTPSettings } = setup;
 
   return {
     setInitSMTPSettings,
-    organizationName,
     currentColorScheme,
     integrationSettingsUrl,
   };

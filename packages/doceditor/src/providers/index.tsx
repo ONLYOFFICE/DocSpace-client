@@ -24,9 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TUser } from "@docspace/shared/api/people/types";
-import { TSettings } from "@docspace/shared/api/settings/types";
 import { Toast } from "@docspace/shared/components/toast/Toast";
+import type { TUser } from "@docspace/shared/api/people/types";
+import type {
+  TGetColorTheme,
+  TSettings,
+} from "@docspace/shared/api/settings/types";
+import type { ThemeKeys } from "@docspace/shared/enums";
 
 import ThemeProvider from "./ThemeProvider";
 import TranslationProvider from "./TranslationProvider";
@@ -35,6 +39,8 @@ import ErrorProvider from "./ErrorProvider";
 export type TContextData = {
   user: TUser | undefined;
   settings: TSettings | undefined;
+  systemTheme: ThemeKeys | undefined;
+  colorTheme: TGetColorTheme | undefined;
 };
 
 export type TProviders = {
@@ -42,9 +48,9 @@ export type TProviders = {
   contextData: TContextData;
 };
 
-const Providers = ({ children, contextData, api_host, timer }: TProviders) => {
+const Providers = ({ children, contextData }: TProviders) => {
   return (
-    <TranslationProvider {...contextData} api_host={api_host} timer={timer}>
+    <TranslationProvider {...contextData}>
       <ThemeProvider {...contextData}>
         <ErrorProvider {...contextData}>
           {children}

@@ -3,6 +3,5 @@
   "FormFilling": "Попълване на формуляр",
   "LinkName": "Име на линка",
   "ShareEmailBody": "Даден Ви е достъп до документ {{itemName}}. Кликнете върху връзката долу, за да отворите документа сега: {{shareLink}}.",
-  "ShareEmailSubject": "Даден Ви е достъп до документ {{itemName}}",
-  "SharingSettingsTitle": "Настройки за споделяне"
+  "ShareEmailSubject": "Даден Ви е достъп до документ {{itemName}}"
 }

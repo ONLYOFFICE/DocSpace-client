@@ -1,0 +1,12 @@
+{
+  "BackToRoom": "Nazad u prostoriju",
+  "CheckReadyForms": "Proveri spremne formulare",
+  "Description": "Vaš formular je završen i sačuvan",
+  "DescriptionForAnonymous": "Podneli ste popunjeni PDF formular kome je dodeljen jedinstven broj. Da biste proverili status, kontaktirajte vlasnika formulara i pružite dodeljeni broj.",
+  "DescriptionForRegisteredUser": "Popunjeni PDF je sačuvan i dostupan u Završeno folderu. Da biste proverili status, kontaktirajte vlasnika formulara i pružite dodeljeni broj.",
+  "FillItOutAgain": "Popuni ponovo",
+  "FormCompletedSuccessfully": "Formular je završen",
+  "FormNumber": "Broj formulara:",
+  "FormOwner": "Vlasnik formulara",
+  "Title": "Formular je završen"
+}

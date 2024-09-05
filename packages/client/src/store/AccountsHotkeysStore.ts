@@ -28,6 +28,7 @@ import { makeAutoObservable } from "mobx";
 import { isMobile } from "@docspace/shared/utils";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 import { TUser, TUserGroup } from "@docspace/shared/api/people/types";
+import { TABLE_HEADER_HEIGHT } from "@docspace/shared/components/table/Table.constants";
 
 type AccountsType = TUser | TUserGroup;
 
@@ -153,6 +154,13 @@ class AccountsHotkeysStore {
       ? document.querySelector("#customScrollBar > .scroll-wrapper > .scroller")
       : document.getElementsByClassName("section-scroll")[0];
 
+    const stickySection = document.querySelector(".section-sticky-container");
+    const stickySectionHeight =
+      stickySection?.getBoundingClientRect().height ?? 0;
+
+    const tableHeaderHeight =
+      this.peopleStore.viewAs === "table" ? TABLE_HEADER_HEIGHT : 0;
+
     const scrollRect = scroll?.getBoundingClientRect();
 
     if (scrollRect && scroll) {
@@ -160,12 +168,9 @@ class AccountsHotkeysStore {
         const el = item[0] as HTMLElement;
         const rect = el.getBoundingClientRect();
 
-        const rectHeight =
-          this.peopleStore.viewAs === "table" ? rect.height * 2 : rect.height;
-
         if (
           scrollRect.top + scrollRect.height - rect.height > rect.top &&
-          scrollRect.top < rect.top + el.offsetHeight - rectHeight
+          scrollRect.top + stickySectionHeight + tableHeaderHeight < rect.top
         ) {
           // console.log("element is visible");
         } else {
@@ -224,6 +229,19 @@ class AccountsHotkeysStore {
       : this.peopleStore.groupsStore;
 
     selectAll();
+  };
+
+  openItem = () => {
+    const someDialogIsOpen = checkDialogsOpen();
+    if (
+      this.isAccountsPage ||
+      this.accountsSelection.length !== 1 ||
+      someDialogIsOpen
+    )
+      return;
+
+    const item = this.accountsSelection[0];
+    this.peopleStore.groupsStore.openGroupAction(item.id, true, item.name);
   };
 
   activateHotkeys = (e: KeyboardEvent) => {

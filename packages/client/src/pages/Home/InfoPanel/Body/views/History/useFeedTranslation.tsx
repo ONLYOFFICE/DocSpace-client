@@ -18,8 +18,18 @@ export const useFeedTranslation = (
     case "FileRenamed":
       return t("InfoPanel:FileRenamed");
     case "FileMoved":
+      if (feed.data.fromParentTitle) {
+        return t("InfoPanel:FileMovedTo", {
+          folderTitle: feed.data.parentTitle,
+        });
+      }
       return t("InfoPanel:FileMoved");
     case "FileCopied":
+      if (feed.data.fromParentTitle) {
+        return t("InfoPanel:FileCopiedTo", {
+          folderTitle: feed.data.parentTitle,
+        });
+      }
       return t("InfoPanel:FileCopied");
     case "FileDeleted":
       return t("InfoPanel:FileDeleted");
@@ -38,7 +48,17 @@ export const useFeedTranslation = (
         <Trans
           t={t}
           ns="InfoPanel"
-          i18nKey="RoomCreated"
+          i18nKey="HistoryRoomCreated"
+          values={{ roomTitle: feed.data.title }}
+          components={{ 1: <strong /> }}
+        />
+      );
+    case "RoomCopied":
+      return (
+        <Trans
+          t={t}
+          ns="InfoPanel"
+          i18nKey="HistoryRoomCopied"
           values={{ roomTitle: feed.data.title }}
           components={{ 1: <strong /> }}
         />
@@ -61,9 +81,9 @@ export const useFeedTranslation = (
     case "DeletedRoomTags":
       return t("InfoPanel:DeletedRoomTags");
     case "RoomLogoCreated":
-      return t("InfoPanel:RoomLogoCreated");
+      return t("InfoPanel:RoomLogoChanged");
     case "RoomLogoDeleted":
-      return t("InfoPanel:RoomLogoDeleted");
+      return t("InfoPanel:RoomLogoChanged");
     case "RoomExternalLinkCreated":
       return t("InfoPanel:RoomExternalLinkCreated");
     case "RoomExternalLinkRenamed":
@@ -91,16 +111,28 @@ export const useFeedTranslation = (
           components={{ 1: <strong /> }}
         />
       );
+    case "RoomExternalLinkRevoked":
+      return (
+        <Trans
+          t={t}
+          ns="InfoPanel"
+          i18nKey="RoomExternalLinkRevoked"
+          values={{
+            linkTitle: feed.data.title || feed.data.sharedTo?.title,
+          }}
+          components={{ 1: <strong /> }}
+        />
+      );
     case "RoomCreateUser":
       return t("InfoPanel:RoomCreateUser");
     case "RoomUpdateAccessForUser":
-      return t("InfoPanel:RoomUpdateAccessForUser");
+      return t("InfoPanel:RoomUpdateAccess");
     case "RoomRemoveUser":
       return t("InfoPanel:RoomRemoveUser");
     case "RoomGroupAdded":
       return t("InfoPanel:RoomGroupAdded");
     case "RoomUpdateAccessForGroup":
-      return t("InfoPanel:RoomUpdateAccessForGroup");
+      return t("InfoPanel:RoomUpdateAccess");
     case "RoomGroupRemove":
       return t("InfoPanel:RoomGroupRemove");
     default:

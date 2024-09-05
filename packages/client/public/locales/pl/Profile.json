@@ -1,5 +1,6 @@
 {
   "ActiveSessions": "Aktywne sesje",
+  "AutoDeleteTitle": "Wszystkie sesje starsze niż 60 dni zostaną automatycznie usunięte.",
   "ChangeEmailSuccess": "E-mail został pomyślnie zmieniony ",
   "ChangePasswordAfterLoggingOut": "Zmień hasło po wylogowaniu",
   "ConnectSocialNetworks": "Podłącz swoje sieci społecznościowe",
@@ -14,7 +15,6 @@
   "InterfaceTheme": "Motyw interfejsu",
   "LightTheme": "Motyw jasny",
   "LogoutActiveConnection": "Wyloguj z aktywnego połączenia",
-  "LogoutAllActiveConnections": "Wyloguj ze wszystkich aktywnych połączeń",
   "LogoutAllActiveSessionsDescription": "Wszystkie aktywne połączenia, oprócz niniejszego zostaną wylogowane, ponieważ jest ono obecnie w użyciu.",
   "LogoutBtn": "Wyloguj",
   "LogoutDescription": "Uwaga. Wszystkie aktywne połączenia, oprócz niniejszego zostaną wylogowane, ponieważ jest ono obecnie w użyciu.",
@@ -27,5 +27,6 @@
   "SuccessLogout": "Aktywne połączenie zostało wylogowane: {{platform}}, {{browser}}",
   "SystemTheme": "Użyj motywu systemowego",
   "SystemThemeDescription": "Automatycznie przełączaj się między jasnym i ciemnym motywem, kiedy robi to Twój system.",
+  "TerminateAllSessions": "Zakończ wszystkie sesje z wyjątkiem bieżącej",
   "TwoFactorDescription": "Weryfikacja dwuetapowa za pośrednictwem aplikacji generującej kody została włączona przez administratora dla wszystkich użytkowników."
 }

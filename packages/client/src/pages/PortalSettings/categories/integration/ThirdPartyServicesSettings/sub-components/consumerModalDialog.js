@@ -279,7 +279,7 @@ class ConsumerModalDialog extends React.Component {
       >
         <ModalDialog.Header>{selectedConsumer.title}</ModalDialog.Header>
         <ModalDialog.Body>
-          <Box paddingProp="0 0 16px">{consumerInstruction}</Box>
+          <Box paddingProp="16px 0 16px">{consumerInstruction}</Box>
           <React.Fragment>
             {selectedConsumer.props.map((prop, i) =>
               this.inputsRender(prop, i),

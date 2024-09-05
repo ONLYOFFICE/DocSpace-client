@@ -39,4 +39,7 @@ export const enum ValidationResult {
   Invalid = 1,
   Expired = 2,
   TariffLimit = 3,
+  UserExisted = 4,
+  UserExcluded = 5,
+  QuotaFailed = 6,
 }

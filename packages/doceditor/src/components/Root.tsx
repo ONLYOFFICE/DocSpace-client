@@ -25,15 +25,21 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 "use client";
+import dynamic from "next/dynamic";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 
-import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
+const ErrorContainer = dynamic(
+  () => import("@docspace/shared/components/error-container/ErrorContainer"),
+  {
+    ssr: false,
+  },
+);
 
 import { TResponse } from "@/types";
-import useError from "@/hooks/useError";
 
+import useError from "@/hooks/useError";
 import useRootInit from "@/hooks/useRootInit";
 import useDeepLink from "@/hooks/useDeepLink";
 import useSelectFileDialog from "@/hooks/useSelectFileDialog";
@@ -44,14 +50,31 @@ import useFilesSettings from "@/hooks/useFilesSettings";
 import useUpdateSearchParamId from "@/hooks/useUpdateSearchParamId";
 import useStartFillingSelectDialog from "@/hooks/useStartFillingSelectDialog";
 
-import DeepLink from "./deep-link";
 import Editor from "./Editor";
-import SelectFileDialog from "./SelectFileDialog";
-import SelectFolderDialog from "./SelectFolderDialog";
-import SharingDialog from "./ShareDialog";
+
+const DeepLink = dynamic(() => import("./deep-link"), {
+  ssr: false,
+});
+const SelectFileDialog = dynamic(() => import("./SelectFileDialog"), {
+  ssr: false,
+});
+const SelectFolderDialog = dynamic(() => import("./SelectFolderDialog"), {
+  ssr: false,
+});
+const SharingDialog = dynamic(() => import("./ShareDialog"), {
+  ssr: false,
+});
+const StartFillingSelectorDialog = dynamic(
+  () => import("./StartFillingSelectDialog"),
+  {
+    ssr: false,
+  },
+);
+const ConflictResolveDialog = dynamic(() => import("./ConflictResolveDialog"), {
+  ssr: false,
+});
+
 import { calculateAsideHeight } from "@/utils";
-import StartFillingSelectorDialog from "./StartFillingSelectDialog";
-import ConflictResolveDialog from "./ConflictResolveDialog";
 
 const Root = ({
   settings,
@@ -64,7 +87,6 @@ const Root = ({
   doc,
   fileId,
   hash,
-  timer,
 }: TResponse) => {
   const editorRef = React.useRef<null | HTMLElement>(null);
 
@@ -76,14 +98,10 @@ const Root = ({
   const isSkipError =
     error?.status === "not-found" ||
     (error?.status === "access-denied" && !!error.editorUrl) ||
-    error?.status === "not-supported";
+    error?.status === "not-supported" ||
+    error?.status === "quota-exception";
 
   const { t } = useTranslation(["Editor", "Common"]);
-
-  useEffect(() => {
-    console.log("editor timer: ", timer);
-    console.log("openEdit timer: ", config?.timer);
-  }, [config?.timer, timer]);
 
   useRootInit({
     documentType: config?.documentType,
@@ -102,6 +120,7 @@ const Root = ({
   const { filesSettings } = useFilesSettings({});
   const { socketHelper } = useSocketHelper({
     socketUrl: user ? settings?.socketUrl ?? "" : "",
+    user,
   });
   const {
     onSDKRequestSaveAs,
@@ -134,6 +153,7 @@ const Root = ({
     onSDKRequestStartFilling,
     conflictDataDialog,
     headerLabelSFSDialog,
+    onDownloadAs,
   } = useStartFillingSelectDialog(fileInfo);
 
   const {
@@ -210,6 +230,8 @@ const Root = ({
           fileInfo={fileInfo}
           errorMessage={error?.message}
           isSkipError={!!isSkipError}
+          onDownloadAs={onDownloadAs}
+          filesSettings={filesSettings}
           onSDKRequestSharingSettings={onSDKRequestSharingSettings}
           onSDKRequestSaveAs={onSDKRequestSaveAs}
           onSDKRequestInsertImage={onSDKRequestInsertImage}
@@ -258,7 +280,9 @@ const Root = ({
           socketHelper={socketHelper}
           filesSettings={filesSettings}
           headerLabel={headerLabelSFSDialog}
-          isVisible={isVisibleStartFillingSelectDialog}
+          isVisible={
+            isVisibleStartFillingSelectDialog && !conflictDataDialog.visible
+          }
           onClose={onCloseStartFillingSelectDialog}
           onSubmit={onSubmitStartFillingSelectDialog}
           getIsDisabled={getIsDisabledStartFillingSelectDialog}

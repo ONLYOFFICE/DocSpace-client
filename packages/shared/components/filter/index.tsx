@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
 import { isTablet, isIOS } from "react-device-detect";
@@ -99,11 +98,6 @@ const FilterInput = React.memo(
     const { t } = useTranslation(["Common"]);
 
     const mountRef = React.useRef(true);
-    const { interfaceDirection } = useTheme();
-    const styleViewSelector =
-      interfaceDirection === "rtl"
-        ? { marginRight: "8px" }
-        : { marginLeft: "8px" };
     React.useEffect(() => {
       const value = getViewSettingsData?.();
 
@@ -260,7 +254,7 @@ const FilterInput = React.memo(
                 id={
                   viewAs === "tile" ? "view-switch--row" : "view-switch--tile"
                 }
-                style={styleViewSelector}
+                style={{ marginInlineStart: "8px" }}
                 viewAs={viewAs === "table" ? "row" : viewAs}
                 viewSettings={viewSettings}
                 onChangeView={onChangeViewAs}

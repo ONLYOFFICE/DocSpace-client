@@ -78,7 +78,6 @@ import {
   COOKIE_EXPIRATION_YEAR,
   MEDIA_VIEW_URL,
   WRONG_PORTAL_NAME_URL,
-  BRAND_NAME,
 } from "../constants";
 import { Dark, Base, TColorScheme } from "../themes";
 import { toastr } from "../components/toast";
@@ -97,6 +96,8 @@ const isDesktopEditors = window.AscDesktopEditor !== undefined;
 const systemTheme = getSystemTheme();
 
 class SettingsStore {
+  isFirstLoaded = false;
+
   isLoading = false;
 
   interfaceDirection = "";
@@ -157,15 +158,11 @@ class SettingsStore {
     timePattern: "h:mm tt",
   };
 
-  organizationName = BRAND_NAME;
-
   greetingSettings = "Web Office Applications";
 
   enableAdmMess = false;
 
   enabledJoin = false;
-
-  urlLicense = "https://gnu.org/licenses/gpl-3.0.html";
 
   urlSupport = "https://helpdesk.onlyoffice.com/";
 
@@ -260,6 +257,8 @@ class SettingsStore {
 
   apiDocsLink = null;
 
+  licenseUrl = null;
+
   bookTrainingEmail = null;
 
   hotkeyPanelVisible = false;
@@ -335,7 +334,7 @@ class SettingsStore {
   };
 
   get ldapSettingsUrl() {
-    //TODO: Change to real link
+    // TODO: Change to real link
     return `${this.helpLink}/administration/docspace-settings.aspx#LdapSettings_block`;
   }
 
@@ -662,6 +661,7 @@ class SettingsStore {
 
     this.setIsLoading(false);
     this.setIsLoaded(true);
+    this.setIsFirstLoaded(true);
   };
 
   setRoomsMode = (mode: boolean) => {
@@ -674,6 +674,10 @@ class SettingsStore {
 
   setIsLoaded = (isLoaded: boolean) => {
     this.isLoaded = isLoaded;
+  };
+
+  setIsFirstLoaded = (isFirstLoaded: boolean) => {
+    this.isFirstLoaded = isFirstLoaded;
   };
 
   setCultures = (cultures: string[]) => {

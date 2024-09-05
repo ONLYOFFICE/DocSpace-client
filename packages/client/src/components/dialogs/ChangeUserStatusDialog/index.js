@@ -24,23 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { memo } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
-
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import { withTranslation } from "react-i18next";
 
 import { EmployeeStatus } from "@docspace/shared/enums";
 import ModalDialogContainer from "../ModalDialogContainer";
 import { inject, observer } from "mobx-react";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
+
+import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 
 class ChangeUserStatusDialogComponent extends React.Component {
   constructor(props) {
@@ -49,15 +47,6 @@ class ChangeUserStatusDialogComponent extends React.Component {
     this.state = { isRequestRunning: false };
   }
 
-  onClickPayments = () => {
-    const paymentPageUrl = combineUrl(
-      "/portal-settings",
-      "/payments/portal-payments",
-    );
-
-    toastr.clear();
-    window.DocSpace.navigate(paymentPageUrl);
-  };
   onChangeUserStatus = () => {
     const {
       updateUserStatus,
@@ -84,22 +73,7 @@ class ChangeUserStatusDialogComponent extends React.Component {
           toastr.success(t("PeopleTranslations:SuccessChangeUserStatus"));
         })
         .catch((err) => {
-          toastr.error(
-            <>
-              <Text>{t("Common:QuotaPaidUserLimitError")}</Text>
-              <Link
-                color="#5387AD"
-                isHovered={true}
-                onClick={this.onClickPayments}
-              >
-                {t("Common:PaymentsTitle")}
-              </Link>
-            </>,
-            false,
-            0,
-            true,
-            true,
-          );
+          toastr.error(<PaidQuotaLimitError />, false, 0, true, true);
         })
         .finally(() => {
           this.setState({ isRequestRunning: false }, () => {
@@ -132,8 +106,10 @@ class ChangeUserStatusDialogComponent extends React.Component {
       header = onlyOneUser ? t("DisableUser") : t("DisableUsers");
 
       bodyText = onlyOneUser
-        ? t("DisableUserDescription", { productName: PRODUCT_NAME })
-        : t("DisableUsersDescription", { productName: PRODUCT_NAME });
+        ? t("DisableUserDescription", { productName: t("Common:ProductName") })
+        : t("DisableUsersDescription", {
+            productName: t("Common:ProductName"),
+          });
 
       bodyText = bodyText + t("DisableGeneralDescription");
 
@@ -142,8 +118,8 @@ class ChangeUserStatusDialogComponent extends React.Component {
       header = onlyOneUser ? t("EnableUser") : t("EnableUsers");
 
       bodyText = onlyOneUser
-        ? t("EnableUserDescription", { productName: PRODUCT_NAME })
-        : t("EnableUsersDescription", { productName: PRODUCT_NAME });
+        ? t("EnableUserDescription", { productName: t("Common:ProductName") })
+        : t("EnableUsersDescription", { productName: t("Common:ProductName") });
 
       buttonLabelSave = t("Common:Enable");
     }

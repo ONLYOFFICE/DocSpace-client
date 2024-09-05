@@ -1,0 +1,12 @@
+{
+  "BackToRoom": "Voltar para a sala",
+  "CheckReadyForms": "Verificar formulários prontos",
+  "Description": "Seu formulário foi concluído e salvo",
+  "DescriptionForAnonymous": "Você enviou o formulário PDF preenchido ao qual foi atribuído um número exclusivo. Para verificar o status, entre em contato com o proprietário do formulário fornecendo o número atribuído.",
+  "DescriptionForRegisteredUser": "O formulário PDF preenchido é salvo e está disponível para você na pasta Concluído. Para verificar o status, entre em contato com o proprietário do formulário, fornecendo o número atribuído.",
+  "FillItOutAgain": "Preencha novamente",
+  "FormCompletedSuccessfully": "Formulário concluído com sucesso",
+  "FormNumber": "Número do formulário:",
+  "FormOwner": "Proprietário do formulário",
+  "Title": "O formulário está preenchido"
+}

@@ -73,6 +73,12 @@ const ActionsBlock = ({ t, textStyles, keyTextStyles, CtrlKey }) => {
           <Text {...keyTextStyles}> {CtrlKey} + x</Text>
         </>
       </Row>
+      <Row className="hotkeys_row">
+        <>
+          <Text {...textStyles}>{t("HotkeysRenameSelected")}</Text>
+          <Text {...keyTextStyles}> F2</Text>
+        </>
+      </Row>
     </>
   );
 };

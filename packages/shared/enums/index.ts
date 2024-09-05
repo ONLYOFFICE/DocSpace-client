@@ -24,6 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+export const enum ScopeType {
+  read = "read",
+  write = "write",
+  openid = "openid",
+}
+
+export const enum ScopeGroup {
+  files = "files",
+  accounts = "accounts",
+  profiles = "profiles",
+  rooms = "rooms",
+  openid = "openid",
+}
+
+export const enum AuthenticationMethod {
+  none = "none",
+  "client_secret_post" = "client_secret_post",
+}
+
 /**
  * Enum for employee activation status.
  * @readonly
@@ -123,8 +142,15 @@ export const enum FilterType {
   ArchiveOnly = 10,
   ByExtension = 11,
   MediaOnly = 12,
-  OFormTemplateOnly = 18,
-  OFormOnly = 19,
+  FillingFormsRooms = 13,
+  EditingRooms = 14,
+  ReviewRooms = 15,
+  ReadOnlyRooms = 16,
+  CustomRooms = 17,
+  PublicRooms = 20,
+  FormRooms = 21,
+  Pdf = 22,
+  PDFForm = 23,
 }
 
 /**
@@ -221,7 +247,7 @@ export const enum FolderType {
   ReadOnlyRoom = 18,
   CustomRoom = 19,
   Archive = 20,
-
+  PublicRoom = 22,
   Done = 25,
   InProgress = 26,
   SubFolderDone = 27,
@@ -454,7 +480,8 @@ export const enum ParseErrorTypes {
 }
 
 export const enum ButtonKeys {
-  enter = "enter",
+  enter = "Enter",
+  numpadEnter = "NumpadEnter",
   esc = "Escape",
   tab = "Tab",
 }
@@ -538,7 +565,6 @@ export const enum FilesSelectorExtendedFilterTypes {
   Media = "Media",
   Archives = "Archives",
   AllFiles = "AllFiles",
-  FormTemplates = "FormTemplates",
   Forms = "Forms",
 }
 
@@ -604,4 +630,22 @@ export const enum ExportRoomIndexTaskStatus {
   Completed = 2,
   Canceled = 3,
   Failed = 4,
+}
+
+export enum FileExtensions {
+  PDF = "pdf",
+  DOC = "doc",
+  DOCX = "docx",
+  DOCXF = "docxf",
+  XLSX = "xlsx",
+  PPTX = "pptx",
+}
+
+export enum ValidationStatus {
+  Ok = 0,
+  Invalid = 1,
+  Expired = 2,
+  Password = 3,
+  InvalidPassword = 4,
+  ExternalAccessDenied = 5,
 }

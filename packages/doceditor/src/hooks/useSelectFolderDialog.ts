@@ -119,6 +119,9 @@ const useSelectFolderDialog = ({}: UseSelectFolderDialogProps) => {
 
     if (!selectedItemSecurity) return false;
 
+    if ("Create" in selectedItemSecurity && !selectedItemSecurity.Create)
+      return true;
+
     return "CopyTo" in selectedItemSecurity
       ? !selectedItemSecurity?.CopyTo
       : !selectedItemSecurity.Copy;
@@ -136,4 +139,3 @@ const useSelectFolderDialog = ({}: UseSelectFolderDialogProps) => {
 };
 
 export default useSelectFolderDialog;
-

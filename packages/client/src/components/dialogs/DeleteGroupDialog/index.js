@@ -32,7 +32,6 @@ import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 import ModalDialogContainer from "../ModalDialogContainer";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const DeleteGroupDialog = (props) => {
   const {
@@ -67,7 +66,7 @@ const DeleteGroupDialog = (props) => {
       if (hasMoreGroups) {
         onDeleteAllGroups(t);
       } else {
-        onDeleteGroup(t, bufferSelection?.id || selection[0].id);
+        onDeleteGroup(t, bufferSelection?.id || selection[0]?.id);
       }
     } catch (err) {
       toastr.error(err.message);
@@ -90,10 +89,10 @@ const DeleteGroupDialog = (props) => {
         <Text>
           {hasMoreGroups
             ? t("DeleteDialog:DeleteAllGroupDescription", {
-                productName: PRODUCT_NAME,
+                productName: t("Common:ProductName"),
               })
             : t("DeleteDialog:DeleteGroupDescription", {
-                productName: PRODUCT_NAME,
+                productName: t("Common:ProductName"),
                 groupName,
               })}
         </Text>

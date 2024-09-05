@@ -24,56 +24,105 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { inject, observer } from "mobx-react";
-import { StyledHistoryLink } from "../../../styles/history";
-import { ActionByTarget } from "../FeedInfo";
 import { decode } from "he";
+import { withTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
+
 import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
-import { withTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
+import { RoomsType } from "@docspace/shared/enums";
+import { TTranslation } from "@docspace/shared/types";
+
+import { StyledHistoryLink } from "../../../styles/history";
+
+type TFeedData = {
+  access: number;
+  canEditAccess: boolean;
+  subjectType: number;
+  isOwner: boolean;
+  isLocked: boolean;
+  title?: string;
+  sharedTo?: {
+    title: string;
+    shareLink: string;
+    requestToken: string;
+    primary: boolean;
+    linkType: number;
+    isExpired: boolean;
+    internal: boolean;
+    id: string;
+    denyDownload: boolean;
+  };
+};
 
 interface HistoryRoomExternalLinkProps {
-  feed: any;
-  actionType: ActionByTarget<"roomTag">;
+  feedData: TFeedData;
+  roomId: number | string;
+  t: TTranslation;
+  canEditLink: boolean;
+  setEditLinkPanelIsVisible: (value: boolean) => void;
+  setLinkParams: (data: {
+    isEdit: boolean;
+    link: TFeedData;
+    roomId: number | string;
+    isFormRoom?: boolean;
+  }) => void;
+  isFormRoom?: boolean;
 }
 
 const HistoryRoomExternalLink = ({
   t,
-  feed,
-  actionType,
+  feedData,
   canEditLink,
   setEditLinkPanelIsVisible,
   setLinkParams,
+  roomId,
+  isFormRoom,
 }: HistoryRoomExternalLinkProps) => {
   const onEditLink = () => {
-    if (!feed.data.sharedTo) {
+    if (!feedData.sharedTo) {
       toastr.error(t("FeedLinkWasDeleted"));
       return;
     }
 
-    setLinkParams({ isEdit: true, link: feed.data });
+    setLinkParams({
+      isEdit: true,
+      link: feedData,
+      roomId,
+      isFormRoom,
+    });
     setEditLinkPanelIsVisible(true);
   };
 
-  if (actionType === "create")
-    return (
-      <StyledHistoryLink>
-        {canEditLink ? (
-          <Link className="text link" onClick={onEditLink}>
-            {decode(feed.data.title || feed.data.sharedTo?.title)}
-          </Link>
-        ) : (
-          <Text as="span" className="text">
-            {decode(feed.data.title || feed.data.sharedTo?.title)}
-          </Text>
-        )}
-      </StyledHistoryLink>
-    );
+  return (
+    <StyledHistoryLink>
+      {canEditLink ? (
+        <Link className="text link" onClick={onEditLink}>
+          {decode((feedData.title || feedData.sharedTo?.title) ?? "")}
+        </Link>
+      ) : (
+        <Text as="span" className="text">
+          {decode((feedData.title || feedData.sharedTo?.title) ?? "")}
+        </Text>
+      )}
+    </StyledHistoryLink>
+  );
 };
 
-export default inject(({ userStore, dialogsStore }) => ({
-  canEditLink: !(userStore.user.isVisitor || userStore.user.isCollaborator),
-  setEditLinkPanelIsVisible: dialogsStore.setEditLinkPanelIsVisible,
-  setLinkParams: dialogsStore.setLinkParams,
-}))(withTranslation(["InfoPanel"])(observer(HistoryRoomExternalLink)));
+export default inject<TStore>(({ dialogsStore, infoPanelStore }) => {
+  const { infoPanelSelection } = infoPanelStore;
+  const { setLinkParams, setEditLinkPanelIsVisible } = dialogsStore;
+  const { id, roomType, security } = infoPanelSelection!;
+  const { EditRoom } = security || {};
+
+  const isFormRoom = roomType === RoomsType.FormRoom;
+
+  return {
+    canEditLink: EditRoom,
+    setEditLinkPanelIsVisible,
+    setLinkParams,
+    roomId: id,
+    isFormRoom,
+  };
+})(withTranslation(["InfoPanel"])(observer(HistoryRoomExternalLink)));

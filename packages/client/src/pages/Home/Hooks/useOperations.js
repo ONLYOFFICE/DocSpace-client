@@ -41,7 +41,7 @@ const useOperations = ({
   itemsSelectionTitle,
   secondaryProgressDataStoreIcon,
   itemsSelectionLength,
-
+  disableUploadPanelOpen,
   setItemsSelectionTitle,
 }) => {
   const prevProps = React.useRef({
@@ -74,6 +74,7 @@ const useOperations = ({
   }, [isProgressFinished]);
 
   const showUploadPanel = () => {
+    if (disableUploadPanelOpen) return;
     setUploadPanelVisible(true);
 
     if (primaryProgressDataVisible && uploaded && converted)
@@ -121,7 +122,12 @@ const useOperations = ({
             ),
             refreshFiles()
           );
-
+        case "duplicate-room":
+          return toastr.success(
+            <Trans t={t} i18nKey="CopyItem" ns="Files">
+              {{ title }} copied
+            </Trans>,
+          );
         default:
           break;
       }

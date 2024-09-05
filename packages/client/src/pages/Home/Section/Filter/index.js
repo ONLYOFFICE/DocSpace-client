@@ -55,12 +55,9 @@ import {
   RoomsProviderType,
   RoomsType,
 } from "@docspace/shared/enums";
-import {
-  PRODUCT_NAME,
-  ROOMS_PROVIDER_TYPE_NAME,
-} from "@docspace/shared/constants";
+import { ROOMS_PROVIDER_TYPE_NAME } from "@docspace/shared/constants";
 
-import { getDefaultRoomName } from "SRC_DIR/helpers/filesUtils";
+import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
 
 import { SortByFieldName, TableVersions } from "SRC_DIR/helpers/constants";
 
@@ -472,7 +469,9 @@ const SectionFilterContent = ({
           newFilter.searchArea === RoomSearchArea.Active
             ? "rooms/shared"
             : "rooms/archived";
-        navigate(`${path}/filter?${newFilter.toUrlParams(userId)}`);
+        navigate(
+          `${path}/filter?${newFilter.toUrlParams(userId)}&hash=${new Date().getTime()}`,
+        );
       } else {
         const filterType = getFilterType(data) || null;
 
@@ -808,7 +807,9 @@ const SectionFilterContent = ({
 
           switch (+filter.role) {
             case EmployeeType.Admin:
-              label = t("Common:PortalAdmin", { productName: PRODUCT_NAME });
+              label = t("Common:PortalAdmin", {
+                productName: t("Common:ProductName"),
+              });
               break;
             case EmployeeType.User:
               label = t("Common:RoomAdmin");
@@ -1027,7 +1028,7 @@ const SectionFilterContent = ({
       if (roomsFilter.type) {
         const key = +roomsFilter.type;
 
-        const label = getDefaultRoomName(key, t);
+        const label = getRoomTypeName(key, t);
 
         filterValues.push({
           key: key,
@@ -1112,12 +1113,9 @@ const SectionFilterContent = ({
             label = t("Media");
             break;
           case FilterType.FilesOnly.toString():
-            label = t("AllFiles");
+            label = t("Translations:Files");
             break;
-          case FilterType.OFormTemplateOnly.toString():
-            label = t("FormsTemplates");
-            break;
-          case FilterType.OFormOnly.toString():
+          case FilterType.Pdf.toString():
             label = t("Forms");
             break;
         }
@@ -1348,7 +1346,9 @@ const SectionFilterContent = ({
           id: "filter_type-docspace-admin",
           key: EmployeeType.Admin,
           group: "filter-type",
-          label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
+          label: t("Common:PortalAdmin", {
+            productName: t("Common:ProductName"),
+          }),
         },
         {
           id: "filter_type-room-admin",
@@ -1648,16 +1648,16 @@ const SectionFilterContent = ({
           },
           ...folders,
           {
+            id: "filter_type-all-files",
+            key: FilterType.FilesOnly.toString(),
+            group: FilterGroups.filterType,
+            label: t("Translations:Files").toLowerCase(),
+          },
+          {
             id: "filter_type-documents",
             key: FilterType.DocumentsOnly.toString(),
             group: FilterGroups.filterType,
             label: t("Common:Documents").toLowerCase(),
-          },
-          {
-            id: "filter_type-presentations",
-            key: FilterType.PresentationsOnly.toString(),
-            group: FilterGroups.filterType,
-            label: t("Translations:Presentations").toLowerCase(),
           },
           {
             id: "filter_type-spreadsheets",
@@ -1666,27 +1666,20 @@ const SectionFilterContent = ({
             label: t("Translations:Spreadsheets").toLowerCase(),
           },
           {
-            id: "filter_type-form-templates",
-            key: FilterType.OFormTemplateOnly.toString(),
+            id: "filter_type-presentations",
+            key: FilterType.PresentationsOnly.toString(),
             group: FilterGroups.filterType,
-            label: t("FormsTemplates").toLowerCase(),
+            label: t("Translations:Presentations").toLowerCase(),
           },
           {
             id: "filter_type-forms",
-            key: FilterType.OFormOnly.toString(),
+            key: FilterType.Pdf.toString(),
             group: FilterGroups.filterType,
             label: t("Forms").toLowerCase(),
           },
           ...archives,
-
           ...images,
           ...media,
-          {
-            id: "filter_type-all-files",
-            key: FilterType.FilesOnly.toString(),
-            group: FilterGroups.filterType,
-            label: t("AllFiles").toLowerCase(),
-          },
         ];
 
     const subjectOptions = [
@@ -1977,16 +1970,9 @@ const SectionFilterContent = ({
       const options = [];
 
       const firstName = {
-        id: "sort-by_first-name",
-        key: "firstname",
-        label: t("Common:FirstName"),
-        default: true,
-      };
-
-      const lastName = {
-        id: "sort-by_last-name",
-        key: "lastname",
-        label: t("Common:LastName"),
+        id: "sort-by_displayname",
+        key: "displayname",
+        label: t("Common:Name"),
         default: true,
       };
 
@@ -2028,42 +2014,8 @@ const SectionFilterContent = ({
         hideableColumns.Storage = storage;
       }
 
-      options.push(firstName, lastName);
-
-      if (accountsViewAs === "table") {
-        const tableColumns = isInsideGroup
-          ? TABLE_INSIDE_GROUP_COLUMNS
-          : TABLE_PEOPLE_COLUMNS;
-
-        const columnsSizeInfoPanel = isInsideGroup
-          ? COLUMNS_INSIDE_GROUP_SIZE_INFO_PANEL
-          : COLUMNS_PEOPLE_SIZE_INFO_PANEL;
-
-        const availableSort = localStorage
-          ?.getItem(`${tableColumns}=${userId}`)
-          ?.split(",");
-
-        const infoPanelColumnsSize = localStorage
-          ?.getItem(`${columnsSizeInfoPanel}=${userId}`)
-          ?.split(" ");
-
-        availableSort?.forEach((columnTitle) => {
-          if (!hideableColumns[columnTitle]) return;
-
-          if (availableSort?.includes(columnTitle)) {
-            const idx = availableSort.findIndex((x) => x === columnTitle);
-            const hide =
-              infoPanelVisible &&
-              infoPanelColumnsSize &&
-              infoPanelColumnsSize[idx] === "0px";
-
-            !hide && options.push(hideableColumns[columnTitle]);
-          }
-        });
-      } else {
-        options.push(type, department, email);
-        if (showStorageInfo) options.push(storage);
-      }
+      options.push(firstName, type, department, email);
+      if (showStorageInfo) options.push(storage);
 
       return options;
     }
@@ -2078,6 +2030,13 @@ const SectionFilterContent = ({
         default: true,
       };
 
+      const people = {
+        id: "sort-by_people",
+        key: "membersCount",
+        label: t("Common:People"),
+        default: true,
+      };
+
       const manager = {
         id: "sort-by_manager",
         key: "manager",
@@ -2085,29 +2044,7 @@ const SectionFilterContent = ({
         default: true,
       };
 
-      groupsOptions.push(title);
-
-      if (accountsViewAs === "table") {
-        const availableSort = localStorage
-          ?.getItem(`${TABLE_GROUPS_COLUMNS}=${userId}`)
-          ?.split(",");
-
-        const infoPanelColumnsSize = localStorage
-          ?.getItem(`${COLUMNS_GROUPS_SIZE_INFO_PANEL}=${userId}`)
-          ?.split(" ");
-
-        if (availableSort?.includes("Head of Group")) {
-          const idx = availableSort.findIndex((x) => x === "Head of Group");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
-
-          !hide && groupsOptions.push(manager);
-        }
-      } else {
-        groupsOptions.push(manager);
-      }
+      groupsOptions.push(title, people, manager);
 
       return groupsOptions;
     }
@@ -2124,6 +2061,12 @@ const SectionFilterContent = ({
       id: "sort-by_modified",
       key: SortByFieldName.ModifiedDate,
       label: t("Common:LastModifiedDate"),
+      default: true,
+    };
+    const activityDate = {
+      id: "sort-by_activity",
+      key: SortByFieldName.ModifiedDate,
+      label: t("Common:LastActivityDate"),
       default: true,
     };
     const lastOpenedDate = {
@@ -2197,220 +2140,25 @@ const SectionFilterContent = ({
 
     commonOptions.push(name);
 
-    if (viewAs === "table") {
-      if (isRooms) {
-        const availableSort = localStorage
-          ?.getItem(`${TABLE_ROOMS_COLUMNS}=${userId}`)
-          ?.split(",");
-
-        const infoPanelColumnsSize = localStorage
-          ?.getItem(`${COLUMNS_ROOMS_SIZE_INFO_PANEL}=${userId}`)
-          ?.split(" ");
-
-        const hideOption = infoPanelVisible && infoPanelColumnsSize;
-
-        if (availableSort?.includes("Type")) {
-          const idx = availableSort.findIndex((x) => x === "Type");
-          const hide = hideOption && infoPanelColumnsSize[idx] === "0px";
-
-          !hide && commonOptions.push(roomType);
-        }
-
-        if (availableSort?.includes("Tags")) {
-          const idx = availableSort.findIndex((x) => x === "Tags");
-          const hide = hideOption && infoPanelColumnsSize[idx] === "0px";
-
-          !hide && commonOptions.push(tags);
-        }
-
-        if (availableSort?.includes("Owner")) {
-          const idx = availableSort.findIndex((x) => x === "Owner");
-          const hide = hideOption && infoPanelColumnsSize[idx] === "0px";
-
-          !hide && commonOptions.push(owner);
-        }
-
-        if (availableSort?.includes("Activity")) {
-          const idx = availableSort.findIndex((x) => x === "Activity");
-          const hide = hideOption && infoPanelColumnsSize[idx] === "0px";
-
-          !hide && commonOptions.push(modifiedDate);
-        }
-
-        if (showStorageInfo && availableSort?.includes("Storage")) {
-          const idx = availableSort.findIndex(
-            (x) => x === SortByFieldName.UsedSpace,
-          );
-          const hide = hideOption && infoPanelColumnsSize[idx] === "0px";
-
-          !hide && commonOptions.push(sortByStorage);
-        }
-      } else if (isTrash) {
-        const availableSort = localStorage
-          ?.getItem(`${TABLE_TRASH_COLUMNS}=${userId}`)
-          ?.split(",");
-
-        const infoPanelColumnsSize = localStorage
-          ?.getItem(`${COLUMNS_TRASH_SIZE_INFO_PANEL}=${userId}`)
-          ?.split(" ");
-
-        if (availableSort?.includes("Room")) {
-          const idx = availableSort.findIndex((x) => x === "Room");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
-
-          // !hide && commonOptions.push(room);
-        }
-        if (availableSort?.includes("AuthorTrash")) {
-          const idx = availableSort.findIndex((x) => x === "AuthorTrash");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
-
-          // !hide && commonOptions.push(authorOption);
-        }
-        if (availableSort?.includes("CreatedTrash")) {
-          const idx = availableSort.findIndex((x) => x === "CreatedTrash");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
-
-          // !hide && commonOptions.push(creationDate);
-        }
-        if (availableSort?.includes("Erasure")) {
-          const idx = availableSort.findIndex((x) => x === "Erasure");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
-
-          !hide && commonOptions.push(erasure);
-        }
-        if (availableSort?.includes("SizeTrash")) {
-          const idx = availableSort.findIndex((x) => x === "SizeTrash");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
-
-          !hide && commonOptions.push(size);
-        }
-        if (availableSort?.includes("TypeTrash")) {
-          const idx = availableSort.findIndex((x) => x === "TypeTrash");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
-
-          // !hide && commonOptions.push(type);
-        }
-      } else if (isRecentTab) {
-        const availableSort = localStorage
-          ?.getItem(`${TABLE_RECENT_COLUMNS}=${userId}`)
-          ?.split(",");
-
-        const infoPanelColumnsSize = localStorage
-          ?.getItem(`${COLUMNS_RECENT_SIZE_INFO_PANEL}=${userId}`)
-          ?.split(" ");
-
-        if (availableSort?.includes("LastOpened")) {
-          const idx = availableSort.findIndex((x) => x === "LastOpened");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
-
-          !hide && commonOptions.push(lastOpenedDate);
-        }
-
-        if (availableSort?.includes("Size")) {
-          const idx = availableSort.findIndex((x) => x === "Size");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
-
-          !hide && commonOptions.push(size);
-        }
-      } else {
-        const availableSort = localStorage
-          ?.getItem(`${TABLE_COLUMNS}=${userId}`)
-          ?.split(",");
-
-        const infoPanelColumnsSize = localStorage
-          ?.getItem(`${COLUMNS_SIZE_INFO_PANEL}=${userId}`)
-          ?.split(" ");
-
-        if (availableSort?.includes("Author")) {
-          const idx = availableSort.findIndex((x) => x === "Author");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
-
-          // !hide && commonOptions.push(authorOption);
-        }
-        if (availableSort?.includes("Created")) {
-          const idx = availableSort.findIndex((x) => x === "Created");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
-
-          // !hide && commonOptions.push(creationDate);
-        }
-        if (availableSort?.includes("Modified")) {
-          const idx = availableSort.findIndex((x) => x === "Modified");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
-
-          !hide && commonOptions.push(modifiedDate);
-        }
-        if (availableSort?.includes("Size")) {
-          const idx = availableSort.findIndex((x) => x === "Size");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
-
-          !hide && commonOptions.push(size);
-        }
-        if (availableSort?.includes("Type")) {
-          const idx = availableSort.findIndex((x) => x === "Type");
-          const hide =
-            infoPanelVisible &&
-            infoPanelColumnsSize &&
-            infoPanelColumnsSize[idx] === "0px";
-
-          // !hide && commonOptions.push(type);
-        }
-      }
+    if (isRooms) {
+      commonOptions.push(roomType);
+      commonOptions.push(tags);
+      commonOptions.push(owner);
+      commonOptions.push(activityDate);
+      showStorageInfo && commonOptions.push(sortByStorage);
+    } else if (isTrash) {
+      // commonOptions.push(authorOption);
+      // commonOptions.push(creationDate);
+      commonOptions.push(erasure);
+      commonOptions.push(size);
+      // commonOptions.push(type);
     } else {
-      if (isRooms) {
-        commonOptions.push(roomType);
-        commonOptions.push(tags);
-        commonOptions.push(owner);
-        commonOptions.push(modifiedDate);
-        commonOptions.push(sortByStorage);
-      } else if (isTrash) {
-        // commonOptions.push(authorOption);
-        // commonOptions.push(creationDate);
-        commonOptions.push(erasure);
-        commonOptions.push(size);
-        // commonOptions.push(type);
-      } else {
-        // commonOptions.push(authorOption);
-        // commonOptions.push(creationDate);
-        commonOptions.push(modifiedDate);
-        commonOptions.push(size);
-        // commonOptions.push(type);
-      }
+      // commonOptions.push(authorOption);
+      // commonOptions.push(creationDate);
+      commonOptions.push(modifiedDate);
+      commonOptions.push(size);
+      // commonOptions.push(type);
+      isRecentTab && commonOptions.push(lastOpenedDate);
     }
 
     return commonOptions;

@@ -24,28 +24,35 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { i18n } from "i18next";
+import React, { useState } from "react";
 
-import { getCookie, getLanguage } from "@docspace/shared/utils";
+import { getCookie } from "@docspace/shared/utils";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { TSettings } from "@docspace/shared/api/settings/types";
 
 import { getI18NInstance } from "@/utils/i18n";
-import { setCookie } from "@docspace/shared/utils/cookie";
+import { i18n } from "i18next";
 
 interface UseI18NProps {
   settings?: TSettings;
 }
 
 const useI18N = ({ settings }: UseI18NProps) => {
+  const [i18N, seti18N] = useState<i18n>(() =>
+    getI18NInstance(getCookie(LANGUAGE) ?? settings?.culture ?? "en"),
+  );
+
   React.useEffect(() => {
     if (!settings?.timezone) return;
     window.timezone = settings.timezone;
   }, [settings?.timezone]);
 
+  React.useEffect(() => {
+    seti18N(getI18NInstance(getCookie(LANGUAGE) ?? settings?.culture ?? "en"));
+  }, [settings?.culture]);
+
   return {
-    i18n: getI18NInstance(getCookie(LANGUAGE) ?? settings?.culture ?? "en"),
+    i18n: i18N,
   };
 };
 

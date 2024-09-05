@@ -1,1 +1,7 @@
-{}
+{
+  "PDFform": "PDF 表单",
+  "PDFFormEditDialogDescription": "您想切换到表单编辑模式吗？请注意，表单将不再可供填写，编辑后您需要再次单击“开始填写”按钮才能填写。",
+  "PDFFormEditDialogTitle": "表单编辑",
+  "PDFFormIsReadyToast": "PDF 表单 <1>{{filename}}}</1> 已准备好填写。",
+  "PDFFormSuccessfullyCreatedDescription": "您的 PDF 表单已准备好填写。复制公共链接以开始表单填写过程或邀请其他用户加入此房间。"
+}

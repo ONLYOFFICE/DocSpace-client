@@ -1,7 +1,11 @@
 {
-  "Auto": "Auto",
-  "CodeCopySuccess": "Code is naar het klembord gekopieerd",
-  "EmbedCode": "Code insluiten",
+  "CodeSuccessfullyCopied": "Code om in te voegen succesvol gekopieerd naar klembord",
+  "ContentRestricted": "Het kopiëren van materiaal, downloaden van bestanden en afdrukken is beperkt.",
+  "DisplaySettings": "Weergave instellingen",
+  "EmbeddingBarAllowList": "Voeg de website URL voor insluiten toe aan de <1>toestaan lijst</1>.",
+  "EmbeddingBarDescription": "Insluiten werkt alleen voor de URL's die zijn opgegeven door de {{productName}} beheerder in de JavaScript SDK instellingen.",
   "Height": "Hoogte",
+  "Link": "Link",
+  "LinkProtectedWithPassword": "De link is beveiligd met een wachtwoord.",
   "Width": "Breedte"
 }

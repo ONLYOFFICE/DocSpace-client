@@ -24,17 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 import { ChangeUserTypeDialog } from "../dialogs";
 import { toastr } from "@docspace/shared/components/toast";
-import { Link } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const ChangeUserTypeEvent = ({
   setVisible,
@@ -47,7 +43,6 @@ const ChangeUserTypeEvent = ({
   getPeopleListItem,
   setInfoPanelSelection,
   needResetUserSelection,
-  isRoomAdmin,
 }) => {
   const { toType, fromType, userIDs, successCallback, abortCallback } =
     peopleDialogData;
@@ -77,16 +72,6 @@ const ChangeUserTypeEvent = ({
     };
   }, [peopleDialogData]);
 
-  const onClickPayments = () => {
-    const paymentPageUrl = combineUrl(
-      "/portal-settings",
-      "/payments/portal-payments",
-    );
-
-    toastr.clear();
-    navigate(paymentPageUrl);
-  };
-
   const onChangeUserType = () => {
     onClosePanel();
     updateUserType(toType, userIDs, peopleFilter, fromType)
@@ -102,20 +87,7 @@ const ChangeUserTypeEvent = ({
         successCallback && successCallback(users);
       })
       .catch((err) => {
-        toastr.error(
-          <>
-            <Text>{t("Common:QuotaPaidUserLimitError")}</Text>
-            {!isRoomAdmin && (
-              <Link color="#5387AD" isHovered={true} onClick={onClickPayments}>
-                {t("Common:PaymentsTitle")}
-              </Link>
-            )}
-          </>,
-          false,
-          0,
-          true,
-          true,
-        );
+        toastr.error(<PaidQuotaLimitError />, false, 0, true, true);
 
         abortCallback && abortCallback();
       })
@@ -137,7 +109,9 @@ const ChangeUserTypeEvent = ({
   const getType = (type) => {
     switch (type) {
       case "admin":
-        return t("Common:PortalAdmin", { productName: PRODUCT_NAME });
+        return t("Common:PortalAdmin", {
+          productName: t("Common:ProductName"),
+        });
       case "manager":
         return t("Common:RoomAdmin");
       case "collaborator":
@@ -169,7 +143,7 @@ export default inject(
       changeUserTypeDialogVisible: visible,
       setChangeUserTypeDialogVisible: setVisible,
     } = dialogsStore;
-    const { isRoomAdmin } = authStore;
+
     const { setInfoPanelSelection } = infoPanelStore;
     const { dialogStore, filterStore, usersStore } = peopleStore;
 
@@ -179,7 +153,6 @@ export default inject(
       usersStore;
     const { setSelected } = peopleStore.selectionStore;
     return {
-      isRoomAdmin,
       needResetUserSelection,
       getPeopleListItem,
       setInfoPanelSelection,

@@ -39,6 +39,7 @@ interface ViewerPlayerProps {
   isFullScreen: boolean;
   panelVisible: boolean;
   isPreviewFile?: boolean;
+  autoPlay: boolean;
   isOpenContextMenu: boolean;
   isThirdParty?: boolean;
   mobileDetails: JSX.Element;

@@ -1,14 +1,11 @@
 {
-  "Auto": "Auto",
-  "CodeCopySuccess": "Code has been copied to the clipboard",
-  "EmbedCode": "Embed code",
-  "Height": "Height",
-  "Width": "Width",
-  "Link": "Link",
-  "DisplaySettings": "Display settings",
   "CodeSuccessfullyCopied": "Code to insert successfully copied to clipboard",
-  "LinkProtectedWithPassword": "The link is protected with a password.",
   "ContentRestricted": "Content copying, file downloading and printing are restricted.",
-  "EmbeddingBarDescription": "Embedding will only work for the URLs specified by the DocSpace admin in the JavaScript SDK settings.",
-  "EmbeddingBarAllowList": "Add the website URL for embedding to the <1>allow list</1>."
+  "DisplaySettings": "Display settings",
+  "EmbeddingBarAllowList": "Add the website URL for embedding to the <1>allow list</1>.",
+  "EmbeddingBarDescription": "Embedding will only work for the URLs specified by the {{productName}} admin in the JavaScript SDK settings.",
+  "Height": "Height",
+  "Link": "Link",
+  "LinkProtectedWithPassword": "The link is protected with a password.",
+  "Width": "Width"
 }

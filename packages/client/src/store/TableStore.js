@@ -59,7 +59,6 @@ class TableStore {
   roomColumnTypeIsEnabled = false;
   roomColumnTagsIsEnabled = true;
   roomColumnOwnerIsEnabled = false;
-  roomColumnQuickButtonsIsEnabled = true;
   roomColumnActivityIsEnabled = true;
   roomQuotaColumnIsEnable = false;
 
@@ -67,17 +66,24 @@ class TableStore {
   authorColumnIsEnabled = false;
   roomColumnIsEnabled = true;
   erasureColumnIsEnabled = true;
-  createdColumnIsEnabled = true;
+  createdColumnIsEnabled = false;
   modifiedColumnIsEnabled = true;
   sizeColumnIsEnabled = true;
   indexColumnIsEnabled = true;
   typeColumnIsEnabled = true;
+  typeColumnIsEnabled = false;
   quickButtonsColumnIsEnabled = true;
+
+  authorRecentColumnIsEnabled = true;
+  modifiedRecentColumnIsEnabled = false;
+  createdRecentColumnIsEnabled = false;
+  sizeRecentColumnIsEnabled = true;
+  typeRecentColumnIsEnabled = false;
   lastOpenedColumnIsEnabled = true;
 
   authorTrashColumnIsEnabled = true;
   createdTrashColumnIsEnabled = false;
-  sizeTrashColumnIsEnabled = false;
+  sizeTrashColumnIsEnabled = true;
   typeTrashColumnIsEnabled = false;
 
   typeAccountsColumnIsEnabled = true;
@@ -85,6 +91,7 @@ class TableStore {
   emailAccountsColumnIsEnabled = true;
   storageAccountsColumnIsEnabled = true;
 
+  peopleAccountsGroupsColumnIsEnabled = true;
   managerAccountsGroupsColumnIsEnabled = true;
 
   typeAccountsInsideGroupColumnIsEnabled = true;
@@ -131,12 +138,24 @@ class TableStore {
     this.authorColumnIsEnabled = enable;
   };
 
+  setAuthorRecentColumn = (enable) => {
+    this.authorRecentColumnIsEnabled = enable;
+  };
+
   setCreatedColumn = (enable) => {
     this.createdColumnIsEnabled = enable;
   };
 
+  setCreatedRecentColumn = (enable) => {
+    this.createdRecentColumnIsEnabled = enable;
+  };
+
   setModifiedColumn = (enable) => {
     this.modifiedColumnIsEnabled = enable;
+  };
+
+  setModifiedRecentColumn = (enable) => {
+    this.modifiedRecentColumnIsEnabled = enable;
   };
 
   setRoomColumn = (enable) => {
@@ -155,8 +174,16 @@ class TableStore {
     this.indexColumnIsEnabled = enable;
   };
 
+  setSizeRecentColumn = (enable) => {
+    this.sizeRecentColumnIsEnabled = enable;
+  };
+
   setTypeColumn = (enable) => {
     this.typeColumnIsEnabled = enable;
+  };
+
+  setTypeRecentColumn = (enable) => {
+    this.typeRecentColumnIsEnabled = enable;
   };
 
   setQuickButtonsColumn = (enable) => {
@@ -179,6 +206,8 @@ class TableStore {
   setAccountsColumnStorage = (enable) =>
     (this.storageAccountsColumnIsEnabled = enable);
 
+  setAccountsGroupsColumnPeople = (enable) =>
+    (this.peopleAccountsGroupsColumnIsEnabled = enable);
   setAccountsGroupsColumnManager = (enable) =>
     (this.managerAccountsGroupsColumnIsEnabled = enable);
 
@@ -189,7 +218,7 @@ class TableStore {
   setAccountsInsideGroupColumnGroup = (enable) =>
     (this.groupAccountsInsideGroupColumnIsEnabled = enable);
 
-  setColumnsEnable = (frameTableColumns) => {
+  setColumnsEnable = (frameTableColumns, isRecentTab) => {
     const storageColumns = localStorage.getItem(this.tableStorageName);
     const splitColumns = storageColumns
       ? storageColumns.split(",")
@@ -226,6 +255,7 @@ class TableStore {
       }
 
       if (getIsAccountsGroups()) {
+        this.setAccountsGroupsColumnPeople(splitColumns.includes("People"));
         this.setAccountsGroupsColumnManager(
           splitColumns.includes("Head of Group"),
         );
@@ -248,6 +278,16 @@ class TableStore {
         this.setErasureColumn(splitColumns.includes("Erasure"));
         this.setSizeTrashColumn(splitColumns.includes("SizeTrash"));
         this.setTypeTrashColumn(splitColumns.includes("TypeTrash"));
+        return;
+      }
+
+      if (isRecentTab) {
+        this.setModifiedRecentColumn(splitColumns.includes("ModifiedRecent"));
+        this.setAuthorRecentColumn(splitColumns.includes("AuthorRecent"));
+        this.setCreatedRecentColumn(splitColumns.includes("CreatedRecent"));
+        this.setLastOpenedColumn(splitColumns.includes("LastOpened"));
+        this.setSizeRecentColumn(splitColumns.includes("SizeRecent"));
+        this.setTypeRecentColumn(splitColumns.includes("TypeRecent"));
         this.setQuickButtonsColumn(splitColumns.includes("QuickButtons"));
         return;
       }
@@ -258,8 +298,8 @@ class TableStore {
       this.setSizeColumn(splitColumns.includes("Size"));
       this.setIndexColumn(splitColumns.includes("Index"));
       this.setTypeColumn(splitColumns.includes("Type"));
-      this.setQuickButtonsColumn(splitColumns.includes("QuickButtons"));
       this.setLastOpenedColumn(splitColumns.includes("LastOpened"));
+      this.setQuickButtonsColumn(splitColumns.includes("QuickButtons"));
     }
   };
 
@@ -285,12 +325,18 @@ class TableStore {
       case "AuthorTrash":
         this.setAuthorTrashColumn(!this.authorTrashColumnIsEnabled);
         return;
+      case "AuthorRecent":
+        this.setAuthorRecentColumn(!this.authorRecentColumnIsEnabled);
+        return;
 
       case "Created":
         this.setCreatedColumn(!this.createdColumnIsEnabled);
         return;
       case "CreatedTrash":
         this.setCreatedTrashColumn(!this.createdTrashColumnIsEnabled);
+        return;
+      case "CreatedRecent":
+        this.setCreatedRecentColumn(!this.createdRecentColumnIsEnabled);
         return;
 
       case "Department":
@@ -303,6 +349,9 @@ class TableStore {
 
       case "Modified":
         this.setModifiedColumn(!this.modifiedColumnIsEnabled);
+        return;
+      case "ModifiedRecent":
+        this.setModifiedRecentColumn(!this.modifiedRecentColumnIsEnabled);
         return;
 
       case "Erasure":
@@ -319,6 +368,9 @@ class TableStore {
       case "SizeTrash":
         this.setSizeTrashColumn(!this.sizeTrashColumnIsEnabled);
         return;
+      case "SizeRecent":
+        this.setSizeRecentColumn(!this.sizeRecentColumnIsEnabled);
+        return;
 
       case "Type":
         isRooms
@@ -334,6 +386,10 @@ class TableStore {
 
       case "TypeTrash":
         this.setTypeTrashColumn(!this.typeTrashColumnIsEnabled);
+        return;
+
+      case "TypeRecent":
+        this.setTypeRecentColumn(!this.typeRecentColumnIsEnabled);
         return;
 
       case "QuickButtons":
@@ -370,6 +426,12 @@ class TableStore {
           : this.setRoomColumnQuota(!this.roomQuotaColumnIsEnable);
         return;
 
+      case "People":
+        this.setAccountsGroupsColumnPeople(
+          !this.peopleAccountsGroupsColumnIsEnabled,
+        );
+        return;
+
       case "Head of Group":
         this.setAccountsGroupsColumnManager(
           !this.managerAccountsGroupsColumnIsEnabled,
@@ -381,7 +443,7 @@ class TableStore {
     }
   };
 
-  getColumns = (defaultColumns) => {
+  getColumns = (defaultColumns, isRecentTab) => {
     const { isFrame, frameConfig } = this.settingsStore;
     const storageColumns = localStorage.getItem(this.tableStorageName);
     const splitColumns = storageColumns && storageColumns.split(",");
@@ -390,7 +452,7 @@ class TableStore {
     const columns = [];
 
     if (splitColumns) {
-      this.setColumnsEnable();
+      this.setColumnsEnable(null, isRecentTab);
 
       for (let col of defaultColumns) {
         const column = splitColumns.find((key) => key === col.key);

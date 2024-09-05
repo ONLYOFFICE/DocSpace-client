@@ -34,10 +34,7 @@ import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject, observer } from "mobx-react";
 import { DeviceType } from "@docspace/shared/enums";
-import {
-  COOKIE_EXPIRATION_YEAR,
-  PRODUCT_NAME,
-} from "@docspace/shared/constants";
+import { COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { setCookie } from "@docspace/shared/utils/cookie";
 import { useNavigate } from "react-router-dom";
@@ -81,7 +78,7 @@ let timezoneDefaultFromSessionStorage = "";
 
 const settingNames = ["language", "timezone"];
 
-const LanguageAndTimeZone = (props) => {
+const LanguageAndTimeZoneComponent = (props) => {
   const {
     i18n,
     language,
@@ -524,7 +521,9 @@ const LanguageAndTimeZone = (props) => {
       )}
       <div className="category-item-description">
         <Text fontSize="13px" fontWeight={400}>
-          {t("TimeLanguageSettingsDescription", { productName: PRODUCT_NAME })}
+          {t("TimeLanguageSettingsDescription", {
+            productName: t("Common:ProductName"),
+          })}
         </Text>
         <Text>
           <Trans t={t} i18nKey="TimeLanguageSettingsSave" />
@@ -558,46 +557,50 @@ const LanguageAndTimeZone = (props) => {
   );
 };
 
-export default inject(({ settingsStore, setup, common, userStore }) => {
-  const {
-    culture,
-    timezone,
-    timezones,
-    nameSchemaId,
-    greetingSettings,
-    cultures,
-    currentColorScheme,
-    languageAndTimeZoneSettingsUrl,
-    deviceType,
-  } = settingsStore;
+export const LanguageAndTimeZoneSettings = inject(
+  ({ settingsStore, setup, common, userStore }) => {
+    const {
+      culture,
+      timezone,
+      timezones,
+      nameSchemaId,
+      greetingSettings,
+      cultures,
+      currentColorScheme,
+      languageAndTimeZoneSettingsUrl,
+      deviceType,
+    } = settingsStore;
 
-  const { user } = userStore;
+    const { user } = userStore;
 
-  const { setLanguageAndTime } = setup;
-  const { isLoaded, setIsLoadedLngTZSettings, initSettings, setIsLoaded } =
-    common;
-  return {
-    user,
-    portalLanguage: culture,
-    portalTimeZoneId: timezone,
-    language: culture,
-    rawTimezones: timezones,
-    greetingSettings,
-    nameSchemaId,
-    setLanguageAndTime,
-    isLoaded,
-    setIsLoadedLngTZSettings,
-    cultures,
-    initSettings,
-    setIsLoaded,
-    currentColorScheme,
-    languageAndTimeZoneSettingsUrl,
-    deviceType,
-  };
-})(
+    const { setLanguageAndTime } = setup;
+    const { isLoaded, setIsLoadedLngTZSettings, initSettings, setIsLoaded } =
+      common;
+    return {
+      user,
+      portalLanguage: culture,
+      portalTimeZoneId: timezone,
+      language: culture,
+      rawTimezones: timezones,
+      greetingSettings,
+      nameSchemaId,
+      setLanguageAndTime,
+      isLoaded,
+      setIsLoadedLngTZSettings,
+      cultures,
+      initSettings,
+      setIsLoaded,
+      currentColorScheme,
+      languageAndTimeZoneSettingsUrl,
+      deviceType,
+    };
+  },
+)(
   withCultureNames(
     withLoading(
-      withTranslation(["Settings", "Common"])(observer(LanguageAndTimeZone)),
+      withTranslation(["Settings", "Common"])(
+        observer(LanguageAndTimeZoneComponent),
+      ),
     ),
   ),
 );

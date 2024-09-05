@@ -39,32 +39,16 @@ const StyledMainButtonMobile = styled(MainButtonMobile)`
   position: fixed;
   z-index: 200;
 
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          left: ${isMobileOnly
-            ? "calc(16px + env(safe-area-inset-left))"
-            : "24px"};
-        `
-      : css`
-          right: ${isMobileOnly
-            ? "calc(16px + env(safe-area-inset-right))"
-            : "24px"};
-        `}
+  inset-inline-end: ${({ theme }) => {
+    const side = theme.interfaceDirection === "rtl" ? "left" : "right";
+    return isMobileOnly ? `calc(16px + env(safe-area-inset-${side}))` : "24px";
+  }};
 
   bottom: 24px;
 
   @media ${mobile} {
     position: absolute;
-    bottom: 16px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: 16px;
-          `
-        : css`
-            right: 16px;
-          `}
+    inset-inline-end: 16px;
     bottom: 16px;
   }
 `;

@@ -26,8 +26,10 @@
 
 import React, { useCallback, useEffect, useRef } from "react";
 import { InfiniteLoader, WindowScroller, List } from "react-virtualized";
-import { StyledList } from "../InfiniteLoader.styled";
+import { StyledItem, StyledList } from "../InfiniteLoader.styled";
 import { GridComponentProps } from "../InfiniteLoader.types";
+import { TileSkeleton } from "../../../skeletons/tiles";
+import { RectangleSkeleton } from "../../../skeletons";
 
 const GridComponent = ({
   hasMoreFiles,
@@ -39,12 +41,13 @@ const GridComponent = ({
   children,
   className,
   scroll,
+  showSkeleton,
 }: GridComponentProps) => {
   const loaderRef = useRef<InfiniteLoader | null>(null);
   const listRef = useRef<List | null>(null);
 
   useEffect(() => {
-    listRef?.current?.recomputeRowHeights();
+    // listRef?.current?.recomputeRowHeights(); //TODO: return there will be problems with the height of the tile when clicking on the backspace
   });
 
   const isItemLoaded = useCallback(
@@ -58,11 +61,50 @@ const GridComponent = ({
     index,
     style,
     key,
+    isScrolling,
   }: {
     index: number;
     style: React.CSSProperties;
     key: string;
+    isScrolling: boolean;
   }) => {
+    const elem = children[index] as React.ReactElement;
+    const itemClassNames = elem.props?.className;
+
+    const isFolder = itemClassNames?.includes("isFolder");
+    const isRoom = itemClassNames?.includes("isRoom");
+    const isHeader =
+      itemClassNames?.includes("folder_header") ||
+      itemClassNames?.includes("files_header");
+
+    if (isScrolling && showSkeleton) {
+      const list = [];
+      let i = 0;
+
+      if (isHeader) {
+        return (
+          <div key={key} style={style}>
+            <StyledItem>
+              <RectangleSkeleton height="22px" width="100px" animate />
+            </StyledItem>
+          </div>
+        );
+      }
+
+      while (i < countTilesInRow) {
+        list.push(
+          <TileSkeleton key={key} isFolder={isFolder} isRoom={isRoom} />,
+        );
+        i += 1;
+      }
+
+      return (
+        <div key={key} style={style}>
+          <StyledItem>{list.map((item) => item)}</StyledItem>
+        </div>
+      );
+    }
+
     return (
       <div className="window-item" style={style} key={key}>
         {children[index]}

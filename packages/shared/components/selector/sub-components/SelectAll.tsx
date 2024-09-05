@@ -24,41 +24,49 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { ReactNode, useContext } from "react";
 
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
 import { Text } from "../../text";
 import { Checkbox } from "../../checkbox";
 
 import { StyledSelectAll } from "../Selector.styled";
-import { TSelectorSelectAll } from "../Selector.types";
+import { SelectAllContext } from "../contexts/SelectAll";
 
 const SelectAll = React.memo(
   ({
-    withSelectAll,
+    show,
+    isLoading,
+    rowLoader,
+  }: {
+    show: boolean;
+    isLoading: boolean;
+    rowLoader: ReactNode;
+  }) => {
+    const {
+      selectAllIcon,
+      selectAllLabel,
+      isAllChecked,
+      isAllIndeterminate,
+      onSelectAll,
+    } = useContext(SelectAllContext);
 
-    selectAllLabel,
-    selectAllIcon,
+    if (!show) return null;
 
-    isAllChecked,
-    isAllIndeterminate,
-
-    onSelectAll,
-  }: TSelectorSelectAll) => {
-    if (!withSelectAll) return;
+    if (isLoading) return rowLoader;
 
     const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
       if (e.target instanceof HTMLElement && e.target.closest(".checkbox"))
         return;
 
-      onSelectAll();
+      onSelectAll?.();
     };
 
     return (
       <StyledSelectAll onClick={onClick}>
         <Avatar
           className="select-all_avatar"
-          source={selectAllIcon}
+          source={selectAllIcon ?? ""}
           role={AvatarRole.user}
           size={AvatarSize.min}
         />

@@ -1,7 +1,7 @@
 {
   "ExternalLink": "ລິງພາຍນອກ",
   "FormFilling": "ການຕື່ມແບບຟອມ",
+  "LinkName": "ຊື່ລິ້ງ",
   "ShareEmailBody": "ທ່ານໄດ້ຮັບອະນຸຍາດເຂົ້າເຖິງເອກະສານ {{itemName}}. ກົດທີ່ລິ້ງດ້ານລຸ່ມເພື່ອເປີດເອກະສານດຽວນີ້: {{shareLink}}.",
-  "ShareEmailSubject": "ທ່ານໄດ້ຮັບອະນຸຍາດເຂົ້າເຖິງເອກະສານ {{itemName}}",
-  "SharingSettingsTitle": "ຕັ້ງຄ່າການແບ່ງປັນ"
+  "ShareEmailSubject": "ທ່ານໄດ້ຮັບອະນຸຍາດເຂົ້າເຖິງເອກະສານ {{itemName}}"
 }

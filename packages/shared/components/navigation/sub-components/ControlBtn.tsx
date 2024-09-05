@@ -79,7 +79,8 @@ const ControlButtons = ({
         onClick={onNavigationButtonClick}
       />
     ) : null;
-  const children = tariffBar ? React.cloneElement(tariffBar, { title }) : null;
+  const children =
+    tariffBar && !isFrame ? React.cloneElement(tariffBar, { title }) : null;
   const isTabletView = isTablet();
 
   const contextOptionsFolder = getContextOptionsFolder();

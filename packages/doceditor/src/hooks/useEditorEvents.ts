@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 
 import IConfig from "@onlyoffice/document-editor-react/dist/esm/types/model/config";
 
@@ -83,6 +84,9 @@ const useEditorEvents = ({
   openOnNewPage,
   t,
 }: UseEventsProps) => {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+
   const [events, setEvents] = React.useState<IConfigEvents>({});
   const [documentReady, setDocumentReady] = React.useState(false);
   const [createUrl, setCreateUrl] = React.useState<Nullable<string>>(null);
@@ -163,7 +167,24 @@ const useEditorEvents = ({
         if (config?.Error) docEditor?.showMessage?.(config.Error);
       }
     }
-  }, [config?.Error, errorMessage, isSkipError, t]);
+
+    const message = searchParams.get("message");
+
+    if (message) {
+      docEditor?.showMessage?.(message);
+      let search = "?";
+      let idx = 0;
+      searchParams.forEach((value, key) => {
+        if (key !== "message") {
+          if (idx) search += "&";
+          idx++;
+          search += `${key}=${value}`;
+        }
+      });
+
+      history.pushState({}, "", `${pathname}${search}`);
+    }
+  }, [config?.Error, errorMessage, isSkipError, searchParams, pathname, t]);
 
   const onDocumentReady = React.useCallback(() => {
     // console.log("onDocumentReady", { docEditor });
@@ -537,6 +558,7 @@ const useEditorEvents = ({
       setTimeout(() => {
         docSaved
           ? setDocumentTitle(
+              t,
               docTitle,
               config?.document.fileType ?? "",
               documentReady,
@@ -544,6 +566,7 @@ const useEditorEvents = ({
               setDocTitle,
             )
           : setDocumentTitle(
+              t,
               `*${docTitle}`,
               config?.document.fileType ?? "",
               documentReady,
@@ -552,7 +575,14 @@ const useEditorEvents = ({
             );
       }, 500);
     },
-    [config?.document.fileType, docSaved, docTitle, documentReady, successAuth],
+    [
+      t,
+      config?.document.fileType,
+      docSaved,
+      docTitle,
+      documentReady,
+      successAuth,
+    ],
   );
 
   const onMetaChange = React.useCallback(
@@ -562,6 +592,7 @@ const useEditorEvents = ({
 
       if (newTitle && newTitle !== docTitle) {
         setDocumentTitle(
+          t,
           newTitle,
           config?.document.fileType ?? "",
           documentReady,
@@ -571,7 +602,7 @@ const useEditorEvents = ({
         setDocTitle(newTitle);
       }
     },
-    [config?.document.fileType, docTitle, documentReady, successAuth],
+    [t, config?.document.fileType, docTitle, documentReady, successAuth],
   );
 
   const onMakeActionLink = React.useCallback((event: object) => {

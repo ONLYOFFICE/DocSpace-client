@@ -30,6 +30,10 @@ import {
   FolderType,
   RoomsType,
   ShareAccessRights,
+  FolderType,
+  RoomsType,
+  ShareAccessRights,
+  ValidationStatus,
 } from "../../enums";
 import { TCreatedBy, TPathParts } from "../../types";
 
@@ -113,4 +117,11 @@ export type TExportRoomIndexTask = {
   resultFileId: number;
   resultFileName: string;
   resultFileUrl: string;
+};
+
+export type TPublicRoomPassword = {
+  linkId: string;
+  shared: boolean;
+  status: ValidationStatus;
+  tenantId: string | number;
 };

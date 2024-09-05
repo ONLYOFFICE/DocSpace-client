@@ -44,9 +44,6 @@ import { ComboBox, TOption } from "@docspace/shared/components/combobox";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { TTranslation } from "@docspace/shared/types";
 import { TColorScheme, TTheme } from "@docspace/shared/themes";
-
-import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { UserStore } from "@docspace/shared/store/UserStore";
 import {
   ModalDialog,
   ModalDialogType,
@@ -65,8 +62,6 @@ import { StyledModalDialog, StyledBody } from "./StyledEmbeddingPanel";
 
 import { DisplayBlock } from "./sub-components/DisplayBlock";
 import { CheckboxElement } from "./sub-components/CheckboxElement";
-import PublicRoomStore from "../../../store/PublicRoomStore";
-import DialogsStore from "../../../store/DialogsStore";
 
 type LinkParamsLinkShareToType = {
   denyDownload: boolean;
@@ -160,7 +155,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
   );
 
   const fileConfig = {
-    mode: "viewer",
+    mode: "editor",
     width: `${widthValue}${dataDimensions[0].label}`,
     height: `${heightValue}${dataDimensions[1].label}`,
     frameId: "ds-frame",
@@ -431,7 +426,9 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                     {`"Add the website URL for embedding to the <1>allow list</1>."`}
                   </Trans>
                 ) : (
-                  t("EmbeddingPanel:EmbeddingBarDescription")
+                  t("EmbeddingPanel:EmbeddingBarDescription", {
+                    productName: t("Common:ProductName"),
+                  })
                 )}
               </Text>
               <IconButton
@@ -460,6 +457,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                   selectedOption={selectedLink as TOption}
                   displaySelectedOption
                   directionY="bottom"
+                  withLabel={false}
                 />
               </>
             )}

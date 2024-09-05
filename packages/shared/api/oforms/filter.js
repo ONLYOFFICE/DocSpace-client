@@ -45,6 +45,7 @@ const DEFAULT_SORT_BY = "";
 const DEFAULT_SORT_ORDER = "";
 const DEFAULT_CATEGORIZE_BY = "";
 const DEFAULT_CATEGORY_ID = "";
+const DEFAULT_EXTENSION = "pdf";
 
 class OformsFilter {
   constructor(
@@ -54,6 +55,7 @@ class OformsFilter {
     categoryId = DEFAULT_CATEGORY_ID,
     locale = DEFAULT_LOCALE,
     search = DEFAULT_SEARCH,
+    extension = DEFAULT_EXTENSION,
     sortBy = DEFAULT_SORT_BY,
     sortOrder = DEFAULT_SORT_ORDER,
     total = DEFAULT_TOTAL,
@@ -64,12 +66,13 @@ class OformsFilter {
     this.categoryId = categoryId;
     this.locale = locale;
     this.search = search;
+    this.extension = extension;
     this.sortBy = sortBy;
     this.sortOrder = sortOrder;
     this.total = total;
   }
 
-  static getDefault(total = DEFAULT_TOTAL) {
+  static getDefault(total = DEFAULT_TOTAL, extension = DEFAULT_EXTENSION) {
     return new OformsFilter(
       DEFAULT_PAGE,
       DEFAULT_PAGE_SIZE,
@@ -77,6 +80,7 @@ class OformsFilter {
       DEFAULT_CATEGORY_ID,
       DEFAULT_LOCALE,
       DEFAULT_SEARCH,
+      extension,
       DEFAULT_SORT_BY,
       DEFAULT_SORT_ORDER,
       total,
@@ -110,6 +114,7 @@ class OformsFilter {
       categoryId,
       locale,
       search,
+      defaultFilter.extension,
       sortBy,
       sortOrder,
       defaultFilter.total,
@@ -126,6 +131,7 @@ class OformsFilter {
       this.categoryId,
       this.locale,
       this.search,
+      this.extension,
       this.sortBy,
       this.sortOrder,
       this.total,
@@ -155,6 +161,7 @@ class OformsFilter {
       categoryId,
       locale,
       search,
+      extension,
       sortBy,
       sortOrder,
     } = this;
@@ -166,6 +173,7 @@ class OformsFilter {
       dtoFilter[`filters[${categorizeBy}][id][$eq]`] = categoryId;
     dtoFilter[LOCALE] = locale;
     dtoFilter[`filters[name_form][$containsi]`] = search;
+    dtoFilter[`filters[form_exts][ext][$eq]`] = extension;
     if (sortBy && sortOrder) dtoFilter[SORT] = `${sortBy}:${sortOrder}`;
 
     return toUrlParams(dtoFilter, true);

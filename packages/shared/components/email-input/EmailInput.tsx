@@ -39,21 +39,35 @@ const TextInputWrapper = ({
   emailSettings,
   customValidate,
   ...props
-}: EmailInputProps & TextInputProps & { isValidEmail?: boolean }) => (
-  <StyledEmailInput {...props} data-testid="email-input" />
-);
+}: EmailInputProps & TextInputProps & { isValidEmail?: boolean }) => {
+  return <StyledEmailInput {...props} data-testid="email-input" />;
+};
 
 const EmailInput = ({
-  value,
   onValidateInput,
   customValidate,
-  emailSettings,
+
   onBlur,
   onChange,
-  hasError,
+
   isAutoFocussed,
+  autoComplete = "email",
+  className = "",
+  hasError = undefined,
+  id = "",
+  isDisabled = false,
+  isReadOnly = false,
+  maxLength = 255,
+  name = "",
+  placeholder = "",
+  scale = false,
+  size = InputSize.base,
+  title = "",
+  withBorder = true,
+  value = "",
+  emailSettings,
   ...rest
-}: EmailInputProps) => {
+}: EmailInputProps & TextInputProps) => {
   const [inputValue, setInputValue] = React.useState(value);
   const [isValidEmail, setIsValidEmail] = React.useState<TValidate>(
     {} as TValidate,
@@ -65,7 +79,7 @@ const EmailInput = ({
         return customValidate(v);
       }
 
-      const emailObj = parseAddress(v, emailSettings);
+      const emailObj = parseAddress(v, emailSettings ?? new EmailSettings());
       const isValid = emailObj.isValid();
       const parsedErrors = emailObj.parseErrors;
       const errors = parsedErrors
@@ -124,6 +138,18 @@ const EmailInput = ({
   return (
     <TextInputWrapper
       {...rest}
+      className={className}
+      autoComplete={autoComplete}
+      id={id}
+      isDisabled={isDisabled}
+      isReadOnly={isReadOnly}
+      maxLength={maxLength}
+      name={name}
+      placeholder={placeholder}
+      scale={scale}
+      size={size}
+      title={title}
+      withBorder={withBorder}
       isAutoFocussed={isMobile && isIOS ? false : isAutoFocussed}
       hasError={isError}
       value={inputValue}
@@ -133,24 +159,6 @@ const EmailInput = ({
       onBlur={onBlurAction}
     />
   );
-};
-
-EmailInput.defaultProps = {
-  autoComplete: "email",
-  className: "",
-  hasError: undefined,
-  id: "",
-  isDisabled: false,
-  isReadOnly: false,
-  maxLength: 255,
-  name: "",
-  placeholder: "",
-  scale: false,
-  size: InputSize.base,
-  title: "",
-  value: "",
-  withBorder: true,
-  emailSettings: new EmailSettings(),
 };
 
 export { EmailInput };

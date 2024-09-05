@@ -30,7 +30,7 @@ import styled from "styled-components";
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { githubLightInit, githubDarkInit } from "@uiw/codemirror-theme-github";
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
 
 const StyledContainer = styled.div`
@@ -39,6 +39,7 @@ const StyledContainer = styled.div`
   width: 800px;
   overflow: hidden;
   background-color: ${(props) => props.theme.sdkPresets.previewBackgroundColor};
+  margin-bottom: 16px;
 `;
 
 StyledContainer.defaultProps = { theme: Base };
@@ -50,28 +51,28 @@ const CodeBlock = ({ config }) => {
 
   const baseTheme = githubLightInit({
     settings: {
-      background: "#FFFFFF",
-      caret: "#000000",
-      lineHighlight: "#F3F4F4",
-      gutterBorder: "#F8F9F9",
-      gutterBackground: "#F8F9F9",
-      gutterForeground: "#333333",
+      background: globalColors.white,
+      caret: globalColors.darkBlack,
+      lineHighlight: globalColors.lightGrayHover,
+      gutterBorder: globalColors.grayLight,
+      gutterBackground: globalColors.grayLight,
+      gutterForeground: globalColors.black,
     },
   });
 
   const darkTheme = githubDarkInit({
     settings: {
-      background: "#282828",
-      caret: "#FFFFFF",
-      lineHighlight: "#3D3D3D",
-      gutterBorder: "#242424",
-      gutterBackground: "#242424",
-      gutterForeground: "#ADADAD",
+      background: globalColors.darkGrayLight,
+      caret: globalColors.white,
+      lineHighlight: globalColors.lightDarkGrayHover,
+      gutterBorder: globalColors.grayDarkMid,
+      gutterBackground: globalColors.grayDarkMid,
+      gutterForeground: globalColors.darkGrayDark,
     },
   });
 
   return (
-    <StyledContainer>
+    <StyledContainer dir="ltr">
       <CodeMirror
         value={codeString}
         maxWidth="800px"

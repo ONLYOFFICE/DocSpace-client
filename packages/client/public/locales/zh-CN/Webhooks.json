@@ -46,6 +46,7 @@
   "URL": "URL",
   "ViewRawPayload": "查看原始负载",
   "WebhookCreated": "Webhook 已被创建",
+  "WebhookCreationHint": "此 webhook 将分配给{{productName}}中的所有事件",
   "WebhookDetails": "Webhook 详细信息",
   "WebhookEditedSuccessfully": "Webhook 配置编辑成功",
   "WebhookHistory": "Webhook 历史",
@@ -53,5 +54,6 @@
   "WebhookRedilivered": "Webhook 已被重新传递",
   "WebhookRemoved": "Webhook 已被移除",
   "Webhooks": "Webhook",
-  "WebhooksGuide": "Webhook 指南"
+  "WebhooksGuide": "Webhook 指南",
+  "WebhooksInfo": "使用 webhook 根据 {{organizationName}}{{productName}}中的各种事件在您正在使用的任何应用程序或网站端执行自定义操作。\n在这里，您可以创建和管理所有 webhook、配置它们，并浏览每个 webhook 的历史记录以审核其性能。"
 }

@@ -30,6 +30,7 @@
 
 import find from "lodash/find";
 import moment from "moment-timezone";
+import { findWindows } from "windows-iana";
 import { isMobile } from "react-device-detect";
 import { I18nextProviderProps } from "react-i18next";
 import sjcl from "sjcl";
@@ -66,7 +67,6 @@ import {
 import {
   COOKIE_EXPIRATION_YEAR,
   LANGUAGE,
-  PRODUCT_NAME,
   PUBLIC_MEDIA_VIEW_URL,
   RTL_LANGUAGES,
 } from "../constants";
@@ -75,7 +75,7 @@ import { TI18n, TTranslation } from "../types";
 import { TUser } from "../api/people/types";
 import { TFolder, TFile, TGetFolder } from "../api/files/types";
 import { TRoom } from "../api/rooms/types";
-import { TPasswordHash } from "../api/settings/types";
+import { TPasswordHash, TTimeZone } from "../api/settings/types";
 import TopLoaderService from "../components/top-loading-indicator";
 
 import { Encoder } from "./encoder";
@@ -146,7 +146,7 @@ export const getUserTypeLabel = (
     case "owner":
       return t("Common:Owner");
     case "admin":
-      return t("Common:PortalAdmin", { productName: PRODUCT_NAME });
+      return t("Common:PortalAdmin", { productName: t("Common:ProductName") });
     case "manager":
       return t("Common:RoomAdmin");
     case "collaborator":
@@ -274,8 +274,13 @@ export function showLoader() {
   if (isMobile) return;
 
   hideLoader();
-
   timer = setTimeout(() => TopLoaderService.start(), 500);
+}
+
+export function showProgress() {
+  if (isMobile) return;
+  TopLoaderService.cancel();
+  TopLoaderService.start();
 }
 
 export function isMe(user: TUser, userName: string) {
@@ -634,13 +639,18 @@ export const frameCallCommand = (
   );
 };
 
+// Done in a similar way to server code
+// https://github.com/ONLYOFFICE/DocSpace-server/blob/master/common/ASC.Common/Utils/CommonFileSizeComment.cs
 export const getPowerFromBytes = (bytes: number, maxPower = 6) => {
   const power = Math.floor(Math.log(bytes) / Math.log(1024));
   return power <= maxPower ? power : maxPower;
 };
 
 export const getSizeFromBytes = (bytes: number, power: number) => {
-  return Math.floor(bytes / 1024 ** power);
+  const size = bytes / 1024 ** power;
+  const truncateToTwo = Math.trunc(size * 100) / 100;
+
+  return truncateToTwo;
 };
 
 export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
@@ -667,6 +677,8 @@ export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
   return `${resultSize} ${sizeNames[power]}`;
 };
 
+//
+
 export const getConvertedQuota = (
   t: (key: string) => string,
   bytes: number,
@@ -682,15 +694,19 @@ export const getSpaceQuotaAsText = (
   isDefaultQuotaSet: boolean,
 ) => {
   const usedValue = getConvertedQuota(t, usedSpace);
+
+  if (!isDefaultQuotaSet) return usedValue;
+
+  if (!quotaLimit) return usedValue;
+
   const quotaValue = getConvertedQuota(t, quotaLimit);
 
-  if (isDefaultQuotaSet) return `${usedValue} / ${quotaValue}`;
-
-  return usedValue;
+  return `${usedValue} / ${quotaValue}`;
 };
 
 export const conversionToBytes = (size: number, power: number) => {
-  const value = Math.floor(size) * 1024 ** power;
+  const value = Math.ceil(size * 1024 ** power);
+
   return value.toString();
 };
 
@@ -1111,14 +1127,89 @@ export const mapCulturesToArray = (
   });
 };
 
+export const mapTimezonesToArray = (
+  timezones: TTimeZone[],
+): {
+  key: string | number;
+  label: string;
+}[] => {
+  return timezones.map((timezone) => {
+    return { key: timezone.id, label: timezone.displayName };
+  });
+};
+
+export const getUserTimezone = (): string => {
+  return Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
+};
+
+export const getSelectZone = (
+  zones: {
+    key: string | number;
+    label: string;
+  }[],
+  userTimezone: string,
+) => {
+  const defaultTimezone = "UTC";
+  const isWindowsZones = zones[0].key === "Dateline Standard Time"; // TODO: get from server
+
+  if (isWindowsZones) {
+    const windowsZoneKey = findWindows(userTimezone);
+    return (
+      zones.filter((zone) => zone.key === windowsZoneKey[0]) ||
+      zones.filter((zone) => zone.key === defaultTimezone)
+    );
+  }
+  return (
+    zones.filter((zone) => zone.key === userTimezone) ||
+    zones.filter((zone) => zone.key === defaultTimezone)
+  );
+};
+
 export function getLogoUrl(
   logoType: WhiteLabelLogoType,
   dark: boolean = false,
   def: boolean = false,
+  culture?: string,
 ) {
-  return `/logo.ashx?logotype=${logoType}&dark=${dark}&default=${def}`;
+  return `/logo.ashx?logotype=${logoType}&dark=${dark}&default=${def}${culture ? `&culture=${culture}` : ""}`;
 }
 
+export const getUserTypeName = (
+  isOwner: boolean,
+  isPortalAdmin: boolean,
+  isRoomAdmin: boolean,
+  isCollaborator: boolean,
+  t: TTranslation,
+) => {
+  if (isOwner) return t("Common:Owner");
+
+  if (isPortalAdmin)
+    return t("Common:PortalAdmin", { productName: t("Common:ProductName") });
+
+  if (isRoomAdmin) return t("Common:RoomAdmin");
+
+  if (isCollaborator) return t("Common:PowerUser");
+
+  return t("Common:User");
+};
+
+export const getUserTypeDescription = (
+  isPortalAdmin: boolean,
+  isRoomAdmin: boolean,
+  isCollaborator: boolean,
+  t: TTranslation,
+) => {
+  if (isPortalAdmin)
+    return t("Translations:RolePortalAdminDescription", {
+      productName: t("Common:ProductName"),
+    });
+
+  if (isRoomAdmin) return t("Translations:RoleRoomAdminDescription");
+
+  if (isCollaborator) return t("Translations:RolePowerUserDescription");
+
+  return t("Translations:RoleViewerDescription");
+};
 export function setLanguageForUnauthorized(culture: string) {
   setCookie(LANGUAGE, culture, {
     "max-age": COOKIE_EXPIRATION_YEAR,

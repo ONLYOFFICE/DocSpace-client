@@ -24,39 +24,48 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
+
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
+import { TUser } from "@docspace/shared/api/people/types";
 import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";
+
 import * as Styled from "./index.styled";
-import SelectGroupMembersPanel from "./SelectGroupMembersPanel";
 import GroupMemberRow from "../GroupMemberRow";
+import { GroupMembersList } from "../GroupMembersList/GroupMembersList";
 
-interface GroupMember {
-  id: string;
-}
+type InfiniteLoaderProps =
+  | {
+      withInfiniteLoader: true;
+      loadNextPage: (startIndex: number) => Promise<void>;
+      hasNextPage: boolean;
+      total: number;
+    }
+  | Partial<{
+      withInfiniteLoader: undefined;
+      loadNextPage: undefined;
+      hasNextPage: undefined;
+      total: undefined;
+    }>;
 
-interface MembersParamProps {
-  groupManager: GroupMember | null;
-  groupMembers: GroupMember[] | null;
-  setGroupMembers: (groupMembers: GroupMember[]) => void;
+type MembersParamProps = {
+  groupManager: TUser | null;
+  groupMembers: TUser[] | null;
   onShowSelectMembersPanel: () => void;
-}
+  removeMember: (member: TUser) => void;
+} & InfiniteLoaderProps;
+
 const MembersParam = ({
   groupManager,
   groupMembers,
-  setGroupMembers,
   onShowSelectMembersPanel,
+  withInfiniteLoader,
+  hasNextPage,
+  loadNextPage,
+  total,
+  removeMember,
 }: MembersParamProps) => {
   const { t } = useTranslation(["Common", "PeopleTranslation"]);
-
-  const onRemoveUserById = useCallback(
-    (id: string) => {
-      const newGroupMembers = groupMembers?.filter((gm) => gm.id !== id);
-      setGroupMembers(newGroupMembers || []);
-    },
-    [groupMembers, setGroupMembers],
-  );
 
   return (
     <div>
@@ -67,16 +76,27 @@ const MembersParam = ({
         <div className="label">{t("PeopleTranslations:AddMembers")}</div>
       </Styled.AddMembersButton>
 
-      {groupMembers &&
-        groupMembers
-          .filter((member) => member.id !== groupManager?.id)
-          .map((member) => (
-            <GroupMemberRow
-              key={member.id}
-              groupMember={member}
-              onClickRemove={() => onRemoveUserById(member.id)}
-            />
-          ))}
+      {groupMembers ? (
+        withInfiniteLoader ? (
+          <GroupMembersList
+            members={groupMembers}
+            removeMember={removeMember}
+            hasNextPage={hasNextPage}
+            loadNextPage={loadNextPage}
+            total={total}
+          />
+        ) : (
+          groupMembers
+            .filter((member) => member.id !== groupManager?.id)
+            .map((member) => (
+              <GroupMemberRow
+                key={member.id}
+                groupMember={member}
+                removeMember={removeMember}
+              />
+            ))
+        )
+      ) : null}
     </div>
   );
 };

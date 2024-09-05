@@ -34,6 +34,7 @@ import RoomTypeListLoader from "@docspace/shared/skeletons/create-edit-room/Room
 import { RoomsTypeValues } from "@docspace/shared/utils/common";
 
 const StyledRoomTypeList = styled.div`
+  margin-top: 20px;
   width: 100%;
   display: flex;
   flex-direction: column;

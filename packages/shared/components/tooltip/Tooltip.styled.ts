@@ -65,11 +65,11 @@ const StyledTooltip = styled.div<{ maxWidthProp?: string; color?: string }>`
   }
 
   .__react_component_tooltip.place-left::after {
-    border-left: none !important;
+    border-inline-start: none !important;
   }
 
   .__react_component_tooltip.place-right::after {
-    border-right: none !important;
+    border-inline-end: none !important;
   }
 
   .__react_component_tooltip.place-top::after {

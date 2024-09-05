@@ -127,10 +127,8 @@ export default function withContent(WrappedContent) {
       "DataReassignmentDialog",
     ]);
 
-    const contextOptionsProps = useMemo(
-      () => ({
-        contextOptions: getModel(item, t),
-      }),
+    const getContextModel = useCallback(
+      () => getModel(item, t),
       [getModel, item, t],
     );
 
@@ -147,7 +145,7 @@ export default function withContent(WrappedContent) {
         onEmailClick={onEmailClick}
         checkedProps={checkedProps}
         element={element}
-        contextOptionsProps={contextOptionsProps}
+        getContextModel={getContextModel}
         value={value}
         onOpenGroup={onOpenGroup}
         {...props}

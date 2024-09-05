@@ -33,21 +33,13 @@ import { Text } from "@docspace/shared/components/text";
 
 const HideButton = (props) => {
   const { t } = useTranslation("SingleSignOn");
-  const {
-    text,
-    label,
-    isAdditionalParameters,
-    value,
-    setIsSettingsShown,
-    isDisabled,
-  } = props;
-  const marginProp = isAdditionalParameters ? null : "24px 0";
+  const { text, label, isAdditionalParameters, value, setIsSettingsShown } =
+    props;
+  const marginProp = isAdditionalParameters ? null : "24px 0 8px 0px";
 
   const onClick = () => {
     setIsSettingsShown(!value);
   };
-
-  const onClickProp = isDisabled ? {} : { onClick: onClick };
 
   return (
     <Box
@@ -71,7 +63,7 @@ const HideButton = (props) => {
       <Link
         className="hide-button settings_unavailable"
         isHovered
-        {...onClickProp}
+        onClick={onClick}
         type="action"
       >
         {value

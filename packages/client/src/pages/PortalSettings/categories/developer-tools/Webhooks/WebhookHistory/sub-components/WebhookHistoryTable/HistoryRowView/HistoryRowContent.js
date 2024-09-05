@@ -33,6 +33,7 @@ import { RowContent } from "@docspace/shared/components/row-content";
 
 import StatusBadge from "../../../../sub-components/StatusBadge";
 import { useTranslation } from "react-i18next";
+import { globalColors } from "@docspace/shared/themes";
 
 const StyledRowContent = styled(RowContent)`
   display: flex;
@@ -77,7 +78,7 @@ export const HistoryRowContent = ({ sectionWidth, historyItem }) => {
           </Text>
           <StatusBadge status={historyItem.status} />
         </StatusHeader>
-        <Text fontWeight={600} fontSize="12px" color="#A3A9AE">
+        <Text fontWeight={600} fontSize="12px" color={globalColors.gray}>
           {formattedDelivery}
         </Text>
       </ContentWrapper>

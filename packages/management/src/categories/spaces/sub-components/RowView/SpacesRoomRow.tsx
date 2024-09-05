@@ -48,17 +48,11 @@ const StyledRoomRow = styled(Row)`
 
   .styled-element {
     width: 32px;
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: 20px;`
-        : `margin-left: 20px`}
+    margin-inline-start: 20px;
   }
 
   .row_context-menu-wrapper {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-left: 18px;`
-        : `margin-right: 18px;`}
+    margin-inline-end: 18px;
   }
 `;
 
@@ -68,7 +62,7 @@ type TRow = {
 const SpacesRoomRow = ({ item }: TRow) => {
   const { spacesStore, settingsStore } = useStore();
   const { setDeletePortalDialogVisible, setCurrentPortal } = spacesStore;
-  const { tenantAlias, getAllPortals } = settingsStore;
+  const { tenantAlias, getAllPortals, theme } = settingsStore;
 
   const [isVisibleDialog, setIsVisibleDialog] = useState(false);
   const [isDisableQuota, setIsDisableQuota] = useState(false);
@@ -152,6 +146,7 @@ const SpacesRoomRow = ({ item }: TRow) => {
         element={logoElement}
         key={item.id}
         data={item}
+        theme={theme}
       >
         <RoomContent item={item} isCurrentPortal={isCurrentPortal} />
       </StyledRoomRow>

@@ -3,6 +3,5 @@
   "FormFilling": "Remplissage de formulaire",
   "LinkName": "Nom du lien",
   "ShareEmailBody": "Vous avez été autorisé à accéder au document {{itemName}}. Cliquez sur le lien ci-dessous pour ouvrir le document maintenant : {{shareLink}}.",
-  "ShareEmailSubject": "Vous avez été autorisé à accéder au document {{itemName}}",
-  "SharingSettingsTitle": "Paramètres de partage"
+  "ShareEmailSubject": "Vous avez été autorisé à accéder au document {{itemName}}"
 }

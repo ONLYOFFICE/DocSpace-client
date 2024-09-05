@@ -43,7 +43,7 @@ const HistoryMainText = ({ t, feed }: HistoryMainTextProps) => {
   );
 };
 
-export default inject(({ infoPanelStore }) => {
+export default inject<TStore>(({ infoPanelStore }) => {
   const { infoPanelSelection } = infoPanelStore;
   return {
     infoPanelSelection,

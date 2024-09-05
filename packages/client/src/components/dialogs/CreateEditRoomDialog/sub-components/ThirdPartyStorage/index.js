@@ -37,7 +37,6 @@ import ThirdPartyComboBox from "./ThirdPartyComboBox";
 import FolderInput from "./FolderInput";
 import { getOAuthToken } from "@docspace/shared/utils/common";
 import { Checkbox } from "@docspace/shared/components/checkbox";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledThirdPartyStorage = styled(StyledParam)`
   flex-direction: column;
@@ -72,6 +71,7 @@ const ThirdPartyStorage = ({
   isDisabled,
   currentColorScheme,
   isRoomAdmin,
+  isAdmin,
   createNewFolderIsChecked,
   onCreateFolderChange,
 
@@ -89,7 +89,7 @@ const ThirdPartyStorage = ({
       const data = isRoomAdmin ? (
         <Text as="p">
           {t("ThirdPartyStorageRoomAdminNoStorageAlert", {
-            productName: PRODUCT_NAME,
+            productName: t("Common:ProductName"),
           })}
         </Text>
       ) : (
@@ -169,6 +169,7 @@ const ThirdPartyStorage = ({
           setIsScrollLocked={setIsScrollLocked}
           setIsOauthWindowOpen={setIsOauthWindowOpen}
           isDisabled={isDisabled}
+          isAdmin={isAdmin}
         />
       )}
 
@@ -214,7 +215,7 @@ export default inject(
 
     const connectItems = thirdPartyStore.connectingStorages;
 
-    const { isRoomAdmin } = authStore;
+    const { isRoomAdmin, isAdmin } = authStore;
 
     return {
       connectItems,
@@ -233,6 +234,7 @@ export default inject(
       getOAuthToken,
       currentColorScheme,
       isRoomAdmin,
+      isAdmin,
       fetchConnectingStorages: thirdPartyStore.fetchConnectingStorages,
     };
   },

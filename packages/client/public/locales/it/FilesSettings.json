@@ -6,6 +6,7 @@
   "DisplayTemplates": "Visualizza modelli documento",
   "IntermediateVersion": "Mantieni tutte le versioni intermedie salvate",
   "KeepIntermediateVersion": "Mantieni le versioni intermedie durante la modifica",
+  "OpenSameTab": "Apri l'editor di {{organizationName}} nella stessa scheda",
   "OriginalCopy": "Salva anche la copia del file in formato originale",
   "StoringFileVersion": "Memorizzazione delle versioni dei file",
   "ThirdPartyAccounts": "Account di terze parti",

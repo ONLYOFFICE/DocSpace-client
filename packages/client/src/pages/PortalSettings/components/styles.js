@@ -66,10 +66,7 @@ export const StyledMobileCategoryWrapper = styled.div`
   }
 
   .inherit-title-link {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-left: 7px;`
-        : `margin-right: 7px;`}
+    margin-inline-end: 7px;
     font-size: 16px;
     font-weight: 700;
   }

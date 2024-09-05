@@ -37,6 +37,7 @@ import CreatePortalDialog from "./sub-components/dialogs/CreatePortalDialog";
 import DeletePortalDialog from "./sub-components/dialogs/DeletePortalDialog";
 import SpaceCreatedDialog from "./sub-components/dialogs/SpaceCreatedDialog";
 import { SpacesLoader } from "./sub-components/SpacesLoader";
+import { setDocumentTitle } from "SRC_DIR/utils";
 
 const Spaces = () => {
   const { t } = useTranslation(["Management", "Common", "Settings"]);
@@ -50,7 +51,7 @@ const Spaces = () => {
     deletePortalDialogVisible,
     spaceCreatedDialogVisible,
   } = spacesStore;
-  const { setDocumentTitle } = authStore;
+
   const { portals } = settingsStore;
 
   React.useEffect(() => {

@@ -31,6 +31,7 @@ import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { NoUserSelect, getLogoUrl } from "@docspace/shared/utils";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
+import { globalColors } from "@docspace/shared/themes";
 
 const LogoItem = styled.div`
   display: flex;
@@ -41,7 +42,7 @@ const LogoItem = styled.div`
   cursor: pointer;
 
   .nav-logo-wrapper {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
     ${NoUserSelect}
   }
 

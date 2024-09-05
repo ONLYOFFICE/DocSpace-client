@@ -42,21 +42,22 @@ const StyledPeopleRow = styled(TableRow)`
   }
 
   .table-container_row-checkbox-wrapper {
-    padding-left: 4px;
+    padding-inline-start: 4px;
     min-width: 46px;
 
     .table-container_row-checkbox {
-      margin-left: -4px;
-      padding: 16px 0px 16px 12px;
+      margin-inline-start: -4px;
+      padding-block: 16px;
+      padding-inline: 12px 0;
     }
   }
 
   .link-with-dropdown-group {
-    margin-right: 12px;
+    margin-inline-end: 12px;
   }
 
   .table-cell_username {
-    margin-right: 12px;
+    margin-inline-end: 12px;
   }
   ${(props) => props.isSettingNotPaid && UnavailableStyles}
 `;

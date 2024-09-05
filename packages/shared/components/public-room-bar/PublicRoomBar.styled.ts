@@ -26,12 +26,12 @@
 
 import styled from "styled-components";
 
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 
 const StyledPublicRoomBar = styled.div`
   display: flex;
   background-color: ${(props) => props.theme.infoBlock.background};
-  color: #333;
+  color: ${globalColors.black};
   font-size: 12px;
   padding: 12px 16px;
   border-radius: 6px;
@@ -61,16 +61,17 @@ const StyledPublicRoomBar = styled.div`
   }
 
   .close-icon {
-    margin: -5px -17px 0 0;
+    /* margin: -5px -17px 0 0; */
+    cursor: pointer;
 
     path {
       fill: ${({ theme }) => theme.iconButton.color};
     }
 
-    svg {
+    /* svg {
       weight: 8px;
       height: 8px;
-    }
+    } */
   }
 `;
 

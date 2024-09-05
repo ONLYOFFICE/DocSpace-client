@@ -16,5 +16,8 @@
   "SsoSettingsDisabled": "Single sign-on is disabled",
   "SsoSettingsEmptyToken": "Authentication token could not be found",
   "SsoSettingsNotValidToken": "Invalid authentication token",
-  "SsoSettingsUserTerminated": "This user is disabled"
+  "SsoSettingsUserTerminated": "This user is disabled",
+  "OAuthApplicationEmpty": "Application could not be found",
+  "OAuthApplicationDisabled": "This application is disabled",
+  "OAuthClientEmpty": "Client id could not be found"
 }

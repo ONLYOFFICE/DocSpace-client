@@ -28,10 +28,10 @@ import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 import { inject, observer } from "mobx-react";
-import LanguageAndTimeZone from "./Customization/language-and-time-zone";
-import WelcomePageSettings from "./Customization/welcome-page-settings";
-import PortalRenaming from "./Customization/portal-renaming";
-import DNSSettings from "./Customization/dns-settings";
+import { LanguageAndTimeZoneSettings } from "./Customization/language-and-time-zone";
+import { WelcomePageSettings } from "./Customization/welcome-page-settings";
+import { PortalRenaming } from "./Customization/portal-renaming";
+import { DNSSettings } from "./Customization/dns-settings";
 import CustomizationNavbar from "./customization-navbar";
 import { Base } from "@docspace/shared/themes";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
@@ -70,14 +70,7 @@ const StyledComponent = styled.div`
     font-weight: bold;
     font-size: 16px;
     line-height: 22px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 4px;
-          `
-        : css`
-            margin-right: 4px;
-          `}
+    margin-inline-end: 4px;
   }
 
   .settings-block {
@@ -110,7 +103,7 @@ const Customization = (props) => {
   const isLoadedSetting = isLoaded && tReady;
 
   useEffect(() => {
-    setDocumentTitle(t("Customization"));
+    setDocumentTitle(t("Settings:Customization"));
 
     return () => {
       resetIsInit();
@@ -137,7 +130,7 @@ const Customization = (props) => {
           {t("Settings:CustomizationDescription")}
         </div>
       )}
-      <LanguageAndTimeZone isMobileView={viewMobile} />
+      <LanguageAndTimeZoneSettings isMobileView={viewMobile} />
       <StyledSettingsSeparator />
       <WelcomePageSettings isMobileView={viewMobile} />
       <StyledSettingsSeparator />

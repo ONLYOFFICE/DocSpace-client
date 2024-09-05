@@ -27,8 +27,10 @@
 import React from "react";
 import { ReactSVG } from "react-svg";
 import PeopleIcon from "PUBLIC_DIR/images/people.react.svg?url";
+import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg?url";
 
 import { Text } from "../text";
+import { IconButton } from "../icon-button";
 
 import { StyledPublicRoomBar } from "./PublicRoomBar.styled";
 import { PublicRoomBarProps } from "./PublicRoomBar.types";
@@ -64,12 +66,14 @@ const PublicRoomBar = (props: PublicRoomBarProps) => {
         </Text>
       </div>
 
-      {/* <IconButton
-        className="close-icon"
-        size={8}
-        iconName={CrossReactSvg}
-        onClick={onClose}
-      /> */}
+      {onClose && (
+        <IconButton
+          className="close-icon"
+          size={12}
+          iconName={CrossReactSvg}
+          onClick={onClose}
+        />
+      )}
     </StyledPublicRoomBar>
   );
 };

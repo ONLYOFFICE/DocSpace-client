@@ -35,7 +35,6 @@ import { Button } from "@docspace/shared/components/button";
 import RecoverAccessModalDialog from "@docspace/shared/components/recover-access-modal-dialog/RecoverAccessModalDialog";
 import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledBodyContent = styled.div`
   max-width: 480px;
@@ -46,9 +45,7 @@ const StyledBodyContent = styled.div`
   }
 `;
 const StyledBody = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
+  width: 100%;
 
   .portal-unavailable_container {
     .portal-unavailable_contact-text {
@@ -83,18 +80,20 @@ const PortalUnavailable = ({ onLogoutClick }) => {
         t={t}
         emailPlaceholderText={t("Common:RegistrationEmail")}
         textBody={t("PortalUnavailable:AccessingProblem", {
-          productName: PRODUCT_NAME,
+          productName: t("Common:ProductName"),
         })}
         onClose={onCloseDialog}
       />
       <ErrorContainer
         className="portal-unavailable_container"
-        headerText={t("ErrorUnavailableText", { productName: PRODUCT_NAME })}
+        headerText={t("ErrorUnavailableText", {
+          productName: t("Common:ProductName"),
+        })}
       >
         <StyledBodyContent>
           <Text textAlign="center" className="portal-unavailable_text">
             {t("PortalUnavailable:AccessingProblem", {
-              productName: PRODUCT_NAME,
+              productName: t("Common:ProductName"),
             })}
           </Text>
           {!window.navigator.userAgent.includes("ZoomWebKit") &&
@@ -114,7 +113,7 @@ const PortalUnavailable = ({ onLogoutClick }) => {
             onClick={onClickToContact}
           >
             {t("PortalUnavailable:ContactAdministrator", {
-              productName: PRODUCT_NAME,
+              productName: t("Common:ProductName"),
             })}
           </ColorTheme>
         </StyledBodyContent>
@@ -123,7 +122,7 @@ const PortalUnavailable = ({ onLogoutClick }) => {
   );
 };
 
-export default inject(({ profileActionsStore }) => {
+export const Component = inject(({ profileActionsStore }) => {
   const { onLogoutClick } = profileActionsStore;
 
   return { onLogoutClick };

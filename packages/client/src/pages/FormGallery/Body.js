@@ -49,15 +49,15 @@ const StyledEmptyContainerLinks = styled.div`
   .icon {
     height: 20px;
     width: 12px;
-    margin: ${({ theme }) =>
-      theme.interfaceDirection !== "rtl" ? "4px 4px 0 0;" : "4px 0 0 4px;"};
+    margin-block: 4px 0;
+    margin-inline: 0 4px;
     cursor: pointer;
   }
 
   .link {
     color: ${({ theme }) => theme.filesEmptyContainer.linkColor};
-    margin: ${({ theme }) =>
-      theme.interfaceDirection !== "rtl" ? "0 7px 0 0" : "0 0 0 7px;"};
+    margin-block: 0;
+    margin-inline: 0 7px;
   }
 `;
 

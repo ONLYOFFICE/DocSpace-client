@@ -24,36 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
+
 import { SelectorAddButton } from "@docspace/shared/components/selector-add-button";
-import * as Styled from "./index.styled";
+import { TUser } from "@docspace/shared/api/people/types";
 import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";
-import SelectGroupManagerPanel from "./SelectGroupManagerPanel";
+
+import * as Styled from "./index.styled";
 import GroupMemberRow from "../GroupMemberRow";
 
 interface HeadOfGroupProps {
-  groupManager: object | null;
-  setGroupManager: (groupManager: object | null) => void;
-  groupMembers: object[] | null;
-  setGroupMembers: (groupMembers: object[]) => void;
+  groupManager: TUser | null;
+  removeManager: () => void;
+  onShowSelectGroupManagerPanel: () => void;
 }
 
 const HeadOfGroup = ({
   groupManager,
-  setGroupManager,
-  groupMembers,
-  setGroupMembers,
+  removeManager,
   onShowSelectGroupManagerPanel,
 }: HeadOfGroupProps) => {
   const { t } = useTranslation(["Common"]);
-
-  const onRemoveGroupManager = () => {
-    setGroupManager(null);
-    setGroupMembers(
-      groupMembers?.filter((gm) => gm.id !== groupManager!.id) || [],
-    );
-  };
 
   return (
     <div>
@@ -67,7 +58,7 @@ const HeadOfGroup = ({
       ) : (
         <GroupMemberRow
           groupMember={groupManager}
-          onClickRemove={onRemoveGroupManager}
+          removeMember={removeManager}
         />
       )}
     </div>

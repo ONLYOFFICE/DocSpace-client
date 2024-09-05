@@ -57,6 +57,7 @@ const ViewerWrapper = memo(
       isPreviewFile,
       currentDeviceType,
       isPublicFile,
+      autoPlay,
 
       onClose,
       onNextClick,
@@ -99,7 +100,7 @@ const ViewerWrapper = memo(
           directionY="top"
           withBackdrop={false}
           isDefaultMode={false}
-          directionX={isRtl ? "left" : "right"}
+          directionX="right"
           manualY={`${bottom ?? 63}px`}
           manualX={`${right ?? -31}px`}
         >
@@ -167,6 +168,7 @@ const ViewerWrapper = memo(
         visible={visible}
         isImage={isImage}
         toolbar={toolbar}
+        autoPlay={autoPlay}
         playlist={playlist}
         audioIcon={audioIcon}
         errorTitle={errorTitle}

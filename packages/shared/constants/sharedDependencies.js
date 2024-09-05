@@ -42,10 +42,7 @@ module.exports = {
     singleton: true,
     requiredVersion: deps["react-dom"],
   },
-  "react-router": {
-    singleton: true,
-    requiredVersion: deps["react-router"],
-  },
+
   "react-router-dom": {
     singleton: true,
     requiredVersion: deps["react-router-dom"],
@@ -186,9 +183,5 @@ module.exports = {
   "query-string": {
     singleton: true,
     requiredVersion: deps["query-string"],
-  },
-  "@loadable/component": {
-    singleton: true,
-    requiredVersion: deps["@loadable/component"],
   },
 };

@@ -43,14 +43,7 @@ const StyledLoader = styled.div`
   }
 
   .padding-right {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 12px;
-          `
-        : css`
-            padding-right: 12px;
-          `}
+    padding-inline-end: 12px;
   }
 
   .preview-title {

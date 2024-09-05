@@ -1,7 +1,10 @@
 {
+  "ActionCannotBeUndone": " 所选的已禁用用户将从{{productName}}中删除。此操作无法撤消。",
   "CannotReassignFiles": "如果您一次删除了多个用户，则无法将他们的文件重新分配给其他用户。",
   "DeleteGroupUsersSuccessMessage": "用户已成功删除。",
   "DeleteMyDocumentsUser": "该用户“我的文档”板块中的所有个人文件和文件夹将被永久删除。",
+  "DeletePersonalData": " 选定用户的“文档”和“垃圾箱”部分*中的个人数据、所有个人文件和文件夹将被永久删除。选定用户保存在公共部分*（如房间）中的文件和文件夹将保留在{{productName}}中。",
+  "DeletePersonalDataApplicable": " *适用于拥有此类文件和文件夹的选定用户。",
   "DeleteReassignDescriptionUser": "此用户创建的 {{warningMessageMyDocuments}} 房间及存储在房间中的文档将被自动转让给执行删除操作的管理员：<strong>{{userPerformedDeletion}} ({{userYou}})</strong>。您可以手动转让数据，选择其他转让目标用户。",
   "DeleteUser": "删除用户",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> 将被删除。此操作无法撤消。",

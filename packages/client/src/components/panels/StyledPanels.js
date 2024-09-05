@@ -29,28 +29,14 @@ import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { Link } from "@docspace/shared/components/link";
 import { desktop, mobile, tablet } from "@docspace/shared/utils";
 import { isMobile } from "react-device-detect";
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 
 const PanelStyles = css`
   .panel_combo-box {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 10px;
-          `
-        : css`
-            margin-left: 10px;
-          `}
+    margin-inline-start: 10px;
 
     .optionalBlock {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 4px;
-            `
-          : css`
-              margin-right: 4px;
-            `}
+      margin-inline-end: 4px;
       display: flex;
     }
 
@@ -68,8 +54,7 @@ const PanelStyles = css`
     padding: 16px;
     width: 100%;
     margin: auto;
-    left: 0;
-    right: 0;
+    inset-inline: 0;
   }
 `;
 
@@ -80,14 +65,7 @@ const StyledAsidePanel = styled.div`
     width: 100%;
     font-weight: 700;
     margin: 14px 0;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 10px;
-          `
-        : css`
-            padding-right: 10px;
-          `}
+    padding-inline-end: 10px;
   }
 
   .modal-dialog-aside {
@@ -118,14 +96,7 @@ const StyledVersionHistoryPanel = styled.div`
 
   .version-history-panel-header {
     height: 53px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 0px;
-          `
-        : css`
-            margin-left: 0px;
-          `}
+    margin-inline-start: 0;
     .version-history-panel-heading {
       font-weight: 700;
       margin-bottom: 13px;
@@ -135,38 +106,17 @@ const StyledVersionHistoryPanel = styled.div`
 
   .version-history-panel-body {
     padding-bottom: ${(props) => (props.isLoading ? "0px" : null)};
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 16px;
-          `
-        : css`
-            margin-left: 16px;
-          `}
+    margin-inline-start: 16px;
 
     height: calc(100% - 53px);
     box-sizing: border-box;
 
     .version-comment-wrapper {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: 85px;
-            `
-          : css`
-              margin-left: 85px;
-            `}
+      margin-inline-start: 85px;
     }
 
     .version_edit-comment {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              padding-right: 7px;
-            `
-          : css`
-              padding-left: 7px;
-            `}
+      padding-inline-start: 7px;
     }
   }
 `;
@@ -186,14 +136,7 @@ const StyledContent = styled.div`
     props.theme.filesPanels.content.backgroundColor};
 
   .header_aside-panel-plus-icon {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: auto;
-          `
-        : css`
-            margin-left: auto;
-          `}
+    margin-inline-start: auto;
   }
 
   .sharing-access-combo-box-icon {
@@ -215,37 +158,16 @@ const StyledContent = styled.div`
 
   .panel-loader-wrapper {
     margin-top: 8px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-right: 32px;
-          `
-        : css`
-            padding-left: 32px;
-          `}
+    padding-inline-start: 32px;
   }
   .panel-loader {
     display: inline;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 10px;
-          `
-        : css`
-            margin-right: 10px;
-          `}
+    margin-inline-end: 10px;
   }
 
   .layout-progress-bar {
     position: fixed;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: 15px;
-          `
-        : css`
-            right: 15px;
-          `}
+    inset-inline-end: 15px;
     bottom: 21px;
 
     @media ${tablet} {
@@ -256,63 +178,16 @@ const StyledContent = styled.div`
 
 StyledContent.defaultProps = { theme: Base };
 
-const StyledHeaderContent = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-left: -16px;
-        `
-      : css`
-          margin-right: -16px;
-        `}
-
-  border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
-  }
-
-  .files-operations-header,
-  .sharing_panel-header {
-    font-weight: 700;
-    margin: 14px 0;
-  }
-
-  @media ${desktop} {
-    .files-operations-header,
-    .sharing_panel-header {
-      margin: 12px 0;
-      font-size: 18px;
-    }
-  }
-`;
-
-StyledHeaderContent.defaultProps = { theme: Base };
-
 const StyledBody = styled.div`
   &.files-operations-body {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding: 0 16px 0 0;
-          `
-        : css`
-            padding: 0 0 0 16px;
-          `}
+    padding-block: 0;
+    padding-inline: 16px 0;
     box-sizing: border-box;
     width: 100%;
     height: calc(100vh - 125px);
 
     .styled-element {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: -2px;
-            `
-          : css`
-              margin-left: -2px;
-            `}
+      margin-inline-start: -2px;
     }
   }
 
@@ -387,8 +262,7 @@ const StyledFooter = styled.div`
   padding: 16px;
   width: 100%;
   margin: auto;
-  left: 0;
-  right: 0;
+  inset-inline: 0;
   background-color: ${(props) =>
     props.theme.filesPanels.footer.backgroundColor};
   border-top: ${(props) => props.theme.filesPanels.footer.borderTop};
@@ -401,37 +275,16 @@ const StyledFooter = styled.div`
     }
 
     .checkbox {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 6px;
-            `
-          : css`
-              margin-right: 6px;
-            `}
+      margin-inline-end: 6px;
     }
   }
 
   .sharing_panel-button {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: auto;
-          `
-        : css`
-            margin-left: auto;
-          `}
+    margin-inline-start: auto;
   }
 
   .new_file_panel-first-button {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 8px;
-          `
-        : css`
-            margin-right: 8px;
-          `}
+    margin-inline-end: 8px;
   }
   .new_files_panel-button {
     width: 100%;
@@ -456,14 +309,7 @@ const StyledFooter = styled.div`
 StyledFooter.defaultProps = { theme: Base };
 
 const StyledLinkRow = styled.div`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-left: -16px;
-        `
-      : css`
-          margin-right: -16px;
-        `}
+  margin-inline-end: -16px;
   padding: 0 16px;
   box-sizing: border-box;
   background-color: ${(props) =>
@@ -507,7 +353,7 @@ const StyledLinkRow = styled.div`
   .row_content {
     display: grid;
     grid-template-columns: 1fr 28px;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
   }
 
   .combo-button {
@@ -544,14 +390,7 @@ const StyledModalRowContainer = styled.div`
   }
 
   .panel_combo-box {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 0px;
-          `
-        : css`
-            margin-left: 0px;
-          `}
+    margin-inline-start: 0;
 
     .combo-button {
       height: 30px;
@@ -561,15 +400,7 @@ const StyledModalRowContainer = styled.div`
     }
 
     .optionalBlock {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 4px;
-            `
-          : css`
-              margin-right: 4px;
-            `}
-
+      margin-inline-end: 4px;
       display: flex;
     }
 
@@ -596,7 +427,7 @@ const StyledModalRowContainer = styled.div`
   }
 
   .embedding-panel_code-container {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
   }
 
   .embedding-panel_text {
@@ -607,30 +438,16 @@ const StyledModalRowContainer = styled.div`
     position: absolute;
     z-index: 1;
     margin: 8px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: 0px;
-          `
-        : css`
-            right: 0px;
-          `}
+    inset-inline-end: 0;
   }
 
   .embedding-panel_links-container {
     display: flex;
 
     .embedding-panel_link {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 8px;
-            `
-          : css`
-              margin-right: 8px;
-            `}
+      margin-inline-end: 8px;
 
-      border: 1px solid #eceef1;
+      border: ${(props) => props.theme.filesPanels.embedding.border};
       border-radius: 16px;
       line-height: 30px;
       padding: 4px 15px;
@@ -641,20 +458,13 @@ const StyledModalRowContainer = styled.div`
     display: flex;
 
     .embedding-panel_input {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 8px;
-            `
-          : css`
-              margin-right: 8px;
-            `}
+      margin-inline-end: 8px;
       width: 94px;
     }
   }
 
   .embedding-panel_code-container {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
   }
 
   .embedding-panel_text {
@@ -665,37 +475,16 @@ const StyledModalRowContainer = styled.div`
     position: absolute;
     z-index: 1;
     margin: 8px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            left: 0;
-          `
-        : css`
-            right: 0;
-          `}
+    inset-inline-end: 0;
   }
 
   .panel-loader-wrapper {
     margin-top: 8px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-right: 32px;
-          `
-        : css`
-            padding-left: 32px;
-          `}
+    padding-inline-start: 32px;
   }
   .panel-loader {
     display: inline;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 10px;
-          `
-        : css`
-            margin-right: 10px;
-          `}
+    margin-inline-end: 10px;
   }
 
   @media ${tablet} {
@@ -712,13 +501,6 @@ const StyledLink = styled(Link)`
 
 StyledModalRowContainer.defaultProps = { theme: Base };
 
-const StyledUploadHeader = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
 const StyledUploadBody = styled.div`
   width: calc(100% + 16px);
   height: 100%;
@@ -733,13 +515,11 @@ export {
   StyledEmbeddingPanel,
   StyledVersionHistoryPanel,
   StyledContent,
-  StyledHeaderContent,
   StyledBody,
   StyledFooter,
   StyledLinkRow,
   StyledModalRowContainer,
   StyledLink,
   StyledNewFilesBody,
-  StyledUploadHeader,
   StyledUploadBody,
 };

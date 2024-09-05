@@ -30,6 +30,7 @@ import { AccountsSearchArea } from "@docspace/shared/enums";
 // import axios from "axios";
 import { Encoder } from "@docspace/shared/utils/encoder";
 import { checkFilterInstance } from "@docspace/shared/utils/common";
+import { Nullable } from "../../types";
 import { request } from "../client";
 
 import Filter from "./filter";
@@ -91,7 +92,10 @@ export async function getUser(userName = null, headers = null) {
   return user;
 }
 
-export async function getUserByEmail(userEmail: string, confirmKey = null) {
+export async function getUserByEmail(
+  userEmail: string,
+  confirmKey: Nullable<string> = null,
+) {
   const options = {
     method: "get",
     url: `/people/email?email=${userEmail}`,
@@ -129,7 +133,7 @@ export function getUserPhoto(userId) {
   });
 }
 
-export function createUser(data, confirmKey = null) {
+export function createUser(data, confirmKey: Nullable<string> = null) {
   const options = {
     method: "post",
     url: "/people",
@@ -346,12 +350,16 @@ export function linkOAuth(serializedProfile) {
   });
 }
 
-export function signupOAuth(signupAccount) {
-  return request({
+export function signupOAuth(signupAccount, confirmKey = null) {
+  const options = {
     method: "post",
     url: "people/thirdparty/signup",
     data: signupAccount,
-  });
+  };
+
+  if (confirmKey) options.headers = { confirm: confirmKey };
+
+  return request(options);
 }
 
 export function unlinkOAuth(provider) {

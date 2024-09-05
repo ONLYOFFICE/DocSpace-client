@@ -29,7 +29,7 @@ import React, { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { setDocumentTitle } from "@docspace/client/src/helpers/filesUtils";
+import { setDocumentTitle } from "@docspace/client/src/helpers/utils";
 import { PaymentsStandaloneLoader } from "@docspace/shared/skeletons/payments";
 
 import LicenseContainer from "./LicenseContainer";

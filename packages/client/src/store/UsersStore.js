@@ -149,9 +149,14 @@ class UsersStore {
     return Promise.resolve(result);
   };
 
-  removeUser = async (userId, filter) => {
+  removeUser = async (userId, filter, isInsideGroup) => {
+    const { refreshInsideGroup } = this.peopleStore.groupsStore;
+
     await api.people.deleteUsers(userId);
-    await this.getUsersList(filter, true);
+
+    isInsideGroup
+      ? await refreshInsideGroup()
+      : await this.getUsersList(filter, true);
   };
 
   get needResetUserSelection() {
@@ -168,6 +173,10 @@ class UsersStore {
           const userIndex = this.users.findIndex((x) => x.id === user.id);
           if (userIndex !== -1) this.users[userIndex] = user;
         });
+
+        if (!this.needResetUserSelection) {
+          this.peopleStore.selectionStore.updateSelection(this.peopleList);
+        }
       }
 
       return users;
@@ -340,7 +349,7 @@ class UsersStore {
 
           options.push("details");
 
-          if (userRole === "manager" || userRole === "admin") {
+          if (userRole !== "user") {
             options.push("reassign-data");
           }
 
@@ -380,9 +389,12 @@ class UsersStore {
           ) {
             options.push("separator-1");
 
-            if (status === EmployeeStatus.Active) {
+            if (
+              status === EmployeeStatus.Active ||
+              status === EmployeeStatus.Pending
+            ) {
               options.push("disable");
-            } else {
+            } else if (status === EmployeeStatus.Disabled) {
               options.push("enable");
             }
           }

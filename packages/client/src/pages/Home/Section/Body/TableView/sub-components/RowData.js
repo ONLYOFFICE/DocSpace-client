@@ -67,6 +67,11 @@ const RowDataComponent = (props) => {
   } = props;
 
   const lastColumn = getLastColumn(tableStorageName);
+  const quickButtonsComponentNode = (
+    <StyledQuickButtonsContainer>
+      {quickButtonsComponent}
+    </StyledQuickButtonsContainer>
+  );
 
   return (
     <>
@@ -107,6 +112,7 @@ const RowDataComponent = (props) => {
         <StyledBadgesContainer showHotkeyBorder={showHotkeyBorder}>
           {badgesComponent}
         </StyledBadgesContainer>
+        {lastColumn === "Name" ? quickButtonsComponentNode : <></>}
       </TableCell>
 
       {authorColumnIsEnabled ? (
@@ -124,6 +130,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "Author" ? quickButtonsComponentNode : <></>}
         </TableCell>
       ) : (
         <div />
@@ -147,6 +154,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "Created" ? quickButtonsComponentNode : <></>}
         </TableCell>
       ) : (
         <div />
@@ -167,6 +175,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "Modified" ? quickButtonsComponentNode : <></>}
         </TableCell>
       ) : (
         <div />
@@ -187,6 +196,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
+          {lastColumn === "Size" ? quickButtonsComponentNode : <></>}
         </TableCell>
       ) : (
         <div />
@@ -209,26 +219,7 @@ const RowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-        </TableCell>
-      ) : (
-        <div />
-      )}
-      {quickButtonsColumnIsEnabled ? (
-        <TableCell
-          style={
-            !quickButtonsColumnIsEnabled
-              ? { background: "none" }
-              : dragStyles.style
-          }
-          {...selectionProp}
-          className={classNames(
-            selectionProp?.className,
-            "table-container_quick-buttons-wrapper",
-          )}
-        >
-          <StyledQuickButtonsContainer>
-            {quickButtonsComponent}
-          </StyledQuickButtonsContainer>
+          {lastColumn === "Type" ? quickButtonsComponentNode : <></>}
         </TableCell>
       ) : (
         <div />
@@ -245,7 +236,6 @@ export default inject(({ tableStore, indexingStore }) => {
     sizeColumnIsEnabled,
     indexColumnIsEnabled,
     typeColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
     tableStorageName,
   } = tableStore;
 
@@ -258,9 +248,6 @@ export default inject(({ tableStore, indexingStore }) => {
     sizeColumnIsEnabled,
     indexColumnIsEnabled,
     typeColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
-
-    isIndexing,
     tableStorageName,
   };
 })(observer(RowDataComponent));

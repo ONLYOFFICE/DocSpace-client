@@ -56,7 +56,7 @@ export interface RowProps {
   /** Sets a callback function that is triggered when a row element is selected. Returns data value. */
   onSelect?: (checked: boolean, data?: TData) => void;
   /** Sets a callback function that is triggered when any element except the checkbox and context menu is clicked. */
-  onRowClick: () => void;
+  onRowClick: (e: React.MouseEvent) => void;
   /** Function that is invoked on clicking the icon button in the context-menu */
   onContextClick?: (value?: boolean) => void;
   /** Accepts css style  */

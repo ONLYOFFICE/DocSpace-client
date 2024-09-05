@@ -31,12 +31,11 @@ import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg?url";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Text } from "@docspace/shared/components/text";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledInfoBar = styled.div`
   display: flex;
   background-color: ${(props) => props.theme.infoBar.background};
-  color: #333;
+  color: ${(props) => props.theme.infoBar.textColor};
   font-size: 12px;
   padding: 12px 16px;
   border-radius: 6px;
@@ -56,7 +55,7 @@ const StyledInfoBar = styled.div`
     .header-icon {
       svg {
         path {
-          fill: #ed7309;
+          fill: ${(props) => props.theme.infoBar.iconFill};
         }
       }
     }
@@ -70,7 +69,8 @@ const StyledInfoBar = styled.div`
     font-weight: 400;
   }
   .close-icon {
-    margin: 3px 1px 0px 0px;
+    margin-block: 3px 0;
+    margin-inline: 0 1px;
     path {
       fill: ${({ theme }) => theme.iconButton.color};
     }
@@ -96,7 +96,7 @@ const InfoBar = (props) => {
           </Text>
         </div>
         <div className="body-container">
-          {t("InfoPanel:InfoBanner", { productName: PRODUCT_NAME })}
+          {t("InfoPanel:InfoBanner", { productName: t("Common:ProductName") })}
         </div>
       </div>
 

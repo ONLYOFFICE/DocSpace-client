@@ -33,14 +33,7 @@ const StyledHeadline = styled(Headline)`
   font-weight: 700;
   font-size: 18px;
   line-height: 24px;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: 18px;
-        `
-      : css`
-          margin-left: 18px;
-        `}
+  margin-inline-start: 18px;
 
   @media ${tablet} {
     font-size: 21px;
@@ -56,16 +49,9 @@ const StyledContainer = styled.div`
   align-items: center;
 
   .public-room-header_separator {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin: 0 15px 0 16px;
-            border-right: 1px solid #dfe2e3;
-          `
-        : css`
-            margin: 0 16px 0 15px;
-            border-left: 1px solid #dfe2e3;
-          `}
+    margin-block: 0;
+    margin-inline: 15px 16px;
+    border-inline-start: ${(props) => props.theme.publicRoom.border};
     height: 21px;
   }
 

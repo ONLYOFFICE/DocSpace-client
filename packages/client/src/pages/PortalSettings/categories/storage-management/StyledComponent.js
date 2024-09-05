@@ -157,7 +157,8 @@ const StyledFolderTagSection = styled.div`
   width: ${(props) => props.width + "%"};
 
   &:first-of-type {
-    border-radius: 46px 0px 0px 46px;
+    border-start-start-radius: 46px;
+    border-end-start-radius: 46px;
   }
 `;
 
@@ -196,8 +197,9 @@ const StyledStatistics = styled.div`
 const StyledDivider = styled.div`
   height: 1px;
   width: 100%;
-  background-color: #ddd;
-  margin: 28px 0 28px 0;
+  background-color: ${(props) =>
+    props.theme.client.settings.storageManagement.dividerColor};
+  margin: 28px 0 28px;
 `;
 
 const StyledSimpleFilesRow = styled(Row)`

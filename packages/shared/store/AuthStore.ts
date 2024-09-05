@@ -30,7 +30,6 @@ import { makeAutoObservable, runInAction } from "mobx";
 import api from "../api";
 import { setWithCredentialsStatus } from "../api/client";
 import { loginWithTfaCode } from "../api/user";
-import { getPortalTenantExtra } from "../api/portal";
 import { TUser } from "../api/people/types";
 import { TCapabilities, TThirdPartyProvider } from "../api/settings/types";
 import { logout as logoutDesktop } from "../utils/desktop";
@@ -42,7 +41,6 @@ import {
   isPublicPreview,
 } from "../utils/common";
 import { getCookie, setCookie } from "../utils/cookie";
-import { TTenantExtraRes } from "../api/portal/types";
 import { TenantStatus } from "../enums";
 import { COOKIE_EXPIRATION_YEAR, LANGUAGE } from "../constants";
 import { Nullable, TI18n } from "../types";
@@ -75,8 +73,6 @@ class AuthStore {
   isLogout = false;
 
   isUpdatingTariff = false;
-
-  tenantExtra: Nullable<TTenantExtraRes> = null;
 
   skipRequest = false;
 
@@ -158,7 +154,7 @@ class AuthStore {
   updateTariff = async () => {
     this.setIsUpdatingTariff(true);
 
-    await this.getTenantExtra();
+    await this.getPaymentInfo();
     await this.currentTariffStatusStore?.setPayerInfo();
 
     this.setIsUpdatingTariff(false);
@@ -170,7 +166,7 @@ class AuthStore {
 
     this.skipRequest = skipRequest ?? false;
 
-    await this.settingsStore?.init();
+    await Promise.all([this.settingsStore?.init(), this.getCapabilities()]);
 
     const requests = [];
 
@@ -189,7 +185,7 @@ class AuthStore {
       requests.push(
         this.userStore?.init(i18n, this.settingsStore.culture).then(() => {
           if (!isPortalRestore) {
-            this.getTenantExtra();
+            this.getPaymentInfo();
           }
         }),
       );
@@ -227,36 +223,24 @@ class AuthStore {
     });
   };
 
-  get isEnterprise() {
-    this.currentTariffStatusStore?.setIsEnterprise(
-      this.tenantExtra?.enterprise || false,
-    );
-    return this.tenantExtra?.enterprise;
-  }
-
-  get isCommunity() {
-    return this.tenantExtra?.opensource;
-  }
-
-  getTenantExtra = async () => {
+  getPaymentInfo = async () => {
     let refresh = false;
+
     if (window.location.search === "?complete=true") {
       window.history.replaceState({}, document.title, window.location.pathname);
       refresh = true;
     }
+    const user = this.userStore?.user?.isVisitor;
 
-    const result = await getPortalTenantExtra(refresh);
+    const request = [];
 
-    if (!result) return;
+    request.push(this.currentTariffStatusStore?.fetchPortalTariff(refresh));
 
-    const { tariff, quota, ...tenantExtra } = result;
+    if (!user) {
+      request.push(this.currentQuotaStore?.fetchPortalQuota(refresh));
+    }
 
-    runInAction(() => {
-      this.tenantExtra = { ...tenantExtra };
-    });
-
-    this.currentQuotaStore?.setPortalQuotaValue(quota);
-    this.currentTariffStatusStore?.setPortalTariffValue(tariff);
+    await Promise.all(request);
 
     this.isPortalInfoLoaded = true;
   };
@@ -369,7 +353,7 @@ class AuthStore {
 
   login = async (user: TUser, hash: string, session = true) => {
     try {
-      const response = (await api.user.login(user, hash, session)) as {
+      const response = (await api.user.login(user, hash, "", session)) as {
         token: string;
         tfa: string;
         error: { message: unknown };
@@ -470,28 +454,6 @@ class AuthStore {
       // || //this.userStore.isAuthenticated
     );
   }
-
-  setDocumentTitle = (subTitle = null) => {
-    let title;
-
-    // const currentModule = this.settingsStore?.product;
-    const organizationName = this.settingsStore?.organizationName;
-
-    if (subTitle) {
-      title = `${subTitle} - ${organizationName}`;
-      // if (this.isAuthenticated && currentModule) {
-      //   title = `${subTitle} - ${currentModule.title}`;
-      // } else {
-      //   title = `${subTitle} - ${organizationName}`;
-      // }
-      // } else if ( organizationName) {
-      // title = `${currentModule.title} - ${organizationName}`;
-    } else {
-      title = organizationName;
-    }
-
-    document.title = title ?? "";
-  };
 
   setProductVersion = (version: string) => {
     this.version = version;

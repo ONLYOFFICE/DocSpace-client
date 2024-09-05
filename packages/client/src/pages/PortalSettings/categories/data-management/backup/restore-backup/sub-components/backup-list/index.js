@@ -50,7 +50,6 @@ import { StyledBackupList } from "../../../StyledBackup";
 import BackupListBody from "./BackupListBody";
 import { TenantStatus } from "@docspace/shared/enums";
 import styled from "styled-components";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const StyledModalDialog = styled(ModalDialog)`
   .restore_footer {
@@ -58,7 +57,7 @@ const StyledModalDialog = styled(ModalDialog)`
     .restore_dialog-button {
       display: flex;
       button:first-child {
-        margin-right: 10px;
+        margin-inline-end: 10px;
         width: 50%;
       }
       button:last-child {
@@ -79,7 +78,7 @@ const StyledModalDialog = styled(ModalDialog)`
     }
 
     .backup-list_tooltip {
-      margin-left: 8px;
+      margin-inline-start: 8px;
     }
   }
 `;
@@ -210,11 +209,13 @@ const BackupListModalDialog = (props) => {
   const helpContent = () => (
     <>
       <Text className="restore-backup_warning-description">
-        {t("RestoreBackupWarningText", { productName: PRODUCT_NAME })}{" "}
+        {t("RestoreBackupWarningText", {
+          productName: t("Common:ProductName"),
+        })}{" "}
         {!standalone && (
           <Text as="span" className="restore-backup_warning-link">
             {t("RestoreBackupResetInfoWarningText", {
-              productName: PRODUCT_NAME,
+              productName: t("Common:ProductName"),
             })}
           </Text>
         )}
@@ -229,11 +230,7 @@ const BackupListModalDialog = (props) => {
       onClose={onModalClose}
       withFooterBorder
     >
-      <ModalDialog.Header>
-        <Text fontSize="21px" fontWeight={700}>
-          {t("BackupList")}
-        </Text>
-      </ModalDialog.Header>
+      <ModalDialog.Header>{t("BackupList")}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledBackupList
           isCopyingToLocal={isCopyingToLocal}

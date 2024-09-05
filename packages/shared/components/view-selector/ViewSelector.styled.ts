@@ -47,49 +47,27 @@ const StyledViewSelector = styled.div<{
               z-index: 2;
             }
             .view-selector-icon:not(:first-child) {
-              ${props.theme.interfaceDirection === "rtl"
-                ? `margin-right: -1px;`
-                : `margin-left: -1px;`}
+              margin-inline-start: -1px;
             }
           `
         : css`
             .view-selector-icon:first-child {
-              ${props.theme.interfaceDirection === "rtl"
-                ? `border-left: none;`
-                : `border-right: none;`}
+              border-inline-end: none;
             }
             .view-selector-icon:last-child {
-              ${props.theme.interfaceDirection === "rtl"
-                ? `border-right: none;`
-                : `border-left: none;`}
+              border-inline-start: none;
             }
           `}
 `;
 
 const firstItemStyle = css`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          border-top-right-radius: 3px;
-          border-bottom-right-radius: 3px;
-        `
-      : css`
-          border-top-left-radius: 3px;
-          border-bottom-left-radius: 3px;
-        `}
+  border-start-start-radius: 3px;
+  border-end-start-radius: 3px;
 `;
 
 const lastItemStyle = css`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          border-top-left-radius: 3px;
-          border-bottom-left-radius: 3px;
-        `
-      : css`
-          border-top-right-radius: 3px;
-          border-bottom-right-radius: 3px;
-        `}
+  border-start-end-radius: 3px;
+  border-end-end-radius: 3px;
 `;
 
 const IconWrapper = styled.div<{

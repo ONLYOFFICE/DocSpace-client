@@ -34,6 +34,7 @@ import * as Styled from "./index.styled";
 import { Text } from "@docspace/shared/components/text";
 import { Avatar } from "@docspace/shared/components/avatar";
 import Badges from "../../Badges";
+import { globalColors } from "@docspace/shared/themes";
 
 const GroupsTableItem = ({
   t,
@@ -43,7 +44,9 @@ const GroupsTableItem = ({
   hideColumns,
   bufferSelection,
   getGroupContextOptions,
+  getModel,
   openGroupAction,
+  peopleAccountsGroupsColumnIsEnabled,
   managerAccountsGroupsColumnIsEnabled,
 
   changeGroupSelection,
@@ -61,8 +64,8 @@ const GroupsTableItem = ({
     changeGroupContextSelection(item, !rightMouseButtonClick);
   };
 
-  const onOpenGroup = () => {
-    openGroupAction(item.id, true, item.name);
+  const onOpenGroup = (e) => {
+    openGroupAction(item.id, true, item.name, e);
   };
 
   const onRowClick = (e) => {
@@ -77,6 +80,8 @@ const GroupsTableItem = ({
 
     selectRow(item);
   };
+
+  const getContextModel = () => getModel(t, item);
 
   let value = `folder_${item.id}_false_index_${itemIndex}`;
 
@@ -98,6 +103,7 @@ const GroupsTableItem = ({
         onDoubleClick={onOpenGroup}
         hideColumns={hideColumns}
         contextOptions={getGroupContextOptions(t, item)}
+        getContextModel={getContextModel}
       >
         <TableCell className={"table-container_group-title-cell"}>
           <TableCell
@@ -135,6 +141,23 @@ const GroupsTableItem = ({
           <Badges isLDAP={item.isLDAP} />
         </TableCell>
 
+        {peopleAccountsGroupsColumnIsEnabled ? (
+          <TableCell className="table-container_group-people">
+            <Text
+              title={item.membersCount}
+              fontWeight="600"
+              fontSize="13px"
+              isTextOverflow
+              className="table-cell_group-people"
+              color={theme.filesSection.tableView.row.sideColor}
+            >
+              {item.membersCount}
+            </Text>
+          </TableCell>
+        ) : (
+          <div />
+        )}
+
         {managerAccountsGroupsColumnIsEnabled ? (
           <TableCell className={"table-container_group-manager"}>
             <Text
@@ -143,7 +166,7 @@ const GroupsTableItem = ({
               fontSize="13px"
               isTextOverflow
               className="table-cell_group-manager"
-              color={"#A3A9AE"}
+              color={globalColors.gray}
               dir="auto"
             >
               {item.manager?.displayName}
@@ -160,6 +183,7 @@ const GroupsTableItem = ({
 export default inject(({ peopleStore }) => ({
   bufferSelection: peopleStore.groupsStore.bufferSelection,
   getGroupContextOptions: peopleStore.groupsStore.getGroupContextOptions,
+  getModel: peopleStore.groupsStore.getModel,
   openGroupAction: peopleStore.groupsStore.openGroupAction,
   changeGroupSelection: peopleStore.groupsStore.changeGroupSelection,
   changeGroupContextSelection:

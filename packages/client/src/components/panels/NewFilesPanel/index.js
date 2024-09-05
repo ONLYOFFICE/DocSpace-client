@@ -52,6 +52,7 @@ import { StyledNewFilesBody, StyledLink } from "../StyledPanels";
 import withLoader from "../../../HOCs/withLoader";
 
 import config from "PACKAGE_FILE";
+import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
 const NewFilesPanel = (props) => {
   const {
@@ -60,8 +61,6 @@ const NewFilesPanel = (props) => {
     getFolderIcon,
     newFiles,
     markAsRead,
-    setMediaViewerData,
-    currentFolderId,
     setIsLoading,
     t,
     visible,
@@ -203,40 +202,10 @@ const NewFilesPanel = (props) => {
       }
 
       if (isMedia) {
-        if (currentFolderId !== item.folderId) {
-          const categoryType = getCategoryTypeByFolderType(
-            rootFolderType,
-            item.folderId,
-          );
-
-          const state = {
-            title: "",
-            rootFolderType,
-
-            isRoot: false,
-          };
-          setIsLoading(true);
-
-          const url = getCategoryUrl(categoryType, item.folderId);
-
-          const filter = FilesFilter.getDefault();
-          filter.folder = item.folderId;
-
-          window.DocSpace.navigate(`${url}?${filter.toUrlParams()}`, { state });
-
-          const mediaItem = { visible: true, id };
-          setMediaViewerData(mediaItem);
-
-          setInProgress(false);
-          onClose();
-        } else {
-          const mediaItem = { visible: true, id };
-          setMediaViewerData(mediaItem);
-
-          return onClose();
-        }
-
-        return;
+        return window.open(
+          combineUrl(MEDIA_VIEW_URL, id),
+          openOnNewPage ? "_blank" : "_self",
+        );
       }
 
       if (fileItemsList && enablePlugins) {
@@ -335,7 +304,6 @@ export default inject(
     filesStore,
     mediaViewerDataStore,
     filesActionsStore,
-    selectedFolderStore,
     dialogsStore,
     filesSettingsStore,
     clientLoadingStore,
@@ -349,10 +317,9 @@ export default inject(
       setIsSectionFilterLoading(param);
     };
 
-    const { setMediaViewerData, setCurrentItem } = mediaViewerDataStore;
+    const { setCurrentItem } = mediaViewerDataStore;
     const { getIcon, getFolderIcon, openOnNewPage } = filesSettingsStore;
     const { markAsRead } = filesActionsStore;
-    const { id: currentFolderId } = selectedFolderStore;
 
     const {
       setNewFilesPanelVisible,
@@ -371,8 +338,6 @@ export default inject(
       newFilesIds,
       isLoading,
       setCurrentItem,
-      currentFolderId,
-      setMediaViewerData,
       getIcon,
       getFolderIcon,
       markAsRead,

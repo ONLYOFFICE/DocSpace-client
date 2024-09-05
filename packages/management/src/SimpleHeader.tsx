@@ -30,6 +30,7 @@ import { useTranslation } from "react-i18next";
 
 const StyledHeader = styled.div`
   position: absolute;
+  // doesn't require mirroring for RTL
   right: 50%;
   transform: translateX(50%);
   font-size: 17px;

@@ -115,7 +115,7 @@ const FieldContainer = ({
 
       <div className="field-body">
         {children}
-        {hasError ? (
+        {hasError && errorMessage ? (
           <Text className="error-label" fontSize="12px" color={errorColor}>
             {errorMessage}
           </Text>

@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 
 const StyledSsoPage = styled.div`
+  max-width: 100%;
   box-sizing: border-box;
   outline: none;
 
@@ -49,17 +49,6 @@ const StyledSsoPage = styled.div`
   .field-label-icon {
     align-items: center;
     margin-bottom: 4px;
-    max-width: 350px;
-  }
-
-  .field-label {
-    display: flex;
-    align-items: center;
-    height: auto;
-    font-weight: 600;
-    line-height: 20px;
-    overflow: visible;
-    white-space: normal;
   }
 
   .xml-input {
@@ -78,14 +67,7 @@ const StyledSsoPage = styled.div`
   }
 
   .radio-button-group {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 24px;
-          `
-        : css`
-            margin-left: 24px;
-          `}
+    margin-inline-start: 24px;
   }
 
   .combo-button-label {
@@ -93,14 +75,7 @@ const StyledSsoPage = styled.div`
   }
 
   .save-button {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 8px;
-          `
-        : css`
-            margin-right: 8px;
-          `}
+    margin-inline-end: 8px;
   }
 
   .download-button {
@@ -137,18 +112,9 @@ const StyledSsoPage = styled.div`
 
     .label > div {
       display: inline-flex;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: 4px;
-            `
-          : css`
-              margin-left: 4px;
-            `}
+      margin-inline-start: 4px;
     }
   }
-
-  ${(props) => !props.isSettingPaid && UnavailableStyles}
 `;
 
 export default StyledSsoPage;

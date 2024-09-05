@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
+import { useTheme } from "styled-components";
 
 import { Scrollbar as ScrollbarType } from "../scrollbar/custom-scrollbar";
 
@@ -53,6 +54,8 @@ const Tabs = (props: TabsProps) => {
     ...rest
   } = props;
 
+  const theme = useTheme();
+
   const selectedItemIndex = !selectedItemId
     ? 0
     : items.findIndex((item) => item.id === selectedItemId);
@@ -66,33 +69,62 @@ const Tabs = (props: TabsProps) => {
   const isViewFirstTab = useViewTab(scrollRef, tabsRef, 0);
   const isViewLastTab = useViewTab(scrollRef, tabsRef, items.length - 1);
 
+  const scrollToTab = useCallback(
+    (index: number): void => {
+      if (!scrollRef.current || !tabsRef.current) return;
+
+      const containerElement = scrollRef.current.scrollerElement;
+      const tabElement = tabsRef.current.children[index] as HTMLDivElement;
+
+      if (!containerElement || !tabElement) return;
+
+      const containerWidth = containerElement.offsetWidth;
+      const tabWidth = tabElement?.offsetWidth;
+      const tabOffsetLeft = tabElement?.offsetLeft;
+
+      if (theme.interfaceDirection === "ltr") {
+        if (tabOffsetLeft - OFFSET_LEFT < containerElement.scrollLeft) {
+          scrollRef.current.scrollTo(tabOffsetLeft - OFFSET_LEFT);
+        } else if (
+          tabOffsetLeft + tabWidth >
+          containerElement.scrollLeft + containerWidth
+        ) {
+          scrollRef.current.scrollTo(
+            tabOffsetLeft - containerWidth + tabWidth + OFFSET_RIGHT,
+          );
+        }
+
+        return;
+      }
+
+      const rect = tabElement?.getBoundingClientRect();
+
+      if (rect.left - OFFSET_LEFT < 0) {
+        scrollRef.current.scrollTo(
+          -(
+            Math.abs(rect.left) +
+            OFFSET_LEFT +
+            Math.abs(containerElement.scrollLeft)
+          ),
+        );
+      } else if (rect.right > containerWidth && !!containerElement.scrollLeft) {
+        scrollRef.current.scrollTo(
+          rect.right -
+            containerWidth +
+            containerElement.scrollLeft +
+            OFFSET_RIGHT,
+        );
+      }
+    },
+    [theme.interfaceDirection],
+  );
+
   useEffect(() => {
     if (!multiple) setCurrentItem(selectedItemIndex);
-  }, [selectedItemIndex, items, multiple]);
 
-  const scrollToTab = (index: number): void => {
-    if (!scrollRef.current || !tabsRef.current) return;
-
-    const containerElement = scrollRef.current.scrollerElement;
-    const tabElement = tabsRef.current.children[index] as HTMLDivElement;
-
-    if (!containerElement || !tabElement) return;
-
-    const containerWidth = containerElement.offsetWidth;
-    const tabWidth = tabElement?.offsetWidth;
-    const tabOffsetLeft = tabElement.offsetLeft;
-
-    if (tabOffsetLeft - OFFSET_LEFT < containerElement.scrollLeft) {
-      scrollRef.current.scrollTo(tabOffsetLeft - OFFSET_LEFT);
-    } else if (
-      tabOffsetLeft + tabWidth >
-      containerElement.scrollLeft + containerWidth
-    ) {
-      scrollRef.current.scrollTo(
-        tabOffsetLeft - containerWidth + tabWidth + OFFSET_RIGHT,
-      );
-    }
-  };
+    setCurrentItem(items[selectedItemIndex]);
+    scrollToTab(selectedItemIndex);
+  }, [selectedItemIndex, items, scrollToTab, multiple]);
 
   const setSelectedItem = (selectedTabItem: TTabItem, index: number): void => {
     if (multiple) {

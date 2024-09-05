@@ -31,14 +31,8 @@ import { mobile, tablet, desktop } from "@docspace/shared/utils";
 
 const StyledInfoPanelBody = styled.div`
   height: auto;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          padding: 0px 20px 24px 3px;
-        `
-      : css`
-          padding: 0px 3px 24px 20px;
-        `}
+  padding-block: 0 24px;
+  padding-inline: 20px 3px;
   color: ${(props) => props.theme.infoPanel.textColor};
   background-color: ${(props) => props.theme.infoPanel.backgroundColor};
 
@@ -55,14 +49,8 @@ const StyledInfoPanelBody = styled.div`
   }
 
   @media ${mobile} {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding: 0px 16px 0 8px;
-          `
-        : css`
-            padding: 0px 8px 0 16px;
-          `}
+    padding-block: 0;
+    padding-inline: 16px 8px;
   }
 `;
 
@@ -70,16 +58,9 @@ const StyledTitle = styled.div`
   position: sticky;
   top: 0;
   z-index: 100;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          padding: 24px 20px 24px 0px;
-          margin-right: -20px;
-        `
-      : css`
-          padding: 24px 0 24px 20px;
-          margin-left: -20px;
-        `}
+  padding-block: 24px;
+  padding-inline: 20px 0;
+  margin-inline-start: -20px;
 
   background: ${(props) => props.theme.infoPanel.backgroundColor};
 
@@ -91,15 +72,7 @@ const StyledTitle = styled.div`
 
   .info_title-icons {
     display: flex;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: auto;
-          `
-        : css`
-            margin-left: auto;
-          `}
-    /* theme.interfaceDirection */
+    margin-inline-start: auto;
     gap: 14px;
     .icon {
       cursor: pointer;
@@ -137,11 +110,17 @@ const StyledTitle = styled.div`
     line-height: 22px;
     max-height: 44px;
     margin: 0 8px;
+
     overflow: hidden;
     text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    text-align: start;
+  }
+
+  .file-extension {
+    color: ${(props) => props.theme.filesSection.tableView.fileExstColor};
   }
 
   .free-label {
@@ -149,23 +128,17 @@ const StyledTitle = styled.div`
     font-weight: 600;
     line-height: 16px;
 
-    margin: ${({ theme }) =>
-      theme.interfaceDirection === "rtl" ? "0 auto 0 0" : "0 0 0 auto"};
+    margin-block: 0;
+    margin-inline: auto 0;
   }
 
   ${(props) =>
     props.withBottomBorder &&
     css`
       width: calc(100% + 20px);
-      margin: 0 -20px 0 -20px;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              padding: 23px 23px 23px 0;
-            `
-          : css`
-              padding: 23px 0 23px 20px;
-            `}
+      margin: 0 -20px;
+      padding-block: 23px;
+      padding-inline: 20px 0;
       border-bottom: ${(props) =>
         `solid 1px ${props.theme.infoPanel.borderColor}`};
     `}
@@ -176,33 +149,21 @@ const StyledTitle = styled.div`
 
   @media ${tablet} {
     width: 440px;
-    padding: 24px 20px 24px 20px;
+    padding: 24px 20px;
   }
 
   @media ${mobile} {
     width: calc(100vw - 24px);
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding: 24px 16px 24px 0;
-          `
-        : css`
-            padding: 24px 0 24px 16px;
-          `}
+    padding-block: 24px;
+    padding-inline: 16px 0;
 
     ${(props) =>
       props.withBottomBorder &&
       css`
         width: calc(100% + 16px);
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                padding: 23px 16px 23px 0;
-              `
-            : css`
-                padding: 23px 0 23px 16px;
-              `}
-        margin: 0 -16px 0 -16px;
+        padding-block: 23px;
+        padding-inline: 16px 0;
+        margin: 0 -16px;
       `}
   }
 `;
@@ -267,8 +228,8 @@ const StyledProperties = styled.div`
     grid-template-columns: 120px 1fr;
     grid-column-gap: 24px;
 
-    -webkit-box-align: center;
-    align-items: center;
+    -webkit-box-align: baseline;
+    align-items: baseline;
 
     .property-title {
       font-size: 13px;
@@ -290,7 +251,6 @@ const StyledProperties = styled.div`
       gap: 4px;
 
       .property-tag {
-        background: red;
         max-width: 195px;
         margin: 0;
         background: ${(props) => props.theme.infoPanel.details.tagBackground};

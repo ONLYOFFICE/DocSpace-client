@@ -25,15 +25,26 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
-import { StyledText, StyledAuthorCell } from "./CellStyles";
-import { Avatar } from "@docspace/shared/components/avatar";
 import { decode } from "he";
+import { useTranslation } from "react-i18next";
+
+import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
+
+import { Avatar } from "@docspace/shared/components/avatar";
+
+import { StyledText, StyledAuthorCell } from "./CellStyles";
 
 const AuthorCell = ({ fileOwner, sideColor, item }) => {
-  const { avatarSmall, hasAvatar } = item.createdBy;
+  const { t } = useTranslation();
+
+  const { avatarSmall, hasAvatar, isAnonim } = item.createdBy;
 
   const avatarSource = hasAvatar ? avatarSmall : DefaultUserPhotoSize32PngUrl;
+
+  const name = React.useMemo(
+    () => (isAnonim ? t("Common:Anonymous") : decode(fileOwner)),
+    [fileOwner, isAnonim],
+  );
 
   return (
     <StyledAuthorCell className="author-cell">
@@ -46,10 +57,10 @@ const AuthorCell = ({ fileOwner, sideColor, item }) => {
         color={sideColor}
         fontSize="12px"
         fontWeight={600}
-        title={decode(fileOwner)}
+        title={name}
         truncate
       >
-        {decode(fileOwner)}
+        {name}
       </StyledText>
     </StyledAuthorCell>
   );

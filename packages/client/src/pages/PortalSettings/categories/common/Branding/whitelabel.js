@@ -39,7 +39,7 @@ import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-butto
 import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
 import { size } from "@docspace/shared/utils";
-
+import { globalColors } from "@docspace/shared/themes";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import WhiteLabelWrapper from "./StyledWhitelabel";
 import LoaderWhiteLabel from "../sub-components/loaderWhiteLabel";
@@ -54,7 +54,7 @@ import {
 import isEqual from "lodash/isEqual";
 import { DeviceType, WhiteLabelLogoType } from "@docspace/shared/enums";
 
-const WhiteLabel = (props) => {
+const WhiteLabelComponent = (props) => {
   const {
     t,
     isSettingPaid,
@@ -73,15 +73,19 @@ const WhiteLabel = (props) => {
 
     resetIsInit,
     standalone,
+    theme,
+
+    isWhitelableLoaded,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [isLoadedData, setIsLoadedData] = useState(false);
   const [logoTextWhiteLabel, setLogoTextWhiteLabel] = useState("");
   const [isSaving, setIsSaving] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(isWhitelableLoaded && !logoText);
 
   const isMobileView = deviceType === DeviceType.mobile;
+  const showAbout = standalone && isManagement();
 
   const init = async () => {
     const isWhiteLabelPage = standalone
@@ -121,24 +125,22 @@ const WhiteLabel = (props) => {
   };
 
   useEffect(() => {
+    if (!isWhitelableLoaded) return;
+
     const companyNameFromSessionStorage = getFromSessionStorage("companyName");
 
     if (!companyNameFromSessionStorage) {
+      setIsEmpty(!logoText);
       if (!logoText) return;
 
       setLogoTextWhiteLabel(logoText);
       saveToSessionStorage("companyName", logoText);
     } else {
+      setIsEmpty(!companyNameFromSessionStorage);
       setLogoTextWhiteLabel(companyNameFromSessionStorage);
       saveToSessionStorage("companyName", companyNameFromSessionStorage);
     }
-  }, [logoText]);
-
-  useEffect(() => {
-    if (logoTextWhiteLabel && logoUrlsWhiteLabel.length && !isLoadedData) {
-      setIsLoadedData(true);
-    }
-  }, [isLoadedData, logoTextWhiteLabel, logoUrlsWhiteLabel]);
+  }, [logoText, isWhitelableLoaded]);
 
   const onResetCompanyName = async () => {
     const whlText = await getWhiteLabelLogoText();
@@ -149,13 +151,29 @@ const WhiteLabel = (props) => {
   const onChangeCompanyName = (e) => {
     const value = e.target.value;
     setLogoTextWhiteLabel(value);
-    saveToSessionStorage("companyName", value);
+
+    const trimmedValue = value?.trim();
+    setIsEmpty(!trimmedValue);
+    saveToSessionStorage("companyName", trimmedValue);
   };
 
   const onUseTextAsLogo = () => {
+    if (isEmpty) {
+      return;
+    }
+
     let newLogos = logoUrlsWhiteLabel;
+
     for (let i = 0; i < logoUrlsWhiteLabel.length; i++) {
-      const options = getLogoOptions(i, logoTextWhiteLabel);
+      const options = getLogoOptions(
+        i,
+        logoTextWhiteLabel,
+        logoUrlsWhiteLabel[i].size.width,
+        logoUrlsWhiteLabel[i].size.height,
+      );
+
+      if (!showAbout && logoUrlsWhiteLabel[i].name === "AboutPage") continue;
+
       const isDocsEditorName = logoUrlsWhiteLabel[i].name === "DocsEditor";
 
       const logoLight = generateLogo(
@@ -163,16 +181,18 @@ const WhiteLabel = (props) => {
         options.height,
         options.text,
         options.fontSize,
-        isDocsEditorName ? "#fff" : "#000",
+        isDocsEditorName ? globalColors.white : globalColors.darkBlack,
         options.alignCenter,
+        options.isEditor,
       );
       const logoDark = generateLogo(
         options.width,
         options.height,
         options.text,
         options.fontSize,
-        "#fff",
+        globalColors.white,
         options.alignCenter,
+        options.isEditor,
       );
       newLogos[i].path.light = logoLight;
       newLogos[i].path.dark = logoDark;
@@ -259,7 +279,7 @@ const WhiteLabel = (props) => {
   const isEqualText = defaultLogoTextWhiteLabel === logoTextWhiteLabel;
   const saveButtonDisabled = isEqualLogo && isEqualText;
 
-  return !isLoadedData ? (
+  return !isWhitelableLoaded ? (
     <LoaderWhiteLabel />
   ) : (
     <WhiteLabelWrapper showReminder={!saveButtonDisabled}>
@@ -273,7 +293,11 @@ const WhiteLabel = (props) => {
           <Badge
             className="paid-badge"
             fontWeight="700"
-            backgroundColor="#EDC409"
+            backgroundColor={
+              theme.isBase
+                ? globalColors.favoritesStatus
+                : globalColors.favoriteStatusDark
+            }
             label={t("Common:Paid")}
             isPaidBadge={true}
           />
@@ -302,6 +326,7 @@ const WhiteLabel = (props) => {
           labelText={t("Common:CompanyName")}
           isVertical={true}
           className="settings_unavailable"
+          hasError={isEmpty}
         >
           <TextInput
             className="company-name input"
@@ -313,6 +338,7 @@ const WhiteLabel = (props) => {
             isAutoFocussed={!isMobile}
             tabIndex={1}
             maxLength={30}
+            hasError={isEmpty}
           />
           <Button
             id="btnUseAsLogo"
@@ -426,39 +452,42 @@ const WhiteLabel = (props) => {
           </div>
         </div>
 
-        <div className="logo-wrapper">
-          <Text
-            fontSize="15px"
-            fontWeight="600"
-            className="settings_unavailable"
-          >
-            {t("LogoAbout")} ({logoUrlsWhiteLabel[6].size.width}x
-            {logoUrlsWhiteLabel[6].size.height})
-          </Text>
-          <div className="logos-wrapper">
-            <Logo
-              title={t("Profile:LightTheme")}
-              src={logoUrlsWhiteLabel[6].path.light}
-              imageClass="border-img logo-about background-white"
-              inputId={`logoUploader_${WhiteLabelLogoType.AboutPage}_light`}
-              linkId="link-about-light"
-              onChangeText={t("ChangeLogoButton")}
-              onChange={onChangeLogo}
-              isSettingPaid={isSettingPaid}
-            />
-            <Logo
-              title={t("Profile:DarkTheme")}
-              src={logoUrlsWhiteLabel[6].path.dark}
-              imageClass="border-img logo-about background-dark"
-              inputId={`logoUploader_${WhiteLabelLogoType.AboutPage}_dark`}
-              linkId="link-about-dark"
-              onChangeText={t("ChangeLogoButton")}
-              onChange={onChangeLogo}
-              isSettingPaid={isSettingPaid}
-            />
-          </div>
-        </div>
-
+        {showAbout && (
+          <>
+            <div className="logo-wrapper">
+              <Text
+                fontSize="15px"
+                fontWeight="600"
+                className="settings_unavailable"
+              >
+                {t("LogoAbout")} ({logoUrlsWhiteLabel[6].size.width}x
+                {logoUrlsWhiteLabel[6].size.height})
+              </Text>
+              <div className="logos-wrapper">
+                <Logo
+                  title={t("Profile:LightTheme")}
+                  src={logoUrlsWhiteLabel[6].path.light}
+                  imageClass="border-img logo-about background-white"
+                  inputId={`logoUploader_${WhiteLabelLogoType.AboutPage}_light`}
+                  linkId="link-about-light"
+                  onChangeText={t("ChangeLogoButton")}
+                  onChange={onChangeLogo}
+                  isSettingPaid={isSettingPaid}
+                />
+                <Logo
+                  title={t("Profile:DarkTheme")}
+                  src={logoUrlsWhiteLabel[6].path.dark}
+                  imageClass="border-img logo-about background-dark"
+                  inputId={`logoUploader_${WhiteLabelLogoType.AboutPage}_dark`}
+                  linkId="link-about-dark"
+                  onChangeText={t("ChangeLogoButton")}
+                  onChange={onChangeLogo}
+                  isSettingPaid={isSettingPaid}
+                />
+              </div>
+            </div>
+          </>
+        )}
         <div className="logo-wrapper">
           <Text
             fontSize="15px"
@@ -544,45 +573,54 @@ const WhiteLabel = (props) => {
   );
 };
 
-export default inject(({ settingsStore, common, currentQuotaStore }) => {
-  const {
-    setLogoText,
-    whiteLabelLogoText,
-    getWhiteLabelLogoText,
-    restoreWhiteLabelSettings,
-    initSettings,
-    saveWhiteLabelSettings,
-    logoUrlsWhiteLabel,
-    setLogoUrlsWhiteLabel,
-    defaultLogoTextWhiteLabel,
-    enableRestoreButton,
-    resetIsInit,
-  } = common;
+export const WhiteLabel = inject(
+  ({ settingsStore, common, currentQuotaStore }) => {
+    const {
+      setLogoText,
+      whiteLabelLogoText,
+      getWhiteLabelLogoText,
+      restoreWhiteLabelSettings,
+      initSettings,
+      saveWhiteLabelSettings,
+      logoUrlsWhiteLabel,
+      setLogoUrlsWhiteLabel,
+      defaultLogoTextWhiteLabel,
+      enableRestoreButton,
+      resetIsInit,
+      isWhitelableLoaded,
+    } = common;
 
-  const {
-    whiteLabelLogoUrls: defaultWhiteLabelLogoUrls,
-    deviceType,
-    standalone,
-  } = settingsStore;
-  const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
+    const {
+      whiteLabelLogoUrls: defaultWhiteLabelLogoUrls,
+      deviceType,
+      standalone,
+    } = settingsStore;
+    const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
 
-  return {
-    setLogoText,
-    theme: settingsStore.theme,
-    logoText: whiteLabelLogoText,
-    getWhiteLabelLogoText,
-    saveWhiteLabelSettings,
-    restoreWhiteLabelSettings,
-    defaultWhiteLabelLogoUrls,
-    isSettingPaid: isBrandingAndCustomizationAvailable,
-    initSettings,
-    logoUrlsWhiteLabel,
-    setLogoUrlsWhiteLabel,
-    defaultLogoTextWhiteLabel,
-    enableRestoreButton,
+    return {
+      setLogoText,
+      theme: settingsStore.theme,
+      logoText: whiteLabelLogoText,
+      getWhiteLabelLogoText,
+      saveWhiteLabelSettings,
+      restoreWhiteLabelSettings,
+      defaultWhiteLabelLogoUrls,
+      isSettingPaid: isBrandingAndCustomizationAvailable,
+      initSettings,
+      logoUrlsWhiteLabel,
+      setLogoUrlsWhiteLabel,
+      defaultLogoTextWhiteLabel,
+      enableRestoreButton,
 
-    deviceType,
-    resetIsInit,
-    standalone,
-  };
-})(withTranslation(["Settings", "Profile", "Common"])(observer(WhiteLabel)));
+      deviceType,
+      resetIsInit,
+      standalone,
+
+      isWhitelableLoaded,
+    };
+  },
+)(
+  withTranslation(["Settings", "Profile", "Common"])(
+    observer(WhiteLabelComponent),
+  ),
+);

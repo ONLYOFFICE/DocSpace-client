@@ -107,6 +107,12 @@ const StyledTableContainer = styled(TableContainer)`
       }
     }
   }
+
+  .table-container_user-name-cell {
+    .additional-badges {
+      margin-inline-end: 12px;
+    }
+  }
 `;
 
 StyledTableContainer.defaultProps = { theme: Base };

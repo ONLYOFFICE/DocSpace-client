@@ -1,6 +1,12 @@
 {
-  "Title": "The form is completed",
-  "Description": "Your PDF form has been saved in the Complete section.",
+  "BackToRoom": "Back to room",
+  "CheckReadyForms": "Check ready forms",
+  "Description": "Your form completed and saved",
+  "DescriptionForAnonymous": "You submitted the filled PDF form which was assigned a unique number. To check the status, contact the form owner providing the assigned number.",
+  "DescriptionForRegisteredUser": "The filled PDF form is saved and available to you in the Complete folder. To check the status, contact the form owner providing the assigned number.",
   "FillItOutAgain": "Fill it out again",
-  "GoToCompleteFolder": "Go to Complete folder"
+  "FormCompletedSuccessfully": "Form completed successfully",
+  "FormNumber": "Form number:",
+  "FormOwner": "Form owner",
+  "Title": "The form is completed"
 }

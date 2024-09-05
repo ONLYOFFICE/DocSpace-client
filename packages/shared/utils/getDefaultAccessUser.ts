@@ -34,7 +34,7 @@ export const getDefaultAccessUser = (
       return ShareAccessRights.FormFilling;
 
     case RoomsType.PublicRoom:
-      return ShareAccessRights.RoomManager;
+      return ShareAccessRights.Collaborator;
 
     default:
       return ShareAccessRights.ReadOnly;

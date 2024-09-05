@@ -38,7 +38,7 @@ import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 import { StyledAccountContent } from "../../styles/accounts";
 import { getUserTypeLabel } from "@docspace/shared/utils/common";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
+
 import { EmployeeStatus } from "@docspace/shared/enums";
 
 const Accounts = (props) => {
@@ -88,8 +88,8 @@ const Accounts = (props) => {
     const adminOption = {
       id: "info-account-type_portal-admin",
       key: "admin",
-      title: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
-      label: t("Common:PortalAdmin", { productName: PRODUCT_NAME }),
+      title: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
+      label: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
       action: "admin",
     };
     const managerOption = {
@@ -176,7 +176,7 @@ const Accounts = (props) => {
         size="content"
         displaySelectedOption
         modernView
-        manualWidth={"fit-content"}
+        manualWidth="auto"
         isLoading={isLoading}
       />
     );
@@ -296,6 +296,7 @@ const Accounts = (props) => {
                     fontWeight={600}
                     title={group.name}
                     onClick={() => onGroupClick(group.id)}
+                    isTextOverflow
                   >
                     {group.name}
                   </Link>

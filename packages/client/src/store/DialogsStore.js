@@ -26,7 +26,9 @@
 
 import { getNewFiles } from "@docspace/shared/api/files";
 import {
+  EmployeeType,
   FilesSelectorFilterTypes,
+  FilterType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
@@ -59,7 +61,7 @@ class DialogsStore {
   selectFileDialogVisible = false;
   selectFileFormRoomDialogVisible = false;
   convertPasswordDialogVisible = false;
-  inviteUsersWarningDialogVisible = false;
+  inviteQuotaWarningDialogVisible = false;
   changeQuotaDialogVisible = false;
   unsavedChangesDialogVisible = false;
   moveToPublicRoomVisible = false;
@@ -120,6 +122,18 @@ class DialogsStore {
 
   selectFileFormRoomFilterParam = FilesSelectorFilterTypes.DOCX;
   selectFileFormRoomOpenRoot = false;
+  fillPDFDialogData = {
+    visible: false,
+    data: null,
+  };
+  shareCollectSelector = {
+    visible: false,
+    file: null,
+  };
+
+  warningQuotaDialogVisible = false;
+  invitePaidUsersCount = 0;
+  isNewQuotaItemsByCurrentUser = false;
 
   constructor(
     authStore,
@@ -376,6 +390,11 @@ class DialogsStore {
     this.selectFileDialogVisible = visible;
   };
 
+  /**
+   *  @param {boolean} visible
+   *  @param {FilesSelectorFilterTypes | FilterType} [filterParam = FilesSelectorFilterTypes.DOCX]
+   *  @param {boolean} [openRoot = false]
+   */
   setSelectFileFormRoomDialogVisible = (
     visible,
     filterParam = FilesSelectorFilterTypes.DOCX,
@@ -408,6 +427,8 @@ class DialogsStore {
       templateId: fileInfo.id,
       withoutDialog,
       preview,
+      edit: true,
+      toForm: true,
     };
 
     event.payload = payload;
@@ -423,15 +444,48 @@ class DialogsStore {
     this.inviteItems = inviteItems;
   };
 
+  setInvitePaidUsersCount = (modifier = 1) => {
+    this.invitePaidUsersCount = this.invitePaidUsersCount + modifier;
+    if (this.invitePaidUsersCount === -1) this.invitePaidUsersCount = 0;
+  };
+
+  isPaidUserAccess = (selectedAccess) => {
+    return (
+      selectedAccess === EmployeeType.Admin ||
+      selectedAccess === EmployeeType.Collaborator ||
+      selectedAccess === EmployeeType.User
+    );
+  };
+
   changeInviteItem = async (item) =>
     runInAction(() => {
       const index = this.inviteItems.findIndex((iItem) => iItem.id === item.id);
 
+      const isPrevAccessPaid = this.isPaidUserAccess(
+        this.inviteItems[index].access,
+      );
+      const isCurrAccessPaid = this.isPaidUserAccess(item.access);
+
+      let modifier = 0;
+
+      if (isPrevAccessPaid && !isCurrAccessPaid) modifier = -1;
+      if (!isPrevAccessPaid && isCurrAccessPaid) modifier = 1;
+
+      this.setInvitePaidUsersCount(modifier);
+
       this.inviteItems[index] = { ...this.inviteItems[index], ...item };
     });
 
-  setInviteUsersWarningDialogVisible = (inviteUsersWarningDialogVisible) => {
-    this.inviteUsersWarningDialogVisible = inviteUsersWarningDialogVisible;
+  setQuotaWarningDialogVisible = (inviteQuotaWarningDialogVisible) => {
+    this.inviteQuotaWarningDialogVisible = inviteQuotaWarningDialogVisible;
+  };
+
+  setIsNewRoomByCurrentUser = (value) => {
+    this.isNewRoomByCurrentUser = value;
+  };
+
+  setIsNewUserByCurrentUser = (value) => {
+    this.isNewUserByCurrentUser = value;
   };
 
   setCreateRoomDialogVisible = (createRoomDialogVisible) => {
@@ -523,6 +577,29 @@ class DialogsStore {
 
   setReorderDialogVisible = (visible) => {
     this.reorderDialogVisible = visible;
+  };
+
+  setFillPDFDialogData = (visible, data) => {
+    this.fillPDFDialogData = {
+      visible,
+      data,
+    };
+  };
+
+  /**
+   * @param {boolean} visible
+   * @param {import("@docspace/shared/api/files/types").TFile} [file = null]
+   * @returns {void}
+   */
+  setShareCollectSelector = (visible, file = null) => {
+    this.shareCollectSelector = {
+      visible,
+      file,
+    };
+  };
+
+  setWarningQuotaDialogVisible = (visible) => {
+    this.warningQuotaDialogVisible = visible;
   };
 }
 

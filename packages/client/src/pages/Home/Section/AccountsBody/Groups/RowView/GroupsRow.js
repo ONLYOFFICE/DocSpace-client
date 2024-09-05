@@ -41,6 +41,7 @@ const GroupsRow = ({
   selection,
   bufferSelection,
   getGroupContextOptions,
+  getModel,
   sectionWidth,
   theme,
   openGroupAction,
@@ -58,15 +59,15 @@ const GroupsRow = ({
     changeGroupContextSelection(item, !rightMouseButtonClick);
   };
 
-  const onOpenGroup = () => {
-    openGroupAction(item.id, true, item.name);
+  const onOpenGroup = (e) => {
+    openGroupAction(item.id, true, item.name, e);
   };
 
   const nameColor =
     item.statusType === "pending" || item.statusType === "disabled"
       ? theme.peopleTableRow.pendingNameColor
       : theme.peopleTableRow.nameColor;
-  const sideInfoColor = theme.peopleTableRow.pendingSideInfoColor;
+  const sideInfoColor = theme.peopleTableRow.sideInfoColor;
 
   const titleWithoutSpaces = item.name.replace(/\s+/g, " ").trim();
   const indexAfterLastSpace = titleWithoutSpaces.lastIndexOf(" ");
@@ -76,6 +77,8 @@ const GroupsRow = ({
       : titleWithoutSpaces[indexAfterLastSpace + 1];
 
   const groupName = (item.name[0] + secondCharacter).toUpperCase();
+
+  const getContextModel = () => getModel(t, item);
 
   return (
     <Styled.GroupsRowWrapper
@@ -106,6 +109,7 @@ const GroupsRow = ({
           checked={isChecked}
           isActive={isActive}
           contextOptions={getGroupContextOptions(t, item)}
+          getContextModel={getContextModel}
           sectionWidth={sectionWidth}
           mode={"modern"}
           className={"group-row"}
@@ -134,8 +138,6 @@ const GroupsRow = ({
 
             <Badges isLDAP={item.isLDAP} />
 
-            <div></div>
-
             <Link
               key={"group-title"}
               containerWidth="28%"
@@ -163,6 +165,7 @@ export default inject(({ peopleStore, settingsStore }) => ({
   selection: peopleStore.groupsStore.selection,
   bufferSelection: peopleStore.groupsStore.bufferSelection,
   getGroupContextOptions: peopleStore.groupsStore.getGroupContextOptions,
+  getModel: peopleStore.groupsStore.getModel,
   openGroupAction: peopleStore.groupsStore.openGroupAction,
   changeGroupSelection: peopleStore.groupsStore.changeGroupSelection,
   changeGroupContextSelection:

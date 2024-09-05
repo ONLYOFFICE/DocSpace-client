@@ -24,34 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import RoomsReactSvgUrl from "PUBLIC_DIR/images/rooms.react.svg?url";
-import ManageAccessRightsReactSvgUrl from "PUBLIC_DIR/images/manage.access.rights.react.svg?url";
-import ManageAccessRightsReactSvgDarkUrl from "PUBLIC_DIR/images/manage.access.rights.dark.react.svg?url";
-import React from "react";
+import FolderIcon from "PUBLIC_DIR/images/icons/12/folder.svg";
+import ManageAccessRightsDarkIcon from "PUBLIC_DIR/images/emptyview/empty.access.rights.dark.svg";
+import ManageAccessRightsLightIcon from "PUBLIC_DIR/images/emptyview/empty.access.rights.light.svg";
 
+import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import EmptyContainer from "./EmptyContainer";
-import { Link } from "@docspace/shared/components/link";
-import { IconButton } from "@docspace/shared/components/icon-button";
+
+import { RoomSearchArea } from "@docspace/shared/enums";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import { frameCallEvent } from "@docspace/shared/utils/common";
+import { EmptyView } from "@docspace/shared/components/empty-view";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 
 const RoomNoAccessContainer = (props) => {
-  const {
-    t,
-    setIsLoading,
-    linkStyles,
-
-    isEmptyPage,
-    sectionWidth,
-    theme,
-    isFrame,
-    userId,
-  } = props;
+  const { t, setIsLoading, linkStyles, theme, isFrame, userId } = props;
 
   const descriptionRoomNoAccess = t("NoAccessRoomDescription");
   const titleRoomNoAccess = t("NoAccessRoomTitle");
@@ -63,11 +54,17 @@ const RoomNoAccessContainer = (props) => {
     return () => clearTimeout(timer);
   }, []);
 
-  const onGoToShared = () => {
+  /**
+   * @param {React.MouseEvent<HTMLAnchorElement, MouseEvent> | undefined} event
+   * @returns {void}
+   */
+  const onGoToShared = (event) => {
+    event?.preventDefault();
+
     if (isFrame) return;
     setIsLoading(true);
 
-    const filter = RoomsFilter.getDefault(userId);
+    const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
 
     const filterParamsStr = filter.toUrlParams();
 
@@ -76,38 +73,28 @@ const RoomNoAccessContainer = (props) => {
     navigate(`${path}?${filterParamsStr}`);
   };
 
-  const goToButtons = (
-    <div className="empty-folder_container-links">
-      <IconButton
-        className="empty-folder_container-icon"
-        size="12"
-        onClick={onGoToShared}
-        iconName={RoomsReactSvgUrl}
-        isFill
-      />
-      <Link onClick={onGoToShared} {...linkStyles}>
-        {t("GoToMyRooms")}
-      </Link>
-    </div>
-  );
-
+  /**
+   * @type {import("@docspace/shared/components/empty-view/EmptyView.types").EmptyViewProps}
+   */
   const propsRoomNotFoundOrMoved = {
-    headerText: titleRoomNoAccess,
-    descriptionText: isFrame ? "" : descriptionRoomNoAccess,
-    imageSrc: theme.isBase
-      ? ManageAccessRightsReactSvgUrl
-      : ManageAccessRightsReactSvgDarkUrl,
-    buttons: isFrame ? <></> : goToButtons,
+    title: titleRoomNoAccess,
+    description: isFrame ? "" : descriptionRoomNoAccess,
+    icon: theme.isBase ? (
+      <ManageAccessRightsLightIcon />
+    ) : (
+      <ManageAccessRightsDarkIcon />
+    ),
+    options: isFrame
+      ? []
+      : {
+          description: t("GoToMyRooms"),
+          icon: <FolderIcon />,
+          to: "",
+          onClick: onGoToShared,
+        },
   };
 
-  return (
-    <EmptyContainer
-      isEmptyPage={isEmptyPage}
-      sectionWidth={sectionWidth}
-      className="empty-folder_room-not-found"
-      {...propsRoomNotFoundOrMoved}
-    />
-  );
+  return <EmptyView {...propsRoomNotFoundOrMoved} />;
 };
 
 export default inject(

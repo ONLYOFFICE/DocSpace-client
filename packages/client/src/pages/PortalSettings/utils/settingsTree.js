@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { PageType } from "@docspace/shared/enums";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
+
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/settings.react.svg?url";
 /**
  * Array for generation current settings tree.
@@ -371,38 +371,10 @@ export const settingsTree = [
     isHeader: true,
     children: [
       {
-        id: "portal-settings_catalog-data-migration",
+        id: "portal-settings_catalog-data-import-child",
         key: "5-0",
-        icon: "",
-        link: "migration",
-        tKey: "DataImport",
-        isCategory: true,
-        children: [
-          {
-            id: "portal-settings_catalog-google-data-migration",
-            key: "5-0-0",
-            icon: "",
-            link: "google",
-            tKey: "ImportFromGoogle",
-            isCategory: true,
-          },
-          {
-            id: "portal-settings_catalog-nextcloud-data-migration",
-            key: "5-0-1",
-            icon: "",
-            link: "nextcloud",
-            tKey: "ImportFromNextcloud",
-            isCategory: true,
-          },
-          {
-            id: "portal-settings_catalog-onlyoffice-data-migration",
-            key: "5-0-2",
-            icon: "",
-            link: "onlyoffice",
-            tKey: "ImportFromPortal",
-            isCategory: true,
-          },
-        ],
+        link: "",
+        tKey: "ImportHeader",
       },
     ],
   },
@@ -511,7 +483,7 @@ export const settingsTree = [
             key: "7-1-6",
             icon: "",
             link: "docspace",
-            tKey: PRODUCT_NAME,
+            tKey: "Common:ProductName",
           },
         ],
       },
@@ -529,6 +501,14 @@ export const settingsTree = [
         icon: "",
         link: "webhooks",
         tKey: "Common:DeveloperTools",
+        isCategory: true,
+      },
+      {
+        id: "portal-settings_catalog-oauth",
+        key: "7-4",
+        icon: "",
+        link: "oauth",
+        tKey: "OAuth:OAuth",
         isCategory: true,
       },
     ],

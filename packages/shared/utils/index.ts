@@ -77,6 +77,7 @@ import {
 } from "./common";
 import { DeviceType } from "../enums";
 import { TFile } from "../api/files/types";
+import { onEdgeScrolling, clearEdgeScrollingTimer } from "./edgeScrolling";
 
 export {
   isBetaLanguage,
@@ -127,6 +128,8 @@ export {
   ObjectUtils,
   getLogoUrl,
   isMobileDevice,
+  onEdgeScrolling,
+  clearEdgeScrollingTimer,
 };
 
 export const getModalType = () => {
@@ -176,7 +179,70 @@ export const getLastColumn = (tableStorageName: string) => {
     (column) => column !== "false" && column !== "QuickButtons",
   );
 
-  if (filterColumns.length > 1) return filterColumns[filterColumns.length - 1];
+  if (filterColumns.length > 0) return filterColumns[filterColumns.length - 1];
 
   return null;
+};
+
+export const getNewPassword = (
+  settings: {
+    minLength?: number;
+    upperCase?: boolean;
+    digits?: boolean;
+    specSymbols?: boolean;
+    digitsRegexStr?: string;
+    upperCaseRegexStr?: string;
+    specSymbolsRegexStr?: string;
+    allowedCharactersRegexStr?: string;
+  },
+  generatorSpecial: string = "!@#$%^&*",
+) => {
+  const passwordSettings = settings ?? {
+    minLength: 8,
+    upperCase: false,
+    digits: false,
+    specSymbols: false,
+    digitsRegexStr: "(?=.*\\d)",
+    upperCaseRegexStr: "(?=.*[A-Z])",
+    specSymbolsRegexStr: "(?=.*[\\x21-\\x2F\\x3A-\\x40\\x5B-\\x60\\x7B-\\x7E])",
+  };
+
+  const length = passwordSettings?.minLength || 0;
+  const string = "abcdefghijklmnopqrstuvwxyz";
+  const numeric = "0123456789";
+  const special = generatorSpecial || "";
+
+  let password = "";
+  let character = "";
+
+  while (password.length < length) {
+    const a = Math.ceil(string.length * Math.random() * Math.random());
+    const b = Math.ceil(numeric.length * Math.random() * Math.random());
+    const c = Math.ceil(special.length * Math.random() * Math.random());
+
+    let hold = string.charAt(a);
+
+    if (passwordSettings?.upperCase) {
+      hold = password.length % 2 === 0 ? hold.toUpperCase() : hold;
+    }
+
+    character += hold;
+
+    if (passwordSettings?.digits) {
+      character += numeric.charAt(b);
+    }
+
+    if (passwordSettings?.specSymbols) {
+      character += special.charAt(c);
+    }
+
+    password = character;
+  }
+
+  password = password
+    .split("")
+    .sort(() => 0.5 - Math.random())
+    .join("");
+
+  return password.substring(0, length);
 };

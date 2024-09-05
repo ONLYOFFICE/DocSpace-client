@@ -28,8 +28,8 @@ import { TUser } from "@docspace/shared/api/people/types";
 
 export type GroupParams = {
   groupName: string;
-  groupManager: object | null;
-  groupMembers: object[];
+  groupManager: TUser | null;
+  groupMembers: TUser[];
 };
 
 export type GroupMembers = TUser[] | null;

@@ -67,7 +67,7 @@ export const getFileTypeName = (fileType) => {
   }
 };
 
-export const getDefaultRoomName = (room, t) => {
+export const getRoomTypeName = (room, t) => {
   switch (room) {
     case RoomsType.CustomRoom:
       return t("Common:CustomRooms");
@@ -92,26 +92,6 @@ export const getDefaultRoomName = (room, t) => {
     case RoomsType.FormRoom:
       return t("Common:FormRoom");
   }
-};
-
-export const setDocumentTitle = (subTitle = null) => {
-  const { isAuthenticated, product: currentModule } = authStore;
-  const { organizationName } = settingsStore;
-
-  let title;
-  if (subTitle) {
-    if (isAuthenticated && currentModule) {
-      title = subTitle + " - " + currentModule.title;
-    } else {
-      title = subTitle + " - " + organizationName;
-    }
-  } else if (currentModule && organizationName) {
-    title = currentModule.title + " - " + organizationName;
-  } else {
-    title = organizationName;
-  }
-
-  document.title = title;
 };
 
 export const getDefaultFileName = (format) => {

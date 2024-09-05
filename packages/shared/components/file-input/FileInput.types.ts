@@ -63,4 +63,6 @@ export interface FileInputProps {
   idButton?: string;
   path?: string;
   fromStorage?: boolean;
+  /** Indicates that the input may contain multiple files. */
+  isMultiple?: boolean;
 }

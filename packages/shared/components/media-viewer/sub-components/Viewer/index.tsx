@@ -59,6 +59,7 @@ export const Viewer = (props: ViewerProps) => {
     fileUrl,
     toolbar,
     playlist,
+    autoPlay,
     audioIcon,
     errorTitle,
     targetFile,
@@ -229,7 +230,7 @@ export const Viewer = (props: ViewerProps) => {
     playlistFile.fileExst === ".tiff" || playlistFile.fileExst === ".tif";
 
   return (
-    <StyledViewerContainer visible={visible}>
+    <StyledViewerContainer dir="ltr" visible={visible}>
       {!isFullscreen && !isMobile && panelVisible && !isPdf && (
         <DesktopDetails
           title={title}
@@ -277,6 +278,7 @@ export const Viewer = (props: ViewerProps) => {
         <ViewerPlayer
           isError={isError}
           src={fileUrl}
+          autoPlay={autoPlay}
           devices={devices}
           isAudio={isAudio}
           isVideo={isVideo}

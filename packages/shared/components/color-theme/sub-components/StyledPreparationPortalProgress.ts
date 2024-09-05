@@ -57,10 +57,7 @@ const StyledPreparationPortalProgress = styled.div<{ percent?: number }>`
           ? props.theme.preparationPortalProgress.colorPercentBig
           : props.theme.preparationPortalProgress.colorPercentSmall};
       top: 2px;
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl"
-          ? `right: calc(50% - 9px);`
-          : `left: calc(50% - 9px);`}
+      inset-inline-start: calc(50% - 9px);
     }
   }
 `;

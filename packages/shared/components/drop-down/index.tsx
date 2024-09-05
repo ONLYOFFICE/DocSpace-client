@@ -45,6 +45,12 @@ const DropDown = (props: DropDownProps) => {
     eventTypes,
     forceCloseClickOutside,
     withoutBackground,
+
+    showDisabledItems = false,
+    isDefaultMode = true,
+    fixedDirection = false,
+    offsetLeft = 0,
+    enableKeyboardEvents = true,
   } = props;
 
   const toggleDropDown = () => {
@@ -72,17 +78,17 @@ const DropDown = (props: DropDownProps) => {
           withoutBackground={withoutBackground}
         />
       ) : null}
-      <EnhancedComponent {...eventTypesProp} {...props} />
+      <EnhancedComponent
+        {...eventTypesProp}
+        showDisabledItems={showDisabledItems}
+        isDefaultMode={isDefaultMode}
+        fixedDirection={fixedDirection}
+        offsetLeft={offsetLeft}
+        enableKeyboardEvents={enableKeyboardEvents}
+        {...props}
+      />
     </>
   );
-};
-DropDown.defaultProps = {
-  withBackdrop: true,
-  showDisabledItems: false,
-  isDefaultMode: true,
-  fixedDirection: false,
-  offsetLeft: 0,
-  enableKeyboardEvents: true,
 };
 
 export { DropDown };

@@ -26,6 +26,8 @@
 
 import { useState } from "react";
 import { inject, observer } from "mobx-react";
+import { useTheme } from "styled-components";
+
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import { StyledUser } from "../../styles/members";
 import { Avatar } from "@docspace/shared/components/avatar";
@@ -43,7 +45,6 @@ import { StyledUserTypeHeader } from "../../styles/members";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { Link } from "@docspace/shared/components/link";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const User = ({
   t,
@@ -68,6 +69,8 @@ const User = ({
 }) => {
   if (!infoPanelSelection) return null;
   if (!user.displayName && !user.name && !user.email) return null;
+
+  const theme = useTheme();
 
   const security = infoPanelSelection ? infoPanelSelection.security : {};
   const isExpect = user.isExpect;
@@ -264,7 +267,7 @@ const User = ({
         fontSize="12px"
         noSelect
         truncate
-        color="#A3A9AE !important"
+        color={theme.infoPanel.members.subtitleColor}
         dir="auto"
       >
         {`${typeLabel} | ${user.email}`}
@@ -289,8 +292,8 @@ const User = ({
 
   const tooltipContent = `${
     user.isOwner
-      ? t("Common:PortalOwner", { productName: PRODUCT_NAME })
-      : t("Common:PortalAdmin", { productName: PRODUCT_NAME })
+      ? t("Common:PortalOwner", { productName: t("Common:ProductName") })
+      : t("Common:PortalAdmin", { productName: t("Common:ProductName") })
   }. ${t("Common:HasFullAccess")}`;
 
   return user.isTitle ? (
@@ -357,7 +360,7 @@ const User = ({
               fontSize="12px"
               noSelect
               truncate
-              color="#A3A9AE"
+              color={theme.infoPanel.members.subtitleColor}
               dir="auto"
             >
               {`${typeLabel} | ${user.email}`}
@@ -379,7 +382,7 @@ const User = ({
               size="content"
               modernView
               title={t("Common:Role")}
-              manualWidth={"fit-content"}
+              manualWidth="auto"
               isLoading={isLoading}
               isMobileView={isMobileOnly}
               directionY="both"

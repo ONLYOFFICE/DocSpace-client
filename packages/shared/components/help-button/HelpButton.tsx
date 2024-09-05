@@ -38,9 +38,9 @@ import { HelpButtonProps } from "./HelpButton.types";
 const HelpButton = (props: HelpButtonProps) => {
   const {
     id,
-    className,
+    className = "icon-button",
     iconName,
-    size,
+    size = 12,
     color,
     dataTip,
     getContent,
@@ -65,7 +65,7 @@ const HelpButton = (props: HelpButtonProps) => {
         id={currentId}
         className={classNames([className], "help-icon") || "help-icon"}
         isClickable
-        iconName={iconName || InfoReactSvgUrl}
+        iconName={iconName ?? InfoReactSvgUrl}
         size={size}
         color={color}
         data-for={currentId}
@@ -100,13 +100,6 @@ const HelpButton = (props: HelpButtonProps) => {
       )}
     </div>
   );
-};
-
-HelpButton.defaultProps = {
-  iconName: InfoReactSvgUrl,
-  //   place: "top",
-  className: "icon-button",
-  size: 12,
 };
 
 export { HelpButton };

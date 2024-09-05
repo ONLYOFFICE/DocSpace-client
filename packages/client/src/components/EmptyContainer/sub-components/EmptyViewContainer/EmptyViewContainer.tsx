@@ -1,188 +1,102 @@
-import { useTheme } from "styled-components";
+import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import React, { useMemo, useCallback } from "react";
 
-import { Events, FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { EmptyView } from "@docspace/shared/components/empty-view";
 
-import {
-  getDescription,
-  getIcon,
-  getOptions,
-  getTitle,
-} from "./EmptyViewContainer.helpers";
-
+import { useEmptyView, useOptions } from "./EmptyViewContainer.hooks";
 import type {
-  CreateEvent,
   EmptyViewContainerProps,
-  ExtensiontionType,
-  UploadType,
+  InjectedEmptyViewContainerProps,
+  OutEmptyViewContainerProps,
 } from "./EmptyViewContainer.types";
 
-const EmptyViewContainer = observer(
+const EmptyViewContainer = observer((props: EmptyViewContainerProps) => {
+  const { t } = useTranslation([
+    "EmptyView",
+    "Files",
+    "Common",
+    "Translations",
+  ]);
+
+  const options = useOptions(props, t);
+  const emptyViewOptions = useEmptyView(props, t);
+
+  const { description, title, icon } = emptyViewOptions;
+
+  return (
+    <EmptyView
+      icon={icon}
+      title={title}
+      options={options}
+      description={description}
+    />
+  );
+});
+
+const InjectedEmptyViewContainer = inject<
+  TStore,
+  OutEmptyViewContainerProps,
+  InjectedEmptyViewContainerProps
+>(
   ({
-    type,
-    access,
-    folderId,
-    isFolder,
-    security,
-    folderType,
-    selectedFolder,
-    parentRoomType,
-    onClickInviteUsers,
-    onCreateAndCopySharedLink,
-    setSelectFileFormRoomDialogVisible,
-  }: EmptyViewContainerProps) => {
-    const { t } = useTranslation([
-      "EmptyView",
-      "Files",
-      "Common",
-      "Translations",
-    ]);
+    contextOptionsStore,
+    selectedFolderStore,
+    dialogsStore,
+    infoPanelStore,
+    treeFoldersStore,
+    clientLoadingStore,
+    userStore,
+    currentQuotaStore,
+    publicRoomStore,
+  }): InjectedEmptyViewContainerProps => {
+    const { isWarningRoomsDialog } = currentQuotaStore;
+    const { isPublicRoom } = publicRoomStore;
 
-    const theme = useTheme();
+    const { myFolderId, myFolder, roomsFolder } = treeFoldersStore;
 
-    const onUploadAction = useCallback((uploadType: UploadType) => {
-      const element =
-        uploadType === "file"
-          ? document.getElementById("customFileInput")
-          : uploadType === "pdf"
-            ? document.getElementById("customPDFInput")
-            : document.getElementById("customFolderInput");
+    const { setIsSectionFilterLoading } = clientLoadingStore;
 
-      element?.click();
-    }, []);
-
-    const inviteUser = useCallback(() => {
-      onClickInviteUsers?.(folderId, type);
-    }, [onClickInviteUsers, folderId, type]);
-
-    const uploadFromDocspace = useCallback(
-      (filterParam: FilesSelectorFilterTypes, openRoot: boolean = true) => {
-        setSelectFileFormRoomDialogVisible?.(true, filterParam, openRoot);
-      },
-      [setSelectFileFormRoomDialogVisible],
-    );
-
-    const onCreate = useCallback(
-      (extension: ExtensiontionType, withoutDialog?: boolean) => {
-        const event: CreateEvent = new Event(Events.CREATE);
-
-        const payload = {
-          id: -1,
-          extension,
-          withoutDialog,
-        };
-        event.payload = payload;
-
-        window.dispatchEvent(event);
-      },
-      [],
-    );
-
-    const createAndCopySharedLink = useCallback(() => {
-      if (!selectedFolder) return;
-
-      onCreateAndCopySharedLink?.(selectedFolder, t);
-    }, [selectedFolder, onCreateAndCopySharedLink, t]);
-
-    const emptyViewOptions = useMemo(() => {
-      const description = getDescription(
-        type,
-        t,
-        access,
-        isFolder,
-        folderType,
-        parentRoomType,
-      );
-      const title = getTitle(
-        type,
-        t,
-        access,
-        isFolder,
-        folderType,
-        parentRoomType,
-      );
-      const icon = getIcon(
-        type,
-        theme.isBase,
-        access,
-        isFolder,
-        folderType,
-        parentRoomType,
-      );
-
-      return { description, title, icon };
-    }, [type, t, theme.isBase, access, isFolder, folderType, parentRoomType]);
-
-    const options = useMemo(
-      () =>
-        getOptions(
-          type,
-          security!,
-          t,
-          access,
-          isFolder,
-          folderType,
-          parentRoomType,
-          {
-            inviteUser,
-            onCreate,
-            uploadFromDocspace,
-            onUploadAction,
-            createAndCopySharedLink,
-          },
-        ),
-      [
-        type,
-        access,
-        security,
-        isFolder,
-        folderType,
-        parentRoomType,
-        t,
-        inviteUser,
-        uploadFromDocspace,
-        onUploadAction,
-        createAndCopySharedLink,
-        onCreate,
-      ],
-    );
-
-    const { description, title, icon } = emptyViewOptions;
-
-    return (
-      <EmptyView
-        icon={icon}
-        title={title}
-        options={options}
-        description={description}
-      />
-    );
-  },
-);
-
-const injectedEmptyViewContainer = inject<TStore>(
-  ({ contextOptionsStore, selectedFolderStore, dialogsStore }) => {
-    const { onClickInviteUsers, onCreateAndCopySharedLink } =
+    const { onClickInviteUsers, onCreateAndCopySharedLink, inviteUser } =
       contextOptionsStore;
 
-    const { setSelectFileFormRoomDialogVisible } = dialogsStore;
+    const {
+      setIsVisible: setVisibleInfoPanel,
+      isVisible: isVisibleInfoPanel,
+      setView: setViewInfoPanel,
+    } = infoPanelStore;
 
-    const { security, access } = selectedFolderStore;
+    const { setSelectFileFormRoomDialogVisible, setQuotaWarningDialogVisible } =
+      dialogsStore;
+
+    const { security, access, rootFolderType } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
+
+    const userId = userStore?.user?.id;
 
     return {
       access,
       security,
       selectedFolder,
+      isVisibleInfoPanel,
+      rootFolderType,
+      myFolderId,
+      myFolder,
+      roomsFolder,
+      userId,
+      isPublicRoom,
+      isWarningRoomsDialog,
+      inviteUser,
+      setViewInfoPanel,
       onClickInviteUsers,
+      setVisibleInfoPanel,
+      setIsSectionFilterLoading,
       onCreateAndCopySharedLink,
       setSelectFileFormRoomDialogVisible,
+      setQuotaWarningDialogVisible,
     };
   },
-)(EmptyViewContainer);
+)(EmptyViewContainer as React.FC<OutEmptyViewContainerProps>);
 
-export default injectedEmptyViewContainer;
+export default InjectedEmptyViewContainer;

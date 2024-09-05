@@ -33,21 +33,26 @@ import {
 import { ContextMenuModel } from "../../context-menu";
 
 import {
+  BreadCrumbsProps,
   TBreadCrumb,
   TDisplayedItem,
-  TSelectorBreadCrumbs,
 } from "../Selector.types";
 import {
   StyledBreadCrumbs,
   StyledItemText,
   StyledArrowRightSvg,
 } from "../Selector.styled";
+import { BreadCrumbsContext } from "../contexts/BreadCrumbs";
 
-const BreadCrumbs = ({
-  breadCrumbs,
-  isBreadCrumbsLoading,
-  onSelectBreadCrumb,
-}: TSelectorBreadCrumbs) => {
+const BreadCrumbs = ({ visible = true }: BreadCrumbsProps) => {
+  const {
+    withBreadCrumbs,
+    breadCrumbs,
+    breadCrumbsLoader,
+    isBreadCrumbsLoading,
+    onSelectBreadCrumb,
+  } = React.useContext(BreadCrumbsContext);
+
   const [displayedItems, setDisplayedItems] = React.useState<TDisplayedItem[]>(
     [],
   );
@@ -184,6 +189,10 @@ const BreadCrumbs = ({
     gridTemplateColumns =
       "minmax(1px, max-content) 12px minmax(1px, max-content)";
   }
+
+  if (!withBreadCrumbs || !visible) return null;
+
+  if (isBreadCrumbsLoading) return breadCrumbsLoader;
 
   return (
     <StyledBreadCrumbs

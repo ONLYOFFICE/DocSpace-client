@@ -31,7 +31,7 @@ export const GroupNameParam = styled.div`
   flex-direction: column;
   gap: 4px;
   max-height: 54px;
-  margin: 4px 0 20px 0;
+  margin: 4px 0 20px;
 
   .input-label {
     cursor: pointer;

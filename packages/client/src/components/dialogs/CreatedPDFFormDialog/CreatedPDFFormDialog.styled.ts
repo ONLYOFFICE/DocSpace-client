@@ -34,4 +34,8 @@ export const Wrapper = styled.div`
     align-self: center;
     width: 100%;
   }
+
+  .created-pdf__checkbox {
+    margin-top: 16px;
+  }
 `;

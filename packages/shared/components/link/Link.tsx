@@ -35,16 +35,34 @@ export { LinkType, LinkTarget };
 const Link = ({
   isTextOverflow,
   children,
-  noHover,
-  enableUserSelect,
+  className = "",
+  fontSize = "13px",
+  href = undefined,
+  isBold = false,
+  isHovered = false,
+  isSemitransparent = false,
+  noHover = false,
+  rel = "noopener noreferrer",
+  tabIndex = -1,
+  type = LinkType.page,
+  enableUserSelect = false,
   ...rest
 }: LinkProps) => {
   return (
     <StyledText
+      className={className}
+      fontSize={fontSize}
+      href={href}
+      isBold={isBold}
+      isHovered={isHovered}
+      isSemitransparent={isSemitransparent}
+      rel={rel}
+      tabIndex={tabIndex}
+      type={type}
       tag="a"
       isTextOverflow={isTextOverflow}
       noHover={noHover}
-      truncate={isTextOverflow || false}
+      truncate={isTextOverflow ?? false}
       enableUserSelect={enableUserSelect}
       data-testid="link"
       {...rest}
@@ -52,21 +70,6 @@ const Link = ({
       {children}
     </StyledText>
   );
-};
-
-Link.defaultProps = {
-  className: "",
-  fontSize: "13px",
-  href: undefined,
-  isBold: false,
-  isHovered: false,
-  isSemitransparent: false,
-  isTextOverflow: false,
-  noHover: false,
-  rel: "noopener noreferrer",
-  tabIndex: -1,
-  type: LinkType.page,
-  enableUserSelect: false,
 };
 
 export { Link };

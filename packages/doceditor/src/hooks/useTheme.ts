@@ -26,76 +26,104 @@
 
 import React from "react";
 import { i18n } from "i18next";
+import { match, P } from "ts-pattern";
 
 import { Base, Dark, TColorScheme, TTheme } from "@docspace/shared/themes";
 import { getSystemTheme } from "@docspace/shared/utils";
+import { setCookie } from "@docspace/shared/utils/cookie";
 import { ThemeKeys } from "@docspace/shared/enums";
 import { getAppearanceTheme } from "@docspace/shared/api/settings";
-import { TUser } from "@docspace/shared/api/people/types";
 import { getFontFamilyDependingOnLanguage } from "@docspace/shared/utils/rtlUtils";
+import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
 
-const SYSTEM_THEME = getSystemTheme();
+import type { TUser } from "@docspace/shared/api/people/types";
+import type { TGetColorTheme } from "@docspace/shared/api/settings/types";
+
+type MatchType = [ThemeKeys | undefined, ThemeKeys | undefined];
 
 export interface UseThemeProps {
   user?: TUser;
   i18n?: i18n;
+  systemTheme?: ThemeKeys;
+  colorTheme?: TGetColorTheme;
+  lang?: string;
 }
 
-const useTheme = ({ user, i18n }: UseThemeProps) => {
+const useTheme = ({
+  user,
+  i18n,
+  systemTheme,
+  colorTheme,
+  lang,
+}: UseThemeProps) => {
   const [currentColorTheme, setCurrentColorTheme] =
-    React.useState<TColorScheme>({} as TColorScheme);
+    React.useState<TColorScheme>(() => {
+      if (!colorTheme) return {} as TColorScheme;
+
+      return (
+        colorTheme.themes.find((theme) => theme.id === colorTheme.selected) ??
+        ({} as TColorScheme)
+      );
+    });
 
   const [theme, setTheme] = React.useState<TTheme>(() => {
-    if (user?.theme === ThemeKeys.DarkStr)
-      return {
-        ...Dark,
-        currentColorScheme: currentColorTheme,
-      };
+    const interfaceDirection = i18n?.dir ? i18n.dir(lang) : "ltr";
+
+    const newTheme = match<MatchType>([user?.theme, systemTheme])
+      .returnType<TTheme>()
+      .with([ThemeKeys.DarkStr, P._], () => Dark)
+      .with([ThemeKeys.BaseStr, P._], () => Base)
+      .with([ThemeKeys.SystemStr, ThemeKeys.BaseStr], () => Base)
+      .with([ThemeKeys.SystemStr, ThemeKeys.DarkStr], () => Dark)
+      .with([undefined, ThemeKeys.DarkStr], () => Dark)
+      .with([undefined, ThemeKeys.BaseStr], () => Base)
+      .otherwise(() => Base);
+
     return {
-      ...Base,
+      ...newTheme,
       currentColorScheme: currentColorTheme,
+      interfaceDirection,
+      fontFamily: getFontFamilyDependingOnLanguage(i18n?.language ?? "en"),
     };
   });
 
   const isRequestRunning = React.useRef(false);
 
   const getCurrentColorTheme = React.useCallback(async () => {
-    if (isRequestRunning.current) return;
+    if (isRequestRunning.current || colorTheme) return;
     isRequestRunning.current = true;
     const colorThemes = await getAppearanceTheme();
 
-    const colorTheme = colorThemes.themes.find(
+    const curColorTheme = colorThemes.themes.find(
       (t) => t.id === colorThemes.selected,
     );
 
     isRequestRunning.current = false;
-    if (colorTheme) setCurrentColorTheme(colorTheme);
-  }, []);
+    if (curColorTheme) setCurrentColorTheme(curColorTheme);
+  }, [colorTheme]);
 
   const getUserTheme = React.useCallback(() => {
-    if (!user?.theme) return;
-    let theme = user.theme;
-    const interfaceDirection = i18n?.dir ? i18n.dir() : "ltr";
+    const SYSTEM_THEME = getSystemTheme();
 
-    if (user.theme === ThemeKeys.SystemStr) theme = SYSTEM_THEME;
+    let theme = user?.theme ?? SYSTEM_THEME;
+    const interfaceDirection = i18n?.dir ? i18n.dir(lang) : "ltr";
 
-    if (theme === ThemeKeys.BaseStr) {
-      setTheme({
-        ...Base,
-        currentColorScheme: currentColorTheme,
-        interfaceDirection,
-        fontFamily: getFontFamilyDependingOnLanguage(i18n?.language),
-      });
+    if (user?.theme === ThemeKeys.SystemStr) theme = SYSTEM_THEME;
 
-      return;
-    }
+    const fontFamily = getFontFamilyDependingOnLanguage(i18n?.language ?? "en");
+
+    const isBaseTheme = theme === ThemeKeys.BaseStr;
+    const themeCookie = isBaseTheme ? ThemeKeys.BaseStr : ThemeKeys.DarkStr;
 
     setTheme({
-      ...Dark,
+      ...(isBaseTheme ? Base : Dark),
       currentColorScheme: currentColorTheme,
       interfaceDirection,
+      fontFamily,
     });
-  }, [user?.theme, i18n, currentColorTheme]);
+
+    setCookie(SYSTEM_THEME_KEY, themeCookie);
+  }, [user?.theme, i18n, currentColorTheme, lang]);
 
   React.useEffect(() => {
     getCurrentColorTheme();
@@ -104,6 +132,16 @@ const useTheme = ({ user, i18n }: UseThemeProps) => {
   React.useEffect(() => {
     getUserTheme();
   }, [currentColorTheme, getUserTheme]);
+
+  React.useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+    mediaQuery.addEventListener("change", getUserTheme);
+
+    return () => {
+      mediaQuery.removeEventListener("change", getUserTheme);
+    };
+  }, [getUserTheme]);
 
   return { theme, currentColorTheme };
 };

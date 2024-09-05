@@ -32,12 +32,13 @@ import { inject, observer } from "mobx-react";
 import { mobile } from "@docspace/shared/utils";
 import { Button } from "@docspace/shared/components/button";
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
-import ConfirmWrapper from "../../../../Confirm/ConfirmWrapper";
+import ConfirmWrapper from "SRC_DIR/components/ConfirmWrapper";
 
 import ApiSvgUrl from "PUBLIC_DIR/images/settings.api.svg?url";
 import ApiDarkSvgUrl from "PUBLIC_DIR/images/settings.api.dark.svg?url";
 import { DeviceType } from "@docspace/shared/enums";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
+
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const EmptyContainer = styled(EmptyScreenContainer)`
   .ec-header {
@@ -45,7 +46,7 @@ const EmptyContainer = styled(EmptyScreenContainer)`
   }
 
   .ec-image {
-    margin-right: 22px;
+    margin-inline-end: 22px;
     margin-top: 22px;
 
     @media ${mobile} {
@@ -61,14 +62,7 @@ const EmptyContainer = styled(EmptyScreenContainer)`
 `;
 
 const Api = (props) => {
-  const {
-    t,
-    setDocumentTitle,
-    theme,
-    apiBasicLink,
-    currentDeviceType,
-    organizationName,
-  } = props;
+  const { t, theme, apiBasicLink, currentDeviceType } = props;
 
   const imgSrc = theme.isBase ? ApiSvgUrl : ApiDarkSvgUrl;
 
@@ -88,8 +82,8 @@ const Api = (props) => {
           />
         }
         descriptionText={t("ApiPageDescription", {
-          productName: PRODUCT_NAME,
-          organizationName,
+          productName: t("Common:ProductName"),
+          organizationName: t("Common:OrganizationName"),
         })}
         headerText={t("ApiPageHeader")}
         imageAlt={t("ApiPageHeader")}
@@ -99,16 +93,12 @@ const Api = (props) => {
   );
 };
 
-export default inject(({ authStore, settingsStore }) => {
-  const { setDocumentTitle } = authStore;
-  const { theme, apiBasicLink, currentDeviceType, organizationName } =
-    settingsStore;
+export default inject(({ settingsStore }) => {
+  const { theme, apiBasicLink, currentDeviceType } = settingsStore;
 
   return {
     theme,
-    setDocumentTitle,
     apiBasicLink,
     currentDeviceType,
-    organizationName,
   };
 })(withTranslation(["Settings", "Common"])(observer(Api)));

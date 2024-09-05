@@ -59,11 +59,13 @@ export type TRes = {
   request?: {
     responseType: string;
   };
+  headers: { [key: string]: boolean | string };
 };
 
 export type TReqOption = {
   skipUnauthorized?: boolean;
   skipLogout?: boolean;
+  withRedirect?: boolean;
 };
 
 class AxiosClient {
@@ -139,6 +141,9 @@ class AxiosClient {
 
     const apiBaseURL = combineUrl(origin, proxyURL, apiPrefix);
 
+    if (!headers.cookie.includes(origin))
+      headers.cookie = `${headers.cookie};x-docspace-address=${origin}`;
+
     const axiosConfig: AxiosRequestConfig = {
       baseURL: apiBaseURL,
       responseType: "json",
@@ -177,18 +182,28 @@ class AxiosClient {
     }
   };
 
-  request = (
+  request = <T>(
     options: TReqOption & AxiosRequestConfig,
     skipRedirect = false,
-  ) => {
+    isOAuth = false,
+  ): Promise<T> | undefined => {
     const onSuccess = (response: TRes) => {
       const error = this.getResponseError(response);
+
       if (error) throw new Error(error);
+
+      if (response.headers["x-redirect-uri"] && options.withRedirect) {
+        const redirectUri = response.headers["x-redirect-uri"];
+
+        if (typeof redirectUri === "string")
+          return window.location.replace(redirectUri);
+      }
 
       if (!response || !response.data || response.isAxiosError) return null;
 
       if (
         response.data &&
+        typeof response.data !== "string" &&
         typeof response.data === "object" &&
         "total" in response.data
       )
@@ -201,6 +216,8 @@ class AxiosClient {
 
       if (options.baseURL === "/apisystem" && !response.data.response)
         return response.data;
+
+      if (isOAuth && !response.data.response) return response.data;
 
       return response.data.response;
     };
@@ -220,11 +237,19 @@ class AxiosClient {
       }
 
       const loginURL = combineUrl(proxyURL, "/login");
+
       if (!this.isSSR) {
         switch (error.response?.status) {
           case 401: {
             if (options.skipUnauthorized) return Promise.resolve();
+
             if (options.skipLogout) return Promise.reject(error);
+
+            console.log("debug is SDK frame", window?.ClientConfig?.isFrame);
+
+            if (window?.ClientConfig?.isFrame) {
+              break;
+            }
 
             const opt: AxiosRequestConfig = {
               method: "POST",
@@ -244,14 +269,13 @@ class AxiosClient {
             break;
           case 403: {
             const pathname = window.location.pathname;
-            const isFrame = window?.ClientConfig?.isFrame;
 
             const isArchived = pathname.indexOf("/rooms/archived") !== -1;
 
             const isRooms =
               pathname.indexOf("/rooms/shared") !== -1 || isArchived;
 
-            if (isRooms && !skipRedirect && !isFrame) {
+            if (isRooms && !skipRedirect && !window?.ClientConfig?.isFrame) {
               setTimeout(() => {
                 window.DocSpace.navigate(isArchived ? "/archived" : "/");
               }, 1000);
@@ -268,6 +292,7 @@ class AxiosClient {
 
         return Promise.reject(error);
       }
+
       switch (error.response?.status) {
         case 401:
           return Promise.resolve();
@@ -278,7 +303,9 @@ class AxiosClient {
 
       return Promise.reject(error);
     };
-    return this.client?.(options).then(onSuccess).catch(onError);
+    return this.client?.(options).then(onSuccess).catch(onError) as
+      | Promise<T>
+      | undefined;
   };
 }
 

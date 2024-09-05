@@ -28,41 +28,32 @@ import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import elementResizeDetectorMaker from "element-resize-detector";
-import React, { useEffect, useRef, useCallback, useMemo } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useCallback,
+  useMemo,
+  useContext,
+} from "react";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { Base } from "@docspace/shared/themes";
 import { TableContainer } from "@docspace/shared/components/table";
 import { TableBody } from "@docspace/shared/components/table";
+import { Context } from "@docspace/shared/utils";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
 
 const fileNameCss = css`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: -24px;
-          padding-right: 24px;
-        `
-      : css`
-          margin-left: -24px;
-          padding-left: 24px;
-        `}
+  margin-inline-start: -24px;
+  padding-inline-start: 24px;
 `;
 
 const contextCss = css`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-left: -20px;
-          padding-left: 20px;
-        `
-      : css`
-          margin-right: -20px;
-          padding-right: 20px;
-        `}
+  margin-inline-end: -20px;
+  padding-inline-end: 20px;
 `;
 
 const StyledTableContainer = styled(TableContainer)`
@@ -93,8 +84,7 @@ const StyledTableContainer = styled(TableContainer)`
       .table-container_file-name-cell,
       .table-container_index-cell {
         ${fileNameCss}
-        border-left: 0; //for Safari macOS
-        border-right: 0; //for Safari macOS
+        border-inline: 0; //for Safari macOS
 
         border-image-source: ${(props) => `linear-gradient(to right, 
           ${props.theme.filesSection.tableView.row.borderColorTransition} 17px, ${props.theme.filesSection.tableView.row.borderColor} 31px)`};
@@ -131,7 +121,6 @@ const elementResizeDetector = elementResizeDetectorMaker({
 
 const Table = ({
   filesList,
-  sectionWidth,
   viewAs,
   setViewAs,
   setFirsElemChecked,
@@ -154,6 +143,8 @@ const Table = ({
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
+
+  const { sectionWidth } = useContext(Context);
 
   const ref = useRef(null);
   const tagRef = useRef(null);

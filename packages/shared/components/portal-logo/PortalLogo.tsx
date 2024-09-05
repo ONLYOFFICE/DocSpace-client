@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+"use client";
+
 import React, { useState } from "react";
 import { useTheme } from "styled-components";
 
@@ -36,7 +38,9 @@ import type { PortalLogoProps } from "./PortalLogo.types";
 const PortalLogo = ({ className, isResizable = false }: PortalLogoProps) => {
   const theme = useTheme();
 
-  const [size, setSize] = useState(window.innerWidth);
+  const [size, setSize] = useState(
+    typeof window !== "undefined" ? window.innerWidth : 0,
+  );
 
   const onResize = () => {
     setSize(window.innerWidth);

@@ -46,12 +46,13 @@ const BarWrapper = styled.div`
 
   margin-top: 25px;
 
-  background: ${(props) => (props.theme.isBase ? "#f8f9f9" : "#3D3D3D")};
+  background: ${(props) => props.theme.client.settings.webhooks.barBackground};
   border-radius: 3px;
   flex-wrap: wrap;
 
   .barItemHeader {
     margin-bottom: 10px;
+    color: ${(props) => props.theme.client.settings.webhooks.color};
   }
 `;
 
@@ -72,13 +73,7 @@ const BarItem = styled.div`
 `;
 
 const BarItemHeader = ({ children }) => (
-  <Text
-    as="h3"
-    color="#A3A9AE"
-    fontSize="12px"
-    fontWeight={600}
-    className="barItemHeader"
-  >
+  <Text as="h3" fontSize="12px" fontWeight={600} className="barItemHeader">
     {children}
   </Text>
 );

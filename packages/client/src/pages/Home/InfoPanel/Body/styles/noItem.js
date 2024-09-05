@@ -24,17 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const StyledNoItemContainer = styled.div`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin: 80px 0 0 auto;
-        `
-      : css`
-          margin: 80px auto 0 0;
-        `}
+  margin-block: 80px 0;
+  margin-inline: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;

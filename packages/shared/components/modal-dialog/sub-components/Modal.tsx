@@ -25,22 +25,20 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { isIOS, isMobileOnly, isSafari } from "react-device-detect";
 
 import { classNames } from "../../../utils";
 import { DialogSkeleton, DialogAsideSkeleton } from "../../../skeletons";
 
-import { Heading, HeadingSize } from "../../heading";
 import { Scrollbar } from "../../scrollbar";
-
+import { AsideHeader } from "../../aside";
 import {
   StyledModal,
-  StyledHeader,
   Content,
   Dialog,
   StyledBody,
   StyledFooter,
 } from "../ModalDialog.styled";
-import { CloseButton } from "./CloseButton";
 import { ModalBackdrop } from "./ModalBackdrop";
 import { FormWrapper } from "./FormWrapper";
 import { ModalSubComponentsProps } from "../ModalDialog.types";
@@ -67,10 +65,12 @@ const Modal = ({
   modalSwipeOffset,
   containerVisible,
   isDoubleFooterLine,
-  isCloseable,
+
   embedded,
   withForm,
   blur,
+
+  ...rest
 }: ModalSubComponentsProps) => {
   const contentRef = React.useRef<null | HTMLDivElement>(null);
 
@@ -102,6 +102,24 @@ const Modal = ({
     ? (footer?.props as { className?: string })
     : { className: "" };
 
+  const onTouchMove = () => {
+    const activeElement = document.activeElement;
+    if (activeElement?.tagName === "INPUT") activeElement.blur();
+  };
+
+  const onFocusAction = () => {
+    document.addEventListener("touchmove", onTouchMove);
+  };
+
+  const onBlurAction = () => {
+    document.removeEventListener("touchmove", onTouchMove);
+  };
+
+  const iOSActions =
+    isMobileOnly && isIOS && isSafari
+      ? { onFocus: onFocusAction, onBlur: onBlurAction }
+      : {};
+
   return (
     <StyledModal
       id={id}
@@ -113,7 +131,6 @@ const Modal = ({
         className={visible ? "modal-backdrop-active backdrop-active" : ""}
         visible
         zIndex={zIndex}
-        modalSwipeOffset={modalSwipeOffset}
       >
         <Dialog
           id="modal-onMouseDown-close"
@@ -139,12 +156,6 @@ const Modal = ({
             embedded={embedded}
             ref={contentRef}
           >
-            {isCloseable && (
-              <CloseButton
-                currentDisplayType={currentDisplayType}
-                onClick={onClose}
-              />
-            )}
             {isLoading ? (
               currentDisplayType === "modal" ? (
                 <DialogSkeleton
@@ -165,24 +176,21 @@ const Modal = ({
             ) : (
               <FormWrapper withForm={withForm || false}>
                 {header && (
-                  <StyledHeader
+                  <AsideHeader
                     id="modal-header-swipe"
                     className={
                       classNames(["modal-header", headerProps.className]) ||
                       "modal-header"
                     }
-                    {...headerProps}
-                  >
-                    <Heading
-                      level={1}
-                      className="heading"
-                      size={HeadingSize.medium}
-                      truncate
-                    >
-                      {headerComponent}
-                    </Heading>
-                  </StyledHeader>
+                    header={headerComponent}
+                    onCloseClick={onClose}
+                    {...(currentDisplayType === "modal" && {
+                      style: { marginBottom: "16px" },
+                    })}
+                    {...rest}
+                  />
                 )}
+
                 {body && (
                   <StyledBody
                     className={
@@ -194,6 +202,7 @@ const Modal = ({
                     hasFooter={!!footer}
                     currentDisplayType={currentDisplayType}
                     {...bodyProps}
+                    {...iOSActions}
                     // embedded={embedded}
                   >
                     {currentDisplayType === "aside" && withBodyScroll ? (

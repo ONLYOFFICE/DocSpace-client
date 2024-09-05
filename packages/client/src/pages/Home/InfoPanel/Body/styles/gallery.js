@@ -26,14 +26,14 @@
 
 import styled from "styled-components";
 import { isMobileOnly } from "react-device-detect";
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 
 const StyledGalleryThumbnail = styled.div`
   box-sizing: border-box;
   width: 100%;
   overflow: hidden;
   border-radius: 6px;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
   height: ${isMobileOnly ? "335px" : "346px"};
   border: ${(props) =>
     `solid 1px ${props.theme.infoPanel.gallery.borderColor}`};

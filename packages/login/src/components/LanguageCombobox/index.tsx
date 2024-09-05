@@ -36,22 +36,22 @@ import { Nullable } from "@docspace/shared/types";
 import { TPortalCultures } from "@docspace/shared/api/settings/types";
 
 import useDeviceType from "@/hooks/useDeviceType";
-import { getPortalCultures } from "@/utils/actions";
 
-const LanguageComboboxWrapper = () => {
+type TLanguageComboboxWrapper = {
+  initialCultures?: TPortalCultures;
+};
+
+const LanguageComboboxWrapper = ({
+  initialCultures,
+}: TLanguageComboboxWrapper) => {
   const { i18n } = useTranslation(["Login", "Common"]);
   const currentCulture = i18n.language;
 
   const [cultures, setCultures] = useState<Nullable<TPortalCultures>>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const cultures = await getPortalCultures();
-      if (cultures) setCultures(cultures);
-    };
-
-    fetchData();
-  }, []);
+    if (initialCultures) setCultures(initialCultures);
+  }, [initialCultures]);
 
   const onLanguageSelect = (culture: { key: string }) => {
     const { key } = culture;
@@ -70,7 +70,7 @@ const LanguageComboboxWrapper = () => {
       onSelectLanguage={onLanguageSelect}
       cultures={cultures}
       selectedCulture={currentCulture}
-      withBorder={false}
+      withBorder={!isMobileView}
       isMobileView={isMobileView}
     />
   );

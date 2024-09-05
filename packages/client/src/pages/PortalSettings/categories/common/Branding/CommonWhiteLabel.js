@@ -28,6 +28,7 @@ import React from "react";
 import { observer } from "mobx-react";
 
 import { useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
@@ -36,7 +37,7 @@ import { TextInput } from "@docspace/shared/components/text-input";
 import { Button } from "@docspace/shared/components/button";
 import { Badge } from "@docspace/shared/components/badge";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-
+import { globalColors } from "@docspace/shared/themes";
 import WhiteLabelWrapper from "./StyledWhitelabel";
 import Logo from "./sub-components/logo";
 
@@ -53,6 +54,7 @@ const CommonWhiteLabel = ({
   isEqualText,
   isSaving,
 }) => {
+  const theme = useTheme();
   const { t } = useTranslation(["Settings", "Profile", "Common"]);
 
   return (
@@ -66,7 +68,11 @@ const CommonWhiteLabel = ({
         {!isSettingPaid && (
           <Badge
             className="paid-badge"
-            backgroundColor="#EDC409"
+            backgroundColor={
+              theme.isBase
+                ? globalColors.favoritesStatus
+                : globalColors.favoriteStatusDark
+            }
             label={t("Common:Paid")}
             isPaidBadge={true}
           />

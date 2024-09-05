@@ -92,6 +92,7 @@ const StyledScrollbar = styled(Scrollbar)<{ $fixedSize?: boolean }>`
     align-items: flex-end;
     direction: ltr;
 
+    // doesn't require mirroring for LTR
     ${({ theme }) =>
       theme.interfaceDirection === "rtl"
         ? `left: unset !important; right: 0 !important;`

@@ -24,15 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useRef } from "react";
 import ToggleBlock from "./ToggleBlock";
-import { PasswordInput } from "@docspace/shared/components/password-input";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Link } from "@docspace/shared/components/link";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import copy from "copy-to-clipboard";
 import { toastr } from "@docspace/shared/components/toast";
+import SimulatePassword from "../../../components/SimulatePassword";
+import { getNewPassword } from "@docspace/shared/utils";
 
 const PasswordAccessBlock = (props) => {
   const {
@@ -45,14 +45,12 @@ const PasswordAccessBlock = (props) => {
     setIsPasswordValid,
   } = props;
 
-  const passwordInputRef = useRef(null);
-
   const onGeneratePasswordClick = () => {
-    passwordInputRef.current.onGeneratePassword();
+    const password = getNewPassword();
+    setPasswordValue(password);
   };
 
   const onCleanClick = () => {
-    passwordInputRef.current.setState((s) => ({ ...s, value: "" })); //TODO: PasswordInput bug
     setPasswordValue("");
   };
 
@@ -64,8 +62,8 @@ const PasswordAccessBlock = (props) => {
     }
   };
 
-  const onChangePassword = (e) => {
-    setPasswordValue(e.target.value);
+  const onChangePassword = (password) => {
+    setPasswordValue(password);
     setIsPasswordValid(true);
   };
 
@@ -80,18 +78,13 @@ const PasswordAccessBlock = (props) => {
               errorMessage={t("Common:RequiredField")}
               className="edit-link_password-block"
             >
-              <PasswordInput
-                // scale //doesn't work
-                // tabIndex={3}
-                // simpleView
-                // passwordSettings={{ minLength: 0 }}
+              <SimulatePassword
                 className="edit-link_password-input"
-                ref={passwordInputRef}
-                simpleView
                 isDisabled={isLoading}
                 hasError={!isPasswordValid}
                 inputValue={passwordValue}
                 onChange={onChangePassword}
+                inputMaxWidth="100%"
               />
             </FieldContainer>
 

@@ -27,8 +27,7 @@
 "use client";
 
 import React from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { isMobile } from "react-device-detect";
+import { useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 import { DocumentEditor } from "@onlyoffice/document-editor-react";
@@ -52,12 +51,16 @@ import {
 } from "@/utils/events";
 import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
-import useFilesSettings from "@/hooks/useFilesSettings";
 
 type IConfigType = IConfig & {
   events?: {
     onRequestStartFilling?: (event: object) => void;
     onSubmit?: (event: object) => void;
+  };
+  editorConfig?: {
+    customization?: {
+      close?: Record<string, unknown>;
+    };
   };
 };
 
@@ -73,6 +76,9 @@ const Editor = ({
   errorMessage,
   isSkipError,
 
+  filesSettings,
+
+  onDownloadAs,
   onSDKRequestSharingSettings,
   onSDKRequestSaveAs,
   onSDKRequestInsertImage,
@@ -83,9 +89,7 @@ const Editor = ({
 }: EditorProps) => {
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
 
-  const router = useRouter();
   const searchParams = useSearchParams();
-  const { filesSettings } = useFilesSettings({});
 
   const openOnNewPage = IS_ZOOM ? false : !filesSettings?.openEditorInSameTab;
 
@@ -142,13 +146,8 @@ const Editor = ({
   if (config) newConfig.editorConfig = { ...config.editorConfig };
 
   const search = typeof window !== "undefined" ? window.location.search : "";
-  const editorType = new URLSearchParams(search).get("editorType");
 
   //if (view && newConfig.editorConfig) newConfig.editorConfig.mode = "view";
-
-  if (editorType) newConfig.type = editorType;
-
-  if (isMobile) newConfig.type = "mobile";
 
   let goBack: TGoBack = {} as TGoBack;
 
@@ -169,6 +168,7 @@ const Editor = ({
       goBack = {
         requestClose: true,
         text: openFileLocationText,
+        blank: openOnNewPage,
       };
     } else {
       goBack = {
@@ -177,32 +177,40 @@ const Editor = ({
             ? window.ClientConfig?.editor?.requestClose ?? false
             : false,
         text: openFileLocationText,
+        blank: openOnNewPage,
       };
       if (
         typeof window !== "undefined" &&
         !window.ClientConfig?.editor?.requestClose
       ) {
-        goBack.blank = openOnNewPage ? true : false;
         goBack.url = getBackUrl(fileInfo.rootFolderType, fileInfo.folderId);
       }
     }
   }
 
   const customization = new URLSearchParams(search).get("customization");
+
   const sdkCustomization: NonNullable<
     IConfig["editorConfig"]
   >["customization"] = JSON.parse(customization || "{}");
 
   const theme = sdkCustomization?.uiTheme || user?.theme;
 
-  if (newConfig.editorConfig)
+  if (newConfig.editorConfig) {
     newConfig.editorConfig.customization = {
       ...newConfig.editorConfig.customization,
       ...sdkCustomization,
       goback: { ...goBack },
-      close: { visible: SHOW_CLOSE, text: t("Common:CloseButton") },
       uiTheme: getEditorTheme(theme as ThemeKeys),
     };
+
+    if (SHOW_CLOSE) {
+      newConfig.editorConfig.customization.close = {
+        visible: SHOW_CLOSE,
+        text: t("Common:CloseButton"),
+      };
+    }
+  }
 
   //if (newConfig.document && newConfig.document.info)
   //  newConfig.document.info.favorite = false;
@@ -233,6 +241,7 @@ const Editor = ({
     onMetaChange,
     onMakeActionLink,
     onOutdatedVersion,
+    onDownloadAs,
   };
 
   if (successAuth) {
@@ -295,16 +304,26 @@ const Editor = ({
     newConfig.events.onRequestClose = onSDKRequestClose;
   }
 
-  if (config?.startFilling) {
+  if (config?.startFilling && !IS_ZOOM) {
     newConfig.events.onRequestStartFilling = () =>
-      onSDKRequestStartFilling?.(t("Common:StartFilling"));
+      onSDKRequestStartFilling?.(t("Common:ShareAndCollect"));
   }
 
   newConfig.events.onSubmit = () => {
     const origin = window.location.origin;
 
+    const otherSearchParams = new URLSearchParams();
+
+    if (config?.fillingSessionId)
+      otherSearchParams.append("fillingSessionId", config.fillingSessionId);
+
+    const combinedSearchParams = new URLSearchParams({
+      ...Object.fromEntries(searchParams),
+      ...Object.fromEntries(otherSearchParams),
+    });
+
     window.location.replace(
-      `${origin}/doceditor/completed-form?${searchParams.toString()}`,
+      `${origin}/doceditor/completed-form?${combinedSearchParams.toString()}`,
     );
   };
 

@@ -63,7 +63,7 @@ const StyledContainerInline = styled.div`
   margin-bottom: 10px;
 
   > * {
-    margin-right: 10px;
+    margin-inline-end: 10px;
     margin-bottom: 10px;
   }
 `;

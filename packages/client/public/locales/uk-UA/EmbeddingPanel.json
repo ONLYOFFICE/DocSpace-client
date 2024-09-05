@@ -1,7 +1,11 @@
 {
-  "Auto": "Автоматично",
-  "CodeCopySuccess": "Код скопійовано до буфера обміну",
-  "EmbedCode": "Код вбудовування",
+  "CodeSuccessfullyCopied": "Код для вставлення успішно скопійовано до буфера обміну",
+  "ContentRestricted": "Копіювання вмісту, завантаження файлів та друк обмежено.",
+  "DisplaySettings": "Показати параметри",
+  "EmbeddingBarAllowList": "Додайте URL-адресу вебсайту для вбудовування до <1>списку дозволених</1>.",
+  "EmbeddingBarDescription": "Вбудовування буде працювати лише для URL-адрес, вказаних адміністратором {{productName}} в параметрах SDK JavaScript.",
   "Height": "Висота",
+  "Link": "Посилання",
+  "LinkProtectedWithPassword": "Посилання захищене паролем.",
   "Width": "Ширина"
 }

@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { StyledTitleComponent } from "../StyledComponent";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
+
 import { getTwoDotsReplacing } from "../../utils";
 
 const TariffTitleContainer = ({
@@ -38,7 +38,6 @@ const TariffTitleContainer = ({
   isTrial,
   trialDaysLeft,
   paymentDate,
-  organizationName,
 }) => {
   const { t } = useTranslation(["PaymentsEnterprise", "Common"]);
   const alertComponent = () => {
@@ -96,8 +95,8 @@ const TariffTitleContainer = ({
         <div className="title">
           <Text fontWeight={600} fontSize="14px" as="span">
             {t("ActivateTariffDescr", {
-              productName: PRODUCT_NAME,
-              organizationName,
+              productName: t("Common:ProductName"),
+              organizationName: t("Common:OrganizationName"),
             })}
           </Text>{" "}
           {!isLicenseDateExpired && (
@@ -112,20 +111,15 @@ const TariffTitleContainer = ({
   );
 };
 
-export default inject(
-  ({ settingsStore, currentQuotaStore, currentTariffStatusStore }) => {
-    const { trialDaysLeft, paymentDate, isLicenseDateExpired } =
-      currentTariffStatusStore;
-    const { isTrial } = currentQuotaStore;
+export default inject(({ currentQuotaStore, currentTariffStatusStore }) => {
+  const { trialDaysLeft, paymentDate, isLicenseDateExpired } =
+    currentTariffStatusStore;
+  const { isTrial } = currentQuotaStore;
 
-    const { organizationName } = settingsStore;
-
-    return {
-      isTrial,
-      trialDaysLeft,
-      paymentDate,
-      isLicenseDateExpired,
-      organizationName,
-    };
-  },
-)(observer(TariffTitleContainer));
+  return {
+    isTrial,
+    trialDaysLeft,
+    paymentDate,
+    isLicenseDateExpired,
+  };
+})(observer(TariffTitleContainer));

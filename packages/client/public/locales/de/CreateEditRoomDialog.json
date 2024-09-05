@@ -1,8 +1,10 @@
 {
+  "ActivationRequired": "aktivierung erforderlich",
   "ChooseRoomType": "Raumtyp wählen",
   "CreateRoomConfirmation": "Möchten Sie weiterfahren, ohne den Speicher anzuschließen?\nSie haben eine Speicheroption eines Drittanbieters ausgewählt, die noch nicht verbunden ist. Wenn Sie fortfahren, ohne den Dienst zu verbinden, wird diese Option nicht hinzugefügt.",
   "CreateTagOption": "Tag erstellen",
   "DisableRoomQuota": "Die Quote für diesen Raum deaktivieren",
+  "FormRoomBarDescription": "Dieser Raum ist für jeden zugänglich, der den Link hat. Externe Benutzer haben die Berechtigung zum Ausfüllen von Formularen für alle Dateien.",
   "Icon": "Icon",
   "MakeRoomPrivateDescription": "Alle Dateien in diesem Raum werden verschlüsselt.",
   "MakeRoomPrivateLimitationsWarningDescription": "Mit dieser Funktion können Sie nur bestehende {{productName}}-Benutzer einladen. Nachdem Sie einen Raum erstellt haben, können Sie die Liste der Benutzer nicht mehr ändern.",

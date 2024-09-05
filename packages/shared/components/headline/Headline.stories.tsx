@@ -29,6 +29,7 @@ import { Meta, StoryObj } from "@storybook/react";
 
 import Headline from "./Headline";
 import type { HeadlineProps } from "./Headline.types";
+import { globalColors } from "../../themes";
 
 type HeadlineType = FC<HeadlineProps>;
 
@@ -41,7 +42,7 @@ export default meta;
 
 export const Default: StoryObj<HeadlineType> = {
   args: {
-    color: "#333",
+    color: globalColors.black,
     type: "content",
     children: "Sample text heading",
   },

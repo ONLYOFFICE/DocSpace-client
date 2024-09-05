@@ -9,7 +9,6 @@ import type { TFirebaseSettings } from "@docspace/shared/api/settings/types";
 import useI18N from "@/hooks/useI18N";
 import useTheme from "@/hooks/useTheme";
 import useDeviceType from "@/hooks/useDeviceType";
-import useWhiteLabel from "@/hooks/useWhiteLabel";
 
 import pkg from "../../../package.json";
 
@@ -18,7 +17,7 @@ import { ErrorProps } from "./Error.types";
 const Error = ({ settings, user, error }: ErrorProps) => {
   const { i18n } = useI18N({ settings, user });
   const { currentDeviceType } = useDeviceType();
-  const { logoUrls } = useWhiteLabel();
+
   const { theme } = useTheme({ user });
 
   const firebaseHelper = useMemo(() => {
@@ -32,7 +31,6 @@ const Error = ({ settings, user, error }: ErrorProps) => {
         errorLog={error}
         version={pkg.version}
         user={user ?? ({} as TUser)}
-        whiteLabelLogoUrls={logoUrls}
         firebaseHelper={firebaseHelper}
         currentDeviceType={currentDeviceType}
       />

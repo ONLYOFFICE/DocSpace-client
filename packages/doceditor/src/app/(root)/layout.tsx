@@ -24,26 +24,44 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { redirect } from "next/navigation";
+import { headers, cookies } from "next/headers";
+
+import { ThemeKeys } from "@docspace/shared/enums";
 import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
+import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
+
+import Providers from "@/providers";
 import Scripts from "@/components/Scripts";
 import StyledComponentsRegistry from "@/utils/registry";
+import { getColorTheme, getSettings, getUser } from "@/utils/actions";
 
 import "@/styles/globals.scss";
-import Providers from "@/providers";
-import { getSettings, getUser } from "@/utils/actions";
 
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const startDate = new Date();
-  const [user, settings] = await Promise.all([getUser(), getSettings()]);
-  const timer = new Date().getTime() - startDate.getTime();
+  const hdrs = headers();
+
+  const cookieStore = cookies();
+
+  const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as
+    | ThemeKeys
+    | undefined;
+
+  if (hdrs.get("x-health-check") || hdrs.get("referer")?.includes("/health")) {
+    console.log("is health check");
+    return <></>;
+  }
+
+  const [user, settings, colorTheme] = await Promise.all([
+    getUser(),
+    getSettings(),
+    getColorTheme(),
+  ]);
 
   if (settings === "access-restricted") redirect(`${getBaseUrl()}/${settings}`);
-
-  const api_host = process.env.API_HOST?.trim();
 
   return (
     <html lang="en" translate="no">
@@ -60,11 +78,7 @@ export default async function RootLayout({
       </head>
       <body>
         <StyledComponentsRegistry>
-          <Providers
-            contextData={{ user, settings }}
-            api_host={api_host}
-            timer={timer}
-          >
+          <Providers contextData={{ user, settings, systemTheme, colorTheme }}>
             {children}
           </Providers>
         </StyledComponentsRegistry>

@@ -30,7 +30,11 @@ import React from "react";
 
 import { ThemeProvider as ComponentThemeProvider } from "@docspace/shared/components/theme-provider";
 import { TUser } from "@docspace/shared/api/people/types";
-import { TSettings } from "@docspace/shared/api/settings/types";
+import type {
+  TGetColorTheme,
+  TSettings,
+} from "@docspace/shared/api/settings/types";
+import type { ThemeKeys } from "@docspace/shared/enums";
 
 import useTheme from "@/hooks/useTheme";
 import useI18N from "@/hooks/useI18N";
@@ -39,12 +43,28 @@ type TThemeProvider = {
   children: React.ReactNode;
   settings: TSettings | undefined;
   user: TUser | undefined;
+  systemTheme: ThemeKeys | undefined;
+  colorTheme: TGetColorTheme | undefined;
 };
 
-const ThemeProvider = ({ children, user, settings }: TThemeProvider) => {
+const ThemeProvider = ({
+  children,
+  user,
+  settings,
+  systemTheme,
+  colorTheme,
+}: TThemeProvider) => {
   const { i18n } = useI18N({ settings, user });
 
-  const { theme, currentColorTheme } = useTheme({ user, i18n });
+  const lang = user?.cultureName ?? settings?.culture;
+
+  const { theme, currentColorTheme } = useTheme({
+    user,
+    i18n,
+    systemTheme,
+    colorTheme,
+    lang,
+  });
 
   return (
     <ComponentThemeProvider

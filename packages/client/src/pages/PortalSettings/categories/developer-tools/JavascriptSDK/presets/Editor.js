@@ -63,9 +63,10 @@ import {
   FilesSelectorInputWrapper,
 } from "./StyledPresets";
 import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const Editor = (props) => {
-  const { t, setDocumentTitle, getFilePrimaryLink, theme } = props;
+  const { t, getFilePrimaryLink, theme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -228,14 +229,12 @@ const Editor = (props) => {
   );
 };
 
-export default inject(({ authStore, settingsStore, filesStore }) => {
-  const { setDocumentTitle } = authStore;
+export const Component = inject(({ settingsStore, filesStore }) => {
   const { theme } = settingsStore;
   const { getFilePrimaryLink } = filesStore;
 
   return {
     theme,
-    setDocumentTitle,
     getFilePrimaryLink,
   };
 })(

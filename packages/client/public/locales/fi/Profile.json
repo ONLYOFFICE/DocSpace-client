@@ -1,5 +1,6 @@
 {
   "ActiveSessions": "Aktiiviset istunnot",
+  "AutoDeleteTitle": "Kaikki yli 60 päivää vanhat istunnot poistetaan automaattisesti.",
   "ChangeEmailSuccess": "Sähköpostin vaihtaminen onnistui ",
   "ChangePasswordAfterLoggingOut": "Vaihda salasana uloskirjautumisen jälkeen",
   "ConnectSocialNetworks": "Yhdistä sosiaaliset verkostosi",
@@ -14,7 +15,6 @@
   "InterfaceTheme": "Käyttöliittymän teema",
   "LightTheme": "Kevyt teema",
   "LogoutActiveConnection": "Kirjaudu ulos aktiivisesta yhteydestä",
-  "LogoutAllActiveConnections": "Kirjaudu ulos aktiivisista yhteyksistä",
   "LogoutAllActiveSessionsDescription": "Kaikki aktiiviset yhteydet paitsi tämä yhteys kirjataan ulos, koska se on tällä hetkellä käytössä oleva.",
   "LogoutBtn": "Kirjaudu ulos",
   "LogoutDescription": "Huom. Kaikki aktiiviset yhteydet paitsi tämä yhteys kirjataan ulos, koska se on tällä hetkellä käytössä oleva.",
@@ -27,5 +27,6 @@
   "SuccessLogout": "Aktiivisesta yhteydestä kirjauduttiin ulos:{{platform}}, {{browser}}",
   "SystemTheme": "Käytä järjestelmän teemaa",
   "SystemThemeDescription": "Vaihda automaattisesti vaalean ja tumman teeman välillä, kun systeemisi tekee niin.",
+  "TerminateAllSessions": "Päätä kaikki paitsi nykyinen istunto",
   "TwoFactorDescription": "Järjestelmänvalvoja otti käyttöön kaksivaiheisen todennuksen koodia luovan sovelluksen kautta kaikille käyttäjille."
 }

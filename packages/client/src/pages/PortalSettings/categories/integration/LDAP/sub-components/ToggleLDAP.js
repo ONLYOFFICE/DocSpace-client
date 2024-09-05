@@ -25,15 +25,48 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import styled from "styled-components";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Badge } from "@docspace/shared/components/badge";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
+import { globalColors } from "@docspace/shared/themes";
+import { mobile } from "@docspace/shared/utils";
+import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 
-const borderProp = { radius: "6px" };
+const StyledWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding: 12px;
+  border-radius: 6px;
+  background: ${(props) =>
+    props.theme.client.settings.integration.sso.toggleContentBackground};
+
+  @media ${mobile} {
+    margin-bottom: 24px;
+  }
+
+  .toggle {
+    position: static;
+    margin-top: 1px;
+  }
+
+  .toggle-caption {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    .toggle-caption_title {
+      display: flex;
+      .toggle-caption_title_badge {
+        margin-inline-start: 4px;
+        cursor: auto;
+      }
+    }
+  }
+
+  ${(props) => !props.isLdapAvailable && UnavailableStyles}
+`;
 
 const ToggleLDAP = ({
   theme,
@@ -58,57 +91,55 @@ const ToggleLDAP = ({
   );
 
   return (
-    <>
-      <Box
-        backgroundProp={
-          theme.client.settings.integration.sso.toggleContentBackground
-        }
-        borderProp={borderProp}
-        displayProp="flex"
-        flexDirection="row"
-        paddingProp="12px"
-      >
-        <ToggleButton
-          className="toggle"
-          isChecked={isLdapEnabled}
-          onChange={onChangeToggle}
-          isDisabled={isUIDisabled}
-        />
+    <StyledWrapper isLdapAvailable={isLdapAvailable}>
+      <ToggleButton
+        className="toggle"
+        isChecked={isLdapEnabled}
+        onChange={onChangeToggle}
+        isDisabled={isUIDisabled}
+      />
 
-        <div className="toggle-caption">
-          <div className="toggle-caption_title">
-            <Text
-              fontWeight={600}
-              lineHeight="20px"
-              noSelect
-              className="settings_unavailable"
-            >
-              {t("LdapToggle")}
-            </Text>
-            {!isLdapAvailable && (
-              <Badge
-                backgroundColor="#EDC409"
-                label={t("Common:Paid")}
-                className="toggle-caption_title_badge"
-                isPaidBadge={true}
-              />
-            )}
-          </div>
+      <div className="toggle-caption">
+        <div className="toggle-caption_title">
           <Text
-            fontSize="12px"
-            fontWeight={400}
-            lineHeight="16px"
-            className="settings_unavailable"
+            fontWeight={600}
+            lineHeight="20px"
             noSelect
+            className="settings_unavailable"
           >
-            {t("LdapToggleDescription", { productName: PRODUCT_NAME })}
+            {t("LdapToggle")}
           </Text>
+          {!isLdapAvailable && (
+            <Badge
+              backgroundColor={
+                theme.isBase
+                  ? globalColors.favoritesStatus
+                  : globalColors.favoriteStatusDark
+              }
+              label={t("Common:Paid")}
+              className="toggle-caption_title_badge"
+              isPaidBadge={true}
+            />
+          )}
         </div>
-      </Box>
-
-      {/* {confirmationDisableModal && <DisableSsoConfirmationModal />} */}
-    </>
+        <Text
+          fontSize="12px"
+          fontWeight={400}
+          lineHeight="16px"
+          className="settings_unavailable"
+          noSelect
+        >
+          {t("LdapToggleDescription", {
+            productName: t("Common:ProductName"),
+          })}
+        </Text>
+      </div>
+    </StyledWrapper>
   );
+
+  {
+    /* {confirmationDisableModal && <DisableSsoConfirmationModal />} */
+  }
 };
 
 export default inject(({ settingsStore, ldapStore, currentQuotaStore }) => {

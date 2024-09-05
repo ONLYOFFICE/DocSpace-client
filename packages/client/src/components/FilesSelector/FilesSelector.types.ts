@@ -24,13 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { TFile, TFolder } from "@docspace/shared/api/files/types";
-import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
+import {
+  TFile,
+  TFilesSettings,
+  TFolder,
+} from "@docspace/shared/api/files/types";
+import {
+  TBreadCrumb,
+  TSelectorHeader,
+} from "@docspace/shared/components/selector/Selector.types";
 import { DeviceType } from "@docspace/shared/enums";
 import { TTheme } from "@docspace/shared/themes";
 import SocketIOHelper from "@docspace/shared/utils/socket";
 
-export type FilesSelectorProps = {
+export type FilesSelectorProps = TSelectorHeader & {
   isPanelVisible: boolean;
   // withoutImmediatelyClose: boolean;
   isThirdParty: boolean;
@@ -142,4 +149,6 @@ export type FilesSelectorProps = {
 
   roomsFolderId?: number;
   openRoot?: boolean;
+
+  filesSettings: TFilesSettings;
 };

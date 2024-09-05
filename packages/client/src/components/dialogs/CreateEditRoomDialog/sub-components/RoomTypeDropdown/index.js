@@ -47,7 +47,7 @@ const RoomTypeDropdown = ({
   setRoomType,
   setIsScrollLocked,
   isDisabled,
-  forсeHideDropdown,
+  forceHideDropdown,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -69,11 +69,11 @@ const RoomTypeDropdown = ({
   };
 
   useEffect(() => {
-    if (forсeHideDropdown) {
+    if (forceHideDropdown) {
       setIsScrollLocked(false);
       setIsOpen(false);
     }
-  }, [forсeHideDropdown]);
+  }, [forceHideDropdown]);
 
   return (
     <StyledRoomTypeDropdown isOpen={isOpen}>
@@ -92,7 +92,7 @@ const RoomTypeDropdown = ({
           open={isOpen}
           onClose={toggleDropdown}
           chooseRoomType={chooseRoomType}
-          forсeHideDropdown={forсeHideDropdown}
+          forceHideDropdown={forceHideDropdown}
         />
       ) : (
         <DropdownDesktop t={t} open={isOpen} chooseRoomType={chooseRoomType} />

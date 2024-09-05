@@ -75,6 +75,10 @@ const Search = ({ setSearchValue, resetSearch }: SearchProps) => {
     return () => window.removeEventListener("keyup", onEscapeUp);
   }, []);
 
+  useEffect(() => {
+    return () => debouncedSearch.cancel();
+  }, [debouncedSearch]);
+
   return (
     <StyledSearchContainer>
       <TextInput

@@ -324,16 +324,11 @@ module.exports = (env, argv) => {
     };
   }
 
-  const remotes = {
-    client: "client@/remoteEntry.js",
-    login: "login@/login/remoteEntry.js",
-  };
-
   config.plugins.push(
     new ModuleFederationPlugin({
       name: "client",
       filename: "remoteEntry.js",
-      remotes: remotes,
+      remotes: [],
       exposes: {
         "./shell": "./src/Shell",
         "./store": "./src/store",

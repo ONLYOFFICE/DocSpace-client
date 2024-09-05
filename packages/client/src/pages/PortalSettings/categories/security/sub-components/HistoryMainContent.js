@@ -29,12 +29,13 @@ import { Text } from "@docspace/shared/components/text";
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import { TextInput } from "@docspace/shared/components/text-input";
 import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { UnavailableStyles } from "../../../utils/commonSettingsStyles";
 import { mobile, tablet } from "@docspace/shared/utils";
 import { Badge } from "@docspace/shared/components/badge";
+import { globalColors } from "@docspace/shared/themes";
 
 const StyledTextInput = styled(TextInput)`
   margin-top: 4px;
@@ -56,11 +57,12 @@ const MainContainer = styled.div`
   .paid-badge {
     cursor: auto;
     margin-bottom: 8px;
-    margin-left: -2px;
+    margin-inline-start: -2px;
   }
 
   .login-history-description {
     color: ${(props) => props.theme.client.settings.common.descriptionColor};
+    padding-bottom: 24px;
   }
 
   .save-cancel {
@@ -74,17 +76,13 @@ const MainContainer = styled.div`
 
   .login-subheader {
     font-size: 13px;
-    color: #657077;
+    color: ${(props) =>
+      props.theme.client.settings.security.loginHistory.subheaderColor};
   }
 
   .latest-text {
     font-size: 13px;
     padding: 20px 0 16px;
-  }
-
-  .download-text {
-    font-size: 13px;
-    padding: 24px 0;
   }
 
   .storage-label {
@@ -173,7 +171,6 @@ const HistoryMainContent = (props) => {
     lifetime,
     saveButtonLabel,
     cancelButtonLabel,
-    downloadText,
     setLifetimeAuditSettings,
     securityLifetime,
     content,
@@ -190,6 +187,8 @@ const HistoryMainContent = (props) => {
   const [auditLifeTimeReminder, setAuditLifeTimeReminder] = useState(false);
 
   const isLoginHistoryPage = window.location.pathname.includes("login-history");
+
+  const theme = useTheme();
 
   useEffect(() => {
     getSettings();
@@ -315,7 +314,11 @@ const HistoryMainContent = (props) => {
         <Badge
           className="paid-badge"
           fontWeight="700"
-          backgroundColor="#EDC409"
+          backgroundColor={
+            theme.isBase
+              ? globalColors.favoritesStatus
+              : globalColors.favoriteStatusDark
+          }
           label={t("Common:Paid")}
           isPaidBadge={true}
         />
@@ -324,6 +327,9 @@ const HistoryMainContent = (props) => {
         <Text fontSize="13px" className="login-history-description">
           {subHeader}
         </Text>
+
+        {/*  
+        // This part is commented out because it is not used in the current version of the application
         <Text className="latest-text settings_unavailable">{latestText} </Text>
 
         <label
@@ -378,10 +384,7 @@ const HistoryMainContent = (props) => {
               isDisabled={isSettingNotPaid}
             />
           </>
-        )}
-        <Text className="download-text settings_unavailable">
-          {downloadText}
-        </Text>
+        )} */}
       </div>
       {content}
       <DownLoadWrapper>

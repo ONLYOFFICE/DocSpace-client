@@ -38,18 +38,23 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { DropDown } from "@docspace/shared/components/drop-down";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
+import { ShareAccessRights } from "@docspace/shared/enums";
+import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
 
-import AccessSelector from "./AccessSelector";
-
+import AccessSelector from "../../../AccessSelector";
+import PaidQuotaLimitError from "../../../PaidQuotaLimitError";
 import {
-  StyledBlock,
   StyledSubHeader,
   StyledInviteInput,
   StyledInviteInputContainer,
   StyledToggleButton,
   StyledDescription,
+  StyledExternalLink,
 } from "../StyledInvitePanel";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
+import { globalColors } from "@docspace/shared/themes";
+
+import { getFreeUsersRoleArray, getFreeUsersTypeArray } from "../utils";
 
 const ExternalLinks = ({
   t,
@@ -65,26 +70,45 @@ const ExternalLinks = ({
   setActiveLink,
   activeLink,
   isMobileView,
+  getPortalInviteLink,
+  isUserTariffLimit,
 }) => {
+  const [isLinksToggling, setIsLinksToggling] = useState(false);
+
   const [actionLinksVisible, setActionLinksVisible] = useState(false);
 
   const inputsRef = useRef();
 
-  const toggleLinks = () => {
-    if (roomId === -1) {
-      const link = shareLinks.find((l) => l.access === +defaultAccess);
+  const toggleLinks = async (e) => {
+    if (isLinksToggling) return;
 
-      setActiveLink(link);
-      copyLink(link.shareLink);
-    } else {
-      !externalLinksVisible ? editLink() : disableLink();
+    setIsLinksToggling(true);
+
+    try {
+      if (roomId === -1) {
+        if (e?.target?.checked) {
+          const link = shareLinks.find((l) => l.access === defaultAccess);
+
+          link.shareLink = await getPortalInviteLink(defaultAccess);
+
+          setActiveLink(link);
+          copyLink(link.shareLink);
+        }
+      } else {
+        !externalLinksVisible ? await editLink() : await disableLink();
+      }
+      onChangeExternalLinksVisible(!externalLinksVisible);
+    } catch (error) {
+      toastr.error(error.message);
+    } finally {
+      setIsLinksToggling(false);
     }
-    onChangeExternalLinksVisible(!externalLinksVisible);
   };
 
-  const disableLink = () => {
-    setInvitationLinks(roomId, "Invite", 0, shareLinks[0].id);
-    setShareLinks([]);
+  const disableLink = async () => {
+    shareLinks?.length &&
+      (await setInvitationLinks(roomId, "Invite", 0, shareLinks[0].id));
+    return setShareLinks([]);
   };
 
   const editLink = async () => {
@@ -104,17 +128,21 @@ const ExternalLinks = ({
 
     copyLink(shareLink);
     setShareLinks([activeLink]);
-    setActiveLink(activeLink);
+    return setActiveLink(activeLink);
   };
 
-  const onSelectAccess = (access) => {
+  const onSelectAccess = async (access) => {
     let link = null;
+    const selectedAccess = access.access;
+
     if (roomId === -1) {
-      link = shareLinks.find((l) => l.access === access.access);
+      link = shareLinks.find((l) => l.access === selectedAccess);
+
+      link.shareLink = await getPortalInviteLink(selectedAccess);
 
       setActiveLink(link);
     } else {
-      setInvitationLinks(roomId, "Invite", +access.access, shareLinks[0].id);
+      setInvitationLinks(roomId, "Invite", +selectedAccess, shareLinks[0].id);
 
       link = shareLinks[0];
       setActiveLink(shareLinks[0]);
@@ -126,10 +154,9 @@ const ExternalLinks = ({
   const copyLink = (link) => {
     if (link) {
       toastr.success(
-        `${t("Translations:LinkCopySuccess")}. ${t(
-          "Translations:LinkValidTime",
-          { days_count: 7 },
-        )}`,
+        `${t("Common:LinkCopySuccess")}. ${t("Translations:LinkValidTime", {
+          days_count: 7,
+        })}`,
       );
       copy(link);
     }
@@ -182,8 +209,11 @@ const ExternalLinks = ({
     [closeActionLinks],
   );
 
+  const availableAccess =
+    roomId === -1 ? getFreeUsersTypeArray() : getFreeUsersRoleArray();
+
   return (
-    <StyledBlock noPadding ref={inputsRef}>
+    <StyledExternalLink noPadding ref={inputsRef}>
       <StyledSubHeader inline>
         {t("InviteViaLink")}
         {false && ( //TODO: Change to linksVisible after added link information from backend
@@ -191,8 +221,8 @@ const ExternalLinks = ({
             <IconButton
               size={16}
               iconName={MediaDownloadReactSvgUrl}
-              hoverColor="#333333"
-              iconColor="#A3A9AE"
+              hoverColor={globalColors.black}
+              iconColor={globalColors.gray}
               onClick={toggleActionLinks}
             />
             <DropDown
@@ -217,11 +247,14 @@ const ExternalLinks = ({
           className="invite-via-link"
           isChecked={externalLinksVisible}
           onChange={toggleLinks}
+          isDisabled={isLinksToggling}
         />
       </StyledSubHeader>
       <StyledDescription>
         {roomId === -1
-          ? t("InviteViaLinkDescriptionAccounts", { productName: PRODUCT_NAME })
+          ? t("InviteViaLinkDescriptionAccounts", {
+              productName: t("Common:ProductName"),
+            })
           : t("InviteViaLinkDescriptionRoom")}
       </StyledDescription>
       {externalLinksVisible && (
@@ -247,24 +280,33 @@ const ExternalLinks = ({
             containerRef={inputsRef}
             isOwner={isOwner}
             isMobileView={isMobileView}
+            isSelectionDisabled={isUserTariffLimit}
+            selectionErrorText={<PaidQuotaLimitError />}
+            availableAccess={availableAccess}
           />
         </StyledInviteInputContainer>
       )}
-    </StyledBlock>
+    </StyledExternalLink>
   );
 };
 
-export default inject(({ userStore, dialogsStore, filesStore }) => {
-  const { isOwner } = userStore.user;
-  const { invitePanelOptions } = dialogsStore;
-  const { setInvitationLinks } = filesStore;
-  const { roomId, hideSelector, defaultAccess } = invitePanelOptions;
+export default inject(
+  ({ userStore, dialogsStore, filesStore, peopleStore, currentQuotaStore }) => {
+    const { isOwner } = userStore.user;
+    const { invitePanelOptions } = dialogsStore;
+    const { setInvitationLinks } = filesStore;
+    const { roomId, hideSelector, defaultAccess } = invitePanelOptions;
+    const { getPortalInviteLink } = peopleStore.inviteLinksStore;
+    const { isUserTariffLimit } = currentQuotaStore;
 
-  return {
-    setInvitationLinks,
-    roomId,
-    hideSelector,
-    defaultAccess,
-    isOwner,
-  };
-})(observer(ExternalLinks));
+    return {
+      setInvitationLinks,
+      roomId,
+      hideSelector,
+      defaultAccess,
+      isOwner,
+      getPortalInviteLink,
+      isUserTariffLimit,
+    };
+  },
+)(observer(ExternalLinks));

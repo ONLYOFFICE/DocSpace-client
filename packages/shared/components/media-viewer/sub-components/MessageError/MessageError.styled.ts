@@ -30,6 +30,7 @@ export const StyledMediaError = styled.div`
   position: fixed;
   z-index: 1006;
 
+  // doesn't require mirroring for RTL
   left: 50%;
   top: 50%;
 
@@ -49,6 +50,7 @@ export const StyledMediaError = styled.div`
 export const StyledErrorToolbar = styled.div`
   position: fixed;
   bottom: 24px;
+  // doesn't require mirroring for RTL
   left: 50%;
   z-index: 1006;
 

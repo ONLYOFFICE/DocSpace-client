@@ -29,7 +29,6 @@ import { useTranslation } from "react-i18next";
 
 import ErrorContainer from "../error-container/ErrorContainer";
 import { ErrorUnavailableWrapper } from "./Errors.styled";
-import { PRODUCT_NAME } from "../../constants";
 
 const ErrorUnavailable = () => {
   const { t, ready } = useTranslation("Common");
@@ -38,7 +37,9 @@ const ErrorUnavailable = () => {
     ready && (
       <ErrorUnavailableWrapper>
         <ErrorContainer
-          headerText={t("ErrorDeactivatedText", { productName: PRODUCT_NAME })}
+          headerText={t("ErrorDeactivatedText", {
+            productName: t("Common:ProductName"),
+          })}
         />
       </ErrorUnavailableWrapper>
     )

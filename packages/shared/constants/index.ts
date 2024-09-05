@@ -24,20 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import ShareAppleReactSvgUrl from "PUBLIC_DIR/images/share.apple.react.svg?url";
-import ShareGoogleReactSvgUrl from "PUBLIC_DIR/images/share.google.react.svg?url";
-import ShareFacebookReactSvgUrl from "PUBLIC_DIR/images/share.facebook.react.svg?url";
-import ShareTwitterReactSvgUrl from "PUBLIC_DIR/images/share.twitter.react.svg?url";
-import ShareLinkedinReactSvgUrl from "PUBLIC_DIR/images/share.linkedin.react.svg?url";
-import ShareMicrosoftReactSvgUrl from "PUBLIC_DIR/images/share.microsoft.react.svg?url";
-import ShareZoomReactSvgUrl from "PUBLIC_DIR/images/share.zoom.react.svg?url";
+import ShareAppleReactSvg from "PUBLIC_DIR/images/share.apple.react.svg";
+import ShareGoogleReactSvg from "PUBLIC_DIR/images/share.google.react.svg";
+import ShareFacebookReactSvg from "PUBLIC_DIR/images/share.facebook.react.svg";
+import ShareTwitterReactSvg from "PUBLIC_DIR/images/share.twitter.react.svg";
+import ShareLinkedinReactSvg from "PUBLIC_DIR/images/share.linkedin.react.svg";
+import ShareMicrosoftReactSvg from "PUBLIC_DIR/images/share.microsoft.react.svg";
+import ShareZoomReactSvg from "PUBLIC_DIR/images/share.zoom.react.svg";
+import { globalColors } from "../themes/globalColors";
 
 export const LOADER_STYLE = Object.freeze({
   title: "",
   width: "100%",
   height: "32",
-  backgroundColor: "#000000",
-  foregroundColor: "#000000",
+  backgroundColor: globalColors.darkBlack,
+  foregroundColor: globalColors.darkBlack,
   backgroundOpacity: 0.1,
   foregroundOpacity: 0.15,
   borderRadius: "3",
@@ -53,6 +54,9 @@ export const ROOM = "room";
 export const USERS = "users";
 export const USERS_IN_ROOM = "usersInRoom";
 export const PDF_FORM_DIALOG_KEY = "pdf_form_dialog";
+export const CREATED_FORM_KEY = "created_form_key";
+
+export const OPEN_BACKUP_CODES_DIALOG = "openBackupCodesDialog";
 
 export const COUNT_FOR_SHOWING_BAR = 2;
 export const PERCENTAGE_FOR_SHOWING_BAR = 90;
@@ -67,17 +71,6 @@ export const LIVE_CHAT_LOCAL_STORAGE_KEY = "live_chat_state";
 export const MAX_FILE_COMMENT_LENGTH = 255;
 export const LINKS_LIMIT_COUNT = 5;
 export const LOADER_TIMEOUT = 300;
-
-export const ROOMS_TYPE_TRANSLATIONS = Object.freeze({
-  1: "Files:FillingFormRooms",
-  2: "Files:CollaborationRooms",
-  3: "Common:Review",
-  4: "Files:ViewOnlyRooms",
-  5: "Files:CustomRooms",
-  6: "Files:PublicRoom",
-
-  8: "Common:VirtualDataRoom",
-});
 
 export const ROOMS_PROVIDER_TYPE_NAME = Object.freeze({
   1: "Box",
@@ -110,37 +103,37 @@ export const FOLDER_NAMES = Object.freeze({
 export const PROVIDERS_DATA = Object.freeze({
   appleid: {
     label: "apple",
-    icon: ShareAppleReactSvgUrl,
+    icon: ShareAppleReactSvg,
     iconOptions: undefined,
   },
   google: {
     label: "google",
-    icon: ShareGoogleReactSvgUrl,
+    icon: ShareGoogleReactSvg,
     iconOptions: undefined,
   },
   facebook: {
     label: "facebook",
-    icon: ShareFacebookReactSvgUrl,
+    icon: ShareFacebookReactSvg,
     iconOptions: undefined,
   },
   twitter: {
     label: "twitter",
-    icon: ShareTwitterReactSvgUrl,
-    iconOptions: { color: "#2AA3EF" },
+    icon: ShareTwitterReactSvg,
+    iconOptions: { color: globalColors.twitterColor },
   },
   linkedin: {
     label: "linkedin",
-    icon: ShareLinkedinReactSvgUrl,
+    icon: ShareLinkedinReactSvg,
     iconOptions: undefined,
   },
   microsoft: {
     label: "microsoft",
-    icon: ShareMicrosoftReactSvgUrl,
+    icon: ShareMicrosoftReactSvg,
     iconOptions: undefined,
   },
   zoom: {
     label: "zoom",
-    icon: ShareZoomReactSvgUrl,
+    icon: ShareZoomReactSvg,
     iconOptions: undefined,
   },
 });
@@ -181,11 +174,12 @@ export const HTML_EXST = [".htm", ".mht", ".html"];
 
 export const SYSTEM_THEME_KEY = "system_theme";
 
-export const PRODUCT_NAME = "DocSpace";
-export const BRAND_NAME = "ONLYOFFICE";
+const SDK_VERSION = "1.0.1";
 
-const SDK_VERSION = "1.0.0";
 export const SDK_SCRIPT_URL =
   typeof window !== "undefined"
     ? `${window.location.origin}/static/scripts/sdk/${SDK_VERSION}/api.js`
     : "";
+
+export const ALLOWED_PASSWORD_CHARACTERS =
+  "a-z, A-Z, 0-9, !\"#%&'()*+,-./:;<=>?@[]^_`{|}";

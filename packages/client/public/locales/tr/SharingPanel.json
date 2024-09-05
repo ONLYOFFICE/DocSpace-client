@@ -3,6 +3,5 @@
   "FormFilling": "Form doldurma",
   "LinkName": "Bağlantı adı",
   "ShareEmailBody": "{{itemName}} belgesine erişim izni aldınız. Belgeyi hemen açmak için aşağıdaki bağlantıya tıklayın: {{shareLink}}.",
-  "ShareEmailSubject": "{{itemName}} dokümanına erişim izni aldınız",
-  "SharingSettingsTitle": "Paylaşım ayarları"
+  "ShareEmailSubject": "{{itemName}} dokümanına erişim izni aldınız"
 }

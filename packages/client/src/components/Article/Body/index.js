@@ -28,7 +28,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import { DeviceType, RoomSearchArea } from "@docspace/shared/enums";
 import Items from "./Items";
@@ -43,8 +43,7 @@ import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
+import { showProgress } from "@docspace/shared/utils/common";
 
 const ArticleBodyContent = (props) => {
   const {
@@ -76,18 +75,13 @@ const ArticleBodyContent = (props) => {
     isFrame,
   } = props;
 
-  const navigate = useNavigate();
   const location = useLocation();
 
   const [disableBadgeClick, setDisableBadgeClick] = React.useState(false);
   const [activeItemId, setActiveItemId] = React.useState(null);
 
-  const isAccounts = location.pathname.includes("accounts/filter");
-
-  const onClick = React.useCallback(
-    (e, folderId, title, rootFolderType, canCreate) => {
-      const { toggleArticleOpen } = props;
-
+  const getLinkData = React.useCallback(
+    (folderId, title, rootFolderType, canCreate) => {
       let params = null;
       let path = ``;
 
@@ -99,19 +93,31 @@ const ArticleBodyContent = (props) => {
         canCreate,
       };
 
-      let withTimer = !!selectedFolderId;
-
       switch (folderId) {
         case myFolderId:
           const myFilter = FilesFilter.getDefault();
           myFilter.folder = folderId;
+
+          const filterStorageItem =
+            userId && localStorage.getItem(`UserFilter=${userId}`);
+
+          if (filterStorageItem) {
+            const splitFilter = filterStorageItem.split(",");
+
+            myFilter.sortBy = splitFilter[0];
+            myFilter.sortOrder = splitFilter[1];
+          }
+
           params = myFilter.toUrlParams();
 
           path = getCategoryUrl(CategoryType.Personal);
 
           break;
         case archiveFolderId:
-          const archiveFilter = RoomsFilter.getDefault(userId);
+          const archiveFilter = RoomsFilter.getDefault(
+            userId,
+            RoomSearchArea.Archive,
+          );
           archiveFilter.searchArea = RoomSearchArea.Archive;
           params = archiveFilter.toUrlParams(userId, true);
           path = getCategoryUrl(CategoryType.Archive);
@@ -120,6 +126,17 @@ const ArticleBodyContent = (props) => {
         case recycleBinFolderId:
           const recycleBinFilter = FilesFilter.getDefault();
           recycleBinFilter.folder = folderId;
+
+          const filterStorageTrash =
+            userId && localStorage.getItem(`UserFilterTrash=${userId}`);
+
+          if (filterStorageTrash) {
+            const splitFilterTrash = filterStorageTrash.split(",");
+
+            recycleBinFilter.sortBy = splitFilterTrash[0];
+            recycleBinFilter.sortOrder = splitFilterTrash[1];
+          }
+
           params = recycleBinFilter.toUrlParams();
           path = getCategoryUrl(CategoryType.Trash);
 
@@ -129,20 +146,13 @@ const ArticleBodyContent = (props) => {
           params = accountsFilter.toUrlParams();
           path = getCategoryUrl(CategoryType.Accounts);
 
-          withTimer = false;
-
           break;
-        case "settings":
-          path = getCategoryUrl(CategoryType.Settings);
-          navigate(path);
-
-          if (currentDeviceType === DeviceType.mobile) {
-            toggleArticleOpen();
-          }
-          return;
         case roomsFolderId:
         default:
-          const roomsFilter = RoomsFilter.getDefault(userId);
+          const roomsFilter = RoomsFilter.getDefault(
+            userId,
+            RoomSearchArea.Active,
+          );
           roomsFilter.searchArea = RoomSearchArea.Active;
           params = roomsFilter.toUrlParams(userId, true);
           path = getCategoryUrl(CategoryType.Shared);
@@ -152,14 +162,32 @@ const ArticleBodyContent = (props) => {
 
       path += `?${params}&date=${new Date().getTime()}`;
 
-      if (openingNewTab(path, e)) return;
+      return { path, state };
+    },
+    [
+      roomsFolderId,
+      archiveFolderId,
+      myFolderId,
+      recycleBinFolderId,
+      activeItemId,
+    ],
+  );
 
-      if (folderId === "accounts" || folderId === "settings") clearFiles();
+  const onClick = React.useCallback(
+    (e, folderId) => {
+      if (e?.ctrlKey || e?.metaKey || e?.shiftKey || e?.button) return;
 
-      setSelection && setSelection([]);
+      const { toggleArticleOpen } = props;
+
+      const isAccountsClick = folderId === "accounts";
+
+      let withTimer = isAccountsClick ? false : !!selectedFolderId;
+
+      if (isAccountsClick) clearFiles();
+
+      setSelection?.([]);
 
       setIsLoading(true, withTimer);
-      navigate(path, { state });
 
       if (currentDeviceType === DeviceType.mobile) {
         toggleArticleOpen();
@@ -172,7 +200,7 @@ const ArticleBodyContent = (props) => {
       recycleBinFolderId,
       activeItemId,
       selectedFolderId,
-      isAccounts,
+
       setSelection,
     ],
   );
@@ -251,6 +279,7 @@ const ArticleBodyContent = (props) => {
       <Items
         onClick={onClick}
         onBadgeClick={onShowNewFilesPanel}
+        getLinkData={getLinkData}
         showText={showText}
         onHide={toggleArticleOpen}
         activeItemId={activeItemId}
@@ -286,6 +315,8 @@ export default inject(
 
     const setIsLoading = (param, withTimer) => {
       setIsSectionFilterLoading(param, withTimer);
+
+      if (param && withTimer) showProgress();
     };
 
     const { roomsFolderId, archiveFolderId, myFolderId, recycleBinFolderId } =

@@ -43,6 +43,7 @@ const SelectorAddButton = (props: SelectorAddButtonProps) => {
     style,
     iconName = ActionsHeaderTouchReactSvgUrl,
     onClick,
+    iconSize = 12,
   } = props;
 
   const onClickAction = (e: React.MouseEvent) => {
@@ -62,7 +63,7 @@ const SelectorAddButton = (props: SelectorAddButtonProps) => {
       data-testid="selector-add-button"
     >
       <IconButton
-        size={12}
+        size={iconSize}
         iconName={iconName}
         isFill
         isDisabled={isDisabled}

@@ -24,13 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import TableHeader from "./TableHeader";
-
-export { TableHeader };
 export { TableContainer } from "./TableContainer";
 export { TableBody } from "./TableBody";
 export { TableRow } from "./TableRow";
-// export { TableHeader } from "./TableHeader";
+export { TableHeader } from "./TableHeader";
 export { TableGroupMenu } from "./TableGroupMenu";
 export { TableCell } from "./sub-components/TableCell";
 

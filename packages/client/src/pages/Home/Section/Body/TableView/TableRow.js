@@ -76,6 +76,7 @@ const FilesTableRow = (props) => {
     canDrag,
     onEditIndex,
     isIndexUpdated,
+    displayFileExtension,
   } = props;
 
   const { acceptBackground, background } = theme.dragAndDrop;
@@ -192,6 +193,7 @@ const FilesTableRow = (props) => {
         isIndexing={isIndexing}
         isIndexUpdated={isIndexUpdated}
         showHotkeyBorder={showHotkeyBorder}
+        displayFileExtension={displayFileExtension}
         title={
           item.isFolder
             ? t("Translations:TitleShowFolderActions")

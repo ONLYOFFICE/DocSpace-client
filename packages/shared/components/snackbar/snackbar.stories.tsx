@@ -31,6 +31,7 @@ import { Box } from "../box";
 
 import { SnackBar } from "./Snackbar";
 import { SnackbarProps } from "./Snackbar.types";
+import { globalColors } from "../../themes";
 
 const meta = {
   title: "Components/SnackBar",
@@ -68,8 +69,8 @@ export const base: Story = {
   render: (args) => <BaseTemplate {...args} />,
   args: {
     backgroundImg: "",
-    backgroundColor: "#f8f7bf",
-    textColor: "#000",
+    backgroundColor: globalColors.lightToastInfo,
+    textColor: globalColors.darkBlack,
     opacity: 1,
     headerText: "Attention",
     text: "We apologize for any short-term technical issues in service functioning, that may appear on 22.06.2021 during the update of ONLYOFFICE Personal.",

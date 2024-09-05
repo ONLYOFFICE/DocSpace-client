@@ -75,7 +75,7 @@ const HistoryBlockContent = ({
       )}
 
       {targetType === "roomExternalLink" && actionType === "create" && (
-        <HistoryRoomExternalLink feed={feed} actionType={actionType} />
+        <HistoryRoomExternalLink feedData={feed.data} />
       )}
 
       {targetType === "user" && actionType !== "update" && (

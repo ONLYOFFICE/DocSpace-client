@@ -100,13 +100,14 @@ const WhiteLabelWrapper = styled.div`
   }
 
   .logos-editor-wrapper {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 8px;
+    display: grid;
+    grid-template-columns: 172px 1fr;
+    grid-gap: 8px;
     margin-bottom: 8px;
 
     @media ${mobile} {
+      display: flex;
+      gap: 8px;
       flex-direction: column;
     }
   }
@@ -160,15 +161,15 @@ const WhiteLabelWrapper = styled.div`
   }
 
   .logo-docs-editor {
-    width: 154px;
-    height: 27px;
-    padding: 6px 9px 7px 9px;
+    width: 172px;
+    height: 40px;
+    padding: 0;
   }
 
   .logo-embedded-editor {
-    width: 154px;
-    height: 27px;
-    padding: 5px 8px 6px 8px;
+    width: 172px;
+    height: 40px;
+    padding: 0;
     margin-bottom: 8px;
   }
 
@@ -185,6 +186,11 @@ const WhiteLabelWrapper = styled.div`
   .background-orange {
     background-color: ${(props) =>
       props.theme.client.settings.common.whiteLabel.orangeBackgroundColor};
+  }
+
+  .background-red {
+    background-color: ${(props) =>
+      props.theme.client.settings.common.whiteLabel.redBackgroundColor};
   }
 
   .background-light {

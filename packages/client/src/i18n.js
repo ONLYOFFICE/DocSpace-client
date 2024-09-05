@@ -31,7 +31,7 @@ import config from "PACKAGE_FILE";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie } from "@docspace/shared/utils";
 
-import { loadLanguagePath } from "./helpers/utils";
+import { loadLanguagePath } from "./helpers/language-helpers";
 
 const newInstance = i18n.createInstance();
 
@@ -61,6 +61,7 @@ newInstance
     },
 
     ns: [
+      "Common",
       "ArchiveDialog",
       "InfoPanel",
       "InviteDialog",

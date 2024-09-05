@@ -87,6 +87,7 @@ const SpaceQuota = (props) => {
 
     needResetSelection,
     setSelected,
+    inRoom,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -123,7 +124,7 @@ const SpaceQuota = (props) => {
 
     if (action === "no-quota") {
       try {
-        const items = await updateQuota(-1, [item.id]);
+        const items = await updateQuota(-1, [item.id], inRoom);
 
         options.map((item) => {
           if (item.key === "no-quota") item.label = t("Common:Unlimited");
@@ -140,7 +141,7 @@ const SpaceQuota = (props) => {
     }
 
     try {
-      const items = await resetQuota([item.id]);
+      const items = await resetQuota([item.id], inRoom);
 
       options.map((item) => {
         if (item.key === "default-quota") item.label = defaultQuotaSize;
@@ -195,7 +196,8 @@ const SpaceQuota = (props) => {
         size="content"
         modernView
         isLoading={isLoading}
-        manualWidth="fit-content"
+        manualWidth="auto"
+        directionY="both"
       />
     </StyledBody>
   );
@@ -203,7 +205,13 @@ const SpaceQuota = (props) => {
 
 export default inject(
   (
-    { peopleStore, filesActionsStore, filesStore, currentQuotaStore },
+    {
+      peopleStore,
+      filesActionsStore,
+      filesStore,
+      currentQuotaStore,
+      infoPanelStore,
+    },
     { type },
   ) => {
     const { changeUserQuota, usersStore, selectionStore } = peopleStore;
@@ -223,6 +231,9 @@ export default inject(
       defaultUsersQuota,
       defaultRoomsQuota,
     } = currentQuotaStore;
+
+    const { infoPanelSelection } = infoPanelStore;
+    const inRoom = !!infoPanelSelection?.navigationPath;
 
     const { setSelected: setUsersSelected } = selectionStore;
 
@@ -250,6 +261,7 @@ export default inject(
       resetQuota,
       defaultSize,
       needResetSelection,
+      inRoom,
     };
   },
 )(observer(SpaceQuota));

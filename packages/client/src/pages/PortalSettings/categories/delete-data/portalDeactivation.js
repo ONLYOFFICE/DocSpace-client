@@ -32,12 +32,11 @@ import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { Link } from "@docspace/shared/components/link";
 import { MainContainer, ButtonWrapper } from "./StyledDeleteData";
-import { setDocumentTitle } from "../../../../helpers/utils";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { sendSuspendPortalEmail } from "@docspace/shared/api/portal";
 import { isDesktop } from "@docspace/shared/utils";
 import { EmployeeActivationStatus } from "@docspace/shared/enums";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const PortalDeactivation = (props) => {
   const { t, getPortalOwner, owner, currentColorScheme, sendActivationLink } =
@@ -49,7 +48,9 @@ const PortalDeactivation = (props) => {
   };
 
   useEffect(() => {
-    setDocumentTitle(t("PortalDeactivation", { productName: PRODUCT_NAME }));
+    setDocumentTitle(
+      t("PortalDeactivation", { productName: t("Common:ProductName") }),
+    );
     fetchData();
     onCheckView();
     window.addEventListener("resize", onCheckView);
@@ -85,12 +86,14 @@ const PortalDeactivation = (props) => {
         {t("PortalDeactivationDescription")}
       </Text>
       <Text className="helper">
-        {t("PortalDeactivationHelper", { productName: PRODUCT_NAME })}
+        {t("PortalDeactivationHelper", {
+          productName: t("Common:ProductName"),
+        })}
       </Text>
       <ButtonWrapper>
         <Button
           className="deactivate-button button"
-          label={t("Deactivate")}
+          label={t("Common:Deactivate")}
           primary
           size={isDesktopView ? "small" : "normal"}
           onClick={onDeactivateClick}
@@ -100,7 +103,7 @@ const PortalDeactivation = (props) => {
           <Text fontSize="12px" fontWeight="600">
             {t("MainBar:ConfirmEmailHeader", {
               email: owner.email,
-              productName: PRODUCT_NAME,
+              productName: t("Common:ProductName"),
             })}
             <Link
               className="request-again-link"

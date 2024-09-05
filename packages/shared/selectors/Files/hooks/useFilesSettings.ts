@@ -25,30 +25,59 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { TFilesSettings } from "../../../api/files/types";
 
+import api from "../../../api";
+import { TFilesSettings } from "../../../api/files/types";
 import { presentInArray } from "../../../utils";
 import { iconSize32 } from "../../../utils/image-helpers";
 import { HTML_EXST } from "../../../constants";
+import { toastr } from "../../../components/toast";
+import { TData } from "../../../components/toast/Toast.type";
+
+import { TGetIcon } from "../FilesSelector.types";
 
 const useFilesSettings = (
-  getIconProp?: (size: number, fileExst: string) => string,
+  getIconProp?: TGetIcon,
   settings?: TFilesSettings,
 ) => {
+  const [filesSettings, setFilesSettings] = React.useState<
+    TFilesSettings | undefined
+  >(settings);
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const getFileSettings = React.useCallback(async () => {
+    try {
+      setIsLoading(true);
+      const newSettings = await api.files.getSettingsFiles();
+
+      setFilesSettings(newSettings);
+      setIsLoading(false);
+    } catch (e) {
+      setIsLoading(false);
+      toastr.error(e as TData);
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if (!settings) getFileSettings();
+  }, [getFileSettings, settings]);
+
   const isArchive = React.useCallback(
     (extension: string) =>
-      presentInArray(settings?.extsArchive ?? [], extension),
-    [settings?.extsArchive],
+      presentInArray(filesSettings?.extsArchive ?? [], extension),
+    [filesSettings?.extsArchive],
   );
 
   const isImage = React.useCallback(
-    (extension: string) => presentInArray(settings?.extsImage ?? [], extension),
-    [settings?.extsImage],
+    (extension: string) =>
+      presentInArray(filesSettings?.extsImage ?? [], extension),
+    [filesSettings?.extsImage],
   );
 
   const isSound = React.useCallback(
-    (extension: string) => presentInArray(settings?.extsAudio ?? [], extension),
-    [settings?.extsAudio],
+    (extension: string) =>
+      presentInArray(filesSettings?.extsAudio ?? [], extension),
+    [filesSettings?.extsAudio],
   );
 
   const isHtml = React.useCallback(
@@ -60,7 +89,7 @@ const useFilesSettings = (
     (fileExst: string) => {
       if (getIconProp) return getIconProp(32, fileExst);
 
-      if (!settings) return "";
+      if (!filesSettings) return "";
 
       const isArchiveItem = isArchive(fileExst);
       const isImageItem = isImage(fileExst);
@@ -254,10 +283,10 @@ const useFilesSettings = (
 
       return iconSize32.get(path) ?? "";
     },
-    [getIconProp, isArchive, isHtml, isImage, isSound, settings],
+    [filesSettings, getIconProp, isArchive, isHtml, isImage, isSound],
   );
 
-  return { getIcon };
+  return { getIcon, extsWebEdited: filesSettings?.extsWebEdited, isLoading };
 };
 
 export default useFilesSettings;

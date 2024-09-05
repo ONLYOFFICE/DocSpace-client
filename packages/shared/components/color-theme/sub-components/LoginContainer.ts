@@ -38,12 +38,12 @@ const LoginContainer = styled.div<{
   display: flex;
   flex-direction: column;
   align-items: center;
-  //margin: 56px auto 0 auto;
   max-width: 960px;
   z-index: 0;
 
+  margin-top: 56px;
   margin-bottom: ${(props) =>
-    props.isRegisterContainerVisible ? "100px" : "16px"};
+    props.isRegisterContainerVisible ? "100px" : "56px"};
 
   .remember-wrapper {
     max-width: 170px;
@@ -62,10 +62,12 @@ const LoginContainer = styled.div<{
   }
 
   @media ${mobile} {
-    margin-left: auto;
-    margin-right: auto;
+    margin-inline: auto;
     max-width: 100%;
-    width: calc(100% - 32px);
+    width: calc(100% - 24px);
+    padding-inline: 16px 8px;
+
+    margin: 0 auto;
   }
 
   .socialButton {
@@ -95,7 +97,7 @@ const LoginContainer = styled.div<{
     color: ${(props) => props.theme.login.headerColor};
 
     @media ${mobile} {
-      padding-top: 32px;
+      padding-top: 34px;
     }
   }
 
@@ -114,6 +116,10 @@ const LoginContainer = styled.div<{
     align-items: center;
     color: ${(props) => props.theme.login.orLineColor};
     padding: 32px 0;
+
+    @media ${mobile} {
+      padding: 24px 0;
+    }
   }
 
   .line:before,
@@ -134,32 +140,6 @@ const LoginContainer = styled.div<{
 
   .not-found-code {
     margin-top: 32px;
-  }
-
-  .code-input-bar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px;
-    margin-top: 16px;
-    padding: 14px 12px;
-    text-align: center;
-    font-weight: 600;
-    font-size: 11px;
-    line-height: 12px;
-    color: #333;
-    svg {
-      margin: 8px;
-    }
-  }
-
-  .code-input-bar.warning {
-    background: #f7e6be;
-    margin-bottom: 16px;
-  }
-
-  .code-input-bar.error {
-    background: #f7cdbe;
   }
 
   .auth-form-container {
@@ -185,10 +165,7 @@ const LoginContainer = styled.div<{
           align-items: flex-start;
 
           svg {
-            ${({ theme }) =>
-              theme.interfaceDirection === "rtl"
-                ? `margin-left: 8px !important;`
-                : `margin-right: 8px !important;`}
+            margin-inline-end: 8px !important;
             rect {
               fill: ${(props) => props.theme.checkbox.fillColor};
               stroke: ${(props) => props.theme.checkbox.borderColor};
@@ -224,11 +201,7 @@ const LoginContainer = styled.div<{
 
       .login-link {
         line-height: 18px;
-
-        ${({ theme }) =>
-          theme.interfaceDirection === "rtl"
-            ? `margin-right: auto;`
-            : `margin-left: auto;`}
+        margin-inline-start: auto;
       }
     }
 
@@ -237,16 +210,13 @@ const LoginContainer = styled.div<{
     }
 
     .login-button-dialog {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl"
-          ? `margin-left: 8px;`
-          : `margin-right: 8px;`}
+      margin-inline-end: 8px;
     }
 
     .login-bottom-border {
       width: 100%;
       height: 1px;
-      background: #eceef1;
+      background: ${(props) => props.theme.login.orLineColor};
     }
 
     .login-bottom-text {
@@ -270,6 +240,7 @@ const LoginContainer = styled.div<{
     align-items: center;
     justify-content: center;
     width: 100%;
+    max-width: 386px;
     height: ${(props) => (props.type === "invitation" ? "26.56px" : "44px")};
     padding-bottom: ${(props) =>
       props.type === "invitation" ? "16px" : "40px"};

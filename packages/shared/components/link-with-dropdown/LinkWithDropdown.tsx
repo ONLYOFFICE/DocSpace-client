@@ -66,6 +66,7 @@ const LinkWithDropdown = ({
   dropDownClassName,
   isOpen = false,
   children,
+  manualWidth,
   ...rest
 }: LinkWithDropDownProps) => {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -188,7 +189,9 @@ const LinkWithDropdown = ({
       </span>
       <DropDown
         className={classNames("fixed-max-width", dropDownClassName || "") || ""}
-        manualWidth={showScroll ? onCheckManualWidth() : undefined}
+        manualWidth={
+          manualWidth || (showScroll ? onCheckManualWidth() : undefined)
+        }
         open={state.isOpen}
         // withArrow={false}
         forwardedRef={ref}

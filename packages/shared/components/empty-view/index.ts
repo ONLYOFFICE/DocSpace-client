@@ -1,2 +1,6 @@
 export { EmptyView } from "./EmptyView";
-export type { EmptyViewItemType } from "./EmptyView.types";
+export type {
+  EmptyViewItemType,
+  EmptyViewLinkType,
+  EmptyViewOptionsType,
+} from "./EmptyView.types";

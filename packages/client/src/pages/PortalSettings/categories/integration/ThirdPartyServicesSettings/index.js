@@ -42,12 +42,14 @@ import { Badge } from "@docspace/shared/components/badge";
 import { toastr } from "@docspace/shared/components/toast";
 import { Button } from "@docspace/shared/components/button";
 import { isMobile } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
 
 import ConsumerItem from "./sub-components/consumerItem";
 import ConsumerModalDialog from "./sub-components/consumerModalDialog";
 
 import ThirdPartyLoader from "./sub-components/thirdPartyLoader";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
+
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const RootContainer = styled(Box)`
   max-width: 700px;
@@ -78,7 +80,8 @@ const RootContainer = styled(Box)`
 
     border-radius: 6px;
     min-height: 116px;
-    padding: 12px 12px 8px 20px;
+    padding-block: 12px 8px;
+    padding-inline: 20px 12px;
   }
 
   .request-block {
@@ -110,9 +113,9 @@ const RootContainer = styled(Box)`
 class ThirdPartyServices extends React.Component {
   constructor(props) {
     super(props);
-    const { t, setDocumentTitle } = props;
+    const { t, tReady } = props;
 
-    setDocumentTitle(`${t("ThirdPartyAuthorization")}`);
+    if (tReady) setDocumentTitle(`${t("ThirdPartyAuthorization")}`);
 
     this.state = {
       dialogVisible: false,
@@ -132,6 +135,12 @@ class ThirdPartyServices extends React.Component {
     } else {
       getConsumers().finally(() => hideLoader());
     }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { t, tReady } = this.props;
+    if (prevProps.tReady !== tReady && tReady)
+      setDocumentTitle(t("ThirdPartyAuthorization"));
   }
 
   onChangeLoading = (status) => {
@@ -202,25 +211,14 @@ class ThirdPartyServices extends React.Component {
       theme,
       currentColorScheme,
       isThirdPartyAvailable,
-      organizationName,
     } = this.props;
     const { dialogVisible, isLoading } = this.state;
     const { onModalClose, onModalOpen, setConsumer, onChangeLoading } = this;
 
-    const filteredConsumers = consumers.filter(
-      (consumer) =>
-        consumer.name !== "bitly" &&
-        consumer.name !== "wordpress" &&
-        consumer.name !== "docusign" &&
-        consumer.name !== "clickatell" && //TODO: hide while 2fa by sms is not working
-        consumer.name !== "twilio" &&
-        consumer.name !== "selectel",
-    );
-
-    const freeConsumers = filteredConsumers.filter(
+    const freeConsumers = consumers.filter(
       (consumer) => consumer.canSet === false,
     );
-    const paidConsumers = filteredConsumers.filter(
+    const paidConsumers = consumers.filter(
       (consumer) => !freeConsumers.includes(consumer),
     );
 
@@ -254,8 +252,8 @@ class ThirdPartyServices extends React.Component {
             />
             <Text>
               {t("IntegrationRequest", {
-                productName: PRODUCT_NAME,
-                organizationName,
+                productName: t("Common:ProductName"),
+                organizationName: t("Common:OrganizationName"),
               })}
             </Text>
             <Button
@@ -294,7 +292,11 @@ class ThirdPartyServices extends React.Component {
                   </Text>
                   <Badge
                     className="paid-badge"
-                    backgroundColor="#EDC409"
+                    backgroundColor={
+                      theme.isBase
+                        ? globalColors.favoritesStatus
+                        : globalColors.favoriteStatusDark
+                    }
                     fontWeight="700"
                     label={t("Common:Paid")}
                     isPaidBadge={true}
@@ -346,39 +348,33 @@ ThirdPartyServices.propTypes = {
   setSelectedConsumer: PropTypes.func.isRequired,
 };
 
-export default inject(
-  ({ setup, authStore, settingsStore, currentQuotaStore }) => {
-    const { setDocumentTitle } = authStore;
-    const {
-      integrationSettingsUrl,
-      theme,
-      currentColorScheme,
-      companyInfoSettingsData,
-      organizationName,
-    } = settingsStore;
-    const {
-      getConsumers,
-      integration,
-      updateConsumerProps,
-      setSelectedConsumer,
-      fetchAndSetConsumers,
-    } = setup;
-    const { consumers } = integration;
-    const { isThirdPartyAvailable } = currentQuotaStore;
+export default inject(({ setup, settingsStore, currentQuotaStore }) => {
+  const {
+    integrationSettingsUrl,
+    theme,
+    currentColorScheme,
+    companyInfoSettingsData,
+  } = settingsStore;
+  const {
+    getConsumers,
+    integration,
+    updateConsumerProps,
+    setSelectedConsumer,
+    fetchAndSetConsumers,
+  } = setup;
+  const { consumers } = integration;
+  const { isThirdPartyAvailable } = currentQuotaStore;
 
-    return {
-      theme,
-      consumers,
-      integrationSettingsUrl,
-      getConsumers,
-      updateConsumerProps,
-      setSelectedConsumer,
-      fetchAndSetConsumers,
-      setDocumentTitle,
-      currentColorScheme,
-      isThirdPartyAvailable,
-      supportEmail: companyInfoSettingsData?.email,
-      organizationName,
-    };
-  },
-)(withTranslation(["Settings", "Common"])(observer(ThirdPartyServices)));
+  return {
+    theme,
+    consumers,
+    integrationSettingsUrl,
+    getConsumers,
+    updateConsumerProps,
+    setSelectedConsumer,
+    fetchAndSetConsumers,
+    currentColorScheme,
+    isThirdPartyAvailable,
+    supportEmail: companyInfoSettingsData?.email,
+  };
+})(withTranslation(["Settings", "Common"])(observer(ThirdPartyServices)));

@@ -35,7 +35,6 @@ import { StyledBodyWrapper } from "./StyledComponents";
 
 import { Aside } from "@docspace/shared/components/aside";
 import { Backdrop } from "@docspace/shared/components/backdrop";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const RoomsSelectorInput = (props) => {
   const {
@@ -71,7 +70,7 @@ const RoomsSelectorInput = (props) => {
   } = props;
 
   const [isPanelVisible, setIsPanelVisible] = useState(false);
-  const BasePath = `${PRODUCT_NAME} / ${t("Common:Rooms")} `;
+  const BasePath = `${t("Common:ProductName")} / ${t("Common:Rooms")} `;
   const [path, setPath] = useState("");
 
   const handleOnSubmit = (rooms) => {
@@ -106,7 +105,7 @@ const RoomsSelectorInput = (props) => {
       submitButtonLabel={submitButtonLabel}
       onSubmit={handleOnSubmit}
       withHeader={withHeader}
-      headerProps={headerProps}
+      headerProps={{ ...headerProps, onCloseClick: onClose }}
       setIsDataReady={setIsDataReady}
       roomType={roomType}
     />
@@ -138,6 +137,7 @@ const RoomsSelectorInput = (props) => {
         withoutBodyScroll
         zIndex={310}
         onClose={onClose}
+        withoutHeader
       >
         {SelectorBody}
       </Aside>

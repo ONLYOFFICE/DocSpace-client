@@ -34,7 +34,7 @@ import "@testing-library/jest-dom";
 
 // const baseCalendarProps = {
 //   isDisabled: false,
-//   themeColor: "#ED7309",
+//   themeColor: "",
 //   selectedDate: moment(),
 //   openToDate: moment(),
 //   minDate: new Date("1970/01/01"),
@@ -50,8 +50,8 @@ import "@testing-library/jest-dom";
 //     { key: "en_2", value: "We", color: "" },
 //     { key: "en_3", value: "Th", color: "" },
 //     { key: "en_4", value: "Fr", color: "" },
-//     { key: "en_5", value: "Sa", color: "#A3A9AE" },
-//     { key: "en_6", value: "Su", color: "#A3A9AE" },
+//     { key: "en_5", value: "Sa", color: "" },
+//     { key: "en_6", value: "Su", color: "" },
 //   ],
 //   size: "base",
 // };
@@ -217,9 +217,9 @@ describe("Calendar tests:", () => {
   // it("Calendar themeColor test", () => {
   //   const wrapper = mount(
   //     // @ts-expect-error TS(2322): Type '{ themeColor: string; isDisabled: boolean; s... Remove this comment to see the full error message
-  //     <Calendar {...baseCalendarProps} themeColor={"#fff"} />,
+  //     <Calendar {...baseCalendarProps} themeColor={""} />,
   //   );
-  //   expect(wrapper.props().themeColor).toEqual("#fff");
+  //   expect(wrapper.props().themeColor).toEqual("");
   // });
 
   // it("Calendar locale test", () => {

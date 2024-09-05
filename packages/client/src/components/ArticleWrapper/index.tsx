@@ -48,7 +48,6 @@ export default inject<TStore>(
       isLiveChatAvailable,
 
       isPaymentPageAvailable,
-      isEnterprise,
     } = authStore;
 
     const { getActions, getUserRole, onProfileClick, isShowLiveChat } =
@@ -88,7 +87,6 @@ export default inject<TStore>(
       currentDeviceType,
       standalone,
       isBurgerLoading,
-      organizationName,
     } = settingsStore;
 
     const { isFreeTariff, isNonProfit, isTrial, currentTariffPlanTitle } =
@@ -101,7 +99,6 @@ export default inject<TStore>(
     } = currentTariffStatusStore;
 
     return {
-      organizationName,
       onProfileClick,
       user,
       getUserRole,
@@ -116,7 +113,7 @@ export default inject<TStore>(
       showProgress,
 
       isBurgerLoading,
-      isEnterprise,
+
       isTrial,
       isLicenseDateExpired,
       trialDaysLeft,

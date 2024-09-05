@@ -47,7 +47,6 @@ import {
 
 import { ArticleItem } from "@docspace/shared/components/article-item";
 import { ArticleFolderLoader } from "@docspace/shared/skeletons/article";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const ArticleBodyContent = (props) => {
   const {
@@ -60,12 +59,12 @@ const ArticleBodyContent = (props) => {
     isOwner,
     isLoadedArticleBody,
     standalone,
-    isEnterprise,
     isCommunity,
     currentDeviceType,
     isProfileLoading,
     limitedAccessSpace,
     currentColorScheme,
+    baseDomain,
   } = props;
 
   const [selectedKeys, setSelectedKeys] = React.useState([]);
@@ -174,26 +173,19 @@ const ArticleBodyContent = (props) => {
     selectedKeys,
   ]);
 
-  const onSelect = (value, e) => {
-    if (isArrayEqual([value], selectedKeys)) {
-      return;
-    }
-
-    const settingsPath = `/portal-settings${getSelectedLinkByKey(
+  const getLinkData = (value) => {
+    const path = `/portal-settings${getSelectedLinkByKey(
       value + "-0",
       settingsTree,
     )}`;
 
-    if (openingNewTab(settingsPath, e)) return;
-    // setSelectedKeys([value + "-0"]);
+    return { path, state: {} };
+  };
 
+  const onSelect = (value, e) => {
     if (currentDeviceType === DeviceType.mobile) {
       toggleArticleOpen();
     }
-
-    if (settingsPath === location.pathname) return;
-
-    navigate(`${settingsPath}`);
   };
 
   const mapKeys = (tKey) => {
@@ -211,7 +203,7 @@ const ArticleBodyContent = (props) => {
       case "ManagementCategorySecurity":
         return t("ManagementCategorySecurity");
       case "PortalAccess":
-        return t("PortalAccess", { productName: PRODUCT_NAME });
+        return t("PortalAccess", { productName: t("Common:ProductName") });
       case "TwoFactorAuth":
         return t("TwoFactorAuth");
       case "ManagementCategoryIntegration":
@@ -233,7 +225,7 @@ const ArticleBodyContent = (props) => {
       case "RestoreBackup":
         return t("RestoreBackup");
       case "PortalDeletion":
-        return t("PortalDeletion", { productName: PRODUCT_NAME });
+        return t("PortalDeletion", { productName: t("Common:ProductName") });
       case "Common:DeveloperTools":
         return t("Common:DeveloperTools");
       case "Common:Bonus":
@@ -242,12 +234,6 @@ const ArticleBodyContent = (props) => {
         return "Common:FreeAccessToLicensedVersion";
       case "DataImport":
         return t("DataImport");
-      case "ImportFromGoogle":
-        return t("ImportFromGoogle");
-      case "ImportFromNextcloud":
-        return t("ImportFromNextcloud");
-      case "ImportFromPortal":
-        return t("ImportFromPortal");
       case "StorageManagement":
         return t("StorageManagement");
       default:
@@ -287,7 +273,7 @@ const ArticleBodyContent = (props) => {
       }
     }
 
-    if (!isOwner) {
+    if (!isOwner || (baseDomain && baseDomain === "localhost")) {
       const index = resultTree.findIndex((n) => n.tKey === "PortalDeletion");
       if (index !== -1) {
         resultTree.splice(index, 1);
@@ -304,6 +290,7 @@ const ArticleBodyContent = (props) => {
       const patternSearching = selectedKeys[0].split("-");
       const selectedKey = patternSearching[0];
       const title = mapKeys(item.tKey);
+      const linkData = getLinkData(item.key);
 
       items.push(
         <ArticleItem
@@ -316,6 +303,7 @@ const ArticleBodyContent = (props) => {
           value={item.link}
           isActive={item.key === selectedKey}
           onClick={(e) => onSelect(item.key, e)}
+          linkData={linkData}
           folderId={item.id}
           style={{
             marginTop: `${item.key.includes(9) ? "16px" : "0"}`,
@@ -347,8 +335,8 @@ export default inject(
     currentTariffStatusStore,
   }) => {
     const { isLoadedArticleBody, setIsLoadedArticleBody } = common;
-    const { isEnterprise, isCommunity } = authStore;
-    const { isNotPaidPeriod } = currentTariffStatusStore;
+
+    const { isNotPaidPeriod, isCommunity } = currentTariffStatusStore;
     const { user } = userStore;
     const { isOwner } = user;
     const {
@@ -358,6 +346,7 @@ export default inject(
       currentDeviceType,
       limitedAccessSpace,
       currentColorScheme,
+      baseDomain,
     } = settingsStore;
 
     const isProfileLoading =
@@ -367,7 +356,7 @@ export default inject(
 
     return {
       standalone,
-      isEnterprise,
+
       showText,
       toggleArticleOpen,
       isLoadedArticleBody,
@@ -379,6 +368,7 @@ export default inject(
       isProfileLoading,
       limitedAccessSpace,
       currentColorScheme,
+      baseDomain,
     };
   },
 )(

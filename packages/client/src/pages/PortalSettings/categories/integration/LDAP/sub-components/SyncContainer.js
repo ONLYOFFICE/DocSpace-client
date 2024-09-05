@@ -50,7 +50,6 @@ const SyncContainer = ({
   onChangeCron,
   cron,
   serverCron,
-  theme,
 
   isLdapEnabledOnServer,
   isUIDisabled,
@@ -60,7 +59,7 @@ const SyncContainer = ({
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    setDocumentTitle(t("Ldap:LdapSyncTitle"));
+    isMobileView && setDocumentTitle(t("Ldap:LdapSyncTitle"));
     onCheckView();
     window.addEventListener("resize", onCheckView);
 
@@ -169,7 +168,6 @@ const SyncContainer = ({
     return (
       <StyledLdapPage
         isMobileView={isMobileView}
-        theme={theme}
         isSettingPaid={isLdapAvailable}
       >
         {renderBody()}
@@ -180,34 +178,35 @@ const SyncContainer = ({
   return <>{renderBody()}</>;
 };
 
-export default inject(({ currentQuotaStore, settingsStore, ldapStore }) => {
-  const { isLdapAvailable } = currentQuotaStore;
-  const { currentDeviceType, theme } = settingsStore;
-  const {
-    syncLdap,
-    saveCronLdap,
-    onChangeCron,
-    cron,
-    serverCron,
+export const SyncContainerSection = inject(
+  ({ currentQuotaStore, settingsStore, ldapStore }) => {
+    const { isLdapAvailable } = currentQuotaStore;
+    const { currentDeviceType } = settingsStore;
+    const {
+      syncLdap,
+      saveCronLdap,
+      onChangeCron,
+      cron,
+      serverCron,
 
-    isUIDisabled,
+      isUIDisabled,
 
-    serverSettings,
-  } = ldapStore;
+      serverSettings,
+    } = ldapStore;
 
-  const isMobileView = currentDeviceType === DeviceType.mobile;
+    const isMobileView = currentDeviceType === DeviceType.mobile;
 
-  return {
-    isMobileView,
-    syncLdap,
-    saveCronLdap,
-    onChangeCron,
-    cron,
-    serverCron,
-    theme,
+    return {
+      isMobileView,
+      syncLdap,
+      saveCronLdap,
+      onChangeCron,
+      cron,
+      serverCron,
 
-    isLdapEnabledOnServer: serverSettings.EnableLdapAuthentication,
-    isUIDisabled,
-    isLdapAvailable,
-  };
-})(observer(SyncContainer));
+      isLdapEnabledOnServer: serverSettings.EnableLdapAuthentication,
+      isUIDisabled,
+      isLdapAvailable,
+    };
+  },
+)(observer(SyncContainer));

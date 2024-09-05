@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { makeObservable, action, observable } from "mobx";
+import { makeAutoObservable } from "mobx";
 
 class PrimaryProgressDataStore {
   percent = 0;
@@ -34,21 +34,10 @@ class PrimaryProgressDataStore {
   alert = false;
   loadingFile = null;
   errors = 0;
+  disableUploadPanelOpen = false;
 
   constructor() {
-    makeObservable(this, {
-      percent: observable,
-      label: observable,
-      visible: observable,
-      icon: observable,
-      alert: observable,
-      loadingFile: observable,
-      errors: observable,
-
-      setPrimaryProgressBarData: action,
-      clearPrimaryProgressData: action,
-      setPrimaryProgressBarErrors: action,
-    });
+    makeAutoObservable(this);
   }
 
   setPrimaryProgressBarData = (primaryProgressData) => {
@@ -66,6 +55,7 @@ class PrimaryProgressDataStore {
       icon: "",
       alert: false,
       errors: 0,
+      disableUploadPanelOpen: false,
     });
   };
 

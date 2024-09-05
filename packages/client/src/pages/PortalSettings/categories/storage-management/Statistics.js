@@ -26,9 +26,11 @@
 
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
 import { Badge } from "@docspace/shared/components/badge";
+import { globalColors } from "@docspace/shared/themes";
 
 import ItemIcon from "SRC_DIR/components/ItemIcon";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
@@ -37,7 +39,6 @@ import { StyledStatistics, StyledMainTitle } from "./StyledComponent";
 
 import RoomsList from "./sub-components/RoomsList";
 import UsersList from "./sub-components/UsersList";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const buttonProps = {
   className: "button-element",
@@ -45,7 +46,9 @@ const buttonProps = {
 };
 const StatisticsComponent = (props) => {
   const { t } = useTranslation("Settings");
+  const theme = useTheme();
   const { isStatisticsAvailable } = props;
+
   const iconElement = (
     id,
     icon,
@@ -89,7 +92,11 @@ const StatisticsComponent = (props) => {
         </StyledMainTitle>
         {!isStatisticsAvailable && (
           <Badge
-            backgroundColor="#EDC409"
+            backgroundColor={
+              theme.isBase
+                ? globalColors.favoritesStatus
+                : globalColors.favoriteStatusDark
+            }
             label={t("Common:Paid")}
             className="paid-badge"
             isPaidBadge
@@ -97,7 +104,7 @@ const StatisticsComponent = (props) => {
         )}
       </div>
       <Text className="statistics-description">
-        {t("StatisticDescription", { productName: PRODUCT_NAME })}
+        {t("StatisticDescription", { productName: t("Common:ProductName") })}
       </Text>
       {isStatisticsAvailable && (
         <>

@@ -24,12 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { Metadata } from "next";
-import { BRAND_NAME } from "@docspace/shared/constants";
+import { headers } from "next/headers";
+import Script from "next/script";
+import dynamic from "next/dynamic";
 
-import { getData } from "@/utils/actions";
+import { getSelectorsByUserAgent } from "react-device-detect";
+
+import { ValidationStatus } from "@docspace/shared/enums";
+
+import { getData, validatePublicRoomKey } from "@/utils/actions";
 import { RootPageProps } from "@/types";
 import Root from "@/components/Root";
+
+const FilePassword = dynamic(() => import("@/components/file-password"), {
+  ssr: false,
+});
 
 const initialSearchParams: RootPageProps["searchParams"] = {
   fileId: undefined,
@@ -41,17 +50,31 @@ const initialSearchParams: RootPageProps["searchParams"] = {
   editorType: undefined,
 };
 
-export const metadata: Metadata = {
-  title: `${BRAND_NAME} DocEditor page`,
-
-  description: "",
-};
-
 async function Page({ searchParams }: RootPageProps) {
-  const { fileId, fileid, version, doc, action, share, editorType } =
+  const { fileId, fileid, version, doc, action, share, editorType, error } =
     searchParams ?? initialSearchParams;
 
-  const startDate = new Date();
+  const hdrs = headers();
+
+  let type = editorType;
+
+  const ua = hdrs.get("user-agent");
+  if (ua && !type) {
+    const { isMobile } = getSelectorsByUserAgent(ua);
+
+    if (isMobile) type = "mobile";
+  }
+
+  if (share) {
+    const roomData = await validatePublicRoomKey(share, fileId ?? fileid ?? "");
+    if (!roomData) return;
+
+    const { status } = roomData.response;
+
+    if (status === ValidationStatus.Password) {
+      return <FilePassword {...roomData.response} shareKey={share} />;
+    }
+  }
 
   const data = await getData(
     fileId ?? fileid ?? "",
@@ -59,12 +82,25 @@ async function Page({ searchParams }: RootPageProps) {
     doc,
     action,
     share,
-    editorType,
+    type,
   );
 
-  const timer = new Date().getTime() - startDate.getTime();
+  if (data.error?.status === "not-found" && error) {
+    data.error.message = error;
+  }
 
-  return <Root {...data} timer={timer} />;
+  let url = data.config?.editorUrl ?? data.error?.editorUrl;
+
+  if (url && !url.endsWith("/")) url += "/";
+
+  const docApiUrl = `${url}web-apps/apps/api/documents/api.js`;
+
+  return (
+    <>
+      <Root {...data} />
+      <Script id="editor-api" strategy="beforeInteractive" src={docApiUrl} />
+    </>
+  );
 }
 
 export default Page;

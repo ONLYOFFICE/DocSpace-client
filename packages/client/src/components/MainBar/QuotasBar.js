@@ -26,13 +26,11 @@
 
 import React from "react";
 import { withTranslation, Trans } from "react-i18next";
-import styled, { css } from "styled-components";
 
 import { SnackBar } from "@docspace/shared/components/snackbar";
 
 import { Link } from "@docspace/shared/components/link";
 import { QuotaBarTypes } from "SRC_DIR/helpers/constants";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const QuotasBar = ({
   t,
@@ -54,38 +52,167 @@ const QuotasBar = ({
     onClose && onClose(type);
   };
 
-  const getStorageQuotaDescription = () => {
-    if (!isAdmin) return t("StorageQuotaUserDescription");
+  const getTenantCustomQuota = () => {
+    if (!isAdmin) return t("RemoveFilesOrContactToUpgradeQuota");
 
     return (
-      <Trans
-        i18nKey="StorageQuotaDescription"
-        t={t}
-        values={{ productName: PRODUCT_NAME }}
-      >
-        You can remove the unnecessary files or
+      <Trans i18nKey="TenantCustomQuotaDescription" t={t}>
+        You can remove the unnecessary files or change quota in the
         <Link
           fontSize="12px"
           fontWeight="400"
           color={currentColorScheme?.main?.accent}
           onClick={onClickAction}
         >
-          {{ clickHere: t("ClickHere").toLowerCase() }}
-        </Link>{" "}
-        to find a better pricing plan for your portal.
+          Storage management settings.
+        </Link>
       </Trans>
     );
   };
 
-  const getUserQuotaDescription = () => {
+  const getUserTariffAlmostLimit = () => {
+    if (!isAdmin)
+      return t("UserTariffAlmostReached", {
+        productName: t("Common:ProductName"),
+      });
+
     return (
       <Trans
         t={t}
-        i18nKey="UserQuotaDescription"
+        i18nKey="UserTariffAlmostReachedForAdmins"
         values={{
-          productName: PRODUCT_NAME,
-          clickHere: t("ClickHere"),
+          productName: t("Common:ProductName"),
         }}
+        components={{
+          1: (
+            <Link
+              fontSize="12px"
+              fontWeight="400"
+              color={currentColorScheme?.main?.accent}
+              className="error_description_link"
+              onClick={onClickAction}
+            />
+          ),
+        }}
+      />
+    );
+  };
+
+  const getUserTariffLimit = () => {
+    if (!isAdmin) return t("UserTariffReached");
+
+    return (
+      <Trans
+        t={t}
+        i18nKey="UserTariffReachedForAdmins"
+        values={{
+          productName: t("Common:ProductName"),
+        }}
+        components={{
+          1: (
+            <Link
+              fontSize="12px"
+              fontWeight="400"
+              color={currentColorScheme?.main?.accent}
+              className="error_description_link"
+              onClick={onClickAction}
+            />
+          ),
+        }}
+      />
+    );
+  };
+
+  const getStorageTariffDescription = () => {
+    if (!isAdmin)
+      return t("RemoveFilesOrContactToUpgrade", {
+        productName: t("Common:ProductName"),
+      });
+
+    return (
+      <Trans
+        t={t}
+        i18nKey="RemoveFilesOrClickToUpgrade"
+        components={{
+          1: (
+            <Link
+              fontSize="12px"
+              fontWeight="400"
+              color={currentColorScheme?.main?.accent}
+              className="error_description_link"
+              onClick={onClickAction}
+            />
+          ),
+        }}
+      />
+    );
+  };
+
+  const getPersonalQuotaDescription = () => {
+    if (!isAdmin)
+      return t("PersonalUserQuotaDescription", {
+        productName: t("Common:ProductName"),
+      });
+
+    return (
+      <Trans
+        t={t}
+        i18nKey="PersonalUserQuotaAdminsDescription"
+        components={{
+          1: (
+            <Link
+              fontSize="12px"
+              fontWeight="400"
+              color={currentColorScheme?.main?.accent}
+              className="error_description_link"
+              onClick={onClickAction}
+            />
+          ),
+        }}
+      />
+    );
+  };
+
+  const getPersonalQuotaHeader = () => {
+    if (!isAdmin) return t("PersonalQuotaHeader");
+    return t("PersonalQuotaHeaderForAdmins");
+  };
+
+  const getUpgradeTariffDescription = () => {
+    if (!isAdmin)
+      return t("ContactToUpgradeTariff", {
+        productName: t("Common:ProductName"),
+      });
+
+    return (
+      <Trans
+        t={t}
+        i18nKey="ClickToUpgradeTariff"
+        components={{
+          1: (
+            <Link
+              fontSize="12px"
+              fontWeight="400"
+              color={currentColorScheme?.main?.accent}
+              className="error_description_link"
+              onClick={onClickAction}
+            />
+          ),
+        }}
+      />
+    );
+  };
+
+  const getRoomsTariffDescription = () => {
+    if (!isAdmin)
+      return t("ArchivedRoomsOrContact", {
+        productName: t("Common:ProductName"),
+      });
+
+    return (
+      <Trans
+        t={t}
+        i18nKey="RoomQuotaDescription"
         components={{
           1: (
             <Link
@@ -102,86 +229,70 @@ const QuotasBar = ({
   };
   const getQuotaInfo = () => {
     switch (type) {
-      case QuotaBarTypes.RoomQuota:
+      case QuotaBarTypes.RoomsTariff:
         return {
           header: t("RoomQuotaHeader", { currentValue, maxValue }),
-          description: (
-            <Trans
-              i18nKey="RoomQuotaDescription"
-              t={t}
-              values={{ productName: PRODUCT_NAME }}
-            >
-              You can archived the unnecessary rooms or
-              <Link
-                fontSize="12px"
-                fontWeight="400"
-                color={currentColorScheme?.main?.accent}
-                onClick={onClickAction}
-              >
-                {{ clickHere: t("ClickHere").toLowerCase() }}
-              </Link>{" "}
-              to find a better pricing plan for your portal.
-            </Trans>
-          ),
+          description: getRoomsTariffDescription(),
+        };
+      case QuotaBarTypes.RoomsTariffLimit:
+        return {
+          header: t("RoomQuotaHeaderLimit", { currentValue, maxValue }),
+          description: getRoomsTariffDescription(),
+        };
+      case QuotaBarTypes.StorageTariff:
+        return {
+          header: t("StorageQuotaHeader", { currentValue, maxValue }),
+          description: getStorageTariffDescription(),
+        };
+      case QuotaBarTypes.StorageTariffLimit:
+        return {
+          header: t("StorageLimitHeader", { currentValue, maxValue }),
+          description: getStorageTariffDescription(),
         };
       case QuotaBarTypes.StorageQuota:
         return {
           header: t("StorageQuotaHeader", { currentValue, maxValue }),
-          description: getStorageQuotaDescription(),
+          description: getTenantCustomQuota(),
         };
-      case QuotaBarTypes.TenantCustomQuota:
+      case QuotaBarTypes.StorageQuotaLimit:
         return {
-          header: t("StorageQuotaHeader", { currentValue, maxValue }),
-          description: (
-            <Trans i18nKey="TenantCustomQuotaDescription" t={t}>
-              You can remove the unnecessary files or change quota in the
-              <Link
-                fontSize="12px"
-                fontWeight="400"
-                color={currentColorScheme?.main?.accent}
-                onClick={onClickAction}
-              >
-                Storage management settings.
-              </Link>
-            </Trans>
-          ),
+          header: t("StorageLimitHeader", { currentValue, maxValue }),
+          description: getTenantCustomQuota(),
         };
-      case QuotaBarTypes.UserQuota:
+      case QuotaBarTypes.UsersTariff:
         return {
           header: t("UserQuotaHeader", { currentValue, maxValue }),
-          description: getUserQuotaDescription(),
+          description: getUserTariffAlmostLimit(),
         };
-
-      case QuotaBarTypes.UserAndStorageQuota:
+      case QuotaBarTypes.UsersTariffLimit:
         return {
-          header: t("StorageAndUserHeader", { currentValue, maxValue }),
-          description: getUserQuotaDescription(),
+          header: t("UserTariffLimitHeader", { currentValue, maxValue }),
+          description: getUserTariffLimit(),
         };
-      case QuotaBarTypes.RoomAndStorageQuota:
+      case QuotaBarTypes.UserAndStorageTariff:
         return {
-          header: t("StorageAndRoomHeader", { currentValue, maxValue }),
-          description: getUserQuotaDescription(),
+          header: t("StorageAndUserHeader"),
+          description: getUpgradeTariffDescription(),
+        };
+      case QuotaBarTypes.UserAndStorageTariffLimit:
+        return {
+          header: t("StorageAndUserTariffLimitHeader"),
+          description: getUpgradeTariffDescription(),
+        };
+      case QuotaBarTypes.RoomsAndStorageTariff:
+        return {
+          header: t("StorageAndRoomHeader"),
+          description: getUpgradeTariffDescription(),
+        };
+      case QuotaBarTypes.RoomsAndStorageTariffLimit:
+        return {
+          header: t("StorageAndRoomLimitHeader"),
+          description: getUpgradeTariffDescription(),
         };
       case QuotaBarTypes.PersonalUserQuota:
-        const description = !isAdmin ? (
-          t("PersonalUserQuotaDescription")
-        ) : (
-          <Trans i18nKey="PersonalUserQuotaAdminsDescription" t={t}>
-            To upload and create new files and folders, please free up disk
-            space, or manage quota per user in the
-            <Link
-              fontSize="12px"
-              fontWeight="400"
-              color={currentColorScheme?.main?.accent}
-              onClick={onClickAction}
-            >
-              Storage management settings.
-            </Link>
-          </Trans>
-        );
         return {
-          header: t("StorageQuotaExceeded"),
-          description,
+          header: getPersonalQuotaHeader(),
+          description: getPersonalQuotaDescription(),
         };
 
       default:

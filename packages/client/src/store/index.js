@@ -81,6 +81,11 @@ import PluginStore from "./PluginStore";
 import InfoPanelStore from "./InfoPanelStore";
 import CampaignsStore from "./CampaignsStore";
 import IndexingStore from "./IndexingStore";
+import EditGroupStore from "./EditGroupStore";
+
+import OAuthStore from "./OAuthStore";
+
+const oauthStore = new OAuthStore(userStore);
 
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
 
@@ -97,14 +102,8 @@ const paymentStore = new PaymentStore(
   paymentQuotasStore,
 );
 const wizardStore = new WizardStore();
-const setupStore = new SettingsSetupStore(
-  tfaStore,
-  authStore,
-  settingsStore,
-  thirdPartyStore,
-);
 const confirmStore = new ConfirmStore();
-const backupStore = new BackupStore();
+const backupStore = new BackupStore(authStore, thirdPartyStore);
 const commonStore = new CommonStore(settingsStore);
 
 const ssoStore = new SsoFormStore();
@@ -131,6 +130,14 @@ const filesSettingsStore = new FilesSettingsStore(
   pluginStore,
   authStore,
   settingsStore,
+);
+
+const setupStore = new SettingsSetupStore(
+  tfaStore,
+  authStore,
+  settingsStore,
+  thirdPartyStore,
+  filesSettingsStore,
 );
 
 const accessRightsStore = new AccessRightsStore(
@@ -236,6 +243,7 @@ const contextOptionsStore = new ContextOptionsStore(
   pluginStore,
   infoPanelStore,
   currentTariffStatusStore,
+  currentQuotaStore,
   userStore,
   indexingStore,
   clientLoadingStore,
@@ -260,6 +268,7 @@ const profileActionsStore = new ProfileActionsStore(
   pluginStore,
   userStore,
   settingsStore,
+  currentTariffStatusStore,
 );
 
 peopleStore.profileActionsStore = profileActionsStore;
@@ -289,6 +298,7 @@ const createEditRoomStore = new CreateEditRoomStore(
   infoPanelStore,
   currentQuotaStore,
   clientLoadingStore,
+  dialogsStore,
 );
 
 const webhooksStore = new WebhooksStore(settingsStore);
@@ -302,6 +312,8 @@ const storageManagement = new StorageManagement(
 );
 
 const campaignsStore = new CampaignsStore(settingsStore, userStore);
+
+const editGroupStore = new EditGroupStore(peopleStore);
 
 const store = {
   authStore,
@@ -354,10 +366,12 @@ const store = {
   clientLoadingStore,
   publicRoomStore,
 
+  oauthStore,
   pluginStore,
   storageManagement,
   campaignsStore,
   indexingStore,
+  editGroupStore,
 };
 
 export default store;

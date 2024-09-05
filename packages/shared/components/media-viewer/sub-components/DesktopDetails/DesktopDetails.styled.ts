@@ -25,14 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
+import { globalColors } from "../../../../themes";
 
 export const DesktopDetailsContainer = styled.div`
+  direction: ${({ theme }) => theme.interfaceDirection};
   padding-top: 21px;
   height: 64px;
   width: 100%;
   background: linear-gradient(
     0deg,
-    rgba(0, 0, 0, 0) 0%,
+    ${globalColors.tapHighlight} 0%,
     rgba(0, 0, 0, 0.8) 100%
   );
 
@@ -50,10 +52,7 @@ export const DesktopDetailsContainer = styled.div`
     text-overflow: ellipsis;
     width: calc(100% - 50px);
 
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `padding-right: 16px;`
-        : `padding-left: 16px;`}
+    padding-inline-start: 16px;
     box-sizing: border-box;
     color: ${(props) => props.theme.mediaViewer.titleColor};
   }

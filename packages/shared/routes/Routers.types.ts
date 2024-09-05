@@ -49,12 +49,14 @@ export interface PrivateRouteProps
       | "isPortalDeactivate"
       | "enablePortalRename"
       | "limitedAccessSpace"
+      | "baseDomain"
     >,
     Pick<CurrentTariffStatusStore, "isNotPaidPeriod">,
     Pick<UserStore, "user"> {
   restricted?: boolean;
   withManager?: boolean;
   withCollaborator?: boolean;
+  identityServerEnabled?: boolean;
 }
 
 export interface PublicRouteProps
@@ -62,5 +64,8 @@ export interface PublicRouteProps
     Pick<AuthStore, "isAuthenticated">,
     Pick<
       SettingsStore,
-      "wizardCompleted" | "tenantStatus" | "isPortalDeactivate"
+      | "wizardCompleted"
+      | "tenantStatus"
+      | "isPortalDeactivate"
+      | "isFirstLoaded"
     > {}

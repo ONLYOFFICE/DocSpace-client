@@ -30,10 +30,9 @@ import { useTranslation } from "react-i18next";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Box } from "@docspace/shared/components/box";
-import { TextInput } from "@docspace/shared/components/text-input";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-import { Textarea } from "@docspace/shared/components/textarea";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
+
+import LdapFieldComponent from "./LdapFieldComponent";
 
 const FIELD_STYLE = { marginBottom: "0px" };
 
@@ -57,6 +56,8 @@ const GroupMembership = (props) => {
     setGroupFilter,
     setGroupAttribute,
     setGroupNameAttribute,
+
+    errors,
 
     isLdapEnabled,
     isUIDisabled,
@@ -97,7 +98,7 @@ const GroupMembership = (props) => {
         />
         <HelpButton
           tooltipContent={t("LdapGroupMembershipTooltip", {
-            productName: PRODUCT_NAME,
+            productName: t("Common:ProductName"),
           })}
         />
       </div>
@@ -109,13 +110,15 @@ const GroupMembership = (props) => {
           errorMessage={t("Common:EmptyFieldError")}
           labelText={t("LdapGroupDN")}
           isRequired
+          hasError={errors.groupDN}
           tooltipContent={t("LdapGroupDNTooltip")}
         >
-          <TextInput
+          <LdapFieldComponent
             className="field-input"
             onChange={onChange}
             name={GROUP_DN}
             value={groupDN}
+            hasError={errors.groupDN}
             isDisabled={!isLdapEnabled || isUIDisabled || !groupMembership}
             scale
             tabIndex={13}
@@ -126,15 +129,17 @@ const GroupMembership = (props) => {
           labelVisible={true}
           style={FIELD_STYLE}
           errorMessage={t("Common:EmptyFieldError")}
+          hasError={errors.userAttribute}
           labelText={t("LdapUserAttribute")}
           isRequired
           tooltipContent={t("LdapGroupUserAttributeTooltip")}
         >
-          <TextInput
+          <LdapFieldComponent
             className="field-input"
             onChange={onChange}
             name={USER_ATTRIBUTE}
             value={userAttribute}
+            hasError={errors.userAttribute}
             isDisabled={!isLdapEnabled || isUIDisabled || !groupMembership}
             scale
             tabIndex={14}
@@ -146,14 +151,17 @@ const GroupMembership = (props) => {
           labelVisible={true}
           errorMessage={t("Common:EmptyFieldError")}
           labelText={t("LdapGroupFilter")}
+          hasError={errors.groupFilter}
           tooltipContent={t("LdapGroupFilterTooltip")}
           className="ldap_group-filter"
           inlineHelpButton
           isRequired
         >
-          <Textarea
+          <LdapFieldComponent
+            isTextArea
             value={groupFilter}
             onChange={onChange}
+            hasError={errors.groupFilter}
             name={GROUP_FILTER}
             isDisabled={!isLdapEnabled || isUIDisabled || !groupMembership}
             heightTextArea={100}
@@ -165,14 +173,16 @@ const GroupMembership = (props) => {
           isVertical
           labelVisible={true}
           errorMessage={t("Common:EmptyFieldError")}
+          hasError={errors.groupNameAttribute}
           labelText={t("LdapGroupNameAttribute")}
           isRequired
           tooltipContent={t("LdapGroupNameAttributeTooltip")}
         >
-          <TextInput
+          <LdapFieldComponent
             className="field-input"
             onChange={onChange}
             name={GROUP_NAME_ATTRIBUTE}
+            hasError={errors.groupNameAttribute}
             isDisabled={!isLdapEnabled || isUIDisabled || !groupMembership}
             value={groupNameAttribute}
             scale
@@ -183,16 +193,18 @@ const GroupMembership = (props) => {
           isVertical
           labelVisible={true}
           errorMessage={t("Common:EmptyFieldError")}
+          hasError={errors.groupAttribute}
           labelText={t("LdapGroupAttribute")}
           isRequired
           tooltipContent={t("LdapGroupAttributeTooltip")}
         >
-          <TextInput
+          <LdapFieldComponent
             className="field-input"
             onChange={onChange}
             name={GROUP_ATTRIBUTE}
             isDisabled={!isLdapEnabled || isUIDisabled || !groupMembership}
             value={groupAttribute}
+            hasError={errors.groupAttribute}
             scale
             tabIndex={17}
           />
@@ -217,6 +229,8 @@ export default inject(({ ldapStore }) => {
     setGroupAttribute,
     setGroupNameAttribute,
 
+    errors,
+
     isLdapEnabled,
     isUIDisabled,
   } = ldapStore;
@@ -234,6 +248,8 @@ export default inject(({ ldapStore }) => {
     setGroupFilter,
     setGroupAttribute,
     setGroupNameAttribute,
+
+    errors,
 
     isLdapEnabled,
     isUIDisabled,

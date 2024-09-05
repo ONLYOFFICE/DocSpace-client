@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import moment from "moment";
 import { TCreatedBy, TPathParts } from "../../types";
 import { TUser } from "../people/types";
 import {
@@ -240,7 +241,8 @@ export type TFilesSettings = {
   };
   canSearchByContent: boolean;
   chunkUploadSize: number;
-  chunkUploadCount: number;
+  maxUploadThreadCount: number;
+  maxUploadFilesCount: number;
   confirmDelete: boolean;
   convertNotify: boolean;
   defaultOrder: { is_asc: boolean; property: 1 };
@@ -394,9 +396,11 @@ export type TFileLink = {
     requestToken: string;
     shareLink: string;
     title: string;
-    expirationDate?: string;
+    expirationDate?: moment.Moment | null;
     internal?: boolean;
+    password?: string;
   };
+  subjectType: number;
 };
 
 export type TFilesUsedSpace = {

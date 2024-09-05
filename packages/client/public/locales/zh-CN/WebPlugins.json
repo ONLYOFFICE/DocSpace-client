@@ -1,5 +1,6 @@
 {
   "DeletePlugin": "移除插件",
+  "DeletePluginDescription": "此插件将不再可供{{productName}}用户使用。您确定您要继续吗？",
   "DeletePluginTitle": "移除插件？",
   "ExpandFunctionality": "使用插件SDK扩展功能",
   "GoToRepo": "转到仓库",
@@ -9,5 +10,7 @@
   "NotNeedSettings": "无需输入设置",
   "PluginSamples": "插件示例",
   "PluginSDK": "插件SDK",
-  "PluginSDKInstruction": "单击该按钮了解如何创建您自己的插件。"
+  "PluginSDKDescription": "使用插件 SDK，您可以扩展{{productName}}功能、连接第三方服务或增强现有用户体验。您可以在此处找到 GitHub 上提供的带有代码源的插件示例。",
+  "PluginSDKInstruction": "单击该按钮了解如何创建您自己的插件。",
+  "UploadDescription": "您可以添加插件以使用额外功能扩展{{productName}}的功能。单击“上传插件”或将文件拖放到 ZIP 存档中。"
 }

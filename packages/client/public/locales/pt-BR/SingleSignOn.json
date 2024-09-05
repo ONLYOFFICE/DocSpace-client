@@ -6,7 +6,6 @@
   "AttributeMatchingTooltip": "A correspondência dos atributos do Single Sign-On com as entradas da seção 'Contas'.",
   "Binding": "Vinculativo:",
   "CertificateExist": "Certificado com o mesmo tipo de ação já existe",
-  "ConfirmationText": "Todos os dados inseridos serão perdidos. Você tem certeza que quer continuar?",
   "CustomEntryButton": "Legenda do botão de login personalizado",
   "CustomEntryTooltip": "A legenda do botão usado para fazer login no espaço com o serviço Single Sign-On",
   "DownloadMetadataXML": "Baixe o XML de metadados do SP",

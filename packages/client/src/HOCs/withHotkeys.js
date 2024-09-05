@@ -83,8 +83,8 @@ const withHotkeys = (Component) => {
       isVisitor,
       deleteRooms,
       archiveRooms,
-      isGracePeriod,
-      setInviteUsersWarningDialogVisible,
+      isWarningRoomsDialog,
+      setQuotaWarningDialogVisible,
 
       security,
       copyToClipboard,
@@ -145,10 +145,22 @@ const withHotkeys = (Component) => {
       window.dispatchEvent(event);
     };
 
+    const onRename = () => {
+      if (selection.length === 1) {
+        const item = selection[0];
+
+        if (!item.contextOptions.includes("rename")) return;
+
+        const event = new Event(Events.RENAME);
+        event.item = item;
+        window.dispatchEvent(event);
+      }
+    };
+
     const onCreateRoom = () => {
       if (!isVisitor && isRoomsFolder && security?.Create) {
-        if (isGracePeriod) {
-          setInviteUsersWarningDialogVisible(true);
+        if (isWarningRoomsDialog) {
+          setQuotaWarningDialogVisible(true);
           return;
         }
 
@@ -158,6 +170,10 @@ const withHotkeys = (Component) => {
     };
 
     const onPaste = async (e) => {
+      const someDialogIsOpen = checkDialogsOpen();
+
+      if (someDialogIsOpen) return;
+
       uploadClipboardFiles(t, e);
     };
 
@@ -387,6 +403,8 @@ const withHotkeys = (Component) => {
       hotkeysFilter,
     );
 
+    useHotkeys("f2", onRename, hotkeysFilter);
+
     //Upload file
     useHotkeys(
       "Shift+u",
@@ -424,8 +442,8 @@ const withHotkeys = (Component) => {
       treeFoldersStore,
       selectedFolderStore,
       userStore,
-      currentTariffStatusStore,
       indexingStore,
+      currentQuotaStore,
     }) => {
       const {
         setSelected,
@@ -462,7 +480,7 @@ const withHotkeys = (Component) => {
       const {
         setDeleteDialogVisible,
         setSelectFileDialogVisible,
-        setInviteUsersWarningDialogVisible,
+        setQuotaWarningDialogVisible,
       } = dialogsStore;
       const {
         isAvailableOption,
@@ -476,7 +494,6 @@ const withHotkeys = (Component) => {
 
       const { visible: mediaViewerIsVisible } = mediaViewerDataStore;
       const { setHotkeyPanelVisible } = settingsStore;
-      const { isGracePeriod } = currentTariffStatusStore;
 
       const isVisitor = userStore.user?.isVisitor;
 
@@ -487,6 +504,8 @@ const withHotkeys = (Component) => {
         isArchiveFolder,
         isRoomsFolder,
       } = treeFoldersStore;
+
+      const { isWarningRoomsDialog } = currentQuotaStore;
 
       const security = selectedFolderStore.security;
       const isFormRoom = selectedFolderStore.roomType === RoomsType.FormRoom;
@@ -543,8 +562,8 @@ const withHotkeys = (Component) => {
         deleteRooms,
         archiveRooms,
 
-        isGracePeriod,
-        setInviteUsersWarningDialogVisible,
+        isWarningRoomsDialog,
+        setQuotaWarningDialogVisible,
 
         security,
         copyToClipboard,

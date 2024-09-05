@@ -36,11 +36,11 @@ import type {
   TFirebaseSettings,
   TSettings,
 } from "@docspace/shared/api/settings/types";
+import FirebaseHelper from "@docspace/shared/utils/firebase";
 
 import useTheme from "@/hooks/useTheme";
 import useDeviceType from "@/hooks/useDeviceType";
 import useI18N from "@/hooks/useI18N";
-import FirebaseHelper from "@docspace/shared/utils/firebase";
 
 import pkg from "../../package.json";
 

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
@@ -39,9 +39,9 @@ import ThirdParty from "./ThirdPartyServicesSettings";
 import SMTPSettings from "./SMTPSettings";
 import DocumentService from "./DocumentService";
 import PluginPage from "./Plugins";
-import { Badge } from "@docspace/shared/components/badge";
 import { Box } from "@docspace/shared/components/box";
 import { SECTION_HEADER_HEIGHT } from "@docspace/shared/components/section/Section.constants";
+import { globalColors } from "@docspace/shared/themes";
 
 const IntegrationWrapper = (props) => {
   const {
@@ -70,14 +70,14 @@ const IntegrationWrapper = (props) => {
       content: <LDAP />,
     },
     {
-      id: "third-party-services",
-      name: t("Translations:ThirdPartyTitle"),
-      content: <ThirdParty />,
-    },
-    {
       id: "sso",
       name: t("SingleSignOn"),
       content: <SSO />,
+    },
+    {
+      id: "third-party-services",
+      name: t("Translations:ThirdPartyTitle"),
+      content: <ThirdParty />,
     },
     {
       id: "smtp-settings",
@@ -100,19 +100,10 @@ const IntegrationWrapper = (props) => {
     const pluginLabel = (
       <Box displayProp="flex" style={{ gap: "8px" }}>
         {t("Common:Plugins")}
-
-        <Badge
-          label={t("Common:BetaLabel")}
-          backgroundColor="#533ED1"
-          fontSize="9px"
-          borderRadius="50px"
-          noHover={true}
-          isHovered={false}
-        />
       </Box>
     );
 
-    data.splice(1, 0, {
+    data.splice(2, 0, {
       id: "plugins",
       name: pluginLabel,
       content: <PluginPage />,
@@ -142,25 +133,27 @@ const IntegrationWrapper = (props) => {
       items={data}
       selectedItemId={currentTabId}
       onSelect={onSelect}
-      topProps={SECTION_HEADER_HEIGHT[currentDeviceType]}
+      stickyTop={SECTION_HEADER_HEIGHT[currentDeviceType]}
     />
   );
 };
 
-export default inject(({ settingsStore, ssoStore, currentQuotaStore }) => {
-  const { standalone, enablePlugins, currentDeviceType } = settingsStore;
-  const { load: toDefault } = ssoStore;
+export const Component = inject(
+  ({ settingsStore, ssoStore, currentQuotaStore }) => {
+    const { standalone, enablePlugins, currentDeviceType } = settingsStore;
+    const { load: toDefault } = ssoStore;
 
-  const { isSSOAvailable } = currentQuotaStore;
+    const { isSSOAvailable } = currentQuotaStore;
 
-  return {
-    toDefault,
-    isSSOAvailable,
-    standalone,
-    currentDeviceType,
-    enablePlugins,
-  };
-})(
+    return {
+      toDefault,
+      isSSOAvailable,
+      standalone,
+      currentDeviceType,
+      enablePlugins,
+    };
+  },
+)(
   withTranslation([
     "Settings",
     "SingleSignOn",

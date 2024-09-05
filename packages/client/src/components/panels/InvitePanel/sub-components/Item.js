@@ -23,18 +23,28 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import debounce from "lodash.debounce";
 
 import InfoEditReactSvgUrl from "PUBLIC_DIR/images/info.edit.react.svg?url";
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import AlertSvgUrl from "PUBLIC_DIR/images/icons/12/alert.react.svg?url";
-import React, { useState, useEffect } from "react";
+
+import React, { useState, useEffect, useCallback } from "react";
+import { inject, observer } from "mobx-react";
+
 import { Avatar } from "@docspace/shared/components/avatar";
 import { Text } from "@docspace/shared/components/text";
-
 import { parseAddresses } from "@docspace/shared/utils";
-import { getAccessOptions } from "../utils";
 import { getUserTypeLabel } from "@docspace/shared/utils/common";
+import { getMembersList, getUserList } from "@docspace/shared/api/people";
+import { AccountsSearchArea, RoomsType } from "@docspace/shared/enums";
+import { toastr } from "@docspace/shared/components/toast";
 
+import {
+  getAccessOptions,
+  getFreeUsersRoleArray,
+  getFreeUsersTypeArray,
+} from "../utils";
 import {
   StyledEditInput,
   StyledEditButton,
@@ -43,9 +53,13 @@ import {
   StyledHelpButton,
   StyledDeleteIcon,
   StyledInviteUserBody,
+  ErrorWrapper,
 } from "../StyledInvitePanel";
 import { filterGroupRoleOptions, filterUserRoleOptions } from "SRC_DIR/helpers";
-import AccessSelector from "./AccessSelector";
+import AccessSelector from "../../../AccessSelector";
+
+import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
+import Filter from "@docspace/shared/api/people/filter";
 
 const Item = ({
   t,
@@ -61,6 +75,10 @@ const Item = ({
   setIsOpenItemAccess,
   isMobileView,
   standalone,
+  isPaidUserAccess,
+  setInvitePaidUsersCount,
+  isUserTariffLimit,
+  roomId,
 }) => {
   const {
     avatar,
@@ -72,6 +90,7 @@ const Item = ({
     isGroup,
     name: groupName,
     warning,
+    isVisitor,
   } = item;
 
   const name = isGroup
@@ -86,6 +105,44 @@ const Item = ({
   const [edit, setEdit] = useState(false);
   const [inputValue, setInputValue] = useState(name);
   const [parseErrors, setParseErrors] = useState(errors);
+
+  const [searchRequestRunning, setSearchRequestRunning] = useState(false);
+  const [isSharedUser, setIsSharedUser] = useState(false);
+
+  const searchByQuery = async (value) => {
+    if (!value) {
+      setSearchRequestRunning(false);
+      setIsSharedUser(false);
+
+      return;
+    }
+
+    const isPublicRoomType = roomType === RoomsType.PublicRoom;
+
+    const filter = Filter.getDefault();
+
+    const searchArea = isPublicRoomType
+      ? AccountsSearchArea.People
+      : AccountsSearchArea.Any;
+
+    filter.search = value;
+
+    const users =
+      roomId === -1
+        ? await getUserList(filter)
+        : await getMembersList(searchArea, roomId, filter);
+
+    setSearchRequestRunning(false);
+
+    const user = users.items.find((item) => item.email === value);
+
+    setIsSharedUser(user && (roomId === -1 || user?.shared));
+  };
+
+  const debouncedSearch = useCallback(
+    debounce((value) => searchByQuery(value), 300),
+    [],
+  );
 
   const accesses = getAccessOptions(
     t,
@@ -134,9 +191,17 @@ const Item = ({
   const cancelEdit = (e) => {
     setInputValue(name);
     setEdit(false);
+    setSearchRequestRunning(false);
+    setIsSharedUser(false);
   };
 
-  const saveEdit = (e) => {
+  const saveEdit = async (e) => {
+    if (searchRequestRunning) return;
+
+    if (isSharedUser) {
+      return toastr.warning(t("UsersAlreadyAdded"));
+    }
+
     const value = inputValue === "" ? name : inputValue;
 
     setEdit(false);
@@ -162,19 +227,27 @@ const Item = ({
     const errors = !!parseErrors.length ? parseErrors : [];
 
     setParseErrors(errors);
-    changeInviteItem({ id, email: value, errors }).then(() => errorsInList());
+    changeInviteItem({ id, email: value, errors, access }).then(() =>
+      errorsInList(),
+    );
   };
 
   const changeValue = (e) => {
     const value = e.target.value.trim();
 
     setInputValue(value);
+
+    setSearchRequestRunning(true);
+
+    debouncedSearch(value);
   };
 
   const hasError = parseErrors && !!parseErrors.length;
 
   const removeItem = () => {
     const newItems = inviteItems.filter((item) => item.id !== id);
+
+    if (isPaidUserAccess(item.access)) setInvitePaidUsersCount(-1);
 
     setInviteItems(newItems);
   };
@@ -187,6 +260,9 @@ const Item = ({
 
   const textProps = !!avatar || isGroup ? {} : { onClick: onEdit };
 
+  const availableAccess =
+    roomId === -1 ? getFreeUsersTypeArray() : getFreeUsersRoleArray();
+
   const displayBody = (
     <>
       <StyledInviteUserBody>
@@ -196,11 +272,10 @@ const Item = ({
 
         {!isGroup && (
           <Text
-            className="label"
+            className="label about-label"
             fontWeight={400}
             fontSize="12px"
             noSelect
-            color="#A3A9AE"
             truncate
           >
             {`${typeLabel} | ${email}`}
@@ -209,7 +284,7 @@ const Item = ({
       </StyledInviteUserBody>
 
       {hasError ? (
-        <>
+        <ErrorWrapper>
           <StyledHelpButton
             iconName={InfoEditReactSvgUrl}
             displayType="auto"
@@ -224,7 +299,7 @@ const Item = ({
             size="medium"
             onClick={removeItem}
           />
-        </>
+        </ErrorWrapper>
       ) : (
         <>
           {warning && (
@@ -248,6 +323,11 @@ const Item = ({
             setIsOpenItemAccess={setIsOpenItemAccess}
             isMobileView={isMobileView}
             noBorder
+            {...((roomId === -1 || !avatar || isVisitor) && {
+              isSelectionDisabled: isUserTariffLimit,
+              selectionErrorText: <PaidQuotaLimitError />,
+              availableAccess,
+            })}
           />
         </>
       )}
@@ -260,7 +340,11 @@ const Item = ({
   const editBody = (
     <>
       <StyledEditInput value={inputValue} onChange={changeValue} />
-      <StyledEditButton icon={okIcon} onClick={saveEdit} />
+      <StyledEditButton
+        icon={okIcon}
+        onClick={saveEdit}
+        isDisabled={searchRequestRunning}
+      />
       <StyledEditButton icon={cancelIcon} onClick={cancelEdit} />
     </>
   );
@@ -279,4 +363,15 @@ const Item = ({
   );
 };
 
-export default Item;
+export default inject(({ dialogsStore, currentQuotaStore }) => {
+  const { isPaidUserAccess, setInvitePaidUsersCount, invitePanelOptions } =
+    dialogsStore;
+  const { isUserTariffLimit } = currentQuotaStore;
+
+  return {
+    isPaidUserAccess,
+    setInvitePaidUsersCount,
+    isUserTariffLimit,
+    roomId: invitePanelOptions.roomId,
+  };
+})(observer(Item));

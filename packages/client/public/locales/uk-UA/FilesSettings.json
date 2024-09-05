@@ -6,6 +6,7 @@
   "DisplayTemplates": "Відображати шаблони",
   "IntermediateVersion": "Зберігати усі збережені проміжні версії",
   "KeepIntermediateVersion": "Зберігати проміжні версії при редагуванні",
+  "OpenSameTab": "Відкрити редактор {{organizationName}} на тій самій вкладці",
   "OriginalCopy": "Також зберігати копію файлу в оригінальному форматі",
   "StoringFileVersion": "Збереження версій файлу",
   "ThirdPartyAccounts": "Сторонні облікові записи",

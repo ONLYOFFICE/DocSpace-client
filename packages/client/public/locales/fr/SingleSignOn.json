@@ -6,7 +6,6 @@
   "AttributeMatchingTooltip": "La correspondance entre les attributs de l’authentification unique et les entrées de la section \"Comptes\".",
   "Binding": "Liaison :",
   "CertificateExist": "Le certificat avec le même type d’action existe déjà.",
-  "ConfirmationText": "Toutes les données que vous avez saisies seront perdues. Êtes-vous sûr de vouloir continuer ?",
   "CustomEntryButton": "Légende du bouton de connexion personnalisée",
   "CustomEntryTooltip": "Légende du bouton utilisé pour se connecter à l’espace avec le service d’authentification unique (Single Sign-On)",
   "DownloadMetadataXML": "Télécharger le fichier XML des métadonnées SP",

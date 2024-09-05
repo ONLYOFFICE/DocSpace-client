@@ -147,3 +147,7 @@ export interface SectionProps {
   getContextModel?: () => ContextMenuModel[];
   isIndexEditingMode?: boolean;
 }
+
+export interface SectionContextMenuProps {
+  getContextModel: () => ContextMenuModel[];
+}

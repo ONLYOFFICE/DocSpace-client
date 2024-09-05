@@ -40,6 +40,7 @@ import { toastr } from "../toast";
 
 import StyledFileInput from "./FileInput.styled";
 import { FileInputProps } from "./FileInput.types";
+import { globalColors } from "../../themes";
 
 const FileInputPure = ({
   onInput,
@@ -57,6 +58,7 @@ const FileInputPure = ({
   path,
   idButton,
   isDocumentIcon,
+  isMultiple = true,
   ...rest
 }: FileInputProps) => {
   const { t } = useTranslation("Common");
@@ -118,7 +120,12 @@ const FileInputPure = ({
     fromStorage && !isDisabled ? { onClick: rest.onClick } : {};
 
   return (
-    <Dropzone onDrop={onDrop} noClick={isDisabled || isLoading} accept={accept}>
+    <Dropzone
+      onDrop={onDrop}
+      noClick={isDisabled || isLoading}
+      accept={accept}
+      multiple={isMultiple}
+    >
       {({ getRootProps, getInputProps }) => (
         <StyledFileInput
           scale={scale ? 1 : 0}
@@ -177,7 +184,7 @@ const FileInputPure = ({
                       ? DocumentReactSvgUrl
                       : CatalogFolderReactSvgUrl
                   }
-                  color="#A3A9AE"
+                  color={globalColors.gray}
                   size={iconSize}
                   isDisabled={isDisabled}
                 />
@@ -198,6 +205,7 @@ FileInputPure.defaultProps = {
   isLoading: false,
   accept: [""],
   isDocumentIcon: false,
+  isMultiple: true,
 };
 
 export { FileInputPure };

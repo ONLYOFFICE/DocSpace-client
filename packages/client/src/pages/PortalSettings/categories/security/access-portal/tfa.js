@@ -41,7 +41,6 @@ import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-butto
 
 import TfaLoader from "../sub-components/loaders/tfa-loader";
 import { DeviceType } from "@docspace/shared/enums";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
 
 const MainContainer = styled.div`
   width: 100%;
@@ -151,7 +150,7 @@ const TwoFactorAuth = (props) => {
 
       if (res) {
         setIsInit(false);
-        navigate(res.replace(window.location.origin, ""));
+        window.location.replace(res);
       }
     } catch (error) {
       toastr.error(error);
@@ -175,7 +174,9 @@ const TwoFactorAuth = (props) => {
     <MainContainer>
       <LearnMoreWrapper>
         <Text fontSize="13px" fontWeight="400">
-          {t("TwoFactorAuthEnableDescription", { productName: PRODUCT_NAME })}
+          {t("TwoFactorAuthEnableDescription", {
+            productName: t("Common:ProductName"),
+          })}
         </Text>
         <Link
           className="link-learn-more"
@@ -237,7 +238,7 @@ const TwoFactorAuth = (props) => {
   );
 };
 
-export default inject(({ settingsStore, setup, tfaStore }) => {
+export const TfaSection = inject(({ settingsStore, setup, tfaStore }) => {
   const {
     setTfaSettings,
 

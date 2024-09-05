@@ -124,16 +124,9 @@ const StyledLoader = styled.div`
     position: absolute;
     bottom: 0;
     width: calc(100% - 32px);
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            right: 0;
-            padding: 0 16px 16px 0;
-          `
-        : css`
-            left: 0;
-            padding: 0 0 16px 16px;
-          `}
+    inset-inline-start: 0;
+    padding-block: 0 16px;
+    padding-inline: 16px 0;
   }
 
   .flex {
@@ -147,14 +140,7 @@ const StyledLoader = styled.div`
   }
 
   .padding-right {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 8px;
-          `
-        : css`
-            padding-right: 8px;
-          `}
+    padding-inline-end: 8px;
   }
 
   .dns-field {

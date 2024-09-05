@@ -64,7 +64,9 @@ const FileManagement = ({
 
   openEditorInSameTab,
   setOpenEditorInSameTab,
-  organizationName,
+
+  displayFileExtension,
+  setDisplayFileExtension,
 }) => {
   const { t, ready } = useTranslation(["FilesSettings", "Common"]);
 
@@ -90,6 +92,10 @@ const FileManagement = ({
   const onChangeKeepNewFileName = React.useCallback(() => {
     setKeepNewFileName(!keepNewFileName);
   }, [setKeepNewFileName, keepNewFileName]);
+
+  const onChangeDisplayFileExtension = React.useCallback(() => {
+    setDisplayFileExtension(!displayFileExtension);
+  }, [setDisplayFileExtension, displayFileExtension]);
 
   const onChangeOpenEditorInSameTab = React.useCallback(() => {
     setOpenEditorInSameTab(!openEditorInSameTab);
@@ -168,7 +174,21 @@ const FileManagement = ({
               onChange={onChangeOpenEditorInSameTab}
               isChecked={openEditorInSameTab}
             />
-            <Text>{t("OpenSameTab", { organizationName })}</Text>
+            <Text>
+              {t("OpenSameTab", {
+                organizationName: t("Common:OrganizationName"),
+              })}
+            </Text>
+          </div>
+        )}
+        {!isVisitor && (
+          <div className="toggle-btn-wrapper">
+            <ToggleButton
+              className="display-file-extension toggle-btn"
+              onChange={onChangeDisplayFileExtension}
+              isChecked={displayFileExtension}
+            />
+            <Text>{t("DisplayFileExtension")}</Text>
           </div>
         )}
       </Box>
@@ -228,68 +248,70 @@ const FileManagement = ({
   );
 };
 
-export default inject(
-  ({ settingsStore, userStore, filesSettingsStore, treeFoldersStore }) => {
-    const { organizationName } = settingsStore;
-    const {
-      storeOriginalFiles,
-      confirmDelete,
-      forcesave,
+export default inject(({ userStore, filesSettingsStore, treeFoldersStore }) => {
+  const {
+    storeOriginalFiles,
+    confirmDelete,
+    forcesave,
 
-      setStoreOriginal,
+    setStoreOriginal,
 
-      setConfirmDelete,
+    setConfirmDelete,
 
-      setForceSave,
+    setForceSave,
 
-      favoritesSection,
-      recentSection,
-      setFavoritesSetting,
-      setRecentSetting,
+    favoritesSection,
+    recentSection,
+    setFavoritesSetting,
+    setRecentSetting,
 
-      keepNewFileName,
-      setKeepNewFileName,
+    keepNewFileName,
+    setKeepNewFileName,
 
-      setThumbnails1280x720,
-      thumbnails1280x720,
+    setThumbnails1280x720,
+    thumbnails1280x720,
 
-      openEditorInSameTab,
-      setOpenEditorInSameTab,
-    } = filesSettingsStore;
+    openEditorInSameTab,
+    setOpenEditorInSameTab,
 
-    const { myFolderId, commonFolderId } = treeFoldersStore;
+    displayFileExtension,
+    setDisplayFileExtension,
+  } = filesSettingsStore;
 
-    return {
-      storeOriginalFiles,
-      confirmDelete,
-      forceSave: forcesave,
+  const { myFolderId, commonFolderId } = treeFoldersStore;
 
-      myFolderId,
-      commonFolderId,
-      isVisitor: userStore.user.isVisitor,
-      favoritesSection,
-      recentSection,
+  return {
+    storeOriginalFiles,
+    confirmDelete,
+    forceSave: forcesave,
 
-      setStoreOriginal,
+    myFolderId,
+    commonFolderId,
+    isVisitor: userStore.user.isVisitor,
+    favoritesSection,
+    recentSection,
 
-      setConfirmDelete,
+    setStoreOriginal,
 
-      setForceSave,
+    setConfirmDelete,
 
-      setFavoritesSetting,
-      setRecentSetting,
-      myFolderId,
-      commonFolderId,
+    setForceSave,
 
-      keepNewFileName,
-      setKeepNewFileName,
+    setFavoritesSetting,
+    setRecentSetting,
+    myFolderId,
+    commonFolderId,
 
-      setThumbnails1280x720,
-      thumbnails1280x720,
+    keepNewFileName,
+    setKeepNewFileName,
 
-      openEditorInSameTab,
-      setOpenEditorInSameTab,
-      organizationName,
-    };
-  },
-)(observer(FileManagement));
+    setThumbnails1280x720,
+    thumbnails1280x720,
+
+    openEditorInSameTab,
+    setOpenEditorInSameTab,
+
+    displayFileExtension,
+    setDisplayFileExtension,
+  };
+})(observer(FileManagement));

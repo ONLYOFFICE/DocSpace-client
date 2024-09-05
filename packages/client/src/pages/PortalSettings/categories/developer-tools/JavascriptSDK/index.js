@@ -28,7 +28,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { withTranslation } from "react-i18next";
 import styled, { css } from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
+
 import { inject, observer } from "mobx-react";
 
 import { mobile, tablet } from "@docspace/shared/utils/device";
@@ -56,6 +56,7 @@ import FileSelectorImgDark from "PUBLIC_DIR/images/sdk-presets_file-selector_dar
 import EditorImgDark from "PUBLIC_DIR/images/sdk-presets_editor_dark.react.svg?url";
 import ViewerImgDark from "PUBLIC_DIR/images/sdk-presets_viewer_dark.react.svg?url";
 import CustomImgDark from "PUBLIC_DIR/images/sdk-presets_custom_dark.react.svg?url";
+import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const SDKContainer = styled(Box)`
   @media ${tablet} {
@@ -117,7 +118,7 @@ const PresetsContainer = styled.div`
 `;
 
 const PortalIntegration = (props) => {
-  const { t, setDocumentTitle, currentColorScheme, sdkLink, theme } = props;
+  const { t, currentColorScheme, sdkLink, theme, tReady } = props;
 
   const isSmall = useRef(
     (() => {
@@ -128,8 +129,6 @@ const PortalIntegration = (props) => {
   );
 
   const [isFlex, setIsFlex] = useState(isSmall.current);
-
-  setDocumentTitle(t("JavascriptSdk"));
 
   const navigate = useNavigate();
 
@@ -143,8 +142,10 @@ const PortalIntegration = (props) => {
 
   const presetsData = [
     {
-      title: PRODUCT_NAME,
-      description: t("PortalDescription", { productName: PRODUCT_NAME }),
+      title: t("Common:ProductName"),
+      description: t("PortalDescription", {
+        productName: t("Common:ProductName"),
+      }),
       image: theme.isBase ? PortalImg : PortalImgDark,
       handleOnClick: navigateToPortal,
     },
@@ -180,11 +181,17 @@ const PortalIntegration = (props) => {
     },
     {
       title: t("Common:Custom"),
-      description: t("CustomDescription", { productName: PRODUCT_NAME }),
+      description: t("CustomDescription", {
+        productName: t("Common:ProductName"),
+      }),
       image: theme.isBase ? CustomImg : CustomImgDark,
       handleOnClick: navigateToCustom,
     },
   ];
+
+  useEffect(() => {
+    if (tReady) setDocumentTitle(t("JavascriptSdk"));
+  }, [tReady]);
 
   const onResize = (entries) => {
     const belowThreshold = entries[0].contentRect.width <= 600;
@@ -207,7 +214,7 @@ const PortalIntegration = (props) => {
     <SDKContainer>
       <CategoryDescription>
         <Text className="sdk-description">
-          {t("SDKDescription", { productName: PRODUCT_NAME })}
+          {t("SDKDescription", { productName: t("Common:ProductName") })}
         </Text>
         <Link
           color={currentColorScheme?.main?.accent}
@@ -221,7 +228,7 @@ const PortalIntegration = (props) => {
         <CSP t={t} />
       </CategoryDescription>
       <CategoryHeader>
-        {t("SelectModeEmbedding", { productName: PRODUCT_NAME })}
+        {t("SelectModeEmbedding", { productName: t("Common:ProductName") })}
       </CategoryHeader>
       <Text lineHeight="20px" color={theme.sdkPresets.secondaryColor}>
         {t("InitializeSDK")}
@@ -242,13 +249,11 @@ const PortalIntegration = (props) => {
   );
 };
 
-export default inject(({ settingsStore, authStore, publicRoomStore }) => {
-  const { setDocumentTitle } = authStore;
+export default inject(({ settingsStore }) => {
   const { theme, currentColorScheme, sdkLink } = settingsStore;
 
   return {
     theme,
-    setDocumentTitle,
     currentColorScheme,
     sdkLink,
   };

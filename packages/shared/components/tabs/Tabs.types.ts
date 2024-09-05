@@ -51,6 +51,8 @@ export interface TabsProps {
   stickyTop?: string;
   /** Enables multiple select  */
   multiple?: boolean;
+  /** Sets a tab class name */
+  className?: string;
   /** Sets a callback function that is triggered when the tab is selected. */
   onSelect?: (element: TTabItem) => void;
 }

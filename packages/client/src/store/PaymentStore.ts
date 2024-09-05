@@ -127,12 +127,12 @@ class PaymentStore {
   basicSettings = async () => {
     if (!this.currentTariffStatusStore || !this.currentQuotaStore) return;
 
-    const { setPortalTariff, setPayerInfo } = this.currentTariffStatusStore;
+    const { fetchPortalTariff, setPayerInfo } = this.currentTariffStatusStore;
     const { addedManagersCount } = this.currentQuotaStore;
 
     this.setIsUpdatingBasicSettings(true);
 
-    const requests = [setPortalTariff()];
+    const requests = [fetchPortalTariff()];
 
     if (this.isAlreadyPaid) requests.push(this.setPaymentAccount());
     else requests.push(this.getBasicPaymentLink(addedManagersCount));
@@ -231,12 +231,12 @@ class PaymentStore {
   };
 
   standaloneBasicSettings = async (t: TTranslation) => {
-    const { getTenantExtra } = authStore;
+    const { getPaymentInfo } = authStore;
 
     this.setIsUpdatingBasicSettings(true);
 
     try {
-      await getTenantExtra();
+      await getPaymentInfo();
     } catch (e) {
       toastr.error(t("Common:UnexpectedError"));
 
@@ -247,7 +247,7 @@ class PaymentStore {
   };
 
   standaloneInit = async (t: TTranslation) => {
-    const { getTenantExtra } = authStore;
+    const { getPaymentInfo } = authStore;
 
     if (this.isInitPaymentPage) {
       this.standaloneBasicSettings(t);
@@ -256,7 +256,7 @@ class PaymentStore {
     }
 
     try {
-      await Promise.all([this.getSettingsPayment(), getTenantExtra()]);
+      await Promise.all([this.getSettingsPayment(), getPaymentInfo()]);
     } catch (error) {
       toastr.error(t("Common:UnexpectedError"));
       console.error(error);
@@ -317,14 +317,14 @@ class PaymentStore {
 
   acceptPaymentsLicense = async (t: TTranslation) => {
     try {
-      const { getTenantExtra } = authStore;
+      const { getPaymentInfo } = authStore;
 
       await acceptLicense();
 
       toastr.success(t("ActivateLicenseActivated"));
       localStorage.removeItem("enterpriseAlertClose");
 
-      await getTenantExtra();
+      await getPaymentInfo();
     } catch (e) {
       toastr.error(e as TData);
     }

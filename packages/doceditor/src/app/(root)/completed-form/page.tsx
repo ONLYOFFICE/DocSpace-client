@@ -24,9 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { CompletedForm } from "@/components/completed-form";
+import { getFillingSession } from "@/utils/actions";
 
-async function Page() {
-  return <CompletedForm />;
+interface PageProps {
+  searchParams: Record<string, string | undefined>;
+}
+
+async function Page({ searchParams }: PageProps) {
+  const { share, fillingSessionId, is_file } = searchParams;
+
+  const session = await getFillingSession(fillingSessionId!, share);
+
+  const isShreFile = is_file === "true";
+
+  return (
+    <CompletedForm session={session} share={share} isShreFile={isShreFile} />
+  );
 }
 
 export default Page;

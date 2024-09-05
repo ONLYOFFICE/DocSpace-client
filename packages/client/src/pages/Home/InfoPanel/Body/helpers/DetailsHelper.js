@@ -37,8 +37,8 @@ import { decode } from "he";
 
 import {
   connectedCloudsTypeTitleTranslation as getProviderTranslation,
-  getDefaultRoomName,
   getFileTypeName,
+  getRoomTypeName,
 } from "@docspace/client/src/helpers/filesUtils";
 import CommentEditor from "../sub-components/CommentEditor";
 
@@ -70,7 +70,7 @@ const tagList = (tags, selectTag) => (
         key={i}
         className="property-tag"
         label={tag}
-        onClick={() => selectTag(tag)}
+        onClick={() => selectTag({ label: tag })}
       />
     ))}
   </div>
@@ -314,7 +314,7 @@ class DetailsHelper {
   getItemType = () => {
     return text(
       this.item.isRoom
-        ? getDefaultRoomName(this.item.roomType, this.t)
+        ? getRoomTypeName(this.item.roomType, this.t)
         : getFileTypeName(this.item.fileType),
     );
   };

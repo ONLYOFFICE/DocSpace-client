@@ -30,6 +30,7 @@
   "HotkeysPlayPause": "Toista/keskeytä",
   "HotkeysRedoLastUndoneAction": "Tee edellinen kumottu toiminto uudelleen",
   "HotkeysRemove": "Poista valitut kohteet",
+  "HotkeysRenameSelected": "Nimeä valittu kohde uudelleen",
   "HotkeysSelectAll": "Valitse kaikki näkyvät kansiot ja tiedostot",
   "HotkeysSelectDown": "Valitse seuraava kohde alhaalta",
   "HotkeysSelection": "Kohteiden valitseminen",

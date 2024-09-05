@@ -32,7 +32,7 @@ import { useTranslation } from "react-i18next";
 
 import { regDesktop } from "@docspace/shared/utils/desktop";
 import PaymentsLoader from "@docspace/shared/skeletons/payments";
-import { setDocumentTitle } from "@docspace/client/src/helpers/filesUtils";
+import { setDocumentTitle } from "@docspace/client/src/helpers/utils";
 
 import PaymentContainer from "./PaymentContainer";
 

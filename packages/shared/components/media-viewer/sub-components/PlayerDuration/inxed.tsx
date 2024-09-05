@@ -29,18 +29,19 @@ import styled from "styled-components";
 
 import { mobile } from "@docspace/shared/utils";
 import { formatTime } from "../../MediaViewer.utils";
+import { globalColors } from "../../../../themes";
 
 const PlayerDurationWrapper = styled.div`
   width: 102px;
-  color: #fff;
+  color: ${globalColors.white};
   user-select: none;
   font-size: 12px;
   font-weight: 700;
 
-  margin-left: 10px;
+  margin-inline-start: 10px;
 
   @media ${mobile} {
-    margin-left: 0;
+    margin-inline-start: 0;
   }
 `;
 

@@ -53,10 +53,9 @@ const Sdk = ({
   user,
   updateProfileCulture,
   getRoomsIcon,
-  fetchExternalLinks,
   getFilePrimaryLink,
   getFilesSettings,
-  organizationName,
+  getPrimaryLink,
 }) => {
   const [isDataReady, setIsDataReady] = useState(false);
 
@@ -82,14 +81,13 @@ const Sdk = ({
     [FilterType.FoldersOnly]: t("Common:SelectTypeFiles", {
       type: t("Translations:Folders").toLowerCase(),
     }),
-    [FilterType.OFormTemplateOnly]: t("Common:SelectTypeFiles", {
-      type: t("Files:FormsTemplates").toLowerCase(),
-    }),
-    [FilterType.OFormOnly]: t("Common:SelectTypeFiles", {
+    [FilterType.Pdf]: t("Common:SelectTypeFiles", {
       type: t("Files:Forms").toLowerCase(),
     }),
     EditorSupportedTypes: t("Common:SelectTypeFiles", {
-      type: t("AllTypesAvailableForEditing", { organizationName }),
+      type: t("AllTypesAvailableForEditing", {
+        organizationName: t("Common:OrganizationName"),
+      }),
     }),
   };
 
@@ -113,17 +111,19 @@ const Sdk = ({
 
   useEffect(() => {
     if (window.parent && !frameConfig?.frameId && isLoaded) {
-      callCommand("setConfig");
+      callCommand();
     }
   }, [callCommand, isLoaded]);
 
   useEffect(() => {
     if (isDataReady) {
-      callCommandLoad("setIsLoaded");
+      callCommandLoad();
     }
   }, [callCommandLoad, isDataReady]);
 
   useEffect(() => {
+    if (window.ClientConfig && window.parent)
+      window.ClientConfig.isFrame = true;
     getFilesSettings();
   }, []);
 
@@ -202,20 +202,11 @@ const Sdk = ({
         (data[0].roomType === RoomsType.CustomRoom && data[0].shared) ||
         (data[0].roomType === RoomsType.FormRoom && data[0].shared)
       ) {
-        const links = await fetchExternalLinks(data[0].id);
+        const link = await getPrimaryLink(data[0].id);
 
-        const requestTokens = links.map((link) => {
-          const { id, title, requestToken, primary } = link.sharedTo;
+        const { id, title, requestToken, primary } = link.sharedTo;
 
-          return {
-            id,
-            primary,
-            title,
-            requestToken,
-          };
-        });
-
-        data[0].requestTokens = requestTokens;
+        data[0].requestTokens = [{ id, primary, title, requestToken }];
       }
 
       frameCallEvent({ event: "onSelectCallback", data });
@@ -248,6 +239,11 @@ const Sdk = ({
 
   if (!frameConfig) return;
 
+  const selectorOpenRoot =
+    selectorType !== "userFolderOnly" &&
+    selectorType !== "roomsOnly" &&
+    !frameConfig?.id;
+
   switch (mode) {
     case "room-selector":
       const cancelButtonProps = frameConfig?.showSelectorCancel
@@ -259,7 +255,10 @@ const Sdk = ({
         : {};
 
       const headerProps = frameConfig?.showSelectorHeader
-        ? { withHeader: true, headerProps: { headerLabel: "" } }
+        ? {
+            withHeader: true,
+            headerProps: { headerLabel: "", isCloseable: false },
+          }
         : {};
 
       component = (
@@ -296,7 +295,9 @@ const Sdk = ({
           acceptButtonLabel={frameConfig?.acceptButtonLabel}
           cancelButtonLabel={frameConfig?.cancelButtonLabel}
           currentFolderId={frameConfig?.id}
+          openRoot={selectorOpenRoot}
           descriptionText={formatsDescription[frameConfig?.filterParam] || ""}
+          headerProps={{ isCloseable: false }}
         />
       );
       break;
@@ -307,30 +308,22 @@ const Sdk = ({
   return component;
 };
 
-export default inject(
+export const Component = inject(
   ({
     authStore,
     settingsStore,
     filesSettingsStore,
     peopleStore,
-    publicRoomStore,
     userStore,
     filesStore,
   }) => {
     const { login, logout } = authStore;
-    const {
-      theme,
-      setFrameConfig,
-      frameConfig,
-      getSettings,
-      isLoaded,
-      organizationName,
-    } = settingsStore;
+    const { theme, setFrameConfig, frameConfig, getSettings, isLoaded } =
+      settingsStore;
     const { loadCurrentUser, user } = userStore;
     const { updateProfileCulture } = peopleStore.targetUserStore;
     const { getIcon, getRoomsIcon, getFilesSettings } = filesSettingsStore;
-    const { fetchExternalLinks } = publicRoomStore;
-    const { getFilePrimaryLink } = filesStore;
+    const { getFilePrimaryLink, getPrimaryLink } = filesStore;
 
     return {
       theme,
@@ -345,10 +338,9 @@ export default inject(
       isLoaded,
       updateProfileCulture,
       user,
-      fetchExternalLinks,
       getFilePrimaryLink,
       getFilesSettings,
-      organizationName,
+      getPrimaryLink,
     };
   },
 )(

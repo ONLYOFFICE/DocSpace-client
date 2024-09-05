@@ -29,7 +29,7 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { FolderType } from "@docspace/shared/enums";
 import FilesSelector from "@docspace/shared/selectors/Files";
 import { toastr } from "@docspace/shared/components/toast";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -138,6 +138,9 @@ const FilesSelectorWrapper = ({
 
   roomsFolderId,
   openRoot,
+
+  filesSettings,
+  headerProps,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -336,9 +339,11 @@ const FilesSelectorWrapper = ({
     );
   };
 
+  const openRootVar = openRoot || isRestore || isRestoreAll;
+
   return (
     <FilesSelector
-      openRoot={openRoot}
+      openRoot={openRootVar}
       socketHelper={socketHelper}
       socketSubscribers={socketSubscribers}
       disabledItems={disabledItems}
@@ -352,7 +357,7 @@ const FilesSelectorWrapper = ({
       isThirdParty={isThirdParty}
       rootThirdPartyId={rootThirdPartyId}
       roomsFolderId={roomsFolderId}
-      currentFolderId={isFormRoom && openRoot ? "" : currentFolderId}
+      currentFolderId={isFormRoom && openRootVar ? "" : currentFolderId}
       parentId={parentId}
       rootFolderType={rootFolderType || FolderType.Rooms}
       currentDeviceType={currentDeviceType}
@@ -387,8 +392,8 @@ const FilesSelectorWrapper = ({
       }
       getFilesArchiveError={getFilesArchiveError}
       withCreate={(isMove || isCopy || isRestore || isRestoreAll) ?? false}
-      // createDefineRoomLabel="New filling from room"
-      // createDefineRoomType={RoomsType.FormRoom}
+      filesSettings={filesSettings}
+      headerProps={headerProps}
     />
   );
 };
@@ -421,7 +426,7 @@ export default inject(
       isRestore,
       isPanelVisible,
       id,
-      currentFolderId,
+      currentFolderId: currentFolderIdProp,
     }: FilesSelectorProps,
   ) => {
     const { id: selectedId, parentId, rootFolderType } = selectedFolderStore;
@@ -460,11 +465,11 @@ export default inject(
       setSelected,
       filesSettingsStore,
     } = filesStore;
-    const { getIcon } = filesSettingsStore;
+    const { getIcon, filesSettings } = filesSettingsStore;
     const { isVisible: infoPanelIsVisible, infoPanelSelection } =
       infoPanelStore;
 
-    const selections =
+    const selections: (TFile | TFolder | TRoom) & { isEditing: boolean }[] =
       isMove || isCopy || isRestoreAll || isRestore
         ? isRestoreAll
           ? filesList
@@ -477,9 +482,9 @@ export default inject(
                 : []
         : [];
 
-    const sessionPath = window.sessionStorage.getItem("filesSelectorPath");
+    // const sessionPath = window.sessionStorage.getItem("filesSelectorPath");
 
-    const selectionsWithoutEditing = isRestoreAll
+    const selectionsWithoutEditing: (TFile | TFolder | TRoom)[] = isRestoreAll
       ? filesList
       : isCopy
         ? selections
@@ -497,22 +502,21 @@ export default inject(
     });
 
     const includeFolder =
-      selectionsWithoutEditing.filter((i) => i.isFolder).length > 0;
+      selectionsWithoutEditing.filter((i) => "isFolder" in i && i.isFolder)
+        .length > 0;
 
     const fromFolderId =
       id ||
       (rootFolderType === FolderType.Archive ||
       rootFolderType === FolderType.TRASH
         ? undefined
-        : selectedId === selectionsWithoutEditing[0]?.id
+        : selectedId === selectionsWithoutEditing[0]?.id &&
+            "isFolder" in selectionsWithoutEditing[0] &&
+            selectionsWithoutEditing[0]?.isFolder
           ? parentId
           : selectedId);
 
-    const folderId =
-      currentFolderId ||
-      (sessionPath && (isMove || isCopy || isRestore || isRestoreAll)
-        ? +sessionPath
-        : fromFolderId);
+    const folderId = fromFolderId;
 
     return {
       fromFolderId,
@@ -550,7 +554,8 @@ export default inject(
       getIcon,
 
       roomsFolderId,
-      currentFolderId: folderId,
+      currentFolderId: folderId || currentFolderIdProp,
+      filesSettings,
     };
   },
 )(observer(FilesSelectorWrapper));

@@ -28,11 +28,11 @@ import styled, { css } from "styled-components";
 import { Base } from "@docspace/shared/themes";
 import { tablet } from "@docspace/shared/utils";
 
-const getHeaderHeight = ({ withTabs, isTablet }) => {
-  let res = isTablet ? 53 : 69;
-  if (withTabs) res += 32;
-  return `${res}px`;
-};
+// const getHeaderHeight = ({ withTabs, isTablet }) => {
+//   let res = isTablet ? 54 : 70;
+//   if (withTabs) res += 32;
+//   return `${res}px`;
+// };
 
 const getMainHeight = ({ isTablet }) => {
   let res = isTablet ? 52 : 68;
@@ -43,52 +43,17 @@ const StyledInfoPanelHeader = styled.div`
   width: 100%;
   max-width: 100%;
 
-  height: ${(props) => getHeaderHeight(props)};
-  min-height: ${(props) => getHeaderHeight(props)};
-  @media ${tablet} {
-    height: ${(props) => getHeaderHeight({ ...props, isTablet: true })};
-    min-height: ${(props) => getHeaderHeight({ ...props, isTablet: true })};
-  }
-
   display: flex;
   flex-direction: column;
   border-bottom: ${(props) =>
     props.withTabs ? "none" : `1px solid ${props.theme.infoPanel.borderColor}`};
-  .main {
+
+  .header-text {
     height: ${(props) => getMainHeight(props)};
-    min-height: ${(props) => getMainHeight(props)};
     @media ${tablet} {
       height: ${(props) => getMainHeight({ ...props, isTablet: true })};
-      min-height: ${(props) => getMainHeight({ ...props, isTablet: true })};
-    }
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    .header-text {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: 20px;
-            `
-          : css`
-              margin-left: 20px;
-            `}
     }
   }
-
-  .info-panel-toggle-bg {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 20px;
-          `
-        : css`
-            margin-right: 20px;
-          `}
-  }
-
   .tabs {
     display: flex;
     width: 100%;

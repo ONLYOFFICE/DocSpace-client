@@ -64,14 +64,7 @@ const StyledWrapper = styled.div`
     font-weight: 600;
   }
   .icon-button {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 5px;
-          `
-        : css`
-            margin-left: 5px;
-          `}
+    margin-inline-start: 5px;
   }
 `;
 

@@ -39,6 +39,7 @@ import { messageActions } from "SRC_DIR/helpers/plugins/utils";
 const StyledFullScreen = styled.div`
   position: fixed;
   top: 0;
+  // doesn't require mirroring for RTL
   left: 0;
   z-index: 500;
   background: ${(props) => props.theme.backgroundColor};

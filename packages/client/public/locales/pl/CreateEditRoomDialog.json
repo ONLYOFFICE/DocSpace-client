@@ -1,8 +1,10 @@
 {
+  "ActivationRequired": "wymagana aktywacja",
   "ChooseRoomType": "Wybierz rodzaj pokoju",
   "CreateRoomConfirmation": "Kontynuować bez podłączania pamięci?\nWybrano pamięć podmiotu trzeciego, która nie jest jeszcze podłączona. Jeśli będziesz kontynuować bez podłączenia usługi, dana opcja nie zostanie dodana.",
   "CreateTagOption": "Utwórz znacznik",
   "DisableRoomQuota": "Wyłącz limit dla tego pokoju",
+  "FormRoomBarDescription": "Ten pokój jest dostępny dla każdego, kto ma link. Użytkownicy zewnętrzni będą mieli uprawnienie umożliwiające wypełnienie formularza dla wszystkich plików.",
   "Icon": "Ikona",
   "MakeRoomPrivateDescription": "Wszystkie pliki w tym pokoju zostaną zaszyfrowane.",
   "MakeRoomPrivateLimitationsWarningDescription": "Dzięki tej funkcji możesz zapraszać tylko istniejących użytkowników {{productName}}. Po utworzeniu pokoju nie będziesz w stanie zmienić listy użytkowników.",

@@ -48,7 +48,7 @@ const SelectFolderDialog = ({
   fileSaveAsExtension,
 }: SelectFolderDialogProps) => {
   const { t } = useTranslation(["Common", "Editor"]);
-  const sessionPath = sessionStorage.getItem("filesSelectorPath");
+  // const sessionPath = sessionStorage.getItem("filesSelectorPath");
 
   const cancelButtonProps: TSelectorCancelButton = {
     withCancelButton: true,
@@ -82,7 +82,7 @@ const SelectFolderDialog = ({
       isPanelVisible={isVisible}
       isRoomsOnly={false}
       isThirdParty={false}
-      currentFolderId={sessionPath || fileInfo.folderId}
+      currentFolderId={fileInfo.folderId}
       rootFolderType={fileInfo.rootFolderType}
       embedded={false}
       withFooterInput

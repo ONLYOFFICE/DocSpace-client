@@ -55,11 +55,7 @@ export const MainContainerWrapper = styled.div`
 
   display: flex;
   align-self: center;
-
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `margin-left: auto;`
-      : `margin-right: auto;`}
+  margin-inline-end: auto;
 `;
 
 export const StyledTileContent = styled.div`

@@ -59,7 +59,7 @@ import { Link } from "@docspace/shared/components/link";
 import { getSettingsThirdParty } from "@docspace/shared/api/files";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { isManagement } from "@docspace/shared/utils/common";
-import { PRODUCT_NAME } from "@docspace/shared/constants";
+import { globalColors } from "@docspace/shared/themes";
 
 const { DocumentModuleType, ResourcesModuleType, StorageModuleType } =
   BackupStorageType;
@@ -67,7 +67,7 @@ const { EveryDayType, EveryWeekType, EveryMonthType } = AutoBackupPeriod;
 class AutomaticBackup extends React.PureComponent {
   constructor(props) {
     super(props);
-    const { t, language } = props;
+    const { t, tReady, language } = props;
     moment.locale(language);
 
     this.state = {
@@ -97,7 +97,7 @@ class AutomaticBackup extends React.PureComponent {
     this.maxNumberCopiesArray = [];
     this.weekdaysLabelArray = [];
 
-    setDocumentTitle(t("AutoBackup"));
+    if (tReady) setDocumentTitle(t("AutoBackup"));
 
     this.getTime();
     this.getMonthNumbers();
@@ -169,6 +169,12 @@ class AutomaticBackup extends React.PureComponent {
     if (Object.keys(rootFoldersTitles).length === 0) fetchTreeFolders();
 
     this.setBasicSettings();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { t, tReady } = this.props;
+    if (prevProps.tReady !== tReady && tReady)
+      setDocumentTitle(t("AutoBackup"));
   }
 
   componentWillUnmount() {
@@ -470,7 +476,9 @@ class AutomaticBackup extends React.PureComponent {
       <StyledAutoBackup isEnableAuto={isEnableAuto}>
         <div className="backup_modules-header_wrapper">
           <Text className="backup_modules-description settings_unavailable">
-            {t("AutoBackupDescription", { productName: PRODUCT_NAME })}
+            {t("AutoBackupDescription", {
+              productName: t("Common:ProductName"),
+            })}
           </Text>
           <Link
             className="link-learn-more"
@@ -504,7 +512,11 @@ class AutomaticBackup extends React.PureComponent {
               </Text>
               {!isEnableAuto && (
                 <Badge
-                  backgroundColor="#EDC409"
+                  backgroundColor={
+                    theme.isBase
+                      ? globalColors.favoritesStatus
+                      : globalColors.favoriteStatusDark
+                  }
                   label={t("Common:Paid")}
                   fontWeight="700"
                   className="auto-backup_badge"

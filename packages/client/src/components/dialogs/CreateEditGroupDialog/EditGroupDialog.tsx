@@ -25,171 +25,200 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { ChangeEvent, useEffect, useRef, useState } from "react";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button } from "@docspace/shared/components/button";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { getGroupById } from "@docspace/shared/api/groups";
-import { compareGroupParams } from "./utils";
-import { EditGroupParams } from "./types";
+
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
+import { TGroup } from "@docspace/shared/api/groups/types";
+import {
+  MIN_LOADER_TIMER,
+  SHOW_LOADER_TIMER,
+} from "@docspace/shared/selectors/Files/FilesSelector.constants";
+import EditGroupStore from "SRC_DIR/store/EditGroupStore";
 
 import { StyledModal } from "./CreateEditGroupDialog.styled";
 import GroupNameParam from "./sub-components/GroupNameParam";
 import HeadOfGroup from "./sub-components/HeadOfGroupParam";
 import MembersParam from "./sub-components/MembersParam";
 import SelectGroupManagerPanel from "./sub-components/HeadOfGroupParam/SelectGroupManagerPanel";
-import SelectGroupMembersPanel from "./sub-components/MembersParam/SelectGroupMembersPanel";
+import { SelectMembersPanel } from "./sub-components/edit-components/SelectMembersPanel";
+import { BodyLoader } from "./sub-components/BodyLoader/BodyLoader";
 
-interface EditGroupDialogProps {
-  group: {
-    members: object[];
-    [key: string]: any;
-  };
+type InjectedProps = Pick<
+  EditGroupStore,
+  | "initGroupData"
+  | "resetGroupData"
+  | "isInit"
+  | "loadMembers"
+  | "manager"
+  | "addManager"
+  | "removeManager"
+  | "members"
+  | "addMembers"
+  | "removeMember"
+  | "currentTotal"
+  | "submitChanges"
+  | "title"
+  | "setTitle"
+  | "hasChanges"
+>;
+
+type EditGroupDialogProps = {
+  group: TGroup;
   visible: boolean;
   onClose: () => void;
-  updateGroup: (
-    groupId: string,
-    groupName: string,
-    groupManager: string,
-    membersToAdd: string[],
-    membersToRemove: string[],
-  ) => Promise<void>;
-}
+  injectedProps?: InjectedProps;
+};
 
 const EditGroupDialog = ({
   group,
   visible,
   onClose,
-  updateGroup,
-  setInfoPanelSelectedGroup,
+
+  injectedProps,
 }: EditGroupDialogProps) => {
+  const {
+    initGroupData,
+    resetGroupData,
+    isInit,
+    loadMembers,
+    manager,
+    addManager,
+    removeManager,
+    members,
+    addMembers,
+    removeMember,
+    currentTotal,
+    submitChanges,
+    title,
+    setTitle,
+    hasChanges,
+  } = injectedProps!;
+
   const { t } = useTranslation(["PeopleTranslations", "Common"]);
-
-  const [initialMembersIds, setInitialMembersIds] = useState<string[]>([]);
-
-  const [isCreateGroupLoading, setCreateGroupIsLoading] =
-    useState<boolean>(false);
-
-  const [isFetchMembersLoading, setFetchMembersIsLoading] =
-    useState<boolean>(false);
-
-  const [groupParams, setGroupParams] = useState<EditGroupParams>({
-    groupName: group.name,
-    groupManager: group.manager,
-    groupMembers: null,
-  });
-
-  const prevGroupParams = useRef({ ...groupParams });
-
-  const onChangeGroupName = (e: ChangeEvent<HTMLInputElement>) =>
-    setGroupParams((prev) => ({ ...prev, groupName: e.target.value }));
-
-  const setGroupManager = (groupManager: object | null) =>
-    setGroupParams((prev) => ({ ...prev, groupManager }));
-
-  const setGroupMembers = (groupMembers: object[]) =>
-    setGroupParams((prev) => ({ ...prev, groupMembers }));
-
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [selectGroupMangerPanelIsVisible, setSelectGroupMangerPanelIsVisible] =
     useState<boolean>(false);
+  const [selectMembersPanelIsVisible, setSelectMembersPanelIsVisible] =
+    useState<boolean>(false);
+  const [showLoader, setShowLoader] = useState(false);
+
+  const loaderTimeout = useRef<NodeJS.Timeout | null>(null);
+  const startLoaderTime = useRef<Date | null>(null);
+
+  const onChangeGroupName = (e: ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+  };
+
+  const closeModal = () => {
+    resetGroupData();
+    onClose();
+  };
 
   const onShowSelectGroupManagerPanel = () =>
     setSelectGroupMangerPanelIsVisible(true);
   const onHideSelectGroupManagerPanel = () =>
     setSelectGroupMangerPanelIsVisible(false);
 
-  const [selectMembersPanelIsVisible, setSelectMembersPanelIsVisible] =
-    useState<boolean>(false);
-
   const onShowSelectMembersPanel = () => setSelectMembersPanelIsVisible(true);
   const onHideSelectMembersPanel = () => setSelectMembersPanelIsVisible(false);
 
   const onEditGroup = async () => {
-    setCreateGroupIsLoading(true);
+    setIsSubmitting(true);
 
-    const groupManagerId = groupParams.groupManager?.id || undefined;
+    await submitChanges();
 
-    const newMembersIds =
-      groupParams.groupMembers?.map((gm: any) => gm.id) || [];
-    const membersToAdd = newMembersIds.filter(
-      (gm) => !initialMembersIds.includes(gm),
-    );
-    const membersToDelete = initialMembersIds.filter(
-      (gm) => !newMembersIds.includes(gm),
-    );
-
-    await updateGroup(
-      group.id,
-      groupParams.groupName,
-      groupManagerId,
-      membersToAdd,
-      membersToDelete,
-    );
-
-    setCreateGroupIsLoading(false);
-    onClose();
+    setIsSubmitting(false);
+    closeModal();
   };
 
-  const notEnoughGroupParamsToEdit =
-    !groupParams.groupName ||
-    (!groupParams.groupManager && !groupParams.groupMembers?.length);
+  useEffect(() => {
+    initGroupData(group);
 
-  const groupParamsNotChanged = compareGroupParams(
-    groupParams,
-    prevGroupParams.current,
-  );
+    return () => {
+      resetGroupData();
+    };
+  }, []);
 
   useEffect(() => {
-    if (groupParams.groupMembers) return;
-    setFetchMembersIsLoading(true);
+    if (!isInit) {
+      loaderTimeout.current = setTimeout(() => {
+        startLoaderTime.current = new Date();
+        setShowLoader(true);
+      }, SHOW_LOADER_TIMER);
+    } else if (startLoaderTime.current) {
+      const currentDate = new Date();
 
-    getGroupById(group.id)!
-      .then((data: any) => {
-        prevGroupParams.current.groupMembers = data.members;
-        setInitialMembersIds(data.members.map((gm) => gm.id));
-        setGroupMembers(data.members);
-      })
-      .then((data) => {
-        setInfoPanelSelectedGroup(data);
-      })
-      .catch((err) => console.error(err))
-      .finally(() => setFetchMembersIsLoading(false));
-  }, [group.id]);
+      const ms = Math.abs(
+        startLoaderTime.current.getTime() - currentDate.getTime(),
+      );
+
+      if (ms >= MIN_LOADER_TIMER) {
+        startLoaderTime.current = null;
+        return setShowLoader(false);
+      }
+
+      setTimeout(() => {
+        if (isInit) {
+          startLoaderTime.current = null;
+          setShowLoader(false);
+        }
+      }, MIN_LOADER_TIMER - ms);
+
+      loaderTimeout.current = null;
+    } else if (loaderTimeout.current) {
+      clearTimeout(loaderTimeout.current);
+      loaderTimeout.current = null;
+    }
+  }, [isInit]);
+
+  const notEnoughParamsToEdit = !title || (!manager && !members?.length);
 
   return (
     <>
       <StyledModal
-        displayType="aside"
+        displayType={ModalDialogType.aside}
         withBodyScroll
         visible={visible}
-        onClose={onClose}
+        onClose={closeModal}
         withFooterBorder
-        //   isScrollLocked={isScrollLocked}
-        //   isOauthWindowOpen={isOauthWindowOpen}
       >
         <ModalDialog.Header>
           {t("PeopleTranslations:EditGroup")}
         </ModalDialog.Header>
 
         <ModalDialog.Body>
-          <GroupNameParam
-            groupName={groupParams.groupName}
-            onChangeGroupName={onChangeGroupName}
-          />
-          <HeadOfGroup
-            groupManager={groupParams.groupManager}
-            setGroupManager={setGroupManager}
-            groupMembers={groupParams.groupMembers}
-            setGroupMembers={setGroupMembers}
-            onShowSelectGroupManagerPanel={onShowSelectGroupManagerPanel}
-          />
-          {!isFetchMembersLoading && (
-            <MembersParam
-              groupManager={groupParams.groupManager}
-              groupMembers={groupParams.groupMembers}
-              setGroupMembers={setGroupMembers}
-              onShowSelectMembersPanel={onShowSelectMembersPanel}
-            />
+          {showLoader ? (
+            <BodyLoader />
+          ) : (
+            isInit && (
+              <>
+                <GroupNameParam
+                  groupName={title}
+                  onChangeGroupName={onChangeGroupName}
+                />
+                <HeadOfGroup
+                  groupManager={manager}
+                  onShowSelectGroupManagerPanel={onShowSelectGroupManagerPanel}
+                  removeManager={removeManager}
+                />
+
+                <MembersParam
+                  groupManager={manager}
+                  groupMembers={members}
+                  removeMember={removeMember}
+                  onShowSelectMembersPanel={onShowSelectMembersPanel}
+                  withInfiniteLoader
+                  total={currentTotal}
+                  loadNextPage={loadMembers}
+                  hasNextPage={!!members && members.length < currentTotal}
+                />
+              </>
+            )
           )}
         </ModalDialog.Body>
 
@@ -198,21 +227,21 @@ const EditGroupDialog = ({
             id="edit-group-modal_submit"
             tabIndex={5}
             label={t("Common:SaveButton")}
-            size="normal"
+            size={ButtonSize.normal}
             primary
             scale
             onClick={onEditGroup}
-            isDisabled={notEnoughGroupParamsToEdit || groupParamsNotChanged}
-            isLoading={isCreateGroupLoading}
+            isDisabled={!hasChanges || notEnoughParamsToEdit}
+            isLoading={isSubmitting}
           />
           <Button
             id="edit-group-modal_cancel"
             tabIndex={5}
             label={t("Common:CancelButton")}
-            size="normal"
+            size={ButtonSize.normal}
             scale
-            isDisabled={isCreateGroupLoading}
-            onClick={onClose}
+            isDisabled={isSubmitting}
+            onClick={closeModal}
           />
         </ModalDialog.Footer>
       </StyledModal>
@@ -222,25 +251,60 @@ const EditGroupDialog = ({
           isVisible={selectGroupMangerPanelIsVisible}
           onClose={onHideSelectGroupManagerPanel}
           onParentPanelClose={onClose}
-          setGroupManager={setGroupManager}
+          setGroupManager={addManager}
         />
       )}
 
       {selectMembersPanelIsVisible && (
-        <SelectGroupMembersPanel
+        <SelectMembersPanel
           isVisible={selectMembersPanelIsVisible}
           onClose={onHideSelectMembersPanel}
           onParentPanelClose={onClose}
-          groupManager={groupParams.groupManager}
-          groupMembers={groupParams.groupMembers}
-          setGroupMembers={setGroupMembers}
+          addMembers={addMembers}
         />
       )}
     </>
   );
 };
 
-export default inject(({ peopleStore, infoPanelStore }) => ({
-  updateGroup: peopleStore.groupsStore.updateGroup,
-  setInfoPanelSelectedGroup: infoPanelStore.setInfoPanelSelectedGroup,
-}))(observer(EditGroupDialog));
+export default inject<{ editGroupStore: EditGroupStore }>(
+  ({ editGroupStore }) => {
+    const {
+      initGroupData,
+      resetGroupData,
+      isInit,
+      loadMembers,
+      manager,
+      addManager,
+      removeManager,
+      members,
+      addMembers,
+      removeMember,
+      currentTotal,
+      submitChanges,
+      title,
+      setTitle,
+      hasChanges,
+    } = editGroupStore;
+
+    return {
+      injectedProps: {
+        initGroupData,
+        resetGroupData,
+        isInit,
+        loadMembers,
+        manager,
+        addManager,
+        removeManager,
+        members,
+        addMembers,
+        removeMember,
+        currentTotal,
+        submitChanges,
+        title,
+        setTitle,
+        hasChanges,
+      },
+    };
+  },
+)(observer(EditGroupDialog));

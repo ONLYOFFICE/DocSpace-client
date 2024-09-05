@@ -26,10 +26,11 @@
 
 import React from "react";
 import { RoomsType, ShareAccessRights } from "../../enums";
-import { MergeTypes } from "../../types";
+import { MergeTypes, Nullable } from "../../types";
 
 import { TFileSecurity, TFolderSecurity } from "../../api/files/types";
 import { TRoomSecurity } from "../../api/rooms/types";
+import { TGroup } from "../../api/groups/types";
 
 import { AvatarRole } from "../avatar";
 import { TTabItem } from "../tabs";
@@ -38,19 +39,43 @@ import { SelectorAccessRightsMode } from "./Selector.enums";
 
 // header
 
-type THeaderBackButton = {
-  onBackClick: () => void;
-  withoutBackButton: false;
+type THeaderBackButton =
+  | {
+      onBackClick: () => void;
+      withoutBackButton: false;
+      withoutBorder: false;
+    }
+  | {
+      onBackClick?: undefined;
+      withoutBackButton?: undefined;
+      withoutBorder?: undefined;
+    };
+
+export type TInfoBarData = {
+  title: string;
+  description: string;
+  icon?: string;
+  onClose?: VoidFunction;
 };
 
-type THeaderNonBackButton = {
-  onBackClick?: undefined;
-  withoutBackButton?: undefined;
+export type TInfoBar = {
+  withInfoBar?: boolean;
+  infoBarData?: TInfoBarData;
+};
+
+export type InfoBarProps = {
+  visible: boolean;
+};
+
+export type BreadCrumbsProps = {
+  visible?: boolean;
 };
 
 export type HeaderProps = {
   headerLabel: string;
-} & (THeaderBackButton | THeaderNonBackButton);
+  onCloseClick: () => void;
+  isCloseable?: boolean;
+} & THeaderBackButton;
 
 export type TSelectorHeader =
   | {
@@ -60,21 +85,23 @@ export type TSelectorHeader =
   | { withHeader?: undefined; headerProps?: undefined };
 
 // bread crumbs
+type TOnBreadCrumbClick = ({
+  e,
+  open,
+  item,
+}: {
+  e: React.MouseEvent;
+  open: boolean;
+  item: TBreadCrumb;
+}) => void;
+
 export type TBreadCrumb = {
   id: string | number;
   label: string;
   isRoom?: boolean;
   minWidth?: string;
   roomType?: RoomsType;
-  onClick?: ({
-    e,
-    open,
-    item,
-  }: {
-    e: React.MouseEvent;
-    open: boolean;
-    item: TBreadCrumb;
-  }) => void;
+  onClick?: TOnBreadCrumbClick;
 };
 
 export type TDisplayedItem = {
@@ -105,15 +132,12 @@ export type TSelectorBreadCrumbs =
     };
 
 // tabs
-export type TWithTabs =
+export type TSelectorTabs =
   | { withTabs: true; tabsData: TTabItem[]; activeTabId: string }
   | { withTabs?: undefined; tabsData?: undefined; activeTabId?: undefined };
 
 // select all
-export type TSelectorSelectAll = {
-  isAllIndeterminate?: boolean;
-  isAllChecked?: boolean;
-} & (
+export type TSelectorSelectAll =
   | {
       withSelectAll: true;
       selectAllLabel: string;
@@ -125,17 +149,9 @@ export type TSelectorSelectAll = {
       selectAllLabel?: undefined;
       selectAllIcon?: undefined;
       onSelectAll?: undefined;
-    }
-);
+    };
 
 // search
-export interface SearchProps {
-  placeholder?: string;
-  value?: string;
-  onSearch: (value: string, callback?: Function) => void;
-  onClearSearch: (callback?: Function) => void;
-  setIsSearch: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
 export type TSelectorSearch =
   | {
@@ -157,27 +173,15 @@ export type TSelectorSearch =
       onClearSearch?: undefined;
     };
 
-export type TSelectorBodySearch = TSelectorSearch & {
-  isSearch: boolean;
-  setIsSearch: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
 // empty screen
 export interface EmptyScreenProps {
-  image: string;
-  header: string;
-  description: string;
-  searchImage: string;
-  searchHeader: string;
-  searchDescription: string;
   withSearch: boolean;
 
   items: TSelectorItem[];
-
   inputItemVisible: boolean;
 }
 
-type TSelectorEmptyScreen = {
+export type TSelectorEmptyScreen = {
   emptyScreenImage: string;
   emptyScreenHeader: string;
   emptyScreenDescription: string;
@@ -187,6 +191,7 @@ type TSelectorEmptyScreen = {
   searchEmptyScreenDescription: string;
 };
 
+// submit button
 type TOnSubmit = (
   selectedItems: TSelectorItem[],
   access: TAccessRight | null,
@@ -194,7 +199,6 @@ type TOnSubmit = (
   isFooterCheckboxChecked: boolean,
 ) => void | Promise<void>;
 
-// submit button
 export type TSelectorSubmitButton = {
   submitButtonLabel: string;
   disableSubmitButton: boolean;
@@ -298,9 +302,17 @@ export type TSelectorInfo =
   | { withInfo: true; infoText: string }
   | { withInfo?: undefined; infoText?: undefined };
 
+export type TRenderCustomItem = (
+  label: string,
+  role?: string,
+  email?: string,
+  isGroup?: boolean,
+) => React.ReactNode | null;
+
 export type SelectorProps = TSelectorHeader &
+  TInfoBar &
   TSelectorInfo &
-  TWithTabs &
+  TSelectorTabs &
   TSelectorSelectAll &
   TSelectorEmptyScreen &
   TSelectorSearch &
@@ -333,54 +345,39 @@ export type SelectorProps = TSelectorHeader &
 
     rowLoader: React.ReactNode;
 
-    renderCustomItem?: (
-      label: string,
-      role?: string,
-      email?: string,
-      isGroup?: boolean,
-    ) => React.ReactNode | null;
+    renderCustomItem?: TRenderCustomItem;
 
     alwaysShowFooter?: boolean;
     descriptionText?: string;
   };
 
-export type BodyProps = TSelectorBreadCrumbs &
-  TSelectorInfo &
-  TWithTabs &
-  TSelectorBodySearch &
-  TSelectorSelectAll &
-  TSelectorEmptyScreen &
-  TSelectorBreadCrumbs & {
-    footerVisible: boolean;
-    withHeader?: boolean;
+export type BodyProps = TSelectorInfo & {
+  footerVisible: boolean;
+  withHeader?: boolean;
 
-    value?: string;
+  value?: string;
 
-    isMultiSelect: boolean;
+  isMultiSelect: boolean;
 
-    inputItemVisible: boolean;
-    setInputItemVisible: (value: boolean) => void;
+  inputItemVisible: boolean;
+  setInputItemVisible: (value: boolean) => void;
 
-    items: TSelectorItem[];
-    renderCustomItem?: (
-      label: string,
-      role?: string,
-      email?: string,
-    ) => React.ReactNode | null;
-    onSelect: (item: TSelectorItem, isDoubleClick: boolean) => void;
+  items: TSelectorItem[];
+  renderCustomItem?: TRenderCustomItem;
+  onSelect: (item: TSelectorItem, isDoubleClick: boolean) => void;
 
-    loadMoreItems: (startIndex: number) => void;
-    hasNextPage: boolean;
-    isNextPageLoading: boolean;
-    totalItems: number;
-    isLoading: boolean;
+  loadMoreItems: (startIndex: number) => void;
+  hasNextPage: boolean;
+  isNextPageLoading: boolean;
+  totalItems: number;
+  isLoading: boolean;
 
-    rowLoader: React.ReactNode;
+  rowLoader: React.ReactNode;
 
-    withFooterInput?: boolean;
-    withFooterCheckbox?: boolean;
-    descriptionText?: string;
-  };
+  withFooterInput?: boolean;
+  withFooterCheckbox?: boolean;
+  descriptionText?: string;
+};
 
 export type FooterProps = TSelectorFooterSubmitButton &
   TSelectorCancelButton &
@@ -400,6 +397,7 @@ type TSelectorItemEmpty = {
   iconOriginal?: undefined;
   role?: undefined;
   email?: undefined;
+  groups?: TGroup[];
   isOwner?: undefined;
   isAdmin?: undefined;
   isVisitor?: undefined;
@@ -427,6 +425,9 @@ type TSelectorItemEmpty = {
   onAcceptInput?: undefined;
   onCancelInput?: undefined;
   placeholder?: undefined;
+
+  isRoomsOnly?: undefined;
+  createDefineRoomType?: undefined;
 };
 
 export type TSelectorItemUser = MergeTypes<
@@ -441,6 +442,7 @@ export type TSelectorItemUser = MergeTypes<
     avatar: string;
     hasAvatar: boolean;
     role: AvatarRole;
+    groups?: TGroup[];
 
     access?: ShareAccessRights | string | number;
   }
@@ -503,8 +505,10 @@ export type TSelectorItemNew = MergeTypes<
     hotkey?: string;
     dropDownItems?: React.ReactElement[];
     onCreateClick?: VoidFunction;
-
     onBackClick: VoidFunction;
+
+    isRoomsOnly?: boolean;
+    createDefineRoomType?: RoomsType;
   }
 >;
 
@@ -550,14 +554,11 @@ export type Data = {
   isMultiSelect: boolean;
   isItemLoaded: (index: number) => boolean;
   rowLoader: React.ReactNode;
-  renderCustomItem?: (
-    label: string,
-    role?: string,
-    email?: string,
-    isGroup?: boolean,
-  ) => React.ReactNode | null;
+  renderCustomItem?: TRenderCustomItem;
   setInputItemVisible: (value: boolean) => void;
   inputItemVisible: boolean;
+  savedInputValue: Nullable<string>;
+  setSavedInputValue: (value: Nullable<string>) => void;
 };
 
 export interface ItemProps {

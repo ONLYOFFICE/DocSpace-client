@@ -42,14 +42,7 @@ const Footer = styled.div`
     width: 100%;
   }
   button:first-of-type {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-left: 10px;
-          `
-        : css`
-            margin-right: 10px;
-          `}
+    margin-inline-end: 10px;
   }
 `;
 

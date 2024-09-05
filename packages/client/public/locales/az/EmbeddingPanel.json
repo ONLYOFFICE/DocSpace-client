@@ -1,7 +1,11 @@
 {
-  "Auto": "Avto",
-  "CodeCopySuccess": "Kod buferə köçürüldü",
-  "EmbedCode": "Kodu yerləşdirin",
+  "CodeSuccessfullyCopied": "Əlavə ediləcək kod mübadilə buferinə uğurla kopyalandı",
+  "ContentRestricted": "Məzmunu kopyalamaq, faylları yükləmək və çap etmək məhdudlanıb.",
+  "DisplaySettings": "Görüntü parametrləri",
+  "EmbeddingBarAllowList": "Saytın URL-ni yerləşdirmə üçün <1>allow list</1> əlavə edin.",
+  "EmbeddingBarDescription": "Yerləşdirmə yalnız JavaScript SDK parametrlərində {{productName}} administratoru tərəfindən müəyyən edilmiş URL-lər üçün işləyir.",
   "Height": "Uzunluq",
+  "Link": "Link",
+  "LinkProtectedWithPassword": "Link şifrəylə qorunur.",
   "Width": "Genişlik"
 }

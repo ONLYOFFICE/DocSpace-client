@@ -33,7 +33,7 @@ export const DeleteDataLayout = styled.div`
   hr {
     margin: 24px 0;
     border: none;
-    border-top: 1px solid #eceef1;
+    border-top: ${(props) => props.theme.client.settings.deleteData.borderTop};
   }
 `;
 

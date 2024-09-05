@@ -41,17 +41,11 @@ user-select: none;*/
   height: ${(props) => props.theme.dragAndDrop.height};
   border: ${(props) => props.theme.dragAndDrop.transparentBorder};
 
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `margin-right: -2px;`
-      : `margin-left: -2px;`}
+  margin-inline-start: -2px;
   position: relative;
 
   @media ${tablet} {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-right: 0;`
-        : `margin-left: 0;`}
+    margin-inline-start: 0;
   }
   outline: none;
   background: ${(props) =>

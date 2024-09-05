@@ -149,9 +149,11 @@ const ContactContainer = (props) => {
   );
 };
 
-export default inject(({ authStore, settingsStore, paymentStore }) => {
-  const { isCommunity } = authStore;
-  const { helpUrl, salesEmail } = paymentStore;
-  const { theme } = settingsStore;
-  return { helpUrl, salesEmail, theme, isCommunity };
-})(observer(ContactContainer));
+export default inject(
+  ({ currentTariffStatusStore, settingsStore, paymentStore }) => {
+    const { isCommunity } = currentTariffStatusStore;
+    const { helpUrl, salesEmail } = paymentStore;
+    const { theme } = settingsStore;
+    return { helpUrl, salesEmail, theme, isCommunity };
+  },
+)(observer(ContactContainer));

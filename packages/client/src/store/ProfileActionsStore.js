@@ -83,6 +83,7 @@ class ProfileActionsStore {
     pluginStore,
     userStore,
     settingsStore,
+    currentTariffStatusStore,
   ) {
     this.authStore = authStore;
     this.filesStore = filesStore;
@@ -92,6 +93,7 @@ class ProfileActionsStore {
     this.pluginStore = pluginStore;
     this.userStore = userStore;
     this.settingsStore = settingsStore;
+    this.currentTariffStatusStore = currentTariffStatusStore;
 
     this.isShowLiveChat = this.getStateLiveChat();
 
@@ -248,7 +250,7 @@ class ProfileActionsStore {
       limitedAccessSpace,
     } = this.settingsStore;
     const isAdmin = this.authStore.isAdmin;
-    const isCommunity = this.authStore.isCommunity;
+    const isCommunity = this.currentTariffStatusStore.isCommunity;
     // const { isOwner } = this.userStore.user;
 
     // const settingsModule = modules.find((module) => module.id === "settings");
@@ -345,7 +347,7 @@ class ProfileActionsStore {
 
     let bookTraining = null;
 
-    if (!isMobile && this.isTeamTrainingAlertAvailable) {
+    if (!isMobile && this.authStore.isTeamTrainingAlertAvailable) {
       bookTraining = {
         key: "user-menu-book-training",
         icon: BookTrainingReactSvgUrl,

@@ -305,7 +305,7 @@ const SessionLifetime = (props) => {
   );
 };
 
-export default inject(({ settingsStore, setup }) => {
+export const SessionLifetimeSection = inject(({ settingsStore, setup }) => {
   const {
     sessionLifetime,
     enabledSessionLifetime,

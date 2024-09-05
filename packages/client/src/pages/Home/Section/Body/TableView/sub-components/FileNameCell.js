@@ -26,6 +26,7 @@
 
 import React from "react";
 import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { classNames } from "@docspace/shared/utils";
 import { TableCell } from "@docspace/shared/components/table";
@@ -42,8 +43,9 @@ const FileNameCell = ({
   t,
   inProgress,
   isIndexEditingMode,
+  displayFileExtension,
 }) => {
-  const { title, viewAccessibility } = item;
+  const { title, viewAccessibility, fileExst } = item;
 
   const onChange = (e) => {
     onContentSelect && onContentSelect(e.target.checked, item);
@@ -67,7 +69,7 @@ const FileNameCell = ({
           className={classNames("table-container_element-wrapper", {
             ["table-container-index"]: isIndexEditingMode,
           })}
-          style={{background: "none !important"}}
+          style={{ background: "none !important" }}
           hasAccess={true}
           checked={checked}
         >
@@ -96,6 +98,9 @@ const FileNameCell = ({
         dir="auto"
       >
         {titleWithoutExt}
+        {displayFileExtension && (
+          <span className="item-file-exst">{fileExst}</span>
+        )}
       </Link>
     </>
   );

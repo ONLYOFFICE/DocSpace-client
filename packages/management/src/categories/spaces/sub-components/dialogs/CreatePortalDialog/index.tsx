@@ -28,7 +28,10 @@ import React from "react";
 import styled from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
 import { TextInput } from "@docspace/shared/components/text-input";
@@ -37,10 +40,8 @@ import toLower from "lodash/toLower";
 import { useStore } from "SRC_DIR/store";
 import { validatePortalName } from "@docspace/shared/utils/common";
 
-const StyledModal = styled(ModalDialog)`
-  #modal-dialog {
-    min-height: 326px;
-  }
+const StyledBodyContent = styled.div`
+  display: contents;
 
   .create-portal-input-block {
     padding: 16px 0;
@@ -143,63 +144,66 @@ const CreatePortalDialog = () => {
   };
 
   return (
-    <StyledModal
+    <ModalDialog
       isLarge
       visible={visible}
       onClose={onClose}
-      displayType="modal"
+      displayType={ModalDialogType.modal}
+      autoMaxHeight
     >
       <ModalDialog.Header>
         {t("CreatingPortal", { productName: t("Common:ProductName") })}
       </ModalDialog.Header>
-      <ModalDialog.Body className="create-docspace-body">
-        <Text noSelect={true}>
-          {t("CreateSpaceDescription", {
-            productName: t("Common:ProductName"),
-          })}
-        </Text>
-        <div className="create-portal-input-block">
-          <Text
-            fontSize="13px"
-            fontWeight="600"
-            style={{ paddingBottom: "5px" }}
-          >
-            {t("PortalName")}
+      <ModalDialog.Body>
+        <StyledBodyContent>
+          <Text noSelect={true}>
+            {t("CreateSpaceDescription", {
+              productName: t("Common:ProductName"),
+            })}
           </Text>
-          <TextInput
-            onChange={onHandleName}
-            value={name}
-            hasError={!!registerError}
-            placeholder={t("EnterName")}
-            className="create-portal-input"
-          />
-          <div>
-            <Text className="error-text" fontSize="12px" fontWeight="400">
-              {registerError}
-            </Text>
-          </div>
-          <div style={{ marginTop: "6px", wordWrap: "break-word" }}>
+          <div className="create-portal-input-block">
             <Text
-              className="sub-text"
-              fontSize="12px"
-              fontWeight="400"
-            >{`${name}.${baseDomain}`}</Text>
+              fontSize="13px"
+              fontWeight="600"
+              style={{ paddingBottom: "5px" }}
+            >
+              {t("PortalName")}
+            </Text>
+            <TextInput
+              onChange={onHandleName}
+              value={name}
+              hasError={!!registerError}
+              placeholder={t("EnterName")}
+              className="create-portal-input"
+            />
+            <div>
+              <Text className="error-text" fontSize="12px" fontWeight="400">
+                {registerError}
+              </Text>
+            </div>
+            <div style={{ marginTop: "6px", wordWrap: "break-word" }}>
+              <Text
+                className="sub-text"
+                fontSize="12px"
+                fontWeight="400"
+              >{`${name}.${baseDomain}`}</Text>
+            </div>
           </div>
-        </div>
-        <div>
-          <Checkbox
-            className="create-portal-checkbox"
-            label={t("VisitSpace")}
-            onChange={() => setVisit((visit) => !visit)}
-            isChecked={visit}
-          />
+          <div>
+            <Checkbox
+              className="create-portal-checkbox"
+              label={t("VisitSpace")}
+              onChange={() => setVisit((visit) => !visit)}
+              isChecked={visit}
+            />
 
-          <Checkbox
-            label={t("RestrictAccess")}
-            onChange={() => setRestrictAccess((access) => !access)}
-            isChecked={restrictAccess}
-          />
-        </div>
+            <Checkbox
+              label={t("RestrictAccess")}
+              onChange={() => setRestrictAccess((access) => !access)}
+              isChecked={restrictAccess}
+            />
+          </div>
+        </StyledBodyContent>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -219,7 +223,7 @@ const CreatePortalDialog = () => {
           scale
         />
       </ModalDialog.Footer>
-    </StyledModal>
+    </ModalDialog>
   );
 };
 

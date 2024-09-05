@@ -35,8 +35,6 @@ import { TextInput } from "@docspace/shared/components/text-input";
 import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 
-import { ChangeNameContainer } from "./StyledChangeName";
-
 const StyledBodyContent = styled.div`
   display: flex;
   flex-direction: column;
@@ -118,7 +116,7 @@ const ChangeNameDialog = (props) => {
   };
 
   return (
-    <ChangeNameContainer
+    <ModalDialog
       isLoading={!ready}
       visible={visible}
       onClose={onCloseAction}
@@ -208,7 +206,7 @@ const ChangeNameDialog = (props) => {
           tabIndex={4}
         />
       </ModalDialog.Footer>
-    </ChangeNameContainer>
+    </ModalDialog>
   );
 };
 

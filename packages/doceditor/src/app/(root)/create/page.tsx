@@ -93,7 +93,7 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
 
   if (!templateId && fromFile) redirect(baseURL);
 
-  const { file, error } =
+  const res =
     fromFile && templateId
       ? await fileCopyAs(
           templateId,
@@ -104,6 +104,10 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
           toForm,
         )
       : await createFile(parentId, fileTitle, templateId, formId);
+
+  if (!res) return;
+
+  const { file, error } = res;
 
   if (!file) {
     fileError = error as unknown as Error;
@@ -121,7 +125,7 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
 
     return (
       <Editor
-        documentserverUrl={documentserverUrl.docServiceUrl}
+        documentserverUrl={documentserverUrl?.docServiceUrl ?? ""}
         errorMessage={error.message}
       />
     );

@@ -26,11 +26,11 @@
 
 import styled from "styled-components";
 
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+const StyledBodyContent = styled.div`
+  display: contents;
 
-const StyledModalDialog = styled(ModalDialog)`
   p {
     margin-bottom: 16px;
   }
 `;
-export default StyledModalDialog;
+export default StyledBodyContent;

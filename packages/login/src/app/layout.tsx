@@ -42,6 +42,8 @@ import {
 import "../styles/globals.scss";
 import Scripts from "@/components/Scripts";
 
+console.log("test action");
+
 export default async function RootLayout({
   children,
 }: {

@@ -192,11 +192,17 @@ const Share = (props: ShareProps) => {
 
       const expDate = moment(link.sharedTo.expirationDate);
 
+      const isRemoveOption = item.key === "remove";
+
+      const access = isRemoveOption
+        ? (item.access as ShareAccessRights)
+        : link.access;
+
       const res = editFileLink
         ? await editFileLink(
             infoPanelSelection.id,
             link.sharedTo.id,
-            link.access,
+            access,
             link.sharedTo.primary,
             item.internal || false,
             expDate,
@@ -204,11 +210,17 @@ const Share = (props: ShareProps) => {
         : await editExternalLink(
             infoPanelSelection.id,
             link.sharedTo.id,
-            link.access,
+            access,
             link.sharedTo.primary,
             item.internal || false,
             expDate,
           );
+
+      if (isRemoveOption) {
+        deleteLink(link.sharedTo.id);
+        toastr.success(t("Common:LinkRemoved"));
+        return;
+      }
       updateLink(link, res);
 
       copyShareLink(link.sharedTo.shareLink);

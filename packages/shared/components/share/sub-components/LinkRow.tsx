@@ -153,6 +153,7 @@ const LinkRow = ({
                 scaledOptions={false}
                 showDisabledItems
                 size={ComboBoxSize.content}
+                manualWidth="fit-content"
                 fillIcon={false}
                 modernView
                 isDisabled={isLoaded}

@@ -29,8 +29,8 @@ import AccessReviewReactSvgUrl from "PUBLIC_DIR/images/access.review.react.svg?u
 import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/custom.filter.react.svg?url";
 import AccessCommentReactSvgUrl from "PUBLIC_DIR/images/access.comment.react.svg?url";
 import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
-import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
-import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
+// import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
+// import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 
 import { ShareAccessRights } from "../../enums";
 import { TTranslation } from "../../types";
@@ -50,6 +50,12 @@ export const getShareOptions = (t: TTranslation) => {
       label: t("Common:SpaceUsersOnly", {
         productName: t("Common:ProductName"),
       }),
+    },
+    {
+      key: "remove",
+      internal: true,
+      access: ShareAccessRights.None,
+      label: t("Common:Remove"),
     },
   ];
 };
@@ -95,16 +101,16 @@ export const getAccessOptions = (
     //   label: t("Common:DenyAccess"),
     //   icon: EyeOffReactSvgUrl,
     // },
-    {
-      key: "separator",
-      isSeparator: true,
-    },
-    available.None && {
-      access: ShareAccessRights.None,
-      key: "remove",
-      label: t("Common:Remove"),
-      icon: RemoveReactSvgUrl,
-    },
+    // {
+    //   key: "separator",
+    //   isSeparator: true,
+    // },
+    // available.None && {
+    //   access: ShareAccessRights.None,
+    //   key: "remove",
+    //   label: t("Common:Remove"),
+    //   icon: RemoveReactSvgUrl,
+    // },
   ];
 
   const items: TOption[] = [];

@@ -25,18 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import dynamic from "next/dynamic";
 
-import { getBgPattern, getLogoUrl } from "@docspace/shared/utils/common";
+import { cookies, headers } from "next/headers";
+
+import { getBgPattern } from "@docspace/shared/utils/common";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 import SimpleNav from "@/components/SimpleNav";
-import { LoginContent, LoginFormWrapper } from "@/components/Login";
-import GreetingContainer from "@/components/GreetingContainer";
-import { getColorTheme, getSettings } from "@/utils/actions";
-import { cookies } from "next/headers";
+import { getColorTheme, getPortalCultures, getSettings } from "@/utils/actions";
+import { ContentWrapper, StyledPage } from "@/components/Layout.styled";
+import dynamic from "next/dynamic";
+import { TYPE_LINK_WITHOUT_LNG_COMBOBOX } from "@/utils/constants";
 
 const LanguageComboboxWrapper = dynamic(
   () => import("@/components/LanguageCombobox"),
@@ -59,32 +58,42 @@ export default async function Layout({
 
   const objectSettings = typeof settings === "string" ? undefined : settings;
 
-  const isRegisterContainerVisible = objectSettings?.enabledJoin;
-
   const culture =
     cookies().get("asc_language")?.value ?? objectSettings?.culture;
 
+  const hdrs = headers();
+  const type = hdrs.get("x-confirm-type") ?? "";
+
+  let isComboboxVisible = true;
+  if (
+    TYPE_LINK_WITHOUT_LNG_COMBOBOX?.includes(type) ||
+    objectSettings?.wizardToken
+  ) {
+    isComboboxVisible = false;
+  }
+
+  let cultures;
+  if (isComboboxVisible) {
+    cultures = await getPortalCultures();
+  }
+
   return (
     <div style={{ width: "100%", height: "100%" }}>
-      <SimpleNav culture={culture} />
-      <LoginFormWrapper id="login-page" bgPattern={bgPattern}>
+      <SimpleNav
+        culture={culture}
+        initialCultures={cultures}
+        isLanguageComboboxVisible={isComboboxVisible}
+      />
+      <ContentWrapper id="content-wrapper" bgPattern={bgPattern}>
         <div className="bg-cover" />
         <Scrollbar id="customScrollBar">
-          <LanguageComboboxWrapper />
-          <LoginContent>
-            <ColorTheme
-              themeId={ThemeId.LinkForgotPassword}
-              isRegisterContainerVisible={isRegisterContainerVisible}
-            >
-              <GreetingContainer
-                greetingSettings={objectSettings?.greetingSettings}
-                culture={culture}
-              />
-              {children}
-            </ColorTheme>
-          </LoginContent>
+          {isComboboxVisible && (
+            <LanguageComboboxWrapper initialCultures={cultures} />
+          )}
+
+          <StyledPage id="styled-page">{children}</StyledPage>
         </Scrollbar>
-      </LoginFormWrapper>
+      </ContentWrapper>
     </div>
   );
 }

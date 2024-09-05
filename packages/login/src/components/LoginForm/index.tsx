@@ -53,7 +53,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { thirdPartyLogin, checkConfirmLink } from "@docspace/shared/api/user";
 import { setWithCredentialsStatus } from "@docspace/shared/api/client";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
-import { RecaptchaType } from "@docspace/shared/enums";
+import { ButtonKeys, RecaptchaType } from "@docspace/shared/enums";
 import { getAvailablePortals } from "@docspace/shared/api/management";
 import { getCookie } from "@docspace/shared/utils";
 import { deleteCookie } from "@docspace/shared/utils/cookie";
@@ -103,18 +103,14 @@ const LoginForm = ({
   const message = searchParams.get("message");
   const confirmedEmail = searchParams.get("confirmedEmail");
   const authError = searchParams.get("authError");
-  const loginData = searchParams.get("loginData");
   const referenceUrl = searchParams.get("referenceUrl");
 
   const isDesktop =
     typeof window !== "undefined" && window["AscDesktopEditor"] !== undefined;
 
-  const [emailFromInvitation, setEmailFromInvitation] = useState(
-    getEmailFromInvitation(loginData),
-  );
-  const [identifier, setIdentifier] = useState(
-    getEmailFromInvitation(loginData),
-  );
+  const emailFromInvitation = getEmailFromInvitation();
+
+  const [identifier, setIdentifier] = useState(getEmailFromInvitation());
 
   const [isEmailErrorShow, setIsEmailErrorShow] = useState(false);
   const [errorText, setErrorText] = useState("");
@@ -123,7 +119,7 @@ const LoginForm = ({
   const [identifierValid, setIdentifierValid] = useState(true);
   const [password, setPassword] = useState("");
 
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(true);
   const [isLdapLoginChecked, setIsLdapLoginChecked] = useState(
     ldapEnabled || false,
   );
@@ -135,12 +131,8 @@ const LoginForm = ({
   const hCaptchaRef = useRef<HCaptcha>(null);
 
   useLayoutEffect(() => {
-    const email = getEmailFromInvitation(loginData);
-
-    setIdentifier(email);
-    setEmailFromInvitation(email);
     frameCallCommand("setIsLoaded");
-  }, [loginData]);
+  }, []);
 
   const authCallback = useCallback(
     async (profile: string) => {
@@ -272,7 +264,7 @@ const LoginForm = ({
 
     const pwd = isLdapLoginChecked ? pass : undefined;
 
-    const confirmData = getConfirmDataFromInvitation(loginData);
+    const confirmData = getConfirmDataFromInvitation();
 
     isDesktop && checkPwd();
     const session = !isChecked;
@@ -319,7 +311,10 @@ const LoginForm = ({
         }
         return res;
       })
-      .then((res: string | object) => {
+      .then((res?: string | object) => {
+        const isLoginData = sessionStorage.getItem("loginData");
+        if (isLoginData) sessionStorage.removeItem("loginData");
+
         const isConfirm = typeof res === "string" && res.includes("confirm");
         const redirectPath =
           referenceUrl || sessionStorage.getItem("referenceUrl");
@@ -376,7 +371,6 @@ const LoginForm = ({
     router,
     clientId,
     referenceUrl,
-    loginData,
   ]);
 
   const onBlurEmail = () => {
@@ -416,7 +410,7 @@ const LoginForm = ({
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Enter") {
+      if (e.key === ButtonKeys.enter) {
         if (isModalOpen) return;
 
         onSubmit();
@@ -430,6 +424,18 @@ const LoginForm = ({
     };
   }, [isModalOpen, onSubmit]);
 
+  useEffect(() => {
+    const onClearStorage = () => {
+      const isLoginData = sessionStorage.getItem("loginData");
+      if (isLoginData) sessionStorage.removeItem("loginData");
+    };
+
+    window.addEventListener("beforeunload", onClearStorage);
+    return () => {
+      window.removeEventListener("beforeunload", onClearStorage);
+    };
+  }, []);
+
   const passwordErrorMessage = errorMessage();
 
   if (authError && ready) {
@@ -439,6 +445,12 @@ const LoginForm = ({
 
   return (
     <form className="auth-form-container">
+      {!emailFromInvitation && !client && (
+        <Text fontSize="16px" fontWeight="600" className="sign-in-subtitle">
+          {t("Common:LoginButton")}
+        </Text>
+      )}
+
       {client && (
         <OAuthClientInfo
           name={client.name}
@@ -516,7 +528,7 @@ const LoginForm = ({
         label={
           isLoading ? t("Common:LoadingProcessing") : t("Common:LoginButton")
         }
-        tabIndex={1}
+        tabIndex={5}
         isDisabled={isLoading}
         isLoading={isLoading}
         onClick={onSubmit}

@@ -76,6 +76,7 @@ export type TFrameEvents = {
   onSignOut: null | ((e: Event) => void);
   onDownload: null | ((e: Event) => void);
   onNoAccess: null | ((e: Event) => void);
+  onNotFound: null | ((e: Event) => void);
 };
 
 export type TFrameConfig = {

@@ -53,9 +53,9 @@ const Sdk = ({
   user,
   updateProfileCulture,
   getRoomsIcon,
-  fetchExternalLinks,
   getFilePrimaryLink,
   getFilesSettings,
+  getPrimaryLink,
 }) => {
   const [isDataReady, setIsDataReady] = useState(false);
 
@@ -111,17 +111,19 @@ const Sdk = ({
 
   useEffect(() => {
     if (window.parent && !frameConfig?.frameId && isLoaded) {
-      callCommand("setConfig");
+      callCommand();
     }
   }, [callCommand, isLoaded]);
 
   useEffect(() => {
     if (isDataReady) {
-      callCommandLoad("setIsLoaded");
+      callCommandLoad();
     }
   }, [callCommandLoad, isDataReady]);
 
   useEffect(() => {
+    if (window.ClientConfig && window.parent)
+      window.ClientConfig.isFrame = true;
     getFilesSettings();
   }, []);
 
@@ -200,20 +202,11 @@ const Sdk = ({
         (data[0].roomType === RoomsType.CustomRoom && data[0].shared) ||
         (data[0].roomType === RoomsType.FormRoom && data[0].shared)
       ) {
-        const links = await fetchExternalLinks(data[0].id);
+        const link = await getPrimaryLink(data[0].id);
 
-        const requestTokens = links.map((link) => {
-          const { id, title, requestToken, primary } = link.sharedTo;
+        const { id, title, requestToken, primary } = link.sharedTo;
 
-          return {
-            id,
-            primary,
-            title,
-            requestToken,
-          };
-        });
-
-        data[0].requestTokens = requestTokens;
+        data[0].requestTokens = [{ id, primary, title, requestToken }];
       }
 
       frameCallEvent({ event: "onSelectCallback", data });
@@ -321,7 +314,6 @@ export const Component = inject(
     settingsStore,
     filesSettingsStore,
     peopleStore,
-    publicRoomStore,
     userStore,
     filesStore,
   }) => {
@@ -331,8 +323,7 @@ export const Component = inject(
     const { loadCurrentUser, user } = userStore;
     const { updateProfileCulture } = peopleStore.targetUserStore;
     const { getIcon, getRoomsIcon, getFilesSettings } = filesSettingsStore;
-    const { fetchExternalLinks } = publicRoomStore;
-    const { getFilePrimaryLink } = filesStore;
+    const { getFilePrimaryLink, getPrimaryLink } = filesStore;
 
     return {
       theme,
@@ -347,9 +338,9 @@ export const Component = inject(
       isLoaded,
       updateProfileCulture,
       user,
-      fetchExternalLinks,
       getFilePrimaryLink,
       getFilesSettings,
+      getPrimaryLink,
     };
   },
 )(

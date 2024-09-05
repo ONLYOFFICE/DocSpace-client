@@ -24,15 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { inject } from "mobx-react";
+
 import { Consumer } from "@docspace/shared/utils";
+import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
+
 import { Table } from "./TableView/TableView";
 import AuditRowContainer from "./RowView/AuditRowContainer";
 import HistoryMainContent from "../sub-components/HistoryMainContent";
 
+import EmptyScreenRecentUrl from "PUBLIC_DIR/images/empty_screen_recent.svg?url";
+import EmptyScreenRecentDarkUrl from "PUBLIC_DIR/images/empty_screen_recent_dark.svg?url";
+import AuditTrailLoader from "./AuditTrailLoader";
+
+let timerId = null;
 const AuditTrail = (props) => {
   const {
     t,
@@ -48,11 +56,24 @@ const AuditTrail = (props) => {
     isLoadingDownloadReport,
   } = props;
 
+  const [isLoading, setIsLoading] = useState(!auditTrailUsers.length);
+  const [isShowLoader, setIShowLoader] = useState(false);
+  const initAudit = async () => {
+    timerId = setTimeout(() => {
+      if (!auditTrailUsers.length) setIShowLoader(true);
+    }, 500);
+
+    await getAuditTrail();
+
+    clearTimeout(timerId);
+    timerId = null;
+    setIShowLoader(false);
+    setIsLoading(false);
+  };
+
   useEffect(() => {
     setDocumentTitle(t("AuditTrailNav"));
-
-    getAuditTrail();
-
+    initAudit();
     getLifetimeAuditSettings();
   }, []);
 
@@ -83,6 +104,27 @@ const AuditTrail = (props) => {
       </div>
     );
   };
+
+  if (isShowLoader) {
+    return <AuditTrailLoader />;
+  }
+
+  if (isLoading) return <></>;
+
+  if (auditTrailUsers.length === 0) {
+    return (
+      <EmptyScreenContainer
+        descriptionText={t("AuditSubheader", {
+          productName: t("Common:ProductName"),
+        })}
+        imageSrc={
+          theme.isBase ? EmptyScreenRecentUrl : EmptyScreenRecentDarkUrl
+        }
+        headerText={t("NoEventsHereYet")}
+      />
+    );
+  }
+
   return (
     <>
       {securityLifetime && securityLifetime.auditTrailLifeTime && (

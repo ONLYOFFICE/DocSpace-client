@@ -388,12 +388,10 @@ class SsoFormStore {
     this.isSubmitLoading = true;
 
     try {
-      const res = await submitSsoForm(data);
+      await submitSsoForm(data);
       toastr.success(t("Settings:SuccessfullySaveSettingsMessage"));
       this.isSubmitLoading = false;
-      this.setSpMetadata(true);
-      this.setDefaultSettings(res);
-      this.setIsSsoEnabled(settings.enableSso);
+      this.load();
     } catch (err) {
       toastr.error(err);
       console.error(err);
@@ -902,6 +900,7 @@ class SsoFormStore {
   };
 
   checkRequiredFields = () => {
+    this.setError("spLoginLabel", this.spLoginLabel);
     this.setError("entityId", this.entityId);
     this.ssoBinding === BINDING_POST &&
       this.setError("ssoUrlPost", this.ssoUrlPost);
@@ -965,6 +964,7 @@ class SsoFormStore {
 
   get isRequiredFieldsEmpty() {
     return (
+      this.spLoginLabel.trim().length === 0 ||
       this.entityId.trim().length === 0 ||
       (this.ssoBinding === BINDING_POST &&
         this.ssoUrlPost.trim().length === 0) ||

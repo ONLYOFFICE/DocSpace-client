@@ -153,13 +153,13 @@ const StyledFilterBlock = styled.div`
   background: ${(props) => props.theme.filterInput.filter.background};
 
   @media ${tablet} {
-    max-width: calc(100% - 69px);
+    max-width: 100%;
   }
 
   @media ${mobile} {
     bottom: 0;
     top: unset;
-    height: calc(100% - 64px);
+    height: 100%;
     width: 100%;
     max-width: 100%;
   }

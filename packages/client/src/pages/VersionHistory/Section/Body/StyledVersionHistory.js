@@ -31,7 +31,8 @@ import { Base } from "@docspace/shared/themes";
 
 const StyledBody = styled.div`
   height: 100%;
-  width: 100%;
+  width: calc(100% + 16px);
+
   .version-list {
     height: 100%;
     width: 100%;

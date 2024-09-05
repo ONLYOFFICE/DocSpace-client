@@ -191,7 +191,7 @@ export default inject(({ setup, settingsStore, importAccountsStore }) => {
     filteredUsers,
   };
 })(
-  withTranslation(["Common, SMTPSettings, Settings"])(
+  withTranslation(["Common", "SMTPSettings", "Settings"])(
     observer(NextcloudWorkspace),
   ),
 );

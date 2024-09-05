@@ -43,7 +43,7 @@ const BetaBadge = ({
   currentDeviceType,
   withOutFeedbackLink = false,
 }: BetaBadgeProps) => {
-  const { t } = useTranslation(["Common,Settings"]);
+  const { t } = useTranslation(["Common", "Settings"]);
 
   const tooltipDescription = (
     <>

@@ -158,4 +158,4 @@ export default inject(({ settingsStore, accessRightsStore, oformsStore }) => ({
   categoryFilterLoaded: oformsStore.categoryFilterLoaded,
   languageFilterLoaded: oformsStore.languageFilterLoaded,
   oformFilesLoaded: oformsStore.oformFilesLoaded,
-}))(withTranslation("Common, FormGallery")(observer(SectionBodyContent)));
+}))(withTranslation("Common", "FormGallery")(observer(SectionBodyContent)));

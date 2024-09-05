@@ -280,4 +280,4 @@ export default inject(({ setup, settingsStore, importAccountsStore }) => {
     setUsers,
     filteredUsers,
   };
-})(withTranslation(["Common, Settings"])(observer(OnlyofficeWorkspace)));
+})(withTranslation(["Common", "Settings"])(observer(OnlyofficeWorkspace)));

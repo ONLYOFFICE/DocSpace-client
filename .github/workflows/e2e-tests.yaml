@@ -2,10 +2,10 @@ name: E2e tests
 
 on:
   push:
-    branches: [feature/ssr-confirm-test]
+    branches: [develop]
     paths: [packages/login/**,packages/shared/**]
   pull_request:
-    branches: [feature/ssr-confirm-test]
+    branches: [develop]
     paths: [packages/login/**,packages/shared/**]
 jobs:
   playwright:

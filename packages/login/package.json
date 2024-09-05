@@ -11,8 +11,8 @@
     "lint": "next lint",
     "clean": "shx rm -rf .next",
     "deploy": "shx --silent mkdir -p ../../../publish/web/login && shx --silent mkdir -p ../../../publish/web/login/.next && shx --silent mkdir -p ../../../publish/web/login/node_modules && shx --silent mkdir -p ../../../publish/web/login/.next/static && shx cp -r .next/standalone/node_modules/* ../../../publish/web/login/node_modules && shx cp -r .next/static/* ../../../publish/web/login/.next/static    && shx cp -r .next/standalone/packages/login/.next/* ../../../publish/web/login/.next &&  shx cp -f server.prod.js ../../../publish/web/login/server.js",
-    "test:build": "node ./scripts/buildTranslations.js && TEST=true next build",
-    "test:start": "PORT=5111 NODE_ENV=development TEST=true node server.js",
+    "test:build": "node ./scripts/buildTranslations.js && E2E_TEST=true next build",
+    "test:start": "PORT=5111 NODE_ENV=production E2E_TEST=true node server.js",
     "test:e2e": "npx playwright test",
     "test:e2e:ui": "npx playwright test --ui"
   },

@@ -64,8 +64,7 @@ import {
   settingsSuccessWithAuthWizard,
 } from "@docspace/shared/__mocks__/e2e";
 
-
-const IS_TEST = process.env.TEST;
+const IS_TEST = process.env.E2E_TEST;
 
 export const checkIsAuthenticated = async () => {
   const [request] = createRequest(["/authentication"], [["", ""]], "GET");

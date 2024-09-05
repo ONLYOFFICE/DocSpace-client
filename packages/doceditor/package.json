@@ -8,7 +8,7 @@
     "start-prod": "NODE_ENV=production node server.js",
     "start:internal": "node ./scripts/buildTranslations.js && NODE_ENV=development API_HOST=http://127.0.0.1 node server.js",
     "start-prod:internal": "NODE_ENV=production API_HOST=http://127.0.0.1 node server.js",
-    "lint": "next lint",
+    "lint": "next lint --max-warnings=0",
     "clean": "shx rm -rf .next",
     "deploy": "shx --silent mkdir -p ../../../publish/web/editor && shx --silent mkdir -p ../../../publish/web/editor/.next && shx --silent mkdir -p ../../../publish/web/editor/config && shx cp -r config/* ../../../publish/web/editor/config && shx --silent mkdir -p ../../../publish/web/editor/node_modules && shx --silent mkdir -p ../../../publish/web/editor/.next/static && shx cp -r .next/standalone/node_modules/* ../../../publish/web/editor/node_modules && shx cp -r .next/static/* ../../../publish/web/editor/.next/static    && shx cp -r .next/standalone/packages/doceditor/.next/* ../../../publish/web/editor/.next &&  shx cp -f server.prod.js ../../../publish/web/editor/server.js"
   },

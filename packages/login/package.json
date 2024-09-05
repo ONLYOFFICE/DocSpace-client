@@ -8,7 +8,7 @@
     "start-prod": "NODE_ENV=production node server.js",
     "start:internal": "node ./scripts/buildTranslations.js && NODE_ENV=development API_HOST=http://127.0.0.1 node server.js",
     "start-prod:internal": "NODE_ENV=production API_HOST=http://127.0.0.1 node server.js",
-    "lint": "next lint",
+    "lint": "next lint --max-warnings=0",
     "clean": "shx rm -rf .next",
     "deploy": "shx --silent mkdir -p ../../../publish/web/login && shx --silent mkdir -p ../../../publish/web/login/.next && shx --silent mkdir -p ../../../publish/web/login/node_modules && shx --silent mkdir -p ../../../publish/web/login/.next/static && shx cp -r .next/standalone/node_modules/* ../../../publish/web/login/node_modules && shx cp -r .next/static/* ../../../publish/web/login/.next/static    && shx cp -r .next/standalone/packages/login/.next/* ../../../publish/web/login/.next &&  shx cp -f server.prod.js ../../../publish/web/login/server.js",
     "test:build": "node ./scripts/buildTranslations.js && E2E_TEST=true next build",

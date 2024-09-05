@@ -89,12 +89,12 @@ export const getAccessOptions = (
       label: t("Common:ReadOnly"),
       icon: EyeReactSvgUrl,
     },
-    available.Restrict && {
-      access: ShareAccessRights.DenyAccess,
-      key: "deny-access",
-      label: t("Common:DenyAccess"),
-      icon: EyeOffReactSvgUrl,
-    },
+    // available.Restrict && {
+    //   access: ShareAccessRights.DenyAccess,
+    //   key: "deny-access",
+    //   label: t("Common:DenyAccess"),
+    //   icon: EyeOffReactSvgUrl,
+    // },
     {
       key: "separator",
       isSeparator: true,

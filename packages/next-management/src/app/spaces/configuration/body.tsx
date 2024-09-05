@@ -70,7 +70,7 @@ export const Body = ({ domainValidator }) => {
       <Text fontSize="13px" fontWeight={600}>
         {t("Common:Domain")}
       </Text>
-      <Text color="#A3A9AE">(example.com)</Text>
+      <Text className="domain-description">(example.com)</Text>
     </>
   );
 

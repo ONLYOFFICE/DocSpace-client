@@ -28,6 +28,7 @@ import { useTranslation } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
 import { getConvertedSize } from "@docspace/shared/utils/common";
+import { globalColors } from "@docspace/shared/themes";
 
 import { StyledRowContent } from "./multiple.styled";
 
@@ -53,8 +54,8 @@ export const RowContent = ({ item, tenantAlias }) => {
   return (
     <StyledRowContent
       sectionWidth={"620px"}
-      sideColor="#A3A9AE"
-      nameColor="#D0D5DA"
+      sideColor={globalColors.gray}
+      nameColor={globalColors.grayStrong}
       className="spaces_row-content"
     >
       <div className="user-container-wrapper">
@@ -68,7 +69,7 @@ export const RowContent = ({ item, tenantAlias }) => {
         fontSize="14px"
         fontWeight={600}
         truncate={true}
-        color="#A3A9AE"
+        color={globalColors.gray}
         className="spaces_row-current"
       >
         {isCurrentPortal && t("CurrentSpace")}

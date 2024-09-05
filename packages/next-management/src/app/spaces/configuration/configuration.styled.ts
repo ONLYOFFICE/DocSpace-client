@@ -51,6 +51,10 @@ export const StyledBody = styled.div`
     gap: 4px;
   }
 
+  .domain-description {
+    color: ${(props) => props.theme.management.textColor};
+  }
+
   @media ${mobile} {
     max-width: 100%;
   }

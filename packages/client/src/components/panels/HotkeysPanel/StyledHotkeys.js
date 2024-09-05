@@ -32,29 +32,15 @@ import { tablet, mobile } from "@docspace/shared/utils";
 const StyledHotkeysPanel = styled.div`
   .hotkeys-panel {
     .scroll-body {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              padding-left: 0 !important;
-            `
-          : css`
-              padding-right: 0 !important;
-            `}
+      padding-inline-end: 0 !important;
     }
   }
 
   .hotkeys_sub-header {
     font-weight: 700;
     font-size: 16px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-right: 16px;
-          `
-        : css`
-            padding-left: 16px;
-          `}
-    margin: 20px 0 6px 0;
+    padding-inline-start: 16px;
+    margin: 20px 0 6px;
   }
 
   .hotkeys_row {
@@ -65,7 +51,7 @@ const StyledHotkeysPanel = styled.div`
     border-bottom: none;
 
     .row_content {
-      margin: 12px 0 12px 0px;
+      margin: 12px 0 12px;
 
       @media ${tablet} {
         height: unset;
@@ -89,24 +75,11 @@ const StyledHotkeysPanel = styled.div`
   }
 
   .hotkeys-key {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin: 0 0 0 auto;
-          `
-        : css`
-            margin: 0 auto 0 0;
-          `}
+    margin-block: 0;
+    margin-inline: 0 auto;
 
     @media ${mobile} {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin: 0 auto 0 0;
-            `
-          : css`
-              margin: 0 0 0 auto;
-            `}
+      margin-inline: auto 0;
       width: fit-content;
     }
   }

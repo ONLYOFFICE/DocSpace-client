@@ -37,23 +37,16 @@ const StyledAccountsItemTitle = styled.div`
   justify-content: start;
   gap: 16px;
   position: fixed;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: -20px;
-          padding: 24px 20px 24px 0;
-        `
-      : css`
-          margin-left: -20px;
-          padding: 24px 0 24px 20px;
-        `}
+  margin-inline-start: -20px;
+  padding-block: 24px;
+  padding-inline: 20px 0;
   width: calc(100% - 40px);
   background: ${(props) => props.theme.infoPanel.backgroundColor};
   z-index: 100;
 
   @media ${tablet} {
     width: 440px;
-    padding: 24px 20px 24px 20px;
+    padding: 24px 20px;
   }
 
   @media ${mobile} {
@@ -78,14 +71,7 @@ const StyledAccountsItemTitle = styled.div`
 
     .badges {
       height: 22px;
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: 8px;
-            `
-          : css`
-              margin-left: 8px;
-            `}
+      margin-inline-start: 8px;
     }
 
     .info-text__name {
@@ -109,28 +95,15 @@ const StyledAccountsItemTitle = styled.div`
   }
 
   .context-button {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: auto;
-          `
-        : css`
-            margin-left: auto;
-          `}
+    margin-inline-start: auto;
   }
 `;
 
 StyledAccountsItemTitle.defaultProps = { theme: Base };
 
 const StyledAccountContent = styled.div`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin: 0px 0 0 auto;
-        `
-      : css`
-          margin: 0px auto 0 0;
-        `}
+  margin-block: 0;
+  margin-inline: 0 auto;
 
   padding-top: 128px;
 
@@ -153,24 +126,10 @@ const StyledAccountContent = styled.div`
     align-items: center;
 
     .type-combobox {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: -8px;
-            `
-          : css`
-              margin-left: -8px;
-            `}
+      margin-inline-start: -8px;
 
       .combo-button {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                padding-right: 8px;
-              `
-            : css`
-                padding-left: 8px;
-              `}
+        padding-inline-start: 8px;
       }
 
       .backdrop-active {

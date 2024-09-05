@@ -27,7 +27,7 @@
 import { thirdPartyLogin } from "@docspace/shared/utils/loginUtils";
 import { Nullable, TTranslation } from "@docspace/shared/types";
 
-import { MessageKey } from "./enums";
+import { MessageKey, OAuth2ErrorKey } from "./enums";
 
 export async function oAuthLogin(profile: string) {
   let isSuccess = false;
@@ -106,21 +106,36 @@ export const getMessageKeyTranslate = (t: TTranslation, message: string) => {
   }
 };
 
-export const getInvitationLinkData = (encodeString: string) => {
-  const fromBinaryStr = (encodeString: string) => {
-    const decodeStr = atob(encodeString);
+export const getOAuthMessageKeyTranslation = (
+  t: TTranslation,
+  messageKey?: OAuth2ErrorKey,
+) => {
+  if (!messageKey) return;
+  switch (messageKey) {
+    case OAuth2ErrorKey.asc_retrieval_error:
+      return t("Common:SomethingWentWrong");
+    case OAuth2ErrorKey.client_disabled_error:
+      return t("Errors:OAuthApplicationDisabled");
+    case OAuth2ErrorKey.client_not_found_error:
+      return t("Errors:OAuthApplicationEmpty");
+    case OAuth2ErrorKey.client_permission_denied_error:
+      return t("Common:AccessDenied");
+    case OAuth2ErrorKey.missing_client_id_error:
+      return t("Errors:OAuthClientEmpty");
+    case OAuth2ErrorKey.something_went_wrong_error:
+      return t("Common:UnknownError");
+    case OAuth2ErrorKey.missing_asc_cookie_error:
+    default:
+      return t("Common:Error");
+  }
+};
 
-    const decoder = new TextDecoder();
-    const charCodeArray = Uint8Array.from(
-      { length: decodeStr.length },
-      (element, index) => decodeStr.charCodeAt(index),
-    );
+export const getInvitationLinkData = () => {
+  const loginData = sessionStorage.getItem("loginData");
 
-    return decoder.decode(charCodeArray);
-  };
+  if (!loginData) return;
 
-  const decodeString = fromBinaryStr(encodeString);
-  const queryParams = JSON.parse(decodeString) as {
+  const queryParams = JSON.parse(loginData) as {
     email: string;
     roomName: string;
     firstName: string;
@@ -137,24 +152,34 @@ export const getInvitationLinkData = (encodeString: string) => {
   return queryParams;
 };
 
-export const getEmailFromInvitation = (encodeString: Nullable<string>) => {
-  if (!encodeString) return "";
-
-  const queryParams = getInvitationLinkData(encodeString);
+export const getEmailFromInvitation = () => {
+  const queryParams = getInvitationLinkData();
 
   if (!queryParams || !queryParams.email) return "";
 
   return queryParams.email;
 };
 
-export const getConfirmDataFromInvitation = (
-  encodeString: Nullable<string>,
-) => {
-  if (!encodeString) return "";
+export const generateOAuth2ReferenceURl = (clientId: string) => {
+  return `/login/consent?clientId=${clientId}`;
+};
 
-  const queryParams = getInvitationLinkData(encodeString);
+export const getConfirmDataFromInvitation = () => {
+  const queryParams = getInvitationLinkData();
 
   if (!queryParams || !queryParams.linkData) return {};
 
   return queryParams.linkData;
+};
+
+export const getStringFromSearchParams = (searchParams: {
+  [key: string]: string;
+}): string => {
+  let stringSearchParams = "";
+
+  for (const [key, value] of Object.entries(searchParams)) {
+    stringSearchParams += `&${key}=${value}`;
+  }
+
+  return stringSearchParams.slice(1);
 };

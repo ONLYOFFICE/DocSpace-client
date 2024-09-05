@@ -24,9 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { PROVIDERS_DATA } from "@docspace/shared/constants";
+import { LANGUAGE, PROVIDERS_DATA } from "@docspace/shared/constants";
 
 import {
+  getOAuthClient,
   getCapabilities,
   getSettings,
   getSSO,
@@ -37,14 +38,26 @@ import LoginForm from "@/components/LoginForm";
 import ThirdParty from "@/components/ThirdParty";
 import RecoverAccess from "@/components/RecoverAccess";
 import Register from "@/components/Register";
+import { GreetingLoginContainer } from "@/components/GreetingContainer";
+import { FormWrapper } from "@docspace/shared/components/form-wrapper";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { cookies } from "next/headers";
 
-async function Page() {
-  const [settings, thirdParty, capabilities, ssoSettings] = await Promise.all([
-    getSettings(),
-    getThirdPartyProviders(),
-    getCapabilities(),
-    getSSO(),
-  ]);
+async function Page({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string };
+}) {
+  const clientId = searchParams.client_id;
+
+  const [settings, thirdParty, capabilities, ssoSettings, client] =
+    await Promise.all([
+      getSettings(),
+      getThirdPartyProviders(),
+      getCapabilities(),
+      getSSO(),
+      clientId ? getOAuthClient(clientId) : undefined,
+    ]);
 
   const ssoUrl = capabilities ? capabilities.ssoUrl : "";
   const hideAuthPage = ssoSettings ? ssoSettings.hideAuthPage : false;
@@ -60,39 +73,65 @@ async function Page() {
           })
           .some((item) => !!item);
 
+  const isRegisterContainerVisible =
+    typeof settings === "string" ? undefined : settings?.enabledJoin;
+
+  const settingsCulture =
+    typeof settings === "string" ? undefined : settings?.culture;
+
+  const culture = cookies().get(LANGUAGE)?.value ?? settingsCulture;
+
   return (
-    <Login>
+    <>
       {settings && typeof settings !== "string" && (
-        <>
-          <LoginForm
-            hashSettings={settings?.passwordHash}
-            cookieSettingsEnabled={settings?.cookieSettingsEnabled}
-            reCaptchaPublicKey={settings?.recaptchaPublicKey}
-            reCaptchaType={settings?.recaptchaType}
-            ldapDomain={capabilities?.ldapDomain}
-            ldapEnabled={capabilities?.ldapEnabled || false}
-          />
-          <ThirdParty
-            thirdParty={thirdParty}
-            capabilities={capabilities}
-            ssoExists={ssoExists}
-            ssoUrl={ssoUrl}
-            hideAuthPage={hideAuthPage}
-            oauthDataExists={oauthDataExists}
-          />
-          {settings.enableAdmMess && <RecoverAccess />}
-          {settings.enabledJoin && (
-            <Register
-              id="login_register"
-              enabledJoin
-              trustedDomains={settings.trustedDomains}
-              trustedDomainsType={settings.trustedDomainsType}
-              isAuthenticated={false}
+        <ColorTheme
+          themeId={ThemeId.LinkForgotPassword}
+          isRegisterContainerVisible={isRegisterContainerVisible}
+        >
+          <>
+            <GreetingLoginContainer
+              greetingSettings={settings.greetingSettings}
+              culture={culture}
             />
-          )}
-        </>
+
+            <FormWrapper id="login-form">
+              <Login>
+                <LoginForm
+                  hashSettings={settings?.passwordHash}
+                  cookieSettingsEnabled={settings?.cookieSettingsEnabled}
+                  clientId={clientId}
+                  client={client}
+                  reCaptchaPublicKey={settings?.recaptchaPublicKey}
+                  reCaptchaType={settings?.recaptchaType}
+                  ldapDomain={capabilities?.ldapDomain}
+                  ldapEnabled={capabilities?.ldapEnabled || false}
+                />
+                {!clientId && (
+                  <ThirdParty
+                    thirdParty={thirdParty}
+                    capabilities={capabilities}
+                    ssoExists={ssoExists}
+                    ssoUrl={ssoUrl}
+                    hideAuthPage={hideAuthPage}
+                    oauthDataExists={oauthDataExists}
+                  />
+                )}
+                {settings.enableAdmMess && <RecoverAccess />}
+                {settings.enabledJoin && (
+                  <Register
+                    id="login_register"
+                    enabledJoin
+                    trustedDomains={settings.trustedDomains}
+                    trustedDomainsType={settings.trustedDomainsType}
+                    isAuthenticated={false}
+                  />
+                )}
+              </Login>
+            </FormWrapper>
+          </>
+        </ColorTheme>
       )}
-    </Login>
+    </>
   );
 }
 

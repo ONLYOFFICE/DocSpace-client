@@ -33,10 +33,7 @@ import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
 import { classNames, getLastColumn } from "@docspace/shared/utils";
-import {
-  StyledBadgesContainer,
-  StyledQuickButtonsContainer,
-} from "../StyledTable";
+import { StyledBadgesContainer } from "../StyledTable";
 
 const RecentRowDataComponent = (props) => {
   const {
@@ -58,7 +55,6 @@ const RecentRowDataComponent = (props) => {
     inProgress,
     showHotkeyBorder,
     badgesComponent,
-    quickButtonsComponent,
     tableStorageName,
   } = props;
 
@@ -215,26 +211,6 @@ const RecentRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-        </TableCell>
-      ) : (
-        <div />
-      )}
-      {quickButtonsColumnIsEnabled ? (
-        <TableCell
-          style={
-            !quickButtonsColumnIsEnabled
-              ? { background: "none" }
-              : dragStyles.style
-          }
-          {...selectionProp}
-          className={classNames(
-            selectionProp?.className,
-            "table-container_quick-buttons-wrapper",
-          )}
-        >
-          <StyledQuickButtonsContainer>
-            {quickButtonsComponent}
-          </StyledQuickButtonsContainer>
         </TableCell>
       ) : (
         <div />

@@ -98,9 +98,8 @@ const EditingWrapper = styled.div`
 
       height: 43px;
       bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 9px 8px 9px 8px;
+      inset-inline: 0;
+      padding: 9px 8px;
     `}
 
 
@@ -120,8 +119,7 @@ const EditingWrapper = styled.div`
     font-weight: 600;
     margin: 0;
     font-family: ${(props) => props.theme.fontFamily};
-    text-align: ${({ theme }) =>
-      theme.interfaceDirection === "rtl" ? `right` : `left`};
+    text-align: start;
     color: ${(props) => props.theme.filesEditingWrapper.color};
     background: ${(props) =>
       props.theme.filesEditingWrapper.row.itemBackground} !important;
@@ -129,14 +127,7 @@ const EditingWrapper = styled.div`
     ${(props) =>
       props.viewAs === "tile" &&
       css`
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-left: 2px;
-              `
-            : css`
-                margin-right: 2px;
-              `}
+        margin-inline-end: 2px;
         border: none;
         background: none;
       `};
@@ -144,20 +135,13 @@ const EditingWrapper = styled.div`
     ${(props) =>
       props.isUpdatingRowItem &&
       css`
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-right: 0;
-              `
-            : css`
-                margin-left: 0;
-              `}
+        margin-inline-start: 0;
         display: flex;
         align-items: center;
         background: none !important;
       `}
 
-    ${(props) => props.viewAs === "table" && `padding-left: 12px`}
+    ${(props) => props.viewAs === "table" && `padding-inline-start: 12px`}
 
     ${(props) =>
       props.viewAs === "tile" &&
@@ -174,32 +158,20 @@ const EditingWrapper = styled.div`
         }
       `};
 
-    ${({ isDisabled }) => isDisabled && "background-color: #fff"}
+    ${({ isDisabled }) =>
+      isDisabled &&
+      `background-color: ${(props) => props.theme.filesEditingWrapper.disabledBackground}`}
   }
 
   .edit-button {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 8px;
-          `
-        : css`
-            margin-left: 8px;
-          `}
+    margin-inline-start: 8px;
     height: 32px;
-    padding: 0px 7px 0px 7px;
+    padding: 0px 7px;
 
     ${(props) =>
       props.viewAs === "tile" &&
       css`
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-right: 0;
-              `
-            : css`
-                margin-left: 0;
-              `}
+        margin-inline-start: 0;
         background: ${(props) =>
           props.theme.filesEditingWrapper.tile.itemBackground};
         border: ${(props) =>

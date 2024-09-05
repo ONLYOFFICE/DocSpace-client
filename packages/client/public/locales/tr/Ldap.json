@@ -41,7 +41,6 @@
   "LdapSendWelcomeLetter": "Hoş geldiniz yazısı gönderin",
   "LdapSendWelcomeLetterTooltip": "İşaretlenirse tüm yeni kullanıcılar hoş geldiniz yazısı alır. Yalnızca Posta Özelliği LDAP ile eşleştirildiğinde kullanılabilir.",
   "LdapServer": "Sunucu",
-  "LdapServerTooltip": "LDAP sunucu URL'sini bağlantı noktası numarası olmadan girin, örneğin LDAP://mycompany.com.",
   "LdapSettings": "LDAP ayarları",
   "LdapSettingsCertCnNoMatch": "Sertifika adı ana bilgisayar adıyla eşleşmiyor",
   "LdapSettingsCertExpired": "Sertifikanın süresi doldu",

@@ -31,6 +31,7 @@ import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Badge } from "@docspace/shared/components/badge";
+import { globalColors } from "@docspace/shared/themes";
 import { mobile } from "@docspace/shared/utils";
 import { UnavailableStyles } from "../../../../utils/commonSettingsStyles";
 
@@ -58,14 +59,7 @@ const StyledWrapper = styled.div`
     .toggle-caption_title {
       display: flex;
       .toggle-caption_title_badge {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-right: 4px;
-              `
-            : css`
-                margin-left: 4px;
-              `}
+        margin-inline-start: 4px;
         cursor: auto;
       }
     }
@@ -77,13 +71,17 @@ const StyledWrapper = styled.div`
 const ToggleSSO = ({ enableSso, ssoToggle, isSSOAvailable }) => {
   const { t } = useTranslation("SingleSignOn");
 
+  const onChangeToggle = React.useCallback(() => {
+    ssoToggle(t);
+  }, [ssoToggle, t]);
+
   const theme = useTheme();
   return (
     <StyledWrapper isSSOAvailable={isSSOAvailable}>
       <ToggleButton
         className="enable-sso toggle"
         isChecked={enableSso}
-        onChange={() => ssoToggle(t)}
+        onChange={onChangeToggle}
         isDisabled={!isSSOAvailable}
       />
 
@@ -99,7 +97,11 @@ const ToggleSSO = ({ enableSso, ssoToggle, isSSOAvailable }) => {
           </Text>
           {!isSSOAvailable && (
             <Badge
-              backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
+              backgroundColor={
+                theme.isBase
+                  ? globalColors.favoritesStatus
+                  : globalColors.favoriteStatusDark
+              }
               label={t("Common:Paid")}
               fontWeight="700"
               className="toggle-caption_title_badge"

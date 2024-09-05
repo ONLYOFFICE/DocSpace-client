@@ -33,6 +33,7 @@ import { DropDown } from "../drop-down";
 
 import { ColorInputProps } from "./ColorInput.types";
 import { ColorPicker } from "../color-picker";
+import { globalColors } from "../../themes";
 
 const ColorInput = ({
   className,
@@ -45,7 +46,9 @@ const ColorInput = ({
   hasError,
   hasWarning,
 }: ColorInputProps) => {
-  const [color, setColor] = useState(defaultColor || "#4781D1");
+  const [color, setColor] = useState(
+    defaultColor || globalColors.lightBlueMain,
+  );
   const [isPickerOpen, setIsPickerOpen] = useState(false);
 
   const closePicker = () => setIsPickerOpen(false);

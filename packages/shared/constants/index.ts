@@ -31,13 +31,14 @@ import ShareTwitterReactSvg from "PUBLIC_DIR/images/share.twitter.react.svg";
 import ShareLinkedinReactSvg from "PUBLIC_DIR/images/share.linkedin.react.svg";
 import ShareMicrosoftReactSvg from "PUBLIC_DIR/images/share.microsoft.react.svg";
 import ShareZoomReactSvg from "PUBLIC_DIR/images/share.zoom.react.svg";
+import { globalColors } from "../themes/globalColors";
 
 export const LOADER_STYLE = Object.freeze({
   title: "",
   width: "100%",
   height: "32",
-  backgroundColor: "#000000",
-  foregroundColor: "#000000",
+  backgroundColor: globalColors.darkBlack,
+  foregroundColor: globalColors.darkBlack,
   backgroundOpacity: 0.1,
   foregroundOpacity: 0.15,
   borderRadius: "3",
@@ -54,6 +55,8 @@ export const USERS = "users";
 export const USERS_IN_ROOM = "usersInRoom";
 export const PDF_FORM_DIALOG_KEY = "pdf_form_dialog";
 export const CREATED_FORM_KEY = "created_form_key";
+
+export const OPEN_BACKUP_CODES_DIALOG = "openBackupCodesDialog";
 
 export const COUNT_FOR_SHOWING_BAR = 2;
 export const PERCENTAGE_FOR_SHOWING_BAR = 90;
@@ -116,7 +119,7 @@ export const PROVIDERS_DATA = Object.freeze({
   twitter: {
     label: "twitter",
     icon: ShareTwitterReactSvg,
-    iconOptions: { color: "#2AA3EF" },
+    iconOptions: { color: globalColors.twitterColor },
   },
   linkedin: {
     label: "linkedin",

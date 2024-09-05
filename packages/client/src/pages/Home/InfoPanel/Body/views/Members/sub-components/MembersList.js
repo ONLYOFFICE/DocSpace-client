@@ -61,6 +61,7 @@ const StyledList = styled(List)`
   margin-bottom: 24px;
 
   .members-list-item {
+    // doesn't require mirroring for RTL
     left: unset !important;
     inset-inline-start: 0;
     width: calc(100% - 20px) !important;
@@ -77,6 +78,7 @@ const StyledList = styled(List)`
 `;
 
 const itemSize = 48;
+const shareLinkItemSize = 68;
 
 const MembersList = (props) => {
   const {
@@ -150,6 +152,16 @@ const MembersList = (props) => {
     [isNextPageLoading, loadNextPage],
   );
 
+  const getItemSize = ({ index }) => {
+    const elem = list[index];
+
+    if (elem?.props?.isShareLink) {
+      return shareLinkItemSize;
+    }
+
+    return itemSize;
+  };
+
   const onScroll = (e) => {
     const header = document.getElementById("members-list-header");
 
@@ -220,7 +232,7 @@ const MembersList = (props) => {
                       onRowsRendered={onRowsRendered}
                       ref={registerChild}
                       rowCount={itemsCount}
-                      rowHeight={itemSize}
+                      rowHeight={getItemSize}
                       rowRenderer={renderRow}
                       width={width}
                       isScrolling={isScrolling}

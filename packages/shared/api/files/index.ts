@@ -789,10 +789,11 @@ export async function getNewFiles(folderId: number) {
 // TODO: update res type
 export async function convertFile(
   fileId: string | number | null,
+  outputType = null,
   password = null,
   sync = false,
 ) {
-  const data = { password, sync };
+  const data = { password, sync, outputType };
 
   const res = (await request({
     method: "put",
@@ -924,6 +925,17 @@ export async function changeKeepNewFileName(val: boolean) {
   const res = (await request({
     method: "put",
     url: "files/keepnewfilename",
+    data,
+  })) as boolean;
+
+  return res;
+}
+
+export async function enableDisplayFileExtension(val: boolean) {
+  const data = { set: val };
+  const res = (await request({
+    method: "put",
+    url: "files/displayfileextension",
     data,
   })) as boolean;
 

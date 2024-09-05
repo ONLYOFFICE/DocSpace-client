@@ -52,10 +52,7 @@ const StyledIconCropper = styled.div`
       position: absolute;
       width: 216px;
       height: 216px;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
+      inset: 0;
       svg {
         opacity: 0.2;
         path {

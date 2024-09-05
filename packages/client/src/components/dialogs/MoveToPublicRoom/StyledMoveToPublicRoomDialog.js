@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { tablet, getCorrectFourValuesStyle } from "@docspace/shared/utils";
+import { tablet } from "@docspace/shared/utils";
 import styled from "styled-components";
 
 const StyledMoveToPublicRoomDialog = styled(ModalDialog)`
@@ -39,25 +39,16 @@ const StyledMoveToPublicRoomDialog = styled(ModalDialog)`
   }
 
   .modal-dialog-aside-header {
-    margin: ${({ theme }) =>
-      getCorrectFourValuesStyle(
-        "0 -24px 0 -16px",
-        theme.interfaceDirection === "rtl",
-      )};
-    padding: ${({ theme }) =>
-      getCorrectFourValuesStyle(
-        "0 0 0 16px",
-        theme.interfaceDirection === "rtl",
-      )};
+    margin-block: 0;
+    margin-inline: -16px -24px;
+    padding-block: 0;
+    padding-inline: 16px 0;
   }
 
   .modal-dialog-aside-footer {
     @media ${tablet} {
       width: 100%;
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl"
-          ? `padding-left: 32px;`
-          : `padding-right: 32px;`}
+      padding-inline-end: 32px;
       display: flex;
     }
   }

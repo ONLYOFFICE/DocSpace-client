@@ -67,5 +67,4 @@ export interface ButtonProps {
 export interface ButtonThemeProps extends ButtonProps {
   ref: React.LegacyRef<HTMLButtonElement>;
   $currentColorScheme?: TColorScheme;
-  interfaceDirection?: string;
 }

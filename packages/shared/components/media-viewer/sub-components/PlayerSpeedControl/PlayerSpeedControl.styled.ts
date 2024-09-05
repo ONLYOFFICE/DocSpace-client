@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
+import { globalColors } from "../../../../themes";
 
 export const SpeedControlWrapper = styled.div`
   position: relative;
@@ -41,12 +42,12 @@ export const SpeedControlWrapper = styled.div`
 
   svg {
     path {
-      fill: #fff;
+      fill: ${globalColors.white};
     }
   }
 
   rect {
-    stroke: #fff;
+    stroke: ${globalColors.white};
   }
 `;
 
@@ -64,8 +65,8 @@ export const DropDown = styled.div`
   bottom: 48px;
   z-index: 50;
 
-  color: #fff;
-  background: #333;
+  color: ${globalColors.white};
+  background: ${globalColors.black};
   text-align: center;
   border-radius: 7px 7px 0px 0px;
 `;
@@ -78,7 +79,7 @@ export const DropDownItem = styled.div`
   width: 48px;
   &:hover {
     cursor: pointer;
-    background: #222;
+    background: ${globalColors.black};
   }
 `;
 
@@ -86,6 +87,7 @@ export const ToastSpeed = styled.div`
   position: fixed;
 
   top: 50%;
+  // doesn't require mirroring for RTL
   left: 50%;
 
   display: flex;
@@ -105,11 +107,11 @@ export const ToastSpeed = styled.div`
     width: 46px;
     height: 46px;
     path {
-      fill: #fff;
+      fill: ${globalColors.white};
     }
   }
 
   rect {
-    stroke: #fff;
+    stroke: ${globalColors.white};
   }
 `;

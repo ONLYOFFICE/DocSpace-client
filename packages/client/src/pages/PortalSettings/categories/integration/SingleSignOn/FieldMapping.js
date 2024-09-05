@@ -58,7 +58,8 @@ const StyledWrapper = styled.div`
 
   .checkbox-input {
     width: fit-content;
-    margin: 10px 8px 6px 0;
+    margin-block: 10px 6px;
+    margin-inline: 0 8px;
   }
 
   .icon-button {

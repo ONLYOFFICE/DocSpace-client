@@ -32,14 +32,7 @@ const StyledLoader = styled.div`
   margin-top: -4px;
 
   .loader {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 4px;
-          `
-        : css`
-            padding-right: 4px;
-          `}
+    padding-inline-end: 4px;
   }
 
   @media ${mobileMore} {

@@ -51,15 +51,9 @@ export const StyledPage = styled.div`
   }
 
   @media ${mobile} {
+    padding-block: 0;
+    padding-inline: 16px 8px;
     background-image: none;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding: 0 16px 0 8px;
-          `
-        : css`
-            padding: 0 8px 0 16px;
-          `}
   }
 
   .subtitle {

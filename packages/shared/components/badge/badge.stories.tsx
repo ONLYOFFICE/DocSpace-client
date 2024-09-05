@@ -27,6 +27,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 
 import { Badge } from "./Badge";
+import { globalColors } from "../../themes";
 
 const meta = {
   title: "Components/Badge",
@@ -83,7 +84,7 @@ export const HighBadge: Story = {
   args: {
     type: "high",
     label: "High",
-    backgroundColor: "#f2675a",
+    backgroundColor: globalColors.mainRed,
   },
   argTypes: {
     type: { control: "radio" },

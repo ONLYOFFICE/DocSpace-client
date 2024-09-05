@@ -344,7 +344,7 @@ class ManualBackup extends React.Component {
                   onClick={this.onClickDownloadBackup}
                   isDisabled={false}
                   size={buttonSize}
-                  style={{ marginLeft: "8px" }}
+                  style={{ marginInlineStart: "8px" }}
                 />
               )}
               {!isMaxProgress && (
@@ -352,7 +352,7 @@ class ManualBackup extends React.Component {
                   label={t("Common:CopyOperation") + "..."}
                   isDisabled={true}
                   size={buttonSize}
-                  style={{ marginLeft: "8px" }}
+                  style={{ marginInlineStart: "8px" }}
                 />
               )}
             </div>

@@ -39,6 +39,7 @@ import { AvatarRole } from "../avatar";
 
 import { Selector } from "./Selector";
 import { SelectorProps, TSelectorItem } from "./Selector.types";
+import { globalColors } from "../../themes";
 
 const StyledRowLoader = styled.div`
   width: 100%;
@@ -210,7 +211,7 @@ const Template = (args: SelectorProps) => {
       style={{
         width: "480px",
         height: "485px",
-        border: "1px solid #eee",
+        border: `1px solid ${globalColors.grayLightMid}`,
         margin: "auto",
       }}
     >

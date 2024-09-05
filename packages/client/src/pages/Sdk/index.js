@@ -111,17 +111,19 @@ const Sdk = ({
 
   useEffect(() => {
     if (window.parent && !frameConfig?.frameId && isLoaded) {
-      callCommand("setConfig");
+      callCommand();
     }
   }, [callCommand, isLoaded]);
 
   useEffect(() => {
     if (isDataReady) {
-      callCommandLoad("setIsLoaded");
+      callCommandLoad();
     }
   }, [callCommandLoad, isDataReady]);
 
   useEffect(() => {
+    if (window.ClientConfig && window.parent)
+      window.ClientConfig.isFrame = true;
     getFilesSettings();
   }, []);
 
@@ -306,7 +308,7 @@ const Sdk = ({
   return component;
 };
 
-export default inject(
+export const Component = inject(
   ({
     authStore,
     settingsStore,

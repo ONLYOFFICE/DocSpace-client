@@ -71,24 +71,12 @@ const StyledDropdown = styled.div<{
   ${(props) =>
     props.directionX === "right" &&
     !props.directionXStylesDisabled &&
-    (props.theme.interfaceDirection === "rtl"
-      ? css`
-          left: ${props.manualX || "0px"};
-        `
-      : css`
-          right: ${props.manualX || "0px"};
-        `)}
+    `inset-inline-end: ${props.manualX || "0px"};`}
 
   ${(props) =>
     props.directionX === "left" &&
     !props.directionXStylesDisabled &&
-    (props.theme.interfaceDirection === "rtl"
-      ? css`
-          right: ${props.manualX || "0px"};
-        `
-      : css`
-          left: ${props.manualX || "0px"};
-        `)}
+    `inset-inline-start: ${props.manualX || "0px"};`}
 
   z-index: ${(props) =>
     props.zIndex ? props.zIndex : props.theme.dropDown.zIndex};
@@ -122,10 +110,7 @@ const StyledDropdown = styled.div<{
 
   .scroll-drop-down-item {
     .scroll-body {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? `padding-left: 0 !important;`
-          : `padding-right: 0 !important;`}
+      padding-inline-end: 0 !important;
     }
   }
   &.download-dialog-dropDown {
@@ -138,7 +123,7 @@ const StyledDropdown = styled.div<{
       css`
         top: auto !important;
         bottom: 0;
-        ${props.theme.interfaceDirection === "rtl" ? `right: 0;` : `left: 0;`}
+        inset-inline-start: 0;
         width: 100%;
       `}
   }

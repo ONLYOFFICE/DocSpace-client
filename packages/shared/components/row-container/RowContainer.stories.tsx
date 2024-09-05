@@ -40,6 +40,7 @@ import { Link, LinkType } from "../link";
 import { RowContainer } from "./RowContainer";
 
 import { RowContainerProps } from "./RowContainer.types";
+import { globalColors } from "../../themes";
 
 const SendClockIcon = styled(SendClockReactSvg)`
   ${commonIconsStyles}
@@ -144,8 +145,11 @@ const Template = (args: RowContainerProps) => {
             source={user.avatar}
           />
         );
-        const nameColor = user.status === "pending" && "#A3A9AE";
-        const sideInfoColor = user.status === "pending" ? "#D0D5DA" : "#A3A9AE";
+        const nameColor = user.status === "pending" && globalColors.gray;
+        const sideInfoColor =
+          user.status === "pending"
+            ? globalColors.grayStrong
+            : globalColors.gray;
 
         return (
           <Row
@@ -169,10 +173,16 @@ const Template = (args: RowContainerProps) => {
               </Link>
               <>
                 {user.status === "pending" && (
-                  <SendClockIcon size={IconSizeType.small} color="#3B72A7" />
+                  <SendClockIcon
+                    size={IconSizeType.small}
+                    color={globalColors.lightIcons}
+                  />
                 )}
                 {user.status === "disabled" && (
-                  <CatalogSpamIcon size={IconSizeType.small} color="#3B72A7" />
+                  <CatalogSpamIcon
+                    size={IconSizeType.small}
+                    color={globalColors.lightIcons}
+                  />
                 )}
               </>
               {user.isHead ? (

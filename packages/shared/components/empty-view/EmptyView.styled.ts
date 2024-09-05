@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { mobile } from "@docspace/shared/utils";
+import { globalColors } from "../../themes";
 
 export const EmptyViewWrapper = styled.div`
   margin-inline: auto;
@@ -12,7 +13,11 @@ export const EmptyViewWrapper = styled.div`
   flex-direction: column;
   gap: 18px;
 
-  padding-top: 31px;
+  padding-top: 61px;
+
+  @media ${mobile} {
+    padding-top: 40px;
+  }
 `;
 
 export const EmptyViewHeader = styled.div`
@@ -48,6 +53,39 @@ export const EmptyViewBody = styled.div`
   gap: 8px;
 
   width: 100%;
+
+  &:has(> .ev-link) {
+    align-items: center;
+    margin-top: 2px;
+  }
+
+  .ev-link {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: nowrap;
+
+    max-width: fit-content;
+    text-decoration: none;
+
+    color: ${(props) => props.theme.emptyView.linkColor};
+
+    svg {
+      color: inherit;
+      g {
+        fill: currentColor;
+      }
+      flex-shrink: 0;
+    }
+
+    span {
+      font-weight: 600;
+      font-size: 13px;
+      line-height: 15px;
+      text-decoration: underline dotted;
+      text-underline-offset: 2px;
+    }
+  }
 `;
 
 export const EmptyViewItemWrapper = styled.div`
@@ -68,34 +106,34 @@ export const EmptyViewItemWrapper = styled.div`
 
   :nth-child(1) .ev-item__icon {
     rect {
-      color: #5299e0;
+      color: ${globalColors.lightSecondMain};
     }
     path {
-      color: #4781d1;
+      color: ${globalColors.lightBlueMain};
     }
   }
   :nth-child(2) .ev-item__icon {
     rect {
-      color: #2db482;
+      color: ${globalColors.mainGreen};
     }
     path {
-      color: #2db482;
+      color: ${globalColors.mainGreen};
     }
   }
   :nth-child(3) .ev-item__icon {
     rect {
-      color: #f97a0b;
+      color: ${globalColors.mainOrange};
     }
     path {
-      color: #f97a0b;
+      color: ${globalColors.mainOrange};
     }
   }
   :nth-child(4) .ev-item__icon {
     rect {
-      color: #6d4ec2;
+      color: ${globalColors.purple};
     }
     path {
-      color: #6d4ec2;
+      color: ${globalColors.purple};
     }
   }
 

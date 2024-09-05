@@ -38,9 +38,9 @@ import StyledLdapPage from "./styled-components/StyledLdapPage";
 import StyledSettingsSeparator from "SRC_DIR/pages/PortalSettings/StyledSettingsSeparator";
 
 import ToggleLDAP from "./sub-components/ToggleLDAP";
-import SyncContainer from "./sub-components/SyncContainer";
+import { SyncContainerSection } from "./sub-components/SyncContainer";
 import LdapMobileView from "./sub-components/LdapMobileView";
-import SettingsContainer from "./sub-components/SettingsContainer";
+import { SettingsContainerSection } from "./sub-components/SettingsContainer";
 import LdapLoader from "./sub-components/LdapLoader";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
@@ -97,11 +97,11 @@ const LDAP = ({
         <>
           <ToggleLDAP />
 
-          <SettingsContainer />
+          <SettingsContainerSection />
 
           <StyledSettingsSeparator />
 
-          <SyncContainer />
+          <SyncContainerSection />
         </>
       )}
     </StyledLdapPage>

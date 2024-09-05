@@ -40,6 +40,7 @@ import { toastr } from "../toast";
 
 import StyledFileInput from "./FileInput.styled";
 import { FileInputProps } from "./FileInput.types";
+import { globalColors } from "../../themes";
 
 const FileInputPure = ({
   onInput,
@@ -183,7 +184,7 @@ const FileInputPure = ({
                       ? DocumentReactSvgUrl
                       : CatalogFolderReactSvgUrl
                   }
-                  color="#A3A9AE"
+                  color={globalColors.gray}
                   size={iconSize}
                   isDisabled={isDisabled}
                 />

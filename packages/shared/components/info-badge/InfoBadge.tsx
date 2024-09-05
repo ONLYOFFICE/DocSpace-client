@@ -40,6 +40,7 @@ import {
   StyledToolTip,
 } from "./InfoBadge.styled";
 import type InfoBadgeProps from "./InfoBadge.types";
+import { globalColors } from "../../themes";
 
 export const InfoBadge: FC<InfoBadgeProps> = ({
   label,
@@ -65,7 +66,7 @@ export const InfoBadge: FC<InfoBadgeProps> = ({
         borderRadius="50px"
         label={label}
         data-tooltip-id={id}
-        backgroundColor="#533ED1"
+        backgroundColor={globalColors.mainPurple}
       />
 
       <StyledToolTip

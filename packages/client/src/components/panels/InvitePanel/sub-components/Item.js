@@ -282,11 +282,10 @@ const Item = ({
 
         {!isGroup && (
           <Text
-            className="label"
+            className="label about-label"
             fontWeight={400}
             fontSize="12px"
             noSelect
-            color="#A3A9AE"
             truncate
           >
             {`${typeLabel} | ${email}`}

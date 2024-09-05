@@ -53,6 +53,7 @@ export const TagPure = ({
   className,
   style,
   icon,
+  removeTagIcon,
   roomType,
   providerType,
 }: TagProps) => {
@@ -156,6 +157,7 @@ export const TagPure = ({
               fontWeight={600}
               fontSize="12px"
               truncate
+              removeTagIcon={removeTagIcon}
             >
               {t}
             </StyledDropdownText>

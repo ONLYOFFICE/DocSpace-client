@@ -44,7 +44,7 @@ import { Badge } from "@docspace/shared/components/badge";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
-import { Base } from "@docspace/shared/themes";
+import { Base, globalColors } from "@docspace/shared/themes";
 
 import { isTablet, isDesktop, size, classNames } from "@docspace/shared/utils";
 
@@ -56,7 +56,7 @@ const StyledWrapper = styled.div`
   background: ${(props) => props.theme.filesBadges.backgroundColor};
   padding: 6px;
   border-radius: 4px;
-  box-shadow: 0px 2px 4px rgba(4, 15, 27, 0.16);
+  box-shadow: 0px 2px 4px ${globalColors.badgeShadow};
 `;
 
 StyledWrapper.defaultProps = { theme: Base };
@@ -306,7 +306,6 @@ const Badges = ({
       {/* {isForm  && ( 
         <BadgeWrapper isTile={isTile}>
           <HelpButton
-            color="#F2675A"
             place="bottom"
             size={isViewTable ? 12 : 16}
             className="bagde_alert icons-group"

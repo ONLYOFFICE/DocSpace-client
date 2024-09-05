@@ -27,13 +27,14 @@
 import axios from "axios";
 import config from "PACKAGE_FILE";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { globalColors } from "@docspace/shared/themes";
 
 export const generateLogo = (
   width,
   height,
   text,
   fontSize = 18,
-  fontColor = "#000",
+  fontColor = globalColors.darkBlack,
   alignCenter = false,
   isEditor = false,
 ) => {

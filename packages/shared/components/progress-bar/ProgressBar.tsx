@@ -38,6 +38,7 @@ const ProgressBar = ({
   percent,
   label,
   isInfiniteProgress,
+  className,
   status,
   error,
   ...rest
@@ -58,6 +59,7 @@ const ProgressBar = ({
       </Text>
       <StyledProgressBar
         {...rest}
+        className={className}
         percent={progressPercent}
         data-testid="progress-bar"
       >

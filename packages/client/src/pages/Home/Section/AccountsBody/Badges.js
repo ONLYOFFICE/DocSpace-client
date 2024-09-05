@@ -31,7 +31,7 @@ import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import { PaymentsType, AccountLoginType } from "@docspace/shared/enums";
-
+import { globalColors } from "@docspace/shared/themes";
 import { Badge } from "@docspace/shared/components/badge";
 import { commonIconsStyles } from "@docspace/shared/utils";
 
@@ -49,33 +49,19 @@ const StyledBadgesContainer = styled.div`
     props.infoPanelVisible &&
     css`
       .accounts-badge:last-child {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-left: 12px;
-              `
-            : css`
-                margin-right: 12px;
-              `}
+        margin-inline-end: 12px;
       }
     `}
 `;
 
 const StyledPaidBadge = styled(Badge)`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-left: 8px;
-        `
-      : css`
-          margin-right: 8px;
-        `}
+  margin-inline-end: 8px;
 `;
 
 const StyledCatalogSpamIcon = styled(CatalogSpamIcon)`
   ${commonIconsStyles}
   path {
-    fill: #f21c0e;
+    fill: ${(props) => props.theme.accountsBadges.disabledColor};
   }
 `;
 
@@ -124,8 +110,12 @@ const Badges = ({
         <Badge
           className="accounts-badge"
           label={t("Common:LDAP")}
-          color={"#FFFFFF"}
-          backgroundColor={theme.isBase ? "#8570BD" : "#544C6A"}
+          color={globalColors.white}
+          backgroundColor={
+            theme.isBase
+              ? globalColors.secondPurple
+              : globalColors.secondPurpleDark
+          }
           fontSize={"9px"}
           fontWeight={800}
           noHover
@@ -137,8 +127,12 @@ const Badges = ({
         <Badge
           className="accounts-badge"
           label={t("SSO")}
-          color={"#FFFFFF"}
-          backgroundColor={theme.isBase ? "#22C386" : "#2E5E4C"}
+          color={globalColors.white}
+          backgroundColor={
+            theme.isBase
+              ? globalColors.secondGreen
+              : globalColors.secondGreenDark
+          }
           fontSize={"9px"}
           fontWeight={800}
           noHover
@@ -150,7 +144,11 @@ const Badges = ({
         <StyledPaidBadge
           className="paid-badge accounts-badge"
           label={t("Paid")}
-          backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
+          backgroundColor={
+            theme.isBase
+              ? globalColors.favoritesStatus
+              : globalColors.favoriteStatusDark
+          }
           fontSize={"9px"}
           fontWeight={800}
           lineHeight={"13px"}

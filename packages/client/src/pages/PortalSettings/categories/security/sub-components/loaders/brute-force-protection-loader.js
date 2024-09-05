@@ -28,7 +28,7 @@ import styled from "styled-components";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
 const StyledLoader = styled.div`
-  padding-right: 8px;
+  padding-inline-end: 8px;
 
   .header {
     margin-bottom: 12px;

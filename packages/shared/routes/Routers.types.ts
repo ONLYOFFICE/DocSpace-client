@@ -56,6 +56,7 @@ export interface PrivateRouteProps
   restricted?: boolean;
   withManager?: boolean;
   withCollaborator?: boolean;
+  identityServerEnabled?: boolean;
 }
 
 export interface PublicRouteProps
@@ -63,5 +64,8 @@ export interface PublicRouteProps
     Pick<AuthStore, "isAuthenticated">,
     Pick<
       SettingsStore,
-      "wizardCompleted" | "tenantStatus" | "isPortalDeactivate"
+      | "wizardCompleted"
+      | "tenantStatus"
+      | "isPortalDeactivate"
+      | "isFirstLoaded"
     > {}

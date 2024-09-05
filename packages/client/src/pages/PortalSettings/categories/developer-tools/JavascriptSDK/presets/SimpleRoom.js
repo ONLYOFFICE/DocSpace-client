@@ -385,12 +385,13 @@ const SimpleRoom = (props) => {
   );
 };
 
-export default inject(({ settingsStore, publicRoomStore }) => {
+export const Component = inject(({ settingsStore, publicRoomStore }) => {
   const { theme, currentColorScheme } = settingsStore;
   const { fetchExternalLinks } = publicRoomStore;
 
   return {
     theme,
+
     fetchExternalLinks,
     currentColorScheme,
   };

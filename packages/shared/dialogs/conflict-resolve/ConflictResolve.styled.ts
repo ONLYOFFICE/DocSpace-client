@@ -27,6 +27,7 @@
 import styled from "styled-components";
 
 import { ModalDialog } from "../../components/modal-dialog";
+import { globalColors } from "../../themes";
 
 const StyledModalDialog = styled(ModalDialog)`
   .radio {
@@ -62,11 +63,7 @@ const StyledModalDialog = styled(ModalDialog)`
 
     svg {
       overflow: visible;
-
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl"
-          ? `margin-left: 8px;`
-          : `margin-right: 8px;`}
+      margin-inline-end: 8px;
       margin-top: 3px;
     }
 
@@ -79,7 +76,7 @@ const StyledModalDialog = styled(ModalDialog)`
     .radio-option-description {
       font-size: 12px;
       line-height: 16px;
-      color: #a3a9ae;
+      color: ${globalColors.gray};
     }
   }
 

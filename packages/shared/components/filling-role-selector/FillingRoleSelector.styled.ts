@@ -29,7 +29,7 @@ import styled, { css } from "styled-components";
 import AddRoleButton from "PUBLIC_DIR/images/add.role.button.react.svg";
 import EveryoneRoleIcon from "PUBLIC_DIR/images/everyone.role.button.react.svg";
 
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 
 const StyledFillingRoleSelector = styled.div`
   display: flex;
@@ -65,7 +65,7 @@ const StyledNumber = styled.div`
   font-weight: 600;
   font-size: 14px;
   line-height: 16px;
-  color: #a3a9ae;
+  color: ${globalColors.gray};
 `;
 
 const StyledAvatar = styled.img`
@@ -99,14 +99,8 @@ const StyledRole = styled.div`
 `;
 
 const StyledAssignedRole = styled.div`
-  padding-left: 4px;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl" &&
-    css`
-      padding-right: 4px;
-      padding-left: auto;
-    `}
-  color: rgba(170, 170, 170, 1);
+  padding-inline-start: 4px;
+  color: ${globalColors.gray};
 
   ::before {
     content: "(";
@@ -128,13 +122,13 @@ const StyledEveryoneRoleContainer = styled.div`
     font-weight: 400;
     font-size: 10px;
     line-height: 14px;
-    color: #657077;
+    color: ${globalColors.lightGrayDark};
   }
 `;
 
 const StyledTooltip = styled.div`
-  background: #f8f7bf;
-  color: #333;
+  background: ${globalColors.lightToastInfo};
+  color: ${globalColors.black};
   border-radius: 6px;
   font-weight: 400;
   font-size: 12px;

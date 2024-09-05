@@ -59,6 +59,7 @@ import { Link } from "@docspace/shared/components/link";
 import { getSettingsThirdParty } from "@docspace/shared/api/files";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 import { isManagement } from "@docspace/shared/utils/common";
+import { globalColors } from "@docspace/shared/themes";
 
 const { DocumentModuleType, ResourcesModuleType, StorageModuleType } =
   BackupStorageType;
@@ -511,7 +512,11 @@ class AutomaticBackup extends React.PureComponent {
               </Text>
               {!isEnableAuto && (
                 <Badge
-                  backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
+                  backgroundColor={
+                    theme.isBase
+                      ? globalColors.favoritesStatus
+                      : globalColors.favoriteStatusDark
+                  }
                   label={t("Common:Paid")}
                   fontWeight="700"
                   className="auto-backup_badge"

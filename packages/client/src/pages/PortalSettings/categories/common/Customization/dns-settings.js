@@ -48,6 +48,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { DeviceType } from "@docspace/shared/enums";
 import { parseDomain } from "@docspace/shared/utils/common";
+import { globalColors } from "@docspace/shared/themes";
 
 const toggleStyle = {
   position: "static",
@@ -66,7 +67,7 @@ const buttonProps = {
   primary: true,
 };
 let timerId = null;
-const DNSSettings = (props) => {
+const DNSSettingsComponent = (props) => {
   const {
     t,
     isMobileView,
@@ -213,10 +214,10 @@ const DNSSettings = (props) => {
             {errorText &&
               errorText.map((err, index) => (
                 <Text
+                  className="dns-error-text"
                   key={index}
                   fontSize="12px"
                   fontWeight="400"
-                  color="#F24724"
                 >
                   {err}
                 </Text>
@@ -227,7 +228,7 @@ const DNSSettings = (props) => {
               key="dns-hint"
               fontSize="12px"
               fontWeight="400"
-              color="#A3A9AE"
+              color={globalColors.gray}
             >
               {`${t("Settings:DNSSettingsHint")}${domainExampleText}`}
             </Text>
@@ -290,7 +291,11 @@ const DNSSettings = (props) => {
             <Badge
               className="paid-badge"
               fontWeight="700"
-              backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
+              backgroundColor={
+                theme.isBase
+                  ? globalColors.favoritesStatus
+                  : globalColors.favoriteStatusDark
+              }
               label={t("Common:Paid")}
               isPaidBadge={true}
             />
@@ -317,46 +322,52 @@ const DNSSettings = (props) => {
   );
 };
 
-export default inject(({ settingsStore, common, currentQuotaStore }) => {
-  const {
-    helpLink,
-    currentColorScheme,
-    standalone,
-    dnsSettingsUrl,
-    currentDeviceType,
-  } = settingsStore;
-  const {
-    isLoaded,
-    setIsLoadedDNSSettings,
-    initSettings,
-    setIsLoaded,
-    dnsSettings,
-    setIsEnableDNS,
-    setDNSName,
-    saveDNSSettings,
-    isDefaultDNS,
-  } = common;
+export const DNSSettings = inject(
+  ({ settingsStore, common, currentQuotaStore }) => {
+    const {
+      helpLink,
+      currentColorScheme,
+      standalone,
+      dnsSettingsUrl,
+      currentDeviceType,
+    } = settingsStore;
+    const {
+      isLoaded,
+      setIsLoadedDNSSettings,
+      initSettings,
+      setIsLoaded,
+      dnsSettings,
+      setIsEnableDNS,
+      setDNSName,
+      saveDNSSettings,
+      isDefaultDNS,
+    } = common;
 
-  const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
-  const { customObj } = dnsSettings;
-  const { dnsName, enable } = customObj;
+    const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
+    const { customObj } = dnsSettings;
+    const { dnsName, enable } = customObj;
 
-  return {
-    isDefaultDNS,
-    dnsName: dnsName || "",
-    enable,
-    setDNSName,
-    isLoaded,
-    setIsLoadedDNSSettings,
-    helpLink,
-    initSettings,
-    setIsLoaded,
-    isSettingPaid: isBrandingAndCustomizationAvailable,
-    currentColorScheme,
-    standalone,
-    setIsEnableDNS,
-    saveDNSSettings,
-    dnsSettingsUrl,
-    currentDeviceType,
-  };
-})(withLoading(withTranslation(["Settings", "Common"])(observer(DNSSettings))));
+    return {
+      isDefaultDNS,
+      dnsName: dnsName || "",
+      enable,
+      setDNSName,
+      isLoaded,
+      setIsLoadedDNSSettings,
+      helpLink,
+      initSettings,
+      setIsLoaded,
+      isSettingPaid: isBrandingAndCustomizationAvailable,
+      currentColorScheme,
+      standalone,
+      setIsEnableDNS,
+      saveDNSSettings,
+      dnsSettingsUrl,
+      currentDeviceType,
+    };
+  },
+)(
+  withLoading(
+    withTranslation(["Settings", "Common"])(observer(DNSSettingsComponent)),
+  ),
+);

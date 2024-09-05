@@ -44,9 +44,6 @@ import { ComboBox, TOption } from "@docspace/shared/components/combobox";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { TTranslation } from "@docspace/shared/types";
 import { TColorScheme, TTheme } from "@docspace/shared/themes";
-
-import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { UserStore } from "@docspace/shared/store/UserStore";
 import {
   ModalDialog,
   ModalDialogType,
@@ -65,8 +62,6 @@ import { StyledModalDialog, StyledBody } from "./StyledEmbeddingPanel";
 
 import { DisplayBlock } from "./sub-components/DisplayBlock";
 import { CheckboxElement } from "./sub-components/CheckboxElement";
-import PublicRoomStore from "../../../store/PublicRoomStore";
-import DialogsStore from "../../../store/DialogsStore";
 
 type LinkParamsLinkShareToType = {
   denyDownload: boolean;

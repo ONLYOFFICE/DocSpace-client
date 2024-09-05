@@ -26,12 +26,12 @@
 
 import styled from "styled-components";
 
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 
 const StyledPublicRoomBar = styled.div`
   display: flex;
   background-color: ${(props) => props.theme.infoBlock.background};
-  color: #333;
+  color: ${globalColors.black};
   font-size: 12px;
   padding: 12px 16px;
   border-radius: 6px;

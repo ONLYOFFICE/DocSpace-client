@@ -31,10 +31,10 @@ import { inject, observer } from "mobx-react";
 
 import withLoading from "SRC_DIR/HOCs/withLoading";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import Whitelabel from "./Branding/whitelabel";
-import CompanyInfoSettings from "./Branding/companyInfoSettings";
+import { WhiteLabel } from "./Branding/whitelabel";
+import { CompanyInfoSettings } from "./Branding/companyInfoSettings";
 import styled from "styled-components";
-import AdditionalResources from "./Branding/additionalResources";
+import { AdditionalResources } from "./Branding/additionalResources";
 import { isManagement } from "@docspace/shared/utils/common";
 import LoaderBrandingDescription from "./sub-components/loaderBrandingDescription";
 
@@ -118,7 +118,7 @@ const Branding = ({
 
   return (
     <StyledComponent isSettingPaid={isSettingPaid}>
-      <Whitelabel />
+      <WhiteLabel />
       {showSettings && (
         <>
           <hr />

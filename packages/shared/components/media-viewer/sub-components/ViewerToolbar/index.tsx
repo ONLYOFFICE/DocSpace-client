@@ -45,6 +45,7 @@ import {
   ListTools,
   ToolbarItem,
 } from "./ViewerToolbar.styled";
+import { globalColors } from "../../../../themes";
 
 const ViewerToolbar = forwardRef<ImperativeHandle, ImageViewerToolbarProps>(
   (
@@ -106,7 +107,11 @@ const ViewerToolbar = forwardRef<ImperativeHandle, ImageViewerToolbarProps>(
       return (
         <div
           className="iconContainer zoomPercent"
-          style={{ width: "auto", color: "#fff", userSelect: "none" }}
+          style={{
+            width: "auto",
+            color: globalColors.white,
+            userSelect: "none",
+          }}
         >
           {`${percent}%`}
         </div>

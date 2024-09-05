@@ -150,7 +150,7 @@ const TwoFactorAuth = (props) => {
 
       if (res) {
         setIsInit(false);
-        navigate(res.replace(window.location.origin, ""));
+        window.location.replace(res);
       }
     } catch (error) {
       toastr.error(error);
@@ -238,7 +238,7 @@ const TwoFactorAuth = (props) => {
   );
 };
 
-export default inject(({ settingsStore, setup, tfaStore }) => {
+export const TfaSection = inject(({ settingsStore, setup, tfaStore }) => {
   const {
     setTfaSettings,
 

@@ -31,6 +31,7 @@ import { InputSize, InputType, TextInput } from "../text-input";
 
 import { FieldContainer } from "./FieldContainer";
 import { FieldContainerProps } from "./FieldContainer.types";
+import { globalColors } from "../../themes";
 
 const meta = {
   title: "Components/FieldContainer",
@@ -84,7 +85,7 @@ export const Default: Story = {
     place: "top",
     errorMessage:
       "Error text. Lorem ipsum dolor sit amet, consectetuer adipiscing elit",
-    errorColor: "#C96C27",
+    errorColor: globalColors.lightErrorStatus,
     errorMessageWidth: "293px",
     removeMargin: false,
     children: null,

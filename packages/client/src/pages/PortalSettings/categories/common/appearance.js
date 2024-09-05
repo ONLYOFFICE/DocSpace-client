@@ -54,6 +54,7 @@ import { isMobile } from "@docspace/shared/utils";
 import { DeviceType } from "@docspace/shared/enums";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { ColorPicker } from "@docspace/shared/components/color-picker";
+import { globalColors } from "@docspace/shared/themes";
 
 const Appearance = (props) => {
   const {
@@ -469,8 +470,8 @@ const Appearance = (props) => {
   ]);
 
   const getTextColor = (color) => {
-    const black = "#333333";
-    const white = "#FFFFFF";
+    const black = globalColors.black;
+    const white = globalColors.white;
 
     const rgba = hexRgb(color);
 

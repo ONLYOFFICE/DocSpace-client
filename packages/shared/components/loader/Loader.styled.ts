@@ -46,7 +46,7 @@ const Dot = styled.div<{ color?: string; size: number; delay: string }>`
 
   width: ${(props) => props.size / 9}px;
   height: ${(props) => props.size / 9}px;
-  margin-right: ${(props) => props.theme.loader.marginRight};
+  margin-inline-end: ${(props) => props.theme.loader.marginRight};
   /* Animation */
   animation: ${BounceAnimation} 0.5s linear infinite;
   animation-delay: ${(props) => props.delay};
@@ -64,7 +64,7 @@ const LoadingWrapper = styled.div<{ color?: string; size: string }>`
 `;
 
 const LoadingLabel = styled.span`
-  margin-right: ${(props) => props.theme.loader.marginRight};
+  margin-inline-end: ${(props) => props.theme.loader.marginRight};
 `;
 LoadingLabel.defaultProps = { theme: Base };
 

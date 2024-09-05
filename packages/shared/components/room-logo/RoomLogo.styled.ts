@@ -38,19 +38,13 @@ const StyledContainer = styled.div`
   align-items: center;
   justify-content: center;
 
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `margin-left: 12px;`
-      : `margin-right: 12px;`}
+  margin-inline-end: 12px;
 
   .room-logo_checkbox {
     display: none;
 
     .checkbox {
-      ${({ theme }) =>
-        theme.interfaceDirection === "rtl"
-          ? `margin-left: 0;`
-          : `margin-right: 0;`}
+      margin-inline-end: 0;
     }
   }
 `;

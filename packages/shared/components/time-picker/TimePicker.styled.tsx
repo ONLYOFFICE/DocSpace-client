@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 
 const TimeInput = styled.div<{ hasError?: boolean; isFocused?: boolean }>`
   width: 57px;
@@ -34,7 +34,7 @@ const TimeInput = styled.div<{ hasError?: boolean; isFocused?: boolean }>`
   padding: 0px 6px;
   direction: ltr;
 
-  border: 1px solid #d0d5da;
+  border: 1px solid ${globalColors.grayStrong};
   border-radius: 3px;
 
   transition: "all 0.2s ease 0s";
@@ -42,25 +42,25 @@ const TimeInput = styled.div<{ hasError?: boolean; isFocused?: boolean }>`
   display: flex;
   align-items: center;
 
-  border-color: ${(props) => (props.hasError ? "#f21c0e" : "#d0d5da")};
+  border-color: ${(props) =>
+    props.hasError ? globalColors.lightErrorStatus : globalColors.grayStrong};
 
   background-color: ${(props) => props.theme.input.backgroundColor};
 
   ${(props) =>
     props.isFocused &&
     css`
-      border-color: #4781d1;
+      border-color: ${globalColors.lightBlueMain};
     `}
 
   :focus {
-    border-color: #4781d1;
+    border-color: ${globalColors.lightBlueMain};
   }
 
   input {
     max-width: 22px;
     padding: 0;
-    padding-left: 2.5px;
-    margin-right: -2.5px;
+    padding-inline: 2.5px -2.5px;
   }
 
   input[type="search"]::-webkit-search-decoration,

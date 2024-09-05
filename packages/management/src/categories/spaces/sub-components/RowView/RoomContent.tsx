@@ -30,7 +30,10 @@ import styled from "styled-components";
 
 import { RowContent } from "@docspace/shared/components/row-content";
 import { Text } from "@docspace/shared/components/text";
+
 import { getConvertedSize } from "@docspace/shared/utils/common";
+import { TTheme } from "@docspace/shared/themes";
+
 import { mobile } from "@docspace/shared/utils";
 import { TPortals } from "SRC_DIR/types/spaces";
 
@@ -43,6 +46,10 @@ const StyledRowContent = styled(RowContent)`
 
   .mainIcons {
     height: 20px;
+  }
+
+  .spaces_row-current {
+    color: ${({ theme }) => theme.management.textColor};
   }
 
   @media ${mobile} {
@@ -59,9 +66,10 @@ const StyledRowContent = styled(RowContent)`
 type TRoomContent = {
   item: TPortals;
   isCurrentPortal: boolean;
+  theme: TTheme;
 };
 
-export const RoomContent = ({ item, isCurrentPortal }: TRoomContent) => {
+export const RoomContent = ({ item, isCurrentPortal, theme }: TRoomContent) => {
   const { t } = useTranslation(["Management", "Common", "Settings"]);
 
   const { roomAdminCount, usersCount, roomsCount, usedSize } =
@@ -78,11 +86,14 @@ export const RoomContent = ({ item, isCurrentPortal }: TRoomContent) => {
   const storageSpace =
     customQuota >= 0 ? `${usedStorage}/${maxStorage}` : `${usedStorage}`;
 
+  const sideColor = theme?.management?.sideColor;
+  const nameColor = theme?.management?.nameColor;
+
   return (
     <StyledRowContent
       sectionWidth={"620px"}
-      sideColor="#A3A9AE"
-      nameColor="#D0D5DA"
+      sideColor={sideColor}
+      nameColor={nameColor}
       className="spaces_row-content"
     >
       <div className="user-container-wrapper">
@@ -96,7 +107,6 @@ export const RoomContent = ({ item, isCurrentPortal }: TRoomContent) => {
         fontSize="14px"
         fontWeight={600}
         truncate={true}
-        color="#A3A9AE"
         className="spaces_row-current"
       >
         {isCurrentPortal && t("CurrentSpace")}

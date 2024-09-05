@@ -54,7 +54,7 @@ export const CategoryFilterMobileWrapper = styled.div`
 export const CategoryFilterMobile = styled(DropDown)`
   position: fixed;
   top: 36px;
-  left: 0;
+  inset-inline-start: 0;
   width: 100%;
 
   padding: 6px 0;
@@ -74,10 +74,7 @@ export const CategoryFilterMobile = styled(DropDown)`
 
   .section-scroll,
   .scroll-body {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `padding-left: 0px !important;`
-        : `padding-right: 0px !important;`}
+    padding-inline-end: 0 !important;
   }
 `;
 
@@ -99,8 +96,8 @@ export const CategoryFilterItemMobile = styled(DropDownItem)`
     `}
 
   .submenu-arrow {
-    margin: ${({ theme }) =>
-      theme.interfaceDirection !== "rtl" ? `0 0 0 auto` : `0 auto 0 0`};
+    margin-block: 0;
+    margin-inline: auto 0;
 
     svg {
       height: 12px;
@@ -118,5 +115,5 @@ export const CategoryFilterItemMobile = styled(DropDownItem)`
 CategoryFilterItemMobile.defaultProps = { theme: Base };
 
 export const StyledSubItemMobile = styled(DropDownItem)`
-  padding-left: 28px;
+  padding-inline-start: 28px;
 `;

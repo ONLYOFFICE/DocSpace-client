@@ -436,7 +436,7 @@ const PureHome = (props) => {
 
 const Home = withTranslation(["Files", "People"])(PureHome);
 
-export default inject(
+export const Component = inject(
   ({
     authStore,
     filesStore,

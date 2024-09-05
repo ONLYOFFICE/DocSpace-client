@@ -47,7 +47,7 @@ const StyledLoader = styled.div`
 
     .header-item {
       width: 72px;
-      margin-right: 20px;
+      margin-inline-end: 20px;
     }
   }
 

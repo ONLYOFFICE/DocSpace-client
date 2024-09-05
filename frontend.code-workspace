@@ -68,6 +68,11 @@
             "tooltip": "🛠️ Start the \"backend docker build SAAS + dnsmasq\" task",
           },
           {
+            "label": "Docker : Build-SAAS + dnsmasq + identity",
+            "task": "Backend | build SAAS + dnsmasq + identity",
+            "tooltip": "🛠️ Start the \"backend docker build SAAS + dnsmasq + identity\" task",
+          },
+          {
             "label": "Docker : ReBuild-SAAS + dnsmasq",
             "task": "Backend | rebuild SAAS + dnsmasq",
             "tooltip": "🛠️ Start the \"backend docker rebuild SAAS + dnsmasq\" task",
@@ -76,6 +81,16 @@
             "label": "Docker : Build-EE + dnsmasq",
             "task": "Backend | build EE + dnsmasq",
             "tooltip": "🛠️ Start the \"backend docker build EE + dnsmasq\" task",
+          },
+          {
+            "label": "Docker : Build-EE + identity",
+            "task": "Backend | build EE + identity",
+            "tooltip": "🛠️ Start the \"backend docker build EE + identity\" task",
+          },
+          {
+            "label": "Docker : Build-EE + dnsmasq + identity",
+            "task": "Backend | build EE + dnsmasq + identity",
+            "tooltip": "🛠️ Start the \"backend docker build EE + dnsmasq + identity\" task",
           },
           {
             "label": "Docker : Clear",

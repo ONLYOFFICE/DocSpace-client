@@ -29,7 +29,7 @@ import { Consumer } from "@docspace/shared/utils";
 
 import { AccountsSectionBodyContent } from "../Section";
 
-const AccountsView = () => {
+export const AccountsView = () => {
   return (
     <Consumer>
       {(context) => (
@@ -40,5 +40,3 @@ const AccountsView = () => {
     </Consumer>
   );
 };
-
-export default AccountsView;

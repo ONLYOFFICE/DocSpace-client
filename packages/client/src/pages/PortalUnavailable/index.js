@@ -122,7 +122,7 @@ const PortalUnavailable = ({ onLogoutClick }) => {
   );
 };
 
-export default inject(({ profileActionsStore }) => {
+export const Component = inject(({ profileActionsStore }) => {
   const { onLogoutClick } = profileActionsStore;
 
   return { onLogoutClick };

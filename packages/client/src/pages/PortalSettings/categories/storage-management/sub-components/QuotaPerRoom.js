@@ -49,7 +49,7 @@ const QuotaPerRoomComponent = (props) => {
   );
 };
 
-export default inject(({ currentQuotaStore }) => {
+export const QuotaPerRoomComponentSection = inject(({ currentQuotaStore }) => {
   const { setRoomQuota, defaultRoomsQuota, isDefaultRoomsQuotaSet } =
     currentQuotaStore;
 

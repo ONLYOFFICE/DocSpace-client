@@ -166,7 +166,7 @@ class AuthStore {
 
     this.skipRequest = skipRequest ?? false;
 
-    await this.settingsStore?.init();
+    await Promise.all([this.settingsStore?.init(), this.getCapabilities()]);
 
     const requests = [];
 

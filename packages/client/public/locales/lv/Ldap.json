@@ -41,7 +41,6 @@
   "LdapSendWelcomeLetter": "Sūtīt sveiciena vēstuli",
   "LdapSendWelcomeLetterTooltip": "Ja atzīmēts, visi jaunie lietotāji saņems sveiciena vēstuli. Pieejams tikai tad, ja pasta atribūts ir kartēts LDAP.",
   "LdapServer": "Servers",
-  "LdapServerTooltip": "Ievadiet LDAP servera vietrādi URL bez porta numura, piemēram, LDAP://mycompany.com.",
   "LdapSettings": "LDAP iestatījumi",
   "LdapSettingsCertCnNoMatch": "Sertifikāta nosaukums neatbilst resursdatora nosaukumam",
   "LdapSettingsCertExpired": "Sertifikāta derīguma termiņš ir beidzies",

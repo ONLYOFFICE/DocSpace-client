@@ -31,7 +31,7 @@ const StyledBody = styled.div`
   overflow: hidden;
   width: 100%;
   max-width: max-content;
-  margin-left: 0px !important;
+  margin-inline-start: 0px !important;
 
   display: flex;
   flex-wrap: nowrap;
@@ -48,8 +48,7 @@ const StyledBody = styled.div`
     flex: 1;
     min-width: 0;
     .combo-button {
-      padding-left: 8px;
-      padding-right: 0px;
+      padding-inline: 8px 0;
       width: auto;
     }
   }

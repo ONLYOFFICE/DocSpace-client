@@ -26,10 +26,10 @@
 
 import React, { useMemo } from "react";
 
-import { classNames } from "../../utils";
-
 import { Text } from "../text";
+
 import { IconButton } from "../icon-button";
+import { classNames } from "../../utils";
 
 import { getRoomTitle } from "./RoomIcon.utils";
 import { StyledIcon } from "./RoomIcon.styled";

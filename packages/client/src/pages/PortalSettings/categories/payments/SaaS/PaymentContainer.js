@@ -101,14 +101,7 @@ const StyledBody = styled.div`
       margin: auto 0;
     }
     .payment-info_managers-price {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-left: 6px;
-            `
-          : css`
-              margin-right: 6px;
-            `}
+      margin-inline-end: 6px;
     }
   }
 `;

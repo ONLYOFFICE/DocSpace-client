@@ -32,6 +32,7 @@ import { Button } from "../button";
 import Wrapper from "./ColorPicker.styled";
 import { ColorPickerProps } from "./ColorPicker.types";
 import { ButtonSize } from "../button/Button.enums";
+import { globalColors } from "../../themes";
 
 const ColorPicker = ({
   className,
@@ -45,7 +46,9 @@ const ColorPicker = ({
   handleChange,
   hexCodeLabel,
 }: ColorPickerProps) => {
-  const [color, setColor] = useState(appliedColor || "#4781D1");
+  const [color, setColor] = useState(
+    appliedColor || globalColors.lightBlueMain,
+  );
 
   useEffect(() => {
     if (!isPickerOnly && appliedColor && appliedColor !== color) {
@@ -105,7 +108,7 @@ ColorPicker.defaultProps = {
   isPickerOnly: false,
   onClose: () => {},
   onApply: () => {},
-  appliedColor: "#4781D1",
+  appliedColor: globalColors.lightBlueMain,
   applyButtonLabel: "Apply",
   cancelButtonLabel: "Cancel",
   hexCodeLabel: "Hex code",

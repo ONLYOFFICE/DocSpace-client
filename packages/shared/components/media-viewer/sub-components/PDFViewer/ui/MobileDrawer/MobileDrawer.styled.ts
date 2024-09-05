@@ -26,6 +26,7 @@
 
 import { animated } from "@react-spring/web";
 import styled from "styled-components";
+import { globalColors } from "../../../../../../themes";
 
 export const MobileDrawerContainer = styled.section`
   position: fixed;
@@ -42,7 +43,7 @@ export const MobileDrawerWrapper = styled(animated.div)`
 
   width: 100%;
 
-  background: #333333;
+  background: ${globalColors.black};
   touch-action: none;
 
   overflow: hidden;
@@ -68,6 +69,6 @@ export const MobileDrawerHeader = styled.div`
   }
 
   .mobile-drawer_cross-icon {
-    margin-left: auto;
+    margin-inline-start: auto;
   }
 `;

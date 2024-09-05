@@ -129,6 +129,7 @@ class DialogsStore {
     file: null,
   };
 
+  warningQuotaDialogVisible = false;
   invitePaidUsersCount = 0;
   isNewQuotaItemsByCurrentUser = false;
 
@@ -585,6 +586,10 @@ class DialogsStore {
       visible,
       file,
     };
+  };
+
+  setWarningQuotaDialogVisible = (visible) => {
+    this.warningQuotaDialogVisible = visible;
   };
 }
 

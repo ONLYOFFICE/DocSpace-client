@@ -118,8 +118,8 @@ describe("DatePicker tests", () => {
   // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
   // it("DatePicker themeColor test", () => {
   //   // @ts-expect-error TS(2322): Type '{ themeColor: string; }' is not assignable t... Remove this comment to see the full error message
-  //   const wrapper = mount(<DatePicker themeColor={"#fff"} />);
-  //   expect(wrapper.props().themeColor).toEqual("#fff");
+  //   const wrapper = mount(<DatePicker themeColor={""} />);
+  //   expect(wrapper.props().themeColor).toEqual("");
   // });
 
   // // @ts-expect-error TS(2582): Cannot find name 'it'. Do you need to install type... Remove this comment to see the full error message
@@ -228,7 +228,6 @@ describe("DatePicker tests", () => {
   //     isDisabled: false,
   //     isReadOnly: false,
   //     hasError: false,
-  //     themeColor: "#ED7309",
   //     locale: "en",
   //   };
 

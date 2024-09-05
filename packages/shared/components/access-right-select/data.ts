@@ -33,6 +33,7 @@
 // import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
 
 import { TOption } from "../combobox";
+import { globalColors } from "../../themes";
 
 export const data: TOption[] = [
   {
@@ -40,14 +41,14 @@ export const data: TOption[] = [
     label: "Room administrator",
     description: `Administration of rooms, archiving of rooms, inviting and managing users in rooms.`,
     quota: "free",
-    color: "#20D21F",
+    color: globalColors.tickColor,
   },
   {
     key: "key2",
     label: "Full access",
     description: `Edit, upload, create, view, download, delete files and folders.`,
     quota: "paid",
-    color: "#EDC409",
+    color: globalColors.favoritesStatus,
   },
 
   { key: "key3", label: "", isSeparator: true },

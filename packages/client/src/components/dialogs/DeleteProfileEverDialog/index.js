@@ -71,7 +71,7 @@ const StyledModalDialogContainer = styled(ModalDialogContainer)`
   }
 
   .text-warning {
-    color: #f24724;
+    color: ${(props) => props.theme.peopleDialogs.deleteUser.textColor};
     font-size: 16px;
     font-weight: 700;
     line-height: 22px;

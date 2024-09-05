@@ -254,7 +254,7 @@ const RoomSelector = (props) => {
   );
 };
 
-export default inject(({ authStore, settingsStore }) => {
+export const Component = inject(({ settingsStore }) => {
   const { theme } = settingsStore;
 
   return {

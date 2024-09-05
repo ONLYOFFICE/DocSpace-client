@@ -52,11 +52,7 @@ const mainWrapperTabletStyle = css`
 
   margin-top: ${(props) => props.theme.rowContent.mainWrapper.marginTop};
   width: ${(props) => props.theme.rowContent.mainWrapper.width};
-
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `margin-left: ${theme.rowContent.mainWrapper.marginRight};`
-      : `margin-right: ${theme.rowContent.mainWrapper.marginRight};`}
+  margin-inline-end: ${({ theme }) => theme.rowContent.mainWrapper.marginRight};
 `;
 
 const mainContainerTabletStyle = css`
@@ -106,16 +102,8 @@ const MainContainerWrapper = styled.div<{
   display: flex;
   align-self: center;
 
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `
-      margin-right: 0;
-      margin-left: auto;
-      `
-      : `
-      margin-left: 0;
-      margin-right: auto;
-      `}
+  margin-inline-start: 0;
+  margin-inline-end: auto;
 
   width: ${(props) =>
     props.mainContainerWidth ? props.mainContainerWidth : "140px"};
@@ -147,10 +135,7 @@ const MainContainer = styled.div<{
 
   max-width: 100%;
 
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `margin-left: 8px;`
-      : `margin-right: 8px;`}
+  margin-inline-end: 8px;
 
   ${(props) =>
     (props.widthProp && props.widthProp <= size.desktop) || props.isMobile

@@ -52,6 +52,7 @@ import {
   StyledDescription,
   StyledExternalLink,
 } from "../StyledInvitePanel";
+import { globalColors } from "@docspace/shared/themes";
 
 import { getFreeUsersRoleArray, getFreeUsersTypeArray } from "../utils";
 
@@ -220,8 +221,8 @@ const ExternalLinks = ({
             <IconButton
               size={16}
               iconName={MediaDownloadReactSvgUrl}
-              hoverColor="#333333"
-              iconColor="#A3A9AE"
+              hoverColor={globalColors.black}
+              iconColor={globalColors.gray}
               onClick={toggleActionLinks}
             />
             <DropDown

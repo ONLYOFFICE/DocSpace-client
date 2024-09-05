@@ -25,11 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base } from "@docspace/shared/themes";
-import {
-  getCorrectBorderRadius,
-  getCorrectFourValuesStyle,
-} from "@docspace/shared/utils";
+import { Base, globalColors } from "@docspace/shared/themes";
 
 const StyledComponent = styled.div`
   display: inline-flex;
@@ -44,21 +40,21 @@ const StyledComponent = styled.div`
 
     height: 100%;
     background: ${(props) =>
-      props.themePreview === "Light" ? "#f8f9f9" : "#292929"};
+      props.themePreview === "Light"
+        ? globalColors.grayLight
+        : globalColors.darkGrayLight};
     ${(props) =>
       props.withBorder &&
       css`
         border-width: 1px;
         border-style: solid;
-        border-radius: ${getCorrectBorderRadius(
-          "16px 0px 0px 16px",
-          props.theme.interfaceDirection,
-        )};
+        border-start-start-radius: 16px;
+        border-end-start-radius: 16px;
       `}
   }
 
   .tablet-header {
-    padding: 0 15px 20px 15px;
+    padding: 0 15px 20px;
   }
 
   .tablet-category {
@@ -69,19 +65,22 @@ const StyledComponent = styled.div`
     width: 20px;
     height: 1px;
     background: ${(props) =>
-      props.themePreview === "Light" ? "#eceef1" : "#474747"};
-    margin: 0 20px 31px 20px;
+      props.themePreview === "Light"
+        ? globalColors.grayLightMid
+        : globalColors.grayDarkStrong};
+    margin: 0 20px 31px;
   }
 
   .tablet-category-notice {
-    padding: 20px 16px 20px 16px;
+    padding: 20px 16px 20px;
 
     ${({ theme }) =>
       theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
 
     circle {
       fill: ${(props) => props.colorPreview};
-      stroke: ${(props) => props.themePreview === "Dark" && "#292929"};
+      stroke: ${(props) =>
+        props.themePreview === "Dark" && globalColors.darkGrayLight};
     }
   }
 
@@ -101,18 +100,10 @@ const StyledComponent = styled.div`
   }
 
   .tile-half {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 16px;
-            border-left: none !important;
-            border-radius: 0px 12px 12px 0 !important;
-          `
-        : css`
-            margin-left: 16px;
-            border-right: none !important;
-            border-radius: 12px 0 0 12px !important;
-          `}
+    margin-inline-start: 16px;
+    border-inline-end: none !important;
+    border-start-start-radius: 12px;
+    border-end-start-radius: 12px;
     width: 44% !important;
   }
 
@@ -124,43 +115,23 @@ const StyledComponent = styled.div`
       css`
         border-width: 1px;
         border-style: solid;
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                border-radius: 16px 0px 0px 16px;
-                border-right-style: none;
-              `
-            : css`
-                border-radius: 0px 16px 16px 0px;
-                border-left-style: none;
-              `}
+        border-start-end-radius: 16px;
+        border-end-end-radius: 16px;
+        border-inline-start-style: none;
       `}
     background: ${(props) =>
-      props.themePreview === "Light" ? "#FFFFFF" : "#333333"};
+      props.themePreview === "Light" ? globalColors.white : globalColors.black};
   }
 
   .section-header {
     display: flex;
     align-items: flex-start;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding: 26px 20px 28px 0px;
-          `
-        : css`
-            padding: 26px 0px 28px 20px;
-          `}
+    padding-block: 26px 28px;
+    padding-inline: 20px 0;
   }
 
   .section-header-loader {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 17px;
-          `
-        : css`
-            padding-right: 17px;
-          `}
+    padding-inline-end: 17px;
     height: 16px;
   }
 
@@ -168,30 +139,16 @@ const StyledComponent = styled.div`
     height: 30px;
     border-width: 1px;
     border-style: solid;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin: 0px 20px 24px 0px;
-            border-left-style: none;
-            border-radius: 0px 3px 3px 0px;
-          `
-        : css`
-            margin: 0px 0px 24px 20px;
-            border-right-style: none;
-            border-radius: 3px 0px 0px 3px;
-          `}
+    margin-block: 0 24px;
+    margin-inline: 20px 0;
+    border-inline-end-style: none;
+    border-start-start-radius: 3px;
+    border-end-start-radius: 3px;
   }
 
   .section-search-loader {
     padding-top: 9px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-right: 8px;
-          `
-        : css`
-            padding-left: 8px;
-          `}
+    padding-inline-start: 8px;
   }
 
   .loader-search {
@@ -217,7 +174,7 @@ const StyledComponent = styled.div`
   .color-badge rect {
     fill: ${(props) =>
       props.themePreview === "Dark" && props.selectThemeId === 7
-        ? "#FFFFFF"
+        ? globalColors.white
         : props.colorPreview} !important;
   }
 
@@ -225,7 +182,7 @@ const StyledComponent = styled.div`
     fill: ${(props) =>
       props.themePreview === "Light"
         ? `${props.colorPreview} !important`
-        : `#FFFFFF !important`};
+        : `${globalColors.white} !important`};
   }
 
   .menu-section {
@@ -235,13 +192,15 @@ const StyledComponent = styled.div`
   }
 
   .header {
-    margin: 0px 20px 23px 20px;
+    margin: 0px 20px 23px;
     height: 24px;
   }
 
   .loaders-theme {
     background-color: ${(props) =>
-      props.themePreview === "Light" ? "#FFF" : "#858585"};
+      props.themePreview === "Light"
+        ? globalColors.white
+        : globalColors.grayDark};
     border-radius: 3px;
   }
 
@@ -257,14 +216,7 @@ const StyledComponent = styled.div`
 
   .padding-right {
     height: 16px;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 8px;
-          `
-        : css`
-            padding-right: 8px;
-          `}
+    padding-inline-end: 8px;
   }
 
   .title-section {
@@ -273,14 +225,7 @@ const StyledComponent = styled.div`
   }
 
   .menu-badge {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-right: 93px;
-          `
-        : css`
-            padding-left: 93px;
-          `}
+    padding-inline-start: 93px;
     border: none;
     cursor: auto;
   }
@@ -289,20 +234,19 @@ const StyledComponent = styled.div`
     padding-top: 9px;
     padding-bottom: 9px !important;
     background: ${(props) =>
-      props.themePreview === "Light" ? "#f0f0f0" : "#333333"};
+      props.themePreview === "Light" ? globalColors.white : globalColors.black};
   }
 
   .section-tile {
-    padding: ${({ isViewTablet, theme }) => {
-      const value = isViewTablet ? "0 0 0 20px" : "0 20px 0";
-
-      return getCorrectFourValuesStyle(value, theme.interfaceDirection);
-    }};
+      padding-block: 0;
+      padding-inline: ${({ isViewTablet }) => (isViewTablet ? "20px 0" : "20px")}};
   }
 
   .border-color {
     border-color: ${(props) =>
-      props.themePreview === "Light" ? "#d0d5da" : "#474747"};
+      props.themePreview === "Light"
+        ? globalColors.grayStrong
+        : globalColors.grayDarkStrong};
   }
 
   .tile {
@@ -315,7 +259,9 @@ const StyledComponent = styled.div`
 
   .background {
     background: ${(props) =>
-      props.themePreview === "Light" ? "#FFF" : "#292929"};
+      props.themePreview === "Light"
+        ? globalColors.white
+        : globalColors.darkGrayLight};
   }
 
   .tile-name {
@@ -327,29 +273,21 @@ const StyledComponent = styled.div`
   }
 
   .tablet-tile-name {
-    width: 44% !important;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: 16px;
-            border-left: none !important;
-            border-radius: 0 12px 0 16px !important;
-          `
-        : css`
-            margin-left: 16px;
-            border-right: none !important;
-            border-radius: 12px 0 16px 0 !important;
-          `}
+      width: 44% !important;
+      margin-inline-start: 16px;
+      border-inline-end: none !important;
+      border-start-start-radius: 12px !important;
+      border-end-end-radius: 16px !important;
   }
 
   .only-tile-name {
     width: ${(props) => props.isViewTablet && "66%"};
     border-top-width: 1px;
-    border-right-width: 1px;
-    border-left-width: 1px;
+    border-inline-width: 1px;
     border-style: solid;
     border-bottom: none;
-    border-radius: 12px 12px 0px 0px;
+    border-start-start-radius: 12px;
+    border-start-end-radius: 12px;
   }
 
   .action-button {
@@ -360,14 +298,11 @@ const StyledComponent = styled.div`
   }
 
   .tile-tag {
-    display: flex;
-    border-top-width: 1px;
-    border-top-style: solid;
-    padding: ${({ theme }) =>
-      getCorrectFourValuesStyle(
-        `16px 0px 16px 16px`,
-        theme.interfaceDirection,
-      )};
+      display: flex;
+      border-top-width: 1px;
+      border-top-style: solid;
+      padding-block: 16px;
+      padding-inline: 16px 0;
   }
 
   .tile-container {
@@ -376,42 +311,21 @@ const StyledComponent = styled.div`
   }
 
   .tile-icon {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 12px;
-          `
-        : css`
-            padding-right: 12px;
-          `}
+      padding-inline-end: 12px;
   }
 
   .section-badge {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 12px;
-          `
-        : css`
-            padding-right: 12px;
-          `}
+      padding-inline-end: 12px;
   }
 
   .pin {
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            padding-left: 14px;
-          `
-        : css`
-            padding-right: 14px;
-          `}
+      padding-inline-end: 14px;
 
     path {
       fill: ${(props) =>
         props.themePreview === "Light"
           ? `${props.colorPreview} !important`
-          : `#FFFFFF !important`};
+          : `${globalColors.white} !important`};
     }
   }
 
@@ -420,20 +334,13 @@ const StyledComponent = styled.div`
   }
 
   .main-button_text {
-    color: #ffffff !important;
+    color: ${globalColors.white} !important;
   }
 `;
 
 const StyledFloatingButton = styled.div`
   bottom: 24px;
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          left: 24px;
-        `
-      : css`
-          right: 24px;
-        `}
+  inset-inline-end: 24px;
   width: 48px;
   height: 48px;
   border-radius: 50%;
@@ -443,7 +350,7 @@ const StyledFloatingButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0px 12px 40px rgba(4, 15, 27, 0.12);
+  box-shadow: 0px 12px 40px ${globalColors.popupShadow};
 `;
 
 StyledFloatingButton.defaultProps = { theme: Base };
@@ -465,10 +372,12 @@ const StyledMobilePreview = styled.div`
   border-radius: 16px;
   padding: 0px 16px;
   background: ${({ themePreview }) =>
-    themePreview === "Light" ? "#FFFFFF" : "#333333"};
+    themePreview === "Light" ? globalColors.white : globalColors.black};
 
   border: ${({ themePreview }) =>
-    themePreview === "Light" ? "1px solid #d0d5da" : "1px solid #474747"};
+    themePreview === "Light"
+      ? `1px solid ${globalColors.grayStrong}`
+      : `1px solid ${globalColors.grayDarkStrong}`};
 
   .section-search {
     height: 30px;
@@ -494,7 +403,7 @@ const StyledMobilePreview = styled.div`
   .color-badge rect {
     fill: ${(props) =>
       props.themePreview === "Dark" && props.selectThemeId === 7
-        ? "#FFFFFF"
+        ? globalColors.white
         : props.colorPreview} !important;
   }
 
@@ -502,7 +411,7 @@ const StyledMobilePreview = styled.div`
     fill: ${(props) =>
       props.themePreview === "Light"
         ? `${props.colorPreview} !important`
-        : `#FFFFFF !important`};
+        : `${globalColors.white} !important`};
   }
 
   .menu-section {
@@ -513,33 +422,41 @@ const StyledMobilePreview = styled.div`
 
   .loaders-theme {
     background-color: ${(props) =>
-      props.themePreview === "Light" ? "#FFF" : "#545454"};
+      props.themePreview === "Light"
+        ? globalColors.white
+        : globalColors.grayDark};
     border-radius: 3px;
   }
 
   .loaders-tile-theme {
     background: ${(props) =>
-      props.themePreview === "Light" ? "#F1F1F1" : "#333333"};
+      props.themePreview === "Light" ? globalColors.white : globalColors.black};
 
     border-radius: 3px;
   }
 
   .loaders-tile-text-theme {
     background: ${(props) =>
-      props.themePreview === "Light" ? "#D0D5DA" : "#858585"};
+      props.themePreview === "Light"
+        ? globalColors.grayStrong
+        : globalColors.grayDark};
 
     border-radius: 3px;
   }
 
   .loaders-theme-avatar {
     background-color: ${(props) =>
-      props.themePreview === "Light" ? "#FFF" : "#545454"};
+      props.themePreview === "Light"
+        ? globalColors.white
+        : globalColors.grayDark};
     border-radius: 50px;
   }
 
   .border-color {
     border-color: ${(props) =>
-      props.themePreview === "Light" ? "#d0d5da" : "#474747"};
+      props.themePreview === "Light"
+        ? globalColors.grayStrong
+        : globalColors.grayDarkStrong};
   }
 
   .tile {
@@ -552,32 +469,35 @@ const StyledMobilePreview = styled.div`
 
   .background {
     background: ${(props) =>
-      props.themePreview === "Light" ? "#FFF" : "#292929"};
+      props.themePreview === "Light"
+        ? globalColors.white
+        : globalColors.darkGrayLight};
   }
 
   .tile-name {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 16px 14px 16px;
+    padding: 16px 16px 14px;
     height: 30px;
   }
 
   .tablet-tile-name {
     width: 44% !important;
     margin-inline-start: 16px;
-    border-right: none !important;
-    border-radius: 12px 0 16px 0 !important;
+    border-inline-end: none !important;
+    border-start-start-radius: 12px;
+    border-end-end-radius: 16px;
   }
 
   .only-tile-name {
     width: ${(props) => props.isViewTablet && "66%"};
     border-top-width: 1px;
-    border-right-width: 1px;
-    border-left-width: 1px;
+    border-inline-width: 1px;
     border-style: solid;
     border-bottom: none;
-    border-radius: 12px 12px 0px 0px;
+    border-start-start-radius: 12px;
+    border-start-end-radius: 12px;
   }
 
   .action-button {
@@ -607,7 +527,7 @@ const StyledMobilePreview = styled.div`
       fill: ${(props) =>
         props.themePreview === "Light"
           ? `${props.colorPreview} !important`
-          : `#FFFFFF !important`};
+          : `${globalColors.white} !important`};
     }
   }
 
@@ -626,7 +546,9 @@ const StyledMobilePreview = styled.div`
     padding: 0 16px;
 
     background: ${({ themePreview }) =>
-      themePreview === "Light" ? "#FFFFFF" : "#282828"};
+      themePreview === "Light"
+        ? globalColors.white
+        : globalColors.darkGrayLight};
 
     border-radius: 16px 16px 0px 0px;
   }
@@ -644,7 +566,7 @@ const StyledMobilePreview = styled.div`
   .color-badge rect {
     fill: ${({ themePreview, selectThemeId, colorPreview }) =>
       themePreview === "Dark" && selectThemeId === 7
-        ? "#FFFFFF"
+        ? globalColors.white
         : colorPreview} !important;
   }
   .section-badge {
@@ -665,7 +587,8 @@ const StyledMobilePreview = styled.div`
   .icon-button_svg {
     svg {
       path {
-        fill: #a3a9ae;
+        fill: ${(props) =>
+          props.theme.client.settings.common.appearance.iconFill};
       }
     }
   }

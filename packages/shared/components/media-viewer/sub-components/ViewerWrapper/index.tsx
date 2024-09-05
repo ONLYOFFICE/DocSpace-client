@@ -100,7 +100,7 @@ const ViewerWrapper = memo(
           directionY="top"
           withBackdrop={false}
           isDefaultMode={false}
-          directionX={isRtl ? "left" : "right"}
+          directionX="right"
           manualY={`${bottom ?? 63}px`}
           manualX={`${right ?? -31}px`}
         >

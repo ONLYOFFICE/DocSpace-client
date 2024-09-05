@@ -41,7 +41,6 @@
   "LdapSendWelcomeLetter": "Pošlji pozdravno pismo",
   "LdapSendWelcomeLetterTooltip": "Če je označeno, bodo vsi novi uporabniki prejeli pozdravno pismo. Na voljo samo, če je poštni atribut preslikan v LDAP.",
   "LdapServer": "Strežnik",
-  "LdapServerTooltip": "Vnesite URL strežnika LDAP brez številke vrat, npr. LDAP://mycompany.com.",
   "LdapSettings": "LDAP nastavitve",
   "LdapSettingsCertCnNoMatch": "Ime potrdila se ne ujema z imenom gostitelja",
   "LdapSettingsCertExpired": "Certifikat je potekel",

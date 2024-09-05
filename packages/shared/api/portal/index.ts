@@ -33,6 +33,7 @@ import {
   TPortalTariff,
   TRestoreProgress,
 } from "./types";
+import { Nullable } from "../../types";
 
 export function getShortenedLink(link: string) {
   return request({
@@ -213,7 +214,7 @@ export function sendDeletePortalEmail() {
   });
 }
 
-export function suspendPortal(confirmKey = null) {
+export function suspendPortal(confirmKey: Nullable<string> = null) {
   const options = {
     method: "put",
     url: "/portal/suspend",
@@ -224,7 +225,7 @@ export function suspendPortal(confirmKey = null) {
   return request(options);
 }
 
-export function continuePortal(confirmKey = null) {
+export function continuePortal(confirmKey: Nullable<string> = null) {
   const options = {
     method: "put",
     url: "/portal/continue",
@@ -235,7 +236,7 @@ export function continuePortal(confirmKey = null) {
   return request(options);
 }
 
-export function deletePortal(confirmKey = null) {
+export function deletePortal(confirmKey: Nullable<string> = null) {
   const options = {
     method: "delete",
     url: "/portal/delete",

@@ -158,7 +158,7 @@ const DocSpace = (props) => {
   );
 };
 
-export default inject(({ settingsStore }) => {
+export const Component = inject(({ settingsStore }) => {
   const { theme } = settingsStore;
 
   return {

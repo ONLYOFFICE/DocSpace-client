@@ -75,6 +75,7 @@ export const CategoryFilterItem = styled(DropDownItem)`
     overflow: hidden;
     text-overflow: ellipsis;
 
+    // logical property won't work here (dir: auto)
     text-align: ${({ theme }) =>
       theme.interfaceDirection !== "rtl" ? `left` : `right`};
   }
@@ -95,14 +96,7 @@ export const CategoryFilterSubList = styled(DropDown)`
   margin-top: ${({ marginTop }) => marginTop};
   padding: 4px 0;
 
-  ${({ theme }) =>
-    theme.interfaceDirection !== "rtl"
-      ? css`
-          left: calc(100% + 4px);
-        `
-      : css`
-          right: calc(100% + 4px);
-        `};
+  inset-inline-start: calc(100% + 4px);
 
   max-height: 296px;
   max-width: auto;
@@ -124,14 +118,7 @@ export const CategoryFilterSubList = styled(DropDown)`
     content: "";
     position: absolute;
 
-    ${({ theme }) =>
-      theme.interfaceDirection !== "rtl"
-        ? css`
-            left: -4px;
-          `
-        : css`
-            right: -4px;
-          `};
+    inset-inline-start: -4px;
 
     top: 0;
     width: 6px;

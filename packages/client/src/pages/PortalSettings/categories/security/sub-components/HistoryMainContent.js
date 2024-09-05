@@ -35,6 +35,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { UnavailableStyles } from "../../../utils/commonSettingsStyles";
 import { mobile, tablet } from "@docspace/shared/utils";
 import { Badge } from "@docspace/shared/components/badge";
+import { globalColors } from "@docspace/shared/themes";
 
 const StyledTextInput = styled(TextInput)`
   margin-top: 4px;
@@ -56,7 +57,7 @@ const MainContainer = styled.div`
   .paid-badge {
     cursor: auto;
     margin-bottom: 8px;
-    margin-left: -2px;
+    margin-inline-start: -2px;
   }
 
   .login-history-description {
@@ -75,7 +76,8 @@ const MainContainer = styled.div`
 
   .login-subheader {
     font-size: 13px;
-    color: #657077;
+    color: ${(props) =>
+      props.theme.client.settings.security.loginHistory.subheaderColor};
   }
 
   .latest-text {
@@ -312,7 +314,11 @@ const HistoryMainContent = (props) => {
         <Badge
           className="paid-badge"
           fontWeight="700"
-          backgroundColor={theme.isBase ? "#EDC409" : "#A38A1A"}
+          backgroundColor={
+            theme.isBase
+              ? globalColors.favoritesStatus
+              : globalColors.favoriteStatusDark
+          }
           label={t("Common:Paid")}
           isPaidBadge={true}
         />

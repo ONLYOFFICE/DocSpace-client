@@ -18,6 +18,9 @@
   "management": {
     "checkDomain": false
   },
+  "oauth2": {
+    "origin": ""
+  },
   "firebase": {
     "fetchTimeoutMillis": 3600000,
     "minimumFetchIntervalMillis": 3600000

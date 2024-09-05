@@ -66,10 +66,7 @@ const StyledPaging = styled.div`
   }
 
   & > button {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl"
-        ? `margin-left: ${theme.paging.button.marginRight};`
-        : `margin-right: ${theme.paging.button.marginRight};`}
+    margin-inline-end: ${({ theme }) => theme.paging.button.marginRight};
   }
 `;
 StyledPaging.defaultProps = { theme: Base };
@@ -82,16 +79,8 @@ const StyledOnPage = styled.div`
     height: 40px;
   }
 
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `
-        margin-right: ${theme.paging.comboBox.marginLeft};
-        margin-left: ${theme.paging.comboBox.marginRight};
-      `
-      : `
-        margin-left: ${theme.paging.comboBox.marginLeft};
-        margin-right: ${theme.paging.comboBox.marginRight};
-      `}
+  margin-inline-start: ${({ theme }) => theme.paging.comboBox.marginLeft};
+  margin-inline-end: ${({ theme }) => theme.paging.comboBox.marginRight};
 
   .hideDisabled {
     padding: 0;
@@ -103,14 +92,14 @@ const StyledOnPage = styled.div`
     }
 
     .combo-button {
-      padding-left: 14px;
+      padding-inline-start: 14px;
 
       .combo-button-label {
-        margin-right: 0;
+        margin-inline-end: 0;
       }
 
       .combo-buttons_arrow-icon {
-        margin-right: 4px;
+        margin-inline-end: 4px;
       }
 
       @media ${tablet} {
@@ -131,10 +120,7 @@ StyledOnPage.defaultProps = { theme: Base };
 
 const StyledPage = styled.div`
   width: 83px;
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `margin-left: ${theme.paging.page.marginRight};`
-      : `margin-right: ${theme.paging.page.marginRight};`}
+  margin-inline-end: ${({ theme }) => theme.paging.page.marginRight};
 
   .manualWidth {
     padding: 0;
@@ -146,14 +132,14 @@ const StyledPage = styled.div`
     }
 
     .combo-button {
-      padding-left: 14px;
+      padding-inline-start: 14px;
 
       .combo-button-label {
-        margin-right: 0;
+        margin-inline-end: 0;
       }
 
       .combo-buttons_arrow-icon {
-        margin-right: 4px;
+        margin-inline-end: 4px;
       }
 
       @media ${tablet} {

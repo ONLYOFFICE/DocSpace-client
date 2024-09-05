@@ -75,11 +75,12 @@ const TableRow = (props: TableRowProps) => {
 
   const renderContext =
     Object.prototype.hasOwnProperty.call(props, "contextOptions") &&
+    contextOptions &&
     contextOptions.length > 0;
 
   const getOptions = () => {
     fileContextClick?.();
-    return contextOptions;
+    return contextOptions || [];
   };
 
   return (
@@ -99,7 +100,7 @@ const TableRow = (props: TableRowProps) => {
           <ContextMenu
             onHide={onHideContextMenu}
             ref={cm}
-            model={contextOptions}
+            model={contextOptions || []}
             getContextModel={getContextModel}
             withBackdrop
             badgeUrl={badgeUrl}

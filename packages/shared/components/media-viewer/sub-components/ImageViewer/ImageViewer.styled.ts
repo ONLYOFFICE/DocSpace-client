@@ -26,6 +26,7 @@
 
 import styled from "styled-components";
 import { animated } from "@react-spring/web";
+import { globalColors } from "../../../../themes";
 
 export const ImageViewerContainer = styled.div<{ $backgroundBlack: boolean }>`
   width: 100%;
@@ -41,7 +42,7 @@ export const ImageViewerContainer = styled.div<{ $backgroundBlack: boolean }>`
   touch-action: none;
 
   background-color: ${(props) =>
-    props.$backgroundBlack ? "#000" : "rgba(55, 55, 55, 0.6)"};
+    props.$backgroundBlack ? globalColors.darkBlack : "rgba(55, 55, 55, 0.6)"};
 `;
 
 export const ImageWrapper = styled.div<{ $isLoading: boolean }>`

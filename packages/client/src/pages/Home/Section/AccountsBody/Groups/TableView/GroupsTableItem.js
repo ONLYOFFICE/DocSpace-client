@@ -34,6 +34,7 @@ import * as Styled from "./index.styled";
 import { Text } from "@docspace/shared/components/text";
 import { Avatar } from "@docspace/shared/components/avatar";
 import Badges from "../../Badges";
+import { globalColors } from "@docspace/shared/themes";
 
 const GroupsTableItem = ({
   t,
@@ -165,7 +166,7 @@ const GroupsTableItem = ({
               fontSize="13px"
               isTextOverflow
               className="table-cell_group-manager"
-              color={"#A3A9AE"}
+              color={globalColors.gray}
               dir="auto"
             >
               {item.manager?.displayName}

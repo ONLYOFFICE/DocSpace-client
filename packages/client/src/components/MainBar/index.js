@@ -42,10 +42,7 @@ const StyledContainer = styled.div`
     max-width: calc(100% + 8px);
   }
 
-  ${({ theme }) =>
-    theme.interfaceDirection === "rtl"
-      ? `margin-left: -16px;`
-      : `margin-right: -16px;`}
+  margin-inline-end: -16px;
 
   #bar-banner {
     margin-bottom: -3px;

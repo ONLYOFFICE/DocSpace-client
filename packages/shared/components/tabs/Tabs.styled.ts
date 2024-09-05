@@ -78,17 +78,8 @@ export const StyledTabs = styled.div<{
     position: absolute;
     height: 32px;
     width: 60px;
-
+    inset-inline-end: 0;
     pointer-events: none;
-
-    ${(props) =>
-      props.theme.interfaceDirection === "ltr"
-        ? css`
-            right: 0;
-          `
-        : css`
-            left: 0;
-          `}
 
     background: ${(props) =>
       props.theme.interfaceDirection === "ltr"
@@ -187,7 +178,7 @@ export const Tab = styled.div<{
   user-select: none;
 
   padding: ${(props) =>
-    props.$type === TabsTypes.Primary ? "4px 0 0 0" : "4px 16px"};
+    props.$type === TabsTypes.Primary ? "4px 0 0" : "4px 16px"};
 
 
   color: ${(props) =>

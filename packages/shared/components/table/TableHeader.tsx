@@ -100,7 +100,7 @@ class TableHeaderComponent extends React.Component<
       }
 
       for (let index in columns) {
-        if (columns[index].enable !== prevProps.columns[index].enable) {
+        if (columns[index]?.enable !== prevProps.columns[index]?.enable) {
           return this.resetColumns();
         }
       }
@@ -291,8 +291,8 @@ class TableHeaderComponent extends React.Component<
       ? columnSize.right - e.clientX
       : e.clientX - columnSize.left;
 
-    const tableContainer = containerRef.current.style.gridTemplateColumns;
-    const widths = tableContainer.split(" ");
+    const tableContainer = containerRef.current?.style.gridTemplateColumns;
+    const widths = tableContainer?.split(" ") as string[];
 
     const minSize = column.dataset.minWidth
       ? column.dataset.minWidth
@@ -311,8 +311,8 @@ class TableHeaderComponent extends React.Component<
     }
 
     const str = widths.join(" ");
-
-    containerRef.current.style.gridTemplateColumns = str;
+    if (containerRef.current)
+      containerRef.current.style.gridTemplateColumns = str;
     if (this.headerRef?.current)
       this.headerRef.current.style.gridTemplateColumns = str;
 
@@ -327,17 +327,18 @@ class TableHeaderComponent extends React.Component<
       containerRef,
     } = this.props;
 
-    if (!infoPanelVisible) {
-      localStorage.setItem(
-        columnStorageName,
-        containerRef.current.style.gridTemplateColumns,
-      );
-    } else {
-      localStorage.setItem(
-        columnInfoPanelStorageName,
-        containerRef.current.style.gridTemplateColumns,
-      );
-    }
+    if (containerRef.current)
+      if (!infoPanelVisible) {
+        localStorage.setItem(
+          columnStorageName,
+          containerRef.current.style.gridTemplateColumns,
+        );
+      } else {
+        localStorage.setItem(
+          columnInfoPanelStorageName || "",
+          containerRef.current.style.gridTemplateColumns,
+        );
+      }
 
     window.removeEventListener("mousemove", this.onMouseMove);
     window.removeEventListener("mouseup", this.onMouseUp);
@@ -419,7 +420,7 @@ class TableHeaderComponent extends React.Component<
 
     if (!container) return;
 
-    const containerWidth = +container.clientWidth;
+    const containerWidth = container.getBoundingClientRect().width;
 
     const defaultWidth = tableContainer
       .map((column) => getSubstring(column))
@@ -435,7 +436,7 @@ class TableHeaderComponent extends React.Component<
       let hideColumnsConst = false;
 
       const storageInfoPanelSize = localStorage.getItem(
-        columnInfoPanelStorageName,
+        columnInfoPanelStorageName || "",
       );
 
       const tableInfoPanelContainer = storageInfoPanelSize
@@ -470,7 +471,7 @@ class TableHeaderComponent extends React.Component<
 
       if (hideColumns !== hideColumnsConst) {
         this.setState({ hideColumns: hideColumnsConst });
-        setHideColumns(hideColumnsConst);
+        setHideColumns?.(hideColumnsConst);
       }
 
       if (hideColumnsConst) {
@@ -773,8 +774,12 @@ class TableHeaderComponent extends React.Component<
       }
 
       if (infoPanelVisible)
-        localStorage.setItem(columnInfoPanelStorageName, str);
+        localStorage.setItem(columnInfoPanelStorageName || "", str);
       else localStorage.setItem(columnStorageName, str);
+
+      if (!infoPanelVisible) {
+        localStorage.removeItem(columnInfoPanelStorageName || "");
+      }
     }
   };
 
@@ -956,12 +961,12 @@ class TableHeaderComponent extends React.Component<
                   key={column.key ?? "empty-cell"}
                   index={index}
                   column={column}
-                  sorted={sorted}
-                  sortBy={sortBy}
+                  sorted={sorted || false}
+                  sortBy={sortBy || ""}
                   resizable={resizable}
                   defaultSize={column.defaultSize}
                   onMouseDown={this.onMouseDown}
-                  sortingVisible={sortingVisible}
+                  sortingVisible={sortingVisible || false}
                   tagRef={tagRef}
                 />
               );

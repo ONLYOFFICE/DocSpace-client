@@ -1255,71 +1255,10 @@ class ContextOptionsStore {
       !contextOptions.includes("finalize-version") &&
       contextOptions.includes("show-version-history");
 
-    const versionActions = isDesktop()
-      ? onlyShowVersionHistory
-        ? [
-            {
-              id: "option_show-version-history",
-              key: "show-version-history",
-              label: t("ShowVersionHistory"),
-              icon: HistoryReactSvgUrl,
-              onClick: () =>
-                this.showVersionHistory(
-                  item.id,
-                  item.security,
-                  item?.requestToken,
-                ),
-              disabled: false,
-            },
-          ]
-        : [
-            {
-              id: "option_version",
-              key: "version",
-              label: t("VersionHistory"),
-              icon: HistoryFinalizedReactSvgUrl,
-              items: [
-                {
-                  id: "option_finalize-version",
-                  key: "finalize-version",
-                  label: t("FinalizeVersion"),
-                  icon: HistoryFinalizedReactSvgUrl,
-                  onClick: () =>
-                    isEditing
-                      ? this.onShowEditingToast(t)
-                      : this.finalizeVersion(item.id, item.security),
-                  disabled: false,
-                },
-                {
-                  id: "option_version-history",
-                  key: "show-version-history",
-                  label: t("ShowVersionHistory"),
-                  icon: HistoryReactSvgUrl,
-                  onClick: () =>
-                    this.showVersionHistory(
-                      item.id,
-                      item.security,
-                      item?.requestToken,
-                    ),
-                  disabled: false,
-                },
-              ],
-            },
-          ]
-      : [
+    const versionActions = onlyShowVersionHistory
+      ? [
           {
-            id: "option_finalize-version",
-            key: "finalize-version",
-            label: t("FinalizeVersion"),
-            icon: HistoryFinalizedReactSvgUrl,
-            onClick: () =>
-              isEditing
-                ? this.onShowEditingToast(t)
-                : this.finalizeVersion(item.id),
-            disabled: false,
-          },
-          {
-            id: "option_version-history",
+            id: "option_show-version-history",
             key: "show-version-history",
             label: t("ShowVersionHistory"),
             icon: HistoryReactSvgUrl,
@@ -1331,8 +1270,43 @@ class ContextOptionsStore {
               ),
             disabled: false,
           },
+        ]
+      : [
+          {
+            id: "option_version",
+            key: "version",
+            label: t("VersionHistory"),
+            icon: HistoryFinalizedReactSvgUrl,
+            items: [
+              {
+                id: "option_finalize-version",
+                key: "finalize-version",
+                label: t("FinalizeVersion"),
+                icon: HistoryFinalizedReactSvgUrl,
+                onClick: () =>
+                  isEditing
+                    ? this.onShowEditingToast(t)
+                    : this.finalizeVersion(item.id, item.security),
+                disabled: false,
+              },
+              {
+                id: "option_version-history",
+                key: "show-version-history",
+                label: t("ShowVersionHistory"),
+                icon: HistoryReactSvgUrl,
+                onClick: () =>
+                  this.showVersionHistory(
+                    item.id,
+                    item.security,
+                    item?.requestToken,
+                  ),
+                disabled: false,
+              },
+            ],
+          },
         ];
-    const moveActions = isDesktop()
+
+    const moveActions = !isInfoPanel
       ? [
           {
             id: "option_move-or-copy",
@@ -1814,7 +1788,7 @@ class ContextOptionsStore {
     const pluginItems = this.onLoadPlugins(item);
 
     if (pluginItems.length > 0) {
-      if (!isDesktop() || pluginItems.length === 1) {
+      if (pluginItems.length === 1) {
         pluginItems.forEach((plugin) => {
           options.splice(1, 0, {
             id: `option_${plugin.key}`,
@@ -2101,13 +2075,15 @@ class ContextOptionsStore {
     return newOptions;
   };
 
-  onInvite = (e) => {
+  /**
+   * @param {EmployeeType} userType
+   * @returns {void}
+   */
+  inviteUser = (userType) => {
     const { setQuotaWarningDialogVisible, setInvitePanelOptions } =
       this.dialogsStore;
 
-    const type = e.item["data-type"];
-
-    if (this.currentQuotaStore.showWarningDialog(type)) {
+    if (this.currentQuotaStore.showWarningDialog(userType)) {
       setQuotaWarningDialogVisible(true);
       return;
     }
@@ -2116,8 +2092,13 @@ class ContextOptionsStore {
       visible: true,
       roomId: -1,
       hideSelector: true,
-      defaultAccess: type,
+      defaultAccess: userType,
     });
+  };
+
+  onInvite = (e) => {
+    const type = e.item["data-type"];
+    this.inviteUser(type);
   };
 
   onInviteAgain = (t) => {
@@ -2436,7 +2417,7 @@ class ContextOptionsStore {
     }
 
     const createNewDoc = {
-      id: "personal_new-documnet",
+      id: "personal_new-document",
       key: "new-document",
       label: t("Common:NewDocument"),
       onClick: () => this.onCreate("docx"),

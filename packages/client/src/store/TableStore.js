@@ -55,7 +55,6 @@ class TableStore {
   roomColumnTypeIsEnabled = false;
   roomColumnTagsIsEnabled = true;
   roomColumnOwnerIsEnabled = false;
-  roomColumnQuickButtonsIsEnabled = true;
   roomColumnActivityIsEnabled = true;
   roomQuotaColumnIsEnable = false;
 
@@ -262,7 +261,6 @@ class TableStore {
         this.setErasureColumn(splitColumns.includes("Erasure"));
         this.setSizeTrashColumn(splitColumns.includes("SizeTrash"));
         this.setTypeTrashColumn(splitColumns.includes("TypeTrash"));
-        this.setQuickButtonsColumn(splitColumns.includes("QuickButtons"));
         return;
       }
 
@@ -282,6 +280,7 @@ class TableStore {
       this.setCreatedColumn(splitColumns.includes("Created"));
       this.setSizeColumn(splitColumns.includes("Size"));
       this.setTypeColumn(splitColumns.includes("Type"));
+      this.setLastOpenedColumn(splitColumns.includes("LastOpened"));
       this.setQuickButtonsColumn(splitColumns.includes("QuickButtons"));
     }
   };

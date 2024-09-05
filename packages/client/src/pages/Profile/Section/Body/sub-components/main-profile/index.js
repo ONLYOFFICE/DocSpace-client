@@ -67,6 +67,7 @@ import { Tooltip } from "@docspace/shared/components/tooltip";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 import { isMobile } from "@docspace/shared/utils";
 import { useTheme } from "styled-components";
+import { globalColors } from "@docspace/shared/themes";
 
 const MainProfile = (props) => {
   const { t } = useTranslation(["Profile", "Common"]);
@@ -160,7 +161,7 @@ const MainProfile = (props) => {
     : DefaultUserAvatarMax;
 
   const tooltipLanguage = (
-    <Text as="div" fontSize="12px" color="#333333">
+    <Text as="div" fontSize="12px">
       <Trans t={t} i18nKey="NotFoundLanguage" ns="Common">
         "In case you cannot find your language in the list of the available
         ones, feel free to write to us at
@@ -227,8 +228,12 @@ const MainProfile = (props) => {
             <Badge
               className="sso-badge"
               label={t("Common:SSO")}
-              color={"#FFFFFF"}
-              backgroundColor={theme.isBase ? "#22C386" : "#2E5E4C"}
+              color={globalColors.white}
+              backgroundColor={
+                theme.isBase
+                  ? globalColors.secondGreen
+                  : globalColors.secondGreenDark
+              }
               fontSize={"9px"}
               fontWeight={800}
               noHover
@@ -241,8 +246,12 @@ const MainProfile = (props) => {
             <Badge
               className="sso-badge"
               label={t("Common:LDAP")}
-              color={"#FFFFFF"}
-              backgroundColor={theme.isBase ? "#8570BD" : "#544C6A"}
+              color={globalColors.white}
+              backgroundColor={
+                theme.isBase
+                  ? globalColors.secondPurple
+                  : globalColors.secondPurpleDark
+              }
               fontSize={"9px"}
               fontWeight={800}
               noHover
@@ -267,8 +276,12 @@ const MainProfile = (props) => {
                   id="sso-badge-profile"
                   className="sso-badge"
                   label={t("Common:SSO")}
-                  color={"#FFFFFF"}
-                  backgroundColor={theme.isBase ? "#22C386" : "#2E5E4C"}
+                  color={globalColors.white}
+                  backgroundColor={
+                    theme.isBase
+                      ? globalColors.secondGreen
+                      : globalColors.secondGreenDark
+                  }
                   fontSize={"9px"}
                   fontWeight={800}
                   noHover
@@ -286,8 +299,12 @@ const MainProfile = (props) => {
                   id="ldap-badge-profile"
                   className="ldap-badge"
                   label={t("Common:LDAP")}
-                  color={"#FFFFFF"}
-                  backgroundColor={theme.isBase ? "#8570BD" : "#544C6A"}
+                  color={globalColors.white}
+                  backgroundColor={
+                    theme.isBase
+                      ? globalColors.secondPurple
+                      : globalColors.secondPurpleDark
+                  }
                   fontSize={"9px"}
                   fontWeight={800}
                   noHover

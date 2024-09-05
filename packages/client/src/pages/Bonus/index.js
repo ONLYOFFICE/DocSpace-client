@@ -62,7 +62,7 @@ const Bonus = ({ standaloneInit, isInitPaymentPage }) => {
   );
 };
 
-export default inject(({ paymentStore }) => {
+export const Component = inject(({ paymentStore }) => {
   const { standaloneInit, isInitPaymentPage } = paymentStore;
   return {
     standaloneInit,

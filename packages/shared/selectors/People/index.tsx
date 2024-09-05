@@ -54,6 +54,7 @@ import { Box } from "../../components/box";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";
 import { StyledSendClockIcon } from "./PeopleSelector.styled";
+import { globalColors } from "../../themes";
 
 const toListItem = (
   item: TUser,
@@ -373,7 +374,7 @@ const PeopleSelector = ({
               fontSize="12px"
               noSelect
               truncate
-              color="#A3A9AE"
+              color={globalColors.gray}
               dir="auto"
             >
               {`${userType} | ${email}`}

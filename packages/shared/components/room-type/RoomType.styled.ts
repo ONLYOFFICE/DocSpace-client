@@ -43,14 +43,8 @@ const StyledRoomType = styled.div`
 
   .choose_room-forward_btn {
     ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: auto;
-            transform: scaleX(-1);
-          `
-        : css`
-            margin-left: auto;
-          `}
+      props.theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
+    margin-inline-start: auto;
     max-width: 17px;
     max-height: 17px;
     min-width: 17px;

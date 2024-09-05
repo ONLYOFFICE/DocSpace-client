@@ -32,14 +32,7 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 const StyledEditLinkPanel = styled(ModalDialog)`
   .edit-link-panel {
     .scroll-body {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              padding-left: 0 !important;
-            `
-          : css`
-              padding-right: 0 !important;
-            `}
+      padding-inline-end: 0 !important;
     }
   }
 
@@ -55,7 +48,7 @@ const StyledEditLinkPanel = styled(ModalDialog)`
     padding: 4px 0px 0px;
 
     .edit-link_link-block {
-      padding: 16px 16px 20px 16px;
+      padding: 16px 16px 20px;
 
       .edit-link-text {
         display: inline-flex;
@@ -64,14 +57,8 @@ const StyledEditLinkPanel = styled(ModalDialog)`
 
       .edit-link_required-icon {
         display: inline-flex;
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin-right: 2px;
-              `
-            : css`
-                margin-left: 2px;
-              `}
+        color: ${(props) => props.theme.editLink.requiredColor};
+        margin-inline-start: 2px;
       }
 
       .edit-link_link-input {
@@ -81,15 +68,7 @@ const StyledEditLinkPanel = styled(ModalDialog)`
     }
 
     .edit-link-toggle-block {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              padding: 0 20px 16px;
-            `
-          : css`
-              padding: 0 16px 20px;
-            `}
-
+      padding: 0 16px 20px;
       border-top: ${(props) => props.theme.filesPanels.sharing.borderBottom};
 
       .edit-link-toggle-header {
@@ -99,16 +78,7 @@ const StyledEditLinkPanel = styled(ModalDialog)`
         gap: 8px;
 
         .edit-link-toggle {
-          ${(props) =>
-            props.theme.interfaceDirection === "rtl"
-              ? css`
-                  margin-right: auto;
-                  margin-left: 28px;
-                `
-              : css`
-                  margin-left: auto;
-                  margin-right: 28px;
-                `}
+          margin-inline: auto 28px;
         }
       }
       .edit-link_password-block {
@@ -137,14 +107,8 @@ const StyledEditLinkPanel = styled(ModalDialog)`
       }
 
       .edit-link_generate-icon {
-        ${(props) =>
-          props.theme.interfaceDirection === "rtl"
-            ? css`
-                margin: 16px 8px 0px 0px;
-              `
-            : css`
-                margin: 16px 0px 0px 8px;
-              `}
+        margin-block: 16px 0;
+        margin-inline: 8px 0;
       }
     }
   }

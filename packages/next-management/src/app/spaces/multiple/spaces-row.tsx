@@ -25,17 +25,73 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import DefaultLogoUrl from "PUBLIC_DIR/images/logo/leftmenu.svg?url";
+import CatalogSettingsReactSvgUrl from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
+import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
+import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.react.svg?url";
+import ChangQuotaReactSvgUrl from "PUBLIC_DIR/images/change.quota.react.svg?url";
+import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?url";
 
+import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 
+import { useStores } from "@/hooks/useStores";
 import { RowContent } from "./row-content";
 import { StyledSpaceRow } from "./multiple.styled";
 
 export const SpacesRow = ({ item }) => {
+  const { t } = useTranslation(["Common", "Files"]);
+  const { spacesStore } = useStores();
+  const { setDeletePortalDialogVisible, setCurrentPortal } = spacesStore;
   const logoElement = <ReactSVG id={item.key} src={DefaultLogoUrl} />;
+  const protocol = window?.location?.protocol;
+
+  const contextOptions = [
+    {
+      label: t("Files:Open"),
+      key: "space_open",
+      icon: ExternalLinkIcon,
+      onClick: () => window.open(`${protocol}//${item.domain}/`, "_blank"),
+    },
+    {
+      label: t("Common:Settings"),
+      key: "space_settings",
+      icon: CatalogSettingsReactSvgUrl,
+      onClick: () =>
+        window.open(`${protocol}//${item.domain}/portal-settings/`, "_blank"),
+    },
+    {
+      label: t("Common:ManageStorageQuota"),
+      key: "change_quota",
+      icon: ChangQuotaReactSvgUrl,
+      onClick: () => {},
+    },
+    {
+      key: "disable_quota",
+      label: t("Common:DisableQuota"),
+      icon: DisableQuotaReactSvgUrl,
+      onClick: () => {},
+    },
+    {
+      key: "separator",
+      isSeparator: true,
+    },
+    {
+      label: t("Common:Delete"),
+      key: "space_delete",
+      icon: DeleteReactSvgUrl,
+      onClick: () => {
+        setCurrentPortal(item);
+        setDeletePortalDialogVisible(true);
+      },
+    },
+  ];
 
   return (
-    <StyledSpaceRow element={logoElement} key={item.id}>
+    <StyledSpaceRow
+      key={item.id}
+      element={logoElement}
+      contextOptions={contextOptions}
+    >
       <RowContent item={item} />
     </StyledSpaceRow>
   );

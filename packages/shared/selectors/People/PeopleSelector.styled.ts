@@ -29,7 +29,6 @@ import styled from "styled-components";
 import SendClockIcon from "PUBLIC_DIR/images/send.clock.react.svg";
 
 import { commonIconsStyles } from "../../utils";
-import { globalColors } from "../../themes";
 
 const StyledUserTooltip = styled.div`
   width: 233px;
@@ -54,7 +53,7 @@ export const StyledSendClockIcon = styled(SendClockIcon)`
 
   ${commonIconsStyles}
   path {
-    fill: ${globalColors.gray};
+    fill: ${(props) => props.theme.accountsBadges.pendingColor};
   }
 `;
 

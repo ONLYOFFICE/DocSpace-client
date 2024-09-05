@@ -30,6 +30,7 @@ import React from "react";
 import styled from "styled-components";
 import { observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { useRouter } from "next/navigation";
 
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
@@ -62,13 +63,13 @@ const StyledModal = styled(ModalDialog)`
 
 export const ChangeDomainDialog = observer(() => {
   const { t } = useTranslation(["Management", "Common"]);
+  const router = useRouter();
   const { spacesStore } = useStores();
   const [domainNameError, setDomainNameError] =
     React.useState<null | Array<object>>(null);
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const {
     setDomainName,
-    getPortalDomain,
     setChangeDomainDialogVisible,
     domainDialogVisible: visible,
   } = spacesStore;
@@ -91,16 +92,13 @@ export const ChangeDomainDialog = observer(() => {
 
     try {
       setIsLoading(true);
-
       await setDomainName(domain);
-      //await settingsStore.getAllPortals();
-      await getPortalDomain();
-
       onClose();
     } catch (err) {
       toastr.error(err);
     } finally {
       setIsLoading(false);
+      router.refresh();
     }
   };
 

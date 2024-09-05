@@ -28,8 +28,8 @@
     "licenses-audit": "yarn licenses audit --output-csv=licenses.csv --config=licenses.config.js --summary",
     "check-circular": "yarn madge --circular ./packages",
     "check-circular:graph": "yarn madge --circular --image graph.svg ./packages",
-    "lint": "yarn workspace @docspace/shared lint",
-    "lint:fix": "yarn workspace @docspace/shared lint:fix",
+    "lint": "yarn workspaces foreach -vptiR --from '{@docspace/login,@docspace/doceditor}' run lint",
+    "lint:fix": "yarn workspaces foreach -vptiR --from '{@docspace/login,@docspace/doceditor}' run lint:fix",
     "test:build": "yarn workspace @docspace/login test:build",
     "test:e2e": "yarn workspace @docspace/login test:e2e",
     "test:e2e:model": "yarn workspace @docspace/login test:e2e:model"

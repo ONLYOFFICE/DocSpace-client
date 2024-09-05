@@ -83,14 +83,6 @@ function VirtualList({
         case "ArrowUp":
           index -= 1;
           break;
-        case "Enter":
-          return (
-            children &&
-            Array.isArray(children) &&
-            children[index] &&
-            React.isValidElement(children?.[index]) &&
-            children?.[index]?.props?.onClick?.()
-          );
         default:
           return;
       }
@@ -104,16 +96,41 @@ function VirtualList({
     [isOpen, children],
   );
 
+  const onKeyUp = useCallback(
+    (e: KeyboardEvent) => {
+      if (!focusTrapRef.current || !isOpen) return;
+
+      if (e.code === "Enter") {
+        e.stopPropagation();
+
+        const index = currentIndexRef.current;
+
+        return (
+          children &&
+          Array.isArray(children) &&
+          children[index] &&
+          React.isValidElement(children?.[index]) &&
+          children?.[index]?.props?.onClick?.()
+        );
+      }
+    },
+    [isOpen, children],
+  );
+
   useEffect(() => {
+    const focusTrap = focusTrapRef.current;
+
     if (isOpen && isDropdownReady && enableKeyboardEvents) {
-      focusTrapRef.current?.focus();
-      focusTrapRef.current?.addEventListener("keydown", onKeyDown);
+      focusTrap?.focus();
+      focusTrap?.addEventListener("keydown", onKeyDown);
+      focusTrap?.addEventListener("keyup", onKeyUp);
     }
 
     const refVar = ref.current;
 
     return () => {
-      focusTrapRef.current?.removeEventListener("keydown", onKeyDown);
+      focusTrap?.removeEventListener("keydown", onKeyDown);
+      focusTrap?.removeEventListener("keyup", onKeyUp);
 
       if (itemCount > 0 && refVar) {
         setCurrentIndex(activeIndex);
@@ -129,6 +146,7 @@ function VirtualList({
     enableKeyboardEvents,
     children,
     onKeyDown,
+    onKeyUp,
     itemCount,
     isDropdownReady,
   ]);

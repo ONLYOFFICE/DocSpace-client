@@ -471,6 +471,11 @@ const InvitePanel = ({
     [inviteItems],
   );
 
+  const invitedUsersArray = useMemo(
+    () => Array.from(invitedUsers.keys()),
+    [invitedUsers],
+  );
+
   return (
     <ModalDialog
       visible={visible}
@@ -496,7 +501,7 @@ const InvitePanel = ({
             roomId={roomId}
             withGroups={!isPublicRoomType}
             withAccessRights
-            invitedUsers={invitedUsers}
+            invitedUsers={invitedUsersArray}
             disableDisabledUsers
             useAside={false}
           />

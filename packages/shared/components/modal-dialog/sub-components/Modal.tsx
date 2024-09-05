@@ -51,6 +51,7 @@ const Modal = ({
   withBodyScroll,
   isScrollLocked,
   isLarge,
+  isHuge,
   zIndex,
   autoMaxHeight,
   autoMaxWidth,
@@ -152,6 +153,7 @@ const Modal = ({
               id="modal-dialog"
               visible={visible}
               isLarge={isLarge}
+              isHuge={isHuge}
               currentDisplayType={currentDisplayType}
               autoMaxHeight={autoMaxHeight}
               autoMaxWidth={autoMaxWidth}

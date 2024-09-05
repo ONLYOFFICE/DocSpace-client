@@ -82,6 +82,7 @@ const ModalDialog = ({
   blur,
   zIndex = 310,
   isLarge = false,
+  isHuge = false,
   isLoading = false,
   isCloseable = true,
   withBodyScroll = false,
@@ -161,6 +162,7 @@ const ModalDialog = ({
           withBodyScroll={withBodyScroll}
           isScrollLocked={isScrollLocked}
           isLarge={isLarge || false}
+          isHuge={isHuge || false}
           zIndex={zIndex}
           autoMaxHeight={autoMaxHeight}
           autoMaxWidth={autoMaxWidth}

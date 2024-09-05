@@ -32,7 +32,6 @@ import { withTranslation } from "react-i18next";
 import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { mobileMore } from "@docspace/shared/utils";
 import api from "@docspace/shared/api";
 
 import { inject, observer } from "mobx-react";
@@ -41,24 +40,8 @@ import BodyComponent from "./sub-components/BodyComponent";
 
 const { deleteUser } = api.people;
 
-const StyledModalDialogContainer = styled(ModalDialog)`
-  #modal-dialog {
-    ${(props) =>
-      props.needReassignData &&
-      css`
-        width: auto;
-
-        @media ${mobileMore} {
-          .delete-button,
-          .cancel-button {
-            width: auto;
-          }
-        }
-      `}
-
-    max-width: 520px;
-    max-height: none;
-  }
+const StyledBodyContent = styled.div`
+  display: contents;
 
   .user-delete {
     line-height: 20px;
@@ -190,11 +173,10 @@ const DeleteProfileEverDialogComponent = (props) => {
   };
 
   return (
-    <StyledModalDialogContainer
+    <ModalDialog
       isLoading={!tReady}
       visible={visible}
       onClose={onClose}
-      needReassignData={needReassignData}
       deleteWithoutReassign={deleteWithoutReassign}
       areUsersOnly={areUsersOnly}
     >
@@ -202,15 +184,17 @@ const DeleteProfileEverDialogComponent = (props) => {
         {onlyOneUser ? t("DeleteUser") : t("DeletingUsers")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <BodyComponent
-          needReassignData={needReassignData}
-          onClickReassignData={onClickReassignData}
-          deleteWithoutReassign={deleteWithoutReassign}
-          users={usersToDelete}
-          onlyOneUser={onlyOneUser}
-          areUsersOnly={areUsersOnly}
-          t={t}
-        />
+        <StyledBodyContent>
+          <BodyComponent
+            needReassignData={needReassignData}
+            onClickReassignData={onClickReassignData}
+            deleteWithoutReassign={deleteWithoutReassign}
+            users={usersToDelete}
+            onlyOneUser={onlyOneUser}
+            areUsersOnly={areUsersOnly}
+            t={t}
+          />
+        </StyledBodyContent>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -231,7 +215,7 @@ const DeleteProfileEverDialogComponent = (props) => {
           onClick={onClose}
         />
       </ModalDialog.Footer>
-    </StyledModalDialogContainer>
+    </ModalDialog>
   );
 };
 

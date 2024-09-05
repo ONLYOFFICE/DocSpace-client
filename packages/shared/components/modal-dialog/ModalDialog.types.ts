@@ -60,6 +60,7 @@ export interface ModalDialogProps {
   /** **`MODAL-ONLY`**
   Sets `width: 520px` and `max-height: 400px` */
   isLarge?: boolean;
+  isHuge?: boolean;
 
   /** **`MODAL-ONLY`**
   Sets `max-width: auto` */
@@ -145,6 +146,7 @@ export type ModalSubComponentsProps = AsideHeaderProps & {
   withBodyScroll?: boolean;
   isScrollLocked?: boolean;
   isLarge: boolean;
+  isHuge: boolean;
   zIndex?: number;
   autoMaxHeight?: boolean;
   autoMaxWidth?: boolean;

@@ -74,6 +74,7 @@ const Content = styled.div.attrs((props: { modalSwipeOffset?: number }) => ({
   isLarge?: boolean;
   visible?: boolean;
   embedded?: boolean;
+  isHuge?: boolean;
 }>`
   box-sizing: border-box;
   position: relative;
@@ -100,6 +101,8 @@ const Content = styled.div.attrs((props: { modalSwipeOffset?: number }) => ({
             : props.isLarge
               ? "520px"
               : "400px"};
+
+          max-width: ${props.isHuge ? "730px" : "unset"};
 
           border-radius: 6px;
           @media ${mobile} {

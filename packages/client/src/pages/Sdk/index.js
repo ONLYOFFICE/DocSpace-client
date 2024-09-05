@@ -122,6 +122,8 @@ const Sdk = ({
   }, [callCommandLoad, isDataReady]);
 
   useEffect(() => {
+    if (window.ClientConfig && window.parent)
+      window.ClientConfig.isFrame = true;
     getFilesSettings();
   }, []);
 

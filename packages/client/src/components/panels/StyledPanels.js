@@ -178,31 +178,6 @@ const StyledContent = styled.div`
 
 StyledContent.defaultProps = { theme: Base };
 
-const StyledHeaderContent = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  margin-inline-end: -16px;
-
-  border-bottom: ${(props) => props.theme.filesPanels.sharing.borderBottom};
-
-  .files-operations-header,
-  .sharing_panel-header {
-    font-weight: 700;
-    margin: 14px 0;
-  }
-
-  @media ${desktop} {
-    .files-operations-header,
-    .sharing_panel-header {
-      margin: 12px 0;
-      font-size: 18px;
-    }
-  }
-`;
-
-StyledHeaderContent.defaultProps = { theme: Base };
-
 const StyledBody = styled.div`
   &.files-operations-body {
     padding-block: 0;
@@ -526,13 +501,6 @@ const StyledLink = styled(Link)`
 
 StyledModalRowContainer.defaultProps = { theme: Base };
 
-const StyledUploadHeader = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
 const StyledUploadBody = styled.div`
   width: calc(100% + 16px);
   height: 100%;
@@ -547,13 +515,11 @@ export {
   StyledEmbeddingPanel,
   StyledVersionHistoryPanel,
   StyledContent,
-  StyledHeaderContent,
   StyledBody,
   StyledFooter,
   StyledLinkRow,
   StyledModalRowContainer,
   StyledLink,
   StyledNewFilesBody,
-  StyledUploadHeader,
   StyledUploadBody,
 };

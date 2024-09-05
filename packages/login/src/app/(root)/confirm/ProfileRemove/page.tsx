@@ -25,7 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { getSettings } from "@/utils/actions";
-import ProfileRemoveForm from "@/components/ProfileRemoveForm";
+
+import ProfileRemoveForm from "./page.client";
 
 async function Page() {
   const settings = await getSettings();

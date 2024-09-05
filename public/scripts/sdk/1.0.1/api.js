@@ -98,6 +98,7 @@
       onSignOut: null,
       onDownload: null,
       onNoAccess: null,
+      onNotFound: null,
       onContentReady: null,
     },
   };

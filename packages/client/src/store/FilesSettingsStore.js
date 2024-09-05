@@ -44,6 +44,8 @@ import {
   getIconPathByFolderType,
   isPublicPreview,
 } from "@docspace/shared/utils/common";
+import { toastr } from "@docspace/shared/components/toast";
+
 class FilesSettingsStore {
   thirdPartyStore;
   treeFoldersStore;
@@ -71,6 +73,7 @@ class FilesSettingsStore {
   chunkUploadSize = 1024 * 1023; // 1024 * 1023; //~0.999mb
   maxUploadThreadCount = 15;
   maxUploadFilesCount = 5;
+  displayFileExtension = null;
 
   settingsIsLoaded = false;
 
@@ -165,7 +168,8 @@ class FilesSettingsStore {
         if (
           !settings.enableThirdParty ||
           this.publicRoomStore.isPublicRoom ||
-          isPublicPreview()
+          isPublicPreview() ||
+          (this.settingsStore.isFrame && !this.authStore.isAuthenticated)
         )
           return;
 
@@ -192,12 +196,14 @@ class FilesSettingsStore {
   setStoreOriginal = (data, setting) =>
     api.files
       .storeOriginal(data)
-      .then((res) => this.setFilesSetting(setting, res));
+      .then((res) => this.setFilesSetting(setting, res))
+      .catch((e) => toastr.error(e));
 
   setConfirmDelete = (data, setting) =>
     api.files
       .changeDeleteConfirm(data)
-      .then((res) => this.setFilesSetting(setting, res));
+      .then((res) => this.setFilesSetting(setting, res))
+      .catch((e) => toastr.error(e));
 
   setStoreForceSave = (data) =>
     api.files.storeForceSave(data).then((res) => this.setStoreForcesave(res));
@@ -211,13 +217,22 @@ class FilesSettingsStore {
   setKeepNewFileName = (data) => {
     api.files
       .changeKeepNewFileName(data)
-      .then((res) => this.setFilesSetting("keepNewFileName", res));
+      .then((res) => this.setFilesSetting("keepNewFileName", res))
+      .catch((e) => toastr.error(e));
+  };
+
+  setDisplayFileExtension = (data) => {
+    api.files
+      .enableDisplayFileExtension(data)
+      .then((res) => this.setFilesSetting("displayFileExtension", res))
+      .catch((e) => toastr.error(e));
   };
 
   setOpenEditorInSameTab = (data) => {
     api.files
       .changeOpenEditorInSameTab(data)
-      .then((res) => this.setFilesSetting("openEditorInSameTab", res));
+      .then((res) => this.setFilesSetting("openEditorInSameTab", res))
+      .catch((e) => toastr.error(e));
   };
 
   setEnableThirdParty = async (data, setting) => {

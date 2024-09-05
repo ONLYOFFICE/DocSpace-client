@@ -25,12 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { useMemo } from "react";
+import { useMemo, useContext } from "react";
 import { inject, observer } from "mobx-react";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
 import { Base } from "@docspace/shared/themes";
+import { Context } from "@docspace/shared/utils";
 import { RowContainer } from "@docspace/shared/components/row-container";
 
 import SimpleFilesRow from "./SimpleFilesRow";
@@ -62,7 +63,6 @@ StyledRowContainer.defaultProps = { theme: Base };
 
 const FilesRowContainer = ({
   filesList,
-  sectionWidth,
   viewAs,
   setViewAs,
   infoPanelVisible,
@@ -75,6 +75,8 @@ const FilesRowContainer = ({
   highlightFile,
   currentDeviceType,
 }) => {
+  const { sectionWidth } = useContext(Context);
+
   useViewEffect({
     view: viewAs,
     setView: setViewAs,

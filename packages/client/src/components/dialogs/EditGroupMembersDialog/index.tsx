@@ -35,6 +35,7 @@ import {
 import { getGroupMembersInRoom } from "@docspace/shared/api/groups";
 import { InputSize } from "@docspace/shared/components/text-input";
 import { SearchInput } from "@docspace/shared/components/search-input";
+import { Text } from "@docspace/shared/components/text";
 import {
   TGroup,
   TGroupMemberInvitedInRoom,
@@ -131,7 +132,11 @@ const EditGroupMembers = ({
       onClose={onClose}
       displayType={ModalDialogType.aside}
     >
-      <ModalDialog.Header>{group.name}</ModalDialog.Header>
+      <ModalDialog.Header>
+        <Text fontSize="21px" fontWeight={700} noSelect>
+          {group.name}
+        </Text>
+      </ModalDialog.Header>
 
       <ModalDialog.Body>
         {!groupMembers ? (

@@ -67,6 +67,7 @@ const AddIdpCertificateModal = (props) => {
           onChange={setInput}
           value={idpCertificate}
           placeholder={t("PlaceholderCert")}
+          heightTextArea="72px"
         />
       </ModalDialog.Body>
 

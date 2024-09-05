@@ -26,34 +26,29 @@
 
 import React from "react";
 
-import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
-
-import { IconButton } from "../../icon-button";
-import { Heading } from "../../heading";
-
-import { StyledHeader } from "../Selector.styled";
 import { HeaderProps } from "../Selector.types";
+import { AsideHeader } from "../../aside";
 
 const Header = React.memo(
   ({
     onBackClick,
+    onCloseClick,
     withoutBackButton,
     headerLabel,
     withoutBorder,
+    isCloseable,
   }: HeaderProps) => {
     return (
-      <StyledHeader withoutBorder={withoutBorder}>
-        {!withoutBackButton && typeof withoutBackButton === "boolean" && (
-          <IconButton
-            className="arrow-button"
-            iconName={ArrowPathReactSvgUrl}
-            size={17}
-            onClick={onBackClick}
-          />
-        )}
-
-        <Heading className="heading-text">{headerLabel}</Heading>
-      </StyledHeader>
+      <AsideHeader
+        header={headerLabel}
+        isBackButton={
+          !withoutBackButton && typeof withoutBackButton === "boolean"
+        }
+        onBackClick={onBackClick}
+        onCloseClick={onCloseClick}
+        withoutBorder={withoutBorder}
+        isCloseable={isCloseable}
+      />
     );
   },
 );

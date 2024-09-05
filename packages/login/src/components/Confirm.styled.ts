@@ -31,7 +31,6 @@ import { mobile, tablet } from "@docspace/shared/utils";
 
 export const StyledBody = styled.div`
   margin: 56px auto;
-  max-width: 480px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -88,6 +87,7 @@ export const StyledBody = styled.div`
   }
 
   .greeting-title {
+    max-width: 480px;
     margin-bottom: 32px;
     text-align: center;
   }

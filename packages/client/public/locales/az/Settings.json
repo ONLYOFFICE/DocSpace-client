@@ -168,8 +168,6 @@
   "ManagementCategorySecurity": "Təhlükəsizlik",
   "ManualBackupDescription": "Sahədə olan bütün məlumatları fayl kimi əldə etmək istəyirsinizsə, bu seçimdən istifadə edin.",
   "MaxCopies": "{{copiesCount}} - ehtiyat nüsxələrin maksimal sayı",
-  "MemoryQuotaDisabled": "Yaddaş kvotası uğurla deaktiv edildi.",
-  "MemoryQuotaEnabled": "Yaddaş kvotası uğurla aktiv edildi.",
   "Migration": "Köçürülmə",
   "NewColorScheme": "Yeni rəng sxemi",
   "NextStep": "Növbəti addım",

@@ -14,7 +14,7 @@
   "EnterAppCodeDescription": "Enter 6-digit generated code from your app. If you don't have access to your phone, use the backup codes.",
   "EnterAppCodeTitle": "Enter code from authentication app",
   "EnterCodePlaceholder": "Enter code",
-  "EnterEmail": "Enter email",
+  "EnterEmailHeader": "Enter email",
   "EnterPhone": "Enter mobile phone number",
   "GetCode": "Get code",
   "LoginRegistryButton": "Join",
@@ -31,5 +31,6 @@
   "SignUp": "Sign up",
   "SuccessDeactivate": "Your account has been successfully deactivated. In 10 seconds you will be redirected to the <1>site</1>.",
   "SuccessReactivate": "Your account has been successfully reactivated. In 10 seconds you will be redirected to the <1>portal</1>.",
-  "SuccessRemoved": "Your account has been successfully removed. In 10 seconds you will be redirected to the <1>site</1>."
+  "SuccessRemoved": "Your account has been successfully removed. In 10 seconds you will be redirected to the <1>site</1>.",
+  "TermsAndConditions": "By continuing, you understand and agree to our <1>Terms and conditions</1> and <2>Privacy statement</2>."
 }

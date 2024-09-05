@@ -45,12 +45,12 @@ import { Text } from "@docspace/shared/components/text";
 import AccessSelector from "../../../AccessSelector";
 import PaidQuotaLimitError from "../../../PaidQuotaLimitError";
 import {
-  StyledBlock,
   StyledSubHeader,
   StyledInviteInput,
   StyledInviteInputContainer,
   StyledToggleButton,
   StyledDescription,
+  StyledExternalLink,
 } from "../StyledInvitePanel";
 import { globalColors } from "@docspace/shared/themes";
 
@@ -213,7 +213,7 @@ const ExternalLinks = ({
     roomId === -1 ? getFreeUsersTypeArray() : getFreeUsersRoleArray();
 
   return (
-    <StyledBlock noPadding ref={inputsRef}>
+    <StyledExternalLink noPadding ref={inputsRef}>
       <StyledSubHeader inline>
         {t("InviteViaLink")}
         {false && ( //TODO: Change to linksVisible after added link information from backend
@@ -286,7 +286,7 @@ const ExternalLinks = ({
           />
         </StyledInviteInputContainer>
       )}
-    </StyledBlock>
+    </StyledExternalLink>
   );
 };
 

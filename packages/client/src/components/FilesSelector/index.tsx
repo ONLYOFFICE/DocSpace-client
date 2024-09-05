@@ -140,6 +140,7 @@ const FilesSelectorWrapper = ({
   openRoot,
 
   filesSettings,
+  headerProps,
 }: FilesSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Files",
@@ -392,6 +393,7 @@ const FilesSelectorWrapper = ({
       getFilesArchiveError={getFilesArchiveError}
       withCreate={(isMove || isCopy || isRestore || isRestoreAll) ?? false}
       filesSettings={filesSettings}
+      headerProps={headerProps}
     />
   );
 };

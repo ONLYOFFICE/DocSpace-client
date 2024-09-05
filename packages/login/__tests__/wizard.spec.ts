@@ -27,8 +27,20 @@
 import path from "path";
 import { expect, test } from "./fixtures/base";
 import { endpoints } from "./mocking/endpoints";
+import {
+  HEADER_WIZARD_SETTINGS,
+  HEADER_LICENCE_REQUIRED,
+} from "@docspace/shared/__mocks__/e2e";
 
 test("wizard render", async ({ page }) => {
+  await page.route("*/**/login/wizard", async (route) => {
+    await route.continue({
+      headers: {
+        [HEADER_WIZARD_SETTINGS]: "true",
+      },
+    });
+  });
+
   await page.goto("/login/wizard");
 
   await expect(page).toHaveScreenshot([
@@ -39,6 +51,13 @@ test("wizard render", async ({ page }) => {
 });
 
 test("wizard success", async ({ page, mockRequest }) => {
+  await page.route("*/**/login/wizard", async (route) => {
+    await route.continue({
+      headers: {
+        [HEADER_WIZARD_SETTINGS]: "true",
+      },
+    });
+  });
   await mockRequest.router(endpoints.complete);
 
   await page.goto("/login/wizard");
@@ -67,6 +86,13 @@ test("wizard success", async ({ page, mockRequest }) => {
 });
 
 test("wizard error", async ({ page, mockRequest }) => {
+  await page.route("*/**/login/wizard", async (route) => {
+    await route.continue({
+      headers: {
+        [HEADER_WIZARD_SETTINGS]: "true",
+      },
+    });
+  });
   await mockRequest.router(endpoints.complete);
 
   await page.goto("/login/wizard");
@@ -76,7 +102,6 @@ test("wizard error", async ({ page, mockRequest }) => {
     .getByTestId("password-input")
     .getByTestId("text-input")
     .fill("123");
-  await page.getByTestId("checkbox").click();
 
   await page.getByTestId("button").click();
 
@@ -88,11 +113,11 @@ test("wizard error", async ({ page, mockRequest }) => {
 });
 
 test("wizard with license success", async ({ page, mockRequest }) => {
-  //TODO: remove this route when MSW the server is added
   await page.route("*/**/login/wizard", async (route) => {
     await route.continue({
       headers: {
-        "x-test-data-license-required": "true",
+        [HEADER_WIZARD_SETTINGS]: "true",
+        [HEADER_LICENCE_REQUIRED]: "true",
       },
     });
   });
@@ -132,11 +157,11 @@ test("wizard with license success", async ({ page, mockRequest }) => {
 });
 
 test("wizard with license error", async ({ page }) => {
-  //TODO: remove this route when MSW the server is added
   await page.route("*/**/login/wizard", async (route) => {
     await route.continue({
       headers: {
-        "x-test-data-license-required": "true",
+        [HEADER_WIZARD_SETTINGS]: "true",
+        [HEADER_LICENCE_REQUIRED]: "true",
       },
     });
   });
@@ -148,7 +173,6 @@ test("wizard with license error", async ({ page }) => {
     .getByTestId("password-input")
     .getByTestId("text-input")
     .fill("123");
-  await page.getByTestId("checkbox").click();
 
   await page.getByTestId("button").click();
 

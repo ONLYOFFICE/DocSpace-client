@@ -26,7 +26,6 @@
 
 import React from "react";
 import { Backdrop } from "@docspace/shared/components/backdrop";
-import { Heading } from "@docspace/shared/components/heading";
 import { Aside } from "@docspace/shared/components/aside";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
@@ -38,7 +37,6 @@ import {
   StyledAsidePanel,
   StyledContent,
   StyledFooter,
-  StyledHeaderContent,
   StyledBody,
 } from "../StyledPanels";
 import { inject, observer } from "mobx-react";
@@ -116,13 +114,9 @@ class ChangeOwnerComponent extends React.Component {
           className="header_aside-panel"
           visible={visible}
           onClose={this.onClose}
+          header={t("ChangeOwner", { fileName })}
         >
           <StyledContent>
-            <StyledHeaderContent>
-              <Heading className="sharing_panel-header" size="medium" truncate>
-                {t("ChangeOwner", { fileName })}
-              </Heading>
-            </StyledHeaderContent>
             <StyledBody>
               <div className="change-owner_body">
                 <Link

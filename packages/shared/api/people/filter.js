@@ -40,6 +40,7 @@ const DEFAULT_PAYMENTS = null;
 const DEFAULT_ACCOUNT_LOGIN_TYPE = null;
 const DEFAULT_WITHOUT_GROUP = false;
 const DEFAULT_QUOTA_FILTER = null;
+const DEFAULT_FILTER_SEPARATOR = null;
 
 const ACTIVE_EMPLOYEE_STATUS = 1;
 
@@ -56,6 +57,7 @@ const PAYMENTS = "payments";
 const ACCOUNT_LOGIN_TYPE = "accountLoginType";
 const WITHOUT_GROUP = "withoutGroup";
 const QUOTA_FILTER = "quotaFilter";
+const FILTER_SEPARATOR = "filterSeparator";
 
 class Filter {
   static getDefault(total = DEFAULT_TOTAL) {
@@ -145,6 +147,7 @@ class Filter {
     accountLoginType = DEFAULT_ACCOUNT_LOGIN_TYPE,
     withoutGroup = DEFAULT_WITHOUT_GROUP,
     quotaFilter = DEFAULT_QUOTA_FILTER,
+    filterSeparator = DEFAULT_FILTER_SEPARATOR,
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -160,6 +163,7 @@ class Filter {
     this.accountLoginType = accountLoginType;
     this.withoutGroup = withoutGroup;
     this.quotaFilter = quotaFilter;
+    this.filterSeparator = filterSeparator;
   }
 
   getStartIndex = () => {
@@ -188,6 +192,7 @@ class Filter {
       accountLoginType,
       withoutGroup,
       quotaFilter,
+      filterSeparator,
     } = this;
 
     let employeetype = null;
@@ -212,6 +217,7 @@ class Filter {
       accountLoginType,
       withoutGroup,
       quotaFilter,
+      filterSeparator,
     };
 
     dtoFilter = { ...dtoFilter, ...employeetype };
@@ -235,6 +241,7 @@ class Filter {
       accountLoginType,
       withoutGroup,
       quotaFilter,
+      filterSeparator,
     } = this;
 
     const dtoFilter = {};
@@ -268,6 +275,8 @@ class Filter {
     }
 
     if (quotaFilter) dtoFilter[QUOTA_FILTER] = quotaFilter;
+
+    if (filterSeparator) dtoFilter[FILTER_SEPARATOR] = filterSeparator;
 
     dtoFilter[PAGE] = page + 1;
     dtoFilter[SORT_BY] = sortBy;
@@ -304,6 +313,7 @@ class Filter {
           this.accountLoginType,
           this.withoutGroup,
           this.quotaFilter,
+          this.filterSeparator,
         );
   }
 
@@ -323,6 +333,7 @@ class Filter {
         null,
         null,
         false,
+        null,
       );
     }
 
@@ -342,7 +353,8 @@ class Filter {
       this.pageCount === filter.pageCount &&
       this.payments === filter.payments &&
       this.accountLoginType === filter.accountLoginType &&
-      this.withoutGroup === filter.withoutGroup;
+      this.withoutGroup === filter.withoutGroup &&
+      this.filterSeparator === filter.filterSeparator;
 
     return equals;
   }

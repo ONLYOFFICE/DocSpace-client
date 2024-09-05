@@ -77,6 +77,10 @@ export const WorkspacesContainer = styled.div`
     justify-content: space-between;
     cursor: pointer;
 
+    .link {
+      color: ${globalColors.lightBlueMain};
+    }
+
     &:hover {
       border-color: ${globalColors.lightBlueMain};
     }

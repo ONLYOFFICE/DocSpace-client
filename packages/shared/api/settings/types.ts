@@ -108,6 +108,7 @@ export type TSettings = {
   bookTrainingEmail: string;
   documentationEmail: string;
   legalTerms: string;
+  licenseUrl: string;
   cookieSettingsEnabled: boolean;
   userNameRegex: string;
   plugins: {

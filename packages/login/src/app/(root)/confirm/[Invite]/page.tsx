@@ -30,7 +30,6 @@ import { cookies, headers } from "next/headers";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { LANGUAGE } from "@docspace/shared/constants";
 
-import CreateUserForm from "@/components/CreateUserForm";
 import { GreetingCreateUserContainer } from "@/components/GreetingContainer";
 import { getStringFromSearchParams } from "@/utils";
 import {
@@ -40,6 +39,7 @@ import {
   getThirdPartyProviders,
   getUserFromConfirm,
 } from "@/utils/actions";
+import CreateUserForm from "./page.client";
 
 type LinkInviteProps = {
   searchParams: { [key: string]: string };
@@ -91,6 +91,8 @@ async function Page({ searchParams, params }: LinkInviteProps) {
               passwordSettings={passwordSettings}
               capabilities={capabilities}
               thirdPartyProviders={thirdParty}
+              legalTerms={settings.legalTerms}
+              licenseUrl={settings.licenseUrl}
             />
           </FormWrapper>
         </>

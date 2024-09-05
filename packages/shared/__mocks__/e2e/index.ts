@@ -1,32 +1,7 @@
-import getMockResponse, {
-  settingsSuccessNoAuth,
-  settingsSuccessWithAuth,
-  settingsError,
-  settingsForbidden,
-  settingsNotFound,
-  settingsSuccessWithAuthWizard,
-  settingsPasswordSuccess,
-  machineNameSuccess,
-  isLicenseRequiredFalseSuccess,
-  isLicenseRequiredTrueSuccess,
-  portalTimeZonesSuccess,
-  portalCulturesSuccess,
-  colorThemeSuccess,
-} from "./settings";
+export * from "./handlers";
 
 export {
-  getMockResponse,
-  settingsSuccessNoAuth,
-  settingsSuccessWithAuth,
-  settingsError,
-  settingsForbidden,
-  settingsNotFound,
-  settingsSuccessWithAuthWizard,
-  settingsPasswordSuccess,
-  machineNameSuccess,
-  isLicenseRequiredFalseSuccess,
-  isLicenseRequiredTrueSuccess,
-  portalTimeZonesSuccess,
-  portalCulturesSuccess,
-  colorThemeSuccess,
-};
+  BASE_URL,
+  HEADER_LICENCE_REQUIRED,
+  HEADER_WIZARD_SETTINGS,
+} from "./utils";

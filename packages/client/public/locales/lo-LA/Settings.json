@@ -162,8 +162,6 @@
   "ManagementCategorySecurity": "ຄວາມປອດໄພ",
   "ManualBackupDescription": "ໃຊ້ທາງເລືອກນີ້ຖ້າທ່ານຕ້ອງການເອົາຂໍ້ມູນທັງຫມົດທີ່ມີຢູ່ໃນປະຕູເປັນໄຟລ໌. ",
   "MaxCopies": "{{ copiesCount }} - ຈຳນວນສູງສຸດຂອງສຳເນົາສຳຮອງ",
-  "MemoryQuotaDisabled": "ໂຄຕ້າໜ່ວຍຄວາມຈຳຖືກປິດການນຳໃຊ້ສຳເລັດແລ້ວ.",
-  "MemoryQuotaEnabled": "ໂຄຕ້າໜ່ວຍຄວາມຈຳໄດ້ຖືກເປີດໃຊ້ສຳເລັດແລ້ວ.",
   "Migration": "ຍົກຍ້າຍ",
   "NewColorScheme": "ຮູບແບບສີສັນໃໝ່",
   "NextStep": "ຂັ້ນ​ຕອນ​ຕໍ່​ໄປ",

@@ -123,7 +123,7 @@ const LoginForm = ({
   const [identifierValid, setIdentifierValid] = useState(true);
   const [password, setPassword] = useState("");
 
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(true);
   const [isLdapLoginChecked, setIsLdapLoginChecked] = useState(
     ldapEnabled || false,
   );
@@ -319,7 +319,7 @@ const LoginForm = ({
         }
         return res;
       })
-      .then((res: string | object) => {
+      .then((res?: string | object) => {
         const isConfirm = typeof res === "string" && res.includes("confirm");
         const redirectPath =
           referenceUrl || sessionStorage.getItem("referenceUrl");
@@ -439,7 +439,7 @@ const LoginForm = ({
 
   return (
     <form className="auth-form-container">
-      {!emailFromInvitation && (
+      {!emailFromInvitation && !client && (
         <Text fontSize="16px" fontWeight="600" className="sign-in-subtitle">
           {t("Common:LoginButton")}
         </Text>
@@ -522,7 +522,7 @@ const LoginForm = ({
         label={
           isLoading ? t("Common:LoadingProcessing") : t("Common:LoginButton")
         }
-        tabIndex={1}
+        tabIndex={5}
         isDisabled={isLoading}
         isLoading={isLoading}
         onClick={onSubmit}

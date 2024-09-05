@@ -29,7 +29,8 @@ import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 import { GreetingContainer } from "@/components/GreetingContainer";
 import { getStringFromSearchParams } from "@/utils";
 import { getSettings, getUserFromConfirm } from "@/utils/actions";
-import ChangeOwnerForm from "@/components/ChangeOwnerForm";
+
+import ChangeOwnerForm from "./page.client";
 
 type PortalOwnerChangeProps = {
   searchParams: { [key: string]: string };

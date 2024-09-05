@@ -43,7 +43,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { getUserRoleOptions } from "@docspace/shared/utils/room-members/getUserRoleOptions";
 import { ShareAccessRights } from "@docspace/shared/enums";
-import { getUserRole } from "@docspace/shared/utils/common";
+import { getUserRole, getUserTypeLabel } from "@docspace/shared/utils/common";
 import { TGroupMemberInvitedInRoom } from "@docspace/shared/api/groups/types";
 
 import * as Styled from "./index.styled";
@@ -59,7 +59,7 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation("Common");
 
-  const userRole = user.isOwner
+  const userRole = member.owner
     ? getUserRoleOptions(t).portalAdmin
     : getUserRoleOptionsByUserAccess(
         t,
@@ -74,6 +74,10 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
 
   const userRoleOptions = filterUserRoleOptions(fullRoomRoleOptions, user);
 
+  const hasIndividualRightsInRoom =
+    member.owner ||
+    (member.userAccess && member.userAccess !== member.groupAccess);
+
   let type;
   if (user.isOwner) type = "owner";
   else if (user.isAdmin) type = "admin";
@@ -82,6 +86,11 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
   else type = "user";
 
   const role = getUserRole(user, userRole?.type);
+
+  const typeLabel = getUserTypeLabel(
+    role as "owner" | "admin" | "user" | "collaborator" | "manager",
+    t,
+  );
 
   let selectedUserRoleCBOption;
   if (user.isOwner)
@@ -140,31 +149,30 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
             {decode(user.displayName)}
           </Text>
           <Text className="email" noSelect>
-            {user.email}
+            <span dir="auto">{typeLabel}</span> |{" "}
+            <span dir="ltr">{user.email}</span>
           </Text>
         </div>
       </div>
 
       <div className="individual-rights-tooltip">
-        {member.userAccess &&
-          member.userAccess !== member.groupAccess &&
-          !user.isOwner && (
-            <HelpButton
-              place="left"
-              offsetRight={0}
-              openOnClick={false}
-              tooltipContent={
-                <Text fontSize="12px" fontWeight={600}>
-                  {t("PeopleTranslations:IndividualRights")}
-                </Text>
-              }
-            />
-          )}
+        {hasIndividualRightsInRoom && (
+          <HelpButton
+            place="left"
+            offsetRight={0}
+            openOnClick={false}
+            tooltipContent={
+              <Text fontSize="12px" fontWeight={600}>
+                {t("PeopleTranslations:IndividualRights")}
+              </Text>
+            }
+          />
+        )}
       </div>
 
       {userRole && userRoleOptions && (
         <div className="role-wrapper">
-          {member.canEditAccess && !user.isOwner ? (
+          {member.canEditAccess ? (
             <ComboBox
               className="role-combobox"
               selectedOption={userRole}
@@ -182,9 +190,14 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
               isLoading={isLoading}
             />
           ) : (
-            <div className="disabled-role-combobox" title={t("Common:Role")}>
+            <Text
+              className="disabled-role-combobox"
+              title={t("Common:Role")}
+              fontWeight={600}
+              noSelect
+            >
               {userRole.label}
-            </div>
+            </Text>
           )}
         </div>
       )}

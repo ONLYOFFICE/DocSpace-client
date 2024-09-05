@@ -80,7 +80,6 @@ const InviteInput = ({
   setInviteLanguage,
   hideSelector,
   inviteItems,
-  onClose,
   roomId,
   roomType,
   setInviteItems,
@@ -89,7 +88,6 @@ const InviteInput = ({
   language,
   isOwner,
   inputsRef,
-  addUsersPanelVisible,
   setAddUsersPanelVisible,
   isMobileView,
   cultureNames,
@@ -98,12 +96,14 @@ const InviteInput = ({
   isPaidUserAccess,
   setInvitePaidUsersCount,
   isUserTariffLimit,
+  removeExist,
+  inputValue,
+  setInputValue,
+  usersList,
+  setUsersList,
 }) => {
   const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
-  const [inputValue, setInputValue] = useState("");
-
-  const [usersList, setUsersList] = useState([]);
   const [invitedUsers, setInvitedUsers] = useState(new Map());
 
   const [isChangeLangMail, setIsChangeLangMail] = useState(false);
@@ -313,25 +313,6 @@ const InviteInput = ({
 
     setSearchRequestRunning(true);
     debouncedSearch(clearValue);
-  };
-
-  const removeExist = (items) => {
-    const filtered = items.reduce((unique, current) => {
-      const isUnique = !unique.some((obj) =>
-        obj.isGroup ? obj.id === current.id : obj.email === current.email,
-      );
-
-      if (!isUnique && isPaidUserAccess(current.access))
-        setInvitePaidUsersCount(-1);
-
-      isUnique && unique.push(current);
-
-      return unique;
-    }, []);
-
-    if (items.length > filtered.length) toastr.warning(t("UsersAlreadyAdded"));
-
-    return filtered;
   };
 
   const getItemContent = (item) => {

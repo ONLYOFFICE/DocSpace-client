@@ -139,15 +139,12 @@ const StyledDescription = styled(Text)`
 StyledDescription.defaultProps = { theme: Base };
 
 const StyledRow = styled.div`
-  width: calc(100% - 32px) !important;
-
   display: inline-flex;
   align-items: center;
   gap: 8px;
 
   min-height: 41px;
 
-  margin-inline-start: 16px;
   box-sizing: border-box;
   border-bottom: none;
 

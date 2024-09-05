@@ -49,7 +49,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { getAccessOptions } from "./utils";
+import { getAccessOptions, getTopFreeRole } from "./utils";
 import AddUsersPanel from "../AddUsersPanel";
 
 const InvitePanel = ({
@@ -79,6 +79,8 @@ const InvitePanel = ({
   isOwner,
   standalone,
   hideSelector,
+  isUserTariffLimit,
+  isPaidUserAccess,
 }) => {
   const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
     roomId !== -1,
@@ -93,7 +95,8 @@ const InvitePanel = ({
   const [infoBarIsVisible, setInfoBarIsVisible] = useState(true);
   const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
   const [isMobileView, setIsMobileView] = useState(isMobile());
-
+  const [inputValue, setInputValue] = useState("");
+  const [usersList, setUsersList] = useState([]);
   const [cultureKey, setCultureKey] = useState();
 
   const onCloseBar = () => setInfoBarIsVisible(false);
@@ -363,9 +366,28 @@ const InvitePanel = ({
   const hasInvitedUsers = !!inviteItems.length;
   const hasAdmins = inviteItems.findIndex((u) => u.isAdmin || u.isOwner) > -1;
 
+  const removeExist = (items) => {
+    const filtered = items.reduce((unique, current) => {
+      const isUnique = !unique.some((obj) =>
+        obj.isGroup ? obj.id === current.id : obj.email === current.email,
+      );
+
+      if (!isUnique && isPaidUserAccess(current.access))
+        setInvitePaidUsersCount(-1);
+
+      isUnique && unique.push(current);
+
+      return unique;
+    }, []);
+
+    if (items.length > filtered.length) toastr.warning(t("UsersAlreadyAdded"));
+
+    return filtered;
+  };
+
   const bodyInvitePanel = useMemo(() => {
     return (
-      <>
+      <div style={{ display: "contents" }} ref={invitePanelBodyRef}>
         <ExternalLinks
           t={t}
           shareLinks={shareLinks}
@@ -388,6 +410,11 @@ const InvitePanel = ({
           addUsersPanelVisible={addUsersPanelVisible}
           setAddUsersPanelVisible={setAddUsersPanelVisible}
           isMobileView={isMobileView}
+          removeExist={removeExist}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          usersList={usersList}
+          setUsersList={setUsersList}
         />
         {infoBarIsVisible && hasAdmins && (
           <InfoBar t={t} onClose={onCloseBar} />
@@ -404,7 +431,7 @@ const InvitePanel = ({
             isMobileView={isMobileView}
           />
         )}
-      </>
+      </div>
     );
   }, [
     t,
@@ -483,6 +510,7 @@ const InvitePanel = ({
       displayType={ModalDialogType.aside}
       containerVisible={!hideSelector && addUsersPanelVisible}
       isLoading={invitePanelIsLoding}
+      withBodyScroll
     >
       {!hideSelector && addUsersPanelVisible && (
         <ModalDialog.Container>
@@ -565,6 +593,7 @@ export default inject(
       invitePaidUsersCount,
       setIsNewUserByCurrentUser,
       setInvitePaidUsersCount,
+      isPaidUserAccess,
     } = dialogsStore;
 
     const { getFolderInfo, setRoomSecurity, getRoomSecurityInfo, folders } =
@@ -572,7 +601,7 @@ export default inject(
 
     const { isRoomAdmin } = authStore;
 
-    const { maxCountManagersByQuota } = currentQuotaStore;
+    const { maxCountManagersByQuota, isUserTariffLimit } = currentQuotaStore;
 
     const { isOwner } = userStore.user;
 
@@ -604,6 +633,8 @@ export default inject(
       isOwner,
       standalone,
       hideSelector: invitePanelOptions.hideSelector,
+      isUserTariffLimit,
+      isPaidUserAccess,
     };
   },
 )(

@@ -35,6 +35,10 @@ export const StyledSection = styled.section`
   display: flex;
   flex-direction: column;
 
+  @media ${mobile} {
+    width: calc(100% - 32px);
+  }
+
   button {
     width: fit-content;
 

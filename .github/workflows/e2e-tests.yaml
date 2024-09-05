@@ -2,17 +2,11 @@ name: E2e tests
 
 on:
   push:
-    branches: 
-      - feature/ssr-confirm-test
-    paths: 
-      - 'packages/logig/**'
-      - 'packages/shared/**'
+    branches: [feature/ssr-confirm-test]
+    paths: [packages/login/**,packages/shared/**]
   pull_request:
-    branches: 
-      - feature/ssr-confirm-test
-     paths: 
-      - 'packages/logig/**'
-      - 'packages/shared/**'
+    branches: [feature/ssr-confirm-test]
+    paths: [packages/login/**,packages/shared/**]
 jobs:
   playwright:
     name: "Login e2e tests"

@@ -70,6 +70,7 @@ export const DeletePortalDialog = observer(() => {
       visible={visible}
       onClose={onClose}
       displayType={ModalDialogType.modal}
+      autoMaxHeight
     >
       <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
       <ModalDialog.Body>

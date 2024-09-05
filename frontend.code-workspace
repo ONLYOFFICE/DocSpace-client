@@ -204,6 +204,21 @@
             "task": "Test | Jest:unit",
             "tooltip": "🛠️ Start the \"Test | Jest:unit\" task",
           },
+          {
+            "label": "e2e build",
+            "task": "Test | Test build",
+            "tooltip": "🛠️ Start the \"test build\" task",
+          },
+          {
+            "label": "e2e",
+            "task": "Test | Test e2e",
+            "tooltip": "🛠️ Start the \"frontend e2e tests\" task",
+          },
+          {
+            "label": "e2e model",
+            "task": "Test | Test e2e model",
+            "tooltip": "🛠️ Start the \"frontend e2e tests with generate model\" task",
+          },
         ],
         "tooltip": "🛠️ Client tests tasks",
       },

@@ -209,26 +209,6 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     const headerKey = linkData?.confirmHeader ?? null;
 
     try {
-      const toBinaryStr = (str: string) => {
-        const encoder = new TextEncoder();
-        const charCodes = encoder.encode(str);
-        // @ts-ignore
-        return String.fromCharCode(...charCodes);
-      };
-
-      const loginData = window.btoa(
-        toBinaryStr(
-          JSON.stringify({
-            type: "invitation",
-            email,
-            roomName,
-            firstName,
-            lastName,
-            linkData,
-          }),
-        ),
-      );
-
       await getUserByEmail(email, headerKey);
 
       setCookie(LANGUAGE, currentCultureName, {
@@ -243,7 +223,18 @@ const CreateUserForm = (props: CreateUserFormProps) => {
         sessionStorage.setItem("referenceUrl", finalUrl);
       }
 
-      router.push(`/?loginData=${loginData}`);
+      const loginData = JSON.stringify({
+        type: "invitation",
+        email,
+        roomName,
+        firstName,
+        lastName,
+        linkData,
+      });
+
+      sessionStorage.setItem("loginData", loginData);
+
+      router.push("/");
     } catch (error) {
       const knownError = error as TError;
       const status =

@@ -82,6 +82,7 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
     onClickAction(e);
   };
   const onClickBadgeAction = (e: React.MouseEvent) => {
+    e.preventDefault();
     e.stopPropagation();
     onClickBadge?.(id);
   };

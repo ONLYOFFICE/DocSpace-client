@@ -168,8 +168,6 @@
   "ManagementCategorySecurity": "Drošība",
   "ManualBackupDescription": "Izmantojiet šo iespēju, ka vēlaties visus portāla datus iegūt faila veidā.",
   "MaxCopies": "Maksimālais rezerves dublējumu skaits: {{copiesCount}}",
-  "MemoryQuotaDisabled": "Atmiņas kvota ir veiksmīgi atspējota.",
-  "MemoryQuotaEnabled": "Atmiņas kvota ir veiksmīgi iespējota.",
   "Migration": "Migrācija",
   "NewColorScheme": "Jauna krāsu shēma",
   "NextStep": "Nākamais solis",

@@ -220,30 +220,6 @@ export async function getPortalCultures() {
   return cultures.response as TPortalCultures;
 }
 
-export async function gitAvailablePortals(data: {
-  email: string;
-  passwordHash: string;
-}) {
-  const [gitAvailablePortals] = createRequest(
-    [`/portal/signin`],
-    [["Content-Type", "application/json"]],
-    "POST",
-    JSON.stringify(data),
-    true,
-  );
-
-  console.log(gitAvailablePortals.url);
-
-  const response = await fetch(gitAvailablePortals);
-  if (!response.ok) return null;
-
-  const { response: portals } = await response.json();
-
-  console.log(portals);
-
-  // return config;
-}
-
 export async function getConfig() {
   const baseUrl = getBaseUrl();
   const config = await (

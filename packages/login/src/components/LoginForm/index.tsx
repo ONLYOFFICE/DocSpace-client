@@ -74,8 +74,6 @@ import { StyledCaptcha } from "./LoginForm.styled";
 import { LoginDispatchContext, LoginValueContext } from "../Login";
 import OAuthClientInfo from "../ConsentInfo";
 
-// import { gitAvailablePortals } from "@/utils/actions";
-
 let showToastr = true;
 
 const LoginForm = ({
@@ -276,7 +274,7 @@ const LoginForm = ({
       });
 
       if (portals.length === 1) {
-        window.open(`${portals[0].portalLink}`, "_self");
+        window.location.replace(`${portals[0].portalLink}`);
 
         return;
       }

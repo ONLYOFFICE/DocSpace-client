@@ -1,8 +1,6 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
 import {
-  addClient,
-  updateClient,
   changeClientStatus,
   regenerateSecret,
   deleteClient,
@@ -14,11 +12,9 @@ import {
 import {
   IClientListProps,
   IClientProps,
-  IClientReqDTO,
   TScope,
 } from "@docspace/shared/utils/oauth/types";
 import { toastr } from "@docspace/shared/components/toast";
-import { AuthenticationMethod } from "@docspace/shared/enums";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { Nullable, TTranslation } from "@docspace/shared/types";
@@ -89,10 +85,6 @@ export interface OAuthStoreProps {
 
   fetchConsents: () => Promise<void>;
   fetchNextConsents: (startIndex: number) => Promise<void>;
-
-  saveClient: (client: IClientReqDTO) => Promise<void>;
-
-  updateClient: (clientId: string, client: IClientReqDTO) => Promise<void>;
 
   changeClientStatus: (clientId: string, status: boolean) => Promise<void>;
 
@@ -389,58 +381,6 @@ class OAuthStore implements OAuthStoreProps {
     this.setConsentsIsLoading(false);
   };
 
-  saveClient = async (client: IClientReqDTO) => {
-    try {
-      const newClient = await addClient(client);
-
-      const creatorDisplayName = this.userStore?.user?.displayName;
-      const creatorAvatar = this.userStore?.user?.avatarSmall;
-
-      runInAction(() => {
-        this.clients = [
-          { ...newClient, enabled: true, creatorDisplayName, creatorAvatar },
-          ...this.clients,
-        ];
-      });
-    } catch (e) {
-      const err = e as TData;
-      toastr.error(err);
-    }
-  };
-
-  updateClient = async (clientId: string, client: IClientReqDTO) => {
-    try {
-      await updateClient(clientId, client);
-
-      const idx = this.clients.findIndex((c) => c.clientId === clientId);
-
-      const newClient = { ...this.clients[idx] };
-
-      newClient.name = client.name;
-      newClient.allowedOrigins = client.allowed_origins;
-      newClient.logo = client.logo;
-      newClient.description = client.description;
-      newClient.isPublic = client.is_public;
-
-      if (
-        client.allow_pkce &&
-        !newClient.authenticationMethods.includes(AuthenticationMethod.none)
-      )
-        newClient.authenticationMethods.push(AuthenticationMethod.none);
-
-      if (idx > -1) {
-        runInAction(() => {
-          this.clients[idx] = {
-            ...newClient,
-          };
-        });
-      }
-    } catch (e) {
-      const err = e as TData;
-      toastr.error(err);
-    }
-  };
-
   changeClientStatus = async (clientId: string, status: boolean) => {
     try {
       await changeClientStatus(clientId, status);
@@ -511,7 +451,7 @@ class OAuthStore implements OAuthStoreProps {
       const requests: Promise<void>[] = [];
 
       clientsId.forEach((id) => {
-        this.setActiveClient(id);
+        // this.setActiveClient(id);
         requests.push(revokeUserClient(id));
       });
 
@@ -523,7 +463,7 @@ class OAuthStore implements OAuthStoreProps {
         );
       });
 
-      this.setActiveClient("");
+      // this.setActiveClient("");
     } catch (e) {
       const err = e as TData;
       toastr.error(err);
@@ -671,13 +611,13 @@ class OAuthStore implements OAuthStoreProps {
           const actions: Promise<void>[] = [];
 
           this.selection.forEach((s) => {
-            this.setActiveClient(s);
+            // this.setActiveClient(s);
             actions.push(this.changeClientStatus(s, status));
           });
 
           await Promise.all(actions);
 
-          this.setActiveClient("");
+          // this.setActiveClient("");
           this.setSelection("");
           toastr.success(t("OAuth:ApplicationsEnabledSuccessfully"));
         } catch (e) {
@@ -685,11 +625,11 @@ class OAuthStore implements OAuthStoreProps {
           toastr.error(err);
         }
       } else {
-        this.setActiveClient(clientId);
+        // this.setActiveClient(clientId);
 
         await this.changeClientStatus(clientId, status);
 
-        this.setActiveClient("");
+        // this.setActiveClient("");
         this.setSelection("");
 
         toastr.success(t("OAuth:ApplicationEnabledSuccessfully"));

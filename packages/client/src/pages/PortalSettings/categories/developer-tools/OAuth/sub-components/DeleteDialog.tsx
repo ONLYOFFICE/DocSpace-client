@@ -108,9 +108,6 @@ export default inject(({ oauthStore }: { oauthStore: OAuthStoreProps }) => {
 
   const onDelete = async () => {
     if (isGroup) {
-      selection.forEach((item) => {
-        setActiveClient(item);
-      });
       await deleteClient(selection);
 
       setActiveClient("");
@@ -119,7 +116,6 @@ export default inject(({ oauthStore }: { oauthStore: OAuthStoreProps }) => {
       return;
     }
     if (!bufferSelection) return;
-    setActiveClient(bufferSelection.clientId);
     await deleteClient([bufferSelection.clientId]);
     setActiveClient("");
     setSelection("");

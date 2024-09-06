@@ -10,7 +10,7 @@ import {
 import { AuthenticationMethod } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
-import { getClient } from "@docspace/shared/api/oauth";
+import { addClient, getClient, updateClient } from "@docspace/shared/api/oauth";
 
 import ResetDialog from "../ResetDialog";
 
@@ -35,9 +35,6 @@ const ClientForm = ({
   scopeList,
 
   fetchScopes,
-
-  saveClient,
-  updateClient,
 
   resetDialogVisible,
   setResetDialogVisible,
@@ -128,7 +125,7 @@ const ClientForm = ({
 
         setIsRequestRunning(true);
 
-        await saveClient?.(form);
+        await addClient?.(form);
       } else {
         await updateClient?.(clientId, form);
       }
@@ -448,9 +445,6 @@ export default inject(
 
       fetchScopes,
 
-      saveClient,
-      updateClient,
-
       setResetDialogVisible,
       resetDialogVisible,
 
@@ -464,9 +458,6 @@ export default inject(
       scopeList,
 
       fetchScopes,
-
-      saveClient,
-      updateClient,
 
       setResetDialogVisible,
       currentDeviceType,

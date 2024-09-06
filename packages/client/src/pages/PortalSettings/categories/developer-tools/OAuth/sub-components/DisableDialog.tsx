@@ -117,7 +117,6 @@ export default inject(({ oauthStore }: { oauthStore: OAuthStoreProps }) => {
 
       selection.forEach((item) => {
         const disable = async () => {
-          setActiveClient(item);
           await changeClientStatus(item, false);
         };
 
@@ -130,7 +129,6 @@ export default inject(({ oauthStore }: { oauthStore: OAuthStoreProps }) => {
       setSelection("");
     } else {
       if (!bufferSelection) return;
-      setActiveClient(bufferSelection.clientId);
       await changeClientStatus(bufferSelection.clientId, false);
       setActiveClient("");
       setSelection("");

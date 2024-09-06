@@ -85,6 +85,7 @@ const LoginForm = ({
   reCaptchaType,
   ldapDomain,
   ldapEnabled,
+  baseDomain,
 }: LoginFormProps) => {
   const { isLoading, isModalOpen } = useContext(LoginValueContext);
   const { setIsLoading } = useContext(LoginDispatchContext);
@@ -274,7 +275,21 @@ const LoginForm = ({
       });
 
       if (portals.length === 1) {
-        window.location.replace(`${portals[0].portalLink}`);
+        const name =
+          !baseDomain || portals[0].portalName.includes(baseDomain)
+            ? portals[0].portalName
+            : `${portals[0].portalName}.${baseDomain}`;
+
+        const redirectUrl = getCookie("x-redirect-authorization-uri")?.replace(
+          window.location.origin,
+          name,
+        );
+        deleteCookie("x-redirect-authorization-uri");
+
+        window.open(
+          `${portals[0].portalLink}&referenceUrl=${redirectUrl}`,
+          "_self",
+        );
 
         return;
       }
@@ -369,6 +384,7 @@ const LoginForm = ({
     router,
     clientId,
     referenceUrl,
+    baseDomain,
   ]);
 
   const onBlurEmail = () => {

@@ -53,7 +53,7 @@ function VirtualList({
   enableKeyboardEvents,
   isDropdownReady,
 }: VirtualListProps) {
-  const ref = useRef<VariableSizeList>(null);
+  const virtualListRef = useRef<VariableSizeList>(null);
   const focusTrapRef = useRef<HTMLDivElement>(null);
 
   const activeIndex = useMemo(() => {
@@ -67,6 +67,17 @@ function VirtualList({
 
   const [currentIndex, setCurrentIndex] = useState(activeIndex);
   const currentIndexRef = useRef<number>(activeIndex);
+
+  const scrollToItem = useCallback(
+    (index: number) => {
+      const canScrollToItem = virtualListRef.current && !!maxHeight;
+
+      if (canScrollToItem) {
+        virtualListRef.current.scrollToItem(index, "smart");
+      }
+    },
+    [maxHeight],
+  );
 
   const onKeyDown = useCallback(
     (event: KeyboardEvent) => {
@@ -92,9 +103,9 @@ function VirtualList({
 
       setCurrentIndex(index);
       currentIndexRef.current = index;
-      // ref.current.scrollToItem(index, "smart");
+      scrollToItem(index);
     },
-    [isOpen, cleanChildren],
+    [isOpen, cleanChildren, scrollToItem],
   );
 
   const onKeyUp = useCallback(
@@ -127,7 +138,7 @@ function VirtualList({
       focusTrap?.addEventListener("keyup", onKeyUp);
     }
 
-    const refVar = ref.current;
+    const refVar = virtualListRef.current;
 
     return () => {
       focusTrap?.removeEventListener("keydown", onKeyDown);
@@ -137,7 +148,7 @@ function VirtualList({
         setCurrentIndex(activeIndex);
         currentIndexRef.current = activeIndex;
 
-        // refVar.scrollToItem(activeIndex, "smart");
+        scrollToItem(activeIndex);
       }
     };
   }, [
@@ -150,6 +161,7 @@ function VirtualList({
     onKeyUp,
     itemCount,
     isDropdownReady,
+    scrollToItem,
   ]);
 
   useEffect(() => {
@@ -202,7 +214,7 @@ function VirtualList({
         <Scrollbar style={{ height: maxHeight }}>{cleanChildren}</Scrollbar>
       ) : (
         <VariableSizeList
-          ref={ref}
+          ref={virtualListRef}
           width={width}
           itemCount={itemCount}
           itemSize={getItemSize}

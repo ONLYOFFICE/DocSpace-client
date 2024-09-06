@@ -629,6 +629,10 @@ class LdapFormStore {
   };
 
   getSettings = () => {
+    const clearServer = this.requiredSettings.server.replace(
+      /((https?|ldaps?):\/\/)/gi,
+      "",
+    );
     return {
       EnableLdapAuthentication: this.isLdapEnabled,
       AcceptCertificate: this.acceptCertificate,
@@ -636,7 +640,7 @@ class LdapFormStore {
       StartTls: this.isTlsEnabled,
       Ssl: this.isSslEnabled,
       SendWelcomeEmail: this.isSendWelcomeEmail,
-      Server: this.requiredSettings.server,
+      Server: clearServer,
       UserDN: this.requiredSettings.userDN,
       PortNumber: this.requiredSettings.portNumber,
       UserFilter: this.requiredSettings.userFilter,

@@ -575,24 +575,6 @@ const ClientRoutes = [
     ],
   },
   {
-    path: "/wizard",
-    async lazy() {
-      const { WrappedComponent } = await componentLoader(
-        () => import("SRC_DIR/pages/Wizard"),
-      );
-
-      const Component = () => (
-        <PublicRoute>
-          <ErrorBoundary>
-            <WrappedComponent />
-          </ErrorBoundary>
-        </PublicRoute>
-      );
-
-      return { Component };
-    },
-  },
-  {
     path: "/sdk/:mode",
     lazy: () => import("SRC_DIR/pages/Sdk"),
   },

@@ -52,6 +52,7 @@
   "ComingSoon": "În curând",
   "Comment": "Comentariu",
   "Comments": "Comentarii",
+  "Commercial": "Comerț",
   "Common": "În comun",
   "CommonFiles": "Fișiere comune",
   "CompanyName": "Numele companiei",
@@ -241,6 +242,7 @@
   "InviteUsers": "Invitaţi utilizatori",
   "Kilobyte": "KO",
   "Language": "Limbă",
+  "LastActivityDate": "Data când a avut loc ultima activitate",
   "LastModifiedDate": "Data ultimei modificări",
   "LastName": "Numele",
   "LatePayment": "Plata întârziată",
@@ -393,6 +395,7 @@
   "RoomAdmin": "Administratorul sălii",
   "RoomList": "Listă de săli",
   "Rooms": "Săli",
+  "RoomSpaceQuotaExceeded": "Spațiu de stocare pentru sala a fost depășit ({{size}})",
   "SameEmail": "Nu puteți folosi una și aceeași adresă adresa e-mail ",
   "SaveButton": "Salvează",
   "SaveHereButton": "Salvează aici",
@@ -512,5 +515,6 @@
   "Website": "Pagină web",
   "Yes": "Da",
   "Yesterday": "Ieri",
-  "You": "Dvs"
+  "You": "Dvs",
+  "Deactivate": "Dezactivare"
 }

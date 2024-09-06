@@ -51,7 +51,10 @@ import { updateTempContent, isPublicRoom } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/shared/components/toast";
 import config from "PACKAGE_FILE";
 import { thumbnailStatuses } from "@docspace/client/src/helpers/filesConstants";
-import { getDaysRemaining } from "@docspace/shared/utils/common";
+import {
+  getDaysRemaining,
+  frameCallEvent,
+} from "@docspace/shared/utils/common";
 import {
   LOADER_TIMEOUT,
   MEDIA_VIEW_URL,
@@ -1762,6 +1765,14 @@ class FilesStore {
 
         if (isUserError && !isThirdPartyError) {
           if (isPublicRoom()) return Promise.reject(err);
+
+          if (err?.response?.status === NotFoundHttpCode) {
+            frameCallEvent({ event: "onNotFound" });
+          }
+
+          if (err?.response?.status === ForbiddenHttpCode) {
+            frameCallEvent({ event: "onNoAccess" });
+          }
 
           this.setIsErrorRoomNotAvailable(true);
         } else {

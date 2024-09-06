@@ -393,6 +393,7 @@
   "RoomAdmin": "방 관리자",
   "RoomList": "방 목록",
   "Rooms": "방",
+  "RoomSpaceQuotaExceeded": "방 공간 할당량을 초과했습니다({{size}})",
   "SameEmail": "같은 이메일을 사용할 수 없습니다",
   "SaveButton": "저장",
   "SaveHereButton": "여기에 저장",
@@ -512,5 +513,6 @@
   "Website": "웹사이트",
   "Yes": "네",
   "Yesterday": "어제",
-  "You": "나"
+  "You": "나",
+  "Deactivate": "비활성화"
 }

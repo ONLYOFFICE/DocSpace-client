@@ -71,13 +71,17 @@ const StyledWrapper = styled.div`
 const ToggleSSO = ({ enableSso, ssoToggle, isSSOAvailable }) => {
   const { t } = useTranslation("SingleSignOn");
 
+  const onChangeToggle = React.useCallback(() => {
+    ssoToggle(t);
+  }, [ssoToggle, t]);
+
   const theme = useTheme();
   return (
     <StyledWrapper isSSOAvailable={isSSOAvailable}>
       <ToggleButton
         className="enable-sso toggle"
         isChecked={enableSso}
-        onChange={() => ssoToggle(t)}
+        onChange={onChangeToggle}
         isDisabled={!isSSOAvailable}
       />
 

@@ -51,6 +51,7 @@ const LDAPContainer = ({
         <Checkbox
           id="login_ldap-checkbox"
           className="login-checkbox"
+          tabIndex={4}
           isChecked={isLdapLoginChecked}
           onChange={onChangeLdapLoginCheckbox}
           label={t("SignInLDAP", { ldap_domain: ldapDomain })}

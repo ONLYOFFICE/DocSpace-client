@@ -50,14 +50,7 @@ const StyledRowContainer = styled(RowContainer)`
     height: 61px;
     position: sticky;
     z-index: 201;
-    ${(props) =>
-      props.theme.interfaceDirection === "rtl"
-        ? css`
-            margin-right: -16px;
-          `
-        : css`
-            margin-left: -16px;
-          `}
+    margin-inline-end: -16px;
     width: 100%;
 
     margin-top: 20px;
@@ -71,14 +64,7 @@ const StyledRowContainer = styled(RowContainer)`
     }
 
     .table-container_group-menu-checkbox {
-      ${(props) =>
-        props.theme.interfaceDirection === "rtl"
-          ? css`
-              margin-right: 8px;
-            `
-          : css`
-              margin-left: 8px;
-            `}
+      margin-inline-end: 8px;
     }
 
     .table-container_group-menu-separator {

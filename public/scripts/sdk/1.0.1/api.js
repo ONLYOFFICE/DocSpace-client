@@ -27,6 +27,8 @@
 (function () {
   const FRAME_NAME = "frameDocSpace";
 
+  const version = "1.0.1";
+
   const defaultConfig = {
     src: new URL(document.currentScript.src).origin,
     rootPath: "/rooms/shared/",
@@ -98,6 +100,7 @@
       onSignOut: null,
       onDownload: null,
       onNoAccess: null,
+      onNotFound: null,
       onContentReady: null,
     },
   };

@@ -393,6 +393,7 @@
   "RoomAdmin": "Administrátor místnosti",
   "RoomList": "Seznam místností",
   "Rooms": "Místnosti",
+  "RoomSpaceQuotaExceeded": "Překročení kvóty místa v místnosti ({{size}})",
   "SameEmail": "Nelze použít stejný e-mail",
   "SaveButton": "Uložit",
   "SaveHereButton": "Uložit zde",
@@ -512,5 +513,6 @@
   "Website": "Webová stránka",
   "Yes": "Ano",
   "Yesterday": "Včera",
-  "You": "Vy"
+  "You": "Vy",
+  "Deactivate": "Deaktivace"
 }

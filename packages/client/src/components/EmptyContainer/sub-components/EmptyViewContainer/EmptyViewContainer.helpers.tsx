@@ -62,10 +62,12 @@ export const getDescription = (
   isArchiveFolderRoot: boolean,
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
-): string => {
+  isPublicRoom: boolean,
+): React.ReactNode => {
   const isNotAdmin = isUser(access);
 
-  if (isRootEmptyPage) return getRootDesctiption(t, access, rootFolderType);
+  if (isRootEmptyPage)
+    return getRootDesctiption(t, access, rootFolderType, isPublicRoom);
 
   if (isFolder)
     return getFolderDescription(

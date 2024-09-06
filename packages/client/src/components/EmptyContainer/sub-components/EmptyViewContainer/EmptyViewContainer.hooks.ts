@@ -40,6 +40,7 @@ export const useEmptyView = (
     isRootEmptyPage,
     isArchiveFolderRoot,
     rootFolderType,
+    isPublicRoom,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
@@ -56,6 +57,7 @@ export const useEmptyView = (
       isArchiveFolderRoot,
       isRootEmptyPage,
       rootFolderType,
+      isPublicRoom,
     );
     const title = getTitle(
       type,
@@ -91,6 +93,7 @@ export const useEmptyView = (
     isRootEmptyPage,
     isArchiveFolderRoot,
     rootFolderType,
+    isPublicRoom,
   ]);
 
   return emptyViewOptions;
@@ -133,9 +136,9 @@ export const useOptions = (
     newFilter.searchArea = RoomSearchArea.Active;
 
     const state = {
-      title: roomsFolder.title,
+      title: roomsFolder?.title,
       isRoot: true,
-      rootFolderType: roomsFolder.rootFolderType,
+      rootFolderType: roomsFolder?.rootFolderType,
     };
 
     const path = getCategoryUrl(CategoryType.Shared);
@@ -146,7 +149,7 @@ export const useOptions = (
       },
       state,
     };
-  }, [roomsFolder.rootFolderType, roomsFolder.title, userId]);
+  }, [roomsFolder?.rootFolderType, roomsFolder?.title, userId]);
 
   const onGoToPersonal = useCallback((): LinkProps => {
     const newFilter = FilesFilter.getDefault();
@@ -154,9 +157,9 @@ export const useOptions = (
     newFilter.folder = myFolderId?.toString() ?? "";
 
     const state = {
-      title: myFolder.title,
+      title: myFolder?.title,
       isRoot: true,
-      rootFolderType: myFolder.rootFolderType,
+      rootFolderType: myFolder?.rootFolderType,
     };
 
     const path = getCategoryUrl(CategoryType.Personal);
@@ -170,7 +173,7 @@ export const useOptions = (
       },
       state,
     };
-  }, [myFolder.rootFolderType, myFolder.title, myFolderId]);
+  }, [myFolder?.rootFolderType, myFolder?.title, myFolderId]);
 
   const onCreateRoom = useCallback(() => {
     if (isWarningRoomsDialog) {

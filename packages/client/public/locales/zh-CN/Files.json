@@ -84,6 +84,7 @@
   "GoToPersonal": "转到我的文档",
   "Images": "图像",
   "InviteUsersInRoom": "邀请用户进入房间",
+  "LastActivity": "上次活动",
   "LeaveRoomDescription": "您是房间的所有者。退出房间之前，您必须将所有者的角色转移给其他用户。",
   "LeaveTheRoom": "退出房间",
   "LeftAndAppointNewOwner": "您已退出房间并指定了新的所有者",

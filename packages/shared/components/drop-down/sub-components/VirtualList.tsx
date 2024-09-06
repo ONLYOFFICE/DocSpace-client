@@ -197,7 +197,6 @@ function VirtualList({
               handleMouseMove,
             }}
             index={index}
-            style={{}}
           />
         ))}
       </div>

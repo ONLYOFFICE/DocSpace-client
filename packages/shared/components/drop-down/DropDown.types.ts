@@ -113,5 +113,5 @@ export interface RowProps {
     handleMouseMove?: (index: number) => void;
   };
   index: number;
-  style: React.CSSProperties;
+  style?: React.CSSProperties;
 }

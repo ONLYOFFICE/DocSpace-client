@@ -37,11 +37,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { ChangeNameContainer } from "./StyledChangeName";
 
 const ChangeNameDialog = (props) => {
-  const { t, ready } = useTranslation([
-    "ProfileAction",
-    "PeopleTranslations",
-    "Common",
-  ]);
+  const { t, ready } = useTranslation(["PeopleTranslations", "Common"]);
   const {
     visible,
     onClose,

@@ -99,7 +99,6 @@
     "html-loader": "^4.2.0",
     "html-webpack-plugin": "5.5.0",
     "json-loader": "^0.5.7",
-    "playwright": "^1.32.0",
     "prettier": "^3.1.0",
     "sass": "^1.59.3",
     "sass-loader": "^12.6.0",

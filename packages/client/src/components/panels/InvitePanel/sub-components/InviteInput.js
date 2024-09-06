@@ -287,8 +287,6 @@ const InviteInput = ({
       isBlocked = regex.test(part) ? false : isBlocked;
     });
 
-    console.log("set here", isBlocked);
-
     setIsAddEmailPanelBlocked(isBlocked);
 
     setSearchRequestRunning(false);
@@ -427,6 +425,7 @@ const InviteInput = ({
         const userItem = usersList.find((value) => value.email === item.email);
 
         if (userItem) {
+          userItem.access = selectedAccess;
           if (userItem.isOwner || userItem.isAdmin)
             userItem.access = ShareAccessRights.RoomManager;
 

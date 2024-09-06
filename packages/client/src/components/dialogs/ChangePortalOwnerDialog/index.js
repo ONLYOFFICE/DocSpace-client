@@ -279,11 +279,7 @@ export default inject(({ setup, userStore, settingsStore }) => {
 
   return { displayName, avatar, id, sendOwnerChange, currentColorScheme };
 })(
-  withTranslation([
-    "ChangePortalOwner",
-    "Common",
-    "Translations",
-    "ProfileAction",
-    "Settings",
-  ])(observer(ChangePortalOwnerDialog)),
+  withTranslation(["ChangePortalOwner", "Common", "Translations", "Settings"])(
+    observer(ChangePortalOwnerDialog),
+  ),
 );

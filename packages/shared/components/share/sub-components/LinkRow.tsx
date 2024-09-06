@@ -173,6 +173,7 @@ const LinkRow = ({
           <div className="link-actions">
             {!isArchiveFolder && (
               <IconButton
+                className="link-actions_copy-icon"
                 size={16}
                 iconName={CopyIcon}
                 onClick={() => onCopyLink(link)}

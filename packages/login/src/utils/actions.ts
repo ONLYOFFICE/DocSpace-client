@@ -53,6 +53,17 @@ import {
 } from "@/types";
 import { TScope } from "@docspace/shared/utils/oauth/types";
 import { transformToClientProps } from "@docspace/shared/utils/oauth";
+import {
+  licenseRequiredHandler,
+  settingsHandler,
+  colorThemeHandler,
+  portalCulturesHandler,
+  portalPasswordSettingHandler,
+  machineNameHandler,
+  portalTimeZoneHandler,
+} from "@docspace/shared/__mocks__/e2e";
+
+const IS_TEST = process.env.E2E_TEST;
 
 export const checkIsAuthenticated = async () => {
   const [request] = createRequest(["/authentication"], [["", ""]], "GET");
@@ -73,7 +84,9 @@ export async function getSettings() {
     "GET",
   );
 
-  const settingsRes = await fetch(getSettings);
+  const settingsRes = IS_TEST
+    ? settingsHandler(headers())
+    : await fetch(getSettings);
 
   if (settingsRes.status === 403) return `access-restricted`;
 
@@ -109,7 +122,7 @@ export async function getColorTheme() {
     "GET",
   );
 
-  const res = await fetch(getColorTheme);
+  const res = IS_TEST ? colorThemeHandler() : await fetch(getColorTheme);
 
   if (!res.ok) return;
 
@@ -211,7 +224,9 @@ export async function getPortalCultures() {
     "GET",
   );
 
-  const res = await fetch(getPortalCultures);
+  const res = IS_TEST
+    ? portalCulturesHandler()
+    : await fetch(getPortalCultures);
 
   if (!res.ok) return;
 
@@ -253,8 +268,9 @@ export async function getPortalPasswordSettings(
     [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
     "GET",
   );
-
-  const res = await fetch(getPortalPasswordSettings);
+  const res = IS_TEST
+    ? portalPasswordSettingHandler()
+    : await fetch(getPortalPasswordSettings);
 
   if (!res.ok) return;
 
@@ -293,7 +309,7 @@ export async function getMachineName(confirmKey: string | null = null) {
     "GET",
   );
 
-  const res = await fetch(getMachineName);
+  const res = IS_TEST ? machineNameHandler() : await fetch(getMachineName);
 
   if (!res.ok) throw new Error(res.statusText);
 
@@ -309,7 +325,9 @@ export async function getIsLicenseRequired() {
     "GET",
   );
 
-  const res = await fetch(getIsLicenseRequired);
+  const res = IS_TEST
+    ? licenseRequiredHandler(headers())
+    : await fetch(getIsLicenseRequired);
 
   if (!res.ok) throw new Error(res.statusText);
 
@@ -325,7 +343,9 @@ export async function getPortalTimeZones(confirmKey: string | null = null) {
     "GET",
   );
 
-  const res = await fetch(getPortalTimeZones);
+  const res = IS_TEST
+    ? portalTimeZoneHandler()
+    : await fetch(getPortalTimeZones);
 
   if (!res.ok) throw new Error(res.statusText);
 

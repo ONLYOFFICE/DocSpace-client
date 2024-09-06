@@ -26,9 +26,14 @@
 
 import Script from "next/script";
 
-import runtime from "../../../runtime.json";
+let runtime = null;
 
-const hashDate = runtime?.date;
+try {
+  runtime = require("../../../runtime.json");
+} catch (e) {
+  console.log(e);
+}
+const hashDate = runtime ? runtime?.date : new Date().getTime();
 
 const Scripts = () => {
   return (

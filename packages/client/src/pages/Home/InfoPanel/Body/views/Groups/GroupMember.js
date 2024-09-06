@@ -48,7 +48,6 @@ const GroupMember = ({
     "People",
     "Profile",
     "PeopleTranslations",
-    "ProfileAction",
     "Common",
   ]);
 

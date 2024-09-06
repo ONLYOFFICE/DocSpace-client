@@ -101,6 +101,12 @@ test("password change error invalid", async ({ page }) => {
   await page.goto(
     "/login/confirm/PasswordChange?type=PasswordChange&key=123&email=mail@mail.com&uid=123",
   );
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "password-change",
+    "password-change-error-invalid.png",
+  ]);
 });
 
 test("password change error expired", async ({ page }) => {
@@ -117,6 +123,12 @@ test("password change error expired", async ({ page }) => {
   await page.goto(
     "/login/confirm/PasswordChange?type=PasswordChange&key=123&email=mail@mail.com&uid=123",
   );
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "password-change",
+    "password-change-error-expired.png",
+  ]);
 });
 
 test("password change error user excluded", async ({ page }) => {
@@ -131,9 +143,14 @@ test("password change error user excluded", async ({ page }) => {
     },
   );
 
+  // Expected to go to default page
   await page.goto(
     "/login/confirm/PasswordChange?type=PasswordChange&key=123&email=mail@mail.com&uid=123",
   );
 
-  await page.waitForURL("/", { waitUntil: "load" });
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "password-change",
+    "password-change-error-user-excluded.png",
+  ]);
 });

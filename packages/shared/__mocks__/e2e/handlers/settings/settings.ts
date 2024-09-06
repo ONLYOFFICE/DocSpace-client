@@ -77,6 +77,11 @@ export const settings = (headers?: Headers): Response => {
         docSpace: true,
         standalone: true,
         baseDomain: "localhost",
+        passwordHash: {
+          size: 256,
+          iterations: 100000,
+          salt: "4d9abe238e2f7b14a30a4565d62214a795a15abb798ed61118a69820d6a6146c",
+        },
         firebase: {
           apiKey: "",
           authDomain: "",

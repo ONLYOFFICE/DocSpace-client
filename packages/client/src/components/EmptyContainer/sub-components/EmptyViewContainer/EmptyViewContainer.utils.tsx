@@ -262,6 +262,8 @@ export const getRoomTitle = (
       return t("EmptyView:CollaborationRoomEmptyTitle");
     case RoomsType.PublicRoom:
       return t("EmptyView:PublicRoomEmptyTitle");
+    case RoomsType.VirtualDataRoom:
+      return t("EmptyView:VirtualDataRoomEmptyTitle");
     case RoomsType.CustomRoom:
       return t("EmptyView:CustomRoomEmptyTitle");
     default:
@@ -372,6 +374,25 @@ export const getRoomIcon = (
           ),
       )
       .with([RoomsType.PublicRoom, ShareAccessRights.Collaborator], () =>
+        isBaseTheme ? (
+          <EmptyPublicRoomCollaboratorLightIcon />
+        ) : (
+          <EmptyPublicRoomCollaboratorDarkIcon />
+        ),
+      )
+      .with(
+        [
+          RoomsType.VirtualDataRoom,
+          P.union(ShareAccessRights.None, ShareAccessRights.RoomManager), // owner, docspace admin, room admin
+        ],
+        () =>
+          isBaseTheme ? (
+            <EmptyPublicRoomLightIcon />
+          ) : (
+            <EmptyPublicRoomDarkIcon />
+          ),
+      )
+      .with([RoomsType.VirtualDataRoom, ShareAccessRights.Collaborator], () =>
         isBaseTheme ? (
           <EmptyPublicRoomCollaboratorLightIcon />
         ) : (

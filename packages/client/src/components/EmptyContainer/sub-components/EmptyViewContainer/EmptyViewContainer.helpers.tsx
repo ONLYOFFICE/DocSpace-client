@@ -410,6 +410,20 @@ export const getOptions = (
         uploadAllFromDocSpace,
         uploadFromDeviceAnyFile,
       ];
+
+    case RoomsType.VirtualDataRoom:
+      if (isNotAdmin) return [];
+
+      if (isCollaborator)
+        return [createFile, uploadAllFromDocSpace, uploadFromDeviceAnyFile];
+
+      return [
+        createFile,
+        inviteUser,
+        uploadAllFromDocSpace,
+        uploadFromDeviceAnyFile,
+      ];
+
     case RoomsType.CustomRoom:
       if (isNotAdmin) return [];
 

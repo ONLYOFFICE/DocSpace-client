@@ -1,11 +1,14 @@
 import React from "react";
 import { Trans } from "react-i18next";
+import resizeImage from "resize-image";
 
 import { TTranslation } from "@docspace/shared/types";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { FieldContainer } from "@docspace/shared/components/field-container";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { IClientReqDTO } from "@docspace/shared/utils/oauth/types";
+import { toastr } from "@docspace/shared/components/toast";
+
 // import { ToggleButton } from "@docspace/shared/components/toggle-button";
 // import { Text } from "@docspace/shared/components/text";
 
@@ -15,6 +18,10 @@ import BlockHeader from "./BlockHeader";
 import InputGroup from "./InputGroup";
 import TextAreaGroup from "./TextAreaGroup";
 import SelectGroup from "./SelectGroup";
+
+const ONE_MEGABYTE = 1024 * 1024;
+const COMPRESSION_RATIO = 2;
+const NO_COMPRESSION_RATIO = 1;
 
 interface BasicBlockProps {
   t: TTranslation;
@@ -36,41 +43,8 @@ interface BasicBlockProps {
   errorFields: string[];
   requiredErrorFields: string[];
   onBlur: (name: string) => void;
-}
 
-function getImageDimensions(
-  image: HTMLImageElement,
-): Promise<{ width: number; height: number }> {
-  return new Promise((resolve) => {
-    image.onload = () => {
-      const width = image.width;
-      const height = image.height;
-      resolve({ height, width });
-    };
-  });
-}
-
-function compressImage(
-  image: HTMLImageElement,
-  scale: number,
-  initialWidth: number,
-  initialHeight: number,
-): Promise<Blob | undefined | null> {
-  return new Promise((resolve) => {
-    const canvas = document.createElement("canvas");
-
-    canvas.width = scale * initialWidth;
-    canvas.height = scale * initialHeight;
-
-    const ctx = canvas.getContext("2d");
-    if (ctx) {
-      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-
-      ctx.canvas.toBlob((blob) => {
-        resolve(blob);
-      }, "image/png");
-    }
-  });
+  maxImageSize?: number;
 }
 
 const BasicBlock = ({
@@ -80,13 +54,14 @@ const BasicBlock = ({
   logoValue,
   descriptionValue,
   allowPkce,
-  // isPublic,
   changeValue,
 
   isEdit,
   errorFields,
   requiredErrorFields,
   onBlur,
+
+  maxImageSize = ONE_MEGABYTE,
 }: BasicBlockProps) => {
   const onChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -96,50 +71,85 @@ const BasicBlock = ({
     changeValue(target.name as keyof IClientReqDTO, target.value);
   };
 
+  async function resizeRecursiveAsync(
+    img: { width: number; height: number },
+    canvas: HTMLCanvasElement,
+    compressionRatio = COMPRESSION_RATIO,
+    depth = 0,
+  ): Promise<unknown> {
+    const data = resizeImage.resize(
+      // @ts-expect-error canvas
+      canvas,
+      img.width / compressionRatio,
+      img.height / compressionRatio,
+      resizeImage.JPEG,
+    );
+
+    const file = await fetch(data)
+      .then((res) => res.blob())
+      .then((blob) => {
+        const f = new File([blob], "File name", {
+          type: "image/jpg",
+        });
+        return f;
+      });
+
+    if (file.size < maxImageSize) {
+      return file;
+    }
+
+    if (depth > 5) {
+      throw new Error("recursion depth exceeded");
+    }
+
+    return new Promise((resolve) => {
+      // eslint-disable-next-line no-promise-executor-return
+      return resolve(file);
+    }).then(() =>
+      resizeRecursiveAsync(img, canvas, compressionRatio + 1, depth + 1),
+    );
+  }
+
   const onSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file =
       e.target.files && e.target.files?.length > 0 && e.target.files[0];
 
     if (file) {
-      const imgEl = document.getElementsByClassName(
-        "client-logo",
-      )[0] as HTMLImageElement;
+      try {
+        const imageBitMap = await createImageBitmap(file);
 
-      imgEl.src = URL.createObjectURL(file);
+        const width = imageBitMap.width;
+        const height = imageBitMap.height;
 
-      const { height, width } = await getImageDimensions(imgEl);
+        // @ts-expect-error imageBitMap
+        const canvas = resizeImage.resize2Canvas(imageBitMap, width, height);
 
-      const MAX_WIDTH = 32; // if we resize by width, this is the max width of compressed image
-      const MAX_HEIGHT = 32; // if we resize by height, this is the max height of the compressed image
-
-      const widthRatioBlob = await compressImage(
-        imgEl,
-        MAX_WIDTH / width,
-        width,
-        height,
-      );
-      const heightRatioBlob = await compressImage(
-        imgEl,
-        MAX_HEIGHT / height,
-        width,
-        height,
-      );
-
-      if (widthRatioBlob && heightRatioBlob) {
-        // pick the smaller blob between both
-        const compressedBlob =
-          widthRatioBlob.size > heightRatioBlob.size
-            ? heightRatioBlob
-            : widthRatioBlob;
-
-        const reader = new FileReader();
-        reader.readAsDataURL(compressedBlob);
-
-        reader.onload = () => {
-          const result = reader.result as string;
-
-          changeValue("logo", result);
-        };
+        resizeRecursiveAsync(
+          { width, height },
+          canvas,
+          file.size > maxImageSize ? COMPRESSION_RATIO : NO_COMPRESSION_RATIO,
+        )
+          .then((f) => {
+            if (f instanceof File) {
+              const reader = new FileReader();
+              reader.onloadend = () => {
+                if (reader.result && typeof reader.result === "string")
+                  changeValue("logo", reader.result);
+              };
+              reader.readAsDataURL(file);
+            }
+          })
+          .catch((error) => {
+            if (
+              error instanceof Error &&
+              error.message === "recursion depth exceeded"
+            ) {
+              toastr.error(t("Common:SizeImageLarge"));
+            }
+            // console.error(error);
+          });
+      } catch (err) {
+        toastr.error(t("Common:NotSupportedFormat"));
       }
     }
   };
@@ -147,8 +157,6 @@ const BasicBlock = ({
   const pkceHelpButtonText = (
     <Trans t={t} i18nKey="AllowPKCEHelpButton" ns="OAuth" />
   );
-
-  // const publicClientHelpButtonText = "Help text";
 
   const isNameRequiredError = requiredErrorFields.includes("name");
   const isWebsiteRequiredError = requiredErrorFields.includes("website_url");

@@ -46,6 +46,7 @@ const ClientForm = ({
   setClientSecretProps,
 
   currentDeviceType,
+  maxImageUploadSize,
 }: ClientFormProps) => {
   const navigate = useNavigate();
 
@@ -386,6 +387,7 @@ const ClientForm = ({
               errorFields={errorFields}
               requiredErrorFields={requiredErrorFields}
               onBlur={onBlur}
+              maxImageSize={maxImageUploadSize}
             />
             {isEdit && (
               <ClientBlock
@@ -456,7 +458,7 @@ export default inject(
       clientSecret,
     } = oauthStore;
 
-    const { currentDeviceType } = settingsStore;
+    const { currentDeviceType, maxImageUploadSize } = settingsStore;
 
     const props: ClientFormProps = {
       scopeList,
@@ -471,6 +473,7 @@ export default inject(
       resetDialogVisible,
       setClientSecretProps: setClientSecret,
       clientSecretProps: clientSecret,
+      maxImageUploadSize: maxImageUploadSize ?? undefined,
     };
 
     if (id) {

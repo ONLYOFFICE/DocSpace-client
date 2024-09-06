@@ -52,6 +52,7 @@ export interface ClientFormProps {
   setResetDialogVisible?: (value: boolean) => void;
 
   currentDeviceType?: DeviceUnionType;
+  maxImageUploadSize?: number;
 
   setClientSecretProps?: (value: string) => void;
   clientSecretProps?: string;

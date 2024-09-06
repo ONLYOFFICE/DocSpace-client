@@ -58,11 +58,24 @@ const StyledModalDialog = styled(ModalDialog)`
   }
 `;
 
-const RoomLogoCoverDialog = ({ setRoomLogoCoverDialogVisible }) => {
+const RoomLogoCoverDialog = ({
+  setRoomLogoCoverDialogVisible,
+  getCovers,
+  covers,
+  setRoomLogoCover,
+}) => {
   const { t } = useTranslation(["Common"]);
+
+  React.useEffect(() => {
+    getCovers();
+  }, []);
 
   const onCloseRoomLogo = () => {
     setRoomLogoCoverDialogVisible(false);
+  };
+
+  const handleSubmit = () => {
+    setRoomLogoCover();
   };
   return (
     <StyledModalDialog
@@ -74,7 +87,7 @@ const RoomLogoCoverDialog = ({ setRoomLogoCoverDialogVisible }) => {
     >
       <ModalDialog.Header>{t("RoomCover")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <RoomLogoCover />
+        <RoomLogoCover covers={covers} />
       </ModalDialog.Body>
 
       <ModalDialog.Footer>
@@ -84,7 +97,7 @@ const RoomLogoCoverDialog = ({ setRoomLogoCoverDialogVisible }) => {
           tabIndex={0}
           size={ButtonSize.normal}
           label={t("Common:ApplyButton")}
-          // onClick={handleSubmit}
+          onClick={handleSubmit}
         />
         <Button
           scale
@@ -98,8 +111,11 @@ const RoomLogoCoverDialog = ({ setRoomLogoCoverDialogVisible }) => {
   );
 };
 
-export default inject<TStore>(({ dialogsStore }) => {
+export default inject<TStore>(({ dialogsStore, filesStore }) => {
   return {
     setRoomLogoCoverDialogVisible: dialogsStore.setRoomLogoCoverDialogVisible,
+    getCovers: dialogsStore.getCovers,
+    covers: dialogsStore.covers,
+    setRoomLogoCover: dialogsStore.setRoomLogoCover,
   };
 })(observer(RoomLogoCoverDialog));

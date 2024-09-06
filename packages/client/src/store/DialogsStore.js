@@ -38,6 +38,8 @@ import TrashIconSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import PenSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import UploadSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 
+import { getRoomCovers, setRoomCover } from "@docspace/shared/api/rooms";
+
 class DialogsStore {
   authStore;
   treeFoldersStore;
@@ -137,6 +139,9 @@ class DialogsStore {
   warningQuotaDialogVisible = false;
   invitePaidUsersCount = 0;
   isNewQuotaItemsByCurrentUser = false;
+
+  covers = null;
+  cover = null;
 
   constructor(
     authStore,
@@ -601,6 +606,19 @@ class DialogsStore {
     this.roomLogoCoverDialogVisible = visible;
   };
 
+  setCovers = (covers) => {
+    this.covers = covers;
+  };
+
+  setCover = (cover) => {
+    this.cover = cover;
+  };
+
+  setRoomLogoCover = async () => {
+    const { bufferSelection } = this.filesStore;
+    await setRoomCover(bufferSelection.id, this.cover);
+  };
+
   getLogoCoverModel = (t, hasImage) => {
     return [
       {
@@ -621,6 +639,12 @@ class DialogsStore {
             onClick: () => this.setRoomLogoCoverDialogVisible(true),
           },
     ];
+  };
+
+  getCovers = async () => {
+    const response = await getRoomCovers();
+
+    this.setCovers(response);
   };
 }
 

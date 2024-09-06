@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useMemo } from "react";
+import { ReactSVG } from "react-svg";
 
 import EditPenSvgUrl from "PUBLIC_DIR/images/icons/12/pen-edit.react.svg?url";
 
@@ -51,7 +52,7 @@ const RoomIcon = ({
   radius = "6px",
   showDefault,
   imgClassName,
-  imgSrc,
+  logo,
   badgeUrl,
   onBadgeClick,
   className,
@@ -72,6 +73,12 @@ const RoomIcon = ({
   });
 
   const roomTitle = useMemo(() => getRoomTitle(title ?? ""), [title]);
+
+  const imgSrc = logo?.cover
+    ? `data:image/svg+xml;base64, ${window.btoa(logo?.cover)}`
+    : logo?.medium
+      ? logo.medium
+      : logo;
 
   const dropdownElement = (
     <DropDown
@@ -112,6 +119,8 @@ const RoomIcon = ({
     prefetchImage();
   }, [prefetchImage]);
 
+  const coverSize = size.replace("px", "") * 0.625;
+
   return (
     <StyledIcon
       ref={iconRef}
@@ -120,11 +129,17 @@ const RoomIcon = ({
       radius={radius}
       isArchive={isArchive}
       wrongImage={!correctImage}
+      coverSize={coverSize}
       className={className}
       data-testid="room-icon"
       withHover={!!hoverSrc}
     >
-      {showDefault || !correctImage ? (
+      {logo?.cover ? (
+        <>
+          <div className="room-background hover-class" />
+          <ReactSVG className="room-icon-cover" src={imgSrc} />
+        </>
+      ) : showDefault || !correctImage ? (
         <>
           <div className="room-background hover-class" />
           <Text className="room-title">{roomTitle}</Text>

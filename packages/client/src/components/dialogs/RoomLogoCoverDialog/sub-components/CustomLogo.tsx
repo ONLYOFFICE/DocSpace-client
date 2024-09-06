@@ -47,8 +47,7 @@ const StyledLogo = styled.div<StyledLogoProps>`
 
   .custom-logo-cover {
     svg {
-      width: 60px;
-      height: 60px;
+      transform: scale(3);
       path {
         fill: #fff;
       }
@@ -98,7 +97,10 @@ export const CustomLogo = ({
           {roomTitle}
         </Text>
       ) : (
-        <ReactSVG className="custom-logo-cover" src={icon} alt="icon" />
+        <ReactSVG
+          className="custom-logo-cover"
+          src={`data:image/svg+xml;base64, ${window.btoa(icon.data)}`}
+        />
       )}
     </StyledLogo>
   );

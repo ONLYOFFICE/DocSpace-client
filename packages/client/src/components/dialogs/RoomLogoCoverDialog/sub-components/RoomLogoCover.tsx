@@ -96,7 +96,13 @@ const RoomLogoCoverContainer = styled.div`
   }
 `;
 
-const RoomLogoCover = ({ isBaseTheme, logo, title }: RoomLogoCoverProps) => {
+const RoomLogoCover = ({
+  isBaseTheme,
+  logo,
+  title,
+  covers,
+  setCover,
+}: RoomLogoCoverProps) => {
   const { t } = useTranslation(["Common", "CreateEditRoomDialog"]);
 
   const roomTitle = React.useMemo(() => getRoomTitle(title ?? ""), [title]);
@@ -106,6 +112,11 @@ const RoomLogoCover = ({ isBaseTheme, logo, title }: RoomLogoCoverProps) => {
   const [color, setColor] = useState<string>(roomColor);
   const [icon, setIcon] = useState<string>(roomTitle);
   const [withoutIcon, setWithoutIcon] = useState<boolean>(true);
+
+  const setLogoCover = (cover) => {
+    setIcon(cover);
+    setCover({ color: color.replace("#", ""), cover: cover.id });
+  };
 
   const scrollRef = useRef(null);
 
@@ -123,8 +134,9 @@ const RoomLogoCover = ({ isBaseTheme, logo, title }: RoomLogoCoverProps) => {
         <SelectIcon
           t={t}
           withoutIcon={withoutIcon}
-          setIcon={setIcon}
+          setIcon={setLogoCover}
           setWithoutIcon={setWithoutIcon}
+          covers={covers}
         />
       </div>
     </>
@@ -154,7 +166,7 @@ const RoomLogoCover = ({ isBaseTheme, logo, title }: RoomLogoCoverProps) => {
   );
 };
 
-export default inject<TStore>(({ settingsStore, filesStore }) => {
+export default inject<TStore>(({ settingsStore, filesStore, dialogsStore }) => {
   const { theme } = settingsStore;
   const { bufferSelection } = filesStore;
 
@@ -162,5 +174,6 @@ export default inject<TStore>(({ settingsStore, filesStore }) => {
     isBaseTheme: theme?.isBase,
     logo: bufferSelection?.logo,
     title: bufferSelection?.title,
+    setCover: dialogsStore.setCover,
   };
 })(observer(RoomLogoCover));

@@ -24,15 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React from "react";
 import SecuritySvgUrl from "PUBLIC_DIR/images/security.svg?url";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import { Base } from "@docspace/shared/themes";
 import { NoUserSelect } from "@docspace/shared/utils";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
-
-import EditPenSvgUrl from "PUBLIC_DIR/images/icons/12/pen-edit.react.svg?url";
 
 const IconWrapper = styled.div`
   ${(props) =>
@@ -90,7 +88,7 @@ const ItemIcon = ({
   imgClassName,
   model,
 }) => {
-  const isLoadedRoomIcon = !!logo?.medium;
+  const isLoadedRoomIcon = !!logo;
   const showDefaultRoomIcon = !isLoadedRoomIcon && isRoom;
 
   return (
@@ -103,7 +101,7 @@ const ItemIcon = ({
           isArchive={isArchive}
           showDefault={showDefault || showDefaultRoomIcon}
           imgClassName={imgClassName || "react-svg-icon"}
-          imgSrc={isRoom ? logo?.medium : icon}
+          logo={isRoom ? logo : icon}
           badgeUrl={badgeUrl ? badgeUrl : ""}
           withEditing={withEditing}
           model={model}

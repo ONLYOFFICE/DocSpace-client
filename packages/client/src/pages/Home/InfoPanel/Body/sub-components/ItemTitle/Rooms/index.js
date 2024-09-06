@@ -35,9 +35,6 @@ import Planet12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/planet.react.svg?url
 import Camera10ReactSvgUrl from "PUBLIC_DIR/images/icons/10/cover.camera.react.svg?url";
 import SearchIconReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
 
-import PenSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
-import UploadPenSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
-
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { StyledTitle } from "../../../styles/common";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
@@ -69,7 +66,9 @@ const RoomsItemHeader = ({
 
   if (!selection) return null;
 
-  const icon = selection.icon;
+  console.log(selection.icon);
+
+  const icon = selection.icon || selection.logo;
   const isLoadedRoomIcon = !!selection.logo?.medium;
   const showDefaultRoomIcon = !isLoadedRoomIcon && selection.isRoom;
   const security = infoPanelSelection ? infoPanelSelection.security : {};
@@ -116,7 +115,6 @@ const RoomsItemHeader = ({
   const onSearchClick = () => setShowSearchBlock(true);
   const hasImage = selection?.logo?.original;
   const model = getLogoCoverModel(t, hasImage);
-  console.log(model);
 
   return (
     <StyledTitle ref={itemTitleRef}>
@@ -129,7 +127,7 @@ const RoomsItemHeader = ({
           isArchive={isArchive}
           showDefault={showDefaultRoomIcon}
           imgClassName={`icon ${selection.isRoom && "is-room"}`}
-          imgSrc={icon}
+          logo={icon}
           badgeUrl={badgeUrl ? badgeUrl : ""}
           hoverSrc={Camera10ReactSvgUrl}
           model={model}

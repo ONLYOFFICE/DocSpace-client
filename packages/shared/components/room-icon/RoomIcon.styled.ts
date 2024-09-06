@@ -1,6 +1,8 @@
 import styled, { css } from "styled-components";
 import { Base } from "../../themes";
 
+const COVER_DEFAULT_SIZE = 20;
+
 const StyledIcon = styled.div<{
   size: string;
   radius: string;
@@ -8,6 +10,7 @@ const StyledIcon = styled.div<{
   color?: string;
   wrongImage: boolean;
   withHover: boolean;
+  coverSize: number;
 }>`
   display: flex;
   justify-content: center;
@@ -30,6 +33,25 @@ const StyledIcon = styled.div<{
         : `#${props.color}`};
     position: absolute;
     opacity: ${(props) => props.theme.roomIcon.opacityBackground};
+  }
+
+  .room-icon-cover {
+    z-index: 1;
+    svg {
+      transform: ${(props) =>
+        props.coverSize && `scale(${props.coverSize / COVER_DEFAULT_SIZE})`};
+      path {
+        fill: #fff;
+      }
+    }
+
+    div:first-child {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: ${(props) => `${props.coverSize}px`};
+      width: ${(props) => `${props.coverSize}px`};
+    }
   }
 
   .room-title {

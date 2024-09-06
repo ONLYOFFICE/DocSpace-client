@@ -95,7 +95,9 @@ const Details = ({
   const currentIcon =
     !isArchive && selection?.logo?.large
       ? selection?.logo?.large
-      : getInfoPanelItemIcon(selection, 96);
+      : selection?.logo?.cover
+        ? selection?.logo
+        : getInfoPanelItemIcon(selection, 96);
 
   //console.log("InfoPanel->Details render", { selection });
 
@@ -138,7 +140,7 @@ const Details = ({
               selection.logo?.large &&
               "custom-logo"
             }`}
-            logo={{ medium: currentIcon }}
+            logo={currentIcon}
             model={model}
             withEditing={true}
           />

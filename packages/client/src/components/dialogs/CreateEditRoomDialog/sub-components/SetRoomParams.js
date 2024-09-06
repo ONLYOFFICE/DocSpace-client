@@ -194,8 +194,10 @@ const SetRoomParams = ({
       fileExst={bufferSelection?.fileExst}
       isRoom={bufferSelection?.isRoom}
       title={bufferSelection?.title}
-      logo={{ medium: bufferSelection?.logo?.large }}
-      showDefault={!bufferSelection?.logo?.large}
+      logo={bufferSelection?.logo}
+      showDefault={
+        !bufferSelection?.logo?.cover && !bufferSelection?.logo?.large
+      }
       color={bufferSelection?.logo?.color}
       size={isMobile() ? "96px" : "64px"}
       withEditing={true}

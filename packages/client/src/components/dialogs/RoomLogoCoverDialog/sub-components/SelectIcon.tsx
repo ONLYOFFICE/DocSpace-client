@@ -31,6 +31,7 @@ import { tablet } from "@docspace/shared/utils";
 
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { SelectIconProps } from "../RoomLogoCoverDialog.types";
+import { ReactSVG } from "react-svg";
 import { RoomCoverIcons } from "../data";
 
 interface WithoutIconProps {
@@ -100,6 +101,7 @@ export const SelectIcon = ({
   withoutIcon,
   setWithoutIcon,
   setIcon,
+  covers,
 }: SelectIconProps) => {
   const toggleWithoutIcon = () => setWithoutIcon((state: boolean) => !state);
   return (
@@ -109,18 +111,19 @@ export const SelectIcon = ({
         {t("WithoutIcon")}
       </StyledWithoutIcon>
       <div className="cover-icon-container">
-        {RoomCoverIcons.map((icon) => (
-          <StyledIconContainer onClick={() => setIcon(icon)} key={icon}>
-            <ColorTheme
-              themeId={ThemeId.IconButton}
-              iconName={icon}
-              className="cover-icon"
-              size={20}
-              alt="cover-icon"
-              color={"#657077"}
-            />
-          </StyledIconContainer>
-        ))}
+        {covers &&
+          covers?.map((icon) => {
+            function createMarkup() {
+              return { __html: icon.data };
+            }
+            return (
+              <StyledIconContainer
+                onClick={() => setIcon(icon)}
+                key={icon.id}
+                dangerouslySetInnerHTML={createMarkup()}
+              />
+            );
+          })}
       </div>
     </div>
   );

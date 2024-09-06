@@ -141,8 +141,4 @@ export default inject(({ userStore }) => {
   return {
     userId: userStore.user.id,
   };
-})(
-  withTranslation(["Home", "Common", "Translations"])(
-    observer(PeopleTableHeader),
-  ),
-);
+})(withTranslation(["Common", "Translations"])(observer(PeopleTableHeader)));

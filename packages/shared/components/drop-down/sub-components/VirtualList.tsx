@@ -131,11 +131,13 @@ function VirtualList({
 
   useEffect(() => {
     const focusTrap = focusTrapRef.current;
+    const setFocus = () => focusTrap?.focus();
 
     if (isOpen && isDropdownReady && enableKeyboardEvents) {
-      focusTrap?.focus();
+      setFocus();
       focusTrap?.addEventListener("keydown", onKeyDown);
       focusTrap?.addEventListener("keyup", onKeyUp);
+      window.addEventListener("focus", setFocus);
     }
 
     const refVar = virtualListRef.current;
@@ -143,6 +145,7 @@ function VirtualList({
     return () => {
       focusTrap?.removeEventListener("keydown", onKeyDown);
       focusTrap?.removeEventListener("keyup", onKeyUp);
+      window.removeEventListener("focus", setFocus);
 
       if (itemCount > 0 && refVar) {
         setCurrentIndex(activeIndex);

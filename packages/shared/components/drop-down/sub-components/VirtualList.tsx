@@ -36,6 +36,7 @@ import { VariableSizeList } from "react-window";
 import { Scrollbar } from "../../scrollbar";
 
 import { VirtualListProps } from "../DropDown.types";
+import { findNextNonSeparatorIndex } from "../DropDown.utils";
 
 function VirtualList({
   Row,
@@ -78,22 +79,22 @@ function VirtualList({
 
       switch (event.code) {
         case "ArrowDown":
-          index += 1;
+          index = findNextNonSeparatorIndex(index, cleanChildren, "forward");
           break;
         case "ArrowUp":
-          index -= 1;
+          index = findNextNonSeparatorIndex(index, cleanChildren, "backward");
           break;
         default:
           return;
       }
 
-      if (index < 0 || index >= React.Children.count(children)) return;
+      if (index < 0 || index >= React.Children.count(cleanChildren)) return;
 
       setCurrentIndex(index);
       currentIndexRef.current = index;
       // ref.current.scrollToItem(index, "smart");
     },
-    [isOpen, children],
+    [isOpen, cleanChildren],
   );
 
   const onKeyUp = useCallback(

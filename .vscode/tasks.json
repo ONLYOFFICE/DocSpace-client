@@ -481,6 +481,21 @@
         "focus": true,
         "close": false
       }
+    },
+    {
+      "label": "Test | e2e playwright setup",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; npx playwright install ; ",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
     }
   ]
 }

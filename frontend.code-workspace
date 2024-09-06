@@ -205,6 +205,11 @@
             "tooltip": "🛠️ Start the \"Test | Jest:unit\" task",
           },
           {
+            "label": "e2e playwright setup",
+            "task": "Test | e2e playwright setup",
+            "tooltip": "🛠️ Start the \"e2e playwright setup\" task",
+          },
+          {
             "label": "e2e build",
             "task": "Test | Test build",
             "tooltip": "🛠️ Start the \"test build\" task",

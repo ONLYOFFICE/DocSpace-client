@@ -104,7 +104,7 @@ function ConfirmRoute(props: ConfirmRouteProps) {
           confirmLinkParams,
           validationResult: confirmLinkResult.result,
         });
-        throw new Error(t("Common:LinkHasExpiredAndHasBeenDisabled"));
+        throw new Error(t("Common:LinkExpired"));
       case ValidationResult.TariffLimit:
         console.error("tariff limit", {
           confirmLinkParams,

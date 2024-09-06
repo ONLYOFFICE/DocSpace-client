@@ -65,7 +65,7 @@ const MembersParam = ({
   total,
   removeMember,
 }: MembersParamProps) => {
-  const { t } = useTranslation(["Common", "PeopleTranslation"]);
+  const { t } = useTranslation(["Common", "PeopleTranslations"]);
 
   return (
     <div>

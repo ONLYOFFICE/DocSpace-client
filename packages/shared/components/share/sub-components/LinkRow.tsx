@@ -34,12 +34,10 @@ import LockedReactSvg from "PUBLIC_DIR/images/icons/12/locked.react.svg";
 
 import { RowSkeleton } from "../../../skeletons/share";
 import { TFileLink } from "../../../api/files/types";
-import { copyShareLink } from "../../../utils/copy";
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
 import { Link } from "../../link";
 import { ComboBox, ComboBoxSize, TOption } from "../../combobox";
 import { IconButton } from "../../icon-button";
-import { toastr } from "../../toast";
 import { Loader, LoaderTypes } from "../../loader";
 import { Text } from "../../text";
 
@@ -48,6 +46,7 @@ import {
   getShareOptions,
   getAccessOptions,
   getRoomAccessOptions,
+  copyShareLink,
 } from "../Share.helpers";
 import { LinkRowProps } from "../Share.types";
 
@@ -82,8 +81,7 @@ const LinkRow = ({
   const roomAccessOptions = isRoomsLink ? getRoomAccessOptions(t) : [];
 
   const onCopyLink = (link: TFileLink) => {
-    copyShareLink(link.sharedTo.shareLink);
-    toastr.success(t("Common:LinkSuccessfullyCopied"));
+    copyShareLink(link, t);
   };
 
   return !links?.length ? (

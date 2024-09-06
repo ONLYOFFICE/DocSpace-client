@@ -33,7 +33,7 @@ import { Text } from "../../text";
 import { LinkWithDropdown } from "../../link-with-dropdown";
 import { Link, LinkType } from "../../link";
 
-import { getExpiredOptions } from "../Share.helpers";
+import { getDate, getExpiredOptions } from "../Share.helpers";
 import { ExpiredComboBoxProps } from "../Share.types";
 
 import ShareCalendar from "./ShareCalendar";
@@ -96,22 +96,6 @@ const ExpiredComboBox = ({
     changeExpirationOption(link, currentDate);
   };
 
-  const getDate = () => {
-    if (!expirationDate) return;
-    const currentDare = moment(new Date());
-    const expDate = moment(new Date(expirationDate));
-    const calculatedDate = expDate.diff(currentDare, "days");
-
-    if (calculatedDate < 1) {
-      return {
-        date: expDate.diff(currentDare, "hours") + 1,
-        label: t("Common:Hours"),
-      };
-    }
-
-    return { date: calculatedDate + 1, label: t("Common:Days") };
-  };
-
   const onRemoveLink = () => {
     const opt = accessOptions.find((o) => o.access === ShareAccessRights.None);
     if (opt) changeAccessOption(opt, link);
@@ -134,7 +118,7 @@ const ExpiredComboBox = ({
 
   const getExpirationTrans = () => {
     if (expirationDate) {
-      const dateObj = getDate();
+      const dateObj = getDate(expirationDate, t);
       const date = `${dateObj?.date} ${dateObj?.label}`;
 
       return (

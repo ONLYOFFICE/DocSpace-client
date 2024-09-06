@@ -41,7 +41,6 @@ import {
 } from "../../api/files";
 import { TAvailableExternalRights, TFileLink } from "../../api/files/types";
 import { isDesktop } from "../../utils";
-import { copyShareLink } from "../../utils/copy";
 import { TOption } from "../combobox";
 import { Text } from "../text";
 import { IconButton } from "../icon-button";
@@ -56,6 +55,7 @@ import LinkRow from "./sub-components/LinkRow";
 
 import { StyledLinks } from "./Share.styled";
 import { ShareProps, TLink } from "./Share.types";
+import { copyShareLink } from "./Share.helpers";
 
 const Share = (props: ShareProps) => {
   const {
@@ -118,8 +118,7 @@ const Share = (props: ShareProps) => {
 
       if (link) {
         setFileLinks([link]);
-        copyShareLink(link.sharedTo.shareLink);
-        toastr.success(t("Common:GeneralAccessLinkCopied"));
+        copyShareLink(link, t);
       } else {
         setFileLinks([]);
       }
@@ -223,8 +222,7 @@ const Share = (props: ShareProps) => {
       }
       updateLink(link, res);
 
-      copyShareLink(link.sharedTo.shareLink);
-      toastr.success(t("Common:LinkSuccessfullyCopied"));
+      copyShareLink(res, t);
     } catch (e) {
       toastr.error(e as TData);
     }
@@ -262,8 +260,7 @@ const Share = (props: ShareProps) => {
         if (item.access === ShareAccessRights.DenyAccess) {
           toastr.success(t("Common:LinkAccessDenied"));
         } else {
-          copyShareLink(link.sharedTo.shareLink);
-          toastr.success(t("Common:LinkSuccessfullyCopied"));
+          copyShareLink(res, t);
         }
       }
     } catch (e) {
@@ -300,8 +297,7 @@ const Share = (props: ShareProps) => {
 
       updateLink(link, res);
 
-      copyShareLink(link.sharedTo.shareLink);
-      toastr.success(t("Common:LinkSuccessfullyCopied"));
+      copyShareLink(res, t);
     } catch (e) {
       toastr.error(e as TData);
     }

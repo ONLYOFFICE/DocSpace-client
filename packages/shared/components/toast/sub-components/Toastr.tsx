@@ -145,11 +145,12 @@ function success(
   timeout?: number,
   withCross?: boolean,
   centerPosition?: boolean,
+  withTitle = true,
 ) {
   return notify(
     ToastType.success,
     data,
-    title || getTitle("Done") || "",
+    title || withTitle ? getTitle("Done") || "" : "",
     timeout || 5000,
     withCross,
     centerPosition,

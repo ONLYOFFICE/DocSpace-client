@@ -42,4 +42,12 @@ export const endpoints: TEndpoints = {
     url: "*/**/api/2.0/settings/license",
     pathToData: "settings/license",
   },
+  changePassword: {
+    url: "*/**/api/2.0/people/**/password",
+    pathToData: "people/password",
+  },
+  login: {
+    url: "*/**/api/2.0/authentication",
+    pathToData: "authentication/login",
+  },
 };

@@ -51,10 +51,12 @@ const OAuth = ({
   const startLoadingRef = React.useRef<null | Date>(null);
 
   const getData = React.useCallback(async () => {
-    if (isInit) return;
     const actions = [];
 
-    actions.push(fetchScopes(), fetchClients());
+    if (!isInit) {
+      actions.push(fetchScopes());
+    }
+    actions.push(fetchClients());
 
     await Promise.all(actions);
 
@@ -73,6 +75,7 @@ const OAuth = ({
     }
 
     setIsLoading(false);
+    startLoadingRef.current = null;
     setIsInit(true);
   }, [fetchClients, fetchScopes, isInit, setIsInit]);
 
@@ -83,7 +86,8 @@ const OAuth = ({
   });
 
   React.useEffect(() => {
-    if (isInit) return setIsLoading(false);
+    if (startLoadingRef.current) return;
+    setIsLoading(true);
     startLoadingRef.current = new Date();
     getData();
   }, [getData, setIsInit, isInit]);

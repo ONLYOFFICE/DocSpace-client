@@ -46,11 +46,7 @@ const StyledBodyContent = styled.div`
 `;
 
 const ChangeNameDialog = (props) => {
-  const { t, ready } = useTranslation([
-    "ProfileAction",
-    "PeopleTranslations",
-    "Common",
-  ]);
+  const { t, ready } = useTranslation(["PeopleTranslations", "Common"]);
   const {
     visible,
     onClose,

@@ -20,6 +20,12 @@ const StyledIcon = styled.div<{
 
   width: ${(props) => props.size};
 
+  ${(props) =>
+    props.withEditing &&
+    css`
+      position: relative;
+    `};
+
   .room-background {
     height: ${(props) => props.size};
 
@@ -38,8 +44,11 @@ const StyledIcon = styled.div<{
   .room-icon-cover {
     z-index: 1;
     svg {
+      opacity: 1;
+      transition: all 0.2s ease;
       transform: ${(props) =>
-        props.coverSize && `scale(${props.coverSize / COVER_DEFAULT_SIZE})`};
+        props.coverSize &&
+        `scale(${props.coverSize / COVER_DEFAULT_SIZE}) translateY(0)`};
       path {
         fill: #fff;
       }
@@ -128,6 +137,10 @@ const StyledIcon = styled.div<{
         .room-title {
           opacity: 0;
           transform: translateY(-20px);
+        }
+
+        .room-icon-cover svg {
+          transform: translateY(-30px);
         }
       }
     `}

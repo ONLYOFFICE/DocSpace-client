@@ -66,8 +66,6 @@ const RoomsItemHeader = ({
 
   if (!selection) return null;
 
-  console.log(selection.icon);
-
   const icon = selection.icon || selection.logo;
   const isLoadedRoomIcon = !!selection.logo?.medium;
   const showDefaultRoomIcon = !isLoadedRoomIcon && selection.isRoom;
@@ -129,7 +127,7 @@ const RoomsItemHeader = ({
           imgClassName={`icon ${selection.isRoom && "is-room"}`}
           logo={icon}
           badgeUrl={badgeUrl ? badgeUrl : ""}
-          hoverSrc={Camera10ReactSvgUrl}
+          hoverSrc={selection.isRoom && Camera10ReactSvgUrl}
           model={model}
         />
       </div>

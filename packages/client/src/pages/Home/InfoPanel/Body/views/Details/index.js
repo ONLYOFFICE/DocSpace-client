@@ -126,7 +126,7 @@ const Details = ({
         </StyledThumbnail>
       ) : (
         <StyledNoThumbnail>
-          <ItemIcon
+          <RoomIcon
             color={selection.logo?.color}
             title={selection.title}
             isArchive={isArchive}

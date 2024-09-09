@@ -128,11 +128,12 @@ const RoomIcon = ({
       size={size}
       radius={radius}
       isArchive={isArchive}
-      wrongImage={!correctImage}
+      wrongImage={!correctImage && !imgSrc?.color}
       coverSize={coverSize}
       className={className}
       data-testid="room-icon"
       withHover={!!hoverSrc}
+      withEditing={withEditing}
     >
       {logo?.cover ? (
         <>

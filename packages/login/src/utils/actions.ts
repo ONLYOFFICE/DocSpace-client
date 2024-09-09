@@ -61,6 +61,11 @@ import {
   portalPasswordSettingHandler,
   machineNameHandler,
   portalTimeZoneHandler,
+  capabilitiesHandler,
+  ssoHandler,
+  selfHandler,
+  thirdPartyProviderHandler,
+  getClientHandler,
 } from "@docspace/shared/__mocks__/e2e";
 
 const IS_TEST = process.env.E2E_TEST;
@@ -138,7 +143,9 @@ export async function getThirdPartyProviders() {
     "GET",
   );
 
-  const res = await fetch(getThirdParty);
+  const res = IS_TEST
+    ? thirdPartyProviderHandler()
+    : await fetch(getThirdParty);
 
   if (!res.ok) return;
 
@@ -150,7 +157,7 @@ export async function getThirdPartyProviders() {
 export async function getCapabilities() {
   const [getCapabilities] = createRequest([`/capabilities`], [["", ""]], "GET");
 
-  const res = await fetch(getCapabilities);
+  const res = IS_TEST ? capabilitiesHandler() : await fetch(getCapabilities);
 
   if (!res.ok) return;
 
@@ -162,7 +169,7 @@ export async function getCapabilities() {
 export async function getSSO() {
   const [getSSO] = createRequest([`/settings/ssov2`], [["", ""]], "GET");
 
-  const res = await fetch(getSSO);
+  const res = IS_TEST ? ssoHandler() : await fetch(getSSO);
 
   if (!res.ok) return;
 
@@ -178,7 +185,7 @@ export async function getUser() {
   const [getUser] = createRequest([`/people/@self`], [["", ""]], "GET");
 
   if (!cookie?.includes("asc_auth_key")) return undefined;
-  const userRes = await fetch(getUser);
+  const userRes = IS_TEST ? selfHandler() : await fetch(getUser);
 
   if (userRes.status === 401) return undefined;
 
@@ -208,7 +215,9 @@ export async function getOAuthClient(clientId: string) {
     "GET",
   );
 
-  const oauthClient = await fetch(getOAuthClient);
+  const oauthClient = IS_TEST
+    ? getClientHandler()
+    : await fetch(getOAuthClient);
 
   if (!oauthClient.ok) return;
 

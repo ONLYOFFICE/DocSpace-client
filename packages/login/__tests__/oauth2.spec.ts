@@ -24,39 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX, BASE_URL } from "../utils";
+import { successClient } from "@docspace/shared/__mocks__/e2e";
 
-const PATH = "capabilities";
+import { expect, test } from "./fixtures/base";
 
-const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
+test("login oauth2 render", async ({ page }) => {
+  await page.goto(`/login?client_id=${successClient.client_id}`);
 
-export const successCapabilities = {
-  response: {
-    ldapEnabled: false,
-    providers: [
-      "google",
-      "zoom",
-      "linkedin",
-      "facebook",
-      "twitter",
-      "microsoft",
-    ],
-    ssoLabel: "Single Sign-on",
-    oauthEnabled: true,
-    ssoUrl: `${BASE_URL}/sso/login`,
-    identityServerEnabled: true,
-  },
-  count: 1,
-  links: [
-    {
-      href: url,
-      action: "GET",
-    },
-  ],
-  status: 0,
-  statusCode: 200,
-};
-
-export const capabilitiesHandler = () => {
-  return new Response(JSON.stringify(successCapabilities));
-};
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "oauth",
+    "login-oauth2-render.png",
+  ]);
+});

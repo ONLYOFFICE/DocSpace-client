@@ -23,3 +23,56 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { API_PREFIX, BASE_URL } from "../../utils";
+
+const PATH = "people/thirdparty/providers";
+
+const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
+
+export const successThirdpartyProviders = {
+  response: [
+    {
+      provider: "google",
+      url: "/login.ashx?auth=google&mode=popup&callback=",
+      linked: false,
+    },
+    {
+      provider: "zoom",
+      url: "/login.ashx?auth=zoom&mode=popup&callback=",
+      linked: false,
+    },
+    {
+      provider: "linkedin",
+      url: "/login.ashx?auth=linkedin&mode=popup&callback=",
+      linked: false,
+    },
+    {
+      provider: "facebook",
+      url: "/login.ashx?auth=facebook&mode=popup&callback=",
+      linked: false,
+    },
+    {
+      provider: "twitter",
+      url: "/login.ashx?auth=twitter&mode=popup&callback=",
+      linked: false,
+    },
+    {
+      provider: "microsoft",
+      url: "/login.ashx?auth=microsoft&mode=popup&callback=",
+      linked: false,
+    },
+  ],
+  count: 6,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+export const thirdPartyProvider = () => {
+  return new Response(JSON.stringify(successThirdpartyProviders));
+};

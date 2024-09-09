@@ -46,6 +46,14 @@ export const endpoints: TEndpoints = {
     url: "*/**/api/2.0/people/**/password",
     pathToData: "people/password",
   },
+  activationStatus: {
+    url: "*/**/api/2.0/people/activationstatus/*",
+    pathToData: "people/activationStatus",
+  },
+  updateUser: {
+    url: "*/**/api/2.0/people/*",
+    pathToData: "people/user",
+  },
   login: {
     url: "*/**/api/2.0/authentication",
     pathToData: "authentication/login",

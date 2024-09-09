@@ -13,6 +13,7 @@ const StyledCalendarComponent = styled.div`
   position: relative;
 
   .icon-calendar {
+    height: 16px;
     padding-right: 2px;
   }
 `;

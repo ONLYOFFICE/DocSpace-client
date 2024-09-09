@@ -39,6 +39,7 @@ class SelectionStore {
   items;
   platformData = [];
   isLoading = false;
+  isSessionsLoaded = false;
   isDisabled = false;
   selection = [];
   selectionUsersRights = {
@@ -494,6 +495,10 @@ class SelectionStore {
     this.isLoading = isLoading;
   };
 
+  setIsSessionsLoaded = (isSessionsLoaded) => {
+    this.isSessionsLoaded = isSessionsLoaded;
+  };
+
   setFromDateAgo = (id, value) => {
     this.fromDateAgo[id] = value;
   };
@@ -707,6 +712,7 @@ class SelectionStore {
   fetchData = async () => {
     const { getUserSessionsById } = this.settingsSetupStore;
     const { getUsersList } = this.peopleStore.usersStore;
+    this.setIsSessionsLoaded(true);
     try {
       const users = await getUsersList();
       const sessionsPromises = users
@@ -717,7 +723,9 @@ class SelectionStore {
 
       this.setSessionsData(sessions);
     } catch (error) {
-      console.error(error);
+      toastr.error(error);
+    } finally {
+      this.setIsSessionsLoaded(false);
     }
   };
 

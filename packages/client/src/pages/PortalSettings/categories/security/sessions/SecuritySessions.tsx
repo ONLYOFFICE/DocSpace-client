@@ -155,7 +155,8 @@ const Sessions = ({
       ? [bufferSelection.id, ...selectionUserId]
       : [...selectionUserId];
 
-  if (!isSessionsLoaded) return <SessionsLoader viewAs={viewAs} />;
+  if (isSessionsLoaded || !allSessions.length)
+    return <SessionsLoader viewAs={viewAs} />;
 
   return (
     <MainContainer>
@@ -243,6 +244,7 @@ export const SecuritySessions = inject<TStore>(
       onClickLogoutAllSessions,
       onClickLogoutAllExceptThis,
       onClickRemoveSession,
+      isSessionsLoaded,
     } = peopleStore.selectionStore as unknown as SelectionPeopleStore;
 
     const {
@@ -285,7 +287,7 @@ export const SecuritySessions = inject<TStore>(
       isLoadingDownloadReport,
       setUserSessionPanelVisible,
       isSeveralSelection,
-      isSessionsLoaded: allSessions.length > 0,
+      isSessionsLoaded,
     };
   },
 )(observer(Sessions));

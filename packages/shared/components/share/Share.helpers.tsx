@@ -313,12 +313,12 @@ export const copyDocumentShareLink = (
   const date = getTranslationDate(expirationDate, t);
 
   toastr.success(
-    <>
-      <Strong>{t("Common:LinkCopiedToClipboard")}</Strong>
-      <br />
-      <span>
-        {head} {date}.{" "}
-        {linkOptions?.canShowLink && linkOptions?.onClickLink && (
+    <span>
+      {head} {date}
+      <Strong>.</Strong>
+      {linkOptions?.canShowLink && linkOptions?.onClickLink && (
+        <>
+          &nbsp;
           <Link
             color={globalColors.lightBlueMain}
             isHovered
@@ -326,13 +326,9 @@ export const copyDocumentShareLink = (
           >
             {t("Notifications:ManageNotifications")}
           </Link>
-        )}
-      </span>
-    </>,
-    "",
-    undefined,
-    undefined,
-    undefined,
-    false,
+        </>
+      )}
+    </span>,
+    t("Common:LinkCopiedToClipboard"),
   );
 };

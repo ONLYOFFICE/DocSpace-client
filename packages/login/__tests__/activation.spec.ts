@@ -92,6 +92,7 @@ test("activation success", async ({ page, mockRequest }) => {
     .getByTestId("input-block")
     .getByTestId("text-input")
     .fill("qwerty123");
+  await page.getByTestId("icon-button").getByRole("img").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",

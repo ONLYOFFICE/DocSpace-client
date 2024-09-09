@@ -49,6 +49,7 @@ import type {
   TFileLink,
 } from "../../api/files/types";
 import type { TOption } from "../combobox";
+import { Strong } from "./Share.styled";
 
 export const getShareOptions = (t: TTranslation) => {
   return [
@@ -299,7 +300,7 @@ export const copyShareLink = (
       ns="Common"
       i18nKey="ShareLinkTitleInternal"
       values={{ productName: t("Common:ProductName"), access }}
-      components={{ 1: <strong /> }}
+      components={{ 1: <Strong /> }}
     />
   ) : (
     <Trans
@@ -307,14 +308,14 @@ export const copyShareLink = (
       ns="Common"
       i18nKey="ShareLinkTitle"
       values={{ access }}
-      components={{ 1: <strong /> }}
+      components={{ 1: <Strong /> }}
     />
   );
   const date = getTranslationDate(expirationDate, t);
 
   toastr.success(
     <>
-      <strong>{t("Common:LinkCopiedToClipboard")}</strong>
+      <Strong>{t("Common:LinkCopiedToClipboard")}</Strong>
       <br />
       <span>
         {head} {date}.{" "}

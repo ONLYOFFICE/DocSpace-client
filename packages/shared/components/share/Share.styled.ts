@@ -51,6 +51,10 @@ const StyledLinks = styled.div`
   }
 `;
 
+const Strong = styled.strong`
+  font-weight: 600;
+`;
+
 const StyledLinkRow = styled.div<{ isExpired?: boolean; isDisabled?: boolean }>`
   display: flex;
   gap: 8px;
@@ -187,4 +191,4 @@ const StyledDropDown = styled(DropDown)`
   }
 `;
 
-export { StyledLinks, StyledLinkRow, StyledSquare, StyledDropDown };
+export { StyledLinks, StyledLinkRow, StyledSquare, StyledDropDown, Strong };

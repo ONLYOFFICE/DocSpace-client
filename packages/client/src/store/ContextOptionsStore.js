@@ -92,7 +92,11 @@ import { toastr } from "@docspace/shared/components/toast";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isDesktop, trimSeparator } from "@docspace/shared/utils";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
-import { copyShareLink } from "@docspace/shared/utils/copy";
+import { copyShareLink as copyLink } from "@docspace/shared/utils/copy";
+import {
+  canShowManageLink,
+  copyShareLink,
+} from "@docspace/shared/components/share/Share.helpers";
 
 import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helpers/filesUtils";
 import { getOAuthToken } from "@docspace/shared/utils/common";
@@ -430,7 +434,7 @@ class ContextOptionsStore {
         const itemLink = item.isFolder
           ? await getFolderLink(item.id)
           : await getFileLink(item.id);
-        copyShareLink(itemLink.sharedTo.shareLink);
+        copyLink(itemLink.sharedTo.shareLink);
         toastr.success(t("Common:LinkCopySuccess"));
       } catch (error) {
         toastr.error(error);
@@ -502,7 +506,7 @@ class ContextOptionsStore {
     const primaryLink = await this.filesStore.getPrimaryLink(item.id);
 
     if (primaryLink) {
-      copyShareLink(primaryLink.sharedTo.shareLink);
+      copyLink(primaryLink.sharedTo.shareLink);
       item.shared
         ? toastr.success(t("Common:LinkSuccessfullyCopied"))
         : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
@@ -1203,6 +1207,21 @@ class ContextOptionsStore {
     return this.getFilesContextOptions(item, t, false, true);
   };
 
+  getManageLinkOptions = (item) => {
+    return {
+      canShowLink: canShowManageLink(
+        item,
+        this.filesStore.bufferSelection,
+        this.infoPanelStore.isVisible,
+        this.infoPanelStore.fileView,
+      ),
+      onClickLink: () => {
+        this.filesStore.setBufferSelection(item);
+        this.infoPanelStore.openShareTab();
+      },
+    };
+  };
+
   getFilesContextOptions = (item, t, isInfoPanel, isHeader) => {
     const optionsToRemove = isInfoPanel
       ? ["select", "room-info", "show-info"]
@@ -1528,10 +1547,7 @@ class ContextOptionsStore {
 
           const primaryLink = await getPrimaryFileLink(item.id);
           if (primaryLink) {
-            copyShareLink(primaryLink.sharedTo.shareLink);
-            item.shared
-              ? toastr.success(t("Common:LinkSuccessfullyCopied"))
-              : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+            copyShareLink(primaryLink, t, this.getManageLinkOptions(item));
             setShareChanged(true);
           }
         },

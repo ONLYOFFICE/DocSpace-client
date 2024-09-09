@@ -26,6 +26,8 @@
 import moment from "moment";
 import { Trans } from "react-i18next";
 
+import equal from "fast-deep-equal/react";
+
 import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
 import AccessReviewReactSvgUrl from "PUBLIC_DIR/images/access.review.react.svg?url";
 import CustomFilterReactSvgUrl from "PUBLIC_DIR/images/custom.filter.react.svg?url";
@@ -34,13 +36,16 @@ import EyeReactSvgUrl from "PUBLIC_DIR/images/eye.react.svg?url";
 // import EyeOffReactSvgUrl from "PUBLIC_DIR/images/eye.off.react.svg?url";
 // import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 
+import { Link } from "../link";
 import { toastr } from "../toast";
+import { globalColors } from "../../themes";
 import { ShareAccessRights } from "../../enums";
 import { copyShareLink as copy } from "../../utils/copy";
 
 import type { TTranslation } from "../../types";
 import type {
   TAvailableExternalRights,
+  TFile,
   TFileLink,
 } from "../../api/files/types";
 import type { TOption } from "../combobox";
@@ -263,7 +268,25 @@ export const getTranslationDate = (
   );
 };
 
-export const copyShareLink = (link: TFileLink, t: TTranslation) => {
+export const canShowManageLink = (
+  item: TFile,
+  buffer: TFile,
+  infoPanelVisible: boolean,
+  infoPanelView: string,
+) => {
+  const isEqual = equal(item, buffer);
+
+  return !isEqual || infoPanelView !== "info_share" || !infoPanelVisible;
+};
+
+export const copyShareLink = (
+  link: TFileLink,
+  t: TTranslation,
+  linkOptions?: {
+    canShowLink: boolean;
+    onClickLink: VoidFunction;
+  },
+) => {
   const { internal, expirationDate, shareLink } = link.sharedTo;
 
   const access = getNameAccess(link.access, t).toLowerCase();
@@ -294,7 +317,16 @@ export const copyShareLink = (link: TFileLink, t: TTranslation) => {
       <strong>{t("Common:LinkCopiedToClipboard")}</strong>
       <br />
       <span>
-        {head} {date}
+        {head} {date}.{" "}
+        {linkOptions?.canShowLink && linkOptions?.onClickLink && (
+          <Link
+            color={globalColors.lightBlueMain}
+            isHovered
+            onClick={linkOptions.onClickLink}
+          >
+            {t("Notifications:ManageNotifications")}
+          </Link>
+        )}
       </span>
     </>,
     "",

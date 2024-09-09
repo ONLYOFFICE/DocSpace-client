@@ -55,7 +55,6 @@ export const GroupMemberRow = styled.div<{}>`
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      width: 100%;
     }
 
     .email {

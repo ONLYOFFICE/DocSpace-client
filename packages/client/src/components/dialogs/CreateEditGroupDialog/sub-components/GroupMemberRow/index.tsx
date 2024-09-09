@@ -35,7 +35,11 @@ import {
 } from "@docspace/shared/components/avatar";
 import { getUserRole, getUserTypeLabel } from "@docspace/shared/utils/common";
 import { TUser } from "@docspace/shared/api/people/types";
+import { Box } from "@docspace/shared/components/box";
+import { EmployeeStatus } from "@docspace/shared/enums";
+
 import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
+import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 
 import * as Styled from "./index.styled";
 
@@ -78,7 +82,17 @@ const GroupMemberRow = ({ groupMember, removeMember }: GroupMemberRowProps) => {
         source={groupMember.avatarSmall ?? groupMember.avatar}
       />
       <div className="info">
-        <div className="name">{groupMember.displayName}</div>
+        <Box
+          displayProp="flex"
+          alignItems="center"
+          gapProp="8px"
+          widthProp="100%"
+        >
+          <div className="name">{groupMember.displayName}</div>
+          {groupMember.status === EmployeeStatus.Pending && (
+            <StyledSendClockIcon />
+          )}
+        </Box>
         <div className="email">{`${getUserTypeLabel(role, t)} | ${groupMember.email}`}</div>
       </div>
       <ReactSVG

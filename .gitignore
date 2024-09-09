@@ -32,3 +32,4 @@ licenses.csv
 
 .idea
 packages/runtime.json
+playwright-report

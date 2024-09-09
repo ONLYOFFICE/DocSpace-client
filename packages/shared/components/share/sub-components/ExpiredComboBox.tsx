@@ -118,8 +118,7 @@ const ExpiredComboBox = ({
 
   const getExpirationTrans = () => {
     if (expirationDate) {
-      const dateObj = getDate(expirationDate, t);
-      const date = `${dateObj?.date} ${dateObj?.label}`;
+      const date = getDate(expirationDate);
 
       return (
         <Trans t={t} i18nKey="LinkExpireAfter" ns="Common">

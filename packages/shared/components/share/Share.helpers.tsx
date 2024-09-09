@@ -206,20 +206,20 @@ export const getExpiredOptions = (
   ];
 };
 
-export const getDate = (expirationDate: moment.Moment, t: TTranslation) => {
-  if (!expirationDate) return;
+export const getDate = (expirationDate: moment.Moment) => {
+  if (!expirationDate) return "";
+
   const currentDare = moment(new Date());
   const expDate = moment(new Date(expirationDate as unknown as string));
   const calculatedDate = expDate.diff(currentDare, "days");
 
   if (calculatedDate < 1) {
-    return {
-      date: expDate.diff(currentDare, "hours") + 1,
-      label: t("Common:Hours"),
-    };
+    return moment
+      .duration(expDate.diff(currentDare, "hours") + 1, "hours")
+      .humanize();
   }
 
-  return { date: calculatedDate + 1, label: t("Common:Days") };
+  return moment.duration(calculatedDate + 1, "days").humanize();
 };
 
 export const getNameAccess = (access: ShareAccessRights, t: TTranslation) => {
@@ -244,8 +244,7 @@ export const getTranslationDate = (
   t: TTranslation,
 ) => {
   if (expirationDate) {
-    const dateObj = getDate(expirationDate, t);
-    const date = `${dateObj?.date} ${dateObj?.label}`;
+    const date = getDate(expirationDate);
 
     return (
       <Trans

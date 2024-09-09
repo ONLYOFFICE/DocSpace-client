@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Acerca de",
   "AboutCompanyTitle": "Acerca del programa",
   "AccessDenied": "Acceso denegado ",
@@ -40,6 +40,7 @@
   "ChangeButton": "Cambiar",
   "ChangeQuota": "Cambiar cuota",
   "ChangesSavedSuccessfully": "Los cambios se ha guardado correctamente",
+  "ChangeUserPermissions": "Cambie los permisos de usuario para las personas invitadas o <1>actualice su plan de tarifas</1>.",
   "ChooseFromTemplates": "Elegir entre plantillas",
   "ClearAll": "Borrar todo",
   "ClearFilter": "Borrar filtro",
@@ -51,6 +52,7 @@
   "ComingSoon": "Próximamente",
   "Comment": "Comentario",
   "Comments": "Comentarios",
+  "Commercial": "Comercial",
   "Common": "Documentos comunes",
   "CommonFiles": "Archivos comunes",
   "CompanyName": "Nombre de empresa",
@@ -59,7 +61,6 @@
   "ConflictResolveSelectAction": "Por favor, seleccione la acción:",
   "Connect": "Conectar",
   "Content": "Contenido",
-  "Context": "Contexto",
   "ContinueButton": "Continuar",
   "ContinueWith": "Continuar con",
   "Copy": "Copiar",
@@ -140,6 +141,8 @@
   "DontShowAgain": "No volver a mostrar",
   "Download": "Descargar",
   "DownloadApps": "Descargar aplicaciones",
+  "DownloadOperationDescription": "Una vez listos, puede encontrar los archivos en la carpeta de descargas de su navegador y cerrar esta pestaña.",
+  "DownloadOperationTitle": "Descarga de archivos en curso",
   "DropzoneTitleExsts": "(JPG o PNG)",
   "DropzoneTitleLink": "Seleccione una nueva imagen",
   "DropzoneTitleSecondary": "o coloque el archivo aquí",
@@ -158,6 +161,7 @@
   "EmptyRoomsDescription": "Por favor, cree la primera sala en Mis salas.",
   "EmptyRoomsHeader": "Todavía no hay salas aquí",
   "Enable": "Habilitar",
+  "EnableThirdPartyIntegration": "Por favor, pida al propietario o administrador de {{productName}} que habilite el servicio correspondiente en la sección Integración de la Configuración de {{productName}}.",
   "EncryptingFile": "Cifrando el archivo",
   "EncryptionFilePreparing": "Preparando el archivo para cifrar",
   "EncryptionKeysReload": "Las claves de cifrado deben ser introducidas de nuevo",
@@ -239,6 +243,7 @@
   "InviteUsers": "Invitar a usuarios",
   "Kilobyte": "KB",
   "Language": "Idioma",
+  "LastActivityDate": "Fecha de la última actividad",
   "LastModifiedDate": "Fecha de actualización",
   "LastName": "Apellido",
   "LatePayment": "Pago atrasado",
@@ -321,6 +326,7 @@
   "Owner": "Propietario",
   "PageOfTotalPage": "{{page}} de {{totalPage}}",
   "Paid": "De pago",
+  "PaidUsersExceedsLimit": "El número de administradores/usuarios avanzados supera el límite: {{count}} / {{limit}}.",
   "Password": "Contraseña",
   "PasswordLimitDigits": "dígitos",
   "PasswordLimitMessage": "La contraseña debe contener",
@@ -390,6 +396,7 @@
   "RoomAdmin": "Administrador de la sala",
   "RoomList": "Lista de las salas",
   "Rooms": "Salas",
+  "RoomSpaceQuotaExceeded": "Se ha superado la cuota de espacio de la sala ({{size}})",
   "SameEmail": "No se puede utilizar el mismo email",
   "SaveButton": "Guardar",
   "SaveHereButton": "Guardar aquí",
@@ -509,5 +516,6 @@
   "Website": "Sitio web",
   "Yes": "Sí",
   "Yesterday": "Ayer",
-  "You": "Usted"
+  "You": "Usted",
+  "Deactivate": "Desactivar"
 }

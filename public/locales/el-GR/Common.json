@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Σχετικά",
   "AboutCompanyTitle": "Σχετικά με αυτό το πρόγραμμα",
   "AccessDenied": "Απαγόρευση πρόσβασης",
@@ -40,6 +40,7 @@
   "ChangeButton": "Αλλαγή",
   "ChangeQuota": "Αλλαγή ποσόστωσης",
   "ChangesSavedSuccessfully": "Οι αλλαγές αποθηκεύτηκαν με επιτυχία",
+  "ChangeUserPermissions": "Αλλάξτε τα δικαιώματα χρήστη στα προσκεκλημένα άτομα ή <1>αναβαθμίστε το τιμολογιακό σας πρόγραμμα</1>.",
   "ChooseFromTemplates": "Επιλέξτε από τα Πρότυπα",
   "ClearAll": "Εκκαθάριση όλων",
   "ClearFilter": "Εκκαθάριση φίλτρου",
@@ -59,7 +60,6 @@
   "ConflictResolveSelectAction": "Επιλέξτε την ενέργεια",
   "Connect": "Σύνδεση",
   "Content": "Περιεχόμενο",
-  "Context": "Συμφραζόμενα",
   "ContinueButton": "Συνέχιση",
   "ContinueWith": "Συνέχιση με",
   "Copy": "Αντιγραφή",
@@ -140,6 +140,8 @@
   "DontShowAgain": "Να μην εμφανιστεί ξανά",
   "Download": "Λήψη",
   "DownloadApps": "Λήψη εφαρμογών",
+  "DownloadOperationDescription": "Μόλις το κάνετε, μπορείτε να βρείτε τα αρχεία στον φάκελο λήψης του προγράμματος περιήγησής σας και να κλείσετε αυτήν την καρτέλα.",
+  "DownloadOperationTitle": "Λήψη αρχείου σε εξέλιξη",
   "DropzoneTitleExsts": "(JPG ή PNG)",
   "DropzoneTitleLink": "Επιλέξτε νέα εικόνα",
   "DropzoneTitleSecondary": "ή εναποθέστε το αρχείο εδώ",
@@ -321,6 +323,7 @@
   "Owner": "Κάτοχος",
   "PageOfTotalPage": "{{page}} από {{totalPage}}",
   "Paid": "Επί πληρωμή",
+  "PaidUsersExceedsLimit": "Ο αριθμός των διαχειριστών/εξουσιοδοτημένων χρηστών υπερβαίνει το όριο: {{count}} / {{limit}}.",
   "Password": "Κωδικός πρόσβασης",
   "PasswordLimitDigits": "ψηφία",
   "PasswordLimitMessage": "Ο κωδικός πρόσβασης πρέπει να περιέχει",
@@ -390,6 +393,7 @@
   "RoomAdmin": "Διαχειριστής δωματίου",
   "RoomList": "Λίστα δωματίων",
   "Rooms": "Δωμάτια",
+  "RoomSpaceQuotaExceeded": "Υπέρβαση της ποσόστωσης χώρου δωματίου ({{size}})",
   "SameEmail": "Δεν μπορείτε να χρησιμοποιήσετε το ίδιο email",
   "SaveButton": "Αποθήκευση",
   "SaveHereButton": "Αποθήκευση εδώ",
@@ -509,5 +513,6 @@
   "Website": "Ιστότοπος",
   "Yes": "Ναι",
   "Yesterday": "Χθες",
-  "You": "Εσείς"
+  "You": "Εσείς",
+  "Deactivate": "Απενεργοποίηση"
 }

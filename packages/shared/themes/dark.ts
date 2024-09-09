@@ -2036,6 +2036,7 @@ const Dark: TTheme = {
         linkColor: white,
         textColor: grayDark,
       },
+      fileExstColor: gray,
 
       row: {
         checkboxChecked: `linear-gradient(to right, ${black} 24px, ${grayDarkStrong} 24px)`,
@@ -2343,6 +2344,7 @@ const Dark: TTheme = {
   },
 
   emptyView: {
+    linkColor: lightBlueMain,
     items: {
       hoverColor: darkGrayLight,
       pressColor: grayDarkStrong,
@@ -2832,6 +2834,7 @@ const Dark: TTheme = {
         textColor: grayDark,
         sso: {
           textColor: grayDark,
+          errorColor: darkErrorStatus,
           toggleContentBackground: grayDarkStrong,
           iconButton: white,
           iconButtonDisabled: black,

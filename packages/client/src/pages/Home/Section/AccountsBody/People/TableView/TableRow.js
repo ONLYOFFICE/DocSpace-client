@@ -397,7 +397,6 @@ const PeopleTableRow = (props) => {
           size="content"
           modernView
           manualWidth={"fit-content"}
-          isLoading={isLoading}
           optionStyle={{ maxWidth: "400px" }}
           textOverflow
         />

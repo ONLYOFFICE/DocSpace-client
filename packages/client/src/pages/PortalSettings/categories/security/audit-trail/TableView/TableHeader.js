@@ -59,7 +59,7 @@ class AuditTableHeader extends React.Component {
       },
       {
         key: "Room",
-        title: t("Common:Context"),
+        title: t("Common:Location"),
         enable: true,
         resizable: true,
         onChange: this.onColumnChange,
@@ -149,8 +149,4 @@ export default inject(({ userStore }) => {
   return {
     userId: userStore.user.id,
   };
-})(
-  withTranslation(["Home", "Common", "Translations"])(
-    observer(AuditTableHeader),
-  ),
-);
+})(withTranslation(["Common", "Translations"])(observer(AuditTableHeader)));

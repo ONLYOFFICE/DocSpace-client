@@ -1862,7 +1862,7 @@ export const getBaseTheme = () => {
         roleSelectorColor: gray,
         disabledRoleSelectorColor: gray,
         roleSelectorArrowColor: gray,
-        createLink: gray,
+        createLink: black,
         linkAccessComboboxExpired: gray,
         crossFill: lightGrayDark,
       },
@@ -2046,6 +2046,7 @@ export const getBaseTheme = () => {
           linkColor: black,
           textColor: gray,
         },
+        fileExstColor: gray,
 
         row: {
           checkboxChecked: `linear-gradient(to right, ${lightGrayHover} 24px, ${grayLightMid} 24px)`,
@@ -2361,6 +2362,8 @@ export const getBaseTheme = () => {
     },
 
     emptyView: {
+      linkColor: lightBlueMain,
+
       items: {
         hoverColor: grayLight,
         pressColor: lightGraySelected,
@@ -2841,6 +2844,7 @@ export const getBaseTheme = () => {
           textColor: gray,
           sso: {
             textColor: gray,
+            errorColor: lightErrorStatus,
             toggleContentBackground: grayLight,
             iconButton: black,
             iconButtonDisabled: gray,

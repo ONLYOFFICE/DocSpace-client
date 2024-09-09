@@ -37,7 +37,7 @@ const Scripts = () => {
     <>
       <Script
         id="browser-detector"
-        strategy="beforeInteractive"
+        // strategy="beforeInteractive"
         src={`/static/scripts/browserDetector.js?hash=${runtime?.checksums?.["browserDetector.js"] ?? hashDate}`}
       />
 

@@ -98,6 +98,7 @@ const SortFilter = ({ t, oformsFilter, sortOforms }) => {
           fillIcon={false}
           options={[]}
           selectedOption={{}}
+          manualWidth={"auto"}
           advancedOptions={
             <>
               {sortData?.map((item) => (

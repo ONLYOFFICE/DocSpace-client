@@ -114,6 +114,7 @@ const FilesSelectorComponent = ({
   createDefineRoomType,
   withInfoBar,
   infoBarData,
+  headerProps,
 }: FilesSelectorProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["Common"]);
@@ -276,6 +277,7 @@ const FilesSelectorComponent = ({
           });
 
           setSelectedItemId(item.id);
+          setSelectedFileInfo(null);
           if (item.isRoom) {
             setSelectedItemType("rooms");
           } else {
@@ -475,8 +477,15 @@ const FilesSelectorComponent = ({
     openRoot,
   ]);
 
-  const headerProps: TSelectorHeader = withHeader
-    ? { withHeader, headerProps: { headerLabel } }
+  const headerSelectorProps: TSelectorHeader = withHeader
+    ? {
+        withHeader,
+        headerProps: {
+          ...headerProps,
+          headerLabel,
+          onCloseClick: onCancel,
+        },
+      }
     : {};
 
   const withSearch = withSearchProp
@@ -553,7 +562,7 @@ const FilesSelectorComponent = ({
 
   const SelectorBody = (
     <Selector
-      {...headerProps}
+      {...headerSelectorProps}
       {...searchProps}
       {...submitButtonProps}
       {...cancelButtonProps}
@@ -617,6 +626,7 @@ const FilesSelectorComponent = ({
         withoutBodyScroll
         zIndex={310}
         onClose={onCancel}
+        withoutHeader
       >
         {SelectorBody}
       </Aside>

@@ -40,6 +40,12 @@ const StyledModalDialog = styled(ModalDialog)`
     .bold {
       font-weight: 600;
     }
+
+    .truncate {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
   }
 
   .select-action {
@@ -72,6 +78,10 @@ const StyledModalDialog = styled(ModalDialog)`
       line-height: 16px;
       color: ${globalColors.gray};
     }
+  }
+
+  .conflict-resolve_file-name {
+    display: flex;
   }
 `;
 

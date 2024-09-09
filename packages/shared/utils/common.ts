@@ -30,6 +30,7 @@
 
 import find from "lodash/find";
 import moment from "moment-timezone";
+import { findWindows } from "windows-iana";
 import { isMobile } from "react-device-detect";
 import { I18nextProviderProps } from "react-i18next";
 import sjcl from "sjcl";
@@ -73,7 +74,7 @@ import { TI18n, TTranslation } from "../types";
 import { TUser } from "../api/people/types";
 import { TFolder, TFile, TGetFolder } from "../api/files/types";
 import { TRoom } from "../api/rooms/types";
-import { TPasswordHash } from "../api/settings/types";
+import { TPasswordHash, TTimeZone } from "../api/settings/types";
 import TopLoaderService from "../components/top-loading-indicator";
 
 import { Encoder } from "./encoder";
@@ -302,9 +303,9 @@ export const getUserRole = (user: TUser) => {
     user.access === ShareAccessRights.RoomManager ||
     user.access === ShareAccessRights.Collaborator
   )
-    //TODO: Change to People Product Id const
+    // TODO: Change to People Product Id const
     return "admin";
-  //TODO: Need refactoring
+  // TODO: Need refactoring
   if (user.isVisitor) return "user";
   if (user.isCollaborator) return "collaborator";
   if (user.isRoomAdmin) return "manager";
@@ -619,13 +620,18 @@ export const frameCallCommand = (
   );
 };
 
+// Done in a similar way to server code
+// https://github.com/ONLYOFFICE/DocSpace-server/blob/master/common/ASC.Common/Utils/CommonFileSizeComment.cs
 export const getPowerFromBytes = (bytes: number, maxPower = 6) => {
   const power = Math.floor(Math.log(bytes) / Math.log(1024));
   return power <= maxPower ? power : maxPower;
 };
 
 export const getSizeFromBytes = (bytes: number, power: number) => {
-  return Math.floor(bytes / 1024 ** power);
+  const size = bytes / 1024 ** power;
+  const truncateToTwo = Math.trunc(size * 100) / 100;
+
+  return truncateToTwo;
 };
 
 export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
@@ -651,6 +657,8 @@ export const getConvertedSize = (t: (key: string) => string, bytes: number) => {
 
   return `${resultSize} ${sizeNames[power]}`;
 };
+
+//
 
 export const getConvertedQuota = (
   t: (key: string) => string,
@@ -678,7 +686,8 @@ export const getSpaceQuotaAsText = (
 };
 
 export const conversionToBytes = (size: number, power: number) => {
-  const value = Math.floor(size) * 1024 ** power;
+  const value = Math.ceil(size * 1024 ** power);
+
   return value.toString();
 };
 
@@ -1097,6 +1106,44 @@ export const mapCulturesToArray = (
 
     return cultureObj;
   });
+};
+
+export const mapTimezonesToArray = (
+  timezones: TTimeZone[],
+): {
+  key: string | number;
+  label: string;
+}[] => {
+  return timezones.map((timezone) => {
+    return { key: timezone.id, label: timezone.displayName };
+  });
+};
+
+export const getUserTimezone = (): string => {
+  return Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
+};
+
+export const getSelectZone = (
+  zones: {
+    key: string | number;
+    label: string;
+  }[],
+  userTimezone: string,
+) => {
+  const defaultTimezone = "UTC";
+  const isWindowsZones = zones[0].key === "Dateline Standard Time"; // TODO: get from server
+
+  if (isWindowsZones) {
+    const windowsZoneKey = findWindows(userTimezone);
+    return (
+      zones.filter((zone) => zone.key === windowsZoneKey[0]) ||
+      zones.filter((zone) => zone.key === defaultTimezone)
+    );
+  }
+  return (
+    zones.filter((zone) => zone.key === userTimezone) ||
+    zones.filter((zone) => zone.key === defaultTimezone)
+  );
 };
 
 export function getLogoUrl(

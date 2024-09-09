@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "Haqqında",
   "AboutCompanyTitle": "Proqram haqqında",
   "AccessDenied": "Giriş qadağandır",
@@ -40,6 +40,7 @@
   "ChangeButton": "Dəyişdir",
   "ChangeQuota": "Kvotanı dəyişin",
   "ChangesSavedSuccessfully": "Dəyişikliklər yadda saxlanıldı",
+  "ChangeUserPermissions": "Dəvət olunan şəxslərin istifadəçi icazələrini dəyişdirin və ya <1>tarif planınızı təkmilləşdirin</1>.",
   "ChooseFromTemplates": "Şablonlardan seçin",
   "ClearAll": "Hamısını silin",
   "ClearFilter": "Filtri silin",
@@ -59,7 +60,6 @@
   "ConflictResolveSelectAction": "Xahiş edirik əməliyyatı seçin:",
   "Connect": "Qoşulmaq",
   "Content": "Kontent",
-  "Context": "Kontekst",
   "ContinueButton": "Davam edin",
   "ContinueWith": "ilə davam edin",
   "Copy": "Köçür",
@@ -140,6 +140,8 @@
   "DontShowAgain": "Bir daha göstərməyin",
   "Download": "Endirin",
   "DownloadApps": "Tətbiqləri endirin",
+  "DownloadOperationDescription": "Hazır olduqda, faylları brauzerinizin endirmə qovluğunda tapa və həmin nişanı bağlaya bilərsiniz.",
+  "DownloadOperationTitle": "Fayl endirilir",
   "DropzoneTitleExsts": "(JPG və ya PNG)",
   "DropzoneTitleLink": "Yeni şəkil seçin",
   "DropzoneTitleSecondary": "və ya faylı buraya buraxın",
@@ -321,6 +323,7 @@
   "Owner": "Portal sahibi",
   "PageOfTotalPage": "{{page}} üzrə {{totalPage}}",
   "Paid": "Ödənildi",
+  "PaidUsersExceedsLimit": "Administrator/güc istifadəçilərinin sayı aşağıdakı limiti keçir: {{count}} / {{limit}}.",
   "Password": "Şifrə",
   "PasswordLimitDigits": "Rəqəmlər",
   "PasswordLimitMessage": "Şifrədə olmalıdır",
@@ -390,6 +393,7 @@
   "RoomAdmin": "Otaq admini",
   "RoomList": "Otaq siyahısı",
   "Rooms": "Otaqlar",
+  "RoomSpaceQuotaExceeded": "Otaq sahəsi kvota limitini keçib ({{size}})",
   "SameEmail": "Eyni elektron poçtu istifadəd edə bilməzsiniz",
   "SaveButton": "Yadda saxlayın",
   "SaveHereButton": "Burada yadda saxlayın",
@@ -509,5 +513,6 @@
   "Website": "Veb-sayt",
   "Yes": "Bəli",
   "Yesterday": "Dünən",
-  "You": "Siz"
+  "You": "Siz",
+  "Deactivate": "Deaktiv edin"
 }

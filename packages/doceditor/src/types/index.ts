@@ -229,6 +229,7 @@ export type EditorProps = {
   isSharingAccess?: boolean;
   errorMessage?: string;
   isSkipError?: boolean;
+  filesSettings?: TFilesSettings;
 
   onDownloadAs?: (obj: object) => void;
   onSDKRequestSharingSettings?: () => void;

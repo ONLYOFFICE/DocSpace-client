@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "පිළිබඳව",
   "AboutCompanyTitle": "මෙම මෘදුකාංගය ගැන",
   "AccessDenied": "ප්‍රවේශය ප්‍රතික්‍ෂේපිතයි",
@@ -55,7 +55,6 @@
   "ConflictResolveSelectAction": "ක්‍රියාමාර්ගය තෝරන්න:",
   "Connect": "සබඳින්න",
   "Content": "අන්තර්ගතය",
-  "Context": "සන්දර්භය",
   "ContinueButton": "ඉදිරියට",
   "ContinueWith": "මෙය සමඟ ඉදිරියට",
   "Copy": "පිටපතක්",
@@ -457,5 +456,6 @@
   "Website": "අඩවිය",
   "Yes": "ඔව්",
   "Yesterday": "ඊයේ",
-  "You": "ඔබ"
+  "You": "ඔබ",
+  "Deactivate": "අක්‍රිය කරන්න"
 }

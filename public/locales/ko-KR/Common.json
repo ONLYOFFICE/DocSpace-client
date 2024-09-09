@@ -1,4 +1,4 @@
-﻿{
+{
   "About": "소개",
   "AboutCompanyTitle": "프로그램 소개",
   "AccessDenied": "액세스가 거부되었습니다",
@@ -40,6 +40,7 @@
   "ChangeButton": "변경",
   "ChangeQuota": "할당량 변경",
   "ChangesSavedSuccessfully": "변경 사항이 성공적으로 저장되었습니다",
+  "ChangeUserPermissions": "초대된 사람에 대한 사용자 권한을 변경하거나 <1>요금제를 업그레이드</1>하세요.",
   "ChooseFromTemplates": "템플릿에서 선택",
   "ClearAll": "모두 삭제",
   "ClearFilter": "필터 삭제",
@@ -59,7 +60,6 @@
   "ConflictResolveSelectAction": "작업 선택:",
   "Connect": "연결",
   "Content": "콘텐츠",
-  "Context": "문맥",
   "ContinueButton": "계속",
   "ContinueWith": "또는 다음을 이용:",
   "Copy": "복사",
@@ -140,6 +140,8 @@
   "DontShowAgain": "다시 표시 안함",
   "Download": "다운로드",
   "DownloadApps": "애플리케이션 다운로드",
+  "DownloadOperationDescription": "준비가 되면 브라우저의 다운로드 폴더에서 파일을 찾고 이 탭을 닫을 수 있습니다.",
+  "DownloadOperationTitle": "파일 다운로드 진행 중",
   "DropzoneTitleExsts": "(JPG 또는 PNG)",
   "DropzoneTitleLink": "새 이미지 선택",
   "DropzoneTitleSecondary": "또는 여기에 파일을 드롭하세요",
@@ -321,6 +323,7 @@
   "Owner": "소유자",
   "PageOfTotalPage": "{{page}}/{{totalPage}}",
   "Paid": "유료",
+  "PaidUsersExceedsLimit": "관리자/파워 유저 수가 한도를 초과했습니다: {{count}} / {{limit}}.",
   "Password": "비밀번호",
   "PasswordLimitDigits": "숫자",
   "PasswordLimitMessage": "비밀번호에는 반드시 다음이 포함되어야 합니다:",
@@ -390,6 +393,7 @@
   "RoomAdmin": "방 관리자",
   "RoomList": "방 목록",
   "Rooms": "방",
+  "RoomSpaceQuotaExceeded": "방 공간 할당량을 초과했습니다({{size}})",
   "SameEmail": "같은 이메일을 사용할 수 없습니다",
   "SaveButton": "저장",
   "SaveHereButton": "여기에 저장",
@@ -509,5 +513,6 @@
   "Website": "웹사이트",
   "Yes": "네",
   "Yesterday": "어제",
-  "You": "나"
+  "You": "나",
+  "Deactivate": "비활성화"
 }

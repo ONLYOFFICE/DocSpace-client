@@ -117,6 +117,7 @@
   "OpenLocation": "위치 열기",
   "PasswordAccess": "비밀번호 액세스",
   "PasswordLink": "링크를 보호하려면 비밀번호를 추가하세요.",
+  "PasswordProtectedFiles": "계속하려면 보호된 파일의 <0>비밀번호를 입력</0>하세요.",
   "PasswordSuccessfullyCopied": "비밀번호가 성공적으로 복사되었습니다",
   "Pin": "고정",
   "PinToTop": "상단에 고정",

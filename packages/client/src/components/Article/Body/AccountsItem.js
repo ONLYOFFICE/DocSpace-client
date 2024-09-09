@@ -39,6 +39,7 @@ const PureAccountsItem = ({
   onClick,
   t,
   currentColorScheme,
+  getLinkData,
 }) => {
   const onClickAction = React.useCallback(
     (e, id) => {
@@ -51,10 +52,13 @@ const PureAccountsItem = ({
 
   const title = t("Accounts");
 
+  const linkData = getLinkData("accounts");
+
   return (
     <ArticleItem
       key="accounts"
       text={title}
+      linkData={linkData}
       title={title}
       icon={icon}
       showText={showText}

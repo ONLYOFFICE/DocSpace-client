@@ -81,7 +81,6 @@ const DropDownItem = (props: DropDownItemProps) => {
     label = "",
     tabIndex = -1,
     textOverflow = false,
-
     ...rest
   } = props;
 
@@ -193,11 +192,6 @@ const DropDownItem = (props: DropDownItemProps) => {
       )}
     </StyledDropdownItem>
   );
-};
-
-DropDownItem.defaultProps = {
-  height: 32,
-  heightTablet: 36,
 };
 
 export { DropDownItem };

@@ -26,7 +26,7 @@
 
 "use server";
 
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
 
 import {
   createRequest,
@@ -35,15 +35,35 @@ import {
 import { TUser } from "@docspace/shared/api/people/types";
 import {
   TCapabilities,
+  TCompanyInfo,
   TGetColorTheme,
   TGetSsoSettings,
+  TPasswordSettings,
   TPortalCultures,
   TSettings,
   TThirdPartyProvider,
+  TTimeZone,
   TVersionBuild,
 } from "@docspace/shared/api/settings/types";
+import { Encoder } from "@docspace/shared/utils/encoder";
+import {
+  TConfirmLinkParams,
+  TConfirmLinkResult,
+  TTfaSecretKeyAndQR,
+} from "@/types";
 import { TScope } from "@docspace/shared/utils/oauth/types";
 import { transformToClientProps } from "@docspace/shared/utils/oauth";
+import {
+  licenseRequiredHandler,
+  settingsHandler,
+  colorThemeHandler,
+  portalCulturesHandler,
+  portalPasswordSettingHandler,
+  machineNameHandler,
+  portalTimeZoneHandler,
+} from "@docspace/shared/__mocks__/e2e";
+
+const IS_TEST = process.env.E2E_TEST;
 
 export const checkIsAuthenticated = async () => {
   const [request] = createRequest(["/authentication"], [["", ""]], "GET");
@@ -64,7 +84,9 @@ export async function getSettings() {
     "GET",
   );
 
-  const settingsRes = await fetch(getSettings);
+  const settingsRes = IS_TEST
+    ? settingsHandler(headers())
+    : await fetch(getSettings);
 
   if (settingsRes.status === 403) return `access-restricted`;
 
@@ -94,13 +116,13 @@ export async function getVersionBuild() {
 }
 
 export async function getColorTheme() {
-  const [getSettings] = createRequest(
+  const [getColorTheme] = createRequest(
     [`/settings/colortheme`],
     [["", ""]],
     "GET",
   );
 
-  const res = await fetch(getSettings);
+  const res = IS_TEST ? colorThemeHandler() : await fetch(getColorTheme);
 
   if (!res.ok) return;
 
@@ -202,7 +224,9 @@ export async function getPortalCultures() {
     "GET",
   );
 
-  const res = await fetch(getPortalCultures);
+  const res = IS_TEST
+    ? portalCulturesHandler()
+    : await fetch(getPortalCultures);
 
   if (!res.ok) return;
 
@@ -242,4 +266,147 @@ export async function getConfig() {
   ).json();
 
   return config;
+}
+
+export async function getCompanyInfoSettings() {
+  const [getCompanyInfoSettings] = createRequest(
+    [`/settings/rebranding/company`],
+    [["", ""]],
+    "GET",
+  );
+
+  const res = await fetch(getCompanyInfoSettings);
+
+  if (!res.ok) throw new Error(res.statusText);
+
+  const passwordSettings = await res.json();
+
+  return passwordSettings.response as TCompanyInfo;
+}
+
+export async function getPortalPasswordSettings(
+  confirmKey: string | null = null,
+) {
+  const [getPortalPasswordSettings] = createRequest(
+    [`/settings/security/password`],
+    [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
+    "GET",
+  );
+  const res = IS_TEST
+    ? portalPasswordSettingHandler()
+    : await fetch(getPortalPasswordSettings);
+
+  if (!res.ok) return;
+
+  const passwordSettings = await res.json();
+
+  return passwordSettings.response as TPasswordSettings;
+}
+
+export async function getUserFromConfirm(
+  userId: string,
+  confirmKey: string | null = null,
+) {
+  const [getUserFromConfirm] = createRequest(
+    [`/people/${userId}`],
+    [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
+    "GET",
+  );
+
+  const res = await fetch(getUserFromConfirm);
+
+  if (!res.ok) return;
+
+  const user = await res.json();
+
+  if (user && user.displayName) {
+    user.displayName = Encoder.htmlDecode(user.displayName);
+  }
+
+  return user.response as TUser;
+}
+
+export async function getMachineName(confirmKey: string | null = null) {
+  const [getMachineName] = createRequest(
+    [`/settings/machine`],
+    [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
+    "GET",
+  );
+
+  const res = IS_TEST ? machineNameHandler() : await fetch(getMachineName);
+
+  if (!res.ok) throw new Error(res.statusText);
+
+  const machineName = await res.json();
+
+  return machineName.response as string;
+}
+
+export async function getIsLicenseRequired() {
+  const [getIsLicenseRequired] = createRequest(
+    [`/settings/license/required`],
+    [["", ""]],
+    "GET",
+  );
+
+  const res = IS_TEST
+    ? licenseRequiredHandler(headers())
+    : await fetch(getIsLicenseRequired);
+
+  if (!res.ok) throw new Error(res.statusText);
+
+  const isLicenseRequire = await res.json();
+
+  return isLicenseRequire.response as boolean;
+}
+
+export async function getPortalTimeZones(confirmKey: string | null = null) {
+  const [getPortalTimeZones] = createRequest(
+    [`/settings/timezones`],
+    [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
+    "GET",
+  );
+
+  const res = IS_TEST
+    ? portalTimeZoneHandler()
+    : await fetch(getPortalTimeZones);
+
+  if (!res.ok) throw new Error(res.statusText);
+
+  const portalTimeZones = await res.json();
+
+  return portalTimeZones.response as TTimeZone[];
+}
+
+export async function getTfaSecretKeyAndQR(confirmKey: string | null = null) {
+  const [getTfaSecretKeyAndQR] = createRequest(
+    [`/settings/tfaapp/setup`],
+    [confirmKey ? ["Confirm", confirmKey] : ["", ""]],
+    "GET",
+  );
+
+  const res = await fetch(getTfaSecretKeyAndQR);
+
+  if (!res.ok) throw new Error(res.statusText);
+
+  const tfaSecretKeyAndQR = await res.json();
+
+  return tfaSecretKeyAndQR.response as TTfaSecretKeyAndQR;
+}
+
+export async function checkConfirmLink(data: TConfirmLinkParams) {
+  const [checkConfirmLink] = createRequest(
+    [`/authentication/confirm`],
+    [["Content-Type", "application/json"]],
+    "POST",
+    JSON.stringify(data),
+  );
+
+  const response = await fetch(checkConfirmLink);
+
+  if (!response.ok) throw new Error(response.statusText);
+
+  const result = await response.json();
+
+  return result.response as TConfirmLinkResult;
 }

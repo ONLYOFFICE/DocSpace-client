@@ -54,6 +54,7 @@ const StyledDropdown = styled.div<{
   `}
   height: fit-content;
   position: absolute;
+  overflow: hidden;
 
   ${(props) => props.manualWidth && `width: ${props.manualWidth};`}
   ${(props) =>
@@ -99,8 +100,6 @@ const StyledDropdown = styled.div<{
   -moz-box-shadow: ${(props) => props.theme.dropDown.boxShadow};
   -webkit-box-shadow: ${(props) => props.theme.dropDown.boxShadow};
 
-  padding: ${(props) =>
-    !props.maxHeight && props.itemCount && props.itemCount > 1 && `4px 0px`};
   ${(props) =>
     props.columnCount &&
     `

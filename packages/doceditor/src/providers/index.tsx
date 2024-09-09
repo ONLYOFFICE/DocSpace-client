@@ -48,9 +48,9 @@ export type TProviders = {
   contextData: TContextData;
 };
 
-const Providers = ({ children, contextData, api_host, timer }: TProviders) => {
+const Providers = ({ children, contextData }: TProviders) => {
   return (
-    <TranslationProvider {...contextData} api_host={api_host} timer={timer}>
+    <TranslationProvider {...contextData}>
       <ThemeProvider {...contextData}>
         <ErrorProvider {...contextData}>
           {children}

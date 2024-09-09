@@ -27,7 +27,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Backdrop } from "@docspace/shared/components/backdrop";
-import { Heading } from "@docspace/shared/components/heading";
 import { Aside } from "@docspace/shared/components/aside";
 
 import { FloatingButton } from "@docspace/shared/components/floating-button";
@@ -37,13 +36,11 @@ import { withTranslation } from "react-i18next";
 import {
   StyledVersionHistoryPanel,
   StyledContent,
-  StyledHeaderContent,
   StyledBody,
 } from "../StyledPanels";
 import { SectionBodyContent } from "../../../pages/VersionHistory/Section/";
 import { inject, observer } from "mobx-react";
 import config from "PACKAGE_FILE";
-import { ArticleHeaderLoader } from "@docspace/shared/skeletons/article";
 
 class PureVersionHistoryPanel extends React.Component {
   onClose = () => {
@@ -85,26 +82,10 @@ class PureVersionHistoryPanel extends React.Component {
           visible={visible}
           onClose={this.onClose}
           withoutBodyScroll
+          isLoading={!versions && !isLoading}
+          header={versions ? versions[0].title : ""}
         >
           <StyledContent>
-            <StyledHeaderContent className="version-history-panel-header">
-              {versions && !isLoading ? (
-                <Heading
-                  className="version-history-panel-heading"
-                  size="medium"
-                  truncate
-                >
-                  {versions[0].title}
-                </Heading>
-              ) : (
-                <ArticleHeaderLoader
-                  className="loader-version-history"
-                  height="28"
-                  width="688"
-                />
-              )}
-            </StyledHeaderContent>
-
             <StyledBody className="version-history-panel-body">
               <SectionBodyContent onClose={this.onClose} />
             </StyledBody>

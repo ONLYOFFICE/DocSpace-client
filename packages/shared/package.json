@@ -91,6 +91,7 @@
     "@babel/preset-typescript": "^7.21.5",
     "@emotion/babel-preset-css-prop": "^10.2.1",
     "@emotion/styled": "^10.3.0",
+    "@playwright/test": "^1.46.1",
     "@react-theming/storybook-addon": "^1.1.10",
     "@storybook/addon-actions": "7.6.12",
     "@storybook/addon-contexts": "^5.3.21",

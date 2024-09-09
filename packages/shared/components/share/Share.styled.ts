@@ -143,6 +143,11 @@ const StyledLinkRow = styled.div<{ isExpired?: boolean; isDisabled?: boolean }>`
       min-width: 16px;
       min-height: 16px;
     }
+
+    .link-actions_copy-icon {
+      min-width: 16px;
+      min-height: 16px;
+    }
   }
 
   .loader {

@@ -66,6 +66,10 @@ export const getShareOptions = (t: TTranslation) => {
       }),
     },
     {
+      key: "separator",
+      isSeparator: true,
+    },
+    {
       key: "remove",
       internal: true,
       access: ShareAccessRights.None,

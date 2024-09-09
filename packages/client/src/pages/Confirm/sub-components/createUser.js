@@ -49,6 +49,7 @@ import {
   createPasswordHash,
   getOAuthToken,
   getLoginLink,
+  toUrlParams,
 } from "@docspace/shared/utils/common";
 import { login } from "@docspace/shared/utils/loginUtils";
 import {
@@ -203,20 +204,22 @@ const CreateUserForm = (props) => {
         sessionStorage.setItem("referenceUrl", finalUrl);
       }
 
-      const loginData = JSON.stringify({
+      const loginData = toUrlParams({
         type: "invitation",
         email,
         roomName,
         firstName: user.firstName,
         lastName: user.lastName,
-        linkData: linkData,
+        spaceAddress: window.location.host,
       });
 
-      sessionStorage.setItem("loginData", loginData);
+      const encodedData = encodeURIComponent(loginData);
+      const base64Data = btoa(JSON.stringify(linkData));
 
       window.location.href = combineUrl(
         window.ClientConfig?.proxy?.url,
         "/login",
+        `?loginData=${encodedData}&linkData=${base64Data}`,
       );
     } catch (err) {
       console.error(err);

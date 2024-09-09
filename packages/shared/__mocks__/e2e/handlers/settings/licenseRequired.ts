@@ -4,6 +4,34 @@ const PATH = "settings/license/required";
 
 const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 
+export const licenseRequiredSuccess = {
+  response: true,
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+  ok: true,
+};
+
+export const licenseNotRequiredSuccess = {
+  response: false,
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+  ok: true,
+};
+
 export const licenseRequired = (headers?: Headers): Response => {
   let isRequired = false;
 
@@ -11,36 +39,7 @@ export const licenseRequired = (headers?: Headers): Response => {
     isRequired = true;
   }
 
-  if (isRequired)
-    return new Response(
-      JSON.stringify({
-        response: true,
-        count: 1,
-        links: [
-          {
-            href: url,
-            action: "GET",
-          },
-        ],
-        status: 0,
-        statusCode: 200,
-        ok: true,
-      }),
-    );
+  if (isRequired) return new Response(JSON.stringify(licenseRequiredSuccess));
 
-  return new Response(
-    JSON.stringify({
-      response: false,
-      count: 1,
-      links: [
-        {
-          href: url,
-          action: "GET",
-        },
-      ],
-      status: 0,
-      statusCode: 200,
-      ok: true,
-    }),
-  );
+  return new Response(JSON.stringify(licenseNotRequiredSuccess));
 };

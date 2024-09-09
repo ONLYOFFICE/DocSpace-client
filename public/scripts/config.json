@@ -19,7 +19,7 @@
     "checkDomain": false
   },
   "oauth2": {
-    "origin": ""
+    "origin": "http://nct3.docspace.site"
   },
   "firebase": {
     "fetchTimeoutMillis": 3600000,

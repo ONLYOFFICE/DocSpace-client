@@ -42,9 +42,11 @@ import { updateRoomMemberRole } from "@docspace/shared/api/rooms";
 import { toastr } from "@docspace/shared/components/toast";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { getUserRoleOptions } from "@docspace/shared/utils/room-members/getUserRoleOptions";
-import { ShareAccessRights } from "@docspace/shared/enums";
+import { EmployeeStatus, ShareAccessRights } from "@docspace/shared/enums";
 import { getUserRole, getUserTypeLabel } from "@docspace/shared/utils/common";
 import { TGroupMemberInvitedInRoom } from "@docspace/shared/api/groups/types";
+import { Box } from "@docspace/shared/components/box";
+import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 
 import * as Styled from "./index.styled";
 
@@ -141,13 +143,16 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
 
       <div className="user_body-wrapper">
         <div className="info">
-          <Text
-            className="name"
-            data-tooltip-id={`userTooltip_${Math.random()}`}
-            noSelect
-          >
-            {decode(user.displayName)}
-          </Text>
+          <Box displayProp="flex" alignItems="center" gapProp="8px">
+            <Text
+              className="name"
+              data-tooltip-id={`userTooltip_${Math.random()}`}
+              noSelect
+            >
+              {decode(user.displayName)}
+            </Text>
+            {user.status === EmployeeStatus.Pending && <StyledSendClockIcon />}
+          </Box>
           <Text className="email" noSelect>
             <span dir="auto">{typeLabel}</span> |{" "}
             <span dir="ltr">{user.email}</span>

@@ -37,7 +37,11 @@ import { Text } from "@docspace/shared/components/text";
 import { parseAddresses } from "@docspace/shared/utils";
 import { getUserTypeLabel } from "@docspace/shared/utils/common";
 import { getMembersList, getUserList } from "@docspace/shared/api/people";
-import { AccountsSearchArea, RoomsType } from "@docspace/shared/enums";
+import {
+  AccountsSearchArea,
+  EmployeeStatus,
+  RoomsType,
+} from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 
 import {
@@ -60,6 +64,8 @@ import AccessSelector from "../../../AccessSelector";
 
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import Filter from "@docspace/shared/api/people/filter";
+import { Box } from "@docspace/shared/components/box";
+import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 
 const Item = ({
   t,
@@ -91,6 +97,7 @@ const Item = ({
     name: groupName,
     warning,
     isVisitor,
+    status,
   } = item;
 
   const name = isGroup
@@ -266,9 +273,12 @@ const Item = ({
   const displayBody = (
     <>
       <StyledInviteUserBody>
-        <Text {...textProps} truncate noSelect>
-          {inputValue}
-        </Text>
+        <Box displayProp="flex" alignItems="center" gapProp="8px">
+          <Text {...textProps} truncate noSelect>
+            {inputValue}
+          </Text>
+          {status === EmployeeStatus.Pending && <StyledSendClockIcon />}
+        </Box>
 
         {!isGroup && (
           <Text

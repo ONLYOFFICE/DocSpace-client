@@ -24,38 +24,35 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-const { createServer } = require("http");
-const { parse } = require("url");
-const next = require("next");
+import { test as base, Page } from "@playwright/test";
+import { MockRequest } from "./mockRequest";
 
-const dev = process.env.NODE_ENV === "development";
-
-const port = process.env.PORT ?? 5011;
-const hostname = "0.0.0.0";
-
-// when using middleware `hostname` and `port` must be provided below
-const app = next({ dev, hostname, port });
-const handle = app.getRequestHandler();
-
-app.prepare().then(() => {
-  createServer(async (req, res) => {
-    try {
-      // Be sure to pass `true` as the second argument to `url.parse`.
-      // This tells it to parse the query portion of the URL.
-      const parsedUrl = parse(req.url, true);
-
-      await handle(req, res, parsedUrl);
-    } catch (err) {
-      console.error("Error occurred handling", req.url, err);
-      res.statusCode = 500;
-      res.end("internal server error");
-    }
-  })
-    .once("error", (err) => {
-      console.error(err);
-      process.exit(1);
-    })
-    .listen(port, () => {
-      console.log(`Server is listening on port ${port}`);
+export const test = base.extend<{ page: Page; mockRequest: MockRequest }>({
+  page: async ({ page }, use) => {
+    await page.route("*/**/logo.ashx**", async (route) => {
+      await route.fulfill({
+        path: `../../public/images/logo/loginpage.svg`,
+      });
     });
+    await page.route(
+      "*/**/login/_next/public/images/**/*",
+      async (route, request) => {
+        const imagePath = request
+          .url()
+          .split("/login/_next/public/images/")
+          .at(-1)!
+          .split("?")[0];
+        await route.fulfill({
+          path: `../../public/images/${imagePath}`,
+        });
+      },
+    );
+    await use(page);
+  },
+  mockRequest: async ({ page }, use) => {
+    const mockRequest = new MockRequest(page);
+    await use(mockRequest);
+  },
 });
+
+export { expect } from "@playwright/test";

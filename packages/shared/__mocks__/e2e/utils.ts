@@ -7,4 +7,7 @@ export const HEADER_WIZARD_SETTINGS = "x-test-data-wizard-settings";
 
 export const HEADER_LINK_INVALID = "x-test-data-link-invalid";
 export const HEADER_LINK_EXPIRED = "x-test-data-link-expired";
+export const HEADER_TRAFF_LIMIT = "x-test-data-traff-limit";
+export const HEADER_USER_EXISTED = "x-test-data-user-existed";
 export const HEADER_USER_EXCLUDED = "x-test-data-user-excluded";
+export const HEADER_QUOTA_FAILED = "x-test-data-quota-failed";

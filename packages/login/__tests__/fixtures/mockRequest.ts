@@ -1,3 +1,4 @@
+import { request } from "@docspace/shared/api/client";
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -36,6 +37,16 @@ export class MockRequest {
       await route.fulfill({
         path: `__tests__/mocking/mock-data/${endpoint.pathToData}.json`,
       });
+    });
+  }
+
+  async setHeader(url: string, header: string) {
+    await this.page.route(url, async (route, request) => {
+      const headers = {
+        ...request.headers(),
+        [header]: "true",
+      };
+      await route.fallback({ headers });
     });
   }
 }

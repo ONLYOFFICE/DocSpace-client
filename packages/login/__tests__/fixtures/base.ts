@@ -25,9 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { test as base, Page } from "@playwright/test";
+
 import { MockRequest } from "./mockRequest";
 
-export const test = base.extend<{ page: Page; mockRequest: MockRequest }>({
+export const test = base.extend<{
+  page: Page;
+  mockRequest: MockRequest;
+}>({
   page: async ({ page }, use) => {
     await page.route("*/**/logo.ashx**", async (route) => {
       await route.fulfill({

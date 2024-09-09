@@ -32,16 +32,13 @@ import {
   HEADER_LICENCE_REQUIRED,
 } from "@docspace/shared/__mocks__/e2e";
 
-test("wizard render", async ({ page }) => {
-  await page.route("*/**/login/wizard", async (route) => {
-    await route.continue({
-      headers: {
-        [HEADER_WIZARD_SETTINGS]: "true",
-      },
-    });
-  });
+const URL = "/login/wizard";
+const NEXT_REQUEST_URL = "*/**/login/wizard";
 
-  await page.goto("/login/wizard");
+test("wizard render", async ({ page, mockRequest }) => {
+  await mockRequest.setHeader(NEXT_REQUEST_URL, HEADER_WIZARD_SETTINGS);
+
+  await page.goto(URL);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -51,16 +48,10 @@ test("wizard render", async ({ page }) => {
 });
 
 test("wizard success", async ({ page, mockRequest }) => {
-  await page.route("*/**/login/wizard", async (route) => {
-    await route.continue({
-      headers: {
-        [HEADER_WIZARD_SETTINGS]: "true",
-      },
-    });
-  });
+  await mockRequest.setHeader(NEXT_REQUEST_URL, HEADER_WIZARD_SETTINGS);
   await mockRequest.router(endpoints.complete);
 
-  await page.goto("/login/wizard");
+  await page.goto(URL);
 
   await page.fill("[name='wizard-email']", "email@mail.ru");
   await page
@@ -86,16 +77,10 @@ test("wizard success", async ({ page, mockRequest }) => {
 });
 
 test("wizard error", async ({ page, mockRequest }) => {
-  await page.route("*/**/login/wizard", async (route) => {
-    await route.continue({
-      headers: {
-        [HEADER_WIZARD_SETTINGS]: "true",
-      },
-    });
-  });
+  await mockRequest.setHeader(NEXT_REQUEST_URL, HEADER_WIZARD_SETTINGS);
   await mockRequest.router(endpoints.complete);
 
-  await page.goto("/login/wizard");
+  await page.goto(URL);
 
   await page.fill("[name='wizard-email']", "email@123");
   await page
@@ -113,18 +98,12 @@ test("wizard error", async ({ page, mockRequest }) => {
 });
 
 test("wizard with license success", async ({ page, mockRequest }) => {
-  await page.route("*/**/login/wizard", async (route) => {
-    await route.continue({
-      headers: {
-        [HEADER_WIZARD_SETTINGS]: "true",
-        [HEADER_LICENCE_REQUIRED]: "true",
-      },
-    });
-  });
-
+  await mockRequest.setHeader(NEXT_REQUEST_URL, HEADER_WIZARD_SETTINGS);
+  await mockRequest.setHeader(NEXT_REQUEST_URL, HEADER_LICENCE_REQUIRED);
   await mockRequest.router(endpoints.complete);
   await mockRequest.router(endpoints.license);
-  await page.goto("/login/wizard");
+
+  await page.goto(URL);
 
   await page.fill("[name='wizard-email']", "email@mail.ru");
   await page
@@ -156,17 +135,11 @@ test("wizard with license success", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("wizard with license error", async ({ page }) => {
-  await page.route("*/**/login/wizard", async (route) => {
-    await route.continue({
-      headers: {
-        [HEADER_WIZARD_SETTINGS]: "true",
-        [HEADER_LICENCE_REQUIRED]: "true",
-      },
-    });
-  });
+test("wizard with license error", async ({ page, mockRequest }) => {
+  await mockRequest.setHeader(NEXT_REQUEST_URL, HEADER_WIZARD_SETTINGS);
+  await mockRequest.setHeader(NEXT_REQUEST_URL, HEADER_LICENCE_REQUIRED);
 
-  await page.goto("/login/wizard");
+  await page.goto(URL);
 
   await page.fill("[name='wizard-email']", "email@123");
   await page

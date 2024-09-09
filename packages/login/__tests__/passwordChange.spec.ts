@@ -1,5 +1,3 @@
-import { login } from "@docspace/shared/api/user";
-import { changePassword } from "@docspace/shared/api/people";
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -26,18 +24,47 @@ import { changePassword } from "@docspace/shared/api/people";
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { expect, test } from "./fixtures/base";
-import { endpoints } from "./mocking/endpoints";
 import {
   HEADER_LINK_EXPIRED,
   HEADER_LINK_INVALID,
   HEADER_USER_EXCLUDED,
 } from "@docspace/shared/__mocks__/e2e/utils";
 
+import { getUrlWithQueryParams } from "__tests__/helpers/getUrlWithQueryParams";
+
+import { expect, test } from "./fixtures/base";
+import { endpoints } from "./mocking/endpoints";
+
+const URL = "/login/confirm/PasswordChange";
+const NEXT_REQUEST_URL = "*/**/login/confirm/PasswordChange";
+
+const QUERY_PARAMS = [
+  {
+    name: "type",
+    value: "PasswordChange",
+  },
+  {
+    name: "key",
+    value: "123",
+  },
+  {
+    name: "email",
+    value: "mail@mail.com",
+  },
+  {
+    name: "uid",
+    value: "123",
+  },
+];
+
+const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
+const NEXT_REQUEST_URL_WITH_PARAMS = getUrlWithQueryParams(
+  NEXT_REQUEST_URL,
+  QUERY_PARAMS,
+);
+
 test("password change render", async ({ page }) => {
-  await page.goto(
-    "/login/confirm/PasswordChange?type=PasswordChange&key=123&email=mail@mail.com&uid=123",
-  );
+  await page.goto(URL_WITH_PARAMS);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -49,9 +76,7 @@ test("password change render", async ({ page }) => {
 test("password change success", async ({ page, mockRequest }) => {
   await mockRequest.router(endpoints.changePassword);
   await mockRequest.router(endpoints.login);
-  await page.goto(
-    "/login/confirm/PasswordChange?type=PasswordChange&key=123&email=mail@mail.com&uid=123",
-  );
+  await page.goto(URL_WITH_PARAMS);
 
   await page.getByTestId("text-input").fill("qwerty123");
 
@@ -73,9 +98,7 @@ test("password change success", async ({ page, mockRequest }) => {
 });
 
 test("password change error", async ({ page }) => {
-  await page.goto(
-    "/login/confirm/PasswordChange?type=PasswordChange&key=123&email=mail@mail.com&uid=123",
-  );
+  await page.goto(URL_WITH_PARAMS);
 
   await page.getByTestId("text-input").fill("123");
   await page.getByTestId("button").click();
@@ -87,20 +110,13 @@ test("password change error", async ({ page }) => {
   ]);
 });
 
-test("password change error invalid", async ({ page }) => {
-  await page.route(
-    "*/**/login/confirm/PasswordChange?type=PasswordChange&key=123&email=mail@mail.com&uid=123",
-    async (route) => {
-      await route.continue({
-        headers: {
-          [HEADER_LINK_INVALID]: "true",
-        },
-      });
-    },
+test("password change error invalid", async ({ page, mockRequest }) => {
+  await mockRequest.setHeader(
+    NEXT_REQUEST_URL_WITH_PARAMS,
+    HEADER_LINK_INVALID,
   );
-  await page.goto(
-    "/login/confirm/PasswordChange?type=PasswordChange&key=123&email=mail@mail.com&uid=123",
-  );
+
+  await page.goto(URL_WITH_PARAMS);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -109,20 +125,13 @@ test("password change error invalid", async ({ page }) => {
   ]);
 });
 
-test("password change error expired", async ({ page }) => {
-  await page.route(
-    "*/**/login/confirm/PasswordChange?type=PasswordChange&key=123&email=mail@mail.com&uid=123",
-    async (route) => {
-      await route.continue({
-        headers: {
-          [HEADER_LINK_EXPIRED]: "true",
-        },
-      });
-    },
+test("password change error expired", async ({ page, mockRequest }) => {
+  await mockRequest.setHeader(
+    NEXT_REQUEST_URL_WITH_PARAMS,
+    HEADER_LINK_EXPIRED,
   );
-  await page.goto(
-    "/login/confirm/PasswordChange?type=PasswordChange&key=123&email=mail@mail.com&uid=123",
-  );
+
+  await page.goto(URL_WITH_PARAMS);
 
   await expect(page).toHaveScreenshot([
     "desktop",
@@ -131,22 +140,14 @@ test("password change error expired", async ({ page }) => {
   ]);
 });
 
-test("password change error user excluded", async ({ page }) => {
-  await page.route(
-    "*/**/login/confirm/PasswordChange?type=PasswordChange&key=123&email=mail@mail.com&uid=123",
-    async (route) => {
-      await route.continue({
-        headers: {
-          [HEADER_USER_EXCLUDED]: "true",
-        },
-      });
-    },
+test("password change error user excluded", async ({ page, mockRequest }) => {
+  await mockRequest.setHeader(
+    NEXT_REQUEST_URL_WITH_PARAMS,
+    HEADER_USER_EXCLUDED,
   );
 
   // Expected to go to default page
-  await page.goto(
-    "/login/confirm/PasswordChange?type=PasswordChange&key=123&email=mail@mail.com&uid=123",
-  );
+  await page.goto(URL_WITH_PARAMS);
 
   await expect(page).toHaveScreenshot([
     "desktop",

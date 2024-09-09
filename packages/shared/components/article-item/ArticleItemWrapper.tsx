@@ -24,5 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export { ArticleItem } from "./ArticleItemWrapper";
-export { ArticleItemNext } from "./ArticleItemWrapperNext";
+import { Link } from "react-router-dom";
+import { ArticleItem as ArticleItemComponent } from "./ArticleItem";
+import { ArticleItemProps } from "./ArticleItem.types";
+
+export const ArticleItem = (props: ArticleItemProps) => {
+  const { linkData } = props;
+
+  return (
+    <Link
+      style={{ textDecoration: "none" }}
+      to={linkData?.path}
+      state={linkData?.state}
+    >
+      <ArticleItemComponent {...props} />
+    </Link>
+  );
+};

@@ -42,6 +42,9 @@ export type ShareCalendarProps = {
   bodyRef?: React.MutableRefObject<HTMLDivElement | null>;
   useDropDown?: boolean;
 };
+
+export type AccessItem = { access?: ShareAccessRights };
+
 export type TLink = TFileLink | { isLoaded: boolean };
 
 export type LinkRowProps =
@@ -49,7 +52,7 @@ export type LinkRowProps =
       onAddClick: () => Promise<void>;
       links: TLink[] | null;
       changeShareOption: (item: TOption, link: TFileLink) => Promise<void>;
-      changeAccessOption: (item: TOption, link: TFileLink) => Promise<void>;
+      changeAccessOption: (item: AccessItem, link: TFileLink) => Promise<void>;
       changeExpirationOption: (
         link: TFileLink,
         expirationDate: moment.Moment | null,
@@ -68,7 +71,7 @@ export type LinkRowProps =
       onAddClick: () => Promise<void>;
       links: TLink[] | null;
       changeShareOption: (item: TOption, link: TFileLink) => Promise<void>;
-      changeAccessOption: (item: TOption, link: TFileLink) => Promise<void>;
+      changeAccessOption: (item: AccessItem, link: TFileLink) => Promise<void>;
       changeExpirationOption: (
         link: TFileLink,
         expirationDate: moment.Moment | null,
@@ -92,8 +95,8 @@ export type ExpiredComboBoxProps = {
   ) => Promise<void>;
   isDisabled?: boolean;
   isRoomsLink?: boolean;
-  changeAccessOption: (item: TOption, link: TFileLink) => Promise<void>;
-  accessOptions: TOption[];
+  changeAccessOption: (item: AccessItem, link: TFileLink) => Promise<void>;
+  availableExternalRights: TAvailableExternalRights;
 };
 
 export type ShareProps = {

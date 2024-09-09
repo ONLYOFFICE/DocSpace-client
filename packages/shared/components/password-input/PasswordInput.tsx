@@ -487,16 +487,20 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
     }, [caretPosition, state.type, state.value, isSimulateType]);
 
     useEffect(() => {
-      if (inputValue !== prevInputValue) {
+      if (isSimulateType && inputValue !== prevInputValue) {
         onChangeAction?.({
           target: { value: inputValue },
         } as ChangeEvent<HTMLInputElement>);
       }
-    }, [inputValue, prevInputValue, onChangeAction]);
+    }, [inputValue, prevInputValue, isSimulateType, onChangeAction]);
 
-    React.useImperativeHandle(ref, () => {
-      return { onGeneratePassword, setState, value: state.value };
-    }, [onGeneratePassword, setState, state.value]);
+    React.useImperativeHandle(
+      ref,
+      () => {
+        return { onGeneratePassword, setState, value: state.value };
+      },
+      [onGeneratePassword, setState, state.value],
+    );
 
     const renderTextTooltip = (
       settings?: TPasswordSettings,

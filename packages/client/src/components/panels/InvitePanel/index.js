@@ -105,8 +105,6 @@ const InvitePanel = ({
 
   const inputsRef = useRef();
   const invitePanelBodyRef = useRef();
-  const invitePanelWrapper = useRef(null);
-  const invitePanelRef = useRef(null);
   const loaderRef = useRef();
 
   const isPublicRoomType = roomType === RoomsType.PublicRoom;

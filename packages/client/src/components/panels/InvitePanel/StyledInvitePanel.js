@@ -86,6 +86,8 @@ const StyledInvitePanel = styled.div`
 `;
 
 const ScrollList = styled.div`
+  position: absolute;
+
   width: 100%;
   height: ${(props) =>
     props.scrollAllPanelContent && props.isTotalListHeight

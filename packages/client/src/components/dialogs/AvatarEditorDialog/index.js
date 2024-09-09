@@ -61,7 +61,6 @@ const AvatarEditorDialog = (props) => {
   const { t } = useTranslation([
     "Profile",
     "PeopleTranslations",
-    "ProfileAction",
     "Common",
     "CreateEditRoomDialog",
   ]);

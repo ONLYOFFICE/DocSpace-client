@@ -37,7 +37,12 @@ import LockedReact12SvgUrl from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
 import React, { useMemo } from "react";
 import styled from "styled-components";
 
-import { isTablet, isMobile, commonIconsStyles } from "@docspace/shared/utils";
+import {
+  isTablet,
+  isMobile,
+  commonIconsStyles,
+  classNames,
+} from "@docspace/shared/utils";
 import {
   DeviceType,
   FileStatus,
@@ -183,7 +188,9 @@ const QuickButtons = (props) => {
         <ColorTheme
           themeId={ThemeId.IconButton}
           iconName={LinkReactSvgUrl}
-          className="badge copy-link icons-group"
+          className={classNames("badge copy-link icons-group", {
+            ["create-share-link"]: !item.shared,
+          })}
           size={sizeQuickButton}
           onClick={onClickShare}
           color={colorShare}

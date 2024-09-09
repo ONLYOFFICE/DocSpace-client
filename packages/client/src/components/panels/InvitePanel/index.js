@@ -590,6 +590,5 @@ export default inject(
     "Translations",
     "Common",
     "InfoPanel",
-    "PeopleSelector",
   ])(observer(InvitePanel)),
 );

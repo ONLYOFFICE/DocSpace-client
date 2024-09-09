@@ -245,6 +245,8 @@ class AxiosClient {
 
             if (options.skipLogout) return Promise.reject(error);
 
+            console.log("debug is SDK frame", window?.ClientConfig?.isFrame);
+
             if (window?.ClientConfig?.isFrame) {
               break;
             }

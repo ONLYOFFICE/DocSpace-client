@@ -103,18 +103,14 @@ const LoginForm = ({
   const message = searchParams.get("message");
   const confirmedEmail = searchParams.get("confirmedEmail");
   const authError = searchParams.get("authError");
-  const loginData = searchParams.get("loginData");
   const referenceUrl = searchParams.get("referenceUrl");
 
   const isDesktop =
     typeof window !== "undefined" && window["AscDesktopEditor"] !== undefined;
 
-  const [emailFromInvitation, setEmailFromInvitation] = useState(
-    getEmailFromInvitation(loginData),
-  );
-  const [identifier, setIdentifier] = useState(
-    getEmailFromInvitation(loginData),
-  );
+  const emailFromInvitation = getEmailFromInvitation();
+
+  const [identifier, setIdentifier] = useState(getEmailFromInvitation());
 
   const [isEmailErrorShow, setIsEmailErrorShow] = useState(false);
   const [errorText, setErrorText] = useState("");
@@ -135,12 +131,8 @@ const LoginForm = ({
   const hCaptchaRef = useRef<HCaptcha>(null);
 
   useLayoutEffect(() => {
-    const email = getEmailFromInvitation(loginData);
-
-    setIdentifier(email);
-    setEmailFromInvitation(email);
     frameCallCommand("setIsLoaded");
-  }, [loginData]);
+  }, []);
 
   const authCallback = useCallback(
     async (profile: string) => {
@@ -272,7 +264,7 @@ const LoginForm = ({
 
     const pwd = isLdapLoginChecked ? pass : undefined;
 
-    const confirmData = getConfirmDataFromInvitation(loginData);
+    const confirmData = getConfirmDataFromInvitation();
 
     isDesktop && checkPwd();
     const session = !isChecked;
@@ -320,6 +312,9 @@ const LoginForm = ({
         return res;
       })
       .then((res?: string | object) => {
+        const isLoginData = sessionStorage.getItem("loginData");
+        if (isLoginData) sessionStorage.removeItem("loginData");
+
         const isConfirm = typeof res === "string" && res.includes("confirm");
         const redirectPath =
           referenceUrl || sessionStorage.getItem("referenceUrl");
@@ -376,7 +371,6 @@ const LoginForm = ({
     router,
     clientId,
     referenceUrl,
-    loginData,
   ]);
 
   const onBlurEmail = () => {
@@ -429,6 +423,18 @@ const LoginForm = ({
       window.removeEventListener("keydown", onKeyDown);
     };
   }, [isModalOpen, onSubmit]);
+
+  useEffect(() => {
+    const onClearStorage = () => {
+      const isLoginData = sessionStorage.getItem("loginData");
+      if (isLoginData) sessionStorage.removeItem("loginData");
+    };
+
+    window.addEventListener("beforeunload", onClearStorage);
+    return () => {
+      window.removeEventListener("beforeunload", onClearStorage);
+    };
+  }, []);
 
   const passwordErrorMessage = errorMessage();
 

@@ -104,11 +104,10 @@ const SortButton = ({
   }, [isOpen, onSortButtonClick]);
 
   const onOptionClick = React.useCallback(
-    (e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>) => {
-      const target = e.target as HTMLDivElement;
-      const key = (target.closest(".option-item") as HTMLDivElement)?.dataset
-        .value;
-
+    (
+      key: string,
+      e?: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
+    ) => {
       let sortDirection = selectedSortData.sortDirection;
 
       if (key === selectedSortData.sortId) {
@@ -135,11 +134,13 @@ const SortButton = ({
         sortDirection,
       });
 
-      // toggleCombobox();
+      if (!e) {
+        toggleCombobox();
+      }
 
       onSort?.(key || "", sortDirection);
     },
-    [onSort, sortData, selectedSortData],
+    [onSort, sortData, selectedSortData, toggleCombobox],
   );
 
   const advancedOptions = (
@@ -162,10 +163,11 @@ const SortButton = ({
       {sortData?.map((item) => (
         <DropDownItem
           id={item.id}
-          onClick={onOptionClick}
+          onClick={(e) => onOptionClick(item.key, e)}
           className={item.className}
           key={item.key}
           data-value={item.key}
+          isSelected={item.isSelected}
         >
           <Text fontWeight={600}>{item.label}</Text>
           <SortDesc

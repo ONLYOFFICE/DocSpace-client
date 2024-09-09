@@ -92,10 +92,10 @@ import { toastr } from "@docspace/shared/components/toast";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isDesktop, trimSeparator } from "@docspace/shared/utils";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
-import { copyShareLink as copyLink } from "@docspace/shared/utils/copy";
+import { copyShareLink } from "@docspace/shared/utils/copy";
 import {
   canShowManageLink,
-  copyShareLink,
+  copyDocumentShareLink,
 } from "@docspace/shared/components/share/Share.helpers";
 
 import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helpers/filesUtils";
@@ -434,7 +434,7 @@ class ContextOptionsStore {
         const itemLink = item.isFolder
           ? await getFolderLink(item.id)
           : await getFileLink(item.id);
-        copyLink(itemLink.sharedTo.shareLink);
+        copyShareLink(itemLink.sharedTo.shareLink);
         toastr.success(t("Common:LinkCopySuccess"));
       } catch (error) {
         toastr.error(error);
@@ -506,7 +506,7 @@ class ContextOptionsStore {
     const primaryLink = await this.filesStore.getPrimaryLink(item.id);
 
     if (primaryLink) {
-      copyLink(primaryLink.sharedTo.shareLink);
+      copyShareLink(primaryLink.sharedTo.shareLink);
       item.shared
         ? toastr.success(t("Common:LinkSuccessfullyCopied"))
         : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
@@ -1216,6 +1216,7 @@ class ContextOptionsStore {
         this.infoPanelStore.fileView,
       ),
       onClickLink: () => {
+        this.filesStore.setSelection([]);
         this.filesStore.setBufferSelection(item);
         this.infoPanelStore.openShareTab();
       },
@@ -1547,7 +1548,11 @@ class ContextOptionsStore {
 
           const primaryLink = await getPrimaryFileLink(item.id);
           if (primaryLink) {
-            copyShareLink(primaryLink, t, this.getManageLinkOptions(item));
+            copyDocumentShareLink(
+              primaryLink,
+              t,
+              this.getManageLinkOptions(item),
+            );
             setShareChanged(true);
           }
         },

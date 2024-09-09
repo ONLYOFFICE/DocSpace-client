@@ -55,7 +55,7 @@ import LinkRow from "./sub-components/LinkRow";
 
 import { StyledLinks } from "./Share.styled";
 import { ShareProps, TLink } from "./Share.types";
-import { copyShareLink } from "./Share.helpers";
+import { copyDocumentShareLink } from "./Share.helpers";
 
 const Share = (props: ShareProps) => {
   const {
@@ -118,7 +118,7 @@ const Share = (props: ShareProps) => {
 
       if (link) {
         setFileLinks([link]);
-        copyShareLink(link, t);
+        copyDocumentShareLink(link, t);
       } else {
         setFileLinks([]);
       }
@@ -222,7 +222,7 @@ const Share = (props: ShareProps) => {
       }
       updateLink(link, res);
 
-      copyShareLink(res, t);
+      copyDocumentShareLink(res, t);
     } catch (e) {
       toastr.error(e as TData);
     }
@@ -260,7 +260,7 @@ const Share = (props: ShareProps) => {
         if (item.access === ShareAccessRights.DenyAccess) {
           toastr.success(t("Common:LinkAccessDenied"));
         } else {
-          copyShareLink(res, t);
+          copyDocumentShareLink(res, t);
         }
       }
     } catch (e) {
@@ -297,7 +297,7 @@ const Share = (props: ShareProps) => {
 
       updateLink(link, res);
 
-      copyShareLink(res, t);
+      copyDocumentShareLink(res, t);
     } catch (e) {
       toastr.error(e as TData);
     }

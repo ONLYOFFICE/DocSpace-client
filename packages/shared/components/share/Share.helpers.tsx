@@ -279,7 +279,7 @@ export const canShowManageLink = (
   return !isEqual || infoPanelView !== "info_share" || !infoPanelVisible;
 };
 
-export const copyShareLink = (
+export const copyDocumentShareLink = (
   link: TFileLink,
   t: TTranslation,
   linkOptions?: {

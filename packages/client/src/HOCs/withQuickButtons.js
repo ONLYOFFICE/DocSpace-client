@@ -27,8 +27,8 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { toastr } from "@docspace/shared/components/toast";
-import { copyShareLink as copyLink } from "@docspace/shared/utils/copy";
-import { copyShareLink } from "@docspace/shared/components/share/Share.helpers";
+import { copyShareLink } from "@docspace/shared/utils/copy";
+import { copyDocumentShareLink } from "@docspace/shared/components/share/Share.helpers";
 
 import QuickButtons from "../components/QuickButtons";
 
@@ -91,7 +91,7 @@ export default function withQuickButtons(WrappedComponent) {
       } = this.props;
       const primaryLink = await getPrimaryFileLink(item.id);
       if (primaryLink) {
-        copyShareLink(primaryLink, t, getManageLinkOptions(item));
+        copyDocumentShareLink(primaryLink, t, getManageLinkOptions(item));
         setShareChanged(true);
       }
     };
@@ -100,7 +100,7 @@ export default function withQuickButtons(WrappedComponent) {
       const { t, item, getPrimaryLink } = this.props;
       const primaryLink = await getPrimaryLink(item.id);
       if (primaryLink) {
-        copyLink(primaryLink.sharedTo.shareLink);
+        copyShareLink(primaryLink.sharedTo.shareLink);
         toastr.success(t("Common:LinkSuccessfullyCopied"));
       }
     };

@@ -5,3 +5,6 @@ export { portalCultures as portalCulturesHandler } from "./portalCultures";
 export { portalPasswordSettings as portalPasswordSettingHandler } from "./portalPasswordSettings";
 export { portalTimeZone as portalTimeZoneHandler } from "./portalTimeZones";
 export { settings as settingsHandler } from "./settings";
+
+export { complete as completeHandler } from "./complete";
+export { license as licenseHandler } from "./license";

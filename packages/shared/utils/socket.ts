@@ -104,6 +104,18 @@ export type TConfig = {
   };
 };
 
+const getOpenFileId = () => {
+  const isEditor = window.location.pathname.includes("/doceditor");
+  const queryParams = new URLSearchParams(window.location.search);
+  const fileId = queryParams.get("fileId");
+
+  if (isEditor && fileId) {
+    return fileId;
+  }
+
+  return null;
+};
+
 class SocketIOHelper {
   socketUrl: string | null = null;
 
@@ -127,6 +139,12 @@ class SocketIOHelper {
       config.query = {
         share: publicRoomKey,
       };
+    }
+
+    const openFileId = getOpenFileId();
+
+    if (openFileId) {
+      config.query = { ...config.query, openFileId };
     }
 
     client = io(origin, config);

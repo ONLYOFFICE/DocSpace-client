@@ -1,10 +1,34 @@
-export { colorTheme as colorThemeHandler } from "./colorTheme";
-export { licenseRequired as licenseRequiredHandler } from "./licenseRequired";
-export { machineName as machineNameHandler } from "./machineName";
-export { portalCultures as portalCulturesHandler } from "./portalCultures";
-export { portalPasswordSettings as portalPasswordSettingHandler } from "./portalPasswordSettings";
-export { portalTimeZone as portalTimeZoneHandler } from "./portalTimeZones";
-export { settings as settingsHandler } from "./settings";
+export {
+  colorTheme as colorThemeHandler,
+  getSuccessColorTheme,
+} from "./colorTheme";
+export {
+  licenseRequired as licenseRequiredHandler,
+  licenseRequiredSuccess,
+  licenseNotRequiredSuccess,
+} from "./licenseRequired";
+export {
+  machineName as machineNameHandler,
+  machineNameSuccess,
+} from "./machineName";
+export {
+  portalCultures as portalCulturesHandler,
+  portalCulturesSuccess,
+} from "./portalCultures";
+export {
+  portalPasswordSettings as portalPasswordSettingHandler,
+  portalPasswordSettingsSuccess,
+} from "./portalPasswordSettings";
+export {
+  portalTimeZone as portalTimeZoneHandler,
+  portalTimeZonesSuccess,
+} from "./portalTimeZones";
+export {
+  settings as settingsHandler,
+  settingsWizzard,
+  settingsAuth,
+  settingsNoAuth,
+} from "./settings";
 
-export { complete as completeHandler } from "./complete";
-export { license as licenseHandler } from "./license";
+export { complete as completeHandler, completeSuccess } from "./complete";
+export { license as licenseHandler, licenseSuccess } from "./license";

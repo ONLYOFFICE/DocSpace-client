@@ -27,6 +27,7 @@
 import { API_PREFIX, BASE_URL } from "../../utils";
 
 export const PATH = "authentication";
+const PORT = process.env.PORT ?? 5011;
 
 const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 
@@ -36,7 +37,7 @@ export const successLogin = {
     expires: "0001-01-01T00:00:00",
     sms: false,
     tfa: true,
-    confirmUrl: `${BASE_URL}/confirm/TfaActivation`,
+    confirmUrl: `${BASE_URL}:${PORT}/confirm/TfaActivation`,
   },
   links: [
     {

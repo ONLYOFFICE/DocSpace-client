@@ -24,18 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Page } from "@playwright/test";
+import { API_PREFIX, BASE_URL } from "../../utils";
 
-import { TEndpoint } from "__tests__/mocking/endpoints";
+export const PATH = "authentication";
+const PORT = process.env.PORT ?? 5011;
 
-export class MockRequest {
-  constructor(public readonly page: Page) {}
+const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 
-  async router(endpoint: TEndpoint) {
-    await this.page.route(endpoint.url, async (route) => {
-      await route.fulfill({
-        path: `__tests__/mocking/mock-data/${endpoint.pathToData}.json`,
-      });
-    });
-  }
-}
+export const successLogin = {
+  count: 1,
+  response: {
+    expires: "0001-01-01T00:00:00",
+    sms: false,
+    tfa: true,
+    confirmUrl: `${BASE_URL}:${PORT}/confirm/TfaActivation`,
+  },
+  links: [
+    {
+      href: url,
+      action: "POST",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+export const login = () => {
+  return new Response(JSON.stringify(successLogin));
+};

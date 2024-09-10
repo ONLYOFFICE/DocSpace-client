@@ -28,12 +28,11 @@ import {
   HEADER_LINK_EXPIRED,
   HEADER_LINK_INVALID,
   HEADER_USER_EXCLUDED,
-} from "@docspace/shared/__mocks__/e2e/utils";
+  endpoints,
+} from "@docspace/shared/__mocks__/e2e";
 
-import { getUrlWithQueryParams } from "__tests__/helpers/getUrlWithQueryParams";
-
+import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 import { expect, test } from "./fixtures/base";
-import { endpoints } from "./mocking/endpoints";
 
 const URL = "/login/confirm/PasswordChange";
 const NEXT_REQUEST_URL = "*/**/login/confirm/PasswordChange";

@@ -25,12 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import path from "path";
-import { expect, test } from "./fixtures/base";
-import { endpoints } from "./mocking/endpoints";
+
 import {
   HEADER_WIZARD_SETTINGS,
   HEADER_LICENCE_REQUIRED,
+  endpoints,
 } from "@docspace/shared/__mocks__/e2e";
+
+import { expect, test } from "./fixtures/base";
 
 const URL = "/login/wizard";
 const NEXT_REQUEST_URL = "*/**/login/wizard";
@@ -49,7 +51,7 @@ test("wizard render", async ({ page, mockRequest }) => {
 
 test("wizard success", async ({ page, mockRequest }) => {
   await mockRequest.setHeader(NEXT_REQUEST_URL, HEADER_WIZARD_SETTINGS);
-  await mockRequest.router(endpoints.complete);
+  await mockRequest.router(endpoints.wizardComplete);
 
   await page.goto(URL);
 
@@ -78,7 +80,7 @@ test("wizard success", async ({ page, mockRequest }) => {
 
 test("wizard error", async ({ page, mockRequest }) => {
   await mockRequest.setHeader(NEXT_REQUEST_URL, HEADER_WIZARD_SETTINGS);
-  await mockRequest.router(endpoints.complete);
+  await mockRequest.router(endpoints.wizardComplete);
 
   await page.goto(URL);
 
@@ -100,7 +102,7 @@ test("wizard error", async ({ page, mockRequest }) => {
 test("wizard with license success", async ({ page, mockRequest }) => {
   await mockRequest.setHeader(NEXT_REQUEST_URL, HEADER_WIZARD_SETTINGS);
   await mockRequest.setHeader(NEXT_REQUEST_URL, HEADER_LICENCE_REQUIRED);
-  await mockRequest.router(endpoints.complete);
+  await mockRequest.router(endpoints.wizardComplete);
   await mockRequest.router(endpoints.license);
 
   await page.goto(URL);

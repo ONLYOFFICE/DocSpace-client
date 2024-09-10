@@ -66,6 +66,7 @@ import {
   selfHandler,
   thirdPartyProviderHandler,
   getClientHandler,
+  confirmHandler,
 } from "@docspace/shared/__mocks__/e2e";
 
 const IS_TEST = process.env.E2E_TEST;
@@ -284,6 +285,7 @@ export async function getPortalPasswordSettings(
   if (!res.ok) return;
 
   const passwordSettings = await res.json();
+  console.log("passwordSettings", passwordSettings);
 
   return passwordSettings.response as TPasswordSettings;
 }
@@ -387,7 +389,9 @@ export async function checkConfirmLink(data: TConfirmLinkParams) {
     JSON.stringify(data),
   );
 
-  const response = await fetch(checkConfirmLink);
+  const response = IS_TEST
+    ? confirmHandler(headers())
+    : await fetch(checkConfirmLink);
 
   if (!response.ok) throw new Error(response.statusText);
 

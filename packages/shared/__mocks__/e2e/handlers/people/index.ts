@@ -24,15 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
+export {
   thirdPartyProvider as thirdPartyProviderHandler,
   successThirdpartyProviders,
 } from "./thirdPartyProviders";
-import { successSelf, selfHandler } from "./self";
+
+export { self as selfHandler, successSelf } from "./self";
 
 export {
-  thirdPartyProviderHandler,
-  selfHandler,
-  successSelf,
-  successThirdpartyProviders,
-};
+  PATH_CHANGE_PASSWORD as SELF_PATH_CHANGE_PASSWORD,
+  PATH_ACTIVATION_STATUS as SELF_PATH_ACTIVATION_STATUS,
+  PATH_UPDATE_USER as SELF_PATH_UPDATE_USER,
+} from "./self";

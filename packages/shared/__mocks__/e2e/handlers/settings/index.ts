@@ -26,7 +26,13 @@ export {
 } from "./portalTimeZones";
 export {
   settings as settingsHandler,
+  settingsWizzard,
   settingsAuth,
   settingsNoAuth,
-  settingsWizzard,
 } from "./settings";
+
+export { complete as completeHandler, completeSuccess } from "./complete";
+export { license as licenseHandler, licenseSuccess } from "./license";
+
+export { PATH as LICENCE_PATH } from "./license";
+export { PATH as COMPLETE_PATH } from "./complete";

@@ -28,6 +28,8 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 import { toastr } from "@docspace/shared/components/toast";
 import { copyShareLink } from "@docspace/shared/utils/copy";
+import { copyDocumentShareLink } from "@docspace/shared/components/share/Share.helpers";
+
 import QuickButtons from "../components/QuickButtons";
 
 export default function withQuickButtons(WrappedComponent) {
@@ -80,13 +82,16 @@ export default function withQuickButtons(WrappedComponent) {
     };
 
     onClickShare = async () => {
-      const { t, item, getPrimaryFileLink, setShareChanged } = this.props;
+      const {
+        t,
+        item,
+        getPrimaryFileLink,
+        setShareChanged,
+        getManageLinkOptions,
+      } = this.props;
       const primaryLink = await getPrimaryFileLink(item.id);
       if (primaryLink) {
-        copyShareLink(primaryLink.sharedTo.shareLink);
-        item.shared
-          ? toastr.success(t("Common:LinkSuccessfullyCopied"))
-          : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+        copyDocumentShareLink(primaryLink, t, getManageLinkOptions(item));
         setShareChanged(true);
       }
     };
@@ -158,6 +163,7 @@ export default function withQuickButtons(WrappedComponent) {
       treeFoldersStore,
       filesStore,
       infoPanelStore,
+      contextOptionsStore,
     }) => {
       const { lockFileAction, setFavoriteAction, onSelectItem } =
         filesActionsStore;
@@ -177,6 +183,8 @@ export default function withQuickButtons(WrappedComponent) {
       const { isPublicRoom } = publicRoomStore;
       const { getPrimaryFileLink, setShareChanged } = infoPanelStore;
 
+      const { getManageLinkOptions } = contextOptionsStore;
+
       return {
         theme: settingsStore.theme,
         currentDeviceType: settingsStore.currentDeviceType,
@@ -192,6 +200,7 @@ export default function withQuickButtons(WrappedComponent) {
         isArchiveFolder,
         getPrimaryFileLink,
         setShareChanged,
+        getManageLinkOptions,
       };
     },
   )(observer(WithQuickButtons));

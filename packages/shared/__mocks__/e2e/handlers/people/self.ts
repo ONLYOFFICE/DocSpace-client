@@ -26,7 +26,10 @@
 
 import { API_PREFIX, BASE_URL } from "../../utils";
 
-const PATH = "people/@self";
+export const PATH = "people";
+export const PATH_CHANGE_PASSWORD = "people/**/password";
+export const PATH_ACTIVATION_STATUS = "people/activationstatus/*";
+export const PATH_UPDATE_USER = "people/*";
 
 const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 
@@ -78,6 +81,6 @@ export const successSelf = {
   statusCode: 200,
 };
 
-export const selfHandler = () => {
+export const self = () => {
   return new Response(JSON.stringify(successSelf));
 };

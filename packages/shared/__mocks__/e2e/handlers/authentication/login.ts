@@ -36,7 +36,7 @@ export const successLogin = {
     expires: "0001-01-01T00:00:00",
     sms: false,
     tfa: true,
-    confirmUrl: "http://localhost:8092/confirm/TfaActivation",
+    confirmUrl: `${BASE_URL}/confirm/TfaActivation`,
   },
   links: [
     {

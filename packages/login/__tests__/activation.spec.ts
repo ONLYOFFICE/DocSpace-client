@@ -81,10 +81,12 @@ test("activation render", async ({ page }) => {
 });
 
 test("activation success", async ({ page, mockRequest }) => {
-  await mockRequest.router(endpoints.changePassword);
-  await mockRequest.router(endpoints.activationStatus);
-  await mockRequest.router(endpoints.login);
-  await mockRequest.router(endpoints.updateUser);
+  await mockRequest.router([
+    endpoints.changePassword,
+    endpoints.activationStatus,
+    endpoints.login,
+    endpoints.updateUser,
+  ]);
   await page.goto(URL_WITH_PARAMS);
 
   await page
@@ -110,7 +112,7 @@ test("activation success", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("activation error", async ({ page, mockRequest }) => {
+test("activation error", async ({ page }) => {
   await page.goto(URL_WITH_PARAMS);
 
   await page.fill("[name='name']", "");

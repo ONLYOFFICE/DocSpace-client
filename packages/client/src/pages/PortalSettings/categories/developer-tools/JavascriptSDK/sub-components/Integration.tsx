@@ -50,11 +50,16 @@ export const Integration = (props: {
   t: TTranslation;
   theme: TTheme;
   currentColorScheme: TColorScheme;
+  className: string;
 }) => {
-  const { t, theme, currentColorScheme } = props;
+  const { t, theme, currentColorScheme, className } = props;
 
   return (
-    <IntegrationContainer theme={theme} color={currentColorScheme.main?.accent}>
+    <IntegrationContainer
+      className={className}
+      theme={theme}
+      color={currentColorScheme.main?.accent}
+    >
       <CategoryHeader className="integration-header">
         {t("IntegrationExamples")}
       </CategoryHeader>

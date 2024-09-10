@@ -40,6 +40,7 @@ import { FilterType } from "@docspace/shared/enums";
 
 import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { TooltipContent } from "../sub-components/TooltipContent";
+import { Integration } from "../sub-components/Integration";
 
 import SubtitleUrl from "PUBLIC_DIR/images/sdk-presets_subtitle.react.svg?url";
 import SearchUrl from "PUBLIC_DIR/images/sdk-presets_files-search.react.svg?url";
@@ -81,7 +82,7 @@ import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const FileSelector = (props) => {
-  const { t, fetchExternalLinks, theme } = props;
+  const { t, fetchExternalLinks, theme, currentColorScheme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -432,19 +433,33 @@ const FileSelector = (props) => {
               </>
             )}
           </ControlsSection>
+
+          <Integration
+            className="integration-examples"
+            t={t}
+            theme={theme}
+            currentColorScheme={currentColorScheme}
+          />
         </Controls>
       </Container>
+
+      <Integration
+        className="integration-examples integration-examples-bottom"
+        t={t}
+        theme={theme}
+        currentColorScheme={currentColorScheme}
+      />
     </PresetWrapper>
   );
 };
 
 export const Component = inject(({ settingsStore, publicRoomStore }) => {
-  const { theme } = settingsStore;
+  const { theme, currentColorScheme } = settingsStore;
   const { fetchExternalLinks } = publicRoomStore;
 
   return {
     theme,
-
+    currentColorScheme,
     fetchExternalLinks,
   };
 })(

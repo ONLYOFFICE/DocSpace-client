@@ -53,14 +53,20 @@ export const AccessRightSelectPure = ({
   availableAccess,
   ...props
 }: AccessRightSelectProps) => {
+  const [opened, setOpened] = useState(false);
   const [currentItem, setCurrentItem] = useState(selectedOption);
+
+  const onToggle = useCallback(() => setOpened((v) => !v), []);
 
   useEffect(() => {
     setCurrentItem(selectedOption);
   }, [selectedOption]);
 
   const onSelectCurrentItem = useCallback(
-    (option: TOption) => {
+    (
+      option: TOption,
+      e?: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
+    ) => {
       if (option) {
         if (isSelectionDisabled) {
           let isError =
@@ -78,50 +84,58 @@ export const AccessRightSelectPure = ({
 
         setCurrentItem(option);
         onSelect?.(option);
+
+        if (!e) {
+          setOpened(false);
+        }
       }
     },
     [onSelect],
   );
 
   const formatToAccessRightItem = (data: TOption[]) => {
-    const items = data.map((item: TOption) => {
-      return "isSeparator" in item && item.isSeparator ? (
-        <DropDownItem key={item.key} isSeparator />
-      ) : (
-        <DropDownItem
-          className="access-right-item"
-          key={item.key}
-          data-key={item.key}
-          onClick={() => onSelectCurrentItem(item)}
-        >
-          <StyledItem>
-            {item.icon && (
-              <StyledItemIcon
-                src={item.icon}
-                isShortenIcon={type === "onlyIcon"}
-              />
-            )}
-            <StyledItemContent>
-              <StyledItemTitle>
-                {item.label}
-                {item.quota && (
-                  <Badge
-                    label={item.quota}
-                    backgroundColor={item.color}
-                    fontSize="9px"
-                    isPaidBadge
-                    noHover
+    return (
+      <>
+        {data.map((item: TOption) => {
+          return "isSeparator" in item && item.isSeparator ? (
+            <DropDownItem key={item.key} isSeparator />
+          ) : (
+            <DropDownItem
+              className="access-right-item"
+              key={item.key}
+              data-key={item.key}
+              onClick={(e) => onSelectCurrentItem(item, e)}
+            >
+              <StyledItem>
+                {item.icon && (
+                  <StyledItemIcon
+                    src={item.icon}
+                    isShortenIcon={type === "onlyIcon"}
                   />
                 )}
-              </StyledItemTitle>
-              <StyledItemDescription>{item.description}</StyledItemDescription>
-            </StyledItemContent>
-          </StyledItem>
-        </DropDownItem>
-      );
-    });
-
-    return <div style={{ display: "contents" }}>{items}</div>;
+                <StyledItemContent>
+                  <StyledItemTitle>
+                    {item.label}
+                    {item.quota && (
+                      <Badge
+                        label={item.quota}
+                        backgroundColor={item.color}
+                        fontSize="9px"
+                        isPaidBadge
+                        noHover
+                      />
+                    )}
+                  </StyledItemTitle>
+                  <StyledItemDescription>
+                    {item.description}
+                  </StyledItemDescription>
+                </StyledItemContent>
+              </StyledItem>
+            </DropDownItem>
+          );
+        })}
+      </>
+    );
   };
 
   const formattedOptions =
@@ -136,6 +150,10 @@ export const AccessRightSelectPure = ({
       advancedOptions={formattedOptions}
       onSelect={onSelectCurrentItem}
       options={[]}
+      opened={opened}
+      onToggle={onToggle}
+      withBackdrop
+      onBackdropClick={onToggle}
       selectedOption={
         {
           icon: currentItem?.icon,

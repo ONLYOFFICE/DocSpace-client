@@ -133,8 +133,9 @@ const SetRoomParams = ({
   folderFormValidation,
   disabledChangeRoomType,
   maxImageUploadSize,
-  bufferSelection,
+  selection,
   getLogoCoverModel,
+  getInfoPanelItemIcon,
 }) => {
   const [previewIcon, setPreviewIcon] = useState(null);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
@@ -146,6 +147,12 @@ const SetRoomParams = ({
 
   const isFormRoom = roomParams.type === RoomsType.FormRoom;
   const isPublicRoom = roomParams.type === RoomsType.PublicRoom;
+
+  const currentIcon = selection?.logo?.large
+    ? selection?.logo?.large
+    : selection?.logo?.cover
+      ? selection?.logo
+      : getInfoPanelItemIcon(selection, 96);
 
   const onChangeName = (e) => {
     setIsValidTitle(true);
@@ -185,27 +192,25 @@ const SetRoomParams = ({
     });
   };
 
-  const hasImage = bufferSelection?.logo?.original;
+  const hasImage = selection?.logo?.original;
   const model = getLogoCoverModel(t, hasImage);
 
   const element = isEdit ? (
     <ItemIcon
-      id={bufferSelection?.id}
-      fileExst={bufferSelection?.fileExst}
-      isRoom={bufferSelection?.isRoom}
-      title={bufferSelection?.title}
-      logo={bufferSelection?.logo}
-      showDefault={
-        !bufferSelection?.logo?.cover && !bufferSelection?.logo?.large
-      }
-      color={bufferSelection?.logo?.color}
+      id={selection?.id}
+      fileExst={selection?.fileExst}
+      isRoom={selection?.isRoom}
+      title={selection?.title}
+      logo={currentIcon}
+      showDefault={!selection?.logo?.cover && !selection?.logo?.large}
+      color={selection?.logo?.color}
       size={isMobile() ? "96px" : "64px"}
       withEditing={true}
       model={model}
     />
   ) : (
     <ItemIcon
-      id={bufferSelection?.id}
+      id={selection?.id}
       title={roomParams.title}
       showDefault={true}
       size={isMobile() ? "96px" : "64px"}
@@ -215,7 +220,7 @@ const SetRoomParams = ({
   return (
     <StyledSetRoomParams disableImageRescaling={disableImageRescaling}>
       <div className="logo-name-container">
-        {element}
+        {isEdit && element}
         <InputParam
           id="shared_room-name"
           title={`${t("Common:Name")}:`}
@@ -337,13 +342,24 @@ const SetRoomParams = ({
 };
 
 export default inject(
-  ({ settingsStore, dialogsStore, currentQuotaStore, filesStore }) => {
+  ({
+    settingsStore,
+    dialogsStore,
+    currentQuotaStore,
+    filesStore,
+    infoPanelStore,
+  }) => {
     const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 
     const { bufferSelection } = filesStore;
+    const { getInfoPanelItemIcon, infoPanelSelection } = infoPanelStore;
 
     const { setChangeRoomOwnerIsVisible, getLogoCoverModel } = dialogsStore;
     const { folderFormValidation, maxImageUploadSize } = settingsStore;
+
+    const selection = infoPanelSelection?.length
+      ? infoPanelSelection
+      : bufferSelection;
 
     return {
       isDefaultRoomsQuotaSet,
@@ -352,6 +368,8 @@ export default inject(
       maxImageUploadSize,
       bufferSelection,
       getLogoCoverModel,
+      selection,
+      getInfoPanelItemIcon,
     };
   },
 )(

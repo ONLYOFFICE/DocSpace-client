@@ -51,35 +51,33 @@ import BackupListBody from "./BackupListBody";
 import { TenantStatus } from "@docspace/shared/enums";
 import styled from "styled-components";
 
-const StyledModalDialog = styled(ModalDialog)`
-  .restore_footer {
-    width: 100%;
-    .restore_dialog-button {
-      display: flex;
-      button:first-child {
-        margin-inline-end: 10px;
-        width: 50%;
-      }
-      button:last-child {
-        width: 50%;
-      }
+const StyledFooterContent = styled.div`
+  width: 100%;
+  .restore_dialog-button {
+    display: flex;
+    button:first-child {
+      margin-inline-end: 10px;
+      width: 50%;
     }
-    #backup-list_help {
-      display: flex;
-      background-color: ${(props) => props.theme.backgroundColor};
-      margin-bottom: 16px;
+    button:last-child {
+      width: 50%;
     }
+  }
+  #backup-list_help {
+    display: flex;
+    background-color: ${(props) => props.theme.backgroundColor};
+    margin-bottom: 16px;
+  }
 
-    .backup-list_agreement-text {
-      user-select: none;
-      div:first-child {
-        display: inline-block;
-      }
+  .backup-list_agreement-text {
+    user-select: none;
+    div:first-child {
+      display: inline-block;
     }
+  }
 
-    .backup-list_tooltip {
-      margin-inline-start: 8px;
-    }
+  .backup-list_tooltip {
+    margin-inline-start: 8px;
   }
 `;
 
@@ -224,7 +222,7 @@ const BackupListModalDialog = (props) => {
   );
 
   return (
-    <StyledModalDialog
+    <ModalDialog
       displayType="aside"
       visible={isVisibleDialog}
       onClose={onModalClose}
@@ -283,7 +281,7 @@ const BackupListModalDialog = (props) => {
       </ModalDialog.Body>
 
       <ModalDialog.Footer>
-        <div className="restore_footer">
+        <StyledFooterContent className="restore_footer">
           <div id="backup-list_help">
             <Checkbox
               truncate
@@ -319,9 +317,9 @@ const BackupListModalDialog = (props) => {
               onClick={onModalClose}
             />
           </div>
-        </div>
+        </StyledFooterContent>
       </ModalDialog.Footer>
-    </StyledModalDialog>
+    </ModalDialog>
   );
 };
 

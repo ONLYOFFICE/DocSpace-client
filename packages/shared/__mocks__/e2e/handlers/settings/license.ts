@@ -24,24 +24,26 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-import { tablet } from "@docspace/shared/utils";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { API_PREFIX, BASE_URL } from "../../utils";
 
-const ModalDialogContainer = styled(ModalDialog)`
-  .modal-dialog-aside-footer {
-    @media ${tablet} {
-      width: 90%;
-    }
-  }
-  .modal-dialog-button {
-    @media ${tablet} {
-      width: 100%;
-    }
-  }
-  .field-body {
-    margin-top: 16px;
-  }
-`;
+export const PATH = "settings/license";
 
-export default ModalDialogContainer;
+const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
+
+export const licenseSuccess = {
+  response:
+    "Uploaded successfully. Support and updates are not available for this license since Sunday, July 7, 2024.",
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+export const license = (): Response => {
+  return new Response(JSON.stringify(licenseSuccess));
+};

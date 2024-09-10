@@ -1,7 +1,15 @@
 export * from "./handlers";
 
+export { MockRequest } from "./mockRequest";
+
 export {
   BASE_URL,
   HEADER_LICENCE_REQUIRED,
   HEADER_WIZARD_SETTINGS,
+  HEADER_LINK_INVALID,
+  HEADER_LINK_EXPIRED,
+  HEADER_TRAFF_LIMIT,
+  HEADER_USER_EXISTED,
+  HEADER_USER_EXCLUDED,
+  HEADER_QUOTA_FAILED,
 } from "./utils";

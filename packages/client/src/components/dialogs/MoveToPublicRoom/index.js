@@ -24,8 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState } from "react";
-import { StyledMoveToPublicRoomDialog } from "./StyledMoveToPublicRoomDialog";
+import { useEffect, useState } from "react";
 import { toastr } from "@docspace/shared/components/toast";
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
@@ -126,11 +125,7 @@ const MoveToPublicRoomComponent = (props) => {
   };
 
   return (
-    <StyledMoveToPublicRoomDialog
-      isLoading={!tReady}
-      visible={visible}
-      onClose={onClose}
-    >
+    <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
       <ModalDialog.Header>
         {t("Files:MoveToPublicRoomTitle")}
       </ModalDialog.Header>
@@ -160,7 +155,7 @@ const MoveToPublicRoomComponent = (props) => {
           isLoading={isLoading}
         />
       </ModalDialog.Footer>
-    </StyledMoveToPublicRoomDialog>
+    </ModalDialog>
   );
 };
 

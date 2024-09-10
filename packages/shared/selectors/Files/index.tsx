@@ -327,8 +327,12 @@ const FilesSelectorComponent = ({
         }
       } else if (item.id && item.label) {
         const inPublic =
-          breadCrumbs.findIndex((f) => f.roomType === RoomsType.PublicRoom) >
-          -1;
+          breadCrumbs.findIndex(
+            (f) =>
+              f.roomType === RoomsType.PublicRoom ||
+              f.roomType === RoomsType.FormRoom ||
+              (f.roomType === RoomsType.CustomRoom && f.shared),
+          ) > -1;
 
         setSelectedFileInfo({
           id: item.id,

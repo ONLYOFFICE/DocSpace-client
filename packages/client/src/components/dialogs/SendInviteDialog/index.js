@@ -39,7 +39,6 @@ import { FixedSizeList as List, areEqual } from "react-window";
 import { withTranslation } from "react-i18next";
 import { resendUserInvites } from "@docspace/shared/api/people";
 
-import ModalDialogContainer from "../ModalDialogContainer";
 import { inject, observer } from "mobx-react";
 
 class SendInviteDialogComponent extends React.Component {
@@ -139,7 +138,7 @@ class SendInviteDialogComponent extends React.Component {
 
     //console.log("SendInviteDialog render");
     return (
-      <ModalDialogContainer
+      <ModalDialog
         isLoading={!tReady}
         visible={visible}
         onClose={onClose}
@@ -172,7 +171,7 @@ class SendInviteDialogComponent extends React.Component {
             isDisabled={isRequestRunning}
           />
         </ModalDialog.Footer>
-      </ModalDialogContainer>
+      </ModalDialog>
     );
   }
 }

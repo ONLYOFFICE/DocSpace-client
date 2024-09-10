@@ -61,6 +61,9 @@ import { TUser } from "@docspace/shared/api/people/types";
 import { TGroup } from "@docspace/shared/api/groups/types";
 import { MIN_LOADER_TIMER } from "@docspace/shared/selectors/Files/FilesSelector.constants";
 import { TTranslation } from "@docspace/shared/types";
+import { Box } from "@docspace/shared/components/box";
+
+import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 
 const PEOPLE_TAB_ID = "0";
 const GROUP_TAB_ID = "1";
@@ -120,6 +123,7 @@ const toListItem = (
       isCollaborator,
       isRoomAdmin,
       isDisabled: isInvited || isDisabled,
+      status,
       disabledText,
       groups,
     } as TSelectorItem;
@@ -171,6 +175,7 @@ type AddUsersPanelProps = {
 
   roomId?: string | number;
   withGroups?: boolean;
+  useAside?: boolean;
 };
 
 const AddUsersPanel = ({
@@ -196,6 +201,7 @@ const AddUsersPanel = ({
   invitedUsers,
   disableDisabledUsers,
   checkIfUserInvited,
+  useAside = true,
 }: AddUsersPanelProps) => {
   const theme = useTheme();
   const { t } = useTranslation([
@@ -293,6 +299,7 @@ const AddUsersPanel = ({
         newItem.isRoomAdmin = user.isRoomAdmin;
         newItem.email = user.email;
         newItem.groups = user.groups;
+        newItem.status = user.status;
       }
 
       items.push(newItem);
@@ -436,6 +443,7 @@ const AddUsersPanel = ({
     userType?: string,
     email?: string,
     isGroup?: boolean,
+    status?: EmployeeStatus,
   ) => {
     return (
       <div
@@ -445,16 +453,19 @@ const AddUsersPanel = ({
           marginInlineEnd: "16px",
         }}
       >
-        <Text
-          className="label"
-          fontWeight={600}
-          fontSize="14px"
-          noSelect
-          truncate
-          dir="auto"
-        >
-          {label}
-        </Text>
+        <Box displayProp="flex" alignItems="center" gapProp="8px">
+          <Text
+            className="label"
+            fontWeight={600}
+            fontSize="14px"
+            noSelect
+            truncate
+            dir="auto"
+          >
+            {label}
+          </Text>
+          {status === EmployeeStatus.Pending && <StyledSendClockIcon />}
+        </Box>
         {!isGroup && (
           <div style={{ display: "flex" }}>
             <Text
@@ -514,7 +525,79 @@ const AddUsersPanel = ({
       }
     : {};
 
-  return (
+  const selectorComponent = (
+    <Selector
+      withHeader
+      alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}
+      headerProps={{
+        // Todo: Update groups empty screen texts when they are ready
+        headerLabel: t("Common:ListAccounts"),
+        withoutBackButton: false,
+        withoutBorder: true,
+        onBackClick,
+        onCloseClick: onClosePanels,
+      }}
+      onSelect={onSelect}
+      renderCustomItem={renderCustomItem}
+      withSearch
+      searchPlaceholder={t("Common:Search")}
+      searchValue={searchValue}
+      onSearch={onSearch}
+      onClearSearch={onClearSearch}
+      items={itemsList}
+      isMultiSelect={isMultiSelect}
+      submitButtonLabel={t("Common:AddButton")}
+      onSubmit={onUsersSelect}
+      disableSubmitButton={selectedItems.length === 0}
+      {...withAccessRightsProps}
+      {...withCancelButtonProps}
+      emptyScreenImage={emptyScreenImage}
+      emptyScreenHeader={
+        // Todo: Update groups empty screen texts when they are ready
+        activeTabId === PEOPLE_TAB_ID
+          ? t("Common:EmptyHeader")
+          : t("Common:NotFoundGroups")
+      }
+      emptyScreenDescription={
+        activeTabId === PEOPLE_TAB_ID
+          ? t("Common:EmptyDescription", {
+              productName: t("Common:ProductName"),
+            })
+          : t("Common:GroupsNotFoundDescription")
+      }
+      searchEmptyScreenImage={emptyScreenImage}
+      searchEmptyScreenHeader={
+        activeTabId === PEOPLE_TAB_ID
+          ? t("Common:NotFoundUsers")
+          : t("Common:NotFoundGroups")
+      }
+      searchEmptyScreenDescription={
+        activeTabId === PEOPLE_TAB_ID
+          ? t("Common:NotFoundUsersDescription")
+          : t("Common:GroupsNotFoundDescription")
+      }
+      hasNextPage={hasNextPage}
+      isNextPageLoading={isNextPageLoading}
+      loadNextPage={loadNextPage}
+      totalItems={total}
+      isLoading={isLoading}
+      searchLoader={<SearchLoader />}
+      isSearchLoading={isInit}
+      rowLoader={
+        <RowLoader
+          style={{ paddingInlineEnd: 0 }}
+          isUser
+          count={15}
+          isContainer={isLoading}
+          isMultiSelect={isMultiSelect}
+          withAllSelect={!isLoading}
+        />
+      }
+      {...withTabsProps}
+    />
+  );
+
+  return useAside ? (
     <>
       <Backdrop
         onClick={onClosePanels}
@@ -531,77 +614,11 @@ const AddUsersPanel = ({
         withoutBodyScroll
         withoutHeader
       >
-        <Selector
-          withHeader
-          alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}
-          headerProps={{
-            // Todo: Update groups empty screen texts when they are ready
-            headerLabel: t("Common:ListAccounts"),
-            withoutBackButton: false,
-            withoutBorder: true,
-            onBackClick,
-            onCloseClick: onClosePanels,
-          }}
-          onSelect={onSelect}
-          renderCustomItem={renderCustomItem}
-          withSearch
-          searchPlaceholder={t("Common:Search")}
-          searchValue={searchValue}
-          onSearch={onSearch}
-          onClearSearch={onClearSearch}
-          items={itemsList}
-          isMultiSelect={isMultiSelect}
-          submitButtonLabel={t("Common:AddButton")}
-          onSubmit={onUsersSelect}
-          disableSubmitButton={selectedItems.length === 0}
-          {...withAccessRightsProps}
-          {...withCancelButtonProps}
-          emptyScreenImage={emptyScreenImage}
-          emptyScreenHeader={
-            // Todo: Update groups empty screen texts when they are ready
-            activeTabId === PEOPLE_TAB_ID
-              ? t("Common:EmptyHeader")
-              : t("Common:NotFoundGroups")
-          }
-          emptyScreenDescription={
-            activeTabId === PEOPLE_TAB_ID
-              ? t("Common:EmptyDescription", {
-                  productName: t("Common:ProductName"),
-                })
-              : t("Common:GroupsNotFoundDescription")
-          }
-          searchEmptyScreenImage={emptyScreenImage}
-          searchEmptyScreenHeader={
-            activeTabId === PEOPLE_TAB_ID
-              ? t("Common:NotFoundUsers")
-              : t("Common:NotFoundGroups")
-          }
-          searchEmptyScreenDescription={
-            activeTabId === PEOPLE_TAB_ID
-              ? t("Common:NotFoundUsersDescription")
-              : t("Common:GroupsNotFoundDescription")
-          }
-          hasNextPage={hasNextPage}
-          isNextPageLoading={isNextPageLoading}
-          loadNextPage={loadNextPage}
-          totalItems={total}
-          isLoading={isLoading}
-          searchLoader={<SearchLoader />}
-          isSearchLoading={isInit}
-          rowLoader={
-            <RowLoader
-              style={{ paddingInlineEnd: 0 }}
-              isUser
-              count={15}
-              isContainer={isLoading}
-              isMultiSelect={isMultiSelect}
-              withAllSelect={!isLoading}
-            />
-          }
-          {...withTabsProps}
-        />
+        {selectorComponent}
       </Aside>
     </>
+  ) : (
+    selectorComponent
   );
 };
 

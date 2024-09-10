@@ -33,7 +33,7 @@ import { Text } from "../../text";
 import { LinkWithDropdown } from "../../link-with-dropdown";
 import { Link, LinkType } from "../../link";
 
-import { getExpiredOptions } from "../Share.helpers";
+import { getDate, getExpiredOptions } from "../Share.helpers";
 import { ExpiredComboBoxProps } from "../Share.types";
 
 import ShareCalendar from "./ShareCalendar";
@@ -46,7 +46,7 @@ const ExpiredComboBox = ({
   isDisabled,
   isRoomsLink,
   changeAccessOption,
-  accessOptions,
+  availableExternalRights,
 }: ExpiredComboBoxProps) => {
   const { t, i18n } = useTranslation(["Common"]);
   const calendarRef = useRef<HTMLDivElement | null>(null);
@@ -96,25 +96,14 @@ const ExpiredComboBox = ({
     changeExpirationOption(link, currentDate);
   };
 
-  const getDate = () => {
-    if (!expirationDate) return;
-    const currentDare = moment(new Date());
-    const expDate = moment(new Date(expirationDate));
-    const calculatedDate = expDate.diff(currentDare, "days");
-
-    if (calculatedDate < 1) {
-      return {
-        date: expDate.diff(currentDare, "hours") + 1,
-        label: t("Common:Hours"),
-      };
-    }
-
-    return { date: calculatedDate + 1, label: t("Common:Days") };
-  };
-
   const onRemoveLink = () => {
-    const opt = accessOptions.find((o) => o.access === ShareAccessRights.None);
-    if (opt) changeAccessOption(opt, link);
+    if (availableExternalRights.None)
+      changeAccessOption(
+        {
+          access: ShareAccessRights.None,
+        },
+        link,
+      );
   };
 
   useEffect(() => {
@@ -134,8 +123,7 @@ const ExpiredComboBox = ({
 
   const getExpirationTrans = () => {
     if (expirationDate) {
-      const dateObj = getDate();
-      const date = `${dateObj?.date} ${dateObj?.label}`;
+      const date = getDate(expirationDate);
 
       return (
         <Trans t={t} i18nKey="LinkExpireAfter" ns="Common">

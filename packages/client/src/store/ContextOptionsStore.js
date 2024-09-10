@@ -92,6 +92,10 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isDesktop, trimSeparator } from "@docspace/shared/utils";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 import { copyShareLink } from "@docspace/shared/utils/copy";
+import {
+  canShowManageLink,
+  copyDocumentShareLink,
+} from "@docspace/shared/components/share/Share.helpers";
 
 import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helpers/filesUtils";
 import { getOAuthToken } from "@docspace/shared/utils/common";
@@ -1198,6 +1202,22 @@ class ContextOptionsStore {
     return this.getFilesContextOptions(item, t, false, true);
   };
 
+  getManageLinkOptions = (item) => {
+    return {
+      canShowLink: canShowManageLink(
+        item,
+        this.filesStore.bufferSelection,
+        this.infoPanelStore.isVisible,
+        this.infoPanelStore.fileView,
+      ),
+      onClickLink: () => {
+        this.filesStore.setSelection([]);
+        this.filesStore.setBufferSelection(item);
+        this.infoPanelStore.openShareTab();
+      },
+    };
+  };
+
   getFilesContextOptions = (item, t, isInfoPanel, isHeader) => {
     const optionsToRemove = isInfoPanel
       ? ["select", "room-info", "show-info"]
@@ -1523,10 +1543,11 @@ class ContextOptionsStore {
 
           const primaryLink = await getPrimaryFileLink(item.id);
           if (primaryLink) {
-            copyShareLink(primaryLink.sharedTo.shareLink);
-            item.shared
-              ? toastr.success(t("Common:LinkSuccessfullyCopied"))
-              : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+            copyDocumentShareLink(
+              primaryLink,
+              t,
+              this.getManageLinkOptions(item),
+            );
             setShareChanged(true);
           }
         },

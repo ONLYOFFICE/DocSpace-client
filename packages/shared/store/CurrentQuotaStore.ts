@@ -431,8 +431,8 @@ class CurrentQuotasStore {
     try {
       await setDefaultUserQuota(isEnable, +quota);
       const toastrText = isEnable
-        ? t("MemoryQuotaEnabled")
-        : t("MemoryQuotaDisabled");
+        ? t("UserQuotaEnabled")
+        : t("UserQuotaDisabled");
 
       toastr.success(toastrText);
     } catch (e: unknown) {
@@ -446,8 +446,8 @@ class CurrentQuotasStore {
     try {
       await setDefaultRoomQuota(isEnable, +quota);
       const toastrText = isEnable
-        ? t("MemoryQuotaEnabled")
-        : t("MemoryQuotaDisabled");
+        ? t("RoomQuotaEnabled")
+        : t("RoomQuotaDisabled");
 
       toastr.success(toastrText);
     } catch (e: unknown) {

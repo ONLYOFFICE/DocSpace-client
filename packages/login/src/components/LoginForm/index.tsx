@@ -53,7 +53,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { thirdPartyLogin, checkConfirmLink } from "@docspace/shared/api/user";
 import { setWithCredentialsStatus } from "@docspace/shared/api/client";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
-import { RecaptchaType } from "@docspace/shared/enums";
+import { ButtonKeys, RecaptchaType } from "@docspace/shared/enums";
 import { getAvailablePortals } from "@docspace/shared/api/management";
 import { getCookie } from "@docspace/shared/utils";
 import { deleteCookie } from "@docspace/shared/utils/cookie";
@@ -103,8 +103,9 @@ const LoginForm = ({
   const message = searchParams.get("message");
   const confirmedEmail = searchParams.get("confirmedEmail");
   const authError = searchParams.get("authError");
-  const loginData = searchParams.get("loginData");
   const referenceUrl = searchParams.get("referenceUrl");
+  const loginData = searchParams.get("loginData");
+  const linkData = searchParams.get("linkData");
 
   const isDesktop =
     typeof window !== "undefined" && window["AscDesktopEditor"] !== undefined;
@@ -112,6 +113,7 @@ const LoginForm = ({
   const [emailFromInvitation, setEmailFromInvitation] = useState(
     getEmailFromInvitation(loginData),
   );
+
   const [identifier, setIdentifier] = useState(
     getEmailFromInvitation(loginData),
   );
@@ -123,7 +125,7 @@ const LoginForm = ({
   const [identifierValid, setIdentifierValid] = useState(true);
   const [password, setPassword] = useState("");
 
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(true);
   const [isLdapLoginChecked, setIsLdapLoginChecked] = useState(
     ldapEnabled || false,
   );
@@ -271,8 +273,13 @@ const LoginForm = ({
       : undefined;
 
     const pwd = isLdapLoginChecked ? pass : undefined;
+    let confirmData = "";
 
-    const confirmData = getConfirmDataFromInvitation(loginData);
+    try {
+      if (linkData) confirmData = JSON.parse(atob(linkData));
+    } catch (e) {
+      console.error("parse error", e);
+    }
 
     isDesktop && checkPwd();
     const session = !isChecked;
@@ -319,7 +326,7 @@ const LoginForm = ({
         }
         return res;
       })
-      .then((res: string | object) => {
+      .then((res: string | object | undefined) => {
         const isConfirm = typeof res === "string" && res.includes("confirm");
         const redirectPath =
           referenceUrl || sessionStorage.getItem("referenceUrl");
@@ -376,7 +383,7 @@ const LoginForm = ({
     router,
     clientId,
     referenceUrl,
-    loginData,
+    linkData,
   ]);
 
   const onBlurEmail = () => {
@@ -416,7 +423,7 @@ const LoginForm = ({
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Enter") {
+      if (e.key === ButtonKeys.enter) {
         if (isModalOpen) return;
 
         onSubmit();
@@ -439,6 +446,12 @@ const LoginForm = ({
 
   return (
     <form className="auth-form-container">
+      {!emailFromInvitation && !client && (
+        <Text fontSize="16px" fontWeight="600" className="sign-in-subtitle">
+          {t("Common:LoginButton")}
+        </Text>
+      )}
+
       {client && (
         <OAuthClientInfo
           name={client.name}
@@ -516,7 +529,7 @@ const LoginForm = ({
         label={
           isLoading ? t("Common:LoadingProcessing") : t("Common:LoginButton")
         }
-        tabIndex={1}
+        tabIndex={5}
         isDisabled={isLoading}
         isLoading={isLoading}
         onClick={onSubmit}

@@ -26,10 +26,11 @@
 
 import styled from "styled-components";
 
-import { ModalDialog } from "../../components/modal-dialog";
 import { globalColors } from "../../themes";
 
-const StyledModalDialog = styled(ModalDialog)`
+const StyledBodyContent = styled.div`
+  display: contents;
+
   .radio {
     padding-bottom: 8px;
   }
@@ -85,4 +86,4 @@ const StyledModalDialog = styled(ModalDialog)`
   }
 `;
 
-export default StyledModalDialog;
+export { StyledBodyContent };

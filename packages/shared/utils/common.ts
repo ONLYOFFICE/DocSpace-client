@@ -30,6 +30,7 @@
 
 import find from "lodash/find";
 import moment from "moment-timezone";
+import { findWindows } from "windows-iana";
 import { isMobile } from "react-device-detect";
 import { I18nextProviderProps } from "react-i18next";
 import sjcl from "sjcl";
@@ -73,7 +74,7 @@ import { TI18n, TTranslation } from "../types";
 import { TUser } from "../api/people/types";
 import { TFolder, TFile, TGetFolder } from "../api/files/types";
 import { TRoom } from "../api/rooms/types";
-import { TPasswordHash } from "../api/settings/types";
+import { TPasswordHash, TTimeZone } from "../api/settings/types";
 import TopLoaderService from "../components/top-loading-indicator";
 
 import { Encoder } from "./encoder";
@@ -302,9 +303,9 @@ export const getUserRole = (user: TUser) => {
     user.access === ShareAccessRights.RoomManager ||
     user.access === ShareAccessRights.Collaborator
   )
-    //TODO: Change to People Product Id const
+    // TODO: Change to People Product Id const
     return "admin";
-  //TODO: Need refactoring
+  // TODO: Need refactoring
   if (user.isVisitor) return "user";
   if (user.isCollaborator) return "collaborator";
   if (user.isRoomAdmin) return "manager";
@@ -904,12 +905,15 @@ export const toUrlParams = (
   return str;
 };
 
+export const parseURL = (searchUrl: string) => {
+  return Object.fromEntries(new URLSearchParams(searchUrl));
+};
 export function getObjectByLocation(location: Location) {
   if (!location.search || !location.search.length) return null;
 
   try {
     const searchUrl = location.search.substring(1);
-    const params = Object.fromEntries(new URLSearchParams(searchUrl));
+    const params = parseURL(searchUrl);
     return params;
   } catch (e) {
     console.error(e);
@@ -1105,6 +1109,44 @@ export const mapCulturesToArray = (
 
     return cultureObj;
   });
+};
+
+export const mapTimezonesToArray = (
+  timezones: TTimeZone[],
+): {
+  key: string | number;
+  label: string;
+}[] => {
+  return timezones.map((timezone) => {
+    return { key: timezone.id, label: timezone.displayName };
+  });
+};
+
+export const getUserTimezone = (): string => {
+  return Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
+};
+
+export const getSelectZone = (
+  zones: {
+    key: string | number;
+    label: string;
+  }[],
+  userTimezone: string,
+) => {
+  const defaultTimezone = "UTC";
+  const isWindowsZones = zones[0].key === "Dateline Standard Time"; // TODO: get from server
+
+  if (isWindowsZones) {
+    const windowsZoneKey = findWindows(userTimezone);
+    return (
+      zones.filter((zone) => zone.key === windowsZoneKey[0]) ||
+      zones.filter((zone) => zone.key === defaultTimezone)
+    );
+  }
+  return (
+    zones.filter((zone) => zone.key === userTimezone) ||
+    zones.filter((zone) => zone.key === defaultTimezone)
+  );
 };
 
 export function getLogoUrl(

@@ -31,6 +31,8 @@ import { ContextMenuButton } from "@docspace/shared/components/context-menu-butt
 import { inject } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
+import { EmployeeStatus } from "@docspace/shared/enums";
+import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 
 const StyledContextMenu = styled(ContextMenu)`
   min-width: auto !important;
@@ -48,7 +50,6 @@ const GroupMember = ({
     "People",
     "Profile",
     "PeopleTranslations",
-    "ProfileAction",
     "Common",
   ]);
 
@@ -92,6 +93,9 @@ const GroupMember = ({
           <div className="name" style={{}} title={groupMember.displayName}>
             {groupMember.displayName}
           </div>
+          {groupMember.status === EmployeeStatus.Pending && (
+            <StyledSendClockIcon />
+          )}
         </div>
         <div className="email" title={groupMember.email}>
           {groupMember.email}

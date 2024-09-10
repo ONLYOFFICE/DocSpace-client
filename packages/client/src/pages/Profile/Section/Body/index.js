@@ -156,7 +156,6 @@ export default inject(
       "Profile",
       "Common",
       "PeopleTranslations",
-      "ProfileAction",
       "ResetApplicationDialog",
       "BackupCodesDialog",
       "DeleteSelfProfileDialog",

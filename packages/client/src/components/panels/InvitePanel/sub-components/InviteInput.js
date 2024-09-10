@@ -39,9 +39,10 @@ import { ComboBox } from "@docspace/shared/components/combobox";
 
 import Filter from "@docspace/shared/api/people/filter";
 import BetaBadge from "../../../BetaBadgeWrapper";
-import { getMembersList } from "@docspace/shared/api/people";
+import { getMembersList, getUserList } from "@docspace/shared/api/people";
 import {
   AccountsSearchArea,
+  EmployeeStatus,
   EmployeeType,
   RoomsType,
   ShareAccessRights,
@@ -50,8 +51,7 @@ import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 import { isBetaLanguage } from "@docspace/shared/utils";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
-import AddUsersPanel from "../../AddUsersPanel";
-import { getAccessOptions, getTopFreeRole, isPaidUserRole } from "../utils";
+import { getTopFreeRole, isPaidUserRole } from "../utils";
 import AccessSelector from "../../../AccessSelector";
 
 import {
@@ -70,15 +70,19 @@ import {
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
+import { Box } from "@docspace/shared/components/box";
+import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 
 const minSearchValue = 2;
+const filterSeparator = ";";
+const regex =
+  /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 const InviteInput = ({
   defaultAccess,
   setInviteLanguage,
   hideSelector,
   inviteItems,
-  onClose,
   roomId,
   roomType,
   setInviteItems,
@@ -87,35 +91,33 @@ const InviteInput = ({
   language,
   isOwner,
   inputsRef,
-  addUsersPanelVisible,
   setAddUsersPanelVisible,
   isMobileView,
   cultureNames,
   i18n,
   setCultureKey,
-  standalone,
   isPaidUserAccess,
   setInvitePaidUsersCount,
   isUserTariffLimit,
+  removeExist,
+  inputValue,
+  setInputValue,
+  usersList,
+  setUsersList,
 }) => {
   const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
-  const [inputValue, setInputValue] = useState("");
-  const [usersList, setUsersList] = useState([]);
+  const [invitedUsers, setInvitedUsers] = useState(new Map());
+
   const [isChangeLangMail, setIsChangeLangMail] = useState(false);
   const [isAddEmailPanelBlocked, setIsAddEmailPanelBlocked] = useState(true);
 
   const [selectedAccess, setSelectedAccess] = useState(defaultAccess);
   const [dropDownWidth, setDropDownWidth] = useState(0);
+  const [searchRequestRunning, setSearchRequestRunning] = useState(false);
 
   const searchRef = useRef();
-
-  const selectedLanguage = cultureNames.find((item) => item.key === language) ||
-    cultureNames.find((item) => item.key === culture.key) || {
-      key: language,
-      label: "",
-      isBeta: isBetaLanguage(language),
-    };
+  const prevDropDownContent = useRef(null);
 
   useEffect(() => {
     setTimeout(() => {
@@ -124,14 +126,52 @@ const InviteInput = ({
     }, 0);
   });
 
+  const selectedLanguage = useMemo(
+    () =>
+      cultureNames.find((item) => item.key === language) ||
+      cultureNames.find((item) => item.key === culture.key) || {
+        key: language,
+        label: "",
+        isBeta: isBetaLanguage(language),
+      },
+    [cultureNames, language, culture],
+  );
+
+  const cultureNamesNew = useMemo(
+    () =>
+      cultureNames.map((item) => ({
+        label: item.label,
+        key: item.key,
+        isBeta: isBetaLanguage(item.key),
+      })),
+    [cultureNames],
+  );
+
   useEffect(() => {
-    !culture.key &&
+    if (!culture.key) {
       setInviteLanguage({
         key: language,
         label: selectedLanguage.label,
         isBeta: isBetaLanguage(language),
       });
+    }
   }, []);
+
+  const onLanguageSelect = (language) => {
+    setInviteLanguage(language);
+    setCultureKey(language.key);
+    if (language.key !== i18n.language) setIsChangeLangMail(true);
+    else setIsChangeLangMail(false);
+  };
+
+  const onResetLangMail = () => {
+    setInviteLanguage({
+      key: selectedLanguage.key,
+      label: selectedLanguage.label,
+      isBeta: selectedLanguage.isBeta,
+    });
+    setIsChangeLangMail(false);
+  };
 
   const toUserItems = (query) => {
     const addresses = parseAddresses(query);
@@ -192,38 +232,65 @@ const InviteInput = ({
       }
     }
 
-    return {
-      email: addresses[0].email,
-      id: uid(),
-      access: userAccess,
-      displayName: addresses[0].email,
-      errors: addresses[0].parseErrors,
-      isEmailInvite: true,
-    };
+    return [
+      {
+        email: addresses[0].email,
+        id: uid(),
+        access: userAccess,
+        displayName: addresses[0].email,
+        errors: addresses[0].parseErrors,
+        isEmailInvite: true,
+      },
+    ];
   };
 
   const searchByQuery = async (value) => {
-    const query = value.trim();
-
-    if (query.length >= minSearchValue) {
-      const searchArea = isPublicRoomType
-        ? AccountsSearchArea.People
-        : AccountsSearchArea.Any;
-      const filter = Filter.getFilterWithOutDisabledUser();
-      filter.search = query;
-
-      const users = await getMembersList(searchArea, roomId, filter);
-
-      setUsersList(users.items);
-
-      if (users.total) setIsAddEmailPanelBlocked(false);
-    }
+    const query = getParts(value.trim()).join(filterSeparator);
 
     if (!query) {
       setInputValue("");
       setUsersList([]);
       setIsAddEmailPanelBlocked(true);
+      setSearchRequestRunning(false);
+
+      return;
     }
+
+    let isBlocked = true;
+
+    if (query.length >= minSearchValue) {
+      const filter = Filter.getDefault();
+
+      const searchArea = isPublicRoomType
+        ? AccountsSearchArea.People
+        : AccountsSearchArea.Any;
+
+      filter.search = query;
+      filter.filterSeparator = filterSeparator;
+
+      const users =
+        roomId === -1
+          ? await getUserList(filter)
+          : await getMembersList(searchArea, roomId, filter);
+
+      setUsersList(
+        roomId === -1
+          ? users.items.map((value) => ({ ...value, shared: true }))
+          : users.items,
+      );
+
+      if (users.total) isBlocked = false;
+    }
+
+    const parts = getParts(value);
+
+    parts.forEach((part) => {
+      isBlocked = regex.test(part) ? false : isBlocked;
+    });
+
+    setIsAddEmailPanelBlocked(isBlocked);
+
+    setSearchRequestRunning(false);
   };
 
   const debouncedSearch = useCallback(
@@ -247,41 +314,8 @@ const InviteInput = ({
       return;
     }
 
-    if (roomId !== -1) {
-      debouncedSearch(clearValue);
-    }
-
-    const regex =
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{0,}))$/g;
-
-    const parts = getParts(value);
-    for (let i = 0; i < parts.length; i += 1) {
-      if (regex.test(parts[i])) {
-        setIsAddEmailPanelBlocked(false);
-        return;
-      }
-    }
-
-    setIsAddEmailPanelBlocked(true);
-  };
-
-  const removeExist = (items) => {
-    const filtered = items.reduce((unique, current) => {
-      const isUnique = !unique.some((obj) =>
-        obj.isGroup ? obj.id === current.id : obj.email === current.email,
-      );
-
-      if (!isUnique && isPaidUserAccess(current.access))
-        setInvitePaidUsersCount(-1);
-
-      isUnique && unique.push(current);
-
-      return unique;
-    }, []);
-
-    if (items.length > filtered.length) toastr.warning(t("UsersAlreadyAdded"));
-
-    return filtered;
+    setSearchRequestRunning(true);
+    debouncedSearch(clearValue);
   };
 
   const getItemContent = (item) => {
@@ -293,6 +327,7 @@ const InviteInput = ({
       id,
       shared,
       isGroup = false,
+      status,
     } = item;
 
     item.access = selectedAccess;
@@ -349,9 +384,12 @@ const InviteInput = ({
           isGroup={isGroup}
         />
         <div className="list-item_content">
-          <SearchItemText primary disabled={shared}>
-            {displayName || groupName}
-          </SearchItemText>
+          <Box displayProp="flex" alignItems="center" gapProp="8px">
+            <SearchItemText primary disabled={shared}>
+              {displayName || groupName}
+            </SearchItemText>
+            {status === EmployeeStatus.Pending && <StyledSendClockIcon />}
+          </Box>
           <SearchItemText>{email}</SearchItemText>
         </div>
         {shared && <SearchItemText info>{t("Common:Invited")}</SearchItemText>}
@@ -360,51 +398,69 @@ const InviteInput = ({
   };
 
   const addEmail = () => {
-    if (!inputValue.trim()) return;
+    if (!inputValue.trim() || searchRequestRunning) return;
 
     const items = toUserItems(inputValue);
 
-    const newItems =
-      items.length > 1 ? [...items, ...inviteItems] : [items, ...inviteItems];
+    const filteredItems = items
+      .filter(
+        (item) =>
+          !usersList.find((value) => value.email === item.email)?.shared,
+      )
+      .map((item) => {
+        const userItem = usersList.find((value) => value.email === item.email);
+
+        if (userItem) {
+          userItem.access = selectedAccess;
+          if (userItem.isOwner || userItem.isAdmin)
+            userItem.access = ShareAccessRights.RoomManager;
+
+          if (userItem.isGroup && checkIfAccessPaid(userItem.access)) {
+            const topFreeRole = getTopFreeRole(t, roomType);
+            userItem.access = topFreeRole.access;
+            userItem.warning = t("GroupMaxAvailableRoleWarning", {
+              roleName: topFreeRole.label,
+            });
+          }
+
+          if (
+            isUserTariffLimit &&
+            userItem.isVisitor &&
+            isPaidUserRole(item.access)
+          ) {
+            const freeRole = getTopFreeRole(t, roomType)?.access;
+
+            if (freeRole) {
+              userItem.access = freeRole;
+              toastr.error(<PaidQuotaLimitError />);
+            }
+          }
+
+          return userItem;
+        }
+
+        return item;
+      });
+
+    if (filteredItems.length !== items.length) {
+      toastr.warning(t("UsersAlreadyAdded"));
+    }
+
+    if (!filteredItems.length) {
+      setInputValue("");
+      setIsAddEmailPanelBlocked(true);
+      setUsersList([]);
+
+      return;
+    }
+
+    const newItems = [...filteredItems, ...inviteItems];
 
     const filtered = removeExist(newItems);
 
     setInviteItems(filtered);
     setInputValue("");
     setIsAddEmailPanelBlocked(true);
-    setUsersList([]);
-  };
-
-  const addItems = (users) => {
-    const topFreeRole = getTopFreeRole(t, roomType);
-    users.forEach((u) => {
-      if (u.isGroup && checkIfAccessPaid(u.access)) {
-        u.access = topFreeRole.access;
-        u.warning = t("GroupMaxAvailableRoleWarning", {
-          roleName: topFreeRole.label,
-        });
-      }
-
-      if (
-        isUserTariffLimit &&
-        (!u.avatar || u.isVisitor) &&
-        isPaidUserRole(u.access)
-      ) {
-        const freeRole = getTopFreeRole(t, roomType)?.access;
-
-        if (freeRole) {
-          u.access = freeRole;
-          toastr.error(<PaidQuotaLimitError />);
-        }
-      }
-    });
-
-    const items = [...users, ...inviteItems];
-
-    const filtered = removeExist(items);
-
-    setInviteItems(filtered);
-    setInputValue("");
     setUsersList([]);
   };
 
@@ -416,43 +472,43 @@ const InviteInput = ({
     setIsAddEmailPanelBlocked(true);
   };
 
-  const closeUsersPanel = () => {
-    setAddUsersPanelVisible(false);
-  };
+  const dropDownContent = useMemo(() => {
+    const partsLength = getParts(inputValue).length;
 
-  const foundUsers = usersList.map((user) => getItemContent(user));
+    if (searchRequestRunning && prevDropDownContent.current) {
+      return prevDropDownContent.current;
+    }
 
-  const addEmailPanel = (
-    <DropDownItem
-      className="list-item"
-      style={{ width: "inherit" }}
-      textOverflow
-      onClick={addEmail}
-      height={48}
-    >
-      <div className="email-list_avatar">
-        <Avatar size="min" role="user" source={AtReactSvgUrl} />
-        <Text truncate fontSize="14px" fontWeight={600}>
-          {inputValue}
-        </Text>
-      </div>
-      <div className="email-list_add-button">
-        <Text fontSize="13px" fontWeight={600}>
-          {t("Common:AddButton")}
-        </Text>
-        <ArrowIcon />
-      </div>
-    </DropDownItem>
-  );
-
-  const accessOptions = getAccessOptions(
-    t,
-    roomType,
-    false,
-    true,
-    isOwner,
-    standalone,
-  );
+    if (partsLength === 1 && !!usersList.length) {
+      prevDropDownContent.current = usersList.map((user) =>
+        getItemContent(user),
+      );
+    } else {
+      prevDropDownContent.current = (
+        <DropDownItem
+          className="list-item"
+          style={{ width: "inherit" }}
+          textOverflow
+          onClick={addEmail}
+          height={48}
+        >
+          <div className="email-list_avatar">
+            <Avatar size="min" role="user" source={AtReactSvgUrl} />
+            <Text truncate fontSize="14px" fontWeight={600}>
+              {inputValue}
+            </Text>
+          </div>{" "}
+          <div className="email-list_add-button">
+            <Text fontSize="13px" fontWeight={600}>
+              {t("Common:AddButton")}
+            </Text>
+            <ArrowIcon />
+          </div>
+        </DropDownItem>
+      );
+    }
+    return prevDropDownContent.current;
+  }, [usersList, inputValue]);
 
   const onSelectAccess = (item) => {
     setSelectedAccess(item.access);
@@ -479,31 +535,14 @@ const InviteInput = ({
     document.addEventListener("keyup", onKeyPress);
     return () => document.removeEventListener("keyup", onKeyPress);
   });
-  const onLanguageSelect = (language) => {
-    setInviteLanguage(language);
-    setCultureKey(language.key);
-    if (language.key !== i18n.language) setIsChangeLangMail(true);
-    else setIsChangeLangMail(false);
-  };
-  const onResetLangMail = () => {
-    setInviteLanguage({
-      key: selectedLanguage.key,
-      label: selectedLanguage.label,
-      isBeta: selectedLanguage.isBeta,
-    });
-    setIsChangeLangMail(false);
-  };
 
-  const cultureNamesNew = cultureNames.map((item) => ({
-    label: item.label,
-    key: item.key,
-    isBeta: isBetaLanguage(item.key),
-  }));
+  useEffect(() => {
+    const newInviteItems = new Map();
 
-  const invitedUsers = useMemo(
-    () => inviteItems.map((item) => item.id),
-    [inviteItems],
-  );
+    inviteItems.forEach((item) => newInviteItems.set(item?.id, item));
+
+    setInvitedUsers((value) => new Map([...value, ...newInviteItems]));
+  }, [inviteItems]);
 
   return (
     <>
@@ -614,8 +653,9 @@ const InviteInput = ({
             withBackdrop={false}
             zIndex={399}
             {...dropDownMaxHeight}
+            isRequestRunning={searchRequestRunning}
           >
-            {!!usersList.length ? foundUsers : addEmailPanel}
+            {dropDownContent}
           </StyledDropDown>
         )}
 
@@ -633,27 +673,6 @@ const InviteInput = ({
             selectionErrorText: <PaidQuotaLimitError />,
           })}
         />
-
-        {!hideSelector && addUsersPanelVisible && (
-          <AddUsersPanel
-            onParentPanelClose={onClose}
-            onClose={closeUsersPanel}
-            visible={addUsersPanelVisible}
-            tempDataItems={inviteItems}
-            setDataItems={addItems}
-            accessOptions={accessOptions}
-            isMultiSelect
-            isEncrypted={true}
-            defaultAccess={selectedAccess}
-            withoutBackground={isMobileView}
-            withBlur={!isMobileView}
-            roomId={roomId}
-            withGroups={!isPublicRoomType}
-            withAccessRights
-            invitedUsers={invitedUsers}
-            disableDisabledUsers
-          />
-        )}
       </StyledInviteInputContainer>
     </>
   );
@@ -672,7 +691,7 @@ export default inject(
       isPaidUserAccess,
     } = dialogsStore;
 
-    const { culture: language, standalone } = settingsStore;
+    const { culture: language } = settingsStore;
     const { isUserTariffLimit } = currentQuotaStore;
     return {
       language,
@@ -684,7 +703,6 @@ export default inject(
       hideSelector: invitePanelOptions.hideSelector,
       defaultAccess: invitePanelOptions.defaultAccess,
       isOwner,
-      standalone,
       isPaidUserAccess,
       setInvitePaidUsersCount,
       isUserTariffLimit,

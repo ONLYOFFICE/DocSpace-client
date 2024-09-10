@@ -32,6 +32,7 @@ import React, {
   ChangeEvent,
   FocusEvent,
   MouseEvent,
+  useEffect,
 } from "react";
 import { TooltipRefProps } from "react-tooltip";
 
@@ -54,26 +55,28 @@ import {
   StyledTooltipItem,
 } from "./PasswordInput.styled";
 import {
+  PasswordInputHandle,
   PasswordInputProps,
   TPasswordSettings,
   TPasswordValidation,
+  TState,
 } from "./PasswordInput.types";
 import { globalColors } from "../../themes";
 
-const PasswordInput = React.forwardRef(
+const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
   (
     {
       inputType = InputType.password,
       inputValue,
       clipActionResource,
       emailInputName,
+      passwordSettings,
       onBlur,
       onKeyDown,
       onValidateInput,
       onChange,
       isDisabled,
       simpleView,
-      passwordSettings,
       generatorSpecial,
 
       clipCopiedResource,
@@ -104,10 +107,22 @@ const PasswordInput = React.forwardRef(
       tooltipOffsetTop,
       isAutoFocussed,
       tooltipAllowedCharacters,
+      isSimulateType,
+      simulateSymbol,
     }: PasswordInputProps,
     ref,
   ) => {
-    const [state, setState] = useState({
+    const usePrevious = (value: string) => {
+      const inputValueRef = useRef<string>();
+      useEffect(() => {
+        inputValueRef.current = value;
+      });
+      return inputValueRef.current;
+    };
+
+    const prevInputValue = usePrevious(inputValue ?? "");
+
+    const [state, setState] = useState<TState>({
       type: inputType,
       value: inputValue,
       copyLabel: clipActionResource,
@@ -118,6 +133,8 @@ const PasswordInput = React.forwardRef(
       validCapital: false,
       validSpecial: false,
     });
+
+    const [caretPosition, setCaretPosition] = useState();
 
     const refProgress = useRef(null);
     const refTooltip = useRef(null);
@@ -178,7 +195,7 @@ const PasswordInput = React.forwardRef(
       [onKeyDown],
     );
 
-    const changeInputType = () => {
+    const changeInputType = React.useCallback(() => {
       const newType =
         state.type === InputType.text ? InputType.password : InputType.text;
 
@@ -186,7 +203,13 @@ const PasswordInput = React.forwardRef(
         ...s,
         type: newType,
       }));
-    };
+    }, [state.type]);
+
+    React.useEffect(() => {
+      if (isDisabled && state.type === InputType.text) {
+        changeInputType();
+      }
+    }, [isDisabled, changeInputType, state.type]);
 
     const testStrength = useCallback(
       (value: string) => {
@@ -268,10 +291,54 @@ const PasswordInput = React.forwardRef(
       [onValidateInput, testStrength],
     );
 
+    const setPasswordSettings = useCallback(
+      (newPassword: string) => {
+        let newValue;
+
+        if (!state.value) return newPassword;
+
+        const oldPassword = state.value ?? "";
+        const oldPasswordLength = oldPassword.length;
+        const newCaretPosition = document.getElementById(
+          "conversion-password",
+        )?.selectionStart;
+
+        setCaretPosition(newCaretPosition);
+        const newCharactersUntilCaret = newPassword.substring(
+          0,
+          newCaretPosition,
+        );
+
+        const unchangedStartCharacters = newCharactersUntilCaret
+          .split("")
+          .filter((el) => el === simulateSymbol).length;
+
+        const unchangedEndingCharacters =
+          newPassword.substring(newCaretPosition).length;
+        const addedCharacters = newCharactersUntilCaret.substring(
+          unchangedStartCharacters,
+        );
+
+        const startingPartOldPassword = oldPassword.substring(
+          0,
+          unchangedStartCharacters,
+        );
+        const countOfCharacters = oldPasswordLength - unchangedEndingCharacters;
+        const endingPartOldPassword = oldPassword.substring(countOfCharacters);
+
+        newValue = startingPartOldPassword + addedCharacters;
+
+        if (unchangedEndingCharacters) {
+          newValue += endingPartOldPassword;
+        }
+
+        return newValue;
+      },
+      [simulateSymbol, state.value],
+    );
+
     const onChangeAction = useCallback(
       (e: ChangeEvent<HTMLInputElement>) => {
-        onChange?.(e);
-
         if (refTooltip.current) {
           const tooltip = refTooltip.current as TooltipRefProps;
           if (tooltip?.isOpen) {
@@ -279,17 +346,30 @@ const PasswordInput = React.forwardRef(
           }
         }
 
+        let value = e.target.value;
+        if (isSimulateType) {
+          value = setPasswordSettings(e.target.value);
+        }
+
+        onChange?.(e, value);
+
         if (simpleView) {
           setState((s) => ({
             ...s,
-            value: e.target.value,
+            value,
           }));
           return;
         }
 
-        checkPassword(e.target.value);
+        checkPassword(value);
       },
-      [onChange, simpleView, checkPassword],
+      [
+        onChange,
+        simpleView,
+        checkPassword,
+        isSimulateType,
+        setPasswordSettings,
+      ],
     );
 
     const getNewPassword = React.useCallback(() => {
@@ -398,6 +478,22 @@ const PasswordInput = React.forwardRef(
       setState((s) => ({ ...s, copyLabel: clipActionResource }));
     }, [clipActionResource, clipCopiedResource]);
 
+    React.useEffect(() => {
+      if (caretPosition && state.type === "password" && isSimulateType) {
+        document
+          .getElementById("conversion-password")
+          .setSelectionRange(caretPosition, caretPosition);
+      }
+    }, [caretPosition, state.type, state.value, isSimulateType]);
+
+    useEffect(() => {
+      if (isSimulateType && inputValue !== prevInputValue) {
+        onChangeAction?.({
+          target: { value: inputValue },
+        } as ChangeEvent<HTMLInputElement>);
+      }
+    }, [inputValue, prevInputValue, isSimulateType, onChangeAction]);
+
     React.useImperativeHandle(
       ref,
       () => {
@@ -501,6 +597,9 @@ const PasswordInput = React.forwardRef(
         type === "password" ? "close" : "open"
       }`;
 
+      const copyPassword = value ?? "";
+      const bullets = copyPassword.replace(/(.)/g, simulateSymbol);
+
       return (
         <>
           <InputBlock
@@ -511,12 +610,14 @@ const PasswordInput = React.forwardRef(
             isDisabled={isDisabled}
             iconName={iconName}
             iconButtonClassName={iconButtonClassName}
-            value={value ?? ""}
+            value={
+              isSimulateType && type === "password" ? bullets : value ?? ""
+            }
             onIconClick={changeInputType}
             onChange={onChangeAction}
             scale={scale}
             size={size}
-            type={type}
+            type={isSimulateType ? InputType.text : type}
             iconSize={16}
             isIconFill
             onBlur={onBlurAction}
@@ -610,6 +711,8 @@ PasswordInput.defaultProps = {
     specSymbolsRegexStr: "(?=.*[\\x21-\\x2F\\x3A-\\x40\\x5B-\\x60\\x7B-\\x7E])",
   },
   isFullWidth: false,
+  isSimulateType: false,
+  simulateSymbol: "•",
 };
 
 export { PasswordInput };

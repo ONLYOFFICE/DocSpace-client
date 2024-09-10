@@ -51,6 +51,10 @@ const StyledLinks = styled.div`
   }
 `;
 
+const Strong = styled.strong`
+  font-weight: 600;
+`;
+
 const StyledLinkRow = styled.div<{ isExpired?: boolean; isDisabled?: boolean }>`
   display: flex;
   gap: 8px;
@@ -143,6 +147,11 @@ const StyledLinkRow = styled.div<{ isExpired?: boolean; isDisabled?: boolean }>`
       min-width: 16px;
       min-height: 16px;
     }
+
+    .link-actions_copy-icon {
+      min-width: 16px;
+      min-height: 16px;
+    }
   }
 
   .loader {
@@ -182,4 +191,4 @@ const StyledDropDown = styled(DropDown)`
   }
 `;
 
-export { StyledLinks, StyledLinkRow, StyledSquare, StyledDropDown };
+export { StyledLinks, StyledLinkRow, StyledSquare, StyledDropDown, Strong };

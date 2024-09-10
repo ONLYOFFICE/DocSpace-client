@@ -86,6 +86,8 @@ const StyledInvitePanel = styled.div`
 `;
 
 const ScrollList = styled.div`
+  position: absolute;
+
   width: 100%;
   height: ${(props) =>
     props.scrollAllPanelContent && props.isTotalListHeight
@@ -115,7 +117,6 @@ const StyledInviteUserBody = styled.div`
 const StyledSubHeader = styled(Heading)`
   font-weight: 700;
   font-size: 16px;
-  padding-inline: 16px;
   margin: 16px 0 8px;
 
   ${(props) =>
@@ -128,7 +129,6 @@ const StyledSubHeader = styled(Heading)`
 `;
 
 const StyledDescription = styled(Text)`
-  padding-inline: 16px;
   color: ${(props) =>
     props.theme.createEditRoomDialog.commonParam.descriptionColor};
   margin-bottom: 16px;
@@ -141,15 +141,12 @@ const StyledDescription = styled(Text)`
 StyledDescription.defaultProps = { theme: Base };
 
 const StyledRow = styled.div`
-  width: calc(100% - 32px) !important;
-
   display: inline-flex;
   align-items: center;
   gap: 8px;
 
   min-height: 41px;
 
-  margin-inline-start: 16px;
   box-sizing: border-box;
   border-bottom: none;
 
@@ -169,19 +166,11 @@ const StyledRow = styled.div`
   .warning {
     margin-inline-start: auto;
   }
-
-  .combo-button-label {
-    color: ${(props) => props.theme.accessRightSelect.descriptionColor};
-  }
-  .combo-buttons_expander-icon path {
-    fill: ${(props) => props.theme.text.disableColor};
-  }
 `;
 
 const StyledInviteInput = styled.div`
   ${fillAvailableWidth}
 
-  margin-inline-start: 16px;
   margin-inline-end: ${(props) => (props.hideSelector ? "16px" : "8px")};
 
   .input-link {
@@ -292,6 +281,10 @@ const StyledInviteInputContainer = styled.div`
       }
     }
   }
+
+  .access-selector {
+    margin-inline-end: 0;
+  }
 `;
 
 const StyledDropDown = styled(DropDown)`
@@ -322,7 +315,12 @@ const StyledDropDown = styled(DropDown)`
       gap: 4px;
 
       p {
-        color: ${(props) => props.theme.filesPanels.invite.addButtonColor};
+        color: ${(props) => props.theme.currentColorScheme.main.accent};
+        ${(props) =>
+          props.isRequestRunning &&
+          css`
+            opacity: 0.65;
+          `}
       }
 
       svg {
@@ -330,7 +328,12 @@ const StyledDropDown = styled(DropDown)`
           theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"};
 
         path {
-          fill: ${(props) => props.theme.filesPanels.invite.addButtonColor};
+          fill: ${(props) => props.theme.currentColorScheme.main.accent};
+          ${(props) =>
+            props.isRequestRunning &&
+            css`
+              opacity: 0.65;
+            `}
         }
       }
     }
@@ -430,7 +433,6 @@ const StyledToggleButton = styled(ToggleButton)`
 `;
 
 const StyledInviteLanguage = styled.div`
-  padding-inline: 16px;
   margin-top: -12px;
   display: flex;
   align-items: center;

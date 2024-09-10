@@ -26,7 +26,7 @@
 
 import React, { useRef } from "react";
 
-import { ContextMenu } from "../context-menu";
+import { ContextMenu, ContextMenuRefType } from "../context-menu";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
@@ -52,17 +52,7 @@ const TableRow = (props: TableRowProps) => {
     ...rest
   } = props;
 
-  const cm = useRef<null | {
-    show: (e: React.MouseEvent | MouseEvent) => void;
-    hide: (
-      e:
-        | React.MouseEvent
-        | MouseEvent
-        | Event
-        | React.ChangeEvent<HTMLInputElement>,
-    ) => void;
-    menuRef: { current: HTMLDivElement };
-  }>(null);
+  const cm = useRef<ContextMenuRefType>(null);
   const row = useRef<HTMLDivElement | null>(null);
 
   const onContextMenu = (e: React.MouseEvent) => {

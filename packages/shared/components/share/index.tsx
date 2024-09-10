@@ -41,7 +41,6 @@ import {
 } from "../../api/files";
 import { TAvailableExternalRights, TFileLink } from "../../api/files/types";
 import { isDesktop } from "../../utils";
-import { copyShareLink } from "../../utils/copy";
 import { TOption } from "../combobox";
 import { Text } from "../text";
 import { IconButton } from "../icon-button";
@@ -55,7 +54,8 @@ import ShareLoader from "../../skeletons/share";
 import LinkRow from "./sub-components/LinkRow";
 
 import { StyledLinks } from "./Share.styled";
-import { ShareProps, TLink } from "./Share.types";
+import { AccessItem, ShareProps, TLink } from "./Share.types";
+import { copyDocumentShareLink } from "./Share.helpers";
 
 const Share = (props: ShareProps) => {
   const {
@@ -118,8 +118,7 @@ const Share = (props: ShareProps) => {
 
       if (link) {
         setFileLinks([link]);
-        copyShareLink(link.sharedTo.shareLink);
-        toastr.success(t("Common:GeneralAccessLinkCopied"));
+        copyDocumentShareLink(link, t);
       } else {
         setFileLinks([]);
       }
@@ -192,11 +191,17 @@ const Share = (props: ShareProps) => {
 
       const expDate = moment(link.sharedTo.expirationDate);
 
+      const isRemoveOption = item.key === "remove";
+
+      const access = isRemoveOption
+        ? (item.access as ShareAccessRights)
+        : link.access;
+
       const res = editFileLink
         ? await editFileLink(
             infoPanelSelection.id,
             link.sharedTo.id,
-            link.access,
+            access,
             link.sharedTo.primary,
             item.internal || false,
             expDate,
@@ -204,21 +209,26 @@ const Share = (props: ShareProps) => {
         : await editExternalLink(
             infoPanelSelection.id,
             link.sharedTo.id,
-            link.access,
+            access,
             link.sharedTo.primary,
             item.internal || false,
             expDate,
           );
+
+      if (isRemoveOption) {
+        deleteLink(link.sharedTo.id);
+        toastr.success(t("Common:LinkRemoved"));
+        return;
+      }
       updateLink(link, res);
 
-      copyShareLink(link.sharedTo.shareLink);
-      toastr.success(t("Common:LinkSuccessfullyCopied"));
+      copyDocumentShareLink(res, t);
     } catch (e) {
       toastr.error(e as TData);
     }
   };
 
-  const changeAccessOption = async (item: TOption, link: TFileLink) => {
+  const changeAccessOption = async (item: AccessItem, link: TFileLink) => {
     try {
       setLoadingLinks([...loadingLinks, link.sharedTo.id]);
 
@@ -250,8 +260,7 @@ const Share = (props: ShareProps) => {
         if (item.access === ShareAccessRights.DenyAccess) {
           toastr.success(t("Common:LinkAccessDenied"));
         } else {
-          copyShareLink(link.sharedTo.shareLink);
-          toastr.success(t("Common:LinkSuccessfullyCopied"));
+          copyDocumentShareLink(res, t);
         }
       }
     } catch (e) {
@@ -288,8 +297,7 @@ const Share = (props: ShareProps) => {
 
       updateLink(link, res);
 
-      copyShareLink(link.sharedTo.shareLink);
-      toastr.success(t("Common:LinkSuccessfullyCopied"));
+      copyDocumentShareLink(res, t);
     } catch (e) {
       toastr.error(e as TData);
     }

@@ -34,11 +34,13 @@ const PublicRouteWrapper = ({
   isAuthenticated,
   isPortalDeactivate,
   tenantStatus,
+  isFirstLoaded,
   wizardCompleted,
 }: Partial<PublicRouteProps>) => {
   return (
     <PublicRoute
       tenantStatus={tenantStatus!}
+      isFirstLoaded={isFirstLoaded!}
       isAuthenticated={isAuthenticated}
       wizardCompleted={wizardCompleted!}
       isPortalDeactivate={isPortalDeactivate!}
@@ -50,10 +52,12 @@ const PublicRouteWrapper = ({
 
 export default inject<TStore>(({ authStore, settingsStore }) => {
   const { isAuthenticated } = authStore;
-  const { wizardCompleted, tenantStatus, isPortalDeactivate } = settingsStore;
+  const { wizardCompleted, tenantStatus, isPortalDeactivate, isFirstLoaded } =
+    settingsStore;
 
   return {
     tenantStatus,
+    isFirstLoaded,
     wizardCompleted,
     isAuthenticated,
     isPortalDeactivate,

@@ -42,7 +42,6 @@ class DialogsStore {
   versionHistoryStore;
   infoPanelStore;
 
-  ownerPanelVisible = false;
   moveToPanelVisible = false;
   restorePanelVisible = false;
   copyPanelVisible = false;
@@ -110,7 +109,6 @@ class DialogsStore {
   linkParams = null;
   leaveRoomDialogVisible = false;
   changeRoomOwnerIsVisible = false;
-  changeRoomOwnerData = null;
   editMembersGroup = null;
   pdfFormEditVisible = false;
   pdfFormEditData = null;
@@ -171,10 +169,6 @@ class DialogsStore {
 
   setIsFolderActions = (isFolderActions) => {
     this.isFolderActions = isFolderActions;
-  };
-
-  setChangeOwnerPanelVisible = (ownerPanelVisible) => {
-    this.ownerPanelVisible = ownerPanelVisible;
   };
 
   setMoveToPanelVisible = (visible) => {
@@ -523,17 +517,8 @@ class DialogsStore {
     this.leaveRoomDialogVisible = visible;
   };
 
-  setChangeRoomOwnerIsVisible = (
-    visible,
-    showBackButton = false,
-    setRoomParams,
-  ) => {
+  setChangeRoomOwnerIsVisible = (visible) => {
     this.changeRoomOwnerIsVisible = visible;
-
-    this.changeRoomOwnerData = {
-      showBackButton,
-      setRoomParams,
-    };
   };
 
   setDeleteLinkDialogVisible = (visible) => {

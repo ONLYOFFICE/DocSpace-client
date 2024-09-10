@@ -13,7 +13,7 @@ const PATH = "/authentication/confirm";
 
 const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 
-const getConfirmSuccess = (result: 0 | 1 | 2 | 3 | 4 | 5 | 6 = 0) => {
+export const getConfirmSuccess = (result: 0 | 1 | 2 | 3 | 4 | 5 | 6 = 0) => {
   return {
     response: { result },
     count: 1,

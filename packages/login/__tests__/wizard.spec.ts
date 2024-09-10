@@ -38,7 +38,7 @@ const URL = "/login/wizard";
 const NEXT_REQUEST_URL = "*/**/login/wizard";
 
 test("wizard render", async ({ page, mockRequest }) => {
-  await mockRequest.setHeader(NEXT_REQUEST_URL, HEADER_WIZARD_SETTINGS);
+  await mockRequest.setHeaders(NEXT_REQUEST_URL, [HEADER_WIZARD_SETTINGS]);
 
   await page.goto(URL);
 
@@ -50,7 +50,7 @@ test("wizard render", async ({ page, mockRequest }) => {
 });
 
 test("wizard success", async ({ page, mockRequest }) => {
-  await mockRequest.setHeader(NEXT_REQUEST_URL, HEADER_WIZARD_SETTINGS);
+  await mockRequest.setHeaders(NEXT_REQUEST_URL, [HEADER_WIZARD_SETTINGS]);
   await mockRequest.router(endpoints.wizardComplete);
 
   await page.goto(URL);
@@ -79,7 +79,7 @@ test("wizard success", async ({ page, mockRequest }) => {
 });
 
 test("wizard error", async ({ page, mockRequest }) => {
-  await mockRequest.setHeader(NEXT_REQUEST_URL, HEADER_WIZARD_SETTINGS);
+  await mockRequest.setHeaders(NEXT_REQUEST_URL, [HEADER_WIZARD_SETTINGS]);
   await mockRequest.router(endpoints.wizardComplete);
 
   await page.goto(URL);
@@ -100,8 +100,10 @@ test("wizard error", async ({ page, mockRequest }) => {
 });
 
 test("wizard with license success", async ({ page, mockRequest }) => {
-  await mockRequest.setHeader(NEXT_REQUEST_URL, HEADER_WIZARD_SETTINGS);
-  await mockRequest.setHeader(NEXT_REQUEST_URL, HEADER_LICENCE_REQUIRED);
+  await mockRequest.setHeaders(NEXT_REQUEST_URL, [
+    HEADER_WIZARD_SETTINGS,
+    HEADER_LICENCE_REQUIRED,
+  ]);
   await mockRequest.router(endpoints.wizardComplete);
   await mockRequest.router(endpoints.license);
 
@@ -138,8 +140,10 @@ test("wizard with license success", async ({ page, mockRequest }) => {
 });
 
 test("wizard with license error", async ({ page, mockRequest }) => {
-  await mockRequest.setHeader(NEXT_REQUEST_URL, HEADER_WIZARD_SETTINGS);
-  await mockRequest.setHeader(NEXT_REQUEST_URL, HEADER_LICENCE_REQUIRED);
+  await mockRequest.setHeaders(NEXT_REQUEST_URL, [
+    HEADER_WIZARD_SETTINGS,
+    HEADER_LICENCE_REQUIRED,
+  ]);
 
   await page.goto(URL);
 

@@ -26,7 +26,7 @@
 
 import { API_PREFIX, BASE_URL } from "../../utils";
 
-const PATH = "settings/complete";
+export const PATH = "settings/wizard/complete";
 
 const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 

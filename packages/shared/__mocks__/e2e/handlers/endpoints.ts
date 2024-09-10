@@ -24,9 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { loginHandler } from "./authentication";
-import { selfHandler } from "./people";
-import { completeHandler, licenseHandler } from "./settings";
+import { loginHandler, LOGIN_PATH } from "./authentication";
+import {
+  SELF_PATH_ACTIVATION_STATUS,
+  SELF_PATH_CHANGE_PASSWORD,
+  SELF_PATH_UPDATE_USER,
+  selfHandler,
+} from "./people";
+import {
+  COMPLETE_PATH,
+  completeHandler,
+  LICENCE_PATH,
+  licenseHandler,
+} from "./settings";
 
 export type TEndpoint = {
   url: string;
@@ -37,29 +47,31 @@ export type TEndpoints = {
   [key: string]: TEndpoint;
 };
 
+const BASE_URL = "*/**/api/2.0/";
+
 export const endpoints: TEndpoints = {
   wizardComplete: {
-    url: "*/**/api/2.0/settings/wizard/complete",
+    url: `${BASE_URL}${COMPLETE_PATH}`,
     dataHandler: completeHandler(),
   },
   license: {
-    url: "*/**/api/2.0/settings/license",
+    url: `${BASE_URL}${LICENCE_PATH}`,
     dataHandler: licenseHandler(),
   },
   changePassword: {
-    url: "*/**/api/2.0/people/**/password",
+    url: `${BASE_URL}${SELF_PATH_CHANGE_PASSWORD}`,
     dataHandler: selfHandler(),
   },
   activationStatus: {
-    url: "*/**/api/2.0/people/activationstatus/*",
+    url: `${BASE_URL}${SELF_PATH_ACTIVATION_STATUS}`,
     dataHandler: selfHandler(),
   },
   updateUser: {
-    url: "*/**/api/2.0/people/*",
+    url: `${BASE_URL}${SELF_PATH_UPDATE_USER}`,
     dataHandler: selfHandler(),
   },
   login: {
-    url: "*/**/api/2.0/authentication",
+    url: `${BASE_URL}${LOGIN_PATH}`,
     dataHandler: loginHandler(),
   },
 };

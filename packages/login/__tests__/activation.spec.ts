@@ -128,7 +128,9 @@ test("activation error", async ({ page, mockRequest }) => {
 });
 
 test("activation error tariffic limit", async ({ page, mockRequest }) => {
-  await mockRequest.setHeader(NEXT_REQUEST_URL_WITH_PARAMS, HEADER_TRAFF_LIMIT);
+  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
+    HEADER_TRAFF_LIMIT,
+  ]);
 
   await page.goto(URL_WITH_PARAMS);
 
@@ -140,10 +142,9 @@ test("activation error tariffic limit", async ({ page, mockRequest }) => {
 });
 
 test("activation error user existed", async ({ page, mockRequest }) => {
-  await mockRequest.setHeader(
-    NEXT_REQUEST_URL_WITH_PARAMS,
+  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
     HEADER_USER_EXISTED,
-  );
+  ]);
 
   // Expected to go to the room page or default page
   await page.goto(URL_WITH_PARAMS);
@@ -156,10 +157,9 @@ test("activation error user existed", async ({ page, mockRequest }) => {
 });
 
 test("activation error quota failed", async ({ page, mockRequest }) => {
-  await mockRequest.setHeader(
-    NEXT_REQUEST_URL_WITH_PARAMS,
+  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
     HEADER_QUOTA_FAILED,
-  );
+  ]);
 
   await page.goto(URL_WITH_PARAMS);
 

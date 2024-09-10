@@ -26,7 +26,10 @@
 
 import { API_PREFIX, BASE_URL } from "../../utils";
 
-const PATH = "people";
+export const PATH = "people";
+export const PATH_CHANGE_PASSWORD = "people/**/password";
+export const PATH_ACTIVATION_STATUS = "people/activationstatus/*";
+export const PATH_UPDATE_USER = "people/*";
 
 const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 

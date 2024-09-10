@@ -181,8 +181,8 @@ function VirtualList({
 
   const items = cleanChildren || children;
 
-  if (!maxHeight)
-    return (
+  if (!maxHeight) {
+    return enableKeyboardEvents ? (
       <div
         className="focus-trap"
         style={{ outline: "none" }}
@@ -203,7 +203,10 @@ function VirtualList({
           />
         ))}
       </div>
+    ) : (
+      items
     );
+  }
 
   return (
     <div

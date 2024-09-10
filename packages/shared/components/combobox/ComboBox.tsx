@@ -329,6 +329,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
           forceCloseClickOutside={forceCloseClickOutside}
           withoutBackground={withoutBackground}
           eventTypes={["mousedown"]}
+          enableKeyboardEvents
         >
           {dropDownBody}
         </DropDown>

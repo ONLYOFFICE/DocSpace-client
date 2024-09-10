@@ -50,7 +50,7 @@ const DropDown = (props: DropDownProps) => {
     isDefaultMode = true,
     fixedDirection = false,
     offsetLeft = 0,
-    enableKeyboardEvents = true,
+    enableKeyboardEvents = false,
   } = props;
 
   const toggleDropDown = () => {

@@ -194,4 +194,6 @@ const DropDownItem = (props: DropDownItemProps) => {
   );
 };
 
+DropDownItem.displayName = "DropDownItem";
+
 export { DropDownItem };

@@ -34,6 +34,7 @@ import React, {
 import { VariableSizeList } from "react-window";
 
 import { Scrollbar } from "../../scrollbar";
+import { DropDownItemProps } from "../../drop-down-item/DropDownItem.types";
 
 import { VirtualListProps } from "../DropDown.types";
 import { findNextNonSeparatorIndex } from "../DropDown.utils";
@@ -189,19 +190,17 @@ function VirtualList({
         ref={focusTrapRef}
         tabIndex={0}
       >
-        {items?.map((item, index) => (
-          <Row
-            key={index}
-            data={{
-              children: cleanChildren,
-              theme,
-              activeIndex,
-              activedescendant: currentIndex,
-              handleMouseMove,
-            }}
-            index={index}
-          />
-        ))}
+        {items?.map((item, index) => {
+          if (React.isValidElement(item) && currentIndex === index)
+            return React.cloneElement(
+              item as React.ReactElement<DropDownItemProps>,
+              {
+                isActiveDescendant: true,
+              },
+            );
+
+          return item;
+        })}
       </div>
     ) : (
       items

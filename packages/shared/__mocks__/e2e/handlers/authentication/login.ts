@@ -26,7 +26,7 @@
 
 import { API_PREFIX, BASE_URL } from "../../utils";
 
-const PATH = "authentication";
+export const PATH = "authentication";
 
 const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 

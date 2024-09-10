@@ -26,7 +26,7 @@
 
 import { API_PREFIX, BASE_URL } from "../../utils";
 
-const PATH = "settings/license";
+export const PATH = "settings/license";
 
 const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 

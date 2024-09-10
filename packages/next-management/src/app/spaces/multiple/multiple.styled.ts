@@ -77,6 +77,12 @@ export const StyledSpaceRow = styled(Row)`
 
 export const StyledRowContent = styled(RowContent)`
   padding-bottom: 10px;
+
+  @media ${mobile} {
+    display: flex;
+    align-items: center;
+  }
+
   .row-main-container-wrapper {
     ${isMobileOnly &&
     css`
@@ -84,10 +90,14 @@ export const StyledRowContent = styled(RowContent)`
     `}
     display: flex;
     justify-content: flex-start;
+
+    @media ${mobile} {
+      flex-direction: column;
+    }
   }
 
   .mainIcons {
-    height: 20px;
+    align-self: flex-start;
   }
 
   .user-container-wrapper {

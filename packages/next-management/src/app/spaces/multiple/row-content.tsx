@@ -80,23 +80,28 @@ export const RowContent = ({ item, tenantAlias }) => {
         )}
       </div>
 
-      <Text
-        containerMinWidth="120px"
-        fontSize="14px"
-        fontWeight={600}
-        truncate={true}
-        color={globalColors.gray}
-        className="spaces_row-current"
-      >
-        {isCurrentPortal && t("CurrentSpace")}
-      </Text>
-      <Text fontSize="12px" as="div" fontWeight={600} truncate={true}>
-        {`${t("PortalStats", {
-          roomCount: roomsCount,
-          userCount: roomAdminCount + usersCount,
-          storageSpace,
-        })}`}
-      </Text>
+      {isCurrentPortal && (
+        <Text
+          containerMinWidth="120px"
+          fontSize="14px"
+          fontWeight={600}
+          truncate={true}
+          color={globalColors.gray}
+          className="spaces_row-current"
+        >
+          {t("CurrentSpace")}
+        </Text>
+      )}
+
+      {currentDeviceType !== DeviceType.mobile && (
+        <Text fontSize="12px" as="div" fontWeight={600} truncate={true}>
+          {`${t("PortalStats", {
+            roomCount: roomsCount,
+            userCount: roomAdminCount + usersCount,
+            storageSpace,
+          })}`}
+        </Text>
+      )}
     </StyledRowContent>
   );
 };

@@ -38,7 +38,7 @@ import { useStores } from "@/hooks/useStores";
 import { RowContent } from "./row-content";
 import { StyledSpaceRow } from "./multiple.styled";
 
-export const SpacesRow = ({ item }) => {
+export const SpacesRow = ({ item, tenantAlias }) => {
   const { t } = useTranslation(["Common", "Files"]);
   const { spacesStore } = useStores();
   const { setDeletePortalDialogVisible, setCurrentPortal } = spacesStore;
@@ -92,7 +92,7 @@ export const SpacesRow = ({ item }) => {
       element={logoElement}
       contextOptions={contextOptions}
     >
-      <RowContent item={item} />
+      <RowContent item={item} tenantAlias={tenantAlias} />
     </StyledSpaceRow>
   );
 };

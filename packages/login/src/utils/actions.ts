@@ -407,12 +407,10 @@ export async function checkConfirmLink(data: TConfirmLinkParams) {
   const response = IS_TEST
     ? confirmHandler(headers())
     : await fetch(checkConfirmLink);
-  console.log("response", response);
 
   if (!response.ok) throw new Error(response.statusText);
 
   const result = await response.json();
-  console.log("result", result);
 
   return result.response as TConfirmLinkResult;
 }

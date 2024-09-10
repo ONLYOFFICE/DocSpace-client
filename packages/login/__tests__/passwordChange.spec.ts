@@ -110,10 +110,9 @@ test("password change error", async ({ page }) => {
 });
 
 test("password change error invalid", async ({ page, mockRequest }) => {
-  await mockRequest.setHeader(
-    NEXT_REQUEST_URL_WITH_PARAMS,
+  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
     HEADER_LINK_INVALID,
-  );
+  ]);
 
   await page.goto(URL_WITH_PARAMS);
 
@@ -125,10 +124,9 @@ test("password change error invalid", async ({ page, mockRequest }) => {
 });
 
 test("password change error expired", async ({ page, mockRequest }) => {
-  await mockRequest.setHeader(
-    NEXT_REQUEST_URL_WITH_PARAMS,
+  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
     HEADER_LINK_EXPIRED,
-  );
+  ]);
 
   await page.goto(URL_WITH_PARAMS);
 
@@ -140,10 +138,9 @@ test("password change error expired", async ({ page, mockRequest }) => {
 });
 
 test("password change error user excluded", async ({ page, mockRequest }) => {
-  await mockRequest.setHeader(
-    NEXT_REQUEST_URL_WITH_PARAMS,
+  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
     HEADER_USER_EXCLUDED,
-  );
+  ]);
 
   // Expected to go to default page
   await page.goto(URL_WITH_PARAMS);

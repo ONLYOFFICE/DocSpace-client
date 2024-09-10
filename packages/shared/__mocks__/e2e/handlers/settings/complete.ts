@@ -24,38 +24,26 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { test as base, Page } from "@playwright/test";
-import { MockRequest } from "@docspace/shared/__mocks__/e2e";
+import { API_PREFIX, BASE_URL } from "../../utils";
 
-export const test = base.extend<{
-  page: Page;
-  mockRequest: MockRequest;
-}>({
-  page: async ({ page }, use) => {
-    await page.route("*/**/logo.ashx**", async (route) => {
-      await route.fulfill({
-        path: `../../public/images/logo/loginpage.svg`,
-      });
-    });
-    await page.route(
-      "*/**/login/_next/public/images/**/*",
-      async (route, request) => {
-        const imagePath = request
-          .url()
-          .split("/login/_next/public/images/")
-          .at(-1)!
-          .split("?")[0];
-        await route.fulfill({
-          path: `../../public/images/${imagePath}`,
-        });
-      },
-    );
-    await use(page);
-  },
-  mockRequest: async ({ page }, use) => {
-    const mockRequest = new MockRequest(page);
-    await use(mockRequest);
-  },
-});
+export const PATH = "settings/wizard/complete";
 
-export { expect } from "@playwright/test";
+const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
+
+export const completeSuccess = {
+  response: true,
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+  ok: true,
+};
+
+export const complete = (): Response => {
+  return new Response(JSON.stringify(completeSuccess));
+};

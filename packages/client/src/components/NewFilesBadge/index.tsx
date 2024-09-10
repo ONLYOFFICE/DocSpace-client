@@ -24,38 +24,26 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { test as base, Page } from "@playwright/test";
-import { MockRequest } from "@docspace/shared/__mocks__/e2e";
+import React from "react";
+import { isMobile } from "react-device-detect";
 
-export const test = base.extend<{
-  page: Page;
-  mockRequest: MockRequest;
-}>({
-  page: async ({ page }, use) => {
-    await page.route("*/**/logo.ashx**", async (route) => {
-      await route.fulfill({
-        path: `../../public/images/logo/loginpage.svg`,
-      });
-    });
-    await page.route(
-      "*/**/login/_next/public/images/**/*",
-      async (route, request) => {
-        const imagePath = request
-          .url()
-          .split("/login/_next/public/images/")
-          .at(-1)!
-          .split("?")[0];
-        await route.fulfill({
-          path: `../../public/images/${imagePath}`,
-        });
-      },
-    );
-    await use(page);
-  },
-  mockRequest: async ({ page }, use) => {
-    const mockRequest = new MockRequest(page);
-    await use(mockRequest);
-  },
-});
+import { Badge } from "@docspace/shared/components/badge";
+import { TViewAs } from "@docspace/shared/types";
 
-export { expect } from "@playwright/test";
+import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
+import { DeviceType } from "@docspace/shared/enums";
+
+type NewFilesBadgeProps = {
+  newFilesCount: number;
+};
+
+const NewFilesBadge = ({ newFilesCount }: NewFilesBadgeProps) => {
+  return (
+    <>
+      <Badge lineHeight="16px" fontSize="11px" fontWeight={600} />
+      <div>asd</div>
+    </>
+  );
+};
+
+export default NewFilesBadge;

@@ -24,38 +24,33 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { test as base, Page } from "@playwright/test";
-import { MockRequest } from "@docspace/shared/__mocks__/e2e";
+import { Page } from "@playwright/test";
 
-export const test = base.extend<{
-  page: Page;
-  mockRequest: MockRequest;
-}>({
-  page: async ({ page }, use) => {
-    await page.route("*/**/logo.ashx**", async (route) => {
-      await route.fulfill({
-        path: `../../public/images/logo/loginpage.svg`,
+import { TEndpoint } from "./handlers";
+
+export class MockRequest {
+  constructor(public readonly page: Page) {}
+
+  async router(endpoints: TEndpoint[]) {
+    endpoints.forEach(async (endpoint) => {
+      await this.page.route(endpoint.url, async (route) => {
+        const json = await endpoint.dataHandler.json();
+
+        await route.fulfill({ json });
       });
     });
-    await page.route(
-      "*/**/login/_next/public/images/**/*",
-      async (route, request) => {
-        const imagePath = request
-          .url()
-          .split("/login/_next/public/images/")
-          .at(-1)!
-          .split("?")[0];
-        await route.fulfill({
-          path: `../../public/images/${imagePath}`,
-        });
-      },
-    );
-    await use(page);
-  },
-  mockRequest: async ({ page }, use) => {
-    const mockRequest = new MockRequest(page);
-    await use(mockRequest);
-  },
-});
+  }
 
-export { expect } from "@playwright/test";
+  async setHeaders(url: string, headers: string[]) {
+    await this.page.route(url, async (route, request) => {
+      const objHeaders: { [key: string]: "true" } = {};
+      headers.forEach((item) => (objHeaders[item] = "true"));
+
+      const newHeaders = {
+        ...request.headers(),
+        ...objHeaders,
+      };
+      await route.fallback({ headers: newHeaders });
+    });
+  }
+}

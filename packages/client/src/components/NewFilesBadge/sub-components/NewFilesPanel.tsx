@@ -23,39 +23,3 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
-import { test as base, Page } from "@playwright/test";
-import { MockRequest } from "@docspace/shared/__mocks__/e2e";
-
-export const test = base.extend<{
-  page: Page;
-  mockRequest: MockRequest;
-}>({
-  page: async ({ page }, use) => {
-    await page.route("*/**/logo.ashx**", async (route) => {
-      await route.fulfill({
-        path: `../../public/images/logo/loginpage.svg`,
-      });
-    });
-    await page.route(
-      "*/**/login/_next/public/images/**/*",
-      async (route, request) => {
-        const imagePath = request
-          .url()
-          .split("/login/_next/public/images/")
-          .at(-1)!
-          .split("?")[0];
-        await route.fulfill({
-          path: `../../public/images/${imagePath}`,
-        });
-      },
-    );
-    await use(page);
-  },
-  mockRequest: async ({ page }, use) => {
-    const mockRequest = new MockRequest(page);
-    await use(mockRequest);
-  },
-});
-
-export { expect } from "@playwright/test";

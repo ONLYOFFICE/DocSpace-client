@@ -39,13 +39,16 @@ export class MockRequest {
     });
   }
 
-  async setHeader(url: string, header: string) {
+  async setHeaders(url: string, headers: string[]) {
     await this.page.route(url, async (route, request) => {
-      const headers = {
+      const objHeaders: { [key: string]: "true" } = {};
+      headers.forEach((item) => (objHeaders[item] = "true"));
+
+      const newHeaders = {
         ...request.headers(),
-        [header]: "true",
+        ...objHeaders,
       };
-      await route.fallback({ headers });
+      await route.fallback({ headers: newHeaders });
     });
   }
 }

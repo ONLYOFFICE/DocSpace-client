@@ -142,7 +142,7 @@ const Details = ({
             }`}
             logo={currentIcon}
             model={model}
-            withEditing={true}
+            withEditing={selection.isRoom}
           />
         </StyledNoThumbnail>
       )}

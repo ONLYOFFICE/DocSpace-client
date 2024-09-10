@@ -31,11 +31,13 @@ import { TEndpoint } from "./handlers";
 export class MockRequest {
   constructor(public readonly page: Page) {}
 
-  async router(endpoint: TEndpoint) {
-    await this.page.route(endpoint.url, async (route) => {
-      const json = await endpoint.dataHandler.json();
+  async router(endpoints: TEndpoint[]) {
+    endpoints.forEach(async (endpoint) => {
+      await this.page.route(endpoint.url, async (route) => {
+        const json = await endpoint.dataHandler.json();
 
-      await route.fulfill({ json });
+        await route.fulfill({ json });
+      });
     });
   }
 

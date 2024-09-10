@@ -42,6 +42,7 @@ import BetaBadge from "../../../BetaBadgeWrapper";
 import { getMembersList, getUserList } from "@docspace/shared/api/people";
 import {
   AccountsSearchArea,
+  EmployeeStatus,
   EmployeeType,
   RoomsType,
   ShareAccessRights,
@@ -70,6 +71,8 @@ import {
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
+import { Box } from "@docspace/shared/components/box";
+import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 
 const minSearchValue = 2;
 const filterSeparator = ";";
@@ -345,6 +348,7 @@ const InviteInput = ({
       id,
       shared,
       isGroup = false,
+      status,
     } = item;
 
     item.access = selectedAccess;
@@ -401,9 +405,12 @@ const InviteInput = ({
           isGroup={isGroup}
         />
         <div className="list-item_content">
-          <SearchItemText primary disabled={shared}>
-            {displayName || groupName}
-          </SearchItemText>
+          <Box displayProp="flex" alignItems="center" gapProp="8px">
+            <SearchItemText primary disabled={shared}>
+              {displayName || groupName}
+            </SearchItemText>
+            {status === EmployeeStatus.Pending && <StyledSendClockIcon />}
+          </Box>
           <SearchItemText>{email}</SearchItemText>
         </div>
         {shared && <SearchItemText info>{t("Common:Invited")}</SearchItemText>}

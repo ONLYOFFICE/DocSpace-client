@@ -105,7 +105,13 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
         )
       : await createFile(parentId, fileTitle, templateId, formId);
 
-  if (!res) return;
+  if (!res) {
+    const documentserverUrl = await getEditorUrl();
+
+    return (
+      <Editor documentserverUrl={documentserverUrl?.docServiceUrl ?? ""} />
+    );
+  }
 
   const { file, error } = res;
 

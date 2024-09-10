@@ -24,21 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Page } from "@playwright/test";
+import { BASE_URL } from "../../utils";
 
-import { TEndpoint } from "__tests__/mocking/endpoints";
+export const oauthSignIPpath = "apisystem/portal/signin";
 
-export class MockRequest {
-  constructor(public readonly page: Page) {}
+export const oauthListSignIn = {
+  tenants: [
+    {
+      portalName: "http://nct1.docspace.site",
+      portalLink: `${BASE_URL}:5111/login/confirm/Auth?type=Auth&key=463586937695.PX9GUFYAB6FMUCGFKFOKT6CKUXP5QES6XKIQGMJJCU&email=test%40gmail.com`,
+    },
+    {
+      portalName: "http://nct4.docspace.site",
+      portalLink: `${BASE_URL}:5111/login/confirm/Auth?type=Auth&key=463586937695.PX9GUFYAB6FMUCGFKFOKT6CKUXP5QES6XKIQGMJJCU&email=test%40gmail.com`,
+    },
+    {
+      portalName: "http://nct2.docspace.site",
+      portalLink: `${BASE_URL}:5111/login/confirm/Auth?type=Auth&key=463586937695.PX9GUFYAB6FMUCGFKFOKT6CKUXP5QES6XKIQGMJJCU&email=test%40gmail.com`,
+    },
+  ],
+};
 
-  async router(endpoint: TEndpoint) {
-    await this.page.route(endpoint.url, async (route) => {
-      if (endpoint.response)
-        return await route.fulfill({ json: endpoint.response });
-
-      await route.fulfill({
-        path: `__tests__/mocking/mock-data/${endpoint.pathToData}.json`,
-      });
-    });
-  }
-}
+export const oauthSignIn = {
+  tenants: [
+    {
+      portalName: "http://nct1.docspace.site",
+      portalLink: `${BASE_URL}/confirm/Auth?type=Auth&key=463586937695.PX9GUFYAB6FMUCGFKFOKT6CKUXP5QES6XKIQGMJJCU&email=test%40gmail.com`,
+    },
+  ],
+};

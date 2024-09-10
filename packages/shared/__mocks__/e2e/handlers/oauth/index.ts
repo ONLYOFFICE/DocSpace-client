@@ -25,5 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { getClientHandler, successClient } from "./client";
+import { oauthListSignIn, oauthSignIPpath, oauthSignIn } from "./signIn";
 
-export { getClientHandler, successClient };
+export {
+  getClientHandler,
+  successClient,
+  oauthListSignIn,
+  oauthSignIPpath,
+  oauthSignIn,
+};

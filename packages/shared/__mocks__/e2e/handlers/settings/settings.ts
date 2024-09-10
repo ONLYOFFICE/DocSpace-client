@@ -74,7 +74,7 @@ export const settingsNoAuth = {
     },
     version: ".",
     recaptchaType: 0,
-    recaptchaPublicKey: "",
+    recaptchaPublicKey: "6Ld7iToqAAAAAMxFUP5Sn3gfzRDb7iEYjlokMdTj",
     debugInfo: false,
     tenantStatus: 0,
     tenantAlias: "localhost",

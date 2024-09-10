@@ -146,6 +146,8 @@ export const checkDomain = async (domain: string) => {
 export const getAvailablePortals = async (data: {
   Email: string;
   PasswordHash: string;
+  recaptchaResponse?: string | null;
+  recaptchaType?: number;
 }) => {
   const res = (await request({
     baseURL,

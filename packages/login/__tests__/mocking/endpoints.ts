@@ -26,7 +26,8 @@
 
 export type TEndpoint = {
   url: string;
-  pathToData: string;
+  pathToData?: string;
+  response?: object;
 };
 
 export type TEndpoints = {

@@ -86,6 +86,8 @@ const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams, isEdit }) => {
   };
 
   const onChangeRestrictCopyAndDownload = () => {
+    setRoomParams({ ...roomParams, denyDownload: !roomParams.denyDownload });
+
     setCopyAndDownloadChecked(!copyAndDownloadChecked);
   };
 

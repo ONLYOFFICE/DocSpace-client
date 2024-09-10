@@ -80,6 +80,7 @@ const EditRoomDialog = ({
         prevParams.icon.uploadedFile === currentParams.icon.uploadedFile) &&
       prevParams.quota === currentParams.quota &&
       prevParams.indexing === currentParams.indexing &&
+      prevParams.denyDownload === currentParams.denyDownload &&
       isEqual(prevParams.lifetime, currentParams.lifetime) &&
       isEqualWatermarkChanges()
     );

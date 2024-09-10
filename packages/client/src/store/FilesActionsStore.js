@@ -96,7 +96,10 @@ import {
 } from "SRC_DIR/helpers/utils";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
-import { changeRoomLifetime } from "@docspace/shared/api/rooms";
+import {
+  changeRoomLifetime,
+  editRoomSettings,
+} from "@docspace/shared/api/rooms";
 import api from "@docspace/shared/api";
 import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
 
@@ -2890,6 +2893,10 @@ class FilesActionStore {
 
   changeRoomLifetime = (roomId, lifetime) => {
     return changeRoomLifetime(roomId, lifetime);
+  };
+
+  editRoomSettings = (roomId, data) => {
+    return editRoomSettings(roomId, data);
   };
 
   copyFromTemplateForm = async (fileInfo, t) => {

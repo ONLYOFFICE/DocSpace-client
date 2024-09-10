@@ -149,6 +149,8 @@ class SelectedFolderStore {
 
   lifetime: TRoomLifetime | null = null;
 
+  denyDownload: boolean | undefined;
+
   usedSpace: number | undefined;
 
   quotaLimit: number | undefined;
@@ -202,6 +204,7 @@ class SelectedFolderStore {
       parentRoomType: this.parentRoomType,
       lifetime: this.lifetime,
       indexing: this.indexing,
+      denyDownload: this.denyDownload,
       usedSpace: this.usedSpace,
       quotaLimit: this.quotaLimit,
       isCustomQuota: this.isCustomQuota,
@@ -245,6 +248,7 @@ class SelectedFolderStore {
     this.parentRoomType = null;
     this.lifetime = null;
     this.indexing = false;
+    this.denyDownload = false;
     this.usedSpace = undefined;
     this.quotaLimit = undefined;
     this.isCustomQuota = undefined;

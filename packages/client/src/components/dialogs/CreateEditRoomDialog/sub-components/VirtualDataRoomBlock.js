@@ -74,7 +74,9 @@ const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams, isEdit }) => {
   const [fileLifetimeChecked, setFileLifetimeChecked] = useState(
     !!roomParams?.lifetime,
   );
-  const [copyAndDownloadChecked, setCopyAndDownloadChecked] = useState(false);
+  const [copyAndDownloadChecked, setCopyAndDownloadChecked] = useState(
+    !!roomParams?.denyDownload,
+  );
 
   const onChangeAutomaticIndexing = () => {
     setRoomParams({ ...roomParams, indexing: !roomParams.indexing });

@@ -86,6 +86,7 @@ const EditRoomEvent = ({
   getWatermarkRequest,
   watermarksSettings,
   isNotWatermarkSet,
+  editRoomSettings,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
 
@@ -119,6 +120,7 @@ const EditRoomEvent = ({
     roomOwner: item.createdBy,
     indexing: item.indexing,
     lifetime: item.lifetime,
+    denyDownload: item.denyDownload,
 
     ...(isDefaultRoomsQuotaSet && {
       quota: item.quotaLimit,
@@ -154,6 +156,7 @@ const EditRoomEvent = ({
     const isQuotaChanged = quotaLimit !== item.quotaLimit;
     const isOwnerChanged = roomParams?.roomOwner?.id !== item.createdBy.id;
     const lifetimeChanged = !isEqual(roomParams.lifetime, item.lifetime);
+    const denyDownloadChanged = roomParams?.denyDownload !== item.denyDownload;
 
     const tags = roomParams.tags.map((tag) => tag.name);
     const newTags = roomParams.tags.filter((t) => t.isNew).map((t) => t.name);
@@ -196,6 +199,13 @@ const EditRoomEvent = ({
       if (lifetimeChanged) {
         actions.push(changeRoomLifetime(room.id, roomParams.lifetime));
         room.lifetime = roomParams.lifetime;
+      }
+
+      if (denyDownloadChanged) {
+        actions.push(
+          editRoomSettings(room.id, { denyDownload: roomParams.denyDownload }),
+        );
+        room.denyDownload = roomParams.denyDownload;
       }
 
       if (tags.length) {
@@ -381,8 +391,12 @@ export default inject(
       removeLogoPaths,
       updateLogoPathsCacheBreaker,
     } = selectedFolderStore;
-    const { updateCurrentFolder, changeRoomOwner, changeRoomLifetime } =
-      filesActionsStore;
+    const {
+      updateCurrentFolder,
+      changeRoomOwner,
+      changeRoomLifetime,
+      editRoomSettings,
+    } = filesActionsStore;
     const { getThirdPartyIcon } = filesSettingsStore.thirdPartyStore;
     const { setCreateRoomDialogVisible } = dialogsStore;
     const { withPaging } = settingsStore;
@@ -437,6 +451,7 @@ export default inject(
       watermarksSettings,
       isNotWatermarkSet,
       getWatermarkRequest,
+      editRoomSettings,
     };
   },
 )(observer(EditRoomEvent));

@@ -89,6 +89,21 @@ export const StyledRowContent = styled(RowContent)`
   .mainIcons {
     height: 20px;
   }
+
+  .user-container-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .arrow-icon > div,
+    .arrow-icon > div > svg {
+      width: 12px;
+      height: 12px;
+      path {
+        fill: ${(props) => props.theme.color};
+      }
+    }
+  }
 `;
 
 export const StyledDomainSettings = styled.div`

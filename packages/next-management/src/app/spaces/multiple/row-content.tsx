@@ -24,16 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import ArrowIcon from "PUBLIC_DIR/images/arrow.react.svg?url";
+
 import { useTranslation } from "react-i18next";
+import { ReactSVG } from "react-svg";
 
 import { Text } from "@docspace/shared/components/text";
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { globalColors } from "@docspace/shared/themes";
+import { DeviceType } from "@docspace/shared/enums";
 
+import useDeviceType from "@/hooks/useDeviceType";
 import { StyledRowContent } from "./multiple.styled";
 
 export const RowContent = ({ item, tenantAlias }) => {
   const { t } = useTranslation(["Management", "Common", "Settings"]);
+  const { currentDeviceType } = useDeviceType();
 
   const { roomAdminCount, usersCount, roomsCount, usedSize } =
     item?.quotaUsage || {
@@ -50,6 +56,13 @@ export const RowContent = ({ item, tenantAlias }) => {
     customQuota >= 0 ? `${usedStorage}/${maxStorage}` : `${usedStorage}`;
 
   const isCurrentPortal = tenantAlias === item.portalName;
+  const protocol = window?.location?.protocol;
+
+  const onSpaceClick = () => {
+    if (currentDeviceType === DeviceType.mobile) {
+      window.open(`${protocol}//${item.domain}/`, "_blank");
+    }
+  };
 
   return (
     <StyledRowContent
@@ -58,10 +71,13 @@ export const RowContent = ({ item, tenantAlias }) => {
       nameColor={globalColors.grayStrong}
       className="spaces_row-content"
     >
-      <div className="user-container-wrapper">
+      <div className="user-container-wrapper" onClick={onSpaceClick}>
         <Text fontWeight={600} fontSize="14px" truncate={true}>
           {`${item.domain}`}
         </Text>
+        {currentDeviceType === DeviceType.mobile && (
+          <ReactSVG src={ArrowIcon} className="arrow-icon" />
+        )}
       </div>
 
       <Text

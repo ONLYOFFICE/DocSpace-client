@@ -51,7 +51,10 @@ import type {
 import type { TOption } from "../combobox";
 import { Strong } from "./Share.styled";
 
-export const getShareOptions = (t: TTranslation) => {
+export const getShareOptions = (
+  t: TTranslation,
+  available: TAvailableExternalRights,
+) => {
   return [
     {
       internal: false,
@@ -65,11 +68,11 @@ export const getShareOptions = (t: TTranslation) => {
         productName: t("Common:ProductName"),
       }),
     },
-    {
+    available.None && {
       key: "separator",
       isSeparator: true,
     },
-    {
+    available.None && {
       key: "remove",
       internal: true,
       access: ShareAccessRights.None,

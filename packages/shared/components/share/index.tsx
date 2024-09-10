@@ -54,7 +54,7 @@ import ShareLoader from "../../skeletons/share";
 import LinkRow from "./sub-components/LinkRow";
 
 import { StyledLinks } from "./Share.styled";
-import { ShareProps, TLink } from "./Share.types";
+import { AccessItem, ShareProps, TLink } from "./Share.types";
 import { copyDocumentShareLink } from "./Share.helpers";
 
 const Share = (props: ShareProps) => {
@@ -228,7 +228,7 @@ const Share = (props: ShareProps) => {
     }
   };
 
-  const changeAccessOption = async (item: TOption, link: TFileLink) => {
+  const changeAccessOption = async (item: AccessItem, link: TFileLink) => {
     try {
       setLoadingLinks([...loadingLinks, link.sharedTo.id]);
 

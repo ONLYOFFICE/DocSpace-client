@@ -73,7 +73,7 @@ const LinkRow = ({
 }: LinkRowProps) => {
   const { t } = useTranslation(["Common", "Translations"]);
 
-  const shareOptions = getShareOptions(t) as TOption[];
+  const shareOptions = getShareOptions(t, availableExternalRights) as TOption[];
   const accessOptions = availableExternalRights
     ? getAccessOptions(t, availableExternalRights)
     : [];
@@ -162,7 +162,7 @@ const LinkRow = ({
             {!isPrimaryLink && (
               <ExpiredComboBox
                 link={link}
-                accessOptions={accessOptions}
+                availableExternalRights={availableExternalRights}
                 changeExpirationOption={changeExpirationOption}
                 isDisabled={isLoaded || isArchiveFolder}
                 isRoomsLink={isRoomsLink}

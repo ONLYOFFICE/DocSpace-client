@@ -55,6 +55,7 @@ import {
   createPasswordHash,
   getLoginLink,
   getOAuthToken,
+  toUrlParams,
 } from "@docspace/shared/utils/common";
 import { setCookie } from "@docspace/shared/utils/cookie";
 import { ButtonKeys, DeviceType } from "@docspace/shared/enums";
@@ -76,6 +77,7 @@ import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import { RegisterContainer } from "@/components/RegisterContainer.styled";
 import EmailInputForm from "./_sub-components/EmailInputForm";
 import RegistrationForm from "./_sub-components/RegistrationForm";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 export type CreateUserFormProps = {
   userNameRegex: string;
@@ -223,18 +225,24 @@ const CreateUserForm = (props: CreateUserFormProps) => {
         sessionStorage.setItem("referenceUrl", finalUrl);
       }
 
-      const loginData = JSON.stringify({
-        type: "invitation",
-        email,
-        roomName,
-        firstName,
-        lastName,
-        linkData,
-      });
+      const loginData = toUrlParams(
+        {
+          type: "invitation",
+          email,
+          roomName,
+          firstName,
+          lastName,
+          spaceAddress: window.location.host,
+        },
+        true,
+      );
 
-      sessionStorage.setItem("loginData", loginData);
+      const encodedData = encodeURIComponent(loginData);
+      const base64Data = btoa(JSON.stringify(linkData));
 
-      router.push("/");
+      const url = `/?loginData=${encodedData}&linkData=${base64Data}`;
+
+      router.push(url);
     } catch (error) {
       const knownError = error as TError;
       const status =

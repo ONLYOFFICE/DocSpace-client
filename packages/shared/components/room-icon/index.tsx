@@ -75,7 +75,7 @@ const RoomIcon = ({
   const roomTitle = useMemo(() => getRoomTitle(title ?? ""), [title]);
 
   const imgSrc = logo?.cover
-    ? `data:image/svg+xml;base64, ${window.btoa(logo?.cover)}`
+    ? `data:image/svg+xml;base64, ${window.btoa(logo?.cover?.data)}`
     : logo?.medium
       ? logo.medium
       : logo;

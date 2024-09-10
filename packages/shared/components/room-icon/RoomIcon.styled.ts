@@ -1,3 +1,4 @@
+import hexRgb from "hex-rgb";
 import styled, { css } from "styled-components";
 import { Base } from "../../themes";
 
@@ -13,6 +14,7 @@ const StyledIcon = styled.div<{
   coverSize: number;
 }>`
   display: flex;
+  z-index: 2;
   justify-content: center;
   align-items: center;
 
@@ -62,6 +64,19 @@ const StyledIcon = styled.div<{
       width: ${(props) => `${props.coverSize}px`};
     }
   }
+
+  ${(props) =>
+    !props.theme.isBase &&
+    props.color &&
+    css`
+      .room-icon-cover {
+        svg {
+          path {
+            fill: ${`#${props.color}`};
+          }
+        }
+      }
+    `}
 
   .room-title {
     font-size: 14px;
@@ -113,6 +128,7 @@ const StyledIcon = styled.div<{
   }
 
   .room-icon_hover {
+    z-index: 2;
     position: absolute;
     opacity: 0;
     transform: translateY(20px);
@@ -140,6 +156,7 @@ const StyledIcon = styled.div<{
         }
 
         .room-icon-cover svg {
+          opacity: 0;
           transform: translateY(-30px);
         }
       }

@@ -294,7 +294,28 @@ describe("Locales Tests", () => {
   });
 
   test("FullEnDublicatesTest", () => {
-    // Add test logic here
+    const fullEnDuplicates = translationFiles
+      .filter((file) => file.language === "en")
+      .flatMap((item) => item.translations)
+      .reduce((acc, t) => {
+        const key = `${t.key}-${t.value}`;
+        if (!acc[key]) {
+          acc[key] = { key: t.key, value: t.value, count: 0, keys: [] };
+        }
+        acc[key].count++;
+        acc[key].keys.push(t);
+        return acc;
+      }, {});
+
+    const duplicatesArray = Object.values(fullEnDuplicates)
+      .filter((grp) => grp.count > 1)
+      .sort((a, b) => b.count - a.count)
+      .map((grp) => ({ key: grp.key, value: grp.value, count: grp.count }));
+
+    expect(duplicatesArray.length).toBe(
+      0,
+      `\r\n${duplicatesArray.map((d) => JSON.stringify(d, null, 2)).join("\r\n")}`
+    );
   });
 
   test("EnDublicatesByContentTest", () => {
@@ -302,10 +323,6 @@ describe("Locales Tests", () => {
   });
 
   test("NotFoundKeysTest", () => {
-    // Add test logic here
-  });
-
-  test("DublicatesFilesByMD5HashTest", () => {
     // Add test logic here
   });
 

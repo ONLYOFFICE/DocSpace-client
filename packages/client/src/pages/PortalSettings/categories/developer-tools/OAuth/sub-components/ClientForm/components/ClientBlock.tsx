@@ -55,7 +55,6 @@ const ClientBlock = ({
         <InputGroup
           label={t("ID")}
           name=""
-          placeholder=""
           value={value.id}
           error=""
           onChange={onChange}
@@ -65,7 +64,6 @@ const ClientBlock = ({
         <InputGroup
           label={t("Secret")}
           name=""
-          placeholder=""
           value={value.secret}
           error=""
           onChange={onChange}

@@ -28,6 +28,7 @@ import { thirdPartyLogin } from "@docspace/shared/utils/loginUtils";
 import { Nullable, TTranslation } from "@docspace/shared/types";
 
 import { MessageKey, OAuth2ErrorKey } from "./enums";
+import { parseURL } from "@docspace/shared/utils/common";
 
 export async function oAuthLogin(profile: string) {
   let isSuccess = false;
@@ -130,30 +131,25 @@ export const getOAuthMessageKeyTranslation = (
   }
 };
 
-export const getInvitationLinkData = () => {
-  const loginData = sessionStorage.getItem("loginData");
+export const getInvitationLinkData = (encodeString: Nullable<string>) => {
+  if (!encodeString) return;
 
-  if (!loginData) return;
+  let locationObject;
 
-  const queryParams = JSON.parse(loginData) as {
-    email: string;
-    roomName: string;
-    firstName: string;
-    lastName: string;
-    type: string;
-    linkData?: {
-      confirmHeader?: string;
-      key: string;
-      type: string;
-      uid?: string;
-    };
-  };
+  try {
+    const decodeString = decodeURIComponent(encodeString);
+    locationObject = parseURL(decodeString);
+  } catch (e) {
+    console.error("parse error", e);
+  }
 
-  return queryParams;
+  return locationObject;
 };
 
-export const getEmailFromInvitation = () => {
-  const queryParams = getInvitationLinkData();
+export const getEmailFromInvitation = (encodeString: Nullable<string>) => {
+  if (!encodeString) return "";
+
+  const queryParams = getInvitationLinkData(encodeString);
 
   if (!queryParams || !queryParams.email) return "";
 
@@ -164,8 +160,12 @@ export const generateOAuth2ReferenceURl = (clientId: string) => {
   return `/login/consent?clientId=${clientId}`;
 };
 
-export const getConfirmDataFromInvitation = () => {
-  const queryParams = getInvitationLinkData();
+export const getConfirmDataFromInvitation = (
+  encodeString: Nullable<string>,
+) => {
+  if (!encodeString) return "";
+
+  const queryParams = getInvitationLinkData(encodeString);
 
   if (!queryParams || !queryParams.linkData) return {};
 

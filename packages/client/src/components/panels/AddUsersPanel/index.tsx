@@ -175,6 +175,7 @@ type AddUsersPanelProps = {
 
   roomId?: string | number;
   withGroups?: boolean;
+  useAside?: boolean;
 };
 
 const AddUsersPanel = ({
@@ -200,6 +201,7 @@ const AddUsersPanel = ({
   invitedUsers,
   disableDisabledUsers,
   checkIfUserInvited,
+  useAside = true,
 }: AddUsersPanelProps) => {
   const theme = useTheme();
   const { t } = useTranslation([
@@ -523,7 +525,79 @@ const AddUsersPanel = ({
       }
     : {};
 
-  return (
+  const selectorComponent = (
+    <Selector
+      withHeader
+      alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}
+      headerProps={{
+        // Todo: Update groups empty screen texts when they are ready
+        headerLabel: t("Common:ListAccounts"),
+        withoutBackButton: false,
+        withoutBorder: true,
+        onBackClick,
+        onCloseClick: onClosePanels,
+      }}
+      onSelect={onSelect}
+      renderCustomItem={renderCustomItem}
+      withSearch
+      searchPlaceholder={t("Common:Search")}
+      searchValue={searchValue}
+      onSearch={onSearch}
+      onClearSearch={onClearSearch}
+      items={itemsList}
+      isMultiSelect={isMultiSelect}
+      submitButtonLabel={t("Common:AddButton")}
+      onSubmit={onUsersSelect}
+      disableSubmitButton={selectedItems.length === 0}
+      {...withAccessRightsProps}
+      {...withCancelButtonProps}
+      emptyScreenImage={emptyScreenImage}
+      emptyScreenHeader={
+        // Todo: Update groups empty screen texts when they are ready
+        activeTabId === PEOPLE_TAB_ID
+          ? t("Common:EmptyHeader")
+          : t("Common:NotFoundGroups")
+      }
+      emptyScreenDescription={
+        activeTabId === PEOPLE_TAB_ID
+          ? t("Common:EmptyDescription", {
+              productName: t("Common:ProductName"),
+            })
+          : t("Common:GroupsNotFoundDescription")
+      }
+      searchEmptyScreenImage={emptyScreenImage}
+      searchEmptyScreenHeader={
+        activeTabId === PEOPLE_TAB_ID
+          ? t("Common:NotFoundUsers")
+          : t("Common:NotFoundGroups")
+      }
+      searchEmptyScreenDescription={
+        activeTabId === PEOPLE_TAB_ID
+          ? t("Common:NotFoundUsersDescription")
+          : t("Common:GroupsNotFoundDescription")
+      }
+      hasNextPage={hasNextPage}
+      isNextPageLoading={isNextPageLoading}
+      loadNextPage={loadNextPage}
+      totalItems={total}
+      isLoading={isLoading}
+      searchLoader={<SearchLoader />}
+      isSearchLoading={isInit}
+      rowLoader={
+        <RowLoader
+          style={{ paddingInlineEnd: 0 }}
+          isUser
+          count={15}
+          isContainer={isLoading}
+          isMultiSelect={isMultiSelect}
+          withAllSelect={!isLoading}
+        />
+      }
+      {...withTabsProps}
+    />
+  );
+
+  return useAside ? (
     <>
       <Backdrop
         onClick={onClosePanels}
@@ -540,77 +614,11 @@ const AddUsersPanel = ({
         withoutBodyScroll
         withoutHeader
       >
-        <Selector
-          withHeader
-          alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}
-          headerProps={{
-            // Todo: Update groups empty screen texts when they are ready
-            headerLabel: t("Common:ListAccounts"),
-            withoutBackButton: false,
-            withoutBorder: true,
-            onBackClick,
-            onCloseClick: onClosePanels,
-          }}
-          onSelect={onSelect}
-          renderCustomItem={renderCustomItem}
-          withSearch
-          searchPlaceholder={t("Common:Search")}
-          searchValue={searchValue}
-          onSearch={onSearch}
-          onClearSearch={onClearSearch}
-          items={itemsList}
-          isMultiSelect={isMultiSelect}
-          submitButtonLabel={t("Common:AddButton")}
-          onSubmit={onUsersSelect}
-          disableSubmitButton={selectedItems.length === 0}
-          {...withAccessRightsProps}
-          {...withCancelButtonProps}
-          emptyScreenImage={emptyScreenImage}
-          emptyScreenHeader={
-            // Todo: Update groups empty screen texts when they are ready
-            activeTabId === PEOPLE_TAB_ID
-              ? t("Common:EmptyHeader")
-              : t("Common:NotFoundGroups")
-          }
-          emptyScreenDescription={
-            activeTabId === PEOPLE_TAB_ID
-              ? t("Common:EmptyDescription", {
-                  productName: t("Common:ProductName"),
-                })
-              : t("Common:GroupsNotFoundDescription")
-          }
-          searchEmptyScreenImage={emptyScreenImage}
-          searchEmptyScreenHeader={
-            activeTabId === PEOPLE_TAB_ID
-              ? t("Common:NotFoundUsers")
-              : t("Common:NotFoundGroups")
-          }
-          searchEmptyScreenDescription={
-            activeTabId === PEOPLE_TAB_ID
-              ? t("Common:NotFoundUsersDescription")
-              : t("Common:GroupsNotFoundDescription")
-          }
-          hasNextPage={hasNextPage}
-          isNextPageLoading={isNextPageLoading}
-          loadNextPage={loadNextPage}
-          totalItems={total}
-          isLoading={isLoading}
-          searchLoader={<SearchLoader />}
-          isSearchLoading={isInit}
-          rowLoader={
-            <RowLoader
-              style={{ paddingInlineEnd: 0 }}
-              isUser
-              count={15}
-              isContainer={isLoading}
-              isMultiSelect={isMultiSelect}
-              withAllSelect={!isLoading}
-            />
-          }
-          {...withTabsProps}
-        />
+        {selectorComponent}
       </Aside>
     </>
+  ) : (
+    selectorComponent
   );
 };
 

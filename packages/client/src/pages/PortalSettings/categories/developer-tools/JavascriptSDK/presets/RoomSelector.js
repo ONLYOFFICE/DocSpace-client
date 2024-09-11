@@ -45,7 +45,7 @@ import { SelectTextInput } from "../sub-components/SelectTextInput";
 import { CancelTextInput } from "../sub-components/CancelTextInput";
 import { MainElementParameter } from "../sub-components/MainElementParameter";
 import { PreviewBlock } from "../sub-components/PreviewBlock";
-
+import { Integration } from "../sub-components/Integration";
 import { loadFrame } from "../utils";
 
 import {
@@ -67,7 +67,7 @@ import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const RoomSelector = (props) => {
-  const { t, theme } = props;
+  const { t, theme, currentColorScheme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -248,17 +248,32 @@ const RoomSelector = (props) => {
               directionY="top"
             />
           </ControlsSection>
+
+          <Integration
+            className="integration-examples"
+            t={t}
+            theme={theme}
+            currentColorScheme={currentColorScheme}
+          />
         </Controls>
       </Container>
+
+      <Integration
+        className="integration-examples integration-examples-bottom"
+        t={t}
+        theme={theme}
+        currentColorScheme={currentColorScheme}
+      />
     </PresetWrapper>
   );
 };
 
 export const Component = inject(({ settingsStore }) => {
-  const { theme } = settingsStore;
+  const { theme, currentColorScheme } = settingsStore;
 
   return {
     theme,
+    currentColorScheme,
   };
 })(
   withTranslation([

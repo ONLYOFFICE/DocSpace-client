@@ -27,7 +27,7 @@
 import React from "react";
 import { withTranslation, Trans } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import { StyledDownloadDialog } from "./StyledDownloadDialog";
+import { StyledBodyContent } from "./StyledDownloadDialog";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
@@ -306,7 +306,7 @@ class DownloadDialogComponent extends React.Component {
       (this.state.other.files.length > 1 && 1);
 
     return (
-      <StyledDownloadDialog
+      <ModalDialog
         visible={visible}
         displayType="aside"
         onClose={this.onClose}
@@ -319,14 +319,14 @@ class DownloadDialogComponent extends React.Component {
         <ModalDialog.Header>{t("Translations:DownloadAs")}</ModalDialog.Header>
 
         <ModalDialog.Body className={this.state.modalDialogToggle}>
-          <div className="download-dialog-description">
+          <StyledBodyContent className="download-dialog-description">
             <Text noSelect>{t("ChooseFormatText")}.</Text>
             {!isSingleFile && (
               <Text noSelect>
                 <Trans t={t} i18nKey="ConvertToZip" />
               </Text>
             )}
-          </div>
+          </StyledBodyContent>
           {documents.length > 0 && (
             <DownloadContent
               {...downloadContentProps}
@@ -411,7 +411,7 @@ class DownloadDialogComponent extends React.Component {
             scale
           />
         </ModalDialog.Footer>
-      </StyledDownloadDialog>
+      </ModalDialog>
     );
   }
 }

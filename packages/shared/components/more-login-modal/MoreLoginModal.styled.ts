@@ -26,8 +26,6 @@
 
 import styled from "styled-components";
 
-import { mobile } from "@docspace/shared/utils";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { globalColors } from "../../themes";
 
 export const ProviderRow = styled.div`
@@ -57,17 +55,5 @@ export const ProviderRow = styled.div`
     padding: 0 12px;
 
     line-height: 16px;
-  }
-`;
-
-export const Modal = styled(ModalDialog)`
-  .modal-dialog-aside {
-    transform: translateX(${(props) => (props.visible ? "0" : "480px")});
-    width: 480px;
-
-    @media ${mobile} {
-      width: 325px;
-      transform: translateX(${(props) => (props.visible ? "0" : "480px")});
-    }
   }
 `;

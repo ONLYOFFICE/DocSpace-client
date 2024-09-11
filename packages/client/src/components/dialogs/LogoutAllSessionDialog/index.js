@@ -31,8 +31,6 @@ import { Button } from "@docspace/shared/components/button";
 import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 
-import ModalDialogContainer from "../ModalDialogContainer";
-
 const LogoutAllSessionDialog = ({
   t,
   visible,
@@ -52,7 +50,7 @@ const LogoutAllSessionDialog = ({
   };
 
   return (
-    <ModalDialogContainer
+    <ModalDialog
       visible={visible}
       onClose={onClose}
       displayType="modal"
@@ -94,7 +92,7 @@ const LogoutAllSessionDialog = ({
           isDisabled={isLoading}
         />
       </ModalDialog.Footer>
-    </ModalDialogContainer>
+    </ModalDialog>
   );
 };
 

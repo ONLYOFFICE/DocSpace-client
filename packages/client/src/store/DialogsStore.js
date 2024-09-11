@@ -142,6 +142,7 @@ class DialogsStore {
 
   covers = null;
   cover = null;
+  coverSelection = null;
 
   constructor(
     authStore,
@@ -610,13 +611,27 @@ class DialogsStore {
     this.covers = covers;
   };
 
-  setCover = (cover) => {
-    this.cover = cover;
+  setCover = (color, icon) => {
+    const newColor = color.replace("#", "");
+    const newIcon = typeof icon === "string" ? "" : icon.id;
+    this.cover = { color: newColor, cover: newIcon };
+  };
+
+  setCoverSelection = (selection) => {
+    this.coverSelection = selection;
   };
 
   setRoomLogoCover = async () => {
-    const { bufferSelection } = this.filesStore;
-    await setRoomCover(bufferSelection.id, this.cover);
+    if (!this.coverSelection) return;
+
+    const res = await setRoomCover(this.coverSelection.id, this.cover);
+    this.infoPanelStore.updateInfoPanelSelection(res);
+  };
+
+  deleteRoomLogo = async () => {
+    if (!this.coverSelection) return;
+    const res = await removeLogoFromRoom(this.coverSelection.id);
+    this.infoPanelStore.updateInfoPanelSelection(res);
   };
 
   getLogoCoverModel = (t, hasImage) => {
@@ -631,7 +646,7 @@ class DialogsStore {
         ? {
             label: t("Common:Delete"),
             icon: TrashIconSvgUrl,
-            onClick: () => {},
+            onClick: () => this.deleteRoomLogo(),
           }
         : {
             label: t("RoomLogoCover:CustomizeCover"),

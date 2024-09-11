@@ -36,7 +36,6 @@ import DetailsHelper from "../../helpers/DetailsHelper.js";
 import { StyledNoThumbnail, StyledThumbnail } from "../../styles/details.js";
 import { StyledProperties, StyledSubtitle } from "../../styles/common.js";
 
-import ItemIcon from "@docspace/client/src/components/ItemIcon";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 const Details = ({
   t,

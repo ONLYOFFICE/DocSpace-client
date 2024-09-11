@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
@@ -61,6 +61,7 @@ const RoomsItemHeader = ({
   roomType,
   displayFileExtension,
   getLogoCoverModel,
+  setCoverSelection,
 }) => {
   const itemTitleRef = useRef();
 
@@ -82,6 +83,10 @@ const RoomsItemHeader = ({
 
   const isFile = !!selection.fileExst;
   let title = selection.title;
+
+  useEffect(() => {
+    setCoverSelection(selection);
+  }, [selection]);
 
   if (isFile) {
     title = getTitleWithoutExtension(selection, false);
@@ -212,6 +217,7 @@ export default inject(
       setInvitePanelOptions: dialogsStore.setInvitePanelOptions,
       setQuotaWarningDialogVisible: dialogsStore.setQuotaWarningDialogVisible,
       getLogoCoverModel: dialogsStore.getLogoCoverModel,
+      setCoverSelection: dialogsStore.setCoverSelection,
 
       setSelection: filesStore.setSelection,
       setBufferSelection: filesStore.setBufferSelection,

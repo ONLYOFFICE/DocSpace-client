@@ -44,9 +44,6 @@ import { ImageEditor } from "@docspace/shared/components/image-editor";
 import PreviewTile from "@docspace/shared/components/image-editor/PreviewTile";
 import { Text } from "@docspace/shared/components/text";
 
-import PenSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
-import UploadPenSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
-
 import ItemIcon from "@docspace/client/src/components/ItemIcon";
 
 import ChangeRoomOwner from "./ChangeRoomOwner";
@@ -136,6 +133,7 @@ const SetRoomParams = ({
   selection,
   getLogoCoverModel,
   getInfoPanelItemIcon,
+  setCoverSelection,
 }) => {
   const [previewIcon, setPreviewIcon] = useState(null);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
@@ -153,6 +151,10 @@ const SetRoomParams = ({
     : selection?.logo?.cover
       ? selection?.logo
       : getInfoPanelItemIcon(selection, 96);
+
+  React.useEffect(() => {
+    setCoverSelection(selection);
+  }, [selection]);
 
   const onChangeName = (e) => {
     setIsValidTitle(true);
@@ -354,12 +356,15 @@ export default inject(
     const { bufferSelection } = filesStore;
     const { getInfoPanelItemIcon, infoPanelSelection } = infoPanelStore;
 
-    const { setChangeRoomOwnerIsVisible, getLogoCoverModel } = dialogsStore;
+    const {
+      setChangeRoomOwnerIsVisible,
+      getLogoCoverModel,
+      setCoverSelection,
+    } = dialogsStore;
     const { folderFormValidation, maxImageUploadSize } = settingsStore;
 
-    const selection = infoPanelSelection?.length
-      ? infoPanelSelection
-      : bufferSelection;
+    const selection =
+      bufferSelection != null ? bufferSelection : infoPanelSelection;
 
     return {
       isDefaultRoomsQuotaSet,
@@ -370,6 +375,7 @@ export default inject(
       getLogoCoverModel,
       selection,
       getInfoPanelItemIcon,
+      setCoverSelection,
     };
   },
 )(

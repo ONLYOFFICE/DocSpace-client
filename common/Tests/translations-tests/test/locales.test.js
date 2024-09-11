@@ -386,10 +386,10 @@ describe("Locales Tests", () => {
     let i = 0;
 
     const groupedToasts = notTranslatedToasts.reduce((acc, t) => {
-      if (!acc[t.key]) {
-        acc[t.key] = [];
+      if (!acc[t.path]) {
+        acc[t.path] = [];
       }
-      acc[t.key].push(t);
+      acc[t.path].push(t);
       return acc;
     }, {});
 
@@ -407,10 +407,10 @@ describe("Locales Tests", () => {
     let i = 0;
 
     const groupedProps = notTranslatedProps.reduce((acc, t) => {
-      if (!acc[t.key]) {
-        acc[t.key] = [];
+      if (!acc[t.path]) {
+        acc[t.path] = [];
       }
-      acc[t.key].push(t);
+      acc[t.path].push(t);
       return acc;
     }, {});
 

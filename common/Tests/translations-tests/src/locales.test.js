@@ -95,6 +95,7 @@ beforeAll(() => {
 
       const translationFile = {
         path: tPath,
+        fileName: path.basename(tPath),
         translations: Object.entries(jsonTranslation).map(([key, value]) => ({
           key,
           value,
@@ -415,7 +416,77 @@ describe("Locales Tests", () => {
   });
 
   test("WrongTranslationVariablesTest", () => {
-    // Add test logic here
+    const message = `Next keys have wrong or empty variables:\r\n\r\n`;
+    const regVariables = new RegExp("\\{\\{([^\\{].?[^\\}]+)\\}\\}", "gm");
+
+    const groupedByLng = translationFiles.reduce((acc, t) => {
+      if (!acc[t.language]) {
+        acc[t.language] = [];
+      }
+      acc[t.language].push(
+        ...t.translations.map((k) => ({
+          key: `${t.fileName}=>${k.key}`,
+          value: k.value,
+          variables: [...k.value.matchAll(regVariables)].map((m) =>
+            m[1]?.trim().replace(", lowercase", "")
+          ),
+        }))
+      );
+      return acc;
+    }, {});
+
+    const enWithVariables = groupedByLng["en"].filter(
+      (t) => t.variables.length > 0
+    );
+
+    const otherLanguagesWithVariables = Object.keys(groupedByLng)
+      .filter((lang) => lang !== "en")
+      .map((lang) => ({
+        language: lang,
+        translationsWithVariables: groupedByLng[lang],
+      }));
+
+    let i = 0;
+    let errorsCount = 0;
+
+    enWithVariables.forEach((enKeyWithVariables) => {
+      otherLanguagesWithVariables.forEach((lng) => {
+        const lngKey = lng.translationsWithVariables.find(
+          (t) => t.key === enKeyWithVariables.Key
+        );
+
+        if (!lngKey) {
+          // wrong
+          // message += `${++i}. lng='${lng.Language}' key='${enKeyWithVariables.Key}' not found\r\n\r\n`;
+          // errorsCount++;
+          return;
+        }
+
+        if (enKeyWithVariables.variables.length !== lngKey.variables.length) {
+          // wrong
+          message +=
+            `${++i}. lng='${lng.language}' key='${lngKey.key}' has less variables than 'en' language have ` +
+            `(en=${enKeyWithVariables.variables.length}|${lng.language}=${lngKey.variables.length})\r\n` +
+            `'en': '${enKeyWithVariables.value}'\r\n'${lng.language}': '${lngKey.value}'\r\n\r\n`;
+          errorsCount++;
+        }
+
+        if (
+          !lngKey.variables.every((v) =>
+            enKeyWithVariables.variables.includes(v)
+          )
+        ) {
+          // wrong
+          message +=
+            `${++i}. lng='${lng.language}' key='${lngKey.key}' has not equals variables of 'en' language have \r\n` +
+            `'${enKeyWithVariables.value}' Variables=[${enKeyWithVariables.variables.join(",")}]\r\n` +
+            `'${lngKey.value}' Variables=[${lngKey.variables.join(",")}]\r\n\r\n`;
+          errorsCount++;
+        }
+      });
+    });
+
+    expect(errorsCount, message).toBe(0);
   });
 
   test("WrongTranslationTagsTest", () => {

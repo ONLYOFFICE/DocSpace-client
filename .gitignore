@@ -3,7 +3,7 @@
 *.suo
 *.user
 .vs/
-*-lock.json
+
 **/node_modules/
 **/storybook-static/
 **/dist

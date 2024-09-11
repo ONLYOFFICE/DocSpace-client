@@ -490,7 +490,72 @@ describe("Locales Tests", () => {
   });
 
   test("WrongTranslationTagsTest", () => {
-    // Add test logic here
+    const message = `Next keys have wrong or empty translation's html tags:\r\n\r\n`;
+    const regString = "<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>";
+    const regTags = new RegExp(regString, "gm");
+
+    const groupedByLng = translationFiles.reduce((acc, t) => {
+      if (!acc[t.language]) {
+        acc[t.language] = [];
+      }
+      acc[t.language].push(
+        ...t.translations.map((k) => ({
+          key: k.key,
+          value: k.value,
+          tags: [...k.value.matchAll(regTags)].map((m) =>
+            m[0].trim().replace(" ", "")
+          ),
+        }))
+      );
+      return acc;
+    }, {});
+
+    const enWithTags = groupedByLng["en"].filter((t) => t.tags.length > 0);
+
+    const otherLanguagesWithTags = Object.keys(groupedByLng)
+      .filter((lang) => lang !== "en")
+      .map((lang) => ({
+        language: lang,
+        translationsWithTags: groupedByLng[lang],
+      }));
+
+    let i = 0;
+    let errorsCount = 0;
+
+    enWithTags.forEach((enKeyWithTags) => {
+      otherLanguagesWithTags.forEach((lng) => {
+        const lngKey = lng.translationsWithTags.find(
+          (t) => t.key === enKeyWithTags.key
+        );
+
+        if (!lngKey) {
+          // wrong
+          // message += `${++i}. lng='${lng.Language}' key='${enKeyWithTags.Key}' not found\r\n\r\n`;
+          // errorsCount++;
+          return;
+        }
+
+        if (enKeyWithTags.tags.length !== lngKey.tags.length) {
+          // wrong
+          message +=
+            `${++i}. lng='${lng.language}' key='${lngKey.key}' has less tags than 'en' language have ` +
+            `(en=${enKeyWithTags.tags.length}|${lng.language}=${lngKey.tags.length})\r\n` +
+            `'en': '${enKeyWithTags.value}'\r\n'${lng.language}': '${lngKey.value}'\r\n\r\n`;
+          errorsCount++;
+        }
+
+        if (!lngKey.tags.every((v) => enKeyWithTags.tags.includes(v))) {
+          // wrong
+          message +=
+            `${++i}. lng='${lng.language}' key='${lngKey.key}' has not equals tags of 'en' language have \r\n` +
+            `'${enKeyWithTags.value}' Tags=[${enKeyWithTags.tags.join(",")}]\r\n` +
+            `'${lngKey.value}' Tags=[${lngKey.tags.join(",")}]\r\n\r\n`;
+          errorsCount++;
+        }
+      });
+    });
+
+    expect(errorsCount, message).toBe(0);
   });
 
   test("ForbiddenValueElementsTest", () => {

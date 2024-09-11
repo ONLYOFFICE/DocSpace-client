@@ -366,7 +366,24 @@ describe("Locales Tests", () => {
   });
 
   test("NotTranslatedToastsTest", () => {
-    // Add test logic here
+    let message = `Next text not translated in toasts:\r\n\r\n`;
+
+    let i = 0;
+
+    const groupedToasts = notTranslatedToasts.reduce((acc, t) => {
+      if (!acc[t.key]) {
+        acc[t.key] = [];
+      }
+      acc[t.key].push(t);
+      return acc;
+    }, {});
+
+    Object.keys(groupedToasts).forEach((key) => {
+      const group = groupedToasts[key];
+      message += `${++i}. Path='${key}'\r\n\r\n${group.map((v) => v.value).join("\r\n")}\r\n\r\n`;
+    });
+
+    expect(notTranslatedToasts.length).toBe(0, message);
   });
 
   test("NotTranslatedPropsTest", () => {

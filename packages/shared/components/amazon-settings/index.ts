@@ -23,35 +23,5 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
-import type { TTheme } from "../../themes";
-import type { TTranslation } from "../../types";
-
-export type PropertiesType = { name: string; title: string; value: string };
-
-export type SelectedStorageType = {
-  id: string;
-  isSet: boolean;
-  title: string;
-  properties: PropertiesType[];
-};
-
-export type StorageRegionsType = { displayName: string; systemName: string };
-
-export interface AmazonSettingsProps {
-  t: TTranslation;
-  theme: TTheme;
-  isNeedFilePath: boolean;
-  isLoading: boolean;
-  isLoadingData: boolean;
-  formSettings: Record<string, string>;
-  defaultRegion: unknown;
-  errorsFieldsBeforeSafe: Record<string, boolean>;
-  storageRegions: StorageRegionsType[];
-  selectedStorage?: SelectedStorageType;
-
-  deleteValueFormSetting: (key: string) => void;
-  addValueInFormSettings: (name: string, value: string) => void;
-  setIsThirdStorageChanged: (changed: boolean) => void;
-  setRequiredFormSettings: (arr: string[]) => void;
-}
+export { default as AmazonSettings } from "./AmazonSettings";
+export { formNames } from "./AmazonSettings.helpers";

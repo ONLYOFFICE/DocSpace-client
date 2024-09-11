@@ -24,73 +24,129 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { withTranslation } from "react-i18next";
-import { Button } from "@docspace/shared/components/button";
-import AmazonSettings from "../../../consumer-storage-settings/AmazonSettings";
-import { inject, observer } from "mobx-react";
-import { getFromLocalStorage } from "../../../../../../utils";
+import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { ThirdPartyStorages } from "@docspace/shared/enums";
-class AmazonStorage extends React.Component {
-  constructor(props) {
-    super(props);
-    const { selectedStorage, setCompletedFormFields, storageRegions } =
-      this.props;
+import {
+  AmazonSettings,
+  formNames,
+} from "@docspace/shared/components/amazon-settings";
 
-    const basicValues = AmazonSettings.formNames(storageRegions[0].systemName);
+import type { TTheme } from "@docspace/shared/themes";
+import type {
+  StorageRegionsType,
+  SelectedStorageType,
+} from "@docspace/shared/components/amazon-settings/AmazonSettings.types";
 
-    const moduleValues = getFromLocalStorage(
-      "LocalCopyThirdPartyStorageValues",
+interface AmazonStorageProps {
+  theme: TTheme;
+  isValidForm: boolean;
+  buttonSize: ButtonSize;
+  isMaxProgress: boolean;
+  isLoadingData: boolean;
+  isNeedFilePath: boolean;
+  isLoading: boolean;
+  selectedStorage?: SelectedStorageType;
+  formSettings: Record<string, string>;
+  errorsFieldsBeforeSafe: Record<string, boolean>;
+  defaultRegion: unknown;
+  storageRegions: StorageRegionsType[];
+
+  deleteValueFormSetting: (key: string) => void;
+  addValueInFormSettings: (name: string, value: string) => void;
+  setIsThirdStorageChanged: (changed: boolean) => void;
+  setRequiredFormSettings: (arr: string[]) => void;
+
+  setCompletedFormFields: (
+    values: Record<string, unknown>,
+    module?: unknown,
+  ) => void;
+  onMakeCopyIntoStorage: () => Promise<void>;
+}
+
+const AmazonStorage = ({
+  theme,
+  isLoading,
+  buttonSize,
+  isValidForm,
+  formSettings,
+  isMaxProgress,
+  defaultRegion,
+  isLoadingData,
+  storageRegions,
+  isNeedFilePath,
+  selectedStorage,
+  errorsFieldsBeforeSafe,
+  onMakeCopyIntoStorage,
+  setCompletedFormFields,
+  deleteValueFormSetting,
+  addValueInFormSettings,
+  setIsThirdStorageChanged,
+  setRequiredFormSettings,
+}: AmazonStorageProps) => {
+  const { t } = useTranslation(["Settings", "Common"]);
+
+  useEffect(() => {
+    const basicValues = formNames(storageRegions[0].systemName);
+
+    const moduleValues = JSON.parse(
+      localStorage.getItem("LocalCopyThirdPartyStorageValues") ?? "null",
     );
     const moduleType =
-      getFromLocalStorage("LocalCopyStorage") === ThirdPartyStorages.AmazonId;
+      JSON.parse(localStorage.getItem("LocalCopyStorage") ?? "null") ===
+      ThirdPartyStorages.AmazonId;
 
     setCompletedFormFields(
       moduleType && moduleValues ? moduleValues : basicValues,
     );
 
-    this.isDisabled = selectedStorage && !selectedStorage.isSet;
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  render() {
-    const {
-      t,
-      isLoadingData,
-      isMaxProgress,
-      selectedStorage,
-      buttonSize,
-      onMakeCopyIntoStorage,
-      isValidForm,
-    } = this.props;
+  const isDisabled = selectedStorage && !selectedStorage.isSet;
 
-    return (
-      <>
-        <AmazonSettings
-          isLoadingData={isLoadingData}
-          selectedStorage={selectedStorage}
-          t={t}
+  return (
+    <>
+      <AmazonSettings
+        t={t}
+        theme={theme}
+        isLoadingData={isLoadingData}
+        selectedStorage={selectedStorage}
+        isNeedFilePath={isNeedFilePath}
+        formSettings={formSettings}
+        isLoading={isLoading}
+        defaultRegion={defaultRegion}
+        storageRegions={storageRegions}
+        errorsFieldsBeforeSafe={errorsFieldsBeforeSafe}
+        deleteValueFormSetting={deleteValueFormSetting}
+        addValueInFormSettings={addValueInFormSettings}
+        setIsThirdStorageChanged={setIsThirdStorageChanged}
+        setRequiredFormSettings={setRequiredFormSettings}
+      />
+      <div className="manual-backup_buttons">
+        <Button
+          id="create-copy"
+          label={t("Common:CreateCopy")}
+          onClick={onMakeCopyIntoStorage}
+          primary
+          isDisabled={!isValidForm || !isMaxProgress || isDisabled}
+          size={buttonSize}
         />
+      </div>
+    </>
+  );
+};
 
-        <div className="manual-backup_buttons">
-          <Button
-            id="create-copy"
-            label={t("Common:CreateCopy")}
-            onClick={onMakeCopyIntoStorage}
-            primary
-            isDisabled={!isValidForm || !isMaxProgress || this.isDisabled}
-            size={buttonSize}
-          />
-        </div>
-      </>
-    );
-  }
-}
-export default inject(({ backup }) => {
-  const { setCompletedFormFields, storageRegions, isValidForm } = backup;
+export default AmazonStorage;
 
-  return {
-    setCompletedFormFields,
-    storageRegions,
-    isValidForm,
-  };
-})(observer(withTranslation(["Settings", "Common"])(AmazonStorage)));
+// export default inject(({ backup }) => {
+//   const { setCompletedFormFields, storageRegions, isValidForm } = backup;
+
+//   return {
+//     setCompletedFormFields,
+//     storageRegions,
+//     isValidForm,
+//   };
+// })(observer(withTranslation(["Settings", "Common"])(AmazonStorage)));

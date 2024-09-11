@@ -283,7 +283,14 @@ describe("Locales Tests", () => {
   });
 
   test("SingleKeyFilesTest", () => {
-    // Add test logic here
+    const singleKeyTranslationFiles = translationFiles.filter(
+      (t) => t.language === "en" && t.translations.length === 1
+    );
+
+    expect(singleKeyTranslationFiles.length).toBe(
+      0,
+      `Translations files with single key:\r\n${singleKeyTranslationFiles.map((d) => `\r\nKey='${d.translations[0].key}':\r\n${d.path}'`).join("\r\n")}`
+    );
   });
 
   test("FullEnDublicatesTest", () => {

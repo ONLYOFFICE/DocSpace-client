@@ -318,12 +318,26 @@ describe("Locales Tests", () => {
     );
   });
 
-  test("EnDublicatesByContentTest", () => {
-    // Add test logic here
-  });
-
   test("NotFoundKeysTest", () => {
-    // Add test logic here
+    const allEnKeys = translationFiles
+      .filter((file) => file.language === "en")
+      .flatMap((item) => item.translations)
+      .map((item) => item.key);
+
+    const allJsTranslationKeys = javascriptFiles
+      .filter((f) => !f.path.includes("Banner.js")) // skip Banner.js (translations from firebase)
+      .flatMap((j) => j.translationKeys)
+      .map((k) => k.substring(k.indexOf(":") + 1))
+      .filter((value, index, self) => self.indexOf(value) === index); // Distinct
+
+    const notFoundJsKeys = allJsTranslationKeys.filter(
+      (k) => !allEnKeys.includes(k)
+    );
+
+    expect(notFoundJsKeys.length).toBe(
+      0,
+      `Some i18n-keys do not exist in translations in 'en' language: Keys:\r\n${notFoundJsKeys.join("\r\n")}`
+    );
   });
 
   test("UselessTranslationKeysTest", () => {

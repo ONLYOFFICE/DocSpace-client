@@ -275,12 +275,11 @@ beforeAll(() => {
 });
 
 describe("Locales Tests", () => {
-  test("LanguageTranslatedPercentTest", () => {
-    // Add test logic here
-  });
-
   test("ParseJsonTest", () => {
-    // Add test logic here
+    expect(parseJsonErrors.length).toBe(
+      0,
+      `File path = '${parseJsonErrors.map((e) => e.path).join(", ")}' failed to parse with error: '${parseJsonErrors.map((e) => e.error).join(", ")}'`
+    );
   });
 
   test("SingleKeyFilesTest", () => {

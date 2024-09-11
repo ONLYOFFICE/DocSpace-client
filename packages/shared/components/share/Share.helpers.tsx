@@ -53,7 +53,7 @@ import { Strong } from "./Share.styled";
 
 export const getShareOptions = (
   t: TTranslation,
-  available: TAvailableExternalRights,
+  available: TAvailableExternalRights | undefined,
 ) => {
   return [
     {

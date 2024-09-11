@@ -30,14 +30,9 @@ import { tablet, mobile } from "@docspace/shared/utils";
 export const StyledSection = styled.section`
   height: 100dvh;
   width: 100%;
-  max-width: 700px;
-  padding: 0 20px;
+  padding-inline-start: 20px;
   display: flex;
   flex-direction: column;
-
-  @media ${mobile} {
-    width: calc(100% - 32px);
-  }
 
   button {
     width: fit-content;

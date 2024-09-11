@@ -38,6 +38,11 @@ export const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  margin-bottom: 16px;
+
+  @media ${mobile} {
+    width: calc(100% - 32px);
+  }
 `;
 
 export const StyledRowContainer = styled(RowContainer)`

@@ -39,6 +39,7 @@ import { inject, observer } from "mobx-react";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
 import { TooltipContent } from "../sub-components/TooltipContent";
+import { Integration } from "../sub-components/Integration";
 import { useNavigate } from "react-router-dom";
 import FilesFilter from "@docspace/shared/api/files/filter";
 
@@ -651,8 +652,22 @@ const Manager = (props) => {
               </ControlsGroup>
             )}
           </ControlsSection>
+
+          <Integration
+            className="integration-examples"
+            t={t}
+            theme={theme}
+            currentColorScheme={currentColorScheme}
+          />
         </Controls>
       </Container>
+
+      <Integration
+        className="integration-examples integration-examples-bottom"
+        t={t}
+        theme={theme}
+        currentColorScheme={currentColorScheme}
+      />
     </PresetWrapper>
   );
 };

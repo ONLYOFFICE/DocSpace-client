@@ -41,7 +41,7 @@ import { HeightSetter } from "../sub-components/HeightSetter";
 import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { PreviewBlock } from "../sub-components/PreviewBlock";
-
+import { Integration } from "../sub-components/Integration";
 import { loadFrame } from "../utils";
 
 import {
@@ -66,7 +66,7 @@ import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 const Editor = (props) => {
-  const { t, getFilePrimaryLink, theme } = props;
+  const { t, getFilePrimaryLink, theme, currentColorScheme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -200,6 +200,13 @@ const Editor = (props) => {
             />
           </ControlsSection>
 
+          <Integration
+            className="integration-examples"
+            t={t}
+            theme={theme}
+            currentColorScheme={currentColorScheme}
+          />
+
           {/* <InterfaceElements>
             <Label className="label">{t("InterfaceElements")}</Label>
             <Checkbox
@@ -225,17 +232,25 @@ const Editor = (props) => {
           </InterfaceElements> */}
         </Controls>
       </Container>
+
+      <Integration
+        className="integration-examples integration-examples-bottom"
+        t={t}
+        theme={theme}
+        currentColorScheme={currentColorScheme}
+      />
     </PresetWrapper>
   );
 };
 
 export const Component = inject(({ settingsStore, filesStore }) => {
-  const { theme } = settingsStore;
+  const { theme, currentColorScheme } = settingsStore;
   const { getFilePrimaryLink } = filesStore;
 
   return {
     theme,
     getFilePrimaryLink,
+    currentColorScheme,
   };
 })(
   withTranslation(["JavascriptSdk", "Files", "EmbeddingPanel", "Common"])(

@@ -19,16 +19,11 @@
     "checkDomain": false
   },
   "oauth2": {
-    "origin": "http://nct3.docspace.site"
+    "origin": ""
   },
   "firebase": {
     "fetchTimeoutMillis": 3600000,
     "minimumFetchIntervalMillis": 3600000
   },
-  "campaigns": [
-    "OnlyofficeForDevelopers",
-    "OnlyofficeForPlatform",
-    "BookTraining",
-    "FormGallery"
-  ]
+  "campaigns": ["OnlyofficeForPlatform", "BookTraining", "FormGallery"]
 }

@@ -145,11 +145,7 @@ const SubmitToFormGallery = ({
   console.log(formItem);
 
   return (
-    <Styled.SubmitToGalleryDialog
-      visible={visible}
-      onClose={onClose}
-      autoMaxHeight
-    >
+    <ModalDialog visible={visible} onClose={onClose} autoMaxHeight>
       <ModalDialog.Header>{t("Common:SubmitToFormGallery")}</ModalDialog.Header>
       <ModalDialog.Body>
         <div>{t("FormGallery:SubmitToGalleryDialogMainInfo")}</div>
@@ -223,7 +219,7 @@ const SubmitToFormGallery = ({
           scale
         />
       </ModalDialog.Footer>
-    </Styled.SubmitToGalleryDialog>
+    </ModalDialog>
   );
 };
 

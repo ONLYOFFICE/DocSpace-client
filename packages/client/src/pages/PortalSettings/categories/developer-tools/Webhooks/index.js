@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Button } from "@docspace/shared/components/button";
-import React, { useState, useEffect, useTransition, Suspense } from "react";
+import { useState, useEffect, useTransition, Suspense } from "react";
 import WebhookDialog from "./sub-components/WebhookDialog";
 import WebhookInfo from "./sub-components/WebhookInfo";
 import WebhooksTable from "./sub-components/WebhooksTable";

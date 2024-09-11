@@ -24,41 +24,33 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import { Page } from "@playwright/test";
 
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { mobile } from "@docspace/shared/utils";
+import { TEndpoint } from "./handlers";
 
-const StyledModalDialog = styled(ModalDialog)`
-  .heading {
-    font-size: 21px;
+export class MockRequest {
+  constructor(public readonly page: Page) {}
+
+  async router(endpoints: TEndpoint[]) {
+    endpoints.forEach(async (endpoint) => {
+      await this.page.route(endpoint.url, async (route) => {
+        const json = await endpoint.dataHandler.json();
+
+        await route.fulfill({ json });
+      });
+    });
   }
 
-  .generate {
-    font-weight: 600;
+  async setHeaders(url: string, headers: string[]) {
+    await this.page.route(url, async (route, request) => {
+      const objHeaders: { [key: string]: "true" } = {};
+      headers.forEach((item) => (objHeaders[item] = "true"));
+
+      const newHeaders = {
+        ...request.headers(),
+        ...objHeaders,
+      };
+      await route.fallback({ headers: newHeaders });
+    });
   }
-
-  .text-area {
-    width: 488px !important;
-    height: 72px !important;
-    margin-top: 4px;
-
-    &-label {
-      font-weight: 600;
-      margin-bottom: 5px;
-    }
-
-    @media ${mobile} {
-      width: 100% !important;
-    }
-  }
-  .text-area-label {
-    margin-top: 16px;
-  }
-
-  .modal-combo {
-    margin: 16px 0 0 0;
-  }
-`;
-
-export default StyledModalDialog;
+}

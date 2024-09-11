@@ -24,18 +24,54 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Page } from "@playwright/test";
+import { loginHandler, LOGIN_PATH } from "./authentication";
+import {
+  SELF_PATH_ACTIVATION_STATUS,
+  SELF_PATH_CHANGE_PASSWORD,
+  SELF_PATH_UPDATE_USER,
+  selfHandler,
+} from "./people";
+import {
+  COMPLETE_PATH,
+  completeHandler,
+  LICENCE_PATH,
+  licenseHandler,
+} from "./settings";
 
-import { TEndpoint } from "__tests__/mocking/endpoints";
+export type TEndpoint = {
+  url: string;
+  dataHandler: Response;
+};
 
-export class MockRequest {
-  constructor(public readonly page: Page) {}
+export type TEndpoints = {
+  [key: string]: TEndpoint;
+};
 
-  async router(endpoint: TEndpoint) {
-    await this.page.route(endpoint.url, async (route) => {
-      await route.fulfill({
-        path: `__tests__/mocking/mock-data/${endpoint.pathToData}.json`,
-      });
-    });
-  }
-}
+const BASE_URL = "*/**/api/2.0/";
+
+export const endpoints: TEndpoints = {
+  wizardComplete: {
+    url: `${BASE_URL}${COMPLETE_PATH}`,
+    dataHandler: completeHandler(),
+  },
+  license: {
+    url: `${BASE_URL}${LICENCE_PATH}`,
+    dataHandler: licenseHandler(),
+  },
+  changePassword: {
+    url: `${BASE_URL}${SELF_PATH_CHANGE_PASSWORD}`,
+    dataHandler: selfHandler(),
+  },
+  activationStatus: {
+    url: `${BASE_URL}${SELF_PATH_ACTIVATION_STATUS}`,
+    dataHandler: selfHandler(),
+  },
+  updateUser: {
+    url: `${BASE_URL}${SELF_PATH_UPDATE_USER}`,
+    dataHandler: selfHandler(),
+  },
+  login: {
+    url: `${BASE_URL}${LOGIN_PATH}`,
+    dataHandler: loginHandler(),
+  },
+};

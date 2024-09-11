@@ -90,10 +90,22 @@ async function Page({ searchParams }: RootPageProps) {
   }
 
   let url = data.config?.editorUrl ?? data.error?.editorUrl;
+  const urlQuery = url?.includes("?") ? `?${url.split("?")[1]}` : "";
+  url = url?.replace(urlQuery, "");
 
   if (url && !url.endsWith("/")) url += "/";
 
-  const docApiUrl = `${url}web-apps/apps/api/documents/api.js`;
+  const docApiUrl = `${url}web-apps/apps/api/documents/api.js${urlQuery}`;
+
+  if (urlQuery) {
+    if (data.config?.editorUrl) {
+      data.config.editorUrl = data.config?.editorUrl.replace(urlQuery, "");
+    }
+
+    if (data.error?.editorUrl) {
+      data.error.editorUrl = data.config?.editorUrl.replace(urlQuery, "");
+    }
+  }
 
   return (
     <>

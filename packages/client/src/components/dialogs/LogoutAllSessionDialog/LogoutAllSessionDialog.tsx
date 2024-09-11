@@ -36,7 +36,6 @@ import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 
 import { LogoutAllSessionDialogProps } from "./LogoutAllSessionDialog.types";
-import ModalDialogContainer from "../ModalDialogContainer";
 
 export const LogoutAllSessionDialog = ({
   t,
@@ -106,7 +105,7 @@ export const LogoutAllSessionDialog = ({
   );
 
   return (
-    <ModalDialogContainer
+    <ModalDialog
       visible={visible}
       onClose={onClose}
       displayType={ModalDialogType.modal}
@@ -139,6 +138,6 @@ export const LogoutAllSessionDialog = ({
           isDisabled={isLoading}
         />
       </ModalDialog.Footer>
-    </ModalDialogContainer>
+    </ModalDialog>
   );
 };

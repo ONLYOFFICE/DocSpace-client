@@ -34,7 +34,6 @@ import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Link } from "@docspace/shared/components/link";
 import { Trans, withTranslation } from "react-i18next";
-import ModalDialogContainer from "../ModalDialogContainer";
 import { sendInstructionsToDelete } from "@docspace/shared/api/people";
 
 class DeleteSelfProfileDialogComponent extends React.Component {
@@ -71,11 +70,7 @@ class DeleteSelfProfileDialogComponent extends React.Component {
     const { isRequestRunning } = this.state;
 
     return (
-      <ModalDialogContainer
-        isLoading={!tReady}
-        visible={visible}
-        onClose={onClose}
-      >
+      <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
         <ModalDialog.Header>{t("DeleteProfileTitle")}</ModalDialog.Header>
         <ModalDialog.Body>
           <Text fontSize="13px">
@@ -110,7 +105,7 @@ class DeleteSelfProfileDialogComponent extends React.Component {
             isDisabled={isRequestRunning}
           />
         </ModalDialog.Footer>
-      </ModalDialogContainer>
+      </ModalDialog>
     );
   }
 }

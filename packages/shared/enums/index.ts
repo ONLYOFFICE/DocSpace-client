@@ -511,6 +511,13 @@ export enum RoomsType {
   CustomRoom = 5,
 }
 
+export const enum RecaptchaType {
+  Default = 0,
+  AndroidV2 = 1,
+  iOSV2 = 2,
+  hCaptcha = 3,
+}
+
 export enum AccountsSearchArea {
   People = "0",
   Groups = "1",

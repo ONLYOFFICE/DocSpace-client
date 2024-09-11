@@ -24,22 +24,26 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export type TEndpoint = {
-  url: string;
-  pathToData: string;
+import { API_PREFIX, BASE_URL } from "../../utils";
+
+export const PATH = "settings/wizard/complete";
+
+const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
+
+export const completeSuccess = {
+  response: true,
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+  ok: true,
 };
 
-export type TEndpoints = {
-  [key: string]: TEndpoint;
-};
-
-export const endpoints: TEndpoints = {
-  complete: {
-    url: "*/**/api/2.0/settings/wizard/complete",
-    pathToData: "settings/complete",
-  },
-  license: {
-    url: "*/**/api/2.0/settings/license",
-    pathToData: "settings/license",
-  },
+export const complete = (): Response => {
+  return new Response(JSON.stringify(completeSuccess));
 };

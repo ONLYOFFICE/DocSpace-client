@@ -34,7 +34,7 @@ import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { Portal } from "@docspace/shared/components/portal";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { StyledEditLinkPanel } from "./StyledEditLinkPanel";
+import { StyledEditLinkBodyContent } from "./StyledEditLinkPanel";
 
 import LinkBlock from "./LinkBlock";
 import ToggleBlock from "./ToggleBlock";
@@ -217,15 +217,16 @@ const EditLinkPanel = (props) => {
     !hasChanges || isLoading || !linkNameIsValid || isExpired;
 
   const editLinkPanelComponent = (
-    <StyledEditLinkPanel
+    <ModalDialog
       isExpired={isExpired}
       displayType="aside"
       visible={visible}
       onClose={onClosePanel}
       isLarge
       zIndex={310}
-      withBodyScroll={true}
-      withFooterBorder={true}
+      withBodyScroll
+      withFooterBorder
+      withoutPadding
     >
       <ModalDialog.Header>
         {isEdit
@@ -237,7 +238,7 @@ const EditLinkPanel = (props) => {
           : t("Files:CreateNewLink")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <div className="edit-link_body">
+        <StyledEditLinkBodyContent className="edit-link_body">
           <LinkBlock
             t={t}
             isEdit={isEdit}
@@ -285,7 +286,7 @@ const EditLinkPanel = (props) => {
               language={language}
             />
           )}
-        </div>
+        </StyledEditLinkBodyContent>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -304,7 +305,7 @@ const EditLinkPanel = (props) => {
           onClick={onClose}
         />
       </ModalDialog.Footer>
-    </StyledEditLinkPanel>
+    </ModalDialog>
   );
 
   const renderPortal = () => {

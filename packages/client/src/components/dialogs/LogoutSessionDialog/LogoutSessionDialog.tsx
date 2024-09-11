@@ -31,7 +31,6 @@ import {
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 
 import { LogoutSessionDialogProps } from "./LogoutSessionDialog.types";
-import ModalDialogContainer from "../ModalDialogContainer";
 
 export const LogoutSessionDialog = ({
   t,
@@ -47,11 +46,10 @@ export const LogoutSessionDialog = ({
   };
 
   return (
-    <ModalDialogContainer
+    <ModalDialog
       visible={visible}
       onClose={onClose}
       displayType={ModalDialogType.modal}
-      autoMaxHeight
     >
       <ModalDialog.Header>{t("Common:LogoutButton")}</ModalDialog.Header>
       <ModalDialog.Body>
@@ -79,6 +77,6 @@ export const LogoutSessionDialog = ({
           isDisabled={isLoading}
         />
       </ModalDialog.Footer>
-    </ModalDialogContainer>
+    </ModalDialog>
   );
 };

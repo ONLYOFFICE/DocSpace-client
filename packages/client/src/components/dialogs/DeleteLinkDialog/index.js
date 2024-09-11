@@ -24,19 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
-
+import { useState, useEffect } from "react";
+import { inject, observer } from "mobx-react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 
-import { StyledDeleteLinkDialog } from "./StyledDeleteLinkDialog";
-
 import { withTranslation } from "react-i18next";
-
-import { inject, observer } from "mobx-react";
-import { RoomsType } from "@docspace/shared/enums";
 
 const DeleteLinkDialogComponent = (props) => {
   const {
@@ -94,11 +89,7 @@ const DeleteLinkDialogComponent = (props) => {
   };
 
   return (
-    <StyledDeleteLinkDialog
-      isLoading={!tReady}
-      visible={visible}
-      onClose={onClose}
-    >
+    <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
       <ModalDialog.Header>
         {link.sharedTo.primary && isPublicRoomType
           ? t("Files:RevokeLink")
@@ -138,7 +129,7 @@ const DeleteLinkDialogComponent = (props) => {
           isDisabled={isLoading}
         />
       </ModalDialog.Footer>
-    </StyledDeleteLinkDialog>
+    </ModalDialog>
   );
 };
 

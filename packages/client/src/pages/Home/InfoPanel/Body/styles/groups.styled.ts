@@ -49,7 +49,9 @@ export const GroupsContent = styled.div<{}>`
       .name-wrapper {
         display: flex;
         flex-direction: row;
-        gap: 4px;
+        align-items: center;
+        gap: 8px;
+
         .name {
           max-width: 180px;
           font-size: 14px;

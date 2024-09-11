@@ -34,12 +34,10 @@ import LockedReactSvg from "PUBLIC_DIR/images/icons/12/locked.react.svg";
 
 import { RowSkeleton } from "../../../skeletons/share";
 import { TFileLink } from "../../../api/files/types";
-import { copyShareLink } from "../../../utils/copy";
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
 import { Link } from "../../link";
 import { ComboBox, ComboBoxSize, TOption } from "../../combobox";
 import { IconButton } from "../../icon-button";
-import { toastr } from "../../toast";
 import { Loader, LoaderTypes } from "../../loader";
 import { Text } from "../../text";
 
@@ -48,6 +46,7 @@ import {
   getShareOptions,
   getAccessOptions,
   getRoomAccessOptions,
+  copyDocumentShareLink,
 } from "../Share.helpers";
 import { LinkRowProps } from "../Share.types";
 
@@ -74,7 +73,7 @@ const LinkRow = ({
 }: LinkRowProps) => {
   const { t } = useTranslation(["Common", "Translations"]);
 
-  const shareOptions = getShareOptions(t) as TOption[];
+  const shareOptions = getShareOptions(t, availableExternalRights) as TOption[];
   const accessOptions = availableExternalRights
     ? getAccessOptions(t, availableExternalRights)
     : [];
@@ -82,8 +81,7 @@ const LinkRow = ({
   const roomAccessOptions = isRoomsLink ? getRoomAccessOptions(t) : [];
 
   const onCopyLink = (link: TFileLink) => {
-    copyShareLink(link.sharedTo.shareLink);
-    toastr.success(t("Common:LinkSuccessfullyCopied"));
+    copyDocumentShareLink(link, t);
   };
 
   return !links?.length ? (
@@ -153,6 +151,7 @@ const LinkRow = ({
                 scaledOptions={false}
                 showDisabledItems
                 size={ComboBoxSize.content}
+                manualWidth="fit-content"
                 fillIcon={false}
                 modernView
                 isDisabled={isLoaded}
@@ -163,7 +162,7 @@ const LinkRow = ({
             {!isPrimaryLink && (
               <ExpiredComboBox
                 link={link}
-                accessOptions={accessOptions}
+                availableExternalRights={availableExternalRights}
                 changeExpirationOption={changeExpirationOption}
                 isDisabled={isLoaded || isArchiveFolder}
                 isRoomsLink={isRoomsLink}

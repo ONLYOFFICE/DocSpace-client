@@ -32,7 +32,7 @@ import { Button, ButtonSize } from "../../components/button";
 import { Text } from "../../components/text";
 import { ConflictResolveType } from "../../enums";
 
-import StyledModalDialog from "./ConflictResolve.styled";
+import { StyledBodyContent } from "./ConflictResolve.styled";
 import { ConflictResolveProps } from "./ConflictResolve.types";
 
 const ConflictResolve = (props: ConflictResolveProps) => {
@@ -105,7 +105,7 @@ const ConflictResolve = (props: ConflictResolveProps) => {
   ];
 
   return (
-    <StyledModalDialog
+    <ModalDialog
       isLoading={isLoading}
       visible={visible}
       onClose={onClose}
@@ -115,20 +115,22 @@ const ConflictResolve = (props: ConflictResolveProps) => {
     >
       <ModalDialog.Header>{headerLabel}</ModalDialog.Header>
       <ModalDialog.Body>
-        <Text truncate className="message conflict-resolve_file-name ">
-          {messageText}
-        </Text>
-        <Text className="select-action">{selectActionText}</Text>
-        <RadioButtonGroup
-          className="conflict-resolve-radio-button"
-          orientation="vertical"
-          fontSize="13px"
-          fontWeight={400}
-          name="group"
-          onClick={onSelectResolveType}
-          options={radioOptions}
-          selected={ConflictResolveType.Overwrite as unknown as string}
-        />
+        <StyledBodyContent>
+          <Text truncate className="message conflict-resolve_file-name ">
+            {messageText}
+          </Text>
+          <Text className="select-action">{selectActionText}</Text>
+          <RadioButtonGroup
+            className="conflict-resolve-radio-button"
+            orientation="vertical"
+            fontSize="13px"
+            fontWeight={400}
+            name="group"
+            onClick={onSelectResolveType}
+            options={radioOptions}
+            selected={ConflictResolveType.Overwrite as unknown as string}
+          />
+        </StyledBodyContent>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -145,7 +147,7 @@ const ConflictResolve = (props: ConflictResolveProps) => {
           onClick={onClose}
         />
       </ModalDialog.Footer>
-    </StyledModalDialog>
+    </ModalDialog>
   );
 };
 

@@ -35,8 +35,6 @@ import { TData } from "@docspace/shared/components/toast/Toast.type";
 
 import { DisableUserDialogProps } from "./DisableUserDialog.types";
 
-import ModalDialogContainer from "../ModalDialogContainer";
-
 export const DisableUserDialog = ({
   t,
   visible,
@@ -78,7 +76,7 @@ export const DisableUserDialog = ({
   };
 
   return (
-    <ModalDialogContainer
+    <ModalDialog
       visible={visible}
       onClose={onClose}
       displayType={ModalDialogType.modal}
@@ -104,6 +102,6 @@ export const DisableUserDialog = ({
           isDisabled={isLoading}
         />
       </ModalDialog.Footer>
-    </ModalDialogContainer>
+    </ModalDialog>
   );
 };

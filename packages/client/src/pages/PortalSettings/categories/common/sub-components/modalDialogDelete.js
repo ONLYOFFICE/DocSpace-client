@@ -24,13 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import styled from "styled-components";
 import { withTranslation } from "react-i18next";
 
-const StyledModalDialogDelete = styled(ModalDialog)`
+const StyledFooterContent = styled.div`
+  display: contents;
+
   .button-modal {
     width: 50%;
   }
@@ -48,31 +50,29 @@ const ModalDialogDelete = (props) => {
   });
 
   return (
-    <StyledModalDialogDelete
-      visible={visible}
-      onClose={onClose}
-      displayType="modal"
-    >
+    <ModalDialog visible={visible} onClose={onClose} displayType="modal">
       <ModalDialog.Header>
         {t("Settings:DeleteThemeForever")}
       </ModalDialog.Header>
       <ModalDialog.Body>{t("Settings:DeleteThemeNotice")}</ModalDialog.Body>
       <ModalDialog.Footer>
-        <Button
-          className="delete button-modal"
-          label={t("Common:Delete")}
-          onClick={onClickDelete}
-          primary
-          size="normal"
-        />
-        <Button
-          className="cancel-button button-modal"
-          label={t("Common:CancelButton")}
-          size="normal"
-          onClick={onClose}
-        />
+        <StyledFooterContent>
+          <Button
+            className="delete button-modal"
+            label={t("Common:Delete")}
+            onClick={onClickDelete}
+            primary
+            size="normal"
+          />
+          <Button
+            className="cancel-button button-modal"
+            label={t("Common:CancelButton")}
+            size="normal"
+            onClick={onClose}
+          />
+        </StyledFooterContent>
       </ModalDialog.Footer>
-    </StyledModalDialogDelete>
+    </ModalDialog>
   );
 };
 

@@ -401,8 +401,30 @@ const StyledTableBody = styled.div<{
   }
 `;
 
-const StyledTableRow = styled.div<{ dragging?: boolean }>`
+const StyledTableRow = styled.div<{
+  dragging?: boolean;
+  isActive?: boolean;
+  checked?: boolean;
+}>`
   display: contents;
+
+  @media (hover: hover) {
+    .create-share-link {
+      display: none;
+    }
+
+    &:hover .create-share-link {
+      display: block;
+    }
+
+    ${({ isActive, checked }) =>
+      (isActive || checked) &&
+      css`
+        .create-share-link {
+          display: block;
+        }
+      `}
+  }
 
   .table-container_header-checkbox {
     svg {

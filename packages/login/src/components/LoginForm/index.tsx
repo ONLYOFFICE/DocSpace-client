@@ -298,7 +298,7 @@ const LoginForm = ({
           const redirectUrl = getCookie(
             "x-redirect-authorization-uri",
           )?.replace(window.location.origin, name);
-          deleteCookie("x-redirect-authorization-uri");
+          // deleteCookie("x-redirect-authorization-uri");
 
           window.open(
             `${portals[0].portalLink}&referenceUrl=${redirectUrl}`,
@@ -355,7 +355,7 @@ const LoginForm = ({
       .then(async (res: string | object) => {
         const redirectUrl = getCookie("x-redirect-authorization-uri");
         if (clientId && redirectUrl) {
-          deleteCookie("x-redirect-authorization-uri");
+          // deleteCookie("x-redirect-authorization-uri");
 
           window.location.replace(redirectUrl);
 

@@ -31,6 +31,7 @@ import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { LANGUAGE } from "@docspace/shared/constants";
 
 import {
+  getConfig,
   getOAuthClient,
   getScopeList,
   getSettings,
@@ -46,11 +47,12 @@ async function Page({
   searchParams: { [key: string]: string };
 }) {
   const clientId = searchParams.clientId ?? searchParams.client_id;
-  const [client, scopes, user, settings] = await Promise.all([
+  const [client, scopes, user, settings, config] = await Promise.all([
     getOAuthClient(clientId),
     getScopeList(),
     getUser(),
     getSettings(),
+    getConfig(),
   ]);
 
   if (!client || (client && !("clientId" in client)) || !scopes || !user)
@@ -80,6 +82,7 @@ async function Page({
               client={client as IClientProps}
               scopes={scopes}
               user={user}
+              baseUrl={config?.oauth2.origin}
             />
           </>
         </ColorTheme>

@@ -89,9 +89,10 @@ interface IConsentProps {
   client: IClientProps;
   scopes: TScope[];
   user: TUser;
+  baseUrl?: string;
 }
 
-const Consent = ({ client, scopes, user }: IConsentProps) => {
+const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
   const { t } = useTranslation(["Consent", "Common"]);
   const router = useRouter();
 
@@ -150,6 +151,12 @@ const Consent = ({ client, scopes, user }: IConsentProps) => {
 
   const onChangeUserClick = async () => {
     await api.user.logout();
+
+    if (baseUrl) {
+      window.location.replace(
+        `${baseUrl}/login?client_id=${client.clientId}&type=oauth2`,
+      );
+    }
 
     router.push(`/?client_id=${client.clientId}&type=oauth2`);
   };

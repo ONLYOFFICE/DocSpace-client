@@ -24,42 +24,54 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export type IconOptions = {
-  color: string;
+export const successScopes = [
+  {
+    name: "accounts.self:read",
+    group: "profiles",
+    type: "read",
+  },
+  {
+    name: "accounts.self:write",
+    group: "profiles",
+    type: "write",
+  },
+  {
+    name: "accounts:read",
+    group: "accounts",
+    type: "read",
+  },
+  {
+    name: "accounts:write",
+    group: "accounts",
+    type: "write",
+  },
+  {
+    name: "files:read",
+    group: "files",
+    type: "read",
+  },
+  {
+    name: "files:write",
+    group: "files",
+    type: "write",
+  },
+  {
+    name: "rooms:read",
+    group: "rooms",
+    type: "read",
+  },
+  {
+    name: "rooms:write",
+    group: "rooms",
+    type: "write",
+  },
+  {
+    name: "openid",
+    group: "openid",
+    type: "openid",
+  },
+];
+
+export const scopesHandler = () => {
+  return new Response(JSON.stringify(successScopes));
 };
-export type SocialButtonSize = "base" | "small";
-
-export interface StyledSocialButtonProps {
-  /** Accepts id */
-  id?: string;
-  /** Accepts tabindex prop */
-  tabIndex: number;
-
-  noHover: boolean;
-  /** Changes the button style if the user is connected to the social network account */
-  isConnect: boolean;
-  /** Accepts class */
-  className?: string;
-  /** Sets the button to present a disabled state */
-  isDisabled: boolean;
-  /** Sets the image size. Contains the small and the basic size options */
-  size: SocialButtonSize;
-  /** Accepts the icon options  */
-  $iconOptions?: IconOptions;
-  /** Accepts css style */
-  style?: React.CSSProperties;
-  /** Sets a callback function that is triggered when the button is clicked */
-  onClick?: (e: React.MouseEvent<Element, MouseEvent>) => void;
-}
-
-export interface SocialButtonProps extends Partial<StyledSocialButtonProps> {
-  /** Button text */
-  label?: string | React.ReactNode;
-  /** Button icon */
-  iconName?: string;
-
-  "data-url"?: string;
-  "data-providername"?: string;
-
-  IconComponent?: JSX.ElementType;
-}

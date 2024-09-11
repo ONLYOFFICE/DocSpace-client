@@ -23,7 +23,11 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { API_PREFIX, BASE_URL } from "../../utils";
+import {
+  API_PREFIX,
+  BASE_URL,
+  HEADER_LIST_THIRD_PARTY_PROVIDERS,
+} from "../../utils";
 
 const PATH = "people/thirdparty/providers";
 
@@ -73,6 +77,23 @@ export const successThirdpartyProviders = {
   statusCode: 200,
 };
 
-export const thirdPartyProvider = () => {
-  return new Response(JSON.stringify(successThirdpartyProviders));
+export const emptyThirdPartyProviders = {
+  response: [],
+  count: 0,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+export const thirdPartyProvider = (headers?: Headers) => {
+  if (headers?.get(HEADER_LIST_THIRD_PARTY_PROVIDERS)) {
+    return new Response(JSON.stringify(successThirdpartyProviders));
+  }
+
+  return new Response(JSON.stringify(emptyThirdPartyProviders));
 };

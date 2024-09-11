@@ -67,6 +67,7 @@ import {
   thirdPartyProviderHandler,
   getClientHandler,
   confirmHandler,
+  scopesHandler,
 } from "@docspace/shared/__mocks__/e2e";
 
 const IS_TEST = process.env.E2E_TEST;
@@ -145,7 +146,7 @@ export async function getThirdPartyProviders() {
   );
 
   const res = IS_TEST
-    ? thirdPartyProviderHandler()
+    ? thirdPartyProviderHandler(headers())
     : await fetch(getThirdParty);
 
   if (!res.ok) return;
@@ -158,7 +159,9 @@ export async function getThirdPartyProviders() {
 export async function getCapabilities() {
   const [getCapabilities] = createRequest([`/capabilities`], [["", ""]], "GET");
 
-  const res = IS_TEST ? capabilitiesHandler() : await fetch(getCapabilities);
+  const res = IS_TEST
+    ? capabilitiesHandler(headers())
+    : await fetch(getCapabilities);
 
   if (!res.ok) return;
 
@@ -200,7 +203,7 @@ export async function getUser() {
 export async function getScopeList() {
   const [getScopeList] = createRequest([`/scopes`], [["", ""]], "GET");
 
-  const scopeList = await fetch(getScopeList);
+  const scopeList = IS_TEST ? scopesHandler() : await fetch(getScopeList);
 
   if (!scopeList.ok) return;
 

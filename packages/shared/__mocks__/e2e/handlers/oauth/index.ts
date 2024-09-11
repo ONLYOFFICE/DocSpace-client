@@ -24,13 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { getClientHandler, successClient } from "./client";
-import { oauthListSignIn, oauthSignIPpath, oauthSignIn } from "./signIn";
-
+export { getClientHandler, successClient } from "./client";
 export {
-  getClientHandler,
-  successClient,
   oauthListSignIn,
-  oauthSignIPpath,
+  oauthSignInHelper,
   oauthSignIn,
-};
+  OAUTH_SIGN_IN_PATH,
+} from "./signIn";
+export * from "./scopes";

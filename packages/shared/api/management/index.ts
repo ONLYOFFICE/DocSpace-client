@@ -152,7 +152,7 @@ export const getAvailablePortals = async (data: {
   const res = (await request({
     baseURL,
     method: "post",
-    url: `/portal/signin?Email=${data.Email}&PasswordHash=${data.PasswordHash}`,
+    url: `/portal/signin`,
     data,
   })) as { tenants: { portalLink: string; portalName: string }[] };
 

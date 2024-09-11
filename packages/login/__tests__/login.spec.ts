@@ -23,9 +23,17 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import {
+  HEADER_LIST_CAPABILITIES,
+  HEADER_LIST_THIRD_PARTY_PROVIDERS,
+} from "@docspace/shared/__mocks__/e2e";
 import { expect, test } from "./fixtures/base";
 
-test("login render", async ({ page }) => {
+test("login render", async ({ page, mockRequest }) => {
+  await mockRequest.setHeaders("/login", [
+    HEADER_LIST_CAPABILITIES,
+    HEADER_LIST_THIRD_PARTY_PROVIDERS,
+  ]);
   await page.goto("/login");
 
   await expect(page).toHaveScreenshot(["desktop", "login", "login-render.png"]);

@@ -24,11 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX, BASE_URL } from "../utils";
+import { API_PREFIX, BASE_URL, HEADER_LIST_CAPABILITIES } from "../utils";
 
 const PATH = "capabilities";
 
 const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
+
+export const emptySuccessCapabilities = {
+  response: {
+    ldapEnabled: false,
+    providers: [],
+    ssoLabel: "",
+    oauthEnabled: false,
+    ssoUrl: "",
+    identityServerEnabled: false,
+  },
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "GET",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
 
 export const successCapabilities = {
   response: {
@@ -57,6 +77,10 @@ export const successCapabilities = {
   statusCode: 200,
 };
 
-export const capabilitiesHandler = () => {
-  return new Response(JSON.stringify(successCapabilities));
+export const capabilitiesHandler = (headers: Headers) => {
+  if (headers.get(HEADER_LIST_CAPABILITIES)) {
+    return new Response(JSON.stringify(successCapabilities));
+  }
+
+  return new Response(JSON.stringify(emptySuccessCapabilities));
 };

@@ -26,7 +26,7 @@
 
 import { BASE_URL } from "../../utils";
 
-export const oauthSignIPpath = "apisystem/portal/signin";
+export const OAUTH_SIGN_IN_PATH = "apisystem/portal/signin";
 
 export const oauthListSignIn = {
   tenants: [
@@ -49,7 +49,11 @@ export const oauthSignIn = {
   tenants: [
     {
       portalName: "http://nct1.docspace.site",
-      portalLink: `${BASE_URL}/confirm/Auth?type=Auth&key=463586937695.PX9GUFYAB6FMUCGFKFOKT6CKUXP5QES6XKIQGMJJCU&email=test%40gmail.com`,
+      portalLink: `${BASE_URL}:${process.env.PORT}/confirm/Auth?type=Auth&key=463586937695.PX9GUFYAB6FMUCGFKFOKT6CKUXP5QES6XKIQGMJJCU&email=test%40gmail.com`,
     },
   ],
+};
+
+export const oauthSignInHelper = () => {
+  return new Response(JSON.stringify(oauthListSignIn));
 };

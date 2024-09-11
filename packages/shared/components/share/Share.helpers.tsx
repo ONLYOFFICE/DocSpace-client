@@ -53,7 +53,7 @@ import { Strong } from "./Share.styled";
 
 export const getShareOptions = (
   t: TTranslation,
-  available: TAvailableExternalRights,
+  available: TAvailableExternalRights | undefined,
 ) => {
   return [
     {
@@ -68,11 +68,11 @@ export const getShareOptions = (
         productName: t("Common:ProductName"),
       }),
     },
-    available.None && {
+    available?.None && {
       key: "separator",
       isSeparator: true,
     },
-    available.None && {
+    available?.None && {
       key: "remove",
       internal: true,
       access: ShareAccessRights.None,

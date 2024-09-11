@@ -31,7 +31,6 @@ import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { withTranslation } from "react-i18next";
-import ModalDialogContainer from "../ModalDialogContainer";
 import { inject, observer } from "mobx-react";
 
 class DataLossWarningDialogComponent extends React.Component {
@@ -61,7 +60,7 @@ class DataLossWarningDialogComponent extends React.Component {
     const { t, tReady, isVisibleDataLossDialog } = this.props;
 
     return (
-      <ModalDialogContainer
+      <ModalDialog
         visible={isVisibleDataLossDialog}
         onClose={this.onClose}
         isLoading={!tReady}
@@ -87,7 +86,7 @@ class DataLossWarningDialogComponent extends React.Component {
             onClick={this.onClose}
           />
         </ModalDialog.Footer>
-      </ModalDialogContainer>
+      </ModalDialog>
     );
   }
 }

@@ -66,9 +66,10 @@ import {
 } from "./StyledPresets";
 import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import { Integration } from "../sub-components/Integration";
 
 const Viewer = (props) => {
-  const { t, getFilePrimaryLink, theme } = props;
+  const { t, getFilePrimaryLink, theme, currentColorScheme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -203,6 +204,13 @@ const Viewer = (props) => {
             />
           </ControlsSection>
 
+          <Integration
+            className="integration-examples"
+            t={t}
+            theme={theme}
+            currentColorScheme={currentColorScheme}
+          />
+
           {/* <InterfaceElements>
             <Label className="label">{t("InterfaceElements")}</Label>
             <Checkbox
@@ -267,17 +275,25 @@ const Viewer = (props) => {
           /> */}
         </Controls>
       </Container>
+
+      <Integration
+        className="integration-examples integration-examples-bottom"
+        t={t}
+        theme={theme}
+        currentColorScheme={currentColorScheme}
+      />
     </PresetWrapper>
   );
 };
 
 export const Component = inject(({ settingsStore, filesStore }) => {
-  const { theme } = settingsStore;
+  const { theme, currentColorScheme } = settingsStore;
   const { getFilePrimaryLink } = filesStore;
 
   return {
     theme,
     getFilePrimaryLink,
+    currentColorScheme,
   };
 })(
   withTranslation([

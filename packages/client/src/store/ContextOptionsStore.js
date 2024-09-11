@@ -31,7 +31,6 @@ import CheckBoxReactSvgUrl from "PUBLIC_DIR/images/check-box.react.svg?url";
 import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 import ReconnectSvgUrl from "PUBLIC_DIR/images/reconnect.svg?url";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
-import FileActionsOwnerReactSvgUrl from "PUBLIC_DIR/images/file.actions.owner.react.svg?url";
 import FolderLocationReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
 import TickRoundedSvgUrl from "PUBLIC_DIR/images/tick.rounded.svg?url";
 import FavoritesReactSvgUrl from "PUBLIC_DIR/images/favorites.react.svg?url";
@@ -311,10 +310,6 @@ class ContextOptionsStore {
 
   onOpenLocation = (item) => {
     this.filesActionsStore.checkAndOpenLocationAction(item);
-  };
-
-  onOwnerChange = () => {
-    this.dialogsStore.setChangeOwnerPanelVisible(true);
   };
 
   onMoveAction = (item) => {
@@ -1593,14 +1588,6 @@ class ContextOptionsStore {
       },
       ...pinOptions,
       ...muteOptions,
-      {
-        id: "option_owner-change",
-        key: "owner-change",
-        label: t("Translations:OwnerChange"),
-        icon: FileActionsOwnerReactSvgUrl,
-        onClick: this.onOwnerChange,
-        disabled: false,
-      },
       {
         id: "option_link-for-portal-users",
         key: "link-for-portal-users",

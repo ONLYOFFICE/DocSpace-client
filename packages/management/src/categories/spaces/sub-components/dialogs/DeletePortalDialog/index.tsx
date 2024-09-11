@@ -25,13 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import ModalDialogContainer from "@docspace/client/src/components/dialogs/ModalDialogContainer";
-import { Text } from "@docspace/shared/components/text";
+
 import { Button } from "@docspace/shared/components/button";
 import { useTranslation, Trans } from "react-i18next";
 import { observer } from "mobx-react";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import tryRedirectTo from "@docspace/shared/utils/tryRedirectTo";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
 import { useStore } from "SRC_DIR/store";
 import { Link } from "@docspace/shared/components/link";
 
@@ -61,13 +62,13 @@ const DeletePortalDialog = () => {
   };
 
   return (
-    <ModalDialogContainer
+    <ModalDialog
       visible={visible}
       onClose={onClose}
-      displayType="modal"
+      displayType={ModalDialogType.modal}
     >
       <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
-      <ModalDialog.Body className="">
+      <ModalDialog.Body>
         <Trans
           i18nKey="DeletePortalText"
           values={{
@@ -107,7 +108,7 @@ const DeletePortalDialog = () => {
           scale
         />
       </ModalDialog.Footer>
-    </ModalDialogContainer>
+    </ModalDialog>
   );
 };
 

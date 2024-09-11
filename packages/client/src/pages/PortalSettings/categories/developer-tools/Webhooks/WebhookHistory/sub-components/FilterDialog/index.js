@@ -24,12 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import moment from "moment-timezone";
 
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { Button } from "@docspace/shared/components/button";
 import DeliveryDatePicker from "./DeliveryDatePicker";
@@ -38,14 +38,6 @@ import StatusPicker from "./StatusPicker";
 import { useParams, useNavigate } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
-
-import { Base } from "@docspace/shared/themes";
-
-const ModalDialogContainer = styled(ModalDialog)`
-  .modal-body {
-    overflow-y: auto;
-  }
-`;
 
 const DialogBodyWrapper = styled.div`
   margin-top: -4px;
@@ -152,7 +144,7 @@ const FilterDialog = (props) => {
       : filters.deliveryDate === null && filters.status.length === 0;
 
   return (
-    <ModalDialogContainer
+    <ModalDialog
       withFooterBorder
       visible={visible}
       onClose={closeModal}
@@ -190,7 +182,7 @@ const FilterDialog = (props) => {
           </Footer>
         </ModalDialog.Footer>
       )}
-    </ModalDialogContainer>
+    </ModalDialog>
   );
 };
 

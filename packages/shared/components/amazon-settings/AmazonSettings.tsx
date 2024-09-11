@@ -24,231 +24,187 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+/* eslint-disable jsx-a11y/tabindex-no-positive */
 import HelpReactSvgUrl from "PUBLIC_DIR/images/help.react.svg?url";
-import React from "react";
-import { inject, observer } from "mobx-react";
-import { TextInput } from "@docspace/shared/components/text-input";
-import { Checkbox } from "@docspace/shared/components/checkbox";
-import { ComboBox } from "@docspace/shared/components/combobox";
-import { RadioButton } from "@docspace/shared/components/radio-button";
-import { Text } from "@docspace/shared/components/text";
-import styled from "styled-components";
-import { HelpButton } from "@docspace/shared/components/help-button";
+
 import { Trans } from "react-i18next";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
-const bucket = "bucket";
-const region = "region";
-const serviceurl = "serviceurl";
-const forcepathstyle = "forcepathstyle";
-const usehttp = "usehttp";
-const sse = "sse";
-const sse_kms = "awskms";
-const sse_key = "ssekey";
-const sse_s3 = "aes256";
-const sse_client_side = "clientawskms";
+import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { ComboBox, TOption } from "@docspace/shared/components/combobox";
+import {
+  InputSize,
+  InputType,
+  TextInput,
+} from "@docspace/shared/components/text-input";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { RadioButton } from "@docspace/shared/components/radio-button";
 
-const filePath = "filePath";
+import { StyledBody } from "./AmazonSettings.styled";
+import {
+  bucket,
+  CUSTOMER_MANAGER,
+  filePath,
+  FORCEPATH_STYLE,
+  MANAGED_KEYS,
+  NONE_VALUE,
+  REGION,
+  SERVICE_URL,
+  SSE,
+  SSE_CLIENT_SIDE,
+  SSE_KEY,
+  SSE_KMS,
+  SSE_S3,
+  USE_HTTP,
+} from "./AmazonSettings.constants";
+import { AmazonSettingsProps } from "./AmazonSettings.types";
 
-const StyledBody = styled.div`
-  margin-bottom: 16px;
-  .backup_storage-tooltip {
-    display: flex;
-    align-items: center;
-    p {
-      margin-inline-end: 8px;
-    }
-  }
-  svg {
-    path {
-      fill: ${(props) => props.theme.iconButton.color} !important;
-    }
-  }
-`;
-class AmazonSettings extends React.Component {
-  static formNames = (systemName) => {
-    return {
-      bucket: "",
-      region: systemName,
-      serviceurl: "",
-      forcepathstyle: "false",
-      usehttp: "false",
-    };
-  };
+const AmazonSettings = ({
+  selectedStorage,
+  setRequiredFormSettings,
+  setIsThirdStorageChanged,
+  storageRegions,
+  defaultRegion,
+  addValueInFormSettings,
+  deleteValueFormSetting,
+  errorsFieldsBeforeSafe: isError,
+  isLoadingData,
+  isLoading,
+  formSettings,
+  t,
+  isNeedFilePath,
+  theme,
+}: AmazonSettingsProps) => {
+  const isDisabled = selectedStorage && !selectedStorage.isSet;
+  const bucketPlaceholder =
+    selectedStorage && selectedStorage.properties[0]?.title;
+  const forcePathStylePlaceholder = t("ForcePathStyle");
+  const regionPlaceholder =
+    selectedStorage && selectedStorage.properties[2]?.title;
 
-  constructor(props) {
-    super(props);
-    const {
-      t,
-      selectedStorage,
-      setRequiredFormSettings,
-      setIsThirdStorageChanged,
-      isNeedFilePath,
-      storageRegions,
-      defaultRegion,
-    } = this.props;
+  const serviceUrlPlaceholder = t("ServiceUrl");
+  const SSEPlaceholder = t("ServerSideEncryptionMethod");
+  const useHttpPlaceholder = t("UseHttp");
+  const serverSideEncryption = t("AmazonSSE");
+  const clientSideEncryption = t("AmazonCSE");
 
-    this.isDisabled = selectedStorage && !selectedStorage.isSet;
+  const sseKms = "SSE-KMS";
+  const sseS3 = "SSE-S3";
 
-    const filePathField = isNeedFilePath ? [filePath] : [];
-    setRequiredFormSettings([bucket, ...filePathField]);
-    setIsThirdStorageChanged(false);
+  const availableEncryptions = [
+    {
+      key: "0",
+      label: NONE_VALUE,
+    },
+    {
+      key: "1",
+      label: serverSideEncryption,
+    },
+    {
+      key: "2",
+      label: clientSideEncryption,
+    },
+  ];
 
-    this.bucketPlaceholder =
-      selectedStorage && selectedStorage.properties[0]?.title;
+  const defaultRegionValue = useRef<{
+    key: string;
+    label: string;
+    systemName: string;
+  }>();
 
-    this.forcePathStylePlaceholder = t("ForcePathStyle");
-
-    this.regionPlaceholder =
-      selectedStorage && selectedStorage.properties[2]?.title;
-
-    this.serviceUrlPlaceholder = t("ServiceUrl");
-    this.SSEPlaceholder = t("ServerSideEncryptionMethod");
-    this.useHttpPlaceholder = t("UseHttp");
-
-    this.sse_kms = "SSE-KMS";
-    this.sse_s3 = "SSE-S3";
-
-    this.serverSideEncryption = t("AmazonSSE");
-    this.clientSideEncryption = t("AmazonCSE");
-    this.defaultManaged = "Default AWS managed CMK";
-    this.customerManager = "Customer manager CMK";
-    this.noneValue = "None";
-
-    this.availableEncryptions = [
-      {
-        key: "0",
-        label: this.noneValue,
-      },
-      {
-        key: "1",
-        label: this.serverSideEncryption,
-      },
-      {
-        key: "2",
-        label: this.clientSideEncryption,
-      },
-    ];
-
-    this.managedKeys = [
-      {
-        key: "0",
-        label: this.defaultManaged,
-      },
-      {
-        key: "1",
-        label: this.customerManager,
-      },
-    ];
-
-    this.regions = [];
-    let defaultRegionValue;
-
-    for (let index = 0; index < storageRegions.length; ++index) {
+  const regions = useMemo(() => {
+    const tempRegions = [];
+    for (let index = 0; index < storageRegions.length; index += 1) {
       const item = storageRegions[index];
 
-      this.regions.push({
+      tempRegions.push({
         key: index.toString(),
         label: `${item.displayName} (${item.systemName})`,
         systemName: item.systemName,
       });
 
       if (defaultRegion === item.systemName) {
-        defaultRegionValue = this.regions[index];
+        defaultRegionValue.current = tempRegions[index];
       }
     }
+    return tempRegions;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    this.state = {
-      region: defaultRegionValue ? defaultRegionValue : this.regions[0],
-    };
-  }
+  const [region, setRegion] = useState(() =>
+    defaultRegionValue.current ? defaultRegionValue.current : regions[0],
+  );
 
-  componentDidUpdate(prevProps) {
-    const { formSettings } = this.props;
+  useEffect(() => {
+    const filePathField = isNeedFilePath ? [filePath] : [];
+    setRequiredFormSettings([bucket, ...filePathField]);
+    setIsThirdStorageChanged(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    if (formSettings[region] !== prevProps.formSettings[region]) {
-      for (let value of this.regions) {
-        if (value.systemName === formSettings[region]) {
-          this.region = value.label;
-
-          this.setState({
-            region: value,
-          });
-          return;
-        }
+  useEffect(() => {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const value of regions) {
+      if (value.systemName === formSettings[REGION]) {
+        return setRegion(value);
       }
     }
-  }
-  onSelectEncryptionMethod = (options) => {
-    const {
-      addValueInFormSettings,
-      deleteValueFormSetting,
-      setIsThirdStorageChanged,
-    } = this.props;
+  }, [formSettings, regions]);
 
+  const onSelectEncryptionMethod = (options: TOption) => {
     const label = options.label;
 
-    if (label === this.noneValue) {
-      deleteValueFormSetting(sse_key);
-      deleteValueFormSetting(sse);
+    if (label === NONE_VALUE) {
+      deleteValueFormSetting(SSE_KEY);
+      deleteValueFormSetting(SSE);
     } else {
-      const isServerSSE = label === this.serverSideEncryption;
-      const value = isServerSSE ? sse_s3 : sse_client_side;
-      addValueInFormSettings(sse, value);
+      const isServerSSE = label === serverSideEncryption;
+      const value = isServerSSE ? SSE_S3 : SSE_CLIENT_SIDE;
+      addValueInFormSettings(SSE, value);
 
       if (!isServerSSE) {
-        addValueInFormSettings(sse_key, "");
+        addValueInFormSettings(SSE_KEY, "");
       } else {
-        deleteValueFormSetting(sse_key);
+        deleteValueFormSetting(SSE_KEY);
       }
     }
     setIsThirdStorageChanged(true);
   };
 
-  onSelectEncryptionMode = (e) => {
-    const {
-      setIsThirdStorageChanged,
-      addValueInFormSettings,
-      deleteValueFormSetting,
-    } = this.props;
+  const onSelectEncryptionMode = (
+    e: React.MouseEvent<HTMLInputElement> | React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const value = e.currentTarget.name;
 
-    const value = e.target.name;
-
-    if (value === sse_s3) {
-      deleteValueFormSetting(sse_key);
+    if (value === SSE_S3) {
+      deleteValueFormSetting(SSE_KEY);
     }
-    addValueInFormSettings(sse, value);
+    addValueInFormSettings(SSE, value);
     setIsThirdStorageChanged(true);
   };
-  onSelectManagedKeys = (options) => {
-    const {
-      addValueInFormSettings,
-      deleteValueFormSetting,
-      setIsThirdStorageChanged,
-    } = this.props;
-    const key = options.key;
+
+  const onSelectManagedKeys = (options: TOption) => {
     const label = options.label;
 
-    if (label === this.customerManager) {
-      addValueInFormSettings(sse_key, "");
+    if (label === CUSTOMER_MANAGER) {
+      addValueInFormSettings(SSE_KEY, "");
     } else {
-      deleteValueFormSetting(sse_key);
+      deleteValueFormSetting(SSE_KEY);
     }
 
     setIsThirdStorageChanged(true);
   };
-  onSelectRegion = (options) => {
-    const { addValueInFormSettings, setIsThirdStorageChanged } = this.props;
-
-    const key = options.key;
-    const label = options.label;
+  const onSelectRegion = (options: TOption) => {
     const systemName = options.systemName;
 
-    addValueInFormSettings(region, systemName);
+    if (!systemName) return;
+
+    addValueInFormSettings(REGION, systemName);
     setIsThirdStorageChanged(true);
   };
 
-  onChangeText = (event) => {
-    const { addValueInFormSettings, setIsThirdStorageChanged } = this.props;
+  const onChangeText = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target } = event;
     const value = target.value;
     const name = target.name;
@@ -258,8 +214,7 @@ class AmazonSettings extends React.Component {
     addValueInFormSettings(name, value);
   };
 
-  onChangeCheckbox = (event) => {
-    const { addValueInFormSettings, setIsThirdStorageChanged } = this.props;
+  const onChangeCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target } = event;
     const value = target.checked;
     const name = target.name;
@@ -268,298 +223,292 @@ class AmazonSettings extends React.Component {
     addValueInFormSettings(name, value.toString());
   };
 
-  render() {
-    const {
-      errorsFieldsBeforeSafe: isError,
-      isLoadingData,
-      isLoading,
-      formSettings,
-      t,
-      isNeedFilePath,
-      theme,
-    } = this.props;
-    const { region } = this.state;
+  const renderTooltip = (helpInfo: string, className?: string) => {
+    return (
+      <HelpButton
+        className={className}
+        offsetRight={0}
+        iconName={HelpReactSvgUrl}
+        tooltipContent={
+          <Trans t={t} i18nKey={`${helpInfo}`} ns="Settings">
+            {helpInfo}
+          </Trans>
+        }
+      />
+    );
+  };
 
-    const renderTooltip = (helpInfo, className) => {
-      return (
+  const selectedEncryption =
+    formSettings[SSE] === SSE_KMS || formSettings[SSE] === SSE_S3
+      ? availableEncryptions[1].label
+      : Object.prototype.hasOwnProperty.call(formSettings, SSE)
+        ? availableEncryptions[2].label
+        : availableEncryptions[0].label;
+
+  const managedKeys =
+    formSettings[SSE] === SSE_KMS
+      ? Object.prototype.hasOwnProperty.call(formSettings, SSE_KEY)
+        ? MANAGED_KEYS[1]
+        : MANAGED_KEYS[0]
+      : MANAGED_KEYS[0];
+
+  return (
+    <>
+      <StyledBody>
+        <div className="backup_storage-tooltip">
+          <Text isBold>{bucketPlaceholder}</Text>
+          {renderTooltip(t("AmazonBucketTip"), "bucket-tooltip")}
+        </div>
+        <TextInput
+          id="bucket-input"
+          name={bucket}
+          className="backup_text-input"
+          scale
+          value={formSettings[bucket]}
+          hasError={isError[bucket]}
+          onChange={onChangeText}
+          isDisabled={isLoadingData || isLoading || isDisabled}
+          tabIndex={1}
+          type={InputType.text}
+          size={InputSize.base}
+        />
+      </StyledBody>
+      <StyledBody>
+        <div className="backup_storage-tooltip">
+          <Text isBold>{regionPlaceholder}</Text>
+          {renderTooltip(t("AmazonRegionTip"), "region-tooltip")}
+        </div>
+        <ComboBox
+          className="region-combo-box backup_text-input"
+          options={regions}
+          selectedOption={{
+            key: 0,
+            label: region.label,
+          }}
+          onSelect={onSelectRegion}
+          noBorder={false}
+          scaled
+          scaledOptions
+          dropDownMaxHeight={300}
+          isDisabled={isDisabled}
+          tabIndex={2}
+          showDisabledItems
+        />
+      </StyledBody>
+
+      <StyledBody>
+        <div className="backup_storage-tooltip">
+          <Text isBold>{serviceUrlPlaceholder}</Text>
+          {renderTooltip(t("AmazonServiceTip"), "service-tooltip")}
+        </div>
+        <TextInput
+          id="service-url-input"
+          name={SERVICE_URL}
+          className="backup_text-input"
+          scale
+          value={formSettings[SERVICE_URL]}
+          hasError={isError[SERVICE_URL]}
+          onChange={onChangeText}
+          isDisabled={isLoadingData || isLoading || isDisabled}
+          tabIndex={3}
+          type={InputType.text}
+          size={InputSize.base}
+        />
+      </StyledBody>
+
+      <StyledBody theme={theme}>
+        <Checkbox
+          id="force-path-style"
+          name={FORCEPATH_STYLE}
+          label={forcePathStylePlaceholder}
+          isChecked={formSettings[FORCEPATH_STYLE] !== "false"}
+          isIndeterminate={false}
+          isDisabled={isDisabled}
+          onChange={onChangeCheckbox}
+          tabIndex={4}
+          helpButton={
+            <div className="backup_storage-tooltip">
+              {renderTooltip(
+                t("AmazonForcePathStyleTip"),
+                "force-path-style-tooltip",
+              )}
+            </div>
+          }
+        />
+      </StyledBody>
+      <StyledBody theme={theme}>
+        <Checkbox
+          id="use-http"
+          className="backup_checkbox"
+          name={USE_HTTP}
+          label={useHttpPlaceholder}
+          isChecked={formSettings[USE_HTTP] !== "false"}
+          isIndeterminate={false}
+          isDisabled={isDisabled}
+          onChange={onChangeCheckbox}
+          tabIndex={5}
+          helpButton={
+            <div className="backup_storage-tooltip">
+              {renderTooltip(t("AmazonHTTPTip"), "http-tooltip")}
+            </div>
+          }
+        />
+      </StyledBody>
+      <StyledBody>
+        <div className="backup_storage-tooltip">
+          <Text isBold>{SSEPlaceholder}</Text>
+          {renderTooltip(t("AmazonSSETip"), "sse-method-tooltip")}
+        </div>
+        <ComboBox
+          className="sse-method-combo-box backup_text-input"
+          options={availableEncryptions}
+          selectedOption={{
+            key: 0,
+            label: selectedEncryption,
+          }}
+          onSelect={onSelectEncryptionMethod}
+          noBorder={false}
+          scaled
+          scaledOptions
+          dropDownMaxHeight={300}
+          isDisabled={isDisabled}
+          tabIndex={7}
+          showDisabledItems
+        />
+      </StyledBody>
+
+      {selectedEncryption === serverSideEncryption && (
         <>
-          <HelpButton
-            className={className}
-            offsetRight={0}
-            iconName={HelpReactSvgUrl}
-            tooltipContent={
-              <>
-                <Trans t={t} i18nKey={`${helpInfo}`} ns="Settings">
-                  {helpInfo}
-                </Trans>
-              </>
-            }
+          <RadioButton
+            id="sse-s3"
+            className="backup_radio-button-settings"
+            value=""
+            label={sseS3}
+            isChecked={formSettings[SSE] === SSE_S3}
+            onClick={onSelectEncryptionMode}
+            name={SSE_S3}
+            isDisabled={isDisabled}
+          />
+
+          <RadioButton
+            id="sse-kms"
+            className="backup_radio-button-settings"
+            value=""
+            label={sseKms}
+            isChecked={formSettings[SSE] === SSE_KMS}
+            onClick={onSelectEncryptionMode}
+            name={SSE_KMS}
+            isDisabled={isDisabled}
+          />
+
+          {formSettings[SSE] === sseKms && (
+            <>
+              <Text isBold>Managed CMK</Text>
+              <ComboBox
+                className="managed-cmk-combo-box backup_text-input"
+                options={MANAGED_KEYS}
+                selectedOption={{
+                  key: 0,
+                  label: managedKeys.label,
+                }}
+                onSelect={onSelectManagedKeys}
+                noBorder={false}
+                scaled
+                scaledOptions
+                dropDownMaxHeight={300}
+                isDisabled={isDisabled}
+                tabIndex={8}
+                showDisabledItems
+              />
+
+              {managedKeys.label === CUSTOMER_MANAGER && (
+                <>
+                  <Text isBold>KMS Key Id:</Text>
+                  <TextInput
+                    id="customer-manager-kms-key-id"
+                    name={SSE_KEY}
+                    className="backup_text-input"
+                    scale
+                    value={formSettings[SSE_KEY]}
+                    hasError={isError[SSE_KEY]}
+                    onChange={onChangeText}
+                    isDisabled={isLoadingData || isLoading || isDisabled}
+                    tabIndex={9}
+                    type={InputType.text}
+                    size={InputSize.base}
+                  />
+                </>
+              )}
+            </>
+          )}
+        </>
+      )}
+
+      {selectedEncryption === clientSideEncryption && (
+        <>
+          <Text isBold>KMS Key Id:</Text>
+          <TextInput
+            id="client-side-encryption-kms-key-id"
+            name={SSE_KEY}
+            className="backup_text-input"
+            scale
+            value={formSettings[SSE_KEY]}
+            hasError={isError[SSE_KEY]}
+            onChange={onChangeText}
+            isDisabled={isLoadingData || isLoading || isDisabled}
+            tabIndex={8}
+            type={InputType.text}
+            size={InputSize.base}
           />
         </>
-      );
-    };
+      )}
 
-    const selectedEncryption =
-      formSettings[sse] === sse_kms || formSettings[sse] === sse_s3
-        ? this.availableEncryptions[1].label
-        : formSettings.hasOwnProperty(sse)
-          ? this.availableEncryptions[2].label
-          : this.availableEncryptions[0].label;
+      {isNeedFilePath && (
+        <TextInput
+          id="file-path-input"
+          name="filePath"
+          className="backup_text-input"
+          scale
+          value={formSettings[filePath]}
+          onChange={onChangeText}
+          isDisabled={isLoadingData || isLoading || isDisabled}
+          placeholder={t("Path")}
+          hasError={isError[filePath]}
+          type={InputType.text}
+          size={InputSize.base}
+        />
+      )}
+    </>
+  );
+};
 
-    const managedKeys =
-      formSettings[sse] === sse_kms
-        ? formSettings.hasOwnProperty(sse_key)
-          ? this.managedKeys[1]
-          : this.managedKeys[0]
-        : this.managedKeys[0];
+export default AmazonSettings;
 
-    return (
-      <>
-        <StyledBody>
-          <div className="backup_storage-tooltip">
-            <Text isBold>{this.bucketPlaceholder}</Text>
-            {renderTooltip(t("AmazonBucketTip"), "bucket-tooltip")}
-          </div>
-          <TextInput
-            id="bucket-input"
-            name={bucket}
-            className="backup_text-input"
-            scale
-            value={formSettings[bucket]}
-            hasError={isError[bucket]}
-            onChange={this.onChangeText}
-            isDisabled={isLoadingData || isLoading || this.isDisabled}
-            tabIndex={1}
-          />
-        </StyledBody>
-        <StyledBody>
-          <div className="backup_storage-tooltip">
-            <Text isBold>{this.regionPlaceholder}</Text>
-            {renderTooltip(t("AmazonRegionTip"), "region-tooltip")}
-          </div>
-          <ComboBox
-            className="region-combo-box backup_text-input"
-            options={this.regions}
-            selectedOption={{
-              key: 0,
-              label: region.label,
-            }}
-            onSelect={this.onSelectRegion}
-            noBorder={false}
-            scaled={true}
-            scaledOptions={true}
-            dropDownMaxHeight={300}
-            isDisabled={this.isDisabled}
-            tabIndex={2}
-            showDisabledItems
-          />
-        </StyledBody>
+// export default inject(({ settingsStore, backup }) => {
+//   const {
+//     setRequiredFormSettings,
+//     formSettings,
+//     errorsFieldsBeforeSafe,
 
-        <StyledBody>
-          <div className="backup_storage-tooltip">
-            <Text isBold>{this.serviceUrlPlaceholder}</Text>
-            {renderTooltip(t("AmazonServiceTip"), "service-tooltip")}
-          </div>
-          <TextInput
-            id="service-url-input"
-            name={serviceurl}
-            className="backup_text-input"
-            scale
-            value={formSettings[serviceurl]}
-            hasError={isError[serviceurl]}
-            onChange={this.onChangeText}
-            isDisabled={isLoadingData || isLoading || this.isDisabled}
-            tabIndex={3}
-          />
-        </StyledBody>
-
-        <StyledBody theme={theme}>
-          <Checkbox
-            id="force-path-style"
-            name={forcepathstyle}
-            label={this.forcePathStylePlaceholder}
-            isChecked={formSettings[forcepathstyle] === "false" ? false : true}
-            isIndeterminate={false}
-            isDisabled={this.isDisabled}
-            onChange={this.onChangeCheckbox}
-            tabIndex={4}
-            helpButton={
-              <div className="backup_storage-tooltip">
-                {renderTooltip(
-                  t("AmazonForcePathStyleTip"),
-                  "force-path-style-tooltip",
-                )}
-              </div>
-            }
-          />
-        </StyledBody>
-        <StyledBody theme={theme}>
-          <Checkbox
-            id="use-http"
-            className="backup_checkbox"
-            name={usehttp}
-            label={this.useHttpPlaceholder}
-            isChecked={formSettings[usehttp] === "false" ? false : true}
-            isIndeterminate={false}
-            isDisabled={this.isDisabled}
-            onChange={this.onChangeCheckbox}
-            tabIndex={5}
-            helpButton={
-              <div className="backup_storage-tooltip">
-                {renderTooltip(t("AmazonHTTPTip"), "http-tooltip")}
-              </div>
-            }
-          />
-        </StyledBody>
-        <StyledBody>
-          <div className="backup_storage-tooltip">
-            <Text isBold>{this.SSEPlaceholder}</Text>
-            {renderTooltip(t("AmazonSSETip"), "sse-method-tooltip")}
-          </div>
-          <ComboBox
-            className="sse-method-combo-box backup_text-input"
-            options={this.availableEncryptions}
-            selectedOption={{
-              key: 0,
-              label: selectedEncryption,
-            }}
-            onSelect={this.onSelectEncryptionMethod}
-            noBorder={false}
-            scaled={true}
-            scaledOptions={true}
-            dropDownMaxHeight={300}
-            isDisabled={this.isDisabled}
-            tabIndex={7}
-            showDisabledItems
-          />
-        </StyledBody>
-
-        {selectedEncryption === this.serverSideEncryption && (
-          <>
-            <RadioButton
-              id="sse-s3"
-              className="backup_radio-button-settings"
-              value=""
-              label={this.sse_s3}
-              isChecked={formSettings[sse] === sse_s3 ? true : false}
-              onClick={this.onSelectEncryptionMode}
-              name={sse_s3}
-              isDisabled={this.isDisabled}
-            />
-
-            <RadioButton
-              id="sse-kms"
-              className="backup_radio-button-settings"
-              value=""
-              label={this.sse_kms}
-              isChecked={formSettings[sse] === sse_kms ? true : false}
-              onClick={this.onSelectEncryptionMode}
-              name={sse_kms}
-              isDisabled={this.isDisabled}
-            />
-
-            {formSettings[sse] === sse_kms && (
-              <>
-                <Text isBold>{"Managed CMK"}</Text>
-                <ComboBox
-                  className="managed-cmk-combo-box backup_text-input"
-                  options={this.managedKeys}
-                  selectedOption={{
-                    key: 0,
-                    label: managedKeys.label,
-                    systemName: managedKeys.systemName,
-                  }}
-                  onSelect={this.onSelectManagedKeys}
-                  noBorder={false}
-                  scaled
-                  scaledOptions
-                  dropDownMaxHeight={300}
-                  isDisabled={this.isDisabled}
-                  tabIndex={8}
-                  showDisabledItems
-                />
-
-                {managedKeys.label === this.customerManager && (
-                  <>
-                    <Text isBold>{"KMS Key Id:"}</Text>
-                    <TextInput
-                      id="customer-manager-kms-key-id"
-                      name={sse_key}
-                      className="backup_text-input"
-                      scale
-                      value={formSettings[sse_key]}
-                      hasError={isError[sse_key]}
-                      onChange={this.onChangeText}
-                      isDisabled={isLoadingData || isLoading || this.isDisabled}
-                      tabIndex={9}
-                    />
-                  </>
-                )}
-              </>
-            )}
-          </>
-        )}
-
-        {selectedEncryption === this.clientSideEncryption && (
-          <>
-            <Text isBold>{"KMS Key Id:"}</Text>
-            <TextInput
-              id="client-side-encryption-kms-key-id"
-              name={sse_key}
-              className="backup_text-input"
-              scale
-              value={formSettings[sse_key]}
-              hasError={isError[sse_key]}
-              onChange={this.onChangeText}
-              isDisabled={isLoadingData || isLoading || this.isDisabled}
-              tabIndex={8}
-            />
-          </>
-        )}
-
-        {isNeedFilePath && (
-          <TextInput
-            id="file-path-input"
-            name="filePath"
-            className="backup_text-input"
-            scale
-            value={formSettings[filePath]}
-            onChange={this.onChangeText}
-            isDisabled={isLoadingData || isLoading || this.isDisabled}
-            placeholder={t("Path")}
-            hasError={isError[filePath]}
-          />
-        )}
-      </>
-    );
-  }
-}
-
-export default inject(({ settingsStore, backup }) => {
-  const {
-    setRequiredFormSettings,
-    formSettings,
-    errorsFieldsBeforeSafe,
-
-    setIsThirdStorageChanged,
-    addValueInFormSettings,
-    deleteValueFormSetting,
-    storageRegions,
-    requiredFormSettings,
-    defaultFormSettings,
-  } = backup;
-  const defaultRegion = defaultFormSettings.region;
-  const { theme } = settingsStore;
-  return {
-    setRequiredFormSettings,
-    formSettings,
-    errorsFieldsBeforeSafe,
-    storageRegions,
-    setIsThirdStorageChanged,
-    addValueInFormSettings,
-    deleteValueFormSetting,
-    defaultRegion,
-    requiredFormSettings,
-    theme,
-  };
-})(observer(AmazonSettings));
+//     setIsThirdStorageChanged,
+//     addValueInFormSettings,
+//     deleteValueFormSetting,
+//     storageRegions,
+//     requiredFormSettings,
+//     defaultFormSettings,
+//   } = backup;
+//   const defaultRegion = defaultFormSettings.region;
+//   const { theme } = settingsStore;
+//   return {
+//     setRequiredFormSettings,
+//     formSettings,
+//     errorsFieldsBeforeSafe,
+//     storageRegions,
+//     setIsThirdStorageChanged,
+//     addValueInFormSettings,
+//     deleteValueFormSetting,
+//     defaultRegion,
+//     requiredFormSettings,
+//     theme,
+//   };
+// })(observer(AmazonSettings));

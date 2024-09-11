@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import { useTheme } from "styled-components";
 
 import { EmptyView } from "@docspace/shared/components/empty-view";
@@ -11,13 +11,25 @@ import EmptyScreenOauthDarkSvg from "PUBLIC_DIR/images/emptyview/empty.oauth2.da
 import RegisterNewButton from "./RegisterNewButton";
 
 const OAuthEmptyScreen = () => {
-  const { t } = useTranslation(["OAuth"]);
+  const { t } = useTranslation(["OAuth", "Common"]);
   const theme = useTheme();
 
   const icon = theme.isBase ? (
     <EmptyScreenOauthLightSvg />
   ) : (
     <EmptyScreenOauthDarkSvg />
+  );
+
+  const descText = (
+    <Trans
+      ns="OAuth"
+      t={t}
+      key="OAuthAppDescription"
+      values={{
+        productName: t("Common:ProductName"),
+        organizationName: t("Common:OrganizationName"),
+      }}
+    />
   );
 
   const description = (
@@ -30,7 +42,7 @@ const OAuthEmptyScreen = () => {
         textAlign="center"
         style={{ marginBottom: "20px" }}
       >
-        {t("OAuthAppDescription")}
+        {descText}
       </Text>{" "}
       <RegisterNewButton />
     </div>

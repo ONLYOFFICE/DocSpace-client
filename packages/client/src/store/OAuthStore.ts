@@ -639,7 +639,7 @@ class OAuthStore implements OAuthStoreProps {
     const editOption = {
       key: "edit",
       icon: PencilReactSvgUrl,
-      label: t("Common:Edit"),
+      label: t("Common:EditButton"),
       onClick: () => this.editClient(clientId),
     };
 

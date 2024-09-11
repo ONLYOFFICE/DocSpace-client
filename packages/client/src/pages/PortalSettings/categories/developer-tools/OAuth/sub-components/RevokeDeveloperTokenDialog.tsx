@@ -158,7 +158,7 @@ const GenerateDeveloperTokenDialog = ({
           size={ButtonSize.normal}
         />
         <Button
-          label={t("Common:Cancel")}
+          label={t("Common:CancelButton")}
           scale
           onClick={onClose}
           size={ButtonSize.normal}

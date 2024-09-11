@@ -238,25 +238,6 @@ const BasicBlock = ({
             <HelpButton tooltipContent={pkceHelpButtonText} />
           </div>
         </InputGroup>
-        {/* <InputGroup
-          label="Client type"
-          name="public_client"
-          placeholder={t("EnterURL")}
-          value=""
-          error=""
-          onChange={() => {}}
-        >
-          <div className="public_client">
-            <ToggleButton
-              isChecked={isPublic}
-              onChange={(e) => {
-                changeValue("is_public", e.target.checked);
-              }}
-            />
-            <Text>Public client</Text>
-            <HelpButton tooltipContent={publicClientHelpButtonText} />
-          </div>
-        </InputGroup> */}
       </StyledInputBlock>
     </StyledBlock>
   );

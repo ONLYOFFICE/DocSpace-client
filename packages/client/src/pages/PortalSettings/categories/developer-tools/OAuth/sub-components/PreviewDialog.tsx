@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTheme } from "styled-components";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
@@ -176,7 +176,14 @@ const PreviewDialog = ({
           <StyledPreviewContainer>
             <SocialButton
               className="social-button"
-              label={t("OAuth:SignIn")}
+              label={
+                <Trans
+                  t={t}
+                  ns="OAuth"
+                  key="SignIn"
+                  values={{ productName: t("Common:ProductName") }}
+                />
+              }
               IconComponent={icon}
               onClick={() => {
                 window.open(link, "login", linkParams);

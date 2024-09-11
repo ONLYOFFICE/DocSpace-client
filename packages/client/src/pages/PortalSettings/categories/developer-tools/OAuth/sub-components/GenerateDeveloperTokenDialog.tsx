@@ -64,7 +64,7 @@ const GenerateDeveloperTokenDialog = ({
 
   const onCopyClick = async () => {
     copy(token);
-    toastr.success("Copied");
+    toastr.success(t("DeveloperTokenCopied"));
   };
 
   const onClose = async () => {
@@ -131,7 +131,7 @@ const GenerateDeveloperTokenDialog = ({
           created: getDate(created, i18nParam),
           expires: getDate(expires, i18nParam),
         });
-        toastr.success("Copied");
+        toastr.success(t("DeveloperTokenCopied"));
       }
     } catch (e) {
       toastr.error(e as TData);

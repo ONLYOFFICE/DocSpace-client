@@ -31,7 +31,7 @@ import { usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 import Headline from "@docspace/shared/components/headline/Headline";
-
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { getHeaderByPathname } from "@/lib";
 
 import { StyledSection } from "./section.styled";
@@ -45,7 +45,9 @@ export const Section = ({ children }: { children: React.ReactNode }) => {
       <Headline className="headline" type="content" truncate={true}>
         {getHeaderByPathname(pathname, t)}
       </Headline>
-      {children}
+      <Scrollbar id="sectionScroll" scrollClass="section-scroll" fixedSize>
+        {children}
+      </Scrollbar>
     </StyledSection>
   );
 };

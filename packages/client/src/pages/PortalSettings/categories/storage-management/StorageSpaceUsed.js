@@ -33,6 +33,7 @@ import { Text } from "@docspace/shared/components/text";
 import { getConvertedSize } from "@docspace/shared/utils/common";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { ContextMenu } from "@docspace/shared/components/context-menu";
+import { ChangeStorageQuotaDialog } from "@docspace/shared/dialogs/change-storage-quota";
 
 import Diagram from "./sub-components/Diagram";
 import RecalculateButton from "./sub-components/RecalculateButton";
@@ -43,7 +44,6 @@ import {
 
 import ChangQuotaReactSvgUrl from "PUBLIC_DIR/images/change.quota.react.svg?url";
 import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?url";
-import ChangeStorageQuotaDialog from "SRC_DIR/components/dialogs/ChangeStorageQuotaDialog";
 
 const DiskSpaceUsedComponent = (props) => {
   const {

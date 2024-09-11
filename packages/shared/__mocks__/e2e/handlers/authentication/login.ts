@@ -24,48 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { tablet } from "@docspace/shared/utils";
-import styled from "styled-components";
+import { API_PREFIX, BASE_URL } from "../../utils";
 
-const StyledMoveToPublicRoomDialog = styled(ModalDialog)`
-  /* .scroll-body {
-    padding-right: 0 !important;
-  } */
+export const PATH = "authentication";
+const PORT = process.env.PORT ?? 5011;
 
-  .modal-dialog-content-body {
-    padding: 0;
-    border: none;
-  }
+const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 
-  .modal-dialog-aside-header {
-    margin-block: 0;
-    margin-inline: -16px -24px;
-    padding-block: 0;
-    padding-inline: 16px 0;
-  }
+export const successLogin = {
+  count: 1,
+  response: {
+    expires: "0001-01-01T00:00:00",
+    sms: false,
+    tfa: true,
+    confirmUrl: `${BASE_URL}:${PORT}/confirm/TfaActivation`,
+  },
+  links: [
+    {
+      href: url,
+      action: "POST",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
 
-  .modal-dialog-aside-footer {
-    @media ${tablet} {
-      width: 100%;
-      padding-inline-end: 32px;
-      display: flex;
-    }
-  }
-
-  .button-dialog-accept {
-    @media ${tablet} {
-      width: 100%;
-    }
-  }
-
-  .button-dialog {
-    @media ${tablet} {
-      width: 100%;
-    }
-
-    display: inline-block;
-  }
-`;
-
-export { StyledMoveToPublicRoomDialog };
+export const login = () => {
+  return new Response(JSON.stringify(successLogin));
+};

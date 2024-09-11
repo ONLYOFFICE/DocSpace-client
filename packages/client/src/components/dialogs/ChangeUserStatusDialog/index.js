@@ -35,7 +35,6 @@ import { toastr } from "@docspace/shared/components/toast";
 import { withTranslation } from "react-i18next";
 
 import { EmployeeStatus } from "@docspace/shared/enums";
-import ModalDialogContainer from "../ModalDialogContainer";
 import { inject, observer } from "mobx-react";
 
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
@@ -125,7 +124,7 @@ class ChangeUserStatusDialogComponent extends React.Component {
     }
 
     return (
-      <ModalDialogContainer
+      <ModalDialog
         isLoading={!tReady}
         visible={visible}
         onClose={this.onCloseAction}
@@ -155,7 +154,7 @@ class ChangeUserStatusDialogComponent extends React.Component {
             isDisabled={isRequestRunning}
           />
         </ModalDialog.Footer>
-      </ModalDialogContainer>
+      </ModalDialog>
     );
   }
 }

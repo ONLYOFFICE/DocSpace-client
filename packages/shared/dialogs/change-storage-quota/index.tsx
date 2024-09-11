@@ -27,24 +27,23 @@
 import { useTranslation } from "react-i18next";
 import { useState, useEffect } from "react";
 
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button } from "@docspace/shared/components/button";
-import { Text } from "@docspace/shared/components/text";
-import { toastr } from "@docspace/shared/components/toast";
-import { setTenantQuotaSettings } from "@docspace/shared/api/settings";
+import { ModalDialog, ModalDialogType } from "../../components/modal-dialog";
+import { Button, ButtonSize } from "../../components/button";
+import { Text } from "../../components/text";
+import { toastr } from "../../components/toast";
+import { QuotaForm } from "../../components/quota-form";
+import { setTenantQuotaSettings } from "../../api/settings";
 
-import QuotaForm from "../../../components/QuotaForm";
+import { ChangeStorageQuotaDialogProps } from "./ChangeStorageQuotaDialog.types";
 
-const ChangeStorageQuotaDialog = (props) => {
-  const {
-    initialSize,
-    portalInfo,
-    isVisible,
-    updateFunction,
-    onClose,
-    isDisableQuota,
-  } = props;
-
+export const ChangeStorageQuotaDialog = ({
+  initialSize,
+  portalInfo,
+  isVisible,
+  updateFunction,
+  onClose,
+  isDisableQuota,
+}: ChangeStorageQuotaDialogProps) => {
   const { t } = useTranslation("Common");
 
   const [isLoading, setIsLoading] = useState(false);
@@ -93,7 +92,7 @@ const ChangeStorageQuotaDialog = (props) => {
     setIsLoading(false);
   };
 
-  const onSetQuotaBytesSize = (bytes) => {
+  const onSetQuotaBytesSize = (bytes: string) => {
     setSize(bytes);
   };
   const onKeyUpHandler = (e) => {
@@ -114,7 +113,11 @@ const ChangeStorageQuotaDialog = (props) => {
   };
 
   return (
-    <ModalDialog visible={isVisible} onClose={onCloseClick}>
+    <ModalDialog
+      displayType={ModalDialogType.modal}
+      visible={isVisible}
+      onClose={onCloseClick}
+    >
       <ModalDialog.Header>
         {isDisableQuota
           ? t("Common:DisableStorageQuota")
@@ -143,7 +146,7 @@ const ChangeStorageQuotaDialog = (props) => {
       <ModalDialog.Footer>
         <Button
           label={t("Common:OKButton")}
-          size="normal"
+          size={ButtonSize.normal}
           primary
           onClick={onSaveClick}
           isLoading={isLoading}
@@ -152,7 +155,7 @@ const ChangeStorageQuotaDialog = (props) => {
         />
         <Button
           label={t("Common:CancelButton")}
-          size="normal"
+          size={ButtonSize.normal}
           onClick={onCloseClick}
           isDisabled={isLoading}
           scale
@@ -161,5 +164,3 @@ const ChangeStorageQuotaDialog = (props) => {
     </ModalDialog>
   );
 };
-
-export default ChangeStorageQuotaDialog;

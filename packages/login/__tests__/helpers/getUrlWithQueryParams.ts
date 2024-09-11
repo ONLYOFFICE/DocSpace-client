@@ -24,68 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { tablet } from "@docspace/shared/utils";
-import styled from "styled-components";
+import { TQueryParam } from "__tests__/types";
 
-const StyledDeleteLinkDialog = styled(ModalDialog)`
-  /* .scroll-body {
-    padding-right: 0 !important;
-  } */
+export const getUrlWithQueryParams = (url: string, params: TQueryParam[]) => {
+  let stringParams = "";
+  const lastParamsIndex = params.length - 1;
 
-  .modal-dialog-content-body {
-    padding: 0;
-    border: none;
-  }
+  params.map((item, index) => {
+    stringParams += `${item.name}=${item.value}`;
 
-  .modal-dialog-aside-header {
-    margin-block: 0;
-    margin-inline: -16px -24px;
-    padding-block: 0;
-    padding-inline: 16px 0;
-  }
+    if (index !== lastParamsIndex) stringParams += "&";
+  });
 
-  .delete_dialog-header-text {
-    padding-bottom: 8px;
-  }
-
-  .delete_dialog-text {
-    padding-bottom: 8px;
-  }
-
-  .delete_dialog-text:not(:first-child) {
-    padding-top: 8px;
-  }
-
-  .modal-dialog-checkbox {
-    .wrapper {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-  }
-
-  .modal-dialog-aside-footer {
-    @media ${tablet} {
-      width: 100%;
-      padding-inline-end: 32px;
-      display: flex;
-    }
-  }
-
-  .button-dialog-accept {
-    @media ${tablet} {
-      width: 100%;
-    }
-  }
-
-  .button-dialog {
-    @media ${tablet} {
-      width: 100%;
-    }
-
-    display: inline-block;
-  }
-`;
-
-export { StyledDeleteLinkDialog };
+  return `${url}?${stringParams}`;
+};

@@ -24,16 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import ModalDialogContainer from "../ModalDialogContainer";
-import styled from "styled-components";
-
-export const ChangeNameContainer = styled(ModalDialogContainer)`
-  #modal-dialog {
-    max-height: none;
-  }
-
-  .error-label {
-    position: relative;
-  }
-`;
+export type TQueryParam = {
+  name: string;
+  value: string;
+};

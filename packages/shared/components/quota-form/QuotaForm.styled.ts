@@ -24,70 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-
 import styled from "styled-components";
-import { tablet } from "@docspace/shared/utils";
 
-const StyledDeleteDialog = styled(ModalDialog)`
-  /* .scroll-body {
-    padding-right: 0 !important;
-  } */
+export const StyledBody = styled.div<{
+  isCheckbox: boolean;
+  isLabel: boolean;
+  maxInputWidth: string;
+}>`
+  margin-top: 16px;
 
-  .modal-dialog-content-body {
+  .quota-container {
+    display: flex;
+    grid-gap: 4px;
+    margin-bottom: ${(props) => (props.isCheckbox ? "8px" : "16px")};
+    ${(props) => props.isLabel && " margin-top: 8px"};
+  }
+  .quota_limit {
+    ${(props) => props.maxInputWidth && `max-width: ${props.maxInputWidth}`};
+    max-height: 32px;
+  }
+
+  .quota_checkbox {
+    svg {
+      margin-inline-end: 8px;
+    }
+  }
+
+  .quota_value {
+    max-width: fit-content;
     padding: 0;
-    border: none;
   }
 
-  .modal-dialog-aside-header {
-    margin-block: 0;
-    margin-inline: -16px -24px;
-    padding-block: 0;
-    padding-inline: 16px 0;
-  }
-
-  .delete_dialog-header-text {
-    padding-bottom: 8px;
-  }
-
-  .delete_dialog-text {
-    padding-bottom: 8px;
-  }
-
-  .delete_dialog-text:not(:first-child) {
-    padding-top: 8px;
-  }
-
-  .modal-dialog-checkbox {
-    .wrapper {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-  }
-
-  .modal-dialog-aside-footer {
-    @media ${tablet} {
-      width: 100%;
-
-      padding-inline-end: 32px;
-      display: flex;
-    }
-  }
-
-  .button-dialog-accept {
-    @media ${tablet} {
-      width: 100%;
-    }
-  }
-
-  .button-dialog {
-    @media ${tablet} {
-      width: 100%;
-    }
-
-    display: inline-block;
+  .quota_description {
+    color: ${(props) => props.theme.text.disableColor};
   }
 `;
-
-export { StyledDeleteDialog };

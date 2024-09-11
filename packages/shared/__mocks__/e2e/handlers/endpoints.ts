@@ -24,41 +24,54 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
+import { loginHandler, LOGIN_PATH } from "./authentication";
+import {
+  SELF_PATH_ACTIVATION_STATUS,
+  SELF_PATH_CHANGE_PASSWORD,
+  SELF_PATH_UPDATE_USER,
+  selfHandler,
+} from "./people";
+import {
+  COMPLETE_PATH,
+  completeHandler,
+  LICENCE_PATH,
+  licenseHandler,
+} from "./settings";
 
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { mobile } from "@docspace/shared/utils";
+export type TEndpoint = {
+  url: string;
+  dataHandler: Response;
+};
 
-const StyledModalDialog = styled(ModalDialog)`
-  .heading {
-    font-size: 21px;
-  }
+export type TEndpoints = {
+  [key: string]: TEndpoint;
+};
 
-  .generate {
-    font-weight: 600;
-  }
+const BASE_URL = "*/**/api/2.0/";
 
-  .text-area {
-    width: 488px !important;
-    height: 72px !important;
-    margin-top: 4px;
-
-    &-label {
-      font-weight: 600;
-      margin-bottom: 5px;
-    }
-
-    @media ${mobile} {
-      width: 100% !important;
-    }
-  }
-  .text-area-label {
-    margin-top: 16px;
-  }
-
-  .modal-combo {
-    margin: 16px 0 0 0;
-  }
-`;
-
-export default StyledModalDialog;
+export const endpoints: TEndpoints = {
+  wizardComplete: {
+    url: `${BASE_URL}${COMPLETE_PATH}`,
+    dataHandler: completeHandler(),
+  },
+  license: {
+    url: `${BASE_URL}${LICENCE_PATH}`,
+    dataHandler: licenseHandler(),
+  },
+  changePassword: {
+    url: `${BASE_URL}${SELF_PATH_CHANGE_PASSWORD}`,
+    dataHandler: selfHandler(),
+  },
+  activationStatus: {
+    url: `${BASE_URL}${SELF_PATH_ACTIVATION_STATUS}`,
+    dataHandler: selfHandler(),
+  },
+  updateUser: {
+    url: `${BASE_URL}${SELF_PATH_UPDATE_USER}`,
+    dataHandler: selfHandler(),
+  },
+  login: {
+    url: `${BASE_URL}${LOGIN_PATH}`,
+    dataHandler: loginHandler(),
+  },
+};

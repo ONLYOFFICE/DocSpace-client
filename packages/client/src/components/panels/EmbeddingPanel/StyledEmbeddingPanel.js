@@ -24,15 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import styled from "styled-components";
 import { globalColors } from "@docspace/shared/themes";
-
-const StyledModalDialog = styled(ModalDialog)`
-  .modal-body {
-    padding: 0;
-  }
-`;
 
 const StyledBody = styled.div`
   padding: 0 16px;
@@ -132,4 +125,4 @@ const StyledBody = styled.div`
   }
 `;
 
-export { StyledModalDialog, StyledBody };
+export { StyledBody };

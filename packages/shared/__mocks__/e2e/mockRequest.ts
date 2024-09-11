@@ -24,34 +24,33 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+import { Page } from "@playwright/test";
 
-const StyledBody = styled.div`
-  .quota-container {
-    display: flex;
-    grid-gap: 4px;
-    margin-bottom: ${(props) => (props.isCheckbox ? "8px" : "16px")};
-    ${(props) => props.isLabel && " margin-top: 8px"};
-  }
-  .quota_limit {
-    ${(props) => props.maxInputWidth && `max-width: ${props.maxInputWidth}`};
-    max-height: 32px;
-  }
+import { TEndpoint } from "./handlers";
 
-  .quota_checkbox {
-    svg {
-      margin-inline-end: 8px;
-    }
+export class MockRequest {
+  constructor(public readonly page: Page) {}
+
+  async router(endpoints: TEndpoint[]) {
+    endpoints.forEach(async (endpoint) => {
+      await this.page.route(endpoint.url, async (route) => {
+        const json = await endpoint.dataHandler.json();
+
+        await route.fulfill({ json });
+      });
+    });
   }
 
-  .quota_value {
-    max-width: fit-content;
-    padding: 0;
-  }
+  async setHeaders(url: string, headers: string[]) {
+    await this.page.route(url, async (route, request) => {
+      const objHeaders: { [key: string]: "true" } = {};
+      headers.forEach((item) => (objHeaders[item] = "true"));
 
-  .quota_description {
-    color: ${(props) => props.theme.text.disableColor};
+      const newHeaders = {
+        ...request.headers(),
+        ...objHeaders,
+      };
+      await route.fallback({ headers: newHeaders });
+    });
   }
-`;
-
-export default StyledBody;
+}

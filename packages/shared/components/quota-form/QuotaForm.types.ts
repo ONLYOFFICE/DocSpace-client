@@ -24,18 +24,19 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Page } from "@playwright/test";
-
-import { TEndpoint } from "__tests__/mocking/endpoints";
-
-export class MockRequest {
-  constructor(public readonly page: Page) {}
-
-  async router(endpoint: TEndpoint) {
-    await this.page.route(endpoint.url, async (route) => {
-      await route.fulfill({
-        path: `__tests__/mocking/mock-data/${endpoint.pathToData}.json`,
-      });
-    });
-  }
+export interface QuotaFormProps {
+  maxInputWidth: string;
+  isLoading: boolean;
+  isError: boolean;
+  isButtonsEnable: boolean;
+  onSetQuotaBytesSize: (bytes: string) => void;
+  initialSize: number;
+  initialPower: number;
+  isDisabled: boolean;
+  onSave: any;
+  onCancel: any;
+  description: string;
+  isAutoFocussed: boolean;
+  checkboxLabel: string;
+  label: string;
 }

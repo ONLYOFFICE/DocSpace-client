@@ -36,7 +36,6 @@ import { TextInput } from "@docspace/shared/components/text-input";
 import { Box } from "@docspace/shared/components/box";
 import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
-import ModalDialogContainer from "./modalDialogContainer";
 import { showLoader, hideLoader } from "@docspace/shared/utils/common";
 import { mobile } from "@docspace/shared/utils";
 import styled from "styled-components";
@@ -271,7 +270,7 @@ class ConsumerModalDialog extends React.Component {
     const isDisabled = requiredRef.some((name) => state[name].trim() === "");
 
     return (
-      <ModalDialogContainer
+      <ModalDialog
         visible={dialogVisible}
         onClose={onModalClose}
         displayType="aside"
@@ -309,7 +308,7 @@ class ConsumerModalDialog extends React.Component {
             onClick={onModalClose}
           />
         </ModalDialog.Footer>
-      </ModalDialogContainer>
+      </ModalDialog>
     );
   }
 }

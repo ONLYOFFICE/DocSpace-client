@@ -26,22 +26,28 @@
 
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import PropTypes from "prop-types";
 
 import {
   conversionToBytes,
   getPowerFromBytes,
   getSizeFromBytes,
-} from "@docspace/shared/utils/common";
-import { TextInput } from "@docspace/shared/components/text-input";
-import { ComboBox } from "@docspace/shared/components/combobox";
-import { SaveCancelButtons } from "@docspace/shared/components/save-cancel-buttons";
-import { Text } from "@docspace/shared/components/text";
+} from "../../utils/common";
+import { TextInput } from "../text-input";
+import { ComboBox, ComboBoxSize } from "../combobox";
+import { SaveCancelButtons } from "../save-cancel-buttons";
+import { Text } from "../text";
+import { Checkbox } from "../checkbox";
 
-import StyledBody from "./StyledComponent";
-import { Checkbox } from "@docspace/shared/components/checkbox";
+import { QuotaFormProps } from "./QuotaForm.types";
+import { StyledBody } from "./QuotaForm.styled";
 
-const isDefaultValue = (initPower, initSize, power, value, initialSize) => {
+const isDefaultValue = (
+  initPower: number,
+  initSize: number,
+  power: number,
+  value: number,
+  initialSize: number,
+) => {
   if (!initialSize && initialSize !== 0) return false;
 
   if (initialSize === -1) return false;
@@ -51,7 +57,7 @@ const isDefaultValue = (initPower, initSize, power, value, initialSize) => {
   return false;
 };
 
-const getInitialSize = (initialSize, initPower) => {
+const getInitialSize = (initialSize: number, initPower: number) => {
   if (initialSize > 0)
     return getSizeFromBytes(initialSize, initPower).toString();
 
@@ -60,13 +66,13 @@ const getInitialSize = (initialSize, initPower) => {
   return initialSize.toString();
 };
 
-const getInitialPower = (initialSize) => {
+const getInitialPower = (initialSize: number) => {
   if (initialSize > 0) return getPowerFromBytes(initialSize, 4);
 
   return 2;
 };
 
-const getOptions = (t) => [
+const getOptions = (t: any) => [
   { key: 0, label: t("Common:Bytes") },
   { key: 1, label: t("Common:Kilobyte") },
   { key: 2, label: t("Common:Megabyte") },
@@ -79,12 +85,12 @@ const getConvertedSize = (value, power) => {
 
   return conversionToBytes(value, power);
 };
-const QuotaForm = ({
+export const QuotaForm = ({
   isLoading,
   isDisabled,
   maxInputWidth,
   onSetQuotaBytesSize,
-  initialSize = "",
+  initialSize = 0,
   isError,
   isButtonsEnable = false,
   onSave,
@@ -93,7 +99,7 @@ const QuotaForm = ({
   checkboxLabel,
   description,
   isAutoFocussed = false,
-}) => {
+}: QuotaFormProps) => {
   const initPower = getInitialPower(initialSize);
   const initSize = getInitialSize(initialSize, initPower);
 
@@ -215,7 +221,7 @@ const QuotaForm = ({
           options={options}
           isDisabled={isDisable}
           selectedOption={options.find((elem) => elem.key === power)}
-          size="content"
+          size={ComboBoxSize.content}
           onSelect={onSelectComboBox}
           showDisabledItems
           manualWidth="auto"
@@ -249,15 +255,3 @@ const QuotaForm = ({
     </StyledBody>
   );
 };
-
-QuotaForm.propTypes = {
-  maxInputWidth: PropTypes.string,
-  isLoading: PropTypes.bool,
-  isError: PropTypes.bool,
-  isButtonsEnable: PropTypes.bool,
-  onSetQuotaBytesSize: PropTypes.func,
-  initialSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  initialPower: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-};
-
-export default QuotaForm;

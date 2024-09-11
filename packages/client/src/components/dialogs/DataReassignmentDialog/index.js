@@ -32,7 +32,6 @@ import PeopleSelector from "@docspace/shared/selectors/People";
 import { toastr } from "@docspace/shared/components/toast";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Backdrop } from "@docspace/shared/components/backdrop";
-import { useNavigate } from "react-router-dom";
 
 import Body from "./sub-components/Body";
 import Footer from "./sub-components/Footer";
@@ -40,7 +39,9 @@ import api from "@docspace/shared/api";
 import { EmployeeType } from "@docspace/shared/enums";
 const { Filter } = api;
 
-const StyledModalDialog = styled(ModalDialog)`
+const StyledBodyContent = styled.div`
+  display: contents;
+
   .avatar-name,
   .delete-profile-container {
     display: flex;
@@ -204,7 +205,7 @@ const DataReassignmentDialog = ({
 
   if (selectorVisible) {
     return (
-      <StyledModalDialog
+      <ModalDialog
         displayType="aside"
         visible={visible}
         onClose={onClosePeopleSelector}
@@ -238,12 +239,12 @@ const DataReassignmentDialog = ({
             disableDisabledUsers
           />
         </ModalDialog.Container>
-      </StyledModalDialog>
+      </ModalDialog>
     );
   }
 
   return (
-    <StyledModalDialog
+    <ModalDialog
       displayType="aside"
       visible={visible}
       onClose={onClose}
@@ -255,19 +256,21 @@ const DataReassignmentDialog = ({
         {t("DataReassignmentDialog:DataReassignment")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <Body
-          t={t}
-          tReady={tReady}
-          showProgress={showProgress}
-          isReassignCurrentUser={isReassignCurrentUser}
-          user={user}
-          selectedUser={selectedUser}
-          percent={percent}
-          isAbortTransfer={isAbortTransfer}
-          dataReassignmentUrl={dataReassignmentUrl}
-          currentColorScheme={currentColorScheme}
-          onTogglePeopleSelector={onTogglePeopleSelector}
-        />
+        <StyledBodyContent>
+          <Body
+            t={t}
+            tReady={tReady}
+            showProgress={showProgress}
+            isReassignCurrentUser={isReassignCurrentUser}
+            user={user}
+            selectedUser={selectedUser}
+            percent={percent}
+            isAbortTransfer={isAbortTransfer}
+            dataReassignmentUrl={dataReassignmentUrl}
+            currentColorScheme={currentColorScheme}
+            onTogglePeopleSelector={onTogglePeopleSelector}
+          />
+        </StyledBodyContent>
       </ModalDialog.Body>
 
       <ModalDialog.Footer>
@@ -285,7 +288,7 @@ const DataReassignmentDialog = ({
           onStartAgain={onStartAgain}
         />
       </ModalDialog.Footer>
-    </StyledModalDialog>
+    </ModalDialog>
   );
 };
 

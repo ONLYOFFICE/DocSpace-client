@@ -80,7 +80,9 @@ const RadioButton = ({
       }
     : {};
 
-  const onChangeAction = (e: React.MouseEvent<HTMLInputElement>) => {
+  const onChangeAction = (
+    e: React.MouseEvent<HTMLInputElement> | React.ChangeEvent<HTMLInputElement>,
+  ) => {
     setIsCheckedState((s) => !s);
     onClick?.(e);
   };

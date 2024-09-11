@@ -38,9 +38,11 @@ export interface RadioButtonProps {
   /** Used as HTML `name` property for `<input>` tag. */
   name: string;
   /** Allows handling the changing events of the component  */
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   /** Allows handling component clicking events */
-  onClick?: (e: React.MouseEvent<HTMLInputElement>) => void;
+  onClick?: (
+    e: React.MouseEvent<HTMLInputElement> | React.ChangeEvent<HTMLInputElement>,
+  ) => void;
   /** Used as HTML `value` property for `<input>` tag. Facilitates identification of each radiobutton  */
   value: string;
   /** Sets margin between radiobuttons. In case the orientation is `horizontal`,

@@ -67,7 +67,6 @@ import ChangeQuotaDialog from "./ChangeQuotaDialog";
 import DeletePluginDialog from "./DeletePluginDialog";
 import ShareFolderDialog from "./ShareFolderDialog";
 import EditGroupMembersDialog from "./EditGroupMembersDialog";
-import ChangeStorageQuotaDialog from "./ChangeStorageQuotaDialog";
 import DeleteGroupDialog from "./DeleteGroupDialog";
 
 export {
@@ -114,6 +113,5 @@ export {
   ShareFolderDialog,
   EditGroupMembersDialog,
   ChangeQuotaDialog,
-  ChangeStorageQuotaDialog,
   DeleteGroupDialog,
 };

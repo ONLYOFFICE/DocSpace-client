@@ -33,6 +33,16 @@ const getAllFiles = (dir) => {
     const filePath = path.join(dir, file);
     const isDirectory = fs.statSync(filePath).isDirectory();
     if (isDirectory) {
+      if (
+        filePath.includes("dist/") ||
+        filePath.includes("tests/") ||
+        filePath.includes(".next/") ||
+        filePath.includes("storybook-static/") ||
+        filePath.includes("node_modules/")
+      ) {
+        return null;
+      }
+
       return getAllFiles(filePath);
     } else {
       return filePath;
@@ -64,7 +74,10 @@ beforeAll(() => {
     const clientDir = path.resolve(BASE_DIR, wsPath);
 
     return getAllFiles(clientDir).filter(
-      (file) => file.endsWith(".json") && file.includes("public/locales")
+      (filePath) =>
+        filePath &&
+        filePath.endsWith(".json") &&
+        filePath.includes("public/locales")
     );
   });
 
@@ -108,12 +121,11 @@ beforeAll(() => {
     const clientDir = path.resolve(BASE_DIR, wsPath);
 
     return getAllFiles(clientDir).filter(
-      (file) =>
-        searchPattern.test(file) &&
-        !file.includes("dist/") &&
-        !file.includes(".next/") &&
-        !file.includes("storybook-static/") &&
-        !file.includes("node_modules/")
+      (filePath) =>
+        filePath &&
+        searchPattern.test(filePath) &&
+        !filePath.includes(".test.") &&
+        !filePath.includes(".stories.")
     );
   });
 
@@ -387,7 +399,24 @@ describe("Locales Tests", () => {
   });
 
   test("NotTranslatedPropsTest", () => {
-    // Add test logic here
+    let message = `Next text not translated props (title, placeholder, label, text):\r\n\r\n`;
+
+    let i = 0;
+
+    const groupedProps = notTranslatedProps.reduce((acc, t) => {
+      if (!acc[t.key]) {
+        acc[t.key] = [];
+      }
+      acc[t.key].push(t);
+      return acc;
+    }, {});
+
+    Object.keys(groupedProps).forEach((key) => {
+      const group = groupedProps[key];
+      message += `${++i}. Path='${key}'\r\n\r\n${group.map((v) => v.value).join("\r\n")}\r\n\r\n`;
+    });
+
+    expect(notTranslatedProps.length).toBe(0, message);
   });
 
   test("WrongTranslationVariablesTest", () => {

@@ -341,7 +341,28 @@ describe("Locales Tests", () => {
   });
 
   test("UselessTranslationKeysTest", () => {
-    // Add test logic here
+    const allEnKeys = translationFiles
+      .filter((file) => file.language === "en")
+      .flatMap((item) => item.translations)
+      .map((item) => item.key)
+      .filter((k) => !k.startsWith("Culture_"))
+      .sort();
+
+    const allJsTranslationKeys = javascriptFiles
+      .flatMap((j) => j.translationKeys)
+      .map((k) => k.substring(k.indexOf(":") + 1))
+      .filter((k) => !k.startsWith("Culture_"))
+      .filter((value, index, self) => self.indexOf(value) === index) // Distinct
+      .sort();
+
+    const notFoundi18nKeys = allEnKeys.filter(
+      (k) => !allJsTranslationKeys.includes(k)
+    );
+
+    expect(notFoundi18nKeys.length).toBe(
+      0,
+      `Some i18n-keys are not found in js keys:\r\n${notFoundi18nKeys.join("\r\n")}`
+    );
   });
 
   test("NotTranslatedToastsTest", () => {

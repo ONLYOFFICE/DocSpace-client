@@ -35,6 +35,7 @@ import {
 import { mobile, tablet, isMobile } from "@docspace/shared/utils";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import RoomLogoCover from "./sub-components/RoomLogoCover";
+import { CoverDialogProps } from "./RoomLogoCoverDialog.types";
 
 const StyledModalDialog = styled(ModalDialog)`
   #modal-dialog {
@@ -63,12 +64,12 @@ const RoomLogoCoverDialog = ({
   getCovers,
   covers,
   setRoomLogoCover,
-}) => {
+}: CoverDialogProps) => {
   const { t } = useTranslation(["Common"]);
 
   React.useEffect(() => {
     getCovers();
-  }, []);
+  }, [getCovers]);
 
   const onCloseRoomLogo = () => {
     setRoomLogoCoverDialogVisible(false);
@@ -76,6 +77,7 @@ const RoomLogoCoverDialog = ({
 
   const handleSubmit = () => {
     setRoomLogoCover();
+    onCloseRoomLogo();
   };
   return (
     <StyledModalDialog
@@ -111,7 +113,7 @@ const RoomLogoCoverDialog = ({
   );
 };
 
-export default inject<TStore>(({ dialogsStore, filesStore }) => {
+export default inject<TStore>(({ dialogsStore }) => {
   return {
     setRoomLogoCoverDialogVisible: dialogsStore.setRoomLogoCoverDialogVisible,
     getCovers: dialogsStore.getCovers,

@@ -33,7 +33,7 @@ import { CustomLogoProps } from "../RoomLogoCoverDialog.types";
 
 interface StyledLogoProps {
   isBase: boolean;
-  color: string;
+  color?: string;
 }
 
 const StyledLogo = styled.div<StyledLogoProps>`

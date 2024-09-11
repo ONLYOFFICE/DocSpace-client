@@ -27,15 +27,38 @@
 import { Dispatch, SetStateAction } from "react";
 import type { TTranslation } from "@docspace/shared/types";
 
-export interface RoomLogoCoverProps {
+export interface ICover {
+  data: string;
+  id: string;
+}
+
+interface ILogo {
+  color: string;
+  cover: ICover;
+}
+
+export interface CoverDialogProps {
   isBaseTheme: boolean;
+  setRoomLogoCover: VoidFunction;
+  covers?: ICover[] | undefined;
+  getCovers: VoidFunction;
+  setRoomLogoCoverDialogVisible: (value: boolean) => void;
+}
+
+export interface RoomLogoCoverProps {
+  isBaseTheme?: boolean;
+  logo?: ILogo;
+  title?: string;
+  covers?: ICover[] | undefined;
+  setCover?: (color: string, icon: string | ICover) => void;
 }
 
 export interface CustomLogoProps {
   color?: string;
-  icon?: string;
+  icon?: string | ICover;
   withoutIcon: boolean;
   isBaseTheme: boolean;
+  roomTitle: string;
 }
 
 export interface SelectColorProps {
@@ -49,5 +72,6 @@ export interface SelectIconProps {
   t: TTranslation;
   withoutIcon: boolean;
   setWithoutIcon: Dispatch<SetStateAction<boolean>>;
-  setIcon: Dispatch<SetStateAction<string>>;
+  setIcon: Dispatch<SetStateAction<string | ICover>>;
+  covers?: ICover[];
 }

@@ -617,7 +617,54 @@ describe("Locales Tests", () => {
   });
 
   test("ForbiddenKeysElementsTest", () => {
-    // Add test logic here
+    let message = `Next keys have forbidden elements in names \`${forbiddenElements.join(",")}\`:\r\n\r\n`;
+
+    let exists = false;
+    let i = 0;
+
+    moduleFolders.forEach((module) => {
+      if (!module.availableLanguages) return;
+
+      module.availableLanguages.forEach((lng) => {
+        const translationItems = lng.translations.filter((f) =>
+          forbiddenElements.some((elem) => f.key.toUpperCase().includes(elem))
+        );
+
+        if (!translationItems.length) return;
+
+        exists = true;
+
+        message +=
+          `${++i}. Language '${lng.language}' (Count: ${translationItems.length}). Path '${lng.path}' ` +
+          `Keys:\r\n\r\n`;
+
+        const keys = translationItems.map((t) => t.key);
+
+        message += keys.join("\r\n") + "\r\n\r\n";
+      });
+    });
+
+    commonTranslations.forEach((lng) => {
+      const translationItems = lng.translations
+        .filter((elem) => !skipForbiddenKeys.includes(elem.key))
+        .filter((f) =>
+          forbiddenElements.some((elem) => f.key.toUpperCase().includes(elem))
+        );
+
+      if (!translationItems.length) return;
+
+      exists = true;
+
+      message +=
+        `${++i}. Language '${lng.language}' (Count: ${translationItems.length}). Path '${lng.path}' ` +
+        `Keys:\r\n\r\n`;
+
+      const keys = translationItems.map((t) => t.key);
+
+      message += keys.join("\r\n") + "\r\n\r\n";
+    });
+
+    expect(exists, message).toBe(false);
   });
 
   test("EmptyValueKeysTest", () => {

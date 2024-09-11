@@ -27,7 +27,7 @@ const List = ({ clients, viewAs, currentDeviceType }: ListProps) => {
     <Trans
       ns="OAuth"
       t={t}
-      key="OAuthAppDescription"
+      i18nKey="OAuthAppDescription"
       values={{
         productName: t("Common:ProductName"),
         organizationName: t("Common:OrganizationName"),

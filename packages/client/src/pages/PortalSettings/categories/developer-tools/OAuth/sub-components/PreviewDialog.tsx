@@ -180,7 +180,7 @@ const PreviewDialog = ({
                 <Trans
                   t={t}
                   ns="OAuth"
-                  key="SignIn"
+                  i18nKey="SignIn"
                   values={{ productName: t("Common:ProductName") }}
                 />
               }

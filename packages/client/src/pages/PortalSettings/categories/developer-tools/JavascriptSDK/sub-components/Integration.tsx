@@ -46,6 +46,10 @@ const zoom = "https://www.onlyoffice.com/office-for-zoom.aspx";
 const wordPress = "https://www.onlyoffice.com/office-for-wordpress.aspx";
 const drupal = "https://www.onlyoffice.com/office-for-drupal.aspx";
 
+const zoomTitle = "Zoom";
+const wordPressTitle = "WordPress";
+const drupalTitle = "Drupal";
+
 export const Integration = (props: {
   t: TTranslation;
   theme: TTheme;
@@ -67,7 +71,7 @@ export const Integration = (props: {
         {t("IntegrationDescription", { productName: t("Common:ProductName") })}
       </Text>
       <div className="icons">
-        <div className="icon" title="Zoom">
+        <div className="icon" title={zoomTitle}>
           <ReactSVG
             className="icon-zoom"
             src={ZoomIcon}
@@ -75,7 +79,7 @@ export const Integration = (props: {
           />
         </div>
 
-        <div className="icon" title="WordPress">
+        <div className="icon" title={wordPressTitle}>
           <ReactSVG
             className="icon-wordpress"
             src={WordpressIcon}
@@ -83,7 +87,7 @@ export const Integration = (props: {
           />
         </div>
 
-        <div className="icon" title="Drupal">
+        <div className="icon" title={drupalTitle}>
           <ReactSVG
             className="icon-drupal"
             src={DrupalIcon}

@@ -668,6 +668,47 @@ describe("Locales Tests", () => {
   });
 
   test("EmptyValueKeysTest", () => {
-    // Add test logic here
+    let message = `Next files have empty keys:\r\n\r\n`;
+
+    let exists = false;
+    let i = 0;
+
+    moduleFolders.forEach((module) => {
+      if (!module.availableLanguages) return;
+
+      module.availableLanguages.forEach((lng) => {
+        const emptyTranslationItems = lng.translations.filter((f) => !f.value);
+
+        if (!emptyTranslationItems.length) return;
+
+        exists = true;
+
+        message +=
+          `${++i}. Language '${lng.language}' (Count: ${emptyTranslationItems.length}). Path '${lng.path}' ` +
+          `Empty keys:\r\n\r\n`;
+
+        const emptyKeys = emptyTranslationItems.map((t) => t.key);
+
+        message += emptyKeys.join("\r\n") + "\r\n\r\n";
+      });
+    });
+
+    commonTranslations.forEach((lng) => {
+      const emptyTranslationItems = lng.translations.filter((f) => !f.value);
+
+      if (!emptyTranslationItems.length) return;
+
+      exists = true;
+
+      message +=
+        `${++i}. Language '${lng.language}' (Count: ${emptyTranslationItems.length}). Path '${lng.path}' ` +
+        `Empty keys:\r\n\r\n`;
+
+      const emptyKeys = emptyTranslationItems.map((t) => t.key);
+
+      message += emptyKeys.join("\r\n") + "\r\n\r\n";
+    });
+
+    expect(exists, message).toBe(false);
   });
 });

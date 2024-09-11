@@ -13,4 +13,5 @@
 // limitations under the License.
 module.exports = {
   testEnvironment: "node",
+  setupFilesAfterEnv: ["jest-expect-message"],
 };

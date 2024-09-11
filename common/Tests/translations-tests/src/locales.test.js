@@ -288,10 +288,8 @@ beforeAll(() => {
 
 describe("Locales Tests", () => {
   test("ParseJsonTest", () => {
-    expect(parseJsonErrors.length).toBe(
-      0,
-      `File path = '${parseJsonErrors.map((e) => e.path).join(", ")}' failed to parse with error: '${parseJsonErrors.map((e) => e.error).join(", ")}'`
-    );
+    const message = `File path = '${parseJsonErrors.map((e) => e.path).join(", ")}' failed to parse with error: '${parseJsonErrors.map((e) => e.error).join(", ")}'`;
+    expect(parseJsonErrors.length, message).toBe(0);
   });
 
   test("SingleKeyFilesTest", () => {
@@ -299,10 +297,9 @@ describe("Locales Tests", () => {
       (t) => t.language === "en" && t.translations.length === 1
     );
 
-    expect(singleKeyTranslationFiles.length).toBe(
-      0,
-      `Translations files with single key:\r\n${singleKeyTranslationFiles.map((d) => `\r\nKey='${d.translations[0].key}':\r\n${d.path}'`).join("\r\n")}`
-    );
+    const message = `Translations files with single key:\r\n${singleKeyTranslationFiles.map((d) => `\r\nKey='${d.translations[0].key}':\r\n${d.path}'`).join("\r\n")}`;
+
+    expect(singleKeyTranslationFiles.length, message).toBe(0);
   });
 
   test("FullEnDublicatesTest", () => {
@@ -324,10 +321,9 @@ describe("Locales Tests", () => {
       .sort((a, b) => b.count - a.count)
       .map((grp) => ({ key: grp.key, value: grp.value, count: grp.count }));
 
-    expect(duplicatesArray.length).toBe(
-      0,
-      `\r\n${duplicatesArray.map((d) => JSON.stringify(d, null, 2)).join("\r\n")}`
-    );
+    const message = `\r\n${duplicatesArray.map((d) => JSON.stringify(d, null, 2)).join("\r\n")}`;
+
+    expect(duplicatesArray.length, message).toBe(0);
   });
 
   test("NotFoundKeysTest", () => {
@@ -346,10 +342,10 @@ describe("Locales Tests", () => {
       (k) => !allEnKeys.includes(k)
     );
 
-    expect(notFoundJsKeys.length).toBe(
-      0,
-      `Some i18n-keys do not exist in translations in 'en' language: Keys:\r\n${notFoundJsKeys.join("\r\n")}`
-    );
+    let i = 0;
+    const message = `Some i18n-keys do not exist in translations in 'en' language:\r\n\r\nKeys:\r\n${notFoundJsKeys.join(`\r\n${++i}`)}`;
+
+    expect(notFoundJsKeys.length, message).toBe(0);
   });
 
   test("UselessTranslationKeysTest", () => {
@@ -371,10 +367,9 @@ describe("Locales Tests", () => {
       (k) => !allJsTranslationKeys.includes(k)
     );
 
-    expect(notFoundi18nKeys.length).toBe(
-      0,
-      `Some i18n-keys are not found in js keys:\r\n${notFoundi18nKeys.join("\r\n")}`
-    );
+    const message = `Some i18n-keys are not found in js keys:\r\n${notFoundi18nKeys.join("\r\n")}`;
+
+    expect(notFoundi18nKeys.length, message).toBe(0);
   });
 
   test("NotTranslatedToastsTest", () => {
@@ -395,7 +390,7 @@ describe("Locales Tests", () => {
       message += `${++i}. Path='${key}'\r\n\r\n${group.map((v) => v.value).join("\r\n")}\r\n\r\n`;
     });
 
-    expect(notTranslatedToasts.length).toBe(0, message);
+    expect(notTranslatedToasts.length, message).toBe(0);
   });
 
   test("NotTranslatedPropsTest", () => {
@@ -416,7 +411,7 @@ describe("Locales Tests", () => {
       message += `${++i}. Path='${key}'\r\n\r\n${group.map((v) => v.value).join("\r\n")}\r\n\r\n`;
     });
 
-    expect(notTranslatedProps.length).toBe(0, message);
+    expect(notTranslatedProps.length, message).toBe(0);
   });
 
   test("WrongTranslationVariablesTest", () => {
@@ -436,18 +431,6 @@ describe("Locales Tests", () => {
   });
 
   test("EmptyValueKeysTest", () => {
-    // Add test logic here
-  });
-
-  test("NotTranslatedKeysTest", () => {
-    // Add test logic here
-  });
-
-  test("NotTranslatedCommonKeysTest", () => {
-    // Add test logic here
-  });
-
-  test("NotAllLanguageTranslatedTest", () => {
     // Add test logic here
   });
 });

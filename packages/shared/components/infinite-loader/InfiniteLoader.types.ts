@@ -35,7 +35,7 @@ export interface InfiniteLoaderProps {
   loadMoreItems: (params: IndexRange) => Promise<void>;
   itemSize?: number;
   children: React.ReactNode[];
-  onScroll: () => void;
+  onScroll?: () => void;
   isLoading?: boolean;
   columnStorageName?: string;
   columnInfoPanelStorageName?: string;
@@ -43,6 +43,7 @@ export interface InfiniteLoaderProps {
   infoPanelVisible?: boolean;
   countTilesInRow?: number;
   showSkeleton?: boolean;
+  currentFolderId?: string | number;
 }
 
 export interface ListComponentProps extends InfiniteLoaderProps {

@@ -24,23 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX, BASE_URL, HEADER_TFA_VALIDATE } from "../../utils";
+import { API_PREFIX, BASE_URL } from "../../utils";
 
 export const PATH = "settings/tfaapp/validate";
 
 const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 
-export const tfaAppNotValidateSuccess = {
-  response: false,
-  count: 1,
-  links: [
-    {
-      href: url,
-      action: "POST",
-    },
-  ],
-  status: 0,
-  statusCode: 200,
+export const tfaAppNotValidateError = {
+  error: {
+    message: "Incorrect code",
+    type: "System.ArgumentException",
+    stack: "",
+    hresult: -2147024809,
+  },
+  status: 1,
+  statusCode: 400,
 };
 
 export const tfaAppValidateSuccess = {
@@ -56,14 +54,8 @@ export const tfaAppValidateSuccess = {
   statusCode: 200,
 };
 
-export const tfaAppValidate = (headers: Headers): Response => {
-  let isValidate = false;
+export const tfaAppValidate = (isValidate: boolean = true): Response => {
+  if (!isValidate) return new Response(JSON.stringify(tfaAppNotValidateError));
 
-  if (headers?.get(HEADER_TFA_VALIDATE)) {
-    isValidate = true;
-  }
-
-  if (isValidate) return new Response(JSON.stringify(tfaAppValidateSuccess));
-
-  return new Response(JSON.stringify(tfaAppNotValidateSuccess));
+  return new Response(JSON.stringify(tfaAppValidateSuccess));
 };

@@ -80,4 +80,8 @@ export const endpoints: TEndpoints = {
     url: `${BASE_URL}${TFA_APP_VALIDATE_PATH}`,
     dataHandler: tfaAppValidateHandler(),
   },
+  tfaAppValidateError: {
+    url: `${BASE_URL}${TFA_APP_VALIDATE_PATH}`,
+    dataHandler: tfaAppValidateHandler(false),
+  },
 };

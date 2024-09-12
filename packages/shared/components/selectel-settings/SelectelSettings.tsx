@@ -24,124 +24,130 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { inject, observer } from "mobx-react";
-import { TextInput } from "@docspace/shared/components/text-input";
+/* eslint-disable jsx-a11y/tabindex-no-positive */
 
-const public_container = "public_container";
-const private_container = "private_container";
-const filePath = "filePath";
-class SelectelSettings extends React.Component {
-  static formNames = () => {
-    return { public_container: "", private_container: "" };
-  };
+import React, { useEffect } from "react";
 
-  constructor(props) {
-    super(props);
-    const {
-      selectedStorage,
-      setRequiredFormSettings,
-      setIsThirdStorageChanged,
-      isNeedFilePath,
-    } = this.props;
+import {
+  InputSize,
+  InputType,
+  TextInput,
+} from "@docspace/shared/components/text-input";
 
-    const filePathField = isNeedFilePath ? [filePath] : [];
+import {
+  FILE_PATH,
+  PRIVATE_CONTAINER,
+  PUBLIC_CONTAINER,
+} from "./SelectelSettings.constants";
+import type { SelectelSettingsProps } from "./SelectelSettings.types";
+
+const SelectelSettings = ({
+  isLoading,
+  formSettings,
+  isLoadingData,
+  isNeedFilePath,
+  selectedStorage,
+  errorsFieldsBeforeSafe: isError,
+  t,
+  setIsThirdStorageChanged,
+  setRequiredFormSettings,
+  addValueInFormSettings,
+}: SelectelSettingsProps) => {
+  const isDisabled = selectedStorage && !selectedStorage.isSet;
+  const privatePlaceholder =
+    selectedStorage && selectedStorage.properties[0].title;
+
+  const publicPlaceholder =
+    selectedStorage && selectedStorage.properties[1].title;
+
+  useEffect(() => {
+    const filePathField = isNeedFilePath ? [FILE_PATH] : [];
     setIsThirdStorageChanged(false);
     setRequiredFormSettings([
-      public_container,
-      private_container,
+      PUBLIC_CONTAINER,
+      PRIVATE_CONTAINER,
       ...filePathField,
     ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    this.isDisabled = selectedStorage && !selectedStorage.isSet;
-
-    this.privatePlaceholder =
-      selectedStorage && selectedStorage.properties[0].title;
-    this.publicPlaceholder =
-      selectedStorage && selectedStorage.properties[1].title;
-  }
-
-  onChangeText = (event) => {
-    const { addValueInFormSettings } = this.props;
-
+  const onChangeText = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target } = event;
     const value = target.value;
     const name = target.name;
 
     addValueInFormSettings(name, value);
   };
-  render() {
-    const {
-      formSettings,
-      errorsFieldsBeforeSafe: isError,
-      isLoadingData,
-      isLoading,
-      isNeedFilePath,
-      t,
-    } = this.props;
 
-    return (
-      <>
+  return (
+    <>
+      <TextInput
+        id="private-container-input"
+        name={PRIVATE_CONTAINER}
+        className="backup_text-input"
+        scale
+        value={formSettings[PRIVATE_CONTAINER]}
+        hasError={isError[PRIVATE_CONTAINER]}
+        onChange={onChangeText}
+        isDisabled={isLoadingData || isLoading || isDisabled}
+        placeholder={privatePlaceholder || ""}
+        tabIndex={1}
+        type={InputType.text}
+        size={InputSize.base}
+      />
+      <TextInput
+        scale
+        id="public-container-input"
+        name={PUBLIC_CONTAINER}
+        className="backup_text-input"
+        value={formSettings[PUBLIC_CONTAINER]}
+        hasError={isError[PUBLIC_CONTAINER]}
+        onChange={onChangeText}
+        isDisabled={isLoadingData || isLoading || isDisabled}
+        placeholder={publicPlaceholder || ""}
+        tabIndex={2}
+        type={InputType.text}
+        size={InputSize.base}
+      />
+
+      {isNeedFilePath && (
         <TextInput
-          id="private-container-input"
-          name={private_container}
+          id="file-path-input"
+          name={FILE_PATH}
           className="backup_text-input"
-          scale={true}
-          value={formSettings[private_container]}
-          hasError={isError[private_container]}
-          onChange={this.onChangeText}
-          isDisabled={isLoadingData || isLoading || this.isDisabled}
-          placeholder={this.privatePlaceholder || ""}
-          tabIndex={1}
+          scale
+          value={formSettings[FILE_PATH]}
+          onChange={onChangeText}
+          isDisabled={isLoadingData || isLoading || isDisabled}
+          placeholder={t("Path")}
+          tabIndex={3}
+          hasError={isError[FILE_PATH]}
+          type={InputType.text}
+          size={InputSize.base}
         />
-        <TextInput
-          id="public-container-input"
-          name={public_container}
-          className="backup_text-input"
-          scale={true}
-          value={formSettings[public_container]}
-          hasError={isError[public_container]}
-          onChange={this.onChangeText}
-          isDisabled={isLoadingData || isLoading || this.isDisabled}
-          placeholder={this.publicPlaceholder || ""}
-          tabIndex={2}
-        />
+      )}
+    </>
+  );
+};
 
-        {isNeedFilePath && (
-          <TextInput
-            id="file-path-input"
-            name={filePath}
-            className="backup_text-input"
-            scale
-            value={formSettings[filePath]}
-            onChange={this.onChangeText}
-            isDisabled={isLoadingData || isLoading || this.isDisabled}
-            placeholder={t("Path")}
-            tabIndex={3}
-            hasError={isError[filePath]}
-          />
-        )}
-      </>
-    );
-  }
-}
+export default SelectelSettings;
 
-export default inject(({ backup }) => {
-  const {
-    setFormSettings,
-    setRequiredFormSettings,
-    formSettings,
-    errorsFieldsBeforeSafe,
-    setIsThirdStorageChanged,
-    addValueInFormSettings,
-  } = backup;
+// export default inject(({ backup }) => {
+//   const {
+//     setFormSettings,
+//     setRequiredFormSettings,
+//     formSettings,
+//     errorsFieldsBeforeSafe,
+//     setIsThirdStorageChanged,
+//     addValueInFormSettings,
+//   } = backup;
 
-  return {
-    setFormSettings,
-    setRequiredFormSettings,
-    formSettings,
-    errorsFieldsBeforeSafe,
-    setIsThirdStorageChanged,
-    addValueInFormSettings,
-  };
-})(observer(SelectelSettings));
+//   return {
+//     setFormSettings,
+//     setRequiredFormSettings,
+//     formSettings,
+//     errorsFieldsBeforeSafe,
+//     setIsThirdStorageChanged,
+//     addValueInFormSettings,
+//   };
+// })(observer(SelectelSettings));

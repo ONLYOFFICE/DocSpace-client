@@ -24,60 +24,46 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { loginHandler, LOGIN_PATH } from "./authentication";
-import {
-  SELF_PATH_ACTIVATION_STATUS,
-  SELF_PATH_CHANGE_PASSWORD,
-  SELF_PATH_UPDATE_USER,
-  selfHandler,
-} from "./people";
-import {
-  COMPLETE_PATH,
-  completeHandler,
-  LICENCE_PATH,
-  licenseHandler,
-  TFA_APP_VALIDATE_PATH,
-  tfaAppValidateHandler,
-} from "./settings";
+import { API_PREFIX, BASE_URL, HEADER_TFA_VALIDATE } from "../../utils";
 
-export type TEndpoint = {
-  url: string;
-  dataHandler: Response;
+export const PATH = "settings/tfaapp/validate";
+
+const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
+
+export const tfaAppNotValidateSuccess = {
+  response: false,
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "POST",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
 };
 
-export type TEndpoints = {
-  [key: string]: TEndpoint;
+export const tfaAppValidateSuccess = {
+  response: true,
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "POST",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
 };
 
-const BASE_URL = "*/**/api/2.0/";
+export const tfaAppValidate = (headers: Headers): Response => {
+  let isValidate = false;
 
-export const endpoints: TEndpoints = {
-  wizardComplete: {
-    url: `${BASE_URL}${COMPLETE_PATH}`,
-    dataHandler: completeHandler(),
-  },
-  license: {
-    url: `${BASE_URL}${LICENCE_PATH}`,
-    dataHandler: licenseHandler(),
-  },
-  changePassword: {
-    url: `${BASE_URL}${SELF_PATH_CHANGE_PASSWORD}`,
-    dataHandler: selfHandler(),
-  },
-  activationStatus: {
-    url: `${BASE_URL}${SELF_PATH_ACTIVATION_STATUS}`,
-    dataHandler: selfHandler(),
-  },
-  updateUser: {
-    url: `${BASE_URL}${SELF_PATH_UPDATE_USER}`,
-    dataHandler: selfHandler(),
-  },
-  login: {
-    url: `${BASE_URL}${LOGIN_PATH}`,
-    dataHandler: loginHandler(),
-  },
-  tfaAppValidate: {
-    url: `${BASE_URL}${TFA_APP_VALIDATE_PATH}`,
-    dataHandler: tfaAppValidateHandler(),
-  },
+  if (headers?.get(HEADER_TFA_VALIDATE)) {
+    isValidate = true;
+  }
+
+  if (isValidate) return new Response(JSON.stringify(tfaAppValidateSuccess));
+
+  return new Response(JSON.stringify(tfaAppNotValidateSuccess));
 };

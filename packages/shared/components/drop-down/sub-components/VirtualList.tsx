@@ -93,9 +93,11 @@ function VirtualList({
         case "ArrowDown":
           index = findNextNonSeparatorIndex(index, cleanChildren, "forward");
           break;
-        case "ArrowUp":
-          index = findNextNonSeparatorIndex(index, cleanChildren, "backward");
+        case "ArrowUp": {
+          const direction = index === -1 ? "forward" : "backward";
+          index = findNextNonSeparatorIndex(index, cleanChildren, direction);
           break;
+        }
         default:
           return;
       }

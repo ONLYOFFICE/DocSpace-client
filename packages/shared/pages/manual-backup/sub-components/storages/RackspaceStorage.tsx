@@ -24,74 +24,108 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { withTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
-import { Button } from "@docspace/shared/components/button";
-import RackspaceSettings from "../../../consumer-storage-settings/RackspaceSettings";
+import React, { useEffect } from "react";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { ThirdPartyStorages } from "@docspace/shared/enums";
-import { getFromLocalStorage } from "../../../../../../utils";
 
-class RackspaceStorage extends React.Component {
-  constructor(props) {
-    super(props);
-    const { selectedStorage, setCompletedFormFields } = this.props;
+import {
+  RackspaceSettings,
+  formNames,
+} from "@docspace/shared/components/rackspace-settings";
+import type { SelectedStorageType, TTranslation } from "@docspace/shared/types";
 
-    const basicValues = RackspaceSettings.formNames();
+interface RackspaceStorageProps {
+  t: TTranslation;
+  isLoading?: boolean;
+  isValidForm: boolean;
+  isLoadingData: boolean;
+  isMaxProgress: boolean;
+  buttonSize: ButtonSize;
+  isNeedFilePath: boolean;
+  formSettings: Record<string, string>;
+  selectedStorage?: SelectedStorageType;
+  errorsFieldsBeforeSafe: Record<string, boolean>;
+  addValueInFormSettings: (name: string, value: string) => void;
+  setRequiredFormSettings: (arr: string[]) => void;
+  onMakeCopyIntoStorage: () => Promise<void>;
+  setIsThirdStorageChanged: (changed: boolean) => void;
+  setCompletedFormFields: (
+    values: Record<string, unknown>,
+    module?: unknown,
+  ) => void;
+}
 
-    const moduleValues = getFromLocalStorage(
-      "LocalCopyThirdPartyStorageValues",
+const RackspaceStorage = ({
+  isLoading,
+  buttonSize,
+  isValidForm,
+  formSettings,
+  isLoadingData,
+  isMaxProgress,
+  isNeedFilePath,
+  selectedStorage,
+  errorsFieldsBeforeSafe,
+
+  addValueInFormSettings,
+  setIsThirdStorageChanged,
+  setRequiredFormSettings,
+  setCompletedFormFields,
+  onMakeCopyIntoStorage,
+  t,
+}: RackspaceStorageProps) => {
+  const isDisabled = selectedStorage && !selectedStorage.isSet;
+
+  useEffect(() => {
+    const basicValues = formNames();
+    const moduleValues = JSON.parse(
+      localStorage.getItem("LocalCopyThirdPartyStorageValues") ?? "null",
     );
+
     const moduleType =
-      getFromLocalStorage("LocalCopyStorage") ===
+      JSON.parse(localStorage.getItem("LocalCopyStorage") ?? "null") ===
       ThirdPartyStorages.RackspaceId;
 
     setCompletedFormFields(
       moduleType && moduleValues ? moduleValues : basicValues,
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    this.isDisabled = selectedStorage && !selectedStorage.isSet;
-  }
-
-  render() {
-    const {
-      t,
-      isLoadingData,
-      isMaxProgress,
-      selectedStorage,
-      buttonSize,
-      onMakeCopyIntoStorage,
-      isValidForm,
-    } = this.props;
-
-    return (
-      <>
-        <RackspaceSettings
-          isLoadingData={isLoadingData}
-          selectedStorage={selectedStorage}
-          t={t}
+  return (
+    <>
+      <RackspaceSettings
+        t={t}
+        isLoading={isLoading}
+        formSettings={formSettings}
+        isLoadingData={isLoadingData}
+        isNeedFilePath={isNeedFilePath}
+        selectedStorage={selectedStorage}
+        errorsFieldsBeforeSafe={errorsFieldsBeforeSafe}
+        addValueInFormSettings={addValueInFormSettings}
+        setRequiredFormSettings={setRequiredFormSettings}
+        setIsThirdStorageChanged={setIsThirdStorageChanged}
+      />
+      <div className="manual-backup_buttons">
+        <Button
+          id="create-copy"
+          label={t("Common:CreateCopy")}
+          onClick={onMakeCopyIntoStorage}
+          primary
+          isDisabled={!isValidForm || !isMaxProgress || isDisabled}
+          size={buttonSize}
         />
+      </div>
+    </>
+  );
+};
 
-        <div className="manual-backup_buttons">
-          <Button
-            id="create-copy"
-            label={t("Common:CreateCopy")}
-            onClick={onMakeCopyIntoStorage}
-            primary
-            isDisabled={!isValidForm || !isMaxProgress || this.isDisabled}
-            size={buttonSize}
-          />
-        </div>
-      </>
-    );
-  }
-}
+export default RackspaceStorage;
 
-export default inject(({ backup }) => {
-  const { setCompletedFormFields, isValidForm } = backup;
+// export default inject(({ backup }) => {
+//   const { setCompletedFormFields, isValidForm } = backup;
 
-  return {
-    isValidForm,
-    setCompletedFormFields,
-  };
-})(observer(withTranslation(["Settings", "Common"])(RackspaceStorage)));
+//   return {
+//     isValidForm,
+//     setCompletedFormFields,
+//   };
+// })(observer(withTranslation(["Settings", "Common"])(RackspaceStorage)));

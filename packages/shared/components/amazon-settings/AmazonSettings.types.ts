@@ -35,7 +35,7 @@ export interface AmazonSettingsProps {
   t: TTranslation;
   theme: TTheme;
   isNeedFilePath: boolean;
-  isLoading: boolean;
+  isLoading?: boolean;
   isLoadingData: boolean;
   formSettings: Record<string, string>;
   defaultRegion: unknown;

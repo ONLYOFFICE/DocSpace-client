@@ -31,7 +31,7 @@ export interface GoogleCloudSettingsProps {
   selectedStorage?: SelectedStorageType;
   errorsFieldsBeforeSafe: Record<string, boolean>;
   formSettings: Record<string, string>;
-  isLoading: boolean;
+  isLoading?: boolean;
   isLoadingData: boolean;
 
   addValueInFormSettings: (name: string, value: string) => void;

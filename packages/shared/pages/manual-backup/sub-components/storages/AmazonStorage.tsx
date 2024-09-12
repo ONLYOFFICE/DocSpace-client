@@ -49,7 +49,7 @@ interface AmazonStorageProps {
   isMaxProgress: boolean;
   isLoadingData: boolean;
   isNeedFilePath: boolean;
-  isLoading: boolean;
+  isLoading?: boolean;
   selectedStorage?: SelectedStorageType;
   formSettings: Record<string, string>;
   errorsFieldsBeforeSafe: Record<string, boolean>;
@@ -113,13 +113,13 @@ const AmazonStorage = ({
       <AmazonSettings
         t={t}
         theme={theme}
-        isLoadingData={isLoadingData}
-        selectedStorage={selectedStorage}
-        isNeedFilePath={isNeedFilePath}
-        formSettings={formSettings}
         isLoading={isLoading}
+        formSettings={formSettings}
+        isLoadingData={isLoadingData}
         defaultRegion={defaultRegion}
         storageRegions={storageRegions}
+        isNeedFilePath={isNeedFilePath}
+        selectedStorage={selectedStorage}
         errorsFieldsBeforeSafe={errorsFieldsBeforeSafe}
         deleteValueFormSetting={deleteValueFormSetting}
         addValueInFormSettings={addValueInFormSettings}

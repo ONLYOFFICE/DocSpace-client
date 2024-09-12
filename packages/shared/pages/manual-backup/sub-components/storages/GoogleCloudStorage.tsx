@@ -24,73 +24,110 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { withTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
-import { Button } from "@docspace/shared/components/button";
-import GoogleCloudSettings from "../../../consumer-storage-settings/GoogleCloudSettings";
+import React, { useEffect } from "react";
+
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { ThirdPartyStorages } from "@docspace/shared/enums";
-import { getFromLocalStorage } from "../../../../../../utils";
 
-class GoogleCloudStorage extends React.Component {
-  constructor(props) {
-    super(props);
-    const { selectedStorage, setCompletedFormFields } = this.props;
+import {
+  GoogleCloudSettings,
+  formNames,
+} from "@docspace/shared/components/google-cloud-settings";
 
-    const basicValues = GoogleCloudSettings.formNames();
+import type { SelectedStorageType, TTranslation } from "@docspace/shared/types";
 
-    const moduleValues = getFromLocalStorage(
-      "LocalCopyThirdPartyStorageValues",
+interface GoogleCloudStorageProps {
+  t: TTranslation;
+  isValidForm: boolean;
+  buttonSize: ButtonSize;
+  isMaxProgress: boolean;
+  isLoadingData: boolean;
+  selectedStorage?: SelectedStorageType;
+  isNeedFilePath: boolean;
+  errorsFieldsBeforeSafe: Record<string, boolean>;
+  formSettings: Record<string, string>;
+  isLoading?: boolean;
+  onMakeCopyIntoStorage: () => Promise<void>;
+  setCompletedFormFields: (
+    values: Record<string, unknown>,
+    module?: unknown,
+  ) => void;
+  addValueInFormSettings: (name: string, value: string) => void;
+  setRequiredFormSettings: (arr: string[]) => void;
+  setIsThirdStorageChanged: (changed: boolean) => void;
+}
+
+const GoogleCloudStorage = ({
+  selectedStorage,
+  setCompletedFormFields,
+  buttonSize,
+  isLoadingData,
+  isMaxProgress,
+  isValidForm,
+  onMakeCopyIntoStorage,
+  t,
+  isNeedFilePath,
+  errorsFieldsBeforeSafe,
+  formSettings,
+  isLoading,
+  addValueInFormSettings,
+  setRequiredFormSettings,
+  setIsThirdStorageChanged,
+}: GoogleCloudStorageProps) => {
+  const isDisabled = selectedStorage && !selectedStorage.isSet;
+
+  useEffect(() => {
+    const basicValues = formNames();
+    const moduleValues = JSON.parse(
+      localStorage.getItem("LocalCopyThirdPartyStorageValues") ?? "null",
     );
 
     const moduleType =
-      getFromLocalStorage("LocalCopyStorage") === ThirdPartyStorages.GoogleId;
+      JSON.parse(localStorage.getItem("LocalCopyStorage") ?? "null") ===
+      ThirdPartyStorages.GoogleId;
 
     setCompletedFormFields(
       moduleType && moduleValues ? moduleValues : basicValues,
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    this.isDisabled = selectedStorage && !selectedStorage.isSet;
-  }
+  return (
+    <>
+      <GoogleCloudSettings
+        t={t}
+        isLoading={isLoading}
+        formSettings={formSettings}
+        isLoadingData={isLoadingData}
+        isNeedFilePath={isNeedFilePath}
+        selectedStorage={selectedStorage}
+        errorsFieldsBeforeSafe={errorsFieldsBeforeSafe}
+        addValueInFormSettings={addValueInFormSettings}
+        setRequiredFormSettings={setRequiredFormSettings}
+        setIsThirdStorageChanged={setIsThirdStorageChanged}
+      />
 
-  render() {
-    const {
-      t,
-      isLoadingData,
-      isMaxProgress,
-      selectedStorage,
-      buttonSize,
-      onMakeCopyIntoStorage,
-      isValidForm,
-    } = this.props;
-
-    return (
-      <>
-        <GoogleCloudSettings
-          selectedStorage={selectedStorage}
-          isLoadingData={isLoadingData}
+      <div className="manual-backup_buttons">
+        <Button
+          id="create-copy"
+          label={t("Common:CreateCopy")}
+          onClick={onMakeCopyIntoStorage}
+          primary
+          isDisabled={!isValidForm || !isMaxProgress || isDisabled}
+          size={buttonSize}
         />
+      </div>
+    </>
+  );
+};
 
-        <div className="manual-backup_buttons">
-          <Button
-            id="create-copy"
-            label={t("Common:CreateCopy")}
-            onClick={onMakeCopyIntoStorage}
-            primary
-            isDisabled={!isValidForm || !isMaxProgress || this.isDisabled}
-            size={buttonSize}
-          />
-        </div>
-      </>
-    );
-  }
-}
+export default GoogleCloudStorage;
 
-export default inject(({ backup }) => {
-  const { setCompletedFormFields, isValidForm } = backup;
+// export default inject(({ backup }) => {
+//   const { setCompletedFormFields, isValidForm } = backup;
 
-  return {
-    isValidForm,
-    setCompletedFormFields,
-  };
-})(observer(withTranslation(["Settings", "Common"])(GoogleCloudStorage)));
+//   return {
+//     isValidForm,
+//     setCompletedFormFields,
+//   };
+// })(observer(withTranslation(["Settings", "Common"])(GoogleCloudStorage)));

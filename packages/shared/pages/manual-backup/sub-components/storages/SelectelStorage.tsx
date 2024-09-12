@@ -24,73 +24,110 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { withTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
-import { Button } from "@docspace/shared/components/button";
-import SelectelSettings from "../../../consumer-storage-settings/SelectelSettings";
+import React, { useEffect } from "react";
+
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { ThirdPartyStorages } from "@docspace/shared/enums";
-import { getFromLocalStorage } from "../../../../../../utils";
 
-class SelectelStorage extends React.Component {
-  constructor(props) {
-    super(props);
-    const { selectedStorage, setCompletedFormFields } = this.props;
+import {
+  SelectelSettings,
+  formNames,
+} from "@docspace/shared/components/selectel-settings";
+import type { SelectedStorageType, TTranslation } from "@docspace/shared/types";
 
-    const basicValues = SelectelSettings.formNames();
+interface SelectelStorageProps {
+  t: TTranslation;
+  isLoading?: boolean;
+  isValidForm: boolean;
+  buttonSize: ButtonSize;
+  isMaxProgress: boolean;
+  isLoadingData: boolean;
+  isNeedFilePath: boolean;
+  selectedStorage?: SelectedStorageType;
+  formSettings: Record<string, string>;
+  errorsFieldsBeforeSafe: Record<string, boolean>;
+  onMakeCopyIntoStorage: () => Promise<void>;
+  setRequiredFormSettings: (arr: string[]) => void;
+  setIsThirdStorageChanged: (changed: boolean) => void;
+  addValueInFormSettings: (name: string, value: string) => void;
+  setCompletedFormFields: (
+    values: Record<string, unknown>,
+    module?: unknown,
+  ) => void;
+}
 
-    const moduleValues = getFromLocalStorage(
-      "LocalCopyThirdPartyStorageValues",
+const SelectelStorage = ({
+  isLoading,
+  buttonSize,
+  isValidForm,
+  formSettings,
+  isLoadingData,
+  isMaxProgress,
+  isNeedFilePath,
+  selectedStorage,
+  errorsFieldsBeforeSafe,
+  t,
+  onMakeCopyIntoStorage,
+  setCompletedFormFields,
+  addValueInFormSettings,
+  setRequiredFormSettings,
+  setIsThirdStorageChanged,
+}: SelectelStorageProps) => {
+  const isDisabled = selectedStorage && !selectedStorage.isSet;
+
+  useEffect(() => {
+    const basicValues = formNames();
+
+    const moduleValues = JSON.parse(
+      localStorage.getItem("LocalCopyThirdPartyStorageValues") ?? "null",
     );
+
     const moduleType =
-      getFromLocalStorage("LocalCopyStorage") === ThirdPartyStorages.SelectelId;
+      JSON.parse(localStorage.getItem("LocalCopyStorage") ?? "null") ===
+      ThirdPartyStorages.SelectelId;
 
     setCompletedFormFields(
       moduleType && moduleValues ? moduleValues : basicValues,
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    this.isDisabled = selectedStorage && !selectedStorage.isSet;
-  }
+  return (
+    <>
+      <SelectelSettings
+        t={t}
+        isLoading={isLoading}
+        formSettings={formSettings}
+        isLoadingData={isLoadingData}
+        isNeedFilePath={isNeedFilePath}
+        selectedStorage={selectedStorage}
+        errorsFieldsBeforeSafe={errorsFieldsBeforeSafe}
+        addValueInFormSettings={addValueInFormSettings}
+        setRequiredFormSettings={setRequiredFormSettings}
+        setIsThirdStorageChanged={setIsThirdStorageChanged}
+      />
 
-  render() {
-    const {
-      t,
-      isLoadingData,
-      isMaxProgress,
-      selectedStorage,
-      buttonSize,
-      onMakeCopyIntoStorage,
-      isValidForm,
-    } = this.props;
-
-    return (
-      <>
-        <SelectelSettings
-          isLoadingData={isLoadingData}
-          selectedStorage={selectedStorage}
-          t={t}
+      <div className="manual-backup_buttons">
+        <Button
+          id="create-copy"
+          label={t("Common:CreateCopy")}
+          onClick={onMakeCopyIntoStorage}
+          primary
+          isDisabled={!isValidForm || !isMaxProgress || isDisabled}
+          size={buttonSize}
         />
+      </div>
+    </>
+  );
+};
 
-        <div className="manual-backup_buttons">
-          <Button
-            id="create-copy"
-            label={t("Common:CreateCopy")}
-            onClick={onMakeCopyIntoStorage}
-            primary
-            isDisabled={!isValidForm || !isMaxProgress || this.isDisabled}
-            size={buttonSize}
-          />
-        </div>
-      </>
-    );
-  }
-}
+export default SelectelStorage;
 
-export default inject(({ backup }) => {
-  const { setCompletedFormFields, isValidForm } = backup;
+// export default inject(({ backup }) => {
+//   const { setCompletedFormFields, isValidForm } = backup;
 
-  return {
-    isValidForm,
-    setCompletedFormFields,
-  };
-})(observer(withTranslation(["Settings", "Common"])(SelectelStorage)));
+//   return {
+//     isValidForm,
+//     setCompletedFormFields,
+//   };
+// })(observer(withTranslation(["Settings", "Common"])(SelectelStorage)));

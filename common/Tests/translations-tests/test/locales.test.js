@@ -88,9 +88,7 @@ beforeAll(() => {
     );
   });
 
-  console.log(
-    `Found translations by *.json filter = ${translations.length}. First path is '${translations[0]}'`
-  );
+  console.log(`Found translations by *.json filter = ${translations.length}.`);
 
   for (const tPath of translations) {
     try {
@@ -120,9 +118,7 @@ beforeAll(() => {
     }
   }
 
-  console.log(
-    `Found translationFiles = ${translationFiles.length}. First path is '${translationFiles[0]?.path}'`
-  );
+  console.log(`Found translationFiles = ${translationFiles.length}.`);
 
   const searchPattern = /\.(js|jsx|ts|tsx)$/;
   const javascripts = workspaces.flatMap((wsPath) => {
@@ -137,9 +133,7 @@ beforeAll(() => {
     );
   });
 
-  console.log(
-    `Found javascripts by *.js(x) filter = ${javascripts.length}. First path is '${javascripts[0]}'`
-  );
+  console.log(`Found javascripts by *.js(x) filter = ${javascripts.length}.`);
 
   const pattern1 =
     "[.{\\s\\(]t\\??\\.?\\(\\s*[\"'`]([a-zA-Z0-9_.:\\s{}/-]+)[\"'`]\\s*[\\),]";
@@ -206,9 +200,7 @@ beforeAll(() => {
     javascriptFiles.push(jsFile);
   });
 
-  console.log(
-    `Found javascriptFiles = ${javascriptFiles.length}. First path is '${javascriptFiles[0]?.path}'`
-  );
+  console.log(`Found javascriptFiles = ${javascriptFiles.length}.`);
 
   const list = translationFiles.map((t) => ({
     modulePath: moduleWorkspaces.find((m) => t.path.includes(m)),
@@ -233,9 +225,7 @@ beforeAll(() => {
     return acc;
   }, []);
 
-  console.log(
-    `Found moduleTranslations = ${moduleTranslations.length}. First path is '${moduleTranslations[0]?.modulePath}'`
-  );
+  console.log(`Found moduleTranslations = ${moduleTranslations.length}.`);
 
   const moduleJsTranslatedFiles = javascriptFiles
     .map((t) => ({
@@ -257,7 +247,7 @@ beforeAll(() => {
     }, []);
 
   console.log(
-    `Found moduleJsTranslatedFiles = ${moduleJsTranslatedFiles.length}. First path is '${moduleJsTranslatedFiles[0]?.modulePath}'`
+    `Found moduleJsTranslatedFiles = ${moduleJsTranslatedFiles.length}.`
   );
 
   moduleWorkspaces.forEach((wsPath) => {
@@ -273,9 +263,7 @@ beforeAll(() => {
     });
   });
 
-  console.log(
-    `Found ModuleFolders = ${moduleFolders.length}. First path is '${moduleFolders[0]?.path}'`
-  );
+  console.log(`Found moduleFolders = ${moduleFolders.length}.`);
 
   commonTranslations = translationFiles
     .filter((file) =>
@@ -289,9 +277,7 @@ beforeAll(() => {
       translations: t.translations,
     }));
 
-  console.log(
-    `Found CommonTranslations = ${commonTranslations.length}. First path is '${commonTranslations[0]?.path}'`
-  );
+  console.log(`Found commonTranslations = ${commonTranslations.length}.`);
 });
 
 describe("Locales Tests", () => {
@@ -351,7 +337,7 @@ describe("Locales Tests", () => {
     );
 
     let i = 0;
-    const message = `Some i18n-keys do not exist in translations in 'en' language:\r\n\r\nKeys:\r\n${notFoundJsKeys.join(`\r\n${++i}`)}`;
+    const message = `Some i18n-keys do not exist in translations in 'en' language:\r\n\r\nKeys:\r\n\r\n${notFoundJsKeys.join(`\r\n${++i}`)}`;
 
     expect(notFoundJsKeys.length, message).toBe(0);
   });
@@ -375,7 +361,7 @@ describe("Locales Tests", () => {
       (k) => !allJsTranslationKeys.includes(k)
     );
 
-    const message = `Some i18n-keys are not found in js keys:\r\n${notFoundi18nKeys.join("\r\n")}`;
+    const message = `Some i18n-keys are not found in js \r\n\r\nKeys:\r\n\r\n${notFoundi18nKeys.join("\r\n")}`;
 
     expect(notFoundi18nKeys.length, message).toBe(0);
   });
@@ -585,7 +571,7 @@ describe("Locales Tests", () => {
 
         message +=
           `${++i}. Language '${lng.language}' (Count: ${translationItems.length}). Path '${lng.path}' ` +
-          `Keys:\r\n\r\n`;
+          `\r\n\r\nKeys:\r\n\r\n`;
 
         const keys = translationItems.map((t) => t.key);
 
@@ -606,7 +592,7 @@ describe("Locales Tests", () => {
 
       message +=
         `${++i}. Language '${lng.language}' (Count: ${translationItems.length}). Path '${lng.path}' ` +
-        `Keys:\r\n\r\n`;
+        `\r\n\r\nKeys:\r\n\r\n`;
 
       const keys = translationItems.map((t) => t.key);
 
@@ -636,7 +622,7 @@ describe("Locales Tests", () => {
 
         message +=
           `${++i}. Language '${lng.language}' (Count: ${translationItems.length}). Path '${lng.path}' ` +
-          `Keys:\r\n\r\n`;
+          `\r\n\r\nKeys:\r\n\r\n`;
 
         const keys = translationItems.map((t) => t.key);
 
@@ -657,7 +643,7 @@ describe("Locales Tests", () => {
 
       message +=
         `${++i}. Language '${lng.language}' (Count: ${translationItems.length}). Path '${lng.path}' ` +
-        `Keys:\r\n\r\n`;
+        `\r\n\r\nKeys:\r\n\r\n`;
 
       const keys = translationItems.map((t) => t.key);
 

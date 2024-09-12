@@ -61,7 +61,6 @@ const RoomsItemHeader = ({
   roomType,
   displayFileExtension,
   getLogoCoverModel,
-  setCoverSelection,
 }) => {
   const itemTitleRef = useRef();
 
@@ -83,10 +82,6 @@ const RoomsItemHeader = ({
 
   const isFile = !!selection.fileExst;
   let title = selection.title;
-
-  useEffect(() => {
-    setCoverSelection(selection);
-  }, [selection]);
 
   if (isFile) {
     title = getTitleWithoutExtension(selection, false);
@@ -196,10 +191,12 @@ export default inject(
     } = infoPanelStore;
 
     const { displayFileExtension } = filesSettingsStore;
+    const { setCoverSelection } = dialogsStore;
 
     const selection = infoPanelSelection.length > 1 ? null : infoPanelSelection;
     const isArchive = selection?.rootFolderType === FolderType.Archive;
 
+    setCoverSelection(selection);
     const roomType =
       selectedFolderStore.roomType ??
       infoPanelStore.infoPanelSelection?.roomType;
@@ -217,7 +214,6 @@ export default inject(
       setInvitePanelOptions: dialogsStore.setInvitePanelOptions,
       setQuotaWarningDialogVisible: dialogsStore.setQuotaWarningDialogVisible,
       getLogoCoverModel: dialogsStore.getLogoCoverModel,
-      setCoverSelection: dialogsStore.setCoverSelection,
 
       setSelection: filesStore.setSelection,
       setBufferSelection: filesStore.setBufferSelection,

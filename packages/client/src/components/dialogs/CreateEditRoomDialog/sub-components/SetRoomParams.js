@@ -133,7 +133,6 @@ const SetRoomParams = ({
   selection,
   getLogoCoverModel,
   getInfoPanelItemIcon,
-  setCoverSelection,
 }) => {
   const [previewIcon, setPreviewIcon] = useState(null);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
@@ -151,10 +150,6 @@ const SetRoomParams = ({
     : selection?.logo?.cover
       ? selection?.logo
       : getInfoPanelItemIcon(selection, 96);
-
-  React.useEffect(() => {
-    setCoverSelection(selection);
-  }, [selection]);
 
   const onChangeName = (e) => {
     setIsValidTitle(true);
@@ -365,6 +360,8 @@ export default inject(
 
     const selection =
       bufferSelection != null ? bufferSelection : infoPanelSelection;
+
+    setCoverSelection(selection);
 
     return {
       isDefaultRoomsQuotaSet,

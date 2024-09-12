@@ -24,43 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  HEADER_QUOTA_FAILED,
-  HEADER_TRAFF_LIMIT,
-  HEADER_USER_EXISTED,
-  endpoints,
-} from "@docspace/shared/__mocks__/e2e";
-
-import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
+import { endpoints } from "@docspace/shared/__mocks__/e2e";
 import { expect, test } from "./fixtures/base";
+import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
+import { HEADER_TFA_VALIDATE } from "@docspace/shared/__mocks__/e2e/utils";
 
-const URL = "/login/confirm/Activation";
-const NEXT_REQUEST_URL = "*/**/login/confirm/Activation";
+const URL = "/login/confirm/TfaActivation";
+const NEXT_REQUEST_URL = "*/**/login/confirm/TfaActivation";
 
 const QUERY_PARAMS = [
   {
     name: "type",
-    value: "Activation",
+    value: "TfaActivation",
   },
-  {
-    name: "key",
-    value: "123",
-  },
+
   {
     name: "email",
     value: "mail@mail.com",
-  },
-  {
-    name: "uid",
-    value: "123",
-  },
-  {
-    name: "firstname",
-    value: "firstname",
-  },
-  {
-    name: "lastname",
-    value: "lastname",
   },
 ];
 
@@ -70,101 +50,66 @@ const NEXT_REQUEST_URL_WITH_PARAMS = getUrlWithQueryParams(
   QUERY_PARAMS,
 );
 
-test("activation render", async ({ page }) => {
+test("tfa activation render", async ({ page }) => {
   await page.goto(URL_WITH_PARAMS);
 
   await expect(page).toHaveScreenshot([
     "desktop",
-    "activation",
-    "activation-render.png",
+    "tfa-activation",
+    "tfa-activation-render.png",
   ]);
 });
 
-test("activation success", async ({ page, mockRequest }) => {
-  await mockRequest.router(endpoints.changePassword);
-  await mockRequest.router(endpoints.activationStatus);
-  await mockRequest.router(endpoints.login);
-  await mockRequest.router(endpoints.updateUser);
+test("tfa activation success", async ({ page, mockRequest }) => {
+  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
+    HEADER_TFA_VALIDATE,
+  ]);
+  await mockRequest.router(endpoints.tfaAppValidate);
   await page.goto(URL_WITH_PARAMS);
 
-  await page
-    .getByTestId("input-block")
-    .getByTestId("text-input")
-    .fill("qwerty123");
-  await page.getByTestId("icon-button").getByRole("img").click();
+  await page.getByTestId("text-input").fill("123456");
 
   await expect(page).toHaveScreenshot([
     "desktop",
-    "activation",
-    "activation-success.png",
+    "tfa-activation",
+    "tfa-activation-success.png",
   ]);
 
   await page.getByTestId("button").click();
 
-  await page.waitForURL("/", { waitUntil: "load" });
+  await page.waitForURL("/profile", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([
     "desktop",
-    "activation",
-    "activation-success-redirect.png",
+    "tfa-activation",
+    "tfa-activation-success-redirect.png",
   ]);
 });
 
-test("activation error", async ({ page }) => {
+test("tfa activation error not validated", async ({ page, mockRequest }) => {
+  await mockRequest.router(endpoints.tfaAppValidate);
   await page.goto(URL_WITH_PARAMS);
 
-  await page.fill("[name='name']", "");
-  await page.fill("[name='surname']", "");
-  await page.getByTestId("input-block").getByTestId("text-input").fill("123");
+  await page.getByTestId("text-input").fill("123456");
 
   await page.getByTestId("button").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",
-    "activation",
-    "activation-error.png",
+    "tfa-activation",
+    "tfa-activation-error-not-validated.png",
   ]);
 });
 
-test("activation error tariffic limit", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_TRAFF_LIMIT,
-  ]);
-
+test("tfa activation error", async ({ page }) => {
   await page.goto(URL_WITH_PARAMS);
+
+  await page.getByTestId("text-input").fill("");
+  await page.getByTestId("button").click();
 
   await expect(page).toHaveScreenshot([
     "desktop",
-    "activation",
-    "activation-error-tariffic-limit.png",
-  ]);
-});
-
-test("activation error user existed", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_USER_EXISTED,
-  ]);
-
-  // Expected to go to the room page or default page
-  await page.goto(URL_WITH_PARAMS);
-
-  await expect(page).toHaveScreenshot([
-    "desktop",
-    "activation",
-    "activation-user-existed.png",
-  ]);
-});
-
-test("activation error quota failed", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_QUOTA_FAILED,
-  ]);
-
-  await page.goto(URL_WITH_PARAMS);
-
-  await expect(page).toHaveScreenshot([
-    "desktop",
-    "activation",
-    "activation-error-quota-failed.png",
+    "tfa-activation",
+    "tfa-activation-error.png",
   ]);
 });

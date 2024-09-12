@@ -340,6 +340,7 @@ export default inject(
     infoPanelStore,
   }) => {
     const { isDefaultRoomsQuotaSet } = currentQuotaStore;
+    const { folderFormValidation, maxImageUploadSize } = settingsStore;
 
     const { bufferSelection } = filesStore;
     const { getInfoPanelItemIcon, infoPanelSelection } = infoPanelStore;
@@ -349,7 +350,6 @@ export default inject(
       getLogoCoverModel,
       setCoverSelection,
     } = dialogsStore;
-
 
     const selection =
       bufferSelection != null ? bufferSelection : infoPanelSelection;

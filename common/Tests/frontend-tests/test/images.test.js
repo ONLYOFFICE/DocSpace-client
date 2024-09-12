@@ -94,4 +94,42 @@ describe("Image Tests", () => {
 
     expect(uselessImages.length, message).toBe(0);
   });
+
+  test("ImagesWithDifferentMD5ButEqualNameTest", () => {
+    const uniqueImg = new Map();
+
+    allImgs.forEach((i) => {
+      const oldImg = uniqueImg.get(i.fileName);
+
+      if (oldImg) {
+        let skip = false;
+
+        oldImg.forEach((oi) => (skip = skip || oi.md5Hash === i.md5Hash));
+
+        if (!skip) {
+          const newImg = [...oldImg, i];
+
+          uniqueImg.set(i.fileName, newImg);
+        }
+      } else {
+        uniqueImg.set(i.fileName, [i]);
+      }
+    });
+
+    let message = "Found images with different MD5 but equal name.\r\n\r\n";
+
+    let i = 0;
+
+    uniqueImg.forEach((value, key) => {
+      if (value.length > 1) {
+        message += `${++i}. ${key}:\r\n`;
+
+        value.forEach((v) => (message += `${v.path}\r\n`));
+
+        message += "\r\n";
+      }
+    });
+
+    expect(i, message).toBe(0);
+  });
 });

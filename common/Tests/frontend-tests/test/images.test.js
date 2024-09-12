@@ -202,4 +202,40 @@ describe("Image Tests", () => {
 
     expect(i, message).toBe(0);
   });
+
+  test("WrongImagesImportTest", () => {
+    let wrongImports = "";
+    const wrongImportImages = [
+      `"/static/images`,
+      `"/images`,
+      `"static/images`,
+      `"images/`,
+    ];
+
+    let message = "Found wrong images import in the code.\r\n\r\n";
+    let k = 0;
+    allFiles.forEach((file) => {
+      const data = fs.readFileSync(file.path, "utf8");
+
+      wrongImportImages.forEach((i) => {
+        const idx = data.indexOf(i);
+
+        if (
+          idx > 0 &&
+          file.fileName.indexOf("webpack") === -1 &&
+          file.path.indexOf("common\\utils\\index.ts") === -1 &&
+          file.path.indexOf("context-menu\\sub-components\\sub-menu.js") ===
+            -1 &&
+          file.path.indexOf("drop-down-item\\index.js") === -1 &&
+          file.path.indexOf("common\\utils\\index.ts") === -1 &&
+          file.path.indexOf(".html") === -1 &&
+          file.path.indexOf("storybook-static") === -1
+        ) {
+          message += `${++k}. ${file.path}\r\n`;
+        }
+      });
+    });
+
+    expect(k, message).toBe(0);
+  });
 });

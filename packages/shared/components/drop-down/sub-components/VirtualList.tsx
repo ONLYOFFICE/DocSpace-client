@@ -171,7 +171,7 @@ function VirtualList({
   useEffect(() => {
     setCurrentIndex(activeIndex);
     currentIndexRef.current = activeIndex;
-  }, [activeIndex]);
+  }, [activeIndex, isOpen]);
 
   const handleMouseMove = useCallback((index: number) => {
     if (currentIndexRef.current === index) return;

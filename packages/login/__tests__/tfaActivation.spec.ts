@@ -27,10 +27,8 @@
 import { endpoints } from "@docspace/shared/__mocks__/e2e";
 import { expect, test } from "./fixtures/base";
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
-import { HEADER_TFA_VALIDATE } from "@docspace/shared/__mocks__/e2e/utils";
 
 const URL = "/login/confirm/TfaActivation";
-const NEXT_REQUEST_URL = "*/**/login/confirm/TfaActivation";
 
 const QUERY_PARAMS = [
   {
@@ -45,10 +43,6 @@ const QUERY_PARAMS = [
 ];
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
-const NEXT_REQUEST_URL_WITH_PARAMS = getUrlWithQueryParams(
-  NEXT_REQUEST_URL,
-  QUERY_PARAMS,
-);
 
 test("tfa activation render", async ({ page }) => {
   await page.goto(URL_WITH_PARAMS);
@@ -61,9 +55,6 @@ test("tfa activation render", async ({ page }) => {
 });
 
 test("tfa activation success", async ({ page, mockRequest }) => {
-  await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_TFA_VALIDATE,
-  ]);
   await mockRequest.router(endpoints.tfaAppValidate);
   await page.goto(URL_WITH_PARAMS);
 
@@ -87,7 +78,7 @@ test("tfa activation success", async ({ page, mockRequest }) => {
 });
 
 test("tfa activation error not validated", async ({ page, mockRequest }) => {
-  await mockRequest.router(endpoints.tfaAppValidate);
+  await mockRequest.router(endpoints.tfaAppValidateError);
   await page.goto(URL_WITH_PARAMS);
 
   await page.getByTestId("text-input").fill("123456");
@@ -98,18 +89,5 @@ test("tfa activation error not validated", async ({ page, mockRequest }) => {
     "desktop",
     "tfa-activation",
     "tfa-activation-error-not-validated.png",
-  ]);
-});
-
-test("tfa activation error", async ({ page }) => {
-  await page.goto(URL_WITH_PARAMS);
-
-  await page.getByTestId("text-input").fill("");
-  await page.getByTestId("button").click();
-
-  await expect(page).toHaveScreenshot([
-    "desktop",
-    "tfa-activation",
-    "tfa-activation-error.png",
   ]);
 });

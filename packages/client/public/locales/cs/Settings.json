@@ -168,8 +168,6 @@
   "ManagementCategorySecurity": "Bezpečnost",
   "ManualBackupDescription": "Použijte tuto možnost, pokud chcete získat všechna data obsažená v prostoru v souboru.",
   "MaxCopies": "{{copiesCount}} - maximální počet záložních kopií",
-  "MemoryQuotaDisabled": "Paměťová kvóta byla úspěšně vypnuta.",
-  "MemoryQuotaEnabled": "Paměťová kvóta byla úspěšně povolena.",
   "Migration": "Migrace",
   "NewColorScheme": "Nové barevné schéma",
   "NextStep": "Další krok",

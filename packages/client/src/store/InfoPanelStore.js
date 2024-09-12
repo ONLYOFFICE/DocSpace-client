@@ -69,6 +69,7 @@ const observedKeys = [
 const infoMembers = "info_members";
 const infoHistory = "info_history";
 const infoDetails = "info_details";
+const infoShare = "info_share";
 
 class InfoPanelStore {
   userStore = null;
@@ -761,7 +762,7 @@ class InfoPanelStore {
   };
 
   openShareTab = () => {
-    this.setView("info_share");
+    this.setView(infoShare);
     this.isVisible = true;
   };
 

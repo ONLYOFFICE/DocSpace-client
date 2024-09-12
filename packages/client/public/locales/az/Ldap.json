@@ -41,7 +41,6 @@
   "LdapSendWelcomeLetter": "Xoş gəlmisiniz məktubu göndərin",
   "LdapSendWelcomeLetterTooltip": "İşarələndikdə bütün yeni istifadəçilərə xoş gəlmisiniz məktubu göndəriləcək. Yalnız Mail Xüsusiyyəti LDAP-a uyğunlaşdırıldıqda əlçatandır.",
   "LdapServer": "Server",
-  "LdapServerTooltip": "LDAP server URL-ni port nömrəsi olmadan daxil edin, məs. LDAP://mycompany.com.",
   "LdapSettings": "LDAP parametrləri",
   "LdapSettingsCertCnNoMatch": "Sertifikat adı host adına uyğun gəlmir",
   "LdapSettingsCertExpired": "Sertifikatın müddəti bitib",

@@ -31,7 +31,6 @@ import CheckBoxReactSvgUrl from "PUBLIC_DIR/images/check-box.react.svg?url";
 import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 import ReconnectSvgUrl from "PUBLIC_DIR/images/reconnect.svg?url";
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
-import FileActionsOwnerReactSvgUrl from "PUBLIC_DIR/images/file.actions.owner.react.svg?url";
 import FolderLocationReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
 import TickRoundedSvgUrl from "PUBLIC_DIR/images/tick.rounded.svg?url";
 import FavoritesReactSvgUrl from "PUBLIC_DIR/images/favorites.react.svg?url";
@@ -93,6 +92,10 @@ import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { isDesktop, trimSeparator } from "@docspace/shared/utils";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 import { copyShareLink } from "@docspace/shared/utils/copy";
+import {
+  canShowManageLink,
+  copyDocumentShareLink,
+} from "@docspace/shared/components/share/Share.helpers";
 
 import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helpers/filesUtils";
 import { getOAuthToken } from "@docspace/shared/utils/common";
@@ -309,10 +312,6 @@ class ContextOptionsStore {
     this.filesActionsStore.checkAndOpenLocationAction(item);
   };
 
-  onOwnerChange = () => {
-    this.dialogsStore.setChangeOwnerPanelVisible(true);
-  };
-
   onMoveAction = (item) => {
     const { setIsMobileHidden } = this.infoPanelStore;
     const { id, isFolder } = this.selectedFolderStore;
@@ -421,7 +420,7 @@ class ContextOptionsStore {
     const { href } = item;
     const sharedItem = navigationPath.find((r) => r.shared);
 
-    const isShared = shared || sharedItem;
+    const isShared = shared || sharedItem || item.shared;
 
     const isSystemFolder = systemFolders.includes(item.type);
 
@@ -1203,6 +1202,22 @@ class ContextOptionsStore {
     return this.getFilesContextOptions(item, t, false, true);
   };
 
+  getManageLinkOptions = (item) => {
+    return {
+      canShowLink: canShowManageLink(
+        item,
+        this.filesStore.bufferSelection,
+        this.infoPanelStore.isVisible,
+        this.infoPanelStore.fileView,
+      ),
+      onClickLink: () => {
+        this.filesStore.setSelection([]);
+        this.filesStore.setBufferSelection(item);
+        this.infoPanelStore.openShareTab();
+      },
+    };
+  };
+
   getFilesContextOptions = (item, t, isInfoPanel, isHeader) => {
     const optionsToRemove = isInfoPanel
       ? ["select", "room-info", "show-info"]
@@ -1528,10 +1543,11 @@ class ContextOptionsStore {
 
           const primaryLink = await getPrimaryFileLink(item.id);
           if (primaryLink) {
-            copyShareLink(primaryLink.sharedTo.shareLink);
-            item.shared
-              ? toastr.success(t("Common:LinkSuccessfullyCopied"))
-              : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+            copyDocumentShareLink(
+              primaryLink,
+              t,
+              this.getManageLinkOptions(item),
+            );
             setShareChanged(true);
           }
         },
@@ -1572,14 +1588,6 @@ class ContextOptionsStore {
       },
       ...pinOptions,
       ...muteOptions,
-      {
-        id: "option_owner-change",
-        key: "owner-change",
-        label: t("Translations:OwnerChange"),
-        icon: FileActionsOwnerReactSvgUrl,
-        onClick: this.onOwnerChange,
-        disabled: false,
-      },
       {
         id: "option_link-for-portal-users",
         key: "link-for-portal-users",
@@ -2417,7 +2425,7 @@ class ContextOptionsStore {
     }
 
     const createNewDoc = {
-      id: "personal_new-documnet",
+      id: "personal_new-document",
       key: "new-document",
       label: t("Common:NewDocument"),
       onClick: () => this.onCreate("docx"),

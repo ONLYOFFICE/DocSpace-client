@@ -28,6 +28,7 @@ import { thirdPartyLogin } from "@docspace/shared/utils/loginUtils";
 import { Nullable, TTranslation } from "@docspace/shared/types";
 
 import { MessageKey, OAuth2ErrorKey } from "./enums";
+import { parseURL } from "@docspace/shared/utils/common";
 
 export async function oAuthLogin(profile: string) {
   let isSuccess = false;
@@ -130,35 +131,19 @@ export const getOAuthMessageKeyTranslation = (
   }
 };
 
-export const getInvitationLinkData = (encodeString: string) => {
-  const fromBinaryStr = (encodeString: string) => {
-    const decodeStr = atob(encodeString);
+export const getInvitationLinkData = (encodeString: Nullable<string>) => {
+  if (!encodeString) return;
 
-    const decoder = new TextDecoder();
-    const charCodeArray = Uint8Array.from(
-      { length: decodeStr.length },
-      (element, index) => decodeStr.charCodeAt(index),
-    );
+  let locationObject;
 
-    return decoder.decode(charCodeArray);
-  };
+  try {
+    const decodeString = decodeURIComponent(encodeString);
+    locationObject = parseURL(decodeString);
+  } catch (e) {
+    console.error("parse error", e);
+  }
 
-  const decodeString = fromBinaryStr(encodeString);
-  const queryParams = JSON.parse(decodeString) as {
-    email: string;
-    roomName: string;
-    firstName: string;
-    lastName: string;
-    type: string;
-    linkData?: {
-      confirmHeader?: string;
-      key: string;
-      type: string;
-      uid?: string;
-    };
-  };
-
-  return queryParams;
+  return locationObject;
 };
 
 export const getEmailFromInvitation = (encodeString: Nullable<string>) => {

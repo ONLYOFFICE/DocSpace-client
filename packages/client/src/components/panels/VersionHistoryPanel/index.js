@@ -26,21 +26,15 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import { Backdrop } from "@docspace/shared/components/backdrop";
-import { Aside } from "@docspace/shared/components/aside";
-
 import { FloatingButton } from "@docspace/shared/components/floating-button";
-import { Portal } from "@docspace/shared/components/portal";
-import { DeviceType } from "@docspace/shared/enums";
 import { withTranslation } from "react-i18next";
-import {
-  StyledVersionHistoryPanel,
-  StyledContent,
-  StyledBody,
-} from "../StyledPanels";
 import { SectionBodyContent } from "../../../pages/VersionHistory/Section/";
 import { inject, observer } from "mobx-react";
 import config from "PACKAGE_FILE";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
 
 class PureVersionHistoryPanel extends React.Component {
   onClose = () => {
@@ -60,51 +54,30 @@ class PureVersionHistoryPanel extends React.Component {
   onKeyPress = (e) => (e.key === "Esc" || e.key === "Escape") && this.onClose();
 
   render() {
-    //console.log("render versionHistoryPanel");
-    const { visible, isLoading, versions, showProgressBar, currentDeviceType } =
-      this.props;
-    const zIndex = 310;
+    const { visible, isLoading, versions, showProgressBar } = this.props;
 
-    const element = (
-      <StyledVersionHistoryPanel
-        className="version-history-modal-dialog"
+    return (
+      <ModalDialog
+        isLoading={!versions && !isLoading}
         visible={visible}
-        isLoading={true}
+        onClose={this.onClose}
+        displayType={ModalDialogType.aside}
       >
-        <Backdrop
-          onClick={this.onClose}
-          visible={visible}
-          zIndex={zIndex}
-          isAside={true}
-        />
-        <Aside
-          className="version-history-aside-panel"
-          visible={visible}
-          onClose={this.onClose}
-          withoutBodyScroll
-          isLoading={!versions && !isLoading}
-          header={versions ? versions[0].title : ""}
-        >
-          <StyledContent>
-            <StyledBody className="version-history-panel-body">
-              <SectionBodyContent onClose={this.onClose} />
-            </StyledBody>
-            {showProgressBar && (
-              <FloatingButton
-                className="layout-progress-bar"
-                icon="file"
-                alert={false}
-              />
-            )}
-          </StyledContent>
-        </Aside>
-      </StyledVersionHistoryPanel>
-    );
+        <ModalDialog.Header>
+          {versions ? versions[0].title : ""}
+        </ModalDialog.Header>
+        <ModalDialog.Body>
+          <SectionBodyContent onClose={this.onClose} />
 
-    return currentDeviceType === DeviceType.mobile ? (
-      <Portal element={element} />
-    ) : (
-      element
+          {showProgressBar && (
+            <FloatingButton
+              className="layout-progress-bar"
+              icon="file"
+              alert={false}
+            />
+          )}
+        </ModalDialog.Body>
+      </ModalDialog>
     );
   }
 }
@@ -124,7 +97,7 @@ export default inject(
     versionHistoryStore,
     infoPanelStore,
   }) => {
-    const { isTabletView, currentDeviceType } = settingsStore;
+    const { isTabletView } = settingsStore;
     const { isLoading } = clientLoadingStore;
     const { setIsMobileHidden: setInfoPanelIsMobileHidden } = infoPanelStore;
     const {
@@ -146,7 +119,6 @@ export default inject(
 
       setIsVerHistoryPanel,
       setInfoPanelIsMobileHidden,
-      currentDeviceType,
     };
   },
 )(observer(VersionHistoryPanel));

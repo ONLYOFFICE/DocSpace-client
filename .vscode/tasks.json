@@ -436,6 +436,66 @@
         "focus": true,
         "close": false
       }
+    },
+    {
+      "label": "Test | Test build",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn test:build ; ",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn test:e2e ; ",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Test e2e model",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; yarn test:e2e:model ; ",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | e2e playwright setup",
+      "type": "shell",
+      "command": "cd ${workspaceFolder} ; npx playwright install ; ",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
     }
   ]
 }

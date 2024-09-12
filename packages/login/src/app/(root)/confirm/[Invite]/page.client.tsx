@@ -55,6 +55,7 @@ import {
   createPasswordHash,
   getLoginLink,
   getOAuthToken,
+  toUrlParams,
 } from "@docspace/shared/utils/common";
 import { setCookie } from "@docspace/shared/utils/cookie";
 import { ButtonKeys, DeviceType } from "@docspace/shared/enums";
@@ -76,6 +77,7 @@ import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import { RegisterContainer } from "@/components/RegisterContainer.styled";
 import EmailInputForm from "./_sub-components/EmailInputForm";
 import RegistrationForm from "./_sub-components/RegistrationForm";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 export type CreateUserFormProps = {
   userNameRegex: string;
@@ -209,26 +211,6 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     const headerKey = linkData?.confirmHeader ?? null;
 
     try {
-      const toBinaryStr = (str: string) => {
-        const encoder = new TextEncoder();
-        const charCodes = encoder.encode(str);
-        // @ts-ignore
-        return String.fromCharCode(...charCodes);
-      };
-
-      const loginData = window.btoa(
-        toBinaryStr(
-          JSON.stringify({
-            type: "invitation",
-            email,
-            roomName,
-            firstName,
-            lastName,
-            linkData,
-          }),
-        ),
-      );
-
       await getUserByEmail(email, headerKey);
 
       setCookie(LANGUAGE, currentCultureName, {
@@ -243,7 +225,24 @@ const CreateUserForm = (props: CreateUserFormProps) => {
         sessionStorage.setItem("referenceUrl", finalUrl);
       }
 
-      router.push(`/?loginData=${loginData}`);
+      const loginData = toUrlParams(
+        {
+          type: "invitation",
+          email,
+          roomName,
+          firstName,
+          lastName,
+          spaceAddress: window.location.host,
+        },
+        true,
+      );
+
+      const encodedData = encodeURIComponent(loginData);
+      const base64Data = btoa(JSON.stringify(linkData));
+
+      const url = `/?loginData=${encodedData}&linkData=${base64Data}`;
+
+      router.push(url);
     } catch (error) {
       const knownError = error as TError;
       const status =

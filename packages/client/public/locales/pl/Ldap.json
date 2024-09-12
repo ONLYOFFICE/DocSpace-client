@@ -41,7 +41,6 @@
   "LdapSendWelcomeLetter": "Wysyłaj wiadomość powitalną",
   "LdapSendWelcomeLetterTooltip": "Jeśli opcja jest zaznaczona, wszyscy nowi użytkownicy otrzymają wiadomość powitalną. Dostępna wyłącznie, jeśli Atrybut poczty jest mapowany do LDAP.",
   "LdapServer": "Serwer",
-  "LdapServerTooltip": "Wprowadź adres URL serwera LDAP bez numeru portu, np. LDAP://mycompany.com.",
   "LdapSettings": "Ustawienia LDAP",
   "LdapSettingsCertCnNoMatch": "Nazwa certyfikatu nie pasuje do nazwy hosta",
   "LdapSettingsCertExpired": "Certyfikat wygasł",

@@ -125,11 +125,10 @@ const SetRoomParams = ({
   onKeyUp,
   enableThirdParty,
   isDefaultRoomsQuotaSet,
-  currentColorScheme,
-  setChangeRoomOwnerIsVisible,
   folderFormValidation,
   disabledChangeRoomType,
   maxImageUploadSize,
+  onOwnerChange,
   selection,
   getLogoCoverModel,
   getInfoPanelItemIcon,
@@ -173,12 +172,6 @@ const SetRoomParams = ({
       setDisableImageRescaling(!icon.uploadedFile);
 
     setRoomParams({ ...roomParams, icon: icon, iconWasUpdated: true });
-  };
-
-  const onOwnerChange = () => {
-    setChangeRoomOwnerIsVisible(true, true, (roomOwner) =>
-      setRoomParams({ ...roomParams, roomOwner }),
-    );
   };
 
   const onCreateFolderChange = () => {
@@ -356,7 +349,7 @@ export default inject(
       getLogoCoverModel,
       setCoverSelection,
     } = dialogsStore;
-    const { folderFormValidation, maxImageUploadSize } = settingsStore;
+
 
     const selection =
       bufferSelection != null ? bufferSelection : infoPanelSelection;

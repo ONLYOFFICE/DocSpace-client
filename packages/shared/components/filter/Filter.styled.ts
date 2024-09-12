@@ -153,13 +153,13 @@ const StyledFilterBlock = styled.div`
   background: ${(props) => props.theme.filterInput.filter.background};
 
   @media ${tablet} {
-    max-width: calc(100% - 69px);
+    max-width: 100%;
   }
 
   @media ${mobile} {
     bottom: 0;
     top: unset;
-    height: calc(100% - 64px);
+    height: 100%;
     width: 100%;
     max-width: 100%;
   }
@@ -201,7 +201,7 @@ const StyledFilterBlockItem = styled.div<{
 }>`
   margin: ${(props) =>
     props.withoutHeader ? "0" : props.isFirst ? "12px 0 0" : "16px 0 0"};
-  padding-inline: 16px 24px;
+  padding-inline: 0 16px;
   max-width: 100%;
   box-sizing: border-box;
 
@@ -335,37 +335,6 @@ const StyledFilterBlockItemSeparator = styled.div`
 `;
 
 StyledFilterBlockItemToggleButton.defaultProps = { theme: Base };
-
-const StyledFilterBlockFooter = styled.div`
-  position: fixed;
-  bottom: 0;
-  inset-inline-end: 0;
-
-  z-index: 401;
-
-  width: 480px;
-  height: 72px;
-  min-height: 72px;
-
-  border-top: ${(props) => props.theme.filterInput.filter.border};
-
-  box-sizing: border-box;
-
-  padding: 0 16px;
-  margin: 0;
-
-  gap: 10px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  @media ${mobile} {
-    width: 100%;
-  }
-`;
-
-StyledFilterBlockFooter.defaultProps = { theme: Base };
 
 const selectedViewIcon = css`
   svg {
@@ -519,6 +488,16 @@ const StyledSortButton = styled.div<{ viewAs: TViewAs; isDesc: boolean }>`
 
 StyledSortButton.defaultProps = { theme: Base };
 
+const StyledFilterBlockHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .additional-icons-container {
+    margin-inline: 16px;
+  }
+`;
+
 export {
   StyledSortButton,
   StyledFilterBlock,
@@ -534,7 +513,7 @@ export {
   StyledFilterBlockItemToggleButton,
   StyledFilterBlockItemCheckboxContainer,
   StyledFilterBlockItemSeparator,
-  StyledFilterBlockFooter,
+  StyledFilterBlockHeader,
 };
 
 export { StyledFilterInput, StyledSearchInput, StyledButton };

@@ -30,9 +30,9 @@
 
 import React, { useLayoutEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useTheme } from "styled-components";
-
+import { useSearchParams } from "next/navigation";
 import { Text } from "@docspace/shared/components/text";
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { getLogoUrl } from "@docspace/shared/utils/common";
@@ -54,31 +54,34 @@ export const GreetingLoginContainer = ({
     false,
     culture,
   );
-
   const searchParams = useSearchParams();
+  const loginData = searchParams?.get("loginData");
+
   const pathname = usePathname();
 
-  const [invitationLinkData, setInvitationLinkData] = useState({
-    email: "",
-    roomName: "",
-    firstName: "",
-    lastName: "",
-    type: "",
-  });
+  const [invitationLinkData, setInvitationLinkData] = useState(
+    getInvitationLinkData(loginData) || {
+      email: "",
+      roomName: "",
+      firstName: "",
+      lastName: "",
+      type: "",
+      spaceAddress: "",
+    },
+  );
 
   useLayoutEffect(() => {
-    if (!searchParams) return;
+    if (!loginData) return;
 
-    const encodeString = searchParams.get("loginData");
-    if (!encodeString) return;
+    const queryParams = getInvitationLinkData(loginData);
 
-    const queryParams = getInvitationLinkData(encodeString);
     if (!queryParams) return;
 
     setInvitationLinkData(queryParams);
-  }, [searchParams]);
+  }, [loginData]);
 
-  const { type, roomName, firstName, lastName } = invitationLinkData;
+  const { type, roomName, firstName, lastName, spaceAddress } =
+    invitationLinkData;
 
   return (
     <>
@@ -108,9 +111,7 @@ export const GreetingLoginContainer = ({
                 firstName,
                 lastName,
                 productName: t("Common:ProductName"),
-                ...(roomName
-                  ? { roomName }
-                  : { spaceAddress: window.location.host }),
+                ...(roomName ? { roomName } : { spaceAddress }),
               }}
               components={{
                 1: <Text fontWeight={600} as="strong" fontSize="16px" />,

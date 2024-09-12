@@ -41,7 +41,6 @@
   "LdapSendWelcomeLetter": "Изпратете приветстващо писмо",
   "LdapSendWelcomeLetterTooltip": "Ако е отметнато, всички нови потребители ще получат приветстващо писмо. Налично само когато атрибутът на пощата е съпоставен с LDAP.",
   "LdapServer": "Сървър",
-  "LdapServerTooltip": "Въведете URL адреса на LDAP сървъра без номера на порта, напр. LDAP://mycompany.com.",
   "LdapSettings": "LDAP настройки",
   "LdapSettingsCertCnNoMatch": "Името на сертификата не съвпада с името на домакина",
   "LdapSettingsCertExpired": "Сертификатът е изтекъл",

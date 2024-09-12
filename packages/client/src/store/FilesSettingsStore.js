@@ -168,7 +168,8 @@ class FilesSettingsStore {
         if (
           !settings.enableThirdParty ||
           this.publicRoomStore.isPublicRoom ||
-          isPublicPreview()
+          isPublicPreview() ||
+          (this.settingsStore.isFrame && !this.authStore.isAuthenticated)
         )
           return;
 

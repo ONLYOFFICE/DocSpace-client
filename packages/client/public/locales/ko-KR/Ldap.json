@@ -41,7 +41,6 @@
   "LdapSendWelcomeLetter": "웰컴 메일 전송",
   "LdapSendWelcomeLetterTooltip": "선택하면 모든 신규 사용자가 웰컴 메일을 받게 됩니다. 메일 속성이 LDAP에 매핑된 경우에만 이용할 수 있습니다.",
   "LdapServer": "서버",
-  "LdapServerTooltip": "포트 번호를 제외한 LDAP 서버 URL을 입력하세요(예: LDAP://mycompany.com).",
   "LdapSettings": "LDAP 설정",
   "LdapSettingsCertCnNoMatch": "인증서 이름이 호스트명과 일치하지 않습니다",
   "LdapSettingsCertExpired": "인증서가 만료되었습니다",

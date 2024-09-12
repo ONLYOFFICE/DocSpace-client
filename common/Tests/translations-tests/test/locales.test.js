@@ -14,9 +14,13 @@
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
-
-const BASE_DIR =
-  process.env.BASE_DIR || path.resolve(__dirname, "../../../../");
+const {
+  getAllFiles,
+  convertPathToOS,
+  getWorkSpaces,
+  BASE_DIR,
+  moduleWorkspaces,
+} = require("../utils/files");
 
 let workspaces = [];
 let translationFiles = [];
@@ -34,47 +38,10 @@ const skipForbiddenKeys = [
   "ProductEditorsName",
 ];
 
-const getAllFiles = (dir) => {
-  const files = fs.readdirSync(dir);
-  return files.flatMap((file) => {
-    const filePath = path.join(dir, file);
-    const isDirectory = fs.statSync(filePath).isDirectory();
-    if (isDirectory) {
-      if (
-        filePath.includes("dist/") ||
-        filePath.includes("tests/") ||
-        filePath.includes(".next/") ||
-        filePath.includes("storybook-static/") ||
-        filePath.includes("node_modules/")
-      ) {
-        return null;
-      }
-
-      return getAllFiles(filePath);
-    } else {
-      return filePath;
-    }
-  });
-};
-
-const convertPathToOS = (filePath) => {
-  return path.sep == "/"
-    ? filePath.replace("\\", "/")
-    : filePath.replace("/", "\\");
-};
-
 beforeAll(() => {
   console.log(`Base path = ${BASE_DIR}`);
 
-  const moduleWorkspaces = [
-    "packages/client",
-    "packages/doceditor",
-    "packages/login",
-    "packages/shared",
-    "packages/management",
-  ];
-
-  workspaces = moduleWorkspaces.map((ws) => path.resolve(BASE_DIR, ws));
+  workspaces = getWorkSpaces();
   workspaces.push(path.resolve(BASE_DIR, "public/locales"));
 
   const translations = workspaces.flatMap((wsPath) => {
@@ -133,7 +100,9 @@ beforeAll(() => {
     );
   });
 
-  console.log(`Found javascripts by *.js(x) filter = ${javascripts.length}.`);
+  console.log(
+    `Found javascripts by js(x)|ts(x) filter = ${javascripts.length}.`
+  );
 
   const pattern1 =
     "[.{\\s\\(]t\\??\\.?\\(\\s*[\"'`]([a-zA-Z0-9_.:\\s{}/-]+)[\"'`]\\s*[\\),]";

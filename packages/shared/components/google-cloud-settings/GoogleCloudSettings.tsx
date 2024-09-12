@@ -24,102 +24,104 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { inject, observer } from "mobx-react";
-import { TextInput } from "@docspace/shared/components/text-input";
+/* eslint-disable jsx-a11y/tabindex-no-positive */
+import React, { useEffect } from "react";
 
-const bucket = "bucket";
-const filePath = "filePath";
-class GoogleCloudSettings extends React.Component {
-  static formNames = () => {
-    return { bucket: "" };
-  };
+import {
+  InputSize,
+  InputType,
+  TextInput,
+} from "@docspace/shared/components/text-input";
 
-  constructor(props) {
-    super(props);
-    const {
-      selectedStorage,
-      setRequiredFormSettings,
-      setIsThirdStorageChanged,
-      isNeedFilePath,
-    } = this.props;
-    const filePathField = isNeedFilePath ? [filePath] : [];
-    setRequiredFormSettings([bucket, ...filePathField]);
+import { BUCKET, FILE_PATH } from "./GoogleCloudSettings.constants";
+import type { GoogleCloudSettingsProps } from "./GoogleCloudSettings.types";
+
+const GoogleCloudSettings = ({
+  t,
+  setIsThirdStorageChanged,
+  setRequiredFormSettings,
+  addValueInFormSettings,
+  isNeedFilePath,
+  selectedStorage,
+  errorsFieldsBeforeSafe: isError,
+  formSettings,
+  isLoading,
+  isLoadingData,
+}: GoogleCloudSettingsProps) => {
+  useEffect(() => {
+    const filePathField = isNeedFilePath ? [FILE_PATH] : [];
+    setRequiredFormSettings([BUCKET, ...filePathField]);
     setIsThirdStorageChanged(false);
-    this.isDisabled = selectedStorage && !selectedStorage.isSet;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-    this.bucketPlaceholder =
-      selectedStorage && selectedStorage.properties[0].title;
-  }
+  const isDisabled = selectedStorage && !selectedStorage.isSet;
+  const bucketPlaceholder =
+    selectedStorage && selectedStorage.properties[0].title;
 
-  onChangeText = (event) => {
-    const { addValueInFormSettings } = this.props;
+  const onChangeText = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target } = event;
     const value = target.value;
     const name = target.name;
 
     addValueInFormSettings(name, value);
   };
-  render() {
-    const {
-      errorsFieldsBeforeSafe: isError,
-      formSettings,
-      isLoadingData,
-      isLoading,
-      isNeedFilePath,
-      t,
-    } = this.props;
 
-    return (
-      <>
+  return (
+    <>
+      <TextInput
+        scale
+        tabIndex={1}
+        name={BUCKET}
+        id="bucket-input"
+        onChange={onChangeText}
+        className="backup_text-input"
+        value={formSettings[BUCKET]}
+        hasError={isError[BUCKET]}
+        isDisabled={isLoadingData || isLoading || isDisabled}
+        placeholder={bucketPlaceholder || ""}
+        type={InputType.text}
+        size={InputSize.base}
+      />
+
+      {isNeedFilePath && (
         <TextInput
-          id="bucket-input"
-          name={bucket}
-          className="backup_text-input"
           scale
-          value={formSettings[bucket]}
-          hasError={isError[bucket]}
-          onChange={this.onChangeText}
-          isDisabled={isLoadingData || isLoading || this.isDisabled}
-          placeholder={this.bucketPlaceholder || ""}
-          tabIndex={1}
+          tabIndex={2}
+          type={InputType.text}
+          size={InputSize.base}
+          name={FILE_PATH}
+          id="file-path-input"
+          placeholder={t("Path")}
+          onChange={onChangeText}
+          className="backup_text-input"
+          hasError={isError[FILE_PATH]}
+          value={formSettings[FILE_PATH]}
+          isDisabled={isLoadingData || isLoading || isDisabled}
         />
+      )}
+    </>
+  );
+};
 
-        {isNeedFilePath && (
-          <TextInput
-            id="file-path-input"
-            name={filePath}
-            className="backup_text-input"
-            scale
-            value={formSettings[filePath]}
-            onChange={this.onChangeText}
-            isDisabled={isLoadingData || isLoading || this.isDisabled}
-            placeholder={t("Path")}
-            tabIndex={2}
-            hasError={isError[filePath]}
-          />
-        )}
-      </>
-    );
-  }
-}
+export default GoogleCloudSettings;
 
-export default inject(({ backup }) => {
-  const {
-    setFormSettings,
-    setRequiredFormSettings,
-    formSettings,
-    errorsFieldsBeforeSafe,
-    setIsThirdStorageChanged,
-    addValueInFormSettings,
-  } = backup;
+// export default inject(({ backup }) => {
+//   const {
+//     setFormSettings,
+//     setRequiredFormSettings,
+//     formSettings,
+//     errorsFieldsBeforeSafe,
+//     setIsThirdStorageChanged,
+//     addValueInFormSettings,
+//   } = backup;
 
-  return {
-    setFormSettings,
-    setRequiredFormSettings,
-    formSettings,
-    errorsFieldsBeforeSafe,
-    setIsThirdStorageChanged,
-    addValueInFormSettings,
-  };
-})(observer(GoogleCloudSettings));
+//   return {
+//     setFormSettings,
+//     setRequiredFormSettings,
+//     formSettings,
+//     errorsFieldsBeforeSafe,
+//     setIsThirdStorageChanged,
+//     addValueInFormSettings,
+//   };
+// })(observer(GoogleCloudSettings));

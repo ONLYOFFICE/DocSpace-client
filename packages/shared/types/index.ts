@@ -71,10 +71,21 @@ export type TCreatedBy = {
   profileUrl: string;
 };
 
+export type StorageRegionsType = { displayName: string; systemName: string };
+
+export type PropertiesType = { name: string; title: string; value: string };
+
 export type TI18n = {
   language: string;
   changeLanguage: (l: string) => string;
   t: (...key: string[]) => string;
+};
+
+export type SelectedStorageType = {
+  id: string;
+  isSet: boolean;
+  title: string;
+  properties: PropertiesType[];
 };
 
 declare module "styled-components" {

@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useEffect } from "react";
-import { useTranslation } from "react-i18next";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { ThirdPartyStorages } from "@docspace/shared/enums";
@@ -35,12 +34,15 @@ import {
 } from "@docspace/shared/components/amazon-settings";
 
 import type { TTheme } from "@docspace/shared/themes";
+
 import type {
-  StorageRegionsType,
   SelectedStorageType,
-} from "@docspace/shared/components/amazon-settings/AmazonSettings.types";
+  StorageRegionsType,
+  TTranslation,
+} from "@docspace/shared/types";
 
 interface AmazonStorageProps {
+  t: TTranslation;
   theme: TTheme;
   isValidForm: boolean;
   buttonSize: ButtonSize;
@@ -67,6 +69,7 @@ interface AmazonStorageProps {
 }
 
 const AmazonStorage = ({
+  t,
   theme,
   isLoading,
   buttonSize,
@@ -86,8 +89,6 @@ const AmazonStorage = ({
   setIsThirdStorageChanged,
   setRequiredFormSettings,
 }: AmazonStorageProps) => {
-  const { t } = useTranslation(["Settings", "Common"]);
-
   useEffect(() => {
     const basicValues = formNames(storageRegions[0].systemName);
 

@@ -53,20 +53,14 @@ export const AccessRightSelectPure = ({
   availableAccess,
   ...props
 }: AccessRightSelectProps) => {
-  const [opened, setOpened] = useState(false);
   const [currentItem, setCurrentItem] = useState(selectedOption);
-
-  const onToggle = useCallback(() => setOpened((v) => !v), []);
 
   useEffect(() => {
     setCurrentItem(selectedOption);
   }, [selectedOption]);
 
   const onSelectCurrentItem = useCallback(
-    (
-      option: TOption,
-      e?: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
-    ) => {
+    (option: TOption) => {
       if (option) {
         if (isSelectionDisabled) {
           let isError =
@@ -84,10 +78,6 @@ export const AccessRightSelectPure = ({
 
         setCurrentItem(option);
         onSelect?.(option);
-
-        if (!e) {
-          setOpened(false);
-        }
       }
     },
     [onSelect],
@@ -104,7 +94,7 @@ export const AccessRightSelectPure = ({
               className="access-right-item"
               key={item.key}
               data-key={item.key}
-              onClick={(e) => onSelectCurrentItem(item, e)}
+              onClick={() => onSelectCurrentItem(item)}
             >
               <StyledItem>
                 {item.icon && (
@@ -150,10 +140,6 @@ export const AccessRightSelectPure = ({
       advancedOptions={formattedOptions}
       onSelect={onSelectCurrentItem}
       options={[]}
-      opened={opened}
-      onToggle={onToggle}
-      withBackdrop
-      onBackdropClick={onToggle}
       selectedOption={
         {
           icon: currentItem?.icon,

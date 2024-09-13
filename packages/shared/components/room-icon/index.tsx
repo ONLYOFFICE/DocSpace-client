@@ -59,6 +59,7 @@ const RoomIcon = ({
   withEditing,
   hoverSrc,
   model,
+  onChangeFile,
 }: RoomIconProps) => {
   const [correctImage, setCorrectImage] = React.useState(true);
 
@@ -67,6 +68,7 @@ const RoomIcon = ({
   const onToggleOpenEditLogo = () => setOpenLogoEdit(!openEditLogo);
 
   const iconRef = React.useRef<HTMLLIElement>(null);
+  const inputFilesElement = React.useRef(null);
 
   useClickOutside(iconRef, () => {
     setOpenLogoEdit(false);
@@ -81,27 +83,42 @@ const RoomIcon = ({
       : logo;
 
   const dropdownElement = (
-    <DropDown
-      open={openEditLogo}
-      clickOutsideAction={() => setOpenLogoEdit(false)}
-      withBackdrop={false}
-      isDefaultMode={false}
-    >
-      {model?.map((option, i) => {
-        const optionOnClickAction = () => {
-          setOpenLogoEdit(false);
-          option.onClick();
-        };
-        return (
-          <DropDownItem
-            key={i}
-            label={option.label}
-            icon={option.icon}
-            onClick={optionOnClickAction}
-          />
-        );
-      })}
-    </DropDown>
+    <>
+      <DropDown
+        open={openEditLogo}
+        clickOutsideAction={() => setOpenLogoEdit(false)}
+        withBackdrop={false}
+        isDefaultMode={false}
+      >
+        {model?.map((option, i) => {
+          const optionOnClickAction = () => {
+            setOpenLogoEdit(false);
+            if (option.key === "upload") {
+              return option.onClick(inputFilesElement);
+            }
+            option.onClick();
+          };
+          return (
+            <DropDownItem
+              key={i}
+              label={option.label}
+              icon={option.icon}
+              onClick={optionOnClickAction}
+            />
+          );
+        })}
+      </DropDown>
+      <input
+        id="customFileInput"
+        className="custom-file-input"
+        type="file"
+        onChange={onChangeFile}
+        accept="image/png, image/jpeg"
+        // onClick={onInputClick}
+        ref={inputFilesElement}
+        style={{ display: "none" }}
+      />
+    </>
   );
 
   const prefetchImage = React.useCallback(() => {

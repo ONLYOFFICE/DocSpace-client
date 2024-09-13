@@ -23,3 +23,82 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import React from "react";
+
+import api from "@docspace/shared/api";
+import { TNewFiles } from "@docspace/shared/api/files/types";
+import { Portal } from "@docspace/shared/components/portal";
+import { toastr } from "@docspace/shared/components/toast";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
+import { Button } from "@docspace/shared/components/button";
+import { isMobile } from "@docspace/shared/utils";
+
+import { NewFilesPanelProps } from "../NewFilesBadge.types";
+import { StyledPanel } from "../NewFilesBadge.styled";
+
+export const NewFilesPanel = ({
+  position,
+  folderId,
+  onClose,
+}: NewFilesPanelProps) => {
+  const [data, setData] = React.useState<TNewFiles[]>([]);
+
+  const requestRunning = React.useRef<boolean>(false);
+  const dataFetched = React.useRef<boolean>(false);
+
+  React.useEffect(() => {
+    if (!folderId || dataFetched.current || requestRunning.current) return;
+
+    const getData = async () => {
+      try {
+        const newFiles = await api.files.getNewFiles(folderId);
+        dataFetched.current = true;
+        requestRunning.current = false;
+
+        setData(newFiles);
+      } catch (e) {
+        requestRunning.current = false;
+
+        toastr.error(e as string);
+      }
+    };
+
+    requestRunning.current = true;
+
+    getData();
+  }, [folderId]);
+
+  const isRooms = folderId === "rooms";
+
+  const markAsReadButton = <Button scale label="Mark as read" />;
+
+  const panel = (
+    <StyledPanel className="new-files-panel" position={position}>
+      sad
+    </StyledPanel>
+  );
+
+  console.log(data, isRooms);
+
+  const mobilePanel = (
+    <ModalDialog
+      visible
+      isCloseable
+      onClose={onClose}
+      displayType={ModalDialogType.aside}
+      withFooterBorder
+      withBodyScroll
+    >
+      <ModalDialog.Header>New files panel</ModalDialog.Header>
+      <ModalDialog.Body>asd</ModalDialog.Body>
+      <ModalDialog.Footer>{markAsReadButton}</ModalDialog.Footer>
+    </ModalDialog>
+  );
+
+  const portal = <Portal element={panel} />;
+  return isMobile() ? mobilePanel : portal;
+};

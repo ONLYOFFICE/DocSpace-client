@@ -25,23 +25,350 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { isMobile } from "react-device-detect";
 
 import { Badge } from "@docspace/shared/components/badge";
-import { TViewAs } from "@docspace/shared/types";
+import { Nullable } from "@docspace/shared/types";
 
-import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
-import { DeviceType } from "@docspace/shared/enums";
+import { isMobile } from "@docspace/shared/utils";
+import {
+  NewFilesBadgeProps,
+  TPanelDirection,
+  TPanelPosition,
+} from "./NewFilesBadge.types";
+import { NewFilesPanel } from "./sub-components/NewFilesPanel";
 
-type NewFilesBadgeProps = {
-  newFilesCount: number;
-};
+const MARGIN_BADGE = 4;
+const MARGIN_WINDOW = 42;
+const PANEL_WIDTH = 400;
+const PANEL_HEIGHT = 500;
 
-const NewFilesBadge = ({ newFilesCount }: NewFilesBadgeProps) => {
+const NewFilesBadge = ({
+  newFilesCount,
+  folderId,
+  parentDOMId,
+  className,
+  onBadgeClick,
+}: NewFilesBadgeProps) => {
+  const [showPanel, setShowPanel] = React.useState(false);
+  const [openWithClick, setOpenWithClick] = React.useState(false);
+  const [panelDirection, setPanelDirection] =
+    React.useState<TPanelDirection>("right");
+  const [panelPosition, setPanelPosition] = React.useState<TPanelPosition>({
+    left: 0,
+    top: 0,
+
+    maxHeight: PANEL_HEIGHT,
+  });
+
+  const badgeRef = React.useRef<Nullable<HTMLDivElement>>(null);
+  const timerRef = React.useRef<Nullable<NodeJS.Timeout>>(null);
+
+  const calculatePosition = () => {
+    if (!badgeRef.current) return;
+
+    let badgeRects = badgeRef.current.getClientRects()[0];
+
+    const winodwHeight = window.innerHeight;
+    const windowWidth = window.innerWidth;
+
+    if (parentDOMId) {
+      const parentElement = document.getElementById(parentDOMId);
+
+      if (parentElement) {
+        badgeRects = parentElement.getClientRects()[0];
+      }
+    }
+
+    const leftSpace = badgeRects.left;
+    const rightSpace = windowWidth - badgeRects.right;
+    const topSpace = badgeRects.top;
+    const bottomSpace = winodwHeight - badgeRects.top;
+
+    const pos: TPanelPosition = {
+      top: 0,
+      left: 0,
+
+      maxHeight: PANEL_HEIGHT,
+    };
+
+    let direction: TPanelDirection = "right";
+
+    const panelWidth = PANEL_WIDTH + MARGIN_WINDOW + MARGIN_BADGE;
+
+    if (rightSpace >= panelWidth) {
+      pos.left = badgeRects.right + MARGIN_BADGE;
+    } else if (leftSpace >= panelWidth) {
+      pos.left = badgeRects.left - PANEL_WIDTH - MARGIN_BADGE;
+      direction = "left";
+    } else if (
+      topSpace >= PANEL_HEIGHT + MARGIN_WINDOW + MARGIN_BADGE ||
+      bottomSpace >= PANEL_HEIGHT + MARGIN_WINDOW + MARGIN_BADGE
+    ) {
+      pos.left = badgeRects.left + badgeRects.width / 2;
+      direction = "center";
+    } else {
+      pos.left = windowWidth - MARGIN_WINDOW;
+      direction = "custom";
+    }
+
+    let panelHeight = pos.maxHeight;
+
+    if (winodwHeight < PANEL_HEIGHT + 2 * MARGIN_WINDOW) {
+      pos.maxHeight = winodwHeight - 2 * MARGIN_WINDOW;
+      panelHeight = pos.maxHeight;
+      if (direction === "center") panelHeight += MARGIN_BADGE;
+    }
+
+    if (direction === "center") {
+      if (topSpace >= panelHeight) {
+        pos.top = badgeRects.top - panelHeight - MARGIN_BADGE;
+      } else {
+        pos.top = badgeRects.bottom + MARGIN_BADGE;
+      }
+    } else if (bottomSpace >= panelHeight - MARGIN_BADGE) {
+      pos.top = badgeRects.top;
+    } else {
+      pos.top = winodwHeight - MARGIN_WINDOW - panelHeight;
+    }
+
+    setPanelPosition(pos);
+    setPanelDirection(direction);
+  };
+
+  const onBadgeClickAction = () => {
+    setOpenWithClick(true);
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+    timerRef.current = null;
+
+    if (isMobile()) {
+      if (onBadgeClick) onBadgeClick();
+
+      setShowPanel(true);
+
+      return;
+    }
+
+    calculatePosition();
+    setShowPanel(true);
+
+    if (onBadgeClick) onBadgeClick();
+  };
+
+  const onPanelClose = React.useCallback((e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+
+    if (target.closest(".new-files-panel") || isMobile()) return;
+
+    setShowPanel(false);
+    setOpenWithClick(false);
+  }, []);
+
+  const onMouseOver = () => {
+    if (timerRef.current) return;
+    timerRef.current = setTimeout(() => {
+      setShowPanel(true);
+      calculatePosition();
+
+      timerRef.current = null;
+    }, 1500);
+  };
+
+  const onMouseLeave = () => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+    timerRef.current = null;
+  };
+
+  const onMouseMove = React.useCallback(
+    (e: MouseEvent) => {
+      if (!badgeRef.current) return;
+
+      let badgeRects = badgeRef.current.getClientRects()[0];
+
+      if (parentDOMId) {
+        const parentElement = document.getElementById(parentDOMId);
+
+        if (parentElement) {
+          badgeRects = parentElement.getClientRects()[0];
+        }
+      }
+
+      const { pageX: leftPos, pageY: topPos } = e;
+
+      const { left: panelLeftPos, top: panelTopPos } = panelPosition;
+      const panelRightPos = panelPosition.left + PANEL_WIDTH;
+      const panelBottomPos = panelPosition.top + panelPosition.maxHeight;
+      const {
+        left: badgeLeftPos,
+        top: badgeTopPos,
+        right: badgeRightPos,
+        bottom: badgeBottomPos,
+      } = badgeRects;
+
+      if (isMobile()) {
+        if (topPos < 64) {
+          setShowPanel(false);
+        }
+
+        return;
+      }
+
+      if (panelDirection === "custom") {
+        if (
+          leftPos >= panelLeftPos &&
+          leftPos <= panelRightPos &&
+          topPos <= panelTopPos &&
+          topPos >= panelBottomPos
+        ) {
+          return;
+        }
+
+        return setShowPanel(false);
+      }
+
+      if (panelDirection === "center") {
+        if (leftPos < panelLeftPos || leftPos > panelRightPos) {
+          return setShowPanel(false);
+        }
+
+        if (panelTopPos > badgeTopPos) {
+          // down
+          if (topPos > panelBottomPos) {
+            return setShowPanel(false);
+          }
+          if (topPos < panelTopPos) {
+            if (topPos < badgeRects.top) {
+              return setShowPanel(false);
+            }
+            if (
+              (leftPos < badgeLeftPos || leftPos > badgeRightPos) &&
+              topPos < badgeBottomPos
+            ) {
+              return setShowPanel(false);
+            }
+          }
+        } else {
+          // top
+          if (topPos < panelTopPos) {
+            return setShowPanel(false);
+          }
+          if (topPos > panelBottomPos) {
+            if (topPos > badgeBottomPos) {
+              setShowPanel(false);
+            }
+            if (
+              (leftPos < badgeLeftPos || leftPos > badgeRightPos) &&
+              topPos > badgeRects.top
+            ) {
+              setShowPanel(false);
+            }
+          }
+        }
+
+        return;
+      }
+
+      if (topPos < panelTopPos || topPos > panelBottomPos) {
+        return setShowPanel(false);
+      }
+
+      if (panelDirection === "left") {
+        if (leftPos < panelLeftPos) {
+          return setShowPanel(false);
+        }
+
+        if (leftPos > badgeRightPos) {
+          return setShowPanel(false);
+        }
+
+        if (
+          (topPos < badgeTopPos || topPos > badgeBottomPos) &&
+          leftPos > badgeLeftPos
+        ) {
+          return setShowPanel(false);
+        }
+        return;
+      }
+
+      if (leftPos > panelRightPos) {
+        return setShowPanel(false);
+      }
+
+      if (leftPos < badgeLeftPos) {
+        return setShowPanel(false);
+      }
+
+      if (
+        (topPos < badgeTopPos || topPos > badgeBottomPos) &&
+        leftPos < badgeRightPos
+      ) {
+        return setShowPanel(false);
+      }
+    },
+    [panelDirection, panelPosition, parentDOMId],
+  );
+
+  React.useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
+
+  React.useEffect(() => {
+    if (showPanel && !openWithClick) {
+      document.addEventListener("mousemove", onMouseMove);
+    }
+
+    if (!showPanel) {
+      document.removeEventListener("mousemove", onMouseMove);
+    }
+
+    return () => {
+      document.removeEventListener("mousemove", onMouseMove);
+    };
+  }, [onMouseMove, openWithClick, showPanel]);
+
+  React.useEffect(() => {
+    if (showPanel) {
+      document.addEventListener("mousedown", onPanelClose);
+    }
+
+    if (!showPanel) {
+      document.removeEventListener("mousedown", onPanelClose);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", onPanelClose);
+    };
+  }, [showPanel, onPanelClose]);
+
+  const label = newFilesCount > 999 ? "999+ " : newFilesCount;
   return (
     <>
-      <Badge lineHeight="16px" fontSize="11px" fontWeight={600} />
-      <div>asd</div>
+      <Badge
+        ref={badgeRef}
+        lineHeight="16px"
+        fontSize="11px"
+        fontWeight={600}
+        className={`new-items${className ?? ""}`}
+        label={label}
+        onClick={onBadgeClickAction}
+        onMouseOver={onMouseOver}
+        onMouseLeave={onMouseLeave}
+      />
+      {showPanel && (
+        <NewFilesPanel
+          position={panelPosition}
+          onClose={() => {
+            setShowPanel(false);
+            setOpenWithClick(false);
+          }}
+          folderId={folderId}
+        />
+      )}
     </>
   );
 };

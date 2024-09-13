@@ -63,6 +63,7 @@ import {
   TTirdParties,
   TUploadOperation,
   TConnectingStorages,
+  TNewFiles,
 } from "./types";
 
 export async function openEdit(
@@ -777,11 +778,11 @@ export async function markAsRead(folderIds: number[], fileIds: number[]) {
   return res;
 }
 
-export async function getNewFiles(folderId: number) {
+export async function getNewFiles(folderId: number | string) {
   const res = (await request({
     method: "get",
     url: `/files/${folderId}/news`,
-  })) as TFile[];
+  })) as TNewFiles[];
 
   return res;
 }

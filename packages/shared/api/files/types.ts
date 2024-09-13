@@ -26,7 +26,6 @@
 
 import moment from "moment";
 import { TCreatedBy, TPathParts } from "../../types";
-import { TUser } from "../people/types";
 import {
   EmployeeActivationStatus,
   EmployeeStatus,
@@ -36,6 +35,8 @@ import {
   RoomsType,
   ShareAccessRights,
 } from "../../enums";
+import { TRoom } from "../rooms/types";
+import { TUser } from "../people/types";
 
 export type TFileViewAccessibility = {
   CanConvert: boolean;
@@ -431,3 +432,10 @@ export type TConnectingStorage = {
 };
 
 export type TConnectingStorages = TConnectingStorage[];
+
+export type TNewFilesItem = TFile | { room: TRoom; items: TFile[] };
+
+export type TNewFiles = {
+  date: Date;
+  items: TNewFilesItem[];
+};

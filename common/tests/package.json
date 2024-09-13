@@ -8,9 +8,9 @@
   },
   "scripts": {
     "test": "jest",
-    "test:locales": "jest -t='locales'",
-    "test:images": "jest -t='images'",
-    "test:colors": "jest -t='colors'"
+    "test:locales": "jest locales.test.js",
+    "test:images": "jest images.test.js",
+    "test:colors": "jest colors.test.js"
   },
   "devDependencies": {
     "jest": "29.7.0",

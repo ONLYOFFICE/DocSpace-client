@@ -43,8 +43,10 @@ export interface DropDownItemProps {
   icon?: string;
   /** Disables default style hover effect */
   noHover?: boolean;
-  /** Sets an action that will be triggered when the dropdown item is clicked */
-  onClick?: (e: React.MouseEvent | React.ChangeEvent<HTMLInputElement>) => void;
+  /** Sets an action that will be triggered when the dropdown item is clicked. Event not passed if item selected by keyboard */
+  onClick?: (
+    e?: React.MouseEvent | React.ChangeEvent<HTMLInputElement>,
+  ) => void;
   /** Children elements */
   children?: React.ReactNode;
   /** Accepts class */

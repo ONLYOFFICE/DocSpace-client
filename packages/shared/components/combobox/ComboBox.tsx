@@ -110,7 +110,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
 
   const optionClick = (
     option: TOption,
-    event: React.ChangeEvent<HTMLInputElement> | React.MouseEvent,
+    event?: React.ChangeEvent<HTMLInputElement> | React.MouseEvent,
   ) => {
     const { onSelect, setIsOpenItemAccess } = props;
 
@@ -175,9 +175,17 @@ const ComboBoxPure = (props: ComboboxProps) => {
     style,
     withLabel = true,
     displayArrow,
+    onToggle,
   } = props;
 
   const { tabIndex, onClickSelectedItem } = props;
+
+  const onCloseCombobox = () => {
+    onToggle?.(null, false);
+    setIsOpenItemAccess?.(false);
+
+    setIsOpen(false);
+  };
 
   React.useEffect(() => {
     setIsOpen(opened || false);
@@ -329,6 +337,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
           forceCloseClickOutside={forceCloseClickOutside}
           withoutBackground={withoutBackground}
           eventTypes={["mousedown"]}
+          onCloseDropdown={onCloseCombobox}
           enableKeyboardEvents
         >
           {dropDownBody}

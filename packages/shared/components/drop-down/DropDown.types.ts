@@ -84,6 +84,7 @@ export interface DropDownProps {
   forceCloseClickOutside?: boolean;
   withoutBackground?: boolean;
   zIndex?: number;
+  onCloseDropdown: () => void;
 }
 
 export interface VirtualListProps {
@@ -102,6 +103,7 @@ export interface VirtualListProps {
   enableKeyboardEvents: boolean;
   getItemSize: (index: number) => number;
   isDropdownReady: boolean;
+  onCloseDropdown: () => void;
 }
 
 export interface RowProps {

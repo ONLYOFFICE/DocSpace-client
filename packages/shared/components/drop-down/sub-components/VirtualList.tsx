@@ -53,6 +53,7 @@ function VirtualList({
   getItemSize,
   enableKeyboardEvents,
   isDropdownReady,
+  onCloseDropdown,
 }: VirtualListProps) {
   const virtualListRef = useRef<VariableSizeList>(null);
   const focusTrapRef = useRef<HTMLDivElement>(null);
@@ -121,14 +122,19 @@ function VirtualList({
 
     const { onKeyboardSelect, onClick, disabled } = child.props;
 
-    if (disabled) return;
+    if (disabled) {
+      onCloseDropdown();
+      return;
+    }
 
     if (onKeyboardSelect) {
       onKeyboardSelect();
     } else if (onClick) {
       onClick();
     }
-  }, [children]);
+
+    onCloseDropdown();
+  }, [children, onCloseDropdown]);
 
   const onKeyUp = useCallback(
     (e: KeyboardEvent) => {

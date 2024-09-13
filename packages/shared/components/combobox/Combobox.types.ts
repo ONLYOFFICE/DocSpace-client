@@ -110,8 +110,8 @@ export interface ComboboxProps {
   size?: ComboBoxSize;
   /** Accepts css style */
   style?: React.CSSProperties;
-  /** The event is triggered by clicking on a component when `displayType: toggle` */
-  onToggle?: (e: Event | React.MouseEvent, isOpen: boolean) => void;
+  /** The event is triggered by clicking on a component when `displayType: toggle`. Null if triggered by keyboard */
+  onToggle?: (e: Event | React.MouseEvent | null, isOpen: boolean) => void;
   /** Accepts css text-overflow */
   textOverflow?: boolean;
   /** Disables clicking on the icon */

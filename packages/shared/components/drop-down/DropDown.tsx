@@ -68,6 +68,7 @@ const DropDown = ({
   manualY,
   className,
   style,
+  onCloseDropdown,
 }: DropDownProps) => {
   const theme = useTheme();
 
@@ -434,6 +435,7 @@ const DropDown = ({
             isOpen={open || false}
             enableKeyboardEvents={enableKeyboardEvents || false}
             isDropdownReady={state.isDropdownReady}
+            onCloseDropdown={onCloseDropdown}
           >
             {children}
           </VirtualList>

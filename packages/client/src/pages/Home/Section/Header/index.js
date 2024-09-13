@@ -258,8 +258,8 @@ const SectionHeaderContent = (props) => {
       : setBufferSelection(selectedFolder);
   };
 
-  const onSelect = (e) => {
-    const key = e.currentTarget.dataset.key;
+  const onSelect = (value) => {
+    const key = value.toString();
 
     isAccountsPage ? setAccountsSelected(key) : setSelected(key);
   };
@@ -280,7 +280,7 @@ const SectionHeaderContent = (props) => {
               key={key}
               label={label}
               data-key={key}
-              onClick={onSelect}
+              onClick={() => onSelect(key)}
             />
           );
         })}
@@ -296,7 +296,7 @@ const SectionHeaderContent = (props) => {
               key={key}
               label={label}
               data-key={key}
-              onClick={onSelect}
+              onClick={() => onSelect(key)}
             />
           );
         })}

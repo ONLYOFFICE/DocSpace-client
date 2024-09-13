@@ -171,10 +171,8 @@ const DirectThirdPartyConnection = (props) => {
     setState({ isLoading: false, isUpdatingInfo: false });
   };
 
-  const onSelectAccount = (event) => {
-    const data = event.currentTarget.dataset;
-
-    const account = accounts.find((t) => t.key === data.thirdPartyKey);
+  const onSelectAccount = (thirdPartyKey) => {
+    const account = accounts.find((t) => t.key === thirdPartyKey);
 
     if (!account.connected) {
       setSelectedThirdPartyAccount({
@@ -183,7 +181,7 @@ const DirectThirdPartyConnection = (props) => {
       });
 
       return window.open(
-        `/portal-settings/integration/third-party-services?service=${ThirdPartyServicesUrlName[data.thirdPartyKey]}`,
+        `/portal-settings/integration/third-party-services?service=${ThirdPartyServicesUrlName[thirdPartyKey]}`,
         "_blank",
       );
     }
@@ -225,9 +223,13 @@ const DirectThirdPartyConnection = (props) => {
 
   const advancedOptions = accounts?.map((item) => {
     return (
-      <StyledComboBoxItem isDisabled={item.disabled} key={item.key}>
+      <StyledComboBoxItem
+        disabled={item.disabled}
+        onKeyboardSelect={() => onSelectAccount(item.key)}
+        key={item.key}
+      >
         <DropDownItem
-          onClick={onSelectAccount}
+          onClick={() => onSelectAccount(item.key)}
           className={item.className}
           data-third-party-key={item.key}
           disabled={item.disabled}

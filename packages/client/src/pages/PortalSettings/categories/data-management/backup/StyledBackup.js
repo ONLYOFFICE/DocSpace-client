@@ -613,6 +613,13 @@ const StyledSettingsHeader = styled.div`
 const StyledComboBoxItem = styled.div`
   display: flex;
 
+  ${(props) =>
+    props.isActiveDescendant &&
+    !props.disabled &&
+    css`
+      background-color: ${props.theme.dropDownItem.hoverBackgroundColor};
+    `}
+
   .drop-down-item_text {
     color: ${({ theme, isDisabled }) =>
       isDisabled ? theme.dropDownItem.disableColor : theme.dropDownItem.color};

@@ -115,3 +115,9 @@ export interface RowProps {
   index: number;
   style?: React.CSSProperties;
 }
+
+export type TSelectableDropdownChild = React.ReactElement<{
+  onClick?: () => void;
+  onKeyboardSelect?: () => void;
+  disabled?: boolean;
+}>;

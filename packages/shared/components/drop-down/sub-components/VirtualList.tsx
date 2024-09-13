@@ -36,7 +36,7 @@ import { VariableSizeList } from "react-window";
 import { Scrollbar } from "../../scrollbar";
 import { DropDownItemProps } from "../../drop-down-item/DropDownItem.types";
 
-import { VirtualListProps } from "../DropDown.types";
+import { TSelectableDropdownChild, VirtualListProps } from "../DropDown.types";
 import { findNextNonSeparatorIndex } from "../DropDown.utils";
 
 function VirtualList({
@@ -111,25 +111,35 @@ function VirtualList({
     [isOpen, cleanChildren, scrollToItem],
   );
 
+  const onSelect = useCallback(() => {
+    if (!Array.isArray(children)) return;
+
+    const index = currentIndexRef.current;
+    const child = children[index] as TSelectableDropdownChild;
+
+    if (!React.isValidElement(child)) return;
+
+    const { onKeyboardSelect, onClick, disabled } = child.props;
+
+    if (disabled) return;
+
+    if (onKeyboardSelect) {
+      onKeyboardSelect();
+    } else if (onClick) {
+      onClick();
+    }
+  }, [children]);
+
   const onKeyUp = useCallback(
     (e: KeyboardEvent) => {
       if (!focusTrapRef.current || !isOpen) return;
 
       if (e.code === "Enter") {
         e.stopPropagation();
-
-        const index = currentIndexRef.current;
-
-        return (
-          children &&
-          Array.isArray(children) &&
-          children[index] &&
-          React.isValidElement(children?.[index]) &&
-          children?.[index]?.props?.onClick?.()
-        );
+        onSelect();
       }
     },
-    [isOpen, children],
+    [isOpen, onSelect],
   );
 
   useEffect(() => {

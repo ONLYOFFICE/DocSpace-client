@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { ReactSVG } from "react-svg";
 import { isMobileOnly, isMobile } from "react-device-detect";
 
@@ -99,9 +99,16 @@ StyledStorageLocation.defaultProps = { theme: Base };
 const StyledComboBoxItem = styled.div`
   display: flex;
 
+  ${(props) =>
+    props.isActiveDescendant &&
+    !props.disabled &&
+    css`
+      background-color: ${props.theme.dropDownItem.hoverBackgroundColor};
+    `}
+
   .drop-down-item_text {
-    color: ${({ theme, isDisabled }) =>
-      isDisabled ? theme.dropDownItem.disableColor : theme.dropDownItem.color};
+    color: ${({ theme, disabled }) =>
+      disabled ? theme.dropDownItem.disableColor : theme.dropDownItem.color};
   }
   .drop-down-item_icon {
     display: flex;
@@ -226,11 +233,9 @@ const ThirdPartyComboBox = ({
     setSaveThirdpartyResponse(null);
   }, [saveThirdpartyResponse]);
 
-  const onSelect = (event) => {
-    const data = event.currentTarget.dataset;
-
+  const onSelect = (thirdPartyId) => {
     const thirdparty = thirdparties.find((t) => {
-      return t.id === data.thirdPartyId;
+      return t.id === thirdPartyId;
     });
 
     thirdparty && setStorageLocaiton(thirdparty, thirdparty.isConnected);
@@ -261,9 +266,13 @@ const ThirdPartyComboBox = ({
         : {};
 
       return (
-        <StyledComboBoxItem isDisabled={isDisabled} key={item.id}>
+        <StyledComboBoxItem
+          disabled={isDisabled}
+          onKeyboardSelect={() => onSelect(item.id)}
+          key={item.id}
+        >
           <DropDownItem
-            onClick={onSelect}
+            onClick={() => onSelect(item.id)}
             data-third-party-id={item.id}
             disabled={isDisabled}
             {...disabledData}

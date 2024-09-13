@@ -46,7 +46,6 @@ const getAllFiles = (dir) => {
         filePath.includes("dist") ||
         filePath.includes("test") ||
         filePath.includes("tests") ||
-        filePath.includes("scripts") ||
         filePath.includes(".next") ||
         filePath.includes("campaigns") ||
         filePath.includes("storybook-static") ||

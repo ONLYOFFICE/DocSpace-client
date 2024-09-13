@@ -38,7 +38,6 @@ import {
 import {
   UploadPanel,
   VersionHistoryPanel,
-  NewFilesPanel,
   HotkeysPanel,
   InvitePanel,
   EditLinkPanel,
@@ -95,7 +94,6 @@ const Panels = (props) => {
     deleteDialogVisible,
     downloadDialogVisible,
     emptyTrashDialogVisible,
-    newFilesPanelVisible,
     conflictResolveDialogVisible,
     convertDialogVisible,
     createMasterForm,
@@ -246,7 +244,6 @@ const Panels = (props) => {
     emptyTrashDialogVisible && <EmptyTrashDialog key="empty-trash-dialog" />,
     downloadDialogVisible && <DownloadDialog key="download-dialog" />,
 
-    newFilesPanelVisible && <NewFilesPanel key="new-files-panel" />,
     conflictResolveDialogVisible && (
       <ConflictResolveDialog key="conflict-resolve-dialog" />
     ),
@@ -356,7 +353,6 @@ export default inject(
       deleteDialogVisible,
       downloadDialogVisible,
       emptyTrashDialogVisible,
-      newFilesPanelVisible,
       conflictResolveDialogVisible,
       convertDialogVisible,
       createRoomDialogVisible,
@@ -445,7 +441,6 @@ export default inject(
       deleteDialogVisible,
       downloadDialogVisible,
       emptyTrashDialogVisible,
-      newFilesPanelVisible,
       conflictResolveDialogVisible,
       convertDialogVisible,
       createRoomDialogVisible,

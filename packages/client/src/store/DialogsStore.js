@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { getNewFiles } from "@docspace/shared/api/files";
 import {
   EmployeeType,
   FilesSelectorFilterTypes,
@@ -51,7 +50,6 @@ class DialogsStore {
   deleteDialogVisible = false;
   downloadDialogVisible = false;
   emptyTrashDialogVisible = false;
-  newFilesPanelVisible = false;
   editGroupMembersDialogVisible = false;
   conflictResolveDialogVisible = false;
   convertDialogVisible = false;
@@ -86,8 +84,7 @@ class DialogsStore {
   connectItem = null;
   formItem = null;
   destFolderId = null;
-  newFilesIds = null;
-  newFiles = null;
+
   conflictResolveDialogData = null;
   conflictResolveDialogItems = null;
   removeMediaItem = null;
@@ -270,64 +267,6 @@ class DialogsStore {
 
   setChangeQuotaDialogVisible = (changeQuotaDialogVisible) => {
     this.changeQuotaDialogVisible = changeQuotaDialogVisible;
-  };
-  setNewFilesPanelVisible = async (visible, newId, item) => {
-    const { pathParts } = this.selectedFolderStore;
-
-    const id = visible && !newId ? item.id : newId;
-    const newIds = newId
-      ? [newId]
-      : pathParts
-        ? pathParts.map((p) => p.id)
-        : [];
-    item &&
-      pathParts.push({
-        id: item.id,
-        title: item.title,
-        roomType: item.roomType,
-      });
-
-    let newFilesPanelVisible = visible;
-
-    if (visible) {
-      const files = await getNewFiles(id);
-      if (files && files.length) {
-        this.setNewFiles(files);
-        this.setNewFilesIds(newIds);
-      } else {
-        newFilesPanelVisible = false;
-        //   const {
-        //     getRootFolder,
-        //     updateRootBadge,
-        //     treeFolders,
-        //   } = this.treeFoldersStore;
-        //   const { updateFolderBadge, updateFoldersBadge } = this.filesStore;
-
-        //   if (item) {
-        //     const { rootFolderType, id } = item;
-        //     const rootFolder = getRootFolder(rootFolderType);
-        //     updateRootBadge(rootFolder.id, item.new);
-        //     updateFolderBadge(id, item.new);
-        //   } else {
-        //     const rootFolder = treeFolders.find((x) => x.id === +newIds[0]);
-        //     updateRootBadge(rootFolder.id, rootFolder.new);
-        //     if (this.selectedFolderStore.id === rootFolder.id)
-        //       updateFoldersBadge();
-        //   }
-      }
-    } else {
-      this.setNewFilesIds(null);
-    }
-
-    this.newFilesPanelVisible = newFilesPanelVisible;
-  };
-
-  setNewFilesIds = (newFilesIds) => {
-    this.newFilesIds = newFilesIds;
-  };
-
-  setNewFiles = (files) => {
-    this.newFiles = files;
   };
 
   setEditGroupMembersDialogVisible = (editGroupMembersDialogVisible) => {

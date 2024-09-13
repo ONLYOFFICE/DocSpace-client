@@ -46,6 +46,7 @@ import AccountsItem from "./AccountsItem";
 
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import { toastr } from "@docspace/shared/components/toast";
+import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
 
 const StyledDragAndDrop = styled(DragAndDrop)`
   display: contents;
@@ -66,7 +67,6 @@ const Item = ({
   showText,
   onClick,
   onMoveTo,
-  onBadgeClick,
   showDragItems,
   startUpload,
   createFoldersTree,
@@ -77,6 +77,8 @@ const Item = ({
   folderId,
   currentColorScheme,
   getLinkData,
+  onBadgeClick,
+  roomsFolderId,
 }) => {
   const [isDragActive, setIsDragActive] = useState(false);
 
@@ -182,6 +184,14 @@ const Item = ({
         onClickBadge={onBadgeClick}
         iconBadge={iconBadge}
         badgeTitle={labelBadge ? "" : t("EmptyRecycleBin")}
+        badgeComponent={
+          <NewFilesBadge
+            newFilesCount={labelBadge}
+            folderId={item.id === roomsFolderId ? "rooms" : item.id}
+            parentDOMId={folderId}
+            onBadgeClick={onBadgeClick}
+          />
+        }
         linkData={linkData}
         $currentColorScheme={currentColorScheme}
       />
@@ -195,7 +205,6 @@ const Items = ({
   showText,
 
   onClick,
-  onBadgeClick,
 
   dragging,
   setDragging,
@@ -230,6 +239,7 @@ const Items = ({
   currentColorScheme,
 
   getLinkData,
+  roomsFolderId,
 }) => {
   const getEndOfBlock = React.useCallback((item) => {
     switch (item.key) {
@@ -317,6 +327,10 @@ const Items = ({
     setEmptyTrashDialogVisible(true);
   };
 
+  const onBadgeClick = () => {
+    if (currentDeviceType === DeviceType.mobile) onHide();
+  };
+
   const getItems = React.useCallback(
     (data) => {
       const items = data.map((item, index) => {
@@ -353,6 +367,8 @@ const Items = ({
             iconBadge={iconBadge}
             folderId={`document_catalog-${FOLDER_NAMES[item.rootFolderType]}`}
             currentColorScheme={currentColorScheme}
+            roomsFolderId={roomsFolderId}
+            onHide={onHide}
           />
         );
       });
@@ -385,7 +401,6 @@ const Items = ({
       getLinkData,
       onMoveTo,
       getEndOfBlock,
-      onBadgeClick,
       showDragItems,
       showText,
       setDragging,
@@ -445,8 +460,13 @@ export default inject(
 
     const { startUpload } = uploadDataStore;
 
-    const { treeFolders, myFolderId, commonFolderId, isPrivacyFolder } =
-      treeFoldersStore;
+    const {
+      treeFolders,
+      myFolderId,
+      commonFolderId,
+      isPrivacyFolder,
+      roomsFolderId,
+    } = treeFoldersStore;
 
     const { id, access: folderAccess } = selectedFolderStore;
     const {
@@ -492,6 +512,7 @@ export default inject(
       currentDeviceType,
       folderAccess,
       currentColorScheme,
+      roomsFolderId,
     };
   },
 )(withTranslation(["Files", "Common", "Translations"])(observer(Items)));

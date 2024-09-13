@@ -17,7 +17,7 @@ const crypto = require("crypto");
 const { getAllFiles, getWorkSpaces, BASE_DIR } = require("../utils/files");
 const { findImagesIntoFiles } = require("../utils/images");
 
-const LOGO_REGEX = new RegExp(/\/logo\/(.)*\/(.).*svg/g);
+const LOGO_REGEX = new RegExp(/\/logo\/(.)*\/(.)*.svg/g);
 
 let allImgs = [];
 let allFiles = [];

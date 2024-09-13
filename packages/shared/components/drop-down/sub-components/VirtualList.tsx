@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, {
+  forwardRef,
   useCallback,
   useEffect,
   useMemo,
@@ -36,8 +37,54 @@ import { VariableSizeList } from "react-window";
 import { Scrollbar } from "../../scrollbar";
 import { DropDownItemProps } from "../../drop-down-item/DropDownItem.types";
 
-import { TSelectableDropdownChild, VirtualListProps } from "../DropDown.types";
+import {
+  SimpleListProps,
+  TSelectableDropdownChild,
+  VirtualListProps,
+} from "../DropDown.types";
 import { findNextNonSeparatorIndex } from "../DropDown.utils";
+
+const FocusTrap = forwardRef<HTMLDivElement, React.PropsWithChildren>(
+  ({ children }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className="focus-trap"
+        style={{ outline: "none" }}
+        tabIndex={-1}
+      >
+        {children}
+      </div>
+    );
+  },
+);
+
+FocusTrap.displayName = "FocusTrap";
+
+const SimpleList = ({
+  focusTrapRef,
+  currentIndex,
+  selectable,
+  children,
+}: SimpleListProps) => {
+  if (!selectable) return children;
+
+  return (
+    <FocusTrap ref={focusTrapRef}>
+      {React.Children.map(children, (item, index) => {
+        if (React.isValidElement(item) && currentIndex === index)
+          return React.cloneElement(
+            item as React.ReactElement<DropDownItemProps>,
+            {
+              isActiveDescendant: true,
+            },
+          );
+
+        return item;
+      })}
+    </FocusTrap>
+  );
+};
 
 function VirtualList({
   Row,
@@ -201,37 +248,19 @@ function VirtualList({
   const items = cleanChildren || children;
 
   if (!maxHeight) {
-    return enableKeyboardEvents ? (
-      <div
-        className="focus-trap"
-        style={{ outline: "none" }}
-        ref={focusTrapRef}
-        tabIndex={0}
+    return (
+      <SimpleList
+        focusTrapRef={focusTrapRef}
+        currentIndex={currentIndex}
+        selectable={enableKeyboardEvents}
       >
-        {items?.map((item, index) => {
-          if (React.isValidElement(item) && currentIndex === index)
-            return React.cloneElement(
-              item as React.ReactElement<DropDownItemProps>,
-              {
-                isActiveDescendant: true,
-              },
-            );
-
-          return item;
-        })}
-      </div>
-    ) : (
-      items
+        {items}
+      </SimpleList>
     );
   }
 
   return (
-    <div
-      className="focus-trap"
-      style={{ outline: "none" }}
-      ref={focusTrapRef}
-      tabIndex={0}
-    >
+    <FocusTrap ref={focusTrapRef}>
       {isNoFixedHeightOptions ? (
         <Scrollbar style={{ height: maxHeight }}>{cleanChildren}</Scrollbar>
       ) : (
@@ -253,7 +282,7 @@ function VirtualList({
           {Row}
         </VariableSizeList>
       )}
-    </div>
+    </FocusTrap>
   );
 }
 

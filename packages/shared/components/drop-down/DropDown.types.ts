@@ -118,6 +118,13 @@ export interface RowProps {
   style?: React.CSSProperties;
 }
 
+export interface SimpleListProps {
+  focusTrapRef: React.MutableRefObject<HTMLDivElement | null>;
+  currentIndex: number;
+  selectable: boolean;
+  children?: React.ReactNode;
+}
+
 export type TSelectableDropdownChild = React.ReactElement<{
   onClick?: () => void;
   handleKeyboardSelect?: () => void;

@@ -204,7 +204,6 @@ describe("Image Tests", () => {
   });
 
   test("WrongImagesImportTest: Verify that image imports in the codebase follow the correct import paths and conventions.", () => {
-    let wrongImports = "";
     const wrongImportImages = [
       `"/static/images`,
       `"/images`,
@@ -227,15 +226,11 @@ describe("Image Tests", () => {
         if (
           idx > 0 &&
           file.fileName.indexOf("webpack") === -1 &&
-          file.path.indexOf("common\\utils\\index.ts") === -1 &&
-          file.path.indexOf("context-menu\\sub-components\\sub-menu.js") ===
-            -1 &&
-          file.path.indexOf("drop-down-item\\index.js") === -1 &&
-          file.path.indexOf("common\\utils\\index.ts") === -1 &&
+          data[idx - 1] !== "(" &&
           file.path.indexOf(".html") === -1 &&
           file.path.indexOf("storybook-static") === -1
         ) {
-          message += `${++k}. ${file.path}\r\n`;
+          message += `${++k}. ${file.path} \r\n`;
         }
       });
     });

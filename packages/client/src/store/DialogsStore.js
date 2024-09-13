@@ -38,7 +38,8 @@ import TrashIconSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import PenSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import UploadSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 
-import { getRoomCovers, setRoomCover } from "@docspace/shared/api/rooms";
+import { getRoomCovers, setRoomCover, removeLogoFromRoom } from "@docspace/shared/api/rooms";
+
 
 class DialogsStore {
   authStore;
@@ -624,7 +625,8 @@ class DialogsStore {
       {
         label: t("RoomLogoCover:UploadPicture"),
         icon: UploadSvgUrl,
-        onClick: () => {},
+        key: "upload",
+        onClick: (ref) => ref.current.click(),
       },
 
       hasImage

@@ -32,7 +32,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Row } from "@docspace/shared/components/row";
 import { HistoryRowContent } from "./HistoryRowContent";
 
-import RetryIcon from "PUBLIC_DIR/images/refresh.react.svg?url";
+import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
 
 import { toastr } from "@docspace/shared/components/toast";

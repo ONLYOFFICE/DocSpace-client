@@ -27,9 +27,9 @@
 import EmailReactSvgUrl from "PUBLIC_DIR/images/email.react.svg?url";
 import SecurityReactSvgUrl from "PUBLIC_DIR/images/security.react.svg?url";
 import ImageReactSvgUrl from "PUBLIC_DIR/images/image.react.svg?url";
-import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/catalog.trash.react.svg?url";
+import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
-import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/vertical-dots.react.svg?url";
+import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
 
 import { useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";

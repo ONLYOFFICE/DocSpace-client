@@ -29,7 +29,7 @@ import { isTablet as isTabletDevice } from "react-device-detect";
 import FileActionsLockedReactSvgUrl from "PUBLIC_DIR/images/file.actions.locked.react.svg?url";
 import FileActionsDownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
-import LockedReactSvgUrl from "PUBLIC_DIR/images/locked.react.svg?url";
+import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
 import FileActionsFavoriteReactSvgUrl from "PUBLIC_DIR/images/file.actions.favorite.react.svg?url";
 import FavoriteReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
 import LockedReact12SvgUrl from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";

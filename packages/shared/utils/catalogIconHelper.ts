@@ -24,26 +24,26 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
-// import CatalogUserReactSvgUrl from "PUBLIC_DIR/images/catalog.user.react.svg?url";
-import CatalogDocumentsReactSvgUrl from "PUBLIC_DIR/images/catalog.documents.react.svg?url";
-import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
-import CatalogArchiveReactSvgUrl from "PUBLIC_DIR/images/catalog.archive.react.svg?url";
-import CatalogSharedReactSvgUrl from "PUBLIC_DIR/images/catalog.shared.react.svg?url";
-import CatalogPortfolioReactSvgUrl from "PUBLIC_DIR/images/catalog.portfolio.react.svg?url";
-import CatalogFavoritesReactSvgUrl from "PUBLIC_DIR/images/catalog.favorites.react.svg?url";
-import CatalogRecentReactSvgUrl from "PUBLIC_DIR/images/catalog.recent.react.svg?url";
-import CatalogPrivateReactSvgUrl from "PUBLIC_DIR/images/catalog.private.react.svg?url";
-import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/catalog.trash.react.svg?url";
-import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
+import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
+// import CatalogUserReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.user.react.svg?url";
+import CatalogDocumentsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.documents.react.svg?url";
+import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
+import CatalogArchiveReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.archive.react.svg?url";
+import CatalogSharedReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.shared.react.svg?url";
+import CatalogPortfolioReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.portfolio.react.svg?url";
+import CatalogFavoritesReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.favorites.react.svg?url";
+import CatalogRecentReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.recent.react.svg?url";
+import CatalogPrivateReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.private.react.svg?url";
+import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
+import CatalogAccountsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.accounts.react.svg?url";
 
 import CatalogSettingsCommonReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-common.svg?url";
 import CatalogSettingsSecurityReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-security.svg?url";
 import CatalogSettingsDataManagementReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-data-management.svg?url";
 import CatalogSettingsRestoreReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-restore.svg?url";
 import CatalogSettingsIntegrationReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-integration.svg?url";
-import CatalogSettingsDataReactSvgUrl from "PUBLIC_DIR/images/catalog.import.react.svg?url";
-import CatalogSettingsDeveloperReactSvgUrl from "PUBLIC_DIR/images/catalog.developer.react.svg?url";
+import CatalogSettingsDataReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.import.react.svg?url";
+import CatalogSettingsDeveloperReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.developer.react.svg?url";
 import CatalogSettingsPaymentReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-payment.svg?url";
 import CatalogSettingsGiftReactSvgUrl from "PUBLIC_DIR/images/gift.react.svg?url";
 import CatalogSettingsStorageManagementReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-storage-management.svg?url";

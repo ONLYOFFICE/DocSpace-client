@@ -56,7 +56,7 @@ import HeaderDarkUrl from "PUBLIC_DIR/images/sdk-presets_header_dark.png?url";
 import SearchUrl from "PUBLIC_DIR/images/sdk-presets_search.react.svg?url";
 import SearchDarkUrl from "PUBLIC_DIR/images/sdk-presets_search_dark.png?url";
 import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
-import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg?url";
+import CrossReactSvg from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
 import { StyledBody } from "./StyledEmbeddingPanel";
 

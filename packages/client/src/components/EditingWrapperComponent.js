@@ -33,7 +33,7 @@ import { TextInput } from "@docspace/shared/components/text-input";
 import { commonIconsStyles, tablet } from "@docspace/shared/utils";
 
 import CheckIcon from "PUBLIC_DIR/images/check.react.svg";
-import CrossIcon from "PUBLIC_DIR/images/cross.react.svg";
+import CrossIcon from "PUBLIC_DIR/images/icons/12/cross.react.svg";
 
 import { Base } from "@docspace/shared/themes";
 

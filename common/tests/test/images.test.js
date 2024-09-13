@@ -74,7 +74,7 @@ beforeAll(() => {
 });
 
 describe("Image Tests", () => {
-  test("UselessImagesTest", () => {
+  test("UselessImagesTest: Verify that there are no unused image files in the codebase.", () => {
     const usedImages = findImagesIntoFiles(allFiles, allImgs);
 
     const uselessImages = allImgs.filter((img) => {
@@ -95,7 +95,7 @@ describe("Image Tests", () => {
     expect(uselessImages.length, message).toBe(0);
   });
 
-  test("ImagesWithDifferentMD5ButEqualNameTest", () => {
+  test("ImagesWithDifferentMD5ButEqualNameTest: Verify that there are no image files with the same name but different content (as determined by their MD5 hash) in the codebase. ", () => {
     const uniqueImg = new Map();
 
     allImgs.forEach((i) => {
@@ -131,7 +131,7 @@ describe("Image Tests", () => {
     expect(i, message).toBe(0);
   });
 
-  test("ImagesWithDifferentNameButEqualMD5Test", () => {
+  test("ImagesWithDifferentNameButEqualMD5Test: hat there are no image files with different names but identical content (as determined by their MD5 hash) in the codebase.", () => {
     const uniqueImg = new Map();
 
     allImgs.forEach((i) => {
@@ -165,7 +165,7 @@ describe("Image Tests", () => {
     expect(i, message).toBe(0);
   });
 
-  test("ImagesWithEqualMD5AndEqualNameTest", () => {
+  test("ImagesWithEqualMD5AndEqualNameTest: Verify that there are no duplicate image files in the codebase that have both the same name and the same content (as determined by their MD5 hash).", () => {
     const uniqueImg = new Map();
 
     allImgs.forEach((i) => {
@@ -203,7 +203,7 @@ describe("Image Tests", () => {
     expect(i, message).toBe(0);
   });
 
-  test("WrongImagesImportTest", () => {
+  test("WrongImagesImportTest: Verify that image imports in the codebase follow the correct import paths and conventions.", () => {
     let wrongImports = "";
     const wrongImportImages = [
       `"/static/images`,

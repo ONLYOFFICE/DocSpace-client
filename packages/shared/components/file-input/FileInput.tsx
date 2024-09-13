@@ -79,7 +79,7 @@ const FileInputPure = ({
         : acceptedFiles[0].name,
     );
 
-    onInput(acceptedFiles.length > 1 ? acceptedFiles : acceptedFiles[0]);
+    onInput?.(acceptedFiles.length > 1 ? acceptedFiles : acceptedFiles[0]);
   };
 
   const getSize = () => {

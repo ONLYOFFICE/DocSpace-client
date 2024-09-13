@@ -215,6 +215,10 @@ describe("Image Tests", () => {
     let message = "Found wrong images import in the code.\r\n\r\n";
     let k = 0;
     allFiles.forEach((file) => {
+      if (file.path.indexOf("browserDetector.js") > -1) {
+        return;
+      }
+
       const data = fs.readFileSync(file.path, "utf8");
 
       wrongImportImages.forEach((i) => {

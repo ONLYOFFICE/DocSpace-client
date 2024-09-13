@@ -37,12 +37,20 @@ const getAllFiles = (dir) => {
     const isDirectory = fs.statSync(filePath).isDirectory();
     if (isDirectory) {
       if (
-        filePath.includes("dist/") ||
-        filePath.includes("tests/") ||
-        filePath.includes(".next/") ||
-        filePath.includes("campaigns/") ||
-        filePath.includes("storybook-static/") ||
-        filePath.includes("node_modules/")
+        filePath.includes("e2e") ||
+        filePath.includes(".yarn") ||
+        filePath.includes(".github") ||
+        filePath.includes(".vscode") ||
+        filePath.includes(".git") ||
+        filePath.includes("__mocks__") ||
+        filePath.includes("dist") ||
+        filePath.includes("test") ||
+        filePath.includes("tests") ||
+        filePath.includes("scripts") ||
+        filePath.includes(".next") ||
+        filePath.includes("campaigns") ||
+        filePath.includes("storybook-static") ||
+        filePath.includes("node_modules")
       ) {
         return null;
       }

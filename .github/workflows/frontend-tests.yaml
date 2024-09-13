@@ -3,10 +3,10 @@ name: Frontend tests
 on:
   push:
     branches: [develop]
-    paths: [packages/login/**, packages/shared/**, packages/doceditor/**]
+    paths: [packages/**, common/**]
   pull_request:
     branches: [develop]
-    paths: [packages/login/**, packages/shared/**, packages/doceditor/**]
+    paths: [packages/**, common/**]
 jobs:
   playwright:
     name: "Login e2e tests"
@@ -53,15 +53,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: enable corepack
-        run: corepack enable
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "npm"
       - name: Install dependencies
         working-directory: ./common/tests
         run: npm install
       - name: Run common tests
         working-directory: ./common/tests
-        run: npm test
+        run: npm run test

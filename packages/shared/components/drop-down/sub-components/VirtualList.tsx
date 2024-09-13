@@ -120,15 +120,15 @@ function VirtualList({
 
     if (!React.isValidElement(child)) return;
 
-    const { onKeyboardSelect, onClick, disabled } = child.props;
+    const { handleKeyboardSelect, onClick, disabled } = child.props;
 
     if (disabled) {
       onCloseDropdown();
       return;
     }
 
-    if (onKeyboardSelect) {
-      onKeyboardSelect();
+    if (handleKeyboardSelect) {
+      handleKeyboardSelect();
     } else if (onClick) {
       onClick();
     }

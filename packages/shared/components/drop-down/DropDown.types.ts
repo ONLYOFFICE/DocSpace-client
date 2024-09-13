@@ -120,6 +120,6 @@ export interface RowProps {
 
 export type TSelectableDropdownChild = React.ReactElement<{
   onClick?: () => void;
-  onKeyboardSelect?: () => void;
+  handleKeyboardSelect?: () => void;
   disabled?: boolean;
 }>;

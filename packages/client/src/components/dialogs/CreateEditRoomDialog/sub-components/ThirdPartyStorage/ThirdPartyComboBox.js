@@ -268,7 +268,7 @@ const ThirdPartyComboBox = ({
       return (
         <StyledComboBoxItem
           disabled={isDisabled}
-          onKeyboardSelect={() => onSelect(item.id)}
+          handleKeyboardSelect={() => onSelect(item.id)}
           key={item.id}
         >
           <DropDownItem

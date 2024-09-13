@@ -225,7 +225,7 @@ const DirectThirdPartyConnection = (props) => {
     return (
       <StyledComboBoxItem
         disabled={item.disabled}
-        onKeyboardSelect={() => onSelectAccount(item.key)}
+        handleKeyboardSelect={() => onSelectAccount(item.key)}
         key={item.key}
       >
         <DropDownItem

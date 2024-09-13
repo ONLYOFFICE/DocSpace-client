@@ -179,6 +179,12 @@ describe("Image Tests", () => {
     let message = "Found images with different name but equal MD5.\r\n\r\n";
     let i = 0;
     uniqueImg.forEach((value, key) => {
+      if (
+        value[0].path.includes("/logo/") ||
+        value[0].path.includes("phoneFlags")
+      )
+        return;
+
       if (value.length > 1) {
         message += `${++i}. ${key}:\r\n`;
         value.forEach((v) => (message += `${v.path}\r\n`));

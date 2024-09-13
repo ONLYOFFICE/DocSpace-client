@@ -64,23 +64,15 @@ const Settings = () => {
   ];
 
   const onSelect = (e) => {
-    console.log("e", e);
     navigate(
       combineUrl(window.DocSpaceConfig?.proxy?.url, `/settings/${e.id}`)
     );
     setCurrentTabId(e.id);
   };
 
-  const getCurrentTab = () => {
-    const path = location.pathname;
-    const currentTab = data.findIndex((item) => path.includes(item.id));
-    return currentTab !== -1 ? currentTab : 0;
-  };
-
   useEffect(() => {
     const path = location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
-    console.log("currentTab", currentTab);
     if (currentTab !== undefined && data.length) setCurrentTabId(currentTab.id);
   }, [location.pathname]);
 

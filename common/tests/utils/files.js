@@ -14,8 +14,7 @@
 const path = require("path");
 const fs = require("fs");
 
-const BASE_DIR =
-  process.env.BASE_DIR || path.resolve(__dirname, "../../../../");
+const BASE_DIR = process.env.BASE_DIR || path.resolve(__dirname, "../../../");
 
 const moduleWorkspaces = [
   "packages/client",

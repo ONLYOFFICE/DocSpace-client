@@ -27,7 +27,7 @@
 import styled from "styled-components";
 
 export const StyledBodyContent = styled.div`
-  display: contents;
+  height: 100%;
 
   .search-input {
     margin: 16px 16px 12px;

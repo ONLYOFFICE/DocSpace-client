@@ -17,7 +17,8 @@ const crypto = require("crypto");
 const { getAllFiles, getWorkSpaces, BASE_DIR } = require("../utils/files");
 const { findImagesIntoFiles } = require("../utils/images");
 
-const LOGO_REGEX = new RegExp(/\/logo\/(.)*\/(.)*.svg/g);
+const LOGO_REGEX = new RegExp(/\/logo\/(.)*\/(.)*.svg/);
+const ICONS_REGEX = new RegExp(/\/(icons|thirdparties)\/(.)*/);
 
 let allImgs = [];
 let allFiles = [];
@@ -106,7 +107,9 @@ describe("Image Tests", () => {
       if (oldImg) {
         let skip = false;
 
-        oldImg.forEach((oi) => (skip = skip || oi.md5Hash === i.md5Hash));
+        oldImg.forEach((oi) => {
+          skip = skip || oi.md5Hash === i.md5Hash;
+        });
 
         if (!skip) {
           const newImg = [...oldImg, i];
@@ -124,8 +127,27 @@ describe("Image Tests", () => {
 
     uniqueImg.forEach((value, key) => {
       if (value.length > 1) {
+        let skip = false;
+        if (
+          value[0].path.includes("/logo/") ||
+          value[0].path.includes("/icons/")
+        ) {
+          skip = true;
+          value.forEach((v) => {
+            const isMain =
+              v.path.includes(`/logo/${key}`) ||
+              v.path.includes(`/icons/${key}`);
+            const isSubPath =
+              LOGO_REGEX.test(v.path) || ICONS_REGEX.test(v.path);
+            skip = (isSubPath || isMain) && skip;
+          });
+        }
+        if (skip) return;
         message += `${++i}. ${key}:\r\n`;
-        value.forEach((v) => (message += `${v.path}\r\n`));
+        value.forEach(
+          (v) =>
+            (message += `${v.path} ${LOGO_REGEX.test(v.path) || ICONS_REGEX.test(v.path)}\r\n`)
+        );
         message += "\r\n";
       }
     });
@@ -196,8 +218,9 @@ describe("Image Tests", () => {
     let i = 0;
     uniqueImg.forEach((value, key) => {
       if (value.length > 1) {
-        let skipLogo = true;
+        let skipLogo = false;
         if (value[0].path.includes("/logo/")) {
+          skipLogo = true;
           value.forEach((v) => {
             const isMainLogo = v.path.includes(`/logo/${key}`);
             const isSubPath = LOGO_REGEX.test(v.path);

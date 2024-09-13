@@ -113,10 +113,10 @@ function VirtualList({
   );
 
   const onSelect = useCallback(() => {
-    if (!Array.isArray(children)) return;
+    if (!Array.isArray(cleanChildren)) return;
 
     const index = currentIndexRef.current;
-    const child = children[index] as TSelectableDropdownChild;
+    const child = cleanChildren[index] as TSelectableDropdownChild;
 
     if (!React.isValidElement(child)) return;
 
@@ -134,7 +134,7 @@ function VirtualList({
     }
 
     onCloseDropdown();
-  }, [children, onCloseDropdown]);
+  }, [cleanChildren, onCloseDropdown]);
 
   const onKeyUp = useCallback(
     (e: KeyboardEvent) => {

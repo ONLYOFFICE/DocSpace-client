@@ -592,8 +592,9 @@ export const WhiteLabel = inject(
 
     const {
       whiteLabelLogoUrls: defaultWhiteLabelLogoUrls,
-      currentDeviceType,
+      deviceType,
       checkEnablePortalSettings,
+      standalone,
     } = settingsStore;
     const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
 

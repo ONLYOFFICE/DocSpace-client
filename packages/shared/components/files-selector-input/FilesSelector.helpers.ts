@@ -23,13 +23,57 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import type { TTranslation } from "@docspace/shared/types";
+import { FilesSelectorFilterTypes } from "@docspace/shared/enums";
 
-import styled from "styled-components";
-import type { StyledBodyWrapperProps } from "./FilesSelectorInput.types";
+export const getHeaderLabel = (
+  t: TTranslation,
+  isSelect?: boolean,
+  filterParam?: string,
+  isSelectFolder?: boolean,
+) => {
+  if (isSelectFolder) return t("Common:SelectFolder");
+  if (isSelect) {
+    return filterParam ? t("Common:SelectFile") : t("Common:SelectAction");
+  }
 
-const StyledBodyWrapper = styled.div<StyledBodyWrapperProps>`
-  margin: 16px 0;
-  max-width: ${(props) => (props.maxWidth ? props.maxWidth : "350px")};
-`;
+  if (filterParam === FilesSelectorFilterTypes.DOCX)
+    return t("Common:CreateMasterFormFromFile");
+  if (filterParam) return t("Common:SelectFile");
 
-export { StyledBodyWrapper };
+  return t("Common:SaveButton");
+};
+
+export const getAcceptButtonLabel = (
+  t: TTranslation,
+  isSelect?: boolean,
+  filterParam?: string,
+  isSelectFolder?: boolean,
+) => {
+  if (isSelect || isSelectFolder) return t("Common:SelectAction");
+
+  if (filterParam === FilesSelectorFilterTypes.DOCX) return t("Common:Create");
+  if (filterParam) return t("Common:SaveButton");
+
+  return t("Common:SaveHereButton");
+};
+
+export const getIsDisabled = (
+  isFirstLoad: boolean,
+  isSelectedParentFolder: boolean,
+
+  isRooms?: boolean,
+  isRoot?: boolean,
+  filterParam?: string,
+  isFileSelected?: boolean,
+  sameId?: boolean,
+) => {
+  if (isFirstLoad) return true;
+  if (isSelectedParentFolder) return true;
+  if (sameId) return true;
+  if (isRooms) return true;
+  if (isRoot) return true;
+  if (filterParam) return !isFileSelected;
+
+  return false;
+};

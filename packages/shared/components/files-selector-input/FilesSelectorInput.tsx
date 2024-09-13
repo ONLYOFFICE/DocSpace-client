@@ -25,20 +25,34 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, useEffect } from "react";
-import { inject, observer } from "mobx-react";
-import { withTranslation } from "react-i18next";
+// import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
+import { DeviceType, FolderType } from "@docspace/shared/enums";
+import FilesSelector from "@docspace/shared/selectors/Files";
+import { InputSize } from "@docspace/shared/components/text-input";
 import { FileInput } from "@docspace/shared/components/file-input";
 
-import FilesSelector from "../FilesSelector";
-import { StyledBodyWrapper } from "./StyledComponents";
+import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
+import type { FilesSelectorProps } from "@docspace/shared/selectors/Files/FilesSelector.types";
 
-const FilesSelectorInput = (props) => {
+import { StyledBodyWrapper } from "./FilesSelectorInput.styled";
+import {
+  getAcceptButtonLabel,
+  getHeaderLabel,
+  getIsDisabled,
+} from "./FilesSelector.helpers";
+
+import type {
+  FileInfoType,
+  FilesSelectorInputProps,
+} from "./FilesSelectorInput.types";
+
+const FilesSelectorInput = (props: FilesSelectorInputProps) => {
   const {
-    t,
     id,
-    isThirdParty,
-    isRoomsOnly,
+    isThirdParty = false,
+    isRoomsOnly = false,
     isSelectFolder,
     setNewPath,
     newPath,
@@ -60,15 +74,22 @@ const FilesSelectorInput = (props) => {
     isSelect,
     isRoomBackup,
     isDocumentIcon,
+    socketHelper,
+    currentDeviceType,
+    ...other
   } = props;
+
+  const { t } = useTranslation("Common");
 
   const isFilesSelection = !!filterParam;
 
   const [isPanelVisible, setIsPanelVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(!!id && !withoutInitPath);
+  // const [isRequestRunning, setIsRequestRunning] = useState<boolean>(false);
 
   useEffect(() => {
     return () => toDefault();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onClick = () => {
@@ -79,75 +100,152 @@ const FilesSelectorInput = (props) => {
     setIsPanelVisible(false);
   };
 
-  const onSetBasePath = (folders) => {
-    !withoutInitPath && setBasePath(folders);
-    isLoading && setIsLoading(false);
+  const onSetBasePath = (
+    folders: number | string | undefined | TBreadCrumb[],
+  ) => {
+    if (!withoutInitPath && Array.isArray(folders)) setBasePath(folders);
+    if (isLoading) setIsLoading(false);
   };
 
-  const onSelectFolder = (folderId, folders) => {
+  const onSelectFolder = (
+    folderId: number | string | undefined,
+    folders: TBreadCrumb[],
+  ) => {
     const publicRoomInPath = folders.filter((folder) => folder.roomType === 6);
-    setSelectedFolder && setSelectedFolder(folderId, publicRoomInPath[0]);
-
-    folders && setNewPath(folders);
+    setSelectedFolder?.(folderId, publicRoomInPath[0]);
+    if (folders) setNewPath(folders);
   };
 
-  const onSelectFile = (fileInfo, folders) => {
-    setSelectedFile && setSelectedFile(fileInfo);
-    folders && setNewPath(folders, fileInfo?.title);
+  const onSelectFile = (fileInfo: FileInfoType, folders: TBreadCrumb[]) => {
+    setSelectedFile?.(fileInfo);
+    if (folders) setNewPath(folders, fileInfo?.title);
   };
 
-  const filesSelectionProps = {
-    onSelectFile: onSelectFile,
-    filterParam: filterParam,
+  const headerLabel = getHeaderLabel(t, isSelect, filterParam, isSelectFolder);
+  const acceptButtonLabel = getAcceptButtonLabel(
+    t,
+    isSelect,
+    filterParam,
+    isSelectFolder,
+  );
+
+  const getIsDisabledAction: FilesSelectorProps["getIsDisabled"] = (
+    isFirstLoad,
+    isSelectedParentFolder,
+    selectedItemId,
+    selectedItemType,
+    isRoot,
+    selectedItemSecurity,
+    selectedFileInfo,
+  ) => {
+    return getIsDisabled(
+      isFirstLoad,
+      isSelectedParentFolder,
+      selectedItemType === "rooms",
+      isRoot,
+      filterParam,
+      !!selectedFileInfo,
+      id === Number(selectedItemId),
+    );
   };
 
-  const foldersSelectionProps = {
-    onSelectFolder: onSelectFolder,
-    onSetBaseFolderPath: onSetBasePath,
+  const onSubmit: FilesSelectorProps["onSubmit"] = (
+    selectedItemId,
+    folderTitle,
+    isPublic,
+    breadCrumbs,
+    fileName,
+    isChecked,
+    selectedTreeNode,
+    selectedFileInfo,
+  ) => {
+    if (isRoomBackup && isPublic) {
+      // setBackupToPublicRoomVisible(true, {
+      //   selectedItemId,
+      //   breadCrumbs,
+      //   onSelectFolder,
+      //   onClose,
+      // });
+      return onClose();
+    }
+
+    if (isFilesSelection && selectedFileInfo) {
+      onSelectFile(selectedFileInfo, breadCrumbs);
+    } else {
+      onSelectFolder(selectedItemId, breadCrumbs);
+    }
+
+    return onClose();
   };
 
   return (
     <StyledBodyWrapper maxWidth={maxWidth} className={className}>
       <FileInput
-        onClick={onClick}
+        scale
         fromStorage
-        path={newPath || basePath}
+        onClick={onClick}
+        size={InputSize.base}
         isLoading={isLoading}
+        path={newPath || basePath}
         isDisabled={isDisabled || isLoading}
         hasError={isError || isErrorPath}
-        scale
         isDocumentIcon={isDocumentIcon}
         placeholder={t("SelectAction")}
       />
-
       <FilesSelector
-        isRoomBackup={isRoomBackup}
-        descriptionText={descriptionText}
-        filterParam={filterParam}
-        rootThirdPartyId={rootThirdPartyId}
-        isThirdParty={isThirdParty}
+        withHeader
+        withSearch
+        withBreadCrumbs
+        withoutBackButton
+        withCancelButton
         isRoomsOnly={isRoomsOnly}
-        isSelectFolder={isSelectFolder}
-        id={id}
-        onClose={onClose}
+        headerLabel={headerLabel}
+        currentFolderId={id ?? ""}
+        filterParam={filterParam}
+        isThirdParty={isThirdParty}
+        socketHelper={socketHelper}
         isPanelVisible={isPanelVisible}
-        isSelect={isSelect}
-        {...(isFilesSelection ? filesSelectionProps : foldersSelectionProps)}
+        rootThirdPartyId={rootThirdPartyId}
+        submitButtonLabel={acceptButtonLabel}
+        descriptionText={descriptionText ?? ""}
+        cancelButtonId="select-file-modal-cancel"
+        cancelButtonLabel={t("Common:CancelButton")}
+        socketSubscribers={socketHelper.socketSubscribers}
+        onCancel={onClose}
+        onSubmit={onSubmit}
+        onSetBaseFolderPath={onSetBasePath}
+        getIsDisabled={getIsDisabledAction}
+        // default
+        parentId={0}
+        disabledItems={[]}
+        embedded={false}
+        withCreate={false}
+        withFooterInput={false}
+        withFooterCheckbox={false}
+        footerInputHeader=""
+        footerCheckboxLabel=""
+        currentFooterInputValue=""
+        getFilesArchiveError={() => ""}
+        rootFolderType={FolderType.Rooms}
+        currentDeviceType={currentDeviceType ?? DeviceType.desktop}
+        {...other}
       />
     </StyledBodyWrapper>
   );
 };
 
-export default inject(({ filesSelectorInput }) => {
-  const { basePath, newPath, setNewPath, setBasePath, toDefault, isErrorPath } =
-    filesSelectorInput;
+export default FilesSelectorInput;
 
-  return {
-    isErrorPath,
-    setBasePath,
-    basePath,
-    newPath,
-    setNewPath,
-    toDefault,
-  };
-})(withTranslation(["Common"])(observer(FilesSelectorInput)));
+// export default inject(({ filesSelectorInput }) => {
+//   const { basePath, newPath, setNewPath, setBasePath, toDefault, isErrorPath } =
+//     filesSelectorInput;
+
+//   return {
+//     isErrorPath,
+//     setBasePath,
+//     basePath,
+//     newPath,
+//     setNewPath,
+//     toDefault,
+//   };
+// })(withTranslation(["Common"])(observer(FilesSelectorInput)));

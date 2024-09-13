@@ -23,13 +23,4 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
-import styled from "styled-components";
-import type { StyledBodyWrapperProps } from "./FilesSelectorInput.types";
-
-const StyledBodyWrapper = styled.div<StyledBodyWrapperProps>`
-  margin: 16px 0;
-  max-width: ${(props) => (props.maxWidth ? props.maxWidth : "350px")};
-`;
-
-export { StyledBodyWrapper };
+export { default as FilesSelectorInput } from "./FilesSelectorInput";

@@ -14,4 +14,23 @@
 module.exports = {
   testEnvironment: "node",
   setupFilesAfterEnv: ["jest-expect-message"],
+  verbose: true,
+  reporters: [
+    "default",
+    [
+      "./node_modules/jest-html-reporter",
+      {
+        pageTitle: "DocSpace Frontend tests report",
+        outputPath: "<rootDir>/reports/tests-results.html",
+        includeFailureMsg: true,
+        includeConsoleLog: true,
+        includeStackTrace: false,
+        useCssFile: true,
+        sort: "titleAsc",
+        append: false,
+        // styleOverridePath: "styles/defaultTheme.css",
+        logo: "../../../public/images/logo/lightsmall.svg",
+      },
+    ],
+  ],
 };

@@ -365,7 +365,7 @@
     {
       "label": "Test | Jest:translations",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:locales",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:locales ; open reports/tests-results.html",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -380,7 +380,7 @@
     {
       "label": "Test | Jest:images",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:images",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:images ; open reports/tests-results.html",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -395,7 +395,7 @@
     {
       "label": "Test | Jest:colors",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:colors",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:colors ; open reports/tests-results.html",
       "group": {
         "kind": "build",
         "isDefault": true

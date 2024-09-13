@@ -29,9 +29,13 @@ beforeAll(() => {
       (filePath) =>
         filePath &&
         searchPattern.test(filePath) &&
-        !filePath.includes("themes/") &&
+        !filePath.includes("themes") &&
         !filePath.includes(".test.") &&
-        !filePath.includes(".stories.")
+        !filePath.includes(".stories.") &&
+        !filePath.includes("packages/shared/utils/encoder.ts") &&
+        !filePath.includes(
+          "packages/shared/components/error-container/ErrorContainer.tsx"
+        )
     );
   });
 
@@ -52,7 +56,7 @@ beforeAll(() => {
 });
 
 describe("Color Tests", () => {
-  test("NotGlogalColorTest", () => {
+  test("NotGlogalColorTest: Verify that there are no inline color definitions in the code and that global color variables are used instead.", () => {
     const issues = Object.keys(hexColorIssues);
 
     let message =

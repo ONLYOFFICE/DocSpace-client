@@ -17,6 +17,8 @@ const crypto = require("crypto");
 const { getAllFiles, getWorkSpaces, BASE_DIR } = require("../utils/files");
 const { findImagesIntoFiles } = require("../utils/images");
 
+const LOGO_REGEX = new RegExp(/\/logo\/(.)*\/(.).*svg/g);
+
 let allImgs = [];
 let allFiles = [];
 
@@ -194,8 +196,18 @@ describe("Image Tests", () => {
     let i = 0;
     uniqueImg.forEach((value, key) => {
       if (value.length > 1) {
+        let skipLogo = true;
+        if (value[0].path.includes("/logo/")) {
+          value.forEach((v) => {
+            const isMainLogo = v.path.includes(`/logo/${key}`);
+            const isSubPath = LOGO_REGEX.test(v.path);
+            skipLogo = (isSubPath || isMainLogo) && skipLogo;
+          });
+        }
+        if (skipLogo) return;
+
         message += `${++i}. ${key}:\r\n`;
-        value.forEach((v) => (message += `${v.path}\r\n`));
+        value.forEach((v) => (message += `${v.path} \r\n`));
         message += "\r\n";
       }
     });

@@ -247,6 +247,55 @@ beforeAll(() => {
     }));
 
   console.log(`Found commonTranslations = ${commonTranslations.length}.`);
+
+  let message = `Next languages translated less than 100%:\n\n`;
+
+  const groupedByLng = translationFiles.reduce((acc, t) => {
+    if (!acc[t.language]) {
+      acc[t.language] = [];
+    }
+    acc[t.language].push(...t.translations);
+    return acc;
+  }, {});
+
+  const groupedByLngArray = Object.keys(groupedByLng).map((language) => {
+    const allTranslated = groupedByLng[language];
+    return {
+      language: language,
+      totalKeysCount: allTranslated.length,
+      emptyKeysCount: allTranslated.filter((t) => !t.value).length,
+    };
+  });
+
+  const expectedTotalKeysCount = groupedByLngArray.find(
+    (t) => t.language === "en"
+  ).totalKeysCount;
+
+  let i = 0;
+  let exists = false;
+
+  groupedByLngArray.forEach((lng) => {
+    if (
+      lng.emptyKeysCount === 0 &&
+      lng.totalKeysCount === expectedTotalKeysCount
+    )
+      return;
+
+    exists = true;
+
+    const translated =
+      lng.totalKeysCount === expectedTotalKeysCount
+        ? Math.round(
+            100 - ((lng.emptyKeysCount * 100) / expectedTotalKeysCount) * 10
+          ) / 10
+        : Math.round(
+            ((lng.totalKeysCount * 100) / expectedTotalKeysCount) * 10
+          ) / 10;
+
+    message += `${++i}. Language '${lng.language}' translated by '${translated}%'\n`;
+  });
+
+  console.log(message);
 });
 
 describe("Locales Tests", () => {

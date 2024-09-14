@@ -29,7 +29,7 @@ import { Trans } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
-import PeopleIcon from "PUBLIC_DIR/images/catalog.accounts.react.svg?url";
+import PeopleIcon from "PUBLIC_DIR/images/icons/16/catalog.accounts.react.svg?url";
 import SelectFileStep from "../../components/SelectFileStep";
 import SelectUsersStep from "../../components/SelectUsersStep";
 import SelectUsersTypeStep from "../../components/SelectUsersTypeStep";

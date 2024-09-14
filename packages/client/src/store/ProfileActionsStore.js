@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import CatalogSettingsReactSvgUrl from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
+import CatalogSettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import HotkeysReactSvgUrl from "PUBLIC_DIR/images/hotkeys.react.svg?url";
 import ProfileReactSvgUrl from "PUBLIC_DIR/images/profile.react.svg?url";
 import PaymentsReactSvgUrl from "PUBLIC_DIR/images/payments.react.svg?url";

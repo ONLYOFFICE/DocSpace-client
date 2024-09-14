@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import AccessEditReactSvgUrl from "PUBLIC_DIR/images/access.edit.react.svg?url";
-import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/catalog.trash.react.svg?url";
+import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
 import FileSvgUrl from "PUBLIC_DIR/images/icons/32/file.svg?url";
 import React from "react";
 import { inject, observer } from "mobx-react";

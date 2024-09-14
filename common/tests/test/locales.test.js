@@ -51,7 +51,7 @@ beforeAll(() => {
       (filePath) =>
         filePath &&
         filePath.endsWith(".json") &&
-        filePath.includes("public/locales")
+        filePath.includes(convertPathToOS("public/locales"))
     );
   });
 

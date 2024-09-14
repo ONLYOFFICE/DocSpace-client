@@ -43,6 +43,7 @@ export interface InfiniteLoaderProps {
   infoPanelVisible?: boolean;
   countTilesInRow?: number;
   showSkeleton?: boolean;
+  currentFolderId?: string | number;
 }
 
 export interface ListComponentProps extends InfiniteLoaderProps {

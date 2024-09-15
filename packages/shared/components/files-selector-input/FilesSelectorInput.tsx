@@ -48,37 +48,35 @@ import type {
   FilesSelectorInputProps,
 } from "./FilesSelectorInput.types";
 
-const FilesSelectorInput = (props: FilesSelectorInputProps) => {
-  const {
-    id,
-    isThirdParty = false,
-    isRoomsOnly = false,
-    isSelectFolder,
-    setNewPath,
-    newPath,
-    onSelectFolder: setSelectedFolder,
-    onSelectFile: setSelectedFile,
-    setBasePath,
-    basePath,
-    isDisabled,
-    isError,
-    toDefault,
-    maxWidth,
-    withoutInitPath,
-    rootThirdPartyId,
-    isErrorPath,
+const FilesSelectorInput = ({
+  id,
+  isThirdParty = false,
+  isRoomsOnly = false,
+  isSelectFolder,
+  setNewPath,
+  newPath,
+  onSelectFolder: setSelectedFolder,
+  onSelectFile: setSelectedFile,
+  setBasePath,
+  basePath,
+  isDisabled,
+  isError,
+  toDefault,
+  maxWidth,
+  withoutInitPath,
+  rootThirdPartyId,
+  isErrorPath,
 
-    filterParam,
-    descriptionText,
-    className,
-    isSelect,
-    isRoomBackup,
-    isDocumentIcon,
-    socketHelper,
-    currentDeviceType,
-    ...other
-  } = props;
-
+  filterParam,
+  descriptionText,
+  className,
+  isSelect,
+  isRoomBackup,
+  isDocumentIcon,
+  socketHelper,
+  currentDeviceType,
+  ...other
+}: FilesSelectorInputProps) => {
   const { t } = useTranslation("Common");
 
   const isFilesSelection = !!filterParam;

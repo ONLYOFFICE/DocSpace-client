@@ -38,7 +38,7 @@ export type FileInfoType = {
   inPublic?: boolean;
 };
 
-type FilesSelectorSettings =
+export type FilesSelectorSettings =
   | {
       getIcon: TGetIcon;
       filesSettings?: TFilesSettings;

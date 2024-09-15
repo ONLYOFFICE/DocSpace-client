@@ -49,13 +49,13 @@ export interface ManualBackupProps {
   saveToLocalStorage: (
     isStorage: boolean,
     moduleName: string,
-    selectedId: string | number,
-    selectedStorageTitle: string,
+    selectedId: string | number | undefined,
+    selectedStorageTitle?: string,
   ) => void;
   getStorageParams: (
     isCheckedThirdPartyStorage: boolean,
-    selectedFolderId: string,
-    selectedStorageId: string,
+    selectedFolderId: string | number,
+    selectedStorageId?: string,
   ) => StorageParamsType[];
 
   setDocumentTitle: (title: string) => void;

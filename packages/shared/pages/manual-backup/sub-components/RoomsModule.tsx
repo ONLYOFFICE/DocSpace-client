@@ -24,90 +24,138 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { withTranslation } from "react-i18next";
-import { Button } from "@docspace/shared/components/button";
-import { getFromLocalStorage } from "../../../../../utils";
-import { BackupStorageType } from "@docspace/shared/enums";
-import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
+import { useTranslation } from "react-i18next";
+import React, { useEffect, useRef, useState } from "react";
 
-let folder = "";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
+import { BackupStorageType, DeviceType } from "@docspace/shared/enums";
+import { FilesSelectorInput } from "@docspace/shared/components/files-selector-input";
+import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
+
+import type SocketIOHelper from "@docspace/shared/utils/socket";
+import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
+import type { FilesSelectorSettings } from "@docspace/shared/components/files-selector-input/FilesSelectorInput.types";
+
 const Documents = "Documents";
 
-class RoomsModule extends React.Component {
-  constructor(props) {
-    super(props);
+export interface RoomsModuleProps {
+  onMakeCopy: (
+    selectedFolder: string | number,
+    moduleName: string,
+    moduleType: string,
+    selectedStorageId?: string,
+    selectedStorageTitle?: string,
+  ) => Promise<void>;
+  buttonSize?: ButtonSize;
+  maxWidth?: string;
+  isMaxProgress: boolean;
 
-    folder = getFromLocalStorage("LocalCopyFolder");
+  newPath: string;
+  basePath: string;
+  isErrorPath: boolean;
+  socketHelper: SocketIOHelper;
+  currentDeviceType?: DeviceType;
+
+  toDefault: VoidFunction;
+  setBasePath: (folders: TBreadCrumb[]) => void;
+  setNewPath: (folders: TBreadCrumb[], fileName?: string) => void;
+  settingsFileSelector: FilesSelectorSettings;
+}
+
+const RoomsModule = ({
+  onMakeCopy,
+  buttonSize,
+  isMaxProgress,
+  basePath,
+  isErrorPath,
+  newPath,
+  maxWidth,
+  setBasePath,
+  setNewPath,
+  socketHelper,
+  toDefault,
+  currentDeviceType,
+  settingsFileSelector,
+}: RoomsModuleProps) => {
+  const { t } = useTranslation(["Settings", "Common"]);
+
+  const folderRef = useRef("");
+  const isMountRef = useRef(false);
+
+  const [isStartCopy, setIsStartCopy] = useState(false);
+  const [selectedFolder, setSelectedFolder] = useState<string | number>(() => {
+    folderRef.current = getFromLocalStorage("LocalCopyFolder");
     const moduleType = getFromLocalStorage("LocalCopyStorageType");
 
-    const selectedFolder = moduleType === Documents ? folder : "";
+    return moduleType === Documents ? folderRef.current : "";
+  });
 
-    this.state = {
-      isStartCopy: false,
-      selectedFolder: selectedFolder,
+  useEffect(() => {
+    isMountRef.current = true;
+    return () => {
+      isMountRef.current = false;
     };
+  }, []);
 
-    this._isMount = false;
-  }
-
-  componentDidMount() {
-    this._isMount = true;
-  }
-  componentWillUnmount() {
-    this._isMount = false;
-  }
-  onSelectFolder = (folderId) => {
-    this._isMount &&
-      this.setState({
-        selectedFolder: folderId,
-      });
+  const onSelectFolder = (folderId: string | number | undefined) => {
+    if (isMountRef.current && !isNullOrUndefined(folderId))
+      setSelectedFolder(folderId);
   };
 
-  onMakeCopy = async () => {
-    const { onMakeCopy } = this.props;
-    const { selectedFolder } = this.state;
-    const { DocumentModuleType } = BackupStorageType;
-
-    this.setState({
-      isStartCopy: true,
-    });
-
-    await onMakeCopy(selectedFolder, Documents, `${DocumentModuleType}`);
-
-    this.setState({
-      isStartCopy: false,
-    });
+  const handleMakeCopy = async () => {
+    try {
+      setIsStartCopy(true);
+      await onMakeCopy(
+        selectedFolder,
+        Documents,
+        `${BackupStorageType.DocumentModuleType}`,
+      );
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsStartCopy(false);
+    }
   };
-  render() {
-    const { isMaxProgress, t, buttonSize } = this.props;
-    const { isStartCopy, selectedFolder } = this.state;
 
-    const isModuleDisabled = !isMaxProgress || isStartCopy;
-    return (
-      <>
-        <div className="manual-backup_folder-input">
-          <FilesSelectorInput
-            onSelectFolder={this.onSelectFolder}
-            {...(selectedFolder && { id: selectedFolder })}
-            withoutInitPath={!selectedFolder}
-            isDisabled={isModuleDisabled}
-            isRoomBackup
-            isSelectFolder
-          />
-        </div>
-        <div className="manual-backup_buttons">
-          <Button
-            id="create-copy"
-            label={t("Common:CreateCopy")}
-            onClick={this.onMakeCopy}
-            primary
-            isDisabled={isModuleDisabled || !selectedFolder}
-            size={buttonSize}
-          />
-        </div>
-      </>
-    );
-  }
-}
-export default withTranslation(["Settings", "Common"])(RoomsModule);
+  const isModuleDisabled = !isMaxProgress || isStartCopy;
+
+  return (
+    <>
+      <div className="manual-backup_folder-input">
+        <FilesSelectorInput
+          isRoomBackup
+          isSelectFolder
+          newPath={newPath}
+          basePath={basePath}
+          maxWidth={maxWidth}
+          toDefault={toDefault}
+          setNewPath={setNewPath}
+          isErrorPath={isErrorPath}
+          setBasePath={setBasePath}
+          socketHelper={socketHelper}
+          isDisabled={isModuleDisabled}
+          onSelectFolder={onSelectFolder}
+          withoutInitPath={!selectedFolder}
+          currentDeviceType={currentDeviceType}
+          {...(selectedFolder && { id: selectedFolder })}
+          {...settingsFileSelector}
+        />
+      </div>
+      <div className="manual-backup_buttons">
+        <Button
+          primary
+          id="create-copy"
+          size={buttonSize}
+          onClick={handleMakeCopy}
+          label={t("Common:CreateCopy")}
+          isDisabled={isModuleDisabled || !selectedFolder}
+        />
+      </div>
+    </>
+  );
+};
+
+export default RoomsModule;
+
+// export default withTranslation(["Settings", "Common"])(RoomsModule);

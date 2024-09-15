@@ -197,11 +197,11 @@ const ManualBackup = ({
   };
 
   const onMakeCopy = async (
-    selectedFolder: string,
+    selectedFolder: string | number,
     moduleName: string,
     moduleType: string,
-    selectedStorageId: string,
-    selectedStorageTitle: string,
+    selectedStorageId?: string,
+    selectedStorageTitle?: string,
   ) => {
     clearLocalStorage();
     const storageParams = getStorageParams(

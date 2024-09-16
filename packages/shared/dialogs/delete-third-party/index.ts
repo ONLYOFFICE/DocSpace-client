@@ -23,25 +23,5 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
-export type ProviderType = {
-  provider_id: unknown;
-};
-
-export interface DeleteThirdPartyDialogProps {
-  visible: boolean;
-  updateInfo?: VoidFunction;
-  isConnectionViaBackupModule?: boolean;
-  currentFolderId?: string | number | null;
-  deleteThirdParty: (id: number) => Promise<void>;
-  setConnectedThirdPartyAccount: (account: unknown) => void;
-  setDeleteThirdPartyDialogVisible: (visible: boolean) => void;
-  setThirdPartyProviders: (providers: ProviderType[]) => void;
-  providers: ProviderType[];
-  removeItem: {
-    id: string;
-    provider_id: string;
-    providerKey: string;
-    title: string;
-  };
-}
+export { default as DeleteThirdPartyDialog } from "./DeleteThirdPartyDialog";
+export type { DeleteThirdPartyDialogProps } from "./DeleteThirdPartyDialog.types";

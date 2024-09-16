@@ -72,7 +72,7 @@ import {
   TTimeZone,
 } from "@docspace/shared/api/settings/types";
 
-import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
+import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
 import { TCulturesOption, TError, TTimeZoneOption } from "@/types";
 import {
@@ -155,7 +155,7 @@ function WizardForm(props: WizardFormProps) {
 
   useEffect(() => {
     setUserCulture(
-      window.navigator ? window.navigator.language : culture ?? "en",
+      window.navigator ? window.navigator.language : (culture ?? "en"),
     );
   }, [culture]);
 

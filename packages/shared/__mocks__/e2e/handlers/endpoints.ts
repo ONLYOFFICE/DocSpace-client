@@ -42,7 +42,7 @@ import {
 
 export type TEndpoint = {
   url: string;
-  dataHandler: Response;
+  dataHandler: () => Response;
 };
 
 export type TEndpoints = {
@@ -54,34 +54,34 @@ const BASE_URL = "*/**/api/2.0/";
 export const endpoints: TEndpoints = {
   wizardComplete: {
     url: `${BASE_URL}${COMPLETE_PATH}`,
-    dataHandler: completeHandler(),
+    dataHandler: completeHandler,
   },
   license: {
     url: `${BASE_URL}${LICENCE_PATH}`,
-    dataHandler: licenseHandler(),
+    dataHandler: licenseHandler,
   },
   changePassword: {
     url: `${BASE_URL}${SELF_PATH_CHANGE_PASSWORD}`,
-    dataHandler: selfHandler(),
+    dataHandler: selfHandler,
   },
   activationStatus: {
     url: `${BASE_URL}${SELF_PATH_ACTIVATION_STATUS}`,
-    dataHandler: selfHandler(),
+    dataHandler: selfHandler,
   },
   updateUser: {
     url: `${BASE_URL}${SELF_PATH_UPDATE_USER}`,
-    dataHandler: selfHandler(),
+    dataHandler: selfHandler,
   },
   login: {
     url: `${BASE_URL}${LOGIN_PATH}`,
-    dataHandler: loginHandler(),
+    dataHandler: loginHandler,
   },
   tfaAppValidate: {
     url: `${BASE_URL}${TFA_APP_VALIDATE_PATH}`,
-    dataHandler: tfaAppValidateHandler(),
+    dataHandler: tfaAppValidateHandler,
   },
   tfaAppValidateError: {
     url: `${BASE_URL}${TFA_APP_VALIDATE_PATH}`,
-    dataHandler: tfaAppValidateHandler(false),
+    dataHandler: tfaAppValidateHandler.bind(null, false),
   },
 };

@@ -33,7 +33,7 @@ export class MockRequest {
 
   async router(endpoint: TEndpoint) {
     await this.page.route(endpoint.url, async (route) => {
-      const json = await endpoint.dataHandler.json();
+      const json = await endpoint.dataHandler().json();
 
       await route.fulfill({ json });
     });

@@ -57,7 +57,7 @@ import ErrorBoundary from "./components/ErrorBoundaryWrapper";
 import DialogsWrapper from "./components/dialogs/DialogsWrapper";
 import useCreateFileError from "./Hooks/useCreateFileError";
 
-// import ReactSmartBanner from "./components/SmartBanner";
+import ReactSmartBanner from "./components/SmartBanner";
 
 const Shell = ({ items = [], page = "home", ...rest }) => {
   const {
@@ -185,7 +185,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     userId,
   ]);
 
-  const { t, ready } = useTranslation(["Common"]); //TODO: if enable banner ["Common", "SmartBanner"]
+  const { t, ready } = useTranslation(["Common", "SmartBanner"]);
 
   let snackTimer = null;
   let fbInterval = null;
@@ -451,7 +451,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   return (
     <Layout>
       {toast}
-      {/* <ReactSmartBanner t={t} ready={ready} /> */}
+      <ReactSmartBanner t={t} ready={ready} />
       {withoutNavMenu ? <></> : <NavMenu />}
       <IndicatorLoader />
       <ScrollToTop />

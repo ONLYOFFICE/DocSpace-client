@@ -26,22 +26,10 @@
 
 import styled from "styled-components";
 
-import { mobile, tablet } from "@docspace/shared/utils";
+import { mobile } from "@docspace/shared/utils";
 
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-
-export const ModalDialogContainer = styled(ModalDialog)`
-  .modal-dialog-aside-footer {
-    @media ${tablet} {
-      width: 90%;
-    }
-  }
-
-  .recover-button-dialog {
-    @media ${mobile} {
-      width: 100%;
-    }
-  }
+export const StyledBodyContent = styled.div`
+  display: contents;
 
   .text-body {
     margin-bottom: 16px;
@@ -49,5 +37,15 @@ export const ModalDialogContainer = styled(ModalDialog)`
 
   .textarea {
     margin-bottom: 0;
+  }
+`;
+
+export const StyledFooterContent = styled.div`
+  display: contents;
+
+  .recover-button-dialog {
+    @media ${mobile} {
+      width: 100%;
+    }
   }
 `;

@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
 import { inject, observer } from "mobx-react";
+import { useState, useEffect, useRef } from "react";
 
 import isEqual from "lodash/isEqual";
 import TagHandler from "./handlers/TagHandler";
@@ -33,6 +33,7 @@ import SetRoomParams from "./sub-components/SetRoomParams";
 
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
+import ChangeRoomOwnerPanel from "../../panels/ChangeRoomOwnerPanel";
 
 const EditRoomDialog = ({
   t,
@@ -49,6 +50,8 @@ const EditRoomDialog = ({
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [isValidTitle, setIsValidTitle] = useState(true);
   const [isWrongTitle, setIsWrongTitle] = useState(false);
+  const [changeRoomOwnerIsVisible, setChangeRoomOwnerIsVisible] =
+    useState(false);
 
   const [roomParams, setRoomParams] = useState({
     ...fetchedRoomParams,
@@ -130,6 +133,19 @@ const EditRoomDialog = ({
     onClose && onClose();
   };
 
+  const onOwnerChange = () => {
+    setChangeRoomOwnerIsVisible(true);
+  };
+
+  const onSetNewOwner = (roomOwner) => {
+    setChangeRoomOwnerIsVisible(false);
+    setRoomParams({ ...roomParams, roomOwner });
+  };
+
+  const onCloseRoomOwnerPanel = () => {
+    setChangeRoomOwnerIsVisible(false);
+  };
+
   return (
     <ModalDialog
       displayType="aside"
@@ -139,7 +155,20 @@ const EditRoomDialog = ({
       isScrollLocked={isScrollLocked}
       isLoading={isInitLoading}
       withFooterBorder
+      containerVisible={changeRoomOwnerIsVisible}
     >
+      {changeRoomOwnerIsVisible && (
+        <ModalDialog.Container>
+          <ChangeRoomOwnerPanel
+            useModal={false}
+            roomOwner={roomParams.roomOwner}
+            onOwnerChange={onSetNewOwner}
+            showBackButton
+            onClose={onCloseRoomOwnerPanel}
+          />
+        </ModalDialog.Container>
+      )}
+
       <ModalDialog.Header>{t("RoomEditing")}</ModalDialog.Header>
 
       <ModalDialog.Body>
@@ -157,6 +186,7 @@ const EditRoomDialog = ({
           setIsValidTitle={setIsValidTitle}
           setIsWrongTitle={setIsWrongTitle}
           onKeyUp={onKeyUpHandler}
+          onOwnerChange={onOwnerChange}
         />
       </ModalDialog.Body>
 

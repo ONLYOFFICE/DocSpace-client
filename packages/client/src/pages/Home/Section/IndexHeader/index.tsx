@@ -27,7 +27,7 @@
 import { Text } from "@docspace/shared/components/text";
 import { TTranslation } from "@docspace/shared/types";
 import RoundedArrowSvgUrl from "PUBLIC_DIR/images/rounded arrow.react.svg?url";
-import CrossIconSvgUrl from "PUBLIC_DIR/images/cross.react.svg?url";
+import CrossIconSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { StyledTableIndexMenu } from "./StyledIndexHeader";
 

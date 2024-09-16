@@ -29,6 +29,8 @@ import { inject, observer } from "mobx-react";
 import moment from "moment";
 import { toastr } from "@docspace/shared/components/toast";
 import { copyShareLink } from "@docspace/shared/utils/copy";
+import { copyDocumentShareLink } from "@docspace/shared/components/share/Share.helpers";
+
 import QuickButtons from "../components/QuickButtons";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { getCookie, getCorrectDate } from "@docspace/shared/utils";
@@ -83,13 +85,16 @@ export default function withQuickButtons(WrappedComponent) {
     };
 
     onClickShare = async () => {
-      const { t, item, getPrimaryFileLink, setShareChanged } = this.props;
+      const {
+        t,
+        item,
+        getPrimaryFileLink,
+        setShareChanged,
+        getManageLinkOptions,
+      } = this.props;
       const primaryLink = await getPrimaryFileLink(item.id);
       if (primaryLink) {
-        copyShareLink(primaryLink.sharedTo.shareLink);
-        item.shared
-          ? toastr.success(t("Common:LinkSuccessfullyCopied"))
-          : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+        copyDocumentShareLink(primaryLink, t, getManageLinkOptions(item));
         setShareChanged(true);
       }
     };
@@ -205,6 +210,7 @@ export default function withQuickButtons(WrappedComponent) {
       filesStore,
       infoPanelStore,
       indexingStore,
+      contextOptionsStore,
     }) => {
       const { lockFileAction, setFavoriteAction, onSelectItem } =
         filesActionsStore;
@@ -227,6 +233,8 @@ export default function withQuickButtons(WrappedComponent) {
       const { getPrimaryFileLink, setShareChanged, infoPanelRoom } =
         infoPanelStore;
 
+      const { getManageLinkOptions } = contextOptionsStore;
+
       return {
         theme: settingsStore.theme,
         culture: settingsStore.culture,
@@ -245,6 +253,7 @@ export default function withQuickButtons(WrappedComponent) {
         setShareChanged,
         isIndexEditingMode,
         roomLifetime: infoPanelRoom?.lifetime,
+        getManageLinkOptions,
       };
     },
   )(observer(WithQuickButtons));

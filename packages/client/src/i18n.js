@@ -71,7 +71,6 @@ newInstance
       "EmptyTrashDialog",
       "ConvertDialog",
       "ConnectDialog",
-      "ConflictResolveDialog",
       "CreateEditRoomDialog",
       "DeleteThirdPartyDialog",
       "PortalUnavailable",

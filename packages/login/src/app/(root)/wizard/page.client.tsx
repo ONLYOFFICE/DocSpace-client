@@ -56,7 +56,7 @@ import {
   ComboBoxSize,
   TOption,
 } from "@docspace/shared/components/combobox";
-import BetaBadge from "@docspace/client/src/components/BetaBadgeWrapper";
+import { BetaBadge } from "@docspace/shared/components/beta-badge";
 import { Checkbox } from "@docspace/shared/components/checkbox";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import api from "@docspace/shared/api";
@@ -72,7 +72,7 @@ import {
   TTimeZone,
 } from "@docspace/shared/api/settings/types";
 
-import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
+import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
 import { TCulturesOption, TError, TTimeZoneOption } from "@/types";
 import {
@@ -94,6 +94,9 @@ type WizardFormProps = {
   isRequiredLicense?: boolean;
   portalTimeZones?: TTimeZone[];
   portalCultures?: TPortalCultures;
+
+  forumLink?: string;
+  documentationEmail?: string;
   culture?: string;
   wizardToken?: string;
   passwordHash?: TPasswordHash;
@@ -114,6 +117,8 @@ function WizardForm(props: WizardFormProps) {
     culture,
     wizardToken,
     passwordHash,
+    forumLink,
+    documentationEmail,
   } = props;
 
   const [selectedTimezone, setSelectedTimezone] = useState<TTimeZoneOption>(
@@ -150,7 +155,7 @@ function WizardForm(props: WizardFormProps) {
 
   useEffect(() => {
     setUserCulture(
-      window.navigator ? window.navigator.language : culture ?? "en",
+      window.navigator ? window.navigator.language : (culture ?? "en"),
     );
   }, [culture]);
 
@@ -460,7 +465,13 @@ function WizardForm(props: WizardFormProps) {
             modernView={true}
           />
           {selectedLanguage?.isBeta && (
-            <BetaBadge withOutFeedbackLink place="bottom" />
+            <BetaBadge
+              withOutFeedbackLink
+              place="bottom"
+              forumLink={forumLink}
+              currentDeviceType={currentDeviceType}
+              documentationEmail={documentationEmail}
+            />
           )}
         </div>
       </StyledInfo>

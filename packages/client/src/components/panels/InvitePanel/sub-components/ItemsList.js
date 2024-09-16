@@ -34,7 +34,6 @@ import Item from "./Item";
 import { StyledRow, ScrollList } from "../StyledInvitePanel";
 import { useTheme } from "styled-components";
 
-const FOOTER_HEIGHT = 73;
 const USER_ITEM_HEIGHT = 48;
 
 const Row = memo(({ data, index, style }) => {
@@ -120,7 +119,7 @@ const ItemsList = ({
           listAreaHeight,
           isOpenItemAccess ? heightWitchOpenItemAccess : 0,
         )
-      : heightList - FOOTER_HEIGHT;
+      : heightList;
 
     const finalHeight = scrollAllPanelContent
       ? isOpenItemAccess

@@ -42,6 +42,7 @@ import BetaBadge from "../../../BetaBadgeWrapper";
 import { getMembersList, getUserList } from "@docspace/shared/api/people";
 import {
   AccountsSearchArea,
+  EmployeeStatus,
   EmployeeType,
   RoomsType,
   ShareAccessRights,
@@ -50,8 +51,7 @@ import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 import { isBetaLanguage } from "@docspace/shared/utils";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
-import AddUsersPanel from "../../AddUsersPanel";
-import { getAccessOptions, getTopFreeRole, isPaidUserRole } from "../utils";
+import { getTopFreeRole, isPaidUserRole } from "../utils";
 import AccessSelector from "../../../AccessSelector";
 
 import {
@@ -70,6 +70,8 @@ import {
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
+import { Box } from "@docspace/shared/components/box";
+import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 
 const minSearchValue = 2;
 const filterSeparator = ";";
@@ -81,7 +83,6 @@ const InviteInput = ({
   setInviteLanguage,
   hideSelector,
   inviteItems,
-  onClose,
   roomId,
   roomType,
   setInviteItems,
@@ -90,22 +91,22 @@ const InviteInput = ({
   language,
   isOwner,
   inputsRef,
-  addUsersPanelVisible,
   setAddUsersPanelVisible,
   isMobileView,
   cultureNames,
   i18n,
   setCultureKey,
-  standalone,
   isPaidUserAccess,
   setInvitePaidUsersCount,
   isUserTariffLimit,
+  removeExist,
+  inputValue,
+  setInputValue,
+  usersList,
+  setUsersList,
 }) => {
   const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
-  const [inputValue, setInputValue] = useState("");
-
-  const [usersList, setUsersList] = useState([]);
   const [invitedUsers, setInvitedUsers] = useState(new Map());
 
   const [isChangeLangMail, setIsChangeLangMail] = useState(false);
@@ -317,25 +318,6 @@ const InviteInput = ({
     debouncedSearch(clearValue);
   };
 
-  const removeExist = (items) => {
-    const filtered = items.reduce((unique, current) => {
-      const isUnique = !unique.some((obj) =>
-        obj.isGroup ? obj.id === current.id : obj.email === current.email,
-      );
-
-      if (!isUnique && isPaidUserAccess(current.access))
-        setInvitePaidUsersCount(-1);
-
-      isUnique && unique.push(current);
-
-      return unique;
-    }, []);
-
-    if (items.length > filtered.length) toastr.warning(t("UsersAlreadyAdded"));
-
-    return filtered;
-  };
-
   const getItemContent = (item) => {
     const {
       avatar,
@@ -345,6 +327,7 @@ const InviteInput = ({
       id,
       shared,
       isGroup = false,
+      status,
     } = item;
 
     item.access = selectedAccess;
@@ -401,9 +384,12 @@ const InviteInput = ({
           isGroup={isGroup}
         />
         <div className="list-item_content">
-          <SearchItemText primary disabled={shared}>
-            {displayName || groupName}
-          </SearchItemText>
+          <Box displayProp="flex" alignItems="center" gapProp="8px">
+            <SearchItemText primary disabled={shared}>
+              {displayName || groupName}
+            </SearchItemText>
+            {status === EmployeeStatus.Pending && <StyledSendClockIcon />}
+          </Box>
           <SearchItemText>{email}</SearchItemText>
         </div>
         {shared && <SearchItemText info>{t("Common:Invited")}</SearchItemText>}
@@ -478,49 +464,12 @@ const InviteInput = ({
     setUsersList([]);
   };
 
-  const addItems = (users) => {
-    const topFreeRole = getTopFreeRole(t, roomType);
-    users.forEach((u) => {
-      if (u.isGroup && checkIfAccessPaid(u.access)) {
-        u.access = topFreeRole.access;
-        u.warning = t("GroupMaxAvailableRoleWarning", {
-          roleName: topFreeRole.label,
-        });
-      }
-
-      if (
-        isUserTariffLimit &&
-        (!u.avatar || u.isVisitor) &&
-        isPaidUserRole(u.access)
-      ) {
-        const freeRole = getTopFreeRole(t, roomType)?.access;
-
-        if (freeRole) {
-          u.access = freeRole;
-          toastr.error(<PaidQuotaLimitError />);
-        }
-      }
-    });
-
-    const items = [...users, ...inviteItems];
-
-    const filtered = removeExist(items);
-
-    setInviteItems(filtered);
-    setInputValue("");
-    setUsersList([]);
-  };
-
   const dropDownMaxHeight = usersList.length > 5 ? { maxHeight: 240 } : {};
 
   const openUsersPanel = () => {
     setInputValue("");
     setAddUsersPanelVisible(true);
     setIsAddEmailPanelBlocked(true);
-  };
-
-  const closeUsersPanel = () => {
-    setAddUsersPanelVisible(false);
   };
 
   const dropDownContent = useMemo(() => {
@@ -561,15 +510,6 @@ const InviteInput = ({
     return prevDropDownContent.current;
   }, [usersList, inputValue]);
 
-  const accessOptions = getAccessOptions(
-    t,
-    roomType,
-    false,
-    true,
-    isOwner,
-    standalone,
-  );
-
   const onSelectAccess = (item) => {
     setSelectedAccess(item.access);
   };
@@ -603,11 +543,6 @@ const InviteInput = ({
 
     setInvitedUsers((value) => new Map([...value, ...newInviteItems]));
   }, [inviteItems]);
-
-  const invitedUsersArray = useMemo(
-    () => Array.from(invitedUsers.keys()),
-    [invitedUsers],
-  );
 
   return (
     <>
@@ -738,27 +673,6 @@ const InviteInput = ({
             selectionErrorText: <PaidQuotaLimitError />,
           })}
         />
-
-        {!hideSelector && addUsersPanelVisible && (
-          <AddUsersPanel
-            onParentPanelClose={onClose}
-            onClose={closeUsersPanel}
-            visible={addUsersPanelVisible}
-            tempDataItems={inviteItems}
-            setDataItems={addItems}
-            accessOptions={accessOptions}
-            isMultiSelect
-            isEncrypted={true}
-            defaultAccess={selectedAccess}
-            withoutBackground={isMobileView}
-            withBlur={!isMobileView}
-            roomId={roomId}
-            withGroups={!isPublicRoomType}
-            withAccessRights
-            invitedUsers={invitedUsersArray}
-            disableDisabledUsers
-          />
-        )}
       </StyledInviteInputContainer>
     </>
   );
@@ -777,7 +691,7 @@ export default inject(
       isPaidUserAccess,
     } = dialogsStore;
 
-    const { culture: language, standalone } = settingsStore;
+    const { culture: language } = settingsStore;
     const { isUserTariffLimit } = currentQuotaStore;
     return {
       language,
@@ -789,7 +703,6 @@ export default inject(
       hideSelector: invitePanelOptions.hideSelector,
       defaultAccess: invitePanelOptions.defaultAccess,
       isOwner,
-      standalone,
       isPaidUserAccess,
       setInvitePaidUsersCount,
       isUserTariffLimit,

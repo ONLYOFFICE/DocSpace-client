@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import CrossReactSvgUrl from "PUBLIC_DIR/images/cross.react.svg?url";
+import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { ReactSVG } from "react-svg";
@@ -279,11 +279,7 @@ export default inject(({ setup, userStore, settingsStore }) => {
 
   return { displayName, avatar, id, sendOwnerChange, currentColorScheme };
 })(
-  withTranslation([
-    "ChangePortalOwner",
-    "Common",
-    "Translations",
-    "ProfileAction",
-    "Settings",
-  ])(observer(ChangePortalOwnerDialog)),
+  withTranslation(["ChangePortalOwner", "Common", "Translations", "Settings"])(
+    observer(ChangePortalOwnerDialog),
+  ),
 );

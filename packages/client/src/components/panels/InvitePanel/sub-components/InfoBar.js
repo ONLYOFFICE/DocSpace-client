@@ -28,7 +28,7 @@ import React from "react";
 import { ReactSVG } from "react-svg";
 import styled from "styled-components";
 import InfoIcon from "PUBLIC_DIR/images/info.outline.react.svg?url";
-import CrossReactSvg from "PUBLIC_DIR/images/cross.react.svg?url";
+import CrossReactSvg from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Text } from "@docspace/shared/components/text";
 

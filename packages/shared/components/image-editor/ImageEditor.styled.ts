@@ -29,23 +29,25 @@ import { mobile } from "../../utils";
 import { Base } from "../../themes";
 
 const StyledImageCropper = styled.div<{ disableImageRescaling?: boolean }>`
-  max-width: 216px;
+  max-width: 368px;
 
   .icon_cropper-crop_area {
-    width: 216px;
-    height: 216px;
+    width: 368px;
+    height: 368px;
     margin-bottom: 4px;
     position: relative;
     .icon_cropper-grid {
       pointer-events: none;
       position: absolute;
-      width: 216px;
-      height: 216px;
+      width: 368px;
+      height: 368px;
       top: 0;
       bottom: 0;
       inset-inline: 0;
       svg {
         opacity: 0.2;
+        width: 368px;
+        height: 368px;
         path {
           fill: ${(props) =>
             props.theme.createEditRoomDialog.iconCropper.gridColor};
@@ -96,6 +98,10 @@ const StyledImageCropper = styled.div<{ disableImageRescaling?: boolean }>`
       line-height: 20px;
       color: ${(props) =>
         props.theme.createEditRoomDialog.iconCropper.deleteButton.color};
+    }
+
+    div:first-child {
+      height: 16px;
     }
 
     svg {

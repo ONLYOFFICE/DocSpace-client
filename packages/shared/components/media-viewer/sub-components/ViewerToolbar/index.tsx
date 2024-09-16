@@ -31,7 +31,7 @@ import React, {
   useState,
 } from "react";
 
-import MediaContextMenu from "PUBLIC_DIR/images/vertical-dots.react.svg";
+import MediaContextMenu from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg";
 
 import { useClickOutside } from "../../../../utils/useClickOutside";
 
@@ -70,17 +70,13 @@ const ViewerToolbar = forwardRef<ImperativeHandle, ImageViewerToolbarProps>(
       setIsOpen(false);
     });
 
-    useImperativeHandle(
-      ref,
-      () => {
-        return {
-          setPercentValue(percentArg: number) {
-            setPercent(Math.round(percentArg * 100));
-          },
-        };
-      },
-      [],
-    );
+    useImperativeHandle(ref, () => {
+      return {
+        setPercentValue(percentArg: number) {
+          setPercent(Math.round(percentArg * 100));
+        },
+      };
+    }, []);
 
     function getContextMenu(item: ToolbarItemType) {
       const contextMenu = generateContextMenu(isOpen);

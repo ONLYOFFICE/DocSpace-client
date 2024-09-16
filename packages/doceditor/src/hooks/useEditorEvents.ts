@@ -216,7 +216,7 @@ const useEditorEvents = ({
 
     if (fileInfo.rootFolderType === FolderType.Rooms) {
       if (key) {
-        backUrl = `/rooms/share?key=${key}`;
+        backUrl = `/rooms/share?key=${key}&folder=${fileInfo.folderId}`;
       } else {
         backUrl = `/rooms/shared/${fileInfo.folderId}/filter?folder=${fileInfo.folderId}`;
       }

@@ -35,7 +35,7 @@ import ButtonDuplicateIcon from "PUBLIC_DIR/images/button.duplicate.react.svg";
 import ButtonAlertIcon from "PUBLIC_DIR/images/button.alert.react.svg";
 import ButtonPlusIcon from "PUBLIC_DIR/images/icons/16/button.plus.react.svg";
 import ButtonMinusIcon from "PUBLIC_DIR/images/icons/16/button.minus.react.svg";
-import RefreshIcon from "PUBLIC_DIR/images/refresh.react.svg";
+import RefreshIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg";
 import CloseIcon from "PUBLIC_DIR/images/close-icon.react.svg";
 
 import { FloatingButtonTheme } from "./FloatingButton.theme";

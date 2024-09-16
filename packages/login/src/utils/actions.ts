@@ -250,9 +250,10 @@ export async function getPortalCultures() {
 
 export async function getConfig() {
   const baseUrl = getBaseUrl();
-  const config = await (
-    await fetch(`${baseUrl}/static/scripts/config.json`)
-  ).json();
+
+  const config = IS_TEST
+    ? new Response(JSON.stringify({}))
+    : await (await fetch(`${baseUrl}/static/scripts/config.json`)).json();
 
   return config;
 }

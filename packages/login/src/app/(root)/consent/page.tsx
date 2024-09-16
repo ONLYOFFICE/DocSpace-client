@@ -82,7 +82,7 @@ async function Page({
               client={client as IClientProps}
               scopes={scopes}
               user={user}
-              baseUrl={config?.oauth2.origin}
+              baseUrl={config?.oauth2?.origin}
             />
           </>
         </ColorTheme>

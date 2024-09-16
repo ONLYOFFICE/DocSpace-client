@@ -25,5 +25,10 @@
     "fetchTimeoutMillis": 3600000,
     "minimumFetchIntervalMillis": 3600000
   },
-  "campaigns": ["OnlyofficeForPlatform", "BookTraining", "FormGallery"]
+  "campaigns": [
+    "OnlyofficeForDevelopers",
+    "OnlyofficeForPlatform",
+    "BookTraining",
+    "FormGallery"
+  ]
 }

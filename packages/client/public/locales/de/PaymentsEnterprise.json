@@ -8,7 +8,7 @@
   "ActivateRenewSubscriptionHeader": "Abonnement für die Enterprise-Version verlängern",
   "ActivateSwithToProHeader": "Erwerben Sie die vollständige Enterprise-Version",
   "ActivateTariffDescr": "Sie benutzen {{organizationName}} {{productName}} Enterprise.",
-  "ActivateTariffEnterpriseExpiration": "Ihr Abonnement ist noch {{date}} Tage gültig.",
+  "ActivateTariffEnterpriseExpiration": "Ihr Abonnement ist bis {{date}}, gültig.",
   "ActivateTariffEnterpriseTrialExpiration": "Ihre Testversion ist noch {{date}} Tage gültig.",
   "ActivateToProBannerHeaderTrial": "Erwerben Sie die vollständige Enterprise-Version und erhalten Sie:",
   "ActivateUploadDescr": "Um Ihre Lizenz zu aktivieren, laden Sie diese hoch und klicken Sie auf Aktivieren.",

@@ -77,8 +77,11 @@ const ArticleBodyContent = (props) => {
 
   const location = useLocation();
 
+  const getHashDate = () => new Date().getTime();
+
   const [disableBadgeClick, setDisableBadgeClick] = React.useState(false);
   const [activeItemId, setActiveItemId] = React.useState(null);
+  const [hashDate, setHashDate] = React.useState(getHashDate);
 
   const getLinkData = React.useCallback(
     (folderId, title, rootFolderType, canCreate) => {
@@ -160,7 +163,7 @@ const ArticleBodyContent = (props) => {
           break;
       }
 
-      path += `?${params}&date=${new Date().getTime()}`;
+      path += `?${params}&date=${hashDate}`;
 
       return { path, state };
     },
@@ -170,6 +173,7 @@ const ArticleBodyContent = (props) => {
       myFolderId,
       recycleBinFolderId,
       activeItemId,
+      hashDate,
     ],
   );
 
@@ -184,6 +188,8 @@ const ArticleBodyContent = (props) => {
       let withTimer = isAccountsClick ? false : !!selectedFolderId;
 
       if (isAccountsClick) clearFiles();
+
+      setHashDate(getHashDate);
 
       setSelection?.([]);
 

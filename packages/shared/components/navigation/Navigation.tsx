@@ -157,6 +157,12 @@ const Navigation = ({
     };
   }, [isOpen, onResize, onMissClick]);
 
+  React.useEffect(() => {
+    if (!navigationItems?.length) {
+      setIsOpen(false);
+    }
+  }, [navigationItems]);
+
   const onBackToParentFolderAction = React.useCallback(() => {
     setIsOpen((val) => !val);
     onBackToParentFolder?.();
@@ -206,11 +212,13 @@ const Navigation = ({
     navigationTitleNode
   );
 
+  const haveItems = !!navigationItems?.length;
+
   return (
     <Consumer>
       {(context) => (
         <>
-          {isOpen && (
+          {isOpen && haveItems && (
             <>
               <Backdrop
                 visible={isOpen}

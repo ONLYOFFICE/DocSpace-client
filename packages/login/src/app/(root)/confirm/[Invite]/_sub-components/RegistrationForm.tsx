@@ -42,6 +42,7 @@ import { ALLOWED_PASSWORD_CHARACTERS } from "@docspace/shared/constants";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { LinkTarget } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
 
 import { ConfirmRouteContext } from "@/components/ConfirmRoute";
 import { GreetingUserContainer } from "@/components/GreetingContainer";
@@ -111,7 +112,7 @@ const RegistrationForm = ({
 
   const termsConditionsComponent = (
     <div className="terms-conditions">
-      <Text fontSize={"12px"} textAlign="center">
+      <Text fontSize={"13px"} textAlign="center" lineHeight="20px">
         <Trans
           t={t}
           ns="Confirm"
@@ -123,7 +124,7 @@ const RegistrationForm = ({
                 themeId={ThemeId.Link}
                 href={licenseUrl}
                 target={LinkTarget.blank}
-                fontSize={"12px"}
+                fontSize={"13px"}
               />
             ),
             2: (
@@ -132,7 +133,7 @@ const RegistrationForm = ({
                 themeId={ThemeId.Link}
                 href={legalTerms}
                 target={LinkTarget.blank}
-                fontSize={"12px"}
+                fontSize={"13px"}
               />
             ),
           }}
@@ -244,6 +245,11 @@ const RegistrationForm = ({
           tooltipAllowedCharacters={`${t("Common:AllowedCharacters")}: ${ALLOWED_PASSWORD_CHARACTERS}`}
         />
       </FieldContainer>
+
+      <div className="news-subscription">
+        <Checkbox className="checkbox-news" />
+        <Text>{t("Confirm:Newsletter")}</Text>
+      </div>
 
       {termsConditionsComponent}
 

@@ -39,6 +39,7 @@ import ThirdPartyStorage from "./ThirdPartyStorage";
 
 import withLoader from "@docspace/client/src/HOCs/withLoader";
 import SetRoomParamsLoader from "@docspace/shared/skeletons/create-edit-room/SetRoomParams";
+import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
 
 import { ImageEditor } from "@docspace/shared/components/image-editor";
 import PreviewTile from "@docspace/shared/components/image-editor/PreviewTile";
@@ -51,6 +52,9 @@ import RoomQuota from "./RoomQuota";
 import { RoomsType } from "@docspace/shared/enums";
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
 import { isMobile, mobile } from "@docspace/shared/utils";
+import RoomImageCoverDialog from "../../RoomImageCoverDialog";
+
+import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 
 const StyledSetRoomParams = styled.div`
   display: flex;
@@ -132,11 +136,14 @@ const SetRoomParams = ({
   selection,
   getLogoCoverModel,
   getInfoPanelItemIcon,
+  uploadFileToImageEditor,
 }) => {
   const [previewIcon, setPreviewIcon] = useState(null);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
     useState(true);
   const [disableImageRescaling, setDisableImageRescaling] = useState(isEdit);
+
+  const [imageCoverVisible, setImageCoverVisible] = useState(false);
 
   const [forceHideRoomTypeDropdown, setForceHideRoomTypeDropdown] =
     useState(false);
@@ -149,6 +156,20 @@ const SetRoomParams = ({
     : selection?.logo?.cover
       ? selection?.logo
       : getInfoPanelItemIcon(selection, 96);
+
+  const onChangeFile = async (e) => {
+    const file = await getFilesFromEvent(e);
+    const uploadedFile = await uploadFileToImageEditor(t, file[0]);
+
+    setRoomParams({
+      ...roomParams,
+      icon: { ...roomParams.icon, uploadedFile: uploadedFile },
+      iconWasUpdated: true,
+    });
+
+    onChangeIcon({ ...roomParams.icon, uploadedFile: uploadedFile });
+    setImageCoverVisible(true);
+  };
 
   const onChangeName = (e) => {
     setIsValidTitle(true);
@@ -191,12 +212,15 @@ const SetRoomParams = ({
       fileExst={selection?.fileExst}
       isRoom={selection?.isRoom}
       title={selection?.title}
-      logo={currentIcon}
-      showDefault={!selection?.logo?.cover && !selection?.logo?.large}
+      logo={imageCoverVisible ? currentIcon : previewIcon || currentIcon}
+      showDefault={
+        !previewIcon && !selection?.logo?.cover && !selection?.logo?.large
+      }
       color={selection?.logo?.color}
       size={isMobile() ? "96px" : "64px"}
       withEditing={true}
       model={model}
+      onChangeFile={onChangeFile}
     />
   ) : (
     <ItemIcon
@@ -303,7 +327,7 @@ const SetRoomParams = ({
       )}
 
       <div>
-        <Text fontWeight={600} className="icon-editor_text">
+        {/* <Text fontWeight={600} className="icon-editor_text">
           {t("Icon")}
         </Text>
         <ImageEditor
@@ -325,7 +349,24 @@ const SetRoomParams = ({
               defaultTagLabel={getRoomTypeName(roomParams.type, t)}
             />
           }
-        />
+        /> */}
+
+        {imageCoverVisible && (
+          <AvatarEditorDialog
+            t={t}
+            isDisabled={isDisabled}
+            image={roomParams.icon}
+            setPreview={setPreviewIcon}
+            onChangeImage={onChangeIcon}
+            onClose={() => setImageCoverVisible(false)}
+            onSave={() => setImageCoverVisible(false)}
+            onChangeFile={onChangeFile}
+            classNameWrapperImageCropper={"icon-editor"}
+            disableImageRescaling={disableImageRescaling}
+            visible={roomParams.icon.uploadedFile}
+            maxImageSize={maxImageUploadSize}
+          />
+        )}
       </div>
     </StyledSetRoomParams>
   );
@@ -338,6 +379,7 @@ export default inject(
     currentQuotaStore,
     filesStore,
     infoPanelStore,
+    filesActionsStore,
   }) => {
     const { isDefaultRoomsQuotaSet } = currentQuotaStore;
     const { folderFormValidation, maxImageUploadSize } = settingsStore;
@@ -366,6 +408,7 @@ export default inject(
       selection,
       getInfoPanelItemIcon,
       setCoverSelection,
+      uploadFileToImageEditor: filesActionsStore.uploadFileToImageEditor,
     };
   },
 )(

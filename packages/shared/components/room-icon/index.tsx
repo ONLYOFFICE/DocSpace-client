@@ -70,6 +70,12 @@ const RoomIcon = ({
   const iconRef = React.useRef<HTMLLIElement>(null);
   const inputFilesElement = React.useRef(null);
 
+  const onInputClick = () => {
+    if (inputFilesElement.current) {
+      inputFilesElement.current.value = null;
+    }
+  };
+
   useClickOutside(iconRef, () => {
     setOpenLogoEdit(false);
   });
@@ -114,7 +120,7 @@ const RoomIcon = ({
         type="file"
         onChange={onChangeFile}
         accept="image/png, image/jpeg"
-        // onClick={onInputClick}
+        onClick={onInputClick}
         ref={inputFilesElement}
         style={{ display: "none" }}
       />

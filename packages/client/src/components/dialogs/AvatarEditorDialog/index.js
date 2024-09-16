@@ -33,15 +33,29 @@ import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
-import {
-  ImageEditor,
-  AvatarPreview,
-} from "@docspace/shared/components/image-editor";
+import { ImageEditor } from "@docspace/shared/components/image-editor";
 
 import { loadAvatar, deleteAvatar } from "@docspace/shared/api/people";
 import { dataUrlToFile } from "@docspace/shared/utils/dataUrlToFile";
 
 import DefaultUserAvatarMax from "PUBLIC_DIR/images/default_user_photo_size_200-200.png";
+
+const StyledModalDialog = styled(ModalDialog)`
+  #modal-dialog {
+    max-height: fit-content;
+  }
+  .wrapper-image-editor {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    .avatar-editor {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+  }
+`;
 
 const StyledBodyContent = styled.div`
   display: contents;
@@ -70,14 +84,18 @@ const AvatarEditorDialog = (props) => {
   const {
     visible,
     onClose,
+    onSave,
     profile,
     updateCreatedAvatar,
     setHasAvatar,
     maxImageUploadSize,
+    onChangeImage,
+    image,
+    onChangeFile,
   } = props;
   const [avatar, setAvatar] = useState({
-    uploadedFile: profile.hasAvatar
-      ? profile.avatarOriginal
+    uploadedFile: profile?.hasAvatar
+      ? profile?.avatarOriginal
       : DefaultUserAvatarMax,
     x: 0.5,
     y: 0.5,
@@ -87,6 +105,11 @@ const AvatarEditorDialog = (props) => {
   const [preview, setPreview] = useState(null);
 
   const onChangeAvatar = (newAvatar) => setAvatar(newAvatar);
+
+  const onCloseModal = () => {
+    props.setPreview("");
+    onClose && onClose();
+  };
 
   const onSaveClick = async () => {
     setIsLoading(true);
@@ -125,11 +148,11 @@ const AvatarEditorDialog = (props) => {
   };
 
   return (
-    <ModalDialog
-      displayType="aside"
+    <StyledModalDialog
+      displayType="modal"
       withBodyScroll
       visible={visible}
-      onClose={onClose}
+      onClose={onCloseModal}
       withFooterBorder
     >
       <ModalDialog.Header>
@@ -143,12 +166,13 @@ const AvatarEditorDialog = (props) => {
             t={t}
             className="wrapper-image-editor"
             classNameWrapperImageCropper="avatar-editor"
-            image={avatar}
-            setPreview={setPreview}
-            onChangeImage={onChangeAvatar}
-            Preview={
-              <AvatarPreview avatar={preview} userName={profile.displayName} />
-            }
+            image={image || avatar}
+            setPreview={props.setPreview || setPreview}
+            onChangeImage={onChangeImage || onChangeAvatar}
+            // Preview={
+            //   <AvatarPreview avatar={preview} userName={profile?.displayName} />
+            // }
+            onChangeFile={onChangeFile}
             maxImageSize={maxImageUploadSize}
           />
         </StyledBodyContent>
@@ -161,7 +185,7 @@ const AvatarEditorDialog = (props) => {
           size="normal"
           scale
           primary={true}
-          onClick={onSaveClick}
+          onClick={onSave || onSaveClick}
           isLoading={isLoading}
         />
         <Button
@@ -170,10 +194,10 @@ const AvatarEditorDialog = (props) => {
           label={t("Common:CancelButton")}
           size="normal"
           scale
-          onClick={onClose}
+          onClick={onCloseModal}
         />
       </ModalDialog.Footer>
-    </ModalDialog>
+    </StyledModalDialog>
   );
 };
 

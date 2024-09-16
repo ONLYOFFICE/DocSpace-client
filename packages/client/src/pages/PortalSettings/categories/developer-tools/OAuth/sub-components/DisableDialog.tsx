@@ -55,15 +55,11 @@ const DisableClientDialog = (props: DisableClientDialogProps) => {
       </ModalDialog.Header>
       <ModalDialog.Body>
         <Text style={{ marginBottom: "16px" }}>
-          <Trans
-            t={t}
-            i18nKey={
-              isGroup
-                ? "DisableApplicationsDescription"
-                : "DisableApplicationDescription"
-            }
-            ns="OAuth"
-          />
+          {isGroup ? (
+            <Trans t={t} i18nKey="DisableApplicationsDescription" ns="OAuth" />
+          ) : (
+            <Trans t={t} i18nKey="DisableApplicationDescription" ns="OAuth" />
+          )}
         </Text>
 
         <Trans t={t} i18nKey="DisableApplicationNote" ns="OAuth" />

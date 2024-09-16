@@ -53,15 +53,11 @@ const DeleteClientDialog = (props: DeleteClientDialogProps) => {
         {isGroup ? t("DeleteApplications") : t("DeleteApplication")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <Trans
-          t={t}
-          i18nKey={
-            isGroup
-              ? "DeleteApplicationsDescription"
-              : "DeleteApplicationDescription"
-          }
-          ns="OAuth"
-        />
+        {isGroup ? (
+          <Trans t={t} i18nKey="DeleteApplicationsDescription" ns="OAuth" />
+        ) : (
+          <Trans t={t} i18nKey="DeleteApplicationDescription" ns="OAuth" />
+        )}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button

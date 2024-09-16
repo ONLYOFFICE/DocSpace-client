@@ -71,7 +71,6 @@ const SelectGroup = ({
           fontSize="13px"
           fontWeight={600}
           lineHeight="20px"
-          title=""
           tag=""
           as="p"
           color=""

@@ -327,6 +327,7 @@ const WhiteLabelComponent = (props) => {
           isVertical={true}
           className="settings_unavailable"
           hasError={isEmpty}
+          labelVisible={true}
         >
           <TextInput
             className="company-name input"

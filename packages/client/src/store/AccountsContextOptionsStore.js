@@ -36,7 +36,7 @@ import InfoOutlineReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url
 import RestoreAuthReactSvgUrl from "PUBLIC_DIR/images/restore.auth.react.svg?url";
 import DisableReactSvgUrl from "PUBLIC_DIR/images/disable.react.svg?url";
 import ProfileReactSvgUrl from "PUBLIC_DIR/images/profile.react.svg?url";
-import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
+import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
 import ChangeToEmployeeReactSvgUrl from "PUBLIC_DIR/images/change.to.employee.react.svg?url";
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";

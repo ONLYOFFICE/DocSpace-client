@@ -28,7 +28,7 @@ import React from "react";
 import styled from "styled-components";
 import { Meta, StoryObj } from "@storybook/react";
 
-import CrossReactSvgUrl from "PUBLIC_DIR/images/cross.react.svg";
+import CrossReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg";
 import EmptyScreenFilterPng from "PUBLIC_DIR/images/empty_screen_filter.png";
 
 import { IconSizeType, commonIconsStyles } from "../../utils";

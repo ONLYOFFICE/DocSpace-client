@@ -348,9 +348,9 @@
       }
     },
     {
-      "label": "Test | frontend-translations",
+      "label": "Test | Jest:common",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/run.translations.tests.py",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -363,9 +363,9 @@
       }
     },
     {
-      "label": "Test | frontend-translations-spellcheck",
+      "label": "Test | Jest:translations",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/run.translations.spellcheck.tests.py",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:locales ; open reports/tests-results.html",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -378,9 +378,24 @@
       }
     },
     {
-      "label": "Test | frontend-translations-spellcheck-force-save",
+      "label": "Test | Jest:images",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/../ ; ${command:python.interpreterPath} buildtools/run.translations.spellcheck.tests.py -f",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:images ; open reports/tests-results.html",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new",
+        "focus": true,
+        "close": false
+      }
+    },
+    {
+      "label": "Test | Jest:colors",
+      "type": "shell",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test:colors ; open reports/tests-results.html",
       "group": {
         "kind": "build",
         "isDefault": true

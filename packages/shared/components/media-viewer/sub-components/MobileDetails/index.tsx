@@ -33,7 +33,7 @@ import {
   TContextMenuRef,
 } from "@docspace/shared/components/context-menu";
 
-import MediaContextMenu from "PUBLIC_DIR/images/vertical-dots.react.svg";
+import MediaContextMenu from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg";
 import BackArrow from "PUBLIC_DIR/images/viewer.media.back.react.svg";
 
 import { StyledMobileDetails } from "../../MediaViewer.styled";

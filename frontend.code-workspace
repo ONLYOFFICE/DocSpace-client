@@ -185,19 +185,24 @@
         "label": "Tests",
         "tasks": [
           {
+            "label": "common",
+            "task": "Test | Jest:common",
+            "tooltip": "🛠️ Start the \"Test | Jest:common\" task",
+          },
+          {
             "label": "translations",
-            "task": "Test | frontend-translations",
-            "tooltip": "🛠️ Start the \"frontend translation tests\" task",
+            "task": "Test | Jest:translations",
+            "tooltip": "🛠️ Start the \"Test | Jest:translations\" task",
           },
           {
-            "label": "spellcheck",
-            "task": "Test | frontend-translations-spellcheck",
-            "tooltip": "🛠️ Start the \"frontend translation spellcheck tests\" task",
+            "label": "images",
+            "task": "Test | Jest:images",
+            "tooltip": "🛠️ Start the \"Test | Jest:images\" task",
           },
           {
-            "label": "spellcheck-force-save",
-            "task": "Test | frontend-translations-spellcheck-force-save",
-            "tooltip": "🛠️ Start the \"frontend translation spellcheck tests\" task",
+            "label": "colors",
+            "task": "Test | Jest:colors",
+            "tooltip": "🛠️ Start the \"Test | Jest:colors\" task",
           },
           {
             "label": "unit",

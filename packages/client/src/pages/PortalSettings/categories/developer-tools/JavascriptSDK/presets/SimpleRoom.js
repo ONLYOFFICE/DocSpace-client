@@ -56,7 +56,7 @@ import { FrameIdSetter } from "../sub-components/FrameIdSetter";
 import { PresetWrapper } from "../sub-components/PresetWrapper";
 import { SharedLinkHint } from "../sub-components/SharedLinkHint";
 import { PreviewBlock } from "../sub-components/PreviewBlock";
-
+import { Integration } from "../sub-components/Integration";
 import { loadFrame } from "../utils";
 
 import {
@@ -379,8 +379,22 @@ const SimpleRoom = (props) => {
               </LabelGroup>
             </CheckboxGroup>
           </ControlsSection>
+
+          <Integration
+            className="integration-examples"
+            t={t}
+            theme={theme}
+            currentColorScheme={currentColorScheme}
+          />
         </Controls>
       </Container>
+
+      <Integration
+        className="integration-examples integration-examples-bottom"
+        t={t}
+        theme={theme}
+        currentColorScheme={currentColorScheme}
+      />
     </PresetWrapper>
   );
 };

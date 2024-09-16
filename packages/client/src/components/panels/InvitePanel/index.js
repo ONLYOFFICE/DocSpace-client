@@ -51,6 +51,7 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { getAccessOptions, getTopFreeRole } from "./utils";
 import AddUsersPanel from "../AddUsersPanel";
+import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
 const InvitePanel = ({
   folders,

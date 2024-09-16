@@ -47,6 +47,8 @@ export type ScrollbarProps = {
   createContext?: boolean;
   /** Set focus on scroll content element after first render */
   autoFocus?: boolean;
+  /** Set scroll body tabindex */
+  tabIndex?: number | null;
 
   onScroll?: React.UIEventHandler<HTMLDivElement>;
   children?: React.ReactNode;

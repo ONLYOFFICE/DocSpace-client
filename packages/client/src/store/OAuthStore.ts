@@ -25,7 +25,7 @@ import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
 import OauthRevokeSvgUrl from "PUBLIC_DIR/images/oauth.revoke.svg?url";
-import GenerateIconUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
+import GenerateIconUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import RevokeIconUrl from "PUBLIC_DIR/images/revoke.react.svg?url";
 import DeleteIconUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 

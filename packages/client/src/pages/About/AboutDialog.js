@@ -24,19 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import PropTypes from "prop-types";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import ModalDialogContainer from "./ModalDialogContainer";
 import { useTranslation } from "react-i18next";
 import AboutContent from "./AboutContent";
+import StyledBodyContent from "./ModalDialogContainer";
 
 const AboutDialog = (props) => {
   const { visible, onClose, buildVersionInfo, previewData } = props;
   const { t, ready } = useTranslation(["About", "Common"]);
 
   return (
-    <ModalDialogContainer
+    <ModalDialog
       isLoading={!ready}
       visible={visible}
       onClose={onClose}
@@ -45,12 +44,14 @@ const AboutDialog = (props) => {
     >
       <ModalDialog.Header>{t("AboutHeader")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <AboutContent
-          buildVersionInfo={buildVersionInfo}
-          previewData={previewData}
-        />
+        <StyledBodyContent>
+          <AboutContent
+            buildVersionInfo={buildVersionInfo}
+            previewData={previewData}
+          />
+        </StyledBodyContent>
       </ModalDialog.Body>
-    </ModalDialogContainer>
+    </ModalDialog>
   );
 };
 

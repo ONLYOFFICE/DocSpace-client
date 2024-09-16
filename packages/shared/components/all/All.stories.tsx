@@ -32,8 +32,8 @@ import React from "react";
 import moment from "moment";
 
 import SettingsReactSvg from "PUBLIC_DIR/images/settings.react.svg";
-import CatalogFolderReactSvg from "PUBLIC_DIR/images/catalog.folder.react.svg";
-import CatalogEmployeeReactSvgUrl from "PUBLIC_DIR/images/catalog.employee.react.svg?url";
+import CatalogFolderReactSvg from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg";
+import CatalogEmployeeReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.employee.react.svg?url";
 import ItemActiveReactSvgUrl from "PUBLIC_DIR/images/item.active.react.svg?url";
 
 import { Avatar, AvatarRole, AvatarSize } from "../avatar";

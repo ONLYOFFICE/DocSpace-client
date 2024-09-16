@@ -185,24 +185,49 @@
         "label": "Tests",
         "tasks": [
           {
+            "label": "common",
+            "task": "Test | Jest:common",
+            "tooltip": "🛠️ Start the \"Test | Jest:common\" task",
+          },
+          {
             "label": "translations",
-            "task": "Test | frontend-translations",
-            "tooltip": "🛠️ Start the \"frontend translation tests\" task",
+            "task": "Test | Jest:translations",
+            "tooltip": "🛠️ Start the \"Test | Jest:translations\" task",
           },
           {
-            "label": "spellcheck",
-            "task": "Test | frontend-translations-spellcheck",
-            "tooltip": "🛠️ Start the \"frontend translation spellcheck tests\" task",
+            "label": "images",
+            "task": "Test | Jest:images",
+            "tooltip": "🛠️ Start the \"Test | Jest:images\" task",
           },
           {
-            "label": "spellcheck-force-save",
-            "task": "Test | frontend-translations-spellcheck-force-save",
-            "tooltip": "🛠️ Start the \"frontend translation spellcheck tests\" task",
+            "label": "colors",
+            "task": "Test | Jest:colors",
+            "tooltip": "🛠️ Start the \"Test | Jest:colors\" task",
           },
           {
             "label": "unit",
             "task": "Test | Jest:unit",
             "tooltip": "🛠️ Start the \"Test | Jest:unit\" task",
+          },
+          {
+            "label": "e2e playwright setup",
+            "task": "Test | e2e playwright setup",
+            "tooltip": "🛠️ Start the \"e2e playwright setup\" task",
+          },
+          {
+            "label": "e2e build",
+            "task": "Test | Test build",
+            "tooltip": "🛠️ Start the \"test build\" task",
+          },
+          {
+            "label": "e2e",
+            "task": "Test | Test e2e",
+            "tooltip": "🛠️ Start the \"frontend e2e tests\" task",
+          },
+          {
+            "label": "e2e model",
+            "task": "Test | Test e2e model",
+            "tooltip": "🛠️ Start the \"frontend e2e tests with generate model\" task",
           },
         ],
         "tooltip": "🛠️ Client tests tasks",

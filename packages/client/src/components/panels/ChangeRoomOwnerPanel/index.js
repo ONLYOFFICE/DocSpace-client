@@ -27,13 +27,14 @@
 import { useState } from "react";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
-import { Aside } from "@docspace/shared/components/aside";
-import { Backdrop } from "@docspace/shared/components/backdrop";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import { withTranslation } from "react-i18next";
 import Filter from "@docspace/shared/api/people/filter";
 import { EmployeeType } from "@docspace/shared/enums";
-import { Portal } from "@docspace/shared/components/portal";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
 
 const StyledChangeRoomOwner = styled.div`
   display: contents;
@@ -70,15 +71,16 @@ const StyledChangeRoomOwner = styled.div`
 const ChangeRoomOwner = (props) => {
   const {
     t,
+    tReady,
     visible,
     setIsVisible,
     showBackButton,
-    setRoomParams,
-    currentDeviceType,
+    onOwnerChange,
     roomOwnerId,
     changeRoomOwner,
     userId,
     updateInfoPanelSelection,
+    useModal = true,
   } = props;
 
   const [isLoading, setIsLoading] = useState(false);
@@ -90,7 +92,7 @@ const ChangeRoomOwner = (props) => {
     isChecked,
   ) => {
     if (showBackButton) {
-      setRoomParams && setRoomParams(user[0]);
+      onOwnerChange && onOwnerChange(user[0]);
     } else {
       setIsLoading(true);
 
@@ -102,6 +104,7 @@ const ChangeRoomOwner = (props) => {
   };
 
   const onClose = () => {
+    if (props.onClose) props.onClose();
     setIsVisible(false);
   };
 
@@ -112,62 +115,65 @@ const ChangeRoomOwner = (props) => {
   const filter = new Filter();
   filter.role = [EmployeeType.Admin, EmployeeType.User];
 
-  const asideComponent = (
-    <StyledChangeRoomOwner showBackButton={showBackButton}>
-      <Backdrop onClick={onClose} visible={visible} zIndex={320} isAside />
-      <Aside
-        currentDeviceType={currentDeviceType}
-        className="header_aside-panel"
-        visible={visible}
-        onClose={onClose}
-        withoutHeader
-        withoutBodyScroll
-      >
-        <PeopleSelector
-          withCancelButton
-          cancelButtonLabel=""
-          onCancel={onClose}
-          onSubmit={onChangeRoomOwner}
-          submitButtonLabel={
-            showBackButton ? t("Common:SelectAction") : t("Files:AssignOwner")
-          }
-          disableSubmitButton={false}
-          withHeader
-          headerProps={{
-            onCloseClick: onClose,
-            onBackClick,
-            withoutBackButton: !showBackButton,
-            headerLabel: t("Files:ChangeTheRoomOwner"),
-          }}
-          filter={filter}
-          isLoading={isLoading}
-          withFooterCheckbox={!showBackButton}
-          footerCheckboxLabel={t("Files:LeaveTheRoom")}
-          isChecked={!showBackButton}
-          withOutCurrentAuthorizedUser
-          filterUserId={roomOwnerId}
-          currentUserId={userId}
-          disableDisabledUsers
-          withInfo
-          infoText={t("CreateEditRoomDialog:PeopleSelectorInfo", {
-            productName: t("Common:ProductName"),
-          })}
-          emptyScreenHeader={t("Common:NotFoundUsers")}
-          emptyScreenDescription={t("CreateEditRoomDialog:PeopleSelectorInfo", {
-            productName: t("Common:ProductName"),
-          })}
-          className="change-owner_people-selector"
-        />
-      </Aside>
-    </StyledChangeRoomOwner>
+  const selectorComponent = (
+    <PeopleSelector
+      withCancelButton
+      cancelButtonLabel=""
+      onCancel={onClose}
+      onSubmit={onChangeRoomOwner}
+      submitButtonLabel={
+        showBackButton ? t("Common:SelectAction") : t("Files:AssignOwner")
+      }
+      disableSubmitButton={false}
+      withHeader
+      headerProps={{
+        onCloseClick: onClose,
+        onBackClick,
+        withoutBackButton: !showBackButton,
+        headerLabel: t("Files:ChangeTheRoomOwner"),
+      }}
+      filter={filter}
+      isLoading={isLoading}
+      withFooterCheckbox={!showBackButton}
+      footerCheckboxLabel={t("Files:LeaveTheRoom")}
+      isChecked={!showBackButton}
+      withOutCurrentAuthorizedUser
+      filterUserId={roomOwnerId}
+      currentUserId={userId}
+      disableDisabledUsers
+      withInfo
+      infoText={t("CreateEditRoomDialog:PeopleSelectorInfo", {
+        productName: t("Common:ProductName"),
+      })}
+      emptyScreenHeader={t("Common:NotFoundUsers")}
+      emptyScreenDescription={t("CreateEditRoomDialog:PeopleSelectorInfo", {
+        productName: t("Common:ProductName"),
+      })}
+      className="change-owner_people-selector"
+    />
   );
 
-  return <Portal visible={visible} element={asideComponent} />;
+  return useModal ? (
+    <ModalDialog
+      isLoading={!tReady}
+      visible={visible}
+      onClose={onClose}
+      displayType={ModalDialogType.aside}
+      withoutPadding
+    >
+      <ModalDialog.Body>
+        <StyledChangeRoomOwner showBackButton={showBackButton}>
+          {selectorComponent}
+        </StyledChangeRoomOwner>
+      </ModalDialog.Body>
+    </ModalDialog>
+  ) : (
+    selectorComponent
+  );
 };
 
 export default inject(
   ({
-    settingsStore,
     dialogsStore,
     filesStore,
     selectedFolderStore,
@@ -175,13 +181,9 @@ export default inject(
     userStore,
     infoPanelStore,
   }) => {
-    const {
-      changeRoomOwnerIsVisible,
-      setChangeRoomOwnerIsVisible,
-      changeRoomOwnerData,
-    } = dialogsStore;
+    const { changeRoomOwnerIsVisible, setChangeRoomOwnerIsVisible } =
+      dialogsStore;
     const { selection, bufferSelection } = filesStore;
-    const { currentDeviceType } = settingsStore;
     const { updateInfoPanelSelection } = infoPanelStore;
 
     const room = selection.length
@@ -195,10 +197,7 @@ export default inject(
     return {
       visible: changeRoomOwnerIsVisible,
       setIsVisible: setChangeRoomOwnerIsVisible,
-      showBackButton: changeRoomOwnerData.showBackButton,
-      setRoomParams: changeRoomOwnerData.setRoomParams,
       roomOwnerId: room?.createdBy?.id,
-      currentDeviceType,
       changeRoomOwner: filesActionsStore.changeRoomOwner,
       userId: id,
       updateInfoPanelSelection,

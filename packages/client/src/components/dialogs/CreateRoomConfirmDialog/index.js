@@ -93,4 +93,4 @@ export default inject(({ dialogsStore, createEditRoomStore }) => {
     confirmDialogIsLoading,
     onCreateRoom,
   };
-})(withTranslation(["Common, Files"])(observer(CreateRoomConfirmDialog)));
+})(withTranslation(["Common", "Files"])(observer(CreateRoomConfirmDialog)));

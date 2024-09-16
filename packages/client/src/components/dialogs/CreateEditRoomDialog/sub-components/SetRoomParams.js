@@ -93,11 +93,10 @@ const SetRoomParams = ({
   onKeyUp,
   enableThirdParty,
   isDefaultRoomsQuotaSet,
-  currentColorScheme,
-  setChangeRoomOwnerIsVisible,
   folderFormValidation,
   disabledChangeRoomType,
   maxImageUploadSize,
+  onOwnerChange,
 }) => {
   const [previewIcon, setPreviewIcon] = useState(null);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
@@ -134,12 +133,6 @@ const SetRoomParams = ({
       setDisableImageRescaling(!icon.uploadedFile);
 
     setRoomParams({ ...roomParams, icon: icon, iconWasUpdated: true });
-  };
-
-  const onOwnerChange = () => {
-    setChangeRoomOwnerIsVisible(true, true, (roomOwner) =>
-      setRoomParams({ ...roomParams, roomOwner }),
-    );
   };
 
   const onCreateFolderChange = () => {
@@ -280,16 +273,14 @@ const SetRoomParams = ({
   );
 };
 
-export default inject(({ settingsStore, dialogsStore, currentQuotaStore }) => {
+export default inject(({ settingsStore, currentQuotaStore }) => {
   const { isDefaultRoomsQuotaSet } = currentQuotaStore;
 
-  const { setChangeRoomOwnerIsVisible } = dialogsStore;
   const { folderFormValidation, maxImageUploadSize } = settingsStore;
 
   return {
     isDefaultRoomsQuotaSet,
     folderFormValidation,
-    setChangeRoomOwnerIsVisible,
     maxImageUploadSize,
   };
 })(

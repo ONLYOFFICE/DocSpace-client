@@ -249,6 +249,6 @@ const NavMenuWrapper = inject(({ authStore, settingsStore }) => {
     isFrame,
     currentDeviceType,
   };
-})(observer(withTranslation(["NavMenu", "Common"])(NavMenu)));
+})(observer(withTranslation(["Common"])(NavMenu)));
 
 export default ({ ...props }) => <NavMenuWrapper {...props} />;

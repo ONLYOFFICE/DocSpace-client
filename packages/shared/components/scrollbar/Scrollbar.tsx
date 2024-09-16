@@ -45,6 +45,7 @@ const ScrollbarComponent = React.forwardRef<Scrollbar, ScrollbarProps>(
       fixedSize = false,
       className,
       autoFocus,
+      tabIndex = -1,
       ...rest
     } = props;
 
@@ -127,6 +128,7 @@ const ScrollbarComponent = React.forwardRef<Scrollbar, ScrollbarProps>(
 
     const autoHideContentProps =
       autoHide && !isTouchDevice ? { onMouseMove: showTracks } : {};
+    const tabIndexProp = tabIndex !== null ? { tabIndex } : {};
 
     return (
       <StyledScrollbar
@@ -140,7 +142,7 @@ const ScrollbarComponent = React.forwardRef<Scrollbar, ScrollbarProps>(
         scrollerProps={{ renderer: renderScroller }}
         contentProps={{
           className: "scroll-body",
-          tabIndex: -1,
+          ...tabIndexProp,
           ...autoHideContentProps,
         }}
         thumbYProps={{ className: "thumb thumb-vertical" }}

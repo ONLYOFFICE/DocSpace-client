@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import { useState } from "react";
+import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
@@ -34,14 +35,18 @@ import { TextInput } from "@docspace/shared/components/text-input";
 import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 
-import { ChangeNameContainer } from "./StyledChangeName";
+const StyledBodyContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .field {
+    margin: 0 !important;
+  }
+`;
 
 const ChangeNameDialog = (props) => {
-  const { t, ready } = useTranslation([
-    "ProfileAction",
-    "PeopleTranslations",
-    "Common",
-  ]);
+  const { t, ready } = useTranslation(["PeopleTranslations", "Common"]);
   const {
     visible,
     onClose,
@@ -107,7 +112,7 @@ const ChangeNameDialog = (props) => {
   };
 
   return (
-    <ChangeNameContainer
+    <ModalDialog
       isLoading={!ready}
       visible={visible}
       onClose={onCloseAction}
@@ -116,55 +121,57 @@ const ChangeNameDialog = (props) => {
       <ModalDialog.Header>
         {t("PeopleTranslations:NameChangeButton")}
       </ModalDialog.Header>
-      <ModalDialog.Body className="change-name-dialog-body">
-        <FieldContainer
-          isVertical
-          labelText={t("Common:FirstName")}
-          className="field"
-          hasError={!isNameValid}
-          errorMessage={
-            firstName.trim().length === 0
-              ? t("Common:RequiredField")
-              : t("Common:IncorrectFirstName")
-          }
-        >
-          <TextInput
-            className="first-name"
-            scale={true}
-            isAutoFocussed={true}
-            value={firstName}
-            onChange={handleNameChange}
-            placeholder={t("Common:FirstName")}
-            isDisabled={isSaving}
-            onKeyDown={onKeyDown}
-            tabIndex={1}
+      <ModalDialog.Body>
+        <StyledBodyContent>
+          <FieldContainer
+            isVertical
+            labelText={t("Common:FirstName")}
+            className="field"
             hasError={!isNameValid}
-          />
-        </FieldContainer>
+            errorMessage={
+              firstName.trim().length === 0
+                ? t("Common:RequiredField")
+                : t("Common:IncorrectFirstName")
+            }
+          >
+            <TextInput
+              className="first-name"
+              scale={true}
+              isAutoFocussed={true}
+              value={firstName}
+              onChange={handleNameChange}
+              placeholder={t("Common:FirstName")}
+              isDisabled={isSaving}
+              onKeyDown={onKeyDown}
+              tabIndex={1}
+              hasError={!isNameValid}
+            />
+          </FieldContainer>
 
-        <FieldContainer
-          isVertical
-          labelText={t("Common:LastName")}
-          className="field"
-          hasError={!isSurnameValid}
-          errorMessage={
-            lastName.trim().length === 0
-              ? t("Common:RequiredField")
-              : t("Common:IncorrectLastName")
-          }
-        >
-          <TextInput
-            className="last-name"
-            scale={true}
-            value={lastName}
-            onChange={handleSurnameChange}
-            placeholder={t("Common:LastName")}
-            isDisabled={isSaving}
-            onKeyDown={onKeyDown}
-            tabIndex={2}
+          <FieldContainer
+            isVertical
+            labelText={t("Common:LastName")}
+            className="field"
             hasError={!isSurnameValid}
-          />
-        </FieldContainer>
+            errorMessage={
+              lastName.trim().length === 0
+                ? t("Common:RequiredField")
+                : t("Common:IncorrectLastName")
+            }
+          >
+            <TextInput
+              className="last-name"
+              scale={true}
+              value={lastName}
+              onChange={handleSurnameChange}
+              placeholder={t("Common:LastName")}
+              isDisabled={isSaving}
+              onKeyDown={onKeyDown}
+              tabIndex={2}
+              hasError={!isSurnameValid}
+            />
+          </FieldContainer>
+        </StyledBodyContent>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -195,7 +202,7 @@ const ChangeNameDialog = (props) => {
           tabIndex={4}
         />
       </ModalDialog.Footer>
-    </ChangeNameContainer>
+    </ModalDialog>
   );
 };
 

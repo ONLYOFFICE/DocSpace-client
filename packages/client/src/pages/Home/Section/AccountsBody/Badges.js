@@ -35,8 +35,8 @@ import { globalColors } from "@docspace/shared/themes";
 import { Badge } from "@docspace/shared/components/badge";
 import { commonIconsStyles } from "@docspace/shared/utils";
 
-import SendClockIcon from "PUBLIC_DIR/images/send.clock.react.svg";
-import CatalogSpamIcon from "PUBLIC_DIR/images/catalog.spam.react.svg";
+import CatalogSpamIcon from "PUBLIC_DIR/images/icons/16/catalog.spam.react.svg";
+import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 
 const StyledBadgesContainer = styled.div`
   height: 100%;
@@ -58,12 +58,6 @@ const StyledPaidBadge = styled(Badge)`
   margin-inline-end: 8px;
 `;
 
-const StyledSendClockIcon = styled(SendClockIcon)`
-  ${commonIconsStyles}
-  path {
-    fill: ${(props) => props.theme.accountsBadges.pendingColor};
-  }
-`;
 const StyledCatalogSpamIcon = styled(CatalogSpamIcon)`
   ${commonIconsStyles}
   path {

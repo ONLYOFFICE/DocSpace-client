@@ -106,6 +106,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       role,
       isSelected,
       isDisabled,
+      status,
       color,
       email,
       isGroup,
@@ -226,7 +227,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           />
         ) : null}
         {renderCustomItem ? (
-          renderCustomItem(label, typeLabel, email, isGroup)
+          renderCustomItem(label, typeLabel, email, isGroup, status)
         ) : (
           <div className="selector-item_name">
             <Text

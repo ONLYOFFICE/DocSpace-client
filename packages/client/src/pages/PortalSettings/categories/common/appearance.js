@@ -45,7 +45,7 @@ import Loader from "./sub-components/loaderAppearance";
 import {
   StyledComponent,
   StyledTheme,
-  StyledModalDialog,
+  StyledBodyContent,
 } from "./Appearance/StyledApperance.js";
 import { ReactSVG } from "react-svg";
 import ModalDialogDelete from "./sub-components/modalDialogDelete";
@@ -606,23 +606,26 @@ const Appearance = (props) => {
   };
 
   const nodeHexColorPickerButtons = isMobile() ? (
-    <StyledModalDialog
+    <ModalDialog
       visible={openHexColorPickerButtons}
       onClose={onCloseHexColorPickerButtons}
       blur={8}
+      autoMaxHeight
     >
       <ModalDialog.Body>
-        <ColorPicker
-          id="buttons-hex"
-          onClose={onCloseHexColorPickerButtons}
-          onApply={onAppliedColorButtons}
-          appliedColor={appliedColorButtons}
-          applyButtonLabel={t("Common:ApplyButton")}
-          cancelButtonLabel={t("Common:CancelButton")}
-          hexCodeLabel={t("Settings:HexCode")}
-        />
+        <StyledBodyContent>
+          <ColorPicker
+            id="buttons-hex"
+            onClose={onCloseHexColorPickerButtons}
+            onApply={onAppliedColorButtons}
+            appliedColor={appliedColorButtons}
+            applyButtonLabel={t("Common:ApplyButton")}
+            cancelButtonLabel={t("Common:CancelButton")}
+            hexCodeLabel={t("Settings:HexCode")}
+          />
+        </StyledBodyContent>
       </ModalDialog.Body>
-    </StyledModalDialog>
+    </ModalDialog>
   ) : (
     <DropDown
       directionX="right"
@@ -647,22 +650,25 @@ const Appearance = (props) => {
   );
 
   const nodeHexColorPickerAccent = isMobile() ? (
-    <StyledModalDialog
+    <ModalDialog
       visible={openHexColorPickerAccent}
       onClose={onCloseHexColorPickerAccent}
       blur={8}
+      autoMaxHeight
     >
       <ModalDialog.Body>
-        <ColorPicker
-          id="accent-hex"
-          onClose={onCloseHexColorPickerAccent}
-          onApply={onAppliedColorAccent}
-          appliedColor={appliedColorAccent}
-          applyButtonLabel={t("Common:ApplyButton")}
-          cancelButtonLabel={t("Common:CancelButton")}
-        />
+        <StyledBodyContent>
+          <ColorPicker
+            id="accent-hex"
+            onClose={onCloseHexColorPickerAccent}
+            onApply={onAppliedColorAccent}
+            appliedColor={appliedColorAccent}
+            applyButtonLabel={t("Common:ApplyButton")}
+            cancelButtonLabel={t("Common:CancelButton")}
+          />
+        </StyledBodyContent>
       </ModalDialog.Body>
-    </StyledModalDialog>
+    </ModalDialog>
   ) : (
     <DropDown
       directionX="right"

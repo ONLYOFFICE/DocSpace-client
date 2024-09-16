@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { RoomsType, ShareAccessRights } from "../../enums";
+import { EmployeeStatus, RoomsType, ShareAccessRights } from "../../enums";
 import { MergeTypes, Nullable } from "../../types";
 
 import { TFileSecurity, TFolderSecurity } from "../../api/files/types";
@@ -101,6 +101,7 @@ export type TBreadCrumb = {
   isRoom?: boolean;
   minWidth?: string;
   roomType?: RoomsType;
+  shared?: Boolean;
   onClick?: TOnBreadCrumbClick;
 };
 
@@ -307,6 +308,7 @@ export type TRenderCustomItem = (
   role?: string,
   email?: string,
   isGroup?: boolean,
+  status?: EmployeeStatus,
 ) => React.ReactNode | null;
 
 export type SelectorProps = TSelectorHeader &
@@ -403,6 +405,7 @@ type TSelectorItemEmpty = {
   isVisitor?: undefined;
   isCollaborator?: undefined;
   isRoomAdmin?: undefined;
+  status?: undefined;
   access?: undefined;
   fileExst?: undefined;
   shared?: undefined;
@@ -443,7 +446,7 @@ export type TSelectorItemUser = MergeTypes<
     hasAvatar: boolean;
     role: AvatarRole;
     groups?: TGroup[];
-
+    status: EmployeeStatus;
     access?: ShareAccessRights | string | number;
   }
 >;

@@ -40,7 +40,7 @@ import { TUser } from "@docspace/shared/api/people/types";
 import PeopleStore from "SRC_DIR/store/PeopleStore";
 import GroupsStore from "SRC_DIR/store/GroupsStore";
 
-import { StyledModal } from "./CreateEditGroupDialog.styled";
+import { StyledBodyContent } from "./CreateEditGroupDialog.styled";
 import { GroupParams } from "./types";
 import GroupNameParam from "./sub-components/GroupNameParam";
 import HeadOfGroup from "./sub-components/HeadOfGroupParam";
@@ -149,7 +149,7 @@ const CreateGroupDialog = ({
 
   return (
     <>
-      <StyledModal
+      <ModalDialog
         displayType={ModalDialogType.aside}
         withBodyScroll
         visible={visible}
@@ -163,21 +163,23 @@ const CreateGroupDialog = ({
         </ModalDialog.Header>
 
         <ModalDialog.Body>
-          <GroupNameParam
-            groupName={groupParams.groupName}
-            onChangeGroupName={onChangeGroupName}
-          />
-          <HeadOfGroup
-            groupManager={groupParams.groupManager}
-            removeManager={removeManager}
-            onShowSelectGroupManagerPanel={onShowSelectGroupManagerPanel}
-          />
-          <MembersParam
-            groupManager={groupParams.groupManager}
-            groupMembers={groupParams.groupMembers}
-            removeMember={removeMember}
-            onShowSelectMembersPanel={onShowSelectMembersPanel}
-          />
+          <StyledBodyContent>
+            <GroupNameParam
+              groupName={groupParams.groupName}
+              onChangeGroupName={onChangeGroupName}
+            />
+            <HeadOfGroup
+              groupManager={groupParams.groupManager}
+              removeManager={removeManager}
+              onShowSelectGroupManagerPanel={onShowSelectGroupManagerPanel}
+            />
+            <MembersParam
+              groupManager={groupParams.groupManager}
+              groupMembers={groupParams.groupMembers}
+              removeMember={removeMember}
+              onShowSelectMembersPanel={onShowSelectMembersPanel}
+            />
+          </StyledBodyContent>
         </ModalDialog.Body>
 
         <ModalDialog.Footer>
@@ -205,7 +207,7 @@ const CreateGroupDialog = ({
             onClick={onClose}
           />
         </ModalDialog.Footer>
-      </StyledModal>
+      </ModalDialog>
 
       {selectGroupMangerPanelIsVisible && (
         <SelectGroupManagerPanel

@@ -39,7 +39,6 @@ const StyledContainer = styled.div`
   width: 800px;
   overflow: hidden;
   background-color: ${(props) => props.theme.sdkPresets.previewBackgroundColor};
-  margin-bottom: 16px;
 `;
 
 StyledContainer.defaultProps = { theme: Base };

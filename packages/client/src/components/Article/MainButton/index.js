@@ -32,7 +32,7 @@ import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url
 import ActionsDocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
 import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
 import ActionsPresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.react.svg?url";
-import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
+import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import PersonAdminReactSvgUrl from "PUBLIC_DIR/images/person.admin.react.svg?url";
 import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg?url";
 import PersonReactSvgUrl from "PUBLIC_DIR/images/person.react.svg?url";

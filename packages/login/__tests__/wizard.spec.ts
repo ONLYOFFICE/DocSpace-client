@@ -51,7 +51,7 @@ test("wizard render", async ({ page, mockRequest }) => {
 
 test("wizard success", async ({ page, mockRequest }) => {
   await mockRequest.setHeaders(NEXT_REQUEST_URL, [HEADER_WIZARD_SETTINGS]);
-  await mockRequest.router(endpoints.wizardComplete);
+  await mockRequest.router([endpoints.wizardComplete]);
 
   await page.goto(URL);
 
@@ -80,7 +80,7 @@ test("wizard success", async ({ page, mockRequest }) => {
 
 test("wizard error", async ({ page, mockRequest }) => {
   await mockRequest.setHeaders(NEXT_REQUEST_URL, [HEADER_WIZARD_SETTINGS]);
-  await mockRequest.router(endpoints.wizardComplete);
+  await mockRequest.router([endpoints.wizardComplete]);
 
   await page.goto(URL);
 
@@ -104,8 +104,7 @@ test("wizard with license success", async ({ page, mockRequest }) => {
     HEADER_WIZARD_SETTINGS,
     HEADER_LICENCE_REQUIRED,
   ]);
-  await mockRequest.router(endpoints.wizardComplete);
-  await mockRequest.router(endpoints.license);
+  await mockRequest.router([endpoints.wizardComplete, endpoints.license]);
 
   await page.goto(URL);
 

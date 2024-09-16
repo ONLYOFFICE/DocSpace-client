@@ -34,28 +34,6 @@ import TagHandler from "./handlers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 import RoomTypeList from "./sub-components/RoomTypeList";
 
-const StyledModalDialog = styled(ModalDialog)`
-  .header-with-button {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    gap: 12px;
-  }
-
-  .sharing_panel-arrow svg {
-    ${({ theme }) =>
-      theme.interfaceDirection === "rtl" && `transform: scaleX(-1);`}
-  }
-
-  ${(props) =>
-    props.isOauthWindowOpen &&
-    css`
-      #modal-dialog {
-        display: none;
-      }
-    `}
-`;
-
 const CreateRoomDialog = ({
   t,
   visible,
@@ -165,14 +143,14 @@ const CreateRoomDialog = ({
     : t("Files:CreateRoom");
 
   return (
-    <StyledModalDialog
+    <ModalDialog
       displayType="aside"
       withBodyScroll
       visible={visible}
       onClose={onCloseAndDisconnectThirdparty}
       isScrollLocked={isScrollLocked}
       withFooterBorder
-      isOauthWindowOpen={isOauthWindowOpen}
+      hideContent={isOauthWindowOpen}
       isBackButton={roomParams.type}
       onBackClick={goBack}
     >
@@ -226,7 +204,7 @@ const CreateRoomDialog = ({
           />
         </ModalDialog.Footer>
       )}
-    </StyledModalDialog>
+    </ModalDialog>
   );
 };
 

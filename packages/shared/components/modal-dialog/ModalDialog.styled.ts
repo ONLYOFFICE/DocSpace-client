@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { isMobile } from "react-device-detect";
 
 import { Base } from "../../themes";
 import { mobile, tablet } from "../../utils";
@@ -75,6 +74,7 @@ const Content = styled.div.attrs((props: { modalSwipeOffset?: number }) => ({
   isLarge?: boolean;
   visible?: boolean;
   embedded?: boolean;
+  isHuge?: boolean;
 }>`
   box-sizing: border-box;
   position: relative;
@@ -101,6 +101,8 @@ const Content = styled.div.attrs((props: { modalSwipeOffset?: number }) => ({
             : props.isLarge
               ? "520px"
               : "400px"};
+
+          max-width: ${props.isHuge ? "730px" : "unset"};
 
           border-radius: 6px;
           @media ${mobile} {
@@ -150,6 +152,7 @@ const StyledBody = styled(Box)<{
   hasFooter?: boolean;
   isScrollLocked?: boolean;
   withBodyScroll?: boolean;
+  withoutPadding?: boolean;
 }>`
   position: relative;
   padding: 0 16px;
@@ -179,6 +182,12 @@ const StyledBody = styled(Box)<{
       height: 100%;
       min-height: auto;
     `}
+
+  ${(props) =>
+    props.withoutPadding &&
+    css`
+      padding: 0;
+    `};
 `;
 
 const StyledFooter = styled.div<{

@@ -26,14 +26,8 @@
 
 import styled from "styled-components";
 
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-
-export const ModalDialogContainer = styled(ModalDialog)`
-  #modal-dialog {
-    width: auto;
-    max-width: 520px;
-    max-height: 560px;
-  }
+export const StyledBodyContent = styled.div`
+  display: contents;
 
   .report-description {
     margin-bottom: 16px;

@@ -196,7 +196,7 @@ export async function createFile(
         error: { status: 401, message: "", type: "", stack: "" },
       };
 
-    if (!fileRes.ok) return;
+    if (!fileRes.ok && fileRes.status !== 403) return;
 
     const file = await fileRes.json();
     console.log("File create success ", file);

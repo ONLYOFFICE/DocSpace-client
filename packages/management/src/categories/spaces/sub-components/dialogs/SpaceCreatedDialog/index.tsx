@@ -25,8 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import ModalDialogContainer from "@docspace/client/src/components/dialogs/ModalDialogContainer";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 
@@ -54,11 +56,11 @@ const SpaceCreatedDialog = () => {
   const { t } = useTranslation(["Management", "Common"]);
 
   return (
-    <ModalDialogContainer
+    <ModalDialog
       visible={visible}
       isLarge
       onClose={onClose}
-      displayType="modal"
+      displayType={ModalDialogType.modal}
     >
       <ModalDialog.Header>{t("SpaceCreated")}</ModalDialog.Header>
       <ModalDialog.Body>
@@ -79,7 +81,7 @@ const SpaceCreatedDialog = () => {
           onClick={onClose}
         />
       </ModalDialog.Footer>
-    </ModalDialogContainer>
+    </ModalDialog>
   );
 };
 

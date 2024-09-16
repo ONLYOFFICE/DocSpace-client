@@ -29,7 +29,7 @@ import { isTablet as isTabletDevice } from "react-device-detect";
 import FileActionsLockedReactSvgUrl from "PUBLIC_DIR/images/file.actions.locked.react.svg?url";
 import FileActionsDownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
-import LockedReactSvgUrl from "PUBLIC_DIR/images/locked.react.svg?url";
+import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
 import FileActionsFavoriteReactSvgUrl from "PUBLIC_DIR/images/file.actions.favorite.react.svg?url";
 import FavoriteReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
 import LockedReact12SvgUrl from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
@@ -37,7 +37,12 @@ import LockedReact12SvgUrl from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
 import React, { useMemo } from "react";
 import styled from "styled-components";
 
-import { isTablet, isMobile, commonIconsStyles } from "@docspace/shared/utils";
+import {
+  isTablet,
+  isMobile,
+  commonIconsStyles,
+  classNames,
+} from "@docspace/shared/utils";
 import {
   DeviceType,
   FileStatus,
@@ -183,7 +188,9 @@ const QuickButtons = (props) => {
         <ColorTheme
           themeId={ThemeId.IconButton}
           iconName={LinkReactSvgUrl}
-          className="badge copy-link icons-group"
+          className={classNames("badge copy-link icons-group", {
+            ["create-share-link"]: !item.shared,
+          })}
           size={sizeQuickButton}
           onClick={onClickShare}
           color={colorShare}

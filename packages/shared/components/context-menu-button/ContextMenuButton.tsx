@@ -29,7 +29,7 @@ import { DebouncedFunc } from "lodash";
 import throttle from "lodash/throttle";
 import { isTablet as Tablet } from "react-device-detect";
 
-import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/vertical-dots.react.svg?url";
+import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
 
 import { desktop, isTablet, isMobile } from "../../utils";
 

@@ -73,8 +73,7 @@ test("password change render", async ({ page }) => {
 });
 
 test("password change success", async ({ page, mockRequest }) => {
-  await mockRequest.router(endpoints.changePassword);
-  await mockRequest.router(endpoints.login);
+  await mockRequest.router([endpoints.changePassword, endpoints.login]);
   await page.goto(URL_WITH_PARAMS);
 
   await page.getByTestId("text-input").fill("qwerty123");

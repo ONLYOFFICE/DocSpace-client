@@ -25,33 +25,39 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useState } from "react";
-import { toastr } from "@docspace/shared/components/toast";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Button } from "@docspace/shared/components/button";
-
-import { withTranslation } from "react-i18next";
-
-import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
+
+import { toastr } from "@docspace/shared/components/toast";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+
+// import { inject, observer } from "mobx-react";
+
 import FilesFilter from "@docspace/shared/api/files/filter";
 
-const DeleteThirdPartyDialog = (props) => {
-  const {
-    t,
-    tReady,
-    visible,
-    providers,
-    removeItem,
+import type { DeleteThirdPartyDialogProps } from "./DeleteThirdPartyDialog.types";
 
-    currentFolderId,
-
-    deleteThirdParty,
-    setThirdPartyProviders,
-    setDeleteThirdPartyDialogVisible,
-    isConnectionViaBackupModule,
-    updateInfo,
-    setConnectedThirdPartyAccount,
-  } = props;
+const DeleteThirdPartyDialog = ({
+  visible,
+  providers,
+  removeItem,
+  currentFolderId,
+  deleteThirdParty,
+  setThirdPartyProviders,
+  setDeleteThirdPartyDialogVisible,
+  isConnectionViaBackupModule,
+  updateInfo,
+  setConnectedThirdPartyAccount,
+}: DeleteThirdPartyDialogProps) => {
+  const { t, ready } = useTranslation([
+    "DeleteThirdPartyDialog",
+    "Common",
+    "Translations",
+  ]);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -68,7 +74,7 @@ const DeleteThirdPartyDialog = (props) => {
         .catch((err) => toastr.error(err))
         .finally(() => {
           setConnectedThirdPartyAccount(null);
-          updateInfo && updateInfo();
+          updateInfo?.();
           setIsLoading(false);
           onClose();
         });
@@ -86,7 +92,7 @@ const DeleteThirdPartyDialog = (props) => {
         if (currentFolderId) {
           const filter = FilesFilter.getDefault();
 
-          filter.folder = currentFolderId;
+          filter.folder = currentFolderId.toString();
 
           navigate(`${location.pathname}?${filter.toUrlParams()}`);
         } else {
@@ -95,7 +101,7 @@ const DeleteThirdPartyDialog = (props) => {
           );
         }
       })
-      .catch((err) => toastr.error(err))
+      .catch((err: Error) => toastr.error(err))
       .finally(() => {
         onClose();
         setIsLoading(false);
@@ -104,10 +110,11 @@ const DeleteThirdPartyDialog = (props) => {
 
   return (
     <ModalDialog
-      isLoading={!tReady}
-      visible={visible}
       zIndex={310}
       onClose={onClose}
+      visible={visible}
+      isLoading={!ready}
+      displayType={ModalDialogType.modal}
     >
       <ModalDialog.Header>{t("DisconnectCloudTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
@@ -118,67 +125,69 @@ const DeleteThirdPartyDialog = (props) => {
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
-          isLoading={isLoading}
-          label={t("Common:OKButton")}
-          size="normal"
-          primary
           scale
+          primary
+          isLoading={isLoading}
+          size={ButtonSize.normal}
+          label={t("Common:OKButton")}
           onClick={onDeleteThirdParty}
         />
         <Button
-          isLoading={isLoading}
-          label={t("Common:CancelButton")}
-          size="normal"
           scale
           onClick={onClose}
+          isLoading={isLoading}
+          size={ButtonSize.normal}
+          label={t("Common:CancelButton")}
         />
       </ModalDialog.Footer>
     </ModalDialog>
   );
 };
 
-export default inject(
-  ({
-    filesStore,
-    filesSettingsStore,
-    dialogsStore,
-    selectedFolderStore,
-    backup,
-  }) => {
-    const { providers, setThirdPartyProviders, deleteThirdParty } =
-      filesSettingsStore.thirdPartyStore;
-    const { setIsLoading } = filesStore;
-    const {
-      selectedThirdPartyAccount: backupConnectionItem,
-      setConnectedThirdPartyAccount,
-    } = backup;
-    const {
-      deleteThirdPartyDialogVisible: visible,
-      setDeleteThirdPartyDialogVisible,
-      removeItem: storeItem,
-    } = dialogsStore;
+export default DeleteThirdPartyDialog;
 
-    const removeItem = backupConnectionItem ?? storeItem;
+// export default inject(
+//   ({
+//     filesStore,
+//     filesSettingsStore,
+//     dialogsStore,
+//     selectedFolderStore,
+//     backup,
+//   }) => {
+//     const { providers, setThirdPartyProviders, deleteThirdParty } =
+//       filesSettingsStore.thirdPartyStore;
+//     const { setIsLoading } = filesStore;
+//     const {
+//       selectedThirdPartyAccount: backupConnectionItem,
+//       setConnectedThirdPartyAccount,
+//     } = backup;
+//     const {
+//       deleteThirdPartyDialogVisible: visible,
+//       setDeleteThirdPartyDialogVisible,
+//       removeItem: storeItem,
+//     } = dialogsStore;
 
-    const { id } = selectedFolderStore;
+//     const removeItem = backupConnectionItem ?? storeItem;
 
-    return {
-      currentFolderId: id,
+//     const { id } = selectedFolderStore;
 
-      setIsLoadingStore: setIsLoading,
+//     return {
+//       currentFolderId: id,
 
-      providers,
-      visible,
-      removeItem,
+//       setIsLoadingStore: setIsLoading,
 
-      setThirdPartyProviders,
-      deleteThirdParty,
-      setDeleteThirdPartyDialogVisible,
-      setConnectedThirdPartyAccount,
-    };
-  },
-)(
-  withTranslation(["DeleteThirdPartyDialog", "Common", "Translations"])(
-    observer(DeleteThirdPartyDialog),
-  ),
-);
+//       providers,
+//       visible,
+//       removeItem,
+
+//       setThirdPartyProviders,
+//       deleteThirdParty,
+//       setDeleteThirdPartyDialogVisible,
+//       setConnectedThirdPartyAccount,
+//     };
+//   },
+// )(
+//   withTranslation(["DeleteThirdPartyDialog", "Common", "Translations"])(
+//     observer(DeleteThirdPartyDialog),
+//   ),
+// );

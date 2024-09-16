@@ -46,10 +46,11 @@ export const GreetingContainer = styled.div`
   }
 
   .tooltip {
-  margin-bottom: 40px;
+  margin-bottom: 32px;
 
     p {
       text-align: center;
+      line-height: 22px;
     }
 
     @media ${mobile} {

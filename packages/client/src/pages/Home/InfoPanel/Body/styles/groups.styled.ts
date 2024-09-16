@@ -90,5 +90,9 @@ export const GroupsContent = styled.div<{}>`
         line-height: 16px;
       }
     }
+
+    .context-btn-wrapper:empty {
+      display: none;
+    }
   }
 `;

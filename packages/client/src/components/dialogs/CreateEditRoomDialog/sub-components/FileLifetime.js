@@ -105,10 +105,11 @@ const FileLifetime = ({ t, roomParams, setRoomParams }) => {
   }, [roomParams.lifetime]);
 
   const onChange = (e) => {
-    // /^(?:[1-9][0-9]*|0)$/
     if (e.target.value && !/^(?:[1-9][0-9]*)$/.test(e.target.value)) return;
 
     setInputValue(e.target.value);
+
+    if (!e.target.value) return;
 
     setRoomParams({
       ...roomParams,

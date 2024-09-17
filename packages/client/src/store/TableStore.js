@@ -69,7 +69,7 @@ class TableStore {
   createdColumnIsEnabled = false;
   modifiedColumnIsEnabled = true;
   sizeColumnIsEnabled = true;
-  indexColumnIsEnabled = true;
+  indexColumnIsEnabled = true; // always true
   typeColumnIsEnabled = true;
   typeColumnIsEnabled = false;
   quickButtonsColumnIsEnabled = true;
@@ -168,10 +168,6 @@ class TableStore {
 
   setSizeColumn = (enable) => {
     this.sizeColumnIsEnabled = enable;
-  };
-
-  setIndexColumn = (enable) => {
-    this.indexColumnIsEnabled = enable;
   };
 
   setSizeRecentColumn = (enable) => {
@@ -296,7 +292,6 @@ class TableStore {
       this.setAuthorColumn(splitColumns.includes("Author"));
       this.setCreatedColumn(splitColumns.includes("Created"));
       this.setSizeColumn(splitColumns.includes("Size"));
-      this.setIndexColumn(splitColumns.includes("Index"));
       this.setTypeColumn(splitColumns.includes("Type"));
       this.setLastOpenedColumn(splitColumns.includes("LastOpened"));
       this.setQuickButtonsColumn(splitColumns.includes("QuickButtons"));
@@ -356,10 +351,6 @@ class TableStore {
 
       case "Erasure":
         this.setErasureColumn(!this.erasureColumnIsEnabled);
-        return;
-
-      case "Index":
-        this.setIndexColumn(!this.indexColumnIsEnabled);
         return;
 
       case "Size":

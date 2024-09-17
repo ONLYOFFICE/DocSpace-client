@@ -157,6 +157,7 @@ const EditRoomEvent = ({
     const isOwnerChanged = roomParams?.roomOwner?.id !== item.createdBy.id;
     const lifetimeChanged = !isEqual(roomParams.lifetime, item.lifetime);
     const denyDownloadChanged = roomParams?.denyDownload !== item.denyDownload;
+    const indexingChanged = roomParams?.indexing !== item.indexing;
 
     const tags = roomParams.tags.map((tag) => tag.name);
     const newTags = roomParams.tags.filter((t) => t.isNew).map((t) => t.name);
@@ -206,6 +207,13 @@ const EditRoomEvent = ({
           editRoomSettings(room.id, { denyDownload: roomParams.denyDownload }),
         );
         room.denyDownload = roomParams.denyDownload;
+      }
+
+      if (indexingChanged) {
+        actions.push(
+          editRoomSettings(room.id, { indexing: roomParams.indexing }),
+        );
+        room.indexing = roomParams.indexing;
       }
 
       if (tags.length) {

@@ -46,6 +46,7 @@ const ItemTitle = ({
   setCalendarDay,
   roomsView,
   getGroupContextOptions,
+  isVDR,
 }) => {
   if (!infoPanelSelection) return null;
   if (isNoItem) return null;
@@ -60,7 +61,6 @@ const ItemTitle = ({
       />
     );
 
-  const openHistory = roomsView === "info_history";
   if (isGroups)
     return (
       <GroupsItemTitle
@@ -80,6 +80,7 @@ const ItemTitle = ({
       />
     );
 
+  const openHistory = isVDR && roomsView === "info_history";
   return (
     <RoomsItemHeader
       openHistory={openHistory}

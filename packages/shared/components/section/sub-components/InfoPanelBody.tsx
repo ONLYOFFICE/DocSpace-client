@@ -49,6 +49,7 @@ const SubInfoPanelBody = ({
       noScrollY={scrollLocked}
       scrollClass="section-scroll info-panel-scroll"
       createContext
+      tabIndex={null}
     >
       {children}
     </StyledScrollbar>

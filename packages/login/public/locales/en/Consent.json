@@ -1,7 +1,8 @@
 {
-  "Consent": "Consent",
-  "ConsentSubHeader": "{{name}} would like the ability to access the following data in <strong>your DocSpace account</strong>:",
-  "ConsentDescription": "Data shared with <strong>{{displayName}}</strong> will be governed by <strong>{{nameApp}}</strong> <6>privacy policy</6> and <6>terms of service</6>. You can revoke this consent at any time in your DocSpace account settings.",
+  "AllowButton": "Allow",
+  "DenyButton": "Deny button",
+  "ConsentSubHeader": "<1>{{nameApp}}</1> would like the ability to access the following data in <strong>your {{productName}} account</strong>:",
+  "ConsentDescription": "Data shared with <strong>{{displayName}}</strong> will be governed by <strong>{{nameApp}}</strong> <6>privacy policy</6> and <6>terms of service</6>. You can revoke this consent at any time in your {{productName}} account settings.",
   "ToContinue": "To continue to",
   "SignedInAs": "Signed in as",
   "NotYou": "Not you?"

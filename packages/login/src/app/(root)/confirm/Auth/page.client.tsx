@@ -72,7 +72,7 @@ const AuthHandler = () => {
 
         const redirectUrl = getCookie("x-redirect-authorization-uri");
 
-        deleteCookie("x-redirect-authorization-uri");
+        // deleteCookie("x-redirect-authorization-uri");
 
         if (redirectUrl) {
           window.location.replace(redirectUrl);

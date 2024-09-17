@@ -70,22 +70,26 @@ const OAuthClientInfo = ({
         lineHeight="22px"
       >
         {isConsentScreen ? (
-          <Trans t={t} i18nKey={"ConsentSubHeader"} ns="Consent">
-            <Link
-              className={"login-link"}
-              type={LinkType.page}
-              isHovered={false}
-              href={websiteUrl}
-              target={LinkTarget.blank}
-              noHover
-              fontWeight={600}
-              fontSize="16px"
-            >
-              {name}
-            </Link>{" "}
-            would like the ability to access the following data in{" "}
-            <strong>your DocSpace account</strong>:
-          </Trans>
+          <Trans
+            t={t}
+            i18nKey="ConsentSubHeader"
+            ns="Consent"
+            values={{ nameApp: name, productName: t("Common:ProductName") }}
+            components={{
+              1: (
+                <Link
+                  className={"login-link"}
+                  type={LinkType.page}
+                  isHovered={false}
+                  href={websiteUrl}
+                  target={LinkTarget.blank}
+                  noHover
+                  fontWeight={600}
+                  fontSize="16px"
+                />
+              ),
+            }}
+          />
         ) : (
           <>
             {t("Consent:ToContinue")}{" "}

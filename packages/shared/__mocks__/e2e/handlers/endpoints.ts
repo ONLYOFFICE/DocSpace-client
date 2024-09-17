@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { loginHandler, LOGIN_PATH } from "./authentication";
+import { OAUTH_SIGN_IN_PATH, oauthSignInHelper } from "./oauth/signIn";
 import {
   SELF_PATH_ACTIVATION_STATUS,
   SELF_PATH_CHANGE_PASSWORD,
@@ -83,5 +84,13 @@ export const endpoints: TEndpoints = {
   tfaAppValidateError: {
     url: `${BASE_URL}${TFA_APP_VALIDATE_PATH}`,
     dataHandler: tfaAppValidateHandler.bind(null, false),
+  },
+  logout: {
+    url: `${BASE_URL}authentication/logout`,
+    dataHandler: new Response(JSON.stringify({})),
+  },
+  oauthSignIn: {
+    url: `*/**/${OAUTH_SIGN_IN_PATH}`,
+    dataHandler: oauthSignInHelper(),
   },
 };

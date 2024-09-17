@@ -290,11 +290,13 @@ const EditRoomEvent = ({
       if (withPaging) await updateCurrentFolder(null, currentFolderId);
 
       if (item.id === currentFolderId) {
-        updateEditedSelectedRoom(
-          editRoomParams.title,
+        updateEditedSelectedRoom({
+          title: editRoomParams.title,
           tags,
-          roomParams.lifetime,
-        );
+          lifetime: roomParams.lifetime,
+          indexing: roomParams.indexing,
+          denyDownload: roomParams.denyDownload,
+        });
         if (item.logo.original && !roomParams.icon.uploadedFile) {
           removeLogoPaths();
           // updateInfoPanelSelection();

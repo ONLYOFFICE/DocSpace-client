@@ -7,8 +7,8 @@ import { RowsSkeleton } from "@docspace/shared/skeletons/rows";
 import { ViewAsType } from "SRC_DIR/store/OAuthStore";
 import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
 
-import { OAuthContainer } from "../../StyledOAuth";
-import { StyledContainer } from ".";
+import { OAuthContainer } from "../../OAuth.styled";
+import { StyledContainer } from "./List.styled";
 
 const OAuthLoader = ({
   viewAs,

@@ -117,7 +117,6 @@ test("activation error", async ({ page }) => {
 
   await page.fill("[name='name']", "");
   await page.fill("[name='surname']", "");
-
   await page.getByTestId("input-block").getByTestId("text-input").fill("123");
 
   await page.getByTestId("button").click();

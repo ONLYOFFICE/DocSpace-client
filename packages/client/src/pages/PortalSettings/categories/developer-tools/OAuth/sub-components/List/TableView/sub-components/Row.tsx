@@ -7,12 +7,13 @@ import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import getCorrectDate from "@docspace/shared/utils/getCorrectDate";
 import { getCookie } from "@docspace/shared/utils/cookie";
+import { toastr } from "@docspace/shared/components/toast";
 
-import NameCell from "./columns/name";
-import CreatorCell from "./columns/creator";
+import NameCell from "../columns/name";
+import CreatorCell from "../columns/creator";
 
-import { StyledRowWrapper, StyledTableRow } from "./TableView.styled";
-import { RowProps } from "./TableView.types";
+import { StyledRowWrapper, StyledTableRow } from "../TableView.styled";
+import { RowProps } from "../TableView.types";
 
 const Row = (props: RowProps) => {
   const {
@@ -34,7 +35,17 @@ const Row = (props: RowProps) => {
 
   const handleToggleEnabled = async () => {
     if (!changeClientStatus) return;
-    await changeClientStatus(item.clientId, !item.enabled);
+    try {
+      await changeClientStatus(item.clientId, !item.enabled);
+
+      if (!item.enabled) {
+        toastr.success(t("ApplicationEnabledSuccessfully"));
+      } else {
+        toastr.success(t("ApplicationDisabledSuccessfully"));
+      }
+    } catch (e) {
+      toastr.error(e as string);
+    }
   };
 
   const handleRowClick = (e: React.MouseEvent) => {

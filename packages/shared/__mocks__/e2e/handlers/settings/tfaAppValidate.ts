@@ -24,17 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/// <reference types='codeceptjs' />
-type steps_file = typeof import("./steps_file.js");
+import { API_PREFIX, BASE_URL } from "../../utils";
 
-declare namespace CodeceptJS {
-  interface SupportObject {
-    I: I;
-    current: any;
-  }
-  interface Methods extends Playwright {}
-  interface I extends ReturnType<steps_file> {}
-  namespace Translation {
-    interface Actions {}
-  }
-}
+export const PATH = "settings/tfaapp/validate";
+
+const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
+
+export const tfaAppNotValidateError = {
+  error: {
+    message: "Incorrect code",
+    type: "System.ArgumentException",
+    stack: "",
+    hresult: -2147024809,
+  },
+  status: 1,
+  statusCode: 400,
+};
+
+export const tfaAppValidateSuccess = {
+  response: true,
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "POST",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+export const tfaAppValidate = (isValidate: boolean = true): Response => {
+  if (!isValidate) return new Response(JSON.stringify(tfaAppNotValidateError));
+
+  return new Response(JSON.stringify(tfaAppValidateSuccess));
+};

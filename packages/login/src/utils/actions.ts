@@ -67,6 +67,7 @@ import {
   thirdPartyProviderHandler,
   getClientHandler,
   confirmHandler,
+  tfaAppHandler,
   scopesHandler,
 } from "@docspace/shared/__mocks__/e2e";
 
@@ -289,7 +290,6 @@ export async function getPortalPasswordSettings(
   if (!res.ok) return;
 
   const passwordSettings = await res.json();
-  console.log("passwordSettings", passwordSettings);
 
   return passwordSettings.response as TPasswordSettings;
 }
@@ -376,7 +376,7 @@ export async function getTfaSecretKeyAndQR(confirmKey: string | null = null) {
     "GET",
   );
 
-  const res = await fetch(getTfaSecretKeyAndQR);
+  const res = IS_TEST ? tfaAppHandler() : await fetch(getTfaSecretKeyAndQR);
 
   if (!res.ok) throw new Error(res.statusText);
 

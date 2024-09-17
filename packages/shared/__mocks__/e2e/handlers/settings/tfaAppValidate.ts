@@ -23,61 +23,39 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { useTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
 
-import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
-import { toastr } from "@docspace/shared/components/toast";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { globalColors } from "@docspace/shared/themes";
+import { API_PREFIX, BASE_URL } from "../../utils";
 
-const PaidQuotaLimitError = ({
-  isRoomAdmin,
-  setInvitePanelOptions,
-  invitePanelVisible,
-}) => {
-  const { t } = useTranslation();
+export const PATH = "settings/tfaapp/validate";
 
-  const onClickPayments = () => {
-    const paymentPageUrl = combineUrl(
-      "/portal-settings",
-      "/payments/portal-payments",
-    );
+const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 
-    toastr.clear();
-    window.DocSpace.navigate(paymentPageUrl);
-
-    invitePanelVisible &&
-      setInvitePanelOptions({
-        visible: false,
-        hideSelector: false,
-        defaultAccess: 1,
-      });
-  };
-
-  return (
-    <>
-      <Text>{t("Common:QuotaPaidUserLimitError")}</Text>
-      {!isRoomAdmin && (
-        <Link
-          color={globalColors.link}
-          isHovered={true}
-          onClick={onClickPayments}
-        >
-          {t("Common:PaymentsTitle")}
-        </Link>
-      )}
-    </>
-  );
+export const tfaAppNotValidateError = {
+  error: {
+    message: "Incorrect code",
+    type: "System.ArgumentException",
+    stack: "",
+    hresult: -2147024809,
+  },
+  status: 1,
+  statusCode: 400,
 };
 
-export default inject(({ authStore, dialogsStore }) => {
-  const { isRoomAdmin } = authStore;
-  const { setInvitePanelOptions, invitePanelOptions } = dialogsStore;
-  return {
-    isRoomAdmin,
-    setInvitePanelOptions,
-    invitePanelVisible: invitePanelOptions.visible,
-  };
-})(observer(PaidQuotaLimitError));
+export const tfaAppValidateSuccess = {
+  response: true,
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "POST",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
+
+export const tfaAppValidate = (isValidate: boolean = true): Response => {
+  if (!isValidate) return new Response(JSON.stringify(tfaAppNotValidateError));
+
+  return new Response(JSON.stringify(tfaAppValidateSuccess));
+};

@@ -1555,6 +1555,10 @@ class FilesStore {
           this.indexingStore.setIsIndexing(false);
         }
 
+        if (data.current.isArchive) {
+          this.indexingStore.setIsIndexing(false);
+        }
+
         if (newTotal > 0) {
           const lastPage = filterData.getLastPage();
 

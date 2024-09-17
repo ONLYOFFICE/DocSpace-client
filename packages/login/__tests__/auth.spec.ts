@@ -78,6 +78,7 @@ test("auth success", async ({ page, mockRequest }) => {
   await page.goto(URL_WITH_PARAMS);
 
   await page.getByTestId("loader").waitFor({ state: "attached" });
+
   await page.waitForURL("/", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot(["desktop", "auth", "auth-success.png"]);
@@ -104,10 +105,11 @@ test("auth with file handler success", async ({ page, mockRequest }) => {
   await mockRequest.router([endpoints.login]);
   await page.goto(URL_WITH_FILE_HANDLER, { waitUntil: "domcontentloaded" });
 
-  await expect(page).toHaveScreenshot(
-    ["desktop", "auth", "auth-with-file-handler-success.png"],
-    { fullPage: true },
-  );
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "auth",
+    "auth-with-file-handler-success.png",
+  ]);
 
   await page.waitForURL(
     `${BASE_URL}:${PORT}/filehandler.ashx?action=download`,

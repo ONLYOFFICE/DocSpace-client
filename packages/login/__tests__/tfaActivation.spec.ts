@@ -55,7 +55,7 @@ test("tfa activation render", async ({ page }) => {
 });
 
 test("tfa activation success", async ({ page, mockRequest }) => {
-  await mockRequest.router(endpoints.tfaAppValidate);
+  await mockRequest.router([endpoints.tfaAppValidate]);
   await page.goto(URL_WITH_PARAMS);
 
   await page.getByTestId("text-input").fill("123456");
@@ -78,7 +78,7 @@ test("tfa activation success", async ({ page, mockRequest }) => {
 });
 
 test("tfa activation error not validated", async ({ page, mockRequest }) => {
-  await mockRequest.router(endpoints.tfaAppValidateError);
+  await mockRequest.router([endpoints.tfaAppValidateError]);
   await page.goto(URL_WITH_PARAMS);
 
   await page.getByTestId("text-input").fill("123456");

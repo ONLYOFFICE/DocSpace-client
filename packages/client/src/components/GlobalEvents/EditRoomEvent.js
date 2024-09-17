@@ -30,14 +30,9 @@ import { useTranslation } from "react-i18next";
 import isEqual from "lodash/isEqual";
 import { EditRoomDialog } from "../dialogs";
 import { Encoder } from "@docspace/shared/utils/encoder";
-import api from "@docspace/shared/api";
-import {
-  deleteWatermarkSettings,
-  getRoomInfo,
-  getWatermarkSettings,
-} from "@docspace/shared/api/rooms";
+import { getRoomInfo, getWatermarkSettings } from "@docspace/shared/api/rooms";
 import { toastr } from "@docspace/shared/components/toast";
-import { setWatermarkSettings } from "@docspace/shared/api/rooms";
+import { RoomsType } from "@docspace/shared/enums";
 
 const EditRoomEvent = ({
   addActiveItems,
@@ -87,6 +82,7 @@ const EditRoomEvent = ({
   watermarksSettings,
   isNotWatermarkSet,
   editRoomSettings,
+  isEqualWatermarkChanges,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
 
@@ -222,7 +218,11 @@ const EditRoomEvent = ({
         room.tags = tags;
       }
 
-      if (watermarksSettings && !isNotWatermarkSet(true)) {
+      if (
+        !isEqualWatermarkChanges &&
+        watermarksSettings &&
+        !isNotWatermarkSet(true)
+      ) {
         const request = getWatermarkRequest(room, watermarksSettings);
 
         actions.push(request);
@@ -329,7 +329,10 @@ const EditRoomEvent = ({
 
     const logo = item?.logo?.original ? item.logo.original : "";
 
-    const requests = [fetchTags(), getWatermarkSettings(item.id)];
+    const requests = [fetchTags()];
+
+    if (item?.roomType === RoomsType.VirtualDataRoom)
+      requests.push(getWatermarkSettings(item.id));
 
     if (logo) requests.push(fetchLogoAction);
 
@@ -416,6 +419,7 @@ export default inject(
       watermarksSettings,
       isNotWatermarkSet,
       getWatermarkRequest,
+      isEqualWatermarkChanges,
     } = createEditRoomStore;
 
     return {
@@ -460,6 +464,7 @@ export default inject(
       isNotWatermarkSet,
       getWatermarkRequest,
       editRoomSettings,
+      isEqualWatermarkChanges,
     };
   },
 )(observer(EditRoomEvent));

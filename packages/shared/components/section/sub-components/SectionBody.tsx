@@ -121,7 +121,9 @@ const SectionBody = React.memo(
           </div>
         )}
 
-        <SectionContextMenu getContextModel={getContextModel} />
+        {!isIndexEditingMode && (
+          <SectionContextMenu getContextModel={getContextModel} />
+        )}
       </StyledDropZoneBody>
     ) : (
       <StyledSectionBody

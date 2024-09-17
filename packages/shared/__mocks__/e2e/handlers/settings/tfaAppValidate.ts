@@ -24,33 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Page } from "@playwright/test";
+import { API_PREFIX, BASE_URL } from "../../utils";
 
-import { TEndpoint } from "./handlers";
+export const PATH = "settings/tfaapp/validate";
 
-export class MockRequest {
-  constructor(public readonly page: Page) {}
+const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 
-  async router(endpoints: TEndpoint[]) {
-    endpoints.forEach(async (endpoint) => {
-      await this.page.route(endpoint.url, async (route) => {
-        const json = await endpoint.dataHandler().json();
+export const tfaAppNotValidateError = {
+  error: {
+    message: "Incorrect code",
+    type: "System.ArgumentException",
+    stack: "",
+    hresult: -2147024809,
+  },
+  status: 1,
+  statusCode: 400,
+};
 
-        await route.fulfill({ json });
-      });
-    });
-  }
+export const tfaAppValidateSuccess = {
+  response: true,
+  count: 1,
+  links: [
+    {
+      href: url,
+      action: "POST",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+};
 
-  async setHeaders(url: string, headers: string[]) {
-    await this.page.route(url, async (route, request) => {
-      const objHeaders: { [key: string]: "true" } = {};
-      headers.forEach((item) => (objHeaders[item] = "true"));
+export const tfaAppValidate = (isValidate: boolean = true): Response => {
+  if (!isValidate) return new Response(JSON.stringify(tfaAppNotValidateError));
 
-      const newHeaders = {
-        ...request.headers(),
-        ...objHeaders,
-      };
-      await route.fallback({ headers: newHeaders });
-    });
-  }
-}
+  return new Response(JSON.stringify(tfaAppValidateSuccess));
+};

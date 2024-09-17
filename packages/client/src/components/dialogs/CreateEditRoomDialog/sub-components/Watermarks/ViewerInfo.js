@@ -137,9 +137,8 @@ const ViewerInfoWatermark = ({
 
   useEffect(() => {
     const { enabled, isImage } = initialWatermarksSettings;
-
-    if (isEdit && enabled && !isImage) {
-      setWatermarks(initialWatermarksSettings);
+    if (isEdit && !isImage) {
+      setWatermarks({ ...initialWatermarksSettings, enabled: true }, true);
 
       return;
     }

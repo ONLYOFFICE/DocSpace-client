@@ -73,7 +73,7 @@ const WatermarkBlock = ({
 
   const onChangeAddWatermarksToDocuments = () => {
     setWatermarksChecked(!watermarksChecked);
-
+    console.log("!watermarksChecked", !watermarksChecked);
     setWatermarks({ enabled: !watermarksChecked });
   };
 

@@ -85,7 +85,7 @@ const EditRoomDialog = ({
       prevParams.indexing === currentParams.indexing &&
       prevParams.denyDownload === currentParams.denyDownload &&
       isEqual(prevParams.lifetime, currentParams.lifetime) &&
-      isEqualWatermarkChanges()
+      isEqualWatermarkChanges
     );
   };
 

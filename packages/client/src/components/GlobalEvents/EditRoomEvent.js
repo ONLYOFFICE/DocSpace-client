@@ -222,7 +222,7 @@ const EditRoomEvent = ({
         room.tags = tags;
       }
 
-      if (watermarksSettings && !isNotWatermarkSet()) {
+      if (watermarksSettings && !isNotWatermarkSet(true)) {
         const request = getWatermarkRequest(room, watermarksSettings);
 
         actions.push(request);

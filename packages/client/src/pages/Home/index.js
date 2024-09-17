@@ -82,7 +82,7 @@ const PureHome = (props) => {
     startUpload,
     setDragging,
     dragging,
-    uploadEmptyFolders,
+    createFoldersTree,
     disableDrag,
     uploaded,
     converted,
@@ -160,7 +160,9 @@ const PureHome = (props) => {
     getFolderModel,
     scrollToTop,
     isEmptyGroups,
+    isCurrentGroupEmpty,
     wsCreatedPDFForm,
+    disableUploadPanelOpen,
   } = props;
 
   //console.log(t("ComingSoon"))
@@ -175,14 +177,18 @@ const PureHome = (props) => {
   const isPeopleAccounts = location.pathname.includes("accounts/people");
   const isGroupsAccounts =
     location.pathname.includes("accounts/groups") && !groupId;
-  const isAccountsEmptyFilter = isGroupsAccounts && isEmptyGroups;
+  const isInsideGroup =
+    location.pathname.includes("accounts/groups") && groupId;
+  const isAccountsEmptyFilter =
+    (isGroupsAccounts && isEmptyGroups) ||
+    (isInsideGroup && isCurrentGroupEmpty);
 
   const { onDrop } = useFiles({
     t,
     dragging,
     setDragging,
     disableDrag,
-    uploadEmptyFolders,
+    createFoldersTree,
     startUpload,
     fetchFiles,
     fetchRooms,
@@ -222,7 +228,7 @@ const PureHome = (props) => {
     itemsSelectionTitle,
     secondaryProgressDataStoreIcon,
     itemsSelectionLength,
-
+    disableUploadPanelOpen,
     setItemsSelectionTitle,
   });
 
@@ -526,6 +532,7 @@ export default inject(
       percent: primaryProgressDataPercent,
       icon: primaryProgressDataIcon,
       alert: primaryProgressDataAlert,
+      disableUploadPanelOpen,
       clearPrimaryProgressData,
     } = primaryProgressDataStore;
 
@@ -543,7 +550,7 @@ export default inject(
     const { setUploadPanelVisible, startUpload, uploaded, converted } =
       uploadDataStore;
 
-    const { uploadEmptyFolders, onClickBack } = filesActionsStore;
+    const { createFoldersTree, onClickBack } = filesActionsStore;
 
     const selectionLength = isProgressFinished ? selection.length : null;
     const selectionTitle = isProgressFinished
@@ -572,6 +579,7 @@ export default inject(
       fetchGroup,
       groups,
       groupsIsFiltered,
+      isCurrentGroupEmpty,
     } = groupsStore;
     const isEmptyGroups =
       !groupsIsFiltered &&
@@ -602,6 +610,7 @@ export default inject(
       primaryProgressDataIcon,
       primaryProgressDataAlert,
       clearPrimaryProgressData,
+      disableUploadPanelOpen,
 
       clearUploadedFilesHistory,
 
@@ -635,7 +644,7 @@ export default inject(
 
       setUploadPanelVisible,
       startUpload,
-      uploadEmptyFolders,
+      createFoldersTree,
 
       setToPreviewFile,
       setIsPreview,
@@ -689,6 +698,7 @@ export default inject(
       getFolderModel,
       scrollToTop,
       isEmptyGroups,
+      isCurrentGroupEmpty,
       wsCreatedPDFForm,
     };
   },

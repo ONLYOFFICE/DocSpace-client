@@ -29,11 +29,9 @@
 
 import React, { useLayoutEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { useSearchParams } from "next/navigation";
 import { useTheme } from "styled-components";
 
 import { Text } from "@docspace/shared/components/text";
-
 import { WhiteLabelLogoType } from "@docspace/shared/enums";
 import { getLogoUrl } from "@docspace/shared/utils/common";
 
@@ -41,13 +39,19 @@ import { GreetingContainersProps } from "@/types";
 import { DEFAULT_PORTAL_TEXT, DEFAULT_ROOM_TEXT } from "@/utils/constants";
 import { getInvitationLinkData } from "@/utils";
 
-const GreetingContainer = ({ greetingSettings }: GreetingContainersProps) => {
+const GreetingContainer = ({
+  greetingSettings,
+  culture,
+}: GreetingContainersProps) => {
   const { t } = useTranslation(["Login"]);
   const theme = useTheme();
 
-  const logoUrl = getLogoUrl(WhiteLabelLogoType.LoginPage, !theme.isBase);
-
-  const searchParams = useSearchParams();
+  const logoUrl = getLogoUrl(
+    WhiteLabelLogoType.LoginPage,
+    !theme.isBase,
+    false,
+    culture,
+  );
 
   const [invitationLinkData, setInvitationLinkData] = useState({
     email: "",
@@ -58,19 +62,12 @@ const GreetingContainer = ({ greetingSettings }: GreetingContainersProps) => {
   });
 
   useLayoutEffect(() => {
-    if (!searchParams) return;
-
-    const encodeString = searchParams.get("loginData");
-
-    if (!encodeString) return;
-
-    const queryParams = getInvitationLinkData(encodeString);
+    const queryParams = getInvitationLinkData();
 
     if (!queryParams) return;
 
     setInvitationLinkData(queryParams);
-    window.history.replaceState({}, document.title, window.location.pathname);
-  }, [searchParams]);
+  }, []);
 
   const { type, roomName, firstName, lastName } = invitationLinkData;
 

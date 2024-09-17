@@ -63,8 +63,11 @@ const StyledSelector = styled.div`
   overflow: hidden;
 `;
 
-const StyledHeader = styled.div<{ withoutBorder: boolean }>`
-  width: calc(100% - 32px);
+const StyledHeader = styled.div<{
+  withoutBorder?: boolean;
+  withoutIcon: boolean;
+}>`
+  width: calc(100% - 53px);
   min-height: 53px;
   height: 53px;
   max-height: 53px;
@@ -82,6 +85,7 @@ const StyledHeader = styled.div<{ withoutBorder: boolean }>`
   .arrow-button {
     cursor: pointer;
     margin-right: 12px;
+    min-width: 17px;
     ${(props) =>
       props.theme.interfaceDirection === "rtl" &&
       css`
@@ -112,11 +116,11 @@ const StyledBody = styled.div<{
   height: ${(props) =>
     props.footerVisible
       ? props.withHeader
-        ? `calc(100% - 16px - ${props.footerHeight}px - ${props.headerHeight}px)`
-        : `calc(100% - 16px - ${props.footerHeight}px)`
+        ? `calc(100% - ${props.footerHeight}px - ${props.headerHeight}px)`
+        : `calc(100% - ${props.footerHeight}px)`
       : props.withHeader
-        ? `calc(100% - 16px - ${props.headerHeight}px)`
-        : `calc(100% - 16px)`};
+        ? `calc(100% - ${props.headerHeight}px)`
+        : "100%"};
 
   padding: ${({ withTabs }) => (withTabs ? "0" : "16px 0 0 0")};
 

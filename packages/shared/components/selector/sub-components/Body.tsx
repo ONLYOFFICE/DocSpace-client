@@ -124,7 +124,9 @@ const Body = ({
 
   const onBodyResize = React.useCallback(() => {
     if (bodyRef && bodyRef.current) {
-      setBodyHeight(bodyRef.current.offsetHeight);
+      setTimeout(() => {
+        setBodyHeight(bodyRef.current!.offsetHeight);
+      }, 20);
     }
   }, []);
 
@@ -216,7 +218,9 @@ const Body = ({
             : FOOTER_HEIGHT
       }
       className="selector_body"
-      headerHeight={HEADER_HEIGHT}
+      headerHeight={
+        withTabs ? HEADER_HEIGHT : HEADER_HEIGHT + CONTAINER_PADDING
+      }
       footerVisible={footerVisible}
       withHeader={withHeader}
       withTabs={withTabs}

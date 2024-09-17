@@ -69,9 +69,10 @@ export const HistoryItemList = ({
   getInfoPanelItemIcon,
   checkAndOpenLocationAction,
 }: HistoryItemListProps) => {
-  const [isExpanded, setIsExpanded] = useState(
-    1 + feed.related.length <= EXPANSION_THRESHOLD,
-  );
+  const totalItems = feed.related.length + 1;
+  const isExpandable = totalItems > EXPANSION_THRESHOLD;
+  const [isExpanded, setIsExpanded] = useState(!isExpandable);
+
   const onExpand = () => setIsExpanded(true);
 
   const items = [
@@ -151,7 +152,7 @@ export const HistoryItemList = ({
         </StyledHistoryBlockFile>
       )}
 
-      {!isExpanded && (
+      {isExpandable && !isExpanded && (
         <StyledHistoryBlockExpandLink
           className="files-list-expand-link"
           onClick={onExpand}

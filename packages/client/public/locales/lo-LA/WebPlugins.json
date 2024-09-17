@@ -1,7 +1,15 @@
 {
+  "DeletePlugin": "ລຶບປລັກອິນ",
+  "DeletePluginDescription": "ປລັກອິນນີ້ຈະບໍ່ສາມາດໃຊ້ໄດ້ກັບຜູ້ໃຊ້ {{productName}} ອີກຕໍ່ໄປ. ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການສືບຕໍ່?",
+  "DeletePluginTitle": "ລຶບປລັກອິນບໍ?",
   "ExpandFunctionality": "ຂະຫຍາຍການເຮັດວຽກໂດຍໃຊ້ Plugin SDK",
   "GoToRepo": "ໄປທີ່ repository",
+  "NeedSettings": "ຕ້ອງການເຂົ້າການຕັ້ງຄ່າ",
+  "NoPlugins": "ບໍ່ມີການເພີ່ມປລັກອິນ",
+  "NotNeedSettings": "ບໍ່ຈຳເປັນຕ້ອງໃສ່ການຕັ້ງຄ່າ",
   "PluginSamples": "ຕົວຢ່າງປລັກອິນ",
+  "PluginSDK": "ປລັກອິນ SDK",
   "PluginSDKDescription": "ການນໍາໃຊ້ Plugin SDK ທ່ານສາມາດຂະຫຍາຍ ການເຮັດວຽກ {{productName}} ຂອງທ່ານ, ເຊື່ອມຕໍ່ການບໍລິການພາກສ່ວນທີສາມຫຼືປັບປຸງປະສົບການຂອງຜູ້ໃຊ້ທີ່ມີຢູ່ແລ້ວ. ທີ່ນີ້ທ່ານສາມາດຊອກຫາຕົວຢ່າງ plugin ທີ່ມີແຫຼ່ງລະຫັດທີ່ມີຢູ່ໃນ GitHub.",
-  "PluginSDKInstruction": "ໃຫ້ຄລິກໃສ່ປຸ່ມສໍາລັບຄໍາແນະນໍາລາຍລະອຽດກ່ຽວກັບວິທີການສ້າງ plugins ຂອງທ່ານເອງ."
+  "PluginSDKInstruction": "ໃຫ້ຄລິກໃສ່ປຸ່ມສໍາລັບຄໍາແນະນໍາລາຍລະອຽດກ່ຽວກັບວິທີການສ້າງ plugins ຂອງທ່ານເອງ.",
+  "UploadDescription": "ທ່ານສາມາດເພີ່ມປລັກອິນເພື່ອຂະຫຍາຍການເຮັດວຽກຂອງ {{productName}} ດ້ວຍຄຸນສົມບັດພິເສດ. ຄລິກອັບໂຫລດ plugin ແລະເລືອກໄຟລ໌ plugin ໃນແຟ້ມ ZIP."
 }

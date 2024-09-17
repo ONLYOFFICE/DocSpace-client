@@ -3,6 +3,8 @@
   "CannotReassignFiles": "Jeśli usuniesz kilku użytkowników jednocześnie, nie będziesz w stanie przypisać ich plików innym użytkownikom.",
   "DeleteGroupUsersSuccessMessage": "Użytkownicy zostali pomyślnie usunięci.",
   "DeleteMyDocumentsUser": "Wszystkie osobiste pliki i katalogi w sekcji Dokumenty tego użytkownika zostaną trwale usunięte.",
+  "DeletePersonalData": "Wszystkie dane osobowe, osobiste pliki oraz katalogi w sekcjach Dokumenty i Kosz* wybranych użytkowników zostaną trwale usunięte. Pliki i katalogi wybranych użytkowników przechowywane we wspólnych sekcjach* takich jak pokoje pozostaną w {{productName}}.",
+  "DeletePersonalDataApplicable": "*Dotyczy wybranych użytkowników, którzy mają takie pliki i katalogi.",
   "DeleteReassignDescriptionUser": "{{warningMessageMyDocuments}} Pokoje utworzone przez tego użytkownika oraz przechowywane w nich dokumenty zostaną automatycznie przypisane administratorowi, który dokonał usunięcia: <strong>{{userPerformedDeletion}} ({{userYou}})</strong>. Przypisz dane ręcznie, aby wybrać innego użytkownika docelowego do ponownego przypisania.",
   "DeleteUser": "Usuń użytkownika",
   "DeleteUserMessage": "{{userCaption}} <strong>{{user}}</strong> zostanie usunięty. Nie można cofnąć tej czynności.",

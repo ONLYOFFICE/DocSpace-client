@@ -6,6 +6,7 @@
   "DisplayTemplates": "Näytä mallit",
   "IntermediateVersion": "Säilytä kaikki tallennetut väliversiot",
   "KeepIntermediateVersion": "Pidä väliversiot muokkauksen aikana",
+  "OpenSameTab": "Avaa {{organizationName}} editori samassa välilehdessä",
   "OriginalCopy": "Tallenna kopio tiedostosta myös alkuperäisessä muodossa",
   "StoringFileVersion": "Tiedostoversioiden tallentaminen",
   "ThirdPartyAccounts": "Kolmannen osapuolen tilit",

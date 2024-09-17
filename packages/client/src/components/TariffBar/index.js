@@ -134,11 +134,7 @@ export default inject(
     currentQuotaStore,
     currentTariffStatusStore,
   }) => {
-    const {
-      isPaymentPageAvailable,
-
-      isEnterprise,
-    } = authStore;
+    const { isPaymentPageAvailable } = authStore;
     const { isFreeTariff, isNonProfit, isTrial } = currentQuotaStore;
     const {
       isGracePeriod,
@@ -146,6 +142,7 @@ export default inject(
       isLicenseDateExpired,
       paymentDate,
       trialDaysLeft,
+      isEnterprise,
     } = currentTariffStatusStore;
     const { standalone } = settingsStore;
 

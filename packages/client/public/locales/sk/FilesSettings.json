@@ -6,6 +6,7 @@
   "DisplayTemplates": "Zobraziť šablóny",
   "IntermediateVersion": "Ponechať všetky uložené priebežné verzie",
   "KeepIntermediateVersion": "Pri úprave ponechať priebežné verzie",
+  "OpenSameTab": "Otvorte redaktor {{organizationName}} v tej istej záložke",
   "OriginalCopy": "Uložte kópiu súboru aj v pôvodnom formáte",
   "StoringFileVersion": "Ukladanie verzií súborov",
   "ThirdPartyAccounts": "Účty tretej strany",

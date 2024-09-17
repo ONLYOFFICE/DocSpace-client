@@ -54,14 +54,7 @@ export const ConfirmType = Object.freeze({
  * Enum for result of validation public room keys.
  * @readonly
  */
-export const ValidationStatus = Object.freeze({
-  Ok: 0,
-  Invalid: 1,
-  Expired: 2,
-  Password: 3,
-  InvalidPassword: 4,
-  ExternalAccessDenied: 5,
-});
+
 export const GUID_EMPTY = "00000000-0000-0000-0000-000000000000";
 export const ID_NO_GROUP_MANAGER = "4a515a15-d4d6-4b8e-828e-e0586f18f3a3";
 
@@ -92,7 +85,7 @@ export const TableVersions = Object.freeze({
   Files: "3",
   People: "3",
   Trash: "4",
-  Groups: "5",
+  Groups: "6",
   InsideGroup: "6",
   Recent: "1",
 });
@@ -103,13 +96,19 @@ export const TableVersions = Object.freeze({
  */
 export const QuotaBarTypes = Object.freeze({
   ConfirmEmail: "confirm-email",
-  RoomQuota: "room-quota",
-  StorageQuota: "storage-quota",
-  UserQuota: "user-quota",
-  UserAndStorageQuota: "user-storage-quota",
-  RoomAndStorageQuota: "room-storage-quota",
+  RoomsTariff: "room-quota",
+  RoomsTariffLimit: "room-quota-limit",
+  StorageTariff: "storage-quota",
+  StorageTariffLimit: "storage-quota-limit",
+  UsersTariff: "user-quota",
+  UsersTariffLimit: "user-quota-limit",
+  UserAndStorageTariff: "user-storage-quota",
+  UserAndStorageTariffLimit: "user-storage-quota-limit",
+  RoomsAndStorageTariff: "room-storage-quota",
+  RoomsAndStorageTariffLimit: "room-storage-quota-limit",
   PersonalUserQuota: "personal-user-quota",
-  TenantCustomQuota: "tenant-custom-quota",
+  StorageQuota: "tenant-custom-quota",
+  StorageQuotaLimit: "tenant-custom-quota-limit",
 });
 
 export const BINDING_POST = "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST";
@@ -169,4 +168,15 @@ export const SortByFieldName = Object.freeze({
   RoomType: "roomType",
   LastOpened: "LastOpened",
   UsedSpace: "usedspace",
+});
+
+export const ThirdPartyServicesUrlName = Object.freeze({
+  GoogleDrive: "google",
+  Box: "box",
+  Dropbox: "dropbox",
+  OneDrive: "skydrive",
+  Nextcloud: "nextcloud",
+  kDrive: "kdrive",
+  ownCloud: "owncloud",
+  WebDav: "webdav",
 });

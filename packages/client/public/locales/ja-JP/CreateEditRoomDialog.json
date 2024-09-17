@@ -1,8 +1,10 @@
 {
+  "ActivationRequired": "アクティベーションが必要です",
   "ChooseRoomType": "タイプから選択する",
   "CreateRoomConfirmation": "ストレージを接続せずに続けますか？\nまだ接続されていないサードパーティストレージオプションを選択されました。サービスを接続せずに進めると、このオプションは追加されません。",
   "CreateTagOption": "タグを作成する",
   "DisableRoomQuota": "このルームの容量制限を無効にする",
+  "FormRoomBarDescription": "このルームはリンクがあれば誰でも利用できます。外部ユーザーには、すべてのファイルに対するフォーム記入権限が与えられます。",
   "Icon": "アイコン",
   "MakeRoomPrivateDescription": "このルームにあるファイルはすべて暗号化されます。",
   "MakeRoomPrivateLimitationsWarningDescription": "この機能では、既存の{{productName}}ユーザーだけを招待することができます。ルームを作成した後、ユーザーリストを変更することはできません。",

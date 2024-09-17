@@ -54,6 +54,7 @@ const StyledDropdown = styled.div<{
   `}
   height: fit-content;
   position: absolute;
+  overflow: hidden;
 
   ${(props) => props.manualWidth && `width: ${props.manualWidth};`}
   ${(props) =>
@@ -93,6 +94,7 @@ const StyledDropdown = styled.div<{
     props.zIndex ? props.zIndex : props.theme.dropDown.zIndex};
   display: ${(props) =>
     props.open ? (props.columnCount ? "block" : "table") : "none"};
+  table-layout: fixed;
 
   ${(props) =>
     !props.isDropdownReady &&
@@ -110,8 +112,6 @@ const StyledDropdown = styled.div<{
   -moz-box-shadow: ${(props) => props.theme.dropDown.boxShadow};
   -webkit-box-shadow: ${(props) => props.theme.dropDown.boxShadow};
 
-  padding: ${(props) =>
-    !props.maxHeight && props.itemCount && props.itemCount > 1 && `4px 0px`};
   ${(props) =>
     props.columnCount &&
     `

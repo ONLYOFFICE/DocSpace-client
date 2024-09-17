@@ -52,7 +52,7 @@ export interface ConflictResolveDialogProps {
   visible: boolean;
   setConflictResolveDialogVisible: (value: boolean) => void;
   conflictResolveDialogData: TConflictResolveDialogData;
-  items: (TFile | TFolder)[];
+  items: (TFile & TFolder)[];
   itemOperationToFolder: (data: {
     destFolderId: number;
     folderIds: number[];
@@ -69,6 +69,7 @@ export interface ConflictResolveDialogProps {
   setActiveFiles: (items: TActiveItem[]) => void;
   setActiveFolders: (items: TActiveItem[]) => void;
   updateActiveFiles: (items: TActiveItem[]) => void;
+  updateActiveFolders: (items: TActiveItem[]) => void;
   setSelected: (value: string) => void;
   setMoveToPanelVisible: (value: boolean) => void;
   setRestorePanelVisible: (value: boolean) => void;
@@ -90,4 +91,8 @@ export interface ConflictResolveDialogProps {
     t: TTranslation,
     create: boolean,
   ) => void;
+  isFileDialog: boolean;
+  isFolderDialog: boolean;
+  files: TFile[];
+  folders: TFolder[];
 }

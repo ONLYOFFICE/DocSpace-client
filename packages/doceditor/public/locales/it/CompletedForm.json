@@ -1,1 +1,12 @@
-{}
+{
+  "BackToRoom": "Compilalo di nuovo",
+  "CheckReadyForms": "Controlla i moduli pronti",
+  "Description": "Compilalo di nuovo",
+  "DescriptionForAnonymous": "Hai inviato il modulo PDF compilato con il numero univoco assegnato. Per controllare lo stato, contatta il proprietario del modulo fornendo il numero assegnato.",
+  "DescriptionForRegisteredUser": "Il modulo PDF compilato viene salvato e reso disponibile nella cartella Compilati. Per controllare lo stato, contatta il proprietario del modulo indicando il numero assegnato.",
+  "FillItOutAgain": "Compilalo di nuovo",
+  "FormCompletedSuccessfully": "Modulo completato con successo",
+  "FormNumber": "Numero del modulo:",
+  "FormOwner": "Proprietario del modulo",
+  "Title": "Il modulo è completato"
+}

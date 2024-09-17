@@ -24,18 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-
+import { ReactSVG } from "react-svg";
 import { isMobileOnly, isMobile } from "react-device-detect";
 
 import { Button } from "@docspace/shared/components/button";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { Text } from "@docspace/shared/components/text";
+import { Tooltip } from "@docspace/shared/components/tooltip";
 import { connectedCloudsTypeTitleTranslation as ProviderKeyTranslation } from "@docspace/client/src/helpers/filesUtils";
 import { Base } from "@docspace/shared/themes";
 import { toastr } from "@docspace/shared/components/toast";
 import { ComboBox } from "@docspace/shared/components/combobox";
 
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
+import { ThirdPartyServicesUrlName } from "../../../../../helpers/constants";
+import { isDesktop } from "@docspace/shared/utils";
 
 const StyledStorageLocation = styled.div`
   display: flex;
@@ -91,16 +96,29 @@ const StyledStorageLocation = styled.div`
 
 StyledStorageLocation.defaultProps = { theme: Base };
 
-const services = {
-  GoogleDrive: "google",
-  Box: "box",
-  Dropbox: "dropbox",
-  OneDrive: "skydrive",
-  Nextcloud: "nextcloud",
-  kDrive: "kdrive",
-  ownCloud: "owncloud",
-  WebDav: "webdav",
-};
+const StyledComboBoxItem = styled.div`
+  display: flex;
+
+  .drop-down-item_text {
+    color: ${({ theme, isDisabled }) =>
+      isDisabled ? theme.dropDownItem.disableColor : theme.dropDownItem.color};
+  }
+  .drop-down-item_icon {
+    display: flex;
+    align-items: center;
+
+    div {
+      display: flex;
+    }
+
+    margin-inline-start: auto;
+
+    svg {
+      min-height: 16px;
+      min-width: 16px;
+    }
+  }
+`;
 
 const ThirdPartyComboBox = ({
   t,
@@ -124,15 +142,16 @@ const ThirdPartyComboBox = ({
 
   isDisabled,
   setIsScrollLocked,
+  isAdmin,
 }) => {
-  const deafultSelectedItem = {
+  const defaultSelectedItem = {
     key: "length",
     label:
       storageLocation?.provider?.title ||
       t("ThirdPartyStorageComboBoxPlaceholder"),
   };
 
-  const [selectedItem, setSelectedItem] = useState(deafultSelectedItem);
+  const [selectedItem, setSelectedItem] = useState(defaultSelectedItem);
 
   const thirdparties = connectItems.map((item) => ({
     ...item,
@@ -142,7 +161,7 @@ const ThirdPartyComboBox = ({
   const setStorageLocaiton = (thirparty, isConnected) => {
     if (!isConnected) {
       window.open(
-        `/portal-settings/integration/third-party-services?service=${services[thirparty.id]}`,
+        `/portal-settings/integration/third-party-services?service=${ThirdPartyServicesUrlName[thirparty.id]}`,
         "_blank",
       );
       return;
@@ -207,27 +226,72 @@ const ThirdPartyComboBox = ({
     setSaveThirdpartyResponse(null);
   }, [saveThirdpartyResponse]);
 
-  const options = thirdparties
-    .sort((storage) => (storage.isConnected ? -1 : 1))
-    .map((item) => ({
-      label:
-        item.title + (item.isConnected ? "" : ` (${t("ActivationRequired")})`),
-      title: item.title,
-      key: item.id,
-      icon: item.isConnected ? undefined : ExternalLinkReactSvgUrl,
-      className: item.isConnected ? "" : "storage-unavailable",
-    }));
+  const onSelect = (event) => {
+    const data = event.currentTarget.dataset;
 
-  const onSelect = (elem) => {
     const thirdparty = thirdparties.find((t) => {
-      return elem.key === t.id;
+      return t.id === data.thirdPartyId;
     });
 
     thirdparty && setStorageLocaiton(thirdparty, thirdparty.isConnected);
     thirdparty.isConnected
-      ? setSelectedItem(elem)
-      : setSelectedItem({ ...deafultSelectedItem });
+      ? setSelectedItem({ key: thirdparty.id, label: thirdparty.title })
+      : setSelectedItem({ ...defaultSelectedItem });
   };
+
+  const getTextTooltip = () => {
+    return (
+      <Text fontSize="12px" noSelect>
+        {t("Common:EnableThirdPartyIntegration", {
+          productName: t("Common:ProductName"),
+        })}
+      </Text>
+    );
+  };
+
+  const advancedOptions = thirdparties
+    .sort((storage) => (storage.isConnected ? -1 : 1))
+    ?.map((item) => {
+      const isDisabled = !item.isConnected && !isAdmin;
+      const itemLabel =
+        item.title + (item.isConnected ? "" : ` (${t("ActivationRequired")})`);
+
+      const disabledData = isDisabled
+        ? { "data-tooltip-id": "file-links-tooltip", "data-tip": "tooltip" }
+        : {};
+
+      return (
+        <StyledComboBoxItem isDisabled={isDisabled} key={item.id}>
+          <DropDownItem
+            onClick={onSelect}
+            data-third-party-id={item.id}
+            disabled={isDisabled}
+            {...disabledData}
+          >
+            <Text className="drop-down-item_text" fontWeight={600}>
+              {itemLabel}
+            </Text>
+
+            {!isDisabled && !item.isConnected ? (
+              <ReactSVG
+                src={ExternalLinkReactSvgUrl}
+                className="drop-down-item_icon"
+              />
+            ) : (
+              <></>
+            )}
+          </DropDownItem>
+          {isDisabled && (
+            <Tooltip
+              float={isDesktop()}
+              id="file-links-tooltip"
+              getContent={getTextTooltip}
+              place="bottom"
+            />
+          )}
+        </StyledComboBoxItem>
+      );
+    });
 
   return (
     <StyledStorageLocation>
@@ -235,21 +299,22 @@ const ThirdPartyComboBox = ({
         <ComboBox
           className="thirdparty-combobox"
           selectedOption={selectedItem}
-          options={options}
+          options={[]}
+          advancedOptions={advancedOptions}
           scaled
           withBackdrop={isMobile}
           size="content"
-          manualWidth={"fit-content"}
+          manualWidth={"auto"}
           isMobileView={isMobileOnly}
           directionY="both"
           displaySelectedOption
           noBorder={false}
-          // fixedDirection
           isDefaultMode={true}
           hideMobileView={false}
           forceCloseClickOutside
           scaledOptions
-          onSelect={onSelect}
+          showDisabledItems
+          displayArrow
         />
         <Button
           id="shared_third-party-storage_connect"

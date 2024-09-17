@@ -2580,6 +2580,7 @@ __metadata:
     "@babel/preset-typescript": "npm:^7.21.0"
     "@codemirror/lang-javascript": "npm:^6.2.2"
     "@svgr/webpack": "npm:^5.5.0"
+    "@types/element-resize-detector": "npm:^1.1.6"
     "@types/eslint": "npm:^8.44.7"
     "@types/he": "npm:^1.2.3"
     "@typescript-eslint/eslint-plugin": "npm:^6.12.0"
@@ -7624,6 +7625,13 @@ __metadata:
   version: 3.1.5
   resolution: "@types/ejs@npm:3.1.5"
   checksum: 10/918898fd279108087722c1713e2ddb0c152ab839397946d164db8a18b5bbd732af9746373882a9bcf4843d35c6b191a8f569a7a4e51e90726d24501b39f40367
+  languageName: node
+  linkType: hard
+
+"@types/element-resize-detector@npm:^1.1.6":
+  version: 1.1.6
+  resolution: "@types/element-resize-detector@npm:1.1.6"
+  checksum: 10/62967c4933ce6dc717608aa498bfbbf2567c3778958203621b1981f5804eb519cf16b8f677d3c92c9b2a9d791191b514dd60298e276fcbf6b1660542209dd299
   languageName: node
   linkType: hard
 

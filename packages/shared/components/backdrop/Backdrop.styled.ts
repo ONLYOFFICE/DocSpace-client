@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Base } from "../../themes";
 import { BackdropProps } from "./Backdrop.types";
 
@@ -33,11 +33,6 @@ const StyledBackdrop = styled.div<BackdropProps & { needBackground: boolean }>`
     props.needBackground
       ? props.theme.backdrop.backgroundColor
       : props.theme.backdrop.unsetBackgroundColor};
-  ${(props) =>
-    props.needBackground &&
-    css`
-      backdrop-filter: ${`blur(${props.theme.modalDialog.backdrop.blur}px)`};
-    `};
 
   display: ${(props) => (props.visible ? "block" : "none")};
   height: 100vh;

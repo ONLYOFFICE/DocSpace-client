@@ -1,1 +1,24 @@
-{}
+{
+  "CollaboratorEmptyTitle": "Miestnosť je prázdna.",
+  "CreateNewFileDescription": "Začnite pracovať v miestnosti a vytvorte súbory alebo priečinky",
+  "CreateNewFileTitle": "Vytvoriť nový súbor",
+  "CustomRoomEmptyTitle": "Vitajte vo Vlastnej miestnosti",
+  "EmptyDescription": "Začnite s rýchlymi akciami:",
+  "FormFolderDefaultDescription": "Vložte sem formuláre PDF alebo ich nahrajte z {{productName}} alebo zariadenia.",
+  "FormFolderDefaultTitle": "Zatiaľ tu nie sú žiadne formuláre",
+  "FormFolderDefaultUserDescription": "Formuláre, ktoré nahrali administrátori, sa budú zobrazovať tu.",
+  "FormFolderDefaultUserTitle": "V tomto priečinku zatiaľ nie sú žiadne formuláre",
+  "FormRoomEmptyTitle": "Vitajte v miestnosti na vyplnenie formulárov",
+  "InviteUsersOptionDescription": "Pridávajte členov portálu na spoločné úpravy v miestnosti",
+  "InviteUsersOptionTitle": "Pozývanie účastníkov",
+  "ShareOptionDescription": "Skopírujte verejný odkaz na prístup alebo pozvite ďalších používateľov do miestnosti, aby mohli začať vypĺňať formuláre.",
+  "ShareOptionTitle": "Zdieľať miestnosť",
+  "UploadDeviceOptionDescription": "Nahrávajte akékoľvek typy súborov zo svojho osobného zariadenia",
+  "UploadDeviceOptionTitle": "Nahrať zo zariadenia",
+  "UploadDevicePDFFormOptionDescription": "Nahrávajte pripravený formulár PDF do miestnosti zo svojho zariadenia.",
+  "UploadDevicePDFFormOptionTitle": "Nahrať zo zariadenia",
+  "UploadFromPortalDescription": "Nahrávajte akékoľvek typy súborov z Dokumentov alebo Miestností",
+  "UploadFromPortalTitle": "Nahrať z {{productName}}",
+  "UploadPDFFormOptionDescription": "Vyberte pripravený PDF formulár dostupný v {{productName}} a nahrajte ho do miestnosti.",
+  "UserEmptyDescription": "Súbory a priečinky nahrané administrátormi sa objavia tu."
+}

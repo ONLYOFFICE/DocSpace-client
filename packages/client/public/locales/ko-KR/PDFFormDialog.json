@@ -1,1 +1,7 @@
-{}
+{
+  "PDFform": "PDF 양식",
+  "PDFFormEditDialogDescription": "양식 편집 모드로 전환하시겠습니까? 해당 양식은 더 이상 작성할 수 없으며 양식을 작성하려면 편집 후 작성 시작 버튼을 다시 클릭해야 한다는 점을 참고하세요.",
+  "PDFFormEditDialogTitle": "양식 편집",
+  "PDFFormIsReadyToast": "<1>{{filename}}</1> PDF 양식을 작성할 준비가 되었습니다.",
+  "PDFFormSuccessfullyCreatedDescription": "PDF 양식을 작성할 준비가 되었습니다. 공개 링크를 복사하여 양식 작성 프로세스를 시작하거나 다른 사용자를 이 룸에 초대하세요."
+}

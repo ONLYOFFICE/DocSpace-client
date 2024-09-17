@@ -119,7 +119,7 @@ const Manager = (props) => {
 
   const [columnsOptions, setColumnsOptions] = useState([
     { key: "Owner", label: t("Common:Owner") },
-    { key: "Activity", label: t("Files:ByLastModified") },
+    { key: "Activity", label: t("Files:LastActivity") },
   ]);
 
   const [sortBy, setSortBy] = useState(dataSortBy[0]);
@@ -130,6 +130,7 @@ const Manager = (props) => {
   );
   const [selectedColumns, setSelectedColumns] = useState([
     { key: "Name", label: t("Common:Name") },
+    { key: "Size", label: t("Common:Size") },
     { key: "Type", label: t("Common:Type") },
     { key: "Tags", label: t("Common:Tags") },
   ]);

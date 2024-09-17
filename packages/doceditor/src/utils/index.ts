@@ -48,6 +48,8 @@ export const getBackUrl = (
     } else {
       backUrl = `/rooms/shared/${folderId}/filter?folder=${folderId}`;
     }
+  } else if (rootFolderType === FolderType.Archive) {
+    backUrl = `/rooms/archived/${folderId}/filter?folder=${folderId}`;
   } else {
     if (
       rootFolderType === FolderType.SHARE ||

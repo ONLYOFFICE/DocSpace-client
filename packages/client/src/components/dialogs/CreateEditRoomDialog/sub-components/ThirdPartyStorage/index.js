@@ -71,6 +71,7 @@ const ThirdPartyStorage = ({
   isDisabled,
   currentColorScheme,
   isRoomAdmin,
+  isAdmin,
   createNewFolderIsChecked,
   onCreateFolderChange,
 
@@ -168,6 +169,7 @@ const ThirdPartyStorage = ({
           setIsScrollLocked={setIsScrollLocked}
           setIsOauthWindowOpen={setIsOauthWindowOpen}
           isDisabled={isDisabled}
+          isAdmin={isAdmin}
         />
       )}
 
@@ -213,7 +215,7 @@ export default inject(
 
     const connectItems = thirdPartyStore.connectingStorages;
 
-    const { isRoomAdmin } = authStore;
+    const { isRoomAdmin, isAdmin } = authStore;
 
     return {
       connectItems,
@@ -232,6 +234,7 @@ export default inject(
       getOAuthToken,
       currentColorScheme,
       isRoomAdmin,
+      isAdmin,
       fetchConnectingStorages: thirdPartyStore.fetchConnectingStorages,
     };
   },

@@ -1,1 +1,12 @@
-{}
+{
+  "BackToRoom": "Otağa qayıdın",
+  "CheckReadyForms": "Hazır formaları yoxlayın",
+  "Description": "Formanız tamamlandı və saxlanıldı",
+  "DescriptionForAnonymous": "Doldurulmuş PDF formasını təqdim etdikdən sonra ona uyğun unikal nömrə verilir. Vəziyyəti yoxlamaq üçün təyin edilmiş nömrəni verən forma sahibi ilə əlaqə saxlayın.",
+  "DescriptionForRegisteredUser": "Doldurulmuş PDF forması Tamamlanmış qovluğunda saxlanılır və sizə təqdim olunur. Vəziyyəti yoxlamaq üçün təyin edilmiş nömrəni verən forma sahibi ilə əlaqə saxlayın.",
+  "FillItOutAgain": "Yenidən doldurun",
+  "FormCompletedSuccessfully": "Forma uğurla tamamlandı",
+  "FormNumber": "Forma nömrəsi:",
+  "FormOwner": "Forma sahibi",
+  "Title": "Forma tamamlandı"
+}

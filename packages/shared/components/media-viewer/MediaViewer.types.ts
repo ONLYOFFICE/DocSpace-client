@@ -91,6 +91,9 @@ export interface MediaViewerProps {
   playlistPos: number;
   /** Indicates if the current file is a preview. */
   isPreviewFile?: boolean;
+
+  autoPlay?: boolean;
+
   isPublicFile?: boolean;
   /** List of playlists. */
   playlist: PlaylistType[];

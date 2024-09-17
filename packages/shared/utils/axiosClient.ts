@@ -220,11 +220,19 @@ class AxiosClient {
       }
 
       const loginURL = combineUrl(proxyURL, "/login");
+
       if (!this.isSSR) {
         switch (error.response?.status) {
           case 401: {
             if (options.skipUnauthorized) return Promise.resolve();
+
             if (options.skipLogout) return Promise.reject(error);
+
+            console.log("debug is SDK frame", window?.ClientConfig?.isFrame);
+
+            if (window?.ClientConfig?.isFrame) {
+              break;
+            }
 
             const opt: AxiosRequestConfig = {
               method: "POST",
@@ -244,14 +252,13 @@ class AxiosClient {
             break;
           case 403: {
             const pathname = window.location.pathname;
-            const isFrame = window?.ClientConfig?.isFrame;
 
             const isArchived = pathname.indexOf("/rooms/archived") !== -1;
 
             const isRooms =
               pathname.indexOf("/rooms/shared") !== -1 || isArchived;
 
-            if (isRooms && !skipRedirect && !isFrame) {
+            if (isRooms && !skipRedirect && !window?.ClientConfig?.isFrame) {
               setTimeout(() => {
                 window.DocSpace.navigate(isArchived ? "/archived" : "/");
               }, 1000);
@@ -268,6 +275,7 @@ class AxiosClient {
 
         return Promise.reject(error);
       }
+
       switch (error.response?.status) {
         case 401:
           return Promise.resolve();

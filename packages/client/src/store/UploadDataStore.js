@@ -25,9 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable, runInAction } from "mobx";
+import { Trans } from "react-i18next";
 import { TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
 import uniqueid from "lodash/uniqueId";
 import sumBy from "lodash/sumBy";
+import uniqBy from "lodash/uniqBy";
 import { ConflictResolveType } from "@docspace/shared/enums";
 import {
   getFileInfo,
@@ -57,6 +59,8 @@ import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
+import { Link } from "@docspace/shared/components/link";
+import { globalColors } from "@docspace/shared/themes";
 
 class UploadDataStore {
   settingsStore;
@@ -636,7 +640,7 @@ class UploadDataStore {
 
     if (this.uploaded || (this.isParallel && allFilesIsUploaded)) {
       this.setConversionPercent(100);
-      this.finishUploadFiles();
+      this.finishUploadFiles(t);
     } else {
       runInAction(() => {
         this.converted = true;
@@ -693,7 +697,10 @@ class UploadDataStore {
     let conflicts = await checkIsFileExist(toFolderId, filesArray);
     const folderInfo = await getFolderInfo(toFolderId);
 
-    conflicts = conflicts.map((fileTitle) => ({ title: fileTitle }));
+    conflicts = conflicts.map((fileTitle) => ({
+      title: fileTitle,
+      isFile: true,
+    }));
 
     if (conflicts.length > 0) {
       this.setConflictDialogData(conflicts, {
@@ -707,14 +714,6 @@ class UploadDataStore {
   };
 
   startUpload = (uploadFiles, folderId, t) => {
-    const withoutHiddenFiles = Object.values(uploadFiles).filter((f) => {
-      const isHidden = /(^|\/)\.[^\/\.]/g.test(f.name);
-
-      return !isHidden;
-    });
-
-    console.log("startUpload", { withoutHiddenFiles, uploadFiles });
-
     const { canConvert } = this.filesSettingsStore;
 
     const toFolderId = folderId ? folderId : this.selectedFolderStore.id;
@@ -736,10 +735,10 @@ class UploadDataStore {
     let filesSize = 0;
     let convertSize = 0;
 
-    const uploadFilesArray = Object.keys(withoutHiddenFiles);
+    const uploadFilesArray = Object.keys(uploadFiles);
     const hasFolder =
       uploadFilesArray.findIndex((_, ind) => {
-        const file = withoutHiddenFiles[ind];
+        const file = uploadFiles[ind];
 
         const filePath = file.path
           ? file.path
@@ -754,13 +753,13 @@ class UploadDataStore {
       if (this.uploaded) {
         this.isParallel = false;
       } else if (this.isParallel) {
-        this.tempFiles.push({ withoutHiddenFiles, folderId, t });
+        this.tempFiles.push({ uploadFiles, folderId, t });
         return;
       }
     }
 
     for (let index of uploadFilesArray) {
-      const file = withoutHiddenFiles[index];
+      const file = uploadFiles[index];
 
       const parts = file.name.split(".");
       const ext = parts.length > 1 ? "." + parts.pop() : "";
@@ -770,7 +769,8 @@ class UploadDataStore {
         file: file,
         uniqueId: uniqueid("download_row-key_"),
         fileId: null,
-        toFolderId,
+        // toFolderId,
+        toFolderId: file.parentFolderId,
         action: "upload",
         error: file.size ? null : t("Files:EmptyFile"),
         fileInfo: null,
@@ -1260,7 +1260,7 @@ class UploadDataStore {
     let files = this.files;
 
     if (files.length === 0 || this.filesSize === 0) {
-      return this.finishUploadFiles();
+      return this.finishUploadFiles(t);
     }
 
     const progressData = {
@@ -1307,7 +1307,7 @@ class UploadDataStore {
       }
 
       if (!this.filesToConversion.length) {
-        this.finishUploadFiles();
+        this.finishUploadFiles(t);
       } else {
         runInAction(() => {
           this.uploaded = true;
@@ -1369,7 +1369,7 @@ class UploadDataStore {
       toFolderId,
       fileName,
       fileSize,
-      relativePath,
+      "", // relativePath,
       file.encrypted,
       file.lastModifiedDate,
       createNewIfExist,
@@ -1509,7 +1509,7 @@ class UploadDataStore {
 
         if (allFilesIsUploaded) {
           if (!this.filesToConversion.length) {
-            this.finishUploadFiles();
+            this.finishUploadFiles(t);
           } else {
             runInAction(() => {
               this.uploaded = true;
@@ -1539,7 +1539,7 @@ class UploadDataStore {
       });
   };
 
-  finishUploadFiles = () => {
+  finishUploadFiles = (t) => {
     const { fetchFiles, filter } = this.filesStore;
     const { withPaging } = this.settingsStore;
 
@@ -1551,7 +1551,7 @@ class UploadDataStore {
       this.asyncUploadObj = {};
 
       for (let item of this.tempFiles) {
-        const { uploadFiles, folderId, t } = item;
+        const { uploadFiles, folderId } = item;
         this.startUpload(uploadFiles, folderId, t);
       }
       this.tempFiles = [];
@@ -1559,12 +1559,36 @@ class UploadDataStore {
       return;
     }
 
-    const totalErrorsCount = sumBy(this.files, (f) => {
-      f.error && toastr.error(f.error);
-      return f.error ? 1 : 0;
-    });
+    const filesWithErrors = this.files.filter((f) => f.error);
+
+    const totalErrorsCount = filesWithErrors.length;
 
     if (totalErrorsCount > 0) {
+      const uniqErrors = uniqBy(filesWithErrors, "error");
+      uniqErrors.forEach((f) =>
+        f.error.indexOf("password") > -1
+          ? toastr.warning(
+              <Trans
+                i18nKey="Files:PasswordProtectedFiles"
+                t={t}
+                components={[
+                  <Link
+                    isHovered
+                    color={globalColors.link}
+                    onClick={() => {
+                      toastr.clear();
+                      this.setUploadPanelVisible(true);
+                    }}
+                  />,
+                ]}
+              />,
+              null,
+              60000,
+              true,
+            )
+          : toastr.error(f.error),
+      );
+
       this.primaryProgressDataStore.setPrimaryProgressBarShowError(true); // for empty file
       this.primaryProgressDataStore.setPrimaryProgressBarErrors(
         totalErrorsCount,

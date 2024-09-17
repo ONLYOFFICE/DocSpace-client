@@ -399,7 +399,7 @@ const InsideGroupTableRow = (props) => {
           directionY="both"
           size="content"
           modernView
-          manualWidth={"fit-content"}
+          manualWidth="auto"
           isLoading={isLoading}
           optionStyle={{ maxWidth: "400px" }}
           textOverflow
@@ -442,7 +442,7 @@ const InsideGroupTableRow = (props) => {
         size="content"
         displaySelectedOption
         modernView
-        manualWidth={"fit-content"}
+        manualWidth="auto"
         isLoading={isLoading}
       />
     );

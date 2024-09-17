@@ -38,7 +38,7 @@ interface ViewerProps {
   visible: boolean;
   isImage: boolean;
   isPdf: boolean;
-
+  autoPlay: boolean;
   playlist: PlaylistType[];
 
   audioIcon: string;

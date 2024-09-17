@@ -31,7 +31,7 @@ import { Avatar } from "@docspace/shared/components/avatar";
 
 import CatalogSpamIcon from "PUBLIC_DIR/images/catalog.spam.react.svg";
 import { commonIconsStyles } from "@docspace/shared/utils";
-import { capitalize } from "lodash";
+import capitalize from "lodash/capitalize";
 
 const StyledCatalogSpamIcon = styled(CatalogSpamIcon)`
   ${commonIconsStyles}

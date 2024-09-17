@@ -1,1 +1,7 @@
-{}
+{
+  "PDFform": "PDF obrazec",
+  "PDFFormEditDialogDescription": "Ali želiš preklopiti v način za urejanje obrazcev? Obrazec ne bo več na voljo za izpolnjevanje in bo potrebno po urejanju znova klikniti gumb Začni izpolnjevati.",
+  "PDFFormEditDialogTitle": "Urejanje obrazca",
+  "PDFFormIsReadyToast": "PDF obrazec <1>{{filename}}</1> je pripravljen za izpolnjevanje.",
+  "PDFFormSuccessfullyCreatedDescription": "Obrazec PDF je pripravljen za izpolnjevanje. Kopiraj javno povezavo, za postopek izpolnjevanja obrazca ali povabi druge uporabnike v to sobo."
+}

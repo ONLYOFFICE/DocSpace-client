@@ -126,7 +126,7 @@ const UsersTypeTableRow = ({
             size="content"
             displaySelectedOption
             modernView
-            manualWidth="fit-content"
+            manualWidth="auto"
           />
         </div>
       </TableCell>

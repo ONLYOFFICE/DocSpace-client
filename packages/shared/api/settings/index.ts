@@ -407,16 +407,10 @@ export async function getCustomSchemaList() {
 }
 
 export function setAdditionalResources(
-  feedbackAndSupportEnabled,
-  videoGuidesEnabled,
-  helpCenterEnabled,
+  additionalResources: TAdditionalResources,
 ) {
   const data = {
-    settings: {
-      helpCenterEnabled,
-      feedbackAndSupportEnabled,
-      videoGuidesEnabled,
-    },
+    settings: additionalResources,
   };
 
   return request({
@@ -881,13 +875,6 @@ export function getStorageRegions() {
     url: "/settings/storage/s3/regions",
   };
   return request(options);
-}
-
-export function getPortalQuota() {
-  return request({
-    method: "get",
-    url: `/settings/quota`,
-  });
 }
 
 export function getAllActiveSessions() {

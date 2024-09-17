@@ -28,10 +28,6 @@ import styled, { css } from "styled-components";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
 const StyledModalDialog = styled(ModalDialog)`
-  .modal-header {
-    margin: 0;
-  }
-
   .modal-body {
     padding: 0;
   }

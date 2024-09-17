@@ -6,7 +6,6 @@
   "AttributeMatchingTooltip": "Zhoda atribútov jednotného prihlásenia so záznamami v sekcii „Účty“.",
   "Binding": "Spojenie:",
   "CertificateExist": "Certifikát s rovnakým typom akcie už existuje",
-  "ConfirmationText": "Všetky zadané údaje sa stratia. Ste si istý, že chcete pokračovať?",
   "CustomEntryButton": "Vlastný popis tlačidla prihlásenia",
   "CustomEntryTooltip": "Popis tlačidla, ktoré sa používa na prihlásenie do priestoru so službou jednotného prihlásenia",
   "DownloadMetadataXML": "Načítať SP metadáta XML",

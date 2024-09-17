@@ -593,3 +593,12 @@ export enum FileExtensions {
   XLSX = "xlsx",
   PPTX = "pptx",
 }
+
+export enum ValidationStatus {
+  Ok = 0,
+  Invalid = 1,
+  Expired = 2,
+  Password = 3,
+  InvalidPassword = 4,
+  ExternalAccessDenied = 5,
+}

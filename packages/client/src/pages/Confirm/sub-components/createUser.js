@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import SsoReactSvgUrl from "PUBLIC_DIR/images/sso.react.svg?url";
+import SsoReactSvg from "PUBLIC_DIR/images/sso.react.svg";
 
 import React, { useEffect, useState, useCallback } from "react";
 import { withTranslation, Trans } from "react-i18next";
@@ -74,6 +74,7 @@ import LanguageComboboxWrapper from "./LanguageCombobox";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 
 import { setCookie } from "@docspace/shared/utils/cookie";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 const DEFAULT_ROOM_TEXT =
   "<strong>{{firstName}} {{lastName}}</strong> invites you to join the room <strong>{{roomName}}</strong> for secure document collaboration.";
@@ -113,6 +114,9 @@ const CreateUserForm = (props) => {
     defaultPage,
     cultures,
     i18n,
+
+    licenseUrl,
+    legalTerms,
   } = props;
 
   const currentCultureName = i18n.language;
@@ -185,25 +189,6 @@ const CreateUserForm = (props) => {
     const headerKey = linkData.confirmHeader;
 
     try {
-      const toBinaryStr = (str) => {
-        const encoder = new TextEncoder();
-        const charCodes = encoder.encode(str);
-        return String.fromCharCode(...charCodes);
-      };
-
-      const loginData = window.btoa(
-        toBinaryStr(
-          JSON.stringify({
-            type: "invitation",
-            email,
-            roomName,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            linkData: linkData,
-          }),
-        ),
-      );
-
       await getUserByEmail(email, headerKey);
 
       setCookie(LANGUAGE, currentCultureName, {
@@ -218,10 +203,20 @@ const CreateUserForm = (props) => {
         sessionStorage.setItem("referenceUrl", finalUrl);
       }
 
+      const loginData = JSON.stringify({
+        type: "invitation",
+        email,
+        roomName,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        linkData: linkData,
+      });
+
+      sessionStorage.setItem("loginData", loginData);
+
       window.location.href = combineUrl(
         window.ClientConfig?.proxy?.url,
         "/login",
-        `?loginData=${loginData}`,
       );
     } catch (err) {
       console.error(err);
@@ -320,7 +315,9 @@ const CreateUserForm = (props) => {
       culture: currentCultureName,
     };
 
-    signupOAuth(signupAccount)
+    const confirmKey = linkData.confirmHeader;
+
+    signupOAuth(signupAccount, confirmKey)
       .then(() => {
         const url = roomData.roomId
           ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}/`
@@ -467,10 +464,41 @@ const CreateUserForm = (props) => {
     ? {
         ssoUrl: capabilities?.ssoUrl,
         ssoLabel: capabilities?.ssoLabel,
-        ssoSVG: SsoReactSvgUrl,
+        ssoSVG: SsoReactSvg,
       }
     : {};
 
+  const termsConditionsComponent = (
+    <div className="terms-conditions">
+      <Text fontSize={"12px"} textAlign="center">
+        <Trans
+          t={t}
+          ns="Confirm"
+          i18nKey="TermsAndConditions"
+          components={{
+            1: (
+              <ColorTheme
+                tag="a"
+                themeId={ThemeId.Link}
+                href={licenseUrl}
+                target="_blank"
+                fontSize={"12px"}
+              />
+            ),
+            2: (
+              <ColorTheme
+                tag="a"
+                themeId={ThemeId.Link}
+                href={legalTerms}
+                target="_blank"
+                fontSize={"12px"}
+              />
+            ),
+          }}
+        />
+      </Text>
+    </div>
+  );
   return (
     <StyledPage>
       <LanguageComboboxWrapper
@@ -643,7 +671,11 @@ const CreateUserForm = (props) => {
                     isVertical={true}
                     labelVisible={false}
                     hasError={isPasswordErrorShow && !passwordValid}
-                    errorMessage={t("Common:IncorrectPassword")}
+                    errorMessage={
+                      password
+                        ? t("Common:IncorrectPassword")
+                        : t("Common:RequiredField")
+                    }
                   >
                     <PasswordInput
                       simpleView={false}
@@ -684,6 +716,8 @@ const CreateUserForm = (props) => {
                       tooltipAllowedCharacters={`${t("Common:AllowedCharacters")}: ${ALLOWED_PASSWORD_CHARACTERS}`}
                     />
                   </FieldContainer>
+
+                  {termsConditionsComponent}
 
                   <Button
                     className="login-button"
@@ -736,6 +770,8 @@ export default inject(({ settingsStore, authStore }) => {
     currentColorScheme,
     userNameRegex,
     cultures,
+    licenseUrl,
+    legalTerms,
   } = settingsStore;
   return {
     settings: passwordSettings,
@@ -750,6 +786,9 @@ export default inject(({ settingsStore, authStore }) => {
     currentColorScheme,
     userNameRegex,
     cultures,
+
+    licenseUrl,
+    legalTerms,
   };
 })(
   withCultureNames(

@@ -26,10 +26,9 @@
 
 import React, { useMemo, useState, useCallback, useEffect } from "react";
 
-import { useTranslation, Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
-import { toastr } from "@docspace/shared/components/toast";
 import {
   Events,
   FilesSelectorFilterTypes,
@@ -55,7 +54,7 @@ import {
   ConflictResolveDialog,
   ConvertDialog,
   CreateRoomDialog,
-  InviteUsersWarningDialog,
+  InviteQuotaWarningDialog,
   CreateRoomConfirmDialog,
   ChangeUserTypeDialog,
   SubmitToFormGallery,
@@ -78,11 +77,11 @@ import FilesSelector from "../FilesSelector";
 
 import LeaveRoomDialog from "../dialogs/LeaveRoomDialog";
 import ChangeRoomOwnerPanel from "../panels/ChangeRoomOwnerPanel";
-import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
 import { PDFFormEditingDialog } from "../dialogs/PDFFormEditingDialog";
 import { SharePDFFormDialog } from "../dialogs/SharePDFFormDialog";
 import { FillPDFDialog } from "../dialogs/FillPDFDialog";
 import { ShareCollectSelector } from "../ShareCollectSelector";
+import { saveToLocalStorage } from "SRC_DIR/pages/PortalSettings/utils";
 
 const Panels = (props) => {
   const {
@@ -116,7 +115,7 @@ const Panels = (props) => {
     confirmDialogIsLoading,
     restoreAllPanelVisible,
     archiveDialogVisible,
-    inviteUsersWarningDialogVisible,
+    inviteQuotaWarningDialogVisible,
     preparationPortalDialogVisible,
     changeUserTypeDialogVisible,
     restoreRoomDialogVisible,
@@ -139,14 +138,11 @@ const Panels = (props) => {
     selectFileFormRoomOpenRoot,
     fillPDFDialogData,
     shareCollectSelector,
-  } = props;
 
-  const [createPDFFormFile, setCreatePDFFormFile] = useState({
-    visible: false,
-    file: null,
-    localKey: "",
-    onClose: null,
-  });
+    setQuotaWarningDialogVisible,
+    resetQuotaItem,
+    isShowWarningDialog,
+  } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
     visible: false,
@@ -175,41 +171,6 @@ const Panels = (props) => {
     return text[selectFileFormRoomFilterParam];
   }, [selectFileFormRoomFilterParam, t]);
 
-  const handleCreatePDFFormFile = useCallback(
-    /**
-     * @param {CustomEvent} event
-     */
-    (event) => {
-      const { file, show, localKey } = event.detail;
-
-      if (!show) {
-        return toastr.success(
-          <Trans
-            ns="PDFFormDialog"
-            i18nKey="PDFFormIsReadyToast"
-            components={{ 1: <strong /> }}
-            values={{ filename: file.title }}
-          />,
-        );
-      }
-
-      setCreatePDFFormFile({
-        visible: true,
-        file,
-        localKey,
-        onClose: () => {
-          setCreatePDFFormFile({
-            visible: false,
-            onClose: null,
-            file: null,
-            localKey: "",
-          });
-        },
-      });
-    },
-    [],
-  );
-
   const handleSharePDFForm = useCallback(
     /**
      * @param {CustomEvent} event
@@ -229,20 +190,23 @@ const Panels = (props) => {
   );
 
   useEffect(() => {
-    window.addEventListener(
-      Events.CREATE_PDF_FORM_FILE,
-      handleCreatePDFFormFile,
-    );
     window.addEventListener(Events.Share_PDF_Form, handleSharePDFForm);
 
     return () => {
-      window.removeEventListener(
-        Events.CREATE_PDF_FORM_FILE,
-        handleCreatePDFFormFile,
-      );
       window.removeEventListener(Events.Share_PDF_Form, handleSharePDFForm);
     };
-  }, [handleCreatePDFFormFile, handleSharePDFForm]);
+  }, [handleSharePDFForm]);
+
+  useEffect(() => {
+    if (isShowWarningDialog) {
+      setQuotaWarningDialogVisible(true);
+
+      resetQuotaItem();
+    }
+    return () => {
+      resetQuotaItem();
+    };
+  }, [isShowWarningDialog]);
 
   return [
     settingsPluginDialogVisible && (
@@ -327,8 +291,8 @@ const Panels = (props) => {
     ),
     archiveDialogVisible && <ArchiveDialog key="archive-dialog" />,
     restoreRoomDialogVisible && <RestoreRoomDialog key="archive-dialog" />,
-    inviteUsersWarningDialogVisible && (
-      <InviteUsersWarningDialog key="invite-users-warning-dialog" />
+    inviteQuotaWarningDialogVisible && (
+      <InviteQuotaWarningDialog key="invite-users-warning-dialog" />
     ),
     preparationPortalDialogVisible && (
       <PreparationPortalDialog key="preparation-portal-dialog" />
@@ -357,12 +321,6 @@ const Panels = (props) => {
       <ChangeRoomOwnerPanel key="change-room-owner" />
     ),
     shareFolderDialogVisible && <ShareFolderDialog key="share-folder-dialog" />,
-    createPDFFormFile.visible && (
-      <CreatedPDFFormDialog
-        key="created-pdf-form-dialog"
-        {...createPDFFormFile}
-      />
-    ),
     pdfFormEditVisible && <PDFFormEditingDialog key="pdf-form-edit-dialog" />,
     sharePDFForm.visible && (
       <SharePDFFormDialog key="share-pdf-form-dialog" {...sharePDFForm} />
@@ -388,7 +346,7 @@ export default inject(
     backup,
     createEditRoomStore,
     pluginStore,
-    filesStore,
+    currentQuotaStore,
     filesActionsStore,
   }) => {
     const {
@@ -421,7 +379,7 @@ export default inject(
       selectFileFormRoomFilterParam,
       setSelectFileFormRoomDialogVisible,
       invitePanelOptions,
-      inviteUsersWarningDialogVisible,
+      inviteQuotaWarningDialogVisible,
       changeUserTypeDialogVisible,
       changeQuotaDialogVisible,
       submitToGalleryDialogVisible,
@@ -438,6 +396,12 @@ export default inject(
       selectFileFormRoomOpenRoot,
       fillPDFDialogData,
       shareCollectSelector,
+
+      setQuotaWarningDialogVisible,
+      setIsNewRoomByCurrentUser,
+      setIsNewUserByCurrentUser,
+      isNewUserByCurrentUser,
+      isNewRoomByCurrentUser,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -447,12 +411,30 @@ export default inject(
     const { isVisible: versionHistoryPanelVisible } = versionHistoryStore;
     const { hotkeyPanelVisible } = settingsStore;
     const { confirmDialogIsLoading } = createEditRoomStore;
+    const { isRoomsTariffAlmostLimit, isUserTariffAlmostLimit } =
+      currentQuotaStore;
 
     const {
       settingsPluginDialogVisible,
       deletePluginDialogVisible,
       pluginDialogVisible,
     } = pluginStore;
+
+    const isAccounts = window.location.href.indexOf("accounts/people") !== -1;
+    const resetQuotaItem = () => {
+      if (isNewUserByCurrentUser) setIsNewUserByCurrentUser(false);
+      if (isNewRoomByCurrentUser) setIsNewRoomByCurrentUser(false);
+    };
+
+    const closeItems = JSON.parse(localStorage.getItem("warning-dialog")) || [];
+
+    const isShowWarningDialog = isAccounts
+      ? isUserTariffAlmostLimit &&
+        !closeItems.includes("user-quota") &&
+        isNewUserByCurrentUser
+      : isRoomsTariffAlmostLimit &&
+        !closeItems.includes("room-quota") &&
+        isNewRoomByCurrentUser;
 
     return {
       preparationPortalDialogVisible,
@@ -485,7 +467,7 @@ export default inject(
       restoreAllPanelVisible,
       invitePanelVisible: invitePanelOptions.visible,
       archiveDialogVisible,
-      inviteUsersWarningDialogVisible,
+      inviteQuotaWarningDialogVisible,
       confirmDialogIsLoading,
       changeUserTypeDialogVisible,
       restoreRoomDialogVisible,
@@ -508,6 +490,10 @@ export default inject(
       selectFileFormRoomOpenRoot,
       fillPDFDialogData,
       shareCollectSelector,
+
+      setQuotaWarningDialogVisible,
+      resetQuotaItem,
+      isShowWarningDialog,
     };
   },
 )(observer(Panels));

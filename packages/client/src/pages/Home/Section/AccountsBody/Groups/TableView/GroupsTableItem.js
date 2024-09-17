@@ -45,6 +45,7 @@ const GroupsTableItem = ({
   getGroupContextOptions,
   getModel,
   openGroupAction,
+  peopleAccountsGroupsColumnIsEnabled,
   managerAccountsGroupsColumnIsEnabled,
 
   changeGroupSelection,
@@ -138,6 +139,23 @@ const GroupsTableItem = ({
 
           <Badges isLDAP={item.isLDAP} />
         </TableCell>
+
+        {peopleAccountsGroupsColumnIsEnabled ? (
+          <TableCell className="table-container_group-people">
+            <Text
+              title={item.membersCount}
+              fontWeight="600"
+              fontSize="13px"
+              isTextOverflow
+              className="table-cell_group-people"
+              color={theme.filesSection.tableView.row.sideColor}
+            >
+              {item.membersCount}
+            </Text>
+          </TableCell>
+        ) : (
+          <div />
+        )}
 
         {managerAccountsGroupsColumnIsEnabled ? (
           <TableCell className={"table-container_group-manager"}>

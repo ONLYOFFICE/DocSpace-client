@@ -1,4 +1,11 @@
 {
+  "CodeSuccessfullyCopied": "Código para inserir copiado com sucesso para a área de transferência",
+  "ContentRestricted": "A cópia de conteúdo, download de arquivos e impressão são restritos.",
+  "DisplaySettings": "Configurações do visor",
+  "EmbeddingBarAllowList": "Adicione o URL do site para incorporação à <1>lista de permissões</1>.",
+  "EmbeddingBarDescription": "A incorporação só funcionará para os URLs especificados pelo administrador do {{productName}} nas configurações do SDK JavaScript.",
   "Height": "Altura",
+  "Link": "Link",
+  "LinkProtectedWithPassword": "O link é protegido por senha.",
   "Width": "Largura"
 }

@@ -1,1 +1,12 @@
-{}
+{
+  "BackToRoom": "Atpakaļ uz telpu",
+  "CheckReadyForms": "Pārbaudīt gatavās veidlapas",
+  "Description": "Jūsu veidlapa ir aizpildīta un saglabāta",
+  "DescriptionForAnonymous": "Jūs iesniedzāt aizpildītu PDF veidlapu, kurai tika piešķirts unikāls numurs. Lai pārbaudītu statusu, sazinieties ar veidlapas īpašnieku, norādot piešķirto numuru.",
+  "DescriptionForRegisteredUser": "Aizpildītā PDF veidlapa ir saglabāta un ir pieejama mapē Complete (Pabeigts). Lai pārbaudītu statusu, sazinieties ar veidlapas īpašnieku, norādot piešķirto numuru.",
+  "FillItOutAgain": "Aizpildiet vēlreiz",
+  "FormCompletedSuccessfully": "Veidlapa ir veiksmīgi pabeigta",
+  "FormNumber": "Veidlapas numurs:",
+  "FormOwner": "Veidlapas īpašnieks",
+  "Title": "Veidlapa ir aizpildīta"
+}

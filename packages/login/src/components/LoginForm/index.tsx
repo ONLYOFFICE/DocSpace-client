@@ -38,6 +38,7 @@ import { useTranslation } from "react-i18next";
 import ReCAPTCHA from "react-google-recaptcha";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { useTheme } from "styled-components";
+import { Id } from "react-toastify";
 import { useSearchParams } from "next/navigation";
 
 import { Text } from "@docspace/shared/components/text";
@@ -52,6 +53,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { thirdPartyLogin, checkConfirmLink } from "@docspace/shared/api/user";
 import { setWithCredentialsStatus } from "@docspace/shared/api/client";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
+import { RecaptchaType } from "@docspace/shared/enums";
 
 import { LoginFormProps } from "@/types";
 import { getEmailFromInvitation, getConfirmDataFromInvitation } from "@/utils";
@@ -59,21 +61,25 @@ import { getEmailFromInvitation, getConfirmDataFromInvitation } from "@/utils";
 import EmailContainer from "./sub-components/EmailContainer";
 import PasswordContainer from "./sub-components/PasswordContainer";
 import ForgotContainer from "./sub-components/ForgotContainer";
+import LDAPContainer from "./sub-components/LDAPContainer";
+
+import { LoginDispatchContext, LoginValueContext } from "../Login";
 
 import { StyledCaptcha } from "./LoginForm.styled";
-import { LoginDispatchContext, LoginValueContext } from "../Login";
-import LDAPContainer from "./sub-components/LDAPContainer";
-import { RecaptchaType } from "@docspace/shared/enums";
+
+let showToastr = true;
 
 const LoginForm = ({
   hashSettings,
   cookieSettingsEnabled,
   reCaptchaPublicKey,
   reCaptchaType,
+  ldapDomain,
+  ldapEnabled,
 }: LoginFormProps) => {
-  const { isLoading, isModalOpen, ldapDomain } = useContext(LoginValueContext);
+  const { isLoading, isModalOpen } = useContext(LoginValueContext);
   const { setIsLoading } = useContext(LoginDispatchContext);
-  const toastId = useRef(null);
+  const toastId = useRef<Id>();
 
   const searchParams = useSearchParams();
 
@@ -85,18 +91,14 @@ const LoginForm = ({
   const message = searchParams.get("message");
   const confirmedEmail = searchParams.get("confirmedEmail");
   const authError = searchParams.get("authError");
-  const loginData = searchParams.get("loginData");
   const referenceUrl = searchParams.get("referenceUrl");
 
   const isDesktop =
     typeof window !== "undefined" && window["AscDesktopEditor"] !== undefined;
 
-  const [emailFromInvitation, setEmailFromInvitation] = useState(
-    getEmailFromInvitation(loginData),
-  );
-  const [identifier, setIdentifier] = useState(
-    getEmailFromInvitation(loginData),
-  );
+  const emailFromInvitation = getEmailFromInvitation();
+
+  const [identifier, setIdentifier] = useState(getEmailFromInvitation());
 
   const [isEmailErrorShow, setIsEmailErrorShow] = useState(false);
   const [errorText, setErrorText] = useState("");
@@ -105,8 +107,10 @@ const LoginForm = ({
   const [identifierValid, setIdentifierValid] = useState(true);
   const [password, setPassword] = useState("");
 
-  const [isChecked, setIsChecked] = useState(false);
-  const [isLdapLoginChecked, setIsLdapLoginChecked] = useState(!!ldapDomain);
+  const [isChecked, setIsChecked] = useState(true);
+  const [isLdapLoginChecked, setIsLdapLoginChecked] = useState(
+    ldapEnabled || false,
+  );
   const [isCaptcha, setIsCaptcha] = useState(false);
   const [isCaptchaSuccessful, setIsCaptchaSuccess] = useState(false);
   const [isCaptchaError, setIsCaptchaError] = useState(false);
@@ -115,12 +119,8 @@ const LoginForm = ({
   const hCaptchaRef = useRef<HCaptcha>(null);
 
   useLayoutEffect(() => {
-    const email = getEmailFromInvitation(loginData);
-
-    setIdentifier(email);
-    setEmailFromInvitation(email);
     frameCallCommand("setIsLoaded");
-  }, [loginData]);
+  }, []);
 
   const authCallback = useCallback(
     async (profile: string) => {
@@ -166,10 +166,6 @@ const LoginForm = ({
   );
 
   useEffect(() => {
-    setIsLdapLoginChecked(!!ldapDomain);
-  }, [ldapDomain]);
-
-  useEffect(() => {
     const profile = localStorage.getItem("profile");
     if (!profile) return;
 
@@ -195,8 +191,7 @@ const LoginForm = ({
       !toastr.isActive(toastId.current || "confirm-email-toast")
     )
       toastId.current = toastr.success(text);
-    if (authError && ready) toastr.error(t("Common:ProviderLoginError"));
-  }, [message, confirmedEmail, t, ready, authError, authCallback]);
+  }, [message, confirmedEmail, t, ready, authCallback]);
 
   const onChangeLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
     //console.log("onChangeLogin", e.target.value);
@@ -257,7 +252,7 @@ const LoginForm = ({
 
     const pwd = isLdapLoginChecked ? pass : undefined;
 
-    const confirmData = getConfirmDataFromInvitation(loginData);
+    const confirmData = getConfirmDataFromInvitation();
 
     isDesktop && checkPwd();
     const session = !isChecked;
@@ -272,6 +267,9 @@ const LoginForm = ({
         return res;
       })
       .then((res: string | object) => {
+        const isLoginData = sessionStorage.getItem("loginData");
+        if (isLoginData) sessionStorage.removeItem("loginData");
+
         const isConfirm = typeof res === "string" && res.includes("confirm");
         const redirectPath =
           referenceUrl || sessionStorage.getItem("referenceUrl");
@@ -324,7 +322,6 @@ const LoginForm = ({
     reCaptchaType,
     isCaptchaSuccessful,
     referenceUrl,
-    loginData,
   ]);
 
   const onBlurEmail = () => {
@@ -378,7 +375,24 @@ const LoginForm = ({
     };
   }, [isModalOpen, onSubmit]);
 
+  useEffect(() => {
+    const onClearStorage = () => {
+      const isLoginData = sessionStorage.getItem("loginData");
+      if (isLoginData) sessionStorage.removeItem("loginData");
+    };
+
+    window.addEventListener("beforeunload", onClearStorage);
+    return () => {
+      window.removeEventListener("beforeunload", onClearStorage);
+    };
+  }, []);
+
   const passwordErrorMessage = errorMessage();
+
+  if (authError && ready) {
+    if (showToastr) toastr.error(t("Common:ProviderLoginError"));
+    showToastr = false;
+  }
 
   return (
     <form className="auth-form-container">
@@ -411,7 +425,7 @@ const LoginForm = ({
         onChangeCheckbox={onChangeCheckbox}
       />
 
-      {ldapDomain && (
+      {ldapDomain && ldapEnabled && (
         <LDAPContainer
           ldapDomain={ldapDomain}
           isLdapLoginChecked={isLdapLoginChecked}
@@ -454,7 +468,7 @@ const LoginForm = ({
         label={
           isLoading ? t("Common:LoadingProcessing") : t("Common:LoginButton")
         }
-        tabIndex={1}
+        tabIndex={5}
         isDisabled={isLoading}
         isLoading={isLoading}
         onClick={onSubmit}

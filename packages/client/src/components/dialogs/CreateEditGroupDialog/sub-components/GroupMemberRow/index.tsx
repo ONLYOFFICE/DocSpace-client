@@ -24,10 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { memo } from "react";
 import { ReactSVG } from "react-svg";
 import { useTranslation } from "react-i18next";
-
-import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 
 import {
   Avatar,
@@ -36,18 +35,16 @@ import {
 } from "@docspace/shared/components/avatar";
 import { getUserRole, getUserTypeLabel } from "@docspace/shared/utils/common";
 import { TUser } from "@docspace/shared/api/people/types";
+import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 
 import * as Styled from "./index.styled";
 
 interface GroupMemberRowProps {
   groupMember: TUser;
-  onClickRemove: () => void;
+  removeMember: (member: TUser) => void;
 }
 
-const GroupMemberRow = ({
-  groupMember,
-  onClickRemove,
-}: GroupMemberRowProps) => {
+const GroupMemberRow = ({ groupMember, removeMember }: GroupMemberRowProps) => {
   const { t } = useTranslation(["Common"]);
 
   const role = getUserRole(groupMember);
@@ -68,6 +65,10 @@ const GroupMemberRow = ({
     default:
   }
 
+  const onRemove = () => {
+    removeMember(groupMember);
+  };
+
   return (
     <Styled.GroupMemberRow>
       <Avatar
@@ -83,10 +84,10 @@ const GroupMemberRow = ({
       <ReactSVG
         className="remove-icon"
         src={RemoveReactSvgUrl}
-        onClick={onClickRemove}
+        onClick={onRemove}
       />
     </Styled.GroupMemberRow>
   );
 };
 
-export default GroupMemberRow;
+export default memo(GroupMemberRow);

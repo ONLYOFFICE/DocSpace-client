@@ -1,5 +1,6 @@
 {
   "ActiveSessions": "アクティブなセッション",
+  "AutoDeleteTitle": "60日以上前のセッションは自動的に削除されます。",
   "ChangeEmailSuccess": "メールの変更が完了しました 。",
   "ChangePasswordAfterLoggingOut": "ログアウト後にパスワードを変更する",
   "ConnectSocialNetworks": "SNSに接続する",
@@ -14,7 +15,6 @@
   "InterfaceTheme": "インターフェイスのテーマ",
   "LightTheme": "ライトのテーマ",
   "LogoutActiveConnection": "アクティブな接続からログアウトする",
-  "LogoutAllActiveConnections": "すべてのアクティブな接続からログアウトする",
   "LogoutAllActiveSessionsDescription": "この接続以外の接続は、現在使用中のため、ログアウトされます。",
   "LogoutBtn": "ログアウト",
   "LogoutDescription": "ご注意：この接続以外の接続は、現在使用中のため、ログアウトされます。",
@@ -27,5 +27,6 @@
   "SuccessLogout": "アクティブな接続はログアウトされました：{{platform}}, {{browser}}",
   "SystemTheme": "システムテーマのように",
   "SystemThemeDescription": "システムの動作に合わせて、ライトテーマとダークテーマを自動で切り替えます。",
+  "TerminateAllSessions": "現在のセッション以外のすべてのセッションを終了します。",
   "TwoFactorDescription": "管理者がすべてのユーザーに対して、コード生成アプリによる二要素認証を有効にしました。"
 }

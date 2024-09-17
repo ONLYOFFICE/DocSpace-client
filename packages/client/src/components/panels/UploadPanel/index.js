@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import ClearActiveReactSvgUrl from "PUBLIC_DIR/images/clear.active.react.svg?url";
+import ClearReactSvgUrl from "PUBLIC_DIR/images/clear.react.svg?url";
 import ButtonCancelReactSvgUrl from "PUBLIC_DIR/images/button.cancel.react.svg?url";
 
 import React from "react";
@@ -39,9 +39,10 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { DialogAsideSkeleton } from "@docspace/shared/skeletons/dialog";
 
-import { StyledUploadHeader, StyledUploadBody } from "../StyledPanels";
+import { StyledUploadBody } from "../StyledPanels";
 import FileList from "./FileList";
 import withLoader from "../../../HOCs/withLoader";
+import { AsideHeader } from "@docspace/shared/components/aside";
 
 const StyledModal = styled(ModalDialog)`
   .heading {
@@ -124,34 +125,24 @@ class UploadPanelComponent extends React.Component {
         ? t("UploadAndConvert")
         : t("Files:Convert");
 
+    const url =
+      uploaded && converted ? ClearReactSvgUrl : ButtonCancelReactSvgUrl;
+
+    const clickEvent =
+      uploaded && converted
+        ? this.clearUploadPanel
+        : uploaded
+          ? cancelConversion
+          : this.onCancelUpload;
+
     return (
       <StyledModal
         visible={visible}
         onClose={this.onClose}
         displayType={ModalDialogType.aside}
+        headerIcons={[{ key: "upload-panel", url, onClick: clickEvent }]}
       >
-        <ModalDialog.Header>
-          <StyledUploadHeader>
-            <div>{title}</div>
-            <div>
-              {uploaded && converted ? (
-                <IconButton
-                  size="20"
-                  iconName={ClearActiveReactSvgUrl}
-                  isClickable
-                  onClick={this.clearUploadPanel}
-                />
-              ) : (
-                <IconButton
-                  size="20"
-                  iconName={ButtonCancelReactSvgUrl}
-                  isClickable
-                  onClick={uploaded ? cancelConversion : this.onCancelUpload}
-                />
-              )}
-            </div>
-          </StyledUploadHeader>
-        </ModalDialog.Header>
+        <ModalDialog.Header>{title}</ModalDialog.Header>
         <ModalDialog.Body>
           <StyledUploadBody>
             <FileList />

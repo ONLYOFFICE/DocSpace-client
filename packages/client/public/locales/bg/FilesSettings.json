@@ -6,6 +6,7 @@
   "DisplayTemplates": "Покажи Шаблони",
   "IntermediateVersion": "Запази всички запазени междинни версии",
   "KeepIntermediateVersion": "Запази междинните версии при редактиране",
+  "OpenSameTab": "Отворете редактора на {{organizationName}} в същия раздел",
   "OriginalCopy": "Запази копието на файла и в оригиналния формат",
   "StoringFileVersion": "Съхранение на версии на файлове",
   "ThirdPartyAccounts": "Акаунти на трети страни",

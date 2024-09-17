@@ -49,7 +49,7 @@ import ChangePortalOwnerDialog from "./ChangePortalOwnerDialog";
 import ChangeNameDialog from "./ChangeNameDialog";
 import AvatarEditorDialog from "./AvatarEditorDialog";
 import DeletePortalDialog from "./DeletePortalDialog";
-import InviteUsersWarningDialog from "./InviteUsersWarningDialog";
+import InviteQuotaWarningDialog from "./InviteQuotaWarningDialog";
 import LogoutSessionDialog from "./LogoutSessionDialog";
 import LogoutAllSessionDialog from "./LogoutAllSessionDialog";
 import CreateRoomConfirmDialog from "./CreateRoomConfirmDialog";
@@ -98,7 +98,7 @@ export {
   AvatarEditorDialog,
   DeletePortalDialog,
   LogoutSessionDialog,
-  InviteUsersWarningDialog,
+  InviteQuotaWarningDialog,
   LogoutAllSessionDialog,
   PortalRenamingDialog,
   DataReassignmentDialog,

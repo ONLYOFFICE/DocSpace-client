@@ -1,5 +1,6 @@
 {
   "ActiveSessions": "Các phiên Hoạt động",
+  "AutoDeleteTitle": "Tất cả các phiên giao dịch trên 60 ngày sẽ tự động bị xóa.",
   "ChangeEmailSuccess": "Email đã được thay đổi thành công",
   "ChangePasswordAfterLoggingOut": "Thay đổi mật khẩu sau khi đăng xuất",
   "ConnectSocialNetworks": "Kết nối mạng xã hội của bạn",
@@ -14,7 +15,6 @@
   "InterfaceTheme": "Chủ đề giao diện\"",
   "LightTheme": "Nền sáng",
   "LogoutActiveConnection": "Đăng xuất khỏi kết nối đang hoạt động",
-  "LogoutAllActiveConnections": "Đăng xuất khỏi tất cả các kết nối đang hoạt động",
   "LogoutAllActiveSessionsDescription": "Tất cả các kết nối đang hoạt động ngoại trừ kết nối này sẽ được đăng xuất, vì nó hiện đang được sử dụng.",
   "LogoutBtn": "Đăng xuất",
   "LogoutDescription": "Lưu ý. Tất cả các kết nối đang hoạt động ngoại trừ kết nối này sẽ được đăng xuất, vì nó hiện đang được sử dụng.",
@@ -27,5 +27,6 @@
   "SuccessLogout": "Kết nối hoạt động đã được đăng xuất: {{platform}}, {{browser}}",
   "SystemTheme": "Sử dụng chủ đề hệ thống",
   "SystemThemeDescription": "Tự động chuyển đổi giữa các chế độ sáng và tối khi hệ thống của bạn hoạt động.",
+  "TerminateAllSessions": "Chấm dứt tất cả các phiên giao dịch ngoại trừ phiên hiện tại",
   "TwoFactorDescription": " Xác thực hai yếu tố qua ứng dụng tạo mã đã được quản trị viên bật cho tất cả người dùng."
 }

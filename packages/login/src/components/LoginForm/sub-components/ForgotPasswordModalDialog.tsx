@@ -49,7 +49,7 @@ const ForgotPasswordModalDialog = ({
   userEmail,
   onDialogClose,
 }: ForgotPasswordModalDialogProps) => {
-  const [email, setEmail] = useState(userEmail);
+  const [email, setEmail] = useState(userEmail ?? "");
   const [emailError, setEmailError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorText, setErrorText] = useState("");
@@ -118,11 +118,7 @@ const ForgotPasswordModalDialog = ({
       onClose={onDialogClose}
       id="forgot-password-modal"
     >
-      <ModalDialog.Header>
-        <Text isBold fontSize="21px">
-          {t("PasswordRecoveryTitle")}
-        </Text>
-      </ModalDialog.Header>
+      <ModalDialog.Header>{t("PasswordRecoveryTitle")}</ModalDialog.Header>
       <ModalDialog.Body>
         <Text
           key="text-body"

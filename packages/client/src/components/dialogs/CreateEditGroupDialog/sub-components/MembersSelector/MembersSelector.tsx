@@ -25,56 +25,59 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { Box } from "@docspace/shared/components/box";
-import { Button } from "@docspace/shared/components/button";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { Text } from "@docspace/shared/components/text";
+import { ShareAccessRights } from "@docspace/shared/enums";
+import { Portal } from "@docspace/shared/components/portal";
+import { TUser } from "@docspace/shared/api/people/types";
 
-import StyledModalDialog from "../styled-containers/StyledModalDialog";
+import AddUsersPanel from "../../../../panels/AddUsersPanel";
+import { getAccessOptions } from "../../../../panels/InvitePanel/utils";
 
-const ResetConfirmationModal = (props) => {
-  const { t } = useTranslation(["SingleSignOn", "Common"]);
-  const { closeResetModal, confirmationResetModal, confirmReset } = props;
+type MembersSelectorProps = {
+  isVisible: boolean;
+  onClose: () => void;
+  onParentPanelClose: () => void;
+
+  addMembers: (members: TUser[]) => void;
+} & (
+  | { checkIfUserInvited: (user: TUser) => boolean; invitedUsers?: undefined }
+  | { invitedUsers: string[]; checkIfUserInvited?: undefined }
+);
+
+export const MembersSelector = ({
+  isVisible,
+  addMembers,
+  onParentPanelClose,
+  onClose,
+  checkIfUserInvited,
+  invitedUsers,
+}: MembersSelectorProps) => {
+  const { t } = useTranslation(["InviteDialog"]);
+  const accessOptions = getAccessOptions(t, 5, false, true);
+  const invitedProps = checkIfUserInvited
+    ? { checkIfUserInvited }
+    : { invitedUsers };
 
   return (
-    <StyledModalDialog
-      contentHeight="100%"
-      displayType="modal"
-      onClose={closeResetModal}
-      visible={confirmationResetModal}
-    >
-      <ModalDialog.Header>{t("Common:Confirmation")}</ModalDialog.Header>
-
-      <ModalDialog.Body>
-        <Text noSelect>{t("ConfirmationText")}</Text>
-      </ModalDialog.Body>
-
-      <ModalDialog.Footer>
-        <Button
-          id="ok-button"
-          label={t("Common:OKButton")}
-          onClick={confirmReset}
-          primary
-          scale
-          size="normal"
+    <Portal
+      element={
+        <AddUsersPanel
+          visible={isVisible}
+          onClose={onClose}
+          onParentPanelClose={onParentPanelClose}
+          isMultiSelect
+          setDataItems={addMembers}
+          accessOptions={accessOptions}
+          withAccessRights={false}
+          isEncrypted
+          defaultAccess={ShareAccessRights.FullAccess}
+          withoutBackground
+          withBlur={false}
+          disableDisabledUsers
+          {...invitedProps}
         />
-        <Button
-          id="cancel-button"
-          label={t("Common:CancelButton")}
-          onClick={closeResetModal}
-          scale
-          size="normal"
-        />
-      </ModalDialog.Footer>
-    </StyledModalDialog>
+      }
+    />
   );
 };
-
-export default inject(({ ssoStore }) => {
-  const { closeResetModal, confirmationResetModal, confirmReset } = ssoStore;
-
-  return { closeResetModal, confirmationResetModal, confirmReset };
-})(observer(ResetConfirmationModal));

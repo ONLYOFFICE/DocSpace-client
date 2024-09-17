@@ -37,6 +37,7 @@ import { Row } from "./sub-components/Row";
 
 import { DropDownProps } from "./DropDown.types";
 import { DEFAULT_PARENT_HEIGHT } from "./DropDown.constants";
+import { isIOS, isMobile } from "react-device-detect";
 
 const DropDown = ({
   directionY = "bottom",
@@ -284,12 +285,25 @@ const DropDown = ({
       };
 
       window.addEventListener("resize", documentResizeListener.current);
+
+      if (isIOS && isMobile)
+        window.visualViewport?.addEventListener(
+          "resize",
+          documentResizeListener.current,
+        );
     }
   }, [checkPosition, checkPositionPortal, isDefaultMode, open]);
 
   const unbindDocumentResizeListener = React.useCallback(() => {
     if (documentResizeListener.current) {
       window.removeEventListener("resize", documentResizeListener.current);
+
+      if (isIOS && isMobile)
+        window.visualViewport?.removeEventListener(
+          "resize",
+          documentResizeListener.current,
+        );
+
       documentResizeListener.current = null;
     }
   }, []);

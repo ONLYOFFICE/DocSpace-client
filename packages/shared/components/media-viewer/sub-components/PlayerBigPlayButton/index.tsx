@@ -36,7 +36,9 @@ export const PlayerBigPlayButton = ({
   if (!visible) return;
 
   return (
-    <WrapperPlayerBigPlayButton>
+    <WrapperPlayerBigPlayButton
+      onContextMenu={(event) => event.preventDefault()}
+    >
       <BigIconPlay onClick={onClick} />
     </WrapperPlayerBigPlayButton>
   );

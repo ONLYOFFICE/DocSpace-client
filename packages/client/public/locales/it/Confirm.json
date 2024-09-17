@@ -7,6 +7,7 @@
   "DeleteProfileBtn": "Cancella il mio account",
   "DeleteProfileConfirmation": "Attenzione! Stai per eliminare il tuo account.",
   "DeleteProfileConfirmationInfo": "Facendo clic su \"Elimina il mio account\" accetti la nostra <1>politica sulla privacy.</1>",
+  "DeleteProfileSuccessDescription": "Il tuo account {{productName}} è stato disattivato con successo. Il proprietario o l'amministratore di {{productName}} può eliminare definitivamente il tuo account disabilitato.",
   "DeleteProfileSuccessMessage": "Il tuo account è stato eliminato con successo.",
   "DeleteProfileSuccessMessageInfo": "Consulta la nostra <1>Informativa sulla privacy</1> per saperne di più sull'eliminazione del tuo account e dei dati ad esso associati.",
   "EmailAndPasswordCopiedToClipboard": "Email e password copiate negli appunti",
@@ -29,5 +30,6 @@
   "SignUp": "Iscriviti",
   "SuccessDeactivate": "Il tuo account è stato disattivato con successo. In 10 secondi verrai reindirizzato al <1>sito</1>.",
   "SuccessReactivate": "Il tuo account è stato riattivato con successo. In 10 secondi verrai reindirizzato al <1>portale</1>.",
-  "SuccessRemoved": "Il tuo account è stato rimosso con successo. In 10 secondi verrai reindirizzato al <1>sito</1>."
+  "SuccessRemoved": "Il tuo account è stato rimosso con successo. In 10 secondi verrai reindirizzato al <1>sito</1>.",
+  "TermsAndConditions": "Continuando, comprendi e accetti i nostri <1>Termini e condizioni</1> e l'<2>Informativa sulla privacy</2>."
 }

@@ -27,15 +27,17 @@
 import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import moment from "moment-timezone";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
-
 import { getDaysRemaining } from "@docspace/shared/utils/common";
 
-const InviteUsersWarningDialog = (props) => {
+import RoomsContent from "./sub-components/RoomsContent";
+import UsersContent from "./sub-components/UsersContent";
+
+const InviteQuotaWarningDialog = (props) => {
   const {
     t,
     tReady,
@@ -51,6 +53,8 @@ const InviteUsersWarningDialog = (props) => {
   } = props;
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const isAccounts = location.pathname.includes("accounts/people");
 
   const [datesData, setDatesData] = useState({});
 
@@ -74,7 +78,21 @@ const InviteUsersWarningDialog = (props) => {
     });
   };
 
-  const onClose = () => setIsVisible(false);
+  const onClose = () => {
+    if (!isGracePeriod) {
+      const closeItems =
+        JSON.parse(localStorage.getItem("warning-dialog")) || [];
+
+      const warningItem = isAccounts ? "user-quota" : "room-quota";
+
+      const closed =
+        closeItems.length > 0 ? [...closeItems, warningItem] : [warningItem];
+      console.log("closed", closed);
+      localStorage.setItem("warning-dialog", JSON.stringify(closed));
+    }
+
+    setIsVisible(false);
+  };
 
   const onUpgradePlan = () => {
     onClose();
@@ -84,6 +102,28 @@ const InviteUsersWarningDialog = (props) => {
     navigate(paymentPageUrl);
   };
 
+  const contentForGracePeriod = (
+    <>
+      <Text fontWeight={700} noSelect>
+        {t("BusinessPlanPaymentOverdue", {
+          planName: currentTariffPlanTitle,
+        })}
+      </Text>
+      <br />
+      <Text noSelect as="div">
+        <Trans t={t} i18nKey="GracePeriodActivatedInfo" ns="Payments">
+          Grace period activated
+          <strong>
+            from {{ fromDate }} to {{ byDate }}
+          </strong>
+          (days remaining: {{ delayDaysCount }})
+        </Trans>
+      </Text>
+      <br />
+      <Text>{t("GracePeriodActivatedDescription")}</Text>
+    </>
+  );
+
   return (
     <ModalDialog
       isLarge={isGracePeriod}
@@ -91,39 +131,16 @@ const InviteUsersWarningDialog = (props) => {
       visible={visible}
       onClose={onClose}
       displayType="modal"
+      autoMaxHeight
     >
       <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
       <ModalDialog.Body>
         {isGracePeriod ? (
-          <>
-            <Text fontWeight={700} noSelect>
-              {t("BusinessPlanPaymentOverdue", {
-                planName: currentTariffPlanTitle,
-              })}
-            </Text>
-            <br />
-            <Text noSelect as="div">
-              <Trans t={t} i18nKey="GracePeriodActivatedInfo" ns="Payments">
-                Grace period activated
-                <strong>
-                  from {{ fromDate }} to {{ byDate }}
-                </strong>
-                (days remaining: {{ delayDaysCount }})
-              </Trans>
-            </Text>
-            <br />
-            <Text>{t("GracePeriodActivatedDescription")}</Text>
-          </>
+          contentForGracePeriod
+        ) : isAccounts ? (
+          <UsersContent />
         ) : (
-          <>
-            <Text fontWeight={700} noSelect>
-              {t("PaymentOverdue")}
-            </Text>
-            <br />
-            <Text>{t("UpgradePlanInfo")}</Text>
-            <br />
-            <Text>{t("ChooseNewPlan")}</Text>
-          </>
+          <RoomsContent />
         )}
       </ModalDialog.Body>
       <ModalDialog.Footer>
@@ -135,17 +152,16 @@ const InviteUsersWarningDialog = (props) => {
           size="normal"
           primary
           onClick={isPaymentPageAvailable ? onUpgradePlan : onClose}
-          scale={isPaymentPageAvailable}
+          scale
         />
-        {isPaymentPageAvailable && (
-          <Button
-            key="CancelButton"
-            label={t("Common:CancelButton")}
-            size="normal"
-            onClick={onClose}
-            scale
-          />
-        )}
+
+        <Button
+          key="CancelButton"
+          label={t("Common:CancelButton")}
+          size="normal"
+          onClick={onClose}
+          scale
+        />
       </ModalDialog.Footer>
     </ModalDialog>
   );
@@ -162,20 +178,18 @@ export default inject(
     const { dueDate, delayDueDate, isGracePeriod } = currentTariffStatusStore;
     const { currentTariffPlanTitle } = currentQuotaStore;
 
-    const {
-      inviteUsersWarningDialogVisible,
-      setInviteUsersWarningDialogVisible,
-    } = dialogsStore;
+    const { inviteQuotaWarningDialogVisible, setQuotaWarningDialogVisible } =
+      dialogsStore;
 
     return {
       isPaymentPageAvailable,
       currentTariffPlanTitle,
       language: authStore.language,
-      visible: inviteUsersWarningDialogVisible,
-      setIsVisible: setInviteUsersWarningDialogVisible,
+      visible: inviteQuotaWarningDialogVisible,
+      setIsVisible: setQuotaWarningDialogVisible,
       dueDate,
       delayDueDate,
       isGracePeriod,
     };
   },
-)(observer(withTranslation(["Payments", "Common"])(InviteUsersWarningDialog)));
+)(observer(withTranslation(["Payments", "Common"])(InviteQuotaWarningDialog)));

@@ -7,6 +7,7 @@
   "DeleteProfileBtn": "Șterge contul meu",
   "DeleteProfileConfirmation": "Atenție! Dumneavoastră sunteți pe cale de a șterge contul dvs.",
   "DeleteProfileConfirmationInfo": "Apăsând Șterge contul meu, acceptați că sunteți de acord cu <1>Politica de confidențialitate a companiei.</1>",
+  "DeleteProfileSuccessDescription": "Contul dvs {{productName}} a fost dezactivat cu succes. Proprietarul sau administratorul {{productName}} poate șterge definitiv contul dvs dezactivat.",
   "DeleteProfileSuccessMessage": "Contul dvs a fost șters cu succes.",
   "DeleteProfileSuccessMessageInfo": "Vă invităm să luați la cunoștință <1>Politica de confidențialitate</1> ca să aflați mai multe despre suprimarea contului și datelor asociate contului.",
   "EmailAndPasswordCopiedToClipboard": "Adresa de e-mail și parola sunt copiate în clipboard  ",
@@ -29,5 +30,6 @@
   "SignUp": "Conectare",
   "SuccessDeactivate": "Contul dvs a fost dezactivat cu succes. Veţi fi redirecţionat în 10 secunde către <1>site-ul</1>.",
   "SuccessReactivate": "Contul dvs a fost reactivat cu succes. Veți fi redirecționat către <1>portal</1> după 10 secunde.",
-  "SuccessRemoved": "Contul dvs a fost eliminat cu succes. Veţi fi redirecţionat în 10 secunde către <1>site-ul</1>."
+  "SuccessRemoved": "Contul dvs a fost eliminat cu succes. Veţi fi redirecţionat în 10 secunde către <1>site-ul</1>.",
+  "TermsAndConditions": "Dacă continuați, acceptați că sunteți de acord cu <1>Termenii si conditiile de utilizare</1> și <2>Politica de confidentialitate</2> a companiei."
 }

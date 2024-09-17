@@ -24,7 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { getSettings } from "@/utils/actions";
+import { PROVIDERS_DATA } from "@docspace/shared/constants";
+
+import {
+  getCapabilities,
+  getSettings,
+  getSSO,
+  getThirdPartyProviders,
+} from "@/utils/actions";
 import Login from "@/components/Login";
 import LoginForm from "@/components/LoginForm";
 import ThirdParty from "@/components/ThirdParty";
@@ -32,7 +39,26 @@ import RecoverAccess from "@/components/RecoverAccess";
 import Register from "@/components/Register";
 
 async function Page() {
-  const settings = await getSettings();
+  const [settings, thirdParty, capabilities, ssoSettings] = await Promise.all([
+    getSettings(),
+    getThirdPartyProviders(),
+    getCapabilities(),
+    getSSO(),
+  ]);
+
+  const ssoUrl = capabilities ? capabilities.ssoUrl : "";
+  const hideAuthPage = ssoSettings ? ssoSettings.hideAuthPage : false;
+  const ssoExists = !!ssoUrl;
+  const oauthDataExists =
+    !capabilities?.oauthEnabled || !thirdParty || thirdParty.length === 0
+      ? false
+      : thirdParty
+          .map((item) => {
+            if (!(item.provider in PROVIDERS_DATA)) return undefined;
+
+            return item;
+          })
+          .some((item) => !!item);
 
   return (
     <Login>
@@ -43,8 +69,17 @@ async function Page() {
             cookieSettingsEnabled={settings?.cookieSettingsEnabled}
             reCaptchaPublicKey={settings?.recaptchaPublicKey}
             reCaptchaType={settings?.recaptchaType}
+            ldapDomain={capabilities?.ldapDomain}
+            ldapEnabled={capabilities?.ldapEnabled || false}
           />
-          <ThirdParty />
+          <ThirdParty
+            thirdParty={thirdParty}
+            capabilities={capabilities}
+            ssoExists={ssoExists}
+            ssoUrl={ssoUrl}
+            hideAuthPage={hideAuthPage}
+            oauthDataExists={oauthDataExists}
+          />
           {settings.enableAdmMess && <RecoverAccess />}
           {settings.enabledJoin && (
             <Register

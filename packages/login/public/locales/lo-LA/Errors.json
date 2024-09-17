@@ -7,6 +7,7 @@
   "InvalidUsernameOrPassword": "ຊື່ຜູ້ໃຊ້ ຫຼືລະຫັດຜ່ານບໍ່ຖືກຕ້ອງ",
   "LoginWithAccountNotFound": "ບໍ່ສາມາດຊອກຫາບັນຊີພາກສ່ວນທີສາມທີ່ກ່ຽວຂ້ອງໄດ້. ທ່ານຈໍາເປັນຕ້ອງເຊື່ອມຕໍ່ບັນຊີເຄືອຂ່າຍສັງຄົມອອນລາຍຂອງທ່ານຢູ່ໃນຫນ້າແກ້ໄຂໂປຣໄຟລ໌ກ່ອນ.",
   "LoginWithBruteForce": "ການອະນຸຍາດຖືກບລັອກຊົ່ວຄາວ",
+  "LoginWithBruteForceCaptcha": "ຢືນຢັນວ່າເຈົ້າບໍ່ແມ່ນຫຸ່ນຍົນ",
   "RecaptchaInvalid": "Recaptcha ບໍ່ຖືກຕ້ອງ",
   "SsoAttributesNotFound": "ການກວດສອບບໍ່ສຳເລັດ (ບໍ່ພົບຄຸນສົມບັດການຢືນຢັນ)",
   "SsoAuthFailed": "ການພິສູດຢືນຢັນຕົວວຕົນລົ້ມເຫລວ",

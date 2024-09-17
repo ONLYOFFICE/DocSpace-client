@@ -149,9 +149,14 @@ class UsersStore {
     return Promise.resolve(result);
   };
 
-  removeUser = async (userId, filter) => {
+  removeUser = async (userId, filter, isInsideGroup) => {
+    const { refreshInsideGroup } = this.peopleStore.groupsStore;
+
     await api.people.deleteUsers(userId);
-    await this.getUsersList(filter, true);
+
+    isInsideGroup
+      ? await refreshInsideGroup()
+      : await this.getUsersList(filter, true);
   };
 
   get needResetUserSelection() {

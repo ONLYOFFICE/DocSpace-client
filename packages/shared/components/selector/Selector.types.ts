@@ -30,6 +30,7 @@ import { MergeTypes, Nullable } from "../../types";
 
 import { TFileSecurity, TFolderSecurity } from "../../api/files/types";
 import { TRoomSecurity } from "../../api/rooms/types";
+import { TGroup } from "../../api/groups/types";
 
 import { AvatarRole } from "../avatar";
 import { TTabItem } from "../tabs";
@@ -47,7 +48,7 @@ type THeaderBackButton =
   | {
       onBackClick?: undefined;
       withoutBackButton?: undefined;
-      withoutBorder: undefined;
+      withoutBorder?: undefined;
     };
 
 export type TInfoBarData = {
@@ -72,6 +73,8 @@ export type BreadCrumbsProps = {
 
 export type HeaderProps = {
   headerLabel: string;
+  onCloseClick: () => void;
+  isCloseable?: boolean;
 } & THeaderBackButton;
 
 export type TSelectorHeader =
@@ -394,6 +397,7 @@ type TSelectorItemEmpty = {
   iconOriginal?: undefined;
   role?: undefined;
   email?: undefined;
+  groups?: TGroup[];
   isOwner?: undefined;
   isAdmin?: undefined;
   isVisitor?: undefined;
@@ -438,6 +442,7 @@ export type TSelectorItemUser = MergeTypes<
     avatar: string;
     hasAvatar: boolean;
     role: AvatarRole;
+    groups?: TGroup[];
 
     access?: ShareAccessRights | string | number;
   }

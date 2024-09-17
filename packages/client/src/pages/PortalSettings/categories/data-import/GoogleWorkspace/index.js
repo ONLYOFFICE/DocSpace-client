@@ -219,7 +219,7 @@ const GoogleWorkspace = ({
     return clearCheckedAccounts;
   }, []);
 
-  if (isMobile || isMobileBreakpoint())
+  if (isMobileBreakpoint())
     return (
       <BreakpointWarning
         isMobileUnavailableOnly
@@ -282,4 +282,4 @@ export default inject(({ setup, settingsStore, importAccountsStore }) => {
     setUsers,
     filteredUsers,
   };
-})(withTranslation(["Common, Settings"])(observer(GoogleWorkspace)));
+})(withTranslation(["Common", "Settings"])(observer(GoogleWorkspace)));

@@ -50,6 +50,8 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import TariffBar from "SRC_DIR/components/TariffBar";
+import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
+import { toastr } from "@docspace/shared/components/toast";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -224,6 +226,8 @@ const SectionHeaderContent = (props) => {
     onEmptyTrashAction,
     getHeaderOptions,
     setBufferSelection,
+    setGroupsBufferSelection,
+    createFoldersTree,
   } = props;
 
   const location = useLocation();
@@ -238,8 +242,16 @@ const SectionHeaderContent = (props) => {
   const isSettingsPage = location.pathname.includes("/settings");
 
   const onFileChange = React.useCallback(
-    (e) => {
-      startUpload(e.target.files, null, t);
+    async (e) => {
+      const files = await getFilesFromEvent(e);
+
+      createFoldersTree(t, files)
+        .then((f) => {
+          if (f.length > 0) startUpload(f, null, t);
+        })
+        .catch((err) => {
+          toastr.error(err);
+        });
     },
     [startUpload, t],
   );
@@ -259,7 +271,9 @@ const SectionHeaderContent = (props) => {
   };
 
   const onContextOptionsClick = () => {
-    setBufferSelection(selectedFolder);
+    isInsideGroup
+      ? setGroupsBufferSelection(currentGroup)
+      : setBufferSelection(selectedFolder);
   };
 
   const onSelect = (e) => {
@@ -636,6 +650,7 @@ export default inject(
       moveToRoomsPage,
       onClickBack,
       moveToPublicRoom,
+      createFoldersTree,
     } = filesActionsStore;
 
     const { setIsVisible, isVisible } = infoPanelStore;
@@ -655,6 +670,7 @@ export default inject(
       currentGroup,
       getGroupContextOptions,
       setSelected: setGroupsSelected,
+      setBufferSelection: setGroupsBufferSelection,
       insideGroupTempTitle,
     } = peopleStore.groupsStore;
 
@@ -797,6 +813,8 @@ export default inject(
       onEmptyTrashAction,
       getHeaderOptions,
       setBufferSelection,
+      setGroupsBufferSelection,
+      createFoldersTree,
     };
   },
 )(

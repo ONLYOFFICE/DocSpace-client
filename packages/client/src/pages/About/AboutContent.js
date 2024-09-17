@@ -100,10 +100,18 @@ const StyledAboutBody = styled.div`
 `;
 
 const AboutContent = (props) => {
-  const { buildVersionInfo, theme, companyInfoSettingsData, previewData } =
-    props;
-  const { t } = useTranslation("About");
-  const license = "AGPL-3.0";
+  const {
+    buildVersionInfo,
+    theme,
+    companyInfoSettingsData,
+    previewData,
+    standalone,
+    licenseUrl,
+    isEnterprise,
+  } = props;
+  const { t } = useTranslation(["About", "Common"]);
+  const isCommercial = !standalone || isEnterprise;
+  const license = isCommercial ? t("Common:Commercial") : "AGPL-3.0";
   const linkRepo = "https://github.com/ONLYOFFICE/DocSpace";
   const linkDocs = "https://github.com/ONLYOFFICE/DocumentServer";
 
@@ -125,7 +133,7 @@ const AboutContent = (props) => {
     ? previewData.address
     : companyInfoSettingsData?.address;
 
-  const logo = getLogoUrl(WhiteLabelLogoType.AboutPage, !theme.isBase);
+  const logo = getLogoUrl(WhiteLabelLogoType.AboutPage, !theme.isBase, true);
 
   return (
     companyInfoSettingsData && (
@@ -198,9 +206,25 @@ const AboutContent = (props) => {
           <Text className="row-el" fontSize="13px">
             {t("SoftwareLicense")}:{" "}
           </Text>
-          <Text className="row-el" fontSize="13px" fontWeight="600">
-            &nbsp;{license}
-          </Text>
+          {isCommercial ? (
+            <ColorTheme
+              {...props}
+              tag="a"
+              themeId={ThemeId.Link}
+              className="row-el"
+              fontSize="13px"
+              fontWeight="600"
+              href={licenseUrl}
+              target="_blank"
+              enableUserSelect
+            >
+              &nbsp;{license}
+            </ColorTheme>
+          ) : (
+            <Text className="row-el" fontSize="13px" fontWeight="600">
+              &nbsp;{license}
+            </Text>
+          )}
         </div>
 
         <Text className="copyright" fontSize="14px" fontWeight="600">
@@ -268,11 +292,16 @@ const AboutContent = (props) => {
   );
 };
 
-export default inject(({ settingsStore }) => {
-  const { theme, companyInfoSettingsData } = settingsStore;
+export default inject(({ settingsStore, currentTariffStatusStore }) => {
+  const { theme, companyInfoSettingsData, standalone, licenseUrl } =
+    settingsStore;
+  const { isEnterprise } = currentTariffStatusStore;
 
   return {
     theme,
     companyInfoSettingsData,
+    standalone,
+    licenseUrl,
+    isEnterprise,
   };
 })(observer(AboutContent));

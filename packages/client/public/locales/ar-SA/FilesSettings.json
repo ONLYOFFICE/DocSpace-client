@@ -6,6 +6,7 @@
   "DisplayTemplates": "اعرض النماذج",
   "IntermediateVersion": "احتفظ بجميع النسخ الوسيطة المحفوظة",
   "KeepIntermediateVersion": "احتفظ بالإصدارات الوسيطة عند التحرير",
+  "OpenSameTab": "افتح محرر {{organizationName}} في نفس علامة التبويب",
   "OriginalCopy": "احفظ نسخة الملف بالتنسيق الأصلي أيضًا",
   "StoringFileVersion": "تخزين إصدارات الملفات",
   "ThirdPartyAccounts": "حسابات الطرف الثالث",

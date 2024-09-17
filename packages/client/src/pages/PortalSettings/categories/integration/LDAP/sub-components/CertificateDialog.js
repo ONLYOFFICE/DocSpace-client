@@ -59,7 +59,7 @@ const CertificateDialog = ({
   const onSaveAction = useCallback((e) => {
     setAcceptCertificate(true);
     setAcceptCertificateHash(cerficateIssue.uniqueHash);
-    save();
+    save(t);
     setCertificateDialogVisible(false);
   }, []);
 
@@ -140,8 +140,10 @@ const CertificateDialog = ({
           </Box>
           {hasError && (
             <Box>
-              {cerficateIssue.errors.map((err) => (
-                <Text color="#F24724">{mapError(err)}</Text>
+              {cerficateIssue.errors.map((err, index) => (
+                <Text color="#F24724" key={`err-${index}`}>
+                  {mapError(err)}
+                </Text>
               ))}
             </Box>
           )}

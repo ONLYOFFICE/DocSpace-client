@@ -254,7 +254,7 @@ const Badges = ({
         </BadgeWrapper>
       )}
 
-      {isEditing && !isVisitor && !(isRecentTab && !canEditing) && (
+      {isEditing && !(isRecentTab && !canEditing) && (
         <ColorTheme
           themeId={ThemeId.IconButton}
           isEditing={isEditing}

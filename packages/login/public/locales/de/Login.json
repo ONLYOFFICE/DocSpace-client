@@ -5,6 +5,7 @@
   "ExpiredCode": "Dieser Code ist nicht mehr gültig. Fordern Sie einen neuen Code an und versuchen Sie es erneut.",
   "ForgotPassword": "Kennwort vergessen?",
   "InvalidCode": "Dieser Code ist ungültig. Versuchen Sie es erneut.",
+  "LDAPUsernamePlaceholder": "Benutzername von {{ldap_domain}}",
   "MessageAuthorize": "Bitte einloggen",
   "MessageEmailConfirmed": "Ihre E-Mail-Adresse wurde erfolgreich aktiviert.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Bitte E-Mail eingeben, das Sie bei der Registrierung verwendet haben. Anleitungen zur Änderung eines Passworts werden daran gesendet.",
@@ -20,5 +21,7 @@
   "RegistrationEmailWatermark": "E-Mail",
   "RememberHelper": "Lebensdauer der Sitzung ist standardmäßig 20 Minuten. Wählen Sie diese Option aus, um den Wert 1 Jahr zu setzen. Für benutzerdefinierte Werte öffnen Sie Einstellungen.",
   "ResendCode": "Code nochmals senden",
+  "SignInLDAP": "Anmelden bei: {{ldap_domain}}",
+  "SignInLdapHelper": "Anmeldedaten für die Unternehmensdomäne verwenden",
   "UserIsAlreadyRegistered": "Benutzer <1>{{email}}</1> ist bereits in diesem {{productName}} registriert. Geben Sie Ihr Passwort ein oder gehen Sie zurück, um mit einer anderen E-Mail fortzufahren."
 }

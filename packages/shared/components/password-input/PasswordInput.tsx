@@ -177,7 +177,7 @@ const PasswordInput = React.forwardRef(
       [onKeyDown],
     );
 
-    const changeInputType = () => {
+    const changeInputType = React.useCallback(() => {
       const newType =
         state.type === InputType.text ? InputType.password : InputType.text;
 
@@ -185,7 +185,13 @@ const PasswordInput = React.forwardRef(
         ...s,
         type: newType,
       }));
-    };
+    }, [state.type]);
+
+    React.useEffect(() => {
+      if (isDisabled && state.type === InputType.text) {
+        changeInputType();
+      }
+    }, [isDisabled, changeInputType, state.type]);
 
     const testStrength = useCallback(
       (value: string) => {

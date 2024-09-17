@@ -37,12 +37,16 @@ let elem =
   typeof document !== "undefined" &&
   document.getElementById("ipl-progress-indicator");
 
+const cancelProgress = () => {
+  if (timerId) clearTimeout(timerId);
+  timerId = null;
+  if (elem) elem.style.width = "0px";
+  width = 0;
+};
+
 const animatingWidth = () => {
   if (width >= MAX) {
-    if (timerId) clearTimeout(timerId);
-    timerId = null;
-    if (elem) elem.style.width = "0px";
-    width = 0;
+    cancelProgress();
     return;
   }
 
@@ -62,6 +66,10 @@ export default class TopLoaderService {
   static start() {
     percentage = 0;
     startInterval();
+  }
+
+  static cancel() {
+    cancelProgress();
   }
 
   static end() {

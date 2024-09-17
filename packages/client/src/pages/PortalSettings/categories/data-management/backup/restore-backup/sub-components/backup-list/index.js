@@ -230,11 +230,7 @@ const BackupListModalDialog = (props) => {
       onClose={onModalClose}
       withFooterBorder
     >
-      <ModalDialog.Header>
-        <Text fontSize="21px" fontWeight={700}>
-          {t("BackupList")}
-        </Text>
-      </ModalDialog.Header>
+      <ModalDialog.Header>{t("BackupList")}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledBackupList
           isCopyingToLocal={isCopyingToLocal}

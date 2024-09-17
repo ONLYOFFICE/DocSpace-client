@@ -27,11 +27,19 @@
 import React from "react";
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-import { StyledTile, StyledBottom, StyledMainContent } from "./Tiles.styled";
+import {
+  StyledTile,
+  StyledBottom,
+  StyledMainContent,
+  StyledRoomTile,
+  StyledRoomTileTopContent,
+  StyledRoomTileBottomContent,
+} from "./Tiles.styled";
 import type { TileSkeletonProps } from "./Tiles.types";
 
 export const TileSkeleton = ({
   isFolder,
+  isRoom,
   title,
   borderRadius,
   backgroundColor,
@@ -83,6 +91,79 @@ export const TileSkeleton = ({
           animate
         />
       </StyledBottom>
+    </StyledTile>
+  ) : isRoom ? (
+    <StyledTile {...rest}>
+      <StyledRoomTile>
+        <StyledRoomTileTopContent>
+          <RectangleSkeleton
+            className="first-content"
+            title={title}
+            width="32px"
+            height="32px"
+            borderRadius={borderRadius}
+            backgroundColor={backgroundColor}
+            foregroundColor={foregroundColor}
+            backgroundOpacity={backgroundOpacity}
+            foregroundOpacity={foregroundOpacity}
+            speed={speed}
+            animate
+          />
+          <RectangleSkeleton
+            className="second-content"
+            title={title}
+            height="22px"
+            borderRadius={borderRadius}
+            backgroundColor={backgroundColor}
+            foregroundColor={foregroundColor}
+            backgroundOpacity={backgroundOpacity}
+            foregroundOpacity={foregroundOpacity}
+            speed={speed}
+            animate
+          />
+          <RectangleSkeleton
+            className="option-button"
+            title={title}
+            height="16px"
+            width="16px"
+            borderRadius={borderRadius}
+            backgroundColor={backgroundColor}
+            foregroundColor={foregroundColor}
+            backgroundOpacity={backgroundOpacity}
+            foregroundOpacity={foregroundOpacity}
+            speed={speed}
+            animate
+          />
+        </StyledRoomTileTopContent>
+        <StyledRoomTileBottomContent>
+          <RectangleSkeleton
+            className="main-content"
+            title={title}
+            height="24px"
+            width="50px"
+            borderRadius={borderRadius}
+            backgroundColor={backgroundColor}
+            foregroundColor={foregroundColor}
+            backgroundOpacity={backgroundOpacity}
+            foregroundOpacity={foregroundOpacity}
+            speed={speed}
+            animate
+          />
+          <RectangleSkeleton
+            className="main-content"
+            title={title}
+            height="24px"
+            width="50px"
+            borderRadius={borderRadius}
+            backgroundColor={backgroundColor}
+            foregroundColor={foregroundColor}
+            backgroundOpacity={backgroundOpacity}
+            foregroundOpacity={foregroundOpacity}
+            speed={speed}
+            animate
+          />
+        </StyledRoomTileBottomContent>
+      </StyledRoomTile>
     </StyledTile>
   ) : (
     <StyledTile {...rest}>

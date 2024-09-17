@@ -29,6 +29,7 @@ import { inject, observer } from "mobx-react";
 
 import { DeviceType, RoomsType } from "@docspace/shared/enums";
 import Planet12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/planet.react.svg?url";
+import { toastr } from "@docspace/shared/components/toast";
 
 export default function withFileActions(WrappedFileItem) {
   class WithFileActions extends React.Component {
@@ -62,21 +63,18 @@ export default function withFileActions(WrappedFileItem) {
     };
 
     onDropZoneUpload = (files, uploadToFolder) => {
-      const { t, dragging, setDragging, startUpload, uploadEmptyFolders } =
+      const { t, dragging, setDragging, startUpload, createFoldersTree } =
         this.props;
 
       dragging && setDragging(false);
 
-      const emptyFolders = files.filter((f) => f.isEmptyDirectory);
-
-      if (emptyFolders.length > 0) {
-        uploadEmptyFolders(emptyFolders, uploadToFolder).then(() => {
-          const onlyFiles = files.filter((f) => !f.isEmptyDirectory);
-          if (onlyFiles.length > 0) startUpload(onlyFiles, uploadToFolder, t);
+      createFoldersTree(t, files, uploadToFolder)
+        .then((f) => {
+          if (f.length > 0) startUpload(f, null, t);
+        })
+        .catch((err) => {
+          toastr.error(err);
         });
-      } else {
-        startUpload(files, uploadToFolder, t);
-      }
     };
 
     onDrop = (items) => {
@@ -167,7 +165,7 @@ export default function withFileActions(WrappedFileItem) {
 
       if (
         e.target?.tagName === "INPUT" ||
-        e.target?.tagName === "SPAN" ||
+        // e.target?.tagName === "SPAN" ||
         e.target?.tagName === "A" ||
         e.target.closest(".checkbox") ||
         e.target.closest(".table-container_row-checkbox") ||
@@ -277,12 +275,12 @@ export default function withFileActions(WrappedFileItem) {
         isRecentTab,
         canDrag,
       } = this.props;
-      const { access, id } = item;
+      const { id, security } = item;
 
       const isDragging =
         !isDisabledDropItem &&
         isFolder &&
-        access < 2 &&
+        security?.MoveTo &&
         !isTrashFolder &&
         !isPrivacy;
 
@@ -371,7 +369,7 @@ export default function withFileActions(WrappedFileItem) {
         onSelectItem,
         //setNewBadgeCount,
         openFileAction,
-        uploadEmptyFolders,
+        createFoldersTree,
       } = filesActionsStore;
       const { setSharingPanelVisible } = dialogsStore;
       const {
@@ -475,7 +473,7 @@ export default function withFileActions(WrappedFileItem) {
         dragging,
         setDragging,
         startUpload,
-        uploadEmptyFolders,
+        createFoldersTree,
         draggable,
         setTooltipPosition,
         setStartDrag,

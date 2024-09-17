@@ -6,7 +6,6 @@
   "AttributeMatchingTooltip": "Zgodność atrybutów pojedynczego logowania z wpisami sekcji „Konta”.",
   "Binding": "Powiązanie:",
   "CertificateExist": "Certyfikat o tym samym rodzaju działania już istnieje",
-  "ConfirmationText": "Wszystkie wprowadzone dane zostaną utracone. Czy na pewno chcesz kontynuować?",
   "CustomEntryButton": "Niestandardowy podpis przycisku logowania",
   "CustomEntryTooltip": "Podpis dla przycisku służącego do logowania się w obszarze roboczym za pomocą usługi pojedynczego logowania",
   "DownloadMetadataXML": "Pobierz XML z metadanymi usługodawcy",

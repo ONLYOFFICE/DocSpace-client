@@ -1,1 +1,12 @@
-{}
+{
+  "BackToRoom": "ルームに戻る",
+  "CheckReadyForms": "完成させたフォームを見る",
+  "Description": "フォームが完成させ、保存された",
+  "DescriptionForAnonymous": "一意の番号が割り当てられた記入済みPDFフォームが送信されました。ステータスを確認するには、割り当てられた番号をフォームの所有者にご連絡ください。",
+  "DescriptionForRegisteredUser": "記入済みのPDFフォームは「完成」フォルダに保存され、利用できます。ステータスを確認するには、割り当てられた番号をフォームの所有者にご連絡ください。",
+  "FillItOutAgain": "もう一度記入してください",
+  "FormCompletedSuccessfully": "フォームを正常に完成させました",
+  "FormNumber": "フォーム番号：",
+  "FormOwner": "フォームの所有者",
+  "Title": "フォームが完成しました"
+}

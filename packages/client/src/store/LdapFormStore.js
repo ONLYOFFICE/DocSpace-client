@@ -14,7 +14,6 @@ import delay from "lodash/delay";
 import { toastr } from "@docspace/shared/components/toast";
 
 const constants = {
-  NULL_PERCENT: 0,
   SSL_LDAP_PORT: 636,
   DEFAULT_LDAP_PORT: 389,
   GET_STATUS_TIMEOUT: 1000,
@@ -91,6 +90,8 @@ class LdapFormStore {
   serverSettings = {};
 
   currentQuotaStore = null;
+
+  confirmationResetModal = false;
 
   constructor(currentQuotaStore) {
     makeAutoObservable(this);
@@ -431,10 +432,10 @@ class LdapFormStore {
 
   scrollToField = () => {
     for (let key in this.errors) {
-      const element = document.getElementsByName(key)[0];
+      const element = document.getElementsByName(key)?.[0];
 
-      element.focus();
-      element.blur();
+      element?.focus();
+      element?.blur();
       return;
     }
   };
@@ -488,7 +489,7 @@ class LdapFormStore {
           completed: true,
           percents: 100,
           certificateConfirmRequest: null,
-          error: "",
+          error: t("Common:UnexpectedError"),
         };
       }
 
@@ -517,7 +518,6 @@ class LdapFormStore {
         toastr.success(t("Common:SuccessfullyCompletedOperation"));
       }
     } catch (error) {
-      console.error(error);
       toastr.error(error);
       this.endProcess();
     }
@@ -604,6 +604,15 @@ class LdapFormStore {
 
   setIsSslEnabled = (enabled) => {
     this.isSslEnabled = enabled;
+
+    if (
+      this.requiredSettings.portNumber == constants.DEFAULT_LDAP_PORT ||
+      this.requiredSettings.portNumber == constants.SSL_LDAP_PORT
+    ) {
+      this.setPortNumber(
+        enabled ? constants.SSL_LDAP_PORT : constants.DEFAULT_LDAP_PORT,
+      );
+    }
   };
 
   get isCronEnabled() {
@@ -620,6 +629,10 @@ class LdapFormStore {
   };
 
   getSettings = () => {
+    const clearServer = this.requiredSettings.server.replace(
+      /((https?|ldaps?):\/\/)/gi,
+      "",
+    );
     return {
       EnableLdapAuthentication: this.isLdapEnabled,
       AcceptCertificate: this.acceptCertificate,
@@ -627,7 +640,7 @@ class LdapFormStore {
       StartTls: this.isTlsEnabled,
       Ssl: this.isSslEnabled,
       SendWelcomeEmail: this.isSendWelcomeEmail,
-      Server: this.requiredSettings.server,
+      Server: clearServer,
       UserDN: this.requiredSettings.userDN,
       PortNumber: this.requiredSettings.portNumber,
       UserFilter: this.requiredSettings.userFilter,
@@ -660,6 +673,14 @@ class LdapFormStore {
       error: "",
       source: "",
     };
+  };
+
+  openResetModal = () => {
+    this.confirmationResetModal = true;
+  };
+
+  closeResetModal = () => {
+    this.confirmationResetModal = false;
   };
 
   get hasChanges() {

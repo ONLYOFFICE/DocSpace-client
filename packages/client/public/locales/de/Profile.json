@@ -1,5 +1,6 @@
 {
   "ActiveSessions": "Aktive Sitzungen",
+  "AutoDeleteTitle": "Alle Sitzungen, die älter als 60 Tage sind, werden automatisch gelöscht.",
   "ChangeEmailSuccess": "E-Mail wurde erfolgreich geändert",
   "ChangePasswordAfterLoggingOut": "Passwort nach Abmeldung ändern",
   "ConnectSocialNetworks": "Verbinden Sie Ihre sozialen Netzwerke",
@@ -14,7 +15,6 @@
   "InterfaceTheme": "Thema der Benutzeroberfläche",
   "LightTheme": "Heller Modus",
   "LogoutActiveConnection": "Abmelden von der aktiven Verbindung",
-  "LogoutAllActiveConnections": "Abmelden von allen aktiven Verbindungen",
   "LogoutAllActiveSessionsDescription": "Alle aktiven Verbindungen mit Ausnahme dieser Verbindung werden abgemeldet, da sie gerade in Gebrauch ist.",
   "LogoutBtn": "Abmelden",
   "LogoutDescription": "Hinweis. Alle aktiven Verbindungen mit Ausnahme dieser Verbindung werden abgemeldet, da sie gerade in Gebrauch ist.",
@@ -27,5 +27,6 @@
   "SuccessLogout": "Die aktive Verbindung wurde abgemeldet: {{platform}}, {{browser}}",
   "SystemTheme": "Wie im System",
   "SystemThemeDescription": "Wechseln Sie automatisch zwischen hellen und dunklen Themen, wenn Ihr System dies tut.",
+  "TerminateAllSessions": "Alle Sitzungen außer der aktuellen beenden",
   "TwoFactorDescription": "Zwei-Faktor-Authentifizierung über eine App für Generierung von Codes wurde für alle aktiviert."
 }

@@ -6,7 +6,6 @@
   "AttributeMatchingTooltip": "单点登录属性与“账户”部分条目的对应关系。",
   "Binding": "绑定：",
   "CertificateExist": "具有相同操作类型的证书已存在",
-  "ConfirmationText": "您所输入的所有数据都将丢失。确定要继续吗？",
   "CustomEntryButton": "自定义登录按钮标题",
   "CustomEntryTooltip": "用于通过单点登录服务登录空间的按钮文本",
   "DownloadMetadataXML": "下载 SP 元数据 XML",

@@ -27,7 +27,7 @@
 "use client";
 
 import React from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
 
 import { DocumentEditor } from "@onlyoffice/document-editor-react";
@@ -51,7 +51,6 @@ import {
 } from "@/utils/events";
 import useInit from "@/hooks/useInit";
 import useEditorEvents from "@/hooks/useEditorEvents";
-import useFilesSettings from "@/hooks/useFilesSettings";
 
 type IConfigType = IConfig & {
   events?: {
@@ -77,6 +76,8 @@ const Editor = ({
   errorMessage,
   isSkipError,
 
+  filesSettings,
+
   onDownloadAs,
   onSDKRequestSharingSettings,
   onSDKRequestSaveAs,
@@ -88,9 +89,7 @@ const Editor = ({
 }: EditorProps) => {
   const { t, i18n } = useTranslation(["Common", "Editor", "DeepLink"]);
 
-  const router = useRouter();
   const searchParams = useSearchParams();
-  const { filesSettings } = useFilesSettings({});
 
   const openOnNewPage = IS_ZOOM ? false : !filesSettings?.openEditorInSameTab;
 
@@ -305,7 +304,7 @@ const Editor = ({
     newConfig.events.onRequestClose = onSDKRequestClose;
   }
 
-  if (config?.startFilling) {
+  if (config?.startFilling && !IS_ZOOM) {
     newConfig.events.onRequestStartFilling = () =>
       onSDKRequestStartFilling?.(t("Common:ShareAndCollect"));
   }

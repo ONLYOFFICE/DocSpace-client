@@ -83,8 +83,8 @@ const withHotkeys = (Component) => {
       isVisitor,
       deleteRooms,
       archiveRooms,
-      isGracePeriod,
-      setInviteUsersWarningDialogVisible,
+      isWarningRoomsDialog,
+      setQuotaWarningDialogVisible,
 
       security,
       copyToClipboard,
@@ -158,8 +158,8 @@ const withHotkeys = (Component) => {
 
     const onCreateRoom = () => {
       if (!isVisitor && isRoomsFolder && security?.Create) {
-        if (isGracePeriod) {
-          setInviteUsersWarningDialogVisible(true);
+        if (isWarningRoomsDialog) {
+          setQuotaWarningDialogVisible(true);
           return;
         }
 
@@ -169,6 +169,10 @@ const withHotkeys = (Component) => {
     };
 
     const onPaste = async (e) => {
+      const someDialogIsOpen = checkDialogsOpen();
+
+      if (someDialogIsOpen) return;
+
       uploadClipboardFiles(t, e);
     };
 
@@ -436,7 +440,7 @@ const withHotkeys = (Component) => {
       treeFoldersStore,
       selectedFolderStore,
       userStore,
-      currentTariffStatusStore,
+      currentQuotaStore,
     }) => {
       const {
         setSelected,
@@ -473,7 +477,7 @@ const withHotkeys = (Component) => {
       const {
         setDeleteDialogVisible,
         setSelectFileDialogVisible,
-        setInviteUsersWarningDialogVisible,
+        setQuotaWarningDialogVisible,
       } = dialogsStore;
       const {
         isAvailableOption,
@@ -487,7 +491,6 @@ const withHotkeys = (Component) => {
 
       const { visible: mediaViewerIsVisible } = mediaViewerDataStore;
       const { setHotkeyPanelVisible } = settingsStore;
-      const { isGracePeriod } = currentTariffStatusStore;
 
       const isVisitor = userStore.user?.isVisitor;
 
@@ -498,6 +501,8 @@ const withHotkeys = (Component) => {
         isArchiveFolder,
         isRoomsFolder,
       } = treeFoldersStore;
+
+      const { isWarningRoomsDialog } = currentQuotaStore;
 
       const security = selectedFolderStore.security;
       const isFormRoom = selectedFolderStore.roomType === RoomsType.FormRoom;
@@ -553,8 +558,8 @@ const withHotkeys = (Component) => {
         deleteRooms,
         archiveRooms,
 
-        isGracePeriod,
-        setInviteUsersWarningDialogVisible,
+        isWarningRoomsDialog,
+        setQuotaWarningDialogVisible,
 
         security,
         copyToClipboard,

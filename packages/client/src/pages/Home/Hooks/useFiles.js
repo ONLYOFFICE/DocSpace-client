@@ -45,6 +45,7 @@ import { useParams } from "react-router-dom";
 
 import { getCategoryType, getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
+import { toastr } from "@docspace/shared/components/toast";
 
 const useFiles = ({
   t,
@@ -52,7 +53,7 @@ const useFiles = ({
   dragging,
   setDragging,
   disableDrag,
-  uploadEmptyFolders,
+  createFoldersTree,
   startUpload,
 
   fetchFiles,
@@ -118,16 +119,13 @@ const useFiles = ({
 
     if (disableDrag) return;
 
-    const emptyFolders = files.filter((f) => f.isEmptyDirectory);
-
-    if (emptyFolders.length > 0) {
-      uploadEmptyFolders(emptyFolders, uploadToFolder).then(() => {
-        const onlyFiles = files.filter((f) => !f.isEmptyDirectory);
-        if (onlyFiles.length > 0) startUpload(onlyFiles, uploadToFolder, t);
+    createFoldersTree(t, files, uploadToFolder)
+      .then((f) => {
+        if (f.length > 0) startUpload(f, null, t);
+      })
+      .catch((err) => {
+        toastr.error(err);
       });
-    } else {
-      startUpload(files, uploadToFolder, t);
-    }
   };
 
   React.useEffect(() => {

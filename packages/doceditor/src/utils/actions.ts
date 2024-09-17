@@ -65,8 +65,6 @@ export async function getFillingSession(
   );
 
   try {
-    console.log({ request });
-
     const response = await fetch(request);
 
     if (response.ok) return await response.json();
@@ -86,19 +84,22 @@ export async function fileCopyAs(
   enableExternalExt?: boolean,
   password?: string,
   toForm?: string,
-): Promise<{
-  file: TFile | undefined;
-  error:
-    | string
-    | {
-        message: string;
-        status: number;
-        type: string;
-        stack: string;
-        statusCode?: number;
-      }
-    | undefined;
-}> {
+): Promise<
+  | {
+      file: TFile | undefined;
+      error:
+        | string
+        | {
+            message: string;
+            status: number;
+            type: string;
+            stack: string;
+            statusCode?: number;
+          }
+        | undefined;
+    }
+  | undefined
+> {
   try {
     const [createFile] = createRequest(
       [`/files/file/${fileId}/copyas`],
@@ -113,7 +114,17 @@ export async function fileCopyAs(
       }),
     );
 
-    const file = await (await fetch(createFile)).json();
+    const fileRes = await fetch(createFile);
+
+    if (fileRes.status === 401)
+      return {
+        file: undefined,
+        error: { status: 401, message: "", type: "", stack: "" },
+      };
+
+    if (!fileRes.ok) return;
+
+    const file = await fileRes.json();
 
     console.log("File copyas success ", file);
 
@@ -153,19 +164,22 @@ export async function createFile(
   title: string,
   templateId?: string,
   formId?: string,
-): Promise<{
-  file: TFile | undefined;
-  error:
-    | string
-    | {
-        message: string;
-        status: number;
-        type: string;
-        stack: string;
-        statusCode?: number;
-      }
-    | undefined;
-}> {
+): Promise<
+  | {
+      file: TFile | undefined;
+      error:
+        | string
+        | {
+            message: string;
+            status: number;
+            type: string;
+            stack: string;
+            statusCode?: number;
+          }
+        | undefined;
+    }
+  | undefined
+> {
   try {
     const [createFile] = createRequest(
       [`/files/${parentId}/file`],
@@ -174,7 +188,17 @@ export async function createFile(
       JSON.stringify({ title, templateId, formId }),
     );
 
-    const file = await (await fetch(createFile)).json();
+    const fileRes = await fetch(createFile);
+
+    if (fileRes.status === 401)
+      return {
+        file: undefined,
+        error: { status: 401, message: "", type: "", stack: "" },
+      };
+
+    if (!fileRes.ok) return;
+
+    const file = await fileRes.json();
     console.log("File create success ", file);
     return {
       file: file.response,
@@ -393,28 +417,44 @@ export const checkIsAuthenticated = async () => {
   return isAuth.response as boolean;
 };
 
-export async function checkFillFromDraft(
-  templateFileId: number,
-  share?: string,
-) {
-  const [checkFillFormDraft] = createRequest(
-    [`/files/masterform/${templateFileId}/checkfillformdraft`],
-    [
-      share ? ["Request-Token", share] : ["", ""],
-      ["Content-Type", "application/json;charset=utf-8"],
-    ],
-    "POST",
-    JSON.stringify({ fileId: templateFileId }),
+export async function validatePublicRoomKey(key: string, fileId?: string) {
+  const [validatePublicRoomKey] = createRequest(
+    [`/files/share/${key}?fileid=${fileId}`],
+    [key ? ["Request-Token", key] : ["", ""]],
+    "GET",
   );
 
-  const response = await fetch(checkFillFormDraft);
+  const res = await fetch(validatePublicRoomKey);
+  if (res.status === 401) return undefined;
+  if (!res.ok) return;
 
-  if (!response.ok) return null;
+  const room = await res.json();
 
-  const { response: formUrl } = await response.json();
-
-  return formUrl as string;
+  return room;
 }
+
+// export async function checkFillFromDraft(
+//   templateFileId: number,
+//   share?: string,
+// ) {
+//   const [checkFillFormDraft] = createRequest(
+//     [`/files/masterform/${templateFileId}/checkfillformdraft`],
+//     [
+//       share ? ["Request-Token", share] : ["", ""],
+//       ["Content-Type", "application/json;charset=utf-8"],
+//     ],
+//     "POST",
+//     JSON.stringify({ fileId: templateFileId }),
+//   );
+
+//   const response = await fetch(checkFillFormDraft);
+
+//   if (!response.ok) return null;
+
+//   const { response: formUrl } = await response.json();
+
+//   return formUrl as string;
+// }
 
 export async function openEdit(
   fileId: number | string,
@@ -449,7 +489,7 @@ export async function openEdit(
     const isAuth = share ? true : await checkIsAuthenticated();
 
     const editorUrl = isAuth
-      ? (await getEditorUrl("", share)).docServiceUrl
+      ? (await getEditorUrl("", share))?.docServiceUrl
       : "";
 
     const status =
@@ -477,7 +517,7 @@ export async function openEdit(
 
   const editorUrl =
     cookie?.includes("asc_auth_key") || share
-      ? (await getEditorUrl("", share)).docServiceUrl
+      ? (await getEditorUrl("", share))?.docServiceUrl
       : "";
 
   return {
@@ -498,6 +538,8 @@ export async function getEditorUrl(
   );
 
   const res = await fetch(request);
+
+  if (!res.ok) return;
 
   const editorUrl = await res.json();
 

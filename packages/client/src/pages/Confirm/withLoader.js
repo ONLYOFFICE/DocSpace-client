@@ -55,6 +55,29 @@ export default function withLoader(WrappedComponent) {
 
     const navigate = useNavigate();
 
+    const requestError = (error) => {
+      let errorMessage = "";
+
+      if (typeof error === "object") {
+        errorMessage =
+          error?.response?.data?.error?.message ||
+          error?.statusText ||
+          error?.message ||
+          "";
+      } else {
+        errorMessage = error;
+      }
+
+      console.error(errorMessage);
+
+      navigate(
+        combineUrl(
+          window.ClientConfig?.proxy?.url,
+          `/login/error?message=${errorMessage}`,
+        ),
+      );
+    };
+
     const fetch = async () => {
       if (type === "EmpInvite" && email) {
         try {
@@ -74,30 +97,15 @@ export default function withLoader(WrappedComponent) {
           );
 
           return;
-        } catch (e) {}
+        } catch (error) {
+          requestError(error);
+        }
       }
 
       try {
         await getPortalPasswordSettings(confirmHeader);
       } catch (error) {
-        let errorMessage = "";
-        if (typeof error === "object") {
-          errorMessage =
-            error?.response?.data?.error?.message ||
-            error?.statusText ||
-            error?.message ||
-            "";
-        } else {
-          errorMessage = error;
-        }
-
-        console.error(errorMessage);
-        navigate(
-          combineUrl(
-            window.ClientConfig?.proxy?.url,
-            `/login/error?message=${errorMessage}`,
-          ),
-        );
+        requestError(error);
       }
     };
 
@@ -116,23 +124,7 @@ export default function withLoader(WrappedComponent) {
     useEffect(() => {
       if (type === "LinkInvite" || type === "EmpInvite") {
         axios.all([getAuthProviders(), getCapabilities()]).catch((error) => {
-          let errorMessage = "";
-          if (typeof error === "object") {
-            errorMessage =
-              error?.response?.data?.error?.message ||
-              error?.statusText ||
-              error?.message ||
-              "";
-          } else {
-            errorMessage = error;
-          }
-          console.error(errorMessage);
-          navigate(
-            combineUrl(
-              window.ClientConfig?.proxy?.url,
-              `/login/error?message=${errorMessage}`,
-            ),
-          );
+          requestError(error);
         });
       }
     }, []);

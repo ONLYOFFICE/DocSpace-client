@@ -229,6 +229,7 @@ export type EditorProps = {
   isSharingAccess?: boolean;
   errorMessage?: string;
   isSkipError?: boolean;
+  filesSettings?: TFilesSettings;
 
   onDownloadAs?: (obj: object) => void;
   onSDKRequestSharingSettings?: () => void;
@@ -334,6 +335,7 @@ export interface SelectFileDialogProps {
 
 export interface UseSocketHelperProps {
   socketUrl: string;
+  user?: TUser;
 }
 
 export interface UseEventsProps {

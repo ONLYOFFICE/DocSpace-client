@@ -25,48 +25,50 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { inject, observer } from "mobx-react";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
-import { ArticleItem } from "@docspace/shared/components/article-item";
+import { Button } from "@docspace/shared/components/button";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { Text } from "@docspace/shared/components/text";
 
-import CatalogSettingsReactSvgUrl from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
+import StyledModalDialog from "./StyledModalDialog";
 
-const PureSettingsItem = ({
-  t,
-  showText,
-  isActive,
-  onClick,
-  currentColorScheme,
-}) => {
-  const onClickAction = React.useCallback(() => {
-    onClick && onClick("settings");
-  }, [onClick]);
-
-  const title = t("Common:Settings");
+const ResetConfirmationModal = (props) => {
+  const { t } = useTranslation(["Common"]);
+  const { closeResetModal, confirmationResetModal, confirmReset } = props;
 
   return (
-    <ArticleItem
-      key="settings"
-      text={title}
-      title={title}
-      icon={CatalogSettingsReactSvgUrl}
-      showText={showText}
-      onClick={onClickAction}
-      isActive={isActive}
-      folderId="document_catalog-settings"
-      $currentColorScheme={currentColorScheme}
-    />
+    <StyledModalDialog
+      contentHeight="100%"
+      displayType="modal"
+      onClose={closeResetModal}
+      visible={confirmationResetModal}
+    >
+      <ModalDialog.Header>{t("Common:Confirmation")}</ModalDialog.Header>
+
+      <ModalDialog.Body>
+        <Text noSelect>{t("Common:ConfirmationText")}</Text>
+      </ModalDialog.Body>
+
+      <ModalDialog.Footer>
+        <Button
+          id="ok-button"
+          label={t("Common:OKButton")}
+          onClick={confirmReset}
+          primary
+          scale
+          size="normal"
+        />
+        <Button
+          id="cancel-button"
+          label={t("Common:CancelButton")}
+          onClick={closeResetModal}
+          scale
+          size="normal"
+        />
+      </ModalDialog.Footer>
+    </StyledModalDialog>
   );
 };
 
-const SettingsItem = withTranslation(["FilesSettings", "Common"])(
-  PureSettingsItem,
-);
-
-export default inject(({ settingsStore }) => {
-  return {
-    showText: settingsStore.showText,
-    currentColorScheme: settingsStore.currentColorScheme,
-  };
-})(observer(SettingsItem));
+export default ResetConfirmationModal;

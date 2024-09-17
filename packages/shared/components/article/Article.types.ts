@@ -139,7 +139,6 @@ export interface ArticleProps {
   isPaymentPageAvailable?: boolean;
   isLicenseExpiring?: boolean;
   isLicenseDateExpired?: boolean;
-  isEnterprise?: boolean;
   isTrial?: boolean;
   standalone?: boolean;
   currentTariffPlanTitle?: string;

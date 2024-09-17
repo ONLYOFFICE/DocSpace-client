@@ -206,7 +206,7 @@ const QuotaForm = ({
           isDisabled={isDisable}
           onKeyDown={onKeyDownInput}
           hasError={isError || hasError}
-          pattern="^[ 0-9]+$"
+          pattern="^-?\d+(?:\.\d{0,2})?"
           scale
           withBorder
         />
@@ -218,7 +218,7 @@ const QuotaForm = ({
           size="content"
           onSelect={onSelectComboBox}
           showDisabledItems
-          manualWidth={"fit-content"}
+          manualWidth="auto"
           directionY="both"
         />
       </div>

@@ -59,7 +59,6 @@ const ArticleBodyContent = (props) => {
     isOwner,
     isLoadedArticleBody,
     standalone,
-    isEnterprise,
     isCommunity,
     currentDeviceType,
     isProfileLoading,
@@ -174,26 +173,19 @@ const ArticleBodyContent = (props) => {
     selectedKeys,
   ]);
 
-  const onSelect = (value, e) => {
-    if (isArrayEqual([value], selectedKeys)) {
-      return;
-    }
-
-    const settingsPath = `/portal-settings${getSelectedLinkByKey(
+  const getLinkData = (value) => {
+    const path = `/portal-settings${getSelectedLinkByKey(
       value + "-0",
       settingsTree,
     )}`;
 
-    if (openingNewTab(settingsPath, e)) return;
-    // setSelectedKeys([value + "-0"]);
+    return { path, state: {} };
+  };
 
+  const onSelect = (value, e) => {
     if (currentDeviceType === DeviceType.mobile) {
       toggleArticleOpen();
     }
-
-    if (settingsPath === location.pathname) return;
-
-    navigate(`${settingsPath}`);
   };
 
   const mapKeys = (tKey) => {
@@ -304,6 +296,7 @@ const ArticleBodyContent = (props) => {
       const patternSearching = selectedKeys[0].split("-");
       const selectedKey = patternSearching[0];
       const title = mapKeys(item.tKey);
+      const linkData = getLinkData(item.key);
 
       items.push(
         <ArticleItem
@@ -316,6 +309,7 @@ const ArticleBodyContent = (props) => {
           value={item.link}
           isActive={item.key === selectedKey}
           onClick={(e) => onSelect(item.key, e)}
+          linkData={linkData}
           folderId={item.id}
           style={{
             marginTop: `${item.key.includes(9) ? "16px" : "0"}`,
@@ -347,8 +341,8 @@ export default inject(
     currentTariffStatusStore,
   }) => {
     const { isLoadedArticleBody, setIsLoadedArticleBody } = common;
-    const { isEnterprise, isCommunity } = authStore;
-    const { isNotPaidPeriod } = currentTariffStatusStore;
+
+    const { isNotPaidPeriod, isCommunity } = currentTariffStatusStore;
     const { user } = userStore;
     const { isOwner } = user;
     const {
@@ -368,7 +362,7 @@ export default inject(
 
     return {
       standalone,
-      isEnterprise,
+
       showText,
       toggleArticleOpen,
       isLoadedArticleBody,

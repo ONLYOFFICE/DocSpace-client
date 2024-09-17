@@ -30,6 +30,7 @@
   "HotkeysPlayPause": "Lecture/Pause",
   "HotkeysRedoLastUndoneAction": "Refaire la dernière action non effectuée",
   "HotkeysRemove": "Supprimer les éléments sélectionnés",
+  "HotkeysRenameSelected": "Renommer l'élément sélectionné",
   "HotkeysSelectAll": "Sélectionner tous les dossiers et fichiers visibles",
   "HotkeysSelectDown": "Sélectionner l'élément suivant vers le bas",
   "HotkeysSelection": "Sélection des éléments",

@@ -1,5 +1,6 @@
 {
   "ActiveSessions": "Aktívne relácie",
+  "AutoDeleteTitle": "Všetky relácie staršie ako 60 dní sa automaticky odstránia.",
   "ChangeEmailSuccess": "E-mail bol úspešne zmenený ",
   "ChangePasswordAfterLoggingOut": "Zmeniť heslo po odhlásení",
   "ConnectSocialNetworks": "Pripojte svoje sociálne siete",
@@ -14,7 +15,6 @@
   "InterfaceTheme": "Vzhľad prostredia",
   "LightTheme": "Svetlá téma",
   "LogoutActiveConnection": "Odhlásiť sa z aktívneho pripojenia",
-  "LogoutAllActiveConnections": "Odhlásiť sa zo všetkých aktívnych pripojení",
   "LogoutAllActiveSessionsDescription": "Budú odhlásené všetky aktívne pripojenia okrem tohto pripojenia, keďže sa práve používa.",
   "LogoutBtn": "Odhlásiť sa",
   "LogoutDescription": "Poznámka. Budú odhlásené všetky aktívne pripojenia okrem tohto pripojenia, keďže sa práve používa.",
@@ -27,5 +27,6 @@
   "SuccessLogout": "Aktívne pripojenie bolo odhlásené: {{platform}}, {{browser}}",
   "SystemTheme": "Použiť tému systému",
   "SystemThemeDescription": "Prepínajte medzi svetlými a tmavými témami automaticky, keď tak urobí váš systém.",
+  "TerminateAllSessions": "Ukončenie všetkých relácií okrem aktuálnej",
   "TwoFactorDescription": "Správca povolil všetkým používateľom dvojfaktorovú autentifikáciu prostredníctvom aplikácie generujúcej kód."
 }

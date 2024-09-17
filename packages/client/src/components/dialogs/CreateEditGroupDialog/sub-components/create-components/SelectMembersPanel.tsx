@@ -24,51 +24,43 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { GroupParams } from "../types";
-import GroupNameParam from "./GroupNameParam";
-import { Dispatch, ChangeEvent } from "react";
-import HeadOfGroup from "./HeadOfGroupParam";
-import MembersParam from "./MembersParam";
+import React from "react";
 
-interface CreateGroupDialogBodyProps {
-  groupParams: GroupParams;
-  setGroupParams: Dispatch<React.SetStateAction<GroupParams>>;
+import { TUser } from "@docspace/shared/api/people/types";
+
+import { MembersSelector } from "../MembersSelector/MembersSelector";
+
+type SelectMembersPanelProps = {
+  isVisible: boolean;
   onClose: () => void;
-}
-
-const CreateGroupDialogBody = ({
-  groupParams,
-  setGroupParams,
-  onClose,
-}: CreateGroupDialogBodyProps) => {
-  const onChangeGroupName = (e: ChangeEvent<HTMLInputElement>) =>
-    setGroupParams({ ...groupParams, groupName: e.target.value });
-
-  const setGroupManager = (groupManager: object) =>
-    setGroupParams({ ...groupParams, groupManager });
-
-  const setGroupMembers = (groupMembers: object[]) =>
-    setGroupParams({ ...groupParams, groupMembers });
-
-  return (
-    <>
-      <GroupNameParam
-        groupName={groupParams.groupName}
-        onChangeGroupName={onChangeGroupName}
-      />
-      <HeadOfGroup
-        groupManager={groupParams.groupManager}
-        setGroupManager={setGroupManager}
-        onClose={onClose}
-      />
-      <MembersParam
-        groupManager={groupParams.groupManager}
-        groupMembers={groupParams.groupMembers}
-        setGroupMembers={setGroupMembers}
-        onClose={onClose}
-      />
-    </>
-  );
+  onParentPanelClose: () => void;
+  groupManager: TUser | null;
+  groupMembers: TUser[];
+  addMembers: (members: TUser[]) => void;
 };
 
-export default CreateGroupDialogBody;
+export const SelectMembersPanel = ({
+  isVisible,
+  onClose,
+  onParentPanelClose,
+  groupManager,
+  groupMembers,
+  addMembers,
+}: SelectMembersPanelProps) => {
+  const invitedUsers = React.useMemo(
+    () => [...groupMembers].map((g) => g?.id),
+    [groupMembers],
+  );
+
+  if (groupManager) invitedUsers.push(groupManager.id);
+
+  return (
+    <MembersSelector
+      isVisible={isVisible}
+      onClose={onClose}
+      onParentPanelClose={onParentPanelClose}
+      addMembers={addMembers}
+      invitedUsers={invitedUsers}
+    />
+  );
+};

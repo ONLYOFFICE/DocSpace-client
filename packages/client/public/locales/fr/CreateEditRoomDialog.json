@@ -1,8 +1,10 @@
 {
+  "ActivationRequired": "activation requise",
   "ChooseRoomType": "Choisir le type de salle",
   "CreateRoomConfirmation": "Poursuivre sans connecter le stockage ?\nVous avez sélectionné une option de stockage de tiers qui n’est pas encore connectée. Si vous continuez sans connecter le service, cette option ne sera pas ajoutée.",
   "CreateTagOption": "Créer une étiquette",
   "DisableRoomQuota": "Désactiver le quota pour cette salle",
+  "FormRoomBarDescription": "Cette salle est accessible à toute personne disposant du lien. Les utilisateurs externes auront le droit de remplir des formulaires pour tous les fichiers.",
   "Icon": "Icône",
   "MakeRoomPrivateDescription": "Tous les fichiers de cette salle seront chiffrés.",
   "MakeRoomPrivateLimitationsWarningDescription": "Cette fonction vous permet d’inviter uniquement les utilisateurs existants de {{productName}}. Après avoir créé une salle, vous ne pourrez pas modifier la liste des utilisateurs.",
@@ -12,6 +14,7 @@
   "PublicRoomSystemFoldersDescription": "Les dossiers système stockent des copies de formulaires à différents stades d'achèvement. Les formulaires en cours de remplissage sont stockés dans le dossier En cours, et les formulaires complétés sont stockés dans le dossier Terminés.",
   "PublicRoomSystemFoldersTitle": "Dossiers système",
   "RoomEditing": "Salle de l’édition",
+  "RootFolderLabel": "Dossier racine",
   "StorageDescription": "Quota de stockage est fixé par salle. Vous pouvez modifier cette valeur ou désactiver la limite de stockage.",
   "TagsPlaceholder": "Ajouter un tag",
   "ThirdPartyStorageComboBoxPlaceholder": "Sélectionner le stockage",

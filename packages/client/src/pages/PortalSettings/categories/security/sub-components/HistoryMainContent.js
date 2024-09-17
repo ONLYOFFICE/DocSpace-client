@@ -61,6 +61,7 @@ const MainContainer = styled.div`
 
   .login-history-description {
     color: ${(props) => props.theme.client.settings.common.descriptionColor};
+    padding-bottom: 24px;
   }
 
   .save-cancel {
@@ -80,11 +81,6 @@ const MainContainer = styled.div`
   .latest-text {
     font-size: 13px;
     padding: 20px 0 16px;
-  }
-
-  .download-text {
-    font-size: 13px;
-    padding: 16px 0 24px 0;
   }
 
   .storage-label {
@@ -173,7 +169,6 @@ const HistoryMainContent = (props) => {
     lifetime,
     saveButtonLabel,
     cancelButtonLabel,
-    downloadText,
     setLifetimeAuditSettings,
     securityLifetime,
     content,
@@ -384,9 +379,6 @@ const HistoryMainContent = (props) => {
             />
           </>
         )} */}
-        <Text className="download-text settings_unavailable">
-          {downloadText}
-        </Text>
       </div>
       {content}
       <DownLoadWrapper>

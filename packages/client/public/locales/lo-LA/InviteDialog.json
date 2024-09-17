@@ -2,7 +2,7 @@
   "AddManually": "ເພີ່ມດ້ວຍຕົນເອງ",
   "AddManuallyDescriptionAccounts": "ເຊີນຜູ້ໃຊ້ໃໝ່ເຂົ້າມາ {{productName}} ສ່ວນຕົວຜ່ານທາງອີເມວ",
   "AddManuallyDescriptionRoom": "ເພີ່ມ ຜູ້ໃຊ້ {{productName}} ທີ່ມີຢູ່ແລ້ວ ໃສ່ຫ້ອງໂດຍໃຊ້ຊື່ ຫຼືເຊີນຜູ້ໃຊ້ໃໝ່ດ້ວຍຕົນເອງຜ່ານອີເມວ",
-  "EmailErrorMessage": "ທີ່ຢູ່ອີເມວບໍ່ຖືກຕ້ອງ. ທ່ານສາມາດແກ້ໄຂອີເມວໂດຍການຄລິກໃສ່ມັນ.",
+  "EmailErrorMessage": "ທີ່ຢູ່ອີເມວບໍ່ຖືກຕ້ອງ. ທ່ານສາມາດແກ້ໄຂອີເມວໂດຍການຄລິກສອງຄັ້ງໃສ່ມັນ.",
   "InvitationLanguage": "ພາສາເຊີນ",
   "InviteAccountSearchPlaceholder": "ເຊີນຄົນທາງອີເມວ",
   "InviteRoomSearchPlaceholder": "ເຊີນຄົນດ້ວຍຊື່ ຫຼືອີເມລ໌",
@@ -11,5 +11,6 @@
   "InviteViaLinkDescriptionRoom": "ສ້າງການເຊື່ອມຕໍ່ທົ່ວໄປສໍາລັບການອະນຸຍາດຕົນເອງໃນຫ້ອງ",
   "LinkCopySuccess": "ລິ້ງຖືກຄັດລອກແລ້ວ",
   "ResetChange": "ຣີເຊັດການປ່ຽນແປງ",
-  "SendInvitation": "ສົ່ງຄຳເຊີນ"
+  "SendInvitation": "ສົ່ງຄຳເຊີນ",
+  "UsersAlreadyAdded": "ຜູ້ໃຊ້ບາງຄົນໄດ້ຖືກເພີ່ມແລ້ວ"
 }

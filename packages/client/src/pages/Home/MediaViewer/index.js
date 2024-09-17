@@ -96,6 +96,7 @@ const FilesMediaViewer = (props) => {
     fetchPublicRoom,
     isPublicRoom,
     openUrl,
+    autoPlay,
   } = props;
 
   const navigate = useNavigate();
@@ -285,6 +286,7 @@ const FilesMediaViewer = (props) => {
             files={files}
             getIcon={getIcon}
             visible={visible}
+            autoPlay={autoPlay}
             playlist={playlist}
             prevMedia={prevMedia}
             nextMedia={nextMedia}
@@ -379,6 +381,7 @@ export default inject(
       nextMedia,
       prevMedia,
       changeUrl,
+      autoPlay,
     } = mediaViewerDataStore;
     const { deleteItemAction } = filesActionsStore;
     const { getIcon, extsImagePreviewed, extsMediaPreviewed } =
@@ -423,6 +426,7 @@ export default inject(
 
     return {
       files,
+      autoPlay,
       playlist,
       currentPostionIndex,
       nextMedia,

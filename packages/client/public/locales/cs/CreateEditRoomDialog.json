@@ -1,8 +1,10 @@
 {
+  "ActivationRequired": "nutná aktivace",
   "ChooseRoomType": "Výběr typu místnosti",
   "CreateRoomConfirmation": "Pokračovat bez připojení úložiště?\nVybrali jste možnost úložiště třetí strany, které ještě není připojeno. Pokud budete pokračovat bez připojení služby, tato možnost nebude přidána.",
   "CreateTagOption": "Vytvořit značku",
   "DisableRoomQuota": "Zakázat kvóty pro tuto místnost",
+  "FormRoomBarDescription": "Tato místnost je k dispozici každému uživateli s odkazem. Externí uživatelé budou mít oprávnění k vyplňování formulářů pro všechny soubory.",
   "Icon": "Ikona",
   "MakeRoomPrivateDescription": "Všechny soubory v této místnosti budou zašifrovány.",
   "MakeRoomPrivateLimitationsWarningDescription": "Pomocí této funkce můžete pozvat pouze stávající uživatele služby {{productName}}. Po vytvoření místnosti nebudete moci seznam uživatelů měnit.",

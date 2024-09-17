@@ -397,7 +397,6 @@ const PeopleTableRow = (props) => {
           size="content"
           modernView
           manualWidth={"fit-content"}
-          isLoading={isLoading}
           optionStyle={{ maxWidth: "400px" }}
           textOverflow
         />
@@ -438,7 +437,7 @@ const PeopleTableRow = (props) => {
         size="content"
         displaySelectedOption
         modernView
-        manualWidth={"fit-content"}
+        manualWidth={"auto"}
         isLoading={isLoading}
       />
     );
@@ -605,6 +604,7 @@ const PeopleTableRow = (props) => {
               onClick={onEmailClick}
               isTextOverflow
               dir="auto"
+              enableUserSelect
             >
               {email}
             </Link>

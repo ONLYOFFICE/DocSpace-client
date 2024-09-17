@@ -92,7 +92,6 @@ const Article = ({
   isBurgerLoading,
 
   isNonProfit,
-  isEnterprise,
   isFreeTariff,
   isGracePeriod,
   isLicenseDateExpired,

@@ -43,6 +43,7 @@ export type TDataContext = {
 
 export type GreetingContainersProps = {
   greetingSettings?: string;
+  culture?: string;
 };
 
 export type LoginProps = {
@@ -86,6 +87,8 @@ export type LoginFormProps = {
   reCaptchaPublicKey?: string;
   reCaptchaType?: RecaptchaType;
   cookieSettingsEnabled: boolean;
+  ldapDomain?: string;
+  ldapEnabled?: boolean;
 };
 
 export type ForgotPasswordModalDialogProps = {

@@ -23,54 +23,44 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import React, { useEffect } from "react";
+import { useTheme } from "styled-components";
 
-import React from "react";
-import styled from "styled-components";
+import DownloadingReactSvg from "PUBLIC_DIR/images/downloading.react.svg";
+import DownloadingDarkReactSvg from "PUBLIC_DIR/images/downloading.dark.react.svg";
 
-import WrappedComponent from "../WrappedComponent";
+import { StyledOperationContainer } from "./OperationContainer.styled";
+import { IOperationContainer } from "./OperationContainer.types";
+import { Text } from "../text";
+import PortalLogo from "../portal-logo/PortalLogo";
 
-import { PluginComponents } from "../enums";
+const OperationContainer = (props: IOperationContainer) => {
+  const { url, authorized, title, description } = props;
 
-const StyledPluginSettings = styled.div`
-  .settings-header {
-    margin: 0;
-    margin-bottom: 16px;
-  }
+  const theme = useTheme();
 
-  margin-bottom: 32px;
-`;
+  const logo = theme.isBase ? (
+    <DownloadingReactSvg className="operation-logo" />
+  ) : (
+    <DownloadingDarkReactSvg className="operation-logo" />
+  );
 
-const PluginSettings = ({
-  id,
-
-  onLoad,
-
-  customSettings,
-}) => {
-  const [customSettingsProps, setCustomSettingsProps] =
-    React.useState(customSettings);
-
-  const onLoadAction = React.useCallback(async () => {
-    if (!onLoad) return;
-    const res = await onLoad();
-
-    setCustomSettingsProps(res.customSettings);
-  }, [onLoad]);
-
-  React.useEffect(() => {
-    onLoadAction();
-  }, [onLoadAction]);
+  useEffect(() => {
+    if (url && authorized) window.location.replace(url);
+  }, [url, authorized]);
 
   return (
-    <StyledPluginSettings>
-      <WrappedComponent
-        component={{
-          component: PluginComponents.box,
-          props: customSettingsProps,
-        }}
-      />
-    </StyledPluginSettings>
+    <StyledOperationContainer>
+      <PortalLogo isResizable />
+      {logo}
+      <Text className="operation-title" fontWeight={700} fontSize="23px">
+        {title}
+      </Text>
+      <Text className="operation-description" fontWeight={600} fontSize="13px">
+        {description}
+      </Text>
+    </StyledOperationContainer>
   );
 };
 
-export default PluginSettings;
+export default OperationContainer;

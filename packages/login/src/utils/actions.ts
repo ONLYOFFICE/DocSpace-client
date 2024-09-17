@@ -144,18 +144,3 @@ export async function getSSO() {
 
   return sso.response as TGetSsoSettings;
 }
-export async function getPortalCultures() {
-  const [getPortalCultures] = createRequest(
-    [`/settings/cultures`],
-    [["", ""]],
-    "GET",
-  );
-
-  const res = await fetch(getPortalCultures);
-
-  if (!res.ok) return;
-
-  const cultures = await res.json();
-
-  return cultures.response as TPortalCultures;
-}

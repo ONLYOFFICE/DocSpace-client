@@ -23,7 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 
 import ErrorContainer from "@docspace/shared/components/error-container/ErrorContainer";
@@ -33,17 +33,17 @@ import { Text } from "../../components/text";
 
 import { ColorTheme, ThemeId } from "../../components/color-theme";
 import { IPreparationPortal } from "./PreparationPortal.types";
+import { getRestoreProgress } from "../../api/portal";
 import {
-  getRecoveryProgress,
-  reachingSecondBoundary,
-  reachingThirdBoundary,
+  clearAllIntervals,
+  clearLocalStorage,
+  getIntervalProgress,
+  returnToPortal,
 } from "./PreparationPortal.utils";
 
-const firstBound = 10;
-const secondBound = 63;
+let requestsCount = 0;
 
 let timerId: ReturnType<typeof setInterval> | null;
-let progressTimerId: ReturnType<typeof setInterval> | null;
 
 const PreparationPortal = (props: IPreparationPortal) => {
   const { withoutHeader, style, isDialog } = props;
@@ -55,42 +55,83 @@ const PreparationPortal = (props: IPreparationPortal) => {
   const [percent, setPercent] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const clearAllIntervals = () => {
-    if (timerId) clearInterval(timerId);
-    if (progressTimerId) clearInterval(progressTimerId);
+  const setMessage = useCallback(
+    (error?: unknown) => {
+      const errorText = error ?? errorInternalServer;
 
-    progressTimerId = null;
-    timerId = null;
-  };
-
-  useEffect(() => {
-    if (percent < firstBound) return;
-
-    if (percent < secondBound) {
-      reachingSecondBoundary(percent, secondBound, progressTimerId, setPercent);
-      return;
-    }
-
-    reachingThirdBoundary(percent, progressTimerId, setPercent);
-  }, [percent]);
+      setErrorMessage(errorText);
+    },
+    [errorInternalServer],
+  );
 
   useEffect(() => {
+    const getRecoveryProgress = async () => {
+      try {
+        const response = await getRestoreProgress();
+
+        if (!response) {
+          setMessage();
+          return;
+        }
+
+        const { progress, error } = response;
+
+        if (error) {
+          setMessage(error);
+          return;
+        }
+
+        setPercent(progress);
+
+        if (progress === 100) {
+          returnToPortal();
+          clearLocalStorage();
+
+          return;
+        }
+
+        timerId = setInterval(
+          () => getIntervalProgress(setMessage, setPercent, timerId),
+          1000,
+        );
+      } catch (err: unknown) {
+        const knownError = err as {
+          response?: { status: number; data: { error: { message: string } } };
+          statusText?: string;
+          message?: string;
+        };
+
+        const status = knownError?.response?.status;
+        const needCreationTableTime = status === 404;
+
+        if (needCreationTableTime && requestsCount < 3) {
+          requestsCount += 1;
+
+          getRecoveryProgress();
+
+          return;
+        }
+
+        const message =
+          typeof err !== "object"
+            ? err
+            : knownError?.response?.data?.error?.message ||
+              knownError?.statusText ||
+              knownError?.message ||
+              errorInternalServer;
+
+        setMessage(message);
+      }
+    };
+
     setTimeout(() => {
-      getRecoveryProgress(
-        setErrorMessage,
-        errorInternalServer,
-        timerId,
-        progressTimerId,
-        firstBound,
-        setPercent,
-        clearAllIntervals,
-      );
+      getRecoveryProgress();
     }, 6000);
 
     return () => {
-      clearAllIntervals();
+      clearAllIntervals(timerId);
     };
-  }, [errorInternalServer]);
+  }, [errorInternalServer, setMessage]);
 
   const headerText = errorMessage
     ? t("Common:Error")

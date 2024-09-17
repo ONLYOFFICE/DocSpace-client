@@ -5,6 +5,7 @@
   "HotkeysChangeView": "ສະຫຼັບລະຫວ່າງຕາຂ່າຍແລະລາຍການເບິ່ງ",
   "HotkeysClearAll": "ລຶບການເລືອກທັງໝົດ",
   "HotkeysClose": "ປິດ/ຍົກເລີກການກະທຳ",
+  "HotkeysCopySelected": "ສຳເນົາລາຍການທີ່ເລືອກໃສ່ຄລິບບອດ",
   "HotkeysCreateDocument": "ສ້າງເອກະສານ",
   "HotkeysCreateFolder": "ສ້າງໂຟນເດີ",
   "HotkeysCreateForm": "ສ້າງແມ່ແບບແບບຟອມເປົ່າ",
@@ -12,6 +13,7 @@
   "HotkeysCreatePresentation": "ສ້າງການນໍາສະເຫນີ",
   "HotkeysCreateSpreadsheet": "ສ້າງຕາຕະລາງ",
   "HotkeysCreatingObjects": "ການສ້າງລາຍການ",
+  "HotkeysCutSelected": "ຕັດລາຍການທີ່ເລືອກໃສ່ຄລິບບອດ",
   "HotkeysExtendSelectionDown": "ຂະຫຍາຍການເລືອກລົງ",
   "HotkeysExtendSelectionLeft": "ຂະຫຍາຍການເລືອກຊ້າຍ",
   "HotkeysExtendSelectionRight": "ຂະຫຍາຍການເລືອກທີ່ຖືກຕ້ອງ",
@@ -24,6 +26,7 @@
   "HotkeysMoveUp": "ເລື່ອນຂຶ້ນໂດຍບໍ່ປ່ຽນການເລືອກ",
   "HotkeysNavigation": "ການນຳທາງ",
   "HotkeysOpen": "ເປີດລາຍການທີ່ເລືອກ/ຢືນຢັນການກະທຳ",
+  "HotkeysPasteSelected": "ວາງລາຍການທີ່ເລືອກຈາກຄລິບບອດ",
   "HotkeysPlayPause": "ຫຼິ້ນ/ຢຸດຊົ່ວຄາວ",
   "HotkeysRedoLastUndoneAction": "ເຮັດຄືນການກະທຳທີ່ບໍ່ໄດ້ເຮັດຄັ້ງສຸດທ້າຍ",
   "HotkeysRemove": "ລຶບລາຍການທີ່ເລືອກ",
@@ -37,5 +40,7 @@
   "HotkeysShortcuts": "ສະແດງລາຍການຄີບອດແປ້ນພິມ",
   "HotkeysUndoLastAction": "ຍົກເລີກການກະ ທຳ ສຸດທ້າຍ",
   "HotkeysUploadFile": "ອັບໂຫລດໄຟລ໌",
-  "HotkeysUploadingObjects": "ການອັບໂຫລດລາຍການ"
+  "HotkeysUploadingObjects": "ການອັບໂຫລດລາຍການ",
+  "HotkeysZoomIn": "ຂະ​ຫຍາຍ​ເຂົ້າ",
+  "HotkeysZoomOut": "ຊູມອອກ"
 }

@@ -7,6 +7,7 @@
   "DeleteProfileBtn": "Izbriši moj račun",
   "DeleteProfileConfirmation": "Pozor! Izbrisali boste svoj račun.",
   "DeleteProfileConfirmationInfo": "S klikom na \"izbriši moj račun\" se strinjate z našo <1>Politiko zasebnosti.</1>",
+  "DeleteProfileSuccessDescription": "Vaš račun {{productName}} je uspešno onemogočen. Lastnik ali skrbnik {{productName}} lahko trajno izbriše vaš onemogočen račun.",
   "DeleteProfileSuccessMessage": "Vaš račun je bil uspešno izbrisan.",
   "DeleteProfileSuccessMessageInfo": "Oglejte si naš <1>pravilnik o zasebnosti</1>, če želite izvedeti več o brisanju računa in podatkov, povezanih z njim.",
   "EmailAndPasswordCopiedToClipboard": "Email in geslo sta kopirana v odložišče",

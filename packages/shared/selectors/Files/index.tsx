@@ -114,6 +114,7 @@ const FilesSelectorComponent = ({
   createDefineRoomType,
   withInfoBar,
   infoBarData,
+  headerProps,
 }: FilesSelectorProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["Common"]);
@@ -238,7 +239,7 @@ const FilesSelectorComponent = ({
           setSelectedItemType(undefined);
           getRootData();
         } else {
-          setItems([]);
+          // setItems([]);
 
           setBreadCrumbs((bc) => {
             const idx = bc.findIndex(
@@ -276,6 +277,7 @@ const FilesSelectorComponent = ({
           });
 
           setSelectedItemId(item.id);
+          setSelectedFileInfo(null);
           if (item.isRoom) {
             setSelectedItemType("rooms");
           } else {
@@ -302,7 +304,7 @@ const FilesSelectorComponent = ({
       if (item.isFolder) {
         setIsFirstLoad(true);
 
-        setItems([]);
+        // setItems([]);
         setBreadCrumbs((value) => [
           ...value,
           {
@@ -445,7 +447,14 @@ const FilesSelectorComponent = ({
         selectedFileInfo,
       );
     },
-    [breadCrumbs, selectedFileInfo, selectedItemId, selectedTreeNode, onSubmit],
+    [
+      breadCrumbs,
+      rootFolderType,
+      onSubmit,
+      selectedItemId,
+      selectedTreeNode,
+      selectedFileInfo,
+    ],
   );
 
   React.useEffect(() => {
@@ -468,8 +477,15 @@ const FilesSelectorComponent = ({
     openRoot,
   ]);
 
-  const headerProps: TSelectorHeader = withHeader
-    ? { withHeader, headerProps: { headerLabel } }
+  const headerSelectorProps: TSelectorHeader = withHeader
+    ? {
+        withHeader,
+        headerProps: {
+          ...headerProps,
+          headerLabel,
+          onCloseClick: onCancel,
+        },
+      }
     : {};
 
   const withSearch = withSearchProp
@@ -499,7 +515,7 @@ const FilesSelectorComponent = ({
     submitButtonLabel,
     submitButtonId,
     disableSubmitButton: getIsDisabled(
-      isFirstLoad,
+      isFirstLoad && showLoader,
       isSelectedParentFolder,
       selectedItemId,
       selectedItemType,
@@ -546,7 +562,7 @@ const FilesSelectorComponent = ({
 
   const SelectorBody = (
     <Selector
-      {...headerProps}
+      {...headerSelectorProps}
       {...searchProps}
       {...submitButtonProps}
       {...cancelButtonProps}
@@ -610,6 +626,7 @@ const FilesSelectorComponent = ({
         withoutBodyScroll
         zIndex={310}
         onClose={onCancel}
+        withoutHeader
       >
         {SelectorBody}
       </Aside>

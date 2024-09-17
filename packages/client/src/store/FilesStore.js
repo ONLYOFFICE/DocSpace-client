@@ -51,8 +51,12 @@ import { updateTempContent, isPublicRoom } from "@docspace/shared/utils/common";
 import { toastr } from "@docspace/shared/components/toast";
 import config from "PACKAGE_FILE";
 import { thumbnailStatuses } from "@docspace/client/src/helpers/filesConstants";
-import { getDaysRemaining } from "@docspace/shared/utils/common";
 import {
+  getDaysRemaining,
+  frameCallEvent,
+} from "@docspace/shared/utils/common";
+import {
+  LOADER_TIMEOUT,
   MEDIA_VIEW_URL,
   PDF_FORM_DIALOG_KEY,
   ROOMS_PROVIDER_TYPE_NAME,
@@ -72,7 +76,7 @@ import debounce from "lodash.debounce";
 import clone from "lodash/clone";
 import Queue from "queue-promise";
 import { parseHistory } from "SRC_DIR/pages/Home/InfoPanel/Body/helpers/HistoryHelper";
-
+import { toJSON } from "@docspace/shared/api/rooms/filter";
 const { FilesFilter, RoomsFilter } = api;
 const storageViewAs = localStorage.getItem("viewAs");
 
@@ -380,7 +384,7 @@ class FilesStore {
     socketHelper.on("s:modify-room", (option) => {
       switch (option.cmd) {
         case "create-form":
-          this.wsCreatedPDFForm(option);
+          setTimeout(() => this.wsCreatedPDFForm(option), LOADER_TIMEOUT * 2);
           break;
 
         default:
@@ -817,6 +821,10 @@ class FilesStore {
 
   updateActiveFiles = (items) => {
     this.activeFiles = items;
+  };
+
+  updateActiveFolders = (items) => {
+    this.activeFolders = items;
   };
 
   clearFiles = () => {
@@ -1300,10 +1308,24 @@ class FilesStore {
   };
 
   //TODO: FILTER
-  setFilesFilter = (filter) => {
-    if (!this.publicRoomStore.isPublicRoom) {
-      const key = `UserFilter=${this.userStore.user?.id}`;
-      const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
+  setFilesFilter = (filter, folderId = null) => {
+    const { recycleBinFolderId } = this.treeFoldersStore;
+
+    const key =
+      this.categoryType === CategoryType.Archive
+        ? `UserFilterArchiveRoom=${this.userStore.user?.id}`
+        : this.categoryType === CategoryType.SharedRoom
+          ? `UserFilterSharedRoom=${this.userStore.user?.id}`
+          : folderId === "recent"
+            ? `UserFilterRecent=${this.userStore.user?.id}`
+            : +folderId === recycleBinFolderId
+              ? `UserFilterTrash=${this.userStore.user?.id}`
+              : !this.publicRoomStore.isPublicRoom
+                ? `UserFilter=${this.userStore.user?.id}`
+                : null;
+
+    if (key) {
+      const value = `${filter.sortBy},${filter.sortOrder}`;
       localStorage.setItem(key, value);
     }
 
@@ -1329,6 +1351,21 @@ class FilesStore {
 
   setRoomsFilter = (filter) => {
     if (!this.settingsStore.withPaging) filter.pageCount = 100;
+
+    const isArchive = this.categoryType === CategoryType.Archive;
+
+    const key = isArchive
+      ? `UserRoomsArchivedFilter=${this.userStore.user?.id}`
+      : `UserRoomsSharedFilter=${this.userStore.user?.id}`;
+
+    const sharedStorageFilter = JSON.parse(localStorage.getItem(key));
+    if (sharedStorageFilter) {
+      sharedStorageFilter.sortBy = filter.sortBy;
+      sharedStorageFilter.sortOrder = filter.sortOrder;
+
+      const value = toJSON(sharedStorageFilter);
+      localStorage.setItem(key, value);
+    }
 
     // this.setFilterUrl(filter, true);
     this.roomsFilter = filter;
@@ -1463,8 +1500,7 @@ class FilesStore {
       const splitFilter = filterStorageItem.split(",");
 
       filterData.sortBy = splitFilter[0];
-      filterData.pageCount = +splitFilter[1];
-      filterData.sortOrder = splitFilter[2];
+      filterData.sortOrder = splitFilter[1];
     }
 
     if (!this.settingsStore.withPaging) {
@@ -1540,7 +1576,7 @@ class FilesStore {
           //save filter for after closing preview change url
           this.setTempFilter(filterData);
         } else {
-          this.setFilesFilter(filterData); //TODO: FILTER
+          this.setFilesFilter(filterData, folderId); //TODO: FILTER
         }
 
         const isPrivacyFolder =
@@ -1573,13 +1609,16 @@ class FilesStore {
               (data.current.rootFolderType === Rooms ||
                 data.current.rootFolderType === Archive);
 
-            let shared;
+            let shared, quotaLimit, usedSpace;
             if (idx === 1) {
               let room = data.current;
 
               if (!isCurrentFolder) {
                 room = await api.files.getFolderInfo(folderId);
+
                 shared = room.shared;
+                quotaLimit = room.quotaLimit;
+                usedSpace = room.usedSpace;
 
                 this.infoPanelStore.setInfoPanelRoom(room);
               }
@@ -1598,6 +1637,8 @@ class FilesStore {
               roomType,
               isRootRoom,
               shared,
+              quotaLimit,
+              usedSpace,
             };
           }),
         ).then((res) => {
@@ -1724,6 +1765,14 @@ class FilesStore {
 
         if (isUserError && !isThirdPartyError) {
           if (isPublicRoom()) return Promise.reject(err);
+
+          if (err?.response?.status === NotFoundHttpCode) {
+            frameCallEvent({ event: "onNotFound" });
+          }
+
+          if (err?.response?.status === ForbiddenHttpCode) {
+            frameCallEvent({ event: "onNoAccess" });
+          }
 
           this.setIsErrorRoomNotAvailable(true);
         } else {
@@ -2143,7 +2192,7 @@ class FilesStore {
         fileOptions = this.removeOptions(fileOptions, ["download"]);
       }
 
-      if (!isPdf || item.startFilling || item.isForm) {
+      if (!isPdf || (shouldFillForm && canFillForm)) {
         fileOptions = this.removeOptions(fileOptions, ["open-pdf"]);
       }
 
@@ -3470,6 +3519,7 @@ class FilesStore {
         type,
         hasDraft,
         isForm,
+        isPDFForm: item.isForm,
         requestToken,
         lastOpened,
         quotaLimit,

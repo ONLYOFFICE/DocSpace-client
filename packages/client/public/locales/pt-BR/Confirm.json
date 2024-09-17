@@ -7,6 +7,7 @@
   "DeleteProfileBtn": "Apagar minha conta",
   "DeleteProfileConfirmation": "Atenção! Você está prestes a apagar sua conta.",
   "DeleteProfileConfirmationInfo": "Ao clicar em \"Apagar minha conta\", você concorda com nossa <1>política de privacidade.</1>",
+  "DeleteProfileSuccessDescription": "Sua conta do {{productName}} foi desativada com sucesso. O proprietário ou administrador do {{productName}} pode excluir permanentemente sua conta desativada.",
   "DeleteProfileSuccessMessage": "Sua conta foi excluída com sucesso.",
   "DeleteProfileSuccessMessageInfo": "Consulte nossa <1>política de privacidade</1> para saber mais sobre como excluir sua conta e os dados associados a ela.",
   "EmailAndPasswordCopiedToClipboard": "Email e senha copiados para a área de transferência",
@@ -29,5 +30,6 @@
   "SignUp": "Inscrever-se",
   "SuccessDeactivate": "Sua conta foi desativada com sucesso. Em 10 segundos você será redirecionado para o <1>site</1>.",
   "SuccessReactivate": "Sua conta foi reativada com sucesso. Em 10 segundos você será redirecionado para o <1>portal</1>.",
-  "SuccessRemoved": "Sua conta foi removida com sucesso. Em 10 segundos você será redirecionado para o <1>site</1>."
+  "SuccessRemoved": "Sua conta foi removida com sucesso. Em 10 segundos você será redirecionado para o <1>site</1>.",
+  "TermsAndConditions": "Ao continuar, você entende e concorda com nossos <1>Termos e condições</1> e <2>Declaração de privacidade</2>."
 }

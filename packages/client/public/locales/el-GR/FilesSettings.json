@@ -6,6 +6,7 @@
   "DisplayTemplates": "Πρότυπα οθόνης",
   "IntermediateVersion": "Διατήρηση όλων των αποθηκευμένων ενδιάμεσων εκδόσεων",
   "KeepIntermediateVersion": "Διατηρήστε τις ενδιάμεσες εκδόσεις κατά την επεξεργασία",
+  "OpenSameTab": "Ανοίξτε το πρόγραμμα επεξεργασίας {{organizationName}} στην ίδια καρτέλα",
   "OriginalCopy": "Αποθηκεύστε το αντίγραφο του αρχείου και στην αρχική μορφή",
   "StoringFileVersion": "Αποθήκευση εκδόσεων αρχείων",
   "ThirdPartyAccounts": "Λογαριασμοί τρίτων",

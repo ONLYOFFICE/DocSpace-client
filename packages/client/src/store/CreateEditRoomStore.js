@@ -46,6 +46,7 @@ class CreateEditRoomStore {
   settingsStore = null;
   infoPanelStore = null;
   currentQuotaStore = null;
+  dialogsStore = null;
 
   constructor(
     filesStore,
@@ -57,6 +58,7 @@ class CreateEditRoomStore {
     infoPanelStore,
     currentQuotaStore,
     clientLoadingStore,
+    dialogsStore,
   ) {
     makeAutoObservable(this);
 
@@ -69,6 +71,7 @@ class CreateEditRoomStore {
     this.infoPanelStore = infoPanelStore;
     this.currentQuotaStore = currentQuotaStore;
     this.clientLoadingStore = clientLoadingStore;
+    this.dialogsStore = dialogsStore;
   }
 
   setRoomParams = (roomParams) => {
@@ -87,8 +90,8 @@ class CreateEditRoomStore {
     this.onClose = onClose;
   };
 
-  setRoomIsCreated = (onClose) => {
-    this.onClose = onClose;
+  setIsRoomCreatedByCurrentUser = (value) => {
+    this.isRoomCreatedByCurrentUser = value;
   };
 
   onCreateRoom = async (withConfirm = false, t) => {
@@ -151,6 +154,8 @@ class CreateEditRoomStore {
         isThirdparty && storageFolderId
           ? await createRoomInThirdpary(storageFolderId, createRoomData)
           : await createRoom(createRoomData);
+
+      this.dialogsStore.setIsNewRoomByCurrentUser(true);
 
       room.isLogoLoading = true;
 

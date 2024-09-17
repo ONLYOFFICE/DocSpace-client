@@ -1,1 +1,4 @@
-{}
+{
+  "LdapConnectionTypeSSL": "SSL",
+  "LdapConnectionTypeStartTls": "StartTLS"
+}

@@ -25,14 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { i18n } from "i18next";
 
-import { getCookie, getLanguage } from "@docspace/shared/utils";
+import { getCookie } from "@docspace/shared/utils";
 import { LANGUAGE } from "@docspace/shared/constants";
 import { TSettings } from "@docspace/shared/api/settings/types";
 
 import { getI18NInstance } from "@/utils/i18n";
-import { setCookie } from "@docspace/shared/utils/cookie";
 
 interface UseI18NProps {
   settings?: TSettings;

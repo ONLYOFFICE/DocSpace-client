@@ -27,10 +27,15 @@
 import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/vertical-dots.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/refresh.react.svg?url";
 import AccessNoneReactSvgUrl from "PUBLIC_DIR/images/access.none.react.svg?url";
-import React, { useEffect, useReducer } from "react";
+import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
+
+import { useEffect, useReducer } from "react";
+import { ReactSVG } from "react-svg";
 import { Button } from "@docspace/shared/components/button";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { Text } from "@docspace/shared/components/text";
 import { saveSettingsThirdParty } from "@docspace/shared/api/files";
-import { StyledBackup } from "../StyledBackup";
+import { StyledBackup, StyledComboBoxItem } from "../StyledBackup";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import { toastr } from "@docspace/shared/components/toast";
 import { inject, observer } from "mobx-react";
@@ -39,6 +44,7 @@ import DeleteThirdPartyDialog from "../../../../../../components/dialogs/DeleteT
 import { getOAuthToken } from "@docspace/shared/utils/common";
 import FilesSelectorInput from "SRC_DIR/components/FilesSelectorInput";
 import { useTranslation } from "react-i18next";
+import { ThirdPartyServicesUrlName } from "../../../../../../helpers/constants";
 
 const initialState = {
   folderList: {},
@@ -83,7 +89,7 @@ const DirectThirdPartyConnection = (props) => {
 
   const onSetSettings = async () => {
     try {
-      await setThirdPartyAccountsInfo();
+      await setThirdPartyAccountsInfo(t);
 
       setState({
         isLoading: false,
@@ -157,7 +163,7 @@ const DirectThirdPartyConnection = (props) => {
         provider_id,
       );
 
-      await setThirdPartyAccountsInfo();
+      await setThirdPartyAccountsInfo(t);
     } catch (e) {
       toastr.error(e);
     }
@@ -165,9 +171,24 @@ const DirectThirdPartyConnection = (props) => {
     setState({ isLoading: false, isUpdatingInfo: false });
   };
 
-  const onSelectAccount = (options) => {
-    const key = options.key;
-    setSelectedThirdPartyAccount({ ...accounts[+key] });
+  const onSelectAccount = (event) => {
+    const data = event.currentTarget.dataset;
+
+    const account = accounts.find((t) => t.key === data.thirdPartyKey);
+
+    if (!account.connected) {
+      setSelectedThirdPartyAccount({
+        key: 0,
+        label: selectedThirdPartyAccount?.label,
+      });
+
+      return window.open(
+        `/portal-settings/integration/third-party-services?service=${ThirdPartyServicesUrlName[data.thirdPartyKey]}`,
+        "_blank",
+      );
+    }
+
+    setSelectedThirdPartyAccount(account);
   };
 
   const onDisconnect = () => {
@@ -187,7 +208,7 @@ const DirectThirdPartyConnection = (props) => {
         key: "Disconnect-settings",
         label: t("Common:Disconnect"),
         onClick: onDisconnect,
-        disabled: selectedThirdPartyAccount?.connected ? false : true,
+        disabled: selectedThirdPartyAccount?.storageIsConnected ? false : true,
         icon: AccessNoneReactSvgUrl,
       },
     ];
@@ -201,6 +222,33 @@ const DirectThirdPartyConnection = (props) => {
   const isDisabledSelector = isLoading || isDisabled;
 
   const folderList = connectedThirdPartyAccount ?? {};
+
+  const advancedOptions = accounts?.map((item) => {
+    return (
+      <StyledComboBoxItem isDisabled={item.disabled} key={item.key}>
+        <DropDownItem
+          onClick={onSelectAccount}
+          className={item.className}
+          data-third-party-key={item.key}
+          disabled={item.disabled}
+        >
+          <Text className="drop-down-item_text" fontWeight={600}>
+            {item.title}
+          </Text>
+
+          {!item.disabled && !item.connected ? (
+            <ReactSVG
+              src={ExternalLinkReactSvgUrl}
+              className="drop-down-item_icon"
+            />
+          ) : (
+            <></>
+          )}
+        </DropDownItem>
+      </StyledComboBoxItem>
+    );
+  });
+
   return (
     <StyledBackup
       isConnectedAccount={
@@ -210,17 +258,25 @@ const DirectThirdPartyConnection = (props) => {
     >
       <div className="backup_connection">
         <ComboBox
-          options={accounts}
+          className="thirdparty-combobox"
           selectedOption={{
             key: 0,
             label: selectedThirdPartyAccount?.label,
           }}
-          onSelect={onSelectAccount}
+          options={[]}
+          advancedOptions={advancedOptions}
+          scaled
+          size="content"
+          manualWidth={"auto"}
+          directionY="both"
+          displaySelectedOption
           noBorder={false}
+          isDefaultMode={true}
+          hideMobileView={false}
+          forceCloseClickOutside
           scaledOptions
-          dropDownMaxHeight={300}
-          tabIndex={1}
           showDisabledItems
+          displayArrow
           isDisabled={isDisabledComponent}
         />
 

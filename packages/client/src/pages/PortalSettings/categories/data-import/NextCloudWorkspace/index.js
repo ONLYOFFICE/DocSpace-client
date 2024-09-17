@@ -133,7 +133,7 @@ const NextcloudWorkspace = (props) => {
     return clearCheckedAccounts;
   }, []);
 
-  if (isMobile || isMobileBreakpoint())
+  if (isMobileBreakpoint())
     return (
       <BreakpointWarning
         isMobileUnavailableOnly
@@ -191,7 +191,7 @@ export default inject(({ setup, settingsStore, importAccountsStore }) => {
     filteredUsers,
   };
 })(
-  withTranslation(["Common, SMTPSettings, Settings"])(
+  withTranslation(["Common", "SMTPSettings", "Settings"])(
     observer(NextcloudWorkspace),
   ),
 );

@@ -74,7 +74,7 @@ const HeaderNav = ({
   getActions,
   hideProfileMenu,
 }) => {
-  const { t } = useTranslation(["NavMenu", "Common", "About"]);
+  const { t } = useTranslation(["Common", "About"]);
   const userActions = getActions(t);
 
   return (

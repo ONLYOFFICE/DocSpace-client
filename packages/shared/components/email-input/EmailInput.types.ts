@@ -72,4 +72,8 @@ export interface EmailInputProps {
   type: InputType;
   /** Used as HTML `tabindex` property */
   tabIndex?: number;
+
+  withBorder?: boolean;
+  maxLength?: number;
+  title?: string;
 }

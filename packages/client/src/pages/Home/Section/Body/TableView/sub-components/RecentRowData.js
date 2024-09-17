@@ -40,11 +40,11 @@ import {
 
 const RecentRowDataComponent = (props) => {
   const {
-    authorColumnIsEnabled,
-    createdColumnIsEnabled,
-    modifiedColumnIsEnabled,
-    sizeColumnIsEnabled,
-    typeColumnIsEnabled,
+    authorRecentColumnIsEnabled,
+    createdRecentColumnIsEnabled,
+    modifiedRecentColumnIsEnabled,
+    sizeRecentColumnIsEnabled,
+    typeRecentColumnIsEnabled,
     quickButtonsColumnIsEnabled,
     lastOpenedColumnIsEnabled,
 
@@ -87,15 +87,17 @@ const RecentRowDataComponent = (props) => {
         </StyledBadgesContainer>
       </TableCell>
 
-      {authorColumnIsEnabled ? (
+      {authorRecentColumnIsEnabled ? (
         <TableCell
           style={
-            !authorColumnIsEnabled ? { background: "none" } : dragStyles.style
+            !authorRecentColumnIsEnabled
+              ? { background: "none" }
+              : dragStyles.style
           }
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
-            lastColumn === "Author" ? "no-extra-space" : "",
+            lastColumn === "AuthorRecent" ? "no-extra-space" : "",
           )}
         >
           <AuthorCell
@@ -107,17 +109,17 @@ const RecentRowDataComponent = (props) => {
         <div />
       )}
 
-      {createdColumnIsEnabled ? (
+      {createdRecentColumnIsEnabled ? (
         <TableCell
           style={
-            !createdColumnIsEnabled
+            !createdRecentColumnIsEnabled
               ? { background: "none !important" }
               : dragStyles.style
           }
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
-            lastColumn === "Created" ? "no-extra-space" : "",
+            lastColumn === "CreatedRecent" ? "no-extra-space" : "",
           )}
         >
           <DateCell
@@ -152,15 +154,17 @@ const RecentRowDataComponent = (props) => {
         <div />
       )}
 
-      {modifiedColumnIsEnabled ? (
+      {modifiedRecentColumnIsEnabled ? (
         <TableCell
           style={
-            !modifiedColumnIsEnabled ? { background: "none" } : dragStyles.style
+            !modifiedRecentColumnIsEnabled
+              ? { background: "none" }
+              : dragStyles.style
           }
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
-            lastColumn === "Modified" ? "no-extra-space" : "",
+            lastColumn === "ModifiedRecent" ? "no-extra-space" : "",
           )}
         >
           <DateCell
@@ -172,15 +176,17 @@ const RecentRowDataComponent = (props) => {
         <div />
       )}
 
-      {sizeColumnIsEnabled ? (
+      {sizeRecentColumnIsEnabled ? (
         <TableCell
           style={
-            !sizeColumnIsEnabled ? { background: "none" } : dragStyles.style
+            !sizeRecentColumnIsEnabled
+              ? { background: "none" }
+              : dragStyles.style
           }
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
-            lastColumn === "Size" ? "no-extra-space" : "",
+            lastColumn === "SizeRecent" ? "no-extra-space" : "",
           )}
         >
           <SizeCell
@@ -192,17 +198,17 @@ const RecentRowDataComponent = (props) => {
         <div />
       )}
 
-      {typeColumnIsEnabled ? (
+      {typeRecentColumnIsEnabled ? (
         <TableCell
           style={
-            !typeColumnIsEnabled
+            !typeRecentColumnIsEnabled
               ? { background: "none !important" }
               : dragStyles.style
           }
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
-            lastColumn === "Type" ? "no-extra-space" : "",
+            lastColumn === "TypeRecent" ? "no-extra-space" : "",
           )}
         >
           <TypeCell
@@ -239,22 +245,22 @@ const RecentRowDataComponent = (props) => {
 
 export default inject(({ tableStore }) => {
   const {
-    authorColumnIsEnabled,
-    createdColumnIsEnabled,
-    modifiedColumnIsEnabled,
-    sizeColumnIsEnabled,
-    typeColumnIsEnabled,
+    authorRecentColumnIsEnabled,
+    createdRecentColumnIsEnabled,
+    modifiedRecentColumnIsEnabled,
+    sizeRecentColumnIsEnabled,
+    typeRecentColumnIsEnabled,
     quickButtonsColumnIsEnabled,
     lastOpenedColumnIsEnabled,
     tableStorageName,
   } = tableStore;
 
   return {
-    authorColumnIsEnabled,
-    createdColumnIsEnabled,
-    modifiedColumnIsEnabled,
-    sizeColumnIsEnabled,
-    typeColumnIsEnabled,
+    authorRecentColumnIsEnabled,
+    createdRecentColumnIsEnabled,
+    modifiedRecentColumnIsEnabled,
+    sizeRecentColumnIsEnabled,
+    typeRecentColumnIsEnabled,
     quickButtonsColumnIsEnabled,
     lastOpenedColumnIsEnabled,
     tableStorageName,

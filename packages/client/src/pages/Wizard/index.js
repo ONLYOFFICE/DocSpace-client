@@ -91,7 +91,7 @@ const Wizard = (props) => {
     getIsRequiredLicense,
     getPortalTimezones,
     machineName,
-    urlLicense,
+    licenseUrl,
     theme,
     cultureNames,
     culture,
@@ -189,7 +189,7 @@ const Wizard = (props) => {
     if (!wizardToken)
       navigate(combineUrl(window.ClientConfig?.proxy?.url, "/"));
     else fetchData();
-  }, []);
+  }, [wizardToken]);
 
   const onEmailChangeHandler = (result) => {
     console.log(result);
@@ -496,11 +496,7 @@ const Wizard = (props) => {
                   }
                   fontSize="13px"
                   target="_blank"
-                  href={
-                    urlLicense
-                      ? urlLicense
-                      : "https://gnu.org/licenses/gpl-3.0.html"
-                  }
+                  href={licenseUrl}
                 >
                   {t("LicenseLink")}
                 </Link>
@@ -527,7 +523,7 @@ export default inject(({ authStore, settingsStore, wizardStore }) => {
     passwordSettings,
     wizardToken,
     timezone,
-    urlLicense,
+    licenseUrl,
     hashSettings,
     setWizardComplete,
     getPortalTimezones,
@@ -556,7 +552,7 @@ export default inject(({ authStore, settingsStore, wizardStore }) => {
     wizardToken,
     passwordSettings,
     timezone,
-    urlLicense,
+    licenseUrl,
     hashSettings,
     isWizardLoaded,
     machineName,

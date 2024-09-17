@@ -24,27 +24,66 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { useState, useEffect } from "react";
 import { isMobile } from "../../utils";
 
 import ListComponent from "./sub-components/List";
 import GridComponent from "./sub-components/Grid";
 
 import { InfiniteLoaderProps } from "./InfiniteLoader.types";
+import { MAX_INFINITE_LOADER_SHIFT } from "../../utils/device";
 
 const InfiniteLoaderComponent = (props: InfiniteLoaderProps) => {
   const { viewAs, isLoading } = props;
+
+  const [scrollTop, setScrollTop] = useState(0);
+  const [showSkeleton, setShowSkeleton] = useState(false);
 
   const scroll = isMobile()
     ? document.querySelector("#customScrollBar .scroll-wrapper > .scroller")
     : document.querySelector("#sectionScroll .scroll-wrapper > .scroller");
 
+  const onScroll = (e: Event) => {
+    const eventTarget = e.target as HTMLElement;
+    const currentScrollTop = eventTarget.scrollTop;
+
+    setScrollTop(currentScrollTop ?? 0);
+
+    const scrollShift = scrollTop - currentScrollTop;
+
+    if (
+      scrollShift > MAX_INFINITE_LOADER_SHIFT ||
+      scrollShift < -MAX_INFINITE_LOADER_SHIFT
+    ) {
+      setShowSkeleton(true);
+      setTimeout(() => {
+        setShowSkeleton(false);
+      }, 200);
+    }
+  };
+
+  useEffect(() => {
+    if (scroll) scroll.addEventListener("scroll", onScroll);
+
+    return () => {
+      if (scroll) scroll.removeEventListener("scroll", onScroll);
+    };
+  });
+
   if (isLoading) return null;
 
   return viewAs === "tile" ? (
-    <GridComponent scroll={scroll ?? window} {...props} />
+    <GridComponent
+      scroll={scroll ?? window}
+      showSkeleton={showSkeleton}
+      {...props}
+    />
   ) : (
-    <ListComponent scroll={scroll ?? window} {...props} />
+    <ListComponent
+      scroll={scroll ?? window}
+      showSkeleton={showSkeleton}
+      {...props}
+    />
   );
 };
 

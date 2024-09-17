@@ -65,6 +65,8 @@ const {
   darkErrorStatus,
   charlestonGreen,
   outerSpace,
+
+  blurDark,
 } = globalColors;
 
 const Dark: TTheme = {
@@ -635,7 +637,7 @@ const Dark: TTheme = {
         r: 27,
         g: 27,
         b: 27,
-        a: 0.4,
+        a: 0.6,
       },
       blur: 9,
     },
@@ -1305,7 +1307,7 @@ const Dark: TTheme = {
   },
 
   backdrop: {
-    backgroundColor: "rgba(20, 20, 20, 0.8)",
+    backgroundColor: blurDark,
     unsetBackgroundColor: "unset",
   },
 
@@ -2041,7 +2043,7 @@ const Dark: TTheme = {
     sectionHeaderToggleBgActive: "#292929",
 
     backgroundColor: black,
-    blurColor: "rgba(20, 20, 20, 0.8)",
+    blurColor: blurDark,
     borderColor: "#474747",
     thumbnailBorderColor: grayLightMid,
     textColor: white,
@@ -3041,6 +3043,8 @@ const Dark: TTheme = {
         linkColor: "#E06A1B",
 
         sso: {
+          textColor: grayDark,
+          errorColor: darkErrorStatus,
           toggleContentBackground: "#474747",
           iconButton: white,
           iconButtonDisabled: "#333",

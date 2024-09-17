@@ -1,1 +1,12 @@
-{}
+{
+  "BackToRoom": "Volver a la sala",
+  "CheckReadyForms": "Comprobar formularios listos",
+  "Description": "Su formulario se ha rellenado y guardado",
+  "DescriptionForAnonymous": "Ha enviado el formulario PDF rellenado al que se le ha asignado un número único. Para comprobar el estado, póngase en contacto con el propietario del formulario proporcionándole el número asignado.",
+  "DescriptionForRegisteredUser": "El formulario PDF rellenado está guardado y disponible para usted en la carpeta Completado. Para comprobar el estado, póngase en contacto con el propietario del formulario proporcionándole el número asignado.",
+  "FillItOutAgain": "Vuelva a rellenarlo",
+  "FormCompletedSuccessfully": "Formulario rellenado correctamente",
+  "FormNumber": "Número de formulario:",
+  "FormOwner": "Propietario del formulario",
+  "Title": "El formulario está completado"
+}

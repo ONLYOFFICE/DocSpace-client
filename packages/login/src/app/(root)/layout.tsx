@@ -24,11 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { cookies } from "next/headers";
 import dynamic from "next/dynamic";
 
-import { SYSTEM_THEME_KEY } from "@docspace/shared/constants";
-import { ThemeKeys, WhiteLabelLogoType } from "@docspace/shared/enums";
 import { getBgPattern, getLogoUrl } from "@docspace/shared/utils/common";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
@@ -38,6 +35,7 @@ import SimpleNav from "@/components/SimpleNav";
 import { LoginContent, LoginFormWrapper } from "@/components/Login";
 import GreetingContainer from "@/components/GreetingContainer";
 import { getColorTheme, getSettings } from "@/utils/actions";
+import { cookies } from "next/headers";
 
 const LanguageComboboxWrapper = dynamic(
   () => import("@/components/LanguageCombobox"),
@@ -56,20 +54,18 @@ export default async function Layout({
     getColorTheme(),
   ]);
 
-  const cookieStore = cookies();
-
-  const systemTheme = cookieStore.get(SYSTEM_THEME_KEY)?.value as ThemeKeys;
-
   const bgPattern = getBgPattern(colorTheme?.selected);
 
   const objectSettings = typeof settings === "string" ? undefined : settings;
 
   const isRegisterContainerVisible = objectSettings?.enabledJoin;
 
+  const culture =
+    cookies().get("asc_language")?.value ?? objectSettings?.culture;
+
   return (
     <div style={{ width: "100%", height: "100%" }}>
-      <SimpleNav systemTheme={systemTheme} />
-
+      <SimpleNav culture={culture} />
       <LoginFormWrapper id="login-page" bgPattern={bgPattern}>
         <div className="bg-cover" />
         <Scrollbar id="customScrollBar">
@@ -81,6 +77,7 @@ export default async function Layout({
             >
               <GreetingContainer
                 greetingSettings={objectSettings?.greetingSettings}
+                culture={culture}
               />
               <FormWrapper id="login-form">{children}</FormWrapper>
             </ColorTheme>

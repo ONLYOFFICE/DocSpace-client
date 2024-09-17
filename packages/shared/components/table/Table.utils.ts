@@ -33,7 +33,6 @@ export const checkingForUnfixedSize = (
   defaultColumnSize: number,
 ) => {
   return (
-    item !== "24px" && // TODO: SETTINGS_SIZE is not imported
     item !== `${SETTINGS_SIZE}px` &&
     item !== `${defaultColumnSize}px` &&
     item !== "0px"

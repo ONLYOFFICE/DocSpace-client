@@ -1,1 +1,12 @@
-{}
+{
+  "BackToRoom": "Completaţi-l  încă o dată",
+  "CheckReadyForms": "Verificați formulare completate",
+  "Description": "Completaţi-l  încă o dată",
+  "DescriptionForAnonymous": "Ați trimis un formular PDF completat căruia i s-a atribuit un număr unic. Pentru verificarea statutului, contactaţi proprietarul formularului și îl anunţaţi numărul unic. ",
+  "DescriptionForRegisteredUser": "Formularul PDF completat este salvat în folderul Formulare competate. Pentru verificarea statutului, contactaţi proprietarul formularului și îl anunţaţi numărul unic.",
+  "FillItOutAgain": "Completaţi-l  încă o dată",
+  "FormCompletedSuccessfully": "Formularul a fost completat cu succes",
+  "FormNumber": "Formular nr.:",
+  "FormOwner": "Proprietarul formularului",
+  "Title": "Formularul este completat"
+}

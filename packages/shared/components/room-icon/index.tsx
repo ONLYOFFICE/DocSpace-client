@@ -24,126 +24,17 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useMemo } from "react";
 
-import styled, { css } from "styled-components";
-import { Base } from "../../themes";
-import { Text } from "../text";
-
-import { IconButton } from "../icon-button";
 import { classNames } from "../../utils";
 
-const StyledIcon = styled.div<{
-  size: string;
-  radius: string;
-  isArchive?: boolean;
-  color?: string;
-  wrongImage: boolean;
-}>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+import { Text } from "../text";
+import { IconButton } from "../icon-button";
 
-  height: ${(props) => props.size};
+import { getRoomTitle } from "./RoomIcon.utils";
+import { StyledIcon } from "./RoomIcon.styled";
 
-  width: ${(props) => props.size};
-
-  .room-background {
-    height: ${(props) => props.size};
-
-    width: ${(props) => props.size};
-
-    border-radius: ${(props) => props.radius};
-    vertical-align: middle;
-    background: ${(props) =>
-      props.isArchive
-        ? props.theme.roomIcon.backgroundArchive
-        : `#${props.color}`};
-    position: absolute;
-    opacity: ${(props) => props.theme.roomIcon.opacityBackground};
-  }
-
-  .room-title {
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 16px;
-    color: ${(props) =>
-      props.wrongImage && props.theme.isBase ? "#333333" : "#ffffff"};
-    position: relative;
-    ${(props) =>
-      !props.theme.isBase &&
-      !props.isArchive &&
-      css`
-        color: ${`#${props.color}`};
-      `};
-  }
-
-  .room-icon_badge {
-    position: absolute;
-    margin-block: 24px 0;
-    margin-inline: 24px 0;
-
-    .room-icon-button {
-      width: 12px;
-      height: 12px;
-      border: ${(props) => `1px solid ${props.theme.backgroundColor}`};
-      border-radius: 50%;
-
-      svg {
-        path {
-          fill: ${(props) => props.theme.backgroundColor};
-        }
-        rect {
-          stroke: ${(props) => props.theme.backgroundColor};
-        }
-      }
-    }
-  }
-`;
-
-StyledIcon.defaultProps = { theme: Base };
-
-// interface RoomIconProps {
-//   title: string;
-//   isArchive?: boolean;
-//   color: string;
-//   size?: string;
-//   radius?: string;
-//   showDefault: boolean;
-//   imgClassName?: string;
-//   imgSrc?: string;
-
-// }
-
-type RoomIconDefault = {
-  title: string;
-  isArchive?: boolean;
-  size?: string;
-  radius?: string;
-  showDefault: boolean;
-  imgClassName?: string;
-  className?: string;
-};
-
-type RoomIconColor = {
-  color: string;
-  imgSrc?: undefined;
-  imgClassName?: undefined;
-};
-
-type RoomIconImage = {
-  color?: string | undefined;
-  imgSrc: string;
-  imgClassName?: string;
-};
-
-type RoomIconBadge = { badgeUrl?: string; onBadgeClick?: () => void };
-
-type RoomIconNonBadge = { badgeUrl?: undefined; onBadgeClick?: undefined };
-
-type RoomIconProps = RoomIconDefault &
-  (RoomIconColor | RoomIconImage) &
-  (RoomIconBadge | RoomIconNonBadge);
+import type { RoomIconProps } from "./RoomIcon.types";
 
 const RoomIcon = ({
   title,
@@ -160,17 +51,7 @@ const RoomIcon = ({
 }: RoomIconProps) => {
   const [correctImage, setCorrectImage] = React.useState(true);
 
-  const titleWithoutNumberDuplicate = title?.replace(/\(\d+\)/, "");
-  const titleWithoutSpaces = titleWithoutNumberDuplicate
-    ?.replace(/\s+/g, " ")
-    ?.trim();
-  const indexAfterLastSpace = titleWithoutSpaces?.lastIndexOf(" ");
-  const secondCharacter =
-    !titleWithoutSpaces || indexAfterLastSpace === -1
-      ? ""
-      : titleWithoutSpaces[indexAfterLastSpace + 1];
-
-  const roomTitle = title && (title[0] + secondCharacter).toUpperCase();
+  const roomTitle = useMemo(() => getRoomTitle(title ?? ""), [title]);
 
   const prefetchImage = React.useCallback(() => {
     if (!imgSrc) return;

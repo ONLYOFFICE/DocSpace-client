@@ -47,6 +47,9 @@ export const globalColors = {
   lightHover: "#F3F4F4",
   veryDarkGrey: "#3D3D3D",
 
+  blurLight: "rgba(6, 22, 38, 0.2)",
+  blurDark: "rgba(27, 27, 27, 0.6)",
+
   blueMain: "#2DA7DB",
   blueHover: "#3DB8EC",
   blueActive: "#1F97CA",

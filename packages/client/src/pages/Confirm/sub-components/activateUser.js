@@ -52,6 +52,7 @@ import {
 } from "./StyledCreateUser";
 import PortalLogo from "@docspace/shared/components/portal-logo/PortalLogo";
 import GreetingUserContainer from "./GreetingUserContainer";
+import { ALLOWED_PASSWORD_CHARACTERS } from "@docspace/shared/constants";
 
 const ActivateUserForm = (props) => {
   const { t, settings, linkData, hashSettings, defaultPage, login } = props;

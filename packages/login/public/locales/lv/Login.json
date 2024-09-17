@@ -5,6 +5,7 @@
   "ExpiredCode": "Šis kods vairs nav derīgs. Pieprasiet jaunu kodu un mēģiniet vēlreiz.",
   "ForgotPassword": "Vai aizmirsāt savu paroli?",
   "InvalidCode": "Šis kods nav derīgs. Mēģiniet vēlreiz.",
+  "LDAPUsernamePlaceholder": "Lietotājvārds: {{ldap_domain}} ",
   "MessageAuthorize": "Piesakieties, lai turpinātu",
   "MessageEmailConfirmed": "Jūsu e-pasts tika veiksmīgi aktivizēts.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Lūdzu, ievadiet reģistrācijā izmantoto e-pasta adresi. Uz to tiks nosūtīti norādījumi paroles atkopšanai.",
@@ -20,5 +21,7 @@
   "RegistrationEmailWatermark": "E-pasts",
   "RememberHelper": "Noklusējuma sesijas ilgums ir 20 minūtes. Atzīmējiet šo opciju, lai iestatītu to uz vienu gadu. Lai iestatītu savu vērtību, dodieties uz Iestatījumi.",
   "ResendCode": "Atkārtoti nosūtīt kodu",
+  "SignInLDAP": "Pierakstieties: {{ldap_domain}}",
+  "SignInLdapHelper": "Izmantojiet akreditācijas datus korporatīvajam domēnam",
   "UserIsAlreadyRegistered": "Lietotājs <1>{{email}}</1> jau ir reģistrēts šajā {{productName}}, ievadiet savu paroli vai dodieties atpakaļ, lai turpinātu ar citu e-pasta adresi."
 }

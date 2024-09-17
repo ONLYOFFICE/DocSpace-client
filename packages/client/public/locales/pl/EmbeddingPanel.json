@@ -1,4 +1,11 @@
 {
+  "CodeSuccessfullyCopied": "Kod do wstawienia został pomyślnie skopiowany do schowka.",
+  "ContentRestricted": "Kopiowanie treści, pobieranie plików i drukowanie są ograniczone.",
+  "DisplaySettings": "Ustawienia wyświetlania",
+  "EmbeddingBarAllowList": "Dodaj URL witryny, którą chcesz osadzić do <1> listy dozwolonych</1>.",
+  "EmbeddingBarDescription": "Osadzanie będzie działać tylko dla adresów URL określonych przez administratora {{productName}} w ustawieniach SDK JavaScript.",
   "Height": "Wysokość",
+  "Link": "Link",
+  "LinkProtectedWithPassword": "Link jest chroniony hasłem.",
   "Width": "Szerokość"
 }

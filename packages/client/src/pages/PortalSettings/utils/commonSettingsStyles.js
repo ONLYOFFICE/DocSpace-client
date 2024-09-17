@@ -68,7 +68,7 @@ export const commonSettingsStyles = css`
 `;
 export const UnavailableStyles = css`
   .settings_unavailable {
-    color: ${(props) => props.theme.text.disableColor};
+    // color: ${(props) => props.theme.text.disableColor};
     pointer-events: none;
     cursor: default;
 

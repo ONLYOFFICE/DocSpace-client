@@ -47,6 +47,7 @@ const ListComponent = ({
   className,
   scroll,
   infoPanelVisible,
+  showSkeleton,
 }: ListComponentProps) => {
   const loaderRef = useRef<InfiniteLoader | null>(null);
   const listRef = useRef<List | null>(null);
@@ -89,13 +90,16 @@ const ListComponent = ({
     key,
     index,
     style,
+    isScrolling,
   }: {
     key: string;
     index: number;
     style: React.CSSProperties;
+    isScrolling: boolean;
   }) => {
     const isLoaded = isItemLoaded({ index });
-    if (!isLoaded) return getLoader(style, key);
+    if (!isLoaded || (isScrolling && showSkeleton))
+      return getLoader(style, key);
 
     return (
       <div className="row-list-item window-item" style={style} key={key}>
@@ -108,10 +112,12 @@ const ListComponent = ({
     index,
     style,
     key,
+    isScrolling,
   }: {
     index: number;
     style: React.CSSProperties;
     key: string;
+    isScrolling: boolean;
   }) => {
     if (!columnInfoPanelStorageName || !columnStorageName) {
       throw new Error("columnStorageName is required for a table view");
@@ -122,7 +128,8 @@ const ListComponent = ({
       : localStorage.getItem(columnStorageName);
 
     const isLoaded = isItemLoaded({ index });
-    if (!isLoaded) return getLoader(style, key);
+    if (!isLoaded || (isScrolling && showSkeleton))
+      return getLoader(style, key);
 
     return (
       <div

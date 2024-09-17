@@ -29,7 +29,6 @@ import AvatarBaseReactSvgUrl from "PUBLIC_DIR/images/avatar.base.react.svg?url";
 import { globalColors } from "./globalColors";
 import { CommonTheme } from "./commonTheme";
 import { DEFAULT_FONT_FAMILY } from "../constants";
-import { color } from "storybook-static/sb-manager/chunk-INSKDKQB";
 
 export type TColorScheme = {
   id: number;
@@ -92,6 +91,8 @@ const {
   darkRed,
 
   lightErrorStatus,
+
+  blurLight,
 } = globalColors;
 
 export const getBaseTheme = () => {
@@ -1337,7 +1338,7 @@ export const getBaseTheme = () => {
     },
 
     backdrop: {
-      backgroundColor: "rgba(6, 22, 38, 0.2)",
+      backgroundColor: blurLight,
       unsetBackgroundColor: "unset",
     },
 
@@ -2069,7 +2070,7 @@ export const getBaseTheme = () => {
       sectionHeaderToggleBgActive: grayLight,
 
       backgroundColor: white,
-      blurColor: "rgba(6, 22, 38, 0.2)",
+      blurColor: blurLight,
       borderColor: grayLightMid,
       thumbnailBorderColor: grayLightMid,
       textColor: black,
@@ -2097,7 +2098,7 @@ export const getBaseTheme = () => {
         roleSelectorColor: "#a3a9ae",
         disabledRoleSelectorColor: "#a3a9ae",
         roleSelectorArrowColor: "#a3a9ae",
-        createLink: "#a3a9ae",
+        createLink: black,
         linkAccessComboboxExpired: "#a3a9ae",
       },
 
@@ -3063,6 +3064,8 @@ export const getBaseTheme = () => {
           linkColor: link,
 
           sso: {
+            textColor: gray,
+            errorColor: lightErrorStatus,
             toggleContentBackground: grayLight,
             iconButton: black,
             iconButtonDisabled: gray,
@@ -3208,9 +3211,9 @@ export const getBaseTheme = () => {
     tag: {
       color: black,
       deletedColor: "#A3A9AE",
-      background: "#f3f4f4",
-      hoverBackground: "#eceef1",
-      disabledBackground: "#f8f9f9",
+      background: grayLightMid,
+      hoverBackground: lightGrayishStrongBlue,
+      disabledBackground: grayLightMid,
       deletedBackground: "#F8F9F9",
       defaultTagColor: black,
       newTagBackground: "#eceef1",

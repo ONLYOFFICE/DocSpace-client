@@ -135,7 +135,6 @@ export default inject(({ settingsStore, peopleStore, clientLoadingStore }) => {
       "Profile",
       "Common",
       "PeopleTranslations",
-      "ProfileAction",
       "ResetApplicationDialog",
       "BackupCodesDialog",
       "DeleteSelfProfileDialog",

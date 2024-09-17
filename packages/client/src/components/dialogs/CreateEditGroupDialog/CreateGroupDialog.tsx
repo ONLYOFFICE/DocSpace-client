@@ -25,24 +25,28 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState, ChangeEvent } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { observer, inject } from "mobx-react";
+
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
-import { observer, inject } from "mobx-react";
-
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 import { createGroup } from "@docspace/shared/api/groups";
+import { TUser } from "@docspace/shared/api/people/types";
+import PeopleStore from "SRC_DIR/store/PeopleStore";
+import GroupsStore from "SRC_DIR/store/GroupsStore";
+
 import { StyledModal } from "./CreateEditGroupDialog.styled";
 import { GroupParams } from "./types";
 import GroupNameParam from "./sub-components/GroupNameParam";
 import HeadOfGroup from "./sub-components/HeadOfGroupParam";
 import MembersParam from "./sub-components/MembersParam";
 import SelectGroupManagerPanel from "./sub-components/HeadOfGroupParam/SelectGroupManagerPanel";
-import SelectGroupMembersPanel from "./sub-components/MembersParam/SelectGroupMembersPanel";
+import { SelectMembersPanel } from "./sub-components/create-components/SelectMembersPanel";
 
 interface CreateGroupDialogProps {
   visible: boolean;
@@ -69,10 +73,10 @@ const CreateGroupDialog = ({
   const onChangeGroupName = (e: ChangeEvent<HTMLInputElement>) =>
     setGroupParams({ ...groupParams, groupName: e.target.value });
 
-  const setGroupManager = (groupManager: object | null) =>
+  const setGroupManager = (groupManager: TUser | null) =>
     setGroupParams({ ...groupParams, groupManager });
 
-  const setGroupMembers = (groupMembers: object[]) =>
+  const setGroupMembers = (groupMembers: TUser[]) =>
     setGroupParams((prevState) => ({ ...prevState, groupMembers }));
 
   const [selectGroupMangerPanelIsVisible, setSelectGroupMangerPanelIsVisible] =
@@ -88,6 +92,44 @@ const CreateGroupDialog = ({
 
   const onShowSelectMembersPanel = () => setSelectMembersPanelIsVisible(true);
   const onHideSelectMembersPanel = () => setSelectMembersPanelIsVisible(false);
+
+  const removeManager = () => {
+    setGroupManager(null);
+    setGroupMembers(
+      groupParams.groupMembers?.filter(
+        (gm) => gm.id !== groupParams.groupManager!.id,
+      ) || [],
+    );
+  };
+
+  const addMembers = (newGroupMembers: TUser[]) => {
+    const resultGroupMembers: TUser[] = [...groupParams.groupMembers];
+    let showErrorWasSelected = false;
+
+    newGroupMembers.forEach((groupMember) => {
+      if (
+        groupParams.groupMembers.findIndex((gm) => gm.id === groupMember.id) !==
+        -1
+      ) {
+        showErrorWasSelected = true;
+        return;
+      }
+      resultGroupMembers.push(groupMember);
+    });
+
+    if (showErrorWasSelected) {
+      toastr.warning("Some users have already been added");
+    }
+
+    setGroupMembers(resultGroupMembers);
+  };
+
+  const removeMember = (member: TUser) => {
+    const newGroupMembers = groupParams.groupMembers?.filter(
+      (gm) => gm.id !== member.id,
+    );
+    setGroupMembers(newGroupMembers || []);
+  };
 
   const onCreateGroup = async () => {
     setIsLoading(true);
@@ -127,15 +169,13 @@ const CreateGroupDialog = ({
           />
           <HeadOfGroup
             groupManager={groupParams.groupManager}
-            setGroupManager={setGroupManager}
-            groupMembers={groupParams.groupMembers}
-            setGroupMembers={setGroupMembers}
+            removeManager={removeManager}
             onShowSelectGroupManagerPanel={onShowSelectGroupManagerPanel}
           />
           <MembersParam
             groupManager={groupParams.groupManager}
             groupMembers={groupParams.groupMembers}
-            setGroupMembers={setGroupMembers}
+            removeMember={removeMember}
             onShowSelectMembersPanel={onShowSelectMembersPanel}
           />
         </ModalDialog.Body>
@@ -177,19 +217,23 @@ const CreateGroupDialog = ({
       )}
 
       {selectMembersPanelIsVisible && (
-        <SelectGroupMembersPanel
+        <SelectMembersPanel
           isVisible={selectMembersPanelIsVisible}
           onClose={onHideSelectMembersPanel}
           onParentPanelClose={onClose}
           groupManager={groupParams.groupManager}
           groupMembers={groupParams.groupMembers}
-          setGroupMembers={setGroupMembers}
+          addMembers={addMembers}
         />
       )}
     </>
   );
 };
 
-export default inject(({ peopleStore }) => ({
-  getGroups: peopleStore.groupsStore.getGroups,
-}))(observer(CreateGroupDialog));
+export default inject<{ peopleStore: PeopleStore }>(({ peopleStore }) => {
+  const { getGroups } = peopleStore.groupsStore! as GroupsStore;
+
+  return {
+    getGroups,
+  };
+})(observer(CreateGroupDialog));

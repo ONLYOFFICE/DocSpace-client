@@ -111,9 +111,9 @@ const RootContainer = styled(Box)`
 class ThirdPartyServices extends React.Component {
   constructor(props) {
     super(props);
-    const { t } = props;
+    const { t, tReady } = props;
 
-    setDocumentTitle(`${t("ThirdPartyAuthorization")}`);
+    if (tReady) setDocumentTitle(`${t("ThirdPartyAuthorization")}`);
 
     this.state = {
       dialogVisible: false,
@@ -133,6 +133,12 @@ class ThirdPartyServices extends React.Component {
     } else {
       getConsumers().finally(() => hideLoader());
     }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { t, tReady } = this.props;
+    if (prevProps.tReady !== tReady && tReady)
+      setDocumentTitle(t("ThirdPartyAuthorization"));
   }
 
   onChangeLoading = (status) => {
@@ -207,20 +213,10 @@ class ThirdPartyServices extends React.Component {
     const { dialogVisible, isLoading } = this.state;
     const { onModalClose, onModalOpen, setConsumer, onChangeLoading } = this;
 
-    const filteredConsumers = consumers.filter(
-      (consumer) =>
-        consumer.name !== "bitly" &&
-        consumer.name !== "wordpress" &&
-        consumer.name !== "docusign" &&
-        consumer.name !== "clickatell" && //TODO: hide while 2fa by sms is not working
-        consumer.name !== "twilio" &&
-        consumer.name !== "selectel",
-    );
-
-    const freeConsumers = filteredConsumers.filter(
+    const freeConsumers = consumers.filter(
       (consumer) => consumer.canSet === false,
     );
-    const paidConsumers = filteredConsumers.filter(
+    const paidConsumers = consumers.filter(
       (consumer) => !freeConsumers.includes(consumer),
     );
 

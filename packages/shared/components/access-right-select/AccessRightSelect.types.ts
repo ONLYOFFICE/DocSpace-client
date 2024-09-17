@@ -49,4 +49,7 @@ type PropsFromCombobox = Pick<
 export type AccessRightSelectProps = PropsFromCombobox & {
   /** List of access options */
   accessOptions: ComboboxProps["options"];
+  isSelectionDisabled?: boolean;
+  selectionErrorText?: React.ReactNode;
+  availableAccess?: number[];
 };

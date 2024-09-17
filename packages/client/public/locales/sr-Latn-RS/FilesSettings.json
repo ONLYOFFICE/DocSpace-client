@@ -6,6 +6,7 @@
   "DisplayTemplates": "Prikaži Šablone",
   "IntermediateVersion": "Zadrži sve sačuvane međuverzije",
   "KeepIntermediateVersion": "Zadrži međuverzije kada uređuješ",
+  "OpenSameTab": "Otvori {{organizationName}} uređivač u istoj kartici",
   "OriginalCopy": "Sačuvaj kopiju datoteke u originalnom formatu takođe",
   "StoringFileVersion": "Čuvanje verzija datoteka",
   "ThirdPartyAccounts": "Nalozi treće strane",

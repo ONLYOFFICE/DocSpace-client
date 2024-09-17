@@ -26,7 +26,8 @@
 
 import React, { useRef } from "react";
 import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 import { Box } from "@docspace/shared/components/box";
 import { TextInput } from "@docspace/shared/components/text-input";
@@ -39,6 +40,8 @@ import { FieldContainer } from "@docspace/shared/components/field-container";
 import AccessSelector from "SRC_DIR/components/AccessSelector";
 import { isMobile } from "@docspace/shared/utils";
 import LdapFieldComponent from "./LdapFieldComponent";
+import { Link } from "@docspace/shared/components/link";
+import { globalColors } from "@docspace/shared/themes";
 
 const FIRST_NAME = "firstName",
   SECOND_NAME = "secondName",
@@ -68,9 +71,15 @@ const AttributeMapping = (props) => {
 
     isLdapEnabled,
     isUIDisabled,
+
+    isDefaultUsersQuotaSet,
+
+    currentColorScheme,
   } = props;
 
   const { t } = useTranslation("Ldap");
+
+  const navigate = useNavigate();
 
   const inputsRef = useRef();
 
@@ -100,6 +109,10 @@ const AttributeMapping = (props) => {
     setUserType(option.access);
   };
 
+  const goToStarageManagement = () => {
+    navigate("/portal-settings/management/disk-space");
+  };
+
   return (
     <>
       <div className="ldap_attribute-mapping-text">
@@ -115,7 +128,7 @@ const AttributeMapping = (props) => {
           labelVisible={true}
           errorMessage={t("Common:EmptyFieldError")}
           hasError={errors.firstName}
-          labelText={t("LdapFirstName")}
+          labelText={t("Common:FirstName")}
           isRequired
         >
           <LdapFieldComponent
@@ -126,46 +139,6 @@ const AttributeMapping = (props) => {
             scale
             isDisabled={!isLdapEnabled || isUIDisabled}
             tabIndex={7}
-          />
-        </FieldContainer>
-
-        <FieldContainer
-          style={FIELD_STYLE}
-          isVertical
-          labelVisible={true}
-          errorMessage={t("Common:EmptyFieldError")}
-          hasError={errors.mail}
-          labelText={t("LdapMail")}
-          isRequired
-        >
-          <LdapFieldComponent
-            name={MAIL}
-            hasError={errors.mail}
-            onChange={onChangeValue}
-            value={mail}
-            scale
-            isDisabled={!isLdapEnabled || isUIDisabled}
-            tabIndex={9}
-          />
-        </FieldContainer>
-
-        <FieldContainer
-          style={FIELD_STYLE}
-          isVertical
-          labelVisible={true}
-          hasError={errors.userQuotaLimit}
-          labelText={t("LdapQuota")}
-          tooltipContent={t("LdapUserQuotaTooltip")}
-          inlineHelpButton
-        >
-          <TextInput
-            name={QUOTA}
-            hasError={errors.userQuotaLimit}
-            onChange={onChangeValue}
-            value={userQuotaLimit}
-            scale
-            isDisabled={!isLdapEnabled || isUIDisabled}
-            tabIndex={11}
           />
         </FieldContainer>
 
@@ -193,6 +166,26 @@ const AttributeMapping = (props) => {
           style={FIELD_STYLE}
           isVertical
           labelVisible={true}
+          errorMessage={t("Common:EmptyFieldError")}
+          hasError={errors.mail}
+          labelText={t("LdapMail")}
+          isRequired
+        >
+          <LdapFieldComponent
+            name={MAIL}
+            hasError={errors.mail}
+            onChange={onChangeValue}
+            value={mail}
+            scale
+            isDisabled={!isLdapEnabled || isUIDisabled}
+            tabIndex={9}
+          />
+        </FieldContainer>
+
+        <FieldContainer
+          style={FIELD_STYLE}
+          isVertical
+          labelVisible={true}
           hasError={errors.avatarAttribute}
           labelText={t("LdapAvatar")}
         >
@@ -205,6 +198,49 @@ const AttributeMapping = (props) => {
             isDisabled={!isLdapEnabled || isUIDisabled}
             tabIndex={10}
           />
+        </FieldContainer>
+
+        <FieldContainer
+          style={FIELD_STYLE}
+          isVertical
+          labelVisible={true}
+          hasError={errors.userQuotaLimit}
+          labelText={t("LdapQuota")}
+          tooltipContent={t("LdapUserQuotaTooltip")}
+          inlineHelpButton
+        >
+          <TextInput
+            name={QUOTA}
+            hasError={errors.userQuotaLimit}
+            onChange={onChangeValue}
+            value={userQuotaLimit}
+            scale
+            isDisabled={
+              !isDefaultUsersQuotaSet || !isLdapEnabled || isUIDisabled
+            }
+            tabIndex={11}
+          />
+          {!isDefaultUsersQuotaSet && (
+            <Text
+              as={"span"}
+              fontWeight={400}
+              fontSize="12px"
+              lineHeight="16px"
+            >
+              <Trans
+                t={t}
+                i18nKey="LdapQuotaInfo"
+                ns="Ldap"
+                components={[
+                  <Link
+                    type="action"
+                    color={currentColorScheme.main.accent}
+                    onClick={goToStarageManagement}
+                  />,
+                ]}
+              />
+            </Text>
+          )}
         </FieldContainer>
       </Box>
       <Box marginProp="24px 0 24px 0">
@@ -250,7 +286,7 @@ const AttributeMapping = (props) => {
   );
 };
 
-export default inject(({ ldapStore }) => {
+export default inject(({ ldapStore, currentQuotaStore, settingsStore }) => {
   const {
     setMail,
     setFirstName,
@@ -274,6 +310,10 @@ export default inject(({ ldapStore }) => {
     userType,
   } = requiredSettings;
 
+  const { isDefaultUsersQuotaSet } = currentQuotaStore;
+
+  const { currentColorScheme } = settingsStore;
+
   return {
     setFirstName,
     setSecondName,
@@ -292,5 +332,8 @@ export default inject(({ ldapStore }) => {
     errors,
     isLdapEnabled,
     isUIDisabled,
+
+    isDefaultUsersQuotaSet,
+    currentColorScheme,
   };
 })(observer(AttributeMapping));

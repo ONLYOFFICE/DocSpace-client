@@ -378,7 +378,7 @@ const User = ({
               size="content"
               modernView
               title={t("Common:Role")}
-              manualWidth={"fit-content"}
+              manualWidth="auto"
               isLoading={isLoading}
               isMobileView={isMobileOnly}
               directionY="both"

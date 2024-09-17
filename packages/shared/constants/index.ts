@@ -24,13 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import ShareAppleReactSvgUrl from "PUBLIC_DIR/images/share.apple.react.svg?url";
-import ShareGoogleReactSvgUrl from "PUBLIC_DIR/images/share.google.react.svg?url";
-import ShareFacebookReactSvgUrl from "PUBLIC_DIR/images/share.facebook.react.svg?url";
-import ShareTwitterReactSvgUrl from "PUBLIC_DIR/images/share.twitter.react.svg?url";
-import ShareLinkedinReactSvgUrl from "PUBLIC_DIR/images/share.linkedin.react.svg?url";
-import ShareMicrosoftReactSvgUrl from "PUBLIC_DIR/images/share.microsoft.react.svg?url";
-import ShareZoomReactSvgUrl from "PUBLIC_DIR/images/share.zoom.react.svg?url";
+import ShareAppleReactSvg from "PUBLIC_DIR/images/share.apple.react.svg";
+import ShareGoogleReactSvg from "PUBLIC_DIR/images/share.google.react.svg";
+import ShareFacebookReactSvg from "PUBLIC_DIR/images/share.facebook.react.svg";
+import ShareTwitterReactSvg from "PUBLIC_DIR/images/share.twitter.react.svg";
+import ShareLinkedinReactSvg from "PUBLIC_DIR/images/share.linkedin.react.svg";
+import ShareMicrosoftReactSvg from "PUBLIC_DIR/images/share.microsoft.react.svg";
+import ShareZoomReactSvg from "PUBLIC_DIR/images/share.zoom.react.svg";
 
 export const LOADER_STYLE = Object.freeze({
   title: "",
@@ -100,37 +100,37 @@ export const FOLDER_NAMES = Object.freeze({
 export const PROVIDERS_DATA = Object.freeze({
   appleid: {
     label: "apple",
-    icon: ShareAppleReactSvgUrl,
+    icon: ShareAppleReactSvg,
     iconOptions: undefined,
   },
   google: {
     label: "google",
-    icon: ShareGoogleReactSvgUrl,
+    icon: ShareGoogleReactSvg,
     iconOptions: undefined,
   },
   facebook: {
     label: "facebook",
-    icon: ShareFacebookReactSvgUrl,
+    icon: ShareFacebookReactSvg,
     iconOptions: undefined,
   },
   twitter: {
     label: "twitter",
-    icon: ShareTwitterReactSvgUrl,
+    icon: ShareTwitterReactSvg,
     iconOptions: { color: "#2AA3EF" },
   },
   linkedin: {
     label: "linkedin",
-    icon: ShareLinkedinReactSvgUrl,
+    icon: ShareLinkedinReactSvg,
     iconOptions: undefined,
   },
   microsoft: {
     label: "microsoft",
-    icon: ShareMicrosoftReactSvgUrl,
+    icon: ShareMicrosoftReactSvg,
     iconOptions: undefined,
   },
   zoom: {
     label: "zoom",
-    icon: ShareZoomReactSvgUrl,
+    icon: ShareZoomReactSvg,
     iconOptions: undefined,
   },
 });
@@ -171,7 +171,8 @@ export const HTML_EXST = [".htm", ".mht", ".html"];
 
 export const SYSTEM_THEME_KEY = "system_theme";
 
-const SDK_VERSION = "1.0.0";
+const SDK_VERSION = "1.0.1";
+
 export const SDK_SCRIPT_URL =
   typeof window !== "undefined"
     ? `${window.location.origin}/static/scripts/sdk/${SDK_VERSION}/api.js`

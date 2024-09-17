@@ -24,44 +24,41 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
-import React from "react";
-import { withTranslation } from "react-i18next";
+import styled from "styled-components";
 
-import withLoader from "@docspace/client/src/HOCs/withLoader";
-import { IconButton } from "@docspace/shared/components/icon-button";
-import CreateEditRoomDilogHeaderLoader from "@docspace/shared/skeletons/create-edit-room/DilogHeader";
+import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { mobile } from "@docspace/shared/utils";
 
-const DialogHeader = ({
-  t,
-  isEdit,
-  isChooseRoomType,
-  onArrowClick,
-  disabledIcon,
-}) => {
-  return (
-    <>
-      {isEdit ? (
-        <span>{t("RoomEditing")}</span>
-      ) : isChooseRoomType ? (
-        <span>{t("ChooseRoomType")}</span>
-      ) : (
-        <div className="header-with-button">
-          {!disabledIcon && (
-            <IconButton
-              size={17}
-              iconName={ArrowPathReactSvgUrl}
-              className="sharing_panel-arrow"
-              onClick={onArrowClick}
-            />
-          )}
-          <div>{t("Files:CreateRoom")}</div>
-        </div>
-      )}
-    </>
-  );
-};
+const StyledModalDialog = styled(ModalDialog)`
+  .heading {
+    font-size: 21px;
+  }
 
-export default withTranslation(["CreateEditRoomDialog", "Files"])(
-  withLoader(DialogHeader)(<CreateEditRoomDilogHeaderLoader />),
-);
+  .generate {
+    font-weight: 600;
+  }
+
+  .text-area {
+    width: 488px !important;
+    height: 72px !important;
+    margin-top: 4px;
+
+    &-label {
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    @media ${mobile} {
+      width: 100% !important;
+    }
+  }
+  .text-area-label {
+    margin-top: 16px;
+  }
+
+  .modal-combo {
+    margin: 16px 0 0 0;
+  }
+`;
+
+export default StyledModalDialog;

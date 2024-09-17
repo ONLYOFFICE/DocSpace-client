@@ -27,6 +27,7 @@
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { TTranslation } from "@docspace/shared/types";
+import { FolderType } from "@docspace/shared/enums";
 import { StyledHistoryBlockMessage } from "../../../styles/history";
 
 type HistoryMainTextFolderInfoProps = {
@@ -54,23 +55,26 @@ const HistoryMainTextFolderInfo = ({
 
   if (!parentTitle) return null;
 
-  const isRoom = parentType === 0;
-  const isFromRoom = fromParentType === 0;
+  const isSection = parentType === FolderType.USER;
+  const isFolder = parentType === FolderType.DEFAULT;
+  const isFromFolder = fromParentType === FolderType.DEFAULT;
 
-  const destination = isRoom
+  const destination = isFolder
     ? t("FeedLocationLabel", { folderTitle: parentTitle })
-    : t("FeedLocationRoomLabel", { folderTitle: parentTitle });
+    : isSection
+      ? t("FeedLocationSectionLabel", { folderTitle: parentTitle })
+      : t("FeedLocationRoomLabel", { folderTitle: parentTitle });
 
-  const sourceDestination = isFromRoom
+  const sourceDestination = isFromFolder
     ? t("FeedLocationLabelFrom", { folderTitle: fromParentTitle })
     : t("FeedLocationRoomLabel", { folderTitle: parentTitle });
 
-  const className = !isFromRoom ? "folder-label" : "source-folder-label";
+  const className = isFromFolder ? "source-folder-label" : "folder-label";
 
   return (
     <StyledHistoryBlockMessage className="message">
       <span className={className}>
-        {!isFromRoom ? destination : sourceDestination}
+        {isFromFolder ? sourceDestination : destination}
       </span>
     </StyledHistoryBlockMessage>
   );

@@ -34,3 +34,35 @@ export const StyledModal = styled(ModalDialog)`
     padding-top: 20px;
   }
 `;
+
+export const StyledBodyLoader = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+
+  .title-section {
+    margin-bottom: 14px;
+  }
+
+  .group-title {
+    margin-bottom: 4px;
+    height: 16px;
+    padding-top: 4px;
+  }
+
+  .manager-title,
+  .members-title {
+    padding-block: 8px;
+  }
+
+  .add-member-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-block: 8px;
+  }
+
+  .member-row {
+    padding-inline: 0;
+  }
+`;

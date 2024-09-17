@@ -2,5 +2,6 @@
   "CannotChangePlan": "Et voi muuttaa ohjelmaasi, koska käytetyn muistin määrä tai ylläpitäjien/tehokäyttäjien määrä ylittää valitun ohjelman rajoitukset:",
   "ChangePricingPlan": "Muuta hinnoitteluohjelmaa",
   "PlanStorageLimit": "Uuden tariffin rajoitus on <1>{{storageValue}}</1> muistista ja käytetyn muistin määrä on  <1>{{currentStorageValue}}</1>.",
-  "PlanUsersLimit": "Haluat alentaa tiimin<1>{{usersCount}}</1>ylläpitäjiksi/tehokäyttäjiksi ja nykyinen määrä sellaisia käyttäjiä {{productName}}-ssasi on <1>{{currentUsersCount}}</1>."
+  "PlanUsersLimit": "Haluat alentaa tiimin<1>{{usersCount}}</1>ylläpitäjiksi/tehokäyttäjiksi ja nykyinen määrä sellaisia käyttäjiä {{productName}}-ssasi on <1>{{currentUsersCount}}</1>.",
+  "SaveOrChange": "Ole hyvä ja poista ristiriitaisen parametrin yhteensopimattomuus jatkaaksesi tai säilyttääksesi aktiivinen tilauksesi."
 }

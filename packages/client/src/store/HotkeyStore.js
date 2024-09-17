@@ -683,9 +683,8 @@ class HotkeyStore {
   };
 
   uploadClipboardFiles = async (t, event) => {
-    const { uploadEmptyFolders } = this.filesActionsStore;
+    const { createFoldersTree } = this.filesActionsStore;
     const { startUpload } = this.uploadDataStore;
-    const currentFolderId = this.selectedFolderStore.id;
 
     if (this.filesStore.hotkeysClipboard.length) {
       return this.moveFilesFromClipboard(t);
@@ -693,16 +692,13 @@ class HotkeyStore {
 
     const files = await getFilesFromEvent(event);
 
-    const emptyFolders = files.filter((f) => f.isEmptyDirectory);
-
-    if (emptyFolders.length > 0) {
-      uploadEmptyFolders(emptyFolders, currentFolderId).then(() => {
-        const onlyFiles = files.filter((f) => !f.isEmptyDirectory);
-        if (onlyFiles.length > 0) startUpload(onlyFiles, currentFolderId, t);
+    createFoldersTree(t, files)
+      .then((f) => {
+        if (f.length > 0) startUpload(f, null, t);
+      })
+      .catch((err) => {
+        toastr.error(err);
       });
-    } else {
-      startUpload(files, currentFolderId, t);
-    }
   };
 
   get countTilesInRow() {

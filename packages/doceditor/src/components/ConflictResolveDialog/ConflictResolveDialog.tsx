@@ -37,7 +37,6 @@ function ConflictResolveDialog({
   reject,
   resolve,
   fileName,
-  folderName,
 }: ConflictResolveProps) {
   const { t } = useTranslation(["Common"]);
 
@@ -53,8 +52,8 @@ function ConflictResolveDialog({
         <Trans
           t={t}
           ns="Common"
-          i18nKey="ConflictResolveDescription"
-          values={{ file: fileName, folder: folderName }}
+          i18nKey="FileActionRequired"
+          values={{ fileName }}
           components={{ 1: <strong className="bold" /> }}
         />
       }
@@ -65,7 +64,7 @@ function ConflictResolveDialog({
       duplicateDescription={t("CreateDescription")}
       skipTitle={t("SkipTitle")}
       skipDescription={t("SkipDescription")}
-      headerLabel={t("ConflictResolveTitle")}
+      headerLabel={t("ActionRequired")}
     />
   );
 }

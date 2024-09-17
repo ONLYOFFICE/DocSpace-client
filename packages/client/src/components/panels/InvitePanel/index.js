@@ -32,26 +32,19 @@ import React, {
   useRef,
 } from "react";
 import { observer, inject } from "mobx-react";
-import { withTranslation } from "react-i18next";
+import { withTranslation, Trans } from "react-i18next";
 
-import { DeviceType } from "@docspace/shared/enums";
+import { DeviceType, EmployeeType } from "@docspace/shared/enums";
 import { LOADER_TIMEOUT } from "@docspace/shared/constants";
 
 import { Backdrop } from "@docspace/shared/components/backdrop";
-import { Aside } from "@docspace/shared/components/aside";
+import { Aside, AsideHeader } from "@docspace/shared/components/aside";
 import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { Portal } from "@docspace/shared/components/portal";
 import { isDesktop, isMobile, size } from "@docspace/shared/utils";
 
-import {
-  StyledBlock,
-  StyledHeading,
-  StyledInvitePanel,
-  StyledButtons,
-  StyledControlContainer,
-  StyledCrossIconMobile,
-} from "./StyledInvitePanel";
+import { StyledInvitePanel, StyledButtons } from "./StyledInvitePanel";
 
 import ItemsList from "./sub-components/ItemsList";
 import InviteInput from "./sub-components/InviteInput";
@@ -60,6 +53,10 @@ import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 import InfoBar from "./sub-components/InfoBar";
 import InvitePanelLoader from "./sub-components/InvitePanelLoader";
+
+import { Text } from "@docspace/shared/components/text";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 const InvitePanel = ({
   folders,
@@ -72,11 +69,6 @@ const InvitePanel = ({
   visible,
   setRoomSecurity,
   getRoomSecurityInfo,
-  getPortalInviteLinks,
-  userLink,
-  guestLink,
-  adminLink,
-  collaboratorLink,
   defaultAccess,
   inviteUsers,
   setInfoPanelIsMobileHidden,
@@ -86,11 +78,14 @@ const InvitePanel = ({
   getUsersList,
   filter,
   currentDeviceType,
+  isRoomAdmin,
+  maxCountManagersByQuota,
+  invitePaidUsersCount,
+  setIsNewUserByCurrentUser,
+  setInvitePaidUsersCount,
 }) => {
   const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
-    () =>
-      ((!userLink || !guestLink || !collaboratorLink) && !adminLink) ||
-      roomId !== -1,
+    roomId !== -1,
   );
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [hasErrors, setHasErrors] = useState(false);
@@ -116,6 +111,33 @@ const InvitePanel = ({
   const onChangeExternalLinksVisible = (visible) => {
     setExternalLinksVisible(visible);
   };
+
+  const accessModel = [
+    {
+      id: "user",
+      title: "User",
+      shareLink: "",
+      access: EmployeeType.User,
+    },
+    {
+      id: "guest",
+      title: "Guest",
+      shareLink: "",
+      access: EmployeeType.Guest,
+    },
+    {
+      id: "admin",
+      title: "Admin",
+      shareLink: "",
+      access: EmployeeType.Admin,
+    },
+    {
+      id: "collaborator",
+      title: "Collaborator",
+      shareLink: "",
+      access: EmployeeType.Collaborator,
+    },
+  ];
 
   const selectRoom = () => {
     const room = folders.find((folder) => folder.id === roomId);
@@ -167,40 +189,7 @@ const InvitePanel = ({
 
   useEffect(() => {
     if (roomId === -1) {
-      if ((!userLink || !guestLink || !collaboratorLink) && !adminLink) {
-        setInvitePanelIsLoading(true);
-        getPortalInviteLinks().finally(() => {
-          disableInvitePanelLoader();
-        });
-      }
-
-      setShareLinks([
-        {
-          id: "user",
-          title: "User",
-          shareLink: userLink,
-          access: 1,
-        },
-        {
-          id: "guest",
-          title: "Guest",
-          shareLink: guestLink,
-          access: 2,
-        },
-        {
-          id: "admin",
-          title: "Admin",
-          shareLink: adminLink,
-          access: 3,
-        },
-        {
-          id: "collaborator",
-          title: "Collaborator",
-          shareLink: collaboratorLink,
-          access: 4,
-        },
-      ]);
-
+      setShareLinks(accessModel);
       return;
     }
 
@@ -208,7 +197,7 @@ const InvitePanel = ({
     Promise.all([selectRoom(), getInfo()]).finally(() => {
       disableInvitePanelLoader(false);
     });
-  }, [roomId, userLink, guestLink, adminLink, collaboratorLink]);
+  }, [roomId]);
 
   useEffect(() => {
     const hasErrors = inviteItems.some((item) => !!item.errors?.length);
@@ -258,6 +247,55 @@ const InvitePanel = ({
     return () => document.removeEventListener("keyup", onKeyPress);
   });
 
+  const onClickPayments = () => {
+    const paymentPageUrl = combineUrl(
+      "/portal-settings",
+      "/payments/portal-payments",
+    );
+
+    toastr.clear();
+
+    window.DocSpace.navigate(paymentPageUrl);
+
+    setInvitePanelOptions({
+      visible: false,
+      hideSelector: false,
+      defaultAccess: 1,
+    });
+  };
+
+  const getError = () => {
+    const paymentLink = (
+      <Trans
+        t={t}
+        i18nKey="ChangeUserPermissions"
+        ns="Common"
+        components={{
+          1: (
+            <ColorTheme
+              tag="a"
+              themeId={ThemeId.Link}
+              onClick={onClickPayments}
+              target="_blank"
+            />
+          ),
+        }}
+      />
+    );
+
+    return (
+      <>
+        <Text as="span">
+          {t("Common:PaidUsersExceedsLimit", {
+            count: maxCountManagersByQuota + invitePaidUsersCount,
+            limit: maxCountManagersByQuota,
+          })}
+        </Text>
+        &nbsp;
+        {!isRoomAdmin && paymentLink}
+      </>
+    );
+  };
   const onClickSend = async (e) => {
     const invitations = inviteItems.map((item) => {
       let newItem = {};
@@ -289,7 +327,11 @@ const InvitePanel = ({
         ? await inviteUsers(data)
         : await setRoomSecurity(roomId, data);
 
+      if (!isRooms) {
+        setIsNewUserByCurrentUser(true);
+      }
       setIsLoading(false);
+      setInvitePaidUsersCount(0);
 
       onClose();
       toastr.success(t("Common:UsersInvited"));
@@ -302,7 +344,13 @@ const InvitePanel = ({
         updateInfoPanelMembers(t);
       }
     } catch (err) {
-      toastr.error(err);
+      let error = err;
+
+      if (err?.response?.status === 402) {
+        error = getError();
+      }
+
+      toastr.error(error);
       setIsLoading(false);
     } finally {
       if (roomId === -1) {
@@ -374,9 +422,6 @@ const InvitePanel = ({
 
   const invitePanelNode = (
     <>
-      <StyledBlock>
-        <StyledHeading>{t("Common:InviteUsers")}</StyledHeading>
-      </StyledBlock>
       {invitePanelIsLoding ? (
         <InvitePanelLoader />
       ) : (
@@ -424,9 +469,11 @@ const InvitePanel = ({
     >
       {isMobileView ? (
         <div className="invite_panel" ref={invitePanelRef}>
-          <StyledControlContainer onClick={onClose}>
-            <StyledCrossIconMobile />
-          </StyledControlContainer>
+          <AsideHeader
+            header={t("Common:InviteUsers")}
+            onCloseClick={onClose}
+          />
+
           {invitePanelNode}
         </div>
       ) : (
@@ -443,6 +490,7 @@ const InvitePanel = ({
             onClose={onClose}
             withoutBodyScroll
             zIndex={310}
+            header={t("Common:InviteUsers")}
           >
             {invitePanelNode}
           </Aside>
@@ -475,6 +523,8 @@ export default inject(
     filesStore,
     dialogsStore,
     infoPanelStore,
+    authStore,
+    currentQuotaStore,
   }) => {
     const { theme, currentDeviceType } = settingsStore;
 
@@ -488,23 +538,22 @@ export default inject(
     } = infoPanelStore;
 
     const {
-      getPortalInviteLinks,
-      userLink,
-      guestLink,
-      adminLink,
-      collaboratorLink,
-    } = peopleStore.inviteLinksStore;
-
-    const {
       inviteItems,
       invitePanelOptions,
       setInviteItems,
       setInvitePanelOptions,
       setInviteLanguage,
+      invitePaidUsersCount,
+      setIsNewUserByCurrentUser,
+      setInvitePaidUsersCount,
     } = dialogsStore;
 
     const { getFolderInfo, setRoomSecurity, getRoomSecurityInfo, folders } =
       filesStore;
+
+    const { isRoomAdmin } = authStore;
+
+    const { maxCountManagersByQuota } = currentQuotaStore;
 
     return {
       folders,
@@ -520,11 +569,6 @@ export default inject(
       visible: invitePanelOptions.visible,
       defaultAccess: invitePanelOptions.defaultAccess,
       getFolderInfo,
-      getPortalInviteLinks,
-      userLink,
-      guestLink,
-      adminLink,
-      collaboratorLink,
       inviteUsers,
       setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
@@ -532,6 +576,11 @@ export default inject(
       getUsersList,
       filter,
       currentDeviceType,
+      isRoomAdmin,
+      maxCountManagersByQuota,
+      invitePaidUsersCount,
+      setIsNewUserByCurrentUser,
+      setInvitePaidUsersCount,
     };
   },
 )(
@@ -541,6 +590,5 @@ export default inject(
     "Translations",
     "Common",
     "InfoPanel",
-    "PeopleSelector",
   ])(observer(InvitePanel)),
 );

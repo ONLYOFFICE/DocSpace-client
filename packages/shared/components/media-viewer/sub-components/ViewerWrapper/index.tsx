@@ -57,6 +57,7 @@ const ViewerWrapper = memo(
       isPreviewFile,
       currentDeviceType,
       isPublicFile,
+      autoPlay,
 
       onClose,
       onNextClick,
@@ -167,6 +168,7 @@ const ViewerWrapper = memo(
         visible={visible}
         isImage={isImage}
         toolbar={toolbar}
+        autoPlay={autoPlay}
         playlist={playlist}
         audioIcon={audioIcon}
         errorTitle={errorTitle}

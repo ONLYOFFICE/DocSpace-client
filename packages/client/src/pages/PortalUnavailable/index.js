@@ -45,9 +45,7 @@ const StyledBodyContent = styled.div`
   }
 `;
 const StyledBody = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
+  width: 100%;
 
   .portal-unavailable_container {
     .portal-unavailable_contact-text {

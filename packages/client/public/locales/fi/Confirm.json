@@ -7,6 +7,7 @@
   "DeleteProfileBtn": "Poista tilini",
   "DeleteProfileConfirmation": "Huomio! Olet poistamassa tilisi.",
   "DeleteProfileConfirmationInfo": "Napsauttamalla \"Poista tilini\", hyväksyt <1>yksityisyyskäytäntömme.</1>",
+  "DeleteProfileSuccessDescription": "{{productName}} – tilisi on poistettu käytöstä. {{productName}}:n omistaja tai pääkäyttäjä voi poistaa tilisi pysyvästi.",
   "DeleteProfileSuccessMessage": "Tilisi poistaminen onnistui.",
   "DeleteProfileSuccessMessageInfo": "Katso <1>yksityisyyskäytäntömme</1> jos haluat lisätietoja tilisi ja siihen liittyvien tietojen poistamisesta.",
   "EmailAndPasswordCopiedToClipboard": "Sähköposti ja salasana oon kopioitu leikepöydälle",

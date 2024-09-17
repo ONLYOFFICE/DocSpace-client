@@ -6,6 +6,7 @@
   "DisplayTemplates": "Vorlagen anzeigen",
   "IntermediateVersion": "Alle gespeicherten Zwischenversionen aufbewahren",
   "KeepIntermediateVersion": "Zwischenversionen bei der Bearbeitung aufbewahren",
+  "OpenSameTab": "{{organizationName}}-Editor in derselben Registerkarte öffnen",
   "OriginalCopy": "Dateikopie auch im Originalformat speichern",
   "StoringFileVersion": "Speicherung von Dateiversionen",
   "ThirdPartyAccounts": "Konten von Drittanbietern",

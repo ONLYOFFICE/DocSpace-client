@@ -87,10 +87,10 @@ export const endpoints: TEndpoints = {
   },
   logout: {
     url: `${BASE_URL}authentication/logout`,
-    dataHandler: new Response(JSON.stringify({})),
+    dataHandler: () => new Response(JSON.stringify({})),
   },
   oauthSignIn: {
     url: `*/**/${OAUTH_SIGN_IN_PATH}`,
-    dataHandler: oauthSignInHelper(),
+    dataHandler: oauthSignInHelper,
   },
 };

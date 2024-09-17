@@ -904,12 +904,15 @@ export const toUrlParams = (
   return str;
 };
 
+export const parseURL = (searchUrl: string) => {
+  return Object.fromEntries(new URLSearchParams(searchUrl));
+};
 export function getObjectByLocation(location: Location) {
   if (!location.search || !location.search.length) return null;
 
   try {
     const searchUrl = location.search.substring(1);
-    const params = Object.fromEntries(new URLSearchParams(searchUrl));
+    const params = parseURL(searchUrl);
     return params;
   } catch (e) {
     console.error(e);

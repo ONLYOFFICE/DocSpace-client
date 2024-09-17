@@ -101,6 +101,7 @@ export type TBreadCrumb = {
   isRoom?: boolean;
   minWidth?: string;
   roomType?: RoomsType;
+  shared?: Boolean;
   onClick?: TOnBreadCrumbClick;
 };
 

@@ -3,10 +3,14 @@ import { useTranslation } from "react-i18next";
 
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 
-import { RegisterNewButtonProps } from "./RegisterNewButton.types";
+import { DeviceUnionType } from "SRC_DIR/Hooks/useViewEffect";
+
+export interface RegisterNewButtonProps {
+  currentDeviceType?: DeviceUnionType;
+}
 
 const RegisterNewButton = ({ currentDeviceType }: RegisterNewButtonProps) => {
-  const { t } = useTranslation(["OAuth", "Common"]);
+  const { t } = useTranslation(["OAuth"]);
 
   const navigate = useNavigate();
 

@@ -221,6 +221,7 @@ export type LoginFormProps = {
   client?: IClientProps;
   ldapDomain?: string;
   ldapEnabled?: boolean;
+  baseDomain?: string;
 };
 
 export type ForgotPasswordModalDialogProps = {

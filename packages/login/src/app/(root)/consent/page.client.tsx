@@ -89,9 +89,10 @@ interface IConsentProps {
   client: IClientProps;
   scopes: TScope[];
   user: TUser;
+  baseUrl?: string;
 }
 
-const Consent = ({ client, scopes, user }: IConsentProps) => {
+const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
   const { t } = useTranslation(["Consent", "Common"]);
   const router = useRouter();
 
@@ -151,6 +152,12 @@ const Consent = ({ client, scopes, user }: IConsentProps) => {
   const onChangeUserClick = async () => {
     await api.user.logout();
 
+    if (baseUrl) {
+      window.location.replace(
+        `${baseUrl}/login?client_id=${client.clientId}&type=oauth2`,
+      );
+    }
+
     router.push(`/?client_id=${client.clientId}&type=oauth2`);
   };
 
@@ -172,7 +179,7 @@ const Consent = ({ client, scopes, user }: IConsentProps) => {
       <StyledButtonContainer>
         <Button
           onClick={onAllowClick}
-          label={"Allow"}
+          label={t("AllowButton")}
           size={ButtonSize.normal}
           scale
           primary
@@ -181,7 +188,7 @@ const Consent = ({ client, scopes, user }: IConsentProps) => {
         />
         <Button
           onClick={onDenyClick}
-          label={"Deny"}
+          label={t("DenyButton")}
           size={ButtonSize.normal}
           scale
           isDisabled={isAllowRunning}
@@ -190,7 +197,7 @@ const Consent = ({ client, scopes, user }: IConsentProps) => {
       </StyledButtonContainer>
       <StyledDescriptionContainer>
         <Text fontWeight={400} fontSize={"13px"} lineHeight={"20px"}>
-          <Trans t={t} i18nKey={"ConsentDescription"} ns="Consent">
+          <Trans t={t} i18nKey="ConsentDescription" ns="Consent">
             Data shared with {{ displayName: user.displayName }} will be
             governed by {{ nameApp: client.name }}
             <Link
@@ -214,8 +221,8 @@ const Consent = ({ client, scopes, user }: IConsentProps) => {
             >
               terms of service
             </Link>
-            . You can revoke this consent at any time in your DocSpace account
-            settings.
+            . You can revoke this consent at any time in your{" "}
+            {{ productName: t("Common:ProductName") }} account settings.
           </Trans>
         </Text>
       </StyledDescriptionContainer>

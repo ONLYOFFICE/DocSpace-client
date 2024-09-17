@@ -24,17 +24,54 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/// <reference types='codeceptjs' />
-type steps_file = typeof import("./steps_file.js");
+export const successScopes = [
+  {
+    name: "accounts.self:read",
+    group: "profiles",
+    type: "read",
+  },
+  {
+    name: "accounts.self:write",
+    group: "profiles",
+    type: "write",
+  },
+  {
+    name: "accounts:read",
+    group: "accounts",
+    type: "read",
+  },
+  {
+    name: "accounts:write",
+    group: "accounts",
+    type: "write",
+  },
+  {
+    name: "files:read",
+    group: "files",
+    type: "read",
+  },
+  {
+    name: "files:write",
+    group: "files",
+    type: "write",
+  },
+  {
+    name: "rooms:read",
+    group: "rooms",
+    type: "read",
+  },
+  {
+    name: "rooms:write",
+    group: "rooms",
+    type: "write",
+  },
+  {
+    name: "openid",
+    group: "openid",
+    type: "openid",
+  },
+];
 
-declare namespace CodeceptJS {
-  interface SupportObject {
-    I: I;
-    current: any;
-  }
-  interface Methods extends Playwright {}
-  interface I extends ReturnType<steps_file> {}
-  namespace Translation {
-    interface Actions {}
-  }
-}
+export const scopesHandler = () => {
+  return new Response(JSON.stringify(successScopes));
+};

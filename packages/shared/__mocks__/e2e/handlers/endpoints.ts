@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { loginHandler, LOGIN_PATH } from "./authentication";
+import { OAUTH_SIGN_IN_PATH, oauthSignInHelper } from "./oauth/signIn";
 import {
   SELF_PATH_ACTIVATION_STATUS,
   SELF_PATH_CHANGE_PASSWORD,
@@ -73,5 +74,13 @@ export const endpoints: TEndpoints = {
   login: {
     url: `${BASE_URL}${LOGIN_PATH}`,
     dataHandler: loginHandler(),
+  },
+  logout: {
+    url: `${BASE_URL}authentication/logout`,
+    dataHandler: new Response(JSON.stringify({})),
+  },
+  oauthSignIn: {
+    url: `*/**/${OAUTH_SIGN_IN_PATH}`,
+    dataHandler: oauthSignInHelper(),
   },
 };

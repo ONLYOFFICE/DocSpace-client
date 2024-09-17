@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 
 import { TTableColumn, TableHeader } from "@docspace/shared/components/table";
 
-import { HeaderProps } from "./TableView.types";
+import { HeaderProps } from "../TableView.types";
 
 const Header = (props: HeaderProps) => {
   const { sectionWidth, tableRef, columnStorageName, tagRef } = props;

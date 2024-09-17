@@ -24,44 +24,59 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+/* eslint-disable jsx-a11y/tabindex-no-positive */
+
 import React, { useState, useEffect, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
 import { toastr } from "@docspace/shared/components/toast";
-import { Button } from "@docspace/shared/components/button";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { TextInput } from "@docspace/shared/components/text-input";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
+import {
+  InputSize,
+  InputType,
+  TextInput,
+} from "@docspace/shared/components/text-input";
 import { PasswordInput } from "@docspace/shared/components/password-input";
 import { FieldContainer } from "@docspace/shared/components/field-container";
-
-import { withTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
 import { getOAuthToken } from "@docspace/shared/utils/common";
 import { saveSettingsThirdParty } from "@docspace/shared/api/files";
+import type { ConnectDialogProps } from "./ConnectDialog.types";
 
-const PureConnectDialogContainer = (props) => {
-  const {
-    visible,
-    t,
-    tReady,
-    item,
-    fetchThirdPartyProviders,
-    providers,
-    selectedFolderId,
-    selectedFolderFolders,
-    saveThirdParty,
-    openConnectWindow,
-    setConnectDialogVisible,
-    folderFormValidation,
-    isConnectionViaBackupModule,
-    roomCreation,
-    setSaveThirdpartyResponse,
-    isConnectDialogReconnect,
-    setIsConnectDialogReconnect,
-    saveAfterReconnectOAuth,
-    setSaveAfterReconnectOAuth,
-    setThirdPartyAccountsInfo,
-    connectingStorages,
-  } = props;
+const ConnectDialog = ({
+  visible,
+  // t,
+  // tReady,
+  item,
+  fetchThirdPartyProviders,
+  providers,
+  selectedFolderId,
+  selectedFolderFolders,
+  saveThirdParty,
+  openConnectWindow,
+  setConnectDialogVisible,
+  folderFormValidation,
+  isConnectionViaBackupModule,
+  roomCreation,
+  setSaveThirdpartyResponse,
+  isConnectDialogReconnect,
+  setIsConnectDialogReconnect,
+  saveAfterReconnectOAuth,
+  setSaveAfterReconnectOAuth,
+  setThirdPartyAccountsInfo,
+  connectingStorages,
+}: ConnectDialogProps) => {
+  const { t, ready } = useTranslation([
+    "ConnectDialog",
+    "Common",
+    "Translations",
+    "Files",
+  ]);
+
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   const { title, link, token, provider_id, provider_key, key } = item;
 
   const connectItem = connectingStorages.find(
@@ -92,33 +107,33 @@ const PureConnectDialogContainer = (props) => {
     ? t("Common:ReconnectStorage")
     : t("Translations:ConnectingAccount");
 
-  const onChangeUrl = (e) => {
+  const onChangeUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsUrlValid(true);
     setUrlValue(e.target.value);
   };
-  const onChangeLogin = (e) => {
+  const onChangeLogin = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsLoginValid(true);
     setLoginValue(e.target.value);
   };
-  const onChangePassword = (e) => {
+  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsPasswordValid(true);
     setPasswordValue(e.target.value);
   };
-  const onChangeFolderName = (e) => {
+  const onChangeFolderName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsTitleValid(true);
-    let title = e.target.value;
-    //const chars = '*+:"<>?|/'; TODO: think how to solve problem with interpolation escape values in i18n translate
+    let folderName = e.target.value;
+    // const chars = '*+:"<>?|/'; TODO: think how to solve problem with interpolation escape values in i18n translate
 
-    if (title.match(folderFormValidation)) {
+    if (folderName.match(folderFormValidation)) {
       toastr.warning(t("Files:ContainsSpecCharacter"));
     }
-    title = title.replace(folderFormValidation, "_");
+    folderName = folderName.replace(folderFormValidation, "_");
 
-    setCustomerTitleValue(title);
+    setCustomerTitleValue(folderName);
   };
 
   const onClose = useCallback(() => {
-    !isLoading && setConnectDialogVisible(false);
+    if (!isLoading) setConnectDialogVisible(false);
 
     if (isConnectDialogReconnect) {
       setIsConnectDialogReconnect(false);
@@ -131,29 +146,27 @@ const PureConnectDialogContainer = (props) => {
   ]);
 
   const onSave = useCallback(() => {
-    const isTitleValid = !!customerTitle.trim();
-    const isUrlValid = !!urlValue.trim();
-    const isLoginValid = !!loginValue.trim();
-    const isPasswordValid = !!passwordValue.trim();
+    const isCustomerTitleValid = !!customerTitle.trim();
+    const isURLValueValid = !!urlValue.trim();
+    const isLoginValueValid = !!loginValue.trim();
+    const isPasswordValueValid = !!passwordValue.trim();
 
     if (link) {
-      if (!isTitleValid) {
+      if (!isCustomerTitleValid) {
         setIsTitleValid(!!customerTitle.trim());
         return;
       }
-    } else {
-      if (
-        !isTitleValid ||
-        !isLoginValid ||
-        !isPasswordValid ||
-        (showUrlField && !isUrlValid)
-      ) {
-        setIsTitleValid(isTitleValid);
-        showUrlField && setIsUrlValid(isUrlValid);
-        setIsLoginValid(isLoginValid);
-        setIsPasswordValid(isPasswordValid);
-        return;
-      }
+    } else if (
+      !isCustomerTitleValid ||
+      !isLoginValueValid ||
+      !isPasswordValueValid ||
+      (showUrlField && !isURLValueValid)
+    ) {
+      setIsTitleValid(isCustomerTitleValid);
+      if (showUrlField) setIsUrlValid(isURLValueValid);
+      setIsLoginValid(isLoginValueValid);
+      setIsPasswordValid(isPasswordValueValid);
+      return;
     }
 
     setIsLoading(true);
@@ -169,7 +182,7 @@ const PureConnectDialogContainer = (props) => {
         provider_key,
         provider_id,
       )
-        .then(async () => {
+        ?.then(async () => {
           await setThirdPartyAccountsInfo(t);
         })
         .catch((err) => {
@@ -209,6 +222,8 @@ const PureConnectDialogContainer = (props) => {
         setIsLoading(false);
         setSaveAfterReconnectOAuth(false);
       });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     customerTitle,
     fetchThirdPartyProviders,
@@ -226,21 +241,21 @@ const PureConnectDialogContainer = (props) => {
   ]);
 
   const onReconnect = () => {
-    let authModal = window.open(
+    const authModal = window.open(
       "",
       t("Common:Authorization"),
       "height=600, width=1020",
     );
     openConnectWindow(provider_key, authModal).then((modal) =>
-      getOAuthToken(modal).then((token) => {
-        authModal.close();
-        setToken(token);
+      getOAuthToken(modal).then((responseToken) => {
+        authModal?.close();
+        setToken(responseToken);
       }),
     );
   };
 
   const onKeyUpHandler = useCallback(
-    (e) => {
+    (e: KeyboardEvent) => {
       if (e.keyCode === 13) onSave();
     },
     [onSave],
@@ -259,16 +274,18 @@ const PureConnectDialogContainer = (props) => {
     if (saveAfterReconnectOAuth) {
       onSave();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [saveAfterReconnectOAuth]);
 
   return (
     <ModalDialog
-      isLoading={!tReady}
+      isLoading={!ready}
       visible={visible}
       zIndex={310}
       isLarge={!isAccount}
       autoMaxHeight
       onClose={onClose}
+      displayType={ModalDialogType.modal}
     >
       <ModalDialog.Header>{header}</ModalDialog.Header>
       <ModalDialog.Body>
@@ -281,7 +298,7 @@ const PureConnectDialogContainer = (props) => {
           >
             <Button
               label={t("Common:Reconnect")}
-              size="normal"
+              size={ButtonSize.normal}
               onClick={onReconnect}
               scale
               isDisabled={isLoading}
@@ -300,13 +317,15 @@ const PureConnectDialogContainer = (props) => {
               >
                 <TextInput
                   id="connection-url-input"
-                  isAutoFocussed={true}
+                  isAutoFocussed
                   hasError={!isUrlValid}
                   isDisabled={isLoading}
                   tabIndex={1}
                   scale
                   value={urlValue}
                   onChange={onChangeUrl}
+                  type={InputType.text}
+                  size={InputSize.base}
                 />
               </FieldContainer>
             )}
@@ -328,6 +347,8 @@ const PureConnectDialogContainer = (props) => {
                 scale
                 value={loginValue}
                 onChange={onChangeLogin}
+                type={InputType.text}
+                size={InputSize.base}
               />
             </FieldContainer>
             <FieldContainer
@@ -346,8 +367,9 @@ const PureConnectDialogContainer = (props) => {
                 tabIndex={3}
                 simpleView
                 passwordSettings={{ minLength: 0 }}
-                value={passwordValue}
+                // value={passwordValue}
                 onChange={onChangePassword}
+                size={InputSize.base}
               />
             </FieldContainer>
           </>
@@ -367,6 +389,8 @@ const PureConnectDialogContainer = (props) => {
               scale
               value={`${customerTitle}`}
               onChange={onChangeFolderName}
+              type={InputType.text}
+              size={InputSize.base}
             />
           </FieldContainer>
         )}
@@ -376,7 +400,7 @@ const PureConnectDialogContainer = (props) => {
           id="save"
           tabIndex={5}
           label={t("Common:SaveButton")}
-          size="normal"
+          size={ButtonSize.normal}
           primary
           scale={isAccount}
           onClick={onSave}
@@ -387,7 +411,7 @@ const PureConnectDialogContainer = (props) => {
           id="cancel"
           tabIndex={5}
           label={t("Common:CancelButton")}
-          size="normal"
+          size={ButtonSize.normal}
           scale={isAccount}
           onClick={onClose}
           isDisabled={isLoading}
@@ -397,70 +421,72 @@ const PureConnectDialogContainer = (props) => {
   );
 };
 
-const ConnectDialog = withTranslation([
-  "ConnectDialog",
-  "Common",
-  "Translations",
-  "Files",
-])(PureConnectDialogContainer);
+export default ConnectDialog;
 
-export default inject(
-  ({
-    settingsStore,
-    filesSettingsStore,
-    selectedFolderStore,
-    dialogsStore,
-    backup,
-  }) => {
-    const {
-      providers,
-      saveThirdParty,
-      openConnectWindow,
-      fetchThirdPartyProviders,
-      connectingStorages,
-    } = filesSettingsStore.thirdPartyStore;
-    const { folderFormValidation } = settingsStore;
+// const ConnectDialog = withTranslation([
+//   "ConnectDialog",
+//   "Common",
+//   "Translations",
+//   "Files",
+// ])(PureConnectDialogContainer);
 
-    const { id, folders } = selectedFolderStore;
-    const {
-      selectedThirdPartyAccount: backupConnectionItem,
-      setThirdPartyAccountsInfo,
-    } = backup;
-    const {
-      connectDialogVisible: visible,
-      setConnectDialogVisible,
-      connectItem,
-      roomCreation,
-      setSaveThirdpartyResponse,
-      isConnectDialogReconnect,
-      setIsConnectDialogReconnect,
-      saveAfterReconnectOAuth,
-      setSaveAfterReconnectOAuth,
-    } = dialogsStore;
+// export default inject(
+//   ({
+//     settingsStore,
+//     filesSettingsStore,
+//     selectedFolderStore,
+//     dialogsStore,
+//     backup,
+//   }) => {
+//     const {
+//       providers,
+//       saveThirdParty,
+//       openConnectWindow,
+//       fetchThirdPartyProviders,
+//       connectingStorages,
+//     } = filesSettingsStore.thirdPartyStore;
+//     const { folderFormValidation } = settingsStore;
 
-    const item = backupConnectionItem ?? connectItem;
-    const isConnectionViaBackupModule = backupConnectionItem ? true : false;
+//     const { id, folders } = selectedFolderStore;
+//     const {
+//       selectedThirdPartyAccount: backupConnectionItem,
+//       setThirdPartyAccountsInfo,
+//     } = backup;
+//     const {
+//       connectDialogVisible: visible,
+//       setConnectDialogVisible,
+//       connectItem,
+//       roomCreation,
+//       setSaveThirdpartyResponse,
+//       isConnectDialogReconnect,
+//       setIsConnectDialogReconnect,
+//       saveAfterReconnectOAuth,
+//       setSaveAfterReconnectOAuth,
+//     } = dialogsStore;
 
-    return {
-      selectedFolderId: id,
-      selectedFolderFolders: folders,
-      providers,
-      visible,
-      item,
-      roomCreation,
-      setSaveThirdpartyResponse,
-      folderFormValidation,
-      isConnectionViaBackupModule,
-      saveThirdParty,
-      openConnectWindow,
-      fetchThirdPartyProviders,
-      setConnectDialogVisible,
-      isConnectDialogReconnect,
-      saveAfterReconnectOAuth,
-      setSaveAfterReconnectOAuth,
-      setIsConnectDialogReconnect,
-      setThirdPartyAccountsInfo,
-      connectingStorages,
-    };
-  },
-)(observer(ConnectDialog));
+//     const item = backupConnectionItem ?? connectItem;
+//     const isConnectionViaBackupModule = backupConnectionItem ? true : false;
+
+//     return {
+//       selectedFolderId: id,
+//       selectedFolderFolders: folders,
+//       providers,
+//       visible,
+//       item,
+//       roomCreation,
+//       setSaveThirdpartyResponse,
+//       folderFormValidation,
+//       isConnectionViaBackupModule,
+//       saveThirdParty,
+//       openConnectWindow,
+//       fetchThirdPartyProviders,
+//       setConnectDialogVisible,
+//       isConnectDialogReconnect,
+//       saveAfterReconnectOAuth,
+//       setSaveAfterReconnectOAuth,
+//       setIsConnectDialogReconnect,
+//       setThirdPartyAccountsInfo,
+//       connectingStorages,
+//     };
+//   },
+// )(observer(ConnectDialog));

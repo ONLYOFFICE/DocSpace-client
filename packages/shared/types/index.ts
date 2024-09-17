@@ -39,6 +39,10 @@ export type TDirectionY = "bottom" | "top" | "both";
 
 export type TViewAs = "tile" | "table" | "row" | "settings" | "profile";
 
+export type ProviderType = {
+  provider_id: unknown;
+  customer_title: string;
+};
 export type TTranslation = (
   key: string,
   params?: { [key: string]: string | string[] },

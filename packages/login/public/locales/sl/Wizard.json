@@ -1,8 +1,6 @@
 {
   "Desc": "Prosimo, nastavite podatke za registracijo {{productName}}.",
   "ErrorEmail": "Napačen email naslov",
-  "ErrorInitWizard": "Storitev trenutno ni na voljo, poskusite znova kasneje.",
-  "ErrorInitWizardButton": "Poskusi znova",
   "ErrorLicenseBody": "Licenca ni veljavna. Izberite pravo datoteko.",
   "ErrorPassword": "Geslo ne ustreza zahtevam",
   "ErrorUploadLicenseFile": "Izberite licenčno datoteko",

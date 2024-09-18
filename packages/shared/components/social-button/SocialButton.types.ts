@@ -54,7 +54,7 @@ export interface StyledSocialButtonProps {
 
 export interface SocialButtonProps extends Partial<StyledSocialButtonProps> {
   /** Button text */
-  label?: string;
+  label?: string | React.ReactNode;
   /** Button icon */
   iconName?: string;
 

@@ -1,8 +1,4 @@
-import {
-  IClientProps,
-  IClientReqDTO,
-  TScope,
-} from "@docspace/shared/utils/oauth/types";
+import { IClientProps, TScope } from "@docspace/shared/utils/oauth/types";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
@@ -45,13 +41,11 @@ export interface ClientFormProps {
 
   fetchScopes?: () => Promise<void>;
 
-  saveClient?: (client: IClientReqDTO) => Promise<void>;
-  updateClient?: (clientId: string, client: IClientReqDTO) => Promise<void>;
-
   resetDialogVisible?: boolean;
   setResetDialogVisible?: (value: boolean) => void;
 
   currentDeviceType?: DeviceUnionType;
+  maxImageUploadSize?: number;
 
   setClientSecretProps?: (value: string) => void;
   clientSecretProps?: string;

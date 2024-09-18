@@ -1,15 +1,11 @@
 {
-  "CodeSubtitle": "{{email}} adresine 6 haneli bir kod gönderdik. Kodun sınırlı bir geçerlilik süresi vardır, kodu en kısa sürede girin.",
   "CodeTitle": "Kod tarafınıza e-posta olarak gönderildi",
   "ErrorInvalidText": "10 saniye içinde <1>{{productName}}</1> yönlendirileceksiniz",
-  "ExpiredCode": "Bu kod artık geçerli değil. Yeni bir kod isteyip tekrar deneyin.",
   "ForgotPassword": "Şifrenizi mi unuttunuz?",
-  "InvalidCode": "Bu kod geçersizdir. Tekrar deneyin.",
   "LDAPUsernamePlaceholder": "{{ldap_domain}} kullanıcı adı",
   "MessageAuthorize": "Devam etmek için giriş yapın",
   "MessageEmailConfirmed": "E-posta adresiniz başarıyla etkinleştirildi.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Lütfen kayıt için kullandığınız e-postayı giriniz. Şifre kurtarma talimatları o adrese gönderilecektir.",
-  "NotFoundCode": "Kodu bulamıyor musunuz? «Spam» klasörünüzü kontrol edin.",
   "PasswordRecoveryTitle": "Şifre kurtarma",
   "RecoverAccess": "Erişimi kurtar",
   "RecoverContactEmailPlaceholder": "İletişim e-postası",
@@ -20,7 +16,6 @@
   "RegisterTitle": "Kayıt talebi",
   "RegistrationEmailWatermark": "E-posta",
   "RememberHelper": "Varsayılan oturum ömrü 20 dakikadır. 1 yıla ayarlamak için bu seçeneği işaretleyin. Kendi sürenizi ayarlamak için Ayarlar'a gidin.",
-  "ResendCode": "Kodu yeniden gönder",
   "SignInLDAP": "Şurada oturum açın: {{ldap_domain}}",
   "SignInLdapHelper": "Kurumsal alan için kimlik bilgilerini kullanın",
   "UserIsAlreadyRegistered": "Kullanıcı <1>{{email}}</1> bu {{productName}}'e zaten kayıtlı, şifrenizi girin veya başka bir e-posta ile devam etmek için geri dönün."

@@ -11,7 +11,6 @@
   "EnterSecretKey": "Unesi tajni ključ",
   "EnterUrl": "Unesi URL",
   "EnterWebhookName": "Unesi webhook ime",
-  "EventHint": "Dostave su automatski obrisane nakon 15 dana",
   "EventID": "ID događaja",
   "FailedToConnect": "Nismo mogli dostaviti ovaj paket: nije uspelo povezivanje sa serverom",
   "From": "Od",

@@ -227,12 +227,6 @@ const StyledArticleMainButton = styled.div`
   }
 `;
 
-const StyledIconContainer = styled.div`
-  margin-left: auto;
-`;
-
-StyledIconContainer.defaultProps = { theme: Base };
-
 const StyledCrossIcon = styled(CrossIcon)`
   width: 17px;
   height: 17px;
@@ -471,7 +465,6 @@ export {
   StyledIconBox,
   StyledMenuIcon,
   StyledArticleMainButton,
-  StyledIconContainer,
   StyledCrossIcon,
   StyledArticleProfile,
   StyledUserName,

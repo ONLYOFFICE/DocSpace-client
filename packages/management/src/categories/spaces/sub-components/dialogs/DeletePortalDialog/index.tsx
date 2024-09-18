@@ -25,16 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-
-import { Button } from "@docspace/shared/components/button";
 import { useTranslation, Trans } from "react-i18next";
 import { observer } from "mobx-react";
+
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { useStore } from "SRC_DIR/store";
 import { Link } from "@docspace/shared/components/link";
+
+import { useStore } from "SRC_DIR/store";
 
 const DeletePortalDialog = () => {
   const { spacesStore, settingsStore } = useStore();
@@ -95,7 +96,7 @@ const DeletePortalDialog = () => {
         <Button
           key="CreateButton"
           label={t("Common:Delete")}
-          size="normal"
+          size={ButtonSize.normal}
           scale
           primary
           onClick={onDelete}
@@ -103,7 +104,7 @@ const DeletePortalDialog = () => {
         <Button
           key="CancelButton"
           label={t("Common:CancelButton")}
-          size="normal"
+          size={ButtonSize.normal}
           onClick={onClose}
           scale
         />

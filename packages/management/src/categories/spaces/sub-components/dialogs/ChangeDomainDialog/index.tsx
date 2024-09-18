@@ -34,7 +34,11 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { useTranslation } from "react-i18next";
 import { observer } from "mobx-react";
-import { TextInput } from "@docspace/shared/components/text-input";
+import {
+  TextInput,
+  InputType,
+  InputSize,
+} from "@docspace/shared/components/text-input";
 import { useStore } from "SRC_DIR/store";
 import { toastr } from "@docspace/shared/components/toast";
 import { parseDomain } from "@docspace/shared/utils/common";
@@ -67,7 +71,7 @@ const ChangeDomainDialogComponent = () => {
 
   const [domain, setDomain] = React.useState("");
 
-  const onHandleDomain = (e) => {
+  const onHandleDomain = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (domainNameError) setDomainNameError(null);
     setDomain(e.target.value);
   };
@@ -118,6 +122,8 @@ const ChangeDomainDialogComponent = () => {
               {t("DomainName")}
             </Text>
             <TextInput
+              type={InputType.text}
+              size={InputSize.base}
               hasError={!!domainNameError}
               onChange={onHandleDomain}
               value={domain}

@@ -27,7 +27,7 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react";
-import { Tabs } from "@docspace/shared/components/tabs";
+import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import Branding from "../branding";
@@ -63,11 +63,11 @@ const Settings = () => {
     },
   ];
 
-  const onSelect = (e) => {
+  const onSelect = (element: TTabItem) => {
     navigate(
-      combineUrl(window.DocSpaceConfig?.proxy?.url, `/settings/${e.id}`)
+      combineUrl(window.ClientConfig?.proxy?.url, `/settings/${element.id}`)
     );
-    setCurrentTabId(e.id);
+    setCurrentTabId(element.id);
   };
 
   useEffect(() => {

@@ -463,13 +463,10 @@ describe("Locales Tests", () => {
     enWithVariables.forEach((enKeyWithVariables) => {
       otherLanguagesWithVariables.forEach((lng) => {
         const lngKey = lng.translationsWithVariables.find(
-          (t) => t.key === enKeyWithVariables.Key
+          (t) => t.key === enKeyWithVariables.key
         );
 
         if (!lngKey) {
-          // wrong
-          // message += `${++i}. lng='${lng.Language}' key='${enKeyWithVariables.Key}' not found\r\n\r\n`;
-          // errorsCount++;
           return;
         }
 
@@ -540,9 +537,6 @@ describe("Locales Tests", () => {
         );
 
         if (!lngKey) {
-          // wrong
-          // message += `${++i}. lng='${lng.Language}' key='${enKeyWithTags.Key}' not found\r\n\r\n`;
-          // errorsCount++;
           return;
         }
 

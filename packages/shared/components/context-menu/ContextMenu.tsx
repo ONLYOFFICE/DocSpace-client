@@ -235,12 +235,12 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
 
           if (options) {
             Array.from(options).forEach((option) =>
-              optionsWidth.push(option.clientWidth),
+              optionsWidth.push(option.getBoundingClientRect().width),
             );
 
             const widthMaxContent = Math.max(...optionsWidth);
 
-            width = widthMaxContent;
+            width = Math.ceil(widthMaxContent);
           }
         }
 
@@ -439,13 +439,9 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
       setShowMobileMenu(false);
     };
 
-    React.useImperativeHandle(
-      ref,
-      () => {
-        return { show, hide, toggle, menuRef };
-      },
-      [hide, show, toggle],
-    );
+    React.useImperativeHandle(ref, () => {
+      return { show, hide, toggle, menuRef };
+    }, [hide, show, toggle]);
 
     const renderContextMenu = () => {
       const currentClassName = className

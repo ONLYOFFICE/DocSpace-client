@@ -26,7 +26,7 @@
 import type { TFolder } from "../../api/files/types";
 import type { Nullable, ProviderType, TTranslation } from "../../types";
 
-export type ThirdPartyItemType = {
+export type ConnectionItemType = {
   link: string;
   title: string;
   token: string;
@@ -49,10 +49,10 @@ export type ConnectingStoragesType = {
 
 export interface ConnectDialogProps {
   visible: boolean;
-  item: ThirdPartyItemType;
+  item: Nullable<ConnectionItemType>;
   providers: ProviderType[];
-  selectedFolderId: number;
-  selectedFolderFolders: TFolder;
+  selectedFolderId: Nullable<string | number>;
+  selectedFolderFolders: Nullable<TFolder[]>;
   folderFormValidation: RegExp;
   isConnectionViaBackupModule: boolean;
   roomCreation: boolean;

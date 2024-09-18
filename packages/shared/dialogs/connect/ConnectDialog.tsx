@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable jsx-a11y/tabindex-no-positive */
 
 import React, { useState, useEffect, useCallback } from "react";
@@ -76,22 +77,28 @@ const ConnectDialog = ({
     "Files",
   ]);
 
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  const { title, link, token, provider_id, provider_key, key } = item;
+  const {
+    title,
+    link,
+    token = "",
+    provider_id = "",
+    provider_key = "",
+    key = "",
+  } = item ?? {};
 
   const connectItem = connectingStorages.find(
     (el) => el.providerKey === provider_key,
   );
 
-  const provider = providers.find((el) => el.provider_id === item.provider_id);
+  const provider = providers.find((el) => el.provider_id === item?.provider_id);
   const folderTitle = provider ? provider.customer_title : title;
 
   const [urlValue, setUrlValue] = useState("");
   const [loginValue, setLoginValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
-  const [customerTitle, setCustomerTitleValue] = useState(folderTitle);
+  const [customerTitle, setCustomerTitleValue] = useState(folderTitle ?? "");
 
-  const [oAuthToken, setToken] = useState(token);
+  const [oAuthToken, setToken] = useState(token ?? "");
 
   const [isTitleValid, setIsTitleValid] = useState(true);
   const [isUrlValid, setIsUrlValid] = useState(true);
@@ -146,14 +153,14 @@ const ConnectDialog = ({
   ]);
 
   const onSave = useCallback(() => {
-    const isCustomerTitleValid = !!customerTitle.trim();
+    const isCustomerTitleValid = !!customerTitle?.trim();
     const isURLValueValid = !!urlValue.trim();
     const isLoginValueValid = !!loginValue.trim();
     const isPasswordValueValid = !!passwordValue.trim();
 
     if (link) {
       if (!isCustomerTitleValid) {
-        setIsTitleValid(!!customerTitle.trim());
+        setIsTitleValid(!!customerTitle?.trim());
         return;
       }
     } else if (

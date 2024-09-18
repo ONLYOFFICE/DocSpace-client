@@ -27,7 +27,6 @@
   "Other": "其他",
   "OwnerChange": "变更所有者",
   "Presentations": "演示文稿",
-  "PublicRoomLinkValidTime": "此链接有效期至 {{date}}。过期后，用户无法通过此链接进入房间。",
   "RoleCommentator": "可评论",
   "RoleCommentatorDescription": "现有文件操作：查看、评论。",
   "RoleEditorDescription": "现有文件操作：查看、编辑、表单填写、审阅、评论。",

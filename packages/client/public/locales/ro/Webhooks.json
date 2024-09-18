@@ -11,7 +11,6 @@
   "EnterSecretKey": "Introducere cheie secretă",
   "EnterUrl": "Introducere adresă URL",
   "EnterWebhookName": "Introducere nume webhook",
-  "EventHint": "Livrările sunt șterse automat după 15 zile",
   "EventID": "ID-ul eveniment",
   "FailedToConnect": "Nu s-a reușit livrarea acestei sarcini: conectare la gazdă a eșuat",
   "From": "De la",

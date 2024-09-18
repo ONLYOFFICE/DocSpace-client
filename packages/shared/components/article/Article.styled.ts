@@ -88,7 +88,6 @@ const StyledArticle = styled.article<{
 
     @media ${mobile} {
       height: 100% !important;
-      margin-top: 32px;
     }
 
     .article-scroller {
@@ -228,22 +227,11 @@ const StyledArticleMainButton = styled.div`
   }
 `;
 
-const StyledControlContainer = styled.div`
-  width: 17px;
-  height: 17px;
-  position: absolute;
-  top: 37px;
-
-  inset-inline-end: 10px;
-  border-radius: 100px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 290;
+const StyledIconContainer = styled.div`
+  margin-left: auto;
 `;
 
-StyledControlContainer.defaultProps = { theme: Base };
+StyledIconContainer.defaultProps = { theme: Base };
 
 const StyledCrossIcon = styled(CrossIcon)`
   width: 17px;
@@ -483,7 +471,7 @@ export {
   StyledIconBox,
   StyledMenuIcon,
   StyledArticleMainButton,
-  StyledControlContainer,
+  StyledIconContainer,
   StyledCrossIcon,
   StyledArticleProfile,
   StyledUserName,

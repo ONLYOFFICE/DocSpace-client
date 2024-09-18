@@ -28,6 +28,7 @@ import OauthRevokeSvgUrl from "PUBLIC_DIR/images/oauth.revoke.svg?url";
 import GenerateIconUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 import RevokeIconUrl from "PUBLIC_DIR/images/revoke.react.svg?url";
 import DeleteIconUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
+import SettingsIconUrl from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
 
 const PAGE_LIMIT = 100;
 

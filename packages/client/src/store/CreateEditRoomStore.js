@@ -108,10 +108,17 @@ class CreateEditRoomStore {
     this.initialWatermarksSettings.isImage =
       !!this.initialWatermarksSettings.imageUrl;
 
+    this.initialWatermarksSettings.image = "";
+
     this.setWatermarks(this.initialWatermarksSettings);
   };
 
-  setWatermarks = (object) => {
+  setWatermarks = (object, isInit) => {
+    if (isInit) {
+      this.watermarksSettings = { ...object };
+      return;
+    }
+
     for (const [key, value] of Object.entries(object)) {
       this.watermarksSettings[key] = value;
     }
@@ -122,11 +129,13 @@ class CreateEditRoomStore {
     this.initialWatermarksSettings = {};
   };
 
-  isEqualWatermarkChanges = () => {
+  get isEqualWatermarkChanges() {
     return isEqual(this.watermarksSettings, this.initialWatermarksSettings);
-  };
+  }
 
-  isNotWatermarkSet = () => {
+  isNotWatermarkSet = (isEdit) => {
+    if (!isEdit && !this.watermarksSettings.enabled) return false;
+
     if (
       this.watermarksSettings.isImage &&
       !this.watermarksSettings.image &&

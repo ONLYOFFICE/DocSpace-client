@@ -278,14 +278,15 @@ class SelectedFolderStore {
     this.changeDocumentsTabs = changeDocumentsTabs;
   };
 
-  updateEditedSelectedRoom = (
-    title = this.title,
-    tags = this.tags,
-    lifetime = this.lifetime,
+  updateEditedSelectedRoom: (selectedFolder: TSetSelectedFolder) => void = (
+    selectedFolder,
   ) => {
-    this.title = title;
-    this.tags = tags;
-    this.lifetime = lifetime;
+    Object.entries(selectedFolder).forEach(([key, item]) => {
+      if (key in this) {
+        // @ts-expect-error its always be good
+        this[key] = item;
+      }
+    });
   };
 
   setInRoom = (inRoom: boolean) => {

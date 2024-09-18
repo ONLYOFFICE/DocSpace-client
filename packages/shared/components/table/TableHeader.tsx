@@ -47,12 +47,6 @@ import {
 } from "./Table.constants";
 import { isDesktop } from "../../utils";
 
-const defaultMinColumnSize = 110;
-const settingsSize = 24;
-
-const minSizeFirstColumn = 75;
-const handleOffset = 8;
-
 class TableHeaderComponent extends React.Component<
   TableHeaderProps,
   { hideColumns: boolean; columnIndex: null | number }

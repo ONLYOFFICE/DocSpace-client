@@ -1551,7 +1551,7 @@ class FilesStore {
 
         if (data.current.indexing || data.current.order) {
           this.indexingStore.setIsIndexing(true);
-        } else if (data.current.rootFolderId !== FolderType.COMMON) {
+        } else {
           this.indexingStore.setIsIndexing(false);
         }
 

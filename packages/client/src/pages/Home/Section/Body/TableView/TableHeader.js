@@ -432,8 +432,6 @@ class FilesTableHeader extends React.Component {
     const sortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
     const sortOrder = isRooms ? roomsFilter.sortOrder : filter.sortOrder;
 
-    const tabChangeCompleted = !(this.state.isRecentTab && changeDocumentsTabs);
-
     if (
       isArchiveFolder !== prevProps.isArchiveFolder ||
       indexColumnSize !== prevProps.indexColumnSize ||
@@ -444,8 +442,8 @@ class FilesTableHeader extends React.Component {
       columnInfoPanelStorageName !== prevProps.columnInfoPanelStorageName ||
       isRecentTab !== this.state.isRecentTab ||
       showStorageInfo !== prevProps.showStorageInfo ||
-      (tabChangeCompleted && sortBy !== this.state.sortBy) ||
-      (tabChangeCompleted && sortOrder !== this.state.sortOrder)
+      (!changeDocumentsTabs && sortBy !== this.state.sortBy) ||
+      (!changeDocumentsTabs && sortOrder !== this.state.sortOrder)
     ) {
       return this.getTableColumns(true);
     }

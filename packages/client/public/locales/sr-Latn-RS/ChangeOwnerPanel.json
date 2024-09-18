@@ -1,4 +1,3 @@
 {
-  "ChangeOwner": "Promeni vlasnika ({{fileName}})",
-  "ChangeOwnerDescription": "Kada se promeni vlasnik, trenutni vlasnik dobija isti nivo pristupa kao i drugi članovi njihove grupe."
+  "ChangeOwner": "Promeni vlasnika ({{fileName}})"
 }

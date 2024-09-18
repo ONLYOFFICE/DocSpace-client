@@ -1,15 +1,11 @@
 {
-  "CodeSubtitle": "Na {{email}} smo poslali 6-mestno kodo. Koda ima omejeno trajanje veljavnosti, vnesite jo čim prej.",
   "CodeTitle": "Koda vam je bila poslana po e-pošti",
   "ErrorInvalidText": "V 10 sekundah boste preusmerjeni na <1>{{productName}}</1>",
-  "ExpiredCode": "Ta koda ni več veljavna. Zahtevajte novo kodo in poskusite znova.",
   "ForgotPassword": "Ste pozabili geslo?",
-  "InvalidCode": "Ta koda je napačna. Poskusite znova.",
   "LDAPUsernamePlaceholder": "Uporabniško ime za {{ldap_domain}} ",
   "MessageAuthorize": "Za nadaljevanje se prijavite",
   "MessageEmailConfirmed": "Vaš e-mail naslov je bil uspešno aktiviran.",
   "MessageSendPasswordRecoveryInstructionsOnEmail": "Prosimo, vnesite e-mail naslov, ki ste ga uporabili za registracijo. Navodila za obnovitev gesla bodo poslana.",
-  "NotFoundCode": "Ne najdete kode? Preverite vašo mapo z «Vsiljeno pošto».",
   "PasswordRecoveryTitle": "Obnova gesla",
   "RecoverAccess": "Obnova dostopa",
   "RecoverContactEmailPlaceholder": "Kontaktni email",
@@ -20,7 +16,6 @@
   "RegisterTitle": "Zahteva za registracijo",
   "RegistrationEmailWatermark": "Email",
   "RememberHelper": "Privzeta življenjska doba seje je 20 minut. Preverite to možnost, če jo želite nastaviti na 1 leto. Če želite nastaviti poljubno vrednost, pojdite v Nastavitve.",
-  "ResendCode": "Ponovno pošlji kodo",
   "SignInLDAP": "Prijavi se v: {{ldap_domain}}",
   "SignInLdapHelper": "Uporabi poverilnice za domeno podjetja",
   "UserIsAlreadyRegistered": "Uporabnik <1>{{email}}</1> je že registriran v tem prostoru {{productName}}. Vnesite svoje geslo ali se vrnite nazaj in nadaljujte z drugim e-mail naslovom."

@@ -73,6 +73,7 @@ const ArticleBodyContent = (props) => {
     campaigns,
     userId,
     isFrame,
+    setIsIndexing,
   } = props;
 
   const location = useLocation();
@@ -186,6 +187,8 @@ const ArticleBodyContent = (props) => {
       const isAccountsClick = folderId === "accounts";
 
       let withTimer = isAccountsClick ? false : !!selectedFolderId;
+
+      setIsIndexing(false);
 
       if (isAccountsClick) clearFiles();
 
@@ -310,6 +313,7 @@ export default inject(
     clientLoadingStore,
     userStore,
     campaignsStore,
+    indexingStore,
   }) => {
     const { clearFiles, setSelection } = filesStore;
     const {
@@ -378,6 +382,7 @@ export default inject(
       currentDeviceType,
       campaigns,
       isFrame,
+      setIsIndexing: indexingStore.setIsIndexing,
     };
   },
 )(withTranslation([])(observer(ArticleBodyContent)));

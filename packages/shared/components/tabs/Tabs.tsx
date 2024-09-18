@@ -122,7 +122,6 @@ const Tabs = (props: TabsProps) => {
   useEffect(() => {
     if (!multiple) setCurrentItem(selectedItemIndex);
 
-    setCurrentItem(items[selectedItemIndex]);
     scrollToTab(selectedItemIndex);
   }, [selectedItemIndex, items, scrollToTab, multiple]);
 

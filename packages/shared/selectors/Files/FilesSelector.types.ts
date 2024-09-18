@@ -26,9 +26,9 @@
 
 import { TSelectorItem } from "../../components/selector";
 import {
+  HeaderProps,
   TBreadCrumb,
   TInfoBar,
-  TSelectorHeader,
 } from "../../components/selector/Selector.types";
 import {
   TFileSecurity,
@@ -144,8 +144,7 @@ export type TSelectedFileInfo = {
 
 export type TGetIcon = (size: number, fileExst: string) => string;
 
-export type FilesSelectorProps = TSelectorHeader &
-  TInfoBar &
+export type FilesSelectorProps = TInfoBar &
   (
     | {
         getIcon: TGetIcon;
@@ -201,6 +200,7 @@ export type FilesSelectorProps = TSelectorHeader &
     ) => boolean;
     setIsDataReady?: (value: boolean) => void;
     withHeader: boolean;
+    headerProps?: HeaderProps;
     headerLabel: string;
     submitButtonLabel: string;
     withCancelButton: boolean;

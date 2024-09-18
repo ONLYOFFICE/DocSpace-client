@@ -33,8 +33,6 @@
   "UserName": "User Name",
   "UserEmail": "User Email",
   "UserIPAddress": "User IP Address",
-  "ViewOnlyRoomDescription": "Share any ready documents, reports, documentation, and other files for viewing.",
-  "ViewOnlyRoomTitle": "View-only room",
   "WatermarkPreview": "Watermark Preview",
   "WatermarkPreviewHelp": "This image preview roughly shows how the watermark will be displayed in your files.",
   "AutomaticIndexing": "Automatic indexing",

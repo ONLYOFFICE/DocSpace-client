@@ -4400,6 +4400,21 @@ class FilesStore {
     }
   };
 
+  updateRoom = (oldRoom, newRoom) => {
+    // After rename of room with providerKey, it's id value changes too
+    if (oldRoom.providerKey) {
+      let index = getFolderIndex(oldRoom.id);
+
+      if (index === -1) {
+        index = getFolderIndex(newRoom.id);
+      }
+
+      return updateFolder(index, newRoom);
+    }
+
+    this.setFolder(newRoom);
+  };
+
   get isFiltered() {
     const { isRoomsFolder, isArchiveFolder } = this.treeFoldersStore;
 

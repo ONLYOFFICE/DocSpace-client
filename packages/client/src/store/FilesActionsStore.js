@@ -90,10 +90,7 @@ import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
-import { ONE_MEGABYTE, COMPRESSION_RATIO, NO_COMPRESSION_RATIO } from "@docspace/shared/constants";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
-import resizeImage from "resize-image";
-
 
 class FilesActionStore {
   settingsStore;
@@ -2909,76 +2906,6 @@ class FilesActionStore {
       .itemOperationToFolder(operationData)
       .catch((error) => toastr.error(error));
   };
-
-  resizeRecursiveAsync = async (
-    img,
-    canvas,
-    compressionRatio = COMPRESSION_RATIO,
-    depth = 0,
-  ) => {
-
-    const data = resizeImage.resize(
-      canvas,
-      img.width / compressionRatio,
-      img.height / compressionRatio,
-      resizeImage.JPEG,
-    );
-
-    const file = await fetch(data)
-      .then((res) => res.blob())
-      .then((blob) => {
-        const f = new File([blob], "File name", {
-          type: "image/jpg",
-        });
-        return f;
-      });
-
-    if (file.size < ONE_MEGABYTE) {
-      return file;
-    }
-
-    if (depth > 5) {
-      throw new Error("recursion depth exceeded");
-    }
-
-    return new Promise((resolve) => {
-      return resolve(file);
-    }).then(() =>
-      this.resizeRecursiveAsync(img, canvas, compressionRatio + 1, depth + 1),
-    );
-  }
-
-  uploadFileToImageEditor = async (t, file) => {
-    try {
-      const imageBitMap = await  createImageBitmap(file);
-
-      const width = imageBitMap.width;
-      const height = imageBitMap.height;
-
-      const canvas = resizeImage.resize2Canvas(imageBitMap, width, height);
-
-      return this.resizeRecursiveAsync(
-        { width, height },
-        canvas,
-        file.size > ONE_MEGABYTE ? COMPRESSION_RATIO : NO_COMPRESSION_RATIO,
-      )
-        .then((f) => {
-          console.log(f);
-          if (f instanceof File) return f;
-        })
-        .catch((error) => {
-          if (
-            error instanceof Error &&
-            error.message === "recursion depth exceeded"
-          ) {
-           toastr.error(t("Common:SizeImageLarge"));
-          }
-        })
-    } 
-    catch (error) {
-     toastr.error(t("Common:NotSupportedFormat"));
-    }
-  }
 }
 
 export default FilesActionStore;

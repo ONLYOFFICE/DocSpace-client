@@ -39,7 +39,6 @@ import ThirdPartyStorage from "./ThirdPartyStorage";
 
 import withLoader from "@docspace/client/src/HOCs/withLoader";
 import SetRoomParamsLoader from "@docspace/shared/skeletons/create-edit-room/SetRoomParams";
-import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
 
 import { ImageEditor } from "@docspace/shared/components/image-editor";
 import PreviewTile from "@docspace/shared/components/image-editor/PreviewTile";
@@ -136,7 +135,9 @@ const SetRoomParams = ({
   selection,
   getLogoCoverModel,
   getInfoPanelItemIcon,
-  uploadFileToImageEditor,
+  uploadFile,
+  avatarEditorDialogVisible,
+  setAvatarEditorDialogVisible,
 }) => {
   const [previewIcon, setPreviewIcon] = useState(null);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
@@ -158,8 +159,7 @@ const SetRoomParams = ({
       : getInfoPanelItemIcon(selection, 96);
 
   const onChangeFile = async (e) => {
-    const file = await getFilesFromEvent(e);
-    const uploadedFile = await uploadFileToImageEditor(t, file[0]);
+    const uploadedFile = await uploadFile(t, e);
 
     setRoomParams({
       ...roomParams,
@@ -212,7 +212,9 @@ const SetRoomParams = ({
       fileExst={selection?.fileExst}
       isRoom={selection?.isRoom}
       title={selection?.title}
-      logo={imageCoverVisible ? currentIcon : previewIcon || currentIcon}
+      logo={
+        avatarEditorDialogVisible ? currentIcon : previewIcon || currentIcon
+      }
       showDefault={
         !previewIcon && !selection?.logo?.cover && !selection?.logo?.large
       }
@@ -351,15 +353,15 @@ const SetRoomParams = ({
           }
         /> */}
 
-        {imageCoverVisible && (
+        {avatarEditorDialogVisible && (
           <AvatarEditorDialog
             t={t}
             isDisabled={isDisabled}
             image={roomParams.icon}
             setPreview={setPreviewIcon}
             onChangeImage={onChangeIcon}
-            onClose={() => setImageCoverVisible(false)}
-            onSave={() => setImageCoverVisible(false)}
+            onClose={() => setAvatarEditorDialogVisible(false)}
+            onSave={() => setAvatarEditorDialogVisible(false)}
             onChangeFile={onChangeFile}
             classNameWrapperImageCropper={"icon-editor"}
             disableImageRescaling={disableImageRescaling}
@@ -379,13 +381,19 @@ export default inject(
     currentQuotaStore,
     filesStore,
     infoPanelStore,
-    filesActionsStore,
+    avatarEditorDialogStore,
   }) => {
     const { isDefaultRoomsQuotaSet } = currentQuotaStore;
     const { folderFormValidation, maxImageUploadSize } = settingsStore;
 
     const { bufferSelection } = filesStore;
     const { getInfoPanelItemIcon, infoPanelSelection } = infoPanelStore;
+
+    const {
+      uploadFile,
+      avatarEditorDialogVisible,
+      setAvatarEditorDialogVisible,
+    } = avatarEditorDialogStore;
 
     const {
       setChangeRoomOwnerIsVisible,
@@ -408,7 +416,9 @@ export default inject(
       selection,
       getInfoPanelItemIcon,
       setCoverSelection,
-      uploadFileToImageEditor: filesActionsStore.uploadFileToImageEditor,
+      uploadFile,
+      avatarEditorDialogVisible,
+      setAvatarEditorDialogVisible,
     };
   },
 )(

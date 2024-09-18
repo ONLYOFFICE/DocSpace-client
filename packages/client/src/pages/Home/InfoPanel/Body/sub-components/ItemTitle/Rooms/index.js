@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
 
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
@@ -35,12 +35,17 @@ import Planet12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/planet.react.svg?url
 import Camera10ReactSvgUrl from "PUBLIC_DIR/images/icons/10/cover.camera.react.svg?url";
 import SearchIconReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
 
+import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
+
+import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { StyledTitle } from "../../../styles/common";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import RoomsContextBtn from "./context-btn";
 import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { toastr } from "@docspace/shared/components/toast";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
+
 import Search from "../../Search";
 
 const RoomsItemHeader = ({
@@ -61,8 +66,21 @@ const RoomsItemHeader = ({
   roomType,
   displayFileExtension,
   getLogoCoverModel,
+  maxImageUploadSize,
+  uploadFile,
+  avatarEditorDialogVisible,
+  setAvatarEditorDialogVisible,
+  onSaveRoomLogo,
+  uploadedFile,
 }) => {
   const itemTitleRef = useRef();
+
+  const [avatar, setAvatar] = useState({
+    uploadedFile,
+    x: 0.5,
+    y: 0.5,
+    zoom: 1,
+  });
 
   if (!selection) return null;
 
@@ -90,6 +108,15 @@ const RoomsItemHeader = ({
   const onSelectItem = () => {
     setSelection([]);
     setBufferSelection(selection);
+  };
+
+  const onChangeIcon = (icon) => {
+    setAvatar(icon);
+  };
+
+  const onChangeFile = async (e) => {
+    const uploadedFile = await uploadFile(t, e);
+    setAvatar({ ...avatar, uploadedFile: uploadedFile });
   };
 
   const onClickInviteUsers = () => {
@@ -129,8 +156,23 @@ const RoomsItemHeader = ({
           badgeUrl={badgeUrl ? badgeUrl : ""}
           hoverSrc={selection.isRoom && Camera10ReactSvgUrl}
           model={model}
+          onChangeFile={onChangeFile}
         />
       </div>
+
+      {avatarEditorDialogVisible && (
+        <AvatarEditorDialog
+          t={t}
+          image={avatar}
+          onChangeImage={onChangeIcon}
+          onClose={() => setAvatarEditorDialogVisible(false)}
+          onSave={() => onSaveRoomLogo(selection.id, avatar, selection, true)}
+          onChangeFile={onChangeFile}
+          classNameWrapperImageCropper={"icon-editor"}
+          visible={avatar.uploadedFile}
+          maxImageSize={maxImageUploadSize}
+        />
+      )}
 
       <Text className="text" title={title} dir="auto">
         {title}
@@ -181,6 +223,8 @@ export default inject(
     filesStore,
     infoPanelStore,
     filesSettingsStore,
+    settingsStore,
+    avatarEditorDialogStore,
   }) => {
     const {
       infoPanelSelection,
@@ -188,6 +232,7 @@ export default inject(
       setIsMobileHidden,
       showSearchBlock,
       setShowSearchBlock,
+      updateInfoPanelSelection,
     } = infoPanelStore;
 
     const { displayFileExtension } = filesSettingsStore;
@@ -195,6 +240,14 @@ export default inject(
 
     const selection = infoPanelSelection.length > 1 ? null : infoPanelSelection;
     const isArchive = selection?.rootFolderType === FolderType.Archive;
+
+    const {
+      uploadFile,
+      avatarEditorDialogVisible,
+      setAvatarEditorDialogVisible,
+      onSaveRoomLogo,
+      uploadedFile,
+    } = avatarEditorDialogStore;
 
     setCoverSelection(selection);
     const roomType =
@@ -222,6 +275,13 @@ export default inject(
       roomType,
 
       displayFileExtension,
+      maxImageUploadSize: settingsStore.maxImageUploadSize,
+      updateInfoPanelSelection,
+      uploadFile,
+      avatarEditorDialogVisible,
+      setAvatarEditorDialogVisible,
+      onSaveRoomLogo,
+      uploadedFile,
     };
   },
 )(

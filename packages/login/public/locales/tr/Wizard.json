@@ -1,8 +1,6 @@
 {
   "Desc": "Lütfen {{productName}} kayıt verilerini ayarlayın.",
   "ErrorEmail": "Geçersiz e-posta adresi",
-  "ErrorInitWizard": "Bu hizmet şu anda kullanılamamaktadır, lütfen daha sonra tekrar deneyin.",
-  "ErrorInitWizardButton": "Tekrar dene",
   "ErrorLicenseBody": "Lisans geçerli değil. Doğru dosyayı seçtiğinizden emin olun.",
   "ErrorPassword": "Şifre gereksinimleri karşılamıyor",
   "ErrorUploadLicenseFile": "Lisans dosyası seçin",

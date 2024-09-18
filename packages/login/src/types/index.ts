@@ -162,12 +162,6 @@ export interface ConfirmRouteProps {
   confirmLinkParams: TConfirmLinkParams;
 }
 
-export type GreetingContainersProps = {
-  greetingSettings?: string;
-  culture?: string;
-  welcomeTitle?: string;
-};
-
 export type GreetingCreateUserContainerProps = {
   type: string;
   firstName?: string;

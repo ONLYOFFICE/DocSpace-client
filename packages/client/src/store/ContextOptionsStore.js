@@ -541,8 +541,8 @@ class ContextOptionsStore {
   // };
 
   onClickDownload = (item, t) => {
-    const { fileExst, contentLength, viewUrl } = item;
-    const isFile = !!fileExst && contentLength;
+    const { viewUrl, isFolder } = item;
+    const isFile = !isFolder;
 
     const { openUrl } = this.settingsStore;
     const { downloadAction } = this.filesActionsStore;

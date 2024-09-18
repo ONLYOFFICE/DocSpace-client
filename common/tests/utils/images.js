@@ -21,7 +21,9 @@ const findImagesIntoFiles = (fileList, imageList) => {
     if (
       i.path.indexOf("flags") > -1 ||
       i.path.indexOf("thirdparties") > -1 ||
-      i.path.indexOf("notifications") > -1
+      i.path.indexOf("notifications") > -1 ||
+      i.path.indexOf("errors") > -1 ||
+      i.path.indexOf("folder") > -1
     )
       return usedImages.push(i.fileName);
 

@@ -24,31 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { FormWrapper } from "@docspace/shared/components/form-wrapper";
+"use client";
 
-import { GreetingContainer } from "@/components/GreetingContainer";
-import { getCompanyInfoSettings, getSettings } from "@/utils/actions";
+import { useTranslation } from "react-i18next";
+import { GreetingContainer } from "../GreetingContainer";
 
-import DeactivatePortalForm from "./page.client";
-
-async function Page() {
-  const [settings, companyInfoSettings] = await Promise.all([
-    getSettings(),
-    getCompanyInfoSettings(),
-  ]);
+const WizardGreeting = () => {
+  const { t } = useTranslation(["Wizard", "Common"]);
 
   return (
-    <>
-      {settings && typeof settings !== "string" && (
-        <>
-          <GreetingContainer greetingText={settings?.greetingSettings} />
-          <FormWrapper id="portal-suspend-form">
-            <DeactivatePortalForm siteUrl={companyInfoSettings.site} />
-          </FormWrapper>
-        </>
-      )}
-    </>
+    <GreetingContainer
+      greetingText={t("Wizard:WelcomeTitle", {
+        productName: t("Common:ProductName"),
+      })}
+    />
   );
-}
+};
 
-export default Page;
+export default WizardGreeting;

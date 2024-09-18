@@ -9,7 +9,6 @@
   "Activate": "ເປີດໃຊ້",
   "Active": "ການເຄື່ອນໄຫວ",
   "AddButton": "ບັນທຶກ",
-  "AdditionalLinkRemove": "ລຶບລິ້ງເພີ່ມເຕີມອອກ",
   "Address": "ທີ່ຢູ່",
   "AddUsers": "ເພີ່ມຜູ້ໃຊ້",
   "AdvancedFilter": "ຕົວເລືອກການຊອກຫາ",
@@ -112,6 +111,7 @@
   "DayOfTheMonth": "ມື້ຂອງເດືອນ",
   "DayOfTheWeek": "ມື້ຂອງອາທິດ",
   "Days": "ມື້",
+  "Deactivate": "ປິດໃຊ້ງານ",
   "DefaultQuota": "ໂຄຕ້າເລີ່ມຕົ້ນ",
   "Delete": "ລົບ",
   "DenyAccess": "ປະຕິເສດການເຂົ້າເຖິງ",
@@ -140,8 +140,6 @@
   "EmptyEmail": "ບໍ່ແບ່ງແຍກອີເມວ",
   "EmptyFieldError": "ຊ່ອງວ່າງ",
   "EmptyFilterDescriptionText": "ບໍ່ມີໄຟລ໌ ຫລື ແຟ້ມໃດທີ່ກົງກັບຕົວກອງນີ້. ລອງໃຊ້ຕົວກັ່ນຕອງອື່ນ ຫຼື ລຶບລ້າງຂໍ້ມູນເພື່ອເບິ່ງເອກະສານທັງໝົດ.",
-  "EmptyGroupsDescription": "ກະລຸນາສ້າງກຸ່ມທໍາອິດ.",
-  "EmptyGroupsHeader": "ບໍ່ມີກຸ່ມຢູ່ທີ່ນີ້ເທື່ອ",
   "EmptyHeader": "ບໍ່ມີບັນຊີອື່ນຢູ່ບ່ອນນີ້ເທື່ອ",
   "EmptyRoomsDescription": "ກະລຸນາສ້າງຫ້ອງທໍາອິດໃນຫ້ອງຂອງຂ້ອຍ.",
   "EmptyRoomsHeader": "ບໍ່ມີຫ້ອງຢູ່ທີ່ນີ້ເທື່ອ",
@@ -373,6 +371,5 @@
   "WantToContinue": "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການສືບຕໍ່?",
   "Warning": "ແຈ້ງເຕືອນ",
   "Website": "ເວັບໄຊທ໌",
-  "Yesterday": "ມື້ວານນີ້",
-  "Deactivate": "ປິດໃຊ້ງານ"
+  "Yesterday": "ມື້ວານນີ້"
 }

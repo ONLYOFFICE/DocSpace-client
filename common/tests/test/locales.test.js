@@ -427,7 +427,7 @@ describe("Locales Tests", () => {
   });
 
   test("WrongTranslationVariablesTest: Verify that translation keys across different languages have consistent variables.", () => {
-    const message = `Next keys have wrong or empty variables:\r\n\r\n`;
+    let message = `Next keys have wrong or empty variables:\r\n\r\n`;
     const regVariables = new RegExp("\\{\\{([^\\{].?[^\\}]+)\\}\\}", "gm");
 
     const groupedByLng = translationFiles.reduce((acc, t) => {
@@ -463,13 +463,10 @@ describe("Locales Tests", () => {
     enWithVariables.forEach((enKeyWithVariables) => {
       otherLanguagesWithVariables.forEach((lng) => {
         const lngKey = lng.translationsWithVariables.find(
-          (t) => t.key === enKeyWithVariables.Key
+          (t) => t.key === enKeyWithVariables.key
         );
 
         if (!lngKey) {
-          // wrong
-          // message += `${++i}. lng='${lng.Language}' key='${enKeyWithVariables.Key}' not found\r\n\r\n`;
-          // errorsCount++;
           return;
         }
 
@@ -501,7 +498,7 @@ describe("Locales Tests", () => {
   });
 
   test("WrongTranslationTagsTest: Verify that HTML tags within translation strings are consistent across different languages.", () => {
-    const message = `Next keys have wrong or empty translation's html tags:\r\n\r\n`;
+    let message = `Next keys have wrong or empty translation's html tags:\r\n\r\n`;
     const regString = "<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>";
     const regTags = new RegExp(regString, "gm");
 
@@ -540,9 +537,6 @@ describe("Locales Tests", () => {
         );
 
         if (!lngKey) {
-          // wrong
-          // message += `${++i}. lng='${lng.Language}' key='${enKeyWithTags.Key}' not found\r\n\r\n`;
-          // errorsCount++;
           return;
         }
 

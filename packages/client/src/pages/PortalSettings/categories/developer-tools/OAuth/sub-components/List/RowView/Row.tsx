@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { Row } from "@docspace/shared/components/row";
+import { toastr } from "@docspace/shared/components/toast";
 
 import { RowContent } from "./RowContent";
 import { RowProps } from "./RowView.types";
@@ -26,7 +27,17 @@ export const OAuthRow = (props: RowProps) => {
 
   const handleToggleEnabled = async () => {
     if (!changeClientStatus) return;
-    await changeClientStatus(item.clientId, !item.enabled);
+    try {
+      await changeClientStatus(item.clientId, !item.enabled);
+
+      if (!item.enabled) {
+        toastr.success(t("ApplicationEnabledSuccessfully"));
+      } else {
+        toastr.success(t("ApplicationDisabledSuccessfully"));
+      }
+    } catch (e) {
+      toastr.error(e as string);
+    }
   };
 
   const handleRowClick = (e: React.MouseEvent) => {

@@ -268,6 +268,7 @@ export const getOptions = (
     title: t("EmptyView:MigrationDataTitle"),
     description: t("EmptyView:MigrationDataDescription", {
       productName: t("Common:ProductName"),
+      organizationName: t("Common:OrganizationName"),
     }),
     icon: <InviteUserFormIcon />,
     key: "migration-data",

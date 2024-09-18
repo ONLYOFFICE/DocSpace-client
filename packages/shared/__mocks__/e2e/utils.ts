@@ -11,3 +11,8 @@ export const HEADER_TRAFF_LIMIT = "x-test-data-traff-limit";
 export const HEADER_USER_EXISTED = "x-test-data-user-existed";
 export const HEADER_USER_EXCLUDED = "x-test-data-user-excluded";
 export const HEADER_QUOTA_FAILED = "x-test-data-quota-failed";
+
+export const HEADER_LIST_CAPABILITIES = "x-test-list-capabilities";
+
+export const HEADER_LIST_THIRD_PARTY_PROVIDERS =
+  "x-test-list-third-party-providers";

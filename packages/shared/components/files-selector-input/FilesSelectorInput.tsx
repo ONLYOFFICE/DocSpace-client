@@ -75,6 +75,7 @@ const FilesSelectorInput = ({
   isDocumentIcon,
   socketHelper,
   currentDeviceType,
+  setBackupToPublicRoomVisible,
   ...other
 }: FilesSelectorInputProps) => {
   const { t } = useTranslation("Common");
@@ -158,13 +159,13 @@ const FilesSelectorInput = ({
     selectedFileInfo,
   ) => {
     if (isRoomBackup && isPublic) {
-      // setBackupToPublicRoomVisible(true, {
-      //   selectedItemId,
-      //   breadCrumbs,
-      //   onSelectFolder,
-      //   onClose,
-      // });
-      return onClose();
+      return setBackupToPublicRoomVisible?.(true, {
+        selectedItemId,
+        breadCrumbs,
+        onSelectFolder,
+        onClose,
+      });
+      // return onClose();
     }
 
     if (isFilesSelection && selectedFileInfo) {

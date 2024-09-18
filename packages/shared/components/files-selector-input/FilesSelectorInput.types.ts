@@ -29,6 +29,7 @@ import type { TGetIcon } from "@docspace/shared/selectors/Files/FilesSelector.ty
 import type { TFilesSettings } from "@docspace/shared/api/files/types";
 import type SocketIOHelper from "@docspace/shared/utils/socket";
 import type { DeviceType } from "@docspace/shared/enums";
+import type { Nullable } from "@docspace/shared/types";
 
 export type FileInfoType = {
   id: string | number;
@@ -78,6 +79,19 @@ export type FilesSelectorInputProps = FilesSelectorSettings & {
   onSelectFile?: (fileInfo: FileInfoType, breadCrumbs?: TBreadCrumb[]) => void;
 
   setNewPath: (folders: TBreadCrumb[], fileName?: string) => void;
+
+  setBackupToPublicRoomVisible?: (
+    visible: boolean,
+    options?: Nullable<{
+      breadCrumbs: TBreadCrumb[];
+      selectedItemId: number | string | undefined;
+      onClose: VoidFunction;
+      onSelectFolder: (
+        folderId: number | string | undefined,
+        breadCrumbs: TBreadCrumb[],
+      ) => void;
+    }>,
+  ) => void;
 };
 
 export type StyledBodyWrapperProps = {

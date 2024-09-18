@@ -30,6 +30,7 @@ import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.
 export interface InjectedFilesSelectorInputWrapperProps
   extends Pick<TStore["settingsStore"], "socketHelper" | "currentDeviceType">,
     Pick<TStore["filesSettingsStore"], "filesSettings" | "getIcon">,
+    Pick<TStore["dialogsStore"], "setBackupToPublicRoomVisible">,
     Pick<
       TStore["filesSelectorInput"],
       | "basePath"

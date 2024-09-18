@@ -40,12 +40,13 @@ export default inject<
   TStore,
   ExternalFilesSelectorInputWrapperProps,
   InjectedFilesSelectorInputWrapperProps
->(({ filesSelectorInput, settingsStore, filesSettingsStore }) => {
+>(({ filesSelectorInput, settingsStore, filesSettingsStore, dialogsStore }) => {
   const { basePath, newPath, setNewPath, setBasePath, toDefault, isErrorPath } =
     filesSelectorInput;
 
   const { socketHelper, currentDeviceType } = settingsStore;
   const { getIcon, filesSettings } = filesSettingsStore;
+  const { setBackupToPublicRoomVisible } = dialogsStore;
 
   return {
     newPath,
@@ -60,6 +61,7 @@ export default inject<
 
     getIcon,
     filesSettings,
+    setBackupToPublicRoomVisible,
   };
 })(
   observer(

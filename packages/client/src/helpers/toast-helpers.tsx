@@ -29,9 +29,10 @@ import { TFunction } from "i18next";
 import { Link, LinkTarget } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
+import { TTranslation } from "@docspace/shared/types";
 
 export const showSuccessExportRoomIndexToast = (
-  t: TFunction,
+  t: TTranslation,
   fileName: string,
   fileUrl: string,
   openOnNewPage: boolean,
@@ -48,7 +49,7 @@ export const showSuccessExportRoomIndexToast = (
       </Link>
       &nbsp;
       <Text as="span" fontSize="12px">
-        {t<string>("Files:FileExportedToMyDocuments")}
+        {t("Files:FileExportedToMyDocuments")}
       </Text>
     </>
   );

@@ -2986,9 +2986,13 @@ class FilesActionStore {
   };
 
   reorder = async (id, t) => {
+    const { setIsIndexEditingMode } = this.indexingStore;
+
     try {
       const operationId = uniqueid("operation_");
       await reorder(id);
+      toastr.success(t("Common:SuccessfullyCompletedOperation"));
+      setIsIndexEditingMode(false);
       this.updateCurrentFolder(null, [id], true, operationId);
     } catch (e) {
       toastr.error(t("Files:ErrorChangeIndex"));

@@ -225,7 +225,6 @@ const SectionHeaderContent = (props) => {
     onCreateAndCopySharedLink,
     showNavigationButton,
     startUpload,
-    reorder,
     getFolderModel,
     onCreateRoom,
     onEmptyTrashAction,
@@ -392,6 +391,14 @@ const SectionHeaderContent = (props) => {
     onCreateAndCopySharedLink(selectedFolder, t);
   };
 
+  const onCloseIndexMenu = () => {
+    setIsIndexEditingMode(false);
+  };
+
+  const onIndexReorder = () => {
+    setReorderDialogVisible(true);
+  };
+
   const headerMenu = isAccountsPage
     ? getAccountsHeaderMenu(t, isGroupsPage)
     : getHeaderMenu(t);
@@ -409,9 +416,9 @@ const SectionHeaderContent = (props) => {
   };
 
   const indexMenuProps = {
-    setIsIndexEditingMode,
     t,
-    setReorderDialogVisible,
+    onCloseIndexMenu,
+    onIndexReorder,
   };
 
   if (isAccountsPage && !(isGroupsPage && isRoomAdmin)) {
@@ -681,7 +688,6 @@ export default inject(
       moveToRoomsPage,
       onClickBack,
       moveToPublicRoom,
-      reorder,
       createFoldersTree,
     } = filesActionsStore;
 
@@ -847,7 +853,6 @@ export default inject(
       onCreateAndCopySharedLink,
       showNavigationButton,
       startUpload,
-      reorder,
       getFolderModel,
       onCreateRoom,
       onEmptyTrashAction,

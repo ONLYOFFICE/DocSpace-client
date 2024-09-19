@@ -56,7 +56,7 @@ import {
   getFolder,
   deleteFilesFromRecent,
   changeIndex,
-  reorder,
+  reorderIndex,
 } from "@docspace/shared/api/files";
 import {
   ConflictResolveType,
@@ -182,7 +182,7 @@ class FilesActionStore {
       fetchRooms,
       filter,
       roomsFilter,
-
+      scrollToTop,
       isEmptyLastPageAfterOperation,
       resetFilterPage,
     } = this.filesStore;
@@ -219,6 +219,7 @@ class FilesActionStore {
         undefined,
         true,
       ).finally(() => {
+        scrollToTop();
         this.dialogsStore.setIsFolderActions(false);
         return setTimeout(
           () => clearSecondaryProgressData(operationId),
@@ -233,6 +234,7 @@ class FilesActionStore {
         true,
         clearSelection,
       ).finally(() => {
+        scrollToTop();
         this.dialogsStore.setIsFolderActions(false);
         return setTimeout(
           () => clearSecondaryProgressData(operationId),
@@ -2929,6 +2931,30 @@ class FilesActionStore {
       .itemOperationToFolder(operationData)
       .catch((error) => toastr.error(error));
   };
+
+  setOrder = (currentItem, replaceableItem, newFiles, newFolders) => {
+    if (currentItem.isFolder) {
+      const fldIndex = newFolders.findIndex((f) => f.id === currentItem.id);
+      newFolders[fldIndex].order = replaceableItem.order;
+    } else {
+      const fileIndex = newFiles.findIndex((f) => f.id === currentItem.id);
+      newFiles[fileIndex].order = replaceableItem.order;
+    }
+  };
+
+  setFilesOrder = (currentItem, replaceableItem) => {
+    const { files, folders, setFiles, setFolders } = this.filesStore;
+
+    const newFiles = [...files];
+    const newFolders = [...folders];
+
+    this.setOrder(currentItem, replaceableItem, newFiles, newFolders);
+    this.setOrder(replaceableItem, currentItem, newFiles, newFolders);
+
+    setFiles(newFiles);
+    setFolders(newFolders);
+  };
+
   changeIndex = async (action, item, t) => {
     const { filesList } = this.filesStore;
 
@@ -2949,7 +2975,6 @@ class FilesActionStore {
       ? this.filesStore.selection
       : [bufferSelection];
 
-    const { id } = this.selectedFolderStore;
     const { setUpdateItems } = this.indexingStore;
 
     let replaceable;
@@ -2975,22 +3000,21 @@ class FilesActionStore {
     try {
       await changeIndex(current?.id, replaceable.order, current?.isFolder);
 
+      this.setFilesOrder(current, replaceable);
+
       const items = [current, replaceable];
       setUpdateItems(items);
-
-      const operationId = uniqueid("operation_");
-      this.updateCurrentFolder(null, [id], true, operationId);
     } catch (e) {
       toastr.error(t("Files:ErrorChangeIndex"));
     }
   };
 
-  reorder = async (id, t) => {
+  reorderIndexOfFiles = async (id, t) => {
     const { setIsIndexEditingMode } = this.indexingStore;
 
     try {
       const operationId = uniqueid("operation_");
-      await reorder(id);
+      await reorderIndex(id);
       toastr.success(t("Common:SuccessfullyCompletedOperation"));
       setIsIndexEditingMode(false);
       this.updateCurrentFolder(null, [id], true, operationId);

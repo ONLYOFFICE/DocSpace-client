@@ -105,6 +105,9 @@ const {
   highlandGray,
 
   blurDark,
+  darkGreyAction,
+  darkActive,
+  darkGreyHover,
 } = globalColors;
 
 const Dark: TTheme = {
@@ -2048,6 +2051,11 @@ const Dark: TTheme = {
         contextMenuWrapperDraggingHover: `linear-gradient(to left, ${dndDarkHover} 24px, ${grayDarkStrong} 24px)`,
 
         backgroundActive: lightDarkGrayHover,
+
+        indexBackgroundButtonHover: darkGreyHover,
+        indexUpdate: darkActive,
+        indexActive: darkGreyAction,
+        indexArrowButtonHover: white,
 
         borderImageCheckbox: `linear-gradient(to right, ${grayDarkStrong} 24px, ${grayDarkStrong} 24px)`,
         borderImageContextMenu: `linear-gradient(to left, ${grayDarkStrong} 24px, ${grayDarkStrong} 24px)`,

@@ -109,6 +109,9 @@ const {
   highlandGray,
 
   blurLight,
+  lightBlueAction,
+  lightActive,
+  lightBlueHover,
 } = globalColors;
 
 export const getBaseTheme = () => {
@@ -2060,11 +2063,11 @@ export const getBaseTheme = () => {
           contextMenuWrapperDraggingHover: `linear-gradient(to left, ${dndHoverColor} 24px,${grayLightMid} 24px)`,
 
           backgroundActive: lightGrayHover,
-          indexUpdate: `#F2F6FC`,
-          indexActive: `#E4ECF8`,
+          indexUpdate: lightActive,
+          indexActive: lightBlueAction,
 
-          indexBackgroundButtonHover: `#BED3EF`,
-          indexArrowButtonHover: `#4781D1`,
+          indexBackgroundButtonHover: lightBlueHover,
+          indexArrowButtonHover: lightBlueMain,
 
           borderImageCheckbox: `linear-gradient(to right, ${white} 24px, ${grayLightMid} 24px)`,
           borderImageContextMenu: `linear-gradient(to left, ${white} 24px, ${grayLightMid} 24px)`,

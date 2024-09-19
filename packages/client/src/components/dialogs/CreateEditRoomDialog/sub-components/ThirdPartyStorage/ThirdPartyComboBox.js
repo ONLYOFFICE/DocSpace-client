@@ -39,7 +39,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { ComboBox } from "@docspace/shared/components/combobox";
 
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
-import { ThirdPartyServicesUrlName } from "../../../../../helpers/constants";
+import { ThirdPartyServicesUrlName } from "@docspace/shared/constants";
 import { isDesktop } from "@docspace/shared/utils";
 
 const StyledStorageLocation = styled.div`

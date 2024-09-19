@@ -169,14 +169,3 @@ export const SortByFieldName = Object.freeze({
   LastOpened: "LastOpened",
   UsedSpace: "usedspace",
 });
-
-export const ThirdPartyServicesUrlName = Object.freeze({
-  GoogleDrive: "google",
-  Box: "box",
-  Dropbox: "dropbox",
-  OneDrive: "skydrive",
-  Nextcloud: "nextcloud",
-  kDrive: "kdrive",
-  ownCloud: "owncloud",
-  WebDav: "webdav",
-});

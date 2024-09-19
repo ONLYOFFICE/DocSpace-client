@@ -1,5 +1,4 @@
-import styled from "styled-components";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
 import { Text } from "@docspace/shared/components/text";
@@ -13,24 +12,7 @@ import TableView from "./TableView";
 import RowView from "./RowView";
 
 import RegisterNewButton from "../RegisterNewButton";
-
-export const StyledContainer = styled.div`
-  width: 100%;
-
-  display: flex;
-  flex-direction: column;
-
-  .description {
-    margin-bottom: 20px;
-    max-width: 700px;
-  }
-
-  .add-button {
-    width: fit-content;
-
-    margin-bottom: 12px;
-  }
-`;
+import { StyledContainer } from "./List.styled";
 
 interface ListProps {
   clients: IClientProps[];
@@ -41,16 +23,27 @@ interface ListProps {
 const List = ({ clients, viewAs, currentDeviceType }: ListProps) => {
   const { t } = useTranslation(["OAuth", "Common"]);
 
+  const descText = (
+    <Trans
+      ns="OAuth"
+      t={t}
+      i18nKey="OAuthAppDescription"
+      values={{
+        productName: t("Common:ProductName"),
+        organizationName: t("Common:OrganizationName"),
+      }}
+    />
+  );
+
   return (
     <StyledContainer>
       <Text
         fontSize="12px"
         fontWeight={400}
         lineHeight="16px"
-        title={t("OAuthAppDescription")}
         className="description"
       >
-        {t("OAuthAppDescription")}
+        {descText}
       </Text>
       <RegisterNewButton currentDeviceType={currentDeviceType} />
       <Consumer>

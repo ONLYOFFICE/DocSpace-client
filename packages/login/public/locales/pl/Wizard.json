@@ -1,8 +1,6 @@
 {
   "Desc": "Skonfiguruj dane rejestracyjne {{productName}}.",
   "ErrorEmail": "Nieprawidłowy adres e-mail",
-  "ErrorInitWizard": "Dana usługa jest w tej chwili niedostępna, spróbuj ponownie później.",
-  "ErrorInitWizardButton": "Spróbuj ponownie",
   "ErrorLicenseBody": "Licencja jest nieważna. Upewnij się, że wybrano właściwy plik.",
   "ErrorPassword": "Hasło nie spełnia wymogów",
   "ErrorUploadLicenseFile": "Wybierz plik licencyjny",

@@ -11,7 +11,6 @@
   "EnterSecretKey": "Enter secret key",
   "EnterUrl": "Enter URL",
   "EnterWebhookName": "Enter webhook name",
-  "EventHint": "Deliveries are automatically deleted after 15 days",
   "EventID": "Event ID",
   "FailedToConnect": "We couldn’t deliver this payload: failed to connect to host",
   "From": "From",

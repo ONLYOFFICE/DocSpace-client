@@ -78,6 +78,7 @@ import { RegisterContainer } from "@/components/RegisterContainer.styled";
 import EmailInputForm from "./_sub-components/EmailInputForm";
 import RegistrationForm from "./_sub-components/RegistrationForm";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { globalColors } from "@docspace/shared/themes";
 
 export type CreateUserFormProps = {
   userNameRegex: string;
@@ -530,7 +531,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       {!emailFromLink && (oauthDataExists() || ssoExists()) && (
         <>
           <div className="line">
-            <Text color="#A3A9AE" className="or-label">
+            <Text color={globalColors.gray} className="or-label">
               {t("Common:orContinueWith")}
             </Text>
           </div>

@@ -26,7 +26,7 @@
 
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -72,7 +72,7 @@ const AuthHandler = () => {
 
         const redirectUrl = getCookie("x-redirect-authorization-uri");
 
-        deleteCookie("x-redirect-authorization-uri");
+        // deleteCookie("x-redirect-authorization-uri");
 
         if (redirectUrl) {
           window.location.replace(redirectUrl);

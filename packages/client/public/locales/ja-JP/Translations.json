@@ -27,7 +27,6 @@
   "Other": "その他",
   "OwnerChange": "オーナー変更",
   "Presentations": "プレゼンテーション",
-  "PublicRoomLinkValidTime": "このリンクは{{date}}まで有効です。有効期限が切れると、このリンクから部屋にアクセスすることはできなくなります。",
   "RoleCommentator": "コメンテーター",
   "RoleCommentatorDescription": "既存ファイルに対する操作：閲覧、コメント。",
   "RoleEditorDescription": "既存ファイルに対する操作：閲覧、編集、フォームへの記入、レビュー、コメント。",

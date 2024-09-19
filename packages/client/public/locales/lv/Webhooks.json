@@ -11,7 +11,6 @@
   "EnterSecretKey": "Ievadiet slepeno atslēgu",
   "EnterUrl": "Ievadiet vietrādi URL",
   "EnterWebhookName": "Ievadiet tīmekļa aizķeres nosaukumu",
-  "EventHint": "Piegādes tiek automātiski izdzēstas pēc 15 dienām",
   "EventID": "Pasākuma ID",
   "FailedToConnect": "Mēs nevarējām piegādāt šo lietderīgo slodzi: neizdevās izveidot savienojumu ar saimnieku",
   "From": "No",

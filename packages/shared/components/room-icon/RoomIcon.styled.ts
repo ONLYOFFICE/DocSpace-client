@@ -1,6 +1,6 @@
 import hexRgb from "hex-rgb";
 import styled, { css } from "styled-components";
-import { Base } from "../../themes";
+import { Base, globalColors } from "../../themes";
 
 const COVER_DEFAULT_SIZE = 20;
 
@@ -86,7 +86,9 @@ const StyledIcon = styled.div<{
     opacity: 1;
     transform: translateY(0);
     color: ${(props) =>
-      props.wrongImage && props.theme.isBase ? "#333333" : "#ffffff"};
+      props.wrongImage && props.theme.isBase
+        ? globalColors.black
+        : globalColors.white};
     position: relative;
     ${(props) =>
       !props.theme.isBase &&

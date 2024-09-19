@@ -33,19 +33,19 @@ import { Text } from "@docspace/shared/components/text";
 import { RowContent } from "@docspace/shared/components/row-content";
 
 import { EmailInput } from "@docspace/shared/components/email-input";
-import { Button } from "@docspace/shared/components/button";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import { InputType } from "@docspace/shared/components/text-input";
 
 import { isMobile } from "@docspace/shared/utils";
 
 import EditSvg from "PUBLIC_DIR/images/access.edit.react.svg";
-import CrossSvg from "PUBLIC_DIR/images/cross.edit.react.svg";
-import CheckSvg from "PUBLIC_DIR/images/check.edit.react.svg";
+import CrossSvgUrl from "PUBLIC_DIR/images/cross.edit.react.svg?url";
+import CheckSvgUrl from "PUBLIC_DIR/images/check.edit.react.svg?url";
 
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 
 import EmailChangeDialog from "SRC_DIR/components/dialogs/EmailChangeDialog";
+import { IconButton } from "@docspace/shared/components/icon-button";
 import {
   AddEmailRowContentProps,
   InjectedAddEmailRowContentProps,
@@ -55,17 +55,6 @@ const EmailInputWrapper = styled.div`
   display: flex;
   gap: 8px;
 `;
-
-const DecisionButton = styled(Button)`
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  path {
-    fill: ${(props) => props.theme.client.settings.migration.tableHeaderText};
-  }
-`;
-
-DecisionButton.defaultProps = { theme: Base };
 
 const StyledRowContent = styled(RowContent)`
   display: flex;
@@ -224,12 +213,22 @@ const UsersRowContent = (props: AddEmailRowContentProps) => {
               isAutoFocussed
             />
 
-            <DecisionButton
-              label=""
-              icon={<CheckSvg />}
+            <IconButton
+              className="import-check-container-button"
+              size={32}
               onClick={handleSaveClick}
+              iconName={CheckSvgUrl}
+              isFill={true}
+              isClickable={true}
             />
-            <DecisionButton label="" icon={<CrossSvg />} onClick={clearEmail} />
+            <IconButton
+              className="import-clear-container-button"
+              size={32}
+              onClick={clearEmail}
+              iconName={CrossSvgUrl}
+              isFill={true}
+              isClickable={true}
+            />
           </EmailInputWrapper>
         )
       ) : (

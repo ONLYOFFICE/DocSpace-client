@@ -30,6 +30,7 @@ import { Text } from "@docspace/shared/components/text";
 import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { globalColors } from "@docspace/shared/themes";
 
 const PaidQuotaLimitError = ({
   isRoomAdmin,
@@ -59,7 +60,11 @@ const PaidQuotaLimitError = ({
     <>
       <Text>{t("Common:QuotaPaidUserLimitError")}</Text>
       {!isRoomAdmin && (
-        <Link color="#5387AD" isHovered={true} onClick={onClickPayments}>
+        <Link
+          color={globalColors.link}
+          isHovered={true}
+          onClick={onClickPayments}
+        >
           {t("Common:PaymentsTitle")}
         </Link>
       )}

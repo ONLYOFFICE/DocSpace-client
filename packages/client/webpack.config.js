@@ -81,7 +81,7 @@ const config = {
       },
       progress: true,
     },
-    port: 5001,
+    port: process.env.PORT ?? 5001,
     historyApiFallback: {
       // Paths with dots should still use the history fallback.
       // See https://github.com/facebook/create-react-app/issues/387.

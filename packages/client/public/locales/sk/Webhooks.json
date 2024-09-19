@@ -11,7 +11,6 @@
   "EnterSecretKey": "Zadajte tajný kľúč",
   "EnterUrl": "Zadajte adresu URL",
   "EnterWebhookName": "Zadajte názov webhooku",
-  "EventHint": "Doručenia sa automaticky vymažú po 15 dňoch",
   "EventID": "Identifikátor udalosti",
   "FailedToConnect": "Tento dátový obsah sa nám nepodarilo doručiť: nepodarilo sa pripojiť k hostu",
   "From": "Od",

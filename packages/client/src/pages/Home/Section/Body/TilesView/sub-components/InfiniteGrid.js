@@ -88,6 +88,7 @@ const InfiniteGrid = (props) => {
     filesLength,
     className,
     getCountTilesInRow,
+    currentFolderId,
     ...rest
   } = props;
 
@@ -219,6 +220,7 @@ const InfiniteGrid = (props) => {
       itemCount={hasMoreFiles ? list.length + 1 : list.length}
       loadMoreItems={fetchMoreFiles}
       className={`TileList ${className}`}
+      currentFolderId={currentFolderId}
       {...rest}
     >
       {list}
@@ -227,7 +229,12 @@ const InfiniteGrid = (props) => {
 };
 
 export default inject(
-  ({ filesStore, treeFoldersStore, clientLoadingStore }) => {
+  ({
+    filesStore,
+    treeFoldersStore,
+    clientLoadingStore,
+    selectedFolderStore,
+  }) => {
     const {
       filesList,
       hasMoreFiles,
@@ -243,6 +250,8 @@ export default inject(
     const filesLength = filesList.length;
     const isRooms = isRoomsFolder || isArchiveFolder;
 
+    const currentFolderId = selectedFolderStore.id;
+
     return {
       filesList,
       hasMoreFiles,
@@ -251,6 +260,7 @@ export default inject(
       filesLength,
       getCountTilesInRow,
       isLoading,
+      currentFolderId,
     };
   },
 )(observer(InfiniteGrid));

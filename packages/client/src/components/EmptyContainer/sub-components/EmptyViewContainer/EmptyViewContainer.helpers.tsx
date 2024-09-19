@@ -25,7 +25,7 @@ import DocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?
 import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
 import PresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.react.svg?url";
 import FormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
-import FolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
+import FolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 
 import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
@@ -268,6 +268,7 @@ export const getOptions = (
     title: t("EmptyView:MigrationDataTitle"),
     description: t("EmptyView:MigrationDataDescription", {
       productName: t("Common:ProductName"),
+      organizationName: t("Common:OrganizationName"),
     }),
     icon: <InviteUserFormIcon />,
     key: "migration-data",

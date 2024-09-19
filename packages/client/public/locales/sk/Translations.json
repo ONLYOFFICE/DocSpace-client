@@ -27,7 +27,6 @@
   "Other": "Iný",
   "OwnerChange": "Zmeniť vlastníka",
   "Presentations": "Prezentácie",
-  "PublicRoomLinkValidTime": "Tento odkaz je platný do {{date}}. Po uplynutí jeho platnosti nebude možné získať prístup do miestnosti prostredníctvom tohto odkazu.",
   "RoleCommentator": "Komentátor",
   "RoleCommentatorDescription": "Operácie s existujúcimi súbormi: prezeranie, komentovanie.",
   "RoleEditorDescription": "Operácie s existujúcimi súbormi: prezeranie, úprava, vypĺňanie formulárov, kontrola, komentovanie.",

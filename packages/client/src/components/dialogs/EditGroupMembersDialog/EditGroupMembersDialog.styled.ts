@@ -26,8 +26,14 @@
 
 import styled from "styled-components";
 
+import { Text } from "@docspace/shared/components/text";
+
+export const StyledHeaderText = styled(Text)`
+  margin-inline-end: 16px;
+`;
+
 export const StyledBodyContent = styled.div`
-  display: contents;
+  height: 100%;
 
   .search-input {
     margin: 16px 16px 12px;

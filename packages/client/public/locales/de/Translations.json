@@ -27,7 +27,6 @@
   "Other": "Sonstiges",
   "OwnerChange": "Besitzer ändern",
   "Presentations": "Präsentationen",
-  "PublicRoomLinkValidTime": "Dieser Link ist bis zum {{date}} gültig. Sobald die Gültigkeitsdauer abgelaufen ist, ist der Zugriff auf den Raum über diesen Link nicht mehr möglich.",
   "RoleCommentator": "Kommentator",
   "RoleCommentatorDescription": "Vorgänge mit bestehenden Dateien: Anzeigen, Kommentieren.",
   "RoleEditorDescription": "Vorgänge mit bestehenden Dateien: Anzeigen, Bearbeiten, Ausfüllen von Formularen, Überprüfen, Kommentieren.",

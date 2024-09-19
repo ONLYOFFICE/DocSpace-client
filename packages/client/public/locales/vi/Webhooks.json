@@ -11,7 +11,6 @@
   "EnterSecretKey": "Nhập khóa bí mật",
   "EnterUrl": "Nhập URL",
   "EnterWebhookName": "Nhập tên webhook",
-  "EventHint": "Việc gửi sẽ bị xóa tự động sau 15 ngày",
   "EventID": "ID sự kiện",
   "FailedToConnect": "Chúng tôi không thể gửi payload này: không thể kết nối với máy chủ",
   "From": "Từ",

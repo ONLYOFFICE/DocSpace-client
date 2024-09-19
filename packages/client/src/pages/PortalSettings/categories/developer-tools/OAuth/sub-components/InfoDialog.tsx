@@ -1,6 +1,5 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 
 import { IClientProps, TScope } from "@docspace/shared/utils/oauth/types";
@@ -20,125 +19,13 @@ import {
   AvatarSize,
 } from "@docspace/shared/components/avatar";
 import { Link, LinkTarget, LinkType } from "@docspace/shared/components/link";
-import { Base } from "@docspace/shared/themes";
 import { TTranslation } from "@docspace/shared/types";
 import { ContextMenuModel } from "@docspace/shared/components/context-menu";
-
-import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 import { Tag } from "@docspace/shared/components/tag";
 
-const StyledContainer = styled.div<{
-  showDescription: boolean;
-  withShowText: boolean;
-}>`
-  width: 100%;
-  height: 100%;
+import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 
-  box-sizing: border-box;
-
-  padding-top: 8px;
-
-  display: flex;
-  flex-direction: column;
-
-  .client-block {
-    width: 100%;
-    height: 32px;
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-
-    margin-bottom: 12px;
-
-    .client-block__info {
-      width: 100%;
-
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-
-      gap: 8px;
-
-      .client-block__info-logo {
-        width: 32px;
-        height: 32px;
-
-        max-width: 32px;
-        max-height: 32px;
-
-        border-radius: 3px;
-      }
-    }
-  }
-
-  .description {
-    max-height: ${(props) =>
-      props.showDescription ? "100%" : props.withShowText ? "100px" : "100%"};
-
-    overflow: hidden;
-
-    margin-bottom: ${(props) => (props.withShowText ? "4px" : 0)};
-  }
-
-  .desc-link {
-    color: ${(props) => props.theme.oauth.infoDialog.descLinkColor};
-  }
-
-  .block-header {
-    margin-top: 20px;
-    margin-bottom: 12px;
-
-    color: ${(props) => props.theme.oauth.infoDialog.blockHeaderColor};
-  }
-
-  .creator-block {
-    margin: 8px 0;
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    gap: 8px;
-  }
-
-  .privacy-block {
-    display: flex;
-
-    .separator {
-      display: inline-block;
-
-      margin-top: 2px;
-
-      height: 16px;
-      width: 1px;
-
-      margin: 0 8px;
-
-      background: ${(props) => props.theme.oauth.infoDialog.separatorColor};
-    }
-  }
-
-  .property-tag_list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-
-    .property-tag {
-      max-width: 195px;
-      margin: 0;
-      background: ${(props) => props.theme.infoPanel.details.tagBackground};
-      p {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-    }
-  }
-`;
-
-StyledContainer.defaultProps = { theme: Base };
+import { StyledInfoContainer } from "../OAuth.styled";
 
 interface InfoDialogProps {
   visible: boolean;
@@ -206,10 +93,11 @@ const InfoDialog = ({
       visible={visible}
       displayType={ModalDialogType.aside}
       onClose={onClose}
+      withBodyScroll
     >
       <ModalDialog.Header>{t("Common:Info")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <StyledContainer
+        <StyledInfoContainer
           showDescription={showDescription}
           withShowText={withShowText}
         >
@@ -335,7 +223,7 @@ const InfoDialog = ({
             noSelect
             truncate
           >
-            {t("Scopes")}
+            {t("Access")}
           </Text>{" "}
           <ScopeList
             selectedScopes={client?.scopes || []}
@@ -350,7 +238,7 @@ const InfoDialog = ({
             noSelect
             truncate
           >
-            {t("Access")}
+            {t("Scopes")}
           </Text>
           <div className="property-tag_list">
             {client?.scopes.map((scope) => (
@@ -453,7 +341,7 @@ const InfoDialog = ({
               </Text>
             </>
           )}
-        </StyledContainer>
+        </StyledInfoContainer>
       </ModalDialog.Body>
     </ModalDialog>
   );

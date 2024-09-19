@@ -176,6 +176,7 @@ const CreatePortalDialog = () => {
               {t("PortalName")}
             </Text>
             <TextInput
+              isAutoFocussed
               type={InputType.text}
               size={InputSize.base}
               onChange={onHandleName}

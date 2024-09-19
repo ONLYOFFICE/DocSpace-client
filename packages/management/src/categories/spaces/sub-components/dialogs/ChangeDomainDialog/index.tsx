@@ -122,6 +122,7 @@ const ChangeDomainDialogComponent = () => {
               {t("DomainName")}
             </Text>
             <TextInput
+              isAutoFocussed
               type={InputType.text}
               size={InputSize.base}
               hasError={!!domainNameError}

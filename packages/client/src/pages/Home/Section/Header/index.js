@@ -225,7 +225,6 @@ const SectionHeaderContent = (props) => {
     onCreateAndCopySharedLink,
     showNavigationButton,
     startUpload,
-    reorder,
     getFolderModel,
     onCreateRoom,
     onEmptyTrashAction,
@@ -689,7 +688,6 @@ export default inject(
       moveToRoomsPage,
       onClickBack,
       moveToPublicRoom,
-      reorder,
       createFoldersTree,
     } = filesActionsStore;
 
@@ -855,7 +853,6 @@ export default inject(
       onCreateAndCopySharedLink,
       showNavigationButton,
       startUpload,
-      reorder,
       getFolderModel,
       onCreateRoom,
       onEmptyTrashAction,

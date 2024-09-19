@@ -56,7 +56,7 @@ import {
   getFolder,
   deleteFilesFromRecent,
   changeIndex,
-  reorder,
+  reorderIndex,
 } from "@docspace/shared/api/files";
 import {
   ConflictResolveType,
@@ -3009,12 +3009,12 @@ class FilesActionStore {
     }
   };
 
-  reorder = async (id, t) => {
+  reorderIndexOfFiles = async (id, t) => {
     const { setIsIndexEditingMode } = this.indexingStore;
 
     try {
       const operationId = uniqueid("operation_");
-      await reorder(id);
+      await reorderIndex(id);
       toastr.success(t("Common:SuccessfullyCompletedOperation"));
       setIsIndexEditingMode(false);
       this.updateCurrentFolder(null, [id], true, operationId);

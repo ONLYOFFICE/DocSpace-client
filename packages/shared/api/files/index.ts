@@ -1475,7 +1475,7 @@ export async function changeIndex(
   });
 }
 
-export async function reorder(id: number) {
+export async function reorderIndex(id: number) {
   return request({
     method: "put",
     url: `/files/rooms/${id}/reorder`,

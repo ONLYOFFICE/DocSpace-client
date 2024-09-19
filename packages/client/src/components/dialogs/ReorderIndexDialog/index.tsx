@@ -44,7 +44,7 @@ import FilesActionsStore from "SRC_DIR/store/FilesActionsStore";
 import { TSelectedFolder } from "@docspace/client/src/store/SelectedFolderStore";
 
 export interface ReorderIndexDialogProps {
-  reorder: (id: number | string | null, t: TTranslation) => void;
+  reorderIndexOfFiles: (id: number | string | null, t: TTranslation) => void;
   setIsVisible: (visible: boolean) => void;
   visible: boolean;
   selectedFolder: TSelectedFolder;
@@ -53,7 +53,7 @@ export interface ReorderIndexDialogProps {
 const ReorderIndexDialog = ({
   visible,
   setIsVisible,
-  reorder,
+  reorderIndexOfFiles,
   selectedFolder,
 }: ReorderIndexDialogProps) => {
   const { t, ready } = useTranslation(["Files", "Common"]);
@@ -63,7 +63,7 @@ const ReorderIndexDialog = ({
   };
 
   const onReorder = () => {
-    reorder(selectedFolder?.id, t);
+    reorderIndexOfFiles(selectedFolder?.id, t);
     setIsVisible(false);
   };
 
@@ -116,12 +116,12 @@ export default inject(
   }) => {
     const { reorderDialogVisible, setReorderDialogVisible } = dialogsStore;
     const selectedFolder = selectedFolderStore.getSelectedFolder();
-    const { reorder } = filesActionsStore;
+    const { reorderIndexOfFiles } = filesActionsStore;
 
     return {
       visible: reorderDialogVisible,
       setIsVisible: setReorderDialogVisible,
-      reorder,
+      reorderIndexOfFiles,
       selectedFolder,
     };
   },

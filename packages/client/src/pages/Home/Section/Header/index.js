@@ -392,6 +392,14 @@ const SectionHeaderContent = (props) => {
     onCreateAndCopySharedLink(selectedFolder, t);
   };
 
+  const onCloseIndexMenu = () => {
+    setIsIndexEditingMode(false);
+  };
+
+  const onIndexReorder = () => {
+    setReorderDialogVisible(true);
+  };
+
   const headerMenu = isAccountsPage
     ? getAccountsHeaderMenu(t, isGroupsPage)
     : getHeaderMenu(t);
@@ -409,9 +417,9 @@ const SectionHeaderContent = (props) => {
   };
 
   const indexMenuProps = {
-    setIsIndexEditingMode,
     t,
-    setReorderDialogVisible,
+    onCloseIndexMenu,
+    onIndexReorder,
   };
 
   if (isAccountsPage && !(isGroupsPage && isRoomAdmin)) {

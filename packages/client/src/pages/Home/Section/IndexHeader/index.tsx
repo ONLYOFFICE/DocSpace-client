@@ -32,16 +32,12 @@ import { IconButton } from "@docspace/shared/components/icon-button";
 import { StyledTableIndexMenu } from "./StyledIndexHeader";
 
 export interface IndexMenuProps {
-  setIsIndexEditingMode: (mode: boolean) => void;
-  setReorderDialogVisible: (visible: boolean) => void;
   t: TTranslation;
+  onCloseIndexMenu: () => void;
+  onIndexReorder: () => void;
 }
 
-const IndexMenu = ({
-  setIsIndexEditingMode,
-  t,
-  setReorderDialogVisible,
-}: IndexMenuProps) => {
+const IndexMenu = ({ t, onCloseIndexMenu, onIndexReorder }: IndexMenuProps) => {
   return (
     <StyledTableIndexMenu>
       <div className="table-header_index-container">
@@ -52,12 +48,11 @@ const IndexMenu = ({
         <div className="table-header_index-separator" />
         <div
           className="table-header_reorder-container"
-          onClick={() => setReorderDialogVisible(true)}
+          onClick={onIndexReorder}
         >
           <IconButton
             className="table-header_reorder-icon"
             size={16}
-            onClick={() => {}}
             iconName={RoundedArrowSvgUrl}
             isFill
             isClickable={false}
@@ -70,7 +65,7 @@ const IndexMenu = ({
       <IconButton
         className="table-header_cross-icon"
         size={16}
-        onClick={() => setIsIndexEditingMode(false)}
+        onClick={onCloseIndexMenu}
         iconName={CrossIconSvgUrl}
         isFill
         isClickable={false}

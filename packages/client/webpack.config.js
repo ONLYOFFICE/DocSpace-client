@@ -356,6 +356,7 @@ module.exports = (env, argv) => {
         "./BonusPage": "./src/pages/Bonus",
         "./ChangeStorageQuotaDialog":
           "./src/components/dialogs/ChangeStorageQuotaDialog",
+        "./ConnectDialog": "./src/components/dialogs/ConnectDialog",
       },
       shared: {
         ...deps,

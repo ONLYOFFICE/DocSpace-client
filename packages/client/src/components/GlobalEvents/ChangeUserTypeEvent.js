@@ -115,10 +115,10 @@ const ChangeUserTypeEvent = ({
       case "manager":
         return t("Common:RoomAdmin");
       case "collaborator":
-        return t("Common:PowerUser");
+        return t("Common:User");
       case "user":
       default:
-        return t("Common:User");
+        return t("Common:User"); //TODO: replace to Guest
     }
   };
 

@@ -31,9 +31,9 @@ import App from "./App";
 
 import Spaces from "./categories/spaces";
 import Settings from "./categories/settings";
-import WhiteLabelPage from "client/WhiteLabelPage";
-import CompanyInfoPage from "client/CompanyInfoPage";
-import AdditionalResPage from "client/AdditionalResPage";
+import { WhiteLabel } from "client/WhiteLabelPage";
+import { CompanyInfoSettings } from "client/CompanyInfoPage";
+import { AdditionalResources } from "client/AdditionalResPage";
 import Payments from "./categories/payments";
 import Bonus from "./categories/bonus";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
@@ -66,15 +66,15 @@ const routes = [
       },
       {
         path: "settings/branding/white-label",
-        element: <WhiteLabelPage />,
+        element: <WhiteLabel />,
       },
       {
         path: "settings/branding/company-info-settings",
-        element: <CompanyInfoPage />,
+        element: <CompanyInfoSettings />,
       },
       {
         path: "settings/branding/additional-resources",
-        element: <AdditionalResPage />,
+        element: <AdditionalResources />,
       },
       {
         path: "settings/data-backup",

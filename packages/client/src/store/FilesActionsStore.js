@@ -182,7 +182,7 @@ class FilesActionStore {
       fetchRooms,
       filter,
       roomsFilter,
-
+      scrollToTop,
       isEmptyLastPageAfterOperation,
       resetFilterPage,
     } = this.filesStore;
@@ -219,6 +219,7 @@ class FilesActionStore {
         undefined,
         true,
       ).finally(() => {
+        scrollToTop();
         this.dialogsStore.setIsFolderActions(false);
         return setTimeout(
           () => clearSecondaryProgressData(operationId),
@@ -233,6 +234,7 @@ class FilesActionStore {
         true,
         clearSelection,
       ).finally(() => {
+        scrollToTop();
         this.dialogsStore.setIsFolderActions(false);
         return setTimeout(
           () => clearSecondaryProgressData(operationId),

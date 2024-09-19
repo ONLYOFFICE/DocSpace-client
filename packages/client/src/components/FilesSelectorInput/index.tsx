@@ -48,6 +48,11 @@ export default inject<
   const { getIcon, filesSettings } = filesSettingsStore;
   const { setBackupToPublicRoomVisible } = dialogsStore;
 
+  const filesSelectorSettings = {
+    getIcon,
+    filesSettings,
+  };
+
   return {
     newPath,
     basePath,
@@ -58,9 +63,7 @@ export default inject<
 
     socketHelper,
     currentDeviceType,
-
-    getIcon,
-    filesSettings,
+    filesSelectorSettings,
     setBackupToPublicRoomVisible,
   };
 })(

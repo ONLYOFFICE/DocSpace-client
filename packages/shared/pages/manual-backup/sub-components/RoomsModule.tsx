@@ -138,8 +138,8 @@ const RoomsModule = ({
           onSelectFolder={onSelectFolder}
           withoutInitPath={!selectedFolder}
           currentDeviceType={currentDeviceType}
+          filesSelectorSettings={settingsFileSelector}
           {...(selectedFolder && { id: selectedFolder })}
-          {...settingsFileSelector}
         />
       </div>
       <div className="manual-backup_buttons">

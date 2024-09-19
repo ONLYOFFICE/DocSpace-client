@@ -34,6 +34,10 @@ import {
 import { makeAutoObservable, runInAction } from "mobx";
 import { Events } from "@docspace/shared/enums";
 
+/**
+ * @typedef {import("@docspace/shared/components/files-selector-input/FilesSelectorInput.types").BackupToPublicRoomOptionType } BackupToPublicRoomOptionType
+ */
+
 class DialogsStore {
   authStore;
   treeFoldersStore;
@@ -533,6 +537,10 @@ class DialogsStore {
     this.moveToPublicRoomVisible = visible;
     this.moveToPublicRoomData = data;
   };
+  /**
+   * @param {boolean} visible
+   * @param {null | BackupToPublicRoomOptionType } [data]
+   */
   setBackupToPublicRoomVisible = (visible, data = null) => {
     this.backupToPublicRoomVisible = visible;
     this.backupToPublicRoomData = data;

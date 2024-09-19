@@ -39,6 +39,16 @@ export type FileInfoType = {
   inPublic?: boolean;
 };
 
+export type BackupToPublicRoomOptionType = {
+  breadCrumbs: TBreadCrumb[];
+  selectedItemId: number | string | undefined;
+  onClose: VoidFunction;
+  onSelectFolder: (
+    folderId: number | string | undefined,
+    breadCrumbs: TBreadCrumb[],
+  ) => void;
+};
+
 export type FilesSelectorSettings =
   | {
       getIcon: TGetIcon;
@@ -83,15 +93,7 @@ export type FilesSelectorInputProps = {
 
   setBackupToPublicRoomVisible?: (
     visible: boolean,
-    options?: Nullable<{
-      breadCrumbs: TBreadCrumb[];
-      selectedItemId: number | string | undefined;
-      onClose: VoidFunction;
-      onSelectFolder: (
-        folderId: number | string | undefined,
-        breadCrumbs: TBreadCrumb[],
-      ) => void;
-    }>,
+    options?: Nullable<BackupToPublicRoomOptionType>,
   ) => void;
 };
 

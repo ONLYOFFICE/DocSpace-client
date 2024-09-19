@@ -30,7 +30,6 @@ import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 import { expect, test } from "./fixtures/base";
 
 const URL = "/login/confirm/LinkInvite";
-const NEXT_REQUEST_URL = "*/**/login/confirm/LinkInvite";
 
 const QUERY_PARAMS = [
   {

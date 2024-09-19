@@ -52,6 +52,7 @@ import {
 import { getAccessOptions, getTopFreeRole } from "./utils";
 import AddUsersPanel from "../AddUsersPanel";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
+import { StyledModal } from "./StyledInvitePanel";
 
 const InvitePanel = ({
   folders,
@@ -503,13 +504,14 @@ const InvitePanel = ({
   );
 
   return (
-    <ModalDialog
+    <StyledModal
       visible={visible}
       onClose={onClose}
       displayType={ModalDialogType.aside}
       containerVisible={!hideSelector && addUsersPanelVisible}
       isLoading={invitePanelIsLoding}
       withBodyScroll
+      withFooterBorder
     >
       {!hideSelector && addUsersPanelVisible && (
         <ModalDialog.Container>
@@ -557,7 +559,7 @@ const InvitePanel = ({
           isDisabled={isLoading}
         />
       </ModalDialog.Footer>
-    </ModalDialog>
+    </StyledModal>
   );
 };
 

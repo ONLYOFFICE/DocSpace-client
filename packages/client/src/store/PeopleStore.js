@@ -346,8 +346,8 @@ class PeopleStore {
     const collaboratorOption = {
       id: "menu_change-collaborator",
       key: "collaborator",
-      title: t("Common:PowerUser"),
-      label: t("Common:PowerUser"),
+      title: t("Common:User"),
+      label: t("Common:User"),
       "data-action": "collaborator",
       onClick: (e) => this.onChangeType(e),
       isActive: userSelectionRole === "collaborator",

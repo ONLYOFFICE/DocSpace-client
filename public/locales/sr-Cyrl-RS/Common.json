@@ -335,7 +335,6 @@
   "PortalAdmin": "{{productName}} админ",
   "PortalOwner": "{{productName}} власник",
   "PortalRestriction": "Ваша IP адреса није укључена у листу дозвољених IP адреса да бисте приступили овом {{productName}}-у. Ако је VPN омогућен, искључите га и освежите страницу, или користите другу IP адресу да се улогујете.",
-  "PowerUser": "Напредни корисник",
   "PreparationPortalTitle": "Обнова портала је у току",
   "Preview": "Преглед",
   "Previous": "Претходно",

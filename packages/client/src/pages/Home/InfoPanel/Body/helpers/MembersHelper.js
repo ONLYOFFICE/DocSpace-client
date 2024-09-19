@@ -51,7 +51,7 @@ class MembersHelper {
       },
       collaborator: {
         key: "collaborator",
-        label: this.t("Common:PowerUser"),
+        label: this.t("Common:ContentCreator"),
         access: ShareAccessRights.Collaborator,
         type: "collaborator",
       },

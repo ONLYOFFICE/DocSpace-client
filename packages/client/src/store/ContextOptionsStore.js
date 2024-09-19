@@ -2371,7 +2371,7 @@ class ContextOptionsStore {
         id: "accounts-add_collaborator",
         className: "main-button_drop-down",
         icon: PersonDefaultReactSvgUrl,
-        label: t("Common:PowerUser"),
+        label: t("Common:User"),
         onClick: this.onInvite,
         "data-type": EmployeeType.Collaborator,
         key: "collaborator",

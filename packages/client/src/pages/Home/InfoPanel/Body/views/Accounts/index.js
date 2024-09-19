@@ -102,8 +102,8 @@ const Accounts = (props) => {
     const collaboratorOption = {
       id: "info-account-type_collaborator",
       key: "collaborator",
-      title: t("Common:PowerUser"),
-      label: t("Common:PowerUser"),
+      title: t("Common:User"),
+      label: t("Common:User"),
       action: "collaborator",
     };
     const userOption = {

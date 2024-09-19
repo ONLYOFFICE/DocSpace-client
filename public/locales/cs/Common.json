@@ -335,7 +335,6 @@
   "PortalAdmin": "Správce prostoru {{productName}}",
   "PortalOwner": "Majitel {{productName}}",
   "PortalRestriction": "Vaše IP adresa není uvedena v seznamu povolených IP adres pro přístup k tomuto {{productName}}. Vypněte VPN, pokud je povolena, a znovu načtěte stránku nebo použijte k přihlášení jinou IP adresu.",
-  "PowerUser": "Mocný uživatel",
   "PreparationPortalTitle": "Probíhá obnova portálu",
   "Preview": "Náhled",
   "Previous": "Předchozí",

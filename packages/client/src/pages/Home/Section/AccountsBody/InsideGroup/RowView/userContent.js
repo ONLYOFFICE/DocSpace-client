@@ -111,7 +111,7 @@ const UserContent = ({
       : role === "admin"
         ? t("Common:PortalAdmin", { productName: t("Common:ProductName") })
         : isCollaborator
-          ? t("Common:PowerUser")
+          ? t("Common:User")
           : isVisitor
             ? t("Common:User")
             : t("Common:RoomAdmin");

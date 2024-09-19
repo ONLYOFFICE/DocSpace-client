@@ -335,7 +335,6 @@
   "PortalAdmin": "{{productName}} skrbnik",
   "PortalOwner": "{{productName}} lastnik",
   "PortalRestriction": "Vaš naslov IP ni vključen na seznam dovoljenih naslovov IP za dostop do tega prostora {{productName}}. Izklopite VPN, če je omogočen, in znova naložite stran ali uporabite drug naslov IP za prijavo.",
-  "PowerUser": "Napredni uporabnik",
   "PreparationPortalTitle": "Obnavljanje portala je v teku",
   "Preview": "Predogled",
   "Previous": "Prejšnji",

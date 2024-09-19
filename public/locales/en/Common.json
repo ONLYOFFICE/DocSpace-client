@@ -362,7 +362,6 @@
   "PortalAdmin": "{{productName}} admin",
   "PortalOwner": "{{productName}} owner",
   "PortalRestriction": "Your IP address is not included in the list of allowed IP addresses to access this {{productName}}. Turn off a VPN if it's enabled and reload the page, or use another IP address to log in.",
-  "PowerUser": "Power user",
   "PreparationPortalTitle": "Portal restoring is underway",
   "Preview": "Preview",
   "Previous": "Previous",

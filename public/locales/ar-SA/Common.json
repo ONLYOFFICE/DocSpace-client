@@ -335,7 +335,6 @@
   "PortalAdmin": "مسئول {{productName}}",
   "PortalOwner": "مالك {{productName}}",
   "PortalRestriction": "لم يتم تضمين عنوان IP الخاص بك في قائمة عناوين IP المسموح بها للوصول إلى {{productName}}. قم بإيقاف تشغيل VPN إذا تم تمكينه وأعد تحميل الصفحة، أو استخدم عنوان IP آخر لتسجيل الدخول.",
-  "PowerUser": "قوة المستخدم",
   "PreparationPortalTitle": "جاري استعادة البوابة",
   "Preview": "معاينة ",
   "Previous": "السابق",

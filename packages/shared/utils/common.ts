@@ -149,7 +149,7 @@ export const getUserTypeLabel = (
     case "manager":
       return t("Common:RoomAdmin");
     case "collaborator":
-      return t("Common:PowerUser");
+      return t("Common:User");
     case "user":
       return t("Common:User");
     default:
@@ -1172,7 +1172,7 @@ export const getUserTypeName = (
 
   if (isRoomAdmin) return t("Common:RoomAdmin");
 
-  if (isCollaborator) return t("Common:PowerUser");
+  if (isCollaborator) return t("Common:User");
 
   return t("Common:User");
 };

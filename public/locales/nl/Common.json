@@ -335,7 +335,6 @@
   "PortalAdmin": "{{productName}} beheerder",
   "PortalOwner": "{{productName}} eigenaar",
   "PortalRestriction": "Uw IP-adres staat niet in de lijst met toegestane IP-adressen voor toegang tot deze {{productName}}. Als een VPN is ingeschakeld, schakel deze dan uit en laad de pagina opnieuw, of gebruik een ander IP-adres om in te loggen.",
-  "PowerUser": "Power user",
   "PreparationPortalTitle": "Portaal herstel is bezig.",
   "Preview": "Preview",
   "Previous": "Vorige",

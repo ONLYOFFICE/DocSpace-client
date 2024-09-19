@@ -335,7 +335,6 @@
   "PortalAdmin": "{{productName}}- järjestelmänvalvoja",
   "PortalOwner": "{{productName}} omistaja",
   "PortalRestriction": "IP-osoitteesi ei sisälly tähän {{productName}} sallittujen IP-osoitteiden luetteloon. Sulje VPN, jos se on käytössä ja lataa sivu uudelleen, tai käytä toista IP-osoitetta kirjautuaksesi sisään.",
-  "PowerUser": "Tehokäyttäjä",
   "PreparationPortalTitle": "Portaalin palautus on käynnissä.",
   "Preview": "Esikatselu",
   "Previous": "Edellinen",

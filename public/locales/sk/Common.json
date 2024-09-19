@@ -335,7 +335,6 @@
   "PortalAdmin": "Administrátor {{productName}}",
   "PortalOwner": "Vlastník {{productName}}",
   "PortalRestriction": "Vaša IP adresa nie je uvedená v zozname povolených IP adries pre prístup do tohto priestoru {{productName}}. Vypnite VPN, ak je zapnuté, a znovu načítajte stránku alebo na prihlásenie použite inú IP adresu.",
-  "PowerUser": "Pokročilý používateľ",
   "PreparationPortalTitle": "Prebieha obnova portálu.",
   "Preview": "Náhľad",
   "Previous": "Predchádzajúci",

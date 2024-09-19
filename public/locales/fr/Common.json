@@ -338,7 +338,6 @@
   "PortalAdmin": "Administrateur de {{productName}}",
   "PortalOwner": "Propriétaire de {{productName}}",
   "PortalRestriction": " Votre adresse IP ne figure pas dans la liste des adresses IP autorisées à accéder à ce {{productName}}. Désactivez un VPN s'il est activé et rechargez la page, ou utilisez une autre adresse IP pour vous connecter.",
-  "PowerUser": "Utilisateur avancé",
   "PreparationPortalTitle": "Restauration du portail est en cours.",
   "Preview": "Aperçu",
   "Previous": "Précédent",

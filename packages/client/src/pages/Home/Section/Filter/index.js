@@ -813,7 +813,7 @@ const SectionFilterContent = ({
               label = t("Common:RoomAdmin");
               break;
             case EmployeeType.Collaborator:
-              label = t("Common:PowerUser");
+              label = t("Common:User");
               break;
             case EmployeeType.Guest:
               label = t("Common:User");
@@ -1358,7 +1358,7 @@ const SectionFilterContent = ({
           id: "filter_type-room-admin",
           key: EmployeeType.Collaborator,
           group: "filter-type",
-          label: t("Common:PowerUser"),
+          label: t("Common:User"),
         },
         {
           id: "filter_type-user",

@@ -338,7 +338,6 @@
   "PortalAdmin": "{{productName}}の管理者",
   "PortalOwner": "{{productName}}の所有者",
   "PortalRestriction": "現在のIPアドレスは、この{{productName}}へのアクセスを許可するIPアドレスリストに含まれていません。VPNが有効になっている場合はオフにしてページを再読み込みするか、別のIPアドレスを使ってログインしてください。",
-  "PowerUser": "パワーユーザー",
   "PreparationPortalTitle": "ポータルの復元が実施中です。",
   "Preview": "プレビュー",
   "Previous": "前",

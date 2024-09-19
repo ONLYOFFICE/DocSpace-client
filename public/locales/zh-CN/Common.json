@@ -338,7 +338,6 @@
   "PortalAdmin": "{{productName}}管理员",
   "PortalOwner": "{{productName}}所有者",
   "PortalRestriction": "您的 IP 地址未包含在允许访问此{{productName}}的 IP 地址列表中。如果已启用 VPN，请将其关闭并重新加载页面，或使用其他 IP 地址登录。",
-  "PowerUser": "高级用户",
   "PreparationPortalTitle": "门户恢复正在进行中。",
   "Preview": "预览",
   "Previous": "上一个",

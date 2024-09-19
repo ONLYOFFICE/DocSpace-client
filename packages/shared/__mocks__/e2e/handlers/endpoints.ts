@@ -24,12 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { loginHandler, LOGIN_PATH } from "./authentication";
+import {
+  loginHandler,
+  LOGIN_PATH,
+  LOGIN_PATH_WITH_PARAMS,
+  CONFIRM_PATH,
+  confirmHandler,
+} from "./authentication";
 import { OAUTH_SIGN_IN_PATH, oauthSignInHelper } from "./oauth/signIn";
 import {
+  SELF_PATH,
   SELF_PATH_ACTIVATION_STATUS,
   SELF_PATH_CHANGE_PASSWORD,
   SELF_PATH_UPDATE_USER,
+  SELF_PATH_USER_BY_EMAIL,
   selfHandler,
 } from "./people";
 import {
@@ -61,6 +69,14 @@ export const endpoints: TEndpoints = {
     url: `${BASE_URL}${LICENCE_PATH}`,
     dataHandler: licenseHandler,
   },
+  createUser: {
+    url: `${BASE_URL}${SELF_PATH}`,
+    dataHandler: selfHandler,
+  },
+  updateUser: {
+    url: `${BASE_URL}${SELF_PATH_UPDATE_USER}`,
+    dataHandler: selfHandler,
+  },
   changePassword: {
     url: `${BASE_URL}${SELF_PATH_CHANGE_PASSWORD}`,
     dataHandler: selfHandler,
@@ -69,12 +85,24 @@ export const endpoints: TEndpoints = {
     url: `${BASE_URL}${SELF_PATH_ACTIVATION_STATUS}`,
     dataHandler: selfHandler,
   },
-  updateUser: {
-    url: `${BASE_URL}${SELF_PATH_UPDATE_USER}`,
+  getUserByEmail: {
+    url: `${BASE_URL}${SELF_PATH_USER_BY_EMAIL}`,
     dataHandler: selfHandler,
+  },
+  getUserByEmailError: {
+    url: `${BASE_URL}${SELF_PATH_USER_BY_EMAIL}`,
+    dataHandler: selfHandler.bind(null, true),
+  },
+  checkConfirmLink: {
+    url: `${BASE_URL}${CONFIRM_PATH}`,
+    dataHandler: confirmHandler,
   },
   login: {
     url: `${BASE_URL}${LOGIN_PATH}`,
+    dataHandler: loginHandler,
+  },
+  loginWithTfaCode: {
+    url: `${BASE_URL}${LOGIN_PATH_WITH_PARAMS}`,
     dataHandler: loginHandler,
   },
   tfaAppValidate: {

@@ -24,12 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX, BASE_URL } from "../../utils";
+import { API_PREFIX, BASE_URL, HEADER_SELF_ERROR } from "../../utils";
 
 export const PATH = "people";
 export const PATH_CHANGE_PASSWORD = "people/**/password";
 export const PATH_ACTIVATION_STATUS = "people/activationstatus/*";
 export const PATH_UPDATE_USER = "people/*";
+export const PATH_USER_BY_EMAIL = "people/email?email=**";
 
 const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 
@@ -81,6 +82,26 @@ export const successSelf = {
   statusCode: 200,
 };
 
-export const self = () => {
+export const selfError = {
+  response: {
+    data: {
+      error: {
+        message: "The record could not be found",
+        type: "ASC.Common.Web.ItemNotFoundException",
+        stack: "",
+        hresult: -2146233088,
+      },
+    },
+    status: 404,
+    statusText: "Not Found",
+  },
+  status: 1,
+  statusCode: 404,
+};
+
+export const self = (isError: boolean = false, headers?: Headers) => {
+  if (isError || headers?.get(HEADER_SELF_ERROR))
+    return new Response(JSON.stringify(selfError));
+
   return new Response(JSON.stringify(successSelf));
 };

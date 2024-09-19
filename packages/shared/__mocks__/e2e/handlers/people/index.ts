@@ -32,7 +32,9 @@ export {
 export { self as selfHandler, successSelf } from "./self";
 
 export {
+  PATH as SELF_PATH,
   PATH_CHANGE_PASSWORD as SELF_PATH_CHANGE_PASSWORD,
   PATH_ACTIVATION_STATUS as SELF_PATH_ACTIVATION_STATUS,
   PATH_UPDATE_USER as SELF_PATH_UPDATE_USER,
+  PATH_USER_BY_EMAIL as SELF_PATH_USER_BY_EMAIL,
 } from "./self";

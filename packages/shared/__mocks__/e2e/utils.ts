@@ -16,3 +16,5 @@ export const HEADER_LIST_CAPABILITIES = "x-test-list-capabilities";
 
 export const HEADER_LIST_THIRD_PARTY_PROVIDERS =
   "x-test-list-third-party-providers";
+
+export const HEADER_SELF_ERROR = "x-test-data-self-error";

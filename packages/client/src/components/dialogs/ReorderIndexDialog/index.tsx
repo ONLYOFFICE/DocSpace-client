@@ -36,7 +36,6 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { isMobile } from "react-device-detect";
 
 import DialogsStore from "SRC_DIR/store/DialogsStore";
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";

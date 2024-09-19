@@ -40,10 +40,6 @@ import ThirdPartyStorage from "./ThirdPartyStorage";
 import withLoader from "@docspace/client/src/HOCs/withLoader";
 import SetRoomParamsLoader from "@docspace/shared/skeletons/create-edit-room/SetRoomParams";
 
-import { ImageEditor } from "@docspace/shared/components/image-editor";
-import PreviewTile from "@docspace/shared/components/image-editor/PreviewTile";
-import { Text } from "@docspace/shared/components/text";
-
 import ItemIcon from "@docspace/client/src/components/ItemIcon";
 
 import ChangeRoomOwner from "./ChangeRoomOwner";
@@ -51,7 +47,6 @@ import RoomQuota from "./RoomQuota";
 import { RoomsType } from "@docspace/shared/enums";
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
 import { isMobile, mobile } from "@docspace/shared/utils";
-import RoomImageCoverDialog from "../../RoomImageCoverDialog";
 
 import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 
@@ -144,8 +139,6 @@ const SetRoomParams = ({
     useState(true);
   const [disableImageRescaling, setDisableImageRescaling] = useState(isEdit);
 
-  const [imageCoverVisible, setImageCoverVisible] = useState(false);
-
   const [forceHideRoomTypeDropdown, setForceHideRoomTypeDropdown] =
     useState(false);
 
@@ -168,7 +161,6 @@ const SetRoomParams = ({
     });
 
     onChangeIcon({ ...roomParams.icon, uploadedFile: uploadedFile });
-    setImageCoverVisible(true);
   };
 
   const onChangeName = (e) => {
@@ -329,30 +321,6 @@ const SetRoomParams = ({
       )}
 
       <div>
-        {/* <Text fontWeight={600} className="icon-editor_text">
-          {t("Icon")}
-        </Text>
-        <ImageEditor
-          t={t}
-          isDisabled={isDisabled}
-          image={roomParams.icon}
-          setPreview={setPreviewIcon}
-          onChangeImage={onChangeIcon}
-          classNameWrapperImageCropper={"icon-editor"}
-          disableImageRescaling={disableImageRescaling}
-          maxImageSize={maxImageUploadSize}
-          Preview={
-            <PreviewTile
-              t={t}
-              title={roomParams.title || t("Common:NewRoom")}
-              previewIcon={previewIcon}
-              tags={roomParams.tags.map((tag) => tag.name)}
-              isDisabled={isDisabled}
-              defaultTagLabel={getRoomTypeName(roomParams.type, t)}
-            />
-          }
-        /> */}
-
         {avatarEditorDialogVisible && (
           <AvatarEditorDialog
             t={t}

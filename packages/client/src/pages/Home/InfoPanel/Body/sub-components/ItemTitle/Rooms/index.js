@@ -66,21 +66,9 @@ const RoomsItemHeader = ({
   roomType,
   displayFileExtension,
   getLogoCoverModel,
-  maxImageUploadSize,
-  uploadFile,
-  avatarEditorDialogVisible,
-  setAvatarEditorDialogVisible,
-  onSaveRoomLogo,
-  uploadedFile,
+  onChangeFile,
 }) => {
   const itemTitleRef = useRef();
-
-  const [avatar, setAvatar] = useState({
-    uploadedFile,
-    x: 0.5,
-    y: 0.5,
-    zoom: 1,
-  });
 
   if (!selection) return null;
 
@@ -110,13 +98,8 @@ const RoomsItemHeader = ({
     setBufferSelection(selection);
   };
 
-  const onChangeIcon = (icon) => {
-    setAvatar(icon);
-  };
-
-  const onChangeFile = async (e) => {
-    const uploadedFile = await uploadFile(t, e);
-    setAvatar({ ...avatar, uploadedFile: uploadedFile });
+  const onChangeFileContext = (e) => {
+    onChangeFile(e, t);
   };
 
   const onClickInviteUsers = () => {
@@ -156,23 +139,9 @@ const RoomsItemHeader = ({
           badgeUrl={badgeUrl ? badgeUrl : ""}
           hoverSrc={selection.isRoom && Camera10ReactSvgUrl}
           model={model}
-          onChangeFile={onChangeFile}
+          onChangeFile={onChangeFileContext}
         />
       </div>
-
-      {avatarEditorDialogVisible && (
-        <AvatarEditorDialog
-          t={t}
-          image={avatar}
-          onChangeImage={onChangeIcon}
-          onClose={() => setAvatarEditorDialogVisible(false)}
-          onSave={() => onSaveRoomLogo(selection.id, avatar, selection, true)}
-          onChangeFile={onChangeFile}
-          classNameWrapperImageCropper={"icon-editor"}
-          visible={avatar.uploadedFile}
-          maxImageSize={maxImageUploadSize}
-        />
-      )}
 
       <Text className="text" title={title} dir="auto">
         {title}
@@ -241,13 +210,7 @@ export default inject(
     const selection = infoPanelSelection.length > 1 ? null : infoPanelSelection;
     const isArchive = selection?.rootFolderType === FolderType.Archive;
 
-    const {
-      uploadFile,
-      avatarEditorDialogVisible,
-      setAvatarEditorDialogVisible,
-      onSaveRoomLogo,
-      uploadedFile,
-    } = avatarEditorDialogStore;
+    const { onChangeFile } = avatarEditorDialogStore;
 
     setCoverSelection(selection);
     const roomType =
@@ -277,11 +240,7 @@ export default inject(
       displayFileExtension,
       maxImageUploadSize: settingsStore.maxImageUploadSize,
       updateInfoPanelSelection,
-      uploadFile,
-      avatarEditorDialogVisible,
-      setAvatarEditorDialogVisible,
-      onSaveRoomLogo,
-      uploadedFile,
+      onChangeFile,
     };
   },
 )(

@@ -51,6 +51,7 @@ const Details = ({
   isDefaultRoomsQuotaSet,
   setNewInfoPanelSelection,
   getLogoCoverModel,
+  onChangeFile,
 }) => {
   const [itemProperties, setItemProperties] = useState([]);
 
@@ -86,6 +87,10 @@ const Details = ({
       await createThumbnail(selection.id);
     }
   }, [selection]);
+
+  const onChangeFileContext = (e) => {
+    onChangeFile(e, t);
+  };
 
   useEffect(() => {
     createThumbnailAction();
@@ -142,6 +147,7 @@ const Details = ({
             logo={currentIcon}
             model={model}
             withEditing={selection.isRoom}
+            onChangeFile={onChangeFileContext}
           />
         </StyledNoThumbnail>
       )}
@@ -179,6 +185,7 @@ export default inject(
     userStore,
     currentQuotaStore,
     dialogsStore,
+    avatarEditorDialogStore,
   }) => {
     const {
       infoPanelSelection,
@@ -211,6 +218,7 @@ export default inject(
       isDefaultRoomsQuotaSet,
       setNewInfoPanelSelection,
       getLogoCoverModel: dialogsStore.getLogoCoverModel,
+      onChangeFile: avatarEditorDialogStore.onChangeFile,
     };
   },
 )(

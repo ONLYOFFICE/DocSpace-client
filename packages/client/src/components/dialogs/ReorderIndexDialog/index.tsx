@@ -70,7 +70,6 @@ const ReorderIndexDialog = ({
   return (
     <ModalDialog
       displayType={ModalDialogType.modal}
-      isLarge
       isLoading={!ready}
       visible={visible}
       onClose={onClose}
@@ -89,7 +88,7 @@ const ReorderIndexDialog = ({
           size={ButtonSize.normal}
           primary
           onClick={onReorder}
-          scale={isMobile}
+          scale
         />
         <Button
           id="cancel-share-folder"
@@ -97,7 +96,7 @@ const ReorderIndexDialog = ({
           label={t("Common:CancelButton")}
           size={ButtonSize.normal}
           onClick={onClose}
-          scale={isMobile}
+          scale
         />
       </ModalDialog.Footer>
     </ModalDialog>

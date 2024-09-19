@@ -303,16 +303,18 @@ class ManualBackup extends React.Component {
           <Text className="backup_modules-description">
             {t("ManualBackupDescription")}
           </Text>
-          <Link
-            className="link-learn-more"
-            href={dataBackupUrl}
-            target="_blank"
-            fontSize="13px"
-            color={currentColorScheme.main?.accent}
-            isHovered
-          >
-            {t("Common:LearnMore")}
-          </Link>
+          {!isManagement() && (
+            <Link
+              className="link-learn-more"
+              href={dataBackupUrl}
+              target="_blank"
+              fontSize="13px"
+              color={currentColorScheme.main?.accent}
+              isHovered
+            >
+              {t("Common:LearnMore")}
+            </Link>
+          )}
         </div>
 
         <StyledModules>

@@ -35,9 +35,15 @@ import Backup from "../backup";
 import AutoBackup from "../auto-backup";
 import Restore from "../restore";
 
+import { useStore } from "SRC_DIR/store";
+import ConnectDialog from "client/ConnectDialog";
+
 const Settings = () => {
   const { t } = useTranslation(["Common", "Settings"]);
   const navigate = useNavigate();
+  const { dialogsStore } = useStore();
+  const { connectDialogVisible } = dialogsStore;
+
   const [currentTabId, setCurrentTabId] = useState("branding");
 
   const data = [
@@ -77,11 +83,14 @@ const Settings = () => {
   }, [location.pathname]);
 
   return (
-    <Tabs
-      items={data}
-      selectedItemId={currentTabId}
-      onSelect={(e) => onSelect(e)}
-    />
+    <>
+      {connectDialogVisible && <ConnectDialog key="connect-dialog" />}
+      <Tabs
+        items={data}
+        selectedItemId={currentTabId}
+        onSelect={(e) => onSelect(e)}
+      />
+    </>
   );
 };
 

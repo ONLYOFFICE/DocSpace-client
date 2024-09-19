@@ -26,7 +26,6 @@
 
 import moment from "moment";
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import { Text } from "@docspace/shared/components/text";
 import { TStatusInRoom } from "@docspace/shared/utils/socket";
 import { useTranslation } from "react-i18next";
@@ -35,8 +34,7 @@ interface StatusProps {
   statusInRoom?: TStatusInRoom;
 }
 
-const getLastSeenStatus = (date: string, locale: string) => {
-  if (!date) return "offline";
+const getLastSeenStatus = (locale: string, date: string) => {
   const dateObj = new Date(date).toISOString();
 
   const momentDate = moment(dateObj).locale(locale);
@@ -56,25 +54,26 @@ const getLastSeenStatus = (date: string, locale: string) => {
   return `Last seen ${formattedDate} at ${formattedTime}`;
 };
 
-export const Status = (props: StatusProps) => {
-  const { i18n } = useTranslation();
+const getStatusText = (locale: string, statusInRoom?: TStatusInRoom) => {
+  if (!statusInRoom) return "Last seen never";
 
+  if (statusInRoom.status === "online") return "In room";
+
+  return getLastSeenStatus(locale, statusInRoom.date);
+};
+
+export const Status = (props: StatusProps) => {
   const { statusInRoom } = props;
 
-  if (!statusInRoom) {
-    return (
-      <RectangleSkeleton width="70" height="12" className="status-loader" />
-    );
-  }
+  const { i18n } = useTranslation();
 
-  const statusText =
-    statusInRoom.status === "online"
-      ? "online"
-      : getLastSeenStatus(statusInRoom.date, i18n.language);
+  const statusText = getStatusText(i18n.language, statusInRoom);
 
   return (
     <div className="status-wrapper">
-      {statusInRoom.status === "online" && <div className="status-indicator" />}
+      {statusInRoom?.status === "online" && (
+        <div className="status-indicator" />
+      )}
       <Text className="status-text">{statusText}</Text>
     </div>
   );

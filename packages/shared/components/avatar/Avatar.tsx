@@ -29,12 +29,18 @@ import React, { memo } from "react";
 import styled, { useTheme } from "styled-components";
 
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
+import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";
 
 import { IconSizeType, commonIconsStyles } from "../../utils";
 
 import { IconButton } from "../icon-button";
 import { Text } from "../text";
 import { TGetTooltipContent, Tooltip } from "../tooltip";
+
+import { DropDown } from "../drop-down";
+import { DropDownItem } from "../drop-down-item";
+
+import { useClickOutside } from "../../utils/useClickOutside";
 
 import {
   EmptyIcon,
@@ -121,10 +127,29 @@ const AvatarPure = ({
   onClick,
   isGroup = false,
   roleIcon: roleIconProp,
+  onChangeFile,
+  model,
+  hasAvatar,
 }: AvatarProps) => {
   const defaultTheme = useTheme();
 
+  const [openEditLogo, setOpenLogoEdit] = React.useState<boolean>(false);
+  const onToggleOpenEditLogo = () => setOpenLogoEdit(!openEditLogo);
+  const iconRef = React.useRef<HTMLLIElement>(null);
+
+  const inputFilesElement = React.useRef(null);
+
   const interfaceDirection = defaultTheme?.interfaceDirection;
+
+  const onInputClick = () => {
+    if (inputFilesElement.current) {
+      inputFilesElement.current.value = null;
+    }
+  };
+
+  useClickOutside(iconRef, () => {
+    setOpenLogoEdit(false);
+  });
 
   let isDefault = false;
   let isIcon = false;
@@ -163,6 +188,38 @@ const AvatarPure = ({
     if (onClick) onClick(e);
   };
 
+  const onUploadClick = () => {
+    const menu = model[0];
+    menu.onClick(inputFilesElement);
+  };
+
+  const dropdownElement = (
+    <DropDown
+      open={openEditLogo}
+      clickOutsideAction={() => setOpenLogoEdit(false)}
+      withBackdrop={false}
+      isDefaultMode={false}
+    >
+      {model?.map((option, i) => {
+        const optionOnClickAction = () => {
+          setOpenLogoEdit(false);
+          if (option.key === "upload") {
+            return option.onClick(inputFilesElement);
+          }
+          option.onClick();
+        };
+        return (
+          <DropDownItem
+            key={i}
+            label={option.label}
+            icon={option.icon}
+            onClick={optionOnClickAction}
+          />
+        );
+      })}
+    </DropDown>
+  );
+
   return (
     <StyledAvatar
       size={size}
@@ -181,12 +238,24 @@ const AvatarPure = ({
       </AvatarWrapper>
       {editing && size === "max" ? (
         <EditContainer>
-          <IconButton
-            className="edit_icon"
-            iconName={PencilReactSvgUrl}
-            onClick={editAction}
-            size={16}
-          />
+          {hasAvatar ? (
+            <>
+              <IconButton
+                className="edit_icon"
+                iconName={PencilReactSvgUrl}
+                onClick={onToggleOpenEditLogo}
+                size={16}
+              />
+              {dropdownElement}{" "}
+            </>
+          ) : (
+            <IconButton
+              className="edit_icon"
+              iconName={PlusSvgUrl}
+              onClick={onUploadClick}
+              size={16}
+            />
+          )}
         </EditContainer>
       ) : (
         !hideRoleIcon && (
@@ -211,6 +280,16 @@ const AvatarPure = ({
           </>
         )
       )}
+      <input
+        id="customFileInput"
+        className="custom-file-input"
+        type="file"
+        onChange={onChangeFile}
+        accept="image/png, image/jpeg"
+        onClick={onInputClick}
+        ref={inputFilesElement}
+        style={{ display: "none" }}
+      />
     </StyledAvatar>
   );
 };

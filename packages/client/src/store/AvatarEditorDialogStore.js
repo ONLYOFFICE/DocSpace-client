@@ -38,6 +38,12 @@ import resizeImage from "resize-image";
 
 class AvatarEditorDialogStore {
   uploadedFile = null;
+  image = {
+    uploadedFile: this.uploadedFile,
+    x: 0.5,
+    y: 0.5,
+    zoom: 1,
+  };
 
   avatarEditorDialogVisible = false;
 
@@ -55,6 +61,15 @@ class AvatarEditorDialogStore {
 
   setUploadedFile = (file) => {
     this.uploadedFile = file;
+  };
+
+  setImage = (image) => {
+    this.image = { ...image, uploadedFile: this.uploadedFile };
+  };
+
+  onChangeFile = async (e, t) => {
+    const uploadedFile = await this.uploadFile(t, e);
+    this.setImage({ ...this.image, uploadedFile: uploadedFile });
   };
 
   onSaveRoomLogo = async (roomId, icon, item, needUpdate = false) => {
@@ -112,6 +127,7 @@ class AvatarEditorDialogStore {
     const uploadedFile = await this.uploadFileToImageEditor(t, file[0]);
 
     this.setUploadedFile(uploadedFile);
+    this.setImage({ ...this.image, uploadedFile: uploadedFile });
     this.setAvatarEditorDialogVisible(true);
 
     return uploadedFile;

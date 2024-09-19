@@ -90,6 +90,12 @@ const MainProfile = (props) => {
     updateProfileCulture,
     documentationEmail,
     setDialogData,
+    getProfileModel,
+    avatarEditorDialogVisible,
+    setAvatarEditorDialogVisible,
+    onChangeFile,
+    image,
+    setImage,
   } = props;
 
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
@@ -117,6 +123,10 @@ const MainProfile = (props) => {
 
   const checkScroll = () => {
     updateDropDownMaxHeight();
+  };
+
+  const onChangeFileContext = (e) => {
+    onChangeFile(e, t);
   };
 
   useEffect(() => {
@@ -154,6 +164,12 @@ const MainProfile = (props) => {
     const email = profile.email;
     setDialogData({ email });
     setChangePasswordVisible(true);
+  };
+
+  const model = getProfileModel(t);
+
+  const onChangeIcon = (icon) => {
+    setImage(icon);
   };
 
   const userAvatar = profile.hasAvatar
@@ -221,7 +237,10 @@ const MainProfile = (props) => {
           source={userAvatar}
           userName={profile.displayName}
           editing={!profile.isLDAP}
+          hasAvatar={!!profile.hasAvatar}
+          model={model}
           editAction={() => setChangeAvatarVisible(true)}
+          onChangeFile={onChangeFileContext}
         />
         {profile.isSSO && (
           <div className="badges-wrapper">
@@ -609,48 +628,75 @@ const MainProfile = (props) => {
         </div>
       </StyledInfo>
 
-      {changeAvatarVisible && (
+      {avatarEditorDialogVisible && (
         <AvatarEditorDialog
           t={t}
-          visible={changeAvatarVisible}
-          onClose={() => setChangeAvatarVisible(false)}
+          visible={image.uploadedFile}
+          image={image}
+          isProfileUpload={true}
+          onChangeImage={onChangeIcon}
+          onChangeFile={onChangeFileContext}
+          onClose={() => setAvatarEditorDialogVisible(false)}
         />
       )}
     </StyledWrapper>
   );
 };
 
-export default inject(({ settingsStore, peopleStore, userStore }) => {
-  const { withActivationBar, sendActivationLink } = userStore;
-  const { theme, helpLink, culture, currentColorScheme, documentationEmail } =
-    settingsStore;
+export default inject(
+  ({
+    settingsStore,
+    peopleStore,
+    userStore,
+    dialogsStore,
+    avatarEditorDialogStore,
+  }) => {
+    const { withActivationBar, sendActivationLink } = userStore;
+    const { theme, helpLink, culture, currentColorScheme, documentationEmail } =
+      settingsStore;
 
-  const {
-    targetUser: profile,
-    setChangePasswordVisible,
-    setChangeNameVisible,
-    changeAvatarVisible,
-    setChangeAvatarVisible,
-    updateProfileCulture,
-  } = peopleStore.targetUserStore;
-  const { setDialogData, setChangeEmailVisible } = peopleStore.dialogStore;
+    const {
+      avatarEditorDialogVisible,
+      setAvatarEditorDialogVisible,
+      onChangeFile,
+      image,
+      setImage,
+    } = avatarEditorDialogStore;
 
-  return {
-    theme,
-    profile,
-    culture,
-    helpLink,
+    const {
+      targetUser: profile,
+      setChangePasswordVisible,
+      setChangeNameVisible,
+      changeAvatarVisible,
+      setChangeAvatarVisible,
+      updateProfileCulture,
+      getProfileModel,
+    } = peopleStore.targetUserStore;
+    const { setDialogData, setChangeEmailVisible } = peopleStore.dialogStore;
 
-    setChangeEmailVisible,
-    setChangePasswordVisible,
-    setChangeNameVisible,
-    changeAvatarVisible,
-    setChangeAvatarVisible,
-    withActivationBar,
-    sendActivationLink,
-    currentColorScheme,
-    updateProfileCulture,
-    documentationEmail,
-    setDialogData,
-  };
-})(withCultureNames(observer(MainProfile)));
+    return {
+      theme,
+      profile,
+      culture,
+      helpLink,
+
+      setChangeEmailVisible,
+      setChangePasswordVisible,
+      setChangeNameVisible,
+      changeAvatarVisible,
+      setChangeAvatarVisible,
+      withActivationBar,
+      sendActivationLink,
+      currentColorScheme,
+      updateProfileCulture,
+      documentationEmail,
+      setDialogData,
+      getProfileModel,
+      avatarEditorDialogVisible,
+      setAvatarEditorDialogVisible,
+      image,
+      onChangeFile,
+      setImage,
+    };
+  },
+)(withCultureNames(observer(MainProfile)));

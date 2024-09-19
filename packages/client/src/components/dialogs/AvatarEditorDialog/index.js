@@ -94,9 +94,7 @@ const AvatarEditorDialog = (props) => {
     onChangeFile,
   } = props;
   const [avatar, setAvatar] = useState({
-    uploadedFile: profile?.hasAvatar
-      ? profile?.avatarOriginal
-      : DefaultUserAvatarMax,
+    uploadedFile: image.uploadedFile,
     x: 0.5,
     y: 0.5,
     zoom: 1,
@@ -107,20 +105,13 @@ const AvatarEditorDialog = (props) => {
   const onChangeAvatar = (newAvatar) => setAvatar(newAvatar);
 
   const onCloseModal = () => {
-    props.setPreview("");
+    props.setPreview && props.setPreview("");
     onClose && onClose();
   };
 
   const onSaveClick = async () => {
     setIsLoading(true);
 
-    if (!avatar.uploadedFile) {
-      const res = await deleteAvatar(profile.id);
-      updateCreatedAvatar(res);
-      setHasAvatar(false);
-      onClose();
-      return;
-    }
     const file = await dataUrlToFile(preview);
 
     const avatarData = new FormData();
@@ -143,6 +134,7 @@ const AvatarEditorDialog = (props) => {
       console.error(error);
       toastr.error(error);
     } finally {
+      onChangeImage({ x: 0.5, y: 0.5, zoom: 1, uploadedFile: null });
       setIsLoading(false);
     }
   };
@@ -166,12 +158,9 @@ const AvatarEditorDialog = (props) => {
             t={t}
             className="wrapper-image-editor"
             classNameWrapperImageCropper="avatar-editor"
-            image={image || avatar}
+            image={image}
             setPreview={props.setPreview || setPreview}
             onChangeImage={onChangeImage || onChangeAvatar}
-            // Preview={
-            //   <AvatarPreview avatar={preview} userName={profile?.displayName} />
-            // }
             onChangeFile={onChangeFile}
             maxImageSize={maxImageUploadSize}
           />
@@ -185,7 +174,7 @@ const AvatarEditorDialog = (props) => {
           size="normal"
           scale
           primary={true}
-          onClick={onSave || onSaveClick}
+          onClick={onSave ? () => onSave(image) : onSaveClick}
           isLoading={isLoading}
         />
         <Button

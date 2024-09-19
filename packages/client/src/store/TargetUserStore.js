@@ -30,11 +30,16 @@ import { NotificationsType } from "@docspace/shared/enums";
 import { LANGUAGE, COOKIE_EXPIRATION_YEAR } from "@docspace/shared/constants";
 import { makeAutoObservable } from "mobx";
 import { setCookie } from "@docspace/shared/utils/cookie";
+
 import {
   changeNotificationSubscription,
   getNotificationSubscription,
 } from "@docspace/shared/api/settings";
 import { toastr } from "@docspace/shared/components/toast";
+
+import UploadSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
+import TrashIconSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
+
 const { Badges, RoomsActivity, DailyFeed, UsefulTips } = NotificationsType;
 class TargetUserStore {
   peopleStore = null;
@@ -159,6 +164,29 @@ class TargetUserStore {
   setChangeAvatarVisible = (visible) => {
     //console.log("setChangeAvatarVisible", { visible });
     this.changeAvatarVisible = visible;
+  };
+
+  deleteProfileAvatar = async () => {
+    const res = await api.people.deleteAvatar(this.targetUser.id);
+    this.updateCreatedAvatar(res);
+    this.setHasAvatar(false);
+    return;
+  };
+
+  getProfileModel = (t) => {
+    return [
+      {
+        label: t("RoomLogoCover:UploadPicture"),
+        icon: UploadSvgUrl,
+        key: "upload",
+        onClick: (ref) => ref.current.click(),
+      },
+      {
+        label: t("Common:Delete"),
+        icon: TrashIconSvgUrl,
+        onClick: () => this.deleteProfileAvatar(),
+      },
+    ];
   };
 
   setSubscriptions = (

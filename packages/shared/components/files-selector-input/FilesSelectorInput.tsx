@@ -76,7 +76,7 @@ const FilesSelectorInput = ({
   socketHelper,
   currentDeviceType,
   setBackupToPublicRoomVisible,
-  ...other
+  filesSelectorSettings,
 }: FilesSelectorInputProps) => {
   const { t } = useTranslation("Common");
 
@@ -227,7 +227,7 @@ const FilesSelectorInput = ({
         getFilesArchiveError={() => ""}
         rootFolderType={FolderType.Rooms}
         currentDeviceType={currentDeviceType ?? DeviceType.desktop}
-        {...other}
+        {...filesSelectorSettings}
       />
     </StyledBodyWrapper>
   );

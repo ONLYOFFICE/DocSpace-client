@@ -46,7 +46,7 @@ export type FilesSelectorSettings =
     }
   | { getIcon?: never; filesSettings: TFilesSettings };
 
-export type FilesSelectorInputProps = FilesSelectorSettings & {
+export type FilesSelectorInputProps = {
   newPath: string;
   basePath: string;
   isErrorPath: boolean;
@@ -69,6 +69,7 @@ export type FilesSelectorInputProps = FilesSelectorSettings & {
   isRoomBackup?: boolean;
   isDocumentIcon?: boolean;
   socketHelper: SocketIOHelper;
+  filesSelectorSettings: FilesSelectorSettings;
 
   setBasePath: (folders: TBreadCrumb[]) => void;
   toDefault: VoidFunction;

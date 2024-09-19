@@ -23,5 +23,12 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-export { default as FilesSelectorInput } from "./FilesSelectorInput";
-export type { FilesSelectorSettings } from "./FilesSelectorInput.types";
+
+import type { DirectThirdPartyConnectionState } from "./DirectThirdPartyConnection.types";
+
+export const initialState = {
+  //   folderList: {},
+  isLoading: false,
+  isInitialLoading: true,
+  isUpdatingInfo: false,
+} satisfies DirectThirdPartyConnectionState;

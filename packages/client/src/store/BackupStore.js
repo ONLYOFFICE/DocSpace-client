@@ -43,8 +43,14 @@ import { connectedCloudsTypeTitleTranslation } from "../helpers/filesUtils.js";
 
 const { EveryDayType, EveryWeekType } = AutoBackupPeriod;
 
+/**
+ * @typedef {import("@docspace/shared/types").ThirdPartyAccountType} ThirdPartyAccountType
+ * @typedef {import("@docspace/shared/api/files/types").TConnectingStorage} TConnectingStorage
+ */
+
 class BackupStore {
   authStore = null;
+  /** @type {import("./ThirdPartyStore").default} */
   thirdPartyStore = null;
 
   restoreResource = null;
@@ -100,8 +106,10 @@ class BackupStore {
   defaultEnableSchedule = false;
 
   storageRegions = [];
+  /** @type {ThirdPartyAccountType | null} */
   selectedThirdPartyAccount = null;
   connectedThirdPartyAccount = null;
+  /** @type {ThirdPartyAccountType[]} */
   accounts = [];
   connectedAccount = [];
 
@@ -208,7 +216,9 @@ class BackupStore {
 
     this.setConnectedThirdPartyAccount(connectedAccount);
 
+    /** @type {ThirdPartyAccountType[]} */
     let accounts = [],
+      /** @type {ThirdPartyAccountType} */
       selectedAccount = {};
     let index = 0;
 
@@ -239,6 +249,15 @@ class BackupStore {
     );
   };
 
+  /**
+   * @typedef {Object} GetThirdPartyAccountReturnType
+   * @property {ThirdPartyAccountType} account
+   * @property {boolean} isConnected
+   *
+   * @param {TConnectingStorage} provider
+   * @param {import("@docspace/shared/types").TTranslation} t
+   * @returns {GetThirdPartyAccountReturnType}
+   */
   getThirdPartyAccount = (provider, t) => {
     const serviceTitle = connectedCloudsTypeTitleTranslation(provider.name, t);
     const serviceLabel = provider.connected
@@ -276,6 +295,9 @@ class BackupStore {
     this.accounts = accounts;
   };
 
+  /**
+   * @param {ThirdPartyAccountType | null} elem
+   */
   setSelectedThirdPartyAccount = (elem) => {
     this.selectedThirdPartyAccount = elem;
   };

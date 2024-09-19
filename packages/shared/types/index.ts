@@ -43,6 +43,28 @@ export type ProviderType = {
   provider_id: unknown;
   customer_title: string;
 };
+
+export type ConnectedThirdPartyAccountType = {
+  id: string;
+  title: string;
+  providerId: string;
+  providerKey: string;
+};
+
+export type ThirdPartyAccountType = {
+  key: string | number;
+  title: string;
+  label: string;
+  provider_key: string;
+  provider_link?: string;
+  storageIsConnected: boolean;
+  connected: boolean;
+  provider_id?: string;
+  id?: string;
+  disabled: boolean;
+  className?: string;
+};
+
 export type TTranslation = (
   key: string,
   params?: { [key: string]: string | string[] },

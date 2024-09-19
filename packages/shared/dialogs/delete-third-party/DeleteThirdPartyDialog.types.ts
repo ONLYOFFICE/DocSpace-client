@@ -24,7 +24,11 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { ProviderType } from "../../types";
+import type {
+  ConnectedThirdPartyAccountType,
+  Nullable,
+  ProviderType,
+} from "../../types";
 
 export interface DeleteThirdPartyDialogProps {
   visible: boolean;
@@ -32,7 +36,9 @@ export interface DeleteThirdPartyDialogProps {
   isConnectionViaBackupModule?: boolean;
   currentFolderId?: string | number | null;
   deleteThirdParty: (id: number) => Promise<void>;
-  setConnectedThirdPartyAccount: (account: unknown) => void;
+  setConnectedThirdPartyAccount: (
+    account: Nullable<ConnectedThirdPartyAccountType>,
+  ) => void;
   setDeleteThirdPartyDialogVisible: (visible: boolean) => void;
   setThirdPartyProviders: (providers: ProviderType[]) => void;
   providers: ProviderType[];

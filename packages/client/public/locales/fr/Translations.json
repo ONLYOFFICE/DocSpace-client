@@ -34,7 +34,6 @@
   "RoleFormFillerDescription": "Opérations sur les fichiers existants : affichage, remplissage de formulaires, révision, commentaires.",
   "RoleFormFillerFormRoomDescription": "Les remplisseurs de formulaires peuvent remplir des formulaires et ne visualiser que leurs formulaires terminés ou entamés dans les dossiers Complet et En cours.",
   "RolePortalAdminDescription": "Les administrateurs de {{productName}} peuvent accéder aux paramètres de {{productName}}, gérer et archiver les salles, inviter de nouveaux utilisateurs et attribuer des rôles inférieurs à leur niveau. Tous les administrateurs ont accès à la section Documents.",
-  "RolePowerUserDescription": "Les utilisateurs avancés peuvent créer et modifier des fichiers dans la salle, mais ne peuvent pas créer de salles, gérer les utilisateurs ou accéder aux paramètres.",
   "RolePowerUserFormRoomDescription": "Les utilisateurs avancés peuvent télécharger des formulaires dans la salle et ont un accès complet aux dossiers Complet et En cours.",
   "RoleReviewer": "Réviseur",
   "RoleReviewerDescription": "Opérations sur les fichiers existants : affichage, révision, commentaires.",

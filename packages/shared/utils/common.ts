@@ -1190,7 +1190,7 @@ export const getUserTypeDescription = (
 
   if (isRoomAdmin) return t("Translations:RoleRoomAdminDescription");
 
-  if (isCollaborator) return t("Translations:RolePowerUserDescription");
+  if (isCollaborator) return t("Translations:RoleNewUserDescription");
 
   return t("Translations:RoleViewerDescription");
 };

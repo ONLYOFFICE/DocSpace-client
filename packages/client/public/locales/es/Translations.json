@@ -34,7 +34,6 @@
   "RoleFormFillerDescription": "Operaciones con archivos existentes: visualización, relleno de formularios, revisión, comentarios.",
   "RoleFormFillerFormRoomDescription": "Los rellenadores de formularios pueden rellenar formularios y ver solo sus formularios rellenados/iniciados dentro de las carpetas Completado y En curso.",
   "RolePortalAdminDescription": "Los administradores de {{productName}} pueden acceder a la configuración de {{productName}}, gestionar y archivar salas, invitar a nuevos usuarios y asignar roles a un nivel inferior al suyo. Todos los administradores tienen acceso a la sección Documentos.",
-  "RolePowerUserDescription": "Los usuarios avanzados pueden crear y editar archivos en la sala, pero no pueden crear salas, gestionar usuarios ni acceder a la configuración.",
   "RolePowerUserFormRoomDescription": "Los usuarios avanzados pueden cargar formularios en la sala y tienen acceso completo a las carpetas Completado y En curso.",
   "RoleReviewer": "Revisor",
   "RoleReviewerDescription": "Operaciones con archivos existentes: visualización, revisión, comentarios.",

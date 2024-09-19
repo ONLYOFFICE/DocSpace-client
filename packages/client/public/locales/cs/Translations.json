@@ -34,7 +34,6 @@
   "RoleFormFillerDescription": "Operace s existujícími soubory: prohlížení, vyplňování formulářů, prohlížení, komentování.",
   "RoleFormFillerFormRoomDescription": "Vyplňovatelé formulářů mohou vyplňovat formuláře a zobrazovat pouze své dokončené/zahájené formuláře ve složkách Dokončeno a V procesu.",
   "RolePortalAdminDescription": "Správci {{productName}} mají přístup k nastavení {{productName}}, mohou spravovat a archivovat místnosti, zvát nové uživatele a přidělovat role pod svou úrovní. Všichni správci mají přístup do sekce Dokumenty.",
-  "RolePowerUserDescription": "Výkonní uživatelé mohou vytvářet a upravovat soubory v místnosti, ale nemohou vytvářet místnosti, spravovat uživatele ani přistupovat k nastavením.",
   "RolePowerUserFormRoomDescription": "Zkušení uživatelé mohou nahrávat formuláře do místnosti a mají plný přístup ke složkám Dokončeno a V procesu.",
   "RoleReviewer": "Recenzent",
   "RoleReviewerDescription": "Operace s existujícími soubory: prohlížení, prohlížení, komentování.",

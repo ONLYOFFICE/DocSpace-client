@@ -34,7 +34,6 @@
   "RoleFormFillerDescription": "Hoạt động với các tập tin hiện có: xem, điền biểu mẫu, xem lại, nhận xét.",
   "RoleFormFillerFormRoomDescription": "Người điền biểu mẫu có thể điền vào các biểu mẫu và chỉ xem các biểu mẫu đã hoàn thành/bắt đầu của họ trong các thư mục Hoàn thành và Đang xử lý.",
   "RolePortalAdminDescription": "Quản trị viên {{productName}} có thể truy cập cài đặt {{productName}}, quản lý và sao lưu phòng, mời người dùng mới và chỉ định vai trò dưới cấp độ của họ. Tất cả quản trị viên đều có quyền truy cập vào phần Cá nhân.",
-  "RolePowerUserDescription": "Người dùng cấp cao có thể tạo và chỉnh sửa các tập tin trong phòng, nhưng không thể tạo phòng, quản lý người dùng hoặc truy cập cài đặt.",
   "RolePowerUserFormRoomDescription": "Người dùng cấp cao có thể tải biểu mẫu lên phòng và có toàn quyền truy cập vào các thư mục Hoàn thành và Đang xử lý.",
   "RoleReviewer": "Người phê duyệt",
   "RoleReviewerDescription": "Hoạt động với các tập tin hiện có: xem, xem lại, nhận xét.",

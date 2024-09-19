@@ -34,7 +34,6 @@
   "RoleFormFillerDescription": "Operações com ficheiros existentes: visualização, preenchimento de formulários, revisão, comentários.",
   "RoleFormFillerFormRoomDescription": "Os preenchedores de formulários podem preencher formulários e visualizar apenas seus formulários concluídos/iniciados nas pastas Concluído e Em processamento.",
   "RolePortalAdminDescription": "Os administradores do {{productName}} podem aceder às configurações do {{productName}}, gerir e arquivar salas, convidar novos utilizadores e atribuir papéis quem está abaixo do seu nível. Todos os administradores têm acesso à secção Documentos.",
-  "RolePowerUserDescription": "Os utilizadores com poder podem criar e editar ficheiros na sala, mas não podem criar salas, gerir os utilizadores ou aceder às configurações.",
   "RolePowerUserFormRoomDescription": "Usuários avançados podem carregar formulários na sala e ter acesso total às pastas Concluído e Em processamento.",
   "RoleReviewer": "Revisor",
   "RoleReviewerDescription": "Operações com ficheiros existentes: visualização, revisão, comentários.",

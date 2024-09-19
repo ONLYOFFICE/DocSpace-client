@@ -41,9 +41,10 @@ const getRoomAdminDescription = (roomType, t) => {
   switch (roomType) {
     case RoomsType.FormRoom:
       return t("Translations:RoleRoomAdminFormRoomDescription");
-
+    case -1:
+      return t("Translations:RoleRoomAdminDescription");
     default:
-      return t("Translations:RoleRoomManagerDescriptioin");
+      return t("Translations:RoleRoomManagerDescription");
   }
 };
 /**
@@ -55,7 +56,8 @@ const getPowerUserDescription = (roomType, t) => {
   switch (roomType) {
     case RoomsType.FormRoom:
       return t("Translations:RolePowerUserFormRoomDescription");
-
+    case -1:
+      return t("Translations:RoleNewUserDescription");
     default:
       return t("Translations:RoleContentCreatorDescription");
   }
@@ -100,6 +102,16 @@ export const getAccessOptions = (
     },
     roomAdmin: {
       key: "roomAdmin",
+      label: t("Common:RoomAdmin"),
+      description: getRoomAdminDescription(roomType, t),
+      ...(!standalone && { quota: t("Common:Paid") }),
+      color: globalColors.favoritesStatus,
+      access:
+        roomType === -1 ? EmployeeType.User : ShareAccessRights.RoomManager,
+      type: "manager",
+    },
+    roomManager: {
+      key: "roomManager",
       label: t("Common:RoomManager"),
       description: getRoomAdminDescription(roomType, t),
       ...(!standalone && { quota: t("Common:Paid") }),
@@ -108,8 +120,18 @@ export const getAccessOptions = (
         roomType === -1 ? EmployeeType.User : ShareAccessRights.RoomManager,
       type: "manager",
     },
-    collaborator: {
-      key: "collaborator",
+    newUser: {
+      key: "newUser",
+      label: t("Common:User"),
+      description: getPowerUserDescription(roomType, t),
+      access:
+        roomType === -1
+          ? EmployeeType.Collaborator
+          : ShareAccessRights.Collaborator,
+      type: "collaborator",
+    },
+    contentCreator: {
+      key: "contentCreator",
       label: t("Common:ContentCreator"),
       description: getPowerUserDescription(roomType, t),
       access:
@@ -118,13 +140,14 @@ export const getAccessOptions = (
           : ShareAccessRights.Collaborator,
       type: "collaborator",
     },
-    user: {
-      key: "user",
-      label: t("Common:User"),
-      description: t("Translations:RoleUserDescription"),
-      access: EmployeeType.Guest,
-      type: "user",
-    },
+    // TODO: Replace to Guest
+    // user: {
+    //   key: "user",
+    //   label: t("Common:User"),
+    //   description: t("Translations:RoleUserDescription"),
+    //   access: EmployeeType.Guest,
+    //   type: "user",
+    // },
     editor: {
       key: "editor",
       label: t("Common:Editor"),
@@ -167,14 +190,14 @@ export const getAccessOptions = (
       options = [
         accesses.roomAdmin,
         { key: "s1", isSeparator: withSeparator },
-        accesses.collaborator,
+        accesses.contentCreator,
         accesses.formFiller,
         accesses.viewer,
       ];
       break;
     case RoomsType.EditingRoom:
       options = [
-        accesses.roomAdmin,
+        accesses.roomManager,
         { key: "s1", isSeparator: withSeparator },
         accesses.collaborator,
         accesses.editor,
@@ -183,9 +206,9 @@ export const getAccessOptions = (
       break;
     case RoomsType.ReviewRoom:
       options = [
-        accesses.roomAdmin,
+        accesses.roomManager,
         { key: "s1", isSeparator: withSeparator },
-        accesses.collaborator,
+        accesses.contentCreator,
         accesses.reviewer,
         accesses.commentator,
         accesses.viewer,
@@ -193,17 +216,17 @@ export const getAccessOptions = (
       break;
     case RoomsType.ReadOnlyRoom:
       options = [
-        accesses.roomAdmin,
+        accesses.roomManager,
         { key: "s1", isSeparator: withSeparator },
-        accesses.collaborator,
+        accesses.contentCreator,
         accesses.viewer,
       ];
       break;
     case RoomsType.CustomRoom:
       options = [
-        accesses.roomAdmin,
+        accesses.roomManager,
         { key: "s1", isSeparator: withSeparator },
-        accesses.collaborator,
+        accesses.contentCreator,
         accesses.editor,
         accesses.formFiller,
         accesses.reviewer,
@@ -212,14 +235,14 @@ export const getAccessOptions = (
       ];
       break;
     case RoomsType.PublicRoom:
-      options = [accesses.roomAdmin, accesses.collaborator];
+      options = [accesses.roomManager, accesses.contentCreator];
       break;
 
     case RoomsType.FormRoom:
       options = [
-        accesses.roomAdmin,
+        accesses.roomManager,
         { key: "s1", isSeparator: withSeparator },
-        accesses.collaborator,
+        accesses.contentCreator,
         accesses.formFiller,
       ];
       break;
@@ -230,8 +253,8 @@ export const getAccessOptions = (
         ...options,
         accesses.roomAdmin,
         { key: "s1", isSeparator: withSeparator },
-        accesses.collaborator,
-        accesses.user,
+        accesses.newUser,
+        // accesses.user, // TODO: Replace to Guest
       ];
       break;
   }

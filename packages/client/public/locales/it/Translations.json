@@ -34,7 +34,6 @@
   "RoleFormFillerDescription": "Operazioni con file esistenti: visualizzazione, compilazione moduli, revisione, commenti.",
   "RoleFormFillerFormRoomDescription": "I compilatori di moduli possono compilare i moduli e visualizzare solo i moduli completati/iniziati nelle cartelle Completato e In corso.",
   "RolePortalAdminDescription": "Gli amministratori di {{productName}} possono accedere alle impostazioni di {{productName}}, gestire e archiviare stanze, invitare nuovi utenti e assegnare ruoli al di sotto del loro livello. Tutti gli amministratori hanno accesso alla sezione Documenti.",
-  "RolePowerUserDescription": "Gli utenti esperti possono creare e modificare file nella stanza, ma non possono creare stanze, gestire utenti o accedere alle impostazioni.",
   "RolePowerUserFormRoomDescription": "Gli utenti esperti possono caricare i moduli nella stanza e avere accesso completo alle cartelle Completato e In corso.",
   "RoleReviewer": "Recensore",
   "RoleReviewerDescription": "Operazioni con file esistenti: visualizzazione, revisione, commenti.",

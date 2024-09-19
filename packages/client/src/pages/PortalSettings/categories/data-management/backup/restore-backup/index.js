@@ -298,35 +298,37 @@ const RestoreBackup = (props) => {
   );
 };
 
-export default inject(({ settingsStore, backup, currentQuotaStore }) => {
-  const { currentDeviceType, standalone, checkEnablePortalSettings } =
-    settingsStore;
-  const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
-  const {
-    getProgress,
-    clearProgressInterval,
-    setStorageRegions,
-    setThirdPartyStorage,
-    setConnectedThirdPartyAccount,
-    setRestoreResource,
-  } = backup;
+export const Component = inject(
+  ({ settingsStore, backup, currentQuotaStore }) => {
+    const { currentDeviceType, standalone, checkEnablePortalSettings } =
+      settingsStore;
+    const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
+    const {
+      getProgress,
+      clearProgressInterval,
+      setStorageRegions,
+      setThirdPartyStorage,
+      setConnectedThirdPartyAccount,
+      setRestoreResource,
+    } = backup;
 
-  const buttonSize =
-    currentDeviceType !== DeviceType.desktop ? "normal" : "small";
+    const buttonSize =
+      currentDeviceType !== DeviceType.desktop ? "normal" : "small";
 
-  const isEnableRestore = checkEnablePortalSettings(
-    isRestoreAndAutoBackupAvailable,
-  );
+    const isEnableRestore = checkEnablePortalSettings(
+      isRestoreAndAutoBackupAvailable,
+    );
 
-  return {
-    standalone,
-    isEnableRestore,
-    setStorageRegions,
-    setThirdPartyStorage,
-    buttonSize,
-    setConnectedThirdPartyAccount,
-    clearProgressInterval,
-    getProgress,
-    setRestoreResource,
-  };
-})(withTranslation(["Settings", "Common"])(observer(RestoreBackup)));
+    return {
+      standalone,
+      isEnableRestore,
+      setStorageRegions,
+      setThirdPartyStorage,
+      buttonSize,
+      setConnectedThirdPartyAccount,
+      clearProgressInterval,
+      getProgress,
+      setRestoreResource,
+    };
+  },
+)(withTranslation(["Settings", "Common"])(observer(RestoreBackup)));

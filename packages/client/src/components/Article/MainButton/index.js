@@ -656,20 +656,20 @@ const ArticleMainButtonContent = (props) => {
         id: "invite_room-collaborator",
         className: "main-button_drop-down",
         icon: PersonDefaultReactSvgUrl,
-        label: t("Common:PowerUser"),
+        label: t("Common:User"),
         onClick: onInvite,
         action: EmployeeType.Collaborator,
         key: "collaborator",
       },
-      {
-        id: "invite_user",
-        className: "main-button_drop-down",
-        icon: PersonDefaultReactSvgUrl,
-        label: t("Common:User"),
-        onClick: onInvite,
-        action: EmployeeType.Guest,
-        key: "user",
-      },
+      // {
+      //   id: "invite_user",
+      //   className: "main-button_drop-down",
+      //   icon: PersonDefaultReactSvgUrl,
+      //   label: t("Common:User"),
+      //   onClick: onInvite,
+      //   action: EmployeeType.Guest,
+      //   key: "user",
+      // },
       ...(!isMobileArticle
         ? [
             {

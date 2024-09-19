@@ -35,7 +35,6 @@ import {
 import { getGroupMembersInRoom } from "@docspace/shared/api/groups";
 import { InputSize } from "@docspace/shared/components/text-input";
 import { SearchInput } from "@docspace/shared/components/search-input";
-import { Text } from "@docspace/shared/components/text";
 import {
   TGroup,
   TGroupMemberInvitedInRoom,
@@ -44,7 +43,10 @@ import { MIN_LOADER_TIMER } from "@docspace/shared/selectors/Files/FilesSelector
 
 import EmptyContainer from "./EmptyContainer";
 import GroupMembersList from "./sub-components/GroupMembersList/GroupMembersList";
-import { StyledBodyContent } from "./EditGroupMembersDialog.styled";
+import {
+  StyledBodyContent,
+  StyledHeaderText,
+} from "./EditGroupMembersDialog.styled";
 import { ModalBodyLoader } from "./sub-components/ModalBodyLoader/ModalBodyLoader";
 
 interface EditGroupMembersProps {
@@ -134,9 +136,15 @@ const EditGroupMembers = ({
       withoutPadding
     >
       <ModalDialog.Header>
-        <Text fontSize="21px" fontWeight={700} noSelect>
+        <StyledHeaderText
+          fontSize="21px"
+          fontWeight={700}
+          dir="auto"
+          truncate
+          noSelect
+        >
           {group.name}
-        </Text>
+        </StyledHeaderText>
       </ModalDialog.Header>
 
       <ModalDialog.Body>

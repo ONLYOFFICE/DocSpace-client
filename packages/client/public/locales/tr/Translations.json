@@ -27,7 +27,6 @@
   "Other": "Diğer",
   "OwnerChange": "Sahibi değiştir",
   "Presentations": "Sunumlar",
-  "PublicRoomLinkValidTime": "Bu bağlantı {{date}} tarihine kadar geçerlidir. Süresi dolduğunda bu bağlantı üzerinden odaya erişim mümkün olmayacaktır.",
   "RoleCommentator": "Yorumcu",
   "RoleCommentatorDescription": "Mevcut dosyalarla işlemler: görüntüleme, yorum yapma.",
   "RoleEditorDescription": "Mevcut dosyalarla işlemler: görüntüleme, düzenleme, form doldurma, gözden geçirme, yorum yapma.",

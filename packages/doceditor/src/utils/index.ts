@@ -44,7 +44,7 @@ export const getBackUrl = (
 
   if (rootFolderType === FolderType.Rooms) {
     if (key) {
-      backUrl = `/rooms/share?key=${key}`;
+      backUrl = `/rooms/share?key=${key}&folder=${folderId}`;
     } else {
       backUrl = `/rooms/shared/${folderId}/filter?folder=${folderId}`;
     }

@@ -12,23 +12,29 @@ import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 
 interface DeleteClientDialogProps {
   isVisible?: boolean;
+  isGroup?: boolean;
   onClose?: () => void;
-  onDisable?: () => Promise<void>;
+  onDelete?: () => Promise<void>;
 }
 
 const DeleteClientDialog = (props: DeleteClientDialogProps) => {
   const { t, ready } = useTranslation(["OAuth", "Common"]);
-  const { isVisible, onClose, onDisable } = props;
+  const { isVisible, isGroup, onClose, onDelete } = props;
 
   const [isRequestRunning, setIsRequestRunning] = React.useState(false);
 
-  const onDisableClick = async () => {
+  const onDeleteClick = async () => {
     try {
       setIsRequestRunning(true);
-      await onDisable?.();
+      await onDelete?.();
 
       setIsRequestRunning(true);
       onClose?.();
+      toastr.success(
+        isGroup
+          ? t("OAuth:ApplicationsDeletedSuccessfully")
+          : t("OAuth:ApplicationDeletedSuccessfully"),
+      );
     } catch (error: unknown) {
       const e = error as TData;
       toastr.error(e);
@@ -43,9 +49,15 @@ const DeleteClientDialog = (props: DeleteClientDialogProps) => {
       onClose={onClose}
       displayType={ModalDialogType.modal}
     >
-      <ModalDialog.Header>{t("DeleteHeader")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {isGroup ? t("DeleteApplications") : t("DeleteApplication")}
+      </ModalDialog.Header>
       <ModalDialog.Body>
-        <Trans t={t} i18nKey="DeleteDescription" ns="OAuth" />
+        {isGroup ? (
+          <Trans t={t} i18nKey="DeleteApplicationsDescription" ns="OAuth" />
+        ) : (
+          <Trans t={t} i18nKey="DeleteApplicationDescription" ns="OAuth" />
+        )}
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -56,7 +68,7 @@ const DeleteClientDialog = (props: DeleteClientDialogProps) => {
           scale
           primary
           isLoading={isRequestRunning}
-          onClick={onDisableClick}
+          onClick={onDeleteClick}
         />
         <Button
           className="cancel-button"
@@ -75,6 +87,8 @@ const DeleteClientDialog = (props: DeleteClientDialogProps) => {
 export default inject(({ oauthStore }: { oauthStore: OAuthStoreProps }) => {
   const {
     bufferSelection,
+    selection,
+
     setDeleteDialogVisible,
     setActiveClient,
     setSelection,
@@ -82,17 +96,26 @@ export default inject(({ oauthStore }: { oauthStore: OAuthStoreProps }) => {
     deleteDialogVisible,
   } = oauthStore;
 
+  const isGroup = !!selection.length;
+
   const onClose = () => {
     setDeleteDialogVisible(false);
   };
 
-  const onDisable = async () => {
+  const onDelete = async () => {
+    if (isGroup) {
+      await deleteClient(selection);
+
+      setActiveClient("");
+      setSelection("");
+
+      return;
+    }
     if (!bufferSelection) return;
-    setActiveClient(bufferSelection.clientId);
     await deleteClient([bufferSelection.clientId]);
     setActiveClient("");
     setSelection("");
   };
 
-  return { isVisible: deleteDialogVisible, onClose, onDisable };
+  return { isVisible: deleteDialogVisible, isGroup, onClose, onDelete };
 })(observer(DeleteClientDialog));

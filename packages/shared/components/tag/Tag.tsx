@@ -27,7 +27,7 @@
 import React from "react";
 import { ReactSVG } from "react-svg";
 
-import CrossIconReactSvgUrl from "PUBLIC_DIR/images/cross.react.svg?url";
+import CrossIconReactSvgUrl from "PUBLIC_DIR/images/icons/12/cross.react.svg?url";
 
 import { DropDown } from "../drop-down";
 import { DropDownItem } from "../drop-down-item";

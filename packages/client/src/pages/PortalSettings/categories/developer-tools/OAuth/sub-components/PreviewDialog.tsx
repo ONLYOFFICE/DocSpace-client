@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-import styled, { useTheme } from "styled-components";
-import { useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
+import { useTranslation, Trans } from "react-i18next";
 
 import { IClientProps } from "@docspace/shared/utils/oauth/types";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
@@ -10,7 +10,7 @@ import { SocialButton } from "@docspace/shared/components/social-button";
 import { Text } from "@docspace/shared/components/text";
 import { Textarea } from "@docspace/shared/components/textarea";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 import { generatePKCEPair } from "@docspace/shared/utils/oauth";
 import { AuthenticationMethod } from "@docspace/shared/enums";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -19,65 +19,11 @@ import OnlyofficeLight from "PUBLIC_DIR/images/onlyoffice.light.react.svg";
 import OnlyofficeDark from "PUBLIC_DIR/images/onlyoffice.dark.react.svg";
 
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
-
-const StyledContainer = styled.div`
-  width: 100%;
-  height: 100%;
-
-  box-sizing: border-box;
-
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`;
-
-const StyledPreviewContainer = styled.div`
-  width: 100%;
-  height: 152px;
-
-  box-sizing: border-box;
-
-  border: ${(props) => props.theme.oauth.previewDialog.border};
-
-  border-radius: 6px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .social-button {
-    max-width: 226px;
-
-    padding: 11px 16px;
-
-    box-sizing: border-box;
-
-    display: flex;
-    gap: 16px;
-
-    .iconWrapper {
-      padding: 0;
-      margin: 0;
-    }
-  }
-`;
-
-StyledPreviewContainer.defaultProps = { theme: Base };
-
-const StyledBlocksContainer = styled.div`
-  width: 100%;
-  height: auto;
-
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-
-  .block-container {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-`;
+import {
+  StyledContainer,
+  StyledPreviewContainer,
+  StyledBlocksContainer,
+} from "../OAuth.styled";
 
 const htmlBlock = `<body>
     <button id="docspace-button" class="docspace-button">
@@ -176,21 +122,21 @@ const PreviewDialog = ({
 
   const encodingScopes = encodeURI(scopesString || "");
 
-  const getData = React.useCallback(() => {
-    const { verifier, challenge, state: s } = generatePKCEPair();
-
-    setCodeVerifier(verifier);
-    setCodeChallenge(challenge);
-    setState(s);
-  }, []);
-
   React.useEffect(() => {
+    const getData = () => {
+      const { verifier, challenge, state: s } = generatePKCEPair();
+
+      setCodeVerifier(verifier);
+      setCodeChallenge(challenge);
+      setState(s);
+    };
+
     getData();
-  }, [getData]);
+  }, []);
 
   const getLink = () => {
     return `${
-      window?.ClientConfig?.oauth2.origin
+      window?.ClientConfig?.oauth2.origin || window.location.origin
     }/oauth2/authorize?response_type=code&client_id=${client?.clientId}&redirect_uri=${
       client?.redirectUris[0]
     }&scope=${encodingScopes}&state=${state}${
@@ -222,14 +168,22 @@ const PreviewDialog = ({
       displayType={ModalDialogType.aside}
       onClose={onClose}
       withFooterBorder
+      withBodyScroll
     >
-      <ModalDialog.Header>{t("AuthButton")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("OAuth:AuthButton")}</ModalDialog.Header>
       <ModalDialog.Body>
         <StyledContainer>
           <StyledPreviewContainer>
             <SocialButton
               className="social-button"
-              label={t("SignIn")}
+              label={
+                <Trans
+                  t={t}
+                  ns="OAuth"
+                  i18nKey="SignIn"
+                  values={{ productName: t("Common:ProductName") }}
+                />
+              }
               IconComponent={icon}
               onClick={() => {
                 window.open(link, "login", linkParams);
@@ -275,7 +229,7 @@ const PreviewDialog = ({
             </div>
             <div className="block-container">
               <Text fontWeight={600} lineHeight="20px" fontSize="13px" noSelect>
-                {t("AuthorizeLink")}
+                {t("OAuth:AuthorizeLink")}
               </Text>
               <Textarea
                 heightTextArea={64}
@@ -307,7 +261,7 @@ const PreviewDialog = ({
                   fontSize="13px"
                   noSelect
                 >
-                  {t("CodeVerifier")}
+                  {t("OAuth:CodeVerifier")}
                 </Text>
                 <Textarea
                   heightTextArea={64}

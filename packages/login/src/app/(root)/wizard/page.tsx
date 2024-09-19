@@ -29,7 +29,6 @@ import { redirect } from "next/navigation";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
-import { GreetingContainer } from "@/components/GreetingContainer";
 import {
   getMachineName,
   getPortalPasswordSettings,
@@ -40,6 +39,7 @@ import {
 } from "@/utils/actions";
 
 import WizardForm from "./page.client";
+import WizardGreeting from "@/components/WizardGreeting/index.client";
 
 async function Page() {
   const settings = await getSettings();
@@ -67,10 +67,7 @@ async function Page() {
   return (
     <ColorTheme themeId={ThemeId.LinkForgotPassword}>
       <>
-        <GreetingContainer
-          greetingSettings={objectSettings?.greetingSettings}
-          welcomeTitle="Wizard:WelcomeTitle"
-        />
+        <WizardGreeting />
         <FormWrapper id="wizard-form">
           <WizardForm
             passwordSettings={passwordSettings}

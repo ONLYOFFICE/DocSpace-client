@@ -11,7 +11,6 @@
   "EnterSecretKey": "시크릿 키 입력",
   "EnterUrl": "URL 입력",
   "EnterWebhookName": "웹훅 이름 입력",
-  "EventHint": "전송은 15일 후에 자동으로 삭제됩니다",
   "EventID": "이벤트 ID",
   "FailedToConnect": "이 페이로드를 전송하지 못했습니다: 호스트에게 연결하는 데 실패했습니다",
   "From": "시작",

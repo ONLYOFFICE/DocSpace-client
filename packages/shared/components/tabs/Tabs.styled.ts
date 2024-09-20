@@ -175,6 +175,7 @@ export const Tab = styled.div<{
   isActive: boolean;
   isDisabled?: boolean;
   $type?: TabsTypes;
+  multiple?: boolean;
 }>`
   display: flex;
   white-space: nowrap;
@@ -187,7 +188,7 @@ export const Tab = styled.div<{
   line-height: 20px;
   cursor: pointer;
   opacity: ${(props) => (props.isDisabled && props.$type === TabsTypes.Secondary ? 0.6 : 1)};
-  pointer-events: ${(props) => ((props.isDisabled && props.$type === TabsTypes.Secondary) || props.isActive) && "none"};
+  pointer-events: ${(props) => ((props.isDisabled && props.$type === TabsTypes.Secondary) || (!props.multiple && props.isActive)) && "none"};
   user-select: none;
 
   padding: ${(props) =>

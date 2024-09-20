@@ -168,6 +168,7 @@ const Tabs = (props: TabsProps) => {
             isActive={isActive}
             isDisabled={item?.isDisabled}
             $type={type}
+            multiple={multiple}
             onClick={() => {
               item.onClick?.();
               setSelectedItem(item, index);

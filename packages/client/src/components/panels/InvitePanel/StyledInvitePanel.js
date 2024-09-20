@@ -41,7 +41,6 @@ import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 import DeleteIcon from "PUBLIC_DIR/images/mobile.actions.remove.react.svg";
 import { isMobile, desktop, commonInputStyles } from "@docspace/shared/utils";
 import Base from "@docspace/shared/themes/base";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
 const fillAvailableWidth = css`
   width: 100%;
@@ -494,12 +493,6 @@ const ErrorWrapper = styled.div`
   margin-inline-start: auto;
 `;
 
-const StyledModal = styled(ModalDialog)`
-  .modal-body {
-    padding-bottom: 0;
-  }
-`;
-
 export {
   StyledInvitePanel,
   StyledRow,
@@ -525,5 +518,4 @@ export {
   StyledInviteUserBody,
   StyledExternalLink,
   ErrorWrapper,
-  StyledModal,
 };

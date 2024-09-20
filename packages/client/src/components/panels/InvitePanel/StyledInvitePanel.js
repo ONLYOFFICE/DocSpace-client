@@ -94,6 +94,10 @@ const ScrollList = styled.div`
       ? "auto"
       : props.offsetTop && `calc(100% - ${props.offsetTop}px)`};
 
+  .scroll-body {
+    padding-bottom: 12px !important;
+  }
+
   .row-item {
     @media not ${mobile} {
       width: 448px !important;

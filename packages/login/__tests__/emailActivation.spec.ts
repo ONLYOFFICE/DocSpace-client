@@ -24,16 +24,12 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  endpoints,
-  HEADER_SELF_ERROR_400,
-} from "@docspace/shared/__mocks__/e2e";
+import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
 import { expect, test } from "./fixtures/base";
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 
 const URL = "/login/confirm/EmailActivation";
-const NEXT_REQUEST_URL = "*/**/login/confirm/EmailActivation";
 
 const QUERY_PARAMS = [
   {
@@ -55,10 +51,6 @@ const QUERY_PARAMS = [
 ];
 
 const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
-const NEXT_REQUEST_URL_WITH_PARAMS = getUrlWithQueryParams(
-  NEXT_REQUEST_URL,
-  QUERY_PARAMS,
-);
 
 test("email activation success", async ({ page, mockRequest }) => {
   await mockRequest.router([endpoints.activationStatus]);

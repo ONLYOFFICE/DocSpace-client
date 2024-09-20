@@ -24,7 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { endpoints, HEADER_SELF_ERROR } from "@docspace/shared/__mocks__/e2e";
+import {
+  endpoints,
+  HEADER_SELF_ERROR_404,
+} from "@docspace/shared/__mocks__/e2e";
 import { expect, test } from "./fixtures/base";
 import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
 
@@ -87,7 +90,7 @@ test("tfa auth success", async ({ page, mockRequest }) => {
 
 test("tfa auth error not validated", async ({ page, mockRequest }) => {
   await mockRequest.setHeaders(NEXT_REQUEST_URL_WITH_PARAMS, [
-    HEADER_SELF_ERROR,
+    HEADER_SELF_ERROR_404,
   ]);
   await mockRequest.router([endpoints.tfaAppValidateError]);
   await page.goto(URL_WITH_PARAMS);

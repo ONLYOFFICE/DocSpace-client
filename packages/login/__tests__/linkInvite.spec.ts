@@ -79,8 +79,7 @@ test("link invite login render", async ({ page, mockRequest }) => {
   ]);
 });
 
-test("link invite registration render", async ({ page, mockRequest }) => {
-  await mockRequest.router([endpoints.getUserByEmailError]);
+test("link invite registration render", async ({ page }) => {
   await page.goto(URL_WITH_PARAMS);
 
   await page.getByTestId("email-input").fill("mail@mail.com");
@@ -166,20 +165,11 @@ test("link invite login error", async ({ page, mockRequest }) => {
 });
 
 test("link invite registration success", async ({ page, mockRequest }) => {
-  await mockRequest.router([
-    endpoints.getUserByEmailError,
-    endpoints.createUser,
-    endpoints.login,
-  ]);
+  await mockRequest.router([endpoints.createUser, endpoints.login]);
   await page.goto(URL_WITH_PARAMS);
 
   await page.getByTestId("email-input").fill("mail@mail.com");
   await page.getByTestId("button").click();
-
-  await page
-    .locator("p")
-    .filter({ hasText: "Sign up" })
-    .waitFor({ state: "attached" });
 
   await page.fill("[name='first-name']", "firstName");
   await page.fill("[name='last-name']", "lastName");
@@ -203,4 +193,22 @@ test("link invite registration success", async ({ page, mockRequest }) => {
     "link-invite",
     "link-invite-registration-success-redirect.png",
   ]);
+});
+
+test("link invite registration error", async ({ page, mockRequest }) => {
+  await page.goto(URL_WITH_PARAMS);
+
+  await page.getByTestId("email-input").fill("mail@mail.com");
+  await page.getByTestId("button").click();
+
+  await page.getByTestId("input-block").getByTestId("text-input").fill("123");
+  await page.getByTestId("input-block").getByRole("img").click();
+
+  await page.getByRole("button", { name: "Sign up" }).click();
+
+  await page.setViewportSize({ width: 1920, height: 1080 });
+  await expect(page).toHaveScreenshot(
+    ["desktop", "link-invite", "link-invite-registration-error.png"],
+    { fullPage: true },
+  );
 });

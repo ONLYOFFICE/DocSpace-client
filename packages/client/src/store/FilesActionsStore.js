@@ -3056,7 +3056,7 @@ class FilesActionStore {
         break;
     }
 
-    if (!replaceable) return;
+    if (!replaceable || current.order === replaceable.order) return;
 
     try {
       await changeIndex(current?.id, replaceable.order, current?.isFolder);

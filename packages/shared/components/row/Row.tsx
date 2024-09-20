@@ -186,6 +186,7 @@ const Row = (props: RowProps) => {
             <StyledCheckbox
               className="not-selectable styled-checkbox-container"
               mode={mode}
+              isIndexEditingMode={isIndexEditingMode}
             >
               <StyledElement
                 onClick={onElementClick}

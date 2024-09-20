@@ -24,131 +24,217 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { inject, observer } from "mobx-react";
-import { withTranslation } from "react-i18next";
-import { Button } from "@docspace/shared/components/button";
-import { getFromLocalStorage } from "../../../../../utils";
-import { BackupStorageType } from "@docspace/shared/enums";
-import DirectThirdPartyConnection from "../../common-container/DirectThirdPartyConnection";
+import { useTranslation } from "react-i18next";
+import React, { useRef, useEffect, useState } from "react";
 
-let folder = "";
+import { BackupStorageType } from "@docspace/shared/enums";
+import { isNullOrUndefined } from "@docspace/shared/utils/typeGuards";
+import { Button, type ButtonSize } from "@docspace/shared/components/button";
+import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
+import {
+  DirectThirdPartyConnection,
+  type RemoveItemType,
+} from "@docspace/shared/components/direct-third-party-connection";
+
+import type {
+  ConnectedThirdPartyAccountType,
+  Nullable,
+  ProviderType,
+  ThirdPartyAccountType,
+  TTranslation,
+} from "@docspace/shared/types";
+import type SocketIOHelper from "@docspace/shared/utils/socket";
+import type { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
+import type { FilesSelectorSettings } from "@docspace/shared/components/files-selector-input";
+
+interface ThirdPartyModuleProps {
+  onMakeCopy: (
+    selectedFolder: string | number,
+    moduleName: string,
+    moduleType: string,
+    selectedStorageId?: string,
+    selectedStorageTitle?: string,
+  ) => Promise<void>;
+  isMaxProgress: boolean;
+  buttonSize?: ButtonSize;
+  connectedThirdPartyAccount: Nullable<ConnectedThirdPartyAccountType>;
+  isTheSameThirdPartyAccount: boolean;
+
+  openConnectWindow: (
+    serviceName: string,
+    modal: Window | null,
+  ) => Promise<Window | null>;
+  connectDialogVisible: boolean;
+  deleteThirdPartyDialogVisible: boolean;
+  setConnectDialogVisible: (visible: boolean) => void;
+  setDeleteThirdPartyDialogVisible: (visible: boolean) => void;
+  clearLocalStorage: VoidFunction;
+  setSelectedThirdPartyAccount: (
+    elem: Nullable<Partial<ThirdPartyAccountType>>,
+  ) => void;
+  selectedThirdPartyAccount: Nullable<ThirdPartyAccountType>;
+  accounts: ThirdPartyAccountType[];
+  setThirdPartyAccountsInfo: (t: TTranslation) => Promise<void>;
+  deleteThirdParty: (id: number) => Promise<void>;
+  setConnectedThirdPartyAccount: (
+    account: Nullable<ConnectedThirdPartyAccountType>,
+  ) => void;
+  setThirdPartyProviders: (providers: ProviderType[]) => void;
+  providers: ProviderType[];
+  removeItem: RemoveItemType;
+  newPath: string;
+  basePath: string;
+  isErrorPath: boolean;
+  socketHelper: SocketIOHelper;
+  filesSelectorSettings: FilesSelectorSettings;
+  setBasePath: (folders: TBreadCrumb[]) => void;
+  toDefault: VoidFunction;
+  setNewPath: (folders: TBreadCrumb[], fileName?: string) => void;
+}
+
 const ThirdPartyResource = "ThirdPartyResource";
 
-class ThirdPartyModule extends React.Component {
-  constructor(props) {
-    super(props);
+const ThirdPartyModule = ({
+  onMakeCopy,
+  isMaxProgress,
+  buttonSize,
+  connectedThirdPartyAccount,
+  isTheSameThirdPartyAccount,
 
-    folder = getFromLocalStorage("LocalCopyFolder");
-    const moduleType = getFromLocalStorage("LocalCopyStorageType");
+  openConnectWindow,
+  connectDialogVisible,
+  deleteThirdPartyDialogVisible,
+  setConnectDialogVisible,
+  setDeleteThirdPartyDialogVisible,
+  clearLocalStorage,
+  setSelectedThirdPartyAccount,
+  selectedThirdPartyAccount,
+  accounts,
+  setThirdPartyAccountsInfo,
+  deleteThirdParty,
+  setConnectedThirdPartyAccount,
+  setThirdPartyProviders,
+  providers,
+  removeItem,
+  basePath,
+  isErrorPath,
+  newPath,
+  socketHelper,
+  filesSelectorSettings,
+  setBasePath,
+  setNewPath,
+  toDefault,
+}: ThirdPartyModuleProps) => {
+  const isMountRef = useRef(false);
+  const folderRef = useRef("");
 
-    const selectedFolder = moduleType === ThirdPartyResource ? folder : "";
+  const [isError, setIsError] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
+  const [isStartCopy, setIsStartCopy] = useState(false);
+  const [selectedFolder, setSelectedFolder] = useState<string | number>(() => {
+    folderRef.current = getFromLocalStorage("LocalCopyFolder");
+    const moduleType = getFromLocalStorage<string>("LocalCopyStorageType");
+    return moduleType === ThirdPartyResource ? folderRef.current : "";
+  });
 
-    this.state = {
-      isStartCopy: false,
-      selectedFolder: selectedFolder,
-      isError: false,
-      isLoading: false,
+  const { t } = useTranslation(["Settings", "Common"]);
+
+  useEffect(() => {
+    isMountRef.current = true;
+
+    return () => {
+      isMountRef.current = false;
     };
+  }, []);
 
-    this._isMount = false;
-  }
-
-  componentDidMount() {
-    this._isMount = true;
-  }
-  componentWillUnmount() {
-    this._isMount = false;
-  }
-
-  onSelectFolder = (folderId) => {
-    this._isMount &&
-      this.setState({
-        selectedFolder: folderId,
-      });
+  const onSelectFolder = (folderId: string | number | undefined) => {
+    if (isMountRef.current && !isNullOrUndefined(folderId))
+      setSelectedFolder(folderId);
   };
 
-  isInvalidForm = () => {
-    const { selectedFolder } = this.state;
-
+  const isInvalidForm = () => {
     if (selectedFolder) return false;
 
-    this.setState({
-      isError: true,
-    });
+    setIsError(true);
 
     return true;
   };
 
-  onMakeCopy = async () => {
-    const { onMakeCopy } = this.props;
-    const { selectedFolder, isError } = this.state;
-    const { ResourcesModuleType } = BackupStorageType;
-    if (this.isInvalidForm()) return;
+  const handleMakeCopy = async () => {
+    if (isInvalidForm()) return;
 
-    isError &&
-      this.setState({
-        isError: false,
-      });
+    if (isError) setIsError(false);
 
-    this.setState({
-      isStartCopy: true,
-    });
+    setIsStartCopy(true);
 
     await onMakeCopy(
       selectedFolder,
       ThirdPartyResource,
-      `${ResourcesModuleType}`,
+      `${BackupStorageType.ResourcesModuleType}`,
     );
 
-    this.setState({
-      isStartCopy: false,
-    });
+    setIsStartCopy(false);
   };
 
-  render() {
-    const {
-      isMaxProgress,
-      t,
-      buttonSize,
-      connectedThirdPartyAccount,
-      isTheSameThirdPartyAccount,
-    } = this.props;
-    const { isError, isStartCopy, selectedFolder } = this.state;
+  const isModuleDisabled = !isMaxProgress || isStartCopy;
 
-    const isModuleDisabled = !isMaxProgress || isStartCopy;
+  return (
+    <div className="manual-backup_third-party-module">
+      <DirectThirdPartyConnection
+        openConnectWindow={openConnectWindow}
+        connectDialogVisible={connectDialogVisible}
+        deleteThirdPartyDialogVisible={deleteThirdPartyDialogVisible}
+        connectedThirdPartyAccount={connectedThirdPartyAccount}
+        setConnectDialogVisible={setConnectDialogVisible}
+        setDeleteThirdPartyDialogVisible={setDeleteThirdPartyDialogVisible}
+        clearLocalStorage={clearLocalStorage}
+        setSelectedThirdPartyAccount={setSelectedThirdPartyAccount}
+        isTheSameThirdPartyAccount={isTheSameThirdPartyAccount}
+        selectedThirdPartyAccount={selectedThirdPartyAccount}
+        accounts={accounts}
+        setThirdPartyAccountsInfo={setThirdPartyAccountsInfo}
+        deleteThirdParty={deleteThirdParty}
+        setConnectedThirdPartyAccount={setConnectedThirdPartyAccount}
+        setThirdPartyProviders={setThirdPartyProviders}
+        providers={providers}
+        removeItem={removeItem}
+        newPath={newPath}
+        basePath={basePath}
+        isErrorPath={isErrorPath}
+        socketHelper={socketHelper}
+        filesSelectorSettings={filesSelectorSettings}
+        setBasePath={setBasePath}
+        toDefault={toDefault}
+        setNewPath={setNewPath}
+        onSelectFolder={onSelectFolder}
+        isDisabled={isModuleDisabled}
+        {...(selectedFolder && { id: selectedFolder })}
+        withoutInitPath={!selectedFolder}
+        isError={isError}
+        buttonSize={buttonSize}
+        isSelectFolder
+      />
 
-    return (
-      <div className="manual-backup_third-party-module">
-        <DirectThirdPartyConnection
-          t={t}
-          onSelectFolder={this.onSelectFolder}
-          isDisabled={isModuleDisabled}
-          {...(selectedFolder && { id: selectedFolder })}
-          withoutInitPath={!selectedFolder}
-          isError={isError}
-          buttonSize={buttonSize}
-          isSelectFolder
+      {connectedThirdPartyAccount?.id && isTheSameThirdPartyAccount && (
+        <Button
+          primary
+          size={buttonSize}
+          onClick={handleMakeCopy}
+          label={t("Common:CreateCopy")}
+          isDisabled={isModuleDisabled || selectedFolder === ""}
         />
+      )}
+    </div>
+  );
+};
 
-        {connectedThirdPartyAccount?.id && isTheSameThirdPartyAccount && (
-          <Button
-            label={t("Common:CreateCopy")}
-            onClick={this.onMakeCopy}
-            primary
-            isDisabled={isModuleDisabled || selectedFolder === ""}
-            size={buttonSize}
-          />
-        )}
-      </div>
-    );
-  }
-}
-export default inject(({ backup }) => {
-  const { connectedThirdPartyAccount, isTheSameThirdPartyAccount } = backup;
+export default ThirdPartyModule;
 
-  return {
-    connectedThirdPartyAccount,
-    isTheSameThirdPartyAccount,
-  };
-})(withTranslation(["Settings", "Common"])(observer(ThirdPartyModule)));
+// export default inject(({ backup }) => {
+//   const { connectedThirdPartyAccount, isTheSameThirdPartyAccount } = backup;
+
+//   return {
+//     connectedThirdPartyAccount,
+//     isTheSameThirdPartyAccount,
+//   };
+// })(withTranslation(["Settings", "Common"])(observer(ThirdPartyModule)));

@@ -48,6 +48,13 @@ export type StyledBackupProps = {
   isMobileScale?: boolean;
 };
 
+export type RemoveItemType = {
+  id: string;
+  provider_id: string;
+  providerKey: string;
+  title: string;
+};
+
 export type DirectThirdPartyConnectionState = {
   // folderList: {};
   isLoading: boolean;
@@ -83,12 +90,7 @@ export interface DirectThirdPartyConnectionProps {
   setThirdPartyProviders: (providers: ProviderType[]) => void;
 
   providers: ProviderType[];
-  removeItem: {
-    id: string;
-    provider_id: string;
-    providerKey: string;
-    title: string;
-  };
+  removeItem: RemoveItemType;
   // FilesSelectorInput
   newPath: string;
   basePath: string;

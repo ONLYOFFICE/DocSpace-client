@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -85,13 +86,13 @@ export const endpoints: TEndpoints = {
     url: `${BASE_URL}${SELF_PATH_ACTIVATION_STATUS}`,
     dataHandler: selfHandler,
   },
+  activationStatusError: {
+    url: `${BASE_URL}${SELF_PATH_ACTIVATION_STATUS}`,
+    dataHandler: selfHandler.bind(null, 400),
+  },
   getUserByEmail: {
     url: `${BASE_URL}${SELF_PATH_USER_BY_EMAIL}`,
     dataHandler: selfHandler,
-  },
-  getUserByEmailError: {
-    url: `${BASE_URL}${SELF_PATH_USER_BY_EMAIL}`,
-    dataHandler: selfHandler.bind(null, true),
   },
   checkConfirmLink: {
     url: `${BASE_URL}${CONFIRM_PATH}`,
@@ -111,7 +112,7 @@ export const endpoints: TEndpoints = {
   },
   tfaAppValidateError: {
     url: `${BASE_URL}${TFA_APP_VALIDATE_PATH}`,
-    dataHandler: tfaAppValidateHandler.bind(null, false),
+    dataHandler: tfaAppValidateHandler.bind(null, 400),
   },
   logout: {
     url: `${BASE_URL}authentication/logout`,

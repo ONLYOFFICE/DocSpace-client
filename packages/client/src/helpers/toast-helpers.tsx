@@ -24,8 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Link, LinkTarget } from "@docspace/shared/components/link";
-import { Text } from "@docspace/shared/components/text";
+import { Trans } from "react-i18next";
+
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { LinkTarget } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 import { TTranslation } from "@docspace/shared/types";
 
@@ -36,20 +38,22 @@ export const showSuccessExportRoomIndexToast = (
   openOnNewPage: boolean,
 ) => {
   const toastMessage = (
-    <>
-      <Link
-        color="#5299E0"
-        fontSize="12px"
-        target={openOnNewPage ? LinkTarget.blank : LinkTarget.self}
-        href={fileUrl}
-      >
-        {fileName}
-      </Link>
-      &nbsp;
-      <Text as="span" fontSize="12px">
-        {t("Files:FileExportedToMyDocuments")}
-      </Text>
-    </>
+    <Trans
+      t={t}
+      i18nKey="FileExportedToMyDocuments"
+      ns="Files"
+      values={{ fileName }}
+      components={{
+        1: (
+          <ColorTheme
+            tag="a"
+            themeId={ThemeId.Link}
+            href={fileUrl}
+            target={openOnNewPage ? LinkTarget.blank : LinkTarget.self}
+          />
+        ),
+      }}
+    />
   );
 
   toastr.success(toastMessage);

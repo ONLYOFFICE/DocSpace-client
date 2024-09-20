@@ -141,7 +141,7 @@ const AdditionalResourcesComponent = (props) => {
 
   const checkWidth = () => {
     const url = isManagement()
-      ? "/branding"
+      ? "/settings/branding"
       : "portal-settings/customization/branding";
     window.innerWidth > size.mobile &&
       !isMobileView &&
@@ -330,10 +330,13 @@ export const AdditionalResources = inject(
 
       additionalResourcesData,
       additionalResourcesIsDefault,
-      deviceType,
+      checkEnablePortalSettings,
     } = settingsStore;
 
     const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
+    const isSettingPaid = checkEnablePortalSettings(
+      isBrandingAndCustomizationAvailable,
+    );
 
     return {
       getAdditionalResources,
@@ -342,8 +345,7 @@ export const AdditionalResources = inject(
       additionalResourcesIsDefault,
       setIsLoadedAdditionalResources,
       isLoadedAdditionalResources,
-      isSettingPaid: isBrandingAndCustomizationAvailable,
-      deviceType,
+      isSettingPaid,
     };
   },
 )(

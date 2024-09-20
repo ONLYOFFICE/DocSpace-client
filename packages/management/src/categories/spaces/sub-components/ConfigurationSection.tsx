@@ -26,16 +26,22 @@
 
 import React from "react";
 import { observer } from "mobx-react";
-import { Button } from "@docspace/shared/components/button";
-import { TextInput } from "@docspace/shared/components/text-input";
-import { Text } from "@docspace/shared/components/text";
-import { ConfigurationWrapper } from "../StyledSpaces";
-import { useStore } from "SRC_DIR/store";
-import { isMobile } from "react-device-detect";
-import { toastr } from "@docspace/shared/components/toast";
 import toLower from "lodash/toLower";
-import { TranslationType } from "SRC_DIR/types/spaces";
+import { isMobile } from "react-device-detect";
+
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import {
+  TextInput,
+  InputSize,
+  InputType,
+} from "@docspace/shared/components/text-input";
+import { Text } from "@docspace/shared/components/text";
+import { toastr } from "@docspace/shared/components/toast";
 import { parseDomain, validatePortalName } from "@docspace/shared/utils/common";
+
+import { TranslationType } from "SRC_DIR/types/spaces";
+import { useStore } from "SRC_DIR/store";
+import { ConfigurationWrapper } from "../StyledSpaces";
 
 type TConfigurationSection = {
   t: TranslationType;
@@ -145,6 +151,8 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
           </div>
 
           <TextInput
+            type={InputType.text}
+            size={InputSize.base}
             hasError={!!(domainNameError || checkDomainError)}
             onChange={onHandleDomain}
             value={domain}
@@ -171,6 +179,8 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
             {t("PortalName", { productName: t("Common:ProductName") })}
           </Text>
           <TextInput
+            type={InputType.text}
+            size={InputSize.base}
             hasError={!!(portalNameError || checkDomainError)}
             onChange={onHandleName}
             value={name}
@@ -188,7 +198,7 @@ const ConfigurationSection = ({ t }: TConfigurationSection): JSX.Element => {
 
       <Button
         isLoading={isLoading}
-        size={isMobile ? "normal" : "small"}
+        size={isMobile ? ButtonSize.normal : ButtonSize.small}
         className="spaces-button"
         label={t("Common:Connect")}
         onClick={onConfigurationPortal}

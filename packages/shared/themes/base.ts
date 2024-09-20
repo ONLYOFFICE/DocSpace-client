@@ -3217,6 +3217,7 @@ export const getBaseTheme = () => {
       errorColor: lightErrorStatus,
       sideColor: gray,
       nameColor: grayStrong,
+      barBackground: grayLight,
     },
 
     publicRoom: {

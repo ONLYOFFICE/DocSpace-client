@@ -24,49 +24,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { createContext, useContext } from "react";
+import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
-import SpacesStore from "./SpacesStore";
+import { setDocumentTitle } from "SRC_DIR/utils";
+import AutoBackupPage from "client/AutoBackupPage";
 
-import store from "client/store";
-import { UserStore } from "@docspace/shared/store/UserStore";
-import { BannerStore } from "@docspace/shared/store/BannerStore";
-import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-const {
-  authStore,
-  userStore,
-  bannerStore,
-  settingsStore,
-  currentTariffStatusStore,
-  dialogsStore,
-}: {
-  userStore: UserStore;
-  bannerStore: BannerStore;
-  authStore: any;
-  currentTariffStatusStore: any;
-  settingsStore: SettingsStore;
-  dialogsStore: any;
-} = store;
+const AutoBackup = () => {
+  const { t } = useTranslation(["Settings"]);
 
-export class RootStore {
-  authStore = authStore;
-  userStore = userStore;
-  bannerStore = bannerStore;
-  settingsStore = settingsStore;
-  currentTariffStatusStore = currentTariffStatusStore;
-  spacesStore = new SpacesStore(this.settingsStore);
-  dialogsStore = dialogsStore;
-}
+  useEffect(() => {
+    setDocumentTitle(t("AutoBackup"));
+  }, []);
 
-export const RootStoreContext = createContext<RootStore | null>(null);
-
-export const useStore = () => {
-  const context = useContext(RootStoreContext);
-  if (context === null) {
-    throw new Error(
-      "You have forgotten to wrap your root component with RootStoreProvider"
-    );
-  }
-
-  return context;
+  return <AutoBackupPage />;
 };
+
+export default AutoBackup;

@@ -25,6 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { useTranslation } from "react-i18next";
+import { observer } from "mobx-react";
+
 import {
   ModalDialog,
   ModalDialogType,
@@ -32,8 +35,6 @@ import {
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 
-import { useTranslation } from "react-i18next";
-import { observer } from "mobx-react";
 import { useStore } from "SRC_DIR/store";
 
 const SpaceCreatedDialog = () => {

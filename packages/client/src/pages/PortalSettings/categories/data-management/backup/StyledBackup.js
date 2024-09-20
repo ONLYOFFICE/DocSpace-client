@@ -238,7 +238,7 @@ const StyledAutoBackup = styled.div`
     }
   }
 
-  ${(props) => !props.isEnableAuto && UnavailableStyles}
+  ${(props) => props.pageIsDisabled && UnavailableStyles}
 `;
 const StyledStoragesModule = styled.div`
   .backup_storages-buttons {
@@ -346,10 +346,11 @@ const StyledRestoreBackup = styled.div`
 const StyledModules = styled.div`
   margin-top: 20px;
   margin-bottom: 24px;
+
   .backup-description {
-    ${(props) => props.isDisabled && `color: ${globalColors.gray};`};
     margin-inline-start: 25px;
     max-width: 700px;
+    color: ${(props) => props.isDisabled && props.theme.text.disableColor};
   }
 `;
 

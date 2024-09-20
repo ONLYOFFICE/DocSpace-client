@@ -298,7 +298,7 @@ class ManualBackup extends React.Component {
     ) : isInitialLoading ? (
       <DataBackupLoader />
     ) : (
-      <StyledManualBackup>
+      <StyledManualBackup pageIsDisabled={pageIsDisabled}>
         <div className="backup_modules-header_wrapper">
           <Text className="backup_modules-description settings_unavailable">
             {t("ManualBackupDescription")}
@@ -317,7 +317,7 @@ class ManualBackup extends React.Component {
           )}
         </div>
 
-        <StyledModules>
+        <StyledModules isDisabled={isNotPaidPeriod || pageIsDisabled}>
           <RadioButton
             id="temporary-storage"
             label={t("TemporaryStorage")}
@@ -361,7 +361,7 @@ class ManualBackup extends React.Component {
             </div>
           )}
         </StyledModules>
-        <StyledModules isDisabled={isNotPaidPeriod}>
+        <StyledModules isDisabled={isNotPaidPeriod || pageIsDisabled}>
           <RadioButton
             id="backup-room"
             label={t("RoomsModule")}
@@ -384,7 +384,7 @@ class ManualBackup extends React.Component {
           )}
         </StyledModules>
 
-        <StyledModules isDisabled={isNotPaidPeriod}>
+        <StyledModules isDisabled={isNotPaidPeriod || pageIsDisabled}>
           <RadioButton
             id="third-party-resource"
             label={t("ThirdPartyResource")}
@@ -399,7 +399,7 @@ class ManualBackup extends React.Component {
           </Text>
           {isCheckedThirdParty && <ThirdPartyModule {...commonModulesProps} />}
         </StyledModules>
-        <StyledModules isDisabled={isNotPaidPeriod}>
+        <StyledModules isDisabled={isNotPaidPeriod || pageIsDisabled}>
           <RadioButton
             id="third-party-storage"
             label={t("Common:ThirdPartyStorage")}

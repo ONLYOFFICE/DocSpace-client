@@ -161,6 +161,9 @@ declare global {
       };
       campaigns?: string[];
       isFrame?: boolean;
+      management: {
+        checkDomain?: boolean;
+      };
     };
     AscDesktopEditor: {
       execCommand: (key: string, value: string) => void;

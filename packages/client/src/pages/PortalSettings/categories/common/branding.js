@@ -103,6 +103,7 @@ const Branding = ({
     };
   }, []);
   const hideBlock = isManagement() ? false : portals?.length > 1 ? true : false;
+
   const showSettings = standalone && !hideBlock;
 
   if (isMobileView)
@@ -140,7 +141,7 @@ const Branding = ({
 export default inject(({ settingsStore, currentQuotaStore, common }) => {
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
   const { isLoadedCompanyInfoSettingsData } = common;
-  const { standalone, deviceType, portals, checkEnablePortalSettings } =
+  const { standalone, portals, deviceType, checkEnablePortalSettings } =
     settingsStore;
   const isSettingPaid = checkEnablePortalSettings(
     isBrandingAndCustomizationAvailable,

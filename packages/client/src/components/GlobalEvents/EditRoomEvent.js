@@ -213,7 +213,7 @@ const EditRoomEvent = ({
           updateLogoPathsCacheBreaker();
       }
 
-      updateInfoPanelSelection(room);
+      //updateInfoPanelSelection(room);
       setIsLoading(false);
       onClose();
     }

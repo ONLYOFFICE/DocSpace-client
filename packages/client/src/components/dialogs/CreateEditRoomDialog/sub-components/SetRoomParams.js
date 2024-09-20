@@ -216,7 +216,6 @@ const SetRoomParams = ({
     setRoomParams({
       ...roomParams,
       title: e.target.value,
-      withCover: true,
     });
 
     if (!cover) {
@@ -227,10 +226,6 @@ const SetRoomParams = ({
   const onSaveAvatar = () => {
     setAvatarEditorDialogVisible(false);
     setCover();
-    setRoomParams({
-      ...roomParams,
-      withCover: false,
-    });
   };
 
   const onChangeIsPrivate = () =>

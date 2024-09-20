@@ -55,6 +55,8 @@ const InfoPanelBodyContent = ({
   uploadFile,
   avatarEditorDialogVisible,
   setAvatarEditorDialogVisible,
+  editRoomDialogProps,
+  createRoomDialogProps,
   onSaveRoomLogo,
   uploadedFile,
   maxImageUploadSize,
@@ -216,21 +218,23 @@ const InfoPanelBodyContent = ({
       )}
       {getView()}
 
-      {avatarEditorDialogVisible && (
-        <AvatarEditorDialog
-          t={t}
-          image={image}
-          onChangeImage={onChangeIcon}
-          onClose={() => setAvatarEditorDialogVisible(false)}
-          onSave={(image) =>
-            onSaveRoomLogo(selection.id, image, selection, true)
-          }
-          onChangeFile={onChangeFile}
-          classNameWrapperImageCropper={"icon-editor"}
-          visible={image.uploadedFile}
-          maxImageSize={maxImageUploadSize}
-        />
-      )}
+      {avatarEditorDialogVisible &&
+        !editRoomDialogProps.visible &&
+        !createRoomDialogProps.visible && (
+          <AvatarEditorDialog
+            t={t}
+            image={image}
+            onChangeImage={onChangeIcon}
+            onClose={() => setAvatarEditorDialogVisible(false)}
+            onSave={(image) =>
+              onSaveRoomLogo(selection.id, image, selection, true)
+            }
+            onChangeFile={onChangeFile}
+            classNameWrapperImageCropper={"icon-editor"}
+            visible={image.uploadedFile}
+            maxImageSize={maxImageUploadSize}
+          />
+        )}
     </StyledInfoPanelBody>
   );
 };
@@ -242,6 +246,7 @@ export default inject(
     infoPanelStore,
     settingsStore,
     avatarEditorDialogStore,
+    dialogsStore,
   }) => {
     const {
       infoPanelSelection,
@@ -260,6 +265,8 @@ export default inject(
       showSearchBlock,
       setShowSearchBlock,
     } = infoPanelStore;
+
+    const { editRoomDialogProps, createRoomDialogProps } = dialogsStore;
 
     const selection = infoPanelSelection.length > 1 ? null : infoPanelSelection;
     const {
@@ -304,6 +311,8 @@ export default inject(
       uploadFile,
       avatarEditorDialogVisible,
       setAvatarEditorDialogVisible,
+      editRoomDialogProps,
+      createRoomDialogProps,
       onSaveRoomLogo,
       onChangeFile,
       uploadedFile,

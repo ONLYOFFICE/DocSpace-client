@@ -64,6 +64,7 @@ const RoomLogoCoverDialog = ({
   getCovers,
   covers,
   setRoomLogoCover,
+  createRoomDialogVisible,
 }: CoverDialogProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -76,6 +77,11 @@ const RoomLogoCoverDialog = ({
   };
 
   const handleSubmit = () => {
+    if (createRoomDialogVisible) {
+      onCloseRoomLogo();
+      return;
+    }
+
     setRoomLogoCover();
     onCloseRoomLogo();
   };
@@ -119,5 +125,6 @@ export default inject<TStore>(({ dialogsStore }) => {
     getCovers: dialogsStore.getCovers,
     covers: dialogsStore.covers,
     setRoomLogoCover: dialogsStore.setRoomLogoCover,
+    createRoomDialogVisible: dialogsStore.createRoomDialogProps.visible,
   };
 })(observer(RoomLogoCoverDialog));

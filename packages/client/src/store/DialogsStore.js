@@ -146,6 +146,18 @@ class DialogsStore {
   cover = null;
   coverSelection = null;
 
+  editRoomDialogProps = {
+    visible: false,
+    item: null,
+    onClose: null,
+  };
+
+  createRoomDialogProps = {
+    title: "",
+    visible: false,
+    onClose: null,
+  };
+
   constructor(
     authStore,
     treeFoldersStore,
@@ -163,6 +175,15 @@ class DialogsStore {
     this.versionHistoryStore = versionHistoryStore;
     this.infoPanelStore = infoPanelStore;
   }
+
+  setEditRoomDialogProps = (props) => {
+    this.editRoomDialogProps = props;
+  };
+
+  setCreateRoomDialogProps = (props) => {
+    this.createRoomDialogProps = props;
+  };
+
   setInviteLanguage = (culture) => {
     this.culture = culture;
   };
@@ -615,8 +636,6 @@ class DialogsStore {
   };
 
   setRoomLogoCover = async (roomId) => {
-    if (!roomId && !this.coverSelection?.id) return;
-
     const res = await setRoomCover(
       roomId || this.coverSelection?.id,
       this.cover,

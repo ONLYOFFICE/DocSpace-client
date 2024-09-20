@@ -2959,9 +2959,9 @@ class FilesActionStore {
         newFilesList[i].order = splitItem.join(".");
       } else {
         if (indexMovedFromBottom) {
-          newFilesList[i].order = +newFilesList[i].order + 1;
+          newFilesList[i].order = +newFilesList[i].order + 1 + "";
         } else {
-          newFilesList[i].order = +newFilesList[i].order - 1;
+          newFilesList[i].order = +newFilesList[i].order - 1 + "";
         }
       }
 

@@ -28,6 +28,8 @@ import React, { useMemo } from "react";
 import { ReactSVG } from "react-svg";
 
 import EditPenSvgUrl from "PUBLIC_DIR/images/icons/12/pen-edit.react.svg?url";
+import Camera10ReactSvgUrl from "PUBLIC_DIR/images/icons/10/cover.camera.react.svg?url";
+import PlusSvgUrl from "PUBLIC_DIR/images/icons/16/button.plus.react.svg?url";
 
 import { DropDown } from "@docspace/shared/components/drop-down";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
@@ -43,6 +45,11 @@ import { getRoomTitle } from "./RoomIcon.utils";
 import { StyledIcon, EditWrapper } from "./RoomIcon.styled";
 
 import type { RoomIconProps } from "./RoomIcon.types";
+
+enum EditWrapperSize {
+  plus = "20px",
+  edit = "24px",
+}
 
 const RoomIcon = ({
   title,
@@ -60,6 +67,8 @@ const RoomIcon = ({
   hoverSrc,
   model,
   onChangeFile,
+  isEmptyIcon,
+  currentColorScheme,
 }: RoomIconProps) => {
   const [correctImage, setCorrectImage] = React.useState(true);
 
@@ -157,8 +166,27 @@ const RoomIcon = ({
       data-testid="room-icon"
       withHover={!!hoverSrc}
       withEditing={withEditing}
+      isEmptyIcon={isEmptyIcon}
     >
-      {logo?.cover ? (
+      {isEmptyIcon ? (
+        <>
+          <ReactSVG className="room-icon-empty" src={Camera10ReactSvgUrl} />
+          <EditWrapper
+            $currentColorScheme={currentColorScheme}
+            size={EditWrapperSize.plus}
+            style={{ bottom: "-6px", right: "-8px" }}
+          >
+            <IconButton
+              className="open-plus-logo-icon"
+              size={12}
+              iconName={PlusSvgUrl}
+              onClick={onToggleOpenEditLogo}
+              isFill
+            />
+            {dropdownElement}
+          </EditWrapper>
+        </>
+      ) : logo?.cover ? (
         <>
           <div className="room-background hover-class" />
           <ReactSVG className="room-icon-cover" src={imgSrc} />
@@ -200,7 +228,7 @@ const RoomIcon = ({
       )}
 
       {withEditing && (
-        <EditWrapper>
+        <EditWrapper size={EditWrapperSize.edit}>
           <IconButton
             className="open-edit-logo-icon"
             size={12}

@@ -3131,6 +3131,7 @@ const Dark: TTheme = {
   roomIcon: {
     backgroundArchive: white,
     opacityBackground: "0.1",
+    plusIcon: black,
   },
 
   plugins: {

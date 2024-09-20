@@ -3144,6 +3144,7 @@ export const getBaseTheme = () => {
     roomIcon: {
       backgroundArchive: gray,
       opacityBackground: "1",
+      plusIcon: white,
     },
 
     plugins: {

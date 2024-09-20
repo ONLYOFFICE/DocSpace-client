@@ -1,6 +1,6 @@
 import hexRgb from "hex-rgb";
 import styled, { css } from "styled-components";
-import { Base, globalColors } from "../../themes";
+import { Base, globalColors, TColorScheme } from "../../themes";
 
 const COVER_DEFAULT_SIZE = 20;
 
@@ -26,6 +26,18 @@ const StyledIcon = styled.div<{
     props.withEditing &&
     css`
       position: relative;
+      min-width: 64px;
+    `};
+
+  ${(props) =>
+    props.isEmptyIcon &&
+    css`
+      position: relative;
+      box-sizing: border-box;
+
+      border: 2px dashed rgb(208, 213, 218);
+      border-radius: 10px;
+      min-width: 64px;
     `};
 
   .room-background {
@@ -41,6 +53,15 @@ const StyledIcon = styled.div<{
         : `#${props.color}`};
     position: absolute;
     opacity: ${(props) => props.theme.roomIcon.opacityBackground};
+  }
+  .room-icon-empty {
+    svg {
+      width: 16px;
+      height: 16px;
+      path {
+        fill: ${(props) => props.theme.iconButton.color};
+      }
+    }
   }
 
   .room-icon-cover {
@@ -167,19 +188,38 @@ const StyledIcon = styled.div<{
 
 StyledIcon.defaultProps = { theme: Base };
 
-const EditWrapper = styled.div`
+const EditWrapper = styled.div<{
+  size: string;
+  $currentColorScheme: TColorScheme;
+}>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  width: ${(props) => props.size};
+  height: ${(props) => props.size};
   background-color: ${(props) => props.theme.itemIcon.editIconColor};
+
+  ${({ $currentColorScheme }) =>
+    $currentColorScheme &&
+    css`
+      background-color: ${$currentColorScheme.main?.accent};
+    `}
+
   border-radius: 50%;
   position: absolute;
   bottom: -6px;
   right: -6px;
 
-  .open-edit-logo-icon {
+  .open-plus-logo-icon {
+    svg {
+      path {
+        fill: ${(props) => props.theme.roomIcon.plusIcon};
+      }
+    }
+  }
+
+  .open-edit-logo-icon,
+  .open-plus-logo-icon {
     &:hover {
       cursor: pointer;
     }

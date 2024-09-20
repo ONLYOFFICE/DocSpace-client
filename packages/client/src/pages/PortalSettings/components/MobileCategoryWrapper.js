@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
+
 import React from "react";
 import styled, { useTheme } from "styled-components";
 
@@ -34,8 +36,7 @@ import { Base } from "@docspace/shared/themes";
 import commonIconsStyles from "@docspace/shared/utils/common-icons-style";
 import { isManagement } from "@docspace/shared/utils/common";
 import { globalColors } from "@docspace/shared/themes";
-
-import ArrowRightIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
+import { isManagement } from "@docspace/shared/utils/common";
 
 const StyledArrowRightIcon = styled(ArrowRightIcon)`
   ${commonIconsStyles}

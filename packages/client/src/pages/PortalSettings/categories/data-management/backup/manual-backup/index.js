@@ -298,24 +298,26 @@ class ManualBackup extends React.Component {
     ) : isInitialLoading ? (
       <DataBackupLoader />
     ) : (
-      <StyledManualBackup>
+      <StyledManualBackup pageIsDisabled={pageIsDisabled}>
         <div className="backup_modules-header_wrapper">
-          <Text className="backup_modules-description">
+          <Text className="backup_modules-description settings_unavailable">
             {t("ManualBackupDescription")}
           </Text>
-          <Link
-            className="link-learn-more"
-            href={dataBackupUrl}
-            target="_blank"
-            fontSize="13px"
-            color={currentColorScheme.main?.accent}
-            isHovered
-          >
-            {t("Common:LearnMore")}
-          </Link>
+          {!isManagement() && (
+            <Link
+              className="link-learn-more"
+              href={dataBackupUrl}
+              target="_blank"
+              fontSize="13px"
+              color={currentColorScheme.main?.accent}
+              isHovered
+            >
+              {t("Common:LearnMore")}
+            </Link>
+          )}
         </div>
 
-        <StyledModules>
+        <StyledModules isDisabled={isNotPaidPeriod || pageIsDisabled}>
           <RadioButton
             id="temporary-storage"
             label={t("TemporaryStorage")}
@@ -325,7 +327,7 @@ class ManualBackup extends React.Component {
             isDisabled={!isMaxProgress || pageIsDisabled}
             {...commonRadioButtonProps}
           />
-          <Text className="backup-description">
+          <Text className="backup-description settings_unavailable">
             {t("TemporaryStorageDescription")}
           </Text>
           {isCheckedTemporaryStorage && (
@@ -359,7 +361,7 @@ class ManualBackup extends React.Component {
             </div>
           )}
         </StyledModules>
-        <StyledModules isDisabled={isNotPaidPeriod}>
+        <StyledModules isDisabled={isNotPaidPeriod || pageIsDisabled}>
           <RadioButton
             id="backup-room"
             label={t("RoomsModule")}
@@ -369,7 +371,7 @@ class ManualBackup extends React.Component {
             isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
             {...commonRadioButtonProps}
           />
-          <Text className="backup-description module-documents">
+          <Text className="backup-description module-documents settings_unavailable">
             <Trans t={t} i18nKey="RoomsModuleDescription" ns="Settings">
               {{ roomName }}
             </Trans>
@@ -382,7 +384,7 @@ class ManualBackup extends React.Component {
           )}
         </StyledModules>
 
-        <StyledModules isDisabled={isNotPaidPeriod}>
+        <StyledModules isDisabled={isNotPaidPeriod || pageIsDisabled}>
           <RadioButton
             id="third-party-resource"
             label={t("ThirdPartyResource")}
@@ -392,12 +394,12 @@ class ManualBackup extends React.Component {
             isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
             {...commonRadioButtonProps}
           />
-          <Text className="backup-description">
+          <Text className="backup-description settings_unavailable">
             {t("ThirdPartyResourceDescription")}
           </Text>
           {isCheckedThirdParty && <ThirdPartyModule {...commonModulesProps} />}
         </StyledModules>
-        <StyledModules isDisabled={isNotPaidPeriod}>
+        <StyledModules isDisabled={isNotPaidPeriod || pageIsDisabled}>
           <RadioButton
             id="third-party-storage"
             label={t("Common:ThirdPartyStorage")}
@@ -407,7 +409,7 @@ class ManualBackup extends React.Component {
             isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
             {...commonRadioButtonProps}
           />
-          <Text className="backup-description">
+          <Text className="backup-description settings_unavailable">
             {t("ThirdPartyStorageDescription")}
           </Text>
           {isCheckedThirdPartyStorage && (

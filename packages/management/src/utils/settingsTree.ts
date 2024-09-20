@@ -28,8 +28,8 @@ import SpacesSvgUrl from "PUBLIC_DIR/images/spaces.react.svg?url";
 import DataManagementIconUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-data-management.svg?url";
 import RestoreIconUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-restore.svg?url";
 import PaymentIconUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-payment.svg?url";
-import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-common.svg?url";
 import CatalogSettingsGiftReactSvgUrl from "PUBLIC_DIR/images/gift.react.svg?url";
+import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog-settings-common.svg?url";
 
 export const settingsTree = [
   {
@@ -46,7 +46,7 @@ export const settingsTree = [
     key: "1",
     icon: SettingsReactSvgUrl,
     link: "settings",
-    tKey: "Settings",
+    tKey: "Common:Settings",
     isHeader: true,
     isArticle: true,
   },

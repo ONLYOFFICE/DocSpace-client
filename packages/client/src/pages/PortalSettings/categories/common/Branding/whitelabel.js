@@ -327,6 +327,7 @@ const WhiteLabelComponent = (props) => {
           isVertical={true}
           className="settings_unavailable"
           hasError={isEmpty}
+          labelVisible={true}
         >
           <TextInput
             className="company-name input"
@@ -593,9 +594,14 @@ export const WhiteLabel = inject(
     const {
       whiteLabelLogoUrls: defaultWhiteLabelLogoUrls,
       deviceType,
+      checkEnablePortalSettings,
       standalone,
     } = settingsStore;
     const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
+
+    const isSettingPaid = checkEnablePortalSettings(
+      isBrandingAndCustomizationAvailable,
+    );
 
     return {
       setLogoText,
@@ -605,7 +611,7 @@ export const WhiteLabel = inject(
       saveWhiteLabelSettings,
       restoreWhiteLabelSettings,
       defaultWhiteLabelLogoUrls,
-      isSettingPaid: isBrandingAndCustomizationAvailable,
+      isSettingPaid,
       initSettings,
       logoUrlsWhiteLabel,
       setLogoUrlsWhiteLabel,

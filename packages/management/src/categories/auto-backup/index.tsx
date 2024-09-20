@@ -27,14 +27,11 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-import { useStore } from "SRC_DIR/store";
+import { setDocumentTitle } from "SRC_DIR/utils";
 import AutoBackupPage from "client/AutoBackupPage";
 
 const AutoBackup = () => {
   const { t } = useTranslation(["Settings"]);
-
-  const { authStore } = useStore();
-  const { setDocumentTitle } = authStore;
 
   useEffect(() => {
     setDocumentTitle(t("AutoBackup"));

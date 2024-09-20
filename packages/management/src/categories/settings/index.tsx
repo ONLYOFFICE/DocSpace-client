@@ -23,26 +23,28 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react";
-import { Submenu } from "@docspace/shared/components/submenu";
-import { DeviceType } from "@docspace/shared/enums";
+import { Tabs, TTabItem } from "@docspace/shared/components/tabs";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-
-import { useStore } from "SRC_DIR/store";
 
 import Branding from "../branding";
 import Backup from "../backup";
 import AutoBackup from "../auto-backup";
 import Restore from "../restore";
 
+import { useStore } from "SRC_DIR/store";
+import ConnectDialog from "client/ConnectDialog";
+
 const Settings = () => {
   const { t } = useTranslation(["Common", "Settings"]);
   const navigate = useNavigate();
-  const { settingsStore } = useStore();
-  const { currentDeviceType } = settingsStore;
+  const { dialogsStore } = useStore();
+  const { connectDialogVisible } = dialogsStore;
+
+  const [currentTabId, setCurrentTabId] = useState("branding");
 
   const data = [
     {
@@ -67,34 +69,28 @@ const Settings = () => {
     },
   ];
 
-  const onSelect = (e) => {
-    console.log("e", e);
+  const onSelect = (element: TTabItem) => {
     navigate(
-      combineUrl(window.DocSpaceConfig?.proxy?.url, `/settings/${e.id}`)
+      combineUrl(window.ClientConfig?.proxy?.url, `/settings/${element.id}`)
     );
+    setCurrentTabId(element.id);
   };
 
-  const getCurrentTab = () => {
+  useEffect(() => {
     const path = location.pathname;
-    const currentTab = data.findIndex((item) => path.includes(item.id));
-    return currentTab !== -1 ? currentTab : 0;
-  };
-
-  const currentTab = getCurrentTab();
+    const currentTab = data.find((item) => path.includes(item.id));
+    if (currentTab !== undefined && data.length) setCurrentTabId(currentTab.id);
+  }, [location.pathname]);
 
   return (
-    <Submenu
-      data={data}
-      startSelect={currentTab}
-      onSelect={(e) => onSelect(e)}
-      topProps={
-        currentDeviceType === DeviceType.desktop
-          ? "0px"
-          : currentDeviceType === DeviceType.mobile
-            ? "53px"
-            : "61px"
-      }
-    />
+    <>
+      {connectDialogVisible && <ConnectDialog key="connect-dialog" />}
+      <Tabs
+        items={data}
+        selectedItemId={currentTabId}
+        onSelect={(e) => onSelect(e)}
+      />
+    </>
   );
 };
 

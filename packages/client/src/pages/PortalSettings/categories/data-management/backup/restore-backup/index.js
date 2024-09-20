@@ -300,7 +300,8 @@ const RestoreBackup = (props) => {
 
 export const Component = inject(
   ({ settingsStore, backup, currentQuotaStore }) => {
-    const { currentDeviceType, standalone } = settingsStore;
+    const { currentDeviceType, standalone, checkEnablePortalSettings } =
+      settingsStore;
     const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
     const {
       getProgress,
@@ -314,9 +315,13 @@ export const Component = inject(
     const buttonSize =
       currentDeviceType !== DeviceType.desktop ? "normal" : "small";
 
+    const isEnableRestore = checkEnablePortalSettings(
+      isRestoreAndAutoBackupAvailable,
+    );
+
     return {
       standalone,
-      isEnableRestore: isRestoreAndAutoBackupAvailable,
+      isEnableRestore,
       setStorageRegions,
       setThirdPartyStorage,
       buttonSize,

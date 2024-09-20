@@ -108,6 +108,18 @@ export default function withFileActions(WrappedFileItem) {
         viewAs,
       } = this.props;
 
+      if (this.props.isIndexEditingMode) {
+        if (
+          e.target.closest(".change-index_icon") ||
+          e.target.querySelector(".change-index_icon")
+        )
+          return;
+
+        setBufferSelection(item);
+        setStartDrag(true);
+        return;
+      }
+
       const { isThirdPartyFolder } = item;
 
       const notSelectable = e.target.closest(".not-selectable");
@@ -376,7 +388,7 @@ export default function withFileActions(WrappedFileItem) {
         createFoldersTree,
       } = filesActionsStore;
       const { setSharingPanelVisible } = dialogsStore;
-      const { updateSelection } = indexingStore;
+      const { updateSelection, isIndexEditingMode } = indexingStore;
       const {
         isPrivacyFolder,
         isRecycleBinFolder,
@@ -515,6 +527,7 @@ export default function withFileActions(WrappedFileItem) {
         isIndexUpdated,
 
         canDrag: !dragIsDisabled,
+        isIndexEditingMode,
       };
     },
   )(observer(WithFileActions));

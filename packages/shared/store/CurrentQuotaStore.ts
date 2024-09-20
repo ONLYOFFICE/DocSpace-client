@@ -155,7 +155,7 @@ class CurrentQuotasStore {
 
   get isBrandingAndCustomizationAvailable() {
     const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === "whitelabel",
+      (obj) => obj.id === "customization",
     );
 
     return result?.value;

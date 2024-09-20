@@ -115,7 +115,7 @@ const WhiteLabelComponent = (props) => {
 
   const checkWidth = () => {
     const url = isManagement()
-      ? "/branding"
+      ? "/settings/branding"
       : "/portal-settings/customization/branding";
 
     window.innerWidth > size.mobile &&
@@ -289,7 +289,7 @@ const WhiteLabelComponent = (props) => {
         <Text fontSize="16px" fontWeight="700">
           {t("WhiteLabel")}
         </Text>
-        {!isSettingPaid && (
+        {!isSettingPaid && !isManagement() && (
           <Badge
             className="paid-badge"
             fontWeight="700"
@@ -327,6 +327,7 @@ const WhiteLabelComponent = (props) => {
           isVertical={true}
           className="settings_unavailable"
           hasError={isEmpty}
+          labelVisible={true}
         >
           <TextInput
             className="company-name input"
@@ -593,9 +594,14 @@ export const WhiteLabel = inject(
     const {
       whiteLabelLogoUrls: defaultWhiteLabelLogoUrls,
       deviceType,
+      checkEnablePortalSettings,
       standalone,
     } = settingsStore;
     const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
+
+    const isSettingPaid = checkEnablePortalSettings(
+      isBrandingAndCustomizationAvailable,
+    );
 
     return {
       setLogoText,
@@ -605,7 +611,7 @@ export const WhiteLabel = inject(
       saveWhiteLabelSettings,
       restoreWhiteLabelSettings,
       defaultWhiteLabelLogoUrls,
-      isSettingPaid: isBrandingAndCustomizationAvailable,
+      isSettingPaid,
       initSettings,
       logoUrlsWhiteLabel,
       setLogoUrlsWhiteLabel,

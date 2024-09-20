@@ -36,7 +36,7 @@ import { OAUTH_SIGN_IN_PATH, oauthSignInHelper } from "./oauth/signIn";
 import {
   SELF_PATH,
   SELF_PATH_ACTIVATION_STATUS,
-  SELF_PATH_CHANGE_PASSWORD,
+  SELF_PATH_CHANGE_AUTH_DATA,
   SELF_PATH_UPDATE_USER,
   SELF_PATH_USER_BY_EMAIL,
   selfHandler,
@@ -79,8 +79,16 @@ export const endpoints: TEndpoints = {
     dataHandler: selfHandler,
   },
   changePassword: {
-    url: `${BASE_URL}${SELF_PATH_CHANGE_PASSWORD}`,
+    url: `${BASE_URL}${SELF_PATH_CHANGE_AUTH_DATA}`,
     dataHandler: selfHandler,
+  },
+  changeEmail: {
+    url: `${BASE_URL}${SELF_PATH_CHANGE_AUTH_DATA}`,
+    dataHandler: selfHandler,
+  },
+  changeEmailError: {
+    url: `${BASE_URL}${SELF_PATH_CHANGE_AUTH_DATA}`,
+    dataHandler: selfHandler.bind(null, 400),
   },
   activationStatus: {
     url: `${BASE_URL}${SELF_PATH_ACTIVATION_STATUS}`,

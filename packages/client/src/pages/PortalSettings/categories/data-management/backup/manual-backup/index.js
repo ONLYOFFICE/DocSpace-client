@@ -300,7 +300,7 @@ class ManualBackup extends React.Component {
     ) : (
       <StyledManualBackup>
         <div className="backup_modules-header_wrapper">
-          <Text className="backup_modules-description">
+          <Text className="backup_modules-description settings_unavailable">
             {t("ManualBackupDescription")}
           </Text>
           {!isManagement() && (
@@ -327,7 +327,7 @@ class ManualBackup extends React.Component {
             isDisabled={!isMaxProgress || pageIsDisabled}
             {...commonRadioButtonProps}
           />
-          <Text className="backup-description">
+          <Text className="backup-description settings_unavailable">
             {t("TemporaryStorageDescription")}
           </Text>
           {isCheckedTemporaryStorage && (
@@ -371,7 +371,7 @@ class ManualBackup extends React.Component {
             isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
             {...commonRadioButtonProps}
           />
-          <Text className="backup-description module-documents">
+          <Text className="backup-description module-documents settings_unavailable">
             <Trans t={t} i18nKey="RoomsModuleDescription" ns="Settings">
               {{ roomName }}
             </Trans>
@@ -394,7 +394,7 @@ class ManualBackup extends React.Component {
             isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
             {...commonRadioButtonProps}
           />
-          <Text className="backup-description">
+          <Text className="backup-description settings_unavailable">
             {t("ThirdPartyResourceDescription")}
           </Text>
           {isCheckedThirdParty && <ThirdPartyModule {...commonModulesProps} />}
@@ -409,7 +409,7 @@ class ManualBackup extends React.Component {
             isDisabled={!isMaxProgress || isNotPaidPeriod || pageIsDisabled}
             {...commonRadioButtonProps}
           />
-          <Text className="backup-description">
+          <Text className="backup-description settings_unavailable">
             {t("ThirdPartyStorageDescription")}
           </Text>
           {isCheckedThirdPartyStorage && (

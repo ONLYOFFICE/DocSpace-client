@@ -26,6 +26,7 @@
 
 import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
 import LifetimeRoomIconUrl from "PUBLIC_DIR/images/lifetime-room.react.svg?url";
+import RoundedArrowSvgUrl from "PUBLIC_DIR/images/rounded arrow.react.svg?url";
 
 import React from "react";
 import { inject, observer } from "mobx-react";
@@ -51,7 +52,6 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import TariffBar from "SRC_DIR/components/TariffBar";
-import IndexMenu from "../IndexHeader";
 import { getLifetimePeriodTranslation } from "@docspace/shared/utils/common";
 import { globalColors } from "@docspace/shared/themes";
 import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
@@ -399,9 +399,18 @@ const SectionHeaderContent = (props) => {
     setReorderDialogVisible(true);
   };
 
-  const headerMenu = isAccountsPage
-    ? getAccountsHeaderMenu(t, isGroupsPage)
-    : getHeaderMenu(t);
+  const headerMenu = isIndexEditingMode
+    ? [
+        {
+          id: "reorder-index",
+          label: t("Files:Reorder"),
+          onClick: onIndexReorder,
+          iconUrl: RoundedArrowSvgUrl,
+        },
+      ]
+    : isAccountsPage
+      ? getAccountsHeaderMenu(t, isGroupsPage)
+      : getHeaderMenu(t);
 
   const menuItems = getMenuItems();
 
@@ -413,12 +422,6 @@ const SectionHeaderContent = (props) => {
     isInfoPanelVisible,
     toggleInfoPanel: onToggleInfoPanel,
     isMobileView: currentDeviceType === DeviceType.mobile,
-  };
-
-  const indexMenuProps = {
-    t,
-    onCloseIndexMenu,
-    onIndexReorder,
   };
 
   if (isAccountsPage && !(isGroupsPage && isRoomAdmin)) {
@@ -434,11 +437,13 @@ const SectionHeaderContent = (props) => {
       : isGroupsHeaderIndeterminate;
     tableGroupMenuProps.withoutInfoPanelToggler = false;
   } else {
-    tableGroupMenuVisible = isHeaderVisible && tableGroupMenuVisible;
+    tableGroupMenuVisible =
+      (isIndexEditingMode || isHeaderVisible) && tableGroupMenuVisible;
     tableGroupMenuProps.isChecked = isHeaderChecked;
     tableGroupMenuProps.isIndeterminate = isHeaderIndeterminate;
     tableGroupMenuProps.isBlocked = isGroupMenuBlocked;
-    tableGroupMenuProps.withoutInfoPanelToggler = isPublicRoom;
+    tableGroupMenuProps.withoutInfoPanelToggler =
+      isIndexEditingMode || isPublicRoom;
   }
 
   const stateTitle = location?.state?.title;
@@ -522,6 +527,14 @@ const SectionHeaderContent = (props) => {
     ? t("Files:ShareRoom")
     : null;
 
+  const headerProps = isIndexEditingMode
+    ? { headerLabel: t("Common:SortingIndex") }
+    : {};
+
+  const closeProps = isIndexEditingMode
+    ? { isCloseable: true, onCloseClick: onCloseIndexMenu }
+    : {};
+
   return (
     <Consumer key="header">
       {(context) => (
@@ -530,9 +543,12 @@ const SectionHeaderContent = (props) => {
           isVirtualDataRoomType={isVirtualDataRoomType}
         >
           {tableGroupMenuVisible ? (
-            <TableGroupMenu {...tableGroupMenuProps} withComboBox />
-          ) : isIndexEditingMode ? (
-            <IndexMenu {...indexMenuProps} />
+            <TableGroupMenu
+              withComboBox={!isIndexEditingMode}
+              {...tableGroupMenuProps}
+              {...headerProps}
+              {...closeProps}
+            />
           ) : (
             <div className="header-container">
               <Navigation

@@ -159,12 +159,36 @@ const StyledTableGroupMenu = styled.div<{ checkboxMargin?: string }>`
 
   margin: 0;
 
+  .table-header_icon {
+    display: flex;
+
+    align-items: center;
+    align-self: center;
+    justify-content: center;
+    margin-block: 0;
+    margin-inline: auto 20px;
+    height: 100%;
+    width: auto;
+
+    padding-inline-start: 20px;
+    padding-inline-end: 0;
+
+    .table-header_icon-button {
+      margin-inline-end: 8px;
+    }
+  }
+
+  .table-container_label-element,
   .table-container_group-menu-checkbox {
     margin-inline-start: ${({ checkboxMargin }) => checkboxMargin ?? "28px"};
 
     @media ${tablet} {
       margin-inline-start: 24px;
     }
+  }
+
+  .table-container_label-element {
+    white-space: nowrap;
   }
 
   .table-container_group-menu-separator {
@@ -213,20 +237,6 @@ StyledTableGroupMenu.defaultProps = { theme: Base };
 const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme)<{
   isInfoPanelVisible?: boolean;
 }>`
-  display: flex;
-
-  align-items: center;
-  align-self: center;
-  justify-content: center;
-  margin-block: 0;
-  margin-inline: auto 20px;
-  height: 100%;
-  width: auto;
-
-  .info-panel-toggle {
-    margin-inline-end: 8px;
-  }
-
   ${(props) =>
     props.isInfoPanelVisible &&
     css`
@@ -242,9 +252,6 @@ const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme)<{
         }
       }
     `}
-
-  padding-inline-start: 20px;
-  padding-inline-end: 0;
 
   @media ${tablet} {
     display: none;

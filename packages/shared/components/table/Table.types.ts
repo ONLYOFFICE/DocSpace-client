@@ -151,7 +151,7 @@ export type TGroupMenuItem = {
   id: string;
 };
 
-export interface TableGroupMenuProps {
+interface TableGroupmenuBased {
   isChecked: boolean;
   isIndeterminate: boolean;
   headerMenu: TGroupMenuItem[];
@@ -165,4 +165,11 @@ export interface TableGroupMenuProps {
   isBlocked?: boolean;
   toggleInfoPanel: () => void;
   withComboBox?: boolean;
+  headerLabel?: string;
 }
+export type TableGroupMenuProps =
+  | (TableGroupmenuBased & {
+      isCloseable?: undefined;
+      onCloseClick?: undefined;
+    })
+  | (TableGroupmenuBased & { isCloseable: boolean; onCloseClick: () => void });

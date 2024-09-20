@@ -164,6 +164,18 @@ export const RTL_LANGUAGES = Object.freeze([
   "yi",
 ]);
 
+export const logoColors = [
+  "#FF6680",
+  "#FF8F40",
+  "#F2D230",
+  "#61C059",
+  "#1FCECB",
+  "#5CC3F7",
+  "#6191F2",
+  "#7757D9",
+  "#FF7FD4",
+];
+
 export const DEFAULT_FONT_FAMILY = "Open Sans, sans-serif, Arial";
 
 export const ONE_MEGABYTE = 1024 * 1024;

@@ -33,23 +33,13 @@ import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 import { getRoomTitle } from "@docspace/shared/components/room-icon/RoomIcon.utils";
 
+import { logoColors } from "@docspace/shared/constants";
+
 import { CustomLogo } from "./CustomLogo";
 import { SelectColor } from "./SelectColor/SelectColor";
 import { SelectIcon } from "./SelectIcon";
 
 import { RoomLogoCoverProps, ICover } from "../RoomLogoCoverDialog.types";
-
-const logoColors = [
-  "#FF6680",
-  "#FF8F40",
-  "#F2D230",
-  "#61C059",
-  "#1FCECB",
-  "#5CC3F7",
-  "#6191F2",
-  "#7757D9",
-  "#FF7FD4",
-];
 
 const RoomLogoCoverContainer = styled.div`
   .room-logo-container {
@@ -177,8 +167,8 @@ export default inject<TStore>(({ settingsStore, dialogsStore }) => {
 
   return {
     isBaseTheme: theme?.isBase,
-    logo: coverSelection.logo,
-    title: coverSelection.title,
+    logo: coverSelection?.logo,
+    title: coverSelection?.title,
     setCover: dialogsStore.setCover,
   };
 })(observer(RoomLogoCover));

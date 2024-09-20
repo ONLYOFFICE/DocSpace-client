@@ -46,7 +46,7 @@ export const settingsTree = [
     key: "1",
     icon: SettingsReactSvgUrl,
     link: "settings",
-    tKey: "Settings",
+    tKey: "Common:Settings",
     isHeader: true,
     isArticle: true,
   },

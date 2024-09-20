@@ -227,6 +227,7 @@ const AvatarPure = ({
       className={className}
       onMouseDown={onMouseDown}
       onClick={onClick}
+      ref={iconRef}
     >
       <AvatarWrapper
         source={source}

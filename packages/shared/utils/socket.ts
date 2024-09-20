@@ -48,7 +48,7 @@ type TOptQuota =
   | { customQuotaFeature: string; usedSpace: number; quotaLimit: number }
   | { customQuotaFeature?: never; usedSpace?: never; quotaLimit?: never };
 
-export type TStatus = "online" | "offline";
+export type TStatus = "online" | "offline" | "edit";
 
 export type TSession = {
   id: number;
@@ -77,7 +77,15 @@ export type TStatusInRoomOffline = TStatusInRoomBase & {
   date: string;
 };
 
-export type TStatusInRoom = TStatusInRoomOnline | TStatusInRoomOffline;
+export type TStatusInRoomEditFile = TStatusInRoomBase & {
+  status: Extract<TStatus, "edit">;
+  file: string;
+};
+
+export type TStatusInRoom =
+  | TStatusInRoomOnline
+  | TStatusInRoomOffline
+  | TStatusInRoomEditFile;
 
 export type TOptSocket = {
   featureId: string;

@@ -126,6 +126,16 @@ class InfoPanelStore {
 
       this.updateMemberStatus(newStatusInRoom);
     });
+    socketHelper.on("start-edit-file-in-room", (data) => {
+      const newStatusInRoom = { status: "edit", ...data };
+
+      this.updateMemberStatus(newStatusInRoom);
+    });
+    socketHelper.on("stop-edit-file-in-room", (data) => {
+      const newStatusInRoom = { userId: data.userId, status: "online" };
+
+      this.updateMemberStatus(newStatusInRoom);
+    });
   }
 
   // Setters

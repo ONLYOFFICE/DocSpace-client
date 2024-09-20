@@ -59,6 +59,8 @@ const getStatusText = (locale: string, statusInRoom?: TStatusInRoom) => {
 
   if (statusInRoom.status === "online") return "In room";
 
+  if (statusInRoom.status === "edit") return statusInRoom.file;
+
   return getLastSeenStatus(locale, statusInRoom.date);
 };
 
@@ -68,12 +70,11 @@ export const Status = (props: StatusProps) => {
   const { i18n } = useTranslation();
 
   const statusText = getStatusText(i18n.language, statusInRoom);
+  const isOnline = statusInRoom && statusInRoom.status !== "offline";
 
   return (
     <div className="status-wrapper">
-      {statusInRoom?.status === "online" && (
-        <div className="status-indicator" />
-      )}
+      {isOnline && <div className="status-indicator" />}
       <Text className="status-text">{statusText}</Text>
     </div>
   );

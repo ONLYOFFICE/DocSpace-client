@@ -124,6 +124,7 @@ const SectionBodyContent = (props) => {
     viewAs,
     uploaded,
     currentDeviceType,
+    filesList,
   ]);
 
   useEffect(() => {

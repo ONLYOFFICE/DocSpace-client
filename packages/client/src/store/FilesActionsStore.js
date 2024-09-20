@@ -2992,11 +2992,12 @@ class FilesActionStore {
       let newFilesList;
       if (indexMovedFromBottom) {
         newFilesList = this.setListOrder(replaceableIndex, currentIndex, true);
+        newFilesList[currentIndex].order = replaceableItem.order;
       } else {
-        newFilesList = this.setListOrder(currentIndex, replaceableIndex + 1);
+        newFilesList = this.setListOrder(currentIndex, replaceableIndex);
+        newFilesList[currentIndex].order =
+          filesList[replaceableIndex - 1].order;
       }
-
-      newFilesList[currentIndex].order = replaceableItem.order;
 
       const newFolders = newFilesList.filter((f) => f.isFolder);
       const newFiles = newFilesList.filter((f) => !f.isFolder);

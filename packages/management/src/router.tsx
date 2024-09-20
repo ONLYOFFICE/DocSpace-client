@@ -30,12 +30,10 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import App from "./App";
 
 import Spaces from "./categories/spaces";
-import Branding from "./categories/branding";
-import WhiteLabelPage from "client/WhiteLabelPage";
-import CompanyInfoPage from "client/CompanyInfoPage";
-import AdditionalResPage from "client/AdditionalResPage";
-import Backup from "./categories/backup";
-import Restore from "./categories/restore";
+import Settings from "./categories/settings";
+import { WhiteLabel } from "client/WhiteLabelPage";
+import { CompanyInfoSettings } from "client/CompanyInfoPage";
+import { AdditionalResources } from "client/AdditionalResPage";
 import Payments from "./categories/payments";
 import Bonus from "./categories/bonus";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
@@ -59,37 +57,36 @@ const routes = [
         element: <Spaces />,
       },
       {
-        path: "branding",
-        element: <Branding />,
+        path: "settings",
+        element: <Settings />,
       },
       {
-        path: "branding/white-label",
-        element: <WhiteLabelPage />,
+        path: "settings/branding",
+        element: <Settings />,
       },
       {
-        path: "branding/company-info-settings",
-        element: <CompanyInfoPage />,
+        path: "settings/branding/white-label",
+        element: <WhiteLabel />,
       },
       {
-        path: "branding/additional-resources",
-        element: <AdditionalResPage />,
-      },
-
-      {
-        path: "backup",
-        element: <Navigate to="data-backup" />,
+        path: "settings/branding/company-info-settings",
+        element: <CompanyInfoSettings />,
       },
       {
-        path: "backup/data-backup",
-        element: <Backup />,
+        path: "settings/branding/additional-resources",
+        element: <AdditionalResources />,
       },
       {
-        path: "backup/auto-backup",
-        element: <Backup />,
+        path: "settings/data-backup",
+        element: <Settings />,
       },
       {
-        path: "restore",
-        element: <Restore />,
+        path: "settings/auto-backup",
+        element: <Settings />,
+      },
+      {
+        path: "settings/restore",
+        element: <Settings />,
       },
       {
         path: "payments",

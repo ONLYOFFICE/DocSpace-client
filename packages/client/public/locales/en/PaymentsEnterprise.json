@@ -12,6 +12,7 @@
   "ActivateTariffEnterpriseTrialExpiration": "Your trial expires on {{date}}.",
   "ActivateToProBannerHeaderTrial": "Buy the full Enterprise version to get:",
   "ActivateUploadDescr": "To activate your license, upload it below and click the Activate.",
+  "ActivateRenewalDescr": "To activate the renewal you already bought, upload it below and click the Activate button.",
   "FreeDaysLeft": "{{count}} Free days left",
   "UpgradeToProBannerHeader": "Get free access to enterprise-ready office suite for 30 days",
   "UpgradeToProBannerInformationAboutShort": "Learn more about Enterprise Edition on the <1>official website</1>",

@@ -63,12 +63,12 @@ const ArticleBodyContent = () => {
   useEffect(() => {
     const path = location.pathname;
     const item = getItemByLink(path);
-    setSelectedKey(item?.key);
+    setSelectedKey(item?.key[0]);
     setIsBurgerLoading(false);
   }, []);
 
   const onClickItem = (item: TSettingsTreeItem, e: React.MouseEvent) => {
-    setSelectedKey(item?.key);
+    setSelectedKey(item?.key[0]);
 
     if (isMobileOnly || isMobile()) {
       toggleArticleOpen();
@@ -78,7 +78,7 @@ const ArticleBodyContent = () => {
   const catalogItems = () => {
     const items: Array<React.ReactNode> = [];
 
-    let resultTree = settingsTree.filter((item) => item?.isHeader);
+    let resultTree = settingsTree.filter((item) => item?.isArticle);
 
     const deletionTKey = isCommunity ? "Common:PaymentsTitle" : "Common:Bonus";
 
@@ -89,6 +89,7 @@ const ArticleBodyContent = () => {
     }
 
     resultTree.map((item) => {
+      const itemKey = item.key[0];
       items.push(
         <ArticleItem
           key={item.key}
@@ -97,7 +98,7 @@ const ArticleBodyContent = () => {
           showText={true}
           text={t(item.tKey)}
           value={item.link}
-          isActive={item.key === selectedKey}
+          isActive={itemKey === selectedKey}
           onClick={(e) => onClickItem(item, e)}
           folderId={item.id}
           $currentColorScheme={currentColorScheme}

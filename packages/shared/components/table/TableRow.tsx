@@ -103,14 +103,14 @@ const TableRow = (props: TableRowProps) => {
               <ColorTheme
                 themeId={ThemeId.IndexIconButton}
                 iconName={ArrowReactSvgUrl}
-                className="index-up-icon"
+                className="index-up-icon change-index_icon"
                 size="small"
                 onClick={(e) => changeIndex(e, VDRIndexingAction.HigherIndex)}
               />
               <ColorTheme
                 themeId={ThemeId.IndexIconButton}
                 iconName={ArrowReactSvgUrl}
-                className="index-down-icon"
+                className="index-down-icon change-index_icon"
                 size="small"
                 onClick={(e) => changeIndex(e, VDRIndexingAction.LowerIndex)}
               />

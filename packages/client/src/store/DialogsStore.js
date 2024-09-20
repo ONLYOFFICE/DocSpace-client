@@ -601,6 +601,10 @@ class DialogsStore {
   };
 
   setCover = (color, icon) => {
+    if (!color) {
+      return (this.cover = null);
+    }
+
     const newColor = color.replace("#", "");
     const newIcon = typeof icon === "string" ? "" : icon.id;
     this.cover = { color: newColor, cover: newIcon };
@@ -610,11 +614,15 @@ class DialogsStore {
     this.coverSelection = selection;
   };
 
-  setRoomLogoCover = async () => {
-    if (!this.coverSelection) return;
+  setRoomLogoCover = async (roomId) => {
+    if (!roomId && !this.coverSelection?.id) return;
 
-    const res = await setRoomCover(this.coverSelection.id, this.cover);
+    const res = await setRoomCover(
+      roomId || this.coverSelection?.id,
+      this.cover,
+    );
     this.infoPanelStore.updateInfoPanelSelection(res);
+    this.setCover();
   };
 
   deleteRoomLogo = async () => {

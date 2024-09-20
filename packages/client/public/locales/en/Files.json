@@ -70,7 +70,7 @@
   "FavoritesEmptyContainerDescription": "To mark files as favorites or remove them from this list, use the context menu.",
   "FileContents": "File contents",
   "FileDownloadingIsRestricted": "File downloading is restricted in this room.",
-  "FileExportedToMyDocuments": "file exported to My Documents",
+  "FileExportedToMyDocuments": "<1>{{fileName}}</1> file exported to Documents",
   "FileRemoved": "File moved to Trash",
   "FileRenamed": "The document '{{oldTitle}}' is renamed to '{{newTitle}}'",
   "FilesWillAppearHere": "Files and folders added to the room will appear here.",

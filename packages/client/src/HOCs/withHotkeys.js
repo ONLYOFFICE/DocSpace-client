@@ -114,6 +114,9 @@ const withHotkeys = (Component) => {
     const onKeyDown = (e) => {
       const someDialogIsOpen = checkDialogsOpen();
       setIsEnabled(!someDialogIsOpen);
+
+      if (isIndexEditingMode) return;
+
       activateHotkeys(e);
     };
 

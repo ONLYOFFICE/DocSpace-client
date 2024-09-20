@@ -209,7 +209,7 @@ const RestoreBackup = (props) => {
 
   const warningContent = (
     <>
-      <Text className="restore-backup_warning" noSelect>
+      <Text className="restore-backup_warning settings_unavailable" noSelect>
         {t("Common:Warning")}
         {"!"}
       </Text>

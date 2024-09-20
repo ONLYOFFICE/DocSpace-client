@@ -32,7 +32,6 @@ import { tablet } from "@docspace/shared/utils";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { SelectIconProps } from "../RoomLogoCoverDialog.types";
 import { ReactSVG } from "react-svg";
-import { RoomCoverIcons } from "../data";
 
 interface WithoutIconProps {
   isSelected?: boolean;

@@ -101,6 +101,9 @@ class CreateEditRoomStore {
   };
 
   setInitialWatermarks = (watermarksSettings) => {
+
+    this.resetWatermarks();
+
     this.initialWatermarksSettings = !watermarksSettings
       ? { enabled: false }
       : watermarksSettings;

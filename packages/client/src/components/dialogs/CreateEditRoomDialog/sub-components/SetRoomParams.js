@@ -53,7 +53,7 @@ import debounce from "lodash.debounce";
 import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 
 import { RoomIcon } from "@docspace/shared/components/room-icon";
-import { logoColors } from "@docspace/shared/constants";
+import { globalColors } from "@docspace/shared/themes";
 
 const StyledSetRoomParams = styled.div`
   display: flex;
@@ -177,10 +177,9 @@ const SetRoomParams = ({
 
   const randomColor = React.useMemo(
     () =>
-      logoColors[Math.floor(Math.random() * logoColors.length)].replace(
-        "#",
-        "",
-      ),
+      globalColors.logoColors[
+        Math.floor(Math.random() * globalColors.logoColors.length)
+      ].replace("#", ""),
     [],
   );
 

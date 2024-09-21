@@ -30,6 +30,7 @@ import hexRgb from "hex-rgb";
 import { ReactSVG } from "react-svg";
 import { Text } from "@docspace/shared/components/text";
 import { CustomLogoProps } from "../RoomLogoCoverDialog.types";
+import { globalColors } from "@docspace/shared/themes";
 
 interface StyledLogoProps {
   isBase: boolean;
@@ -49,13 +50,13 @@ const StyledLogo = styled.div<StyledLogoProps>`
     svg {
       transform: scale(3);
       path {
-        fill: #fff;
+        fill: ${globalColors.white};
       }
     }
   }
 
   .logo-cover-text {
-    color: #fff;
+    color: ${globalColors.white};
     font-size: 41px;
   }
 
@@ -91,7 +92,7 @@ export const CustomLogo = ({
         <Text
           className="logo-cover-text"
           fontSize="41"
-          color="#fff"
+          color={globalColors.white}
           fontWeight={700}
         >
           {roomTitle}

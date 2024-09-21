@@ -29,6 +29,7 @@ import { tablet } from "@docspace/shared/utils";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 
 import type { ColorItemProps } from "./SelecColor.types";
+import { globalColors } from "@docspace/shared/themes";
 
 const StyledModalDialog = styled(ModalDialog)`
   .modal-close {
@@ -173,11 +174,11 @@ const CustomSelectedColor = styled.div<ColorItemProps>`
 
   svg {
     path {
-      fill: #fff;
+      fill: ${globalColors.white};
     }
     &:hover {
       path {
-        fill: #fff;
+        fill: ${globalColors.white};
       }
     }
   }

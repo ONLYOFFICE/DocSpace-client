@@ -33,13 +33,12 @@ import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 import { getRoomTitle } from "@docspace/shared/components/room-icon/RoomIcon.utils";
 
-import { logoColors } from "@docspace/shared/constants";
-
 import { CustomLogo } from "./CustomLogo";
 import { SelectColor } from "./SelectColor/SelectColor";
 import { SelectIcon } from "./SelectIcon";
 
 import { RoomLogoCoverProps, ICover } from "../RoomLogoCoverDialog.types";
+import { globalColors } from "@docspace/shared/themes";
 
 const RoomLogoCoverContainer = styled.div`
   .room-logo-container {
@@ -101,7 +100,7 @@ const RoomLogoCover = ({
     [title],
   );
 
-  const roomColor = logo?.color ? `#${logo.color}` : logoColors[0];
+  const roomColor = logo?.color ? `#${logo.color}` : globalColors.logoColors[0];
   const roomIcon = logo?.cover ? logo.cover : roomTitle;
 
   React.useEffect(() => {
@@ -120,7 +119,7 @@ const RoomLogoCover = ({
         <SelectColor
           t={t}
           selectedColor={roomCoverDialogProps.color}
-          logoColors={logoColors}
+          logoColors={globalColors.logoColors}
           onChangeColor={(color) =>
             setRoomCoverDialogProps({ ...roomCoverDialogProps, color })
           }

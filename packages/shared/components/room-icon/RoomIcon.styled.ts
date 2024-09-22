@@ -73,7 +73,7 @@ const StyledIcon = styled.div<{
         props.coverSize &&
         `scale(${props.coverSize / COVER_DEFAULT_SIZE}) translateY(0)`};
       path {
-        fill: #fff;
+        fill: ${globalColors.white};
       }
     }
 

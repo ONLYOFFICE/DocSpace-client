@@ -30,7 +30,7 @@ import styled, { css } from "styled-components";
 import { tablet } from "@docspace/shared/utils";
 
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import { SelectIconProps } from "../RoomLogoCoverDialog.types";
+import { ICover, SelectIconProps } from "../RoomLogoCoverDialog.types";
 import { ReactSVG } from "react-svg";
 
 interface WithoutIconProps {
@@ -102,7 +102,12 @@ export const SelectIcon = ({
   setIcon,
   covers,
 }: SelectIconProps) => {
-  const toggleWithoutIcon = () => setWithoutIcon((state: boolean) => !state);
+  const toggleWithoutIcon = () => setWithoutIcon(!withoutIcon);
+
+  const onSelectIcon = (icon: ICover) => {
+    setIcon(icon);
+  };
+
   return (
     <div>
       <div className="color-name">{t("CreateEditRoomDialog:Icon")}</div>
@@ -117,7 +122,7 @@ export const SelectIcon = ({
             }
             return (
               <StyledIconContainer
-                onClick={() => setIcon(icon)}
+                onClick={() => onSelectIcon(icon)}
                 key={icon.id}
                 dangerouslySetInnerHTML={createMarkup()}
               />

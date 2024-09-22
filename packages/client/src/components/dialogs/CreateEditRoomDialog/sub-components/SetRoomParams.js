@@ -140,6 +140,8 @@ const SetRoomParams = ({
   setAvatarEditorDialogVisible,
   roomLogoCoverDialogVisible,
   currentColorScheme,
+  setRoomCoverDialogProps,
+  roomCoverDialogProps,
   image,
   cover,
   covers,
@@ -212,6 +214,10 @@ const SetRoomParams = ({
     }
     if (!isEdit) {
       debouncedTitle(e.target.value);
+      setRoomCoverDialogProps({
+        ...roomCoverDialogProps,
+        title: e.target.value,
+      });
     }
     setRoomParams({
       ...roomParams,
@@ -289,9 +295,9 @@ const SetRoomParams = ({
       imgClassName={"react-svg-icon"}
       model={model}
       isEmptyIcon={(!currentCover || roomLogoCoverDialogVisible) && isEmptyIcon}
-      color={cover && !roomLogoCoverDialogVisible ? cover.color : randomColor}
+      color={cover ? cover.color : randomColor}
       logo={
-        currentCover && !roomLogoCoverDialogVisible
+        currentCover
           ? { cover: currentCover }
           : !avatarEditorDialogVisible && previewIcon
       }
@@ -450,6 +456,8 @@ export default inject(
       roomLogoCoverDialogVisible,
       getLogoCoverModel,
       setCoverSelection,
+      setRoomCoverDialogProps,
+      roomCoverDialogProps,
       cover,
       covers,
       setCover,
@@ -473,6 +481,8 @@ export default inject(
       uploadFile,
       avatarEditorDialogVisible,
       setAvatarEditorDialogVisible,
+      setRoomCoverDialogProps,
+      roomCoverDialogProps,
       roomLogoCoverDialogVisible,
       currentColorScheme,
       image,

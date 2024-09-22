@@ -175,8 +175,7 @@ class CreateEditRoomStore {
       // add new tags to room
       if (!!addTagsData.length)
         room = await addTagsToRoom(room.id, addTagsData);
-
-      if (this.dialogsStore.cover?.cover) {
+      if (this.dialogsStore.cover) {
         await this.dialogsStore.setRoomLogoCover(room.id);
 
         !withPaging && this.onOpenNewRoom(room);

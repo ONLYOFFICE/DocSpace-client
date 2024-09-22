@@ -146,6 +146,13 @@ class DialogsStore {
   cover = null;
   coverSelection = null;
 
+  roomCoverDialogProps = {
+    icon: null,
+    color: null,
+    title: null,
+    withoutIcon: true,
+  };
+
   editRoomDialogProps = {
     visible: false,
     item: null,
@@ -621,6 +628,10 @@ class DialogsStore {
     this.covers = covers;
   };
 
+  setRoomCoverDialogProps = (props) => {
+    this.roomCoverDialogProps = props;
+  };
+
   setCover = (color, icon) => {
     if (!color) {
       return (this.cover = null);
@@ -629,6 +640,13 @@ class DialogsStore {
     const newColor = color.replace("#", "");
     const newIcon = typeof icon === "string" ? "" : icon.id;
     this.cover = { color: newColor, cover: newIcon };
+
+    this.setRoomCoverDialogProps({
+      icon: null,
+      title: null,
+      color: null,
+      withoutIcon: true,
+    });
   };
 
   setCoverSelection = (selection) => {

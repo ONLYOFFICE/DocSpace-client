@@ -65,6 +65,9 @@ const RoomLogoCoverDialog = ({
   covers,
   setRoomLogoCover,
   createRoomDialogVisible,
+  setCover,
+  setRoomCoverDialogProps,
+  roomCoverDialogProps,
 }: CoverDialogProps) => {
   const { t } = useTranslation(["Common"]);
 
@@ -73,10 +76,17 @@ const RoomLogoCoverDialog = ({
   }, [getCovers]);
 
   const onCloseRoomLogo = () => {
+    setRoomCoverDialogProps({ ...roomCoverDialogProps, withoutIcon: true });
     setRoomLogoCoverDialogVisible(false);
   };
 
   const handleSubmit = () => {
+    const icon = roomCoverDialogProps.withoutIcon
+      ? ""
+      : roomCoverDialogProps.icon;
+
+    setCover(roomCoverDialogProps.color, icon);
+
     if (createRoomDialogVisible) {
       onCloseRoomLogo();
       return;
@@ -120,11 +130,24 @@ const RoomLogoCoverDialog = ({
 };
 
 export default inject<TStore>(({ dialogsStore }) => {
+  const {
+    setCover,
+    getCovers,
+    createRoomDialogProps,
+    setRoomLogoCoverDialogVisible,
+    covers,
+    setRoomLogoCover,
+    setRoomCoverDialogProps,
+    roomCoverDialogProps,
+  } = dialogsStore;
   return {
-    setRoomLogoCoverDialogVisible: dialogsStore.setRoomLogoCoverDialogVisible,
-    getCovers: dialogsStore.getCovers,
-    covers: dialogsStore.covers,
-    setRoomLogoCover: dialogsStore.setRoomLogoCover,
-    createRoomDialogVisible: dialogsStore.createRoomDialogProps.visible,
+    setRoomLogoCoverDialogVisible,
+    getCovers,
+    covers,
+    setCover,
+    setRoomLogoCover,
+    setRoomCoverDialogProps,
+    roomCoverDialogProps,
+    createRoomDialogVisible: createRoomDialogProps.visible,
   };
 })(observer(RoomLogoCoverDialog));

@@ -91,7 +91,8 @@ const RoomLogoCover = ({
   logo,
   title,
   covers,
-  setCover,
+  setRoomCoverDialogProps,
+  roomCoverDialogProps,
 }: RoomLogoCoverProps) => {
   const { t } = useTranslation(["Common", "CreateEditRoomDialog"]);
 
@@ -103,14 +104,13 @@ const RoomLogoCover = ({
   const roomColor = logo?.color ? `#${logo.color}` : logoColors[0];
   const roomIcon = logo?.cover ? logo.cover : roomTitle;
 
-  const [color, setColor] = useState<string>(roomColor);
-  const [icon, setIcon] = useState<string | ICover>(roomIcon);
-  const [withoutIcon, setWithoutIcon] = useState<boolean>(true);
-
   React.useEffect(() => {
-    const newIcon = withoutIcon ? roomTitle : icon;
-    setCover(color, newIcon);
-  }, [color, icon, roomTitle, setCover, withoutIcon]);
+    setRoomCoverDialogProps({
+      ...roomCoverDialogProps,
+      icon: roomIcon,
+      color: roomColor,
+    });
+  }, []);
 
   const scrollRef = useRef(null);
 
@@ -119,17 +119,30 @@ const RoomLogoCover = ({
       <div className="color-select-container">
         <SelectColor
           t={t}
-          selectedColor={color}
+          selectedColor={roomCoverDialogProps.color}
           logoColors={logoColors}
-          onChangeColor={setColor}
+          onChangeColor={(color) =>
+            setRoomCoverDialogProps({ ...roomCoverDialogProps, color })
+          }
         />
       </div>
       <div className="icon-select-container">
         <SelectIcon
           t={t}
-          withoutIcon={withoutIcon}
-          setIcon={setIcon}
-          setWithoutIcon={setWithoutIcon}
+          withoutIcon={roomCoverDialogProps.withoutIcon}
+          setIcon={(icon) =>
+            setRoomCoverDialogProps({
+              ...roomCoverDialogProps,
+              icon,
+              withoutIcon: false,
+            })
+          }
+          setWithoutIcon={(value) =>
+            setRoomCoverDialogProps({
+              ...roomCoverDialogProps,
+              withoutIcon: value,
+            })
+          }
           covers={covers}
         />
       </div>
@@ -141,9 +154,9 @@ const RoomLogoCover = ({
       <div className="room-logo-container">
         <CustomLogo
           isBaseTheme={!!isBaseTheme}
-          icon={icon}
-          color={color}
-          withoutIcon={withoutIcon}
+          icon={roomCoverDialogProps.icon}
+          color={roomCoverDialogProps.color}
+          withoutIcon={roomCoverDialogProps.withoutIcon}
           roomTitle={roomTitle}
         />
       </div>
@@ -163,12 +176,25 @@ const RoomLogoCover = ({
 export default inject<TStore>(({ settingsStore, dialogsStore }) => {
   const { theme } = settingsStore;
 
-  const { coverSelection } = dialogsStore;
+  const {
+    coverSelection,
+    setCover,
+    createRoomDialogProps,
+    setRoomCoverDialogProps,
+    roomCoverDialogProps,
+  } = dialogsStore;
+
+  const logo = createRoomDialogProps.visible ? null : coverSelection?.logo;
+  const title = createRoomDialogProps.visible
+    ? roomCoverDialogProps.title
+    : coverSelection?.title;
 
   return {
     isBaseTheme: theme?.isBase,
-    logo: coverSelection?.logo,
-    title: coverSelection?.title,
-    setCover: dialogsStore.setCover,
+    logo,
+    title,
+    setCover,
+    setRoomCoverDialogProps,
+    roomCoverDialogProps,
   };
 })(observer(RoomLogoCover));

@@ -162,6 +162,7 @@ const ArticleMainButtonContent = (props) => {
     isOwner,
     isAdmin,
     isRoomAdmin,
+    isCollaborator,
 
     setInvitePanelOptions,
 
@@ -788,13 +789,16 @@ const ArticleMainButtonContent = (props) => {
 
   const mainButtonText = t("Common:Actions");
 
-  const isDisabled = isFrame
-    ? disableActionButton
-    : isSettingsPage
-      ? isSettingsPage
-      : isAccountsPage
-        ? !isAccountsPage
-        : !security?.Create;
+  let isDisabled = false;
+  if (isFrame) {
+    isDisabled = disableActionButton;
+  } else if (isSettingsPage) {
+    isDisabled = isSettingsPage;
+  } else if (isAccountsPage) {
+    isDisabled = isCollaborator;
+  } else {
+    isDisabled = !security?.Create;
+  }
 
   const isProfile = location.pathname.includes("/profile");
 
@@ -950,7 +954,7 @@ export default inject(
     const parentRoomType = selectedFolderStore.parentRoomType;
     const isFolder = selectedFolderStore.isFolder;
 
-    const { isAdmin, isOwner, isRoomAdmin } = userStore.user;
+    const { isAdmin, isOwner, isRoomAdmin, isCollaborator } = userStore.user;
 
     const { showWarningDialog, isWarningRoomsDialog } = currentQuotaStore;
 
@@ -996,6 +1000,7 @@ export default inject(
       isAdmin,
       isOwner,
       isRoomAdmin,
+      isCollaborator,
 
       mainButtonMobileVisible,
       moveToPanelVisible,

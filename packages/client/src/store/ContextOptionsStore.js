@@ -2326,8 +2326,12 @@ class ContextOptionsStore {
 
     const isInsideGroup = !!groupId;
 
+    const { isCollaborator } = this.userStore?.user || {
+      isCollaborator: false,
+    };
+
     const canCreate =
-      (currentCanCreate || isAccountsPage) &&
+      (currentCanCreate || (isAccountsPage && !isCollaborator)) &&
       !isSettingsPage &&
       !isPublicRoom &&
       !isInsideGroup;

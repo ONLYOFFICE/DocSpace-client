@@ -187,6 +187,7 @@ const SectionHeaderContent = (props) => {
     setAccountsSelected,
     setGroupsSelected,
     isRoomAdmin,
+    isCollaborator,
     isEmptyPage,
 
     isLoading,
@@ -487,7 +488,7 @@ const SectionHeaderContent = (props) => {
                 showText={showText}
                 isRootFolder={isRoot && !isInsideGroup}
                 canCreate={
-                  (currentCanCreate || isAccountsPage) &&
+                  (currentCanCreate || (isAccountsPage && !isCollaborator)) &&
                   !isSettingsPage &&
                   !isPublicRoom &&
                   !isInsideGroup
@@ -590,7 +591,7 @@ export default inject(
     uploadDataStore,
   }) => {
     const { startUpload } = uploadDataStore;
-    const isRoomAdmin = userStore.user?.isRoomAdmin;
+    const { isRoomAdmin, isCollaborator } = userStore.user;
 
     const {
       setSelected,
@@ -777,6 +778,7 @@ export default inject(
       getAccountsCheckboxItemLabel,
       setAccountsSelected,
       isRoomAdmin,
+      isCollaborator,
       isEmptyPage,
       categoryType,
       theme,

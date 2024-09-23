@@ -333,7 +333,12 @@ class CurrentQuotasStore {
   }
 
   showWarningDialog = (type: number) => {
-    if (type && this.isUserTariffLimit && type !== EmployeeType.Guest)
+    if (
+      type &&
+      this.isUserTariffLimit &&
+      type !== EmployeeType.Guest &&
+      type !== EmployeeType.Collaborator
+    )
       return true;
 
     return this.currentTariffStatusStore?.isGracePeriod;

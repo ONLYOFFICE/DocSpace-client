@@ -153,35 +153,35 @@ export const getAccessOptions = (
       label: t("Common:Editor"),
       description: t("Translations:RoleEditorDescription"),
       access: ShareAccessRights.Editing,
-      type: "user",
+      type: "collaborator",
     },
     formFiller: {
       key: "formFiller",
       label: t("Translations:RoleFormFiller"),
       description: getFormFillerDescription(roomType, t),
       access: ShareAccessRights.FormFilling,
-      type: "user",
+      type: "collaborator",
     },
     reviewer: {
       key: "reviewer",
       label: t("Translations:RoleReviewer"),
       description: t("Translations:RoleReviewerDescription"),
       access: ShareAccessRights.Review,
-      type: "user",
+      type: "collaborator",
     },
     commentator: {
       key: "commentator",
       label: t("Translations:RoleCommentator"),
       description: t("Translations:RoleCommentatorDescription"),
       access: ShareAccessRights.Comment,
-      type: "user",
+      type: "collaborator",
     },
     viewer: {
       key: "viewer",
       label: t("Translations:RoleViewer"),
       description: t("Translations:RoleViewerDescription"),
       access: ShareAccessRights.ReadOnly,
-      type: "user",
+      type: "collaborator",
     },
   };
 
@@ -284,7 +284,6 @@ export const getTopFreeRole = (t, roomType) => {
 export const isPaidUserRole = (selectedAccess) => {
   return (
     selectedAccess === ShareAccessRights.FullAccess ||
-    selectedAccess === ShareAccessRights.Collaborator ||
     selectedAccess === ShareAccessRights.RoomManager
   );
 };

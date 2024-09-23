@@ -603,7 +603,7 @@ export default inject(
 
     const { isDefaultRoomsQuotaSet, showStorageInfo } = currentQuotaStore;
 
-    const { isIndexEditingMode, isIndexing } = indexingStore;
+    const { isIndexEditingMode } = indexingStore;
 
     const {
       isHeaderChecked,
@@ -660,7 +660,7 @@ export default inject(
     } = tableStore;
 
     const { isPublicRoom, publicRoomKey } = publicRoomStore;
-    const { changeDocumentsTabs } = selectedFolderStore;
+    const { changeDocumentsTabs, isIndexedFolder } = selectedFolderStore;
 
     return {
       setRoomsFilter,
@@ -670,7 +670,7 @@ export default inject(
       withContent,
       sortingVisible,
 
-      isIndexing,
+      isIndexing: isIndexedFolder,
 
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
 

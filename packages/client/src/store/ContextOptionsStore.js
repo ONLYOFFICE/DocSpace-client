@@ -1411,7 +1411,6 @@ class ContextOptionsStore {
       item.roomType === RoomsType.PublicRoom ||
       item.roomType === RoomsType.FormRoom ||
       item.roomType === RoomsType.CustomRoom;
-    const isVDRRoomType = item.roomType === RoomsType.VirtualDataRoom;
 
     const { navigationPath } = this.selectedFolderStore;
 
@@ -1427,8 +1426,8 @@ class ContextOptionsStore {
         ? item.security.CopySharedLink
         : item.security?.EditAccess;
 
-    const { isIndexing } = this.indexingStore;
     const { isFiltered } = this.filesStore;
+    const { isIndexedFolder, security } = this.selectedFolderStore;
 
     const indexOptions = {
       id: "option_edit-index",
@@ -1436,8 +1435,7 @@ class ContextOptionsStore {
       label: t("Common:EditIndex"),
       icon: EditIndexReactSvgUrl,
       onClick: () => this.onEditIndex(),
-      disabled:
-        (!isIndexing && !item.security?.EditRoom) || isFiltered || isArchive,
+      disabled: !security?.EditRoom || !isIndexedFolder || isFiltered,
     };
 
     const optionsModel = [
@@ -1622,7 +1620,7 @@ class ContextOptionsStore {
         label: t("Files:ExportRoomIndex"),
         icon: ExportRoomIndexSvgUrl,
         onClick: () => this.onExportRoomIndex(t, item.id),
-        disabled: !isVDRRoomType || !item.indexing,
+        disabled: !item.indexing,
       },
       {
         id: "option_owner-change",

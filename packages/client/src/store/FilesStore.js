@@ -1477,6 +1477,9 @@ class FilesStore {
     clearSelection = true,
   ) => {
     const { setSelectedNode } = this.treeFoldersStore;
+    const { setIsIndexEditingMode } = this.indexingStore;
+
+    setIsIndexEditingMode(false);
 
     if (this.clientLoadingStore.isLoading) {
       this.abortAllFetch();
@@ -1547,12 +1550,6 @@ class FilesStore {
           !this.publicRoomStore.isPublicRoom
         ) {
           await this.publicRoomStore.getExternalLinks(data.current.id);
-        }
-
-        if (data.current.indexing || data.current.order) {
-          this.indexingStore.setIsIndexing(true);
-        } else {
-          this.indexingStore.setIsIndexing(false);
         }
 
         if (newTotal > 0) {
@@ -1654,6 +1651,7 @@ class FilesStore {
             })
             .reverse();
         });
+
         this.selectedFolderStore.setSelectedFolder({
           folders: data.folders,
           ...data.current,
@@ -1822,9 +1820,10 @@ class FilesStore {
     withFilterLocalStorage = false,
   ) => {
     const { setSelectedNode, roomsFolderId } = this.treeFoldersStore;
-    const { setIsIndexing, isIndexing } = this.indexingStore;
 
-    if (isIndexing) setIsIndexing(false);
+    const { setIsIndexEditingMode } = this.indexingStore;
+
+    setIsIndexEditingMode(false);
 
     if (this.clientLoadingStore.isLoading) {
       this.abortAllFetch();
@@ -4155,7 +4154,7 @@ class FilesStore {
   }
 
   get indexColumnSize() {
-    if (!this.indexingStore.isIndexing) return;
+    if (!this.selectedFolderStore.isIndexedFolder) return;
 
     let minWidth = 36;
     const lastFile = this.filesList[this.filesList.length - 1];

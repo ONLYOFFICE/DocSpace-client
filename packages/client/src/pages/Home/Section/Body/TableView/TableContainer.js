@@ -278,6 +278,7 @@ export default inject(
 
     indexingStore,
     filesActionsStore,
+    selectedFolderStore,
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
@@ -299,9 +300,9 @@ export default inject(
       highlightFile,
     } = filesStore;
 
-    const { isIndexEditingMode, isIndexing } = indexingStore;
+    const { isIndexEditingMode } = indexingStore;
     const { changeIndex } = filesActionsStore;
-
+    const { isIndexedFolder } = selectedFolderStore;
     const { withPaging, theme, currentDeviceType } = settingsStore;
 
     return {
@@ -319,7 +320,7 @@ export default inject(
       isRooms,
       isTrashFolder,
       isIndexEditingMode,
-      isIndexing,
+      isIndexing: isIndexedFolder,
       withPaging,
       columnStorageName,
       columnInfoPanelStorageName,

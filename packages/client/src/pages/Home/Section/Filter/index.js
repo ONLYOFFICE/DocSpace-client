@@ -2438,6 +2438,7 @@ export default inject(
     settingsStore,
     currentQuotaStore,
     indexingStore,
+    selectedFolderStore,
   }) => {
     const {
       filter,
@@ -2478,6 +2479,7 @@ export default inject(
     const { showStorageInfo, isDefaultRoomsQuotaSet } = currentQuotaStore;
 
     const { isIndexing, isIndexEditingMode } = indexingStore;
+    const { isIndexedFolder } = selectedFolderStore;
     const {
       filterStore,
 
@@ -2517,7 +2519,7 @@ export default inject(
       isRooms,
       isTrash,
       isArchiveFolder,
-      isIndexing,
+      isIndexing: isIndexedFolder,
       isIndexEditingMode,
 
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,

@@ -239,8 +239,6 @@ export default inject(({ tableStore, indexingStore }) => {
     tableStorageName,
   } = tableStore;
 
-  const { isIndexing } = indexingStore;
-
   return {
     authorColumnIsEnabled,
     createdColumnIsEnabled,

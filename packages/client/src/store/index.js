@@ -115,7 +115,7 @@ const clientLoadingStore = new ClientLoadingStore();
 const publicRoomStore = new PublicRoomStore(clientLoadingStore);
 
 const infoPanelStore = new InfoPanelStore(userStore);
-const indexingStore = new IndexingStore(infoPanelStore);
+const indexingStore = new IndexingStore(infoPanelStore, selectedFolderStore);
 
 const treeFoldersStore = new TreeFoldersStore(
   selectedFolderStore,
@@ -279,6 +279,7 @@ const tableStore = new TableStore(
   userStore,
   settingsStore,
   indexingStore,
+  selectedFolderStore,
 );
 
 infoPanelStore.filesSettingsStore = filesSettingsStore;

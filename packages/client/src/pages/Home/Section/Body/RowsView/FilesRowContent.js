@@ -333,19 +333,19 @@ export default inject(
     settingsStore,
     treeFoldersStore,
     filesStore,
-    indexingStore,
+    selectedFolderStore,
   }) => {
     const { filter, roomsFilter } = filesStore;
     const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
       treeFoldersStore;
+    const { isIndexedFolder } = selectedFolderStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder;
     const filterSortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
 
-    const { isIndexing } = indexingStore;
-
     const { isDefaultRoomsQuotaSet, isStatisticsAvailable, showStorageInfo } =
       currentQuotaStore;
+
     return {
       filterSortBy,
       theme: settingsStore.theme,
@@ -353,7 +353,7 @@ export default inject(
       isDefaultRoomsQuotaSet,
       isStatisticsAvailable,
       showStorageInfo,
-      isIndexing,
+      isIndexing: isIndexedFolder,
     };
   },
 )(

@@ -3532,6 +3532,8 @@ class FilesStore {
     const orderItems = [...this.folders, ...this.files].filter((x) => x.order);
 
     if (orderItems.length > 0) {
+      this.isEmptyPage && this.setIsEmptyPage(false);
+
       orderItems.sort((a, b) => {
         if (a.order.includes(".")) {
           return (
@@ -4144,14 +4146,6 @@ class FilesStore {
   setMainButtonMobileVisible = (visible) => {
     this.mainButtonMobileVisible = visible;
   };
-
-  get roomsFilterTotal() {
-    return this.roomsFilter.total;
-  }
-
-  get filterTotal() {
-    return this.filter.total;
-  }
 
   get indexColumnSize() {
     if (!this.selectedFolderStore.isIndexedFolder) return;

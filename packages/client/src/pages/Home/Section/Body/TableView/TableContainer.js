@@ -295,9 +295,9 @@ export default inject(
       setHeaderBorder,
       fetchMoreFiles,
       hasMoreFiles,
-      filterTotal,
-      roomsFilterTotal,
+      roomsFilter,
       highlightFile,
+      filter,
     } = filesStore;
 
     const { isIndexEditingMode } = indexingStore;
@@ -316,7 +316,7 @@ export default inject(
       infoPanelVisible,
       fetchMoreFiles,
       hasMoreFiles,
-      filterTotal: isRooms ? roomsFilterTotal : filterTotal,
+      filterTotal: isRooms ? roomsFilter.total : filter.total,
       isRooms,
       isTrashFolder,
       isIndexEditingMode,

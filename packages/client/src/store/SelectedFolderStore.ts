@@ -38,7 +38,7 @@ import type {
   Nullable,
   TCreatedBy,
   TPathParts,
-  TTranslation,
+  // TTranslation,
 } from "@docspace/shared/types";
 import { TFolder, TFolderSecurity } from "@docspace/shared/api/files/types";
 import {
@@ -162,6 +162,8 @@ class SelectedFolderStore {
 
   changeDocumentsTabs = false;
 
+  order: Nullable<string> = null;
+
   constructor(settingsStore: SettingsStore) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -212,6 +214,7 @@ class SelectedFolderStore {
       usedSpace: this.usedSpace,
       quotaLimit: this.quotaLimit,
       isCustomQuota: this.isCustomQuota,
+      order: this.order,
     };
   };
 
@@ -261,6 +264,7 @@ class SelectedFolderStore {
     this.usedSpace = undefined;
     this.quotaLimit = undefined;
     this.isCustomQuota = undefined;
+    this.order = null;
   };
 
   setParentId = (parentId: number) => {
@@ -340,10 +344,11 @@ class SelectedFolderStore {
     if (!("providerId" in selectedFolder)) this.providerId = null;
     if (!("providerItem" in selectedFolder)) this.providerItem = null;
     if (!("providerKey" in selectedFolder)) this.providerKey = null;
+    if (!("order" in selectedFolder)) this.order = null;
   };
 
   setSelectedFolder: (
-    t: TTranslation,
+    // t: TTranslation,
     selectedFolder: TSetSelectedFolder | null,
   ) => void = (selectedFolder) => {
     const socketHelper = this.settingsStore?.socketHelper;

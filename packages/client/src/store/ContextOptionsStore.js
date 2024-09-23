@@ -1428,6 +1428,7 @@ class ContextOptionsStore {
         : item.security?.EditAccess;
 
     const { isIndexing } = this.indexingStore;
+    const { isFiltered } = this.filesStore;
 
     const indexOptions = {
       id: "option_edit-index",
@@ -1435,7 +1436,8 @@ class ContextOptionsStore {
       label: t("Common:EditIndex"),
       icon: EditIndexReactSvgUrl,
       onClick: () => this.onEditIndex(),
-      disabled: (!isIndexing && !item.security?.EditRoom) || isArchive,
+      disabled:
+        (!isIndexing && !item.security?.EditRoom) || isFiltered || isArchive,
     };
 
     const optionsModel = [

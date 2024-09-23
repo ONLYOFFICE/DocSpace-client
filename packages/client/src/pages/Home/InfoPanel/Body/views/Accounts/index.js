@@ -206,7 +206,8 @@ const Accounts = (props) => {
 
   const typeData = renderTypeData();
 
-  const statusText = isVisitor ? t("Common:Free") : t("Common:Paid");
+  const statusText =
+    isVisitor || isCollaborator ? t("Common:Free") : t("Common:Paid");
 
   return (
     <>

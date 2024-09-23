@@ -112,7 +112,7 @@ const UserContent = ({
     t,
   );
 
-  const isPaidUser = !standalone && !isVisitor;
+  const isPaidUser = !standalone && !isVisitor && !isCollaborator;
 
   return (
     <StyledRowContent

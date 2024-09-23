@@ -483,7 +483,7 @@ const InsideGroupTableRow = (props) => {
 
   const onRowClick = (e) => onContentRowClick?.(e, item);
 
-  const isPaidUser = !standalone && !isVisitor;
+  const isPaidUser = !standalone && !isVisitor && !isCollaborator;
   return (
     <StyledWrapper
       className={`user-item ${

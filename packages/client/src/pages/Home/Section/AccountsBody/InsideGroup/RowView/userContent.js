@@ -116,7 +116,7 @@ const UserContent = ({
             ? t("Common:User")
             : t("Common:RoomAdmin");
 
-  const isPaidUser = !standalone && !isVisitor;
+  const isPaidUser = !standalone && !isVisitor && !isCollaborator;
   const spaceQuota = getSpaceQuotaAsText(
     t,
     usedSpace,

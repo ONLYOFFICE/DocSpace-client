@@ -324,7 +324,7 @@ const ClientRoutes = [
           {
             path: "accounts",
             element: (
-              <PrivateRoute restricted withManager>
+              <PrivateRoute restricted withManager withCollaborator>
                 <Navigate to="/accounts/people/filter" replace />
               </PrivateRoute>
             ),
@@ -332,7 +332,7 @@ const ClientRoutes = [
           {
             path: "accounts/filter",
             element: (
-              <PrivateRoute restricted withManager>
+              <PrivateRoute restricted withManager withCollaborator>
                 <Navigate to="/accounts/people/filter" replace />
               </PrivateRoute>
             ),
@@ -352,7 +352,7 @@ const ClientRoutes = [
           {
             path: "accounts/people",
             element: (
-              <PrivateRoute restricted withManager>
+              <PrivateRoute restricted withManager withCollaborator>
                 <Navigate to="/accounts/people/filter" replace />
               </PrivateRoute>
             ),
@@ -366,7 +366,7 @@ const ClientRoutes = [
 
               const Component = () => {
                 return (
-                  <PrivateRoute restricted withManager>
+                  <PrivateRoute restricted withManager withCollaborator>
                     <AccountsView />
                   </PrivateRoute>
                 );
@@ -378,7 +378,7 @@ const ClientRoutes = [
           {
             path: "accounts/groups",
             element: (
-              <PrivateRoute restricted withManager>
+              <PrivateRoute restricted withManager withCollaborator>
                 <Navigate to="/accounts/groups/filter" replace />
               </PrivateRoute>
             ),
@@ -392,7 +392,7 @@ const ClientRoutes = [
 
               const Component = () => {
                 return (
-                  <PrivateRoute restricted withManager>
+                  <PrivateRoute restricted withManager withCollaborator>
                     <AccountsView />
                   </PrivateRoute>
                 );
@@ -404,7 +404,7 @@ const ClientRoutes = [
           {
             path: "accounts/groups/:groupId",
             element: (
-              <PrivateRoute restricted withManager>
+              <PrivateRoute restricted withManager withCollaborator>
                 <Navigate to="filter" replace />
               </PrivateRoute>
             ),
@@ -418,7 +418,7 @@ const ClientRoutes = [
 
               const Component = () => {
                 return (
-                  <PrivateRoute restricted withManager>
+                  <PrivateRoute restricted withManager withCollaborator>
                     <AccountsView />
                   </PrivateRoute>
                 );

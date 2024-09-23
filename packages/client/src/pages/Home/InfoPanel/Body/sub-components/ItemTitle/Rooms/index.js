@@ -73,7 +73,7 @@ const RoomsItemHeader = ({
   if (!selection) return null;
 
   const icon = selection.icon;
-  const isLoadedRoomIcon = !!selection.logo?.medium;
+  const isLoadedRoomIcon = !!selection.logo?.cover || !!selection.logo?.medium;
   const showDefaultRoomIcon = !isLoadedRoomIcon && selection.isRoom;
   const security = infoPanelSelection ? infoPanelSelection.security : {};
   const canInviteUserInRoomAbility = security?.EditAccess;

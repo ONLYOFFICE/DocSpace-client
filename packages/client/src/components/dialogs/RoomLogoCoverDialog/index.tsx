@@ -65,11 +65,12 @@ const RoomLogoCoverDialog = ({
   covers,
   setRoomLogoCover,
   createRoomDialogVisible,
+  editRoomDialogPropsVisible,
   setCover,
   setRoomCoverDialogProps,
   roomCoverDialogProps,
 }: CoverDialogProps) => {
-  const { t } = useTranslation(["Common"]);
+  const { t } = useTranslation(["Common", "RoomLogoCover"]);
 
   React.useEffect(() => {
     getCovers();
@@ -87,7 +88,7 @@ const RoomLogoCoverDialog = ({
 
     setCover(roomCoverDialogProps.color, icon);
 
-    if (createRoomDialogVisible) {
+    if (createRoomDialogVisible || editRoomDialogPropsVisible) {
       onCloseRoomLogo();
       return;
     }
@@ -103,7 +104,7 @@ const RoomLogoCoverDialog = ({
       displayType={isMobile() ? ModalDialogType.aside : ModalDialogType.modal}
       withBodyScroll
     >
-      <ModalDialog.Header>{t("RoomCover")}</ModalDialog.Header>
+      <ModalDialog.Header>{t("RoomLogoCover:RoomCover")}</ModalDialog.Header>
       <ModalDialog.Body>
         <RoomLogoCover covers={covers} />
       </ModalDialog.Body>
@@ -134,7 +135,9 @@ export default inject<TStore>(({ dialogsStore }) => {
     setCover,
     getCovers,
     createRoomDialogProps,
+    editRoomDialogProps,
     setRoomLogoCoverDialogVisible,
+
     covers,
     setRoomLogoCover,
     setRoomCoverDialogProps,
@@ -149,5 +152,6 @@ export default inject<TStore>(({ dialogsStore }) => {
     setRoomCoverDialogProps,
     roomCoverDialogProps,
     createRoomDialogVisible: createRoomDialogProps.visible,
+    editRoomDialogPropsVisible: editRoomDialogProps.visible,
   };
 })(observer(RoomLogoCoverDialog));

@@ -161,6 +161,10 @@ const SetRoomParams = ({
   const isPublicRoom = roomParams.type === RoomsType.PublicRoom;
 
   const getCoverLogo = () => {
+    if (cover) {
+      setPreviewIcon(null);
+    }
+
     if (cover && cover.cover) {
       const currentCoverData = covers.filter(
         (item) => item.id === cover.cover,
@@ -223,7 +227,7 @@ const SetRoomParams = ({
       title: e.target.value,
     });
 
-    if (!cover) {
+    if (!cover && !previewIcon) {
       setCover(`#${randomColor}`, "");
     }
   };
@@ -254,7 +258,7 @@ const SetRoomParams = ({
     });
   };
 
-  const hasImage = selection?.logo?.original;
+  const hasImage = isEdit ? selection?.logo?.original : false;
   const model = getLogoCoverModel(t, hasImage);
 
   const isEmptyIcon = previewTitle
@@ -274,12 +278,21 @@ const SetRoomParams = ({
       isRoom={selection?.isRoom}
       title={selection?.title}
       logo={
-        avatarEditorDialogVisible ? currentIcon : previewIcon || currentIcon
+        currentCover
+          ? { cover: currentCover }
+          : avatarEditorDialogVisible
+            ? currentIcon
+            : previewIcon || currentIcon
       }
       showDefault={
-        !previewIcon && !selection?.logo?.cover && !selection?.logo?.large
+        cover && cover.cover
+          ? false
+          : (!previewIcon &&
+              !selection?.logo?.cover &&
+              !selection?.logo?.large) ||
+            cover?.color
       }
-      color={selection?.logo?.color}
+      color={cover ? cover.color : selection?.logo?.color}
       size={isMobile() ? "96px" : "64px"}
       withEditing={true}
       model={model}
@@ -289,7 +302,9 @@ const SetRoomParams = ({
     <RoomIcon
       id={selection?.id}
       title={previewTitle}
-      showDefault={!previewIcon || avatarEditorDialogVisible}
+      showDefault={
+        cover && cover.cover ? false : !previewIcon || avatarEditorDialogVisible
+      }
       size={isMobile() ? "96px" : "64px"}
       imgClassName={"react-svg-icon"}
       model={model}

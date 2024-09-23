@@ -78,6 +78,8 @@ const EditRoomEvent = ({
   onSaveRoomLogo,
   uploadedFile,
   updateRoom,
+  cover,
+  setRoomLogoCover,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
 
@@ -181,7 +183,9 @@ const EditRoomEvent = ({
         room = await removeLogoFromRoom(room.id);
       }
 
-      if (uploadedFile) {
+      if (cover) {
+        setRoomLogoCover(room.id);
+      } else if (uploadedFile) {
         updateRoom(item, {
           ...room,
           logo: { big: item.logo.original },
@@ -189,7 +193,7 @@ const EditRoomEvent = ({
 
         addActiveItems(null, [room.id]);
 
-        await onSaveRoomLogo(room.id, roomParams.icon, item);
+        await onSaveRoomLogo(room.id, roomParams.icon, item, true);
       } else {
         !withPaging &&
           updateRoom(item, {
@@ -263,6 +267,7 @@ const EditRoomEvent = ({
       fetchedTags={fetchedTags}
       fetchedImage={fetchedImage}
       isLoading={isLoading}
+      cover={cover}
     />
   );
 };
@@ -308,7 +313,8 @@ export default inject(
     } = selectedFolderStore;
     const { updateCurrentFolder, changeRoomOwner } = filesActionsStore;
     const { getThirdPartyIcon } = filesSettingsStore.thirdPartyStore;
-    const { setCreateRoomDialogVisible } = dialogsStore;
+    const { setCreateRoomDialogVisible, cover, setRoomLogoCover } =
+      dialogsStore;
     const { withPaging } = settingsStore;
     const { updateInfoPanelSelection } = infoPanelStore;
 
@@ -350,9 +356,12 @@ export default inject(
 
       updateInfoPanelSelection,
       changeRoomOwner,
+
+      setRoomLogoCover,
       uploadedFile,
       onSaveRoomLogo,
       updateRoom,
+      cover,
     };
   },
 )(observer(EditRoomEvent));

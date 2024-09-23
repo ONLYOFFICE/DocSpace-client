@@ -70,7 +70,7 @@ import { useTheme } from "styled-components";
 import { globalColors } from "@docspace/shared/themes";
 
 const MainProfile = (props) => {
-  const { t } = useTranslation(["Profile", "Common"]);
+  const { t } = useTranslation(["Profile", "Common", "RoomLogoCover"]);
 
   const {
     theme,

@@ -360,7 +360,7 @@ class InfoPanelStore {
 
   getInfoPanelItemIcon = (item, size) => {
     return item?.isRoom || !!item?.roomType
-      ? item.rootFolderType === FolderType.Archive
+      ? item.rootFolderType === FolderType.Archive && !item?.logo?.cover
         ? item.logo && item.logo.medium
         : item?.logo?.cover
           ? item.logo

@@ -138,6 +138,7 @@ const RoomIcon = ({
 
   const prefetchImage = React.useCallback(() => {
     if (!imgSrc) return;
+    setCorrectImage(true);
     const img = new Image();
 
     img.src = imgSrc;
@@ -164,7 +165,7 @@ const RoomIcon = ({
       coverSize={coverSize}
       className={className}
       data-testid="room-icon"
-      withHover={!!hoverSrc}
+      withHover={!!hoverSrc && !isArchive}
       withEditing={withEditing}
       isEmptyIcon={isEmptyIcon}
     >
@@ -186,15 +187,15 @@ const RoomIcon = ({
             {dropdownElement}
           </EditWrapper>
         </>
-      ) : logo?.cover ? (
-        <>
-          <div className="room-background hover-class" />
-          <ReactSVG className="room-icon-cover" src={imgSrc} />
-        </>
       ) : showDefault || !correctImage ? (
         <>
           <div className="room-background hover-class" />
           <Text className="room-title">{roomTitle}</Text>
+        </>
+      ) : logo?.cover ? (
+        <>
+          <div className="room-background hover-class" />
+          <ReactSVG className="room-icon-cover" src={imgSrc} />
         </>
       ) : (
         <img
@@ -208,7 +209,7 @@ const RoomIcon = ({
         />
       )}
 
-      {hoverSrc && (
+      {hoverSrc && !isArchive && (
         <div className="room-icon-container" onClick={onToggleOpenEditLogo}>
           <img className="room-icon_hover" src={hoverSrc} alt="room icon" />
           {dropdownElement}
@@ -227,7 +228,7 @@ const RoomIcon = ({
         </div>
       )}
 
-      {withEditing && (
+      {withEditing && !isArchive && (
         <EditWrapper size={EditWrapperSize.edit}>
           <IconButton
             className="open-edit-logo-icon"

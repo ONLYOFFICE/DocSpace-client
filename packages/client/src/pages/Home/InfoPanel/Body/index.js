@@ -268,7 +268,8 @@ export default inject(
 
     const { editRoomDialogProps, createRoomDialogProps } = dialogsStore;
 
-    const selection = infoPanelSelection.length > 1 ? null : infoPanelSelection;
+    const selection =
+      infoPanelSelection?.length > 1 ? null : infoPanelSelection;
     const {
       uploadFile,
       avatarEditorDialogVisible,

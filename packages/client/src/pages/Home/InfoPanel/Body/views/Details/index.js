@@ -96,16 +96,15 @@ const Details = ({
     createThumbnailAction();
   }, [selection, createThumbnailAction]);
 
-  const currentIcon =
-    !isArchive && selection?.logo?.large
-      ? selection?.logo?.large
-      : selection?.logo?.cover
-        ? selection?.logo
-        : getInfoPanelItemIcon(selection, 96);
+  const currentIcon = selection?.logo?.large
+    ? selection?.logo?.large
+    : selection?.logo?.cover
+      ? selection?.logo
+      : getInfoPanelItemIcon(selection, 96);
 
   //console.log("InfoPanel->Details render", { selection });
 
-  const isLoadedRoomIcon = !!selection.logo?.large;
+  const isLoadedRoomIcon = !!selection.logo?.cover || !!selection.logo?.large;
   const showDefaultRoomIcon = !isLoadedRoomIcon && selection.isRoom;
 
   const hasImage = selection?.logo?.original;

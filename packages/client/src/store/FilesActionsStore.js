@@ -2979,14 +2979,14 @@ class FilesActionStore {
   ) => {
     const { files, folders, filesList, setFiles, setFolders } = this.filesStore;
 
-    if (action === VDRIndexingAction.MoveIndex) {
-      const currentIndex = filesList.findIndex(
-        (f) => f.order === currentItem.order,
-      );
-      const replaceableIndex = filesList.findIndex(
-        (f) => f.order === replaceableItem.order,
-      );
+    const currentIndex = filesList.findIndex(
+      (f) => f.order === currentItem.order,
+    );
+    const replaceableIndex = filesList.findIndex(
+      (f) => f.order === replaceableItem.order,
+    );
 
+    if (action === VDRIndexingAction.MoveIndex) {
       let newFilesList;
       if (indexMovedFromBottom) {
         newFilesList = this.setListOrder(replaceableIndex, currentIndex, true);
@@ -3005,8 +3005,12 @@ class FilesActionStore {
       const newFiles = JSON.parse(JSON.stringify(files));
       const newFolders = JSON.parse(JSON.stringify(folders));
 
-      this.setOrder(currentItem, replaceableItem, newFiles, newFolders);
-      this.setOrder(replaceableItem, currentItem, newFiles, newFolders);
+      const newReplaceableItem = indexMovedFromBottom
+        ? replaceableItem
+        : filesList[replaceableIndex + 1];
+
+      this.setOrder(currentItem, newReplaceableItem, newFiles, newFolders);
+      this.setOrder(newReplaceableItem, currentItem, newFiles, newFolders);
 
       setFiles(newFiles);
       setFolders(newFolders);

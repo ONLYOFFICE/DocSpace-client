@@ -142,10 +142,10 @@ export default inject(
       filesList,
       viewAs,
       setViewAs,
-      filterTotal,
+      filter,
       fetchMoreFiles,
       hasMoreFiles,
-      roomsFilterTotal,
+      roomsFilter,
       highlightFile,
     } = filesStore;
     const { isVisible: infoPanelVisible } = infoPanelStore;
@@ -160,7 +160,7 @@ export default inject(
       viewAs,
       setViewAs,
       infoPanelVisible,
-      filterTotal: isRooms ? roomsFilterTotal : filterTotal,
+      filterTotal: isRooms ? roomsFilter.total : filter.total,
       fetchMoreFiles,
       hasMoreFiles,
       isRooms,

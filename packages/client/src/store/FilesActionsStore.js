@@ -2932,16 +2932,6 @@ class FilesActionStore {
       .catch((error) => toastr.error(error));
   };
 
-  setOrder = (currentItem, replaceableItem, newFiles, newFolders) => {
-    if (currentItem.isFolder) {
-      const fldIndex = newFolders.findIndex((f) => f.id === currentItem.id);
-      newFolders[fldIndex].order = replaceableItem.order;
-    } else {
-      const fileIndex = newFiles.findIndex((f) => f.id === currentItem.id);
-      newFiles[fileIndex].order = replaceableItem.order;
-    }
-  };
-
   setListOrder = (startIndex, finalIndex, indexMovedFromBottom = false) => {
     const newFilesList = JSON.parse(JSON.stringify(this.filesStore.filesList));
 
@@ -2971,46 +2961,34 @@ class FilesActionStore {
     return newFilesList;
   };
 
-  setFilesOrder = (
-    currentItem,
-    replaceableItem,
-    action,
-    indexMovedFromBottom,
-  ) => {
-    const { files, folders, filesList, setFiles, setFolders } = this.filesStore;
+  setFilesOrder = (currentItem, replaceableItem, indexMovedFromBottom) => {
+    const { filesList, setFiles, setFolders } = this.filesStore;
 
-    if (action === VDRIndexingAction.MoveIndex) {
-      const currentIndex = filesList.findIndex(
-        (f) => f.order === currentItem.order,
+    const currentIndex = filesList.findIndex(
+      (f) => f.order === currentItem.order,
+    );
+    const replaceableIndex = filesList.findIndex(
+      (f) => f.order === replaceableItem.order,
+    );
+
+    let newFilesList;
+    if (indexMovedFromBottom) {
+      newFilesList = this.setListOrder(
+        replaceableIndex,
+        currentIndex,
+        indexMovedFromBottom,
       );
-      const replaceableIndex = filesList.findIndex(
-        (f) => f.order === replaceableItem.order,
-      );
-
-      let newFilesList;
-      if (indexMovedFromBottom) {
-        newFilesList = this.setListOrder(replaceableIndex, currentIndex, true);
-        newFilesList[currentIndex].order = replaceableItem.order;
-      } else {
-        newFilesList = this.setListOrder(currentIndex, replaceableIndex + 1);
-        newFilesList[currentIndex].order = filesList[replaceableIndex].order;
-      }
-
-      const newFolders = newFilesList.filter((f) => f.isFolder);
-      const newFiles = newFilesList.filter((f) => !f.isFolder);
-
-      setFiles(newFiles);
-      setFolders(newFolders);
+      newFilesList[currentIndex].order = replaceableItem.order;
     } else {
-      const newFiles = JSON.parse(JSON.stringify(files));
-      const newFolders = JSON.parse(JSON.stringify(folders));
-
-      this.setOrder(currentItem, replaceableItem, newFiles, newFolders);
-      this.setOrder(replaceableItem, currentItem, newFiles, newFolders);
-
-      setFiles(newFiles);
-      setFolders(newFolders);
+      newFilesList = this.setListOrder(currentIndex, replaceableIndex + 1);
+      newFilesList[currentIndex].order = filesList[replaceableIndex].order;
     }
+
+    const newFolders = newFilesList.filter((f) => f.isFolder);
+    const newFiles = newFilesList.filter((f) => !f.isFolder);
+
+    setFiles(newFiles);
+    setFolders(newFolders);
   };
 
   changeIndex = async (action, item, t, isLastItem) => {
@@ -3072,7 +3050,7 @@ class FilesActionStore {
           ? replaceable
           : filesList[newRepIndex - 1];
 
-      this.setFilesOrder(current, newReplaceable, action, indexMovedFromBottom);
+      this.setFilesOrder(current, newReplaceable, indexMovedFromBottom);
       this.filesStore.setSelected("none");
 
       const items = [current, replaceable];

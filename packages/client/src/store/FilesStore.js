@@ -3533,6 +3533,8 @@ class FilesStore {
     const orderItems = [...this.folders, ...this.files].filter((x) => x.order);
 
     if (orderItems.length > 0) {
+      this.isEmptyPage && this.setIsEmptyPage(false);
+
       orderItems.sort((a, b) => {
         if (a.order.includes(".")) {
           return (

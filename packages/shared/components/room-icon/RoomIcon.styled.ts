@@ -207,9 +207,17 @@ const EditWrapper = styled.div<{
 
   border-radius: 50%;
   position: absolute;
-  bottom: -6px;
-  right: -6px;
 
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          left: -6px;
+        `
+      : css`
+          bottom: -6px;
+          right: -6px;
+        `}
+  bottom: -6px;
   .open-plus-logo-icon {
     svg {
       path {

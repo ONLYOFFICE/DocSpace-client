@@ -29,6 +29,8 @@ import { useNavigate } from "react-router-dom";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
+import { isMobile } from "@docspace/shared/utils";
+
 import { FileType, FolderType } from "@docspace/shared/enums";
 import { Text } from "@docspace/shared/components/text";
 
@@ -146,6 +148,7 @@ const Details = ({
             logo={currentIcon}
             model={model}
             withEditing={selection.isRoom}
+            dropDownManualX={isMobile() ? "-30px" : "-10px"}
             onChangeFile={onChangeFileContext}
           />
         </StyledNoThumbnail>

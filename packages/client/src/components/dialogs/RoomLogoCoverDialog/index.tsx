@@ -47,7 +47,7 @@ const StyledModalDialog = styled(ModalDialog)`
 
     .modal-body {
       padding: 0;
-      padding-left: 14px;
+      padding-inline-start: 14px;
     }
 
     @media ${mobile} {

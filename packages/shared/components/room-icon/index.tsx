@@ -69,6 +69,7 @@ const RoomIcon = ({
   onChangeFile,
   isEmptyIcon,
   currentColorScheme,
+  dropDownManualX,
 }: RoomIconProps) => {
   const [correctImage, setCorrectImage] = React.useState(true);
 
@@ -100,6 +101,7 @@ const RoomIcon = ({
   const dropdownElement = (
     <>
       <DropDown
+        manualX={dropDownManualX || "-10px"}
         open={openEditLogo}
         clickOutsideAction={() => setOpenLogoEdit(false)}
         withBackdrop={false}
@@ -175,7 +177,6 @@ const RoomIcon = ({
           <EditWrapper
             $currentColorScheme={currentColorScheme}
             size={EditWrapperSize.plus}
-            style={{ bottom: "-6px", right: "-8px" }}
           >
             <IconButton
               className="open-plus-logo-icon"

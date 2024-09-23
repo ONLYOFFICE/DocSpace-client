@@ -333,22 +333,23 @@ const SectionBodyContent = (props) => {
     const isSectionTarget = elem && elem.className === sectionClass;
 
     let replaceable;
-    const item = isSectionTarget
-      ? filesList[filesList.length - 1]
-      : filesList.find((i) =>
-          replaceableItemType === "file"
-            ? i.id === replaceableItemId && i.fileExst
-            : i.id === replaceableItemId,
-        );
+    if (isSectionTarget) {
+      replaceable = filesList[filesList.length - 1];
+    } else {
+      const replaceableItemIndex = filesList.findIndex((i) =>
+        replaceableItemType === "file"
+          ? i.id === replaceableItemId && !i.isFolder
+          : i.id === replaceableItemId && i.isFolder,
+      );
 
-    replaceable = item;
-    if (item === filesList[filesList.length - 1] && !isSectionTarget) {
-      replaceable = filesList[filesList.length - 2];
+      if (replaceableItemIndex > -1) {
+        replaceable = filesList[replaceableItemIndex];
+      }
     }
 
     if (!replaceable) return;
 
-    changeIndex(VDRIndexingAction.MoveIndex, replaceable, t);
+    changeIndex(VDRIndexingAction.MoveIndex, replaceable, t, isSectionTarget);
     return;
   };
 

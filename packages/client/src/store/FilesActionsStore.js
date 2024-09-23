@@ -2971,7 +2971,12 @@ class FilesActionStore {
     return newFilesList;
   };
 
-  setFilesOrder = (currentItem, replaceableItem, action) => {
+  setFilesOrder = (
+    currentItem,
+    replaceableItem,
+    action,
+    indexMovedFromBottom,
+  ) => {
     const { files, folders, filesList, setFiles, setFolders } = this.filesStore;
 
     if (action === VDRIndexingAction.MoveIndex) {
@@ -2982,21 +2987,13 @@ class FilesActionStore {
         (f) => f.order === replaceableItem.order,
       );
 
-      let indexMovedFromBottom = +currentItem.order > +replaceableItem.order;
-      if (currentItem.order.includes(".")) {
-        indexMovedFromBottom =
-          +currentItem.order.split(".").at(-1) >
-          +replaceableItem.order.split(".").at(-1);
-      }
-
       let newFilesList;
       if (indexMovedFromBottom) {
         newFilesList = this.setListOrder(replaceableIndex, currentIndex, true);
         newFilesList[currentIndex].order = replaceableItem.order;
       } else {
-        newFilesList = this.setListOrder(currentIndex, replaceableIndex);
-        newFilesList[currentIndex].order =
-          filesList[replaceableIndex - 1].order;
+        newFilesList = this.setListOrder(currentIndex, replaceableIndex + 1);
+        newFilesList[currentIndex].order = filesList[replaceableIndex].order;
       }
 
       const newFolders = newFilesList.filter((f) => f.isFolder);
@@ -3016,8 +3013,8 @@ class FilesActionStore {
     }
   };
 
-  changeIndex = async (action, item, t) => {
-    const { filesList } = this.filesStore;
+  changeIndex = async (action, item, t, isLastItem) => {
+    const { filesList, bufferSelection } = this.filesStore;
 
     const index = filesList.findIndex(
       (elem) => elem.id === item?.id && elem.fileExst === item?.fileExst,
@@ -3029,8 +3026,6 @@ class FilesActionStore {
         index === filesList.length - 1)
     )
       return;
-
-    const { bufferSelection } = this.filesStore;
 
     let selection = this.filesStore.selection.length
       ? this.filesStore.selection
@@ -3061,7 +3056,23 @@ class FilesActionStore {
     try {
       await changeIndex(current?.id, replaceable.order, current?.isFolder);
 
-      this.setFilesOrder(current, replaceable, action);
+      let indexMovedFromBottom = +current.order > +replaceable.order;
+      if (current.order.includes(".")) {
+        indexMovedFromBottom =
+          +current.order.split(".").at(-1) >
+          +replaceable.order.split(".").at(-1);
+      }
+
+      const newRepIndex = filesList.findIndex(
+        (f) => f.id === replaceable.id && f.isFolder === replaceable.isFolder,
+      );
+
+      const newReplaceable =
+        indexMovedFromBottom || isLastItem
+          ? replaceable
+          : filesList[newRepIndex - 1];
+
+      this.setFilesOrder(current, newReplaceable, action, indexMovedFromBottom);
       this.filesStore.setSelected("none");
 
       const items = [current, replaceable];

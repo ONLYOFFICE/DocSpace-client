@@ -204,6 +204,7 @@ const SetRoomParams = ({
 
       {isEdit && (
         <ChangeRoomOwner
+          canChangeOwner={roomParams.canChangeRoomOwner}
           roomOwner={roomParams.roomOwner}
           onOwnerChange={onOwnerChange}
         />

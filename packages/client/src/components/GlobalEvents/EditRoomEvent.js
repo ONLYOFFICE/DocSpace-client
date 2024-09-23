@@ -105,6 +105,7 @@ const EditRoomEvent = ({
       zoom: 1,
     },
     roomOwner: item.createdBy,
+    canChangeRoomOwner: item?.security?.ChangeOwner || false,
 
     ...(isDefaultRoomsQuotaSet && {
       quota: item.quotaLimit,

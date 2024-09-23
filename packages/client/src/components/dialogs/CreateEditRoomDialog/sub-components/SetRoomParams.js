@@ -237,6 +237,20 @@ const SetRoomParams = ({
     setCover();
   };
 
+  const onDeleteAvatar = () => {
+    setCover(`#${randomColor}`, "");
+    setRoomParams({
+      ...roomParams,
+      icon: {
+        uploadedFile: null,
+        tmpFile: "",
+        x: 0.5,
+        y: 0.5,
+        zoom: 1,
+      },
+    });
+  };
+
   const onChangeIsPrivate = () =>
     setRoomParams({ ...roomParams, isPrivate: !roomParams.isPrivate });
 
@@ -258,18 +272,25 @@ const SetRoomParams = ({
     });
   };
 
-  const hasImage = isEdit ? selection?.logo?.original : false;
+  const hasImage = isEdit
+    ? roomParams.icon.uploadedFile && selection?.logo?.original
+    : false;
   const model = getLogoCoverModel(t, hasImage);
 
-  const isEmptyIcon = previewTitle
-    ? false
-    : avatarEditorDialogVisible
-      ? true
-      : previewIcon
-        ? false
-        : previewTitle
+  const isEditRoomModel = model.map((item) =>
+    item.key === "delete" ? { ...item, onClick: onDeleteAvatar } : item,
+  );
+
+  const isEmptyIcon =
+    previewTitle || cover?.color
+      ? false
+      : avatarEditorDialogVisible
+        ? true
+        : previewIcon
           ? false
-          : true;
+          : previewTitle
+            ? false
+            : true;
 
   const element = isEdit ? (
     <ItemIcon
@@ -295,7 +316,7 @@ const SetRoomParams = ({
       color={cover ? cover.color : selection?.logo?.color}
       size={isMobile() ? "96px" : "64px"}
       withEditing={true}
-      model={model}
+      model={isEditRoomModel}
       onChangeFile={onChangeFile}
     />
   ) : (
@@ -318,7 +339,8 @@ const SetRoomParams = ({
       withEditing={
         (previewIcon && !avatarEditorDialogVisible) ||
         previewTitle ||
-        (currentCover && !roomLogoCoverDialogVisible)
+        (currentCover && !roomLogoCoverDialogVisible) ||
+        cover?.color
       }
       onChangeFile={onChangeFile}
       currentColorScheme={currentColorScheme}

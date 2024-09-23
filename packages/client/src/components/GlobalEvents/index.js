@@ -50,6 +50,7 @@ const GlobalEvents = ({
   setEditRoomDialogProps,
   createRoomDialogProps,
   setCreateRoomDialogProps,
+  setCover,
 }) => {
   const [createDialogProps, setCreateDialogProps] = useState({
     visible: false,
@@ -181,6 +182,7 @@ const GlobalEvents = ({
       visible: visible,
       item: e.item,
       onClose: () => {
+        setCover();
         setEditRoomDialogProps({
           visible: false,
           item: null,
@@ -436,6 +438,7 @@ export default inject(({ settingsStore, pluginStore, dialogsStore }) => {
     setEditRoomDialogProps,
     createRoomDialogProps,
     setCreateRoomDialogProps,
+    setCover,
   } = dialogsStore;
 
   const { eventListenerItemsList } = pluginStore;
@@ -447,5 +450,6 @@ export default inject(({ settingsStore, pluginStore, dialogsStore }) => {
     setEditRoomDialogProps,
     createRoomDialogProps,
     setCreateRoomDialogProps,
+    setCover,
   };
 })(observer(GlobalEvents));

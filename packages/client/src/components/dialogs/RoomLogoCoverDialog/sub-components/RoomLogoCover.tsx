@@ -108,6 +108,7 @@ const RoomLogoCover = ({
       ...roomCoverDialogProps,
       icon: roomIcon,
       color: roomColor,
+      withoutIcon: typeof roomIcon === "string",
     });
   }, []);
 

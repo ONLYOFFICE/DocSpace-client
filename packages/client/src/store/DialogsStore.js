@@ -668,7 +668,7 @@ class DialogsStore {
     this.infoPanelStore.updateInfoPanelSelection(res);
   };
 
-  getLogoCoverModel = (t, hasImage) => {
+  getLogoCoverModel = (t, hasImage, onDelete) => {
     return [
       {
         label: t("RoomLogoCover:UploadPicture"),
@@ -681,11 +681,13 @@ class DialogsStore {
         ? {
             label: t("Common:Delete"),
             icon: TrashIconSvgUrl,
-            onClick: () => this.deleteRoomLogo(),
+            key: "delete",
+            onClick: onDelete ? onDelete() : () => this.deleteRoomLogo(),
           }
         : {
             label: t("RoomLogoCover:CustomizeCover"),
             icon: PenSvgUrl,
+            key: "cover",
             onClick: () => this.setRoomLogoCoverDialogVisible(true),
           },
     ];

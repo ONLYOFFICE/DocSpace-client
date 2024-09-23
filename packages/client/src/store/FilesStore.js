@@ -4148,14 +4148,6 @@ class FilesStore {
     this.mainButtonMobileVisible = visible;
   };
 
-  get roomsFilterTotal() {
-    return this.roomsFilter.total;
-  }
-
-  get filterTotal() {
-    return this.filter.total;
-  }
-
   get indexColumnSize() {
     if (!this.indexingStore.isIndexing) return;
 

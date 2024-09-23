@@ -3192,6 +3192,7 @@ const Dark: TTheme = {
     errorColor: darkErrorStatus,
     sideColor: grayDark,
     nameColor: grayDarkStrong,
+    barBackground: darkGrayLight,
   },
 
   publicRoom: {

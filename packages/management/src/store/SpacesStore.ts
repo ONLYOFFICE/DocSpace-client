@@ -44,7 +44,7 @@ class SpacesStore {
 
   referenceLink: URL | string = "";
 
-  currentPortal = false;
+  currentPortal = null;
 
   constructor(settingsStore) {
     this.settingsStore = settingsStore;

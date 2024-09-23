@@ -23,46 +23,41 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
-import { useEffect, useContext } from "react";
 import { isMobile as isMobileDevice } from "react-device-detect";
 
-import { DeviceType } from "@docspace/shared/enums";
-import { isTablet, isMobile, Context } from "@docspace/shared/utils";
+import { isTablet, isMobile } from "./device";
+import { DeviceType, FolderType, RoomsType } from "../enums";
+import type { Nullable } from "../types";
 
-type UseViewEffectProps = {
-  view: string;
-  setView: (view: string) => void;
+type ViewType = "row" | "table" | "tile";
+
+type Options = {
+  parentRoomType?: Nullable<FolderType>;
+  roomType?: Nullable<RoomsType>;
+  indexing?: boolean;
   currentDeviceType: DeviceType;
 };
 
-type ContextType = {
-  sectionWidth?: number;
-  sectionHeight?: number;
-};
+export const getViewForCurrentRoom = (
+  view: ViewType,
+  options: Options,
+): ViewType => {
+  const isTile = view === "tile";
 
-const useViewEffect = ({
-  view,
-  setView,
-  currentDeviceType,
-}: UseViewEffectProps) => {
-  const { sectionWidth } = useContext<ContextType>(Context);
+  const isVDR =
+    options.parentRoomType === FolderType.VirtualDataRoom ||
+    options.roomType === RoomsType.VirtualDataRoom;
 
-  useEffect(() => {
-    const isNotRowView = view !== "row";
-    const isNotTableView = view !== "table";
-
-    if ((isNotTableView && isNotRowView) || !sectionWidth) return;
-
+  if (isVDR && isTile && options.indexing) {
     if (
       isMobileDevice ||
-      ((isTablet() || isMobile()) && currentDeviceType !== DeviceType.desktop)
-    ) {
-      if (isNotRowView) setView("row");
-    } else if (isNotTableView) {
-      setView("table");
-    }
-  }, [sectionWidth, currentDeviceType, view, setView]);
-};
+      ((isTablet() || isMobile()) &&
+        options.currentDeviceType !== DeviceType.desktop)
+    )
+      return "row";
 
-export default useViewEffect;
+    return "table";
+  }
+
+  return view;
+};

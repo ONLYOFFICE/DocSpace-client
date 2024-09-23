@@ -41,6 +41,7 @@ import {
   onEdgeScrolling,
 } from "@docspace/shared/utils";
 import { isElementInViewport } from "@docspace/shared/utils/common";
+import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
 
 import { DeviceType, VDRIndexingAction } from "@docspace/shared/enums";
 
@@ -51,10 +52,16 @@ let currentDroppable = null;
 let droppableSeparator = null;
 let isDragActive = false;
 
+const fileViews = {
+  tile: FilesTileContainer,
+  table: TableView,
+  row: FilesRowContainer,
+};
+
 const SectionBodyContent = (props) => {
   const {
     t,
-    tReady,
+    // tReady,
     isEmptyFilesList,
     folderId,
     dragging,
@@ -81,6 +88,9 @@ const SectionBodyContent = (props) => {
     currentDeviceType,
     isIndexEditingMode,
     changeIndex,
+    parentRoomType,
+    roomType,
+    indexing,
   } = props;
 
   useEffect(() => {
@@ -386,17 +396,16 @@ const SectionBodyContent = (props) => {
 
   if (isEmptyFilesList) return <EmptyContainer isEmptyPage={isEmptyPage} />;
 
-  return (
-    <>
-      {viewAs === "tile" ? (
-        <FilesTileContainer t={t} />
-      ) : viewAs === "table" ? (
-        <TableView tReady={tReady} />
-      ) : (
-        <FilesRowContainer tReady={tReady} />
-      )}
-    </>
-  );
+  const view = getViewForCurrentRoom(viewAs, {
+    currentDeviceType,
+    parentRoomType,
+    roomType,
+    indexing,
+  });
+
+  const FileViewComponent = fileViews[view] ?? FilesRowContainer;
+
+  return <FileViewComponent />;
 };
 
 export default inject(
@@ -429,6 +438,9 @@ export default inject(
       isEmptyPage,
       movingInProgress,
     } = filesStore;
+
+    const { parentRoomType, roomType, indexing, order } = selectedFolderStore;
+
     return {
       dragging,
       startDrag,
@@ -457,6 +469,9 @@ export default inject(
       currentDeviceType: settingsStore.currentDeviceType,
       isEmptyPage,
       isIndexEditingMode: indexingStore.isIndexEditingMode,
+      parentRoomType,
+      roomType,
+      indexing: indexing || Boolean(order),
     };
   },
 )(

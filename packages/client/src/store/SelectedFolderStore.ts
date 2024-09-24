@@ -146,9 +146,6 @@ class SelectedFolderStore {
   indexing = false;
 
   parentRoomType: Nullable<FolderType> = null;
-  order = false;
-
-  parentRoomType: Nullable = null;
 
   lifetime: TRoomLifetime | null = null;
 
@@ -209,7 +206,6 @@ class SelectedFolderStore {
       parentRoomType: this.parentRoomType,
       lifetime: this.lifetime,
       indexing: this.indexing,
-      order: this.order,
       denyDownload: this.denyDownload,
       usedSpace: this.usedSpace,
       quotaLimit: this.quotaLimit,
@@ -259,7 +255,6 @@ class SelectedFolderStore {
     this.parentRoomType = null;
     this.lifetime = null;
     this.indexing = false;
-    this.order = false;
     this.denyDownload = false;
     this.usedSpace = undefined;
     this.quotaLimit = undefined;

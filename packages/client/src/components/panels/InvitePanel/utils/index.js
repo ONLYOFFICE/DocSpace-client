@@ -199,7 +199,7 @@ export const getAccessOptions = (
       options = [
         accesses.roomManager,
         { key: "s1", isSeparator: withSeparator },
-        accesses.collaborator,
+        accesses.contentCreator,
         accesses.editor,
         accesses.viewer,
       ];

@@ -48,10 +48,10 @@ const StyledWithoutIcon = styled.div<WithoutIconProps>`
   line-height: 20px;
   user-select: none;
   padding: 3px 15px;
-  color: ${(props) => props.theme.logoCover.textColor};
   background-color: ${(props) => props.theme.logoCover.selectedBackgroundColor};
   border: 1px solid ${(props) => props.theme.logoCover.selectedBorderColor};
   border-radius: 16px;
+  box-sizing: border-box;
 
   @media ${tablet} {
     padding: 5px 21px;
@@ -74,6 +74,7 @@ const StyledIconContainer = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
   width: 30px;
   height: 30px;
 

@@ -32,22 +32,50 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { mobile, tablet, isMobile } from "@docspace/shared/utils";
+import {
+  mobile,
+  tablet,
+  isMobile,
+  isDesktop,
+  isTablet,
+  size,
+} from "@docspace/shared/utils";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import RoomLogoCover from "./sub-components/RoomLogoCover";
 import { CoverDialogProps } from "./RoomLogoCoverDialog.types";
 
-const StyledModalDialog = styled(ModalDialog)`
+const PADDING_HEIGHT = 84;
+const HEIGHT_WITHOUT_BODY = 158;
+const CONTENT_SCROLL_DIFF = 262;
+
+const DESKTOP_HEIGHT = 648;
+const TABLET_HEIGHT = 854;
+
+const StyledModalDialog = styled(ModalDialog)<{ heightProp?: string }>`
   #modal-dialog {
     width: 422px;
+    height: ${(props) => props.heightProp};
 
     @media ${tablet} {
       width: 464px;
     }
 
+    .modal-header {
+      height: 54px;
+      min-height: 54px;
+    }
+
     .modal-body {
       padding: 0;
-      padding-inline-start: 14px;
+      padding-inline-start: 16px;
+    }
+
+    .modal-footer {
+      margin-top: 16px;
+    }
+
+    .scroll-body {
+      padding-inline-end: 16px !important;
     }
 
     @media ${mobile} {
@@ -69,8 +97,71 @@ const RoomLogoCoverDialog = ({
   setCover,
   setRoomCoverDialogProps,
   roomCoverDialogProps,
+  roomLogoCoverDialogVisible,
 }: CoverDialogProps) => {
   const { t } = useTranslation(["Common", "RoomLogoCover"]);
+
+  const defaultHeight = isDesktop() ? DESKTOP_HEIGHT : TABLET_HEIGHT;
+
+  const [height, setHeight] = React.useState(`${defaultHeight}px`);
+  const [view, setView] = React.useState(isDesktop() ? "desktop" : "tablet");
+  const contentRef = React.useRef();
+
+  const recalculateHeight = React.useCallback(() => {
+    if (contentRef.current) {
+      const contentHeight =
+        contentRef?.current?.getBoundingClientRect()?.height;
+      const h = contentHeight + HEIGHT_WITHOUT_BODY;
+
+      const maxH = isDesktop() ? DESKTOP_HEIGHT : TABLET_HEIGHT;
+
+      const isMaxHeight =
+        (isDesktop() && DESKTOP_HEIGHT <= h) ||
+        (isTablet() && TABLET_HEIGHT <= h);
+
+      if (size.desktop > window.innerWidth && view === "desktop") {
+        setView("tablet");
+        setHeight(`${maxH}px`);
+        return;
+      }
+
+      if (size.desktop < window.innerWidth && view === "tablet") {
+        setView("desktop");
+        setHeight(`${maxH}px`);
+        return;
+      }
+
+      if (h + PADDING_HEIGHT >= window.innerHeight) {
+        setHeight(`${window.innerHeight - PADDING_HEIGHT}px`);
+      } else if (isMaxHeight) {
+        return setHeight(`${maxH}px`);
+      } else if (window.innerHeight >= h + PADDING_HEIGHT && !isMaxHeight) {
+        setHeight(`${window.innerHeight - PADDING_HEIGHT}px`);
+      } else setHeight(`${h}px`);
+    }
+  }, [view]);
+
+  const scrollH = React.useMemo(() => {
+    return `${Number(height.replace("px", "")) - CONTENT_SCROLL_DIFF}px`;
+  }, [height]);
+
+  React.useLayoutEffect(() => {
+    if (contentRef.current) {
+      const { height: h } = contentRef.current.getBoundingClientRect();
+      setHeight(`${h}px`);
+    }
+  }, [roomLogoCoverDialogVisible]);
+
+  React.useLayoutEffect(() => {
+    recalculateHeight();
+  }, [roomLogoCoverDialogVisible, recalculateHeight]);
+
+  React.useEffect(() => {
+    window.addEventListener("resize", recalculateHeight);
+    return () => {
+      window.removeEventListener("resize", recalculateHeight);
+    };
+  }, [recalculateHeight]);
 
   React.useEffect(() => {
     getCovers();
@@ -100,13 +191,18 @@ const RoomLogoCoverDialog = ({
     <StyledModalDialog
       visible
       autoMaxHeight
+      heightProp={height}
       onClose={onCloseRoomLogo}
       displayType={isMobile() ? ModalDialogType.aside : ModalDialogType.modal}
       withBodyScroll
     >
       <ModalDialog.Header>{t("RoomLogoCover:RoomCover")}</ModalDialog.Header>
       <ModalDialog.Body>
-        <RoomLogoCover covers={covers} />
+        <RoomLogoCover
+          forwardedRef={contentRef}
+          scrollHeight={scrollH}
+          covers={covers}
+        />
       </ModalDialog.Body>
 
       <ModalDialog.Footer>
@@ -137,6 +233,7 @@ export default inject<TStore>(({ dialogsStore }) => {
     createRoomDialogProps,
     editRoomDialogProps,
     setRoomLogoCoverDialogVisible,
+    roomLogoCoverDialogVisible,
 
     covers,
     setRoomLogoCover,
@@ -145,6 +242,7 @@ export default inject<TStore>(({ dialogsStore }) => {
   } = dialogsStore;
   return {
     setRoomLogoCoverDialogVisible,
+    roomLogoCoverDialogVisible,
     getCovers,
     covers,
     setCover,

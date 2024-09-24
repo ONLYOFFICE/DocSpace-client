@@ -97,9 +97,10 @@ const StyledColorItem = styled.div<ColorItemProps>`
 `;
 
 const SelectedColorItem = styled.div`
-  width: 26px;
-  height: 26px;
-  margin-top: 6px;
+  width: 30px;
+  height: 30px;
+  box-sizing: border-box;
+  margin-top: 8px;
   border-radius: 50%;
   border: ${(props) => `solid 2px ${props.color}`};
   display: flex;
@@ -107,8 +108,8 @@ const SelectedColorItem = styled.div`
   justify-content: center;
 
   @media ${tablet} {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
   }
 
   .circle {

@@ -41,11 +41,35 @@ import { RoomLogoCoverProps, ICover } from "../RoomLogoCoverDialog.types";
 import { globalColors } from "@docspace/shared/themes";
 
 const RoomLogoCoverContainer = styled.div`
+  color: ${(props) => props.theme.logoCover.textColor};
   .room-logo-container {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 16px;
+  }
+
+  .color-select-container {
+    @media ${mobile} {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+  }
+
+  .icon-select-container {
+    @media ${mobile} {
+      text-align: center;
+    }
+  }
+
+  .cover-icon-container {
+    @media ${mobile} {
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
   }
 
   .color-name {
@@ -62,10 +86,17 @@ const RoomLogoCoverContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    box-sizing: border-box;
+    width: 390px;
 
     @media ${tablet} {
       flex-wrap: wrap;
       gap: 16px;
+      width: 432px;
+    }
+
+    @media ${mobile} {
+      width: 100%;
     }
   }
 
@@ -92,6 +123,8 @@ const RoomLogoCover = ({
   covers,
   setRoomCoverDialogProps,
   roomCoverDialogProps,
+  forwardedRef,
+  scrollHeight,
 }: RoomLogoCoverProps) => {
   const { t } = useTranslation(["Common", "CreateEditRoomDialog"]);
 
@@ -150,7 +183,7 @@ const RoomLogoCover = ({
   );
 
   return (
-    <RoomLogoCoverContainer>
+    <RoomLogoCoverContainer ref={forwardedRef}>
       <div className="room-logo-container">
         <CustomLogo
           isBaseTheme={!!isBaseTheme}
@@ -164,7 +197,7 @@ const RoomLogoCover = ({
         {isMobile() ? (
           selectContainerBody
         ) : (
-          <Scrollbar ref={scrollRef} style={{ height: "378px" }}>
+          <Scrollbar ref={scrollRef} style={{ height: `${scrollHeight}` }}>
             {selectContainerBody}
           </Scrollbar>
         )}

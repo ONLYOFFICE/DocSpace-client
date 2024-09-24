@@ -62,6 +62,7 @@ const StyledLogo = styled.div<StyledLogoProps>`
 
   ${(props) =>
     !props.isBase &&
+    props.color &&
     css`
       background-color: ${hexRgb(props.color, { alpha: 0.09, format: "css" })};
 

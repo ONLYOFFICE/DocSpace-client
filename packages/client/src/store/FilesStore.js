@@ -2446,6 +2446,8 @@ class FilesStore {
       const canViewRoomInfo = item.security?.Read;
       const canMuteRoom = item.security?.Mute;
 
+      const canChangeOwner = item.security?.ChangeOwner;
+
       const isPublicRoomType =
         item.roomType === RoomsType.PublicRoom ||
         item.roomType === RoomsType.FormRoom ||
@@ -2469,6 +2471,7 @@ class FilesStore {
         "separator1",
         "duplicate-room",
         "download",
+        "change-room-owner",
         "archive-room",
         "unarchive-room",
         "leave-room",
@@ -2499,6 +2502,10 @@ class FilesStore {
 
       if (!canInviteUserInRoom) {
         roomOptions = this.removeOptions(roomOptions, ["invite-users-to-room"]);
+      }
+
+      if (!canChangeOwner) {
+        roomOptions = this.removeOptions(roomOptions, ["change-room-owner"]);
       }
 
       if (!canArchiveRoom) {

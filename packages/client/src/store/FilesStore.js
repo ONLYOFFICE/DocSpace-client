@@ -44,6 +44,7 @@ import {
 } from "@docspace/shared/enums";
 
 import { RoomsTypes } from "@docspace/shared/utils";
+import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { updateTempContent, isPublicRoom } from "@docspace/shared/utils/common";
@@ -108,7 +109,7 @@ class FilesStore {
 
   pluginStore;
 
-  viewAs =
+  privateViewAs =
     !isDesktop() && storageViewAs !== "tile" ? "row" : storageViewAs || "table";
 
   dragging = false;
@@ -861,10 +862,25 @@ class FilesStore {
     this.activeFolders = arrayFormation;
   };
   setViewAs = (viewAs) => {
-    this.viewAs = viewAs;
+    this.privateViewAs = viewAs;
     localStorage.setItem("viewAs", viewAs);
     viewAs === "tile" && this.createThumbnails();
   };
+
+  get viewAs() {
+    const view = this.privateViewAs;
+
+    const { parentRoomType, roomType, isIndexedFolder } =
+      this.selectedFolderStore;
+    const currentDeviceType = this.settingsStore.currentDeviceType;
+
+    return getViewForCurrentRoom(view, {
+      currentDeviceType,
+      parentRoomType,
+      roomType,
+      indexing: isIndexedFolder,
+    });
+  }
 
   setPageItemsLength = (pageItemsLength) => {
     this.pageItemsLength = pageItemsLength;

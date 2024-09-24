@@ -34,7 +34,7 @@ type ViewType = "row" | "table" | "tile";
 type Options = {
   parentRoomType?: Nullable<FolderType>;
   roomType?: Nullable<RoomsType>;
-  indexing?: boolean;
+  indexing: boolean;
   currentDeviceType: DeviceType;
 };
 

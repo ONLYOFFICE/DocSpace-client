@@ -41,7 +41,6 @@ import {
   onEdgeScrolling,
 } from "@docspace/shared/utils";
 import { isElementInViewport } from "@docspace/shared/utils/common";
-import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
 
 import { DeviceType, VDRIndexingAction } from "@docspace/shared/enums";
 
@@ -396,14 +395,7 @@ const SectionBodyContent = (props) => {
 
   if (isEmptyFilesList) return <EmptyContainer isEmptyPage={isEmptyPage} />;
 
-  const view = getViewForCurrentRoom(viewAs, {
-    currentDeviceType,
-    parentRoomType,
-    roomType,
-    indexing,
-  });
-
-  const FileViewComponent = fileViews[view] ?? FilesRowContainer;
+  const FileViewComponent = fileViews[viewAs] ?? FilesRowContainer;
 
   return <FileViewComponent />;
 };

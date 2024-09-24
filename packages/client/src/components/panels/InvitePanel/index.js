@@ -39,7 +39,6 @@ import ItemsList from "./sub-components/ItemsList";
 import InviteInput from "./sub-components/InviteInput";
 import ExternalLinks from "./sub-components/ExternalLinks";
 
-import InfoBar from "./sub-components/InfoBar";
 import InvitePanelLoader from "./sub-components/InvitePanelLoader";
 
 import { Text } from "@docspace/shared/components/text";
@@ -93,15 +92,11 @@ const InvitePanel = ({
   const [externalLinksVisible, setExternalLinksVisible] = useState(false);
   const [scrollAllPanelContent, setScrollAllPanelContent] = useState(false);
   const [activeLink, setActiveLink] = useState({});
-  const [infoBarIsVisible, setInfoBarIsVisible] = useState(true);
   const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
   const [isMobileView, setIsMobileView] = useState(isMobile());
   const [inputValue, setInputValue] = useState("");
   const [usersList, setUsersList] = useState([]);
   const [cultureKey, setCultureKey] = useState();
-
-  const onCloseBar = () => setInfoBarIsVisible(false);
-
   const [selectedAccess, setSelectedAccess] = useState(defaultAccess);
 
   const inputsRef = useRef();
@@ -363,7 +358,6 @@ const InvitePanel = ({
 
   const roomType = selectedRoom ? selectedRoom.roomType : -1;
   const hasInvitedUsers = !!inviteItems.length;
-  const hasAdmins = inviteItems.findIndex((u) => u.isAdmin || u.isOwner) > -1;
 
   const removeExist = (items) => {
     const filtered = items.reduce((unique, current) => {
@@ -415,9 +409,6 @@ const InvitePanel = ({
           usersList={usersList}
           setUsersList={setUsersList}
         />
-        {infoBarIsVisible && hasAdmins && (
-          <InfoBar t={t} onClose={onCloseBar} />
-        )}
         {hasInvitedUsers && (
           <ItemsList
             t={t}

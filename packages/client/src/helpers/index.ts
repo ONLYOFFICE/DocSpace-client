@@ -30,8 +30,7 @@ import { ShareAccessRights } from "@docspace/shared/enums";
 export const checkIfAccessPaid = (access: ShareAccessRights) => {
   return (
     access === ShareAccessRights.FullAccess ||
-    access === ShareAccessRights.RoomManager ||
-    access === ShareAccessRights.Collaborator
+    access === ShareAccessRights.RoomManager
   );
 };
 

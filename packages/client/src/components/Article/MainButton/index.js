@@ -820,6 +820,10 @@ const ArticleMainButtonContent = (props) => {
         : true;
   }
 
+  if (isAccountsPage && !isOwner && !isAdmin && !isRoomAdmin) {
+    mainButtonVisible = false;
+  }
+
   if (showArticleLoader)
     return isMobileArticle ? null : <ArticleButtonLoader height="32px" />;
 

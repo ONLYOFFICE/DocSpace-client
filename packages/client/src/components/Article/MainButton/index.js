@@ -644,15 +644,19 @@ const ArticleMainButtonContent = (props) => {
             },
           ]
         : []),
-      {
-        id: "invite_room-admin",
-        className: "main-button_drop-down",
-        icon: PersonManagerReactSvgUrl,
-        label: t("Common:RoomAdmin"),
-        onClick: onInvite,
-        action: EmployeeType.User,
-        key: "manager",
-      },
+      ...(!isRoomAdmin
+        ? [
+            {
+              id: "invite_room-admin",
+              className: "main-button_drop-down",
+              icon: PersonManagerReactSvgUrl,
+              label: t("Common:RoomAdmin"),
+              onClick: onInvite,
+              action: EmployeeType.User,
+              key: "manager",
+            },
+          ]
+        : []),
       {
         id: "invite_room-collaborator",
         className: "main-button_drop-down",

@@ -2991,7 +2991,7 @@ class FilesActionStore {
     setFolders(newFolders);
   };
 
-  changeIndex = async (action, item, t, isLastItem) => {
+  changeIndex = async (action, item, t, isLastItem = true) => {
     const { filesList, bufferSelection } = this.filesStore;
 
     const index = filesList.findIndex(

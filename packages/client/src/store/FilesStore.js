@@ -256,6 +256,13 @@ class FilesStore {
 
       console.log("[WS] s:modify-folder", opt);
 
+      if (opt?.cmd === "create" && !this.showNewFilesInList) {
+        const newFilter = this.filter;
+        newFilter.total += 1;
+        this.setFilter(newFilter);
+        return;
+      }
+
       if (!(this.clientLoadingStore.isLoading || this.operationAction))
         switch (opt?.cmd) {
           case "create":
@@ -2936,7 +2943,11 @@ class FilesStore {
   };
 
   scrollToTop = () => {
-    if (this.settingsStore.withPaging) return;
+    if (
+      this.settingsStore.withPaging ||
+      this.selectedFolderStore.isIndexedFolder
+    )
+      return;
 
     const scrollElm = isMobile()
       ? document.querySelector("#customScrollBar > .scroll-wrapper > .scroller")
@@ -2947,6 +2958,10 @@ class FilesStore {
 
   addItem = (item, isFolder) => {
     const { socketHelper } = this.settingsStore;
+
+    if (!this.showNewFilesInList) {
+      return;
+    }
 
     if (isFolder) {
       const foundIndex = this.folders.findIndex((x) => x.id === item?.id);
@@ -3000,7 +3015,7 @@ class FilesStore {
 
     if (destFolderId && destFolderId === this.selectedFolderStore.id) return;
 
-    if (newFilter.total <= newFilter.pageCount) {
+    if (newFilter.total <= this.filesList.length) {
       const files = fileIds
         ? this.files.filter((x) => !fileIds.includes(x.id))
         : this.files;
@@ -4505,6 +4520,17 @@ class FilesStore {
     const { isVisible: infoPanelVisible } = this.infoPanelStore;
 
     return !infoPanelVisible || this.selection.length > 1;
+  }
+
+  get showNewFilesInList() {
+    if (
+      this.selectedFolderStore.isIndexedFolder &&
+      this.filesList.length < this.filter.total
+    ) {
+      return false;
+    }
+
+    return true;
   }
 }
 

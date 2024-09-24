@@ -355,7 +355,7 @@ class FilesActionStore {
     const filesList = [];
     await this.createFolderTree(tree, toFolderId, filesList);
 
-    this.updateCurrentFolder(null, [folderId], null, operationId);
+    // this.updateCurrentFolder(null, [folderId], null, operationId);
 
     if (!filesList.length) {
       setTimeout(() => clearPrimaryProgressData(), TIMEOUT);

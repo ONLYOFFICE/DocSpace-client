@@ -70,11 +70,16 @@ class IndexingStore {
   };
 
   setIsIndexEditingMode = (mode: boolean) => {
+    const { setIsVisible } = this.infoPanelStore;
+
     if (!mode) {
       this.setUpdateSelection([]);
     }
-    const { setIsVisible } = this.infoPanelStore;
-    setIsVisible(false);
+
+    if (mode) {
+      setIsVisible(false);
+    }
+
     this.isIndexEditingMode = mode;
   };
 }

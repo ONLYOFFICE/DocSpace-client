@@ -2478,7 +2478,7 @@ export default inject(
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { showStorageInfo, isDefaultRoomsQuotaSet } = currentQuotaStore;
 
-    const { isIndexing, isIndexEditingMode } = indexingStore;
+    const { isIndexEditingMode } = indexingStore;
     const { isIndexedFolder } = selectedFolderStore;
     const {
       filterStore,

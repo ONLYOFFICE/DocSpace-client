@@ -2275,11 +2275,11 @@ const Dark: TTheme = {
     iconCropper: {
       gridColor: black,
       deleteButton: {
-        background: black,
+        background: grayDarkMid,
         hoverBackground: black,
         borderColor: gray,
         hoverBorderColor: lightDarkGrayHover,
-        color: grayDark,
+        color: darkGrayDark,
         iconColor: darkGrayDark,
       },
     },

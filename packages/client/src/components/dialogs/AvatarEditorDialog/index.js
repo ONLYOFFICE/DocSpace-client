@@ -43,6 +43,16 @@ import DefaultUserAvatarMax from "PUBLIC_DIR/images/default_user_photo_size_200-
 const StyledModalDialog = styled(ModalDialog)`
   #modal-dialog {
     max-height: fit-content;
+
+    .modal-header {
+      height: 54px;
+      min-height: 54px;
+    }
+
+    .modal-footer {
+      box-sizing: border-box;
+      max-height: 72px;
+    }
   }
   .wrapper-image-editor {
     width: 100%;
@@ -79,6 +89,7 @@ const AvatarEditorDialog = (props) => {
     "PeopleTranslations",
     "Common",
     "CreateEditRoomDialog",
+    "Ldap",
   ]);
 
   const {
@@ -149,7 +160,7 @@ const AvatarEditorDialog = (props) => {
     >
       <ModalDialog.Header>
         <Text fontSize="21px" fontWeight={700}>
-          {t("EditPhoto")}
+          {t("Ldap:LdapAvatar")}
         </Text>
       </ModalDialog.Header>
       <ModalDialog.Body>

@@ -2283,7 +2283,7 @@ export const getBaseTheme = () => {
       },
 
       iconCropper: {
-        gridColor: black,
+        gridColor: grayStrong,
         deleteButton: {
           background: grayLight,
           hoverBackground: lightGrayHover,

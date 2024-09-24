@@ -45,7 +45,7 @@ const StyledImageCropper = styled.div<{ disableImageRescaling?: boolean }>`
       bottom: 0;
       inset-inline: 0;
       svg {
-        opacity: 0.2;
+        opacity: 1;
         width: 368px;
         height: 368px;
         path {
@@ -75,9 +75,6 @@ const StyledImageCropper = styled.div<{ disableImageRescaling?: boolean }>`
     padding: 6px 0;
     background: ${(props) =>
       props.theme.createEditRoomDialog.iconCropper.deleteButton.background};
-    border: 1px solid
-      ${(props) =>
-        props.theme.createEditRoomDialog.iconCropper.deleteButton.borderColor};
     border-radius: 3px;
     margin-bottom: 12px;
 
@@ -86,10 +83,6 @@ const StyledImageCropper = styled.div<{ disableImageRescaling?: boolean }>`
       background: ${(props) =>
         props.theme.createEditRoomDialog.iconCropper.deleteButton
           .hoverBackground};
-      border: 1px solid
-        ${(props) =>
-          props.theme.createEditRoomDialog.iconCropper.deleteButton
-            .hoverBorderColor};
     }
 
     &-text {
@@ -117,8 +110,8 @@ const StyledImageCropper = styled.div<{ disableImageRescaling?: boolean }>`
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    height: 24px;
     gap: 12px;
-    margin-bottom: 20px;
 
     &-slider {
       margin: 0;

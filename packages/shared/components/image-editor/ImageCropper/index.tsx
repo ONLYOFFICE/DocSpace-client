@@ -30,8 +30,8 @@ import throttle from "lodash/throttle";
 import AvatarEditor, { Position } from "react-avatar-editor";
 
 import ZoomMinusReactSvgUrl from "PUBLIC_DIR/images/zoom-minus.react.svg?url";
-import ZoomPlusReactSvgUrl from "PUBLIC_DIR/images/zoom-plus.react.svg?url";
-import IconCropperGridSvgUrl from "PUBLIC_DIR/images/icon-cropper-grid.svg?url";
+import ZoomPlusReactSvgUrl from "PUBLIC_DIR/images/zoom-plus-test.react.svg?url";
+import IconCropperGridSvgUrl from "PUBLIC_DIR/images/subtract.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
 import { Slider } from "../../slider";
@@ -132,7 +132,7 @@ const ImageCropper = ({
           border={0}
           rotate={0}
           borderRadius={108}
-          style={{ width: "368px", height: "368px" }}
+          style={{ width: "368px", height: "367px" }}
           onPositionChange={handlePositionChange}
           onImageReady={handleImageChange}
           disableHiDPIScaling={false}
@@ -166,7 +166,7 @@ const ImageCropper = ({
           <div className="icon_cropper-zoom-container">
             <IconButton
               className="icon_cropper-zoom-container-button"
-              size={16}
+              size={20}
               onClick={handleZoomOutClick}
               iconName={ZoomMinusReactSvgUrl}
               isFill
@@ -181,11 +181,12 @@ const ImageCropper = ({
               onChange={handleSliderChange}
               step={0.01}
               value={image.zoom}
+              withPouring={true}
               isDisabled={isDisabled}
             />
             <IconButton
               className="icon_cropper-zoom-container-button"
-              size={16}
+              size={20}
               onClick={handleZoomInClick}
               iconName={ZoomPlusReactSvgUrl}
               isFill

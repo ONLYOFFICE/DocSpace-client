@@ -173,7 +173,12 @@ class FilesActionStore {
     this.isBulkDownload = isBulkDownload;
   };
 
-  updateCurrentFolder = (fileIds, folderIds, clearSelection, operationId) => {
+  updateCurrentFolder = async (
+    fileIds,
+    folderIds,
+    clearSelection,
+    operationId,
+  ) => {
     const { clearSecondaryProgressData } =
       this.uploadDataStore.secondaryProgressDataStore;
 
@@ -210,37 +215,29 @@ class FilesActionStore {
       updatedFolder = this.selectedFolderStore.parentId;
     }
 
-    if (isRoomsFolder || isArchiveFolder || isArchiveFolderRoot) {
-      fetchRooms(
-        updatedFolder,
-        newFilter ? newFilter : roomsFilter.clone(),
-        undefined,
-        undefined,
-        undefined,
-        true,
-      ).finally(() => {
-        scrollToTop();
-        this.dialogsStore.setIsFolderActions(false);
-        return setTimeout(
-          () => clearSecondaryProgressData(operationId),
-          TIMEOUT,
+    try {
+      if (isRoomsFolder || isArchiveFolder || isArchiveFolderRoot) {
+        await fetchRooms(
+          updatedFolder,
+          newFilter ? newFilter : roomsFilter.clone(),
+          undefined,
+          undefined,
+          undefined,
+          true,
         );
-      });
-    } else {
-      fetchFiles(
-        updatedFolder,
-        newFilter ? newFilter : filter,
-        true,
-        true,
-        clearSelection,
-      ).finally(() => {
-        scrollToTop();
-        this.dialogsStore.setIsFolderActions(false);
-        return setTimeout(
-          () => clearSecondaryProgressData(operationId),
-          TIMEOUT,
+      } else {
+        await fetchFiles(
+          updatedFolder,
+          newFilter ? newFilter : filter,
+          true,
+          true,
+          clearSelection,
         );
-      });
+      }
+    } finally {
+      scrollToTop();
+      this.dialogsStore.setIsFolderActions(false);
+      setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
     }
   };
 

@@ -287,9 +287,14 @@ const EditRoomEvent = ({
     } catch (err) {
       console.log(err);
     } finally {
-      if (withPaging) await updateCurrentFolder(null, currentFolderId);
+      const isEditCurrentFolder = item.id === currentFolderId;
+      const needTableContentUpdate =
+        (indexingChanged && isEditCurrentFolder) || withPaging;
 
-      if (item.id === currentFolderId) {
+      if (needTableContentUpdate)
+        await updateCurrentFolder(null, currentFolderId);
+
+      if (isEditCurrentFolder) {
         updateEditedSelectedRoom({
           title: editRoomParams.title,
           tags,

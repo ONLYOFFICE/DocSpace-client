@@ -343,7 +343,7 @@ export const DNSSettings = inject(
       isDefaultDNS,
     } = common;
 
-    const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
+    const { isCustomizationAvailable } = currentQuotaStore;
     const { customObj } = dnsSettings;
     const { dnsName, enable } = customObj;
 
@@ -357,7 +357,7 @@ export const DNSSettings = inject(
       helpLink,
       initSettings,
       setIsLoaded,
-      isSettingPaid: isBrandingAndCustomizationAvailable,
+      isSettingPaid: isCustomizationAvailable,
       currentColorScheme,
       standalone,
       setIsEnableDNS,

@@ -139,13 +139,11 @@ const Branding = ({
 };
 
 export default inject(({ settingsStore, currentQuotaStore, common }) => {
-  const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
+  const { isCustomizationAvailable } = currentQuotaStore;
   const { isLoadedCompanyInfoSettingsData } = common;
   const { standalone, portals, deviceType, checkEnablePortalSettings } =
     settingsStore;
-  const isSettingPaid = checkEnablePortalSettings(
-    isBrandingAndCustomizationAvailable,
-  );
+  const isSettingPaid = checkEnablePortalSettings(isCustomizationAvailable);
 
   return {
     isLoadedCompanyInfoSettingsData,

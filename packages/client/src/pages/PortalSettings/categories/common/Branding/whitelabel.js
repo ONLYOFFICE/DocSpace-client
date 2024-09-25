@@ -597,11 +597,9 @@ export const WhiteLabel = inject(
       checkEnablePortalSettings,
       standalone,
     } = settingsStore;
-    const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
+    const { isCustomizationAvailable } = currentQuotaStore;
 
-    const isSettingPaid = checkEnablePortalSettings(
-      isBrandingAndCustomizationAvailable,
-    );
+    const isSettingPaid = checkEnablePortalSettings(isCustomizationAvailable);
 
     return {
       setLogoText,

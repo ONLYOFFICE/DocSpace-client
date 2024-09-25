@@ -141,7 +141,7 @@ export const StyledContainer = styled.div`
 
 const SectionHeaderContent = (props) => {
   const {
-    isBrandingAndCustomizationAvailable,
+    isCustomizationAvailable,
     isRestoreAndAutoBackupAvailable,
     tReady,
     setIsLoadedSectionHeader,
@@ -163,15 +163,15 @@ const SectionHeaderContent = (props) => {
   const isAvailableSettings = (key) => {
     switch (key) {
       case "DNSSettings":
-        return isBrandingAndCustomizationAvailable;
+        return isCustomizationAvailable;
       case "RestoreBackup":
         return isRestoreAndAutoBackupAvailable;
       case "WhiteLabel":
-        return isBrandingAndCustomizationAvailable;
+        return isCustomizationAvailable;
       case "CompanyInfoSettings":
-        return isBrandingAndCustomizationAvailable;
+        return isCustomizationAvailable;
       case "AdditionalResources":
-        return isBrandingAndCustomizationAvailable;
+        return isCustomizationAvailable;
       case "SingleSignOn:ServiceProviderSettings":
       case "SingleSignOn:SpMetadata":
         return isSSOAvailable;
@@ -390,7 +390,7 @@ const SectionHeaderContent = (props) => {
 export default inject(
   ({ currentQuotaStore, setup, common, importAccountsStore }) => {
     const {
-      isBrandingAndCustomizationAvailable,
+      isCustomizationAvailable,
       isRestoreAndAutoBackupAvailable,
       isSSOAvailable,
     } = currentQuotaStore;
@@ -427,7 +427,7 @@ export default inject(
       selection,
       isLoadedSectionHeader,
       setIsLoadedSectionHeader,
-      isBrandingAndCustomizationAvailable,
+      isCustomizationAvailable,
       isRestoreAndAutoBackupAvailable,
       isSSOAvailable,
       workspace,

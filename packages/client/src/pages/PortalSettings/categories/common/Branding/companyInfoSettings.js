@@ -517,10 +517,8 @@ export const CompanyInfoSettings = inject(
       checkEnablePortalSettings,
     } = settingsStore;
 
-    const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
-    const isSettingPaid = checkEnablePortalSettings(
-      isBrandingAndCustomizationAvailable,
-    );
+    const { isCustomizationAvailable } = currentQuotaStore;
+    const isSettingPaid = checkEnablePortalSettings(isCustomizationAvailable);
 
     return {
       getCompanyInfoSettings,

@@ -108,9 +108,6 @@ const App = observer(() => {
   if (!isLoaded || isPaymentPageUnavailable || isBonusPageUnavailable)
     return <AppLoader />;
 
-  if (userStore?.isLoaded && !userStore?.user)
-    return tryRedirectTo(window.location.origin);
-
   return (
     <Layout>
       {toast}

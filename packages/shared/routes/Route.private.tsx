@@ -58,6 +58,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
 
     identityServerEnabled,
     baseDomain,
+    limitedAccessSpace,
   } = props;
 
   const location = useLocation();
@@ -103,6 +104,8 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     const isBrandingPage = location.pathname.includes(
       "portal-settings/customization/branding",
     );
+
+    const isManagement = location.pathname.includes("management");
 
     if (isLoaded && !isAuthenticated) {
       if (isPortalDeactivate) {
@@ -205,6 +208,12 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
           state={{ from: location }}
         />
       );
+    }
+
+    if (isManagement) {
+      if ((user && !user?.isAdmin) || limitedAccessSpace)
+        return <Navigate replace to="/error/403" />;
+      return children;
     }
 
     if (!isLoaded) {

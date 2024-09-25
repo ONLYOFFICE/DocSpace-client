@@ -2276,9 +2276,10 @@ const Dark: TTheme = {
       gridColor: black,
       deleteButton: {
         background: grayDarkMid,
-        hoverBackground: black,
+        hoverBackground: grayDarkStrong,
         borderColor: gray,
         hoverBorderColor: lightDarkGrayHover,
+        hoverColor: white,
         color: darkGrayDark,
         iconColor: darkGrayDark,
       },

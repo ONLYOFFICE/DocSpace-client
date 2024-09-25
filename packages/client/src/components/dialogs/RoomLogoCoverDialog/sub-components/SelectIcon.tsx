@@ -31,6 +31,7 @@ import { tablet } from "@docspace/shared/utils";
 
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import { ICover, SelectIconProps } from "../RoomLogoCoverDialog.types";
+import hexRgb from "hex-rgb";
 import { ReactSVG } from "react-svg";
 
 interface WithoutIconProps {
@@ -84,9 +85,18 @@ const StyledIconContainer = styled.div`
     height: 40px;
   }
   border-radius: 4px;
+
   &:hover {
     cursor: pointer;
-    background-color: rgba(71, 129, 209, 0.2);
+    svg {
+      path {
+        ${({ $currentColorScheme }) =>
+          $currentColorScheme &&
+          css`
+            fill: ${$currentColorScheme.main?.accent};
+          `}
+      }
+    }
   }
 
   .cover-icon {
@@ -95,6 +105,21 @@ const StyledIconContainer = styled.div`
       cursor: pointer;
     }
   }
+  ${(props) =>
+    props.isSelected &&
+    props.$currentColorScheme &&
+    css`
+      background-color: ${hexRgb(props.$currentColorScheme.main?.accent, {
+        alpha: 0.2,
+        format: "css",
+      })};
+
+      svg {
+        path {
+          fill: ${props.$currentColorScheme.main?.accent};
+        }
+      }
+    `}
 `;
 
 export const SelectIcon = ({
@@ -103,6 +128,8 @@ export const SelectIcon = ({
   setWithoutIcon,
   setIcon,
   covers,
+  $currentColorScheme,
+  coverId,
 }: SelectIconProps) => {
   const toggleWithoutIcon = () => setWithoutIcon(!withoutIcon);
 
@@ -124,7 +151,13 @@ export const SelectIcon = ({
             }
             return (
               <StyledIconContainer
-                onClick={() => onSelectIcon(icon)}
+                isSelected={coverId === icon.id && !withoutIcon}
+                $currentColorScheme={$currentColorScheme}
+                onClick={
+                  coverId === icon.id
+                    ? toggleWithoutIcon
+                    : () => onSelectIcon(icon)
+                }
                 key={icon.id}
                 dangerouslySetInnerHTML={createMarkup()}
               />

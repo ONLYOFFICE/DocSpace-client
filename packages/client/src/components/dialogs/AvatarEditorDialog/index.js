@@ -38,6 +38,9 @@ import { ImageEditor } from "@docspace/shared/components/image-editor";
 import { loadAvatar, deleteAvatar } from "@docspace/shared/api/people";
 import { dataUrlToFile } from "@docspace/shared/utils/dataUrlToFile";
 
+import AvatarCropperGridSvgUrl from "PUBLIC_DIR/images/avatar.crop-area.react.svg?url";
+import RoomCropperGridSvgUrl from "PUBLIC_DIR/images/room.crop-area.react.svg?url";
+
 import DefaultUserAvatarMax from "PUBLIC_DIR/images/default_user_photo_size_200-200.png";
 
 const StyledModalDialog = styled(ModalDialog)`
@@ -90,6 +93,7 @@ const AvatarEditorDialog = (props) => {
     "Common",
     "CreateEditRoomDialog",
     "Ldap",
+    "RoomLogoCover",
   ]);
 
   const {
@@ -103,6 +107,7 @@ const AvatarEditorDialog = (props) => {
     onChangeImage,
     image,
     onChangeFile,
+    isProfileUpload,
   } = props;
   const [avatar, setAvatar] = useState({
     uploadedFile: image.uploadedFile,
@@ -115,7 +120,16 @@ const AvatarEditorDialog = (props) => {
 
   const onChangeAvatar = (newAvatar) => setAvatar(newAvatar);
 
+  const areaCropperImage = isProfileUpload
+    ? AvatarCropperGridSvgUrl
+    : RoomCropperGridSvgUrl;
+
+  const avatarTitle = isProfileUpload
+    ? t("Ldap:LdapAvatar")
+    : t("RoomLogoCover:RoomCover");
+
   const onCloseModal = () => {
+    onChangeImage({ x: 0.5, y: 0.5, zoom: 1, uploadedFile: null });
     props.setPreview && props.setPreview("");
     onClose && onClose();
   };
@@ -160,7 +174,7 @@ const AvatarEditorDialog = (props) => {
     >
       <ModalDialog.Header>
         <Text fontSize="21px" fontWeight={700}>
-          {t("Ldap:LdapAvatar")}
+          {avatarTitle}
         </Text>
       </ModalDialog.Header>
       <ModalDialog.Body>
@@ -174,6 +188,7 @@ const AvatarEditorDialog = (props) => {
             onChangeImage={onChangeImage || onChangeAvatar}
             onChangeFile={onChangeFile}
             maxImageSize={maxImageUploadSize}
+            areaCropperImage={areaCropperImage}
           />
         </StyledBodyContent>
       </ModalDialog.Body>

@@ -151,6 +151,8 @@ class DialogsStore {
     color: null,
     title: null,
     withoutIcon: true,
+    withSelection: true,
+    customColor: null,
   };
 
   editRoomDialogProps = {
@@ -659,6 +661,10 @@ class DialogsStore {
       this.cover,
     );
     this.infoPanelStore.updateInfoPanelSelection(res);
+    this.setRoomCoverDialogProps({
+      ...this.roomCoverDialogProps,
+      withSelection: true,
+    });
     this.setCover();
   };
 

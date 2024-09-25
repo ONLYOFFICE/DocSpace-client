@@ -53,9 +53,17 @@ export const SelectColor = ({
   selectedColor,
   t,
   onChangeColor,
+  roomColor,
 }: SelectColorProps) => {
   const [openColorPicker, setOpenColorPicker] = useState<boolean>(false);
-  const [pickerColor, setPickerColor] = useState<string>("");
+  const isDefaultColor = logoColors.includes(roomColor);
+  const [pickerColor, setPickerColor] = useState<string>(
+    isDefaultColor ? "" : roomColor || "",
+  );
+
+  React.useEffect(() => {
+    setPickerColor(roomColor);
+  }, [roomColor]);
 
   const iconRef = useRef(null);
 
@@ -91,7 +99,7 @@ export const SelectColor = ({
             />
           ),
         )}
-        {pickerColor ? (
+        {roomColor ? (
           <CustomSelectedColor
             isSelected={isSelectedColorPicker}
             color={pickerColor}

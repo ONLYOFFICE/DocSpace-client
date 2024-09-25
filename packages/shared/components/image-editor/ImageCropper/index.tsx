@@ -31,7 +31,6 @@ import AvatarEditor, { Position } from "react-avatar-editor";
 
 import ZoomMinusReactSvgUrl from "PUBLIC_DIR/images/zoom-minus.react.svg?url";
 import ZoomPlusReactSvgUrl from "PUBLIC_DIR/images/zoom-plus-test.react.svg?url";
-import IconCropperGridSvgUrl from "PUBLIC_DIR/images/subtract.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
 import { Slider } from "../../slider";
@@ -49,6 +48,7 @@ const ImageCropper = ({
   isDisabled,
   disableImageRescaling,
   onChangeFile,
+  areaCropperImage,
 }: ImageCropperProps) => {
   const editorRef = React.useRef<null | AvatarEditor>(null);
   const inputFilesElement = React.useRef(null);
@@ -119,7 +119,7 @@ const ImageCropper = ({
       disableImageRescaling={disableImageRescaling}
     >
       <div className="icon_cropper-crop_area">
-        <ReactSVG className="icon_cropper-grid" src={IconCropperGridSvgUrl} />
+        <ReactSVG className="icon_cropper-grid" src={areaCropperImage} />
         <AvatarEditor
           className="icon_cropper-avatar-editor"
           ref={setEditorRef}
@@ -181,7 +181,6 @@ const ImageCropper = ({
               onChange={handleSliderChange}
               step={0.01}
               value={image.zoom}
-              withPouring={true}
               isDisabled={isDisabled}
             />
             <IconButton

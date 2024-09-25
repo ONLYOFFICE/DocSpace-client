@@ -170,6 +170,7 @@ const RoomIcon = ({
       withHover={!!hoverSrc && !isArchive}
       withEditing={withEditing}
       isEmptyIcon={isEmptyIcon}
+      onClick={onToggleOpenEditLogo}
     >
       {isEmptyIcon ? (
         <>

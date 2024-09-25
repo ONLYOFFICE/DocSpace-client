@@ -32,13 +32,13 @@ import { mobile, tablet, isMobile } from "@docspace/shared/utils";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
 
 import { getRoomTitle } from "@docspace/shared/components/room-icon/RoomIcon.utils";
+import { globalColors } from "@docspace/shared/themes";
 
 import { CustomLogo } from "./CustomLogo";
 import { SelectColor } from "./SelectColor/SelectColor";
 import { SelectIcon } from "./SelectIcon";
 
 import { RoomLogoCoverProps, ICover } from "../RoomLogoCoverDialog.types";
-import { globalColors } from "@docspace/shared/themes";
 
 const RoomLogoCoverContainer = styled.div`
   color: ${(props) => props.theme.logoCover.textColor};
@@ -124,10 +124,12 @@ const RoomLogoCover = ({
   logo,
   title,
   covers,
+  cover,
   setRoomCoverDialogProps,
   roomCoverDialogProps,
   forwardedRef,
   scrollHeight,
+  currentColorScheme,
 }: RoomLogoCoverProps) => {
   const { t } = useTranslation(["Common", "CreateEditRoomDialog"]);
 
@@ -136,8 +138,21 @@ const RoomLogoCover = ({
     [title],
   );
 
-  const roomColor = logo?.color ? `#${logo.color}` : globalColors.logoColors[0];
-  const roomIcon = logo?.cover ? logo.cover : roomTitle;
+  const SelectedCover = React.useMemo(() => {
+    return covers?.filter((item) => item.id === cover?.cover)[0];
+  }, [cover?.cover]);
+
+  const roomColor = cover?.color
+    ? `#${cover?.color}`
+    : logo?.color
+      ? `#${logo.color}`
+      : globalColors.logoColors[0];
+
+  const roomIcon = cover?.cover
+    ? SelectedCover
+    : logo?.cover && roomCoverDialogProps.withSelection
+      ? logo.cover
+      : roomTitle;
 
   React.useEffect(() => {
     setRoomCoverDialogProps({
@@ -145,8 +160,13 @@ const RoomLogoCover = ({
       icon: roomIcon,
       color: roomColor,
       withoutIcon: typeof roomIcon === "string",
+      customColor: globalColors.logoColors.includes(roomColor)
+        ? roomCoverDialogProps.customColor
+        : roomColor,
     });
   }, []);
+
+  const coverId = roomCoverDialogProps.icon?.id || roomIcon?.id;
 
   const scrollRef = useRef(null);
 
@@ -157,8 +177,15 @@ const RoomLogoCover = ({
           t={t}
           selectedColor={roomCoverDialogProps.color}
           logoColors={globalColors.logoColors}
+          roomColor={roomCoverDialogProps.customColor}
           onChangeColor={(color) =>
-            setRoomCoverDialogProps({ ...roomCoverDialogProps, color })
+            setRoomCoverDialogProps({
+              ...roomCoverDialogProps,
+              color,
+              customColor: globalColors.logoColors.includes(color)
+                ? roomCoverDialogProps.customColor
+                : color,
+            })
           }
         />
       </div>
@@ -166,6 +193,8 @@ const RoomLogoCover = ({
         <SelectIcon
           t={t}
           withoutIcon={roomCoverDialogProps.withoutIcon}
+          $currentColorScheme={currentColorScheme}
+          coverId={coverId}
           setIcon={(icon) =>
             setRoomCoverDialogProps({
               ...roomCoverDialogProps,
@@ -209,28 +238,34 @@ const RoomLogoCover = ({
   );
 };
 
-export default inject<TStore>(({ settingsStore, dialogsStore }) => {
-  const { theme } = settingsStore;
+export default inject<TStore>(
+  ({ settingsStore, dialogsStore, createEditRoomStore }) => {
+    const { theme, currentColorScheme } = settingsStore;
 
-  const {
-    coverSelection,
-    setCover,
-    createRoomDialogProps,
-    setRoomCoverDialogProps,
-    roomCoverDialogProps,
-  } = dialogsStore;
+    const {
+      coverSelection,
+      setCover,
+      cover,
+      createRoomDialogProps,
+      editRoomDialogProps,
+      setRoomCoverDialogProps,
+      roomCoverDialogProps,
+    } = dialogsStore;
 
-  const logo = createRoomDialogProps.visible ? null : coverSelection?.logo;
-  const title = createRoomDialogProps.visible
-    ? roomCoverDialogProps.title
-    : coverSelection?.title;
+    const logo = createRoomDialogProps.visible ? null : coverSelection?.logo;
+    const title = createRoomDialogProps.visible
+      ? roomCoverDialogProps.title
+      : coverSelection?.title;
 
-  return {
-    isBaseTheme: theme?.isBase,
-    logo,
-    title,
-    setCover,
-    setRoomCoverDialogProps,
-    roomCoverDialogProps,
-  };
-})(observer(RoomLogoCover));
+    return {
+      isBaseTheme: theme?.isBase,
+      logo,
+      title,
+      cover,
+      setCover,
+      setRoomCoverDialogProps,
+      roomCoverDialogProps,
+      currentColorScheme,
+    };
+  },
+)(observer(RoomLogoCover));

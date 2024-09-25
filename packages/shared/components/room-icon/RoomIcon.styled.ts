@@ -22,6 +22,10 @@ const StyledIcon = styled.div<{
 
   width: ${(props) => props.size};
 
+  &:hover {
+    cursor: pointer;
+  }
+
   ${(props) =>
     props.withEditing &&
     css`

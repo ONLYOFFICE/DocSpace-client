@@ -172,8 +172,12 @@ const RoomLogoCoverDialog = ({
     getCovers();
   }, [getCovers]);
 
-  const onCloseRoomLogo = () => {
-    setRoomCoverDialogProps({ ...roomCoverDialogProps, withoutIcon: true });
+  const onCloseRoomLogo = (withSelection = true) => {
+    setRoomCoverDialogProps({
+      ...roomCoverDialogProps,
+      withoutIcon: true,
+      withSelection,
+    });
     setRoomLogoCoverDialogVisible(false);
   };
 
@@ -185,7 +189,7 @@ const RoomLogoCoverDialog = ({
     setCover(roomCoverDialogProps.color, icon);
 
     if (createRoomDialogVisible || editRoomDialogPropsVisible) {
-      onCloseRoomLogo();
+      onCloseRoomLogo(false);
       return;
     }
 

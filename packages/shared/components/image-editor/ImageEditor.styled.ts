@@ -83,6 +83,8 @@ const StyledImageCropper = styled.div<{ disableImageRescaling?: boolean }>`
       background: ${(props) =>
         props.theme.createEditRoomDialog.iconCropper.deleteButton
           .hoverBackground};
+      color: ${(props) =>
+        props.theme.createEditRoomDialog.iconCropper.deleteButton.color};
     }
 
     &-text {
@@ -90,7 +92,7 @@ const StyledImageCropper = styled.div<{ disableImageRescaling?: boolean }>`
       font-weight: 600;
       line-height: 20px;
       color: ${(props) =>
-        props.theme.createEditRoomDialog.iconCropper.deleteButton.color};
+        props.theme.createEditRoomDialog.iconCropper.deleteButton.hoverColor};
     }
 
     div:first-child {

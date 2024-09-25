@@ -152,7 +152,7 @@ const SetRoomParams = ({
     useState(true);
   const [disableImageRescaling, setDisableImageRescaling] = useState(isEdit);
 
-  const [previewTitle, setPreviewTitle] = useState(null);
+  const [previewTitle, setPreviewTitle] = useState(selection?.title || "");
 
   const [forceHideRoomTypeDropdown, setForceHideRoomTypeDropdown] =
     useState(false);
@@ -216,18 +216,25 @@ const SetRoomParams = ({
       setIsWrongTitle(false);
     }
     if (!isEdit) {
-      debouncedTitle(e.target.value);
+      if (e.target.value?.length > 1) {
+        debouncedTitle(e.target.value);
+      } else {
+        setPreviewTitle(e.target.value);
+      }
+
       setRoomCoverDialogProps({
         ...roomCoverDialogProps,
         title: e.target.value,
       });
+    } else {
+      setPreviewTitle(e.target.value);
     }
     setRoomParams({
       ...roomParams,
       title: e.target.value,
     });
 
-    if (!cover && !previewIcon) {
+    if (!cover && !previewIcon && !isEdit) {
       setCover(`#${randomColor}`, "");
     }
   };
@@ -297,7 +304,7 @@ const SetRoomParams = ({
       id={selection?.id}
       fileExst={selection?.fileExst}
       isRoom={selection?.isRoom}
-      title={selection?.title}
+      title={previewTitle}
       logo={
         currentCover
           ? { cover: currentCover }

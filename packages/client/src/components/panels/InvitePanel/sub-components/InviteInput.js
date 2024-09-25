@@ -336,9 +336,6 @@ const InviteInput = ({
       if (shared) {
         toastr.warning(t("UsersAlreadyAdded"));
       } else {
-        if (item.isOwner || item.isAdmin)
-          item.access = ShareAccessRights.RoomManager;
-
         if (isGroup && checkIfAccessPaid(item.access)) {
           const topFreeRole = getTopFreeRole(t, roomType);
           item.access = topFreeRole.access;
@@ -412,8 +409,6 @@ const InviteInput = ({
 
         if (userItem) {
           userItem.access = selectedAccess;
-          if (userItem.isOwner || userItem.isAdmin)
-            userItem.access = ShareAccessRights.RoomManager;
 
           if (userItem.isGroup && checkIfAccessPaid(userItem.access)) {
             const topFreeRole = getTopFreeRole(t, roomType);

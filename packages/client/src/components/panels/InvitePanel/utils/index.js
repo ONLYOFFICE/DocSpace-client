@@ -299,5 +299,6 @@ export const getFreeUsersRoleArray = () => {
     ShareAccessRights.FormFilling,
     ShareAccessRights.ReadOnly,
     ShareAccessRights.Review,
+    ShareAccessRights.Collaborator,
   ];
 };

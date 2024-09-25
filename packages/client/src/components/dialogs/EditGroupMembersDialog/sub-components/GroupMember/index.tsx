@@ -74,8 +74,6 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
     false,
   );
 
-  const userRoleOptions = filterUserRoleOptions(fullRoomRoleOptions, user);
-
   const hasIndividualRightsInRoom =
     member.owner ||
     (member.userAccess && member.userAccess !== member.groupAccess);
@@ -107,11 +105,6 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
       t,
       member.userAccess || member.groupAccess,
     );
-
-  const availableUserRoleCBOptions = filterUserRoleOptions(
-    fullRoomRoleOptions,
-    user,
-  );
 
   const onChangeRole = async (userRoleOption) => {
     setIsLoading(true);
@@ -175,13 +168,13 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
         )}
       </div>
 
-      {userRole && userRoleOptions && (
+      {userRole && fullRoomRoleOptions && (
         <div className="role-wrapper">
           {member.canEditAccess ? (
             <ComboBox
               className="role-combobox"
               selectedOption={userRole}
-              options={availableUserRoleCBOptions}
+              options={fullRoomRoleOptions}
               scaled={false}
               withBackdrop={isMobile}
               size="content"

@@ -162,7 +162,7 @@ const Item = ({
 
   const filteredAccesses = item.isGroup
     ? filterGroupRoleOptions(accesses)
-    : filterUserRoleOptions(accesses, item, true);
+    : accesses;
 
   const defaultAccess = filteredAccesses.find(
     (option) => option.access === +access,

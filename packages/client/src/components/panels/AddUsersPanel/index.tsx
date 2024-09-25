@@ -273,10 +273,7 @@ const AddUsersPanel = ({
     const items: TSelectorItem[] = [];
 
     users.forEach((user) => {
-      const currentAccess =
-        user.isOwner || user.isAdmin
-          ? ShareAccessRights.RoomManager
-          : access?.access;
+      const currentAccess = access?.access;
 
       const newItem = {
         access: currentAccess,

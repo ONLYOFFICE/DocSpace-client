@@ -89,7 +89,7 @@ const User = ({
   const userRole = membersHelper.getOptionByUserAccess(user.access, user);
   const userRoleOptions = user.isGroup
     ? filterGroupRoleOptions(fullRoomRoleOptions)
-    : filterUserRoleOptions(fullRoomRoleOptions, user);
+    : fullRoomRoleOptions;
 
   const onRepeatInvitation = async () => {
     resendEmailInvitations(infoPanelSelection.id, true)

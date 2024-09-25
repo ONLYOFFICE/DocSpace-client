@@ -46,7 +46,7 @@ import { CoverDialogProps } from "./RoomLogoCoverDialog.types";
 
 const PADDING_HEIGHT = 84;
 const HEIGHT_WITHOUT_BODY = 158;
-const CONTENT_SCROLL_DIFF = 262;
+const CONTENT_SCROLL_DIFF = 260;
 
 const DESKTOP_HEIGHT = 648;
 const TABLET_HEIGHT = 854;
@@ -64,24 +64,29 @@ const StyledModalDialog = styled(ModalDialog)<{ heightProp?: string }>`
       height: 54px;
       min-height: 54px;
     }
-
     .modal-body {
       padding: 0;
       padding-inline-start: 16px;
     }
 
     .modal-footer {
-      margin-top: 16px;
-    }
-
-    .scroll-body {
-      padding-inline-end: 16px !important;
+      margin-top: 8px;
     }
 
     @media ${mobile} {
+      margin-bottom: 16px;
       width: 100vw;
+
       .modal-body {
         padding: 0px 16px 8px;
+      }
+
+      .modal-footer {
+        margin-top: 0px;
+      }
+
+      .modal-header {
+        margin-bottom: 16px;
       }
     }
   }
@@ -139,7 +144,7 @@ const RoomLogoCoverDialog = ({
         setHeight(`${window.innerHeight - PADDING_HEIGHT}px`);
       } else setHeight(`${h}px`);
     }
-  }, [view]);
+  }, [view, roomLogoCoverDialogVisible]);
 
   const scrollH = React.useMemo(() => {
     return `${Number(height.replace("px", "")) - CONTENT_SCROLL_DIFF}px`;
@@ -154,7 +159,7 @@ const RoomLogoCoverDialog = ({
 
   React.useLayoutEffect(() => {
     recalculateHeight();
-  }, [roomLogoCoverDialogVisible, recalculateHeight]);
+  }, [roomLogoCoverDialogVisible, recalculateHeight, contentRef.current]);
 
   React.useEffect(() => {
     window.addEventListener("resize", recalculateHeight);

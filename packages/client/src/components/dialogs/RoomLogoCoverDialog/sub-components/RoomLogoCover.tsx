@@ -47,29 +47,11 @@ const RoomLogoCoverContainer = styled.div`
     justify-content: center;
     align-items: center;
     margin-bottom: 16px;
+    padding-right: 16px;
   }
 
   .color-select-container {
-    @media ${mobile} {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-  }
-
-  .icon-select-container {
-    @media ${mobile} {
-      text-align: center;
-    }
-  }
-
-  .cover-icon-container {
-    @media ${mobile} {
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
+    margin-bottom: 16px;
   }
 
   .color-name {
@@ -88,31 +70,52 @@ const RoomLogoCoverContainer = styled.div`
     gap: 10px;
     box-sizing: border-box;
     width: 390px;
+  }
 
-    @media ${tablet} {
+  @media ${tablet} {
+    .select-container {
+      text-align: center;
+    }
+    .select-color-container {
+      margin-bottom: 16px;
+    }
+
+    .cover-icon-container {
       flex-wrap: wrap;
       gap: 16px;
       width: 432px;
     }
-
-    @media ${mobile} {
-      width: 100%;
-    }
   }
+  @media ${mobile} {
+    .cover-icon-container {
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
 
-  .cover-icon-container {
-    @media ${mobile} {
-      padding-left: 10px;
+    .color-select-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .room-logo-container {
+      padding-right: 0px;
+    }
+
+    .icon-select-container {
+      text-align: center;
+    }
+    .colors-container {
+      width: 100%;
     }
   }
 
   .cover-icon-container,
   .color-name {
     user-select: none;
-  }
-
-  .select-color-container {
-    margin-bottom: 14px;
   }
 `;
 

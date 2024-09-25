@@ -55,6 +55,7 @@ const StyledWithoutIcon = styled.div<WithoutIconProps>`
 
   @media ${tablet} {
     padding: 5px 21px;
+    margin: 12px auto;
   }
 
   &:hover {

@@ -134,7 +134,14 @@ const RoomsItemHeader = ({
         />
       </div>
 
-      <Text className="text" title={title} dir="auto">
+      <Text
+        fontWeight={600}
+        fontSize="16px"
+        className="info-panel_header-text"
+        title={title}
+        dir="auto"
+        truncate
+      >
         {title}
         {isFile && displayFileExtension && (
           <span className="file-extension">{selection.fileExst}</span>

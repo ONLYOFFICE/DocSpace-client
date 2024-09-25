@@ -49,6 +49,7 @@ const AsideHeader = (props: AsideHeaderProps) => {
     style,
     isLoading,
     withoutBorder = false,
+    headerHeight,
   } = props;
 
   const backButtonRender = (
@@ -75,18 +76,21 @@ const AsideHeader = (props: AsideHeaderProps) => {
 
   // TODO: Heading is temporary until all dialogues are checked
 
+  const headerComponent =
+    typeof header === "string" ? (
+      <Text fontSize="21px" fontWeight={700} className="header-component">
+        {header}
+      </Text>
+    ) : (
+      <Heading className="heading" size={HeadingSize.medium} truncate>
+        {header}
+      </Heading>
+    );
+
   const mainComponent = (
     <>
       {isBackButton && backButtonRender}
-      {typeof header === "string" ? (
-        <Text fontSize="21px" fontWeight={700} className="header-component">
-          {header}
-        </Text>
-      ) : (
-        <Heading className="heading" size={HeadingSize.medium} truncate>
-          {header}
-        </Heading>
-      )}
+      {header && headerComponent}
       {headerIcons.length > 0 && (
         <div className="additional-icons-container">
           {headerIcons.map((item) => (
@@ -114,6 +118,7 @@ const AsideHeader = (props: AsideHeaderProps) => {
       className={className}
       style={style}
       withoutBorder={withoutBorder}
+      headerHeight={headerHeight}
     >
       {isLoading ? loaderComponent : mainComponent}
     </StyledHeaderContainer>

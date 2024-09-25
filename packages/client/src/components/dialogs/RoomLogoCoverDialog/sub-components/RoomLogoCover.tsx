@@ -253,9 +253,10 @@ export default inject<TStore>(
     } = dialogsStore;
 
     const logo = createRoomDialogProps.visible ? null : coverSelection?.logo;
-    const title = createRoomDialogProps.visible
-      ? roomCoverDialogProps.title
-      : coverSelection?.title;
+    const title =
+      createRoomDialogProps.visible || editRoomDialogProps.visible
+        ? roomCoverDialogProps.title
+        : coverSelection?.title;
 
     return {
       isBaseTheme: theme?.isBase,

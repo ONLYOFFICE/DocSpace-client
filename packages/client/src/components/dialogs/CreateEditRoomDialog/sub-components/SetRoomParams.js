@@ -181,6 +181,13 @@ const SetRoomParams = ({
     [],
   );
 
+  React.useEffect(() => {
+    setRoomCoverDialogProps({
+      ...roomCoverDialogProps,
+      title: previewTitle,
+    });
+  }, []);
+
   const randomColor = React.useMemo(
     () =>
       globalColors.logoColors[
@@ -215,20 +222,18 @@ const SetRoomParams = ({
     } else {
       setIsWrongTitle(false);
     }
-    if (!isEdit) {
-      if (e.target.value?.length > 1) {
-        debouncedTitle(e.target.value);
-      } else {
-        setPreviewTitle(e.target.value);
-      }
 
-      setRoomCoverDialogProps({
-        ...roomCoverDialogProps,
-        title: e.target.value,
-      });
+    if (e.target.value?.length > 1) {
+      debouncedTitle(e.target.value);
     } else {
       setPreviewTitle(e.target.value);
     }
+
+    setRoomCoverDialogProps({
+      ...roomCoverDialogProps,
+      title: e.target.value,
+    });
+
     setRoomParams({
       ...roomParams,
       title: e.target.value,

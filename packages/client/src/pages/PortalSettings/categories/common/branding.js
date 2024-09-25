@@ -102,7 +102,6 @@ const Branding = ({
       }
     };
   }, []);
-
   const hideBlock = isManagement() ? false : portals?.length > 1 ? true : false;
 
   const showSettings = standalone && !hideBlock;
@@ -142,11 +141,15 @@ const Branding = ({
 export default inject(({ settingsStore, currentQuotaStore, common }) => {
   const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
   const { isLoadedCompanyInfoSettingsData } = common;
-  const { standalone, portals, deviceType } = settingsStore;
+  const { standalone, portals, deviceType, checkEnablePortalSettings } =
+    settingsStore;
+  const isSettingPaid = checkEnablePortalSettings(
+    isBrandingAndCustomizationAvailable,
+  );
 
   return {
     isLoadedCompanyInfoSettingsData,
-    isSettingPaid: isBrandingAndCustomizationAvailable,
+    isSettingPaid,
     standalone,
     portals,
     deviceType,

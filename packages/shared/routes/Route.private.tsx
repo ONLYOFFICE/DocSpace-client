@@ -100,6 +100,10 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     );
     const isAuthorizedAppsPage = location.pathname.includes("authorized-apps");
 
+    const isBrandingPage = location.pathname.includes(
+      "portal-settings/customization/branding",
+    );
+
     if (isLoaded && !isAuthenticated) {
       if (isPortalDeactivate) {
         window.location.replace(
@@ -223,7 +227,10 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     //   );
     // }
 
-    if (isPortalRenameUrl && !enablePortalRename) {
+    if (
+      (isPortalRenameUrl && !enablePortalRename) ||
+      (isCommunity && isBrandingPage)
+    ) {
       return <Navigate replace to="/error/404" />;
     }
 

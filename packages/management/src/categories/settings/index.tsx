@@ -75,7 +75,10 @@ const Settings = () => {
 
   const onSelect = (element: TTabItem) => {
     navigate(
-      combineUrl(window.ClientConfig?.proxy?.url, `/settings/${element.id}`)
+      combineUrl(
+        window.ClientConfig?.proxy?.url,
+        `/management/settings/${element.id}`
+      )
     );
     setCurrentTabId(element.id);
   };

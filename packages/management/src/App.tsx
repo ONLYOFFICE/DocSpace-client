@@ -33,7 +33,6 @@ import { ThemeKeys } from "@docspace/shared/enums";
 import { Toast } from "@docspace/shared/components/toast";
 import { Portal } from "@docspace/shared/components/portal";
 import AppLoader from "@docspace/shared/components/app-loader";
-import { Error403 } from "@docspace/shared/components/errors/Error403";
 
 import tryRedirectTo from "@docspace/shared/utils/tryRedirectTo";
 
@@ -63,7 +62,7 @@ const App = observer(() => {
 
   const { init, isLoaded } = authStore;
   const { isCommunity } = currentTariffStatusStore;
-  const { setTheme, limitedAccessSpace, timezone } = settingsStore;
+  const { setTheme, timezone } = settingsStore;
 
   window.timezone = timezone;
 
@@ -108,9 +107,6 @@ const App = observer(() => {
 
   if (!isLoaded || isPaymentPageUnavailable || isBonusPageUnavailable)
     return <AppLoader />;
-
-  if ((userStore?.user && !userStore?.user?.isAdmin) || limitedAccessSpace)
-    return <Error403 />;
 
   if (userStore?.isLoaded && !userStore?.user)
     return tryRedirectTo(window.location.origin);

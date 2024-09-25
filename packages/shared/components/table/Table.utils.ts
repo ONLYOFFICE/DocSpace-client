@@ -31,9 +31,10 @@ export const getSubstring = (str: string) => +str.substring(0, str.length - 2);
 export const checkingForUnfixedSize = (
   item: string,
   defaultColumnSize: number,
+  isIndexEditingMode?: boolean,
 ) => {
   return (
-    item !== `${SETTINGS_SIZE}px` &&
+    item !== `${isIndexEditingMode ? 75 : SETTINGS_SIZE}px` &&
     item !== `${defaultColumnSize}px` &&
     item !== "0px"
   );

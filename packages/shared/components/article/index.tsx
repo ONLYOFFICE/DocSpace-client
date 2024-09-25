@@ -266,6 +266,7 @@ const Article = ({
           withCustomArticleHeader={withCustomArticleHeader}
           onClick={onArticleHeaderClick}
           isBurgerLoading={isBurgerLoading}
+          onIconClick={toggleArticleOpen}
         >
           {articleHeaderContent ? articleHeaderContent.props.children : null}
         </SubArticleHeader>
@@ -336,7 +337,7 @@ const Article = ({
           ))}
       </StyledArticle>
       {articleOpen && currentDeviceType === DeviceType.mobile && (
-        <SubArticleBackdrop onClick={toggleArticleOpen} />
+        <SubArticleBackdrop />
       )}
 
       {articleMainButtonContent && currentDeviceType === DeviceType.mobile ? (

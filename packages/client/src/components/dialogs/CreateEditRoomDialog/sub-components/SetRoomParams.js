@@ -153,6 +153,7 @@ const SetRoomParams = ({
   const [disableImageRescaling, setDisableImageRescaling] = useState(isEdit);
 
   const [previewTitle, setPreviewTitle] = useState(selection?.title || "");
+  const [createRoomTitle, setCreateRoomTitleTitle] = useState("");
 
   const [forceHideRoomTypeDropdown, setForceHideRoomTypeDropdown] =
     useState(false);
@@ -177,7 +178,7 @@ const SetRoomParams = ({
   const currentCover = React.useMemo(getCoverLogo, [cover]);
 
   const debouncedTitle = React.useCallback(
-    debounce((value) => setPreviewTitle(value), 300),
+    debounce((setTitle, value) => setTitle(value), 300),
     [],
   );
 
@@ -223,10 +224,18 @@ const SetRoomParams = ({
       setIsWrongTitle(false);
     }
 
-    if (e.target.value?.length > 1) {
-      debouncedTitle(e.target.value);
+    if (isEdit) {
+      if (e.target.value?.length > 1) {
+        debouncedTitle(setPreviewTitle, e.target.value);
+      } else {
+        setPreviewTitle(e.target.value);
+      }
     } else {
-      setPreviewTitle(e.target.value);
+      if (e.target.value?.length > 1) {
+        debouncedTitle(setCreateRoomTitleTitle, e.target.value);
+      } else {
+        setCreateRoomTitleTitle(e.target.value);
+      }
     }
 
     setRoomCoverDialogProps({
@@ -294,13 +303,13 @@ const SetRoomParams = ({
   );
 
   const isEmptyIcon =
-    previewTitle || cover?.color
+    createRoomTitle || cover?.color
       ? false
       : avatarEditorDialogVisible
         ? true
         : previewIcon
           ? false
-          : previewTitle
+          : createRoomTitle
             ? false
             : true;
 
@@ -334,7 +343,7 @@ const SetRoomParams = ({
   ) : (
     <RoomIcon
       id={selection?.id}
-      title={previewTitle}
+      title={createRoomTitle}
       showDefault={
         cover && cover.cover ? false : !previewIcon || avatarEditorDialogVisible
       }
@@ -350,7 +359,7 @@ const SetRoomParams = ({
       }
       withEditing={
         (previewIcon && !avatarEditorDialogVisible) ||
-        previewTitle ||
+        createRoomTitle ||
         (currentCover && !roomLogoCoverDialogVisible) ||
         cover?.color
       }

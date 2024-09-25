@@ -62,7 +62,6 @@ const contextMenuWrapperDraggingStyle = css`
 const StyledTableRow = styled(TableRow)`
   .table-container_cell:not(.table-container_element-wrapper) {
     border-top: ${(props) =>
-      !props.isIndexEditingMode &&
       `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
     margin-top: -1px;
     border-inline: 0; //for Safari

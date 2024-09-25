@@ -47,7 +47,7 @@ const HistoryBlockContent = ({
   const { actionType, targetType } = getFeedInfo(feed);
 
   return (
-    <>
+    <div className="info-panel_history-block">
       {targetType === "user" && actionType === "update" && (
         <HistoryUserList feed={feed} />
       )}
@@ -88,11 +88,11 @@ const HistoryBlockContent = ({
 
       {(targetType === "user" || targetType === "group") &&
         actionType === "update" && <HistoryUserGroupRoleChange feed={feed} />}
-    </>
+    </div>
   );
 };
 
-export default inject(({ infoPanelStore }) => {
+export default inject<TStore>(({ infoPanelStore }) => {
   const { historyWithFileList } = infoPanelStore;
   return { historyWithFileList };
 })(observer(HistoryBlockContent));

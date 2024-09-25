@@ -104,6 +104,10 @@ const StyledTitle = styled.div`
     }
   }
 
+  .info-panel_header-text {
+    margin: 0 8px;
+  }
+
   .text {
     font-weight: 600;
     font-size: 16px;

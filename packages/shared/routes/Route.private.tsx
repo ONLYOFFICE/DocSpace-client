@@ -211,6 +211,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     }
 
     if (isManagement) {
+      if (isLoaded && !isAuthenticated) return <Navigate replace to="/" />;
       if ((user && !user?.isAdmin) || limitedAccessSpace)
         return <Navigate replace to="/error/403" />;
       return children;

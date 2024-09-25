@@ -41,17 +41,13 @@ import ConnectDialog from "client/ConnectDialog";
 const Settings = () => {
   const { t } = useTranslation(["Common", "Settings"]);
   const navigate = useNavigate();
-  const { dialogsStore } = useStore();
+  const { dialogsStore, currentTariffStatusStore } = useStore();
   const { connectDialogVisible } = dialogsStore;
+  const { isCommunity } = currentTariffStatusStore;
 
   const [currentTabId, setCurrentTabId] = useState("branding");
 
   const data = [
-    {
-      id: "branding",
-      name: t("Settings:Branding"),
-      content: <Branding />,
-    },
     {
       id: "data-backup",
       name: t("Settings:DataBackup"),
@@ -68,6 +64,14 @@ const Settings = () => {
       content: <Restore />,
     },
   ];
+
+  if (!isCommunity) {
+    data.unshift({
+      id: "branding",
+      name: t("Settings:Branding"),
+      content: <Branding />,
+    });
+  }
 
   const onSelect = (element: TTabItem) => {
     navigate(

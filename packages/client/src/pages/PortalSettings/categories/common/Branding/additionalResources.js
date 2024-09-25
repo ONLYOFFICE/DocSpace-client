@@ -141,7 +141,7 @@ const AdditionalResourcesComponent = (props) => {
 
   const checkWidth = () => {
     const url = isManagement()
-      ? "/settings/branding"
+      ? "/management/settings/branding"
       : "portal-settings/customization/branding";
     window.innerWidth > size.mobile &&
       !isMobileView &&

@@ -39,7 +39,7 @@ const MobileView = ({ isSettingPaid, showSettings }) => {
   const { t } = useTranslation(["Settings"]);
   const navigate = useNavigate();
   const baseUrl = isManagement()
-    ? "/settings"
+    ? "/management/settings"
     : "/portal-settings/customization";
 
   const onClickLink = (e) => {

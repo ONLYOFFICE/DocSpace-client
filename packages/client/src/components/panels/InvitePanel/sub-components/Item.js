@@ -180,7 +180,9 @@ const Item = ({
   const typeLabel = item?.isEmailInvite
     ? getUserTypeLabel(defaultAccess.type, t)
     : (type === "user" && defaultAccess?.type !== type) ||
-        (defaultAccess?.type === "manager" && type !== "admin")
+        (defaultAccess?.type === "manager" &&
+          type !== "admin" &&
+          type !== "owner")
       ? getUserTypeLabel(defaultAccess.type, t)
       : getUserTypeLabel(type, t);
 

@@ -23,7 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
@@ -38,7 +38,7 @@ import { CustomLogo } from "./CustomLogo";
 import { SelectColor } from "./SelectColor/SelectColor";
 import { SelectIcon } from "./SelectIcon";
 
-import { RoomLogoCoverProps, ICover } from "../RoomLogoCoverDialog.types";
+import { RoomLogoCoverProps } from "../RoomLogoCoverDialog.types";
 
 const RoomLogoCoverContainer = styled.div`
   color: ${(props) => props.theme.logoCover.textColor};

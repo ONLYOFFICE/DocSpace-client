@@ -29,10 +29,8 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { tablet } from "@docspace/shared/utils";
 
-import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
-import { ICover, SelectIconProps } from "../RoomLogoCoverDialog.types";
 import hexRgb from "hex-rgb";
-import { ReactSVG } from "react-svg";
+import { ICover, SelectIconProps } from "../RoomLogoCoverDialog.types";
 
 interface WithoutIconProps {
   isSelected?: boolean;

@@ -48,8 +48,6 @@ import { RoomsType } from "@docspace/shared/enums";
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
 import { isMobile, mobile } from "@docspace/shared/utils";
 
-import debounce from "lodash.debounce";
-
 import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 
 import { RoomIcon } from "@docspace/shared/components/room-icon";

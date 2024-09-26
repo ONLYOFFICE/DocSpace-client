@@ -27,9 +27,8 @@ import styled, { css } from "styled-components";
 
 import { tablet } from "@docspace/shared/utils";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-
-import type { ColorItemProps } from "./SelecColor.types";
 import { globalColors } from "@docspace/shared/themes";
+import type { ColorItemProps } from "./SelecColor.types";
 
 const StyledModalDialog = styled(ModalDialog)`
   .modal-close {
@@ -75,14 +74,6 @@ const StyledColorItem = styled.div<ColorItemProps>`
     width: 40px;
     height: 40px;
   }
-
-  /* ${(props) =>
-    props.isEmptyColor &&
-    css`
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    `} */
 
   ${(props) =>
     props.isSelected &&

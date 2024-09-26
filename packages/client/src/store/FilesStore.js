@@ -4181,8 +4181,14 @@ class FilesStore {
   get indexColumnSize() {
     if (!this.selectedFolderStore.isIndexedFolder) return;
 
-    let minWidth = 36;
+    const minWidth = 36;
+    const maxIndexLength = 5;
+
     const lastFile = this.filesList[this.filesList.length - 1];
+
+    if (lastFile?.order?.length > maxIndexLength) {
+      return minWidth + maxIndexLength * 3;
+    }
 
     return minWidth + lastFile?.order?.length * 3;
   }

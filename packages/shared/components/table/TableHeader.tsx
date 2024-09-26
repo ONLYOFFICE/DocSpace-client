@@ -49,7 +49,11 @@ import { isDesktop } from "../../utils";
 
 class TableHeaderComponent extends React.Component<
   TableHeaderProps,
-  { hideColumns: boolean; columnIndex: null | number }
+  {
+    hideColumns: boolean;
+    columnIndex: null | number;
+    minWidthsIndex: number[];
+  }
 > {
   headerRef: null | React.RefObject<HTMLDivElement> = null;
 
@@ -58,7 +62,11 @@ class TableHeaderComponent extends React.Component<
   constructor(props: TableHeaderProps) {
     super(props);
 
-    this.state = { columnIndex: null, hideColumns: false };
+    this.state = {
+      columnIndex: null,
+      hideColumns: false,
+      minWidthsIndex: [],
+    };
 
     this.headerRef = React.createRef();
     this.throttledResize = throttle(this.onResize, 300);
@@ -99,7 +107,7 @@ class TableHeaderComponent extends React.Component<
         return this.resetColumns();
       }
 
-      for (let index in columns) {
+      for (const index in columns) {
         if (columns[index]?.enable !== prevProps.columns[index]?.enable) {
           return this.resetColumns();
         }
@@ -431,19 +439,12 @@ class TableHeaderComponent extends React.Component<
 
     const containerWidth = container.getBoundingClientRect().width;
 
-    const indexColumnDifference = shortSize
-      ? Number(tableContainer[0].split("px")[0]) - shortSize
-      : 0;
-
     const defaultWidth = tableContainer
       .map((column) => getSubstring(column))
       .reduce((x, y) => x + y);
 
     const oldWidth =
-      defaultWidth -
-      defaultSize -
-      (isIndexEditingMode ? 75 : SETTINGS_SIZE) -
-      indexColumnDifference;
+      defaultWidth - defaultSize - (isIndexEditingMode ? 75 : SETTINGS_SIZE);
 
     let str = "";
     let gridTemplateColumnsWithoutOverfilling: string[] = [];
@@ -505,8 +506,6 @@ class TableHeaderComponent extends React.Component<
             gridTemplateColumns.push(
               `${containerWidth - defaultSize - shortColumnSize - (isIndexEditingMode ? 75 : SETTINGS_SIZE)}px`,
             );
-          } else if (column?.dataset?.minWidth && column?.dataset?.shortColum) {
-            gridTemplateColumns.push(`${column?.dataset?.minWidth}px`);
           } else if (
             item === `${defaultSize}px` ||
             item === `${isIndexEditingMode ? 75 : SETTINGS_SIZE}px`
@@ -517,6 +516,8 @@ class TableHeaderComponent extends React.Component<
           }
         });
       }
+
+      const { minWidthsIndex } = this.state;
 
       let hasGridTemplateColumnsWithoutOverfilling = false;
       if (infoPanelVisible) {
@@ -555,11 +556,39 @@ class TableHeaderComponent extends React.Component<
             let overWidth = 0;
 
             tableInfoPanelContainer.forEach((item, index) => {
-              if (index === 0 && enabledColumnsCount > 0) {
-                gridTemplateColumns.push(item);
-              } else {
-                const column = document.getElementById(`column_${index}`);
+              const column = document.getElementById(`column_${index}`);
 
+              const shortColumSize =
+                column?.dataset?.shortColum && column.dataset.minWidth;
+
+              if (index === 0 && enabledColumnsCount > 0) {
+                let newItemWidth = item;
+
+                // Checking whether the index column is less than the minimum width
+                if (
+                  +index === 0 &&
+                  shortColumSize &&
+                  getSubstring(item) < +shortColumSize
+                ) {
+                  overWidth += +shortColumSize - getSubstring(item);
+                  newItemWidth = `${shortColumSize}px`;
+                }
+
+                // Set the previous minimum width of the index column
+                // if the user has not changed the width of this column
+                if (
+                  +index === 0 &&
+                  shortColumSize &&
+                  getSubstring(item) > +shortColumSize &&
+                  minWidthsIndex.includes(getSubstring(item)) &&
+                  minWidthsIndex?.includes(+shortColumSize)
+                ) {
+                  overWidth += getSubstring(item) - +shortColumSize;
+                  newItemWidth = `${shortColumSize}px`;
+                }
+
+                gridTemplateColumns.push(newItemWidth);
+              } else {
                 const enable =
                   index === tableInfoPanelContainer.length - 1 ||
                   (column ? column.dataset.enable === "true" : item !== "0px");
@@ -697,10 +726,8 @@ class TableHeaderComponent extends React.Component<
                 getSubstring(item)
               }px`;
             } else if (isSettingColumn) {
-              let newSettingsSize = isIndexEditingMode ? 75 : SETTINGS_SIZE;
+              const newSettingsSize = isIndexEditingMode ? 75 : SETTINGS_SIZE;
               gridTemplateColumns.push(`${newSettingsSize}px`);
-            } else if (shortColumSize) {
-              gridTemplateColumns.push(`${shortColumSize}px`);
             } else if (item !== `${SETTINGS_SIZE}px`) {
               const percent = (getSubstring(item) / oldWidth) * 100;
 
@@ -715,25 +742,71 @@ class TableHeaderComponent extends React.Component<
                 }
               }
 
-              let newItemWidth = defaultColumnSize
-                ? `${defaultColumnSize}px`
-                : percent === 0
-                  ? `${DEFAULT_MIN_COLUMN_SIZE}px`
-                  : `${
-                      ((containerWidth -
-                        defaultSize -
-                        (isIndexEditingMode ? 75 : SETTINGS_SIZE)) *
-                        percent) /
-                      100
-                    }px`;
+              if (
+                +index === 0 &&
+                shortColumSize &&
+                !minWidthsIndex.includes(+shortColumSize)
+              ) {
+                this.setState((prevState) => ({
+                  minWidthsIndex: [
+                    ...prevState.minWidthsIndex,
+                    +shortColumSize,
+                  ],
+                }));
+              }
+
+              let newItemWidth;
+
+              if (defaultColumnSize) {
+                newItemWidth = `${defaultColumnSize}px`;
+              } else if (percent === 0) {
+                newItemWidth = `${DEFAULT_MIN_COLUMN_SIZE}px`;
+              } else if (shortColumSize) {
+                newItemWidth = item;
+              } else {
+                newItemWidth = `${
+                  ((containerWidth -
+                    defaultSize -
+                    (isIndexEditingMode ? 75 : SETTINGS_SIZE)) *
+                    percent) /
+                  100
+                }px`;
+              }
 
               const minWidth = column?.dataset?.minWidth;
               const minSize = minWidth ? +minWidth : MIN_SIZE_FIRST_COLUMN;
 
               // Checking whether the first column is less than the minimum width
-              if (+index === 0 && getSubstring(newItemWidth) < minSize) {
+              if (
+                +index === 0 &&
+                getSubstring(newItemWidth) < minSize &&
+                !shortColumSize
+              ) {
                 overWidth += MIN_SIZE_FIRST_COLUMN - getSubstring(newItemWidth);
                 newItemWidth = `${MIN_SIZE_FIRST_COLUMN}px`;
+              }
+
+              // Checking whether the index column is less than the minimum width
+              if (
+                +index === 0 &&
+                shortColumSize &&
+                getSubstring(newItemWidth) < +shortColumSize
+              ) {
+                overWidth += +shortColumSize - getSubstring(newItemWidth);
+                newItemWidth = `${shortColumSize}px`;
+              }
+
+              // Set the previous minimum width of the index column
+              // if the user has not changed the width of this column
+              if (
+                +index === 0 &&
+                shortColumSize &&
+                getSubstring(newItemWidth) > +shortColumSize &&
+                minWidthsIndex.includes(getSubstring(newItemWidth)) &&
+                minWidthsIndex?.includes(+shortColumSize)
+              ) {
+                overWidth += getSubstring(newItemWidth) - +shortColumSize;
+                newItemWidth = `${shortColumSize}px`;
               }
 
               // Checking whether columns are smaller than the minimum width

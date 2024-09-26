@@ -25,13 +25,13 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { StyledText } from "./CellStyles";
+import { StyledIndexCell } from "./CellStyles";
 
 const IndexCell = ({ t, item, sideColor }) => {
   const { order } = item;
 
   return (
-    <StyledText
+    <StyledIndexCell
       color={sideColor}
       fontSize="12px"
       fontWeight={600}
@@ -39,7 +39,7 @@ const IndexCell = ({ t, item, sideColor }) => {
       style={{ marginRight: 0 }}
     >
       {order}
-    </StyledText>
+    </StyledIndexCell>
   );
 };
 

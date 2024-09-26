@@ -1,8 +1,6 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
 import {
-  addClient,
-  updateClient,
   changeClientStatus,
   regenerateSecret,
   deleteClient,
@@ -14,11 +12,9 @@ import {
 import {
   IClientListProps,
   IClientProps,
-  IClientReqDTO,
   TScope,
 } from "@docspace/shared/utils/oauth/types";
 import { toastr } from "@docspace/shared/components/toast";
-import { AuthenticationMethod } from "@docspace/shared/enums";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { Nullable, TTranslation } from "@docspace/shared/types";
@@ -29,8 +25,10 @@ import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
 import OauthRevokeSvgUrl from "PUBLIC_DIR/images/oauth.revoke.svg?url";
-import SettingsIcon from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
-import DeleteIcon from "PUBLIC_DIR/images/delete.react.svg?url";
+import GenerateIconUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
+import RevokeIconUrl from "PUBLIC_DIR/images/revoke.react.svg?url";
+import DeleteIconUrl from "PUBLIC_DIR/images/delete.react.svg?url";
+import SettingsIconUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 
 const PAGE_LIMIT = 100;
 
@@ -87,10 +85,6 @@ export interface OAuthStoreProps {
 
   fetchConsents: () => Promise<void>;
   fetchNextConsents: (startIndex: number) => Promise<void>;
-
-  saveClient: (client: IClientReqDTO) => Promise<void>;
-
-  updateClient: (clientId: string, client: IClientReqDTO) => Promise<void>;
 
   changeClientStatus: (clientId: string, status: boolean) => Promise<void>;
 
@@ -387,58 +381,6 @@ class OAuthStore implements OAuthStoreProps {
     this.setConsentsIsLoading(false);
   };
 
-  saveClient = async (client: IClientReqDTO) => {
-    try {
-      const newClient = await addClient(client);
-
-      const creatorDisplayName = this.userStore?.user?.displayName;
-      const creatorAvatar = this.userStore?.user?.avatarSmall;
-
-      runInAction(() => {
-        this.clients = [
-          { ...newClient, enabled: true, creatorDisplayName, creatorAvatar },
-          ...this.clients,
-        ];
-      });
-    } catch (e) {
-      const err = e as TData;
-      toastr.error(err);
-    }
-  };
-
-  updateClient = async (clientId: string, client: IClientReqDTO) => {
-    try {
-      await updateClient(clientId, client);
-
-      const idx = this.clients.findIndex((c) => c.clientId === clientId);
-
-      const newClient = { ...this.clients[idx] };
-
-      newClient.name = client.name;
-      newClient.allowedOrigins = client.allowed_origins;
-      newClient.logo = client.logo;
-      newClient.description = client.description;
-      newClient.isPublic = client.is_public;
-
-      if (
-        client.allow_pkce &&
-        !newClient.authenticationMethods.includes(AuthenticationMethod.none)
-      )
-        newClient.authenticationMethods.push(AuthenticationMethod.none);
-
-      if (idx > -1) {
-        runInAction(() => {
-          this.clients[idx] = {
-            ...newClient,
-          };
-        });
-      }
-    } catch (e) {
-      const err = e as TData;
-      toastr.error(err);
-    }
-  };
-
   changeClientStatus = async (clientId: string, status: boolean) => {
     try {
       await changeClientStatus(clientId, status);
@@ -509,7 +451,7 @@ class OAuthStore implements OAuthStoreProps {
       const requests: Promise<void>[] = [];
 
       clientsId.forEach((id) => {
-        this.setActiveClient(id);
+        // this.setActiveClient(id);
         requests.push(revokeUserClient(id));
       });
 
@@ -521,7 +463,7 @@ class OAuthStore implements OAuthStoreProps {
         );
       });
 
-      this.setActiveClient("");
+      // this.setActiveClient("");
     } catch (e) {
       const err = e as TData;
       toastr.error(err);
@@ -597,26 +539,16 @@ class OAuthStore implements OAuthStoreProps {
       icon: ExternalLinkReactSvgUrl,
       label: t("Files:Open"),
       onClick: () => window.open(item.websiteUrl, "_blank"),
-      isDisabled: isInfo,
+      disabled: isInfo,
     };
 
     const infoOption = {
       key: "info",
-      icon: SettingsIcon,
+      icon: SettingsIconUrl,
       label: t("Common:Info"),
       onClick: onShowInfo,
-      isDisabled: isInfo,
+      disabled: isInfo,
     };
-
-    const revokeOptions = [
-      {
-        key: "revoke",
-        icon: OauthRevokeSvgUrl,
-        label: t("Revoke"),
-        onClick: onRevoke,
-        isDisabled: false,
-      },
-    ];
 
     if (!isSettings) {
       const items: ContextMenuModel[] = [];
@@ -632,7 +564,13 @@ class OAuthStore implements OAuthStoreProps {
         });
       }
 
-      items.push(...revokeOptions);
+      items.push({
+        key: "revoke",
+        icon: OauthRevokeSvgUrl,
+        label: t("Revoke"),
+        onClick: onRevoke,
+        disabled: false,
+      });
 
       return items;
     }
@@ -673,34 +611,35 @@ class OAuthStore implements OAuthStoreProps {
           const actions: Promise<void>[] = [];
 
           this.selection.forEach((s) => {
-            this.setActiveClient(s);
+            // this.setActiveClient(s);
             actions.push(this.changeClientStatus(s, status));
           });
 
           await Promise.all(actions);
 
-          this.setActiveClient("");
+          // this.setActiveClient("");
           this.setSelection("");
+          toastr.success(t("OAuth:ApplicationsEnabledSuccessfully"));
         } catch (e) {
           const err = e as TData;
           toastr.error(err);
         }
       } else {
-        this.setActiveClient(clientId);
+        // this.setActiveClient(clientId);
 
         await this.changeClientStatus(clientId, status);
 
-        this.setActiveClient("");
+        // this.setActiveClient("");
         this.setSelection("");
 
-        // TODO OAuth, show toast
+        toastr.success(t("OAuth:ApplicationEnabledSuccessfully"));
       }
     };
 
     const editOption = {
       key: "edit",
       icon: PencilReactSvgUrl,
-      label: t("Common:Edit"),
+      label: t("Common:EditButton"),
       onClick: () => this.editClient(clientId),
     };
 
@@ -727,28 +666,24 @@ class OAuthStore implements OAuthStoreProps {
 
     const generateDeveloperTokenOption = {
       key: "generate-token",
-      icon: EnableReactSvgUrl,
-      label: "Generate developer token",
+      icon: GenerateIconUrl,
+      label: t("OAuth:GenerateToken"),
       onClick: onGenerateDeveloperToken,
     };
 
     const revokeDeveloperTokenOption = {
       key: "revoke-token",
-      icon: EnableReactSvgUrl,
-      label: "Revoke developer token",
+      icon: RevokeIconUrl,
+      label: t("OAuth:RevokeDialogHeader"),
       onClick: onRevokeDeveloperToken,
     };
 
-    const contextOptions = [
-      {
-        key: "Separator dropdownItem",
-        isSeparator: true,
-      },
+    const contextOptions: ContextMenuModel[] = [
       {
         key: "delete",
         label: t("Common:Delete"),
-        icon: DeleteIcon,
-        onClick: () => onDelete(),
+        icon: DeleteIconUrl,
+        onClick: onDelete,
       },
     ];
 
@@ -767,6 +702,11 @@ class OAuthStore implements OAuthStoreProps {
       } else {
         contextOptions.unshift(enableOption);
       }
+
+      contextOptions.unshift({
+        key: "Separator dropdownItem",
+        isSeparator: true,
+      });
     } else {
       if (item.enabled) {
         contextOptions.unshift(disableOption);
@@ -774,8 +714,18 @@ class OAuthStore implements OAuthStoreProps {
         contextOptions.unshift(enableOption);
       }
 
+      contextOptions.unshift({
+        key: "Separator dropdownItem",
+        isSeparator: true,
+      });
+
       contextOptions.unshift(revokeDeveloperTokenOption);
       contextOptions.unshift(generateDeveloperTokenOption);
+
+      contextOptions.unshift({
+        key: "Separator-2 dropdownItem",
+        isSeparator: true,
+      });
 
       if (!isInfo) contextOptions.unshift(infoOption);
       contextOptions.unshift(authButtonOption);

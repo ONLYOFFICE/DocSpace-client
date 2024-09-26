@@ -31,13 +31,13 @@ import { useTheme } from "styled-components";
 import { getLogoUrl } from "../../../utils";
 import { DeviceType, WhiteLabelLogoType } from "../../../enums";
 import { ArticleHeaderLoader } from "../../../skeletons/article";
-
 import {
   StyledArticleHeader,
   StyledHeading,
   StyledIconBox,
 } from "../Article.styled";
 import { ArticleHeaderProps } from "../Article.types";
+import { AsideHeader } from "../../aside/AsideHeader";
 
 const ArticleHeader = ({
   showText,
@@ -48,6 +48,8 @@ const ArticleHeader = ({
 
   withCustomArticleHeader,
   currentDeviceType,
+  onIconClick,
+
   ...rest
 }: ArticleHeaderProps) => {
   const navigate = useNavigate();
@@ -61,7 +63,15 @@ const ArticleHeader = ({
   const burgerLogo = getLogoUrl(WhiteLabelLogoType.LeftMenu, !theme.isBase);
   const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
 
-  if (currentDeviceType === DeviceType.mobile) return null;
+  if (currentDeviceType === DeviceType.mobile)
+    return (
+      <AsideHeader
+        headerHeight="49px"
+        isCloseable
+        withoutBorder
+        onCloseClick={onIconClick}
+      />
+    );
 
   const isLoadingComponent =
     currentDeviceType === DeviceType.tablet ? (

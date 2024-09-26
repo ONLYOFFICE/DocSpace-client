@@ -51,6 +51,7 @@ import {
   checkPropertyByLink,
 } from "../../../utils";
 import TariffBar from "SRC_DIR/components/TariffBar";
+import { IMPORT_HEADER_CONST } from "SRC_DIR/pages/PortalSettings/utils/settingsTree";
 
 export const HeaderContainer = styled.div`
   position: relative;
@@ -439,7 +440,7 @@ const SectionHeaderContent = (props) => {
   const withoutInfoPanelToggler = isSessionsPage ? true : false;
 
   const translatedHeader =
-    header === "ImportHeader"
+    header === IMPORT_HEADER_CONST
       ? workspace === "GoogleWorkspace"
         ? t("ImportFromGoogle")
         : workspace === "Nextcloud"

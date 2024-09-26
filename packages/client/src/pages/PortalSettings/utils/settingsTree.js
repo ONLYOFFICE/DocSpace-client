@@ -27,6 +27,8 @@
 import { PageType } from "@docspace/shared/enums";
 
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/settings.react.svg?url";
+
+export const IMPORT_HEADER_CONST = "ImportHeader";
 /**
  * Array for generation current settings tree.
  */
@@ -382,7 +384,7 @@ export const settingsTree = [
         id: "portal-settings_catalog-data-import-child",
         key: "5-0",
         link: "",
-        tKey: "ImportHeader",
+        tKey: IMPORT_HEADER_CONST,
       },
     ],
   },

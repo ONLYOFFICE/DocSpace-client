@@ -59,22 +59,17 @@ import { getCookie } from "@docspace/shared/utils";
 import { deleteCookie } from "@docspace/shared/utils/cookie";
 
 import { LoginFormProps } from "@/types";
-import {
-  generateOAuth2ReferenceURl,
-  getEmailFromInvitation,
-  getConfirmDataFromInvitation,
-} from "@/utils";
+import { getEmailFromInvitation, getConfirmDataFromInvitation } from "@/utils";
 
 import EmailContainer from "./sub-components/EmailContainer";
 import PasswordContainer from "./sub-components/PasswordContainer";
 import ForgotContainer from "./sub-components/ForgotContainer";
 import LDAPContainer from "./sub-components/LDAPContainer";
 
-import { StyledCaptcha } from "./LoginForm.styled";
 import { LoginDispatchContext, LoginValueContext } from "../Login";
 import OAuthClientInfo from "../ConsentInfo";
 
-// import { gitAvailablePortals } from "@/utils/actions";
+import { StyledCaptcha } from "./LoginForm.styled";
 
 let showToastr = true;
 
@@ -87,6 +82,7 @@ const LoginForm = ({
   reCaptchaType,
   ldapDomain,
   ldapEnabled,
+  baseDomain,
 }: LoginFormProps) => {
   const { isLoading, isModalOpen } = useContext(LoginValueContext);
   const { setIsLoading } = useContext(LoginDispatchContext);
@@ -285,34 +281,81 @@ const LoginForm = ({
     const session = !isChecked;
 
     if (client?.isPublic && hash) {
-      const portals = await getAvailablePortals({
-        Email: user,
-        PasswordHash: hash,
-      });
+      try {
+        const portals = await getAvailablePortals({
+          Email: user,
+          PasswordHash: hash,
+          recaptchaResponse: captchaToken,
+          recaptchaType: reCaptchaType,
+        });
 
-      if (portals.length === 1) {
-        window.open(`${portals[0].portalLink}`, "_self");
+        if (portals.length === 1) {
+          const name =
+            !baseDomain || portals[0].portalName.includes(baseDomain)
+              ? portals[0].portalName
+              : `${portals[0].portalName}.${baseDomain}`;
 
+          const redirectUrl = getCookie(
+            "x-redirect-authorization-uri",
+          )?.replace(window.location.origin, name);
+          // deleteCookie("x-redirect-authorization-uri");
+
+          window.open(
+            `${portals[0].portalLink}&referenceUrl=${redirectUrl}`,
+            "_self",
+          );
+
+          return;
+        }
+
+        const searchParams = new URLSearchParams();
+
+        const portalsString = JSON.stringify({ portals });
+
+        searchParams.set("portals", portalsString);
+        searchParams.set("clientId", client.clientId);
+
+        router.push(`/tenant-list?${searchParams.toString()}`);
+        setIsLoading(false);
+        return;
+      } catch (error) {
+        console.log(error);
+        let errorMessage = "";
+        if (typeof error === "object") {
+          errorMessage =
+            (error as { response: { data: { error: { message: string } } } })
+              ?.response?.data?.error?.message ||
+            (error as { statusText: string })?.statusText ||
+            (error as { message: string })?.message ||
+            "";
+        } else {
+          errorMessage = error as string;
+        }
+
+        if (
+          reCaptchaPublicKey &&
+          (error as { response: { status: number } })?.response?.status === 403
+        ) {
+          setIsCaptcha(true);
+        }
+
+        if (isCaptcha && captchaRef.current) {
+          captchaRef.current.reset();
+        }
+
+        setIsEmailErrorShow(true);
+        setErrorText(errorMessage);
+        setPasswordValid(!errorMessage);
+        setIsLoading(false);
         return;
       }
-
-      const searchParams = new URLSearchParams();
-
-      const portalsString = JSON.stringify({ portals });
-
-      searchParams.set("portals", portalsString);
-      searchParams.set("clientId", client.clientId);
-
-      router.push(`/tenant-list?${searchParams.toString()}`);
-      setIsLoading(false);
-      return;
     }
 
     login(user, hash, pwd, session, captchaToken, currentCulture, reCaptchaType)
       .then(async (res: string | object) => {
         const redirectUrl = getCookie("x-redirect-authorization-uri");
         if (clientId && redirectUrl) {
-          deleteCookie("x-redirect-authorization-uri");
+          // deleteCookie("x-redirect-authorization-uri");
 
           window.location.replace(redirectUrl);
 
@@ -383,6 +426,7 @@ const LoginForm = ({
     router,
     clientId,
     referenceUrl,
+    baseDomain,
     linkData,
   ]);
 

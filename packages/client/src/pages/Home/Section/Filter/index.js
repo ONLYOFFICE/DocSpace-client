@@ -314,7 +314,7 @@ const SectionFilterContent = ({
   userId,
   isPersonalRoom,
 
-  providers,
+  fetchThirdPartyProviders,
 
   clearSearch,
   setClearSearch,
@@ -1516,7 +1516,12 @@ const SectionFilterContent = ({
     }
 
     let tags = null;
-    if (!isPublicRoom) tags = await fetchTags();
+    let providers = [];
+    if (!isPublicRoom) {
+      const res = await Promise.all([fetchTags(), fetchThirdPartyProviders()]);
+      tags = res[0];
+      providers = res[1];
+    }
     const connectedThirdParty = [];
 
     providers.forEach((item) => {
@@ -1924,7 +1929,6 @@ const SectionFilterContent = ({
     return filterOptions;
   }, [
     t,
-    providers,
     isPersonalRoom,
     isRooms,
     isPeopleAccounts,
@@ -2441,7 +2445,7 @@ export default inject(
       setRoomsFilter,
     } = filesStore;
 
-    const { providers } = thirdPartyStore;
+    const { fetchThirdPartyProviders } = thirdPartyStore;
 
     const { fetchTags } = tagsStore;
     const { isRoomAdmin } = authStore;
@@ -2511,7 +2515,7 @@ export default inject(
       isPersonalRoom,
       infoPanelVisible,
       setCurrentRoomsFilter,
-      providers,
+      fetchThirdPartyProviders,
 
       isLoadedEmptyPage,
 

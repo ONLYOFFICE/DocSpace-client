@@ -27,7 +27,6 @@
   "Other": "기타",
   "OwnerChange": "소유자 변경",
   "Presentations": "프레젠테이션",
-  "PublicRoomLinkValidTime": "이 링크는 {{date}}까지 유효합니다. 만료되면 이 링크를 통해 방에 액세스할 수 없습니다.",
   "RoleCommentator": "주석자",
   "RoleCommentatorDescription": "기존 파일 작업: 보기, 주석 달기.",
   "RoleEditorDescription": "기존 파일 작업: 보기, 편집, 양식 채우기, 검토, 주석 달기.",

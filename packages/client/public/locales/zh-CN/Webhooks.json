@@ -11,7 +11,6 @@
   "EnterSecretKey": "输入密钥",
   "EnterUrl": "输入 URL",
   "EnterWebhookName": "输入 webhook 名称",
-  "EventHint": "传递会在15天后自动删除",
   "EventID": "事件 ID",
   "FailedToConnect": "我们无法传递这个负载：无法连接到主机",
   "From": "自",

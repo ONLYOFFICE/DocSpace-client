@@ -39,15 +39,15 @@ const ScopesBlock = ({
 }: TScopesBlockProps) => {
   const [checkedScopes, setCheckedScopes] = React.useState<string[]>([]);
   const [filteredScopes, setFilteredScopes] = React.useState<TFilteredScopes>(
-    filterScopeByGroup(selectedScopes, scopes),
+    filterScopeByGroup(selectedScopes, scopes, t),
   );
 
   React.useEffect(() => {
-    const filtered = filterScopeByGroup(selectedScopes, scopes);
+    const filtered = filterScopeByGroup(selectedScopes, scopes, t);
 
     setCheckedScopes([...selectedScopes]);
     setFilteredScopes({ ...filtered });
-  }, [scopes, selectedScopes]);
+  }, [scopes, selectedScopes, t]);
 
   const onAddCheckedScope = (
     group: ScopeGroup,
@@ -99,7 +99,7 @@ const ScopesBlock = ({
     const list: React.ReactNode[] = [];
 
     Object.entries(filteredScopes).forEach(([key, value]) => {
-      const name = getScopeTKeyName(key as ScopeGroup);
+      const name = getScopeTKeyName(key as ScopeGroup, t);
 
       const isReadDisabled = value.checkedType === ScopeType.write;
       const isReadChecked = value.isChecked;

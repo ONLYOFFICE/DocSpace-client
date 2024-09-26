@@ -61,6 +61,7 @@ const StyledTenantList = styled.div`
 
   .item {
     height: 59px;
+    background-color: ${(props) => props.theme.backgroundColor};
 
     box-sizing: border-box;
 

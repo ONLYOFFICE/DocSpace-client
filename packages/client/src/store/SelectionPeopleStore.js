@@ -526,7 +526,7 @@ class SelectionStore {
 
   get getItems() {
     if (!this.items) return {};
-    return this.allSessions.find((item) => item.id === this.items.id) ?? {};
+    return this.allSessions.find((item) => item.id === this.items.userId) ?? {};
   }
 
   convertDate = (t, dateString, locale) => {
@@ -675,7 +675,7 @@ class SelectionStore {
 
   getCurrentConnections = (session, data) => {
     const [first, ...other] = session.connections;
-    const isCurrentSesstion = session.id === data?.id;
+    const isCurrentSesstion = session.id === data?.userId;
     const connectionsIsEmpty = session.connections.length === 0;
 
     const sessionData = data.sessions?.at(-1);

@@ -24,7 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+import { globalColors } from "@docspace/shared/themes";
+import styled from "styled-components";
 
 const StyledWatermark = styled.div`
   margin-top: 16px;
@@ -63,7 +64,7 @@ const StyledWatermark = styled.div`
     .image-watermark_wrapper {
       width: 216px;
       height: 216px;
-      border: 1px solid #eceef1;
+      border: 1px solid ${globalColors.grayLightMid};
 
       overflow: hidden;
       display: flex;

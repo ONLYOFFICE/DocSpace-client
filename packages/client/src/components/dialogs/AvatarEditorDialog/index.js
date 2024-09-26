@@ -28,6 +28,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { mobile } from "@docspace/shared/utils/device";
 
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
@@ -66,6 +67,10 @@ const StyledModalDialog = styled(ModalDialog)`
       display: flex;
       gap: 16px;
       align-items: center;
+
+      @media ${mobile} {
+        justify-content: center;
+      }
     }
   }
 `;

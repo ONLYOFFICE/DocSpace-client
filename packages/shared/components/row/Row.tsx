@@ -129,6 +129,8 @@ const Row = (props: RowProps) => {
     icon: "",
     avatar: "",
     color: "",
+    cover: "",
+    logo: "",
   };
   if (React.isValidElement(children) && children.props.item) {
     contextMenuHeader = {
@@ -138,6 +140,8 @@ const Row = (props: RowProps) => {
         ? children.props.item.title
         : children.props.item.displayName || "",
       color: children.props.item.logo?.color,
+      logo: children.props.item.logo?.medium,
+      cover: children.props.item.logo?.cover,
     };
   }
 

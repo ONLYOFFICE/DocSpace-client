@@ -494,13 +494,21 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
                       />
                     ) : (
                       <div className="icon-wrapper">
-                        {header.icon ? (
+                        {(header?.icon && !header?.color) ||
+                        header?.cover ||
+                        header?.logo ? (
                           <RoomIcon
                             title={header.title}
                             isArchive={isArchive}
-                            showDefault={defaultIcon}
+                            showDefault={false}
                             imgClassName="drop-down-item_icon"
-                            logo={header.icon}
+                            logo={
+                              header?.cover
+                                ? { cover: header.cover }
+                                : header?.logo
+                                  ? header?.logo
+                                  : header?.icon
+                            }
                             badgeUrl={badgeUrl}
                             color={header.color || ""}
                           />

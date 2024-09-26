@@ -28,6 +28,7 @@ import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { isMobile } from "react-device-detect";
+import isEqual from "lodash/isEqual";
 
 import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
@@ -40,19 +41,18 @@ import { toastr } from "@docspace/shared/components/toast";
 import { isManagement } from "@docspace/shared/utils/common";
 import { size } from "@docspace/shared/utils";
 import { globalColors } from "@docspace/shared/themes";
+import { DeviceType, WhiteLabelLogoType } from "@docspace/shared/enums";
+
 import { saveToSessionStorage, getFromSessionStorage } from "../../../utils";
 import WhiteLabelWrapper from "./StyledWhitelabel";
 import LoaderWhiteLabel from "../sub-components/loaderWhiteLabel";
-
 import Logo from "./sub-components/logo";
 import {
   generateLogo,
   getLogoOptions,
   uploadLogo,
 } from "../../../utils/whiteLabelHelper";
-
-import isEqual from "lodash/isEqual";
-import { DeviceType, WhiteLabelLogoType } from "@docspace/shared/enums";
+import NotAvailable from "../../../components/NotAvailable";
 
 const WhiteLabelComponent = (props) => {
   const {
@@ -284,12 +284,12 @@ const WhiteLabelComponent = (props) => {
   ) : (
     <WhiteLabelWrapper showReminder={!saveButtonDisabled}>
       <Text className="subtitle">{t("BrandingSubtitle")}</Text>
-
+      {!isSettingPaid && standalone && <NotAvailable />}
       <div className="header-container">
         <Text fontSize="16px" fontWeight="700">
           {t("WhiteLabel")}
         </Text>
-        {!isSettingPaid && !isManagement() && (
+        {!isSettingPaid && !standalone && (
           <Badge
             className="paid-badge"
             fontWeight="700"

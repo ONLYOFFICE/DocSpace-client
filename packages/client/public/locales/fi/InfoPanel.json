@@ -49,7 +49,7 @@
   "RoomGroupRemove": "Ryhmät poistettu",
   "RoomLogoChanged": "Kuvake muutettu",
   "RoomRemoveUser": "Käyttäjä poistettu.",
-  "RoomRenamed": "Huone <1>«{{oldRoomTitle}}»</1> nimetty uudelleen <1>«{{roomTitle}}»</1>",
+  "RoomRenamed": "Huone <1>«{{oldRoomTitle}}»</1> nimetty uudelleen <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Katso huonetiedot täältä",
   "RoomUpdateAccess": "on määrätty",
   "SelectedUsers": "Valitut tilit",

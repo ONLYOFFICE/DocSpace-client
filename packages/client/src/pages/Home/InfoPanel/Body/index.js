@@ -26,6 +26,7 @@
 
 import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import ViewHelper from "./helpers/ViewHelper";
 import ItemTitle from "./sub-components/ItemTitle";
@@ -33,6 +34,8 @@ import ItemTitle from "./sub-components/ItemTitle";
 import { StyledInfoPanelBody } from "./styles/common";
 import { RoomsType } from "@docspace/shared/enums";
 import { useParams } from "react-router-dom";
+
+import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 
 const InfoPanelBodyContent = ({
   infoPanelSelection,
@@ -50,9 +53,23 @@ const InfoPanelBodyContent = ({
   isRootFolder,
   showSearchBlock,
   setShowSearchBlock,
+  uploadFile,
+  avatarEditorDialogVisible,
+  setAvatarEditorDialogVisible,
+  editRoomDialogProps,
+  createRoomDialogProps,
+  onSaveRoomLogo,
+  uploadedFile,
+  maxImageUploadSize,
+  selection,
+  setImage,
+  image,
+  onChangeFile,
   ...props
 }) => {
   const { groupId } = useParams();
+
+  const { t } = useTranslation("Common");
 
   const [selectedItems, setSelectedItems] = useState(props.selectedItems);
   const [selectedFolder, setSelectedFolder] = useState(props.selectedFolder);
@@ -116,6 +133,15 @@ const InfoPanelBodyContent = ({
     galleryProps: {},
     pluginProps: { isRooms, roomsView, fileView },
   });
+
+  // const onChangeFile = async (e) => {
+  //   const uploadedFile = await uploadFile(t, e);
+  //   setImage({ ...image, uploadedFile: uploadedFile });
+  // };
+
+  const onChangeIcon = (icon) => {
+    setImage(icon);
+  };
 
   const getView = () => {
     const currentView = isRooms ? roomsView : fileView;
@@ -193,12 +219,37 @@ const InfoPanelBodyContent = ({
         />
       )}
       {getView()}
+
+      {avatarEditorDialogVisible &&
+        !editRoomDialogProps.visible &&
+        !createRoomDialogProps.visible && (
+          <AvatarEditorDialog
+            t={t}
+            image={image}
+            onChangeImage={onChangeIcon}
+            onClose={() => setAvatarEditorDialogVisible(false)}
+            onSave={(image) =>
+              onSaveRoomLogo(selection.id, image, selection, true)
+            }
+            onChangeFile={onChangeFile}
+            classNameWrapperImageCropper={"icon-editor"}
+            visible={image.uploadedFile}
+            maxImageSize={maxImageUploadSize}
+          />
+        )}
     </StyledInfoPanelBody>
   );
 };
 
 export default inject(
-  ({ selectedFolderStore, oformsStore, infoPanelStore }) => {
+  ({
+    selectedFolderStore,
+    oformsStore,
+    infoPanelStore,
+    settingsStore,
+    avatarEditorDialogStore,
+    dialogsStore,
+  }) => {
     const {
       infoPanelSelection,
       setNewInfoPanelSelection,
@@ -217,6 +268,21 @@ export default inject(
       setShowSearchBlock,
     } = infoPanelStore;
 
+    const { editRoomDialogProps, createRoomDialogProps } = dialogsStore;
+
+    const selection =
+      infoPanelSelection?.length > 1 ? null : infoPanelSelection;
+    const {
+      uploadFile,
+      avatarEditorDialogVisible,
+      setAvatarEditorDialogVisible,
+      onSaveRoomLogo,
+      onChangeFile,
+      uploadedFile,
+      setImage,
+      image,
+    } = avatarEditorDialogStore;
+
     const { gallerySelected } = oformsStore;
     const { isRootFolder } = selectedFolderStore;
 
@@ -224,6 +290,7 @@ export default inject(
       infoPanelSelection,
       setNewInfoPanelSelection,
       isItemChanged,
+      selection,
 
       roomsView,
       fileView,
@@ -242,6 +309,18 @@ export default inject(
 
       showSearchBlock,
       setShowSearchBlock,
+
+      maxImageUploadSize: settingsStore.maxImageUploadSize,
+      uploadFile,
+      avatarEditorDialogVisible,
+      setAvatarEditorDialogVisible,
+      editRoomDialogProps,
+      createRoomDialogProps,
+      onSaveRoomLogo,
+      onChangeFile,
+      uploadedFile,
+      setImage,
+      image,
     };
   },
 )(observer(InfoPanelBodyContent));

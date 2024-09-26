@@ -67,6 +67,7 @@ import {
   PluginDialog,
   DeletePluginDialog,
   ShareFolderDialog,
+  RoomLogoCoverDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
@@ -145,6 +146,7 @@ const Panels = (props) => {
     setQuotaWarningDialogVisible,
     resetQuotaItem,
     isShowWarningDialog,
+    roomLogoCoverDialogVisible,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -338,6 +340,9 @@ const Panels = (props) => {
         {...shareCollectSelector}
       />
     ),
+    roomLogoCoverDialogVisible && (
+      <RoomLogoCoverDialog key="room-logo-cover-dialog" />
+    ),
   ];
 };
 
@@ -401,7 +406,7 @@ export default inject(
       reorderDialogVisible,
       fillPDFDialogData,
       shareCollectSelector,
-
+      roomLogoCoverDialogVisible,
       setQuotaWarningDialogVisible,
       setIsNewRoomByCurrentUser,
       setIsNewUserByCurrentUser,
@@ -496,7 +501,7 @@ export default inject(
       reorderDialogVisible,
       fillPDFDialogData,
       shareCollectSelector,
-
+      roomLogoCoverDialogVisible,
       setQuotaWarningDialogVisible,
       resetQuotaItem,
       isShowWarningDialog,

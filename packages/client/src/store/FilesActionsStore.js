@@ -94,7 +94,6 @@ import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
-import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 import {
   changeRoomLifetime,

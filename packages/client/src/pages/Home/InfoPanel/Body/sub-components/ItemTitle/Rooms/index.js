@@ -32,18 +32,17 @@ import { Text } from "@docspace/shared/components/text";
 import { inject, observer } from "mobx-react";
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
 import Planet12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/planet.react.svg?url";
+import Camera10ReactSvgUrl from "PUBLIC_DIR/images/icons/10/cover.camera.react.svg?url";
 import SearchIconReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
+
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { StyledTitle } from "../../../styles/common";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import RoomsContextBtn from "./context-btn";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 import CalendarComponent from "../Calendar";
-import {
-  FolderType,
-  RoomsType,
-  ShareAccessRights,
-} from "@docspace/shared/enums";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
+
 import Search from "../../Search";
 
 const RoomsItemHeader = ({
@@ -67,13 +66,15 @@ const RoomsItemHeader = ({
   setIsScrollLocked,
   i18n,
   displayFileExtension,
+  getLogoCoverModel,
+  onChangeFile,
 }) => {
   const itemTitleRef = useRef();
 
   if (!selection) return null;
 
   const icon = selection.icon;
-  const isLoadedRoomIcon = !!selection.logo?.medium;
+  const isLoadedRoomIcon = !!selection.logo?.cover || !!selection.logo?.medium;
   const showDefaultRoomIcon = !isLoadedRoomIcon && selection.isRoom;
   const security = infoPanelSelection ? infoPanelSelection.security : {};
   const canInviteUserInRoomAbility = security?.EditAccess;
@@ -98,6 +99,10 @@ const RoomsItemHeader = ({
     setBufferSelection(selection);
   };
 
+  const onChangeFileContext = (e) => {
+    onChangeFile(e, t);
+  };
+
   const onClickInviteUsers = () => {
     onSelectItem();
     setIsMobileHidden(true);
@@ -117,6 +122,8 @@ const RoomsItemHeader = ({
   };
 
   const onSearchClick = () => setShowSearchBlock(true);
+  const hasImage = selection?.logo?.original;
+  const model = getLogoCoverModel(t, hasImage);
 
   return (
     <StyledTitle ref={itemTitleRef}>
@@ -129,8 +136,11 @@ const RoomsItemHeader = ({
           isArchive={isArchive}
           showDefault={showDefaultRoomIcon}
           imgClassName={`icon ${selection.isRoom && "is-room"}`}
-          imgSrc={icon}
+          logo={icon}
           badgeUrl={badgeUrl ? badgeUrl : ""}
+          hoverSrc={selection.isRoom && Camera10ReactSvgUrl}
+          model={model}
+          onChangeFile={onChangeFileContext}
         />
       </div>
 
@@ -198,6 +208,8 @@ export default inject(
     infoPanelStore,
     filesSettingsStore,
     publicRoomStore,
+    settingsStore,
+    avatarEditorDialogStore,
   }) => {
     const {
       infoPanelSelection,
@@ -207,14 +219,19 @@ export default inject(
       setShowSearchBlock,
       setCalendarDay,
       setIsScrollLocked,
+      updateInfoPanelSelection,
     } = infoPanelStore;
 
     const { displayFileExtension } = filesSettingsStore;
     const { externalLinks } = publicRoomStore;
+    const { setCoverSelection } = dialogsStore;
 
     const selection = infoPanelSelection.length > 1 ? null : infoPanelSelection;
     const isArchive = selection?.rootFolderType === FolderType.Archive;
 
+    const { onChangeFile } = avatarEditorDialogStore;
+
+    setCoverSelection(selection);
     const roomType =
       selectedFolderStore.roomType ??
       infoPanelStore.infoPanelSelection?.roomType;
@@ -231,6 +248,7 @@ export default inject(
 
       setInvitePanelOptions: dialogsStore.setInvitePanelOptions,
       setQuotaWarningDialogVisible: dialogsStore.setQuotaWarningDialogVisible,
+      getLogoCoverModel: dialogsStore.getLogoCoverModel,
 
       setSelection: filesStore.setSelection,
       setBufferSelection: filesStore.setBufferSelection,
@@ -243,6 +261,9 @@ export default inject(
       roomType,
 
       displayFileExtension,
+      maxImageUploadSize: settingsStore.maxImageUploadSize,
+      updateInfoPanelSelection,
+      onChangeFile,
     };
   },
 )(
@@ -252,5 +273,6 @@ export default inject(
     "Translations",
     "InfoPanel",
     "SharingPanel",
+    "RoomLogoCover",
   ])(observer(RoomsItemHeader)),
 );

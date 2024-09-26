@@ -46,6 +46,7 @@ const CreateRoomEvent = ({
   setIsLoading,
   setOnClose,
   setCreateRoomDialogVisible,
+  setCover,
 
   fetchThirdPartyProviders,
   enableThirdParty,
@@ -84,7 +85,10 @@ const CreateRoomEvent = ({
 
   useEffect(() => {
     setCreateRoomDialogVisible(true);
-    return () => setCreateRoomDialogVisible(false);
+    return () => {
+      setCreateRoomDialogVisible(false);
+      setCover();
+    };
   }, []);
 
   return (
@@ -129,6 +133,7 @@ export default inject(
       setCreateRoomConfirmDialogVisible,
       connectDialogVisible,
       setCreateRoomDialogVisible,
+      setCover,
     } = dialogsStore;
 
     const {
@@ -159,6 +164,7 @@ export default inject(
       deleteThirdParty,
 
       isNotWatermarkSet,
+      setCover,
     };
   },
 )(observer(CreateRoomEvent));

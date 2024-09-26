@@ -360,30 +360,32 @@ class InfoPanelStore {
   // Icon helpers //
 
   getInfoPanelItemIcon = (item, size) => {
-    return item.isRoom || !!item.roomType
-      ? item.rootFolderType === FolderType.Archive
+    return item?.isRoom || !!item?.roomType
+      ? item.rootFolderType === FolderType.Archive && !item?.logo?.cover
         ? item.logo && item.logo.medium
-        : this.filesSettingsStore.getIcon(
-              size,
-              null,
-              null,
-              null,
-              item.roomType,
-              true,
-            )
-          ? item.logo?.medium
-          : item.icon
-            ? item.icon
-            : this.filesSettingsStore.getIcon(
+        : item?.logo?.cover
+          ? item.logo
+          : this.filesSettingsStore.getIcon(
                 size,
                 null,
                 null,
                 null,
                 item.roomType,
+                true,
               )
-      : item.isFolder
+            ? item.logo?.medium
+            : item.icon
+              ? item.icon
+              : this.filesSettingsStore.getIcon(
+                  size,
+                  null,
+                  null,
+                  null,
+                  item.roomType,
+                )
+      : item?.isFolder
         ? this.filesSettingsStore.getIconByFolderType(item.type, size)
-        : this.filesSettingsStore.getIcon(size, item.fileExst || ".file");
+        : this.filesSettingsStore.getIcon(size, item?.fileExst || ".file");
   };
 
   // User link actions //

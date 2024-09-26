@@ -310,9 +310,13 @@ class CreateEditRoomStore {
       // add new tags to room
       if (!!addTagsData.length)
         room = await addTagsToRoom(room.id, addTagsData);
+      if (this.dialogsStore.cover) {
+        await this.dialogsStore.setRoomLogoCover(room.id);
 
+        !withPaging && this.onOpenNewRoom(room);
+      }
       // calculate and upload logo to room
-      if (roomParams.icon.uploadedFile) {
+      else if (roomParams.icon.uploadedFile) {
         await uploadRoomLogo(uploadLogoData).then(async (response) => {
           const url = URL.createObjectURL(roomParams.icon.uploadedFile);
           const img = new Image();

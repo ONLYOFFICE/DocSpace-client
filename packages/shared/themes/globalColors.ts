@@ -148,4 +148,16 @@ export const globalColors = {
   alphaGreenDark: "rgba(59, 164, 32, 0.1)",
   alphaRedLight: "rgba(242, 28, 14, 0.1)",
   alphaRedDark: "rgba(224, 100, 81, 0.1)",
+
+  logoColors: [
+    "#FF6680",
+    "#FF8F40",
+    "#F2D230",
+    "#61C059",
+    "#1FCECB",
+    "#5CC3F7",
+    "#6191F2",
+    "#7757D9",
+    "#FF7FD4",
+  ],
 };

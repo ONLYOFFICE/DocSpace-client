@@ -43,7 +43,15 @@ import CreatePluginFile from "./CreatePluginFileEvent";
 import ChangeQuotaEvent from "./ChangeQuotaEvent";
 import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
 
-const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
+const GlobalEvents = ({
+  enablePlugins,
+  eventListenerItemsList,
+  editRoomDialogProps,
+  setEditRoomDialogProps,
+  createRoomDialogProps,
+  setCreateRoomDialogProps,
+  setCover,
+}) => {
   const [createDialogProps, setCreateDialogProps] = useState({
     visible: false,
     id: null,
@@ -57,18 +65,6 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
   });
 
   const [renameDialogProps, setRenameDialogProps] = useState({
-    visible: false,
-    item: null,
-    onClose: null,
-  });
-
-  const [createRoomDialogProps, setCreateRoomDialogProps] = useState({
-    title: "",
-    visible: false,
-    onClose: null,
-  });
-
-  const [editRoomDialogProps, setEditRoomDialogProps] = useState({
     visible: false,
     item: null,
     onClose: null,
@@ -186,6 +182,7 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
       visible: visible,
       item: e.item,
       onClose: () => {
+        setCover();
         setEditRoomDialogProps({
           visible: false,
           item: null,
@@ -433,10 +430,26 @@ const GlobalEvents = ({ enablePlugins, eventListenerItemsList }) => {
   ];
 };
 
-export default inject(({ settingsStore, pluginStore }) => {
+export default inject(({ settingsStore, pluginStore, dialogsStore }) => {
   const { enablePlugins } = settingsStore;
+
+  const {
+    editRoomDialogProps,
+    setEditRoomDialogProps,
+    createRoomDialogProps,
+    setCreateRoomDialogProps,
+    setCover,
+  } = dialogsStore;
 
   const { eventListenerItemsList } = pluginStore;
 
-  return { enablePlugins, eventListenerItemsList };
+  return {
+    enablePlugins,
+    eventListenerItemsList,
+    editRoomDialogProps,
+    setEditRoomDialogProps,
+    createRoomDialogProps,
+    setCreateRoomDialogProps,
+    setCover,
+  };
 })(observer(GlobalEvents));

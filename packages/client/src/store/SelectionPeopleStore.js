@@ -560,7 +560,7 @@ class SelectionStore {
     const status = "offline";
 
     const currentSesstionIndex = this.sessionsData.findIndex(
-      ({ userId }) => userId === userId,
+      ({ id }) => id === userId,
     );
 
     const index = newData.findIndex((data) => data.userId === userId);
@@ -648,7 +648,7 @@ class SelectionStore {
     const newArr = [...this.dataFromSocket];
     const index = newArr.findIndex(({ userId }) => userId === data.userId);
     const currentSesstionIndex = this.sessionsData.findIndex(
-      ({ userId }) => userId === data.userId,
+      ({ id }) => id === data.userId,
     );
     const { sessions, status } = data;
 

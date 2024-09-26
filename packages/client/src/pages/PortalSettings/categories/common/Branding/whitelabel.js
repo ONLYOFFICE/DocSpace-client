@@ -282,7 +282,10 @@ const WhiteLabelComponent = (props) => {
   return !isWhitelableLoaded ? (
     <LoaderWhiteLabel />
   ) : (
-    <WhiteLabelWrapper showReminder={!saveButtonDisabled}>
+    <WhiteLabelWrapper
+      showReminder={!saveButtonDisabled}
+      isSettingPaid={isSettingPaid}
+    >
       <Text className="subtitle">{t("BrandingSubtitle")}</Text>
       {!isSettingPaid && standalone && <NotAvailable />}
       <div className="header-container">

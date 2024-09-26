@@ -89,7 +89,7 @@ const ItemIcon = ({
   model,
   onChangeFile,
 }) => {
-  const isLoadedRoomIcon = !!logo?.cover || !!logo?.medium;
+  const isLoadedRoomIcon = !!logo;
   const showDefaultRoomIcon = !isLoadedRoomIcon && isRoom;
 
   return (

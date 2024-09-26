@@ -177,11 +177,6 @@ const SetRoomParams = ({
 
   const currentCover = React.useMemo(getCoverLogo, [cover]);
 
-  const debouncedTitle = React.useCallback(
-    debounce((setTitle, value) => setTitle(value), 300),
-    [],
-  );
-
   React.useEffect(() => {
     setRoomCoverDialogProps({
       ...roomCoverDialogProps,
@@ -225,17 +220,9 @@ const SetRoomParams = ({
     }
 
     if (isEdit) {
-      if (e.target.value?.length > 1) {
-        debouncedTitle(setPreviewTitle, e.target.value);
-      } else {
-        setPreviewTitle(e.target.value);
-      }
+      setPreviewTitle(e.target.value);
     } else {
-      if (e.target.value?.length > 1) {
-        debouncedTitle(setCreateRoomTitleTitle, e.target.value);
-      } else {
-        setCreateRoomTitleTitle(e.target.value);
-      }
+      setCreateRoomTitleTitle(e.target.value);
     }
 
     setRoomCoverDialogProps({

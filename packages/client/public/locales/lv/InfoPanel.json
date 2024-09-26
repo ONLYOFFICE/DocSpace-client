@@ -49,7 +49,7 @@
   "RoomGroupRemove": "Grupa ir noņemta",
   "RoomLogoChanged": "Ikona ir mainīta",
   "RoomRemoveUser": "Lietotājs ir noņemts.",
-  "RoomRenamed": "Telpa ir <1>«{{oldRoomTitle}}»</1> pārdēvēta par <1>«{{roomTitle}}»</1>",
+  "RoomRenamed": "Telpa ir <1>«{{oldRoomTitle}}»</1> pārdēvēta par <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Detalizētu informāciju par telpām skatīt šeit",
   "RoomUpdateAccess": "ir piešķirts",
   "SelectedUsers": "Atlasītie konti",

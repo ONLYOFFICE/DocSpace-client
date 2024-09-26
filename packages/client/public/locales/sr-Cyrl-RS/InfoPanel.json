@@ -49,7 +49,7 @@
   "RoomGroupRemove": "Група уклоњена",
   "RoomLogoChanged": "Икона промењена",
   "RoomRemoveUser": "Корисник уклоњен.",
-  "RoomRenamed": "Просторија <1>«{{oldRoomTitle}}»</1> преименована на <1>«{{roomTitle}}»</1>",
+  "RoomRenamed": "Просторија <1>«{{oldRoomTitle}}»</1> преименована на <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Види детаље собе овде",
   "RoomUpdateAccess": "додељена је улога",
   "SelectedUsers": "Одабрани налози",

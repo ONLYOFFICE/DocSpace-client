@@ -26,15 +26,13 @@
 
 import { observer } from "mobx-react";
 import React, { useEffect } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { isMobileOnly } from "react-device-detect";
 
 import { ThemeKeys } from "@docspace/shared/enums";
 import { Toast } from "@docspace/shared/components/toast";
 import { Portal } from "@docspace/shared/components/portal";
 import AppLoader from "@docspace/shared/components/app-loader";
-
-import tryRedirectTo from "@docspace/shared/utils/tryRedirectTo";
 
 import "@docspace/shared/styles/custom.scss";
 
@@ -52,16 +50,10 @@ declare global {
   }
 }
 
-let isPaymentPageUnavailable = true;
-let isBonusPageUnavailable = true;
-
 const App = observer(() => {
-  const { authStore, userStore, settingsStore, currentTariffStatusStore } =
-    useStore();
-  const location = useLocation();
+  const { authStore, userStore, settingsStore } = useStore();
 
   const { init, isLoaded } = authStore;
-  const { isCommunity } = currentTariffStatusStore;
   const { setTheme, timezone } = settingsStore;
 
   window.timezone = timezone;
@@ -82,21 +74,6 @@ const App = observer(() => {
     if (userTheme) setTheme(userTheme);
   }, [userTheme]);
 
-  isPaymentPageUnavailable = location.pathname === "/payments" && isCommunity;
-  isBonusPageUnavailable = location.pathname === "/bonus" && !isCommunity;
-
-  useEffect(() => {
-    if (!isLoaded) return;
-
-    if (isPaymentPageUnavailable) {
-      window.location.replace("/management/bonus");
-    }
-
-    if (isBonusPageUnavailable) {
-      window.location.replace("/management/payments");
-    }
-  }, [isLoaded]);
-
   const rootElement = document.getElementById("root") as HTMLElement;
 
   const toast = isMobileOnly ? (
@@ -105,8 +82,7 @@ const App = observer(() => {
     <Toast />
   );
 
-  if (!isLoaded || isPaymentPageUnavailable || isBonusPageUnavailable)
-    return <AppLoader />;
+  if (!isLoaded) return <AppLoader />;
 
   return (
     <Layout>

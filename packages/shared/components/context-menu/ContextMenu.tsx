@@ -500,7 +500,7 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
                             isArchive={isArchive}
                             showDefault={defaultIcon}
                             imgClassName="drop-down-item_icon"
-                            imgSrc={header.icon}
+                            logo={header.icon}
                             badgeUrl={badgeUrl}
                             color={header.color || ""}
                           />

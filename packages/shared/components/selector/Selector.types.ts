@@ -29,7 +29,7 @@ import { EmployeeStatus, RoomsType, ShareAccessRights } from "../../enums";
 import { MergeTypes, Nullable } from "../../types";
 
 import { TFileSecurity, TFolderSecurity } from "../../api/files/types";
-import { TRoomSecurity } from "../../api/rooms/types";
+import { TRoomSecurity, ICover } from "../../api/rooms/types";
 import { TGroup } from "../../api/groups/types";
 
 import { AvatarRole } from "../avatar";
@@ -428,6 +428,7 @@ type TSelectorItemEmpty = {
   onAcceptInput?: undefined;
   onCancelInput?: undefined;
   placeholder?: undefined;
+  cover?: undefined;
 
   isRoomsOnly?: undefined;
   createDefineRoomType?: undefined;
@@ -523,6 +524,7 @@ export type TSelectorItemInput = MergeTypes<
     icon?: string;
     color?: string;
     roomType?: RoomsType;
+    cover?: ICover;
     placeholder?: string;
 
     onAcceptInput: (value: string) => void;

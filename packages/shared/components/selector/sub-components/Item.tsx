@@ -113,6 +113,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       disabledText,
       dropDownItems,
       lifetimeTooltip,
+      cover,
     } = item;
 
     if (isInputItem) {
@@ -124,6 +125,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           style={style}
           color={color}
           roomType={roomType}
+          cover={cover}
           icon={icon}
           setInputItemVisible={setInputItemVisible}
           setSavedInputValue={setSavedInputValue}
@@ -208,6 +210,15 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
             isGroup={isGroup}
             userName={isGroup ? label : ""}
           />
+        ) : cover ? (
+          <RoomIcon
+            color={color}
+            title={label}
+            logo={{ cover }}
+            showDefault={false}
+            badgeUrl={badgeUrl ?? ""}
+            className="item-logo"
+          />
         ) : color ? (
           <RoomIcon
             color={color}
@@ -221,7 +232,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
             title={label}
             className="item-logo"
             imgClassName="room-logo"
-            imgSrc={icon}
+            logo={icon}
             showDefault={false}
             badgeUrl={badgeUrl ?? ""}
           />

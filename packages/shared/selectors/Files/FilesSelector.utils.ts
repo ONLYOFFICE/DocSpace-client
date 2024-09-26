@@ -144,6 +144,7 @@ export const convertRoomsToItems: (
     } = room;
 
     const icon = logo.medium || "";
+    const cover = logo?.cover;
 
     const iconProp = icon ? { icon } : { color: logo.color as string };
 
@@ -167,6 +168,7 @@ export const convertRoomsToItems: (
       roomType,
       shared,
       lifetimeTooltip,
+      cover,
       ...iconProp,
     };
   });

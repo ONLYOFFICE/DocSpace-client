@@ -37,7 +37,13 @@ import {
 } from "../../enums";
 import { TCreatedBy, TPathParts } from "../../types";
 
+export type ICover = {
+  data: string;
+  id: string;
+};
+
 export type TLogo = {
+  cover: ICover;
   original: string;
   large: string;
   medium: string;

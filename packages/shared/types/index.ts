@@ -112,6 +112,7 @@ export type SelectedStorageType = {
   isSet: boolean;
   title: string;
   properties: PropertiesType[];
+  current?: unknown;
 };
 
 declare module "styled-components" {

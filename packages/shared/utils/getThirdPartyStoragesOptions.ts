@@ -26,19 +26,24 @@
 
 import { ThirdPartyStorages } from "@docspace/shared/enums";
 
-export const getOptions = (storageBackup, needDefaultParameter = false) => {
+import type { SelectedStorageType } from "@docspace/shared/types";
+
+export const getOptions = (
+  storageBackup: SelectedStorageType[],
+  needDefaultParameter = false,
+) => {
   if (!storageBackup) return;
 
-  let googleStorageId = ThirdPartyStorages.GoogleId;
-  let comboBoxOptions = [];
-  let storagesInfo = {};
+  const googleStorageId = ThirdPartyStorages.GoogleId;
+  const comboBoxOptions = [];
+  let storagesInfo: Record<string, SelectedStorageType> = {};
   let isDefaultStorageExist = false;
   let isFirstSet = false;
   let firstSetId = "";
   let selectedStorageTitle = "";
   let selectedStorageId = "";
 
-  for (let item = 0; item < storageBackup.length; item++) {
+  for (let item = 0; item < storageBackup.length; item += 1) {
     const backupElem = storageBackup[item];
     const { isSet, properties, title, id, current } = backupElem;
 
@@ -52,10 +57,10 @@ export const getOptions = (storageBackup, needDefaultParameter = false) => {
     storagesInfo = {
       ...storagesInfo,
       [id]: {
-        isSet: isSet,
-        properties: properties,
-        title: title,
-        id: id,
+        id,
+        isSet,
+        title,
+        properties,
       },
     };
 

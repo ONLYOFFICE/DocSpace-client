@@ -106,6 +106,10 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     );
 
     const isManagement = location.pathname.includes("management");
+    const isPaymentPageUnavailable =
+      location.pathname.includes("payments") && isCommunity;
+    const isBonusPageUnavailable =
+      location.pathname.includes("bonus") && !isCommunity;
 
     if (isLoaded && !isAuthenticated) {
       if (isPortalDeactivate) {
@@ -214,6 +218,12 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       if (isLoaded && !isAuthenticated) return <Navigate replace to="/" />;
       if ((user && !user?.isAdmin) || limitedAccessSpace)
         return <Navigate replace to="/error/403" />;
+
+      if (isPaymentPageUnavailable)
+        return <Navigate replace to="/management/bonus" />;
+      if (isBonusPageUnavailable)
+        return <Navigate replace to="/management/payments" />;
+
       return children;
     }
 

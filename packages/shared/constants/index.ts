@@ -166,6 +166,10 @@ export const RTL_LANGUAGES = Object.freeze([
 
 export const DEFAULT_FONT_FAMILY = "Open Sans, sans-serif, Arial";
 
+export const ONE_MEGABYTE = 1024 * 1024;
+export const COMPRESSION_RATIO = 2;
+export const NO_COMPRESSION_RATIO = 1;
+
 // Contains system fonts used in mac, ios, windows, android and linux
 export const SYSTEM_FONT_FAMILY =
   "-apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Arial, sans-serif, Roboto, Noto Sans Arabic, Geeza Pro, Traditional Arabic, Noto Sans";

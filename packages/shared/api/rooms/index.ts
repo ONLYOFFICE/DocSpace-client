@@ -492,3 +492,26 @@ export function resetRoomQuota(roomIds) {
 
   return request(options);
 }
+
+export function getRoomCovers() {
+  const options = {
+    method: "get",
+    url: "files/rooms/covers",
+  };
+
+  return request(options);
+}
+
+export function setRoomCover(roomId, cover) {
+  const data = {
+    Color: cover.color,
+    Cover: cover.cover,
+  };
+  const options = {
+    method: "post",
+    url: `files/rooms/${roomId}/cover`,
+    data,
+  };
+
+  return request(options);
+}

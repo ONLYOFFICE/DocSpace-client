@@ -39,6 +39,7 @@ export interface ArticleHeaderProps {
   showText: boolean;
   children: React.ReactNode;
   onClick?: () => void;
+  onIconClick: () => void;
   onLogoClickAction?: () => void;
   isBurgerLoading: boolean;
   withCustomArticleHeader: boolean;

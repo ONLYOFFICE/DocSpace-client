@@ -47,6 +47,8 @@ const Wrapper = styled.div`
   .hex-color-picker .react-colorful__interactive {
     width: 183px;
 
+    ${({ theme }) => theme.interfaceDirection === "rtl" && "right: unset;"}
+
     ${isMobileOnly &&
     css`
       width: calc(100vw - 76px);

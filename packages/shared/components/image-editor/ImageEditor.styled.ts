@@ -29,23 +29,25 @@ import { mobile } from "../../utils";
 import { Base } from "../../themes";
 
 const StyledImageCropper = styled.div<{ disableImageRescaling?: boolean }>`
-  max-width: 216px;
+  max-width: 368px;
 
   .icon_cropper-crop_area {
-    width: 216px;
-    height: 216px;
+    width: 368px;
+    height: 368px;
     margin-bottom: 4px;
     position: relative;
     .icon_cropper-grid {
       pointer-events: none;
       position: absolute;
-      width: 216px;
-      height: 216px;
+      width: 368px;
+      height: 368px;
       top: 0;
       bottom: 0;
       inset-inline: 0;
       svg {
-        opacity: 0.2;
+        opacity: 1;
+        width: 368px;
+        height: 368px;
         path {
           fill: ${(props) =>
             props.theme.createEditRoomDialog.iconCropper.gridColor};
@@ -62,13 +64,56 @@ const StyledImageCropper = styled.div<{ disableImageRescaling?: boolean }>`
       `};
   }
 
+  .icon_cropper-delete_button {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 6px 0;
+    background: ${(props) =>
+      props.theme.createEditRoomDialog.iconCropper.deleteButton.background};
+    border-radius: 3px;
+    margin-bottom: 12px;
+
+    transition: all 0.2s ease;
+    &:hover {
+      background: ${(props) =>
+        props.theme.createEditRoomDialog.iconCropper.deleteButton
+          .hoverBackground};
+      color: ${(props) =>
+        props.theme.createEditRoomDialog.iconCropper.deleteButton.color};
+    }
+
+    &-text {
+      user-select: none;
+      font-weight: 600;
+      line-height: 20px;
+      color: ${(props) =>
+        props.theme.createEditRoomDialog.iconCropper.deleteButton.hoverColor};
+    }
+
+    div:first-child {
+      height: 16px;
+    }
+
+    svg {
+      path {
+        fill: ${(props) =>
+          props.theme.createEditRoomDialog.iconCropper.deleteButton.iconColor};
+      }
+    }
+  }
+
   .icon_cropper-zoom-container {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    height: 24px;
     gap: 12px;
-    margin-bottom: 20px;
 
     &-slider {
       margin: 0;

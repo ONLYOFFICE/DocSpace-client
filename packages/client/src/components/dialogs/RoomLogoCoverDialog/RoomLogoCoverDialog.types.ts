@@ -24,68 +24,54 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { globalColors } from "@docspace/shared/themes";
-import styled from "styled-components";
+import { Dispatch, SetStateAction } from "react";
+import type { TTranslation } from "@docspace/shared/types";
 
-const StyledWatermark = styled.div`
-  margin-top: 16px;
+export interface ICover {
+  data: string;
+  id: string;
+}
 
-  .watermark-title {
-    margin: 16px 0 8px 0;
-  }
-  .title-without-top {
-    margin-top: 0px;
-  }
-  .watermark-checkbox {
-    margin: 18px 0 0 0;
-  }
+interface ILogo {
+  color: string;
+  cover: ICover;
+}
 
-  .options-wrapper {
-    display: grid;
-    grid-template-rows: 56px 56px;
-    gap: 16px;
-  }
+export interface CoverDialogProps {
+  isBaseTheme: boolean;
+  setRoomLogoCover: VoidFunction;
+  covers?: ICover[] | undefined;
+  getCovers: VoidFunction;
+  setRoomLogoCoverDialogVisible: (value: boolean) => void;
+}
 
-  .image-wrapper {
-    display: grid;
-    grid-template-columns: 216px auto;
-    gap: 16px;
+export interface RoomLogoCoverProps {
+  isBaseTheme?: boolean;
+  logo?: ILogo;
+  title?: string;
+  covers?: ICover[] | undefined;
+  setCover?: (color: string, icon: string | ICover) => void;
+}
 
-    .image-description {
-      display: flex;
-      gap: 8px;
-      align-items: baseline;
+export interface CustomLogoProps {
+  color?: string;
+  icon?: string | ICover;
+  withoutIcon: boolean;
+  isBaseTheme: boolean;
+  roomTitle: string;
+}
 
-      .image-watermark_text {
-        margin-bottom: 8px;
-      }
-    }
+export interface SelectColorProps {
+  t: TTranslation;
+  logoColors: string[];
+  selectedColor: string;
+  onChangeColor: Dispatch<SetStateAction<string>>;
+}
 
-    .image-watermark_wrapper {
-      width: 216px;
-      height: 216px;
-      border: 1px solid ${globalColors.grayLightMid};
-
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      img {
-        width: 88%;
-        height: 88%;
-        transform: ${(props) =>
-          `rotate(${props.rotate}deg) scale(${props.scale})`};
-
-        opacity: 0.4;
-        margin: auto;
-      }
-    }
-  }
-`;
-const StyledBody = styled.div`
-  .types-content {
-  }
-`;
-
-export { StyledWatermark, StyledBody };
+export interface SelectIconProps {
+  t: TTranslation;
+  withoutIcon: boolean;
+  setWithoutIcon: Dispatch<SetStateAction<boolean>>;
+  setIcon: Dispatch<SetStateAction<string | ICover>>;
+  covers?: ICover[];
+}

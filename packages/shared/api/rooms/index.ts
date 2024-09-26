@@ -520,6 +520,15 @@ export function changeRoomLifetime(
   return request(options);
 }
 
+export function getRoomCovers() {
+  const options = {
+    method: "get",
+    url: "files/rooms/covers",
+  };
+
+  return request(options);
+}
+
 export function exportRoomIndex(roomId: number) {
   return request({
     method: "post",
@@ -550,6 +559,20 @@ export function setWatermarkSettings(
   const options = {
     method: "put",
     url: `files/rooms/${roomId}/watermark`,
+    data,
+  };
+
+  return request(options);
+}
+
+export function setRoomCover(roomId, cover) {
+  const data = {
+    Color: cover.color,
+    Cover: cover.cover,
+  };
+  const options = {
+    method: "post",
+    url: `files/rooms/${roomId}/cover`,
     data,
   };
 

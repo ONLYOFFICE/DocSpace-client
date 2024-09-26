@@ -34,6 +34,7 @@ import styled from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { TTranslation } from "@docspace/shared/types";
+import { TEmit } from "@docspace/shared/utils/socket";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import type UsersStore from "SRC_DIR/store/UsersStore";
@@ -127,6 +128,7 @@ const Sessions = ({
   setUserSessionPanelVisible,
   isSeveralSelection,
   isSessionsLoaded,
+  socketHelper,
 }: SessionsProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Settings",
@@ -136,11 +138,15 @@ const Sessions = ({
   ]);
 
   useEffect(() => {
+    socketHelper.emit({
+      command: "getSessionsInPortal",
+    } as TEmit);
+
     fetchData();
     return () => {
       clearSelection();
     };
-  }, [fetchData, clearSelection]);
+  }, [socketHelper, fetchData, clearSelection]);
 
   useViewEffect({
     view: viewAs,
@@ -228,7 +234,7 @@ export const SecuritySessions = inject<TStore>(
   ({ settingsStore, setup, peopleStore, dialogsStore }) => {
     const { updateUserStatus } =
       peopleStore.usersStore as unknown as UsersStore;
-    const { currentDeviceType } = settingsStore;
+    const { currentDeviceType, socketHelper } = settingsStore;
     const { setUserSessionPanelVisible } = dialogsStore;
     const {
       allSessions,
@@ -288,6 +294,7 @@ export const SecuritySessions = inject<TStore>(
       setUserSessionPanelVisible,
       isSeveralSelection,
       isSessionsLoaded,
+      socketHelper,
     };
   },
 )(observer(Sessions));

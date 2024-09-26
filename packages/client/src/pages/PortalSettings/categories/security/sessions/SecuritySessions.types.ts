@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TViewAs, TTranslation } from "@docspace/shared/types";
-
+import SocketIOHelper from "@docspace/shared/utils/socket";
 import { DeviceType } from "@docspace/shared/enums";
 
 export type TUserStatus = "online" | "offline";
@@ -102,6 +102,7 @@ export interface SessionsProps {
   setUserSessionPanelVisible: (visible: boolean) => void;
   isSeveralSelection: boolean;
   isSessionsLoaded: boolean;
+  socketHelper: SocketIOHelper;
 }
 
 export interface SessionsTableProps {

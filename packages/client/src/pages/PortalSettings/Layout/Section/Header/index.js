@@ -147,6 +147,7 @@ const SectionHeaderContent = (props) => {
     setIsLoadedSectionHeader,
     isSSOAvailable,
     workspace,
+    standalone,
   } = props;
 
   const navigate = useNavigate();
@@ -167,11 +168,11 @@ const SectionHeaderContent = (props) => {
       case "RestoreBackup":
         return isRestoreAndAutoBackupAvailable;
       case "WhiteLabel":
-        return isCustomizationAvailable;
+        return isCustomizationAvailable || standalone;
       case "CompanyInfoSettings":
-        return isCustomizationAvailable;
+        return isCustomizationAvailable || standalone;
       case "AdditionalResources":
-        return isCustomizationAvailable;
+        return isCustomizationAvailable || standalone;
       case "SingleSignOn:ServiceProviderSettings":
       case "SingleSignOn:SpMetadata":
         return isSSOAvailable;
@@ -388,7 +389,13 @@ const SectionHeaderContent = (props) => {
 };
 
 export default inject(
-  ({ currentQuotaStore, setup, common, importAccountsStore }) => {
+  ({
+    currentQuotaStore,
+    setup,
+    common,
+    importAccountsStore,
+    settingsStore,
+  }) => {
     const {
       isCustomizationAvailable,
       isRestoreAndAutoBackupAvailable,
@@ -410,6 +417,7 @@ export default inject(
     const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
 
     const { workspace } = importAccountsStore;
+    const { standalone } = settingsStore;
 
     return {
       addUsers,
@@ -431,6 +439,7 @@ export default inject(
       isRestoreAndAutoBackupAvailable,
       isSSOAvailable,
       workspace,
+      standalone,
     };
   },
 )(

@@ -143,7 +143,13 @@ class TableHeaderComponent extends React.Component<
     }
   };
 
-  moveToLeft = (widths: string[], newWidth: number, index?: number) => {
+  moveToLeft = (
+    widths: string[],
+    newWidth: number,
+    isIndexEditingMode: boolean,
+    index?: number,
+  ) => {
+    if (isIndexEditingMode) return;
     const { columnIndex } = this.state;
 
     let leftColumn;
@@ -167,7 +173,7 @@ class TableHeaderComponent extends React.Component<
 
       if (leftColumn.getBoundingClientRect().width <= +minSize) {
         if (colIndex < 0) return false;
-        this.moveToLeft(widths, newWidth, colIndex - 1);
+        this.moveToLeft(widths, newWidth, isIndexEditingMode, colIndex - 1);
         return;
       }
       if (columnIndex !== null) {
@@ -188,7 +194,13 @@ class TableHeaderComponent extends React.Component<
     }
   };
 
-  moveToRight = (widths: string[], newWidth: number, index?: number) => {
+  moveToRight = (
+    widths: string[],
+    newWidth: number,
+    isIndexEditingMode: boolean,
+    index?: number,
+  ) => {
+    if (isIndexEditingMode) return;
     const { columnIndex } = this.state;
     const { columns } = this.props;
 
@@ -224,7 +236,7 @@ class TableHeaderComponent extends React.Component<
       widths[colIndex] = `${DEFAULT_MIN_COLUMN_SIZE}px`;
     } else {
       if (colIndex === columns.length) return false;
-      this.moveToRight(widths, newWidth, colIndex + 1);
+      this.moveToRight(widths, newWidth, isIndexEditingMode, colIndex + 1);
     }
   };
 
@@ -289,7 +301,7 @@ class TableHeaderComponent extends React.Component<
 
   onMouseMove = (e: MouseEvent) => {
     const { columnIndex } = this.state;
-    const { containerRef, theme } = this.props;
+    const { containerRef, theme, isIndexEditingMode } = this.props;
     const isRtl = theme.interfaceDirection === "rtl";
 
     if (columnIndex === null) return;
@@ -315,10 +327,10 @@ class TableHeaderComponent extends React.Component<
       // Move left
       if (currentWidth !== +minSize) {
         newWidth = +minSize - HANDLE_OFFSET;
-        this.moveToRight(widths, newWidth);
-      } else this.moveToLeft(widths, newWidth);
+        this.moveToRight(widths, newWidth, isIndexEditingMode);
+      } else this.moveToLeft(widths, newWidth, isIndexEditingMode);
     } else {
-      this.moveToRight(widths, newWidth);
+      this.moveToRight(widths, newWidth, isIndexEditingMode);
     }
 
     const str = widths.join(" ");
@@ -1061,6 +1073,7 @@ class TableHeaderComponent extends React.Component<
       showSettings = true,
       tagRef,
       settingsTitle,
+      isIndexEditingMode,
       ...rest
     } = this.props;
 
@@ -1106,7 +1119,9 @@ class TableHeaderComponent extends React.Component<
               >
                 <TableSettings
                   columns={columns}
-                  disableSettings={infoPanelVisible || hideColumns}
+                  disableSettings={
+                    infoPanelVisible || hideColumns || isIndexEditingMode
+                  }
                 />
               </div>
             )}

@@ -644,8 +644,8 @@ class DialogsStore {
     this.cover = { color: newColor, cover: newIcon };
 
     this.setRoomCoverDialogProps({
+      ...this.roomCoverDialogProps,
       icon: null,
-      title: null,
       color: null,
       withoutIcon: true,
     });

@@ -323,6 +323,15 @@ const StyledTableRow = styled(TableRow)`
       margin-inline-end: 8px !important;
     }
   }
+
+  .index-buttons {
+    justify-content: space-between;
+    width: calc(100% + 24px);
+  }
+
+  .index-buttons-name {
+    width: calc(100% + 24px);
+  }
 `;
 
 const StyledDragAndDrop = styled(DragAndDrop)`

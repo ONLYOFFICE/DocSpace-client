@@ -25,8 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React, { useRef } from "react";
-import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow2.react.svg?url";
-import { VDRIndexingAction } from "../../enums";
 
 import { ContextMenu, ContextMenuRefType } from "../context-menu";
 import {
@@ -38,7 +36,6 @@ import { StyledTableRow } from "./Table.styled";
 import { TableRowProps } from "./Table.types";
 
 import { TableCell } from "./sub-components/TableCell";
-import { ColorTheme, ThemeId } from "../color-theme";
 
 const TableRow = (props: TableRowProps) => {
   const {
@@ -53,7 +50,6 @@ const TableRow = (props: TableRowProps) => {
     getContextModel,
     badgeUrl,
     isIndexEditingMode,
-    onChangeIndex,
     ...rest
   } = props;
 
@@ -78,11 +74,6 @@ const TableRow = (props: TableRowProps) => {
     return contextOptions || [];
   };
 
-  const changeIndex = (e, action) => {
-    e.stopPropagation();
-    onChangeIndex(action);
-  };
-
   return (
     <StyledTableRow
       onContextMenu={onContextMenu}
@@ -99,22 +90,7 @@ const TableRow = (props: TableRowProps) => {
           className={`${selectionProp?.className} table-container_row-context-menu-wrapper`}
         >
           {isIndexEditingMode ? (
-            <>
-              <ColorTheme
-                themeId={ThemeId.IndexIconButton}
-                iconName={ArrowReactSvgUrl}
-                className="index-up-icon change-index_icon"
-                size="small"
-                onClick={(e) => changeIndex(e, VDRIndexingAction.HigherIndex)}
-              />
-              <ColorTheme
-                themeId={ThemeId.IndexIconButton}
-                iconName={ArrowReactSvgUrl}
-                className="index-down-icon change-index_icon"
-                size="small"
-                onClick={(e) => changeIndex(e, VDRIndexingAction.LowerIndex)}
-              />
-            </>
+            <></>
           ) : (
             <>
               <ContextMenu

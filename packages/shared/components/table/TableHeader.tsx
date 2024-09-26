@@ -269,9 +269,7 @@ class TableHeaderComponent extends React.Component<
     )?.defaultSize;
 
     const widthColumns =
-      containerWidth -
-      (isIndexEditingMode ? 75 : SETTINGS_SIZE) -
-      (defaultSizeColumn || 0);
+      containerWidth - SETTINGS_SIZE - (defaultSizeColumn || 0);
 
     const newColumnSize = defaultSize || widthColumns / allColumnsLength;
 
@@ -440,7 +438,7 @@ class TableHeaderComponent extends React.Component<
     ) {
       const hasContent = !!storageSize.split(" ").find((item, index) => {
         if (index === 0) return;
-        return checkingForUnfixedSize(item, defaultSize, isIndexEditingMode);
+        return checkingForUnfixedSize(item, defaultSize);
       });
 
       // If content column sizes are calculated as empty after changing view
@@ -455,8 +453,7 @@ class TableHeaderComponent extends React.Component<
       .map((column) => getSubstring(column))
       .reduce((x, y) => x + y);
 
-    const oldWidth =
-      defaultWidth - defaultSize - (isIndexEditingMode ? 75 : SETTINGS_SIZE);
+    const oldWidth = defaultWidth - defaultSize - SETTINGS_SIZE;
 
     let str = "";
     let gridTemplateColumnsWithoutOverfilling: string[] = [];
@@ -473,10 +470,7 @@ class TableHeaderComponent extends React.Component<
         ? storageInfoPanelSize.split(" ")
         : tableContainer;
 
-      let containerMinWidth =
-        containerWidth -
-        defaultSize -
-        (isIndexEditingMode ? 75 : SETTINGS_SIZE);
+      let containerMinWidth = containerWidth - defaultSize - SETTINGS_SIZE;
 
       tableInfoPanelContainer.forEach((item, index) => {
         const column = document.getElementById(`column_${index}`);
@@ -488,7 +482,7 @@ class TableHeaderComponent extends React.Component<
         if (
           enable &&
           (item !== `${defaultSize}px` || `${defaultSize}px` === `0px`) &&
-          item !== `${isIndexEditingMode ? 75 : SETTINGS_SIZE}px`
+          item !== `${SETTINGS_SIZE}px`
         ) {
           if (column?.dataset?.minWidth) {
             containerMinWidth -= +column.dataset.minWidth;
@@ -516,11 +510,11 @@ class TableHeaderComponent extends React.Component<
 
           if (column?.dataset?.minWidth && column?.dataset?.default) {
             gridTemplateColumns.push(
-              `${containerWidth - defaultSize - shortColumnSize - (isIndexEditingMode ? 75 : SETTINGS_SIZE)}px`,
+              `${containerWidth - defaultSize - shortColumnSize - SETTINGS_SIZE}px`,
             );
           } else if (
             item === `${defaultSize}px` ||
-            item === `${isIndexEditingMode ? 75 : SETTINGS_SIZE}px`
+            item === `${SETTINGS_SIZE}px`
           ) {
             gridTemplateColumns.push(item);
           } else {
@@ -738,7 +732,7 @@ class TableHeaderComponent extends React.Component<
                 getSubstring(item)
               }px`;
             } else if (isSettingColumn) {
-              const newSettingsSize = isIndexEditingMode ? 75 : SETTINGS_SIZE;
+              const newSettingsSize = SETTINGS_SIZE;
               gridTemplateColumns.push(`${newSettingsSize}px`);
             } else if (item !== `${SETTINGS_SIZE}px`) {
               const percent = (getSubstring(item) / oldWidth) * 100;
@@ -777,10 +771,7 @@ class TableHeaderComponent extends React.Component<
                 newItemWidth = item;
               } else {
                 newItemWidth = `${
-                  ((containerWidth -
-                    defaultSize -
-                    (isIndexEditingMode ? 75 : SETTINGS_SIZE)) *
-                    percent) /
+                  ((containerWidth - defaultSize - SETTINGS_SIZE) * percent) /
                   100
                 }px`;
               }
@@ -842,7 +833,6 @@ class TableHeaderComponent extends React.Component<
             gridTemplateColumnsWithoutOverfilling = this.distributionOverWidth(
               overWidth,
               gridTemplateColumns,
-              isIndexEditingMode,
             );
           }
 
@@ -859,7 +849,6 @@ class TableHeaderComponent extends React.Component<
               gridColumns,
               +activeColumnIndex,
               containerWidth,
-              isIndexEditingMode,
             );
             if (needReset) return;
           }
@@ -911,7 +900,6 @@ class TableHeaderComponent extends React.Component<
   distributionOverWidth = (
     overWidth: number,
     gridTemplateColumns: string[],
-    isIndexEditingMode: boolean,
   ) => {
     const newGridTemplateColumns: string[] = JSON.parse(
       JSON.stringify(gridTemplateColumns),
@@ -924,11 +912,7 @@ class TableHeaderComponent extends React.Component<
       columns.find((col) => col.defaultSize && col.enable)?.defaultSize || 0;
 
     newGridTemplateColumns.forEach((item, index) => {
-      const unfixedSize = checkingForUnfixedSize(
-        item,
-        defaultColumnSize,
-        isIndexEditingMode,
-      );
+      const unfixedSize = checkingForUnfixedSize(item, defaultColumnSize);
       if (!unfixedSize) return;
 
       const column = document.getElementById(`column_${index}`);
@@ -944,11 +928,7 @@ class TableHeaderComponent extends React.Component<
     const addWidth = overWidth / countColumns;
 
     newGridTemplateColumns.forEach((item, index) => {
-      const unfixedSize = checkingForUnfixedSize(
-        item,
-        defaultColumnSize,
-        isIndexEditingMode,
-      );
+      const unfixedSize = checkingForUnfixedSize(item, defaultColumnSize);
       if (!unfixedSize) return;
 
       const column = document.getElementById(`column_${index}`);
@@ -996,7 +976,6 @@ class TableHeaderComponent extends React.Component<
       columnInfoPanelStorageName,
       columns,
       infoPanelVisible,
-      isIndexEditingMode,
     } = this.props;
 
     if (!infoPanelVisible) localStorage.removeItem(columnStorageName);
@@ -1019,9 +998,7 @@ class TableHeaderComponent extends React.Component<
       columns.find((col) => col.defaultSize && col.enable)?.defaultSize || 0;
 
     const containerWidth =
-      container.clientWidth -
-      defaultColumnSize -
-      (isIndexEditingMode ? 75 : SETTINGS_SIZE);
+      container.clientWidth - defaultColumnSize - SETTINGS_SIZE;
 
     const firstColumnPercent = enableColumns.length > 0 ? 40 : 100;
     const percent = enableColumns.length > 0 ? 60 / enableColumns.length : 0;
@@ -1043,7 +1020,7 @@ class TableHeaderComponent extends React.Component<
       }
     }
 
-    str += `${isIndexEditingMode ? 75 : SETTINGS_SIZE}px`;
+    str += `${SETTINGS_SIZE}px`;
 
     if (container) container.style.gridTemplateColumns = str;
     if (this.headerRef && this.headerRef.current) {

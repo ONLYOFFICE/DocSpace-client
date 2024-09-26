@@ -148,7 +148,7 @@ const FilesTableRow = (props) => {
 
   const idWithFileExst = item.fileExst
     ? `${item.id}_${item.fileExst}`
-    : item.id ?? "";
+    : (item.id ?? "");
 
   const contextOptionProps = isIndexEditingMode
     ? {}
@@ -156,6 +156,11 @@ const FilesTableRow = (props) => {
         contextOptions: item.contextOptions,
         getContextModel,
       };
+
+  const changeIndex = (e, action) => {
+    e.stopPropagation();
+    onChangeIndex(action);
+  };
 
   return (
     <StyledDragAndDrop
@@ -181,7 +186,6 @@ const FilesTableRow = (props) => {
         key={item.id}
         fileContextClick={fileContextClick}
         onClick={isIndexEditingMode ? () => {} : onMouseClick}
-        onChangeIndex={onChangeIndex}
         isActive={isActive}
         isIndexEditingMode={isIndexEditingMode}
         inProgress={inProgress}
@@ -230,6 +234,8 @@ const FilesTableRow = (props) => {
             element={element}
             dragStyles={dragStyles}
             selectionProp={selectionProp}
+            isIndexEditingMode={isIndexEditingMode}
+            changeIndex={changeIndex}
             {...props}
           />
         )}

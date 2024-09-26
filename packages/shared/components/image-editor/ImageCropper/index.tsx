@@ -30,9 +30,8 @@ import throttle from "lodash/throttle";
 import AvatarEditor, { Position } from "react-avatar-editor";
 
 import ZoomMinusReactSvgUrl from "PUBLIC_DIR/images/zoom-minus.react.svg?url";
-import ZoomPlusReactSvgUrl from "PUBLIC_DIR/images/zoom-plus.react.svg?url";
-import IconCropperGridSvgUrl from "PUBLIC_DIR/images/icon-cropper-grid.svg?url";
-import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
+import ZoomPlusReactSvgUrl from "PUBLIC_DIR/images/zoom-plus-test.react.svg?url";
+import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
 import { Slider } from "../../slider";
 import { IconButton } from "../../icon-button";
@@ -48,8 +47,11 @@ const ImageCropper = ({
   setPreviewImage,
   isDisabled,
   disableImageRescaling,
+  onChangeFile,
+  areaCropperImage,
 }: ImageCropperProps) => {
   const editorRef = React.useRef<null | AvatarEditor>(null);
+  const inputFilesElement = React.useRef(null);
   const setEditorRef = (editor: AvatarEditor) => (editorRef.current = editor);
 
   const handlePositionChange = (position: Position) => {
@@ -81,10 +83,15 @@ const ImageCropper = ({
     handleSliderChange(undefined, image.zoom >= 1.5 ? image.zoom - 0.5 : 1);
   };
 
-  const handleDeleteImage = () => {
+  const handleChangeImage = (e) => {
     if (isDisabled) return;
+    onChangeFile(e);
+  };
 
-    setUploadedFile();
+  const onInputClick = () => {
+    if (inputFilesElement.current) {
+      inputFilesElement.current.value = null;
+    }
   };
 
   const handleImageChange = throttle(() => {
@@ -102,7 +109,7 @@ const ImageCropper = ({
   useEffect(() => {
     handleImageChange();
     return () => {
-      setPreviewImage("");
+      // setPreviewImage("");
     };
   }, [handleImageChange, image, setPreviewImage]);
 
@@ -112,7 +119,7 @@ const ImageCropper = ({
       disableImageRescaling={disableImageRescaling}
     >
       <div className="icon_cropper-crop_area">
-        <ReactSVG className="icon_cropper-grid" src={IconCropperGridSvgUrl} />
+        <ReactSVG className="icon_cropper-grid" src={areaCropperImage} />
         <AvatarEditor
           className="icon_cropper-avatar-editor"
           ref={setEditorRef}
@@ -125,7 +132,7 @@ const ImageCropper = ({
           border={0}
           rotate={0}
           borderRadius={108}
-          style={{ width: "216px", height: "216px" }}
+          style={{ width: "368px", height: "367px" }}
           onPositionChange={handlePositionChange}
           onImageReady={handleImageChange}
           disableHiDPIScaling={false}
@@ -134,13 +141,23 @@ const ImageCropper = ({
       </div>
       <div
         className="icon_cropper-delete_button"
-        onClick={handleDeleteImage}
-        title={t("Common:Delete")}
+        onClick={() => inputFilesElement.current.click()}
+        title={t("Common:ChooseAnother")}
       >
-        <ReactSVG src={TrashReactSvgUrl} />
+        <ReactSVG src={RefreshReactSvgUrl} />
         <div className="icon_cropper-delete_button-text">
-          {t("Common:Delete")}
+          {t("Common:ChooseAnother")}
         </div>
+        <input
+          id="customFileInput"
+          className="custom-file-input"
+          type="file"
+          onChange={handleChangeImage}
+          accept="image/png, image/jpeg"
+          onClick={onInputClick}
+          ref={inputFilesElement}
+          style={{ display: "none" }}
+        />
       </div>
 
       {typeof uploadedFile !== "string" &&
@@ -149,7 +166,7 @@ const ImageCropper = ({
           <div className="icon_cropper-zoom-container">
             <IconButton
               className="icon_cropper-zoom-container-button"
-              size={16}
+              size={20}
               onClick={handleZoomOutClick}
               iconName={ZoomMinusReactSvgUrl}
               isFill
@@ -168,7 +185,7 @@ const ImageCropper = ({
             />
             <IconButton
               className="icon_cropper-zoom-container-button"
-              size={16}
+              size={20}
               onClick={handleZoomInClick}
               iconName={ZoomPlusReactSvgUrl}
               isFill

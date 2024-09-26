@@ -80,6 +80,7 @@ const CreateRoomDialog = ({
       y: 0.5,
       zoom: 1,
     },
+    withCover: false,
   };
 
   const [roomParams, setRoomParams] = useState({ ...startRoomParams });

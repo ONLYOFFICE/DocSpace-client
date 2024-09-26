@@ -2275,11 +2275,12 @@ const Dark: TTheme = {
     iconCropper: {
       gridColor: black,
       deleteButton: {
-        background: black,
-        hoverBackground: black,
+        background: grayDarkMid,
+        hoverBackground: grayDarkStrong,
         borderColor: gray,
         hoverBorderColor: lightDarkGrayHover,
-        color: grayDark,
+        hoverColor: white,
+        color: darkGrayDark,
         iconColor: darkGrayDark,
       },
     },
@@ -3069,6 +3070,7 @@ const Dark: TTheme = {
 
   itemIcon: {
     borderColor: grayDarkStrong,
+    editIconColor: grayDarkMid,
   },
 
   invitePage: {
@@ -3132,6 +3134,7 @@ const Dark: TTheme = {
   roomIcon: {
     backgroundArchive: white,
     opacityBackground: "0.1",
+    plusIcon: black,
   },
 
   plugins: {
@@ -3199,6 +3202,17 @@ const Dark: TTheme = {
 
   publicRoom: {
     border: `1px solid ${lightGraySelected}`,
+  },
+
+  logoCover: {
+    selectColor: {
+      backgroundColor: lightDarkGrayHover,
+    },
+    textColor: darkGrayDark,
+    selectedBackgroundColor: grayDarkMid,
+    selectedBorderColor: grayDarkMid,
+    backgroundColor: black,
+    borderColor: grayDarkStrong,
   },
 };
 

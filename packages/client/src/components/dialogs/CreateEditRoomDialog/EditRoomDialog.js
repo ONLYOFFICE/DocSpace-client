@@ -42,6 +42,7 @@ const EditRoomDialog = ({
   fetchedRoomParams,
   fetchedTags,
   fetchedImage,
+  cover,
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [isValidTitle, setIsValidTitle] = useState(true);
@@ -190,8 +191,9 @@ const EditRoomDialog = ({
           scale
           onClick={onEditRoom}
           isDisabled={
-            isWrongTitle ||
-            compareRoomParams(prevRoomParams.current, roomParams)
+            !cover &&
+            (isWrongTitle ||
+              compareRoomParams(prevRoomParams.current, roomParams))
           }
           isLoading={isLoading}
         />

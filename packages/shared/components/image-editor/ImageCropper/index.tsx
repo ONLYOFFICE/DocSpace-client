@@ -30,7 +30,7 @@ import throttle from "lodash/throttle";
 import AvatarEditor, { Position } from "react-avatar-editor";
 
 import ZoomMinusReactSvgUrl from "PUBLIC_DIR/images/zoom-minus.react.svg?url";
-import ZoomPlusReactSvgUrl from "PUBLIC_DIR/images/zoom-plus-test.react.svg?url";
+import ZoomPlusReactSvgUrl from "PUBLIC_DIR/images/zoom-plus.react.svg?url";
 import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
 import { Slider } from "../../slider";

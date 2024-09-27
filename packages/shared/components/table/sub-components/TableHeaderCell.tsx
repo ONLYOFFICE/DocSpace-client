@@ -55,6 +55,7 @@ const TableHeaderCell = ({
     withTagRef,
     default: isDefault,
     checkbox,
+    isShort,
   } = column;
 
   const isActive = (sortBy && column.sortBy === sortBy) || active;
@@ -82,6 +83,7 @@ const TableHeaderCell = ({
       data-default={isDefault}
       data-enable={enable}
       data-min-width={minWidth}
+      data-short-colum={isShort}
       data-default-size={defaultSize}
       sortingVisible={sortingVisible}
       ref={tagRef}
@@ -120,6 +122,7 @@ const TableHeaderCell = ({
       id={`column_${index}`}
       data-enable={enable}
       data-default={isDefault}
+      data-short-colum={isShort}
       data-min-width={minWidth}
       data-default-size={defaultSize}
       sortingVisible={sortingVisible}

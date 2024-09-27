@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useRef, useEffect, useState } from "react";
+import { useRef } from "react";
 import { withTranslation } from "react-i18next";
 
 import { getTitleWithoutExtension } from "@docspace/shared/utils";
@@ -35,16 +35,13 @@ import Planet12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/planet.react.svg?url
 import Camera10ReactSvgUrl from "PUBLIC_DIR/images/icons/10/cover.camera.react.svg?url";
 import SearchIconReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
 
-import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
-
-import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { StyledTitle } from "../../../styles/common";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import RoomsContextBtn from "./context-btn";
-import { FolderType, RoomsType } from "@docspace/shared/enums";
-import { toastr } from "@docspace/shared/components/toast";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
+import CalendarComponent from "../Calendar";
+import { FolderType, RoomsType } from "@docspace/shared/enums";
 
 import Search from "../../Search";
 
@@ -62,8 +59,12 @@ const RoomsItemHeader = ({
   isArchive,
   isShared,
   showSearchBlock,
+  setCalendarDay,
+  openHistory,
   setShowSearchBlock,
   roomType,
+  setIsScrollLocked,
+  i18n,
   displayFileExtension,
   getLogoCoverModel,
   onChangeFile,
@@ -143,7 +144,14 @@ const RoomsItemHeader = ({
         />
       </div>
 
-      <Text className="text" title={title} dir="auto">
+      <Text
+        fontWeight={600}
+        fontSize="16px"
+        className="info-panel_header-text"
+        title={title}
+        dir="auto"
+        truncate
+      >
         {title}
         {isFile && displayFileExtension && (
           <span className="file-extension">{selection.fileExst}</span>
@@ -173,7 +181,14 @@ const RoomsItemHeader = ({
             size={16}
           />
         )}
-
+        {openHistory && (
+          <CalendarComponent
+            setCalendarDay={setCalendarDay}
+            roomCreationDate={selection.created}
+            setIsScrollLocked={setIsScrollLocked}
+            locale={i18n.language}
+          />
+        )}
         <RoomsContextBtn
           selection={selection}
           itemTitleRef={itemTitleRef}
@@ -192,6 +207,7 @@ export default inject(
     filesStore,
     infoPanelStore,
     filesSettingsStore,
+    publicRoomStore,
     settingsStore,
     avatarEditorDialogStore,
   }) => {
@@ -201,10 +217,13 @@ export default inject(
       setIsMobileHidden,
       showSearchBlock,
       setShowSearchBlock,
+      setCalendarDay,
+      setIsScrollLocked,
       updateInfoPanelSelection,
     } = infoPanelStore;
 
     const { displayFileExtension } = filesSettingsStore;
+    const { externalLinks } = publicRoomStore;
     const { setCoverSelection } = dialogsStore;
 
     const selection = infoPanelSelection.length > 1 ? null : infoPanelSelection;
@@ -234,6 +253,10 @@ export default inject(
       setSelection: filesStore.setSelection,
       setBufferSelection: filesStore.setBufferSelection,
       isArchive,
+      hasLinks: externalLinks.length,
+      setCalendarDay,
+      roomType,
+      setIsScrollLocked,
       isShared: selection?.shared,
       roomType,
 

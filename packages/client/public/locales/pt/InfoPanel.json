@@ -49,7 +49,7 @@
   "RoomGroupRemove": "Grupo removido",
   "RoomLogoChanged": "Ícone alterado",
   "RoomRemoveUser": "Usuário removido.",
-  "RoomRenamed": "Sala <1>«{{oldRoomTitle}}»</1> renomeada para <1>«{{roomTitle}}»</1>",
+  "RoomRenamed": "Sala <1>«{{oldRoomTitle}}»</1> renomeada para <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Ver os detalhes das salas aqui",
   "RoomUpdateAccess": "foi assinado",
   "SelectedUsers": "Contas selecionadas",

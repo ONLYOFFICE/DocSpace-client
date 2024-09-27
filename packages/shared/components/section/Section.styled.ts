@@ -49,7 +49,7 @@ const StyledScrollbar = styled(Scrollbar)<{ $isScrollLocked?: boolean }>`
   ${({ $isScrollLocked }) =>
     $isScrollLocked &&
     css`
-      & .scroll-wrapper > .scroller {
+      &:first-child > .scroll-wrapper > .scroller {
         overflow: hidden !important;
         margin-inline-end: -1px !important;
       }

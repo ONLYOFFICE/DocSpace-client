@@ -418,6 +418,9 @@ class FilesSettingsStore {
         case RoomsType.PublicRoom:
           path = "public.svg";
           break;
+        case RoomsType.VirtualDataRoom:
+          path = "virtual.data.svg";
+          break;
         case RoomsType.FormRoom:
           path = "form.svg";
       }

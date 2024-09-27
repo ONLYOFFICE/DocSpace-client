@@ -642,6 +642,8 @@ class Tile extends React.PureComponent {
       icon: children[0].props.item.icon,
       title: children[0].props.item.title,
       color: children[0].props.item.logo?.color,
+      cover: children[0].props.item.logo?.cover,
+      logo: children[0].props.item.logo?.medium,
     };
 
     const title = item.isFolder

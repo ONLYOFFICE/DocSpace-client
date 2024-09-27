@@ -238,10 +238,10 @@ export default inject(
     const {
       filesList,
       hasMoreFiles,
-      filterTotal,
+      filter,
       fetchMoreFiles,
       getCountTilesInRow,
-      roomsFilterTotal,
+      roomsFilter,
     } = filesStore;
 
     const { isLoading } = clientLoadingStore;
@@ -255,7 +255,7 @@ export default inject(
     return {
       filesList,
       hasMoreFiles,
-      filterTotal: isRooms ? roomsFilterTotal : filterTotal,
+      filterTotal: isRooms ? roomsFilter.total : filter.total,
       fetchMoreFiles,
       filesLength,
       getCountTilesInRow,

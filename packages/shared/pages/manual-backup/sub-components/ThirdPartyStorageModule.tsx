@@ -110,23 +110,14 @@ const ThirdPartyStorageModule = ({
 }: ThirdPartyStorageModuleProps) => {
   const { t } = useTranslation(["Settings", "Common"]);
 
-  const parameters = useMemo((): Required<ReturnType<typeof getOptions>> => {
-    if (thirdPartyStorage && thirdPartyStorage.length > 0) {
-      return getOptions(thirdPartyStorage) ?? DefaultParameters;
-    }
+  const { comboBoxOptions, storagesInfo, ...parameters } =
+    useMemo((): NonNullable<ReturnType<typeof getOptions>> => {
+      if (thirdPartyStorage && thirdPartyStorage.length > 0) {
+        return getOptions(thirdPartyStorage) ?? DefaultParameters;
+      }
 
-    return DefaultParameters;
-  }, [thirdPartyStorage]);
-  const comboBoxOptions = useMemo(() => {
-    if (parameters) return parameters.comboBoxOptions;
-
-    return [];
-  }, [parameters]);
-  const storagesInfo = useMemo(() => {
-    if (parameters) return parameters.storagesInfo;
-
-    return {};
-  }, [parameters]);
+      return DefaultParameters;
+    }, [thirdPartyStorage]);
 
   const [selectedStorageTitle, setSelectedStorageTitle] = useState<string>(
     () => {
@@ -134,13 +125,13 @@ const ThirdPartyStorageModule = ({
         "LocalCopyThirdPartyStorageType",
       );
 
-      return storageTitle ?? parameters?.selectedStorageTitle ?? "";
+      return storageTitle ?? parameters.selectedStorageTitle;
     },
   );
 
   const [selectedId, setSelectedId] = useState<string>(() => {
     const storageId = getFromLocalStorage<string>("LocalCopyStorage");
-    return storageId ?? parameters?.selectedStorageId ?? "";
+    return storageId ?? parameters.selectedStorageId;
   });
 
   const [isStartCopy, setIsStartCopy] = useState(false);
@@ -178,6 +169,7 @@ const ThirdPartyStorageModule = ({
 
       setIsStartCopy(false);
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error(error);
     }
   };

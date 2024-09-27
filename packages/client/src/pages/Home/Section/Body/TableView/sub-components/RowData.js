@@ -80,6 +80,7 @@ const RowDataComponent = (props) => {
 
   const indexComponentNode = (
     <div
+      className="index-arrows-container"
       style={
         lastColumn === "Name"
           ? { display: "flex", justifyContent: "flex-end", flexGrow: "1" }

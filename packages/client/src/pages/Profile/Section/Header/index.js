@@ -116,7 +116,7 @@ const Header = (props) => {
         key: "edit-photo",
         label: t("Profile:EditPhoto"),
         onClick: () => setChangeAvatarVisible(true),
-        disabled: false,
+        disabled: true,
         icon: ImageReactSvgUrl,
       },
       { key: "separator", isSeparator: true },

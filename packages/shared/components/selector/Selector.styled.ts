@@ -143,6 +143,10 @@ const StyledBody = styled.div<{
   .selector_info-bar {
     margin: 0px 20px 16px;
   }
+
+  .selector-body-scroll .scroll-body {
+    padding-bottom: 12px !important;
+  }
 `;
 
 const StyledSelectAll = styled.div`

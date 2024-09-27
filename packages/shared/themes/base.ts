@@ -2283,7 +2283,7 @@ export const getBaseTheme = () => {
       },
 
       iconCropper: {
-        gridColor: black,
+        gridColor: grayStrong,
         deleteButton: {
           background: grayLight,
           hoverBackground: lightGrayHover,
@@ -3082,6 +3082,7 @@ export const getBaseTheme = () => {
 
     itemIcon: {
       borderColor: grayLightMid,
+      editIconColor: grayLightMid,
     },
 
     invitePage: {
@@ -3145,6 +3146,7 @@ export const getBaseTheme = () => {
     roomIcon: {
       backgroundArchive: gray,
       opacityBackground: "1",
+      plusIcon: white,
     },
 
     plugins: {
@@ -3212,6 +3214,18 @@ export const getBaseTheme = () => {
 
     publicRoom: {
       border: `1px solid ${lightGraySelected}`,
+    },
+
+    logoCover: {
+      selectColor: {
+        backgroundColor: lightGrayHover,
+      },
+
+      textColor: lightGrayDark,
+      selectedBackgroundColor: grayLightMid,
+      selectedBorderColor: grayLightMid,
+      backgroundColor: white,
+      borderColor: grayLightMid,
     },
   };
 };

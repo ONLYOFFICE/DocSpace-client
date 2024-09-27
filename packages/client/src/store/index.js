@@ -82,6 +82,8 @@ import InfoPanelStore from "./InfoPanelStore";
 import CampaignsStore from "./CampaignsStore";
 import EditGroupStore from "./EditGroupStore";
 
+import AvatarEditorDialogStore from "./AvatarEditorDialogStore";
+
 import OAuthStore from "./OAuthStore";
 
 const oauthStore = new OAuthStore(userStore);
@@ -309,6 +311,12 @@ const campaignsStore = new CampaignsStore(settingsStore, userStore);
 
 const editGroupStore = new EditGroupStore(peopleStore);
 
+const avatarEditorDialogStore = new AvatarEditorDialogStore(
+  filesStore,
+  settingsStore,
+  infoPanelStore,
+);
+
 const store = {
   authStore,
   userStore,
@@ -365,6 +373,7 @@ const store = {
   storageManagement,
   campaignsStore,
   editGroupStore,
+  avatarEditorDialogStore,
 };
 
 export default store;

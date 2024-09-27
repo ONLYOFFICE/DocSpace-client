@@ -67,7 +67,7 @@ import ShareFolderDialog from "./ShareFolderDialog";
 import EditGroupMembersDialog from "./EditGroupMembersDialog";
 import ChangeStorageQuotaDialog from "./ChangeStorageQuotaDialog";
 import DeleteGroupDialog from "./DeleteGroupDialog";
-
+import RoomLogoCoverDialog from "./RoomLogoCoverDialog";
 export {
   EmptyTrashDialog,
   DeleteDialog,
@@ -112,4 +112,5 @@ export {
   ChangeQuotaDialog,
   ChangeStorageQuotaDialog,
   DeleteGroupDialog,
+  RoomLogoCoverDialog,
 };

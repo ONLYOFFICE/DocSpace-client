@@ -75,6 +75,11 @@ const EditRoomEvent = ({
 
   defaultRoomsQuota,
   isDefaultRoomsQuotaSet,
+  onSaveRoomLogo,
+  uploadedFile,
+  updateRoom,
+  cover,
+  setRoomLogoCover,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
 
@@ -111,21 +116,6 @@ const EditRoomEvent = ({
     }),
   };
 
-  const updateRoom = (oldRoom, newRoom) => {
-    // After rename of room with providerKey, it's id value changes too
-    if (oldRoom.providerKey) {
-      let index = getFolderIndex(oldRoom.id);
-
-      if (index === -1) {
-        index = getFolderIndex(newRoom.id);
-      }
-
-      return updateFolder(index, newRoom);
-    }
-
-    setFolder(newRoom);
-  };
-
   const onSave = async (roomParams) => {
     const quotaLimit = roomParams?.quota || item.quotaLimit;
 
@@ -143,9 +133,6 @@ const EditRoomEvent = ({
     const tags = roomParams.tags.map((tag) => tag.name);
     const newTags = roomParams.tags.filter((t) => t.isNew).map((t) => t.name);
     const removedTags = startTags.filter((sT) => !tags.includes(sT));
-
-    const uploadLogoData = new FormData();
-    uploadLogoData.append(0, roomParams.icon.uploadedFile);
 
     let room = null;
 
@@ -196,7 +183,9 @@ const EditRoomEvent = ({
         room = await removeLogoFromRoom(room.id);
       }
 
-      if (roomParams.iconWasUpdated && roomParams.icon.uploadedFile) {
+      if (cover) {
+        setRoomLogoCover(room.id);
+      } else if (uploadedFile) {
         updateRoom(item, {
           ...room,
           logo: { big: item.logo.original },
@@ -204,34 +193,7 @@ const EditRoomEvent = ({
 
         addActiveItems(null, [room.id]);
 
-        const response = await uploadRoomLogo(uploadLogoData);
-        const url = URL.createObjectURL(roomParams.icon.uploadedFile);
-        const img = new Image();
-
-        const promise = new Promise((resolve) => {
-          img.onload = async () => {
-            const { x, y, zoom } = roomParams.icon;
-
-            try {
-              room = await addLogoToRoom(room.id, {
-                tmpFile: response.data,
-                ...calculateRoomLogoParams(img, x, y, zoom),
-              });
-            } catch (e) {
-              toastr.error(e);
-            }
-
-            !withPaging && updateRoom(item, room);
-            // updateInfoPanelSelection();
-            URL.revokeObjectURL(img.src);
-            setActiveFolders([]);
-            resolve();
-          };
-
-          img.src = url;
-        });
-
-        await promise;
+        await onSaveRoomLogo(room.id, roomParams.icon, item, true);
       } else {
         !withPaging &&
           updateRoom(item, {
@@ -255,7 +217,7 @@ const EditRoomEvent = ({
           updateLogoPathsCacheBreaker();
       }
 
-      updateInfoPanelSelection(room);
+      //updateInfoPanelSelection(room);
       setIsLoading(false);
       onClose();
     }
@@ -305,6 +267,7 @@ const EditRoomEvent = ({
       fetchedTags={fetchedTags}
       fetchedImage={fetchedImage}
       isLoading={isLoading}
+      cover={cover}
     />
   );
 };
@@ -320,6 +283,7 @@ export default inject(
     filesSettingsStore,
     infoPanelStore,
     currentQuotaStore,
+    avatarEditorDialogStore,
   }) => {
     const {
       editRoom,
@@ -334,7 +298,10 @@ export default inject(
       removeLogoFromRoom,
       addActiveItems,
       setActiveFolders,
+      updateRoom,
     } = filesStore;
+
+    const { uploadedFile, onSaveRoomLogo } = avatarEditorDialogStore;
 
     const { createTag, fetchTags } = tagsStore;
     const {
@@ -346,7 +313,8 @@ export default inject(
     } = selectedFolderStore;
     const { updateCurrentFolder, changeRoomOwner } = filesActionsStore;
     const { getThirdPartyIcon } = filesSettingsStore.thirdPartyStore;
-    const { setCreateRoomDialogVisible } = dialogsStore;
+    const { setCreateRoomDialogVisible, cover, setRoomLogoCover } =
+      dialogsStore;
     const { withPaging } = settingsStore;
     const { updateInfoPanelSelection } = infoPanelStore;
 
@@ -388,6 +356,12 @@ export default inject(
 
       updateInfoPanelSelection,
       changeRoomOwner,
+
+      setRoomLogoCover,
+      uploadedFile,
+      onSaveRoomLogo,
+      updateRoom,
+      cover,
     };
   },
 )(observer(EditRoomEvent));

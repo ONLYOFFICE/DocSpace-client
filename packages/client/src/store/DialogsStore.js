@@ -34,6 +34,16 @@ import {
 import { makeAutoObservable, runInAction } from "mobx";
 import { Events } from "@docspace/shared/enums";
 
+import TrashIconSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
+import PenSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
+import UploadSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
+
+import {
+  getRoomCovers,
+  setRoomCover,
+  removeLogoFromRoom,
+} from "@docspace/shared/api/rooms";
+
 class DialogsStore {
   authStore;
   treeFoldersStore;
@@ -79,6 +89,7 @@ class DialogsStore {
   restoreAllPanelVisible = false;
   archiveDialogVisible = false;
   restoreRoomDialogVisible = false;
+  roomLogoCoverDialogVisible = false;
   eventDialogVisible = false;
   deleteLinkDialogVisible = false;
 
@@ -130,6 +141,31 @@ class DialogsStore {
   invitePaidUsersCount = 0;
   isNewQuotaItemsByCurrentUser = false;
 
+  covers = null;
+  cover = null;
+  coverSelection = null;
+
+  roomCoverDialogProps = {
+    icon: null,
+    color: null,
+    title: null,
+    withoutIcon: true,
+    withSelection: true,
+    customColor: null,
+  };
+
+  editRoomDialogProps = {
+    visible: false,
+    item: null,
+    onClose: null,
+  };
+
+  createRoomDialogProps = {
+    title: "",
+    visible: false,
+    onClose: null,
+  };
+
   constructor(
     authStore,
     treeFoldersStore,
@@ -147,6 +183,15 @@ class DialogsStore {
     this.versionHistoryStore = versionHistoryStore;
     this.infoPanelStore = infoPanelStore;
   }
+
+  setEditRoomDialogProps = (props) => {
+    this.editRoomDialogProps = props;
+  };
+
+  setCreateRoomDialogProps = (props) => {
+    this.createRoomDialogProps = props;
+  };
+
   setInviteLanguage = (culture) => {
     this.culture = culture;
   };
@@ -578,6 +623,89 @@ class DialogsStore {
 
   setWarningQuotaDialogVisible = (visible) => {
     this.warningQuotaDialogVisible = visible;
+  };
+
+  setRoomLogoCoverDialogVisible = (visible) => {
+    this.roomLogoCoverDialogVisible = visible;
+  };
+
+  setCovers = (covers) => {
+    this.covers = covers;
+  };
+
+  setRoomCoverDialogProps = (props) => {
+    this.roomCoverDialogProps = props;
+  };
+
+  setCover = (color, icon) => {
+    if (!color) {
+      return (this.cover = null);
+    }
+
+    const newColor = color.replace("#", "");
+    const newIcon = typeof icon === "string" ? "" : icon.id;
+    this.cover = { color: newColor, cover: newIcon };
+
+    this.setRoomCoverDialogProps({
+      ...this.roomCoverDialogProps,
+      icon: null,
+      color: null,
+      withoutIcon: true,
+    });
+  };
+
+  setCoverSelection = (selection) => {
+    this.coverSelection = selection;
+  };
+
+  setRoomLogoCover = async (roomId) => {
+    const res = await setRoomCover(
+      roomId || this.coverSelection?.id,
+      this.cover,
+    );
+    this.infoPanelStore.updateInfoPanelSelection(res);
+    this.setRoomCoverDialogProps({
+      ...this.roomCoverDialogProps,
+      withSelection: true,
+    });
+    this.setCover();
+  };
+
+  deleteRoomLogo = async () => {
+    if (!this.coverSelection) return;
+    const res = await removeLogoFromRoom(this.coverSelection.id);
+    this.infoPanelStore.updateInfoPanelSelection(res);
+  };
+
+  getLogoCoverModel = (t, hasImage, onDelete) => {
+    return [
+      {
+        label: t("RoomLogoCover:UploadPicture"),
+        icon: UploadSvgUrl,
+        key: "upload",
+        onClick: (ref) => ref.current.click(),
+      },
+
+      hasImage
+        ? {
+            label: t("Common:Delete"),
+            icon: TrashIconSvgUrl,
+            key: "delete",
+            onClick: onDelete ? onDelete() : () => this.deleteRoomLogo(),
+          }
+        : {
+            label: t("RoomLogoCover:CustomizeCover"),
+            icon: PenSvgUrl,
+            key: "cover",
+            onClick: () => this.setRoomLogoCoverDialogVisible(true),
+          },
+    ];
+  };
+
+  getCovers = async () => {
+    const response = await getRoomCovers();
+
+    this.setCovers(response);
   };
 }
 

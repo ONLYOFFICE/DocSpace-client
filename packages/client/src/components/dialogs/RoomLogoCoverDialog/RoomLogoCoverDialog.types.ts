@@ -24,62 +24,54 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import Dropzone from "./Dropzone";
-import ImageCropper from "./ImageCropper";
+import { Dispatch, SetStateAction } from "react";
+import type { TTranslation } from "@docspace/shared/types";
 
-import { ImageEditorProps } from "./ImageEditor.types";
-import AvatarPreview from "./AvatarPreview";
+export interface ICover {
+  data: string;
+  id: string;
+}
 
-const ImageEditor = ({
-  t,
-  image,
-  onChangeImage,
-  Preview,
-  setPreview,
-  isDisabled,
-  classNameWrapperImageCropper,
-  className,
-  disableImageRescaling,
-  areaCropperImage,
-  maxImageSize,
-  onChangeFile,
-}: ImageEditorProps) => {
-  const setUploadedFile = (f?: File) => {
-    onChangeImage({ ...image, uploadedFile: f });
-  };
+interface ILogo {
+  color: string;
+  cover: ICover;
+}
 
-  const isDefaultAvatar =
-    typeof image.uploadedFile === "string" &&
-    image.uploadedFile.includes("default_user_photo");
+export interface CoverDialogProps {
+  isBaseTheme: boolean;
+  setRoomLogoCover: VoidFunction;
+  covers?: ICover[] | undefined;
+  getCovers: VoidFunction;
+  setRoomLogoCoverDialogVisible: (value: boolean) => void;
+}
 
-  return (
-    <div className={className}>
-      {image.uploadedFile && !isDefaultAvatar && (
-        <div className={classNameWrapperImageCropper}>
-          <ImageCropper
-            t={t}
-            image={image}
-            onChangeImage={onChangeImage}
-            uploadedFile={image.uploadedFile}
-            setUploadedFile={setUploadedFile}
-            setPreviewImage={setPreview}
-            isDisabled={isDisabled}
-            disableImageRescaling={disableImageRescaling}
-            onChangeFile={onChangeFile}
-            areaCropperImage={areaCropperImage}
-          />
-          {Preview}
-        </div>
-      )}
-      {/* <Dropzone
-        t={t}
-        setUploadedFile={setUploadedFile}
-        isDisabled={isDisabled}
-        maxImageSize={maxImageSize}
-      /> */}
-    </div>
-  );
-};
+export interface RoomLogoCoverProps {
+  isBaseTheme?: boolean;
+  logo?: ILogo;
+  title?: string;
+  covers?: ICover[] | undefined;
+  setCover?: (color: string, icon: string | ICover) => void;
+}
 
-export { ImageEditor, AvatarPreview };
+export interface CustomLogoProps {
+  color?: string;
+  icon?: string | ICover;
+  withoutIcon: boolean;
+  isBaseTheme: boolean;
+  roomTitle: string;
+}
+
+export interface SelectColorProps {
+  t: TTranslation;
+  logoColors: string[];
+  selectedColor: string;
+  onChangeColor: Dispatch<SetStateAction<string>>;
+}
+
+export interface SelectIconProps {
+  t: TTranslation;
+  withoutIcon: boolean;
+  setWithoutIcon: Dispatch<SetStateAction<boolean>>;
+  setIcon: Dispatch<SetStateAction<string | ICover>>;
+  covers?: ICover[];
+}

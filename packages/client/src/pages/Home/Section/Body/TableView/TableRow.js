@@ -83,6 +83,9 @@ const FilesTableRow = (props) => {
       fileExst={item.fileExst}
       isRoom={item.isRoom}
       title={item.title}
+      showDefault={
+        !(!!item?.logo?.cover || !!item?.logo?.medium) && item.isRoom
+      }
       logo={item.logo}
       color={item.logo?.color}
       isArchive={item.isArchive}
@@ -139,7 +142,7 @@ const FilesTableRow = (props) => {
 
   const idWithFileExst = item.fileExst
     ? `${item.id}_${item.fileExst}`
-    : item.id ?? "";
+    : (item.id ?? "");
 
   return (
     <StyledDragAndDrop

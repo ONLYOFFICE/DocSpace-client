@@ -14,7 +14,6 @@
   "FileManagement": "파일 관리",
   "InterfaceTheme": "인터페이스 테마",
   "LightTheme": "라이트 테마",
-  "LogoutActiveConnection": "활성 연결에서 로그아웃",
   "LogoutAllActiveSessionsDescription": "현재 사용 중이므로 이 연결을 제외한 모든 활성 연결이 로그아웃됩니다.",
   "LogoutDescription": "참고. 현재 사용 중이므로 이 연결을 제외한 모든 활성 연결이 로그아웃됩니다.",
   "LogoutFrom": "{{platform}} {{browser}}에서 로그아웃하시겠습니까?",

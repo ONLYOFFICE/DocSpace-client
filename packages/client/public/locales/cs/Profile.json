@@ -14,7 +14,6 @@
   "FileManagement": "Správa souborů",
   "InterfaceTheme": "Vzhled prostředí",
   "LightTheme": "Světlý motiv",
-  "LogoutActiveConnection": "Odhlášení z aktivního připojení",
   "LogoutAllActiveSessionsDescription": "Všechna aktivní připojení kromě tohoto připojení budou odhlášena, protože jsou právě používána.",
   "LogoutDescription": "Poznámka. Všechna aktivní připojení kromě tohoto připojení budou odhlášena, protože jsou právě používána.",
   "LogoutFrom": "Odhlášení z {{platform}} {{browser}}?",

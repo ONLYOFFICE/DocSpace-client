@@ -14,7 +14,6 @@
   "FileManagement": "ファイル管理",
   "InterfaceTheme": "インターフェイスのテーマ",
   "LightTheme": "ライトのテーマ",
-  "LogoutActiveConnection": "アクティブな接続からログアウトする",
   "LogoutAllActiveSessionsDescription": "この接続以外の接続は、現在使用中のため、ログアウトされます。",
   "LogoutDescription": "ご注意：この接続以外の接続は、現在使用中のため、ログアウトされます。",
   "LogoutFrom": "{{platform}} {{browser}} からログアウトしますか？",

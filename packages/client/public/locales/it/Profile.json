@@ -14,7 +14,6 @@
   "FileManagement": "Gestione dei file",
   "InterfaceTheme": "Tema dell'interfaccia",
   "LightTheme": "Tema chiaro",
-  "LogoutActiveConnection": "Esci dalla connessione attiva",
   "LogoutAllActiveSessionsDescription": "Tutte le connessioni attive tranne questa che è attualmente in uso, verranno disconnesse.",
   "LogoutDescription": "Ti preghiamo di notare. Tutte le connessioni attive tranne questa connessione verranno disconnesse, poiché è attualmente in uso.",
   "LogoutFrom": "Vuoi uscire da {{platform}} {{browser}}?",

@@ -14,7 +14,6 @@
   "FileManagement": "Ֆայլերի կառավարում",
   "InterfaceTheme": "Միջերեսի ոճ",
   "LightTheme": "Բաց ոճ",
-  "LogoutActiveConnection": "Դուրս եկեք ակտիվ կապից",
   "LogoutAllActiveSessionsDescription": "Բոլոր ակտիվ կապերը, բացի այս կապից, դուրս կգրվեն, քանի որ այն ներկայումս օգտագործվում է:",
   "LogoutDescription": "Նշում. Բոլոր ակտիվ կապերը, բացի այս կապից, դուրս կգրվեն, քանի որ այն ներկայումս օգտագործվում է:",
   "LogoutFrom": "Դուրս գալ {{platform}} {{browser}}-ից:",

@@ -14,7 +14,6 @@
   "FileManagement": "Failu pārvaldība",
   "InterfaceTheme": "Interfeisa dizains",
   "LightTheme": "Gaišs dizains",
-  "LogoutActiveConnection": "Izrakstīties no aktīvā savienojuma",
   "LogoutAllActiveSessionsDescription": "Visi aktīvie savienojumi, izņemot šo savienojumu, tiks izrakstīti, jo tas pašlaik tiek lietots.",
   "LogoutDescription": "Piezīme. Visi aktīvie savienojumi, izņemot šo savienojumu, tiks izrakstīti, jo tas pašlaik tiek lietots.",
   "LogoutFrom": "Vai izrakstīties no {{platform}} {{browser}}?",

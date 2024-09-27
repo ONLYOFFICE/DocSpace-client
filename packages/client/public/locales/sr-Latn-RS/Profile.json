@@ -14,7 +14,6 @@
   "FileManagement": "Upravljanje datotekama",
   "InterfaceTheme": "Tema interfejsa",
   "LightTheme": "Svetla tema",
-  "LogoutActiveConnection": "Odjavi se sa aktivnih konekcija",
   "LogoutAllActiveSessionsDescription": "Sve aktivne konekcije osim ove konekcije će biti odjavljene, zato što je trenutno u upotrebi.",
   "LogoutDescription": "Obratite pažnju. Sve aktivne konekcije osim ove konekcije će biti odjavljene, zato što je trenutno u upotrebi.",
   "LogoutFrom": "Odjavite se sa {{platform}} {{browser}}?",

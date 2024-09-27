@@ -14,7 +14,6 @@
   "FileManagement": "إدارة الملف",
   "InterfaceTheme": "واجهة المستخدم",
   "LightTheme": "الوضع النهاري",
-  "LogoutActiveConnection": "تسجيل الخروج من الاتصال النشط",
   "LogoutAllActiveSessionsDescription": "سيتم تسجيل الخروج من جميع الاتصالات النشطة باستثناء هذا الاتصال، حيث أنه قيد الاستخدام حاليًا.",
   "LogoutDescription": "ملحوظة. سيتم تسجيل خروج جميع الاتصالات النشطة باستثناء هذا الاتصال ، حيث إنه قيد الاستخدام حاليًا.",
   "LogoutFrom": "هل تريد الخروج من {{platform}} {{browser}}؟",

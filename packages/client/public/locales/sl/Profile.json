@@ -14,7 +14,6 @@
   "FileManagement": "Upravljanje datotek",
   "InterfaceTheme": "Tema vmesnika",
   "LightTheme": "Svetla tema",
-  "LogoutActiveConnection": "Odjava iz aktivne povezave",
   "LogoutAllActiveSessionsDescription": "Vse aktivne povezave bodo odjavljene, razen te, ki je trenutno v uporabi.",
   "LogoutDescription": "Opomba. Vse aktivne povezave bodo odjavljene, razen te, ki je trenutno v uporabi.",
   "LogoutFrom": "Odjava iz {{platform}} {{browser}}?",

@@ -14,7 +14,6 @@
   "FileManagement": "Tiedostojen hallinta",
   "InterfaceTheme": "Käyttöliittymän teema",
   "LightTheme": "Kevyt teema",
-  "LogoutActiveConnection": "Kirjaudu ulos aktiivisesta yhteydestä",
   "LogoutAllActiveSessionsDescription": "Kaikki aktiiviset yhteydet paitsi tämä yhteys kirjataan ulos, koska se on tällä hetkellä käytössä oleva.",
   "LogoutDescription": "Huom. Kaikki aktiiviset yhteydet paitsi tämä yhteys kirjataan ulos, koska se on tällä hetkellä käytössä oleva.",
   "LogoutFrom": "Kirjaudu ulos {{platform}} {{browser}}?",

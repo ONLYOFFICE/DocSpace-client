@@ -14,7 +14,6 @@
   "FileManagement": "Dateiverwaltung",
   "InterfaceTheme": "Thema der Benutzeroberfläche",
   "LightTheme": "Heller Modus",
-  "LogoutActiveConnection": "Abmelden von der aktiven Verbindung",
   "LogoutAllActiveSessionsDescription": "Alle aktiven Verbindungen mit Ausnahme dieser Verbindung werden abgemeldet, da sie gerade in Gebrauch ist.",
   "LogoutDescription": "Hinweis. Alle aktiven Verbindungen mit Ausnahme dieser Verbindung werden abgemeldet, da sie gerade in Gebrauch ist.",
   "LogoutFrom": "Abmelden von {{platform}} {{browser}}?",

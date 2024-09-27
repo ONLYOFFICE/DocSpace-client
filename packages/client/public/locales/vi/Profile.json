@@ -14,7 +14,6 @@
   "FileManagement": "Quản lý tập tin",
   "InterfaceTheme": "Chủ đề giao diện\"",
   "LightTheme": "Nền sáng",
-  "LogoutActiveConnection": "Đăng xuất khỏi kết nối đang hoạt động",
   "LogoutAllActiveSessionsDescription": "Tất cả các kết nối đang hoạt động ngoại trừ kết nối này sẽ được đăng xuất, vì nó hiện đang được sử dụng.",
   "LogoutDescription": "Lưu ý. Tất cả các kết nối đang hoạt động ngoại trừ kết nối này sẽ được đăng xuất, vì nó hiện đang được sử dụng.",
   "LogoutFrom": "Đăng xuất khỏi {{platform}} {{browser}}?",

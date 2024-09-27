@@ -14,7 +14,6 @@
   "FileManagement": "Bestandsbeheer",
   "InterfaceTheme": "Interface thema",
   "LightTheme": "Licht thema",
-  "LogoutActiveConnection": "Uitloggen van actieve verbinding",
   "LogoutAllActiveSessionsDescription": "Alle actieve verbindingen behalve deze verbinding worden uitgelogd, omdat deze momenteel in gebruik is.",
   "LogoutDescription": "Opmerking. Alle actieve verbindingen behalve deze verbinding worden uitgelogd, omdat deze momenteel in gebruik is.",
   "LogoutFrom": "Uitloggen van {{platform}} {{browser}}?",

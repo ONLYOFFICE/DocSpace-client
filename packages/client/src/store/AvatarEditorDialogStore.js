@@ -105,7 +105,7 @@ class AvatarEditorDialogStore {
           toastr.error(e);
         }
 
-        !this.filesStore.withPaging && updateRoom(item, room);
+        needUpdate && !this.filesStore.withPaging && updateRoom(item, room);
         needUpdate && this.infoPanelStore.updateInfoPanelSelection(room);
         URL.revokeObjectURL(img.src);
         setActiveFolders([]);

@@ -291,6 +291,12 @@ infoPanelStore.selectedFolderStore = selectedFolderStore;
 infoPanelStore.treeFoldersStore = treeFoldersStore;
 infoPanelStore.publicRoomStore = publicRoomStore;
 
+const avatarEditorDialogStore = new AvatarEditorDialogStore(
+  filesStore,
+  settingsStore,
+  infoPanelStore,
+);
+
 const createEditRoomStore = new CreateEditRoomStore(
   filesStore,
   filesActionsStore,
@@ -302,6 +308,7 @@ const createEditRoomStore = new CreateEditRoomStore(
   currentQuotaStore,
   clientLoadingStore,
   dialogsStore,
+  avatarEditorDialogStore,
 );
 
 const webhooksStore = new WebhooksStore(settingsStore);
@@ -317,12 +324,6 @@ const storageManagement = new StorageManagement(
 const campaignsStore = new CampaignsStore(settingsStore, userStore);
 
 const editGroupStore = new EditGroupStore(peopleStore);
-
-const avatarEditorDialogStore = new AvatarEditorDialogStore(
-  filesStore,
-  settingsStore,
-  infoPanelStore,
-);
 
 const store = {
   authStore,

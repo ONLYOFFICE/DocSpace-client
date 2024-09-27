@@ -519,7 +519,6 @@ const InvitePanel = ({
       containerVisible={!hideSelector && addUsersPanelVisible}
       isLoading={invitePanelIsLoding}
       withBodyScroll
-      withFooterBorder
     >
       {!hideSelector && addUsersPanelVisible && (
         <ModalDialog.Container>

@@ -185,7 +185,6 @@ const EditGroupDialog = ({
         withBodyScroll
         visible={visible}
         onClose={closeModal}
-        withFooterBorder
       >
         <ModalDialog.Header>
           {t("PeopleTranslations:EditGroup")}

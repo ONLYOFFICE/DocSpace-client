@@ -65,6 +65,7 @@ class CreateEditRoomStore {
     currentQuotaStore,
     clientLoadingStore,
     dialogsStore,
+    avatarEditorDialogStore,
   ) {
     makeAutoObservable(this);
 
@@ -78,6 +79,7 @@ class CreateEditRoomStore {
     this.currentQuotaStore = currentQuotaStore;
     this.clientLoadingStore = clientLoadingStore;
     this.dialogsStore = dialogsStore;
+    this.avatarEditorDialogStore = avatarEditorDialogStore;
   }
 
   setRoomParams = (roomParams) => {
@@ -101,7 +103,6 @@ class CreateEditRoomStore {
   };
 
   setInitialWatermarks = (watermarksSettings) => {
-
     this.resetWatermarks();
 
     this.initialWatermarksSettings = !watermarksSettings
@@ -317,29 +318,18 @@ class CreateEditRoomStore {
       }
       // calculate and upload logo to room
       else if (roomParams.icon.uploadedFile) {
-        await uploadRoomLogo(uploadLogoData).then(async (response) => {
-          const url = URL.createObjectURL(roomParams.icon.uploadedFile);
-          const img = new Image();
-
-          img.onload = async () => {
-            const { x, y, zoom } = roomParams.icon;
-            try {
-              room = await addLogoToRoom(room.id, {
-                tmpFile: response.data,
-                ...calculateRoomLogoParams(img, x, y, zoom),
-              });
-            } catch (e) {
-              toastr.error(e);
-              this.setIsLoading(false);
-              this.setConfirmDialogIsLoading(false);
-              this.onClose();
-            }
-
-            !withPaging && this.onOpenNewRoom(room);
-            URL.revokeObjectURL(img.src);
-          };
-          img.src = url;
-        });
+        try {
+          await this.avatarEditorDialogStore.onSaveRoomLogo(
+            room.id,
+            roomParams.icon,
+          );
+          !withPaging && this.onOpenNewRoom(room);
+        } catch (e) {
+          toastr.error(e);
+          this.setIsLoading(false);
+          this.setConfirmDialogIsLoading(false);
+          this.onClose();
+        }
       } else !withPaging && this.onOpenNewRoom(room);
 
       if (processCreatingRoomFromData) {

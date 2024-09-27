@@ -110,6 +110,17 @@ const StyledTableContainer = styled(TableContainer)`
       }
     }
   }
+
+  .resize-handle {
+    ${(props) =>
+      props.isIndexEditingMode &&
+      css`
+        cursor: default;
+        &:hover {
+          border-inline-end: ${({ theme }) => theme.tableContainer.borderRight};
+        }
+      `}
+  }
 `;
 
 StyledTableContainer.defaultProps = { theme: Base };
@@ -235,7 +246,11 @@ const Table = ({
   ]);
 
   return (
-    <StyledTableContainer useReactWindow={!withPaging} forwardedRef={ref}>
+    <StyledTableContainer
+      useReactWindow={!withPaging}
+      forwardedRef={ref}
+      isIndexEditingMode={isIndexEditingMode}
+    >
       <TableHeader
         sectionWidth={sectionWidth}
         containerRef={ref}

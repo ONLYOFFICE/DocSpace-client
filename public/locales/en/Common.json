@@ -450,6 +450,7 @@
   "SetDiskSpaceQuota": "Set storage quota to define the maximum disk space for this {{productName}}.",
   "SetQuotaStorageLimit": "Set quota to define storage limit.",
   "Settings": "Settings",
+  "Sessions": "Sessions",
   "SettingsGeneral": "General",
   "SettingsPersonal": "Personal",
   "SetToDefault": "Set to default",

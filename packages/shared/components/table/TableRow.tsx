@@ -82,16 +82,16 @@ const TableRow = (props: TableRowProps) => {
       {...rest}
     >
       {children}
-      <div>
-        <TableCell
-          {...selectionProp}
-          style={style}
-          forwardedRef={row}
-          className={`${selectionProp?.className} table-container_row-context-menu-wrapper`}
-        >
-          {isIndexEditingMode ? (
-            <></>
-          ) : (
+      {isIndexEditingMode ? (
+        <></>
+      ) : (
+        <div>
+          <TableCell
+            {...selectionProp}
+            style={style}
+            forwardedRef={row}
+            className={`${selectionProp?.className} table-container_row-context-menu-wrapper`}
+          >
             <>
               <ContextMenu
                 onHide={onHideContextMenu}
@@ -116,9 +116,9 @@ const TableRow = (props: TableRowProps) => {
                 <div className="expandButton"> </div>
               )}
             </>
-          )}
-        </TableCell>
-      </div>
+          </TableCell>
+        </div>
+      )}
     </StyledTableRow>
   );
 };

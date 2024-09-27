@@ -39,7 +39,7 @@ interface SelectelStorageProps {
   t: TTranslation;
   isLoading?: boolean;
   isValidForm: boolean;
-  buttonSize: ButtonSize;
+  buttonSize?: ButtonSize;
   isMaxProgress: boolean;
   isLoadingData: boolean;
   isNeedFilePath: boolean;

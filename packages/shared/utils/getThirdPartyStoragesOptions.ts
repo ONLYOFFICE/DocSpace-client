@@ -29,7 +29,7 @@ import { ThirdPartyStorages } from "@docspace/shared/enums";
 import type { SelectedStorageType } from "@docspace/shared/types";
 
 export const getOptions = (
-  storageBackup: SelectedStorageType[],
+  storageBackup?: SelectedStorageType[],
   needDefaultParameter = false,
 ) => {
   if (!storageBackup) return;

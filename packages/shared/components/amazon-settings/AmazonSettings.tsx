@@ -74,7 +74,6 @@ const AmazonSettings = ({
   formSettings,
   t,
   isNeedFilePath,
-  theme,
 }: AmazonSettingsProps) => {
   const isDisabled = selectedStorage && !selectedStorage.isSet;
   const bucketPlaceholder =
@@ -316,7 +315,7 @@ const AmazonSettings = ({
         />
       </StyledBody>
 
-      <StyledBody theme={theme}>
+      <StyledBody>
         <Checkbox
           id="force-path-style"
           name={FORCEPATH_STYLE}
@@ -336,7 +335,7 @@ const AmazonSettings = ({
           }
         />
       </StyledBody>
-      <StyledBody theme={theme}>
+      <StyledBody>
         <Checkbox
           id="use-http"
           className="backup_checkbox"

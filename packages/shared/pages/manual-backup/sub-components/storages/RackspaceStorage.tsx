@@ -40,7 +40,7 @@ interface RackspaceStorageProps {
   isValidForm: boolean;
   isLoadingData: boolean;
   isMaxProgress: boolean;
-  buttonSize: ButtonSize;
+  buttonSize?: ButtonSize;
   isNeedFilePath: boolean;
   formSettings: Record<string, string>;
   selectedStorage?: SelectedStorageType;

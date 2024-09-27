@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import type { TTheme } from "../../themes";
 import type {
   SelectedStorageType,
   StorageRegionsType,
@@ -33,12 +32,11 @@ import type {
 
 export interface AmazonSettingsProps {
   t: TTranslation;
-  theme: TTheme;
   isNeedFilePath: boolean;
   isLoading?: boolean;
   isLoadingData: boolean;
   formSettings: Record<string, string>;
-  defaultRegion: unknown;
+  defaultRegion: string;
   errorsFieldsBeforeSafe: Record<string, boolean>;
   storageRegions: StorageRegionsType[];
   selectedStorage?: SelectedStorageType;

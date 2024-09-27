@@ -39,7 +39,7 @@ import type { SelectedStorageType, TTranslation } from "@docspace/shared/types";
 interface GoogleCloudStorageProps {
   t: TTranslation;
   isValidForm: boolean;
-  buttonSize: ButtonSize;
+  buttonSize?: ButtonSize;
   isMaxProgress: boolean;
   isLoadingData: boolean;
   selectedStorage?: SelectedStorageType;

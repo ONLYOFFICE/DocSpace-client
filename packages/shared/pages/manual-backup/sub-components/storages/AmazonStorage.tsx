@@ -33,8 +33,6 @@ import {
   formNames,
 } from "@docspace/shared/components/amazon-settings";
 
-import type { TTheme } from "@docspace/shared/themes";
-
 import type {
   SelectedStorageType,
   StorageRegionsType,
@@ -43,9 +41,8 @@ import type {
 
 interface AmazonStorageProps {
   t: TTranslation;
-  theme: TTheme;
   isValidForm: boolean;
-  buttonSize: ButtonSize;
+  buttonSize?: ButtonSize;
   isMaxProgress: boolean;
   isLoadingData: boolean;
   isNeedFilePath: boolean;
@@ -53,7 +50,7 @@ interface AmazonStorageProps {
   selectedStorage?: SelectedStorageType;
   formSettings: Record<string, string>;
   errorsFieldsBeforeSafe: Record<string, boolean>;
-  defaultRegion: unknown;
+  defaultRegion: string;
   storageRegions: StorageRegionsType[];
 
   deleteValueFormSetting: (key: string) => void;
@@ -70,7 +67,6 @@ interface AmazonStorageProps {
 
 const AmazonStorage = ({
   t,
-  theme,
   isLoading,
   buttonSize,
   isValidForm,
@@ -112,7 +108,6 @@ const AmazonStorage = ({
     <>
       <AmazonSettings
         t={t}
-        theme={theme}
         isLoading={isLoading}
         formSettings={formSettings}
         isLoadingData={isLoadingData}

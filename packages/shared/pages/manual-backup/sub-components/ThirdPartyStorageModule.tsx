@@ -26,70 +26,129 @@
 
 import ExternalLinkReactSvgUrl from "PUBLIC_DIR/images/external.link.react.svg?url";
 
-import React from "react";
-import { inject, observer } from "mobx-react";
 import { ReactSVG } from "react-svg";
+import { useTranslation } from "react-i18next";
+import React, { useMemo, useState } from "react";
 
-import { ComboBox } from "@docspace/shared/components/combobox";
-import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { Text } from "@docspace/shared/components/text";
-
+import { ComboBox, ComboBoxSize } from "@docspace/shared/components/combobox";
+import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { BackupStorageType, ThirdPartyStorages } from "@docspace/shared/enums";
+import { getOptions } from "@docspace/shared/utils/getThirdPartyStoragesOptions";
+import { getFromLocalStorage } from "@docspace/shared/utils/getFromLocalStorage";
+import { ButtonSize } from "@docspace/shared/components/button";
+
+import type {
+  Nullable,
+  SelectedStorageType,
+  StorageRegionsType,
+} from "@docspace/shared/types";
+
+import { StyledManualBackup, StyledComboBoxItem } from "../ManualBackup.styled";
 
 import GoogleCloudStorage from "./storages/GoogleCloudStorage";
 import RackspaceStorage from "./storages/RackspaceStorage";
 import SelectelStorage from "./storages/SelectelStorage";
 import AmazonStorage from "./storages/AmazonStorage";
-import { getOptions } from "../../common-container/GetThirdPartyStoragesOptions";
-import { getFromLocalStorage } from "../../../../../utils";
-import { StyledManualBackup, StyledComboBoxItem } from "../../StyledBackup";
 
-let storageTitle = "";
-let storageId = "";
-class ThirdPartyStorageModule extends React.PureComponent {
-  constructor(props) {
-    super(props);
+const DefaultParameters = {
+  comboBoxOptions: [],
+  storagesInfo: {},
+  selectedStorageTitle: "",
+  selectedStorageId: "",
+};
 
-    storageTitle = getFromLocalStorage("LocalCopyThirdPartyStorageType");
-    storageId = getFromLocalStorage("LocalCopyStorage");
+type SelectType =
+  | React.MouseEvent<HTMLElement>
+  | React.ChangeEvent<HTMLInputElement>;
 
-    this.state = {
-      comboBoxOptions: [],
-      storagesInfo: {},
-      selectedStorageTitle: storageTitle || "",
-      selectedId: storageId || "",
-      isStartCopy: false,
-    };
+interface ThirdPartyStorageModuleProps {
+  isValidForm: boolean;
+  isNeedFilePath: boolean;
+  isMaxProgress: boolean;
+  buttonSize?: ButtonSize;
+  thirdPartyStorage: SelectedStorageType[];
+  formSettings: Record<string, string>;
+  errorsFieldsBeforeSafe: Record<string, boolean>;
+  defaultRegion: string;
+  storageRegions: StorageRegionsType[];
+  isFormReady: () => boolean;
+  onMakeCopy: (
+    selectedFolder: Nullable<string | number>,
+    moduleName: string,
+    moduleType: string,
+    selectedStorageId?: string,
+    selectedStorageTitle?: string,
+  ) => Promise<void>;
+  deleteValueFormSetting: (key: string) => void;
+  setCompletedFormFields: (
+    values: Record<string, unknown>,
+    module?: unknown,
+  ) => void;
+  addValueInFormSettings: (name: string, value: string) => void;
+  setRequiredFormSettings: (arr: string[]) => void;
+  setIsThirdStorageChanged: (changed: boolean) => void;
+}
 
-    this.isFirstSet = false;
-  }
-  componentDidMount() {
-    const { thirdPartyStorage } = this.props;
+const ThirdPartyStorageModule = ({
+  buttonSize,
+  isValidForm,
+  formSettings,
+  storageRegions,
+  isMaxProgress,
+  defaultRegion,
+  isNeedFilePath,
+  thirdPartyStorage,
+  errorsFieldsBeforeSafe,
+  isFormReady,
+  onMakeCopy,
+  setCompletedFormFields,
+  addValueInFormSettings,
+  deleteValueFormSetting,
+  setRequiredFormSettings,
+  setIsThirdStorageChanged,
+}: ThirdPartyStorageModuleProps) => {
+  const { t } = useTranslation(["Settings", "Common"]);
 
+  const parameters = useMemo((): Required<ReturnType<typeof getOptions>> => {
     if (thirdPartyStorage && thirdPartyStorage.length > 0) {
-      const parameters = getOptions(thirdPartyStorage);
-
-      const {
-        comboBoxOptions,
-        storagesInfo,
-        selectedStorageTitle,
-        selectedStorageId,
-      } = parameters;
-
-      this.setState({
-        comboBoxOptions,
-        storagesInfo,
-        selectedStorageTitle: storageTitle || selectedStorageTitle,
-        selectedId: storageId || selectedStorageId,
-      });
+      return getOptions(thirdPartyStorage) ?? DefaultParameters;
     }
-  }
 
-  onSelect = (event) => {
-    const data = event.target.dataset;
+    return DefaultParameters;
+  }, [thirdPartyStorage]);
+  const comboBoxOptions = useMemo(() => {
+    if (parameters) return parameters.comboBoxOptions;
 
-    const selectedStorageId = data.thirdPartyKey;
-    const { storagesInfo } = this.state;
+    return [];
+  }, [parameters]);
+  const storagesInfo = useMemo(() => {
+    if (parameters) return parameters.storagesInfo;
+
+    return {};
+  }, [parameters]);
+
+  const [selectedStorageTitle, setSelectedStorageTitle] = useState<string>(
+    () => {
+      const storageTitle = getFromLocalStorage<string>(
+        "LocalCopyThirdPartyStorageType",
+      );
+
+      return storageTitle ?? parameters?.selectedStorageTitle ?? "";
+    },
+  );
+
+  const [selectedId, setSelectedId] = useState<string>(() => {
+    const storageId = getFromLocalStorage<string>("LocalCopyStorage");
+    return storageId ?? parameters?.selectedStorageId ?? "";
+  });
+
+  const [isStartCopy, setIsStartCopy] = useState(false);
+
+  const onSelect = (event: SelectType) => {
+    const data = event.currentTarget.dataset;
+
+    const selectedStorageId = data.thirdPartyKey ?? "";
 
     const selectedStorage = storagesInfo[selectedStorageId];
 
@@ -100,124 +159,126 @@ class ThirdPartyStorageModule extends React.PureComponent {
       );
     }
 
-    this.setState({
-      selectedStorageTitle: selectedStorage.title,
-      selectedId: selectedStorage.id,
-    });
+    setSelectedId(selectedStorage.id);
+    setSelectedStorageTitle(selectedStorage.title);
   };
 
-  onMakeCopyIntoStorage = async () => {
-    const { selectedId, selectedStorageTitle } = this.state;
-    const { onMakeCopy, isFormReady } = this.props;
-    const { StorageModuleType } = BackupStorageType;
-
+  const onMakeCopyIntoStorage = async () => {
     if (!isFormReady()) return;
 
-    this.setState({
-      isStartCopy: true,
-    });
-
-    await onMakeCopy(
-      null,
-      "ThirdPartyStorage",
-      `${StorageModuleType}`,
-      selectedId,
-      selectedStorageTitle,
-    );
-
-    this.setState({
-      isStartCopy: false,
-    });
-  };
-
-  render() {
-    const { isMaxProgress, thirdPartyStorage, buttonSize } = this.props;
-    const {
-      comboBoxOptions,
-      selectedStorageTitle,
-      selectedId,
-      isStartCopy,
-      storagesInfo,
-    } = this.state;
-
-    const commonProps = {
-      isLoadingData: !isMaxProgress || isStartCopy,
-      selectedStorage: storagesInfo[selectedId],
-      isMaxProgress,
-      selectedId,
-      buttonSize,
-      onMakeCopyIntoStorage: this.onMakeCopyIntoStorage,
-    };
-
-    const { GoogleId, RackspaceId, SelectelId, AmazonId } = ThirdPartyStorages;
-
-    const advancedOptions = comboBoxOptions?.map((item) => {
-      return (
-        <StyledComboBoxItem isDisabled={item.disabled} key={item.key}>
-          <DropDownItem
-            onClick={this.onSelect}
-            className={item.className}
-            data-third-party-key={item.key}
-            disabled={item.disabled}
-          >
-            <Text className="drop-down-item_text" fontWeight={600}>
-              {item.label}
-            </Text>
-
-            {!item.disabled && !item.connected ? (
-              <ReactSVG
-                src={ExternalLinkReactSvgUrl}
-                className="drop-down-item_icon"
-              />
-            ) : (
-              <></>
-            )}
-          </DropDownItem>
-        </StyledComboBoxItem>
+    try {
+      setIsStartCopy(true);
+      await onMakeCopy(
+        null,
+        "ThirdPartyStorage",
+        `${BackupStorageType.StorageModuleType}`,
+        selectedId,
+        selectedStorageTitle,
       );
-    });
 
-    return (
-      <StyledManualBackup>
-        <div className="manual-backup_storages-module">
-          <ComboBox
-            options={[]}
-            advancedOptions={advancedOptions}
-            selectedOption={{ key: 0, label: selectedStorageTitle }}
-            onSelect={this.onSelect}
-            isDisabled={!isMaxProgress || isStartCopy || !!!thirdPartyStorage}
-            size="content"
-            manualWidth={"400px"}
-            directionY="both"
-            displaySelectedOption
-            noBorder={false}
-            isDefaultMode={true}
-            hideMobileView={false}
-            forceCloseClickOutside
-            scaledOptions
-            showDisabledItems
-            displayArrow
-            className="backup_combo"
-          />
-
-          {selectedId === GoogleId && <GoogleCloudStorage {...commonProps} />}
-
-          {selectedId === RackspaceId && <RackspaceStorage {...commonProps} />}
-
-          {selectedId === SelectelId && <SelectelStorage {...commonProps} />}
-
-          {selectedId === AmazonId && <AmazonStorage {...commonProps} />}
-        </div>
-      </StyledManualBackup>
-    );
-  }
-}
-
-export default inject(({ backup }) => {
-  const { thirdPartyStorage, isFormReady } = backup;
-
-  return {
-    thirdPartyStorage,
-    isFormReady,
+      setIsStartCopy(false);
+    } catch (error) {
+      console.error(error);
+    }
   };
-})(observer(ThirdPartyStorageModule));
+
+  const commonProps = {
+    isLoadingData: !isMaxProgress || isStartCopy,
+    selectedStorage: storagesInfo[selectedId],
+    isMaxProgress,
+    selectedId,
+    buttonSize,
+    onMakeCopyIntoStorage,
+    t,
+    isValidForm,
+    isNeedFilePath,
+    formSettings,
+    errorsFieldsBeforeSafe,
+    setCompletedFormFields,
+    addValueInFormSettings,
+    setRequiredFormSettings,
+    setIsThirdStorageChanged,
+  };
+
+  const advancedOptions = comboBoxOptions?.map((item) => {
+    return (
+      <StyledComboBoxItem isDisabled={item.disabled} key={item.key}>
+        <DropDownItem
+          onClick={onSelect}
+          // className={item.className}
+          data-third-party-key={item.key}
+          disabled={item.disabled}
+        >
+          <Text className="drop-down-item_text" fontWeight={600}>
+            {item.label}
+          </Text>
+
+          {!item.disabled && !item.connected ? (
+            <ReactSVG
+              src={ExternalLinkReactSvgUrl}
+              className="drop-down-item_icon"
+            />
+          ) : null}
+        </DropDownItem>
+      </StyledComboBoxItem>
+    );
+  });
+
+  return (
+    <StyledManualBackup>
+      <div className="manual-backup_storages-module">
+        <ComboBox
+          options={[]}
+          displayArrow
+          isDefaultMode
+          scaledOptions
+          noBorder={false}
+          showDisabledItems
+          directionY="both"
+          manualWidth="400px"
+          onSelect={onSelect}
+          displaySelectedOption
+          hideMobileView={false}
+          forceCloseClickOutside
+          className="backup_combo"
+          size={ComboBoxSize.content}
+          advancedOptions={advancedOptions}
+          selectedOption={{ key: 0, label: selectedStorageTitle }}
+          isDisabled={!isMaxProgress || isStartCopy || !thirdPartyStorage}
+        />
+
+        {selectedId === ThirdPartyStorages.GoogleId && (
+          <GoogleCloudStorage {...commonProps} />
+        )}
+
+        {selectedId === ThirdPartyStorages.RackspaceId && (
+          <RackspaceStorage {...commonProps} />
+        )}
+
+        {selectedId === ThirdPartyStorages.SelectelId && (
+          <SelectelStorage {...commonProps} />
+        )}
+
+        {selectedId === ThirdPartyStorages.AmazonId && (
+          <AmazonStorage
+            defaultRegion={defaultRegion}
+            storageRegions={storageRegions}
+            deleteValueFormSetting={deleteValueFormSetting}
+            {...commonProps}
+          />
+        )}
+      </div>
+    </StyledManualBackup>
+  );
+};
+
+export default ThirdPartyStorageModule;
+
+// export default inject(({ backup }) => {
+//   const { thirdPartyStorage, isFormReady } = backup;
+
+//   return {
+//     thirdPartyStorage,
+//     isFormReady,
+//   };
+// })(observer(ThirdPartyStorageModule));

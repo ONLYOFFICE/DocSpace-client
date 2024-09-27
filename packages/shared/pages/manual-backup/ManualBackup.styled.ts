@@ -177,3 +177,27 @@ export const StyledModules = styled.div<StyledModulesProps>`
     max-width: 700px;
   }
 `;
+
+export const StyledComboBoxItem = styled.div<StyledModulesProps>`
+  display: flex;
+
+  .drop-down-item_text {
+    color: ${({ theme, isDisabled }) =>
+      isDisabled ? theme.dropDownItem.disableColor : theme.dropDownItem.color};
+  }
+  .drop-down-item_icon {
+    display: flex;
+    align-items: center;
+
+    div {
+      display: flex;
+    }
+
+    margin-inline-start: auto;
+
+    svg {
+      min-height: 16px;
+      min-width: 16px;
+    }
+  }
+`;

@@ -49,7 +49,7 @@
   "RoomGroupRemove": "Խմբերը հեռացվել են։",
   "RoomLogoChanged": "Պատկերակը փոխվել է",
   "RoomRemoveUser": "Օգտատերը հեռացվել է:",
-  "RoomRenamed": "Սենյակը <1>«{{oldRoomTitle}}»</1> վերանվանվել է <1>«{{roomTitle}}»</1>",
+  "RoomRenamed": "Սենյակը <1>«{{oldRoomTitle}}»</1> վերանվանվել է <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Սենյակների մանրամասները տես ",
   "RoomUpdateAccess": "նշանակվել է",
   "SelectedUsers": "Ընտրել էջ",

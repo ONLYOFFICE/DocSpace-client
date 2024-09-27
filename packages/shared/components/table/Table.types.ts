@@ -50,6 +50,7 @@ export type TTableColumn = {
   defaultSize?: number;
   default?: boolean;
   resizable?: boolean;
+  isShort?: boolean;
   checkbox?: {
     value: boolean;
     isIndeterminate: boolean;
@@ -112,6 +113,7 @@ export interface TableBodyProps {
   useReactWindow: boolean;
   onScroll?: () => void;
   infoPanelVisible?: boolean;
+  isIndexEditingMode: boolean;
 }
 
 export interface TableRowProps {
@@ -124,8 +126,9 @@ export interface TableRowProps {
   style?: React.CSSProperties;
   title?: string;
   getContextModel: () => ContextMenuModel[];
+  badgeUrl: string;
+  isIndexEditingMode: boolean;
   onClick?: (e: React.MouseEvent) => void;
-  badgeUrl?: string;
 }
 
 export interface TableCellProps {
@@ -148,7 +151,7 @@ export type TGroupMenuItem = {
   id: string;
 };
 
-export interface TableGroupMenuProps {
+interface TableGroupmenuBased {
   isChecked: boolean;
   isIndeterminate: boolean;
   headerMenu: TGroupMenuItem[];
@@ -162,4 +165,11 @@ export interface TableGroupMenuProps {
   isBlocked?: boolean;
   toggleInfoPanel: () => void;
   withComboBox?: boolean;
+  headerLabel?: string;
 }
+export type TableGroupMenuProps =
+  | (TableGroupmenuBased & {
+      isCloseable?: undefined;
+      onCloseClick?: undefined;
+    })
+  | (TableGroupmenuBased & { isCloseable: boolean; onCloseClick: () => void });

@@ -32,6 +32,7 @@ import ViewHelper from "./helpers/ViewHelper";
 import ItemTitle from "./sub-components/ItemTitle";
 
 import { StyledInfoPanelBody } from "./styles/common";
+import { RoomsType } from "@docspace/shared/enums";
 import { useParams } from "react-router-dom";
 
 import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
@@ -119,6 +120,7 @@ const InfoPanelBodyContent = ({
     isGallery,
     isRootFolder: selectedFolder.id === selectedFolder.rootFolderId,
     isSeveralItems,
+    isVDR: selectedItems[0]?.roomType === RoomsType.VirtualDataRoom,
   };
 
   const viewHelper = new ViewHelper({

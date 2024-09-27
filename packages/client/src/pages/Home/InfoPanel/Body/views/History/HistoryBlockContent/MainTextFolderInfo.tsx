@@ -73,14 +73,17 @@ const HistoryMainTextFolderInfo = ({
 
   return (
     <StyledHistoryBlockMessage className="message">
-      <span className={className}>
+      <span
+        className={className}
+        title={isFromFolder ? fromParentTitle : parentTitle}
+      >
         {isFromFolder ? sourceDestination : destination}
       </span>
     </StyledHistoryBlockMessage>
   );
 };
 
-export default inject(({ selectedFolderStore }) => ({
+export default inject<TStore>(({ selectedFolderStore }) => ({
   selectedFolderId: selectedFolderStore.id,
 }))(
   withTranslation(["InfoPanel", "Common", "Translations"])(

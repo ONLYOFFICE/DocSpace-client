@@ -44,10 +44,13 @@ export interface TabsProps {
   items: TTabItem[];
   /** Selected item of tabs. */
   selectedItemId?: number | string;
+  selectedItems?: number[];
   /** Theme for displaying tabs. */
   type?: TabsTypes;
   /** Tab indentation for sticky positioning. */
   stickyTop?: string;
+  /** Enables multiple select  */
+  multiple?: boolean;
   /** Sets a tab class name */
   className?: string;
   /** Sets a callback function that is triggered when the tab is selected. */

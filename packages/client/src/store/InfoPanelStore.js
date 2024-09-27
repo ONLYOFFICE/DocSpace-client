@@ -99,6 +99,7 @@ class InfoPanelStore {
   isMembersPanelUpdating = false;
 
   shareChanged = false;
+  calendarDay = null;
 
   showSearchBlock = false;
   searchValue = "";
@@ -833,6 +834,10 @@ class InfoPanelStore {
 
   setShareChanged = (shareChanged) => {
     this.shareChanged = shareChanged;
+  };
+
+  setCalendarDay = (calendarDay) => {
+    this.calendarDay = calendarDay;
   };
 }
 

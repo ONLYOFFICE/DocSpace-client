@@ -54,11 +54,13 @@ class DialogsStore {
 
   moveToPanelVisible = false;
   restorePanelVisible = false;
+  reorderDialogVisible = false;
   copyPanelVisible = false;
   deleteThirdPartyDialogVisible = false;
   connectDialogVisible = false;
   thirdPartyMoveDialogVisible = false;
   deleteDialogVisible = false;
+  lifetimeDialogVisible = false;
   downloadDialogVisible = false;
   emptyTrashDialogVisible = false;
   newFilesPanelVisible = false;
@@ -282,6 +284,10 @@ class DialogsStore {
 
   setDeleteDialogVisible = (deleteDialogVisible) => {
     this.deleteDialogVisible = deleteDialogVisible;
+  };
+
+  setLifetimeDialogVisible = (lifetimeDialogVisible) => {
+    this.lifetimeDialogVisible = lifetimeDialogVisible;
   };
 
   setEventDialogVisible = (eventDialogVisible) => {
@@ -600,6 +606,10 @@ class DialogsStore {
 
   setUserSessionPanelVisible = (visible) => {
     this.userSessionsPanelVisible = visible;
+  };
+
+  setReorderDialogVisible = (visible) => {
+    this.reorderDialogVisible = visible;
   };
 
   setFillPDFDialogData = (visible, data) => {

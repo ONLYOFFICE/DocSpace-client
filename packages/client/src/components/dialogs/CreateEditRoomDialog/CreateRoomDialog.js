@@ -80,6 +80,8 @@ const CreateRoomDialog = ({
       y: 0.5,
       zoom: 1,
     },
+    indexing: false,
+    denyDownload: false,
     withCover: false,
   };
 

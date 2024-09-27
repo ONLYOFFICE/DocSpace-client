@@ -49,7 +49,7 @@
   "RoomGroupRemove": "组已删除",
   "RoomLogoChanged": "图标已更改",
   "RoomRemoveUser": "用户已删除。",
-  "RoomRenamed": "房间<1>«{{oldRoomTitle}}»</1>已重命名为<1>«{{roomTitle}}»</1>",
+  "RoomRenamed": "房间<1>«{{oldRoomTitle}}»</1>已重命名为<2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "在此查看房间详情",
   "RoomUpdateAccess": "已分配角色",
   "SelectedUsers": "已选账户",

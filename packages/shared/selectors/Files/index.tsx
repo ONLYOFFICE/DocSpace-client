@@ -144,6 +144,7 @@ const FilesSelectorComponent = ({
     title: string;
     path?: string[];
     fileExst?: string;
+    viewUrl?: string;
     inPublic?: boolean;
   } | null>(null);
   const [total, setTotal] = React.useState<number>(0);
@@ -338,6 +339,7 @@ const FilesSelectorComponent = ({
           id: item.id,
           title: item.label,
           fileExst: item.fileExst,
+          viewUrl: item.viewUrl,
           inPublic,
         });
 

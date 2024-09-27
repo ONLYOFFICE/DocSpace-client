@@ -153,7 +153,7 @@ const useRoomsHelper = ({
 
         setIsBreadCrumbsLoading(false);
       }
-      const itemList: TSelectorItem[] = convertRoomsToItems(folders);
+      const itemList: TSelectorItem[] = convertRoomsToItems(folders, t);
 
       setHasNextPage(count === PAGE_COUNT);
 

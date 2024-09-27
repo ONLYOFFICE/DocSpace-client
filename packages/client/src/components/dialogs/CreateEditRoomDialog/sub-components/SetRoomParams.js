@@ -40,13 +40,15 @@ import ThirdPartyStorage from "./ThirdPartyStorage";
 import withLoader from "@docspace/client/src/HOCs/withLoader";
 import SetRoomParamsLoader from "@docspace/shared/skeletons/create-edit-room/SetRoomParams";
 
+import VirtualDataRoomBlock from "./VirtualDataRoomBlock";
 import ItemIcon from "@docspace/client/src/components/ItemIcon";
 
 import ChangeRoomOwner from "./ChangeRoomOwner";
 import RoomQuota from "./RoomQuota";
 import { RoomsType } from "@docspace/shared/enums";
-import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
+
 import { isMobile, mobile } from "@docspace/shared/utils";
+import { isMobileOnly } from "react-device-detect";
 
 import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 
@@ -88,12 +90,13 @@ const StyledSetRoomParams = styled.div`
       align-items: center;
     }
 
+    .room-params-icon,
     .react-svg-icon {
-      width: 64px;
-      height: 64px;
+      min-width: 64px;
+      min-height: 64px;
       @media ${mobile} {
-        width: 96px;
-        height: 96px;
+        min-width: 96px;
+        min-height: 96px;
       }
     }
     .room-title {
@@ -148,6 +151,7 @@ const SetRoomParams = ({
   const [previewIcon, setPreviewIcon] = useState(null);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
     useState(true);
+  const [horizontalOrientation, setHorizontalOrientation] = useState(false);
   const [disableImageRescaling, setDisableImageRescaling] = useState(isEdit);
 
   const [previewTitle, setPreviewTitle] = useState(selection?.title || "");
@@ -156,8 +160,24 @@ const SetRoomParams = ({
   const [forceHideRoomTypeDropdown, setForceHideRoomTypeDropdown] =
     useState(false);
 
+  const isVDRRoom = roomParams.type === RoomsType.VirtualDataRoom;
+
   const isFormRoom = roomParams.type === RoomsType.FormRoom;
   const isPublicRoom = roomParams.type === RoomsType.PublicRoom;
+
+  const checkWidth = () => {
+    if (!isMobile()) {
+      setHorizontalOrientation(true);
+    } else {
+      setHorizontalOrientation(false);
+    }
+  };
+
+  React.useEffect(() => {
+    checkWidth();
+    window.addEventListener("resize", checkWidth);
+    return () => window.removeEventListener("resize", checkWidth);
+  }, []);
 
   const getCoverLogo = () => {
     if (cover) {
@@ -304,6 +324,7 @@ const SetRoomParams = ({
       fileExst={selection?.fileExst}
       isRoom={selection?.isRoom}
       title={previewTitle}
+      className="room-params-icon"
       logo={
         currentCover
           ? { cover: currentCover }
@@ -320,7 +341,7 @@ const SetRoomParams = ({
             cover?.color
       }
       color={cover ? cover.color : selection?.logo?.color}
-      size={isMobile() ? "96px" : "64px"}
+      size={isMobile() && !horizontalOrientation ? "96px" : "64px"}
       withEditing={true}
       model={isEditRoomModel}
       onChangeFile={onChangeFile}
@@ -332,9 +353,10 @@ const SetRoomParams = ({
       showDefault={
         cover && cover.cover ? false : !previewIcon || avatarEditorDialogVisible
       }
-      size={isMobile() ? "96px" : "64px"}
+      size={isMobile() && !horizontalOrientation ? "96px" : "64px"}
       imgClassName={"react-svg-icon"}
       model={model}
+      className="room-params-icon"
       isEmptyIcon={(!currentCover || roomLogoCoverDialogVisible) && isEmptyIcon}
       color={cover ? cover.color : randomColor}
       logo={
@@ -422,6 +444,15 @@ const SetRoomParams = ({
         <ChangeRoomOwner
           roomOwner={roomParams.roomOwner}
           onOwnerChange={onOwnerChange}
+        />
+      )}
+
+      {isVDRRoom && (
+        <VirtualDataRoomBlock
+          t={t}
+          roomParams={roomParams}
+          setRoomParams={setRoomParams}
+          isEdit={isEdit}
         />
       )}
 

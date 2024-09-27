@@ -80,6 +80,7 @@ import ImportAccountsStore from "./ImportAccountsStore";
 import PluginStore from "./PluginStore";
 import InfoPanelStore from "./InfoPanelStore";
 import CampaignsStore from "./CampaignsStore";
+import IndexingStore from "./IndexingStore";
 import EditGroupStore from "./EditGroupStore";
 
 import AvatarEditorDialogStore from "./AvatarEditorDialogStore";
@@ -116,6 +117,7 @@ const clientLoadingStore = new ClientLoadingStore();
 const publicRoomStore = new PublicRoomStore(clientLoadingStore);
 
 const infoPanelStore = new InfoPanelStore(userStore);
+const indexingStore = new IndexingStore(infoPanelStore, selectedFolderStore);
 
 const treeFoldersStore = new TreeFoldersStore(
   selectedFolderStore,
@@ -160,6 +162,7 @@ const filesStore = new FilesStore(
   userStore,
   currentTariffStatusStore,
   settingsStore,
+  indexingStore,
 );
 
 const mediaViewerDataStore = new MediaViewerDataStore(
@@ -223,6 +226,7 @@ const filesActionsStore = new FilesActionsStore(
   currentTariffStatusStore,
   peopleStore,
   currentQuotaStore,
+  indexingStore,
 );
 
 const contextOptionsStore = new ContextOptionsStore(
@@ -243,6 +247,7 @@ const contextOptionsStore = new ContextOptionsStore(
   currentTariffStatusStore,
   currentQuotaStore,
   userStore,
+  indexingStore,
   clientLoadingStore,
 );
 
@@ -275,6 +280,8 @@ const tableStore = new TableStore(
   treeFoldersStore,
   userStore,
   settingsStore,
+  indexingStore,
+  selectedFolderStore,
 );
 
 infoPanelStore.filesSettingsStore = filesSettingsStore;
@@ -283,6 +290,12 @@ infoPanelStore.peopleStore = peopleStore;
 infoPanelStore.selectedFolderStore = selectedFolderStore;
 infoPanelStore.treeFoldersStore = treeFoldersStore;
 infoPanelStore.publicRoomStore = publicRoomStore;
+
+const avatarEditorDialogStore = new AvatarEditorDialogStore(
+  filesStore,
+  settingsStore,
+  infoPanelStore,
+);
 
 const createEditRoomStore = new CreateEditRoomStore(
   filesStore,
@@ -295,6 +308,7 @@ const createEditRoomStore = new CreateEditRoomStore(
   currentQuotaStore,
   clientLoadingStore,
   dialogsStore,
+  avatarEditorDialogStore,
 );
 
 const webhooksStore = new WebhooksStore(settingsStore);
@@ -310,12 +324,6 @@ const storageManagement = new StorageManagement(
 const campaignsStore = new CampaignsStore(settingsStore, userStore);
 
 const editGroupStore = new EditGroupStore(peopleStore);
-
-const avatarEditorDialogStore = new AvatarEditorDialogStore(
-  filesStore,
-  settingsStore,
-  infoPanelStore,
-);
 
 const store = {
   authStore,
@@ -372,6 +380,7 @@ const store = {
   pluginStore,
   storageManagement,
   campaignsStore,
+  indexingStore,
   editGroupStore,
   avatarEditorDialogStore,
 };

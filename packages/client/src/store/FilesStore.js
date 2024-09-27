@@ -4186,11 +4186,13 @@ class FilesStore {
 
     const lastFile = this.filesList[this.filesList.length - 1];
 
-    if (lastFile?.order?.length > maxIndexLength) {
+    const orderLength = lastFile?.order?.length ?? 0;
+
+    if (orderLength > maxIndexLength) {
       return minWidth + maxIndexLength * 3;
     }
 
-    return minWidth + lastFile?.order?.length * 3;
+    return minWidth + orderLength * 3;
   }
 
   get hasMoreFiles() {

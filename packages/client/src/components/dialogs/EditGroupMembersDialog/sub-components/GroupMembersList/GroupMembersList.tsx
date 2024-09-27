@@ -104,6 +104,7 @@ const GroupMembersList = ({
         >
           {({ onItemsRendered, ref }) => (
             <List
+              className="list-scroll"
               ref={ref}
               direction={interfaceDirection}
               height={height - SEARCH_WITH_PADDING_HEIGHT}

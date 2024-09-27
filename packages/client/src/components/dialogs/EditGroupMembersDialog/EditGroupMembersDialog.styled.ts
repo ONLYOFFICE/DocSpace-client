@@ -38,4 +38,8 @@ export const StyledBodyContent = styled.div`
   .search-input {
     margin: 16px 16px 12px;
   }
+
+  .list-scroll > .scroll-wrapper > .scroller > .scroll-body {
+    padding-bottom: 12px !important;
+  }
 `;

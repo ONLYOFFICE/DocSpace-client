@@ -118,6 +118,8 @@ class AvatarEditorDialogStore {
     await promise;
 
     this.setAvatarEditorDialogVisible(false);
+    this.setImage({ uploadedFile: null, x: 0.5, y: 0.5, zoom: 1 });
+    this.setUploadedFile(null);
 
     return;
   };

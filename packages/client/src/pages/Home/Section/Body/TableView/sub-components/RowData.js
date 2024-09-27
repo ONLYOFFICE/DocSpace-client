@@ -67,11 +67,40 @@ const RowDataComponent = (props) => {
 
     isIndexing,
     tableStorageName,
+    columnStorageName,
     isIndexEditingMode,
     changeIndex,
   } = props;
 
-  const lastColumn = getLastColumn(tableStorageName);
+  const [lastColumn, setLastColumn] = React.useState(
+    getLastColumn(
+      tableStorageName,
+      localStorage.getItem(columnStorageName),
+      isIndexEditingMode,
+    ),
+  );
+
+  const onResize = React.useCallback(() => {
+    const newLastColumn = getLastColumn(
+      tableStorageName,
+      localStorage.getItem(columnStorageName),
+      isIndexEditingMode,
+    );
+
+    setLastColumn(newLastColumn);
+  }, [
+    localStorage.getItem(columnStorageName),
+    isIndexEditingMode,
+    tableStorageName,
+  ]);
+
+  React.useEffect(() => {
+    onResize();
+    window.addEventListener("resize", onResize);
+
+    return () => window.removeEventListener("resize", onResize);
+  }, [isIndexEditingMode, localStorage.getItem(columnStorageName)]);
+
   const quickButtonsComponentNode = (
     <StyledQuickButtonsContainer>
       {quickButtonsComponent}
@@ -277,7 +306,7 @@ const RowDataComponent = (props) => {
   );
 };
 
-export default inject(({ tableStore, indexingStore }) => {
+export default inject(({ tableStore }) => {
   const {
     authorColumnIsEnabled,
     createdColumnIsEnabled,
@@ -286,6 +315,7 @@ export default inject(({ tableStore, indexingStore }) => {
     indexColumnIsEnabled,
     typeColumnIsEnabled,
     tableStorageName,
+    columnStorageName,
   } = tableStore;
 
   return {
@@ -296,5 +326,6 @@ export default inject(({ tableStore, indexingStore }) => {
     indexColumnIsEnabled,
     typeColumnIsEnabled,
     tableStorageName,
+    columnStorageName,
   };
 })(observer(RowDataComponent));

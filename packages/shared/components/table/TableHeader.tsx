@@ -951,8 +951,9 @@ class TableHeaderComponent extends React.Component<
       const minSize = minWidth ? +minWidth : MIN_SIZE_NAME_COLUMN;
 
       if (
-        (columns[index].key === "Name" ? minSize : DEFAULT_MIN_COLUMN_SIZE) !==
-        getSubstring(item)
+        (columns[index].key === "Name" || columns[index].key === "Index"
+          ? minSize
+          : DEFAULT_MIN_COLUMN_SIZE) !== getSubstring(item)
       )
         countColumns += 1;
     });
@@ -970,8 +971,9 @@ class TableHeaderComponent extends React.Component<
       const itemSubstring = getSubstring(item);
 
       if (
-        (columns[index].key === "Name" ? minSize : DEFAULT_MIN_COLUMN_SIZE) ===
-        itemSubstring
+        (columns[index].key === "Name" || columns[index].key === "Index"
+          ? minSize
+          : DEFAULT_MIN_COLUMN_SIZE) === itemSubstring
       )
         return;
 

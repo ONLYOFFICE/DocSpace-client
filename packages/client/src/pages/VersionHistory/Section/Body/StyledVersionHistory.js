@@ -45,6 +45,10 @@ const StyledBody = styled.div`
 `;
 
 const StyledVersionList = styled.div`
+  .scroll-body {
+    padding-bottom: 12px !important;
+  }
+
   .row_context-menu-wrapper {
     .expandButton {
       ${(props) =>

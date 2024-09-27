@@ -54,7 +54,7 @@ import { VirtualScroll } from "./VirtualScroll";
 
 const CONTAINER_PADDING = 16;
 const HEADER_HEIGHT = 54;
-const TABS_HEIGHT = 40;
+const TABS_HEIGHT = 33;
 const BREAD_CRUMBS_HEIGHT = 38;
 const SEARCH_HEIGHT = 44;
 const BODY_DESCRIPTION_TEXT_HEIGHT = 32;

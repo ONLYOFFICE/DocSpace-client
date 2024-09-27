@@ -27,6 +27,7 @@
 import { inject, observer } from "mobx-react";
 import { tablet } from "@docspace/shared/utils";
 import styled, { css } from "styled-components";
+import { globalColors } from "@docspace/shared/themes";
 
 import { RowContainer } from "@docspace/shared/components/row-container";
 import { SessionsRowProps } from "../../SecuritySessions.types";
@@ -72,7 +73,7 @@ const StyledRowContainer = styled(RowContainer)`
 
   .row-hotkey-border + .row-selected {
     .user-row {
-      border-top: 1px solid #2da7db !important;
+      border-top: 1px solid ${globalColors.lightBlueMain} !important;
     }
   }
 
@@ -100,7 +101,7 @@ const StyledRowContainer = styled(RowContainer)`
 
   .header-container-text {
     font-size: 12px;
-    color: #a3a9ae;
+    color: ${globalColors.gray};
   }
 
   .table-container_header {

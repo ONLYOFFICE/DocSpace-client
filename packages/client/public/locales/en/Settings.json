@@ -230,6 +230,7 @@
   "SelectUsersDescriptionWorkspace": "Check users from the list to import into {{organizationName}} {{productName}}. Users already existing in {{organizationName}} {{productName}} are highlighted with a green color and are not checked by default.",
   "SelectUsersWithEmail": "Select users with e-mail",
   "SelectUserTypes": "Select user types",
+  "SelectedUsersWillBeLoggedOut": "Note. All active connections of the selected users will be logged out. Are you sure you want to continue?",
   "SelectUserTypesDescription": "Select {{productName}} roles for the imported users: <1>{{productName}} admin</1>, <1>Room admin</1> or <1>Power user</1>. By default, Power user role is selected for each user. You can manage the roles after the import.",
   "SendInviteLetter": "Send invite letter",
   "SendNotificationAboutRestoring": "Send notification about space restoring to users",

@@ -80,10 +80,9 @@ export const LogoutAllSessionDialog = ({
     }
   };
 
-  const bodySubtitle =
-    isSeveralSelection || isProfile
-      ? t("Profile:LogoutDescription")
-      : t("Profile:LogoutCurrentUserDescription", { displayName });
+  const bodySubtitle = isProfile
+    ? t("Profile:LogoutDescription")
+    : t("Profile:LogoutCurrentUserDescription", { displayName });
 
   const bodyText = !isSeveralSelection && (
     <>
@@ -114,7 +113,9 @@ export const LogoutAllSessionDialog = ({
       <ModalDialog.Header>{t("Common:LogoutButton")}</ModalDialog.Header>
 
       <ModalDialog.Body>
-        {bodySubtitle}
+        {!isSeveralSelection
+          ? bodySubtitle
+          : t("Settings:SelectedUsersWillBeLoggedOut")}
         {bodyText}
       </ModalDialog.Body>
       <ModalDialog.Footer>

@@ -979,7 +979,9 @@ class TableHeaderComponent extends React.Component<
 
       const differenceWithMinimum =
         itemSubstring -
-        (columns[index].key === "Name" ? minSize : DEFAULT_MIN_COLUMN_SIZE);
+        (columns[index].key === "Name" || columns[index].key === "Index"
+          ? minSize
+          : DEFAULT_MIN_COLUMN_SIZE);
 
       if (differenceWithMinimum >= addWidth) {
         newGridTemplateColumns[index] = `${itemSubstring - addWidth}px`;

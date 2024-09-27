@@ -578,6 +578,10 @@ const StyledBackupList = styled.div`
     .nav-thumb-vertical {
       margin-inline-start: -8px !important;
     }
+
+    .scroll-body {
+      padding-bottom: 12px !important;
+    }
   }
   .backup-restore_empty-list {
     margin-top: 96px;

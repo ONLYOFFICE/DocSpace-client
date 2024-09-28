@@ -57,6 +57,7 @@ const HEADER_HEIGHT = 54;
 const TABS_HEIGHT = 33;
 const BREAD_CRUMBS_HEIGHT = 38;
 const SEARCH_HEIGHT = 44;
+const INFO_BLOCK_MARGIN = 12;
 const BODY_DESCRIPTION_TEXT_HEIGHT = 32;
 const SELECT_ALL_HEIGHT = 61;
 const FOOTER_HEIGHT = 73;
@@ -197,7 +198,7 @@ const Body = ({
   if (withInfo) {
     const infoEl = document.getElementById("selector-info-text");
     if (infoEl) {
-      const height = infoEl.getClientRects()[0].height;
+      const height = infoEl.getClientRects()[0].height + INFO_BLOCK_MARGIN;
       listHeight -= height;
     }
   }

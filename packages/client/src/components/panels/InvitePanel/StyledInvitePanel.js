@@ -288,6 +288,19 @@ const StyledInviteInputContainer = styled.div`
 
   .access-selector {
     margin-inline-end: 0;
+
+    // Add space between access-selector's absolute positioned dropdown and modal footer
+    .dropdown-container {
+      overflow: unset;
+
+      ::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        height: 12px;
+      }
+    }
   }
 `;
 

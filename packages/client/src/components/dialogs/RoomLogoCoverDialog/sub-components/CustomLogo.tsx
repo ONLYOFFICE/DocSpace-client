@@ -29,12 +29,12 @@ import styled, { css } from "styled-components";
 import hexRgb from "hex-rgb";
 import { ReactSVG } from "react-svg";
 import { Text } from "@docspace/shared/components/text";
-import { CustomLogoProps } from "../RoomLogoCoverDialog.types";
 import { globalColors } from "@docspace/shared/themes";
+import { CustomLogoProps } from "../RoomLogoCoverDialog.types";
 
 interface StyledLogoProps {
   isBase: boolean;
-  color?: string;
+  color: string | null;
 }
 
 const StyledLogo = styled.div<StyledLogoProps>`

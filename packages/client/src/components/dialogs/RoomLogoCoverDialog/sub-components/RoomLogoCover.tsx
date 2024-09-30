@@ -238,35 +238,33 @@ const RoomLogoCover = ({
   );
 };
 
-export default inject<TStore>(
-  ({ settingsStore, dialogsStore, createEditRoomStore }) => {
-    const { theme, currentColorScheme } = settingsStore;
+export default inject<TStore>(({ settingsStore, dialogsStore }) => {
+  const { theme, currentColorScheme } = settingsStore;
 
-    const {
-      coverSelection,
-      setCover,
-      cover,
-      createRoomDialogProps,
-      editRoomDialogProps,
-      setRoomCoverDialogProps,
-      roomCoverDialogProps,
-    } = dialogsStore;
+  const {
+    coverSelection,
+    setCover,
+    cover,
+    createRoomDialogProps,
+    editRoomDialogProps,
+    setRoomCoverDialogProps,
+    roomCoverDialogProps,
+  } = dialogsStore;
 
-    const logo = createRoomDialogProps.visible ? null : coverSelection?.logo;
-    const title =
-      createRoomDialogProps.visible || editRoomDialogProps.visible
-        ? roomCoverDialogProps.title
-        : coverSelection?.title;
+  const logo = createRoomDialogProps.visible ? null : coverSelection?.logo;
+  const title =
+    createRoomDialogProps.visible || editRoomDialogProps.visible
+      ? roomCoverDialogProps.title
+      : coverSelection?.title;
 
-    return {
-      isBaseTheme: theme?.isBase,
-      logo,
-      title,
-      cover,
-      setCover,
-      setRoomCoverDialogProps,
-      roomCoverDialogProps,
-      currentColorScheme,
-    };
-  },
-)(observer(RoomLogoCover));
+  return {
+    isBaseTheme: theme?.isBase,
+    logo,
+    title,
+    cover,
+    setCover,
+    setRoomCoverDialogProps,
+    roomCoverDialogProps,
+    currentColorScheme,
+  };
+})(observer(RoomLogoCover));

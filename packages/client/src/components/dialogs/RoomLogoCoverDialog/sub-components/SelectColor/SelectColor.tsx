@@ -57,7 +57,7 @@ export const SelectColor = ({
 }: SelectColorProps) => {
   const [openColorPicker, setOpenColorPicker] = useState<boolean>(false);
   const isDefaultColor = logoColors.includes(roomColor);
-  const [pickerColor, setPickerColor] = useState<string>(
+  const [pickerColor, setPickerColor] = useState<string | null>(
     isDefaultColor ? "" : roomColor || "",
   );
 

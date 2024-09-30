@@ -24,25 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, RefObject } from "react";
 import type { TTranslation } from "@docspace/shared/types";
+import { TColorScheme } from "@docspace/shared/themes";
 
 export interface ICover {
   data: string;
   id: string;
 }
 
-interface ILogo {
+export interface ILogo {
   color: string;
   cover: ICover;
 }
 
-export interface CoverDialogProps {
-  isBaseTheme: boolean;
-  setRoomLogoCover: VoidFunction;
-  covers?: ICover[] | undefined;
-  getCovers: VoidFunction;
-  setRoomLogoCoverDialogVisible: (value: boolean) => void;
+interface IRoomCoverDialogProps {
+  icon: string | null | ILogo;
+  color: string | null;
+  title: string | null;
+  withoutIcon: boolean;
+  withSelection: boolean;
+  customColor: string | null;
 }
 
 export interface RoomLogoCoverProps {
@@ -50,12 +52,28 @@ export interface RoomLogoCoverProps {
   logo?: ILogo;
   title?: string;
   covers?: ICover[] | undefined;
-  setCover?: (color: string, icon: string | ICover) => void;
+  setCover: (color: string, icon: string | ICover) => void;
+  cover: ILogo;
+  setRoomCoverDialogProps: (params: IRoomCoverDialogProps) => void;
+  roomCoverDialogProps: IRoomCoverDialogProps;
+  forwardedRef?: React.ForwardedRef<HTMLDivElement>;
+  scrollHeight: string;
+  currentColorScheme: TColorScheme;
 }
 
+export type CoverDialogProps = RoomLogoCoverProps & {
+  setRoomLogoCover: VoidFunction;
+  covers?: ICover[] | undefined;
+  getCovers: VoidFunction;
+  setRoomLogoCoverDialogVisible: (value: boolean) => void;
+  createRoomDialogVisible: boolean;
+  editRoomDialogPropsVisible: boolean;
+  roomLogoCoverDialogVisible: boolean;
+};
+
 export interface CustomLogoProps {
-  color?: string;
-  icon?: string | ICover;
+  color: string | null;
+  icon: string | ILogo | null;
   withoutIcon: boolean;
   isBaseTheme: boolean;
   roomTitle: string;
@@ -64,14 +82,17 @@ export interface CustomLogoProps {
 export interface SelectColorProps {
   t: TTranslation;
   logoColors: string[];
-  selectedColor: string;
-  onChangeColor: Dispatch<SetStateAction<string>>;
+  selectedColor: string | null;
+  onChangeColor: (value: string) => void;
+  roomColor: string | null;
 }
 
 export interface SelectIconProps {
   t: TTranslation;
   withoutIcon: boolean;
-  setWithoutIcon: Dispatch<SetStateAction<boolean>>;
-  setIcon: Dispatch<SetStateAction<string | ICover>>;
+  setWithoutIcon: (value: boolean) => void;
+  setIcon: (icon: string | ILogo | null) => void;
   covers?: ICover[];
+  $currentColorScheme: TColorScheme;
+  coverId: string;
 }

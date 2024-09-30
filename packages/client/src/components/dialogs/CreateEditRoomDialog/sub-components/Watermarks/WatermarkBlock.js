@@ -62,7 +62,6 @@ const WatermarkBlock = ({
   isWatermarks = false,
   t,
 }) => {
-  console.log("isWatermarks", isWatermarks);
   const [watermarksChecked, setWatermarksChecked] = useState(
     isWatermarks && isEdit,
   );

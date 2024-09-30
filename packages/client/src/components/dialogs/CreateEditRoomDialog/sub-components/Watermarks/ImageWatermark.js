@@ -231,7 +231,6 @@ const ImageWatermark = ({
   //   setWatermarks({ image: fileInfo });
   // };
 
-  console.log("selectedRotate", selectedRotate.key, selectedScale.key);
   return (
     <StyledWatermark
       rotate={selectedRotate.key}

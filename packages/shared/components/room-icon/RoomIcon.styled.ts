@@ -124,6 +124,7 @@ const StyledIcon = styled.div<{
   }
 
   .room-icon_badge {
+    z-index: 2;
     position: absolute;
     margin-block: 24px 0;
     margin-inline: 24px 0;

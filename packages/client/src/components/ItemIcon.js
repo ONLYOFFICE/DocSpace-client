@@ -88,6 +88,7 @@ const ItemIcon = ({
   imgClassName,
   model,
   onChangeFile,
+  className,
 }) => {
   const isLoadedRoomIcon = !!logo;
   const showDefaultRoomIcon = !isLoadedRoomIcon && isRoom;
@@ -107,6 +108,7 @@ const ItemIcon = ({
           withEditing={withEditing}
           model={model}
           onChangeFile={onChangeFile}
+          className={className}
         />
       </IconWrapper>
       {isPrivacy && fileExst && <EncryptedFileIcon isEdit={false} />}

@@ -54,6 +54,8 @@ class FilesTableHeader extends React.Component {
       showStorageInfo,
       isArchiveFolder,
       tableStorageName,
+      isIndexing,
+      indexColumnSize,
       roomsFilter,
       filter,
     } = this.props;
@@ -332,6 +334,17 @@ class FilesTableHeader extends React.Component {
       defaultColumns.push(...columns);
     }
 
+    if (isIndexing) {
+      defaultColumns.unshift({
+        key: "Index",
+        title: "#",
+        enable: this.props.indexColumnIsEnabled,
+        minWidth: indexColumnSize,
+        resizable: false,
+        isShort: true,
+      });
+    }
+
     let columns = getColumns(defaultColumns, isRecentTab);
     const storageColumns = localStorage.getItem(tableStorageName);
     const splitColumns = storageColumns && storageColumns.split(",");
@@ -408,7 +421,9 @@ class FilesTableHeader extends React.Component {
       columnInfoPanelStorageName,
       isRecentTab,
       isArchiveFolder,
+      isIndexEditingMode,
       showStorageInfo,
+      indexColumnSize,
       roomsFilter,
       filter,
       changeDocumentsTabs,
@@ -419,6 +434,8 @@ class FilesTableHeader extends React.Component {
 
     if (
       isArchiveFolder !== prevProps.isArchiveFolder ||
+      indexColumnSize !== prevProps.indexColumnSize ||
+      isIndexEditingMode !== prevProps.isIndexEditingMode ||
       isRooms !== prevProps.isRooms ||
       isTrashFolder !== prevProps.isTrashFolder ||
       columnStorageName !== prevProps.columnStorageName ||
@@ -530,6 +547,9 @@ class FilesTableHeader extends React.Component {
       setHideColumns,
       isFrame,
       showSettings,
+
+      isIndexing,
+      isIndexEditingMode,
     } = this.props;
 
     const {
@@ -552,7 +572,9 @@ class FilesTableHeader extends React.Component {
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         resetColumnsSize={resetColumnsSize}
-        sortingVisible={sortingVisible}
+        isIndexing={isIndexing}
+        sortingVisible={isIndexing ? false : sortingVisible}
+        isIndexEditingMode={isIndexEditingMode}
         infoPanelVisible={infoPanelVisible}
         useReactWindow={!withPaging}
         tagRef={tagRef}
@@ -575,10 +597,13 @@ export default inject(
     clientLoadingStore,
     infoPanelStore,
     currentQuotaStore,
+    indexingStore,
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
     const { isDefaultRoomsQuotaSet, showStorageInfo } = currentQuotaStore;
+
+    const { isIndexEditingMode } = indexingStore;
 
     const {
       isHeaderChecked,
@@ -590,6 +615,7 @@ export default inject(
       headerBorder,
       roomsFilter,
       setRoomsFilter,
+      indexColumnSize,
     } = filesStore;
     const { isRecentTab, isArchiveFolder, isTrashFolder } = treeFoldersStore;
     const withContent = canShare;
@@ -610,6 +636,7 @@ export default inject(
       roomColumnIsEnabled,
       erasureColumnIsEnabled,
       sizeColumnIsEnabled,
+      indexColumnIsEnabled,
       sizeTrashColumnIsEnabled,
       typeColumnIsEnabled,
       typeTrashColumnIsEnabled,
@@ -633,7 +660,7 @@ export default inject(
     } = tableStore;
 
     const { isPublicRoom, publicRoomKey } = publicRoomStore;
-    const { changeDocumentsTabs } = selectedFolderStore;
+    const { changeDocumentsTabs, isIndexedFolder } = selectedFolderStore;
 
     return {
       setRoomsFilter,
@@ -642,6 +669,8 @@ export default inject(
       selectedFolderId: selectedFolderStore.id,
       withContent,
       sortingVisible,
+
+      isIndexing: isIndexedFolder,
 
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
 
@@ -666,6 +695,7 @@ export default inject(
       roomColumnIsEnabled,
       erasureColumnIsEnabled,
       sizeColumnIsEnabled,
+      indexColumnIsEnabled,
       sizeTrashColumnIsEnabled,
       typeColumnIsEnabled,
       typeTrashColumnIsEnabled,
@@ -696,6 +726,9 @@ export default inject(
       isDefaultRoomsQuotaSet,
       showStorageInfo,
       isArchiveFolder,
+      isIndexEditingMode,
+
+      indexColumnSize,
       changeDocumentsTabs,
     };
   },

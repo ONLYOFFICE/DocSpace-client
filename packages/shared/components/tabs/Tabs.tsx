@@ -40,28 +40,28 @@ import {
 } from "./Tabs.styled";
 import { TabsProps, TTabItem } from "./Tabs.types";
 import { TabsTypes } from "./Tabs.enums";
-import { OFFSET_RIGHT, OFFSET_LEFT, INDEX_NOT_FOUND } from "./Tabs.constants";
+import { OFFSET_RIGHT, OFFSET_LEFT } from "./Tabs.constants";
 
 const Tabs = (props: TabsProps) => {
   const {
     items,
     selectedItemId,
+    selectedItems = [],
     type = TabsTypes.Primary,
     stickyTop,
     onSelect,
+    multiple = false,
     ...rest
   } = props;
 
   const theme = useTheme();
 
-  let selectedItemIndex = items.findIndex((item) => item.id === selectedItemId);
-  if (selectedItemIndex === INDEX_NOT_FOUND) {
-    selectedItemIndex = 0;
-  }
+  const selectedItemIndex = !selectedItemId
+    ? 0
+    : items.findIndex((item) => item.id === selectedItemId);
 
-  const [currentItem, setCurrentItem] = useState<TTabItem>(
-    items[selectedItemIndex],
-  );
+  const [currentItem, setCurrentItem] = useState(selectedItemIndex);
+  const [multipleItems, setMultipleItems] = useState(selectedItems);
 
   const tabsRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<ScrollbarType>(null);
@@ -120,49 +120,91 @@ const Tabs = (props: TabsProps) => {
   );
 
   useEffect(() => {
-    setCurrentItem(items[selectedItemIndex]);
+    if (!multiple) setCurrentItem(selectedItemIndex);
+
     scrollToTab(selectedItemIndex);
-  }, [selectedItemIndex, items, scrollToTab]);
+  }, [selectedItemIndex, items, scrollToTab, multiple]);
 
   const setSelectedItem = (selectedTabItem: TTabItem, index: number): void => {
-    setCurrentItem(selectedTabItem);
-    scrollToTab(index);
+    if (multiple) {
+      const indexOperation = () => {
+        const newArray = [...multipleItems];
+
+        const deletionIndex = newArray.indexOf(index);
+
+        if (deletionIndex !== -1) {
+          newArray.splice(deletionIndex, 1);
+
+          return newArray;
+        }
+
+        newArray.push(index);
+        return newArray;
+      };
+
+      const updatedActiveTab = indexOperation();
+
+      setMultipleItems(updatedActiveTab);
+      onSelect?.(selectedTabItem);
+      return;
+    }
+
+    setCurrentItem(index);
     onSelect?.(selectedTabItem);
+
+    scrollToTab(index);
   };
 
+  const renderContent = (
+    <TabList ref={tabsRef} $type={type} multiple={multiple}>
+      {items.map((item, index) => {
+        const isActive = multiple
+          ? multipleItems.indexOf(index) !== -1
+          : index === currentItem;
+
+        return (
+          <Tab
+            key={item.id}
+            isActive={isActive}
+            isDisabled={item?.isDisabled}
+            $type={type}
+            multiple={multiple}
+            onClick={() => {
+              item.onClick?.();
+              setSelectedItem(item, index);
+            }}
+          >
+            {item.name}
+            <TabSubLine isActive={isActive} $type={type} />
+          </Tab>
+        );
+      })}
+    </TabList>
+  );
   return (
-    <StyledTabs {...rest} stickyTop={stickyTop}>
-      <div className="sticky">
-        {!isViewFirstTab && <div className="blur-ahead" />}
-        <ScrollbarTabs ref={scrollRef} autoHide={false} noScrollY $type={type}>
-          <TabList ref={tabsRef} $type={type}>
-            {items.map((item, index) => {
-              const isActive = item.id === currentItem.id;
-              return (
-                <Tab
-                  key={item.id}
-                  isActive={isActive}
-                  isDisabled={item?.isDisabled}
-                  $type={type}
-                  onClick={() => {
-                    item.onClick?.();
+    <StyledTabs {...rest} stickyTop={stickyTop} multiple={multiple}>
+      {multiple && renderContent}
 
-                    return setSelectedItem(item, index);
-                  }}
-                >
-                  {item.name}
-                  <TabSubLine isActive={isActive} $type={type} />
-                </Tab>
-              );
-            })}
-          </TabList>
-        </ScrollbarTabs>
-        {!isViewLastTab && <div className="blur-back" />}
-      </div>
+      {!multiple && (
+        <div className="sticky">
+          {!isViewFirstTab && <div className="blur-ahead" />}
 
+          <ScrollbarTabs
+            ref={scrollRef}
+            autoHide={false}
+            noScrollY
+            $type={type}
+          >
+            {renderContent}
+          </ScrollbarTabs>
+
+          {!isViewLastTab && <div className="blur-back" />}
+        </div>
+      )}
       <div className="sticky-indent" />
-
-      <div className="tabs-body">{currentItem?.content}</div>
+      {!multiple && (
+        <div className="tabs-body">{items[currentItem]?.content}</div>
+      )}
     </StyledTabs>
   );
 };

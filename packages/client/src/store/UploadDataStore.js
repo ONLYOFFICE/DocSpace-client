@@ -819,6 +819,11 @@ class UploadDataStore {
       }
 
       const addNewFile = () => {
+        if (!this.filesStore.showNewFilesInList) {
+          this.filesStore.setOperationAction(false);
+          return;
+        }
+
         if (folderInfo) {
           const isFolderExist = newFolders.find((x) => x.id === folderInfo.id);
           if (!isFolderExist && folderInfo) {

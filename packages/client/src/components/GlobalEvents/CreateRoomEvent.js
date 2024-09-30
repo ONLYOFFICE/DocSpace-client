@@ -52,6 +52,7 @@ const CreateRoomEvent = ({
   enableThirdParty,
   deleteThirdParty,
   startRoomType,
+  isNotWatermarkSet,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
   const [fetchedTags, setFetchedTags] = useState([]);
@@ -60,14 +61,17 @@ const CreateRoomEvent = ({
     setRoomParams(roomParams);
     setOnClose(onClose);
 
-    if (
+    const notConnectedThirdparty =
       roomParams.storageLocation.isThirdparty &&
-      !roomParams.storageLocation.storageFolderId
-    ) {
+      !roomParams.storageLocation.storageFolderId;
+
+    if (notConnectedThirdparty || isNotWatermarkSet()) {
       setCreateRoomConfirmDialogVisible(true);
-    } else {
-      onCreateRoom(false, t);
+
+      return;
     }
+
+    onCreateRoom(false, t);
   };
 
   const fetchTagsAction = useCallback(async () => {
@@ -139,6 +143,8 @@ export default inject(
       setIsLoading,
       setOnClose,
       confirmDialogIsLoading,
+
+      isNotWatermarkSet,
     } = createEditRoomStore;
 
     return {
@@ -156,6 +162,8 @@ export default inject(
       fetchThirdPartyProviders,
       enableThirdParty,
       deleteThirdParty,
+
+      isNotWatermarkSet,
       setCover,
     };
   },

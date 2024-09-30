@@ -313,6 +313,8 @@ const SectionFilterContent = ({
   isTrash,
   userId,
   isPersonalRoom,
+  isIndexing,
+  isIndexEditingMode,
 
   fetchThirdPartyProviders,
 
@@ -1623,6 +1625,13 @@ const SectionFilterContent = ({
                   group: FilterGroups.roomFilterType,
                   label: t("Common:PublicRoom"),
                 };
+              case RoomsType.VirtualDataRoom:
+                return {
+                  id: "filter_type-virtual-data",
+                  key: RoomsType.VirtualDataRoom,
+                  group: FilterGroups.roomFilterType,
+                  label: t("Common:VirtualDataRoom"),
+                };
               case RoomsType.CustomRoom:
               default:
                 return {
@@ -2408,6 +2417,8 @@ const SectionFilterContent = ({
       isPeopleAccounts={isPeopleAccounts}
       isGroupsAccounts={isGroupsAccounts}
       isInsideGroup={isInsideGroup}
+      isIndexing={isIndexing}
+      isIndexEditingMode={isIndexEditingMode}
       disableThirdParty={isTrash}
     />
   );
@@ -2426,6 +2437,8 @@ export default inject(
     userStore,
     settingsStore,
     currentQuotaStore,
+    indexingStore,
+    selectedFolderStore,
   }) => {
     const {
       filter,
@@ -2465,6 +2478,8 @@ export default inject(
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { showStorageInfo, isDefaultRoomsQuotaSet } = currentQuotaStore;
 
+    const { isIndexEditingMode } = indexingStore;
+    const { isIndexedFolder } = selectedFolderStore;
     const {
       filterStore,
 
@@ -2504,6 +2519,8 @@ export default inject(
       isRooms,
       isTrash,
       isArchiveFolder,
+      isIndexing: isIndexedFolder,
+      isIndexEditingMode,
 
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
       showFilterLoader: clientLoadingStore.showFilterLoader,

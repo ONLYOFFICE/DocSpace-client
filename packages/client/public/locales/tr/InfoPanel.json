@@ -48,7 +48,7 @@
   "RoomGroupRemove": "Grup kaldırıldı",
   "RoomLogoChanged": "Simge değişti",
   "RoomRemoveUser": "Simge değişti",
-  "RoomRenamed": "Oda <1>«{{oldRoomTitle}}»</1> <1>«{{roomTitle}}»</1> olarak yeniden adlandırıldı",
+  "RoomRenamed": "Oda <1>«{{oldRoomTitle}}»</1> <2>«{{roomTitle}}»</2> olarak yeniden adlandırıldı",
   "RoomsEmptyScreenTent": "Oda detaylarını buradan gör",
   "RoomUpdateAccess": "rol atanmıştır",
   "SelectedUsers": "Seçili hesaplar",

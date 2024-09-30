@@ -65,6 +65,8 @@ const FilesTableRow = (props) => {
     id,
     isRooms,
     isTrashFolder,
+    isIndexEditingMode,
+    isIndexing,
     isHighlight,
     hideColumns,
     onDragOver,
@@ -72,8 +74,11 @@ const FilesTableRow = (props) => {
     badgeUrl,
     isRecentTab,
     canDrag,
+    onEditIndex,
+    isIndexUpdated,
     displayFileExtension,
   } = props;
+
   const { acceptBackground, background } = theme.dragAndDrop;
 
   const element = (
@@ -83,6 +88,9 @@ const FilesTableRow = (props) => {
       fileExst={item.fileExst}
       isRoom={item.isRoom}
       title={item.title}
+      showDefault={
+        !(!!item?.logo?.cover || !!item?.logo?.medium) && item.isRoom
+      }
       logo={item.logo}
       color={item.logo?.color}
       isArchive={item.isArchive}
@@ -100,12 +108,16 @@ const FilesTableRow = (props) => {
   const dragStyles = {
     style: {
       background:
-        dragging && isDragging
+        dragging && isDragging && !isIndexEditingMode
           ? isDragActive
             ? acceptBackground
             : background
           : "none",
     },
+  };
+
+  const onChangeIndex = (action) => {
+    return onEditIndex(action, item, t);
   };
 
   const onDragOverEvent = (dragActive, e) => {
@@ -139,7 +151,19 @@ const FilesTableRow = (props) => {
 
   const idWithFileExst = item.fileExst
     ? `${item.id}_${item.fileExst}`
-    : item.id ?? "";
+    : (item.id ?? "");
+
+  const contextOptionProps = isIndexEditingMode
+    ? {}
+    : {
+        contextOptions: item.contextOptions,
+        getContextModel,
+      };
+
+  const changeIndex = (e, action) => {
+    e.stopPropagation();
+    onChangeIndex(action);
+  };
 
   return (
     <StyledDragAndDrop
@@ -164,16 +188,17 @@ const FilesTableRow = (props) => {
         selectionProp={selectionProp}
         key={item.id}
         fileContextClick={fileContextClick}
-        onClick={onMouseClick}
+        onClick={isIndexEditingMode ? () => {} : onMouseClick}
         isActive={isActive}
+        isIndexEditingMode={isIndexEditingMode}
         inProgress={inProgress}
         isFolder={item.isFolder}
         onHideContextMenu={onHideContextMenu}
         isThirdPartyFolder={item.isThirdPartyFolder}
-        onDoubleClick={onDoubleClick}
-        checked={checkedProps}
-        contextOptions={item.contextOptions}
-        getContextModel={getContextModel}
+        onDoubleClick={isIndexEditingMode ? () => {} : onDoubleClick}
+        checked={checkedProps || isIndexUpdated}
+        isIndexing={isIndexing}
+        isIndexUpdated={isIndexUpdated}
         showHotkeyBorder={showHotkeyBorder}
         displayFileExtension={displayFileExtension}
         title={
@@ -186,6 +211,7 @@ const FilesTableRow = (props) => {
         hideColumns={hideColumns}
         badgeUrl={badgeUrl}
         canDrag={canDrag}
+        {...contextOptionProps}
       >
         {isRooms ? (
           <RoomsRowDataComponent
@@ -211,6 +237,8 @@ const FilesTableRow = (props) => {
             element={element}
             dragStyles={dragStyles}
             selectionProp={selectionProp}
+            isIndexEditingMode={isIndexEditingMode}
+            changeIndex={changeIndex}
             {...props}
           />
         )}

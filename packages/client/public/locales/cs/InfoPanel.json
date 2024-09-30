@@ -48,7 +48,7 @@
   "RoomGroupRemove": "Skupina odstraněna",
   "RoomLogoChanged": "Změna ikony",
   "RoomRemoveUser": "Odstraněný uživatel.",
-  "RoomRenamed": "Místnost <1>«{{oldRoomTitle}}»</1> přejmenována na <1>«{{roomTitle}}»</1>",
+  "RoomRenamed": "Místnost <1>«{{oldRoomTitle}}»</1> přejmenována na <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Podrobnosti o místnostech najdete zde",
   "RoomUpdateAccess": "byl přidělen",
   "SelectedUsers": "Vybrané účty",

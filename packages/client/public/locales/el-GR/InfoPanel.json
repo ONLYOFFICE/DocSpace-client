@@ -48,7 +48,7 @@
   "RoomGroupRemove": "Η ομάδα αφαιρέθηκε.",
   "RoomLogoChanged": "Το εικονίδιο άλλαξε",
   "RoomRemoveUser": "Ο χρήστης αφαιρέθηκε.",
-  "RoomRenamed": "Το δωμάτιο <1>«{{oldRoomTitle}}»</1> μετονομάστηκε σε <1>«{{roomTitle}}»</1>",
+  "RoomRenamed": "Το δωμάτιο <1>«{{oldRoomTitle}}»</1> μετονομάστηκε σε <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Δείτε λεπτομέρειες για τα δωμάτια εδώ",
   "RoomUpdateAccess": "έχει εκχωρηθεί",
   "SelectedUsers": "Επιλεγμένοι λογαριασμοί",

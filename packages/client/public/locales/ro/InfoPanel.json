@@ -48,7 +48,7 @@
   "RoomGroupRemove": "Grupul a fost eliminat.",
   "RoomLogoChanged": "Pictograma a fost schimbată",
   "RoomRemoveUser": "Utilizatorul a fost eliminat.",
-  "RoomRenamed": "Sala <1>«{{oldRoomTitle}}»</1> a fost redenumită <1>«{{roomTitle}}»</1>",
+  "RoomRenamed": "Sala <1>«{{oldRoomTitle}}»</1> a fost redenumită <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Detaliile sălilor aici",
   "RoomUpdateAccess": "a fost atribuit",
   "SelectedUsers": "Conturi selectate",

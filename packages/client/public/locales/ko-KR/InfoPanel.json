@@ -48,7 +48,7 @@
   "RoomGroupRemove": "그룹이 제거되었습니다",
   "RoomLogoChanged": "아이콘이 변경되었습니다",
   "RoomRemoveUser": "사용자가 제거되었습니다.",
-  "RoomRenamed": "<1>«{{oldRoomTitle}}»</1> 룸의 이름이 <1>«{{roomTitle}}»</1> 룸으로 변경되었습니다",
+  "RoomRenamed": "<1>«{{oldRoomTitle}}»</1> 룸의 이름이 <2>«{{roomTitle}}»</2> 룸으로 변경되었습니다",
   "RoomsEmptyScreenTent": "여기에서 방 세부 정보를 확인하세요",
   "RoomUpdateAccess": "님에게 역할이 할당되었습니다",
   "SelectedUsers": "선택된 계정",

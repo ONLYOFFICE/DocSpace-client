@@ -246,6 +246,16 @@ export const getAccessOptions = (
         accesses.formFiller,
       ];
       break;
+
+    case RoomsType.VirtualDataRoom:
+      options = [
+        accesses.roomAdmin,
+        accesses.collaborator,
+        { key: "s1", isSeparator: withSeparator },
+        accesses.viewer,
+      ];
+      break;
+
     case -1:
       if (isOwner) options.push(accesses.portalAdmin);
 

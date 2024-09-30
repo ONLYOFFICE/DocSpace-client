@@ -48,7 +48,7 @@
   "RoomGroupRemove": "Gruppe entfernt",
   "RoomLogoChanged": "Icon geändert",
   "RoomRemoveUser": "Benutzer entfernt.",
-  "RoomRenamed": "Raum <1>«{{oldRoomTitle}}»</1> umbenannt in <1>«{{roomTitle}}»</1>",
+  "RoomRenamed": "Raum <1>«{{oldRoomTitle}}»</1> umbenannt in <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Siehe Details von Räumen hier",
   "RoomUpdateAccess": "wurde zugewiesen",
   "SelectedUsers": "Ausgewählte Konten",

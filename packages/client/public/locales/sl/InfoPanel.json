@@ -48,7 +48,7 @@
   "RoomGroupRemove": "Skupina odstranjena.",
   "RoomLogoChanged": "Ikona spremenjena",
   "RoomRemoveUser": "Ikona spremenjena",
-  "RoomRenamed": "Soba <1>«{{oldRoomTitle}}»</1> preimenovana v <1>«{{roomTitle}}»</1>",
+  "RoomRenamed": "Soba <1>«{{oldRoomTitle}}»</1> preimenovana v <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Oglej si podrobnosti o sobah tukaj",
   "RoomUpdateAccess": "je bila dodeljena vloga",
   "SelectedUsers": "Izbrani računi",

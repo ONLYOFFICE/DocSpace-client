@@ -48,7 +48,7 @@
   "RoomGroupRemove": "Grupa uklonjena",
   "RoomLogoChanged": "Ikona promenjena",
   "RoomRemoveUser": "Korisnik uklonjen.",
-  "RoomRenamed": "Prostorija <1>«{{oldRoomTitle}}»</1> preimenovana na <1>«{{roomTitle}}»</1>",
+  "RoomRenamed": "Prostorija <1>«{{oldRoomTitle}}»</1> preimenovana na <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Vidi detalje sobe ovde",
   "RoomUpdateAccess": "dodeljena je uloga",
   "SelectedUsers": "Odabrani nalozi",

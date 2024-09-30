@@ -48,7 +48,7 @@
   "RoomGroupRemove": "Đã xóa nhóm",
   "RoomLogoChanged": "Đã thay đổi biểu tượng",
   "RoomRemoveUser": "Đã xoá người dùng.",
-  "RoomRenamed": "Phòng <1>«{{oldRoomTitle}}»</1> được đổi tên thành <1>«{{roomTitle}}»</1>",
+  "RoomRenamed": "Phòng <1>«{{oldRoomTitle}}»</1> được đổi tên thành <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Xem chi tiết phòng tại đây",
   "RoomUpdateAccess": "đã được chỉ định vai trò",
   "SelectedUsers": "Tài khoản đã chọn",

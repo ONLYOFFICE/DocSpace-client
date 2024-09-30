@@ -48,7 +48,6 @@
   "RoomGroupRemove": "تمت إزالة المجموعة",
   "RoomLogoChanged": "تم تغيير الأيقونة",
   "RoomRemoveUser": "تمت إزالة المستخدم.",
-  "RoomRenamed": "تمت إعادة تسمية الغرفة <1>«{{oldRoomTitle}}»</1> إلى <1>«{{roomTitle}}»</1>",
   "RoomsEmptyScreenTent": "انظر تفاصيل الغرف هنا",
   "RoomUpdateAccess": "تم تعيين الوظيفة",
   "SelectedUsers": "الحسابات المحددة",

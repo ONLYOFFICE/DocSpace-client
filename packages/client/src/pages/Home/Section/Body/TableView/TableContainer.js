@@ -61,19 +61,28 @@ const StyledTableContainer = styled(TableContainer)`
     .table-container_file-name-cell {
       ${fileNameCss}
     }
+    .table-container_index-cell {
+      ${fileNameCss}
+    }
 
     .table-container_row-context-menu-wrapper {
       ${contextCss}
     }
   }
+  .table-container_index-cell {
+    margin-right: 0;
+    padding-right: 0;
+  }
 
   .table-row-selected + .table-row-selected {
     .table-row {
       .table-container_file-name-cell,
+      .table-container_index-cell,
       .table-container_row-context-menu-wrapper {
         border-image-slice: 1;
       }
-      .table-container_file-name-cell {
+      .table-container_file-name-cell,
+      .table-container_index-cell {
         ${fileNameCss}
         border-inline: 0; //for Safari macOS
 
@@ -91,7 +100,8 @@ const StyledTableContainer = styled(TableContainer)`
 
   .files-item:not(.table-row-selected) + .table-row-selected {
     .table-row {
-      .table-container_file-name-cell {
+      .table-container_file-name-cell,
+      .table-container_index-cell {
         ${fileNameCss}
       }
 
@@ -99,6 +109,17 @@ const StyledTableContainer = styled(TableContainer)`
         ${contextCss}
       }
     }
+  }
+
+  .resize-handle {
+    ${(props) =>
+      props.isIndexEditingMode &&
+      css`
+        cursor: default;
+        &:hover {
+          border-inline-end: ${({ theme }) => theme.tableContainer.borderRight};
+        }
+      `}
   }
 `;
 
@@ -122,11 +143,14 @@ const Table = ({
   filterTotal,
   isRooms,
   isTrashFolder,
+  isIndexEditingMode,
   withPaging,
   columnStorageName,
   columnInfoPanelStorageName,
   highlightFile,
   currentDeviceType,
+  onEditIndex,
+  isIndexing,
 }) => {
   const [tagCount, setTagCount] = React.useState(null);
   const [hideColumns, setHideColumns] = React.useState(false);
@@ -191,6 +215,9 @@ const Table = ({
         item={item}
         itemIndex={index}
         index={index}
+        onEditIndex={onEditIndex}
+        isIndexEditingMode={isIndexEditingMode}
+        isIndexing={isIndexing}
         setFirsElemChecked={setFirsElemChecked}
         setHeaderBorder={setHeaderBorder}
         theme={theme}
@@ -214,10 +241,16 @@ const Table = ({
     highlightFile.id,
     highlightFile.isExst,
     isTrashFolder,
+    isIndexEditingMode,
+    isIndexing,
   ]);
 
   return (
-    <StyledTableContainer useReactWindow={!withPaging} forwardedRef={ref}>
+    <StyledTableContainer
+      useReactWindow={!withPaging}
+      forwardedRef={ref}
+      isIndexEditingMode={isIndexEditingMode}
+    >
       <TableHeader
         sectionWidth={sectionWidth}
         containerRef={ref}
@@ -226,6 +259,7 @@ const Table = ({
         navigate={navigate}
         location={location}
         isRooms={isRooms}
+        isIndexing={isIndexing}
         filesList={filesList}
       />
 
@@ -237,6 +271,7 @@ const Table = ({
         itemCount={filterTotal}
         useReactWindow={!withPaging}
         infoPanelVisible={infoPanelVisible}
+        isIndexEditingMode={isIndexEditingMode}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         itemHeight={48}
       >
@@ -255,6 +290,10 @@ export default inject(
     tableStore,
     userStore,
     settingsStore,
+
+    indexingStore,
+    filesActionsStore,
+    selectedFolderStore,
   }) => {
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
@@ -271,11 +310,14 @@ export default inject(
       setHeaderBorder,
       fetchMoreFiles,
       hasMoreFiles,
-      filterTotal,
-      roomsFilterTotal,
+      roomsFilter,
       highlightFile,
+      filter,
     } = filesStore;
 
+    const { isIndexEditingMode } = indexingStore;
+    const { changeIndex } = filesActionsStore;
+    const { isIndexedFolder } = selectedFolderStore;
     const { withPaging, theme, currentDeviceType } = settingsStore;
 
     return {
@@ -289,14 +331,17 @@ export default inject(
       infoPanelVisible,
       fetchMoreFiles,
       hasMoreFiles,
-      filterTotal: isRooms ? roomsFilterTotal : filterTotal,
+      filterTotal: isRooms ? roomsFilter.total : filter.total,
       isRooms,
       isTrashFolder,
+      isIndexEditingMode,
+      isIndexing: isIndexedFolder,
       withPaging,
       columnStorageName,
       columnInfoPanelStorageName,
       highlightFile,
       currentDeviceType,
+      onEditIndex: changeIndex,
     };
   },
 )(observer(Table));

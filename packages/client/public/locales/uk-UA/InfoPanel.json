@@ -48,7 +48,7 @@
   "RoomGroupRemove": "Групу видалено",
   "RoomLogoChanged": "Піктограму змінено",
   "RoomRemoveUser": "Піктограму змінено",
-  "RoomRenamed": "Кімнату <1>«{{oldRoomTitle}}»</1> перейменовано в <1>«{{roomTitle}}»</1>",
+  "RoomRenamed": "Кімнату <1>«{{oldRoomTitle}}»</1> перейменовано в <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Див. інформацію про кімнати тут",
   "RoomUpdateAccess": "призначено роль",
   "SelectedUsers": "Вибрані облікові записи",

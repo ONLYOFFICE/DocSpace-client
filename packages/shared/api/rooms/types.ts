@@ -26,6 +26,10 @@
 
 import { TFile, TFolder } from "../files/types";
 import {
+  ExportRoomIndexTaskStatus,
+  FolderType,
+  RoomsType,
+  ShareAccessRights,
   FolderType,
   RoomsType,
   ShareAccessRights,
@@ -33,7 +37,13 @@ import {
 } from "../../enums";
 import { TCreatedBy, TPathParts } from "../../types";
 
+export type ICover = {
+  data: string;
+  id: string;
+};
+
 export type TLogo = {
+  cover: ICover;
   original: string;
   large: string;
   medium: string;
@@ -57,6 +67,12 @@ export type TRoomSecurity = {
   Duplicate: boolean;
   Download: boolean;
   CopySharedLink: boolean;
+};
+
+export type TRoomLifetime = {
+  deletePermanently: boolean;
+  period: number;
+  value: number;
 };
 
 export type TRoom = {
@@ -84,6 +100,7 @@ export type TRoom = {
   updatedBy: TCreatedBy;
   isArchive?: boolean;
   security: TRoomSecurity;
+  lifetime: TRoomLifetime;
 };
 
 export type TGetRooms = {
@@ -95,6 +112,17 @@ export type TGetRooms = {
   count: number;
   total: number;
   new: number;
+};
+
+export type TExportRoomIndexTask = {
+  id: string;
+  error: string;
+  percentage: number;
+  isCompleted: boolean;
+  status: ExportRoomIndexTaskStatus;
+  resultFileId: number;
+  resultFileName: string;
+  resultFileUrl: string;
 };
 
 export type TPublicRoomPassword = {

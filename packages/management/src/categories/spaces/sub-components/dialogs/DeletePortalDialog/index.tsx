@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import styled from "styled-components";
 import { useTranslation, Trans } from "react-i18next";
 import { observer } from "mobx-react";
 
@@ -34,8 +35,16 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { Link } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
 
 import { useStore } from "SRC_DIR/store";
+
+const StyledModalDialog = styled(ModalDialog)`
+  .warning-text {
+    color: ${(props) => props.theme.management.errorColor};
+    margin-bottom: 8px;
+  }
+`;
 
 const DeletePortalDialog = () => {
   const { spacesStore, settingsStore } = useStore();
@@ -47,10 +56,9 @@ const DeletePortalDialog = () => {
     setDeletePortalDialogVisible,
   } = spacesStore;
 
-  const { t } = useTranslation(["Management", "Common"]);
+  const { t } = useTranslation(["Management", "Settings", "Common"]);
 
-  const { owner, domain } = currentPortal;
-  const { displayName, email } = owner;
+  const { domain } = currentPortal;
 
   const onClose = () => setDeletePortalDialogVisible(false);
 
@@ -63,39 +71,33 @@ const DeletePortalDialog = () => {
   };
 
   return (
-    <ModalDialog
+    <StyledModalDialog
       visible={visible}
       onClose={onClose}
       displayType={ModalDialogType.modal}
+      autoMaxHeight
     >
-      <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {t("Settings:DeletePortal", { productName: t("Common:ProductName") })}
+      </ModalDialog.Header>
       <ModalDialog.Body>
+        <Text className="warning-text" fontSize="16px" fontWeight={700}>
+          {t("Common:Warning")}!
+        </Text>
         <Trans
           i18nKey="DeletePortalText"
           values={{
-            productName: t("Common:ProductName"),
-            displayName,
-            email,
-            domain,
+            docspaceAddress: domain,
           }}
           components={{
             1: <strong />,
-            5: (
-              <Link
-                className="email-link"
-                href={`mailto:${email}`}
-                noHover
-                color={currentColorScheme?.main?.accent}
-                title={email}
-              />
-            ),
           }}
         />
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           key="CreateButton"
-          label={t("Common:Delete")}
+          label={t("Common:ContinueButton")}
           size={ButtonSize.normal}
           scale
           primary
@@ -109,7 +111,7 @@ const DeletePortalDialog = () => {
           scale
         />
       </ModalDialog.Footer>
-    </ModalDialog>
+    </StyledModalDialog>
   );
 };
 

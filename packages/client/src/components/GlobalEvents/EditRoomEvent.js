@@ -27,11 +27,12 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import isEqual from "lodash/isEqual";
 import { EditRoomDialog } from "../dialogs";
 import { Encoder } from "@docspace/shared/utils/encoder";
-import api from "@docspace/shared/api";
-import { getRoomInfo } from "@docspace/shared/api/rooms";
+import { getRoomInfo, getWatermarkSettings } from "@docspace/shared/api/rooms";
 import { toastr } from "@docspace/shared/components/toast";
+import { RoomsType } from "@docspace/shared/enums";
 
 const EditRoomEvent = ({
   addActiveItems,
@@ -75,12 +76,25 @@ const EditRoomEvent = ({
 
   defaultRoomsQuota,
   isDefaultRoomsQuotaSet,
+  changeRoomLifetime,
+  setInitialWatermarks,
+  getWatermarkRequest,
+  watermarksSettings,
+  isNotWatermarkSet,
+  editRoomSettings,
+  isEqualWatermarkChanges,
+  onSaveRoomLogo,
+  uploadedFile,
+  updateRoom,
+  cover,
+  setRoomLogoCover,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common", "Files"]);
 
   const [fetchedTags, setFetchedTags] = useState([]);
   const [fetchedImage, setFetchedImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isInitLoading, setIsInitLoading] = useState(false);
 
   const startTags = Object.values(item.tags);
   const startObjTags = startTags.map((tag, i) => ({ id: i, name: tag }));
@@ -105,25 +119,13 @@ const EditRoomEvent = ({
       zoom: 1,
     },
     roomOwner: item.createdBy,
+    indexing: item.indexing,
+    lifetime: item.lifetime,
+    denyDownload: item.denyDownload,
 
     ...(isDefaultRoomsQuotaSet && {
       quota: item.quotaLimit,
     }),
-  };
-
-  const updateRoom = (oldRoom, newRoom) => {
-    // After rename of room with providerKey, it's id value changes too
-    if (oldRoom.providerKey) {
-      let index = getFolderIndex(oldRoom.id);
-
-      if (index === -1) {
-        index = getFolderIndex(newRoom.id);
-      }
-
-      return updateFolder(index, newRoom);
-    }
-
-    setFolder(newRoom);
   };
 
   const onSave = async (roomParams) => {
@@ -139,13 +141,13 @@ const EditRoomEvent = ({
     const isTitleChanged = roomParams?.title !== item.title;
     const isQuotaChanged = quotaLimit !== item.quotaLimit;
     const isOwnerChanged = roomParams?.roomOwner?.id !== item.createdBy.id;
+    const lifetimeChanged = !isEqual(roomParams.lifetime, item.lifetime);
+    const denyDownloadChanged = roomParams?.denyDownload !== item.denyDownload;
+    const indexingChanged = roomParams?.indexing !== item.indexing;
 
     const tags = roomParams.tags.map((tag) => tag.name);
     const newTags = roomParams.tags.filter((t) => t.isNew).map((t) => t.name);
     const removedTags = startTags.filter((sT) => !tags.includes(sT));
-
-    const uploadLogoData = new FormData();
-    uploadLogoData.append(0, roomParams.icon.uploadedFile);
 
     let room = null;
 
@@ -177,10 +179,40 @@ const EditRoomEvent = ({
           displayName: roomParams.roomOwner.label,
         };
       }
+
+      if (lifetimeChanged) {
+        actions.push(changeRoomLifetime(room.id, roomParams.lifetime));
+        room.lifetime = roomParams.lifetime;
+      }
+
+      if (denyDownloadChanged) {
+        actions.push(
+          editRoomSettings(room.id, { denyDownload: roomParams.denyDownload }),
+        );
+        room.denyDownload = roomParams.denyDownload;
+      }
+
+      if (indexingChanged) {
+        actions.push(
+          editRoomSettings(room.id, { indexing: roomParams.indexing }),
+        );
+        room.indexing = roomParams.indexing;
+      }
+
       if (tags.length) {
         const tagsToAddList = tags.filter((t) => !startTags.includes(t));
         actions.push(addTagsToRoom(room.id, tagsToAddList));
         room.tags = tags;
+      }
+
+      if (
+        !isEqualWatermarkChanges &&
+        watermarksSettings &&
+        !isNotWatermarkSet(true)
+      ) {
+        const request = getWatermarkRequest(room, watermarksSettings);
+
+        actions.push(request);
       }
 
       if (removedTags.length) {
@@ -196,7 +228,9 @@ const EditRoomEvent = ({
         room = await removeLogoFromRoom(room.id);
       }
 
-      if (roomParams.iconWasUpdated && roomParams.icon.uploadedFile) {
+      if (cover) {
+        setRoomLogoCover(room.id);
+      } else if (uploadedFile) {
         updateRoom(item, {
           ...room,
           logo: { big: item.logo.original },
@@ -204,34 +238,7 @@ const EditRoomEvent = ({
 
         addActiveItems(null, [room.id]);
 
-        const response = await uploadRoomLogo(uploadLogoData);
-        const url = URL.createObjectURL(roomParams.icon.uploadedFile);
-        const img = new Image();
-
-        const promise = new Promise((resolve) => {
-          img.onload = async () => {
-            const { x, y, zoom } = roomParams.icon;
-
-            try {
-              room = await addLogoToRoom(room.id, {
-                tmpFile: response.data,
-                ...calculateRoomLogoParams(img, x, y, zoom),
-              });
-            } catch (e) {
-              toastr.error(e);
-            }
-
-            !withPaging && updateRoom(item, room);
-            // updateInfoPanelSelection();
-            URL.revokeObjectURL(img.src);
-            setActiveFolders([]);
-            resolve();
-          };
-
-          img.src = url;
-        });
-
-        await promise;
+        await onSaveRoomLogo(room.id, roomParams.icon, item, true);
       } else {
         !withPaging &&
           updateRoom(item, {
@@ -242,10 +249,21 @@ const EditRoomEvent = ({
     } catch (err) {
       console.log(err);
     } finally {
-      if (withPaging) await updateCurrentFolder(null, currentFolderId);
+      const isEditCurrentFolder = item.id === currentFolderId;
+      const needTableContentUpdate =
+        (indexingChanged && isEditCurrentFolder) || withPaging;
 
-      if (item.id === currentFolderId) {
-        updateEditedSelectedRoom(editRoomParams.title, tags);
+      if (needTableContentUpdate)
+        await updateCurrentFolder(null, currentFolderId);
+
+      if (isEditCurrentFolder) {
+        updateEditedSelectedRoom({
+          title: editRoomParams.title,
+          tags,
+          lifetime: roomParams.lifetime,
+          indexing: roomParams.indexing,
+          denyDownload: roomParams.denyDownload,
+        });
         if (item.logo.original && !roomParams.icon.uploadedFile) {
           removeLogoPaths();
           // updateInfoPanelSelection();
@@ -255,7 +273,7 @@ const EditRoomEvent = ({
           updateLogoPathsCacheBreaker();
       }
 
-      updateInfoPanelSelection(room);
+      //updateInfoPanelSelection(room);
       setIsLoading(false);
       onClose();
     }
@@ -275,23 +293,30 @@ const EditRoomEvent = ({
   }, []);
 
   useEffect(() => {
-    const logo = item?.logo?.original ? item.logo.original : "";
-    if (logo) {
-      fetchLogoAction(logo);
-    }
-  }, []);
-
-  const fetchTagsAction = useCallback(async () => {
-    const tags = await fetchTags();
-    setFetchedTags(tags);
-  }, []);
-
-  useEffect(() => {
-    fetchTagsAction();
-  }, [fetchTagsAction]);
-
-  useEffect(() => {
     setCreateRoomDialogVisible(true);
+    setIsInitLoading(true);
+
+    const logo = item?.logo?.original ? item.logo.original : "";
+
+    const requests = [fetchTags()];
+
+    if (item?.roomType === RoomsType.VirtualDataRoom)
+      requests.push(getWatermarkSettings(item.id));
+
+    if (logo) requests.push(fetchLogoAction);
+
+    const fetchInfo = async () => {
+      const [tags, watermarks] = await Promise.all(requests);
+
+      setFetchedTags(tags);
+
+      setInitialWatermarks(watermarks);
+
+      setIsInitLoading(false);
+    };
+
+    fetchInfo();
+
     return () => setCreateRoomDialogVisible(false);
   }, []);
 
@@ -305,6 +330,8 @@ const EditRoomEvent = ({
       fetchedTags={fetchedTags}
       fetchedImage={fetchedImage}
       isLoading={isLoading}
+      isInitLoading={isInitLoading}
+      cover={cover}
     />
   );
 };
@@ -320,6 +347,8 @@ export default inject(
     filesSettingsStore,
     infoPanelStore,
     currentQuotaStore,
+    createEditRoomStore,
+    avatarEditorDialogStore,
   }) => {
     const {
       editRoom,
@@ -334,7 +363,10 @@ export default inject(
       removeLogoFromRoom,
       addActiveItems,
       setActiveFolders,
+      updateRoom,
     } = filesStore;
+
+    const { uploadedFile, onSaveRoomLogo } = avatarEditorDialogStore;
 
     const { createTag, fetchTags } = tagsStore;
     const {
@@ -344,13 +376,26 @@ export default inject(
       removeLogoPaths,
       updateLogoPathsCacheBreaker,
     } = selectedFolderStore;
-    const { updateCurrentFolder, changeRoomOwner } = filesActionsStore;
+    const {
+      updateCurrentFolder,
+      changeRoomOwner,
+      changeRoomLifetime,
+      editRoomSettings,
+    } = filesActionsStore;
     const { getThirdPartyIcon } = filesSettingsStore.thirdPartyStore;
-    const { setCreateRoomDialogVisible } = dialogsStore;
+    const { setCreateRoomDialogVisible, cover, setRoomLogoCover } =
+      dialogsStore;
     const { withPaging } = settingsStore;
     const { updateInfoPanelSelection } = infoPanelStore;
 
     const { defaultRoomsQuota, isDefaultRoomsQuotaSet } = currentQuotaStore;
+    const {
+      setInitialWatermarks,
+      watermarksSettings,
+      isNotWatermarkSet,
+      getWatermarkRequest,
+      isEqualWatermarkChanges,
+    } = createEditRoomStore;
 
     return {
       defaultRoomsQuota,
@@ -388,6 +433,19 @@ export default inject(
 
       updateInfoPanelSelection,
       changeRoomOwner,
+      changeRoomLifetime,
+      setInitialWatermarks,
+      watermarksSettings,
+      isNotWatermarkSet,
+      getWatermarkRequest,
+      editRoomSettings,
+      isEqualWatermarkChanges,
+
+      setRoomLogoCover,
+      uploadedFile,
+      onSaveRoomLogo,
+      updateRoom,
+      cover,
     };
   },
 )(observer(EditRoomEvent));

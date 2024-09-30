@@ -30,5 +30,6 @@ export type TSettingsTreeItem = {
   icon: string;
   link: string;
   tKey: string;
-  isHeader: boolean;
+  isHeader?: boolean;
+  isArticle?: boolean;
 };

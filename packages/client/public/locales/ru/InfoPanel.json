@@ -49,7 +49,7 @@
   "RoomGroupRemove": "Группа удалена",
   "RoomLogoChanged": "Иконка изменена",
   "RoomRemoveUser": "Пользователь удален.",
-  "RoomRenamed": "Комната <1>«{{oldRoomTitle}}»</1> переименована в <1>«{{roomTitle}}»</1>",
+  "RoomRenamed": "Комната <1>«{{oldRoomTitle}}»</1> переименована в <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Здесь будут представлены подробности о комнатах",
   "RoomUpdateAccess": "была назначена роль",
   "SelectedUsers": "Выбрано пользователей",

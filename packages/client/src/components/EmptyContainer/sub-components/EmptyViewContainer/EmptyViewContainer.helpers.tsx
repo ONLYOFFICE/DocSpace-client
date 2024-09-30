@@ -25,7 +25,7 @@ import DocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?
 import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
 import PresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.react.svg?url";
 import FormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
-import FolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
+import FolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 
 import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TRoomSecurity } from "@docspace/shared/api/rooms/types";
@@ -44,8 +44,8 @@ import {
   getRoomDescription,
   getRoomIcon,
   getRoomTitle,
-  getRootDesctiption,
-  getRootIcom,
+  getRootDescription,
+  getRootIcon,
   getRootTitle,
   helperOptions,
   isAdmin,
@@ -67,7 +67,7 @@ export const getDescription = (
   const isNotAdmin = isUser(access);
 
   if (isRootEmptyPage)
-    return getRootDesctiption(t, access, rootFolderType, isPublicRoom);
+    return getRootDescription(t, access, rootFolderType, isPublicRoom);
 
   if (isFolder)
     return getFolderDescription(
@@ -120,7 +120,7 @@ export const getIcon = (
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
 ): JSX.Element => {
-  if (isRootEmptyPage) return getRootIcom(rootFolderType, access, isBaseTheme);
+  if (isRootEmptyPage) return getRootIcon(rootFolderType, access, isBaseTheme);
 
   return isFolder
     ? getFolderIcon(parentRoomType, isBaseTheme, access, folderType)
@@ -268,6 +268,7 @@ export const getOptions = (
     title: t("EmptyView:MigrationDataTitle"),
     description: t("EmptyView:MigrationDataDescription", {
       productName: t("Common:ProductName"),
+      organizationName: t("Common:OrganizationName"),
     }),
     icon: <InviteUserFormIcon />,
     key: "migration-data",
@@ -410,6 +411,20 @@ export const getOptions = (
         uploadAllFromDocSpace,
         uploadFromDeviceAnyFile,
       ];
+
+    case RoomsType.VirtualDataRoom:
+      if (isNotAdmin) return [];
+
+      if (isCollaborator)
+        return [createFile, uploadAllFromDocSpace, uploadFromDeviceAnyFile];
+
+      return [
+        createFile,
+        inviteUser,
+        uploadAllFromDocSpace,
+        uploadFromDeviceAnyFile,
+      ];
+
     case RoomsType.CustomRoom:
       if (isNotAdmin) return [];
 

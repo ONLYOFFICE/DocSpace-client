@@ -26,7 +26,7 @@ import {
 import type {
   CreateEvent,
   EmptyViewContainerProps,
-  ExtensiontionType,
+  ExtensionType,
   UploadType,
 } from "./EmptyViewContainer.types";
 
@@ -217,7 +217,7 @@ export const useOptions = (
   );
 
   const onCreate = useCallback(
-    (extension: ExtensiontionType, withoutDialog?: boolean) => {
+    (extension: ExtensionType, withoutDialog?: boolean) => {
       const event: CreateEvent = new Event(Events.CREATE);
 
       const edit = extension === FileExtensions.PDF;

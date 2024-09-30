@@ -31,7 +31,7 @@ import { Row } from "@docspace/shared/components/row";
 
 import { WebhookRowContent } from "./WebhookRowContent";
 
-import SettingsIcon from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
+import SettingsIcon from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import HistoryIcon from "PUBLIC_DIR/images/history.react.svg?url";
 import DeleteIcon from "PUBLIC_DIR/images/delete.react.svg?url";
 

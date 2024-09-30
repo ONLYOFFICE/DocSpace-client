@@ -35,7 +35,7 @@ import { globalColors } from "@docspace/shared/themes";
 import { Badge } from "@docspace/shared/components/badge";
 import { commonIconsStyles } from "@docspace/shared/utils";
 
-import CatalogSpamIcon from "PUBLIC_DIR/images/catalog.spam.react.svg";
+import CatalogSpamIcon from "PUBLIC_DIR/images/icons/16/catalog.spam.react.svg";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 
 const StyledBadgesContainer = styled.div`

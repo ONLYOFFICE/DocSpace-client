@@ -1,8 +1,6 @@
 {
   "Desc": "Molimo postavite {{productName}} podatke za registraciju.",
   "ErrorEmail": "Nevažeća email adresa",
-  "ErrorInitWizard": "Servis je trenutno nedostupan, molimo pokušajte ponovo kasnije.",
-  "ErrorInitWizardButton": "Pokušajte ponovo",
   "ErrorLicenseBody": "Licenca nije važeća. Uverite se da ste izabrali ispravnu datoteku.",
   "ErrorPassword": "Lozinka ne ispunjava zahteve",
   "ErrorUploadLicenseFile": "Izaberi datoteku licence",

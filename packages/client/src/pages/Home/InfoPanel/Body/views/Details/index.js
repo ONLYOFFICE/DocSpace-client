@@ -29,12 +29,15 @@ import { useNavigate } from "react-router-dom";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
+import { isMobile } from "@docspace/shared/utils";
+
 import { FileType, FolderType } from "@docspace/shared/enums";
 import { Text } from "@docspace/shared/components/text";
 
 import DetailsHelper from "../../helpers/DetailsHelper.js";
 import { StyledNoThumbnail, StyledThumbnail } from "../../styles/details.js";
 import { StyledProperties, StyledSubtitle } from "../../styles/common.js";
+
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 const Details = ({
   t,
@@ -49,6 +52,8 @@ const Details = ({
   isArchive,
   isDefaultRoomsQuotaSet,
   setNewInfoPanelSelection,
+  getLogoCoverModel,
+  onChangeFile,
 }) => {
   const [itemProperties, setItemProperties] = useState([]);
 
@@ -85,19 +90,27 @@ const Details = ({
     }
   }, [selection]);
 
+  const onChangeFileContext = (e) => {
+    onChangeFile(e, t);
+  };
+
   useEffect(() => {
     createThumbnailAction();
   }, [selection, createThumbnailAction]);
 
-  const currentIcon =
-    !isArchive && selection?.logo?.large
-      ? selection?.logo?.large
+  const currentIcon = selection?.logo?.large
+    ? selection?.logo?.large
+    : selection?.logo?.cover
+      ? selection?.logo
       : getInfoPanelItemIcon(selection, 96);
 
   //console.log("InfoPanel->Details render", { selection });
 
-  const isLoadedRoomIcon = !!selection.logo?.large;
+  const isLoadedRoomIcon = !!selection.logo?.cover || !!selection.logo?.large;
   const showDefaultRoomIcon = !isLoadedRoomIcon && selection.isRoom;
+
+  const hasImage = selection?.logo?.original;
+  const model = getLogoCoverModel(t, hasImage);
 
   return (
     <>
@@ -124,6 +137,7 @@ const Details = ({
             isArchive={isArchive}
             size="96px"
             radius="16px"
+            isRoom={selection.isRoom}
             showDefault={showDefaultRoomIcon}
             imgClassName={`no-thumbnail-img ${selection.isRoom && "is-room"} ${
               selection.isRoom &&
@@ -131,7 +145,11 @@ const Details = ({
               selection.logo?.large &&
               "custom-logo"
             }`}
-            imgSrc={currentIcon}
+            logo={currentIcon}
+            model={model}
+            withEditing={selection.isRoom}
+            dropDownManualX={isMobile() ? "-30px" : "-10px"}
+            onChangeFile={onChangeFileContext}
           />
         </StyledNoThumbnail>
       )}
@@ -168,6 +186,8 @@ export default inject(
     infoPanelStore,
     userStore,
     currentQuotaStore,
+    dialogsStore,
+    avatarEditorDialogStore,
   }) => {
     const {
       infoPanelSelection,
@@ -199,6 +219,16 @@ export default inject(
       isArchive,
       isDefaultRoomsQuotaSet,
       setNewInfoPanelSelection,
+      getLogoCoverModel: dialogsStore.getLogoCoverModel,
+      onChangeFile: avatarEditorDialogStore.onChangeFile,
     };
   },
-)(withTranslation(["InfoPanel", "Common", "Translations", "Files"])(Details));
+)(
+  withTranslation([
+    "InfoPanel",
+    "Common",
+    "Translations",
+    "Files",
+    "RoomLogoCover",
+  ])(Details),
+);

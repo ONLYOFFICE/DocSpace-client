@@ -11,7 +11,6 @@
   "EnterSecretKey": "Secret key invoeren",
   "EnterUrl": "Voer URL in",
   "EnterWebhookName": "Voer de naam van de webhook in",
-  "EventHint": "Leveringen worden na 15 dagen automatisch verwijderd",
   "EventID": "Event ID",
   "FailedToConnect": "We konden deze payload niet afleveren: verbinding met host mislukt",
   "From": "Van",

@@ -24,23 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
-import { Row } from "@docspace/shared/components/row";
-import { RoomContent } from "./RoomContent";
-import { observer } from "mobx-react";
-import styled from "styled-components";
-import CatalogSettingsReactSvgUrl from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
+import CatalogSettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import ExternalLinkIcon from "PUBLIC_DIR/images/external.link.react.svg?url";
 import DefaultLogoUrl from "PUBLIC_DIR/images/logo/leftmenu.svg?url";
 import ChangQuotaReactSvgUrl from "PUBLIC_DIR/images/change.quota.react.svg?url";
 import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?url";
+
+import React, { useState } from "react";
+import styled from "styled-components";
+import { useTranslation } from "react-i18next";
+import { observer } from "mobx-react";
+import { ReactSVG } from "react-svg";
+
+import { Row } from "@docspace/shared/components/row";
+import { RoomContent } from "./RoomContent";
+
 import ChangeStorageQuotaDialog from "client/ChangeStorageQuotaDialog";
 
-import { useTranslation } from "react-i18next";
 import { TPortals } from "SRC_DIR/types/spaces";
-
-import { ReactSVG } from "react-svg";
 import { useStore } from "SRC_DIR/store";
 
 const StyledRoomRow = styled(Row)`
@@ -74,7 +76,7 @@ const SpacesRoomRow = ({ item }: TRow) => {
 
   const { t } = useTranslation(["Common", "Files", "Settings"]);
 
-  const logoElement = <ReactSVG id={item.key} src={DefaultLogoUrl} />;
+  const logoElement = <ReactSVG id={item.portalName} src={DefaultLogoUrl} />;
 
   const protocol = window?.location?.protocol;
 
@@ -144,11 +146,14 @@ const SpacesRoomRow = ({ item }: TRow) => {
       <StyledRoomRow
         contextOptions={contextOptionsProps}
         element={logoElement}
-        key={item.id}
-        data={item}
+        key={item.portalName}
         theme={theme}
       >
-        <RoomContent item={item} isCurrentPortal={isCurrentPortal} />
+        <RoomContent
+          item={item}
+          isCurrentPortal={isCurrentPortal}
+          theme={theme}
+        />
       </StyledRoomRow>
     </>
   );

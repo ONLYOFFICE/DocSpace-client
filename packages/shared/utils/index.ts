@@ -168,7 +168,11 @@ export const getTitleWithoutExtension = (
     : item.title;
 };
 
-export const getLastColumn = (tableStorageName: string) => {
+export const getLastColumn = (
+  tableStorageName: string,
+  storageColumnsSize?: string,
+  isIndexEditingMode?: boolean,
+) => {
   if (!tableStorageName) return;
 
   const storageColumns = localStorage.getItem(tableStorageName);
@@ -178,8 +182,19 @@ export const getLastColumn = (tableStorageName: string) => {
   const filterColumns = columns.filter(
     (column) => column !== "false" && column !== "QuickButtons",
   );
+  let hideColumnsTable = false;
 
+  if (isIndexEditingMode) {
+    hideColumnsTable = !storageColumnsSize
+      ?.split(" ")
+      .filter(
+        (item, index, array) =>
+          index !== 0 && index !== 1 && index !== array.length - 1,
+      )
+      .find((item) => item !== "0px");
+  }
+
+  if (hideColumnsTable) return filterColumns[1];
   if (filterColumns.length > 0) return filterColumns[filterColumns.length - 1];
-
   return null;
 };

@@ -38,10 +38,14 @@ import type {
   Nullable,
   TCreatedBy,
   TPathParts,
-  TTranslation,
+  // TTranslation,
 } from "@docspace/shared/types";
 import { TFolder, TFolderSecurity } from "@docspace/shared/api/files/types";
-import { TLogo, TRoomSecurity } from "@docspace/shared/api/rooms/types";
+import {
+  TLogo,
+  TRoomLifetime,
+  TRoomSecurity,
+} from "@docspace/shared/api/rooms/types";
 
 import { setDocumentTitle } from "../helpers/utils";
 
@@ -139,7 +143,13 @@ class SelectedFolderStore {
 
   canShare = false;
 
+  indexing = false;
+
   parentRoomType: Nullable<FolderType> = null;
+
+  lifetime: TRoomLifetime | null = null;
+
+  denyDownload: boolean | undefined;
 
   usedSpace: number | undefined;
 
@@ -148,6 +158,8 @@ class SelectedFolderStore {
   isCustomQuota: boolean | undefined;
 
   changeDocumentsTabs = false;
+
+  order: Nullable<string> = null;
 
   constructor(settingsStore: SettingsStore) {
     makeAutoObservable(this);
@@ -192,11 +204,19 @@ class SelectedFolderStore {
       type: this.type,
       isRootFolder: this.isRootFolder,
       parentRoomType: this.parentRoomType,
+      lifetime: this.lifetime,
+      indexing: this.indexing,
+      denyDownload: this.denyDownload,
       usedSpace: this.usedSpace,
       quotaLimit: this.quotaLimit,
       isCustomQuota: this.isCustomQuota,
+      order: this.order,
     };
   };
+
+  get isIndexedFolder() {
+    return !!(this.indexing || this.order);
+  }
 
   get isRootFolder() {
     return this.pathParts && this.pathParts.length <= 1;
@@ -233,9 +253,13 @@ class SelectedFolderStore {
     this.type = null;
     this.inRoom = false;
     this.parentRoomType = null;
+    this.lifetime = null;
+    this.indexing = false;
+    this.denyDownload = false;
     this.usedSpace = undefined;
     this.quotaLimit = undefined;
     this.isCustomQuota = undefined;
+    this.order = null;
   };
 
   setParentId = (parentId: number) => {
@@ -262,9 +286,15 @@ class SelectedFolderStore {
     this.changeDocumentsTabs = changeDocumentsTabs;
   };
 
-  updateEditedSelectedRoom = (title = this.title, tags = this.tags) => {
-    this.title = title;
-    this.tags = tags;
+  updateEditedSelectedRoom: (selectedFolder: TSetSelectedFolder) => void = (
+    selectedFolder,
+  ) => {
+    Object.entries(selectedFolder).forEach(([key, item]) => {
+      if (key in this) {
+        // @ts-expect-error its always be good
+        this[key] = item;
+      }
+    });
   };
 
   setInRoom = (inRoom: boolean) => {
@@ -309,10 +339,11 @@ class SelectedFolderStore {
     if (!("providerId" in selectedFolder)) this.providerId = null;
     if (!("providerItem" in selectedFolder)) this.providerItem = null;
     if (!("providerKey" in selectedFolder)) this.providerKey = null;
+    if (!("order" in selectedFolder)) this.order = null;
   };
 
   setSelectedFolder: (
-    t: TTranslation,
+    // t: TTranslation,
     selectedFolder: TSetSelectedFolder | null,
   ) => void = (selectedFolder) => {
     const socketHelper = this.settingsStore?.socketHelper;

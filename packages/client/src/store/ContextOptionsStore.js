@@ -24,13 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import FileActionsOwnerReactSvgUrl from "PUBLIC_DIR/images/file.actions.owner.react.svg?url";
 import HistoryReactSvgUrl from "PUBLIC_DIR/images/history.react.svg?url";
 import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
 import MoveReactSvgUrl from "PUBLIC_DIR/images/move.react.svg?url";
 import CheckBoxReactSvgUrl from "PUBLIC_DIR/images/check-box.react.svg?url";
 import FolderReactSvgUrl from "PUBLIC_DIR/images/folder.react.svg?url";
 import ReconnectSvgUrl from "PUBLIC_DIR/images/reconnect.svg?url";
-import SettingsReactSvgUrl from "PUBLIC_DIR/images/catalog.settings.react.svg?url";
+import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import FolderLocationReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
 import TickRoundedSvgUrl from "PUBLIC_DIR/images/tick.rounded.svg?url";
 import FavoritesReactSvgUrl from "PUBLIC_DIR/images/favorites.react.svg?url";
@@ -39,7 +40,7 @@ import DownloadAsReactSvgUrl from "PUBLIC_DIR/images/download-as.react.svg?url";
 import RenameReactSvgUrl from "PUBLIC_DIR/images/rename.react.svg?url";
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
-import LockedReactSvgUrl from "PUBLIC_DIR/images/locked.react.svg?url";
+import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 import DuplicateReactSvgUrl from "PUBLIC_DIR/images/duplicate.react.svg?url";
 import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
@@ -55,12 +56,13 @@ import UnmuteReactSvgUrl from "PUBLIC_DIR/images/unmute.react.svg?url";
 import MuteReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
 import ShareReactSvgUrl from "PUBLIC_DIR/images/share.react.svg?url";
 import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
+import EditIndexReactSvgUrl from "PUBLIC_DIR/images/edit.index.react.svg?url";
 import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 import MailReactSvgUrl from "PUBLIC_DIR/images/mail.react.svg?url";
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import PluginActionsSvgUrl from "PUBLIC_DIR/images/plugin.actions.react.svg?url";
 import LeaveRoomSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
-import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
+import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
 import RemoveOutlineSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import PersonAdminReactSvgUrl from "PUBLIC_DIR/images/person.admin.react.svg?url";
 import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg?url";
@@ -74,11 +76,12 @@ import ActionsPresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentati
 import FormReactSvgUrl from "PUBLIC_DIR/images/access.form.react.svg?url";
 import FormBlankReactSvgUrl from "PUBLIC_DIR/images/form.blank.react.svg?url";
 import FormGalleryReactSvgUrl from "PUBLIC_DIR/images/form.gallery.react.svg?url";
-import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
+import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
+import ExportRoomIndexSvgUrl from "PUBLIC_DIR/images/icons/16/export-room-index.react.svg?url";
 
 import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
 
@@ -144,6 +147,7 @@ class ContextOptionsStore {
   currentTariffStatusStore;
   currentQuotaStore;
   userStore;
+  indexingStore;
   clientLoadingStore;
 
   linksIsLoading = false;
@@ -166,6 +170,7 @@ class ContextOptionsStore {
     currentTariffStatusStore,
     currentQuotaStore,
     userStore,
+    indexingStore,
     clientLoadingStore,
   ) {
     makeAutoObservable(this);
@@ -186,6 +191,7 @@ class ContextOptionsStore {
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.currentQuotaStore = currentQuotaStore;
     this.userStore = userStore;
+    this.indexingStore = indexingStore;
     this.clientLoadingStore = clientLoadingStore;
   }
 
@@ -541,8 +547,8 @@ class ContextOptionsStore {
   // };
 
   onClickDownload = (item, t) => {
-    const { fileExst, contentLength, viewUrl } = item;
-    const isFile = !!fileExst && contentLength;
+    const { viewUrl, isFolder } = item;
+    const isFile = !isFolder;
 
     const { openUrl } = this.settingsStore;
     const { downloadAction } = this.filesActionsStore;
@@ -923,6 +929,14 @@ class ContextOptionsStore {
     const { action } = data;
 
     this.filesActionsStore.setMuteAction(action, item, t);
+  };
+
+  onExportRoomIndex = (t, roomId) => {
+    this.filesActionsStore.exportRoomIndex(t, roomId);
+  };
+
+  onEditIndex = () => {
+    this.indexingStore.setIsIndexEditingMode(true);
   };
 
   onClickRemoveFromRecent = (item) => {
@@ -1412,6 +1426,18 @@ class ContextOptionsStore {
         ? item.security.CopySharedLink
         : item.security?.EditAccess;
 
+    const { isFiltered } = this.filesStore;
+    const { isIndexedFolder, security } = this.selectedFolderStore;
+
+    const indexOptions = {
+      id: "option_edit-index",
+      key: "edit-index",
+      label: t("Common:EditIndex"),
+      icon: EditIndexReactSvgUrl,
+      onClick: () => this.onEditIndex(),
+      disabled: !security?.EditRoom || !isIndexedFolder || isFiltered,
+    };
+
     const optionsModel = [
       {
         id: "option_select",
@@ -1589,6 +1615,22 @@ class ContextOptionsStore {
       ...pinOptions,
       ...muteOptions,
       {
+        id: "option_export-room-index",
+        key: "export-room-index",
+        label: t("Files:ExportRoomIndex"),
+        icon: ExportRoomIndexSvgUrl,
+        onClick: () => this.onExportRoomIndex(t, item.id),
+        disabled: !item.indexing,
+      },
+      {
+        id: "option_owner-change",
+        key: "owner-change",
+        label: t("Translations:OwnerChange"),
+        icon: FileActionsOwnerReactSvgUrl,
+        onClick: this.onOwnerChange,
+        disabled: false,
+      },
+      {
         id: "option_link-for-portal-users",
         key: "link-for-portal-users",
         label: t("LinkForPortalUsers", {
@@ -1710,6 +1752,7 @@ class ContextOptionsStore {
         onClick: this.onRestoreAction,
         disabled: false,
       },
+      indexOptions,
       {
         id: "option_rename",
         key: "rename",
@@ -1790,7 +1833,6 @@ class ContextOptionsStore {
         disabled: !this.treeFoldersStore.isRecentTab,
       },
     ];
-
     const options = this.filterModel(optionsModel, contextOptions);
 
     const pluginItems = this.onLoadPlugins(item);

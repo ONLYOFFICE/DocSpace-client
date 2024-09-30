@@ -115,6 +115,7 @@ const PureHome = (props) => {
     isPrivacyFolder,
     isRecycleBinFolder,
     isErrorRoomNotAvailable,
+    isIndexEditingMode,
 
     primaryProgressDataPercent,
     primaryProgressDataIcon,
@@ -363,6 +364,7 @@ const PureHome = (props) => {
   sectionProps.secondaryProgressBarIcon = secondaryProgressDataStoreIcon;
   sectionProps.showSecondaryButtonAlert = secondaryProgressDataStoreAlert;
   sectionProps.getContextModel = getContextModel;
+  sectionProps.isIndexEditingMode = isIndexEditingMode;
 
   return (
     <>
@@ -453,6 +455,7 @@ export const Component = inject(
     currentTariffStatusStore,
     settingsStore,
     contextOptionsStore,
+    indexingStore,
   }) => {
     const { setSelectedFolder, security: folderSecurity } = selectedFolderStore;
     const {
@@ -631,6 +634,7 @@ export const Component = inject(
       isErrorRoomNotAvailable,
       isRoomsFolder,
       isArchiveFolder,
+      isIndexEditingMode: indexingStore.isIndexEditingMode,
 
       disableDrag,
 

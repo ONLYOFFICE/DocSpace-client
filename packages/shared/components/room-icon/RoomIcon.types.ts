@@ -6,6 +6,8 @@ type RoomIconDefault = {
   showDefault: boolean;
   imgClassName?: string;
   className?: string;
+  hoverSrc?: string;
+  withEditing?: boolean;
 };
 
 type RoomIconColor = {

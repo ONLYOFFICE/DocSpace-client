@@ -313,8 +313,10 @@ const SectionFilterContent = ({
   isTrash,
   userId,
   isPersonalRoom,
+  isIndexing,
+  isIndexEditingMode,
 
-  providers,
+  fetchThirdPartyProviders,
 
   clearSearch,
   setClearSearch,
@@ -1516,7 +1518,12 @@ const SectionFilterContent = ({
     }
 
     let tags = null;
-    if (!isPublicRoom) tags = await fetchTags();
+    let providers = [];
+    if (!isPublicRoom) {
+      const res = await Promise.all([fetchTags(), fetchThirdPartyProviders()]);
+      tags = res[0];
+      providers = res[1];
+    }
     const connectedThirdParty = [];
 
     providers.forEach((item) => {
@@ -1617,6 +1624,13 @@ const SectionFilterContent = ({
                   key: RoomsType.PublicRoom,
                   group: FilterGroups.roomFilterType,
                   label: t("Common:PublicRoom"),
+                };
+              case RoomsType.VirtualDataRoom:
+                return {
+                  id: "filter_type-virtual-data",
+                  key: RoomsType.VirtualDataRoom,
+                  group: FilterGroups.roomFilterType,
+                  label: t("Common:VirtualDataRoom"),
                 };
               case RoomsType.CustomRoom:
               default:
@@ -1924,7 +1938,6 @@ const SectionFilterContent = ({
     return filterOptions;
   }, [
     t,
-    providers,
     isPersonalRoom,
     isRooms,
     isPeopleAccounts,
@@ -2404,6 +2417,8 @@ const SectionFilterContent = ({
       isPeopleAccounts={isPeopleAccounts}
       isGroupsAccounts={isGroupsAccounts}
       isInsideGroup={isInsideGroup}
+      isIndexing={isIndexing}
+      isIndexEditingMode={isIndexEditingMode}
       disableThirdParty={isTrash}
     />
   );
@@ -2422,6 +2437,8 @@ export default inject(
     userStore,
     settingsStore,
     currentQuotaStore,
+    indexingStore,
+    selectedFolderStore,
   }) => {
     const {
       filter,
@@ -2441,7 +2458,7 @@ export default inject(
       setRoomsFilter,
     } = filesStore;
 
-    const { providers } = thirdPartyStore;
+    const { fetchThirdPartyProviders } = thirdPartyStore;
 
     const { fetchTags } = tagsStore;
     const { isRoomAdmin } = authStore;
@@ -2461,6 +2478,8 @@ export default inject(
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { showStorageInfo, isDefaultRoomsQuotaSet } = currentQuotaStore;
 
+    const { isIndexEditingMode } = indexingStore;
+    const { isIndexedFolder } = selectedFolderStore;
     const {
       filterStore,
 
@@ -2500,6 +2519,8 @@ export default inject(
       isRooms,
       isTrash,
       isArchiveFolder,
+      isIndexing: isIndexedFolder,
+      isIndexEditingMode,
 
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
       showFilterLoader: clientLoadingStore.showFilterLoader,
@@ -2511,7 +2532,7 @@ export default inject(
       isPersonalRoom,
       infoPanelVisible,
       setCurrentRoomsFilter,
-      providers,
+      fetchThirdPartyProviders,
 
       isLoadedEmptyPage,
 

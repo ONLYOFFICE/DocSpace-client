@@ -27,7 +27,6 @@
   "Other": "Drugo",
   "OwnerChange": "Promeni vlasnika",
   "Presentations": "Prezentacije",
-  "PublicRoomLinkValidTime": "Link je validan do {{date}}. Kada istekne, biće nemoguće pristupiti sobi putem ovog linka.",
   "RoleCommentator": "Komentator",
   "RoleCommentatorDescription": "Operacije sa postojećim datotekama: pregledanje, komentarisanje.",
   "RoleEditorDescription": "Operacije sa postojećim datotekama: pregledanje, uređivanje, popunjavanje obrazaca, recenziranje, komentarisanje.",

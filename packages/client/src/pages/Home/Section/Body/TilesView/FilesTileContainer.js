@@ -32,6 +32,7 @@ import React, {
   useMemo,
   useContext,
 } from "react";
+import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { Context } from "@docspace/shared/utils";
@@ -42,12 +43,7 @@ import { elementResizeDetector, getThumbSize } from "./FileTile.utils";
 
 import TileContainer from "./sub-components/TileContainer";
 
-const FilesTileContainer = ({
-  filesList,
-  t,
-  withPaging,
-  thumbnails1280x720,
-}) => {
+const FilesTileContainer = ({ filesList, withPaging, thumbnails1280x720 }) => {
   const tileRef = useRef(null);
   const timerRef = useRef(null);
   const isMountedRef = useRef(true);
@@ -55,6 +51,8 @@ const FilesTileContainer = ({
   const [columnCount, setColumnCount] = useState(null);
 
   const { sectionWidth } = useContext(Context);
+
+  const { t } = useTranslation(["Translations"]);
 
   useEffect(() => {
     return () => {

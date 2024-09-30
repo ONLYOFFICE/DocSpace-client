@@ -1,5 +1,5 @@
 import { create } from "@storybook/theming/create";
-import Logo from "./darksmall.svg?url";
+import Logo from "../../../public/images/logo/dark_lightsmall.svg?url";
 import { globalColors } from "../themes";
 
 export default create({

@@ -34,7 +34,7 @@ import PinReactSvgUrl from "PUBLIC_DIR/images/pin.react.svg?url";
 import UnpinReactSvgUrl from "PUBLIC_DIR/images/unpin.react.svg?url";
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
-import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/catalog.rooms.react.svg?url";
+import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
 import ChangQuotaReactSvgUrl from "PUBLIC_DIR/images/change.quota.react.svg?url";
 import DisableQuotaReactSvgUrl from "PUBLIC_DIR/images/disable.quota.react.svg?url";
 import DefaultQuotaReactSvgUrl from "PUBLIC_DIR/images/default.quota.react.svg?url";
@@ -55,15 +55,19 @@ import {
   duplicate,
   getFolder,
   deleteFilesFromRecent,
+  changeIndex,
+  reorderIndex,
 } from "@docspace/shared/api/files";
 import {
   ConflictResolveType,
   Events,
+  ExportRoomIndexTaskStatus,
   FileAction,
   FileStatus,
   FolderType,
   RoomsType,
   ShareAccessRights,
+  VDRIndexingAction,
 } from "@docspace/shared/enums";
 import { makeAutoObservable } from "mobx";
 
@@ -90,8 +94,13 @@ import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
-import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
+import {
+  changeRoomLifetime,
+  editRoomSettings,
+} from "@docspace/shared/api/rooms";
+import api from "@docspace/shared/api";
+import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
 
 class FilesActionStore {
   settingsStore;
@@ -107,6 +116,7 @@ class FilesActionStore {
   publicRoomStore;
   infoPanelStore;
   peopleStore;
+  indexingStore;
   userStore = null;
   currentTariffStatusStore = null;
   currentQuotaStore = null;
@@ -115,6 +125,7 @@ class FilesActionStore {
   isGroupMenuBlocked = false;
   emptyTrashInProgress = false;
   processCreatingRoomFromData = false;
+  alreadyExportingRoomIndex = false;
 
   constructor(
     settingsStore,
@@ -134,6 +145,7 @@ class FilesActionStore {
     currentTariffStatusStore,
     peopleStore,
     currentQuotaStore,
+    indexingStore,
   ) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -153,13 +165,19 @@ class FilesActionStore {
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.peopleStore = peopleStore;
     this.currentQuotaStore = currentQuotaStore;
+    this.indexingStore = indexingStore;
   }
 
   setIsBulkDownload = (isBulkDownload) => {
     this.isBulkDownload = isBulkDownload;
   };
 
-  updateCurrentFolder = (fileIds, folderIds, clearSelection, operationId) => {
+  updateCurrentFolder = async (
+    fileIds,
+    folderIds,
+    clearSelection,
+    operationId,
+  ) => {
     const { clearSecondaryProgressData } =
       this.uploadDataStore.secondaryProgressDataStore;
 
@@ -168,7 +186,7 @@ class FilesActionStore {
       fetchRooms,
       filter,
       roomsFilter,
-
+      scrollToTop,
       isEmptyLastPageAfterOperation,
       resetFilterPage,
     } = this.filesStore;
@@ -196,35 +214,29 @@ class FilesActionStore {
       updatedFolder = this.selectedFolderStore.parentId;
     }
 
-    if (isRoomsFolder || isArchiveFolder || isArchiveFolderRoot) {
-      fetchRooms(
-        updatedFolder,
-        newFilter ? newFilter : roomsFilter.clone(),
-        undefined,
-        undefined,
-        undefined,
-        true,
-      ).finally(() => {
-        this.dialogsStore.setIsFolderActions(false);
-        return setTimeout(
-          () => clearSecondaryProgressData(operationId),
-          TIMEOUT,
+    try {
+      if (isRoomsFolder || isArchiveFolder || isArchiveFolderRoot) {
+        await fetchRooms(
+          updatedFolder,
+          newFilter ? newFilter : roomsFilter.clone(),
+          undefined,
+          undefined,
+          undefined,
+          true,
         );
-      });
-    } else {
-      fetchFiles(
-        updatedFolder,
-        newFilter ? newFilter : filter,
-        true,
-        true,
-        clearSelection,
-      ).finally(() => {
-        this.dialogsStore.setIsFolderActions(false);
-        return setTimeout(
-          () => clearSecondaryProgressData(operationId),
-          TIMEOUT,
+      } else {
+        await fetchFiles(
+          updatedFolder,
+          newFilter ? newFilter : filter,
+          true,
+          true,
+          clearSelection,
         );
-      });
+      }
+    } finally {
+      scrollToTop();
+      this.dialogsStore.setIsFolderActions(false);
+      setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
     }
   };
 
@@ -339,7 +351,7 @@ class FilesActionStore {
     const filesList = [];
     await this.createFolderTree(tree, toFolderId, filesList);
 
-    this.updateCurrentFolder(null, [folderId], null, operationId);
+    // this.updateCurrentFolder(null, [folderId], null, operationId);
 
     if (!filesList.length) {
       setTimeout(() => clearPrimaryProgressData(), TIMEOUT);
@@ -2877,6 +2889,14 @@ class FilesActionStore {
     await refreshFiles();
   };
 
+  changeRoomLifetime = (roomId, lifetime) => {
+    return changeRoomLifetime(roomId, lifetime);
+  };
+
+  editRoomSettings = (roomId, data) => {
+    return editRoomSettings(roomId, data);
+  };
+
   copyFromTemplateForm = async (fileInfo, t) => {
     const selectedItemId = this.selectedFolderStore.id;
     const fileIds = [fileInfo.id];
@@ -2906,6 +2926,260 @@ class FilesActionStore {
     this.uploadDataStore
       .itemOperationToFolder(operationData)
       .catch((error) => toastr.error(error));
+  };
+
+  setListOrder = (startIndex, finalIndex, indexMovedFromBottom = false) => {
+    const newFilesList = JSON.parse(JSON.stringify(this.filesStore.filesList));
+
+    let i = startIndex;
+    while (i !== finalIndex) {
+      if (newFilesList[i].order.includes(".")) {
+        const splitItem = newFilesList[i].order.split(".");
+
+        if (indexMovedFromBottom) {
+          splitItem[1] = +splitItem.at(-1) + 1;
+        } else {
+          splitItem[1] = +splitItem.at(-1) - 1;
+        }
+
+        newFilesList[i].order = splitItem.join(".");
+      } else {
+        if (indexMovedFromBottom) {
+          newFilesList[i].order = +newFilesList[i].order + 1 + "";
+        } else {
+          newFilesList[i].order = +newFilesList[i].order - 1 + "";
+        }
+      }
+
+      i++;
+    }
+
+    return newFilesList;
+  };
+
+  setFilesOrder = (currentItem, replaceableItem, indexMovedFromBottom) => {
+    const { filesList, setFiles, setFolders } = this.filesStore;
+
+    const currentIndex = filesList.findIndex(
+      (f) => f.order === currentItem.order,
+    );
+    const replaceableIndex = filesList.findIndex(
+      (f) => f.order === replaceableItem.order,
+    );
+
+    let newFilesList;
+    if (indexMovedFromBottom) {
+      newFilesList = this.setListOrder(
+        replaceableIndex,
+        currentIndex,
+        indexMovedFromBottom,
+      );
+      newFilesList[currentIndex].order = replaceableItem.order;
+    } else {
+      newFilesList = this.setListOrder(currentIndex, replaceableIndex + 1);
+      newFilesList[currentIndex].order = filesList[replaceableIndex].order;
+    }
+
+    const newFolders = newFilesList.filter((f) => f.isFolder);
+    const newFiles = newFilesList.filter((f) => !f.isFolder);
+
+    setFiles(newFiles);
+    setFolders(newFolders);
+  };
+
+  changeIndex = async (action, item, t, isLastItem = true) => {
+    const { filesList, bufferSelection } = this.filesStore;
+
+    const index = filesList.findIndex(
+      (elem) => elem.id === item?.id && elem.fileExst === item?.fileExst,
+    );
+
+    if (
+      (action === VDRIndexingAction.HigherIndex && index === 0) ||
+      (action === VDRIndexingAction.LowerIndex &&
+        index === filesList.length - 1)
+    )
+      return;
+
+    let selection = this.filesStore.selection.length
+      ? this.filesStore.selection
+      : [bufferSelection];
+
+    const { setUpdateItems } = this.indexingStore;
+
+    let replaceable;
+    let current = item;
+
+    switch (action) {
+      case VDRIndexingAction.HigherIndex:
+        replaceable = filesList[index - 1];
+        break;
+
+      case VDRIndexingAction.LowerIndex:
+        replaceable = filesList[index + 1];
+        break;
+
+      default:
+        current = selection[0];
+        replaceable = item;
+        break;
+    }
+
+    if (!replaceable || current.order === replaceable.order) return;
+
+    try {
+      await changeIndex(current?.id, replaceable.order, current?.isFolder);
+
+      let indexMovedFromBottom = +current.order > +replaceable.order;
+      if (current.order.includes(".")) {
+        indexMovedFromBottom =
+          +current.order.split(".").at(-1) >
+          +replaceable.order.split(".").at(-1);
+      }
+
+      const newRepIndex = filesList.findIndex(
+        (f) => f.id === replaceable.id && f.isFolder === replaceable.isFolder,
+      );
+
+      const newReplaceable =
+        indexMovedFromBottom || isLastItem
+          ? replaceable
+          : filesList[newRepIndex - 1];
+
+      this.setFilesOrder(current, newReplaceable, indexMovedFromBottom);
+      this.filesStore.setSelected("none");
+
+      const items = [current, replaceable];
+      setUpdateItems(items);
+    } catch (e) {
+      toastr.error(t("Files:ErrorChangeIndex"));
+    }
+  };
+
+  reorderIndexOfFiles = async (id, t) => {
+    const { setIsIndexEditingMode } = this.indexingStore;
+
+    try {
+      const operationId = uniqueid("operation_");
+      await reorderIndex(id);
+      toastr.success(t("Common:SuccessfullyCompletedOperation"));
+      setIsIndexEditingMode(false);
+      this.updateCurrentFolder(null, [id], true, operationId);
+    } catch (e) {
+      toastr.error(t("Files:ErrorChangeIndex"));
+    }
+  };
+
+  checkExportRoomIndexProgress = async () => {
+    return await new Promise((resolve, reject) => {
+      setTimeout(async () => {
+        try {
+          const res = await api.rooms.getExportRoomIndexProgress();
+
+          resolve(res);
+        } catch (e) {
+          reject(e);
+        }
+      }, 1000);
+    });
+  };
+
+  loopExportRoomIndexStatusChecking = async (pbData) => {
+    const { setSecondaryProgressBarData } =
+      this.uploadDataStore.secondaryProgressDataStore;
+
+    let isCompleted = false;
+    let res;
+
+    while (!isCompleted) {
+      res = await this.checkExportRoomIndexProgress();
+
+      if (res?.isCompleted) {
+        isCompleted = true;
+      }
+
+      if (res?.percentage) {
+        setSecondaryProgressBarData({
+          icon: pbData.icon,
+          visible: true,
+          percent: res.percentage,
+          label: "",
+          alert: false,
+          operationId: pbData.operationId,
+        });
+      }
+    }
+
+    return res;
+  };
+
+  checkPreviousExportRoomIndexInProgress = async () => {
+    try {
+      if (this.alreadyExportingRoomIndex) {
+        return true;
+      }
+
+      const previousExport = await api.rooms.getExportRoomIndexProgress();
+
+      return previousExport && !previousExport.isCompleted;
+    } catch (e) {
+      toastr.error(e);
+    }
+  };
+
+  onSuccessExportRoomIndex = (t, fileName, fileUrl) => {
+    const { openOnNewPage } = this.filesSettingsStore;
+    const urlWithProxy = combineUrl(window.ClientConfig?.proxy?.url, fileUrl);
+
+    showSuccessExportRoomIndexToast(t, fileName, urlWithProxy, openOnNewPage);
+  };
+
+  exportRoomIndex = async (t, roomId) => {
+    const previousExportInProgress =
+      await this.checkPreviousExportRoomIndexInProgress();
+
+    if (previousExportInProgress) {
+      return toastr.error(t("Files:ExportRoomIndexAlreadyInProgressError"));
+    }
+
+    const { setSecondaryProgressBarData, clearSecondaryProgressData } =
+      this.uploadDataStore.secondaryProgressDataStore;
+
+    const pbData = { icon: "exportIndex", operationId: uniqueid("operation_") };
+
+    setSecondaryProgressBarData({
+      icon: pbData.icon,
+      visible: true,
+      percent: 0,
+      label: "",
+      alert: false,
+      operationId: pbData.operationId,
+    });
+
+    this.alreadyExportingRoomIndex = true;
+
+    try {
+      let res = await api.rooms.exportRoomIndex(roomId);
+
+      if (!res.isCompleted) {
+        res = await this.loopExportRoomIndexStatusChecking(pbData);
+      }
+
+      if (res.status === ExportRoomIndexTaskStatus.Failed) {
+        toastr.error(res.error);
+        return;
+      }
+
+      if (res.status === ExportRoomIndexTaskStatus.Completed) {
+        this.onSuccessExportRoomIndex(t, res.resultFileName, res.resultFileUrl);
+      }
+    } catch (e) {
+      toastr.error(e);
+    } finally {
+      this.alreadyExportingRoomIndex = false;
+
+      setTimeout(() => clearSecondaryProgressData(pbData.operationId), TIMEOUT);
+    }
   };
 }
 

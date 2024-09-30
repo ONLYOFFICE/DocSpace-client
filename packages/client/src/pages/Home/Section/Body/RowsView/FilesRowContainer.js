@@ -74,6 +74,8 @@ const FilesRowContainer = ({
   withPaging,
   highlightFile,
   currentDeviceType,
+  isIndexEditingMode,
+  changeIndex,
 }) => {
   const { sectionWidth } = useContext(Context);
 
@@ -95,9 +97,11 @@ const FilesRowContainer = ({
         sectionWidth={sectionWidth}
         isRooms={isRooms}
         isTrashFolder={isTrashFolder}
+        changeIndex={changeIndex}
         isHighlight={
           highlightFile.id == item.id && highlightFile.isExst === !item.fileExst
         }
+        isIndexEditingMode={isIndexEditingMode}
       />
     ));
   }, [
@@ -126,20 +130,28 @@ const FilesRowContainer = ({
 };
 
 export default inject(
-  ({ filesStore, settingsStore, infoPanelStore, treeFoldersStore }) => {
+  ({
+    filesStore,
+    settingsStore,
+    infoPanelStore,
+    treeFoldersStore,
+    indexingStore,
+    filesActionsStore,
+  }) => {
     const {
       filesList,
       viewAs,
       setViewAs,
-      filterTotal,
+      filter,
       fetchMoreFiles,
       hasMoreFiles,
-      roomsFilterTotal,
+      roomsFilter,
       highlightFile,
     } = filesStore;
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
     const { withPaging, currentDeviceType } = settingsStore;
+    const { isIndexEditingMode } = indexingStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -148,7 +160,7 @@ export default inject(
       viewAs,
       setViewAs,
       infoPanelVisible,
-      filterTotal: isRooms ? roomsFilterTotal : filterTotal,
+      filterTotal: isRooms ? roomsFilter.total : filter.total,
       fetchMoreFiles,
       hasMoreFiles,
       isRooms,
@@ -156,6 +168,8 @@ export default inject(
       withPaging,
       highlightFile,
       currentDeviceType,
+      isIndexEditingMode,
+      changeIndex: filesActionsStore.changeIndex,
     };
   },
 )(observer(FilesRowContainer));

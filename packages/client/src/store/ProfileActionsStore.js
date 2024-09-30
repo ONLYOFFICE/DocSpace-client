@@ -84,6 +84,7 @@ class ProfileActionsStore {
     userStore,
     settingsStore,
     currentTariffStatusStore,
+    currentQuotaStore,
   ) {
     this.authStore = authStore;
     this.filesStore = filesStore;
@@ -94,6 +95,7 @@ class ProfileActionsStore {
     this.userStore = userStore;
     this.settingsStore = settingsStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
+    this.currentQuotaStore = currentQuotaStore;
 
     this.isShowLiveChat = this.getStateLiveChat();
 
@@ -249,6 +251,7 @@ class ProfileActionsStore {
       tenantAlias,
       limitedAccessSpace,
     } = this.settingsStore;
+    const { isBrandingAvailable } = this.currentQuotaStore;
     const isAdmin = this.authStore.isAdmin;
     const isCommunity = this.currentTariffStatusStore.isCommunity;
     // const { isOwner } = this.userStore.user;
@@ -356,6 +359,17 @@ class ProfileActionsStore {
       };
     }
 
+    let about = null;
+
+    if (!isBrandingAvailable) {
+      about = {
+        key: "user-menu-about",
+        icon: InfoOutlineReactSvgUrl,
+        label: t("Common:AboutCompanyTitle"),
+        onClick: this.onAboutClick,
+      };
+    }
+
     const feedbackAndSupportEnabled =
       this.settingsStore.additionalResourcesData?.feedbackAndSupportEnabled;
     const videoGuidesEnabled =
@@ -412,12 +426,7 @@ class ProfileActionsStore {
         onClick: this.onSupportClick,
       },
       bookTraining,
-      {
-        key: "user-menu-about",
-        icon: InfoOutlineReactSvgUrl,
-        label: t("Common:AboutCompanyTitle"),
-        onClick: this.onAboutClick,
-      },
+      about,
     ];
 
     if (showFrameSignOut) {

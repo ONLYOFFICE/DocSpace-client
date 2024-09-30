@@ -88,6 +88,7 @@ const Branding = ({
   standalone,
   deviceType,
   portals,
+  isBrandingAvailable,
 }) => {
   const isMobileView = deviceType === DeviceType.mobile;
 
@@ -110,8 +111,8 @@ const Branding = ({
     return (
       <MobileView
         isSettingPaid={isSettingPaid || standalone}
-        isManagement={isManagement()}
         showSettings={showSettings}
+        isBrandingAvailable={isBrandingAvailable}
       />
     );
 
@@ -121,16 +122,22 @@ const Branding = ({
       {showSettings && (
         <>
           <hr />
-          {isLoadedCompanyInfoSettingsData ? (
-            <div className="section-description settings_unavailable">
-              {t("Settings:BrandingSectionDescription", {
-                productName: t("Common:ProductName"),
-              })}
-            </div>
+          {!isBrandingAvailable ? (
+            <>
+              {isLoadedCompanyInfoSettingsData ? (
+                <div className="section-description settings_unavailable">
+                  {t("Settings:BrandingSectionDescription", {
+                    productName: t("Common:ProductName"),
+                  })}
+                </div>
+              ) : (
+                <LoaderBrandingDescription />
+              )}
+              <CompanyInfoSettings />
+            </>
           ) : (
-            <LoaderBrandingDescription />
+            <></>
           )}
-          <CompanyInfoSettings />
           <AdditionalResources />
         </>
       )}
@@ -139,7 +146,7 @@ const Branding = ({
 };
 
 export default inject(({ settingsStore, currentQuotaStore, common }) => {
-  const { isCustomizationAvailable } = currentQuotaStore;
+  const { isCustomizationAvailable, isBrandingAvailable } = currentQuotaStore;
   const { isLoadedCompanyInfoSettingsData } = common;
   const { standalone, portals, deviceType, checkEnablePortalSettings } =
     settingsStore;
@@ -151,5 +158,6 @@ export default inject(({ settingsStore, currentQuotaStore, common }) => {
     standalone,
     portals,
     deviceType,
+    isBrandingAvailable,
   };
 })(withLoading(withTranslation(["Settings", "Common"])(observer(Branding))));

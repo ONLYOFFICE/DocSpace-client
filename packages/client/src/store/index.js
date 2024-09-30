@@ -271,6 +271,7 @@ const profileActionsStore = new ProfileActionsStore(
   userStore,
   settingsStore,
   currentTariffStatusStore,
+  currentQuotaStore,
 );
 
 peopleStore.profileActionsStore = profileActionsStore;

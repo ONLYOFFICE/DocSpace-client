@@ -35,7 +35,7 @@ const StyledWrapper = styled.div`
   flex-direction: column;
 `;
 
-const MobileView = ({ isSettingPaid, showSettings }) => {
+const MobileView = ({ isSettingPaid, showSettings, isBrandingAvailable }) => {
   const { t } = useTranslation(["Settings"]);
   const navigate = useNavigate();
   const baseUrl = isManagement()
@@ -59,16 +59,18 @@ const MobileView = ({ isSettingPaid, showSettings }) => {
       />
       {showSettings && (
         <>
-          <MobileCategoryWrapper
-            title={t("CompanyInfoSettings")}
-            subtitle={t("BrandingSectionDescription", {
-              productName: t("Common:ProductName"),
-            })}
-            url={`${baseUrl}/branding/company-info-settings`}
-            withPaidBadge={!isSettingPaid}
-            badgeLabel={t("Common:Paid")}
-            onClickLink={onClickLink}
-          />
+          {!isBrandingAvailable && (
+            <MobileCategoryWrapper
+              title={t("CompanyInfoSettings")}
+              subtitle={t("BrandingSectionDescription", {
+                productName: t("Common:ProductName"),
+              })}
+              url={`${baseUrl}/branding/company-info-settings`}
+              withPaidBadge={!isSettingPaid}
+              badgeLabel={t("Common:Paid")}
+              onClickLink={onClickLink}
+            />
+          )}
           <MobileCategoryWrapper
             title={t("AdditionalResources")}
             subtitle={t("AdditionalResourcesSubtitle")}

@@ -1274,8 +1274,8 @@ export const imageProcessing = async (file: File, maxSize?: number) => {
 
     // console.log(`${stepMessage} ${sizeMessage} ${compressionRatioMessage}`);
 
-    if (file.size < maxImageSize) {
-      return file;
+    if (newFile.size < maxImageSize) {
+      return newFile;
     }
 
     if (depth > 5) {

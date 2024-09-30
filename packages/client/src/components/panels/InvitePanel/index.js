@@ -27,6 +27,7 @@
 import { useEffect, useState, useMemo, useRef } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 import { EmployeeType, RoomsType } from "@docspace/shared/enums";
 import { LOADER_TIMEOUT } from "@docspace/shared/constants";
@@ -97,7 +98,8 @@ const InvitePanel = ({
   const [inputValue, setInputValue] = useState("");
   const [usersList, setUsersList] = useState([]);
   const [cultureKey, setCultureKey] = useState();
-  const [selectedAccess, setSelectedAccess] = useState(defaultAccess);
+
+  const navigate = useNavigate();
 
   const inputsRef = useRef();
   const invitePanelBodyRef = useRef();
@@ -351,7 +353,14 @@ const InvitePanel = ({
       setIsLoading(false);
     } finally {
       if (roomId === -1) {
-        await getUsersList(filter, false);
+        const isPeoplePage =
+          window.location.pathname.includes("accounts/people");
+
+        if (isPeoplePage) {
+          await getUsersList(filter, false);
+        } else {
+          navigate("/accounts/people/filter");
+        }
       }
     }
   };
@@ -513,7 +522,7 @@ const InvitePanel = ({
             accessOptions={accessOptions}
             isMultiSelect
             isEncrypted
-            defaultAccess={selectedAccess}
+            defaultAccess={defaultAccess}
             withoutBackground={isMobileView}
             withBlur={!isMobileView}
             roomId={roomId}

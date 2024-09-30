@@ -57,6 +57,7 @@ import { ButtonKeys, RecaptchaType } from "@docspace/shared/enums";
 import { getAvailablePortals } from "@docspace/shared/api/management";
 import { getCookie } from "@docspace/shared/utils";
 import { deleteCookie } from "@docspace/shared/utils/cookie";
+import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
 
 import { LoginFormProps } from "@/types";
 import { getEmailFromInvitation, getConfirmDataFromInvitation } from "@/utils";
@@ -102,6 +103,7 @@ const LoginForm = ({
   const referenceUrl = searchParams.get("referenceUrl");
   const loginData = searchParams.get("loginData");
   const linkData = searchParams.get("linkData");
+  const isPublicAuth = searchParams.get("publicAuth");
 
   const isDesktop =
     typeof window !== "undefined" && window["AscDesktopEditor"] !== undefined;
@@ -164,6 +166,11 @@ const LoginForm = ({
           return window.location.replace(response.confirmUrl);
         }
 
+        if (isPublicAuth) {
+          localStorage.setItem(PUBLIC_STORAGE_KEY, "true");
+          window.close();
+        }
+
         const redirectPath =
           referenceUrl || sessionStorage.getItem("referenceUrl");
 
@@ -180,7 +187,7 @@ const LoginForm = ({
         );
       }
     },
-    [t, referenceUrl, currentCulture],
+    [t, referenceUrl, currentCulture, isPublicAuth],
   );
 
   useEffect(() => {
@@ -370,6 +377,11 @@ const LoginForm = ({
         return res;
       })
       .then((res: string | object | undefined) => {
+        if (isPublicAuth) {
+          localStorage.setItem(PUBLIC_STORAGE_KEY, "true");
+          window.close();
+        }
+
         const isConfirm = typeof res === "string" && res.includes("confirm");
         const redirectPath =
           referenceUrl || sessionStorage.getItem("referenceUrl");
@@ -428,6 +440,7 @@ const LoginForm = ({
     referenceUrl,
     baseDomain,
     linkData,
+    isPublicAuth,
   ]);
 
   const onBlurEmail = () => {

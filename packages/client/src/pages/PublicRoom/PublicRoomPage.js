@@ -24,18 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 import { useLocation, Outlet } from "react-router-dom";
 import Section from "@docspace/shared/components/section";
+import { toastr } from "@docspace/shared/components/toast";
+import { Text } from "@docspace/shared/components/text";
 import SectionHeaderContent from "../Home/Section/Header";
 import SectionFilterContent from "../Home/Section/Filter";
 import FilesPanels from "../../components/FilesPanels";
 import SectionWrapper from "SRC_DIR/components/Section";
 import SelectionArea from "../Home/SelectionArea/FilesSelectionArea";
 import MediaViewer from "../Home/MediaViewer";
-
 import { usePublic, useSDK } from "../Home/Hooks";
+import { Link } from "@docspace/shared/components/link";
+import { StyledToast } from "./StyledPublicRoom";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
 
 const PublicRoomPage = (props) => {
   const {
@@ -58,6 +64,10 @@ const PublicRoomPage = (props) => {
 
   const location = useLocation();
 
+  const { t } = useTranslation(["Common"]);
+
+  const [windowIsOpen, setWindowIsOpen] = useState(false);
+
   usePublic({
     location,
     fetchFiles,
@@ -66,6 +76,70 @@ const PublicRoomPage = (props) => {
   });
 
   useSDK({ frameConfig, setFrameConfig, isLoading });
+
+  const getAuthWindow = () => {
+    return new Promise((res, rej) => {
+      try {
+        const path = combineUrl(
+          window.ClientConfig?.proxy?.url,
+          "/login?publicAuth=true",
+        );
+
+        const authModal = window.open(
+          path,
+          t("Common:Authorization"),
+          "height=800, width=866",
+        );
+
+        const checkConnect = setInterval(() => {
+          if (!authModal || !authModal.closed) {
+            return;
+          }
+
+          clearInterval(checkConnect);
+
+          res(authModal);
+        }, 500);
+      } catch (error) {
+        rej(error);
+      }
+    });
+  };
+
+  const onOpenSignInWindow = async () => {
+    if (windowIsOpen) return;
+
+    setWindowIsOpen(true);
+    await getAuthWindow();
+    setWindowIsOpen(false);
+
+    const isAuth = localStorage.getItem(PUBLIC_STORAGE_KEY);
+
+    if (isAuth) {
+      localStorage.removeItem(PUBLIC_STORAGE_KEY);
+      window.location.reload();
+    }
+  };
+
+  useEffect(() => {
+    const toastText = (
+      <StyledToast>
+        <Text fontSize="12px" fontWeight={400}>
+          {t("Common:PublicAuthorizeToast")}
+        </Text>
+        <Link
+          fontSize="12px"
+          fontWeight={400}
+          className="public-toast_link"
+          onClick={onOpenSignInWindow}
+        >
+          {t("Common:LoginButton")}
+        </Link>
+      </StyledToast>
+    );
+
+    toastr.info(toastText);
+  }, []);
 
   const sectionProps = {
     showSecondaryProgressBar,
@@ -83,7 +157,11 @@ const PublicRoomPage = (props) => {
         {...sectionProps}
       >
         <Section.SectionHeader>
-          <SectionHeaderContent />
+          <SectionHeaderContent
+            showSignInButton
+            onSignInClick={onOpenSignInWindow}
+            signInButtonIsDisabled={windowIsOpen}
+          />
         </Section.SectionHeader>
 
         {!isEmptyPage && (

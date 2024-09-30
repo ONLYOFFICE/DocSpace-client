@@ -56,6 +56,7 @@ import { getLifetimePeriodTranslation } from "@docspace/shared/utils/common";
 import { globalColors } from "@docspace/shared/themes";
 import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
 import { toastr } from "@docspace/shared/components/toast";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -129,6 +130,19 @@ const StyledContainer = styled.div`
         rect {
           stroke: ${(props) => props.theme.backgroundColor};
         }
+      }
+    }
+
+    .header_sign-in-button {
+      margin-left: auto;
+      display: block;
+
+      @media ${tablet} {
+        margin-left: 16px;
+      }
+
+      @media ${mobile} {
+        display: none;
       }
     }
   }
@@ -233,6 +247,9 @@ const SectionHeaderContent = (props) => {
     setReorderDialogVisible,
     setGroupsBufferSelection,
     createFoldersTree,
+    showSignInButton,
+    onSignInClick,
+    signInButtonIsDisabled,
   } = props;
 
   const location = useLocation();
@@ -611,6 +628,16 @@ const SectionHeaderContent = (props) => {
                 showNavigationButton={!!showNavigationButton}
                 onContextOptionsClick={onContextOptionsClick}
               />
+              {showSignInButton && (
+                <Button
+                  className="header_sign-in-button"
+                  label={t("Common:LoginButton")}
+                  size={ButtonSize.small}
+                  onClick={onSignInClick}
+                  isDisabled={signInButtonIsDisabled}
+                  primary
+                />
+              )}
             </div>
           )}
           {isFrame && (

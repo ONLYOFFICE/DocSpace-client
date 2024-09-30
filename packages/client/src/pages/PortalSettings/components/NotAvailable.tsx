@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import LockedReactSvgUrl from "PUBLIC_DIR/images/locked.react.svg?url";
+import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
 
 import React from "react";
 import styled from "styled-components";

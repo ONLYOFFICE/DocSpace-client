@@ -48,9 +48,12 @@ const options = (t) => [
   },
 ];
 
-const getOptionType = (additions, isEdit) => {
+const getOptionType = (initialWatermarksSettings, isEdit) => {
   if (isEdit) {
-    return additions === 0 ? imageWatermark : viewerInfoWatermark;
+    return initialWatermarksSettings?.additions === 0 &&
+      initialWatermarksSettings?.imageUrl
+      ? imageWatermark
+      : viewerInfoWatermark;
   }
 
   return viewerInfoWatermark;
@@ -58,7 +61,7 @@ const getOptionType = (additions, isEdit) => {
 const Watermarks = ({ isEdit, setWatermarks, initialWatermarksSettings }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
   const [type, setType] = useState(
-    getOptionType(initialWatermarksSettings?.additions, isEdit),
+    getOptionType(initialWatermarksSettings, isEdit),
   );
 
   const onSelectType = (e) => {

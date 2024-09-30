@@ -157,9 +157,15 @@ class CreateEditRoomStore {
   };
 
   getWatermarkRequest = async (room) => {
-    if (!this.watermarksSettings.isImage) {
+
+    if (this.watermarksSettings.enabled === false) {
       return setWatermarkSettings(room.id, {
         enabled: this.watermarksSettings.enabled,
+      });
+    }
+    if (!this.watermarksSettings.isImage) {
+      return setWatermarkSettings(room.id, {
+        // enabled: this.watermarksSettings.enabled,
         rotate: this.watermarksSettings.rotate,
         text: this.watermarksSettings.text,
         additions: this.watermarksSettings.additions,
@@ -185,7 +191,7 @@ class CreateEditRoomStore {
 
     if (!watermarkImage && this.watermarksSettings.imageUrl) {
       return setWatermarkSettings(room.id, {
-        enabled: watermarksSettings.enabled,
+        // enabled: watermarksSettings.enabled,
         imageScale: watermarksSettings.imageScale,
         rotate: watermarksSettings.rotate,
         imageUrl: watermarksSettings.imageUrl,

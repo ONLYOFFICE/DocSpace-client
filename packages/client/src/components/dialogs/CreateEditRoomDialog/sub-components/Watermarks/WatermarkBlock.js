@@ -62,6 +62,7 @@ const WatermarkBlock = ({
   isWatermarks = false,
   t,
 }) => {
+  console.log("isWatermarks", isWatermarks);
   const [watermarksChecked, setWatermarksChecked] = useState(
     isWatermarks && isEdit,
   );
@@ -90,6 +91,9 @@ export default inject(({ createEditRoomStore }) => {
 
   return {
     setWatermarks,
-    isWatermarks: initialWatermarksSettings?.enabled,
+    isWatermarks: !!(
+      initialWatermarksSettings?.imageUrl ||
+      initialWatermarksSettings?.additions
+    ),
   };
 })(observer(WatermarkBlock));

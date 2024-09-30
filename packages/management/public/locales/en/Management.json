@@ -5,7 +5,7 @@
   "CreateSpaceDescription": "You have successfully connected your domain to your IP address. To edit the space address settings, you need to set the future {{productName}} name",
   "CreatingPortal": "Creating new {{productName}}",
   "CurrentSpace": "Current space",
-  "DeletePortalText": "Please note: only the owner is able to delete the selected {{productName}}. The owner of <1>{{domain}}</1> is <1>{{displayName}}</1> (<5>{{email}}</5>). If you are not the owner, you will not be able to access the {{productName}} deletion settings by clicking the DELETE button and will be redirected to the Rooms section.",
+  "DeletePortalText": "You are going to permanently delete the <1>{{docspaceAddress}}</1> space with all the stored data and accounts. This action cannot be undone.",
   "DomainName": "Domain name",
   "DomainNotFound": "Domain not found, please check in DNS settings",
   "DomainSettings": "Domain settings",

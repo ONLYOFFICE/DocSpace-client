@@ -134,11 +134,11 @@ const StyledContainer = styled.div`
     }
 
     .header_sign-in-button {
-      margin-left: auto;
+      margin-inline-start: auto;
       display: block;
 
       @media ${tablet} {
-        margin-left: 16px;
+        margin-inline-start: 16px;
       }
 
       @media ${mobile} {

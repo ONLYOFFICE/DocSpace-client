@@ -550,5 +550,8 @@
   "Years": "Years",
   "MoveToTrash": "Move to trash",
   "DeletePermanently": "Delete permanently",
-  "PublicAuthorizeToast": "This room is opened in the view-only mode. To be able to work on documents, please authorize."
+  "PublicAuthorizeToast": "This room is opened in the <1>{{roomMode}}</1> mode. To be able to work on documents, please authorize.",
+  "ViewOnly": "view-only",
+  "Commenting": "commenting",
+  "Reviewing": "reviewing"
 }

@@ -26,11 +26,16 @@
 
 import { useEffect, useState } from "react";
 import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import { useLocation, Outlet } from "react-router-dom";
 import Section from "@docspace/shared/components/section";
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
+import { Link } from "@docspace/shared/components/link";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
+import { ShareAccessRights } from "@docspace/shared/enums";
+
 import SectionHeaderContent from "../Home/Section/Header";
 import SectionFilterContent from "../Home/Section/Filter";
 import FilesPanels from "../../components/FilesPanels";
@@ -38,10 +43,7 @@ import SectionWrapper from "SRC_DIR/components/Section";
 import SelectionArea from "../Home/SelectionArea/FilesSelectionArea";
 import MediaViewer from "../Home/MediaViewer";
 import { usePublic, useSDK } from "../Home/Hooks";
-import { Link } from "@docspace/shared/components/link";
 import { StyledToast } from "./StyledPublicRoom";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
 
 const PublicRoomPage = (props) => {
   const {
@@ -60,11 +62,12 @@ const PublicRoomPage = (props) => {
     setFrameConfig,
     isFrame,
     isLoading,
+    access,
   } = props;
 
   const location = useLocation();
 
-  const { t } = useTranslation(["Common"]);
+  const { t, ready } = useTranslation(["Common"]);
 
   const [windowIsOpen, setWindowIsOpen] = useState(false);
 
@@ -121,11 +124,37 @@ const PublicRoomPage = (props) => {
     }
   };
 
+  const getAccessTranslation = () => {
+    switch (access) {
+      case ShareAccessRights.ReadOnly:
+        return t("Common:ViewOnly");
+      case ShareAccessRights.Comment:
+        return t("Common:Commenting");
+      case ShareAccessRights.Review:
+        return t("Common:Reviewing");
+      case ShareAccessRights.Editing:
+        return t("Common:Editor");
+      default:
+        return t("Common:ViewOnly");
+    }
+  };
+
   useEffect(() => {
+    if (!access || !ready) return;
+    const roomMode = getAccessTranslation().toLowerCase();
+
     const toastText = (
       <StyledToast>
         <Text fontSize="12px" fontWeight={400}>
-          {t("Common:PublicAuthorizeToast")}
+          <Trans
+            t={t}
+            ns="Common"
+            i18nKey="PublicAuthorizeToast"
+            values={{ roomMode }}
+            components={{
+              1: <Text as="span" fontSize="12px" fontWeight={700} />,
+            }}
+          />
         </Text>
         <Link
           fontSize="12px"
@@ -139,7 +168,7 @@ const PublicRoomPage = (props) => {
     );
 
     toastr.info(toastText);
-  }, []);
+  }, [access, ready]);
 
   const sectionProps = {
     showSecondaryProgressBar,
@@ -195,6 +224,7 @@ export default inject(
     uploadDataStore,
     filesSettingsStore,
     mediaViewerDataStore,
+    selectedFolderStore,
   }) => {
     const { withPaging, frameConfig, setFrameConfig, isFrame } = settingsStore;
     const { isLoaded, isLoading, roomStatus, fetchPublicRoom } =
@@ -234,6 +264,7 @@ export default inject(
       frameConfig,
       setFrameConfig,
       isFrame,
+      access: selectedFolderStore.access,
     };
   },
 )(observer(PublicRoomPage));

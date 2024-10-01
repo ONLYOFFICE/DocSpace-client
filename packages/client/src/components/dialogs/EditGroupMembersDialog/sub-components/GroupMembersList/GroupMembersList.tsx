@@ -30,14 +30,22 @@ import { areEqual, FixedSizeList as List } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
 import InfiniteLoader from "react-window-infinite-loader";
 
-import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import {
+  Scrollbar,
+  ScrollbarProps,
+} from "@docspace/shared/components/scrollbar";
 import { RowLoader } from "@docspace/shared/skeletons/selector";
 import { TGroupMemberInvitedInRoom } from "@docspace/shared/api/groups/types";
+import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 
 import GroupMember from "../GroupMember";
 
 const ROW_HEIGHT = 48;
 const SEARCH_WITH_PADDING_HEIGHT = 60;
+
+const VirtualScroll = (props: ScrollbarProps) => (
+  <Scrollbar {...props} paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM} />
+);
 
 const Row = memo(
   ({
@@ -112,7 +120,7 @@ const GroupMembersList = ({
               itemCount={itemCount}
               itemSize={ROW_HEIGHT}
               itemData={members}
-              outerElementType={Scrollbar}
+              outerElementType={VirtualScroll}
               onItemsRendered={onItemsRendered}
             >
               {Row}

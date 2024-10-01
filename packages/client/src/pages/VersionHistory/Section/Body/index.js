@@ -32,7 +32,16 @@ import { VariableSizeList as List, areEqual } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
 import HistoryRowsSkeleton from "@docspace/shared/skeletons/history";
 import { CustomScrollbarsVirtualListWithAutoFocus } from "@docspace/shared/components/scrollbar";
+import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 import { StyledBody, StyledVersionList } from "./StyledVersionHistory";
+
+const VirtualScroll = (props) => (
+  <CustomScrollbarsVirtualListWithAutoFocus
+    {...props}
+    paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
+  />
+);
+
 class SectionBodyContent extends React.Component {
   constructor(props) {
     super(props);
@@ -140,7 +149,7 @@ class SectionBodyContent extends React.Component {
             itemSize={this.getSize}
             itemCount={versions.length}
             itemData={versions}
-            outerElementType={CustomScrollbarsVirtualListWithAutoFocus}
+            outerElementType={VirtualScroll}
           >
             {this.renderRow}
           </List>

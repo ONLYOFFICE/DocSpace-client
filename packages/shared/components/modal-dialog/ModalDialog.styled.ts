@@ -174,9 +174,6 @@ const StyledBody = styled(Box)<{
         margin-inline-end: 0 !important;
         overflow: hidden !important;
       `}
-
-    ${({ currentDisplayType }) =>
-      currentDisplayType === "aside" && "padding-bottom: 12px !important;"}
   }
 
   ${(props) =>

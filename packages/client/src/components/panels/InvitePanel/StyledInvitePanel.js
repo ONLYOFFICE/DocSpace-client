@@ -41,6 +41,7 @@ import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 import DeleteIcon from "PUBLIC_DIR/images/mobile.actions.remove.react.svg";
 import { isMobile, desktop, commonInputStyles } from "@docspace/shared/utils";
 import Base from "@docspace/shared/themes/base";
+import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 
 const fillAvailableWidth = css`
   width: 100%;
@@ -93,10 +94,6 @@ const ScrollList = styled.div`
     props.scrollAllPanelContent && props.isTotalListHeight
       ? "auto"
       : props.offsetTop && `calc(100% - ${props.offsetTop}px)`};
-
-  .scroll-body {
-    padding-bottom: 12px !important;
-  }
 
   .row-item {
     @media not ${mobile} {
@@ -298,7 +295,7 @@ const StyledInviteInputContainer = styled.div`
         position: absolute;
         top: 100%;
         width: 100%;
-        height: 12px;
+        height: ${ASIDE_PADDING_AFTER_LAST_ITEM};
       }
     }
   }

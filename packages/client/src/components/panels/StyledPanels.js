@@ -469,7 +469,6 @@ const StyledUploadBody = styled.div`
 
   .scroll-body {
     padding-inline-end: 0px !important;
-    padding-bottom: 12px !important;
   }
 `;
 

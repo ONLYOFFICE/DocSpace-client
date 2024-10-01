@@ -1645,10 +1645,10 @@ class FilesStore {
                 shared = room.shared;
                 quotaLimit = room.quotaLimit;
                 usedSpace = room.usedSpace;
-
                 this.infoPanelStore.setInfoPanelRoom(room);
+              } else {
+                this.infoPanelStore.updateInfoPanelSelection(room);
               }
-
               const { mute } = room;
 
               runInAction(() => {
@@ -4488,7 +4488,7 @@ class FilesStore {
         index = getFolderIndex(newRoom.id);
       }
 
-      return updateFolder(index, newRoom);
+      return this.updateFolder(index, newRoom);
     }
 
     this.setFolder(newRoom);

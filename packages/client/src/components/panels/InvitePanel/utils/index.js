@@ -140,13 +140,6 @@ export const getAccessOptions = (
           : ShareAccessRights.Collaborator,
       type: "collaborator",
     },
-    guest: {
-      key: "guest",
-      label: t("Common:Guest"),
-      description: t("Translations:RoleUserDescription"),
-      access: EmployeeType.Guest,
-      type: "user",
-    },
     editor: {
       key: "editor",
       label: t("Common:Editor"),
@@ -263,7 +256,6 @@ export const getAccessOptions = (
         accesses.roomAdmin,
         { key: "s1", isSeparator: withSeparator },
         accesses.user,
-        accesses.guest,
       ];
       break;
   }

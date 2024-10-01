@@ -44,7 +44,6 @@ const ImageCropper = ({
   image,
   onChangeImage,
   uploadedFile,
-  setUploadedFile,
   setPreviewImage,
   isDisabled,
   disableImageRescaling,
@@ -141,12 +140,12 @@ const ImageCropper = ({
         />
       </div>
       <div
-        className="icon_cropper-delete_button"
+        className="icon_cropper-change_button"
         onClick={() => inputFilesElement.current.click()}
         title={t("Common:ChooseAnother")}
       >
         <ReactSVG src={RefreshReactSvgUrl} />
-        <div className="icon_cropper-delete_button-text">
+        <div className="icon_cropper-change_button-text">
           {t("Common:ChooseAnother")}
         </div>
         <input

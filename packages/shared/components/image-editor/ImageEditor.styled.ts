@@ -65,7 +65,7 @@ const StyledImageCropper = styled.div<{ disableImageRescaling?: boolean }>`
       `};
   }
 
-  .icon_cropper-delete_button {
+  .icon_cropper-change_button {
     cursor: pointer;
     display: flex;
     flex-direction: row;

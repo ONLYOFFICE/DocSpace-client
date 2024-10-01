@@ -156,8 +156,10 @@ const StyledBody = styled(Box)<{
 }>`
   position: relative;
   padding: 0 16px;
-  padding-bottom: ${(props) =>
-    props.currentDisplayType === "aside" || props.hasFooter ? "8px" : "16px"};
+
+  ${({ currentDisplayType, hasFooter }) =>
+    currentDisplayType === "modal" &&
+    `padding-bottom: ${hasFooter ? "8px" : "16px"};`}
 
   white-space: pre-line;
 
@@ -178,7 +180,6 @@ const StyledBody = styled(Box)<{
     props.currentDisplayType === "aside" &&
     css<{ withBodyScroll?: boolean }>`
       margin-inline-end: ${props.withBodyScroll ? "-16px" : "0"};
-      padding-bottom: 8px;
       height: 100%;
       min-height: auto;
     `}

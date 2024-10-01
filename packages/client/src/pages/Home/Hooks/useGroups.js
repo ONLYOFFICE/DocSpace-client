@@ -48,7 +48,7 @@ const useGroups = ({
 
     const newFilter = GroupsFilter.getFilter(location);
 
-    setDocumentTitle(t("Common:Accounts"));
+    setDocumentTitle(t("Common:Contacts"));
 
     fetchGroups(newFilter, true, true)
       .catch((err) => {

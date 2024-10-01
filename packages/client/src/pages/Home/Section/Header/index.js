@@ -470,7 +470,7 @@ const SectionHeaderContent = (props) => {
     : isAccountsPage
       ? isInsideGroup
         ? getInsideGroupTitle()
-        : t("Common:Accounts")
+        : t("Common:Contacts")
       : isLoading && stateTitle
         ? stateTitle
         : title;
@@ -489,7 +489,7 @@ const SectionHeaderContent = (props) => {
   const accountsNavigationPath = isInsideGroup && [
     {
       id: 0,
-      title: t("Common:Accounts"),
+      title: t("Common:Contacts"),
       isRoom: false,
       isRootRoom: true,
     },

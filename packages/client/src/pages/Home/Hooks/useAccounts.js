@@ -51,7 +51,7 @@ const useAccounts = ({
 
     const newFilter = AccountsFilter.getFilter(location);
 
-    setDocumentTitle(t("Common:Accounts"));
+    setDocumentTitle(t("Common:Contacts"));
 
     fetchPeople(newFilter, true, true)
       .catch((err) => {

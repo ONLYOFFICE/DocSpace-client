@@ -11,7 +11,9 @@ import WatermarkBlock from "./Watermarks/WatermarkBlock";
 
 const StyledVirtualDataRoomBlock = styled.div`
   .virtual-data-room-block {
-    margin-bottom: 18px;
+    :not(:last-child) {
+      margin-bottom: 18px;
+    }
 
     .virtual-data-room-block_header {
       display: flex;

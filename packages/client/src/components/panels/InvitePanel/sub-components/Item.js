@@ -179,7 +179,7 @@ const Item = ({
   const type = getUserType(item);
 
   const typeLabel = item?.isEmailInvite
-    ? isPaidUserRole(access)
+    ? roomId === -1 || isPaidUserRole(access)
       ? getUserTypeLabel(defaultAccess.type, t)
       : t("Common:Guest")
     : (type === "user" && defaultAccess?.type !== type) ||

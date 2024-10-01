@@ -482,16 +482,34 @@ const InviteInput = ({
       prevDropDownContent.current = (
         <DropDownItem
           className="list-item"
-          style={{ width: "inherit" }}
+          style={{
+            width: "inherit",
+          }}
           textOverflow
           onClick={addEmail}
-          height={48}
+          height={53}
         >
           <div className="email-list_avatar">
             <Avatar size="min" role="user" source={AtReactSvgUrl} />
-            <Text truncate fontSize="14px" fontWeight={600}>
-              {inputValue}
-            </Text>
+            {roomId == -1 ? (
+              <Text truncate fontSize="14px" fontWeight={600}>
+                {inputValue}
+              </Text>
+            ) : (
+              <div className="email-list_email-container">
+                <Text truncate fontSize="14px" fontWeight={600}>
+                  {inputValue}
+                </Text>
+                <Text
+                  truncate
+                  fontSize="12px"
+                  fontWeight={400}
+                  className="email-list_invite-as-guest"
+                >
+                  {t("Common:InviteAsGuest")}
+                </Text>
+              </div>
+            )}
           </div>{" "}
           <div className="email-list_add-button">
             <Text fontSize="13px" fontWeight={600}>
@@ -647,6 +665,7 @@ const InviteInput = ({
             eventTypes="click"
             withBackdrop={false}
             zIndex={399}
+            className="add-manually-dropdown"
             {...dropDownMaxHeight}
             isRequestRunning={searchRequestRunning}
           >

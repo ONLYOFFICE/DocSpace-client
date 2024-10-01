@@ -41,6 +41,7 @@ import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 import DeleteIcon from "PUBLIC_DIR/images/mobile.actions.remove.react.svg";
 import { isMobile, desktop, commonInputStyles } from "@docspace/shared/utils";
 import Base from "@docspace/shared/themes/base";
+import { globalColors } from "@docspace/shared/themes";
 
 const fillAvailableWidth = css`
   width: 100%;
@@ -285,6 +286,11 @@ const StyledInviteInputContainer = styled.div`
   .access-selector {
     margin-inline-end: 0;
   }
+
+  .add-manually-dropdown {
+    inset-inline-start: 0;
+    border: ${`1px solid ${globalColors.grayStrong}`};
+  }
 `;
 
 const StyledDropDown = styled(DropDown)`
@@ -294,7 +300,7 @@ const StyledDropDown = styled(DropDown)`
     display: flex;
     align-items: center;
     gap: 8px;
-    height: 48px;
+    height: 53px;
 
     .list-item_content {
       text-overflow: ellipsis;
@@ -306,6 +312,17 @@ const StyledDropDown = styled(DropDown)`
       align-items: center;
       gap: 8px;
       overflow: hidden;
+    }
+
+    .email-list_email-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      line-height: 16px;
+
+      .email-list_invite-as-guest {
+        color: ${(props) => props.theme.currentColorScheme.main.accent};
+      }
     }
 
     .email-list_add-button {

@@ -246,6 +246,7 @@
   "InvitationToPortal": "<1>{{firstName}} {{lastName}}</1> invites you to join the {{productName}} <1>{{spaceAddress}}</1> for secure document collaboration.",
   "InvitationToRoom": "<1>{{firstName}} {{lastName}}</1> invites you to join the room <1>{{roomName}}</1> for secure document collaboration.",
   "Invite": "Invite",
+  "InviteAsGuest": "invite as guest",
   "Invited": "Invited",
   "InviteUsers": "Invite users",
   "Kilobyte": "KB",

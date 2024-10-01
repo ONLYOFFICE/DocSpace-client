@@ -118,7 +118,7 @@ const ChangeUserTypeEvent = ({
         return t("Common:User");
       case "user":
       default:
-        return t("Common:User"); //TODO: replace to Guest
+        return t("Common:Guest");
     }
   };
 

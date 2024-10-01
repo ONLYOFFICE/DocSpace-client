@@ -109,8 +109,8 @@ const Accounts = (props) => {
     const userOption = {
       id: "info-account-type_user",
       key: "user",
-      title: t("Common:User"),
-      label: t("Common:User"),
+      title: t("Common:Guest"),
+      label: t("Common:Guest"),
       action: "user",
     };
 

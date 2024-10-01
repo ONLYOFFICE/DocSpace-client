@@ -48,6 +48,7 @@ import {
   getAccessOptions,
   getFreeUsersRoleArray,
   getFreeUsersTypeArray,
+  isPaidUserRole,
 } from "../utils";
 import {
   StyledEditInput,
@@ -178,7 +179,9 @@ const Item = ({
   const type = getUserType(item);
 
   const typeLabel = item?.isEmailInvite
-    ? getUserTypeLabel(defaultAccess.type, t)
+    ? isPaidUserRole(access)
+      ? getUserTypeLabel(defaultAccess.type, t)
+      : t("Common:Guest")
     : (type === "user" && defaultAccess?.type !== type) ||
         (defaultAccess?.type === "manager" &&
           type !== "admin" &&

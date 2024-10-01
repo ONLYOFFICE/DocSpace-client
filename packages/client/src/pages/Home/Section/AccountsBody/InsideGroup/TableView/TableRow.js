@@ -292,8 +292,8 @@ const InsideGroupTableRow = (props) => {
     };
     const userOption = {
       key: "user",
-      title: t("Common:User"),
-      label: t("Common:User"),
+      title: t("Common:Guest"),
+      label: t("Common:Guest"),
       action: "user",
     };
 

@@ -152,9 +152,9 @@ export const getUserTypeLabel = (
     case "collaborator":
       return t("Common:User");
     case "user":
-      return t("Common:User");
+      return t("Common:Guest");
     default:
-      return t("Common:User");
+      return t("Common:Guest");
   }
 };
 

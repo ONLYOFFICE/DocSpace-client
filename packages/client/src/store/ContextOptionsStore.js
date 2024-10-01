@@ -2433,16 +2433,6 @@ class ContextOptionsStore {
         "data-type": EmployeeType.Collaborator,
         key: "collaborator",
       },
-      // TODOD: Replace to guest
-      // {
-      //   id: "accounts-add_user",
-      //   className: "main-button_drop-down",
-      //   icon: PersonDefaultReactSvgUrl,
-      //   label: t("Common:User"),
-      //   onClick: this.onInvite,
-      //   "data-type": EmployeeType.Guest,
-      //   key: "user",
-      // },
       {
         key: "separator",
         isSeparator: true,

@@ -120,7 +120,7 @@ export const getAccessOptions = (
         roomType === -1 ? EmployeeType.User : ShareAccessRights.RoomManager,
       type: "manager",
     },
-    newUser: {
+    user: {
       key: "newUser",
       label: t("Common:User"),
       description: getPowerUserDescription(roomType, t),
@@ -140,14 +140,13 @@ export const getAccessOptions = (
           : ShareAccessRights.Collaborator,
       type: "collaborator",
     },
-    // TODO: Replace to Guest
-    // user: {
-    //   key: "user",
-    //   label: t("Common:User"),
-    //   description: t("Translations:RoleUserDescription"),
-    //   access: EmployeeType.Guest,
-    //   type: "user",
-    // },
+    guest: {
+      key: "guest",
+      label: t("Common:Guest"),
+      description: t("Translations:RoleUserDescription"),
+      access: EmployeeType.Guest,
+      type: "user",
+    },
     editor: {
       key: "editor",
       label: t("Common:Editor"),
@@ -263,8 +262,8 @@ export const getAccessOptions = (
         ...options,
         accesses.roomAdmin,
         { key: "s1", isSeparator: withSeparator },
-        accesses.newUser,
-        // accesses.user, // TODO: Replace to Guest
+        accesses.user,
+        accesses.guest,
       ];
       break;
   }

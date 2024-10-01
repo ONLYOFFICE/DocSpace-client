@@ -658,7 +658,7 @@ const ArticleMainButtonContent = (props) => {
           ]
         : []),
       {
-        id: "invite_room-collaborator",
+        id: "invite_user",
         className: "main-button_drop-down",
         icon: PersonDefaultReactSvgUrl,
         label: t("Common:User"),
@@ -666,15 +666,6 @@ const ArticleMainButtonContent = (props) => {
         action: EmployeeType.Collaborator,
         key: "collaborator",
       },
-      // {
-      //   id: "invite_user",
-      //   className: "main-button_drop-down",
-      //   icon: PersonDefaultReactSvgUrl,
-      //   label: t("Common:User"),
-      //   onClick: onInvite,
-      //   action: EmployeeType.Guest,
-      //   key: "user",
-      // },
       ...(!isMobileArticle
         ? [
             {

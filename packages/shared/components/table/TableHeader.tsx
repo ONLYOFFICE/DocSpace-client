@@ -471,9 +471,11 @@ class TableHeaderComponent extends React.Component<
         columnInfoPanelStorageName || "",
       );
 
-      const tableInfoPanelContainer = storageInfoPanelSize
-        ? storageInfoPanelSize.split(" ")
-        : tableContainer;
+      const tableInfoPanelContainer =
+        storageInfoPanelSize &&
+        storageInfoPanelSize.split(" ").length === tableContainer.length
+          ? storageInfoPanelSize.split(" ")
+          : tableContainer;
 
       let containerMinWidth = containerWidth - defaultSize - SETTINGS_SIZE;
 

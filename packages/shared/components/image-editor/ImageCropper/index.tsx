@@ -28,6 +28,7 @@ import React, { useEffect } from "react";
 import { ReactSVG } from "react-svg";
 import throttle from "lodash/throttle";
 import AvatarEditor, { Position } from "react-avatar-editor";
+import { useTheme } from "styled-components";
 
 import ZoomMinusReactSvgUrl from "PUBLIC_DIR/images/zoom-minus.react.svg?url";
 import ZoomPlusReactSvgUrl from "PUBLIC_DIR/images/zoom-plus.react.svg?url";
@@ -48,11 +49,12 @@ const ImageCropper = ({
   isDisabled,
   disableImageRescaling,
   onChangeFile,
-  areaCropperImage,
+  editorBorderRadius,
 }: ImageCropperProps) => {
   const editorRef = React.useRef<null | AvatarEditor>(null);
   const inputFilesElement = React.useRef(null);
   const setEditorRef = (editor: AvatarEditor) => (editorRef.current = editor);
+  const theme = useTheme();
 
   const handlePositionChange = (position: Position) => {
     if (isDisabled || disableImageRescaling) return;
@@ -119,7 +121,6 @@ const ImageCropper = ({
       disableImageRescaling={disableImageRescaling}
     >
       <div className="icon_cropper-crop_area">
-        <ReactSVG className="icon_cropper-grid" src={areaCropperImage} />
         <AvatarEditor
           className="icon_cropper-avatar-editor"
           ref={setEditorRef}
@@ -128,11 +129,11 @@ const ImageCropper = ({
           height={648}
           position={{ x: image.x, y: image.y }}
           scale={image.zoom}
-          color={[6, 22, 38, 0.2]}
+          color={theme.isBase ? [6, 22, 38, 0.2] : [20, 20, 20, 0.8]}
           border={0}
           rotate={0}
-          borderRadius={108}
-          style={{ width: "368px", height: "367px" }}
+          borderRadius={editorBorderRadius}
+          style={{ width: "368px", height: "368px" }}
           onPositionChange={handlePositionChange}
           onImageReady={handleImageChange}
           disableHiDPIScaling={false}

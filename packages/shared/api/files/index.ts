@@ -38,6 +38,7 @@ import {
   sortInDisplayOrder,
 } from "../../utils/common";
 
+import { TNewFiles } from "../rooms/types";
 import { request } from "../client";
 
 import FilesFilter from "./filter";
@@ -63,7 +64,6 @@ import {
   TTirdParties,
   TUploadOperation,
   TConnectingStorages,
-  TNewFiles,
 } from "./types";
 
 export async function openEdit(

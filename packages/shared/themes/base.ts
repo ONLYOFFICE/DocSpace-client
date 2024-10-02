@@ -3224,6 +3224,7 @@ export const getBaseTheme = () => {
 
     publicRoom: {
       border: `1px solid ${lightGraySelected}`,
+      linkColor: lightBlueMain,
     },
 
     logoCover: {

@@ -3210,6 +3210,7 @@ const Dark: TTheme = {
 
   publicRoom: {
     border: `1px solid ${lightGraySelected}`,
+    linkColor: lightBlueMain,
   },
 
   logoCover: {

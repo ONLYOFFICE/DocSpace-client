@@ -63,12 +63,16 @@ export const StyledPanel = styled.div<{ position: TPanelPosition }>`
   }
 `;
 
-export const StyledItem = styled.div<{ isRooms: boolean; isFirst: boolean }>`
+export const StyledItem = styled.div<{
+  isRooms: boolean;
+  isFirst: boolean;
+  isLoader: boolean;
+}>`
   padding: 0;
   margin: 0;
 
   .date-item {
-    margin-bottom: 12px;
+    margin-bottom: ${(props) => (props.isLoader ? "8px" : "12px")};
     margin-top: ${(props) => (props.isFirst ? "20px" : "8px")};
   }
 

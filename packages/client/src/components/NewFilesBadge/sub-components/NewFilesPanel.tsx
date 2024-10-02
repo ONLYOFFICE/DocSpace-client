@@ -38,7 +38,7 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { Scrollbar } from "@docspace/shared/components/scrollbar";
-import useLoadingWithTimeout from "@docspace/shared/hooks/useLoadingWithTimeout";
+import { Nullable } from "@docspace/shared/types";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
 
 import {
@@ -50,6 +50,8 @@ import { StyledPanel } from "../NewFilesBadge.styled";
 import { NewFilesPanelLoader } from "./NewFilesPanelLoader";
 import { NewFilesPanelItem } from "./NewFilesPanelItem";
 
+const MIN_LOADER_TIMER = 500;
+
 export const NewFilesPanelComponent = ({
   position,
   folderId,
@@ -59,12 +61,13 @@ export const NewFilesPanelComponent = ({
   markAsRead,
 }: NewFilesPanelProps) => {
   const { t } = useTranslation(["Files"]);
-  const [isLoading, setIsLoading] = useLoadingWithTimeout<boolean>(500, true);
+  const [isLoading, setIsLoading] = React.useState(true);
   const [isMarkAsReadRunning, setIsMarkAsReadRunning] = React.useState(false);
   const [data, setData] = React.useState<TNewFiles[]>([]);
 
   const requestRunning = React.useRef<boolean>(false);
   const dataFetched = React.useRef<boolean>(false);
+  const timerRef = React.useRef<Nullable<NodeJS.Timeout>>(null);
 
   const isRooms = folderId === "rooms";
 
@@ -94,16 +97,34 @@ export const NewFilesPanelComponent = ({
   };
 
   React.useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
+
+  React.useEffect(() => {
     if (!folderId || dataFetched.current || requestRunning.current) return;
 
     const getData = async () => {
       try {
         setIsLoading(true);
+        const startLoaderTime = new Date();
+
         const newFiles = await api.files.getNewFiles(folderId);
+
         dataFetched.current = true;
         requestRunning.current = false;
 
         setData(newFiles);
+        const currentDate = new Date();
+
+        const ms = currentDate.getTime() - startLoaderTime.getTime();
+        if (ms < MIN_LOADER_TIMER) {
+          return (timerRef.current = setTimeout(() => {
+            setIsLoading(false);
+          }, MIN_LOADER_TIMER - ms));
+        }
+
         setIsLoading(false);
       } catch (e) {
         requestRunning.current = false;

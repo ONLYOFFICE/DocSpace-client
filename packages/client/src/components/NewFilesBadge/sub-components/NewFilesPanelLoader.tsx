@@ -40,7 +40,7 @@ export const NewFilesPanelLoader = ({ isRooms }: NewFilesPanelLoaderProps) => {
   if (isRooms)
     return (
       <>
-        <StyledItem isRooms isFirst>
+        <StyledItem isRooms isFirst isLoader>
           <RectangleSkeleton className="date-item" width="80px" height="16px" />
           <div className="room-items-container">
             <StyledRoomItem>
@@ -64,7 +64,7 @@ export const NewFilesPanelLoader = ({ isRooms }: NewFilesPanelLoaderProps) => {
             </div>
           </div>
         </StyledItem>
-        <StyledItem isRooms isFirst={false}>
+        <StyledItem isRooms isFirst={false} isLoader>
           <RectangleSkeleton className="date-item" width="80px" height="16px" />
           <div className="room-items-container">
             <StyledRoomItem>
@@ -87,17 +87,17 @@ export const NewFilesPanelLoader = ({ isRooms }: NewFilesPanelLoaderProps) => {
     );
 
   return (
-    <StyledItem isRooms={false} isFirst>
+    <StyledItem isRooms={false} isFirst isLoader>
       <RectangleSkeleton className="date-item" width="80px" height="16px" />
 
       <div className="file-items-container">
-        <StyledFileItem isRooms>
+        <StyledFileItem isRooms={false}>
           <RectangleSkeleton width="100%" height="32px" />
         </StyledFileItem>
-        <StyledFileItem isRooms>
+        <StyledFileItem isRooms={false}>
           <RectangleSkeleton width="100%" height="32px" />
         </StyledFileItem>
-        <StyledFileItem isRooms>
+        <StyledFileItem isRooms={false}>
           <RectangleSkeleton width="100%" height="32px" />
         </StyledFileItem>
         <RectangleSkeleton className="more-items" width="120px" height="24px" />

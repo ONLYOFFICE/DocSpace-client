@@ -120,6 +120,7 @@ const User = ({
               (m) => m.id !== user.id,
             ),
             groups: infoPanelMembers.groups?.filter((m) => m.id !== user.id),
+            guests: infoPanelMembers.guests?.filter((m) => m.id !== user.id),
           };
 
           const roomId = infoPanelSelection.id;
@@ -137,12 +138,16 @@ const User = ({
           const newGroups =
             newMembers.groups.length > minItemsCount ? newMembers?.groups : [];
 
+          const newGuests =
+            newMembers.guests.length > minItemsCount ? newMembers?.guests : [];
+
           setInfoPanelMembers({
             roomId,
             users: newUsers,
             administrators: newAdministrators,
             expected: newExpected,
             groups: newGroups,
+            guests: newGuests,
           });
 
           newMembersFilter.total -= 1;
@@ -170,6 +175,7 @@ const User = ({
               users: [...newUsers, ...fetchedMembers.users],
               expected: [...newExpected, ...fetchedMembers.expected],
               groups: [...newGroups, ...fetchedMembers.groups],
+              guests: [...newMembersFilter.guests],
             };
 
             setInfoPanelMembers({
@@ -195,6 +201,9 @@ const User = ({
               m.id === user.id ? { ...m, access: option.access } : m,
             ),
             groups: infoPanelMembers.groups?.map((m) =>
+              m.id === user.id ? { ...m, access: option.access } : m,
+            ),
+            guests: infoPanelMembers.guests?.map((m) =>
               m.id === user.id ? { ...m, access: option.access } : m,
             ),
           });

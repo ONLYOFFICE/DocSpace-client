@@ -57,6 +57,8 @@ export const NewFilesPanelComponent = ({
   folderId,
   onClose,
 
+  isRoom,
+
   culture,
   markAsRead,
 }: NewFilesPanelProps) => {
@@ -187,7 +189,9 @@ export const NewFilesPanelComponent = ({
       withFooterBorder
       withBodyScroll
     >
-      <ModalDialog.Header>{t("NewFilesPanel")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {isRooms ? t("NewInRooms") : isRoom ? t("NewInRoom") : t("NewInFolder")}
+      </ModalDialog.Header>
       <ModalDialog.Body>{content}</ModalDialog.Body>
       <ModalDialog.Footer>{markAsReadButton}</ModalDialog.Footer>
     </ModalDialog>

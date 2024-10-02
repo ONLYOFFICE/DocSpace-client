@@ -36,6 +36,8 @@ export type NewFilesBadgeProps = {
   newFilesCount: number;
   folderId: string | number;
 
+  isRoom?: boolean;
+
   parentDOMId?: string;
   className?: string;
   onBadgeClick?: () => void;
@@ -62,6 +64,8 @@ export type NewFilesPanelInjectStore = {
 export type NewFilesPanelProps = {
   position: TPanelPosition;
   folderId: string | number;
+
+  isRoom?: boolean;
 
   onClose: VoidFunction;
 

@@ -49,6 +49,8 @@ const NewFilesBadge = ({
   newFilesCount,
   folderId,
 
+  isRoom,
+
   parentDOMId,
   className,
   onBadgeClick,
@@ -384,6 +386,7 @@ const NewFilesBadge = ({
         <NewFilesPanel
           position={panelPosition}
           folderId={folderId}
+          isRoom={isRoom}
           onClose={onPanelHide}
         />
       )}

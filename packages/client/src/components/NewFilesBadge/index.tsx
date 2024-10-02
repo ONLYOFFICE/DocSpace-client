@@ -50,6 +50,7 @@ const NewFilesBadge = ({
   folderId,
 
   isRoom,
+  mute,
 
   parentDOMId,
   className,
@@ -381,6 +382,7 @@ const NewFilesBadge = ({
         onClick={onBadgeClickAction}
         onMouseOver={onMouseOver}
         onMouseLeave={onMouseLeave}
+        isMutedBadge={mute}
       />
       {showPanel && (
         <NewFilesPanel

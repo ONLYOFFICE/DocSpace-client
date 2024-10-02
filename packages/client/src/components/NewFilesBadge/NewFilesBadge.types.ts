@@ -37,6 +37,7 @@ export type NewFilesBadgeProps = {
   folderId: string | number;
 
   isRoom?: boolean;
+  mute?: boolean;
 
   parentDOMId?: string;
   className?: string;

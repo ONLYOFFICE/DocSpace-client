@@ -357,6 +357,7 @@ const Badges = ({
           className="tablet-badge"
           newFilesCount={newItems}
           folderId={id}
+          mute={mute}
           isRoom={isRoom}
         />
       )}

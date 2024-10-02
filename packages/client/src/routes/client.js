@@ -34,6 +34,7 @@ import Error404 from "@docspace/shared/components/errors/Error404";
 import ErrorBoundary from "../components/ErrorBoundaryWrapper";
 
 import { generalRoutes } from "./general";
+import { contanctsRoutes } from "./contacts";
 
 const ClientRoutes = [
   {
@@ -321,112 +322,7 @@ const ClientRoutes = [
               return { Component };
             },
           },
-          {
-            path: "accounts",
-            element: (
-              <PrivateRoute restricted withManager withCollaborator>
-                <Navigate to="/accounts/people/filter" replace />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "accounts/filter",
-            element: (
-              <PrivateRoute restricted withManager withCollaborator>
-                <Navigate to="/accounts/people/filter" replace />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "accounts/changeOwner",
-            element: (
-              <PrivateRoute restricted withManager>
-                <Navigate
-                  to="/accounts/people/filter"
-                  state={{ openChangeOwnerDialog: true }}
-                  replace
-                />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "accounts/people",
-            element: (
-              <PrivateRoute restricted withManager withCollaborator>
-                <Navigate to="/accounts/people/filter" replace />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "accounts/people/filter",
-            async lazy() {
-              const { AccountsView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Accounts"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute restricted withManager withCollaborator>
-                    <AccountsView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
-          },
-          {
-            path: "accounts/groups",
-            element: (
-              <PrivateRoute restricted withManager withCollaborator>
-                <Navigate to="/accounts/groups/filter" replace />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "accounts/groups/filter",
-            async lazy() {
-              const { AccountsView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Accounts"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute restricted withManager withCollaborator>
-                    <AccountsView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
-          },
-          {
-            path: "accounts/groups/:groupId",
-            element: (
-              <PrivateRoute restricted withManager withCollaborator>
-                <Navigate to="filter" replace />
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: "accounts/groups/:groupId/filter",
-            async lazy() {
-              const { AccountsView } = await componentLoader(
-                () => import("SRC_DIR/pages/Home/View/Accounts"),
-              );
-
-              const Component = () => {
-                return (
-                  <PrivateRoute restricted withManager withCollaborator>
-                    <AccountsView />
-                  </PrivateRoute>
-                );
-              };
-
-              return { Component };
-            },
-          },
+          ...contanctsRoutes,
         ],
       },
       {

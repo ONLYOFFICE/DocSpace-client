@@ -4182,7 +4182,7 @@ class FilesStore {
   get indexColumnSize() {
     if (!this.selectedFolderStore.isIndexedFolder) return;
 
-    const minWidth = 36;
+    const minWidth = 30;
     const maxIndexLength = 5;
 
     const lastFile = this.filesList[this.filesList.length - 1];
@@ -4193,7 +4193,7 @@ class FilesStore {
       return minWidth + maxIndexLength * 3;
     }
 
-    return minWidth + orderLength * 3;
+    return minWidth + orderLength * 2;
   }
 
   get hasMoreFiles() {

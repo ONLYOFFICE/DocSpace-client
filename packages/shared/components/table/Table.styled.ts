@@ -305,6 +305,7 @@ const StyledTableHeaderCell = styled.div<{
   showIcon?: boolean;
   sortingVisible?: boolean;
   isActive?: boolean;
+  isShort?: boolean;
   sorted?: boolean;
 }>`
   cursor: ${(props) =>
@@ -356,6 +357,12 @@ const StyledTableHeaderCell = styled.div<{
   .table-container_header-item {
     display: grid;
     grid-template-columns: 1fr 22px;
+
+    ${(isShort) =>
+      isShort &&
+      css`
+        grid-template-columns: 1fr 12px;
+      `};
 
     margin-inline-end: 8px;
 

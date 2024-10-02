@@ -60,6 +60,7 @@ const NewFilesBadge = ({
   setNewFilesPanelFolderId,
 }: NewFilesBadgeProps) => {
   const [showPanel, setShowPanel] = React.useState(false);
+  const [disableBadgeClick, setDisableBadgeClick] = React.useState(false);
   const [openWithClick, setOpenWithClick] = React.useState(false);
   const [panelDirection, setPanelDirection] =
     React.useState<TPanelDirection>("right");
@@ -72,6 +73,7 @@ const NewFilesBadge = ({
 
   const badgeRef = React.useRef<Nullable<HTMLDivElement>>(null);
   const timerRef = React.useRef<Nullable<NodeJS.Timeout>>(null);
+  const disableBadgeTimerRef = React.useRef<Nullable<NodeJS.Timeout>>(null);
 
   const calculatePosition = () => {
     if (!badgeRef.current) return;
@@ -146,6 +148,7 @@ const NewFilesBadge = ({
   };
 
   const onPanelOpen = () => {
+    if (disableBadgeClick) return;
     setShowPanel(true);
     setNewFilesPanelFolderId?.(folderId);
     calculatePosition();
@@ -154,6 +157,11 @@ const NewFilesBadge = ({
   const onPanelHide = React.useCallback(() => {
     setShowPanel(false);
     setOpenWithClick(false);
+    setDisableBadgeClick(true);
+    disableBadgeTimerRef.current = setTimeout(
+      () => setDisableBadgeClick(false),
+      300,
+    );
   }, []);
 
   const onBadgeClickAction = () => {
@@ -328,6 +336,8 @@ const NewFilesBadge = ({
   React.useEffect(() => {
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
+      if (disableBadgeTimerRef.current)
+        clearTimeout(disableBadgeTimerRef.current);
     };
   }, []);
 

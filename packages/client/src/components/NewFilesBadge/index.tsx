@@ -25,11 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { inject, observer } from "mobx-react";
 
 import { Badge } from "@docspace/shared/components/badge";
 import { Nullable } from "@docspace/shared/types";
-
 import { isMobile } from "@docspace/shared/utils";
+
+import DialogsStore from "SRC_DIR/store/DialogsStore";
+
 import {
   NewFilesBadgeProps,
   TPanelDirection,
@@ -45,9 +48,13 @@ const PANEL_HEIGHT = 500;
 const NewFilesBadge = ({
   newFilesCount,
   folderId,
+
   parentDOMId,
   className,
   onBadgeClick,
+
+  newFilesPanelFolderId,
+  setNewFilesPanelFolderId,
 }: NewFilesBadgeProps) => {
   const [showPanel, setShowPanel] = React.useState(false);
   const [openWithClick, setOpenWithClick] = React.useState(false);
@@ -135,6 +142,17 @@ const NewFilesBadge = ({
     setPanelDirection(direction);
   };
 
+  const onPanelOpen = () => {
+    setShowPanel(true);
+    setNewFilesPanelFolderId?.(folderId);
+    calculatePosition();
+  };
+
+  const onPanelHide = React.useCallback(() => {
+    setShowPanel(false);
+    setOpenWithClick(false);
+  }, []);
+
   const onBadgeClickAction = () => {
     setOpenWithClick(true);
     if (timerRef.current) {
@@ -142,34 +160,25 @@ const NewFilesBadge = ({
     }
     timerRef.current = null;
 
-    if (isMobile()) {
-      if (onBadgeClick) onBadgeClick();
-
-      setShowPanel(true);
-
-      return;
-    }
-
-    calculatePosition();
-    setShowPanel(true);
-
-    if (onBadgeClick) onBadgeClick();
+    onPanelOpen();
+    onBadgeClick?.();
   };
 
-  const onPanelClose = React.useCallback((e: MouseEvent) => {
-    const target = e.target as HTMLElement;
+  const onPanelClose = React.useCallback(
+    (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
 
-    if (target.closest(".new-files-panel") || isMobile()) return;
+      if (target.closest(".new-files-panel") || isMobile()) return;
 
-    setShowPanel(false);
-    setOpenWithClick(false);
-  }, []);
+      onPanelHide();
+    },
+    [onPanelHide],
+  );
 
   const onMouseOver = () => {
     if (timerRef.current) return;
     timerRef.current = setTimeout(() => {
-      setShowPanel(true);
-      calculatePosition();
+      onPanelOpen();
 
       timerRef.current = null;
     }, 1500);
@@ -210,7 +219,7 @@ const NewFilesBadge = ({
 
       if (isMobile()) {
         if (topPos < 64) {
-          setShowPanel(false);
+          onPanelHide();
         }
 
         return;
@@ -226,44 +235,44 @@ const NewFilesBadge = ({
           return;
         }
 
-        return setShowPanel(false);
+        return onPanelHide();
       }
 
       if (panelDirection === "center") {
         if (leftPos < panelLeftPos || leftPos > panelRightPos) {
-          return setShowPanel(false);
+          return onPanelHide();
         }
 
         if (panelTopPos > badgeTopPos) {
           // down
           if (topPos > panelBottomPos) {
-            return setShowPanel(false);
+            return onPanelHide();
           }
           if (topPos < panelTopPos) {
             if (topPos < badgeRects.top) {
-              return setShowPanel(false);
+              return onPanelHide();
             }
             if (
               (leftPos < badgeLeftPos || leftPos > badgeRightPos) &&
               topPos < badgeBottomPos
             ) {
-              return setShowPanel(false);
+              return onPanelHide();
             }
           }
         } else {
           // top
           if (topPos < panelTopPos) {
-            return setShowPanel(false);
+            return onPanelHide();
           }
           if (topPos > panelBottomPos) {
             if (topPos > badgeBottomPos) {
-              setShowPanel(false);
+              onPanelHide();
             }
             if (
               (leftPos < badgeLeftPos || leftPos > badgeRightPos) &&
               topPos > badgeRects.top
             ) {
-              setShowPanel(false);
+              onPanelHide();
             }
           }
         }
@@ -272,43 +281,43 @@ const NewFilesBadge = ({
       }
 
       if (topPos < panelTopPos || topPos > panelBottomPos) {
-        return setShowPanel(false);
+        return onPanelHide();
       }
 
       if (panelDirection === "left") {
         if (leftPos < panelLeftPos) {
-          return setShowPanel(false);
+          return onPanelHide();
         }
 
         if (leftPos > badgeRightPos) {
-          return setShowPanel(false);
+          return onPanelHide();
         }
 
         if (
           (topPos < badgeTopPos || topPos > badgeBottomPos) &&
           leftPos > badgeLeftPos
         ) {
-          return setShowPanel(false);
+          return onPanelHide();
         }
         return;
       }
 
       if (leftPos > panelRightPos) {
-        return setShowPanel(false);
+        return onPanelHide();
       }
 
       if (leftPos < badgeLeftPos) {
-        return setShowPanel(false);
+        return onPanelHide();
       }
 
       if (
         (topPos < badgeTopPos || topPos > badgeBottomPos) &&
         leftPos < badgeRightPos
       ) {
-        return setShowPanel(false);
+        return onPanelHide();
       }
     },
-    [panelDirection, panelPosition, parentDOMId],
+    [onPanelHide, panelDirection, panelPosition, parentDOMId],
   );
 
   React.useEffect(() => {
@@ -345,7 +354,14 @@ const NewFilesBadge = ({
     };
   }, [showPanel, onPanelClose]);
 
-  const label = newFilesCount > 999 ? "999+ " : newFilesCount;
+  React.useEffect(() => {
+    if (!newFilesPanelFolderId || newFilesPanelFolderId === folderId) return;
+
+    onPanelHide();
+  }, [folderId, newFilesPanelFolderId, onPanelHide]);
+
+  const label = newFilesCount > 999 ? "999+" : newFilesCount;
+
   return (
     <>
       <Badge
@@ -353,7 +369,7 @@ const NewFilesBadge = ({
         lineHeight="16px"
         fontSize="11px"
         fontWeight={600}
-        className={`new-items${className ?? ""}`}
+        className={`new-items${className ? ` ${className}` : ""}`}
         label={label}
         onClick={onBadgeClickAction}
         onMouseOver={onMouseOver}
@@ -362,15 +378,16 @@ const NewFilesBadge = ({
       {showPanel && (
         <NewFilesPanel
           position={panelPosition}
-          onClose={() => {
-            setShowPanel(false);
-            setOpenWithClick(false);
-          }}
           folderId={folderId}
+          onClose={onPanelHide}
         />
       )}
     </>
   );
 };
 
-export default NewFilesBadge;
+export default inject(({ dialogsStore }: { dialogsStore: DialogsStore }) => {
+  const { newFilesPanelFolderId, setNewFilesPanelFolderId } = dialogsStore;
+
+  return { newFilesPanelFolderId, setNewFilesPanelFolderId };
+})(observer(NewFilesBadge));

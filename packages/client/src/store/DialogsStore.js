@@ -166,6 +166,8 @@ class DialogsStore {
     onClose: null,
   };
 
+  newFilesPanelFolderId = null;
+
   constructor(
     authStore,
     treeFoldersStore,
@@ -183,6 +185,10 @@ class DialogsStore {
     this.versionHistoryStore = versionHistoryStore;
     this.infoPanelStore = infoPanelStore;
   }
+
+  setNewFilesPanelFolderId = (folderId) => {
+    this.newFilesPanelFolderId = folderId;
+  };
 
   setEditRoomDialogProps = (props) => {
     this.editRoomDialogProps = props;

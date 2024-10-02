@@ -24,6 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { TFile } from "@docspace/shared/api/files/types";
+import { TNewFilesItem, TRoom } from "@docspace/shared/api/rooms/types";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { Nullable } from "@docspace/shared/types";
+
+import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
+import FilesSettingsStore from "SRC_DIR/store/FilesSettingsStore";
+
 export type NewFilesBadgeProps = {
   newFilesCount: number;
   folderId: string | number;
@@ -31,6 +39,9 @@ export type NewFilesBadgeProps = {
   parentDOMId?: string;
   className?: string;
   onBadgeClick?: () => void;
+
+  newFilesPanelFolderId?: Nullable<string | number>;
+  setNewFilesPanelFolderId?: (value: Nullable<string | number>) => void;
 };
 
 export type TPanelPosition = {
@@ -39,11 +50,64 @@ export type TPanelPosition = {
   maxHeight: number;
 };
 
+type MarkAsRead = FilesActionStore["markAsRead"];
+type CheckAndOpenLocationAction =
+  FilesActionStore["checkAndOpenLocationAction"];
+
+export type NewFilesPanelInjectStore = {
+  settingsStore: SettingsStore;
+  filesActionsStore: FilesActionStore;
+};
+
 export type NewFilesPanelProps = {
   position: TPanelPosition;
   folderId: string | number;
 
   onClose: VoidFunction;
+
+  culture?: string;
+  markAsRead?: MarkAsRead;
 };
 
 export type TPanelDirection = "left" | "right" | "center" | "custom";
+
+export type NewFilesPanelItemProps = {
+  date: string;
+  items: TNewFilesItem[];
+  isRooms: boolean;
+  isFirst: boolean;
+  onClose: VoidFunction;
+
+  culture?: string;
+};
+
+export type NewFilesPanelItemDateProps = {
+  date: string;
+  culture?: string;
+};
+
+export type NewFilesPanelItemRoomProps = {
+  room: TRoom;
+};
+
+export type NewFilesPanelItemFileInjectStore = {
+  filesSettingsStore: FilesSettingsStore;
+  filesActionsStore: FilesActionStore;
+};
+
+type GetIcon = FilesSettingsStore["getIcon"];
+
+export type NewFilesPanelItemFileProps = {
+  item: TFile;
+  isRooms: boolean;
+  onClose: VoidFunction;
+
+  getIcon?: GetIcon;
+  checkAndOpenLocationAction?: CheckAndOpenLocationAction;
+};
+
+export type NewFilesPanelFileListProps = {
+  items: TFile[];
+  isRooms: boolean;
+  onClose: VoidFunction;
+};

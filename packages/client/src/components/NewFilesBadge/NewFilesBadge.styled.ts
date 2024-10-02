@@ -26,7 +26,7 @@
 
 import styled from "styled-components";
 
-import { mobile } from "@docspace/shared/utils";
+import { tablet } from "@docspace/shared/utils";
 
 import { TPanelPosition } from "./NewFilesBadge.types";
 
@@ -49,14 +49,123 @@ export const StyledPanel = styled.div<{ position: TPanelPosition }>`
 
   box-sizing: border-box;
 
-  @media ${mobile} {
-    bottom: 0;
-    left: 0;
-    top: unset;
+  padding-inline-start: 16px;
+  padding-bottom: 16px;
 
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
 
-    height: calc(100% - 64px);
-    max-height: calc(100% - 64px);
+  .mark-as-read-button {
+    min-height: 32px;
+    width: calc(100% - 16px);
+  }
+`;
+
+export const StyledItem = styled.div<{ isRooms: boolean; isFirst: boolean }>`
+  padding: 0;
+  margin: 0;
+
+  .date-item {
+    margin-bottom: 12px;
+    margin-top: ${(props) => (props.isFirst ? "20px" : "8px")};
+  }
+
+  .room-items-container {
+    box-sizing: border-box;
+
+    padding: 16px 0;
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .file-items-container {
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    padding: ${(props) => (props.isRooms ? 0 : "16px 0 ")};
+
+    .more-items {
+      padding-top: 4px;
+      padding-inline-start: ${(props) => (props.isRooms ? "32px" : 0)};
+
+      .more-items__link {
+        text-decoration: underline dashed;
+      }
+    }
+  }
+`;
+
+export const StyledRoomItem = styled.div`
+  height: 24px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+
+  .room-icon {
+    min-width: 24px;
+  }
+`;
+
+export const StyledFileItem = styled.div<{ isRooms: boolean }>`
+  width: 100%;
+  height: 32px;
+
+  padding-inline-start: ${(props) => (props.isRooms ? "32px" : 0)};
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+
+  .info-container {
+    width: auto;
+    max-width: calc(100% - 20px);
+    height: 100%;
+    box-sizing: border-box;
+    border: 1px solid
+      ${(props) => props.theme.newFilesPanel.fileItem.borderColor};
+    border-radius: 6px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    padding-inline-end: 8px;
+
+    .file-icon {
+      min-width: 32px;
+    }
+
+    .file-exst {
+      color: ${(props) => props.theme.newFilesPanel.fileItem.fileExstColor};
+    }
+  }
+
+  .open-location-button {
+    cursor: pointer;
+
+    display: none;
+
+    @media ${tablet} {
+      display: block;
+    }
+  }
+
+  &:hover {
+    .open-location-button {
+      display: block;
+    }
   }
 `;

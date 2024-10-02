@@ -25,44 +25,89 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
 import api from "@docspace/shared/api";
-import { TNewFiles } from "@docspace/shared/api/files/types";
+import { TNewFiles } from "@docspace/shared/api/rooms/types";
 import { Portal } from "@docspace/shared/components/portal";
 import { toastr } from "@docspace/shared/components/toast";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { Button } from "@docspace/shared/components/button";
-import { isMobile } from "@docspace/shared/utils";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { Scrollbar } from "@docspace/shared/components/scrollbar";
+import useLoadingWithTimeout from "@docspace/shared/hooks/useLoadingWithTimeout";
+import { isDesktop, isMobile } from "@docspace/shared/utils";
 
-import { NewFilesPanelProps } from "../NewFilesBadge.types";
+import {
+  NewFilesPanelInjectStore,
+  NewFilesPanelProps,
+} from "../NewFilesBadge.types";
 import { StyledPanel } from "../NewFilesBadge.styled";
 
-export const NewFilesPanel = ({
+import { NewFilesPanelLoader } from "./NewFilesPanelLoader";
+import { NewFilesPanelItem } from "./NewFilesPanelItem";
+
+export const NewFilesPanelComponent = ({
   position,
   folderId,
   onClose,
+
+  culture,
+  markAsRead,
 }: NewFilesPanelProps) => {
+  const { t } = useTranslation(["Files"]);
+  const [isLoading, setIsLoading] = useLoadingWithTimeout<boolean>(500, true);
+  const [isMarkAsReadRunning, setIsMarkAsReadRunning] = React.useState(false);
   const [data, setData] = React.useState<TNewFiles[]>([]);
 
   const requestRunning = React.useRef<boolean>(false);
   const dataFetched = React.useRef<boolean>(false);
+
+  const isRooms = folderId === "rooms";
+
+  const markAsReadAction = async () => {
+    if (isMarkAsReadRunning) return;
+    setIsMarkAsReadRunning(true);
+    const folderIDs = isRooms
+      ? data.map(({ items }) => {
+          const roomsIds = items.map((item) => {
+            if ("room" in item) return item.room.id;
+
+            return null;
+          });
+
+          // remove duplicate and null
+          return roomsIds.filter((r, index) => {
+            if (!r || index !== roomsIds.indexOf(r)) return false;
+            return true;
+          });
+        })
+      : [folderId];
+
+    await markAsRead?.(folderIDs, []);
+    setIsMarkAsReadRunning(false);
+
+    onClose();
+  };
 
   React.useEffect(() => {
     if (!folderId || dataFetched.current || requestRunning.current) return;
 
     const getData = async () => {
       try {
+        setIsLoading(true);
         const newFiles = await api.files.getNewFiles(folderId);
         dataFetched.current = true;
         requestRunning.current = false;
 
         setData(newFiles);
+        setIsLoading(false);
       } catch (e) {
         requestRunning.current = false;
-
+        setIsLoading(false);
         toastr.error(e as string);
       }
     };
@@ -70,19 +115,47 @@ export const NewFilesPanel = ({
     requestRunning.current = true;
 
     getData();
-  }, [folderId]);
+  }, [folderId, setIsLoading]);
 
-  const isRooms = folderId === "rooms";
+  const isMobileDevice = !isDesktop();
 
-  const markAsReadButton = <Button scale label="Mark as read" />;
+  const markAsReadButton = (
+    <Button
+      className="mark-as-read-button"
+      scale
+      label={t("MarkRead")}
+      size={isMobileDevice ? ButtonSize.normal : ButtonSize.small}
+      onClick={markAsReadAction}
+      isLoading={isMarkAsReadRunning}
+    />
+  );
+
+  const content = isLoading ? (
+    <NewFilesPanelLoader isRooms={isRooms} />
+  ) : (
+    <>
+      {data.map(({ date, items }, index) => {
+        return (
+          <NewFilesPanelItem
+            key={date}
+            date={date}
+            items={items}
+            isRooms={isRooms}
+            isFirst={index === 0}
+            culture={culture}
+            onClose={onClose}
+          />
+        );
+      })}
+    </>
+  );
 
   const panel = (
     <StyledPanel className="new-files-panel" position={position}>
-      sad
+      <Scrollbar>{content}</Scrollbar>
+      {markAsReadButton}
     </StyledPanel>
   );
-
-  console.log(data, isRooms);
 
   const mobilePanel = (
     <ModalDialog
@@ -93,12 +166,22 @@ export const NewFilesPanel = ({
       withFooterBorder
       withBodyScroll
     >
-      <ModalDialog.Header>New files panel</ModalDialog.Header>
-      <ModalDialog.Body>asd</ModalDialog.Body>
+      <ModalDialog.Header>{t("NewFilesPanel")}</ModalDialog.Header>
+      <ModalDialog.Body>{content}</ModalDialog.Body>
       <ModalDialog.Footer>{markAsReadButton}</ModalDialog.Footer>
     </ModalDialog>
   );
 
   const portal = <Portal element={panel} />;
+
   return isMobile() ? mobilePanel : portal;
 };
+
+export const NewFilesPanel = inject(
+  ({ settingsStore, filesActionsStore }: NewFilesPanelInjectStore) => {
+    const { culture } = settingsStore;
+    const { markAsRead } = filesActionsStore;
+
+    return { culture, markAsRead };
+  },
+)(observer(NewFilesPanelComponent));

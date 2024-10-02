@@ -154,6 +154,8 @@ const NewFilesBadge = ({
   }, []);
 
   const onBadgeClickAction = () => {
+    if (showPanel) return;
+
     setOpenWithClick(true);
     if (timerRef.current) {
       clearTimeout(timerRef.current);
@@ -343,16 +345,19 @@ const NewFilesBadge = ({
   React.useEffect(() => {
     if (showPanel) {
       document.addEventListener("mousedown", onPanelClose);
+      window.addEventListener("resize", onPanelHide);
     }
 
     if (!showPanel) {
       document.removeEventListener("mousedown", onPanelClose);
+      window.removeEventListener("resize", onPanelHide);
     }
 
     return () => {
       document.removeEventListener("mousedown", onPanelClose);
+      window.removeEventListener("resize", onPanelHide);
     };
-  }, [showPanel, onPanelClose]);
+  }, [showPanel, onPanelClose, onPanelHide]);
 
   React.useEffect(() => {
     if (!newFilesPanelFolderId || newFilesPanelFolderId === folderId) return;

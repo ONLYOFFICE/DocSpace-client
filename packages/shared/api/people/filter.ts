@@ -24,13 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import {
+  AccountLoginType,
+  EmployeeActivationStatus,
+  EmployeeStatus,
+  EmployeeType,
+  PaymentsType,
+} from "../../enums";
+import { Nullable } from "../../types";
 import { getObjectByLocation, toUrlParams } from "../../utils/common";
+import { TFilterSortBy, TSortOrder } from "./types";
 
 const DEFAULT_PAGE = 0;
-const DEFAULT_PAGE_COUNT = 25;
+const DEFAULT_PAGE_COUNT = 100;
 const DEFAULT_TOTAL = 0;
+
 const DEFAULT_SORT_BY = "displayname";
 const DEFAULT_SORT_ORDER = "ascending";
+
 const DEFAULT_EMPLOYEE_STATUS = null;
 const DEFAULT_ACTIVATION_STATUS = null;
 const DEFAULT_ROLE = null;
@@ -41,8 +52,10 @@ const DEFAULT_ACCOUNT_LOGIN_TYPE = null;
 const DEFAULT_WITHOUT_GROUP = false;
 const DEFAULT_QUOTA_FILTER = null;
 const DEFAULT_FILTER_SEPARATOR = null;
+const DEFAULT_USER_ID = null;
+const DEFAULT_INVITED_BY_ME = false;
 
-const ACTIVE_EMPLOYEE_STATUS = 1;
+const ACTIVE_EMPLOYEE_STATUS = EmployeeStatus.Active;
 
 const EMPLOYEE_STATUS = "employeestatus";
 const ACTIVATION_STATUS = "activationstatus";
@@ -58,6 +71,8 @@ const ACCOUNT_LOGIN_TYPE = "accountLoginType";
 const WITHOUT_GROUP = "withoutGroup";
 const QUOTA_FILTER = "quotaFilter";
 const FILTER_SEPARATOR = "filterSeparator";
+const USER_ID = "userid";
+const INVITED_BY_ME = "invitedbyme";
 
 class Filter {
   static getDefault(total = DEFAULT_TOTAL) {
@@ -78,10 +93,15 @@ class Filter {
       DEFAULT_GROUP,
       DEFAULT_PAYMENTS,
       DEFAULT_ACCOUNT_LOGIN_TYPE,
+      DEFAULT_WITHOUT_GROUP,
+      DEFAULT_QUOTA_FILTER,
+      DEFAULT_FILTER_SEPARATOR,
+      DEFAULT_INVITED_BY_ME,
+      DEFAULT_USER_ID,
     );
   }
 
-  static getFilter(location) {
+  static getFilter(location: Location) {
     if (!location) return this.getDefault();
 
     const urlFilter = getObjectByLocation(location);
@@ -91,26 +111,61 @@ class Filter {
     const defaultFilter = Filter.getDefault();
 
     const employeeStatus =
-      (urlFilter[EMPLOYEE_STATUS] && +urlFilter[EMPLOYEE_STATUS]) ||
+      ((urlFilter[EMPLOYEE_STATUS] &&
+        +urlFilter[EMPLOYEE_STATUS]) as typeof defaultFilter.employeeStatus) ||
       defaultFilter.employeeStatus;
     const activationStatus =
-      (urlFilter[ACTIVATION_STATUS] && +urlFilter[ACTIVATION_STATUS]) ||
+      ((urlFilter[ACTIVATION_STATUS] &&
+        +urlFilter[
+          ACTIVATION_STATUS
+        ]) as typeof defaultFilter.activationStatus) ||
       defaultFilter.activationStatus;
-    const role = urlFilter[ROLE] || defaultFilter.role;
-    const group = urlFilter[GROUP] || defaultFilter.group;
-    const search = urlFilter[SEARCH] || defaultFilter.search;
-    const sortBy = urlFilter[SORT_BY] || defaultFilter.sortBy;
-    const sortOrder = urlFilter[SORT_ORDER] || defaultFilter.sortOrder;
+    const role =
+      (urlFilter[ROLE] as typeof defaultFilter.role) || defaultFilter.role;
+    const group =
+      (urlFilter[GROUP] as typeof defaultFilter.group) || defaultFilter.group;
+    const search =
+      (urlFilter[SEARCH] as typeof defaultFilter.search) ||
+      defaultFilter.search;
+    const sortBy =
+      (urlFilter[SORT_BY] as typeof defaultFilter.sortBy) ||
+      defaultFilter.sortBy;
+    const sortOrder =
+      (urlFilter[SORT_ORDER] as typeof defaultFilter.sortOrder) ||
+      defaultFilter.sortOrder;
     const page =
-      (urlFilter[PAGE] && +urlFilter[PAGE] - 1) || defaultFilter.page;
+      ((urlFilter[PAGE] &&
+        +urlFilter[PAGE] - 1) as typeof defaultFilter.page) ||
+      defaultFilter.page;
     const pageCount =
-      (urlFilter[PAGE_COUNT] && +urlFilter[PAGE_COUNT]) ||
+      ((urlFilter[PAGE_COUNT] &&
+        +urlFilter[PAGE_COUNT]) as typeof defaultFilter.pageCount) ||
       defaultFilter.pageCount;
-    const payments = urlFilter[PAYMENTS] || defaultFilter.payments;
+    const payments =
+      (urlFilter[PAYMENTS] as typeof defaultFilter.payments) ||
+      defaultFilter.payments;
     const accountLoginType =
-      urlFilter[ACCOUNT_LOGIN_TYPE] || defaultFilter.accountLoginType;
-    const withoutGroup = urlFilter[WITHOUT_GROUP] || defaultFilter.withoutGroup;
-    const quotaFilter = urlFilter[QUOTA_FILTER] || defaultFilter.quotaFilter;
+      (urlFilter[
+        ACCOUNT_LOGIN_TYPE
+      ] as typeof defaultFilter.accountLoginType) ||
+      defaultFilter.accountLoginType;
+    const withoutGroup =
+      (urlFilter[WITHOUT_GROUP] &&
+        ((urlFilter[WITHOUT_GROUP] ===
+          "true") as typeof defaultFilter.withoutGroup)) ||
+      defaultFilter.withoutGroup;
+    const quotaFilter =
+      (urlFilter[QUOTA_FILTER] &&
+        (+urlFilter[QUOTA_FILTER] as typeof defaultFilter.quotaFilter)) ||
+      defaultFilter.quotaFilter;
+    const filterSeparator =
+      urlFilter[FILTER_SEPARATOR] || defaultFilter.filterSeparator;
+    const invitedByMe =
+      (urlFilter[INVITED_BY_ME] &&
+        ((urlFilter[INVITED_BY_ME] ===
+          "true") as typeof defaultFilter.invitedByMe)) ||
+      defaultFilter.withoutGroup;
+    const userId = urlFilter[USER_ID] || defaultFilter.userId;
 
     const newFilter = new Filter(
       page,
@@ -127,27 +182,32 @@ class Filter {
       accountLoginType,
       withoutGroup,
       quotaFilter,
+      filterSeparator,
+      invitedByMe,
+      userId,
     );
 
     return newFilter;
   }
 
   constructor(
-    page = DEFAULT_PAGE,
-    pageCount = DEFAULT_PAGE_COUNT,
-    total = DEFAULT_TOTAL,
-    sortBy = DEFAULT_SORT_BY,
-    sortOrder = DEFAULT_SORT_ORDER,
-    employeeStatus = DEFAULT_EMPLOYEE_STATUS,
-    activationStatus = DEFAULT_ACTIVATION_STATUS,
-    role = DEFAULT_ROLE,
-    search = DEFAULT_SEARCH,
-    group = DEFAULT_GROUP,
-    payments = DEFAULT_PAYMENTS,
-    accountLoginType = DEFAULT_ACCOUNT_LOGIN_TYPE,
-    withoutGroup = DEFAULT_WITHOUT_GROUP,
-    quotaFilter = DEFAULT_QUOTA_FILTER,
-    filterSeparator = DEFAULT_FILTER_SEPARATOR,
+    public page: number = DEFAULT_PAGE,
+    public pageCount: number = DEFAULT_PAGE_COUNT,
+    public total: number = DEFAULT_TOTAL,
+    public sortBy: TFilterSortBy = DEFAULT_SORT_BY,
+    public sortOrder: TSortOrder = DEFAULT_SORT_ORDER,
+    public employeeStatus: Nullable<EmployeeStatus> = DEFAULT_EMPLOYEE_STATUS,
+    public activationStatus: Nullable<EmployeeActivationStatus> = DEFAULT_ACTIVATION_STATUS,
+    public role: Nullable<EmployeeType> = DEFAULT_ROLE,
+    public search: string = DEFAULT_SEARCH,
+    public group: Nullable<string> = DEFAULT_GROUP,
+    public payments: Nullable<PaymentsType> = DEFAULT_PAYMENTS,
+    public accountLoginType: Nullable<AccountLoginType> = DEFAULT_ACCOUNT_LOGIN_TYPE,
+    public withoutGroup: boolean = DEFAULT_WITHOUT_GROUP,
+    public quotaFilter: Nullable<number> = DEFAULT_QUOTA_FILTER,
+    public filterSeparator: Nullable<string> = DEFAULT_FILTER_SEPARATOR,
+    public invitedByMe: boolean = DEFAULT_INVITED_BY_ME,
+    public userId: Nullable<string> = DEFAULT_USER_ID,
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -164,6 +224,8 @@ class Filter {
     this.withoutGroup = withoutGroup;
     this.quotaFilter = quotaFilter;
     this.filterSeparator = filterSeparator;
+    this.invitedByMe = invitedByMe;
+    this.userId = userId;
   }
 
   getStartIndex = () => {
@@ -178,13 +240,12 @@ class Filter {
     return this.page > 0;
   };
 
-  toApiUrlParams = (fields = undefined) => {
+  toApiUrlParams = () => {
     const {
       pageCount,
       sortBy,
       sortOrder,
       employeeStatus,
-      // activationStatus,
       role,
       search,
       group,
@@ -193,6 +254,8 @@ class Filter {
       withoutGroup,
       quotaFilter,
       filterSeparator,
+      invitedByMe,
+      userId,
     } = this;
 
     let employeetype = null;
@@ -204,20 +267,20 @@ class Filter {
     }
 
     let dtoFilter = {
-      StartIndex: this.getStartIndex(),
-      Count: pageCount,
+      startindex: this.getStartIndex(),
+      count: pageCount,
       sortby: sortBy,
       sortorder: sortOrder,
       employeestatus: employeeStatus,
-      // activationstatus: activationStatus,
       filtervalue: (search ?? "").trim(),
       groupId: group,
-      fields,
       payments,
       accountLoginType,
       withoutGroup,
       quotaFilter,
       filterSeparator,
+      invitedByMe,
+      userId,
     };
 
     dtoFilter = { ...dtoFilter, ...employeetype };
@@ -232,7 +295,6 @@ class Filter {
       sortBy,
       sortOrder,
       employeeStatus,
-      // activationStatus,
       role,
       search,
       group,
@@ -242,54 +304,62 @@ class Filter {
       withoutGroup,
       quotaFilter,
       filterSeparator,
+      invitedByMe,
+      userId,
     } = this;
 
-    const dtoFilter = {};
+    const dtoFilter: {
+      [PAGE]: typeof page;
+      [SORT_BY]: typeof sortBy;
+      [SORT_ORDER]: typeof sortOrder;
+      [EMPLOYEE_STATUS]?: typeof employeeStatus;
+      [ROLE]?: typeof role;
+      [GROUP]?: typeof group;
+      [SEARCH]?: typeof search;
+      [PAGE_COUNT]?: typeof pageCount;
+      [WITHOUT_GROUP]?: typeof withoutGroup;
+      [QUOTA_FILTER]?: typeof quotaFilter;
+      [FILTER_SEPARATOR]?: typeof filterSeparator;
+      [PAYMENTS]?: typeof payments;
+      [ACCOUNT_LOGIN_TYPE]?: typeof accountLoginType;
+      [INVITED_BY_ME]?: typeof invitedByMe;
+      [USER_ID]?: typeof userId;
+    } = {
+      page: page + 1,
+      sortby: sortBy,
+      sortorder: sortOrder,
+    };
 
-    if (employeeStatus) {
-      dtoFilter[EMPLOYEE_STATUS] = employeeStatus;
-    }
+    if (employeeStatus) dtoFilter[EMPLOYEE_STATUS] = employeeStatus;
 
-    // if (activationStatus) {
-    //   dtoFilter[ACTIVATION_STATUS] = activationStatus;
-    // }
+    if (role) dtoFilter[ROLE] = role;
 
-    if (role) {
-      dtoFilter[ROLE] = role;
-    }
+    if (group) dtoFilter[GROUP] = group;
 
-    if (group) {
-      dtoFilter[GROUP] = group;
-    }
+    if (search) dtoFilter[SEARCH] = search.trim();
 
-    if (search) {
-      dtoFilter[SEARCH] = search.trim();
-    }
+    if (pageCount !== DEFAULT_PAGE_COUNT) dtoFilter[PAGE_COUNT] = pageCount;
 
-    if (pageCount !== DEFAULT_PAGE_COUNT) {
-      dtoFilter[PAGE_COUNT] = pageCount;
-    }
-
-    if (withoutGroup) {
-      dtoFilter[WITHOUT_GROUP] = withoutGroup;
-    }
+    if (withoutGroup) dtoFilter[WITHOUT_GROUP] = withoutGroup;
 
     if (quotaFilter) dtoFilter[QUOTA_FILTER] = quotaFilter;
 
     if (filterSeparator) dtoFilter[FILTER_SEPARATOR] = filterSeparator;
 
-    dtoFilter[PAGE] = page + 1;
-    dtoFilter[SORT_BY] = sortBy;
-    dtoFilter[SORT_ORDER] = sortOrder;
-    dtoFilter[PAYMENTS] = payments;
-    dtoFilter[ACCOUNT_LOGIN_TYPE] = accountLoginType;
+    if (payments) dtoFilter[PAYMENTS] = payments;
+
+    if (accountLoginType) dtoFilter[ACCOUNT_LOGIN_TYPE] = accountLoginType;
+
+    if (invitedByMe) dtoFilter[INVITED_BY_ME] = invitedByMe;
+
+    if (userId) dtoFilter[USER_ID] = userId;
 
     const str = toUrlParams(dtoFilter, true);
 
     return str;
   };
 
-  clone(onlySorting) {
+  clone(onlySorting: boolean) {
     return onlySorting
       ? new Filter(
           DEFAULT_PAGE,
@@ -314,33 +384,12 @@ class Filter {
           this.withoutGroup,
           this.quotaFilter,
           this.filterSeparator,
+          this.invitedByMe,
+          this.userId,
         );
   }
 
-  reset(idGroup) {
-    if (idGroup) {
-      return new Filter(
-        0,
-        this.pageCount,
-        this.total,
-        this.sortBy,
-        this.sortOrder,
-        null,
-        null,
-        null,
-        "",
-        idGroup,
-        null,
-        null,
-        false,
-        null,
-      );
-    }
-
-    this.clone(true);
-  }
-
-  equals(filter) {
+  equals(filter: Filter) {
     const equals =
       this.employeeStatus === filter.employeeStatus &&
       this.activationStatus === filter.activationStatus &&
@@ -354,7 +403,9 @@ class Filter {
       this.payments === filter.payments &&
       this.accountLoginType === filter.accountLoginType &&
       this.withoutGroup === filter.withoutGroup &&
-      this.filterSeparator === filter.filterSeparator;
+      this.filterSeparator === filter.filterSeparator &&
+      this.invitedByMe === filter.invitedByMe &&
+      this.userId === filter.userId;
 
     return equals;
   }

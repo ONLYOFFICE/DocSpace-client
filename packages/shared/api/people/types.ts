@@ -30,6 +30,16 @@ import {
   ThemeKeys,
 } from "../../enums";
 
+export type TFilterSortBy =
+  | "displayname"
+  | "type"
+  | "department"
+  | "email"
+  | "usedspace"
+  | "createdby";
+
+export type TSortOrder = "descending" | "ascending";
+
 export type TUserGroup = {
   id: string;
   manager: string;

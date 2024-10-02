@@ -26,36 +26,32 @@
 
 import { AxiosRequestConfig } from "axios";
 
-import { AccountsSearchArea } from "@docspace/shared/enums";
-// import axios from "axios";
-import { Encoder } from "@docspace/shared/utils/encoder";
-import { checkFilterInstance } from "@docspace/shared/utils/common";
+import { Encoder } from "../../utils/encoder";
+import { checkFilterInstance } from "../../utils/common";
+import { TReqOption } from "../../utils/axiosClient";
+import {
+  EmployeeActivationStatus,
+  ThemeKeys,
+  AccountsSearchArea,
+} from "../../enums";
 import { Nullable } from "../../types";
+
+import { TGroup } from "../groups/types";
 import { request } from "../client";
 
 import Filter from "./filter";
-
 import { TChangeTheme, TGetUserList, TUser } from "./types";
-
-import { TReqOption } from "../../utils/axiosClient";
-import { EmployeeActivationStatus, ThemeKeys } from "../../enums";
-import { TGroup } from "../groups/types";
 
 export async function getUserList(
   filter = Filter.getDefault(),
   signal?: AbortSignal,
 ) {
   let params = "";
-  // if (fake) {
-  //   return fakePeople.getUserList(filter);
-  // }
 
   if (filter) {
     checkFilterInstance(filter, Filter);
 
-    params = `/filter?${filter.toApiUrlParams(
-      "id,status,isAdmin,isOwner,isRoomAdmin,isVisitor,activationStatus,userName,email,mobilePhone,displayName,avatar,listAdminModules,birthday,title,location,isLDAP,isSSO,groups",
-    )}`;
+    params = `/filter?${filter.toApiUrlParams()}`;
   }
 
   const res = (await request({

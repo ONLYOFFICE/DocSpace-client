@@ -65,6 +65,7 @@ export const PERCENTAGE_FOR_SHOWING_BAR = 90;
 export const LANGUAGE = "asc_language";
 
 export const MOBILE_FOOTER_HEIGHT = "64px";
+export const ASIDE_PADDING_AFTER_LAST_ITEM = "12px";
 
 export const COOKIE_EXPIRATION_YEAR = 31536000000;
 export const ARTICLE_PINNED_KEY = "asc_article_pinned_key";

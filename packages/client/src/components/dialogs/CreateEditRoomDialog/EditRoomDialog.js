@@ -155,7 +155,6 @@ const EditRoomDialog = ({
       onClose={onCloseAction}
       isScrollLocked={isScrollLocked}
       isLoading={isInitLoading}
-      withFooterBorder
       containerVisible={changeRoomOwnerIsVisible}
     >
       {changeRoomOwnerIsVisible && (

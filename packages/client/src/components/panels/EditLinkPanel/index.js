@@ -225,7 +225,6 @@ const EditLinkPanel = (props) => {
       isLarge
       zIndex={310}
       withBodyScroll
-      withFooterBorder
       withoutPadding
     >
       <ModalDialog.Header>

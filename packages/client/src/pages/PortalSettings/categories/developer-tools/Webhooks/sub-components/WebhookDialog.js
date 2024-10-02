@@ -183,7 +183,6 @@ const WebhookDialog = (props) => {
 
   return (
     <ModalDialog
-      withFooterBorder
       visible={visible}
       onClose={onModalClose}
       displayType="aside"

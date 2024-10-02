@@ -45,6 +45,8 @@ import MediaViewer from "../Home/MediaViewer";
 import { usePublic, useSDK } from "../Home/Hooks";
 import { StyledToast } from "./StyledPublicRoom";
 
+const PUBLIC_SIGN_IN_TOAST = "showPublicSignInToast";
+
 const PublicRoomPage = (props) => {
   const {
     withPaging,
@@ -140,8 +142,13 @@ const PublicRoomPage = (props) => {
   };
 
   useEffect(() => {
-    if (!access || !ready) return;
+    const toastIsDisabled =
+      sessionStorage.getItem(PUBLIC_SIGN_IN_TOAST) === "true";
+
+    if (!access || !ready || toastIsDisabled) return;
     const roomMode = getAccessTranslation().toLowerCase();
+
+    sessionStorage.setItem(PUBLIC_SIGN_IN_TOAST, "true");
 
     const toastText = (
       <StyledToast>

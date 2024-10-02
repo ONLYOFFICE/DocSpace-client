@@ -19,13 +19,12 @@ const StyledVirtualDataRoomBlock = styled.div`
       display: flex;
 
       .virtual-data-room-block_toggle {
-        margin-left: auto;
-        margin-right: 28px;
+        margin-inline: auto 28px;
       }
     }
     .virtual-data-room-block_description {
       max-width: 420px;
-      margin-right: 28px;
+      margin-inline-end: 28px;
 
       color: ${({ theme }) => theme.editLink.text.color};
     }

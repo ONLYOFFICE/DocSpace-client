@@ -3231,6 +3231,11 @@ export const getBaseTheme = () => {
 
       borderRadius: "6px",
       boxShadow: `0px 8px 16px 0px ${boxShadowColor}`,
+
+      fileItem: {
+        borderColor: globalColors.grayLightMid,
+        fileExstColor: globalColors.gray,
+      },
     },
     logoCover: {
       selectColor: {

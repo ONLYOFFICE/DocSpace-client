@@ -3216,6 +3216,11 @@ const Dark: TTheme = {
 
     borderRadius: "6px",
     boxShadow: `0px 8px 16px 0px ${boxShadowDarkColor}`,
+
+    fileItem: {
+      borderColor: globalColors.grayDarkStrong,
+      fileExstColor: globalColors.grayDark,
+    },
   },
 
   logoCover: {

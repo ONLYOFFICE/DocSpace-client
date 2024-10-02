@@ -24,34 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 
-const StyledContainer = styled.div<{ isRooms?: boolean }>`
-  display: flex;
-  flex-direction: column;
-
-  gap: 32px;
-
-  padding-top: 16px;
-
-  box-sizing: border-box;
-
-  .room-container {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .items-container {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-
-    padding-inline-start: 32px;
-  }
-`;
+import {
+  StyledFileItem,
+  StyledItem,
+  StyledRoomItem,
+} from "../NewFilesBadge.styled";
 
 type NewFilesPanelLoaderProps = {
   isRooms: boolean;
@@ -60,54 +39,69 @@ type NewFilesPanelLoaderProps = {
 export const NewFilesPanelLoader = ({ isRooms }: NewFilesPanelLoaderProps) => {
   if (isRooms)
     return (
-      <StyledContainer isRooms>
-        <div className="room-container">
-          <RectangleSkeleton width="80px" height="16px" />
-          <RectangleSkeleton width="120px" height="24px" />
-          <div className="items-container">
-            <RectangleSkeleton width="100%" height="32px" />
-            <RectangleSkeleton width="100%" height="32px" />
-            <RectangleSkeleton width="100%" height="32px" />
-            <RectangleSkeleton width="120px" height="24px" />
+      <>
+        <StyledItem isRooms isFirst>
+          <RectangleSkeleton className="date-item" width="80px" height="16px" />
+          <div className="room-items-container">
+            <StyledRoomItem>
+              <RectangleSkeleton width="120px" height="24px" />
+            </StyledRoomItem>
+            <div className="file-items-container">
+              <StyledFileItem isRooms>
+                <RectangleSkeleton width="100%" height="32px" />
+              </StyledFileItem>
+              <StyledFileItem isRooms>
+                <RectangleSkeleton width="100%" height="32px" />
+              </StyledFileItem>
+              <StyledFileItem isRooms>
+                <RectangleSkeleton width="100%" height="32px" />
+              </StyledFileItem>
+              <RectangleSkeleton
+                className="more-items"
+                width="120px"
+                height="24px"
+              />
+            </div>
           </div>
-        </div>
-        <div className="room-container">
-          <RectangleSkeleton width="80px" height="16px" />
-          <RectangleSkeleton width="120px" height="24px" />
-          <div className="items-container">
-            <RectangleSkeleton width="100%" height="32px" />
-            <RectangleSkeleton width="100%" height="32px" />
-            <RectangleSkeleton width="100%" height="32px" />
+        </StyledItem>
+        <StyledItem isRooms isFirst={false}>
+          <RectangleSkeleton className="date-item" width="80px" height="16px" />
+          <div className="room-items-container">
+            <StyledRoomItem>
+              <RectangleSkeleton width="120px" height="24px" />
+            </StyledRoomItem>
+            <div className="file-items-container">
+              <StyledFileItem isRooms>
+                <RectangleSkeleton width="100%" height="32px" />
+              </StyledFileItem>
+              <StyledFileItem isRooms>
+                <RectangleSkeleton width="100%" height="32px" />
+              </StyledFileItem>
+              <StyledFileItem isRooms>
+                <RectangleSkeleton width="100%" height="32px" />
+              </StyledFileItem>
+            </div>
           </div>
-        </div>
-      </StyledContainer>
+        </StyledItem>
+      </>
     );
 
   return (
-    <StyledContainer>
-      <div className="room-container">
-        <RectangleSkeleton width="80px" height="16px" />
-        <div className="items-container">
-          <RectangleSkeleton width="100%" height="32px" />
-        </div>
-      </div>
-      <div className="room-container">
-        <RectangleSkeleton width="80px" height="16px" />
+    <StyledItem isRooms={false} isFirst>
+      <RectangleSkeleton className="date-item" width="80px" height="16px" />
 
-        <div className="items-container">
+      <div className="file-items-container">
+        <StyledFileItem isRooms>
           <RectangleSkeleton width="100%" height="32px" />
+        </StyledFileItem>
+        <StyledFileItem isRooms>
           <RectangleSkeleton width="100%" height="32px" />
-        </div>
-      </div>{" "}
-      <div className="room-container">
-        <RectangleSkeleton width="80px" height="16px" />
-
-        <div className="items-container">
-          <RectangleSkeleton width="100%" height="32px" />{" "}
+        </StyledFileItem>
+        <StyledFileItem isRooms>
           <RectangleSkeleton width="100%" height="32px" />
-          <RectangleSkeleton width="100%" height="32px" />
-        </div>
+        </StyledFileItem>
+        <RectangleSkeleton className="more-items" width="120px" height="24px" />
       </div>
-    </StyledContainer>
+    </StyledItem>
   );
 };

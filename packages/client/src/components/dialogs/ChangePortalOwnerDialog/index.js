@@ -139,7 +139,6 @@ const ChangePortalOwnerDialog = ({
       visible={visible}
       onClose={onCloseAction}
       withBodyScroll
-      withFooterBorder
       containerVisible={selectorVisible}
     >
       {selectorVisible && (

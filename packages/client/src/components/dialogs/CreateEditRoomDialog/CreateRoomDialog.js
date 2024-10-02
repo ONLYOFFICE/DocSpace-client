@@ -152,7 +152,6 @@ const CreateRoomDialog = ({
       visible={visible}
       onClose={onCloseAndDisconnectThirdparty}
       isScrollLocked={isScrollLocked}
-      withFooterBorder
       hideContent={isOauthWindowOpen}
       isBackButton={roomParams.type}
       onBackClick={goBack}

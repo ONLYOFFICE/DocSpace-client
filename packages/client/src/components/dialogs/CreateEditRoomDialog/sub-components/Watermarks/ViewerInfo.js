@@ -138,7 +138,21 @@ const ViewerInfoWatermark = ({
   useEffect(() => {
     const { enabled, isImage } = initialWatermarksSettings;
     if (isEdit && !isImage) {
-      setWatermarks({ ...initialWatermarksSettings, enabled: true }, true);
+      const settings =
+        initialWatermarksSettings.additions === 0
+          ? {
+              rotate: initialInfoRef.rotate.key,
+              additions: WatermarkAdditions.UserName,
+              isImage: false,
+              //enabled: true,
+              image: "",
+              imageWidth: 0,
+              imageHeight: 0,
+              imageScale: 0,
+            }
+          : initialWatermarksSettings;
+
+      setWatermarks({ ...settings }, true);
 
       return;
     }
@@ -147,7 +161,7 @@ const ViewerInfoWatermark = ({
       rotate: initialInfoRef.rotate.key,
       additions: WatermarkAdditions.UserName,
       isImage: false,
-      enabled: true,
+      //enabled: true,
       image: "",
       imageWidth: 0,
       imageHeight: 0,

@@ -15,6 +15,7 @@
   "AdvancedFilter": "Search options",
   "Alert": "Alert",
   "AllowedCharacters": "Allowed characters",
+  "AndMore": "and <1>{{count}} more</1>",
   "Anonymous": "Anonymous",
   "AnyoneWithLink": "Anyone with the link",
   "ApplyButton": "Apply",

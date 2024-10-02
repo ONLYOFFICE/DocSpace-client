@@ -104,6 +104,8 @@ export type NewFilesPanelItemFileProps = {
 
   getIcon?: GetIcon;
   checkAndOpenLocationAction?: CheckAndOpenLocationAction;
+
+  displayFileExtension?: boolean;
 };
 
 export type NewFilesPanelFileListProps = {

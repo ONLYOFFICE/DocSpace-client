@@ -45,6 +45,8 @@ const NewFilesPanelItemFileComponent = ({
 
   getIcon,
   checkAndOpenLocationAction,
+
+  displayFileExtension,
 }: NewFilesPanelItemFileProps) => {
   const icon = getIcon?.(24, item.fileExst);
 
@@ -71,7 +73,9 @@ const NewFilesPanelItemFileComponent = ({
           lineHeight="16px"
         >
           {item.title.replace(item.fileExst, "")}
-          <span className="file-exst">{item.fileExst}</span>
+          {displayFileExtension && (
+            <span className="file-exst">{item.fileExst}</span>
+          )}
         </Text>
       </div>
       <IconButton
@@ -89,9 +93,9 @@ export const NewFilesPanelItemFile = inject(
     filesSettingsStore,
     filesActionsStore,
   }: NewFilesPanelItemFileInjectStore) => {
-    const { getIcon } = filesSettingsStore;
+    const { displayFileExtension, getIcon } = filesSettingsStore;
     const { checkAndOpenLocationAction } = filesActionsStore;
 
-    return { getIcon, checkAndOpenLocationAction };
+    return { displayFileExtension, getIcon, checkAndOpenLocationAction };
   },
 )(observer(NewFilesPanelItemFileComponent));

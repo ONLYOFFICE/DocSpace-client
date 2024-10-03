@@ -287,7 +287,7 @@ const DNSSettingsComponent = (props) => {
       {isCustomizationView && !isMobileView && (
         <div className="category-item-heading">
           <div className="category-item-title">{t("DNSSettings")}</div>
-          {!isSettingPaid && (
+          {!isSettingPaid && !standalone && (
             <Badge
               className="paid-badge"
               fontWeight="700"

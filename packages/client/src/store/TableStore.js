@@ -150,6 +150,10 @@ class TableStore {
     this.authorRecentColumnIsEnabled = enable;
   };
 
+  setAuthorVDRColumn = (enable) => {
+    this.authorVDRColumnIsEnabled = enable;
+  };
+
   setCreatedColumn = (enable) => {
     this.createdColumnIsEnabled = enable;
   };
@@ -158,12 +162,20 @@ class TableStore {
     this.createdRecentColumnIsEnabled = enable;
   };
 
+  setCreatedVDRColumn = (enable) => {
+    this.createdVDRColumnIsEnabled = enable;
+  };
+
   setModifiedColumn = (enable) => {
     this.modifiedColumnIsEnabled = enable;
   };
 
   setModifiedRecentColumn = (enable) => {
     this.modifiedRecentColumnIsEnabled = enable;
+  };
+
+  setModifiedVDRColumn = (enable) => {
+    this.modifiedVDRColumnIsEnabled = enable;
   };
 
   setRoomColumn = (enable) => {
@@ -182,12 +194,20 @@ class TableStore {
     this.sizeRecentColumnIsEnabled = enable;
   };
 
+  setSizeVDRColumn = (enable) => {
+    this.sizeVDRColumnIsEnabled = enable;
+  };
+
   setTypeColumn = (enable) => {
     this.typeColumnIsEnabled = enable;
   };
 
   setTypeRecentColumn = (enable) => {
     this.typeRecentColumnIsEnabled = enable;
+  };
+
+  setTypeVDRColumn = (enable) => {
+    this.typeVDRColumnIsEnabled = enable;
   };
 
   setQuickButtonsColumn = (enable) => {
@@ -296,6 +316,14 @@ class TableStore {
         return;
       }
 
+      if (this.selectedFolderStore.isIndexedFolder) {
+        this.setAuthorVDRColumn(splitColumns.includes("AuthorIndexing"));
+        this.setCreatedVDRColumn(splitColumns.includes("CreatedIndexing"));
+        this.setModifiedVDRColumn(splitColumns.includes("ModifiedIndexing"));
+        this.setSizeVDRColumn(splitColumns.includes("SizeIndexing"));
+        this.setTypeVDRColumn(splitColumns.includes("TypeIndexing"));
+      }
+
       this.setModifiedColumn(splitColumns.includes("Modified"));
       this.setAuthorColumn(splitColumns.includes("Author"));
       this.setCreatedColumn(splitColumns.includes("Created"));
@@ -329,7 +357,9 @@ class TableStore {
       case "AuthorRecent":
         this.setAuthorRecentColumn(!this.authorRecentColumnIsEnabled);
         return;
-
+      case "AuthorIndexing":
+        this.setAuthorVDRColumn(!this.authorVDRColumnIsEnabled);
+        return;
       case "Created":
         this.setCreatedColumn(!this.createdColumnIsEnabled);
         return;
@@ -338,6 +368,9 @@ class TableStore {
         return;
       case "CreatedRecent":
         this.setCreatedRecentColumn(!this.createdRecentColumnIsEnabled);
+        return;
+      case "CreatedIndexing":
+        this.setCreatedVDRColumn(!this.createdVDRColumnIsEnabled);
         return;
 
       case "Department":
@@ -354,6 +387,9 @@ class TableStore {
       case "ModifiedRecent":
         this.setModifiedRecentColumn(!this.modifiedRecentColumnIsEnabled);
         return;
+      case "ModifiedIndexing":
+        this.setModifiedVDRColumn(!this.modifiedVDRColumnIsEnabled);
+        return;
 
       case "Erasure":
         this.setErasureColumn(!this.erasureColumnIsEnabled);
@@ -367,6 +403,10 @@ class TableStore {
         return;
       case "SizeRecent":
         this.setSizeRecentColumn(!this.sizeRecentColumnIsEnabled);
+        return;
+
+      case "SizeIndexing":
+        this.setSizeVDRColumn(!this.sizeVDRColumnIsEnabled);
         return;
 
       case "Type":
@@ -387,6 +427,10 @@ class TableStore {
 
       case "TypeRecent":
         this.setTypeRecentColumn(!this.typeRecentColumnIsEnabled);
+        return;
+
+      case "TypeIndexing":
+        this.setTypeVDRColumn(!this.typeVDRColumnIsEnabled);
         return;
 
       case "QuickButtons":

@@ -62,7 +62,6 @@ const RowDataComponent = (props) => {
     badgesComponent,
     quickButtonsComponent,
 
-    isIndexing,
     tableStorageName,
     columnStorageName,
     isIndexEditingMode,

@@ -154,7 +154,6 @@ const CreateGroupDialog = ({
         withBodyScroll
         visible={visible}
         onClose={onClose}
-        withFooterBorder
         //   isScrollLocked={isScrollLocked}
         //   isOauthWindowOpen={isOauthWindowOpen}
       >

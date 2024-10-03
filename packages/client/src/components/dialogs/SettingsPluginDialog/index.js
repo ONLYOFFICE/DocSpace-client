@@ -97,7 +97,6 @@ const SettingsPluginDialog = ({
       displayType="aside"
       onClose={onCloseAction}
       withBodyScroll
-      withFooterBorder
     >
       <ModalDialog.Header>
         <Header t={t} name={plugin?.name} />

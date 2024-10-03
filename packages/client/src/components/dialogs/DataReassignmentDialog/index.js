@@ -210,7 +210,6 @@ const DataReassignmentDialog = ({
         visible={visible}
         onClose={onClosePeopleSelector}
         containerVisible={selectorVisible}
-        withFooterBorder
         withBodyScroll
       >
         <Backdrop
@@ -249,7 +248,6 @@ const DataReassignmentDialog = ({
       visible={visible}
       onClose={onClose}
       containerVisible={selectorVisible}
-      withFooterBorder
       withBodyScroll
     >
       <ModalDialog.Header>

@@ -24,23 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import * as Styled from "./index.styled";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { inject, observer } from "mobx-react";
-import { SectionSubmenuSkeleton } from "@docspace/shared/skeletons/sections";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+
+import { SectionSubmenuSkeleton } from "@docspace/shared/skeletons/sections";
+import { Tabs } from "@docspace/shared/components/tabs";
+
+import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
+import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
+import UsersStore from "SRC_DIR/store/contacts/UsersStore";
+import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
+
+type AccountsTabsProps = {
+  showBodyLoader: ClientLoadingStore["showBodyLoader"];
+  setUsersSelection: UsersStore["setSelection"];
+  setUsersBufferSelection: UsersStore["setBufferSelection"];
+  setGroupsSelection: GroupsStore["setSelection"];
+  setGroupsBufferSelection: GroupsStore["setBufferSelection"];
+};
 
 const AccountsTabs = ({
   showBodyLoader,
-  setPeopleSelection,
+  setUsersSelection,
   setGroupsSelection,
-  setPeopleBufferSelection,
+  setUsersBufferSelection,
   setGroupsBufferSelection,
-}) => {
+}: AccountsTabsProps) => {
   const { t } = useTranslation(["Common"]);
 
   const location = useLocation();
   const navigate = useNavigate();
+
   const { groupId } = useParams();
 
   const isPeople = location.pathname.includes("/accounts/people");
@@ -52,9 +67,17 @@ const AccountsTabs = ({
   };
 
   const onGroups = () => {
-    setPeopleSelection([]);
-    setPeopleBufferSelection(null);
+    setUsersSelection([]);
+    setUsersBufferSelection(null);
     navigate("/accounts/groups/filter");
+  };
+
+  const onGuests = () => {
+    setUsersSelection([]);
+    setUsersBufferSelection(null);
+    setGroupsSelection([]);
+    setGroupsBufferSelection(null);
+    navigate("/accounts/guests/filter");
   };
 
   if (groupId !== undefined) return null;
@@ -62,7 +85,7 @@ const AccountsTabs = ({
   if (showBodyLoader) return <SectionSubmenuSkeleton />;
 
   return (
-    <Styled.AccountsTabs
+    <Tabs
       className="accounts-tabs"
       selectedItemId={isPeople ? "people" : "groups"}
       items={[
@@ -78,15 +101,43 @@ const AccountsTabs = ({
           onClick: onGroups,
           content: null,
         },
+        {
+          id: "guests",
+          name: t("Common:Guests"),
+          onClick: onGuests,
+          content: null,
+        },
       ]}
     />
   );
 };
 
-export default inject(({ peopleStore, clientLoadingStore }) => ({
-  showBodyLoader: clientLoadingStore.showBodyLoader,
-  setPeopleSelection: peopleStore.usersStore.setSelection,
-  setPeopleBufferSelection: peopleStore.usersStore.setBufferSelection,
-  setGroupsSelection: peopleStore.groupsStore.setSelection,
-  setGroupsBufferSelection: peopleStore.groupsStore.setBufferSelection,
-}))(observer(AccountsTabs));
+export default inject(
+  ({
+    peopleStore,
+    clientLoadingStore,
+  }: {
+    peopleStore: PeopleStore;
+    clientLoadingStore: ClientLoadingStore;
+  }) => {
+    const { showBodyLoader } = clientLoadingStore;
+    const { usersStore, groupsStore } = peopleStore;
+
+    const {
+      setSelection: setUserSelection,
+      setBufferSelection: setUserBufferSelection,
+    } = usersStore;
+    const {
+      setSelection: setGroupsSelection,
+      setBufferSelection: setGroupsBufferSelection,
+    } = groupsStore;
+
+    return {
+      showBodyLoader,
+      setUserSelection,
+      setUserBufferSelection,
+      setGroupsSelection,
+      setGroupsBufferSelection,
+    };
+  },
+)(observer(AccountsTabs));

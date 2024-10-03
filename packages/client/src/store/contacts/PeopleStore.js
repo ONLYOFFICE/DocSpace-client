@@ -61,8 +61,7 @@ class PeopleStore {
   contextOptionsStore = null;
   authStore = null;
   dialogsStore = null;
-  groupsStore = null;
-  usersStore = null;
+
   targetUserStore = null;
   headerMenuStore = null;
 

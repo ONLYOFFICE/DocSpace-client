@@ -42,13 +42,13 @@ import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow2.react.svg?url";
 import { VDRIndexingAction } from "@docspace/shared/enums";
 
-const RowDataComponent = (props) => {
+const IndexRowDataComponent = (props) => {
   const {
-    authorColumnIsEnabled,
-    createdColumnIsEnabled,
-    modifiedColumnIsEnabled,
-    sizeColumnIsEnabled,
-    typeColumnIsEnabled,
+    authorVDRColumnIsEnabled,
+    modifiedVDRColumnIsEnabled,
+    createdVDRColumnIsEnabled,
+    sizeVDRColumnIsEnabled,
+    typeVDRColumnIsEnabled,
 
     dragStyles,
     selectionProp,
@@ -62,7 +62,6 @@ const RowDataComponent = (props) => {
     badgesComponent,
     quickButtonsComponent,
 
-    isIndexing,
     tableStorageName,
     columnStorageName,
     isIndexEditingMode,
@@ -137,6 +136,20 @@ const RowDataComponent = (props) => {
   return (
     <>
       <TableCell
+        className={classNames(
+          selectionProp?.className,
+          "table-container_index-cell",
+        )}
+        style={dragStyles.style}
+        value={value}
+      >
+        <IndexCell
+          sideColor={theme.filesSection.tableView.row.sideColor}
+          {...props}
+        />
+      </TableCell>
+
+      <TableCell
         {...dragStyles}
         className={classNames(
           selectionProp?.className,
@@ -161,11 +174,9 @@ const RowDataComponent = (props) => {
         {lastColumn === "Name" ? lastColumnContent : <></>}
       </TableCell>
 
-      {authorColumnIsEnabled ? (
+      {authorVDRColumnIsEnabled ? (
         <TableCell
-          style={
-            !authorColumnIsEnabled ? { background: "none" } : dragStyles.style
-          }
+          style={dragStyles.style}
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
@@ -185,13 +196,9 @@ const RowDataComponent = (props) => {
         <div />
       )}
 
-      {createdColumnIsEnabled ? (
+      {createdVDRColumnIsEnabled ? (
         <TableCell
-          style={
-            !createdColumnIsEnabled
-              ? { background: "none !important" }
-              : dragStyles.style
-          }
+          style={dragStyles.style}
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
@@ -212,11 +219,9 @@ const RowDataComponent = (props) => {
         <div />
       )}
 
-      {modifiedColumnIsEnabled ? (
+      {modifiedVDRColumnIsEnabled ? (
         <TableCell
-          style={
-            !modifiedColumnIsEnabled ? { background: "none" } : dragStyles.style
-          }
+          style={dragStyles.style}
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
@@ -236,11 +241,9 @@ const RowDataComponent = (props) => {
         <div />
       )}
 
-      {sizeColumnIsEnabled ? (
+      {sizeVDRColumnIsEnabled ? (
         <TableCell
-          style={
-            !sizeColumnIsEnabled ? { background: "none" } : dragStyles.style
-          }
+          style={dragStyles.style}
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
@@ -258,13 +261,9 @@ const RowDataComponent = (props) => {
         <div />
       )}
 
-      {typeColumnIsEnabled ? (
+      {typeVDRColumnIsEnabled ? (
         <TableCell
-          style={
-            !typeColumnIsEnabled
-              ? { background: "none !important" }
-              : dragStyles.style
-          }
+          style={dragStyles.style}
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
@@ -287,22 +286,22 @@ const RowDataComponent = (props) => {
 
 export default inject(({ tableStore }) => {
   const {
-    authorColumnIsEnabled,
-    createdColumnIsEnabled,
-    modifiedColumnIsEnabled,
-    sizeColumnIsEnabled,
-    typeColumnIsEnabled,
+    authorVDRColumnIsEnabled,
+    modifiedVDRColumnIsEnabled,
+    createdVDRColumnIsEnabled,
+    sizeVDRColumnIsEnabled,
+    typeVDRColumnIsEnabled,
     tableStorageName,
     columnStorageName,
   } = tableStore;
 
   return {
-    authorColumnIsEnabled,
-    createdColumnIsEnabled,
-    modifiedColumnIsEnabled,
-    sizeColumnIsEnabled,
-    typeColumnIsEnabled,
+    authorVDRColumnIsEnabled,
+    modifiedVDRColumnIsEnabled,
+    createdVDRColumnIsEnabled,
+    sizeVDRColumnIsEnabled,
+    typeVDRColumnIsEnabled,
     tableStorageName,
     columnStorageName,
   };
-})(observer(RowDataComponent));
+})(observer(IndexRowDataComponent));

@@ -26,7 +26,6 @@
 
 import { makeAutoObservable } from "mobx";
 import { TableVersions } from "SRC_DIR/helpers/constants";
-import { RoomsType } from "@docspace/shared/enums";
 
 const TABLE_COLUMNS = `filesTableColumns_ver-${TableVersions.Files}`;
 const TABLE_ACCOUNTS_PEOPLE_COLUMNS = `peopleTableColumns_ver-${TableVersions.People}`;
@@ -47,6 +46,7 @@ const COLUMNS_SIZE_INFO_PANEL = `filesColumnsSizeInfoPanel_ver-${TableVersions.F
 const COLUMNS_ROOMS_SIZE_INFO_PANEL = `roomsColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
 const COLUMNS_TRASH_SIZE_INFO_PANEL = `trashColumnsSizeInfoPanel_ver-${TableVersions.Trash}`;
 const COLUMNS_RECENT_SIZE_INFO_PANEL = `recentColumnsSizeInfoPanel_ver-${TableVersions.Recent}`;
+const COLUMNS_VDR_INDEXING_SIZE_INFO_PANEL = `vdrIndexingColumnsSizeInfoPanel_ver-${TableVersions.Recent}`;
 
 class TableStore {
   authStore;
@@ -69,7 +69,6 @@ class TableStore {
   createdColumnIsEnabled = false;
   modifiedColumnIsEnabled = true;
   sizeColumnIsEnabled = true;
-  indexColumnIsEnabled = true; // always true
   typeColumnIsEnabled = true;
   typeColumnIsEnabled = false;
   quickButtonsColumnIsEnabled = true;
@@ -97,6 +96,13 @@ class TableStore {
   typeAccountsInsideGroupColumnIsEnabled = true;
   groupAccountsInsideGroupColumnIsEnabled = true;
   emailAccountsInsideGroupColumnIsEnabled = true;
+
+  indexVDRColumnIsEnabled = true; // always true
+  authorVDRColumnIsEnabled = true;
+  modifiedVDRColumnIsEnabled = true;
+  createdVDRColumnIsEnabled = false;
+  sizeVDRColumnIsEnabled = true;
+  typeVDRColumnIsEnabled = false;
 
   constructor(
     authStore,
@@ -304,9 +310,7 @@ class TableStore {
     const {
       isRoomsFolder,
       isArchiveFolder,
-      isTrashFolder,
       getIsAccountsPeople,
-      getIsAccountsGroups,
       getIsAccountsInsideGroup,
     } = this.treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
@@ -530,6 +534,9 @@ class TableStore {
   get columnInfoPanelStorageName() {
     const { isRoomsFolder, isArchiveFolder, isTrashFolder, isRecentTab } =
       this.treeFoldersStore;
+
+    const { isIndexedFolder } = this.selectedFolderStore;
+
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
@@ -540,7 +547,9 @@ class TableStore {
         ? `${COLUMNS_TRASH_SIZE_INFO_PANEL}=${userId}`
         : isRecentTab
           ? `${COLUMNS_RECENT_SIZE_INFO_PANEL}=${userId}`
-          : `${COLUMNS_SIZE_INFO_PANEL}=${userId}`;
+          : isIndexedFolder
+            ? `${COLUMNS_VDR_INDEXING_SIZE_INFO_PANEL}=${userId}`
+            : `${COLUMNS_SIZE_INFO_PANEL}=${userId}`;
 
     return isFrame
       ? `SDK_${columnInfoPanelStorageName}`

@@ -44,6 +44,7 @@ const HistoryBlock = ({ t, feed, isLastEntity }) => {
 
   return (
     <StyledHistoryBlock
+      className={date}
       withBottomDivider={!isLastEntity}
       isUserAction={isUserAction}
     >

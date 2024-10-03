@@ -44,8 +44,8 @@ import {
   getRoomDescription,
   getRoomIcon,
   getRoomTitle,
-  getRootDesctiption,
-  getRootIcom,
+  getRootDescription,
+  getRootIcon,
   getRootTitle,
   helperOptions,
   isAdmin,
@@ -67,7 +67,7 @@ export const getDescription = (
   const isNotAdmin = isUser(access);
 
   if (isRootEmptyPage)
-    return getRootDesctiption(t, access, rootFolderType, isPublicRoom);
+    return getRootDescription(t, access, rootFolderType, isPublicRoom);
 
   if (isFolder)
     return getFolderDescription(
@@ -120,7 +120,7 @@ export const getIcon = (
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
 ): JSX.Element => {
-  if (isRootEmptyPage) return getRootIcom(rootFolderType, access, isBaseTheme);
+  if (isRootEmptyPage) return getRootIcon(rootFolderType, access, isBaseTheme);
 
   return isFolder
     ? getFolderIcon(parentRoomType, isBaseTheme, access, folderType)
@@ -411,6 +411,20 @@ export const getOptions = (
         uploadAllFromDocSpace,
         uploadFromDeviceAnyFile,
       ];
+
+    case RoomsType.VirtualDataRoom:
+      if (isNotAdmin) return [];
+
+      if (isCollaborator)
+        return [createFile, uploadAllFromDocSpace, uploadFromDeviceAnyFile];
+
+      return [
+        createFile,
+        inviteUser,
+        uploadAllFromDocSpace,
+        uploadFromDeviceAnyFile,
+      ];
+
     case RoomsType.CustomRoom:
       if (isNotAdmin) return [];
 

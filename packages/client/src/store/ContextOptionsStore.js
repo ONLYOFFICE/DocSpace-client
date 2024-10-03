@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import FileActionsOwnerReactSvgUrl from "PUBLIC_DIR/images/file.actions.owner.react.svg?url";
 import HistoryReactSvgUrl from "PUBLIC_DIR/images/history.react.svg?url";
 import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
 import MoveReactSvgUrl from "PUBLIC_DIR/images/move.react.svg?url";
@@ -55,6 +56,7 @@ import UnmuteReactSvgUrl from "PUBLIC_DIR/images/unmute.react.svg?url";
 import MuteReactSvgUrl from "PUBLIC_DIR/images/icons/16/mute.react.svg?url";
 import ShareReactSvgUrl from "PUBLIC_DIR/images/share.react.svg?url";
 import InvitationLinkReactSvgUrl from "PUBLIC_DIR/images/invitation.link.react.svg?url";
+import EditIndexReactSvgUrl from "PUBLIC_DIR/images/edit.index.react.svg?url";
 import TabletLinkReactSvgUrl from "PUBLIC_DIR/images/tablet-link.react.svg?url";
 import MailReactSvgUrl from "PUBLIC_DIR/images/mail.react.svg?url";
 import RoomArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
@@ -79,6 +81,7 @@ import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
+import ExportRoomIndexSvgUrl from "PUBLIC_DIR/images/icons/16/export-room-index.react.svg?url";
 
 import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
 
@@ -144,6 +147,7 @@ class ContextOptionsStore {
   currentTariffStatusStore;
   currentQuotaStore;
   userStore;
+  indexingStore;
   clientLoadingStore;
 
   linksIsLoading = false;
@@ -166,6 +170,7 @@ class ContextOptionsStore {
     currentTariffStatusStore,
     currentQuotaStore,
     userStore,
+    indexingStore,
     clientLoadingStore,
   ) {
     makeAutoObservable(this);
@@ -186,6 +191,7 @@ class ContextOptionsStore {
     this.currentTariffStatusStore = currentTariffStatusStore;
     this.currentQuotaStore = currentQuotaStore;
     this.userStore = userStore;
+    this.indexingStore = indexingStore;
     this.clientLoadingStore = clientLoadingStore;
   }
 
@@ -925,6 +931,14 @@ class ContextOptionsStore {
     this.filesActionsStore.setMuteAction(action, item, t);
   };
 
+  onExportRoomIndex = (t, roomId) => {
+    this.filesActionsStore.exportRoomIndex(t, roomId);
+  };
+
+  onEditIndex = () => {
+    this.indexingStore.setIsIndexEditingMode(true);
+  };
+
   onClickRemoveFromRecent = (item) => {
     this.filesActionsStore.removeFilesFromRecent([item.id]);
   };
@@ -1412,6 +1426,18 @@ class ContextOptionsStore {
         ? item.security.CopySharedLink
         : item.security?.EditAccess;
 
+    const { isFiltered } = this.filesStore;
+    const { isIndexedFolder, security } = this.selectedFolderStore;
+
+    const indexOptions = {
+      id: "option_edit-index",
+      key: "edit-index",
+      label: t("Common:EditIndex"),
+      icon: EditIndexReactSvgUrl,
+      onClick: () => this.onEditIndex(),
+      disabled: !security?.EditRoom || !isIndexedFolder || isFiltered,
+    };
+
     const optionsModel = [
       {
         id: "option_select",
@@ -1589,6 +1615,22 @@ class ContextOptionsStore {
       ...pinOptions,
       ...muteOptions,
       {
+        id: "option_export-room-index",
+        key: "export-room-index",
+        label: t("Files:ExportRoomIndex"),
+        icon: ExportRoomIndexSvgUrl,
+        onClick: () => this.onExportRoomIndex(t, item.id),
+        disabled: !item.indexing,
+      },
+      {
+        id: "option_owner-change",
+        key: "owner-change",
+        label: t("Translations:OwnerChange"),
+        icon: FileActionsOwnerReactSvgUrl,
+        onClick: this.onOwnerChange,
+        disabled: false,
+      },
+      {
         id: "option_link-for-portal-users",
         key: "link-for-portal-users",
         label: t("LinkForPortalUsers", {
@@ -1710,6 +1752,7 @@ class ContextOptionsStore {
         onClick: this.onRestoreAction,
         disabled: false,
       },
+      indexOptions,
       {
         id: "option_rename",
         key: "rename",
@@ -1790,7 +1833,6 @@ class ContextOptionsStore {
         disabled: !this.treeFoldersStore.isRecentTab,
       },
     ];
-
     const options = this.filterModel(optionsModel, contextOptions);
 
     const pluginItems = this.onLoadPlugins(item);

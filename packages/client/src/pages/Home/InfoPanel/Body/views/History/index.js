@@ -48,6 +48,8 @@ const History = ({
   openUser,
   isVisitor,
   isCollaborator,
+  calendarDay,
+  setCalendarDay,
 }) => {
   const isMount = useRef(true);
   const abortControllerRef = useRef(new AbortController());
@@ -81,7 +83,85 @@ const History = ({
   ]);
 
   useEffect(() => {
+    if (!calendarDay) return;
+
+    const heightTitleRoom = 80;
+    const heightDayWeek = 40;
+
+    const historyListNode = document.getElementById("history-list-info-panel");
+    if (!historyListNode) return;
+
+    const scroll = historyListNode.closest(".scroller");
+    if (!scroll) return;
+
+    let dateCoincidingWithCalendarDay = null;
+
+    selectionHistory.every((item) => {
+      if (dateCoincidingWithCalendarDay) return false;
+
+      item.feeds.every((feed) => {
+        if (feed.date.slice(0, 10) === calendarDay) {
+          dateCoincidingWithCalendarDay = feed.date;
+        }
+      });
+
+      return true;
+    });
+
+    if (dateCoincidingWithCalendarDay) {
+      const dayNode = historyListNode.getElementsByClassName(
+        dateCoincidingWithCalendarDay,
+      );
+      if (!dayNode[0]) return;
+
+      const y = dayNode[0].offsetTop - heightTitleRoom - heightDayWeek;
+      scroll.scrollTo(0, y);
+      setCalendarDay(null);
+
+      return;
+    }
+
+    //If there are no entries in the history for the selected day
+    const calendarDayModified = new Date(calendarDay);
+    let nearestNewerDate = null;
+
+    selectionHistory.every((item, indexItem) => {
+      if (nearestNewerDate) return false;
+
+      item.feeds.every((feed) => {
+        const date = new Date(feed.date);
+
+        //Stop checking all entries for one day
+        if (date > calendarDayModified) return false;
+
+        //Looking for the nearest new date
+        if (date < calendarDayModified) {
+          //If there are no nearby new entries in the post history, then scroll to the last one
+          if (indexItem === 0) {
+            nearestNewerDate = feed.date;
+            return false;
+          }
+
+          nearestNewerDate = selectionHistory[indexItem - 1].feeds[0].date;
+        }
+      });
+
+      return true;
+    });
+
+    if (!nearestNewerDate) return;
+
+    const dayNode = historyListNode.getElementsByClassName(nearestNewerDate);
+    if (!dayNode[0]) return;
+
+    const y = dayNode[0].offsetTop - heightTitleRoom - heightDayWeek;
+    scroll.scrollTo(0, y);
+    setCalendarDay(null);
+  }, [calendarDay]);
+
+  useEffect(() => {
     const showLoaderTimer = setTimeout(() => setIsShowLoader(true), 500);
+
     return () => {
       clearTimeout(showLoaderTimer);
       abortControllerRef.current?.abort();
@@ -98,7 +178,7 @@ const History = ({
   if (!selectionHistory?.length) return <NoHistory t={t} />;
 
   return (
-    <StyledHistoryList>
+    <StyledHistoryList id="history-list-info-panel">
       {selectionHistory.map(({ day, feeds }) => [
         <StyledHistorySubtitle key={day}>
           {getRelativeDateDay(t, feeds[0].date)}
@@ -133,6 +213,8 @@ export default inject(
       historyWithFileList,
       getInfoPanelItemIcon,
       openUser,
+      calendarDay,
+      setCalendarDay,
     } = infoPanelStore;
     const { culture } = settingsStore;
 
@@ -153,6 +235,8 @@ export default inject(
       openUser,
       isVisitor,
       isCollaborator,
+      calendarDay,
+      setCalendarDay,
     };
   },
 )(withTranslation(["InfoPanel", "Common", "Translations"])(observer(History)));

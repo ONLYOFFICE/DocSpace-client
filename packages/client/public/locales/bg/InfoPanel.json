@@ -49,7 +49,7 @@
   "RoomGroupRemove": "Премахнати групи",
   "RoomLogoChanged": "Сменена иконка",
   "RoomRemoveUser": "Потребителят е премахнат.",
-  "RoomRenamed": "Стаята <1>«{{oldRoomTitle}}»</1> е преименувана на <1>«{{roomTitle}}»</1>",
+  "RoomRenamed": "Стаята <1>«{{oldRoomTitle}}»</1> е преименувана на <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Вижте подробности за стаите тук",
   "RoomUpdateAccess": "бе назначен",
   "SelectedUsers": "Избрани акаунти",

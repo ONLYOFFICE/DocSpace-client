@@ -49,7 +49,7 @@
   "RoomGroupRemove": "Qrup silindi",
   "RoomLogoChanged": "İşarə dəyişdi",
   "RoomRemoveUser": "İstifadəçi silindi.",
-  "RoomRenamed": "Otağın <1>«{{oldRoomTitle}}»</1> adı <1>«{{roomTitle}}»</1> olaraq dəyişdirildi",
+  "RoomRenamed": "Otağın <1>«{{oldRoomTitle}}»</1> adı <2>«{{roomTitle}}»</2> olaraq dəyişdirildi",
   "RoomsEmptyScreenTent": "Otaq detallarına burada baxın",
   "RoomUpdateAccess": "təyin edilmişdir",
   "SelectedUsers": "Seçilmiş hesablar",

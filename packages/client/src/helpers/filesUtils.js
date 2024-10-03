@@ -86,6 +86,10 @@ export const getRoomTypeName = (room, t) => {
 
     case RoomsType.PublicRoom:
       return t("Common:PublicRoom");
+
+    case RoomsType.VirtualDataRoom:
+      return t("Common:VirtualDataRoom");
+
     case RoomsType.FormRoom:
       return t("Common:FormRoom");
   }

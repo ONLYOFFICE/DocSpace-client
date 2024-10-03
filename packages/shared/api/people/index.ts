@@ -33,6 +33,8 @@ import {
   EmployeeActivationStatus,
   ThemeKeys,
   AccountsSearchArea,
+  EmployeeStatus,
+  EmployeeType,
 } from "../../enums";
 import { Nullable } from "../../types";
 
@@ -322,20 +324,27 @@ export function deleteAvatar(profileId) {
   });
 }
 
-export function updateUserStatus(status, userIds) {
-  return request({
+export async function updateUserStatus(
+  status: EmployeeStatus,
+  userIds: string[],
+) {
+  const users = (await request({
     method: "put",
     url: `/people/status/${status}`,
     data: { userIds },
-  });
+  })) as TUser[];
+
+  return users;
 }
 
-export function updateUserType(type, userIds) {
-  return request({
+export async function updateUserType(type: EmployeeType, userIds: string[]) {
+  const users = (await request({
     method: "put",
     url: `/people/type/${type}`,
     data: { userIds },
-  });
+  })) as TUser[];
+
+  return users;
 }
 
 export function linkOAuth(serializedProfile) {
@@ -477,28 +486,32 @@ export async function getMembersList(
   return res;
 }
 
-export function setCustomUserQuota(userIds, quota) {
+export async function setCustomUserQuota(userIds: string[], quota: number) {
   const data = {
     userIds,
     quota,
   };
-  const options = {
+  const options: AxiosRequestConfig = {
     method: "put",
     url: "/people/userquota",
     data,
   };
 
-  return request(options);
+  const users = (await request(options)) as TUser[];
+
+  return users;
 }
-export function resetUserQuota(userIds) {
+export async function resetUserQuota(userIds: string[]) {
   const data = {
     userIds,
   };
-  const options = {
+  const options: AxiosRequestConfig = {
     method: "put",
     url: "/people/resetquota",
     data,
   };
 
-  return request(options);
+  const users = (await request(options)) as TUser[];
+
+  return users;
 }

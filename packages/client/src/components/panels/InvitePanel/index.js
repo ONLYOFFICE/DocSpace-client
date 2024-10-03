@@ -35,7 +35,7 @@ import { LOADER_TIMEOUT } from "@docspace/shared/constants";
 import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
-
+import api from "@docspace/shared/api";
 import ItemsList from "./sub-components/ItemsList";
 import InviteInput from "./sub-components/InviteInput";
 import ExternalLinks from "./sub-components/ExternalLinks";
@@ -323,7 +323,7 @@ const InvitePanel = ({
       setIsLoading(true);
       const isRooms = roomId !== -1;
       const result = !isRooms
-        ? await inviteUsers(data)
+        ? await api.people.inviteUsers(data)
         : await setRoomSecurity(roomId, data);
 
       if (!isRooms) {
@@ -574,8 +574,7 @@ export default inject(
   }) => {
     const { theme, standalone } = settingsStore;
 
-    const { getUsersByQuery, inviteUsers, getUsersList, filter } =
-      peopleStore.usersStore;
+    const { inviteUsers, getUsersList, filter } = peopleStore.usersStore;
     const {
       setIsMobileHidden: setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
@@ -606,7 +605,6 @@ export default inject(
     return {
       folders,
       setInviteLanguage,
-      getUsersByQuery,
       getRoomSecurityInfo,
       inviteItems,
       roomId: invitePanelOptions.roomId,

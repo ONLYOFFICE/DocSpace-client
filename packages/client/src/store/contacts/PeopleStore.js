@@ -56,6 +56,7 @@ import {
 } from "@docspace/shared/enums";
 import Filter from "@docspace/shared/api/people/filter";
 import { deleteGroup } from "@docspace/shared/api/groups";
+import { getUserRole } from "@docspace/shared/utils/common";
 
 class PeopleStore {
   contextOptionsStore = null;
@@ -94,12 +95,7 @@ class PeopleStore {
   ) {
     this.authStore = authStore;
     this.infoPanelStore = infoPanelStore;
-    this.usersStore = new UsersStore(
-      this,
-      settingsStore,
-      infoPanelStore,
-      userStore,
-    );
+
     this.accountsHotkeysStore = new AccountsHotkeysStore(this);
     this.groupsStore = new GroupsStore(
       authStore,
@@ -124,6 +120,15 @@ class PeopleStore {
       userStore,
       tfaStore,
       settingsStore,
+    );
+
+    this.usersStore = new UsersStore(
+      settingsStore,
+      infoPanelStore,
+      userStore,
+      this.targetUserStore,
+      this.groupsStore,
+      this.selectionStore,
     );
 
     makeAutoObservable(this);
@@ -160,7 +165,6 @@ class PeopleStore {
 
   changeType = (type, users, successCallback, abortCallback) => {
     const { setDialogData } = this.dialogStore;
-    const { getUserRole } = this.usersStore;
     const event = new Event(Events.CHANGE_USER_TYPE);
 
     let fromType =
@@ -502,14 +506,6 @@ class PeopleStore {
 
   setIsLoadedProfileSectionBody = (isLoadedProfileSectionBody) => {
     this.isLoadedProfileSectionBody = isLoadedProfileSectionBody;
-  };
-
-  getUserRole = (user) => {
-    if (user.isOwner) return "owner";
-    else if (user.isAdmin) return "admin";
-    else if (user.isCollaborator) return "collaborator";
-    else if (user.isVisitor) return "user";
-    else return "manager";
   };
 
   setEnabledHotkeys = (enabledHotkeys) => {

@@ -36,6 +36,7 @@ import api from "@docspace/shared/api";
 import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 import { Button } from "@docspace/shared/components/button";
+import { getUserRole } from "@docspace/shared/utils/common";
 
 const StyledDiv = styled.div`
   width: 32px;
@@ -96,16 +97,6 @@ class ProfileActions extends React.PureComponent {
       this.props.setUserIsUpdate(false);
     }
   }
-
-  getUserRole = (user) => {
-    let isModuleAdmin =
-      user?.listAdminModules && user?.listAdminModules?.length;
-
-    if (user.isOwner) return "owner";
-    if (user.isAdmin || isModuleAdmin) return "admin";
-    if (user.isVisitor) return "guest";
-    return "user";
-  };
 
   onClose = (e) => {
     const path = e.path || (e.composedPath && e.composedPath());

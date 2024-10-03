@@ -48,7 +48,7 @@ const SectionBodyContent = (props) => {
     setChangeOwnerDialogVisible,
     selectUser,
     enabledHotkeys,
-    accountsIsIsLoading,
+    isUsersLoading,
     selectBottom,
     selectUpper,
     activateHotkeys,
@@ -65,7 +65,7 @@ const SectionBodyContent = (props) => {
 
   useAccountsHotkeys({
     enabledHotkeys,
-    accountsIsIsLoading,
+    isUsersLoading,
     selectBottom,
     selectUpper,
     activateHotkeys,
@@ -141,7 +141,7 @@ export default inject(({ peopleStore, filesActionsStore }) => {
     enabledHotkeys,
     setEnabledHotkeys,
   } = peopleStore;
-  const { isFiltered, accountsIsIsLoading } = usersStore;
+  const { isFiltered, isUsersLoading } = usersStore;
 
   const {
     setSelection: setPeopleSelection,
@@ -179,7 +179,7 @@ export default inject(({ peopleStore, filesActionsStore }) => {
     setChangeOwnerDialogVisible,
     selectUser,
     enabledHotkeys,
-    accountsIsIsLoading,
+    isUsersLoading,
 
     selectBottom,
     selectUpper,

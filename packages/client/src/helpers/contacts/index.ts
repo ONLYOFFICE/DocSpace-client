@@ -24,74 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  EmployeeActivationStatus,
-  EmployeeStatus,
-  ThemeKeys,
-} from "../../enums";
+import Filter from "@docspace/shared/api/people/filter";
+import { TUser } from "@docspace/shared/api/people/types";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
-export type TFilterSortBy =
-  | "displayname"
-  | "type"
-  | "department"
-  | "email"
-  | "usedspace"
-  | "createdby";
+import config from "PACKAGE_FILE";
 
-export type TSortOrder = "descending" | "ascending";
+export const setContactsFilterUrl = (filter: Filter) => {
+  const urlFilter = filter.toUrlParams();
+  const newPath = combineUrl(`/accounts/people/filter?${urlFilter}`);
 
-export type TUserGroup = {
-  id: string;
-  manager: string;
-  name: string;
+  if (window.location.pathname + window.location.search === newPath) return;
+
+  window.history.replaceState(
+    "",
+    "",
+    combineUrl(window.ClientConfig?.proxy?.url, config.homepage, newPath),
+  );
 };
 
-export type TUser = {
-  access: number;
-  firstName: string;
-  lastName: string;
-  userName: string;
-  email: string;
-  status: EmployeeStatus;
-  activationStatus: EmployeeActivationStatus;
-  department: string;
-  workFrom: string;
-  avatarMax: string;
-  avatarMedium: string;
-  avatarOriginal: string;
-  avatar: string;
-  isAdmin: boolean;
-  isRoomAdmin: boolean;
-  isLDAP: boolean;
-  listAdminModules: string[];
-  isOwner: boolean;
-  isVisitor: boolean;
-  isCollaborator: boolean;
-  mobilePhoneActivationStatus: number;
-  isSSO: boolean;
-  quotaLimit?: number;
-  usedSpace?: number;
-  id: string;
-  displayName: string;
-  avatarSmall: string;
-  profileUrl: string;
-  hasAvatar: boolean;
-  theme?: ThemeKeys;
-  mobilePhone?: string;
-  cultureName?: string;
-  groups?: TUserGroup[];
-  shared?: boolean;
-  loginEventId?: number;
-  notes?: string;
-  isCustomQuota?: string;
-  title?: string;
-};
+export const employeeWrapperToMemberModel = (profile: TUser) => {
+  const comment = profile.notes;
+  const department = profile.groups
+    ? profile.groups.map((group) => group.id)
+    : [];
+  const worksFrom = profile.workFrom;
 
-export type TGetUserList = {
-  items: TUser[];
-  total: number;
-};
-
-export type TChangeTheme = {
-  theme: ThemeKeys;
+  return { ...profile, comment, department, worksFrom };
 };

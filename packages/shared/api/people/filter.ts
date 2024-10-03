@@ -359,7 +359,7 @@ class Filter {
     return str;
   };
 
-  clone(onlySorting: boolean) {
+  clone(onlySorting?: boolean) {
     return onlySorting
       ? new Filter(
           DEFAULT_PAGE,

@@ -33,6 +33,7 @@ import { useTranslation } from "react-i18next";
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 import { EmployeeStatus } from "@docspace/shared/enums";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
+import { getUserRole } from "@docspace/shared/utils/common";
 
 const StyledContextMenu = styled(ContextMenu)`
   min-width: auto !important;
@@ -42,7 +43,6 @@ const GroupMember = ({
   userId,
   groupMember,
   isManager,
-  getUserRole,
   getUserContextOptions,
   getUserContextOptionsModel,
 }) => {
@@ -133,7 +133,6 @@ const GroupMember = ({
 
 export default inject(({ peopleStore }) => ({
   userId: peopleStore.userStore.user.id,
-  getUserRole: peopleStore.getUserRole,
   getUserContextOptions: peopleStore.usersStore.getUserContextOptions,
   getUserContextOptionsModel:
     peopleStore.contextOptionsStore.getUserContextOptions,

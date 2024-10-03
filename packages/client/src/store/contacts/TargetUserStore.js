@@ -40,6 +40,8 @@ import { toastr } from "@docspace/shared/components/toast";
 import UploadSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
 import TrashIconSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 
+import { employeeWrapperToMemberModel } from "SRC_DIR/helpers/contacts";
+
 const { Badges, RoomsActivity, DailyFeed, UsefulTips } = NotificationsType;
 class TargetUserStore {
   peopleStore = null;
@@ -104,8 +106,7 @@ class TargetUserStore {
   };
 
   updateProfile = async (profile) => {
-    const member =
-      this.peopleStore.usersStore.employeeWrapperToMemberModel(profile);
+    const member = employeeWrapperToMemberModel(profile);
 
     const res = await api.people.updateUser(member);
     if (!res.theme) res.theme = this.userStore.user.theme;

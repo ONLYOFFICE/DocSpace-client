@@ -25,43 +25,102 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable, runInAction } from "mobx";
-import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
+
 import api from "@docspace/shared/api";
 import Filter from "@docspace/shared/api/people/filter";
 import {
-  EmployeeStatus,
-  EmployeeType,
-  EmployeeActivationStatus,
-} from "@docspace/shared/enums";
+  TFilterSortBy,
+  TSortOrder,
+  TUser,
+} from "@docspace/shared/api/people/types";
+import { TThirdPartyProvider } from "@docspace/shared/api/settings/types";
+
+import { EmployeeStatus, EmployeeType } from "@docspace/shared/enums";
+import { getUserRole } from "@docspace/shared/utils/common";
+
+import { UserStore } from "@docspace/shared/store/UserStore";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+
+import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
+
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
-import config from "PACKAGE_FILE";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { setContactsFilterUrl } from "SRC_DIR/helpers/contacts";
+
+import InfoPanelStore from "../InfoPanelStore";
+
+import TargetUserStore from "./TargetUserStore";
+import GroupsStore from "./GroupsStore";
+import SelectionStore from "./SelectionPeopleStore";
 
 class UsersStore {
-  peopleStore = null;
-  settingsStore = null;
-  infoPanelStore = null;
-  userStore = null;
-
   filter = Filter.getDefault();
 
-  users = [];
-  providers = [];
-  accountsIsIsLoading = false;
+  users: TUser[] = [];
+
+  providers: TThirdPartyProvider[] = [];
+
+  isUsersLoading = false;
+
   operationRunning = false;
+
   abortController = new AbortController();
+
   requestRunning = false;
 
-  constructor(peopleStore, settingsStore, infoPanelStore, userStore) {
-    this.peopleStore = peopleStore;
+  constructor(
+    public settingsStore: SettingsStore,
+    public infoPanelStore: InfoPanelStore,
+    public userStore: UserStore,
+    public targetUserStore: TargetUserStore,
+    public groupsStore: GroupsStore,
+    public selectionStore: SelectionStore,
+  ) {
     this.settingsStore = settingsStore;
     this.infoPanelStore = infoPanelStore;
     this.userStore = userStore;
+    this.targetUserStore = targetUserStore;
+    this.groupsStore = groupsStore;
+    this.selectionStore = selectionStore;
+
     makeAutoObservable(this);
   }
 
+  setFilter = (filter: Filter) => {
+    const key = `PeopleFilter=${this.userStore.user?.id}`;
+    const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
+    localStorage.setItem(key, value);
+    setContactsFilterUrl(filter);
+
+    this.filter = filter;
+  };
+
+  get filterTotal() {
+    return this.filter.total;
+  }
+
+  get isFiltered() {
+    return (
+      this.filter.activationStatus ||
+      this.filter.employeeStatus ||
+      this.filter.payments ||
+      this.filter.search ||
+      this.filter.role ||
+      this.filter.accountLoginType ||
+      this.filter.withoutGroup ||
+      this.filter.group ||
+      this.filter.quotaFilter ||
+      this.filter.filterSeparator ||
+      this.filter.invitedByMe ||
+      this.filter.userId
+    );
+  }
+
+  setUsers = (users: TUser[]) => {
+    this.users = users;
+  };
+
   getUsersList = async (
-    filter,
+    filter: Filter,
     updateFilter = false,
     withFilterLocalStorage = false,
   ) => {
@@ -80,9 +139,9 @@ class UsersStore {
     if (filterStorageItem && withFilterLocalStorage) {
       const splitFilter = filterStorageItem.split(",");
 
-      filterData.sortBy = splitFilter[0];
+      filterData.sortBy = splitFilter[0] as TFilterSortBy;
       filterData.pageCount = +splitFilter[1];
-      filterData.sortOrder = splitFilter[2];
+      filterData.sortOrder = splitFilter[2] as TSortOrder;
     }
 
     if (!this.settingsStore.withPaging) {
@@ -95,8 +154,9 @@ class UsersStore {
       }
     }
 
-    if (filterData.group && filterData.group === "root")
-      filterData.group = undefined;
+    if (filterData.group && filterData.group === "root") {
+      filterData.group = null;
+    }
 
     this.requestRunning = true;
 
@@ -104,12 +164,13 @@ class UsersStore {
       filterData,
       this.abortController.signal,
     );
+
     filterData.total = res.total;
 
     this.requestRunning = false;
 
     if (updateFilter) {
-      this.setFilterParams(filterData);
+      this.setFilter(filterData);
     }
 
     this.setUsers(res.items);
@@ -117,75 +178,47 @@ class UsersStore {
     return Promise.resolve(res.items);
   };
 
-  setUsers = (users) => {
-    this.users = users;
-  };
-
-  setProviders = (providers) => {
+  setProviders = (providers: TThirdPartyProvider[]) => {
     this.providers = providers;
   };
 
-  setOperationRunning = (operationRunning) => {
-    this.operationRunning = operationRunning;
+  removeUsers = async (
+    userIds: string[],
+    filter: Filter,
+    isInsideGroup: boolean,
+  ) => {
+    const { refreshInsideGroup } = this.groupsStore;
+
+    await api.people.deleteUsers(userIds);
+
+    if (isInsideGroup) {
+      await refreshInsideGroup();
+    } else {
+      await this.getUsersList(filter, true);
+    }
   };
 
-  employeeWrapperToMemberModel = (profile) => {
-    const comment = profile.notes;
-    const department = profile.groups
-      ? profile.groups.map((group) => group.id)
-      : [];
-    const worksFrom = profile.workFrom;
+  updateUserStatus = async (status: EmployeeStatus, userIds: string[]) => {
+    const updatedUsers = await api.people.updateUserStatus(status, userIds);
+    if (updatedUsers) {
+      updatedUsers.forEach((user) => {
+        const userIndex = this.users.findIndex((x) => x.id === user.id);
+        if (userIndex !== -1) this.users[userIndex] = user;
+      });
 
-    return { ...profile, comment, department, worksFrom };
-  };
-
-  createUser = async (user) => {
-    const filter = this.filter;
-    const member = this.employeeWrapperToMemberModel(user);
-    let result;
-    const res = await api.people.createUser(member);
-    result = res;
-
-    await this.peopleStore.targetUserStore.getTargetUser(result.userName);
-    await this.getUsersList(filter);
-    return Promise.resolve(result);
-  };
-
-  removeUser = async (userId, filter, isInsideGroup) => {
-    const { refreshInsideGroup } = this.peopleStore.groupsStore;
-
-    await api.people.deleteUsers(userId);
-
-    isInsideGroup
-      ? await refreshInsideGroup()
-      : await this.getUsersList(filter, true);
-  };
-
-  get needResetUserSelection() {
-    const { isVisible: infoPanelVisible } = this.infoPanelStore;
-    const { isOneUserSelection, isOnlyBufferSelection } =
-      this.peopleStore.selectionStore;
-
-    return !infoPanelVisible || (!isOneUserSelection && !isOnlyBufferSelection);
-  }
-  updateUserStatus = async (status, userIds) => {
-    return api.people.updateUserStatus(status, userIds).then((users) => {
-      if (users) {
-        users.forEach((user) => {
-          const userIndex = this.users.findIndex((x) => x.id === user.id);
-          if (userIndex !== -1) this.users[userIndex] = user;
-        });
-
-        if (!this.needResetUserSelection) {
-          this.peopleStore.selectionStore.updateSelection(this.peopleList);
-        }
+      if (!this.needResetUserSelection) {
+        this.selectionStore.updateSelection(this.peopleList);
       }
+    }
 
-      return users;
-    });
+    return updatedUsers;
   };
 
-  updateUserType = async (type, userIds, filter) => {
+  updateUserType = async (
+    type: EmployeeType,
+    userIds: string[],
+    filter: Filter,
+  ) => {
     let toType = 0;
 
     switch (type) {
@@ -200,94 +233,86 @@ class UsersStore {
         break;
       case "manager":
         toType = EmployeeType.User;
+        break;
+      default:
+        return;
     }
 
-    let users = null;
+    let updatedUsers: TUser[] = [];
 
     try {
-      users = await api.people.updateUserType(toType, userIds);
+      updatedUsers = await api.people.updateUserType(toType, userIds);
     } catch (e) {
-      throw new Error(e);
+      throw new Error(e as string);
     }
 
-    // await this.getUsersList(filter, true); // accounts loader
     await this.getUsersList(filter); // rooms
 
-    if (users && !this.needResetUserSelection) {
-      this.peopleStore.selectionStore.updateSelection(this.peopleList);
+    if (updatedUsers && !this.needResetUserSelection) {
+      this.selectionStore.updateSelection(this.peopleList);
     }
 
-    return users;
+    return updatedUsers;
   };
 
-  setCustomUserQuota = async (quotaSize, userIds) => {
-    const filter = this.filter;
-    const users = await api.people.setCustomUserQuota(userIds, +quotaSize);
-
-    await this.getUsersList(filter, true);
-
-    return users;
-  };
-
-  resetUserQuota = async (userIds) => {
-    const filter = this.filter;
-    const users = await api.people.resetUserQuota(userIds);
-
-    await this.getUsersList(filter, true);
-
-    return users;
-  };
-
-  updateProfileInUsers = async (updatedProfile) => {
-    if (!this.users) {
-      return this.getUsersList();
-    }
-    if (!updatedProfile) {
-      updatedProfile = this.peopleStore.targetUserStore.targetUser;
-    }
-    const { userName } = updatedProfile;
-    const oldProfileArr = this.users.filter((u) => u.userName === userName);
-    const oldProfile = oldProfileArr[0];
-    const newProfile = {};
-
-    for (let key in oldProfile) {
-      if (
-        updatedProfile.hasOwnProperty(key) &&
-        updatedProfile[key] !== oldProfile[key]
-      ) {
-        newProfile[key] = updatedProfile[key];
-      } else {
-        newProfile[key] = oldProfile[key];
-      }
-    }
-
-    const updatedUsers = this.users.map((user) =>
-      user.id === newProfile.id ? newProfile : user,
+  setCustomUserQuota = async (
+    quotaSize: string | number,
+    userIds: string[],
+  ) => {
+    const updatedUsers = await api.people.setCustomUserQuota(
+      userIds,
+      +quotaSize,
     );
+
+    await this.getUsersList(this.filter, true);
+
+    return updatedUsers;
+  };
+
+  resetUserQuota = async (userIds: string[]) => {
+    const updatedUsers = await api.people.resetUserQuota(userIds);
+
+    await this.getUsersList(this.filter, true);
+
+    return updatedUsers;
+  };
+
+  updateProfileInUsers = async (updatedProfile?: TUser) => {
+    const updatedUser = updatedProfile ?? this.targetUserStore.targetUser;
+    if (!this.users) {
+      return this.getUsersList(this.filter);
+    }
+
+    if (!updatedUser) return;
+
+    const updatedUsers = this.users.map((user) => {
+      if (
+        user.id === updatedUser.id ||
+        user.userName === updatedUser.userName
+      ) {
+        return { ...user, ...updatedUser };
+      }
+
+      return user;
+    });
 
     this.setUsers(updatedUsers);
   };
 
-  getUserRole = (user) => {
-    if (user.isOwner) return "owner";
-    else if (user.isAdmin) return "admin";
-    else if (user.isCollaborator) return "collaborator";
-    else if (user.isVisitor) return "user";
-    else return "manager";
-  };
-
   getUserContextOptions = (
-    isMySelf,
-    isUserSSO,
-    isUserLDAP,
-    statusType,
-    userRole,
-    status,
+    isMySelf: boolean,
+    isUserSSO: boolean,
+    isUserLDAP: boolean,
+    statusType: ReturnType<typeof getUserStatus>,
+    userRole: ReturnType<typeof getUserRole>,
+    status: EmployeeStatus,
   ) => {
+    if (!this.userStore.user) return;
+
     const { isOwner, isAdmin, isVisitor, isCollaborator, isLDAP } =
       this.userStore.user;
 
-    const options = [];
+    const options: string[] = [];
 
     switch (statusType) {
       case "active":
@@ -314,27 +339,25 @@ class UsersStore {
             options.push("separator-2");
             options.push("change-owner");
           }
-        } else {
-          if (
-            isOwner ||
-            (isAdmin &&
-              (userRole === "user" ||
-                userRole === "manager" ||
-                userRole === "collaborator"))
-          ) {
-            if (!isUserLDAP && !isUserSSO) {
-              options.push("separator-1");
+        } else if (
+          isOwner ||
+          (isAdmin &&
+            (userRole === "user" ||
+              userRole === "manager" ||
+              userRole === "collaborator"))
+        ) {
+          if (!isUserLDAP && !isUserSSO) {
+            options.push("separator-1");
 
-              options.push("change-email");
-              options.push("change-password");
-            }
+            options.push("change-email");
+            options.push("change-password");
+          }
 
-            options.push("reset-auth");
+          options.push("reset-auth");
 
-            if (!isUserLDAP) {
-              options.push("separator-2");
-              options.push("disable");
-            }
+          if (!isUserLDAP) {
+            options.push("separator-2");
+            options.push("disable");
           }
         }
 
@@ -413,55 +436,39 @@ class UsersStore {
         }
 
         break;
+
+      default:
+        break;
     }
 
     return options;
   };
 
-  isUserSelected = (id) => {
-    return this.peopleStore.selectionStore.selection.some((el) => el.id === id);
-  };
-
-  setAccountsIsIsLoading = (accountsIsIsLoading) => {
-    this.accountsIsIsLoading = accountsIsIsLoading;
+  setIsUsersLoading = (isLoading: boolean) => {
+    this.isUsersLoading = isLoading;
   };
 
   fetchMoreAccounts = async () => {
-    if (!this.hasMoreAccounts || this.accountsIsIsLoading) return;
-    // console.log("fetchMoreAccounts");
+    if (!this.hasMoreAccounts || this.isUsersLoading) return;
 
-    this.setAccountsIsIsLoading(true);
+    this.setIsUsersLoading(true);
 
-    const { filter, setFilterParams } = this;
-
-    const newFilter = filter.clone();
+    const newFilter = this.filter.clone();
     newFilter.page += 1;
-    setFilterParams(newFilter);
+    this.setFilter(newFilter);
 
-    const res = await api.people.getUserList(newFilter);
+    const res = await api.people.getUserList(
+      newFilter,
+      this.abortController.signal,
+    );
 
     runInAction(() => {
       this.setUsers([...this.users, ...res.items]);
-      this.setAccountsIsIsLoading(false);
+      this.setIsUsersLoading(false);
     });
   };
 
-  get hasMoreAccounts() {
-    return this.peopleList.length < this.filterTotal;
-  }
-
-  getUsersByQuery = async (query) => {
-    const filter = Filter.getFilterWithOutDisabledUser();
-
-    filter.search = query;
-    filter.pageCount = 100;
-
-    const res = await api.people.getUserList(filter);
-
-    return res.items;
-  };
-
-  getPeopleListItem = (user) => {
+  getPeopleListItem = (user: TUser) => {
     const {
       id,
       displayName,
@@ -487,10 +494,12 @@ class UsersStore {
       usedSpace,
       isCustomQuota,
     } = user;
+
     const statusType = getUserStatus(user);
-    const role = this.getUserRole(user);
+    const role = getUserRole(user);
     const isMySelf =
-      this.userStore.user && user.userName === this.userStore.user.userName;
+      (this.userStore.user && user.userName === this.userStore.user.userName) ??
+      false;
 
     const options = this.getUserContextOptions(
       isMySelf,
@@ -539,57 +548,15 @@ class UsersStore {
     return list;
   }
 
-  inviteUsers = async (data) => {
-    const result = await api.people.inviteUsers(data);
-
-    return Promise.resolve(result);
-  };
-
-  setFilterUrl = (filter) => {
-    const urlFilter = filter.toUrlParams();
-    const newPath = combineUrl(`/accounts/people/filter?${urlFilter}`);
-
-    if (window.location.pathname + window.location.search === newPath) return;
-
-    window.history.replaceState(
-      "",
-      "",
-      combineUrl(window.ClientConfig?.proxy?.url, config.homepage, newPath),
-    );
-  };
-
-  setFilterParams = (data) => {
-    this.setFilterUrl(data);
-    this.setFilter(data);
-  };
-
-  resetFilter = () => {
-    this.setFilter(Filter.getDefault());
-  };
-
-  setFilter = (filter) => {
-    const key = `PeopleFilter=${this.userStore.user.id}`;
-    const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
-    localStorage.setItem(key, value);
-
-    this.filter = filter;
-  };
-
-  get filterTotal() {
-    return this.filter.total;
+  get hasMoreAccounts() {
+    return this.peopleList.length < this.filterTotal;
   }
 
-  get isFiltered() {
-    return (
-      this.filter.activationStatus ||
-      this.filter.employeeStatus ||
-      this.filter.payments ||
-      this.filter.search ||
-      this.filter.role ||
-      this.filter.accountLoginType ||
-      this.filter.withoutGroup ||
-      this.filter.group
-    );
+  get needResetUserSelection() {
+    const { isVisible: infoPanelVisible } = this.infoPanelStore;
+    const { isOneUserSelection, isOnlyBufferSelection } = this.selectionStore;
+
+    return !infoPanelVisible || (!isOneUserSelection && !isOnlyBufferSelection);
   }
 }
 

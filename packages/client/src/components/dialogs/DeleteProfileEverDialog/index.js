@@ -179,6 +179,7 @@ const DeleteProfileEverDialogComponent = (props) => {
       onClose={onClose}
       deleteWithoutReassign={deleteWithoutReassign}
       areUsersOnly={areUsersOnly}
+      isLarge
     >
       <ModalDialog.Header>
         {onlyOneUser ? t("DeleteUser") : t("DeletingUsers")}

@@ -42,6 +42,7 @@ import DeleteIcon from "PUBLIC_DIR/images/mobile.actions.remove.react.svg";
 import { isMobile, desktop, commonInputStyles } from "@docspace/shared/utils";
 import Base from "@docspace/shared/themes/base";
 import { globalColors } from "@docspace/shared/themes";
+import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 
 const fillAvailableWidth = css`
   width: 100%;
@@ -285,6 +286,19 @@ const StyledInviteInputContainer = styled.div`
 
   .access-selector {
     margin-inline-end: 0;
+
+    // Add space between access-selector's absolute positioned dropdown and modal footer
+    .dropdown-container {
+      overflow: unset;
+
+      ::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        height: ${ASIDE_PADDING_AFTER_LAST_ITEM};
+      }
+    }
   }
 
   .add-manually-dropdown {

@@ -33,8 +33,16 @@ import Item from "./Item";
 
 import { StyledRow, ScrollList } from "../StyledInvitePanel";
 import { useTheme } from "styled-components";
+import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 
 const USER_ITEM_HEIGHT = 48;
+
+const VirtualScroll = (props) => (
+  <CustomScrollbarsVirtualList
+    {...props}
+    paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
+  />
+);
 
 const Row = memo(({ data, index, style }) => {
   const {
@@ -185,7 +193,7 @@ const ItemsList = ({
           t,
           standalone,
         }}
-        outerElementType={!scrollAllPanelContent && CustomScrollbarsVirtualList}
+        outerElementType={!scrollAllPanelContent && VirtualScroll}
       >
         {Row}
       </List>

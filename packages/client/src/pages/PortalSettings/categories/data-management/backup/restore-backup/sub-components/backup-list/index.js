@@ -226,7 +226,6 @@ const BackupListModalDialog = (props) => {
       displayType="aside"
       visible={isVisibleDialog}
       onClose={onModalClose}
-      withFooterBorder
     >
       <ModalDialog.Header>{t("BackupList")}</ModalDialog.Header>
       <ModalDialog.Body>

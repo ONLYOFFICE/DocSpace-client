@@ -512,9 +512,6 @@ const InviteInput = ({
             )}
           </div>{" "}
           <div className="email-list_add-button">
-            <Text fontSize="13px" fontWeight={600}>
-              {t("Common:AddButton")}
-            </Text>
             <ArrowIcon />
           </div>
         </DropDownItem>

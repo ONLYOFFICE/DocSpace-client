@@ -345,21 +345,12 @@ const StyledDropDown = styled(DropDown)`
       align-items: center;
       gap: 4px;
 
-      p {
-        color: ${(props) => props.theme.currentColorScheme.main.accent};
-        ${(props) =>
-          props.isRequestRunning &&
-          css`
-            opacity: 0.65;
-          `}
-      }
-
       svg {
         ${({ theme }) =>
           theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"};
 
         path {
-          fill: ${(props) => props.theme.currentColorScheme.main.accent};
+          fill: ${(props) => props.theme.inputBlock.iconColor};
           ${(props) =>
             props.isRequestRunning &&
             css`

@@ -65,7 +65,7 @@ import ContextOptionsStore from "./ContextOptionsStore";
 import HotkeyStore from "./HotkeyStore";
 
 import TagsStore from "./TagsStore";
-import PeopleStore from "./PeopleStore";
+import PeopleStore from "./contacts/PeopleStore";
 import OformsStore from "./OformsStore";
 
 import AccessRightsStore from "./AccessRightsStore";

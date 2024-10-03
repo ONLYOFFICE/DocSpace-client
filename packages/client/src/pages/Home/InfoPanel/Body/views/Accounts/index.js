@@ -329,7 +329,7 @@ export default inject(
     const {
       setSelection: setPeopleSelection,
       setBufferSelection: setPeopleBufferSelection,
-    } = peopleStore.selectionStore;
+    } = usersStore;
 
     const { showStorageInfo } = currentQuotaStore;
     const { standalone } = settingsStore;

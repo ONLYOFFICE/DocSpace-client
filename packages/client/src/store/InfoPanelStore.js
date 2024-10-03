@@ -191,7 +191,7 @@ class InfoPanelStore {
     const {
       selection: peopleSelection,
       bufferSelection: peopleBufferSelection,
-    } = this.peopleStore.selectionStore;
+    } = this.peopleStore.usersStore;
 
     const {
       selection: groupsSelection,

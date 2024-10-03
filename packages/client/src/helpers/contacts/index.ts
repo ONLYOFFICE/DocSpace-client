@@ -26,9 +26,18 @@
 
 import Filter from "@docspace/shared/api/people/filter";
 import { TUser } from "@docspace/shared/api/people/types";
+import { EmployeeStatus } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 import config from "PACKAGE_FILE";
+
+export type TSelected =
+  | "all"
+  | "active"
+  | "pending"
+  | "disabled"
+  | "none"
+  | "close";
 
 export const setContactsFilterUrl = (filter: Filter) => {
   const urlFilter = filter.toUrlParams();
@@ -51,4 +60,19 @@ export const employeeWrapperToMemberModel = (profile: TUser) => {
   const worksFrom = profile.workFrom;
 
   return { ...profile, comment, department, worksFrom };
+};
+
+export const getUserChecked = (user: TUser, selected: TSelected) => {
+  switch (selected) {
+    case "all":
+      return true;
+    case "active":
+      return user.status === EmployeeStatus.Active;
+    case "pending":
+      return user.status === EmployeeStatus.Pending;
+    case "disabled":
+      return user.status === EmployeeStatus.Disabled;
+    default:
+      return false;
+  }
 };

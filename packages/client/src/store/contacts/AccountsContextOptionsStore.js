@@ -216,7 +216,7 @@ class AccountsContextOptionsStore {
       hasUsersToInvite,
       hasUsersToRemove,
       hasFreeUsers,
-    } = this.peopleStore.selectionStore;
+    } = this.peopleStore.usersStore;
     const { setSendInviteDialogVisible, setDeleteProfileDialogVisible } =
       this.peopleStore.dialogStore;
 
@@ -309,7 +309,7 @@ class AccountsContextOptionsStore {
   };
 
   getModel = (item, t) => {
-    const { selection } = this.peopleStore.selectionStore;
+    const { selection } = this.peopleStore.usersStore;
 
     const { options } = item;
 
@@ -422,7 +422,7 @@ class AccountsContextOptionsStore {
 
   onDetailsClick = (item) => {
     const { setIsVisible } = this.infoPanelStore;
-    const { setBufferSelection } = this.peopleStore.selectionStore;
+    const { setBufferSelection } = this.peopleStore.usersStore;
     setBufferSelection(item);
     setIsVisible(true);
   };

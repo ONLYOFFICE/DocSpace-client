@@ -65,7 +65,7 @@ const SelectionArea = ({
 export default inject(({ peopleStore }) => {
   const { viewAs } = peopleStore;
 
-  const { setSelections: setSelectionsPeople } = peopleStore.selectionStore;
+  const { setSelections: setSelectionsPeople } = peopleStore.usersStore;
   const { setSelections: setSelectionsGroups } = peopleStore.groupsStore;
 
   return {

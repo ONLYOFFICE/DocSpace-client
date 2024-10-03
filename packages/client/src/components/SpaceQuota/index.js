@@ -214,9 +214,13 @@ export default inject(
     },
     { type },
   ) => {
-    const { changeUserQuota, usersStore, selectionStore } = peopleStore;
-    const { setCustomUserQuota, resetUserQuota, needResetUserSelection } =
-      usersStore;
+    const { changeUserQuota, usersStore } = peopleStore;
+    const {
+      setCustomUserQuota,
+      resetUserQuota,
+      needResetUserSelection,
+      setSelected: setUsersSelected,
+    } = usersStore;
     const { changeRoomQuota } = filesActionsStore;
     const {
       setCustomRoomQuota,
@@ -234,8 +238,6 @@ export default inject(
 
     const { infoPanelSelection } = infoPanelStore;
     const inRoom = !!infoPanelSelection?.navigationPath;
-
-    const { setSelected: setUsersSelected } = selectionStore;
 
     const changeQuota = type === "user" ? changeUserQuota : changeRoomQuota;
     const updateQuota =

@@ -88,12 +88,12 @@ class HeaderMenuStore {
   // People
 
   get isHeaderVisible() {
-    const { selection } = this.peopleStore.selectionStore;
+    const { selection } = this.peopleStore.usersStore;
     return selection.length > 0;
   }
 
   get isHeaderIndeterminate() {
-    const { selection } = this.peopleStore.selectionStore;
+    const { selection } = this.peopleStore.usersStore;
     const { users } = this.peopleStore.usersStore;
 
     return (
@@ -103,7 +103,7 @@ class HeaderMenuStore {
     );
   }
   get isHeaderChecked() {
-    const { selection } = this.peopleStore.selectionStore;
+    const { selection } = this.peopleStore.usersStore;
     const { users } = this.peopleStore.usersStore;
 
     return this.isHeaderVisible && selection.length === users.length;

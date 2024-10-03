@@ -153,8 +153,8 @@ export default inject(
       getPeopleListItem,
       needResetUserSelection,
       filter: peopleFilter,
+      setSelected,
     } = usersStore;
-    const { setSelected } = peopleStore.selectionStore;
     return {
       needResetUserSelection,
       getPeopleListItem,

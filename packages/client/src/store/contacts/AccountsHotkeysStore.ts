@@ -60,7 +60,7 @@ class AccountsHotkeysStore {
 
   get accountsSelection() {
     return this.isAccountsPage
-      ? this.peopleStore.selectionStore.selection
+      ? this.peopleStore.usersStore.selection
       : this.peopleStore.groupsStore.selection;
   }
 
@@ -110,11 +110,11 @@ class AccountsHotkeysStore {
 
   setSelection = (selection: AccountsType[]) => {
     return this.isAccountsPage
-      ? this.peopleStore.selectionStore.setSelection(selection)
+      ? this.peopleStore.usersStore.setSelection(selection)
       : this.peopleStore.groupsStore.setSelection(selection);
   };
 
-  setHotkeyCaret = (hotkeyCaret: AccountsType) => {
+  setHotkeyCaret = (hotkeyCaret: AccountsType | null) => {
     if (hotkeyCaret || this.hotkeyCaret) {
       this.hotkeyCaret = hotkeyCaret;
     }
@@ -216,7 +216,7 @@ class AccountsHotkeysStore {
 
   deselectAll = () => {
     const { setSelected } = this.isAccountsPage
-      ? this.peopleStore.selectionStore
+      ? this.peopleStore.usersStore
       : this.peopleStore.groupsStore;
 
     this.elemOffset = 0;
@@ -225,7 +225,7 @@ class AccountsHotkeysStore {
 
   selectAll = () => {
     const { selectAll } = this.isAccountsPage
-      ? this.peopleStore.selectionStore
+      ? this.peopleStore.usersStore
       : this.peopleStore.groupsStore;
 
     selectAll();

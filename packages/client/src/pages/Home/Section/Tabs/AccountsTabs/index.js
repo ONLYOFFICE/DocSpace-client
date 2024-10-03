@@ -85,8 +85,8 @@ const AccountsTabs = ({
 
 export default inject(({ peopleStore, clientLoadingStore }) => ({
   showBodyLoader: clientLoadingStore.showBodyLoader,
-  setPeopleSelection: peopleStore.selectionStore.setSelection,
-  setPeopleBufferSelection: peopleStore.selectionStore.setBufferSelection,
+  setPeopleSelection: peopleStore.usersStore.setSelection,
+  setPeopleBufferSelection: peopleStore.usersStore.setBufferSelection,
   setGroupsSelection: peopleStore.groupsStore.setSelection,
   setGroupsBufferSelection: peopleStore.groupsStore.setBufferSelection,
 }))(observer(AccountsTabs));

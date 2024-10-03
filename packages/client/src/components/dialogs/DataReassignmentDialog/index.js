@@ -301,7 +301,6 @@ export default inject(({ settingsStore, peopleStore, setup, userStore }) => {
     setIsDeletingUserWithReassignment,
   } = peopleStore.dialogStore;
   const { currentColorScheme, dataReassignmentUrl } = settingsStore;
-  const { setSelected } = peopleStore.selectionStore;
   const {
     dataReassignment,
     dataReassignmentProgress,
@@ -310,7 +309,8 @@ export default inject(({ settingsStore, peopleStore, setup, userStore }) => {
 
   const { user: currentUser } = userStore;
 
-  const { getUsersList, needResetUserSelection } = peopleStore.usersStore;
+  const { getUsersList, needResetUserSelection, setSelected } =
+    peopleStore.usersStore;
 
   return {
     setDataReassignmentDialogVisible,

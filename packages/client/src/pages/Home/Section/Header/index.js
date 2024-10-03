@@ -752,7 +752,7 @@ export default inject(
     const isEmptyArchive = !canRestoreAll && !canDeleteAll;
 
     const {
-      selectionStore,
+      usersStore,
       headerMenuStore,
       getHeaderMenu: getAccountsHeaderMenu,
     } = peopleStore;
@@ -770,7 +770,7 @@ export default inject(
     } = headerMenuStore;
 
     const { isIndexEditingMode, setIsIndexEditingMode } = indexingStore;
-    const { setSelected: setAccountsSelected } = selectionStore;
+    const { setSelected: setAccountsSelected } = usersStore;
     const { isPublicRoom } = publicRoomStore;
 
     let folderPath = navigationPath;

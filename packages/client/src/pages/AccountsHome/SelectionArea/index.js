@@ -56,7 +56,7 @@ const SelectionArea = (props) => {
 
 export default inject(({ peopleStore }) => {
   const { viewAs } = peopleStore;
-  const { setSelections } = peopleStore.selectionStore;
+  const { setSelections } = peopleStore.usersStore;
 
   return {
     viewAs,

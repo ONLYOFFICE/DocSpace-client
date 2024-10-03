@@ -46,7 +46,7 @@ class SelectedGroupStore {
   }
 
   selectGroup = (groupId) => {
-    const { clearSelection } = this.peopleStore.selectionStore;
+    const { clearSelection } = this.peopleStore.usersStore;
     const { getUsersList, filter } = this.peopleStore.usersStore;
 
     let newFilter = filter.clone();

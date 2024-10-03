@@ -37,7 +37,6 @@ import DefaultQuotaReactSvgUrl from "PUBLIC_DIR/images/default.quota.react.svg?u
 import GroupsStore from "./GroupsStore";
 import UsersStore from "./UsersStore";
 import TargetUserStore from "./TargetUserStore";
-import SelectionStore from "./SelectionPeopleStore";
 import AccountsHotkeysStore from "./AccountsHotkeysStore";
 import HeaderMenuStore from "./HeaderMenuStore";
 
@@ -65,7 +64,6 @@ class PeopleStore {
   groupsStore = null;
   usersStore = null;
   targetUserStore = null;
-  selectionStore = null;
   headerMenuStore = null;
 
   inviteLinksStore = null;
@@ -104,7 +102,6 @@ class PeopleStore {
       clientLoadingStore,
     );
     this.targetUserStore = new TargetUserStore(this, userStore);
-    this.selectionStore = new SelectionStore(this);
     this.headerMenuStore = new HeaderMenuStore(this);
     this.inviteLinksStore = new InviteLinksStore(this);
     this.dialogStore = new DialogStore();
@@ -128,7 +125,8 @@ class PeopleStore {
       userStore,
       this.targetUserStore,
       this.groupsStore,
-      this.selectionStore,
+      this.accountsHotkeysStore,
+      accessRightsStore,
     );
 
     makeAutoObservable(this);
@@ -158,7 +156,7 @@ class PeopleStore {
   onChangeType = (e) => {
     const action = e?.action ? e.action : e?.currentTarget?.dataset?.action;
 
-    const { getUsersToMakeEmployees } = this.selectionStore;
+    const { getUsersToMakeEmployees } = this.usersStore;
 
     this.changeType(action, getUsersToMakeEmployees);
   };
@@ -273,11 +271,11 @@ class PeopleStore {
     const users = [];
 
     if (status === EmployeeStatus.Active) {
-      const { getUsersToActivate } = this.selectionStore;
+      const { getUsersToActivate } = this.usersStore;
 
       users.push(...getUsersToActivate);
     } else {
-      const { getUsersToDisable } = this.selectionStore;
+      const { getUsersToDisable } = this.usersStore;
 
       users.push(...getUsersToDisable);
     }
@@ -304,7 +302,7 @@ class PeopleStore {
   };
 
   getUsersRightsSubmenu = (t) => {
-    const { userSelectionRole, selectionUsersRights } = this.selectionStore;
+    const { userSelectionRole, selectionUsersRights } = this.usersStore;
 
     const { isOwner } = this.userStore.user;
 
@@ -400,7 +398,7 @@ class PeopleStore {
       hasUsersToResetQuota,
       hasUsersToDisableQuota,
       selection,
-    } = this.selectionStore;
+    } = this.usersStore;
 
     const { setSendInviteDialogVisible } = this.dialogStore;
     const { toggleDeleteProfileEverDialog } = this.contextOptionsStore;

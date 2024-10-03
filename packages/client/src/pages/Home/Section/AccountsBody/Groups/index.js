@@ -69,8 +69,8 @@ const Groups = ({
 export default inject(({ peopleStore }) => ({
   accountsViewAs: peopleStore.viewAs,
   isGroupsLoaded: peopleStore.groupsStore.groups !== undefined,
-  setPeopleSelection: peopleStore.selectionStore.setSelection,
-  setPeopleBufferSelection: peopleStore.selectionStore.setBufferSelection,
+  setPeopleSelection: peopleStore.usersStore.setSelection,
+  setPeopleBufferSelection: peopleStore.usersStore.setBufferSelection,
 }))(
   withTranslation(["People", "Common", "PeopleTranslations"])(
     withLoader(observer(Groups))(),

@@ -141,13 +141,13 @@ export default inject(({ peopleStore, filesActionsStore }) => {
     enabledHotkeys,
     setEnabledHotkeys,
   } = peopleStore;
-  const { isFiltered, isUsersLoading } = usersStore;
-
   const {
+    isFiltered,
+    isUsersLoading,
     setSelection: setPeopleSelection,
     setBufferSelection: setPeopleBufferSelection,
     selectUser,
-  } = peopleStore.selectionStore;
+  } = usersStore;
 
   const {
     setSelection: setGroupsSelection,

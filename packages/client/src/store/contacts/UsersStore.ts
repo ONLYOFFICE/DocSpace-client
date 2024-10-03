@@ -37,6 +37,7 @@ import { TThirdPartyProvider } from "@docspace/shared/api/settings/types";
 
 import { EmployeeStatus, EmployeeType } from "@docspace/shared/enums";
 import { getUserRole } from "@docspace/shared/utils/common";
+import { Nullable } from "@docspace/shared/types";
 
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
@@ -44,18 +45,36 @@ import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
-import { setContactsFilterUrl } from "SRC_DIR/helpers/contacts";
+import {
+  getUserChecked,
+  setContactsFilterUrl,
+  TSelected,
+} from "SRC_DIR/helpers/contacts";
 
 import InfoPanelStore from "../InfoPanelStore";
 
 import TargetUserStore from "./TargetUserStore";
 import GroupsStore from "./GroupsStore";
-import SelectionStore from "./SelectionPeopleStore";
+import AccountsHotkeysStore from "./AccountsHotkeysStore";
+import AccessRightsStore from "../AccessRightsStore";
 
 class UsersStore {
   filter = Filter.getDefault();
 
   users: TUser[] = [];
+
+  selection: ReturnType<typeof this.getPeopleListItem>[] = [];
+
+  bufferSelection: Nullable<ReturnType<typeof this.getPeopleListItem>> = null;
+
+  selectionUsersRights = {
+    isVisitor: 0,
+    isCollaborator: 0,
+    isRoomAdmin: 0,
+    isAdmin: 0,
+  };
+
+  selected = "none";
 
   providers: TThirdPartyProvider[] = [];
 
@@ -73,14 +92,16 @@ class UsersStore {
     public userStore: UserStore,
     public targetUserStore: TargetUserStore,
     public groupsStore: GroupsStore,
-    public selectionStore: SelectionStore,
+    public accountsHotkeysStore: AccountsHotkeysStore,
+    public accessRightsStore: AccessRightsStore,
   ) {
     this.settingsStore = settingsStore;
     this.infoPanelStore = infoPanelStore;
     this.userStore = userStore;
     this.targetUserStore = targetUserStore;
     this.groupsStore = groupsStore;
-    this.selectionStore = selectionStore;
+    this.accountsHotkeysStore = accountsHotkeysStore;
+    this.accessRightsStore = accessRightsStore;
 
     makeAutoObservable(this);
   }
@@ -207,7 +228,7 @@ class UsersStore {
       });
 
       if (!this.needResetUserSelection) {
-        this.selectionStore.updateSelection(this.peopleList);
+        this.updateSelection();
       }
     }
 
@@ -249,7 +270,7 @@ class UsersStore {
     await this.getUsersList(filter); // rooms
 
     if (updatedUsers && !this.needResetUserSelection) {
-      this.selectionStore.updateSelection(this.peopleList);
+      this.updateSelection();
     }
 
     return updatedUsers;
@@ -554,9 +575,392 @@ class UsersStore {
 
   get needResetUserSelection() {
     const { isVisible: infoPanelVisible } = this.infoPanelStore;
-    const { isOneUserSelection, isOnlyBufferSelection } = this.selectionStore;
 
-    return !infoPanelVisible || (!isOneUserSelection && !isOnlyBufferSelection);
+    return (
+      !infoPanelVisible ||
+      (!this.isOneUserSelection && !this.isOnlyBufferSelection)
+    );
+  }
+
+  resetUsersRight = () => {
+    Object.keys(this.selectionUsersRights).forEach((key) => {
+      this.selectionUsersRights[key as keyof typeof this.selectionUsersRights] =
+        0;
+    });
+  };
+
+  incrementUsersRights = (
+    selection: ReturnType<typeof this.getPeopleListItem>,
+  ) => {
+    Object.keys(this.selectionUsersRights).forEach((key) => {
+      if (key in selection && !selection[key as keyof typeof selection]) return;
+
+      type TKey = keyof typeof this.selectionUsersRights;
+
+      this.selectionUsersRights[key as TKey] =
+        this.selectionUsersRights[key as TKey] + 1;
+    });
+  };
+
+  decrementUsersRights = (
+    selection: ReturnType<typeof this.getPeopleListItem>,
+  ) => {
+    Object.keys(this.selectionUsersRights).forEach((key) => {
+      if (key in selection && !selection[key as keyof typeof selection]) return;
+
+      type TKey = keyof typeof this.selectionUsersRights;
+
+      this.selectionUsersRights[key as TKey] =
+        this.selectionUsersRights[key as TKey] - 1;
+    });
+  };
+
+  recalculateUsersRights = () => {
+    this.resetUsersRight();
+    this.selection.forEach((u) => this.incrementUsersRights(u));
+  };
+
+  setSelection = (selection: ReturnType<typeof this.getPeopleListItem>[]) => {
+    this.selection = selection;
+
+    if (selection.length === 0) this.resetUsersRight();
+  };
+
+  updateSelection = () => {
+    const hasSelection = !!this.selection.length;
+
+    this.peopleList.forEach((el) => {
+      if (hasSelection && this.selection[0].id === el.id)
+        this.setSelection([el]);
+
+      if (this.bufferSelection && this.bufferSelection.id === el.id)
+        this.setBufferSelection(el);
+    });
+
+    if (hasSelection) {
+      this.recalculateUsersRights();
+    }
+  };
+
+  setSelections = (added: Element[], removed: Element[], clear = false) => {
+    if (clear) {
+      this.selection = [];
+    }
+
+    const newSelections: typeof this.selection = JSON.parse(
+      JSON.stringify(this.selection),
+    );
+
+    added.forEach((item) => {
+      if (!item) return;
+
+      const value = item.getElementsByClassName("user-item")
+        ? item.getElementsByClassName("user-item")[0]?.getAttribute("value")
+        : null;
+
+      if (!value) return;
+
+      const splitValue = value.split("_");
+      const id = splitValue.slice(1, -3).join("_");
+
+      const isFound = this.selection.findIndex((f) => f.id === id) === -1;
+
+      if (isFound) {
+        const user = this.peopleList.find((f) => f.id === id);
+
+        if (user) {
+          this.incrementUsersRights(user);
+          newSelections.push(user);
+        }
+      }
+    });
+
+    removed.forEach((item) => {
+      if (!item) return;
+
+      const value = item.getElementsByClassName("user-item")
+        ? item.getElementsByClassName("user-item")[0]?.getAttribute("value")
+        : null;
+
+      if (!value) return;
+      const splitValue = value.split("_");
+      const id = splitValue.slice(1, -3).join("_");
+
+      const index = newSelections.findIndex((i) => i.id === id);
+
+      if (index !== -1) {
+        this.decrementUsersRights(newSelections[index]);
+        newSelections.splice(index, 1);
+      }
+    });
+
+    this.setSelection(newSelections);
+  };
+
+  setBufferSelection = (bufferSelection: typeof this.bufferSelection) => {
+    this.bufferSelection = bufferSelection;
+  };
+
+  selectUser = (user: ReturnType<typeof this.getPeopleListItem>) => {
+    const index = this.selection.findIndex((el) => el.id === user!.id);
+
+    const exists = index > -1;
+
+    if (exists) return;
+
+    this.setSelection([...this.selection, user!]);
+    this.accountsHotkeysStore.setHotkeyCaret(null);
+
+    this.incrementUsersRights(user);
+  };
+
+  deselectUser = (user: ReturnType<typeof this.getPeopleListItem>) => {
+    const index = this.selection.findIndex((el) => el.id === user.id);
+
+    const exists = index > -1;
+
+    if (!exists) return;
+
+    const newData = [...this.selection];
+
+    newData.splice(index, 1);
+
+    this.decrementUsersRights(this.selection[index]);
+
+    this.setSelection(newData);
+  };
+
+  selectAll = () => {
+    this.bufferSelection = null;
+
+    this.setSelection(this.peopleList);
+  };
+
+  clearSelection = () => {
+    return this.setSelection([]);
+  };
+
+  selectRow = (item: ReturnType<typeof this.getPeopleListItem>) => {
+    const isItemSelected = !!this.selection.find((s) => s.id === item.id);
+    const isSingleSelected = isItemSelected && this.selection.length === 1;
+
+    if (this.bufferSelection) {
+      this.setBufferSelection(null);
+    }
+
+    if (isSingleSelected) {
+      this.deselectUser(item);
+    } else {
+      this.clearSelection();
+      this.selectUser(item);
+    }
+  };
+
+  singleContextMenuAction = (item: typeof this.bufferSelection) => {
+    if (this.selection.length) {
+      this.clearSelection();
+    }
+
+    this.setBufferSelection(item);
+  };
+
+  multipleContextMenuAction = (
+    item: ReturnType<typeof this.getPeopleListItem>,
+  ) => {
+    const isItemSelected = !!this.selection.find((s) => s.id === item.id);
+    const isSingleSelected = isItemSelected && this.selection.length === 1;
+
+    if (!isItemSelected || isSingleSelected) {
+      this.clearSelection();
+      this.setBufferSelection(item);
+    }
+  };
+
+  resetSelections = () => {
+    this.setBufferSelection(null);
+    this.clearSelection();
+  };
+
+  selectByStatus = (status: EmployeeStatus) => {
+    this.bufferSelection = null;
+    const list = this.peopleList.filter((u) => u.status === status);
+
+    this.setSelection(list);
+  };
+
+  getUsersBySelected = (
+    users: ReturnType<typeof this.getPeopleListItem>[],
+    selected: TSelected,
+  ) => {
+    const newSelection: ReturnType<typeof this.getPeopleListItem>[] = [];
+    users.forEach((user) => {
+      const checked = getUserChecked(user as unknown as TUser, selected);
+
+      if (checked) newSelection.push(user);
+    });
+
+    return newSelection;
+  };
+
+  setSelected = (selected: TSelected) => {
+    this.bufferSelection = null;
+    this.selected = selected;
+
+    this.setSelection(this.getUsersBySelected(this.peopleList, selected));
+
+    if (selected !== "none" && selected !== "close") {
+      this.resetUsersRight();
+      this.peopleList.forEach((u) => this.incrementUsersRights(u));
+    }
+
+    this.accountsHotkeysStore.setHotkeyCaret(null);
+
+    return selected;
+  };
+
+  get hasAnybodySelected() {
+    return this.selection.length > 0;
+  }
+
+  get hasUsersToMakeEmployees() {
+    const { canMakeEmployeeUser } = this.accessRightsStore;
+
+    const users = this.selection.filter((x) => canMakeEmployeeUser(x));
+
+    return users.length > 0;
+  }
+
+  get hasUsersToMakePowerUser() {
+    const { canMakePowerUser } = this.accessRightsStore;
+    const users = this.selection.filter((x) => canMakePowerUser(x));
+
+    return users.length > 0;
+  }
+
+  get getUsersToMakeEmployees() {
+    const { canMakeEmployeeUser } = this.accessRightsStore;
+
+    const users = this.selection.filter((x) => canMakeEmployeeUser(x));
+
+    return users.map((u) => u);
+  }
+
+  get userSelectionRole() {
+    if (this.selection.length !== 1) return null;
+
+    return this.selection[0].role;
+  }
+
+  get isOneUserSelection() {
+    return this.selection.length > 0 && this.selection.length === 1;
+  }
+
+  get isOnlyBufferSelection() {
+    return !this.selection.length && !!this.bufferSelection;
+  }
+
+  get hasFreeUsers() {
+    const users = this.selection.filter(
+      (x) => x.status !== EmployeeStatus.Disabled && x.isVisitor,
+    );
+
+    return users.length > 0;
+  }
+
+  get hasUsersToActivate() {
+    const { canActivateUser } = this.accessRightsStore;
+
+    const users = this.selection.filter((x) => canActivateUser(x));
+
+    return users.length > 0;
+  }
+
+  get getUsersToActivate() {
+    const { canActivateUser } = this.accessRightsStore;
+
+    const users = this.selection.filter((x) => canActivateUser(x));
+
+    return users.map((u) => u);
+  }
+
+  get hasUsersToDisable() {
+    const { canDisableUser } = this.accessRightsStore;
+
+    const users = this.selection.filter((x) => canDisableUser(x));
+
+    return users.length > 0;
+  }
+
+  get getUsersToDisable() {
+    const { canDisableUser } = this.accessRightsStore;
+
+    const users = this.selection.filter((x) => canDisableUser(x));
+
+    return users.map((u) => u);
+  }
+
+  get hasUsersToInvite() {
+    const { canInviteUser } = this.accessRightsStore;
+
+    const users = this.selection.filter((x) => canInviteUser(x));
+
+    return users.length > 0;
+  }
+
+  get getUsersToInviteIds() {
+    const { canInviteUser } = this.accessRightsStore;
+
+    const users = this.selection.filter((x) => canInviteUser(x));
+
+    return users.length > 0 ? users.map((u) => u.id) : [];
+  }
+
+  get hasUsersToRemove() {
+    const { canRemoveUser } = this.accessRightsStore;
+
+    const users = this.selection.filter((x) => canRemoveUser(x));
+
+    return users.length > 0;
+  }
+
+  get hasOnlyOneUserToRemove() {
+    const { canRemoveUser } = this.accessRightsStore;
+
+    const users = this.selection.filter((x) => canRemoveUser(x));
+
+    return users.length === 1;
+  }
+
+  get getUsersToRemoveIds() {
+    const { canRemoveUser } = this.accessRightsStore;
+
+    const users = this.selection.filter((x) => canRemoveUser(x));
+
+    return users.map((u) => u.id);
+  }
+
+  get hasUsersToChangeQuota() {
+    const { canChangeQuota } = this.accessRightsStore;
+
+    const users = this.selection.filter(() => canChangeQuota());
+
+    return users.length > 0;
+  }
+
+  get hasUsersToDisableQuota() {
+    const { canDisableQuota } = this.accessRightsStore;
+
+    const users = this.selection.filter(() => canDisableQuota());
+
+    return users.length > 0;
+  }
+
+  get hasUsersToResetQuota() {
+    const { caResetCustomQuota } = this.accessRightsStore;
+
+    const users = this.selection.filter((x) => caResetCustomQuota(x));
+
+    return users.length > 0;
   }
 }
 

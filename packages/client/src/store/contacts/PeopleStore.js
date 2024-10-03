@@ -37,7 +37,6 @@ import DefaultQuotaReactSvgUrl from "PUBLIC_DIR/images/default.quota.react.svg?u
 import GroupsStore from "./GroupsStore";
 import UsersStore from "./UsersStore";
 import TargetUserStore from "./TargetUserStore";
-import EditingFormStore from "./EditingFormStore";
 import FilterStore from "./FilterStore";
 import SelectionStore from "./SelectionPeopleStore";
 import AccountsHotkeysStore from "./AccountsHotkeysStore";
@@ -66,7 +65,6 @@ class PeopleStore {
   groupsStore = null;
   usersStore = null;
   targetUserStore = null;
-  editingFormStore = null;
   filterStore = null;
   selectionStore = null;
   headerMenuStore = null;
@@ -112,7 +110,6 @@ class PeopleStore {
       clientLoadingStore,
     );
     this.targetUserStore = new TargetUserStore(this, userStore);
-    this.editingFormStore = new EditingFormStore(this);
     this.filterStore = new FilterStore(userStore);
     this.selectionStore = new SelectionStore(this);
     this.headerMenuStore = new HeaderMenuStore(this);

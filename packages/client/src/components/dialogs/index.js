@@ -40,7 +40,6 @@ import DeleteOwnerProfileDialog from "./DeleteOwnerProfileDialog";
 import SendInviteDialog from "./SendInviteDialog";
 import ChangeUserStatusDialog from "./ChangeUserStatusDialog";
 import ChangeUserTypeDialog from "./ChangeUserTypeDialog";
-import DataLossWarningDialog from "./DataLossWarningDialog";
 import ResetApplicationDialog from "./ResetApplicationDialog";
 import BackupCodesDialog from "./BackupCodesDialog";
 import CreateRoomDialog from "./CreateEditRoomDialog/CreateRoomDialog";
@@ -87,7 +86,6 @@ export {
   SendInviteDialog,
   ChangeUserStatusDialog,
   ChangeUserTypeDialog,
-  DataLossWarningDialog,
   ResetApplicationDialog,
   BackupCodesDialog,
   CreateRoomDialog,

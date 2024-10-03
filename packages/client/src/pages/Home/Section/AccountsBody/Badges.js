@@ -175,9 +175,9 @@ const Badges = ({
 };
 
 export default inject(({ peopleStore }) => {
-  const { filterStore } = peopleStore;
+  const { usersStore } = peopleStore;
 
-  const { filter } = filterStore;
+  const { filter } = usersStore;
 
   return { filter };
 })(withTranslation(["Common"])(observer(Badges)));

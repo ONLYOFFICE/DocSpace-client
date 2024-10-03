@@ -124,15 +124,15 @@ const PeopleRowContainer = ({
 
 export default inject(
   ({ peopleStore, filesStore, settingsStore, infoPanelStore }) => {
-    const {
-      usersStore,
-      filterStore,
-      viewAs: accountsViewAs,
-      setViewAs,
-    } = peopleStore;
+    const { usersStore, viewAs: accountsViewAs, setViewAs } = peopleStore;
     const { theme, withPaging, currentDeviceType } = settingsStore;
-    const { peopleList, hasMoreAccounts, fetchMoreAccounts } = usersStore;
-    const { filterTotal, isFiltered } = filterStore;
+    const {
+      peopleList,
+      hasMoreAccounts,
+      fetchMoreAccounts,
+      filterTotal,
+      isFiltered,
+    } = usersStore;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
 

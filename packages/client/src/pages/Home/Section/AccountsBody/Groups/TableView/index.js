@@ -136,7 +136,6 @@ export default inject(
     const {
       usersStore,
       groupsStore,
-      filterStore,
       viewAs: accountsViewAs,
       setViewAs,
       changeType,

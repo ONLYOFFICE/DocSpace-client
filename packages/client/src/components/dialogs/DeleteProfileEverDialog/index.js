@@ -231,10 +231,11 @@ DeleteProfileEverDialog.propTypes = {
 };
 
 export default inject(({ peopleStore }, { users }) => {
-  const { dialogStore, selectionStore, filterStore, usersStore } = peopleStore;
+  const { dialogStore, selectionStore, usersStore } = peopleStore;
   const { refreshInsideGroup } = peopleStore.groupsStore;
 
-  const { getUsersList, needResetUserSelection } = peopleStore.usersStore;
+  const { getUsersList, needResetUserSelection, filter, removeUser } =
+    usersStore;
 
   const {
     setDataReassignmentDialogVisible,
@@ -263,9 +264,9 @@ export default inject(({ peopleStore }, { users }) => {
     setIsDeletingUserWithReassignment,
     setDialogData,
     setSelected,
-    removeUser: usersStore.removeUser,
+    removeUser,
     needResetUserSelection,
-    filter: filterStore.filter,
+    filter,
     refreshInsideGroup,
     getUsersList,
     deleteWithoutReassign,

@@ -137,11 +137,11 @@ const SectionBodyContent = (props) => {
 export default inject(({ peopleStore, filesActionsStore }) => {
   const {
     viewAs: accountsViewAs,
-    filterStore,
+    usersStore,
     enabledHotkeys,
     setEnabledHotkeys,
   } = peopleStore;
-  const { isFiltered } = filterStore;
+  const { isFiltered, accountsIsIsLoading } = usersStore;
 
   const {
     setSelection: setPeopleSelection,
@@ -155,7 +155,6 @@ export default inject(({ peopleStore, filesActionsStore }) => {
   } = peopleStore.groupsStore;
 
   const { setChangeOwnerDialogVisible } = peopleStore.dialogStore;
-  const { accountsIsIsLoading } = peopleStore.usersStore;
 
   const {
     selectBottom,

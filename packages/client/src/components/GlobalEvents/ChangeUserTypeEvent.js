@@ -145,12 +145,15 @@ export default inject(
     } = dialogsStore;
 
     const { setInfoPanelSelection } = infoPanelStore;
-    const { dialogStore, filterStore, usersStore } = peopleStore;
+    const { dialogStore, usersStore } = peopleStore;
 
     const { data: peopleDialogData } = dialogStore;
-    const { filter: peopleFilter } = filterStore;
-    const { updateUserType, getPeopleListItem, needResetUserSelection } =
-      usersStore;
+    const {
+      updateUserType,
+      getPeopleListItem,
+      needResetUserSelection,
+      filter: peopleFilter,
+    } = usersStore;
     const { setSelected } = peopleStore.selectionStore;
     return {
       needResetUserSelection,

@@ -27,21 +27,23 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
 import api from "@docspace/shared/api";
+import Filter from "@docspace/shared/api/people/filter";
 import {
   EmployeeStatus,
   EmployeeType,
   EmployeeActivationStatus,
 } from "@docspace/shared/enums";
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
-const { Filter } = api;
-
-const fullAccessId = "00000000-0000-0000-0000-000000000000";
+import config from "PACKAGE_FILE";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
 
 class UsersStore {
   peopleStore = null;
   settingsStore = null;
   infoPanelStore = null;
   userStore = null;
+
+  filter = Filter.getDefault();
 
   users = [];
   providers = [];
@@ -107,7 +109,7 @@ class UsersStore {
     this.requestRunning = false;
 
     if (updateFilter) {
-      this.peopleStore.filterStore.setFilterParams(filterData);
+      this.setFilterParams(filterData);
     }
 
     this.setUsers(res.items);
@@ -138,7 +140,7 @@ class UsersStore {
   };
 
   createUser = async (user) => {
-    const filter = this.peopleStore.filterStore.filter;
+    const filter = this.filter;
     const member = this.employeeWrapperToMemberModel(user);
     let result;
     const res = await api.people.createUser(member);
@@ -219,7 +221,7 @@ class UsersStore {
   };
 
   setCustomUserQuota = async (quotaSize, userIds) => {
-    const filter = this.peopleStore.filterStore.filter;
+    const filter = this.filter;
     const users = await api.people.setCustomUserQuota(userIds, +quotaSize);
 
     await this.getUsersList(filter, true);
@@ -228,7 +230,7 @@ class UsersStore {
   };
 
   resetUserQuota = async (userIds) => {
-    const filter = this.peopleStore.filterStore.filter;
+    const filter = this.filter;
     const users = await api.people.resetUserQuota(userIds);
 
     await this.getUsersList(filter, true);
@@ -430,7 +432,7 @@ class UsersStore {
 
     this.setAccountsIsIsLoading(true);
 
-    const { filter, setFilterParams } = this.peopleStore.filterStore;
+    const { filter, setFilterParams } = this;
 
     const newFilter = filter.clone();
     newFilter.page += 1;
@@ -445,7 +447,7 @@ class UsersStore {
   };
 
   get hasMoreAccounts() {
-    return this.peopleList.length < this.peopleStore.filterStore.filterTotal;
+    return this.peopleList.length < this.filterTotal;
   }
 
   getUsersByQuery = async (query) => {
@@ -542,6 +544,53 @@ class UsersStore {
 
     return Promise.resolve(result);
   };
+
+  setFilterUrl = (filter) => {
+    const urlFilter = filter.toUrlParams();
+    const newPath = combineUrl(`/accounts/people/filter?${urlFilter}`);
+
+    if (window.location.pathname + window.location.search === newPath) return;
+
+    window.history.replaceState(
+      "",
+      "",
+      combineUrl(window.ClientConfig?.proxy?.url, config.homepage, newPath),
+    );
+  };
+
+  setFilterParams = (data) => {
+    this.setFilterUrl(data);
+    this.setFilter(data);
+  };
+
+  resetFilter = () => {
+    this.setFilter(Filter.getDefault());
+  };
+
+  setFilter = (filter) => {
+    const key = `PeopleFilter=${this.userStore.user.id}`;
+    const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
+    localStorage.setItem(key, value);
+
+    this.filter = filter;
+  };
+
+  get filterTotal() {
+    return this.filter.total;
+  }
+
+  get isFiltered() {
+    return (
+      this.filter.activationStatus ||
+      this.filter.employeeStatus ||
+      this.filter.payments ||
+      this.filter.search ||
+      this.filter.role ||
+      this.filter.accountLoginType ||
+      this.filter.withoutGroup ||
+      this.filter.group
+    );
+  }
 }
 
 export default UsersStore;

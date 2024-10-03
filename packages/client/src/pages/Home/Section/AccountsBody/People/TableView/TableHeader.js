@@ -210,9 +210,9 @@ export default inject(
     currentQuotaStore,
     tableStore,
   }) => {
-    const { filterStore } = peopleStore;
+    const { usersStore } = peopleStore;
 
-    const { filter, setFilter } = filterStore;
+    const { filter, setFilter } = usersStore;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { withPaging } = settingsStore;

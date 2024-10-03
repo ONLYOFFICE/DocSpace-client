@@ -2481,7 +2481,7 @@ export default inject(
     const { isIndexEditingMode } = indexingStore;
     const { isIndexedFolder } = selectedFolderStore;
     const {
-      filterStore,
+      usersStore,
 
       groupsStore,
       viewAs: accountsViewAs,
@@ -2495,8 +2495,7 @@ export default inject(
       setInsideGroupFilter,
     } = groupsStore;
 
-    const { filter: accountsFilter, setFilter: setAccountsFilter } =
-      filterStore;
+    const { filter: accountsFilter, setFilter: setAccountsFilter } = usersStore;
     const { isPublicRoom, publicRoomKey } = publicRoomStore;
 
     const { canSearchByContent } = filesSettingsStore;

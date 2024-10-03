@@ -574,9 +574,8 @@ export default inject(
   }) => {
     const { theme, standalone } = settingsStore;
 
-    const { getUsersByQuery, inviteUsers, getUsersList } =
+    const { getUsersByQuery, inviteUsers, getUsersList, filter } =
       peopleStore.usersStore;
-    const { filter } = peopleStore.filterStore;
     const {
       setIsMobileHidden: setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,

@@ -218,14 +218,18 @@ export default inject(
   }) => {
     const {
       usersStore,
-      filterStore,
       viewAs: accountsViewAs,
       setViewAs,
       changeType,
     } = peopleStore;
     const { theme, withPaging, currentDeviceType } = settingsStore;
-    const { peopleList, hasMoreAccounts, fetchMoreAccounts } = usersStore;
-    const { filterTotal, isFiltered } = filterStore;
+    const {
+      peopleList,
+      hasMoreAccounts,
+      fetchMoreAccounts,
+      filterTotal,
+      isFiltered,
+    } = usersStore;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { isAdmin, isOwner, id: userId } = userStore.user;

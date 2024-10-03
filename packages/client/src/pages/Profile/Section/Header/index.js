@@ -235,9 +235,9 @@ export default inject(
 
     const { isVisitor, isCollaborator, user } = userStore.user;
 
-    const { targetUserStore, filterStore, dialogStore } = peopleStore;
+    const { targetUserStore, usersStore, dialogStore } = peopleStore;
 
-    const { filter, setFilterParams } = filterStore;
+    const { filter, setFilterParams } = usersStore;
 
     const { targetUser, isMe } = targetUserStore;
 

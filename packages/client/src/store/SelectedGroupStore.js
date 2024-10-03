@@ -46,9 +46,8 @@ class SelectedGroupStore {
   }
 
   selectGroup = (groupId) => {
-    const { filter } = this.peopleStore.filterStore;
     const { clearSelection } = this.peopleStore.selectionStore;
-    const { getUsersList } = this.peopleStore.usersStore;
+    const { getUsersList, filter } = this.peopleStore.usersStore;
 
     let newFilter = filter.clone();
     newFilter.group = groupId;
@@ -77,7 +76,7 @@ class SelectedGroupStore {
 
   get isEmptyGroup() {
     const { groups } = this.peopleStore.groupsStore;
-    const { filter } = this.peopleStore.filterStore;
+    const { filter } = this.peopleStore.usersStore;
 
     const { group, search, role, activationStatus, employeeStatus } = filter;
 

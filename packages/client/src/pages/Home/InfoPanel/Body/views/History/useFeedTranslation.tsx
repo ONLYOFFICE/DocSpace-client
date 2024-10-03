@@ -1,5 +1,6 @@
 import { TTranslation } from "@docspace/shared/types";
 import { Trans } from "react-i18next";
+import moment from "moment";
 import { AnyFeedInfo } from "./FeedInfo";
 import { HistoryText } from "./HistoryText";
 
@@ -34,6 +35,11 @@ export const useFeedTranslation = (
       return t("InfoPanel:FileCopied");
     case "FileDeleted":
       return t("InfoPanel:FileDeleted");
+    case "FileIndexChanged":
+    case "FolderIndexChanged":
+      return t("InfoPanel:IndexChanged");
+    case "FolderIndexReordered":
+      return t("InfoPanel:FolderIndexReordered");
     case "FolderCreated":
       return t("InfoPanel:FolderCreated");
     case "FolderRenamed":
@@ -141,6 +147,50 @@ export const useFeedTranslation = (
       return t("InfoPanel:RoomUpdateAccess");
     case "RoomGroupRemove":
       return t("InfoPanel:RoomGroupRemove");
+    case "RoomWatermarkSet":
+      return t("InfoPanel:RoomWatermarkSet");
+    case "RoomIndexingEnabled":
+      return t("InfoPanel:RoomIndexingEnabled");
+    case "RoomIndexingDisabled":
+      return t("InfoPanel:RoomIndexingDisabled");
+    case "RoomLifeTimeSet": {
+      const periodLifeTime = feed.data.lifeTime.period;
+      const value = feed.data.lifeTime.value;
+      const maxValue = 9999;
+      const period =
+        periodLifeTime === 0
+          ? "days"
+          : periodLifeTime === 1
+            ? "months"
+            : "years";
+
+      const thresholds =
+        periodLifeTime === 0
+          ? { d: maxValue }
+          : periodLifeTime === 1
+            ? { M: maxValue }
+            : { y: maxValue };
+
+      const data = moment.duration(value, period).humanize(false, thresholds);
+
+      return (
+        <Trans
+          t={t}
+          ns="InfoPanel"
+          i18nKey="RoomLifeTimeSet"
+          values={{ data }}
+          components={{
+            1: <strong />,
+          }}
+        />
+      );
+    }
+    case "RoomLifeTimeDisabled":
+      return t("InfoPanel:RoomLifeTimeDisabled");
+    case "RoomDenyDownloadEnabled":
+      return t("InfoPanel:RoomDenyDownloadEnabled");
+    case "RoomDenyDownloadDisabled":
+      return t("InfoPanel:RoomDenyDownloadDisabled");
     default:
       return null;
   }

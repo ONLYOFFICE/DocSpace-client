@@ -161,14 +161,6 @@ class CurrentQuotasStore {
     return result?.value;
   }
 
-  get isBrandingAvailable() {
-    const result = this.currentPortalQuotaFeatures.find(
-      (obj) => obj.id === "branding",
-    );
-
-    return result?.value;
-  }
-
   get isOAuthAvailable() {
     const result = this.currentPortalQuotaFeatures.find(
       (obj) => obj.id === "oauth",

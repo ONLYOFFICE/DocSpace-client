@@ -88,7 +88,7 @@ const Branding = ({
   standalone,
   deviceType,
   portals,
-  isBrandingAvailable,
+  displayAbout,
 }) => {
   const isMobileView = deviceType === DeviceType.mobile;
 
@@ -112,7 +112,7 @@ const Branding = ({
       <MobileView
         isSettingPaid={isSettingPaid || standalone}
         showSettings={showSettings}
-        isBrandingAvailable={isBrandingAvailable}
+        displayAbout={displayAbout}
       />
     );
 
@@ -122,7 +122,7 @@ const Branding = ({
       {showSettings && (
         <>
           <hr />
-          {!isBrandingAvailable ? (
+          {displayAbout ? (
             <>
               {isLoadedCompanyInfoSettingsData ? (
                 <div className="section-description settings_unavailable">
@@ -146,10 +146,15 @@ const Branding = ({
 };
 
 export default inject(({ settingsStore, currentQuotaStore, common }) => {
-  const { isCustomizationAvailable, isBrandingAvailable } = currentQuotaStore;
+  const { isCustomizationAvailable } = currentQuotaStore;
   const { isLoadedCompanyInfoSettingsData } = common;
-  const { standalone, portals, deviceType, checkEnablePortalSettings } =
-    settingsStore;
+  const {
+    standalone,
+    portals,
+    deviceType,
+    checkEnablePortalSettings,
+    displayAbout,
+  } = settingsStore;
   const isSettingPaid = checkEnablePortalSettings(isCustomizationAvailable);
 
   return {
@@ -158,6 +163,6 @@ export default inject(({ settingsStore, currentQuotaStore, common }) => {
     standalone,
     portals,
     deviceType,
-    isBrandingAvailable,
+    displayAbout,
   };
 })(withLoading(withTranslation(["Settings", "Common"])(observer(Branding))));

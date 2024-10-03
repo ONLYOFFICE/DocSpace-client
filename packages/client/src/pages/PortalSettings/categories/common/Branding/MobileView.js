@@ -35,7 +35,7 @@ const StyledWrapper = styled.div`
   flex-direction: column;
 `;
 
-const MobileView = ({ isSettingPaid, showSettings, isBrandingAvailable }) => {
+const MobileView = ({ isSettingPaid, showSettings, displayAbout }) => {
   const { t } = useTranslation(["Settings"]);
   const navigate = useNavigate();
   const baseUrl = isManagement()
@@ -59,7 +59,7 @@ const MobileView = ({ isSettingPaid, showSettings, isBrandingAvailable }) => {
       />
       {showSettings && (
         <>
-          {!isBrandingAvailable && (
+          {displayAbout && (
             <MobileCategoryWrapper
               title={t("CompanyInfoSettings")}
               subtitle={t("BrandingSectionDescription", {

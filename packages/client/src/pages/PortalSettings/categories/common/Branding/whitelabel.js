@@ -76,7 +76,7 @@ const WhiteLabelComponent = (props) => {
     theme,
 
     isWhitelableLoaded,
-    isBrandingAvailable,
+    displayAbout,
   } = props;
   const navigate = useNavigate();
   const location = useLocation();
@@ -86,7 +86,7 @@ const WhiteLabelComponent = (props) => {
   const [isEmpty, setIsEmpty] = useState(isWhitelableLoaded && !logoText);
 
   const isMobileView = deviceType === DeviceType.mobile;
-  const showAbout = standalone && isManagement() && !isBrandingAvailable;
+  const showAbout = standalone && isManagement() && displayAbout;
 
   const init = async () => {
     const isWhiteLabelPage = standalone
@@ -600,8 +600,9 @@ export const WhiteLabel = inject(
       deviceType,
       checkEnablePortalSettings,
       standalone,
+      displayAbout,
     } = settingsStore;
-    const { isCustomizationAvailable, isBrandingAvailable } = currentQuotaStore;
+    const { isCustomizationAvailable } = currentQuotaStore;
 
     const isSettingPaid = checkEnablePortalSettings(isCustomizationAvailable);
 
@@ -625,7 +626,7 @@ export const WhiteLabel = inject(
       standalone,
 
       isWhitelableLoaded,
-      isBrandingAvailable,
+      displayAbout,
     };
   },
 )(

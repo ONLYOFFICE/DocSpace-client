@@ -84,7 +84,6 @@ class ProfileActionsStore {
     userStore,
     settingsStore,
     currentTariffStatusStore,
-    currentQuotaStore,
   ) {
     this.authStore = authStore;
     this.filesStore = filesStore;
@@ -95,7 +94,6 @@ class ProfileActionsStore {
     this.userStore = userStore;
     this.settingsStore = settingsStore;
     this.currentTariffStatusStore = currentTariffStatusStore;
-    this.currentQuotaStore = currentQuotaStore;
 
     this.isShowLiveChat = this.getStateLiveChat();
 
@@ -250,8 +248,8 @@ class ProfileActionsStore {
       baseDomain,
       tenantAlias,
       limitedAccessSpace,
+      displayAbout,
     } = this.settingsStore;
-    const { isBrandingAvailable } = this.currentQuotaStore;
     const isAdmin = this.authStore.isAdmin;
     const isCommunity = this.currentTariffStatusStore.isCommunity;
     // const { isOwner } = this.userStore.user;
@@ -361,7 +359,7 @@ class ProfileActionsStore {
 
     let about = null;
 
-    if (!isBrandingAvailable) {
+    if (displayAbout) {
       about = {
         key: "user-menu-about",
         icon: InfoOutlineReactSvgUrl,

@@ -27,6 +27,7 @@
 import React, { useState, useRef } from "react";
 
 import { isMobile } from "@docspace/shared/utils";
+import { useClickOutside } from "@docspace/shared/utils/useClickOutside";
 
 import {
   ModalDialog,
@@ -54,8 +55,9 @@ export const SelectColor = ({
   t,
   onChangeColor,
   roomColor,
+  openColorPicker,
+  setOpenColorPicker,
 }: SelectColorProps) => {
-  const [openColorPicker, setOpenColorPicker] = useState<boolean>(false);
   const isDefaultColor = logoColors.includes(roomColor);
   const [pickerColor, setPickerColor] = useState<string | null>(
     isDefaultColor ? "" : roomColor || "",
@@ -67,8 +69,13 @@ export const SelectColor = ({
 
   const iconRef = useRef(null);
 
-  const onApply = (color: string) => {
+  const pickerRef = useRef(null);
+
+  useClickOutside(pickerRef, () => {
     setOpenColorPicker(false);
+  });
+
+  const onApply = (color: string) => {
     setPickerColor(color);
     onChangeColor(color);
   };
@@ -152,6 +159,8 @@ export const SelectColor = ({
                 id="buttons-hex"
                 onClose={() => setOpenColorPicker(false)}
                 onApply={onApply}
+                isPickerOnly
+                handleChange={onApply}
                 appliedColor={selectedColor}
                 applyButtonLabel={t("Common:ApplyButton")}
                 cancelButtonLabel={t("Common:CancelButton")}
@@ -172,6 +181,9 @@ export const SelectColor = ({
                 id="accent-hex"
                 onClose={() => setOpenColorPicker(false)}
                 onApply={onApply}
+                forwardedRef={pickerRef}
+                isPickerOnly
+                handleChange={onApply}
                 appliedColor={selectedColor}
                 applyButtonLabel={t("Common:ApplyButton")}
                 cancelButtonLabel={t("Common:CancelButton")}

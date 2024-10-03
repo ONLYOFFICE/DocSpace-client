@@ -130,6 +130,8 @@ const RoomLogoCover = ({
   forwardedRef,
   scrollHeight,
   currentColorScheme,
+  openColorPicker,
+  setOpenColorPicker,
 }: RoomLogoCoverProps) => {
   const { t } = useTranslation(["Common", "CreateEditRoomDialog"]);
 
@@ -178,6 +180,8 @@ const RoomLogoCover = ({
           selectedColor={roomCoverDialogProps.color}
           logoColors={globalColors.logoColors}
           roomColor={roomCoverDialogProps.customColor}
+          openColorPicker={openColorPicker}
+          setOpenColorPicker={setOpenColorPicker}
           onChangeColor={(color) =>
             setRoomCoverDialogProps({
               ...roomCoverDialogProps,

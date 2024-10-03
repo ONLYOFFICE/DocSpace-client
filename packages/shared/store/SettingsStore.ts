@@ -325,6 +325,8 @@ class SettingsStore {
 
   recaptchaType: RecaptchaType | null = null;
 
+  displayAbout: boolean = false;
+
   constructor() {
     makeAutoObservable(this);
   }

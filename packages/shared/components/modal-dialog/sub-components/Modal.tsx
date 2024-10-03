@@ -28,6 +28,7 @@ import React from "react";
 import { isIOS, isMobileOnly, isSafari } from "react-device-detect";
 
 import { classNames } from "../../../utils";
+import { ASIDE_PADDING_AFTER_LAST_ITEM } from "../../../constants";
 import { DialogSkeleton, DialogAsideSkeleton } from "../../../skeletons";
 
 import { Scrollbar } from "../../scrollbar";
@@ -212,7 +213,11 @@ const Modal = ({
                       // embedded={embedded}
                     >
                       {currentDisplayType === "aside" && withBodyScroll ? (
-                        <Scrollbar id="modal-scroll" className="modal-scroll">
+                        <Scrollbar
+                          id="modal-scroll"
+                          className="modal-scroll"
+                          paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
+                        >
                           {bodyComponent}
                         </Scrollbar>
                       ) : (

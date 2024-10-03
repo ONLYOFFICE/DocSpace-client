@@ -121,7 +121,7 @@ const ImageWatermark = ({
     const { enabled, isImage } = initialWatermarksSettings;
 
     if (isEdit && isImage) {
-      setWatermarks({ ...initialWatermarksSettings, enabled: true }, true);
+      setWatermarks({ ...initialWatermarksSettings }, true);
       return;
     }
 
@@ -130,7 +130,7 @@ const ImageWatermark = ({
       scale: initialInfoRef.scale.key,
       additions: 0,
       isImage: true,
-      enabled: true,
+      //enabled: true,
     });
   }, []);
 
@@ -231,7 +231,6 @@ const ImageWatermark = ({
   //   setWatermarks({ image: fileInfo });
   // };
 
-  console.log("selectedRotate", selectedRotate.key, selectedScale.key);
   return (
     <StyledWatermark
       rotate={selectedRotate.key}

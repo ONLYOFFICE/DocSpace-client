@@ -24,65 +24,46 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
+
+import React from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import { isManagement } from "@docspace/shared/utils/common";
-import MobileCategoryWrapper from "../../../components/MobileCategoryWrapper";
+import { ReactSVG } from "react-svg";
+import { Text } from "@docspace/shared/components/text";
 
 const StyledWrapper = styled.div`
+  background: ${(props) =>
+    props.theme.client.settings.common.whiteLabel.notAvailableBackground};
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+
+  .lock-icon {
+    width: 16px;
+    height: 16px;
+    div > svg {
+      path {
+        fill: ${(props) =>
+          props.theme.client.settings.common.whiteLabel.textColor};
+      }
+    }
+  }
 `;
 
-const MobileView = ({ isSettingPaid, showSettings, displayAbout }) => {
-  const { t } = useTranslation(["Settings"]);
-  const navigate = useNavigate();
-  const baseUrl = isManagement()
-    ? "/management/settings"
-    : "/portal-settings/customization";
-
-  const onClickLink = (e) => {
-    e.preventDefault();
-    navigate(e.target.pathname);
-  };
-
+const NotAvailable = () => {
+  const { t } = useTranslation("Settings");
   return (
     <StyledWrapper>
-      <MobileCategoryWrapper
-        title={t("WhiteLabel")}
-        subtitle={t("BrandingSubtitle")}
-        url={`${baseUrl}/branding/white-label`}
-        withPaidBadge={!isSettingPaid}
-        badgeLabel={t("Common:Paid")}
-        onClickLink={onClickLink}
-      />
-      {showSettings && (
-        <>
-          {displayAbout && (
-            <MobileCategoryWrapper
-              title={t("CompanyInfoSettings")}
-              subtitle={t("BrandingSectionDescription", {
-                productName: t("Common:ProductName"),
-              })}
-              url={`${baseUrl}/branding/company-info-settings`}
-              withPaidBadge={!isSettingPaid}
-              badgeLabel={t("Common:Paid")}
-              onClickLink={onClickLink}
-            />
-          )}
-          <MobileCategoryWrapper
-            title={t("AdditionalResources")}
-            subtitle={t("AdditionalResourcesSubtitle")}
-            url={`${baseUrl}/branding/additional-resources`}
-            withPaidBadge={!isSettingPaid}
-            badgeLabel={t("Common:Paid")}
-            onClickLink={onClickLink}
-          />
-        </>
-      )}
+      <ReactSVG className="lock-icon" src={LockedReactSvgUrl} />
+      <Text fontSize="12px" fontWeight="600">
+        {t("NotAvailableUnderLicense")}
+      </Text>
     </StyledWrapper>
   );
 };
 
-export default MobileView;
+export default NotAvailable;

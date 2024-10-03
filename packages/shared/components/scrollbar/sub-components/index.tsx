@@ -39,6 +39,7 @@ const CustomScrollbars = ({
   contentRef,
   autoFocus,
   scrollClass,
+  paddingAfterLastItem,
 }: CustomScrollbarsVirtualListProps) => {
   const refSetter = (
     scrollbarsRef: React.RefObject<Scrollbar>,
@@ -68,6 +69,7 @@ const CustomScrollbars = ({
       className={className}
       autoFocus={autoFocus}
       scrollClass={scrollClass}
+      paddingAfterLastItem={paddingAfterLastItem}
     >
       {children}
       <div className="additional-scroll-height" />

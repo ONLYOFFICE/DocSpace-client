@@ -3,7 +3,7 @@
   "CheckReadyForms": "Check ready forms",
   "Description": "Your form completed and saved",
   "DescriptionForAnonymous": "Your submitted PDF form was assigned a unique form number. To check the status, please contact the form owner.",
-  "DescriptionForRegisteredUser": "Your submitted PDF form and available to you in the Complete folder.",
+  "DescriptionForRegisteredUser": "Your submitted PDF form available to you in the Complete folder.",
   "FillItOutAgain": "Fill it out again",
   "FormCompletedSuccessfully": "Form completed successfully",
   "FormNumber": "Form number:",

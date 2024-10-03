@@ -137,4 +137,30 @@ export const contanctsRoutes = [
       return { Component };
     },
   },
+  {
+    path: "accounts/guests",
+    element: (
+      <PrivateRoute restricted withManager>
+        <Navigate to="/accounts/guests/filter" replace />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "accounts/guests/filter",
+    async lazy() {
+      const { AccountsView } = await componentLoader(
+        () => import("SRC_DIR/pages/Home/View/Accounts"),
+      );
+
+      const Component = () => {
+        return (
+          <PrivateRoute restricted withManager>
+            <AccountsView />
+          </PrivateRoute>
+        );
+      };
+
+      return { Component };
+    },
+  },
 ];

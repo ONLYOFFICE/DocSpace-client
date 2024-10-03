@@ -102,6 +102,15 @@ export const HistoryItemList = ({
             key={`${feed.action.id}_${item.id}`}
           >
             <ReactSVG className="icon" src={getInfoPanelItemIcon!(item, 24)} />
+            {actionType === "changeIndex" ? (
+              <>
+                <div className="index old-index"> {item.oldIndex}</div>
+                <div className="index new-index"> {item.newIndex} </div>
+              </>
+            ) : (
+              <></>
+            )}
+
             <div className="item-title">
               {item.title ? (
                 <>

@@ -391,7 +391,6 @@ class TableHeaderComponent extends React.Component<
       infoPanelVisible = false,
       columns,
       setHideColumns,
-      isIndexEditingMode,
     } = this.props;
 
     if (!isDesktop()) return;
@@ -742,8 +741,6 @@ class TableHeaderComponent extends React.Component<
               column?.dataset?.shortColum && column.dataset.minWidth;
 
             const isSettingColumn = Number(index) === tableContainer.length - 1;
-            const isQuickButtonColumn =
-              Number(index) === tableContainer.length - 2;
 
             const isActiveNow = item === "0px" && enable;
             if (isActiveNow && column) activeColumnIndex = index;

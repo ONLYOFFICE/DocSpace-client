@@ -46,6 +46,7 @@ const COLUMNS_SIZE_INFO_PANEL = `filesColumnsSizeInfoPanel_ver-${TableVersions.F
 const COLUMNS_ROOMS_SIZE_INFO_PANEL = `roomsColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
 const COLUMNS_TRASH_SIZE_INFO_PANEL = `trashColumnsSizeInfoPanel_ver-${TableVersions.Trash}`;
 const COLUMNS_RECENT_SIZE_INFO_PANEL = `recentColumnsSizeInfoPanel_ver-${TableVersions.Recent}`;
+const COLUMNS_VDR_INDEXING_SIZE_INFO_PANEL = `vdrIndexingColumnsSizeInfoPanel_ver-${TableVersions.Recent}`;
 
 class TableStore {
   authStore;
@@ -533,6 +534,9 @@ class TableStore {
   get columnInfoPanelStorageName() {
     const { isRoomsFolder, isArchiveFolder, isTrashFolder, isRecentTab } =
       this.treeFoldersStore;
+
+    const { isIndexedFolder } = this.selectedFolderStore;
+
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
@@ -543,7 +547,9 @@ class TableStore {
         ? `${COLUMNS_TRASH_SIZE_INFO_PANEL}=${userId}`
         : isRecentTab
           ? `${COLUMNS_RECENT_SIZE_INFO_PANEL}=${userId}`
-          : `${COLUMNS_SIZE_INFO_PANEL}=${userId}`;
+          : isIndexedFolder
+            ? `${COLUMNS_VDR_INDEXING_SIZE_INFO_PANEL}=${userId}`
+            : `${COLUMNS_SIZE_INFO_PANEL}=${userId}`;
 
     return isFrame
       ? `SDK_${columnInfoPanelStorageName}`

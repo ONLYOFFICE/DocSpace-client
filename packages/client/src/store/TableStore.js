@@ -26,7 +26,6 @@
 
 import { makeAutoObservable } from "mobx";
 import { TableVersions } from "SRC_DIR/helpers/constants";
-import { RoomsType } from "@docspace/shared/enums";
 
 const TABLE_COLUMNS = `filesTableColumns_ver-${TableVersions.Files}`;
 const TABLE_ACCOUNTS_PEOPLE_COLUMNS = `peopleTableColumns_ver-${TableVersions.People}`;
@@ -69,7 +68,6 @@ class TableStore {
   createdColumnIsEnabled = false;
   modifiedColumnIsEnabled = true;
   sizeColumnIsEnabled = true;
-  indexColumnIsEnabled = true; // always true
   typeColumnIsEnabled = true;
   typeColumnIsEnabled = false;
   quickButtonsColumnIsEnabled = true;
@@ -97,6 +95,13 @@ class TableStore {
   typeAccountsInsideGroupColumnIsEnabled = true;
   groupAccountsInsideGroupColumnIsEnabled = true;
   emailAccountsInsideGroupColumnIsEnabled = true;
+
+  indexVDRColumnIsEnabled = true; // always true
+  authorVDRColumnIsEnabled = true;
+  modifiedVDRColumnIsEnabled = true;
+  createdVDRColumnIsEnabled = false;
+  sizeVDRColumnIsEnabled = true;
+  typeVDRColumnIsEnabled = false;
 
   constructor(
     authStore,
@@ -304,9 +309,7 @@ class TableStore {
     const {
       isRoomsFolder,
       isArchiveFolder,
-      isTrashFolder,
       getIsAccountsPeople,
-      getIsAccountsGroups,
       getIsAccountsInsideGroup,
     } = this.treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder;

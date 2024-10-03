@@ -25,44 +25,49 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable, runInAction } from "mobx";
+
 import {
   getInvitationLinks,
   getInvitationLink,
   getShortenedLink,
 } from "@docspace/shared/api/portal";
-
 import { EmployeeType } from "@docspace/shared/enums";
+import { Nullable } from "@docspace/shared/types";
+import { UserStore } from "@docspace/shared/store/UserStore";
 
 class InviteLinksStore {
-  peopleStore = null;
-  userLink = null;
-  guestLink = null;
-  adminLink = null;
-  collaboratorLink = null;
+  userLink: Nullable<string> = null;
 
-  constructor(peopleStore) {
-    this.peopleStore = peopleStore;
+  guestLink: Nullable<string> = null;
+
+  adminLink: Nullable<string> = null;
+
+  collaboratorLink: Nullable<string> = null;
+
+  constructor(public userStore: UserStore) {
+    this.userStore = userStore;
+
     makeAutoObservable(this);
   }
 
-  setUserLink = (link) => {
+  setUserLink = (link: Nullable<string>) => {
     this.userLink = link;
   };
 
-  setGuestLink = (link) => {
+  setGuestLink = (link: Nullable<string>) => {
     this.guestLink = link;
   };
 
-  setAdminLink = (link) => {
+  setAdminLink = (link: Nullable<string>) => {
     this.adminLink = link;
   };
 
-  setCollaboratorLink = (link) => {
+  setCollaboratorLink = (link: Nullable<string>) => {
     this.collaboratorLink = link;
   };
 
   getPortalInviteLinks = async () => {
-    if (this.peopleStore.authStore.isVisitor) return Promise.resolve();
+    if (this.userStore.user!.isVisitor) return Promise.resolve();
 
     const links = await getInvitationLinks();
 
@@ -74,8 +79,8 @@ class InviteLinksStore {
     });
   };
 
-  getPortalInviteLink = async (type) => {
-    if (this.peopleStore.authStore.isVisitor) return Promise.resolve();
+  getPortalInviteLink = async (type: EmployeeType) => {
+    if (this.userStore.user!.isVisitor) return Promise.resolve();
 
     const link = await getInvitationLink(type);
 
@@ -93,13 +98,15 @@ class InviteLinksStore {
         case EmployeeType.Collaborator:
           this.setCollaboratorLink(link);
           break;
+        default:
+          break;
       }
     });
 
     return link;
   };
 
-  getShortenedLink = async (link, forUser = false) => {
+  getShortenedLink = async (link: string, forUser = false) => {
     if (forUser) {
       const userLink = await getShortenedLink(link);
       this.setUserLink(userLink);

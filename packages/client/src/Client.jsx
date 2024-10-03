@@ -196,7 +196,6 @@ export const Client = inject(
     authStore,
     clientLoadingStore,
     filesStore,
-    peopleStore,
     pluginStore,
     userStore,
     settingsStore,
@@ -240,7 +239,7 @@ export const Client = inject(
       showMenu: frameConfig?.showMenu,
       user: userStore.user,
       isAuthenticated: authStore.isAuthenticated,
-      encryptionKeys: encryptionKeys,
+      encryptionKeys,
       isEncryption: isEncryptionSupport,
       isLoaded: authStore.isLoaded && clientLoadingStore.isLoaded,
       setIsLoaded: clientLoadingStore.setIsLoaded,
@@ -249,12 +248,11 @@ export const Client = inject(
       setIsFilterLoading: setIsSectionFilterLoading,
       setIsHeaderLoading: setIsSectionHeaderLoading,
       isLoading,
-      setEncryptionKeys: setEncryptionKeys,
+      setEncryptionKeys,
       showArticleLoader,
       loadClientInfo: async () => {
         const actions = [];
         actions.push(filesStore.initFiles());
-        actions.push(peopleStore.init());
 
         if (enablePlugins && !isInitPlugins) actions.push(initPlugins());
         await Promise.all(actions);

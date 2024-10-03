@@ -24,42 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { isMobile } from "react-device-detect";
-import { observer, inject } from "mobx-react";
-import { SelectionArea as SelectionAreaComponent } from "@docspace/shared/components/selection-area";
-
-const SelectionArea = (props) => {
-  const { viewAs, setSelections } = props;
-
-  const onMove = ({ added, removed, clear }) => {
-    setSelections(added, removed, clear);
-  };
-
-  const itemHeight = viewAs === "table" ? 49 : 59;
-
-  return isMobile ? (
-    <></>
-  ) : (
-    <SelectionAreaComponent
-      containerClass="section-scroll"
-      scrollClass="section-scroll"
-      itemsContainerClass="ReactVirtualized__Grid__innerScrollContainer"
-      selectableClass="window-item"
-      itemClass="user-item"
-      onMove={onMove}
-      viewAs={viewAs}
-      itemHeight={itemHeight}
-    />
-  );
-};
-
-export default inject(({ peopleStore }) => {
-  const { viewAs } = peopleStore;
-  const { setSelections } = peopleStore.usersStore;
-
-  return {
-    viewAs,
-    setSelections,
-  };
-})(observer(SelectionArea));
+export const PEOPLE_ROUTE = "accounts/people/filter";
+export const GROUPS_ROUTE = "accounts/groups/filter";
+export const GUESTS_ROUTE = "accounts/guests/filter";

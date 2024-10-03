@@ -166,7 +166,7 @@ export default inject(({ peopleStore, filesActionsStore }) => {
     selectAll,
     deselectAll,
     openItem,
-  } = peopleStore.accountsHotkeysStore;
+  } = peopleStore.contactsHotkeysStore;
   const { onClickBack } = filesActionsStore;
 
   return {

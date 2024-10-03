@@ -139,7 +139,7 @@ class ProfileActions extends React.PureComponent {
   render() {
     //console.log("Layout sub-component ProfileActions render");
     const { user, opened, avatar } = this.state;
-    const userRole = this.getUserRole(user);
+    const userRole = getUserRole(user);
 
     return (
       <StyledDiv isProduct={this.props.isProduct} ref={this.ref}>

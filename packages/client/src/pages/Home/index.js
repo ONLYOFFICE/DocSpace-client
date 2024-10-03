@@ -25,14 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { useLocation, useNavigate, Outlet, useParams } from "react-router-dom";
+import { useLocation, Outlet, useParams } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import { showLoader, hideLoader } from "@docspace/shared/utils/common";
-
 import Section from "@docspace/shared/components/section";
+
 import SectionWrapper from "SRC_DIR/components/Section";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
 
@@ -45,10 +45,11 @@ import {
 } from "./Section";
 import AccountsDialogs from "./Section/AccountsBody/Dialogs";
 
-import MediaViewer from "./MediaViewer";
 import FilesSelectionArea from "./SelectionArea/FilesSelectionArea";
 import AccountsSelectionArea from "./SelectionArea/AccountsSelectionArea";
 import { InfoPanelBodyContent, InfoPanelHeaderContent } from "./InfoPanel";
+
+import MediaViewer from "./MediaViewer";
 
 import {
   useFiles,
@@ -584,6 +585,7 @@ export const Component = inject(
       groupsIsFiltered,
       isCurrentGroupEmpty,
     } = groupsStore;
+
     const isEmptyGroups =
       !groupsIsFiltered &&
       ((groups && groups.length === 0) || !Boolean(groups));

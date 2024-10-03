@@ -32,7 +32,7 @@ import { TABLE_HEADER_HEIGHT } from "@docspace/shared/components/table/Table.con
 
 type AccountsType = TUser | TUserGroup;
 
-class AccountsHotkeysStore {
+class ContactsHotkeysStore {
   peopleStore;
 
   hotkeyCaret: AccountsType | null = null;
@@ -300,4 +300,4 @@ class AccountsHotkeysStore {
   };
 }
 
-export default AccountsHotkeysStore;
+export default ContactsHotkeysStore;

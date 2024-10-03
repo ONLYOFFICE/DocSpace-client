@@ -36,9 +36,9 @@ import EmptyScreenPersonSvgLight from "PUBLIC_DIR/images/emptyFilter/empty.filte
 import EmptyScreenPersonSvgDark from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.dark.svg";
 
 import { EmptyView } from "@docspace/shared/components/empty-view";
+import { resetFilter } from "SRC_DIR/helpers/contacts";
 
 const EmptyScreen = ({
-  resetFilter,
   resetInsideGroupFilter,
   setIsLoading,
   theme,
@@ -121,7 +121,7 @@ const EmptyScreen = ({
 };
 
 export default inject(({ peopleStore, clientLoadingStore, settingsStore }) => {
-  const { resetFilter, groupsStore, userStore } = peopleStore;
+  const { groupsStore, userStore } = peopleStore;
 
   const { resetInsideGroupFilter, editGroup, deleteGroup, currentGroup } =
     groupsStore;
@@ -136,7 +136,6 @@ export default inject(({ peopleStore, clientLoadingStore, settingsStore }) => {
     setIsSectionBodyLoading(param);
   };
   return {
-    resetFilter,
     resetInsideGroupFilter,
     isRoomAdmin,
     editGroup,

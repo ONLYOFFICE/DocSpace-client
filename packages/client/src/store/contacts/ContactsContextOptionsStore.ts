@@ -24,6 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { makeAutoObservable } from "mobx";
+
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import {
+  EmployeeStatus,
+  EmployeeType,
+  FilterSubject,
+} from "@docspace/shared/enums";
+import { TTranslation } from "@docspace/shared/types";
+import RoomsFilter from "@docspace/shared/api/rooms/filter";
+import { TContextMenuValueTypeOnClick } from "@docspace/shared/components/context-menu/ContextMenu.types";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { TfaStore } from "@docspace/shared/store/TfaStore";
+import { UserStore } from "@docspace/shared/store/UserStore";
+
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import ChangeMailReactSvgUrl from "PUBLIC_DIR/images/email.react.svg?url";
 import ChangeSecurityReactSvgUrl from "PUBLIC_DIR/images/change.security.react.svg?url";
@@ -40,40 +55,84 @@ import RefreshReactSvgUrl from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url
 import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
 import ChangeToEmployeeReactSvgUrl from "PUBLIC_DIR/images/change.to.employee.react.svg?url";
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
-import InfoReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import ReassignDataReactSvgUrl from "PUBLIC_DIR/images/reassign.data.svg?url";
-import { makeAutoObservable } from "mobx";
-import { toastr } from "@docspace/shared/components/toast";
 
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { EmployeeStatus, FilterSubject } from "@docspace/shared/enums";
-import { resendUserInvites } from "@docspace/shared/api/people";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
-import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
+import {
+  onDeletePersonalDataClick,
+  onInviteAgainClick,
+} from "SRC_DIR/helpers/contacts";
+
+import InfoPanelStore from "../InfoPanelStore";
+import ProfileActionsStore from "../ProfileActionsStore";
+
+import UsersStore from "./UsersStore";
+import DialogStore from "./DialogStore";
+import TargetUserStore from "./TargetUserStore";
 
 const PROXY_HOMEPAGE_URL = combineUrl(window.ClientConfig?.proxy?.url, "/");
 
-const PROFILE_SELF_URL = "/profile";
+type TItem = ReturnType<UsersStore["getPeopleListItem"]>;
 
-class AccountsContextOptionsStore {
-  settingsStore = null;
-  infoPanelStore = null;
-  peopleStore = null;
-  userStore = null;
-  tfaStore = null;
-
-  constructor(peopleStore, infoPanelStore, userStore, tfaStore, settingsStore) {
-    makeAutoObservable(this);
+class ContactsConextOptionsStore {
+  constructor(
+    public profileActionsStore: ProfileActionsStore,
+    public infoPanelStore: InfoPanelStore,
+    public userStore: UserStore,
+    public tfaStore: TfaStore,
+    public settingsStore: SettingsStore,
+    public usersStore: UsersStore,
+    public dialogStore: DialogStore,
+    public targetUserStore: TargetUserStore,
+  ) {
     this.settingsStore = settingsStore;
     this.infoPanelStore = infoPanelStore;
-    this.peopleStore = peopleStore;
+    this.profileActionsStore = profileActionsStore;
     this.userStore = userStore;
     this.tfaStore = tfaStore;
+    this.usersStore = usersStore;
+    this.dialogStore = dialogStore;
+    this.targetUserStore = targetUserStore;
+
+    makeAutoObservable(this);
   }
 
-  getUserContextOptions = (t, options, item) => {
+  onChangeType = (e: TContextMenuValueTypeOnClick) => {
+    const action =
+      "action" in e && e.action
+        ? e.action
+        : // @ts-expect-error TODO: need fix typing
+          e?.currentTarget?.dataset?.action;
+
+    const { getUsersToMakeEmployees } = this.usersStore!;
+
+    this.usersStore.changeType(action as EmployeeType, getUsersToMakeEmployees);
+  };
+
+  onChangeStatus = (status: EmployeeStatus) => {
+    const users = [];
+
+    if (status === EmployeeStatus.Active) {
+      const { getUsersToActivate } = this.usersStore;
+
+      users.push(...getUsersToActivate);
+    } else {
+      const { getUsersToDisable } = this.usersStore;
+
+      users.push(...getUsersToDisable);
+    }
+
+    this.usersStore.changeStatus(status, users);
+  };
+
+  toggleChangeOwnerDialog = () => {
+    const { setChangeOwnerDialogVisible } = this.dialogStore;
+
+    setChangeOwnerDialogVisible(true);
+  };
+
+  getUserContextOptions = (t: TTranslation, options: string[], item: TItem) => {
     const contextMenu = options.map((option) => {
       switch (option) {
         case "separator-1":
@@ -87,7 +146,7 @@ class AccountsContextOptionsStore {
             key: option,
             icon: ProfileReactSvgUrl,
             label: t("Common:Profile"),
-            onClick: this.peopleStore.profileActionsStore.onProfileClick,
+            onClick: this.profileActionsStore.onProfileClick,
           };
 
         case "change-name":
@@ -120,7 +179,7 @@ class AccountsContextOptionsStore {
             key: option,
             icon: RefreshReactSvgUrl,
             label: t("Translations:OwnerChange"),
-            onClick: () => this.toggleChangeOwnerDialog(item),
+            onClick: () => this.toggleChangeOwnerDialog(),
           };
         case "room-list":
           return {
@@ -135,7 +194,7 @@ class AccountsContextOptionsStore {
             key: option,
             icon: EnableReactSvgUrl,
             label: t("PeopleTranslations:EnableUserButton"),
-            onClick: () => this.onEnableClick(t, item),
+            onClick: () => this.onEnableClick(item),
           };
         case "disable":
           return {
@@ -143,7 +202,7 @@ class AccountsContextOptionsStore {
             key: option,
             icon: RemoveReactSvgUrl,
             label: t("PeopleTranslations:DisableUserButton"),
-            onClick: () => this.onDisableClick(t, item),
+            onClick: () => this.onDisableClick(item),
           };
         case "reassign-data":
           return {
@@ -159,7 +218,7 @@ class AccountsContextOptionsStore {
             key: option,
             icon: DelDataReactSvgUrl,
             label: t("PeopleTranslations:RemoveData"),
-            onClick: () => this.onDeletePersonalDataClick(t, item),
+            onClick: () => onDeletePersonalDataClick(t),
           };
         case "delete-user":
           return {
@@ -185,7 +244,7 @@ class AccountsContextOptionsStore {
             key: option,
             icon: InviteAgainReactSvgUrl,
             label: t("LblInviteAgain"),
-            onClick: () => this.onInviteAgainClick(t, item),
+            onClick: () => onInviteAgainClick(item, t),
           };
         case "reset-auth":
           return {
@@ -206,8 +265,8 @@ class AccountsContextOptionsStore {
     return contextMenu;
   };
 
-  getUserGroupContextOptions = (t) => {
-    const { onChangeType, onChangeStatus } = this.peopleStore;
+  getUserGroupContextOptions = (t: TTranslation) => {
+    const { onChangeType, onChangeStatus } = this;
 
     const {
       hasUsersToMakeEmployees,
@@ -216,11 +275,11 @@ class AccountsContextOptionsStore {
       hasUsersToInvite,
       hasUsersToRemove,
       hasFreeUsers,
-    } = this.peopleStore.usersStore;
+    } = this.usersStore;
     const { setSendInviteDialogVisible, setDeleteProfileDialogVisible } =
-      this.peopleStore.dialogStore;
+      this.dialogStore;
 
-    const { isOwner } = this.userStore.user;
+    const { isOwner } = this.userStore.user!;
 
     const { setIsVisible, isVisible } = this.infoPanelStore;
 
@@ -231,8 +290,8 @@ class AccountsContextOptionsStore {
       className: "context-menu_drop-down",
       label: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
       title: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
-      onClick: (e) => onChangeType(e, t),
-      action: "admin",
+      onClick: (e: TContextMenuValueTypeOnClick) => onChangeType(e),
+      action: EmployeeType.PortalAdmin,
       key: "cm-administrator",
     };
     const managerOption = {
@@ -240,8 +299,8 @@ class AccountsContextOptionsStore {
       className: "context-menu_drop-down",
       label: t("Common:RoomAdmin"),
       title: t("Common:RoomAdmin"),
-      onClick: (e) => onChangeType(e, t),
-      action: "manager",
+      onClick: (e: TContextMenuValueTypeOnClick) => onChangeType(e),
+      action: EmployeeType.RoomAdmin,
       key: "cm-manager",
     };
     const userOption = {
@@ -249,16 +308,16 @@ class AccountsContextOptionsStore {
       className: "context-menu_drop-down",
       label: t("Common:User"),
       title: t("Common:User"),
-      onClick: (e) => onChangeType(e, t),
-      action: "user",
+      onClick: (e: TContextMenuValueTypeOnClick) => onChangeType(e),
+      action: EmployeeType.UserString,
       key: "cm-user",
     };
 
-    isOwner && options.push(adminOption);
+    if (isOwner) options.push(adminOption);
 
     options.push(managerOption);
 
-    hasFreeUsers && options.push(userOption);
+    if (hasFreeUsers) options.push(userOption);
 
     const headerMenu = [
       {
@@ -273,7 +332,7 @@ class AccountsContextOptionsStore {
         label: t("Common:Info"),
         disabled: isVisible,
         onClick: () => setIsVisible(true),
-        icon: InfoReactSvgUrl,
+        icon: InfoOutlineReactSvgUrl,
       },
       {
         key: "cm-invite",
@@ -308,8 +367,8 @@ class AccountsContextOptionsStore {
     return headerMenu;
   };
 
-  getModel = (item, t) => {
-    const { selection } = this.peopleStore.usersStore;
+  getModel = (item: TItem, t: TTranslation) => {
+    const { selection } = this.usersStore;
 
     const { options } = item;
 
@@ -323,13 +382,13 @@ class AccountsContextOptionsStore {
     return contextOptionsProps;
   };
 
-  openUserRoomList = (user) => {
+  openUserRoomList = (user: TItem) => {
     const filter = RoomsFilter.getDefault();
 
     filter.subjectId = user.id;
     filter.subjectFilter = FilterSubject.Member;
 
-    const { id } = this.userStore.user;
+    const { id } = this.userStore.user!;
 
     const filterParamsStr = filter.toUrlParams(id);
     const url = getCategoryUrl(CategoryType.Shared);
@@ -342,22 +401,21 @@ class AccountsContextOptionsStore {
   };
 
   toggleChangeNameDialog = () => {
-    const { setChangeNameVisible } = this.peopleStore.targetUserStore;
+    const { setChangeNameVisible } = this.targetUserStore;
 
     setChangeNameVisible(true);
   };
 
-  toggleChangeEmailDialog = (item) => {
-    const { setDialogData, setChangeEmailVisible } =
-      this.peopleStore.dialogStore;
+  toggleChangeEmailDialog = (item: TItem) => {
+    const { setDialogData, setChangeEmailVisible } = this.dialogStore;
 
     setDialogData(item);
     setChangeEmailVisible(true);
   };
 
-  toggleChangePasswordDialog = (item) => {
-    const { setDialogData } = this.peopleStore.dialogStore;
-    const { setChangePasswordVisible } = this.peopleStore.targetUserStore;
+  toggleChangePasswordDialog = (item: TItem) => {
+    const { setDialogData } = this.dialogStore;
+    const { setChangePasswordVisible } = this.targetUserStore;
     const { email } = item;
 
     setDialogData({
@@ -366,35 +424,21 @@ class AccountsContextOptionsStore {
     setChangePasswordVisible(true);
   };
 
-  toggleChangeOwnerDialog = () => {
-    const { setChangeOwnerDialogVisible } = this.peopleStore.dialogStore;
+  onEnableClick = (item: TItem) => {
+    const { changeStatus } = this.usersStore;
 
-    setChangeOwnerDialogVisible(true);
+    changeStatus(EmployeeStatus.Active, [item]);
   };
 
-  onEnableClick = (t, item) => {
-    const { id } = item;
+  onDisableClick = (item: TItem) => {
+    const { changeStatus } = this.usersStore;
 
-    const { changeStatus } = this.peopleStore;
-
-    changeStatus(EmployeeStatus.Active, [id]);
+    changeStatus(EmployeeStatus.Disabled, [item]);
   };
 
-  onDisableClick = (t, item) => {
-    const { id } = item;
-
-    const { changeStatus } = this.peopleStore;
-
-    changeStatus(EmployeeStatus.Disabled, [id]);
-  };
-
-  onDeletePersonalDataClick = (t, item) => {
-    toastr.success(t("PeopleTranslations:SuccessDeletePersonalData"));
-  };
-
-  toggleDeleteProfileEverDialog = (item) => {
+  toggleDeleteProfileEverDialog = (item: TItem[]) => {
     const { setDialogData, setDeleteProfileDialogVisible, closeDialogs } =
-      this.peopleStore.dialogStore;
+      this.dialogStore;
 
     closeDialogs();
 
@@ -402,9 +446,9 @@ class AccountsContextOptionsStore {
     setDeleteProfileDialogVisible(true);
   };
 
-  toggleDataReassignmentDialog = (item) => {
+  toggleDataReassignmentDialog = (item: TItem) => {
     const { setDialogData, setDataReassignmentDialogVisible, closeDialogs } =
-      this.peopleStore.dialogStore;
+      this.dialogStore;
     const { id, displayName, userName, avatar, statusType } = item;
 
     closeDialogs();
@@ -420,27 +464,19 @@ class AccountsContextOptionsStore {
     setDataReassignmentDialogVisible(true);
   };
 
-  onDetailsClick = (item) => {
+  onDetailsClick = (item: TItem) => {
     const { setIsVisible } = this.infoPanelStore;
-    const { setBufferSelection } = this.peopleStore.usersStore;
+    const { setBufferSelection } = this.usersStore;
     setBufferSelection(item);
     setIsVisible(true);
   };
 
-  onInviteAgainClick = (t, item) => {
-    const { id, email } = item;
-    resendUserInvites([id])
-      .then(() => showEmailActivationToast(email))
-      .catch((error) => toastr.error(error));
-  };
-
-  onResetAuth = (item) => {
-    const { setDialogData, setResetAuthDialogVisible } =
-      this.peopleStore.dialogStore;
+  onResetAuth = (item: TItem) => {
+    const { setDialogData, setResetAuthDialogVisible } = this.dialogStore;
 
     setResetAuthDialogVisible(true);
     setDialogData(item.id);
   };
 }
 
-export default AccountsContextOptionsStore;
+export default ContactsConextOptionsStore;

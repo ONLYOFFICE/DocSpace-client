@@ -67,16 +67,6 @@ class TargetUserStore {
     makeAutoObservable(this);
   }
 
-  get getDisableProfileType() {
-    const res =
-      this.userStore.user.id === this.targetUser.id ||
-      this.peopleStore.isPeoplesAdmin
-        ? false
-        : true;
-
-    return res;
-  }
-
   get isMe() {
     return (
       this.targetUser &&

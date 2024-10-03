@@ -35,7 +35,7 @@ import {
 } from "@docspace/shared/api/people/types";
 import { TThirdPartyProvider } from "@docspace/shared/api/settings/types";
 
-import { EmployeeStatus, EmployeeType } from "@docspace/shared/enums";
+import { EmployeeStatus, EmployeeType, Events } from "@docspace/shared/enums";
 import { getUserRole } from "@docspace/shared/utils/common";
 import { Nullable } from "@docspace/shared/types";
 
@@ -47,16 +47,17 @@ import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_s
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 import {
   getUserChecked,
-  setContactsFilterUrl,
-  TSelected,
+  setContactsUsersFilterUrl,
 } from "SRC_DIR/helpers/contacts";
+import type { TContactsSelected } from "SRC_DIR/helpers/contacts";
 
 import InfoPanelStore from "../InfoPanelStore";
+import AccessRightsStore from "../AccessRightsStore";
 
 import TargetUserStore from "./TargetUserStore";
 import GroupsStore from "./GroupsStore";
-import AccountsHotkeysStore from "./AccountsHotkeysStore";
-import AccessRightsStore from "../AccessRightsStore";
+import ContactsHotkeysStore from "./ContactsHotkeysStore";
+import DialogStore from "./DialogStore";
 
 class UsersStore {
   filter = Filter.getDefault();
@@ -92,16 +93,18 @@ class UsersStore {
     public userStore: UserStore,
     public targetUserStore: TargetUserStore,
     public groupsStore: GroupsStore,
-    public accountsHotkeysStore: AccountsHotkeysStore,
+    public contactsHotkeysStore: ContactsHotkeysStore,
     public accessRightsStore: AccessRightsStore,
+    public dialogStore: DialogStore,
   ) {
     this.settingsStore = settingsStore;
     this.infoPanelStore = infoPanelStore;
     this.userStore = userStore;
     this.targetUserStore = targetUserStore;
     this.groupsStore = groupsStore;
-    this.accountsHotkeysStore = accountsHotkeysStore;
+    this.contactsHotkeysStore = contactsHotkeysStore;
     this.accessRightsStore = accessRightsStore;
+    this.dialogStore = dialogStore;
 
     makeAutoObservable(this);
   }
@@ -110,7 +113,7 @@ class UsersStore {
     const key = `PeopleFilter=${this.userStore.user?.id}`;
     const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
     localStorage.setItem(key, value);
-    setContactsFilterUrl(filter);
+    setContactsUsersFilterUrl(filter);
 
     this.filter = filter;
   };
@@ -709,7 +712,7 @@ class UsersStore {
     if (exists) return;
 
     this.setSelection([...this.selection, user!]);
-    this.accountsHotkeysStore.setHotkeyCaret(null);
+    this.contactsHotkeysStore.setHotkeyCaret(null);
 
     this.incrementUsersRights(user);
   };
@@ -790,7 +793,7 @@ class UsersStore {
 
   getUsersBySelected = (
     users: ReturnType<typeof this.getPeopleListItem>[],
-    selected: TSelected,
+    selected: TContactsSelected,
   ) => {
     const newSelection: ReturnType<typeof this.getPeopleListItem>[] = [];
     users.forEach((user) => {
@@ -802,7 +805,7 @@ class UsersStore {
     return newSelection;
   };
 
-  setSelected = (selected: TSelected) => {
+  setSelected = (selected: TContactsSelected) => {
     this.bufferSelection = null;
     this.selected = selected;
 
@@ -813,7 +816,7 @@ class UsersStore {
       this.peopleList.forEach((u) => this.incrementUsersRights(u));
     }
 
-    this.accountsHotkeysStore.setHotkeyCaret(null);
+    this.contactsHotkeysStore.setHotkeyCaret(null);
 
     return selected;
   };
@@ -962,6 +965,71 @@ class UsersStore {
 
     return users.length > 0;
   }
+
+  changeType = (
+    type: EmployeeType,
+    users: UsersStore["getUsersToMakeEmployees"],
+    successCallback?: VoidFunction,
+    abortCallback?: VoidFunction,
+  ) => {
+    const { setDialogData } = this.dialogStore!;
+    const event = new Event(Events.CHANGE_USER_TYPE);
+
+    let fromType =
+      users.length === 1
+        ? [
+            users[0].role
+              ? users[0].role
+              : getUserRole(users[0] as unknown as TUser),
+          ]
+        : users.map((u) =>
+            u.role ? u.role : getUserRole(u as unknown as TUser),
+          );
+
+    if (users.length > 1) {
+      fromType = fromType.filter(
+        (item, index) => fromType.indexOf(item) === index && item !== type,
+      );
+
+      if (fromType.length === 0) fromType = [fromType[0]];
+    }
+
+    if (fromType.length === 1 && fromType[0] === type) return false;
+
+    const userIDs = users
+      .filter((u) => u.role !== type)
+      .map((user) => {
+        return user?.id ? user.id : user;
+      });
+
+    setDialogData({
+      toType: type,
+      fromType,
+      userIDs,
+      successCallback,
+      abortCallback,
+    });
+
+    window.dispatchEvent(event);
+
+    return true;
+  };
+
+  changeStatus = (
+    status: EmployeeStatus,
+    users: typeof this.getUsersToActivate | typeof this.getUsersToDisable,
+  ) => {
+    const { setChangeUserStatusDialogVisible, setDialogData } =
+      this.dialogStore;
+
+    const userIDs = users.map((user) => {
+      return user?.id ? user.id : user;
+    });
+
+    setDialogData({ status, userIDs });
+
+    setChangeUserStatusDialogVisible(true);
+  };
 }
 
 export default UsersStore;

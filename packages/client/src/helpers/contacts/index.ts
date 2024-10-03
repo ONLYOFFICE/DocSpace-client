@@ -26,22 +26,35 @@
 
 import Filter from "@docspace/shared/api/people/filter";
 import { TUser } from "@docspace/shared/api/people/types";
-import { EmployeeStatus } from "@docspace/shared/enums";
+import { EmployeeStatus, Events } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { TTranslation } from "@docspace/shared/types";
+import { resendUserInvites } from "@docspace/shared/api/people";
+import { toastr } from "@docspace/shared/components/toast";
 
 import config from "PACKAGE_FILE";
+import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 
-export type TSelected =
-  | "all"
-  | "active"
-  | "pending"
-  | "disabled"
-  | "none"
-  | "close";
+import type {
+  TContactsSelected,
+  TContactsTab,
+  TContactsViewAs,
+  TContactsMenuItemdId,
+} from "./types";
+import { PEOPLE_ROUTE, GROUPS_ROUTE, GUESTS_ROUTE } from "./constants";
+import { showEmailActivationToast } from "../people-helpers";
 
-export const setContactsFilterUrl = (filter: Filter) => {
+export type {
+  TContactsSelected,
+  TContactsTab,
+  TContactsViewAs,
+  TContactsMenuItemdId,
+};
+export { PEOPLE_ROUTE, GROUPS_ROUTE, GUESTS_ROUTE };
+
+export const setContactsUsersFilterUrl = (filter: Filter) => {
   const urlFilter = filter.toUrlParams();
-  const newPath = combineUrl(`/accounts/people/filter?${urlFilter}`);
+  const newPath = combineUrl(`/${PEOPLE_ROUTE}?${urlFilter}`);
 
   if (window.location.pathname + window.location.search === newPath) return;
 
@@ -50,6 +63,12 @@ export const setContactsFilterUrl = (filter: Filter) => {
     "",
     combineUrl(window.ClientConfig?.proxy?.url, config.homepage, newPath),
   );
+};
+
+export const resetFilter = () => {
+  const filter = Filter.getDefault();
+
+  window.DocSpace.navigate(`${PEOPLE_ROUTE}?${filter.toUrlParams()}`);
 };
 
 export const employeeWrapperToMemberModel = (profile: TUser) => {
@@ -62,7 +81,7 @@ export const employeeWrapperToMemberModel = (profile: TUser) => {
   return { ...profile, comment, department, worksFrom };
 };
 
-export const getUserChecked = (user: TUser, selected: TSelected) => {
+export const getUserChecked = (user: TUser, selected: TContactsSelected) => {
   switch (selected) {
     case "all":
       return true;
@@ -75,4 +94,75 @@ export const getUserChecked = (user: TUser, selected: TSelected) => {
     default:
       return false;
   }
+};
+
+export const getContactsMenuItemId = (item: TContactsMenuItemdId) => {
+  switch (item) {
+    case "active":
+      return "selected_active";
+    case "pending":
+      return "selected_pending";
+    case "disabled":
+      return "selected_disabled";
+    case "all":
+      return "selected_all";
+    default:
+      return "";
+  }
+};
+
+export const getContactsCheckboxItemLabel = (
+  t: TTranslation,
+  item: TContactsMenuItemdId,
+) => {
+  switch (item) {
+    case "active":
+      return t("Common:Active");
+    case "pending":
+      return t("PeopleTranslations:PendingInviteTitle");
+    case "disabled":
+      return t("PeopleTranslations:DisabledEmployeeStatus");
+    case "all":
+      return t("All");
+    default:
+      return "";
+  }
+};
+
+export const changeUserQuota = (
+  users: TUser[],
+  successCallback?: VoidFunction,
+  abortCallback?: VoidFunction,
+) => {
+  const event: Event & { payload?: unknown } = new Event(Events.CHANGE_QUOTA);
+
+  const userIDs = users.map((user) => {
+    return user?.id ? user.id : user;
+  });
+
+  const payload = {
+    visible: true,
+    type: "user",
+    ids: userIDs,
+    successCallback,
+    abortCallback,
+  };
+
+  event.payload = payload;
+
+  window.dispatchEvent(event);
+};
+
+export const onDeletePersonalDataClick = (t: TTranslation) => {
+  toastr.success(t("PeopleTranslations:SuccessDeletePersonalData"));
+};
+
+export const onInviteAgainClick = (
+  item: ReturnType<UsersStore["getPeopleListItem"]>,
+  t: TTranslation,
+) => {
+  const { id, email } = item;
+  resendUserInvites([id])
+    .then(() => showEmailActivationToast(email, t))
+    .catch((error) => toastr.error(error));
 };

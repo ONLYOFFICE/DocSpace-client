@@ -124,18 +124,18 @@ export default inject(
     const { usersStore, groupsStore } = peopleStore;
 
     const {
-      setSelection: setUserSelection,
-      setBufferSelection: setUserBufferSelection,
-    } = usersStore;
+      setSelection: setUsersSelection,
+      setBufferSelection: setUsersBufferSelection,
+    } = usersStore!;
     const {
       setSelection: setGroupsSelection,
       setBufferSelection: setGroupsBufferSelection,
-    } = groupsStore;
+    } = groupsStore!;
 
     return {
       showBodyLoader,
-      setUserSelection,
-      setUserBufferSelection,
+      setUsersSelection,
+      setUsersBufferSelection,
       setGroupsSelection,
       setGroupsBufferSelection,
     };

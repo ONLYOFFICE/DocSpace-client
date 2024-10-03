@@ -175,11 +175,12 @@ export function toEmployeeWrapper(profile) {
   return cloneDeep({ ...emptyData, ...profile });
 }
 
-export const showEmailActivationToast = (email) => {
+export const showEmailActivationToast = (email, t) => {
   //console.log("showEmailActivationToast", { email });
   toastr.success(
     <Trans
       i18nKey="MessageEmailActivationInstuctionsSentOnEmail"
+      t={t}
       ns="People"
       defaults="The email activation instructions have been sent to the <strong>{{email}}</strong> email address"
       values={{ email }}

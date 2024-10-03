@@ -37,63 +37,66 @@ import { AdditionalResources } from "client/AdditionalResPage";
 import Payments from "./categories/payments";
 import Bonus from "./categories/bonus";
 import ErrorBoundary from "./components/ErrorBoundaryWrapper";
+import PrivateRouteWrapper from "./components/PrivateRouterWrapper";
 
 import Error404 from "@docspace/shared/components/errors/Error404";
 import { PreparationPortal } from "@docspace/shared/pages/PreparationPortal";
 
 const routes = [
   {
-    path: "/",
+    path: "/management",
     element: (
       <ErrorBoundary>
-        <App />
+        <PrivateRouteWrapper>
+          <App />
+        </PrivateRouteWrapper>
       </ErrorBoundary>
     ),
     errorElement: <Error404 />,
     children: [
-      { index: true, element: <Navigate to="spaces" replace /> },
+      { index: true, element: <Navigate to="/management/spaces" replace /> },
       {
-        path: "spaces",
+        path: "/management/spaces",
         element: <Spaces />,
       },
       {
-        path: "settings",
+        path: "/management/settings",
         element: <Settings />,
       },
       {
-        path: "settings/branding",
+        path: "/management/settings/branding",
         element: <Settings />,
       },
       {
-        path: "settings/branding/white-label",
+        path: "/management/settings/branding/white-label",
         element: <WhiteLabel />,
       },
       {
-        path: "settings/branding/company-info-settings",
+        path: "/management/settings/branding/company-info-settings",
         element: <CompanyInfoSettings />,
       },
       {
-        path: "settings/branding/additional-resources",
+        path: "/management/settings/branding/additional-resources",
         element: <AdditionalResources />,
       },
       {
-        path: "settings/data-backup",
+        path: "/management/settings/data-backup",
         element: <Settings />,
       },
       {
-        path: "settings/auto-backup",
+        path: "/management/settings/auto-backup",
         element: <Settings />,
       },
       {
-        path: "settings/restore",
+        path: "/management/settings/restore",
         element: <Settings />,
       },
       {
-        path: "payments",
+        path: "/management/payments",
         element: <Payments />,
       },
       {
-        path: "bonus",
+        path: "/management/bonus",
         element: <Bonus />,
       },
       {
@@ -105,7 +108,7 @@ const routes = [
 ];
 
 const router = createBrowserRouter(routes, {
-  basename: "/management",
+  basename: "/",
 });
 
 export default router;

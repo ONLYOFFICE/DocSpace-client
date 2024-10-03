@@ -148,13 +148,13 @@ const Customization = (props) => {
 
 export default inject(({ settingsStore, common, currentQuotaStore }) => {
   const { enablePortalRename } = settingsStore;
-  const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
+  const { isCustomizationAvailable } = currentQuotaStore;
   const { isLoaded, setIsLoadedCustomization, resetIsInit } = common;
 
   return {
     isLoaded,
     setIsLoadedCustomization,
-    isSettingPaid: isBrandingAndCustomizationAvailable,
+    isSettingPaid: isCustomizationAvailable,
     enablePortalRename,
     resetIsInit,
   };

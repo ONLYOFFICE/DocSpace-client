@@ -171,6 +171,7 @@
   "NewColorScheme": "New color scheme",
   "NextStep": "Next step",
   "NoEmail": "NO EMAIL",
+  "NotAvailableUnderLicense": "Not available under this license",
   "NoEventsHereYet": "No events here yet",
   "NoUsersInBackup": "No users found. Try again or upload other backup files.",
   "NumberOfActiveEmployees": "Number of active employees: {{count}}",

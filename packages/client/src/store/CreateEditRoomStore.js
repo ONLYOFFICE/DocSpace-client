@@ -284,6 +284,15 @@ class CreateEditRoomStore {
         requests.push(removeLogoFromRoom(room.id));
       }
 
+      if (cover) {
+        requests.push(setRoomLogoCover(room.id));
+      }
+
+      if (!cover && isUpdatelogo) {
+        addActiveItems(null, [room.id]);
+        requests.push(onSaveRoomLogo(room.id, newParams.icon, room, true));
+      }
+
       const isEditCurrentFolder = room.id === currentFolderId;
       const needTableContentUpdate = indexingChanged && isEditCurrentFolder; //|| withPaging;
 
@@ -303,15 +312,6 @@ class CreateEditRoomStore {
         isRootFolder
           ? setFolder(updatedRoomInfo)
           : updateEditedSelectedRoom({ tags: tags });
-      }
-
-      if (cover) {
-        await setRoomLogoCover(room.id);
-      }
-
-      if (!cover && isUpdatelogo) {
-        addActiveItems(null, [room.id]);
-        await onSaveRoomLogo(room.id, newParams.icon, room, true);
       }
     } catch (e) {
       toastr.error(e);

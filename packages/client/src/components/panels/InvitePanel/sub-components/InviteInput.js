@@ -51,7 +51,12 @@ import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 import { isBetaLanguage } from "@docspace/shared/utils";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
-import { getTopFreeRole, isPaidUserRole } from "../utils";
+import {
+  fixAccess,
+  getTopFreeRole,
+  isPaidUserRole,
+  makeFreeRole,
+} from "../utils";
 import AccessSelector from "../../../AccessSelector";
 
 import {
@@ -337,11 +342,7 @@ const InviteInput = ({
         toastr.warning(t("UsersAlreadyAdded"));
       } else {
         if (isGroup && checkIfAccessPaid(item.access)) {
-          const topFreeRole = getTopFreeRole(t, roomType);
-          item.access = topFreeRole.access;
-          item.warning = t("GroupMaxAvailableRoleWarning", {
-            roleName: topFreeRole.label,
-          });
+          item = fixAccess(item, t, roomType);
         }
 
         if (
@@ -407,34 +408,45 @@ const InviteInput = ({
       .map((item) => {
         const userItem = usersList.find((value) => value.email === item.email);
 
-        if (userItem) {
-          userItem.access = selectedAccess;
+        if (!userItem) {
+          const isRolePaid = isPaidUserRole(item.access);
 
-          if (userItem.isGroup && checkIfAccessPaid(userItem.access)) {
+          if (isRolePaid && item.isEmailInvite) {
             const topFreeRole = getTopFreeRole(t, roomType);
-            userItem.access = topFreeRole.access;
-            userItem.warning = t("GroupMaxAvailableRoleWarning", {
-              roleName: topFreeRole.label,
-            });
-          }
 
-          if (
-            isUserTariffLimit &&
-            userItem.isVisitor &&
-            isPaidUserRole(item.access)
-          ) {
-            const freeRole = getTopFreeRole(t, roomType)?.access;
-
-            if (freeRole) {
-              userItem.access = freeRole;
-              toastr.error(<PaidQuotaLimitError />);
+            if (item.access !== topFreeRole.access) {
+              item = makeFreeRole(item, t, topFreeRole);
             }
           }
 
-          return userItem;
+          return item;
         }
 
-        return item;
+        userItem.access = selectedAccess;
+
+        const isAccessPaid = checkIfAccessPaid(userItem.access);
+
+        if (
+          isAccessPaid &&
+          (userItem.isGroup || user.isVisitor || user.isCollaborator)
+        ) {
+          userItem = fixAccess(userItem, t, roomType);
+        }
+
+        if (
+          isUserTariffLimit &&
+          userItem.isVisitor &&
+          isPaidUserRole(item.access)
+        ) {
+          const freeRole = getTopFreeRole(t, roomType)?.access;
+
+          if (freeRole) {
+            userItem.access = freeRole;
+            toastr.error(<PaidQuotaLimitError />);
+          }
+        }
+
+        return userItem;
       });
 
     if (filteredItems.length !== items.length) {

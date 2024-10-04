@@ -303,3 +303,22 @@ export const getFreeUsersRoleArray = () => {
     ShareAccessRights.Collaborator,
   ];
 };
+
+export const fixAccess = (item, t, roomType) => {
+  const topFreeRole = getTopFreeRole(t, roomType);
+  makeFreeRole(item, t, topFreeRole);
+};
+
+export const makeFreeRole = (item, t, freeRole) => {
+  if (!freeRole) return item;
+
+  item.access = freeRole.access;
+  item.warning = item.isGroup
+    ? t("GroupMaxAvailableRoleWarning", {
+        roleName: freeRole.label,
+      })
+    : t("UserMaxAvailableRoleWarning", {
+        productName: t("Common:ProductName"),
+      });
+  return item;
+};

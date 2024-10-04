@@ -49,7 +49,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { getAccessOptions, getTopFreeRole } from "./utils";
+import { getAccessOptions, getTopFreeRole, makeFreeRole } from "./utils";
 import AddUsersPanel from "../AddUsersPanel";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
@@ -454,10 +454,7 @@ const InvitePanel = ({
     const topFreeRole = getTopFreeRole(t, roomType);
     users.forEach((u) => {
       if (u.isGroup && checkIfAccessPaid(u.access)) {
-        u.access = topFreeRole.access;
-        u.warning = t("GroupMaxAvailableRoleWarning", {
-          roleName: topFreeRole.label,
-        });
+        u = makeFreeRole(u, t, topFreeRole);
       }
 
       if (

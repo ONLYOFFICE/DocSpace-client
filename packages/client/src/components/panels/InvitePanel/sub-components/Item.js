@@ -28,6 +28,7 @@ import debounce from "lodash.debounce";
 import InfoEditReactSvgUrl from "PUBLIC_DIR/images/info.edit.react.svg?url";
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
 import AlertSvgUrl from "PUBLIC_DIR/images/icons/12/alert.react.svg?url";
+import InfoRoleSvgUrl from "PUBLIC_DIR/images/info.role.react.svg?url";
 
 import React, { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
@@ -41,6 +42,7 @@ import {
   AccountsSearchArea,
   EmployeeStatus,
   RoomsType,
+  ShareAccessRights,
 } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 
@@ -48,6 +50,7 @@ import {
   getAccessOptions,
   getFreeUsersRoleArray,
   getFreeUsersTypeArray,
+  getTopFreeRole,
   isPaidUserRole,
 } from "../utils";
 import {
@@ -60,7 +63,7 @@ import {
   StyledInviteUserBody,
   ErrorWrapper,
 } from "../StyledInvitePanel";
-import { filterGroupRoleOptions, filterUserRoleOptions } from "SRC_DIR/helpers";
+import { filterGroupRoleOptions } from "SRC_DIR/helpers";
 import AccessSelector from "../../../AccessSelector";
 
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
@@ -161,13 +164,6 @@ const Item = ({
     standalone,
   );
 
-  const filteredAccesses = item.isGroup
-    ? filterGroupRoleOptions(accesses)
-    : accesses;
-
-  const defaultAccess = filteredAccesses.find(
-    (option) => option.access === +access,
-  );
   const getUserType = (item) => {
     if (item.isOwner) return "owner";
     if (item.isAdmin) return "admin";
@@ -178,9 +174,27 @@ const Item = ({
 
   const type = getUserType(item);
 
+  const isRolePaid = isPaidUserRole(access);
+  const isUserRolesFilterd =
+    isRolePaid && (type == "user" || type == "collaborator");
+  const isGroupRoleFiltered = isRolePaid && item.isGroup;
+
+  const filteredAccesses = item.isGroup
+    ? filterGroupRoleOptions(accesses)
+    : isUserRolesFilterd
+      ? accesses.filter(
+          (o) => +o.access !== ShareAccessRights.RoomManager && o.key !== "s1",
+        )
+      : accesses;
+
+  const defaultAccess =
+    isUserRolesFilterd || isGroupRoleFiltered
+      ? getTopFreeRole(t, roomType)
+      : filteredAccesses.find((option) => option.access === +access);
+
   const typeLabel = item?.isEmailInvite
-    ? roomId === -1 || isPaidUserRole(access)
-      ? getUserTypeLabel(defaultAccess.type, t)
+    ? roomId === -1 || isRolePaid
+      ? getUserTypeLabel(type, t)
       : t("Common:Guest")
     : (type === "user" && defaultAccess?.type !== type) ||
         (defaultAccess?.type === "manager" &&
@@ -278,7 +292,12 @@ const Item = ({
   const displayBody = (
     <>
       <StyledInviteUserBody>
-        <Box displayProp="flex" alignItems="center" gapProp="8px">
+        <Box
+          displayProp="flex"
+          alignItems="center"
+          gapProp="8px"
+          className={isGroup && "group-name"}
+        >
           <Text {...textProps} truncate noSelect>
             {inputValue}
           </Text>
@@ -316,12 +335,18 @@ const Item = ({
           />
         </ErrorWrapper>
       ) : (
-        <>
+        <Box
+          displayProp="flex"
+          alignItems="right"
+          gapProp="8px"
+          className="role-access"
+        >
           {warning && (
-            <div className="warning">
+            <div className="role-warning">
               <StyledHelpButton
                 tooltipContent={warning}
-                iconName={AlertSvgUrl}
+                iconName={InfoRoleSvgUrl}
+                size={16}
               />
             </div>
           )}
@@ -344,7 +369,7 @@ const Item = ({
               availableAccess,
             })}
           />
-        </>
+        </Box>
       )}
     </>
   );

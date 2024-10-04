@@ -111,6 +111,10 @@ const StyledInviteUserBody = styled.div`
   flex-direction: column;
   overflow: auto;
 
+  .group-name {
+    padding-top: 8px;
+  }
+
   .about-label {
     color: ${(props) => props.theme.filesPanels.invite.textColor};
   }
@@ -143,8 +147,8 @@ const StyledDescription = styled(Text)`
 StyledDescription.defaultProps = { theme: Base };
 
 const StyledRow = styled.div`
-  display: inline-flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 32px 1fr auto;
   gap: 8px;
 
   min-height: 41px;
@@ -167,6 +171,12 @@ const StyledRow = styled.div`
 
   .warning {
     margin-inline-start: auto;
+  }
+
+  .role-access {
+    .role-warning {
+      padding-top: 4px;
+    }
   }
 `;
 

@@ -256,7 +256,7 @@ const StyledTableRow = styled(TableRow)`
     ${(props) =>
       props.isIndexing &&
       css`
-        padding-left: 8px;
+        padding-inline-start: 8px;
       `}
   }
 

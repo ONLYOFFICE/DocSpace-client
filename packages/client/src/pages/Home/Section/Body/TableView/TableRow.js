@@ -96,7 +96,9 @@ const FilesTableRow = (props) => {
       color={item.logo?.color}
       isArchive={item.isArchive}
       badgeUrl={badgeUrl}
-      className={isIndexing && "icon-with-index-column"}
+      className={classNames({
+        ["icon-with-index-column"]: isIndexing,
+      })}
     />
   );
 

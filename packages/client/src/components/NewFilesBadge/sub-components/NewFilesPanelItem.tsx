@@ -24,20 +24,54 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import AddUsersPanel from "./AddUsersPanel";
-import EmbeddingPanel from "./EmbeddingPanel";
-import VersionHistoryPanel from "./VersionHistoryPanel";
-import UploadPanel from "./UploadPanel";
-import HotkeysPanel from "./HotkeysPanel";
-import InvitePanel from "./InvitePanel";
-import EditLinkPanel from "./EditLinkPanel";
+import { TFile } from "@docspace/shared/api/files/types";
 
-export {
-  AddUsersPanel,
-  EmbeddingPanel,
-  VersionHistoryPanel,
-  UploadPanel,
-  HotkeysPanel,
-  InvitePanel,
-  EditLinkPanel,
+import { StyledItem } from "../NewFilesBadge.styled";
+import { NewFilesPanelItemProps } from "../NewFilesBadge.types";
+
+import { NewFilesPanelItemDate } from "./NewFilesPanelItemDate";
+import { NewFilesPanelItemRoom } from "./NewFilesPanelItemRoom";
+import { NewFilesPanelFileList } from "./NewFilesPanelFileList";
+
+export const NewFilesPanelItem = ({
+  date,
+  items,
+  isRooms,
+  isFirst,
+  onClose,
+
+  culture,
+}: NewFilesPanelItemProps) => {
+  return (
+    <StyledItem isRooms={isRooms} isFirst={isFirst}>
+      <NewFilesPanelItemDate date={date} culture={culture} />
+      {isRooms ? (
+        items.map((value) => {
+          if ("room" in value)
+            return (
+              <div
+                key={`${date}-${value.room.id}`}
+                className="room-items-container"
+              >
+                <NewFilesPanelItemRoom {...value} />
+                <NewFilesPanelFileList
+                  items={value.items}
+                  isRooms
+                  onClose={onClose}
+                />
+              </div>
+            );
+          return null;
+        })
+      ) : (
+        <NewFilesPanelFileList
+          key={date}
+          // if not is rooms mode - items is default files
+          items={items as unknown as TFile[]}
+          isRooms={false}
+          onClose={onClose}
+        />
+      )}
+    </StyledItem>
+  );
 };

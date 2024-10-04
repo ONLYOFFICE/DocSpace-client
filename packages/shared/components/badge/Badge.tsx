@@ -30,64 +30,73 @@ import { BadgeProps } from "./Badge.types";
 import { StyledInner, StyledText } from "./Badge.styled";
 import { BadgeTheme } from "./Badge.theme";
 
-const Badge = (props: BadgeProps) => {
-  const {
-    onClick,
-    fontSize,
-    color,
-    fontWeight,
-    backgroundColor,
-    borderRadius,
-    padding,
-    maxWidth,
-    height,
-    type,
-    compact,
-    isHovered,
-    border,
-    label,
-  } = props;
+const Badge = React.forwardRef(
+  (props: BadgeProps, ref: React.ForwardedRef<HTMLDivElement>) => {
+    const {
+      onClick,
+      fontSize,
+      color,
+      fontWeight,
+      backgroundColor,
+      borderRadius,
+      padding,
+      maxWidth,
+      height,
+      type,
+      compact,
+      isHovered,
+      border,
+      label,
+      onMouseLeave,
+      onMouseOver,
+    } = props;
 
-  const onClickAction = React.useCallback(
-    (e: React.MouseEvent) => {
-      if (!onClick) return;
+    const onClickAction = React.useCallback(
+      (e: React.MouseEvent) => {
+        if (!onClick) return;
 
-      e.preventDefault();
-      onClick(e);
-    },
-    [onClick],
-  );
+        e.preventDefault();
+        onClick(e);
+      },
+      [onClick],
+    );
 
-  return (
-    <BadgeTheme
-      {...props}
-      isHovered={isHovered}
-      onClick={onClickAction}
-      border={border}
-      height={height}
-    >
-      <StyledInner
-        backgroundColor={backgroundColor}
-        borderRadius={borderRadius}
-        padding={padding}
-        type={type}
-        compact={compact}
-        maxWidth={maxWidth}
-        data-testid="badge"
+    return (
+      <BadgeTheme
+        {...props}
+        isHovered={isHovered}
+        onClick={onClickAction}
+        onMouseLeave={onMouseLeave}
+        onMouseOver={onMouseOver}
+        border={border}
+        height={height}
+        ref={ref}
       >
-        <StyledText
-          textAlign="center"
-          fontWeight={fontWeight}
+        <StyledInner
+          backgroundColor={backgroundColor}
           borderRadius={borderRadius}
-          color={color}
-          fontSize={fontSize}
+          padding={padding}
+          type={type}
+          compact={compact}
+          maxWidth={maxWidth}
+          data-testid="badge"
         >
-          {label}
-        </StyledText>
-      </StyledInner>
-    </BadgeTheme>
-  );
-};
+          <StyledText
+            textAlign="center"
+            fontWeight={fontWeight}
+            borderRadius={borderRadius}
+            color={color}
+            fontSize={fontSize}
+          >
+            {label}
+          </StyledText>
+        </StyledInner>
+      </BadgeTheme>
+    );
+  },
+);
+
+Badge.displayName = "Badge";
 
 Badge.defaultProps = {
   label: 0,

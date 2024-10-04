@@ -61,7 +61,7 @@ export default function withBadges(WrappedComponent) {
     onBadgeClick = () => {
       if (this.state.disableBadgeClick) return;
 
-      const { item, markAsRead, setNewFilesPanelVisible } = this.props;
+      const { item, markAsRead } = this.props;
       this.setState(() => ({
         disableBadgeClick: true,
       }));
@@ -72,10 +72,6 @@ export default function withBadges(WrappedComponent) {
 
       if (item.fileExst) {
         markAsRead([], [item.id], item).then(() => {
-          enableBadgeClick();
-        });
-      } else {
-        setNewFilesPanelVisible(true, null, item).then(() => {
           enableBadgeClick();
         });
       }
@@ -237,11 +233,7 @@ export default function withBadges(WrappedComponent) {
       } = filesActionsStore;
       const { isTabletView, isDesktopClient, theme } = settingsStore;
       const { setIsVerHistoryPanel, fetchFileVersions } = versionHistoryStore;
-      const {
-        setNewFilesPanelVisible,
-        setConvertDialogVisible,
-        setConvertItem,
-      } = dialogsStore;
+      const { setConvertDialogVisible, setConvertItem } = dialogsStore;
       const { setIsLoading, isMuteCurrentRoomNotifications, getPrimaryLink } =
         filesStore;
       const { roomType, mute } = item;
@@ -261,7 +253,6 @@ export default function withBadges(WrappedComponent) {
         setIsVerHistoryPanel,
         fetchFileVersions,
         markAsRead,
-        setNewFilesPanelVisible,
         setIsLoading,
         setConvertDialogVisible,
         setConvertItem,

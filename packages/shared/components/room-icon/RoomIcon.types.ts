@@ -1,3 +1,5 @@
+import { TLogo } from "api/rooms/types";
+
 type RoomIconDefault = {
   title: string;
   isArchive?: boolean;
@@ -8,6 +10,7 @@ type RoomIconDefault = {
   className?: string;
   hoverSrc?: string;
   withEditing?: boolean;
+  logo?: TLogo;
 };
 
 type RoomIconColor = {

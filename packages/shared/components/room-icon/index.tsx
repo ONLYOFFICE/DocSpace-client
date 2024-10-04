@@ -139,7 +139,7 @@ const RoomIcon = ({
   );
 
   const prefetchImage = React.useCallback(() => {
-    if (!imgSrc) return;
+    if (!imgSrc || typeof imgSrc !== "string") return;
     setCorrectImage(true);
     const img = new Image();
 

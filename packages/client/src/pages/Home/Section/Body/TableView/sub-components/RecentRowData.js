@@ -42,7 +42,6 @@ const RecentRowDataComponent = (props) => {
     modifiedRecentColumnIsEnabled,
     sizeRecentColumnIsEnabled,
     typeRecentColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
     lastOpenedColumnIsEnabled,
 
     dragStyles,

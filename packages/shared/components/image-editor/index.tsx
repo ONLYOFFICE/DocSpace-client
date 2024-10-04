@@ -42,7 +42,7 @@ const ImageEditor = ({
   classNameWrapperImageCropper,
   className,
   disableImageRescaling,
-  areaCropperImage,
+  editorBorderRadius,
   maxImageSize,
   onChangeFile,
 }: ImageEditorProps) => {
@@ -68,7 +68,7 @@ const ImageEditor = ({
             isDisabled={isDisabled}
             disableImageRescaling={disableImageRescaling}
             onChangeFile={onChangeFile}
-            areaCropperImage={areaCropperImage}
+            editorBorderRadius={editorBorderRadius}
           />
           {Preview}
         </div>

@@ -1645,10 +1645,10 @@ class FilesStore {
                 shared = room.shared;
                 quotaLimit = room.quotaLimit;
                 usedSpace = room.usedSpace;
-
                 this.infoPanelStore.setInfoPanelRoom(room);
+              } else {
+                this.infoPanelStore.updateInfoPanelSelection(room);
               }
-
               const { mute } = room;
 
               runInAction(() => {
@@ -2502,6 +2502,7 @@ class FilesStore {
         "unpin-room",
         "mute-room",
         "unmute-room",
+        "edit-index",
         "export-room-index",
         "separator1",
         "duplicate-room",
@@ -4185,7 +4186,7 @@ class FilesStore {
   get indexColumnSize() {
     if (!this.selectedFolderStore.isIndexedFolder) return;
 
-    const minWidth = 36;
+    const minWidth = 33;
     const maxIndexLength = 5;
 
     const lastFile = this.filesList[this.filesList.length - 1];
@@ -4196,7 +4197,7 @@ class FilesStore {
       return minWidth + maxIndexLength * 3;
     }
 
-    return minWidth + orderLength * 3;
+    return minWidth + orderLength * 2;
   }
 
   get hasMoreFiles() {
@@ -4492,7 +4493,7 @@ class FilesStore {
         index = getFolderIndex(newRoom.id);
       }
 
-      return updateFolder(index, newRoom);
+      return this.updateFolder(index, newRoom);
     }
 
     this.setFolder(newRoom);

@@ -126,7 +126,8 @@ const StyledArticleItemBadgeWrapper = styled.div<{ showText?: boolean }>`
 
   ${(props) => !props.showText && badgeWithoutText}
 
-  .catalog-item__badge {
+  .catalog-item__badge,
+  .new-files {
     display: flex;
     align-items: center;
     justify-content: center;

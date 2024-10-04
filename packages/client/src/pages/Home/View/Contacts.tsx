@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { Consumer } from "@docspace/shared/utils";
 
 import { AccountsSectionBodyContent } from "../Section";
@@ -33,9 +32,7 @@ export const AccountsView = () => {
   return (
     <Consumer>
       {(context) => (
-        <>
-          <AccountsSectionBodyContent sectionWidth={context.sectionWidth} />
-        </>
+        <AccountsSectionBodyContent sectionWidth={context.sectionWidth} />
       )}
     </Consumer>
   );

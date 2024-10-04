@@ -24,32 +24,39 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { useLocation } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
+
 import { SelectionArea as SelectionAreaComponent } from "@docspace/shared/components/selection-area";
-import { useLocation, useParams } from "react-router-dom";
+import { TOnMove } from "@docspace/shared/components/selection-area/SelectionArea.types";
+
+import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
+import UsersStore from "SRC_DIR/store/contacts/UsersStore";
+import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
+import { getContactsView } from "SRC_DIR/helpers/contacts";
+
+type SelectionAreaProps = {
+  viewAs: PeopleStore["viewAs"];
+  setSelectionsPeople: UsersStore["setSelections"];
+  setSelectionsGroups: GroupsStore["setSelections"];
+};
 
 const SelectionArea = ({
   viewAs,
   setSelectionsPeople,
   setSelectionsGroups,
-}) => {
-  const { groupId } = useParams();
+}: SelectionAreaProps) => {
   const location = useLocation();
 
-  const isPeopleSelections =
-    !!groupId || location.pathname.includes("/accounts/people");
+  const isPeopleSelections = getContactsView(location) !== "groups";
 
-  const onMove = ({ added, removed, clear }) => {
-    isPeopleSelections
-      ? setSelectionsPeople(added, removed, clear)
-      : setSelectionsGroups(added, removed, clear);
+  const onMove = ({ added, removed, clear }: TOnMove) => {
+    if (isPeopleSelections) setSelectionsPeople(added, removed, clear);
+    else setSelectionsGroups(added, removed, clear);
   };
 
-  return isMobile ? (
-    <></>
-  ) : (
+  return isMobile ? null : (
     <SelectionAreaComponent
       containerClass="section-scroll"
       scrollClass="section-scroll"
@@ -62,11 +69,12 @@ const SelectionArea = ({
   );
 };
 
-export default inject(({ peopleStore }) => {
-  const { viewAs } = peopleStore;
+export default inject(({ peopleStore }: { peopleStore: PeopleStore }) => {
+  const { viewAs, usersStore, groupsStore } = peopleStore;
 
-  const { setSelections: setSelectionsPeople } = peopleStore.usersStore;
-  const { setSelections: setSelectionsGroups } = peopleStore.groupsStore;
+  const { setSelections: setSelectionsPeople } = usersStore!;
+
+  const { setSelections: setSelectionsGroups } = groupsStore!;
 
   return {
     viewAs,

@@ -47,7 +47,8 @@ import {
 import AccountsDialogs from "./Section/AccountsBody/Dialogs";
 
 import FilesSelectionArea from "./SelectionArea/FilesSelectionArea";
-import AccountsSelectionArea from "./SelectionArea/AccountsSelectionArea";
+import ContactsSelectionArea from "./SelectionArea/ContactsSelectionArea";
+
 import { InfoPanelBodyContent, InfoPanelHeaderContent } from "./InfoPanel";
 
 import MediaViewer from "./MediaViewer";
@@ -137,7 +138,7 @@ const PureHome = (props) => {
     withPaging,
     isEmptyPage,
 
-    accountsViewAs,
+    contactsViewAs,
     getUsersList,
     getGroups,
     fetchGroup,
@@ -322,7 +323,7 @@ const PureHome = (props) => {
       withBodyAutoFocus: !isMobile,
       firstLoad,
       isLoaded: !firstLoad,
-      viewAs: accountsViewAs,
+      viewAs: contactsViewAs,
       isAccounts: isContactsPage,
     };
 
@@ -363,7 +364,7 @@ const PureHome = (props) => {
       ) : isContactsPage ? (
         <>
           <AccountsDialogs />
-          <AccountsSelectionArea />
+          <ContactsSelectionArea />
         </>
       ) : (
         <>
@@ -497,8 +498,6 @@ export const Component = inject(
       wsCreatedPDFForm,
     } = filesStore;
 
-    const { updateProfileCulture } = peopleStore.targetUserStore;
-
     const { createTag } = tagsStore;
 
     const { gallerySelected } = oformsStore;
@@ -555,8 +554,13 @@ export const Component = inject(
       getSettings,
     } = settingsStore;
 
-    const { usersStore, groupsStore, viewAs: accountsViewAs } = peopleStore;
-
+    const {
+      usersStore,
+      groupsStore,
+      targetUserStore,
+      viewAs: contactsViewAs,
+    } = peopleStore;
+    const { updateProfileCulture } = targetUserStore;
     const { getUsersList, setContactsTab } = usersStore;
     const {
       getGroups,
@@ -641,7 +645,6 @@ export const Component = inject(
       getFileInfo,
       gallerySelected,
       setIsUpdatingRowItem,
-      setContactsTab,
 
       setFrameConfig,
       frameConfig,
@@ -662,10 +665,6 @@ export const Component = inject(
       withPaging,
       isEmptyPage,
 
-      accountsViewAs,
-      getUsersList,
-      getGroups,
-      fetchGroup,
       setSelectedNode,
       onClickBack,
 
@@ -679,14 +678,21 @@ export const Component = inject(
       addTagsToRoom,
       removeTagsFromRoom,
       loadCurrentUser: userStore.loadCurrentUser,
-      updateProfileCulture,
       getRooms,
       setSelectedFolder,
       getFolderModel,
       scrollToTop,
+      wsCreatedPDFForm,
+
+      // contacts store
+      setContactsTab,
+      contactsViewAs,
+      getUsersList,
+      getGroups,
+      fetchGroup,
       isEmptyGroups,
       isCurrentGroupEmpty,
-      wsCreatedPDFForm,
+      updateProfileCulture,
     };
   },
 )(observer(Home));

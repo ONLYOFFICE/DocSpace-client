@@ -54,7 +54,7 @@ const DEFAULT_ACCOUNT_LOGIN_TYPE = null;
 const DEFAULT_WITHOUT_GROUP = false;
 const DEFAULT_QUOTA_FILTER = null;
 const DEFAULT_FILTER_SEPARATOR = null;
-const DEFAULT_USER_ID = null;
+const DEFAULT_INVITER_ID = null;
 const DEFAULT_INVITED_BY_ME = false;
 
 const ACTIVE_EMPLOYEE_STATUS = EmployeeStatus.Active;
@@ -73,7 +73,7 @@ const ACCOUNT_LOGIN_TYPE = "accountLoginType";
 const WITHOUT_GROUP = "withoutGroup";
 const QUOTA_FILTER = "quotaFilter";
 const FILTER_SEPARATOR = "filterSeparator";
-const USER_ID = "userid";
+const INVITER_ID = "inviterid";
 const INVITED_BY_ME = "invitedbyme";
 
 class Filter {
@@ -99,7 +99,7 @@ class Filter {
       DEFAULT_QUOTA_FILTER,
       DEFAULT_FILTER_SEPARATOR,
       DEFAULT_INVITED_BY_ME,
-      DEFAULT_USER_ID,
+      DEFAULT_INVITER_ID,
     );
   }
 
@@ -167,7 +167,7 @@ class Filter {
         ((urlFilter[INVITED_BY_ME] ===
           "true") as typeof defaultFilter.invitedByMe)) ||
       defaultFilter.withoutGroup;
-    const userId = urlFilter[USER_ID] || defaultFilter.userId;
+    const inviterId = urlFilter[INVITER_ID] || defaultFilter.inviterId;
 
     const newFilter = new Filter(
       page,
@@ -186,7 +186,7 @@ class Filter {
       quotaFilter,
       filterSeparator,
       invitedByMe,
-      userId,
+      inviterId,
     );
 
     return newFilter;
@@ -209,7 +209,7 @@ class Filter {
     public quotaFilter: Nullable<number> = DEFAULT_QUOTA_FILTER,
     public filterSeparator: Nullable<string> = DEFAULT_FILTER_SEPARATOR,
     public invitedByMe: boolean = DEFAULT_INVITED_BY_ME,
-    public userId: Nullable<string> = DEFAULT_USER_ID,
+    public inviterId: Nullable<string> = DEFAULT_INVITER_ID,
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -227,7 +227,7 @@ class Filter {
     this.quotaFilter = quotaFilter;
     this.filterSeparator = filterSeparator;
     this.invitedByMe = invitedByMe;
-    this.userId = userId;
+    this.inviterId = inviterId;
   }
 
   getStartIndex = () => {
@@ -257,7 +257,7 @@ class Filter {
       quotaFilter,
       filterSeparator,
       invitedByMe,
-      userId,
+      inviterId,
     } = this;
 
     let employeetype = null;
@@ -282,7 +282,7 @@ class Filter {
       quotaFilter,
       filterSeparator,
       invitedByMe,
-      userId,
+      inviterId,
     };
 
     dtoFilter = { ...dtoFilter, ...employeetype };
@@ -307,7 +307,7 @@ class Filter {
       quotaFilter,
       filterSeparator,
       invitedByMe,
-      userId,
+      inviterId,
     } = this;
 
     const dtoFilter: {
@@ -325,7 +325,7 @@ class Filter {
       [PAYMENTS]?: typeof payments;
       [ACCOUNT_LOGIN_TYPE]?: typeof accountLoginType;
       [INVITED_BY_ME]?: typeof invitedByMe;
-      [USER_ID]?: typeof userId;
+      [INVITER_ID]?: typeof inviterId;
     } = {
       page: page + 1,
       sortby: sortBy,
@@ -354,7 +354,7 @@ class Filter {
 
     if (invitedByMe) dtoFilter[INVITED_BY_ME] = invitedByMe;
 
-    if (userId) dtoFilter[USER_ID] = userId;
+    if (inviterId) dtoFilter[INVITER_ID] = inviterId;
 
     const str = toUrlParams(dtoFilter, true);
 
@@ -387,7 +387,7 @@ class Filter {
           this.quotaFilter,
           this.filterSeparator,
           this.invitedByMe,
-          this.userId,
+          this.inviterId,
         );
   }
 
@@ -407,7 +407,7 @@ class Filter {
       this.withoutGroup === filter.withoutGroup &&
       this.filterSeparator === filter.filterSeparator &&
       this.invitedByMe === filter.invitedByMe &&
-      this.userId === filter.userId;
+      this.inviterId === filter.inviterId;
 
     return equals;
   }

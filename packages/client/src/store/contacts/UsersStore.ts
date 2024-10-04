@@ -49,7 +49,7 @@ import {
   getUserChecked,
   setContactsUsersFilterUrl,
 } from "SRC_DIR/helpers/contacts";
-import type { TContactsSelected } from "SRC_DIR/helpers/contacts";
+import type { TContactsSelected, TContactsTab } from "SRC_DIR/helpers/contacts";
 
 import InfoPanelStore from "../InfoPanelStore";
 import AccessRightsStore from "../AccessRightsStore";
@@ -87,6 +87,8 @@ class UsersStore {
 
   requestRunning = false;
 
+  contactsTab: TContactsTab = "people";
+
   constructor(
     public settingsStore: SettingsStore,
     public infoPanelStore: InfoPanelStore,
@@ -108,6 +110,10 @@ class UsersStore {
 
     makeAutoObservable(this);
   }
+
+  setContactsTab = (contactsTab: TContactsTab) => {
+    this.contactsTab = contactsTab;
+  };
 
   setFilter = (filter: Filter) => {
     const key = `PeopleFilter=${this.userStore.user?.id}`;
@@ -135,7 +141,7 @@ class UsersStore {
       this.filter.quotaFilter ||
       this.filter.filterSeparator ||
       this.filter.invitedByMe ||
-      this.filter.userId
+      this.filter.inviterId
     );
   }
 

@@ -29,13 +29,19 @@ import { Navigate } from "react-router-dom";
 import componentLoader from "@docspace/shared/utils/component-loader";
 
 import PrivateRoute from "../components/PrivateRouteWrapper";
+import {
+  GUESTS_ROUTE,
+  GROUPS_ROUTE,
+  INSIDE_GROUP_ROUTE,
+  PEOPLE_ROUTE,
+} from "SRC_DIR/helpers/contacts";
 
 export const contanctsRoutes = [
   {
     path: "accounts",
     element: (
       <PrivateRoute restricted withManager withCollaborator>
-        <Navigate to="/accounts/people/filter" replace />
+        <Navigate to={PEOPLE_ROUTE} replace />
       </PrivateRoute>
     ),
   },
@@ -43,7 +49,7 @@ export const contanctsRoutes = [
     path: "accounts/filter",
     element: (
       <PrivateRoute restricted withManager withCollaborator>
-        <Navigate to="/accounts/people/filter" replace />
+        <Navigate to={PEOPLE_ROUTE} replace />
       </PrivateRoute>
     ),
   },
@@ -52,7 +58,7 @@ export const contanctsRoutes = [
     element: (
       <PrivateRoute restricted withManager>
         <Navigate
-          to="/accounts/people/filter"
+          to={PEOPLE_ROUTE}
           state={{ openChangeOwnerDialog: true }}
           replace
         />
@@ -63,15 +69,15 @@ export const contanctsRoutes = [
     path: "accounts/people",
     element: (
       <PrivateRoute restricted withManager withCollaborator>
-        <Navigate to="/accounts/people/filter" replace />
+        <Navigate to={PEOPLE_ROUTE} replace />
       </PrivateRoute>
     ),
   },
   {
-    path: "accounts/people/filter",
+    path: PEOPLE_ROUTE,
     async lazy() {
       const { AccountsView } = await componentLoader(
-        () => import("SRC_DIR/pages/Home/View/Accounts"),
+        () => import("SRC_DIR/pages/Home/View/Contacts"),
       );
 
       const Component = () => {
@@ -89,15 +95,15 @@ export const contanctsRoutes = [
     path: "accounts/groups",
     element: (
       <PrivateRoute restricted withManager withCollaborator>
-        <Navigate to="/accounts/groups/filter" replace />
+        <Navigate to={GROUPS_ROUTE} replace />
       </PrivateRoute>
     ),
   },
   {
-    path: "accounts/groups/filter",
+    path: GROUPS_ROUTE,
     async lazy() {
       const { AccountsView } = await componentLoader(
-        () => import("SRC_DIR/pages/Home/View/Accounts"),
+        () => import("SRC_DIR/pages/Home/View/Contacts"),
       );
 
       const Component = () => {
@@ -120,15 +126,41 @@ export const contanctsRoutes = [
     ),
   },
   {
-    path: "accounts/groups/:groupId/filter",
+    path: INSIDE_GROUP_ROUTE,
     async lazy() {
       const { AccountsView } = await componentLoader(
-        () => import("SRC_DIR/pages/Home/View/Accounts"),
+        () => import("SRC_DIR/pages/Home/View/Contacts"),
       );
 
       const Component = () => {
         return (
           <PrivateRoute restricted withManager withCollaborator>
+            <AccountsView />
+          </PrivateRoute>
+        );
+      };
+
+      return { Component };
+    },
+  },
+  {
+    path: "accounts/guests",
+    element: (
+      <PrivateRoute restricted withManager>
+        <Navigate to={GUESTS_ROUTE} replace />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: GUESTS_ROUTE,
+    async lazy() {
+      const { AccountsView } = await componentLoader(
+        () => import("SRC_DIR/pages/Home/View/Contacts"),
+      );
+
+      const Component = () => {
+        return (
+          <PrivateRoute restricted withManager>
             <AccountsView />
           </PrivateRoute>
         );

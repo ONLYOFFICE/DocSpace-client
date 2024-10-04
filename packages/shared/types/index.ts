@@ -100,6 +100,7 @@ declare global {
     snackbar?: {};
     DocSpace: {
       navigate: (path: string, state?: { [key: string]: unknown }) => void;
+      location: Location;
     };
     ClientConfig?: {
       pdfViewerUrl: string;

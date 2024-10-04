@@ -23,18 +23,20 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { useLocation } from "react-router-dom";
 
+import { getContactsView } from "SRC_DIR/helpers/contacts";
 import AccountsTabs from "./AccountsTabs";
 import MyDocumentsTabs from "./MyDocumentsTabs";
 import { inject, observer } from "mobx-react";
-import { useLocation } from "react-router-dom";
 
 const SectionSubmenuContent = ({ isPersonalRoom, isRecentTab }) => {
   const location = useLocation();
-  const isAccounts = location.pathname.includes("/accounts");
+
+  const isContacts = getContactsView(location);
 
   if (isPersonalRoom || isRecentTab) return <MyDocumentsTabs />;
-  if (isAccounts) return <AccountsTabs />;
+  if (isContacts) return <AccountsTabs />;
   return null;
 };
 

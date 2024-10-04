@@ -24,41 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect } from "react";
+export type TContactsSelected =
+  | "all"
+  | "active"
+  | "pending"
+  | "disabled"
+  | "none"
+  | "close";
 
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-import GroupsFilter from "@docspace/shared/api/groups/filter";
+export type TContactsTab = "people" | "groups" | "inside_group" | "guests";
 
-const useGroups = ({
-  t,
-  isAccountsPage,
-  isGroupsAccounts,
-  location,
+export type TContactsViewAs = "table" | "row";
 
-  setIsLoading,
-
-  setSelectedNode,
-  fetchGroups,
-  scrollToTop,
-}) => {
-  useEffect(() => {
-    if (!isAccountsPage || !isGroupsAccounts) return;
-    setIsLoading(true);
-    setSelectedNode(["accounts", "groups", "filter"]);
-
-    const newFilter = GroupsFilter.getFilter(location);
-
-    setDocumentTitle(t("Common:Contacts"));
-
-    fetchGroups(newFilter, true, true)
-      .catch((err) => {
-        console.error(err);
-      })
-      .finally(() => {
-        scrollToTop();
-        setIsLoading(false);
-      });
-  }, [isAccountsPage, isGroupsAccounts, location.pathname, location.search]);
-};
-
-export default useGroups;
+export type TContactsMenuItemdId = "active" | "pending" | "disabled" | "all";

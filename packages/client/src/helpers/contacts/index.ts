@@ -24,55 +24,24 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import Filter from "@docspace/shared/api/people/filter";
-import { TUser } from "@docspace/shared/api/people/types";
-import { EmployeeStatus } from "@docspace/shared/enums";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
+export { PEOPLE_ROUTE, GROUPS_ROUTE, GUESTS_ROUTE } from "./constants";
 
-import config from "PACKAGE_FILE";
+export type {
+  TContactsSelected,
+  TContactsTab,
+  TContactsViewAs,
+  TContactsMenuItemdId,
+} from "./types";
 
-export type TSelected =
-  | "all"
-  | "active"
-  | "pending"
-  | "disabled"
-  | "none"
-  | "close";
-
-export const setContactsFilterUrl = (filter: Filter) => {
-  const urlFilter = filter.toUrlParams();
-  const newPath = combineUrl(`/accounts/people/filter?${urlFilter}`);
-
-  if (window.location.pathname + window.location.search === newPath) return;
-
-  window.history.replaceState(
-    "",
-    "",
-    combineUrl(window.ClientConfig?.proxy?.url, config.homepage, newPath),
-  );
-};
-
-export const employeeWrapperToMemberModel = (profile: TUser) => {
-  const comment = profile.notes;
-  const department = profile.groups
-    ? profile.groups.map((group) => group.id)
-    : [];
-  const worksFrom = profile.workFrom;
-
-  return { ...profile, comment, department, worksFrom };
-};
-
-export const getUserChecked = (user: TUser, selected: TSelected) => {
-  switch (selected) {
-    case "all":
-      return true;
-    case "active":
-      return user.status === EmployeeStatus.Active;
-    case "pending":
-      return user.status === EmployeeStatus.Pending;
-    case "disabled":
-      return user.status === EmployeeStatus.Disabled;
-    default:
-      return false;
-  }
-};
+export {
+  setContactsUsersFilterUrl,
+  resetFilter,
+  employeeWrapperToMemberModel,
+  getUserChecked,
+  getContactsMenuItemId,
+  getContactsCheckboxItemLabel,
+  changeUserQuota,
+  onDeletePersonalDataClick,
+  onInviteAgainClick,
+  getContactsView,
+} from "./utils";

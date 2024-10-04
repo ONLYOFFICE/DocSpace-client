@@ -396,7 +396,7 @@ class GroupsStore {
     this.selected = selected;
     this.setSelection(this.getGroupsBySelected(selected));
 
-    this.peopleStore.accountsHotkeysStore.setHotkeyCaret(null);
+    this.peopleStore.contactsHotkeysStore.setHotkeyCaret(null);
     return selected;
   };
 
@@ -649,7 +649,7 @@ class GroupsStore {
     const { setIsSectionBodyLoading, setIsSectionFilterLoading } =
       this.clientLoadingStore;
 
-    const url = `/accounts/groups/${groupId}`;
+    const url = `/accounts/groups/${groupId}/filter`;
 
     if (openingNewTab(url, e)) return;
 

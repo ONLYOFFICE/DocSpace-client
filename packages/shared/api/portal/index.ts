@@ -35,19 +35,21 @@ import {
 } from "./types";
 import { Nullable } from "../../types";
 
-export function getShortenedLink(link: string) {
-  return request({
+export async function getShortenedLink(link: string) {
+  const shortLink = (await request({
     method: "put",
     url: "/portal/getshortenlink",
     data: { link },
-  });
+  })) as string;
+
+  return shortLink;
 }
 
 export async function getInvitationLink(type: EmployeeType) {
-  const res = await request({
+  const res = (await request({
     method: "get",
     url: `/portal/users/invite/${type}`,
-  });
+  })) as string;
 
   return res;
 }

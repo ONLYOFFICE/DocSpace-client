@@ -24,42 +24,61 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { useLocation } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 import { observer, inject } from "mobx-react";
+
 import { SelectionArea as SelectionAreaComponent } from "@docspace/shared/components/selection-area";
+import { TOnMove } from "@docspace/shared/components/selection-area/SelectionArea.types";
 
-const SelectionArea = (props) => {
-  const { viewAs, setSelections } = props;
+import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
+import UsersStore from "SRC_DIR/store/contacts/UsersStore";
+import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
+import { getContactsView } from "SRC_DIR/helpers/contacts";
 
-  const onMove = ({ added, removed, clear }) => {
-    setSelections(added, removed, clear);
+type SelectionAreaProps = {
+  viewAs: PeopleStore["viewAs"];
+  setSelectionsPeople: UsersStore["setSelections"];
+  setSelectionsGroups: GroupsStore["setSelections"];
+};
+
+const SelectionArea = ({
+  viewAs,
+  setSelectionsPeople,
+  setSelectionsGroups,
+}: SelectionAreaProps) => {
+  const location = useLocation();
+
+  const isPeopleSelections = getContactsView(location) !== "groups";
+
+  const onMove = ({ added, removed, clear }: TOnMove) => {
+    if (isPeopleSelections) setSelectionsPeople(added, removed, clear);
+    else setSelectionsGroups(added, removed, clear);
   };
 
-  const itemHeight = viewAs === "table" ? 49 : 59;
-
-  return isMobile ? (
-    <></>
-  ) : (
+  return isMobile ? null : (
     <SelectionAreaComponent
       containerClass="section-scroll"
       scrollClass="section-scroll"
       itemsContainerClass="ReactVirtualized__Grid__innerScrollContainer"
       selectableClass="window-item"
-      itemClass="user-item"
+      itemClass={isPeopleSelections ? "user-item" : "group-item"}
       onMove={onMove}
       viewAs={viewAs}
-      itemHeight={itemHeight}
     />
   );
 };
 
-export default inject(({ peopleStore }) => {
-  const { viewAs } = peopleStore;
-  const { setSelections } = peopleStore.usersStore;
+export default inject(({ peopleStore }: { peopleStore: PeopleStore }) => {
+  const { viewAs, usersStore, groupsStore } = peopleStore;
+
+  const { setSelections: setSelectionsPeople } = usersStore!;
+
+  const { setSelections: setSelectionsGroups } = groupsStore!;
 
   return {
     viewAs,
-    setSelections,
+    setSelectionsPeople,
+    setSelectionsGroups,
   };
 })(observer(SelectionArea));

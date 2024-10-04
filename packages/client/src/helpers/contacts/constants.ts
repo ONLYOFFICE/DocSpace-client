@@ -24,45 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { matchPath } from "react-router-dom";
-
-import AccountsFilter from "@docspace/shared/api/people/filter";
-
-import { setDocumentTitle } from "SRC_DIR/helpers/utils";
-
-const useInsideGroup = ({
-  t,
-  groupId,
-  location,
-
-  setIsLoading,
-  fetchGroup,
-  setPortalTariff,
-  scrollToTop,
-}) => {
-  const isInsideGroup = matchPath(
-    "/accounts/groups/:groupId/filter",
-    location.pathname,
-  );
-
-  React.useEffect(() => {
-    if (!isInsideGroup || !groupId) return;
-    setIsLoading(true);
-
-    const newFilter = AccountsFilter.getFilter(location);
-
-    setDocumentTitle(t("Common:Contacts"));
-
-    fetchGroup(groupId, newFilter, true, true)
-      .catch((err) => {
-        if (err?.response?.status === 402) setPortalTariff();
-      })
-      .finally(() => {
-        scrollToTop();
-        setIsLoading(false);
-      });
-  }, [groupId, location.pathname, location.search]);
-};
-
-export default useInsideGroup;
+export const PEOPLE_ROUTE = "accounts/people/filter";
+export const GROUPS_ROUTE = "accounts/groups/filter";
+export const GUESTS_ROUTE = "accounts/guests/filter";
+export const INSIDE_GROUP_ROUTE = "accounts/groups/:groupId/filter";

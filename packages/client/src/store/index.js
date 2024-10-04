@@ -185,6 +185,18 @@ const dialogsStore = new DialogsStore(
   infoPanelStore,
 );
 
+const profileActionsStore = new ProfileActionsStore(
+  authStore,
+  filesStore,
+  peopleStore,
+  treeFoldersStore,
+  selectedFolderStore,
+  pluginStore,
+  userStore,
+  settingsStore,
+  currentTariffStatusStore,
+);
+
 const peopleStore = new PeopleStore(
   authStore,
   setupStore,
@@ -195,7 +207,10 @@ const peopleStore = new PeopleStore(
   tfaStore,
   settingsStore,
   clientLoadingStore,
+  profileActionsStore,
 );
+
+profileActionsStore.peopleStore = peopleStore;
 
 const uploadDataStore = new UploadDataStore(
   settingsStore,
@@ -260,20 +275,6 @@ const hotkeyStore = new HotkeyStore(
   uploadDataStore,
   selectedFolderStore,
 );
-
-const profileActionsStore = new ProfileActionsStore(
-  authStore,
-  filesStore,
-  peopleStore,
-  treeFoldersStore,
-  selectedFolderStore,
-  pluginStore,
-  userStore,
-  settingsStore,
-  currentTariffStatusStore,
-);
-
-peopleStore.profileActionsStore = profileActionsStore;
 
 const tableStore = new TableStore(
   authStore,

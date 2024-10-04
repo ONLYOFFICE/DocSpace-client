@@ -35,6 +35,7 @@ import { toastr } from "@docspace/shared/components/toast";
 
 import { StyledBody, StyledText } from "./StyledComponent";
 import { connectedCloudsTypeTitleTranslation } from "SRC_DIR/helpers/filesUtils";
+import { changeUserQuota } from "SRC_DIR/helpers/contacts";
 
 const getOptions = (t, item, spaceLimited) => {
   const items = [
@@ -214,7 +215,7 @@ export default inject(
     },
     { type },
   ) => {
-    const { changeUserQuota, usersStore } = peopleStore;
+    const { usersStore } = peopleStore;
     const {
       setCustomUserQuota,
       resetUserQuota,

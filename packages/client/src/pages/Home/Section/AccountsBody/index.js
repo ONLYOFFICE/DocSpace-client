@@ -123,7 +123,8 @@ const SectionBodyContent = (props) => {
 
   return (
     <>
-      {location.pathname.includes("/accounts/people") ? (
+      {location.pathname.includes("/accounts/people") ||
+      location.pathname.includes("/accounts/guests") ? (
         <People />
       ) : !groupId ? (
         <Groups />
@@ -166,7 +167,7 @@ export default inject(({ peopleStore, filesActionsStore }) => {
     selectAll,
     deselectAll,
     openItem,
-  } = peopleStore.accountsHotkeysStore;
+  } = peopleStore.contactsHotkeysStore;
   const { onClickBack } = filesActionsStore;
 
   return {

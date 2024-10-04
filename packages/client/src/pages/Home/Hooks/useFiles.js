@@ -60,7 +60,7 @@ const useFiles = ({
   fetchRooms,
   setIsLoading,
 
-  isAccountsPage,
+  isContactsPage,
   isSettingsPage,
 
   location,
@@ -138,7 +138,7 @@ const useFiles = ({
       });
     }
 
-    if (isAccountsPage || isSettingsPage) return;
+    if (isContactsPage || isSettingsPage) return;
 
     if (location.pathname === "/") setIsLoading(true, true, true);
     else setIsLoading(true, false, false);
@@ -333,7 +333,7 @@ const useFiles = ({
         scrollToTop();
         setIsLoading(false);
       });
-  }, [isAccountsPage, isSettingsPage, location.pathname, location.search]);
+  }, [isContactsPage, isSettingsPage, location.pathname, location.search]);
 
   return { onDrop };
 };

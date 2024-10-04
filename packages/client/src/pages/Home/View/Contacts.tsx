@@ -24,16 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Tabs } from "@docspace/shared/components/tabs";
-import { tablet } from "@docspace/shared/utils/device";
-import styled from "styled-components";
+import { Consumer } from "@docspace/shared/utils";
 
-export const AccountsTabs = styled(Tabs)`
-  /* width: 100%;
+import { AccountsSectionBodyContent } from "../Section";
 
-  @media ${tablet} {
-    .sticky {
-      margin-top: 8px;
-    }
-  } */
-`;
+export const AccountsView = () => {
+  return (
+    <Consumer>
+      {(context) => (
+        <AccountsSectionBodyContent sectionWidth={context.sectionWidth} />
+      )}
+    </Consumer>
+  );
+};

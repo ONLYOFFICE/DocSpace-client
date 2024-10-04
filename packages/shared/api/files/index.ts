@@ -787,6 +787,15 @@ export async function getNewFiles(folderId: number | string) {
   return res;
 }
 
+export async function getNewFolderFiles(folderId: number | string) {
+  const res = (await request({
+    method: "get",
+    url: `/files/rooms/${folderId}/news`,
+  })) as TNewFiles[];
+
+  return res;
+}
+
 // TODO: update res type
 export async function convertFile(
   fileId: string | number | null,

@@ -112,7 +112,9 @@ export const NewFilesPanelComponent = ({
         setIsLoading(true);
         const startLoaderTime = new Date();
 
-        const newFiles = await api.files.getNewFiles(folderId);
+        const newFiles = isRooms
+          ? await api.files.getNewFiles(folderId)
+          : await api.files.getNewFolderFiles(folderId);
 
         dataFetched.current = true;
         requestRunning.current = false;
@@ -138,7 +140,7 @@ export const NewFilesPanelComponent = ({
     requestRunning.current = true;
 
     getData();
-  }, [folderId, setIsLoading]);
+  }, [folderId, isRooms, setIsLoading]);
 
   const isMobileDevice = !isDesktop();
 

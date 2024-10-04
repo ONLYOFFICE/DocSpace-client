@@ -65,7 +65,7 @@ const CreateRoomEvent = ({
       roomParams.storageLocation.isThirdparty &&
       !roomParams.storageLocation.storageFolderId;
 
-    if (notConnectedThirdparty || isCorrectWatermark(roomParams.watermark)) {
+    if (notConnectedThirdparty || !isCorrectWatermark(roomParams.watermark)) {
       setCreateRoomConfirmDialogVisible(true);
 
       return;

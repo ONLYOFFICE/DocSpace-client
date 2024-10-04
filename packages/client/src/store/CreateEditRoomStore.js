@@ -353,7 +353,6 @@ class CreateEditRoomStore {
       roomType: roomParams.type,
       title: roomParams.title || t("Common:NewRoom"),
       indexing: roomParams.indexing,
-      lifetime: roomParams.lifetime,
       denyDownload: roomParams.denyDownload,
       createAsNewFolder: roomParams.createAsNewFolder ?? true,
       ...(quotaLimit && {
@@ -372,6 +371,15 @@ class CreateEditRoomStore {
     const uploadLogoData = new FormData();
     uploadLogoData.append(0, roomParams.icon.uploadedFile);
 
+    if (roomParams.lifetime) {
+      createRoomData.lifetime = roomParams.lifetime;
+    }
+
+    if (roomParams.watermark && this.isCorrectWatermark(roomParams.watermark)) {
+      createRoomData.watermark = await this.getWatermarkRequest(
+        roomParams.watermark,
+      );
+    }
     try {
       this.setIsLoading(true);
       withConfirm && this.setConfirmDialogIsLoading(true);
@@ -389,10 +397,6 @@ class CreateEditRoomStore {
       const actions = [];
 
       const requests = [];
-
-      if (this.watermarksSettings.enabled && !this.isCorrectWatermark()) {
-        requests.push(this.getWatermarkRequest(room));
-      }
 
       // delete thirdparty account if not needed
       if (!isThirdparty && storageFolderId)

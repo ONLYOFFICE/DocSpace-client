@@ -2825,6 +2825,8 @@ const Dark: TTheme = {
 
           dataFontColor: white,
           dataFontColorBlack: white,
+          notAvailableBackground: grayDark,
+          textColor: white,
         },
 
         companyInfo: {

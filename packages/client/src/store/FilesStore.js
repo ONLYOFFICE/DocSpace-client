@@ -1882,7 +1882,11 @@ class FilesStore {
     )
       filterData.quotaFilter = defaultFilter.quotaFilter;
 
-    if (type && !RoomsType[type]) filterData.type = defaultFilter.type;
+    const supportedType = Array.isArray(type)
+      ? type.every((t) => Object.values(RoomsType).includes(+t))
+      : type === filter.type;
+
+    if (type && !supportedType) filterData.type = defaultFilter.type;
 
     const request = () =>
       api.rooms

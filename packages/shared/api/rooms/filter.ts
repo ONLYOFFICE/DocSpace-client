@@ -202,22 +202,23 @@ class RoomsFilter {
 
     const page = (urlPage && +urlPage - 1) || defaultPage;
     const pageCount = (urlPageCount && +urlPageCount) || defaultPageCount;
-    const filterValue = urlFilterValue || defaultFilterValue;
-    const provider = urlProvider || defaultProvider;
+    const filterValue = (urlFilterValue as string) || defaultFilterValue;
+    const provider = (urlProvider as string) || defaultProvider;
     const type = urlType || defaultType;
-    const subjectId = urlSubjectId || defaultSubjectId;
+    const subjectId = (urlSubjectId as string) || defaultSubjectId;
     const subjectFilter =
       urlSubjectFilter?.toString() || defaultSubjectFilter?.toString();
     const searchInContent = false;
     const withSubfolders = false;
-    const searchArea = urlSearchArea || defaultSearchArea;
-    const tags = tryParseArray(urlTags) || defaultTags;
-    const sortBy = urlSortBy || defaultSortBy;
-    const sortOrder = urlSortOrder || defaultSortOrder;
-    const excludeSubject = urlExcludeSubject || defaultExcludeSubject;
-    const withoutTags = urlWithoutTags || defaultWithoutTags;
-    const quotaFilter = urlQuotaFilter || defaultQuotaFilter;
-    const storageFilter = urlStorageFilter || defaultStorageFilter;
+    const searchArea = (urlSearchArea as string) || defaultSearchArea;
+    const tags = tryParseArray(urlTags as string) || defaultTags;
+    const sortBy = (urlSortBy as string) || defaultSortBy;
+    const sortOrder = (urlSortOrder as string) || defaultSortOrder;
+    const excludeSubject =
+      (urlExcludeSubject as string) || defaultExcludeSubject;
+    const withoutTags = (urlWithoutTags as string) || defaultWithoutTags;
+    const quotaFilter = (urlQuotaFilter as string) || defaultQuotaFilter;
+    const storageFilter = (urlStorageFilter as string) || defaultStorageFilter;
 
     // TODO: remove it if search with subfolders and in content will be available and add it to the urlFilter and the defaultFilter
     // const searchInContent = urlSearchInContent || defaultSearchInContent;

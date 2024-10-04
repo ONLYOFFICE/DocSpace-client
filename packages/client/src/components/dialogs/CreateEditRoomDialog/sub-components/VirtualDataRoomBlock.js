@@ -128,7 +128,7 @@ const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams, isEdit }) => {
         isChecked={copyAndDownloadChecked}
       ></Block>
 
-      <WatermarkBlock BlockComponent={Block} t={t} isEdit={isEdit} />
+      {/* <WatermarkBlock BlockComponent={Block} t={t} isEdit={isEdit} /> */}
     </StyledVirtualDataRoomBlock>
   );
 };

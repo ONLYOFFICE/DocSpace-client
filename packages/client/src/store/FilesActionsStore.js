@@ -2870,6 +2870,7 @@ class FilesActionStore {
         if (isLeaveChecked) await this.onLeaveRoom(t);
         else toastr.success(t("Files:AppointNewOwner"));
       })
+      .catch((e) => toastr.error(e))
       .finally(() => {
         setSelected("none");
       });

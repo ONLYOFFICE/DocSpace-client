@@ -26,7 +26,7 @@
 
 import { makeAutoObservable } from "mobx";
 import isEqual from "lodash/isEqual";
-
+import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
 import { isDesktop } from "@docspace/shared/utils";
 import FilesFilter from "@docspace/shared/api/files/filter";
@@ -157,7 +157,6 @@ class CreateEditRoomStore {
   };
 
   getWatermarkRequest = async (room) => {
-
     if (this.watermarksSettings.enabled === false) {
       return setWatermarkSettings(room.id, {
         enabled: this.watermarksSettings.enabled,
@@ -224,6 +223,123 @@ class CreateEditRoomStore {
         imageHeight: img.naturalHeight,
       });
     });
+  };
+
+  onSaveEditRoom = async (t, newParams, room) => {
+    const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
+    const { cover, setRoomLogoCover } = this.dialogsStore;
+    const {
+      editRoom,
+      removeLogoFromRoom,
+      addActiveItems,
+      addTagsToRoom,
+      removeTagsFromRoom,
+
+      setFolder,
+    } = this.filesStore;
+    const { uploadedFile, onSaveRoomLogo } = this.avatarEditorDialogStore;
+    const { changeRoomOwner } = this.filesActionsStore;
+    const { createTag } = this.tagsStore;
+    const { isRootFolder, updateEditedSelectedRoom, id } =
+      this.selectedFolderStore;
+
+    const editRoomParams = {};
+
+    const quotaLimit = newParams?.quota || room.quotaLimit;
+    const isTitleChanged = !isEqual(newParams.title, room.title);
+    const denyDownloadChanged = newParams?.denyDownload !== room.denyDownload;
+    const indexingChanged = newParams?.indexing !== room.indexing;
+    const isQuotaChanged = quotaLimit !== room.quotaLimit;
+    const lifetimeChanged = !isEqual(newParams.lifetime, room.lifetime);
+    const isOwnerChanged = newParams?.roomOwner?.id !== room.createdBy.id;
+
+    if (isDefaultRoomsQuotaSet && isQuotaChanged) {
+      editRoomParams.quotaLimit = +quotaLimit;
+    }
+
+    if (isTitleChanged) {
+      editRoomParams.title = newParams.title || t("Common:NewRoom");
+    }
+
+    if (denyDownloadChanged) {
+      editRoomParams.denyDownload = newParams.denyDownload;
+    }
+
+    if (indexingChanged) {
+      editRoomParams.indexing = newParams.indexing;
+    }
+
+    if (lifetimeChanged) {
+      editRoomParams.lifetime = newParams.lifetime ?? {
+        enabled: false,
+      };
+    }
+
+    // if (isWatermarkChanged && isCorrectWatermark(roomParams.watermark)) {
+    //   editRoomParams.watermark = roomParams.watermark
+    //     ? await getWatermarkRequest(roomParams.watermark)
+    //     : {
+    //         enabled: false,
+    //       };
+    // }
+
+    const startTags = Object.values(room.tags);
+    const tags = newParams.tags.map((tag) => tag.name);
+    const removedTags = startTags.filter((sT) => !tags.includes(sT));
+    const newTags = newParams.tags.filter((t) => t.isNew).map((t) => t.name);
+    const isDeletionTags = removedTags.length > 0;
+
+    const isUpdatelogo = uploadedFile;
+    const isDeleteLogo = !!room.logo.original && !newParams.icon.uploadedFile;
+
+    const requests = [];
+
+    try {
+      if (Object.keys(editRoomParams).length)
+        requests.push(editRoom(room.id, editRoomParams));
+
+      for (let i = 0; i < newTags.length; i++) {
+        requests.push(createTag(newTags[i]));
+      }
+
+      if (isOwnerChanged) {
+        requests.push(changeRoomOwner(t, newParams?.roomOwner?.id));
+      }
+
+      if (!!requests.length) {
+        await Promise.all(requests);
+      }
+
+      if (isDeletionTags) {
+        requests.push(removeTagsFromRoom(room.id, removedTags));
+      }
+
+      if (isDeleteLogo) {
+        requests.push(removeLogoFromRoom(room.id));
+      }
+
+      if (cover) {
+        requests.push(setRoomLogoCover(room.id));
+      }
+
+      if (!cover && isUpdatelogo) {
+        addActiveItems(null, [room.id]);
+        requests.push(onSaveRoomLogo(room.id, newParams.icon, room, true));
+      }
+
+      let updatedRoomInfo = null;
+
+      if (tags.length) {
+        const tagsToAddList = tags.filter((t) => !startTags.includes(t));
+        updatedRoomInfo = await addTagsToRoom(room.id, tagsToAddList);
+
+        isRootFolder
+          ? setFolder(updatedRoomInfo)
+          : updateEditedSelectedRoom({ tags: tags });
+      }
+    } catch (e) {
+      toastr.error(e);
+    }
   };
 
   onCreateRoom = async (withConfirm = false, t) => {

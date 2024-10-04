@@ -543,28 +543,6 @@ export function getExportRoomIndexProgress() {
   }) as Promise<TExportRoomIndexTask>;
 }
 
-export function setWatermarkSettings(
-  roomId: number | string,
-  data: {
-    enabled: boolean;
-    rotate: number;
-    text: string;
-    additions: number;
-    imageScale: number;
-    imageUrl: string;
-    imageWidth: string;
-    imageHeight: string;
-  },
-) {
-  const options = {
-    method: "put",
-    url: `files/rooms/${roomId}/watermark`,
-    data,
-  };
-
-  return request(options);
-}
-
 export function setRoomCover(roomId, cover) {
   const data = {
     Color: cover.color,
@@ -577,18 +555,4 @@ export function setRoomCover(roomId, cover) {
   };
 
   return request(options);
-}
-
-export function getWatermarkSettings(roomId: number | string) {
-  return request({
-    method: "get",
-    url: `files/rooms/${roomId}/watermark`,
-  });
-}
-
-export function deleteWatermarkSettings(roomId: number | string) {
-  return request({
-    method: "delete",
-    url: `files/rooms/${roomId}/watermark`,
-  });
 }

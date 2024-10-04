@@ -45,6 +45,7 @@ import {
   TLogo,
   TRoomLifetime,
   TRoomSecurity,
+  TWatermark,
 } from "@docspace/shared/api/rooms/types";
 
 import { setDocumentTitle } from "../helpers/utils";
@@ -149,6 +150,8 @@ class SelectedFolderStore {
 
   lifetime: TRoomLifetime | null = null;
 
+  watermark: TWatermark | null = null;
+
   denyDownload: boolean | undefined;
 
   usedSpace: number | undefined;
@@ -211,6 +214,7 @@ class SelectedFolderStore {
       quotaLimit: this.quotaLimit,
       isCustomQuota: this.isCustomQuota,
       order: this.order,
+      watermark: this.watermark,
     };
   };
 
@@ -260,6 +264,7 @@ class SelectedFolderStore {
     this.quotaLimit = undefined;
     this.isCustomQuota = undefined;
     this.order = null;
+    this.watermark = null;
   };
 
   setParentId = (parentId: number) => {

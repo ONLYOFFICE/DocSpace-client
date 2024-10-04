@@ -3380,6 +3380,7 @@ class FilesStore {
         startFilling,
         draftLocation,
         expired,
+        watermark,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3554,6 +3555,7 @@ class FilesStore {
         startFilling,
         draftLocation,
         expired,
+        watermark,
       };
     });
   };

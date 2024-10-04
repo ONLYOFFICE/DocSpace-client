@@ -1,13 +1,12 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
-import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
 
 import FileLifetime from "./FileLifetime";
-import WatermarkBlock from "./Watermarks/WatermarkBlock";
+import Watermarks from "./Watermarks";
 
 const StyledVirtualDataRoomBlock = styled.div`
   .virtual-data-room-block {
@@ -71,12 +70,38 @@ const Block = ({
 const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams, isEdit }) => {
   const role = t("Translations:RoleViewer");
 
+  const initialInfo = useRef(null);
+
+  if (initialInfo.current === null) {
+    initialInfo.current = { ...roomParams };
+  }
+  const initialRoomParams = initialInfo.current;
+
   const [fileLifetimeChecked, setFileLifetimeChecked] = useState(
     !!roomParams?.lifetime,
   );
   const [copyAndDownloadChecked, setCopyAndDownloadChecked] = useState(
     !!roomParams?.denyDownload,
   );
+
+  console.log(
+    "roomParams.watermark",
+    roomParams.watermark,
+    !!roomParams.watermark && isEdit,
+  );
+  const [watermarksChecked, setWatermarksChecked] = useState(
+    !!roomParams.watermark && isEdit,
+  );
+
+  const onChangeAddWatermarksToDocuments = () => {
+    if (watermarksChecked)
+      setRoomParams({
+        ...roomParams,
+        watermark: null,
+      });
+
+    setWatermarksChecked(!watermarksChecked);
+  };
 
   const onChangeAutomaticIndexing = () => {
     setRoomParams({ ...roomParams, indexing: !roomParams.indexing });
@@ -128,7 +153,20 @@ const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams, isEdit }) => {
         isChecked={copyAndDownloadChecked}
       ></Block>
 
-      {/* <WatermarkBlock BlockComponent={Block} t={t} isEdit={isEdit} /> */}
+      <Block
+        headerText={t("AddWatermarksToDocuments")}
+        bodyText={t("AddWatermarksToDocumentsDescription")}
+        onChange={onChangeAddWatermarksToDocuments}
+        isDisabled={false}
+        isChecked={watermarksChecked}
+      >
+        <Watermarks
+          isEdit={isEdit}
+          roomParams={roomParams}
+          setRoomParams={setRoomParams}
+          initialRoomParams={initialRoomParams}
+        />
+      </Block>
     </StyledVirtualDataRoomBlock>
   );
 };

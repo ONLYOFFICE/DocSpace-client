@@ -28,9 +28,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
-import { getWatermarkSettings } from "@docspace/shared/api/rooms";
-import { RoomsType } from "@docspace/shared/enums";
-
 import { EditRoomDialog } from "../dialogs";
 
 const EditRoomEvent = ({
@@ -41,7 +38,6 @@ const EditRoomEvent = ({
   getThirdPartyIcon,
   setCreateRoomDialogVisible,
   isDefaultRoomsQuotaSet,
-  setInitialWatermarks,
   cover,
   onSaveEditRoom,
 }) => {
@@ -78,7 +74,7 @@ const EditRoomEvent = ({
     indexing: item.indexing,
     lifetime: item.lifetime,
     denyDownload: item.denyDownload,
-
+    watermark: item.watermark,
     ...(isDefaultRoomsQuotaSet && {
       quota: item.quotaLimit,
     }),
@@ -114,17 +110,12 @@ const EditRoomEvent = ({
 
     const requests = [fetchTags()];
 
-    if (item?.roomType === RoomsType.VirtualDataRoom)
-      requests.push(getWatermarkSettings(item.id));
-
     if (logo) requests.push(fetchLogoAction);
 
     const fetchInfo = async () => {
-      const [tags, watermarks] = await Promise.all(requests);
+      const [tags] = await Promise.all(requests);
 
       setFetchedTags(tags);
-
-      setInitialWatermarks(watermarks);
 
       setIsInitLoading(false);
     };
@@ -164,14 +155,14 @@ export default inject(
     const { setCreateRoomDialogVisible, cover } = dialogsStore;
 
     const { isDefaultRoomsQuotaSet } = currentQuotaStore;
-    const { setInitialWatermarks, onSaveEditRoom } = createEditRoomStore;
+    const { onSaveEditRoom } = createEditRoomStore;
 
     return {
       isDefaultRoomsQuotaSet,
       fetchTags,
       getThirdPartyIcon,
       setCreateRoomDialogVisible,
-      setInitialWatermarks,
+
       cover,
       onSaveEditRoom,
     };

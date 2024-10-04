@@ -62,6 +62,18 @@ export default function withFileActions(WrappedFileItem) {
       this.props.setEnabledHotkeys(true);
     };
 
+    getBadgeUrl = () => {
+      const { item } = this.props;
+
+      const showPlanetIcon =
+        (item.roomType === RoomsType.PublicRoom ||
+          item.roomType === RoomsType.FormRoom ||
+          item.roomType === RoomsType.CustomRoom) &&
+        item.shared;
+
+      return showPlanetIcon ? Planet12ReactSvgUrl : null;
+    };
+
     onDropZoneUpload = (files, uploadToFolder) => {
       const { t, dragging, setDragging, startUpload, createFoldersTree } =
         this.props;
@@ -322,13 +334,7 @@ export default function withFileActions(WrappedFileItem) {
 
       const checkedProps = id <= 0 ? false : isSelected;
 
-      const showPlanetIcon =
-        (item.roomType === RoomsType.PublicRoom ||
-          item.roomType === RoomsType.FormRoom ||
-          item.roomType === RoomsType.CustomRoom) &&
-        item.shared;
-
-      const badgeUrl = showPlanetIcon ? Planet12ReactSvgUrl : null;
+      const badgeUrl = this.getBadgeUrl();
 
       return (
         <WrappedFileItem

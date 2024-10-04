@@ -204,10 +204,13 @@ class CreateEditRoomStore {
       setFolder,
     } = this.filesStore;
     const { uploadedFile, onSaveRoomLogo } = this.avatarEditorDialogStore;
-    const { changeRoomOwner } = this.filesActionsStore;
+    const { changeRoomOwner, updateCurrentFolder } = this.filesActionsStore;
     const { createTag } = this.tagsStore;
-    const { isRootFolder, updateEditedSelectedRoom, id } =
-      this.selectedFolderStore;
+    const {
+      isRootFolder,
+      updateEditedSelectedRoom,
+      id: currentFolderId,
+    } = this.selectedFolderStore;
 
     const editRoomParams = {};
 
@@ -263,7 +266,7 @@ class CreateEditRoomStore {
 
     try {
       if (Object.keys(editRoomParams).length)
-        requests.push(editRoom(room.id, editRoomParams));
+        await editRoom(room.id, editRoomParams);
 
       for (let i = 0; i < newTags.length; i++) {
         requests.push(createTag(newTags[i]));
@@ -280,6 +283,12 @@ class CreateEditRoomStore {
       if (isDeleteLogo) {
         requests.push(removeLogoFromRoom(room.id));
       }
+
+      const isEditCurrentFolder = room.id === currentFolderId;
+      const needTableContentUpdate = indexingChanged && isEditCurrentFolder; //|| withPaging;
+
+      if (needTableContentUpdate)
+        requests.push(updateCurrentFolder(null, currentFolderId));
 
       if (!!requests.length) {
         await Promise.all(requests);

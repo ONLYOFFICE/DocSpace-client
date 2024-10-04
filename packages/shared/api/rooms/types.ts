@@ -30,9 +30,6 @@ import {
   FolderType,
   RoomsType,
   ShareAccessRights,
-  FolderType,
-  RoomsType,
-  ShareAccessRights,
   ValidationStatus,
 } from "../../enums";
 import { TCreatedBy, TPathParts } from "../../types";
@@ -130,4 +127,11 @@ export type TPublicRoomPassword = {
   shared: boolean;
   status: ValidationStatus;
   tenantId: string | number;
+};
+
+export type TNewFilesItem = TFile[] | { room: TRoom; items: TFile[] };
+
+export type TNewFiles = {
+  date: string;
+  items: TNewFilesItem[];
 };

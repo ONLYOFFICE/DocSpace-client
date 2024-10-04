@@ -211,19 +211,6 @@ const ArticleBodyContent = (props) => {
     ],
   );
 
-  const onShowNewFilesPanel = React.useCallback(
-    async (folderId) => {
-      if (disableBadgeClick) return;
-
-      setDisableBadgeClick(true);
-
-      await props.setNewFilesPanelVisible(true, [`${folderId}`]);
-
-      setDisableBadgeClick(false);
-    },
-    [disableBadgeClick],
-  );
-
   React.useEffect(() => {
     if (
       location.pathname.includes("/rooms/shared") &&
@@ -284,7 +271,6 @@ const ArticleBodyContent = (props) => {
     <>
       <Items
         onClick={onClick}
-        onBadgeClick={onShowNewFilesPanel}
         getLinkData={getLinkData}
         showText={showText}
         onHide={toggleArticleOpen}
@@ -305,7 +291,6 @@ export default inject(
     settingsStore,
     filesStore,
     treeFoldersStore,
-    dialogsStore,
     selectedFolderStore,
     clientLoadingStore,
     userStore,
@@ -327,8 +312,6 @@ export default inject(
 
     const { roomsFolderId, archiveFolderId, myFolderId, recycleBinFolderId } =
       treeFoldersStore;
-
-    const { setNewFilesPanelVisible } = dialogsStore;
 
     const selectedFolderId = selectedFolderStore.id;
 
@@ -355,8 +338,6 @@ export default inject(
       showArticleLoader,
       isVisitor: userStore.user.isVisitor,
       userId: userStore.user?.id,
-
-      setNewFilesPanelVisible,
 
       firstLoad,
       isDesktopClient,

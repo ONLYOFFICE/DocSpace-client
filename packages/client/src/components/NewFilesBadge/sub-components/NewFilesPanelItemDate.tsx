@@ -24,20 +24,59 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import AddUsersPanel from "./AddUsersPanel";
-import EmbeddingPanel from "./EmbeddingPanel";
-import VersionHistoryPanel from "./VersionHistoryPanel";
-import UploadPanel from "./UploadPanel";
-import HotkeysPanel from "./HotkeysPanel";
-import InvitePanel from "./InvitePanel";
-import EditLinkPanel from "./EditLinkPanel";
+import { useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
 
-export {
-  AddUsersPanel,
-  EmbeddingPanel,
-  VersionHistoryPanel,
-  UploadPanel,
-  HotkeysPanel,
-  InvitePanel,
-  EditLinkPanel,
+import { Text } from "@docspace/shared/components/text";
+import { getCookie, getCorrectDate } from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
+import { LANGUAGE } from "@docspace/shared/constants";
+
+import { NewFilesPanelItemDateProps } from "../NewFilesBadge.types";
+
+export const NewFilesPanelItemDate = ({
+  date,
+  culture,
+}: NewFilesPanelItemDateProps) => {
+  const { t } = useTranslation(["Common"]);
+  const theme = useTheme();
+
+  const getTitle = () => {
+    const now = new Date();
+    const enteredDate = new Date(date);
+
+    if (now.setHours(0, 0, 0, 0) === enteredDate.setHours(0, 0, 0, 0)) {
+      return t("Today");
+    }
+
+    now.setDate(now.getDate() - 1);
+
+    if (now.getDate() === enteredDate.getDate()) {
+      return t("Yesterday");
+    }
+
+    const locale = getCookie(LANGUAGE);
+
+    const correctDate = getCorrectDate(
+      locale ?? culture ?? "en",
+      new Date(enteredDate.setHours(0, 0, 0, 0)),
+    ).split(" ")[0];
+
+    return correctDate;
+  };
+
+  const title = getTitle();
+
+  return (
+    <Text
+      className="date-item"
+      fontSize="14px"
+      lineHeight="16px"
+      fontWeight={600}
+      color={theme.isBase ? globalColors.gray : globalColors.grayDark}
+      noSelect
+    >
+      {title}
+    </Text>
+  );
 };

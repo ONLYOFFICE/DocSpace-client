@@ -92,7 +92,11 @@ import { isMobile, isTablet } from "react-device-detect";
 import config from "PACKAGE_FILE";
 import { toastr } from "@docspace/shared/components/toast";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { isDesktop, trimSeparator } from "@docspace/shared/utils";
+import {
+  isDesktop,
+  isLockedSharedRoom,
+  trimSeparator,
+} from "@docspace/shared/utils";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import {
@@ -196,6 +200,9 @@ class ContextOptionsStore {
   }
 
   onOpenFolder = (item) => {
+    if (isLockedSharedRoom(item))
+      return this.dialogsStore.setPasswordEntryDialog(true, item);
+
     this.filesActionsStore.openLocationAction(item);
   };
 

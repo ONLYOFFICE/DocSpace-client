@@ -76,7 +76,7 @@ import { TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
 import { checkProtocol } from "../helpers/files-helpers";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
-import { isDesktop } from "@docspace/shared/utils";
+import { isDesktop, isLockedSharedRoom } from "@docspace/shared/utils";
 import { getCategoryType } from "SRC_DIR/helpers/utils";
 import { muteRoomNotification } from "@docspace/shared/api/settings";
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -2409,6 +2409,13 @@ class FilesActionStore {
   onMarkAsRead = (item) => this.markAsRead([], [`${item.id}`], item);
 
   openFileAction = (item, t, e) => {
+    if (isLockedSharedRoom(item))
+      return this.dialogsStore.setPasswordEntryDialog(true, item);
+
+    this.openItemAction(item, t, e);
+  };
+
+  openItemAction = (item, t, e) => {
     const { openDocEditor, isPrivacyFolder, setSelection, categoryType } =
       this.filesStore;
     const { currentDeviceType } = this.settingsStore;

@@ -85,6 +85,7 @@ import { FillPDFDialog } from "../dialogs/FillPDFDialog";
 import { ShareCollectSelector } from "../ShareCollectSelector";
 import { saveToLocalStorage } from "SRC_DIR/pages/PortalSettings/utils";
 import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
+import { PasswordEntryDialog } from "../dialogs/PasswordEntryDialog";
 
 const Panels = (props) => {
   const {
@@ -147,6 +148,7 @@ const Panels = (props) => {
     resetQuotaItem,
     isShowWarningDialog,
     roomLogoCoverDialogVisible,
+    passwordEntryDialogDate,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -343,6 +345,12 @@ const Panels = (props) => {
     roomLogoCoverDialogVisible && (
       <RoomLogoCoverDialog key="room-logo-cover-dialog" />
     ),
+    passwordEntryDialogDate.visible && (
+      <PasswordEntryDialog
+        key="password-entry-dialog"
+        item={passwordEntryDialogDate.item}
+      />
+    ),
   ];
 };
 
@@ -412,6 +420,7 @@ export default inject(
       setIsNewUserByCurrentUser,
       isNewUserByCurrentUser,
       isNewRoomByCurrentUser,
+      passwordEntryDialogDate,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -505,6 +514,7 @@ export default inject(
       setQuotaWarningDialogVisible,
       resetQuotaItem,
       isShowWarningDialog,
+      passwordEntryDialogDate,
     };
   },
 )(observer(Panels));

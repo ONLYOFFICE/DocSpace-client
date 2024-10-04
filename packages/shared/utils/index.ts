@@ -78,6 +78,7 @@ import {
 import { DeviceType } from "../enums";
 import { TFile } from "../api/files/types";
 import { onEdgeScrolling, clearEdgeScrollingTimer } from "./edgeScrolling";
+import type { TRoom } from "../api/rooms/types";
 
 export {
   isBetaLanguage,
@@ -197,4 +198,8 @@ export const getLastColumn = (
   if (hideColumnsTable) return filterColumns[1];
   if (filterColumns.length > 0) return filterColumns[filterColumns.length - 1];
   return null;
+};
+
+export const isLockedSharedRoom = (item: TRoom) => {
+  return Boolean(item.external && item.passwordProtected);
 };

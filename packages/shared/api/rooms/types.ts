@@ -101,6 +101,8 @@ export type TRoom = {
   isArchive?: boolean;
   security: TRoomSecurity;
   lifetime: TRoomLifetime;
+  external?: boolean;
+  passwordProtected?: boolean;
 };
 
 export type TGetRooms = {

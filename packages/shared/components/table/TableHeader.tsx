@@ -457,7 +457,7 @@ class TableHeaderComponent extends React.Component<
       .map((column) => getSubstring(column))
       .reduce((x, y) => x + y);
 
-    const oldWidth = defaultWidth - defaultSize - SETTINGS_SIZE;
+    let oldWidth = defaultWidth - defaultSize - SETTINGS_SIZE;
 
     let str = "";
     let gridTemplateColumnsWithoutOverfilling: string[] = [];
@@ -745,6 +745,27 @@ class TableHeaderComponent extends React.Component<
             const isActiveNow = item === "0px" && enable;
             if (isActiveNow && column) activeColumnIndex = index;
 
+            if (
+              columns[index]?.key === "Index" &&
+              shortColumSize &&
+              !minWidthsIndex.includes(+shortColumSize)
+            ) {
+              this.setState((prevState) => ({
+                minWidthsIndex: [...prevState.minWidthsIndex, +shortColumSize],
+              }));
+            }
+
+            if (
+              columns[index]?.key === "Index" &&
+              shortColumSize &&
+              getSubstring(item) > +shortColumSize &&
+              minWidthsIndex.includes(getSubstring(item)) &&
+              minWidthsIndex.includes(+shortColumSize)
+            ) {
+              const diff = getSubstring(item) - +shortColumSize;
+              oldWidth -= diff;
+            }
+
             if (!enable) {
               gridTemplateColumns.push("0px");
 
@@ -775,19 +796,6 @@ class TableHeaderComponent extends React.Component<
                   this.resetColumns();
                   return;
                 }
-              }
-
-              if (
-                +index === 0 &&
-                shortColumSize &&
-                !minWidthsIndex.includes(+shortColumSize)
-              ) {
-                this.setState((prevState) => ({
-                  minWidthsIndex: [
-                    ...prevState.minWidthsIndex,
-                    +shortColumSize,
-                  ],
-                }));
               }
 
               let newItemWidth;
@@ -835,9 +843,8 @@ class TableHeaderComponent extends React.Component<
                 shortColumSize &&
                 getSubstring(newItemWidth) > +shortColumSize &&
                 minWidthsIndex.includes(getSubstring(newItemWidth)) &&
-                minWidthsIndex?.includes(+shortColumSize)
+                minWidthsIndex.includes(+shortColumSize)
               ) {
-                overWidth += getSubstring(newItemWidth) - +shortColumSize;
                 newItemWidth = `${shortColumSize}px`;
               }
 
@@ -1041,10 +1048,10 @@ class TableHeaderComponent extends React.Component<
     const containerWidth =
       container.clientWidth - defaultColumnSize - SETTINGS_SIZE;
 
-    const firstColumnPercent = enableColumns.length > 0 ? 40 : 100;
+    const nameColumnPercent = enableColumns.length > 0 ? 40 : 100;
     const percent = enableColumns.length > 0 ? 60 / enableColumns.length : 0;
 
-    const wideColumnSize = `${(containerWidth * firstColumnPercent) / 100}px`;
+    const wideColumnSize = `${(containerWidth * nameColumnPercent) / 100}px`;
     const otherColumns = `${(containerWidth * percent) / 100}px`;
 
     for (const col of columns) {

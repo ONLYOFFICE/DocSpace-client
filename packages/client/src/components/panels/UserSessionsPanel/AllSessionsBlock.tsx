@@ -68,18 +68,24 @@ const AllSessionsBlock = (props: AllSessionsBlockProps) => {
     isLoading,
     isDisabled,
     items = {} as IAllSessions,
-    onClickLogoutAllExceptThis = () => {},
+    onClickLogoutAllSessions = () => {},
+    activeSessionsMap,
+    setDisplayName = () => {},
+    setLogoutAllDialogVisible = () => {},
   } = props;
   const { displayName } = items;
 
   const exceptId = items.connections[0]?.id;
-  const sessions = items.sessions || items.connections;
+  const sessions = items.connections;
 
-  const filteredSessions = sessions
-    .filter(
-      (session) => session.status === "offline" && session.id !== exceptId,
-    )
-    .reverse();
+  const filteredSessions = activeSessionsMap.get(items.userId) || [];
+  // .filter((session) => session.id !== exceptId)
+  // .reverse();
+
+  const onClickLogout = () => {
+    setLogoutAllDialogVisible(true);
+    setDisplayName(displayName);
+  };
 
   return (
     <>
@@ -90,7 +96,7 @@ const AllSessionsBlock = (props: AllSessionsBlockProps) => {
           <Button
             label={t("Profile:LogoutFromAllSessions")}
             size={ButtonSize.small}
-            onClick={() => onClickLogoutAllExceptThis(t, exceptId, displayName)}
+            onClick={onClickLogout}
             scale
             isDisabled={isDisabled}
             isLoading={isLoading}
@@ -110,14 +116,25 @@ const AllSessionsBlock = (props: AllSessionsBlockProps) => {
   );
 };
 
-export default inject<TStore>(({ peopleStore }) => {
-  const { getItems, isLoading, onClickLogoutAllExceptThis, isDisabled } =
-    peopleStore.selectionStore as unknown as SelectionPeopleStore;
+export default inject<TStore>(({ peopleStore, setup }) => {
+  const {
+    getItems,
+    isLoading,
+    onClickLogoutAllSessions,
+    isDisabled,
+    activeSessionsMap,
+    setDisplayName,
+  } = peopleStore.selectionStore as unknown as SelectionPeopleStore;
+
+  const { setLogoutAllDialogVisible } = setup;
 
   return {
     isDisabled,
     items: getItems,
     isLoading,
-    onClickLogoutAllExceptThis,
+    onClickLogoutAllSessions,
+    activeSessionsMap,
+    setDisplayName,
+    setLogoutAllDialogVisible,
   };
 })(observer(AllSessionsBlock));

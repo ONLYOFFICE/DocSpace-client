@@ -151,12 +151,14 @@ const LastSessionBlock = (props: LastSessionBlockProps) => {
     isRoomAdmin,
     isCollaborator,
     connections,
+    sessions,
   } = items;
 
   const fromDateAgo = getFromDateAgo(id);
 
   const isOnline = fromDateAgo === "online";
-  const { platform, browser, ip, city, country } = connections[0] ?? {};
+  const { platform, browser, ip, city, country } =
+    (connections[0] || sessions[0]) ?? {};
 
   const getUserType = (): string => {
     if (isOwner) return t("Common:Owner");

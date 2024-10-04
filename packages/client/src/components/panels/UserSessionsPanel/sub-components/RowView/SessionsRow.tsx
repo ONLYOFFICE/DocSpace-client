@@ -47,18 +47,18 @@ const SessionsRow = (props: SessionsRowProps) => {
     setPlatformData = () => {},
   } = props;
 
-  const isEqualSession = item.id === connections?.id;
+  // const isEqualSession = item.id === connections?.id;
 
-  useEffect(() => {
-    setIsDisabled(isEqualSession);
-  }, [isEqualSession, setIsDisabled]);
+  // useEffect(() => {
+  //   setIsDisabled(isEqualSession);
+  // }, [isEqualSession, setIsDisabled]);
 
   const onClickDisable = () => {
     setLogoutDialogVisible(true);
     setPlatformData(item);
   };
 
-  const contentElement = !isEqualSession && (
+  const contentElement = (
     <IconButton
       size={20}
       iconName={RemoveSessionSvgUrl}

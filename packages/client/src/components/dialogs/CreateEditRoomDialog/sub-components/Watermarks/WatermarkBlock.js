@@ -90,6 +90,9 @@ export default inject(({ createEditRoomStore }) => {
 
   return {
     setWatermarks,
-    isWatermarks: initialWatermarksSettings?.enabled,
+    isWatermarks: !!(
+      initialWatermarksSettings?.imageUrl ||
+      initialWatermarksSettings?.additions
+    ),
   };
 })(observer(WatermarkBlock));

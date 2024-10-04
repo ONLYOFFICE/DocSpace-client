@@ -1,4 +1,5 @@
 import { TColorScheme } from "@docspace/shared/themes";
+import { TLogo } from "api/rooms/types";
 
 type RoomIconDefault = {
   title: string;
@@ -25,6 +26,7 @@ type RoomIconExpansion = {
   dropDownManualX: string;
   model?: Model;
   currentColorScheme: TColorScheme;
+  logo?: TLogo;
 };
 
 type RoomIconColor = {

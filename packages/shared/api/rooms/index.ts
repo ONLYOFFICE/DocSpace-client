@@ -186,14 +186,6 @@ export function editRoom(id, data) {
   });
 }
 
-export function editRoomSettings(id, data) {
-  const options = { method: "put", url: `/files/rooms/${id}/settings`, data };
-
-  return request(options).then((res) => {
-    return res;
-  });
-}
-
 export function pinRoom(id) {
   const options = { method: "put", url: `/files/rooms/${id}/pin` };
 
@@ -500,20 +492,6 @@ export function resetRoomQuota(roomIds) {
   const options = {
     method: "put",
     url: "files/rooms/resetquota",
-    data,
-  };
-
-  return request(options);
-}
-
-export function changeRoomLifetime(
-  roomId: string | number,
-  lifetime: TRoomLifetime | null,
-) {
-  const data = lifetime ? { ...lifetime } : null;
-  const options = {
-    method: "put",
-    url: `files/rooms/${roomId}/lifetime`,
     data,
   };
 

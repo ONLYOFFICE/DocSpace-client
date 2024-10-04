@@ -31,6 +31,7 @@ import { FolderType } from "@docspace/shared/enums";
 
 // import router from "SRC_DIR/router";
 import i18n from "../i18n";
+import { PEOPLE_ROUTE } from "./contacts";
 
 export const setDocumentTitle = (subTitle = "") => {
   const { isAuthenticated, product: currentModule } = authStore;
@@ -185,7 +186,7 @@ export const getCategoryUrl = (categoryType, folderId = null) => {
       return "/rooms/share";
 
     case CategoryType.Accounts:
-      return "/accounts";
+      return PEOPLE_ROUTE;
 
     case CategoryType.Settings:
       return "/settings/personal";

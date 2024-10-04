@@ -35,6 +35,7 @@ import Section from "@docspace/shared/components/section";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 import DragTooltip from "SRC_DIR/components/DragTooltip";
+import { getContactsView } from "SRC_DIR/helpers/contacts";
 
 import {
   SectionFilterContent,
@@ -55,10 +56,8 @@ import {
   useFiles,
   useSDK,
   useOperations,
-  useAccounts,
+  useContacts,
   useSettings,
-  useGroups,
-  useInsideGroup,
 } from "./Hooks";
 
 const PureHome = (props) => {
@@ -67,7 +66,9 @@ const PureHome = (props) => {
     fetchRooms,
 
     //homepage,
-    setIsLoading,
+    setIsSectionHeaderLoading,
+    setIsSectionBodyLoading,
+    setIsSectionFilterLoading,
     isLoading,
 
     setToPreviewFile,
@@ -136,11 +137,9 @@ const PureHome = (props) => {
     withPaging,
     isEmptyPage,
 
-    setPortalTariff,
-
     accountsViewAs,
-    fetchPeople,
-    fetchGroups,
+    getUsersList,
+    getGroups,
     fetchGroup,
     setSelectedNode,
     onClickBack,
@@ -170,20 +169,32 @@ const PureHome = (props) => {
   //console.log(t("ComingSoon"))
 
   const location = useLocation();
-  const { groupId } = useParams();
 
   const isSettingsPage =
     location.pathname.includes("settings") &&
     !location.pathname.includes("settings/plugins");
-  const isAccountsPage = location.pathname.includes("/accounts");
-  const isPeopleAccounts = location.pathname.includes("accounts/people");
-  const isGroupsAccounts =
-    location.pathname.includes("accounts/groups") && !groupId;
-  const isInsideGroup =
-    location.pathname.includes("accounts/groups") && groupId;
+
+  const contactsView = getContactsView();
+  const isContactsPage = !!contactsView;
+
+  const isGroupsAccounts = contactsView === "groups";
+  const isInsideGroup = contactsView === "inside_group";
   const isAccountsEmptyFilter =
     (isGroupsAccounts && isEmptyGroups) ||
     (isInsideGroup && isCurrentGroupEmpty);
+
+  const setIsLoading = React.useCallback(
+    (param, withoutTimer, withHeaderLoader) => {
+      if (withHeaderLoader) setIsSectionHeaderLoading(param, !withoutTimer);
+      setIsSectionFilterLoading(param, !withoutTimer);
+      setIsSectionBodyLoading(param, !withoutTimer);
+    },
+    [
+      setIsSectionHeaderLoading,
+      setIsSectionFilterLoading,
+      setIsSectionBodyLoading,
+    ],
+  );
 
   const { onDrop } = useFiles({
     t,
@@ -196,7 +207,7 @@ const PureHome = (props) => {
     fetchRooms,
     setIsLoading,
 
-    isAccountsPage,
+    isContactsPage,
     isSettingsPage,
 
     location,
@@ -234,44 +245,19 @@ const PureHome = (props) => {
     setItemsSelectionTitle,
   });
 
-  useAccounts({
+  useContacts({
     t,
-    isAccountsPage,
-    isPeopleAccounts,
-    location,
+
+    isContactsPage,
+    contactsView,
 
     setIsLoading,
-
-    setSelectedNode,
-    fetchPeople,
-    setPortalTariff,
-
     scrollToTop,
-  });
-
-  useGroups({
-    t,
-    isAccountsPage,
-    isGroupsAccounts,
-    location,
-
-    setIsLoading,
-
     setSelectedNode,
-    fetchGroups,
 
-    scrollToTop,
-  });
-
-  useInsideGroup({
-    t,
-    groupId,
-    location,
-    setIsLoading,
-    setPortalTariff,
+    getUsersList,
+    getGroups,
     fetchGroup,
-
-    scrollToTop,
   });
 
   useSettings({
@@ -334,10 +320,10 @@ const PureHome = (props) => {
       firstLoad,
       isLoaded: !firstLoad,
       viewAs: accountsViewAs,
-      isAccounts: isAccountsPage,
+      isAccounts: isContactsPage,
     };
 
-    if (!isAccountsPage) {
+    if (!isContactsPage) {
       sectionProps.dragging = dragging;
       sectionProps.uploadFiles = true;
       sectionProps.onDrop =
@@ -351,7 +337,7 @@ const PureHome = (props) => {
       sectionProps.isEmptyPage = isEmptyPage;
       sectionProps.isTrashFolder = isRecycleBinFolder;
     } else {
-      sectionProps.isAccounts = isAccountsPage;
+      sectionProps.isAccounts = isContactsPage;
     }
   }
 
@@ -371,7 +357,7 @@ const PureHome = (props) => {
     <>
       {isSettingsPage ? (
         <></>
-      ) : isAccountsPage ? (
+      ) : isContactsPage ? (
         <>
           <AccountsDialogs />
           <AccountsSelectionArea />
@@ -384,7 +370,7 @@ const PureHome = (props) => {
       )}
       <MediaViewer />
       <SectionWrapper {...sectionProps}>
-        {(!isErrorRoomNotAvailable || isAccountsPage || isSettingsPage) && (
+        {(!isErrorRoomNotAvailable || isContactsPage || isSettingsPage) && (
           <Section.SectionHeader>
             <SectionHeaderContent />
           </Section.SectionHeader>
@@ -403,7 +389,7 @@ const PureHome = (props) => {
         {(((!isEmptyPage || showFilterLoader) &&
           !isAccountsEmptyFilter &&
           !isErrorRoomNotAvailable) ||
-          (!isAccountsEmptyFilter && isAccountsPage)) &&
+          (!isAccountsEmptyFilter && isContactsPage)) &&
           !isSettingsPage && (
             <Section.SectionFilter>
               {isFrame ? (
@@ -414,7 +400,7 @@ const PureHome = (props) => {
             </Section.SectionFilter>
           )}
 
-        <Section.SectionBody isAccounts={isAccountsPage}>
+        <Section.SectionBody isAccounts={isContactsPage}>
           <>
             <Outlet />
           </>
@@ -453,7 +439,6 @@ export const Component = inject(
     selectedFolderStore,
     clientLoadingStore,
     userStore,
-    currentTariffStatusStore,
     settingsStore,
     contextOptionsStore,
     indexingStore,
@@ -475,12 +460,6 @@ export const Component = inject(
     } = clientLoadingStore;
 
     const { getFolderModel } = contextOptionsStore;
-
-    const setIsLoading = (param, withoutTimer, withHeaderLoader) => {
-      if (withHeaderLoader) setIsSectionHeaderLoading(param, !withoutTimer);
-      setIsSectionFilterLoading(param, !withoutTimer);
-      setIsSectionBodyLoading(param, !withoutTimer);
-    };
 
     const {
       fetchFiles,
@@ -563,8 +542,6 @@ export const Component = inject(
 
     const { setToPreviewFile, playlist } = mediaViewerDataStore;
 
-    const { setPortalTariff } = currentTariffStatusStore;
-
     const {
       setFrameConfig,
       frameConfig,
@@ -577,9 +554,9 @@ export const Component = inject(
 
     const { usersStore, groupsStore, viewAs: accountsViewAs } = peopleStore;
 
-    const { getUsersList: fetchPeople } = usersStore;
+    const { getUsersList } = usersStore;
     const {
-      getGroups: fetchGroups,
+      getGroups,
       fetchGroup,
       groups,
       groupsIsFiltered,
@@ -643,7 +620,9 @@ export const Component = inject(
       setExpandedKeys,
 
       setDragging,
-      setIsLoading,
+      setIsSectionHeaderLoading,
+      setIsSectionBodyLoading,
+      setIsSectionFilterLoading,
       isLoading,
       fetchFiles,
       fetchRooms,
@@ -679,11 +658,9 @@ export const Component = inject(
       withPaging,
       isEmptyPage,
 
-      setPortalTariff,
-
       accountsViewAs,
-      fetchPeople,
-      fetchGroups,
+      getUsersList,
+      getGroups,
       fetchGroup,
       setSelectedNode,
       onClickBack,

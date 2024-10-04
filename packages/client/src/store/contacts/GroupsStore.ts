@@ -649,7 +649,7 @@ class GroupsStore {
     const { setIsSectionBodyLoading, setIsSectionFilterLoading } =
       this.clientLoadingStore;
 
-    const url = `/accounts/groups/${groupId}`;
+    const url = `/accounts/groups/${groupId}/filter`;
 
     if (openingNewTab(url, e)) return;
 

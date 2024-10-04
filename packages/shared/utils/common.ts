@@ -28,6 +28,7 @@
 /* eslint-disable no-multi-str */
 /* eslint-disable no-plusplus */
 
+import type { Location } from "@remix-run/router";
 import find from "lodash/find";
 import moment from "moment-timezone";
 import { findWindows } from "windows-iana";

@@ -27,3 +27,4 @@
 export const PEOPLE_ROUTE = "accounts/people/filter";
 export const GROUPS_ROUTE = "accounts/groups/filter";
 export const GUESTS_ROUTE = "accounts/guests/filter";
+export const INSIDE_GROUP_ROUTE = "accounts/groups/:groupId/filter";

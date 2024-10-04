@@ -123,7 +123,8 @@ const SectionBodyContent = (props) => {
 
   return (
     <>
-      {location.pathname.includes("/accounts/people") ? (
+      {location.pathname.includes("/accounts/people") ||
+      location.pathname.includes("/accounts/guests") ? (
         <People />
       ) : !groupId ? (
         <Groups />

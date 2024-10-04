@@ -25,16 +25,24 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { SectionSubmenuSkeleton } from "@docspace/shared/skeletons/sections";
 import { Tabs } from "@docspace/shared/components/tabs";
+import { UserStore } from "@docspace/shared/store/UserStore";
+import { TUser } from "@docspace/shared/api/people/types";
 
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
+import {
+  getContactsView,
+  GROUPS_ROUTE,
+  GUESTS_ROUTE,
+  PEOPLE_ROUTE,
+} from "SRC_DIR/helpers/contacts";
 
 type AccountsTabsProps = {
   showBodyLoader: ClientLoadingStore["showBodyLoader"];
@@ -42,6 +50,9 @@ type AccountsTabsProps = {
   setUsersBufferSelection: UsersStore["setBufferSelection"];
   setGroupsSelection: GroupsStore["setSelection"];
   setGroupsBufferSelection: GroupsStore["setBufferSelection"];
+
+  isVisitor: TUser["isVisitor"];
+  isCollaborator: TUser["isCollaborator"];
 };
 
 const AccountsTabs = ({
@@ -50,64 +61,69 @@ const AccountsTabs = ({
   setGroupsSelection,
   setUsersBufferSelection,
   setGroupsBufferSelection,
+  isVisitor,
+  isCollaborator,
 }: AccountsTabsProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const location = useLocation();
   const navigate = useNavigate();
 
-  const { groupId } = useParams();
-
-  const isPeople = location.pathname.includes("/accounts/people");
+  const contactsView = getContactsView();
 
   const onPeople = () => {
     setGroupsSelection([]);
     setGroupsBufferSelection(null);
-    navigate("/accounts/people/filter");
+    navigate(PEOPLE_ROUTE);
   };
 
   const onGroups = () => {
     setUsersSelection([]);
     setUsersBufferSelection(null);
-    navigate("/accounts/groups/filter");
+    navigate(GROUPS_ROUTE);
   };
 
   const onGuests = () => {
+    if (isVisitor || isCollaborator) return;
     setUsersSelection([]);
     setUsersBufferSelection(null);
     setGroupsSelection([]);
     setGroupsBufferSelection(null);
-    navigate("/accounts/guests/filter");
+    navigate(GUESTS_ROUTE);
   };
 
-  if (groupId !== undefined) return null;
+  if (contactsView === "inside_group") return null;
 
   if (showBodyLoader) return <SectionSubmenuSkeleton />;
+
+  const items = [
+    {
+      id: "people",
+      name: t("Common:People"),
+      onClick: onPeople,
+      content: null,
+    },
+    {
+      id: "groups",
+      name: t("Common:Groups"),
+      onClick: onGroups,
+      content: null,
+    },
+  ];
+
+  if (!isVisitor && !isCollaborator) {
+    items.splice(2, 0, {
+      id: "guests",
+      name: t("Common:Guests"),
+      onClick: onGuests,
+      content: null,
+    });
+  }
 
   return (
     <Tabs
       className="accounts-tabs"
-      selectedItemId={isPeople ? "people" : "groups"}
-      items={[
-        {
-          id: "people",
-          name: t("Common:People"),
-          onClick: onPeople,
-          content: null,
-        },
-        {
-          id: "groups",
-          name: t("Common:Groups"),
-          onClick: onGroups,
-          content: null,
-        },
-        {
-          id: "guests",
-          name: t("Common:Guests"),
-          onClick: onGuests,
-          content: null,
-        },
-      ]}
+      selectedItemId={contactsView as string}
+      items={items}
     />
   );
 };
@@ -116,12 +132,16 @@ export default inject(
   ({
     peopleStore,
     clientLoadingStore,
+    userStore,
   }: {
     peopleStore: PeopleStore;
     clientLoadingStore: ClientLoadingStore;
+    userStore: UserStore;
   }) => {
     const { showBodyLoader } = clientLoadingStore;
     const { usersStore, groupsStore } = peopleStore;
+
+    const { isVisitor, isCollaborator } = userStore.user!;
 
     const {
       setSelection: setUsersSelection,
@@ -138,6 +158,9 @@ export default inject(
       setUsersBufferSelection,
       setGroupsSelection,
       setGroupsBufferSelection,
+
+      isVisitor,
+      isCollaborator,
     };
   },
 )(observer(AccountsTabs));

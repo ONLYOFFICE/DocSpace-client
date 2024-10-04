@@ -84,11 +84,6 @@ const VirtualDataRoomBlock = ({ t, roomParams, setRoomParams, isEdit }) => {
     !!roomParams?.denyDownload,
   );
 
-  console.log(
-    "roomParams.watermark",
-    roomParams.watermark,
-    !!roomParams.watermark && isEdit,
-  );
   const [watermarksChecked, setWatermarksChecked] = useState(
     !!roomParams.watermark && isEdit,
   );

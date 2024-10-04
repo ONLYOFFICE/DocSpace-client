@@ -1149,7 +1149,6 @@ class FilesStore {
   };
 
   setFolder = (folder) => {
-    console.log("setFolder", folder);
     const index = this.getFolderIndex(folder.id);
 
     this.updateFolder(index, folder);

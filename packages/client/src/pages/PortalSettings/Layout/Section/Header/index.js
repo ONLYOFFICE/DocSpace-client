@@ -141,12 +141,13 @@ export const StyledContainer = styled.div`
 
 const SectionHeaderContent = (props) => {
   const {
-    isBrandingAndCustomizationAvailable,
+    isCustomizationAvailable,
     isRestoreAndAutoBackupAvailable,
     tReady,
     setIsLoadedSectionHeader,
     isSSOAvailable,
     workspace,
+    standalone,
   } = props;
 
   const navigate = useNavigate();
@@ -163,15 +164,15 @@ const SectionHeaderContent = (props) => {
   const isAvailableSettings = (key) => {
     switch (key) {
       case "DNSSettings":
-        return isBrandingAndCustomizationAvailable;
+        return isCustomizationAvailable;
       case "RestoreBackup":
         return isRestoreAndAutoBackupAvailable;
       case "WhiteLabel":
-        return isBrandingAndCustomizationAvailable;
+        return isCustomizationAvailable || standalone;
       case "CompanyInfoSettings":
-        return isBrandingAndCustomizationAvailable;
+        return isCustomizationAvailable || standalone;
       case "AdditionalResources":
-        return isBrandingAndCustomizationAvailable;
+        return isCustomizationAvailable || standalone;
       case "SingleSignOn:ServiceProviderSettings":
       case "SingleSignOn:SpMetadata":
         return isSSOAvailable;
@@ -388,9 +389,15 @@ const SectionHeaderContent = (props) => {
 };
 
 export default inject(
-  ({ currentQuotaStore, setup, common, importAccountsStore }) => {
+  ({
+    currentQuotaStore,
+    setup,
+    common,
+    importAccountsStore,
+    settingsStore,
+  }) => {
     const {
-      isBrandingAndCustomizationAvailable,
+      isCustomizationAvailable,
       isRestoreAndAutoBackupAvailable,
       isSSOAvailable,
     } = currentQuotaStore;
@@ -410,6 +417,7 @@ export default inject(
     const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
 
     const { workspace } = importAccountsStore;
+    const { standalone } = settingsStore;
 
     return {
       addUsers,
@@ -427,10 +435,11 @@ export default inject(
       selection,
       isLoadedSectionHeader,
       setIsLoadedSectionHeader,
-      isBrandingAndCustomizationAvailable,
+      isCustomizationAvailable,
       isRestoreAndAutoBackupAvailable,
       isSSOAvailable,
       workspace,
+      standalone,
     };
   },
 )(

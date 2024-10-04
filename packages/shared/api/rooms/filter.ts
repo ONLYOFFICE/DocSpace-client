@@ -30,26 +30,26 @@ import {
   toUrlParams,
   tryParseArray,
 } from "../../utils/common";
-import { TSortOrder, TSortBy } from "../../types";
+import { TSortOrder, TSortBy, Nullable } from "../../types";
 
-const DEFAULT_EXCLUDE_SUBJECT: string | boolean | null = false;
-const DEFAULT_FILTER_VALUE: string | null = null;
+const DEFAULT_EXCLUDE_SUBJECT: Nullable<string | boolean> = false;
+const DEFAULT_FILTER_VALUE: Nullable<string> = null;
 const DEFAULT_PAGE = 0;
 const DEFAULT_PAGE_COUNT = 25;
-const DEFAULT_PROVIDER: string | null = null;
-const DEFAULT_QUOTA_FILTER: string | null = null;
+const DEFAULT_PROVIDER: Nullable<string> = null;
+const DEFAULT_QUOTA_FILTER: Nullable<string> = null;
 const DEFAULT_SEARCH_AREA: RoomSearchArea | string = RoomSearchArea.Active;
-const DEFAULT_SEARCH_IN_CONTENT: boolean | null = null;
-const DEFAULT_SEARCH_TYPE: string | boolean | null = null;
+const DEFAULT_SEARCH_IN_CONTENT: Nullable<boolean> = null;
+const DEFAULT_SEARCH_TYPE: Nullable<string | boolean> = null;
 const DEFAULT_SORT_BY: TSortBy | string = "DateAndTime";
 const DEFAULT_SORT_ORDER: TSortOrder | string = "descending";
-const DEFAULT_STORAGE_FILTER: string | null = null;
-const DEFAULT_SUBJECT_FILTER: string | null = null;
-const DEFAULT_SUBJECT_ID: string | null = null;
-const DEFAULT_TAGS: string | string[] | null = null;
+const DEFAULT_STORAGE_FILTER: Nullable<string> = null;
+const DEFAULT_SUBJECT_FILTER: Nullable<string> = null;
+const DEFAULT_SUBJECT_ID: Nullable<string> = null;
+const DEFAULT_TAGS: Nullable<string | string[]> = null;
 const DEFAULT_TOTAL = 0;
-const DEFAULT_TYPE: string | string[] | null = null;
-const DEFAULT_WITHOUT_TAGS: string | boolean | null = false;
+const DEFAULT_TYPE: Nullable<string | string[]> = null;
+const DEFAULT_WITHOUT_TAGS: Nullable<string | boolean> = false;
 
 const EXCLUDE_SUBJECT = "excludeSubject";
 const FILTER_VALUE = "filterValue";
@@ -93,33 +93,33 @@ class RoomsFilter {
 
   searchArea: RoomSearchArea | string;
 
-  filterValue: string | null;
+  filterValue: Nullable<string>;
 
-  provider: string | null;
+  provider: Nullable<string>;
 
-  type: string[] | string | null;
+  type: Nullable<string | string[]>;
 
-  subjectId: string | null;
+  subjectId: Nullable<string>;
 
-  searchInContent: boolean | null;
+  searchInContent: Nullable<boolean>;
 
-  withSubfolders: string | boolean | null;
+  withSubfolders: Nullable<string | boolean>;
 
-  tags: string[] | string | null;
+  tags: Nullable<string | string[]>;
 
   sortBy: TSortBy | string;
 
   sortOrder: TSortOrder | string;
 
-  excludeSubject: string | boolean | null;
+  excludeSubject: Nullable<string | boolean>;
 
-  withoutTags: string | boolean | null;
+  withoutTags: Nullable<string | boolean>;
 
-  subjectFilter: string | null;
+  subjectFilter: Nullable<string>;
 
-  quotaFilter: string | null;
+  quotaFilter: Nullable<string>;
 
-  storageFilter: string | null;
+  storageFilter: Nullable<string>;
 
   static getDefault(userId?: string, searchArea: string = DEFAULT_SEARCH_AREA) {
     const defaultFilter = new RoomsFilter(

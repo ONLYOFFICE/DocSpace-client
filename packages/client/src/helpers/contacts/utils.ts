@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { matchPath } from "react-router-dom";
+import type { Location } from "@remix-run/router";
 
 import Filter from "@docspace/shared/api/people/filter";
 import { TUser } from "@docspace/shared/api/people/types";
@@ -161,10 +162,10 @@ export const onInviteAgainClick = (
     .catch((error) => toastr.error(error));
 };
 
-export const getContactsView = (): TContactsTab | boolean => {
-  const location = window.DocSpace.location;
-
-  const { pathname } = location;
+export const getContactsView = (
+  location?: Location,
+): TContactsTab | boolean => {
+  const { pathname } = location ?? window.DocSpace.location;
 
   if (pathname.includes(PEOPLE_ROUTE)) return "people";
   if (pathname.includes(GROUPS_ROUTE)) return "groups";

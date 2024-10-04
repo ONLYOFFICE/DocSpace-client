@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { SectionSubmenuSkeleton } from "@docspace/shared/skeletons/sections";
@@ -66,9 +66,10 @@ const AccountsTabs = ({
 }: AccountsTabsProps) => {
   const { t } = useTranslation(["Common"]);
 
+  const location = useLocation();
   const navigate = useNavigate();
 
-  const contactsView = getContactsView();
+  const contactsView = getContactsView(location);
 
   const onPeople = () => {
     setGroupsSelection([]);

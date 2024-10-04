@@ -164,6 +164,7 @@ const PureHome = (props) => {
     isCurrentGroupEmpty,
     wsCreatedPDFForm,
     disableUploadPanelOpen,
+    setContactsTab,
   } = props;
 
   //console.log(t("ComingSoon"))
@@ -174,7 +175,7 @@ const PureHome = (props) => {
     location.pathname.includes("settings") &&
     !location.pathname.includes("settings/plugins");
 
-  const contactsView = getContactsView();
+  const contactsView = getContactsView(location);
   const isContactsPage = !!contactsView;
 
   const isGroupsAccounts = contactsView === "groups";
@@ -250,6 +251,8 @@ const PureHome = (props) => {
 
     isContactsPage,
     contactsView,
+
+    setContactsTab,
 
     setIsLoading,
     scrollToTop,
@@ -554,7 +557,7 @@ export const Component = inject(
 
     const { usersStore, groupsStore, viewAs: accountsViewAs } = peopleStore;
 
-    const { getUsersList } = usersStore;
+    const { getUsersList, setContactsTab } = usersStore;
     const {
       getGroups,
       fetchGroup,
@@ -638,6 +641,7 @@ export const Component = inject(
       getFileInfo,
       gallerySelected,
       setIsUpdatingRowItem,
+      setContactsTab,
 
       setFrameConfig,
       frameConfig,

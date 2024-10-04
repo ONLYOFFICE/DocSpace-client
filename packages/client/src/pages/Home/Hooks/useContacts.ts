@@ -42,6 +42,8 @@ type UseContactsProps = {
   isContactsPage: boolean;
   contactsView: TContactsTab;
 
+  setContactsTab: UsersStore["setContactsTab"];
+
   setIsLoading: (
     param: boolean,
     withoutTimer?: boolean,
@@ -59,6 +61,8 @@ const useContacts = ({
   isContactsPage,
   contactsView,
 
+  setContactsTab,
+
   setIsLoading,
   scrollToTop,
   setSelectedNode,
@@ -75,6 +79,7 @@ const useContacts = ({
     if (!isContactsPage) return;
 
     setIsLoading(true);
+    setContactsTab(contactsView);
 
     const isInsideGroup = contactsView === "inside_group";
     const isGuests = contactsView === "guests";
@@ -109,6 +114,8 @@ const useContacts = ({
   }, [
     contactsView,
     isContactsPage,
+
+    setContactsTab,
 
     groupId,
 

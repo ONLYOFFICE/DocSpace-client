@@ -22,6 +22,11 @@ const StyledIcon = styled.div<{
 
   width: ${(props) => props.size};
 
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
   &:hover {
     cursor: pointer;
   }

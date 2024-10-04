@@ -24,20 +24,33 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import AddUsersPanel from "./AddUsersPanel";
-import EmbeddingPanel from "./EmbeddingPanel";
-import VersionHistoryPanel from "./VersionHistoryPanel";
-import UploadPanel from "./UploadPanel";
-import HotkeysPanel from "./HotkeysPanel";
-import InvitePanel from "./InvitePanel";
-import EditLinkPanel from "./EditLinkPanel";
+import { RoomIcon } from "@docspace/shared/components/room-icon";
+import { Text } from "@docspace/shared/components/text";
 
-export {
-  AddUsersPanel,
-  EmbeddingPanel,
-  VersionHistoryPanel,
-  UploadPanel,
-  HotkeysPanel,
-  InvitePanel,
-  EditLinkPanel,
+import { StyledRoomItem } from "../NewFilesBadge.styled";
+import { NewFilesPanelItemRoomProps } from "../NewFilesBadge.types";
+
+export const NewFilesPanelItemRoom = ({ room }: NewFilesPanelItemRoomProps) => {
+  return (
+    <StyledRoomItem>
+      <RoomIcon
+        className="room-icon"
+        logo={room.logo}
+        title={room.title}
+        color={room.logo.color}
+        imgSrc=""
+        showDefault={false}
+        size="24px"
+      />
+      <Text
+        fontSize="13px"
+        fontWeight={600}
+        lineHeight="15px"
+        truncate
+        noSelect
+      >
+        {room.title}
+      </Text>
+    </StyledRoomItem>
+  );
 };

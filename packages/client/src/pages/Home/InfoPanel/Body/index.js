@@ -96,6 +96,10 @@ const InfoPanelBodyContent = ({
       selectedItems.length &&
       !selectedItems[0].hasOwnProperty("membersCount"));
 
+  const isLockedSharedRoom = Boolean(
+    infoPanelSelection?.external && infoPanelSelection?.passwordProtected,
+  );
+
   const isSeveralItems = props.selectedItems?.length > 1;
 
   const isNoItemGallery = isGallery && !gallerySelected;
@@ -106,6 +110,7 @@ const InfoPanelBodyContent = ({
     infoPanelSelection?.id === infoPanelSelection?.rootFolderId;
   const isNoItem =
     !infoPanelSelection ||
+    isLockedSharedRoom ||
     isNoItemPeople ||
     isNoItemGallery ||
     isNoItemGroups ||
@@ -121,6 +126,7 @@ const InfoPanelBodyContent = ({
     isRootFolder: selectedFolder.id === selectedFolder.rootFolderId,
     isSeveralItems,
     isVDR: selectedItems[0]?.roomType === RoomsType.VirtualDataRoom,
+    isLockedSharedRoom,
   };
 
   const viewHelper = new ViewHelper({

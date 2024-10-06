@@ -59,4 +59,31 @@ const StyledNoItemContainer = styled.div`
   }
 `;
 
-export { StyledNoItemContainer };
+const LockedSharedRoomButton = styled.button`
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: nowrap;
+
+  background: none;
+  cursor: pointer;
+  border: none;
+
+  color: ${(props) => props.theme.emptyContent.button.colorLink};
+
+  svg {
+    path {
+      fill: ${(props) => props.theme.emptyContent.button.colorLink};
+    }
+  }
+
+  span {
+    color: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: underline dashed;
+    text-underline-offset: 2px;
+  }
+`;
+
+export { StyledNoItemContainer, LockedSharedRoomButton };

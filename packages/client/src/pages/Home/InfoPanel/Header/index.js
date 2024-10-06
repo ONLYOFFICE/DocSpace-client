@@ -71,9 +71,17 @@ const InfoPanelHeaderContent = (props) => {
   const isRoot =
     selection?.isFolder && selection?.id === selection?.rootFolderId;
   const isSeveralItems = selection && Array.isArray(selection);
+  const isLockedSharedRoom = Boolean(
+    selection?.external && selection?.passwordProtected,
+  );
 
   const withTabs =
-    !isRoot && !isSeveralItems && !isGallery && !isAccounts && !isTrash;
+    !isRoot &&
+    !isSeveralItems &&
+    !isGallery &&
+    !isAccounts &&
+    !isTrash &&
+    !isLockedSharedRoom;
 
   useEffect(() => {
     checkWidth();

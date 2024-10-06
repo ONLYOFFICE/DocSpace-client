@@ -31,8 +31,19 @@ import NoRoomItem from "./NoRoomItem";
 import NoFileOrFolderItem from "./NoFileOrFolderItem";
 import NoAccountsItem from "./NoAccountsItem";
 import NoGroupsItem from "./NoGroupsItem";
+import LockedItem from "./LockedItem";
 
-const NoItem = ({ t, isPeople, isGroups, isGallery, isRooms, isFiles }) => {
+const NoItem = ({
+  t,
+  isPeople,
+  isGroups,
+  isGallery,
+  isRooms,
+  isFiles,
+  isLockedSharedRoom,
+  infoPanelSelection,
+}) => {
+  if (isLockedSharedRoom) return <LockedItem t={t} item={infoPanelSelection} />;
   if (isPeople) return <NoAccountsItem t={t} />;
   if (isGroups) return <NoGroupsItem t={t} />;
   if (isGallery) return <NoGalleryItem t={t} />;

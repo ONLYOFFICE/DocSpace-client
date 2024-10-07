@@ -95,10 +95,6 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
-import {
-  changeRoomLifetime,
-  editRoomSettings,
-} from "@docspace/shared/api/rooms";
 import api from "@docspace/shared/api";
 import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
 
@@ -2870,6 +2866,7 @@ class FilesActionStore {
         if (isLeaveChecked) await this.onLeaveRoom(t);
         else toastr.success(t("Files:AppointNewOwner"));
       })
+      .catch((e) => toastr.error(e))
       .finally(() => {
         setSelected("none");
       });
@@ -2887,14 +2884,6 @@ class FilesActionStore {
 
     await deleteFilesFromRecent(fileIds);
     await refreshFiles();
-  };
-
-  changeRoomLifetime = (roomId, lifetime) => {
-    return changeRoomLifetime(roomId, lifetime);
-  };
-
-  editRoomSettings = (roomId, data) => {
-    return editRoomSettings(roomId, data);
   };
 
   copyFromTemplateForm = async (fileInfo, t) => {

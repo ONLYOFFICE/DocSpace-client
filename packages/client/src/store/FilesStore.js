@@ -3384,6 +3384,7 @@ class FilesStore {
         startFilling,
         draftLocation,
         expired,
+        watermark,
       } = item;
 
       const thirdPartyIcon = this.thirdPartyStore.getThirdPartyIcon(
@@ -3429,7 +3430,9 @@ class FilesStore {
         : previewUrl
           ? previewUrl
           : !isFolder
-            ? docUrl
+            ? item.fileType === FileType.Archive
+              ? item.webUrl
+              : docUrl
             : folderUrl;
 
       const isRoom = !!roomType;
@@ -3558,6 +3561,7 @@ class FilesStore {
         startFilling,
         draftLocation,
         expired,
+        watermark,
       };
     });
   };

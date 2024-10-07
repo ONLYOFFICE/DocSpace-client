@@ -141,6 +141,12 @@ export const useFeedTranslation = (
       return t("InfoPanel:RoomUpdateAccess");
     case "RoomGroupRemove":
       return t("InfoPanel:RoomGroupRemove");
+
+    case "FormSubmit":
+      return t("InfoPanel:FilledOutForm");
+    case "FormOpenedForFilling":
+      return t("InfoPanel:StartedFillingItOut");
+
     default:
       return null;
   }

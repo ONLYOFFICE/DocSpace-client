@@ -72,6 +72,14 @@ export type TRoomLifetime = {
   value: number;
 };
 
+export type TWatermark = {
+  additions: number;
+  imageHeight: number;
+  imageScale: number;
+  imageWidth: number;
+  rotate: number;
+  imageUrl?: string;
+};
 export type TRoom = {
   parentId: number;
   filesCount: number;

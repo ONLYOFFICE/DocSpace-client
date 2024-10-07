@@ -27,48 +27,74 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
+
+import { EmptyView } from "@docspace/shared/components/empty-view";
+import { UserStore } from "@docspace/shared/store/UserStore";
+import { TUser } from "@docspace/shared/api/people/types";
 
 import InviteUserIcon from "PUBLIC_DIR/images/emptyview/invite.user.svg";
 import TrashIcon from "PUBLIC_DIR/images/emptyview/trash.svg";
 import ClearEmptyFilterSvg from "PUBLIC_DIR/images/clear.empty.filter.svg";
-
 import EmptyScreenPersonSvgLight from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.light.svg";
 import EmptyScreenPersonSvgDark from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.dark.svg";
 
-import { EmptyView } from "@docspace/shared/components/empty-view";
 import { resetFilter } from "SRC_DIR/helpers/contacts";
+import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
+import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
+import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
+import UsersStore from "SRC_DIR/store/contacts/UsersStore";
+
+type EmptyScreenProps = {
+  isRoomAdmin?: TUser["isRoomAdmin"];
+  contactsTab?: UsersStore["contactsTab"];
+  isFiltered?: UsersStore["isFiltered"];
+  currentGroup?: GroupsStore["currentGroup"];
+  setIsSectionBodyLoading?: ClientLoadingStore["setIsSectionBodyLoading"];
+  editGroup?: GroupsStore["editGroup"];
+  deleteGroup?: GroupsStore["deleteGroup"];
+};
 
 const EmptyScreen = ({
-  resetInsideGroupFilter,
-  setIsLoading,
-  theme,
-  isEmptyGroup = false,
   isRoomAdmin,
+  contactsTab,
+  currentGroup,
+  isFiltered,
+  setIsSectionBodyLoading,
   editGroup,
   deleteGroup,
-  currentGroup,
-}) => {
+}: EmptyScreenProps) => {
   const { t } = useTranslation([
     "People",
     "Common",
     "EmptyView",
     "DeleteDialog",
   ]);
-  const isPeopleAccounts = window.location.pathname.includes("accounts/people");
+  const theme = useTheme();
 
-  const title = t("Common:NotFoundUsers");
-  const description = isEmptyGroup
-    ? t("Common:EmptyGroupDescription")
-    : t("Common:NotFoundUsersDescription");
+  const isEmptyGroup = contactsTab === "inside_group";
+  const isEmptyGuests = contactsTab === "guests";
 
-  /**
-   * @type {React.MouseEventHandler<HTMLAnchorElement>}
-   */
-  const onResetFilter = (event) => {
+  const title = isEmptyGuests
+    ? t("Common:NotFoundGuests")
+    : t("Common:NotFoundUsers");
+
+  const description = isEmptyGuests
+    ? t("Common:NotFoundGuestsDescription")
+    : isEmptyGroup
+      ? t("Common:EmptyGroupDescription")
+      : t("Common:NotFoundUsersDescription");
+
+  const setIsLoading = (param: boolean) => {
+    setIsSectionBodyLoading?.(param);
+  };
+
+  const onResetFilter = (event: React.MouseEvent) => {
     event.preventDefault();
 
     setIsLoading(true);
-    isPeopleAccounts ? resetFilter() : resetInsideGroupFilter();
+
+    resetFilter(contactsTab!, currentGroup?.id);
   };
 
   const icon = theme.isBase ? (
@@ -77,11 +103,8 @@ const EmptyScreen = ({
     <EmptyScreenPersonSvgDark />
   );
 
-  /**
-   * @returns {import("@docspace/shared/components/empty-view").EmptyViewOptionsType}
-   */
   const getOptions = () => {
-    if (isEmptyGroup) {
+    if (isEmptyGroup && currentGroup) {
       return [
         {
           key: "group-add-user",
@@ -89,7 +112,7 @@ const EmptyScreen = ({
           description: t("EmptyView:EmptyGroupAddedUserOptionDescription"),
           disabled: isRoomAdmin || currentGroup?.isLDAP,
           icon: <InviteUserIcon />,
-          onClick: () => editGroup(currentGroup),
+          onClick: () => editGroup!(currentGroup),
         },
         {
           key: "delete-group",
@@ -97,17 +120,20 @@ const EmptyScreen = ({
           description: t("EmptyView:EmptyGroupDeleteOptionDescription"),
           disabled: isRoomAdmin || currentGroup?.isLDAP,
           icon: <TrashIcon />,
-          onClick: () => deleteGroup(currentGroup, true),
+          onClick: () => deleteGroup!(currentGroup, true),
         },
       ];
     }
 
-    return {
-      to: "",
-      description: t("Common:ClearFilter"),
-      icon: <ClearEmptyFilterSvg />,
-      onClick: onResetFilter,
-    };
+    if (isFiltered)
+      return {
+        to: "",
+        description: t("Common:ClearFilter"),
+        icon: <ClearEmptyFilterSvg />,
+        onClick: onResetFilter,
+      };
+
+    return null;
   };
 
   return (
@@ -120,28 +146,37 @@ const EmptyScreen = ({
   );
 };
 
-export default inject(({ peopleStore, clientLoadingStore, settingsStore }) => {
-  const { groupsStore, userStore } = peopleStore;
+export default inject(
+  ({
+    peopleStore,
+    clientLoadingStore,
+    userStore,
+  }: {
+    peopleStore: PeopleStore;
+    clientLoadingStore: ClientLoadingStore;
+    userStore: UserStore;
+  }) => {
+    const { groupsStore, usersStore } = peopleStore;
 
-  const { resetInsideGroupFilter, editGroup, deleteGroup, currentGroup } =
-    groupsStore;
+    const { editGroup, deleteGroup, currentGroup } = groupsStore!;
+    const { contactsTab, isFiltered } = usersStore!;
 
-  console.log({ editGroup });
+    const { setIsSectionBodyLoading } = clientLoadingStore;
 
-  const { setIsSectionBodyLoading } = clientLoadingStore;
+    const isRoomAdmin = userStore.user!.isRoomAdmin;
 
-  const isRoomAdmin = userStore?.user?.isRoomAdmin;
+    return {
+      isRoomAdmin,
 
-  const setIsLoading = (param) => {
-    setIsSectionBodyLoading(param);
-  };
-  return {
-    resetInsideGroupFilter,
-    isRoomAdmin,
-    editGroup,
-    deleteGroup,
-    currentGroup,
-    setIsLoading,
-    theme: settingsStore.theme,
-  };
-})(observer(EmptyScreen));
+      isFiltered,
+
+      currentGroup,
+      contactsTab,
+
+      setIsSectionBodyLoading,
+
+      editGroup,
+      deleteGroup,
+    };
+  },
+)(observer(EmptyScreen));

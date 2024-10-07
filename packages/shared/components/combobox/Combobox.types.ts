@@ -48,6 +48,8 @@ export type TOption =
       internal?: boolean;
       access?: ShareAccessRights;
       className?: string;
+      title?: string;
+      action?: unknown;
     }
   | {
       key: string | number;
@@ -65,6 +67,8 @@ export type TOption =
       internal?: undefined;
       access?: ShareAccessRights;
       className?: string;
+      title?: string;
+      action?: unknown;
     };
 
 export interface ComboboxProps {

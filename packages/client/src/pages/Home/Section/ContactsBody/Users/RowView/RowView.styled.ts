@@ -24,19 +24,57 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import styled, { css } from "styled-components";
 import { isMobile } from "react-device-detect";
 
+import { RowContainer } from "@docspace/shared/components/row-container";
 import { Row } from "@docspace/shared/components/row";
-import { Base, globalColors } from "@docspace/shared/themes";
-
-import withContent from "SRC_DIR/HOCs/withPeopleContent";
-
-import UserContent from "./userContent";
 import { mobile, tablet } from "@docspace/shared/utils/device";
+import { globalColors } from "@docspace/shared/themes";
+import { RowContent } from "@docspace/shared/components/row-content";
 
 const marginStyles = css`
+  margin-inline: -24px;
+  padding-inline: 24px;
+
+  @media ${tablet} {
+    margin-inline: -16px;
+    padding-inline: 16px;
+  }
+`;
+
+export const StyledRowContainer = styled(RowContainer)`
+  .row-selected + .row-wrapper:not(.row-selected) {
+    .user-row {
+      ${marginStyles}
+    }
+  }
+
+  .row-wrapper:not(.row-selected) + .row-selected {
+    .user-row {
+      ${marginStyles}
+    }
+  }
+
+  .row-list-item:first-child {
+    .user-row {
+      border-top: 2px solid transparent;
+    }
+
+    .row-selected {
+      .user-row {
+        border-top-color: ${(props) =>
+          `${props.theme.filesSection.tableView.row.borderColor} !important`};
+      }
+    }
+  }
+
+  .row-list-item {
+    margin-top: -1px;
+  }
+`;
+
+const marginStylesRow = css`
   margin-inline-start: -24px;
   padding-inline: 24px;
 
@@ -56,10 +94,14 @@ const marginStylesUserRowContainer = css`
 
 const checkedStyle = css`
   background: ${(props) => props.theme.filesSection.rowView.checkedBackground};
-  ${marginStyles}
+  ${marginStylesRow}
 `;
 
-const StyledWrapper = styled.div`
+export const StyledWrapper = styled.div<{
+  checked?: boolean;
+  isActive?: boolean;
+  value?: string;
+}>`
   .user-item {
     border: 1px solid transparent;
     border-inline: none;
@@ -85,9 +127,10 @@ const StyledWrapper = styled.div`
   }
 `;
 
-StyledWrapper.defaultProps = { theme: Base };
-
-const StyledSimpleUserRow = styled(Row)`
+export const StyledSimpleUserRow = styled(Row)<{
+  checked?: boolean;
+  isActive?: boolean;
+}>`
   ${(props) => (props.checked || props.isActive) && checkedStyle};
 
   .row_content {
@@ -119,57 +162,38 @@ const StyledSimpleUserRow = styled(Row)`
   }
 `;
 
-const SimpleUserRow = (props) => {
-  const {
-    item,
-    sectionWidth,
-    getContextModel,
-    checkedProps,
-    onContentRowSelect,
-    onUserContextClick,
-    element,
-    isActive,
-    value,
-  } = props;
+export const StyledRowContent = styled(RowContent)`
+  @media ${tablet} {
+    .row-main-container-wrapper {
+      width: 100%;
+      display: flex;
+      // justify-content: space-between;
+      max-width: inherit;
+    }
 
-  const isChecked = checkedProps.checked;
+    .badges {
+      flex-direction: row-reverse;
 
-  const onRowContextClick = React.useCallback(
-    (rightMouseButtonClick) => {
-      onUserContextClick?.(item, !rightMouseButtonClick);
-    },
-    [item, onUserContextClick],
-  );
+      margin-inline-end: 12px;
 
-  return (
-    <StyledWrapper
-      className={`user-item row-wrapper ${
-        isChecked || isActive ? "row-selected" : ""
-      } ${item.id}`}
-      value={value}
-      checked={isChecked}
-      isActive={isActive}
-    >
-      <div className="user-item user-row-container">
-        <StyledSimpleUserRow
-          key={item.id}
-          data={item}
-          element={element}
-          onSelect={onContentRowSelect}
-          checked={isChecked}
-          isActive={isActive}
-          sectionWidth={sectionWidth}
-          mode={"modern"}
-          className={"user-row"}
-          onContextClick={onRowContextClick}
-          contextOptions={item.options}
-          getContextModel={getContextModel}
-        >
-          <UserContent {...props} />
-        </StyledSimpleUserRow>
-      </div>
-    </StyledWrapper>
-  );
-};
+      .paid-badge {
+        margin-inline: 8px 0;
+      }
+    }
+  }
 
-export default withContent(SimpleUserRow);
+  @media ${mobile} {
+    .row-main-container-wrapper {
+      justify-content: flex-start;
+    }
+
+    .badges {
+      margin-top: 0px;
+      gap: 8px;
+
+      .paid-badge {
+        margin: 0px;
+      }
+    }
+  }
+`;

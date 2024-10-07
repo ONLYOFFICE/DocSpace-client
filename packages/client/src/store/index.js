@@ -283,6 +283,7 @@ const tableStore = new TableStore(
   settingsStore,
   indexingStore,
   selectedFolderStore,
+  peopleStore,
 );
 
 infoPanelStore.filesSettingsStore = filesSettingsStore;

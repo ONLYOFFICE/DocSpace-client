@@ -25,67 +25,35 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled, { css } from "styled-components";
+import { useTheme } from "styled-components";
+import { useTranslation } from "react-i18next";
 
-import { withTranslation } from "react-i18next";
+import {
+  getSpaceQuotaAsText,
+  getUserTypeName,
+} from "@docspace/shared/utils/common";
+import { Link, LinkType } from "@docspace/shared/components/link";
 
-import { RowContent } from "@docspace/shared/components/row-content";
-import { Link } from "@docspace/shared/components/link";
-
+import { UserContentProps } from "./RowView.types";
 import Badges from "../../Badges";
-import { tablet, mobile } from "@docspace/shared/utils/device";
-
-import { getUserTypeName } from "@docspace/shared/utils/common";
-
-const StyledRowContent = styled(RowContent)`
-  @media ${tablet} {
-    .row-main-container-wrapper {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      max-width: inherit;
-    }
-
-    .badges {
-      flex-direction: row-reverse;
-
-      margin-inline-end: 12px;
-
-      .paid-badge {
-        margin-inline: 8px 0;
-      }
-    }
-  }
-
-  @media ${mobile} {
-    .row-main-container-wrapper {
-      justify-content: flex-start;
-    }
-
-    .badges {
-      margin-top: 0px;
-      gap: 8px;
-
-      .paid-badge {
-        margin: 0px;
-      }
-    }
-  }
-`;
+import { StyledRowContent } from "./RowView.styled";
 
 const UserContent = ({
   item,
   sectionWidth,
 
-  t,
-  theme,
+  contactsTab,
+  showStorageInfo,
+  isDefaultUsersQuotaSet,
+
   standalone,
-}) => {
+}: UserContentProps) => {
+  const { t } = useTranslation(["People", "Common"]);
+  const theme = useTheme();
   const {
     displayName,
     email,
     statusType,
-    role,
     isVisitor,
     isCollaborator,
     isSSO,
@@ -93,14 +61,21 @@ const UserContent = ({
     isOwner,
     isAdmin,
     isRoomAdmin,
+    usedSpace,
+    quotaLimit,
   } = item;
 
+  const isGuests = contactsTab === "guests";
+
+  const isPending = statusType === "pending";
+  const isDisabled = statusType === "disabled";
+
   const nameColor =
-    statusType === "pending" || statusType === "disabled"
+    isPending || isDisabled
       ? theme.peopleTableRow.pendingNameColor
       : theme.peopleTableRow.nameColor;
   const sideInfoColor =
-    statusType === "pending" || statusType === "disabled"
+    isPending || isDisabled
       ? theme.peopleTableRow.pendingSideInfoColor
       : theme.peopleTableRow.sideInfoColor;
 
@@ -114,23 +89,23 @@ const UserContent = ({
 
   const isPaidUser = !standalone && !isVisitor && !isCollaborator;
 
+  const spaceQuota = getSpaceQuotaAsText(
+    t,
+    usedSpace!,
+    quotaLimit!,
+    !!isDefaultUsersQuotaSet,
+  );
+
   return (
-    <StyledRowContent
-      sideColor={sideInfoColor}
-      sectionWidth={sectionWidth}
-      nameColor={nameColor}
-      sideInfoColor={sideInfoColor}
-    >
+    <StyledRowContent sideColor={sideInfoColor} sectionWidth={sectionWidth}>
       <Link
-        containerWidth="28%"
-        type="page"
+        type={LinkType.page}
         title={displayName}
         fontWeight={600}
         fontSize="15px"
         color={nameColor}
-        isTextOverflow={true}
+        isTextOverflow
         noHover
-        dir="auto"
       >
         {statusType === "pending"
           ? email
@@ -138,40 +113,57 @@ const UserContent = ({
             ? displayName
             : email}
       </Link>
-
       <Badges
         statusType={statusType}
         isPaid={isPaidUser}
         isSSO={isSSO}
         isLDAP={isLDAP}
       />
-
       <Link
-        containerMinWidth="140px"
-        containerWidth="17%"
-        type="page"
+        type={LinkType.page}
         title={email}
         fontSize="12px"
         fontWeight={400}
         color={sideInfoColor}
-        isTextOverflow={true}
+        isTextOverflow
       >
-        {roleLabel}
+        {isGuests ? email : roleLabel}
       </Link>
       <Link
-        containerMinWidth="140px"
-        containerWidth="17%"
-        type="page"
+        type={LinkType.page}
         title={email}
         fontSize="12px"
         fontWeight={400}
         color={sideInfoColor}
-        isTextOverflow={true}
+        isTextOverflow
       >
-        {email}
+        {isGuests ? item.createdBy?.displayName : email}
       </Link>
+      {isGuests && !isPending && !isDisabled && (
+        <Link
+          type={LinkType.page}
+          title={email}
+          fontSize="12px"
+          fontWeight={400}
+          color={sideInfoColor}
+          isTextOverflow
+        >
+          {item.registrationDate}
+        </Link>
+      )}
+      {showStorageInfo && !isGuests && (
+        <Link
+          type={LinkType.page}
+          fontSize="12px"
+          fontWeight={400}
+          color={sideInfoColor}
+          isTextOverflow
+        >
+          {spaceQuota}
+        </Link>
+      )}
     </StyledRowContent>
   );
 };
 
-export default withTranslation(["People", "Common"])(UserContent);
+export default UserContent;

@@ -246,23 +246,6 @@ class TreeFoldersStore {
     return this.recycleBinFolder ? this.recycleBinFolder.id : null;
   }
 
-  getIsAccountsPeople = () => {
-    return window.location.pathname.includes("accounts/people");
-  };
-
-  getIsAccountsInsideGroup = () => {
-    const insideGroupPattern = /accounts\/groups\/.*\/filter/;
-
-    return insideGroupPattern.test(window.location.pathname);
-  };
-
-  getIsAccountsGroups = () => {
-    return (
-      window.location.pathname.includes("accounts/groups") &&
-      !this.getIsAccountsInsideGroup()
-    );
-  };
-
   get isPersonalRoom() {
     return (
       this.myFolder &&

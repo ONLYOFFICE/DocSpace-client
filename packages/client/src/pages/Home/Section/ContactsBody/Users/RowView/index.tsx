@@ -25,120 +25,103 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import styled, { css } from "styled-components";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
-
-import { RowContainer } from "@docspace/shared/components/row-container";
-import { tablet } from "@docspace/shared/utils";
+import { TContactsViewAs } from "SRC_DIR/helpers/contacts";
 
 import EmptyScreen from "../../EmptyScreen";
+
 import SimpleUserRow from "./SimpleUserRow";
-
-const marginStyles = css`
-  margin-inline: -24px;
-  padding-inline: 24px;
-
-  @media ${tablet} {
-    margin-inline: -16px;
-    padding-inline: 16px;
-  }
-`;
-
-const StyledRowContainer = styled(RowContainer)`
-  .row-selected + .row-wrapper:not(.row-selected) {
-    .user-row {
-      ${marginStyles}
-    }
-  }
-
-  .row-wrapper:not(.row-selected) + .row-selected {
-    .user-row {
-      ${marginStyles}
-    }
-  }
-
-  .row-list-item:first-child {
-    .user-row {
-      border-top: 2px solid transparent;
-    }
-
-    .row-selected {
-      .user-row {
-        border-top-color: ${(props) =>
-          `${props.theme.filesSection.tableView.row.borderColor} !important`};
-      }
-    }
-  }
-
-  .row-list-item {
-    margin-top: -1px;
-  }
-`;
+import { StyledRowContainer } from "./RowView.styled";
+import { RowViewProps, RowViewStores } from "./RowView.types";
 
 const PeopleRowContainer = ({
   peopleList,
   sectionWidth,
-  accountsViewAs,
+  viewAs,
   setViewAs,
-  theme,
-  infoPanelVisible,
+  fetchMoreUsers,
+  hasMoreUsers,
+  filterTotal,
   withPaging,
   currentDeviceType,
-  insideGroupIsFiltered,
-}) => {
+  isUsersEmptyView,
+  contactsTab,
+  showStorageInfo,
+  isDefaultUsersQuotaSet,
+}: RowViewProps) => {
   useViewEffect({
-    view: accountsViewAs,
-    setView: setViewAs,
-    currentDeviceType,
+    view: viewAs!,
+    setView: (view: string) => {
+      setViewAs!(view as TContactsViewAs);
+    },
+    currentDeviceType: currentDeviceType!,
   });
 
-  return !!peopleList?.length ? (
+  return !isUsersEmptyView ? (
     <StyledRowContainer
       className="people-row-container"
       useReactWindow={!withPaging}
-      fetchMoreFiles={() => {}}
-      hasMoreFiles={false}
-      itemCount={peopleList.length}
-      filesLength={peopleList.length}
+      fetchMoreFiles={fetchMoreUsers!}
+      hasMoreFiles={hasMoreUsers!}
+      itemCount={filterTotal!}
+      filesLength={peopleList!.length}
       itemHeight={58}
+      onScroll={() => {}}
     >
-      {peopleList.map((item, index) => (
+      {peopleList!.map((item, index) => (
         <SimpleUserRow
-          theme={theme}
           key={item.id}
           item={item}
           itemIndex={index}
-          sectionWidth={sectionWidth}
+          sectionWidth={sectionWidth!}
+          contactsTab={contactsTab!}
+          showStorageInfo={showStorageInfo}
+          isDefaultUsersQuotaSet={isDefaultUsersQuotaSet}
         />
       ))}
     </StyledRowContainer>
   ) : (
-    <EmptyScreen isEmptyGroup={!insideGroupIsFiltered} />
+    <EmptyScreen />
   );
 };
 
-export default inject(({ peopleStore, filesStore, settingsStore }) => {
-  const {
-    viewAs: accountsViewAs,
-    setViewAs,
-    usersStore,
-    infoPanelStore,
-  } = peopleStore;
-  const { theme, withPaging, currentDeviceType } = settingsStore;
-  const { isVisible: infoPanelVisible } = infoPanelStore;
-  const { currentGroup, insideGroupIsFiltered } = peopleStore.groupsStore;
-  const { peopleList } = usersStore;
+export default inject(
+  ({ peopleStore, settingsStore, currentQuotaStore }: RowViewStores) => {
+    const { usersStore, viewAs, setViewAs } = peopleStore;
 
-  return {
-    peopleList,
-    currentGroup,
-    accountsViewAs,
-    setViewAs,
-    theme,
-    infoPanelVisible,
-    withPaging,
-    currentDeviceType,
-    insideGroupIsFiltered,
-  };
-})(observer(PeopleRowContainer));
+    const {
+      peopleList,
+
+      hasMoreUsers,
+      fetchMoreUsers,
+
+      filterTotal,
+
+      isUsersEmptyView,
+      contactsTab,
+    } = usersStore!;
+
+    const { withPaging, currentDeviceType } = settingsStore;
+
+    const { showStorageInfo, isDefaultUsersQuotaSet } = currentQuotaStore;
+
+    return {
+      viewAs,
+      setViewAs,
+
+      peopleList,
+
+      withPaging,
+
+      fetchMoreUsers,
+      hasMoreUsers,
+      filterTotal,
+      currentDeviceType,
+      isUsersEmptyView,
+      contactsTab,
+      showStorageInfo,
+      isDefaultUsersQuotaSet,
+    };
+  },
+)(observer(PeopleRowContainer));

@@ -26,38 +26,39 @@
 
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import PeopleRowContainer from "./RowView/PeopleRowContainer";
-import TableView from "./TableView/TableContainer";
-import { Consumer } from "@docspace/shared/utils/context";
-import withLoader from "SRC_DIR/HOCs/withLoader";
 
-const People = ({ tReady, peopleList, accountsViewAs }) => {
+import { Consumer } from "@docspace/shared/utils/context";
+
+import withLoader from "SRC_DIR/HOCs/withLoader";
+import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
+import { TContactsViewAs } from "SRC_DIR/helpers/contacts";
+
+import RowView from "./RowView";
+import TableView from "./TableView";
+
+type UsersProps = {
+  contactsViewAs: TContactsViewAs;
+};
+
+const Users = ({ contactsViewAs }: UsersProps) => {
   return (
     <Consumer>
       {(context) =>
-        accountsViewAs === "table" ? (
-          <TableView
-            peopleList={peopleList}
-            sectionWidth={context.sectionWidth}
-            tReady={tReady}
-          />
+        contactsViewAs === "table" ? (
+          <TableView sectionWidth={context.sectionWidth} />
         ) : (
-          <PeopleRowContainer
-            peopleList={peopleList}
-            sectionWidth={context.sectionWidth}
-            tReady={tReady}
-          />
+          <RowView sectionWidth={context.sectionWidth} />
         )
       }
     </Consumer>
   );
 };
 
-export default inject(({ peopleStore }) => ({
-  peopleList: peopleStore.usersStore.peopleList,
-  accountsViewAs: peopleStore.viewAs,
+export default inject(({ peopleStore }: { peopleStore: PeopleStore }) => ({
+  peopleList: peopleStore.usersStore!.peopleList,
+  contactsViewAs: peopleStore.viewAs,
 }))(
   withTranslation(["People", "Common", "PeopleTranslations"])(
-    withLoader(observer(People))(),
+    withLoader(observer(Users))(),
   ),
 );

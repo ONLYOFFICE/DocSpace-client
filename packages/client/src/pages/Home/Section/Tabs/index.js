@@ -26,7 +26,7 @@
 import { useLocation } from "react-router-dom";
 
 import { getContactsView } from "SRC_DIR/helpers/contacts";
-import AccountsTabs from "./AccountsTabs";
+import ContactsTabs from "./ContactsTabs";
 import MyDocumentsTabs from "./MyDocumentsTabs";
 import { inject, observer } from "mobx-react";
 
@@ -36,7 +36,7 @@ const SectionSubmenuContent = ({ isPersonalRoom, isRecentTab }) => {
   const isContacts = getContactsView(location);
 
   if (isPersonalRoom || isRecentTab) return <MyDocumentsTabs />;
-  if (isContacts) return <AccountsTabs />;
+  if (isContacts) return <ContactsTabs />;
   return null;
 };
 

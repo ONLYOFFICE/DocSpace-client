@@ -35,7 +35,7 @@ import {
 } from "../../enums";
 import { Nullable } from "../../types";
 import { getObjectByLocation, toUrlParams } from "../../utils/common";
-import { TFilterSortBy, TSortOrder } from "./types";
+import { TFilterArea, TFilterSortBy, TSortOrder } from "./types";
 
 const DEFAULT_PAGE = 0;
 const DEFAULT_PAGE_COUNT = 100;
@@ -56,6 +56,8 @@ const DEFAULT_QUOTA_FILTER = null;
 const DEFAULT_FILTER_SEPARATOR = null;
 const DEFAULT_INVITER_ID = null;
 const DEFAULT_INVITED_BY_ME = false;
+const DEFAULT_AREA = null;
+const DEFAULT_INCLUDE_STRANGERS = false;
 
 const ACTIVE_EMPLOYEE_STATUS = EmployeeStatus.Active;
 
@@ -75,6 +77,8 @@ const QUOTA_FILTER = "quotaFilter";
 const FILTER_SEPARATOR = "filterSeparator";
 const INVITER_ID = "inviterid";
 const INVITED_BY_ME = "invitedbyme";
+const AREA = "area";
+const INCLUDE_STRANGERS = "includeStrangers";
 
 class Filter {
   static getDefault(total = DEFAULT_TOTAL) {
@@ -100,6 +104,8 @@ class Filter {
       DEFAULT_FILTER_SEPARATOR,
       DEFAULT_INVITED_BY_ME,
       DEFAULT_INVITER_ID,
+      DEFAULT_AREA,
+      DEFAULT_INCLUDE_STRANGERS,
     );
   }
 
@@ -108,7 +114,7 @@ class Filter {
 
     const urlFilter = getObjectByLocation(location);
 
-    if (!urlFilter) return null;
+    if (!urlFilter) return this.getDefault();
 
     const defaultFilter = Filter.getDefault();
 
@@ -152,9 +158,7 @@ class Filter {
       ] as typeof defaultFilter.accountLoginType) ||
       defaultFilter.accountLoginType;
     const withoutGroup =
-      (urlFilter[WITHOUT_GROUP] &&
-        ((urlFilter[WITHOUT_GROUP] ===
-          "true") as typeof defaultFilter.withoutGroup)) ||
+      (urlFilter[WITHOUT_GROUP] && urlFilter[WITHOUT_GROUP] === "true") ||
       defaultFilter.withoutGroup;
     const quotaFilter =
       (urlFilter[QUOTA_FILTER] &&
@@ -163,11 +167,14 @@ class Filter {
     const filterSeparator =
       urlFilter[FILTER_SEPARATOR] || defaultFilter.filterSeparator;
     const invitedByMe =
-      (urlFilter[INVITED_BY_ME] &&
-        ((urlFilter[INVITED_BY_ME] ===
-          "true") as typeof defaultFilter.invitedByMe)) ||
+      (urlFilter[INVITED_BY_ME] && urlFilter[INVITED_BY_ME] === "true") ||
       defaultFilter.withoutGroup;
     const inviterId = urlFilter[INVITER_ID] || defaultFilter.inviterId;
+    const area = (urlFilter[AREA] as TFilterArea) || defaultFilter.area;
+    const includeStrangers =
+      (urlFilter[INCLUDE_STRANGERS] &&
+        urlFilter[INCLUDE_STRANGERS] === "true") ||
+      defaultFilter.includeStrangers;
 
     const newFilter = new Filter(
       page,
@@ -187,6 +194,8 @@ class Filter {
       filterSeparator,
       invitedByMe,
       inviterId,
+      area,
+      includeStrangers,
     );
 
     return newFilter;
@@ -210,6 +219,8 @@ class Filter {
     public filterSeparator: Nullable<string> = DEFAULT_FILTER_SEPARATOR,
     public invitedByMe: boolean = DEFAULT_INVITED_BY_ME,
     public inviterId: Nullable<string> = DEFAULT_INVITER_ID,
+    public area: Nullable<TFilterArea> = DEFAULT_AREA,
+    public includeStrangers: boolean = DEFAULT_INCLUDE_STRANGERS,
   ) {
     this.page = page;
     this.pageCount = pageCount;
@@ -228,6 +239,8 @@ class Filter {
     this.filterSeparator = filterSeparator;
     this.invitedByMe = invitedByMe;
     this.inviterId = inviterId;
+    this.area = area;
+    this.includeStrangers = includeStrangers;
   }
 
   getStartIndex = () => {
@@ -258,6 +271,8 @@ class Filter {
       filterSeparator,
       invitedByMe,
       inviterId,
+      area,
+      includeStrangers,
     } = this;
 
     let employeetype = null;
@@ -283,6 +298,8 @@ class Filter {
       filterSeparator,
       invitedByMe,
       inviterId,
+      area,
+      includeStrangers,
     };
 
     dtoFilter = { ...dtoFilter, ...employeetype };
@@ -308,6 +325,8 @@ class Filter {
       filterSeparator,
       invitedByMe,
       inviterId,
+      area,
+      includeStrangers,
     } = this;
 
     const dtoFilter: {
@@ -326,6 +345,8 @@ class Filter {
       [ACCOUNT_LOGIN_TYPE]?: typeof accountLoginType;
       [INVITED_BY_ME]?: typeof invitedByMe;
       [INVITER_ID]?: typeof inviterId;
+      [AREA]?: typeof area;
+      [INCLUDE_STRANGERS]?: typeof includeStrangers;
     } = {
       page: page + 1,
       sortby: sortBy,
@@ -355,6 +376,10 @@ class Filter {
     if (invitedByMe) dtoFilter[INVITED_BY_ME] = invitedByMe;
 
     if (inviterId) dtoFilter[INVITER_ID] = inviterId;
+
+    if (area) dtoFilter[AREA] = area;
+
+    if (includeStrangers) dtoFilter[INCLUDE_STRANGERS] = includeStrangers;
 
     const str = toUrlParams(dtoFilter, true);
 
@@ -388,6 +413,8 @@ class Filter {
           this.filterSeparator,
           this.invitedByMe,
           this.inviterId,
+          this.area,
+          this.includeStrangers,
         );
   }
 
@@ -407,7 +434,9 @@ class Filter {
       this.withoutGroup === filter.withoutGroup &&
       this.filterSeparator === filter.filterSeparator &&
       this.invitedByMe === filter.invitedByMe &&
-      this.inviterId === filter.inviterId;
+      this.inviterId === filter.inviterId &&
+      this.area === filter.area &&
+      this.includeStrangers === filter.includeStrangers;
 
     return equals;
   }

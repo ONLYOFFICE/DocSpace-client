@@ -24,21 +24,23 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
 import { inject, observer } from "mobx-react";
 import styled, { css, useTheme } from "styled-components";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { useNavigate, useLocation } from "react-router-dom";
 
+import Filter from "@docspace/shared/api/people/filter";
 import { PaymentsType, AccountLoginType } from "@docspace/shared/enums";
 import { globalColors } from "@docspace/shared/themes";
 import { Badge } from "@docspace/shared/components/badge";
-import { commonIconsStyles } from "@docspace/shared/utils";
+import { commonIconsStyles, IconSizeType } from "@docspace/shared/utils";
 
 import CatalogSpamIcon from "PUBLIC_DIR/images/icons/16/catalog.spam.react.svg";
-import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
 
-const StyledBadgesContainer = styled.div`
+import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
+import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
+
+const StyledBadgesContainer = styled.div<{ infoPanelVisible?: boolean }>`
   height: 100%;
 
   display: flex;
@@ -65,8 +67,17 @@ const StyledCatalogSpamIcon = styled(CatalogSpamIcon)`
   }
 `;
 
+type BadgeProps = {
+  statusType: string;
+  withoutPaid?: boolean;
+  isPaid?: boolean;
+  filter?: Filter;
+  infoPanelVisible?: boolean;
+  isSSO?: boolean;
+  isLDAP?: boolean;
+};
+
 const Badges = ({
-  t,
   statusType,
   withoutPaid,
   isPaid = false,
@@ -74,29 +85,30 @@ const Badges = ({
   infoPanelVisible,
   isSSO = false,
   isLDAP = false,
-}) => {
+}: BadgeProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
+  const { t } = useTranslation(["Common"]);
 
   const onClickPaid = () => {
-    if (filter.payments === PaymentsType.Paid) return;
-    const newFilter = filter.clone();
+    if (filter!.payments === PaymentsType.Paid) return;
+    const newFilter = filter!.clone();
     newFilter.payments = PaymentsType.Paid;
 
     navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
   };
 
   const onSSOClick = () => {
-    if (filter.accountLoginType === AccountLoginType.SSO) return;
-    const newFilter = filter.clone();
+    if (filter!.accountLoginType === AccountLoginType.SSO) return;
+    const newFilter = filter!.clone();
     newFilter.accountLoginType = AccountLoginType.SSO;
     navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
   };
 
   const onLDAPClick = () => {
-    if (filter.accountLoginType === AccountLoginType.LDAP) return;
-    const newFilter = filter.clone();
+    if (filter!.accountLoginType === AccountLoginType.LDAP) return;
+    const newFilter = filter!.clone();
     newFilter.accountLoginType = AccountLoginType.LDAP;
     navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
   };
@@ -116,10 +128,10 @@ const Badges = ({
               ? globalColors.secondPurple
               : globalColors.secondPurpleDark
           }
-          fontSize={"9px"}
+          fontSize="9px"
           fontWeight={800}
           noHover
-          lineHeight={"13px"}
+          lineHeight="13px"
           onClick={onLDAPClick}
         />
       )}
@@ -133,10 +145,10 @@ const Badges = ({
               ? globalColors.secondGreen
               : globalColors.secondGreenDark
           }
-          fontSize={"9px"}
+          fontSize="9px"
           fontWeight={800}
           noHover
-          lineHeight={"13px"}
+          lineHeight="13px"
           onClick={onSSOClick}
         />
       )}
@@ -149,9 +161,9 @@ const Badges = ({
               ? globalColors.favoritesStatus
               : globalColors.favoriteStatusDark
           }
-          fontSize={"9px"}
+          fontSize="9px"
           fontWeight={800}
-          lineHeight={"13px"}
+          lineHeight="13px"
           noHover
           onClick={onClickPaid}
           isPaidBadge
@@ -161,23 +173,23 @@ const Badges = ({
       {statusType === "pending" && (
         <StyledSendClockIcon
           className="pending-badge accounts-badge"
-          size="small"
+          size={IconSizeType.small}
         />
       )}
       {statusType === "disabled" && (
         <StyledCatalogSpamIcon
           className="disabled-badge accounts-badge"
-          size="small"
+          size={IconSizeType.small}
         />
       )}
     </StyledBadgesContainer>
   );
 };
 
-export default inject(({ peopleStore }) => {
+export default inject(({ peopleStore }: { peopleStore: PeopleStore }) => {
   const { usersStore } = peopleStore;
 
-  const { filter } = usersStore;
+  const { filter } = usersStore!;
 
   return { filter };
-})(withTranslation(["Common"])(observer(Badges)));
+})(observer(Badges));

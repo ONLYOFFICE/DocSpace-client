@@ -321,7 +321,7 @@ export default inject(
     settingsStore,
   }) => {
     const { isOwner, isAdmin, id: selfId } = userStore.user;
-    const { changeType: changeUserType, usersStore } = peopleStore;
+    const { usersStore } = peopleStore;
     const { canChangeUserType } = accessRightsStore;
 
     const { setInfoPanelSelection } = infoPanelStore;
@@ -329,6 +329,7 @@ export default inject(
     const {
       setSelection: setPeopleSelection,
       setBufferSelection: setPeopleBufferSelection,
+      changeType: changeUserType,
     } = usersStore;
 
     const { showStorageInfo } = currentQuotaStore;

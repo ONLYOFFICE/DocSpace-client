@@ -38,7 +38,8 @@ import { TThirdPartyProvider } from "@docspace/shared/api/settings/types";
 import { EmployeeStatus, EmployeeType, Events } from "@docspace/shared/enums";
 import { getUserRole } from "@docspace/shared/utils/common";
 import { Nullable } from "@docspace/shared/types";
-
+import { getCookie, getCorrectDate } from "@docspace/shared/utils";
+import { LANGUAGE } from "@docspace/shared/constants";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
@@ -58,9 +59,12 @@ import TargetUserStore from "./TargetUserStore";
 import GroupsStore from "./GroupsStore";
 import ContactsHotkeysStore from "./ContactsHotkeysStore";
 import DialogStore from "./DialogStore";
+import ClientLoadingStore from "../ClientLoadingStore";
 
 class UsersStore {
   filter = Filter.getDefault();
+
+  isUsersFetched = false;
 
   users: TUser[] = [];
 
@@ -98,6 +102,7 @@ class UsersStore {
     public contactsHotkeysStore: ContactsHotkeysStore,
     public accessRightsStore: AccessRightsStore,
     public dialogStore: DialogStore,
+    public clientLoadingStore: ClientLoadingStore,
   ) {
     this.settingsStore = settingsStore;
     this.infoPanelStore = infoPanelStore;
@@ -107,19 +112,37 @@ class UsersStore {
     this.contactsHotkeysStore = contactsHotkeysStore;
     this.accessRightsStore = accessRightsStore;
     this.dialogStore = dialogStore;
+    this.clientLoadingStore = clientLoadingStore;
 
     makeAutoObservable(this);
   }
+
+  setIsUsersFetched = (value: boolean) => {
+    this.isUsersFetched = value;
+  };
 
   setContactsTab = (contactsTab: TContactsTab) => {
     this.contactsTab = contactsTab;
   };
 
   setFilter = (filter: Filter) => {
-    const key = `PeopleFilter=${this.userStore.user?.id}`;
-    const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
-    localStorage.setItem(key, value);
-    setContactsUsersFilterUrl(filter);
+    const key =
+      this.contactsTab === "inside_group"
+        ? `InsideGroupFilter=${this.userStore.user?.id}`
+        : this.contactsTab === "guests"
+          ? `PeopleFilter=${this.userStore.user?.id}`
+          : `GuestsFilter=${this.userStore.user?.id}`;
+
+    if (key) {
+      const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
+
+      localStorage.setItem(key, value);
+    }
+    setContactsUsersFilterUrl(
+      filter,
+      this.contactsTab,
+      this.groupsStore.currentGroup?.id,
+    );
 
     this.filter = filter;
   };
@@ -141,8 +164,14 @@ class UsersStore {
       this.filter.quotaFilter ||
       this.filter.filterSeparator ||
       this.filter.invitedByMe ||
-      this.filter.inviterId
+      this.filter.inviterId ||
+      (this.filter.area && this.contactsTab === "people") ||
+      this.filter.includeStrangers
     );
+  }
+
+  get isUsersEmptyView() {
+    return !this.peopleList.length && !this.isFiltered;
   }
 
   setUsers = (users: TUser[]) => {
@@ -154,6 +183,7 @@ class UsersStore {
     updateFilter = false,
     withFilterLocalStorage = false,
   ) => {
+    const { currentGroup } = this.groupsStore;
     const filterData = filter ? filter.clone() : Filter.getDefault();
 
     if (this.requestRunning) {
@@ -162,9 +192,14 @@ class UsersStore {
       this.abortController = new AbortController();
     }
 
-    const filterStorageItem = localStorage.getItem(
-      `PeopleFilter=${this.userStore.user?.id}`,
-    );
+    const localStorageKey =
+      this.contactsTab === "inside_group"
+        ? `InsideGroupFilter=${this.userStore.user?.id}`
+        : this.contactsTab === "guests"
+          ? `PeopleFilter=${this.userStore.user?.id}`
+          : `GuestsFilter=${this.userStore.user?.id}`;
+
+    const filterStorageItem = localStorage.getItem(localStorageKey);
 
     if (filterStorageItem && withFilterLocalStorage) {
       const splitFilter = filterStorageItem.split(",");
@@ -184,6 +219,10 @@ class UsersStore {
       }
     }
 
+    if (currentGroup?.id) {
+      filterData.group = currentGroup.id;
+    }
+
     if (filterData.group && filterData.group === "root") {
       filterData.group = null;
     }
@@ -194,6 +233,8 @@ class UsersStore {
       filterData,
       this.abortController.signal,
     );
+
+    this.setIsUsersFetched(true);
 
     filterData.total = res.total;
 
@@ -212,20 +253,20 @@ class UsersStore {
     this.providers = providers;
   };
 
-  removeUsers = async (
-    userIds: string[],
-    filter: Filter,
-    isInsideGroup: boolean,
-  ) => {
-    const { refreshInsideGroup } = this.groupsStore;
+  removeUsers = async (userIds: string[]) => {
+    const { updateCurrentGroup } = this.groupsStore;
 
     await api.people.deleteUsers(userIds);
 
-    if (isInsideGroup) {
-      await refreshInsideGroup();
-    } else {
-      await this.getUsersList(filter, true);
+    const actions: (Promise<TUser[]> | Promise<void>)[] = [
+      this.getUsersList(this.filter, true, false),
+    ];
+
+    if (this.contactsTab === "inside_group" && this.filter.group) {
+      actions.push(updateCurrentGroup(this.filter.group));
     }
+
+    await Promise.all(actions);
   };
 
   updateUserStatus = async (status: EmployeeStatus, userIds: string[]) => {
@@ -276,7 +317,7 @@ class UsersStore {
       throw new Error(e as string);
     }
 
-    await this.getUsersList(filter); // rooms
+    await this.getUsersList(filter);
 
     if (updatedUsers && !this.needResetUserSelection) {
       this.updateSelection();
@@ -478,8 +519,8 @@ class UsersStore {
     this.isUsersLoading = isLoading;
   };
 
-  fetchMoreAccounts = async () => {
-    if (!this.hasMoreAccounts || this.isUsersLoading) return;
+  fetchMoreUsers = async () => {
+    if (!this.hasMoreUsers || this.isUsersLoading) return;
 
     this.setIsUsersLoading(true);
 
@@ -523,6 +564,8 @@ class UsersStore {
       quotaLimit,
       usedSpace,
       isCustomQuota,
+      createdBy,
+      registrationDate,
     } = user;
 
     const statusType = getUserStatus(user);
@@ -539,6 +582,12 @@ class UsersStore {
       role,
       status,
     );
+
+    const locale = getCookie(LANGUAGE) ?? this.settingsStore.culture;
+
+    const regDate = registrationDate
+      ? getCorrectDate(locale, registrationDate)
+      : undefined;
 
     const currentAvatar = hasAvatar ? avatar : DefaultUserPhotoSize32PngUrl;
 
@@ -569,6 +618,8 @@ class UsersStore {
       quotaLimit,
       usedSpace,
       isCustomQuota,
+      createdBy,
+      registrationDate: regDate,
     };
   };
 
@@ -578,7 +629,7 @@ class UsersStore {
     return list;
   }
 
-  get hasMoreAccounts() {
+  get hasMoreUsers() {
     return this.peopleList.length < this.filterTotal;
   }
 

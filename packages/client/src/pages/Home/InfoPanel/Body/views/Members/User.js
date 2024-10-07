@@ -426,7 +426,7 @@ export default inject(
       setMembersFilter,
     } = filesStore;
 
-    const { changeType: changeUserType } = peopleStore;
+    const { changeType: changeUserType } = peopleStore.usersStore;
 
     const { setEditMembersGroup, setEditGroupMembersDialogVisible } =
       dialogsStore;

@@ -44,7 +44,7 @@ import {
   SectionSubmenuContent,
   SectionWarningContent,
 } from "./Section";
-import AccountsDialogs from "./Section/AccountsBody/Dialogs";
+import AccountsDialogs from "./Section/ContactsBody/Dialogs";
 
 import FilesSelectionArea from "./SelectionArea/FilesSelectionArea";
 import ContactsSelectionArea from "./SelectionArea/ContactsSelectionArea";
@@ -166,6 +166,7 @@ const PureHome = (props) => {
     wsCreatedPDFForm,
     disableUploadPanelOpen,
     setContactsTab,
+    isUsersEmptyView,
   } = props;
 
   //console.log(t("ComingSoon"))
@@ -180,10 +181,8 @@ const PureHome = (props) => {
   const isContactsPage = !!contactsView;
 
   const isGroupsAccounts = contactsView === "groups";
-  const isInsideGroup = contactsView === "inside_group";
-  const isAccountsEmptyFilter =
-    (isGroupsAccounts && isEmptyGroups) ||
-    (isInsideGroup && isCurrentGroupEmpty);
+  const isContactsEmptyView =
+    (isGroupsAccounts && isEmptyGroups) || isUsersEmptyView;
 
   const setIsLoading = React.useCallback(
     (param, withoutTimer, withHeaderLoader) => {
@@ -391,9 +390,9 @@ const PureHome = (props) => {
         )}
 
         {(((!isEmptyPage || showFilterLoader) &&
-          !isAccountsEmptyFilter &&
+          !isContactsEmptyView &&
           !isErrorRoomNotAvailable) ||
-          (!isAccountsEmptyFilter && isContactsPage)) &&
+          (!isContactsEmptyView && isContactsPage)) &&
           !isSettingsPage && (
             <Section.SectionFilter>
               {isFrame ? (
@@ -561,7 +560,7 @@ export const Component = inject(
       viewAs: contactsViewAs,
     } = peopleStore;
     const { updateProfileCulture } = targetUserStore;
-    const { getUsersList, setContactsTab } = usersStore;
+    const { getUsersList, setContactsTab, isUsersEmptyView } = usersStore;
     const {
       getGroups,
       fetchGroup,
@@ -693,6 +692,7 @@ export const Component = inject(
       isEmptyGroups,
       isCurrentGroupEmpty,
       updateProfileCulture,
+      isUsersEmptyView,
     };
   },
 )(observer(Home));

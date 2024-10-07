@@ -326,6 +326,8 @@
   "NotFoundTitle": "Nothing found",
   "NotFoundUsers": "No users found",
   "NotFoundUsersDescription": "No users match your search. Please adjust your search parameters or clear the search field to view the full list of users.",
+  "NotFoundGuests": "No added guests yet",
+  "NotFoundGuestsDescription": "New guests will be added here once you invite them to the room. You can share your guests and add guests invited by others to your list.",
   "NotSupportedFormat": "Sorry, this file format isn't supported",
   "OAuthAccountsName": "Accounts",
   "OAuthAccountsReadDescription": "View all accounts",

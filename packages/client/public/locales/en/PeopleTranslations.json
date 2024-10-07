@@ -29,5 +29,6 @@
   "SuccessDeletePersonalData": "Personal data has been successfully deleted",
   "SuccessSentInvitation": "The invitation was successfully sent",
   "SuccessSentMultipleInvitatios": "Invitations were successfully sent",
-  "WithoutGroup": "Without group"
+  "WithoutGroup": "Without group",
+  "RegistrationDate": "Registration date"
 }

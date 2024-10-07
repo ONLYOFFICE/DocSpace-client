@@ -47,9 +47,36 @@ import {
 } from "./constants";
 import { TContactsSelected, TContactsMenuItemdId, TContactsTab } from "./types";
 
-export const setContactsUsersFilterUrl = (filter: Filter) => {
+export const getContactsUrl = (contactsTab: TContactsTab, groupId?: string) => {
+  let url = "";
+
+  switch (contactsTab) {
+    case "people":
+      url = PEOPLE_ROUTE;
+      break;
+    case "guests":
+      url = GUESTS_ROUTE;
+      break;
+    case "inside_group":
+      url = INSIDE_GROUP_ROUTE.replace(":groupId", groupId ?? "");
+      break;
+    default:
+      break;
+  }
+
+  return url;
+};
+
+export const setContactsUsersFilterUrl = (
+  filter: Filter,
+  contactsTab: TContactsTab,
+  groupId?: string,
+) => {
   const urlFilter = filter.toUrlParams();
-  const newPath = combineUrl(`/${PEOPLE_ROUTE}?${urlFilter}`);
+
+  const url = getContactsUrl(contactsTab, groupId);
+
+  const newPath = combineUrl(`/${url}?${urlFilter}`);
 
   if (window.location.pathname + window.location.search === newPath) return;
 
@@ -60,10 +87,20 @@ export const setContactsUsersFilterUrl = (filter: Filter) => {
   );
 };
 
-export const resetFilter = () => {
+export const resetFilter = (contactsTab: TContactsTab, groupId?: string) => {
   const filter = Filter.getDefault();
 
-  window.DocSpace.navigate(`${PEOPLE_ROUTE}?${filter.toUrlParams()}`);
+  const url = getContactsUrl(contactsTab, groupId);
+
+  if (groupId) {
+    filter.group = groupId;
+  }
+
+  if (contactsTab === "people" || contactsTab === "guests") {
+    filter.area = contactsTab;
+  }
+
+  window.DocSpace.navigate(`${url}?${filter.toUrlParams()}`);
 };
 
 export const employeeWrapperToMemberModel = (profile: TUser) => {

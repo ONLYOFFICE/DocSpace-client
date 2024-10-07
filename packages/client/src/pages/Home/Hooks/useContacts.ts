@@ -83,11 +83,10 @@ const useContacts = ({
 
     const isInsideGroup = contactsView === "inside_group";
     const isGuests = contactsView === "guests";
+    const isGroups = contactsView === "groups";
 
     const node = isInsideGroup || isGuests ? "people" : contactsView;
     setSelectedNode(["accounts", node, "filter"]);
-
-    const isGroups = contactsView === "groups";
 
     setDocumentTitle(t("Common:Contacts"));
 
@@ -102,6 +101,8 @@ const useContacts = ({
         await fetchGroup(groupId, newFilter, true, true);
       } else {
         const newFilter = Filter.getFilter(location)!;
+
+        newFilter.area = isGuests ? "guests" : "people";
 
         await getUsersList(newFilter, true, true);
       }

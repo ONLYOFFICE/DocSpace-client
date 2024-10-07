@@ -120,7 +120,7 @@ class ContactsHotkeysStore {
     }
   };
 
-  setHotkeyCaretStart = (hotkeyCaretStart: AccountsType) => {
+  setHotkeyCaretStart = (hotkeyCaretStart: AccountsType | null) => {
     this.hotkeyCaretStart = hotkeyCaretStart;
   };
 

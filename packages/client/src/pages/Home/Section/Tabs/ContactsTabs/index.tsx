@@ -30,6 +30,7 @@ import { useTranslation } from "react-i18next";
 
 import { SectionSubmenuSkeleton } from "@docspace/shared/skeletons/sections";
 import { Tabs } from "@docspace/shared/components/tabs";
+import { Box } from "@docspace/shared/components/box";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { TUser } from "@docspace/shared/api/people/types";
 
@@ -43,11 +44,15 @@ import {
   GUESTS_ROUTE,
   PEOPLE_ROUTE,
 } from "SRC_DIR/helpers/contacts";
+import { Badge } from "@docspace/shared/components/badge";
+import { globalColors } from "@docspace/shared/themes";
 
-type AccountsTabsProps = {
+type ContactsTabsProps = {
   showBodyLoader: ClientLoadingStore["showBodyLoader"];
+
   setUsersSelection: UsersStore["setSelection"];
   setUsersBufferSelection: UsersStore["setBufferSelection"];
+
   setGroupsSelection: GroupsStore["setSelection"];
   setGroupsBufferSelection: GroupsStore["setBufferSelection"];
 
@@ -55,7 +60,7 @@ type AccountsTabsProps = {
   isCollaborator: TUser["isCollaborator"];
 };
 
-const AccountsTabs = ({
+const ContactsTabs = ({
   showBodyLoader,
   setUsersSelection,
   setGroupsSelection,
@@ -63,9 +68,8 @@ const AccountsTabs = ({
   setGroupsBufferSelection,
   isVisitor,
   isCollaborator,
-}: AccountsTabsProps) => {
+}: ContactsTabsProps) => {
   const { t } = useTranslation(["Common"]);
-
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -89,6 +93,7 @@ const AccountsTabs = ({
     setUsersBufferSelection(null);
     setGroupsSelection([]);
     setGroupsBufferSelection(null);
+
     navigate(GUESTS_ROUTE);
   };
 
@@ -114,7 +119,15 @@ const AccountsTabs = ({
   if (!isVisitor && !isCollaborator) {
     items.splice(2, 0, {
       id: "guests",
-      name: t("Common:Guests"),
+      name: (
+        <Box displayProp="flex" gapProp="8px">
+          {t("Common:Guests")}
+          <Badge
+            label={t("Common: New")}
+            backgroundColor={globalColors.redRomb}
+          />
+        </Box>
+      ),
       onClick: onGuests,
       content: null,
     });
@@ -164,4 +177,4 @@ export default inject(
       isCollaborator,
     };
   },
-)(observer(AccountsTabs));
+)(observer(ContactsTabs));

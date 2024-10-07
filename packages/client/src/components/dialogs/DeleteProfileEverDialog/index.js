@@ -92,7 +92,7 @@ const DeleteProfileEverDialogComponent = (props) => {
     removeUsers,
     userIds,
     filter,
-    refreshInsideGroup,
+    updateCurrentGroup,
     setSelected,
     deleteWithoutReassign,
     onlyOneUser,
@@ -117,10 +117,14 @@ const DeleteProfileEverDialogComponent = (props) => {
     setIsRequestRunning(true);
 
     deleteUser(id)
-      .then(() => {
-        return isInsideGroup
-          ? refreshInsideGroup()
-          : getUsersList(filter, true);
+      .then(async () => {
+        const actions = [getUsersList(filter, true, false)];
+
+        if (isInsideGroup) actions.push(updateCurrentGroup(filter.group));
+
+        await Promise.all(actions);
+
+        return;
       })
       .then(() => {
         toastr.success(t("SuccessfullyDeleteUserInfoMessage"));
@@ -134,7 +138,7 @@ const DeleteProfileEverDialogComponent = (props) => {
   };
   const onDeleteUsers = (ids) => {
     setIsRequestRunning(true);
-    removeUsers(ids, filter, isInsideGroup)
+    removeUsers(ids)
       .then(() => {
         toastr.success(t("DeleteGroupUsersSuccessMessage"));
       })
@@ -233,7 +237,7 @@ DeleteProfileEverDialog.propTypes = {
 
 export default inject(({ peopleStore }, { users }) => {
   const { dialogStore, usersStore } = peopleStore;
-  const { refreshInsideGroup } = peopleStore.groupsStore;
+  const { updateCurrentGroup } = peopleStore.groupsStore;
 
   const {
     getUsersList,
@@ -269,7 +273,7 @@ export default inject(({ peopleStore }, { users }) => {
     removeUsers,
     needResetUserSelection,
     filter,
-    refreshInsideGroup,
+    updateCurrentGroup,
     getUsersList,
     deleteWithoutReassign,
     onlyOneUser,

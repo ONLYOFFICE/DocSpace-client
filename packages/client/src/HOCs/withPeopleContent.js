@@ -44,7 +44,6 @@ export default function withContent(WrappedContent) {
       resetSelections,
       openGroupAction,
 
-      theme,
       getModel,
       itemIndex,
     } = props;

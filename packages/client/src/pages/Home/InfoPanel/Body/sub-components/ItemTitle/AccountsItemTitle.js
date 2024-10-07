@@ -34,7 +34,7 @@ import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.pn
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
 import { Badge } from "@docspace/shared/components/badge";
-import Badges from "@docspace/client/src/pages/Home/Section/AccountsBody/Badges";
+import Badges from "SRC_DIR/pages/Home/Section/ContactsBody/Badges";
 import { StyledAccountsItemTitle } from "../../styles/accounts";
 
 import { decode } from "he";

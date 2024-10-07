@@ -29,14 +29,18 @@ import {
   EmployeeStatus,
   ThemeKeys,
 } from "../../enums";
+import { TCreatedBy } from "../../types";
 
 export type TFilterSortBy =
+  | "AZ"
   | "displayname"
   | "type"
   | "department"
   | "email"
   | "usedspace"
   | "createdby";
+
+export type TFilterArea = "all" | "people" | "guests";
 
 export type TSortOrder = "descending" | "ascending";
 
@@ -85,6 +89,8 @@ export type TUser = {
   notes?: string;
   isCustomQuota?: string;
   title?: string;
+  registrationDate?: string;
+  createdBy?: TCreatedBy;
 };
 
 export type TGetUserList = {

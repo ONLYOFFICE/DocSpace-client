@@ -25,105 +25,20 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import styled, { css } from "styled-components";
-import { isMobile } from "react-device-detect";
 
-import { Row } from "@docspace/shared/components/row";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { ContextMenuModel } from "@docspace/shared/components/context-menu";
+import { TData } from "@docspace/shared/components/row/Row.types";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 
-import UserContent from "./userContent";
-import { mobile, tablet } from "@docspace/shared/utils";
+import UserContent from "./UserContent";
 
-const marginStyles = css`
-  margin-inline-start: -24px;
-  padding-inline: 24px;
+import { StyledSimpleUserRow, StyledWrapper } from "./RowView.styled";
+import { SimpleUserRowProps } from "./RowView.types";
 
-  @media ${tablet} {
-    margin-inline-start: -16px;
-    padding-inline: 16px;
-  }
-`;
-
-const marginStylesUserRowContainer = css`
-  margin-inline-end: -48px !important;
-
-  @media ${tablet} {
-    margin-inline-end: -32px !important;
-  }
-`;
-
-const checkedStyle = css`
-  background: ${(props) => props.theme.filesSection.rowView.checkedBackground};
-  ${marginStyles}
-`;
-
-const StyledWrapper = styled.div`
-  .user-item {
-    border: 1px solid transparent;
-    border-inline: none;
-    margin-inline-start: 0;
-    height: 100%;
-    user-select: none;
-
-    position: relative;
-    outline: none;
-    background: none !important;
-  }
-
-  .user-row-container {
-    ${(props) =>
-      (props.checked || props.isActive) && marginStylesUserRowContainer};
-
-    ${!isMobile &&
-    css`
-      :hover {
-        ${marginStylesUserRowContainer}
-      }
-    `}
-  }
-`;
-
-StyledWrapper.defaultProps = { theme: Base };
-
-const StyledSimpleUserRow = styled(Row)`
-  ${(props) => (props.checked || props.isActive) && checkedStyle};
-
-  .row_content {
-    height: 58px;
-  }
-
-  height: 59px;
-
-  border-top: ${(props) =>
-    `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
-  border-bottom: ${(props) =>
-    `1px solid ${props.theme.filesSection.tableView.row.borderColor}`};
-
-  box-sizing: border-box;
-  margin-top: -1px;
-
-  ${!isMobile &&
-  css`
-    :hover {
-      ${checkedStyle}
-    }
-  `}
-
-  position: unset;
-  -webkit-tap-highlight-color: ${globalColors.tapHighlight};
-
-  .styled-element {
-    height: 32px;
-    margin-inline-end: 12px;
-  }
-`;
-
-const SimpleUserRow = (props) => {
+const SimpleUserRow = (props: SimpleUserRowProps) => {
   const {
     item,
-    sectionWidth,
     getContextModel,
     checkedProps,
     onContentRowSelect,
@@ -133,10 +48,10 @@ const SimpleUserRow = (props) => {
     value,
   } = props;
 
-  const isChecked = checkedProps.checked;
+  const isChecked = checkedProps!.checked;
 
   const onRowContextClick = React.useCallback(
-    (rightMouseButtonClick) => {
+    (rightMouseButtonClick?: boolean) => {
       onUserContextClick?.(item, !rightMouseButtonClick);
     },
     [item, onUserContextClick],
@@ -154,18 +69,18 @@ const SimpleUserRow = (props) => {
       <div className="user-item user-row-container">
         <StyledSimpleUserRow
           key={item.id}
-          data={item}
+          data={item as unknown as TData}
           element={element}
-          onSelect={onContentRowSelect}
+          onSelect={onContentRowSelect!}
           checked={isChecked}
           isActive={isActive}
-          sectionWidth={sectionWidth}
-          mode={"modern"}
-          className={"user-row"}
-          onContextClick={onRowContextClick}
-          withoutBorder={true}
-          contextOptions={item.options}
-          getContextModel={getContextModel}
+          mode="modern"
+          className="user-row"
+          onContextClick={onRowContextClick!}
+          contextOptions={item.options as unknown as ContextMenuModel[]}
+          getContextModel={getContextModel!}
+          onRowClick={() => {}}
+          isIndexEditingMode={false}
         >
           <UserContent {...props} />
         </StyledSimpleUserRow>

@@ -203,19 +203,8 @@ class GroupsStore {
     this.setInsideGroupFilterUrl(filter);
   };
 
-  resetInsideGroupFilter = () => {
-    const groupId = this.currentGroup?.id;
-    if (!groupId) return;
-
-    const filter = InsideGroupFilter.getDefault();
-    filter.group = groupId;
-
-    window.DocSpace.navigate(
-      `/accounts/groups/${groupId}/filter?${filter.toUrlParams()}`,
-    );
-  };
-
   setCurrentGroup = (currentGroup: TGroup | null = null) => {
+    console.log("set", currentGroup);
     this.currentGroup = currentGroup;
   };
 
@@ -270,7 +259,7 @@ class GroupsStore {
   };
 
   fetchMoreGroups = async () => {
-    if (!this.hasMoreAccounts || this.groupsIsIsLoading) return;
+    if (!this.hasMoreGroups || this.groupsIsIsLoading) return;
     this.groupsIsIsLoading = true;
 
     const newFilter = this.groupsFilter.clone();
@@ -286,13 +275,15 @@ class GroupsStore {
     });
   };
 
-  get hasMoreAccounts() {
-    return this.groups.length < this.groupsFilter.total;
-  }
-
   getGroupById = async (groupId) => {
     const res = await groupsApi.getGroupById(groupId);
     return res;
+  };
+
+  updateCurrentGroup = async (groupId: string) => {
+    const group = await groupsApi.getGroupById(groupId);
+
+    if (group) this.setCurrentGroup(group);
   };
 
   fetchGroup = async (
@@ -329,13 +320,12 @@ class GroupsStore {
     requests.push(api.people.getUserList(filterData));
 
     if (updateCurrentGroup || groupId !== this.currentGroup?.id) {
-      requests.push(groupsApi.getGroupById(groupId));
+      console.log("update");
+      requests.push(this.updateCurrentGroup(groupId ?? this.currentGroup?.id));
     }
 
-    const [filteredMembersRes, group] = await Promise.all(requests);
+    const [filteredMembersRes] = await Promise.all(requests);
     filterData.total = filteredMembersRes.total;
-
-    group && this.setCurrentGroup(group);
 
     this.peopleStore.usersStore.setUsers(filteredMembersRes.items);
 
@@ -346,18 +336,6 @@ class GroupsStore {
     this.setInsideGroupLoading(false);
 
     return Promise.resolve(filteredMembersRes.items);
-  };
-
-  refreshInsideGroup = async () => {
-    if (!this.currentGroup) return;
-
-    await this.fetchGroup(
-      this.currentGroup.id,
-      this.insideGroupFilter,
-      true,
-      false,
-      true,
-    );
   };
 
   get hasMoreInsideGroupUsers() {

@@ -112,6 +112,7 @@ class PeopleStore {
       this.contactsHotkeysStore,
       accessRightsStore,
       this.dialogStore,
+      clientLoadingStore,
     );
 
     this.contextOptionsStore = new ContactsConextOptionsStore(

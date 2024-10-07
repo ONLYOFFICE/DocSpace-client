@@ -28,7 +28,7 @@ import { inject, observer } from "mobx-react";
 import { useTheme } from "styled-components";
 
 import LockedSharedRoomLightIconURL from "PUBLIC_DIR/images/locked.shared.room.svg?url";
-import LockedSharedRoomDarkIconURL from "PUBLIC_DIR/images/locked.shared.room.svg?url";
+import LockedSharedRoomDarkIconURL from "PUBLIC_DIR/images/locked.shared.room.dark.svg?url";
 import LockIcon from "PUBLIC_DIR/images/icons/12/lock.react.svg";
 
 import { Text } from "@docspace/shared/components/text";

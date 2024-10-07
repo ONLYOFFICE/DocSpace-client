@@ -245,31 +245,7 @@ const User = ({
 
   const type = getUserType(user);
   const role = getUserRole(user, userRole?.type);
-
-  const typeLabel =
-    (type === "user" && userRole?.type !== type) ||
-    (userRole?.type === "manager" && type !== "admin" && type !== "owner")
-      ? getUserTypeLabel(userRole?.type, t)
-      : getUserTypeLabel(type, t);
-
-  const getTooltipContent = () => (
-    <div>
-      <Text fontSize="14px" fontWeight={600} noSelect truncate>
-        {decode(user.displayName)}
-      </Text>
-      <Text
-        className="label"
-        fontWeight={400}
-        fontSize="12px"
-        noSelect
-        truncate
-        color={theme.infoPanel.members.subtitleColor}
-        dir="auto"
-      >
-        {`${typeLabel} | ${user.email}`}
-      </Text>
-    </div>
-  );
+  const typeLabel = getUserTypeLabel(type, t);
 
   const onOpenGroup = (group) => {
     setEditMembersGroup(group);

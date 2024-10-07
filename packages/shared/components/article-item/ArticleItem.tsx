@@ -68,6 +68,7 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
     isFirstHeader = false,
     folderId,
     badgeTitle,
+    badgeComponent,
     $currentColorScheme,
     title,
     linkData,
@@ -161,8 +162,10 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
               onClick={onClickBadgeAction}
               title={badgeTitle}
             >
-              {!iconBadge ? (
-                <Badge className="catalog-item__badge" label={labelBadge} />
+              {badgeComponent || !iconBadge ? (
+                (badgeComponent ?? (
+                  <Badge className="catalog-item__badge" label={labelBadge} />
+                ))
               ) : (
                 <ReactSVG className="catalog-item__icon" src={iconBadge} />
               )}

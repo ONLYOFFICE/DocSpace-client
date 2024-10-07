@@ -1,5 +1,6 @@
 import hexRgb from "hex-rgb";
 import styled, { css } from "styled-components";
+import { RefObject } from "react";
 import { Base, globalColors, TColorScheme } from "../../themes";
 
 const COVER_DEFAULT_SIZE = 20;
@@ -12,6 +13,9 @@ const StyledIcon = styled.div<{
   wrongImage: boolean;
   withHover: boolean;
   coverSize: number;
+  isEmptyIcon: boolean;
+  withEditing: boolean;
+  ref: RefObject<HTMLDivElement>;
 }>`
   display: flex;
   z-index: 2;
@@ -21,6 +25,11 @@ const StyledIcon = styled.div<{
   height: ${(props) => props.size};
 
   width: ${(props) => props.size};
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 
   &:hover {
     cursor: pointer;
@@ -195,7 +204,7 @@ StyledIcon.defaultProps = { theme: Base };
 
 const EditWrapper = styled.div<{
   size: string;
-  $currentColorScheme: TColorScheme;
+  $currentColorScheme?: TColorScheme;
 }>`
   display: flex;
   align-items: center;

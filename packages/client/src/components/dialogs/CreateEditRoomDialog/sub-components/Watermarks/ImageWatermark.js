@@ -52,7 +52,6 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
 import { ComboBox } from "@docspace/shared/components/combobox";
@@ -99,57 +98,64 @@ const getInitialRotate = (rotate, isEdit) => {
 
 const ImageWatermark = ({
   isEdit,
-  setWatermarks,
-  initialWatermarksSettings,
-  imageUrl,
+  roomParams,
+  setRoomParams,
+  isImage,
+
+  initialSettings,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
 
   const initialInfo = useRef(null);
-  const previewRef = useRef(null);
+  const imageUrl = initialSettings?.imageUrl;
+  const image = roomParams.watermark?.image;
 
   if (initialInfo.current === null) {
     initialInfo.current = {
-      rotate: getInitialRotate(initialWatermarksSettings?.rotate, isEdit),
-      scale: getInitialScale(initialWatermarksSettings?.imageScale, isEdit),
+      rotate: getInitialRotate(initialSettings?.rotate, isEdit),
+      scale: getInitialScale(initialSettings?.imageScale, isEdit),
     };
   }
 
   const initialInfoRef = initialInfo.current;
 
+  const [selectedRotate, setRotate] = useState(initialInfoRef.rotate);
+  const [selectedScale, setScale] = useState(initialInfoRef.scale);
+  const [selectedImageUrl, setImageUrl] = useState(imageUrl);
+
+  const previewRef = useRef(null);
+
+  const watermark =
+    isImage && initialSettings
+      ? initialSettings
+      : {
+          rotate: selectedRotate.key,
+          imageScale: selectedScale.key,
+          additions: 0,
+          ...(selectedImageUrl && { imageUrl: selectedImageUrl }),
+          ...(image && { image }),
+        };
+
   useEffect(() => {
-    const { enabled, isImage } = initialWatermarksSettings;
-
-    if (isEdit && isImage) {
-      setWatermarks({ ...initialWatermarksSettings }, true);
-      return;
-    }
-
-    setWatermarks({
-      rotate: initialInfoRef.rotate.key,
-      scale: initialInfoRef.scale.key,
-      additions: 0,
-      isImage: true,
-      //enabled: true,
+    setRoomParams({
+      ...roomParams,
+      watermark,
     });
-  }, []);
 
-  useEffect(() => {
     return () => {
       URL.revokeObjectURL(previewRef.current);
       previewRef.current = null;
     };
   }, []);
 
-  const [selectedRotate, setRotate] = useState(initialInfoRef.rotate);
-  const [selectedScale, setScale] = useState(initialInfoRef.scale);
-  const [selectedImageUrl, setImageUrl] = useState(imageUrl);
-
   const onInput = (file) => {
     imageProcessing(file)
       .then((f) => {
         if (f instanceof File) {
-          setWatermarks({ image: f });
+          setRoomParams({
+            ...roomParams,
+            watermark: { ...watermark, image: f },
+          });
 
           const img = new Image();
 
@@ -174,13 +180,18 @@ const ImageWatermark = ({
   const onScaleChange = (item) => {
     setScale(item);
 
-    setWatermarks({ imageScale: item.key });
+    setRoomParams({
+      ...roomParams,
+      watermark: { ...watermark, imageScale: item.key },
+    });
   };
 
   const onRotateChange = (item) => {
     setRotate(item);
-
-    setWatermarks({ rotate: item.key });
+    setRoomParams({
+      ...roomParams,
+      watermark: { ...watermark, rotate: item.key },
+    });
   };
 
   const onButtonClick = () => {
@@ -189,7 +200,11 @@ const ImageWatermark = ({
       previewRef.current = null;
     }
 
-    setWatermarks({ image: null, imageUrl: null });
+    setRoomParams({
+      ...roomParams,
+      watermark: { ...watermark, image: null, imageUrl: null },
+    });
+
     setImageUrl("");
   };
 
@@ -318,15 +333,4 @@ const ImageWatermark = ({
   );
 };
 
-export default inject(({ createEditRoomStore }) => {
-  const { setWatermarks, initialWatermarksSettings, watermarksSettings } =
-    createEditRoomStore;
-
-  const { imageUrl } = watermarksSettings;
-
-  return {
-    setWatermarks,
-    initialWatermarksSettings,
-    imageUrl,
-  };
-})(observer(ImageWatermark));
+export default ImageWatermark;

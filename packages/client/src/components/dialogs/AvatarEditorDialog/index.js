@@ -36,13 +36,8 @@ import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { ImageEditor } from "@docspace/shared/components/image-editor";
 
-import { loadAvatar, deleteAvatar } from "@docspace/shared/api/people";
+import { loadAvatar } from "@docspace/shared/api/people";
 import { dataUrlToFile } from "@docspace/shared/utils/dataUrlToFile";
-
-import AvatarCropperGridSvgUrl from "PUBLIC_DIR/images/avatar.crop-area.react.svg?url";
-import RoomCropperGridSvgUrl from "PUBLIC_DIR/images/room.crop-area.react.svg?url";
-
-import DefaultUserAvatarMax from "PUBLIC_DIR/images/default_user_photo_size_200-200.png";
 
 const StyledModalDialog = styled(ModalDialog)`
   #modal-dialog {
@@ -125,9 +120,7 @@ const AvatarEditorDialog = (props) => {
 
   const onChangeAvatar = (newAvatar) => setAvatar(newAvatar);
 
-  const areaCropperImage = isProfileUpload
-    ? AvatarCropperGridSvgUrl
-    : RoomCropperGridSvgUrl;
+  const editorBorderRadius = isProfileUpload ? 400 : 110;
 
   const avatarTitle = isProfileUpload
     ? t("Ldap:LdapAvatar")
@@ -193,7 +186,7 @@ const AvatarEditorDialog = (props) => {
             onChangeImage={onChangeImage || onChangeAvatar}
             onChangeFile={onChangeFile}
             maxImageSize={maxImageUploadSize}
-            areaCropperImage={areaCropperImage}
+            editorBorderRadius={editorBorderRadius}
           />
         </StyledBodyContent>
       </ModalDialog.Body>

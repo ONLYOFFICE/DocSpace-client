@@ -1,3 +1,4 @@
+import { Page } from "@playwright/test";
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -64,7 +65,7 @@ const StyledImageCropper = styled.div<{ disableImageRescaling?: boolean }>`
       `};
   }
 
-  .icon_cropper-delete_button {
+  .icon_cropper-change_button {
     cursor: pointer;
     display: flex;
     flex-direction: row;
@@ -115,12 +116,28 @@ const StyledImageCropper = styled.div<{ disableImageRescaling?: boolean }>`
     height: 24px;
     gap: 12px;
 
+    svg {
+      rect {
+        fill: ${(props) => props.theme.iconButton.color};
+      }
+    }
+
     &-slider {
       margin: 0;
     }
 
     &-button {
       user-select: none;
+    }
+
+    .icon_cropper-zoom-container-button {
+      &:hover {
+        svg {
+          rect {
+            fill: ${(props) => props.theme.iconButton.hoverColor};
+          }
+        }
+      }
     }
   }
 `;

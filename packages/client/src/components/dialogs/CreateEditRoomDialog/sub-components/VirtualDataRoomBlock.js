@@ -10,19 +10,20 @@ import Watermarks from "./Watermarks";
 
 const StyledVirtualDataRoomBlock = styled.div`
   .virtual-data-room-block {
-    margin-bottom: 18px;
+    :not(:last-child) {
+      margin-bottom: 18px;
+    }
 
     .virtual-data-room-block_header {
       display: flex;
 
       .virtual-data-room-block_toggle {
-        margin-left: auto;
-        margin-right: 28px;
+        margin-inline: auto 28px;
       }
     }
     .virtual-data-room-block_description {
       max-width: 420px;
-      margin-right: 28px;
+      margin-inline-end: 28px;
 
       color: ${({ theme }) => theme.editLink.text.color};
     }

@@ -45,6 +45,7 @@ import { StyledUserTypeHeader } from "../../styles/members";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Tooltip } from "@docspace/shared/components/tooltip";
 import { Link } from "@docspace/shared/components/link";
+import { ShareAccessRights } from "@docspace/shared/enums";
 
 const User = ({
   t,
@@ -89,7 +90,11 @@ const User = ({
   const userRole = membersHelper.getOptionByUserAccess(user.access, user);
   const userRoleOptions = user.isGroup
     ? filterGroupRoleOptions(fullRoomRoleOptions)
-    : fullRoomRoleOptions;
+    : !user.isAdmin && !user.isOwner && !user.isRoomAdmin
+      ? fullRoomRoleOptions.filter(
+          (o) => +o.access !== ShareAccessRights.RoomManager && o.key !== "s1",
+        )
+      : fullRoomRoleOptions;
 
   const onRepeatInvitation = async () => {
     resendEmailInvitations(infoPanelSelection.id, true)

@@ -3426,7 +3426,9 @@ class FilesStore {
         : previewUrl
           ? previewUrl
           : !isFolder
-            ? docUrl
+            ? item.fileType === FileType.Archive
+              ? item.webUrl
+              : docUrl
             : folderUrl;
 
       const isRoom = !!roomType;

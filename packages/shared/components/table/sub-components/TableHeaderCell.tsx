@@ -77,6 +77,7 @@ const TableHeaderCell = ({
     <StyledTableHeaderCell
       sorted={sorted}
       isActive={isActive}
+      isShort={isShort}
       showIcon={!!column.onClick}
       className="table-container_header-cell"
       id={`column_${index}`}

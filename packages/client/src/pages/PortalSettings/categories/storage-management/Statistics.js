@@ -67,6 +67,7 @@ const StatisticsComponent = (props) => {
         fileExst={fileExst}
         isRoom={isRoom}
         defaultRoomIcon={defaultRoomIcon}
+        showDefault={!(!!logo?.cover || !!logo?.medium) && isRoom}
         title={title}
         color={color}
         logo={logo}

@@ -45,7 +45,7 @@ const EditRoomDialog = ({
   fetchedTags,
   fetchedImage,
   isInitLoading,
-  isEqualWatermarkChanges,
+
   cover,
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
@@ -86,7 +86,7 @@ const EditRoomDialog = ({
       prevParams.indexing === currentParams.indexing &&
       prevParams.denyDownload === currentParams.denyDownload &&
       isEqual(prevParams.lifetime, currentParams.lifetime) &&
-      isEqualWatermarkChanges
+      isEqual(prevParams.watermark, currentParams.watermark)
     );
   };
 
@@ -219,10 +219,4 @@ const EditRoomDialog = ({
   );
 };
 
-export default inject(({ createEditRoomStore }) => {
-  const { isEqualWatermarkChanges } = createEditRoomStore;
-
-  return {
-    isEqualWatermarkChanges,
-  };
-})(observer(EditRoomDialog));
+export default EditRoomDialog;

@@ -24,9 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { inject, observer } from "mobx-react";
 
 import { RadioButtonGroup } from "@docspace/shared/components/radio-button-group";
 
@@ -58,19 +57,30 @@ const getOptionType = (initialWatermarksSettings, isEdit) => {
 
   return viewerInfoWatermark;
 };
-const Watermarks = ({ isEdit, setWatermarks, initialWatermarksSettings }) => {
+const Watermarks = ({
+  isEdit,
+  roomParams,
+  setRoomParams,
+  initialRoomParams,
+}) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
   const [type, setType] = useState(
-    getOptionType(initialWatermarksSettings, isEdit),
+    getOptionType(initialRoomParams.watermark, isEdit),
   );
+
+  const initialInfo = useRef(null);
+
+  if (initialInfo.current === null) {
+    initialInfo.current = {
+      isImageType: type === imageWatermark,
+    };
+  }
+  const initialInfoRef = initialInfo.current;
 
   const onSelectType = (e) => {
     const { value } = e.target;
 
     setType(value);
-    setWatermarks({
-      isImage: type === imageWatermark,
-    });
   };
 
   const typeOptions = options(t);
@@ -86,20 +96,25 @@ const Watermarks = ({ isEdit, setWatermarks, initialWatermarksSettings }) => {
         selected={type}
         onClick={onSelectType}
       />
-
       {type === imageWatermark ? (
-        <ImageWatermark isEdit={isEdit} />
+        <ImageWatermark
+          isEdit={isEdit}
+          initialSettings={initialRoomParams.watermark}
+          roomParams={roomParams}
+          setRoomParams={setRoomParams}
+          isImage={initialInfoRef.isImageType}
+        />
       ) : (
-        <ViewerInfoWatermark isEdit={isEdit} />
+        <ViewerInfoWatermark
+          isEdit={isEdit}
+          initialSettings={initialRoomParams.watermark}
+          roomParams={roomParams}
+          setRoomParams={setRoomParams}
+          isImage={initialInfoRef.isImageType}
+        />
       )}
     </StyledBody>
   );
 };
 
-export default inject(({ createEditRoomStore }) => {
-  const { setWatermarks, initialWatermarksSettings } = createEditRoomStore;
-  return {
-    setWatermarks,
-    initialWatermarksSettings,
-  };
-})(observer(Watermarks));
+export default Watermarks;

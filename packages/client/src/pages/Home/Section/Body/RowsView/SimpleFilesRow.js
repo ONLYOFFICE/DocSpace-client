@@ -382,6 +382,9 @@ const SimpleFilesRow = (props) => {
       isRoom={item.isRoom}
       title={item.title}
       logo={item.logo}
+      showDefault={
+        !(!!item?.logo?.cover || !!item?.logo?.medium) && item.isRoom
+      }
       color={item.logo?.color}
       isArchive={item.isArchive}
       badgeUrl={badgeUrl}
@@ -412,7 +415,7 @@ const SimpleFilesRow = (props) => {
 
   const idWithFileExst = item.fileExst
     ? `${item.id}_${item.fileExst}`
-    : item.id ?? "";
+    : (item.id ?? "");
 
   return (
     <StyledWrapper

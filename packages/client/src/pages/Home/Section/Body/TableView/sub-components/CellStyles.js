@@ -35,7 +35,7 @@ const StyledText = styled(Text)`
 const StyledIndexCell = styled(Text)`
   display: inline-block;
   margin-inline: 0;
-  padding-inline-start: 12px;
+  padding-inline-start: 16px;
 
   overflow: hidden;
   direction: rtl;
@@ -46,7 +46,7 @@ const StyledIndexCell = styled(Text)`
     theme.interfaceDirection === "rtl" &&
     css`
       padding-inline-start: 0;
-      margin-inline-end: 12px;
+      margin-inline-end: 16px;
     `}
 `;
 

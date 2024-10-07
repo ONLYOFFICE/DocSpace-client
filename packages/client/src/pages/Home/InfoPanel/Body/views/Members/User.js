@@ -231,21 +231,8 @@ const User = ({
             ? "collaborator"
             : "user";
 
-    const successCallback = () => {
-      updateRole(option);
-    };
-
     setIsLoading(true);
-
-    const needChangeUserType =
-      ((user.isVisitor || user.isCollaborator) && userType === "manager") ||
-      (user.isVisitor && userType === "collaborator");
-
-    if (needChangeUserType) {
-      changeUserType(userType, [user], successCallback, abortCallback);
-    } else {
-      updateRole(option);
-    }
+    updateRole(option);
   };
 
   const getUserType = (item) => {

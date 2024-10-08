@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export const PEOPLE_ROUTE = "accounts/people/filter";
-export const GROUPS_ROUTE = "accounts/groups/filter";
-export const GUESTS_ROUTE = "accounts/guests/filter";
-export const INSIDE_GROUP_ROUTE = "accounts/groups/:groupId/filter";
+export const PEOPLE_ROUTE = "/accounts/people/filter";
+export const GROUPS_ROUTE = "/accounts/groups/filter";
+export const GUESTS_ROUTE = "/accounts/guests/filter";
+export const INSIDE_GROUP_ROUTE = "/accounts/groups/:groupId/filter";

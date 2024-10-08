@@ -81,6 +81,8 @@ const useContacts = ({
     setIsLoading(true);
     setContactsTab(contactsView);
 
+    console.log(contactsView);
+
     const isInsideGroup = contactsView === "inside_group";
     const isGuests = contactsView === "guests";
     const isGroups = contactsView === "groups";

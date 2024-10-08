@@ -51,17 +51,6 @@ class WebhooksStore {
   isRetryPending = false;
   configName = "";
 
-  PASSWORD_SETTINGS = {
-    minLength: 12,
-    allowedCharactersRegexStr: "[\\x21-\\x7E]",
-    upperCase: true,
-    digits: true,
-    digitsRegexStr: "(?=.*\\d)",
-    upperCaseRegexStr: "(?=.*[A-Z])",
-    specSymbols: false,
-    specSymbolsRegexStr: "(?=.*[\\x21-\\x2F\\x3A-\\x40\\x5B-\\x60\\x7B-\\x7E])",
-  };
-
   constructor(settingsStore) {
     makeAutoObservable(this);
 

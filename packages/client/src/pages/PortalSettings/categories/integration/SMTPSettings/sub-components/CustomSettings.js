@@ -102,6 +102,10 @@ const CustomSettings = (props) => {
   const requirementColor = {
     color: theme.client.settings.integration.smtp.requirementColor,
   };
+
+  const isPortValid =
+    Number(settings[PORT]) > 0 && Number(settings[PORT]) < 65536;
+
   const enableAuthComponent = (
     <div className="smtp-settings_auth">
       <ToggleButton
@@ -238,7 +242,7 @@ const CustomSettings = (props) => {
       <ButtonContainer
         t={t}
         isEmailValid={emailError.isValid}
-        isPortValid={settings[PORT] !== 0 && settings[PORT] !== "0"}
+        isPortValid={isPortValid}
       />
     </StyledComponent>
   );

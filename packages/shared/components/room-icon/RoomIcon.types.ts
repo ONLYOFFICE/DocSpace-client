@@ -41,7 +41,7 @@ type RoomIconCover = {
 };
 
 type Logo = {
-  color: string;
+  color?: string;
   large: string;
   medium?: string;
   original: string;

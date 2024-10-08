@@ -93,7 +93,7 @@ const useFiles = ({
   };
 
   const fetchDefaultRooms = () => {
-    const filter = RoomsFilter.getDefault();
+    const filter = RoomsFilter.getDefault(userId, RoomSearchArea.Active);
 
     const categoryType = getCategoryType(location);
 

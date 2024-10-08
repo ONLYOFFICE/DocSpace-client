@@ -23,6 +23,7 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { useTheme } from "styled-components";
 
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import { Text } from "@docspace/shared/components/text";
@@ -31,15 +32,19 @@ import { StyledRoomItem } from "../NewFilesBadge.styled";
 import { NewFilesPanelItemRoomProps } from "../NewFilesBadge.types";
 
 export const NewFilesPanelItemRoom = ({ room }: NewFilesPanelItemRoomProps) => {
+  const theme = useTheme();
+
   return (
     <StyledRoomItem>
       <RoomIcon
         className="room-icon"
+        imgClassName="room-image"
         logo={room.logo}
         title={room.title}
-        color={room.logo.color}
-        imgSrc=""
-        showDefault={false}
+        color={room.logo.color ?? ""}
+        showDefault={!room.logo.medium && !room.logo.cover}
+        currentColorScheme={theme.currentColorScheme!}
+        dropDownManualX="0"
         size="24px"
       />
       <Text

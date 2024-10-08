@@ -26,14 +26,13 @@
 
 import { makeAutoObservable } from "mobx";
 import isEqual from "lodash/isEqual";
-
+import api from "@docspace/shared/api";
 import { toastr } from "@docspace/shared/components/toast";
 import { isDesktop } from "@docspace/shared/utils";
 import FilesFilter from "@docspace/shared/api/files/filter";
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import { RoomsType } from "@docspace/shared/enums";
-import { setWatermarkSettings } from "@docspace/shared/api/rooms";
 
 class CreateEditRoomStore {
   roomParams = null;
@@ -133,65 +132,27 @@ class CreateEditRoomStore {
     this.initialWatermarksSettings = {};
   };
 
-  get isEqualWatermarkChanges() {
-    return isEqual(this.watermarksSettings, this.initialWatermarksSettings);
-  }
+  isCorrectWatermark = (watermarkSettings) => {
+    if (!watermarkSettings) return true;
 
-  isNotWatermarkSet = (isEdit) => {
-    if (!isEdit && !this.watermarksSettings.enabled) return false;
-
-    if (
-      this.watermarksSettings.isImage &&
-      !this.watermarksSettings.image &&
-      !this.watermarksSettings.imageUrl
-    )
-      return true;
-
-    if (
-      !this.watermarksSettings.isImage &&
-      this.watermarksSettings.additions === 0
-    )
-      return true;
-
-    return false;
+    return !(
+      watermarkSettings.additions === 0 &&
+      !watermarkSettings.image &&
+      !watermarkSettings.imageUrl
+    );
   };
 
-  getWatermarkRequest = async (room) => {
-
-    if (this.watermarksSettings.enabled === false) {
-      return setWatermarkSettings(room.id, {
-        enabled: this.watermarksSettings.enabled,
+  getWatermarkRequest = async (watermarksSettings) => {
+    const watermarkImage = watermarksSettings.image;
+    if (!watermarkImage && !watermarksSettings.imageUrl) {
+      return Promise.resolve({
+        rotate: watermarksSettings.rotate,
+        text: watermarksSettings.text,
+        additions: watermarksSettings.additions,
       });
     }
-    if (!this.watermarksSettings.isImage) {
-      return setWatermarkSettings(room.id, {
-        // enabled: this.watermarksSettings.enabled,
-        rotate: this.watermarksSettings.rotate,
-        text: this.watermarksSettings.text,
-        additions: this.watermarksSettings.additions,
-      });
-    }
-
-    const watermarkImage = this.watermarksSettings.image;
-    const watermarksSettings = this.watermarksSettings;
-
-    const getMeta = (url, onSetInfo) => {
-      //url for this.watermarksSettings.image.viewUrl
-      const img = new Image();
-      const imgUrl = url ?? URL.createObjectURL(watermarkImage);
-      img.src = imgUrl;
-
-      img.onload = () => {
-        URL.revokeObjectURL(imgUrl);
-        onSetInfo(null, img);
-      };
-
-      img.onerror = (err) => onSetInfo(err);
-    };
-
-    if (!watermarkImage && this.watermarksSettings.imageUrl) {
-      return setWatermarkSettings(room.id, {
-        // enabled: watermarksSettings.enabled,
+    if (!watermarkImage && watermarksSettings.imageUrl) {
+      return Promise.resolve({
         imageScale: watermarksSettings.imageScale,
         rotate: watermarksSettings.rotate,
         imageUrl: watermarksSettings.imageUrl,
@@ -208,22 +169,153 @@ class CreateEditRoomStore {
 
     const response = await uploadRoomLogo(uploadWatermarkData);
 
-    getMeta(null, (err, img) => {
-      if (err) {
-        toastr.error(err);
-        return;
-      }
-
-      return setWatermarkSettings(room.id, {
-        enabled: watermarksSettings.enabled,
+    const getMeta = (url) => {
+      //url for this.watermarksSettings.image.viewUrl
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        const imgUrl = url ?? URL.createObjectURL(watermarkImage);
+        img.onload = () => resolve(img);
+        img.onerror = (err) => reject(err);
+        img.src = imgUrl;
+      });
+    };
+    return await getMeta().then((img) => {
+      return {
         imageScale: watermarksSettings.imageScale,
         rotate: watermarksSettings.rotate,
         imageUrl: response.data,
         // imageId: watermarksSettings.image.id,
         imageWidth: img.naturalWidth,
         imageHeight: img.naturalHeight,
-      });
+      };
     });
+  };
+
+  onSaveEditRoom = async (t, newParams, room) => {
+    const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
+    const { cover, setRoomLogoCover } = this.dialogsStore;
+    const {
+      editRoom,
+      removeLogoFromRoom,
+      addActiveItems,
+      addTagsToRoom,
+      removeTagsFromRoom,
+
+      setFolder,
+    } = this.filesStore;
+    const { uploadedFile, onSaveRoomLogo } = this.avatarEditorDialogStore;
+    const { changeRoomOwner, updateCurrentFolder } = this.filesActionsStore;
+    const { createTag } = this.tagsStore;
+    const {
+      isRootFolder,
+      updateEditedSelectedRoom,
+      id: currentFolderId,
+    } = this.selectedFolderStore;
+
+    const editRoomParams = {};
+
+    const quotaLimit = newParams?.quota || room.quotaLimit;
+    const isTitleChanged = !isEqual(newParams.title, room.title);
+    const denyDownloadChanged = newParams?.denyDownload !== room.denyDownload;
+    const indexingChanged = newParams?.indexing !== room.indexing;
+    const isQuotaChanged = quotaLimit !== room.quotaLimit;
+    const lifetimeChanged = !isEqual(newParams.lifetime, room.lifetime);
+    const isOwnerChanged = newParams?.roomOwner?.id !== room.createdBy.id;
+    const isWatermarkChanged = !isEqual(newParams.watermark, room.watermark);
+
+    if (isDefaultRoomsQuotaSet && isQuotaChanged) {
+      editRoomParams.quotaLimit = +quotaLimit;
+    }
+
+    if (isTitleChanged) {
+      editRoomParams.title = newParams.title || t("Common:NewRoom");
+    }
+
+    if (denyDownloadChanged) {
+      editRoomParams.denyDownload = newParams.denyDownload;
+    }
+
+    if (indexingChanged) {
+      editRoomParams.indexing = newParams.indexing;
+    }
+
+    if (lifetimeChanged) {
+      editRoomParams.lifetime = newParams.lifetime ?? {
+        enabled: false,
+      };
+    }
+
+    if (isWatermarkChanged && this.isCorrectWatermark(newParams.watermark)) {
+      editRoomParams.watermark = newParams.watermark
+        ? await this.getWatermarkRequest(newParams.watermark)
+        : {
+            enabled: false,
+          };
+    }
+
+    const startTags = Object.values(room.tags);
+    const tags = newParams.tags.map((tag) => tag.name);
+    const removedTags = startTags.filter((sT) => !tags.includes(sT));
+    const newTags = newParams.tags.filter((t) => t.isNew).map((t) => t.name);
+    const isDeletionTags = removedTags.length > 0;
+
+    const isUpdatelogo = uploadedFile;
+    const isDeleteLogo = !!room.logo.original && !newParams.icon.uploadedFile;
+
+    const requests = [];
+
+    try {
+      if (Object.keys(editRoomParams).length)
+        await editRoom(room.id, editRoomParams);
+
+      for (let i = 0; i < newTags.length; i++) {
+        requests.push(createTag(newTags[i]));
+      }
+
+      if (isOwnerChanged) {
+        requests.push(changeRoomOwner(t, newParams?.roomOwner?.id));
+      }
+
+      if (isDeletionTags) {
+        requests.push(removeTagsFromRoom(room.id, removedTags));
+      }
+
+      if (isDeleteLogo) {
+        requests.push(removeLogoFromRoom(room.id));
+      }
+
+      if (cover) {
+        requests.push(setRoomLogoCover(room.id));
+      }
+
+      if (!cover && isUpdatelogo) {
+        addActiveItems(null, [room.id]);
+        requests.push(onSaveRoomLogo(room.id, newParams.icon, room, true));
+      }
+
+      const isEditCurrentFolder = room.id === currentFolderId;
+      const needTableContentUpdate = indexingChanged && isEditCurrentFolder; //|| withPaging;
+
+      if (needTableContentUpdate)
+        requests.push(updateCurrentFolder(null, currentFolderId));
+
+      if (!!requests.length) {
+        await Promise.all(requests);
+      }
+
+      let updatedRoomInfo = null;
+
+      if (tags.length) {
+        const tagsToAddList = tags.filter((t) => !startTags.includes(t));
+        updatedRoomInfo = await addTagsToRoom(room.id, tagsToAddList);
+
+        isRootFolder
+          ? setFolder(updatedRoomInfo)
+          : updateEditedSelectedRoom({ tags: tags });
+      }
+    } catch (e) {
+      toastr.error(e);
+    }
   };
 
   onCreateRoom = async (withConfirm = false, t) => {
@@ -261,7 +353,6 @@ class CreateEditRoomStore {
       roomType: roomParams.type,
       title: roomParams.title || t("Common:NewRoom"),
       indexing: roomParams.indexing,
-      lifetime: roomParams.lifetime,
       denyDownload: roomParams.denyDownload,
       createAsNewFolder: roomParams.createAsNewFolder ?? true,
       ...(quotaLimit && {
@@ -280,6 +371,15 @@ class CreateEditRoomStore {
     const uploadLogoData = new FormData();
     uploadLogoData.append(0, roomParams.icon.uploadedFile);
 
+    if (roomParams.lifetime) {
+      createRoomData.lifetime = roomParams.lifetime;
+    }
+
+    if (roomParams.watermark && this.isCorrectWatermark(roomParams.watermark)) {
+      createRoomData.watermark = await this.getWatermarkRequest(
+        roomParams.watermark,
+      );
+    }
     try {
       this.setIsLoading(true);
       withConfirm && this.setConfirmDialogIsLoading(true);
@@ -297,10 +397,6 @@ class CreateEditRoomStore {
       const actions = [];
 
       const requests = [];
-
-      if (this.watermarksSettings.enabled && !this.isNotWatermarkSet()) {
-        requests.push(this.getWatermarkRequest(room));
-      }
 
       // delete thirdparty account if not needed
       if (!isThirdparty && storageFolderId)

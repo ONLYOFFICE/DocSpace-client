@@ -494,13 +494,9 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
       }
     }, [inputValue, prevInputValue, isSimulateType, onChangeAction]);
 
-    React.useImperativeHandle(
-      ref,
-      () => {
-        return { onGeneratePassword, setState, value: state.value };
-      },
-      [onGeneratePassword, setState, state.value],
-    );
+    React.useImperativeHandle(ref, () => {
+      return { onGeneratePassword, setState, value: state.value };
+    }, [onGeneratePassword, setState, state.value]);
 
     const renderTextTooltip = (
       settings?: TPasswordSettings,
@@ -611,7 +607,7 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
             iconName={iconName}
             iconButtonClassName={iconButtonClassName}
             value={
-              isSimulateType && type === "password" ? bullets : value ?? ""
+              isSimulateType && type === "password" ? bullets : (value ?? "")
             }
             onIconClick={changeInputType}
             onChange={onChangeAction}

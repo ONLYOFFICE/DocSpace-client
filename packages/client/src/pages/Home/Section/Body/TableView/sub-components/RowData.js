@@ -34,7 +34,6 @@ import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
 import IndexCell from "./IndexCell";
 import { classNames, getLastColumn } from "@docspace/shared/utils";
-import { RoomsType } from "@docspace/shared/enums";
 import {
   StyledBadgesContainer,
   StyledQuickButtonsContainer,
@@ -50,8 +49,6 @@ const RowDataComponent = (props) => {
     modifiedColumnIsEnabled,
     sizeColumnIsEnabled,
     typeColumnIsEnabled,
-    indexColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
 
     dragStyles,
     selectionProp,
@@ -65,7 +62,6 @@ const RowDataComponent = (props) => {
     badgesComponent,
     quickButtonsComponent,
 
-    isIndexing,
     tableStorageName,
     columnStorageName,
     isIndexEditingMode,
@@ -139,24 +135,6 @@ const RowDataComponent = (props) => {
 
   return (
     <>
-      {indexColumnIsEnabled && isIndexing && (
-        <TableCell
-          className={classNames(
-            selectionProp?.className,
-            "table-container_index-cell",
-          )}
-          style={
-            !indexColumnIsEnabled ? { background: "none" } : dragStyles.style
-          }
-          value={value}
-        >
-          <IndexCell
-            sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
-          />
-        </TableCell>
-      )}
-
       <TableCell
         {...dragStyles}
         className={classNames(
@@ -312,7 +290,6 @@ export default inject(({ tableStore }) => {
     createdColumnIsEnabled,
     modifiedColumnIsEnabled,
     sizeColumnIsEnabled,
-    indexColumnIsEnabled,
     typeColumnIsEnabled,
     tableStorageName,
     columnStorageName,
@@ -323,7 +300,6 @@ export default inject(({ tableStore }) => {
     createdColumnIsEnabled,
     modifiedColumnIsEnabled,
     sizeColumnIsEnabled,
-    indexColumnIsEnabled,
     typeColumnIsEnabled,
     tableStorageName,
     columnStorageName,

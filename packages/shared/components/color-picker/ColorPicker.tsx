@@ -26,8 +26,13 @@
 
 import { useEffect, useState } from "react";
 import { HexColorPicker, HexColorInput } from "react-colorful";
+import { useTranslation } from "react-i18next";
+
+import CrossIconSvgUrl from "PUBLIC_DIR/images/icons/16/cross.react.svg?url";
 
 import { Button } from "../button";
+import { Text } from "../text";
+import { IconButton } from "../icon-button";
 
 import Wrapper from "./ColorPicker.styled";
 import { ColorPickerProps } from "./ColorPicker.types";
@@ -45,10 +50,13 @@ const ColorPicker = ({
   isPickerOnly,
   handleChange,
   hexCodeLabel,
+  forwardedRef,
 }: ColorPickerProps) => {
   const [color, setColor] = useState(
     appliedColor || globalColors.lightBlueMain,
   );
+
+  const { t } = useTranslation(["Common"]);
 
   useEffect(() => {
     if (!isPickerOnly && appliedColor && appliedColor !== color) {
@@ -58,7 +66,31 @@ const ColorPicker = ({
   }, [appliedColor]);
 
   return (
-    <Wrapper className={className} id={id}>
+    <Wrapper
+      ref={forwardedRef}
+      isPickerOnly={isPickerOnly}
+      className={className}
+      id={id}
+    >
+      {isPickerOnly && (
+        <div className="hex-header">
+          <div className="hex-text">
+            <Text fontSize="16px" lineHeight="22px" fontWeight={700} truncate>
+              {t("Custom")}
+            </Text>
+          </div>
+          <div className="hex-close">
+            <IconButton
+              className="table-header_icon-button"
+              size={16}
+              onClick={onClose}
+              iconName={CrossIconSvgUrl}
+              isFill
+            />
+          </div>
+        </div>
+      )}
+
       <div className="hex-color-picker">
         {!isPickerOnly && (
           <div className="hex-value-container">

@@ -78,8 +78,7 @@ const StyledColorItem = styled.div<ColorItemProps>`
   ${(props) =>
     props.isSelected &&
     css`
-      background-color: ${(props) =>
-        props.theme.logoCover.selectColor.backgroundColor};
+      background-color: ${props.theme.logoCover.selectColor.backgroundColor};
     `}
 
   &:hover {
@@ -151,7 +150,7 @@ const CustomSelectedColor = styled.div<ColorItemProps>`
       width: 26px;
       height: 26px;
 
-      border: ${(props) => `solid 2px ${props.color}`};
+      border: ${() => `solid 2px ${props.color}`};
       @media ${tablet} {
         width: 36px;
         height: 36px;
@@ -161,7 +160,7 @@ const CustomSelectedColor = styled.div<ColorItemProps>`
   ${(props) =>
     !props.isSelected &&
     css`
-      background-color: ${(props) => props.color};
+      background-color: ${props.color};
     `}
 
   svg {

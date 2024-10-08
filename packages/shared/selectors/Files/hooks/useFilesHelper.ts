@@ -403,6 +403,7 @@ const useFilesHelper = ({
         requestRunning.current = false;
 
         getRootData?.();
+        if (selectedItemId) setSelectedItemId("");
 
         if (onSetBaseFolderPath) {
           onSetBaseFolderPath([]);

@@ -472,7 +472,12 @@ const FilesSelectorComponent = ({
       getRootData();
       return;
     }
-    if (selectedItemType === "files" && typeof selectedItemId !== "undefined")
+
+    if (
+      selectedItemType === "files" &&
+      typeof selectedItemId !== "undefined" &&
+      selectedItemId !== ""
+    )
       getFileList(0);
   }, [
     getFileList,

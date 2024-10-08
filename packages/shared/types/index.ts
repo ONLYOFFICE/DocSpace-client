@@ -29,7 +29,6 @@ import {
   TSettings,
   TVersionBuild,
 } from "../api/settings/types";
-import { TUser } from "../api/people/types";
 import { RoomsType } from "../enums";
 import { TTheme } from "../themes";
 import FirebaseHelper from "../utils/firebase";
@@ -84,7 +83,7 @@ declare global {
   interface Window {
     firebaseHelper: FirebaseHelper;
     __ASC_INITIAL_EDITOR_STATE__?: {
-      user: TUser;
+      user: unknown;
       portalSettings: TSettings;
       appearanceTheme: TGetColorTheme;
       versionInfo: TVersionBuild;

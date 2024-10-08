@@ -95,6 +95,7 @@ const FilterBlock = ({
       const isSelected =
         filterSubject.groupItem.findIndex((i) => i.isSelected) > -1;
 
+      console.log("as");
       if (
         filterOwner &&
         filterOwner.groupItem &&
@@ -401,6 +402,7 @@ const FilterBlock = ({
 
   const selectOption = React.useCallback(
     (items: TSelectorItem[]) => {
+      console.log(items);
       setShowSelector((val) => ({
         ...val,
         show: false,

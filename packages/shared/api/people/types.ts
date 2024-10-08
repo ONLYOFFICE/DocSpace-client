@@ -38,6 +38,7 @@ export type TFilterSortBy =
   | "department"
   | "email"
   | "usedspace"
+  | "registrationDate"
   | "createdby";
 
 export type TFilterArea = "all" | "people" | "guests";

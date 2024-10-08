@@ -839,6 +839,8 @@ class UploadDataStore {
     const { files, setFiles, folders, setFolders, filter, setFilter } =
       this.filesStore;
 
+    const { filesCount, setFilesCount } = this.selectedFolderStore;
+
     const { withPaging } = this.settingsStore;
 
     if (window.location.pathname.indexOf("/history") === -1) {
@@ -872,7 +874,6 @@ class UploadDataStore {
 
       const addNewFile = () => {
         if (!this.filesStore.showNewFilesInList) {
-          this.filesStore.setOperationAction(false);
           return;
         }
 
@@ -892,6 +893,7 @@ class UploadDataStore {
               setFiles(newFiles);
               const newFilter = filter;
               newFilter.total += 1;
+              setFilesCount(filesCount + 1);
               setFilter(newFilter);
             } else if (!this.filesSettingsStore.storeOriginalFiles) {
               newFiles[fileIndex] = currentFile.fileInfo;
@@ -899,8 +901,6 @@ class UploadDataStore {
             }
           }
         }
-
-        this.filesStore.setOperationAction(false);
       };
 
       const isFiltered =

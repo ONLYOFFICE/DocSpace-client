@@ -445,7 +445,6 @@ class FilesActionStore {
 
     if (folderIds.length || fileIds.length) {
       try {
-        this.filesStore.setOperationAction(true);
         this.setGroupMenuBlocked(true);
         await removeFiles(folderIds, fileIds, deleteAfter, immediately)
           .then(async (res) => {
@@ -511,7 +510,6 @@ class FilesActionStore {
         setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
         return toastr.error(err.message ? err.message : err);
       } finally {
-        this.filesStore.setOperationAction(false);
         this.setGroupMenuBlocked(false);
       }
     }
@@ -898,32 +896,28 @@ class FilesActionStore {
       operationId,
     };
 
-    this.filesStore.setOperationAction(true);
-
     const destFolderId = isRecycleBinFolder ? null : recycleBinFolderId;
 
     if (isFile) {
       addActiveItems([itemId], null, destFolderId);
-      return deleteFile(itemId)
-        .then(async (res) => {
-          if (res[0]?.error) return Promise.reject(res[0].error);
-          const data = res[0] ? res[0] : null;
-          await this.uploadDataStore.loopFilesOperations(data, pbData);
+      return deleteFile(itemId).then(async (res) => {
+        if (res[0]?.error) return Promise.reject(res[0].error);
+        const data = res[0] ? res[0] : null;
+        await this.uploadDataStore.loopFilesOperations(data, pbData);
 
-          if (withPaging) {
-            this.updateCurrentFolder([itemId], null, null, operationId);
-            toastr.success(translations.successRemoveFile);
-          } else {
-            this.updateFilesAfterDelete(operationId);
-            this.filesStore.removeFiles(
-              [itemId],
-              null,
-              () => toastr.success(translations.successRemoveFile),
-              destFolderId,
-            );
-          }
-        })
-        .finally(() => this.filesStore.setOperationAction(false));
+        if (withPaging) {
+          this.updateCurrentFolder([itemId], null, null, operationId);
+          toastr.success(translations.successRemoveFile);
+        } else {
+          this.updateFilesAfterDelete(operationId);
+          this.filesStore.removeFiles(
+            [itemId],
+            null,
+            () => toastr.success(translations.successRemoveFile),
+            destFolderId,
+          );
+        }
+      });
     } else if (isRoom) {
       const items = Array.isArray(itemId) ? itemId : [itemId];
       addActiveItems(null, items);
@@ -945,32 +939,29 @@ class FilesActionStore {
         )
         .finally(() => {
           this.setGroupMenuBlocked(false);
-          this.filesStore.setOperationAction(false);
         });
     } else {
       addActiveItems(null, [itemId], destFolderId);
-      return deleteFolder(itemId)
-        .then(async (res) => {
-          if (res[0]?.error) return Promise.reject(res[0].error);
-          const data = res[0] ? res[0] : null;
-          await this.uploadDataStore.loopFilesOperations(data, pbData);
+      return deleteFolder(itemId).then(async (res) => {
+        if (res[0]?.error) return Promise.reject(res[0].error);
+        const data = res[0] ? res[0] : null;
+        await this.uploadDataStore.loopFilesOperations(data, pbData);
 
-          if (withPaging) {
-            this.updateCurrentFolder(null, [itemId], null, operationId);
-            toastr.success(translations.successRemoveFolder);
-          } else {
-            this.updateFilesAfterDelete(operationId);
-            this.filesStore.removeFiles(
-              null,
-              [itemId],
-              () => toastr.success(translations.successRemoveFolder),
-              destFolderId,
-            );
-          }
+        if (withPaging) {
+          this.updateCurrentFolder(null, [itemId], null, operationId);
+          toastr.success(translations.successRemoveFolder);
+        } else {
+          this.updateFilesAfterDelete(operationId);
+          this.filesStore.removeFiles(
+            null,
+            [itemId],
+            () => toastr.success(translations.successRemoveFolder),
+            destFolderId,
+          );
+        }
 
-          getIsEmptyTrash();
-        })
-        .finally(() => this.filesStore.setOperationAction(false));
+        getIsEmptyTrash();
+      });
     }
   };
 

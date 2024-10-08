@@ -117,6 +117,9 @@ export const StyledRoomItem = styled.div`
 
   .room-icon {
     min-width: 24px;
+    .room-image {
+      border-radius: 6px;
+    }
   }
 `;
 

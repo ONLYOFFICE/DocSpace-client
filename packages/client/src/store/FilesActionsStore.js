@@ -328,8 +328,6 @@ class FilesActionStore {
       }
     }
 
-    const operationId = uniqueid("operation_");
-
     const toFolderId = folderId ? folderId : this.selectedFolderStore.id;
 
     const pbData = {

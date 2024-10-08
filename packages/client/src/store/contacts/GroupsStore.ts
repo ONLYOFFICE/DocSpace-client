@@ -37,10 +37,10 @@ import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import config from "PACKAGE_FILE";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import AccountsFilter from "@docspace/shared/api/people/filter";
 import api from "@docspace/shared/api";
 import { TGroup } from "@docspace/shared/api/groups/types";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
+import { getContactsUrl } from "./../../helpers/contacts/utils";
 
 class GroupsStore {
   authStore;
@@ -150,24 +150,6 @@ class GroupsStore {
     if (this.groupsFilter.search !== "") return true;
     if (this.groupsFilter.userId !== null) return true;
     return false;
-  }
-
-  get insideGroupIsFiltered() {
-    return (
-      this.insideGroupFilter.activationStatus ||
-      this.insideGroupFilter.employeeStatus ||
-      this.insideGroupFilter.payments ||
-      this.insideGroupFilter.search ||
-      this.insideGroupFilter.role ||
-      this.insideGroupFilter.accountLoginType
-    );
-  }
-
-  get isCurrentGroupEmpty() {
-    return (
-      !this.insideGroupIsFiltered &&
-      this.peopleStore.usersStore.peopleList.length === 0
-    );
   }
 
   // Inside Group Filter
@@ -284,84 +266,6 @@ class GroupsStore {
     const group = await groupsApi.getGroupById(groupId);
 
     if (group) this.setCurrentGroup(group);
-  };
-
-  fetchGroup = async (
-    groupId,
-    filter,
-    updateFilter = false,
-    withFilterLocalStorage = false,
-    updateCurrentGroup = false,
-  ) => {
-    this.setInsideGroupLoading(true);
-
-    const filterData = filter ? filter.clone() : AccountsFilter.getDefault();
-    filterData.group = groupId;
-
-    if (!this.authStore.settingsStore.withPaging) {
-      filterData.page = 0;
-      filterData.pageCount = 100;
-    }
-
-    const filterStorageItem = localStorage.getItem(
-      `InsideGroupFilter=${this.peopleStore.userStore.user?.id}`,
-    );
-
-    if (filterStorageItem && withFilterLocalStorage) {
-      const splitFilter = filterStorageItem.split(",");
-
-      filterData.sortBy = splitFilter[0];
-      filterData.pageCount = +splitFilter[1];
-      filterData.sortOrder = splitFilter[2];
-    }
-
-    const requests = [];
-
-    requests.push(api.people.getUserList(filterData));
-
-    if (updateCurrentGroup || groupId !== this.currentGroup?.id) {
-      console.log("update");
-      requests.push(this.updateCurrentGroup(groupId ?? this.currentGroup?.id));
-    }
-
-    const [filteredMembersRes] = await Promise.all(requests);
-    filterData.total = filteredMembersRes.total;
-
-    this.peopleStore.usersStore.setUsers(filteredMembersRes.items);
-
-    if (updateFilter) {
-      this.setInsideGroupFilterParams(filterData);
-    }
-
-    this.setInsideGroupLoading(false);
-
-    return Promise.resolve(filteredMembersRes.items);
-  };
-
-  get hasMoreInsideGroupUsers() {
-    return (
-      this.peopleStore.usersStore.users.length < this.insideGroupFilter.total
-    );
-  }
-
-  fetchMoreInsideGroupUsers = async () => {
-    if (!this.hasMoreInsideGroupUsers || this.insideGroupIsLoading) return;
-    this.insideGroupIsLoading = true;
-
-    const newFilter = this.insideGroupFilter.clone();
-    newFilter.page += 1;
-    this.setInsideGroupFilterParams(newFilter);
-
-    const res = await api.people.getUserList(newFilter);
-
-    runInAction(() => {
-      this.peopleStore.usersStore.setUsers([
-        ...this.peopleStore.usersStore.users,
-        ...res.items,
-      ]);
-      this.insideGroupFilter = newFilter;
-      this.insideGroupIsLoading = false;
-    });
   };
 
   setSelection = (selection: TGroup[]) => (this.selection = selection);
@@ -611,13 +515,6 @@ class GroupsStore {
       : this.getGroupContextOptions(t, item);
   };
 
-  clearInsideGroup = () => {
-    this.currentGroup = null;
-    this.insideGroupBackUrl = null;
-    this.insideGroupTempTitle = null;
-    this.peopleStore.usersStore.setUsers([]);
-  };
-
   openGroupAction = (
     groupId: string,
     withBackURL: boolean,
@@ -627,9 +524,9 @@ class GroupsStore {
     const { setIsSectionBodyLoading, setIsSectionFilterLoading } =
       this.clientLoadingStore;
 
-    const url = `/accounts/groups/${groupId}/filter`;
+    const insideGroupUrl = getContactsUrl("inside_group", groupId);
 
-    if (openingNewTab(url, e)) return;
+    if (openingNewTab(insideGroupUrl, e)) return;
 
     this.setSelection([]);
     this.setBufferSelection(null);
@@ -644,7 +541,7 @@ class GroupsStore {
       this.setInsideGroupBackUrl(url);
     }
 
-    window.DocSpace.navigate(url);
+    window.DocSpace.navigate(insideGroupUrl);
   };
 
   updateGroup = async (

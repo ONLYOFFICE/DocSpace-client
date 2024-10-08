@@ -209,6 +209,7 @@ export default inject(
       changeType,
 
       isUsersEmptyView,
+
       contactsTab,
     } = usersStore!;
 

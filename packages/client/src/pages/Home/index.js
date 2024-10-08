@@ -141,7 +141,7 @@ const PureHome = (props) => {
     contactsViewAs,
     getUsersList,
     getGroups,
-    fetchGroup,
+    updateCurrentGroup,
     setSelectedNode,
     onClickBack,
 
@@ -162,7 +162,6 @@ const PureHome = (props) => {
     getFolderModel,
     scrollToTop,
     isEmptyGroups,
-    isCurrentGroupEmpty,
     wsCreatedPDFForm,
     disableUploadPanelOpen,
     setContactsTab,
@@ -260,7 +259,7 @@ const PureHome = (props) => {
 
     getUsersList,
     getGroups,
-    fetchGroup,
+    updateCurrentGroup,
   });
 
   useSettings({
@@ -560,14 +559,10 @@ export const Component = inject(
       viewAs: contactsViewAs,
     } = peopleStore;
     const { updateProfileCulture } = targetUserStore;
-    const { getUsersList, setContactsTab, isUsersEmptyView } = usersStore;
-    const {
-      getGroups,
-      fetchGroup,
-      groups,
-      groupsIsFiltered,
-      isCurrentGroupEmpty,
-    } = groupsStore;
+    const { getUsersList, setContactsTab, isUsersEmptyView, isFiltered } =
+      usersStore;
+    const { getGroups, updateCurrentGroup, groups, groupsIsFiltered } =
+      groupsStore;
 
     const isEmptyGroups =
       !groupsIsFiltered &&
@@ -688,11 +683,10 @@ export const Component = inject(
       contactsViewAs,
       getUsersList,
       getGroups,
-      fetchGroup,
+      updateCurrentGroup,
       isEmptyGroups,
-      isCurrentGroupEmpty,
       updateProfileCulture,
-      isUsersEmptyView,
+      isUsersEmptyView: isUsersEmptyView && !isFiltered,
     };
   },
 )(observer(Home));

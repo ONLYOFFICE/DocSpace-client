@@ -54,7 +54,7 @@ type UseContactsProps = {
 
   getUsersList: UsersStore["getUsersList"];
   getGroups: GroupsStore["getGroups"];
-  fetchGroup: GroupsStore["fetchGroup"];
+  updateCurrentGroup: GroupsStore["updateCurrentGroup"];
 };
 
 const useContacts = ({
@@ -69,7 +69,7 @@ const useContacts = ({
 
   getUsersList,
   getGroups,
-  fetchGroup,
+  updateCurrentGroup,
 }: UseContactsProps) => {
   const { groupId } = useParams();
   const location = useLocation();
@@ -95,16 +95,17 @@ const useContacts = ({
         const newFilter = GroupsFilter.getFilter(location)!;
 
         await getGroups(newFilter, true, true);
-      } else if (isInsideGroup) {
-        const newFilter = Filter.getFilter(location)!;
-
-        await fetchGroup(groupId, newFilter, true, true);
       } else {
         const newFilter = Filter.getFilter(location)!;
 
         newFilter.area = isGuests ? "guests" : "people";
 
-        await getUsersList(newFilter, true, true);
+        if (groupId) newFilter.group = groupId;
+
+        await Promise.all([
+          getUsersList(newFilter, true, true),
+          groupId && isInsideGroup ? updateCurrentGroup(groupId) : null,
+        ]);
       }
 
       scrollToTop();
@@ -124,7 +125,7 @@ const useContacts = ({
 
     getGroups,
     getUsersList,
-    fetchGroup,
+    updateCurrentGroup,
 
     scrollToTop,
     setIsLoading,

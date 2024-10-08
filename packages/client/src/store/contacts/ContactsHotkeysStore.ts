@@ -291,7 +291,7 @@ class ContactsHotkeysStore {
       }
     }
 
-    if (!this.hotkeyCaret && selection.length) {
+    if (!this.hotkeyCaret && selection?.length) {
       this.setCaret(selection[0], !(e.ctrlKey || e.metaKey || e.shiftKey));
       this.setHotkeyCaretStart(selection[0]);
     }

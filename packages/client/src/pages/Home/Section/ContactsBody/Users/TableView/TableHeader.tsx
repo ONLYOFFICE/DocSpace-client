@@ -112,7 +112,7 @@ class PeopleTableHeader extends React.Component<
       title: t!("Common:Inviter"),
       enable: inviterColumnIsEnabled,
       resizable: true,
-      sortBy: "email",
+      sortBy: "createdby",
       onChange: this.onColumnChange,
       onClick: this.onFilter,
     };
@@ -122,7 +122,7 @@ class PeopleTableHeader extends React.Component<
       title: t!("PeopleTranslations:RegistrationDate"),
       enable: invitedDateColumnIsEnabled,
       resizable: true,
-      sortBy: "email",
+      sortBy: "registrationDate",
       onChange: this.onColumnChange,
       onClick: this.onFilter,
     };

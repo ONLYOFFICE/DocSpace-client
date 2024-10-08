@@ -171,7 +171,7 @@ class UsersStore {
   }
 
   get isUsersEmptyView() {
-    return !this.peopleList.length && !this.isFiltered;
+    return !this.peopleList.length;
   }
 
   setUsers = (users: TUser[]) => {

@@ -60,6 +60,9 @@ export const getContactsUrl = (contactsTab: TContactsTab, groupId?: string) => {
     case "inside_group":
       url = INSIDE_GROUP_ROUTE.replace(":groupId", groupId ?? "");
       break;
+    case "groups":
+      url = GROUPS_ROUTE;
+      break;
     default:
       break;
   }

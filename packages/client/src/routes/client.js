@@ -133,7 +133,7 @@ const ClientRoutes = [
 
               const Component = () => {
                 return (
-                  <PrivateRoute restricted withManager withCollaborator>
+                  <PrivateRoute>
                     <FilesView />
                   </PrivateRoute>
                 );
@@ -151,7 +151,7 @@ const ClientRoutes = [
 
               const Component = () => {
                 return (
-                  <PrivateRoute restricted withManager withCollaborator>
+                  <PrivateRoute>
                     <FilesView />
                   </PrivateRoute>
                 );

@@ -708,6 +708,8 @@ class TableHeaderComponent extends React.Component<
               });
             }
           } else {
+            let overWidth = 0;
+
             tableInfoPanelContainer.forEach((item, index) => {
               const column = document.getElementById(`column_${index}`);
 
@@ -719,6 +721,13 @@ class TableHeaderComponent extends React.Component<
               const shortColumSize =
                 column?.dataset?.shortColum && column.dataset.minWidth;
 
+              const oldWidthIndexAndName = indexColumnWidth + nameColumnWidth;
+
+              const percent =
+                enabledColumnsCount === 0
+                  ? 100
+                  : (getSubstring(item) / oldWidthIndexAndName) * 100;
+
               if (!enable) {
                 gridTemplateColumns.push("0px");
               } else if (item !== `${SETTINGS_SIZE}px`) {
@@ -726,14 +735,50 @@ class TableHeaderComponent extends React.Component<
 
                 if (defaultColumnSize) {
                   newItemWidth = `${defaultColumnSize}px`;
-                } else if (shortColumSize) {
-                  newItemWidth = `${shortColumSize}px`;
+                } else if (columns[index].key === "Index") {
+                  if (
+                    shortColumSize &&
+                    getSubstring(item) === +shortColumSize
+                  ) {
+                    newItemWidth = item;
+                  } else {
+                    newItemWidth = `${
+                      ((contentWidth -
+                        enabledColumnsCount * DEFAULT_MIN_COLUMN_SIZE) *
+                        percent) /
+                      100
+                    }px`;
+                  }
                 } else if (columns[index].key === "Name") {
                   newItemWidth = `${
-                    contentWidth - enabledColumnsCount * DEFAULT_MIN_COLUMN_SIZE
+                    ((contentWidth -
+                      enabledColumnsCount * DEFAULT_MIN_COLUMN_SIZE) *
+                      percent) /
+                    100
                   }px`;
                 } else {
                   newItemWidth = `${DEFAULT_MIN_COLUMN_SIZE}px`;
+                }
+
+                // Checking whether the name column is less than the minimum width
+                if (
+                  columns[index].key === "Name" &&
+                  getSubstring(newItemWidth) < MIN_SIZE_NAME_COLUMN &&
+                  !shortColumSize
+                ) {
+                  overWidth +=
+                    MIN_SIZE_NAME_COLUMN - getSubstring(newItemWidth);
+                  newItemWidth = `${MIN_SIZE_NAME_COLUMN}px`;
+                }
+
+                // Checking whether the index column is less than the minimum width
+                if (
+                  columns[index].key === "Index" &&
+                  shortColumSize &&
+                  getSubstring(newItemWidth) < +shortColumSize
+                ) {
+                  overWidth += +shortColumSize - getSubstring(newItemWidth);
+                  newItemWidth = `${shortColumSize}px`;
                 }
 
                 gridTemplateColumns.push(newItemWidth);
@@ -741,6 +786,33 @@ class TableHeaderComponent extends React.Component<
                 gridTemplateColumns.push(item);
               }
             });
+
+            if (overWidth > 0) {
+              gridTemplateColumns.forEach((column, index) => {
+                const columnWidth = getSubstring(column);
+
+                if (
+                  columns[index]?.key === "Name" ||
+                  columns[index]?.key === "Index"
+                ) {
+                  const availableWidth = columnWidth - DEFAULT_MIN_COLUMN_SIZE;
+
+                  if (availableWidth < Math.abs(overWidth)) {
+                    overWidth = Math.abs(overWidth) - availableWidth;
+                    return (gridTemplateColumns[index] = `${
+                      columnWidth - availableWidth
+                    }px`);
+                  }
+                  const temp = overWidth;
+
+                  overWidth = 0;
+
+                  return (gridTemplateColumns[index] = `${
+                    columnWidth - Math.abs(temp)
+                  }px`);
+                }
+              });
+            }
           }
         }
       } else {

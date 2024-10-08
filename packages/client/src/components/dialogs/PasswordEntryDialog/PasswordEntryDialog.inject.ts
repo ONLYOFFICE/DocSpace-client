@@ -34,10 +34,12 @@ export default inject<
   TStore,
   ExternalPasswordEntryDialogProps,
   InjectedPasswordEntryDialogProps
->(({ dialogsStore }) => {
+>(({ dialogsStore, filesActionsStore }) => {
   const { setPasswordEntryDialog: openPasswordEntryDialog } = dialogsStore;
+  const { openItemAction } = filesActionsStore;
 
   return {
     onClose: openPasswordEntryDialog,
+    openItemAction,
   };
 })(observer(PasswordEntryDialog as React.FC<ExternalPasswordEntryDialogProps>));

@@ -23,8 +23,9 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { useState, useRef, useEffect } from "react";
+import axios from "axios";
 import { useTranslation } from "react-i18next";
+import { useState, useRef, useEffect } from "react";
 
 import PublicRoomIcon from "PUBLIC_DIR/images/icons/32/room/public.svg";
 
@@ -32,10 +33,13 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { Button, ButtonSize } from "@docspace/shared/components/button";
-import { FieldContainer } from "@docspace/shared/components/field-container";
-import { PasswordInput } from "@docspace/shared/components/password-input";
+import { ValidationStatus } from "@docspace/shared/enums";
+import { toastr } from "@docspace/shared/components/toast";
 import { InputSize } from "@docspace/shared/components/text-input";
+import { validatePublicRoomPassword } from "@docspace/shared/api/rooms";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { PasswordInput } from "@docspace/shared/components/password-input";
+import { FieldContainer } from "@docspace/shared/components/field-container";
 
 import {
   ModalContentContainer,
@@ -44,13 +48,18 @@ import {
 } from "./PasswordEntryDialog.styled";
 import type { PasswordEntryDialogProps } from "./PasswordEntryDialog.types";
 
-const PasswordEntryDialog = ({ onClose, item }: PasswordEntryDialogProps) => {
+const PasswordEntryDialog = ({
+  onClose,
+  openItemAction,
+  item,
+}: PasswordEntryDialogProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const abortControllerRef = useRef<AbortController>();
 
   const { t } = useTranslation(["UploadPanel", "Common"]);
 
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState();
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -59,16 +68,58 @@ const PasswordEntryDialog = ({ onClose, item }: PasswordEntryDialogProps) => {
     }
   });
 
-  const handleSubmit = () => {
-    console.log({ password });
-  };
-
   const handleClose = () => {
     onClose();
+    abortControllerRef.current?.abort();
+  };
+
+  const handleSubmit = async () => {
+    if (!item.requestToken) return;
+
+    if (password.trim().length === 0) {
+      return setErrorMessage(t("Common:RequiredField"));
+    }
+
+    setIsLoading(true);
+    try {
+      abortControllerRef.current?.abort();
+      abortControllerRef.current = new AbortController();
+
+      const response = await validatePublicRoomPassword(
+        item.requestToken,
+        password,
+        abortControllerRef.current.signal,
+      );
+
+      switch (response?.status) {
+        case ValidationStatus.Ok: {
+          openItemAction(item, t);
+          onClose();
+          break;
+        }
+
+        case ValidationStatus.InvalidPassword: {
+          setErrorMessage(t("Common:IncorrectPassword"));
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+    } catch (error) {
+      if (axios.isCancel(error)) return;
+
+      toastr.error(error as Error);
+      // eslint-disable-next-line no-console
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
+    if (errorMessage) setErrorMessage("");
   };
 
   const title = item.title;
@@ -122,6 +173,7 @@ const PasswordEntryDialog = ({ onClose, item }: PasswordEntryDialogProps) => {
           primary
           tabIndex={0}
           type="submit"
+          isLoading={isLoading}
           size={ButtonSize.normal}
           onClick={handleSubmit}
           label={t("Common:ContinueButton")}

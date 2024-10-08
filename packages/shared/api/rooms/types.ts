@@ -103,6 +103,7 @@ export type TRoom = {
   lifetime: TRoomLifetime;
   external?: boolean;
   passwordProtected?: boolean;
+  requestToken?: string;
 };
 
 export type TGetRooms = {

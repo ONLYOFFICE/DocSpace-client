@@ -28,6 +28,7 @@ import type { TRoom } from "@docspace/shared/api/rooms/types";
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 export interface InjectedPasswordEntryDialogProps {
   onClose: VoidFunction;
+  openItemAction: TStore["filesActionsStore"]["openItemAction"];
 }
 
 export interface ExternalPasswordEntryDialogProps {

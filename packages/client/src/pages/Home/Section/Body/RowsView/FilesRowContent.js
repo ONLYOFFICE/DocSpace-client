@@ -177,6 +177,7 @@ const FilesRowContent = ({
   isDefaultRoomsQuotaSet,
   isStatisticsAvailable,
   showStorageInfo,
+  isIndexing,
   displayFileExtension,
 }) => {
   const {
@@ -192,6 +193,7 @@ const FilesRowContent = ({
     tags,
     quotaLimit,
     usedSpace,
+    order,
   } = item;
 
   const contentComponent = () => {
@@ -284,6 +286,17 @@ const FilesRowContent = ({
           {!isRoom && !isRooms && quickButtons}
         </div>
 
+        {isIndexing && (
+          <Text
+            containerMinWidth="200px"
+            containerWidth="15%"
+            fontSize="12px"
+            fontWeight={400}
+            className="row_update-text"
+          >
+            {`${t("Files:Index")} ${order}`}
+          </Text>
+        )}
         {mainInfo && (
           <Text
             containerMinWidth="200px"
@@ -315,16 +328,24 @@ const FilesRowContent = ({
 };
 
 export default inject(
-  ({ currentQuotaStore, settingsStore, treeFoldersStore, filesStore }) => {
+  ({
+    currentQuotaStore,
+    settingsStore,
+    treeFoldersStore,
+    filesStore,
+    selectedFolderStore,
+  }) => {
     const { filter, roomsFilter } = filesStore;
     const { isRecycleBinFolder, isRoomsFolder, isArchiveFolder } =
       treeFoldersStore;
+    const { isIndexedFolder } = selectedFolderStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder;
     const filterSortBy = isRooms ? roomsFilter.sortBy : filter.sortBy;
 
     const { isDefaultRoomsQuotaSet, isStatisticsAvailable, showStorageInfo } =
       currentQuotaStore;
+
     return {
       filterSortBy,
       theme: settingsStore.theme,
@@ -332,6 +353,7 @@ export default inject(
       isDefaultRoomsQuotaSet,
       isStatisticsAvailable,
       showStorageInfo,
+      isIndexing: isIndexedFolder,
     };
   },
 )(

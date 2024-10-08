@@ -38,7 +38,6 @@ import {
 import {
   UploadPanel,
   VersionHistoryPanel,
-  NewFilesPanel,
   HotkeysPanel,
   InvitePanel,
   EditLinkPanel,
@@ -67,6 +66,7 @@ import {
   PluginDialog,
   DeletePluginDialog,
   ShareFolderDialog,
+  RoomLogoCoverDialog,
 } from "../dialogs";
 import ConvertPasswordDialog from "../dialogs/ConvertPasswordDialog";
 import ArchiveDialog from "../dialogs/ArchiveDialog";
@@ -77,10 +77,13 @@ import FilesSelector from "../FilesSelector";
 import LeaveRoomDialog from "../dialogs/LeaveRoomDialog";
 import ChangeRoomOwnerPanel from "../panels/ChangeRoomOwnerPanel";
 import { PDFFormEditingDialog } from "../dialogs/PDFFormEditingDialog";
+import ReorderIndexDialog from "../dialogs/ReorderIndexDialog";
+import LifetimeDialog from "../dialogs/LifetimeDialog";
 import { SharePDFFormDialog } from "../dialogs/SharePDFFormDialog";
 import { FillPDFDialog } from "../dialogs/FillPDFDialog";
 import { ShareCollectSelector } from "../ShareCollectSelector";
 import { saveToLocalStorage } from "SRC_DIR/pages/PortalSettings/utils";
+import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
 
 const Panels = (props) => {
   const {
@@ -93,9 +96,9 @@ const Panels = (props) => {
     deleteThirdPartyDialogVisible,
     versionHistoryPanelVisible,
     deleteDialogVisible,
+    lifetimeDialogVisible,
     downloadDialogVisible,
     emptyTrashDialogVisible,
-    newFilesPanelVisible,
     conflictResolveDialogVisible,
     convertDialogVisible,
     createMasterForm,
@@ -134,12 +137,14 @@ const Panels = (props) => {
     shareFolderDialogVisible,
     pdfFormEditVisible,
     selectFileFormRoomOpenRoot,
+    reorderDialogVisible,
     fillPDFDialogData,
     shareCollectSelector,
 
     setQuotaWarningDialogVisible,
     resetQuotaItem,
     isShowWarningDialog,
+    roomLogoCoverDialogVisible,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -243,10 +248,10 @@ const Panels = (props) => {
       <VersionHistoryPanel key="version-history-panel" />
     ),
     deleteDialogVisible && <DeleteDialog key="delete-dialog" />,
+    lifetimeDialogVisible && <LifetimeDialog key="delete-dialog" />,
     emptyTrashDialogVisible && <EmptyTrashDialog key="empty-trash-dialog" />,
     downloadDialogVisible && <DownloadDialog key="download-dialog" />,
 
-    newFilesPanelVisible && <NewFilesPanel key="new-files-panel" />,
     conflictResolveDialogVisible && (
       <ConflictResolveDialog key="conflict-resolve-dialog" />
     ),
@@ -318,6 +323,7 @@ const Panels = (props) => {
       <ChangeRoomOwnerPanel key="change-room-owner" />
     ),
     shareFolderDialogVisible && <ShareFolderDialog key="share-folder-dialog" />,
+    reorderDialogVisible && <ReorderIndexDialog key="reorder-index-dialog" />,
     pdfFormEditVisible && <PDFFormEditingDialog key="pdf-form-edit-dialog" />,
     sharePDFForm.visible && (
       <SharePDFFormDialog key="share-pdf-form-dialog" {...sharePDFForm} />
@@ -330,6 +336,9 @@ const Panels = (props) => {
         key="share-collect-dialog"
         {...shareCollectSelector}
       />
+    ),
+    roomLogoCoverDialogVisible && (
+      <RoomLogoCoverDialog key="room-logo-cover-dialog" />
     ),
   ];
 };
@@ -354,9 +363,9 @@ export default inject(
       connectDialogVisible,
       deleteThirdPartyDialogVisible,
       deleteDialogVisible,
+      lifetimeDialogVisible,
       downloadDialogVisible,
       emptyTrashDialogVisible,
-      newFilesPanelVisible,
       conflictResolveDialogVisible,
       convertDialogVisible,
       createRoomDialogVisible,
@@ -390,9 +399,10 @@ export default inject(
       shareFolderDialogVisible,
       pdfFormEditVisible,
       selectFileFormRoomOpenRoot,
+      reorderDialogVisible,
       fillPDFDialogData,
       shareCollectSelector,
-
+      roomLogoCoverDialogVisible,
       setQuotaWarningDialogVisible,
       setIsNewRoomByCurrentUser,
       setIsNewUserByCurrentUser,
@@ -443,9 +453,9 @@ export default inject(
       deleteThirdPartyDialogVisible,
       versionHistoryPanelVisible,
       deleteDialogVisible,
+      lifetimeDialogVisible,
       downloadDialogVisible,
       emptyTrashDialogVisible,
-      newFilesPanelVisible,
       conflictResolveDialogVisible,
       convertDialogVisible,
       createRoomDialogVisible,
@@ -483,9 +493,10 @@ export default inject(
       shareFolderDialogVisible,
       pdfFormEditVisible,
       selectFileFormRoomOpenRoot,
+      reorderDialogVisible,
       fillPDFDialogData,
       shareCollectSelector,
-
+      roomLogoCoverDialogVisible,
       setQuotaWarningDialogVisible,
       resetQuotaItem,
       isShowWarningDialog,

@@ -34,22 +34,26 @@ const TABLE_ACCOUNTS_INSIDE_GROUP_COLUMNS = `insideGroupTableColumns_ver-${Table
 const TABLE_ROOMS_COLUMNS = `roomsTableColumns_ver-${TableVersions.Rooms}`;
 const TABLE_TRASH_COLUMNS = `trashTableColumns_ver-${TableVersions.Trash}`;
 const TABLE_RECENT_COLUMNS = `recentTableColumns_ver-${TableVersions.Recent}`;
+const TABLE_VDR_INDEXING_COLUMNS = `vdrIndexingColumns_ver-${TableVersions.Rooms}`;
 
 const COLUMNS_SIZE = `filesColumnsSize_ver-${TableVersions.Files}`;
 const COLUMNS_ROOMS_SIZE = `roomsColumnsSize_ver-${TableVersions.Rooms}`;
 const COLUMNS_TRASH_SIZE = `trashColumnsSize_ver-${TableVersions.Trash}`;
 const COLUMNS_RECENT_SIZE = `recentColumnsSize_ver-${TableVersions.Recent}`;
+const COLUMNS_VDR_INDEXING_SIZE = `vdrIndexingColumnsSize_ver-${TableVersions.Rooms}`;
 
 const COLUMNS_SIZE_INFO_PANEL = `filesColumnsSizeInfoPanel_ver-${TableVersions.Files}`;
 const COLUMNS_ROOMS_SIZE_INFO_PANEL = `roomsColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
 const COLUMNS_TRASH_SIZE_INFO_PANEL = `trashColumnsSizeInfoPanel_ver-${TableVersions.Trash}`;
 const COLUMNS_RECENT_SIZE_INFO_PANEL = `recentColumnsSizeInfoPanel_ver-${TableVersions.Recent}`;
+const COLUMNS_VDR_INDEXING_SIZE_INFO_PANEL = `vdrIndexingColumnsSizeInfoPanel_ver-${TableVersions.Recent}`;
 
 class TableStore {
   authStore;
   treeFoldersStore;
   userStore;
   settingsStore;
+  selectedFolderStore;
 
   roomColumnNameIsEnabled = true; // always true
   roomColumnTypeIsEnabled = false;
@@ -65,6 +69,7 @@ class TableStore {
   createdColumnIsEnabled = false;
   modifiedColumnIsEnabled = true;
   sizeColumnIsEnabled = true;
+  typeColumnIsEnabled = true;
   typeColumnIsEnabled = false;
   quickButtonsColumnIsEnabled = true;
 
@@ -92,13 +97,29 @@ class TableStore {
   groupAccountsInsideGroupColumnIsEnabled = true;
   emailAccountsInsideGroupColumnIsEnabled = true;
 
-  constructor(authStore, treeFoldersStore, userStore, settingsStore) {
+  indexVDRColumnIsEnabled = true; // always true
+  authorVDRColumnIsEnabled = true;
+  modifiedVDRColumnIsEnabled = true;
+  createdVDRColumnIsEnabled = false;
+  sizeVDRColumnIsEnabled = true;
+  typeVDRColumnIsEnabled = false;
+
+  constructor(
+    authStore,
+    treeFoldersStore,
+    userStore,
+    settingsStore,
+    indexingStore,
+    selectedFolderStore,
+  ) {
     makeAutoObservable(this);
 
     this.authStore = authStore;
     this.treeFoldersStore = treeFoldersStore;
     this.userStore = userStore;
     this.settingsStore = settingsStore;
+    this.indexingStore = indexingStore;
+    this.selectedFolderStore = selectedFolderStore;
   }
 
   setRoomColumnType = (enable) => {
@@ -129,6 +150,10 @@ class TableStore {
     this.authorRecentColumnIsEnabled = enable;
   };
 
+  setAuthorVDRColumn = (enable) => {
+    this.authorVDRColumnIsEnabled = enable;
+  };
+
   setCreatedColumn = (enable) => {
     this.createdColumnIsEnabled = enable;
   };
@@ -137,12 +162,20 @@ class TableStore {
     this.createdRecentColumnIsEnabled = enable;
   };
 
+  setCreatedVDRColumn = (enable) => {
+    this.createdVDRColumnIsEnabled = enable;
+  };
+
   setModifiedColumn = (enable) => {
     this.modifiedColumnIsEnabled = enable;
   };
 
   setModifiedRecentColumn = (enable) => {
     this.modifiedRecentColumnIsEnabled = enable;
+  };
+
+  setModifiedVDRColumn = (enable) => {
+    this.modifiedVDRColumnIsEnabled = enable;
   };
 
   setRoomColumn = (enable) => {
@@ -161,12 +194,20 @@ class TableStore {
     this.sizeRecentColumnIsEnabled = enable;
   };
 
+  setSizeVDRColumn = (enable) => {
+    this.sizeVDRColumnIsEnabled = enable;
+  };
+
   setTypeColumn = (enable) => {
     this.typeColumnIsEnabled = enable;
   };
 
   setTypeRecentColumn = (enable) => {
     this.typeRecentColumnIsEnabled = enable;
+  };
+
+  setTypeVDRColumn = (enable) => {
+    this.typeVDRColumnIsEnabled = enable;
   };
 
   setQuickButtonsColumn = (enable) => {
@@ -275,6 +316,14 @@ class TableStore {
         return;
       }
 
+      if (this.selectedFolderStore.isIndexedFolder) {
+        this.setAuthorVDRColumn(splitColumns.includes("AuthorIndexing"));
+        this.setCreatedVDRColumn(splitColumns.includes("CreatedIndexing"));
+        this.setModifiedVDRColumn(splitColumns.includes("ModifiedIndexing"));
+        this.setSizeVDRColumn(splitColumns.includes("SizeIndexing"));
+        this.setTypeVDRColumn(splitColumns.includes("TypeIndexing"));
+      }
+
       this.setModifiedColumn(splitColumns.includes("Modified"));
       this.setAuthorColumn(splitColumns.includes("Author"));
       this.setCreatedColumn(splitColumns.includes("Created"));
@@ -289,9 +338,7 @@ class TableStore {
     const {
       isRoomsFolder,
       isArchiveFolder,
-      isTrashFolder,
       getIsAccountsPeople,
-      getIsAccountsGroups,
       getIsAccountsInsideGroup,
     } = this.treeFoldersStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
@@ -310,7 +357,9 @@ class TableStore {
       case "AuthorRecent":
         this.setAuthorRecentColumn(!this.authorRecentColumnIsEnabled);
         return;
-
+      case "AuthorIndexing":
+        this.setAuthorVDRColumn(!this.authorVDRColumnIsEnabled);
+        return;
       case "Created":
         this.setCreatedColumn(!this.createdColumnIsEnabled);
         return;
@@ -319,6 +368,9 @@ class TableStore {
         return;
       case "CreatedRecent":
         this.setCreatedRecentColumn(!this.createdRecentColumnIsEnabled);
+        return;
+      case "CreatedIndexing":
+        this.setCreatedVDRColumn(!this.createdVDRColumnIsEnabled);
         return;
 
       case "Department":
@@ -335,6 +387,9 @@ class TableStore {
       case "ModifiedRecent":
         this.setModifiedRecentColumn(!this.modifiedRecentColumnIsEnabled);
         return;
+      case "ModifiedIndexing":
+        this.setModifiedVDRColumn(!this.modifiedVDRColumnIsEnabled);
+        return;
 
       case "Erasure":
         this.setErasureColumn(!this.erasureColumnIsEnabled);
@@ -348,6 +403,10 @@ class TableStore {
         return;
       case "SizeRecent":
         this.setSizeRecentColumn(!this.sizeRecentColumnIsEnabled);
+        return;
+
+      case "SizeIndexing":
+        this.setSizeVDRColumn(!this.sizeVDRColumnIsEnabled);
         return;
 
       case "Type":
@@ -368,6 +427,10 @@ class TableStore {
 
       case "TypeRecent":
         this.setTypeRecentColumn(!this.typeRecentColumnIsEnabled);
+        return;
+
+      case "TypeIndexing":
+        this.setTypeVDRColumn(!this.typeVDRColumnIsEnabled);
         return;
 
       case "QuickButtons":
@@ -464,6 +527,7 @@ class TableStore {
       getIsAccountsInsideGroup,
     } = this.treeFoldersStore;
 
+    const { isIndexedFolder } = this.selectedFolderStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
@@ -480,7 +544,9 @@ class TableStore {
               ? `${TABLE_TRASH_COLUMNS}=${userId}`
               : isRecentTab
                 ? `${TABLE_RECENT_COLUMNS}=${userId}`
-                : `${TABLE_COLUMNS}=${userId}`;
+                : isIndexedFolder
+                  ? `${TABLE_VDR_INDEXING_COLUMNS}=${userId}`
+                  : `${TABLE_COLUMNS}=${userId}`;
 
     return isFrame ? `SDK_${tableStorageName}` : tableStorageName;
   }
@@ -489,9 +555,11 @@ class TableStore {
   get columnStorageName() {
     const { isRoomsFolder, isArchiveFolder, isTrashFolder, isRecentTab } =
       this.treeFoldersStore;
+
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
+    const { isIndexedFolder } = this.selectedFolderStore;
 
     const columnStorageName = isRooms
       ? `${COLUMNS_ROOMS_SIZE}=${userId}`
@@ -499,7 +567,9 @@ class TableStore {
         ? `${COLUMNS_TRASH_SIZE}=${userId}`
         : isRecentTab
           ? `${COLUMNS_RECENT_SIZE}=${userId}`
-          : `${COLUMNS_SIZE}=${userId}`;
+          : isIndexedFolder
+            ? `${COLUMNS_VDR_INDEXING_SIZE}=${userId}`
+            : `${COLUMNS_SIZE}=${userId}`;
 
     return isFrame ? `SDK_${columnStorageName}` : columnStorageName;
   }
@@ -508,6 +578,9 @@ class TableStore {
   get columnInfoPanelStorageName() {
     const { isRoomsFolder, isArchiveFolder, isTrashFolder, isRecentTab } =
       this.treeFoldersStore;
+
+    const { isIndexedFolder } = this.selectedFolderStore;
+
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
@@ -518,7 +591,9 @@ class TableStore {
         ? `${COLUMNS_TRASH_SIZE_INFO_PANEL}=${userId}`
         : isRecentTab
           ? `${COLUMNS_RECENT_SIZE_INFO_PANEL}=${userId}`
-          : `${COLUMNS_SIZE_INFO_PANEL}=${userId}`;
+          : isIndexedFolder
+            ? `${COLUMNS_VDR_INDEXING_SIZE_INFO_PANEL}=${userId}`
+            : `${COLUMNS_SIZE_INFO_PANEL}=${userId}`;
 
     return isFrame
       ? `SDK_${columnInfoPanelStorageName}`

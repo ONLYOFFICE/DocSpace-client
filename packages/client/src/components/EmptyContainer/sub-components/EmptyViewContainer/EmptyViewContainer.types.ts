@@ -11,18 +11,18 @@ import type { Nullable } from "@docspace/shared/types";
 
 export type UploadType = "pdf" | "file" | "folder";
 
-export type FolderExtensiontionType = undefined;
+export type FolderExtensionType = undefined;
 
-export type ExtensiontionType =
+export type ExtensionType =
   | "docx"
   | "xlsx"
   | "pptx"
   | "pdf"
-  | FolderExtensiontionType;
+  | FolderExtensionType;
 
 export type CreateEvent = Event & {
   payload?: {
-    extension: ExtensiontionType;
+    extension: ExtensionType;
     id: number;
     withoutDialog?: boolean;
   };
@@ -73,7 +73,7 @@ export type EmptyViewContainerProps = OutEmptyViewContainerProps &
 export type OptionActions = {
   navigate: NavigateFunction;
   inviteUser: VoidFunction;
-  onCreate: (extension: ExtensiontionType, withoutDialog?: boolean) => void;
+  onCreate: (extension: ExtensionType, withoutDialog?: boolean) => void;
   uploadFromDocspace: (
     filterParam: FilesSelectorFilterTypes | FilterType,
     openRoot?: boolean,

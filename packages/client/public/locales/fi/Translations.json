@@ -27,7 +27,6 @@
   "Other": "Muu",
   "OwnerChange": "Vaihda omistaja",
   "Presentations": "Esitykset",
-  "PublicRoomLinkValidTime": "Tämä linkki on voimassa {{date}} asti. Kun se vanhenee, tähän huoneeseen ei enää pääse kyseisen linkin kautta. ",
   "RoleCommentator": "Kommentaattori",
   "RoleCommentatorDescription": "Toimenpiteet olemassa olevien tiedostojen kanssa: katselu, kommentointi.",
   "RoleEditorDescription": "Toimenpiteet olemassa olevien tiedostojen kanssa: katselu, lomakkeen arkistointi, tarkistaminen, kommentointi.",

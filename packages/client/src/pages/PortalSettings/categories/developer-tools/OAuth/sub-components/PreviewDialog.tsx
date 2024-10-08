@@ -167,7 +167,6 @@ const PreviewDialog = ({
       visible={visible}
       displayType={ModalDialogType.aside}
       onClose={onClose}
-      withFooterBorder
       withBodyScroll
     >
       <ModalDialog.Header>{t("OAuth:AuthButton")}</ModalDialog.Header>

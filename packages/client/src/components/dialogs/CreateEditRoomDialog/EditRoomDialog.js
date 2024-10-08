@@ -24,8 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { inject, observer } from "mobx-react";
 import { useState, useEffect, useRef } from "react";
 
+import isEqual from "lodash/isEqual";
 import TagHandler from "./handlers/TagHandler";
 import SetRoomParams from "./sub-components/SetRoomParams";
 
@@ -42,6 +44,9 @@ const EditRoomDialog = ({
   fetchedRoomParams,
   fetchedTags,
   fetchedImage,
+  isInitLoading,
+
+  cover,
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [isValidTitle, setIsValidTitle] = useState(true);
@@ -77,7 +82,11 @@ const EditRoomDialog = ({
         (currentParams.icon.uploadedFile === null ||
           currentParams.icon.uploadedFile === undefined)) ||
         prevParams.icon.uploadedFile === currentParams.icon.uploadedFile) &&
-      prevParams.quota === currentParams.quota
+      prevParams.quota === currentParams.quota &&
+      prevParams.indexing === currentParams.indexing &&
+      prevParams.denyDownload === currentParams.denyDownload &&
+      isEqual(prevParams.lifetime, currentParams.lifetime) &&
+      isEqual(prevParams.watermark, currentParams.watermark)
     );
   };
 
@@ -145,7 +154,7 @@ const EditRoomDialog = ({
       visible={visible}
       onClose={onCloseAction}
       isScrollLocked={isScrollLocked}
-      withFooterBorder
+      isLoading={isInitLoading}
       containerVisible={changeRoomOwnerIsVisible}
     >
       {changeRoomOwnerIsVisible && (
@@ -190,8 +199,9 @@ const EditRoomDialog = ({
           scale
           onClick={onEditRoom}
           isDisabled={
-            isWrongTitle ||
-            compareRoomParams(prevRoomParams.current, roomParams)
+            !cover &&
+            (isWrongTitle ||
+              compareRoomParams(prevRoomParams.current, roomParams))
           }
           isLoading={isLoading}
         />

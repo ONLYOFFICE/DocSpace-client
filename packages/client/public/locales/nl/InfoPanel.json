@@ -49,7 +49,7 @@
   "RoomGroupRemove": "Groep verwijderd",
   "RoomLogoChanged": "Icoon aangepast",
   "RoomRemoveUser": "Gebruiker verwijderd",
-  "RoomRenamed": "Kamer <1>«{{oldRoomTitle}}\"</1> hernoemd naar <1>«{{roomTitle}}»</1>",
+  "RoomRenamed": "Kamer <1>«{{oldRoomTitle}}\"</1> hernoemd naar <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Bekijk hier de details van de kamers",
   "RoomUpdateAccess": "heeft toegewezen gekregen",
   "SelectedUsers": "Geselecteerde accounts",

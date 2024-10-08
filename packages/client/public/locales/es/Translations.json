@@ -27,7 +27,6 @@
   "Other": "Otro",
   "OwnerChange": "Cambiar propietario",
   "Presentations": "Presentaciones",
-  "PublicRoomLinkValidTime": "Este enlace es válido hasta {{date}}. Una vez que caduque, será imposible acceder a la sala a través de este enlace.",
   "RoleCommentator": "Comentarista",
   "RoleCommentatorDescription": "Operaciones con archivos existentes: visualización, comentarios.",
   "RoleEditorDescription": "Operaciones con archivos existentes: visualización, edición, relleno de formularios, revisión, comentarios.",

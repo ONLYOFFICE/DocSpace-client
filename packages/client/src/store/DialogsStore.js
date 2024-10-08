@@ -24,7 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { getNewFiles } from "@docspace/shared/api/files";
 import {
   EmployeeType,
   FilesSelectorFilterTypes,
@@ -33,6 +32,16 @@ import {
 } from "@docspace/shared/enums";
 import { makeAutoObservable, runInAction } from "mobx";
 import { Events } from "@docspace/shared/enums";
+
+import TrashIconSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
+import PenSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
+import UploadSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg?url";
+
+import {
+  getRoomCovers,
+  setRoomCover,
+  removeLogoFromRoom,
+} from "@docspace/shared/api/rooms";
 
 class DialogsStore {
   authStore;
@@ -44,14 +53,15 @@ class DialogsStore {
 
   moveToPanelVisible = false;
   restorePanelVisible = false;
+  reorderDialogVisible = false;
   copyPanelVisible = false;
   deleteThirdPartyDialogVisible = false;
   connectDialogVisible = false;
   thirdPartyMoveDialogVisible = false;
   deleteDialogVisible = false;
+  lifetimeDialogVisible = false;
   downloadDialogVisible = false;
   emptyTrashDialogVisible = false;
-  newFilesPanelVisible = false;
   editGroupMembersDialogVisible = false;
   conflictResolveDialogVisible = false;
   convertDialogVisible = false;
@@ -79,6 +89,7 @@ class DialogsStore {
   restoreAllPanelVisible = false;
   archiveDialogVisible = false;
   restoreRoomDialogVisible = false;
+  roomLogoCoverDialogVisible = false;
   eventDialogVisible = false;
   deleteLinkDialogVisible = false;
 
@@ -86,8 +97,7 @@ class DialogsStore {
   connectItem = null;
   formItem = null;
   destFolderId = null;
-  newFilesIds = null;
-  newFiles = null;
+
   conflictResolveDialogData = null;
   conflictResolveDialogItems = null;
   removeMediaItem = null;
@@ -131,6 +141,33 @@ class DialogsStore {
   invitePaidUsersCount = 0;
   isNewQuotaItemsByCurrentUser = false;
 
+  covers = null;
+  cover = null;
+  coverSelection = null;
+
+  roomCoverDialogProps = {
+    icon: null,
+    color: null,
+    title: null,
+    withoutIcon: true,
+    withSelection: true,
+    customColor: null,
+  };
+
+  editRoomDialogProps = {
+    visible: false,
+    item: null,
+    onClose: null,
+  };
+
+  createRoomDialogProps = {
+    title: "",
+    visible: false,
+    onClose: null,
+  };
+
+  newFilesPanelFolderId = null;
+
   constructor(
     authStore,
     treeFoldersStore,
@@ -148,6 +185,19 @@ class DialogsStore {
     this.versionHistoryStore = versionHistoryStore;
     this.infoPanelStore = infoPanelStore;
   }
+
+  setNewFilesPanelFolderId = (folderId) => {
+    this.newFilesPanelFolderId = folderId;
+  };
+
+  setEditRoomDialogProps = (props) => {
+    this.editRoomDialogProps = props;
+  };
+
+  setCreateRoomDialogProps = (props) => {
+    this.createRoomDialogProps = props;
+  };
+
   setInviteLanguage = (culture) => {
     this.culture = culture;
   };
@@ -240,6 +290,10 @@ class DialogsStore {
     this.deleteDialogVisible = deleteDialogVisible;
   };
 
+  setLifetimeDialogVisible = (lifetimeDialogVisible) => {
+    this.lifetimeDialogVisible = lifetimeDialogVisible;
+  };
+
   setEventDialogVisible = (eventDialogVisible) => {
     this.eventDialogVisible = eventDialogVisible;
   };
@@ -270,64 +324,6 @@ class DialogsStore {
 
   setChangeQuotaDialogVisible = (changeQuotaDialogVisible) => {
     this.changeQuotaDialogVisible = changeQuotaDialogVisible;
-  };
-  setNewFilesPanelVisible = async (visible, newId, item) => {
-    const { pathParts } = this.selectedFolderStore;
-
-    const id = visible && !newId ? item.id : newId;
-    const newIds = newId
-      ? [newId]
-      : pathParts
-        ? pathParts.map((p) => p.id)
-        : [];
-    item &&
-      pathParts.push({
-        id: item.id,
-        title: item.title,
-        roomType: item.roomType,
-      });
-
-    let newFilesPanelVisible = visible;
-
-    if (visible) {
-      const files = await getNewFiles(id);
-      if (files && files.length) {
-        this.setNewFiles(files);
-        this.setNewFilesIds(newIds);
-      } else {
-        newFilesPanelVisible = false;
-        //   const {
-        //     getRootFolder,
-        //     updateRootBadge,
-        //     treeFolders,
-        //   } = this.treeFoldersStore;
-        //   const { updateFolderBadge, updateFoldersBadge } = this.filesStore;
-
-        //   if (item) {
-        //     const { rootFolderType, id } = item;
-        //     const rootFolder = getRootFolder(rootFolderType);
-        //     updateRootBadge(rootFolder.id, item.new);
-        //     updateFolderBadge(id, item.new);
-        //   } else {
-        //     const rootFolder = treeFolders.find((x) => x.id === +newIds[0]);
-        //     updateRootBadge(rootFolder.id, rootFolder.new);
-        //     if (this.selectedFolderStore.id === rootFolder.id)
-        //       updateFoldersBadge();
-        //   }
-      }
-    } else {
-      this.setNewFilesIds(null);
-    }
-
-    this.newFilesPanelVisible = newFilesPanelVisible;
-  };
-
-  setNewFilesIds = (newFilesIds) => {
-    this.newFilesIds = newFilesIds;
-  };
-
-  setNewFiles = (files) => {
-    this.newFiles = files;
   };
 
   setEditGroupMembersDialogVisible = (editGroupMembersDialogVisible) => {
@@ -554,6 +550,10 @@ class DialogsStore {
     this.pdfFormEditData = data;
   };
 
+  setReorderDialogVisible = (visible) => {
+    this.reorderDialogVisible = visible;
+  };
+
   setFillPDFDialogData = (visible, data) => {
     this.fillPDFDialogData = {
       visible,
@@ -575,6 +575,89 @@ class DialogsStore {
 
   setWarningQuotaDialogVisible = (visible) => {
     this.warningQuotaDialogVisible = visible;
+  };
+
+  setRoomLogoCoverDialogVisible = (visible) => {
+    this.roomLogoCoverDialogVisible = visible;
+  };
+
+  setCovers = (covers) => {
+    this.covers = covers;
+  };
+
+  setRoomCoverDialogProps = (props) => {
+    this.roomCoverDialogProps = props;
+  };
+
+  setCover = (color, icon) => {
+    if (!color) {
+      return (this.cover = null);
+    }
+
+    const newColor = color.replace("#", "");
+    const newIcon = typeof icon === "string" ? "" : icon.id;
+    this.cover = { color: newColor, cover: newIcon };
+
+    this.setRoomCoverDialogProps({
+      ...this.roomCoverDialogProps,
+      icon: null,
+      color: null,
+      withoutIcon: true,
+    });
+  };
+
+  setCoverSelection = (selection) => {
+    this.coverSelection = selection;
+  };
+
+  setRoomLogoCover = async (roomId) => {
+    const res = await setRoomCover(
+      roomId || this.coverSelection?.id,
+      this.cover,
+    );
+    this.infoPanelStore.updateInfoPanelSelection(res);
+    this.setRoomCoverDialogProps({
+      ...this.roomCoverDialogProps,
+      withSelection: true,
+    });
+    this.setCover();
+  };
+
+  deleteRoomLogo = async () => {
+    if (!this.coverSelection) return;
+    const res = await removeLogoFromRoom(this.coverSelection.id);
+    this.infoPanelStore.updateInfoPanelSelection(res);
+  };
+
+  getLogoCoverModel = (t, hasImage, onDelete) => {
+    return [
+      {
+        label: t("RoomLogoCover:UploadPicture"),
+        icon: UploadSvgUrl,
+        key: "upload",
+        onClick: (ref) => ref.current.click(),
+      },
+
+      hasImage
+        ? {
+            label: t("Common:Delete"),
+            icon: TrashIconSvgUrl,
+            key: "delete",
+            onClick: onDelete ? onDelete() : () => this.deleteRoomLogo(),
+          }
+        : {
+            label: t("RoomLogoCover:CustomizeCover"),
+            icon: PenSvgUrl,
+            key: "cover",
+            onClick: () => this.setRoomLogoCoverDialogVisible(true),
+          },
+    ];
+  };
+
+  getCovers = async () => {
+    const response = await getRoomCovers();
+
+    this.setCovers(response);
   };
 }
 

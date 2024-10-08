@@ -1,6 +1,7 @@
 import { TTranslation } from "@docspace/shared/types";
 import { Trans } from "react-i18next";
 import { AnyFeedInfo } from "./FeedInfo";
+import { HistoryText } from "./HistoryText";
 
 export const useFeedTranslation = (
   t: TTranslation,
@@ -50,7 +51,7 @@ export const useFeedTranslation = (
           ns="InfoPanel"
           i18nKey="HistoryRoomCreated"
           values={{ roomTitle: feed.data.title }}
-          components={{ 1: <strong /> }}
+          components={{ 1: <HistoryText title={feed.data.title} /> }}
         />
       );
     case "RoomCopied":
@@ -60,7 +61,7 @@ export const useFeedTranslation = (
           ns="InfoPanel"
           i18nKey="HistoryRoomCopied"
           values={{ roomTitle: feed.data.title }}
-          components={{ 1: <strong /> }}
+          components={{ 1: <strong title={feed.data.title} /> }}
         />
       );
     case "RoomRenamed":
@@ -73,7 +74,10 @@ export const useFeedTranslation = (
             roomTitle: feed.data.newTitle,
             oldRoomTitle: feed.data.oldTitle,
           }}
-          components={{ 1: <strong /> }}
+          components={{
+            1: <HistoryText title={feed.data.newTitle} />,
+            2: <HistoryText title={feed.data.oldTitle} />,
+          }}
         />
       );
     case "AddedRoomTags":
@@ -108,7 +112,7 @@ export const useFeedTranslation = (
           values={{
             linkTitle: feed.data.title,
           }}
-          components={{ 1: <strong /> }}
+          components={{ 1: <strong title={feed.data.title} /> }}
         />
       );
     case "RoomExternalLinkRevoked":
@@ -120,7 +124,9 @@ export const useFeedTranslation = (
           values={{
             linkTitle: feed.data.title || feed.data.sharedTo?.title,
           }}
-          components={{ 1: <strong /> }}
+          components={{
+            1: <strong title={feed.data.title || feed.data.sharedTo?.title} />,
+          }}
         />
       );
     case "RoomCreateUser":
@@ -135,6 +141,12 @@ export const useFeedTranslation = (
       return t("InfoPanel:RoomUpdateAccess");
     case "RoomGroupRemove":
       return t("InfoPanel:RoomGroupRemove");
+
+    case "FormSubmit":
+      return t("InfoPanel:FilledOutForm");
+    case "FormOpenedForFilling":
+      return t("InfoPanel:StartedFillingItOut");
+
     default:
       return null;
   }

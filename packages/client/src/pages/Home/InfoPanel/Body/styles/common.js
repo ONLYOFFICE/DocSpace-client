@@ -104,6 +104,10 @@ const StyledTitle = styled.div`
     }
   }
 
+  .info-panel_header-text {
+    margin: 0 8px;
+  }
+
   .text {
     font-weight: 600;
     font-size: 16px;
@@ -320,8 +324,22 @@ const StyledProperties = styled.div`
   }
 `;
 
+const StyledItemOptions = styled.div`
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          margin-right: auto;
+        `
+      : css`
+          margin-left: auto;
+        `}
+
+  display: flex;
+`;
+
 StyledInfoPanelBody.defaultProps = { theme: Base };
 StyledTitle.defaultProps = { theme: Base };
+StyledItemOptions.defaultProps = { theme: Base };
 
 export {
   StyledInfoPanelBody,

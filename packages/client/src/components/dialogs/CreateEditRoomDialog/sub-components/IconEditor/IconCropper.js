@@ -40,18 +40,18 @@ import { Slider } from "@docspace/shared/components/slider";
 import { Base } from "@docspace/shared/themes";
 
 const StyledIconCropper = styled.div`
-  max-width: 216px;
+  max-width: 368px;
 
   .icon_cropper-crop_area {
-    width: 216px;
-    height: 216px;
+    width: 368px;
+    height: 368px;
     margin-bottom: 4px;
     position: relative;
     .icon_cropper-grid {
       pointer-events: none;
       position: absolute;
-      width: 216px;
-      height: 216px;
+      width: 368px;
+      height: 368px;
       inset: 0;
       svg {
         opacity: 0.2;
@@ -190,8 +190,8 @@ const IconCropper = ({
         <AvatarEditor
           ref={setEditorRef}
           image={uploadedFile}
-          width={216}
-          height={216}
+          width={368}
+          height={368}
           position={{ x: icon.x, y: icon.y }}
           scale={icon.zoom}
           color={[6, 22, 38, 0.2]}

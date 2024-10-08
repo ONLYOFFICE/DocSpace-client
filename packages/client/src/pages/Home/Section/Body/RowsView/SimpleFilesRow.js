@@ -67,7 +67,10 @@ const StyledWrapper = styled.div`
     `1px ${props.theme.filesSection.tableView.row.borderColor} solid`};
   margin-top: -1px;
 
-  ${(props) => (props.checked || props.isActive) && checkedStyle};
+  ${(props) =>
+    (props.checked || props.isActive) &&
+    !props.isIndexEditingMode &&
+    checkedStyle};
   ${(props) =>
     (props.checked || props.isActive) &&
     props.isFirstElem &&
@@ -77,12 +80,35 @@ const StyledWrapper = styled.div`
     `};
 
   ${(props) =>
+    props.isIndexUpdated &&
+    css`
+      background: ${(props) =>
+        props.isIndexEditingMode
+          ? `${props.theme.filesSection.tableView.row.indexUpdate} !important`
+          : `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
+      ${marginStyles}
+    `}
+
+  ${(props) =>
     !isMobile &&
     !props.isDragging &&
+    !props.isIndexEditingMode &&
     css`
       :hover {
         cursor: pointer;
         ${checkedStyle}
+      }
+    `};
+
+  ${(props) =>
+    !isMobile &&
+    props.isIndexEditingMode &&
+    css`
+      :hover {
+        cursor: pointer;
+        background: ${(props) =>
+          props.theme.filesSection.tableView.row.indexActive};
+        ${marginStyles}
       }
     `};
 
@@ -298,6 +324,7 @@ StyledSimpleFilesRow.defaultProps = { theme: Base };
 
 const SimpleFilesRow = (props) => {
   const {
+    t,
     item,
     sectionWidth,
     dragging,
@@ -331,6 +358,9 @@ const SimpleFilesRow = (props) => {
     itemIndex,
     badgeUrl,
     canDrag,
+    isIndexEditingMode,
+    changeIndex,
+    isIndexUpdated,
   } = props;
 
   const isMobileDevice = isMobileUtile();
@@ -340,6 +370,10 @@ const SimpleFilesRow = (props) => {
   const withAccess = item.security?.Lock;
   const isSmallContainer = sectionWidth <= 500;
 
+  const onChangeIndex = (action) => {
+    return changeIndex(action, item, t);
+  };
+
   const element = (
     <ItemIcon
       id={item.id}
@@ -348,6 +382,9 @@ const SimpleFilesRow = (props) => {
       isRoom={item.isRoom}
       title={item.title}
       logo={item.logo}
+      showDefault={
+        !(!!item?.logo?.cover || !!item?.logo?.medium) && item.isRoom
+      }
       color={item.logo?.color}
       isArchive={item.isArchive}
       badgeUrl={badgeUrl}
@@ -378,7 +415,7 @@ const SimpleFilesRow = (props) => {
 
   const idWithFileExst = item.fileExst
     ? `${item.id}_${item.fileExst}`
-    : item.id ?? "";
+    : (item.id ?? "");
 
   return (
     <StyledWrapper
@@ -394,6 +431,8 @@ const SimpleFilesRow = (props) => {
       checked={checkedProps}
       isActive={isActive}
       showHotkeyBorder={showHotkeyBorder}
+      isIndexEditingMode={isIndexEditingMode}
+      isIndexUpdated={isIndexUpdated}
       isFirstElem={itemIndex === 0}
       isHighlight={isHighlight}
     >
@@ -429,6 +468,8 @@ const SimpleFilesRow = (props) => {
           contextButtonSpacerWidth={displayShareButton}
           dragging={dragging && isDragging}
           isDragging={dragging}
+          isIndexEditingMode={isIndexEditingMode}
+          onChangeIndex={onChangeIndex}
           isActive={isActive}
           inProgress={inProgress}
           isThirdPartyFolder={item.isThirdPartyFolder}

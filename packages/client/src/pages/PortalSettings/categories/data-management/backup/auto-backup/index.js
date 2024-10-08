@@ -480,16 +480,18 @@ class AutomaticBackup extends React.PureComponent {
               productName: t("Common:ProductName"),
             })}
           </Text>
-          <Link
-            className="link-learn-more"
-            href={automaticBackupUrl}
-            target="_blank"
-            fontSize="13px"
-            color={currentColorScheme.main?.accent}
-            isHovered
-          >
-            {t("Common:LearnMore")}
-          </Link>
+          {!isManagement() && (
+            <Link
+              className="link-learn-more"
+              href={automaticBackupUrl}
+              target="_blank"
+              fontSize="13px"
+              color={currentColorScheme.main?.accent}
+              isHovered
+            >
+              {t("Common:LearnMore")}
+            </Link>
+          )}
         </div>
 
         <div className="backup_toggle-wrapper">
@@ -510,7 +512,7 @@ class AutomaticBackup extends React.PureComponent {
               >
                 {t("EnableAutomaticBackup")}
               </Text>
-              {!isEnableAuto && (
+              {!isEnableAuto && !isManagement() && (
                 <Badge
                   backgroundColor={
                     theme.isBase
@@ -627,7 +629,12 @@ export default inject(
   }) => {
     const { language } = authStore;
     const { isRestoreAndAutoBackupAvailable } = currentQuotaStore;
-    const { theme, currentColorScheme, automaticBackupUrl } = settingsStore;
+    const {
+      theme,
+      currentColorScheme,
+      automaticBackupUrl,
+      checkEnablePortalSettings,
+    } = settingsStore;
 
     const {
       downloadingProgress,
@@ -671,10 +678,14 @@ export default inject(
 
     const { rootFoldersTitles, fetchTreeFolders } = treeFoldersStore;
 
+    const isEnableAuto = checkEnablePortalSettings(
+      isRestoreAndAutoBackupAvailable,
+    );
+
     return {
       setConnectedThirdPartyAccount,
       defaultFolderId,
-      isEnableAuto: isRestoreAndAutoBackupAvailable,
+      isEnableAuto,
       fetchTreeFolders,
       rootFoldersTitles,
       downloadingProgress,

@@ -27,7 +27,6 @@
   "Other": "Altro",
   "OwnerChange": "Cambiare proprietario",
   "Presentations": "Presentazioni",
-  "PublicRoomLinkValidTime": "Questo link è valido fino al {{date}}. Una volta scaduto sarà impossibile accedere alla stanza tramite questo link.",
   "RoleCommentator": "Commentatore",
   "RoleCommentatorDescription": "Operazioni con file esistenti: visualizzazione, commenti.",
   "RoleEditorDescription": "Operazioni con file esistenti: visualizzazione, modifica, compilazione moduli, revisione, commenti.",

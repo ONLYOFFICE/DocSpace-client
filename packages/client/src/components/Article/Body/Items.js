@@ -46,6 +46,7 @@ import AccountsItem from "./AccountsItem";
 
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import { toastr } from "@docspace/shared/components/toast";
+import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
 
 const StyledDragAndDrop = styled(DragAndDrop)`
   display: contents;
@@ -66,7 +67,6 @@ const Item = ({
   showText,
   onClick,
   onMoveTo,
-  onBadgeClick,
   showDragItems,
   startUpload,
   createFoldersTree,
@@ -76,11 +76,15 @@ const Item = ({
   iconBadge,
   folderId,
   currentColorScheme,
+  isIndexEditingMode,
   getLinkData,
+  onBadgeClick,
+  roomsFolderId,
 }) => {
   const [isDragActive, setIsDragActive] = useState(false);
 
-  const isDragging = dragging ? showDragItems(item) : false;
+  const isDragging =
+    dragging && !isIndexEditingMode ? showDragItems(item) : false;
 
   let value = "";
   if (isDragging) value = `${item.id} dragging`;
@@ -182,6 +186,14 @@ const Item = ({
         onClickBadge={onBadgeClick}
         iconBadge={iconBadge}
         badgeTitle={labelBadge ? "" : t("EmptyRecycleBin")}
+        badgeComponent={
+          <NewFilesBadge
+            newFilesCount={labelBadge}
+            folderId={item.id === roomsFolderId ? "rooms" : item.id}
+            parentDOMId={folderId}
+            onBadgeClick={onBadgeClick}
+          />
+        }
         linkData={linkData}
         $currentColorScheme={currentColorScheme}
       />
@@ -195,7 +207,6 @@ const Items = ({
   showText,
 
   onClick,
-  onBadgeClick,
 
   dragging,
   setDragging,
@@ -228,8 +239,10 @@ const Items = ({
   currentDeviceType,
   folderAccess,
   currentColorScheme,
+  isIndexEditingMode,
 
   getLinkData,
+  roomsFolderId,
 }) => {
   const getEndOfBlock = React.useCallback((item) => {
     switch (item.key) {
@@ -317,6 +330,10 @@ const Items = ({
     setEmptyTrashDialogVisible(true);
   };
 
+  const onBadgeClick = () => {
+    if (currentDeviceType === DeviceType.mobile) onHide();
+  };
+
   const getItems = React.useCallback(
     (data) => {
       const items = data.map((item, index) => {
@@ -353,6 +370,9 @@ const Items = ({
             iconBadge={iconBadge}
             folderId={`document_catalog-${FOLDER_NAMES[item.rootFolderType]}`}
             currentColorScheme={currentColorScheme}
+            roomsFolderId={roomsFolderId}
+            onHide={onHide}
+            isIndexEditingMode={isIndexEditingMode}
           />
         );
       });
@@ -385,7 +405,6 @@ const Items = ({
       getLinkData,
       onMoveTo,
       getEndOfBlock,
-      onBadgeClick,
       showDragItems,
       showText,
       setDragging,
@@ -397,6 +416,7 @@ const Items = ({
       firstLoad,
       activeItemId,
       emptyTrashInProgress,
+      isIndexEditingMode,
     ],
   );
 
@@ -423,12 +443,14 @@ export default inject(
     clientLoadingStore,
     userStore,
     settingsStore,
+    indexingStore,
     currentTariffStatusStore,
   }) => {
-    const { isPaymentPageAvailable, currentDeviceType } = authStore;
+    const { isPaymentPageAvailable } = authStore;
+
     const { isCommunity } = currentTariffStatusStore;
 
-    const { showText, currentColorScheme } = settingsStore;
+    const { showText, currentColorScheme, currentDeviceType } = settingsStore;
 
     const {
       selection,
@@ -441,12 +463,19 @@ export default inject(
       startDrag,
     } = filesStore;
 
+    const { isIndexEditingMode } = indexingStore;
+
     const { firstLoad } = clientLoadingStore;
 
     const { startUpload } = uploadDataStore;
 
-    const { treeFolders, myFolderId, commonFolderId, isPrivacyFolder } =
-      treeFoldersStore;
+    const {
+      treeFolders,
+      myFolderId,
+      commonFolderId,
+      isPrivacyFolder,
+      roomsFolderId,
+    } = treeFoldersStore;
 
     const { id, access: folderAccess } = selectedFolderStore;
     const {
@@ -492,6 +521,8 @@ export default inject(
       currentDeviceType,
       folderAccess,
       currentColorScheme,
+      roomsFolderId,
+      isIndexEditingMode,
     };
   },
 )(withTranslation(["Files", "Common", "Translations"])(observer(Items)));

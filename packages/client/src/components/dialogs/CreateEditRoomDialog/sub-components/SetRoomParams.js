@@ -40,14 +40,20 @@ import ThirdPartyStorage from "./ThirdPartyStorage";
 import withLoader from "@docspace/client/src/HOCs/withLoader";
 import SetRoomParamsLoader from "@docspace/shared/skeletons/create-edit-room/SetRoomParams";
 
-import { ImageEditor } from "@docspace/shared/components/image-editor";
-import PreviewTile from "@docspace/shared/components/image-editor/PreviewTile";
-import { Text } from "@docspace/shared/components/text";
+import VirtualDataRoomBlock from "./VirtualDataRoomBlock";
+import ItemIcon from "@docspace/client/src/components/ItemIcon";
 
 import ChangeRoomOwner from "./ChangeRoomOwner";
 import RoomQuota from "./RoomQuota";
 import { RoomsType } from "@docspace/shared/enums";
-import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
+
+import { isMobile, mobile } from "@docspace/shared/utils";
+import { isMobileOnly } from "react-device-detect";
+
+import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
+
+import { RoomIcon } from "@docspace/shared/components/room-icon";
+import { globalColors } from "@docspace/shared/themes";
 
 const StyledSetRoomParams = styled.div`
   display: flex;
@@ -73,6 +79,37 @@ const StyledSetRoomParams = styled.div`
         margin-bottom: 24px;
       `};
   }
+
+  .logo-name-container {
+    display: flex;
+    align-items: end;
+    gap: 16px;
+
+    @media ${mobile} {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .room-params-icon,
+    .react-svg-icon {
+      min-width: 64px;
+      min-height: 64px;
+      @media ${mobile} {
+        min-width: 96px;
+        min-height: 96px;
+      }
+    }
+    .room-title {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 37px;
+      user-select: none;
+      @media ${mobile} {
+        font-size: 42px;
+        line-height: 56px;
+      }
+    }
+  }
 `;
 
 const SetRoomParams = ({
@@ -96,17 +133,100 @@ const SetRoomParams = ({
   disabledChangeRoomType,
   maxImageUploadSize,
   onOwnerChange,
+  selection,
+  getLogoCoverModel,
+  getInfoPanelItemIcon,
+  uploadFile,
+  avatarEditorDialogVisible,
+  setAvatarEditorDialogVisible,
+  roomLogoCoverDialogVisible,
+  currentColorScheme,
+  setRoomCoverDialogProps,
+  roomCoverDialogProps,
+  image,
+  cover,
+  covers,
+  setCover,
 }) => {
   const [previewIcon, setPreviewIcon] = useState(null);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
     useState(true);
+  const [horizontalOrientation, setHorizontalOrientation] = useState(false);
   const [disableImageRescaling, setDisableImageRescaling] = useState(isEdit);
+
+  const [previewTitle, setPreviewTitle] = useState(selection?.title || "");
+  const [createRoomTitle, setCreateRoomTitleTitle] = useState("");
 
   const [forceHideRoomTypeDropdown, setForceHideRoomTypeDropdown] =
     useState(false);
 
+  const isVDRRoom = roomParams.type === RoomsType.VirtualDataRoom;
+
   const isFormRoom = roomParams.type === RoomsType.FormRoom;
   const isPublicRoom = roomParams.type === RoomsType.PublicRoom;
+
+  const checkWidth = () => {
+    if (!isMobile()) {
+      setHorizontalOrientation(true);
+    } else {
+      setHorizontalOrientation(false);
+    }
+  };
+
+  React.useEffect(() => {
+    checkWidth();
+    window.addEventListener("resize", checkWidth);
+    return () => window.removeEventListener("resize", checkWidth);
+  }, []);
+
+  const getCoverLogo = () => {
+    if (cover) {
+      setPreviewIcon(null);
+    }
+
+    if (cover && cover.cover) {
+      const currentCoverData = covers.filter(
+        (item) => item.id === cover.cover,
+      )[0].data;
+      return { ...cover, data: currentCoverData };
+    }
+    return null;
+  };
+
+  const currentCover = React.useMemo(getCoverLogo, [cover]);
+
+  React.useEffect(() => {
+    setRoomCoverDialogProps({
+      ...roomCoverDialogProps,
+      title: previewTitle,
+    });
+  }, []);
+
+  const randomColor = React.useMemo(
+    () =>
+      globalColors.logoColors[
+        Math.floor(Math.random() * globalColors.logoColors.length)
+      ].replace("#", ""),
+    [],
+  );
+
+  const currentIcon = selection?.logo?.large
+    ? selection?.logo?.large
+    : selection?.logo?.cover
+      ? selection?.logo
+      : getInfoPanelItemIcon(selection, 96);
+
+  const onChangeFile = async (e) => {
+    const uploadedFile = await uploadFile(t, e);
+
+    setRoomParams({
+      ...roomParams,
+      icon: { ...roomParams.icon, uploadedFile: uploadedFile },
+      iconWasUpdated: true,
+    });
+
+    onChangeIcon({ ...roomParams.icon, uploadedFile: uploadedFile });
+  };
 
   const onChangeName = (e) => {
     setIsValidTitle(true);
@@ -116,7 +236,45 @@ const SetRoomParams = ({
     } else {
       setIsWrongTitle(false);
     }
-    setRoomParams({ ...roomParams, title: e.target.value });
+
+    if (isEdit) {
+      setPreviewTitle(e.target.value);
+    } else {
+      setCreateRoomTitleTitle(e.target.value);
+    }
+
+    setRoomCoverDialogProps({
+      ...roomCoverDialogProps,
+      title: e.target.value,
+    });
+
+    setRoomParams({
+      ...roomParams,
+      title: e.target.value,
+    });
+
+    if (!cover && !previewIcon && !isEdit) {
+      setCover(`#${randomColor}`, "");
+    }
+  };
+
+  const onSaveAvatar = () => {
+    setAvatarEditorDialogVisible(false);
+    setCover();
+  };
+
+  const onDeleteAvatar = () => {
+    setCover(`#${randomColor}`, "");
+    setRoomParams({
+      ...roomParams,
+      icon: {
+        uploadedFile: null,
+        tmpFile: "",
+        x: 0.5,
+        y: 0.5,
+        zoom: 1,
+      },
+    });
   };
 
   const onChangeIsPrivate = () =>
@@ -140,6 +298,83 @@ const SetRoomParams = ({
     });
   };
 
+  const hasImage = isEdit
+    ? roomParams.icon.uploadedFile && selection?.logo?.original
+    : false;
+  const model = getLogoCoverModel(t, hasImage);
+
+  const isEditRoomModel = model.map((item) =>
+    item.key === "delete" ? { ...item, onClick: onDeleteAvatar } : item,
+  );
+
+  const isEmptyIcon =
+    createRoomTitle || cover?.color
+      ? false
+      : avatarEditorDialogVisible
+        ? true
+        : previewIcon
+          ? false
+          : createRoomTitle
+            ? false
+            : true;
+
+  const element = isEdit ? (
+    <ItemIcon
+      id={selection?.id}
+      fileExst={selection?.fileExst}
+      isRoom={true}
+      title={previewTitle}
+      className="room-params-icon"
+      logo={
+        currentCover
+          ? { cover: currentCover }
+          : avatarEditorDialogVisible
+            ? currentIcon
+            : previewIcon || currentIcon
+      }
+      showDefault={
+        cover && cover.cover
+          ? false
+          : (!previewIcon &&
+              !selection?.logo?.cover &&
+              !selection?.logo?.large) ||
+            cover?.color
+      }
+      color={cover ? cover.color : selection?.logo?.color}
+      size={isMobile() && !horizontalOrientation ? "96px" : "64px"}
+      withEditing={true}
+      model={isEditRoomModel}
+      onChangeFile={onChangeFile}
+    />
+  ) : (
+    <RoomIcon
+      id={selection?.id}
+      title={createRoomTitle}
+      showDefault={
+        cover && cover.cover ? false : !previewIcon || avatarEditorDialogVisible
+      }
+      size={isMobile() && !horizontalOrientation ? "96px" : "64px"}
+      imgClassName={"react-svg-icon"}
+      model={model}
+      className="room-params-icon"
+      isEmptyIcon={(!currentCover || roomLogoCoverDialogVisible) && isEmptyIcon}
+      color={cover ? cover.color : randomColor}
+      logo={
+        currentCover
+          ? { cover: currentCover }
+          : !avatarEditorDialogVisible && previewIcon
+      }
+      withEditing={
+        (previewIcon && !avatarEditorDialogVisible) ||
+        createRoomTitle ||
+        (currentCover && !roomLogoCoverDialogVisible) ||
+        cover?.color
+      }
+      onChangeFile={onChangeFile}
+      currentColorScheme={currentColorScheme}
+    />
+  );
+
   return (
     <StyledSetRoomParams disableImageRescaling={disableImageRescaling}>
       {isEdit || disabledChangeRoomType ? (
@@ -154,6 +389,37 @@ const SetRoomParams = ({
           forceHideDropdown={forceHideRoomTypeDropdown}
         />
       )}
+      <div className="logo-name-container">
+        {element}
+        <InputParam
+          id="shared_room-name"
+          title={`${t("Common:Name")}:`}
+          placeholder={t("Common:EnterName")}
+          value={roomParams.title}
+          onChange={onChangeName}
+          isDisabled={isDisabled}
+          isValidTitle={isValidTitle}
+          isWrongTitle={isWrongTitle}
+          onFocus={() => setForceHideRoomTypeDropdown(true)}
+          onBlur={() => setForceHideRoomTypeDropdown(false)}
+          errorMessage={
+            isWrongTitle
+              ? t("Files:ContainsSpecCharacter")
+              : t("Common:RequiredField")
+          }
+          onKeyUp={onKeyUp}
+          isAutoFocussed={true}
+        />
+      </div>
+
+      <TagInput
+        t={t}
+        tagHandler={tagHandler}
+        setIsScrollLocked={setIsScrollLocked}
+        isDisabled={isDisabled}
+        onFocus={() => setForceHideRoomTypeDropdown(true)}
+        onBlur={() => setForceHideRoomTypeDropdown(false)}
+      />
       {isEdit && (
         <PermanentSettings
           t={t}
@@ -164,34 +430,6 @@ const SetRoomParams = ({
           isDisabled={isDisabled}
         />
       )}
-      <InputParam
-        id="shared_room-name"
-        title={`${t("Common:Name")}:`}
-        placeholder={t("Common:EnterName")}
-        value={roomParams.title}
-        onChange={onChangeName}
-        isDisabled={isDisabled}
-        isValidTitle={isValidTitle}
-        isWrongTitle={isWrongTitle}
-        onFocus={() => setForceHideRoomTypeDropdown(true)}
-        onBlur={() => setForceHideRoomTypeDropdown(false)}
-        errorMessage={
-          isWrongTitle
-            ? t("Files:ContainsSpecCharacter")
-            : t("Common:RequiredField")
-        }
-        onKeyUp={onKeyUp}
-        isAutoFocussed={true}
-      />
-
-      <TagInput
-        t={t}
-        tagHandler={tagHandler}
-        setIsScrollLocked={setIsScrollLocked}
-        isDisabled={isDisabled}
-        onFocus={() => setForceHideRoomTypeDropdown(true)}
-        onBlur={() => setForceHideRoomTypeDropdown(false)}
-      />
 
       {/* //TODO: Uncomment when private rooms are done
       {!isEdit && (
@@ -206,6 +444,15 @@ const SetRoomParams = ({
         <ChangeRoomOwner
           roomOwner={roomParams.roomOwner}
           onOwnerChange={onOwnerChange}
+        />
+      )}
+
+      {isVDRRoom && (
+        <VirtualDataRoomBlock
+          t={t}
+          roomParams={roomParams}
+          setRoomParams={setRoomParams}
+          isEdit={isEdit}
         />
       )}
 
@@ -233,48 +480,97 @@ const SetRoomParams = ({
       )}
 
       <div>
-        <Text fontWeight={600} className="icon-editor_text">
-          {t("Icon")}
-        </Text>
-        <ImageEditor
-          t={t}
-          isDisabled={isDisabled}
-          image={roomParams.icon}
-          setPreview={setPreviewIcon}
-          onChangeImage={onChangeIcon}
-          classNameWrapperImageCropper={"icon-editor"}
-          disableImageRescaling={disableImageRescaling}
-          maxImageSize={maxImageUploadSize}
-          Preview={
-            <PreviewTile
-              t={t}
-              title={roomParams.title || t("Common:NewRoom")}
-              previewIcon={previewIcon}
-              tags={roomParams.tags.map((tag) => tag.name)}
-              isDisabled={isDisabled}
-              defaultTagLabel={getRoomTypeName(roomParams.type, t)}
-            />
-          }
-        />
+        {avatarEditorDialogVisible && (
+          <AvatarEditorDialog
+            t={t}
+            isDisabled={isDisabled}
+            image={roomParams.icon}
+            setPreview={setPreviewIcon}
+            onChangeImage={onChangeIcon}
+            onClose={() => setAvatarEditorDialogVisible(false)}
+            onSave={onSaveAvatar}
+            onChangeFile={onChangeFile}
+            classNameWrapperImageCropper={"icon-editor"}
+            disableImageRescaling={disableImageRescaling}
+            visible={roomParams.icon.uploadedFile}
+            maxImageSize={maxImageUploadSize}
+          />
+        )}
       </div>
     </StyledSetRoomParams>
   );
 };
 
-export default inject(({ settingsStore, currentQuotaStore }) => {
-  const { isDefaultRoomsQuotaSet } = currentQuotaStore;
+export default inject(
+  ({
+    settingsStore,
+    dialogsStore,
+    currentQuotaStore,
+    filesStore,
+    infoPanelStore,
+    avatarEditorDialogStore,
+  }) => {
+    const { isDefaultRoomsQuotaSet } = currentQuotaStore;
+    const { folderFormValidation, maxImageUploadSize, currentColorScheme } =
+      settingsStore;
 
-  const { folderFormValidation, maxImageUploadSize } = settingsStore;
+    const { bufferSelection } = filesStore;
+    const { getInfoPanelItemIcon, infoPanelSelection } = infoPanelStore;
 
-  return {
-    isDefaultRoomsQuotaSet,
-    folderFormValidation,
-    maxImageUploadSize,
-  };
-})(
+    const {
+      uploadFile,
+      avatarEditorDialogVisible,
+      setAvatarEditorDialogVisible,
+      image,
+    } = avatarEditorDialogStore;
+
+    const {
+      setChangeRoomOwnerIsVisible,
+      roomLogoCoverDialogVisible,
+      getLogoCoverModel,
+      setCoverSelection,
+      setRoomCoverDialogProps,
+      roomCoverDialogProps,
+      cover,
+      covers,
+      setCover,
+    } = dialogsStore;
+
+    const selection =
+      bufferSelection != null ? bufferSelection : infoPanelSelection;
+
+    setCoverSelection(selection);
+
+    return {
+      isDefaultRoomsQuotaSet,
+      folderFormValidation,
+      setChangeRoomOwnerIsVisible,
+      maxImageUploadSize,
+      bufferSelection,
+      getLogoCoverModel,
+      selection,
+      getInfoPanelItemIcon,
+      setCoverSelection,
+      uploadFile,
+      avatarEditorDialogVisible,
+      setAvatarEditorDialogVisible,
+      setRoomCoverDialogProps,
+      roomCoverDialogProps,
+      roomLogoCoverDialogVisible,
+      currentColorScheme,
+      image,
+      cover,
+      covers,
+      setCover,
+    };
+  },
+)(
   observer(
-    withTranslation(["CreateEditRoomDialog", "Translations", "Common"])(
-      withLoader(SetRoomParams)(<SetRoomParamsLoader />),
-    ),
+    withTranslation([
+      "CreateEditRoomDialog",
+      "Translations",
+      "Common",
+      "RoomLogoCover",
+    ])(withLoader(SetRoomParams)(<SetRoomParamsLoader />)),
   ),
 );

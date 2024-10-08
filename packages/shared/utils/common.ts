@@ -34,6 +34,7 @@ import { findWindows } from "windows-iana";
 import { isMobile } from "react-device-detect";
 import { I18nextProviderProps } from "react-i18next";
 import sjcl from "sjcl";
+import resizeImage from "resize-image";
 
 import { flagsIcons } from "@docspace/shared/utils/image-flags";
 
@@ -416,6 +417,24 @@ export function getProviderLabel(provider: string, t: (key: string) => string) {
       return "";
   }
 }
+
+export const getLifetimePeriodTranslation = (
+  period: number,
+  t: TTranslation,
+) => {
+  switch (period) {
+    case 0:
+      return t("Common:Days").toLowerCase();
+    case 1:
+      return t("Common:Months").toLowerCase();
+    case 2:
+      return t("Common:Years").toLowerCase();
+
+    default:
+      return t("Common:Days").toLowerCase();
+  }
+};
+
 export const isLanguageRtl = (lng: string) => {
   if (!lng) return;
 
@@ -1212,3 +1231,66 @@ export function setLanguageForUnauthorized(culture: string) {
 
   window.location.reload();
 }
+
+export const imageProcessing = async (file: File, maxSize?: number) => {
+  const ONE_MEGABYTE = 1024 * 1024;
+  const COMPRESSION_RATIO = 2;
+  const NO_COMPRESSION_RATIO = 1;
+
+  const maxImageSize = maxSize ?? ONE_MEGABYTE;
+  const imageBitMap = await createImageBitmap(file);
+
+  const width = imageBitMap.width;
+  const height = imageBitMap.height;
+
+  // @ts-expect-error imageBitMap
+  const canvas = resizeImage.resize2Canvas(imageBitMap, width, height);
+
+  async function resizeRecursiveAsync(
+    img: { width: number; height: number },
+    compressionRatio = COMPRESSION_RATIO,
+    depth = 0,
+  ): Promise<unknown> {
+    const data = resizeImage.resize(
+      // @ts-expect-error canvas
+      canvas,
+      img.width / compressionRatio,
+      img.height / compressionRatio,
+      resizeImage.JPEG,
+    );
+
+    const newFile = await fetch(data)
+      .then((res) => res.blob())
+      .then((blob) => {
+        const f = new File([blob], "File name", {
+          type: "image/jpg",
+        });
+        return f;
+      });
+
+    // const stepMessage = `Step ${depth + 1}`;
+    // const sizeMessage = `size = ${file.size} bytes`;
+    // const compressionRatioMessage = `compressionRatio = ${compressionRatio}`;
+
+    // console.log(`${stepMessage} ${sizeMessage} ${compressionRatioMessage}`);
+
+    if (newFile.size < maxImageSize) {
+      return newFile;
+    }
+
+    if (depth > 5) {
+      // console.log("start");
+      throw new Error("recursion depth exceeded");
+    }
+
+    return new Promise((resolve) => {
+      // eslint-disable-next-line no-promise-executor-return
+      return resolve(newFile);
+    }).then(() => resizeRecursiveAsync(img, compressionRatio + 1, depth + 1));
+  }
+
+  return resizeRecursiveAsync(
+    { width, height },
+    file.size > maxImageSize ? COMPRESSION_RATIO : NO_COMPRESSION_RATIO,
+  );
+};

@@ -819,6 +819,11 @@ class UploadDataStore {
       }
 
       const addNewFile = () => {
+        if (!this.filesStore.showNewFilesInList) {
+          this.filesStore.setOperationAction(false);
+          return;
+        }
+
         if (folderInfo) {
           const isFolderExist = newFolders.find((x) => x.id === folderInfo.id);
           if (!isFolderExist && folderInfo) {
@@ -891,6 +896,7 @@ class UploadDataStore {
       isAsyncUpload = false, // async upload checker
       isFinalize = false, // is finalize chunk
       allChunkUploaded, // needed for progress, files is uploaded, awaiting finalized chunk
+      createNewIfExist,
     } = chunkUploadObj;
 
     if (!res.data.data && res.data.message) {
@@ -949,7 +955,7 @@ class UploadDataStore {
         const nextFileIndex = this.files.findIndex((f) => !f.inAction);
 
         if (nextFileIndex !== -1) {
-          this.startSessionFunc(nextFileIndex, t);
+          this.startSessionFunc(nextFileIndex, t, createNewIfExist);
         }
       });
 
@@ -994,7 +1000,7 @@ class UploadDataStore {
     }
   };
 
-  asyncUpload = async (t, chunkData, resolve, reject) => {
+  asyncUpload = async (t, chunkData, resolve, reject, createNewIfExist) => {
     const { operationId, file, fileSize, indexOfFile, path, length } =
       chunkData;
 
@@ -1032,7 +1038,8 @@ class UploadDataStore {
         if (!res.data.data && res.data.message) {
           delete this.asyncUploadObj[operationId];
           return reject(res.data.message);
-        } else this.asyncUpload(t, chunkData, resolve, reject);
+        } else
+          this.asyncUpload(t, chunkData, resolve, reject, createNewIfExist);
 
         const activeLength = this.asyncUploadObj[operationId]
           ? this.asyncUploadObj[operationId].chunksArray.filter(
@@ -1065,6 +1072,7 @@ class UploadDataStore {
           isAsyncUpload: true,
           isFinalize: false,
           allChunkUploaded: allIsUploaded === 0,
+          createNewIfExist,
         });
 
         let finalizeChunk = -1;
@@ -1100,6 +1108,7 @@ class UploadDataStore {
               reject,
               isAsyncUpload: true,
               isFinalize: true,
+              createNewIfExist,
             });
           }
         }
@@ -1119,6 +1128,7 @@ class UploadDataStore {
     t,
     operationId,
     toFolderId,
+    createNewIfExist,
   ) => {
     const { uploadThreadCount } = this.filesSettingsStore;
     const length = requestsDataArray.length;
@@ -1158,6 +1168,7 @@ class UploadDataStore {
             { operationId, file, fileSize, indexOfFile, path, length },
             resolve,
             reject,
+            createNewIfExist,
           );
           i--;
         }
@@ -1188,6 +1199,7 @@ class UploadDataStore {
           chunksLength: length,
           resolve,
           reject,
+          createNewIfExist,
         });
 
         //console.log(`Uploaded chunk ${index}/${length}`, res);
@@ -1330,6 +1342,7 @@ class UploadDataStore {
             t,
             operationId,
             toFolderId,
+            createNewIfExist,
           );
         },
       )

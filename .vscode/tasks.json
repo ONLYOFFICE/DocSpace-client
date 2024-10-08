@@ -350,7 +350,7 @@
     {
       "label": "Test | Jest:common",
       "type": "shell",
-      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test",
+      "command": "cd ${workspaceFolder}/common/tests/ ; npm install ; npm run test ; open reports/tests-results.html",
       "group": {
         "kind": "build",
         "isDefault": true

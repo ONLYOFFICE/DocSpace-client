@@ -41,7 +41,7 @@ async function Page() {
     <>
       {settings && typeof settings !== "string" && (
         <>
-          <GreetingContainer greetingSettings={settings?.greetingSettings} />
+          <GreetingContainer greetingText={settings?.greetingSettings} />
           <FormWrapper id="password-change-form">
             <PasswordChangeForm
               passwordHash={settings.passwordHash}

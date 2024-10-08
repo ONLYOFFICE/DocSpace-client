@@ -38,6 +38,7 @@ import {
   sortInDisplayOrder,
 } from "../../utils/common";
 
+import { TNewFiles } from "../rooms/types";
 import { request } from "../client";
 
 import FilesFilter from "./filter";
@@ -777,11 +778,20 @@ export async function markAsRead(folderIds: number[], fileIds: number[]) {
   return res;
 }
 
-export async function getNewFiles(folderId: number) {
+export async function getNewFiles(folderId: number | string) {
   const res = (await request({
     method: "get",
     url: `/files/${folderId}/news`,
-  })) as TFile[];
+  })) as TNewFiles[];
+
+  return res;
+}
+
+export async function getNewFolderFiles(folderId: number | string) {
+  const res = (await request({
+    method: "get",
+    url: `/files/rooms/${folderId}/news`,
+  })) as TNewFiles[];
 
   return res;
 }
@@ -1460,6 +1470,26 @@ export async function startFilling(fileId: string | number): Promise<void> {
   };
 
   await request(options);
+}
+
+export async function changeIndex(
+  id: number,
+  order: number,
+  isFolder: boolean,
+) {
+  const url = isFolder ? `/files/folder/${id}/order` : `/files/${id}/order`;
+  return request({
+    method: "put",
+    url,
+    data: { order },
+  });
+}
+
+export async function reorderIndex(id: number) {
+  return request({
+    method: "put",
+    url: `/files/rooms/${id}/reorder`,
+  });
 }
 
 export async function checkIsPDFForm(fileId: string | number) {

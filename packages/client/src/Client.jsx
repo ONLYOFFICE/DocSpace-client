@@ -215,7 +215,7 @@ export const Client = inject(
 
     if (!userStore.user) return;
 
-    const { isVisitor } = userStore.user;
+    // const { isVisitor } = userStore.user;
 
     const {
       isLoading,
@@ -224,7 +224,7 @@ export const Client = inject(
       showArticleLoader,
     } = clientLoadingStore;
 
-    const withMainButton = !isVisitor;
+    const withMainButton = true; // !isVisitor; // Allways true for any type of users
 
     const { isInit: isInitPlugins, initPlugins } = pluginStore;
 

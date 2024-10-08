@@ -542,7 +542,8 @@ class TableHeaderComponent extends React.Component<
 
           tableInfoPanelContainer.forEach((item, index) => {
             if (
-              index !== 0 &&
+              columns[index]?.key !== "Index" &&
+              columns[index]?.key !== "Name" &&
               item !== "0px" &&
               item !== `${defaultSize}px` &&
               item !== `${SETTINGS_SIZE}px`
@@ -558,13 +559,22 @@ class TableHeaderComponent extends React.Component<
             defaultSize -
             SETTINGS_SIZE;
 
+          const indexColumnWidth =
+            columns[0].key === "Index"
+              ? getSubstring(tableInfoPanelContainer[0])
+              : 0;
+          const nameColumnWidth =
+            columns[0].key === "Name"
+              ? getSubstring(tableInfoPanelContainer[0])
+              : getSubstring(tableInfoPanelContainer[1]);
+
           if (
             contentWidth - enabledColumnsCount * DEFAULT_MIN_COLUMN_SIZE >
-            getSubstring(tableInfoPanelContainer[0])
+            nameColumnWidth + indexColumnWidth
           ) {
             const currentContentWidth =
               enabledColumnsCount > 0
-                ? contentWidth - +getSubstring(tableInfoPanelContainer[0])
+                ? contentWidth - nameColumnWidth - indexColumnWidth
                 : contentWidth;
 
             let overWidth = 0;
@@ -575,15 +585,28 @@ class TableHeaderComponent extends React.Component<
               const shortColumSize =
                 column?.dataset?.shortColum && column.dataset.minWidth;
 
-              const minWidth = column?.dataset?.minWidth;
-              const minSize = minWidth ? +minWidth : MIN_SIZE_NAME_COLUMN;
+              if (
+                (columns[index]?.key === "Name" ||
+                  columns[index]?.key === "Index") &&
+                enabledColumnsCount > 0
+              ) {
+                if (
+                  columns[index]?.key === "Index" &&
+                  shortColumSize &&
+                  !minWidthsIndex.includes(+shortColumSize)
+                ) {
+                  this.setState((prevState) => ({
+                    minWidthsIndex: [
+                      ...prevState.minWidthsIndex,
+                      +shortColumSize,
+                    ],
+                  }));
+                }
 
-              if (index === 0 && enabledColumnsCount > 0) {
                 let newItemWidth = item;
 
-                // Checking whether the index column is less than the minimum width
                 if (
-                  +index === 0 &&
+                  columns[index]?.key === "Index" &&
                   shortColumSize &&
                   getSubstring(item) < +shortColumSize
                 ) {
@@ -594,7 +617,7 @@ class TableHeaderComponent extends React.Component<
                 // Set the previous minimum width of the index column
                 // if the user has not changed the width of this column
                 if (
-                  +index === 0 &&
+                  columns[index]?.key === "Index" &&
                   shortColumSize &&
                   getSubstring(item) > +shortColumSize &&
                   minWidthsIndex?.includes(getSubstring(item)) &&
@@ -602,16 +625,6 @@ class TableHeaderComponent extends React.Component<
                 ) {
                   overWidth += getSubstring(item) - +shortColumSize;
                   newItemWidth = `${shortColumSize}px`;
-                }
-
-                // Checking whether the name column is less than the minimum width
-                if (
-                  columns[index]?.key === "Name" &&
-                  getSubstring(newItemWidth) < minSize
-                ) {
-                  overWidth +=
-                    MIN_SIZE_NAME_COLUMN - getSubstring(newItemWidth);
-                  newItemWidth = `${MIN_SIZE_NAME_COLUMN}px`;
                 }
 
                 gridTemplateColumns.push(newItemWidth);
@@ -629,16 +642,23 @@ class TableHeaderComponent extends React.Component<
                     enabledColumnsCount === 0
                       ? 100
                       : (getSubstring(item) /
-                          (changedWidth -
-                            +getSubstring(tableInfoPanelContainer[0]))) *
+                          (changedWidth - nameColumnWidth - indexColumnWidth)) *
                         100;
 
-                  let newItemWidth = defaultColumnSize
-                    ? `${defaultColumnSize}px`
-                    : (currentContentWidth * percent) / 100 >
-                        DEFAULT_MIN_COLUMN_SIZE
-                      ? `${(currentContentWidth * percent) / 100}px`
-                      : `${DEFAULT_MIN_COLUMN_SIZE}px`;
+                  let newItemWidth;
+
+                  if (defaultColumnSize) {
+                    newItemWidth = `${defaultColumnSize}px`;
+                  } else if (
+                    (currentContentWidth * percent) / 100 >
+                    DEFAULT_MIN_COLUMN_SIZE
+                  ) {
+                    newItemWidth = `${(currentContentWidth * percent) / 100}px`;
+                  } else if (shortColumSize) {
+                    newItemWidth = item;
+                  } else {
+                    newItemWidth = `${DEFAULT_MIN_COLUMN_SIZE}px`;
+                  }
 
                   if (
                     (currentContentWidth * percent) / 100 <
@@ -648,16 +668,6 @@ class TableHeaderComponent extends React.Component<
                     overWidth +=
                       DEFAULT_MIN_COLUMN_SIZE -
                       (currentContentWidth * percent) / 100;
-                  }
-
-                  // Checking whether the name column is less than the minimum width
-                  if (
-                    columns[index]?.key === "Name" &&
-                    getSubstring(newItemWidth) < minSize
-                  ) {
-                    overWidth +=
-                      MIN_SIZE_NAME_COLUMN - getSubstring(newItemWidth);
-                    newItemWidth = `${MIN_SIZE_NAME_COLUMN}px`;
                   }
 
                   gridTemplateColumns.push(newItemWidth);
@@ -672,7 +682,8 @@ class TableHeaderComponent extends React.Component<
                 const columnWidth = getSubstring(column);
 
                 if (
-                  index !== 0 &&
+                  columns[index]?.key !== "Name" &&
+                  columns[index]?.key !== "Index" &&
                   column !== "0px" &&
                   column !== `${defaultSize}px` &&
                   column !== `${SETTINGS_SIZE}px` &&
@@ -705,18 +716,25 @@ class TableHeaderComponent extends React.Component<
                 (column ? column.dataset.enable === "true" : item !== "0px");
 
               const defaultColumnSize = column && column.dataset.defaultSize;
+              const shortColumSize =
+                column?.dataset?.shortColum && column.dataset.minWidth;
 
               if (!enable) {
                 gridTemplateColumns.push("0px");
               } else if (item !== `${SETTINGS_SIZE}px`) {
-                const newItemWidth = defaultColumnSize
-                  ? `${defaultColumnSize}px`
-                  : index === 1
-                    ? `${
-                        contentWidth -
-                        enabledColumnsCount * DEFAULT_MIN_COLUMN_SIZE
-                      }px`
-                    : `${DEFAULT_MIN_COLUMN_SIZE}px`;
+                let newItemWidth;
+
+                if (defaultColumnSize) {
+                  newItemWidth = `${defaultColumnSize}px`;
+                } else if (shortColumSize) {
+                  newItemWidth = `${shortColumSize}px`;
+                } else if (columns[index].key === "Name") {
+                  newItemWidth = `${
+                    contentWidth - enabledColumnsCount * DEFAULT_MIN_COLUMN_SIZE
+                  }px`;
+                } else {
+                  newItemWidth = `${DEFAULT_MIN_COLUMN_SIZE}px`;
+                }
 
                 gridTemplateColumns.push(newItemWidth);
               } else {

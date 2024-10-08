@@ -30,8 +30,8 @@ import { TUser } from "@docspace/shared/api/people/types";
 import { TGroup } from "@docspace/shared/api/groups/types";
 import AccountsFilter from "@docspace/shared/api/people/filter";
 import api from "@docspace/shared/api";
-import PeopleStore from "SRC_DIR/store/PeopleStore";
-import GroupsStore from "SRC_DIR/store/GroupsStore";
+import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
+import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 
 class EditGroupStore {
   isInit = false;

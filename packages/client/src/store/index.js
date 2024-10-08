@@ -81,7 +81,7 @@ import PluginStore from "./PluginStore";
 import InfoPanelStore from "./InfoPanelStore";
 import CampaignsStore from "./CampaignsStore";
 import IndexingStore from "./IndexingStore";
-import EditGroupStore from "./EditGroupStore";
+import EditGroupStore from "./contacts/EditGroupStore";
 
 import AvatarEditorDialogStore from "./AvatarEditorDialogStore";
 

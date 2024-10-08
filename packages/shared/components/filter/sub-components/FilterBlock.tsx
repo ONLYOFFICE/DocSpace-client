@@ -59,10 +59,11 @@ const FilterBlock = ({
   selectorLabel,
   userId,
   isRooms,
-  isAccounts,
-  isPeopleAccounts,
-  isGroupsAccounts,
-  isInsideGroup,
+  isContactsPage,
+  isContactsPeoplePage,
+  isContactsGroupsPage,
+  isContactsInsideGroupPage,
+  isContactsGuestsPage,
   disableThirdParty,
 }: FilterBlockProps) => {
   const { t } = useTranslation(["Common"]);
@@ -497,6 +498,7 @@ const FilterBlock = ({
                   onCloseClick: hideFilterBlock,
                   headerLabel: selectorLabel,
                   withoutBackButton: false,
+                  withoutBorder: false,
                 }}
                 currentUserId={userId}
                 onClose={hideFilterBlock}
@@ -561,10 +563,11 @@ const FilterBlock = ({
           {isLoading ? (
             <FilterBlockLoader
               isRooms={isRooms}
-              isAccounts={isAccounts}
-              isPeopleAccounts={isPeopleAccounts}
-              isGroupsAccounts={isGroupsAccounts}
-              isInsideGroup={isInsideGroup}
+              isContactsPage={isContactsPage}
+              isContactsPeoplePage={isContactsPeoplePage}
+              isContactsGroupsPage={isContactsGroupsPage}
+              isContactsInsideGroupPage={isContactsInsideGroupPage}
+              isContactsGuestsPage={isContactsGuestsPage}
             />
           ) : (
             <>

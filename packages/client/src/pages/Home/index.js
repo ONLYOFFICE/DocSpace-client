@@ -391,9 +391,7 @@ const PureHome = (props) => {
           </Section.SectionWarning>
         )}
 
-        {(((!isEmptyPage || showFilterLoader) &&
-          !isContactsEmptyView &&
-          !isErrorRoomNotAvailable) ||
+        {(((!isEmptyPage || showFilterLoader) && !isErrorRoomNotAvailable) ||
           (!isContactsEmptyView && isContactsPage)) &&
           !isSettingsPage && (
             <Section.SectionFilter>

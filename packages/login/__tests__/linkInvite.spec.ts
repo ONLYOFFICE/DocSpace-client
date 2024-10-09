@@ -206,7 +206,6 @@ test("link invite registration error", async ({ page, mockRequest }) => {
 
   await page.getByRole("button", { name: "Sign up" }).click();
 
-  await page.setViewportSize({ width: 1920, height: 1080 });
   await expect(page).toHaveScreenshot(
     ["desktop", "link-invite", "link-invite-registration-error.png"],
     { fullPage: true },

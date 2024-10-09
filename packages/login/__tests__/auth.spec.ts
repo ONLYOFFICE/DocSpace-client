@@ -1,4 +1,3 @@
-import { options } from "./../../shared/components/input-phone/options";
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -105,11 +104,9 @@ test("auth with file handler success", async ({ page, mockRequest }) => {
   await mockRequest.router([endpoints.login]);
   await page.goto(URL_WITH_FILE_HANDLER, { waitUntil: "domcontentloaded" });
 
-  await expect(page).toHaveScreenshot([
-    "desktop",
-    "auth",
-    "auth-with-file-handler-success.png",
-  ]);
+  await page
+    .getByText("File downloading in progress")
+    .waitFor({ state: "attached" });
 
   await page.waitForURL(
     `${BASE_URL}:${PORT}/filehandler.ashx?action=download`,

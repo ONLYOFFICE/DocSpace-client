@@ -346,15 +346,17 @@ const InviteInput = ({
         }
 
         if (
-          isUserTariffLimit &&
-          item.isVisitor &&
-          isPaidUserRole(item.access)
+          isPaidUserRole(item.access) &&
+          (item.isVisitor || item.isCollaborator)
         ) {
-          const freeRole = getTopFreeRole(t, roomType)?.access;
+          const topFreeRole = getTopFreeRole(t, roomType);
 
-          if (freeRole) {
-            item.access = freeRole;
-            toastr.error(<PaidQuotaLimitError />);
+          if (item.access !== topFreeRole.access) {
+            item = makeFreeRole(item, t, topFreeRole);
+
+            if (isUserTariffLimit) {
+              toastr.error(<PaidQuotaLimitError />);
+            }
           }
         }
         const items = removeExist([item, ...inviteItems]);
@@ -431,17 +433,8 @@ const InviteInput = ({
           (userItem.isGroup || user.isVisitor || user.isCollaborator)
         ) {
           userItem = fixAccess(userItem, t, roomType);
-        }
 
-        if (
-          isUserTariffLimit &&
-          userItem.isVisitor &&
-          isPaidUserRole(item.access)
-        ) {
-          const freeRole = getTopFreeRole(t, roomType)?.access;
-
-          if (freeRole) {
-            userItem.access = freeRole;
+          if (isUserTariffLimit) {
             toastr.error(<PaidQuotaLimitError />);
           }
         }

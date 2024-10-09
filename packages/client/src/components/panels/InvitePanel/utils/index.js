@@ -242,7 +242,7 @@ export const getAccessOptions = (
     case RoomsType.VirtualDataRoom:
       options = [
         accesses.roomAdmin,
-        accesses.collaborator,
+        accesses.contentCreator,
         { key: "s1", isSeparator: withSeparator },
         accesses.viewer,
       ];

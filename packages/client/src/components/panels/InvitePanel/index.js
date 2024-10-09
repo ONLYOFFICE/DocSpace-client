@@ -40,8 +40,6 @@ import ItemsList from "./sub-components/ItemsList";
 import InviteInput from "./sub-components/InviteInput";
 import ExternalLinks from "./sub-components/ExternalLinks";
 
-import InvitePanelLoader from "./sub-components/InvitePanelLoader";
-
 import { Text } from "@docspace/shared/components/text";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
@@ -49,7 +47,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { getAccessOptions, getTopFreeRole, makeFreeRole } from "./utils";
+import { fixAccess, getAccessOptions } from "./utils";
 import AddUsersPanel from "../AddUsersPanel";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
@@ -451,22 +449,16 @@ const InvitePanel = ({
   };
 
   const addItems = (users) => {
-    const topFreeRole = getTopFreeRole(t, roomType);
     users.forEach((u) => {
-      if (u.isGroup && checkIfAccessPaid(u.access)) {
-        u = makeFreeRole(u, t, topFreeRole);
-      }
+      const isAccessPaid = checkIfAccessPaid(u.access);
 
-      if (
-        isUserTariffLimit &&
-        (!u.avatar || u.isVisitor) &&
-        isPaidUserRole(u.access)
-      ) {
-        const freeRole = getTopFreeRole(t, roomType)?.access;
+      if (isAccessPaid) {
+        if (u.isGroup || u.isVisitor || u.isCollaborator) {
+          u = fixAccess(u, t, roomType);
 
-        if (freeRole) {
-          u.access = freeRole;
-          toastr.error(<PaidQuotaLimitError />);
+          if (isUserTariffLimit) {
+            toastr.error(<PaidQuotaLimitError />);
+          }
         }
       }
     });

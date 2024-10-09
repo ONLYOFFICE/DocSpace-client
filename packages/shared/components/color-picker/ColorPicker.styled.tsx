@@ -59,14 +59,18 @@ const Wrapper = styled.div<{ isPickerOnly: boolean }>`
 
   .hex-color-picker .react-colorful__interactive {
     width: 183px;
-    left: 6px;
 
-    ${({ theme }) => theme.interfaceDirection === "rtl" && "right: 6px;"}
+    ${({ theme }) => theme.interfaceDirection === "rtl" && "right: 13px;"}
 
     ${isMobileOnly &&
     css`
       width: calc(100vw - 76px);
     `}
+  }
+
+  .react-colorful__last-control .react-colorful__interactive {
+    left: 6px;
+    ${({ theme }) => theme.interfaceDirection === "rtl" && "right: 6px;"}
   }
 
   .hex-color-picker .react-colorful__saturation-pointer {

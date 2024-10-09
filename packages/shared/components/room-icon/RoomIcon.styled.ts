@@ -94,8 +94,8 @@ const StyledIcon = styled.div<{
       display: flex;
       justify-content: center;
       align-items: center;
-      height: ${(props) => `${props.coverSize}px`};
-      width: ${(props) => `${props.coverSize}px`};
+      height: ${(props) => props.size};
+      width: ${(props) => props.size};
     }
   }
 

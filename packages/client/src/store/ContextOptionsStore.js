@@ -1626,7 +1626,8 @@ class ContextOptionsStore {
         label: t("Files:CopyLink"),
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onCopyLink(item, t),
-        disabled: isPublicRoomType && hasShareLinkRights,
+        disabled:
+          (isPublicRoomType && hasShareLinkRights) || item.passwordProtected,
       },
       {
         id: "option_copy-external-link",

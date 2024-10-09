@@ -2475,7 +2475,8 @@ class FilesStore {
       const canEditRoom = item.security?.EditRoom;
       const canDuplicateRoom = item.security?.Duplicate;
 
-      const canViewRoomInfo = item.security?.Read;
+      const canViewRoomInfo =
+        item.security?.Read || (item.external && item.passwordProtected);
       const canMuteRoom = item.security?.Mute;
 
       const isPublicRoomType =

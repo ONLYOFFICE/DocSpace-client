@@ -45,11 +45,19 @@ const PeopleRowContainer = ({
   filterTotal,
   withPaging,
   currentDeviceType,
+<<<<<<< HEAD:packages/client/src/pages/Home/Section/ContactsBody/Users/RowView/index.tsx
   isUsersEmptyView,
   contactsTab,
   showStorageInfo,
   isDefaultUsersQuotaSet,
 }: RowViewProps) => {
+=======
+  insideGroupIsFiltered,
+  insideGroupFilterTotal,
+  hasMoreInsideGroupUsers,
+  fetchMoreInsideGroupUsers,
+}) => {
+>>>>>>> develop:packages/client/src/pages/Home/Section/AccountsBody/InsideGroup/RowView/PeopleRowContainer.js
   useViewEffect({
     view: viewAs!,
     setView: (view: string) => {
@@ -86,6 +94,7 @@ const PeopleRowContainer = ({
   );
 };
 
+<<<<<<< HEAD:packages/client/src/pages/Home/Section/ContactsBody/Users/RowView/index.tsx
 export default inject(
   ({ peopleStore, settingsStore, currentQuotaStore }: RowViewStores) => {
     const { usersStore, viewAs, setViewAs } = peopleStore;
@@ -125,3 +134,40 @@ export default inject(
     };
   },
 )(observer(PeopleRowContainer));
+=======
+export default inject(({ peopleStore, filesStore, settingsStore }) => {
+  const {
+    viewAs: accountsViewAs,
+    setViewAs,
+    usersStore,
+    infoPanelStore,
+  } = peopleStore;
+  const { theme, withPaging, currentDeviceType } = settingsStore;
+  const { isVisible: infoPanelVisible } = infoPanelStore;
+
+  const {
+    currentGroup,
+    insideGroupIsFiltered,
+    insideGroupFilterTotal,
+    hasMoreInsideGroupUsers,
+    fetchMoreInsideGroupUsers,
+  } = peopleStore.groupsStore;
+
+  const { peopleList } = usersStore;
+
+  return {
+    peopleList,
+    currentGroup,
+    accountsViewAs,
+    setViewAs,
+    theme,
+    infoPanelVisible,
+    withPaging,
+    currentDeviceType,
+    insideGroupIsFiltered,
+    insideGroupFilterTotal,
+    hasMoreInsideGroupUsers,
+    fetchMoreInsideGroupUsers,
+  };
+})(observer(PeopleRowContainer));
+>>>>>>> develop:packages/client/src/pages/Home/Section/AccountsBody/InsideGroup/RowView/PeopleRowContainer.js

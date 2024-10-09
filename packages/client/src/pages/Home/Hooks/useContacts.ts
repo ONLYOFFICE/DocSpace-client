@@ -76,7 +76,7 @@ const useContacts = ({
   const { t } = useTranslation(["Common"]);
 
   React.useEffect(() => {
-    if (!isContactsPage) return;
+    if (!isContactsPage) return setContactsTab(false);
 
     setIsLoading(true);
     setContactsTab(contactsView);

@@ -38,7 +38,7 @@ import { isMobileOnly, isMobile } from "react-device-detect";
 import { decode } from "he";
 import { filterPaidRoleOptions } from "SRC_DIR/helpers";
 
-import { getUserRole, getUserTypeLabel } from "@docspace/shared/utils/common";
+import { getUserType, getUserTypeLabel } from "@docspace/shared/utils/common";
 import { Text } from "@docspace/shared/components/text";
 import EmailPlusReactSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
 import { StyledUserTypeHeader } from "../../styles/members";
@@ -237,16 +237,7 @@ const User = ({
     updateRole(option);
   };
 
-  const getUserType = (item) => {
-    if (item.isOwner) return "owner";
-    if (item.isAdmin) return "admin";
-    if (item.isRoomAdmin) return "manager";
-    if (item.isCollaborator) return "collaborator";
-    return "user";
-  };
-
   const type = getUserType(user);
-  const role = getUserRole(user, userRole?.type);
   const typeLabel = getUserTypeLabel(type, t);
 
   const onOpenGroup = (group) => {
@@ -288,7 +279,7 @@ const User = ({
   ) : (
     <StyledUser isExpect={isExpect} key={user.id}>
       <Avatar
-        role={role}
+        role={type}
         className="avatar"
         size="min"
         source={isExpect ? AtReactSvgUrl : userAvatar || ""}

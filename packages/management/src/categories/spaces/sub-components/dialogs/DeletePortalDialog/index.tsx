@@ -36,6 +36,7 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
+import { toUrlParams } from "@docspace/shared/utils/common";
 
 import { useStore } from "SRC_DIR/store";
 
@@ -64,8 +65,9 @@ const DeletePortalDialog = () => {
 
   const onDelete = () => {
     const protocol = window?.location?.protocol;
+    const deletePortalData = encodeURIComponent(domain);
     return window.open(
-      `${protocol}//${domain}/portal-settings/delete-data/deletion`,
+      `${protocol}//${domain}/login?deletePortalData=${deletePortalData}`,
       "_self"
     );
   };

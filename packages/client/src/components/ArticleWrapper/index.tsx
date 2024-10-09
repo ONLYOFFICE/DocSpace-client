@@ -28,7 +28,7 @@ import { inject, observer } from "mobx-react";
 
 import Article from "@docspace/shared/components/article";
 import { ArticleProps } from "@docspace/shared/components/article/Article.types";
-import { getUserRole } from "@docspace/shared/utils/common";
+import { getUserType } from "@docspace/shared/utils/common";
 
 const ArticleWrapper = (props: ArticleProps) => {
   return <Article {...props} />;
@@ -101,7 +101,7 @@ export default inject<TStore>(
     return {
       onProfileClick,
       user,
-      getUserRole,
+      getUserType,
       getActions,
 
       currentTariffPlanTitle,

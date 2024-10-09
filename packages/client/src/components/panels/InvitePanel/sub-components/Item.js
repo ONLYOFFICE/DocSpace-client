@@ -36,7 +36,7 @@ import { inject, observer } from "mobx-react";
 import { Avatar } from "@docspace/shared/components/avatar";
 import { Text } from "@docspace/shared/components/text";
 import { parseAddresses } from "@docspace/shared/utils";
-import { getUserTypeLabel } from "@docspace/shared/utils/common";
+import { getUserType, getUserTypeLabel } from "@docspace/shared/utils/common";
 import { getMembersList, getUserList } from "@docspace/shared/api/people";
 import {
   AccountsSearchArea,
@@ -163,14 +163,6 @@ const Item = ({
     isOwner,
     standalone,
   );
-
-  const getUserType = (item) => {
-    if (item.isOwner) return "owner";
-    if (item.isAdmin) return "admin";
-    if (item.isRoomAdmin) return "manager";
-    if (item.isCollaborator) return "collaborator";
-    return "user";
-  };
 
   const type = getUserType(item);
 

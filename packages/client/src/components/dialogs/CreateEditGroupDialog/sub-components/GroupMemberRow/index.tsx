@@ -33,7 +33,7 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
-import { getUserRole, getUserTypeLabel } from "@docspace/shared/utils/common";
+import { getUserType, getUserTypeLabel } from "@docspace/shared/utils/common";
 import { TUser } from "@docspace/shared/api/people/types";
 import { Box } from "@docspace/shared/components/box";
 import { EmployeeStatus } from "@docspace/shared/enums";
@@ -51,7 +51,7 @@ interface GroupMemberRowProps {
 const GroupMemberRow = ({ groupMember, removeMember }: GroupMemberRowProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const role = getUserRole(groupMember);
+  const role = getUserType(groupMember);
   let avatarRole = AvatarRole.user;
   switch (role) {
     case "owner":

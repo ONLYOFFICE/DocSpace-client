@@ -28,7 +28,7 @@ import { makeAutoObservable } from "mobx";
 import moment from "moment";
 
 import { getUserById } from "@docspace/shared/api/people";
-import { getUserRole } from "@docspace/shared/utils/common";
+import { getUserType } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
   EmployeeActivationStatus,
@@ -428,7 +428,7 @@ class InfoPanelStore {
     const { getUserContextOptions } = this.peopleStore.usersStore;
 
     const fetchedUser = await getUserById(userId);
-    fetchedUser.role = getUserRole(fetchedUser);
+    fetchedUser.role = getUserType(fetchedUser);
     fetchedUser.statusType = getUserStatus(fetchedUser);
     fetchedUser.options = getUserContextOptions(
       false,

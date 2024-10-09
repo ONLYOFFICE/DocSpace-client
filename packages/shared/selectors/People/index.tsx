@@ -43,7 +43,7 @@ import {
 } from "../../components/selector/Selector.types";
 import { EmployeeStatus } from "../../enums";
 import { TTranslation } from "../../types";
-import { getUserRole } from "../../utils/common";
+import { getUserType } from "../../utils/common";
 import Filter from "../../api/people/filter";
 import { getUserList } from "../../api/people";
 import { TUser } from "../../api/people/types";
@@ -76,7 +76,7 @@ const toListItem = (
     status,
   } = item;
 
-  const role = getUserRole(item);
+  const role = getUserType(item);
 
   const userAvatar = hasAvatar ? avatar : DefaultUserPhoto;
 
@@ -211,7 +211,9 @@ const PeopleSelector = ({
       setIsNextPageLoading(true);
 
       const currentFilter =
-        typeof filter === "function" ? filter() : filter ?? Filter.getDefault();
+        typeof filter === "function"
+          ? filter()
+          : (filter ?? Filter.getDefault());
 
       currentFilter.page = startIndex / pageCount;
       currentFilter.pageCount = pageCount;

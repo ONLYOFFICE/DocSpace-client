@@ -2836,6 +2836,8 @@ export const getBaseTheme = () => {
 
             dataFontColor: white,
             dataFontColorBlack: black,
+            notAvailableBackground: grayLight,
+            textColor: black,
           },
 
           companyInfo: {
@@ -3227,6 +3229,17 @@ export const getBaseTheme = () => {
       linkColor: lightBlueMain,
     },
 
+    newFilesPanel: {
+      borderColor: globalColors.grayLightMid,
+
+      borderRadius: "6px",
+      boxShadow: `0px 8px 16px 0px ${boxShadowColor}`,
+
+      fileItem: {
+        borderColor: globalColors.grayLightMid,
+        fileExstColor: globalColors.gray,
+      },
+    },
     logoCover: {
       selectColor: {
         backgroundColor: lightGrayHover,

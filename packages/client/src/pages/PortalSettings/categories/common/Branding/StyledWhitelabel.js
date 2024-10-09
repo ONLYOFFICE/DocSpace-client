@@ -27,6 +27,7 @@
 import styled from "styled-components";
 import { Base } from "@docspace/shared/themes";
 import { mobile } from "@docspace/shared/utils";
+import { UnavailableStyles } from "../../../utils/commonSettingsStyles";
 
 const WhiteLabelWrapper = styled.div`
   .subtitle {
@@ -226,6 +227,8 @@ const WhiteLabelWrapper = styled.div`
       height: ${(props) => (props.showReminder ? "64px" : "24px")};
     }
   }
+
+  ${(props) => !props.isSettingPaid && UnavailableStyles}
 `;
 
 WhiteLabelWrapper.defaultProps = { theme: Base };

@@ -38,6 +38,7 @@ import {
   sortInDisplayOrder,
 } from "../../utils/common";
 
+import { TNewFiles } from "../rooms/types";
 import { request } from "../client";
 
 import FilesFilter from "./filter";
@@ -777,11 +778,20 @@ export async function markAsRead(folderIds: number[], fileIds: number[]) {
   return res;
 }
 
-export async function getNewFiles(folderId: number) {
+export async function getNewFiles(folderId: number | string) {
   const res = (await request({
     method: "get",
     url: `/files/${folderId}/news`,
-  })) as TFile[];
+  })) as TNewFiles[];
+
+  return res;
+}
+
+export async function getNewFolderFiles(folderId: number | string) {
+  const res = (await request({
+    method: "get",
+    url: `/files/rooms/${folderId}/news`,
+  })) as TNewFiles[];
 
   return res;
 }

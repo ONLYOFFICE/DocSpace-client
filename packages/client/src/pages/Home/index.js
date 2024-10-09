@@ -247,12 +247,7 @@ const PureHome = (props) => {
 
   useContacts({
     isContactsPage,
-    contactsView:
-      typeof contactsView === "string"
-        ? contactsView
-        : contactsView
-          ? "people"
-          : false,
+    contactsView,
 
     setContactsTab,
 

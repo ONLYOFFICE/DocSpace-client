@@ -86,6 +86,9 @@ const PeopleRowContainer = ({
   withPaging,
   currentDeviceType,
   insideGroupIsFiltered,
+  insideGroupFilterTotal,
+  hasMoreInsideGroupUsers,
+  fetchMoreInsideGroupUsers,
 }) => {
   useViewEffect({
     view: accountsViewAs,
@@ -97,9 +100,9 @@ const PeopleRowContainer = ({
     <StyledRowContainer
       className="people-row-container"
       useReactWindow={!withPaging}
-      fetchMoreFiles={() => {}}
-      hasMoreFiles={false}
-      itemCount={peopleList.length}
+      fetchMoreFiles={fetchMoreInsideGroupUsers}
+      hasMoreFiles={hasMoreInsideGroupUsers}
+      itemCount={insideGroupFilterTotal}
       filesLength={peopleList.length}
       itemHeight={58}
     >
@@ -127,7 +130,15 @@ export default inject(({ peopleStore, filesStore, settingsStore }) => {
   } = peopleStore;
   const { theme, withPaging, currentDeviceType } = settingsStore;
   const { isVisible: infoPanelVisible } = infoPanelStore;
-  const { currentGroup, insideGroupIsFiltered } = peopleStore.groupsStore;
+
+  const {
+    currentGroup,
+    insideGroupIsFiltered,
+    insideGroupFilterTotal,
+    hasMoreInsideGroupUsers,
+    fetchMoreInsideGroupUsers,
+  } = peopleStore.groupsStore;
+
   const { peopleList } = usersStore;
 
   return {
@@ -140,5 +151,8 @@ export default inject(({ peopleStore, filesStore, settingsStore }) => {
     withPaging,
     currentDeviceType,
     insideGroupIsFiltered,
+    insideGroupFilterTotal,
+    hasMoreInsideGroupUsers,
+    fetchMoreInsideGroupUsers,
   };
 })(observer(PeopleRowContainer));

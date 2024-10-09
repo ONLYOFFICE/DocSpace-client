@@ -293,10 +293,7 @@ class CreateEditRoomStore {
         requests.push(onSaveRoomLogo(room.id, newParams.icon, room, true));
       }
 
-      const isEditCurrentFolder = room.id === currentFolderId;
-      const needTableContentUpdate = indexingChanged && isEditCurrentFolder;
-
-      if (needTableContentUpdate)
+      if (indexingChanged)
         requests.push(updateCurrentFolder(null, currentFolderId));
 
       if (!!requests.length) {

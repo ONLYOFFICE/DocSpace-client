@@ -553,12 +553,23 @@ class FilesStore {
   };
 
   wsModifyFolderUpdate = (opt) => {
+    const { infoPanelSelection, updateInfoPanelSelection } =
+      this.infoPanelStore;
+
     if (opt?.type === "file" && opt?.data) {
       const file = JSON.parse(opt?.data);
       if (!file || !file.id) return;
 
       this.getFileInfo(file.id); //this.setFile(file);
       console.log("[WS] update file", file.id, file.title);
+
+      if (
+        infoPanelSelection?.id == file.id &&
+        !infoPanelSelection?.isFolder &&
+        !infoPanelSelection?.isRoom
+      ) {
+        updateInfoPanelSelection(file);
+      }
 
       this.checkSelection(file);
     } else if (opt?.type === "folder" && opt?.data) {
@@ -596,6 +607,13 @@ class FilesStore {
 
       if (folder.id === this.selectedFolderStore.id) {
         this.selectedFolderStore.setSelectedFolder({ ...folder });
+      }
+
+      if (
+        infoPanelSelection?.id == folder.id &&
+        (infoPanelSelection?.isFolder || infoPanelSelection?.isRoom)
+      ) {
+        updateInfoPanelSelection(folder);
       }
     }
   };

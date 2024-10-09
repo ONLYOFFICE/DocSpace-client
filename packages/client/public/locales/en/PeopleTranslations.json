@@ -17,6 +17,7 @@
   "PendingInviteTitle": "Pending invite",
   "PendingTitle": "Pending",
   "PeopleCount": "people: {{count}}",
+  "RegistrationDate": "Registration date",
   "RemoveData": "Delete personal data",
   "ResetAuth": "Reset authentication",
   "SearchByGroupMembers": "Search by group members",
@@ -29,6 +30,5 @@
   "SuccessDeletePersonalData": "Personal data has been successfully deleted",
   "SuccessSentInvitation": "The invitation was successfully sent",
   "SuccessSentMultipleInvitatios": "Invitations were successfully sent",
-  "WithoutGroup": "Without group",
-  "RegistrationDate": "Registration date"
+  "WithoutGroup": "Without group"
 }

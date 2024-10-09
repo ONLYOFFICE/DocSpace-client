@@ -358,7 +358,6 @@ const User = ({
               className="label"
               fontWeight={400}
               fontSize="12px"
-              noSelect
               truncate
               color={theme.infoPanel.members.subtitleColor}
               dir="auto"

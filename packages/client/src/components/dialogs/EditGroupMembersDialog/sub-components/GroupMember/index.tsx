@@ -34,7 +34,6 @@ import { Avatar } from "@docspace/shared/components/avatar";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import DefaultUserPhotoUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import { decode } from "he";
-import { filterUserRoleOptions } from "SRC_DIR/helpers";
 import { Text } from "@docspace/shared/components/text";
 import { getUserRoleOptionsByUserAccess } from "@docspace/shared/utils/room-members/getUserRoleOptionsByUserAccess";
 import { getUserRoleOptionsByRoomType } from "@docspace/shared/utils/room-members/getUserRoleOptionsByRoomType";

@@ -63,7 +63,7 @@ import {
   StyledInviteUserBody,
   ErrorWrapper,
 } from "../StyledInvitePanel";
-import { filterGroupRoleOptions } from "SRC_DIR/helpers";
+import { filterPaidRoleOptions } from "SRC_DIR/helpers";
 import AccessSelector from "../../../AccessSelector";
 
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
@@ -179,12 +179,9 @@ const Item = ({
     isRolePaid && (type == "user" || type == "collaborator");
   const isGroupRoleFiltered = isRolePaid && item.isGroup;
 
-  const filteredAccesses = item.isGroup
-    ? filterGroupRoleOptions(accesses)
-    : isUserRolesFilterd
-      ? accesses.filter(
-          (o) => +o.access !== ShareAccessRights.RoomManager && o.key !== "s1",
-        )
+  const filteredAccesses =
+    item.isGroup || isUserRolesFilterd
+      ? filterPaidRoleOptions(accesses)
       : accesses;
 
   const defaultAccess =

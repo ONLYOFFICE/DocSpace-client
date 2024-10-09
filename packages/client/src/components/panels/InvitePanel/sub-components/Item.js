@@ -155,6 +155,8 @@ const Item = ({
     [],
   );
 
+  const type = getUserType(item);
+
   const accesses = getAccessOptions(
     t,
     roomType,
@@ -164,15 +166,13 @@ const Item = ({
     standalone,
   );
 
-  const type = getUserType(item);
-
   const isRolePaid = isPaidUserRole(access);
   const isUserRolesFilterd =
-    isRolePaid && (type == "user" || type == "collaborator");
+    isRolePaid && (type === "user" || type === "collaborator");
   const isGroupRoleFiltered = isRolePaid && item.isGroup;
 
   const filteredAccesses =
-    item.isGroup || isUserRolesFilterd
+    item.isGroup || isUserRolesFilterd || type === "user"
       ? filterPaidRoleOptions(accesses)
       : accesses;
 

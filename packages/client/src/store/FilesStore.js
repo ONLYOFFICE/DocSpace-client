@@ -2506,7 +2506,12 @@ class FilesStore {
         "unarchive-room",
         "leave-room",
         "delete",
+        "remove-shared-room",
       ];
+
+      if (!item.external) {
+        roomOptions = this.removeOptions(roomOptions, ["remove-shared-room"]);
+      }
 
       if (optionsToRemove.length) {
         roomOptions = this.removeOptions(roomOptions, optionsToRemove);

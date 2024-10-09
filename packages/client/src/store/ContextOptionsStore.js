@@ -36,6 +36,7 @@ import FolderLocationReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.s
 import TickRoundedSvgUrl from "PUBLIC_DIR/images/tick.rounded.svg?url";
 import FavoritesReactSvgUrl from "PUBLIC_DIR/images/favorites.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
+import CircleCrossSvgUrl from "PUBLIC_DIR/images/icons/16/circle.cross.svg?url";
 import DownloadAsReactSvgUrl from "PUBLIC_DIR/images/download-as.react.svg?url";
 import RenameReactSvgUrl from "PUBLIC_DIR/images/rename.react.svg?url";
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.svg?url";
@@ -118,7 +119,11 @@ import {
   FileExtensions,
 } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { getFileLink, getFolderLink } from "@docspace/shared/api/files";
+import {
+  getFileLink,
+  getFolderLink,
+  removeSharedFolder,
+} from "@docspace/shared/api/files";
 import { resendInvitesAgain } from "@docspace/shared/api/people";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
@@ -552,6 +557,27 @@ class ContextOptionsStore {
   //       window.matchMedia("(display-mode: " + displayMode + ")").matches,
   //   );
   // };
+
+  onRemoveSharedRooms = async (items) => {
+    if (!Array.isArray(items) || items.length === 0) return;
+
+    const { setGroupMenuBlocked } = this.filesActionsStore;
+    const { addActiveItems } = this.filesStore;
+    const { clearActiveOperations } = this.uploadDataStore;
+
+    const folderIds = items.map((item) => item.id);
+
+    try {
+      setGroupMenuBlocked(true);
+      addActiveItems(null, folderIds);
+      await removeSharedFolder(folderIds);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setGroupMenuBlocked(false);
+      clearActiveOperations([], folderIds);
+    }
+  };
 
   onClickDownload = (item, t) => {
     const { viewUrl, isFolder } = item;
@@ -1741,6 +1767,14 @@ class ContextOptionsStore {
         icon: DownloadReactSvgUrl,
         onClick: () => this.onClickDownload(item, t),
         disabled: !item.security?.Download,
+      },
+      {
+        id: "option_remove-shared-room",
+        key: "remove-shared-room",
+        label: t("Files:RemoveFromList"),
+        icon: CircleCrossSvgUrl,
+        onClick: () => this.onRemoveSharedRooms([item]),
+        disabled: !item.external,
       },
       {
         id: "option_download-as",

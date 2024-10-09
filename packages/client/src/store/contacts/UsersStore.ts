@@ -91,7 +91,7 @@ class UsersStore {
 
   requestRunning = false;
 
-  contactsTab: TContactsTab = "people";
+  contactsTab: TContactsTab = false;
 
   constructor(
     public settingsStore: SettingsStore,

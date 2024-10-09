@@ -32,7 +32,12 @@ export type TContactsSelected =
   | "none"
   | "close";
 
-export type TContactsTab = "people" | "groups" | "inside_group" | "guests";
+export type TContactsTab =
+  | "people"
+  | "groups"
+  | "inside_group"
+  | "guests"
+  | false;
 
 export type TContactsViewAs = "table" | "row";
 

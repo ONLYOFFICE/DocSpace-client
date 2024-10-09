@@ -35,6 +35,7 @@ const useFetchGroup = (groupId, fetchedGroupId, setGroup) => {
   const [, startTransition] = useTransition();
 
   const fetchGroup = async () => {
+    console.log("call");
     if (!groupId) return;
     if (fetchedGroupId === groupId) return;
 

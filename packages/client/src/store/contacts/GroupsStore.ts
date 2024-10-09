@@ -26,40 +26,41 @@
 
 import { makeAutoObservable, runInAction } from "mobx";
 import { TFunction } from "i18next";
+
 import * as groupsApi from "@docspace/shared/api/groups";
-import { Events } from "@docspace/shared/enums";
-import { toastr } from "@docspace/shared/components/toast";
-import Filter from "@docspace/shared/api/groups/filter";
-import InsideGroupFilter from "@docspace/shared/api/people/filter";
 import GroupsFilter from "@docspace/shared/api/groups/filter";
+import { TGroup } from "@docspace/shared/api/groups/types";
+import { toastr } from "@docspace/shared/components/toast";
+import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
+import { UserStore } from "@docspace/shared/store/UserStore";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { Nullable } from "@docspace/shared/types";
+
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
-import config from "PACKAGE_FILE";
-import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import api from "@docspace/shared/api";
-import { TGroup } from "@docspace/shared/api/groups/types";
-import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
-import { getContactsUrl } from "./../../helpers/contacts/utils";
+
+import {
+  editGroup,
+  getContactsUrl,
+  setContactsGroupsFilterUrl,
+} from "SRC_DIR/helpers/contacts";
+
+import InfoPanelStore from "../InfoPanelStore";
+import ClientLoadingStore from "../ClientLoadingStore";
+
+import DialogStore from "./DialogStore";
 
 class GroupsStore {
-  authStore;
-
-  peopleStore;
-
-  infoPanelStore;
-
-  clientLoadingStore;
-
-  groups: any[] | undefined;
+  groups: TGroup[] = [];
 
   selection: TGroup[] = [];
 
-  bufferSelection = null;
+  bufferSelection: Nullable<TGroup> = null;
 
   groupName = "";
 
-  selected = "none";
+  selected: "all" | "none" = "none";
 
   groupsFilter = GroupsFilter.getDefault();
 
@@ -67,63 +68,44 @@ class GroupsStore {
 
   groupsIsIsLoading = false;
 
-  insideGroupIsLoading = false;
-
   currentGroup: TGroup | null = null;
-
-  insideGroupFilter = InsideGroupFilter.getDefault();
 
   insideGroupBackUrl: string | null = null;
 
   insideGroupTempTitle: string | null = null;
 
   constructor(
-    authStore: any,
-    peopleStore: any,
-    infoPanelStore: any,
-    clientLoadingStore: any,
+    public peopleStore: any,
+    public infoPanelStore: InfoPanelStore,
+    public clientLoadingStore: ClientLoadingStore,
+    public userStore: UserStore,
+    public settingsStore: SettingsStore,
+    public dialogStore: DialogStore,
   ) {
-    this.authStore = authStore;
     this.peopleStore = peopleStore;
     this.infoPanelStore = infoPanelStore;
     this.clientLoadingStore = clientLoadingStore;
+    this.userStore = userStore;
+    this.settingsStore = settingsStore;
+    this.dialogStore = dialogStore;
+
     makeAutoObservable(this);
   }
 
   // Groups Filter
 
   setGroupsFilter = (filter = GroupsFilter.getDefault()) => {
-    const key = `GroupsFilter=${this.peopleStore.userStore.user.id}`;
+    const key = `GroupsFilter=${this.userStore.user!.id}`;
+
     const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
     localStorage.setItem(key, value);
 
     this.groupsFilter = filter;
   };
 
-  setGroupsFilterUrl = (filter = GroupsFilter.getDefault()) => {
-    const urlFilter = filter.toUrlParams();
-
-    const newPath = combineUrl(`/accounts/groups/filter?${urlFilter}`);
-    const currentPath = window.location.pathname + window.location.search;
-
-    if (currentPath === newPath) return;
-
-    window.history.replaceState(
-      "",
-      "",
-      combineUrl(window.ClientConfig?.proxy?.url, config.homepage, newPath),
-    );
-  };
-
   setFilterParams = (filter = GroupsFilter.getDefault()) => {
-    this.setGroupsFilterUrl(filter);
+    setContactsGroupsFilterUrl(filter);
     this.setGroupsFilter(filter);
-  };
-
-  resetGroupsFilter = () => {
-    const filter = GroupsFilter.getDefault();
-
-    window.DocSpace.navigate(`accounts/groups/filter?${filter.toUrlParams()}`);
   };
 
   setGroupName = (name: string) => {
@@ -142,56 +124,14 @@ class GroupsStore {
     return this.groups.length < this.groupsFilterTotal;
   }
 
-  get insideGroupFilterTotal() {
-    return this.insideGroupFilter.total;
-  }
-
   get groupsIsFiltered() {
     if (this.groupsFilter.search !== "") return true;
     if (this.groupsFilter.userId !== null) return true;
     return false;
   }
 
-  // Inside Group Filter
-
-  setInsideGroupFilter = (filter) => {
-    const key = `InsideGroupFilter=${this.peopleStore.userStore.user.id}`;
-    const value = `${filter.sortBy},${filter.pageCount},${filter.sortOrder}`;
-    localStorage.setItem(key, value);
-
-    this.insideGroupFilter = filter;
-  };
-
-  setInsideGroupFilterUrl = (filter = InsideGroupFilter.getDefault()) => {
-    if (!filter.group) return;
-    const urlFilter = filter.toUrlParams();
-
-    const newPath = combineUrl(
-      `/accounts/groups/${filter.group}/filter?${urlFilter}`,
-    );
-    const currentPath = window.location.pathname + window.location.search;
-
-    if (currentPath === newPath) return;
-
-    window.history.replaceState(
-      "",
-      "",
-      combineUrl(window.ClientConfig?.proxy?.url, config.homepage, newPath),
-    );
-  };
-
-  setInsideGroupFilterParams = (filter = InsideGroupFilter.getDefault()) => {
-    this.setInsideGroupFilter(filter);
-    this.setInsideGroupFilterUrl(filter);
-  };
-
   setCurrentGroup = (currentGroup: TGroup | null = null) => {
-    console.log("set", currentGroup);
     this.currentGroup = currentGroup;
-  };
-
-  setInsideGroupLoading = (value: boolean) => {
-    this.insideGroupIsLoading = value;
   };
 
   setInsideGroupBackUrl = (url: string) => {
@@ -208,10 +148,10 @@ class GroupsStore {
     withFilterLocalStorage = false,
   ) => {
     this.clientLoadingStore.setIsSectionBodyLoading(true);
-    const filterData = filter ? filter.clone() : Filter.getDefault();
+    const filterData = filter ? filter.clone() : GroupsFilter.getDefault();
 
     const filterStorageItem = localStorage.getItem(
-      `GroupsFilter=${this.peopleStore.userStore.user?.id}`,
+      `GroupsFilter=${this.userStore.user?.id}`,
     );
 
     if (filterStorageItem && withFilterLocalStorage) {
@@ -221,7 +161,7 @@ class GroupsStore {
       filterData.sortOrder = splitFilter[2];
     }
 
-    if (!this.authStore.settingsStore.withPaging) {
+    if (!this.settingsStore.withPaging) {
       const isCustomCountPage =
         filter && filter.pageCount !== 100 && filter.pageCount !== 25;
 
@@ -257,11 +197,6 @@ class GroupsStore {
     });
   };
 
-  getGroupById = async (groupId) => {
-    const res = await groupsApi.getGroupById(groupId);
-    return res;
-  };
-
   updateCurrentGroup = async (groupId: string) => {
     const group = await groupsApi.getGroupById(groupId);
 
@@ -270,7 +205,7 @@ class GroupsStore {
 
   setSelection = (selection: TGroup[]) => (this.selection = selection);
 
-  setBufferSelection = (bufferSelection: any) =>
+  setBufferSelection = (bufferSelection: Nullable<TGroup>) =>
     (this.bufferSelection = bufferSelection);
 
   setSelected = (selected: "all" | "none") => {
@@ -293,19 +228,20 @@ class GroupsStore {
     return [];
   };
 
-  setSelections = (added, removed, clear = false) => {
+  setSelections = (added: Element[], removed: Element[], clear = false) => {
     if (clear) this.selection = [];
 
-    let newSelections = [...this.selection];
+    let newSelections: TGroup[] = [...this.selection];
 
-    // eslint-disable-next-line no-restricted-syntax
-    for (const row of added) {
+    added.forEach((row) => {
       if (!row) return;
 
       const [element] = row.getElementsByClassName("group-item");
       const value = element?.getAttribute("value");
 
-      const splitValue = value && value.split("_");
+      if (!value) return;
+
+      const splitValue = value.split("_");
       const groupId = splitValue.slice(1, -3).join("_");
 
       if (!groupId) return;
@@ -314,19 +250,21 @@ class GroupsStore {
         this.selection.findIndex((g) => g.id === groupId) === -1;
       if (isNotSelected) {
         const group = this.groups.find((g) => g.id === groupId);
-        newSelections.push(group);
+        if (group) newSelections.push(group);
       }
-    }
+    });
 
-    // eslint-disable-next-line no-restricted-syntax
-    for (const row of removed) {
+    removed.forEach((row) => {
       if (!row) return;
 
       const [element] = row.getElementsByClassName("group-item");
       const value = element?.getAttribute("value");
 
-      const splitValue = value && value.split("_");
+      if (!value) return;
+
+      const splitValue = value.split("_");
       const groupId = splitValue.slice(1, -3).join("_");
+
       if (!groupId) return;
 
       const isSelected =
@@ -334,7 +272,7 @@ class GroupsStore {
       if (isSelected) {
         newSelections = newSelections.filter((g) => g.id !== groupId);
       }
-    }
+    });
 
     this.setSelection(newSelections);
   };
@@ -344,7 +282,7 @@ class GroupsStore {
     this.peopleStore.dialogStore.setDeleteGroupDialogVisible(true);
   };
 
-  onDeleteGroup = async (t, groupId) => {
+  onDeleteGroup = async (t: TFunction, groupId: string) => {
     const { getIsInsideGroup, setInfoPanelSelectedGroup } = this.infoPanelStore;
     const isDeletingCurrentGroup =
       getIsInsideGroup() && this.currentGroup?.id === groupId;
@@ -358,12 +296,16 @@ class GroupsStore {
 
     try {
       await groupsApi.deleteGroup(groupId);
-      toastr.success(t("PeopleTranslations:SuccessDeleteGroup"));
+      toastr.success(
+        t(
+          "PeopleTranslations:SuccessDeleteGroup",
+        ) as unknown as React.ReactNode,
+      );
       this.setSelection([]);
       this.getGroups(this.groupsFilter, true);
       this.infoPanelStore.setInfoPanelSelection(null);
       this.setIsLoading(false);
-      this.peopleStore.dialogStore.setDeleteGroupDialogVisible(false);
+      this.dialogStore.setDeleteGroupDialogVisible(false);
 
       if (isDeletingCurrentGroup) {
         setInfoPanelSelectedGroup(null);
@@ -371,36 +313,38 @@ class GroupsStore {
         window.DocSpace.navigate(`accounts/groups`);
       }
     } catch (err) {
-      toastr.error(err.message);
-      console.error(err);
+      toastr.error((err as unknown as { message: string }).message);
       this.setIsLoading(false);
-      this.peopleStore.dialogStore.setDeleteGroupDialogVisible(false);
+      this.dialogStore.setDeleteGroupDialogVisible(false);
     }
   };
 
-  onDeleteAllGroups = (t) => {
+  onDeleteAllGroups = (t: TFunction) => {
     this.setIsLoading(true);
 
     try {
       Promise.all(
         this.selection.map(async (group) => groupsApi.deleteGroup(group.id)),
       ).then(() => {
-        toastr.success(t("PeopleTranslations:SuccessDeleteGroups"));
+        toastr.success(
+          t(
+            "PeopleTranslations:SuccessDeleteGroups",
+          ) as unknown as React.ReactNode,
+        );
         this.setSelection([]);
         this.getGroups(this.groupsFilter, true);
         this.setIsLoading(false);
-        this.peopleStore.dialogStore.setDeleteGroupDialogVisible(false);
+        this.dialogStore.setDeleteGroupDialogVisible(false);
       });
     } catch (err) {
-      toastr.error(err.message);
-      console.error(err);
+      toastr.error((err as unknown as { message: string }).message);
       this.setIsLoading(false);
-      this.peopleStore.dialogStore.setDeleteGroupDialogVisible(false);
+      this.dialogStore.setDeleteGroupDialogVisible(false);
     }
   };
 
   get hasGroupsToRemove() {
-    if (this.peopleStore.userStore.user.isRoomAdmin) {
+    if (this.userStore.user!.isRoomAdmin) {
       return false;
     }
 
@@ -410,7 +354,7 @@ class GroupsStore {
   }
 
   getMultipleGroupsContextOptions = (t: TFunction) => {
-    const { setDeleteGroupDialogVisible } = this.peopleStore.dialogStore;
+    const { setDeleteGroupDialogVisible } = this.dialogStore;
 
     return [
       {
@@ -447,19 +391,13 @@ class GroupsStore {
     this.onDeleteClick(item.name);
   };
 
-  editGroup = (item: TGroup) => {
-    const event: Event & { item?: TGroup } = new Event(Events.GROUP_EDIT);
-    event.item = item;
-    window.dispatchEvent(event);
-  };
-
   getGroupContextOptions = (
-    t,
-    item,
+    t: TFunction,
+    item: TGroup,
     forInfoPanel = false,
     forInsideGroup = false,
   ) => {
-    const { isRoomAdmin } = this.peopleStore.userStore.user;
+    const { isRoomAdmin } = this.userStore.user!;
 
     return [
       !isRoomAdmin &&
@@ -470,7 +408,7 @@ class GroupsStore {
           label: t("PeopleTranslations:EditGroup"),
           title: t("PeopleTranslations:EditGroup"),
           icon: PencilReactSvgUrl,
-          onClick: () => this.editGroup(item),
+          onClick: () => editGroup(item),
         },
       !forInfoPanel && {
         id: "info",
@@ -556,7 +494,7 @@ class GroupsStore {
       setInfoPanelSelection,
       setInfoPanelSelectedGroup,
       getIsInsideGroup,
-    } = this.peopleStore.infoPanelStore;
+    } = this.infoPanelStore;
 
     try {
       const res = await groupsApi.updateGroup(
@@ -572,22 +510,17 @@ class GroupsStore {
       }
 
       if (getIsInsideGroup() && this.currentGroup?.id === groupId) {
-        const filter = this.insideGroupFilter.clone();
-
         this.setCurrentGroup(res);
-        const members = await api.people.getUserList(filter);
-        filter.total = members.total;
-        this.setInsideGroupFilter(filter);
-        this.peopleStore.usersStore.setUsers(members.items);
         this.setInsideGroupTempTitle(res.name);
+        this.peopleStore.usersStore.getUsersList();
       }
 
       if (infoPanelSelection?.id === res.id) {
         setInfoPanelSelection(res);
         setInfoPanelSelectedGroup(res);
       }
-    } catch (err: any) {
-      toastr.error(err.message);
+    } catch (err: unknown) {
+      toastr.error((err as { message: string }).message);
     }
   };
 

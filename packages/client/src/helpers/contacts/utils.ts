@@ -27,6 +27,8 @@ import { matchPath } from "react-router-dom";
 import type { Location } from "@remix-run/router";
 
 import Filter from "@docspace/shared/api/people/filter";
+import GroupsFilter from "@docspace/shared/api/groups/filter";
+import { TGroup } from "@docspace/shared/api/groups/types";
 import { TUser } from "@docspace/shared/api/people/types";
 import { EmployeeStatus, Events } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -40,28 +42,39 @@ import config from "PACKAGE_FILE";
 import { showEmailActivationToast } from "../people-helpers";
 
 import {
+  CONTACTS_ROUTE,
   GROUPS_ROUTE,
+  GROUPS_ROUTE_WITH_FILTER,
   GUESTS_ROUTE,
-  INSIDE_GROUP_ROUTE,
+  GUESTS_ROUTE_WITH_FILTER,
+  INSIDE_GROUP_ROUTE_WITH_FILTER,
   PEOPLE_ROUTE,
+  PEOPLE_ROUTE_WITH_FILTER,
 } from "./constants";
 import { TContactsSelected, TContactsMenuItemdId, TContactsTab } from "./types";
 
 export const getContactsUrl = (contactsTab: TContactsTab, groupId?: string) => {
   let url = "";
 
+  const id =
+    groupId ??
+    matchPath(INSIDE_GROUP_ROUTE_WITH_FILTER, window.DocSpace.location.pathname)
+      ?.params.groupId;
+
   switch (contactsTab) {
     case "people":
-      url = PEOPLE_ROUTE;
+      url = PEOPLE_ROUTE_WITH_FILTER;
       break;
     case "guests":
-      url = GUESTS_ROUTE;
+      url = GUESTS_ROUTE_WITH_FILTER;
       break;
     case "inside_group":
-      url = INSIDE_GROUP_ROUTE.replace(":groupId", groupId ?? "");
+      if (!id) return GROUPS_ROUTE_WITH_FILTER;
+
+      url = INSIDE_GROUP_ROUTE_WITH_FILTER.replace(":groupId", id);
       break;
     case "groups":
-      url = GROUPS_ROUTE;
+      url = GROUPS_ROUTE_WITH_FILTER;
       break;
     default:
       break;
@@ -90,6 +103,22 @@ export const setContactsUsersFilterUrl = (
   );
 };
 
+export const setContactsGroupsFilterUrl = (filter: GroupsFilter) => {
+  const urlFilter = filter.toUrlParams();
+
+  const newPath = combineUrl(`${GROUPS_ROUTE_WITH_FILTER}?${urlFilter}`);
+
+  const currentPath = window.location.pathname + window.location.search;
+
+  if (currentPath === newPath) return;
+
+  window.history.replaceState(
+    "",
+    "",
+    combineUrl(window.ClientConfig?.proxy?.url, config.homepage, newPath),
+  );
+};
+
 export const resetFilter = (contactsTab: TContactsTab, groupId?: string) => {
   const filter = Filter.getDefault();
 
@@ -104,6 +133,14 @@ export const resetFilter = (contactsTab: TContactsTab, groupId?: string) => {
   }
 
   window.DocSpace.navigate(`${url}?${filter.toUrlParams()}`);
+};
+
+export const resetContactsGroupsFilter = () => {
+  const filter = GroupsFilter.getDefault();
+
+  window.DocSpace.navigate(
+    `${GROUPS_ROUTE_WITH_FILTER}?${filter.toUrlParams()}`,
+  );
 };
 
 export const employeeWrapperToMemberModel = (profile: TUser) => {
@@ -207,12 +244,22 @@ export const getContactsView = (
 ): TContactsTab | boolean => {
   const { pathname } = location ?? window.DocSpace.location;
 
-  if (pathname.includes(PEOPLE_ROUTE)) return "people";
-  if (pathname.includes(GROUPS_ROUTE)) return "groups";
-  if (pathname.includes(GUESTS_ROUTE)) return "guests";
-  if (matchPath(INSIDE_GROUP_ROUTE, pathname)) return "inside_group";
+  const isInsideGroup = matchPath(INSIDE_GROUP_ROUTE_WITH_FILTER, pathname);
 
-  if (pathname.includes("accounts")) return true;
+  if (pathname.includes(GUESTS_ROUTE)) return "guests";
+
+  if (isInsideGroup) return "inside_group";
+
+  if (pathname.includes(GROUPS_ROUTE)) return "groups";
+
+  if (pathname.includes(CONTACTS_ROUTE) || pathname.includes(PEOPLE_ROUTE))
+    return "people";
 
   return false;
+};
+
+export const editGroup = (item: TGroup) => {
+  const event: Event & { item?: TGroup } = new Event(Events.GROUP_EDIT);
+  event.item = item;
+  window.dispatchEvent(event);
 };

@@ -39,10 +39,11 @@ import { useTranslation } from "react-i18next";
 import { Events } from "@docspace/shared/enums";
 import { EmptyView } from "@docspace/shared/components/empty-view";
 
+import { resetContactsGroupsFilter } from "SRC_DIR/helpers/contacts";
+
 const EmptyScreenGroups = ({
   isRoomAdmin,
   groupsIsFiltered,
-  resetGroupsFilter,
   setIsLoading,
   theme,
 }) => {
@@ -61,7 +62,7 @@ const EmptyScreenGroups = ({
   const onResetFilter = (event) => {
     event.preventDefault();
     setIsLoading(true);
-    resetGroupsFilter();
+    resetContactsGroupsFilter();
   };
 
   const title = groupsIsFiltered
@@ -125,7 +126,7 @@ const EmptyScreenGroups = ({
 
 export default inject(({ peopleStore, clientLoadingStore, settingsStore }) => {
   const { isRoomAdmin } = peopleStore.userStore.user;
-  const { groupsIsFiltered, resetGroupsFilter } = peopleStore.groupsStore;
+  const { groupsIsFiltered } = peopleStore.groupsStore;
 
   const { setIsSectionBodyLoading } = clientLoadingStore;
 
@@ -136,7 +137,6 @@ export default inject(({ peopleStore, clientLoadingStore, settingsStore }) => {
   return {
     isRoomAdmin,
     groupsIsFiltered,
-    resetGroupsFilter,
     setIsLoading,
     theme: settingsStore.theme,
   };

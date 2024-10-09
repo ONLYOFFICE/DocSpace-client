@@ -52,7 +52,7 @@ const COLUMNS_TRASH_SIZE_INFO_PANEL = `trashColumnsSizeInfoPanel_ver-${TableVers
 const COLUMNS_RECENT_SIZE_INFO_PANEL = `recentColumnsSizeInfoPanel_ver-${TableVersions.Recent}`;
 const COLUMNS_VDR_INDEXING_SIZE_INFO_PANEL = `vdrIndexingColumnsSizeInfoPanel_ver-${TableVersions.Recent}`;
 const COLUMNS_PEOPLE_INFO_PANEL_SIZE = `infoPanelPeopleColumnsSize_ver-${TableVersions.People}`;
-const COLUMNS_GUESTS_INFO_PANEL_SIZE = `infoPanelGuestsPeopleColumnsSize_ver-${TableVersions.Guests}`;
+const COLUMNS_GUESTS_INFO_PANEL_SIZE = `infoPanelGuestsColumnsSize_ver-${TableVersions.Guests}`;
 const COLUMNS_INSIDE_GROUPS_INFO_PANEL_SIZE = `infoPanelInsideGroupPeopleColumnsSize_ver-${TableVersions.InsideGroup}`;
 
 class TableStore {
@@ -308,8 +308,8 @@ class TableStore {
       }
 
       if (isContactsGuests) {
-        this.setGuestsColumnInviter(splitColumns.includes("Inviter"));
         this.setGuestsColumnEmail(splitColumns.includes("Mail"));
+        this.setGuestsColumnInviter(splitColumns.includes("Inviter"));
         this.setGuestsColumnInvitedDate(splitColumns.includes("InvitedDate"));
 
         return;

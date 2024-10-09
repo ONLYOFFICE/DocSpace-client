@@ -79,7 +79,7 @@ class UsersStore {
     isAdmin: 0,
   };
 
-  selected = "none";
+  selected: TContactsSelected = "none";
 
   providers: TThirdPartyProvider[] = [];
 
@@ -122,6 +122,9 @@ class UsersStore {
   };
 
   setContactsTab = (contactsTab: TContactsTab) => {
+    if (contactsTab !== this.contactsTab) {
+      this.filter = Filter.getDefault();
+    }
     this.contactsTab = contactsTab;
   };
 
@@ -179,7 +182,7 @@ class UsersStore {
   };
 
   getUsersList = async (
-    filter: Filter,
+    filter?: Filter,
     updateFilter = false,
     withFilterLocalStorage = false,
   ) => {
@@ -219,7 +222,7 @@ class UsersStore {
       }
     }
 
-    if (currentGroup?.id) {
+    if (currentGroup?.id && this.contactsTab === "inside_group") {
       filterData.group = currentGroup.id;
     }
 

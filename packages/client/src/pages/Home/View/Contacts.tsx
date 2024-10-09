@@ -26,13 +26,13 @@
 
 import { Consumer } from "@docspace/shared/utils";
 
-import { AccountsSectionBodyContent } from "../Section";
+import { ContactsSectionBodyContent } from "../Section";
 
-export const AccountsView = () => {
+export const ContactsView = () => {
   return (
     <Consumer>
       {(context) => (
-        <AccountsSectionBodyContent sectionWidth={context.sectionWidth} />
+        <ContactsSectionBodyContent sectionWidth={context.sectionWidth} />
       )}
     </Consumer>
   );

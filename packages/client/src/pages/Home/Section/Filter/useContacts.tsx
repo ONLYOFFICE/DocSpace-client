@@ -51,8 +51,7 @@ import { TTranslation } from "@docspace/shared/types";
 
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
-import { TContactsTab } from "SRC_DIR/helpers/contacts";
-import { getContactsUrl } from "SRC_DIR/helpers/contacts/utils";
+import { TContactsTab, getContactsUrl } from "SRC_DIR/helpers/contacts";
 import { SortByFieldName } from "SRC_DIR/helpers/constants";
 
 type TFilterValues = (TGroupItem | TItem)[];
@@ -896,6 +895,7 @@ export const useContactsFilter = ({
           newFilter.withoutGroup = false;
           newFilter.group = null;
         }
+
         if (group === FilterGroups.filterInviter) {
           newFilter.inviterId = null;
         }

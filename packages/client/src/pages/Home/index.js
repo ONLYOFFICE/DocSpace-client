@@ -246,8 +246,6 @@ const PureHome = (props) => {
   });
 
   useContacts({
-    t,
-
     isContactsPage,
     contactsView:
       typeof contactsView === "string"

@@ -31,12 +31,10 @@ import { isDesktop } from "@docspace/shared/utils";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { AuthStore } from "@docspace/shared/store/AuthStore";
 import { Nullable } from "@docspace/shared/types";
 
 import type { TContactsViewAs } from "SRC_DIR/helpers/contacts";
 
-import SettingsSetupStore from "../SettingsSetupStore";
 import AccessRightsStore from "../AccessRightsStore";
 import InfoPanelStore from "../InfoPanelStore";
 import ClientLoadingStore from "../ClientLoadingStore";
@@ -73,10 +71,7 @@ class PeopleStore {
   usersStore: Nullable<UsersStore> = null;
 
   constructor(
-    public authStore: AuthStore,
-    public setupStore: SettingsSetupStore,
     public accessRightsStore: AccessRightsStore,
-    public dialogsStore: DialogStore,
     public infoPanelStore: InfoPanelStore,
     public userStore: UserStore,
     public tfaStore: TfaStore,
@@ -84,24 +79,27 @@ class PeopleStore {
     public clientLoadingStore: ClientLoadingStore,
     public profileActionsStore: ProfileActionsStore,
   ) {
-    this.authStore = authStore;
     this.infoPanelStore = infoPanelStore;
-    this.setupStore = setupStore;
     this.accessRightsStore = accessRightsStore;
-    this.dialogsStore = dialogsStore;
     this.userStore = userStore;
+    this.tfaStore = tfaStore;
+    this.settingsStore = settingsStore;
+    this.clientLoadingStore = clientLoadingStore;
+    this.profileActionsStore = profileActionsStore;
 
+    this.dialogStore = new DialogStore();
     this.contactsHotkeysStore = new ContactsHotkeysStore(this);
+    this.inviteLinksStore = new InviteLinksStore(userStore);
+
     this.groupsStore = new GroupsStore(
-      authStore,
       this,
       infoPanelStore,
       clientLoadingStore,
+      userStore,
+      settingsStore,
+      this.dialogStore,
     );
     this.targetUserStore = new TargetUserStore(this, userStore);
-
-    this.inviteLinksStore = new InviteLinksStore(userStore);
-    this.dialogStore = new DialogStore();
 
     this.usersStore = new UsersStore(
       settingsStore,

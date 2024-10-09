@@ -25,10 +25,15 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 export {
+  CONTACTS_ROUTE,
   PEOPLE_ROUTE,
   GROUPS_ROUTE,
   GUESTS_ROUTE,
   INSIDE_GROUP_ROUTE,
+  PEOPLE_ROUTE_WITH_FILTER,
+  GROUPS_ROUTE_WITH_FILTER,
+  GUESTS_ROUTE_WITH_FILTER,
+  INSIDE_GROUP_ROUTE_WITH_FILTER,
 } from "./constants";
 
 export type {
@@ -40,7 +45,9 @@ export type {
 
 export {
   setContactsUsersFilterUrl,
+  setContactsGroupsFilterUrl,
   resetFilter,
+  resetContactsGroupsFilter,
   employeeWrapperToMemberModel,
   getUserChecked,
   getContactsMenuItemId,
@@ -49,4 +56,6 @@ export {
   onDeletePersonalDataClick,
   onInviteAgainClick,
   getContactsView,
+  getContactsUrl,
+  editGroup,
 } from "./utils";

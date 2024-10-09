@@ -81,8 +81,6 @@ const useContacts = ({
     setIsLoading(true);
     setContactsTab(contactsView);
 
-    console.log(contactsView);
-
     const isInsideGroup = contactsView === "inside_group";
     const isGuests = contactsView === "guests";
     const isGroups = contactsView === "groups";
@@ -103,6 +101,10 @@ const useContacts = ({
         newFilter.area = isGuests ? "guests" : "people";
 
         if (groupId) newFilter.group = groupId;
+
+        if (isGuests) {
+          newFilter.group = null;
+        }
 
         await Promise.all([
           getUsersList(newFilter, true, true),

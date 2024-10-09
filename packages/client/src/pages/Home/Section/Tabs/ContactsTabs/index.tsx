@@ -40,12 +40,13 @@ import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 import {
   getContactsView,
-  GROUPS_ROUTE,
-  GUESTS_ROUTE,
-  PEOPLE_ROUTE,
+  GROUPS_ROUTE_WITH_FILTER,
+  GUESTS_ROUTE_WITH_FILTER,
+  PEOPLE_ROUTE_WITH_FILTER,
 } from "SRC_DIR/helpers/contacts";
 import { Badge } from "@docspace/shared/components/badge";
 import { globalColors } from "@docspace/shared/themes";
+import Filter from "@docspace/shared/api/people/filter";
 
 type ContactsTabsProps = {
   showBodyLoader: ClientLoadingStore["showBodyLoader"];
@@ -56,6 +57,7 @@ type ContactsTabsProps = {
   setGroupsSelection: GroupsStore["setSelection"];
   setGroupsBufferSelection: GroupsStore["setBufferSelection"];
 
+  userId: TUser["id"];
   isVisitor: TUser["isVisitor"];
   isCollaborator: TUser["isCollaborator"];
 };
@@ -66,6 +68,7 @@ const ContactsTabs = ({
   setGroupsSelection,
   setUsersBufferSelection,
   setGroupsBufferSelection,
+  userId,
   isVisitor,
   isCollaborator,
 }: ContactsTabsProps) => {
@@ -78,13 +81,13 @@ const ContactsTabs = ({
   const onPeople = () => {
     setGroupsSelection([]);
     setGroupsBufferSelection(null);
-    navigate(PEOPLE_ROUTE);
+    navigate(PEOPLE_ROUTE_WITH_FILTER);
   };
 
   const onGroups = () => {
     setUsersSelection([]);
     setUsersBufferSelection(null);
-    navigate(GROUPS_ROUTE);
+    navigate(GROUPS_ROUTE_WITH_FILTER);
   };
 
   const onGuests = () => {
@@ -94,7 +97,12 @@ const ContactsTabs = ({
     setGroupsSelection([]);
     setGroupsBufferSelection(null);
 
-    navigate(GUESTS_ROUTE);
+    const filter = Filter.getDefault();
+
+    filter.area = "guests";
+    filter.inviterId = userId;
+
+    navigate(`${GUESTS_ROUTE_WITH_FILTER}?${filter.toUrlParams()}`);
   };
 
   if (contactsView === "inside_group") return null;
@@ -155,7 +163,7 @@ export default inject(
     const { showBodyLoader } = clientLoadingStore;
     const { usersStore, groupsStore } = peopleStore;
 
-    const { isVisitor, isCollaborator } = userStore.user!;
+    const { isVisitor, isCollaborator, id: userId } = userStore.user!;
 
     const {
       setSelection: setUsersSelection,
@@ -173,6 +181,7 @@ export default inject(
       setGroupsSelection,
       setGroupsBufferSelection,
 
+      userId,
       isVisitor,
       isCollaborator,
     };

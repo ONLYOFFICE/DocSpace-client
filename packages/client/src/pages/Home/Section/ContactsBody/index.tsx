@@ -30,7 +30,6 @@ import { useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 
 import withLoader from "SRC_DIR/HOCs/withLoader";
-
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
 import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";

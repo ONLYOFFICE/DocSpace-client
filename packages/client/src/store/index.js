@@ -198,10 +198,7 @@ const profileActionsStore = new ProfileActionsStore(
 );
 
 const peopleStore = new PeopleStore(
-  authStore,
-  setupStore,
   accessRightsStore,
-  dialogsStore,
   infoPanelStore,
   userStore,
   tfaStore,

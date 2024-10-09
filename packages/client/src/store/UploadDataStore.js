@@ -787,8 +787,6 @@ class UploadDataStore {
     const { files, setFiles, folders, setFolders, filter, setFilter } =
       this.filesStore;
 
-    const { withPaging } = this.settingsStore;
-
     if (window.location.pathname.indexOf("/history") === -1) {
       const newFiles = files;
       const newFolders = folders;
@@ -852,10 +850,7 @@ class UploadDataStore {
       };
 
       const isFiltered =
-        filter.filterType ||
-        filter.authorType ||
-        filter.search ||
-        (withPaging && filter.page !== 0);
+        filter.filterType || filter.authorType || filter.search;
 
       if ((!currentFile && !folderInfo) || isFiltered) return;
       if (folderInfo && this.selectedFolderStore.id === folderInfo.id) return;
@@ -868,17 +863,7 @@ class UploadDataStore {
         }
       }
 
-      if (filter.total >= filter.pageCount && withPaging) {
-        if (files.length) {
-          fileIndex === -1 && newFiles.pop();
-          addNewFile();
-        } else {
-          newFolders.pop();
-          addNewFile();
-        }
-      } else {
-        addNewFile();
-      }
+      addNewFile();
     }
   };
 
@@ -1439,7 +1424,6 @@ class UploadDataStore {
 
   finishUploadFiles = (t) => {
     const { fetchFiles, filter } = this.filesStore;
-    const { withPaging } = this.settingsStore;
 
     const filesWithErrors = this.files.filter((f) => f.error);
 
@@ -1492,7 +1476,6 @@ class UploadDataStore {
 
     if (this.files.length > 0) {
       const toFolderId = this.files[0]?.toFolderId;
-      withPaging && fetchFiles(toFolderId, filter);
 
       if (toFolderId) {
         const { socketHelper } = this.settingsStore;
@@ -1756,17 +1739,10 @@ class UploadDataStore {
   };
 
   moveToCopyTo = (destFolderId, pbData, isCopy, fileIds, folderIds) => {
-    const {
-      fetchFiles,
-      filter,
-      isEmptyLastPageAfterOperation,
-      resetFilterPage,
-      removeFiles,
-    } = this.filesStore;
+    const { removeFiles } = this.filesStore;
 
     const { clearSecondaryProgressData, setSecondaryProgressBarData, label } =
       this.secondaryProgressDataStore;
-    const { withPaging } = this.settingsStore;
     const isMovingSelectedFolder =
       !isCopy && folderIds && this.selectedFolderStore.id === folderIds[0];
 
@@ -1779,41 +1755,13 @@ class UploadDataStore {
     }
 
     if (!isCopy || destFolderId === this.selectedFolderStore.id) {
-      let newFilter;
-
-      if (!withPaging) {
-        !isCopy && removeFiles(fileIds, folderIds);
-        this.clearActiveOperations(fileIds, folderIds);
-        setTimeout(
-          () => clearSecondaryProgressData(pbData.operationId),
-          TIMEOUT,
-        );
-        isMovingSelectedFolder &&
-          this.navigateToNewFolderLocation(this.selectedFolderStore.id);
-        this.dialogsStore.setIsFolderActions(false);
-        return;
-      }
-
-      if (isEmptyLastPageAfterOperation()) {
-        newFilter = resetFilterPage();
-      }
-
-      fetchFiles(
-        updatedFolder,
-        newFilter ? newFilter : filter,
-        true,
-        true,
-        false,
-      ).finally(() => {
-        this.clearActiveOperations(fileIds, folderIds);
-        setTimeout(
-          () => clearSecondaryProgressData(pbData.operationId),
-          TIMEOUT,
-        );
-        isMovingSelectedFolder &&
-          this.navigateToNewFolderLocation(this.selectedFolderStore.id);
-        this.dialogsStore.setIsFolderActions(false);
-      });
+      !isCopy && removeFiles(fileIds, folderIds);
+      this.clearActiveOperations(fileIds, folderIds);
+      setTimeout(() => clearSecondaryProgressData(pbData.operationId), TIMEOUT);
+      isMovingSelectedFolder &&
+        this.navigateToNewFolderLocation(this.selectedFolderStore.id);
+      this.dialogsStore.setIsFolderActions(false);
+      return;
     } else {
       this.clearActiveOperations(fileIds, folderIds);
       setSecondaryProgressBarData({

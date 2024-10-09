@@ -88,7 +88,6 @@ const PeopleRowContainer = ({
   fetchMoreAccounts,
   hasMoreAccounts,
   filterTotal,
-  withPaging,
   currentDeviceType,
 }) => {
   useViewEffect({
@@ -100,7 +99,7 @@ const PeopleRowContainer = ({
   return peopleList.length !== 0 || !isFiltered ? (
     <StyledRowContainer
       className="people-row-container"
-      useReactWindow={!withPaging}
+      useReactWindow
       fetchMoreFiles={fetchMoreAccounts}
       hasMoreFiles={hasMoreAccounts}
       itemCount={filterTotal}
@@ -130,7 +129,7 @@ export default inject(
       viewAs: accountsViewAs,
       setViewAs,
     } = peopleStore;
-    const { theme, withPaging, currentDeviceType } = settingsStore;
+    const { theme, currentDeviceType } = settingsStore;
     const { peopleList, hasMoreAccounts, fetchMoreAccounts } = usersStore;
     const { filterTotal, isFiltered } = filterStore;
 
@@ -142,7 +141,6 @@ export default inject(
       setViewAs,
       theme,
       infoPanelVisible,
-      withPaging,
 
       fetchMoreAccounts,
       hasMoreAccounts,

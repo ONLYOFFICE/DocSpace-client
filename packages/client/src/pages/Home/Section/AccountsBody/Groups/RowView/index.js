@@ -41,7 +41,6 @@ const RowView = ({
   hasMoreGroups,
   fetchMoreGroups,
   filterTotal,
-  withPaging,
   currentDeviceType,
 }) => {
   useViewEffect({
@@ -56,7 +55,7 @@ const RowView = ({
   return (
     <Styled.GroupsRowContainer
       className="people-row-container"
-      useReactWindow={!withPaging}
+      useReactWindow
       fetchMoreFiles={fetchMoreGroups}
       hasMoreFiles={hasMoreGroups}
       itemCount={filterTotal}
@@ -84,7 +83,5 @@ export default inject(({ peopleStore, settingsStore }) => ({
   fetchMoreGroups: peopleStore.groupsStore.fetchMoreGroups,
   filterTotal: peopleStore.groupsStore.groupsFilterTotal,
   isFiltered: peopleStore.groupsStore.groupsIsFiltered,
-
-  withPaging: settingsStore.withPaging,
   currentDeviceType: settingsStore.currentDeviceType,
 }))(observer(RowView));

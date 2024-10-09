@@ -42,7 +42,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { getUserRoleOptions } from "@docspace/shared/utils/room-members/getUserRoleOptions";
 import { EmployeeStatus, ShareAccessRights } from "@docspace/shared/enums";
-import { getUserRole, getUserTypeLabel } from "@docspace/shared/utils/common";
+import { getUserType, getUserTypeLabel } from "@docspace/shared/utils/common";
 import { TGroupMemberInvitedInRoom } from "@docspace/shared/api/groups/types";
 import { Box } from "@docspace/shared/components/box";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
@@ -77,19 +77,9 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
     member.owner ||
     (member.userAccess && member.userAccess !== member.groupAccess);
 
-  let type;
-  if (user.isOwner) type = "owner";
-  else if (user.isAdmin) type = "admin";
-  else if (user.isRoomAdmin) type = "manager";
-  else if (user.isCollaborator) type = "collaborator";
-  else type = "user";
+  const type = getUserType(user);
 
-  const role = getUserRole(user, userRole?.type);
-
-  const typeLabel = getUserTypeLabel(
-    role as "owner" | "admin" | "user" | "collaborator" | "manager",
-    t,
-  );
+  const typeLabel = getUserTypeLabel(type, t);
 
   let selectedUserRoleCBOption;
   if (user.isOwner)

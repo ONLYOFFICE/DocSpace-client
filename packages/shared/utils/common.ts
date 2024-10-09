@@ -298,20 +298,12 @@ export function isAdmin(currentUser: TUser) {
   );
 }
 
-export const getUserRole = (user: TUser) => {
+export const getUserType = (user: TUser) => {
   if (user.isOwner) return "owner";
-  if (
-    isAdmin(user) ||
-    user.access === ShareAccessRights.RoomManager ||
-    user.access === ShareAccessRights.Collaborator
-  )
-    // TODO: Change to People Product Id const
-    return "admin";
-  // TODO: Need refactoring
-  if (user.isVisitor) return "user";
-  if (user.isCollaborator) return "collaborator";
+  if (isAdmin(user)) return "admin";
   if (user.isRoomAdmin) return "manager";
-
+  if (user.isCollaborator) return "collaborator";
+  if (user.isVisitor) return "user";
   return "user";
 };
 

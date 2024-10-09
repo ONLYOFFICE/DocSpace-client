@@ -44,7 +44,7 @@ import { isMobileOnly } from "react-device-detect";
 import { toastr } from "@docspace/shared/components/toast";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 import {
-  getUserRole,
+  getUserType,
   convertLanguage,
   getUserTypeName,
   getUserTypeDescription,
@@ -149,7 +149,7 @@ const MainProfile = (props) => {
     }
   }, []);
 
-  const role = getUserRole(profile);
+  const role = getUserType(profile);
 
   const sendActivationLinkAction = () => {
     sendActivationLink && sendActivationLink().then(showEmailActivationToast);

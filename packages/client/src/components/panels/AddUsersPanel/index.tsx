@@ -48,7 +48,7 @@ import {
 import { toastr } from "@docspace/shared/components/toast";
 import { Text } from "@docspace/shared/components/text";
 import useLoadingWithTimeout from "@docspace/shared/hooks/useLoadingWithTimeout";
-import { getUserRole } from "@docspace/shared/utils/common";
+import { getUserType } from "@docspace/shared/utils/common";
 import Filter from "@docspace/shared/api/people/filter";
 import { getMembersList, getUserList } from "@docspace/shared/api/people";
 import {
@@ -94,7 +94,7 @@ const toListItem = (
       groups,
     } = item;
 
-    const role = getUserRole(item);
+    const role = getUserType(item);
 
     const userAvatar = hasAvatar ? avatar : DefaultUserPhoto;
 

@@ -36,7 +36,7 @@ import {
 import { TThirdPartyProvider } from "@docspace/shared/api/settings/types";
 
 import { EmployeeStatus, EmployeeType, Events } from "@docspace/shared/enums";
-import { getUserRole } from "@docspace/shared/utils/common";
+import { getUserType } from "@docspace/shared/utils/common";
 import { Nullable } from "@docspace/shared/types";
 import { getCookie, getCorrectDate } from "@docspace/shared/utils";
 import { LANGUAGE } from "@docspace/shared/constants";
@@ -378,7 +378,7 @@ class UsersStore {
     isUserSSO: boolean,
     isUserLDAP: boolean,
     statusType: ReturnType<typeof getUserStatus>,
-    userRole: ReturnType<typeof getUserRole>,
+    userRole: ReturnType<typeof getUserType>,
     status: EmployeeStatus,
   ) => {
     if (!this.userStore.user) return;
@@ -572,7 +572,7 @@ class UsersStore {
     } = user;
 
     const statusType = getUserStatus(user);
-    const role = getUserRole(user);
+    const role = getUserType(user);
     const isMySelf =
       (this.userStore.user && user.userName === this.userStore.user.userName) ??
       false;
@@ -1040,10 +1040,10 @@ class UsersStore {
         ? [
             users[0].role
               ? users[0].role
-              : getUserRole(users[0] as unknown as TUser),
+              : getUserType(users[0] as unknown as TUser),
           ]
         : users.map((u) =>
-            u.role ? u.role : getUserRole(u as unknown as TUser),
+            u.role ? u.role : getUserType(u as unknown as TUser),
           );
 
     if (users.length > 1) {

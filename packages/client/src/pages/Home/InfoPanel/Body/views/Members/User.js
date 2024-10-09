@@ -36,7 +36,7 @@ import DefaultUserPhotoUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82
 import { toastr } from "@docspace/shared/components/toast";
 import { isMobileOnly, isMobile } from "react-device-detect";
 import { decode } from "he";
-import { filterGroupRoleOptions, filterUserRoleOptions } from "SRC_DIR/helpers";
+import { filterPaidRoleOptions } from "SRC_DIR/helpers";
 
 import { getUserRole, getUserTypeLabel } from "@docspace/shared/utils/common";
 import { Text } from "@docspace/shared/components/text";
@@ -88,12 +88,9 @@ const User = ({
   );
 
   const userRole = membersHelper.getOptionByUserAccess(user.access, user);
-  const userRoleOptions = user.isGroup
-    ? filterGroupRoleOptions(fullRoomRoleOptions)
-    : !user.isAdmin && !user.isOwner && !user.isRoomAdmin
-      ? fullRoomRoleOptions.filter(
-          (o) => +o.access !== ShareAccessRights.RoomManager && o.key !== "s1",
-        )
+  const userRoleOptions =
+    user.isGroup || (!user.isAdmin && !user.isOwner && !user.isRoomAdmin)
+      ? filterPaidRoleOptions(fullRoomRoleOptions)
       : fullRoomRoleOptions;
 
   const onRepeatInvitation = async () => {

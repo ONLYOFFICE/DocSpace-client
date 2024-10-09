@@ -33,7 +33,7 @@ export const checkIfAccessPaid = (access: ShareAccessRights) => {
   );
 };
 
-export const filterGroupRoleOptions = (
+export const filterPaidRoleOptions = (
   options: { access: ShareAccessRights; key: string }[],
 ) => {
   if (!options) return options;

@@ -196,10 +196,7 @@ const Item = ({
     ? roomId === -1 || isRolePaid
       ? getUserTypeLabel(type, t)
       : t("Common:Guest")
-    : (type === "user" && defaultAccess?.type !== type) ||
-        (defaultAccess?.type === "manager" &&
-          type !== "admin" &&
-          type !== "owner")
+    : defaultAccess?.type === "manager" && type !== "admin" && type !== "owner"
       ? getUserTypeLabel(defaultAccess.type, t)
       : getUserTypeLabel(type, t);
 

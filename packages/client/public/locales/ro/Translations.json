@@ -39,7 +39,6 @@
   "RoleReviewerDescription": "Operaţii cu fişiere existente: vizualizare, revizuire, comentare.",
   "RoleRoomAdminDescription": "Administratorii sălii pot crea şi gestiona sălile atribuite, invita noi utilizatori şi atribui roluri de administrator sală și de nivel inferior. Toți administratorii pot accesa secțiunea Dokumenty",
   "RoleRoomAdminFormRoomDescription": "Administratorii sălilor pot crea şi gestiona sălile, pot invita noi utilizatori şi pot atribui roluri de administrator sală și de nivel inferior. Administratorii sălilor pot încărca formulare în sala și sunt oferite acces complet la foldere Formulare completate și În curs de completare.",
-  "RoleUserDescription": "Utilizatorii pot accesa doar sălile în care sunt invitaţi de către administratori. Nu au permisiunea de a crea săli, dosare sau fişiere.",
   "RoleViewer": "Vizualizator",
   "RoleViewerDescription": "Vizualizare fişier",
   "SearchByHeadOfGroup": "Căutare după Șef de grupă",

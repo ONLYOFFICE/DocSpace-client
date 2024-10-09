@@ -39,7 +39,6 @@
   "RoleReviewerDescription": "Mevcut dosyalarla işlemler: görüntüleme, gözden geçirme, yorum yapma.",
   "RoleRoomAdminDescription": "Oda yöneticileri, atanan odaları oluşturabilir ve yönetebilir, yeni kullanıcılar davet edebilir ve oda yöneticisi ve alt düzey rolleri atayabilir. Tüm yöneticilerin Belgeler bölümüne erişimi vardır.",
   "RoleRoomAdminFormRoomDescription": "Oda yöneticileri oda oluşturabilir ve yönetebilir, yeni kullanıcılar davet edebilir ve oda yöneticisi veya daha düşük roller atayabilirler. Oda yöneticileri odaya form yükleyebilir ve Tamamlandı ve İşleniyor klasörlerine tam erişime sahip olabilirler.",
-  "RoleUserDescription": "Kullanıcılar, yalnızca yöneticiler tarafından davet edildikleri odalara erişebilir. Kendi odalarını, klasörlerini veya dosyalarını oluşturamazlar.",
   "RoleViewer": "Görüntüleyici",
   "RoleViewerDescription": "Dosya görüntüleme",
   "SearchByHeadOfGroup": "Grup Başkanına göre ara",

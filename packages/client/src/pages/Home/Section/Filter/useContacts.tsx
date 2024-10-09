@@ -676,7 +676,7 @@ export const useContactsFilter = ({
             id: "filter_group-without-group",
             key: FilterKeys.me,
             group: FilterGroups.filterInviter,
-            label: t("Common:Me"),
+            label: t("Common:MeLabel"),
           },
           {
             id: "filter_group-other",

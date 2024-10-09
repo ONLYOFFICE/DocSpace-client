@@ -362,7 +362,7 @@ class UploadDataStore {
     this.uploadedFilesSize = newSize;
 
     const newTotalSize = sumBy(this.files, (f) =>
-      f.file && !this.uploaded ? f.file.size : 0,
+      !f.isCalculated && f.file && !this.uploaded ? f.file.size : 0,
     );
 
     const newPercent = (newSize / newTotalSize) * 100;
@@ -1534,6 +1534,11 @@ class UploadDataStore {
     this.converted = true;
     this.uploadedFilesSize = 0;
     this.asyncUploadObj = {};
+
+    this.files = this.files.map((f) => {
+      f.isCalculated = true;
+      return f;
+    });
 
     const uploadData = {
       filesSize: 0,

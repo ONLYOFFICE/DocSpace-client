@@ -28,6 +28,7 @@ import styled, { css } from "styled-components";
 
 import { Base } from "@docspace/shared/themes";
 import { mobile, tablet, desktop } from "@docspace/shared/utils";
+import { TextUserSelect } from "@docspace/shared/utils";
 
 const StyledInfoPanelBody = styled.div`
   height: auto;
@@ -61,6 +62,8 @@ const StyledTitle = styled.div`
   padding-block: 24px;
   padding-inline: 20px 0;
   margin-inline-start: -20px;
+
+  ${TextUserSelect}
 
   background: ${(props) => props.theme.infoPanel.backgroundColor};
 
@@ -225,6 +228,8 @@ const StyledProperties = styled.div`
   width: 100%;
   gap: 8px;
   padding-bottom: 20px;
+
+  ${TextUserSelect}
 
   .property {
     width: 100%;

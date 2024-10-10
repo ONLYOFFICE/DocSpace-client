@@ -39,7 +39,6 @@
   "RoleReviewerDescription": "Hoạt động với các tập tin hiện có: xem, xem lại, nhận xét.",
   "RoleRoomAdminDescription": "Quản trị viên phòng có thể tạo và quản lý các phòng được chỉ định, mời người dùng mới và chỉ định vai trò từ quản trị viên phòng trở xuống. Tất cả quản trị viên đều có quyền truy cập vào phần Cá nhân.",
   "RoleRoomAdminFormRoomDescription": "Quản trị viên phòng có thể tạo và quản lý các phòng, mời người dùng mới và chỉ định vai trò  quản trị viên phòng hoặc thấp hơn. Quản trị viên phòng có thể tải biểu mẫu lên phòng và có toàn quyền truy cập vào các thư mục Hoàn thành và Đang xử lý.",
-  "RoleUserDescription": "Người dùng chỉ có thể truy cập vào các phòng mà họ được quản trị viên mời. Họ không thể tạo phòng, thư mục hoặc tập tin riêng.",
   "RoleViewer": "Người xem",
   "RoleViewerDescription": "Xem tập tin",
   "SearchByHeadOfGroup": "Tìm kiếm theo Trưởng nhóm",

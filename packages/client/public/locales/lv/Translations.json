@@ -39,7 +39,6 @@
   "RoleReviewerDescription": "Darbības ar esošajiem failiem: skatīšana, pārskatīšana, komentēšana.",
   "RoleRoomAdminDescription": "Telpu administratori var izveidot un pārvaldīt piešķirtās telpas, uzaicināt jaunus lietotājus un piešķirt telpas administratora un zemāka līmeņa funkcijas. Visiem administratoriem ir piekļuve sadaļai Dokumenti.",
   "RoleRoomAdminFormRoomDescription": "Telpu administratori var izveidot un pārvaldīt telpas, uzaicināt jaunus lietotājus un piešķirt telpas administratora vai zemāka līmeņa lomas. Telpu administratori var augšupielādēt veidlapas telpā, un viņiem ir pilnīga piekļuve mapēm Pabeigts un Nepabeigts.",
-  "RoleUserDescription": "Lietotāji var piekļūt tikai tām telpām, uz kurām viņus ir uzaicinājuši administratori. Viņi nevar izveidot savas telpas, mapes vai failus.",
   "RoleViewer": "Skatītājs",
   "RoleViewerDescription": "Failu skatīšana",
   "SearchByHeadOfGroup": "Meklēt pēc grupas vadītāja",

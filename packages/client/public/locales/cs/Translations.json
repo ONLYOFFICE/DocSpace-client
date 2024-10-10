@@ -39,7 +39,6 @@
   "RoleReviewerDescription": "Operace s existujícími soubory: prohlížení, prohlížení, komentování.",
   "RoleRoomAdminDescription": "Správci místností mohou vytvářet a spravovat přidělené místnosti, zvát nové uživatele a přidělovat role správce místnosti a nižší. Všichni správci mají přístup do sekce Dokumenty.",
   "RoleRoomAdminFormRoomDescription": "Správci místností mohou vytvářet a spravovat místnosti, zvát nové uživatele a přidělovat role správce místnosti nebo nižší. Správci místností mohou do místnosti nahrávat formuláře a mají plný přístup do složek Dokončeno a V procesu.",
-  "RoleUserDescription": "Uživatelé mají přístup pouze do místností, do kterých je pozvali správci. Nemohou vytvářet vlastní místnosti, složky ani soubory.",
   "RoleViewer": "Prohlížeč",
   "RoleViewerDescription": "Prohlížení souborů",
   "SearchByHeadOfGroup": "Vyhledávání podle vedoucího skupiny",

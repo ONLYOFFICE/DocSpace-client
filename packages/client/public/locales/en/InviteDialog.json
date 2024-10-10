@@ -3,7 +3,6 @@
   "AddManuallyDescriptionAccounts": "Invite new users to {{productName}} personally via email",
   "AddManuallyDescriptionRoom": "Add existing {{productName}} users to the room using the names or invite new users personally via email",
   "EmailErrorMessage": "Email address not valid. You can edit the email by double-clicking on it.",
-  "UserMaxAvailableRoleWarning": "Guests and Users cannot be assigned as Room managers. Only Room and {{productName}} admins are suitable for the specified role.",
   "GroupMaxAvailableRoleWarning": "Groups can be added to a room with the {{roleName}} role as maximum. However, you can change the role of individual users in the group after it has been successfully added.",
   "InvitationLanguage": "Invitation language",
   "InviteAccountSearchPlaceholder": "Invite people by email",
@@ -14,5 +13,6 @@
   "LinkCopySuccess": "Link has been copied",
   "ResetChange": "Reset change",
   "SendInvitation": "Send invitation",
+  "UserMaxAvailableRoleWarning": "Guests and Users cannot be assigned as Room managers. Only Room and {{productName}} admins are suitable for the specified role.",
   "UsersAlreadyAdded": "Some users have already been added"
 }

@@ -39,7 +39,6 @@
   "RoleReviewerDescription": "Operacije sa postojećim datotekama: pregledanje, recenziranje, komentarisanje.",
   "RoleRoomAdminDescription": "Administratori sobe mogu kreirati i upravljati dodeljenim sobama, pozvati nove korisnike i dodeliti uloge administratora sobe i niže. Svi administratori imaju pristup Ličnom odeljku.",
   "RoleRoomAdminFormRoomDescription": "Administratori prostorija mogu kreirati i upravljati prostorijama, pozivati nove korisnike i dodeljivati uloge administatora prostorije ili niže. Administratori prostorija mogu otpremati formulare u prostoriju i imati pun pristup Završeno i U Procesu folderima.",
-  "RoleUserDescription": "Korisnici mogu pristupiti samo sobama na koje ih pozovu administratori. Ne mogu kreirati sopstvene sobe, foldere ili datoteke.",
   "RoleViewer": "Pregledač",
   "RoleViewerDescription": "Pregled datoteka",
   "SearchByHeadOfGroup": "Pretraga po Vođi grupe",

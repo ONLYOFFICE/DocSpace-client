@@ -39,7 +39,6 @@
   "RoleReviewerDescription": "Operaciones con archivos existentes: visualización, revisión, comentarios.",
   "RoleRoomAdminDescription": "Los administradores de sala pueden crear y gestionar las salas asignadas, invitar a nuevos usuarios y asignar roles de administrador de sala e inferiores. Todos los administradores tienen acceso a la sección Documentos.",
   "RoleRoomAdminFormRoomDescription": "Los administradores de sala pueden crear y gestionar salas, invitar a nuevos usuarios y asignar roles de administrador de sala o inferiores. Los administradores de sala pueden subir formularios a la sala y tienen acceso completo a las carpetas Completado y En curso.",
-  "RoleUserDescription": "Los usuarios solo pueden acceder a las salas a las que les han invitado los administradores. No pueden crear sus propias salas, carpetas o archivos.",
   "RoleViewer": "Espectador",
   "RoleViewerDescription": "Visualización de archivos",
   "SearchByHeadOfGroup": "Buscar por Jefe de grupo",

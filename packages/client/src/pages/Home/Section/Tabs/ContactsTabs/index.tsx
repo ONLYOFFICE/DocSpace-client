@@ -135,7 +135,7 @@ const ContactsTabs = ({
         <Box displayProp="flex" gapProp="8px">
           {t("Common:Guests")}
           <Badge
-            label={t("Common: New")}
+            label={t("Files:New")}
             backgroundColor={globalColors.redRomb}
           />
         </Box>

@@ -39,7 +39,6 @@
   "RoleReviewerDescription": "Operácie s existujúcimi súbormi: prezeranie, kontrola, komentovanie.",
   "RoleRoomAdminDescription": "Administrátori miestností môžu vytvárať a spravovať pridelené miestnosti, pozývať nových používateľov a prideľovať roly administrátora miestnosti a podradené roly. Všetci administrátori majú prístup do sekcie Dokumenti.",
   "RoleRoomAdminFormRoomDescription": "Administrátori miestnosti môžu vytvárať a spravovať miestnosti, pozývať nových používateľov a prideľovať roly administrátora miestnosti alebo nižšie. Administrátori miestností môžu do miestnosti nahrávať formuláre a majú úplný prístup k priečinkom Vyplnené a V procese.",
-  "RoleUserDescription": "Používatelia majú prístup iba do miestností, do ktorých ich pozvali administrátori. Nemôžu si vytvárať vlastné miestnosti, priečinky ani súbory.",
   "RoleViewer": "Prehliadač",
   "RoleViewerDescription": "Prezeranie súboru",
   "SearchByHeadOfGroup": "Vyhľadávanie podľa Vedúceho skupiny",

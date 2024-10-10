@@ -27,7 +27,6 @@ import debounce from "lodash.debounce";
 
 import InfoEditReactSvgUrl from "PUBLIC_DIR/images/info.edit.react.svg?url";
 import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
-import AlertSvgUrl from "PUBLIC_DIR/images/icons/12/alert.react.svg?url";
 import InfoRoleSvgUrl from "PUBLIC_DIR/images/info.role.react.svg?url";
 
 import React, { useState, useEffect, useCallback } from "react";

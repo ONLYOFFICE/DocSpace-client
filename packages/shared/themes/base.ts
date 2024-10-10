@@ -47,7 +47,7 @@ const {
   white,
   black,
   darkBlack,
-
+  moonstone,
   lightGrayBlackout,
   grayLight,
   darkGrayLight,
@@ -3159,6 +3159,11 @@ export const getBaseTheme = () => {
       backgroundArchive: gray,
       opacityBackground: "1",
       plusIcon: white,
+
+      linkIcon: {
+        background: white,
+        path: moonstone,
+      },
     },
 
     plugins: {

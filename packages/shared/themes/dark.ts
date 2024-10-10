@@ -36,6 +36,7 @@ const {
   white,
   black,
   darkBlack,
+  blueRomb,
 
   grayLight,
   darkGrayLight,
@@ -3145,6 +3146,11 @@ const Dark: TTheme = {
     backgroundArchive: white,
     opacityBackground: "0.1",
     plusIcon: black,
+
+    linkIcon: {
+      background: black,
+      path: blueRomb,
+    },
   },
 
   plugins: {

@@ -139,11 +139,6 @@ const StyledIcon = styled.div<{
     margin-inline: 24px 0;
 
     .room-icon-button {
-      width: 12px;
-      height: 12px;
-      border: ${(props) => `1px solid ${props.theme.backgroundColor}`};
-      border-radius: 50%;
-
       svg {
         path {
           fill: ${(props) => props.theme.backgroundColor};
@@ -152,6 +147,24 @@ const StyledIcon = styled.div<{
           stroke: ${(props) => props.theme.backgroundColor};
         }
       }
+
+      .link {
+        path {
+          fill: ${(props) => props.theme.roomIcon.linkIcon.path};
+        }
+
+        .link-background {
+          stroke: ${(props) => props.theme.roomIcon.linkIcon.background};
+          fill: ${(props) => props.theme.roomIcon.linkIcon.background};
+        }
+      }
+    }
+
+    .room-icon-button:has(svg:not(.link)) {
+      width: 12px;
+      height: 12px;
+      border: ${(props) => `1px solid ${props.theme.backgroundColor}`};
+      border-radius: 50%;
     }
   }
 

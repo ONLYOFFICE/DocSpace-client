@@ -164,6 +164,10 @@ class SelectedFolderStore {
 
   order: Nullable<string> = null;
 
+  external: boolean = false;
+
+  passwordProtected: boolean = false;
+
   constructor(settingsStore: SettingsStore) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -215,6 +219,8 @@ class SelectedFolderStore {
       isCustomQuota: this.isCustomQuota,
       order: this.order,
       watermark: this.watermark,
+      passwordProtected: this.passwordProtected,
+      external: this.external,
     };
   };
 
@@ -265,6 +271,8 @@ class SelectedFolderStore {
     this.isCustomQuota = undefined;
     this.order = null;
     this.watermark = null;
+    this.passwordProtected = false;
+    this.external = false;
   };
 
   setParentId = (parentId: number) => {
@@ -345,6 +353,9 @@ class SelectedFolderStore {
     if (!("providerItem" in selectedFolder)) this.providerItem = null;
     if (!("providerKey" in selectedFolder)) this.providerKey = null;
     if (!("order" in selectedFolder)) this.order = null;
+    if (!("passwordProtected" in selectedFolder))
+      this.passwordProtected = false;
+    if (!("external" in selectedFolder)) this.external = false;
   };
 
   setSelectedFolder: (

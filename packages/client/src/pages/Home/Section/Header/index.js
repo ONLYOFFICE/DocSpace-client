@@ -27,6 +27,7 @@
 import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
 import LifetimeRoomIconUrl from "PUBLIC_DIR/images/lifetime-room.react.svg?url";
 import RoundedArrowSvgUrl from "PUBLIC_DIR/images/rounded arrow.react.svg?url";
+import SharedLinkSvgUrl from "PUBLIC_DIR/images/icons/16/shared.link.svg?url";
 
 import React from "react";
 import { inject, observer } from "mobx-react";
@@ -125,7 +126,10 @@ const StyledContainer = styled.div`
     .title-icon {
       svg {
         path {
-          fill: ${(props) => props.theme.backgroundColor};
+          fill: ${({ theme, isExternalFolder }) =>
+            isExternalFolder
+              ? theme.roomIcon.linkIcon.path
+              : theme.backgroundColor};
         }
         rect {
           stroke: ${(props) => props.theme.backgroundColor};
@@ -416,6 +420,17 @@ const SectionHeaderContent = (props) => {
     setReorderDialogVisible(true);
   };
 
+  const getTitleIcon = () => {
+    if (selectedFolder.external && !isPublicRoom) return SharedLinkSvgUrl;
+
+    if (isPublicRoomType && !isPublicRoom) return PublicRoomIconUrl;
+
+    if (isVirtualDataRoomType && selectedFolder.lifetime)
+      return LifetimeRoomIconUrl;
+
+    return "";
+  };
+
   const headerMenu = isIndexEditingMode
     ? [
         {
@@ -529,9 +544,7 @@ const SectionHeaderContent = (props) => {
   const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
   const burgerLogo = getLogoUrl(WhiteLabelLogoType.LeftMenu, !theme.isBase);
 
-  const titleIcon =
-    (isPublicRoomType && !isPublicRoom && PublicRoomIconUrl) ||
-    (isVirtualDataRoomType && selectedFolder.lifetime && LifetimeRoomIconUrl);
+  const titleIcon = getTitleIcon();
 
   const titleIconTooltip = selectedFolder.lifetime
     ? t("Files:RoomFilesLifetime", {
@@ -556,6 +569,7 @@ const SectionHeaderContent = (props) => {
     <Consumer key="header">
       {(context) => (
         <StyledContainer
+          isExternalFolder={selectedFolder.external}
           isRecycleBinFolder={isRecycleBinFolder}
           isVirtualDataRoomType={isVirtualDataRoomType}
         >

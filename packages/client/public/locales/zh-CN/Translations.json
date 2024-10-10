@@ -39,7 +39,6 @@
   "RoleReviewerDescription": "现有文件操作：查看、审阅、评论。",
   "RoleRoomAdminDescription": "房间管理员可创建和管理被分配的房间、邀请新用户、分配房间管理员和较低级别的角色。所有管理员都可访问“个人”板块。",
   "RoleRoomAdminFormRoomDescription": "房间管理员可以创建和管理房间、邀请新用户并为他人设置房间管理员或更低级别的权限。房间管理员可以将表单上传到房间，并拥有“完成”和“正在处理中”文件夹的完全访问权限。",
-  "RoleUserDescription": "用户仅可访问管理员已邀请其加入的房间。其不能创建房间、文件夹或文件。",
   "RoleViewer": "可查看",
   "RoleViewerDescription": "文件查看",
   "SearchByHeadOfGroup": "按组长进行搜索",

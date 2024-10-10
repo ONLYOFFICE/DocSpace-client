@@ -127,7 +127,6 @@ class GroupsTableHeader extends React.Component {
       infoPanelVisible,
       columnStorageName,
       columnInfoPanelStorageName,
-      withPaging,
       setHideColumns,
     } = this.props;
     const { sortOrder } = filter;
@@ -144,7 +143,7 @@ class GroupsTableHeader extends React.Component {
         sectionWidth={sectionWidth}
         checkboxMargin="12px"
         infoPanelVisible={infoPanelVisible}
-        useReactWindow={!withPaging}
+        useReactWindow
         setHideColumns={setHideColumns}
       />
     );
@@ -165,7 +164,6 @@ export default inject(
     setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
     userId: userStore.user?.id,
     infoPanelVisible: infoPanelStore.isVisible,
-    withPaging: settingsStore.withPaging,
     getColumns: tableStore.getColumns,
     setColumnEnable: tableStore.setColumnEnable,
     managerAccountsGroupsColumnIsEnabled:

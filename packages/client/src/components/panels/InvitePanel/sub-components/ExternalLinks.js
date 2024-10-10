@@ -270,7 +270,7 @@ const ExternalLinks = ({
           isDisabled={isLinksToggling}
         />
       </StyledSubHeader>
-      <StyledDescription>
+      <StyledDescription noSelect>
         {roomId === -1
           ? t("InviteViaLinkDescriptionAccounts", {
               productName: t("Common:ProductName"),

@@ -39,7 +39,6 @@
   "RoleReviewerDescription": "Mövcud fayllarla əməliyyatlar: baxmaq, nəzərdən keçirmək, şərh etmək.",
   "RoleRoomAdminDescription": "Otaq administratorları təyin olunmuş otaqlar yarada və idarə edə, yeni istifadəçilər dəvət edə və otaq administratoruna və aşağı səviyyəli şəxslərə rollar təyin edə bilər. Bütün idarəçilərin Sənədlər bölməyə girişi var.",
   "RoleRoomAdminFormRoomDescription": "Otaq administratorları otaqlar yarada və idarə edə, yeni istifadəçiləri dəvət edə və otaq administratoru və ya daha aşağı vəzifələr təyin edə bilər. Otaq administratorları formaları otağa yükləyə, Tamamlanmış və Prosesdə qovluqlarına tam giriş əldə edə bilər.",
-  "RoleUserDescription": "İstifadəçilər yalnız adminlər tərəfindən dəvət olunduqları otaqlara daxil ola bilərlər. Onlar öz otaqlarını, qovluqlarını və ya fayllarını yarada bilməzlər.",
   "RoleViewer": "İzləyici",
   "RoleViewerDescription": "Fayla baxış",
   "SearchByHeadOfGroup": "Qrup rəhbəri tərəfindən axtarış",

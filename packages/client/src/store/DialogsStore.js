@@ -65,6 +65,7 @@ class DialogsStore {
   editGroupMembersDialogVisible = false;
   conflictResolveDialogVisible = false;
   convertDialogVisible = false;
+  convertDialogData = null;
   selectFileDialogVisible = false;
   selectFileFormRoomDialogVisible = false;
   convertPasswordDialogVisible = false;
@@ -355,6 +356,10 @@ class DialogsStore {
 
   setConvertDialogVisible = (visible) => {
     this.convertDialogVisible = visible;
+  };
+
+  setConvertDialogData = (convertDialogData) => {
+    this.convertDialogData = convertDialogData;
   };
 
   setConvertPasswordDialogVisible = (visible) => {

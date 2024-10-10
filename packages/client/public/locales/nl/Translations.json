@@ -39,7 +39,6 @@
   "RoleReviewerDescription": "Bewerkingen met bestaande bestanden: bekijken, herzien, opmerkingen plaatsen.",
   "RoleRoomAdminDescription": "Kamer beheerders kunnen de toegewezen kamers aanmaken en beheren, nieuwe gebruikers uitnodigen en rollen van kamerbeheerder en onder hun niveau toewijzen. Alle beheerders hebben toegang tot de Documenten sectie.",
   "RoleRoomAdminFormRoomDescription": "Kamer beheerders kunnen kamers aanmaken en beheren, nieuwe gebruikers uitnodigen en rollen van kamerbeheerder of onder hun niveau toewijzen. Kamer beheerders kunnen formulieren uploaden naar de kamer en hebben volledige toegang tot de Voltooid en In behandeling mappen.",
-  "RoleUserDescription": "Gebruikers hebben alleen toegang tot de ruimtes waarvoor zij door beheerders zijn uitgenodigd. Zij kunnen geen eigen kamers, mappen of bestanden aanmaken.",
   "RoleViewer": "Kijker",
   "RoleViewerDescription": "Bestand bekijken",
   "SearchByHeadOfGroup": "Zoeken op Groepshoofd",

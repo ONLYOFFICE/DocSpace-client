@@ -39,7 +39,6 @@
   "RoleReviewerDescription": "Toimenpiteet olemassaolevien tiedostojen kanssa: katselu, tarkistaminen, kommentointi.",
   "RoleRoomAdminDescription": "Huoneiden järjestelmänvalvojat voivat luoda ja hallita heille osoitettuja huoneita, kutsua uusia käyttäjiä ja osoittaa huoneen järjestelmänvalvojia ja alempia rooleja. Kaikilla järjestelmänvalvojilla on pääsy Asiakirjat osioon.",
   "RoleRoomAdminFormRoomDescription": "Huoneen järjestelmänvalvojat voivat luoda ja hallita huoneita, kutsua uusia käyttäjiä ja antaa järjestelmänvalvojan tai alempia rooleja. Huoneen järjestelmänvalvojat voivat ladata lomakkeita huoneeseen ja saada täydet oikeudet Valmiit- ja Keskeneräiset-kansioihin.",
-  "RoleUserDescription": "Käyttäjät pääsevät huoneisiin vain, jos järjestelmänvalvojat ovat kutsuneet heidät. He eivät voi luoda omia huoneita, kansioita tai tiedostoja.",
   "RoleViewer": "Katselija",
   "RoleViewerDescription": "Tiedoston katseleminen",
   "SearchByHeadOfGroup": "Hae ryhmän päällikön mukaan",

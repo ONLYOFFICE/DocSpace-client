@@ -267,6 +267,14 @@ class SelectedFolderStore {
     this.watermark = null;
   };
 
+  setFilesCount = (filesCount: number) => {
+    this.filesCount = filesCount;
+  };
+
+  setFoldersCount = (foldersCount: number) => {
+    this.foldersCount = foldersCount;
+  };
+
   setParentId = (parentId: number) => {
     this.parentId = parentId;
   };

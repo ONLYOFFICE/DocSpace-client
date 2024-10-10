@@ -39,7 +39,6 @@
   "RoleReviewerDescription": "Operacje na istniejących plikach: przeglądanie, recenzowanie, komentowanie.",
   "RoleRoomAdminDescription": "Administratorzy pokoi mogą tworzyć pokoje i zarządzać nimi, zapraszać nowych użytkowników oraz przypisywać im rolę administratora pokoju lub niższą. Wszyscy administratorzy mają dostęp do sekcji Dokumenty.",
   "RoleRoomAdminFormRoomDescription": "Administratorzy pokoi mogą tworzyć pokoje i zarządzać nimi, zapraszać nowych użytkowników oraz przypisywać im rolę administratora pokoju lub niższą. Administratorzy pokoi mogą przesyłać formularze do pokoju i mają pełen dostęp do katalogów Gotowe oraz W toku.",
-  "RoleUserDescription": "Użytkownicy mają dostęp tylko do pokoi, do których zostali zaproszeni przez administratorów. Nie mogą tworzyć własnych pokoi, folderów ani plików.",
   "RoleViewer": "Przeglądający",
   "RoleViewerDescription": "Odczyt plików",
   "SearchByHeadOfGroup": "Szukaj według lidera grupy",

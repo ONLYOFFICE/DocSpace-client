@@ -26,15 +26,19 @@
 
 import { makeAutoObservable } from "mobx";
 
-import { EmployeeStatus } from "@docspace/shared/enums";
+import { EmployeeStatus, EmployeeType } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
 import { isMobile, isTablet, isDesktop } from "@docspace/shared/utils";
 import { TContextMenuValueTypeOnClick } from "@docspace/shared/components/context-menu/ContextMenu.types";
-import { changeUserQuota } from "SRC_DIR/helpers/contacts";
+import {
+  changeUserQuota,
+  TContactsMenuItemdId,
+} from "SRC_DIR/helpers/contacts";
 import { TUser } from "@docspace/shared/api/people/types";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
+import { getUserTypeTranslation } from "@docspace/shared/utils/common";
 
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import EnableReactSvgUrl from "PUBLIC_DIR/images/enable.react.svg?url";
@@ -86,36 +90,36 @@ class HeaderMenuStore {
     const adminOption = {
       id: "menu_change-user_administrator",
       className: "group-menu_drop-down",
-      label: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
-      title: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
+      label: getUserTypeTranslation(EmployeeType.PortalAdmin, t),
+      title: getUserTypeTranslation(EmployeeType.PortalAdmin, t),
       onClick: (e: TContextMenuValueTypeOnClick) =>
         this.contextOptionsStore.onChangeType(e),
-      "data-action": "admin",
-      key: "administrator",
-      isActive: userSelectionRole === "admin",
+      "data-action": EmployeeType.PortalAdmin,
+      key: EmployeeType.PortalAdmin,
+      isActive: userSelectionRole === EmployeeType.PortalAdmin,
     };
 
     const managerOption = {
       id: "menu_change-user_manager",
       className: "group-menu_drop-down",
-      label: t("Common:RoomAdmin"),
-      title: t("Common:RoomAdmin"),
+      label: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
+      title: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
       onClick: (e: TContextMenuValueTypeOnClick) =>
         this.contextOptionsStore.onChangeType(e),
-      "data-action": "manager",
-      key: "manager",
-      isActive: userSelectionRole === "manager",
+      "data-action": EmployeeType.RoomAdmin,
+      key: EmployeeType.RoomAdmin,
+      isActive: userSelectionRole === EmployeeType.RoomAdmin,
     };
 
     const collaboratorOption = {
       id: "menu_change-collaborator",
       key: "collaborator",
-      title: t("Common:User"),
-      label: t("Common:User"),
-      "data-action": "collaborator",
+      label: getUserTypeTranslation(EmployeeType.CollaboratorString, t),
+      title: getUserTypeTranslation(EmployeeType.CollaboratorString, t),
+      "data-action": EmployeeType.CollaboratorString,
       onClick: (e: TContextMenuValueTypeOnClick) =>
         this.contextOptionsStore.onChangeType(e),
-      isActive: userSelectionRole === "collaborator",
+      isActive: userSelectionRole === EmployeeType.CollaboratorString,
     };
 
     const { isVisitor, isCollaborator, isRoomAdmin, isAdmin } =
@@ -216,6 +220,9 @@ class HeaderMenuStore {
     const { setSendInviteDialogVisible } = this.dialogStore;
     const { toggleDeleteProfileEverDialog } = this.contextOptionsStore;
     const { isVisible } = this.infoPanelStore;
+    const { contactsTab, getUsersToMakeEmployees } = this.usersStore;
+
+    const isGuests = contactsTab === "guests";
 
     if (isGroupsPage)
       return [
@@ -235,8 +242,15 @@ class HeaderMenuStore {
         label: t("ChangeUserTypeDialog:ChangeUserTypeButton"),
         disabled: !hasUsersToMakeEmployees,
         iconUrl: ChangeToEmployeeReactSvgUrl,
-        withDropDown: true,
-        options: this.getUsersRightsSubmenu(t),
+        onClick: isGuests
+          ? () =>
+              this.usersStore.changeType(
+                EmployeeType.Collaborator,
+                getUsersToMakeEmployees,
+              )
+          : () => {},
+        withDropDown: !isGuests,
+        options: !isGuests ? this.getUsersRightsSubmenu(t) : [],
       },
       {
         id: "menu-info",
@@ -279,7 +293,7 @@ class HeaderMenuStore {
         id: "menu-change-quota",
         key: "change-quota",
         label: t("Common:ChangeQuota"),
-        disabled: !hasUsersToChangeQuota,
+        disabled: !hasUsersToChangeQuota || isGuests,
         iconUrl: ChangQuotaReactSvgUrl,
         onClick: () => changeUserQuota(selection as unknown as TUser[]),
       },
@@ -287,7 +301,7 @@ class HeaderMenuStore {
         id: "menu-default-quota",
         key: "default-quota",
         label: t("Common:SetToDefault"),
-        disabled: !hasUsersToResetQuota,
+        disabled: !hasUsersToResetQuota || isGuests,
         iconUrl: DefaultQuotaReactSvgUrl,
         onClick: () => this.resetUserQuota(selection as unknown as TUser[], t),
       },
@@ -295,7 +309,7 @@ class HeaderMenuStore {
         id: "menu-disable-quota",
         key: "disable-quota",
         label: t("Common:DisableQuota"),
-        disabled: !hasUsersToDisableQuota,
+        disabled: !hasUsersToDisableQuota || isGuests,
         iconUrl: DisableQuotaReactSvgUrl,
         onClick: () =>
           this.disableUserQuota(selection as unknown as TUser[], t),
@@ -316,7 +330,7 @@ class HeaderMenuStore {
   get cbContactsMenuItems() {
     const { users } = this.usersStore;
 
-    let cbMenu = ["all"];
+    let cbMenu: TContactsMenuItemdId[] = ["all"];
 
     users.forEach((user) => {
       switch (user.status) {

@@ -24,50 +24,38 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useEffect, useRef, useTransition } from "react";
-import { getGroupById } from "@docspace/shared/api/groups";
+import styled, { css } from "styled-components";
 
-const useFetchGroup = (groupId, fetchedGroupId, setGroup) => {
-  const isMount = useRef(true);
-  const abortControllerRef = useRef(new AbortController());
+export const StyledBodyContent = styled.div<{
+  needReassignData: boolean;
+}>`
+  display: contents;
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [, startTransition] = useTransition();
+  .user-delete {
+    line-height: 20px;
 
-  const fetchGroup = async () => {
-    if (!groupId) return;
-    if (fetchedGroupId === groupId) return;
+    padding-bottom: 16px;
+  }
 
-    if (isLoading) {
-      abortControllerRef.current?.abort();
-      abortControllerRef.current = new AbortController();
-    } else {
-      setIsLoading(true);
-    }
+  .text-warning {
+    color: ${(props) => props.theme.peopleDialogs.deleteUser.textColor};
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 22px;
+  }
 
-    getGroupById(groupId, false, abortControllerRef.current?.signal)
-      .then((data) => {
-        if (isMount.current) startTransition(() => setGroup(data));
-      })
-      .catch((err) => {
-        if (err.message !== "canceled") console.error(err);
-      })
-      .finally(() => {
-        if (isMount.current) setIsLoading(false);
-      });
-  };
+  .text-delete-description {
+    line-height: 20px;
+    padding: 8px 0;
 
-  useEffect(() => {
-    if (!isMount.current) return;
-    fetchGroup();
-  }, [groupId, fetchedGroupId]);
+    ${(props) =>
+      !props.needReassignData &&
+      css`
+        padding-bottom: 0;
+      `}
+  }
 
-  useEffect(() => {
-    return () => {
-      abortControllerRef.current?.abort();
-      isMount.current = false;
-    };
-  }, []);
-};
-
-export default useFetchGroup;
+  .reassign-data {
+    line-height: 15px;
+  }
+`;

@@ -37,7 +37,7 @@ import { ComboBox } from "@docspace/shared/components/combobox";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 import { StyledAccountContent } from "../../styles/accounts";
-import { getUserTypeLabel } from "@docspace/shared/utils/common";
+import { getUserTypeTranslation } from "@docspace/shared/utils/common";
 
 import { EmployeeStatus } from "@docspace/shared/enums";
 
@@ -161,7 +161,7 @@ const Accounts = (props) => {
   const renderTypeData = () => {
     const typesOptions = getTypesOptions();
 
-    const typeLabel = getUserTypeLabel(role, t);
+    const typeLabel = getUserTypeTranslation(role, t);
 
     const combobox = (
       <ComboBox

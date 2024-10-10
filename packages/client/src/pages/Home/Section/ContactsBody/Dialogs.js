@@ -50,7 +50,6 @@ const Dialogs = ({
   deleteProfileEver,
   data,
   closeDialogs,
-  changeUserTypeDialogVisible,
   changeUserStatusDialogVisible,
 
   sendInviteDialogVisible,
@@ -103,13 +102,7 @@ const Dialogs = ({
           users={data}
         />
       )}
-      {changeUserTypeDialogVisible && (
-        <ChangeUserTypeDialog
-          visible={changeUserTypeDialogVisible}
-          onClose={closeDialogs}
-          {...data}
-        />
-      )}
+
       {changeUserStatusDialogVisible && (
         <ChangeUserStatusDialog
           visible={changeUserStatusDialogVisible}
@@ -168,7 +161,6 @@ export default inject(({ peopleStore, userStore }) => {
     closeDialogs,
     changeEmailVisible,
 
-    changeUserTypeDialogVisible,
     guestDialogVisible,
     changeUserStatusDialogVisible,
     disableDialogVisible,
@@ -194,7 +186,6 @@ export default inject(({ peopleStore, userStore }) => {
     data,
     closeDialogs,
 
-    changeUserTypeDialogVisible,
     guestDialogVisible,
     changeUserStatusDialogVisible,
     disableDialogVisible,

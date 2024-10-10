@@ -41,6 +41,8 @@ export type {
   TContactsTab,
   TContactsViewAs,
   TContactsMenuItemdId,
+  TChangeUserTypeDialogData,
+  TChangeUserStatusDialogData,
 } from "./types";
 
 export {
@@ -55,7 +57,9 @@ export {
   changeUserQuota,
   onDeletePersonalDataClick,
   onInviteAgainClick,
+  onInviteMultipleAgain,
   getContactsView,
   getContactsUrl,
+  createGroup,
   editGroup,
 } from "./utils";

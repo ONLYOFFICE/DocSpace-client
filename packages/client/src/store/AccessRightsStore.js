@@ -182,7 +182,8 @@ class AccessRightsStore {
 
     const needInvite =
       activationStatus === EmployeeActivationStatus.Pending &&
-      status === EmployeeStatus.Active &&
+      status !== EmployeeStatus.Disabled &&
+      status !== EmployeeStatus.Active &&
       userId !== id;
 
     if (isOwner) return needInvite;

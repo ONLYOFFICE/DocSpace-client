@@ -160,6 +160,7 @@ const PureHome = (props) => {
     setSelectedFolder,
     userId,
     getFolderModel,
+    getContactsModel,
     scrollToTop,
     isEmptyGroups,
     wsCreatedPDFForm,
@@ -178,10 +179,8 @@ const PureHome = (props) => {
 
   const contactsView = getContactsView(location);
   const isContactsPage = !!contactsView;
-
-  const isGroupsAccounts = contactsView === "groups";
   const isContactsEmptyView =
-    (isGroupsAccounts && isEmptyGroups) || isUsersEmptyView;
+    (contactsView === "groups" && isEmptyGroups) || isUsersEmptyView;
 
   const setIsLoading = React.useCallback(
     (param, withoutTimer, withHeaderLoader) => {
@@ -295,6 +294,7 @@ const PureHome = (props) => {
 
   const getContextModel = () => {
     if (isFrame) return null;
+    if (isContactsPage) return getContactsModel(t, true);
     return getFolderModel(t, true);
   };
 
@@ -458,6 +458,8 @@ export const Component = inject(
     } = clientLoadingStore;
 
     const { getFolderModel } = contextOptionsStore;
+
+    const { getContactsModel } = peopleStore.contextOptionsStore;
 
     const {
       fetchFiles,
@@ -671,6 +673,7 @@ export const Component = inject(
       getRooms,
       setSelectedFolder,
       getFolderModel,
+      getContactsModel,
       scrollToTop,
       wsCreatedPDFForm,
 

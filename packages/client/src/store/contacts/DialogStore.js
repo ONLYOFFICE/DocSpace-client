@@ -32,8 +32,6 @@ class DialogStore {
   deleteProfileEver = false;
   data = {};
 
-  changeUserTypeDialogVisible = false;
-
   changeUserStatusDialogVisible = false;
   disableDialogVisible = false;
   sendInviteDialogVisible = false;
@@ -72,10 +70,6 @@ class DialogStore {
     this.data = data;
   };
 
-  setChangeUserTypeDialogVisible = (visible) => {
-    this.changeUserTypeDialogVisible = visible;
-  };
-
   setChangeUserStatusDialogVisible = (visible) => {
     this.changeUserStatusDialogVisible = visible;
   };
@@ -106,7 +100,6 @@ class DialogStore {
     this.setDeleteProfileDialogVisible(false);
     this.setDialogData({});
 
-    this.setChangeUserTypeDialogVisible(false);
     this.setChangeUserStatusDialogVisible(false);
 
     this.setSendInviteDialogVisible(false);

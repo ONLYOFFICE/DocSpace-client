@@ -72,10 +72,10 @@ export const enum EmployeeType {
   Admin = 3,
   Collaborator = 4,
   UserString = "user",
+  CollaboratorString = "collaborator",
   RoomAdmin = "manager",
   PortalAdmin = "admin",
-  Owner = "Owner",
-  CollaboratorString = "collaborator",
+  Owner = "owner",
 }
 /**
  * Enum for user payments type.

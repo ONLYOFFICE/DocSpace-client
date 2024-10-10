@@ -112,7 +112,6 @@ class DialogsStore {
   saveAfterReconnectOAuth = false;
   createRoomDialogVisible = false;
   createRoomConfirmDialogVisible = false;
-  changeUserTypeDialogVisible = false;
   editLinkPanelIsVisible = false;
   embeddingPanelData = { visible: false, item: null };
   submitToGalleryDialogVisible = false;
@@ -477,10 +476,6 @@ class DialogsStore {
 
   setCreateRoomConfirmDialogVisible = (createRoomConfirmDialogVisible) => {
     this.createRoomConfirmDialogVisible = createRoomConfirmDialogVisible;
-  };
-
-  setChangeUserTypeDialogVisible = (changeUserTypeDialogVisible) => {
-    this.changeUserTypeDialogVisible = changeUserTypeDialogVisible;
   };
 
   setSubmitToGalleryDialogVisible = (submitToGalleryDialogVisible) => {

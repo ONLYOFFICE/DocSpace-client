@@ -280,8 +280,8 @@ export async function resendUserInvites(userIds: string[]) {
   });
 }
 
-export function resendInvitesAgain() {
-  return request({
+export async function resendInvitesAgain() {
+  await request({
     method: "put",
     url: "/people/invite",
     data: { userIds: [], resendAll: true },
@@ -389,14 +389,14 @@ export function sendInstructionsToChangeEmail(userId, email) {
   });
 }
 
-export function deleteUser(userId) {
-  return request({
+export async function deleteUser(userId: string) {
+  await request({
     method: "delete",
     url: `/people/${userId}`,
   });
 }
 
-export function deleteUsers(userIds) {
+export function deleteUsers(userIds: string[]) {
   return request({
     method: "put",
     url: "/people/delete",

@@ -36,11 +36,15 @@ import { inject, observer } from "mobx-react";
 import { Avatar } from "@docspace/shared/components/avatar";
 import { Text } from "@docspace/shared/components/text";
 import { parseAddresses } from "@docspace/shared/utils";
-import { getUserType, getUserTypeLabel } from "@docspace/shared/utils/common";
+import {
+  getUserType,
+  getUserTypeTranslation,
+} from "@docspace/shared/utils/common";
 import { getMembersList, getUserList } from "@docspace/shared/api/people";
 import {
   AccountsSearchArea,
   EmployeeStatus,
+  EmployeeType,
   RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
@@ -168,11 +172,13 @@ const Item = ({
 
   const isRolePaid = isPaidUserRole(access);
   const isUserRolesFilterd =
-    isRolePaid && (type === "user" || type === "collaborator");
+    isRolePaid &&
+    (type === EmployeeType.UserString ||
+      type === EmployeeType.CollaboratorString);
   const isGroupRoleFiltered = isRolePaid && item.isGroup;
 
   const filteredAccesses =
-    item.isGroup || isUserRolesFilterd || type === "user"
+    item.isGroup || isUserRolesFilterd || type === EmployeeType.UserString
       ? filterPaidRoleOptions(accesses)
       : accesses;
 
@@ -183,11 +189,13 @@ const Item = ({
 
   const typeLabel = item?.isEmailInvite
     ? roomId === -1 || isRolePaid
-      ? getUserTypeLabel(type, t)
+      ? getUserTypeTranslation(type, t)
       : t("Common:Guest")
-    : defaultAccess?.type === "manager" && type !== "admin" && type !== "owner"
-      ? getUserTypeLabel(defaultAccess.type, t)
-      : getUserTypeLabel(type, t);
+    : defaultAccess?.type === EmployeeType.RoomAdmin &&
+        type !== EmployeeType.PortalAdmin &&
+        type !== EmployeeType.Owner
+      ? getUserTypeTranslation(defaultAccess.type, t)
+      : getUserTypeTranslation(type, t);
 
   const errorsInList = () => {
     const hasErrors = inviteItems.some((item) => !!item.errors?.length);

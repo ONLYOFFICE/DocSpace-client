@@ -33,7 +33,10 @@ import { TUser } from "@docspace/shared/api/people/types";
 import { EmployeeStatus, Events } from "@docspace/shared/enums";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { TTranslation } from "@docspace/shared/types";
-import { resendUserInvites } from "@docspace/shared/api/people";
+import {
+  resendInvitesAgain,
+  resendUserInvites,
+} from "@docspace/shared/api/people";
 import { toastr } from "@docspace/shared/components/toast";
 
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
@@ -239,6 +242,14 @@ export const onInviteAgainClick = (
     .catch((error) => toastr.error(error));
 };
 
+export const onInviteMultipleAgain = (t: TTranslation) => {
+  resendInvitesAgain()
+    .then(() =>
+      toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios")),
+    )
+    .catch((err) => toastr.error(err));
+};
+
 export const getContactsView = (
   location?: Location,
 ): TContactsTab | boolean => {
@@ -256,6 +267,12 @@ export const getContactsView = (
     return "people";
 
   return false;
+};
+
+export const createGroup = () => {
+  const event = new Event(Events.GROUP_CREATE);
+
+  window.dispatchEvent(event);
 };
 
 export const editGroup = (item: TGroup) => {

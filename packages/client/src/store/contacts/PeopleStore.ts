@@ -31,6 +31,7 @@ import { isDesktop } from "@docspace/shared/utils";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { Nullable } from "@docspace/shared/types";
 
 import type { TContactsViewAs } from "SRC_DIR/helpers/contacts";
@@ -39,6 +40,7 @@ import AccessRightsStore from "../AccessRightsStore";
 import InfoPanelStore from "../InfoPanelStore";
 import ClientLoadingStore from "../ClientLoadingStore";
 import ProfileActionsStore from "../ProfileActionsStore";
+import DialogsStore from "../DialogsStore";
 
 import GroupsStore from "./GroupsStore";
 import UsersStore from "./UsersStore";
@@ -78,6 +80,8 @@ class PeopleStore {
     public settingsStore: SettingsStore,
     public clientLoadingStore: ClientLoadingStore,
     public profileActionsStore: ProfileActionsStore,
+    public dialogsStore: DialogsStore,
+    public currentQuotaStore: CurrentQuotasStore,
   ) {
     this.infoPanelStore = infoPanelStore;
     this.accessRightsStore = accessRightsStore;
@@ -86,6 +90,8 @@ class PeopleStore {
     this.settingsStore = settingsStore;
     this.clientLoadingStore = clientLoadingStore;
     this.profileActionsStore = profileActionsStore;
+    this.dialogsStore = dialogsStore;
+    this.currentQuotaStore = currentQuotaStore;
 
     this.dialogStore = new DialogStore();
     this.contactsHotkeysStore = new ContactsHotkeysStore(this);
@@ -122,6 +128,8 @@ class PeopleStore {
       this.usersStore,
       this.dialogStore,
       this.targetUserStore,
+      dialogsStore,
+      currentQuotaStore,
     );
 
     this.headerMenuStore = new HeaderMenuStore(

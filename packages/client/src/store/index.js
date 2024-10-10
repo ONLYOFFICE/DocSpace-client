@@ -205,6 +205,8 @@ const peopleStore = new PeopleStore(
   settingsStore,
   clientLoadingStore,
   profileActionsStore,
+  dialogsStore,
+  currentQuotaStore,
 );
 
 profileActionsStore.peopleStore = peopleStore;

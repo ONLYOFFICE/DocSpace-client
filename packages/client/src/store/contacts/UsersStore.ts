@@ -49,17 +49,22 @@ import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 import {
   getUserChecked,
   setContactsUsersFilterUrl,
+  TChangeUserTypeDialogData,
 } from "SRC_DIR/helpers/contacts";
-import type { TContactsSelected, TContactsTab } from "SRC_DIR/helpers/contacts";
+import type {
+  TChangeUserStatusDialogData,
+  TContactsSelected,
+  TContactsTab,
+} from "SRC_DIR/helpers/contacts";
 
 import InfoPanelStore from "../InfoPanelStore";
 import AccessRightsStore from "../AccessRightsStore";
+import ClientLoadingStore from "../ClientLoadingStore";
 
 import TargetUserStore from "./TargetUserStore";
 import GroupsStore from "./GroupsStore";
 import ContactsHotkeysStore from "./ContactsHotkeysStore";
 import DialogStore from "./DialogStore";
-import ClientLoadingStore from "../ClientLoadingStore";
 
 class UsersStore {
   filter = Filter.getDefault();
@@ -291,21 +296,21 @@ class UsersStore {
   updateUserType = async (
     type: EmployeeType,
     userIds: string[],
-    filter: Filter,
+    filter: Filter = this.filter,
   ) => {
     let toType = 0;
 
     switch (type) {
-      case "admin":
+      case EmployeeType.PortalAdmin:
         toType = EmployeeType.Admin;
         break;
-      case "user":
+      case EmployeeType.UserString:
         toType = EmployeeType.Guest;
         break;
-      case "collaborator":
+      case EmployeeType.CollaboratorString:
         toType = EmployeeType.Collaborator;
         break;
-      case "manager":
+      case EmployeeType.RoomAdmin:
         toType = EmployeeType.User;
         break;
       default:
@@ -377,13 +382,14 @@ class UsersStore {
     isMySelf: boolean,
     isUserSSO: boolean,
     isUserLDAP: boolean,
+    isGuest: boolean,
     statusType: ReturnType<typeof getUserStatus>,
     userRole: ReturnType<typeof getUserType>,
     status: EmployeeStatus,
   ) => {
     if (!this.userStore.user) return;
 
-    const { isOwner, isAdmin, isVisitor, isCollaborator, isLDAP } =
+    const { isOwner, isAdmin, isVisitor, isCollaborator, isRoomAdmin, isLDAP } =
       this.userStore.user;
 
     const options: string[] = [];
@@ -414,11 +420,10 @@ class UsersStore {
             options.push("change-owner");
           }
         } else if (
-          isOwner ||
-          (isAdmin &&
-            (userRole === "user" ||
-              userRole === "manager" ||
-              userRole === "collaborator"))
+          (isOwner || isAdmin) &&
+          (userRole === EmployeeType.UserString ||
+            userRole === EmployeeType.RoomAdmin ||
+            userRole === EmployeeType.CollaboratorString)
         ) {
           if (!isUserLDAP && !isUserSSO) {
             options.push("separator-1");
@@ -426,6 +431,8 @@ class UsersStore {
             options.push("change-email");
             options.push("change-password");
           }
+
+          if (isGuest) options.push("change-type");
 
           options.push("reset-auth");
 
@@ -438,11 +445,10 @@ class UsersStore {
         break;
       case "disabled":
         if (
-          isOwner ||
-          (isAdmin &&
-            (userRole === "manager" ||
-              userRole === "user" ||
-              userRole === "collaborator"))
+          (isOwner || isAdmin) &&
+          (userRole === EmployeeType.UserString ||
+            userRole === EmployeeType.RoomAdmin ||
+            userRole === EmployeeType.CollaboratorString)
         ) {
           options.push("enable");
 
@@ -480,11 +486,10 @@ class UsersStore {
           }
 
           if (
-            isOwner ||
-            (isAdmin &&
-              (userRole === "manager" ||
-                userRole === "user" ||
-                userRole === "collaborator"))
+            (isOwner || isAdmin) &&
+            (userRole === "manager" ||
+              userRole === "user" ||
+              userRole === "collaborator")
           ) {
             options.push("separator-1");
 
@@ -581,6 +586,7 @@ class UsersStore {
       isMySelf,
       isSSO,
       isLDAP,
+      isVisitor,
       statusType,
       role,
       status,
@@ -903,7 +909,15 @@ class UsersStore {
   get getUsersToMakeEmployees() {
     const { canMakeEmployeeUser } = this.accessRightsStore;
 
-    const users = this.selection.filter((x) => canMakeEmployeeUser(x));
+    let users = this.selection.filter((x) => canMakeEmployeeUser(x));
+
+    if (
+      this.bufferSelection &&
+      canMakeEmployeeUser(this.bufferSelection) &&
+      !users.length
+    ) {
+      users = [this.bufferSelection];
+    }
 
     return users.map((u) => u);
   }
@@ -1029,7 +1043,7 @@ class UsersStore {
   changeType = (
     type: EmployeeType,
     users: UsersStore["getUsersToMakeEmployees"],
-    successCallback?: VoidFunction,
+    successCallback?: (users?: TUser[]) => void,
     abortCallback?: VoidFunction,
   ) => {
     const { setDialogData } = this.dialogStore!;
@@ -1056,9 +1070,12 @@ class UsersStore {
 
     if (fromType.length === 1 && fromType[0] === type) return false;
 
+    const userNames: string[] = [];
+
     const userIDs = users
       .filter((u) => u.role !== type)
       .map((user) => {
+        if (user.displayName) userNames.push(user.displayName);
         return user?.id ? user.id : user;
       });
 
@@ -1066,9 +1083,10 @@ class UsersStore {
       toType: type,
       fromType,
       userIDs,
+      userNames,
       successCallback,
       abortCallback,
-    });
+    } as TChangeUserTypeDialogData);
 
     window.dispatchEvent(event);
 
@@ -1086,7 +1104,11 @@ class UsersStore {
       return user?.id ? user.id : user;
     });
 
-    setDialogData({ status, userIDs });
+    setDialogData({
+      status,
+      userIDs,
+      isGuests: this.contactsTab === "guests",
+    } as TChangeUserStatusDialogData);
 
     setChangeUserStatusDialogVisible(true);
   };

@@ -63,7 +63,6 @@ const InvitePanel = ({
   setRoomSecurity,
   getRoomSecurityInfo,
   defaultAccess,
-  inviteUsers,
   setInfoPanelIsMobileHidden,
   updateInfoPanelMembers,
   isRoomMembersPanelOpen,
@@ -563,7 +562,7 @@ export default inject(
   }) => {
     const { theme, standalone } = settingsStore;
 
-    const { inviteUsers, getUsersList, filter } = peopleStore.usersStore;
+    const { getUsersList, filter } = peopleStore.usersStore;
     const {
       setIsMobileHidden: setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
@@ -604,7 +603,6 @@ export default inject(
       visible: invitePanelOptions.visible,
       defaultAccess: invitePanelOptions.defaultAccess,
       getFolderInfo,
-      inviteUsers,
       setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
       isRoomMembersPanelOpen,

@@ -34,8 +34,9 @@ import {
 } from "@docspace/shared/utils/common";
 import { Link, LinkType } from "@docspace/shared/components/link";
 
-import { UserContentProps } from "./RowView.types";
 import Badges from "../../Badges";
+
+import { UserContentProps } from "./RowView.types";
 import { StyledRowContent } from "./RowView.styled";
 
 const UserContent = ({

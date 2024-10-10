@@ -24,6 +24,7 @@
   "SSOAccountTooltip": "This user account is loaded from SSO. If you need to change the user name and email address, refer to the SSO server.",
   "StandardLogin": "Standard login",
   "SuccessChangeUserStatus": "The user status was successfully changed",
+  "SuccessChangeGuestStatus": "The guest status was successfully changed",
   "SuccessDeleteGroup": "Group was deleted successfully",
   "SuccessDeleteGroups": "Groups were deleted successfully",
   "SuccessDeletePersonalData": "Personal data has been successfully deleted",

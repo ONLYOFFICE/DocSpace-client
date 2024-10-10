@@ -59,10 +59,11 @@ const FilterBlock = ({
   selectorLabel,
   userId,
   isRooms,
-  isAccounts,
-  isPeopleAccounts,
-  isGroupsAccounts,
-  isInsideGroup,
+  isContactsPage,
+  isContactsPeoplePage,
+  isContactsGroupsPage,
+  isContactsInsideGroupPage,
+  isContactsGuestsPage,
   disableThirdParty,
 }: FilterBlockProps) => {
   const { t } = useTranslation(["Common"]);
@@ -94,6 +95,7 @@ const FilterBlock = ({
       const isSelected =
         filterSubject.groupItem.findIndex((i) => i.isSelected) > -1;
 
+      console.log("as");
       if (
         filterOwner &&
         filterOwner.groupItem &&
@@ -400,6 +402,7 @@ const FilterBlock = ({
 
   const selectOption = React.useCallback(
     (items: TSelectorItem[]) => {
+      console.log(items);
       setShowSelector((val) => ({
         ...val,
         show: false,
@@ -497,6 +500,7 @@ const FilterBlock = ({
                   onCloseClick: hideFilterBlock,
                   headerLabel: selectorLabel,
                   withoutBackButton: false,
+                  withoutBorder: false,
                 }}
                 currentUserId={userId}
                 onClose={hideFilterBlock}
@@ -561,10 +565,11 @@ const FilterBlock = ({
           {isLoading ? (
             <FilterBlockLoader
               isRooms={isRooms}
-              isAccounts={isAccounts}
-              isPeopleAccounts={isPeopleAccounts}
-              isGroupsAccounts={isGroupsAccounts}
-              isInsideGroup={isInsideGroup}
+              isContactsPage={isContactsPage}
+              isContactsPeoplePage={isContactsPeoplePage}
+              isContactsGroupsPage={isContactsGroupsPage}
+              isContactsInsideGroupPage={isContactsInsideGroupPage}
+              isContactsGuestsPage={isContactsGuestsPage}
             />
           ) : (
             <>

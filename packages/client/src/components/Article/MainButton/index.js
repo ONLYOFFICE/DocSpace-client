@@ -162,6 +162,7 @@ const ArticleMainButtonContent = (props) => {
     isOwner,
     isAdmin,
     isRoomAdmin,
+    isCollaborator,
 
     setInvitePanelOptions,
 
@@ -643,32 +644,27 @@ const ArticleMainButtonContent = (props) => {
             },
           ]
         : []),
-      {
-        id: "invite_room-admin",
-        className: "main-button_drop-down",
-        icon: PersonManagerReactSvgUrl,
-        label: t("Common:RoomAdmin"),
-        onClick: onInvite,
-        action: EmployeeType.User,
-        key: "manager",
-      },
-      {
-        id: "invite_room-collaborator",
-        className: "main-button_drop-down",
-        icon: PersonDefaultReactSvgUrl,
-        label: t("Common:PowerUser"),
-        onClick: onInvite,
-        action: EmployeeType.Collaborator,
-        key: "collaborator",
-      },
+      ...(!isRoomAdmin
+        ? [
+            {
+              id: "invite_room-admin",
+              className: "main-button_drop-down",
+              icon: PersonManagerReactSvgUrl,
+              label: t("Common:RoomAdmin"),
+              onClick: onInvite,
+              action: EmployeeType.User,
+              key: "manager",
+            },
+          ]
+        : []),
       {
         id: "invite_user",
         className: "main-button_drop-down",
         icon: PersonDefaultReactSvgUrl,
         label: t("Common:User"),
         onClick: onInvite,
-        action: EmployeeType.Guest,
-        key: "user",
+        action: EmployeeType.Collaborator,
+        key: "collaborator",
       },
       ...(!isMobileArticle
         ? [
@@ -788,13 +784,16 @@ const ArticleMainButtonContent = (props) => {
 
   const mainButtonText = t("Common:Actions");
 
-  const isDisabled = isFrame
-    ? disableActionButton
-    : isSettingsPage
-      ? isSettingsPage
-      : isAccountsPage
-        ? !isAccountsPage
-        : !security?.Create;
+  let isDisabled = false;
+  if (isFrame) {
+    isDisabled = disableActionButton;
+  } else if (isSettingsPage) {
+    isDisabled = isSettingsPage;
+  } else if (isAccountsPage) {
+    isDisabled = isCollaborator;
+  } else {
+    isDisabled = !security?.Create;
+  }
 
   const isProfile = location.pathname.includes("/profile");
 
@@ -810,6 +809,10 @@ const ArticleMainButtonContent = (props) => {
       versionHistoryPanelVisible
         ? false
         : true;
+  }
+
+  if (isAccountsPage && !isOwner && !isAdmin && !isRoomAdmin) {
+    mainButtonVisible = false;
   }
 
   if (showArticleLoader)
@@ -950,7 +953,7 @@ export default inject(
     const parentRoomType = selectedFolderStore.parentRoomType;
     const isFolder = selectedFolderStore.isFolder;
 
-    const { isAdmin, isOwner, isRoomAdmin } = userStore.user;
+    const { isAdmin, isOwner, isRoomAdmin, isCollaborator } = userStore.user;
 
     const { showWarningDialog, isWarningRoomsDialog } = currentQuotaStore;
 
@@ -996,6 +999,7 @@ export default inject(
       isAdmin,
       isOwner,
       isRoomAdmin,
+      isCollaborator,
 
       mainButtonMobileVisible,
       moveToPanelVisible,

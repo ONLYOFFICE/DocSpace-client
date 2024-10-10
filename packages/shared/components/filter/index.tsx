@@ -66,10 +66,11 @@ const FilterInput = React.memo(
     removeSelectedItem,
 
     isRooms,
-    isAccounts,
-    isPeopleAccounts,
-    isGroupsAccounts,
-    isInsideGroup,
+    isContactsPage,
+    isContactsPeoplePage,
+    isContactsGroupsPage,
+    isContactsInsideGroupPage,
+    isContactsGuestsPage,
     isIndexing,
     isIndexEditingMode,
 
@@ -217,10 +218,11 @@ const FilterInput = React.memo(
               filterHeader={filterHeader}
               selectorLabel={selectorLabel}
               isRooms={isRooms}
-              isAccounts={isAccounts}
-              isPeopleAccounts={isPeopleAccounts}
-              isGroupsAccounts={isGroupsAccounts}
-              isInsideGroup={isInsideGroup}
+              isContactsPage={isContactsPage}
+              isContactsPeoplePage={isContactsPeoplePage}
+              isContactsGroupsPage={isContactsGroupsPage}
+              isContactsInsideGroupPage={isContactsInsideGroupPage}
+              isContactsGuestsPage={isContactsGuestsPage}
               title={filterTitle}
               userId={userId}
               disableThirdParty={disableThirdParty}

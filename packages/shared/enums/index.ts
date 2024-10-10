@@ -442,6 +442,12 @@ export const enum FilterGroups {
   filterGroup = "filter-group",
   groupsFilterMember = "filter-group-member",
   groupsFilterManager = "filter-group-manager",
+
+  filterLoginType = "filter-login-type",
+  filterStatus = "filter-status",
+  filterAccount = "filter-account",
+  filterOther = "filter-other",
+  filterInviter = "filter-inviter",
 }
 
 export const enum FilterKeys {

@@ -71,6 +71,7 @@ const EditRoomEvent = ({
       zoom: 1,
     },
     roomOwner: item.createdBy,
+    canChangeRoomOwner: item?.security?.ChangeOwner || false,
     indexing: item.indexing,
     lifetime: item.lifetime,
     denyDownload: item.denyDownload,

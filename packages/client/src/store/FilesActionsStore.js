@@ -316,8 +316,6 @@ class FilesActionStore {
       }
     }
 
-    const operationId = uniqueid("operation_");
-
     const toFolderId = folderId ? folderId : this.selectedFolderStore.id;
 
     const pbData = {
@@ -432,7 +430,6 @@ class FilesActionStore {
 
     if (folderIds.length || fileIds.length) {
       try {
-        this.filesStore.setOperationAction(true);
         this.setGroupMenuBlocked(true);
         await removeFiles(folderIds, fileIds, deleteAfter, immediately)
           .then(async (res) => {
@@ -498,7 +495,6 @@ class FilesActionStore {
         setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
         return toastr.error(err.message ? err.message : err);
       } finally {
-        this.filesStore.setOperationAction(false);
         this.setGroupMenuBlocked(false);
       }
     }
@@ -884,17 +880,14 @@ class FilesActionStore {
       operationId,
     };
 
-    this.filesStore.setOperationAction(true);
-
     const destFolderId = isRecycleBinFolder ? null : recycleBinFolderId;
 
     if (isFile) {
       addActiveItems([itemId], null, destFolderId);
-      return deleteFile(itemId)
-        .then(async (res) => {
-          if (res[0]?.error) return Promise.reject(res[0].error);
-          const data = res[0] ? res[0] : null;
-          await this.uploadDataStore.loopFilesOperations(data, pbData);
+      return deleteFile(itemId).then(async (res) => {
+        if (res[0]?.error) return Promise.reject(res[0].error);
+        const data = res[0] ? res[0] : null;
+        await this.uploadDataStore.loopFilesOperations(data, pbData);
 
         this.updateFilesAfterDelete(operationId);
         this.filesStore.removeFiles(
@@ -925,15 +918,13 @@ class FilesActionStore {
         )
         .finally(() => {
           this.setGroupMenuBlocked(false);
-          this.filesStore.setOperationAction(false);
         });
     } else {
       addActiveItems(null, [itemId], destFolderId);
-      return deleteFolder(itemId)
-        .then(async (res) => {
-          if (res[0]?.error) return Promise.reject(res[0].error);
-          const data = res[0] ? res[0] : null;
-          await this.uploadDataStore.loopFilesOperations(data, pbData);
+      return deleteFolder(itemId).then(async (res) => {
+        if (res[0]?.error) return Promise.reject(res[0].error);
+        const data = res[0] ? res[0] : null;
+        await this.uploadDataStore.loopFilesOperations(data, pbData);
 
         this.updateFilesAfterDelete(operationId);
         this.filesStore.removeFiles(
@@ -943,9 +934,8 @@ class FilesActionStore {
           destFolderId,
         );
 
-          getIsEmptyTrash();
-        })
-        .finally(() => this.filesStore.setOperationAction(false));
+        getIsEmptyTrash();
+      });
     }
   };
 

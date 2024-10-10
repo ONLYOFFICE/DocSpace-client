@@ -74,6 +74,10 @@ const ConvertDialogComponent = (props) => {
     isFavoritesFolder,
     isShareFolder,
     setIsConvertSingleFile,
+    createNewIfExist,
+    isUploadAction,
+    cancelUploadAction,
+    conversionFiles,
   } = props;
 
   const options = [
@@ -113,6 +117,14 @@ const ConvertDialogComponent = (props) => {
     setStoreOriginal(!storeOriginalFiles, "storeOriginalFiles");
   const onChangeMessageVisible = () => setHideMessage(!hideMessage);
 
+  const onCloseDialog = () => {
+    if (isUploadAction && conversionFiles?.length) {
+      cancelUploadAction(conversionFiles);
+    }
+
+    onClose();
+  };
+
   const onClose = () => {
     setConvertDialogVisible(false);
     setIsConvertSingleFile(false);
@@ -139,7 +151,7 @@ const ConvertDialogComponent = (props) => {
       convertFile(item, t, convertItem.isOpen);
     } else {
       hideMessage && hideConfirmConvert();
-      convertUploadedFiles(t);
+      convertUploadedFiles(t, createNewIfExist);
     }
   };
 
@@ -147,7 +159,7 @@ const ConvertDialogComponent = (props) => {
     <ModalDialog
       isLoading={!tReady}
       visible={visible}
-      onClose={onClose}
+      onClose={onCloseDialog}
       withFooterCheckboxes
       autoMaxHeight
     >
@@ -228,7 +240,7 @@ const ConvertDialogComponent = (props) => {
               label={t("Common:CloseButton")}
               size="normal"
               scale
-              onClick={onClose}
+              onClick={onCloseDialog}
             />
           </div>
         </StyledFooterContent>
@@ -255,16 +267,24 @@ export default inject(
       isFavoritesFolder,
       isShareFolder,
     } = treeFoldersStore;
-    const { convertUploadedFiles, convertFile, setIsConvertSingleFile } =
-      uploadDataStore;
+    const {
+      convertUploadedFiles,
+      convertFile,
+      setIsConvertSingleFile,
+      cancelUploadAction,
+    } = uploadDataStore;
     const { storeOriginalFiles, setStoreOriginal, hideConfirmConvert } =
       filesSettingsStore;
     const { id: folderId } = selectedFolderStore;
     const {
       convertDialogVisible: visible,
+      convertDialogData,
       setConvertDialogVisible,
       convertItem,
     } = dialogsStore;
+
+    const createNewIfExist = convertDialogData.createNewIfExist ?? true;
+    const isUploadAction = convertDialogData.isUploadAction ?? false;
 
     return {
       visible,
@@ -281,6 +301,10 @@ export default inject(
       isFavoritesFolder,
       isShareFolder,
       setIsConvertSingleFile,
+      createNewIfExist,
+      isUploadAction,
+      cancelUploadAction,
+      conversionFiles: convertDialogData.files,
     };
   },
 )(observer(ConvertDialog));

@@ -171,7 +171,6 @@ class FilesStore {
 
   tempActionFilesIds = [];
   tempActionFoldersIds = [];
-  operationAction = false;
 
   isErrorRoomNotAvailable = false;
 
@@ -263,7 +262,7 @@ class FilesStore {
         return;
       }
 
-      if (!(this.clientLoadingStore.isLoading || this.operationAction))
+      if (!this.clientLoadingStore.isLoading)
         switch (opt?.cmd) {
           case "create":
             this.wsModifyFolderCreate(opt);
@@ -275,21 +274,6 @@ class FilesStore {
             this.wsModifyFolderDelete(opt);
             break;
         }
-
-      if (
-        opt?.cmd &&
-        opt.id &&
-        (opt.type === "file" || opt.type === "folder") &&
-        (opt.cmd === "create" || opt.cmd === "delete")
-      ) {
-        runInAction(() => {
-          if (opt.cmd === "create") {
-            this.selectedFolderStore[opt.type + "sCount"]++;
-          } else if (opt.cmd === "delete") {
-            this.selectedFolderStore[opt.type + "sCount"]--;
-          }
-        });
-      }
 
       this.treeFoldersStore.updateTreeFoldersItem(opt);
     });
@@ -498,6 +482,10 @@ class FilesStore {
 
       if (foundIndex > -1) return;
 
+      this.selectedFolderStore.setFilesCount(
+        this.selectedFolderStore.filesCount + 1,
+      );
+
       setTimeout(() => {
         const foundIndex = this.files.findIndex((x) => x.id === file.id);
         if (foundIndex > -1) {
@@ -516,6 +504,10 @@ class FilesStore {
         });
       }, 300);
     } else if (opt?.type === "folder" && opt?.id) {
+      this.selectedFolderStore.setFoldersCount(
+        this.selectedFolderStore.foldersCount + 1,
+      );
+
       const foundIndex = this.folders.findIndex((x) => x.id == opt?.id);
 
       if (foundIndex > -1) return;
@@ -623,6 +615,10 @@ class FilesStore {
       const foundIndex = this.files.findIndex((x) => x.id === opt?.id);
       if (foundIndex == -1) return;
 
+      this.selectedFolderStore.setFilesCount(
+        this.selectedFolderStore.filesCount - 1,
+      );
+
       console.log(
         "[WS] delete file",
         this.files[foundIndex].id,
@@ -665,6 +661,10 @@ class FilesStore {
     } else if (opt?.type === "folder" && opt?.id) {
       const foundIndex = this.folders.findIndex((x) => x.id === opt?.id);
       if (foundIndex == -1) return;
+
+      this.selectedFolderStore.setFoldersCount(
+        this.selectedFolderStore.foldersCount - 1,
+      );
 
       console.log(
         "[WS] delete folder",
@@ -728,10 +728,6 @@ class FilesStore {
 
   setTempActionFoldersIds = (tempActionFoldersIds) => {
     this.tempActionFoldersIds = tempActionFoldersIds;
-  };
-
-  setOperationAction = (operationAction) => {
-    this.operationAction = operationAction;
   };
 
   setClearSearch = (clearSearch) => {
@@ -3037,7 +3033,6 @@ class FilesStore {
           toastr.error(err);
         })
         .finally(() => {
-          this.setOperationAction(false);
           this.setTempActionFilesIds([]);
           this.setTempActionFoldersIds([]);
         });
@@ -3070,7 +3065,6 @@ class FilesStore {
           toastr.error(err);
         })
         .finally(() => {
-          this.setOperationAction(false);
           this.setTempActionFilesIds([]);
           this.setTempActionFoldersIds([]);
         });

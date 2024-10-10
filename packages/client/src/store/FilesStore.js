@@ -587,13 +587,11 @@ class FilesStore {
       }
 
       if (this.bufferSelection) {
-        const foundIndex = [this.bufferSelection].findIndex(
-          (x) => x.id === folder.id,
-        );
-        if (foundIndex > -1) {
-          runInAction(() => {
-            this.bufferSelection[foundIndex] = folder;
-          });
+        if (
+          this.bufferSelection.id === folder.id &&
+          (this.bufferSelection.isFolder || this.bufferSelection.isRoom)
+        ) {
+          this.setBufferSelection(folder);
         }
       }
 

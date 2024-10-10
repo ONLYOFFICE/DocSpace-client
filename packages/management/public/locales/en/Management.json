@@ -5,7 +5,7 @@
   "CreateSpaceDescription": "You have successfully connected your domain to your IP address. To edit the space address settings, you need to set the future {{productName}} name",
   "CreatingPortal": "Creating new {{productName}}",
   "CurrentSpace": "Current space",
-  "DeletePortalText": "You are going to permanently delete the <1>{{docspaceAddress}}</1> space with all the stored data and accounts. This action cannot be undone.",
+  "DeletePortalText": "You are going to permanently delete the <1>{{domain}}</1> space with all the stored data and accounts. This action cannot be undone.",
   "DomainName": "Domain name",
   "DomainNotFound": "Domain not found, please check in DNS settings",
   "DomainSettings": "Domain settings",

@@ -141,7 +141,7 @@ const DeletePortalDialog = () => {
         <Trans
           i18nKey="DeletePortalText"
           values={{
-            docspaceAddress: domain,
+            domain,
           }}
           components={{
             1: <strong />,

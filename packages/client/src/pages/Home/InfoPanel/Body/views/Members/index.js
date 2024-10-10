@@ -105,21 +105,29 @@ const Members = ({
     (member) => member.id === selfId,
   );
 
-  const { administrators, users, expected, groups } = infoPanelMembers;
+  const { administrators, users, expected, groups, guests } = infoPanelMembers;
 
-  const membersList = [...administrators, ...groups, ...users, ...expected];
+  const membersList = [
+    ...administrators,
+    ...groups,
+    ...users,
+    ...guests,
+    ...expected,
+  ];
 
   const adminsTitleCount = administrators.length ? 1 : 0;
   const usersTitleCount = users.length ? 1 : 0;
   const expectedTitleCount = expected.length ? 1 : 0;
   const groupsTitleCount = groups.length ? 1 : 0;
+  const guestsTitleCount = guests.length ? 1 : 0;
 
   const headersCount = withoutTitlesAndLinks
     ? 0
     : adminsTitleCount +
       usersTitleCount +
       expectedTitleCount +
-      groupsTitleCount;
+      groupsTitleCount +
+      guestsTitleCount;
 
   const onAddNewLink = async () => {
     if (isPublicRoom || primaryLink) {

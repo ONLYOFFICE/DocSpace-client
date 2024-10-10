@@ -42,10 +42,11 @@ const FilterButton = ({
   filterHeader,
   selectorLabel,
   isRooms,
-  isAccounts,
-  isPeopleAccounts,
-  isGroupsAccounts,
-  isInsideGroup,
+  isContactsPage,
+  isContactsPeoplePage,
+  isContactsGroupsPage,
+  isContactsInsideGroupPage,
+  isContactsGuestsPage,
   id,
   title,
   userId,
@@ -80,10 +81,11 @@ const FilterButton = ({
           onFilter={onFilter}
           selectorLabel={selectorLabel}
           isRooms={isRooms}
-          isAccounts={isAccounts}
-          isPeopleAccounts={isPeopleAccounts}
-          isGroupsAccounts={isGroupsAccounts}
-          isInsideGroup={isInsideGroup}
+          isContactsPage={isContactsPage}
+          isContactsPeoplePage={isContactsPeoplePage}
+          isContactsGroupsPage={isContactsGroupsPage}
+          isContactsInsideGroupPage={isContactsInsideGroupPage}
+          isContactsGuestsPage={isContactsGuestsPage}
           userId={userId}
           disableThirdParty={disableThirdParty}
         />

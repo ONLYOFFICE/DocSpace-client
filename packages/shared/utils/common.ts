@@ -28,6 +28,7 @@
 /* eslint-disable no-multi-str */
 /* eslint-disable no-plusplus */
 
+import type { Location } from "@remix-run/router";
 import find from "lodash/find";
 import moment from "moment-timezone";
 import { findWindows } from "windows-iana";
@@ -150,11 +151,11 @@ export const getUserTypeLabel = (
     case "manager":
       return t("Common:RoomAdmin");
     case "collaborator":
-      return t("Common:PowerUser");
+      return t("Common:User");
     case "user":
-      return t("Common:User");
+      return t("Common:Guest");
     default:
-      return t("Common:User");
+      return t("Common:Guest");
   }
 };
 
@@ -297,20 +298,12 @@ export function isAdmin(currentUser: TUser) {
   );
 }
 
-export const getUserRole = (user: TUser) => {
+export const getUserType = (user: TUser) => {
   if (user.isOwner) return "owner";
-  if (
-    isAdmin(user) ||
-    user.access === ShareAccessRights.RoomManager ||
-    user.access === ShareAccessRights.Collaborator
-  )
-    // TODO: Change to People Product Id const
-    return "admin";
-  // TODO: Need refactoring
-  if (user.isVisitor) return "user";
-  if (user.isCollaborator) return "collaborator";
+  if (isAdmin(user)) return "admin";
   if (user.isRoomAdmin) return "manager";
-
+  if (user.isCollaborator) return "collaborator";
+  if (user.isVisitor) return "user";
   return "user";
 };
 
@@ -1191,7 +1184,7 @@ export const getUserTypeName = (
 
   if (isRoomAdmin) return t("Common:RoomAdmin");
 
-  if (isCollaborator) return t("Common:PowerUser");
+  if (isCollaborator) return t("Common:User");
 
   return t("Common:User");
 };
@@ -1209,7 +1202,7 @@ export const getUserTypeDescription = (
 
   if (isRoomAdmin) return t("Translations:RoleRoomAdminDescription");
 
-  if (isCollaborator) return t("Translations:RolePowerUserDescription");
+  if (isCollaborator) return t("Translations:RoleNewUserDescription");
 
   return t("Translations:RoleViewerDescription");
 };

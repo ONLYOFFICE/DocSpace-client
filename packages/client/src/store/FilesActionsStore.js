@@ -81,7 +81,8 @@ import { getCategoryType } from "SRC_DIR/helpers/utils";
 import { muteRoomNotification } from "@docspace/shared/api/settings";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import AccountsFilter from "@docspace/shared/api/people/filter";
+import UsersFilter from "@docspace/shared/api/people/filter";
+import GroupsFilter from "@docspace/shared/api/groups/filter";
 import { RoomSearchArea, UrlActionType } from "@docspace/shared/enums";
 import {
   getConvertedQuota,
@@ -97,6 +98,7 @@ import {
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
 import api from "@docspace/shared/api";
 import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
+import { getContactsView } from "SRC_DIR/helpers/contacts";
 
 class FilesActionStore {
   settingsStore;
@@ -2523,8 +2525,7 @@ class FilesActionStore {
     const { roomType } = this.selectedFolderStore;
     const { setSelectedNode } = this.treeFoldersStore;
     const { clearFiles, setBufferSelection } = this.filesStore;
-    const { clearInsideGroup, insideGroupBackUrl } =
-      this.peopleStore.groupsStore;
+    const { insideGroupBackUrl } = this.peopleStore.groupsStore;
     const { isLoading } = this.clientLoadingStore;
 
     if (isLoading) return;
@@ -2581,18 +2582,23 @@ class FilesActionStore {
     if (categoryType === CategoryType.Accounts) {
       if (insideGroupBackUrl) {
         window.DocSpace.navigate(insideGroupBackUrl);
-        clearInsideGroup();
+
         return;
       }
-      const accountsFilter = AccountsFilter.getDefault();
-      const params = accountsFilter.toUrlParams();
+      const contactsTab = getContactsView();
+
+      const filter =
+        contactsTab === "groups"
+          ? GroupsFilter.getDefault()
+          : UsersFilter.getDefault();
+      const params = filter.toUrlParams();
       const path = getCategoryUrl(CategoryType.Accounts);
 
       clearFiles();
 
       if (window.location.search.includes("group")) {
         setSelectedNode(["accounts", "groups", "filter"]);
-        return window.DocSpace.navigate(`accounts/groups?${params}`, {
+        return window.DocSpace.navigate(`accounts/groups/filter?${params}`, {
           replace: true,
         });
       }

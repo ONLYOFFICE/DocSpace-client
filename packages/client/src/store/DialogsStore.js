@@ -441,7 +441,6 @@ class DialogsStore {
   isPaidUserAccess = (selectedAccess) => {
     return (
       selectedAccess === EmployeeType.Admin ||
-      selectedAccess === EmployeeType.Collaborator ||
       selectedAccess === EmployeeType.User
     );
   };

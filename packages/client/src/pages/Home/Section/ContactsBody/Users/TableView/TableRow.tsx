@@ -1,0 +1,466 @@
+// (c) Copyright Ascensio System SIA 2009-2024
+//
+// This program is a free software product.
+// You can redistribute it and/or modify it under the terms
+// of the GNU Affero General Public License (AGPL) version 3 as published by the Free Software
+// Foundation. In accordance with Section 7(a) of the GNU AGPL its Section 15 shall be amended
+// to the effect that Ascensio System SIA expressly excludes the warranty of non-infringement of
+// any third-party rights.
+//
+// This program is distributed WITHOUT ANY WARRANTY, without even the implied warranty
+// of MERCHANTABILITY or FITNESS FOR A PARTICULAR  PURPOSE. For details, see
+// the GNU AGPL at: http://www.gnu.org/licenses/agpl-3.0.html
+//
+// You can contact Ascensio System SIA at Lubanas st. 125a-25, Riga, Latvia, EU, LV-1021.
+//
+// The  interactive user interfaces in modified source and object code versions of the Program must
+// display Appropriate Legal Notices, as required under Section 5 of the GNU AGPL version 3.
+//
+// Pursuant to Section 7(b) of the License you must retain the original Product logo when
+// distributing the program. Pursuant to Section 7(e) we decline to grant you any rights under
+// trademark law for use of our trademarks.
+//
+// All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
+// content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+// International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+import React from "react";
+import { useTheme } from "styled-components";
+import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
+
+import { TableCell } from "@docspace/shared/components/table";
+import { Link, LinkType } from "@docspace/shared/components/link";
+import { Text } from "@docspace/shared/components/text";
+import { Checkbox } from "@docspace/shared/components/checkbox";
+import { EmployeeType } from "@docspace/shared/enums";
+import {
+  ComboBox,
+  ComboBoxSize,
+  TOption,
+} from "@docspace/shared/components/combobox";
+import { ContextMenuModel } from "@docspace/shared/components/context-menu";
+
+import withContent from "SRC_DIR/HOCs/withPeopleContent";
+import SpaceQuota from "SRC_DIR/components/SpaceQuota";
+
+import Badges from "../../Badges";
+
+import { TableRowProps, TableRowStores } from "./TableView.types";
+import {
+  StyledGroupsComboBox,
+  StyledWrapper,
+  StyledPeopleRow,
+} from "./TableView.styled";
+
+const PeopleTableRow = ({
+  item,
+  getContextModel,
+  element,
+  checkedProps,
+  onContentRowSelect,
+  onContentRowClick,
+  onEmailClick,
+  onUserContextClick,
+
+  isOwner,
+  changeUserType,
+
+  isActive,
+  canChangeUserType,
+  hideColumns,
+  value,
+  standalone,
+  onOpenGroup,
+  showStorageInfo,
+
+  typeColumnIsEnabled,
+  groupColumnIsEnabled,
+  emailColumnIsEnabled,
+  invitedDateColumnIsEnabled,
+  inviterColumnIsEnabled,
+  storageColumnIsEnabled,
+
+  isGuests,
+}: TableRowProps) => {
+  const theme = useTheme();
+  const { t } = useTranslation(["People", "Common", "Settings"]);
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const {
+    displayName,
+    email,
+    statusType,
+
+    position,
+
+    role,
+    isVisitor,
+    isCollaborator,
+    isSSO,
+    isLDAP,
+  } = item;
+
+  const isPending = statusType === "pending" || statusType === "disabled";
+
+  const nameColor = isPending
+    ? theme.peopleTableRow.pendingNameColor
+    : theme.peopleTableRow.nameColor;
+  const sideInfoColor = theme.peopleTableRow.sideInfoColor;
+
+  const getTypesOptions = React.useCallback(() => {
+    const options = [];
+
+    const adminOption = {
+      key: "admin",
+      title: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
+      label: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
+      action: "admin",
+    };
+    const managerOption = {
+      key: "manager",
+      title: t("Common:RoomAdmin"),
+      label: t("Common:RoomAdmin"),
+      action: "manager",
+    };
+    const collaboratorOption = {
+      key: "collaborator",
+      title: t("Common:User"),
+      label: t("Common:User"),
+      action: "collaborator",
+    };
+    const userOption = {
+      key: "user",
+      title: t("Common:Guest"),
+      label: t("Common:Guest"),
+      action: "user",
+    };
+
+    if (isOwner) options.push(adminOption);
+
+    options.push(managerOption);
+
+    if (isCollaborator || isVisitor) options.push(collaboratorOption);
+
+    if (isVisitor) options.push(userOption);
+
+    return options;
+  }, [t, isOwner, isVisitor, isCollaborator]);
+
+  const onAbort = () => {
+    setIsLoading(false);
+  };
+
+  const onSuccess = () => {
+    setIsLoading(false);
+  };
+
+  const onTypeChange = React.useCallback(
+    (option: TOption) => {
+      if (option.action) {
+        setIsLoading(true);
+        if (
+          !changeUserType(
+            option.action as EmployeeType,
+            [item],
+            onSuccess,
+            onAbort,
+          )
+        ) {
+          setIsLoading(false);
+        }
+      }
+    },
+    [item, changeUserType],
+  );
+
+  const onOpenGroupClick = React.useCallback(
+    ({ action, title }: TOption) => onOpenGroup!(action as string, true, title),
+    [onOpenGroup],
+  );
+
+  const getUserTypeLabel = React.useCallback(() => {
+    switch (role) {
+      case "owner":
+        return t("Common:Owner");
+      case "admin":
+        return t("Common:PortalAdmin", {
+          productName: t("Common:ProductName"),
+        });
+      case "manager":
+        return t("Common:RoomAdmin");
+      case "collaborator":
+        return t("Common:User");
+      case "user":
+        return t("Common:User");
+      default:
+        return "";
+    }
+  }, [role, t]);
+
+  const typeLabel = getUserTypeLabel();
+
+  const isChecked = checkedProps!.checked;
+
+  const renderGroupsCell = () => {
+    const groups = item.groups || [];
+    const groupItems = groups
+      .map((group) => ({
+        key: group.id,
+        title: group.name,
+        label: group.name,
+        action: group.id,
+      }))
+      .slice(0, 5);
+
+    if (groups.length > 1)
+      return (
+        <StyledGroupsComboBox
+          className="groups-combobox"
+          selectedOption={{
+            key: "first-group",
+            title: groups[0].name,
+            label: `${groups[0].name} `,
+          }}
+          plusBadgeValue={groups.length - 1}
+          onSelect={onOpenGroupClick}
+          options={groupItems}
+          scaled={false}
+          directionY="both"
+          size={ComboBoxSize.content}
+          modernView
+          manualWidth="fit-content"
+          optionStyle={{ maxWidth: "400px" }}
+          textOverflow
+        />
+      );
+
+    if (groups.length === 1)
+      return (
+        <Link
+          className="plainTextItem"
+          type={LinkType.page}
+          title={email}
+          fontSize="13px"
+          fontWeight={600}
+          color={sideInfoColor}
+          onClick={() => onOpenGroupClick({ action: groups[0].id } as TOption)}
+          isTextOverflow
+        >
+          {groups[0].name}
+        </Link>
+      );
+
+    return null;
+  };
+
+  const renderTypeCell = () => {
+    const typesOptions = getTypesOptions();
+
+    const combobox = (
+      <ComboBox
+        className="type-combobox"
+        selectedOption={
+          typesOptions.find((option) => option.key === role) || ({} as TOption)
+        }
+        options={typesOptions}
+        onSelect={onTypeChange}
+        scaled={false}
+        directionY="both"
+        size={ComboBoxSize.content}
+        displaySelectedOption
+        modernView
+        manualWidth="auto"
+        isLoading={isLoading}
+      />
+    );
+
+    const text = (
+      <Text
+        className="plainTextItem"
+        title={position}
+        fontSize="13px"
+        fontWeight={600}
+        color={sideInfoColor}
+        truncate
+        noSelect
+        dir="auto"
+      >
+        {typeLabel}
+      </Text>
+    );
+
+    const canChange = canChangeUserType(item);
+
+    return canChange ? combobox : text;
+  };
+
+  const typeCell = renderTypeCell();
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onContentRowSelect?.(e.target.checked, item);
+  };
+
+  const onRowContextClick = React.useCallback(
+    (rightMouseButtonClick?: boolean) => {
+      onUserContextClick?.(item, !rightMouseButtonClick);
+    },
+    [item, onUserContextClick],
+  );
+
+  const onRowClick = (e: React.MouseEvent) => onContentRowClick?.(e, item);
+
+  const isPaidUser = !standalone && !isVisitor && !isCollaborator;
+
+  return (
+    <StyledWrapper
+      className={`user-item ${
+        isChecked || isActive ? "table-row-selected" : ""
+      } ${item.id}`}
+      value={value}
+    >
+      <StyledPeopleRow
+        key={item.id}
+        className="table-row"
+        checked={isChecked}
+        isActive={isActive!}
+        onClick={onRowClick}
+        fileContextClick={onRowContextClick}
+        hideColumns={hideColumns}
+        contextOptions={item.options as unknown as ContextMenuModel[]}
+        getContextModel={getContextModel!}
+        isIndexEditingMode={false}
+        badgeUrl=""
+      >
+        <TableCell className="table-container_user-name-cell">
+          <TableCell
+            hasAccess
+            className="table-container_row-checkbox-wrapper"
+            checked={isChecked}
+          >
+            <div className="table-container_element">{element}</div>
+            <Checkbox
+              className="table-container_row-checkbox"
+              onChange={onChange}
+              isChecked={isChecked}
+            />
+          </TableCell>
+
+          <Text
+            title={displayName}
+            fontWeight="600"
+            fontSize="13px"
+            color={nameColor}
+            className="table-cell_username"
+            dir="auto"
+            truncate
+          >
+            {statusType === "pending"
+              ? email
+              : displayName?.trim()
+                ? displayName
+                : email}
+          </Text>
+          <Badges
+            statusType={statusType}
+            isPaid={isPaidUser}
+            isSSO={isSSO}
+            isLDAP={isLDAP}
+          />
+        </TableCell>
+
+        {isGuests ? null : typeColumnIsEnabled ? (
+          <TableCell className="table-cell_type">{typeCell}</TableCell>
+        ) : (
+          <div />
+        )}
+
+        {isGuests ? null : groupColumnIsEnabled ? (
+          <TableCell className="table-cell_groups">
+            {renderGroupsCell()}
+          </TableCell>
+        ) : (
+          <div />
+        )}
+
+        {emailColumnIsEnabled ? (
+          <TableCell className="table-cell_email">
+            <Link
+              type={LinkType.page}
+              title={email}
+              fontSize="13px"
+              fontWeight={600}
+              color={sideInfoColor}
+              onClick={onEmailClick}
+              isTextOverflow
+              enableUserSelect
+            >
+              {email}
+            </Link>
+          </TableCell>
+        ) : (
+          <div />
+        )}
+
+        {isGuests ? (
+          inviterColumnIsEnabled ? (
+            <TableCell className="table-cell_inviter">
+              <Text
+                title={item.createdBy?.displayName}
+                fontSize="13px"
+                fontWeight={600}
+                color={sideInfoColor}
+                truncate
+                noSelect
+                dir="auto"
+              >
+                {item.createdBy?.displayName}
+              </Text>
+            </TableCell>
+          ) : (
+            <div />
+          )
+        ) : null}
+
+        {isGuests ? (
+          invitedDateColumnIsEnabled ? (
+            <TableCell className="table-cell_invited-date">
+              <Text
+                title={item.registrationDate}
+                fontSize="13px"
+                fontWeight={600}
+                color={sideInfoColor}
+                truncate
+                noSelect
+                dir="auto"
+              >
+                {isPending ? null : item.registrationDate}
+              </Text>
+            </TableCell>
+          ) : (
+            <div />
+          )
+        ) : null}
+
+        {isGuests
+          ? null
+          : showStorageInfo &&
+            (storageColumnIsEnabled ? (
+              <TableCell className="table-cell_Storage/Quota">
+                <SpaceQuota hideColumns={hideColumns} item={item} type="user" />
+              </TableCell>
+            ) : (
+              <div />
+            ))}
+      </StyledPeopleRow>
+    </StyledWrapper>
+  );
+};
+
+export default inject(({ currentQuotaStore }: TableRowStores) => {
+  const { showStorageInfo } = currentQuotaStore;
+
+  return {
+    showStorageInfo,
+  };
+})(withContent(observer(PeopleTableRow)));

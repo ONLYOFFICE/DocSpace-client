@@ -28,6 +28,7 @@ import { inject, observer } from "mobx-react";
 
 import Article from "@docspace/shared/components/article";
 import { ArticleProps } from "@docspace/shared/components/article/Article.types";
+import { getUserType } from "@docspace/shared/utils/common";
 
 const ArticleWrapper = (props: ArticleProps) => {
   return <Article {...props} />;
@@ -50,8 +51,7 @@ export default inject<TStore>(
       isPaymentPageAvailable,
     } = authStore;
 
-    const { getActions, getUserRole, onProfileClick, isShowLiveChat } =
-      profileActionsStore;
+    const { getActions, onProfileClick, isShowLiveChat } = profileActionsStore;
 
     const { withSendAgain, user } = userStore;
 
@@ -101,7 +101,7 @@ export default inject<TStore>(
     return {
       onProfileClick,
       user,
-      getUserRole,
+      getUserType,
       getActions,
 
       currentTariffPlanTitle,

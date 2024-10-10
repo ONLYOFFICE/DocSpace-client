@@ -260,7 +260,7 @@ export const getOptions = (
     }),
     icon: <InviteUserFormIcon />,
     key: "invite-root-room",
-    onClick: () => actions.inviteRootUser(EmployeeType.Guest),
+    onClick: () => actions.inviteRootUser(EmployeeType.Collaborator),
     disabled: false,
   };
 

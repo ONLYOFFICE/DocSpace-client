@@ -81,6 +81,7 @@ import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
+import ReconnectReactSvgUrl from "PUBLIC_DIR/images/reconnect.svg?url";
 import ExportRoomIndexSvgUrl from "PUBLIC_DIR/images/icons/16/export-room-index.react.svg?url";
 
 import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
@@ -905,6 +906,8 @@ class ContextOptionsStore {
       setRestoreRoomDialogVisible(true);
     }
   };
+
+  onChangeRoomOwner = () => this.dialogsStore.setChangeRoomOwnerIsVisible(true);
 
   onLeaveRoom = () => {
     this.dialogsStore.setLeaveRoomDialogVisible(true);
@@ -1782,6 +1785,14 @@ class ContextOptionsStore {
         disabled: false,
       },
       {
+        id: "option_change-room-owner",
+        key: "change-room-owner",
+        label: t("Files:ChangeTheRoomOwner"),
+        icon: ReconnectReactSvgUrl,
+        onClick: this.onChangeRoomOwner,
+        disabled: false,
+      },
+      {
         id: "option_archive-room",
         key: "archive-room",
         label: t("MoveToArchive"),
@@ -2368,8 +2379,12 @@ class ContextOptionsStore {
 
     const isInsideGroup = !!groupId;
 
+    const { isCollaborator } = this.userStore?.user || {
+      isCollaborator: false,
+    };
+
     const canCreate =
-      (currentCanCreate || isAccountsPage) &&
+      (currentCanCreate || (isAccountsPage && !isCollaborator)) &&
       !isSettingsPage &&
       !isPublicRoom &&
       !isInsideGroup;
@@ -2413,19 +2428,10 @@ class ContextOptionsStore {
         id: "accounts-add_collaborator",
         className: "main-button_drop-down",
         icon: PersonDefaultReactSvgUrl,
-        label: t("Common:PowerUser"),
+        label: t("Common:User"),
         onClick: this.onInvite,
         "data-type": EmployeeType.Collaborator,
         key: "collaborator",
-      },
-      {
-        id: "accounts-add_user",
-        className: "main-button_drop-down",
-        icon: PersonDefaultReactSvgUrl,
-        label: t("Common:User"),
-        onClick: this.onInvite,
-        "data-type": EmployeeType.Guest,
-        key: "user",
       },
       {
         key: "separator",

@@ -48,6 +48,10 @@ import {
 
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import {
+  getContactsCheckboxItemLabel,
+  getContactsMenuItemId,
+} from "SRC_DIR/helpers/contacts";
+import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
@@ -194,19 +198,18 @@ const SectionHeaderContent = (props) => {
     moveToRoomsPage,
     setIsInfoPanelVisible,
 
-    getAccountsHeaderMenu,
-    isAccountsHeaderVisible,
+    getContactsHeaderMenu,
+    isUsersHeaderVisible,
     isGroupsHeaderVisible,
     isGroupsHeaderIndeterminate,
     isGroupsHeaderChecked,
-    isAccountsHeaderIndeterminate,
-    isAccountsHeaderChecked,
-    accountsCbMenuItems,
-    getAccountsMenuItemId,
-    getAccountsCheckboxItemLabel,
+    isUsersHeaderIndeterminate,
+    isUsersHeaderChecked,
+    cbContactsMenuItems,
     setAccountsSelected,
     setGroupsSelected,
     isRoomAdmin,
+    isCollaborator,
     isEmptyPage,
 
     isLoading,
@@ -294,9 +297,9 @@ const SectionHeaderContent = (props) => {
   const getMenuItems = () => {
     const checkboxOptions = isAccountsPage ? (
       <>
-        {accountsCbMenuItems.map((key) => {
-          const label = getAccountsCheckboxItemLabel(t, key);
-          const id = getAccountsMenuItemId(key);
+        {cbContactsMenuItems.map((key) => {
+          const label = getContactsCheckboxItemLabel(t, key);
+          const id = getContactsMenuItemId(key);
           return (
             <DropDownItem
               id={id}
@@ -409,7 +412,7 @@ const SectionHeaderContent = (props) => {
         },
       ]
     : isAccountsPage
-      ? getAccountsHeaderMenu(t, isGroupsPage)
+      ? getContactsHeaderMenu(t, isGroupsPage)
       : getHeaderMenu(t);
 
   const menuItems = getMenuItems();
@@ -426,14 +429,14 @@ const SectionHeaderContent = (props) => {
 
   if (isAccountsPage && !(isGroupsPage && isRoomAdmin)) {
     tableGroupMenuVisible =
-      (!isGroupsPage ? isAccountsHeaderVisible : isGroupsHeaderVisible) &&
+      (!isGroupsPage ? isUsersHeaderVisible : isGroupsHeaderVisible) &&
       tableGroupMenuVisible &&
       headerMenu.some((x) => !x.disabled);
     tableGroupMenuProps.isChecked = !isGroupsPage
-      ? isAccountsHeaderChecked
+      ? isUsersHeaderChecked
       : isGroupsHeaderChecked;
     tableGroupMenuProps.isIndeterminate = !isGroupsPage
-      ? isAccountsHeaderIndeterminate
+      ? isUsersHeaderIndeterminate
       : isGroupsHeaderIndeterminate;
     tableGroupMenuProps.withoutInfoPanelToggler = false;
   } else {
@@ -469,7 +472,7 @@ const SectionHeaderContent = (props) => {
     : isAccountsPage
       ? isInsideGroup
         ? getInsideGroupTitle()
-        : t("Common:Accounts")
+        : t("Common:Contacts")
       : isLoading && stateTitle
         ? stateTitle
         : title;
@@ -488,7 +491,7 @@ const SectionHeaderContent = (props) => {
   const accountsNavigationPath = isInsideGroup && [
     {
       id: 0,
-      title: t("Common:Accounts"),
+      title: t("Common:Contacts"),
       isRoom: false,
       isRootRoom: true,
     },
@@ -556,7 +559,7 @@ const SectionHeaderContent = (props) => {
                 showText={showText}
                 isRootFolder={isRoot && !isInsideGroup}
                 canCreate={
-                  (currentCanCreate || isAccountsPage) &&
+                  (currentCanCreate || (isAccountsPage && !isCollaborator)) &&
                   !isSettingsPage &&
                   !isPublicRoom &&
                   !isInsideGroup
@@ -660,7 +663,7 @@ export default inject(
     dialogsStore,
   }) => {
     const { startUpload } = uploadDataStore;
-    const isRoomAdmin = userStore.user?.isRoomAdmin;
+    const { isRoomAdmin, isCollaborator } = userStore.user;
 
     const {
       setSelected,
@@ -750,26 +753,23 @@ export default inject(
 
     const isEmptyArchive = !canRestoreAll && !canDeleteAll;
 
-    const {
-      selectionStore,
-      headerMenuStore,
-      getHeaderMenu: getAccountsHeaderMenu,
-    } = peopleStore;
+    const { usersStore, headerMenuStore } = peopleStore;
 
     const {
-      isHeaderVisible: isAccountsHeaderVisible,
+      isUsersHeaderVisible,
+      isUsersHeaderIndeterminate,
+      isUsersHeaderChecked,
+
       isGroupsHeaderVisible,
       isGroupsHeaderIndeterminate,
       isGroupsHeaderChecked,
-      isHeaderIndeterminate: isAccountsHeaderIndeterminate,
-      isHeaderChecked: isAccountsHeaderChecked,
-      cbMenuItems: accountsCbMenuItems,
-      getMenuItemId: getAccountsMenuItemId,
-      getCheckboxItemLabel: getAccountsCheckboxItemLabel,
+
+      cbContactsMenuItems,
+      getContactsHeaderMenu,
     } = headerMenuStore;
 
     const { isIndexEditingMode, setIsIndexEditingMode } = indexingStore;
-    const { setSelected: setAccountsSelected } = selectionStore;
+    const { setSelected: setAccountsSelected } = usersStore;
     const { isPublicRoom } = publicRoomStore;
 
     let folderPath = navigationPath;
@@ -843,19 +843,18 @@ export default inject(
 
       moveToPublicRoom,
 
-      getAccountsHeaderMenu,
-      isAccountsHeaderVisible,
+      getContactsHeaderMenu,
+      isUsersHeaderVisible,
       isGroupsHeaderVisible,
       isGroupsHeaderIndeterminate,
       isGroupsHeaderChecked,
       setGroupsSelected,
-      isAccountsHeaderIndeterminate,
-      isAccountsHeaderChecked,
-      accountsCbMenuItems,
-      getAccountsMenuItemId,
-      getAccountsCheckboxItemLabel,
+      isUsersHeaderIndeterminate,
+      isUsersHeaderChecked,
+      cbContactsMenuItems,
       setAccountsSelected,
       isRoomAdmin,
+      isCollaborator,
       isEmptyPage,
       categoryType,
       theme,

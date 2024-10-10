@@ -603,7 +603,8 @@ class FilesStore {
         infoPanelSelection?.id == folder.id &&
         (infoPanelSelection?.isFolder || infoPanelSelection?.isRoom)
       ) {
-        updateInfoPanelSelection(folder);
+        const newInfoPanelSelection = this.getFilesListItems([folder]);
+        updateInfoPanelSelection(newInfoPanelSelection);
       }
     }
   };
@@ -1603,7 +1604,10 @@ class FilesStore {
                 usedSpace = room.usedSpace;
                 this.infoPanelStore.setInfoPanelRoom(room);
               } else {
-                this.infoPanelStore.updateInfoPanelSelection(room);
+                const newInfoPanelSelection = this.getFilesListItems(room);
+                this.infoPanelStore.updateInfoPanelSelection(
+                  newInfoPanelSelection,
+                );
               }
               const { mute } = room;
 

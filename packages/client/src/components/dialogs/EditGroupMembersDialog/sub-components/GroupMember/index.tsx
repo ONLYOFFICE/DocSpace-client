@@ -34,7 +34,6 @@ import { Avatar } from "@docspace/shared/components/avatar";
 import { ComboBox } from "@docspace/shared/components/combobox";
 import DefaultUserPhotoUrl from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import { decode } from "he";
-import { filterUserRoleOptions } from "SRC_DIR/helpers";
 import { Text } from "@docspace/shared/components/text";
 import { getUserRoleOptionsByUserAccess } from "@docspace/shared/utils/room-members/getUserRoleOptionsByUserAccess";
 import { getUserRoleOptionsByRoomType } from "@docspace/shared/utils/room-members/getUserRoleOptionsByRoomType";
@@ -43,7 +42,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { getUserRoleOptions } from "@docspace/shared/utils/room-members/getUserRoleOptions";
 import { EmployeeStatus, ShareAccessRights } from "@docspace/shared/enums";
-import { getUserRole, getUserTypeLabel } from "@docspace/shared/utils/common";
+import { getUserType, getUserTypeLabel } from "@docspace/shared/utils/common";
 import { TGroupMemberInvitedInRoom } from "@docspace/shared/api/groups/types";
 import { Box } from "@docspace/shared/components/box";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
@@ -74,25 +73,13 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
     false,
   );
 
-  const userRoleOptions = filterUserRoleOptions(fullRoomRoleOptions, user);
-
   const hasIndividualRightsInRoom =
     member.owner ||
     (member.userAccess && member.userAccess !== member.groupAccess);
 
-  let type;
-  if (user.isOwner) type = "owner";
-  else if (user.isAdmin) type = "admin";
-  else if (user.isRoomAdmin) type = "manager";
-  else if (user.isCollaborator) type = "collaborator";
-  else type = "user";
+  const type = getUserType(user);
 
-  const role = getUserRole(user, userRole?.type);
-
-  const typeLabel = getUserTypeLabel(
-    role as "owner" | "admin" | "user" | "collaborator" | "manager",
-    t,
-  );
+  const typeLabel = getUserTypeLabel(type, t);
 
   let selectedUserRoleCBOption;
   if (user.isOwner)
@@ -107,11 +94,6 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
       t,
       member.userAccess || member.groupAccess,
     );
-
-  const availableUserRoleCBOptions = filterUserRoleOptions(
-    fullRoomRoleOptions,
-    user,
-  );
 
   const onChangeRole = async (userRoleOption) => {
     setIsLoading(true);
@@ -175,13 +157,13 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
         )}
       </div>
 
-      {userRole && userRoleOptions && (
+      {userRole && fullRoomRoleOptions && (
         <div className="role-wrapper">
           {member.canEditAccess ? (
             <ComboBox
               className="role-combobox"
               selectedOption={userRole}
-              options={availableUserRoleCBOptions}
+              options={fullRoomRoleOptions}
               scaled={false}
               withBackdrop={isMobile}
               size="content"

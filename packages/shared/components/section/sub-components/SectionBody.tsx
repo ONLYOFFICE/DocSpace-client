@@ -93,7 +93,7 @@ const SectionBody = React.memo(
     const focusProps = autoFocus
       ? {
           ref: focusRef,
-          tabIndex: -1,
+          //tabIndex: -1,
         }
       : {};
 

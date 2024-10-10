@@ -58,6 +58,7 @@ const link = (text, onClick) => (
     className="property-content"
     isHovered={true}
     onClick={onClick}
+    enableUserSelect
   >
     {text}
   </Link>

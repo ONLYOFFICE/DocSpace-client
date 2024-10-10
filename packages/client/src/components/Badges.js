@@ -287,7 +287,7 @@ const Badges = ({
           <Badge
             {...commonBadgeProps}
             className="badge-version badge-new-version tablet-badge icons-group"
-            label={t("New")}
+            label={t("Files:New")}
             onClick={onBadgeClick}
           />
         </BadgeWrapper>

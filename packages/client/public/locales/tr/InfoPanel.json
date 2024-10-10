@@ -35,7 +35,6 @@
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> oda kopyalandı",
   "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> odası oluşturuldu",
   "HistoryThirdParty": "Geçmiş ekranı, bağlı üçüncü taraf depoları olan genel odalar için kullanılamaz",
-  "InfoBanner": "Davet edilen kullanıcıların listesi, tüm odalara tam erişime sahip bu {{productName}}'in sahibini ve/veya yöneticilerini içerir. Sahibine ve/veya yöneticiye başka erişim hakları atanamaz. Odaya eklendiklerinde tüm değişikliklerden haberdar edileceklerdir.",
   "ItemsSelected": "Seçili öğeler",
   "LastModifiedBy": "Son Düzenleyen",
   "NoRecordsFound": "Kayıt bulunamadı",

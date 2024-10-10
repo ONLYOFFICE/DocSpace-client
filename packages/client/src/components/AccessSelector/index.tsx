@@ -100,7 +100,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
   );
 
   const selectedOption = accessOptions.filter(
-    (access) => access.access === +defaultAccess,
+    (access) => access?.access === +defaultAccess,
   )[0];
 
   const checkWidth = () => {

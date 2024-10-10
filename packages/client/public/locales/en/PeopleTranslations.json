@@ -17,6 +17,7 @@
   "PendingInviteTitle": "Pending invite",
   "PendingTitle": "Pending",
   "PeopleCount": "people: {{count}}",
+  "RegistrationDate": "Registration date",
   "RemoveData": "Delete personal data",
   "ResetAuth": "Reset authentication",
   "SearchByGroupMembers": "Search by group members",

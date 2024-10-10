@@ -133,7 +133,7 @@ export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
           t={t}
           serviceName="Nextcloud"
           usersExportDetails={{
-            name: t("Common:Accounts"),
+            name: t("Common:Contacts"),
             icon: PeopleIcon,
           }}
           personalExportDetails={{

@@ -187,6 +187,7 @@ const EditRoomDialog = ({
           setIsWrongTitle={setIsWrongTitle}
           onKeyUp={onKeyUpHandler}
           onOwnerChange={onOwnerChange}
+          canChangeOwner={roomParams?.security?.ChangeOwner}
         />
       </ModalDialog.Body>
 

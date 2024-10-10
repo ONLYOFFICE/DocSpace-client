@@ -106,7 +106,7 @@ const ImportStep = (props: ImportStepProps) => {
           sectionIcon: usersExportDetails.icon,
         }}
         importSection={{
-          sectionName: t("Common:Accounts"),
+          sectionName: t("Common:Contacts"),
           workspace: t("Common:ProductName"),
           sectionIcon: AccountsIcon,
         }}
@@ -123,7 +123,7 @@ const ImportStep = (props: ImportStepProps) => {
           workspace: serviceName,
         }}
         importSection={{
-          sectionName: t("Common:Accounts"),
+          sectionName: t("Common:Contacts"),
           workspace: t("Common:ProductName"),
           sectionIcon: AccountsIcon,
         }}

@@ -115,10 +115,10 @@ const ChangeUserTypeEvent = ({
       case "manager":
         return t("Common:RoomAdmin");
       case "collaborator":
-        return t("Common:PowerUser");
+        return t("Common:User");
       case "user":
       default:
-        return t("Common:User");
+        return t("Common:Guest");
     }
   };
 
@@ -145,13 +145,16 @@ export default inject(
     } = dialogsStore;
 
     const { setInfoPanelSelection } = infoPanelStore;
-    const { dialogStore, filterStore, usersStore } = peopleStore;
+    const { dialogStore, usersStore } = peopleStore;
 
     const { data: peopleDialogData } = dialogStore;
-    const { filter: peopleFilter } = filterStore;
-    const { updateUserType, getPeopleListItem, needResetUserSelection } =
-      usersStore;
-    const { setSelected } = peopleStore.selectionStore;
+    const {
+      updateUserType,
+      getPeopleListItem,
+      needResetUserSelection,
+      filter: peopleFilter,
+      setSelected,
+    } = usersStore;
     return {
       needResetUserSelection,
       getPeopleListItem,

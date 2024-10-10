@@ -89,10 +89,10 @@ const DeleteProfileEverDialogComponent = (props) => {
     setDialogData,
     getUsersList,
     needResetUserSelection,
-    removeUser,
+    removeUsers,
     userIds,
     filter,
-    refreshInsideGroup,
+    updateCurrentGroup,
     setSelected,
     deleteWithoutReassign,
     onlyOneUser,
@@ -117,10 +117,14 @@ const DeleteProfileEverDialogComponent = (props) => {
     setIsRequestRunning(true);
 
     deleteUser(id)
-      .then(() => {
-        return isInsideGroup
-          ? refreshInsideGroup()
-          : getUsersList(filter, true);
+      .then(async () => {
+        const actions = [getUsersList(filter, true, false)];
+
+        if (isInsideGroup) actions.push(updateCurrentGroup(filter.group));
+
+        await Promise.all(actions);
+
+        return;
       })
       .then(() => {
         toastr.success(t("SuccessfullyDeleteUserInfoMessage"));
@@ -134,7 +138,7 @@ const DeleteProfileEverDialogComponent = (props) => {
   };
   const onDeleteUsers = (ids) => {
     setIsRequestRunning(true);
-    removeUser(ids, filter, isInsideGroup)
+    removeUsers(ids)
       .then(() => {
         toastr.success(t("DeleteGroupUsersSuccessMessage"));
       })
@@ -232,10 +236,18 @@ DeleteProfileEverDialog.propTypes = {
 };
 
 export default inject(({ peopleStore }, { users }) => {
-  const { dialogStore, selectionStore, filterStore, usersStore } = peopleStore;
-  const { refreshInsideGroup } = peopleStore.groupsStore;
+  const { dialogStore, usersStore } = peopleStore;
+  const { updateCurrentGroup } = peopleStore.groupsStore;
 
-  const { getUsersList, needResetUserSelection } = peopleStore.usersStore;
+  const {
+    getUsersList,
+    needResetUserSelection,
+    filter,
+    removeUsers,
+    getUsersToRemoveIds: userIds,
+    setSelected,
+    selection,
+  } = usersStore;
 
   const {
     setDataReassignmentDialogVisible,
@@ -244,12 +256,6 @@ export default inject(({ peopleStore }, { users }) => {
     setIsDeletingUserWithReassignment,
     setDialogData,
   } = dialogStore;
-
-  const {
-    getUsersToRemoveIds: userIds,
-    setSelected,
-    selection,
-  } = selectionStore;
 
   const usersToDelete = users.length ? users : selection;
 
@@ -264,10 +270,10 @@ export default inject(({ peopleStore }, { users }) => {
     setIsDeletingUserWithReassignment,
     setDialogData,
     setSelected,
-    removeUser: usersStore.removeUser,
+    removeUsers,
     needResetUserSelection,
-    filter: filterStore.filter,
-    refreshInsideGroup,
+    filter,
+    updateCurrentGroup,
     getUsersList,
     deleteWithoutReassign,
     onlyOneUser,

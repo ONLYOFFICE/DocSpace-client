@@ -28,7 +28,7 @@ import { makeAutoObservable } from "mobx";
 import moment from "moment";
 
 import { getUserById } from "@docspace/shared/api/people";
-import { getUserRole } from "@docspace/shared/utils/common";
+import { getUserType } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
   EmployeeActivationStatus,
@@ -191,7 +191,7 @@ class InfoPanelStore {
     const {
       selection: peopleSelection,
       bufferSelection: peopleBufferSelection,
-    } = this.peopleStore.selectionStore;
+    } = this.peopleStore.usersStore;
 
     const {
       selection: groupsSelection,
@@ -324,6 +324,7 @@ class InfoPanelStore {
       if (this.infoPanelRoom?.id === room?.id) {
         this.setInfoPanelRoom(this.normalizeSelection(room));
       }
+      return;
     } else {
       this.setNewInfoPanelSelection();
     }
@@ -428,7 +429,7 @@ class InfoPanelStore {
     const { getUserContextOptions } = this.peopleStore.usersStore;
 
     const fetchedUser = await getUserById(userId);
-    fetchedUser.role = getUserRole(fetchedUser);
+    fetchedUser.role = getUserType(fetchedUser);
     fetchedUser.statusType = getUserStatus(fetchedUser);
     fetchedUser.options = getUserContextOptions(
       false,
@@ -543,7 +544,14 @@ class InfoPanelStore {
       : false;
   };
 
-  addMembersTitle = (t, administrators, users, expectedMembers, groups) => {
+  addMembersTitle = (
+    t,
+    administrators,
+    users,
+    expectedMembers,
+    groups,
+    guests,
+  ) => {
     let hasPrevAdminsTitle = this.getHasPrevTitle(
       administrators,
       "administration",
@@ -577,6 +585,16 @@ class InfoPanelStore {
       });
     }
 
+    let hasPrevGuestsTitle = this.getHasPrevTitle(users, "guest");
+
+    if (guests?.length && !hasPrevGuestsTitle) {
+      guests.unshift({
+        id: "guest",
+        displayName: t("Common:Guests"),
+        isTitle: true,
+      });
+    }
+
     let hasPrevExpectedTitle = this.getHasPrevTitle(
       expectedMembers,
       "expected",
@@ -597,6 +615,7 @@ class InfoPanelStore {
     const administrators = [];
     const expectedMembers = [];
     const groups = [];
+    const guests = [];
 
     members?.map((fetchedMember) => {
       const member = {
@@ -615,16 +634,25 @@ class InfoPanelStore {
         administrators.push(member);
       } else if (member.isGroup) {
         groups.push(member);
+      } else if (member.isVisitor) {
+        guests.push(member);
       } else {
         users.push(member);
       }
     });
 
     if (clearFilter && !withoutTitles) {
-      this.addMembersTitle(t, administrators, users, expectedMembers, groups);
+      this.addMembersTitle(
+        t,
+        administrators,
+        users,
+        expectedMembers,
+        groups,
+        guests,
+      );
     }
 
-    return { administrators, users, expectedMembers, groups };
+    return { administrators, users, expectedMembers, groups, guests };
   };
 
   fetchMembers = async (
@@ -635,16 +663,19 @@ class InfoPanelStore {
   ) => {
     if (this.membersIsLoading) return;
     const roomId = this.infoPanelSelection.id;
+    const roomType = this.infoPanelSelection.roomType;
 
-    const isPublic =
-      this.infoPanelSelection?.roomType ?? this.infoPanelSelection?.roomType;
+    const isPublicRoomType =
+      roomType === RoomsType.PublicRoom ||
+      roomType === RoomsType.CustomRoom ||
+      roomType === RoomsType.FormRoom;
 
     const requests = [
       this.filesStore.getRoomMembers(roomId, clearFilter, membersFilter),
     ];
 
     if (
-      isPublic &&
+      isPublicRoomType &&
       clearFilter &&
       this.withPublicRoomBlock &&
       !withoutTitlesAndLinks
@@ -662,7 +693,7 @@ class InfoPanelStore {
 
     links && this.publicRoomStore.setExternalLinks(links);
 
-    const { administrators, users, expectedMembers, groups } =
+    const { administrators, users, expectedMembers, groups, guests } =
       this.convertMembers(t, data, clearFilter, withoutTitlesAndLinks);
 
     return {
@@ -671,6 +702,7 @@ class InfoPanelStore {
       expected: expectedMembers,
       groups,
       roomId,
+      guests,
     };
   };
 
@@ -691,6 +723,7 @@ class InfoPanelStore {
       users: [...oldMembers.users, ...newMembers.users],
       expected: [...oldMembers.expected, ...newMembers.expectedMembers],
       groups: [...oldMembers.groups, ...newMembers.groups],
+      guests: [...oldMembers.guests, ...newMembers.guests],
     };
 
     if (!withoutTitles) {
@@ -700,6 +733,7 @@ class InfoPanelStore {
         mergedMembers.users,
         mergedMembers.expected,
         mergedMembers.groups,
+        mergedMembers.guests,
       );
     }
 

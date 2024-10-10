@@ -120,6 +120,8 @@ const DeletePortalDialog = () => {
 
   useEffect(() => {
     window.addEventListener("message", receiveMessage, false);
+
+    return () => window.removeEventListener("message", receiveMessage);
   }, []);
 
   return (

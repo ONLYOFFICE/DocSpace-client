@@ -50,7 +50,7 @@ const PureAccountsItem = ({
 
   const icon = getCatalogIconUrlByType(PageType.account);
 
-  const title = t("Accounts");
+  const title = t("Common:Contacts");
 
   const linkData = getLinkData("accounts");
 

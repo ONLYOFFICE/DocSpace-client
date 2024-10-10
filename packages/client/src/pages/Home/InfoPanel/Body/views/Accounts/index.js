@@ -102,15 +102,15 @@ const Accounts = (props) => {
     const collaboratorOption = {
       id: "info-account-type_collaborator",
       key: "collaborator",
-      title: t("Common:PowerUser"),
-      label: t("Common:PowerUser"),
+      title: t("Common:User"),
+      label: t("Common:User"),
       action: "collaborator",
     };
     const userOption = {
       id: "info-account-type_user",
       key: "user",
-      title: t("Common:User"),
-      label: t("Common:User"),
+      title: t("Common:Guest"),
+      label: t("Common:Guest"),
       action: "user",
     };
 
@@ -206,7 +206,8 @@ const Accounts = (props) => {
 
   const typeData = renderTypeData();
 
-  const statusText = isVisitor ? t("Common:Free") : t("Common:Paid");
+  const statusText =
+    isVisitor || isCollaborator ? t("Common:Free") : t("Common:Paid");
 
   return (
     <>
@@ -320,7 +321,7 @@ export default inject(
     settingsStore,
   }) => {
     const { isOwner, isAdmin, id: selfId } = userStore.user;
-    const { changeType: changeUserType, usersStore } = peopleStore;
+    const { usersStore } = peopleStore;
     const { canChangeUserType } = accessRightsStore;
 
     const { setInfoPanelSelection } = infoPanelStore;
@@ -328,7 +329,8 @@ export default inject(
     const {
       setSelection: setPeopleSelection,
       setBufferSelection: setPeopleBufferSelection,
-    } = peopleStore.selectionStore;
+      changeType: changeUserType,
+    } = usersStore;
 
     const { showStorageInfo } = currentQuotaStore;
     const { standalone } = settingsStore;

@@ -247,9 +247,12 @@ const FilterBlockItem = ({
       item.group === FilterGroups.filterAuthor ||
       item.group === FilterGroups.roomFilterSubject ||
       item.group === FilterGroups.filterGroup ||
-      item.group === FilterGroups.groupsFilterMember
+      item.group === FilterGroups.groupsFilterMember ||
+      item.group === FilterGroups.filterInviter
     ) {
       const [notSelectorItem, otherItem, selectorItem] = groupItem;
+
+      console.log("call", groupItem);
 
       if (
         item.key === otherItem.key &&

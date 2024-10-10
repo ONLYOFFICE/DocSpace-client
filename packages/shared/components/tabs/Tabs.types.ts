@@ -30,7 +30,7 @@ export type TTabItem = {
   /** Element id. */
   id: string;
   /** Tab text. */
-  name: string;
+  name: string | React.ReactNode;
   /** Content that is shown when you click on the tab.  */
   content: React.ReactNode;
   /** State of tab inclusion. State only works for tabs with a secondary theme. */

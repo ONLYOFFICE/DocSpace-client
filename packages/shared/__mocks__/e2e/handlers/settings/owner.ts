@@ -24,18 +24,25 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export {
-  thirdPartyProvider as thirdPartyProviderHandler,
-  successThirdpartyProviders,
-} from "./thirdPartyProviders";
+import { API_PREFIX, BASE_URL } from "../../utils";
 
-export { self as selfHandler, successSelf } from "./self";
+export const PATH = "settings/owner";
 
-export {
-  PATH as SELF_PATH,
-  PATH_CHANGE_AUTH_DATA as SELF_PATH_CHANGE_AUTH_DATA,
-  PATH_ACTIVATION_STATUS as SELF_PATH_ACTIVATION_STATUS,
-  PATH_UPDATE_USER as SELF_PATH_UPDATE_USER,
-  PATH_DELETE_USER as SELF_PATH_DELETE_USER,
-  PATH_USER_BY_EMAIL as SELF_PATH_USER_BY_EMAIL,
-} from "./self";
+const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
+
+export const ownerSuccess = {
+  count: 0,
+  links: [
+    {
+      href: url,
+      action: "PUT",
+    },
+  ],
+  status: 0,
+  statusCode: 200,
+  ok: true,
+};
+
+export const owner = (): Response => {
+  return new Response(JSON.stringify(ownerSuccess));
+};

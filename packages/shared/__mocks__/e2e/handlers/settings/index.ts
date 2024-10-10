@@ -50,3 +50,9 @@ export {
   tfaAppValidateSuccess,
   PATH as TFA_APP_VALIDATE_PATH,
 } from "./tfaAppValidate";
+
+export {
+  owner as ownerHandler,
+  ownerSuccess,
+  PATH as OWNER_PATH,
+} from "./owner";

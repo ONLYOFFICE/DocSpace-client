@@ -37,6 +37,7 @@ import {
   SELF_PATH,
   SELF_PATH_ACTIVATION_STATUS,
   SELF_PATH_CHANGE_AUTH_DATA,
+  SELF_PATH_DELETE_USER,
   SELF_PATH_UPDATE_USER,
   SELF_PATH_USER_BY_EMAIL,
   selfHandler,
@@ -46,6 +47,8 @@ import {
   completeHandler,
   LICENCE_PATH,
   licenseHandler,
+  OWNER_PATH,
+  ownerHandler,
   TFA_APP_VALIDATE_PATH,
   tfaAppValidateHandler,
 } from "./settings";
@@ -70,12 +73,20 @@ export const endpoints: TEndpoints = {
     url: `${BASE_URL}${LICENCE_PATH}`,
     dataHandler: licenseHandler,
   },
+  changeOwner: {
+    url: `${BASE_URL}${OWNER_PATH}`,
+    dataHandler: ownerHandler,
+  },
   createUser: {
     url: `${BASE_URL}${SELF_PATH}`,
     dataHandler: selfHandler,
   },
   updateUser: {
     url: `${BASE_URL}${SELF_PATH_UPDATE_USER}`,
+    dataHandler: selfHandler,
+  },
+  removeUser: {
+    url: `${BASE_URL}${SELF_PATH_DELETE_USER}`,
     dataHandler: selfHandler,
   },
   changePassword: {

@@ -663,16 +663,19 @@ class InfoPanelStore {
   ) => {
     if (this.membersIsLoading) return;
     const roomId = this.infoPanelSelection.id;
+    const roomType = this.infoPanelSelection.roomType;
 
-    const isPublic =
-      this.infoPanelSelection?.roomType ?? this.infoPanelSelection?.roomType;
+    const isPublicRoomType =
+      roomType === RoomsType.PublicRoom ||
+      roomType === RoomsType.CustomRoom ||
+      roomType === RoomsType.FormRoom;
 
     const requests = [
       this.filesStore.getRoomMembers(roomId, clearFilter, membersFilter),
     ];
 
     if (
-      isPublic &&
+      isPublicRoomType &&
       clearFilter &&
       this.withPublicRoomBlock &&
       !withoutTitlesAndLinks

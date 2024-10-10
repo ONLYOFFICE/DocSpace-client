@@ -123,7 +123,10 @@ class ContactsConextOptionsStore {
 
     const { getUsersToMakeEmployees } = this.usersStore!;
 
-    this.usersStore.changeType(action as EmployeeType, getUsersToMakeEmployees);
+    this.usersStore.changeType(
+      +action as EmployeeType,
+      getUsersToMakeEmployees,
+    );
   };
 
   onChangeStatus = (status: EmployeeStatus) => {
@@ -303,11 +306,14 @@ class ContactsConextOptionsStore {
       hasUsersToInvite,
       hasUsersToRemove,
       hasFreeUsers,
+      contactsTab,
     } = this.usersStore;
     const { setSendInviteDialogVisible, setDeleteProfileDialogVisible } =
       this.dialogStore;
 
-    const { isOwner } = this.userStore.user!;
+    const isGuests = contactsTab === "guests";
+
+    const { isOwner, isRoomAdmin } = this.userStore.user!;
 
     const { setIsVisible, isVisible } = this.infoPanelStore;
 
@@ -347,13 +353,20 @@ class ContactsConextOptionsStore {
 
     if (hasFreeUsers) options.push(userOption);
 
-    const headerMenu = [
+    const menu = [
       {
         key: "cm-change-type",
         label: t("ChangeUserTypeDialog:ChangeUserTypeButton"),
         disabled: !hasUsersToMakeEmployees,
         icon: ChangeToEmployeeReactSvgUrl,
-        items: options,
+        onClick: isGuests
+          ? () =>
+              this.usersStore.changeType(
+                EmployeeType.User,
+                this.usersStore.getUsersToMakeEmployees,
+              )
+          : null,
+        items: isGuests ? null : options,
       },
       {
         key: "cm-info",
@@ -372,27 +385,34 @@ class ContactsConextOptionsStore {
       {
         key: "cm-enable",
         label: t("Common:Enable"),
-        disabled: !hasUsersToActivate,
+        disabled: !hasUsersToActivate || (isRoomAdmin && isGuests),
         onClick: () => onChangeStatus(EmployeeStatus.Active),
         icon: EnableReactSvgUrl,
       },
       {
         key: "cm-disable",
         label: t("PeopleTranslations:DisableUserButton"),
-        disabled: !hasUsersToDisable,
+        disabled: !hasUsersToDisable || (isRoomAdmin && isGuests),
         onClick: () => onChangeStatus(EmployeeStatus.Disabled),
         icon: DisableReactSvgUrl,
       },
       {
         key: "cm-delete",
         label: t("Common:Delete"),
-        disabled: !hasUsersToRemove,
+        disabled: !hasUsersToRemove || (isRoomAdmin && isGuests),
+        onClick: () => setDeleteProfileDialogVisible(true),
+        icon: DeleteReactSvgUrl,
+      },
+      {
+        key: "cm-remove",
+        label: t("Common:Remove"),
+        disabled: !isGuests || !isRoomAdmin,
         onClick: () => setDeleteProfileDialogVisible(true),
         icon: DeleteReactSvgUrl,
       },
     ];
 
-    return headerMenu;
+    return menu;
   };
 
   getModel = (item: TItem, t: TTranslation) => {
@@ -516,7 +536,7 @@ class ContactsConextOptionsStore {
   }
 
   getContactsModel = (t: TTranslation, isSectionMenu: boolean) => {
-    const { isRoomAdmin, isOwner } = this.userStore.user!;
+    const { isRoomAdmin, isOwner, isAdmin } = this.userStore.user!;
 
     const someDialogIsOpen = checkDialogsOpen();
 
@@ -539,7 +559,7 @@ class ContactsConextOptionsStore {
         action: EmployeeType.Admin,
         key: "administrator",
       },
-      {
+      isAdmin && {
         id: "accounts-add_manager",
         className: "main-button_drop-down",
         icon: PersonManagerReactSvgUrl,

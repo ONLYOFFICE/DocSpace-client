@@ -216,15 +216,18 @@ class HeaderMenuStore {
       hasUsersToResetQuota,
       hasUsersToDisableQuota,
       selection,
+      contactsTab,
+      getUsersToMakeEmployees,
     } = this.usersStore!;
     const { setSendInviteDialogVisible } = this.dialogStore;
     const { toggleDeleteProfileEverDialog } = this.contextOptionsStore;
     const { isVisible } = this.infoPanelStore;
-    const { contactsTab, getUsersToMakeEmployees } = this.usersStore;
+    const { isRoomAdmin, isCollaborator } = this.userStore.user!;
 
     const isGuests = contactsTab === "guests";
 
-    if (isGroupsPage)
+    if (isGroupsPage) {
+      if (isRoomAdmin || isCollaborator) return [];
       return [
         {
           id: "menu-delete",
@@ -234,6 +237,7 @@ class HeaderMenuStore {
           iconUrl: DeleteReactSvgUrl,
         },
       ];
+    }
 
     const headerMenu = [
       {

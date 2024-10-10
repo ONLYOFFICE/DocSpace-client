@@ -389,8 +389,7 @@ class UsersStore {
   ) => {
     if (!this.userStore.user) return;
 
-    const { isOwner, isAdmin, isVisitor, isCollaborator, isRoomAdmin, isLDAP } =
-      this.userStore.user;
+    const { isOwner, isAdmin, isRoomAdmin, isLDAP } = this.userStore.user;
 
     const options: string[] = [];
 
@@ -420,19 +419,20 @@ class UsersStore {
             options.push("change-owner");
           }
         } else if (
-          (isOwner || isAdmin) &&
-          (userRole === EmployeeType.Guest ||
-            userRole === EmployeeType.RoomAdmin ||
-            userRole === EmployeeType.User)
+          isOwner ||
+          (isAdmin &&
+            (userRole === EmployeeType.Guest ||
+              userRole === EmployeeType.RoomAdmin ||
+              userRole === EmployeeType.User))
         ) {
           if (!isUserLDAP && !isUserSSO) {
             options.push("separator-1");
 
             options.push("change-email");
             options.push("change-password");
-          }
 
-          if (isGuest) options.push("change-type");
+            if (isGuest) options.push("change-type");
+          }
 
           options.push("reset-auth");
 
@@ -440,15 +440,22 @@ class UsersStore {
             options.push("separator-2");
             options.push("disable");
           }
+        } else if (isRoomAdmin && userRole === EmployeeType.Guest) {
+          options.push("room-list");
+          options.push("separator-1");
+          options.push("change-type");
+          options.push("separator-2");
+          options.push("remove-guest");
         }
 
         break;
       case "disabled":
         if (
-          (isOwner || isAdmin) &&
-          (userRole === EmployeeType.Guest ||
-            userRole === EmployeeType.RoomAdmin ||
-            userRole === EmployeeType.User)
+          isOwner ||
+          (isAdmin &&
+            (userRole === EmployeeType.Guest ||
+              userRole === EmployeeType.RoomAdmin ||
+              userRole === EmployeeType.User))
         ) {
           options.push("enable");
 
@@ -462,6 +469,10 @@ class UsersStore {
           options.push("delete-user");
         } else {
           options.push("details");
+          if (isRoomAdmin && userRole === EmployeeType.Guest) {
+            options.push("separator-1");
+            options.push("remove-guest");
+          }
         }
 
         break;
@@ -469,7 +480,7 @@ class UsersStore {
       case "pending":
         if (
           isOwner ||
-          ((isAdmin || (!isVisitor && !isCollaborator)) &&
+          (isAdmin &&
             (userRole === EmployeeType.Guest ||
               userRole === EmployeeType.RoomAdmin ||
               userRole === EmployeeType.User))
@@ -486,12 +497,18 @@ class UsersStore {
           }
 
           if (
-            (isOwner || isAdmin) &&
-            (userRole === EmployeeType.Guest ||
-              userRole === EmployeeType.RoomAdmin ||
-              userRole === EmployeeType.User)
+            isOwner ||
+            (isAdmin &&
+              (userRole === EmployeeType.Guest ||
+                userRole === EmployeeType.RoomAdmin ||
+                userRole === EmployeeType.User))
           ) {
-            options.push("separator-1");
+            if (isGuest) {
+              options.push("separator-1");
+
+              options.push("change-type");
+            }
+            options.push("separator-2");
 
             if (
               status === EmployeeStatus.Active ||
@@ -511,6 +528,14 @@ class UsersStore {
 
           if (isAdmin || isOwner) {
             options.push("room-list");
+          }
+
+          if (isRoomAdmin && userRole === EmployeeType.Guest) {
+            options.push("room-list");
+            options.push("separator-1");
+            options.push("change-type");
+            options.push("separator-2");
+            options.push("remove-guest");
           }
         }
 

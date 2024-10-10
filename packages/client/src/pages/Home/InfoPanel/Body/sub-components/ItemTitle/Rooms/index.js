@@ -134,7 +134,11 @@ const RoomsItemHeader = ({
           imgClassName={`icon ${selection.isRoom && "is-room"}`}
           logo={icon}
           badgeUrl={badgeUrl ? badgeUrl : ""}
-          hoverSrc={selection.isRoom && Camera10ReactSvgUrl}
+          hoverSrc={
+            selection.isRoom &&
+            selection.security?.EditRoom &&
+            Camera10ReactSvgUrl
+          }
           model={model}
           onChangeFile={onChangeFileContext}
         />

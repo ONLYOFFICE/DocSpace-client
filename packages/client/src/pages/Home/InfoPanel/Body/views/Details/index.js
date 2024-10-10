@@ -147,7 +147,7 @@ const Details = ({
             }`}
             logo={currentIcon}
             model={model}
-            withEditing={selection.isRoom}
+            withEditing={selection.isRoom && selection.security?.EditRoom}
             dropDownManualX={isMobile() ? "-30px" : "-10px"}
             onChangeFile={onChangeFileContext}
           />

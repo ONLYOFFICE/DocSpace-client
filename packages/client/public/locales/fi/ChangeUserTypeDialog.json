@@ -1,8 +1,8 @@
 {
   "ChangeUserTypeButton": "Vaihda tyyppiä",
   "ChangeUserTypeHeader": "Muuta käyttäjän tyyppiä",
-  "ChangeUserTypeMessage": "Käyttäjät, joiden tyyppi on ’{{firstType}}’, siirretään tyypiksi ’{{secondType}}’.",
-  "ChangeUserTypeMessageMulti": "Valitut käyttäjät siirretään '{{secondType}}.",
+  "ChangeUserTypeMessage": "Käyttäjät, joiden tyyppi on <strong>’{{firstType}}’</strong>, siirretään tyypiksi <strong>’{{secondType}}’</strong>.",
+  "ChangeUserTypeMessageMulti": "Valitut käyttäjät siirretään <strong>'{{secondType}}'</strong>.",
   "ChangeUserTypeMessageWarning": "Et voi muuttaa {{productName}}-järjestelmänvalvojien tai omaa tilaasi.",
   "SuccessChangeUserType": "Käyttäjän tila muutettu onnistuneesti"
 }

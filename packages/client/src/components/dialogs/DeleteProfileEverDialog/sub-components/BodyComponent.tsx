@@ -94,7 +94,13 @@ const BodyComponent = ({
     return (
       <>
         <Text className="user-delete">
-          {t("ActionCannotBeUndone", { productName: t("Common:ProductName") })}
+          {onlyGuests
+            ? t("ActionCannotBeUndoneGuests", {
+                productName: t("Common:ProductName"),
+              })
+            : t("ActionCannotBeUndone", {
+                productName: t("Common:ProductName"),
+              })}
         </Text>
         <Text className="text-warning">{t("PleaseNote")}</Text>
         <Text className="text-delete-description">
@@ -117,12 +123,13 @@ const BodyComponent = ({
     return (
       <>
         <Text className="user-delete">
-          {t("ActionCannotBeUndone", {
-            productName: t("Common:ProductName"),
-            userCaption: onlyGuests
-              ? t("Common:Guests").toLowerCase()
-              : t("Common:Users").toLowerCase(),
-          })}
+          {onlyGuests
+            ? t("ActionCannotBeUndoneGuests", {
+                productName: t("Common:ProductName"),
+              })
+            : t("ActionCannotBeUndone", {
+                productName: t("Common:ProductName"),
+              })}
         </Text>
 
         <Text className="text-warning">{t("Common:Warning")}</Text>

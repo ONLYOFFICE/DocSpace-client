@@ -1,8 +1,8 @@
 {
   "ChangeUserTypeButton": "Wijzig type",
   "ChangeUserTypeHeader": "Wijzig gebruiker type",
-  "ChangeUserTypeMessage": "Gebruikers met de '{{ firstType }}' type worden verplaatst naar '{{ secondType }}' type.",
-  "ChangeUserTypeMessageMulti": "De geselecteerde gebruikers worden verplaatst naar het type '{{ secondType }}'.",
+  "ChangeUserTypeMessage": "Gebruikers met de <strong>'{{ firstType }}'</strong> type worden verplaatst naar <strong>'{{ secondType }}'</strong> type.",
+  "ChangeUserTypeMessageMulti": "De geselecteerde gebruikers worden verplaatst naar het type <strong>'{{ secondType }}'</strong>.",
   "ChangeUserTypeMessageWarning": "U kunt het type niet veranderen voor de {{productName}}-beheerders en voor uzelf.",
   "SuccessChangeUserType": "Het gebruikerstype werd met succes gewijzigd"
 }

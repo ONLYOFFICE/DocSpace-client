@@ -1,5 +1,6 @@
 {
-  "ActionCannotBeUndone": "The selected disabled {{userCaption}} will be removed from {{productName}}. This action cannot be undone.",
+  "ActionCannotBeUndone": "The selected disabled users will be removed from {{productName}}. This action cannot be undone.",
+  "ActionCannotBeUndoneGuests": "The selected disabled guests will be removed from {{productName}}. This action cannot be undone.",
   "CannotReassignFiles": "If you delete multiple users at once, you cannot reassign their files to other users.",
   "DeleteGroupUsersSuccessMessage": "Users have been successfully deleted.",
   "DeleteGroupGuestsSuccessMessage": "Guests have been successfully deleted.",

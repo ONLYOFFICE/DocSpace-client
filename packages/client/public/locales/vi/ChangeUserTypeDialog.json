@@ -1,8 +1,8 @@
 {
   "ChangeUserTypeButton": "Thay đổi loại",
   "ChangeUserTypeHeader": "Thay đổi loại người dùng",
-  "ChangeUserTypeMessage": "Người dùng loại '{{ firstType }}' sẽ được chuyển sang loại '{{ secondType }}'.",
-  "ChangeUserTypeMessageMulti": "Người dùng đã chọn sẽ được chuyển sang loại '{{ secondType }}'.",
+  "ChangeUserTypeMessage": "Người dùng loại <strong>'{{ firstType }}'</strong> sẽ được chuyển sang loại <strong>'{{ secondType }}'</strong>.",
+  "ChangeUserTypeMessageMulti": "Người dùng đã chọn sẽ được chuyển sang loại <strong>'{{ secondType }}'</strong>.",
   "ChangeUserTypeMessageWarning": "Bạn không thể thay đổi kiểu cho người quản trị {{productName}} và cho chính mình.",
   "SuccessChangeUserType": "Loại người dùng đã được thay đổi thành công"
 }

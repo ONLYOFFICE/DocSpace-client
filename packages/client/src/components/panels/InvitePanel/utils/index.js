@@ -53,7 +53,7 @@ const getRoomAdminDescription = (roomType, t) => {
  * @param {(key: string)=> string} t
  * @returns {string}
  */
-const getPowerUserDescription = (roomType, t) => {
+const getUserDescription = (roomType, t) => {
   switch (roomType) {
     case RoomsType.FormRoom:
       return t("Translations:RolePowerUserFormRoomDescription");
@@ -124,7 +124,7 @@ export const getAccessOptions = (
     user: {
       key: "newUser",
       label: t("Common:User"),
-      description: getPowerUserDescription(roomType, t),
+      description: getUserDescription(roomType, t),
       access:
         roomType === -1
           ? EmployeeType.Collaborator
@@ -134,7 +134,7 @@ export const getAccessOptions = (
     contentCreator: {
       key: "contentCreator",
       label: t("Common:ContentCreator"),
-      description: getPowerUserDescription(roomType, t),
+      description: getUserDescription(roomType, t),
       access:
         roomType === -1
           ? EmployeeType.Collaborator

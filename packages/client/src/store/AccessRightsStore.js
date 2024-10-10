@@ -120,7 +120,7 @@ class AccessRightsStore {
       (userIsVisitor || userIsCollaborator)
     );
   };
-  canMakePowerUser = (user) => {
+  canMakeUserType = (user) => {
     const { isVisitor: userIsVisitor, isCollaborator: userIsCollaborator } =
       user;
 

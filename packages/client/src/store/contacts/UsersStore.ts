@@ -899,13 +899,6 @@ class UsersStore {
     return users.length > 0;
   }
 
-  get hasUsersToMakePowerUser() {
-    const { canMakePowerUser } = this.accessRightsStore;
-    const users = this.selection.filter((x) => canMakePowerUser(x));
-
-    return users.length > 0;
-  }
-
   get getUsersToMakeEmployees() {
     const { canMakeEmployeeUser } = this.accessRightsStore;
 

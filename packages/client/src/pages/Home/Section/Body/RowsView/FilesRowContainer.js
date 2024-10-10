@@ -71,7 +71,6 @@ const FilesRowContainer = ({
   hasMoreFiles,
   isRooms,
   isTrashFolder,
-  withPaging,
   highlightFile,
   currentDeviceType,
   isIndexEditingMode,
@@ -121,7 +120,7 @@ const FilesRowContainer = ({
       fetchMoreFiles={fetchMoreFiles}
       hasMoreFiles={hasMoreFiles}
       draggable
-      useReactWindow={!withPaging}
+      useReactWindow
       itemHeight={58}
     >
       {filesListNode}
@@ -150,7 +149,7 @@ export default inject(
     } = filesStore;
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
-    const { withPaging, currentDeviceType } = settingsStore;
+    const { currentDeviceType } = settingsStore;
     const { isIndexEditingMode } = indexingStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder;
@@ -165,7 +164,6 @@ export default inject(
       hasMoreFiles,
       isRooms,
       isTrashFolder,
-      withPaging,
       highlightFile,
       currentDeviceType,
       isIndexEditingMode,

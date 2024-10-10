@@ -43,7 +43,6 @@ const PeopleRowContainer = ({
   fetchMoreUsers,
   hasMoreUsers,
   filterTotal,
-  withPaging,
   currentDeviceType,
   isUsersEmptyView,
   contactsTab,
@@ -61,7 +60,7 @@ const PeopleRowContainer = ({
   return !isUsersEmptyView ? (
     <StyledRowContainer
       className="people-row-container"
-      useReactWindow={!withPaging}
+      useReactWindow
       fetchMoreFiles={fetchMoreUsers!}
       hasMoreFiles={hasMoreUsers!}
       itemCount={filterTotal!}
@@ -102,7 +101,7 @@ export default inject(
       contactsTab,
     } = usersStore!;
 
-    const { withPaging, currentDeviceType } = settingsStore;
+    const { currentDeviceType } = settingsStore;
 
     const { showStorageInfo, isDefaultUsersQuotaSet } = currentQuotaStore;
 
@@ -111,8 +110,6 @@ export default inject(
       setViewAs,
 
       peopleList,
-
-      withPaging,
 
       fetchMoreUsers,
       hasMoreUsers,

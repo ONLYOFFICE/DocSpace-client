@@ -222,7 +222,6 @@ class PeopleTableHeader extends React.Component<
       tableStorageName,
       columnStorageName,
       columnInfoPanelStorageName,
-      withPaging,
       setHideColumns,
     } = this.props;
 
@@ -242,7 +241,7 @@ class PeopleTableHeader extends React.Component<
         sectionWidth={sectionWidth}
         resetColumnsSize={resetColumnsSize}
         infoPanelVisible={infoPanelVisible}
-        useReactWindow={!withPaging}
+        useReactWindow
         setHideColumns={setHideColumns}
         showSettings
       />
@@ -255,7 +254,6 @@ export default inject(
     peopleStore,
     clientLoadingStore,
     infoPanelStore,
-    settingsStore,
     userStore,
     currentQuotaStore,
     tableStore,
@@ -263,7 +261,6 @@ export default inject(
     const { filter, setFilter, contactsTab } = peopleStore.usersStore!;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
-    const { withPaging } = settingsStore;
 
     const { isDefaultUsersQuotaSet, showStorageInfo } = currentQuotaStore;
 
@@ -278,8 +275,6 @@ export default inject(
       userId: userStore.user?.id,
 
       infoPanelVisible,
-
-      withPaging,
 
       isDefaultUsersQuotaSet,
       showStorageInfo,

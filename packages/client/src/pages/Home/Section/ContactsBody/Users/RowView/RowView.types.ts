@@ -50,7 +50,6 @@ export type RowViewProps = {
   viewAs?: PeopleStore["viewAs"];
   setViewAs?: PeopleStore["setViewAs"];
 
-  withPaging?: SettingsStore["withPaging"];
   currentDeviceType?: SettingsStore["currentDeviceType"];
 
   showStorageInfo?: CurrentQuotasStore["showStorageInfo"];

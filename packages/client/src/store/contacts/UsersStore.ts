@@ -134,6 +134,8 @@ class UsersStore {
   };
 
   setFilter = (filter: Filter) => {
+    this.filter = filter;
+
     const key =
       this.contactsTab === "inside_group"
         ? `InsideGroupFilter=${this.userStore.user?.id}`
@@ -151,8 +153,6 @@ class UsersStore {
       this.contactsTab,
       this.groupsStore.currentGroup?.id,
     );
-
-    this.filter = filter;
   };
 
   get filterTotal() {
@@ -217,16 +217,6 @@ class UsersStore {
       filterData.sortOrder = splitFilter[2] as TSortOrder;
     }
 
-    if (!this.settingsStore.withPaging) {
-      const isCustomCountPage =
-        filter && filter.pageCount !== 100 && filter.pageCount !== 25;
-
-      if (!isCustomCountPage) {
-        filterData.page = 0;
-        filterData.pageCount = 100;
-      }
-    }
-
     if (currentGroup?.id && this.contactsTab === "inside_group") {
       filterData.group = currentGroup.id;
     }
@@ -246,11 +236,11 @@ class UsersStore {
 
     filterData.total = res.total;
 
-    this.requestRunning = false;
-
     if (updateFilter) {
       this.setFilter(filterData);
     }
+
+    this.requestRunning = false;
 
     this.setUsers(res.items);
 
@@ -325,7 +315,7 @@ class UsersStore {
       throw new Error(e as string);
     }
 
-    await this.getUsersList(filter);
+    await this.getUsersList(filter, true);
 
     if (updatedUsers && !this.needResetUserSelection) {
       this.updateSelection();
@@ -339,7 +329,7 @@ class UsersStore {
 
     const removedGuests = await api.people.deleteGuests(ids);
 
-    await this.getUsersList(this.filter);
+    await this.getUsersList(this.filter, true);
 
     if (!!removedGuests && !this.needResetUserSelection) {
       this.updateSelection();
@@ -373,7 +363,7 @@ class UsersStore {
   updateProfileInUsers = async (updatedProfile?: TUser) => {
     const updatedUser = updatedProfile ?? this.targetUserStore.targetUser;
     if (!this.users) {
-      return this.getUsersList(this.filter);
+      return this.getUsersList(this.filter, true);
     }
 
     if (!updatedUser) return;
@@ -678,7 +668,9 @@ class UsersStore {
   }
 
   get hasMoreUsers() {
-    return this.peopleList.length < this.filterTotal;
+    if (this.clientLoadingStore.isLoading || this.requestRunning) return false;
+
+    return this.peopleList.length < this.filter.total;
   }
 
   get needResetUserSelection() {

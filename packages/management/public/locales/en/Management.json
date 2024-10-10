@@ -13,6 +13,7 @@
   "EnterName": "Enter space name",
   "GoToSpace": "Go to space",
   "NewSpace": "New space",
+  "PortalDeleted": "{{productName}} permanently deleted",
   "PortalName": "{{productName}} name",
   "PortalStats": "Rooms: {{roomCount}} | Users: {{userCount}} | Storage space used: {{storageSpace}}",
   "RestrictAccess": "Restrict access to managing spaces",

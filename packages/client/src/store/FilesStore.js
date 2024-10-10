@@ -1604,7 +1604,7 @@ class FilesStore {
                 usedSpace = room.usedSpace;
                 this.infoPanelStore.setInfoPanelRoom(room);
               } else {
-                const newInfoPanelSelection = this.getFilesListItems(room);
+                const newInfoPanelSelection = this.getFilesListItems([room]);
                 this.infoPanelStore.updateInfoPanelSelection(
                   newInfoPanelSelection,
                 );

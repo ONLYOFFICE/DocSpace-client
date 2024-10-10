@@ -587,13 +587,11 @@ class FilesStore {
       }
 
       if (this.bufferSelection) {
-        const foundIndex = [this.bufferSelection].findIndex(
-          (x) => x.id === folder.id,
-        );
-        if (foundIndex > -1) {
-          runInAction(() => {
-            this.bufferSelection[foundIndex] = folder;
-          });
+        if (
+          this.bufferSelection.id === folder.id &&
+          (this.bufferSelection.isFolder || this.bufferSelection.isRoom)
+        ) {
+          this.setBufferSelection(folder);
         }
       }
 
@@ -605,7 +603,8 @@ class FilesStore {
         infoPanelSelection?.id == folder.id &&
         (infoPanelSelection?.isFolder || infoPanelSelection?.isRoom)
       ) {
-        updateInfoPanelSelection(folder);
+        const newInfoPanelSelection = this.getFilesListItems([folder]);
+        updateInfoPanelSelection(newInfoPanelSelection);
       }
     }
   };
@@ -1605,7 +1604,10 @@ class FilesStore {
                 usedSpace = room.usedSpace;
                 this.infoPanelStore.setInfoPanelRoom(room);
               } else {
-                this.infoPanelStore.updateInfoPanelSelection(room);
+                const newInfoPanelSelection = this.getFilesListItems(room);
+                this.infoPanelStore.updateInfoPanelSelection(
+                  newInfoPanelSelection,
+                );
               }
               const { mute } = room;
 

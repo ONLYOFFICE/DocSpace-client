@@ -385,11 +385,14 @@ const LoginForm = ({
           try {
             const deleteData = decodeURIComponent(deletePortalData);
             await deletePortal({ portalName: deleteData });
-            window.opener.postMessage({ type: "portalDeletedSuccess" }, "*");
+            window.opener.postMessage(
+              JSON.stringify({ type: "portalDeletedSuccess" }),
+              "*",
+            );
           } catch (e) {
             console.error(e);
             window.opener.postMessage(
-              { type: "portalDeletedError", error: e },
+              JSON.stringify({ type: "portalDeletedError", error: e }),
               "*",
             );
           }

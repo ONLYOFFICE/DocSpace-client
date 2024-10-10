@@ -1,4 +1,9 @@
-import { API_PREFIX, BASE_URL, HEADER_WIZARD_SETTINGS } from "../../utils";
+import {
+  API_PREFIX,
+  BASE_URL,
+  HEADER_PORTAL_DEACTIVATE_SETTINGS,
+  HEADER_WIZARD_SETTINGS,
+} from "../../utils";
 
 const PATH = "settings";
 
@@ -98,14 +103,26 @@ export const settingsNoAuth = {
   statusCode: 200,
 };
 
+export const settingsPortalDeactivate = {
+  ...settingsNoAuth,
+  response: { ...settingsNoAuth.response, tenantStatus: 1 },
+};
+
 export const settings = (headers?: Headers): Response => {
   let isWizard = false;
+  let isPortalDeactivate = false;
 
   if (headers?.get(HEADER_WIZARD_SETTINGS)) {
     isWizard = true;
   }
 
+  if (headers?.get(HEADER_PORTAL_DEACTIVATE_SETTINGS)) {
+    isPortalDeactivate = true;
+  }
+
   if (isWizard) return new Response(JSON.stringify(settingsWizzard));
+  if (isPortalDeactivate)
+    return new Response(JSON.stringify(settingsPortalDeactivate));
 
   return new Response(JSON.stringify(settingsNoAuth));
 };

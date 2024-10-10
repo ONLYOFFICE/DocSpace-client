@@ -52,6 +52,14 @@ import {
   TFA_APP_VALIDATE_PATH,
   tfaAppValidateHandler,
 } from "./settings";
+import {
+  CONTINUE_PATH,
+  continuePortalHandler,
+  DELETE_PATH,
+  deletePortalHandler,
+  SUSPEND_PATH,
+  suspendHandler,
+} from "./portal";
 
 export type TEndpoint = {
   url: string;
@@ -140,5 +148,17 @@ export const endpoints: TEndpoints = {
   oauthSignIn: {
     url: `*/**/${OAUTH_SIGN_IN_PATH}`,
     dataHandler: oauthSignInHelper,
+  },
+  suspendPortal: {
+    url: `${BASE_URL}${SUSPEND_PATH}`,
+    dataHandler: suspendHandler,
+  },
+  continuePortal: {
+    url: `${BASE_URL}${CONTINUE_PATH}`,
+    dataHandler: continuePortalHandler,
+  },
+  deletePortal: {
+    url: `${BASE_URL}${DELETE_PATH}`,
+    dataHandler: deletePortalHandler,
   },
 };

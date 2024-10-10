@@ -132,7 +132,6 @@ const PureHome = (props) => {
     showTitle,
     showFilter,
     frameConfig,
-    withPaging,
     isEmptyPage,
 
     setPortalTariff,
@@ -327,7 +326,6 @@ const PureHome = (props) => {
     sectionProps.viewAs = "settings";
   } else {
     sectionProps = {
-      withPaging,
       withBodyScroll: true,
       withBodyAutoFocus: !isMobile,
       firstLoad,
@@ -426,11 +424,11 @@ const PureHome = (props) => {
           <InfoPanelBodyContent />
         </Section.InfoPanelBody>
 
-        {withPaging && !isSettingsPage && (
+        {/* {withPaging && !isSettingsPage && (
           <Section.SectionPaging>
             <SectionPagingContent tReady={tReady} />
           </Section.SectionPaging>
-        )}
+        )} */}
       </SectionWrapper>
     </>
   );
@@ -568,7 +566,6 @@ export const Component = inject(
       setFrameConfig,
       frameConfig,
       isFrame,
-      withPaging,
       showCatalog,
       enablePlugins,
       getSettings,
@@ -674,7 +671,6 @@ export const Component = inject(
       createRoom,
       refreshFiles,
       setViewAs,
-      withPaging,
       isEmptyPage,
 
       setPortalTariff,

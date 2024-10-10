@@ -560,7 +560,7 @@ const InviteInput = ({
           </StyledLink>
         )}
       </StyledSubHeader>
-      <StyledDescription>
+      <StyledDescription noSelect>
         {roomId === -1
           ? t("AddManuallyDescriptionAccounts", {
               productName: t("Common:ProductName"),
@@ -570,7 +570,9 @@ const InviteInput = ({
             })}
       </StyledDescription>
       <StyledInviteLanguage>
-        <Text className="invitation-language">{t("InvitationLanguage")}:</Text>
+        <Text className="invitation-language" noSelect>
+          {t("InvitationLanguage")}:
+        </Text>
         <div className="language-combo-box-wrapper">
           <ComboBox
             className="language-combo-box"

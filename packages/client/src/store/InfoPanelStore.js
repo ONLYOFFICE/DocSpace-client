@@ -324,6 +324,7 @@ class InfoPanelStore {
       if (this.infoPanelRoom?.id === room?.id) {
         this.setInfoPanelRoom(this.normalizeSelection(room));
       }
+      return;
     } else {
       this.setNewInfoPanelSelection();
     }

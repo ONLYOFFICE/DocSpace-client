@@ -250,14 +250,12 @@ class GroupsStore {
       filterData.sortOrder = splitFilter[2];
     }
 
-    if (!this.authStore.settingsStore.withPaging) {
-      const isCustomCountPage =
-        filter && filter.pageCount !== 100 && filter.pageCount !== 25;
+    const isCustomCountPage =
+      filter && filter.pageCount !== 100 && filter.pageCount !== 25;
 
-      if (!isCustomCountPage) {
-        filterData.page = 0;
-        filterData.pageCount = 100;
-      }
+    if (!isCustomCountPage) {
+      filterData.page = 0;
+      filterData.pageCount = 100;
     }
 
     const res = await groupsApi.getGroups(filterData);
@@ -307,10 +305,8 @@ class GroupsStore {
     const filterData = filter ? filter.clone() : AccountsFilter.getDefault();
     filterData.group = groupId;
 
-    if (!this.authStore.settingsStore.withPaging) {
-      filterData.page = 0;
-      filterData.pageCount = 100;
-    }
+    filterData.page = 0;
+    filterData.pageCount = 100;
 
     const filterStorageItem = localStorage.getItem(
       `InsideGroupFilter=${this.peopleStore.userStore.user?.id}`,

@@ -177,15 +177,8 @@ class FilesActionStore {
     const { clearSecondaryProgressData } =
       this.uploadDataStore.secondaryProgressDataStore;
 
-    const {
-      fetchFiles,
-      fetchRooms,
-      filter,
-      roomsFilter,
-      scrollToTop,
-      isEmptyLastPageAfterOperation,
-      resetFilterPage,
-    } = this.filesStore;
+    const { fetchFiles, fetchRooms, filter, roomsFilter, scrollToTop } =
+      this.filesStore;
 
     const { isRoomsFolder, isArchiveFolder, isArchiveFolderRoot } =
       this.treeFoldersStore;
@@ -196,13 +189,6 @@ class FilesActionStore {
       fileIds && folderIds
         ? fileIds.length + folderIds.length
         : fileIds?.length || folderIds?.length;
-
-    if (
-      selectionFilesLength &&
-      isEmptyLastPageAfterOperation(selectionFilesLength)
-    ) {
-      newFilter = resetFilterPage();
-    }
 
     let updatedFolder = this.selectedFolderStore.id;
 
@@ -345,8 +331,6 @@ class FilesActionStore {
     const filesList = [];
     await this.createFolderTree(tree, toFolderId, filesList);
 
-    // this.updateCurrentFolder(null, [folderId], null, operationId);
-
     if (!filesList.length) {
       setTimeout(() => clearPrimaryProgressData(), TIMEOUT);
     } else {
@@ -385,7 +369,6 @@ class FilesActionStore {
       this.uploadDataStore;
     const { setSecondaryProgressBarData, clearSecondaryProgressData } =
       secondaryProgressDataStore;
-    const { withPaging } = this.settingsStore;
 
     let selection = newSelection
       ? newSelection
@@ -471,7 +454,7 @@ class FilesActionStore {
               return toastr.success(translations.FolderRemoved);
             };
 
-            if (withPaging || this.dialogsStore.isFolderActions) {
+            if (this.dialogsStore.isFolderActions) {
               this.updateCurrentFolder(fileIds, folderIds, false, operationId);
               showToast();
             } else {
@@ -887,7 +870,6 @@ class FilesActionStore {
 
   deleteItemOperation = (isFile, itemId, translations, isRoom, operationId) => {
     const { addActiveItems, getIsEmptyTrash } = this.filesStore;
-    const { withPaging } = this.settingsStore;
     const { isRecycleBinFolder, recycleBinFolderId } = this.treeFoldersStore;
 
     const pbData = {
@@ -905,18 +887,13 @@ class FilesActionStore {
         const data = res[0] ? res[0] : null;
         await this.uploadDataStore.loopFilesOperations(data, pbData);
 
-        if (withPaging) {
-          this.updateCurrentFolder([itemId], null, null, operationId);
-          toastr.success(translations.successRemoveFile);
-        } else {
-          this.updateFilesAfterDelete(operationId);
-          this.filesStore.removeFiles(
-            [itemId],
-            null,
-            () => toastr.success(translations.successRemoveFile),
-            destFolderId,
-          );
-        }
+        this.updateFilesAfterDelete(operationId);
+        this.filesStore.removeFiles(
+          [itemId],
+          null,
+          () => toastr.success(translations.successRemoveFile),
+          destFolderId,
+        );
       });
     } else if (isRoom) {
       const items = Array.isArray(itemId) ? itemId : [itemId];
@@ -947,18 +924,13 @@ class FilesActionStore {
         const data = res[0] ? res[0] : null;
         await this.uploadDataStore.loopFilesOperations(data, pbData);
 
-        if (withPaging) {
-          this.updateCurrentFolder(null, [itemId], null, operationId);
-          toastr.success(translations.successRemoveFolder);
-        } else {
-          this.updateFilesAfterDelete(operationId);
-          this.filesStore.removeFiles(
-            null,
-            [itemId],
-            () => toastr.success(translations.successRemoveFolder),
-            destFolderId,
-          );
-        }
+        this.updateFilesAfterDelete(operationId);
+        this.filesStore.removeFiles(
+          null,
+          [itemId],
+          () => toastr.success(translations.successRemoveFolder),
+          destFolderId,
+        );
 
         getIsEmptyTrash();
       });
@@ -1296,7 +1268,6 @@ class FilesActionStore {
               window.DocSpace.navigate("/");
             }
 
-            // this.updateCurrentFolder(null, null, null, operationId);
             this.dialogsStore.setIsFolderActions(false);
             return setTimeout(
               () => clearSecondaryProgressData(operationId),
@@ -1354,7 +1325,6 @@ class FilesActionStore {
 
             await this.uploadDataStore.loopFilesOperations(data, pbData);
 
-            // this.updateCurrentFolder(null, [items], null, operationId);
             this.dialogsStore.setIsFolderActions(false);
             return setTimeout(
               () => clearSecondaryProgressData(operationId),

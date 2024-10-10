@@ -223,8 +223,6 @@ class SettingsStore {
 
   hasShortenService = false;
 
-  withPaging = false;
-
   customSchemaList: TCustomSchema[] = [];
 
   firebase: TFirebaseSettings = {

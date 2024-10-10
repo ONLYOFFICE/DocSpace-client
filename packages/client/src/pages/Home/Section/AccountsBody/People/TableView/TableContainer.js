@@ -132,7 +132,6 @@ const Table = ({
   fetchMoreAccounts,
   hasMoreAccounts,
   filterTotal,
-  withPaging,
   canChangeUserType,
   isFiltered,
   currentDeviceType,
@@ -158,7 +157,7 @@ const Table = ({
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
   return peopleList.length !== 0 || !isFiltered ? (
-    <StyledTableContainer useReactWindow={!withPaging} forwardedRef={ref}>
+    <StyledTableContainer useReactWindow forwardedRef={ref}>
       <TableHeader
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
@@ -177,7 +176,7 @@ const Table = ({
         itemCount={filterTotal}
         filesLength={peopleList.length}
         itemHeight={48}
-        useReactWindow={!withPaging}
+        useReactWindow
       >
         {peopleList.map((item, index) => (
           <TableRow
@@ -223,7 +222,7 @@ export default inject(
       setViewAs,
       changeType,
     } = peopleStore;
-    const { theme, withPaging, currentDeviceType } = settingsStore;
+    const { theme, currentDeviceType } = settingsStore;
     const { peopleList, hasMoreAccounts, fetchMoreAccounts } = usersStore;
     const { filterTotal, isFiltered } = filterStore;
 
@@ -248,7 +247,6 @@ export default inject(
       changeType,
       userId,
       infoPanelVisible,
-      withPaging,
 
       fetchMoreAccounts,
       hasMoreAccounts,

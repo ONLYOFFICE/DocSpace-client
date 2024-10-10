@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useTranslation, Trans } from "react-i18next";
 import { observer } from "mobx-react";
@@ -36,6 +36,8 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
+import { toastr } from "@docspace/shared/components/toast";
+
 import { toUrlParams } from "@docspace/shared/utils/common";
 
 import { useStore } from "SRC_DIR/store";
@@ -49,7 +51,7 @@ const StyledModalDialog = styled(ModalDialog)`
 
 const DeletePortalDialog = () => {
   const { spacesStore, settingsStore } = useStore();
-  const { currentColorScheme } = settingsStore;
+  const { currentColorScheme, getAllPortals } = settingsStore;
 
   const {
     currentPortal,
@@ -58,19 +60,67 @@ const DeletePortalDialog = () => {
   } = spacesStore;
 
   const { t } = useTranslation(["Management", "Settings", "Common"]);
+  const [windowIsOpen, setWindowIsOpen] = useState(false);
 
   const { domain } = currentPortal;
+
+  const receiveMessage = async (e) => {
+    const data = e.data;
+    if (data.type === "portalDeletedSuccess") {
+      await getAllPortals();
+      toastr.success(
+        t("PortalDeleted", { productName: t("Common:ProductName") })
+      );
+    } else if (data.type === "portalDeletedError") {
+      toastr.error(data.error);
+    }
+  };
+
+  const getAuthWindow = () => {
+    return new Promise((res, rej) => {
+      const protocol = window?.location?.protocol;
+      const deletePortalData = encodeURIComponent(domain);
+
+      try {
+        const path = `${protocol}//${domain}/login?deletePortalData=${deletePortalData}`;
+        const authModal = window.open(
+          path,
+          t("Common:Authorization"),
+          "height=800, width=866"
+        );
+
+        const checkConnect = setInterval(() => {
+          if (!authModal || !authModal.closed) {
+            return;
+          }
+
+          clearInterval(checkConnect);
+
+          res(authModal);
+        }, 500);
+      } catch (error) {
+        rej(error);
+      }
+    });
+  };
+
+  const onOpenSignInWindow = async () => {
+    if (windowIsOpen) return;
+    setWindowIsOpen(true);
+    await getAuthWindow();
+    setWindowIsOpen(false);
+  };
 
   const onClose = () => setDeletePortalDialogVisible(false);
 
   const onDelete = () => {
-    const protocol = window?.location?.protocol;
-    const deletePortalData = encodeURIComponent(domain);
-    return window.open(
-      `${protocol}//${domain}/login?deletePortalData=${deletePortalData}`,
-      "_self"
-    );
+    onOpenSignInWindow();
+    onClose();
   };
+
+  useEffect(() => {
+    window.addEventListener("message", receiveMessage, false);
+  }, []);
 
   return (
     <StyledModalDialog

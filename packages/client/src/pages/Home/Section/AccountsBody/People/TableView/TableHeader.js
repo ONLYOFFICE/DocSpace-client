@@ -173,7 +173,6 @@ class PeopleTableHeader extends React.Component {
       infoPanelVisible,
       columnStorageName,
       columnInfoPanelStorageName,
-      withPaging,
       setHideColumns,
     } = this.props;
     const { sortOrder } = filter;
@@ -193,7 +192,7 @@ class PeopleTableHeader extends React.Component {
         resetColumnsSize={resetColumnsSize}
         checkboxMargin="12px"
         infoPanelVisible={infoPanelVisible}
-        useReactWindow={!withPaging}
+        useReactWindow
         setHideColumns={setHideColumns}
       />
     );
@@ -215,7 +214,6 @@ export default inject(
     const { filter, setFilter } = filterStore;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
-    const { withPaging } = settingsStore;
 
     const { isDefaultUsersQuotaSet, showStorageInfo } = currentQuotaStore;
 
@@ -235,7 +233,6 @@ export default inject(
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
       userId: userStore.user?.id,
       infoPanelVisible,
-      withPaging,
       isDefaultUsersQuotaSet,
       showStorageInfo,
 

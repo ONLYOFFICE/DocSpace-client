@@ -318,14 +318,6 @@ class FilesStore {
       //console.log(
       //  `selected folder id ${this.selectedFolderStore.id} an changed folder id ${id}`
       //);
-
-      if (
-        this.selectedFolderStore.id == id &&
-        this.settingsStore.withPaging //TODO: no longer deletes the folder in other tabs
-      ) {
-        console.log("[WS] refresh-folder", id);
-        this.fetchFiles(id, this.filter);
-      }
     });
 
     socketHelper.on("s:markasnew-folder", ({ folderId, count }) => {
@@ -457,13 +449,6 @@ class FilesStore {
 
     const newFiles = [fileInfo, ...this.files];
 
-    if (
-      newFiles.length > this.filter.pageCount &&
-      this.settingsStore.withPaging
-    ) {
-      newFiles.pop(); // Remove last
-    }
-
     const newFilter = this.filter;
     newFilter.total += 1;
 
@@ -500,7 +485,7 @@ class FilesStore {
       }
 
       //To update a file version
-      if (foundIndex > -1 && !this.settingsStore.withPaging) {
+      if (foundIndex > -1) {
         if (
           this.files[foundIndex].version !== file.version ||
           this.files[foundIndex].versionGroup !== file.versionGroup
@@ -556,13 +541,6 @@ class FilesStore {
       console.log("[WS] create new folder", folderInfo.id, folderInfo.title);
 
       const newFolders = [folderInfo, ...this.folders];
-
-      if (
-        newFolders.length > this.filter.pageCount &&
-        this.settingsStore.withPaging
-      ) {
-        newFolders.pop(); // Remove last
-      }
 
       const newFilter = this.filter;
       newFilter.total += 1;
@@ -1394,7 +1372,7 @@ class FilesStore {
   };
 
   setRoomsFilter = (filter) => {
-    if (!this.settingsStore.withPaging) filter.pageCount = 100;
+    filter.pageCount = 100;
 
     const isArchive = this.categoryType === CategoryType.Archive;
 
@@ -1428,7 +1406,7 @@ class FilesStore {
   };
 
   setFilter = (filter) => {
-    if (!this.settingsStore.withPaging) filter.pageCount = 100;
+    filter.pageCount = 100;
     this.filter = filter;
   };
 
@@ -1464,38 +1442,6 @@ class FilesStore {
     //   },
     //   replace: !location.search,
     // });
-  };
-
-  isEmptyLastPageAfterOperation = (newSelection) => {
-    const { isRoomsFolder, isArchiveFolder } = this.treeFoldersStore;
-
-    const selection =
-      newSelection || this.selection?.length || [this.bufferSelection].length;
-
-    const filter =
-      isRoomsFolder || isArchiveFolder ? this.roomsFilter : this.filter;
-
-    return (
-      selection &&
-      filter.page > 0 &&
-      !filter.hasNext() &&
-      selection === this.files.length + this.folders.length
-    );
-  };
-
-  resetFilterPage = () => {
-    const { isRoomsFolder, isArchiveFolder } = this.treeFoldersStore;
-
-    let newFilter;
-
-    newFilter =
-      isRoomsFolder || isArchiveFolder
-        ? this.roomsFilter.clone()
-        : this.filter.clone();
-
-    newFilter.page--;
-
-    return newFilter;
   };
 
   refreshFiles = async () => {
@@ -1548,10 +1494,8 @@ class FilesStore {
       filterData.sortOrder = splitFilter[1];
     }
 
-    if (!this.settingsStore.withPaging) {
-      filterData.page = 0;
-      filterData.pageCount = 100;
-    }
+    filterData.page = 0;
+    filterData.pageCount = 100;
 
     const defaultFilter = FilesFilter.getDefault();
 
@@ -1874,14 +1818,12 @@ class FilesStore {
       ? filter.clone()
       : RoomsFilter.getDefault(this.userStore.user?.id);
 
-    if (!this.settingsStore.withPaging) {
-      const isCustomCountPage =
-        filter && filter.pageCount !== 100 && filter.pageCount !== 25;
+    const isCustomCountPage =
+      filter && filter.pageCount !== 100 && filter.pageCount !== 25;
 
-      if (!isCustomCountPage) {
-        filterData.page = 0;
-        filterData.pageCount = 100;
-      }
+    if (!isCustomCountPage) {
+      filterData.page = 0;
+      filterData.pageCount = 100;
     }
 
     if (folderId) setSelectedNode([folderId + ""]);
@@ -2962,11 +2904,7 @@ class FilesStore {
   };
 
   scrollToTop = () => {
-    if (
-      this.settingsStore.withPaging ||
-      this.selectedFolderStore.isIndexedFolder
-    )
-      return;
+    if (this.selectedFolderStore.isIndexedFolder) return;
 
     const scrollElm = isMobile()
       ? document.querySelector("#customScrollBar > .scroll-wrapper > .scroller")

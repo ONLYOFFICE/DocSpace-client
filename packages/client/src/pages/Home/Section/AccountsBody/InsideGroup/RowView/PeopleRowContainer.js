@@ -82,8 +82,6 @@ const PeopleRowContainer = ({
   accountsViewAs,
   setViewAs,
   theme,
-  infoPanelVisible,
-  withPaging,
   currentDeviceType,
   insideGroupIsFiltered,
   insideGroupFilterTotal,
@@ -99,7 +97,7 @@ const PeopleRowContainer = ({
   return !!peopleList?.length ? (
     <StyledRowContainer
       className="people-row-container"
-      useReactWindow={!withPaging}
+      useReactWindow
       fetchMoreFiles={fetchMoreInsideGroupUsers}
       hasMoreFiles={hasMoreInsideGroupUsers}
       itemCount={insideGroupFilterTotal}
@@ -128,7 +126,7 @@ export default inject(({ peopleStore, filesStore, settingsStore }) => {
     usersStore,
     infoPanelStore,
   } = peopleStore;
-  const { theme, withPaging, currentDeviceType } = settingsStore;
+  const { theme, currentDeviceType } = settingsStore;
   const { isVisible: infoPanelVisible } = infoPanelStore;
 
   const {
@@ -148,7 +146,6 @@ export default inject(({ peopleStore, filesStore, settingsStore }) => {
     setViewAs,
     theme,
     infoPanelVisible,
-    withPaging,
     currentDeviceType,
     insideGroupIsFiltered,
     insideGroupFilterTotal,

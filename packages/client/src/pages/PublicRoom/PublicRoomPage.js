@@ -39,7 +39,6 @@ import { usePublic, useSDK } from "../Home/Hooks";
 
 const PublicRoomPage = (props) => {
   const {
-    withPaging,
     fetchFiles,
     isEmptyPage,
 
@@ -79,7 +78,6 @@ const PublicRoomPage = (props) => {
       <SectionWrapper
         withBodyScroll
         // withBodyAutoFocus={!isMobile}
-        withPaging={withPaging}
         {...sectionProps}
       >
         <Section.SectionHeader>
@@ -118,7 +116,7 @@ export default inject(
     filesSettingsStore,
     mediaViewerDataStore,
   }) => {
-    const { withPaging, frameConfig, setFrameConfig, isFrame } = settingsStore;
+    const { frameConfig, setFrameConfig, isFrame } = settingsStore;
     const { isLoaded, isLoading, roomStatus, fetchPublicRoom } =
       publicRoomStore;
 
@@ -140,8 +138,6 @@ export default inject(
       roomStatus,
       fetchFiles,
       getFilesSettings,
-
-      withPaging,
 
       showSecondaryProgressBar,
       secondaryProgressBarValue,

@@ -131,7 +131,6 @@ const Table = ({
   userId,
   infoPanelVisible,
 
-  withPaging,
   canChangeUserType,
   currentDeviceType,
   typeAccountsInsideGroupColumnIsEnabled,
@@ -164,7 +163,7 @@ const Table = ({
   return isEmptyPage ? (
     <EmptyScreen isEmptyGroup={!insideGroupIsFiltered} />
   ) : (
-    <StyledTableContainer useReactWindow={!withPaging} forwardedRef={ref}>
+    <StyledTableContainer useReactWindow forwardedRef={ref}>
       <TableHeader
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
@@ -183,7 +182,7 @@ const Table = ({
         itemCount={insideGroupFilterTotal}
         filesLength={peopleList.length}
         itemHeight={48}
-        useReactWindow={!withPaging}
+        useReactWindow
       >
         {peopleList.map((item, index) => (
           <TableRow
@@ -230,7 +229,7 @@ export default inject(
       setViewAs,
       changeType,
     } = peopleStore;
-    const { theme, withPaging, currentDeviceType } = settingsStore;
+    const { theme, currentDeviceType } = settingsStore;
     const { peopleList } = usersStore;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
@@ -261,7 +260,6 @@ export default inject(
       changeType,
       userId,
       infoPanelVisible,
-      withPaging,
 
       canChangeUserType,
       currentDeviceType,

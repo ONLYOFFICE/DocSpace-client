@@ -49,7 +49,6 @@ const GroupsTableView = ({
   userId,
   infoPanelVisible,
 
-  withPaging,
   currentDeviceType,
 
   fetchMoreGroups,
@@ -76,10 +75,7 @@ const GroupsTableView = ({
   const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
 
   return groups.length ? (
-    <Styled.GroupsTableContainer
-      useReactWindow={!withPaging}
-      forwardedRef={ref}
-    >
+    <Styled.GroupsTableContainer useReactWindow forwardedRef={ref}>
       <GroupsTableHeader
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
@@ -98,7 +94,7 @@ const GroupsTableView = ({
         itemCount={groupsFilterTotal}
         filesLength={groups.length}
         itemHeight={48}
-        useReactWindow={!withPaging}
+        useReactWindow
       >
         {groups.map((item, index) => (
           <GroupsTableItem
@@ -153,7 +149,7 @@ export default inject(
       groupsFilterTotal,
     } = groupsStore;
 
-    const { theme, withPaging, currentDeviceType } = settingsStore;
+    const { theme, currentDeviceType } = settingsStore;
     const { hasMoreAccounts, fetchMoreAccounts } = usersStore;
     const { id: userId } = userStore.user;
 
@@ -171,7 +167,6 @@ export default inject(
       setViewAs,
       theme,
       infoPanelVisible,
-      withPaging,
 
       fetchMoreAccounts,
       hasMoreAccounts,

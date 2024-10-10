@@ -305,7 +305,7 @@ export async function getUserFromConfirm(
   );
 
   const res = IS_TEST
-    ? selfHandler(false, headers())
+    ? selfHandler(null, headers())
     : await fetch(getUserFromConfirm);
 
   if (!res.ok) return;

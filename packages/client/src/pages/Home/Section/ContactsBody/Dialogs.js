@@ -35,13 +35,13 @@ import {
   ChangePortalOwnerDialog,
   DeleteSelfProfileDialog,
   DeleteProfileEverDialog,
-  ChangeUserTypeDialog,
   ChangeUserStatusDialog,
   SendInviteDialog,
   ChangeNameDialog,
   ResetApplicationDialog,
   DataReassignmentDialog,
   DeleteGroupDialog,
+  RemoveGuestDialog,
 } from "SRC_DIR/components/dialogs";
 
 const Dialogs = ({
@@ -67,6 +67,7 @@ const Dialogs = ({
 
   dataReassignmentDialogVisible,
   deleteGroupDialogVisible,
+  removeGuestDialogVisible,
 }) => {
   return (
     <>
@@ -148,6 +149,13 @@ const Dialogs = ({
           onClose={closeDialogs}
         />
       )}
+
+      {removeGuestDialogVisible && (
+        <RemoveGuestDialog
+          visible={removeGuestDialogVisible}
+          onClose={closeDialogs}
+        />
+      )}
     </>
   );
 };
@@ -168,6 +176,8 @@ export default inject(({ peopleStore, userStore }) => {
     resetAuthDialogVisible,
     dataReassignmentDialogVisible,
     deleteGroupDialogVisible,
+
+    removeGuestDialogVisible,
   } = peopleStore.dialogStore;
 
   const { user: profile } = userStore;
@@ -204,5 +214,6 @@ export default inject(({ peopleStore, userStore }) => {
 
     dataReassignmentDialogVisible,
     deleteGroupDialogVisible,
+    removeGuestDialogVisible,
   };
 })(observer(Dialogs));

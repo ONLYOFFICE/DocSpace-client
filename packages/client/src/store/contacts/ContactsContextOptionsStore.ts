@@ -286,6 +286,14 @@ class ContactsConextOptionsStore {
                 this.usersStore.getUsersToMakeEmployees,
               ),
           };
+        case "remove-guest":
+          return {
+            id: "option_remove-guests",
+            key: option,
+            label: t("Common:Remove"),
+            onClick: () => this.dialogStore.setRemoveGuestDialogVisible(true),
+            icon: DisableReactSvgUrl,
+          };
         default:
           break;
       }
@@ -308,8 +316,11 @@ class ContactsConextOptionsStore {
       hasFreeUsers,
       contactsTab,
     } = this.usersStore;
-    const { setSendInviteDialogVisible, setDeleteProfileDialogVisible } =
-      this.dialogStore;
+    const {
+      setSendInviteDialogVisible,
+      setDeleteProfileDialogVisible,
+      setRemoveGuestDialogVisible,
+    } = this.dialogStore;
 
     const isGuests = contactsTab === "guests";
 
@@ -407,8 +418,8 @@ class ContactsConextOptionsStore {
         key: "cm-remove",
         label: t("Common:Remove"),
         disabled: !isGuests || !isRoomAdmin,
-        onClick: () => setDeleteProfileDialogVisible(true),
-        icon: DeleteReactSvgUrl,
+        onClick: () => setRemoveGuestDialogVisible(true),
+        icon: DisableReactSvgUrl,
       },
     ];
 

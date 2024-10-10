@@ -53,6 +53,7 @@ const Row = memo(({ data, index, style }) => {
     setHasErrors,
     roomType,
     isOwner,
+    isAdmin,
     inputsRef,
     setIsOpenItemAccess,
     isMobileView,
@@ -80,6 +81,7 @@ const Row = memo(({ data, index, style }) => {
         setHasErrors={setHasErrors}
         roomType={roomType}
         isOwner={isOwner}
+        isAdmin={isAdmin}
         inputsRef={inputsRef}
         setIsOpenItemAccess={setIsOpenItemAccess}
         isMobileView={isMobileView}
@@ -97,6 +99,7 @@ const ItemsList = ({
   setHasErrors,
   roomType,
   isOwner,
+  isAdmin,
   externalLinksVisible,
   scrollAllPanelContent,
   inputsRef,
@@ -187,6 +190,7 @@ const ItemsList = ({
           setHasErrors,
           roomType,
           isOwner,
+          isAdmin,
           inputsRef,
           setIsOpenItemAccess,
           isMobileView,
@@ -203,7 +207,7 @@ const ItemsList = ({
 
 export default inject(({ userStore, dialogsStore, settingsStore }) => {
   const { setInviteItems, inviteItems, changeInviteItem } = dialogsStore;
-  const { isOwner } = userStore.user;
+  const { isOwner, isAdmin } = userStore.user;
   const { theme, standalone } = settingsStore;
 
   return {
@@ -211,6 +215,7 @@ export default inject(({ userStore, dialogsStore, settingsStore }) => {
     inviteItems,
     changeInviteItem,
     isOwner,
+    isAdmin,
     standalone,
     theme,
   };

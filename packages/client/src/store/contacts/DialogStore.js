@@ -41,6 +41,7 @@ class DialogStore {
   isDeletingUserWithReassignment = false;
   changeEmailVisible = false;
   deleteGroupDialogVisible = false;
+  removeGuestDialogVisible = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -94,6 +95,10 @@ class DialogStore {
     this.deleteGroupDialogVisible = visible;
   };
 
+  setRemoveGuestDialogVisible = (visible) => {
+    this.removeGuestDialogVisible = visible;
+  };
+
   closeDialogs = () => {
     this.setChangeOwnerDialogVisible(false);
     this.setDeleteSelfProfileDialogVisible(false);
@@ -108,6 +113,8 @@ class DialogStore {
     this.setChangeEmailVisible(false);
 
     this.setDeleteGroupDialogVisible(false);
+
+    this.setRemoveGuestDialogVisible(false);
   };
 }
 

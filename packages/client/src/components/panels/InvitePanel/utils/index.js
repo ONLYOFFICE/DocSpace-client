@@ -85,6 +85,7 @@ export const getAccessOptions = (
   withRemove = false,
   withSeparator = false,
   isOwner = false,
+  isAdmin = false,
   standalone = false,
 ) => {
   let options = [];
@@ -253,12 +254,19 @@ export const getAccessOptions = (
     case -1:
       if (isOwner) options.push(accesses.portalAdmin);
 
-      options = [
-        ...options,
-        accesses.roomAdmin,
-        { key: "s1", isSeparator: withSeparator },
-        accesses.user,
-      ];
+      if (isAdmin || isOwner) {
+        options.push(
+          ...[
+            accesses.roomAdmin,
+            {
+              key: "s1",
+              isSeparator: withSeparator,
+            },
+          ],
+        );
+      }
+
+      options = [...options, accesses.user];
       break;
   }
 

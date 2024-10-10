@@ -31,5 +31,10 @@
   "SuccessSentInvitation": "The invitation was successfully sent",
   "SuccessSentMultipleInvitatios": "Invitations were successfully sent",
   "WithoutGroup": "Without group",
-  "RegistrationDate": "Registration date"
+  "RegistrationDate": "Registration date",
+  "RemoveGuest": "Remove guest",
+  "RemoveGuestDescription": "Guest <strong>{{userName}}</strong> will be removed from all rooms you have invited them to. This action cannot be undone.",
+  "RemoveGuests": "Remove guests",
+  "RemoveGuestsDescription": "Selected guests will be removed from all rooms you have invited them to. This action cannot be undone.",
+  "GuestsRemoved": "Guest (s) successfully removed"
 }

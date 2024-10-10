@@ -95,6 +95,7 @@ const InviteInput = ({
   culture,
   language,
   isOwner,
+  isAdmin,
   inputsRef,
   setAddUsersPanelVisible,
   isMobileView,
@@ -688,6 +689,7 @@ const InviteInput = ({
           onSelectAccess={onSelectAccess}
           containerRef={inputsRef}
           isOwner={isOwner}
+          isAdmin={isAdmin}
           isMobileView={isMobileView}
           {...(roomId === -1 && {
             isSelectionDisabled: isUserTariffLimit,
@@ -701,7 +703,7 @@ const InviteInput = ({
 
 export default inject(
   ({ settingsStore, dialogsStore, userStore, currentQuotaStore }) => {
-    const { isOwner } = userStore.user;
+    const { isOwner, isAdmin } = userStore.user;
     const {
       invitePanelOptions,
       setInviteItems,
@@ -724,6 +726,7 @@ export default inject(
       hideSelector: invitePanelOptions.hideSelector,
       defaultAccess: invitePanelOptions.defaultAccess,
       isOwner,
+      isAdmin,
       isPaidUserAccess,
       setInvitePaidUsersCount,
       isUserTariffLimit,

@@ -85,6 +85,7 @@ const Item = ({
   setHasErrors,
   roomType,
   isOwner,
+  isAdmin,
   inputsRef,
   setIsOpenItemAccess,
   isMobileView,
@@ -168,6 +169,7 @@ const Item = ({
     true,
     true,
     isOwner,
+    isAdmin,
     standalone,
   );
 

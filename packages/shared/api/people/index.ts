@@ -396,6 +396,14 @@ export async function deleteUser(userId: string) {
   });
 }
 
+export async function deleteGuests(userIds: string[]) {
+  return request({
+    method: "delete",
+    url: `/people/guests`,
+    data: { userIds },
+  });
+}
+
 export function deleteUsers(userIds: string[]) {
   return request({
     method: "put",

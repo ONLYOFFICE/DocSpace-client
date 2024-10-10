@@ -75,6 +75,7 @@ const InvitePanel = ({
   setIsNewUserByCurrentUser,
   setInvitePaidUsersCount,
   isOwner,
+  isAdmin,
   standalone,
   hideSelector,
   isUserTariffLimit,
@@ -477,6 +478,7 @@ const InvitePanel = ({
     false,
     true,
     isOwner,
+    isAdmin,
     standalone,
   );
 
@@ -588,7 +590,7 @@ export default inject(
 
     const { maxCountManagersByQuota, isUserTariffLimit } = currentQuotaStore;
 
-    const { isOwner } = userStore.user;
+    const { isOwner, isAdmin } = userStore.user;
 
     return {
       folders,
@@ -618,6 +620,7 @@ export default inject(
       hideSelector: invitePanelOptions.hideSelector,
       isUserTariffLimit,
       isPaidUserAccess,
+      isAdmin,
     };
   },
 )(

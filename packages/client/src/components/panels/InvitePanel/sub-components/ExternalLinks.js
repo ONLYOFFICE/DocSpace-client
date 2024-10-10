@@ -70,6 +70,7 @@ const ExternalLinks = ({
   setShareLinks,
   setInvitationLinks,
   isOwner,
+  isAdmin,
   onChangeExternalLinksVisible,
   externalLinksVisible,
   setActiveLink,
@@ -224,6 +225,7 @@ const ExternalLinks = ({
     false,
     true,
     isOwner,
+    isAdmin,
     standalone,
   );
 
@@ -318,7 +320,7 @@ export default inject(
     currentQuotaStore,
     settingsStore,
   }) => {
-    const { isOwner } = userStore.user;
+    const { isOwner, isAdmin } = userStore.user;
     const { invitePanelOptions } = dialogsStore;
     const { setInvitationLinks } = filesStore;
     const { roomId, hideSelector, defaultAccess } = invitePanelOptions;
@@ -332,6 +334,7 @@ export default inject(
       hideSelector,
       defaultAccess,
       isOwner,
+      isAdmin,
       getPortalInviteLink,
       isUserTariffLimit,
       standalone,

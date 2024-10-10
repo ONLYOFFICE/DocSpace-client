@@ -334,6 +334,20 @@ class UsersStore {
     return updatedUsers;
   };
 
+  removeGuests = async (ids: string[]) => {
+    if (this.contactsTab !== "guests" || !ids.length) return;
+
+    const removedGuests = await api.people.deleteGuests(ids);
+
+    await this.getUsersList(this.filter);
+
+    if (!!removedGuests && !this.needResetUserSelection) {
+      this.updateSelection();
+    }
+
+    return removedGuests;
+  };
+
   setCustomUserQuota = async (
     quotaSize: string | number,
     userIds: string[],

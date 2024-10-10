@@ -106,6 +106,7 @@ const Item = ({
     warning,
     isVisitor,
     status,
+    isEmailInvite,
   } = item;
 
   const name = isGroup
@@ -159,7 +160,7 @@ const Item = ({
     [],
   );
 
-  const type = getUserType(item);
+  const type = isEmailInvite ? access : getUserType(item);
 
   const accesses = getAccessOptions(
     t,
@@ -172,20 +173,26 @@ const Item = ({
 
   const isRolePaid = isPaidUserRole(access);
   const isUserRolesFilterd =
-    isRolePaid && (type === EmployeeType.Guest || type === EmployeeType.User);
+    roomId === -1
+      ? false
+      : isRolePaid &&
+        (type === EmployeeType.Guest || type === EmployeeType.User);
+
   const isGroupRoleFiltered = isRolePaid && item.isGroup;
 
   const filteredAccesses =
-    item.isGroup || isUserRolesFilterd || type === EmployeeType.Guest
-      ? filterPaidRoleOptions(accesses)
-      : accesses;
+    roomId === -1
+      ? accesses
+      : item.isGroup || isUserRolesFilterd || type === EmployeeType.Guest
+        ? filterPaidRoleOptions(accesses)
+        : accesses;
 
   const defaultAccess =
     isUserRolesFilterd || isGroupRoleFiltered
       ? getTopFreeRole(t, roomType)
       : filteredAccesses.find((option) => option.access === +access);
 
-  const typeLabel = item?.isEmailInvite
+  const typeLabel = isEmailInvite
     ? roomId === -1 || isRolePaid
       ? getUserTypeTranslation(type, t)
       : t("Common:Guest")

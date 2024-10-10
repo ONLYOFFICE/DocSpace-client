@@ -183,8 +183,9 @@ const InviteInput = ({
     const uid = () => Math.random().toString(36).slice(-6);
     let userAccess = selectedAccess;
 
-    const isAccounts = roomId === -1;
-    const isPaidAccess = isAccounts
+    const isContacts = roomId === -1;
+
+    const isPaidAccess = isContacts
       ? isPaidUserAccess(userAccess)
       : isPaidUserRole(userAccess);
 
@@ -194,7 +195,7 @@ const InviteInput = ({
       const itemsArray = addresses.map((address) => {
         if (isPaidAccess) {
           if (isUserTariffLimit) {
-            const FreeUser = isAccounts
+            const FreeUser = isContacts
               ? EmployeeType.User
               : getTopFreeRole(t, roomType)?.access;
 
@@ -224,8 +225,8 @@ const InviteInput = ({
 
     if (isPaidAccess) {
       if (isUserTariffLimit) {
-        const FreeUser = isAccounts
-          ? EmployeeType.Guest
+        const FreeUser = isContacts
+          ? EmployeeType.User
           : getTopFreeRole(t, roomType)?.access;
 
         if (FreeUser) {
@@ -411,12 +412,16 @@ const InviteInput = ({
         const userItem = usersList.find((value) => value.email === item.email);
 
         if (!userItem) {
-          const isRolePaid = isPaidUserRole(item.access);
+          const isRolePaid =
+            roomId === -1
+              ? isPaidUserAccess(item.access)
+              : isPaidUserRole(item.access);
 
           if (isRolePaid && item.isEmailInvite) {
-            const topFreeRole = getTopFreeRole(t, roomType);
+            const topFreeRole =
+              roomId === -1 ? EmployeeType.User : getTopFreeRole(t, roomType);
 
-            if (item.access !== topFreeRole.access) {
+            if (roomId !== -1 && item.access !== topFreeRole.access) {
               item = makeFreeRole(item, t, topFreeRole);
             }
           }

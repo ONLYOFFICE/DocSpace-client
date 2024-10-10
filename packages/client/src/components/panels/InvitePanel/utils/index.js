@@ -103,7 +103,7 @@ export const getAccessOptions = (
     },
     roomAdmin: {
       key: "roomAdmin",
-      label: t("Common:RoomAdmin"),
+      label: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
       description: getRoomAdminDescription(roomType, t),
       ...(!standalone && { quota: t("Common:Paid") }),
       color: globalColors.favoritesStatus,
@@ -127,7 +127,7 @@ export const getAccessOptions = (
     },
     user: {
       key: "newUser",
-      label: t("Common:User"),
+      label: getUserTypeTranslation(EmployeeType.User, t),
       description: getUserDescription(roomType, t),
       access:
         roomType === -1 ? EmployeeType.User : ShareAccessRights.Collaborator,
@@ -292,7 +292,7 @@ export const isPaidUserRole = (selectedAccess) => {
 };
 
 export const getFreeUsersTypeArray = () => {
-  return [EmployeeType.Guest];
+  return [EmployeeType.User];
 };
 
 export const getFreeUsersRoleArray = () => {

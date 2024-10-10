@@ -60,6 +60,7 @@ type ContactsTabsProps = {
   userId: TUser["id"];
   isVisitor: TUser["isVisitor"];
   isCollaborator: TUser["isCollaborator"];
+  isRoomAdmin: TUser["isRoomAdmin"];
 };
 
 const ContactsTabs = ({
@@ -71,6 +72,7 @@ const ContactsTabs = ({
   userId,
   isVisitor,
   isCollaborator,
+  isRoomAdmin,
 }: ContactsTabsProps) => {
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
@@ -99,8 +101,10 @@ const ContactsTabs = ({
 
     const filter = Filter.getDefault();
 
-    filter.area = "guests";
-    filter.inviterId = userId;
+    if (!isRoomAdmin) {
+      filter.area = "guests";
+      filter.inviterId = userId;
+    }
 
     navigate(`${GUESTS_ROUTE_WITH_FILTER}?${filter.toUrlParams()}`);
   };
@@ -163,7 +167,12 @@ export default inject(
     const { showBodyLoader } = clientLoadingStore;
     const { usersStore, groupsStore } = peopleStore;
 
-    const { isVisitor, isCollaborator, id: userId } = userStore.user!;
+    const {
+      isVisitor,
+      isCollaborator,
+      isRoomAdmin,
+      id: userId,
+    } = userStore.user!;
 
     const {
       setSelection: setUsersSelection,
@@ -184,6 +193,7 @@ export default inject(
       userId,
       isVisitor,
       isCollaborator,
+      isRoomAdmin,
     };
   },
 )(observer(ContactsTabs));

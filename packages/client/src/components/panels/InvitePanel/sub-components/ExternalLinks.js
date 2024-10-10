@@ -227,7 +227,8 @@ const ExternalLinks = ({
     standalone,
   );
 
-  const filteredAccesses = filterPaidRoleOptions(accesses);
+  const filteredAccesses =
+    roomType === -1 ? accesses : filterPaidRoleOptions(accesses);
 
   return (
     <StyledExternalLink noPadding ref={inputsRef}>

@@ -94,7 +94,7 @@ const ChangeUserTypeEvent = ({
       .then((users) => {
         toastr.success(
           isGuestsDialog
-            ? t("SuccessChangeGuestsType")
+            ? t("SuccessChangeGuestType")
             : t("SuccessChangeUserType"),
         );
 

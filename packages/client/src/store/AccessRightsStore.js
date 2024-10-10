@@ -79,7 +79,7 @@ class AccessRightsStore {
       case EmployeeType.Owner:
         return false;
 
-      case EmployeeType.PortalAdmin:
+      case EmployeeType.Admin:
       case EmployeeType.RoomAdmin:
         if (isOwner) {
           return true;
@@ -87,8 +87,8 @@ class AccessRightsStore {
           return false;
         }
 
-      case EmployeeType.CollaboratorString:
-      case EmployeeType.UserString:
+      case EmployeeType.User:
+      case EmployeeType.Guest:
         return true;
 
       default:

@@ -86,7 +86,7 @@ class InviteLinksStore {
 
     runInAction(() => {
       switch (type) {
-        case EmployeeType.User:
+        case EmployeeType.RoomAdmin:
           this.setUserLink(link);
           break;
         case EmployeeType.Guest:
@@ -95,7 +95,7 @@ class InviteLinksStore {
         case EmployeeType.Admin:
           this.setAdminLink(link);
           break;
-        case EmployeeType.Collaborator:
+        case EmployeeType.User:
           this.setCollaboratorLink(link);
           break;
         default:

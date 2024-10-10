@@ -90,8 +90,8 @@ export const getAccessOptions = (
   let options = [];
   const accesses = {
     portalAdmin: {
-      key: EmployeeType.PortalAdmin,
-      label: getUserTypeTranslation(EmployeeType.PortalAdmin, t),
+      key: EmployeeType.Admin,
+      label: getUserTypeTranslation(EmployeeType.Admin, t),
       description: t("Translations:RolePortalAdminDescription", {
         productName: t("Common:ProductName"),
       }),
@@ -99,7 +99,7 @@ export const getAccessOptions = (
       color: globalColors.favoritesStatus,
       access:
         roomType === -1 ? EmployeeType.Admin : ShareAccessRights.FullAccess,
-      type: EmployeeType.PortalAdmin,
+      type: EmployeeType.Admin,
     },
     roomAdmin: {
       key: "roomAdmin",
@@ -108,7 +108,9 @@ export const getAccessOptions = (
       ...(!standalone && { quota: t("Common:Paid") }),
       color: globalColors.favoritesStatus,
       access:
-        roomType === -1 ? EmployeeType.User : ShareAccessRights.RoomManager,
+        roomType === -1
+          ? EmployeeType.RoomAdmin
+          : ShareAccessRights.RoomManager,
       type: EmployeeType.RoomAdmin,
     },
     roomManager: {
@@ -118,7 +120,9 @@ export const getAccessOptions = (
       ...(!standalone && { quota: t("Common:Paid") }),
       color: globalColors.favoritesStatus,
       access:
-        roomType === -1 ? EmployeeType.User : ShareAccessRights.RoomManager,
+        roomType === -1
+          ? EmployeeType.RoomAdmin
+          : ShareAccessRights.RoomManager,
       type: EmployeeType.RoomAdmin,
     },
     user: {
@@ -126,55 +130,51 @@ export const getAccessOptions = (
       label: t("Common:User"),
       description: getUserDescription(roomType, t),
       access:
-        roomType === -1
-          ? EmployeeType.Collaborator
-          : ShareAccessRights.Collaborator,
-      type: EmployeeType.CollaboratorString,
+        roomType === -1 ? EmployeeType.User : ShareAccessRights.Collaborator,
+      type: EmployeeType.User,
     },
     contentCreator: {
       key: "contentCreator",
       label: t("Common:ContentCreator"),
       description: getUserDescription(roomType, t),
       access:
-        roomType === -1
-          ? EmployeeType.Collaborator
-          : ShareAccessRights.Collaborator,
-      type: EmployeeType.CollaboratorString,
+        roomType === -1 ? EmployeeType.User : ShareAccessRights.Collaborator,
+      type: EmployeeType.User,
     },
     editor: {
       key: "editor",
       label: t("Common:Editor"),
       description: t("Translations:RoleEditorDescription"),
       access: ShareAccessRights.Editing,
-      type: EmployeeType.CollaboratorString,
+      type: EmployeeType.User,
     },
     formFiller: {
       key: "formFiller",
       label: t("Translations:RoleFormFiller"),
       description: getFormFillerDescription(roomType, t),
       access: ShareAccessRights.FormFilling,
-      type: EmployeeType.CollaboratorString,
+      type: EmployeeType.User,
     },
     reviewer: {
       key: "reviewer",
       label: t("Translations:RoleReviewer"),
       description: t("Translations:RoleReviewerDescription"),
       access: ShareAccessRights.Review,
-      type: EmployeeType.CollaboratorString,
+      type: EmployeeType.User,
     },
     commentator: {
       key: "commentator",
       label: t("Translations:RoleCommentator"),
       description: t("Translations:RoleCommentatorDescription"),
       access: ShareAccessRights.Comment,
-      type: EmployeeType.CollaboratorString,
+      type: EmployeeType.User,
     },
     viewer: {
       key: "viewer",
       label: t("Translations:RoleViewer"),
       description: t("Translations:RoleViewerDescription"),
       access: ShareAccessRights.ReadOnly,
-      type: EmployeeType.CollaboratorString,
+      type: EmployeeType.User,
     },
   };
 

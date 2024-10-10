@@ -172,13 +172,11 @@ const Item = ({
 
   const isRolePaid = isPaidUserRole(access);
   const isUserRolesFilterd =
-    isRolePaid &&
-    (type === EmployeeType.UserString ||
-      type === EmployeeType.CollaboratorString);
+    isRolePaid && (type === EmployeeType.Guest || type === EmployeeType.User);
   const isGroupRoleFiltered = isRolePaid && item.isGroup;
 
   const filteredAccesses =
-    item.isGroup || isUserRolesFilterd || type === EmployeeType.UserString
+    item.isGroup || isUserRolesFilterd || type === EmployeeType.Guest
       ? filterPaidRoleOptions(accesses)
       : accesses;
 
@@ -192,7 +190,7 @@ const Item = ({
       ? getUserTypeTranslation(type, t)
       : t("Common:Guest")
     : defaultAccess?.type === EmployeeType.RoomAdmin &&
-        type !== EmployeeType.PortalAdmin &&
+        type !== EmployeeType.Admin &&
         type !== EmployeeType.Owner
       ? getUserTypeTranslation(defaultAccess.type, t)
       : getUserTypeTranslation(type, t);

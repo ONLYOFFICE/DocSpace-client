@@ -195,7 +195,7 @@ const InviteInput = ({
         if (isPaidAccess) {
           if (isUserTariffLimit) {
             const FreeUser = isAccounts
-              ? EmployeeType.Guest
+              ? EmployeeType.User
               : getTopFreeRole(t, roomType)?.access;
 
             if (FreeUser) {

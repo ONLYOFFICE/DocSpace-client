@@ -60,13 +60,13 @@ const GroupMemberRow = ({ groupMember, removeMember }: GroupMemberRowProps) => {
     case EmployeeType.Owner:
       avatarRole = AvatarRole.owner;
       break;
-    case EmployeeType.PortalAdmin:
+    case EmployeeType.Admin:
       avatarRole = AvatarRole.admin;
       break;
     case EmployeeType.RoomAdmin:
       avatarRole = AvatarRole.manager;
       break;
-    case EmployeeType.CollaboratorString:
+    case EmployeeType.User:
       avatarRole = AvatarRole.collaborator;
       break;
     default:

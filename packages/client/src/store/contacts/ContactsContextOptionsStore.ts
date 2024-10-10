@@ -279,7 +279,7 @@ class ContactsConextOptionsStore {
             label: t("ChangeUserTypeDialog:ChangeUserTypeButton"),
             onClick: () =>
               this.usersStore.changeType(
-                EmployeeType.CollaboratorString,
+                EmployeeType.User,
                 this.usersStore.getUsersToMakeEmployees,
               ),
           };
@@ -316,10 +316,10 @@ class ContactsConextOptionsStore {
     const adminOption = {
       id: "context-menu_administrator",
       className: "context-menu_drop-down",
-      label: getUserTypeTranslation(EmployeeType.PortalAdmin, t),
-      title: getUserTypeTranslation(EmployeeType.PortalAdmin, t),
+      label: getUserTypeTranslation(EmployeeType.Admin, t),
+      title: getUserTypeTranslation(EmployeeType.Admin, t),
       onClick: (e: TContextMenuValueTypeOnClick) => onChangeType(e),
-      action: EmployeeType.PortalAdmin,
+      action: EmployeeType.Admin,
       key: "cm-administrator",
     };
     const managerOption = {
@@ -334,10 +334,10 @@ class ContactsConextOptionsStore {
     const userOption = {
       id: "context-menu_user",
       className: "context-menu_drop-down",
-      label: getUserTypeTranslation(EmployeeType.Collaborator, t),
-      title: getUserTypeTranslation(EmployeeType.Collaborator, t),
+      label: getUserTypeTranslation(EmployeeType.User, t),
+      title: getUserTypeTranslation(EmployeeType.User, t),
       onClick: (e: TContextMenuValueTypeOnClick) => onChangeType(e),
-      action: EmployeeType.Collaborator,
+      action: EmployeeType.User,
       key: "cm-user",
     };
 
@@ -544,9 +544,9 @@ class ContactsConextOptionsStore {
         className: "main-button_drop-down",
         icon: PersonManagerReactSvgUrl,
         label: t("Common:RoomAdmin"),
-        onClick: () => this.inviteUser(EmployeeType.User),
-        "data-type": EmployeeType.User,
-        action: EmployeeType.User,
+        onClick: () => this.inviteUser(EmployeeType.RoomAdmin),
+        "data-type": EmployeeType.RoomAdmin,
+        action: EmployeeType.RoomAdmin,
         key: "manager",
       },
       {
@@ -554,9 +554,9 @@ class ContactsConextOptionsStore {
         className: "main-button_drop-down",
         icon: PersonDefaultReactSvgUrl,
         label: t("Common:User"),
-        onClick: () => this.inviteUser(EmployeeType.Collaborator),
-        "data-type": EmployeeType.Collaborator,
-        action: EmployeeType.Collaborator,
+        onClick: () => this.inviteUser(EmployeeType.User),
+        "data-type": EmployeeType.User,
+        action: EmployeeType.User,
         key: "collaborator",
       },
       {

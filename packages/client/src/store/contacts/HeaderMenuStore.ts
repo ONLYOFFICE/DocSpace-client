@@ -90,13 +90,13 @@ class HeaderMenuStore {
     const adminOption = {
       id: "menu_change-user_administrator",
       className: "group-menu_drop-down",
-      label: getUserTypeTranslation(EmployeeType.PortalAdmin, t),
-      title: getUserTypeTranslation(EmployeeType.PortalAdmin, t),
+      label: getUserTypeTranslation(EmployeeType.Admin, t),
+      title: getUserTypeTranslation(EmployeeType.Admin, t),
       onClick: (e: TContextMenuValueTypeOnClick) =>
         this.contextOptionsStore.onChangeType(e),
-      "data-action": EmployeeType.PortalAdmin,
-      key: EmployeeType.PortalAdmin,
-      isActive: userSelectionRole === EmployeeType.PortalAdmin,
+      "data-action": EmployeeType.Admin,
+      key: EmployeeType.Admin,
+      isActive: userSelectionRole === EmployeeType.Admin,
     };
 
     const managerOption = {
@@ -114,12 +114,12 @@ class HeaderMenuStore {
     const collaboratorOption = {
       id: "menu_change-collaborator",
       key: "collaborator",
-      label: getUserTypeTranslation(EmployeeType.CollaboratorString, t),
-      title: getUserTypeTranslation(EmployeeType.CollaboratorString, t),
-      "data-action": EmployeeType.CollaboratorString,
+      label: getUserTypeTranslation(EmployeeType.User, t),
+      title: getUserTypeTranslation(EmployeeType.User, t),
+      "data-action": EmployeeType.User,
       onClick: (e: TContextMenuValueTypeOnClick) =>
         this.contextOptionsStore.onChangeType(e),
-      isActive: userSelectionRole === EmployeeType.CollaboratorString,
+      isActive: userSelectionRole === EmployeeType.User,
     };
 
     const { isVisitor, isCollaborator, isRoomAdmin, isAdmin } =
@@ -245,7 +245,7 @@ class HeaderMenuStore {
         onClick: isGuests
           ? () =>
               this.usersStore.changeType(
-                EmployeeType.Collaborator,
+                EmployeeType.User,
                 getUsersToMakeEmployees,
               )
           : () => {},

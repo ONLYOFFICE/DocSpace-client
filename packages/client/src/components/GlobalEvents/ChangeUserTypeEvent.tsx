@@ -77,7 +77,7 @@ const ChangeUserTypeEvent = ({
     abortCallback,
   } = dialogData;
 
-  const isGuestsDialog = fromType[0] === EmployeeType.UserString;
+  const isGuestsDialog = fromType[0] === EmployeeType.Guest;
 
   const onCloseAction = useCallback(() => {
     if (isRequestRunning) return;

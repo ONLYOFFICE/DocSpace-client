@@ -53,10 +53,8 @@ import { withTranslation } from "react-i18next";
 import { encryptionUploadDialog } from "../../../helpers/desktop";
 import { useNavigate, useLocation } from "react-router-dom";
 import MobileView from "./MobileView";
-import { createGroup, onInviteMultipleAgain } from "SRC_DIR/helpers/contacts";
 import {
   Events,
-  EmployeeType,
   DeviceType,
   RoomsType,
   FilesSelectorFilterTypes,

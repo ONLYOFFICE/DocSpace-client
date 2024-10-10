@@ -53,6 +53,7 @@ import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 import { TContactsTab, getContactsUrl } from "SRC_DIR/helpers/contacts";
 import { SortByFieldName } from "SRC_DIR/helpers/constants";
+import { getUserTypeTranslation } from "@docspace/shared/utils/common";
 
 type TFilterValues = (TGroupItem | TItem)[];
 
@@ -369,26 +370,7 @@ export const useContactsFilter = ({
       }
 
       if (usersFilter.role) {
-        let label = null;
-
-        switch (+usersFilter.role) {
-          case EmployeeType.Admin:
-            label = t("Common:PortalAdmin", {
-              productName: t("Common:ProductName"),
-            });
-            break;
-          case EmployeeType.User:
-            label = t("Common:RoomAdmin");
-            break;
-          case EmployeeType.Collaborator:
-            label = t("Common:User");
-            break;
-          case EmployeeType.Guest:
-            label = t("Common:User");
-            break;
-          default:
-            label = "";
-        }
+        const label = getUserTypeTranslation(+usersFilter.role, t);
 
         filterValues.push({
           key: +usersFilter.role,
@@ -596,27 +578,19 @@ export const useContactsFilter = ({
             id: "filter_type-docspace-admin",
             key: EmployeeType.Admin,
             group: "filter-type",
-            label: t("Common:PortalAdmin", {
-              productName: t("Common:ProductName"),
-            }),
+            label: getUserTypeTranslation(EmployeeType.Admin, t),
+          },
+          {
+            id: "filter_type-room-admin",
+            key: EmployeeType.RoomAdmin,
+            group: "filter-type",
+            label: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
           },
           {
             id: "filter_type-room-admin",
             key: EmployeeType.User,
             group: "filter-type",
-            label: t("Common:RoomAdmin"),
-          },
-          {
-            id: "filter_type-room-admin",
-            key: EmployeeType.Collaborator,
-            group: "filter-type",
-            label: t("Common:User"),
-          },
-          {
-            id: "filter_type-user",
-            key: EmployeeType.Guest,
-            group: "filter-type",
-            label: t("Common:User"),
+            label: getUserTypeTranslation(EmployeeType.User, t),
           },
         ];
 

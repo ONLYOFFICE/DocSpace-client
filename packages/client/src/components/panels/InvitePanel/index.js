@@ -113,7 +113,7 @@ const InvitePanel = ({
       id: "user",
       title: "User",
       shareLink: "",
-      access: EmployeeType.User,
+      access: EmployeeType.RoomAdmin,
     },
     {
       id: "guest",
@@ -131,7 +131,7 @@ const InvitePanel = ({
       id: "collaborator",
       title: "Collaborator",
       shareLink: "",
-      access: EmployeeType.Collaborator,
+      access: EmployeeType.User,
     },
   ];
 

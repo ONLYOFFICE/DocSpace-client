@@ -281,29 +281,26 @@ export function isAdmin(currentUser: TUser) {
 
 export const getUserType = (user: TUser) => {
   if (user.isOwner) return EmployeeType.Owner;
-  if (isAdmin(user)) return EmployeeType.PortalAdmin;
+  if (isAdmin(user)) return EmployeeType.Admin;
   if (user.isRoomAdmin) return EmployeeType.RoomAdmin;
-  if (user.isCollaborator) return EmployeeType.CollaboratorString;
-  if (user.isVisitor) return EmployeeType.UserString;
-  return EmployeeType.UserString;
+  if (user.isCollaborator) return EmployeeType.User;
+  if (user.isVisitor) return EmployeeType.Guest;
+  return EmployeeType.Guest;
 };
 
 export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {
   switch (type) {
     case EmployeeType.Owner:
       return t("Common:Owner");
-    case EmployeeType.PortalAdmin:
     case EmployeeType.Admin:
       return t("Common:PortalAdmin", {
         productName: t("Common:ProductName"),
       });
     case EmployeeType.RoomAdmin:
-    case EmployeeType.User:
       return t("Common:RoomAdmin");
-    case EmployeeType.CollaboratorString:
-    case EmployeeType.Collaborator:
+    case EmployeeType.User:
       return t("Common:User");
-    case EmployeeType.UserString:
+    case EmployeeType.Guest:
     default:
       return t("Common:Guest");
   }

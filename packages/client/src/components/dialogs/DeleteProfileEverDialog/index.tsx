@@ -323,7 +323,7 @@ export default inject(
     const usersToDelete = users.length ? users : selection;
 
     const onlyGuests = usersToDelete.every(
-      (el) => el.role === EmployeeType.UserString,
+      (el) => el.role === EmployeeType.Guest,
     );
     const deleteWithoutReassign = usersToDelete.length > 1 && !onlyGuests;
     const onlyOneUser = usersToDelete.length === 1;

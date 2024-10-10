@@ -87,10 +87,10 @@ const Accounts = (props) => {
 
     const adminOption = {
       id: "info-account-type_portal-admin",
-      key: EmployeeType.PortalAdmin,
-      title: getUserTypeTranslation(EmployeeType.PortalAdmin, t),
-      label: getUserTypeTranslation(EmployeeType.PortalAdmin, t),
-      action: EmployeeType.PortalAdmin,
+      key: EmployeeType.Admin,
+      title: getUserTypeTranslation(EmployeeType.Admin, t),
+      label: getUserTypeTranslation(EmployeeType.Admin, t),
+      action: EmployeeType.Admin,
     };
     const managerOption = {
       id: "info-account-type_room-admin",
@@ -101,17 +101,17 @@ const Accounts = (props) => {
     };
     const collaboratorOption = {
       id: "info-account-type_collaborator",
-      key: EmployeeType.CollaboratorString,
-      title: getUserTypeTranslation(EmployeeType.CollaboratorString, t),
-      label: getUserTypeTranslation(EmployeeType.CollaboratorString, t),
-      action: EmployeeType.CollaboratorString,
+      key: EmployeeType.User,
+      title: getUserTypeTranslation(EmployeeType.User, t),
+      label: getUserTypeTranslation(EmployeeType.User, t),
+      action: EmployeeType.User,
     };
     const userOption = {
       id: "info-account-type_user",
-      key: EmployeeType.UserString,
-      title: getUserTypeTranslation(EmployeeType.UserString, t),
-      label: getUserTypeTranslation(EmployeeType.UserString, t),
-      action: EmployeeType.UserString,
+      key: EmployeeType.Guest,
+      title: getUserTypeTranslation(EmployeeType.Guest, t),
+      label: getUserTypeTranslation(EmployeeType.Guest, t),
+      action: EmployeeType.Guest,
     };
 
     isOwner && options.push(adminOption);

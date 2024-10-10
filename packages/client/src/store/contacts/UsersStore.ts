@@ -298,20 +298,20 @@ class UsersStore {
     userIds: string[],
     filter: Filter = this.filter,
   ) => {
-    let toType = 0;
+    let toType = type ?? 0;
 
     switch (type) {
-      case EmployeeType.PortalAdmin:
+      case EmployeeType.Admin:
         toType = EmployeeType.Admin;
         break;
-      case EmployeeType.UserString:
+      case EmployeeType.Guest:
         toType = EmployeeType.Guest;
         break;
-      case EmployeeType.CollaboratorString:
-        toType = EmployeeType.Collaborator;
+      case EmployeeType.User:
+        toType = EmployeeType.User;
         break;
       case EmployeeType.RoomAdmin:
-        toType = EmployeeType.User;
+        toType = EmployeeType.RoomAdmin;
         break;
       default:
         return;
@@ -421,9 +421,9 @@ class UsersStore {
           }
         } else if (
           (isOwner || isAdmin) &&
-          (userRole === EmployeeType.UserString ||
+          (userRole === EmployeeType.Guest ||
             userRole === EmployeeType.RoomAdmin ||
-            userRole === EmployeeType.CollaboratorString)
+            userRole === EmployeeType.User)
         ) {
           if (!isUserLDAP && !isUserSSO) {
             options.push("separator-1");
@@ -446,15 +446,15 @@ class UsersStore {
       case "disabled":
         if (
           (isOwner || isAdmin) &&
-          (userRole === EmployeeType.UserString ||
+          (userRole === EmployeeType.Guest ||
             userRole === EmployeeType.RoomAdmin ||
-            userRole === EmployeeType.CollaboratorString)
+            userRole === EmployeeType.User)
         ) {
           options.push("enable");
 
           options.push("details");
 
-          if (userRole !== EmployeeType.UserString) {
+          if (userRole !== EmployeeType.Guest) {
             options.push("reassign-data");
           }
 
@@ -470,9 +470,9 @@ class UsersStore {
         if (
           isOwner ||
           ((isAdmin || (!isVisitor && !isCollaborator)) &&
-            (userRole === EmployeeType.UserString ||
+            (userRole === EmployeeType.Guest ||
               userRole === EmployeeType.RoomAdmin ||
-              userRole === EmployeeType.CollaboratorString))
+              userRole === EmployeeType.User))
         ) {
           if (isMySelf) {
             options.push("profile");
@@ -487,9 +487,9 @@ class UsersStore {
 
           if (
             (isOwner || isAdmin) &&
-            (userRole === EmployeeType.UserString ||
+            (userRole === EmployeeType.Guest ||
               userRole === EmployeeType.RoomAdmin ||
-              userRole === EmployeeType.CollaboratorString)
+              userRole === EmployeeType.User)
           ) {
             options.push("separator-1");
 

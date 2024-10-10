@@ -113,10 +113,10 @@ const PeopleTableRow = ({
     const options = [];
 
     const adminOption = {
-      key: EmployeeType.PortalAdmin,
-      title: getUserTypeTranslation(EmployeeType.PortalAdmin, t),
-      label: getUserTypeTranslation(EmployeeType.PortalAdmin, t),
-      action: EmployeeType.PortalAdmin,
+      key: EmployeeType.Admin,
+      title: getUserTypeTranslation(EmployeeType.Admin, t),
+      label: getUserTypeTranslation(EmployeeType.Admin, t),
+      action: EmployeeType.Admin,
     };
     const managerOption = {
       key: EmployeeType.RoomAdmin,
@@ -125,16 +125,16 @@ const PeopleTableRow = ({
       action: EmployeeType.RoomAdmin,
     };
     const collaboratorOption = {
-      key: EmployeeType.CollaboratorString,
-      title: getUserTypeTranslation(EmployeeType.CollaboratorString, t),
-      label: getUserTypeTranslation(EmployeeType.CollaboratorString, t),
-      action: EmployeeType.CollaboratorString,
+      key: EmployeeType.User,
+      title: getUserTypeTranslation(EmployeeType.User, t),
+      label: getUserTypeTranslation(EmployeeType.User, t),
+      action: EmployeeType.User,
     };
     const userOption = {
-      key: EmployeeType.UserString,
-      title: getUserTypeTranslation(EmployeeType.UserString, t),
-      label: getUserTypeTranslation(EmployeeType.UserString, t),
-      action: EmployeeType.UserString,
+      key: EmployeeType.Guest,
+      title: getUserTypeTranslation(EmployeeType.Guest, t),
+      label: getUserTypeTranslation(EmployeeType.Guest, t),
+      action: EmployeeType.Guest,
     };
 
     if (isOwner) options.push(adminOption);

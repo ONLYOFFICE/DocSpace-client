@@ -39,7 +39,7 @@ import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 import { StyledAccountContent } from "../../styles/accounts";
 import { getUserTypeTranslation } from "@docspace/shared/utils/common";
 
-import { EmployeeStatus } from "@docspace/shared/enums";
+import { EmployeeStatus, EmployeeType } from "@docspace/shared/enums";
 
 const Accounts = (props) => {
   const {
@@ -87,31 +87,31 @@ const Accounts = (props) => {
 
     const adminOption = {
       id: "info-account-type_portal-admin",
-      key: "admin",
-      title: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
-      label: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
-      action: "admin",
+      key: EmployeeType.PortalAdmin,
+      title: getUserTypeTranslation(EmployeeType.PortalAdmin, t),
+      label: getUserTypeTranslation(EmployeeType.PortalAdmin, t),
+      action: EmployeeType.PortalAdmin,
     };
     const managerOption = {
       id: "info-account-type_room-admin",
-      key: "manager",
-      title: t("Common:RoomAdmin"),
-      label: t("Common:RoomAdmin"),
-      action: "manager",
+      key: EmployeeType.RoomAdmin,
+      title: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
+      label: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
+      action: EmployeeType.RoomAdmin,
     };
     const collaboratorOption = {
       id: "info-account-type_collaborator",
-      key: "collaborator",
-      title: t("Common:User"),
-      label: t("Common:User"),
-      action: "collaborator",
+      key: EmployeeType.CollaboratorString,
+      title: getUserTypeTranslation(EmployeeType.CollaboratorString, t),
+      label: getUserTypeTranslation(EmployeeType.CollaboratorString, t),
+      action: EmployeeType.CollaboratorString,
     };
     const userOption = {
       id: "info-account-type_user",
-      key: "user",
-      title: t("Common:Guest"),
-      label: t("Common:Guest"),
-      action: "user",
+      key: EmployeeType.UserString,
+      title: getUserTypeTranslation(EmployeeType.UserString, t),
+      label: getUserTypeTranslation(EmployeeType.UserString, t),
+      action: EmployeeType.UserString,
     };
 
     isOwner && options.push(adminOption);

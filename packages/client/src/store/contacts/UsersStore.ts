@@ -454,7 +454,7 @@ class UsersStore {
 
           options.push("details");
 
-          if (userRole !== "user") {
+          if (userRole !== EmployeeType.UserString) {
             options.push("reassign-data");
           }
 
@@ -470,9 +470,9 @@ class UsersStore {
         if (
           isOwner ||
           ((isAdmin || (!isVisitor && !isCollaborator)) &&
-            userRole === "manager") ||
-          userRole === "collaborator" ||
-          userRole === "user"
+            (userRole === EmployeeType.UserString ||
+              userRole === EmployeeType.RoomAdmin ||
+              userRole === EmployeeType.CollaboratorString))
         ) {
           if (isMySelf) {
             options.push("profile");
@@ -487,9 +487,9 @@ class UsersStore {
 
           if (
             (isOwner || isAdmin) &&
-            (userRole === "manager" ||
-              userRole === "user" ||
-              userRole === "collaborator")
+            (userRole === EmployeeType.UserString ||
+              userRole === EmployeeType.RoomAdmin ||
+              userRole === EmployeeType.CollaboratorString)
           ) {
             options.push("separator-1");
 

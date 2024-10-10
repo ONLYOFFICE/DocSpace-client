@@ -30,6 +30,7 @@ import {
   EmployeeType,
 } from "@docspace/shared/enums";
 import { globalColors } from "@docspace/shared/themes";
+import { getUserTypeTranslation } from "@docspace/shared/utils/common";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
 /**
@@ -89,8 +90,8 @@ export const getAccessOptions = (
   let options = [];
   const accesses = {
     portalAdmin: {
-      key: "portalAdmin",
-      label: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
+      key: EmployeeType.PortalAdmin,
+      label: getUserTypeTranslation(EmployeeType.PortalAdmin, t),
       description: t("Translations:RolePortalAdminDescription", {
         productName: t("Common:ProductName"),
       }),
@@ -98,7 +99,7 @@ export const getAccessOptions = (
       color: globalColors.favoritesStatus,
       access:
         roomType === -1 ? EmployeeType.Admin : ShareAccessRights.FullAccess,
-      type: "admin",
+      type: EmployeeType.PortalAdmin,
     },
     roomAdmin: {
       key: "roomAdmin",
@@ -108,7 +109,7 @@ export const getAccessOptions = (
       color: globalColors.favoritesStatus,
       access:
         roomType === -1 ? EmployeeType.User : ShareAccessRights.RoomManager,
-      type: "manager",
+      type: EmployeeType.RoomAdmin,
     },
     roomManager: {
       key: "roomManager",
@@ -118,7 +119,7 @@ export const getAccessOptions = (
       color: globalColors.favoritesStatus,
       access:
         roomType === -1 ? EmployeeType.User : ShareAccessRights.RoomManager,
-      type: "manager",
+      type: EmployeeType.RoomAdmin,
     },
     user: {
       key: "newUser",
@@ -128,7 +129,7 @@ export const getAccessOptions = (
         roomType === -1
           ? EmployeeType.Collaborator
           : ShareAccessRights.Collaborator,
-      type: "collaborator",
+      type: EmployeeType.CollaboratorString,
     },
     contentCreator: {
       key: "contentCreator",
@@ -138,42 +139,42 @@ export const getAccessOptions = (
         roomType === -1
           ? EmployeeType.Collaborator
           : ShareAccessRights.Collaborator,
-      type: "collaborator",
+      type: EmployeeType.CollaboratorString,
     },
     editor: {
       key: "editor",
       label: t("Common:Editor"),
       description: t("Translations:RoleEditorDescription"),
       access: ShareAccessRights.Editing,
-      type: "collaborator",
+      type: EmployeeType.CollaboratorString,
     },
     formFiller: {
       key: "formFiller",
       label: t("Translations:RoleFormFiller"),
       description: getFormFillerDescription(roomType, t),
       access: ShareAccessRights.FormFilling,
-      type: "collaborator",
+      type: EmployeeType.CollaboratorString,
     },
     reviewer: {
       key: "reviewer",
       label: t("Translations:RoleReviewer"),
       description: t("Translations:RoleReviewerDescription"),
       access: ShareAccessRights.Review,
-      type: "collaborator",
+      type: EmployeeType.CollaboratorString,
     },
     commentator: {
       key: "commentator",
       label: t("Translations:RoleCommentator"),
       description: t("Translations:RoleCommentatorDescription"),
       access: ShareAccessRights.Comment,
-      type: "collaborator",
+      type: EmployeeType.CollaboratorString,
     },
     viewer: {
       key: "viewer",
       label: t("Translations:RoleViewer"),
       description: t("Translations:RoleViewerDescription"),
       access: ShareAccessRights.ReadOnly,
-      type: "collaborator",
+      type: EmployeeType.CollaboratorString,
     },
   };
 

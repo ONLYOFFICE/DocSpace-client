@@ -227,15 +227,6 @@ const User = ({
   const onOptionClick = (option) => {
     if (option.access === userRole.access) return;
 
-    const userType =
-      option.key === "owner"
-        ? "admin"
-        : option.key === "roomAdmin"
-          ? "manager"
-          : option.key === "collaborator"
-            ? "collaborator"
-            : "user";
-
     setIsLoading(true);
     updateRole(option);
   };

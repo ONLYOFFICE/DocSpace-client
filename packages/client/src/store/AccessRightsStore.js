@@ -29,6 +29,7 @@ import { makeAutoObservable } from "mobx";
 import {
   EmployeeActivationStatus,
   EmployeeStatus,
+  EmployeeType,
   FolderType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
@@ -75,19 +76,19 @@ class AccessRightsStore {
     if (userId === id || statusType === "disabled") return false;
 
     switch (role) {
-      case "owner":
+      case EmployeeType.Owner:
         return false;
 
-      case "admin":
-      case "manager":
+      case EmployeeType.PortalAdmin:
+      case EmployeeType.RoomAdmin:
         if (isOwner) {
           return true;
         } else {
           return false;
         }
 
-      case "collaborator":
-      case "user":
+      case EmployeeType.CollaboratorString:
+      case EmployeeType.UserString:
         return true;
 
       default:

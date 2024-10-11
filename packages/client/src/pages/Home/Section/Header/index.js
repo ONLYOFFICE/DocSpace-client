@@ -659,7 +659,9 @@ export default inject(
     dialogsStore,
   }) => {
     const { startUpload } = uploadDataStore;
-    const { isRoomAdmin, isCollaborator } = userStore.user;
+
+    const isRoomAdmin = userStore.user?.isRoomAdmin;
+    const isCollaborator = userStore.user?.isCollaborator;
 
     const {
       setSelected,

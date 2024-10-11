@@ -77,6 +77,7 @@ import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import { Box } from "@docspace/shared/components/box";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
+import { getUserType } from "@docspace/shared/utils/common";
 
 const minSearchValue = 2;
 const filterSeparator = ";";
@@ -216,6 +217,7 @@ const InviteInput = ({
           displayName: address.email,
           errors: address.parseErrors,
           isEmailInvite: true,
+          userType: roomId === -1 ? selectedAccess : EmployeeType.Guest,
         };
       });
 
@@ -247,6 +249,7 @@ const InviteInput = ({
         displayName: addresses[0].email,
         errors: addresses[0].parseErrors,
         isEmailInvite: true,
+        userType: roomId === -1 ? selectedAccess : EmployeeType.Guest,
       },
     ];
   };
@@ -431,6 +434,7 @@ const InviteInput = ({
         }
 
         userItem.access = selectedAccess;
+        userItem.userType = getUserType(user);
 
         const isAccessPaid = checkIfAccessPaid(userItem.access);
 

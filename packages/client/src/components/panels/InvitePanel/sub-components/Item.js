@@ -109,6 +109,7 @@ const Item = ({
     isVisitor,
     status,
     isEmailInvite,
+    userType,
   } = item;
 
   const name = isGroup
@@ -162,7 +163,7 @@ const Item = ({
     [],
   );
 
-  const type = isEmailInvite ? access : getUserType(item);
+  const type = isEmailInvite ? userType : (getUserType(item) ?? userType);
 
   const accesses = getAccessOptions(
     t,

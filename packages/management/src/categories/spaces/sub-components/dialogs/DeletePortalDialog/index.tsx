@@ -34,11 +34,8 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
-
-import { toUrlParams } from "@docspace/shared/utils/common";
 
 import { useStore } from "SRC_DIR/store";
 
@@ -51,7 +48,7 @@ const StyledModalDialog = styled(ModalDialog)`
 
 const DeletePortalDialog = () => {
   const { spacesStore, settingsStore } = useStore();
-  const { currentColorScheme, getAllPortals } = settingsStore;
+  const { getAllPortals } = settingsStore;
 
   const {
     currentPortal,
@@ -65,7 +62,7 @@ const DeletePortalDialog = () => {
   const { domain } = currentPortal;
 
   const receiveMessage = async (e) => {
-    const data = e.data;
+    const data = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
     if (data.type === "portalDeletedSuccess") {
       await getAllPortals();
       toastr.success(
@@ -121,7 +118,7 @@ const DeletePortalDialog = () => {
   useEffect(() => {
     window.addEventListener("message", receiveMessage, false);
 
-    return () => window.removeEventListener("message", receiveMessage);
+    // return () => window.removeEventListener("message", receiveMessage, false);
   }, []);
 
   return (

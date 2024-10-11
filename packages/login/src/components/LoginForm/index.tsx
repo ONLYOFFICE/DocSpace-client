@@ -443,11 +443,12 @@ const LoginForm = ({
     currentCulture,
     reCaptchaType,
     isCaptchaSuccessful,
+    linkData,
     router,
+    baseDomain,
     clientId,
     referenceUrl,
-    baseDomain,
-    linkData,
+    deletePortalData,
   ]);
 
   const onBlurEmail = () => {

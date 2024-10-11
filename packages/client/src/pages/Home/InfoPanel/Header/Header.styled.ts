@@ -24,22 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import { Base } from "@docspace/shared/themes";
+import styled from "styled-components";
 import { tablet } from "@docspace/shared/utils";
 
-// const getHeaderHeight = ({ withTabs, isTablet }) => {
-//   let res = isTablet ? 54 : 70;
-//   if (withTabs) res += 32;
-//   return `${res}px`;
-// };
-
-const getMainHeight = ({ isTablet }) => {
-  let res = isTablet ? 52 : 68;
-  return `${res}px`;
-};
-
-const StyledInfoPanelHeader = styled.div`
+export const StyledInfoPanelHeader = styled.div<{ withTabs: boolean }>`
   width: 100%;
   max-width: 100%;
 
@@ -49,9 +37,10 @@ const StyledInfoPanelHeader = styled.div`
     props.withTabs ? "none" : `1px solid ${props.theme.infoPanel.borderColor}`};
 
   .header-text {
-    height: ${(props) => getMainHeight(props)};
+    height: 68px;
+
     @media ${tablet} {
-      height: ${(props) => getMainHeight({ ...props, isTablet: true })};
+      height: 52px;
     }
   }
   .tabs {
@@ -65,7 +54,3 @@ const StyledInfoPanelHeader = styled.div`
     }
   }
 `;
-
-StyledInfoPanelHeader.defaultProps = { theme: Base };
-
-export { StyledInfoPanelHeader };

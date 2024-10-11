@@ -54,6 +54,7 @@ import {
   addLinksToHistory,
   parseHistory,
 } from "SRC_DIR/pages/Home/InfoPanel/Body/helpers/HistoryHelper";
+import { getContactsView } from "SRC_DIR/helpers/contacts";
 
 const observedKeys = [
   "id",
@@ -70,6 +71,7 @@ const infoMembers = "info_members";
 const infoHistory = "info_history";
 const infoDetails = "info_details";
 const infoShare = "info_share";
+const infoPlugin = "info_plugin";
 
 class InfoPanelStore {
   userStore = null;
@@ -162,7 +164,7 @@ class InfoPanelStore {
   };
 
   /**
-   * @param {infoMembers | infoHistory | infoDetails} view
+   * @param {infoMembers | infoHistory | infoDetails | infoShare | infoPlugin} view
    * @returns {void}
    */
   setView = (view) => {
@@ -447,7 +449,7 @@ class InfoPanelStore {
     const pathname = window.location.pathname.toLowerCase();
     const isFiles = this.getIsFiles(pathname);
     const isRooms = this.getIsRooms(pathname);
-    const isAccounts = this.getIsAccounts(pathname);
+    const isAccounts = this.getIsContacts(pathname);
     const isGallery = this.getIsGallery(pathname);
     return isRooms || isFiles || isGallery || isAccounts;
   };
@@ -468,11 +470,9 @@ class InfoPanelStore {
     );
   };
 
-  getIsAccounts = (givenPathName) => {
+  getIsContacts = (givenPathName) => {
     const pathname = givenPathName || window.location.pathname.toLowerCase();
-    return (
-      pathname.indexOf("accounts") !== -1 && !(pathname.indexOf("view") !== -1)
-    );
+    return getContactsView({ pathname });
   };
 
   getIsPeople = (givenPathName) => {

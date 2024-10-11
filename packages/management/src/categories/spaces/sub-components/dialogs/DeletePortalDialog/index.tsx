@@ -64,17 +64,18 @@ const DeletePortalDialog = () => {
   const receiveMessage = async (e) => {
     const data = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
     if (data.type === "portalDeletedSuccess") {
+      toastr.success(
+        t("PortalDeleted", { productName: t("Common:ProductName") })
+      );
       if (window.location.host === domain) {
         const protocol = window?.location?.protocol;
         window.location.replace(`${protocol}//${portals[0].domain}`);
       } else {
         await getAllPortals();
       }
-      toastr.success(
-        t("PortalDeleted", { productName: t("Common:ProductName") })
-      );
     } else if (data.type === "portalDeletedError") {
-      toastr.error(data.error);
+      toastr.error(data.error.message);
+      if (data.error.status === 401) window.location.replace("/");
     }
   };
 

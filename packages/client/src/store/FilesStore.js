@@ -1780,15 +1780,16 @@ class FilesStore {
 
         const isThirdPartyError = isNaN(+folderId);
 
-        if (requestCounter > 0 && !isThirdPartyError) return;
-
-        requestCounter++;
         const isUserError = [
           NotFoundHttpCode,
           ForbiddenHttpCode,
           PaymentRequiredHttpCode,
           UnauthorizedHttpCode,
         ].includes(err?.response?.status);
+
+        if (requestCounter > 0 && !isThirdPartyError && !isUserError) return;
+
+        requestCounter++;
 
         if (isUserError && !isThirdPartyError) {
           if (isPublicRoom()) return Promise.reject(err);

@@ -460,7 +460,11 @@ class DialogsStore {
 
       this.setInvitePaidUsersCount(modifier);
 
-      this.inviteItems[index] = { ...this.inviteItems[index], ...item };
+      this.inviteItems[index] = {
+        ...this.inviteItems[index],
+        ...item,
+        warning: false,
+      };
     });
 
   setQuotaWarningDialogVisible = (inviteQuotaWarningDialogVisible) => {

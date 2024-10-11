@@ -97,7 +97,7 @@ async function Page({ searchParams }: RootPageProps) {
 
   return (
     <>
-      <Root {...data} />
+      <Root {...data} shareKey={share} />
       <Script id="editor-api" strategy="beforeInteractive" src={docApiUrl} />
     </>
   );

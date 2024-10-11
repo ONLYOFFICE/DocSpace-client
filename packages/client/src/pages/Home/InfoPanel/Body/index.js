@@ -112,7 +112,7 @@ const InfoPanelBodyContent = ({
     detailsProps: {},
     membersProps: {},
     historyProps: { selectedFolder },
-    accountsProps: {},
+    usersProps: {},
     groupsProps: {},
     galleryProps: {},
     pluginProps: { isRooms, roomsView, fileView },

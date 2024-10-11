@@ -43,7 +43,7 @@ class ViewHelper {
     this.membersProps = props.membersProps;
     this.historyProps = props.historyProps;
     this.detailsProps = props.detailsProps;
-    this.accountsProps = props.accountsProps;
+    this.usersProps = props.usersProps;
     this.groupsProps = props.groupsProps;
     this.galleryProps = props.galleryProps;
     this.pluginProps = props.pluginProps;
@@ -66,7 +66,7 @@ class ViewHelper {
   };
 
   UsersView = () => {
-    return <Users {...this.defaultProps} {...this.accountsProps} />;
+    return <Users {...this.defaultProps} {...this.usersProps} />;
   };
 
   GroupsView = () => {

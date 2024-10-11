@@ -35,7 +35,9 @@ const ItemTitle = ({
   infoPanelSelection,
   gallerySelected,
   isNoItem,
-  isPeople,
+  isUsers,
+  isGuests,
+  isInsideGroup,
   isGroups,
   isGallery,
   isSeveralItems,
@@ -51,7 +53,7 @@ const ItemTitle = ({
   if (!infoPanelSelection) return null;
   if (isNoItem) return null;
 
-  if (isPeople)
+  if (isUsers || isInsideGroup || isGuests)
     return (
       <AccountsItemTitle
         infoPanelSelection={infoPanelSelection}

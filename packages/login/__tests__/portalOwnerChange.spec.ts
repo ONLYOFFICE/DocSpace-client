@@ -76,14 +76,6 @@ test("portal owner change save", async ({ page, mockRequest }) => {
     "portal-owner-change",
     "portal-owner-change-save.png",
   ]);
-
-  await page.waitForURL("/", { waitUntil: "load" });
-
-  await expect(page).toHaveScreenshot([
-    "desktop",
-    "portal-owner-change",
-    "portal-owner-change-save-redirect.png",
-  ]);
 });
 
 test("portal owner change cancel", async ({ page }) => {

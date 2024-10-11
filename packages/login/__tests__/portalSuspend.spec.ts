@@ -81,6 +81,8 @@ test("portal suspend deactivate", async ({ page, mockRequest }) => {
     "portal-suspend-deactivate.png",
   ]);
 
+  await page.getByTestId("link").click();
+
   await page.waitForURL("https://www.onlyoffice.com/", { waitUntil: "commit" });
 
   await expect(page).toHaveScreenshot([

@@ -78,10 +78,9 @@ test("portal remove delete", async ({ page, mockRequest }) => {
     "portal-remove-delete.png",
   ]);
 
-  await page.waitForURL(
-    "https://www.onlyoffice.com/registration-canceled.aspx",
-    { waitUntil: "commit" },
-  );
+  await page.getByTestId("link").click();
+
+  await page.waitForURL("https://www.onlyoffice.com/", { waitUntil: "commit" });
 
   await expect(page).toHaveScreenshot([
     "desktop",

@@ -73,6 +73,8 @@ test("portal continue reactivate", async ({ page, mockRequest }) => {
     "portal-continue-reactivate.png",
   ]);
 
+  await page.getByTestId("link").click();
+
   await page.waitForURL("/", { waitUntil: "load" });
 
   await expect(page).toHaveScreenshot([

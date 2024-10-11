@@ -65,6 +65,7 @@ import {
   StyledDeleteIcon,
   StyledInviteUserBody,
   ErrorWrapper,
+  StyledRow,
 } from "../StyledInvitePanel";
 import { filterPaidRoleOptions } from "SRC_DIR/helpers";
 import AccessSelector from "../../../AccessSelector";
@@ -93,6 +94,7 @@ const Item = ({
   setInvitePaidUsersCount,
   isUserTariffLimit,
   roomId,
+  style,
 }) => {
   const {
     avatar,
@@ -184,7 +186,10 @@ const Item = ({
   const filteredAccesses =
     roomId === -1
       ? accesses
-      : item.isGroup || isUserRolesFilterd || type === EmployeeType.Guest
+      : item.isGroup ||
+          isUserRolesFilterd ||
+          type === EmployeeType.Guest ||
+          type === EmployeeType.User
         ? filterPaidRoleOptions(accesses)
         : accesses;
 
@@ -390,7 +395,13 @@ const Item = ({
   );
 
   return (
-    <>
+    <StyledRow
+      key={item.id}
+      style={style}
+      className="row-item"
+      hasWarning={!!item.warning}
+      edit={edit}
+    >
       <Avatar
         size="min"
         role={type}
@@ -399,7 +410,7 @@ const Item = ({
         userName={groupName}
       />
       {edit ? editBody : displayBody}
-    </>
+    </StyledRow>
   );
 };
 

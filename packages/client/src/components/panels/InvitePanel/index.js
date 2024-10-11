@@ -482,6 +482,8 @@ const InvitePanel = ({
     standalone,
   );
 
+  console.log(accessOptions);
+
   const invitedUsers = useMemo(
     () => inviteItems.map((item) => item.id),
     [inviteItems],

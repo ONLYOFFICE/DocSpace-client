@@ -148,7 +148,8 @@ StyledDescription.defaultProps = { theme: Base };
 
 const StyledRow = styled.div`
   display: grid;
-  grid-template-columns: 32px 1fr auto;
+  grid-template-columns: ${(props) =>
+    props.edit ? "32px 1fr 32px 32px" : "32px 1fr auto"};
   gap: 8px;
 
   min-height: 41px;
@@ -236,6 +237,7 @@ const StyledInviteInput = styled.div`
 
 const StyledEditInput = styled(TextInput)`
   width: 100%;
+  height: 32px;
 `;
 
 const StyledComboBox = styled(ComboBox)`

@@ -65,29 +65,24 @@ const Row = memo(({ data, index, style }) => {
   const item = inviteItems[index];
 
   return (
-    <StyledRow
+    <Item
+      t={t}
+      item={item}
       key={item.id}
       style={style}
-      className="row-item"
-      hasWarning={!!item.warning}
-    >
-      <Item
-        t={t}
-        item={item}
-        theme={theme}
-        setInviteItems={setInviteItems}
-        changeInviteItem={changeInviteItem}
-        inviteItems={inviteItems}
-        setHasErrors={setHasErrors}
-        roomType={roomType}
-        isOwner={isOwner}
-        isAdmin={isAdmin}
-        inputsRef={inputsRef}
-        setIsOpenItemAccess={setIsOpenItemAccess}
-        isMobileView={isMobileView}
-        standalone={standalone}
-      />
-    </StyledRow>
+      theme={theme}
+      setInviteItems={setInviteItems}
+      changeInviteItem={changeInviteItem}
+      inviteItems={inviteItems}
+      setHasErrors={setHasErrors}
+      roomType={roomType}
+      isOwner={isOwner}
+      isAdmin={isAdmin}
+      inputsRef={inputsRef}
+      setIsOpenItemAccess={setIsOpenItemAccess}
+      isMobileView={isMobileView}
+      standalone={standalone}
+    />
   );
 });
 

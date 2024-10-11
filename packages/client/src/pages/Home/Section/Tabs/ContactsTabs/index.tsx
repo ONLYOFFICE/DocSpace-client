@@ -146,6 +146,7 @@ const ContactsTabs = ({
           <Badge
             label={t("Files:New")}
             backgroundColor={globalColors.redRomb}
+            noHover
           />
         </Box>
       ),

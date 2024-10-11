@@ -38,7 +38,10 @@ import { isMobileOnly, isMobile } from "react-device-detect";
 import { decode } from "he";
 import { filterPaidRoleOptions } from "SRC_DIR/helpers";
 
-import { getUserType, getUserTypeLabel } from "@docspace/shared/utils/common";
+import {
+  getUserType,
+  getUserTypeTranslation,
+} from "@docspace/shared/utils/common";
 import { Text } from "@docspace/shared/components/text";
 import EmailPlusReactSvgUrl from "PUBLIC_DIR/images/e-mail+.react.svg?url";
 import { StyledUserTypeHeader } from "../../styles/members";
@@ -224,21 +227,12 @@ const User = ({
   const onOptionClick = (option) => {
     if (option.access === userRole.access) return;
 
-    const userType =
-      option.key === "owner"
-        ? "admin"
-        : option.key === "roomAdmin"
-          ? "manager"
-          : option.key === "collaborator"
-            ? "collaborator"
-            : "user";
-
     setIsLoading(true);
     updateRole(option);
   };
 
   const type = getUserType(user);
-  const typeLabel = getUserTypeLabel(type, t);
+  const typeLabel = getUserTypeTranslation(type, t);
 
   const onOpenGroup = (group) => {
     setEditMembersGroup(group);

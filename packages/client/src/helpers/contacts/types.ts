@@ -24,6 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { TUser } from "@docspace/shared/api/people/types";
+import { EmployeeStatus, EmployeeType } from "@docspace/shared/enums";
+
 export type TContactsSelected =
   | "all"
   | "active"
@@ -42,3 +45,18 @@ export type TContactsTab =
 export type TContactsViewAs = "table" | "row";
 
 export type TContactsMenuItemdId = "active" | "pending" | "disabled" | "all";
+
+export type TChangeUserTypeDialogData = {
+  toType: EmployeeType;
+  fromType: EmployeeType[];
+  userIDs: string[];
+  userNames: string[];
+  successCallback?: (users?: TUser[]) => void;
+  abortCallback?: VoidFunction;
+};
+
+export type TChangeUserStatusDialogData = {
+  userIDs: string[];
+  status: EmployeeStatus;
+  isGuests: boolean;
+};

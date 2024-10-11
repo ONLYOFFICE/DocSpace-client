@@ -57,9 +57,12 @@ type ContactsTabsProps = {
   setGroupsSelection: GroupsStore["setSelection"];
   setGroupsBufferSelection: GroupsStore["setBufferSelection"];
 
+  setIsSectionFilterLoading: ClientLoadingStore["setIsSectionFilterLoading"];
+
   userId: TUser["id"];
   isVisitor: TUser["isVisitor"];
   isCollaborator: TUser["isCollaborator"];
+  isRoomAdmin: TUser["isRoomAdmin"];
 };
 
 const ContactsTabs = ({
@@ -68,9 +71,11 @@ const ContactsTabs = ({
   setGroupsSelection,
   setUsersBufferSelection,
   setGroupsBufferSelection,
+  setIsSectionFilterLoading,
   userId,
   isVisitor,
   isCollaborator,
+  isRoomAdmin,
 }: ContactsTabsProps) => {
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
@@ -79,14 +84,19 @@ const ContactsTabs = ({
   const contactsView = getContactsView(location);
 
   const onPeople = () => {
+    setUsersSelection([]);
+    setUsersBufferSelection(null);
     setGroupsSelection([]);
     setGroupsBufferSelection(null);
+    setIsSectionFilterLoading(true, true);
     navigate(PEOPLE_ROUTE_WITH_FILTER);
   };
 
   const onGroups = () => {
     setUsersSelection([]);
     setUsersBufferSelection(null);
+    setIsSectionFilterLoading(true, true);
+
     navigate(GROUPS_ROUTE_WITH_FILTER);
   };
 
@@ -96,11 +106,14 @@ const ContactsTabs = ({
     setUsersBufferSelection(null);
     setGroupsSelection([]);
     setGroupsBufferSelection(null);
+    setIsSectionFilterLoading(true, true);
 
     const filter = Filter.getDefault();
 
-    filter.area = "guests";
-    filter.inviterId = userId;
+    if (!isRoomAdmin) {
+      filter.area = "guests";
+      filter.inviterId = userId;
+    }
 
     navigate(`${GUESTS_ROUTE_WITH_FILTER}?${filter.toUrlParams()}`);
   };
@@ -133,6 +146,7 @@ const ContactsTabs = ({
           <Badge
             label={t("Files:New")}
             backgroundColor={globalColors.redRomb}
+            noHover
           />
         </Box>
       ),
@@ -160,10 +174,15 @@ export default inject(
     clientLoadingStore: ClientLoadingStore;
     userStore: UserStore;
   }) => {
-    const { showBodyLoader } = clientLoadingStore;
+    const { showBodyLoader, setIsSectionFilterLoading } = clientLoadingStore;
     const { usersStore, groupsStore } = peopleStore;
 
-    const { isVisitor, isCollaborator, id: userId } = userStore.user!;
+    const {
+      isVisitor,
+      isCollaborator,
+      isRoomAdmin,
+      id: userId,
+    } = userStore.user!;
 
     const {
       setSelection: setUsersSelection,
@@ -181,9 +200,12 @@ export default inject(
       setGroupsSelection,
       setGroupsBufferSelection,
 
+      setIsSectionFilterLoading,
+
       userId,
       isVisitor,
       isCollaborator,
+      isRoomAdmin,
     };
   },
 )(observer(ContactsTabs));

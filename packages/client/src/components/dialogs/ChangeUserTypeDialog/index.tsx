@@ -24,73 +24,106 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { useTranslation, Trans } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
-import { Button } from "@docspace/shared/components/button";
-import { ModalDialog } from "@docspace/shared/components/modal-dialog";
-import { withTranslation, Trans } from "react-i18next";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
+import {
+  ModalDialog,
+  ModalDialogType,
+} from "@docspace/shared/components/modal-dialog";
+
+type ChangeUserTypeDialogProps = {
+  visible: boolean;
+
+  isGuestsDialog: boolean;
+
+  isRequestRunning: boolean;
+
+  firstType: string;
+  secondType: string;
+
+  userNames: string[];
+
+  onClose: VoidFunction;
+  onChangeUserType: VoidFunction;
+};
 
 const ChangeUserTypeDialog = ({
-  t,
   visible,
+  isGuestsDialog,
+  isRequestRunning,
   firstType,
   secondType,
-  onCloseAction,
+  userNames,
+  onClose,
   onChangeUserType,
-  isRequestRunning,
-}) => {
+}: ChangeUserTypeDialogProps) => {
+  const { t } = useTranslation(["ChangeUserTypeDialog", "People", "Common"]);
+
+  const guestBody =
+    userNames.length === 1 ? (
+      <Trans
+        i18nKey="ChangeGuestsTypeMessage"
+        ns="ChangeUserTypeDialog"
+        t={t}
+        values={{ userName: userNames[0] }}
+      />
+    ) : (
+      t("ChangeGuestsTypeMessageMulti")
+    );
+
   return (
     <ModalDialog
       visible={visible}
-      onClose={onCloseAction}
-      displayType="modal"
+      onClose={onClose}
+      displayType={ModalDialogType.modal}
       autoMaxHeight
     >
-      <ModalDialog.Header>{t("ChangeUserTypeHeader")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {isGuestsDialog ? t("ChangeUserTypeButton") : t("ChangeUserTypeHeader")}
+      </ModalDialog.Header>
       <ModalDialog.Body>
         <Text>
-          {firstType ? (
+          {isGuestsDialog ? (
+            guestBody
+          ) : firstType ? (
             <Trans
               i18nKey="ChangeUserTypeMessage"
               ns="ChangeUserTypeDialog"
               t={t}
-            >
-              Users with the <b>'{{ firstType }}'</b> type will be moved to{" "}
-              <b>'{{ secondType }}'</b> type.
-            </Trans>
+              values={{ firstType, secondType }}
+            />
           ) : (
             <Trans
               i18nKey="ChangeUserTypeMessageMulti"
               ns="ChangeUserTypeDialog"
               t={t}
-            >
-              The selected users will be moved to <b>'{{ secondType }}'</b>{" "}
-              type.
-            </Trans>
+              values={{ secondType }}
+            />
           )}{" "}
-          {t("ChangeUserTypeMessageWarning", {
-            productName: t("Common:ProductName"),
-          })}
+          {!isGuestsDialog &&
+            t("ChangeUserTypeMessageWarning", {
+              productName: t("Common:ProductName"),
+            })}
         </Text>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           id="change-user-type-modal_submit"
-          label={t("ChangeUserTypeButton")}
-          size="normal"
+          label={t("Common:ChangeButton")}
+          size={ButtonSize.normal}
           scale
           primary
           onClick={onChangeUserType}
           isLoading={isRequestRunning}
-          //isDisabled={!userIDs.length}
         />
         <Button
           id="change-user-type-modal_cancel"
           label={t("Common:CancelButton")}
-          size="normal"
+          size={ButtonSize.normal}
           scale
-          onClick={onCloseAction}
+          onClick={onClose}
           isDisabled={isRequestRunning}
         />
       </ModalDialog.Footer>
@@ -98,6 +131,4 @@ const ChangeUserTypeDialog = ({
   );
 };
 
-export default withTranslation(["ChangeUserTypeDialog", "People", "Common"])(
-  ChangeUserTypeDialog,
-);
+export default ChangeUserTypeDialog;

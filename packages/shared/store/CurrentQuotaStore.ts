@@ -337,7 +337,7 @@ class CurrentQuotasStore {
       type &&
       this.isUserTariffLimit &&
       type !== EmployeeType.Guest &&
-      type !== EmployeeType.Collaborator
+      type !== EmployeeType.User
     )
       return true;
 

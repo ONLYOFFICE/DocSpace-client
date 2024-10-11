@@ -252,8 +252,6 @@ const FilterBlockItem = ({
     ) {
       const [notSelectorItem, otherItem, selectorItem] = groupItem;
 
-      console.log("call", groupItem);
-
       if (
         item.key === otherItem.key &&
         selectorItem?.isSelected &&

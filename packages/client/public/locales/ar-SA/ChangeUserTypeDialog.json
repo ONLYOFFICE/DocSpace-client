@@ -1,8 +1,8 @@
 {
   "ChangeUserTypeButton": "تغيير النوع",
   "ChangeUserTypeHeader": "تغيير نوع المستخدم",
-  "ChangeUserTypeMessage": "سيتم نقل المستخدمين من النوع \"{{ firstType }}\" إلى النوع '{{ secondType }}'.",
-  "ChangeUserTypeMessageMulti": "سيتم نقل المستخدمين المحددين إلى النوع \"{{ secondType }}\".",
+  "ChangeUserTypeMessage": "سيتم نقل المستخدمين من النوع <strong>\"{{ firstType }}\"</strong> إلى النوع <strong>'{{ secondType }}'</strong>.",
+  "ChangeUserTypeMessageMulti": "سيتم نقل المستخدمين المحددين إلى النوع <strong>\"{{ secondType }}\"</strong>.",
   "ChangeUserTypeMessageWarning": "لا يمكنك تغيير نوع مسؤولي {{productName}} ولنفسك.",
   "SuccessChangeUserType": "تم تغيير نوع المستخدم بنجاح"
 }

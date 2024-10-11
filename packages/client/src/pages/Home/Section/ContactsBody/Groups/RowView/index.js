@@ -51,7 +51,6 @@ const RowView = ({
 
   if (groups.length === 0) return <EmptyScreenGroups />;
 
-  console.log(groups);
   return (
     <Styled.GroupsRowContainer
       className="people-row-container"

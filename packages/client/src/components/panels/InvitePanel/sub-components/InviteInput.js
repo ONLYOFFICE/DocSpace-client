@@ -77,6 +77,7 @@ import ArrowIcon from "PUBLIC_DIR/images/arrow.right.react.svg";
 import PaidQuotaLimitError from "SRC_DIR/components/PaidQuotaLimitError";
 import { Box } from "@docspace/shared/components/box";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
+import { getUserType } from "@docspace/shared/utils/common";
 
 const minSearchValue = 2;
 const filterSeparator = ";";
@@ -95,6 +96,7 @@ const InviteInput = ({
   culture,
   language,
   isOwner,
+  isAdmin,
   inputsRef,
   setAddUsersPanelVisible,
   isMobileView,
@@ -183,8 +185,9 @@ const InviteInput = ({
     const uid = () => Math.random().toString(36).slice(-6);
     let userAccess = selectedAccess;
 
-    const isAccounts = roomId === -1;
-    const isPaidAccess = isAccounts
+    const isContacts = roomId === -1;
+
+    const isPaidAccess = isContacts
       ? isPaidUserAccess(userAccess)
       : isPaidUserRole(userAccess);
 
@@ -194,8 +197,8 @@ const InviteInput = ({
       const itemsArray = addresses.map((address) => {
         if (isPaidAccess) {
           if (isUserTariffLimit) {
-            const FreeUser = isAccounts
-              ? EmployeeType.Guest
+            const FreeUser = isContacts
+              ? EmployeeType.User
               : getTopFreeRole(t, roomType)?.access;
 
             if (FreeUser) {
@@ -214,6 +217,7 @@ const InviteInput = ({
           displayName: address.email,
           errors: address.parseErrors,
           isEmailInvite: true,
+          userType: roomId === -1 ? selectedAccess : EmployeeType.Guest,
         };
       });
 
@@ -224,8 +228,8 @@ const InviteInput = ({
 
     if (isPaidAccess) {
       if (isUserTariffLimit) {
-        const FreeUser = isAccounts
-          ? EmployeeType.Guest
+        const FreeUser = isContacts
+          ? EmployeeType.User
           : getTopFreeRole(t, roomType)?.access;
 
         if (FreeUser) {
@@ -245,6 +249,7 @@ const InviteInput = ({
         displayName: addresses[0].email,
         errors: addresses[0].parseErrors,
         isEmailInvite: true,
+        userType: roomId === -1 ? selectedAccess : EmployeeType.Guest,
       },
     ];
   };
@@ -411,12 +416,16 @@ const InviteInput = ({
         const userItem = usersList.find((value) => value.email === item.email);
 
         if (!userItem) {
-          const isRolePaid = isPaidUserRole(item.access);
+          const isRolePaid =
+            roomId === -1
+              ? isPaidUserAccess(item.access)
+              : isPaidUserRole(item.access);
 
           if (isRolePaid && item.isEmailInvite) {
-            const topFreeRole = getTopFreeRole(t, roomType);
+            const topFreeRole =
+              roomId === -1 ? EmployeeType.User : getTopFreeRole(t, roomType);
 
-            if (item.access !== topFreeRole.access) {
+            if (roomId !== -1 && item.access !== topFreeRole.access) {
               item = makeFreeRole(item, t, topFreeRole);
             }
           }
@@ -425,6 +434,7 @@ const InviteInput = ({
         }
 
         userItem.access = selectedAccess;
+        userItem.userType = getUserType(user);
 
         const isAccessPaid = checkIfAccessPaid(userItem.access);
 
@@ -685,6 +695,7 @@ const InviteInput = ({
           onSelectAccess={onSelectAccess}
           containerRef={inputsRef}
           isOwner={isOwner}
+          isAdmin={isAdmin}
           isMobileView={isMobileView}
           {...(roomId === -1 && {
             isSelectionDisabled: isUserTariffLimit,
@@ -698,7 +709,7 @@ const InviteInput = ({
 
 export default inject(
   ({ settingsStore, dialogsStore, userStore, currentQuotaStore }) => {
-    const { isOwner } = userStore.user;
+    const { isOwner, isAdmin } = userStore.user;
     const {
       invitePanelOptions,
       setInviteItems,
@@ -721,6 +732,7 @@ export default inject(
       hideSelector: invitePanelOptions.hideSelector,
       defaultAccess: invitePanelOptions.defaultAccess,
       isOwner,
+      isAdmin,
       isPaidUserAccess,
       setInvitePaidUsersCount,
       isUserTariffLimit,

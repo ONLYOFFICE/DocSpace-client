@@ -29,22 +29,42 @@ import { inject, observer } from "mobx-react";
 import { Trans } from "react-i18next";
 
 import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
+import { Link, LinkType } from "@docspace/shared/components/link";
+import { Nullable, TTranslation } from "@docspace/shared/types";
+import { TUser } from "@docspace/shared/api/people/types";
 
-const BodyComponent = (props) => {
-  const {
-    needReassignData,
-    deleteWithoutReassign,
-    onClickReassignData,
-    t,
-    userPerformedDeletion,
-    users,
-    onlyOneUser,
-    areUsersOnly,
-  } = props;
+import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 
+type BodyComponentProps = {
+  needReassignData: boolean;
+  deleteWithoutReassign: boolean;
+  onClickReassignData: VoidFunction;
+  t: TTranslation;
+  userPerformedDeletion?: Nullable<TUser>;
+  users: UsersStore["selection"];
+  onlyOneUser: boolean;
+  onlyGuests: boolean;
+};
+
+const BodyComponent = ({
+  needReassignData,
+  deleteWithoutReassign,
+  onClickReassignData,
+  t,
+  userPerformedDeletion,
+  users,
+  onlyOneUser,
+  onlyGuests,
+}: BodyComponentProps) => {
   const warningMessageMyDocuments = t("DeleteMyDocumentsUser");
-  const warningMessageReassign = (
+
+  const warningMessageReassign = onlyGuests ? (
+    t("DeleteReqassignDescriptionGuest", {
+      userCaption: onlyOneUser
+        ? t("Common:Guest").toLowerCase()
+        : t("Common:Guests").toLowerCase(),
+    })
+  ) : (
     <Trans
       i18nKey="DeleteReassignDescriptionUser"
       ns="DeleteProfileEverDialog"
@@ -52,19 +72,20 @@ const BodyComponent = (props) => {
     >
       {{ warningMessageMyDocuments }}
       <strong>
-        {{ userPerformedDeletion: userPerformedDeletion.displayName }}
+        {{ userPerformedDeletion: userPerformedDeletion!.displayName }}
         {{ userYou: t("Common:You") }}
       </strong>
     </Trans>
   );
 
-  const warningMessage = needReassignData
-    ? warningMessageReassign
-    : warningMessageMyDocuments;
+  const warningMessage =
+    needReassignData || onlyGuests
+      ? warningMessageReassign
+      : warningMessageMyDocuments;
 
   const deleteMessage = (
     <Trans i18nKey="DeleteUserMessage" ns="DeleteProfileEverDialog" t={t}>
-      {{ userCaption: t("Common:User") }}
+      {{ userCaption: onlyGuests ? t("Common:Guest") : t("Common:User") }}
       <strong>{{ user: users[0].displayName }}</strong>
     </Trans>
   );
@@ -73,7 +94,13 @@ const BodyComponent = (props) => {
     return (
       <>
         <Text className="user-delete">
-          {t("ActionCannotBeUndone", { productName: t("Common:ProductName") })}
+          {onlyGuests
+            ? t("ActionCannotBeUndoneGuests", {
+                productName: t("Common:ProductName"),
+              })
+            : t("ActionCannotBeUndone", {
+                productName: t("Common:ProductName"),
+              })}
         </Text>
         <Text className="text-warning">{t("PleaseNote")}</Text>
         <Text className="text-delete-description">
@@ -96,14 +123,17 @@ const BodyComponent = (props) => {
     return (
       <>
         <Text className="user-delete">
-          {t("ActionCannotBeUndone", { productName: t("Common:ProductName") })}
+          {onlyGuests
+            ? t("ActionCannotBeUndoneGuests", {
+                productName: t("Common:ProductName"),
+              })
+            : t("ActionCannotBeUndone", {
+                productName: t("Common:ProductName"),
+              })}
         </Text>
-        {!areUsersOnly && (
-          <>
-            <Text className="text-warning">{t("Common:Warning")}</Text>
-            <Text className="text-delete-description">{warningMessage}</Text>
-          </>
-        )}
+
+        <Text className="text-warning">{t("Common:Warning")}</Text>
+        <Text className="text-delete-description">{warningMessage}</Text>
       </>
     );
   }
@@ -111,17 +141,14 @@ const BodyComponent = (props) => {
   return (
     <>
       <Text className="user-delete">{deleteMessage}</Text>
-      {!areUsersOnly && (
-        <>
-          <Text className="text-warning">{t("Common:Warning")}</Text>
-          <Text className="text-delete-description">{warningMessage}</Text>
-        </>
-      )}
+
+      <Text className="text-warning">{t("Common:Warning")}</Text>
+      <Text className="text-delete-description">{warningMessage}</Text>
 
       {needReassignData && (
         <Link
           className="reassign-data"
-          type="action"
+          type={LinkType.action}
           fontSize="13px"
           fontWeight={600}
           isHovered
@@ -134,7 +161,7 @@ const BodyComponent = (props) => {
   );
 };
 
-export default inject(({ userStore }) => {
+export default inject(({ userStore }: TStore) => {
   return {
     userPerformedDeletion: userStore.user,
   };

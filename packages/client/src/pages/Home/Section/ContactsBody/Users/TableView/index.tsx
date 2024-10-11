@@ -62,7 +62,6 @@ const Table = ({
   fetchMoreUsers,
   hasMoreUsers,
   filterTotal,
-  withPaging,
   canChangeUserType,
   currentDeviceType,
   setCurrentGroup,
@@ -134,12 +133,12 @@ const Table = ({
 
   return !isUsersEmptyView ? (
     <StyledTableContainer
-      useReactWindow={!withPaging}
+      useReactWindow
       forwardedRef={ref as React.ForwardedRef<HTMLDivElement>}
     >
       <TableHeader
         // rewrite to component did update
-        key={contactsTab}
+        key={contactsTab || "people"}
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         sectionWidth={sectionWidth!}
@@ -158,7 +157,7 @@ const Table = ({
         itemCount={filterTotal!}
         filesLength={peopleList!.length}
         itemHeight={48}
-        useReactWindow={!withPaging}
+        useReactWindow
         isIndexEditingMode={false}
       >
         {peopleList!.map((item, index) => (
@@ -213,7 +212,7 @@ export default inject(
       contactsTab,
     } = usersStore!;
 
-    const { withPaging, currentDeviceType } = settingsStore;
+    const { currentDeviceType } = settingsStore;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
@@ -258,7 +257,6 @@ export default inject(
 
       infoPanelVisible,
 
-      withPaging,
       currentDeviceType,
 
       hasMoreUsers,

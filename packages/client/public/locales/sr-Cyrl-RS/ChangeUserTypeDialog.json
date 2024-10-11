@@ -1,8 +1,8 @@
 {
   "ChangeUserTypeButton": "Промени тип",
   "ChangeUserTypeHeader": "Промени тип корисника",
-  "ChangeUserTypeMessage": "Корисници са типом '{{ firstType }}' биц́е премештени у тип '{{ secondType }}'.",
-  "ChangeUserTypeMessageMulti": "Одабрани корисници ће бити премештени у '{{ secondType }}' тип.",
+  "ChangeUserTypeMessage": "Корисници са типом <strong>'{{ firstType }}'</strong> биц́е премештени у тип <strong>'{{ secondType }}'</strong>.",
+  "ChangeUserTypeMessageMulti": "Одабрани корисници ће бити премештени у <strong>'{{ secondType }}'</strong> тип.",
   "ChangeUserTypeMessageWarning": "Не можете променити тип за {{productName}} администраторе и за себе.",
   "SuccessChangeUserType": "Кориснички тип је успешно промењен"
 }

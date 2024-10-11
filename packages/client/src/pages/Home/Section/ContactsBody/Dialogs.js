@@ -35,13 +35,13 @@ import {
   ChangePortalOwnerDialog,
   DeleteSelfProfileDialog,
   DeleteProfileEverDialog,
-  ChangeUserTypeDialog,
   ChangeUserStatusDialog,
   SendInviteDialog,
   ChangeNameDialog,
   ResetApplicationDialog,
   DataReassignmentDialog,
   DeleteGroupDialog,
+  RemoveGuestDialog,
 } from "SRC_DIR/components/dialogs";
 
 const Dialogs = ({
@@ -50,7 +50,6 @@ const Dialogs = ({
   deleteProfileEver,
   data,
   closeDialogs,
-  changeUserTypeDialogVisible,
   changeUserStatusDialogVisible,
 
   sendInviteDialogVisible,
@@ -68,6 +67,7 @@ const Dialogs = ({
 
   dataReassignmentDialogVisible,
   deleteGroupDialogVisible,
+  removeGuestDialogVisible,
 }) => {
   return (
     <>
@@ -103,13 +103,7 @@ const Dialogs = ({
           users={data}
         />
       )}
-      {changeUserTypeDialogVisible && (
-        <ChangeUserTypeDialog
-          visible={changeUserTypeDialogVisible}
-          onClose={closeDialogs}
-          {...data}
-        />
-      )}
+
       {changeUserStatusDialogVisible && (
         <ChangeUserStatusDialog
           visible={changeUserStatusDialogVisible}
@@ -155,6 +149,13 @@ const Dialogs = ({
           onClose={closeDialogs}
         />
       )}
+
+      {removeGuestDialogVisible && (
+        <RemoveGuestDialog
+          visible={removeGuestDialogVisible}
+          onClose={closeDialogs}
+        />
+      )}
     </>
   );
 };
@@ -168,7 +169,6 @@ export default inject(({ peopleStore, userStore }) => {
     closeDialogs,
     changeEmailVisible,
 
-    changeUserTypeDialogVisible,
     guestDialogVisible,
     changeUserStatusDialogVisible,
     disableDialogVisible,
@@ -176,6 +176,8 @@ export default inject(({ peopleStore, userStore }) => {
     resetAuthDialogVisible,
     dataReassignmentDialogVisible,
     deleteGroupDialogVisible,
+
+    removeGuestDialogVisible,
   } = peopleStore.dialogStore;
 
   const { user: profile } = userStore;
@@ -194,7 +196,6 @@ export default inject(({ peopleStore, userStore }) => {
     data,
     closeDialogs,
 
-    changeUserTypeDialogVisible,
     guestDialogVisible,
     changeUserStatusDialogVisible,
     disableDialogVisible,
@@ -213,5 +214,6 @@ export default inject(({ peopleStore, userStore }) => {
 
     dataReassignmentDialogVisible,
     deleteGroupDialogVisible,
+    removeGuestDialogVisible,
   };
 })(observer(Dialogs));

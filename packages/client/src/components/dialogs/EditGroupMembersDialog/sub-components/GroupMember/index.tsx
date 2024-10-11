@@ -42,7 +42,10 @@ import { toastr } from "@docspace/shared/components/toast";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { getUserRoleOptions } from "@docspace/shared/utils/room-members/getUserRoleOptions";
 import { EmployeeStatus, ShareAccessRights } from "@docspace/shared/enums";
-import { getUserType, getUserTypeLabel } from "@docspace/shared/utils/common";
+import {
+  getUserType,
+  getUserTypeTranslation,
+} from "@docspace/shared/utils/common";
 import { TGroupMemberInvitedInRoom } from "@docspace/shared/api/groups/types";
 import { Box } from "@docspace/shared/components/box";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
@@ -79,7 +82,7 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
 
   const type = getUserType(user);
 
-  const typeLabel = getUserTypeLabel(type, t);
+  const typeLabel = getUserTypeTranslation(type, t);
 
   let selectedUserRoleCBOption;
   if (user.isOwner)

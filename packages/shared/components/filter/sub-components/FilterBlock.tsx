@@ -402,7 +402,6 @@ const FilterBlock = ({
 
   const selectOption = React.useCallback(
     (items: TSelectorItem[]) => {
-      console.log(items);
       setShowSelector((val) => ({
         ...val,
         show: false,

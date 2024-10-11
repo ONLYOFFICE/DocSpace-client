@@ -64,6 +64,7 @@ import {
   ThemeKeys,
   ErrorKeys,
   WhiteLabelLogoType,
+  EmployeeType,
 } from "../enums";
 import {
   COOKIE_EXPIRATION_YEAR,
@@ -137,26 +138,6 @@ export const isPublicRoom = () => {
 
 export const isPublicPreview = () => {
   return window.location.pathname.includes("/share/preview/");
-};
-
-export const getUserTypeLabel = (
-  role: "owner" | "admin" | "user" | "collaborator" | "manager" | undefined,
-  t: TTranslation,
-) => {
-  switch (role) {
-    case "owner":
-      return t("Common:Owner");
-    case "admin":
-      return t("Common:PortalAdmin", { productName: t("Common:ProductName") });
-    case "manager":
-      return t("Common:RoomAdmin");
-    case "collaborator":
-      return t("Common:User");
-    case "user":
-      return t("Common:Guest");
-    default:
-      return t("Common:Guest");
-  }
 };
 
 export const parseDomain = (
@@ -299,12 +280,30 @@ export function isAdmin(currentUser: TUser) {
 }
 
 export const getUserType = (user: TUser) => {
-  if (user.isOwner) return "owner";
-  if (isAdmin(user)) return "admin";
-  if (user.isRoomAdmin) return "manager";
-  if (user.isCollaborator) return "collaborator";
-  if (user.isVisitor) return "user";
-  return "user";
+  if (user.isOwner) return EmployeeType.Owner;
+  if (isAdmin(user)) return EmployeeType.Admin;
+  if (user.isRoomAdmin) return EmployeeType.RoomAdmin;
+  if (user.isCollaborator) return EmployeeType.User;
+  if (user.isVisitor) return EmployeeType.Guest;
+  return EmployeeType.Guest;
+};
+
+export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {
+  switch (type) {
+    case EmployeeType.Owner:
+      return t("Common:Owner");
+    case EmployeeType.Admin:
+      return t("Common:PortalAdmin", {
+        productName: t("Common:ProductName"),
+      });
+    case EmployeeType.RoomAdmin:
+      return t("Common:RoomAdmin");
+    case EmployeeType.User:
+      return t("Common:User");
+    case EmployeeType.Guest:
+    default:
+      return t("Common:Guest");
+  }
 };
 
 export function clickBackdrop() {

@@ -1,8 +1,8 @@
 {
   "ChangeUserTypeButton": "Zmień rodzaj",
   "ChangeUserTypeHeader": "Zmień rodzaj użytkownika",
-  "ChangeUserTypeMessage": "Użytkownicy o rodzaju'{{ firstType }}' zostaną przeniesieni do rodzaju '{{ secondType }}'.",
-  "ChangeUserTypeMessageMulti": "Wybrani użytkownicy zostaną przeniesieni do rodzaju '{{ secondType }}'.",
+  "ChangeUserTypeMessage": "Użytkownicy o rodzaju<strong>'{{ firstType }}'</strong> zostaną przeniesieni do rodzaju <strong>'{{ secondType }}'</strong>.",
+  "ChangeUserTypeMessageMulti": "Wybrani użytkownicy zostaną przeniesieni do rodzaju <strong>'{{ secondType }}'</strong>.",
   "ChangeUserTypeMessageWarning": "Nie możesz zmienić swojego rodzaju, ani rodzaju administratorów {{productName}}.",
   "SuccessChangeUserType": "Rodzaj użytkownika został pomyślnie zmieniony"
 }

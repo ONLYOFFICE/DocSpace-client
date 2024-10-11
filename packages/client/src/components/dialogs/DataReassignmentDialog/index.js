@@ -200,8 +200,8 @@ const DataReassignmentDialog = ({
       });
   };
 
-  const filter = new Filter();
-  filter.role = [EmployeeType.Admin, EmployeeType.User];
+  const filter = Filter.getDefault();
+  filter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
 
   if (selectorVisible) {
     return (

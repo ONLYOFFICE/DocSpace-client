@@ -200,6 +200,9 @@ class UsersStore {
       this.abortController = new AbortController();
     }
 
+    this.setSelection([]);
+    this.setBufferSelection(null);
+
     const localStorageKey =
       this.contactsTab === "inside_group"
         ? `InsideGroupFilter=${this.userStore.user?.id}`

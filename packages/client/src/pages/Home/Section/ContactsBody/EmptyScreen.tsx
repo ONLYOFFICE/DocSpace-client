@@ -74,7 +74,9 @@ const EmptyScreen = ({
   const isEmptyGuests = contactsTab === "guests";
 
   const title = isEmptyGuests
-    ? t("Common:NotFoundGuests")
+    ? isFiltered
+      ? t("Common:NotFoundGuestsFilter")
+      : t("Common:NotFoundGuests")
     : t("Common:NotFoundUsers");
 
   const description = isEmptyGuests

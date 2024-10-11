@@ -324,6 +324,7 @@
   "NoRoomsFound": "No rooms found",
   "NotFoundGroups": "No groups found",
   "NotFoundGuests": "No added guests yet",
+  "NotFoundGuestsFilter": "No guests found",
   "NotFoundGuestsDescription": "New guests will be added here once you invite them to the room. You can share your guests and add guests invited by others to your list.",
   "NotFoundLanguage": "Can't find your language? Contact us at <1>{{supportEmail}}</1> to take part in the translation program and get rewards.",
   "NotFoundTitle": "Nothing found",

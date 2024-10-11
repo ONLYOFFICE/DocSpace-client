@@ -1,8 +1,8 @@
 {
   "ChangeUserTypeButton": "Spremeni tip",
   "ChangeUserTypeHeader": "Spremeni tip uporabnika",
-  "ChangeUserTypeMessage": "Uporabniki tipa '{{ firstType }}' bodo premaknjeni v '{{ secondType }}' tip.",
-  "ChangeUserTypeMessageMulti": "Izbrani uporabniki bodo premaknjeni v '{{ secondType }}' tip.",
+  "ChangeUserTypeMessage": "Uporabniki tipa <strong>'{{ firstType }}'</strong> bodo premaknjeni v <strong>'{{ secondType }}'</strong> tip.",
+  "ChangeUserTypeMessageMulti": "Izbrani uporabniki bodo premaknjeni v <strong>'{{ secondType }}'</strong> tip.",
   "ChangeUserTypeMessageWarning": "Za skrbnike {{productName}} in zase ne morete spremeniti vrste.",
   "SuccessChangeUserType": "Vrsta uporabnika je bila uspešno spremenjena"
 }

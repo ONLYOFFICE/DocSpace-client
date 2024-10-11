@@ -58,10 +58,6 @@ const Header = (props) => {
     isVisitor,
     isCollaborator,
 
-    filter,
-
-    setFilter,
-
     profile,
     isMe,
     setChangeEmailVisible,
@@ -235,9 +231,7 @@ export default inject(
 
     const { isVisitor, isCollaborator, user } = userStore.user;
 
-    const { targetUserStore, filterStore, dialogStore } = peopleStore;
-
-    const { filter, setFilterParams } = filterStore;
+    const { targetUserStore, usersStore, dialogStore } = peopleStore;
 
     const { targetUser, isMe } = targetUserStore;
 
@@ -257,9 +251,6 @@ export default inject(
       isAdmin,
       isVisitor,
       isCollaborator,
-      filter,
-
-      setFilter: setFilterParams,
 
       profile: targetUser,
       userId: user?.id,

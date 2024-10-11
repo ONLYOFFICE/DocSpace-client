@@ -78,7 +78,12 @@ const AsideHeader = (props: AsideHeaderProps) => {
 
   const headerComponent =
     typeof header === "string" ? (
-      <Text fontSize="21px" fontWeight={700} className="header-component">
+      <Text
+        fontSize="21px"
+        fontWeight={700}
+        className="header-component"
+        noSelect
+      >
         {header}
       </Text>
     ) : (

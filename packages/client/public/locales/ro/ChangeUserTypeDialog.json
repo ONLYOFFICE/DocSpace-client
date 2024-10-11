@@ -1,8 +1,8 @@
 {
   "ChangeUserTypeButton": "Modificare tip",
   "ChangeUserTypeHeader": "Schimbați tipul utilizatorului",
-  "ChangeUserTypeMessage": "Utilizatorii de tipul '{{ firstType }}' vor fi transferați la tipul '{{ secondType }}'.",
-  "ChangeUserTypeMessageMulti": "Utilizatorii pe care le-aţi selectat vor fi trecuţi la categoria '{{ secondType }}'.",
+  "ChangeUserTypeMessage": "Utilizatorii de tipul <strong>'{{ firstType }}'</strong> vor fi transferați la tipul <strong>'{{ secondType }}'</strong>.",
+  "ChangeUserTypeMessageMulti": "Utilizatorii pe care le-aţi selectat vor fi trecuţi la categoria <strong>'{{ secondType }}'</strong>.",
   "ChangeUserTypeMessageWarning": "Nu puteți schimba tipul administratorului de {{productName}} și nici al dumneavoastră.",
   "SuccessChangeUserType": "Tipul utilizatorului a fost modificat cu succes"
 }

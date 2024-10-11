@@ -26,36 +26,34 @@
 
 import { AxiosRequestConfig } from "axios";
 
-import { AccountsSearchArea } from "@docspace/shared/enums";
-// import axios from "axios";
-import { Encoder } from "@docspace/shared/utils/encoder";
-import { checkFilterInstance } from "@docspace/shared/utils/common";
+import { Encoder } from "../../utils/encoder";
+import { checkFilterInstance } from "../../utils/common";
+import { TReqOption } from "../../utils/axiosClient";
+import {
+  EmployeeActivationStatus,
+  ThemeKeys,
+  AccountsSearchArea,
+  EmployeeStatus,
+  EmployeeType,
+} from "../../enums";
 import { Nullable } from "../../types";
+
+import { TGroup } from "../groups/types";
 import { request } from "../client";
 
 import Filter from "./filter";
-
 import { TChangeTheme, TGetUserList, TUser } from "./types";
-
-import { TReqOption } from "../../utils/axiosClient";
-import { EmployeeActivationStatus, ThemeKeys } from "../../enums";
-import { TGroup } from "../groups/types";
 
 export async function getUserList(
   filter = Filter.getDefault(),
   signal?: AbortSignal,
 ) {
   let params = "";
-  // if (fake) {
-  //   return fakePeople.getUserList(filter);
-  // }
 
   if (filter) {
     checkFilterInstance(filter, Filter);
 
-    params = `/filter?${filter.toApiUrlParams(
-      "id,status,isAdmin,isOwner,isRoomAdmin,isVisitor,activationStatus,userName,email,mobilePhone,displayName,avatar,listAdminModules,birthday,title,location,isLDAP,isSSO,groups",
-    )}`;
+    params = `/filter?${filter.toApiUrlParams()}`;
   }
 
   const res = (await request({
@@ -282,8 +280,8 @@ export async function resendUserInvites(userIds: string[]) {
   });
 }
 
-export function resendInvitesAgain() {
-  return request({
+export async function resendInvitesAgain() {
+  await request({
     method: "put",
     url: "/people/invite",
     data: { userIds: [], resendAll: true },
@@ -326,20 +324,27 @@ export function deleteAvatar(profileId) {
   });
 }
 
-export function updateUserStatus(status, userIds) {
-  return request({
+export async function updateUserStatus(
+  status: EmployeeStatus,
+  userIds: string[],
+) {
+  const users = (await request({
     method: "put",
     url: `/people/status/${status}`,
     data: { userIds },
-  });
+  })) as TUser[];
+
+  return users;
 }
 
-export function updateUserType(type, userIds) {
-  return request({
+export async function updateUserType(type: EmployeeType, userIds: string[]) {
+  const users = (await request({
     method: "put",
     url: `/people/type/${type}`,
     data: { userIds },
-  });
+  })) as TUser[];
+
+  return users;
 }
 
 export function linkOAuth(serializedProfile) {
@@ -384,14 +389,22 @@ export function sendInstructionsToChangeEmail(userId, email) {
   });
 }
 
-export function deleteUser(userId) {
-  return request({
+export async function deleteUser(userId: string) {
+  await request({
     method: "delete",
     url: `/people/${userId}`,
   });
 }
 
-export function deleteUsers(userIds) {
+export async function deleteGuests(userIds: string[]) {
+  return request({
+    method: "delete",
+    url: `/people/guests`,
+    data: { userIds },
+  });
+}
+
+export function deleteUsers(userIds: string[]) {
   return request({
     method: "put",
     url: "/people/delete",
@@ -481,28 +494,32 @@ export async function getMembersList(
   return res;
 }
 
-export function setCustomUserQuota(userIds, quota) {
+export async function setCustomUserQuota(userIds: string[], quota: number) {
   const data = {
     userIds,
     quota,
   };
-  const options = {
+  const options: AxiosRequestConfig = {
     method: "put",
     url: "/people/userquota",
     data,
   };
 
-  return request(options);
+  const users = (await request(options)) as TUser[];
+
+  return users;
 }
-export function resetUserQuota(userIds) {
+export async function resetUserQuota(userIds: string[]) {
   const data = {
     userIds,
   };
-  const options = {
+  const options: AxiosRequestConfig = {
     method: "put",
     url: "/people/resetquota",
     data,
   };
 
-  return request(options);
+  const users = (await request(options)) as TUser[];
+
+  return users;
 }

@@ -1,4 +1,7 @@
 import type { To } from "react-router-dom";
+
+import { Nullable } from "../../types/index";
+
 import type { ContextMenuModel } from "../context-menu";
 
 export type EmptyViewLinkType = {
@@ -25,5 +28,5 @@ export interface EmptyViewItemProps extends Omit<EmptyViewItemType, "key"> {}
 
 export interface EmptyViewProps
   extends Omit<EmptyViewItemType, "key" | "onClick" | "disabled" | "model"> {
-  options: EmptyViewOptionsType;
+  options: Nullable<EmptyViewOptionsType>;
 }

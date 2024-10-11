@@ -94,8 +94,6 @@ const InfoPanelBodyContent = ({
     isNoItemGallery ||
     (isRoot && !isGallery);
 
-  console.log(selectedItems.length, infoPanelSelection);
-
   const defaultProps = {
     infoPanelSelection,
     isFiles,
@@ -132,13 +130,11 @@ const InfoPanelBodyContent = ({
   const getView = () => {
     const currentView = isRooms ? roomsView : fileView;
 
-    console.log(isSeveralItems, isNoItem);
-
     if (isNoItem) return viewHelper.NoItemView();
     if (isSeveralItems) return viewHelper.SeveralItemsView();
 
     if (isGallery) return viewHelper.GalleryView();
-    if (isUsers) return viewHelper.AccountsView();
+    if (isUsers || isGuests) return viewHelper.UsersView();
     if (isGroups) return viewHelper.GroupsView();
 
     switch (currentView) {

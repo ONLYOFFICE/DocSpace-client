@@ -304,8 +304,70 @@ class ContactsConextOptionsStore {
     return contextMenu;
   };
 
+  getUsersChangeTypeOptions = (
+    t: TTranslation,
+    item?: ReturnType<UsersStore["getPeopleListItem"]>,
+  ) => {
+    const { userSelectionRole, selectionUsersRights } = this.usersStore;
+
+    const { isOwner: isUserOwner, isAdmin: isUserAdmin } = this.userStore.user!;
+
+    const { isCollaborator, isRoomAdmin, isAdmin } =
+      item ?? selectionUsersRights;
+
+    const options = [];
+
+    const adminOption = {
+      id: "menu_change-user_administrator",
+      className: "group-menu_drop-down",
+      label: getUserTypeTranslation(EmployeeType.Admin, t),
+      title: getUserTypeTranslation(EmployeeType.Admin, t),
+      onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
+      "data-action": EmployeeType.Admin,
+      key: EmployeeType.Admin,
+      isActive: item ? isAdmin : userSelectionRole === EmployeeType.Admin,
+    };
+
+    const roomAdminOption = {
+      id: "menu_change-user_manager",
+      className: "group-menu_drop-down",
+      label: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
+      title: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
+      onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
+      "data-action": EmployeeType.RoomAdmin,
+      key: EmployeeType.RoomAdmin,
+      isActive: item
+        ? isRoomAdmin
+        : userSelectionRole === EmployeeType.RoomAdmin,
+    };
+
+    const userOption = {
+      id: "menu_change-collaborator",
+      key: EmployeeType.User,
+      label: getUserTypeTranslation(EmployeeType.User, t),
+      title: getUserTypeTranslation(EmployeeType.User, t),
+      "data-action": EmployeeType.User,
+      onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
+      isActive: item ? isCollaborator : userSelectionRole === EmployeeType.User,
+    };
+
+    if ((isRoomAdmin || isCollaborator || isAdmin) && isUserOwner) {
+      options.push(adminOption);
+
+      if ((isAdmin || isRoomAdmin) && !isCollaborator)
+        options.push(roomAdminOption);
+    }
+
+    if (isCollaborator && isUserAdmin) {
+      options.push(roomAdminOption);
+      options.push(userOption);
+    }
+
+    return options;
+  };
+
   getUserGroupContextOptions = (t: TTranslation) => {
-    const { onChangeType, onChangeStatus } = this;
+    const { onChangeStatus } = this;
 
     const {
       hasUsersToMakeEmployees,
@@ -313,7 +375,6 @@ class ContactsConextOptionsStore {
       hasUsersToDisable,
       hasUsersToInvite,
       hasUsersToRemove,
-      hasFreeUsers,
       contactsTab,
     } = this.usersStore;
     const {
@@ -324,45 +385,11 @@ class ContactsConextOptionsStore {
 
     const isGuests = contactsTab === "guests";
 
-    const { isOwner, isRoomAdmin } = this.userStore.user!;
+    const { isRoomAdmin } = this.userStore.user!;
 
     const { setIsVisible, isVisible } = this.infoPanelStore;
 
-    const options = [];
-
-    const adminOption = {
-      id: "context-menu_administrator",
-      className: "context-menu_drop-down",
-      label: getUserTypeTranslation(EmployeeType.Admin, t),
-      title: getUserTypeTranslation(EmployeeType.Admin, t),
-      onClick: (e: TContextMenuValueTypeOnClick) => onChangeType(e),
-      action: EmployeeType.Admin,
-      key: "cm-administrator",
-    };
-    const managerOption = {
-      id: "context-menu_manager",
-      className: "context-menu_drop-down",
-      label: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
-      title: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
-      onClick: (e: TContextMenuValueTypeOnClick) => onChangeType(e),
-      action: EmployeeType.RoomAdmin,
-      key: "cm-manager",
-    };
-    const userOption = {
-      id: "context-menu_user",
-      className: "context-menu_drop-down",
-      label: getUserTypeTranslation(EmployeeType.User, t),
-      title: getUserTypeTranslation(EmployeeType.User, t),
-      onClick: (e: TContextMenuValueTypeOnClick) => onChangeType(e),
-      action: EmployeeType.User,
-      key: "cm-user",
-    };
-
-    if (isOwner) options.push(adminOption);
-
-    options.push(managerOption);
-
-    if (hasFreeUsers) options.push(userOption);
+    const options = this.getUsersChangeTypeOptions(t);
 
     const menu = [
       {

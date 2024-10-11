@@ -35,7 +35,7 @@ import { ContextMenuButton } from "@docspace/shared/components/context-menu-butt
 import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
 import { Badge } from "@docspace/shared/components/badge";
 import Badges from "SRC_DIR/pages/Home/Section/ContactsBody/Badges";
-import { StyledAccountsItemTitle } from "../../styles/accounts";
+import { StyledUsersTitle } from "../../styles/Users";
 
 import { decode } from "he";
 import { globalColors } from "@docspace/shared/themes";
@@ -75,7 +75,7 @@ const AccountsItemTitle = ({
     : "";
 
   return (
-    <StyledAccountsItemTitle
+    <StyledUsersTitle
       isPending={isPending}
       isSSO={isSSO}
       isLDAP={isLDAP}
@@ -162,7 +162,7 @@ const AccountsItemTitle = ({
           getData={getData}
         />
       )}
-    </StyledAccountsItemTitle>
+    </StyledUsersTitle>
   );
 };
 

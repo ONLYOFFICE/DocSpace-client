@@ -222,8 +222,6 @@ class InfoPanelStore {
     const isRooms = this.getIsRooms();
     const { currentGroup } = this.peopleStore.groupsStore;
 
-    console.log(this.getIsContacts(), currentGroup);
-
     if (this.getIsContacts() === "groups") {
       return {
         ...currentGroup,
@@ -283,8 +281,6 @@ class InfoPanelStore {
     const selectedItems = this.infoPanelSelectedItems; //files list
     const selectedFolder = this.getInfoPanelSelectedFolder(); // root or current folder
     let newInfoPanelSelection = this.infoPanelSelection;
-
-    console.log(selectedItems);
 
     if (!selectedItems.length) {
       newInfoPanelSelection = this.normalizeSelection(selectedFolder);
@@ -504,7 +500,7 @@ class InfoPanelStore {
       this.getIsContacts() &&
       (!infoPanelSelection.email || !infoPanelSelection.displayName)
     ) {
-      this.infoPanelSelection = infoPanelSelection.length
+      this.infoPanelSelection = !infoPanelSelection.length
         ? infoPanelSelection
         : null;
       return;

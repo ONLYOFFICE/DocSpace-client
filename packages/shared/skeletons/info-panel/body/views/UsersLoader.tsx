@@ -28,7 +28,7 @@ import React from "react";
 
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
 import {
-  StyledAccountsLoader,
+  StyledUsersLoader,
   StyledProperty,
   StyledSubtitleLoader,
 } from "../body.styled";
@@ -36,7 +36,7 @@ import { propertyDimensions } from "../body.constant";
 
 const AccountsLoader = () => {
   return (
-    <StyledAccountsLoader>
+    <StyledUsersLoader>
       <StyledSubtitleLoader>
         <RectangleSkeleton width="71px" height="16px" borderRadius="3px" />
       </StyledSubtitleLoader>
@@ -59,7 +59,7 @@ const AccountsLoader = () => {
           />,
         ])}
       </StyledProperty>
-    </StyledAccountsLoader>
+    </StyledUsersLoader>
   );
 };
 

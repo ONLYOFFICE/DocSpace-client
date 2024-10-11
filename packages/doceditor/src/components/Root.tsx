@@ -87,6 +87,7 @@ const Root = ({
   doc,
   fileId,
   hash,
+  shareKey,
 }: TResponse) => {
   const editorRef = React.useRef<null | HTMLElement>(null);
 
@@ -265,6 +266,7 @@ const Root = ({
           getIsDisabled={getIsDisabledSelectFileDialog}
           fileTypeDetection={selectFileDialogFileTypeDetection}
           fileInfo={fileInfo}
+          shareKey={shareKey}
         />
       )}
       {isSharingDialogVisible && !!socketHelper && fileInfo && (

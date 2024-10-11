@@ -115,6 +115,7 @@ const FilesSelectorComponent = ({
   withInfoBar,
   infoBarData,
   headerProps,
+  shareKey,
 }: FilesSelectorProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["Common"]);
@@ -227,6 +228,7 @@ const FilesSelectorComponent = ({
     roomsFolderId,
     isInit,
     withCreate,
+    shareKey,
   });
 
   const onClickBreadCrumb = React.useCallback(

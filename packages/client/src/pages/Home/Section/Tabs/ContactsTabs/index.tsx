@@ -57,6 +57,8 @@ type ContactsTabsProps = {
   setGroupsSelection: GroupsStore["setSelection"];
   setGroupsBufferSelection: GroupsStore["setBufferSelection"];
 
+  setIsSectionFilterLoading: ClientLoadingStore["setIsSectionFilterLoading"];
+
   userId: TUser["id"];
   isVisitor: TUser["isVisitor"];
   isCollaborator: TUser["isCollaborator"];
@@ -69,6 +71,7 @@ const ContactsTabs = ({
   setGroupsSelection,
   setUsersBufferSelection,
   setGroupsBufferSelection,
+  setIsSectionFilterLoading,
   userId,
   isVisitor,
   isCollaborator,
@@ -81,14 +84,19 @@ const ContactsTabs = ({
   const contactsView = getContactsView(location);
 
   const onPeople = () => {
+    setUsersSelection([]);
+    setUsersBufferSelection(null);
     setGroupsSelection([]);
     setGroupsBufferSelection(null);
+    setIsSectionFilterLoading(true, true);
     navigate(PEOPLE_ROUTE_WITH_FILTER);
   };
 
   const onGroups = () => {
     setUsersSelection([]);
     setUsersBufferSelection(null);
+    setIsSectionFilterLoading(true, true);
+
     navigate(GROUPS_ROUTE_WITH_FILTER);
   };
 
@@ -98,6 +106,7 @@ const ContactsTabs = ({
     setUsersBufferSelection(null);
     setGroupsSelection([]);
     setGroupsBufferSelection(null);
+    setIsSectionFilterLoading(true, true);
 
     const filter = Filter.getDefault();
 
@@ -164,7 +173,7 @@ export default inject(
     clientLoadingStore: ClientLoadingStore;
     userStore: UserStore;
   }) => {
-    const { showBodyLoader } = clientLoadingStore;
+    const { showBodyLoader, setIsSectionFilterLoading } = clientLoadingStore;
     const { usersStore, groupsStore } = peopleStore;
 
     const {
@@ -189,6 +198,8 @@ export default inject(
       setUsersBufferSelection,
       setGroupsSelection,
       setGroupsBufferSelection,
+
+      setIsSectionFilterLoading,
 
       userId,
       isVisitor,

@@ -48,7 +48,7 @@ const StyledModalDialog = styled(ModalDialog)`
 
 const DeletePortalDialog = () => {
   const { spacesStore, settingsStore } = useStore();
-  const { getAllPortals } = settingsStore;
+  const { getAllPortals, portals } = settingsStore;
 
   const {
     currentPortal,
@@ -64,7 +64,12 @@ const DeletePortalDialog = () => {
   const receiveMessage = async (e) => {
     const data = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
     if (data.type === "portalDeletedSuccess") {
-      await getAllPortals();
+      if (window.location.host === domain) {
+        const protocol = window?.location?.protocol;
+        window.location.replace(`${protocol}//${portals[0].domain}`);
+      } else {
+        await getAllPortals();
+      }
       toastr.success(
         t("PortalDeleted", { productName: t("Common:ProductName") })
       );

@@ -395,10 +395,11 @@ class GroupsStore {
     forInfoPanel = false,
     forInsideGroup = false,
   ) => {
-    const { isRoomAdmin } = this.userStore.user!;
+    const { isRoomAdmin, isCollaborator } = this.userStore.user!;
 
     return [
       !isRoomAdmin &&
+        !isCollaborator &&
         !item?.isLDAP && {
           id: "edit-group",
           key: "edit-group",
@@ -428,11 +429,13 @@ class GroupsStore {
         },
       },
       !isRoomAdmin &&
+        !isCollaborator &&
         !item?.isLDAP && {
           key: "separator",
           isSeparator: true,
         },
       !isRoomAdmin &&
+        !isCollaborator &&
         !item?.isLDAP && {
           id: "delete-group",
           key: "delete-group",

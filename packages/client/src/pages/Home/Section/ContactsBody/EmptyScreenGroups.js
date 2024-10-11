@@ -43,6 +43,7 @@ import { resetContactsGroupsFilter } from "SRC_DIR/helpers/contacts";
 
 const EmptyScreenGroups = ({
   isRoomAdmin,
+  isCollaborator,
   groupsIsFiltered,
   setIsLoading,
   theme,
@@ -100,7 +101,7 @@ const EmptyScreenGroups = ({
       };
     }
 
-    if (isRoomAdmin) return [];
+    if (isRoomAdmin || isCollaborator) return [];
 
     return [
       {
@@ -125,7 +126,7 @@ const EmptyScreenGroups = ({
 };
 
 export default inject(({ peopleStore, clientLoadingStore, settingsStore }) => {
-  const { isRoomAdmin } = peopleStore.userStore.user;
+  const { isRoomAdmin, isCollaborator } = peopleStore.userStore.user;
   const { groupsIsFiltered } = peopleStore.groupsStore;
 
   const { setIsSectionBodyLoading } = clientLoadingStore;
@@ -136,6 +137,7 @@ export default inject(({ peopleStore, clientLoadingStore, settingsStore }) => {
 
   return {
     isRoomAdmin,
+    isCollaborator,
     groupsIsFiltered,
     setIsLoading,
     theme: settingsStore.theme,

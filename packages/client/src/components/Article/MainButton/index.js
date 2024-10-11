@@ -53,10 +53,8 @@ import { withTranslation } from "react-i18next";
 import { encryptionUploadDialog } from "../../../helpers/desktop";
 import { useNavigate, useLocation } from "react-router-dom";
 import MobileView from "./MobileView";
-
 import {
   Events,
-  EmployeeType,
   DeviceType,
   RoomsType,
   FilesSelectorFilterTypes,
@@ -66,7 +64,6 @@ import {
 
 import styled, { css } from "styled-components";
 
-import { resendInvitesAgain } from "@docspace/shared/api/people";
 import { ArticleButtonLoader } from "@docspace/shared/skeletons/article";
 import { isMobile, isTablet } from "react-device-detect";
 import { globalColors } from "@docspace/shared/themes";
@@ -184,6 +181,8 @@ const ArticleMainButtonContent = (props) => {
     createFoldersTree,
     showWarningDialog,
     isWarningRoomsDialog,
+    getContactsModel,
+    contactsCanCreate,
   } = props;
 
   const navigate = useNavigate();
@@ -291,35 +290,6 @@ const ArticleMainButtonContent = (props) => {
     setOformFromFolderId(currentFolderId);
     navigate(`/form-gallery/${currentFolderId}/filter?${initOformFilter}`);
   };
-
-  const onInvite = React.useCallback((e) => {
-    const type = e.action;
-
-    if (showWarningDialog(type)) {
-      setQuotaWarningDialogVisible(true);
-      return;
-    }
-
-    setInvitePanelOptions({
-      visible: true,
-      roomId: -1,
-      hideSelector: true,
-      defaultAccess: type,
-    });
-  }, []);
-
-  const onInviteAgain = React.useCallback(() => {
-    resendInvitesAgain()
-      .then(() =>
-        toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios")),
-      )
-      .catch((err) => toastr.error(err));
-  }, [resendInvitesAgain]);
-
-  const onCreateGroup = React.useCallback(() => {
-    const event = new Event(Events.GROUP_CREATE);
-    window.dispatchEvent(event);
-  }, []);
 
   React.useEffect(() => {
     const isFolderHiddenDropdown =
@@ -479,6 +449,15 @@ const ArticleMainButtonContent = (props) => {
   React.useEffect(() => {
     if (isRoomsFolder || isSettingsPage) return;
 
+    if (isAccountsPage) {
+      const model = getContactsModel(t);
+
+      setModel(model);
+      setActions(model);
+
+      return;
+    }
+
     const pluginItems = [];
 
     if (mainButtonItemsList && enablePlugins && !isAccountsPage) {
@@ -628,94 +607,13 @@ const ArticleMainButtonContent = (props) => {
       },
     ];
 
-    const accountsUserActions = [
-      ...(isOwner
-        ? [
-            {
-              id: "invite_portal-administrator",
-              className: "main-button_drop-down",
-              icon: PersonAdminReactSvgUrl,
-              label: t("Common:PortalAdmin", {
-                productName: t("Common:ProductName"),
-              }),
-              onClick: onInvite,
-              action: EmployeeType.Admin,
-              key: "administrator",
-            },
-          ]
-        : []),
-      ...(!isRoomAdmin
-        ? [
-            {
-              id: "invite_room-admin",
-              className: "main-button_drop-down",
-              icon: PersonManagerReactSvgUrl,
-              label: t("Common:RoomAdmin"),
-              onClick: onInvite,
-              action: EmployeeType.User,
-              key: "manager",
-            },
-          ]
-        : []),
-      {
-        id: "invite_user",
-        className: "main-button_drop-down",
-        icon: PersonDefaultReactSvgUrl,
-        label: t("Common:User"),
-        onClick: onInvite,
-        action: EmployeeType.Collaborator,
-        key: "collaborator",
-      },
-      ...(!isMobileArticle
-        ? [
-            {
-              isSeparator: true,
-              key: "invite-users-separator",
-            },
-          ]
-        : []),
-      {
-        id: "invite_again",
-        className: "main-button_drop-down",
-        icon: InviteAgainReactSvgUrl,
-        label: t("People:LblInviteAgain"),
-        onClick: onInviteAgain,
-        action: "invite-again",
-        key: "invite-again",
-      },
+    const actions = [
+      createNewDocumentDocx,
+      createNewSpreadsheetXlsx,
+      createNewPresentationPptx,
+      ...formActions,
+      createNewFolder,
     ];
-
-    const accountsFullActions = [
-      {
-        id: "actions_invite_user",
-        className: "main-button_drop-down",
-        icon: PersonUserReactSvgUrl,
-        label: t("Common:Invite"),
-        key: "new-user",
-        items: accountsUserActions,
-      },
-      {
-        id: "create_group",
-        className: "main-button_drop-down",
-        icon: GroupReactSvgUrl,
-        label: t("PeopleTranslations:CreateGroup"),
-        onClick: onCreateGroup,
-        action: "group",
-        key: "group",
-      },
-    ];
-
-    const actions = isAccountsPage
-      ? isRoomAdmin
-        ? accountsUserActions
-        : accountsFullActions
-      : [
-          createNewDocumentDocx,
-          createNewSpreadsheetXlsx,
-          createNewPresentationPptx,
-          ...formActions,
-          createNewFolder,
-        ];
 
     if (pluginItems.length > 0) {
       // menuModel.push({
@@ -741,15 +639,13 @@ const ArticleMainButtonContent = (props) => {
 
     const menuModel = [...actions];
 
-    if (!isAccountsPage) {
-      menuModel.push({
-        isSeparator: true,
-        key: "separator",
-      });
+    menuModel.push({
+      isSeparator: true,
+      key: "separator",
+    });
 
-      menuModel.push(...uploadActions);
-      setUploadActions(uploadActions);
-    }
+    menuModel.push(...uploadActions);
+    setUploadActions(uploadActions);
 
     setModel(menuModel);
     setActions(actions);
@@ -772,8 +668,7 @@ const ArticleMainButtonContent = (props) => {
 
     onCreate,
     onCreateRoom,
-    onInvite,
-    onInviteAgain,
+    getContactsModel,
     onShowSelectFileDialog,
     onShowFormRoomSelectFileDialog,
     onUploadFileClick,
@@ -790,7 +685,7 @@ const ArticleMainButtonContent = (props) => {
   } else if (isSettingsPage) {
     isDisabled = isSettingsPage;
   } else if (isAccountsPage) {
-    isDisabled = isCollaborator;
+    isDisabled = !contactsCanCreate;
   } else {
     isDisabled = !security?.Create;
   }
@@ -811,7 +706,7 @@ const ArticleMainButtonContent = (props) => {
         : true;
   }
 
-  if (isAccountsPage && !isOwner && !isAdmin && !isRoomAdmin) {
+  if (isAccountsPage && !contactsCanCreate) {
     mainButtonVisible = false;
   }
 
@@ -917,6 +812,7 @@ export default inject(
     currentTariffStatusStore,
     filesActionsStore,
     currentQuotaStore,
+    peopleStore,
   }) => {
     const { showArticleLoader } = clientLoadingStore;
     const { mainButtonMobileVisible } = filesStore;
@@ -1020,6 +916,9 @@ export default inject(
 
       showWarningDialog,
       isWarningRoomsDialog,
+
+      getContactsModel: peopleStore.contextOptionsStore.getContactsModel,
+      contactsCanCreate: peopleStore.contextOptionsStore.contactsCanCreate,
     };
   },
 )(

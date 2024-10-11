@@ -40,6 +40,7 @@ import {
   TOption,
 } from "@docspace/shared/components/combobox";
 import { ContextMenuModel } from "@docspace/shared/components/context-menu";
+import { getUserTypeTranslation } from "@docspace/shared/utils/common";
 
 import withContent from "SRC_DIR/HOCs/withPeopleContent";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
@@ -112,28 +113,28 @@ const PeopleTableRow = ({
     const options = [];
 
     const adminOption = {
-      key: "admin",
-      title: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
-      label: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
-      action: "admin",
+      key: EmployeeType.Admin,
+      title: getUserTypeTranslation(EmployeeType.Admin, t),
+      label: getUserTypeTranslation(EmployeeType.Admin, t),
+      action: EmployeeType.Admin,
     };
     const managerOption = {
-      key: "manager",
-      title: t("Common:RoomAdmin"),
-      label: t("Common:RoomAdmin"),
-      action: "manager",
+      key: EmployeeType.RoomAdmin,
+      title: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
+      label: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
+      action: EmployeeType.RoomAdmin,
     };
     const collaboratorOption = {
-      key: "collaborator",
-      title: t("Common:User"),
-      label: t("Common:User"),
-      action: "collaborator",
+      key: EmployeeType.User,
+      title: getUserTypeTranslation(EmployeeType.User, t),
+      label: getUserTypeTranslation(EmployeeType.User, t),
+      action: EmployeeType.User,
     };
     const userOption = {
-      key: "user",
-      title: t("Common:Guest"),
-      label: t("Common:Guest"),
-      action: "user",
+      key: EmployeeType.Guest,
+      title: getUserTypeTranslation(EmployeeType.Guest, t),
+      label: getUserTypeTranslation(EmployeeType.Guest, t),
+      action: EmployeeType.Guest,
     };
 
     if (isOwner) options.push(adminOption);
@@ -179,26 +180,7 @@ const PeopleTableRow = ({
     [onOpenGroup],
   );
 
-  const getUserTypeLabel = React.useCallback(() => {
-    switch (role) {
-      case "owner":
-        return t("Common:Owner");
-      case "admin":
-        return t("Common:PortalAdmin", {
-          productName: t("Common:ProductName"),
-        });
-      case "manager":
-        return t("Common:RoomAdmin");
-      case "collaborator":
-        return t("Common:User");
-      case "user":
-        return t("Common:User");
-      default:
-        return "";
-    }
-  }, [role, t]);
-
-  const typeLabel = getUserTypeLabel();
+  const typeLabel = getUserTypeTranslation(role, t);
 
   const isChecked = checkedProps!.checked;
 

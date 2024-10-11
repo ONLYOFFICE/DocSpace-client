@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { makeAutoObservable } from "mobx";
+import { isMobile } from "react-device-detect";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import {
@@ -38,6 +39,9 @@ import { TContextMenuValueTypeOnClick } from "@docspace/shared/components/contex
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import { TfaStore } from "@docspace/shared/store/TfaStore";
 import { UserStore } from "@docspace/shared/store/UserStore";
+import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
+import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
+import { getUserTypeTranslation } from "@docspace/shared/utils/common";
 
 import PencilReactSvgUrl from "PUBLIC_DIR/images/pencil.react.svg?url";
 import ChangeMailReactSvgUrl from "PUBLIC_DIR/images/email.react.svg?url";
@@ -56,16 +60,24 @@ import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url
 import ChangeToEmployeeReactSvgUrl from "PUBLIC_DIR/images/change.to.employee.react.svg?url";
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import ReassignDataReactSvgUrl from "PUBLIC_DIR/images/reassign.data.svg?url";
+import PersonAdminReactSvgUrl from "PUBLIC_DIR/images/person.admin.react.svg?url";
+import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg?url";
+import PersonDefaultReactSvgUrl from "PUBLIC_DIR/images/person.default.react.svg?url";
+import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
+import GroupReactSvgUrl from "PUBLIC_DIR/images/group.react.svg?url";
 
 import { getCategoryUrl } from "SRC_DIR/helpers/utils";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import {
+  createGroup,
   onDeletePersonalDataClick,
   onInviteAgainClick,
+  onInviteMultipleAgain,
 } from "SRC_DIR/helpers/contacts";
 
 import InfoPanelStore from "../InfoPanelStore";
 import ProfileActionsStore from "../ProfileActionsStore";
+import DialogsStore from "../DialogsStore";
 
 import UsersStore from "./UsersStore";
 import DialogStore from "./DialogStore";
@@ -85,6 +97,8 @@ class ContactsConextOptionsStore {
     public usersStore: UsersStore,
     public dialogStore: DialogStore,
     public targetUserStore: TargetUserStore,
+    public dialogsStore: DialogsStore,
+    public currentQuotaStore: CurrentQuotasStore,
   ) {
     this.settingsStore = settingsStore;
     this.infoPanelStore = infoPanelStore;
@@ -94,6 +108,8 @@ class ContactsConextOptionsStore {
     this.usersStore = usersStore;
     this.dialogStore = dialogStore;
     this.targetUserStore = targetUserStore;
+    this.dialogsStore = dialogsStore;
+    this.currentQuotaStore = currentQuotaStore;
 
     makeAutoObservable(this);
   }
@@ -107,7 +123,10 @@ class ContactsConextOptionsStore {
 
     const { getUsersToMakeEmployees } = this.usersStore!;
 
-    this.usersStore.changeType(action as EmployeeType, getUsersToMakeEmployees);
+    this.usersStore.changeType(
+      +action as EmployeeType,
+      getUsersToMakeEmployees,
+    );
   };
 
   onChangeStatus = (status: EmployeeStatus) => {
@@ -255,6 +274,26 @@ class ContactsConextOptionsStore {
             onClick: () => this.onResetAuth(item),
             disabled: this.tfaStore.tfaSettings !== "app",
           };
+        case "change-type":
+          return {
+            id: "option_change-type",
+            key: option,
+            icon: ChangeToEmployeeReactSvgUrl,
+            label: t("ChangeUserTypeDialog:ChangeUserTypeButton"),
+            onClick: () =>
+              this.usersStore.changeType(
+                EmployeeType.User,
+                this.usersStore.getUsersToMakeEmployees,
+              ),
+          };
+        case "remove-guest":
+          return {
+            id: "option_remove-guests",
+            key: option,
+            label: t("Common:Remove"),
+            onClick: () => this.dialogStore.setRemoveGuestDialogVisible(true),
+            icon: DisableReactSvgUrl,
+          };
         default:
           break;
       }
@@ -275,11 +314,17 @@ class ContactsConextOptionsStore {
       hasUsersToInvite,
       hasUsersToRemove,
       hasFreeUsers,
+      contactsTab,
     } = this.usersStore;
-    const { setSendInviteDialogVisible, setDeleteProfileDialogVisible } =
-      this.dialogStore;
+    const {
+      setSendInviteDialogVisible,
+      setDeleteProfileDialogVisible,
+      setRemoveGuestDialogVisible,
+    } = this.dialogStore;
 
-    const { isOwner } = this.userStore.user!;
+    const isGuests = contactsTab === "guests";
+
+    const { isOwner, isRoomAdmin } = this.userStore.user!;
 
     const { setIsVisible, isVisible } = this.infoPanelStore;
 
@@ -288,17 +333,17 @@ class ContactsConextOptionsStore {
     const adminOption = {
       id: "context-menu_administrator",
       className: "context-menu_drop-down",
-      label: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
-      title: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
+      label: getUserTypeTranslation(EmployeeType.Admin, t),
+      title: getUserTypeTranslation(EmployeeType.Admin, t),
       onClick: (e: TContextMenuValueTypeOnClick) => onChangeType(e),
-      action: EmployeeType.PortalAdmin,
+      action: EmployeeType.Admin,
       key: "cm-administrator",
     };
     const managerOption = {
       id: "context-menu_manager",
       className: "context-menu_drop-down",
-      label: t("Common:RoomAdmin"),
-      title: t("Common:RoomAdmin"),
+      label: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
+      title: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
       onClick: (e: TContextMenuValueTypeOnClick) => onChangeType(e),
       action: EmployeeType.RoomAdmin,
       key: "cm-manager",
@@ -306,10 +351,10 @@ class ContactsConextOptionsStore {
     const userOption = {
       id: "context-menu_user",
       className: "context-menu_drop-down",
-      label: t("Common:User"),
-      title: t("Common:User"),
+      label: getUserTypeTranslation(EmployeeType.User, t),
+      title: getUserTypeTranslation(EmployeeType.User, t),
       onClick: (e: TContextMenuValueTypeOnClick) => onChangeType(e),
-      action: EmployeeType.UserString,
+      action: EmployeeType.User,
       key: "cm-user",
     };
 
@@ -319,13 +364,20 @@ class ContactsConextOptionsStore {
 
     if (hasFreeUsers) options.push(userOption);
 
-    const headerMenu = [
+    const menu = [
       {
         key: "cm-change-type",
         label: t("ChangeUserTypeDialog:ChangeUserTypeButton"),
         disabled: !hasUsersToMakeEmployees,
         icon: ChangeToEmployeeReactSvgUrl,
-        items: options,
+        onClick: isGuests
+          ? () =>
+              this.usersStore.changeType(
+                EmployeeType.User,
+                this.usersStore.getUsersToMakeEmployees,
+              )
+          : null,
+        items: isGuests ? null : options,
       },
       {
         key: "cm-info",
@@ -344,27 +396,34 @@ class ContactsConextOptionsStore {
       {
         key: "cm-enable",
         label: t("Common:Enable"),
-        disabled: !hasUsersToActivate,
+        disabled: !hasUsersToActivate || (isRoomAdmin && isGuests),
         onClick: () => onChangeStatus(EmployeeStatus.Active),
         icon: EnableReactSvgUrl,
       },
       {
         key: "cm-disable",
         label: t("PeopleTranslations:DisableUserButton"),
-        disabled: !hasUsersToDisable,
+        disabled: !hasUsersToDisable || (isRoomAdmin && isGuests),
         onClick: () => onChangeStatus(EmployeeStatus.Disabled),
         icon: DisableReactSvgUrl,
       },
       {
         key: "cm-delete",
         label: t("Common:Delete"),
-        disabled: !hasUsersToRemove,
+        disabled: !hasUsersToRemove || (isRoomAdmin && isGuests),
         onClick: () => setDeleteProfileDialogVisible(true),
         icon: DeleteReactSvgUrl,
       },
+      {
+        key: "cm-remove",
+        label: t("Common:Remove"),
+        disabled: !isGuests || !isRoomAdmin,
+        onClick: () => setRemoveGuestDialogVisible(true),
+        icon: DisableReactSvgUrl,
+      },
     ];
 
-    return headerMenu;
+    return menu;
   };
 
   getModel = (item: TItem, t: TTranslation) => {
@@ -476,6 +535,114 @@ class ContactsConextOptionsStore {
 
     setResetAuthDialogVisible(true);
     setDialogData(item.id);
+  };
+
+  get contactsCanCreate() {
+    const isInsideGroup = this.usersStore.contactsTab === "inside_group";
+
+    const { isCollaborator } = this.userStore.user!;
+    const canCreate = !isInsideGroup && !isCollaborator;
+
+    return canCreate;
+  }
+
+  getContactsModel = (t: TTranslation, isSectionMenu: boolean) => {
+    const { isRoomAdmin, isOwner, isAdmin } = this.userStore.user!;
+
+    const someDialogIsOpen = checkDialogsOpen();
+
+    if (
+      !this.contactsCanCreate ||
+      (isSectionMenu && (isMobile || someDialogIsOpen))
+    )
+      return null;
+
+    const accountsUserOptions = [
+      isOwner && {
+        id: "accounts-add_administrator",
+        className: "main-button_drop-down",
+        icon: PersonAdminReactSvgUrl,
+        label: t("Common:PortalAdmin", {
+          productName: t("Common:ProductName"),
+        }),
+        onClick: () => this.inviteUser(EmployeeType.Admin),
+        "data-type": EmployeeType.Admin,
+        action: EmployeeType.Admin,
+        key: "administrator",
+      },
+      isAdmin && {
+        id: "accounts-add_manager",
+        className: "main-button_drop-down",
+        icon: PersonManagerReactSvgUrl,
+        label: t("Common:RoomAdmin"),
+        onClick: () => this.inviteUser(EmployeeType.RoomAdmin),
+        "data-type": EmployeeType.RoomAdmin,
+        action: EmployeeType.RoomAdmin,
+        key: "manager",
+      },
+      {
+        id: "accounts-add_collaborator",
+        className: "main-button_drop-down",
+        icon: PersonDefaultReactSvgUrl,
+        label: t("Common:User"),
+        onClick: () => this.inviteUser(EmployeeType.User),
+        "data-type": EmployeeType.User,
+        action: EmployeeType.User,
+        key: "collaborator",
+      },
+      {
+        key: "separator",
+        isSeparator: true,
+      },
+      {
+        id: "accounts-add_invite-again",
+        className: "main-button_drop-down",
+        icon: InviteAgainReactSvgUrl,
+        label: t("People:LblInviteAgain"),
+        onClick: () => onInviteMultipleAgain(t),
+        "data-action": "invite-again",
+        key: "invite-again",
+      },
+    ];
+
+    const accountsFullOptions = [
+      {
+        id: "actions_invite_user",
+        className: "main-button_drop-down",
+        icon: PersonUserReactSvgUrl,
+        label: t("Common:Invite"),
+        key: "new-user",
+        items: accountsUserOptions,
+      },
+      {
+        id: "create_group",
+        className: "main-button_drop-down",
+        icon: GroupReactSvgUrl,
+        label: t("PeopleTranslations:CreateGroup"),
+        onClick: createGroup,
+        action: "group",
+        key: "group",
+      },
+    ];
+
+    return isRoomAdmin ? accountsUserOptions : accountsFullOptions;
+  };
+
+  inviteUser = (userType: EmployeeType) => {
+    const { setQuotaWarningDialogVisible, setInvitePanelOptions } =
+      this.dialogsStore;
+
+    if (this.currentQuotaStore.showWarningDialog(userType as number)) {
+      setQuotaWarningDialogVisible(true);
+      return;
+    }
+
+    setInvitePanelOptions({
+      visible: true,
+      roomId: -1,
+      hideSelector: true,
+      defaultAccess: userType,
+    });
   };
 }
 

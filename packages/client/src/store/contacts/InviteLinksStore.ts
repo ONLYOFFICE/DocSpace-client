@@ -50,7 +50,7 @@ class InviteLinksStore {
     makeAutoObservable(this);
   }
 
-  setUserLink = (link: Nullable<string>) => {
+  setRoomAdminLink = (link: Nullable<string>) => {
     this.userLink = link;
   };
 
@@ -62,7 +62,7 @@ class InviteLinksStore {
     this.adminLink = link;
   };
 
-  setCollaboratorLink = (link: Nullable<string>) => {
+  setUserLink = (link: Nullable<string>) => {
     this.collaboratorLink = link;
   };
 
@@ -72,10 +72,10 @@ class InviteLinksStore {
     const links = await getInvitationLinks();
 
     runInAction(() => {
-      this.setUserLink(links.userLink);
+      this.setRoomAdminLink(links.userLink);
       this.setGuestLink(links.guestLink);
       this.setAdminLink(links.adminLink);
-      this.setCollaboratorLink(links.collaboratorLink);
+      this.setUserLink(links.collaboratorLink);
     });
   };
 
@@ -86,8 +86,8 @@ class InviteLinksStore {
 
     runInAction(() => {
       switch (type) {
-        case EmployeeType.User:
-          this.setUserLink(link);
+        case EmployeeType.RoomAdmin:
+          this.setRoomAdminLink(link);
           break;
         case EmployeeType.Guest:
           this.setGuestLink(link);
@@ -95,8 +95,8 @@ class InviteLinksStore {
         case EmployeeType.Admin:
           this.setAdminLink(link);
           break;
-        case EmployeeType.Collaborator:
-          this.setCollaboratorLink(link);
+        case EmployeeType.User:
+          this.setUserLink(link);
           break;
         default:
           break;
@@ -109,7 +109,7 @@ class InviteLinksStore {
   getShortenedLink = async (link: string, forUser = false) => {
     if (forUser) {
       const userLink = await getShortenedLink(link);
-      this.setUserLink(userLink);
+      this.setRoomAdminLink(userLink);
     } else {
       const guestLink = await getShortenedLink(link);
       this.setGuestLink(guestLink);

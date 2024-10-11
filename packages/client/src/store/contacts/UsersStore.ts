@@ -49,17 +49,22 @@ import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 import {
   getUserChecked,
   setContactsUsersFilterUrl,
+  TChangeUserTypeDialogData,
 } from "SRC_DIR/helpers/contacts";
-import type { TContactsSelected, TContactsTab } from "SRC_DIR/helpers/contacts";
+import type {
+  TChangeUserStatusDialogData,
+  TContactsSelected,
+  TContactsTab,
+} from "SRC_DIR/helpers/contacts";
 
 import InfoPanelStore from "../InfoPanelStore";
 import AccessRightsStore from "../AccessRightsStore";
+import ClientLoadingStore from "../ClientLoadingStore";
 
 import TargetUserStore from "./TargetUserStore";
 import GroupsStore from "./GroupsStore";
 import ContactsHotkeysStore from "./ContactsHotkeysStore";
 import DialogStore from "./DialogStore";
-import ClientLoadingStore from "../ClientLoadingStore";
 
 class UsersStore {
   filter = Filter.getDefault();
@@ -129,6 +134,8 @@ class UsersStore {
   };
 
   setFilter = (filter: Filter) => {
+    this.filter = filter;
+
     const key =
       this.contactsTab === "inside_group"
         ? `InsideGroupFilter=${this.userStore.user?.id}`
@@ -146,8 +153,6 @@ class UsersStore {
       this.contactsTab,
       this.groupsStore.currentGroup?.id,
     );
-
-    this.filter = filter;
   };
 
   get filterTotal() {
@@ -195,6 +200,9 @@ class UsersStore {
       this.abortController = new AbortController();
     }
 
+    this.setSelection([]);
+    this.setBufferSelection(null);
+
     const localStorageKey =
       this.contactsTab === "inside_group"
         ? `InsideGroupFilter=${this.userStore.user?.id}`
@@ -210,16 +218,6 @@ class UsersStore {
       filterData.sortBy = splitFilter[0] as TFilterSortBy;
       filterData.pageCount = +splitFilter[1];
       filterData.sortOrder = splitFilter[2] as TSortOrder;
-    }
-
-    if (!this.settingsStore.withPaging) {
-      const isCustomCountPage =
-        filter && filter.pageCount !== 100 && filter.pageCount !== 25;
-
-      if (!isCustomCountPage) {
-        filterData.page = 0;
-        filterData.pageCount = 100;
-      }
     }
 
     if (currentGroup?.id && this.contactsTab === "inside_group") {
@@ -241,11 +239,11 @@ class UsersStore {
 
     filterData.total = res.total;
 
-    this.requestRunning = false;
-
     if (updateFilter) {
       this.setFilter(filterData);
     }
+
+    this.requestRunning = false;
 
     this.setUsers(res.items);
 
@@ -291,22 +289,22 @@ class UsersStore {
   updateUserType = async (
     type: EmployeeType,
     userIds: string[],
-    filter: Filter,
+    filter: Filter = this.filter,
   ) => {
-    let toType = 0;
+    let toType = type ?? 0;
 
     switch (type) {
-      case "admin":
+      case EmployeeType.Admin:
         toType = EmployeeType.Admin;
         break;
-      case "user":
+      case EmployeeType.Guest:
         toType = EmployeeType.Guest;
         break;
-      case "collaborator":
-        toType = EmployeeType.Collaborator;
-        break;
-      case "manager":
+      case EmployeeType.User:
         toType = EmployeeType.User;
+        break;
+      case EmployeeType.RoomAdmin:
+        toType = EmployeeType.RoomAdmin;
         break;
       default:
         return;
@@ -320,13 +318,27 @@ class UsersStore {
       throw new Error(e as string);
     }
 
-    await this.getUsersList(filter);
+    await this.getUsersList(filter, true);
 
     if (updatedUsers && !this.needResetUserSelection) {
       this.updateSelection();
     }
 
     return updatedUsers;
+  };
+
+  removeGuests = async (ids: string[]) => {
+    if (this.contactsTab !== "guests" || !ids.length) return;
+
+    const removedGuests = await api.people.deleteGuests(ids);
+
+    await this.getUsersList(this.filter, true);
+
+    if (!!removedGuests && !this.needResetUserSelection) {
+      this.updateSelection();
+    }
+
+    return removedGuests;
   };
 
   setCustomUserQuota = async (
@@ -354,7 +366,7 @@ class UsersStore {
   updateProfileInUsers = async (updatedProfile?: TUser) => {
     const updatedUser = updatedProfile ?? this.targetUserStore.targetUser;
     if (!this.users) {
-      return this.getUsersList(this.filter);
+      return this.getUsersList(this.filter, true);
     }
 
     if (!updatedUser) return;
@@ -377,14 +389,14 @@ class UsersStore {
     isMySelf: boolean,
     isUserSSO: boolean,
     isUserLDAP: boolean,
+    isGuest: boolean,
     statusType: ReturnType<typeof getUserStatus>,
     userRole: ReturnType<typeof getUserType>,
     status: EmployeeStatus,
   ) => {
     if (!this.userStore.user) return;
 
-    const { isOwner, isAdmin, isVisitor, isCollaborator, isLDAP } =
-      this.userStore.user;
+    const { isOwner, isAdmin, isRoomAdmin, isLDAP } = this.userStore.user;
 
     const options: string[] = [];
 
@@ -416,15 +428,17 @@ class UsersStore {
         } else if (
           isOwner ||
           (isAdmin &&
-            (userRole === "user" ||
-              userRole === "manager" ||
-              userRole === "collaborator"))
+            (userRole === EmployeeType.Guest ||
+              userRole === EmployeeType.RoomAdmin ||
+              userRole === EmployeeType.User))
         ) {
           if (!isUserLDAP && !isUserSSO) {
             options.push("separator-1");
 
             options.push("change-email");
             options.push("change-password");
+
+            if (isGuest) options.push("change-type");
           }
 
           options.push("reset-auth");
@@ -433,6 +447,12 @@ class UsersStore {
             options.push("separator-2");
             options.push("disable");
           }
+        } else if (isRoomAdmin && userRole === EmployeeType.Guest) {
+          options.push("room-list");
+          options.push("separator-1");
+          options.push("change-type");
+          options.push("separator-2");
+          options.push("remove-guest");
         }
 
         break;
@@ -440,15 +460,15 @@ class UsersStore {
         if (
           isOwner ||
           (isAdmin &&
-            (userRole === "manager" ||
-              userRole === "user" ||
-              userRole === "collaborator"))
+            (userRole === EmployeeType.Guest ||
+              userRole === EmployeeType.RoomAdmin ||
+              userRole === EmployeeType.User))
         ) {
           options.push("enable");
 
           options.push("details");
 
-          if (userRole !== "user") {
+          if (userRole !== EmployeeType.Guest) {
             options.push("reassign-data");
           }
 
@@ -456,6 +476,10 @@ class UsersStore {
           options.push("delete-user");
         } else {
           options.push("details");
+          if (isRoomAdmin && userRole === EmployeeType.Guest) {
+            options.push("separator-1");
+            options.push("remove-guest");
+          }
         }
 
         break;
@@ -463,10 +487,10 @@ class UsersStore {
       case "pending":
         if (
           isOwner ||
-          ((isAdmin || (!isVisitor && !isCollaborator)) &&
-            userRole === "manager") ||
-          userRole === "collaborator" ||
-          userRole === "user"
+          (isAdmin &&
+            (userRole === EmployeeType.Guest ||
+              userRole === EmployeeType.RoomAdmin ||
+              userRole === EmployeeType.User))
         ) {
           if (isMySelf) {
             options.push("profile");
@@ -482,11 +506,16 @@ class UsersStore {
           if (
             isOwner ||
             (isAdmin &&
-              (userRole === "manager" ||
-                userRole === "user" ||
-                userRole === "collaborator"))
+              (userRole === EmployeeType.Guest ||
+                userRole === EmployeeType.RoomAdmin ||
+                userRole === EmployeeType.User))
           ) {
-            options.push("separator-1");
+            if (isGuest) {
+              options.push("separator-1");
+
+              options.push("change-type");
+            }
+            options.push("separator-2");
 
             if (
               status === EmployeeStatus.Active ||
@@ -506,6 +535,14 @@ class UsersStore {
 
           if (isAdmin || isOwner) {
             options.push("room-list");
+          }
+
+          if (isRoomAdmin && userRole === EmployeeType.Guest) {
+            options.push("room-list");
+            options.push("separator-1");
+            options.push("change-type");
+            options.push("separator-2");
+            options.push("remove-guest");
           }
         }
 
@@ -581,6 +618,7 @@ class UsersStore {
       isMySelf,
       isSSO,
       isLDAP,
+      isVisitor,
       statusType,
       role,
       status,
@@ -633,7 +671,9 @@ class UsersStore {
   }
 
   get hasMoreUsers() {
-    return this.peopleList.length < this.filterTotal;
+    if (this.clientLoadingStore.isLoading || this.requestRunning) return false;
+
+    return this.peopleList.length < this.filter.total;
   }
 
   get needResetUserSelection() {
@@ -893,17 +933,18 @@ class UsersStore {
     return users.length > 0;
   }
 
-  get hasUsersToMakePowerUser() {
-    const { canMakePowerUser } = this.accessRightsStore;
-    const users = this.selection.filter((x) => canMakePowerUser(x));
-
-    return users.length > 0;
-  }
-
   get getUsersToMakeEmployees() {
     const { canMakeEmployeeUser } = this.accessRightsStore;
 
-    const users = this.selection.filter((x) => canMakeEmployeeUser(x));
+    let users = this.selection.filter((x) => canMakeEmployeeUser(x));
+
+    if (
+      this.bufferSelection &&
+      canMakeEmployeeUser(this.bufferSelection) &&
+      !users.length
+    ) {
+      users = [this.bufferSelection];
+    }
 
     return users.map((u) => u);
   }
@@ -1029,7 +1070,7 @@ class UsersStore {
   changeType = (
     type: EmployeeType,
     users: UsersStore["getUsersToMakeEmployees"],
-    successCallback?: VoidFunction,
+    successCallback?: (users?: TUser[]) => void,
     abortCallback?: VoidFunction,
   ) => {
     const { setDialogData } = this.dialogStore!;
@@ -1056,9 +1097,12 @@ class UsersStore {
 
     if (fromType.length === 1 && fromType[0] === type) return false;
 
+    const userNames: string[] = [];
+
     const userIDs = users
       .filter((u) => u.role !== type)
       .map((user) => {
+        if (user.displayName) userNames.push(user.displayName);
         return user?.id ? user.id : user;
       });
 
@@ -1066,9 +1110,10 @@ class UsersStore {
       toType: type,
       fromType,
       userIDs,
+      userNames,
       successCallback,
       abortCallback,
-    });
+    } as TChangeUserTypeDialogData);
 
     window.dispatchEvent(event);
 
@@ -1086,7 +1131,11 @@ class UsersStore {
       return user?.id ? user.id : user;
     });
 
-    setDialogData({ status, userIDs });
+    setDialogData({
+      status,
+      userIDs,
+      isGuests: this.contactsTab === "guests",
+    } as TChangeUserStatusDialogData);
 
     setChangeUserStatusDialogVisible(true);
   };

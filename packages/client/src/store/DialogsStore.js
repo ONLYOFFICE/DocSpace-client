@@ -113,7 +113,6 @@ class DialogsStore {
   saveAfterReconnectOAuth = false;
   createRoomDialogVisible = false;
   createRoomConfirmDialogVisible = false;
-  changeUserTypeDialogVisible = false;
   editLinkPanelIsVisible = false;
   embeddingPanelData = { visible: false, item: null };
   submitToGalleryDialogVisible = false;
@@ -441,7 +440,7 @@ class DialogsStore {
   isPaidUserAccess = (selectedAccess) => {
     return (
       selectedAccess === EmployeeType.Admin ||
-      selectedAccess === EmployeeType.User
+      selectedAccess === EmployeeType.RoomAdmin
     );
   };
 
@@ -461,7 +460,11 @@ class DialogsStore {
 
       this.setInvitePaidUsersCount(modifier);
 
-      this.inviteItems[index] = { ...this.inviteItems[index], ...item };
+      this.inviteItems[index] = {
+        ...this.inviteItems[index],
+        ...item,
+        warning: false,
+      };
     });
 
   setQuotaWarningDialogVisible = (inviteQuotaWarningDialogVisible) => {
@@ -482,10 +485,6 @@ class DialogsStore {
 
   setCreateRoomConfirmDialogVisible = (createRoomConfirmDialogVisible) => {
     this.createRoomConfirmDialogVisible = createRoomConfirmDialogVisible;
-  };
-
-  setChangeUserTypeDialogVisible = (changeUserTypeDialogVisible) => {
-    this.changeUserTypeDialogVisible = changeUserTypeDialogVisible;
   };
 
   setSubmitToGalleryDialogVisible = (submitToGalleryDialogVisible) => {

@@ -39,7 +39,7 @@ import ClearEmptyFilterSvg from "PUBLIC_DIR/images/clear.empty.filter.svg";
 import EmptyScreenPersonSvgLight from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.light.svg";
 import EmptyScreenPersonSvgDark from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.dark.svg";
 
-import { resetFilter } from "SRC_DIR/helpers/contacts";
+import { editGroup, resetFilter } from "SRC_DIR/helpers/contacts";
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
@@ -51,7 +51,6 @@ type EmptyScreenProps = {
   isFiltered?: UsersStore["isFiltered"];
   currentGroup?: GroupsStore["currentGroup"];
   setIsSectionBodyLoading?: ClientLoadingStore["setIsSectionBodyLoading"];
-  editGroup?: GroupsStore["editGroup"];
   deleteGroup?: GroupsStore["deleteGroup"];
 };
 
@@ -61,7 +60,6 @@ const EmptyScreen = ({
   currentGroup,
   isFiltered,
   setIsSectionBodyLoading,
-  editGroup,
   deleteGroup,
 }: EmptyScreenProps) => {
   const { t } = useTranslation([
@@ -76,11 +74,15 @@ const EmptyScreen = ({
   const isEmptyGuests = contactsTab === "guests";
 
   const title = isEmptyGuests
-    ? t("Common:NotFoundGuests")
+    ? isFiltered
+      ? t("Common:NotFoundGuestsFilter")
+      : t("Common:NotFoundGuests")
     : t("Common:NotFoundUsers");
 
   const description = isEmptyGuests
-    ? t("Common:NotFoundGuestsDescription")
+    ? isFiltered
+      ? t("Common:NotFoundFilterGuestsDescription")
+      : t("Common:NotFoundGuestsDescription")
     : isEmptyGroup
       ? t("Common:EmptyGroupDescription")
       : t("Common:NotFoundUsersDescription");
@@ -112,7 +114,7 @@ const EmptyScreen = ({
           description: t("EmptyView:EmptyGroupAddedUserOptionDescription"),
           disabled: isRoomAdmin || currentGroup?.isLDAP,
           icon: <InviteUserIcon />,
-          onClick: () => editGroup!(currentGroup),
+          onClick: () => editGroup(currentGroup),
         },
         {
           key: "delete-group",
@@ -158,7 +160,7 @@ export default inject(
   }) => {
     const { groupsStore, usersStore } = peopleStore;
 
-    const { editGroup, deleteGroup, currentGroup } = groupsStore!;
+    const { deleteGroup, currentGroup } = groupsStore!;
     const { contactsTab, isFiltered } = usersStore!;
 
     const { setIsSectionBodyLoading } = clientLoadingStore;
@@ -175,7 +177,6 @@ export default inject(
 
       setIsSectionBodyLoading,
 
-      editGroup,
       deleteGroup,
     };
   },

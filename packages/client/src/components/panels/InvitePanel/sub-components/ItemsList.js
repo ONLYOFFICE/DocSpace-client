@@ -53,6 +53,7 @@ const Row = memo(({ data, index, style }) => {
     setHasErrors,
     roomType,
     isOwner,
+    isAdmin,
     inputsRef,
     setIsOpenItemAccess,
     isMobileView,
@@ -64,28 +65,24 @@ const Row = memo(({ data, index, style }) => {
   const item = inviteItems[index];
 
   return (
-    <StyledRow
+    <Item
+      t={t}
+      item={item}
       key={item.id}
       style={style}
-      className="row-item"
-      hasWarning={!!item.warning}
-    >
-      <Item
-        t={t}
-        item={item}
-        theme={theme}
-        setInviteItems={setInviteItems}
-        changeInviteItem={changeInviteItem}
-        inviteItems={inviteItems}
-        setHasErrors={setHasErrors}
-        roomType={roomType}
-        isOwner={isOwner}
-        inputsRef={inputsRef}
-        setIsOpenItemAccess={setIsOpenItemAccess}
-        isMobileView={isMobileView}
-        standalone={standalone}
-      />
-    </StyledRow>
+      theme={theme}
+      setInviteItems={setInviteItems}
+      changeInviteItem={changeInviteItem}
+      inviteItems={inviteItems}
+      setHasErrors={setHasErrors}
+      roomType={roomType}
+      isOwner={isOwner}
+      isAdmin={isAdmin}
+      inputsRef={inputsRef}
+      setIsOpenItemAccess={setIsOpenItemAccess}
+      isMobileView={isMobileView}
+      standalone={standalone}
+    />
   );
 });
 
@@ -97,6 +94,7 @@ const ItemsList = ({
   setHasErrors,
   roomType,
   isOwner,
+  isAdmin,
   externalLinksVisible,
   scrollAllPanelContent,
   inputsRef,
@@ -187,6 +185,7 @@ const ItemsList = ({
           setHasErrors,
           roomType,
           isOwner,
+          isAdmin,
           inputsRef,
           setIsOpenItemAccess,
           isMobileView,
@@ -203,7 +202,7 @@ const ItemsList = ({
 
 export default inject(({ userStore, dialogsStore, settingsStore }) => {
   const { setInviteItems, inviteItems, changeInviteItem } = dialogsStore;
-  const { isOwner } = userStore.user;
+  const { isOwner, isAdmin } = userStore.user;
   const { theme, standalone } = settingsStore;
 
   return {
@@ -211,6 +210,7 @@ export default inject(({ userStore, dialogsStore, settingsStore }) => {
     inviteItems,
     changeInviteItem,
     isOwner,
+    isAdmin,
     standalone,
     theme,
   };

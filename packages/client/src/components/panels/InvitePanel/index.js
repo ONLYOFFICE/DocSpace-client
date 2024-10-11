@@ -63,7 +63,6 @@ const InvitePanel = ({
   setRoomSecurity,
   getRoomSecurityInfo,
   defaultAccess,
-  inviteUsers,
   setInfoPanelIsMobileHidden,
   updateInfoPanelMembers,
   isRoomMembersPanelOpen,
@@ -76,6 +75,7 @@ const InvitePanel = ({
   setIsNewUserByCurrentUser,
   setInvitePaidUsersCount,
   isOwner,
+  isAdmin,
   standalone,
   hideSelector,
   isUserTariffLimit,
@@ -114,7 +114,7 @@ const InvitePanel = ({
       id: "user",
       title: "User",
       shareLink: "",
-      access: EmployeeType.User,
+      access: EmployeeType.RoomAdmin,
     },
     {
       id: "guest",
@@ -132,7 +132,7 @@ const InvitePanel = ({
       id: "collaborator",
       title: "Collaborator",
       shareLink: "",
-      access: EmployeeType.Collaborator,
+      access: EmployeeType.User,
     },
   ];
 
@@ -478,6 +478,7 @@ const InvitePanel = ({
     false,
     true,
     isOwner,
+    isAdmin,
     standalone,
   );
 
@@ -563,7 +564,7 @@ export default inject(
   }) => {
     const { theme, standalone } = settingsStore;
 
-    const { inviteUsers, getUsersList, filter } = peopleStore.usersStore;
+    const { getUsersList, filter } = peopleStore.usersStore;
     const {
       setIsMobileHidden: setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
@@ -589,7 +590,7 @@ export default inject(
 
     const { maxCountManagersByQuota, isUserTariffLimit } = currentQuotaStore;
 
-    const { isOwner } = userStore.user;
+    const { isOwner, isAdmin } = userStore.user;
 
     return {
       folders,
@@ -604,7 +605,6 @@ export default inject(
       visible: invitePanelOptions.visible,
       defaultAccess: invitePanelOptions.defaultAccess,
       getFolderInfo,
-      inviteUsers,
       setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
       isRoomMembersPanelOpen,
@@ -620,6 +620,7 @@ export default inject(
       hideSelector: invitePanelOptions.hideSelector,
       isUserTariffLimit,
       isPaidUserAccess,
+      isAdmin,
     };
   },
 )(

@@ -32,8 +32,6 @@ class DialogStore {
   deleteProfileEver = false;
   data = {};
 
-  changeUserTypeDialogVisible = false;
-
   changeUserStatusDialogVisible = false;
   disableDialogVisible = false;
   sendInviteDialogVisible = false;
@@ -43,6 +41,7 @@ class DialogStore {
   isDeletingUserWithReassignment = false;
   changeEmailVisible = false;
   deleteGroupDialogVisible = false;
+  removeGuestDialogVisible = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -72,10 +71,6 @@ class DialogStore {
     this.data = data;
   };
 
-  setChangeUserTypeDialogVisible = (visible) => {
-    this.changeUserTypeDialogVisible = visible;
-  };
-
   setChangeUserStatusDialogVisible = (visible) => {
     this.changeUserStatusDialogVisible = visible;
   };
@@ -100,13 +95,16 @@ class DialogStore {
     this.deleteGroupDialogVisible = visible;
   };
 
+  setRemoveGuestDialogVisible = (visible) => {
+    this.removeGuestDialogVisible = visible;
+  };
+
   closeDialogs = () => {
     this.setChangeOwnerDialogVisible(false);
     this.setDeleteSelfProfileDialogVisible(false);
     this.setDeleteProfileDialogVisible(false);
     this.setDialogData({});
 
-    this.setChangeUserTypeDialogVisible(false);
     this.setChangeUserStatusDialogVisible(false);
 
     this.setSendInviteDialogVisible(false);
@@ -115,6 +113,8 @@ class DialogStore {
     this.setChangeEmailVisible(false);
 
     this.setDeleteGroupDialogVisible(false);
+
+    this.setRemoveGuestDialogVisible(false);
   };
 }
 

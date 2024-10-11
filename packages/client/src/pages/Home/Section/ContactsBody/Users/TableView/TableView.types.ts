@@ -106,7 +106,6 @@ export type TableViewProps = {
 
   infoPanelVisible?: InfoPanelStore["isVisible"];
 
-  withPaging?: SettingsStore["withPaging"];
   currentDeviceType?: SettingsStore["currentDeviceType"];
 
   canChangeUserType?: AccessRightsStore["canChangeUserType"];
@@ -159,8 +158,6 @@ export type TableHeaderProps = {
   userId?: TUser["id"];
 
   infoPanelVisible?: InfoPanelStore["isVisible"];
-
-  withPaging?: SettingsStore["withPaging"];
 
   isDefaultUsersQuotaSet?: CurrentQuotasStore["isDefaultUsersQuotaSet"];
   showStorageInfo?: CurrentQuotasStore["showStorageInfo"];

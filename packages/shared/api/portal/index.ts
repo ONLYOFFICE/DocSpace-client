@@ -56,10 +56,10 @@ export async function getInvitationLink(type: EmployeeType) {
 
 export function getInvitationLinks() {
   return Promise.all([
-    getInvitationLink(EmployeeType.User),
+    getInvitationLink(EmployeeType.RoomAdmin),
     getInvitationLink(EmployeeType.Guest),
     getInvitationLink(EmployeeType.Admin),
-    getInvitationLink(EmployeeType.Collaborator),
+    getInvitationLink(EmployeeType.User),
   ]).then(
     ([
       userInvitationLinkResp,

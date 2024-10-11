@@ -35,11 +35,15 @@ import { inject, observer } from "mobx-react";
 import { Avatar } from "@docspace/shared/components/avatar";
 import { Text } from "@docspace/shared/components/text";
 import { parseAddresses } from "@docspace/shared/utils";
-import { getUserType, getUserTypeLabel } from "@docspace/shared/utils/common";
+import {
+  getUserType,
+  getUserTypeTranslation,
+} from "@docspace/shared/utils/common";
 import { getMembersList, getUserList } from "@docspace/shared/api/people";
 import {
   AccountsSearchArea,
   EmployeeStatus,
+  EmployeeType,
   RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
@@ -61,6 +65,7 @@ import {
   StyledDeleteIcon,
   StyledInviteUserBody,
   ErrorWrapper,
+  StyledRow,
 } from "../StyledInvitePanel";
 import { filterPaidRoleOptions } from "SRC_DIR/helpers";
 import AccessSelector from "../../../AccessSelector";
@@ -80,6 +85,7 @@ const Item = ({
   setHasErrors,
   roomType,
   isOwner,
+  isAdmin,
   inputsRef,
   setIsOpenItemAccess,
   isMobileView,
@@ -88,6 +94,7 @@ const Item = ({
   setInvitePaidUsersCount,
   isUserTariffLimit,
   roomId,
+  style,
 }) => {
   const {
     avatar,
@@ -101,6 +108,8 @@ const Item = ({
     warning,
     isVisitor,
     status,
+    isEmailInvite,
+    userType,
   } = item;
 
   const name = isGroup
@@ -154,7 +163,7 @@ const Item = ({
     [],
   );
 
-  const type = getUserType(item);
+  const type = isEmailInvite ? userType : (getUserType(item) ?? userType);
 
   const accesses = getAccessOptions(
     t,
@@ -162,31 +171,43 @@ const Item = ({
     true,
     true,
     isOwner,
+    isAdmin,
     standalone,
   );
 
   const isRolePaid = isPaidUserRole(access);
   const isUserRolesFilterd =
-    isRolePaid && (type === "user" || type === "collaborator");
+    roomId === -1
+      ? false
+      : isRolePaid &&
+        (type === EmployeeType.Guest || type === EmployeeType.User);
+
   const isGroupRoleFiltered = isRolePaid && item.isGroup;
 
   const filteredAccesses =
-    item.isGroup || isUserRolesFilterd || type === "user"
-      ? filterPaidRoleOptions(accesses)
-      : accesses;
+    roomId === -1
+      ? accesses
+      : item.isGroup ||
+          isUserRolesFilterd ||
+          type === EmployeeType.Guest ||
+          type === EmployeeType.User
+        ? filterPaidRoleOptions(accesses)
+        : accesses;
 
   const defaultAccess =
     isUserRolesFilterd || isGroupRoleFiltered
       ? getTopFreeRole(t, roomType)
       : filteredAccesses.find((option) => option.access === +access);
 
-  const typeLabel = item?.isEmailInvite
+  const typeLabel = isEmailInvite
     ? roomId === -1 || isRolePaid
-      ? getUserTypeLabel(type, t)
+      ? getUserTypeTranslation(type, t)
       : t("Common:Guest")
-    : defaultAccess?.type === "manager" && type !== "admin" && type !== "owner"
-      ? getUserTypeLabel(defaultAccess.type, t)
-      : getUserTypeLabel(type, t);
+    : defaultAccess?.type === EmployeeType.RoomAdmin &&
+        type !== EmployeeType.Admin &&
+        type !== EmployeeType.Owner
+      ? getUserTypeTranslation(defaultAccess.type, t)
+      : getUserTypeTranslation(type, t);
 
   const errorsInList = () => {
     const hasErrors = inviteItems.some((item) => !!item.errors?.length);
@@ -375,7 +396,13 @@ const Item = ({
   );
 
   return (
-    <>
+    <StyledRow
+      key={item.id}
+      style={style}
+      className="row-item"
+      hasWarning={!!item.warning}
+      edit={edit}
+    >
       <Avatar
         size="min"
         role={type}
@@ -384,7 +411,7 @@ const Item = ({
         userName={groupName}
       />
       {edit ? editBody : displayBody}
-    </>
+    </StyledRow>
   );
 };
 

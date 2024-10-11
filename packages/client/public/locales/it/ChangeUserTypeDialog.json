@@ -1,8 +1,8 @@
 {
   "ChangeUserTypeButton": "Cambia tipo",
   "ChangeUserTypeHeader": "Cambia tipo di utente",
-  "ChangeUserTypeMessage": "Gli utenti con il tipo '{{ firstType }}' verranno spostati nel tipo '{{ secondType }}'.",
-  "ChangeUserTypeMessageMulti": "Gli utenti selezionati verranno spostati nel tipo '{{ secondType }}'.",
+  "ChangeUserTypeMessage": "Gli utenti con il tipo <strong>'{{ firstType }}'</strong> verranno spostati nel tipo <strong>'{{ secondType }}'</strong>.",
+  "ChangeUserTypeMessageMulti": "Gli utenti selezionati verranno spostati nel tipo <strong>'{{ secondType }}'</strong>.",
   "ChangeUserTypeMessageWarning": "Non puoi modificare il tipo per gli amministratori di {{productName}} e per te stesso.",
   "SuccessChangeUserType": "Il tipo di utente è stato cambiato con successo"
 }

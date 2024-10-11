@@ -33,10 +33,13 @@ import {
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
-import { getUserType, getUserTypeLabel } from "@docspace/shared/utils/common";
+import {
+  getUserType,
+  getUserTypeTranslation,
+} from "@docspace/shared/utils/common";
 import { TUser } from "@docspace/shared/api/people/types";
 import { Box } from "@docspace/shared/components/box";
-import { EmployeeStatus } from "@docspace/shared/enums";
+import { EmployeeStatus, EmployeeType } from "@docspace/shared/enums";
 
 import RemoveReactSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
 import { StyledSendClockIcon } from "SRC_DIR/components/Icons";
@@ -51,19 +54,19 @@ interface GroupMemberRowProps {
 const GroupMemberRow = ({ groupMember, removeMember }: GroupMemberRowProps) => {
   const { t } = useTranslation(["Common"]);
 
-  const role = getUserType(groupMember);
+  const type = getUserType(groupMember);
   let avatarRole = AvatarRole.user;
-  switch (role) {
-    case "owner":
+  switch (type) {
+    case EmployeeType.Owner:
       avatarRole = AvatarRole.owner;
       break;
-    case "admin":
+    case EmployeeType.Admin:
       avatarRole = AvatarRole.admin;
       break;
-    case "manager":
+    case EmployeeType.RoomAdmin:
       avatarRole = AvatarRole.manager;
       break;
-    case "collaborator":
+    case EmployeeType.User:
       avatarRole = AvatarRole.collaborator;
       break;
     default:
@@ -93,7 +96,7 @@ const GroupMemberRow = ({ groupMember, removeMember }: GroupMemberRowProps) => {
             <StyledSendClockIcon />
           )}
         </Box>
-        <div className="email">{`${getUserTypeLabel(role, t)} | ${groupMember.email}`}</div>
+        <div className="email">{`${getUserTypeTranslation(type, t)} | ${groupMember.email}`}</div>
       </div>
       <ReactSVG
         className="remove-icon"

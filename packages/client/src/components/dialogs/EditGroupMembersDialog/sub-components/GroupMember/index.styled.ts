@@ -26,6 +26,7 @@
 
 import styled, { css } from "styled-components";
 import { Base } from "@docspace/shared/themes";
+import { TextUserSelect } from "@docspace/shared/utils";
 
 export const GroupMember = styled.div<{ isExpect: boolean }>`
   display: flex;
@@ -40,6 +41,7 @@ export const GroupMember = styled.div<{ isExpect: boolean }>`
 
   .user_body-wrapper {
     overflow: auto;
+    ${TextUserSelect}
   }
 
   .info,

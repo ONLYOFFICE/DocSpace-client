@@ -1,8 +1,8 @@
 {
   "ChangeUserTypeButton": "Zmeniť typ",
   "ChangeUserTypeHeader": "Zmeňte typ používateľa",
-  "ChangeUserTypeMessage": "Používatelia s typom '{{ firstType }}' budú presunutí do typu '{{ secondType }}' .",
-  "ChangeUserTypeMessageMulti": "Vybraní používatelia budú presunutí do typu '{{secondType}}'.",
+  "ChangeUserTypeMessage": "Používatelia s typom <strong>'{{ firstType }}'</strong> budú presunutí do typu <strong>'{{ secondType }}'</strong> .",
+  "ChangeUserTypeMessageMulti": "Vybraní používatelia budú presunutí do typu <strong>'{{secondType}}'</strong>.",
   "ChangeUserTypeMessageWarning": "Nemôžete zmeniť typ pre správcov {{productName}} a pre seba.",
   "SuccessChangeUserType": "Typ používateľa bol úspešne zmenený"
 }

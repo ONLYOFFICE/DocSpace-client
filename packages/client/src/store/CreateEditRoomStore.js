@@ -293,10 +293,7 @@ class CreateEditRoomStore {
         requests.push(onSaveRoomLogo(room.id, newParams.icon, room, true));
       }
 
-      const isEditCurrentFolder = room.id === currentFolderId;
-      const needTableContentUpdate = indexingChanged && isEditCurrentFolder; //|| withPaging;
-
-      if (needTableContentUpdate)
+      if (indexingChanged)
         requests.push(updateCurrentFolder(null, currentFolderId));
 
       if (!!requests.length) {
@@ -322,22 +319,13 @@ class CreateEditRoomStore {
     const roomParams = this.roomParams;
 
     const { createTag } = this.tagsStore;
-    const { id: currentFolderId } = this.selectedFolderStore;
-    const {
-      updateCurrentFolder,
-      processCreatingRoomFromData,
-      setProcessCreatingRoomFromData,
-      setSelectedItems,
-    } = this.filesActionsStore;
+    const { processCreatingRoomFromData, setProcessCreatingRoomFromData } =
+      this.filesActionsStore;
     const { deleteThirdParty } = this.thirdPartyStore;
-    const { withPaging } = this.settingsStore;
     const {
       createRoom,
       createRoomInThirdpary,
       addTagsToRoom,
-      calculateRoomLogoParams,
-      uploadRoomLogo,
-      addLogoToRoom,
       selection,
       bufferSelection,
     } = this.filesStore;
@@ -416,7 +404,7 @@ class CreateEditRoomStore {
       if (this.dialogsStore.cover) {
         await this.dialogsStore.setRoomLogoCover(room.id);
 
-        !withPaging && this.onOpenNewRoom(room);
+        this.onOpenNewRoom(room);
       }
       // calculate and upload logo to room
       else if (roomParams.icon.uploadedFile) {
@@ -425,14 +413,14 @@ class CreateEditRoomStore {
             room.id,
             roomParams.icon,
           );
-          !withPaging && this.onOpenNewRoom(room);
+          this.onOpenNewRoom(room);
         } catch (e) {
           toastr.error(e);
           this.setIsLoading(false);
           this.setConfirmDialogIsLoading(false);
           this.onClose();
         }
-      } else !withPaging && this.onOpenNewRoom(room);
+      } else this.onOpenNewRoom(room);
 
       if (processCreatingRoomFromData) {
         const selections =
@@ -457,7 +445,6 @@ class CreateEditRoomStore {
       this.roomIsCreated = true;
     } finally {
       processCreatingRoomFromData && setProcessCreatingRoomFromData(false);
-      if (withPaging) await updateCurrentFolder(null, currentFolderId);
     }
   };
 

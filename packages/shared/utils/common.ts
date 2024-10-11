@@ -28,6 +28,7 @@
 /* eslint-disable no-multi-str */
 /* eslint-disable no-plusplus */
 
+import type { Location } from "@remix-run/router";
 import find from "lodash/find";
 import moment from "moment-timezone";
 import { findWindows } from "windows-iana";
@@ -63,6 +64,7 @@ import {
   ThemeKeys,
   ErrorKeys,
   WhiteLabelLogoType,
+  EmployeeType,
 } from "../enums";
 import {
   COOKIE_EXPIRATION_YEAR,
@@ -136,26 +138,6 @@ export const isPublicRoom = () => {
 
 export const isPublicPreview = () => {
   return window.location.pathname.includes("/share/preview/");
-};
-
-export const getUserTypeLabel = (
-  role: "owner" | "admin" | "user" | "collaborator" | "manager" | undefined,
-  t: TTranslation,
-) => {
-  switch (role) {
-    case "owner":
-      return t("Common:Owner");
-    case "admin":
-      return t("Common:PortalAdmin", { productName: t("Common:ProductName") });
-    case "manager":
-      return t("Common:RoomAdmin");
-    case "collaborator":
-      return t("Common:PowerUser");
-    case "user":
-      return t("Common:User");
-    default:
-      return t("Common:User");
-  }
 };
 
 export const parseDomain = (
@@ -297,21 +279,31 @@ export function isAdmin(currentUser: TUser) {
   );
 }
 
-export const getUserRole = (user: TUser) => {
-  if (user.isOwner) return "owner";
-  if (
-    isAdmin(user) ||
-    user.access === ShareAccessRights.RoomManager ||
-    user.access === ShareAccessRights.Collaborator
-  )
-    // TODO: Change to People Product Id const
-    return "admin";
-  // TODO: Need refactoring
-  if (user.isVisitor) return "user";
-  if (user.isCollaborator) return "collaborator";
-  if (user.isRoomAdmin) return "manager";
+export const getUserType = (user: TUser) => {
+  if (user.isOwner) return EmployeeType.Owner;
+  if (isAdmin(user)) return EmployeeType.Admin;
+  if (user.isRoomAdmin) return EmployeeType.RoomAdmin;
+  if (user.isCollaborator) return EmployeeType.User;
+  if (user.isVisitor) return EmployeeType.Guest;
+  return EmployeeType.Guest;
+};
 
-  return "user";
+export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {
+  switch (type) {
+    case EmployeeType.Owner:
+      return t("Common:Owner");
+    case EmployeeType.Admin:
+      return t("Common:PortalAdmin", {
+        productName: t("Common:ProductName"),
+      });
+    case EmployeeType.RoomAdmin:
+      return t("Common:RoomAdmin");
+    case EmployeeType.User:
+      return t("Common:User");
+    case EmployeeType.Guest:
+    default:
+      return t("Common:Guest");
+  }
 };
 
 export function clickBackdrop() {
@@ -1210,7 +1202,7 @@ export const getUserTypeName = (
 
   if (isRoomAdmin) return t("Common:RoomAdmin");
 
-  if (isCollaborator) return t("Common:PowerUser");
+  if (isCollaborator) return t("Common:User");
 
   return t("Common:User");
 };
@@ -1228,7 +1220,7 @@ export const getUserTypeDescription = (
 
   if (isRoomAdmin) return t("Translations:RoleRoomAdminDescription");
 
-  if (isCollaborator) return t("Translations:RolePowerUserDescription");
+  if (isCollaborator) return t("Translations:RoleNewUserDescription");
 
   return t("Translations:RoleViewerDescription");
 };

@@ -124,16 +124,6 @@ class ProfileActionsStore {
     this.isDebugDialogVisible = visible;
   };
 
-  getUserRole = (user) => {
-    let isModuleAdmin =
-      user?.listAdminModules && user?.listAdminModules?.length;
-
-    if (user.isOwner) return "owner";
-    if (user.isAdmin || isModuleAdmin) return "admin";
-    if (user.isVisitor) return "user";
-    return "manager";
-  };
-
   onProfileClick = (obj) => {
     const { isAdmin, isOwner } = this.userStore.user;
     const { isRoomAdmin } = this.authStore;

@@ -37,9 +37,9 @@ import { ComboBox } from "@docspace/shared/components/combobox";
 import SpaceQuota from "SRC_DIR/components/SpaceQuota";
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 import { StyledAccountContent } from "../../styles/accounts";
-import { getUserTypeLabel } from "@docspace/shared/utils/common";
+import { getUserTypeTranslation } from "@docspace/shared/utils/common";
 
-import { EmployeeStatus } from "@docspace/shared/enums";
+import { EmployeeStatus, EmployeeType } from "@docspace/shared/enums";
 
 const Accounts = (props) => {
   const {
@@ -87,31 +87,31 @@ const Accounts = (props) => {
 
     const adminOption = {
       id: "info-account-type_portal-admin",
-      key: "admin",
-      title: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
-      label: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
-      action: "admin",
+      key: EmployeeType.Admin,
+      title: getUserTypeTranslation(EmployeeType.Admin, t),
+      label: getUserTypeTranslation(EmployeeType.Admin, t),
+      action: EmployeeType.Admin,
     };
     const managerOption = {
       id: "info-account-type_room-admin",
-      key: "manager",
-      title: t("Common:RoomAdmin"),
-      label: t("Common:RoomAdmin"),
-      action: "manager",
+      key: EmployeeType.RoomAdmin,
+      title: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
+      label: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
+      action: EmployeeType.RoomAdmin,
     };
     const collaboratorOption = {
       id: "info-account-type_collaborator",
-      key: "collaborator",
-      title: t("Common:PowerUser"),
-      label: t("Common:PowerUser"),
-      action: "collaborator",
+      key: EmployeeType.User,
+      title: getUserTypeTranslation(EmployeeType.User, t),
+      label: getUserTypeTranslation(EmployeeType.User, t),
+      action: EmployeeType.User,
     };
     const userOption = {
       id: "info-account-type_user",
-      key: "user",
-      title: t("Common:User"),
-      label: t("Common:User"),
-      action: "user",
+      key: EmployeeType.Guest,
+      title: getUserTypeTranslation(EmployeeType.Guest, t),
+      label: getUserTypeTranslation(EmployeeType.Guest, t),
+      action: EmployeeType.Guest,
     };
 
     isOwner && options.push(adminOption);
@@ -161,7 +161,7 @@ const Accounts = (props) => {
   const renderTypeData = () => {
     const typesOptions = getTypesOptions();
 
-    const typeLabel = getUserTypeLabel(role, t);
+    const typeLabel = getUserTypeTranslation(role, t);
 
     const combobox = (
       <ComboBox
@@ -206,7 +206,8 @@ const Accounts = (props) => {
 
   const typeData = renderTypeData();
 
-  const statusText = isVisitor ? t("Common:Free") : t("Common:Paid");
+  const statusText =
+    isVisitor || isCollaborator ? t("Common:Free") : t("Common:Paid");
 
   return (
     <>
@@ -320,7 +321,7 @@ export default inject(
     settingsStore,
   }) => {
     const { isOwner, isAdmin, id: selfId } = userStore.user;
-    const { changeType: changeUserType, usersStore } = peopleStore;
+    const { usersStore } = peopleStore;
     const { canChangeUserType } = accessRightsStore;
 
     const { setInfoPanelSelection } = infoPanelStore;
@@ -328,7 +329,8 @@ export default inject(
     const {
       setSelection: setPeopleSelection,
       setBufferSelection: setPeopleBufferSelection,
-    } = peopleStore.selectionStore;
+      changeType: changeUserType,
+    } = usersStore;
 
     const { showStorageInfo } = currentQuotaStore;
     const { standalone } = settingsStore;

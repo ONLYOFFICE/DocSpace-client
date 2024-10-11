@@ -735,7 +735,7 @@ class TableHeaderComponent extends React.Component<
 
                 if (defaultColumnSize) {
                   newItemWidth = `${defaultColumnSize}px`;
-                } else if (columns[index].key === "Index") {
+                } else if (columns[index]?.key === "Index") {
                   if (
                     shortColumSize &&
                     getSubstring(item) === +shortColumSize
@@ -749,7 +749,7 @@ class TableHeaderComponent extends React.Component<
                       100
                     }px`;
                   }
-                } else if (columns[index].key === "Name") {
+                } else if (columns[index]?.key === "Name") {
                   newItemWidth = `${
                     ((contentWidth -
                       enabledColumnsCount * DEFAULT_MIN_COLUMN_SIZE) *
@@ -762,7 +762,7 @@ class TableHeaderComponent extends React.Component<
 
                 // Checking whether the name column is less than the minimum width
                 if (
-                  columns[index].key === "Name" &&
+                  columns[index]?.key === "Name" &&
                   getSubstring(newItemWidth) < MIN_SIZE_NAME_COLUMN &&
                   !shortColumSize
                 ) {
@@ -773,7 +773,7 @@ class TableHeaderComponent extends React.Component<
 
                 // Checking whether the index column is less than the minimum width
                 if (
-                  columns[index].key === "Index" &&
+                  columns[index]?.key === "Index" &&
                   shortColumSize &&
                   getSubstring(newItemWidth) < +shortColumSize
                 ) {
@@ -907,8 +907,9 @@ class TableHeaderComponent extends React.Component<
               const minSize = minWidth ? +minWidth : MIN_SIZE_NAME_COLUMN;
 
               // Checking whether the name column is less than the minimum width
+
               if (
-                columns[index].key === "Name" &&
+                columns[index]?.key === "Name" &&
                 getSubstring(newItemWidth) < minSize &&
                 !shortColumSize
               ) {
@@ -918,7 +919,7 @@ class TableHeaderComponent extends React.Component<
 
               // Checking whether the index column is less than the minimum width
               if (
-                columns[index].key === "Index" &&
+                columns[index]?.key === "Index" &&
                 shortColumSize &&
                 getSubstring(newItemWidth) < +shortColumSize
               ) {
@@ -929,7 +930,7 @@ class TableHeaderComponent extends React.Component<
               // Set the previous minimum width of the index column
               // if the user has not changed the width of this column
               if (
-                columns[index].key === "Index" &&
+                columns[index]?.key === "Index" &&
                 shortColumSize &&
                 getSubstring(newItemWidth) > +shortColumSize &&
                 minWidthsIndex.includes(getSubstring(newItemWidth)) &&
@@ -940,8 +941,8 @@ class TableHeaderComponent extends React.Component<
 
               // Checking whether columns are smaller than the minimum width
               if (
-                columns[index].key !== "Index" &&
-                columns[index].key !== "Name" &&
+                columns[index]?.key !== "Index" &&
+                columns[index]?.key !== "Name" &&
                 !defaultColumnSize &&
                 getSubstring(newItemWidth) < DEFAULT_MIN_COLUMN_SIZE
               ) {
@@ -1047,7 +1048,7 @@ class TableHeaderComponent extends React.Component<
       const minSize = minWidth ? +minWidth : MIN_SIZE_NAME_COLUMN;
 
       if (
-        (columns[index].key === "Name" || columns[index].key === "Index"
+        (columns[index]?.key === "Name" || columns[index]?.key === "Index"
           ? minSize
           : DEFAULT_MIN_COLUMN_SIZE) !== getSubstring(item)
       )
@@ -1067,7 +1068,7 @@ class TableHeaderComponent extends React.Component<
       const itemSubstring = getSubstring(item);
 
       if (
-        (columns[index].key === "Name" || columns[index].key === "Index"
+        (columns[index]?.key === "Name" || columns[index]?.key === "Index"
           ? minSize
           : DEFAULT_MIN_COLUMN_SIZE) === itemSubstring
       )
@@ -1075,7 +1076,7 @@ class TableHeaderComponent extends React.Component<
 
       const differenceWithMinimum =
         itemSubstring -
-        (columns[index].key === "Name" || columns[index].key === "Index"
+        (columns[index]?.key === "Name" || columns[index]?.key === "Index"
           ? minSize
           : DEFAULT_MIN_COLUMN_SIZE);
 
@@ -1083,7 +1084,7 @@ class TableHeaderComponent extends React.Component<
         newGridTemplateColumns[index] = `${itemSubstring - addWidth}px`;
       } else {
         newGridTemplateColumns[index] = `${
-          columns[index].key === "Name" || columns[index].key === "Index"
+          columns[index]?.key === "Name" || columns[index]?.key === "Index"
             ? minSize
             : DEFAULT_MIN_COLUMN_SIZE
         }px`;

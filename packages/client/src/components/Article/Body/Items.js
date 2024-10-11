@@ -63,7 +63,7 @@ const Item = ({
   getFolderIcon,
   setBufferSelection,
   isActive,
-  getEndOfBlock,
+  isLastItem,
   showText,
   onClick,
   onMoveTo,
@@ -177,7 +177,7 @@ const Item = ({
         isActive={isActive}
         onClick={onClickAction}
         onDrop={onMoveTo}
-        isEndOfBlock={getEndOfBlock(item)}
+        isEndOfBlock={isLastItem}
         isDragging={isDragging}
         isDragActive={isDragActive && isDragging}
         value={value}
@@ -244,17 +244,6 @@ const Items = ({
   getLinkData,
   roomsFolderId,
 }) => {
-  const getEndOfBlock = React.useCallback((item) => {
-    switch (item.key) {
-      case "0-3":
-      case "0-5":
-      case "0-6":
-        return true;
-      default:
-        return false;
-    }
-  }, []);
-
   const getFolderIcon = React.useCallback((item) => {
     return getCatalogIconUrlByType(item.rootFolderType);
   }, []);
@@ -358,7 +347,7 @@ const Items = ({
             dragging={dragging}
             getFolderIcon={getFolderIcon}
             isActive={item.id === activeItemId}
-            getEndOfBlock={getEndOfBlock}
+            isLastItem={index === data.length - 1}
             showText={showText}
             onClick={onClick}
             getLinkData={getLinkData}
@@ -377,7 +366,7 @@ const Items = ({
         );
       });
 
-      if (!isVisitor && !isCollaborator)
+      if (!isVisitor)
         items.splice(
           3,
           0,
@@ -404,7 +393,6 @@ const Items = ({
       onClick,
       getLinkData,
       onMoveTo,
-      getEndOfBlock,
       showDragItems,
       showText,
       setDragging,

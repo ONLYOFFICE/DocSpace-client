@@ -38,7 +38,8 @@ const LeaveRoomDialog = (props) => {
     visible,
     setIsVisible,
     setChangeRoomOwnerIsVisible,
-    isOwner,
+    isRoomOwner,
+    canChangeOwner,
     onLeaveRoomAction,
     updateInfoPanelSelection,
   } = props;
@@ -59,12 +60,12 @@ const LeaveRoomDialog = (props) => {
   };
 
   const onLeaveRoom = async () => {
-    if (isOwner) {
+    if (canChangeOwner) {
       setChangeRoomOwnerIsVisible(true);
       onClose();
     } else {
       setIsLoading(true);
-      await onLeaveRoomAction(t, isOwner);
+      await onLeaveRoomAction(t, isRoomOwner);
       setIsLoading(false);
       updateInfoPanelSelection();
       onClose();
@@ -79,7 +80,7 @@ const LeaveRoomDialog = (props) => {
       <ModalDialog.Body>
         <div className="modal-dialog-content-body">
           <Text noSelect>
-            {isOwner
+            {isRoomOwner
               ? t("Files:LeaveRoomDescription")
               : t("Files:WantLeaveRoom")}
           </Text>
@@ -88,7 +89,7 @@ const LeaveRoomDialog = (props) => {
       <ModalDialog.Footer>
         <Button
           key="OkButton"
-          label={isOwner ? t("Files:AssignOwner") : t("Common:OKButton")}
+          label={isRoomOwner ? t("Files:AssignOwner") : t("Common:OKButton")}
           size="normal"
           primary
           scale
@@ -130,12 +131,14 @@ export default inject(
     const folderItem = selections[0] ? selections[0] : selectedFolderStore;
 
     const isRoomOwner = folderItem?.createdBy?.id === user.id;
+    const canChangeOwner = folderItem?.security?.ChangeOwner;
 
     return {
       visible,
       setIsVisible,
       setChangeRoomOwnerIsVisible,
-      isOwner: isRoomOwner,
+      isRoomOwner,
+      canChangeOwner: canChangeOwner,
       onLeaveRoomAction: filesActionsStore.onLeaveRoom,
       updateInfoPanelSelection,
     };

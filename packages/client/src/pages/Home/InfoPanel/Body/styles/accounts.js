@@ -27,6 +27,7 @@
 import styled, { css } from "styled-components";
 import { Base } from "@docspace/shared/themes";
 import { mobile, tablet } from "@docspace/shared/utils";
+import { TextUserSelect } from "@docspace/shared/utils";
 
 const StyledAccountsItemTitle = styled.div`
   min-height: 80px;
@@ -79,6 +80,7 @@ const StyledAccountsItemTitle = styled.div`
       font-weight: 700;
       font-size: 16px;
       line-height: 22px;
+      ${TextUserSelect}
     }
 
     .info-text__email {

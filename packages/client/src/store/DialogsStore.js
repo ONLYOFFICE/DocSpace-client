@@ -65,6 +65,7 @@ class DialogsStore {
   editGroupMembersDialogVisible = false;
   conflictResolveDialogVisible = false;
   convertDialogVisible = false;
+  convertDialogData = null;
   selectFileDialogVisible = false;
   selectFileFormRoomDialogVisible = false;
   convertPasswordDialogVisible = false;
@@ -112,7 +113,6 @@ class DialogsStore {
   saveAfterReconnectOAuth = false;
   createRoomDialogVisible = false;
   createRoomConfirmDialogVisible = false;
-  changeUserTypeDialogVisible = false;
   editLinkPanelIsVisible = false;
   embeddingPanelData = { visible: false, item: null };
   submitToGalleryDialogVisible = false;
@@ -358,6 +358,10 @@ class DialogsStore {
     this.convertDialogVisible = visible;
   };
 
+  setConvertDialogData = (convertDialogData) => {
+    this.convertDialogData = convertDialogData;
+  };
+
   setConvertPasswordDialogVisible = (visible) => {
     this.convertPasswordDialogVisible = visible;
   };
@@ -436,8 +440,7 @@ class DialogsStore {
   isPaidUserAccess = (selectedAccess) => {
     return (
       selectedAccess === EmployeeType.Admin ||
-      selectedAccess === EmployeeType.Collaborator ||
-      selectedAccess === EmployeeType.User
+      selectedAccess === EmployeeType.RoomAdmin
     );
   };
 
@@ -457,7 +460,11 @@ class DialogsStore {
 
       this.setInvitePaidUsersCount(modifier);
 
-      this.inviteItems[index] = { ...this.inviteItems[index], ...item };
+      this.inviteItems[index] = {
+        ...this.inviteItems[index],
+        ...item,
+        warning: false,
+      };
     });
 
   setQuotaWarningDialogVisible = (inviteQuotaWarningDialogVisible) => {
@@ -478,10 +485,6 @@ class DialogsStore {
 
   setCreateRoomConfirmDialogVisible = (createRoomConfirmDialogVisible) => {
     this.createRoomConfirmDialogVisible = createRoomConfirmDialogVisible;
-  };
-
-  setChangeUserTypeDialogVisible = (changeUserTypeDialogVisible) => {
-    this.changeUserTypeDialogVisible = changeUserTypeDialogVisible;
   };
 
   setSubmitToGalleryDialogVisible = (submitToGalleryDialogVisible) => {

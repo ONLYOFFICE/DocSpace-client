@@ -76,7 +76,7 @@ const AccountsTable = (props: AccountsTableProps) => {
     },
     {
       key: UserTypes.User,
-      label: t(`Common:PowerUser`),
+      label: t(`Common:User`),
       onClick: setTypeUser,
     },
   ];

@@ -144,7 +144,6 @@ const Table = ({
   isRooms,
   isTrashFolder,
   isIndexEditingMode,
-  withPaging,
   columnStorageName,
   columnInfoPanelStorageName,
   highlightFile,
@@ -247,7 +246,7 @@ const Table = ({
 
   return (
     <StyledTableContainer
-      useReactWindow={!withPaging}
+      useReactWindow
       forwardedRef={ref}
       isIndexEditingMode={isIndexEditingMode}
     >
@@ -269,7 +268,7 @@ const Table = ({
         filesLength={filesList.length}
         hasMoreFiles={hasMoreFiles}
         itemCount={filterTotal}
-        useReactWindow={!withPaging}
+        useReactWindow
         infoPanelVisible={infoPanelVisible}
         isIndexEditingMode={isIndexEditingMode}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
@@ -318,7 +317,7 @@ export default inject(
     const { isIndexEditingMode } = indexingStore;
     const { changeIndex } = filesActionsStore;
     const { isIndexedFolder } = selectedFolderStore;
-    const { withPaging, theme, currentDeviceType } = settingsStore;
+    const { theme, currentDeviceType } = settingsStore;
 
     return {
       filesList,
@@ -336,7 +335,6 @@ export default inject(
       isTrashFolder,
       isIndexEditingMode,
       isIndexing: isIndexedFolder,
-      withPaging,
       columnStorageName,
       columnInfoPanelStorageName,
       highlightFile,

@@ -37,8 +37,8 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { createGroup } from "@docspace/shared/api/groups";
 import { TUser } from "@docspace/shared/api/people/types";
-import PeopleStore from "SRC_DIR/store/PeopleStore";
-import GroupsStore from "SRC_DIR/store/GroupsStore";
+import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
+import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 
 import { StyledBodyContent } from "./CreateEditGroupDialog.styled";
 import { GroupParams } from "./types";

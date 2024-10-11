@@ -1,8 +1,8 @@
 {
   "ChangeUserTypeButton": "Türü değiştir",
   "ChangeUserTypeHeader": "Kullanıcı türünü değiştir",
-  "ChangeUserTypeMessage": "'{{ firstType }}' türündeki kullanıcılar '{{ secondType }}' türüne taşınacaktır.",
-  "ChangeUserTypeMessageMulti": "Seçilen kullanıcılar '{{ secondType }}' türüne taşınacaktır.",
+  "ChangeUserTypeMessage": "<strong>'{{ firstType }}'</strong> türündeki kullanıcılar <strong>'{{ secondType }}'</strong> türüne taşınacaktır.",
+  "ChangeUserTypeMessageMulti": "Seçilen kullanıcılar <strong>'{{ secondType }}'</strong> türüne taşınacaktır.",
   "ChangeUserTypeMessageWarning": "{{productName}} yöneticileri ve kendiniz için türü değiştiremezsiniz.",
   "SuccessChangeUserType": "Kullanıcı türü başarıyla değiştirildi"
 }

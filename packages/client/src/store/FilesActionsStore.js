@@ -286,9 +286,9 @@ class FilesActionStore {
     const { setPrimaryProgressBarData, clearPrimaryProgressData } =
       this.uploadDataStore.primaryProgressDataStore;
 
-    const roomFolder = this.selectedFolderStore.navigationPath.find(
-      (r) => r.isRoom,
-    );
+    const roomFolder =
+      this.selectedFolderStore.navigationPath.find((r) => r.isRoom) ??
+      this.selectedFolderStore.getSelectedFolder();
 
     const withoutHiddenFiles = Object.values(files).filter((f) => {
       const isHidden = /(^|\/)\.[^\/\.]/g.test(f.name);

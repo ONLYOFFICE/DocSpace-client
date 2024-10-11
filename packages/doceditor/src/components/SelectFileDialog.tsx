@@ -42,6 +42,7 @@ const SelectFileDialog = ({
   onSubmit,
   fileInfo,
   filesSettings,
+  shareKey,
 }: SelectFileDialogProps) => {
   const { t } = useTranslation();
 
@@ -75,6 +76,8 @@ const SelectFileDialog = ({
 
   const listTitle = selectFilesListTitle();
 
+  const openRoot = Boolean(shareKey);
+
   return (
     <FilesSelectorWrapper
       filesSettings={filesSettings}
@@ -89,7 +92,7 @@ const SelectFileDialog = ({
       onSubmit={onSubmit}
       isRoomsOnly={false}
       isThirdParty={false}
-      currentFolderId={fileInfo.folderId}
+      currentFolderId={openRoot ? "" : fileInfo.folderId}
       rootFolderType={fileInfo.rootFolderType}
       withHeader
       headerLabel={headerLabel}
@@ -111,6 +114,8 @@ const SelectFileDialog = ({
       cancelButtonId="select-file-modal-cancel"
       {...fileTypeDetection}
       withCreate={false}
+      shareKey={shareKey}
+      openRoot={openRoot}
     />
   );
 };

@@ -58,7 +58,8 @@ const compareFunction = (prevProps: ItemProps, nextProps: ItemProps) => {
     prevItem?.id === nextItem?.id &&
     prevItem?.label === nextItem?.label &&
     prevItem?.isSelected === nextItem?.isSelected &&
-    nextData?.inputItemVisible === prevData?.inputItemVisible
+    nextData?.inputItemVisible === prevData?.inputItemVisible &&
+    nextData?.listHeight === prevData?.listHeight
   );
 };
 
@@ -74,6 +75,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
     inputItemVisible,
     savedInputValue,
     setSavedInputValue,
+    listHeight,
   }: Data = data;
   const { t } = useTranslation(["Common"]);
 
@@ -143,6 +145,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           label={label}
           onCreateClick={onCreateClick}
           dropDownItems={dropDownItems}
+          listHeight={listHeight}
           style={style}
           hotkey={hotkey}
           inputItemVisible={inputItemVisible}

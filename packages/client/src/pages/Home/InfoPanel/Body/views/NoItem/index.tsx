@@ -24,52 +24,39 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import EmptyScreenPersonSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
-import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
-import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/empty_screen_alt.svg?url";
-import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_alt_dark.svg?url";
-
 import React from "react";
-import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { Text } from "@docspace/shared/components/text";
-import { StyledSeveralItemsContainer } from "../../styles/severalItems";
 
-const SeveralItems = ({ isPeople, theme, selectedItems }) => {
-  const { t } = useTranslation("InfoPanel");
+import NoGalleryItem from "./NoGalleryItem";
+import NoRoomItem from "./NoRoomItem";
+import NoFileOrFolderItem from "./NoFileOrFolderItem";
+import NoContactsItem from "./NoContactsItem";
 
-  const emptyScreenAlt = theme.isBase
-    ? EmptyScreenAltSvgUrl
-    : EmptyScreenAltSvgDarkUrl;
-
-  const emptyScreenPerson = theme.isBase
-    ? EmptyScreenPersonSvgUrl
-    : EmptyScreenPersonSvgDarkUrl;
-
-  const imgSrc = isPeople ? emptyScreenPerson : emptyScreenAlt;
-
-  const itemsText = isPeople
-    ? t("InfoPanel:SelectedUsers")
-    : t("InfoPanel:ItemsSelected");
-
-  return (
-    <StyledSeveralItemsContainer
-      isPeople={isPeople}
-      className="no-thumbnail-img-wrapper"
-    >
-      <img src={imgSrc} />
-      <Text fontSize="16px" fontWeight={700}>
-        {`${itemsText}: ${selectedItems.length}`}
-      </Text>
-    </StyledSeveralItemsContainer>
-  );
+type NoItemsProps = {
+  isUsers: boolean;
+  isGroups: boolean;
+  isGuests: boolean;
+  isGallery: boolean;
+  isRooms: boolean;
+  isFiles: boolean;
 };
 
-export default inject(({ settingsStore, infoPanelStore }) => {
-  const selectedItems = infoPanelStore.infoPanelSelectedItems;
+const NoItem = ({
+  isUsers,
+  isGroups,
+  isGuests,
+  isGallery,
+  isRooms,
+  isFiles,
+}: NoItemsProps) => {
+  const { t } = useTranslation(["InfoPanel", "FormGallery"]);
 
-  return {
-    theme: settingsStore.theme,
-    selectedItems,
-  };
-})(observer(SeveralItems));
+  if (isGroups || isUsers || isGuests)
+    return <NoContactsItem t={t} isGuests={isGuests} isGroups={isGroups} />;
+  if (isGallery) return <NoGalleryItem t={t} />;
+  if (isFiles) return <NoFileOrFolderItem t={t} theme={undefined} />;
+  if (isRooms) return <NoRoomItem t={t} theme={undefined} />;
+
+  return null;
+};
+export default NoItem;

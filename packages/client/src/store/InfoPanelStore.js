@@ -200,12 +200,14 @@ class InfoPanelStore {
       bufferSelection: groupsBufferSelection,
     } = this.peopleStore.groupsStore;
 
-    if (this.getIsPeople() || this.getIsGroups()) {
+    const isGroups = this.getIsContacts() === "groups";
+
+    if (!isGroups) {
       if (peopleSelection.length) return [...peopleSelection];
       if (peopleBufferSelection) return [peopleBufferSelection];
     }
 
-    if (this.getIsGroups()) {
+    if (isGroups) {
       if (groupsSelection.length) return [...groupsSelection];
       if (groupsBufferSelection) return [groupsBufferSelection];
     }
@@ -220,7 +222,9 @@ class InfoPanelStore {
     const isRooms = this.getIsRooms();
     const { currentGroup } = this.peopleStore.groupsStore;
 
-    if (this.getIsGroups()) {
+    console.log(this.getIsContacts(), currentGroup);
+
+    if (this.getIsContacts() === "groups") {
       return {
         ...currentGroup,
         isGroup: true,
@@ -279,6 +283,8 @@ class InfoPanelStore {
     const selectedItems = this.infoPanelSelectedItems; //files list
     const selectedFolder = this.getInfoPanelSelectedFolder(); // root or current folder
     let newInfoPanelSelection = this.infoPanelSelection;
+
+    console.log(selectedItems);
 
     if (!selectedItems.length) {
       newInfoPanelSelection = this.normalizeSelection(selectedFolder);
@@ -475,25 +481,6 @@ class InfoPanelStore {
     return getContactsView({ pathname });
   };
 
-  getIsPeople = (givenPathName) => {
-    const pathname = givenPathName || window.location.pathname.toLowerCase();
-    return pathname.indexOf("accounts/people") !== -1;
-  };
-
-  getIsGroups = (givenPathName) => {
-    const pathname = givenPathName || window.location.pathname.toLowerCase();
-    return pathname.indexOf("accounts/groups") !== -1;
-  };
-
-  getIsInsideGroup = (givenPathName) => {
-    const pathname = givenPathName || window.location.pathname.toLowerCase();
-    return (
-      pathname.indexOf("accounts") !== -1 &&
-      pathname.indexOf("groups/filter") === -1 &&
-      pathname.indexOf("people/filter") === -1
-    );
-  };
-
   getIsGallery = (givenPathName) => {
     const pathname = givenPathName || window.location.pathname.toLowerCase();
     return pathname.indexOf("form-gallery") !== -1;
@@ -514,7 +501,7 @@ class InfoPanelStore {
     }
 
     if (
-      this.getIsPeople() &&
+      this.getIsContacts() &&
       (!infoPanelSelection.email || !infoPanelSelection.displayName)
     ) {
       this.infoPanelSelection = infoPanelSelection.length

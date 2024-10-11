@@ -24,33 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import EmptyScreenPersonSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
-import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
-import React from "react";
-import { inject, observer } from "mobx-react";
+import { TFile, TFolder } from "@docspace/shared/api/files/types";
+import { TGroup } from "@docspace/shared/api/groups/types";
+import { TUser } from "@docspace/shared/api/people/types";
+import { TRoom } from "@docspace/shared/api/rooms/types";
 
-import { Text } from "@docspace/shared/components/text";
-import { StyledNoItemContainer } from "../../styles/noItem";
-
-const NoGroupsItem = ({ t, theme }) => {
-  const imgSrc = theme.isBase
-    ? EmptyScreenPersonSvgUrl
-    : EmptyScreenPersonSvgDarkUrl;
-
-  return (
-    <StyledNoItemContainer>
-      <div className="no-thumbnail-img-wrapper no-accounts">
-        <img src={imgSrc} />
-      </div>
-      <Text className="no-item-text" textAlign="center">
-        {t("InfoPanel:GroupsEmptyScreenText")}
-      </Text>
-    </StyledNoItemContainer>
-  );
-};
-
-export default inject(({ settingsStore }) => {
-  return {
-    theme: settingsStore.theme,
-  };
-})(observer(NoGroupsItem));
+export type TInfoPanelSelection =
+  | TFile
+  | TFolder
+  | (TFile | TFolder)[]
+  | TRoom
+  | TRoom[]
+  | TUser
+  | TUser[]
+  | TGroup
+  | TGroup[];

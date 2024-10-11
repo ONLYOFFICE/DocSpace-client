@@ -45,8 +45,7 @@ const InfoPanelBodyContent = ({
   fileView,
   getIsFiles,
   getIsRooms,
-  getIsPeople,
-  getIsGroups,
+  getIsContacts,
   getIsGallery,
   gallerySelected,
   isRootFolder,
@@ -73,49 +72,37 @@ const InfoPanelBodyContent = ({
   const [selectedItems, setSelectedItems] = useState(props.selectedItems);
   const [selectedFolder, setSelectedFolder] = useState(props.selectedFolder);
 
+  const contactsView = getIsContacts();
+
   const isFiles = getIsFiles();
   const isRooms = getIsRooms();
   const isGallery = getIsGallery();
-  const isInsideGroup = getIsGroups() && groupId;
-  const isGroups =
-    getIsGroups() ||
-    (isInsideGroup &&
-      (!selectedItems.length ||
-        (selectedItems[0]?.membersCount !== null &&
-          selectedItems[0]?.membersCount !== undefined)));
-  const isPeople =
-    getIsPeople() ||
-    (getIsGroups() &&
-      !isInsideGroup &&
-      !(
-        selectedItems[0]?.membersCount !== null &&
-        selectedItems[0]?.membersCount !== undefined
-      )) ||
-    (isInsideGroup &&
-      selectedItems.length &&
-      !selectedItems[0].hasOwnProperty("membersCount"));
+  const isGroups = contactsView === "groups";
+  const isGuests = contactsView === "guests";
+  const isUsers =
+    (contactsView === "inside_group" && groupId) || contactsView === "people";
 
   const isSeveralItems = props.selectedItems?.length > 1;
 
   const isNoItemGallery = isGallery && !gallerySelected;
-  const isNoItemPeople = isPeople && !isInsideGroup && !selectedItems.length;
-  const isNoItemGroups = isGroups && !isInsideGroup && !selectedItems.length;
   const isRoot =
     infoPanelSelection?.isFolder &&
     infoPanelSelection?.id === infoPanelSelection?.rootFolderId;
   const isNoItem =
     !infoPanelSelection ||
-    isNoItemPeople ||
+    ((isUsers || isGuests || isGroups) && !selectedItems.length) ||
     isNoItemGallery ||
-    isNoItemGroups ||
     (isRoot && !isGallery);
+
+  console.log(selectedItems.length, infoPanelSelection);
 
   const defaultProps = {
     infoPanelSelection,
     isFiles,
     isRooms,
-    isPeople,
+    isUsers,
     isGroups,
+    isGuests,
     isGallery,
     isRootFolder: selectedFolder.id === selectedFolder.rootFolderId,
     isSeveralItems,
@@ -145,11 +132,13 @@ const InfoPanelBodyContent = ({
   const getView = () => {
     const currentView = isRooms ? roomsView : fileView;
 
+    console.log(isSeveralItems, isNoItem);
+
     if (isNoItem) return viewHelper.NoItemView();
     if (isSeveralItems) return viewHelper.SeveralItemsView();
 
     if (isGallery) return viewHelper.GalleryView();
-    if (isPeople) return viewHelper.AccountsView();
+    if (isUsers) return viewHelper.AccountsView();
     if (isGroups) return viewHelper.GroupsView();
 
     switch (currentView) {
@@ -260,8 +249,7 @@ export default inject(
       getIsGallery,
       infoPanelSelectedItems,
       getInfoPanelSelectedFolder,
-      getIsPeople,
-      getIsGroups,
+      getIsContacts,
       showSearchBlock,
       setShowSearchBlock,
     } = infoPanelStore;
@@ -294,8 +282,7 @@ export default inject(
       fileView,
       getIsFiles,
       getIsRooms,
-      getIsPeople,
-      getIsGroups,
+      getIsContacts,
       getIsGallery,
 
       selectedItems: infoPanelSelectedItems,

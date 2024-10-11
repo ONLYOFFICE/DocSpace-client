@@ -31,21 +31,19 @@ import { FolderType } from "@docspace/shared/enums";
 import { AsideHeader } from "@docspace/shared/components/aside";
 import { Tabs } from "@docspace/shared/components/tabs";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import { TFile, TFolder } from "@docspace/shared/api/files/types";
-import { TGroup } from "@docspace/shared/api/groups/types";
-import { TUser } from "@docspace/shared/api/people/types";
-import { TRoom } from "@docspace/shared/api/rooms/types";
 
 import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 import PluginStore from "SRC_DIR/store/PluginStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 
+import { TInfoPanelSelection } from "../InfoPanel.types";
+
 import { StyledInfoPanelHeader } from "./Header.styled";
 
 type InfoPanelHeaderContentProps = {
   // TODO change InfoPanelStore["infoPanelSelection"]
-  selection: TFile | TFolder | TRoom | TUser | TGroup;
+  selection: TInfoPanelSelection;
   setIsVisible: InfoPanelStore["setIsVisible"];
   roomsView: InfoPanelStore["roomsView"];
   fileView: InfoPanelStore["fileView"];
@@ -84,6 +82,7 @@ const InfoPanelHeaderContent = ({
 
   const isRoot =
     !isSeveralItems &&
+    selection &&
     "isFolder" in selection &&
     "rootFolderId" in selection &&
     selection.isFolder &&

@@ -36,6 +36,7 @@ import {
 } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
+import { deletePortal } from "@docspace/shared/api/management";
 
 import { useStore } from "SRC_DIR/store";
 
@@ -116,8 +117,20 @@ const DeletePortalDialog = () => {
 
   const onClose = () => setDeletePortalDialogVisible(false);
 
-  const onDelete = () => {
-    onOpenSignInWindow();
+  const onDelete = async () => {
+    if (!currentPortal?.wizardSettings?.completed) {
+      try {
+        await deletePortal({ portalName: domain });
+        await getAllPortals();
+        toastr.success(
+          t("PortalDeleted", { productName: t("Common:ProductName") })
+        );
+      } catch (e) {
+        toastr.error(e);
+      }
+    } else {
+      onOpenSignInWindow();
+    }
     onClose();
   };
 

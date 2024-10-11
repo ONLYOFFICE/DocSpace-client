@@ -397,6 +397,10 @@ const SectionHeaderContent = (props) => {
     setReorderDialogVisible(true);
   };
 
+  const onLogoClick = () => {
+    moveToPublicRoom(props.rootFolderId);
+  };
+
   const headerMenu = isIndexEditingMode
     ? [
         {
@@ -609,6 +613,7 @@ const SectionHeaderContent = (props) => {
                 tariffBar={<TariffBar />}
                 showNavigationButton={!!showNavigationButton}
                 onContextOptionsClick={onContextOptionsClick}
+                onLogoClick={onLogoClick}
               />
             </div>
           )}
@@ -795,6 +800,10 @@ export default inject(
         ? false
         : security?.Read && isShared;
 
+    const rootFolderId = navigationPath.length
+      ? navigationPath[navigationPath.length - 1]?.id
+      : selectedFolder.id;
+
     return {
       showText: settingsStore.showText,
       isDesktop: settingsStore.isDesktopClient,
@@ -881,6 +890,8 @@ export default inject(
       createFoldersTree,
       getContactsModel,
       contactsCanCreate,
+
+      rootFolderId,
     };
   },
 )(

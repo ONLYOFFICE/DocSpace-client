@@ -5,7 +5,6 @@
   "CreateSpaceDescription": "Domeniul dvs a fost conectat cu succes la adresa dvs IP. Pentru a modifica setările pentru adresa spațiului, trebuie să indicați numele spațiului viitor {{productName}}.",
   "CreatingPortal": "Crearea spațiului nou {{productName}}",
   "CurrentSpace": "Spațiul actual",
-  "DeletePortalText": "Rețineți: numai proprietarul poate șterge un spațiu {{productName}}. Proprietarul domeniului <1>{{domain}}</1> este <1>{{displayName}}</1> (<5>{{email}}</5>). Dacă nu sunteți proprietarul, nu veți putea accesa setările pentru ștergerea spațiului {{productName}} utilizând butonul ȘTERGERE și veți fi redirecționat către secțiunea Săli.",
   "DomainName": "Nume de domeniu",
   "DomainNotFound": "Domeniul nu a fost găsit, verificați setările DNS",
   "DomainSettings": "Setări domeniu",

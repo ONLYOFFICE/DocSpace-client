@@ -5,7 +5,6 @@
   "CreateSpaceDescription": "Domeninizi IP ünvanınızla uğurla əlaqələndirdiniz. Domen ünvanı parametrlərini redaktə etmək üçün gələcək {{productName}} adını təyin etməlisiniz",
   "CreatingPortal": "Yeni {{productName}} yaradılır",
   "CurrentSpace": "Cari sahə",
-  "DeletePortalText": "Zəhmət olmasa, nəzərə alın: seçilmiş {{productName}}-i yalnız sahibi silə bilər. <1>{{domain}}</1> domen adı aşağıdakılara məxsusdur: <1>{{displayName}}</1> (<5>{{email}}</5>). Sahibi deyilsinizsə, SİLİN düyməsini klikləməklə {{productName}} silmə parametrlərinə daxil ola bilməyəcəksiniz və Otaqlar bölməsinə yönləndiriləcəksiniz.",
   "DomainName": "Domen adı",
   "DomainNotFound": "Domen adı tapılmadı, zəhmət olmasa, DNS parametrlərini yoxlayın",
   "DomainSettings": "Domen parametrləri",

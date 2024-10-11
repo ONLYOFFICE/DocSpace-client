@@ -205,6 +205,7 @@ export type TResponse =
       doc?: string;
       fileId?: string;
       hash?: string;
+      shareKey?: string;
     }
   | {
       error: TError;
@@ -217,6 +218,7 @@ export type TResponse =
       doc?: undefined;
       fileId?: string;
       hash?: string;
+      shareKey?: string;
     };
 
 export type EditorProps = {
@@ -304,6 +306,7 @@ export interface SelectFileDialogProps {
     isSelect: boolean;
     filterParam: FilesSelectorFilterTypes;
   };
+  shareKey?: string;
   getIsDisabled: (
     isFirstLoad: boolean,
     isSelectedParentFolder: boolean,

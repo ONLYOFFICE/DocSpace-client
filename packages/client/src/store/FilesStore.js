@@ -668,7 +668,18 @@ class FilesStore {
       });
     } else if (opt?.type === "folder" && opt?.id) {
       const foundIndex = this.folders.findIndex((x) => x.id === opt?.id);
-      if (foundIndex == -1) return;
+      if (foundIndex == -1) {
+        const removedId = opt.id;
+        const pathParts = this.selectedFolderStore.pathParts;
+
+        const includePathPart = pathParts.some(({ id }) => id === removedId);
+
+        if (includePathPart) {
+          window.DocSpace.navigate("/");
+        }
+
+        return;
+      }
 
       console.log(
         "[WS] delete folder",

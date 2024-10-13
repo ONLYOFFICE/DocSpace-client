@@ -205,6 +205,12 @@ class ContextOptionsStore {
   }
 
   onOpenFolder = (item) => {
+    if (item.external && item.expired)
+      return toastr.error(
+        t("Common:RoomLinkExpired"),
+        t("Common:RoomNotAvailable"),
+      );
+
     if (isLockedSharedRoom(item))
       return this.dialogsStore.setPasswordEntryDialog(true, item);
 
@@ -1485,8 +1491,8 @@ class ContextOptionsStore {
         key: "open",
         label: t("Open"),
         icon: FolderReactSvgUrl,
-        onClick: () => this.onOpenFolder(item),
-        disabled: false,
+        onClick: () => this.onOpenFolder(item, t),
+        disabled: Boolean(item.external && item.expired),
       },
       {
         id: "option_fill-form",
@@ -1767,14 +1773,12 @@ class ContextOptionsStore {
         label: t("Common:Download"),
         icon: DownloadReactSvgUrl,
         onClick: () => {
-          if (item.external && item.passwordProtected)
+          if (isLockedSharedRoom(item))
             return this.dialogsStore.setPasswordEntryDialog(true, item, true);
 
           this.onClickDownload(item, t);
         },
-        disabled:
-          !item.security?.Download &&
-          !(item.external && item.passwordProtected && !item.expired),
+        disabled: !item.security?.Download && !isLockedSharedRoom(item),
       },
       {
         id: "option_remove-shared-room",

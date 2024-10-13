@@ -109,6 +109,7 @@ export type TRoom = {
   external?: boolean;
   passwordProtected?: boolean;
   requestToken?: string;
+  expired?: boolean;
 };
 
 export type TGetRooms = {

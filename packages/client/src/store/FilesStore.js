@@ -43,7 +43,7 @@ import {
   RoomSearchArea,
 } from "@docspace/shared/enums";
 
-import { RoomsTypes } from "@docspace/shared/utils";
+import { isLockedSharedRoom, RoomsTypes } from "@docspace/shared/utils";
 import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -2141,9 +2141,7 @@ class FilesStore {
     const canCopy = item.security?.Copy;
     const canCopyLink = item.security?.CopyLink;
     const canDuplicate = item.security?.Duplicate;
-    const canDownload =
-      item.security?.Download ||
-      Boolean(item.external && item.passwordProtected && !item.expired);
+    const canDownload = item.security?.Download || isLockedSharedRoom(item);
     const canEmbed = item.security?.Embed;
 
     if (isFile) {
@@ -2489,8 +2487,7 @@ class FilesStore {
       const canEditRoom = item.security?.EditRoom;
       const canDuplicateRoom = item.security?.Duplicate;
 
-      const canViewRoomInfo =
-        item.security?.Read || (item.external && item.passwordProtected);
+      const canViewRoomInfo = item.security?.Read || isLockedSharedRoom(item);
       const canMuteRoom = item.security?.Mute;
 
       const isPublicRoomType =

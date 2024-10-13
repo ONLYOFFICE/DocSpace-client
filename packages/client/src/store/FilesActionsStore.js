@@ -2405,6 +2405,12 @@ class FilesActionStore {
   onMarkAsRead = (item) => this.markAsRead([], [`${item.id}`], item);
 
   openFileAction = (item, t, e) => {
+    if (item.external && item.expired)
+      return toastr.error(
+        t("Common:RoomLinkExpired"),
+        t("Common:RoomNotAvailable"),
+      );
+
     if (isLockedSharedRoom(item))
       return this.dialogsStore.setPasswordEntryDialog(true, item);
 

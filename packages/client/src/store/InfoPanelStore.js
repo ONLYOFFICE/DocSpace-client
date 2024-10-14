@@ -110,7 +110,7 @@ class InfoPanelStore {
   infoPanelSelectedGroup = null;
   historyFilter = {
     page: 0,
-    pageCount: 1000,
+    pageCount: 100,
     total: 0,
     startIndex: 0,
   };

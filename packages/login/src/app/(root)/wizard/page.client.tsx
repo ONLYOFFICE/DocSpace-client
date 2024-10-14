@@ -454,7 +454,7 @@ function WizardForm(props: WizardFormProps) {
           isVertical={true}
           labelVisible={false}
           hasError={hasErrorInstanceId}
-          errorMessage={hasErrorInstanceId && t("ErrorInstanceId")}
+          errorMessage={t("ErrorInstanceId")}
         >
           <TextInput
             id="instance-id"

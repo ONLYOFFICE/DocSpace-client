@@ -23,7 +23,8 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React, { useState, useEffect } from "react";
+
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react";
@@ -44,8 +45,6 @@ const Settings = () => {
   const { dialogsStore, currentTariffStatusStore } = useStore();
   const { connectDialogVisible } = dialogsStore;
   const { isCommunity } = currentTariffStatusStore;
-
-  const [currentTabId, setCurrentTabId] = useState("branding");
 
   const data = [
     {
@@ -80,14 +79,15 @@ const Settings = () => {
         `/management/settings/${element.id}`
       )
     );
-    setCurrentTabId(element.id);
   };
 
-  useEffect(() => {
+  const getCurrentTabId = () => {
     const path = location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
-    if (currentTab !== undefined && data.length) setCurrentTabId(currentTab.id);
-  }, [location.pathname]);
+    return currentTab && data.length ? currentTab.id : data[0].id;
+  };
+
+  const currentTabId = getCurrentTabId();
 
   return (
     <>

@@ -119,7 +119,6 @@ const Panels = (props) => {
     archiveDialogVisible,
     inviteQuotaWarningDialogVisible,
     preparationPortalDialogVisible,
-    changeUserTypeDialogVisible,
     restoreRoomDialogVisible,
     submitToGalleryDialogVisible,
     editGroupMembersDialogVisible,
@@ -258,9 +257,7 @@ const Panels = (props) => {
       <ConflictResolveDialog key="conflict-resolve-dialog" />
     ),
     convertDialogVisible && <ConvertDialog key="convert-dialog" />,
-    changeUserTypeDialogVisible && (
-      <ChangeUserTypeDialog key="change-user-type-dialog" />
-    ),
+
     // createRoomDialogVisible && <CreateRoomDialog key="create-room-dialog" />,
     (createRoomConfirmDialogVisible || confirmDialogIsLoading) && (
       <CreateRoomConfirmDialog key="create-room-confirm-dialog" />
@@ -394,7 +391,6 @@ export default inject(
       setSelectFileFormRoomDialogVisible,
       invitePanelOptions,
       inviteQuotaWarningDialogVisible,
-      changeUserTypeDialogVisible,
       changeQuotaDialogVisible,
       submitToGalleryDialogVisible,
       editGroupMembersDialogVisible,
@@ -484,7 +480,6 @@ export default inject(
       archiveDialogVisible,
       inviteQuotaWarningDialogVisible,
       confirmDialogIsLoading,
-      changeUserTypeDialogVisible,
       restoreRoomDialogVisible,
       submitToGalleryDialogVisible,
       editGroupMembersDialogVisible,

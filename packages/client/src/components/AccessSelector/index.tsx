@@ -41,6 +41,7 @@ interface AccessSelectorProps {
   containerRef: React.RefObject<HTMLDivElement>;
   defaultAccess: number;
   isOwner: boolean;
+  isAdmin: boolean;
   withRemove?: boolean;
   filteredAccesses: any[];
   setIsOpenItemAccess: (isOpen: boolean) => void;
@@ -64,6 +65,7 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
   containerRef,
   defaultAccess,
   isOwner,
+  isAdmin,
   withRemove = false,
   filteredAccesses,
   setIsOpenItemAccess,
@@ -96,11 +98,12 @@ const AccessSelector: React.FC<AccessSelectorProps> = ({
     withRemove,
     true,
     isOwner,
+    isAdmin,
     standalone,
   );
 
   const selectedOption = accessOptions.filter(
-    (access) => access.access === +defaultAccess,
+    (access) => access?.access === +defaultAccess,
   )[0];
 
   const checkWidth = () => {

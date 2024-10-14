@@ -27,17 +27,17 @@
 import { API_PREFIX, BASE_URL } from "../../utils";
 
 export const PATH = "authentication";
-const PORT = process.env.PORT ?? 5011;
+export const PATH_WITH_PARAMS = "authentication/**";
 
 const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 
 export const successLogin = {
   count: 1,
   response: {
+    token: "6jo5…zjm/tny6TtDUAvu3fuuNo3ZE/kxQQ==",
     expires: "0001-01-01T00:00:00",
     sms: false,
-    tfa: true,
-    confirmUrl: `${BASE_URL}:${PORT}/confirm/TfaActivation`,
+    tfa: false,
   },
   links: [
     {

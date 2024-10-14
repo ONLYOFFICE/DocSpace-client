@@ -124,6 +124,7 @@ export type UseFilesHelpersProps = {
   getFilesArchiveError: (name: string) => string;
   isInit: boolean;
   withCreate: boolean;
+  shareKey?: string;
   setSelectedItemId: (value: number | string) => void;
   setSelectedItemType: (value?: "rooms" | "files") => void;
 };
@@ -161,6 +162,7 @@ export type FilesSelectorProps = TSelectorHeader &
     withBreadCrumbs: boolean;
     withSearch: boolean;
     cancelButtonLabel: string;
+    shareKey?: string;
 
     treeFolders?: TFolder[];
     onSetBaseFolderPath?: (

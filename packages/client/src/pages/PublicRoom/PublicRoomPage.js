@@ -49,7 +49,6 @@ const PUBLIC_SIGN_IN_TOAST = "showPublicSignInToast";
 
 const PublicRoomPage = (props) => {
   const {
-    withPaging,
     fetchFiles,
     isEmptyPage,
 
@@ -189,7 +188,6 @@ const PublicRoomPage = (props) => {
       <SectionWrapper
         withBodyScroll
         // withBodyAutoFocus={!isMobile}
-        withPaging={withPaging}
         {...sectionProps}
       >
         <Section.SectionHeader>
@@ -233,7 +231,7 @@ export default inject(
     mediaViewerDataStore,
     selectedFolderStore,
   }) => {
-    const { withPaging, frameConfig, setFrameConfig, isFrame } = settingsStore;
+    const { frameConfig, setFrameConfig, isFrame } = settingsStore;
     const { isLoaded, isLoading, roomStatus, fetchPublicRoom } =
       publicRoomStore;
 
@@ -255,8 +253,6 @@ export default inject(
       roomStatus,
       fetchFiles,
       getFilesSettings,
-
-      withPaging,
 
       showSecondaryProgressBar,
       secondaryProgressBarValue,

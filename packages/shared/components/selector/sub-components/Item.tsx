@@ -29,7 +29,7 @@ import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 import Planet12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/planet.react.svg?url";
 import LifetimeRoomIconUrl from "PUBLIC_DIR/images/lifetime-room.react.svg?url";
-import { getUserTypeLabel } from "../../../utils/common";
+import { getUserTypeTranslation } from "../../../utils/common";
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
 import { Text } from "../../text";
 import { Checkbox } from "../../checkbox";
@@ -38,7 +38,7 @@ import { Tooltip } from "../../tooltip";
 
 import { StyledItem } from "../Selector.styled";
 import { ItemProps, Data, TSelectorItem } from "../Selector.types";
-import { RoomsType } from "../../../enums";
+import { EmployeeType, RoomsType } from "../../../enums";
 import NewItem from "./NewItem";
 import InputItem from "./InputItem";
 
@@ -58,7 +58,8 @@ const compareFunction = (prevProps: ItemProps, nextProps: ItemProps) => {
     prevItem?.id === nextItem?.id &&
     prevItem?.label === nextItem?.label &&
     prevItem?.isSelected === nextItem?.isSelected &&
-    nextData?.inputItemVisible === prevData?.inputItemVisible
+    nextData?.inputItemVisible === prevData?.inputItemVisible &&
+    nextData?.listHeight === prevData?.listHeight
   );
 };
 
@@ -74,6 +75,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
     inputItemVisible,
     savedInputValue,
     setSavedInputValue,
+    listHeight,
   }: Data = data;
   const { t } = useTranslation(["Common"]);
 
@@ -143,6 +145,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           label={label}
           onCreateClick={onCreateClick}
           dropDownItems={dropDownItems}
+          listHeight={listHeight}
           style={style}
           hotkey={hotkey}
           inputItemVisible={inputItemVisible}
@@ -163,8 +166,8 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
 
     const currentRole = role || AvatarRole.user;
 
-    const typeLabel = getUserTypeLabel(
-      role as "owner" | "admin" | "user" | "collaborator" | "manager",
+    const typeLabel = getUserTypeTranslation(
+      role as unknown as EmployeeType,
       t,
     );
 

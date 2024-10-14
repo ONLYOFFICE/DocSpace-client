@@ -35,13 +35,10 @@ import { LOADER_TIMEOUT } from "@docspace/shared/constants";
 import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
-
+import api from "@docspace/shared/api";
 import ItemsList from "./sub-components/ItemsList";
 import InviteInput from "./sub-components/InviteInput";
 import ExternalLinks from "./sub-components/ExternalLinks";
-
-import InfoBar from "./sub-components/InfoBar";
-import InvitePanelLoader from "./sub-components/InvitePanelLoader";
 
 import { Text } from "@docspace/shared/components/text";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -50,7 +47,7 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { getAccessOptions, getTopFreeRole } from "./utils";
+import { fixAccess, getAccessOptions } from "./utils";
 import AddUsersPanel from "../AddUsersPanel";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
@@ -66,7 +63,6 @@ const InvitePanel = ({
   setRoomSecurity,
   getRoomSecurityInfo,
   defaultAccess,
-  inviteUsers,
   setInfoPanelIsMobileHidden,
   updateInfoPanelMembers,
   isRoomMembersPanelOpen,
@@ -79,6 +75,7 @@ const InvitePanel = ({
   setIsNewUserByCurrentUser,
   setInvitePaidUsersCount,
   isOwner,
+  isAdmin,
   standalone,
   hideSelector,
   isUserTariffLimit,
@@ -94,17 +91,13 @@ const InvitePanel = ({
   const [externalLinksVisible, setExternalLinksVisible] = useState(false);
   const [scrollAllPanelContent, setScrollAllPanelContent] = useState(false);
   const [activeLink, setActiveLink] = useState({});
-  const [infoBarIsVisible, setInfoBarIsVisible] = useState(true);
   const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
   const [isMobileView, setIsMobileView] = useState(isMobile());
   const [inputValue, setInputValue] = useState("");
   const [usersList, setUsersList] = useState([]);
   const [cultureKey, setCultureKey] = useState();
+
   const navigate = useNavigate();
-
-  const onCloseBar = () => setInfoBarIsVisible(false);
-
-  const [selectedAccess, setSelectedAccess] = useState(defaultAccess);
 
   const inputsRef = useRef();
   const invitePanelBodyRef = useRef();
@@ -121,7 +114,7 @@ const InvitePanel = ({
       id: "user",
       title: "User",
       shareLink: "",
-      access: EmployeeType.User,
+      access: EmployeeType.RoomAdmin,
     },
     {
       id: "guest",
@@ -139,7 +132,7 @@ const InvitePanel = ({
       id: "collaborator",
       title: "Collaborator",
       shareLink: "",
-      access: EmployeeType.Collaborator,
+      access: EmployeeType.User,
     },
   ];
 
@@ -328,7 +321,7 @@ const InvitePanel = ({
       setIsLoading(true);
       const isRooms = roomId !== -1;
       const result = !isRooms
-        ? await inviteUsers(data)
+        ? await api.people.inviteUsers(data)
         : await setRoomSecurity(roomId, data);
 
       if (!isRooms) {
@@ -372,7 +365,6 @@ const InvitePanel = ({
 
   const roomType = selectedRoom ? selectedRoom.roomType : -1;
   const hasInvitedUsers = !!inviteItems.length;
-  const hasAdmins = inviteItems.findIndex((u) => u.isAdmin || u.isOwner) > -1;
 
   const removeExist = (items) => {
     const filtered = items.reduce((unique, current) => {
@@ -424,9 +416,6 @@ const InvitePanel = ({
           usersList={usersList}
           setUsersList={setUsersList}
         />
-        {infoBarIsVisible && hasAdmins && (
-          <InfoBar t={t} onClose={onCloseBar} />
-        )}
         {hasInvitedUsers && (
           <ItemsList
             t={t}
@@ -460,25 +449,16 @@ const InvitePanel = ({
   };
 
   const addItems = (users) => {
-    const topFreeRole = getTopFreeRole(t, roomType);
     users.forEach((u) => {
-      if (u.isGroup && checkIfAccessPaid(u.access)) {
-        u.access = topFreeRole.access;
-        u.warning = t("GroupMaxAvailableRoleWarning", {
-          roleName: topFreeRole.label,
-        });
-      }
+      const isAccessPaid = checkIfAccessPaid(u.access);
 
-      if (
-        isUserTariffLimit &&
-        (!u.avatar || u.isVisitor) &&
-        isPaidUserRole(u.access)
-      ) {
-        const freeRole = getTopFreeRole(t, roomType)?.access;
+      if (isAccessPaid) {
+        if (u.isGroup || u.isVisitor || u.isCollaborator) {
+          u = fixAccess(u, t, roomType);
 
-        if (freeRole) {
-          u.access = freeRole;
-          toastr.error(<PaidQuotaLimitError />);
+          if (isUserTariffLimit) {
+            toastr.error(<PaidQuotaLimitError />);
+          }
         }
       }
     });
@@ -498,6 +478,7 @@ const InvitePanel = ({
     false,
     true,
     isOwner,
+    isAdmin,
     standalone,
   );
 
@@ -531,7 +512,7 @@ const InvitePanel = ({
             accessOptions={accessOptions}
             isMultiSelect
             isEncrypted
-            defaultAccess={selectedAccess}
+            defaultAccess={defaultAccess}
             withoutBackground={isMobileView}
             withBlur={!isMobileView}
             roomId={roomId}
@@ -583,9 +564,7 @@ export default inject(
   }) => {
     const { theme, standalone } = settingsStore;
 
-    const { getUsersByQuery, inviteUsers, getUsersList } =
-      peopleStore.usersStore;
-    const { filter } = peopleStore.filterStore;
+    const { getUsersList, filter } = peopleStore.usersStore;
     const {
       setIsMobileHidden: setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
@@ -611,12 +590,11 @@ export default inject(
 
     const { maxCountManagersByQuota, isUserTariffLimit } = currentQuotaStore;
 
-    const { isOwner } = userStore.user;
+    const { isOwner, isAdmin } = userStore.user;
 
     return {
       folders,
       setInviteLanguage,
-      getUsersByQuery,
       getRoomSecurityInfo,
       inviteItems,
       roomId: invitePanelOptions.roomId,
@@ -627,7 +605,6 @@ export default inject(
       visible: invitePanelOptions.visible,
       defaultAccess: invitePanelOptions.defaultAccess,
       getFolderInfo,
-      inviteUsers,
       setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
       isRoomMembersPanelOpen,
@@ -643,6 +620,7 @@ export default inject(
       hideSelector: invitePanelOptions.hideSelector,
       isUserTariffLimit,
       isPaidUserAccess,
+      isAdmin,
     };
   },
 )(

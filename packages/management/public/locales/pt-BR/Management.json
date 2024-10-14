@@ -5,7 +5,6 @@
   "CreateSpaceDescription": "Você conectou com sucesso seu domínio ao seu endereço IP. Para editar as configurações de endereço do espaço, você precisa definir o nome futuro do {{productName}}",
   "CreatingPortal": "Criando novo {{productName}}",
   "CurrentSpace": "Espaço atual",
-  "DeletePortalText": "Atenção: somente o proprietário pode excluir o {{productName}} selecionado. O proprietário de <1>{{domain}}</1> é <1>{{displayName}}</1> (<5>{{email}}</5>). Se você não for o proprietário, não poderá acessar as configurações de exclusão do {{productName}} clicando no botão EXCLUIR e será redirecionado para a seção salas.",
   "DomainName": "Nome do domínio",
   "DomainNotFound": "Domínio não encontrado, verifique nas configurações de DNS",
   "DomainSettings": "Configurações de domínio",

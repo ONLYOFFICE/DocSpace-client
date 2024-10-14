@@ -48,6 +48,7 @@ import {
 } from "@docspace/shared/enums";
 
 import { CategoryType } from "SRC_DIR/helpers/constants";
+import { getContactsView } from "SRC_DIR/helpers/contacts";
 import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
@@ -58,6 +59,7 @@ import { globalColors } from "@docspace/shared/themes";
 import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
 import { toastr } from "@docspace/shared/components/toast";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
+import { useContactsHeader } from "./useContacts";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -212,19 +214,18 @@ const SectionHeaderContent = (props) => {
     moveToRoomsPage,
     setIsInfoPanelVisible,
 
-    getAccountsHeaderMenu,
-    isAccountsHeaderVisible,
+    getContactsHeaderMenu,
+    isUsersHeaderVisible,
     isGroupsHeaderVisible,
     isGroupsHeaderIndeterminate,
     isGroupsHeaderChecked,
-    isAccountsHeaderIndeterminate,
-    isAccountsHeaderChecked,
-    accountsCbMenuItems,
-    getAccountsMenuItemId,
-    getAccountsCheckboxItemLabel,
-    setAccountsSelected,
+    isUsersHeaderIndeterminate,
+    isUsersHeaderChecked,
+    cbContactsMenuItems,
+    setUsersSelected,
     setGroupsSelected,
     isRoomAdmin,
+    isCollaborator,
     isEmptyPage,
 
     isLoading,
@@ -244,6 +245,8 @@ const SectionHeaderContent = (props) => {
     showNavigationButton,
     startUpload,
     getFolderModel,
+    getContactsModel,
+    contactsCanCreate,
     onCreateRoom,
     onEmptyTrashAction,
     getHeaderOptions,
@@ -259,11 +262,21 @@ const SectionHeaderContent = (props) => {
   const location = useLocation();
   const { groupId } = useParams();
 
-  const isInsideGroup = !!groupId;
+  const contactsView = getContactsView(location);
+  const isContactsPage = !!contactsView;
+  const isContactsGroupsPage = contactsView === "groups";
+  const isContactsInsideGroupPage =
+    contactsView === "inside_group" && !!groupId;
 
-  const isAccountsPage = location.pathname.includes("/accounts");
-  const isGroupsPage =
-    location.pathname.includes("/accounts/groups") && !isInsideGroup;
+  const { getContactsMenuItems, onContactsChange } = useContactsHeader({
+    setUsersSelected,
+    setGroupsSelected,
+
+    cbContactsMenuItems,
+    t,
+
+    isContactsGroupsPage,
+  });
 
   const isSettingsPage = location.pathname.includes("/settings");
 
@@ -289,7 +302,7 @@ const SectionHeaderContent = (props) => {
   };
 
   const getContextOptionsFolder = () => {
-    if (isInsideGroup) {
+    if (isContactsInsideGroupPage) {
       return getGroupContextOptions(t, currentGroup, false, true);
     }
 
@@ -297,7 +310,7 @@ const SectionHeaderContent = (props) => {
   };
 
   const onContextOptionsClick = () => {
-    isInsideGroup
+    isContactsInsideGroupPage
       ? setGroupsBufferSelection(currentGroup)
       : setBufferSelection(selectedFolder);
   };
@@ -305,30 +318,16 @@ const SectionHeaderContent = (props) => {
   const onSelect = (e) => {
     const key = e.currentTarget.dataset.key;
 
-    isAccountsPage ? setAccountsSelected(key) : setSelected(key);
+    setSelected(key);
   };
 
   const onClose = () => {
-    setSelected("close");
+    isContactsPage ? setUsersSelected("close") : setSelected("close");
   };
 
   const getMenuItems = () => {
-    const checkboxOptions = isAccountsPage ? (
-      <>
-        {accountsCbMenuItems.map((key) => {
-          const label = getAccountsCheckboxItemLabel(t, key);
-          const id = getAccountsMenuItemId(key);
-          return (
-            <DropDownItem
-              id={id}
-              key={key}
-              label={label}
-              data-key={key}
-              onClick={onSelect}
-            />
-          );
-        })}
-      </>
+    const checkboxOptions = isContactsPage ? (
+      getContactsMenuItems()
     ) : (
       <>
         {cbMenuItems.map((key) => {
@@ -351,10 +350,8 @@ const SectionHeaderContent = (props) => {
   };
 
   const onChange = (checked) => {
-    isAccountsPage
-      ? !isGroupsPage
-        ? setAccountsSelected(checked ? "all" : "none")
-        : setGroupsSelected(checked ? "all" : "none")
+    isContactsPage
+      ? onContactsChange(checked)
       : setSelected(checked ? "all" : "none");
   };
 
@@ -405,6 +402,7 @@ const SectionHeaderContent = (props) => {
   };
 
   const getContextOptionsPlus = () => {
+    if (isContactsPage) return getContactsModel(t);
     return getFolderModel(t);
   };
 
@@ -430,6 +428,9 @@ const SectionHeaderContent = (props) => {
 
     return "";
   };
+  const onLogoClick = () => {
+    moveToPublicRoom(props.rootFolderId);
+  };
 
   const headerMenu = isIndexEditingMode
     ? [
@@ -440,8 +441,8 @@ const SectionHeaderContent = (props) => {
           iconUrl: RoundedArrowSvgUrl,
         },
       ]
-    : isAccountsPage
-      ? getAccountsHeaderMenu(t, isGroupsPage)
+    : isContactsPage
+      ? getContactsHeaderMenu(t, isContactsGroupsPage)
       : getHeaderMenu(t);
 
   const menuItems = getMenuItems();
@@ -456,16 +457,16 @@ const SectionHeaderContent = (props) => {
     isMobileView: currentDeviceType === DeviceType.mobile,
   };
 
-  if (isAccountsPage && !(isGroupsPage && isRoomAdmin)) {
+  if (isContactsPage && !(isContactsGroupsPage && isRoomAdmin)) {
     tableGroupMenuVisible =
-      (!isGroupsPage ? isAccountsHeaderVisible : isGroupsHeaderVisible) &&
+      (!isContactsGroupsPage ? isUsersHeaderVisible : isGroupsHeaderVisible) &&
       tableGroupMenuVisible &&
       headerMenu.some((x) => !x.disabled);
-    tableGroupMenuProps.isChecked = !isGroupsPage
-      ? isAccountsHeaderChecked
+    tableGroupMenuProps.isChecked = !isContactsGroupsPage
+      ? isUsersHeaderChecked
       : isGroupsHeaderChecked;
-    tableGroupMenuProps.isIndeterminate = !isGroupsPage
-      ? isAccountsHeaderIndeterminate
+    tableGroupMenuProps.isIndeterminate = !isContactsGroupsPage
+      ? isUsersHeaderIndeterminate
       : isGroupsHeaderIndeterminate;
     tableGroupMenuProps.withoutInfoPanelToggler = false;
   } else {
@@ -488,7 +489,7 @@ const SectionHeaderContent = (props) => {
   const isRoot =
     isLoading && typeof stateIsRoot === "boolean"
       ? stateIsRoot
-      : isRootFolder || isAccountsPage || isSettingsPage;
+      : isRootFolder || isContactsPage || isSettingsPage;
 
   const getInsideGroupTitle = () => {
     return isLoading && insideGroupTempTitle
@@ -498,10 +499,10 @@ const SectionHeaderContent = (props) => {
 
   const currentTitle = isSettingsPage
     ? t("Common:Settings")
-    : isAccountsPage
-      ? isInsideGroup
+    : isContactsPage
+      ? isContactsInsideGroupPage
         ? getInsideGroupTitle()
-        : t("Common:Accounts")
+        : t("Common:Contacts")
       : isLoading && stateTitle
         ? stateTitle
         : title;
@@ -517,10 +518,10 @@ const SectionHeaderContent = (props) => {
       : navigationPath?.length > 1 &&
         navigationPath[navigationPath?.length - 2].title;
 
-  const accountsNavigationPath = isInsideGroup && [
+  const accountsNavigationPath = isContactsInsideGroupPage && [
     {
       id: 0,
-      title: t("Common:Accounts"),
+      title: t("Common:Contacts"),
       isRoom: false,
       isRootRoom: true,
     },
@@ -575,7 +576,7 @@ const SectionHeaderContent = (props) => {
         >
           {tableGroupMenuVisible ? (
             <TableGroupMenu
-              withComboBox={!isIndexEditingMode}
+              withComboBox={!isIndexEditingMode && !!menuItems}
               {...tableGroupMenuProps}
               {...headerProps}
               {...closeProps}
@@ -585,12 +586,11 @@ const SectionHeaderContent = (props) => {
               <Navigation
                 sectionWidth={context.sectionWidth}
                 showText={showText}
-                isRootFolder={isRoot && !isInsideGroup}
+                isRootFolder={isRoot && !isContactsInsideGroupPage}
                 canCreate={
-                  (currentCanCreate || isAccountsPage) &&
+                  (currentCanCreate || (isContactsPage && contactsCanCreate)) &&
                   !isSettingsPage &&
-                  !isPublicRoom &&
-                  !isInsideGroup
+                  !isPublicRoom
                 }
                 rootRoomTitle={currentRootRoomTitle}
                 title={currentTitle}
@@ -599,7 +599,9 @@ const SectionHeaderContent = (props) => {
                 tReady={tReady}
                 menuItems={menuItems}
                 navigationItems={
-                  !isInsideGroup ? navigationPath : accountsNavigationPath
+                  !isContactsInsideGroupPage
+                    ? navigationPath
+                    : accountsNavigationPath
                 }
                 getContextOptionsPlus={getContextOptionsPlus}
                 getContextOptionsFolder={getContextOptionsFolder}
@@ -625,14 +627,14 @@ const SectionHeaderContent = (props) => {
                 withMenu={!isRoomsFolder}
                 onPlusClick={onCreateRoom}
                 isEmptyPage={isEmptyPage}
-                isRoom={isCurrentRoom || isAccountsPage}
+                isRoom={isCurrentRoom || isContactsPage}
                 hideInfoPanel={hideInfoPanel || isSettingsPage || isPublicRoom}
                 withLogo={isPublicRoom && logo}
                 burgerLogo={isPublicRoom && burgerLogo}
                 isPublicRoom={isPublicRoom}
                 titleIcon={titleIcon}
                 titleIconTooltip={titleIconTooltip}
-                showRootFolderTitle={insideTheRoom || isInsideGroup}
+                showRootFolderTitle={insideTheRoom || isContactsInsideGroupPage}
                 currentDeviceType={currentDeviceType}
                 isFrame={isFrame}
                 showTitle={isFrame ? showTitle : true}
@@ -641,6 +643,7 @@ const SectionHeaderContent = (props) => {
                 tariffBar={<TariffBar />}
                 showNavigationButton={!!showNavigationButton}
                 onContextOptionsClick={onContextOptionsClick}
+                onLogoClick={onLogoClick}
               />
               {showSignInButton && (
                 <Button
@@ -701,7 +704,9 @@ export default inject(
     dialogsStore,
   }) => {
     const { startUpload } = uploadDataStore;
+
     const isRoomAdmin = userStore.user?.isRoomAdmin;
+    const isCollaborator = userStore.user?.isCollaborator;
 
     const {
       setSelected,
@@ -761,13 +766,6 @@ export default inject(
     } = selectedFolderStore;
 
     const selectedFolder = selectedFolderStore.getSelectedFolder();
-    const {
-      currentGroup,
-      getGroupContextOptions,
-      setSelected: setGroupsSelected,
-      setBufferSelection: setGroupsBufferSelection,
-      insideGroupTempTitle,
-    } = peopleStore.groupsStore;
 
     const { theme, frameConfig, isFrame, currentDeviceType } = settingsStore;
 
@@ -791,26 +789,35 @@ export default inject(
 
     const isEmptyArchive = !canRestoreAll && !canDeleteAll;
 
-    const {
-      selectionStore,
-      headerMenuStore,
-      getHeaderMenu: getAccountsHeaderMenu,
-    } = peopleStore;
+    const { usersStore, groupsStore, headerMenuStore } = peopleStore;
 
     const {
-      isHeaderVisible: isAccountsHeaderVisible,
+      currentGroup,
+      getGroupContextOptions,
+      setSelected: setGroupsSelected,
+      setBufferSelection: setGroupsBufferSelection,
+      insideGroupTempTitle,
+    } = groupsStore;
+
+    const {
+      isUsersHeaderVisible,
+      isUsersHeaderIndeterminate,
+      isUsersHeaderChecked,
+
       isGroupsHeaderVisible,
       isGroupsHeaderIndeterminate,
       isGroupsHeaderChecked,
-      isHeaderIndeterminate: isAccountsHeaderIndeterminate,
-      isHeaderChecked: isAccountsHeaderChecked,
-      cbMenuItems: accountsCbMenuItems,
-      getMenuItemId: getAccountsMenuItemId,
-      getCheckboxItemLabel: getAccountsCheckboxItemLabel,
+
+      cbContactsMenuItems,
+      getContactsHeaderMenu,
     } = headerMenuStore;
 
+    const { getContactsModel, contactsCanCreate } =
+      peopleStore.contextOptionsStore;
+
+    const { setSelected: setUsersSelected } = usersStore;
+
     const { isIndexEditingMode, setIsIndexEditingMode } = indexingStore;
-    const { setSelected: setAccountsSelected } = selectionStore;
     const { isPublicRoom } = publicRoomStore;
 
     let folderPath = navigationPath;
@@ -832,6 +839,10 @@ export default inject(
       isLoading || !security?.CopyLink || isPublicRoom || isArchive
         ? false
         : security?.Read && isShared;
+
+    const rootFolderId = navigationPath.length
+      ? navigationPath[navigationPath.length - 1]?.id
+      : selectedFolder.id;
 
     return {
       showText: settingsStore.showText,
@@ -884,19 +895,18 @@ export default inject(
 
       moveToPublicRoom,
 
-      getAccountsHeaderMenu,
-      isAccountsHeaderVisible,
+      getContactsHeaderMenu,
+      isUsersHeaderVisible,
       isGroupsHeaderVisible,
       isGroupsHeaderIndeterminate,
       isGroupsHeaderChecked,
       setGroupsSelected,
-      isAccountsHeaderIndeterminate,
-      isAccountsHeaderChecked,
-      accountsCbMenuItems,
-      getAccountsMenuItemId,
-      getAccountsCheckboxItemLabel,
-      setAccountsSelected,
+      isUsersHeaderIndeterminate,
+      isUsersHeaderChecked,
+      cbContactsMenuItems,
+      setUsersSelected,
       isRoomAdmin,
+      isCollaborator,
       isEmptyPage,
       categoryType,
       theme,
@@ -918,6 +928,10 @@ export default inject(
       setReorderDialogVisible,
       setGroupsBufferSelection,
       createFoldersTree,
+      getContactsModel,
+      contactsCanCreate,
+
+      rootFolderId,
     };
   },
 )(

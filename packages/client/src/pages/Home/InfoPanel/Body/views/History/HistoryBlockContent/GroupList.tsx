@@ -135,8 +135,8 @@ export default inject<TStore>(
     return {
       isVisitor: userStore.user.isVisitor,
       isCollaborator: userStore.user.isCollaborator,
-      setPeopleSelection: peopleStore.selectionStore.setSelection,
-      setPeopleBufferSelection: peopleStore.selectionStore.setBufferSelection,
+      setPeopleSelection: peopleStore.usersStore.setSelection,
+      setPeopleBufferSelection: peopleStore.usersStore.setBufferSelection,
       setFilesSelection: filesStore.setSelection,
       setFilesBufferSelection: filesStore.setBufferSelection,
       setSelectedFolder: selectedFolderStore.setSelectedFolder,

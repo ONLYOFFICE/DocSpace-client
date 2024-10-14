@@ -551,6 +551,7 @@ export type TSelectorItem = TSelectorItemType & {
   isDisabled?: boolean;
   disabledText?: string;
   lifetimeTooltip?: string | null;
+  viewUrl?: string;
 };
 
 export type Data = {
@@ -564,6 +565,7 @@ export type Data = {
   inputItemVisible: boolean;
   savedInputValue: Nullable<string>;
   setSavedInputValue: (value: Nullable<string>) => void;
+  listHeight: number;
 };
 
 export interface ItemProps {

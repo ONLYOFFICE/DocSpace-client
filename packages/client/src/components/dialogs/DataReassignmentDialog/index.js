@@ -219,22 +219,22 @@ const DataReassignmentDialog = ({
         />
         <ModalDialog.Container>
           <PeopleSelector
-            submitButtonLabel={t("Common:SelectAction")}
-            onSubmit={onAccept}
+            submitButtonLabel=""
             disableSubmitButton={false}
+            onSubmit={onAccept}
             excludeItems={[user.id]}
             currentUserId={user.id}
             withCancelButton
+            onCancel={onClosePeopleSelector}
             cancelButtonLabel=""
+            withHeader
             headerProps={{
               onCloseClick: onClose,
               onBackClick: onClosePeopleSelector,
               withoutBackButton: false,
               headerLabel: "",
             }}
-            onBackClick={onTogglePeopleSelector}
             filter={filter}
-            withHeader
             disableDisabledUsers
           />
         </ModalDialog.Container>

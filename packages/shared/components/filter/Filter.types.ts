@@ -81,7 +81,7 @@ export type TShowSelector = (selectorType: string, group: FilterGroups) => void;
 export type TSelectorItem = {
   group: FilterGroups;
   isSelected?: boolean;
-  selectedKey?: string;
+  selectedKey?: string | number;
   displaySelectorType?: string;
   key: string | number;
   selectedLabel?: string;

@@ -24,33 +24,50 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import EmptyScreenPersonSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
-import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
 import React from "react";
-import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 
-import { Text } from "@docspace/shared/components/text";
-import { StyledNoItemContainer } from "../../styles/noItem";
+import type { TRoom } from "@docspace/shared/api/rooms/types";
 
-const NoAccountsItem = ({ t, theme }) => {
-  const imgSrc = theme.isBase
-    ? EmptyScreenPersonSvgUrl
-    : EmptyScreenPersonSvgDarkUrl;
+import NoGalleryItem from "./NoGalleryItem";
+import NoRoomItem from "./NoRoomItem";
+import NoFileOrFolderItem from "./NoFileOrFolderItem";
+import NoContactsItem from "./NoContactsItem";
+import ExpiredItem from "./ExpiredItem";
+import LockedItem from "./LockedItem";
 
-  return (
-    <StyledNoItemContainer>
-      <div className="no-thumbnail-img-wrapper no-accounts">
-        <img src={imgSrc} />
-      </div>
-      <Text className="no-item-text" textAlign="center">
-        {t("InfoPanel:AccountsEmptyScreenText")}
-      </Text>
-    </StyledNoItemContainer>
-  );
+type NoItemsProps = {
+  isUsers: boolean;
+  isGroups: boolean;
+  isGuests: boolean;
+  isGallery: boolean;
+  isRooms: boolean;
+  isFiles: boolean;
+  isLockedSharedRoom: boolean;
+  infoPanelSelection: TRoom;
 };
 
-export default inject(({ settingsStore }) => {
-  return {
-    theme: settingsStore.theme,
-  };
-})(observer(NoAccountsItem));
+const NoItem = ({
+  isUsers,
+  isGroups,
+  isGuests,
+  isGallery,
+  isRooms,
+  isFiles,
+  isLockedSharedRoom,
+  infoPanelSelection,
+}: NoItemsProps) => {
+  const { t } = useTranslation(["InfoPanel", "FormGallery"]);
+
+  if (infoPanelSelection?.expired) return <ExpiredItem />;
+  if (isLockedSharedRoom) return <LockedItem t={t} item={infoPanelSelection} />;
+
+  if (isGroups || isUsers || isGuests)
+    return <NoContactsItem t={t} isGuests={isGuests} isGroups={isGroups} />;
+  if (isGallery) return <NoGalleryItem t={t} />;
+  if (isFiles) return <NoFileOrFolderItem t={t} theme={undefined} />;
+  if (isRooms) return <NoRoomItem t={t} theme={undefined} />;
+
+  return null;
+};
+export default NoItem;

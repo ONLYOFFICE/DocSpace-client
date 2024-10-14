@@ -63,7 +63,7 @@ import {
   HeadingSize,
 } from "@docspace/shared/components/heading";
 
-import { StyledNoItemContainer } from "../../styles/noItem";
+import { StyledNoItemContainer } from "../../styles/NoItem";
 
 const ExpiredItem = () => {
   const theme = useTheme();

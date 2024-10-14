@@ -23,67 +23,70 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React from "react";
+
 import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
-import LockedSharedRoomLightIconURL from "PUBLIC_DIR/images/locked.shared.room.svg?url";
-import LockedSharedRoomDarkIconURL from "PUBLIC_DIR/images/locked.shared.room.dark.svg?url";
-import LockIcon from "PUBLIC_DIR/images/icons/12/lock.react.svg";
-
 import { Text } from "@docspace/shared/components/text";
-import type { TTranslation } from "@docspace/shared/types";
-import type { TRoom } from "@docspace/shared/api/rooms/types";
 
-import {
-  LockedSharedRoomButton,
-  StyledNoItemContainer,
-} from "../../styles/NoItem";
+import EmptyScreenPersonSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
+import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
+import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/empty_screen_alt.svg?url";
+import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_alt_dark.svg?url";
 
-interface InjectedLockedItemProps {
-  setPasswordEntryDialog: (visible?: boolean, item?: TRoom) => void;
-}
+import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 
-interface ExternalLockedItemProps {
-  t: TTranslation;
-  item: TRoom;
-}
+import { StyledSeveralItemsContainer } from "../../styles/SeveralItems";
 
-interface LockedItemProps
-  extends InjectedLockedItemProps,
-    ExternalLockedItemProps {}
+type SeveralItemsProps = {
+  isGroups: boolean;
+  isUsers: boolean;
+  isGuests: boolean;
+  selectedItems: InfoPanelStore["infoPanelSelectedItems"];
+};
 
-const LockedItem = ({ t, item, setPasswordEntryDialog }: LockedItemProps) => {
+const SeveralItems = ({
+  isGroups,
+  isUsers,
+  isGuests,
+  selectedItems,
+}: SeveralItemsProps) => {
+  const { t } = useTranslation(["InfoPanel"]);
   const theme = useTheme();
 
-  const imageSrc = theme.isBase
-    ? LockedSharedRoomLightIconURL
-    : LockedSharedRoomDarkIconURL;
+  const emptyScreenAlt = theme.isBase
+    ? EmptyScreenAltSvgUrl
+    : EmptyScreenAltSvgDarkUrl;
 
-  const openModal = () => {
-    setPasswordEntryDialog(true, item);
-  };
+  const emptyScreenPerson = theme.isBase
+    ? EmptyScreenPersonSvgUrl
+    : EmptyScreenPersonSvgDarkUrl;
+
+  const isContacts = isGroups || isUsers || isGuests;
+
+  const imgSrc = isContacts ? emptyScreenPerson : emptyScreenAlt;
+
+  const itemsText = isGroups
+    ? t("InfoPanel:SelectedGroups")
+    : isContacts
+      ? t("InfoPanel:SelectedUsers")
+      : t("InfoPanel:ItemsSelected");
 
   return (
-    <StyledNoItemContainer className="info-panel_gallery-empty-screen">
-      <div className="no-thumbnail-img-wrapper">
-        <img src={imageSrc} alt="Locked icon" />
-      </div>
-      <Text className="no-item-text" textAlign="center">
-        {t("Common:NeedPassword")}
+    <StyledSeveralItemsContainer className="no-thumbnail-img-wrapper">
+      <img src={imgSrc} alt="Several items" />
+      <Text fontSize="16px" fontWeight={700}>
+        {`${itemsText}: ${selectedItems.length}`}
       </Text>
-      <LockedSharedRoomButton onClick={openModal}>
-        <LockIcon />
-        <span>{t("UploadPanel:EnterPassword")}</span>
-      </LockedSharedRoomButton>
-    </StyledNoItemContainer>
+    </StyledSeveralItemsContainer>
   );
 };
 
-export default inject<TStore>(({ dialogsStore }) => {
-  const { setPasswordEntryDialog } = dialogsStore;
+export default inject(({ infoPanelStore }: TStore) => {
+  const selectedItems = infoPanelStore.infoPanelSelectedItems;
 
   return {
-    setPasswordEntryDialog,
+    selectedItems,
   };
-})(observer(LockedItem as React.FC<ExternalLockedItemProps>));
+})(observer(SeveralItems));

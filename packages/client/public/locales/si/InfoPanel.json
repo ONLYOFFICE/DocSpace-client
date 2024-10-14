@@ -1,5 +1,5 @@
 {
-  "AccountsEmptyScreenText": "පරිශ්‍රීලකයින්ගේ විස්තර මෙතැන බලන්න",
+  "UsersEmptyScreenText": "පරිශ්‍රීලකයින්ගේ විස්තර මෙතැන බලන්න",
   "Administration": "පරිපාලනය",
   "AndMoreLabel": "සහ <1>තවත් {{count}}</1>",
   "CreationDate": "සෑදූ දිනය",

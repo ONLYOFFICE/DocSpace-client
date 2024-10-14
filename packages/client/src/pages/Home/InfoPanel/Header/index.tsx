@@ -24,79 +24,80 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
-import { Tabs } from "@docspace/shared/components/tabs";
-import {
-  isDesktop as isDesktopUtils,
-  isMobile as isMobileUtils,
-  isTablet as isTabletUtils,
-} from "@docspace/shared/utils";
-
-import { StyledInfoPanelHeader } from "./styles/common";
-
-import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
 import { FolderType } from "@docspace/shared/enums";
 import { AsideHeader } from "@docspace/shared/components/aside";
+import { Tabs } from "@docspace/shared/components/tabs";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { isLockedSharedRoom } from "@docspace/shared/utils";
+import type { TRoom } from "@docspace/shared/api/rooms/types";
 
-const InfoPanelHeaderContent = (props) => {
-  const {
-    t,
-    selection,
-    setIsVisible,
-    roomsView,
-    fileView,
-    setView,
-    getIsRooms,
-    getIsGallery,
-    getIsAccounts,
-    getIsTrash,
-    infoPanelItemsList,
-    enablePlugins,
-    resetView,
-    myRoomsId,
-    archiveRoomsId,
-    myFolderId,
-  } = props;
+import { PluginFileType } from "SRC_DIR/helpers/plugins/enums";
+import PluginStore from "SRC_DIR/store/PluginStore";
+import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
+import SelectedFolderStore from "SRC_DIR/store/SelectedFolderStore";
 
-  const [isTablet, setIsTablet] = useState(false);
+import { TInfoPanelSelection } from "../InfoPanel.types";
 
-  const isRooms = getIsRooms();
+import { StyledInfoPanelHeader } from "./Header.styled";
+
+type InfoPanelHeaderContentProps = {
+  // TODO change InfoPanelStore["infoPanelSelection"]
+  selection: TInfoPanelSelection;
+  setIsVisible: InfoPanelStore["setIsVisible"];
+  roomsView: InfoPanelStore["roomsView"];
+  fileView: InfoPanelStore["fileView"];
+  setView: InfoPanelStore["setView"];
+  getIsGallery: InfoPanelStore["getIsGallery"];
+  getIsContacts: InfoPanelStore["getIsContacts"];
+  getIsTrash: InfoPanelStore["getIsTrash"];
+
+  infoPanelItemsList: PluginStore["infoPanelItemsList"];
+
+  enablePlugins: SettingsStore["enablePlugins"];
+
+  selectedId: SelectedFolderStore["id"];
+};
+
+const InfoPanelHeaderContent = ({
+  selection,
+  setIsVisible,
+  roomsView,
+  fileView,
+  setView,
+  getIsGallery,
+  getIsContacts,
+  getIsTrash,
+  infoPanelItemsList,
+  enablePlugins,
+  selectedId,
+}: InfoPanelHeaderContentProps) => {
+  const { t } = useTranslation(["Common", "InfoPanel"]);
+
   const isGallery = getIsGallery();
-  const isAccounts = getIsAccounts();
+  const isContacts = getIsContacts();
   const isTrash = getIsTrash();
 
-  const isRoot =
-    selection?.isFolder && selection?.id === selection?.rootFolderId;
   const isSeveralItems = selection && Array.isArray(selection);
-  const isLockedSharedRoom = Boolean(
-    selection?.external && selection?.passwordProtected,
-  );
+
+  const isRoot =
+    !isSeveralItems &&
+    selection &&
+    "isFolder" in selection &&
+    "rootFolderId" in selection &&
+    selection.isFolder &&
+    selection.id === selection.rootFolderId;
 
   const withTabs =
     !isRoot &&
     !isSeveralItems &&
     !isGallery &&
-    !isAccounts &&
+    !isContacts &&
     !isTrash &&
-    !isLockedSharedRoom;
-
-  useEffect(() => {
-    checkWidth();
-    window.addEventListener("resize", checkWidth);
-    return () => {
-      window.removeEventListener("resize", checkWidth);
-      resetView();
-    };
-  }, []);
-
-  const checkWidth = () => {
-    const isTablet = isTabletUtils() || isMobileUtils() || !isDesktopUtils();
-
-    setIsTablet(isTablet);
-  };
+    !isLockedSharedRoom(selection as TRoom) &&
+    !(selection as TRoom).expired;
 
   const closeInfoPanel = () => setIsVisible(false);
 
@@ -105,15 +106,14 @@ const InfoPanelHeaderContent = (props) => {
   const setDetails = () => setView("info_details");
   const setShare = () => setView("info_share");
 
-  //const isArchiveRoot = rootFolderType === FolderType.Archive;
+  const memberTab = {
+    id: "info_members",
+    name: t("Common:Members"),
+    onClick: setMembers,
+    content: null,
+  };
 
   const tabsData = [
-    {
-      id: "info_members",
-      name: t("Common:Members"),
-      onClick: setMembers,
-      content: null,
-    },
     {
       id: "info_history",
       name: t("InfoPanel:SubmenuHistory"),
@@ -128,12 +128,21 @@ const InfoPanelHeaderContent = (props) => {
     },
   ];
 
-  const roomsTabs = [...tabsData];
+  const isRoomsType =
+    selection &&
+    "rootFolderType" in selection &&
+    (selection.rootFolderType === FolderType.Rooms ||
+      selection.rootFolderType === FolderType.Archive);
 
-  const personalTabs = [tabsData[1], tabsData[2]];
+  if (isRoomsType) tabsData.unshift(memberTab);
 
-  if (selection?.canShare) {
-    personalTabs.unshift({
+  if (
+    selection &&
+    "canShare" in selection &&
+    !isRoomsType &&
+    selection.canShare
+  ) {
+    tabsData.unshift({
       id: "info_share",
       name: t("Common:Share"),
       onClick: setShare,
@@ -142,33 +151,32 @@ const InfoPanelHeaderContent = (props) => {
   }
 
   if (enablePlugins && infoPanelItemsList.length > 0) {
-    const isRoom = !!selection?.roomType;
-    const isFile = !!selection?.fileExst;
+    const isRoom = selection && "roomType" in selection && selection.roomType;
+    const isFile = selection && "fileExst" in selection && selection.fileExst;
+
     infoPanelItemsList.forEach((item) => {
       const onClick = async () => {
-        setView(`info_plugin-${item.key}`);
+        setView(`info_plugin`);
 
         if (item.value.subMenu.onClick) {
-          item.value.subMenu.onClick();
+          item.value.subMenu.onClick(selectedId ? +selectedId : 0);
         }
       };
 
       const tabsItem = {
-        id: `info_plugin-${item.key}`,
+        id: `info_plugin`,
         name: item.value.subMenu.name,
         onClick,
         content: null,
       };
 
       if (!item.value.filesType) {
-        roomsTabs.push(tabsItem);
-        personalTabs.push(tabsItem);
+        tabsData.push(tabsItem);
         return;
       }
 
       if (isRoom && item.value.filesType.includes(PluginFileType.Rooms)) {
-        roomsTabs.push(tabsItem);
-        personalTabs.push(tabsItem);
+        tabsData.push(tabsItem);
         return;
       }
 
@@ -180,47 +188,34 @@ const InfoPanelHeaderContent = (props) => {
           return;
         }
 
-        roomsTabs.push(tabsItem);
-        personalTabs.push(tabsItem);
+        tabsData.push(tabsItem);
+
         return;
       }
 
       if (item.value.filesType.includes(PluginFileType.Folders)) {
-        roomsTabs.push(tabsItem);
-        personalTabs.push(tabsItem);
-        return;
+        tabsData.push(tabsItem);
       }
     });
   }
 
-  const isRoomsType =
-    selection?.rootFolderType === FolderType.Rooms ||
-    selection?.rootFolderType === FolderType.Archive;
-
   return (
-    <StyledInfoPanelHeader isTablet={isTablet} withTabs={withTabs}>
+    <StyledInfoPanelHeader withTabs={withTabs}>
       <AsideHeader
         header={t("Common:Info")}
         onCloseClick={closeInfoPanel}
         withoutBorder
         className="header-text"
+        isCloseable
       />
 
       {withTabs && (
         <div className="tabs">
-          {isRoomsType ? (
-            <Tabs
-              style={{ width: "100%" }}
-              items={roomsTabs}
-              selectedItemId={roomsView}
-            />
-          ) : (
-            <Tabs
-              style={{ width: "100%" }}
-              items={personalTabs}
-              selectedItemId={fileView}
-            />
-          )}
+          <Tabs
+            style={{ width: "100%" }}
+            items={tabsData}
+            selectedItemId={isRoomsType ? roomsView : fileView}
+          />
         </div>
       )}
     </StyledInfoPanelHeader>
@@ -228,7 +223,14 @@ const InfoPanelHeaderContent = (props) => {
 };
 
 export default inject(
-  ({ settingsStore, treeFoldersStore, infoPanelStore, pluginStore }) => {
+  ({
+    settingsStore,
+    infoPanelStore,
+    pluginStore,
+    selectedFolderStore,
+  }: TStore) => {
+    const selectedId = selectedFolderStore.id;
+
     const { infoPanelItemsList } = pluginStore;
 
     const {
@@ -237,15 +239,10 @@ export default inject(
       roomsView,
       fileView,
       setView,
-      getIsFiles,
-      getIsRooms,
       getIsGallery,
-      getIsAccounts,
+      getIsContacts,
       getIsTrash,
-      resetView,
     } = infoPanelStore;
-
-    const { myRoomsId, archiveRoomsId, myFolderId } = treeFoldersStore;
 
     const { enablePlugins } = settingsStore;
 
@@ -255,26 +252,15 @@ export default inject(
       roomsView,
       fileView,
       setView,
-      getIsFiles,
-      getIsRooms,
       getIsGallery,
-      getIsAccounts,
+      getIsContacts,
       getIsTrash,
-      infoPanelItemsList,
-      resetView,
 
-      myRoomsId,
-      archiveRoomsId,
+      infoPanelItemsList,
 
       enablePlugins,
-      myFolderId,
+
+      selectedId,
     };
   },
-)(
-  withTranslation(["Common", "InfoPanel"])(
-    InfoPanelHeaderContent,
-    // withLoader(observer(InfoPanelHeaderContent))(
-    //   <Loaders.InfoPanelHeaderLoader />
-    // )
-  ),
-);
+)(observer(InfoPanelHeaderContent));

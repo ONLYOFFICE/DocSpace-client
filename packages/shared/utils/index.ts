@@ -201,6 +201,8 @@ export const getLastColumn = (
   return null;
 };
 
-export const isLockedSharedRoom = (item: TRoom) => {
+export const isLockedSharedRoom = (item?: TRoom) => {
+  if (!item) return false;
+
   return Boolean(item.external && item.passwordProtected && !item.expired);
 };

@@ -24,52 +24,43 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useTheme } from "styled-components";
+
 import EmptyScreenPersonSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
 import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
-import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/empty_screen_alt.svg?url";
-import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_alt_dark.svg?url";
 
-import React from "react";
-import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
-import { StyledSeveralItemsContainer } from "../../styles/severalItems";
+import { TTranslation } from "@docspace/shared/types";
 
-const SeveralItems = ({ isPeople, theme, selectedItems }) => {
-  const { t } = useTranslation("InfoPanel");
+import { StyledNoItemContainer } from "../../styles/NoItem";
 
-  const emptyScreenAlt = theme.isBase
-    ? EmptyScreenAltSvgUrl
-    : EmptyScreenAltSvgDarkUrl;
+type NoСontactsItemProps = {
+  t: TTranslation;
+  isGroups: boolean;
+  isGuests: boolean;
+};
 
-  const emptyScreenPerson = theme.isBase
+const NoСontactsItem = ({ t, isGroups, isGuests }: NoСontactsItemProps) => {
+  const theme = useTheme();
+
+  const imgSrc = theme.isBase
     ? EmptyScreenPersonSvgUrl
     : EmptyScreenPersonSvgDarkUrl;
 
-  const imgSrc = isPeople ? emptyScreenPerson : emptyScreenAlt;
-
-  const itemsText = isPeople
-    ? t("InfoPanel:SelectedUsers")
-    : t("InfoPanel:ItemsSelected");
-
   return (
-    <StyledSeveralItemsContainer
-      isPeople={isPeople}
-      className="no-thumbnail-img-wrapper"
-    >
-      <img src={imgSrc} />
-      <Text fontSize="16px" fontWeight={700}>
-        {`${itemsText}: ${selectedItems.length}`}
+    <StyledNoItemContainer>
+      <div className="no-thumbnail-img-wrapper">
+        <img src={imgSrc} alt="empty screen" />
+      </div>
+      <Text className="no-item-text" textAlign="center">
+        {isGuests
+          ? t("InfoPanel:GuestsEmptyScreenText")
+          : isGroups
+            ? t("InfoPanel:GroupsEmptyScreenText")
+            : t("InfoPanel:UsersEmptyScreenText")}
       </Text>
-    </StyledSeveralItemsContainer>
+    </StyledNoItemContainer>
   );
 };
 
-export default inject(({ settingsStore, infoPanelStore }) => {
-  const selectedItems = infoPanelStore.infoPanelSelectedItems;
-
-  return {
-    theme: settingsStore.theme,
-    selectedItems,
-  };
-})(observer(SeveralItems));
+export default NoСontactsItem;

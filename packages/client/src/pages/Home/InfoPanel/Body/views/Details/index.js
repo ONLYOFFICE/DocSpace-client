@@ -37,8 +37,8 @@ import { FileType, FolderType } from "@docspace/shared/enums";
 import { Text } from "@docspace/shared/components/text";
 
 import DetailsHelper from "../../helpers/DetailsHelper.js";
-import { StyledNoThumbnail, StyledThumbnail } from "../../styles/details.js";
-import { StyledProperties, StyledSubtitle } from "../../styles/common.js";
+import { StyledNoThumbnail, StyledThumbnail } from "../../styles/details";
+import { StyledProperties, StyledSubtitle } from "../../styles/common";
 
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 const Details = ({
@@ -153,7 +153,9 @@ const Details = ({
             }`}
             logo={currentIcon}
             model={model}
-            withEditing={selection.isRoom && selection.security?.EditRoom}
+            withEditing={
+              (selection.isRoom && selection.security?.EditRoom) || false
+            }
             dropDownManualX={isMobile() ? "-30px" : "-10px"}
             onChangeFile={onChangeFileContext}
             badgeUrl={badgeUrl}

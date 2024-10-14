@@ -52,7 +52,6 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { fixAccess, getAccessOptions } from "./utils";
-import AddUsersPanel from "../AddUsersPanel";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 import PeopleSelector from "@docspace/shared/selectors/People";
 

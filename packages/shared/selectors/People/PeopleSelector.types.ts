@@ -24,8 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { TUser } from "../../api/people/types";
 import PeopleFilter from "../../api/people/filter";
 import {
+  TSelectorAccessRights,
   TSelectorCancelButton,
   TSelectorCheckbox,
   TSelectorHeader,
@@ -40,10 +42,19 @@ export interface UserTooltipProps {
   position: string;
 }
 
+export type ContactsSelectorGroups =
+  | { withGroups: true; isGroupsOnly?: boolean }
+  | { withGroups?: never; isGroupsOnly?: never };
+
+export type ContactsSelectorGuests =
+  | { withGuests: true; isGuestsOnly?: boolean }
+  | { withGuests?: never; isGuestsOnly?: never };
+
 export type PeopleSelectorProps = TSelectorHeader &
   TSelectorInfo &
   TSelectorCancelButton &
   TSelectorCheckbox &
+  TSelectorAccessRights &
   TSelectorSubmitButton & {
     id?: string;
     className?: string;
@@ -64,4 +75,9 @@ export type PeopleSelectorProps = TSelectorHeader &
 
     emptyScreenHeader?: string;
     emptyScreenDescription?: string;
-  };
+
+    roomId?: string | number;
+
+    checkIfUserInvited?: (user: TUser) => boolean;
+  } & ContactsSelectorGroups &
+  ContactsSelectorGuests;

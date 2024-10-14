@@ -116,6 +116,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       dropDownItems,
       lifetimeTooltip,
       cover,
+      userType,
     } = item;
 
     if (isInputItem) {
@@ -167,7 +168,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
     const currentRole = role || AvatarRole.user;
 
     const typeLabel = getUserTypeTranslation(
-      role as unknown as EmployeeType,
+      userType as unknown as EmployeeType,
       t,
     );
 

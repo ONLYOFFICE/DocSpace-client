@@ -5,7 +5,6 @@
   "CreateSpaceDescription": "Olet yhdistänyt verkkotunnuksesi onnistuneesti IP-osoitteeseesi. Muokataksesi tilan osoiteasetuksia sinun täytyy asettaa tuleva {{productName}}-nimi",
   "CreatingPortal": "Luodaan uutta {{productName}}",
   "CurrentSpace": "Nykyinen tila",
-  "DeletePortalText": "Ole hyvä ja huomioi: vain omistaja voi poistaa valitun {{productName}}:n. <1>{{domain}}</1> :n omistaja on <1>{{displayName}}</1> (<5>{{email}}</5>). Jos et ole omistaja, et pääse käsiksi {{productName}}:n poistoasetuksiin klikkaamalla POISTA-painiketta ja sinut ohjataan takaisin Huoneet-osioon.",
   "DomainName": "Verkkotunnus",
   "DomainNotFound": "Verkkotunnusta ei löytynyt, ole hyvä ja tarkista DNS-asetukset.",
   "DomainSettings": "Verkkotunnuksen asetukset",

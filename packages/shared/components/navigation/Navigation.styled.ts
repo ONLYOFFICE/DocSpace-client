@@ -79,6 +79,7 @@ const StyledContainer = styled.div<{
     display: flex;
     height: 24px;
     margin-inline-end: 16px;
+    cursor: pointer;
 
     @media ${tablet} {
       .logo-icon_svg {

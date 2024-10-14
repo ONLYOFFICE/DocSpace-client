@@ -567,7 +567,8 @@ class ContactsConextOptionsStore {
   get contactsCanCreate() {
     const isInsideGroup = this.usersStore.contactsTab === "inside_group";
 
-    const { isCollaborator } = this.userStore.user!;
+    const isCollaborator = this.userStore.user?.isCollaborator;
+
     const canCreate = !isInsideGroup && !isCollaborator;
 
     return canCreate;

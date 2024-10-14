@@ -5,7 +5,6 @@
   "CreateSpaceDescription": "Vous avez réussi à connecter votre domaine à votre adresse IP. Pour modifier les paramètres de l'adresse de l'espace, il faut définir le nom du futur {{productName}}.",
   "CreatingPortal": "Création d'un nouveau {{productName}}",
   "CurrentSpace": "Espace actuel",
-  "DeletePortalText": "Remarque : seul le propriétaire peut supprimer le {{productName}} sélectionné. Le propriétaire de <1>{{domain}}</1> est <1>{{displayName}}</1> (<5>{{email}}</5>). Si vous n'êtes pas le propriétaire, vous ne pourrez pas accéder aux paramètres de suppression du {{productName}} en cliquant sur le bouton SUPPRIMER et serez redirigé vers la section Salles.",
   "DomainName": "Nom de domaine",
   "DomainNotFound": "Domaine non trouvé, veuillez vérifier les paramètres DNS",
   "DomainSettings": "Paramètres de domaine",

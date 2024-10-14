@@ -132,7 +132,9 @@ class SettingsSetupStore {
     const isMobileView =
       this.settingsStore.currentDeviceType === DeviceType.mobile;
 
-    if (this.isInit && isMobileView) return;
+    if (this.isInit) return;
+
+    this.isInit = true;
 
     if (this.authStore.isAuthenticated) {
       if (isMobileView) {
@@ -173,8 +175,6 @@ class SettingsSetupStore {
         ]);
       }
     }
-
-    this.isInit = true;
   };
 
   setIsLoadingDownloadReport = (state) => {

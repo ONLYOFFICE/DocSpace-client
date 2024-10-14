@@ -94,8 +94,9 @@ const BruteForceProtection = (props) => {
   }, [currentNumberAttempt, currentBlockingTime, currentCheckPeriod]);
 
   useEffect(() => {
-    isInit && getSettings();
-  }, [isInit]);
+    if (!isInit || !numberAttempt || !blockingTime || !checkPeriod) return;
+    getSettings();
+  }, [isInit, numberAttempt, blockingTime, checkPeriod]);
 
   useEffect(() => {
     checkWidth();

@@ -32,7 +32,7 @@
   "InviteUsersCollaborationOptionDescription": "Add members for joint editing in the room.",
   "InviteUsersOptionDescription": "Add portal members for joint editing in the room",
   "InviteUsersOptionTitle": "Inviting Attendees",
-  "MigrationDataDescription": "Import data to your {{productName}} from ONLYOFFICE Workspace, Google Workspace, or Nextcloud.",
+  "MigrationDataDescription": "Import data to your {{productName}} from {{organizationName}} Workspace, Google Workspace, or Nextcloud.",
   "MigrationDataTitle": "Migration Data",
   "PublicRoomEmptyTitle": "Welcome to the Public room",
   "ShareOptionDescription": "Copy a public access link or invite other users to the room to start the form filling process.",
@@ -46,5 +46,6 @@
   "UploadFromPortalDescription": "Upload any type files from Documents or Rooms",
   "UploadFromPortalTitle": "Upload from {{productName}}",
   "UploadPDFFormOptionDescription": "Select a ready PDF form available in {{productName}} and upload it to the room.",
-  "UserEmptyDescription": "Files and folders uploaded by admins will appeared here."
+  "UserEmptyDescription": "Files and folders uploaded by admins will appeared here.",
+  "VirtualDataRoomEmptyTitle": "Welcome to the Virtual Data Room"
 }

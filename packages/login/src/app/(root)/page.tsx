@@ -105,6 +105,7 @@ async function Page({
                   reCaptchaType={settings?.recaptchaType}
                   ldapDomain={capabilities?.ldapDomain}
                   ldapEnabled={capabilities?.ldapEnabled || false}
+                  baseDomain={settings?.baseDomain}
                 />
                 {!clientId && (
                   <ThirdParty

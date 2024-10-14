@@ -26,7 +26,7 @@
 
 import { Meta, StoryObj } from "@storybook/react";
 
-import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/catalog.folder.react.svg?url";
+import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 
 import { MainButton } from "./MainButton";
 

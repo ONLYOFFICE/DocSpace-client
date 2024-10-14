@@ -26,16 +26,19 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { ReactSVG } from "react-svg";
 import Planet12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/planet.react.svg?url";
-import { getUserTypeLabel } from "../../../utils/common";
+import LifetimeRoomIconUrl from "PUBLIC_DIR/images/lifetime-room.react.svg?url";
+import { getUserTypeTranslation } from "../../../utils/common";
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
 import { Text } from "../../text";
 import { Checkbox } from "../../checkbox";
 import { RoomIcon } from "../../room-icon";
+import { Tooltip } from "../../tooltip";
 
 import { StyledItem } from "../Selector.styled";
 import { ItemProps, Data, TSelectorItem } from "../Selector.types";
-import { RoomsType } from "../../../enums";
+import { EmployeeType, RoomsType } from "../../../enums";
 import NewItem from "./NewItem";
 import InputItem from "./InputItem";
 
@@ -55,7 +58,8 @@ const compareFunction = (prevProps: ItemProps, nextProps: ItemProps) => {
     prevItem?.id === nextItem?.id &&
     prevItem?.label === nextItem?.label &&
     prevItem?.isSelected === nextItem?.isSelected &&
-    nextData?.inputItemVisible === prevData?.inputItemVisible
+    nextData?.inputItemVisible === prevData?.inputItemVisible &&
+    nextData?.listHeight === prevData?.listHeight
   );
 };
 
@@ -71,6 +75,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
     inputItemVisible,
     savedInputValue,
     setSavedInputValue,
+    listHeight,
   }: Data = data;
   const { t } = useTranslation(["Common"]);
 
@@ -109,6 +114,8 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       isGroup,
       disabledText,
       dropDownItems,
+      lifetimeTooltip,
+      cover,
     } = item;
 
     if (isInputItem) {
@@ -120,6 +127,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           style={style}
           color={color}
           roomType={roomType}
+          cover={cover}
           icon={icon}
           setInputItemVisible={setInputItemVisible}
           setSavedInputValue={setSavedInputValue}
@@ -137,6 +145,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           label={label}
           onCreateClick={onCreateClick}
           dropDownItems={dropDownItems}
+          listHeight={listHeight}
           style={style}
           hotkey={hotkey}
           inputItemVisible={inputItemVisible}
@@ -157,8 +166,8 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
 
     const currentRole = role || AvatarRole.user;
 
-    const typeLabel = getUserTypeLabel(
-      role as "owner" | "admin" | "user" | "collaborator" | "manager",
+    const typeLabel = getUserTypeTranslation(
+      role as unknown as EmployeeType,
       t,
     );
 
@@ -179,6 +188,12 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       onSelect?.(item, isDoubleClick);
     };
 
+    const getContent = () => (
+      <Text fontSize="12px" fontWeight={400} noSelect>
+        {lifetimeTooltip}
+      </Text>
+    );
+
     return (
       <StyledItem
         key={`${label}-${avatar}-${role}`}
@@ -198,6 +213,15 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
             isGroup={isGroup}
             userName={isGroup ? label : ""}
           />
+        ) : cover ? (
+          <RoomIcon
+            color={color}
+            title={label}
+            logo={{ cover }}
+            showDefault={false}
+            badgeUrl={badgeUrl ?? ""}
+            className="item-logo"
+          />
         ) : color ? (
           <RoomIcon
             color={color}
@@ -211,7 +235,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
             title={label}
             className="item-logo"
             imgClassName="room-logo"
-            imgSrc={icon}
+            logo={icon}
             showDefault={false}
             badgeUrl={badgeUrl ?? ""}
           />
@@ -219,16 +243,34 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
         {renderCustomItem ? (
           renderCustomItem(label, typeLabel, email, isGroup, status)
         ) : (
-          <Text
-            className="label label-disabled"
-            fontWeight={600}
-            fontSize="14px"
-            noSelect
-            truncate
-            dir="auto"
-          >
-            {label}
-          </Text>
+          <div className="selector-item_name">
+            <Text
+              className="label label-disabled"
+              fontWeight={600}
+              fontSize="14px"
+              noSelect
+              truncate
+              dir="auto"
+            >
+              {label}
+            </Text>
+
+            {lifetimeTooltip && (
+              <>
+                <ReactSVG
+                  data-tooltip-id={`${item.id}_iconTooltip`}
+                  className="title-icon"
+                  src={LifetimeRoomIconUrl}
+                />
+                <Tooltip
+                  id={`${item.id}_iconTooltip`}
+                  place="bottom"
+                  getContent={getContent}
+                  maxWidth="300px"
+                />
+              </>
+            )}
+          </div>
         )}
 
         {isDisabled && disabledText ? (

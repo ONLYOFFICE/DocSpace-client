@@ -144,12 +144,7 @@ const FilterDialog = (props) => {
       : filters.deliveryDate === null && filters.status.length === 0;
 
   return (
-    <ModalDialog
-      withFooterBorder
-      visible={visible}
-      onClose={closeModal}
-      displayType="aside"
-    >
+    <ModalDialog visible={visible} onClose={closeModal} displayType="aside">
       <ModalDialog.Header>{t("Files:Filter")}</ModalDialog.Header>
       <ModalDialog.Body>
         <DialogBodyWrapper>

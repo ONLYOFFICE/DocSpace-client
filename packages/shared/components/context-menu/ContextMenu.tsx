@@ -235,12 +235,12 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
 
           if (options) {
             Array.from(options).forEach((option) =>
-              optionsWidth.push(option.clientWidth),
+              optionsWidth.push(option.getBoundingClientRect().width),
             );
 
             const widthMaxContent = Math.max(...optionsWidth);
 
-            width = widthMaxContent;
+            width = Math.ceil(widthMaxContent);
           }
         }
 
@@ -439,13 +439,9 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
       setShowMobileMenu(false);
     };
 
-    React.useImperativeHandle(
-      ref,
-      () => {
-        return { show, hide, toggle, menuRef };
-      },
-      [hide, show, toggle],
-    );
+    React.useImperativeHandle(ref, () => {
+      return { show, hide, toggle, menuRef };
+    }, [hide, show, toggle]);
 
     const renderContextMenu = () => {
       const currentClassName = className
@@ -498,13 +494,21 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
                       />
                     ) : (
                       <div className="icon-wrapper">
-                        {header.icon ? (
+                        {(header?.icon && !header?.color) ||
+                        header?.cover ||
+                        header?.logo ? (
                           <RoomIcon
                             title={header.title}
                             isArchive={isArchive}
-                            showDefault={defaultIcon}
+                            showDefault={false}
                             imgClassName="drop-down-item_icon"
-                            imgSrc={header.icon}
+                            logo={
+                              header?.cover
+                                ? { cover: header.cover }
+                                : header?.logo
+                                  ? header?.logo
+                                  : header?.icon
+                            }
                             badgeUrl={badgeUrl}
                             color={header.color || ""}
                           />

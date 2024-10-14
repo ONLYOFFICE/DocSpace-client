@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -24,11 +25,20 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { loginHandler, LOGIN_PATH } from "./authentication";
 import {
+  loginHandler,
+  LOGIN_PATH,
+  LOGIN_PATH_WITH_PARAMS,
+  CONFIRM_PATH,
+  confirmHandler,
+} from "./authentication";
+import { OAUTH_SIGN_IN_PATH, oauthSignInHelper } from "./oauth/signIn";
+import {
+  SELF_PATH,
   SELF_PATH_ACTIVATION_STATUS,
-  SELF_PATH_CHANGE_PASSWORD,
+  SELF_PATH_CHANGE_AUTH_DATA,
   SELF_PATH_UPDATE_USER,
+  SELF_PATH_USER_BY_EMAIL,
   selfHandler,
 } from "./people";
 import {
@@ -36,11 +46,13 @@ import {
   completeHandler,
   LICENCE_PATH,
   licenseHandler,
+  TFA_APP_VALIDATE_PATH,
+  tfaAppValidateHandler,
 } from "./settings";
 
 export type TEndpoint = {
   url: string;
-  dataHandler: Response;
+  dataHandler: () => Response;
 };
 
 export type TEndpoints = {
@@ -52,26 +64,70 @@ const BASE_URL = "*/**/api/2.0/";
 export const endpoints: TEndpoints = {
   wizardComplete: {
     url: `${BASE_URL}${COMPLETE_PATH}`,
-    dataHandler: completeHandler(),
+    dataHandler: completeHandler,
   },
   license: {
     url: `${BASE_URL}${LICENCE_PATH}`,
-    dataHandler: licenseHandler(),
+    dataHandler: licenseHandler,
   },
-  changePassword: {
-    url: `${BASE_URL}${SELF_PATH_CHANGE_PASSWORD}`,
-    dataHandler: selfHandler(),
-  },
-  activationStatus: {
-    url: `${BASE_URL}${SELF_PATH_ACTIVATION_STATUS}`,
-    dataHandler: selfHandler(),
+  createUser: {
+    url: `${BASE_URL}${SELF_PATH}`,
+    dataHandler: selfHandler,
   },
   updateUser: {
     url: `${BASE_URL}${SELF_PATH_UPDATE_USER}`,
-    dataHandler: selfHandler(),
+    dataHandler: selfHandler,
+  },
+  changePassword: {
+    url: `${BASE_URL}${SELF_PATH_CHANGE_AUTH_DATA}`,
+    dataHandler: selfHandler,
+  },
+  changeEmail: {
+    url: `${BASE_URL}${SELF_PATH_CHANGE_AUTH_DATA}`,
+    dataHandler: selfHandler,
+  },
+  changeEmailError: {
+    url: `${BASE_URL}${SELF_PATH_CHANGE_AUTH_DATA}`,
+    dataHandler: selfHandler.bind(null, 400),
+  },
+  activationStatus: {
+    url: `${BASE_URL}${SELF_PATH_ACTIVATION_STATUS}`,
+    dataHandler: selfHandler,
+  },
+  activationStatusError: {
+    url: `${BASE_URL}${SELF_PATH_ACTIVATION_STATUS}`,
+    dataHandler: selfHandler.bind(null, 400),
+  },
+  getUserByEmail: {
+    url: `${BASE_URL}${SELF_PATH_USER_BY_EMAIL}`,
+    dataHandler: selfHandler,
+  },
+  checkConfirmLink: {
+    url: `${BASE_URL}${CONFIRM_PATH}`,
+    dataHandler: confirmHandler,
   },
   login: {
     url: `${BASE_URL}${LOGIN_PATH}`,
-    dataHandler: loginHandler(),
+    dataHandler: loginHandler,
+  },
+  loginWithTfaCode: {
+    url: `${BASE_URL}${LOGIN_PATH_WITH_PARAMS}`,
+    dataHandler: loginHandler,
+  },
+  tfaAppValidate: {
+    url: `${BASE_URL}${TFA_APP_VALIDATE_PATH}`,
+    dataHandler: tfaAppValidateHandler,
+  },
+  tfaAppValidateError: {
+    url: `${BASE_URL}${TFA_APP_VALIDATE_PATH}`,
+    dataHandler: tfaAppValidateHandler.bind(null, 400),
+  },
+  logout: {
+    url: `${BASE_URL}authentication/logout`,
+    dataHandler: () => new Response(JSON.stringify({})),
+  },
+  oauthSignIn: {
+    url: `*/**/${OAUTH_SIGN_IN_PATH}`,
+    dataHandler: oauthSignInHelper,
   },
 };

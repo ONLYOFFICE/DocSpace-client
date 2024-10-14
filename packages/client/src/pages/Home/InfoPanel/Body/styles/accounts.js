@@ -27,6 +27,7 @@
 import styled, { css } from "styled-components";
 import { Base } from "@docspace/shared/themes";
 import { mobile, tablet } from "@docspace/shared/utils";
+import { TextUserSelect } from "@docspace/shared/utils";
 
 const StyledAccountsItemTitle = styled.div`
   min-height: 80px;
@@ -36,11 +37,11 @@ const StyledAccountsItemTitle = styled.div`
   align-items: center;
   justify-content: start;
   gap: 16px;
-  position: fixed;
+  position: sticky;
+  top: 0;
   margin-inline-start: -20px;
   padding-block: 24px;
   padding-inline: 20px 0;
-  width: calc(100% - 40px);
   background: ${(props) => props.theme.infoPanel.backgroundColor};
   z-index: 100;
 
@@ -51,6 +52,7 @@ const StyledAccountsItemTitle = styled.div`
 
   @media ${mobile} {
     width: calc(100vw - 32px);
+    padding-inline-end: 0;
   }
 
   .avatar {
@@ -78,6 +80,7 @@ const StyledAccountsItemTitle = styled.div`
       font-weight: 700;
       font-size: 16px;
       line-height: 22px;
+      ${TextUserSelect}
     }
 
     .info-text__email {
@@ -104,8 +107,6 @@ StyledAccountsItemTitle.defaultProps = { theme: Base };
 const StyledAccountContent = styled.div`
   margin-block: 0;
   margin-inline: 0 auto;
-
-  padding-top: 128px;
 
   .data__header {
     width: 100%;

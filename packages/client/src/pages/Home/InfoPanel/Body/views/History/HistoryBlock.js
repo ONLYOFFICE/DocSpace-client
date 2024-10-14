@@ -32,7 +32,7 @@ import HistoryTitleBlock from "./HistoryBlockContent/HistoryTitleBlock";
 import HistoryBlockContent from "./HistoryBlockContent";
 
 const HistoryBlock = ({ t, feed, isLastEntity }) => {
-  const { action, initiator } = feed;
+  const { action, initiator, date } = feed;
 
   const isUserAction =
     action.key === "RoomCreateUser" ||
@@ -41,6 +41,7 @@ const HistoryBlock = ({ t, feed, isLastEntity }) => {
 
   return (
     <StyledHistoryBlock
+      className={date}
       withBottomDivider={!isLastEntity}
       isUserAction={isUserAction}
     >

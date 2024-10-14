@@ -24,12 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { API_PREFIX, BASE_URL } from "../../utils";
+import {
+  API_PREFIX,
+  BASE_URL,
+  HEADER_SELF_ERROR_400,
+  HEADER_SELF_ERROR_404,
+} from "../../utils";
 
 export const PATH = "people";
-export const PATH_CHANGE_PASSWORD = "people/**/password";
+export const PATH_CHANGE_AUTH_DATA = "people/**/password";
 export const PATH_ACTIVATION_STATUS = "people/activationstatus/*";
 export const PATH_UPDATE_USER = "people/*";
+export const PATH_USER_BY_EMAIL = "people/email?email=**";
 
 const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 
@@ -81,6 +87,39 @@ export const successSelf = {
   statusCode: 200,
 };
 
-export const self = () => {
+export const selfError404 = {
+  response: {
+    data: {
+      error: {
+        message: "The record could not be found",
+      },
+    },
+    status: 404,
+    statusText: "Not Found",
+  },
+  status: 1,
+  statusCode: 404,
+};
+
+export const selfError400 = {
+  response: {
+    title: "One or more validation errors occurred.",
+    status: 400,
+  },
+  count: 1,
+  status: 0,
+  statusCode: 400,
+};
+
+export const self = (
+  errorStatus: 400 | 404 | null = null,
+  headers?: Headers,
+) => {
+  if (errorStatus === 404 || headers?.get(HEADER_SELF_ERROR_404))
+    return new Response(JSON.stringify(selfError404));
+
+  if (errorStatus === 400 || headers?.get(HEADER_SELF_ERROR_400))
+    return new Response(JSON.stringify(selfError400));
+
   return new Response(JSON.stringify(successSelf));
 };

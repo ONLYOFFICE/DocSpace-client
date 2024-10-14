@@ -34,9 +34,9 @@ export class MockRequest {
   async router(endpoints: TEndpoint[]) {
     endpoints.forEach(async (endpoint) => {
       await this.page.route(endpoint.url, async (route) => {
-        const json = await endpoint.dataHandler.json();
+        const json = await endpoint.dataHandler().json();
 
-        await route.fulfill({ json });
+        await route.fulfill({ json, status: json.statusCode ?? 200 });
       });
     });
   }

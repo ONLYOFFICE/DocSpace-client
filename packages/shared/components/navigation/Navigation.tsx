@@ -26,19 +26,20 @@
 
 import React, { useCallback } from "react";
 import { ReactSVG } from "react-svg";
+import NavigationText from "./sub-components/Text";
 
 import { Consumer, DomHelpers } from "../../utils";
-import { DeviceType } from "../../enums";
-
 import { Backdrop } from "../backdrop";
 
 import ArrowButton from "./sub-components/ArrowBtn";
-import Text from "./sub-components/Text";
 import ControlButtons from "./sub-components/ControlBtn";
 import ToggleInfoPanelButton from "./sub-components/ToggleInfoPanelBtn";
 import NavigationLogo from "./sub-components/LogoBlock";
 import DropBox from "./sub-components/DropBox";
 
+import { Tooltip } from "../tooltip";
+import { Text } from "../text";
+import { DeviceType } from "../../enums";
 import { StyledContainer } from "./Navigation.styled";
 import { INavigationProps } from "./Navigation.types";
 
@@ -75,6 +76,7 @@ const Navigation = ({
   burgerLogo,
   isPublicRoom,
   titleIcon,
+  titleIconTooltip,
   currentDeviceType,
   rootRoomTitle,
   showTitle,
@@ -83,6 +85,7 @@ const Navigation = ({
   tariffBar,
   showNavigationButton,
   onContextOptionsClick,
+  onLogoClick,
   ...rest
 }: INavigationProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -157,6 +160,12 @@ const Navigation = ({
     };
   }, [isOpen, onResize, onMissClick]);
 
+  React.useEffect(() => {
+    if (!navigationItems?.length) {
+      setIsOpen(false);
+    }
+  }, [navigationItems]);
+
   const onBackToParentFolderAction = React.useCallback(() => {
     setIsOpen((val) => !val);
     onBackToParentFolder?.();
@@ -168,13 +177,35 @@ const Navigation = ({
     ((navigationItems && navigationItems.length > 1) || rootRoomTitle) &&
     currentDeviceType !== DeviceType.mobile;
 
+  const getContent = () => (
+    <Text fontSize="12px" fontWeight={400} noSelect>
+      {titleIconTooltip}
+    </Text>
+  );
+
   const navigationTitleNode = (
     <div className="title-block">
-      {titleIcon && <ReactSVG className="title-icon" src={titleIcon} />}
-      <Text
+      {titleIcon && (
+        <ReactSVG
+          data-tooltip-id="iconTooltip"
+          className="title-icon"
+          src={titleIcon}
+        />
+      )}
+
+      {titleIconTooltip && (
+        <Tooltip
+          id="iconTooltip"
+          place="bottom"
+          getContent={getContent}
+          maxWidth="300px"
+        />
+      )}
+
+      <NavigationText
         className="title-block-text"
         title={title}
-        isOpen={isOpen}
+        isOpen={false}
         isRootFolder={isRootFolder}
         onClick={toggleDropBox}
         isRootFolderTitle={false}
@@ -189,7 +220,7 @@ const Navigation = ({
 
   const navigationTitleContainerNode = showRootFolderNavigation ? (
     <div className="title-container">
-      <Text
+      <NavigationText
         className="room-title"
         title={
           rootRoomTitle || navigationItems[navigationItems.length - 2].title
@@ -206,11 +237,13 @@ const Navigation = ({
     navigationTitleNode
   );
 
+  const haveItems = !!navigationItems?.length;
+
   return (
     <Consumer>
       {(context) => (
         <>
-          {isOpen && (
+          {isOpen && haveItems && (
             <>
               <Backdrop
                 visible={isOpen}
@@ -241,6 +274,7 @@ const Navigation = ({
                 currentDeviceType={currentDeviceType}
                 navigationTitleContainerNode={navigationTitleContainerNode}
                 onCloseDropBox={onCloseDropBox}
+                titleIconTooltip={titleIconTooltip}
               />
             </>
           )}
@@ -262,6 +296,7 @@ const Navigation = ({
                 className="navigation-logo"
                 logo={typeof withLogo === "string" ? withLogo : ""}
                 burgerLogo={burgerLogo}
+                onClick={onLogoClick}
               />
             )}
             <ArrowButton

@@ -28,28 +28,40 @@ import { makeAutoObservable } from "mobx";
 import { TableVersions } from "SRC_DIR/helpers/constants";
 
 const TABLE_COLUMNS = `filesTableColumns_ver-${TableVersions.Files}`;
-const TABLE_ACCOUNTS_PEOPLE_COLUMNS = `peopleTableColumns_ver-${TableVersions.People}`;
-const TABLE_ACCOUNTS_GROUPS_COLUMNS = `groupsTableColumns_ver-${TableVersions.Groups}`;
-const TABLE_ACCOUNTS_INSIDE_GROUP_COLUMNS = `insideGroupTableColumns_ver-${TableVersions.InsideGroup}`;
+const TABLE_PEOPLE_COLUMNS = `peopleTableColumns_ver-${TableVersions.People}`;
+const TABLE_GUESTS_COLUMNS = `guestsTableColumns_ver-${TableVersions.Guests}`;
+const TABLE_GROUPS_COLUMNS = `groupsTableColumns_ver-${TableVersions.Groups}`;
+const TABLE_INSIDE_GROUP_COLUMNS = `insideGroupTableColumns_ver-${TableVersions.InsideGroup}`;
 const TABLE_ROOMS_COLUMNS = `roomsTableColumns_ver-${TableVersions.Rooms}`;
 const TABLE_TRASH_COLUMNS = `trashTableColumns_ver-${TableVersions.Trash}`;
 const TABLE_RECENT_COLUMNS = `recentTableColumns_ver-${TableVersions.Recent}`;
+const TABLE_VDR_INDEXING_COLUMNS = `vdrIndexingColumns_ver-${TableVersions.Rooms}`;
 
 const COLUMNS_SIZE = `filesColumnsSize_ver-${TableVersions.Files}`;
 const COLUMNS_ROOMS_SIZE = `roomsColumnsSize_ver-${TableVersions.Rooms}`;
 const COLUMNS_TRASH_SIZE = `trashColumnsSize_ver-${TableVersions.Trash}`;
 const COLUMNS_RECENT_SIZE = `recentColumnsSize_ver-${TableVersions.Recent}`;
+const COLUMNS_VDR_INDEXING_SIZE = `vdrIndexingColumnsSize_ver-${TableVersions.Rooms}`;
+const COLUMNS_PEOPLE_SIZE = `peopleColumnsSize_ver-${TableVersions.People}`;
+const COLUMNS_GUESTS_SIZE = `guestsColumnsSize_ver-${TableVersions.Guests}`;
+const COLUMNS_INSIDE_GROUPS_SIZE = `insideGroupColumnsSize_ver-${TableVersions.InsideGroup}`;
 
 const COLUMNS_SIZE_INFO_PANEL = `filesColumnsSizeInfoPanel_ver-${TableVersions.Files}`;
 const COLUMNS_ROOMS_SIZE_INFO_PANEL = `roomsColumnsSizeInfoPanel_ver-${TableVersions.Rooms}`;
 const COLUMNS_TRASH_SIZE_INFO_PANEL = `trashColumnsSizeInfoPanel_ver-${TableVersions.Trash}`;
 const COLUMNS_RECENT_SIZE_INFO_PANEL = `recentColumnsSizeInfoPanel_ver-${TableVersions.Recent}`;
+const COLUMNS_VDR_INDEXING_SIZE_INFO_PANEL = `vdrIndexingColumnsSizeInfoPanel_ver-${TableVersions.Recent}`;
+const COLUMNS_PEOPLE_INFO_PANEL_SIZE = `infoPanelPeopleColumnsSize_ver-${TableVersions.People}`;
+const COLUMNS_GUESTS_INFO_PANEL_SIZE = `infoPanelGuestsColumnsSize_ver-${TableVersions.Guests}`;
+const COLUMNS_INSIDE_GROUPS_INFO_PANEL_SIZE = `infoPanelInsideGroupPeopleColumnsSize_ver-${TableVersions.InsideGroup}`;
 
 class TableStore {
   authStore;
   treeFoldersStore;
   userStore;
   settingsStore;
+  selectedFolderStore;
+  peopleStore;
 
   roomColumnNameIsEnabled = true; // always true
   roomColumnTypeIsEnabled = false;
@@ -65,6 +77,7 @@ class TableStore {
   createdColumnIsEnabled = false;
   modifiedColumnIsEnabled = true;
   sizeColumnIsEnabled = true;
+  typeColumnIsEnabled = true;
   typeColumnIsEnabled = false;
   quickButtonsColumnIsEnabled = true;
 
@@ -80,25 +93,48 @@ class TableStore {
   sizeTrashColumnIsEnabled = true;
   typeTrashColumnIsEnabled = false;
 
-  typeAccountsColumnIsEnabled = true;
-  groupAccountsColumnIsEnabled = true;
-  emailAccountsColumnIsEnabled = true;
-  storageAccountsColumnIsEnabled = true;
-
   peopleAccountsGroupsColumnIsEnabled = true;
   managerAccountsGroupsColumnIsEnabled = true;
 
-  typeAccountsInsideGroupColumnIsEnabled = true;
-  groupAccountsInsideGroupColumnIsEnabled = true;
-  emailAccountsInsideGroupColumnIsEnabled = true;
+  typePeopleColumnIsEnabled = true;
+  groupPeopleColumnIsEnabled = true;
+  emailPeopleColumnIsEnabled = true;
+  storagePeopleColumnIsEnabled = true;
 
-  constructor(authStore, treeFoldersStore, userStore, settingsStore) {
+  inviterGuestsColumnIsEnabled = true;
+  emailGuestsColumnIsEnabled = true;
+  invitedDateGuestsColumnIsEnabled = true;
+
+  typeInsideGroupColumnIsEnabled = true;
+  groupInsideGroupColumnIsEnabled = true;
+  emailInsideGroupColumnIsEnabled = true;
+  storageInsideGroupColumnIsEnabled = true;
+
+  indexVDRColumnIsEnabled = true; // always true
+  authorVDRColumnIsEnabled = true;
+  modifiedVDRColumnIsEnabled = true;
+  createdVDRColumnIsEnabled = false;
+  sizeVDRColumnIsEnabled = true;
+  typeVDRColumnIsEnabled = false;
+
+  constructor(
+    authStore,
+    treeFoldersStore,
+    userStore,
+    settingsStore,
+    indexingStore,
+    selectedFolderStore,
+    peopleStore,
+  ) {
     makeAutoObservable(this);
 
     this.authStore = authStore;
     this.treeFoldersStore = treeFoldersStore;
     this.userStore = userStore;
     this.settingsStore = settingsStore;
+    this.indexingStore = indexingStore;
+    this.selectedFolderStore = selectedFolderStore;
+    this.peopleStore = peopleStore;
   }
 
   setRoomColumnType = (enable) => {
@@ -129,6 +165,10 @@ class TableStore {
     this.authorRecentColumnIsEnabled = enable;
   };
 
+  setAuthorVDRColumn = (enable) => {
+    this.authorVDRColumnIsEnabled = enable;
+  };
+
   setCreatedColumn = (enable) => {
     this.createdColumnIsEnabled = enable;
   };
@@ -137,12 +177,20 @@ class TableStore {
     this.createdRecentColumnIsEnabled = enable;
   };
 
+  setCreatedVDRColumn = (enable) => {
+    this.createdVDRColumnIsEnabled = enable;
+  };
+
   setModifiedColumn = (enable) => {
     this.modifiedColumnIsEnabled = enable;
   };
 
   setModifiedRecentColumn = (enable) => {
     this.modifiedRecentColumnIsEnabled = enable;
+  };
+
+  setModifiedVDRColumn = (enable) => {
+    this.modifiedVDRColumnIsEnabled = enable;
   };
 
   setRoomColumn = (enable) => {
@@ -161,12 +209,20 @@ class TableStore {
     this.sizeRecentColumnIsEnabled = enable;
   };
 
+  setSizeVDRColumn = (enable) => {
+    this.sizeVDRColumnIsEnabled = enable;
+  };
+
   setTypeColumn = (enable) => {
     this.typeColumnIsEnabled = enable;
   };
 
   setTypeRecentColumn = (enable) => {
     this.typeRecentColumnIsEnabled = enable;
+  };
+
+  setTypeVDRColumn = (enable) => {
+    this.typeVDRColumnIsEnabled = enable;
   };
 
   setQuickButtonsColumn = (enable) => {
@@ -180,28 +236,34 @@ class TableStore {
   setTypeTrashColumn = (enable) => (this.typeTrashColumnIsEnabled = enable);
   setLastOpenedColumn = (enable) => (this.lastOpenedColumnIsEnabled = enable);
 
-  setAccountsColumnType = (enable) =>
-    (this.typeAccountsColumnIsEnabled = enable);
-  setAccountsColumnEmail = (enable) =>
-    (this.emailAccountsColumnIsEnabled = enable);
-  setAccountsColumnGroup = (enable) =>
-    (this.groupAccountsColumnIsEnabled = enable);
-  setAccountsColumnStorage = (enable) =>
-    (this.storageAccountsColumnIsEnabled = enable);
-
   setAccountsGroupsColumnPeople = (enable) =>
     (this.peopleAccountsGroupsColumnIsEnabled = enable);
   setAccountsGroupsColumnManager = (enable) =>
     (this.managerAccountsGroupsColumnIsEnabled = enable);
 
-  setAccountsInsideGroupColumnType = (enable) =>
-    (this.typeAccountsInsideGroupColumnIsEnabled = enable);
-  setAccountsInsideGroupColumnEmail = (enable) =>
-    (this.emailAccountsInsideGroupColumnIsEnabled = enable);
-  setAccountsInsideGroupColumnGroup = (enable) =>
-    (this.groupAccountsInsideGroupColumnIsEnabled = enable);
+  setPeopleColumnType = (enable) => (this.typePeopleColumnIsEnabled = enable);
+  setPeopleColumnEmail = (enable) => (this.emailPeopleColumnIsEnabled = enable);
+  setPeopleColumnGroup = (enable) => (this.groupPeopleColumnIsEnabled = enable);
+  setPeopleColumnStorage = (enable) =>
+    (this.storagePeopleColumnIsEnabled = enable);
+
+  setGuestsColumnInviter = (enable) =>
+    (this.inviterGuestsColumnIsEnabled = enable);
+  setGuestsColumnEmail = (enable) => (this.emailGuestsColumnIsEnabled = enable);
+  setGuestsColumnInvitedDate = (enable) =>
+    (this.invitedDateGuestsColumnIsEnabled = enable);
+
+  setInsideGroupColumnType = (enable) =>
+    (this.typeInsideGroupColumnIsEnabled = enable);
+  setInsideGroupColumnEmail = (enable) =>
+    (this.emailInsideGroupColumnIsEnabled = enable);
+  setInsideGroupColumnGroup = (enable) =>
+    (this.groupInsideGroupColumnIsEnabled = enable);
+  setInsideGroupColumnStorage = (enable) =>
+    (this.storageInsideGroupColumnIsEnabled = enable);
 
   setColumnsEnable = (frameTableColumns, isRecentTab) => {
+    const { contactsTab } = this.peopleStore.usersStore;
     const storageColumns = localStorage.getItem(this.tableStorageName);
     const splitColumns = storageColumns
       ? storageColumns.split(",")
@@ -210,14 +272,14 @@ class TableStore {
         : null;
 
     if (splitColumns) {
-      const {
-        isRoomsFolder,
-        isArchiveFolder,
-        isTrashFolder,
-        getIsAccountsPeople,
-        getIsAccountsGroups,
-        getIsAccountsInsideGroup,
-      } = this.treeFoldersStore;
+      const { isRoomsFolder, isArchiveFolder, isTrashFolder } =
+        this.treeFoldersStore;
+
+      const isContactsPeople = contactsTab === "people";
+      const isContactsGuests = contactsTab === "guests";
+      const isContactsGroups = contactsTab === "groups";
+      const isContactsInsideGroup = contactsTab === "inside_group";
+
       const isRooms = isRoomsFolder || isArchiveFolder;
 
       if (isRooms) {
@@ -229,15 +291,7 @@ class TableStore {
         return;
       }
 
-      if (getIsAccountsPeople()) {
-        this.setAccountsColumnType(splitColumns.includes("Type"));
-        this.setAccountsColumnEmail(splitColumns.includes("Mail"));
-        this.setAccountsColumnGroup(splitColumns.includes("Department"));
-        this.setAccountsColumnStorage(splitColumns.includes("Storage"));
-        return;
-      }
-
-      if (getIsAccountsGroups()) {
+      if (isContactsGroups) {
         this.setAccountsGroupsColumnPeople(splitColumns.includes("People"));
         this.setAccountsGroupsColumnManager(
           splitColumns.includes("Head of Group"),
@@ -245,12 +299,27 @@ class TableStore {
         return;
       }
 
-      if (getIsAccountsInsideGroup()) {
-        this.setAccountsInsideGroupColumnType(splitColumns.includes("Type"));
-        this.setAccountsInsideGroupColumnEmail(splitColumns.includes("Mail"));
-        this.setAccountsInsideGroupColumnGroup(
-          splitColumns.includes("Department"),
-        );
+      if (isContactsPeople) {
+        this.setPeopleColumnType(splitColumns.includes("Type"));
+        this.setPeopleColumnEmail(splitColumns.includes("Mail"));
+        this.setPeopleColumnGroup(splitColumns.includes("Department"));
+        this.setPeopleColumnStorage(splitColumns.includes("Storage"));
+        return;
+      }
+
+      if (isContactsGuests) {
+        this.setGuestsColumnEmail(splitColumns.includes("Mail"));
+        this.setGuestsColumnInviter(splitColumns.includes("Inviter"));
+        this.setGuestsColumnInvitedDate(splitColumns.includes("InvitedDate"));
+
+        return;
+      }
+
+      if (isContactsInsideGroup) {
+        this.setInsideGroupColumnType(splitColumns.includes("Type"));
+        this.setInsideGroupColumnEmail(splitColumns.includes("Mail"));
+        this.setInsideGroupColumnGroup(splitColumns.includes("Department"));
+        this.setInsideGroupColumnStorage(splitColumns.includes("Storage"));
         return;
       }
 
@@ -275,6 +344,14 @@ class TableStore {
         return;
       }
 
+      if (this.selectedFolderStore.isIndexedFolder) {
+        this.setAuthorVDRColumn(splitColumns.includes("AuthorIndexing"));
+        this.setCreatedVDRColumn(splitColumns.includes("CreatedIndexing"));
+        this.setModifiedVDRColumn(splitColumns.includes("ModifiedIndexing"));
+        this.setSizeVDRColumn(splitColumns.includes("SizeIndexing"));
+        this.setTypeVDRColumn(splitColumns.includes("TypeIndexing"));
+      }
+
       this.setModifiedColumn(splitColumns.includes("Modified"));
       this.setAuthorColumn(splitColumns.includes("Author"));
       this.setCreatedColumn(splitColumns.includes("Created"));
@@ -286,14 +363,14 @@ class TableStore {
   };
 
   setColumnEnable = (key) => {
-    const {
-      isRoomsFolder,
-      isArchiveFolder,
-      isTrashFolder,
-      getIsAccountsPeople,
-      getIsAccountsGroups,
-      getIsAccountsInsideGroup,
-    } = this.treeFoldersStore;
+    const { isRoomsFolder, isArchiveFolder } = this.treeFoldersStore;
+
+    const { contactsTab } = this.peopleStore.usersStore;
+
+    const isContactsPeople = contactsTab === "people";
+
+    const isContactsInsideGroup = contactsTab === "inside_group";
+
     const isRooms = isRoomsFolder || isArchiveFolder;
 
     switch (key) {
@@ -310,7 +387,9 @@ class TableStore {
       case "AuthorRecent":
         this.setAuthorRecentColumn(!this.authorRecentColumnIsEnabled);
         return;
-
+      case "AuthorIndexing":
+        this.setAuthorVDRColumn(!this.authorVDRColumnIsEnabled);
+        return;
       case "Created":
         this.setCreatedColumn(!this.createdColumnIsEnabled);
         return;
@@ -320,13 +399,15 @@ class TableStore {
       case "CreatedRecent":
         this.setCreatedRecentColumn(!this.createdRecentColumnIsEnabled);
         return;
+      case "CreatedIndexing":
+        this.setCreatedVDRColumn(!this.createdVDRColumnIsEnabled);
+        return;
 
       case "Department":
-        getIsAccountsPeople()
-          ? this.setAccountsColumnGroup(!this.groupAccountsColumnIsEnabled)
-          : this.setAccountsInsideGroupColumnGroup(
-              !this.groupAccountsInsideGroupColumnIsEnabled,
-            );
+        if (isContactsPeople)
+          this.setPeopleColumnGroup(!this.groupPeopleColumnIsEnabled);
+        else
+          this.setInsideGroupColumnGroup(!this.groupInsideGroupColumnIsEnabled);
         return;
 
       case "Modified":
@@ -334,6 +415,9 @@ class TableStore {
         return;
       case "ModifiedRecent":
         this.setModifiedRecentColumn(!this.modifiedRecentColumnIsEnabled);
+        return;
+      case "ModifiedIndexing":
+        this.setModifiedVDRColumn(!this.modifiedVDRColumnIsEnabled);
         return;
 
       case "Erasure":
@@ -350,14 +434,18 @@ class TableStore {
         this.setSizeRecentColumn(!this.sizeRecentColumnIsEnabled);
         return;
 
+      case "SizeIndexing":
+        this.setSizeVDRColumn(!this.sizeVDRColumnIsEnabled);
+        return;
+
       case "Type":
         isRooms
           ? this.setRoomColumnType(!this.roomColumnTypeIsEnabled)
-          : getIsAccountsPeople()
-            ? this.setAccountsColumnType(!this.typeAccountsColumnIsEnabled)
-            : getIsAccountsInsideGroup()
-              ? this.setAccountsInsideGroupColumnType(
-                  !this.typeAccountsInsideGroupColumnIsEnabled,
+          : isContactsPeople
+            ? this.setPeopleColumnType(!this.typePeopleColumnIsEnabled)
+            : isContactsInsideGroup
+              ? this.setInsideGroupColumnType(
+                  !this.typeInsideGroupColumnIsEnabled,
                 )
               : this.setTypeColumn(!this.typeColumnIsEnabled);
         return;
@@ -368,6 +456,10 @@ class TableStore {
 
       case "TypeRecent":
         this.setTypeRecentColumn(!this.typeRecentColumnIsEnabled);
+        return;
+
+      case "TypeIndexing":
+        this.setTypeVDRColumn(!this.typeVDRColumnIsEnabled);
         return;
 
       case "QuickButtons":
@@ -391,17 +483,30 @@ class TableStore {
         return;
 
       case "Mail":
-        getIsAccountsPeople()
-          ? this.setAccountsColumnEmail(!this.emailAccountsColumnIsEnabled)
-          : this.setAccountsInsideGroupColumnEmail(
-              !this.emailAccountsInsideGroupColumnIsEnabled,
-            );
+        if (isContactsPeople)
+          this.setPeopleColumnEmail(!this.emailPeopleColumnIsEnabled);
+        else if (isContactsInsideGroup)
+          this.setInsideGroupColumnEmail(!this.emailInsideGroupColumnIsEnabled);
+        else this.setGuestsColumnEmail(!this.emailGuestsColumnIsEnabled);
+
+        return;
+
+      case "InvitedDate":
+        this.setGuestsColumnInvitedDate(!this.invitedDateGuestsColumnIsEnabled);
         return;
 
       case "Storage":
-        getIsAccountsPeople()
-          ? this.setAccountsColumnStorage(!this.storageAccountsColumnIsEnabled)
-          : this.setRoomColumnQuota(!this.roomQuotaColumnIsEnable);
+        isContactsPeople
+          ? this.setPeopleColumnStorage(!this.storagePeopleColumnIsEnabled)
+          : isContactsInsideGroup
+            ? this.setInsideGroupColumnStorage(
+                !this.storageInsideGroupColumnIsEnabled,
+              )
+            : this.setRoomColumnQuota(!this.roomQuotaColumnIsEnable);
+        return;
+
+      case "Inviter":
+        this.setGuestsColumnInviter(!this.inviterGuestsColumnIsEnabled);
         return;
 
       case "People":
@@ -454,33 +559,38 @@ class TableStore {
 
   // Column names
   get tableStorageName() {
-    const {
-      isRoomsFolder,
-      isArchiveFolder,
-      isTrashFolder,
-      getIsAccountsPeople,
-      getIsAccountsGroups,
-      isRecentTab,
-      getIsAccountsInsideGroup,
-    } = this.treeFoldersStore;
+    const { isRoomsFolder, isArchiveFolder, isTrashFolder, isRecentTab } =
+      this.treeFoldersStore;
 
+    const { contactsTab } = this.peopleStore.usersStore;
+
+    const isContactsPeople = contactsTab === "people";
+    const isContactsGuests = contactsTab === "guests";
+    const isContactsGroups = contactsTab === "groups";
+    const isContactsInsideGroup = contactsTab === "inside_group";
+
+    const { isIndexedFolder } = this.selectedFolderStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
 
     const tableStorageName = isRooms
       ? `${TABLE_ROOMS_COLUMNS}=${userId}`
-      : getIsAccountsPeople()
-        ? `${TABLE_ACCOUNTS_PEOPLE_COLUMNS}=${userId}`
-        : getIsAccountsGroups()
-          ? `${TABLE_ACCOUNTS_GROUPS_COLUMNS}=${userId}`
-          : getIsAccountsInsideGroup()
-            ? `${TABLE_ACCOUNTS_INSIDE_GROUP_COLUMNS}=${userId}`
-            : isTrashFolder
-              ? `${TABLE_TRASH_COLUMNS}=${userId}`
-              : isRecentTab
-                ? `${TABLE_RECENT_COLUMNS}=${userId}`
-                : `${TABLE_COLUMNS}=${userId}`;
+      : isContactsPeople
+        ? `${TABLE_PEOPLE_COLUMNS}=${userId}`
+        : isContactsGuests
+          ? `${TABLE_GUESTS_COLUMNS}=${userId}`
+          : isContactsGroups
+            ? `${TABLE_GROUPS_COLUMNS}=${userId}`
+            : isContactsInsideGroup
+              ? `${TABLE_INSIDE_GROUP_COLUMNS}=${userId}`
+              : isTrashFolder
+                ? `${TABLE_TRASH_COLUMNS}=${userId}`
+                : isRecentTab
+                  ? `${TABLE_RECENT_COLUMNS}=${userId}`
+                  : isIndexedFolder
+                    ? `${TABLE_VDR_INDEXING_COLUMNS}=${userId}`
+                    : `${TABLE_COLUMNS}=${userId}`;
 
     return isFrame ? `SDK_${tableStorageName}` : tableStorageName;
   }
@@ -489,9 +599,17 @@ class TableStore {
   get columnStorageName() {
     const { isRoomsFolder, isArchiveFolder, isTrashFolder, isRecentTab } =
       this.treeFoldersStore;
+
+    const { contactsTab } = this.peopleStore.usersStore;
+
+    const isContactsPeople = contactsTab === "people";
+    const isContactsGuests = contactsTab === "guests";
+    const isContactsInsideGroup = contactsTab === "inside_group";
+
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
+    const { isIndexedFolder } = this.selectedFolderStore;
 
     const columnStorageName = isRooms
       ? `${COLUMNS_ROOMS_SIZE}=${userId}`
@@ -499,7 +617,15 @@ class TableStore {
         ? `${COLUMNS_TRASH_SIZE}=${userId}`
         : isRecentTab
           ? `${COLUMNS_RECENT_SIZE}=${userId}`
-          : `${COLUMNS_SIZE}=${userId}`;
+          : isIndexedFolder
+            ? `${COLUMNS_VDR_INDEXING_SIZE}=${userId}`
+            : isContactsPeople
+              ? `${COLUMNS_PEOPLE_SIZE}=${userId}`
+              : isContactsGuests
+                ? `${COLUMNS_GUESTS_SIZE}=${userId}`
+                : isContactsInsideGroup
+                  ? `${COLUMNS_INSIDE_GROUPS_SIZE}=${userId}`
+                  : `${COLUMNS_SIZE}=${userId}`;
 
     return isFrame ? `SDK_${columnStorageName}` : columnStorageName;
   }
@@ -508,6 +634,14 @@ class TableStore {
   get columnInfoPanelStorageName() {
     const { isRoomsFolder, isArchiveFolder, isTrashFolder, isRecentTab } =
       this.treeFoldersStore;
+
+    const { isIndexedFolder } = this.selectedFolderStore;
+    const { contactsTab } = this.peopleStore.usersStore;
+
+    const isContactsPeople = contactsTab === "people";
+    const isContactsGuests = contactsTab === "guests";
+    const isContactsInsideGroup = contactsTab === "inside_group";
+
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
@@ -518,37 +652,19 @@ class TableStore {
         ? `${COLUMNS_TRASH_SIZE_INFO_PANEL}=${userId}`
         : isRecentTab
           ? `${COLUMNS_RECENT_SIZE_INFO_PANEL}=${userId}`
-          : `${COLUMNS_SIZE_INFO_PANEL}=${userId}`;
+          : isIndexedFolder
+            ? `${COLUMNS_VDR_INDEXING_SIZE_INFO_PANEL}=${userId}`
+            : isContactsPeople
+              ? `${COLUMNS_PEOPLE_INFO_PANEL_SIZE}=${userId}`
+              : isContactsGuests
+                ? `${COLUMNS_GUESTS_INFO_PANEL_SIZE}=${userId}`
+                : isContactsInsideGroup
+                  ? `${COLUMNS_INSIDE_GROUPS_INFO_PANEL_SIZE}=${userId}`
+                  : `${COLUMNS_SIZE_INFO_PANEL}=${userId}`;
 
     return isFrame
       ? `SDK_${columnInfoPanelStorageName}`
       : columnInfoPanelStorageName;
-  }
-
-  get filesColumnStorageName() {
-    const userId = this.userStore.user?.id;
-    return `${COLUMNS_SIZE}=${userId}`;
-  }
-  get roomsColumnStorageName() {
-    const userId = this.userStore.user?.id;
-    return `${COLUMNS_ROOMS_SIZE}=${userId}`;
-  }
-  get trashColumnStorageName() {
-    const userId = this.userStore.user?.id;
-    return `${COLUMNS_TRASH_SIZE}=${userId}`;
-  }
-
-  get filesColumnInfoPanelStorageName() {
-    const userId = this.userStore.user?.id;
-    return `${COLUMNS_SIZE_INFO_PANEL}=${userId}`;
-  }
-  get roomsColumnInfoPanelStorageName() {
-    const userId = this.userStore.user?.id;
-    return `${COLUMNS_ROOMS_SIZE_INFO_PANEL}=${userId}`;
-  }
-  get trashColumnInfoPanelStorageName() {
-    const userId = this.userStore.user?.id;
-    return `${COLUMNS_TRASH_SIZE_INFO_PANEL}=${userId}`;
   }
 }
 

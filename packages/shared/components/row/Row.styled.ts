@@ -117,7 +117,10 @@ const StyledContent = styled.div`
 `;
 StyledContent.defaultProps = { theme: Base };
 
-const StyledCheckbox = styled.div<{ mode: TMode }>`
+const StyledCheckbox = styled.div<{
+  mode: TMode;
+  isIndexEditingMode?: boolean;
+}>`
   display: flex;
   flex: 0 0 16px;
   height: 56px;
@@ -129,6 +132,7 @@ const StyledCheckbox = styled.div<{ mode: TMode }>`
   width: 41px;
   ${(props) =>
     props.mode === "modern" &&
+    !props.isIndexEditingMode &&
     !isMobile &&
     css`
       :hover {

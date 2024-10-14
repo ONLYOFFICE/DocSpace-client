@@ -54,9 +54,10 @@ import {
 } from "./StyledPresets";
 import { SDK_SCRIPT_URL } from "@docspace/shared/constants";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
+import { Integration } from "../sub-components/Integration";
 
 const DocSpace = (props) => {
-  const { t, theme } = props;
+  const { t, theme, currentColorScheme } = props;
 
   setDocumentTitle(t("JavascriptSdk"));
 
@@ -117,7 +118,9 @@ const DocSpace = (props) => {
       description={t("PortalDescription", {
         productName: t("Common:ProductName"),
       })}
-      header={t("CreateSamplePortal", { productName: t("Common:ProductName") })}
+      header={t("CreateSamplePortal", {
+        productName: t("Common:ProductName"),
+      })}
     >
       <Container>
         <PreviewBlock
@@ -128,6 +131,7 @@ const DocSpace = (props) => {
           frameId={frameId}
           scriptUrl={SDK_SCRIPT_URL}
           config={config}
+          currentColorScheme={currentColorScheme}
         />
         <Controls>
           <ControlsSection>
@@ -152,17 +156,32 @@ const DocSpace = (props) => {
               setConfig={setConfig}
             />
           </ControlsSection>
+
+          <Integration
+            className="integration-examples"
+            t={t}
+            theme={theme}
+            currentColorScheme={currentColorScheme}
+          />
         </Controls>
       </Container>
+
+      <Integration
+        className="integration-examples integration-examples-bottom"
+        t={t}
+        theme={theme}
+        currentColorScheme={currentColorScheme}
+      />
     </PresetWrapper>
   );
 };
 
 export const Component = inject(({ settingsStore }) => {
-  const { theme } = settingsStore;
+  const { theme, currentColorScheme } = settingsStore;
 
   return {
     theme,
+    currentColorScheme,
   };
 })(
   withTranslation([

@@ -191,7 +191,7 @@ SendInviteDialog.propTypes = {
 };
 
 export default inject(({ peopleStore }) => ({
-  selectedUsers: peopleStore.selectionStore.selection,
-  setSelected: peopleStore.selectionStore.setSelected,
-  userIds: peopleStore.selectionStore.getUsersToInviteIds,
+  selectedUsers: peopleStore.usersStore.selection,
+  setSelected: peopleStore.usersStore.setSelected,
+  userIds: peopleStore.usersStore.getUsersToInviteIds,
 }))(observer(SendInviteDialog));

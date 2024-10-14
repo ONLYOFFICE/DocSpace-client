@@ -29,6 +29,8 @@ import React from "react";
 import AcceptIconSvgUrl from "PUBLIC_DIR/images/selector.input.accept.svg?url";
 import CancelIconSvgUrl from "PUBLIC_DIR/images/selector.input.cancel.svg?url";
 
+import { ICover } from "api/rooms/types";
+
 import { RoomsType } from "../../../enums";
 import { Nullable } from "../../../types";
 
@@ -47,6 +49,7 @@ const InputItem = ({
 
   color,
   icon,
+  cover,
   roomType,
 
   placeholder,
@@ -64,6 +67,7 @@ const InputItem = ({
   color?: string;
   icon?: string;
   roomType?: RoomsType;
+  cover?: ICover;
 
   setInputItemVisible: (value: boolean) => void;
   setSavedInputValue: (value: Nullable<string>) => void;
@@ -140,7 +144,15 @@ const InputItem = ({
       noHover
       style={style}
     >
-      {color ? (
+      {cover ? (
+        <RoomIcon
+          color={color}
+          title={value}
+          logo={{ cover }}
+          showDefault={false}
+          className="item-logo"
+        />
+      ) : color ? (
         <RoomIcon
           color={color}
           title={value}
@@ -154,7 +166,7 @@ const InputItem = ({
           title={value}
           className="item-logo"
           imgClassName="room-logo"
-          imgSrc={icon}
+          logo={icon}
           showDefault={false}
         />
       ) : null}

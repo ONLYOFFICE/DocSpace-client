@@ -41,7 +41,7 @@ import {
   StyledHistoryBlockFilesList,
 } from "../../../styles/history";
 
-import { ActionByTarget } from "../FeedInfo";
+import { ActionByTarget, FeedAction } from "../FeedInfo";
 import { Feed } from "./HistoryBlockContent.types";
 
 const EXPANSION_THRESHOLD = 3;
@@ -77,6 +77,9 @@ const HistoryItemList = ({
   const isExpandable = totalItems > EXPANSION_THRESHOLD;
   const [isExpanded, setIsExpanded] = useState(!isExpandable);
 
+  const isStartedFilling = actionType === FeedAction.StartedFilling;
+  const isSubmitted = actionType === FeedAction.Submitted;
+
   const onExpand = () => setIsExpanded(true);
 
   const isFolder = targetType === "folder";
@@ -97,6 +100,8 @@ const HistoryItemList = ({
     title: nameWithoutExtension!(feed.data.oldTitle),
     fileExst: getFileExtension(feed.data.oldTitle),
   };
+
+  const isDisabledOpenLocationButton = !(isStartedFilling || isSubmitted);
 
   const handleOpenFile = (item) => {
     return (
@@ -147,15 +152,16 @@ const HistoryItemList = ({
                   )}
                 </div>
               </div>
-
-              <IconButton
-                className="location-btn"
-                iconName={FolderLocationReactSvgUrl}
-                size={16}
-                isFill
-                onClick={() => checkAndOpenLocationAction!(item, actionType)}
-                title={t("Files:OpenLocation")}
-              />
+              {isDisabledOpenLocationButton && (
+                <IconButton
+                  className="location-btn"
+                  iconName={FolderLocationReactSvgUrl}
+                  size={16}
+                  isFill
+                  onClick={() => checkAndOpenLocationAction!(item, actionType)}
+                  title={t("Files:OpenLocation")}
+                />
+              )}
             </StyledHistoryBlockFile>
 
             {actionType === "rename" && oldItem && (

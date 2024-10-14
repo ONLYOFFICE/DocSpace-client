@@ -36,19 +36,48 @@ export type AsideProps = AsideHeaderProps & {
 
   withoutHeader: boolean;
 };
-export interface AsideHeaderProps {
-  header: string | React.ReactNode;
+
+interface AsideBased {
+  header?: string | React.ReactNode;
   className?: string;
   id?: string;
-  isBackButton?: boolean;
-  isCloseable?: boolean;
   headerIcons?: { key: string; url: string; onClick: () => void }[];
-  onBackClick?: () => void;
-  onCloseClick?: () => void;
   style?: React.CSSProperties;
   isLoading?: boolean;
   withoutBorder?: boolean;
+  headerHeight?: string;
 }
+
+export type AsideHeaderProps =
+  | (AsideBased & {
+      isCloseable?: never;
+      onCloseClick?: never;
+
+      isBackButton?: never;
+      onBackClick?: never;
+    })
+  | (AsideBased & {
+      isCloseable: boolean;
+      onCloseClick: () => void;
+
+      isBackButton: boolean;
+      onBackClick: () => void;
+    })
+  | (AsideBased & {
+      isCloseable?: never;
+      onCloseClick?: never;
+
+      isBackButton: boolean;
+      onBackClick: () => void;
+    })
+  | (AsideBased & {
+      isCloseable: boolean;
+      onCloseClick: () => void;
+
+      isBackButton?: never;
+      onBackClick?: never;
+    });
+
 export interface StyledAsideProps {
   visible: boolean;
   scale?: boolean;

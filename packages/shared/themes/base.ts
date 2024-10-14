@@ -109,6 +109,9 @@ const {
   highlandGray,
 
   blurLight,
+  lightBlueAction,
+  lightActive,
+  lightBlueHover,
 } = globalColors;
 
 export const getBaseTheme = () => {
@@ -1774,6 +1777,8 @@ export const getBaseTheme = () => {
       background: white,
       rootFolderTitleColor: gray,
       boxShadow: `0px 8px 16px 0px ${boxShadowColor}`,
+      lifetimeIconFill: "#f2675a",
+      lifetimeIconStroke: "#f2675a",
 
       icon: {
         fill: link,
@@ -1988,6 +1993,8 @@ export const getBaseTheme = () => {
       hoverBorderColor: lightGrayDark,
       tableCellBorder: `1px solid ${grayLightMid}`,
 
+      indexingSeparator: "#4781D1",
+
       groupMenu: {
         background: white,
         borderBottom: "1px solid transparent",
@@ -2058,6 +2065,11 @@ export const getBaseTheme = () => {
           contextMenuWrapperDraggingHover: `linear-gradient(to left, ${dndHoverColor} 24px,${grayLightMid} 24px)`,
 
           backgroundActive: lightGrayHover,
+          indexUpdate: lightActive,
+          indexActive: lightBlueAction,
+
+          indexBackgroundButtonHover: lightBlueHover,
+          indexArrowButtonHover: lightBlueMain,
 
           borderImageCheckbox: `linear-gradient(to right, ${white} 24px, ${grayLightMid} 24px)`,
           borderImageContextMenu: `linear-gradient(to left, ${white} 24px, ${grayLightMid} 24px)`,
@@ -2285,7 +2297,7 @@ export const getBaseTheme = () => {
       },
 
       iconCropper: {
-        gridColor: black,
+        gridColor: grayStrong,
         deleteButton: {
           background: grayLight,
           hoverBackground: lightGrayHover,
@@ -2826,6 +2838,8 @@ export const getBaseTheme = () => {
 
             dataFontColor: white,
             dataFontColorBlack: black,
+            notAvailableBackground: grayLight,
+            textColor: black,
           },
 
           companyInfo: {
@@ -3082,6 +3096,7 @@ export const getBaseTheme = () => {
 
     itemIcon: {
       borderColor: grayLightMid,
+      editIconColor: grayLightMid,
     },
 
     invitePage: {
@@ -3145,6 +3160,7 @@ export const getBaseTheme = () => {
     roomIcon: {
       backgroundArchive: gray,
       opacityBackground: "1",
+      plusIcon: white,
     },
 
     plugins: {
@@ -3207,10 +3223,34 @@ export const getBaseTheme = () => {
       errorColor: lightErrorStatus,
       sideColor: gray,
       nameColor: grayStrong,
+      barBackground: grayLight,
     },
 
     publicRoom: {
       border: `1px solid ${lightGraySelected}`,
+    },
+
+    newFilesPanel: {
+      borderColor: globalColors.grayLightMid,
+
+      borderRadius: "6px",
+      boxShadow: `0px 8px 16px 0px ${boxShadowColor}`,
+
+      fileItem: {
+        borderColor: globalColors.grayLightMid,
+        fileExstColor: globalColors.gray,
+      },
+    },
+    logoCover: {
+      selectColor: {
+        backgroundColor: lightGrayHover,
+      },
+
+      textColor: lightGrayDark,
+      selectedBackgroundColor: grayLightMid,
+      selectedBorderColor: grayLightMid,
+      backgroundColor: white,
+      borderColor: grayLightMid,
     },
   };
 };

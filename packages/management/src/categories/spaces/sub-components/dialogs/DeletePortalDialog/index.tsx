@@ -24,21 +24,32 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-
-import { Button } from "@docspace/shared/components/button";
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 import { useTranslation, Trans } from "react-i18next";
 import { observer } from "mobx-react";
+
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
+import { Text } from "@docspace/shared/components/text";
+import { toastr } from "@docspace/shared/components/toast";
+import { deletePortal } from "@docspace/shared/api/management";
+
 import { useStore } from "SRC_DIR/store";
-import { Link } from "@docspace/shared/components/link";
+
+const StyledModalDialog = styled(ModalDialog)`
+  .warning-text {
+    color: ${(props) => props.theme.management.errorColor};
+    margin-bottom: 8px;
+  }
+`;
 
 const DeletePortalDialog = () => {
   const { spacesStore, settingsStore } = useStore();
-  const { currentColorScheme } = settingsStore;
+  const { getAllPortals, portals } = settingsStore;
 
   const {
     currentPortal,
@@ -46,56 +57,118 @@ const DeletePortalDialog = () => {
     setDeletePortalDialogVisible,
   } = spacesStore;
 
-  const { t } = useTranslation(["Management", "Common"]);
+  const { t } = useTranslation(["Management", "Settings", "Common"]);
+  const [windowIsOpen, setWindowIsOpen] = useState(false);
 
-  const { owner, domain } = currentPortal;
-  const { displayName, email } = owner;
+  const { domain } = currentPortal;
+
+  const receiveMessage = async (e) => {
+    const data = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
+    if (data.type === "portalDeletedSuccess") {
+      toastr.success(
+        t("PortalDeleted", { productName: t("Common:ProductName") })
+      );
+      if (window.location.host === domain) {
+        const protocol = window?.location?.protocol;
+        window.location.replace(`${protocol}//${portals[0].domain}`);
+      } else {
+        await getAllPortals();
+      }
+    } else if (data.type === "portalDeletedError") {
+      toastr.error(data.error.message);
+      if (data.error.status === 401) window.location.replace("/");
+    }
+  };
+
+  const getAuthWindow = () => {
+    return new Promise((res, rej) => {
+      const protocol = window?.location?.protocol;
+      const deletePortalData = encodeURIComponent(domain);
+
+      try {
+        const path = `${protocol}//${domain}/login?deletePortalData=${deletePortalData}`;
+        const authModal = window.open(
+          path,
+          t("Common:Authorization"),
+          "height=800, width=866"
+        );
+
+        const checkConnect = setInterval(() => {
+          if (!authModal || !authModal.closed) {
+            return;
+          }
+
+          clearInterval(checkConnect);
+
+          res(authModal);
+        }, 500);
+      } catch (error) {
+        rej(error);
+      }
+    });
+  };
+
+  const onOpenSignInWindow = async () => {
+    if (windowIsOpen) return;
+    setWindowIsOpen(true);
+    await getAuthWindow();
+    setWindowIsOpen(false);
+  };
 
   const onClose = () => setDeletePortalDialogVisible(false);
 
-  const onDelete = () => {
-    const protocol = window?.location?.protocol;
-    return window.open(
-      `${protocol}//${domain}/portal-settings/delete-data/deletion`,
-      "_self"
-    );
+  const onDelete = async () => {
+    if (!currentPortal?.wizardSettings?.completed) {
+      try {
+        await deletePortal({ portalName: domain });
+        await getAllPortals();
+        toastr.success(
+          t("PortalDeleted", { productName: t("Common:ProductName") })
+        );
+      } catch (e) {
+        toastr.error(e);
+      }
+    } else {
+      onOpenSignInWindow();
+    }
+    onClose();
   };
 
+  useEffect(() => {
+    window.addEventListener("message", receiveMessage, false);
+
+    // return () => window.removeEventListener("message", receiveMessage, false);
+  }, []);
+
   return (
-    <ModalDialog
+    <StyledModalDialog
       visible={visible}
       onClose={onClose}
       displayType={ModalDialogType.modal}
+      autoMaxHeight
     >
-      <ModalDialog.Header>{t("Common:Warning")}</ModalDialog.Header>
+      <ModalDialog.Header>
+        {t("Settings:DeletePortal", { productName: t("Common:ProductName") })}
+      </ModalDialog.Header>
       <ModalDialog.Body>
+        <Text className="warning-text" fontSize="16px" fontWeight={700}>
+          {t("Common:Warning")}!
+        </Text>
         <Trans
           i18nKey="DeletePortalText"
           values={{
-            productName: t("Common:ProductName"),
-            displayName,
-            email,
             domain,
           }}
           components={{
             1: <strong />,
-            5: (
-              <Link
-                className="email-link"
-                href={`mailto:${email}`}
-                noHover
-                color={currentColorScheme?.main?.accent}
-                title={email}
-              />
-            ),
           }}
         />
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
           key="CreateButton"
-          label={t("Common:Delete")}
-          size="normal"
+          label={t("Common:ContinueButton")}
+          size={ButtonSize.normal}
           scale
           primary
           onClick={onDelete}
@@ -103,12 +176,12 @@ const DeletePortalDialog = () => {
         <Button
           key="CancelButton"
           label={t("Common:CancelButton")}
-          size="normal"
+          size={ButtonSize.normal}
           onClick={onClose}
           scale
         />
       </ModalDialog.Footer>
-    </ModalDialog>
+    </StyledModalDialog>
   );
 };
 

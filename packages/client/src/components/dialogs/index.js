@@ -40,7 +40,6 @@ import DeleteOwnerProfileDialog from "./DeleteOwnerProfileDialog";
 import SendInviteDialog from "./SendInviteDialog";
 import ChangeUserStatusDialog from "./ChangeUserStatusDialog";
 import ChangeUserTypeDialog from "./ChangeUserTypeDialog";
-import DataLossWarningDialog from "./DataLossWarningDialog";
 import ResetApplicationDialog from "./ResetApplicationDialog";
 import BackupCodesDialog from "./BackupCodesDialog";
 import CreateRoomDialog from "./CreateEditRoomDialog/CreateRoomDialog";
@@ -69,7 +68,8 @@ import ShareFolderDialog from "./ShareFolderDialog";
 import EditGroupMembersDialog from "./EditGroupMembersDialog";
 import ChangeStorageQuotaDialog from "./ChangeStorageQuotaDialog";
 import DeleteGroupDialog from "./DeleteGroupDialog";
-
+import RoomLogoCoverDialog from "./RoomLogoCoverDialog";
+import RemoveGuestDialog from "./RemoveGuest";
 export {
   EmptyTrashDialog,
   DeleteDialog,
@@ -87,7 +87,6 @@ export {
   SendInviteDialog,
   ChangeUserStatusDialog,
   ChangeUserTypeDialog,
-  DataLossWarningDialog,
   ResetApplicationDialog,
   BackupCodesDialog,
   CreateRoomDialog,
@@ -116,4 +115,6 @@ export {
   ChangeQuotaDialog,
   ChangeStorageQuotaDialog,
   DeleteGroupDialog,
+  RoomLogoCoverDialog,
+  RemoveGuestDialog,
 };

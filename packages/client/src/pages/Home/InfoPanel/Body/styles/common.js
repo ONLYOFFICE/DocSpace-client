@@ -28,6 +28,7 @@ import styled, { css } from "styled-components";
 
 import { Base } from "@docspace/shared/themes";
 import { mobile, tablet, desktop } from "@docspace/shared/utils";
+import { TextUserSelect } from "@docspace/shared/utils";
 
 const StyledInfoPanelBody = styled.div`
   height: auto;
@@ -61,6 +62,8 @@ const StyledTitle = styled.div`
   padding-block: 24px;
   padding-inline: 20px 0;
   margin-inline-start: -20px;
+
+  ${TextUserSelect}
 
   background: ${(props) => props.theme.infoPanel.backgroundColor};
 
@@ -102,6 +105,10 @@ const StyledTitle = styled.div`
       border-radius: 6px;
       outline: 1px solid ${(props) => props.theme.itemIcon.borderColor};
     }
+  }
+
+  .info-panel_header-text {
+    margin: 0 8px;
   }
 
   .text {
@@ -222,6 +229,8 @@ const StyledProperties = styled.div`
   gap: 8px;
   padding-bottom: 20px;
 
+  ${TextUserSelect}
+
   .property {
     width: 100%;
     display: grid;
@@ -320,8 +329,22 @@ const StyledProperties = styled.div`
   }
 `;
 
+const StyledItemOptions = styled.div`
+  ${(props) =>
+    props.theme.interfaceDirection === "rtl"
+      ? css`
+          margin-right: auto;
+        `
+      : css`
+          margin-left: auto;
+        `}
+
+  display: flex;
+`;
+
 StyledInfoPanelBody.defaultProps = { theme: Base };
 StyledTitle.defaultProps = { theme: Base };
+StyledItemOptions.defaultProps = { theme: Base };
 
 export {
   StyledInfoPanelBody,

@@ -88,6 +88,7 @@ const Branding = ({
   standalone,
   deviceType,
   portals,
+  displayAbout,
 }) => {
   const isMobileView = deviceType === DeviceType.mobile;
 
@@ -102,7 +103,6 @@ const Branding = ({
       }
     };
   }, []);
-
   const hideBlock = isManagement() ? false : portals?.length > 1 ? true : false;
 
   const showSettings = standalone && !hideBlock;
@@ -110,9 +110,9 @@ const Branding = ({
   if (isMobileView)
     return (
       <MobileView
-        isSettingPaid={isSettingPaid}
-        isManagement={isManagement()}
+        isSettingPaid={isSettingPaid || standalone}
         showSettings={showSettings}
+        displayAbout={displayAbout}
       />
     );
 
@@ -122,16 +122,22 @@ const Branding = ({
       {showSettings && (
         <>
           <hr />
-          {isLoadedCompanyInfoSettingsData ? (
-            <div className="section-description settings_unavailable">
-              {t("Settings:BrandingSectionDescription", {
-                productName: t("Common:ProductName"),
-              })}
-            </div>
+          {displayAbout ? (
+            <>
+              {isLoadedCompanyInfoSettingsData ? (
+                <div className="section-description settings_unavailable">
+                  {t("Settings:BrandingSectionDescription", {
+                    productName: t("Common:ProductName"),
+                  })}
+                </div>
+              ) : (
+                <LoaderBrandingDescription />
+              )}
+              <CompanyInfoSettings />
+            </>
           ) : (
-            <LoaderBrandingDescription />
+            <></>
           )}
-          <CompanyInfoSettings />
           <AdditionalResources />
         </>
       )}
@@ -140,15 +146,23 @@ const Branding = ({
 };
 
 export default inject(({ settingsStore, currentQuotaStore, common }) => {
-  const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
+  const { isCustomizationAvailable } = currentQuotaStore;
   const { isLoadedCompanyInfoSettingsData } = common;
-  const { standalone, portals, deviceType } = settingsStore;
-
-  return {
-    isLoadedCompanyInfoSettingsData,
-    isSettingPaid: isBrandingAndCustomizationAvailable,
+  const {
     standalone,
     portals,
     deviceType,
+    checkEnablePortalSettings,
+    displayAbout,
+  } = settingsStore;
+  const isSettingPaid = checkEnablePortalSettings(isCustomizationAvailable);
+
+  return {
+    isLoadedCompanyInfoSettingsData,
+    isSettingPaid,
+    standalone,
+    portals,
+    deviceType,
+    displayAbout,
   };
 })(withLoading(withTranslation(["Settings", "Common"])(observer(Branding))));

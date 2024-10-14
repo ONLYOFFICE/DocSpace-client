@@ -30,7 +30,7 @@ export type TTabItem = {
   /** Element id. */
   id: string;
   /** Tab text. */
-  name: string;
+  name: string | React.ReactNode;
   /** Content that is shown when you click on the tab.  */
   content: React.ReactNode;
   /** State of tab inclusion. State only works for tabs with a secondary theme. */
@@ -44,10 +44,13 @@ export interface TabsProps {
   items: TTabItem[];
   /** Selected item of tabs. */
   selectedItemId?: number | string;
+  selectedItems?: number[];
   /** Theme for displaying tabs. */
   type?: TabsTypes;
   /** Tab indentation for sticky positioning. */
   stickyTop?: string;
+  /** Enables multiple select  */
+  multiple?: boolean;
   /** Sets a tab class name */
   className?: string;
   /** Sets a callback function that is triggered when the tab is selected. */

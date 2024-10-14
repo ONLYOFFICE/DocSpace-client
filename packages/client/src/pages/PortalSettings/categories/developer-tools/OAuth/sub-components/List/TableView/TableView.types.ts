@@ -19,6 +19,7 @@ export interface TableViewProps {
   itemCount?: number;
   fetchNextClients?: (startIndex: number) => Promise<void>;
   changeClientStatus?: (clientId: string, status: boolean) => Promise<void>;
+  isGroupDialogVisible?: boolean;
 }
 
 export interface HeaderProps {

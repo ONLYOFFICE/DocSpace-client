@@ -27,9 +27,9 @@
 import EmailReactSvgUrl from "PUBLIC_DIR/images/email.react.svg?url";
 import SecurityReactSvgUrl from "PUBLIC_DIR/images/security.react.svg?url";
 import ImageReactSvgUrl from "PUBLIC_DIR/images/image.react.svg?url";
-import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/catalog.trash.react.svg?url";
+import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
-import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/vertical-dots.react.svg?url";
+import VerticalDotsReactSvgUrl from "PUBLIC_DIR/images/icons/16/vertical-dots.react.svg?url";
 
 import { useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
@@ -57,10 +57,6 @@ const Header = (props) => {
     isAdmin,
     isVisitor,
     isCollaborator,
-
-    filter,
-
-    setFilter,
 
     profile,
     isMe,
@@ -116,7 +112,7 @@ const Header = (props) => {
         key: "edit-photo",
         label: t("Profile:EditPhoto"),
         onClick: () => setChangeAvatarVisible(true),
-        disabled: false,
+        disabled: true,
         icon: ImageReactSvgUrl,
       },
       { key: "separator", isSeparator: true },
@@ -235,9 +231,7 @@ export default inject(
 
     const { isVisitor, isCollaborator, user } = userStore.user;
 
-    const { targetUserStore, filterStore, dialogStore } = peopleStore;
-
-    const { filter, setFilterParams } = filterStore;
+    const { targetUserStore, usersStore, dialogStore } = peopleStore;
 
     const { targetUser, isMe } = targetUserStore;
 
@@ -257,9 +251,6 @@ export default inject(
       isAdmin,
       isVisitor,
       isCollaborator,
-      filter,
-
-      setFilter: setFilterParams,
 
       profile: targetUser,
       userId: user?.id,

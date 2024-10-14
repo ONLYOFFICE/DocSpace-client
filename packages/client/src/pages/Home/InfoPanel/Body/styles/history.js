@@ -61,11 +61,8 @@ const StyledHistoryBlock = styled.div`
   }
 
   .info {
-    width: calc(100% - 40px);
-    max-width: calc(100% - 40px);
-    display: ${(props) => `solid 1px ${props.theme.infoPanel.borderColor}`};
-    flex-direction: column;
-    gap: 2px;
+    width: 100%;
+    overflow: hidden;
 
     .title {
       display: flex;
@@ -126,6 +123,9 @@ const StyledHistoryBlockMessage = styled.div`
   .main-message {
     max-width: 100%;
     padding-inline-end: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0px 4px;
   }
 
   strong {
@@ -158,8 +158,10 @@ const StyledHistoryBlockMessage = styled.div`
   }
 `;
 
-const StyledHistoryLink = styled.span`
-  display: inline-block;
+const StyledHistoryLink = styled.div`
+  width: fit-content;
+  max-width: 100%;
+  display: inline-flex;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -171,8 +173,12 @@ const StyledHistoryLink = styled.span`
   }
 
   .link {
-    text-decoration: underline;
-    text-decoration-style: dashed;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    text-decoration: underline dashed;
     text-underline-offset: 2px;
     margin-bottom: -5px;
   }

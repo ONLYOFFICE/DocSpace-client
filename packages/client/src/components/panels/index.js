@@ -26,7 +26,6 @@
 
 import AddUsersPanel from "./AddUsersPanel";
 import EmbeddingPanel from "./EmbeddingPanel";
-import NewFilesPanel from "./NewFilesPanel";
 import VersionHistoryPanel from "./VersionHistoryPanel";
 import UploadPanel from "./UploadPanel";
 import HotkeysPanel from "./HotkeysPanel";
@@ -36,7 +35,6 @@ import EditLinkPanel from "./EditLinkPanel";
 export {
   AddUsersPanel,
   EmbeddingPanel,
-  NewFilesPanel,
   VersionHistoryPanel,
   UploadPanel,
   HotkeysPanel,

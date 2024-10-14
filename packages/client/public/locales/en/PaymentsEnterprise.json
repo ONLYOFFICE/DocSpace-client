@@ -4,6 +4,7 @@
   "ActivatePurchaseBuyLicense": "To buy license, click the button below.",
   "ActivatePurchaseBuyNow": "Buy now",
   "ActivatePurchaseRenewLicense": "To continue getting support and updates, buy a renewal.",
+  "ActivateRenewalDescr": "To activate the renewal you already bought, upload it below and click the Activate button.",
   "ActivateRenewDescr": "To get your personal renewal terms, contact your dedicated manager or write us at <1>{{email}}</1>",
   "ActivateRenewSubscriptionHeader": "Renew subscription for Enterprise",
   "ActivateSwithToProHeader": "Switch to full Enterprise version",

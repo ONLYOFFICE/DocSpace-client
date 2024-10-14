@@ -26,14 +26,13 @@
 
 import { useState } from "react";
 import { inject, observer } from "mobx-react";
-import { useNavigate, NavigateFunction } from "react-router-dom";
 import { Trans, withTranslation } from "react-i18next";
+import { useNavigate, NavigateFunction } from "react-router-dom";
 import { TTranslation } from "@docspace/shared/types";
 import { decode } from "he";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
 import { Feed } from "./HistoryBlockContent.types";
-
 import {
   StyledHistoryBlockExpandLink,
   StyledHistoryLink,
@@ -75,18 +74,22 @@ const HistoryUserList = ({
         const withComma = !isExpanded
           ? i < EXPANSION_THRESHOLD - 1
           : i < usersData.length - 1;
+
+        const userName = decode(user.displayName);
+
         return (
-          <StyledHistoryLink key={user.id}>
+          <StyledHistoryLink key={user.id} className="StyledHistoryLink">
             {isVisitor || isCollaborator ? (
               <Text as="span" className="text">
-                {decode(user.displayName)}
+                {userName}
               </Text>
             ) : (
               <Link
                 className="text link"
                 onClick={() => openUser!(user, navigate)}
+                title={userName}
               >
-                {decode(user.displayName)}
+                {userName}
               </Link>
             )}
 
@@ -116,6 +119,6 @@ const HistoryUserList = ({
 
 export default inject<TStore>(({ infoPanelStore, userStore }) => ({
   openUser: infoPanelStore.openUser,
-  isVisitor: userStore.user.isVisitor,
-  isCollaborator: userStore.user.isCollaborator,
+  isVisitor: userStore?.user?.isVisitor,
+  isCollaborator: userStore?.user?.isCollaborator,
 }))(withTranslation(["InfoPanel"])(observer(HistoryUserList)));

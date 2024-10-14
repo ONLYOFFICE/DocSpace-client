@@ -31,7 +31,7 @@ import { useNavigate } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
-import RetryIcon from "PUBLIC_DIR/images/refresh.react.svg?url";
+import RetryIcon from "PUBLIC_DIR/images/icons/16/refresh.react.svg?url";
 
 import Headline from "@docspace/shared/components/headline/Headline";
 import { IconButton } from "@docspace/shared/components/icon-button";

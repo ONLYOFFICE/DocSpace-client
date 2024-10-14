@@ -27,7 +27,10 @@
 import { TSelectorItem } from "../../components/selector";
 import { TFile, TFolder } from "../../api/files/types";
 import { TRoom } from "../../api/rooms/types";
-import { getIconPathByFolderType } from "../../utils/common";
+import {
+  getIconPathByFolderType,
+  getLifetimePeriodTranslation,
+} from "../../utils/common";
 import { iconSize32 } from "../../utils/image-helpers";
 import { DEFAULT_FILE_EXTS } from "./FilesSelector.constants";
 import { getTitleWithoutExtension } from "../../utils";
@@ -99,7 +102,8 @@ export const convertFilesToItems: (
   filterParam?: string | number,
 ) => {
   const items = files.map((file) => {
-    const { id, title, security, folderId, rootFolderType, fileExst } = file;
+    const { id, title, security, folderId, rootFolderType, fileExst, viewUrl } =
+      file;
 
     const icon = getIcon(fileExst || DEFAULT_FILE_EXTS);
     const label = getTitleWithoutExtension(file, false);
@@ -114,14 +118,16 @@ export const convertFilesToItems: (
       rootFolderType,
       isDisabled: !filterParam,
       fileExst,
+      viewUrl,
     };
   });
   return items;
 };
 
-export const convertRoomsToItems: (rooms: TRoom[]) => TSelectorItem[] = (
+export const convertRoomsToItems: (
   rooms: TRoom[],
-) => {
+  t: TTranslation,
+) => TSelectorItem[] = (rooms: TRoom[], t: TTranslation) => {
   const items = rooms.map((room) => {
     const {
       id,
@@ -134,11 +140,20 @@ export const convertRoomsToItems: (rooms: TRoom[]) => TSelectorItem[] = (
       parentId,
       rootFolderType,
       shared,
+      lifetime,
     } = room;
 
     const icon = logo.medium || "";
+    const cover = logo?.cover;
 
     const iconProp = icon ? { icon } : { color: logo.color as string };
+
+    const lifetimeTooltip = lifetime
+      ? t("Files:RoomFilesLifetime", {
+          days: String(lifetime.value),
+          period: getLifetimePeriodTranslation(lifetime.period, t),
+        })
+      : null;
 
     return {
       id,
@@ -152,6 +167,8 @@ export const convertRoomsToItems: (rooms: TRoom[]) => TSelectorItem[] = (
       isFolder: true,
       roomType,
       shared,
+      lifetimeTooltip,
+      cover,
       ...iconProp,
     };
   });

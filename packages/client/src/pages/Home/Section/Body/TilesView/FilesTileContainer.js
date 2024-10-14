@@ -32,6 +32,7 @@ import React, {
   useMemo,
   useContext,
 } from "react";
+import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { Context } from "@docspace/shared/utils";
@@ -42,12 +43,7 @@ import { elementResizeDetector, getThumbSize } from "./FileTile.utils";
 
 import TileContainer from "./sub-components/TileContainer";
 
-const FilesTileContainer = ({
-  filesList,
-  t,
-  withPaging,
-  thumbnails1280x720,
-}) => {
+const FilesTileContainer = ({ filesList, thumbnails1280x720 }) => {
   const tileRef = useRef(null);
   const timerRef = useRef(null);
   const isMountedRef = useRef(true);
@@ -55,6 +51,8 @@ const FilesTileContainer = ({
   const [columnCount, setColumnCount] = useState(null);
 
   const { sectionWidth } = useContext(Context);
+
+  const { t } = useTranslation(["Translations"]);
 
   useEffect(() => {
     return () => {
@@ -138,7 +136,7 @@ const FilesTileContainer = ({
       <TileContainer
         className="tile-container"
         draggable
-        useReactWindow={!withPaging}
+        useReactWindow
         headingFolders={t("Translations:Folders")}
         headingFiles={t("Translations:Files")}
       >
@@ -150,12 +148,10 @@ const FilesTileContainer = ({
 
 export default inject(({ settingsStore, filesStore, filesSettingsStore }) => {
   const { filesList } = filesStore;
-  const { withPaging } = settingsStore;
   const { thumbnails1280x720 } = filesSettingsStore;
 
   return {
     filesList,
-    withPaging,
     thumbnails1280x720,
   };
 })(observer(FilesTileContainer));

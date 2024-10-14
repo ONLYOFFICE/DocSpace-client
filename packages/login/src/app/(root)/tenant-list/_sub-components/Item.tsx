@@ -51,13 +51,13 @@ const Item = ({ portal, baseDomain }: ItemProps) => {
       window.location.origin,
       name,
     );
-    deleteCookie("x-redirect-authorization-uri");
+    // deleteCookie("x-redirect-authorization-uri");
 
     window.open(`${portal.portalLink}&referenceUrl=${redirectUrl}`, "_self");
   };
 
   return (
-    <div className="item" onClick={onClick}>
+    <div className="item" onClick={onClick} data-testid={portal}>
       <div className="info">
         <img className="favicon" alt="Portal favicon" src={DefaultLogoUrl} />
         <Text fontWeight={600} fontSize="14px" lineHeight="16px" truncate>

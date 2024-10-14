@@ -54,7 +54,12 @@ import {
 } from "../StyledInvitePanel";
 import { globalColors } from "@docspace/shared/themes";
 
-import { getFreeUsersRoleArray, getFreeUsersTypeArray } from "../utils";
+import {
+  getAccessOptions,
+  getFreeUsersRoleArray,
+  getFreeUsersTypeArray,
+} from "../utils";
+import { filterPaidRoleOptions } from "SRC_DIR/helpers";
 
 const ExternalLinks = ({
   t,
@@ -65,6 +70,7 @@ const ExternalLinks = ({
   setShareLinks,
   setInvitationLinks,
   isOwner,
+  isAdmin,
   onChangeExternalLinksVisible,
   externalLinksVisible,
   setActiveLink,
@@ -72,6 +78,7 @@ const ExternalLinks = ({
   isMobileView,
   getPortalInviteLink,
   isUserTariffLimit,
+  standalone,
 }) => {
   const [isLinksToggling, setIsLinksToggling] = useState(false);
 
@@ -212,6 +219,19 @@ const ExternalLinks = ({
   const availableAccess =
     roomId === -1 ? getFreeUsersTypeArray() : getFreeUsersRoleArray();
 
+  const accesses = getAccessOptions(
+    t,
+    roomType,
+    false,
+    true,
+    isOwner,
+    isAdmin,
+    standalone,
+  );
+
+  const filteredAccesses =
+    roomType === -1 ? accesses : filterPaidRoleOptions(accesses);
+
   return (
     <StyledExternalLink noPadding ref={inputsRef}>
       <StyledSubHeader inline>
@@ -250,7 +270,7 @@ const ExternalLinks = ({
           isDisabled={isLinksToggling}
         />
       </StyledSubHeader>
-      <StyledDescription>
+      <StyledDescription noSelect>
         {roomId === -1
           ? t("InviteViaLinkDescriptionAccounts", {
               productName: t("Common:ProductName"),
@@ -282,6 +302,7 @@ const ExternalLinks = ({
             isMobileView={isMobileView}
             isSelectionDisabled={isUserTariffLimit}
             selectionErrorText={<PaidQuotaLimitError />}
+            filteredAccesses={filteredAccesses}
             availableAccess={availableAccess}
           />
         </StyledInviteInputContainer>
@@ -291,13 +312,21 @@ const ExternalLinks = ({
 };
 
 export default inject(
-  ({ userStore, dialogsStore, filesStore, peopleStore, currentQuotaStore }) => {
-    const { isOwner } = userStore.user;
+  ({
+    userStore,
+    dialogsStore,
+    filesStore,
+    peopleStore,
+    currentQuotaStore,
+    settingsStore,
+  }) => {
+    const { isOwner, isAdmin } = userStore.user;
     const { invitePanelOptions } = dialogsStore;
     const { setInvitationLinks } = filesStore;
     const { roomId, hideSelector, defaultAccess } = invitePanelOptions;
     const { getPortalInviteLink } = peopleStore.inviteLinksStore;
     const { isUserTariffLimit } = currentQuotaStore;
+    const { standalone } = settingsStore;
 
     return {
       setInvitationLinks,
@@ -305,8 +334,10 @@ export default inject(
       hideSelector,
       defaultAccess,
       isOwner,
+      isAdmin,
       getPortalInviteLink,
       isUserTariffLimit,
+      standalone,
     };
   },
 )(observer(ExternalLinks));

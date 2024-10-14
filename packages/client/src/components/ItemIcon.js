@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import SecuritySvgUrl from "PUBLIC_DIR/images/security.svg?url";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
@@ -81,8 +82,15 @@ const ItemIcon = ({
   color,
   isArchive,
   badgeUrl,
+  size,
+  withEditing,
+  showDefault,
+  imgClassName,
+  model,
+  onChangeFile,
+  className,
 }) => {
-  const isLoadedRoomIcon = !!logo?.medium;
+  const isLoadedRoomIcon = !!logo;
   const showDefaultRoomIcon = !isLoadedRoomIcon && isRoom;
 
   return (
@@ -91,11 +99,16 @@ const ItemIcon = ({
         <RoomIcon
           color={color}
           title={title}
+          size={size}
           isArchive={isArchive}
-          showDefault={showDefaultRoomIcon}
-          imgClassName="react-svg-icon"
-          imgSrc={isRoom ? logo?.medium : icon}
+          showDefault={showDefault || showDefaultRoomIcon}
+          imgClassName={imgClassName || "react-svg-icon"}
+          logo={isRoom ? logo : icon}
           badgeUrl={badgeUrl ? badgeUrl : ""}
+          withEditing={withEditing}
+          model={model}
+          onChangeFile={onChangeFile}
+          className={className}
         />
       </IconWrapper>
       {isPrivacy && fileExst && <EncryptedFileIcon isEdit={false} />}
@@ -104,7 +117,5 @@ const ItemIcon = ({
 };
 
 export default inject(({ treeFoldersStore }) => {
-  return {
-    isPrivacy: treeFoldersStore.isPrivacyFolder,
-  };
+  return { isPrivacy: treeFoldersStore.isPrivacyFolder };
 })(observer(ItemIcon));

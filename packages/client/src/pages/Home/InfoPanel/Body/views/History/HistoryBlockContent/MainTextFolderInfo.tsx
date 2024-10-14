@@ -23,23 +23,25 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
 import { withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 import { TTranslation } from "@docspace/shared/types";
 import { FolderType } from "@docspace/shared/enums";
 import { StyledHistoryBlockMessage } from "../../../styles/history";
 import { Feed } from "./HistoryBlockContent.types";
+import { FeedAction } from "../FeedInfo";
 
 type HistoryMainTextFolderInfoProps = {
   t: TTranslation;
   feed: Feed;
   selectedFolderId?: number;
+  actionType: string;
 };
 
 const HistoryMainTextFolderInfo = ({
   t,
   feed,
+  actionType,
   selectedFolderId,
 }: HistoryMainTextFolderInfoProps) => {
   const {
@@ -51,13 +53,17 @@ const HistoryMainTextFolderInfo = ({
     fromParentTitle,
   } = feed.data;
 
+  const isStartedFilling = actionType === FeedAction.StartedFilling;
+  const isSubmitted = actionType === FeedAction.Submitted;
+
   if (parentId === selectedFolderId || toFolderId === selectedFolderId)
     return null;
 
   if (!parentTitle) return null;
 
   const isSection = parentType === FolderType.USER;
-  const isFolder = parentType === FolderType.DEFAULT;
+  const isFolder =
+    parentType === FolderType.DEFAULT || isSubmitted || isStartedFilling;
   const isFromFolder = fromParentType === FolderType.DEFAULT;
 
   const destination = isFolder
@@ -74,7 +80,10 @@ const HistoryMainTextFolderInfo = ({
 
   return (
     <StyledHistoryBlockMessage className="message">
-      <span className={className}>
+      <span
+        className={className}
+        title={isFromFolder ? fromParentTitle : parentTitle}
+      >
         {isFromFolder ? sourceDestination : destination}
       </span>
     </StyledHistoryBlockMessage>

@@ -30,7 +30,8 @@ const ResetDialog = (props: ResetDialogProps) => {
       setIsRequestRunning(true);
       if (id) await onReset?.(id);
 
-      setIsRequestRunning(true);
+      setIsRequestRunning(false);
+      toastr.success(t("OAuth:ClientSecretResetSuccessfully"));
       onClose?.();
     } catch (error: unknown) {
       const e = error as TData;

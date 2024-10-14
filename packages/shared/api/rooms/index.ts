@@ -36,7 +36,12 @@ import {
   toUrlParams,
 } from "../../utils/common";
 import RoomsFilter from "./filter";
-import { TGetRooms, TPublicRoomPassword } from "./types";
+import {
+  TGetRooms,
+  TRoomLifetime,
+  TExportRoomIndexTask,
+  TPublicRoomPassword,
+} from "./types";
 
 export async function getRooms(filter: RoomsFilter, signal?: AbortSignal) {
   let params;
@@ -487,6 +492,43 @@ export function resetRoomQuota(roomIds) {
   const options = {
     method: "put",
     url: "files/rooms/resetquota",
+    data,
+  };
+
+  return request(options);
+}
+
+export function getRoomCovers() {
+  const options = {
+    method: "get",
+    url: "files/rooms/covers",
+  };
+
+  return request(options);
+}
+
+export function exportRoomIndex(roomId: number) {
+  return request({
+    method: "post",
+    url: `files/rooms/${roomId}/indexexport`,
+  }) as Promise<TExportRoomIndexTask>;
+}
+
+export function getExportRoomIndexProgress() {
+  return request({
+    method: "get",
+    url: `files/rooms/indexexport`,
+  }) as Promise<TExportRoomIndexTask>;
+}
+
+export function setRoomCover(roomId, cover) {
+  const data = {
+    Color: cover.color,
+    Cover: cover.cover,
+  };
+  const options = {
+    method: "post",
+    url: `files/rooms/${roomId}/cover`,
     data,
   };
 

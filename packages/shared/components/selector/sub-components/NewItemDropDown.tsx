@@ -48,7 +48,7 @@ const NewItemDropDown = ({
   dropDownItems: React.ReactElement[];
   isEmpty?: boolean;
   onCloseDropDown: (e?: MouseEvent) => void;
-  listHeight: number;
+  listHeight?: number;
 }) => {
   const [isMobile, setIsMobile] = React.useState(
     isMobileUtils(window.innerWidth),
@@ -84,7 +84,7 @@ const NewItemDropDown = ({
         className={DROPDOWN_CLASS_NAME}
         isEmpty={isEmpty ?? false}
       >
-        {listHeight < DROPDOWN_CONTAINER_WITH_PADDING ? (
+        {listHeight && listHeight < DROPDOWN_CONTAINER_WITH_PADDING ? (
           <Scrollbar style={{ height: listHeight - PADDING }}>
             {dropDownItems.map((item) => item)}
           </Scrollbar>

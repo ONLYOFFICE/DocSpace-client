@@ -237,6 +237,7 @@ function WizardForm(props: WizardFormProps) {
 
   const onChangeInstanceId = (e: ChangeEvent<HTMLInputElement>) => {
     setInstanceId(e.target.value);
+    setHasErrorInstanceId(e.target.value.trim() === "");
   };
 
   const onLanguageSelect = (lang: TOption) => {
@@ -453,7 +454,7 @@ function WizardForm(props: WizardFormProps) {
           isVertical={true}
           labelVisible={false}
           hasError={hasErrorInstanceId}
-          errorMessage={t("ErrorInstanceId")}
+          errorMessage={hasErrorInstanceId && t("ErrorInstanceId")}
         >
           <TextInput
             id="instance-id"

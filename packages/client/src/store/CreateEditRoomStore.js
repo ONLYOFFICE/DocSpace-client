@@ -265,10 +265,6 @@ class CreateEditRoomStore {
       tagsRequest.push(createTag(newTags[i]));
     }
 
-    if (tagsRequest.length) {
-      await Promise.all(tagsRequest);
-    }
-
     const tagsToAddList = tags.filter((t) => !startTags.includes(t));
 
     if (tags.length && tagsToAddList.length) {
@@ -283,6 +279,14 @@ class CreateEditRoomStore {
     const requests = [];
 
     try {
+      try {
+        if (tagsRequest.length) {
+          await Promise.all(tagsRequest);
+        }
+      } catch (e) {
+        toastr.error(e);
+      }
+
       if (Object.keys(editRoomParams).length)
         await editRoom(room.id, editRoomParams);
 
@@ -359,10 +363,8 @@ class CreateEditRoomStore {
       }),
     };
 
-    const createTagsData = roomParams.tags
-      .filter((t) => t.isNew)
-      .map((t) => t.name);
-    const addTagsData = roomParams.tags.map((tag) => tag.name);
+    const newTags = roomParams.tags.filter((t) => t.isNew).map((t) => t.name);
+    const tagsToAddList = roomParams.tags.map((tag) => tag.name);
 
     const storageFolderId = roomParams.storageLocation.storageFolderId;
     const thirdpartyAccount = roomParams.storageLocation.thirdpartyAccount;
@@ -379,7 +381,28 @@ class CreateEditRoomStore {
         roomParams.watermark,
       );
     }
+
+    if (tagsToAddList.length) {
+      createRoomData.tags = tagsToAddList;
+    }
+
     try {
+      // create new tags
+
+      try {
+        const tagsRequest = [];
+
+        for (let i = 0; i < newTags.length; i++) {
+          tagsRequest.push(createTag(newTags[i]));
+        }
+
+        if (tagsRequest.length) {
+          await Promise.all(tagsRequest);
+        }
+      } catch (e) {
+        toastr.error(e);
+      }
+
       this.setIsLoading(true);
       withConfirm && this.setConfirmDialogIsLoading(true);
 
@@ -393,8 +416,6 @@ class CreateEditRoomStore {
 
       room.isLogoLoading = true;
 
-      const actions = [];
-
       const requests = [];
 
       // delete thirdparty account if not needed
@@ -402,16 +423,6 @@ class CreateEditRoomStore {
         requests.push(deleteThirdParty(thirdpartyAccount.providerId));
 
       await Promise.all(requests);
-      // create new tags
-      for (let i = 0; i < createTagsData.length; i++) {
-        actions.push(createTag(createTagsData[i]));
-      }
-
-      if (!!actions.length) await Promise.all(actions);
-
-      // add new tags to room
-      if (!!addTagsData.length)
-        room = await addTagsToRoom(room.id, addTagsData);
 
       // calculate and upload logo to room
       if (roomParams.icon.uploadedFile) {

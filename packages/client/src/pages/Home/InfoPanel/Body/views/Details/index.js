@@ -29,6 +29,8 @@ import { useNavigate } from "react-router-dom";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
+import SharedLinkIconURL from "PUBLIC_DIR/images/icons/24/shared.svg?url";
+
 import { isMobile } from "@docspace/shared/utils";
 
 import { FileType, FolderType } from "@docspace/shared/enums";
@@ -104,6 +106,10 @@ const Details = ({
       ? selection?.logo
       : getInfoPanelItemIcon(selection, 96);
 
+  const isExternal = Boolean(selection?.external);
+
+  const badgeUrl = isExternal ? SharedLinkIconURL : "";
+
   //console.log("InfoPanel->Details render", { selection });
 
   const isLoadedRoomIcon = !!selection.logo?.cover || !!selection.logo?.large;
@@ -150,6 +156,7 @@ const Details = ({
             withEditing={selection.isRoom && selection.security?.EditRoom}
             dropDownManualX={isMobile() ? "-30px" : "-10px"}
             onChangeFile={onChangeFileContext}
+            badgeUrl={badgeUrl}
           />
         </StyledNoThumbnail>
       )}

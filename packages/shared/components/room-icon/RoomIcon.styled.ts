@@ -135,8 +135,8 @@ const StyledIcon = styled.div<{
   .room-icon_badge {
     z-index: 2;
     position: absolute;
-    margin-block: 24px 0;
-    margin-inline: 24px 0;
+    margin-block: ${({ size }) => (size === "96px" ? "74px 0" : "24px 0")};
+    margin-inline: ${({ size }) => (size === "96px" ? "74px 0" : "24px 0")};
 
     .room-icon-button {
       svg {

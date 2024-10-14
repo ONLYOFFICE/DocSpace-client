@@ -1829,7 +1829,7 @@ class FilesStore {
 
     const defaultFilter = RoomsFilter.getDefault();
 
-    const { provider, quotaFilter, type } = filterData;
+    const { provider, quotaFilter } = filterData;
 
     if (!ROOMS_PROVIDER_TYPE_NAME[provider])
       filterData.provider = defaultFilter.provider;
@@ -1840,8 +1840,6 @@ class FilesStore {
       quotaFilter !== FilterKeys.defaultQuota
     )
       filterData.quotaFilter = defaultFilter.quotaFilter;
-
-    if (type && !RoomsType[type]) filterData.type = defaultFilter.type;
 
     const request = () =>
       api.rooms

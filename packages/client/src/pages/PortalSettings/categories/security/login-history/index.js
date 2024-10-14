@@ -46,6 +46,7 @@ const LoginHistory = (props) => {
     setLifetimeAuditSettings,
     securityLifetime,
     isAuditAvailable,
+    resetIsInit,
   } = props;
 
   useEffect(() => {
@@ -54,6 +55,8 @@ const LoginHistory = (props) => {
     getLoginHistory();
 
     getLifetimeAuditSettings();
+
+    return () => resetIsInit();
   }, []);
 
   const getContent = () => {
@@ -116,6 +119,7 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     getLifetimeAuditSettings,
     setLifetimeAuditSettings,
     securityLifetime,
+    resetIsInit,
   } = setup;
   const { theme } = settingsStore;
 
@@ -131,5 +135,6 @@ export default inject(({ setup, settingsStore, currentQuotaStore }) => {
     viewAs,
     getLoginHistoryReport,
     isAuditAvailable,
+    resetIsInit,
   };
 })(withTranslation("Settings")(LoginHistory));

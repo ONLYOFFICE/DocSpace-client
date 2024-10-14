@@ -29,7 +29,11 @@ import { observer, inject } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-import { EmployeeType, RoomsType } from "@docspace/shared/enums";
+import {
+  EmployeeType,
+  ShareAccessRights,
+  RoomsType,
+} from "@docspace/shared/enums";
 import { LOADER_TIMEOUT } from "@docspace/shared/constants";
 
 import { Button } from "@docspace/shared/components/button";
@@ -48,8 +52,8 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { fixAccess, getAccessOptions } from "./utils";
-import AddUsersPanel from "../AddUsersPanel";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
+import PeopleSelector from "@docspace/shared/selectors/People";
 
 const InvitePanel = ({
   folders,
@@ -448,8 +452,9 @@ const InvitePanel = ({
     setAddUsersPanelVisible(false);
   };
 
-  const addItems = (users) => {
+  const addItems = (users, access) => {
     users.forEach((u) => {
+      u.access = access.access;
       const isAccessPaid = checkIfAccessPaid(u.access);
 
       if (isAccessPaid) {
@@ -470,6 +475,7 @@ const InvitePanel = ({
     setInviteItems(filtered);
     setInputValue("");
     setUsersList([]);
+    closeUsersPanel();
   };
 
   const accessOptions = getAccessOptions(
@@ -492,6 +498,10 @@ const InvitePanel = ({
     [invitedUsers],
   );
 
+  const access =
+    defaultAccess ??
+    (isEncrypted ? ShareAccessRights.FullAccess : ShareAccessRights.ReadOnly);
+
   return (
     <ModalDialog
       visible={visible}
@@ -503,24 +513,37 @@ const InvitePanel = ({
     >
       {!hideSelector && addUsersPanelVisible && (
         <ModalDialog.Container>
-          <AddUsersPanel
-            onParentPanelClose={onClose}
-            onClose={closeUsersPanel}
-            visible={addUsersPanelVisible}
-            tempDataItems={inviteItems}
-            setDataItems={addItems}
-            accessOptions={accessOptions}
-            isMultiSelect
-            isEncrypted
-            defaultAccess={defaultAccess}
-            withoutBackground={isMobileView}
-            withBlur={!isMobileView}
-            roomId={roomId}
-            withGroups={!isPublicRoomType}
+          <PeopleSelector
+            useAside
+            onClose={() => {
+              onClose();
+              closeUsersPanel();
+            }}
+            onSubmit={addItems}
             withAccessRights
-            invitedUsers={invitedUsersArray}
+            accessRights={accessOptions}
+            selectedAccessRight={
+              accessOptions.filter((a) => a.access === access)[0]
+            }
+            onAccessRightsChange={() => {}}
+            isMultiSelect
             disableDisabledUsers
-            useAside={false}
+            withGroups={!isPublicRoomType}
+            roomId={roomId}
+            disableInvitedUsers={invitedUsersArray}
+            withGuests
+            withHeader
+            headerProps={{
+              // Todo: Update groups empty screen texts when they are ready
+              headerLabel: t("Common:ListAccounts"),
+              withoutBackButton: false,
+              withoutBorder: true,
+              onBackClick: onClose,
+              onClose: () => {
+                onClose();
+                closeUsersPanel();
+              },
+            }}
           />
         </ModalDialog.Container>
       )}

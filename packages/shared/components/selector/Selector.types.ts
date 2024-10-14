@@ -198,7 +198,7 @@ export type TSelectorEmptyScreen = {
 };
 
 // submit button
-type TOnSubmit = (
+export type TOnSubmit = (
   selectedItems: TSelectorItem[],
   access: TAccessRight | null,
   fileName: string,

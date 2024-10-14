@@ -27,53 +27,59 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import { ShareAccessRights } from "@docspace/shared/enums";
 import { Portal } from "@docspace/shared/components/portal";
 import { TUser } from "@docspace/shared/api/people/types";
-
-import AddUsersPanel from "../../../../panels/AddUsersPanel";
-import { getAccessOptions } from "../../../../panels/InvitePanel/utils";
+import PeopleSelector from "@docspace/shared/selectors/People";
+import { TOnSubmit } from "@docspace/shared/components/selector/Selector.types";
 
 type MembersSelectorProps = {
   isVisible: boolean;
   onClose: () => void;
   onParentPanelClose: () => void;
 
-  addMembers: (members: TUser[]) => void;
+  addMembers: TOnSubmit;
 } & (
   | { checkIfUserInvited: (user: TUser) => boolean; invitedUsers?: undefined }
   | { invitedUsers: string[]; checkIfUserInvited?: undefined }
 );
 
 export const MembersSelector = ({
-  isVisible,
   addMembers,
   onParentPanelClose,
   onClose,
   checkIfUserInvited,
   invitedUsers,
 }: MembersSelectorProps) => {
-  const { t } = useTranslation(["InviteDialog"]);
-  const accessOptions = getAccessOptions(t, 5, false, true);
+  const { t } = useTranslation(["Common"]);
   const invitedProps = checkIfUserInvited
     ? { checkIfUserInvited }
-    : { invitedUsers };
+    : { disableInvitedUsers: invitedUsers };
 
   return (
     <Portal
       element={
-        <AddUsersPanel
-          visible={isVisible}
-          onClose={onClose}
-          onParentPanelClose={onParentPanelClose}
+        <PeopleSelector
+          onClose={() => {
+            onClose();
+            onParentPanelClose();
+          }}
           isMultiSelect
-          setDataItems={addMembers}
-          accessOptions={accessOptions}
-          withAccessRights={false}
-          isEncrypted
-          defaultAccess={ShareAccessRights.FullAccess}
+          useAside
+          onSubmit={addMembers}
           withoutBackground
+          currentUserId=""
           withBlur={false}
+          withHeader
+          submitButtonLabel=""
+          disableSubmitButton={false}
+          headerProps={{
+            // Todo: Update groups empty screen texts when they are ready
+            headerLabel: t("Common:ListAccounts"),
+            withoutBackButton: false,
+            withoutBorder: true,
+            onBackClick: onClose,
+            onCloseClick: onParentPanelClose,
+          }}
           disableDisabledUsers
           {...invitedProps}
         />

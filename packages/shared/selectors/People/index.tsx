@@ -53,6 +53,8 @@ import { TGroup } from "../../api/groups/types";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 import { Text } from "../../components/text";
 import { Box } from "../../components/box";
+import { Aside } from "../../components/aside";
+import { Backdrop } from "../../components/backdrop";
 import { globalColors } from "../../themes";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";
@@ -204,6 +206,11 @@ const PeopleSelector = ({
   selectedAccessRight,
   onAccessRightsChange,
   accessRightsMode,
+
+  useAside,
+  onClose,
+  withoutBackground,
+  withBlur,
 }: PeopleSelectorProps) => {
   const { t }: { t: TTranslation } = useTranslation(["Common"]);
 
@@ -527,7 +534,7 @@ const PeopleSelector = ({
         }
       : {};
 
-  return (
+  const selectorComponent = (
     <Selector
       id={id}
       alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}
@@ -544,14 +551,29 @@ const PeopleSelector = ({
       disableSubmitButton={disableSubmitButton || !selectedItem}
       submitButtonId={submitButtonId}
       emptyScreenImage={emptyScreenImage}
-      emptyScreenHeader={emptyScreenHeader ?? t("Common:EmptyHeader")}
+      emptyScreenHeader={
+        (emptyScreenHeader ?? activeTabId !== GROUP_TAB_ID)
+          ? t("Common:EmptyHeader")
+          : t("Common:NotFoundGroups")
+      }
       emptyScreenDescription={
-        emptyScreenDescription ??
-        t("Common:EmptyDescription", { productName: t("Common:ProductName") })
+        (emptyScreenDescription ?? activeTabId !== GROUP_TAB_ID)
+          ? t("Common:EmptyDescription", {
+              productName: t("Common:ProductName"),
+            })
+          : t("Common:GroupsNotFoundDescription")
       }
       searchEmptyScreenImage={emptyScreenImage}
-      searchEmptyScreenHeader={t("Common:NotFoundUsers")}
-      searchEmptyScreenDescription={t("Common:NotFoundUsersDescription")}
+      searchEmptyScreenHeader={
+        activeTabId !== GROUP_TAB_ID
+          ? t("Common:NotFoundUsers")
+          : t("Common:NotFoundGroups")
+      }
+      searchEmptyScreenDescription={
+        activeTabId !== GROUP_TAB_ID
+          ? t("Common:NotFoundUsersDescription")
+          : t("Common:GroupsNotFoundDescription")
+      }
       hasNextPage={hasNextPage}
       isNextPageLoading={isNextPageLoading}
       loadNextPage={loadNextPage}
@@ -559,12 +581,43 @@ const PeopleSelector = ({
       totalItems={total}
       isLoading={isFirstLoadRef.current}
       searchLoader={<SearchLoader />}
-      rowLoader={<RowLoader isUser isContainer={isFirstLoadRef.current} />}
+      isSearchLoading={isFirstLoadRef.current}
+      rowLoader={
+        <RowLoader
+          isUser
+          isContainer={isFirstLoadRef.current}
+          isMultiSelect={isMultiSelect}
+        />
+      }
       onSelect={onSelect}
       {...infoProps}
       {...withTabsProps}
       {...withAccessRightsProps}
     />
+  );
+
+  return useAside ? (
+    <>
+      <Backdrop
+        onClick={onClose}
+        visible
+        zIndex={310}
+        isAside
+        withoutBackground={withoutBackground}
+        withoutBlur={!withBlur}
+      />
+      <Aside
+        className="header_aside-panel"
+        visible
+        onClose={onClose}
+        withoutBodyScroll
+        withoutHeader
+      >
+        {selectorComponent}
+      </Aside>
+    </>
+  ) : (
+    selectorComponent
   );
 };
 

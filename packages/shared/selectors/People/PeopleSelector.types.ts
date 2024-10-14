@@ -79,5 +79,10 @@ export type PeopleSelectorProps = TSelectorHeader &
     roomId?: string | number;
 
     checkIfUserInvited?: (user: TUser) => boolean;
+
+    useAside?: boolean;
+    onClose: VoidFunction;
+    withoutBackground?: boolean;
+    withBlur?: boolean;
   } & ContactsSelectorGroups &
   ContactsSelectorGuests;

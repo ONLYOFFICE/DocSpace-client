@@ -514,6 +514,7 @@ const InvitePanel = ({
       {!hideSelector && addUsersPanelVisible && (
         <ModalDialog.Container>
           <PeopleSelector
+            useAside
             onClose={() => {
               onClose();
               closeUsersPanel();

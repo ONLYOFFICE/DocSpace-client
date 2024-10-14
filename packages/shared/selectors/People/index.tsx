@@ -42,6 +42,7 @@ import {
   TSelectorItem,
   TSelectorSearch,
   TSelectorTabs,
+  TSelectorWithAside,
 } from "../../components/selector/Selector.types";
 import { AccountsSearchArea, EmployeeStatus } from "../../enums";
 import { TTranslation } from "../../types";
@@ -53,8 +54,6 @@ import { TGroup } from "../../api/groups/types";
 import { RowLoader, SearchLoader } from "../../skeletons/selector";
 import { Text } from "../../components/text";
 import { Box } from "../../components/box";
-import { Aside } from "../../components/aside";
-import { Backdrop } from "../../components/backdrop";
 import { globalColors } from "../../themes";
 
 import { PeopleSelectorProps } from "./PeopleSelector.types";
@@ -156,23 +155,24 @@ const toListItem = (
 const PeopleSelector = ({
   submitButtonLabel,
   submitButtonId,
-  onSubmit,
   disableSubmitButton,
+  onSubmit,
 
   id,
   className,
   style,
 
+  withCancelButton,
   cancelButtonLabel,
   onCancel,
-  withCancelButton,
 
   filter,
+
   excludeItems,
-  currentUserId,
-  withOutCurrentAuthorizedUser,
 
   filterUserId,
+  currentUserId,
+  withOutCurrentAuthorizedUser,
 
   withFooterCheckbox,
   footerCheckboxLabel,
@@ -534,17 +534,25 @@ const PeopleSelector = ({
         }
       : {};
 
-  const selectorComponent = (
+  const withAside: TSelectorWithAside = useAside
+    ? { useAside, onClose, withBlur, withoutBackground }
+    : {};
+
+  return (
     <Selector
+      {...headerSelectorProps}
+      {...searchSelectorProps}
+      {...checkboxSelectorProps}
+      {...cancelButtonSelectorProps}
+      {...infoProps}
+      {...withTabsProps}
+      {...withAccessRightsProps}
+      {...withAside}
       id={id}
       alwaysShowFooter={itemsList.length !== 0 || Boolean(searchValue)}
       className={className}
       style={style}
       renderCustomItem={renderCustomItem}
-      {...headerSelectorProps}
-      {...searchSelectorProps}
-      {...checkboxSelectorProps}
-      {...cancelButtonSelectorProps}
       items={itemsList}
       submitButtonLabel={submitButtonLabel || t("Common:SelectAction")}
       onSubmit={onSubmit}
@@ -552,27 +560,37 @@ const PeopleSelector = ({
       submitButtonId={submitButtonId}
       emptyScreenImage={emptyScreenImage}
       emptyScreenHeader={
-        (emptyScreenHeader ?? activeTabId !== GROUP_TAB_ID)
-          ? t("Common:EmptyHeader")
-          : t("Common:NotFoundGroups")
+        emptyScreenHeader ??
+        (activeTabId === GUESTS_TAB_ID
+          ? t("Common:NotFoundGuests")
+          : activeTabId === PEOPLE_TAB_ID
+            ? t("Common:EmptyHeader")
+            : t("Common:NotFoundGroups"))
       }
       emptyScreenDescription={
-        (emptyScreenDescription ?? activeTabId !== GROUP_TAB_ID)
-          ? t("Common:EmptyDescription", {
-              productName: t("Common:ProductName"),
-            })
-          : t("Common:GroupsNotFoundDescription")
+        emptyScreenDescription ??
+        (activeTabId === GUESTS_TAB_ID
+          ? t("Common:NotFoundGuestsDescription")
+          : activeTabId === PEOPLE_TAB_ID
+            ? t("Common:EmptyDescription", {
+                productName: t("Common:ProductName"),
+              })
+            : t("Common:GroupsNotFoundDescription"))
       }
       searchEmptyScreenImage={emptyScreenImage}
       searchEmptyScreenHeader={
-        activeTabId !== GROUP_TAB_ID
-          ? t("Common:NotFoundUsers")
-          : t("Common:NotFoundGroups")
+        activeTabId === GUESTS_TAB_ID
+          ? t("Common:NotFoundGuestsFilter")
+          : activeTabId === PEOPLE_TAB_ID
+            ? t("Common:NotFoundUsers")
+            : t("Common:NotFoundGroups")
       }
       searchEmptyScreenDescription={
-        activeTabId !== GROUP_TAB_ID
-          ? t("Common:NotFoundUsersDescription")
-          : t("Common:GroupsNotFoundDescription")
+        activeTabId === GUESTS_TAB_ID
+          ? t("Common:NotFoundFilterGuestsDescription")
+          : activeTabId === PEOPLE_TAB_ID
+            ? t("Common:NotFoundUsersDescription")
+            : t("Common:GroupsNotFoundDescription")
       }
       hasNextPage={hasNextPage}
       isNextPageLoading={isNextPageLoading}
@@ -580,8 +598,6 @@ const PeopleSelector = ({
       isMultiSelect={isMultiSelect ?? false}
       totalItems={total}
       isLoading={isFirstLoadRef.current}
-      searchLoader={<SearchLoader />}
-      isSearchLoading={isFirstLoadRef.current}
       rowLoader={
         <RowLoader
           isUser
@@ -590,34 +606,7 @@ const PeopleSelector = ({
         />
       }
       onSelect={onSelect}
-      {...infoProps}
-      {...withTabsProps}
-      {...withAccessRightsProps}
     />
-  );
-
-  return useAside ? (
-    <>
-      <Backdrop
-        onClick={onClose}
-        visible
-        zIndex={310}
-        isAside
-        withoutBackground={withoutBackground}
-        withoutBlur={!withBlur}
-      />
-      <Aside
-        className="header_aside-panel"
-        visible
-        onClose={onClose}
-        withoutBodyScroll
-        withoutHeader
-      >
-        {selectorComponent}
-      </Aside>
-    </>
-  ) : (
-    selectorComponent
   );
 };
 

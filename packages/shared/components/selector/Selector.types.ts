@@ -257,6 +257,20 @@ type TWithoutAccessRightsProps = {
   accessRightsMode?: undefined;
 };
 
+export type TSelectorWithAside =
+  | {
+      useAside: true;
+      onClose: VoidFunction;
+      withoutBackground?: boolean;
+      withBlur?: boolean;
+    }
+  | {
+      useAside?: undefined;
+      onClose?: undefined;
+      withoutBackground?: undefined;
+      withBlur?: undefined;
+    };
+
 export type TSelectorAccessRights =
   | TWithAccessRightsProps
   | TWithoutAccessRightsProps;
@@ -328,7 +342,8 @@ export type SelectorProps = TSelectorHeader &
   TSelectorCancelButton &
   TSelectorAccessRights &
   TSelectorInput &
-  TSelectorCheckbox & {
+  TSelectorCheckbox &
+  TSelectorWithAside & {
     id?: string;
     className?: string;
     style?: React.CSSProperties;

@@ -24,8 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useTranslation } from "react-i18next";
-
 import { TUser } from "@docspace/shared/api/people/types";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import { TSelectorItem } from "@docspace/shared/components/selector";
@@ -42,8 +40,6 @@ const SelectGroupManagerPanel = ({
   onParentPanelClose,
   setGroupManager,
 }: SelectGroupManagerPanelProps) => {
-  const { t } = useTranslation(["Common"]);
-
   const onSelectGroupManager = (newGroupManager: TSelectorItem[]) => {
     setGroupManager(newGroupManager[0] as unknown as TUser);
   };
@@ -53,10 +49,9 @@ const SelectGroupManagerPanel = ({
       element={
         <PeopleSelector
           disableDisabledUsers
-          onSubmit={onSelectGroupManager}
           submitButtonLabel=""
           disableSubmitButton={false}
-          currentUserId=""
+          onSubmit={onSelectGroupManager}
           useAside
           onClose={() => {
             onClose();
@@ -67,7 +62,7 @@ const SelectGroupManagerPanel = ({
           withHeader
           headerProps={{
             // Todo: Update groups empty screen texts when they are ready
-            headerLabel: t("Common:ListAccounts"),
+            headerLabel: "",
             withoutBackButton: false,
             withoutBorder: true,
             onBackClick: onClose,

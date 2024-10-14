@@ -27,8 +27,10 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
+
 import Planet12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/planet.react.svg?url";
 import LifetimeRoomIconUrl from "PUBLIC_DIR/images/lifetime-room.react.svg?url";
+
 import { getUserTypeTranslation } from "../../../utils/common";
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
 import { Text } from "../../text";
@@ -218,7 +220,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
           <RoomIcon
             color={color}
             title={label}
-            logo={{ cover }}
+            logo={{ cover, large: "", original: "", small: "" }}
             showDefault={false}
             badgeUrl={badgeUrl ?? ""}
             className="item-logo"

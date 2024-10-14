@@ -24,9 +24,6 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { useTranslation } from "react-i18next";
-
 import { Portal } from "@docspace/shared/components/portal";
 import { TUser } from "@docspace/shared/api/people/types";
 import PeopleSelector from "@docspace/shared/selectors/People";
@@ -50,7 +47,6 @@ export const MembersSelector = ({
   checkIfUserInvited,
   invitedUsers,
 }: MembersSelectorProps) => {
-  const { t } = useTranslation(["Common"]);
   const invitedProps = checkIfUserInvited
     ? { checkIfUserInvited }
     : { disableInvitedUsers: invitedUsers };
@@ -59,22 +55,21 @@ export const MembersSelector = ({
     <Portal
       element={
         <PeopleSelector
+          useAside
           onClose={() => {
             onClose();
             onParentPanelClose();
           }}
-          isMultiSelect
-          useAside
-          onSubmit={addMembers}
           withoutBackground
-          currentUserId=""
           withBlur={false}
-          withHeader
+          isMultiSelect
           submitButtonLabel=""
           disableSubmitButton={false}
+          onSubmit={addMembers}
+          withHeader
           headerProps={{
             // Todo: Update groups empty screen texts when they are ready
-            headerLabel: t("Common:ListAccounts"),
+            headerLabel: "",
             withoutBackButton: false,
             withoutBorder: true,
             onBackClick: onClose,

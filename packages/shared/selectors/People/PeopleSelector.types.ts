@@ -33,6 +33,7 @@ import {
   TSelectorHeader,
   TSelectorInfo,
   TSelectorSubmitButton,
+  TSelectorWithAside,
 } from "../../components/selector/Selector.types";
 
 export interface UserTooltipProps {
@@ -55,6 +56,7 @@ export type PeopleSelectorProps = TSelectorHeader &
   TSelectorCancelButton &
   TSelectorCheckbox &
   TSelectorAccessRights &
+  TSelectorWithAside &
   TSelectorSubmitButton & {
     id?: string;
     className?: string;
@@ -64,10 +66,9 @@ export type PeopleSelectorProps = TSelectorHeader &
 
     isMultiSelect?: boolean;
 
-    currentUserId: string;
-    withOutCurrentAuthorizedUser?: boolean;
-
+    currentUserId?: string;
     filterUserId?: string;
+    withOutCurrentAuthorizedUser?: boolean;
 
     excludeItems?: string[];
     disableInvitedUsers?: string[];
@@ -79,10 +80,5 @@ export type PeopleSelectorProps = TSelectorHeader &
     roomId?: string | number;
 
     checkIfUserInvited?: (user: TUser) => boolean;
-
-    useAside?: boolean;
-    onClose?: VoidFunction;
-    withoutBackground?: boolean;
-    withBlur?: boolean;
   } & ContactsSelectorGroups &
   ContactsSelectorGuests;

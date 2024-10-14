@@ -200,8 +200,8 @@ const DataReassignmentDialog = ({
       });
   };
 
-  const filter = new Filter();
-  filter.role = [EmployeeType.Admin, EmployeeType.User];
+  const filter = Filter.getDefault();
+  filter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
 
   if (selectorVisible) {
     return (
@@ -210,7 +210,6 @@ const DataReassignmentDialog = ({
         visible={visible}
         onClose={onClosePeopleSelector}
         containerVisible={selectorVisible}
-        withFooterBorder
         withBodyScroll
       >
         <Backdrop
@@ -220,22 +219,22 @@ const DataReassignmentDialog = ({
         />
         <ModalDialog.Container>
           <PeopleSelector
-            submitButtonLabel={t("Common:SelectAction")}
-            onSubmit={onAccept}
+            submitButtonLabel=""
             disableSubmitButton={false}
+            onSubmit={onAccept}
             excludeItems={[user.id]}
             currentUserId={user.id}
             withCancelButton
+            onCancel={onClosePeopleSelector}
             cancelButtonLabel=""
+            withHeader
             headerProps={{
               onCloseClick: onClose,
               onBackClick: onClosePeopleSelector,
               withoutBackButton: false,
               headerLabel: "",
             }}
-            onBackClick={onTogglePeopleSelector}
             filter={filter}
-            withHeader
             disableDisabledUsers
           />
         </ModalDialog.Container>
@@ -249,7 +248,6 @@ const DataReassignmentDialog = ({
       visible={visible}
       onClose={onClose}
       containerVisible={selectorVisible}
-      withFooterBorder
       withBodyScroll
     >
       <ModalDialog.Header>
@@ -301,7 +299,6 @@ export default inject(({ settingsStore, peopleStore, setup, userStore }) => {
     setIsDeletingUserWithReassignment,
   } = peopleStore.dialogStore;
   const { currentColorScheme, dataReassignmentUrl } = settingsStore;
-  const { setSelected } = peopleStore.selectionStore;
   const {
     dataReassignment,
     dataReassignmentProgress,
@@ -310,7 +307,8 @@ export default inject(({ settingsStore, peopleStore, setup, userStore }) => {
 
   const { user: currentUser } = userStore;
 
-  const { getUsersList, needResetUserSelection } = peopleStore.usersStore;
+  const { getUsersList, needResetUserSelection, setSelected } =
+    peopleStore.usersStore;
 
   return {
     setDataReassignmentDialogVisible,

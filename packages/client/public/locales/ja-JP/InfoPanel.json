@@ -1,5 +1,5 @@
 {
-  "AccountsEmptyScreenText": "ユーザーの詳細情報はこちら",
+  "UsersEmptyScreenText": "ユーザーの詳細情報はこちら",
   "AddedRoomTags": "タグが追加されました。",
   "Administration": "管理",
   "AndMoreLabel": "と、<1>{{count}}もっと</1>",
@@ -35,7 +35,6 @@
   "HistoryRoomCopied": "<1>「{{roomTitle}}」</1>ルームがコピーされました ",
   "HistoryRoomCreated": "<1>「{{roomTitle}}」</1>ルームが作成されました。",
   "HistoryThirdParty": "サードパーティストレージが接続されているパブリックルームでは、履歴表示は利用できません。",
-  "InfoBanner": "招待されたユーザーのリストには、この{{productName}}の所有者および/または管理者が含まれ、すべてのルームにアクセスできます。所有者および/または管理者に他のアクセス権を割り当てることはできません。ルームに追加されると、すべての変更が通知されます。",
   "ItemsSelected": "選択されているアイテム",
   "LastModifiedBy": "最終更新者",
   "NoRecordsFound": "レコードが見つかりません",
@@ -49,7 +48,7 @@
   "RoomGroupRemove": "グループが削除されました",
   "RoomLogoChanged": "アイコンが変更されました",
   "RoomRemoveUser": "ユーザーが削除されました。",
-  "RoomRenamed": "ルーム名<1>«{{oldRoomTitle}}»</1>を<1>«{{roomTitle}}»</1>に変更されました。",
+  "RoomRenamed": "ルーム名<1>«{{oldRoomTitle}}»</1>を<2>«{{roomTitle}}»</2>に変更されました。",
   "RoomsEmptyScreenTent": "ルームの詳細情報はこちら",
   "RoomUpdateAccess": "に次の役割が割り当てられた：",
   "SelectedUsers": "選択されたアカウント",

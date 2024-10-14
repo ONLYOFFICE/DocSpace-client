@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-
+import { TextUserSelect } from "@docspace/shared/utils";
 import { Base } from "@docspace/shared/themes";
 
 const StyledUserTypeHeader = styled.div`
@@ -65,6 +65,7 @@ const StyledUser = styled.div`
 
   .user_body-wrapper {
     overflow: auto;
+    ${TextUserSelect}
   }
 
   .name-wrapper,

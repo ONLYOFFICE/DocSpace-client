@@ -77,7 +77,7 @@ const SecretKeyInput = (props) => {
     name,
     value,
     onChange,
-    PASSWORD_SETTINGS,
+    passwordSettings,
     isPasswordValid,
     setIsPasswordValid,
     setIsResetVisible,
@@ -96,7 +96,7 @@ const SecretKeyInput = (props) => {
   };
 
   const generatePassword = () => {
-    console.log("134");
+    if (isDisabled) return;
     secretKeyInputRef.current.onGeneratePassword();
   };
 
@@ -171,7 +171,7 @@ const SecretKeyInput = (props) => {
           isDisableTooltip={true}
           inputType="password"
           isFullWidth={true}
-          passwordSettings={PASSWORD_SETTINGS}
+          passwordSettings={passwordSettings}
           key={passwordInputKey}
           isDisabled={isDisabled}
         />
@@ -180,7 +180,7 @@ const SecretKeyInput = (props) => {
           type="action"
           fontWeight={600}
           isHovered={true}
-          onClick={isDisabled ? () => {} : generatePassword}
+          onClick={generatePassword}
           className="link dotted"
         >
           {t("Generate")}
@@ -190,12 +190,11 @@ const SecretKeyInput = (props) => {
   );
 };
 
-export default inject(({ settingsStore, webhooksStore }) => {
-  const { webhooksGuideUrl } = settingsStore;
-  const { PASSWORD_SETTINGS } = webhooksStore;
+export default inject(({ settingsStore }) => {
+  const { webhooksGuideUrl, passwordSettings } = settingsStore;
 
   return {
     webhooksGuideUrl,
-    PASSWORD_SETTINGS,
+    passwordSettings,
   };
 })(observer(SecretKeyInput));

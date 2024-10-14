@@ -5,7 +5,7 @@ Component that displays Heading text with custom styles
 ### Usage
 
 ```js
-import Headline from "@docspace/common/components/Headline";
+import Headline from "@docspace/shared/components/Headline";
 ```
 
 ```jsx

@@ -1,8 +1,8 @@
 {
   "ChangeUserTypeButton": "Змінити тип",
   "ChangeUserTypeHeader": "Змінити тип користувача",
-  "ChangeUserTypeMessage": "Користувачів типу \"{{ firstType }}\" буде переміщено до типу \"{{ secondType }}\".",
-  "ChangeUserTypeMessageMulti": "Вибраних користувачів буде переміщено до типу '{{ secondType }}'.",
+  "ChangeUserTypeMessage": "Користувачів типу <strong>\"{{ firstType }}\"</strong> буде переміщено до типу <strong>\"{{ secondType }}\"</strong>.",
+  "ChangeUserTypeMessageMulti": "Вибраних користувачів буде переміщено до типу <strong>'{{ secondType }}'</strong>.",
   "ChangeUserTypeMessageWarning": "Ви не можете змінити тип адміністраторів {{productName}} та свій тип.",
   "SuccessChangeUserType": "Тип користувача успішно змінено"
 }

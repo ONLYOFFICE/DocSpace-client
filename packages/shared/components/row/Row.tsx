@@ -27,11 +27,13 @@
 "use client";
 
 import React, { useRef } from "react";
-
+import ArrowReactSvgUrl from "PUBLIC_DIR/images/arrow2.react.svg?url";
 import { isMobile } from "react-device-detect"; // TODO: isDesktop=true for IOS(Firefox & Safari)
+import { VDRIndexingAction } from "../../enums";
 import { isMobile as isMobileUtils } from "../../utils/device";
 
 import { Checkbox } from "../checkbox";
+import { ColorTheme, ThemeId } from "../color-theme";
 import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
@@ -60,6 +62,7 @@ const Row = (props: RowProps) => {
     onSelect,
     onRowClick,
     onContextClick,
+    onChangeIndex,
 
     getContextModel,
     isRoom,
@@ -73,6 +76,7 @@ const Row = (props: RowProps) => {
     className,
     badgeUrl,
     isDisabled,
+    isIndexEditingMode,
   } = props;
 
   const cm = useRef<null | {
@@ -127,6 +131,8 @@ const Row = (props: RowProps) => {
     icon: "",
     avatar: "",
     color: "",
+    cover: "",
+    logo: "",
   };
   if (React.isValidElement(children) && children.props.item) {
     contextMenuHeader = {
@@ -136,6 +142,8 @@ const Row = (props: RowProps) => {
         ? children.props.item.title
         : children.props.item.displayName || "",
       color: children.props.item.logo?.color,
+      logo: children.props.item.logo?.medium,
+      cover: children.props.item.logo?.cover,
     };
   }
 
@@ -143,6 +151,11 @@ const Row = (props: RowProps) => {
     if (!isMobile) return;
 
     onSelect?.(true, data);
+  };
+
+  const changeIndex = (e, action) => {
+    e.stopPropagation();
+    onChangeIndex(action);
   };
 
   return (
@@ -179,6 +192,7 @@ const Row = (props: RowProps) => {
             <StyledCheckbox
               className="not-selectable styled-checkbox-container"
               mode={mode}
+              isIndexEditingMode={isIndexEditingMode}
             >
               <StyledElement
                 onClick={onElementClick}
@@ -215,30 +229,51 @@ const Row = (props: RowProps) => {
         {renderContentElement && (
           <StyledContentElement>{contentElement}</StyledContentElement>
         )}
-        {renderContext ? (
-          <ContextMenuButton
-            isFill
-            className="expandButton"
-            getData={getOptions}
-            directionX="right"
-            displayType={ContextMenuButtonDisplayType.toggle}
-            onClick={onContextMenu}
-            title={contextTitle}
-          />
+        {isIndexEditingMode ? (
+          <>
+            <ColorTheme
+              themeId={ThemeId.IndexIconButton}
+              iconName={ArrowReactSvgUrl}
+              className="index-up-icon"
+              size="small"
+              onClick={(e) => changeIndex(e, VDRIndexingAction.HigherIndex)}
+            />
+            <ColorTheme
+              themeId={ThemeId.IndexIconButton}
+              iconName={ArrowReactSvgUrl}
+              className="index-down-icon"
+              size="small"
+              onClick={(e) => changeIndex(e, VDRIndexingAction.LowerIndex)}
+            />
+          </>
         ) : (
-          <div className="expandButton"> </div>
+          <>
+            {renderContext ? (
+              <ContextMenuButton
+                isFill
+                className="expandButton"
+                getData={getOptions}
+                directionX="right"
+                displayType={ContextMenuButtonDisplayType.toggle}
+                onClick={onContextMenu}
+                title={contextTitle}
+              />
+            ) : (
+              <div className="expandButton"> </div>
+            )}
+            <ContextMenu
+              getContextModel={getContextModel}
+              model={contextData.contextOptions || []}
+              ref={cm}
+              header={contextMenuHeader}
+              withBackdrop={isMobileUtils()}
+              onHide={rowContextClose}
+              isRoom={isRoom}
+              isArchive={isArchive}
+              badgeUrl={badgeUrl}
+            />
+          </>
         )}
-        <ContextMenu
-          getContextModel={getContextModel}
-          model={contextData.contextOptions || []}
-          ref={cm}
-          header={contextMenuHeader}
-          withBackdrop={isMobileUtils()}
-          onHide={rowContextClose}
-          isRoom={isRoom}
-          isArchive={isArchive}
-          badgeUrl={badgeUrl}
-        />
       </StyledOptionButton>
     </StyledRow>
   );

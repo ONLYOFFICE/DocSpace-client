@@ -1,5 +1,5 @@
 {
-  "AccountsEmptyScreenText": "Voir les détails des utilisateurs ici",
+  "UsersEmptyScreenText": "Voir les détails des utilisateurs ici",
   "AddedRoomTags": "Tags ajoutés.",
   "Administration": "Administration",
   "AndMoreLabel": "et <1>{{count}} plus</1>",
@@ -35,7 +35,6 @@
   "HistoryRoomCopied": "<1>« {{roomTitle}} »</1> salle copiée",
   "HistoryRoomCreated": "Salle  <1>«{{roomTitle}}»</1> créée",
   "HistoryThirdParty": "L'affichage de l'historique n'est pas disponible pour les salles publiques avec des espaces de stockage tiers connectés.",
-  "InfoBanner": "La liste des utilisateurs invités comprend le propriétaire et/ou les administrateurs de ce {{productName}} avec un accès complet à toutes les salles. Le propriétaire et/ou l'administrateur ne peuvent se voir attribuer d'autres droits d'accès. Une fois ajoutés à la salle, ils seront informés de tous les changements.",
   "ItemsSelected": "Éléments sélectionnés",
   "LastModifiedBy": "Dernière modification par",
   "NoRecordsFound": "Aucun enregistrement trouvé",
@@ -49,7 +48,7 @@
   "RoomGroupRemove": "Groupe supprimé",
   "RoomLogoChanged": "Icône modifiée",
   "RoomRemoveUser": "Utilisateur supprimé.",
-  "RoomRenamed": "Salle <1>«{{oldRoomTitle}}»</1> renommée en <1>«{{roomTitle}}»</1>",
+  "RoomRenamed": "Salle <1>«{{oldRoomTitle}}»</1> renommée en <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Voir les détails des salles ici",
   "RoomUpdateAccess": "a été assigné",
   "SelectedUsers": "Comptes sélectionnés",

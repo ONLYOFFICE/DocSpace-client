@@ -153,7 +153,7 @@ class CurrentQuotasStore {
     return result?.used?.value || 0;
   }
 
-  get isBrandingAndCustomizationAvailable() {
+  get isCustomizationAvailable() {
     const result = this.currentPortalQuotaFeatures.find(
       (obj) => obj.id === "customization",
     );
@@ -333,7 +333,12 @@ class CurrentQuotasStore {
   }
 
   showWarningDialog = (type: number) => {
-    if (type && this.isUserTariffLimit && type !== EmployeeType.Guest)
+    if (
+      type &&
+      this.isUserTariffLimit &&
+      type !== EmployeeType.Guest &&
+      type !== EmployeeType.User
+    )
       return true;
 
     return this.currentTariffStatusStore?.isGracePeriod;

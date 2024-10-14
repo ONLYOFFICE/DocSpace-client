@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useContext } from "react";
+import React, { useCallback, useContext } from "react";
 import { useTheme } from "styled-components";
 import { useTranslation } from "react-i18next";
 
@@ -115,6 +115,7 @@ const FilesSelectorComponent = ({
   withInfoBar,
   infoBarData,
   headerProps,
+  shareKey,
 }: FilesSelectorProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["Common"]);
@@ -144,6 +145,7 @@ const FilesSelectorComponent = ({
     title: string;
     path?: string[];
     fileExst?: string;
+    viewUrl?: string;
     inPublic?: boolean;
   } | null>(null);
   const [total, setTotal] = React.useState<number>(0);
@@ -226,6 +228,7 @@ const FilesSelectorComponent = ({
     roomsFolderId,
     isInit,
     withCreate,
+    shareKey,
   });
 
   const onClickBreadCrumb = React.useCallback(
@@ -338,6 +341,7 @@ const FilesSelectorComponent = ({
           id: item.id,
           title: item.label,
           fileExst: item.fileExst,
+          viewUrl: item.viewUrl,
           inPublic,
         });
 
@@ -357,6 +361,10 @@ const FilesSelectorComponent = ({
   }, [selectedItemId, isRoot, unsubscribe, subscribe]);
 
   React.useEffect(() => {
+    setSelectedItemId(currentFolderId);
+  }, [currentFolderId]);
+
+  React.useEffect(() => {
     setIsFirstLoad(true);
 
     const needRoomList = isRoomsOnly && !currentFolderId;
@@ -370,8 +378,7 @@ const FilesSelectorComponent = ({
       setSelectedItemType("rooms");
       return;
     }
-
-    setSelectedItemId(currentFolderId);
+    // setSelectedItemId(currentFolderId);
 
     if (
       needRoomList ||
@@ -470,7 +477,8 @@ const FilesSelectorComponent = ({
       getRootData();
       return;
     }
-    if (selectedItemType === "files" && typeof selectedItemId !== "undefined")
+
+    if (selectedItemType === "files" && (selectedItemId || isUserOnly))
       getFileList(0);
   }, [
     getFileList,
@@ -479,6 +487,7 @@ const FilesSelectorComponent = ({
     selectedItemId,
     getRootData,
     openRoot,
+    isUserOnly,
   ]);
 
   const headerSelectorProps: TSelectorHeader = withHeader

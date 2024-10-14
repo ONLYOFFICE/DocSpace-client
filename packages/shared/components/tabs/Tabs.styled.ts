@@ -31,9 +31,14 @@ import { TabsTypes } from "./Tabs.enums";
 
 export const StyledTabs = styled.div<{
   stickyTop?: string;
+  multiple: boolean;
 }>`
-  display: flex;
-  flex-direction: column;
+  ${(props) =>
+    props.multiple &&
+    css`
+      display: flex;
+      flex-direction: column;
+    `};
 
   .sticky {
     height: 33px;
@@ -141,6 +146,7 @@ export const ScrollbarTabs = styled(Scrollbar)<{
 
 export const TabList = styled.div<{
   $type?: TabsTypes;
+  multiple: boolean;
 }>`
   display: flex;
   align-items: center;
@@ -148,6 +154,13 @@ export const TabList = styled.div<{
 
   width: 100%;
   height: 32px;
+
+  ${(props) =>
+    props.multiple &&
+    css`
+      flex-wrap: wrap;
+      height: fit-content;
+    `};
 
   gap: ${(props) => (props.$type === TabsTypes.Primary ? "20px" : "8px")};
 
@@ -162,6 +175,7 @@ export const Tab = styled.div<{
   isActive: boolean;
   isDisabled?: boolean;
   $type?: TabsTypes;
+  multiple?: boolean;
 }>`
   display: flex;
   white-space: nowrap;
@@ -174,7 +188,7 @@ export const Tab = styled.div<{
   line-height: 20px;
   cursor: pointer;
   opacity: ${(props) => (props.isDisabled && props.$type === TabsTypes.Secondary ? 0.6 : 1)};
-  pointer-events: ${(props) => ((props.isDisabled && props.$type === TabsTypes.Secondary) || props.isActive) && "none"};
+  pointer-events: ${(props) => ((props.isDisabled && props.$type === TabsTypes.Secondary) || (!props.multiple && props.isActive)) && "none"};
   user-select: none;
 
   padding: ${(props) =>

@@ -52,6 +52,13 @@ export const globalColors = {
   lightSecondMain: "#5299E0",
   lightSecondMainHover: "rgba(82, 153, 224, 0.85)",
   lightSecondMainDisabled: "rgba(82, 153, 224, 0.6)",
+  lightBlueAction: "#E4ECF8",
+  darkGreyAction: "#515151",
+  lightBlueHover: "#BED3EF",
+  darkGreyHover: "#7B7B7B",
+
+  lightActive: "#F2F6FC",
+  darkActive: "#414141",
 
   mainGreen: "#2DB482",
   secondGreen: "#22C386",
@@ -141,4 +148,16 @@ export const globalColors = {
   alphaGreenDark: "rgba(59, 164, 32, 0.1)",
   alphaRedLight: "rgba(242, 28, 14, 0.1)",
   alphaRedDark: "rgba(224, 100, 81, 0.1)",
+
+  logoColors: [
+    "#FF6680",
+    "#FF8F40",
+    "#F2D230",
+    "#61C059",
+    "#1FCECB",
+    "#5CC3F7",
+    "#6191F2",
+    "#7757D9",
+    "#FF7FD4",
+  ],
 };

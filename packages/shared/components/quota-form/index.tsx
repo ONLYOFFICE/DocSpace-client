@@ -212,7 +212,7 @@ export const QuotaForm = ({
           isDisabled={isDisable}
           onKeyDown={onKeyDownInput}
           hasError={isError || hasError}
-          pattern="^-?\d+(?:\.\d{0,2})?"
+          pattern="^\d+(?:\.\d{0,2})?"
           scale
           withBorder
         />

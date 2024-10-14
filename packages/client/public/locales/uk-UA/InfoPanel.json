@@ -1,5 +1,5 @@
 {
-  "AccountsEmptyScreenText": "Див. інформацію про користувачів тут",
+  "UsersEmptyScreenText": "Див. інформацію про користувачів тут",
   "AddedRoomTags": "Теги додано.",
   "Administration": "Адміністрування",
   "AndMoreLabel": "і ще <1>{{count}}</1>",
@@ -35,7 +35,6 @@
   "HistoryRoomCopied": "Кімнату <1>«{{roomTitle}}»</1> скопійовано",
   "HistoryRoomCreated": "Кімнату <1>«{{roomTitle}}»</1> створено",
   "HistoryThirdParty": "Показ історії недоступний для публічних кімнат із під'єднаними сторонніми сховищами",
-  "InfoBanner": "Список запрошених користувачів містить власника та/або адміністраторів цього {{productName}} з повним доступом до всіх кімнат. Власнику та/або адміністратору не можна призначати інші права доступу. Після додавання до кімнати вони будуть сповіщені про всі зміни.",
   "ItemsSelected": "Вибрані елементи",
   "LastModifiedBy": "Автор останньої зміни",
   "NoRecordsFound": "Записів не знайдено",
@@ -49,7 +48,7 @@
   "RoomGroupRemove": "Групу видалено",
   "RoomLogoChanged": "Піктограму змінено",
   "RoomRemoveUser": "Піктограму змінено",
-  "RoomRenamed": "Кімнату <1>«{{oldRoomTitle}}»</1> перейменовано в <1>«{{roomTitle}}»</1>",
+  "RoomRenamed": "Кімнату <1>«{{oldRoomTitle}}»</1> перейменовано в <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Див. інформацію про кімнати тут",
   "RoomUpdateAccess": "призначено роль",
   "SelectedUsers": "Вибрані облікові записи",

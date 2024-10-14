@@ -1,3 +1,4 @@
+import { Page } from "@playwright/test";
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -29,23 +30,25 @@ import { mobile } from "../../utils";
 import { Base } from "../../themes";
 
 const StyledImageCropper = styled.div<{ disableImageRescaling?: boolean }>`
-  max-width: 216px;
+  max-width: 368px;
 
   .icon_cropper-crop_area {
-    width: 216px;
-    height: 216px;
+    width: 368px;
+    height: 368px;
     margin-bottom: 4px;
     position: relative;
     .icon_cropper-grid {
       pointer-events: none;
       position: absolute;
-      width: 216px;
-      height: 216px;
+      width: 368px;
+      height: 368px;
       top: 0;
       bottom: 0;
       inset-inline: 0;
       svg {
-        opacity: 0.2;
+        opacity: 1;
+        width: 368px;
+        height: 368px;
         path {
           fill: ${(props) =>
             props.theme.createEditRoomDialog.iconCropper.gridColor};
@@ -62,7 +65,7 @@ const StyledImageCropper = styled.div<{ disableImageRescaling?: boolean }>`
       `};
   }
 
-  .icon_cropper-delete_button {
+  .icon_cropper-change_button {
     cursor: pointer;
     display: flex;
     flex-direction: row;
@@ -73,9 +76,6 @@ const StyledImageCropper = styled.div<{ disableImageRescaling?: boolean }>`
     padding: 6px 0;
     background: ${(props) =>
       props.theme.createEditRoomDialog.iconCropper.deleteButton.background};
-    border: 1px solid
-      ${(props) =>
-        props.theme.createEditRoomDialog.iconCropper.deleteButton.borderColor};
     border-radius: 3px;
     margin-bottom: 12px;
 
@@ -84,10 +84,8 @@ const StyledImageCropper = styled.div<{ disableImageRescaling?: boolean }>`
       background: ${(props) =>
         props.theme.createEditRoomDialog.iconCropper.deleteButton
           .hoverBackground};
-      border: 1px solid
-        ${(props) =>
-          props.theme.createEditRoomDialog.iconCropper.deleteButton
-            .hoverBorderColor};
+      color: ${(props) =>
+        props.theme.createEditRoomDialog.iconCropper.deleteButton.color};
     }
 
     &-text {
@@ -95,7 +93,11 @@ const StyledImageCropper = styled.div<{ disableImageRescaling?: boolean }>`
       font-weight: 600;
       line-height: 20px;
       color: ${(props) =>
-        props.theme.createEditRoomDialog.iconCropper.deleteButton.color};
+        props.theme.createEditRoomDialog.iconCropper.deleteButton.hoverColor};
+    }
+
+    div:first-child {
+      height: 16px;
     }
 
     svg {
@@ -111,8 +113,14 @@ const StyledImageCropper = styled.div<{ disableImageRescaling?: boolean }>`
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    height: 24px;
     gap: 12px;
-    margin-bottom: 20px;
+
+    svg {
+      rect {
+        fill: ${(props) => props.theme.iconButton.color};
+      }
+    }
 
     &-slider {
       margin: 0;
@@ -120,6 +128,16 @@ const StyledImageCropper = styled.div<{ disableImageRescaling?: boolean }>`
 
     &-button {
       user-select: none;
+    }
+
+    .icon_cropper-zoom-container-button {
+      &:hover {
+        svg {
+          rect {
+            fill: ${(props) => props.theme.iconButton.hoverColor};
+          }
+        }
+      }
     }
   }
 `;

@@ -124,16 +124,6 @@ class ProfileActionsStore {
     this.isDebugDialogVisible = visible;
   };
 
-  getUserRole = (user) => {
-    let isModuleAdmin =
-      user?.listAdminModules && user?.listAdminModules?.length;
-
-    if (user.isOwner) return "owner";
-    if (user.isAdmin || isModuleAdmin) return "admin";
-    if (user.isVisitor) return "user";
-    return "manager";
-  };
-
   onProfileClick = (obj) => {
     const { isAdmin, isOwner } = this.userStore.user;
     const { isRoomAdmin } = this.authStore;
@@ -248,6 +238,7 @@ class ProfileActionsStore {
       baseDomain,
       tenantAlias,
       limitedAccessSpace,
+      displayAbout,
     } = this.settingsStore;
     const isAdmin = this.authStore.isAdmin;
     const isCommunity = this.currentTariffStatusStore.isCommunity;
@@ -356,6 +347,17 @@ class ProfileActionsStore {
       };
     }
 
+    let about = null;
+
+    if (displayAbout) {
+      about = {
+        key: "user-menu-about",
+        icon: InfoOutlineReactSvgUrl,
+        label: t("Common:AboutCompanyTitle"),
+        onClick: this.onAboutClick,
+      };
+    }
+
     const feedbackAndSupportEnabled =
       this.settingsStore.additionalResourcesData?.feedbackAndSupportEnabled;
     const videoGuidesEnabled =
@@ -412,12 +414,7 @@ class ProfileActionsStore {
         onClick: this.onSupportClick,
       },
       bookTraining,
-      {
-        key: "user-menu-about",
-        icon: InfoOutlineReactSvgUrl,
-        label: t("Common:AboutCompanyTitle"),
-        onClick: this.onAboutClick,
-      },
+      about,
     ];
 
     if (showFrameSignOut) {

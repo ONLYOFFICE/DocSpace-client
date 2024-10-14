@@ -24,9 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import AddUsersPanel from "./AddUsersPanel";
 import EmbeddingPanel from "./EmbeddingPanel";
-import NewFilesPanel from "./NewFilesPanel";
 import VersionHistoryPanel from "./VersionHistoryPanel";
 import UploadPanel from "./UploadPanel";
 import HotkeysPanel from "./HotkeysPanel";
@@ -34,9 +32,7 @@ import InvitePanel from "./InvitePanel";
 import EditLinkPanel from "./EditLinkPanel";
 
 export {
-  AddUsersPanel,
   EmbeddingPanel,
-  NewFilesPanel,
   VersionHistoryPanel,
   UploadPanel,
   HotkeysPanel,

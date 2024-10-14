@@ -1,8 +1,8 @@
 {
   "ChangeUserTypeButton": "Növün dəyişdirilməsi",
   "ChangeUserTypeHeader": "İstifadəçi növünün dəyişdirilməsi",
-  "ChangeUserTypeMessage": "'{{ firstType }}' tipinə malik olan istifadəçilər '{{ secondType }}' istifadəçi tipinə dəyişdirildi.",
-  "ChangeUserTypeMessageMulti": "Seçilmiş istifadəçilər '{{ secondType }}' növünə köçürüləcək.",
+  "ChangeUserTypeMessage": "<strong>'{{ firstType }}'</strong> tipinə malik olan istifadəçilər <strong>'{{ secondType }}'</strong> istifadəçi tipinə dəyişdirildi.",
+  "ChangeUserTypeMessageMulti": "Seçilmiş istifadəçilər <strong>'{{ secondType }}'</strong> növünə köçürüləcək.",
   "ChangeUserTypeMessageWarning": "{{productName}} inzibatçının və özüvüzün istifadəçi tipini dəyişdirə bilməzsiniz.",
   "SuccessChangeUserType": "İstifadəçi tipi müvəffəqiyyətlə dəyişdirildi"
 }

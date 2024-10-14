@@ -198,7 +198,6 @@ class CreateEditRoomStore {
       editRoom,
       removeLogoFromRoom,
       addActiveItems,
-      addTagsToRoom,
       removeTagsFromRoom,
       setFolder,
     } = this.filesStore;
@@ -276,6 +275,11 @@ class CreateEditRoomStore {
       editRoomParams.tags = tagsToAddList;
     }
 
+    if (cover) {
+      editRoomParams.cover = cover.cover;
+      editRoomParams.color = cover.color;
+    }
+
     const requests = [];
 
     try {
@@ -290,11 +294,7 @@ class CreateEditRoomStore {
         requests.push(removeLogoFromRoom(room.id));
       }
 
-      if (cover) {
-        requests.push(setRoomLogoCover(room.id));
-      }
-
-      if (!cover && isUpdatelogo) {
+      if (isUpdatelogo) {
         addActiveItems(null, [room.id]);
         requests.push(onSaveRoomLogo(room.id, newParams.icon, room, true));
       }
@@ -338,6 +338,7 @@ class CreateEditRoomStore {
     const { preparingDataForCopyingToRoom } = this.filesActionsStore;
 
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
+    const { cover } = this.dialogsStore;
 
     const isThirdparty = roomParams.storageLocation.isThirdparty;
     const quotaLimit =
@@ -351,6 +352,10 @@ class CreateEditRoomStore {
       createAsNewFolder: roomParams.createAsNewFolder ?? true,
       ...(quotaLimit && {
         quota: +quotaLimit,
+      }),
+      ...(cover && {
+        cover: cover.cover,
+        color: cover.color,
       }),
     };
 
@@ -407,13 +412,9 @@ class CreateEditRoomStore {
       // add new tags to room
       if (!!addTagsData.length)
         room = await addTagsToRoom(room.id, addTagsData);
-      if (this.dialogsStore.cover) {
-        await this.dialogsStore.setRoomLogoCover(room.id);
 
-        this.onOpenNewRoom(room);
-      }
       // calculate and upload logo to room
-      else if (roomParams.icon.uploadedFile) {
+      if (roomParams.icon.uploadedFile) {
         try {
           await this.avatarEditorDialogStore.onSaveRoomLogo(
             room.id,

@@ -193,14 +193,13 @@ class CreateEditRoomStore {
 
   onSaveEditRoom = async (t, newParams, room) => {
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
-    const { cover, setRoomLogoCover } = this.dialogsStore;
+    const { cover } = this.dialogsStore;
     const {
       editRoom,
       removeLogoFromRoom,
       addActiveItems,
       addTagsToRoom,
       removeTagsFromRoom,
-
       setFolder,
     } = this.filesStore;
     const { uploadedFile, onSaveRoomLogo } = this.avatarEditorDialogStore;
@@ -224,7 +223,7 @@ class CreateEditRoomStore {
     const isWatermarkChanged = !isEqual(newParams.watermark, room.watermark);
 
     if (isDefaultRoomsQuotaSet && isQuotaChanged) {
-      editRoomParams.quotaLimit = +quotaLimit;
+      editRoomParams.quota = +quotaLimit;
     }
 
     if (isTitleChanged) {
@@ -257,10 +256,25 @@ class CreateEditRoomStore {
     const tags = newParams.tags.map((tag) => tag.name);
     const removedTags = startTags.filter((sT) => !tags.includes(sT));
     const newTags = newParams.tags.filter((t) => t.isNew).map((t) => t.name);
-    const isDeletionTags = removedTags.length > 0;
+    const isTagsDeletion = removedTags.length > 0;
 
     const isUpdatelogo = uploadedFile;
     const isDeleteLogo = !!room.logo.original && !newParams.icon.uploadedFile;
+    const tagsRequest = [];
+
+    for (let i = 0; i < newTags.length; i++) {
+      tagsRequest.push(createTag(newTags[i]));
+    }
+
+    if (tagsRequest.length) {
+      await Promise.all(tagsRequest);
+    }
+
+    const tagsToAddList = tags.filter((t) => !startTags.includes(t));
+
+    if (tags.length && tagsToAddList.length) {
+      editRoomParams.tags = tagsToAddList;
+    }
 
     const requests = [];
 
@@ -268,16 +282,8 @@ class CreateEditRoomStore {
       if (Object.keys(editRoomParams).length)
         await editRoom(room.id, editRoomParams);
 
-      for (let i = 0; i < newTags.length; i++) {
-        requests.push(createTag(newTags[i]));
-      }
-
       if (isOwnerChanged) {
         requests.push(changeRoomOwner(t, newParams?.roomOwner?.id));
-      }
-
-      if (isDeletionTags) {
-        requests.push(removeTagsFromRoom(room.id, removedTags));
       }
 
       if (isDeleteLogo) {
@@ -296,19 +302,19 @@ class CreateEditRoomStore {
       if (indexingChanged)
         requests.push(updateCurrentFolder(null, currentFolderId));
 
-      if (!!requests.length) {
-        await Promise.all(requests);
+      if (isTagsDeletion) {
+        const removeTags = removeTagsFromRoom(room.id, removedTags).then(
+          (updatedRoomInfo) => {
+            isRootFolder
+              ? setFolder(updatedRoomInfo)
+              : updateEditedSelectedRoom({ tags: updatedRoomInfo.tags });
+          },
+        );
+        requests.push(removeTags);
       }
 
-      let updatedRoomInfo = null;
-
-      if (tags.length) {
-        const tagsToAddList = tags.filter((t) => !startTags.includes(t));
-        updatedRoomInfo = await addTagsToRoom(room.id, tagsToAddList);
-
-        isRootFolder
-          ? setFolder(updatedRoomInfo)
-          : updateEditedSelectedRoom({ tags: tags });
+      if (!!requests.length) {
+        await Promise.all(requests);
       }
     } catch (e) {
       toastr.error(e);

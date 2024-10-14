@@ -2868,8 +2868,14 @@ class FilesStore {
     return api.rooms.updateRoomMemberRole(id, data);
   }
 
-  getHistory(selectionType, id, signal = null, requestToken) {
-    return api.rooms.getHistory(selectionType, id, signal, requestToken);
+  getHistory(selectionType, id, signal = null, requestToken, filter) {
+    return api.rooms.getHistory(
+      selectionType,
+      id,
+      signal,
+      requestToken,
+      filter,
+    );
   }
 
   getRoomHistory(id) {

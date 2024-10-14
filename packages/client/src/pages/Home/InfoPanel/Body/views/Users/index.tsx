@@ -154,6 +154,8 @@ const Users = ({
   const renderTypeData = () => {
     const typesOptions = getUsersChangeTypeOptions(t);
 
+    console.log(typesOptions);
+
     const typeLabel = getUserTypeTranslation(role, t);
 
     const selectedOption = typesOptions.find((option) => option.key === role);
@@ -177,7 +179,7 @@ const Users = ({
       statusType: status,
     });
 
-    if (canChange || isGuests || !selectedOption) return text;
+    if (!canChange || isGuests || !selectedOption) return text;
 
     const combobox = (
       <ComboBox

@@ -69,23 +69,23 @@ const CreateGroupDialog = ({
   });
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [selectGroupMangerPanelIsVisible, setSelectGroupMangerPanelIsVisible] =
+    useState<boolean>(false);
 
   const onChangeGroupName = (e: ChangeEvent<HTMLInputElement>) =>
     setGroupParams({ ...groupParams, groupName: e.target.value });
 
-  const setGroupManager = (groupManager: TUser | null) =>
+  const onHideSelectGroupManagerPanel = () =>
+    setSelectGroupMangerPanelIsVisible(false);
+  const setGroupManager = (groupManager: TUser | null) => {
     setGroupParams({ ...groupParams, groupManager });
-
+    setSelectGroupMangerPanelIsVisible(false);
+  };
   const setGroupMembers = (groupMembers: TUser[]) =>
     setGroupParams((prevState) => ({ ...prevState, groupMembers }));
 
-  const [selectGroupMangerPanelIsVisible, setSelectGroupMangerPanelIsVisible] =
-    useState<boolean>(false);
-
   const onShowSelectGroupManagerPanel = () =>
     setSelectGroupMangerPanelIsVisible(true);
-  const onHideSelectGroupManagerPanel = () =>
-    setSelectGroupMangerPanelIsVisible(false);
 
   const [selectMembersPanelIsVisible, setSelectMembersPanelIsVisible] =
     useState<boolean>(false);
@@ -122,6 +122,7 @@ const CreateGroupDialog = ({
     }
 
     setGroupMembers(resultGroupMembers);
+    onHideSelectMembersPanel();
   };
 
   const removeMember = (member: TUser) => {
@@ -210,7 +211,6 @@ const CreateGroupDialog = ({
 
       {selectGroupMangerPanelIsVisible && (
         <SelectGroupManagerPanel
-          isVisible={selectGroupMangerPanelIsVisible}
           onClose={onHideSelectGroupManagerPanel}
           onParentPanelClose={onClose}
           setGroupManager={setGroupManager}
@@ -219,7 +219,6 @@ const CreateGroupDialog = ({
 
       {selectMembersPanelIsVisible && (
         <SelectMembersPanel
-          isVisible={selectMembersPanelIsVisible}
           onClose={onHideSelectMembersPanel}
           onParentPanelClose={onClose}
           groupManager={groupParams.groupManager}

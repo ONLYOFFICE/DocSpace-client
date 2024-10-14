@@ -139,10 +139,11 @@ const RoomSelector = ({
 
       filter.page = page;
       filter.pageCount = PAGE_COUNT;
-      filter.type = roomType;
+      filter.type = roomType as unknown as string | string[];
       filter.filterValue = searchValue || null;
 
-      if (disableThirdParty) filter.storageFilter = RoomsStorageFilter.internal;
+      if (disableThirdParty)
+        filter.storageFilter = RoomsStorageFilter.internal as unknown as string;
 
       const {
         folders,

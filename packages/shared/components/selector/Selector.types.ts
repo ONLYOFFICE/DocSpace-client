@@ -25,12 +25,17 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { EmployeeStatus, RoomsType, ShareAccessRights } from "../../enums";
+import {
+  EmployeeStatus,
+  EmployeeType,
+  RoomsType,
+  ShareAccessRights,
+} from "../../enums";
 import { MergeTypes, Nullable } from "../../types";
 
 import { TFileSecurity, TFolderSecurity } from "../../api/files/types";
 import { TRoomSecurity, ICover } from "../../api/rooms/types";
-import { TGroup } from "../../api/groups/types";
+import { TUserGroup } from "../../api/people/types";
 
 import { AvatarRole } from "../avatar";
 import { TTabItem } from "../tabs";
@@ -43,7 +48,7 @@ type THeaderBackButton =
   | {
       onBackClick: () => void;
       withoutBackButton: false;
-      withoutBorder: false;
+      withoutBorder: boolean;
     }
   | {
       onBackClick?: undefined;
@@ -193,7 +198,7 @@ export type TSelectorEmptyScreen = {
 };
 
 // submit button
-type TOnSubmit = (
+export type TOnSubmit = (
   selectedItems: TSelectorItem[],
   access: TAccessRight | null,
   fileName: string,
@@ -251,6 +256,20 @@ type TWithoutAccessRightsProps = {
   onAccessRightsChange?: undefined;
   accessRightsMode?: undefined;
 };
+
+export type TSelectorWithAside =
+  | {
+      useAside: true;
+      onClose: VoidFunction;
+      withoutBackground?: boolean;
+      withBlur?: boolean;
+    }
+  | {
+      useAside?: undefined;
+      onClose?: undefined;
+      withoutBackground?: undefined;
+      withBlur?: undefined;
+    };
 
 export type TSelectorAccessRights =
   | TWithAccessRightsProps
@@ -323,7 +342,8 @@ export type SelectorProps = TSelectorHeader &
   TSelectorCancelButton &
   TSelectorAccessRights &
   TSelectorInput &
-  TSelectorCheckbox & {
+  TSelectorCheckbox &
+  TSelectorWithAside & {
     id?: string;
     className?: string;
     style?: React.CSSProperties;
@@ -399,7 +419,7 @@ type TSelectorItemEmpty = {
   iconOriginal?: undefined;
   role?: undefined;
   email?: undefined;
-  groups?: TGroup[];
+  groups?: undefined;
   isOwner?: undefined;
   isAdmin?: undefined;
   isVisitor?: undefined;
@@ -429,6 +449,7 @@ type TSelectorItemEmpty = {
   onCancelInput?: undefined;
   placeholder?: undefined;
   cover?: undefined;
+  userType?: undefined;
 
   isRoomsOnly?: undefined;
   createDefineRoomType?: undefined;
@@ -446,7 +467,8 @@ export type TSelectorItemUser = MergeTypes<
     avatar: string;
     hasAvatar: boolean;
     role: AvatarRole;
-    groups?: TGroup[];
+    userType: EmployeeType;
+    groups?: TUserGroup[];
     status: EmployeeStatus;
     access?: ShareAccessRights | string | number;
   }

@@ -29,7 +29,7 @@ import React from "react";
 import AcceptIconSvgUrl from "PUBLIC_DIR/images/selector.input.accept.svg?url";
 import CancelIconSvgUrl from "PUBLIC_DIR/images/selector.input.cancel.svg?url";
 
-import { ICover } from "api/rooms/types";
+import { ICover } from "../../../api/rooms/types";
 
 import { RoomsType } from "../../../enums";
 import { Nullable } from "../../../types";
@@ -148,7 +148,7 @@ const InputItem = ({
         <RoomIcon
           color={color}
           title={value}
-          logo={{ cover }}
+          logo={{ cover, large: "", original: "", small: "" }}
           showDefault={false}
           className="item-logo"
         />

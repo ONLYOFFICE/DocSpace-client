@@ -909,8 +909,8 @@ export const toUrlParams = (
 
     const item = obj[key];
 
-    // added for double employeetype
-    if (Array.isArray(item) && key === "employeetypes") {
+    // added for double employeetype or room type
+    if (Array.isArray(item) && (key === "employeetypes" || key === "type")) {
       for (let i = 0; i < item.length; i += 1) {
         str += `${key}=${encodeURIComponent(item[i])}`;
         if (i !== item.length - 1) {
@@ -931,9 +931,28 @@ export const toUrlParams = (
   return str;
 };
 
+const groupParamsByKey = (params: URLSearchParams) =>
+  Array.from(params.entries()).reduce(
+    (accumulator: { [key: string]: string | string[] }, [key, value]) => {
+      if (accumulator[key]) {
+        accumulator[key] = Array.isArray(accumulator[key])
+          ? [...accumulator[key], value]
+          : [accumulator[key], value];
+      } else {
+        accumulator[key] = value;
+      }
+      return accumulator;
+    },
+    {},
+  );
+
 export const parseURL = (searchUrl: string) => {
-  return Object.fromEntries(new URLSearchParams(searchUrl));
+  const params = new URLSearchParams(searchUrl);
+  const entries: { [key: string]: string | string[] } =
+    groupParamsByKey(params);
+  return entries;
 };
+
 export function getObjectByLocation(location: Location) {
   if (!location.search || !location.search.length) return null;
 

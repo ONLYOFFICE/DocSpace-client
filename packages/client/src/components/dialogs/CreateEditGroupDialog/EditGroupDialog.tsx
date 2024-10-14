@@ -266,7 +266,7 @@ const EditGroupDialog = ({
           onParentPanelClose={onClose}
           addMembers={(users) => {
             addMembers(users);
-            setSelectGroupMangerPanelIsVisible(false);
+            setSelectMembersPanelIsVisible(false);
           }}
         />
       )}

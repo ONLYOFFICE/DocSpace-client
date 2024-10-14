@@ -31,7 +31,7 @@ import { matchPath } from "react-router";
 import { Text } from "@docspace/shared/components/text";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
-import { StyledAccountsItemTitle } from "../../styles/accounts";
+import { StyledUsersTitle } from "../../styles/Users";
 import { inject, observer } from "mobx-react";
 import { decode } from "he";
 import { Badge } from "@docspace/shared/components/badge";
@@ -63,7 +63,7 @@ const GroupsItemTitle = ({
   if (isSeveralItems) return null;
 
   return (
-    <StyledAccountsItemTitle ref={itemTitleRef}>
+    <StyledUsersTitle ref={itemTitleRef}>
       <Avatar
         className="avatar"
         size={AvatarSize.big}
@@ -117,7 +117,7 @@ const GroupsItemTitle = ({
           getData={getContextOptions}
         />
       )}
-    </StyledAccountsItemTitle>
+    </StyledUsersTitle>
   );
 };
 

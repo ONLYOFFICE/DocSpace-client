@@ -1,5 +1,5 @@
 {
-  "AccountsEmptyScreenText": "Kullanıcı ayrıntılarını buradan gör",
+  "UsersEmptyScreenText": "Kullanıcı ayrıntılarını buradan gör",
   "AddedRoomTags": "Etiketler eklendi.",
   "Administration": "Yönetim",
   "AndMoreLabel": "ve <1>{{count}} daha</1>",

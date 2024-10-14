@@ -26,9 +26,12 @@
 
 import styled, { css } from "styled-components";
 
-import { Base } from "@docspace/shared/themes";
-import { mobile, tablet, desktop } from "@docspace/shared/utils";
-import { TextUserSelect } from "@docspace/shared/utils";
+import {
+  mobile,
+  tablet,
+  desktop,
+  TextUserSelect,
+} from "@docspace/shared/utils";
 
 const StyledInfoPanelBody = styled.div`
   height: auto;
@@ -55,7 +58,7 @@ const StyledInfoPanelBody = styled.div`
   }
 `;
 
-const StyledTitle = styled.div`
+const StyledTitle = styled.div<{ withBottomBorder: boolean }>`
   position: sticky;
   top: 0;
   z-index: 100;
@@ -146,8 +149,7 @@ const StyledTitle = styled.div`
       margin: 0 -20px;
       padding-block: 23px;
       padding-inline: 20px 0;
-      border-bottom: ${(props) =>
-        `solid 1px ${props.theme.infoPanel.borderColor}`};
+      border-bottom: solid 1px ${props.theme.infoPanel.borderColor};
     `}
 
   @media ${desktop} {
@@ -328,23 +330,6 @@ const StyledProperties = styled.div`
     align-items: start;
   }
 `;
-
-const StyledItemOptions = styled.div`
-  ${(props) =>
-    props.theme.interfaceDirection === "rtl"
-      ? css`
-          margin-right: auto;
-        `
-      : css`
-          margin-left: auto;
-        `}
-
-  display: flex;
-`;
-
-StyledInfoPanelBody.defaultProps = { theme: Base };
-StyledTitle.defaultProps = { theme: Base };
-StyledItemOptions.defaultProps = { theme: Base };
 
 export {
   StyledInfoPanelBody,

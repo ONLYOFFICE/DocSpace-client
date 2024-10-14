@@ -30,8 +30,8 @@ export interface InfoPanelViewLoaderProps {
     | "history"
     | "details"
     | "gallery"
-    | "accounts"
     | "noItem"
     | "severalItems"
-    | "groups";
+    | "groups"
+    | "users";
 }

@@ -1,5 +1,5 @@
 {
-  "AccountsEmptyScreenText": "Katso käyttäjätiedot täältä",
+  "UsersEmptyScreenText": "Katso käyttäjätiedot täältä",
   "AddedRoomTags": "Tägit lisätty.",
   "Administration": "Hallinto",
   "AndMoreLabel": "ja <1>{{count}} enemmän</1>",

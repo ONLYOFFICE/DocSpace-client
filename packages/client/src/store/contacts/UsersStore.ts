@@ -90,8 +90,6 @@ class UsersStore {
 
   isUsersLoading = false;
 
-  operationRunning = false;
-
   abortController = new AbortController();
 
   requestRunning = false;

@@ -54,6 +54,7 @@ import {
   addLinksToHistory,
   parseHistory,
 } from "SRC_DIR/pages/Home/InfoPanel/Body/helpers/HistoryHelper";
+import { getContactsView } from "SRC_DIR/helpers/contacts";
 
 const observedKeys = [
   "id",
@@ -70,6 +71,7 @@ const infoMembers = "info_members";
 const infoHistory = "info_history";
 const infoDetails = "info_details";
 const infoShare = "info_share";
+const infoPlugin = "info_plugin";
 
 class InfoPanelStore {
   userStore = null;
@@ -171,7 +173,7 @@ class InfoPanelStore {
   };
 
   /**
-   * @param {infoMembers | infoHistory | infoDetails} view
+   * @param {infoMembers | infoHistory | infoDetails | infoShare | infoPlugin} view
    * @returns {void}
    */
   setView = (view) => {
@@ -207,12 +209,14 @@ class InfoPanelStore {
       bufferSelection: groupsBufferSelection,
     } = this.peopleStore.groupsStore;
 
-    if (this.getIsPeople() || this.getIsGroups()) {
+    const isGroups = this.getIsContacts() === "groups";
+
+    if (!isGroups) {
       if (peopleSelection.length) return [...peopleSelection];
       if (peopleBufferSelection) return [peopleBufferSelection];
     }
 
-    if (this.getIsGroups()) {
+    if (isGroups) {
       if (groupsSelection.length) return [...groupsSelection];
       if (groupsBufferSelection) return [groupsBufferSelection];
     }
@@ -227,7 +231,7 @@ class InfoPanelStore {
     const isRooms = this.getIsRooms();
     const { currentGroup } = this.peopleStore.groupsStore;
 
-    if (this.getIsGroups()) {
+    if (this.getIsContacts() === "groups") {
       return {
         ...currentGroup,
         isGroup: true,
@@ -456,7 +460,7 @@ class InfoPanelStore {
     const pathname = window.location.pathname.toLowerCase();
     const isFiles = this.getIsFiles(pathname);
     const isRooms = this.getIsRooms(pathname);
-    const isAccounts = this.getIsAccounts(pathname);
+    const isAccounts = this.getIsContacts(pathname);
     const isGallery = this.getIsGallery(pathname);
     return isRooms || isFiles || isGallery || isAccounts;
   };
@@ -477,30 +481,9 @@ class InfoPanelStore {
     );
   };
 
-  getIsAccounts = (givenPathName) => {
+  getIsContacts = (givenPathName) => {
     const pathname = givenPathName || window.location.pathname.toLowerCase();
-    return (
-      pathname.indexOf("accounts") !== -1 && !(pathname.indexOf("view") !== -1)
-    );
-  };
-
-  getIsPeople = (givenPathName) => {
-    const pathname = givenPathName || window.location.pathname.toLowerCase();
-    return pathname.indexOf("accounts/people") !== -1;
-  };
-
-  getIsGroups = (givenPathName) => {
-    const pathname = givenPathName || window.location.pathname.toLowerCase();
-    return pathname.indexOf("accounts/groups") !== -1;
-  };
-
-  getIsInsideGroup = (givenPathName) => {
-    const pathname = givenPathName || window.location.pathname.toLowerCase();
-    return (
-      pathname.indexOf("accounts") !== -1 &&
-      pathname.indexOf("groups/filter") === -1 &&
-      pathname.indexOf("people/filter") === -1
-    );
+    return getContactsView({ pathname });
   };
 
   getIsGallery = (givenPathName) => {
@@ -523,10 +506,10 @@ class InfoPanelStore {
     }
 
     if (
-      this.getIsPeople() &&
+      this.getIsContacts() &&
       (!infoPanelSelection.email || !infoPanelSelection.displayName)
     ) {
-      this.infoPanelSelection = infoPanelSelection.length
+      this.infoPanelSelection = !infoPanelSelection.length
         ? infoPanelSelection
         : null;
       return;

@@ -1,5 +1,5 @@
 {
-  "AccountsEmptyScreenText": "여기에서 사용자 세부 정보를 확인하세요",
+  "UsersEmptyScreenText": "여기에서 사용자 세부 정보를 확인하세요",
   "AddedRoomTags": "태그가 추가되었습니다.",
   "Administration": "관리",
   "AndMoreLabel": "및 <1>{{count}} 이상</1>",

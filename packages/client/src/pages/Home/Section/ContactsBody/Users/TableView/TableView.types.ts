@@ -41,6 +41,7 @@ import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 import TableStore from "SRC_DIR/store/TableStore";
+import ContactsConextOptionsStore from "SRC_DIR/store/contacts/ContactsContextOptionsStore";
 
 export type TableViewStores = {
   peopleStore: PeopleStore;
@@ -63,6 +64,7 @@ export type TableHeaderStores = {
 
 export type TableRowStores = {
   currentQuotaStore: CurrentQuotasStore;
+  peopleStore: PeopleStore;
 };
 
 export type TableColumns = {
@@ -186,7 +188,7 @@ export type TableRowProps = {
   onEmailClick: () => Window | null;
   onUserContextClick: (item: TItem, isSingleMenu: boolean) => void;
 
-  isOwner?: boolean;
+  getUsersChangeTypeOptions?: ContactsConextOptionsStore["getUsersChangeTypeOptions"];
 
   changeUserType: UsersStore["changeType"];
   canChangeUserType: AccessRightsStore["canChangeUserType"];

@@ -25,42 +25,38 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
+import { useTranslation } from "react-i18next";
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import {
-  StyledAccountsLoader,
-  StyledProperty,
-  StyledSubtitleLoader,
-} from "../body.styled";
-import { propertyDimensions } from "../body.constant";
+import NoGalleryItem from "./NoGalleryItem";
+import NoRoomItem from "./NoRoomItem";
+import NoFileOrFolderItem from "./NoFileOrFolderItem";
+import NoContactsItem from "./NoContactsItem";
 
-const AccountsLoader = () => {
-  return (
-    <StyledAccountsLoader>
-      <StyledSubtitleLoader>
-        <RectangleSkeleton width="71px" height="16px" borderRadius="3px" />
-      </StyledSubtitleLoader>
-
-      <StyledProperty>
-        {propertyDimensions.map((property) => [
-          <RectangleSkeleton
-            key={property.titleKey}
-            className="property-title"
-            width={property.propertyTitle}
-            height="20px"
-            borderRadius="3px"
-          />,
-          <RectangleSkeleton
-            key={property.contentKey}
-            className="property-content"
-            width={property.propertyContent}
-            height="20px"
-            borderRadius="3px"
-          />,
-        ])}
-      </StyledProperty>
-    </StyledAccountsLoader>
-  );
+type NoItemsProps = {
+  isUsers: boolean;
+  isGroups: boolean;
+  isGuests: boolean;
+  isGallery: boolean;
+  isRooms: boolean;
+  isFiles: boolean;
 };
 
-export default AccountsLoader;
+const NoItem = ({
+  isUsers,
+  isGroups,
+  isGuests,
+  isGallery,
+  isRooms,
+  isFiles,
+}: NoItemsProps) => {
+  const { t } = useTranslation(["InfoPanel", "FormGallery"]);
+
+  if (isGroups || isUsers || isGuests)
+    return <NoContactsItem t={t} isGuests={isGuests} isGroups={isGroups} />;
+  if (isGallery) return <NoGalleryItem t={t} />;
+  if (isFiles) return <NoFileOrFolderItem t={t} theme={undefined} />;
+  if (isRooms) return <NoRoomItem t={t} theme={undefined} />;
+
+  return null;
+};
+export default NoItem;

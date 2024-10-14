@@ -29,7 +29,6 @@ import { makeAutoObservable } from "mobx";
 import { EmployeeStatus, EmployeeType } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
 import { isMobile, isTablet, isDesktop } from "@docspace/shared/utils";
-import { TContextMenuValueTypeOnClick } from "@docspace/shared/components/context-menu/ContextMenu.types";
 import {
   changeUserQuota,
   TContactsMenuItemdId,
@@ -38,7 +37,6 @@ import { TUser } from "@docspace/shared/api/people/types";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
-import { getUserTypeTranslation } from "@docspace/shared/utils/common";
 
 import InfoReactSvgUrl from "PUBLIC_DIR/images/info.outline.react.svg?url";
 import EnableReactSvgUrl from "PUBLIC_DIR/images/enable.react.svg?url";
@@ -78,79 +76,6 @@ class HeaderMenuStore {
 
     setGroupName(selection[0].name);
     setDeleteGroupDialogVisible(true);
-  };
-
-  getUsersRightsSubmenu = (t: TTranslation) => {
-    const { userSelectionRole, selectionUsersRights } = this.usersStore;
-
-    const { isOwner } = this.userStore.user!;
-
-    const options = [];
-
-    const adminOption = {
-      id: "menu_change-user_administrator",
-      className: "group-menu_drop-down",
-      label: getUserTypeTranslation(EmployeeType.Admin, t),
-      title: getUserTypeTranslation(EmployeeType.Admin, t),
-      onClick: (e: TContextMenuValueTypeOnClick) =>
-        this.contextOptionsStore.onChangeType(e),
-      "data-action": EmployeeType.Admin,
-      key: EmployeeType.Admin,
-      isActive: userSelectionRole === EmployeeType.Admin,
-    };
-
-    const managerOption = {
-      id: "menu_change-user_manager",
-      className: "group-menu_drop-down",
-      label: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
-      title: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
-      onClick: (e: TContextMenuValueTypeOnClick) =>
-        this.contextOptionsStore.onChangeType(e),
-      "data-action": EmployeeType.RoomAdmin,
-      key: EmployeeType.RoomAdmin,
-      isActive: userSelectionRole === EmployeeType.RoomAdmin,
-    };
-
-    const collaboratorOption = {
-      id: "menu_change-collaborator",
-      key: "collaborator",
-      label: getUserTypeTranslation(EmployeeType.User, t),
-      title: getUserTypeTranslation(EmployeeType.User, t),
-      "data-action": EmployeeType.User,
-      onClick: (e: TContextMenuValueTypeOnClick) =>
-        this.contextOptionsStore.onChangeType(e),
-      isActive: userSelectionRole === EmployeeType.User,
-    };
-
-    const { isVisitor, isCollaborator, isRoomAdmin, isAdmin } =
-      selectionUsersRights;
-
-    if (isVisitor > 0) {
-      if (isOwner) options.push(adminOption);
-      options.push(managerOption);
-      options.push(collaboratorOption);
-
-      return options;
-    }
-
-    if (isCollaborator > 0 || (isRoomAdmin > 0 && isAdmin > 0)) {
-      if (isOwner) options.push(adminOption);
-      options.push(managerOption);
-
-      return options;
-    }
-
-    if (isRoomAdmin > 0) {
-      if (isOwner) options.push(adminOption);
-
-      return options;
-    }
-
-    if (isAdmin > 0) {
-      options.push(managerOption);
-
-      return options;
-    }
   };
 
   onOpenInfoPanel = () => {
@@ -254,7 +179,9 @@ class HeaderMenuStore {
               )
           : () => {},
         withDropDown: !isGuests,
-        options: !isGuests ? this.getUsersRightsSubmenu(t) : [],
+        options: !isGuests
+          ? this.contextOptionsStore.getUsersChangeTypeOptions(t)
+          : [],
       },
       {
         id: "menu-info",

@@ -17,28 +17,28 @@
     "test:e2e:model": "npx playwright test --update-snapshots"
   },
   "dependencies": {
-    "@hcaptcha/react-hcaptcha": "^1.10.1",
+    "@hcaptcha/react-hcaptcha": "^1.11.0",
     "i18next": "^20.6.1",
-    "next": "^14.2.8",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "next": "^14.2.15",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-google-recaptcha": "^3.1.0",
     "react-hcaptcha": "^0.1.1",
-    "react-i18next": "^13.2.1",
-    "sass": "^1.59.3",
-    "styled-components": "^5.3.9"
+    "react-i18next": "^13.5.0",
+    "sass": "^1.79.5",
+    "styled-components": "^5.3.11"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
-    "@types/node": "^20",
-    "@types/react": "^18.2.53",
-    "@types/react-dom": "^18",
+    "@types/node": "^22.7.5",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1",
     "@types/react-google-recaptcha": "^2.1.9",
     "babel-plugin-styled-components": "^2.1.4",
-    "eslint": "^8",
-    "eslint-config-next": "14.0.4",
-    "prettier": "^3.2.4",
+    "eslint": "^9.12.0",
+    "eslint-config-next": "14.2.15",
+    "prettier": "^3.3.3",
     "shx": "^0.3.4",
-    "typescript": "5.3"
+    "typescript": "5.6.3"
   }
 }

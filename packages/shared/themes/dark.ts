@@ -1895,6 +1895,9 @@ const Dark: TTheme = {
       textColor: grayDark,
       tagColor: grayDarkStrong,
     },
+    expired: {
+      color: darkGrayDark,
+    },
   },
 
   filesArticleBody: {

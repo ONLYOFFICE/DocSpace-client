@@ -32,6 +32,7 @@ import NoFileOrFolderItem from "./NoFileOrFolderItem";
 import NoAccountsItem from "./NoAccountsItem";
 import NoGroupsItem from "./NoGroupsItem";
 import LockedItem from "./LockedItem";
+import ExpiredItem from "./ExpiredItem";
 
 const NoItem = ({
   t,
@@ -43,6 +44,7 @@ const NoItem = ({
   isLockedSharedRoom,
   infoPanelSelection,
 }) => {
+  if (infoPanelSelection?.expired) return <ExpiredItem />;
   if (isLockedSharedRoom) return <LockedItem t={t} item={infoPanelSelection} />;
   if (isPeople) return <NoAccountsItem t={t} />;
   if (isGroups) return <NoGroupsItem t={t} />;

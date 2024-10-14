@@ -114,6 +114,7 @@ const InfoPanelBodyContent = ({
     isNoItemPeople ||
     isNoItemGallery ||
     isNoItemGroups ||
+    infoPanelSelection.expired ||
     (isRoot && !isGallery);
 
   const defaultProps = {

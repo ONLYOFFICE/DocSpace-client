@@ -57,6 +57,22 @@ const StyledNoItemContainer = styled.div`
       height: 75px;
     }
   }
+
+  .expired-title {
+    text-align: center;
+
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .expired-text {
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+
+    color: ${(props) => props.theme.infoPanel.expired.color};
+  }
 `;
 
 const LockedSharedRoomButton = styled.button`

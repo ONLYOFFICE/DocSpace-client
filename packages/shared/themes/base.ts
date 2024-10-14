@@ -1903,6 +1903,10 @@ export const getBaseTheme = () => {
         textColor: gray,
         tagColor: grayStrong,
       },
+
+      expired: {
+        color: grayText,
+      },
     },
 
     filesArticleBody: {

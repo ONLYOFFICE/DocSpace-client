@@ -519,6 +519,14 @@ class ContextOptionsStore {
   };
 
   onCreateAndCopySharedLink = async (item, t) => {
+    const { isExpiredLinkAsync } = this.filesActionsStore;
+
+    if (item.external && (item.expired || (await isExpiredLinkAsync(item))))
+      return toastr.error(
+        t("Common:RoomLinkExpired"),
+        t("Common:RoomNotAvailable"),
+      );
+
     const primaryLink = await this.filesStore.getPrimaryLink(item.id);
 
     if (primaryLink) {

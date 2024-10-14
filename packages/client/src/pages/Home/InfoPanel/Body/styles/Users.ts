@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { Base } from "@docspace/shared/themes";
 import { mobile, tablet, TextUserSelect } from "@docspace/shared/utils";
 
 const StyledUsersTitle = styled.div`
@@ -100,8 +99,6 @@ const StyledUsersTitle = styled.div`
     margin-inline-start: auto;
   }
 `;
-
-StyledUsersTitle.defaultProps = { theme: Base };
 
 const StyledUsersContent = styled.div`
   margin-block: 0;

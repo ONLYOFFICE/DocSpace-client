@@ -231,6 +231,43 @@ const Users = ({
         </Text>
         {typeData}
 
+        {isGuests && infoPanelSelection.createdBy?.displayName && (
+          <>
+            <Text className="info_field" noSelect title={t("Common:Inviter")}>
+              {t("Common:Inviter")}
+            </Text>
+            <Text
+              className="info_data first-row"
+              fontSize="13px"
+              fontWeight={600}
+              noSelect
+              title={statusLabel}
+            >
+              {infoPanelSelection.createdBy.displayName}
+            </Text>
+          </>
+        )}
+
+        {isGuests && infoPanelSelection.status === EmployeeStatus.Active && (
+          <>
+            <Text
+              className="info_field"
+              noSelect
+              title={t("PeopleTranslations:RegistrationDate")}
+            >
+              {t("PeopleTranslations:RegistrationDate")}
+            </Text>
+            <Text
+              className="info_data first-row"
+              fontSize="13px"
+              fontWeight={600}
+              noSelect
+              title={infoPanelSelection.registrationDate}
+            >
+              {infoPanelSelection.registrationDate}
+            </Text>
+          </>
+        )}
         {!standalone && (
           <>
             <Text className="info_field" noSelect title={t("UserStatus")}>
@@ -259,44 +296,6 @@ const Users = ({
               onSuccess={onSuccess}
               onAbort={onAbort}
             />
-          </>
-        )}
-
-        {isGuests && (
-          <>
-            <Text className="info_field" noSelect title={t("Common:Inviter")}>
-              {t("Common:Inviter")}
-            </Text>
-            <Text
-              className="info_data first-row"
-              fontSize="13px"
-              fontWeight={600}
-              noSelect
-              title={statusLabel}
-            >
-              {statusText}
-            </Text>
-          </>
-        )}
-
-        {isGuests && infoPanelSelection.status === EmployeeStatus.Active && (
-          <>
-            <Text
-              className="info_field"
-              noSelect
-              title={t("PeopleTranslations:RegistrationDate")}
-            >
-              {t("PeopleTranslations:RegistrationDate")}
-            </Text>
-            <Text
-              className="info_data first-row"
-              fontSize="13px"
-              fontWeight={600}
-              noSelect
-              title={infoPanelSelection.registrationDate}
-            >
-              {infoPanelSelection.registrationDate}
-            </Text>
           </>
         )}
 

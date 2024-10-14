@@ -250,9 +250,7 @@ export const onInviteMultipleAgain = (t: TTranslation) => {
     .catch((err) => toastr.error(err));
 };
 
-export const getContactsView = (
-  location?: Location,
-): TContactsTab | boolean => {
+export const getContactsView = (location?: Location): TContactsTab => {
   const { pathname } = location ?? window.DocSpace.location;
 
   const isInsideGroup = matchPath(INSIDE_GROUP_ROUTE_WITH_FILTER, pathname);

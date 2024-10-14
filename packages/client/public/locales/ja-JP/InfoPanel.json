@@ -1,5 +1,5 @@
 {
-  "AccountsEmptyScreenText": "ユーザーの詳細情報はこちら",
+  "UsersEmptyScreenText": "ユーザーの詳細情報はこちら",
   "AddedRoomTags": "タグが追加されました。",
   "Administration": "管理",
   "AndMoreLabel": "と、<1>{{count}}もっと</1>",

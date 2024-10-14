@@ -5,7 +5,6 @@
   "CreateSpaceDescription": "Domēns ir veiksmīgi savienots ar IP adresi. Lai rediģētu telpas adreses iestatījumus, jums ir jāiestata turpmākais {{productName}} nosaukums",
   "CreatingPortal": "Jauna {{productName}} izveide",
   "CurrentSpace": "Pašreizējā telpa",
-  "DeletePortalText": "Ņemiet vērā: tikai īpašnieks var izdzēst atlasīto {{productName}}. <1>{{domain}} </1> īpašnieks ir <1>{{displayName}} </1> (<5>{{email}} </5>). Ja neesat īpašnieks (-e), jūs nevarēsiet piekļūt {{productName}} dzēšanas iestatījumiem, noklikšķinot uz pogas DZĒST, un tiksiet novirzīts uz sadaļu Telpas.",
   "DomainName": "Domēna nosaukums",
   "DomainNotFound": "Domēns nav atrasts. Pārbaudiet DNS iestatījumus",
   "DomainSettings": "Domēna iestatījumi",

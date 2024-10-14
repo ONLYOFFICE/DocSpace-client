@@ -63,8 +63,8 @@ const PeopleTableRow = ({
   onContentRowClick,
   onEmailClick,
   onUserContextClick,
+  getUsersChangeTypeOptions,
 
-  isOwner,
   changeUserType,
 
   isActive,
@@ -110,43 +110,10 @@ const PeopleTableRow = ({
   const sideInfoColor = theme.peopleTableRow.sideInfoColor;
 
   const getTypesOptions = React.useCallback(() => {
-    const options = [];
-
-    const adminOption = {
-      key: EmployeeType.Admin,
-      title: getUserTypeTranslation(EmployeeType.Admin, t),
-      label: getUserTypeTranslation(EmployeeType.Admin, t),
-      action: EmployeeType.Admin,
-    };
-    const managerOption = {
-      key: EmployeeType.RoomAdmin,
-      title: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
-      label: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
-      action: EmployeeType.RoomAdmin,
-    };
-    const collaboratorOption = {
-      key: EmployeeType.User,
-      title: getUserTypeTranslation(EmployeeType.User, t),
-      label: getUserTypeTranslation(EmployeeType.User, t),
-      action: EmployeeType.User,
-    };
-    const userOption = {
-      key: EmployeeType.Guest,
-      title: getUserTypeTranslation(EmployeeType.Guest, t),
-      label: getUserTypeTranslation(EmployeeType.Guest, t),
-      action: EmployeeType.Guest,
-    };
-
-    if (isOwner) options.push(adminOption);
-
-    options.push(managerOption);
-
-    if (isCollaborator || isVisitor) options.push(collaboratorOption);
-
-    if (isVisitor) options.push(userOption);
+    const options = getUsersChangeTypeOptions!(t, item);
 
     return options;
-  }, [t, isOwner, isVisitor, isCollaborator]);
+  }, [getUsersChangeTypeOptions, item, t]);
 
   const onAbort = () => {
     setIsLoading(false);
@@ -439,10 +406,13 @@ const PeopleTableRow = ({
   );
 };
 
-export default inject(({ currentQuotaStore }: TableRowStores) => {
+export default inject(({ currentQuotaStore, peopleStore }: TableRowStores) => {
   const { showStorageInfo } = currentQuotaStore;
+
+  const { getUsersChangeTypeOptions } = peopleStore.contextOptionsStore!;
 
   return {
     showStorageInfo,
+    getUsersChangeTypeOptions,
   };
 })(withContent(observer(PeopleTableRow)));

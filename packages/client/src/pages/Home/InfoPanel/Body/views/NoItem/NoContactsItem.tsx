@@ -24,33 +24,43 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useTheme } from "styled-components";
+
 import EmptyScreenPersonSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
 import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
-import React from "react";
-import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
-import { StyledNoItemContainer } from "../../styles/noItem";
+import { TTranslation } from "@docspace/shared/types";
 
-const NoAccountsItem = ({ t, theme }) => {
+import { StyledNoItemContainer } from "../../styles/NoItem";
+
+type NoСontactsItemProps = {
+  t: TTranslation;
+  isGroups: boolean;
+  isGuests: boolean;
+};
+
+const NoСontactsItem = ({ t, isGroups, isGuests }: NoСontactsItemProps) => {
+  const theme = useTheme();
+
   const imgSrc = theme.isBase
     ? EmptyScreenPersonSvgUrl
     : EmptyScreenPersonSvgDarkUrl;
 
   return (
     <StyledNoItemContainer>
-      <div className="no-thumbnail-img-wrapper no-accounts">
-        <img src={imgSrc} />
+      <div className="no-thumbnail-img-wrapper">
+        <img src={imgSrc} alt="empty screen" />
       </div>
       <Text className="no-item-text" textAlign="center">
-        {t("InfoPanel:AccountsEmptyScreenText")}
+        {isGuests
+          ? t("InfoPanel:GuestsEmptyScreenText")
+          : isGroups
+            ? t("InfoPanel:GroupsEmptyScreenText")
+            : t("InfoPanel:UsersEmptyScreenText")}
       </Text>
     </StyledNoItemContainer>
   );
 };
 
-export default inject(({ settingsStore }) => {
-  return {
-    theme: settingsStore.theme,
-  };
-})(observer(NoAccountsItem));
+export default NoСontactsItem;

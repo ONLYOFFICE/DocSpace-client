@@ -1,5 +1,5 @@
 {
-  "AccountsEmptyScreenText": "在此查看用户详情",
+  "UsersEmptyScreenText": "在此查看用户详情",
   "AddedRoomTags": "已添加标签。",
   "Administration": "管理",
   "AndMoreLabel": "以及<1>另外 {{count}} 个</1>",

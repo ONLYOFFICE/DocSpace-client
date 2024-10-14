@@ -26,104 +26,10 @@
 
 import { TFile } from "@docspace/shared/api/files/types";
 
-export type TDeepLinkerOptions = {
-  onReturn?: () => void;
-  onFallback?: () => void;
-  onIgnored?: () => void;
-};
-
-type TDeepLinkerThis = {
-  openURL: (url: Location | (string & Location)) => void;
-  destroy: () => void;
-};
-
-const DeepLinker = function (
-  this: TDeepLinkerThis,
-  options: TDeepLinkerOptions,
-) {
-  if (!options) {
-    throw new Error("no options");
-  }
-
-  let hasFocus = true;
-  let didHide = false;
-
-  function onBlur() {
-    hasFocus = false;
-  }
-
-  function onVisibilityChange(e: Event) {
-    const target = e.target as Document;
-    if (target.visibilityState === "hidden") {
-      didHide = true;
-    }
-  }
-
-  function onFocus() {
-    if (didHide) {
-      if (options.onReturn) {
-        options.onReturn();
-      }
-
-      didHide = false;
-    } else {
-      if (!hasFocus && options.onFallback) {
-        setTimeout(function () {
-          if (!didHide) {
-            options.onFallback?.();
-          }
-        }, 3000);
-      }
-    }
-
-    hasFocus = true;
-  }
-
-  function bindEvents(mode: "add" | "remove") {
-    [
-      [window, "blur", onBlur],
-      [document, "visibilitychange", onVisibilityChange],
-      [window, "focus", onFocus],
-    ].forEach(function (conf) {
-      switch (mode) {
-        case "add":
-          if (
-            typeof conf[0] !== "string" &&
-            typeof conf[0] !== "function" &&
-            typeof conf[1] === "string" &&
-            typeof conf[2] === "function"
-          )
-            conf[0].addEventListener(conf[1], conf[2]);
-          break;
-        case "remove":
-          if (
-            typeof conf[0] !== "string" &&
-            typeof conf[0] !== "function" &&
-            typeof conf[1] === "string" &&
-            typeof conf[2] === "function"
-          )
-            conf[0].removeEventListener(conf[1], conf[2]);
-          break;
-        default:
-          break;
-      }
-    });
-  }
-
-  bindEvents("add");
-
-  this.destroy = bindEvents.bind(null, "remove");
-  this.openURL = function (url) {
-    var dialogTimeout = 500;
-
-    setTimeout(function () {
-      if (hasFocus && options.onIgnored) {
-        options.onIgnored();
-      }
-    }, dialogTimeout);
-
-    window.location = url;
-  };
+export type TDeepLinkConfig = {
+  iosPackageId: string;
+  androidPackageName: string;
+  url: string;
 };
 
 function bytesToBase64(bytes: number[]) {
@@ -131,10 +37,45 @@ function bytesToBase64(bytes: number[]) {
   return btoa(binString);
 }
 
-export type TDeepLinkConfig = {
-  iosPackageId: string;
-  androidPackageName: string;
-  url: string;
+const openDeepLink = (
+  url: string,
+  options?: Partial<{
+    onOpen?: () => void;
+    onFail?: () => void;
+  }>,
+) => {
+  let timeout: NodeJS.Timeout;
+  let interval: NodeJS.Timer;
+  let visible: DocumentVisibilityState = "visible";
+
+  const handleOpen = () => {
+    window.removeEventListener("visibilitychange", () => true);
+    options?.onOpen?.();
+  };
+  const handleResponse = () => {
+    if (visible === "visible") return options?.onFail?.();
+    clearInterval(interval);
+    handleOpen();
+  };
+
+  try {
+    window.addEventListener(
+      "visibilitychange",
+      (e) => (visible = (e.target as Document)?.visibilityState),
+    );
+    timeout = setTimeout(handleResponse, 1000);
+
+    interval = setInterval(() => {
+      if (visible === "hidden") {
+        clearTimeout(timeout);
+        handleResponse();
+      }
+    }, 1000);
+
+    window.location.href = url;
+  } catch (error) {
+    options?.onFail?.();
+  }
 };
 
 export const getDeepLink = (
@@ -164,19 +105,11 @@ export const getDeepLink = (
     Array.from(new TextEncoder().encode(stringifyData)),
   );
 
-  const linker = new (DeepLinker as any)({
-    onIgnored: () => {
-      redirectToStore(deepLinkConfig);
-    },
-    onFallback: () => {
-      redirectToStore(deepLinkConfig);
-    },
-    onReturn: () => {
-      //redirectToStore(deepLinkConfig);
-    },
+  openDeepLink(`${deepLinkConfig?.url}?data=${deepLinkData}`, {
+    onOpen: () =>
+      (window.location.href = `${deepLinkConfig?.url}?data=${deepLinkData}`),
+    onFail: () => redirectToStore(deepLinkConfig),
   });
-
-  linker.openURL(`${deepLinkConfig?.url}?data=${deepLinkData}`);
 };
 
 const redirectToStore = (deepLinkConfig?: TDeepLinkConfig) => {
@@ -189,4 +122,3 @@ const redirectToStore = (deepLinkConfig?: TDeepLinkConfig) => {
 
   window.location.replace(storeUrl);
 };
-

@@ -565,6 +565,7 @@ export type Data = {
   inputItemVisible: boolean;
   savedInputValue: Nullable<string>;
   setSavedInputValue: (value: Nullable<string>) => void;
+  listHeight: number;
 };
 
 export interface ItemProps {

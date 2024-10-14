@@ -1,3 +1,4 @@
+import { AvatarRole } from "./../components/avatar/Avatar.enums";
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -278,6 +279,20 @@ export function isAdmin(currentUser: TUser) {
     (currentUser.listAdminModules && currentUser.listAdminModules?.length > 0)
   );
 }
+
+export const getUserAvatarRoleByType = (type: EmployeeType) => {
+  switch (type) {
+    case EmployeeType.Owner:
+      return AvatarRole.owner;
+    case EmployeeType.Admin:
+      return AvatarRole.admin;
+    case EmployeeType.RoomAdmin:
+      return AvatarRole.manager;
+
+    default:
+      return AvatarRole.user;
+  }
+};
 
 export const getUserType = (user: TUser) => {
   if (user.isOwner) return EmployeeType.Owner;

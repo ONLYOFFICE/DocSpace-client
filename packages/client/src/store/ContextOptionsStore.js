@@ -199,8 +199,10 @@ class ContextOptionsStore {
     this.clientLoadingStore = clientLoadingStore;
   }
 
-  onOpenFolder = (item) => {
-    if (item.external && item.expired)
+  onOpenFolder = async (item, t) => {
+    const { isExpiredLinkAsync } = this.filesActionsStore;
+
+    if (item.external && (item.expired || (await isExpiredLinkAsync(item))))
       return toastr.error(
         t("Common:RoomLinkExpired"),
         t("Common:RoomNotAvailable"),
@@ -1089,7 +1091,9 @@ class ContextOptionsStore {
         label: t("PinToTop"),
         icon: PinReactSvgUrl,
         onClick: (e) => this.onClickPin(e, item.id, t),
-        disabled: this.publicRoomStore.isPublicRoom,
+        disabled:
+          this.publicRoomStore.isPublicRoom ||
+          Boolean(item.external && item.expired),
         "data-action": "pin",
         action: "pin",
       },
@@ -1099,7 +1103,9 @@ class ContextOptionsStore {
         label: t("Unpin"),
         icon: UnpinReactSvgUrl,
         onClick: (e) => this.onClickPin(e, item.id, t),
-        disabled: this.publicRoomStore.isPublicRoom,
+        disabled:
+          this.publicRoomStore.isPublicRoom ||
+          Boolean(item.external && item.expired),
         "data-action": "unpin",
         action: "unpin",
       },
@@ -1630,14 +1636,15 @@ class ContextOptionsStore {
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onCopyLink(item, t),
         disabled:
-          (isPublicRoomType && hasShareLinkRights) || item.passwordProtected,
+          (isPublicRoomType && hasShareLinkRights) ||
+          Boolean(item.external && (item.expired || item.passwordProtected)),
       },
       {
         id: "option_copy-external-link",
         key: "external-link",
         label: t("Files:CopySharedLink"),
         icon: TabletLinkReactSvgUrl,
-        disabled: !hasShareLinkRights,
+        disabled: !hasShareLinkRights || Boolean(item.external && item.expired),
         onClick: () => this.onCreateAndCopySharedLink(item, t),
         // onLoad: () => this.onLoadLinks(t, item),
       },
@@ -1647,7 +1654,7 @@ class ContextOptionsStore {
         label: t("Common:Info"),
         icon: InfoOutlineReactSvgUrl,
         onClick: () => this.onShowInfoPanel(item),
-        disabled: isPublicRoom,
+        disabled: isPublicRoom || Boolean(item.external && item.expired),
       },
       ...pinOptions,
       ...muteOptions,
@@ -1775,7 +1782,9 @@ class ContextOptionsStore {
 
           this.onClickDownload(item, t);
         },
-        disabled: !item.security?.Download && !isLockedSharedRoom(item),
+        disabled:
+          (!item.security?.Download && !isLockedSharedRoom(item)) ||
+          Boolean(item.external && item.expired),
       },
       {
         id: "option_remove-shared-room",

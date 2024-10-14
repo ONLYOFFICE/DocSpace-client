@@ -67,6 +67,7 @@ import {
   FolderType,
   RoomsType,
   ShareAccessRights,
+  ValidationStatus,
   VDRIndexingAction,
 } from "@docspace/shared/enums";
 import { makeAutoObservable } from "mobx";
@@ -2365,8 +2366,41 @@ class FilesActionStore {
 
   onMarkAsRead = (item) => this.markAsRead([], [`${item.id}`], item);
 
-  openFileAction = (item, t, e) => {
-    if (item.external && item.expired)
+  isExpiredLinkAsync = async (item) => {
+    const { clearActiveOperations } = this.uploadDataStore;
+    const { addActiveItems } = this.filesStore;
+
+    try {
+      this.setGroupMenuBlocked(true);
+      addActiveItems(null, [item.id]);
+      const response = await api.rooms.validatePublicRoomKey(item.requestToken);
+
+      const isExpired = response.status === ValidationStatus.Expired;
+      if (isExpired) {
+        const foundFolder = this.filesStore.folders.find(
+          (folder) => folder.id === item.id,
+        );
+
+        if (foundFolder && !foundFolder.expired) {
+          foundFolder.expired = true;
+        }
+      }
+
+      return isExpired;
+    } catch (error) {
+      console.log(error);
+      return false;
+    } finally {
+      this.setGroupMenuBlocked(false);
+      clearActiveOperations([], [item.id]);
+    }
+  };
+
+  openFileAction = async (item, t, e) => {
+    if (
+      item.external &&
+      (item.expired || (await this.isExpiredLinkAsync(item)))
+    )
       return toastr.error(
         t("Common:RoomLinkExpired"),
         t("Common:RoomNotAvailable"),

@@ -1,5 +1,5 @@
 {
-  "AccountsEmptyScreenText": "Siehe Benutzerdetails hier",
+  "UsersEmptyScreenText": "Siehe Benutzerdetails hier",
   "AddedRoomTags": "Tags hinzugefügt.",
   "Administration": "Verwaltung",
   "AndMoreLabel": "und <1>{{count}} mehr</1>",

@@ -29,7 +29,7 @@ import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_alt_dark.sv
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { StyledNoItemContainer } from "../../styles/noItem";
+import { StyledNoItemContainer } from "../../styles/NoItem";
 
 const NoFileOrFolderItem = ({ t, theme }) => {
   const imgSrc = theme.isBase ? EmptyScreenAltSvgUrl : EmptyScreenAltSvgDarkUrl;

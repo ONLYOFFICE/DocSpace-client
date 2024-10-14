@@ -26,7 +26,7 @@
 
 import { inject, observer } from "mobx-react";
 
-import AccountsItemTitle from "./AccountsItemTitle";
+import UsersItemTitle from "./UsersItemTitle";
 import GalleryItemTitle from "./GalleryItemTitle";
 import RoomsItemHeader from "./Rooms";
 import GroupsItemTitle from "./GroupsItemTitle";
@@ -35,7 +35,9 @@ const ItemTitle = ({
   infoPanelSelection,
   gallerySelected,
   isNoItem,
-  isPeople,
+  isUsers,
+  isGuests,
+  isInsideGroup,
   isGroups,
   isGallery,
   isSeveralItems,
@@ -51,9 +53,9 @@ const ItemTitle = ({
   if (!infoPanelSelection) return null;
   if (isNoItem) return null;
 
-  if (isPeople)
+  if (isUsers || isInsideGroup || isGuests)
     return (
-      <AccountsItemTitle
+      <UsersItemTitle
         infoPanelSelection={infoPanelSelection}
         isSeveralItems={isSeveralItems}
         getUserContextOptions={getUserContextOptions}

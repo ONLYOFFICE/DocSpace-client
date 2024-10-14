@@ -24,52 +24,43 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import EmptyScreenPersonSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
-import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
-import EmptyScreenAltSvgUrl from "PUBLIC_DIR/images/empty_screen_alt.svg?url";
-import EmptyScreenAltSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_alt_dark.svg?url";
-
 import React from "react";
-import { inject, observer } from "mobx-react";
-import { useTranslation } from "react-i18next";
-import { Text } from "@docspace/shared/components/text";
-import { StyledSeveralItemsContainer } from "../../styles/severalItems";
 
-const SeveralItems = ({ isPeople, theme, selectedItems }) => {
-  const { t } = useTranslation("InfoPanel");
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import {
+  StyledUsersLoader,
+  StyledProperty,
+  StyledSubtitleLoader,
+} from "../body.styled";
+import { propertyDimensions } from "../body.constant";
 
-  const emptyScreenAlt = theme.isBase
-    ? EmptyScreenAltSvgUrl
-    : EmptyScreenAltSvgDarkUrl;
-
-  const emptyScreenPerson = theme.isBase
-    ? EmptyScreenPersonSvgUrl
-    : EmptyScreenPersonSvgDarkUrl;
-
-  const imgSrc = isPeople ? emptyScreenPerson : emptyScreenAlt;
-
-  const itemsText = isPeople
-    ? t("InfoPanel:SelectedUsers")
-    : t("InfoPanel:ItemsSelected");
-
+const AccountsLoader = () => {
   return (
-    <StyledSeveralItemsContainer
-      isPeople={isPeople}
-      className="no-thumbnail-img-wrapper"
-    >
-      <img src={imgSrc} />
-      <Text fontSize="16px" fontWeight={700}>
-        {`${itemsText}: ${selectedItems.length}`}
-      </Text>
-    </StyledSeveralItemsContainer>
+    <StyledUsersLoader>
+      <StyledSubtitleLoader>
+        <RectangleSkeleton width="71px" height="16px" borderRadius="3px" />
+      </StyledSubtitleLoader>
+
+      <StyledProperty>
+        {propertyDimensions.map((property) => [
+          <RectangleSkeleton
+            key={property.titleKey}
+            className="property-title"
+            width={property.propertyTitle}
+            height="20px"
+            borderRadius="3px"
+          />,
+          <RectangleSkeleton
+            key={property.contentKey}
+            className="property-content"
+            width={property.propertyContent}
+            height="20px"
+            borderRadius="3px"
+          />,
+        ])}
+      </StyledProperty>
+    </StyledUsersLoader>
   );
 };
 
-export default inject(({ settingsStore, infoPanelStore }) => {
-  const selectedItems = infoPanelStore.infoPanelSelectedItems;
-
-  return {
-    theme: settingsStore.theme,
-    selectedItems,
-  };
-})(observer(SeveralItems));
+export default AccountsLoader;

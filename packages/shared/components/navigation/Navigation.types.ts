@@ -112,6 +112,7 @@ export interface INavigationLogoProps {
   logo?: string;
   burgerLogo: string;
   className: string;
+  onClick?: () => void;
 }
 
 export type TOnNavigationItemClick = (
@@ -205,4 +206,5 @@ export interface INavigationProps {
   showNavigationButton: boolean;
   titleIconTooltip?: string;
   onContextOptionsClick?: () => void;
+  onLogoClick?: () => void;
 }

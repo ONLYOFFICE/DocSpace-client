@@ -1,5 +1,5 @@
 {
-  "AccountsEmptyScreenText": "Δείτε λεπτομέρειες για τους χρήστες εδώ",
+  "UsersEmptyScreenText": "Δείτε λεπτομέρειες για τους χρήστες εδώ",
   "AddedRoomTags": "Οι ετικέτες προστέθηκαν.",
   "Administration": "Διαχείριση",
   "AndMoreLabel": "και <1>{{count}} περισσότερα</1>",

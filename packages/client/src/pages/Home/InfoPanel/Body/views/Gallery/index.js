@@ -43,7 +43,7 @@ import {
   StyledLink,
   StyledProperties,
   StyledSubtitle,
-} from "../../styles/common.js";
+} from "../../styles/common";
 import { Link } from "@docspace/shared/components/link";
 
 const Gallery = ({

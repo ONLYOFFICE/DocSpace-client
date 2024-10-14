@@ -2664,7 +2664,6 @@ class FilesActionStore {
       rootFolderType: rootFolderType,
     };
 
-    setIsSectionFilterLoading(true);
     window.DocSpace.navigate(
       `${path}?key=${publicRoomKey}&${filter.toUrlParams()}`,
       { state },

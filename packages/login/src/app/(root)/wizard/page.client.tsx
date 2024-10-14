@@ -327,29 +327,18 @@ function WizardForm(props: WizardFormProps) {
     const emailTrim = email.trim();
     const analytics = true;
     const hash = createPasswordHash(password, passwordHash);
-    const instanceIdTrim = instanceId.trim();
+    const amiId = instanceId.trim();
 
     try {
-      if (isAmi && instanceIdTrim) {
-        await api.settings.setPortalOwner(
-          emailTrim,
-          hash,
-          selectedLanguage.key,
-          selectedTimezone.key,
-          wizardToken,
-          analytics,
-          instanceIdTrim,
-        );
-      } else {
-        await api.settings.setPortalOwner(
-          emailTrim,
-          hash,
-          selectedLanguage.key,
-          selectedTimezone.key,
-          wizardToken,
-          analytics,
-        );
-      }
+      await api.settings.setPortalOwner(
+        emailTrim,
+        hash,
+        selectedLanguage.key,
+        selectedTimezone.key,
+        wizardToken,
+        analytics,
+        isAmi && amiId ? amiId : null,
+      );
 
       setCookie(LANGUAGE, selectedLanguage.key.toString(), {
         "max-age": COOKIE_EXPIRATION_YEAR,

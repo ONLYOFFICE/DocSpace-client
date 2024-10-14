@@ -448,18 +448,16 @@ export async function getMembersList(
   if (filter) {
     checkFilterInstance(filter, Filter);
 
-    params = `?${filter.toApiUrlParams(
-      "id,email,avatar,icon,displayName,hasAvatar,isOwner,isAdmin,isVisitor,isCollaborator,",
-    )}`;
+    params = `?${filter.toApiUrlParams()}`;
   }
 
-  const excludeShared = filter.excludeShared ? filter.excludeShared : false;
+  // const excludeShared = filter.excludeShared ? filter.excludeShared : false;
 
-  if (params) {
-    params += `&excludeShared=${excludeShared}`;
-  } else {
-    params = `excludeShared=${excludeShared}`;
-  }
+  // if (params) {
+  //   params += `&excludeShared=${excludeShared}`;
+  // } else {
+  //   params = `excludeShared=${excludeShared}`;
+  // }
 
   let url = "";
 

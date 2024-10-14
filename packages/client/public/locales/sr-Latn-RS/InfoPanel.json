@@ -1,5 +1,5 @@
 {
-  "AccountsEmptyScreenText": "Vidi korisničke detalje ovde",
+  "UsersEmptyScreenText": "Vidi korisničke detalje ovde",
   "AddedRoomTags": "Tagovi dodati.",
   "Administration": "Administracija",
   "AndMoreLabel": "i <1>{{count}} više</1>",

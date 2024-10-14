@@ -85,6 +85,7 @@ const Navigation = ({
   tariffBar,
   showNavigationButton,
   onContextOptionsClick,
+  onLogoClick,
   ...rest
 }: INavigationProps) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -295,6 +296,7 @@ const Navigation = ({
                 className="navigation-logo"
                 logo={typeof withLogo === "string" ? withLogo : ""}
                 burgerLogo={burgerLogo}
+                onClick={onLogoClick}
               />
             )}
             <ArrowButton

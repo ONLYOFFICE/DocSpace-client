@@ -24,33 +24,33 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import EmptyScreenPersonSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
-import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
-import React from "react";
-import { inject, observer } from "mobx-react";
+import styled from "styled-components";
+import { tablet } from "@docspace/shared/utils";
 
-import { Text } from "@docspace/shared/components/text";
-import { StyledNoItemContainer } from "../../styles/noItem";
+export const StyledInfoPanelHeader = styled.div<{ withTabs: boolean }>`
+  width: 100%;
+  max-width: 100%;
 
-const NoGroupsItem = ({ t, theme }) => {
-  const imgSrc = theme.isBase
-    ? EmptyScreenPersonSvgUrl
-    : EmptyScreenPersonSvgDarkUrl;
+  display: flex;
+  flex-direction: column;
+  border-bottom: ${(props) =>
+    props.withTabs ? "none" : `1px solid ${props.theme.infoPanel.borderColor}`};
 
-  return (
-    <StyledNoItemContainer>
-      <div className="no-thumbnail-img-wrapper no-accounts">
-        <img src={imgSrc} />
-      </div>
-      <Text className="no-item-text" textAlign="center">
-        {t("InfoPanel:GroupsEmptyScreenText")}
-      </Text>
-    </StyledNoItemContainer>
-  );
-};
+  .header-text {
+    height: 68px;
 
-export default inject(({ settingsStore }) => {
-  return {
-    theme: settingsStore.theme,
-  };
-})(observer(NoGroupsItem));
+    @media ${tablet} {
+      height: 52px;
+    }
+  }
+  .tabs {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    .sticky {
+      .scroll-body > div {
+        justify-content: center;
+      }
+    }
+  }
+`;

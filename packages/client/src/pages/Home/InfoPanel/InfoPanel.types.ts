@@ -24,48 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import { Base } from "@docspace/shared/themes";
-import { tablet } from "@docspace/shared/utils";
+import { TFile, TFolder } from "@docspace/shared/api/files/types";
+import { TGroup } from "@docspace/shared/api/groups/types";
+import { TUser } from "@docspace/shared/api/people/types";
+import { TRoom } from "@docspace/shared/api/rooms/types";
 
-// const getHeaderHeight = ({ withTabs, isTablet }) => {
-//   let res = isTablet ? 54 : 70;
-//   if (withTabs) res += 32;
-//   return `${res}px`;
-// };
-
-const getMainHeight = ({ isTablet }) => {
-  let res = isTablet ? 52 : 68;
-  return `${res}px`;
-};
-
-const StyledInfoPanelHeader = styled.div`
-  width: 100%;
-  max-width: 100%;
-
-  display: flex;
-  flex-direction: column;
-  border-bottom: ${(props) =>
-    props.withTabs ? "none" : `1px solid ${props.theme.infoPanel.borderColor}`};
-
-  .header-text {
-    height: ${(props) => getMainHeight(props)};
-    @media ${tablet} {
-      height: ${(props) => getMainHeight({ ...props, isTablet: true })};
-    }
-  }
-  .tabs {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    .sticky {
-      .scroll-body > div {
-        justify-content: center;
-      }
-    }
-  }
-`;
-
-StyledInfoPanelHeader.defaultProps = { theme: Base };
-
-export { StyledInfoPanelHeader };
+export type TInfoPanelSelection =
+  | TFile
+  | TFolder
+  | (TFile | TFolder)[]
+  | TRoom
+  | TRoom[]
+  | TUser
+  | TUser[]
+  | TGroup
+  | TGroup[];

@@ -1,5 +1,5 @@
 {
-  "AccountsEmptyScreenText": "Դիտեք օգտվողների մանրամասները այստեղ",
+  "UsersEmptyScreenText": "Դիտեք օգտվողների մանրամասները այստեղ",
   "AddedRoomTags": "Պիտակները ավելացվել են։",
   "Administration": "Ադմինիստրացիա",
   "AndMoreLabel": "և <1>{{count}} ավելի</1>",

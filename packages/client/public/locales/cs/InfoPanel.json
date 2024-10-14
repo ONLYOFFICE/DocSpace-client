@@ -1,5 +1,5 @@
 {
-  "AccountsEmptyScreenText": "Podrobnosti o uživatelích naleznete zde",
+  "UsersEmptyScreenText": "Podrobnosti o uživatelích naleznete zde",
   "AddedRoomTags": "Přidané značky.",
   "Administration": "Správa",
   "AndMoreLabel": "a <1>{{count}} další</1>",

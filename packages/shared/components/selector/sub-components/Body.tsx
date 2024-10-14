@@ -293,6 +293,7 @@ const Body = ({
                     inputItemVisible,
                     savedInputValue,
                     setSavedInputValue,
+                    listHeight,
                   }}
                   itemSize={48}
                   onItemsRendered={onItemsRendered}

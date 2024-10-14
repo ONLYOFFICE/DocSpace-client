@@ -27,7 +27,7 @@
 import styled from "styled-components";
 import { Base } from "@docspace/shared/themes";
 
-export const StyledAccountsLoader = styled.div`
+export const StyledUsersLoader = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;

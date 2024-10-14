@@ -95,7 +95,6 @@ const FilterBlock = ({
       const isSelected =
         filterSubject.groupItem.findIndex((i) => i.isSelected) > -1;
 
-      console.log("as");
       if (
         filterOwner &&
         filterOwner.groupItem &&
@@ -499,10 +498,10 @@ const FilterBlock = ({
                   onCloseClick: hideFilterBlock,
                   headerLabel: selectorLabel,
                   withoutBackButton: false,
-                  withoutBorder: false,
+                  withoutBorder: isRooms,
                 }}
                 currentUserId={userId}
-                onClose={hideFilterBlock}
+                withGuests={isRooms ? true : false}
               />
             ) : showSelector.type === FilterSelectorTypes.groups ? (
               <GroupsSelector

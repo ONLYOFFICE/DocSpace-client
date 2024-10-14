@@ -52,6 +52,8 @@ const PasswordEntryDialog = ({
   onClose,
   openItemAction,
   item,
+  isDownload,
+  onClickDownload,
 }: PasswordEntryDialogProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const abortControllerRef = useRef<AbortController>();
@@ -93,7 +95,12 @@ const PasswordEntryDialog = ({
 
       switch (response?.status) {
         case ValidationStatus.Ok: {
-          openItemAction(item, t);
+          if (isDownload) {
+            onClickDownload(item, t);
+          } else {
+            openItemAction(item, t);
+          }
+
           onClose();
           break;
         }

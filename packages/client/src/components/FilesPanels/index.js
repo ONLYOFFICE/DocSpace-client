@@ -346,6 +346,7 @@ const Panels = (props) => {
       <PasswordEntryDialog
         key="password-entry-dialog"
         item={passwordEntryDialogDate.item}
+        isDownload={passwordEntryDialogDate.isDownload}
       />
     ),
   ];

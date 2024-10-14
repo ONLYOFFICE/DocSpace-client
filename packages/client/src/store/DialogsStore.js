@@ -128,6 +128,7 @@ class DialogsStore {
   passwordEntryDialogDate = {
     visible: false,
     item: null,
+    isDownload: false,
   };
 
   selectFileFormRoomFilterParam = FilesSelectorFilterTypes.DOCX;
@@ -550,10 +551,15 @@ class DialogsStore {
    * @param {import("@docspace/shared/api/rooms/types").TRoom =} item
    * @returns {void}
    */
-  setPasswordEntryDialog = (visible = false, item = null) => {
+  setPasswordEntryDialog = (
+    visible = false,
+    item = null,
+    isDownload = false,
+  ) => {
     this.passwordEntryDialogDate = {
       visible,
       item,
+      isDownload,
     };
   };
 

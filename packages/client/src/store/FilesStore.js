@@ -2141,7 +2141,9 @@ class FilesStore {
     const canCopy = item.security?.Copy;
     const canCopyLink = item.security?.CopyLink;
     const canDuplicate = item.security?.Duplicate;
-    const canDownload = item.security?.Download;
+    const canDownload =
+      item.security?.Download ||
+      Boolean(item.external && item.passwordProtected && !item.expired);
     const canEmbed = item.security?.Embed;
 
     if (isFile) {

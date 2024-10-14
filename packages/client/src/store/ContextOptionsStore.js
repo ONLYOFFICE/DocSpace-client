@@ -1766,8 +1766,15 @@ class ContextOptionsStore {
         key: "download",
         label: t("Common:Download"),
         icon: DownloadReactSvgUrl,
-        onClick: () => this.onClickDownload(item, t),
-        disabled: !item.security?.Download,
+        onClick: () => {
+          if (item.external && item.passwordProtected)
+            return this.dialogsStore.setPasswordEntryDialog(true, item, true);
+
+          this.onClickDownload(item, t);
+        },
+        disabled:
+          !item.security?.Download &&
+          !(item.external && item.passwordProtected && !item.expired),
       },
       {
         id: "option_remove-shared-room",

@@ -29,10 +29,12 @@ import type { TRoom } from "@docspace/shared/api/rooms/types";
 export interface InjectedPasswordEntryDialogProps {
   onClose: VoidFunction;
   openItemAction: TStore["filesActionsStore"]["openItemAction"];
+  onClickDownload: TStore["contextOptionsStore"]["onClickDownload"];
 }
 
 export interface ExternalPasswordEntryDialogProps {
   item: TRoom;
+  isDownload: boolean;
 }
 
 export interface PasswordEntryDialogProps

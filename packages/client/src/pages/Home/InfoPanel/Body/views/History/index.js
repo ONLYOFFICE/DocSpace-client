@@ -128,9 +128,7 @@ const History = ({
 
     selectionHistory.map(({ feeds }) => {
       feeds.map((feed) => {
-        if (feed.related.length) {
-          feedsRelatedLength += feed.related.length;
-        }
+        if (feed.related.length) feedsRelatedLength += feed.related.length;
       });
 
       feedsRelatedLength += feeds.length;

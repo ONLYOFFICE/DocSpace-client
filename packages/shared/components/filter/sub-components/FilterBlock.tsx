@@ -498,10 +498,10 @@ const FilterBlock = ({
                   onCloseClick: hideFilterBlock,
                   headerLabel: selectorLabel,
                   withoutBackButton: false,
-                  withoutBorder: isRooms,
+                  withoutBorder: !!isRooms,
                 }}
                 currentUserId={userId}
-                withGuests={isRooms ? true : false}
+                withGuests={!!isRooms}
               />
             ) : showSelector.type === FilterSelectorTypes.groups ? (
               <GroupsSelector
@@ -513,8 +513,8 @@ const FilterBlock = ({
                   onCloseClick: hideFilterBlock,
                   headerLabel: selectorLabel,
                   withoutBackButton: false,
+                  withoutBorder: false,
                 }}
-                onClose={hideFilterBlock}
               />
             ) : (
               <RoomSelector
@@ -526,11 +526,11 @@ const FilterBlock = ({
                   onCloseClick: hideFilterBlock,
                   headerLabel: selectorLabel,
                   withoutBackButton: false,
+                  withoutBorder: false,
                 }}
                 isMultiSelect={false}
                 withSearch
                 disableThirdParty={disableThirdParty}
-                onClose={hideFilterBlock}
               />
             )}
           </StyledFilterBlock>

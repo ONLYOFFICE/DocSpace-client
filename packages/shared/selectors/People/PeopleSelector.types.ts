@@ -47,7 +47,7 @@ export type ContactsSelectorGroups =
   | { withGroups?: never; isGroupsOnly?: never };
 
 export type ContactsSelectorGuests =
-  | { withGuests: true; isGuestsOnly?: boolean }
+  | { withGuests: boolean; isGuestsOnly?: boolean }
   | { withGuests?: never; isGuestsOnly?: never };
 
 export type PeopleSelectorProps = TSelectorHeader &
@@ -81,7 +81,7 @@ export type PeopleSelectorProps = TSelectorHeader &
     checkIfUserInvited?: (user: TUser) => boolean;
 
     useAside?: boolean;
-    onClose: VoidFunction;
+    onClose?: VoidFunction;
     withoutBackground?: boolean;
     withBlur?: boolean;
   } & ContactsSelectorGroups &

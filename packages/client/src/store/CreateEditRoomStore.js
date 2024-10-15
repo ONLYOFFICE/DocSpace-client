@@ -191,17 +191,35 @@ class CreateEditRoomStore {
     });
   };
 
+  getLogoParams = (uploadedFile, icon) => {
+    const { calculateRoomLogoParams } = this.filesStore;
+
+    const img = new Image();
+    const url = URL.createObjectURL(uploadedFile);
+
+    return new Promise((resolve, reject) => {
+      img.onload = () => {
+        const { x, y, zoom } = icon;
+
+        return resolve({ ...calculateRoomLogoParams(img, x, y, zoom) });
+      };
+      img.onerror = (err) => reject(err);
+
+      img.src = url;
+    });
+  };
+
   onSaveEditRoom = async (t, newParams, room) => {
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
     const { cover } = this.dialogsStore;
     const {
       editRoom,
       removeLogoFromRoom,
-      addActiveItems,
+      calculateRoomLogoParams,
       removeTagsFromRoom,
       setFolder,
     } = this.filesStore;
-    const { uploadedFile, onSaveRoomLogo } = this.avatarEditorDialogStore;
+    const { uploadedFile, getUploadedLogoData } = this.avatarEditorDialogStore;
     const { changeRoomOwner, updateCurrentFolder } = this.filesActionsStore;
     const { createTag } = this.tagsStore;
     const {
@@ -259,10 +277,17 @@ class CreateEditRoomStore {
 
     const isUpdatelogo = uploadedFile;
     const isDeleteLogo = !!room.logo.original && !newParams.icon.uploadedFile;
-    const tagsRequest = [];
+    const additionalRequest = [];
+
+    if (isUpdatelogo) {
+      additionalRequest.push(
+        this.getLogoParams(uploadedFile, newParams.icon),
+        getUploadedLogoData(),
+      );
+    }
 
     for (let i = 0; i < newTags.length; i++) {
-      tagsRequest.push(createTag(newTags[i]));
+      additionalRequest.push(createTag(newTags[i]));
     }
 
     const tagsToAddList = tags.filter((t) => !startTags.includes(t));
@@ -280,8 +305,16 @@ class CreateEditRoomStore {
 
     try {
       try {
-        if (tagsRequest.length) {
-          await Promise.all(tagsRequest);
+        if (additionalRequest.length) {
+          const [firstRequset, secondRequest] =
+            await Promise.all(additionalRequest);
+
+          if (isUpdatelogo) {
+            editRoomParams.logo = {
+              tmpFile: secondRequest.responseData.data,
+              ...firstRequset,
+            };
+          }
         }
       } catch (e) {
         toastr.error(e);
@@ -296,11 +329,6 @@ class CreateEditRoomStore {
 
       if (isDeleteLogo) {
         requests.push(removeLogoFromRoom(room.id));
-      }
-
-      if (isUpdatelogo) {
-        addActiveItems(null, [room.id]);
-        requests.push(onSaveRoomLogo(room.id, newParams.icon, room, true));
       }
 
       if (indexingChanged)
@@ -332,15 +360,10 @@ class CreateEditRoomStore {
     const { processCreatingRoomFromData, setProcessCreatingRoomFromData } =
       this.filesActionsStore;
     const { deleteThirdParty } = this.thirdPartyStore;
-    const {
-      createRoom,
-      createRoomInThirdpary,
-      addTagsToRoom,
-      selection,
-      bufferSelection,
-    } = this.filesStore;
+    const { createRoom, createRoomInThirdpary, selection, bufferSelection } =
+      this.filesStore;
     const { preparingDataForCopyingToRoom } = this.filesActionsStore;
-
+    const { getUploadedLogoData } = this.avatarEditorDialogStore;
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
     const { cover } = this.dialogsStore;
 
@@ -386,18 +409,33 @@ class CreateEditRoomStore {
       createRoomData.tags = tagsToAddList;
     }
 
+    const additionalRequest = [];
+
+    const isUpdatelogo = roomParams.icon.uploadedFile;
+
+    if (isUpdatelogo) {
+      additionalRequest.push(
+        this.getLogoParams(roomParams.icon.uploadedFile, roomParams.icon),
+        getUploadedLogoData(),
+      );
+    }
+
     try {
-      // create new tags
-
       try {
-        const tagsRequest = [];
-
         for (let i = 0; i < newTags.length; i++) {
-          tagsRequest.push(createTag(newTags[i]));
+          additionalRequest.push(createTag(newTags[i]));
         }
 
-        if (tagsRequest.length) {
-          await Promise.all(tagsRequest);
+        if (additionalRequest.length) {
+          const [firstRequset, secondRequest] =
+            await Promise.all(additionalRequest);
+
+          if (isUpdatelogo) {
+            createRoomData.logo = {
+              tmpFile: secondRequest.responseData.data,
+              ...firstRequset,
+            };
+          }
         }
       } catch (e) {
         toastr.error(e);
@@ -424,21 +462,7 @@ class CreateEditRoomStore {
 
       await Promise.all(requests);
 
-      // calculate and upload logo to room
-      if (roomParams.icon.uploadedFile) {
-        try {
-          await this.avatarEditorDialogStore.onSaveRoomLogo(
-            room.id,
-            roomParams.icon,
-          );
-          this.onOpenNewRoom(room);
-        } catch (e) {
-          toastr.error(e);
-          this.setIsLoading(false);
-          this.setConfirmDialogIsLoading(false);
-          this.onClose();
-        }
-      } else this.onOpenNewRoom(room);
+      this.onOpenNewRoom(room);
 
       if (processCreatingRoomFromData) {
         const selections =

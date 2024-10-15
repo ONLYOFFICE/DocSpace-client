@@ -78,6 +78,8 @@ type RegistrationFormProps = {
 
   licenseUrl: string;
   legalTerms: string;
+
+  isStandalone: boolean;
 };
 
 const RegistrationForm = ({

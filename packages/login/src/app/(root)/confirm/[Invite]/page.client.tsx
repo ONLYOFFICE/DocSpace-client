@@ -91,6 +91,7 @@ export type CreateUserFormProps = {
   thirdPartyProviders?: TThirdPartyProvider[];
   firstName?: string;
   lastName?: string;
+  isStandalone: boolean;
 };
 
 const CreateUserForm = (props: CreateUserFormProps) => {

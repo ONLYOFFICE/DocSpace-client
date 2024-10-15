@@ -3,6 +3,7 @@ import {
   BASE_URL,
   HEADER_WIZARD_SETTINGS,
   HEADER_WIZARD_WITH_AMI_SETTINGS,
+  HEADER_PORTAL_DEACTIVATE_SETTINGS,
 } from "../../utils";
 
 const PATH = "settings";
@@ -109,9 +110,15 @@ export const settingsNoAuth = {
   statusCode: 200,
 };
 
+export const settingsPortalDeactivate = {
+  ...settingsNoAuth,
+  response: { ...settingsNoAuth.response, tenantStatus: 1 },
+};
+
 export const settings = (headers?: Headers): Response => {
   let isWizard = false;
   let isWizardWithAmi = false;
+  let isPortalDeactivate = false;
 
   if (headers?.get(HEADER_WIZARD_SETTINGS)) {
     isWizard = true;
@@ -121,9 +128,15 @@ export const settings = (headers?: Headers): Response => {
     isWizardWithAmi = true;
   }
 
+  if (headers?.get(HEADER_PORTAL_DEACTIVATE_SETTINGS)) {
+    isPortalDeactivate = true;
+  }
+
   if (isWizard) return new Response(JSON.stringify(settingsWizzard));
   if (isWizardWithAmi)
     return new Response(JSON.stringify(settingsWizzardWithAmi));
+  if (isPortalDeactivate)
+    return new Response(JSON.stringify(settingsPortalDeactivate));
 
   return new Response(JSON.stringify(settingsNoAuth));
 };

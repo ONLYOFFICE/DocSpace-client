@@ -69,6 +69,7 @@ import {
   confirmHandler,
   tfaAppHandler,
   scopesHandler,
+  companyInfoHandler,
 } from "@docspace/shared/__mocks__/e2e";
 
 const IS_TEST = process.env.E2E_TEST;
@@ -266,7 +267,9 @@ export async function getCompanyInfoSettings() {
     "GET",
   );
 
-  const res = await fetch(getCompanyInfoSettings);
+  const res = IS_TEST
+    ? companyInfoHandler()
+    : await fetch(getCompanyInfoSettings);
 
   if (!res.ok) throw new Error(res.statusText);
 
@@ -305,7 +308,7 @@ export async function getUserFromConfirm(
   );
 
   const res = IS_TEST
-    ? selfHandler(false, headers())
+    ? selfHandler(null, headers())
     : await fetch(getUserFromConfirm);
 
   if (!res.ok) return;

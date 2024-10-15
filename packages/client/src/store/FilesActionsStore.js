@@ -70,7 +70,7 @@ import {
   ValidationStatus,
   VDRIndexingAction,
 } from "@docspace/shared/enums";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
@@ -92,6 +92,8 @@ import {
 } from "@docspace/shared/utils/common";
 import uniqueid from "lodash/uniqueId";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { createLoader } from "@docspace/shared/utils/createLoader";
+
 import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
@@ -2370,9 +2372,16 @@ class FilesActionStore {
     const { clearActiveOperations } = this.uploadDataStore;
     const { addActiveItems } = this.filesStore;
 
+    const { endLoader, startLoader } = createLoader();
+
     try {
-      this.setGroupMenuBlocked(true);
-      addActiveItems(null, [item.id]);
+      startLoader(() =>
+        runInAction(() => {
+          this.setGroupMenuBlocked(true);
+          addActiveItems(null, [item.id]);
+        }),
+      );
+
       const response = await api.rooms.validatePublicRoomKey(item.requestToken);
 
       const isExpired = response.status === ValidationStatus.Expired;
@@ -2391,8 +2400,12 @@ class FilesActionStore {
       console.log(error);
       return false;
     } finally {
-      this.setGroupMenuBlocked(false);
-      clearActiveOperations([], [item.id]);
+      endLoader(() =>
+        runInAction(() => {
+          this.setGroupMenuBlocked(false);
+          clearActiveOperations([], [item.id]);
+        }),
+      );
     }
   };
 

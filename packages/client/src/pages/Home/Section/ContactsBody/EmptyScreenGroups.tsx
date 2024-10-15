@@ -24,30 +24,36 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import EmptyGroupLightIcon from "PUBLIC_DIR/images/emptyview/empty.groups.light.svg";
-import EmptyGroupDarkIcon from "PUBLIC_DIR/images/emptyview/empty.groups.dark.svg";
-import EmptyScreenPersonSvgLight from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.light.svg";
-import EmptyScreenPersonSvgDark from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.dark.svg";
-
-import ClearEmptyFilterSvg from "PUBLIC_DIR/images/clear.empty.filter.svg";
-import GroupIcon from "PUBLIC_DIR/images/emptyview/group.svg";
-
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
 
 import { Events } from "@docspace/shared/enums";
 import { EmptyView } from "@docspace/shared/components/empty-view";
 
+import EmptyGroupLightIcon from "PUBLIC_DIR/images/emptyview/empty.groups.light.svg";
+import EmptyGroupDarkIcon from "PUBLIC_DIR/images/emptyview/empty.groups.dark.svg";
+import EmptyScreenPersonSvgLight from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.light.svg";
+import EmptyScreenPersonSvgDark from "PUBLIC_DIR/images/emptyFilter/empty.filter.people.dark.svg";
+import ClearEmptyFilterSvg from "PUBLIC_DIR/images/clear.empty.filter.svg";
+import GroupIcon from "PUBLIC_DIR/images/emptyview/group.svg";
+
 import { resetContactsGroupsFilter } from "SRC_DIR/helpers/contacts";
+
+type EmptyScreenGroupsProps = {
+  isRoomAdmin: boolean;
+  isCollaborator: boolean;
+  groupsIsFiltered: boolean;
+  setIsLoading: (value: boolean) => void;
+};
 
 const EmptyScreenGroups = ({
   isRoomAdmin,
   isCollaborator,
   groupsIsFiltered,
   setIsLoading,
-  theme,
-}) => {
+}: EmptyScreenGroupsProps) => {
   const { t } = useTranslation([
     "People",
     "PeopleTranslations",
@@ -55,12 +61,15 @@ const EmptyScreenGroups = ({
     "Common",
   ]);
 
-  const onCreateRoom = () => {
+  const theme = useTheme();
+
+  const onCreateGroup = () => {
     const event = new Event(Events.GROUP_CREATE);
+
     window.dispatchEvent(event);
   };
 
-  const onResetFilter = (event) => {
+  const onResetFilter = (event: React.MouseEvent) => {
     event.preventDefault();
     setIsLoading(true);
     resetContactsGroupsFilter();
@@ -88,9 +97,6 @@ const EmptyScreenGroups = ({
     return t("Common:ThisSectionIsEmpty");
   };
 
-  /**
-   * @returns {import("@docspace/shared/components/empty-view").EmptyViewOptionsType}
-   */
   const getOptions = () => {
     if (groupsIsFiltered) {
       return {
@@ -110,7 +116,7 @@ const EmptyScreenGroups = ({
         description: t("EmptyView:EmptyGroupsCreateGroupOptionDescription"),
         icon: <GroupIcon />,
         disabled: isRoomAdmin,
-        onClick: onCreateRoom,
+        onClick: onCreateGroup,
       },
     ];
   };
@@ -125,21 +131,22 @@ const EmptyScreenGroups = ({
   );
 };
 
-export default inject(({ peopleStore, clientLoadingStore, settingsStore }) => {
-  const { isRoomAdmin, isCollaborator } = peopleStore.userStore.user;
-  const { groupsIsFiltered } = peopleStore.groupsStore;
+export default inject(
+  ({ peopleStore, clientLoadingStore, userStore }: TStore) => {
+    const { isRoomAdmin, isCollaborator } = userStore.user!;
+    const { groupsIsFiltered } = peopleStore.groupsStore!;
 
-  const { setIsSectionBodyLoading } = clientLoadingStore;
+    const { setIsSectionBodyLoading } = clientLoadingStore;
 
-  const setIsLoading = (param) => {
-    setIsSectionBodyLoading(param);
-  };
+    const setIsLoading = (param: boolean) => {
+      setIsSectionBodyLoading(param);
+    };
 
-  return {
-    isRoomAdmin,
-    isCollaborator,
-    groupsIsFiltered,
-    setIsLoading,
-    theme: settingsStore.theme,
-  };
-})(observer(EmptyScreenGroups));
+    return {
+      isRoomAdmin,
+      isCollaborator,
+      groupsIsFiltered,
+      setIsLoading,
+    };
+  },
+)(observer(EmptyScreenGroups));

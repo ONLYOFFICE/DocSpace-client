@@ -33,6 +33,9 @@ import { Tabs } from "@docspace/shared/components/tabs";
 import { Box } from "@docspace/shared/components/box";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { TUser } from "@docspace/shared/api/people/types";
+import { Badge } from "@docspace/shared/components/badge";
+import { globalColors } from "@docspace/shared/themes";
+import Filter from "@docspace/shared/api/people/filter";
 
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
@@ -44,20 +47,19 @@ import {
   GUESTS_ROUTE_WITH_FILTER,
   PEOPLE_ROUTE_WITH_FILTER,
 } from "SRC_DIR/helpers/contacts";
-import { Badge } from "@docspace/shared/components/badge";
-import { globalColors } from "@docspace/shared/themes";
-import Filter from "@docspace/shared/api/people/filter";
 
 type ContactsTabsProps = {
-  showBodyLoader: ClientLoadingStore["showBodyLoader"];
+  showFilterLoader: ClientLoadingStore["showFilterLoader"];
 
   setUsersSelection: UsersStore["setSelection"];
   setUsersBufferSelection: UsersStore["setBufferSelection"];
+  isUsersFetched: UsersStore["isUsersFetched"];
 
   setGroupsSelection: GroupsStore["setSelection"];
   setGroupsBufferSelection: GroupsStore["setBufferSelection"];
+  isGroupsFetched: GroupsStore["isGroupsFetched"];
 
-  setIsSectionFilterLoading: ClientLoadingStore["setIsSectionFilterLoading"];
+  setIsSectionBodyLoading: ClientLoadingStore["setIsSectionBodyLoading"];
 
   userId: TUser["id"];
   isVisitor: TUser["isVisitor"];
@@ -66,16 +68,19 @@ type ContactsTabsProps = {
 };
 
 const ContactsTabs = ({
-  showBodyLoader,
+  showFilterLoader,
   setUsersSelection,
   setGroupsSelection,
   setUsersBufferSelection,
   setGroupsBufferSelection,
-  setIsSectionFilterLoading,
+  setIsSectionBodyLoading,
   userId,
   isVisitor,
   isCollaborator,
   isRoomAdmin,
+
+  isUsersFetched,
+  isGroupsFetched,
 }: ContactsTabsProps) => {
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
@@ -88,14 +93,14 @@ const ContactsTabs = ({
     setUsersBufferSelection(null);
     setGroupsSelection([]);
     setGroupsBufferSelection(null);
-    setIsSectionFilterLoading(true, true);
+    setIsSectionBodyLoading(true, isUsersFetched);
     navigate(PEOPLE_ROUTE_WITH_FILTER);
   };
 
   const onGroups = () => {
     setUsersSelection([]);
     setUsersBufferSelection(null);
-    setIsSectionFilterLoading(true, true);
+    setIsSectionBodyLoading(true, isGroupsFetched);
 
     navigate(GROUPS_ROUTE_WITH_FILTER);
   };
@@ -106,7 +111,7 @@ const ContactsTabs = ({
     setUsersBufferSelection(null);
     setGroupsSelection([]);
     setGroupsBufferSelection(null);
-    setIsSectionFilterLoading(true, true);
+    setIsSectionBodyLoading(true, isUsersFetched);
 
     const filter = Filter.getDefault();
 
@@ -120,7 +125,7 @@ const ContactsTabs = ({
 
   if (contactsView === "inside_group") return null;
 
-  if (showBodyLoader) return <SectionSubmenuSkeleton />;
+  if (showFilterLoader) return <SectionSubmenuSkeleton />;
 
   const items = [
     {
@@ -174,7 +179,7 @@ export default inject(
     clientLoadingStore: ClientLoadingStore;
     userStore: UserStore;
   }) => {
-    const { showBodyLoader, setIsSectionFilterLoading } = clientLoadingStore;
+    const { showFilterLoader, setIsSectionBodyLoading } = clientLoadingStore;
     const { usersStore, groupsStore } = peopleStore;
 
     const {
@@ -187,25 +192,32 @@ export default inject(
     const {
       setSelection: setUsersSelection,
       setBufferSelection: setUsersBufferSelection,
+
+      isUsersFetched,
     } = usersStore!;
     const {
       setSelection: setGroupsSelection,
       setBufferSelection: setGroupsBufferSelection,
+
+      isGroupsFetched,
     } = groupsStore!;
 
     return {
-      showBodyLoader,
+      showFilterLoader,
       setUsersSelection,
       setUsersBufferSelection,
       setGroupsSelection,
       setGroupsBufferSelection,
 
-      setIsSectionFilterLoading,
+      setIsSectionBodyLoading,
 
       userId,
       isVisitor,
       isCollaborator,
       isRoomAdmin,
+
+      isUsersFetched,
+      isGroupsFetched,
     };
   },
 )(observer(ContactsTabs));

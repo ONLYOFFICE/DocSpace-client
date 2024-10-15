@@ -68,6 +68,8 @@ class GroupsStore {
 
   groupsIsIsLoading = false;
 
+  isGroupsFetched = false;
+
   currentGroup: TGroup | null = null;
 
   insideGroupBackUrl: string | null = null;
@@ -91,6 +93,10 @@ class GroupsStore {
 
     makeAutoObservable(this);
   }
+
+  setIsGroupsFetched = (isGroupsFetched: boolean) => {
+    this.isGroupsFetched = isGroupsFetched;
+  };
 
   // Groups Filter
 
@@ -174,6 +180,8 @@ class GroupsStore {
 
     const res = await groupsApi.getGroups(filterData);
     filterData.total = res.total;
+
+    this.setIsGroupsFetched(true);
 
     if (updateFilter) this.setFilterParams(filterData);
 

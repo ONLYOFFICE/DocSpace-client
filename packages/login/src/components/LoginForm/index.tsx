@@ -457,11 +457,9 @@ const LoginForm = ({
     isCaptchaSuccessful,
     linkData,
     router,
-    baseDomain,
     clientId,
     referenceUrl,
     baseDomain,
-    linkData,
     isPublicAuth,
     deletePortalData,
   ]);

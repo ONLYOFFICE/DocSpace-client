@@ -324,6 +324,7 @@ class ContactsConextOptionsStore {
       title: getUserTypeTranslation(EmployeeType.Admin, t),
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
       "data-action": EmployeeType.Admin,
+      action: EmployeeType.Admin,
       key: EmployeeType.Admin,
       isActive: item ? isAdmin : userSelectionRole === EmployeeType.Admin,
     };
@@ -335,6 +336,7 @@ class ContactsConextOptionsStore {
       title: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
       "data-action": EmployeeType.RoomAdmin,
+      action: EmployeeType.RoomAdmin,
       key: EmployeeType.RoomAdmin,
       isActive: item
         ? isRoomAdmin
@@ -347,6 +349,7 @@ class ContactsConextOptionsStore {
       label: getUserTypeTranslation(EmployeeType.User, t),
       title: getUserTypeTranslation(EmployeeType.User, t),
       "data-action": EmployeeType.User,
+      action: EmployeeType.User,
       onClick: (e: TContextMenuValueTypeOnClick) => this.onChangeType(e),
       isActive: item ? isCollaborator : userSelectionRole === EmployeeType.User,
     };

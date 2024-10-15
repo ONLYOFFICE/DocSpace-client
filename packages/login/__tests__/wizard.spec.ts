@@ -30,6 +30,7 @@ import {
   HEADER_WIZARD_SETTINGS,
   HEADER_LICENCE_REQUIRED,
   endpoints,
+  HEADER_WIZARD_WITH_AMI_SETTINGS,
 } from "@docspace/shared/__mocks__/e2e";
 
 import { expect, test } from "./fixtures/base";
@@ -158,5 +159,35 @@ test("wizard with license error", async ({ page, mockRequest }) => {
     "desktop",
     "wizard",
     "wizard-with-license-error.png",
+  ]);
+});
+
+test("wizard with ami render", async ({ page, mockRequest }) => {
+  await mockRequest.setHeaders(NEXT_REQUEST_URL, [
+    HEADER_WIZARD_WITH_AMI_SETTINGS,
+  ]);
+
+  await page.goto(URL);
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "wizard",
+    "wizard-with-ami-render.png",
+  ]);
+});
+
+test("wizard with ami error", async ({ page, mockRequest }) => {
+  await mockRequest.setHeaders(NEXT_REQUEST_URL, [
+    HEADER_WIZARD_WITH_AMI_SETTINGS,
+  ]);
+
+  await page.goto(URL);
+
+  await page.getByTestId("button").click();
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "wizard",
+    "wizard-with-ami-error.png",
   ]);
 });

@@ -24,28 +24,34 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import {
-  TSelectorCancelButton,
-  TSelectorHeader,
-  TSelectorItem,
-} from "../../components/selector/Selector.types";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { StyledHistoryBlockLoader, StyledHistoryLoader } from "../body.styled";
 
-import { RoomsType } from "../../enums";
+const HistoryItemLoader = () => {
+  return (
+    <StyledHistoryLoader>
+      <StyledHistoryBlockLoader>
+        <div className="content">
+          <RectangleSkeleton
+            className="avatar"
+            width="32px"
+            height="32px"
+            borderRadius="50%"
+          />
+          <div className="message">
+            <RectangleSkeleton width="107px" height="16px" borderRadius="3px" />
+            <RectangleSkeleton width="176px" height="16px" borderRadius="3px" />
+          </div>
+          <RectangleSkeleton
+            className="date"
+            width="107px"
+            height="16px"
+            borderRadius="3px"
+          />
+        </div>
+      </StyledHistoryBlockLoader>
+    </StyledHistoryLoader>
+  );
+};
 
-export type RoomSelectorProps = TSelectorHeader &
-  TSelectorCancelButton & {
-    id?: string;
-    className?: string;
-    style?: React.CSSProperties;
-
-    isMultiSelect: boolean;
-
-    onSubmit: (items: TSelectorItem[]) => void | Promise<void>;
-    roomType?: RoomsType | RoomsType[];
-    excludeItems?: (number | string | undefined)[];
-    setIsDataReady?: (value: boolean) => void;
-    submitButtonLabel?: string;
-    withSearch?: boolean;
-
-    disableThirdParty?: boolean;
-  };
+export default HistoryItemLoader;

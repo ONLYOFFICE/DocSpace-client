@@ -839,6 +839,8 @@ class UploadDataStore {
     const { files, setFiles, folders, setFolders, filter, setFilter } =
       this.filesStore;
 
+    const { filesCount, setFilesCount } = this.selectedFolderStore;
+
     if (window.location.pathname.indexOf("/history") === -1) {
       const newFiles = files;
       const newFolders = folders;

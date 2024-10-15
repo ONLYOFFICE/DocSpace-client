@@ -24,9 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable import/no-dynamic-require */
-/* eslint-disable global-require */
-const getSvgByName = (name: string) => `${name.replace(/^\./, "")}.svg`;
+/* eslint-disable import/no-dynamic-require, global-require */
+const getSvgByName = (name: string): string => `${name.replace(/^\./, "")}.svg`;
 
 const getUrlByName = (name: string, size: string | number, type = "") =>
   require(`PUBLIC_DIR/images/icons/${size}${type}/${getSvgByName(name)}?url`);
@@ -36,7 +35,7 @@ const getIconsMap = (
   formats: string[],
   folders: string[],
   rooms: string[] = [],
-) => {
+): Map<string, string> => {
   const mapIcons = (icons: string[], type = ""): [string, string][] =>
     icons.map((icon) => [getSvgByName(icon), getUrlByName(icon, size, type)]);
 
@@ -44,10 +43,9 @@ const getIconsMap = (
   const foldersMap = mapIcons(folders, "/folder");
   const roomsMap = mapIcons(rooms, "/room");
 
-  const arr: [string, string][] = [...formatsMap, ...foldersMap, ...roomsMap];
-
-  return new Map(arr);
+  return new Map([...formatsMap, ...foldersMap, ...roomsMap]);
 };
+
 const formatIcons = [
   ".avi",
   ".csv",

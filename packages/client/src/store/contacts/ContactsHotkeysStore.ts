@@ -49,7 +49,11 @@ class ContactsHotkeysStore {
   get isAccountsPage() {
     const groupId = new URLSearchParams(window.location.search).get("group");
 
-    return window.location.pathname.includes("/accounts/people") || groupId;
+    return (
+      window.location.pathname.includes("/accounts/people") ||
+      window.location.pathname.includes("/accounts/guests") ||
+      groupId
+    );
   }
 
   get accountsList() {

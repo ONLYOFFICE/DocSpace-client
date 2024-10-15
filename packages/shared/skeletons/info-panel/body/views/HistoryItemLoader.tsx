@@ -24,40 +24,34 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import { StyledHistoryBlockLoader, StyledHistoryLoader } from "../body.styled";
 
-import { TUser } from "@docspace/shared/api/people/types";
-
-import { MembersSelector } from "../MembersSelector/MembersSelector";
-
-type SelectMembersPanelProps = {
-  onClose: () => void;
-  onParentPanelClose: () => void;
-  groupManager: TUser | null;
-  groupMembers: TUser[];
-  addMembers: (members: TUser[]) => void;
-};
-
-export const SelectMembersPanel = ({
-  onClose,
-  onParentPanelClose,
-  groupManager,
-  groupMembers,
-  addMembers,
-}: SelectMembersPanelProps) => {
-  const invitedUsers = React.useMemo(
-    () => [...groupMembers].map((g) => g?.id),
-    [groupMembers],
-  );
-
-  if (groupManager) invitedUsers.push(groupManager.id);
-
+const HistoryItemLoader = () => {
   return (
-    <MembersSelector
-      onClose={onClose}
-      onParentPanelClose={onParentPanelClose}
-      addMembers={addMembers}
-      invitedUsers={invitedUsers}
-    />
+    <StyledHistoryLoader>
+      <StyledHistoryBlockLoader>
+        <div className="content">
+          <RectangleSkeleton
+            className="avatar"
+            width="32px"
+            height="32px"
+            borderRadius="50%"
+          />
+          <div className="message">
+            <RectangleSkeleton width="107px" height="16px" borderRadius="3px" />
+            <RectangleSkeleton width="176px" height="16px" borderRadius="3px" />
+          </div>
+          <RectangleSkeleton
+            className="date"
+            width="107px"
+            height="16px"
+            borderRadius="3px"
+          />
+        </div>
+      </StyledHistoryBlockLoader>
+    </StyledHistoryLoader>
   );
 };
+
+export default HistoryItemLoader;

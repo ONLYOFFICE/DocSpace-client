@@ -28,7 +28,7 @@ import React from "react";
 import styled from "styled-components";
 import { Meta, StoryObj } from "@storybook/react";
 
-import CatalogFolderReactSvg from "PUBLIC_DIR/images/catalog.folder.react.svg";
+import CatalogFolderReactSvg from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg";
 import CheckReactSvgUrl from "PUBLIC_DIR/images/check.react.svg?url";
 import ItemActiveReactSvgUrl from "PUBLIC_DIR/images/item.active.react.svg?url";
 import { IconSizeType, commonIconsStyles } from "../../utils";

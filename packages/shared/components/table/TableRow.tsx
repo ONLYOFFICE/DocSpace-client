@@ -49,6 +49,7 @@ const TableRow = (props: TableRowProps) => {
     title,
     getContextModel,
     badgeUrl,
+    isIndexEditingMode,
     ...rest
   } = props;
 
@@ -76,41 +77,48 @@ const TableRow = (props: TableRowProps) => {
   return (
     <StyledTableRow
       onContextMenu={onContextMenu}
+      isIndexEditingMode={isIndexEditingMode}
       className={`${className} table-container_row`}
       {...rest}
     >
       {children}
-      <div>
-        <TableCell
-          {...selectionProp}
-          style={style}
-          forwardedRef={row}
-          className={`${selectionProp?.className} table-container_row-context-menu-wrapper`}
-        >
-          <ContextMenu
-            onHide={onHideContextMenu}
-            ref={cm}
-            model={contextOptions || []}
-            getContextModel={getContextModel}
-            withBackdrop
-            badgeUrl={badgeUrl}
-          />
-          {renderContext ? (
-            <ContextMenuButton
-              isFill
-              className="expandButton"
-              getData={getOptions}
-              directionX="right"
-              displayType={ContextMenuButtonDisplayType.toggle}
-              onClick={onContextMenu}
-              onClose={onHideContextMenu}
-              title={title}
-            />
-          ) : (
-            <div className="expandButton"> </div>
-          )}
-        </TableCell>
-      </div>
+      {isIndexEditingMode ? (
+        <></>
+      ) : (
+        <div>
+          <TableCell
+            {...selectionProp}
+            style={style}
+            forwardedRef={row}
+            className={`${selectionProp?.className} table-container_row-context-menu-wrapper`}
+          >
+            <>
+              <ContextMenu
+                onHide={onHideContextMenu}
+                ref={cm}
+                model={contextOptions || []}
+                getContextModel={getContextModel}
+                withBackdrop
+                badgeUrl={badgeUrl}
+              />
+              {renderContext ? (
+                <ContextMenuButton
+                  isFill
+                  className="expandButton"
+                  getData={getOptions}
+                  directionX="right"
+                  displayType={ContextMenuButtonDisplayType.toggle}
+                  onClick={onContextMenu}
+                  onClose={onHideContextMenu}
+                  title={title}
+                />
+              ) : (
+                <div className="expandButton"> </div>
+              )}
+            </>
+          </TableCell>
+        </div>
+      )}
     </StyledTableRow>
   );
 };

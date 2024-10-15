@@ -5,7 +5,6 @@
   "CreateSpaceDescription": "您已成功将您的域名连接到您的 IP 地址。要编辑空间地址设置，您需要设置未来的{{productName}}名称",
   "CreatingPortal": "创建新的{{productName}}",
   "CurrentSpace": "当前协作空间",
-  "DeletePortalText": "请注意：只有所有者才能删除选定的{{productName}}。<1>{{domain}}</1>的所有者是 <1>{{displayName}}</1>（<5>{{email}}</5>）。如果您不是所有者，您将无法通过单击删除按钮访问{{productName}}删除设置，并将被重定向到房间部分。",
   "DomainName": "域名",
   "DomainNotFound": "未找到域，请在 DNS 设置中进行查阅",
   "DomainSettings": "网域设置",

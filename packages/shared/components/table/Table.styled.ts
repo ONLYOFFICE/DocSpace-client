@@ -54,6 +54,11 @@ const StyledTableContainer = styled.div<{ useReactWindow?: boolean }>`
     min-width: 10%;
   }
 
+  .indexing-separator {
+    background-color: ${(props) =>
+      props.theme.tableContainer.indexingSeparator};
+  }
+
   .resize-handle {
     display: block;
     cursor: ew-resize;
@@ -154,12 +159,36 @@ const StyledTableGroupMenu = styled.div<{ checkboxMargin?: string }>`
 
   margin: 0;
 
+  .table-header_icon {
+    display: flex;
+
+    align-items: center;
+    align-self: center;
+    justify-content: center;
+    margin-block: 0;
+    margin-inline: auto 20px;
+    height: 100%;
+    width: auto;
+
+    padding-inline-start: 20px;
+    padding-inline-end: 0;
+
+    .table-header_icon-button {
+      margin-inline-end: 8px;
+    }
+  }
+
+  .table-container_label-element,
   .table-container_group-menu-checkbox {
     margin-inline-start: ${({ checkboxMargin }) => checkboxMargin ?? "28px"};
 
     @media ${tablet} {
       margin-inline-start: 24px;
     }
+  }
+
+  .table-container_label-element {
+    white-space: nowrap;
   }
 
   .table-container_group-menu-separator {
@@ -208,20 +237,6 @@ StyledTableGroupMenu.defaultProps = { theme: Base };
 const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme)<{
   isInfoPanelVisible?: boolean;
 }>`
-  display: flex;
-
-  align-items: center;
-  align-self: center;
-  justify-content: center;
-  margin-block: 0;
-  margin-inline: auto 20px;
-  height: 100%;
-  width: auto;
-
-  .info-panel-toggle {
-    margin-inline-end: 8px;
-  }
-
   ${(props) =>
     props.isInfoPanelVisible &&
     css`
@@ -237,9 +252,6 @@ const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme)<{
         }
       }
     `}
-
-  padding-inline-start: 20px;
-  padding-inline-end: 0;
 
   @media ${tablet} {
     display: none;
@@ -293,6 +305,7 @@ const StyledTableHeaderCell = styled.div<{
   showIcon?: boolean;
   sortingVisible?: boolean;
   isActive?: boolean;
+  isShort?: boolean;
   sorted?: boolean;
 }>`
   cursor: ${(props) =>
@@ -344,6 +357,12 @@ const StyledTableHeaderCell = styled.div<{
   .table-container_header-item {
     display: grid;
     grid-template-columns: 1fr 22px;
+
+    ${(isShort) =>
+      isShort &&
+      css`
+        grid-template-columns: 1fr 12px;
+      `};
 
     margin-inline-end: 8px;
 
@@ -403,6 +422,7 @@ const StyledTableBody = styled.div<{
 
 const StyledTableRow = styled.div<{
   dragging?: boolean;
+  isIndexEditingMode?: boolean;
   isActive?: boolean;
   checked?: boolean;
 }>`
@@ -438,7 +458,7 @@ const StyledTableRow = styled.div<{
 
   .droppable-hover {
     background: ${(props) =>
-      props.dragging
+      props.dragging && !props.isIndexEditingMode
         ? `${props.theme.dragAndDrop.acceptBackground} !important`
         : "none"};
   }

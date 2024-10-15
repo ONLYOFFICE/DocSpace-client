@@ -61,7 +61,15 @@ import {
   portalPasswordSettingHandler,
   machineNameHandler,
   portalTimeZoneHandler,
+  capabilitiesHandler,
+  ssoHandler,
+  selfHandler,
+  thirdPartyProviderHandler,
+  getClientHandler,
   confirmHandler,
+  tfaAppHandler,
+  scopesHandler,
+  companyInfoHandler,
 } from "@docspace/shared/__mocks__/e2e";
 
 const IS_TEST = process.env.E2E_TEST;
@@ -139,7 +147,9 @@ export async function getThirdPartyProviders() {
     "GET",
   );
 
-  const res = await fetch(getThirdParty);
+  const res = IS_TEST
+    ? thirdPartyProviderHandler(headers())
+    : await fetch(getThirdParty);
 
   if (!res.ok) return;
 
@@ -151,7 +161,9 @@ export async function getThirdPartyProviders() {
 export async function getCapabilities() {
   const [getCapabilities] = createRequest([`/capabilities`], [["", ""]], "GET");
 
-  const res = await fetch(getCapabilities);
+  const res = IS_TEST
+    ? capabilitiesHandler(headers())
+    : await fetch(getCapabilities);
 
   if (!res.ok) return;
 
@@ -163,7 +175,7 @@ export async function getCapabilities() {
 export async function getSSO() {
   const [getSSO] = createRequest([`/settings/ssov2`], [["", ""]], "GET");
 
-  const res = await fetch(getSSO);
+  const res = IS_TEST ? ssoHandler() : await fetch(getSSO);
 
   if (!res.ok) return;
 
@@ -179,7 +191,7 @@ export async function getUser() {
   const [getUser] = createRequest([`/people/@self`], [["", ""]], "GET");
 
   if (!cookie?.includes("asc_auth_key")) return undefined;
-  const userRes = await fetch(getUser);
+  const userRes = IS_TEST ? selfHandler() : await fetch(getUser);
 
   if (userRes.status === 401) return undefined;
 
@@ -193,7 +205,7 @@ export async function getUser() {
 export async function getScopeList() {
   const [getScopeList] = createRequest([`/scopes`], [["", ""]], "GET");
 
-  const scopeList = await fetch(getScopeList);
+  const scopeList = IS_TEST ? scopesHandler() : await fetch(getScopeList);
 
   if (!scopeList.ok) return;
 
@@ -209,7 +221,9 @@ export async function getOAuthClient(clientId: string) {
     "GET",
   );
 
-  const oauthClient = await fetch(getOAuthClient);
+  const oauthClient = IS_TEST
+    ? getClientHandler()
+    : await fetch(getOAuthClient);
 
   if (!oauthClient.ok) return;
 
@@ -236,35 +250,12 @@ export async function getPortalCultures() {
   return cultures.response as TPortalCultures;
 }
 
-export async function gitAvailablePortals(data: {
-  email: string;
-  passwordHash: string;
-}) {
-  const [gitAvailablePortals] = createRequest(
-    [`/portal/signin`],
-    [["Content-Type", "application/json"]],
-    "POST",
-    JSON.stringify(data),
-    true,
-  );
-
-  console.log(gitAvailablePortals.url);
-
-  const response = await fetch(gitAvailablePortals);
-  if (!response.ok) return null;
-
-  const { response: portals } = await response.json();
-
-  console.log(portals);
-
-  // return config;
-}
-
 export async function getConfig() {
   const baseUrl = getBaseUrl();
-  const config = await (
-    await fetch(`${baseUrl}/static/scripts/config.json`)
-  ).json();
+
+  const config = IS_TEST
+    ? new Response(JSON.stringify({}))
+    : await (await fetch(`${baseUrl}/static/scripts/config.json`)).json();
 
   return config;
 }
@@ -276,7 +267,9 @@ export async function getCompanyInfoSettings() {
     "GET",
   );
 
-  const res = await fetch(getCompanyInfoSettings);
+  const res = IS_TEST
+    ? companyInfoHandler()
+    : await fetch(getCompanyInfoSettings);
 
   if (!res.ok) throw new Error(res.statusText);
 
@@ -300,7 +293,6 @@ export async function getPortalPasswordSettings(
   if (!res.ok) return;
 
   const passwordSettings = await res.json();
-  console.log("passwordSettings", passwordSettings);
 
   return passwordSettings.response as TPasswordSettings;
 }
@@ -315,7 +307,9 @@ export async function getUserFromConfirm(
     "GET",
   );
 
-  const res = await fetch(getUserFromConfirm);
+  const res = IS_TEST
+    ? selfHandler(null, headers())
+    : await fetch(getUserFromConfirm);
 
   if (!res.ok) return;
 
@@ -387,7 +381,7 @@ export async function getTfaSecretKeyAndQR(confirmKey: string | null = null) {
     "GET",
   );
 
-  const res = await fetch(getTfaSecretKeyAndQR);
+  const res = IS_TEST ? tfaAppHandler() : await fetch(getTfaSecretKeyAndQR);
 
   if (!res.ok) throw new Error(res.statusText);
 

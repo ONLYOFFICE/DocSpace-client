@@ -64,6 +64,7 @@ export const PERCENTAGE_FOR_SHOWING_BAR = 90;
 export const LANGUAGE = "asc_language";
 
 export const MOBILE_FOOTER_HEIGHT = "64px";
+export const ASIDE_PADDING_AFTER_LAST_ITEM = "12px";
 
 export const COOKIE_EXPIRATION_YEAR = 31536000000;
 export const ARTICLE_PINNED_KEY = "asc_article_pinned_key";
@@ -165,6 +166,10 @@ export const RTL_LANGUAGES = Object.freeze([
 ]);
 
 export const DEFAULT_FONT_FAMILY = "Open Sans, sans-serif, Arial";
+
+export const ONE_MEGABYTE = 1024 * 1024;
+export const COMPRESSION_RATIO = 2;
+export const NO_COMPRESSION_RATIO = 1;
 
 // Contains system fonts used in mac, ios, windows, android and linux
 export const SYSTEM_FONT_FAMILY =

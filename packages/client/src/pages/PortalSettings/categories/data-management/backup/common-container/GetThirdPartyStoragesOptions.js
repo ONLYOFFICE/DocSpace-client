@@ -46,6 +46,7 @@ export const getOptions = (storageBackup, needDefaultParameter = false) => {
       key: id,
       label: title,
       disabled: false,
+      connected: isSet,
     });
 
     storagesInfo = {

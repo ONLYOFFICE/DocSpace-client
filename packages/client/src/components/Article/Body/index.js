@@ -77,8 +77,11 @@ const ArticleBodyContent = (props) => {
 
   const location = useLocation();
 
+  const getHashDate = () => new Date().getTime();
+
   const [disableBadgeClick, setDisableBadgeClick] = React.useState(false);
   const [activeItemId, setActiveItemId] = React.useState(null);
+  const [hashDate, setHashDate] = React.useState(getHashDate);
 
   const getLinkData = React.useCallback(
     (folderId, title, rootFolderType, canCreate) => {
@@ -160,7 +163,7 @@ const ArticleBodyContent = (props) => {
           break;
       }
 
-      path += `?${params}&date=${new Date().getTime()}`;
+      path += `?${params}&date=${hashDate}`;
 
       return { path, state };
     },
@@ -170,6 +173,7 @@ const ArticleBodyContent = (props) => {
       myFolderId,
       recycleBinFolderId,
       activeItemId,
+      hashDate,
     ],
   );
 
@@ -184,6 +188,8 @@ const ArticleBodyContent = (props) => {
       let withTimer = isAccountsClick ? false : !!selectedFolderId;
 
       if (isAccountsClick) clearFiles();
+
+      setHashDate(getHashDate);
 
       setSelection?.([]);
 
@@ -203,19 +209,6 @@ const ArticleBodyContent = (props) => {
 
       setSelection,
     ],
-  );
-
-  const onShowNewFilesPanel = React.useCallback(
-    async (folderId) => {
-      if (disableBadgeClick) return;
-
-      setDisableBadgeClick(true);
-
-      await props.setNewFilesPanelVisible(true, [`${folderId}`]);
-
-      setDisableBadgeClick(false);
-    },
-    [disableBadgeClick],
   );
 
   React.useEffect(() => {
@@ -278,7 +271,6 @@ const ArticleBodyContent = (props) => {
     <>
       <Items
         onClick={onClick}
-        onBadgeClick={onShowNewFilesPanel}
         getLinkData={getLinkData}
         showText={showText}
         onHide={toggleArticleOpen}
@@ -299,7 +291,6 @@ export default inject(
     settingsStore,
     filesStore,
     treeFoldersStore,
-    dialogsStore,
     selectedFolderStore,
     clientLoadingStore,
     userStore,
@@ -321,8 +312,6 @@ export default inject(
 
     const { roomsFolderId, archiveFolderId, myFolderId, recycleBinFolderId } =
       treeFoldersStore;
-
-    const { setNewFilesPanelVisible } = dialogsStore;
 
     const selectedFolderId = selectedFolderStore.id;
 
@@ -349,8 +338,6 @@ export default inject(
       showArticleLoader,
       isVisitor: userStore.user.isVisitor,
       userId: userStore.user?.id,
-
-      setNewFilesPanelVisible,
 
       firstLoad,
       isDesktopClient,

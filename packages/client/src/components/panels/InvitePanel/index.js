@@ -27,20 +27,22 @@
 import { useEffect, useState, useMemo, useRef } from "react";
 import { observer, inject } from "mobx-react";
 import { withTranslation, Trans } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
-import { EmployeeType, RoomsType } from "@docspace/shared/enums";
+import {
+  EmployeeType,
+  ShareAccessRights,
+  RoomsType,
+} from "@docspace/shared/enums";
 import { LOADER_TIMEOUT } from "@docspace/shared/constants";
 
 import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { isDesktop, isMobile } from "@docspace/shared/utils";
-
+import api from "@docspace/shared/api";
 import ItemsList from "./sub-components/ItemsList";
 import InviteInput from "./sub-components/InviteInput";
 import ExternalLinks from "./sub-components/ExternalLinks";
-
-import InfoBar from "./sub-components/InfoBar";
-import InvitePanelLoader from "./sub-components/InvitePanelLoader";
 
 import { Text } from "@docspace/shared/components/text";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -49,8 +51,9 @@ import {
   ModalDialog,
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
-import { getAccessOptions, getTopFreeRole } from "./utils";
-import AddUsersPanel from "../AddUsersPanel";
+import { fixAccess, getAccessOptions } from "./utils";
+import { checkIfAccessPaid } from "SRC_DIR/helpers";
+import PeopleSelector from "@docspace/shared/selectors/People";
 
 const InvitePanel = ({
   folders,
@@ -64,7 +67,6 @@ const InvitePanel = ({
   setRoomSecurity,
   getRoomSecurityInfo,
   defaultAccess,
-  inviteUsers,
   setInfoPanelIsMobileHidden,
   updateInfoPanelMembers,
   isRoomMembersPanelOpen,
@@ -77,6 +79,7 @@ const InvitePanel = ({
   setIsNewUserByCurrentUser,
   setInvitePaidUsersCount,
   isOwner,
+  isAdmin,
   standalone,
   hideSelector,
   isUserTariffLimit,
@@ -92,16 +95,13 @@ const InvitePanel = ({
   const [externalLinksVisible, setExternalLinksVisible] = useState(false);
   const [scrollAllPanelContent, setScrollAllPanelContent] = useState(false);
   const [activeLink, setActiveLink] = useState({});
-  const [infoBarIsVisible, setInfoBarIsVisible] = useState(true);
   const [addUsersPanelVisible, setAddUsersPanelVisible] = useState(false);
   const [isMobileView, setIsMobileView] = useState(isMobile());
   const [inputValue, setInputValue] = useState("");
   const [usersList, setUsersList] = useState([]);
   const [cultureKey, setCultureKey] = useState();
 
-  const onCloseBar = () => setInfoBarIsVisible(false);
-
-  const [selectedAccess, setSelectedAccess] = useState(defaultAccess);
+  const navigate = useNavigate();
 
   const inputsRef = useRef();
   const invitePanelBodyRef = useRef();
@@ -118,7 +118,7 @@ const InvitePanel = ({
       id: "user",
       title: "User",
       shareLink: "",
-      access: EmployeeType.User,
+      access: EmployeeType.RoomAdmin,
     },
     {
       id: "guest",
@@ -136,7 +136,7 @@ const InvitePanel = ({
       id: "collaborator",
       title: "Collaborator",
       shareLink: "",
-      access: EmployeeType.Collaborator,
+      access: EmployeeType.User,
     },
   ];
 
@@ -325,7 +325,7 @@ const InvitePanel = ({
       setIsLoading(true);
       const isRooms = roomId !== -1;
       const result = !isRooms
-        ? await inviteUsers(data)
+        ? await api.people.inviteUsers(data)
         : await setRoomSecurity(roomId, data);
 
       if (!isRooms) {
@@ -355,14 +355,20 @@ const InvitePanel = ({
       setIsLoading(false);
     } finally {
       if (roomId === -1) {
-        await getUsersList(filter, false);
+        const isPeoplePage =
+          window.location.pathname.includes("accounts/people");
+
+        if (isPeoplePage) {
+          await getUsersList(filter, false);
+        } else {
+          navigate("/accounts/people/filter");
+        }
       }
     }
   };
 
   const roomType = selectedRoom ? selectedRoom.roomType : -1;
   const hasInvitedUsers = !!inviteItems.length;
-  const hasAdmins = inviteItems.findIndex((u) => u.isAdmin || u.isOwner) > -1;
 
   const removeExist = (items) => {
     const filtered = items.reduce((unique, current) => {
@@ -414,9 +420,6 @@ const InvitePanel = ({
           usersList={usersList}
           setUsersList={setUsersList}
         />
-        {infoBarIsVisible && hasAdmins && (
-          <InfoBar t={t} onClose={onCloseBar} />
-        )}
         {hasInvitedUsers && (
           <ItemsList
             t={t}
@@ -449,26 +452,18 @@ const InvitePanel = ({
     setAddUsersPanelVisible(false);
   };
 
-  const addItems = (users) => {
-    const topFreeRole = getTopFreeRole(t, roomType);
+  const addItems = (users, access) => {
     users.forEach((u) => {
-      if (u.isGroup && checkIfAccessPaid(u.access)) {
-        u.access = topFreeRole.access;
-        u.warning = t("GroupMaxAvailableRoleWarning", {
-          roleName: topFreeRole.label,
-        });
-      }
+      u.access = access.access;
+      const isAccessPaid = checkIfAccessPaid(u.access);
 
-      if (
-        isUserTariffLimit &&
-        (!u.avatar || u.isVisitor) &&
-        isPaidUserRole(u.access)
-      ) {
-        const freeRole = getTopFreeRole(t, roomType)?.access;
+      if (isAccessPaid) {
+        if (u.isGroup || u.isVisitor || u.isCollaborator) {
+          u = fixAccess(u, t, roomType);
 
-        if (freeRole) {
-          u.access = freeRole;
-          toastr.error(<PaidQuotaLimitError />);
+          if (isUserTariffLimit) {
+            toastr.error(<PaidQuotaLimitError />);
+          }
         }
       }
     });
@@ -480,6 +475,7 @@ const InvitePanel = ({
     setInviteItems(filtered);
     setInputValue("");
     setUsersList([]);
+    closeUsersPanel();
   };
 
   const accessOptions = getAccessOptions(
@@ -488,6 +484,7 @@ const InvitePanel = ({
     false,
     true,
     isOwner,
+    isAdmin,
     standalone,
   );
 
@@ -501,6 +498,10 @@ const InvitePanel = ({
     [invitedUsers],
   );
 
+  const access =
+    defaultAccess ??
+    (isEncrypted ? ShareAccessRights.FullAccess : ShareAccessRights.ReadOnly);
+
   return (
     <ModalDialog
       visible={visible}
@@ -512,24 +513,37 @@ const InvitePanel = ({
     >
       {!hideSelector && addUsersPanelVisible && (
         <ModalDialog.Container>
-          <AddUsersPanel
-            onParentPanelClose={onClose}
-            onClose={closeUsersPanel}
-            visible={addUsersPanelVisible}
-            tempDataItems={inviteItems}
-            setDataItems={addItems}
-            accessOptions={accessOptions}
-            isMultiSelect
-            isEncrypted
-            defaultAccess={selectedAccess}
-            withoutBackground={isMobileView}
-            withBlur={!isMobileView}
-            roomId={roomId}
-            withGroups={!isPublicRoomType}
+          <PeopleSelector
+            useAside
+            onClose={() => {
+              onClose();
+              closeUsersPanel();
+            }}
+            onSubmit={addItems}
             withAccessRights
-            invitedUsers={invitedUsersArray}
+            accessRights={accessOptions}
+            selectedAccessRight={
+              accessOptions.filter((a) => a.access === access)[0]
+            }
+            onAccessRightsChange={() => {}}
+            isMultiSelect
             disableDisabledUsers
-            useAside={false}
+            withGroups={!isPublicRoomType}
+            roomId={roomId}
+            disableInvitedUsers={invitedUsersArray}
+            withGuests
+            withHeader
+            headerProps={{
+              // Todo: Update groups empty screen texts when they are ready
+              headerLabel: t("Common:ListAccounts"),
+              withoutBackButton: false,
+              withoutBorder: true,
+              onBackClick: onClose,
+              onClose: () => {
+                onClose();
+                closeUsersPanel();
+              },
+            }}
           />
         </ModalDialog.Container>
       )}
@@ -573,9 +587,7 @@ export default inject(
   }) => {
     const { theme, standalone } = settingsStore;
 
-    const { getUsersByQuery, inviteUsers, getUsersList } =
-      peopleStore.usersStore;
-    const { filter } = peopleStore.filterStore;
+    const { getUsersList, filter } = peopleStore.usersStore;
     const {
       setIsMobileHidden: setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
@@ -601,12 +613,11 @@ export default inject(
 
     const { maxCountManagersByQuota, isUserTariffLimit } = currentQuotaStore;
 
-    const { isOwner } = userStore.user;
+    const { isOwner, isAdmin } = userStore.user;
 
     return {
       folders,
       setInviteLanguage,
-      getUsersByQuery,
       getRoomSecurityInfo,
       inviteItems,
       roomId: invitePanelOptions.roomId,
@@ -617,7 +628,6 @@ export default inject(
       visible: invitePanelOptions.visible,
       defaultAccess: invitePanelOptions.defaultAccess,
       getFolderInfo,
-      inviteUsers,
       setInfoPanelIsMobileHidden,
       updateInfoPanelMembers,
       isRoomMembersPanelOpen,
@@ -633,6 +643,7 @@ export default inject(
       hideSelector: invitePanelOptions.hideSelector,
       isUserTariffLimit,
       isPaidUserAccess,
+      isAdmin,
     };
   },
 )(

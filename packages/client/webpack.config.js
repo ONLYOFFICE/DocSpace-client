@@ -81,7 +81,7 @@ const config = {
       },
       progress: true,
     },
-    port: 5001,
+    port: process.env.PORT ?? 5001,
     historyApiFallback: {
       // Paths with dots should still use the history fallback.
       // See https://github.com/facebook/create-react-app/issues/387.
@@ -346,13 +346,17 @@ module.exports = (env, argv) => {
           "./src/pages/PortalSettings/categories/common/Branding/additionalResources.js",
         "./CompanyInfoPage":
           "./src/pages/PortalSettings/categories/common/Branding/companyInfoSettings.js",
-        "./BackupPage": "./src/pages/PortalSettings/categories/data-management",
+        "./BackupPage":
+          "./src/pages/PortalSettings/categories/data-management/backup/manual-backup",
+        "./AutoBackupPage":
+          "./src/pages/PortalSettings/categories/data-management/backup/auto-backup",
         "./RestorePage":
           "./src/pages/PortalSettings/categories/data-management/backup/restore-backup",
         "./PaymentsPage": "./src/pages/PortalSettings/categories/payments",
         "./BonusPage": "./src/pages/Bonus",
         "./ChangeStorageQuotaDialog":
           "./src/components/dialogs/ChangeStorageQuotaDialog",
+        "./ConnectDialog": "./src/components/dialogs/ConnectDialog",
       },
       shared: {
         ...deps,

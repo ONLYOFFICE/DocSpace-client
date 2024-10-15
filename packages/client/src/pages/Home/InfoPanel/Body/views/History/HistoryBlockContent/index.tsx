@@ -47,7 +47,7 @@ const HistoryBlockContent = ({
   const { actionType, targetType } = getFeedInfo(feed);
 
   return (
-    <>
+    <div className="info-panel_history-block">
       {targetType === "user" && actionType === "update" && (
         <HistoryUserList feed={feed} />
       )}
@@ -59,7 +59,9 @@ const HistoryBlockContent = ({
       <HistoryMainText feed={feed} />
 
       {(targetType === "file" || targetType === "folder") &&
-        actionType !== "delete" && <HistoryMainTextFolderInfo feed={feed} />}
+        actionType !== "delete" && (
+          <HistoryMainTextFolderInfo feed={feed} actionType={actionType} />
+        )}
 
       {(targetType === "file" || targetType === "folder") &&
         (actionType === "rename" || historyWithFileList) && (
@@ -88,11 +90,11 @@ const HistoryBlockContent = ({
 
       {(targetType === "user" || targetType === "group") &&
         actionType === "update" && <HistoryUserGroupRoleChange feed={feed} />}
-    </>
+    </div>
   );
 };
 
-export default inject(({ infoPanelStore }) => {
+export default inject<TStore>(({ infoPanelStore }) => {
   const { historyWithFileList } = infoPanelStore;
   return { historyWithFileList };
 })(observer(HistoryBlockContent));

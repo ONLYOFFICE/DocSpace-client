@@ -3,16 +3,16 @@ name: Frontend tests
 on:
   push:
     branches: [develop]
-    paths: [packages/login/**,packages/shared/**,packages/doceditor/**]
+    paths: [packages/**, common/**]
   pull_request:
     branches: [develop]
-    paths: [packages/login/**,packages/shared/**,packages/doceditor/**]
+    paths: [packages/**, common/**]
 jobs:
   playwright:
     name: "Login e2e tests"
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.46.1-jammy
+      image: mcr.microsoft.com/playwright:v1.47.0-jammy
     steps:
       - uses: actions/checkout@v4
       - name: enable corepack
@@ -27,12 +27,12 @@ jobs:
         run: yarn test:build
       - name: Run tests
         run: yarn test:e2e
-      - uses: actions/upload-artifact@v4
-        if: ${{ !cancelled() }}
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30  
+      # - uses: actions/upload-artifact@v4
+      #   if: ${{ !cancelled() }}
+      #   with:
+      #     name: playwright-report
+      #     path: playwright-report/
+      #     retention-days: 30
   eslint:
     name: "Login and doceditor lint"
     runs-on: ubuntu-latest
@@ -48,4 +48,17 @@ jobs:
         run: yarn install
       - name: Lint login and doceditor
         run: yarn lint
-
+  common:
+    name: "Common tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        working-directory: ./common/tests
+        run: npm install
+      - name: Run common tests
+        working-directory: ./common/tests
+        run: npm run test

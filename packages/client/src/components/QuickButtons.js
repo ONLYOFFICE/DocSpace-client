@@ -29,28 +29,41 @@ import { isTablet as isTabletDevice } from "react-device-detect";
 import FileActionsLockedReactSvgUrl from "PUBLIC_DIR/images/file.actions.locked.react.svg?url";
 import FileActionsDownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
 import LinkReactSvgUrl from "PUBLIC_DIR/images/link.react.svg?url";
-import LockedReactSvgUrl from "PUBLIC_DIR/images/locked.react.svg?url";
+import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
 import FileActionsFavoriteReactSvgUrl from "PUBLIC_DIR/images/file.actions.favorite.react.svg?url";
 import FavoriteReactSvgUrl from "PUBLIC_DIR/images/favorite.react.svg?url";
+import LifetimeReactSvgUrl from "PUBLIC_DIR/images/lifetime.react.svg?url";
 import LockedReact12SvgUrl from "PUBLIC_DIR/images/icons/12/lock.react.svg?url";
 
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import styled from "styled-components";
 
-import {
-  isTablet,
-  isMobile,
-  commonIconsStyles,
-  classNames,
-} from "@docspace/shared/utils";
+import { isTablet, classNames } from "@docspace/shared/utils";
 import {
   DeviceType,
   FileStatus,
   RoomsType,
   ShareAccessRights,
 } from "@docspace/shared/enums";
+import { Tooltip } from "@docspace/shared/components/tooltip";
+import { Text } from "@docspace/shared/components/text";
 
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+
+const StyledQuickButtons = styled.div`
+  .file-lifetime {
+    svg {
+      rect {
+        fill: ${({ theme }) => theme.filesQuickButtons.lifeTimeColor};
+      }
+
+      circle,
+      path {
+        stroke: ${({ theme }) => theme.filesQuickButtons.lifeTimeColor};
+      }
+    }
+  }
+`;
 
 const QuickButtons = (props) => {
   const {
@@ -69,7 +82,10 @@ const QuickButtons = (props) => {
     onClickShare,
     isPersonalRoom,
     isArchiveFolder,
+    isIndexEditingMode,
     currentDeviceType,
+    showLifetimeIcon,
+    expiredDate,
   } = props;
 
   const isMobile = currentDeviceType === DeviceType.mobile;
@@ -141,65 +157,95 @@ const QuickButtons = (props) => {
     !isArchiveFolder &&
     !isTile;
 
+  const getTooltipContent = () => (
+    <Text fontSize="12px" fontWeight={400} noSelect>
+      {t("Files:FileWillBeDeleted", { date: expiredDate })}.
+    </Text>
+  );
+
   return (
-    <div className="badges additional-badges badges__quickButtons">
-      {isAvailableLockFile && (
-        <ColorTheme
-          themeId={ThemeId.IconButton}
-          iconName={iconLock}
-          className="badge lock-file icons-group"
-          size={sizeQuickButton}
-          data-id={id}
-          data-locked={locked ? true : false}
-          onClick={onClickLock}
-          color={colorLock}
-          isDisabled={isDisabled}
-          hoverColor={theme.filesQuickButtons.sharedColor}
-          title={t("UnblockVersion")}
-        />
-      )}
-      {isAvailableDownloadFile && (
-        <ColorTheme
-          themeId={ThemeId.IconButton}
-          iconName={FileActionsDownloadReactSvgUrl}
-          className="badge download-file icons-group"
-          size={sizeQuickButton}
-          onClick={onClickDownload}
-          color={colorLock}
-          isDisabled={isDisabled}
-          hoverColor={theme.filesQuickButtons.sharedColor}
-          title={t("Common:Download")}
-        />
-      )}
-      {showCopyLinkIcon && (
-        <ColorTheme
-          themeId={ThemeId.IconButton}
-          iconName={LinkReactSvgUrl}
-          className="badge copy-link icons-group"
-          size={sizeQuickButton}
-          onClick={onCopyPrimaryLink}
-          color={colorLock}
-          isDisabled={isDisabled}
-          hoverColor={theme.filesQuickButtons.sharedColor}
-          title={t("Files:CopySharedLink")}
-        />
-      )}
-      {isAvailableShareFile && (
-        <ColorTheme
-          themeId={ThemeId.IconButton}
-          iconName={LinkReactSvgUrl}
-          className={classNames("badge copy-link icons-group", {
-            ["create-share-link"]: !item.shared,
-          })}
-          size={sizeQuickButton}
-          onClick={onClickShare}
-          color={colorShare}
-          isDisabled={isDisabled}
-          hoverColor={theme.filesQuickButtons.sharedColor}
-          title={t("Files:CopySharedLink")}
-        />
-      )}
-      {/* {fileExst && !isTrashFolder && displayBadges && (
+    <StyledQuickButtons className="badges additional-badges badges__quickButtons">
+      {!isIndexEditingMode && (
+        <>
+          {showLifetimeIcon && (
+            <>
+              <ColorTheme
+                themeId={ThemeId.IconButton}
+                iconName={LifetimeReactSvgUrl}
+                className="badge file-lifetime icons-group"
+                size={sizeQuickButton}
+                isClickable
+                isDisabled={isDisabled}
+                data-tooltip-id="lifetimeTooltip"
+                color={theme.filesQuickButtons.lifeTimeColor}
+              />
+
+              <Tooltip
+                id="lifetimeTooltip"
+                place="bottom"
+                getContent={getTooltipContent}
+                maxWidth="300px"
+              />
+            </>
+          )}
+
+          {isAvailableLockFile && (
+            <ColorTheme
+              themeId={ThemeId.IconButton}
+              iconName={iconLock}
+              className="badge lock-file icons-group"
+              size={sizeQuickButton}
+              data-id={id}
+              data-locked={locked ? true : false}
+              onClick={onClickLock}
+              color={colorLock}
+              isDisabled={isDisabled}
+              hoverColor={theme.filesQuickButtons.sharedColor}
+              title={t("UnblockVersion")}
+            />
+          )}
+          {isAvailableDownloadFile && (
+            <ColorTheme
+              themeId={ThemeId.IconButton}
+              iconName={FileActionsDownloadReactSvgUrl}
+              className="badge download-file icons-group"
+              size={sizeQuickButton}
+              onClick={onClickDownload}
+              color={colorLock}
+              isDisabled={isDisabled}
+              hoverColor={theme.filesQuickButtons.sharedColor}
+              title={t("Common:Download")}
+            />
+          )}
+          {showCopyLinkIcon && (
+            <ColorTheme
+              themeId={ThemeId.IconButton}
+              iconName={LinkReactSvgUrl}
+              className="badge copy-link icons-group"
+              size={sizeQuickButton}
+              onClick={onCopyPrimaryLink}
+              color={colorLock}
+              isDisabled={isDisabled}
+              hoverColor={theme.filesQuickButtons.sharedColor}
+              title={t("Files:CopySharedLink")}
+            />
+          )}
+          {isAvailableShareFile && (
+            <ColorTheme
+              themeId={ThemeId.IconButton}
+              iconName={LinkReactSvgUrl}
+              className={classNames("badge copy-link icons-group", {
+                ["create-share-link"]: !item.shared,
+              })}
+              size={sizeQuickButton}
+              onClick={onClickShare}
+              color={colorShare}
+              isDisabled={isDisabled}
+              hoverColor={theme.filesQuickButtons.sharedColor}
+              title={t("Files:CopySharedLink")}
+            />
+          )}
+          {/* {fileExst && !isTrashFolder && displayBadges && (
         <ColorTheme
           themeId={ThemeId.IconButton}
           iconName={iconFavorite}
@@ -213,7 +259,9 @@ const QuickButtons = (props) => {
           hoverColor={theme.filesQuickButtons.hoverColor}
         />
       )} */}
-    </div>
+        </>
+      )}
+    </StyledQuickButtons>
   );
 };
 

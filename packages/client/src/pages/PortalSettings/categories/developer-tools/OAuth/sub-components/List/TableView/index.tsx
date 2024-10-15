@@ -7,8 +7,8 @@ import { TableBody } from "@docspace/shared/components/table";
 
 import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
 
-import Row from "./Row";
-import Header from "./Header";
+import Row from "./sub-components/Row";
+import Header from "./sub-components/Header";
 
 import { TableViewProps } from "./TableView.types";
 import { TableWrapper } from "./TableView.styled";
@@ -33,6 +33,7 @@ const TableView = ({
   hasNextPage,
   itemCount,
   fetchNextClients,
+  isGroupDialogVisible,
 }: TableViewProps) => {
   const tableRef = React.useRef<HTMLDivElement>(null);
   const tagRef = React.useRef<HTMLDivElement | null>(null);
@@ -76,6 +77,8 @@ const TableView = ({
 
   const clickOutside = React.useCallback(
     (e: MouseEvent) => {
+      if (isGroupDialogVisible) return;
+
       const target = e.target as HTMLElement;
       if (!target) return;
       if (
@@ -88,7 +91,7 @@ const TableView = ({
 
       setSelection?.("");
     },
-    [setSelection],
+    [setSelection, isGroupDialogVisible],
   );
 
   React.useEffect(() => {
@@ -165,7 +168,11 @@ export default inject(
       hasNextPage,
       itemCount,
       fetchNextClients,
+      disableDialogVisible,
+      deleteDialogVisible,
     } = oauthStore;
+
+    const isGroupDialogVisible = disableDialogVisible || deleteDialogVisible;
 
     return {
       viewAs,
@@ -180,6 +187,7 @@ export default inject(
       hasNextPage,
       itemCount,
       fetchNextClients,
+      isGroupDialogVisible,
     };
   },
 )(observer(TableView));

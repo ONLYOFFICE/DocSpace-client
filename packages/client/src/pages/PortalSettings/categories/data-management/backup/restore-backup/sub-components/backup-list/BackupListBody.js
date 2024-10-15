@@ -34,6 +34,14 @@ import { RadioButton } from "@docspace/shared/components/radio-button";
 import TrashIcon from "PUBLIC_DIR/images/delete.react.svg";
 import { StyledBackupList } from "../../../StyledBackup";
 import FileArchive24SvgUrl from "PUBLIC_DIR/images/icons/24/file_archive.svg?url";
+import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
+
+const VirtualScroll = (props) => (
+  <CustomScrollbarsVirtualList
+    {...props}
+    paddingAfterLastItem={ASIDE_PADDING_AFTER_LAST_ITEM}
+  />
+);
 
 const BackupListBody = ({
   filesList,
@@ -101,7 +109,7 @@ const BackupListBody = ({
           itemSize={48}
           itemCount={filesList.length}
           itemData={filesList}
-          outerElementType={CustomScrollbarsVirtualList}
+          outerElementType={VirtualScroll}
         >
           {Item}
         </List>

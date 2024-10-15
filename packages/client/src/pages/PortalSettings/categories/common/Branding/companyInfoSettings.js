@@ -137,7 +137,7 @@ const CompanyInfoSettingsComponent = (props) => {
 
   const checkWidth = () => {
     const url = isManagement()
-      ? "/branding"
+      ? "/management/settings/branding"
       : "portal-settings/customization/branding";
     window.innerWidth > size.mobile &&
       !isMobileView &&
@@ -514,10 +514,11 @@ export const CompanyInfoSettings = inject(
 
       companyInfoSettingsData,
       buildVersionInfo,
-      deviceType,
+      checkEnablePortalSettings,
     } = settingsStore;
 
-    const { isBrandingAndCustomizationAvailable } = currentQuotaStore;
+    const { isCustomizationAvailable } = currentQuotaStore;
+    const isSettingPaid = checkEnablePortalSettings(isCustomizationAvailable);
 
     return {
       getCompanyInfoSettings,
@@ -528,8 +529,7 @@ export const CompanyInfoSettings = inject(
       setIsLoadedCompanyInfoSettingsData,
       isLoadedCompanyInfoSettingsData,
       buildVersionInfo,
-      isSettingPaid: isBrandingAndCustomizationAvailable,
-      deviceType,
+      isSettingPaid,
     };
   },
 )(

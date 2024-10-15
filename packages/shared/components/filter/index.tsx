@@ -66,10 +66,14 @@ const FilterInput = React.memo(
     removeSelectedItem,
 
     isRooms,
-    isAccounts,
-    isPeopleAccounts,
-    isGroupsAccounts,
-    isInsideGroup,
+    isContactsPage,
+    isContactsPeoplePage,
+    isContactsGroupsPage,
+    isContactsInsideGroupPage,
+    isContactsGuestsPage,
+    isIndexing,
+    isIndexEditingMode,
+
     filterTitle,
     sortByTitle,
 
@@ -202,43 +206,50 @@ const FilterInput = React.memo(
             onClearSearch={onClearSearch}
             id="filter_search-input"
             size={InputSize.base}
+            isDisabled={isIndexEditingMode}
             onFocus={onInputFocus}
           />
-          <FilterButton
-            id="filter-button"
-            onFilter={onFilter}
-            getFilterData={getFilterData}
-            selectedFilterValue={selectedFilterValue}
-            filterHeader={filterHeader}
-            selectorLabel={selectorLabel}
-            isRooms={isRooms}
-            isAccounts={isAccounts}
-            isPeopleAccounts={isPeopleAccounts}
-            isGroupsAccounts={isGroupsAccounts}
-            isInsideGroup={isInsideGroup}
-            title={filterTitle}
-            userId={userId}
-            disableThirdParty={disableThirdParty}
-          />
-          <SortButton
-            id="sort-by-button"
-            onSort={onSort}
-            getSortData={getSortData}
-            getSelectedSortData={getSelectedSortData}
-            view={view}
-            viewAs={viewAs === "table" ? "row" : viewAs}
-            viewSettings={viewSettings}
-            onChangeViewAs={onChangeViewAs}
-            onSortButtonClick={onSortButtonClick}
-            viewSelectorVisible={
-              viewSettings &&
-              viewSelectorVisible &&
-              currentDeviceType !== DeviceType.desktop
-            }
-            title={sortByTitle}
-          />
+          {!isIndexEditingMode && (
+            <FilterButton
+              id="filter-button"
+              onFilter={onFilter}
+              getFilterData={getFilterData}
+              selectedFilterValue={selectedFilterValue}
+              filterHeader={filterHeader}
+              selectorLabel={selectorLabel}
+              isRooms={isRooms}
+              isContactsPage={isContactsPage}
+              isContactsPeoplePage={isContactsPeoplePage}
+              isContactsGroupsPage={isContactsGroupsPage}
+              isContactsInsideGroupPage={isContactsInsideGroupPage}
+              isContactsGuestsPage={isContactsGuestsPage}
+              title={filterTitle}
+              userId={userId}
+              disableThirdParty={disableThirdParty}
+            />
+          )}
 
+          {!isIndexing && (
+            <SortButton
+              id="sort-by-button"
+              onSort={onSort}
+              getSortData={getSortData}
+              getSelectedSortData={getSelectedSortData}
+              view={view}
+              viewAs={viewAs === "table" ? "row" : viewAs}
+              viewSettings={viewSettings}
+              onChangeViewAs={onChangeViewAs}
+              onSortButtonClick={onSortButtonClick}
+              viewSelectorVisible={
+                viewSettings &&
+                viewSelectorVisible &&
+                currentDeviceType !== DeviceType.desktop
+              }
+              title={sortByTitle}
+            />
+          )}
           {viewSettings &&
+            !isIndexing &&
             currentDeviceType === DeviceType.desktop &&
             viewSelectorVisible && (
               <ViewSelector

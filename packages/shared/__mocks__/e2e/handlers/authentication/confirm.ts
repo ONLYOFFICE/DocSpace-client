@@ -9,7 +9,7 @@ import {
   HEADER_USER_EXISTED,
 } from "../../utils";
 
-const PATH = "/authentication/confirm";
+export const PATH = "authentication/confirm";
 
 const url = `${BASE_URL}/${API_PREFIX}/${PATH}`;
 

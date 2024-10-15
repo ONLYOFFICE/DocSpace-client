@@ -10,7 +10,7 @@ import {
 import { AuthenticationMethod } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
-import { getClient } from "@docspace/shared/api/oauth";
+import { addClient, getClient, updateClient } from "@docspace/shared/api/oauth";
 
 import ResetDialog from "../ResetDialog";
 
@@ -36,9 +36,6 @@ const ClientForm = ({
 
   fetchScopes,
 
-  saveClient,
-  updateClient,
-
   resetDialogVisible,
   setResetDialogVisible,
 
@@ -46,6 +43,7 @@ const ClientForm = ({
   setClientSecretProps,
 
   currentDeviceType,
+  maxImageUploadSize,
 }: ClientFormProps) => {
   const navigate = useNavigate();
 
@@ -127,7 +125,7 @@ const ClientForm = ({
 
         setIsRequestRunning(true);
 
-        await saveClient?.(form);
+        await addClient?.(form);
       } else {
         await updateClient?.(clientId, form);
       }
@@ -386,6 +384,7 @@ const ClientForm = ({
               errorFields={errorFields}
               requiredErrorFields={requiredErrorFields}
               onBlur={onBlur}
+              maxImageSize={maxImageUploadSize}
             />
             {isEdit && (
               <ClientBlock
@@ -446,9 +445,6 @@ export default inject(
 
       fetchScopes,
 
-      saveClient,
-      updateClient,
-
       setResetDialogVisible,
       resetDialogVisible,
 
@@ -456,21 +452,19 @@ export default inject(
       clientSecret,
     } = oauthStore;
 
-    const { currentDeviceType } = settingsStore;
+    const { currentDeviceType, maxImageUploadSize } = settingsStore;
 
     const props: ClientFormProps = {
       scopeList,
 
       fetchScopes,
 
-      saveClient,
-      updateClient,
-
       setResetDialogVisible,
       currentDeviceType,
       resetDialogVisible,
       setClientSecretProps: setClientSecret,
       clientSecretProps: clientSecret,
+      maxImageUploadSize: maxImageUploadSize ?? undefined,
     };
 
     if (id) {

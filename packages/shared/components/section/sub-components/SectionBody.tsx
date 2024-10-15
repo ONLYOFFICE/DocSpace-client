@@ -50,6 +50,7 @@ const SectionBody = React.memo(
     isDesktop,
     settingsStudio = false,
     getContextModel,
+    isIndexEditingMode,
   }: SectionBodyProps) => {
     const focusRef = React.useRef<HTMLDivElement | null>(null);
 
@@ -92,7 +93,7 @@ const SectionBody = React.memo(
     const focusProps = autoFocus
       ? {
           ref: focusRef,
-          tabIndex: -1,
+          //tabIndex: -1,
         }
       : {};
 
@@ -120,7 +121,9 @@ const SectionBody = React.memo(
           </div>
         )}
 
-        <SectionContextMenu getContextModel={getContextModel} />
+        {!isIndexEditingMode && (
+          <SectionContextMenu getContextModel={getContextModel} />
+        )}
       </StyledDropZoneBody>
     ) : (
       <StyledSectionBody

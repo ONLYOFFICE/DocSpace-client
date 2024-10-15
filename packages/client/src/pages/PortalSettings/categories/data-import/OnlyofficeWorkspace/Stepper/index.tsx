@@ -29,8 +29,8 @@ import { Trans } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
 
-import UserSolidIcon from "PUBLIC_DIR/images/catalog.user.solid.react.svg?url";
-import SharedIcon from "PUBLIC_DIR/images/catalog.old.share.react.svg?url";
+import UserSolidIcon from "PUBLIC_DIR/images/icons/16/catalog.user.solid.react.svg?url";
+import SharedIcon from "PUBLIC_DIR/images/icons/16/catalog.old.share.react.svg?url";
 import SelectFileStep from "../../components/SelectFileStep";
 import SelectUsersStep from "../../components/SelectUsersStep";
 import SelectUsersTypeStep from "../../components/SelectUsersTypeStep";

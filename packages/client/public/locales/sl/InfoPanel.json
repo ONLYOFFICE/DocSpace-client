@@ -1,5 +1,5 @@
 {
-  "AccountsEmptyScreenText": "Oglej si podrobnosti o uporabnikih tukaj",
+  "UsersEmptyScreenText": "Oglej si podrobnosti o uporabnikih tukaj",
   "AddedRoomTags": "Oznake dodane.",
   "Administration": "Administracija",
   "AndMoreLabel": "in <1>{{count}} več</1>",
@@ -35,7 +35,6 @@
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> soba kopirana",
   "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> soba ustvarjena",
   "HistoryThirdParty": "Prikaz zgodovine ni na voljo za javne sobe s povezanimi shrambami tretjih oseb",
-  "InfoBanner": "Seznam povabljenih uporabnikov vključuje lastnika in/ali skrbnike tega prostora {{productName}} s polnim dostopom do vseh sob. Lastniku in/ali skrbniku ni mogoče dodeliti drugih pravic dostopa. Ko bodo dodani v sobo, bodo obveščeni o vseh spremembah.",
   "ItemsSelected": "Predmeti izbrani",
   "LastModifiedBy": "Nazadnje spremenjeno",
   "NoRecordsFound": "Ni najdenih zapisov",
@@ -49,7 +48,7 @@
   "RoomGroupRemove": "Skupina odstranjena.",
   "RoomLogoChanged": "Ikona spremenjena",
   "RoomRemoveUser": "Ikona spremenjena",
-  "RoomRenamed": "Soba <1>«{{oldRoomTitle}}»</1> preimenovana v <1>«{{roomTitle}}»</1>",
+  "RoomRenamed": "Soba <1>«{{oldRoomTitle}}»</1> preimenovana v <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Oglej si podrobnosti o sobah tukaj",
   "RoomUpdateAccess": "je bila dodeljena vloga",
   "SelectedUsers": "Izbrani računi",

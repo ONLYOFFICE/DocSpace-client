@@ -52,14 +52,14 @@ type GroupsTableViewProps = {
   hasMoreGroups?: GroupsStore["hasMoreGroups"];
   groupsFilterTotal?: GroupsStore["groupsFilterTotal"];
 
-  sectionWidth: number;
+  sectionWidth?: number;
 
   viewAs?: PeopleStore["viewAs"];
   setViewAs?: PeopleStore["setViewAs"];
 
-  infoPanelVisible: InfoPanelStore["isVisible"];
+  infoPanelVisible?: InfoPanelStore["isVisible"];
 
-  currentDeviceType: SettingsStore["currentDeviceType"];
+  currentDeviceType?: SettingsStore["currentDeviceType"];
 
   peopleGroupsColumnIsEnabled?: TableStore["peopleGroupsColumnIsEnabled"];
   managerGroupsColumnIsEnabled?: TableStore["managerGroupsColumnIsEnabled"];

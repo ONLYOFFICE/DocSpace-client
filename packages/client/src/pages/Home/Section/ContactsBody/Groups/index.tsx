@@ -38,10 +38,10 @@ import TableView from "./TableView";
 import RowView from "./RowView";
 
 type GroupsProps = {
-  viewAs: PeopleStore["viewAs"];
-  isGroupsLoaded: boolean;
-  setUsersSelection: UsersStore["setSelection"];
-  setUsersBufferSelection: UsersStore["setBufferSelection"];
+  viewAs?: PeopleStore["viewAs"];
+  isGroupsLoaded?: boolean;
+  setUsersSelection?: UsersStore["setSelection"];
+  setUsersBufferSelection?: UsersStore["setBufferSelection"];
 };
 
 const Groups = ({
@@ -53,10 +53,10 @@ const Groups = ({
   const location = useLocation();
 
   useEffect(() => {
-    setUsersSelection([]);
+    setUsersSelection!([]);
 
-    setUsersBufferSelection(null);
-  }, [location]);
+    setUsersBufferSelection!(null);
+  }, [location, setUsersBufferSelection, setUsersSelection]);
 
   if (!isGroupsLoaded) {
     if (viewAs === "table") return <TableSkeleton />;

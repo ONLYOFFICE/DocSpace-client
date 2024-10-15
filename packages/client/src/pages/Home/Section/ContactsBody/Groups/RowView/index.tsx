@@ -40,7 +40,7 @@ import { GroupsRowContainer } from "./RowView.styled";
 import GroupsRow from "./GroupsRow";
 
 type RowViewProps = {
-  sectionWidth: number;
+  sectionWidth?: number;
 
   groups?: GroupsStore["groups"];
   hasMoreGroups?: GroupsStore["hasMoreGroups"];
@@ -50,7 +50,7 @@ type RowViewProps = {
   viewAs?: PeopleStore["viewAs"];
   setViewAs?: PeopleStore["setViewAs"];
 
-  currentDeviceType: SettingsStore["currentDeviceType"];
+  currentDeviceType?: SettingsStore["currentDeviceType"];
 };
 
 const RowView = ({

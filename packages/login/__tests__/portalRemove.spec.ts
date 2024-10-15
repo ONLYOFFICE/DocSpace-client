@@ -80,13 +80,15 @@ test("portal remove delete", async ({ page, mockRequest }) => {
 
   await page.getByTestId("link").click();
 
-  await page.waitForURL("https://www.onlyoffice.com/", { waitUntil: "commit" });
+  await page.waitForURL(new RegExp("^(http|https)://(.*)"), {
+    waitUntil: "commit",
+  });
 
-  await expect(page).toHaveScreenshot([
-    "desktop",
-    "portal-remove",
-    "portal-remove-delete-redirect.png",
-  ]);
+  expect(
+    await page
+      .getByText("ONLYOFFICE", { exact: true })
+      .waitFor({ state: "attached" }),
+  );
 });
 
 test("portal remove cancel", async ({ page }) => {

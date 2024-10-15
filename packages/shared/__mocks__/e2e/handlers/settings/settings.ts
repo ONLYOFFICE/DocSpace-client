@@ -1,4 +1,9 @@
-import { API_PREFIX, BASE_URL, HEADER_WIZARD_SETTINGS } from "../../utils";
+import {
+  API_PREFIX,
+  BASE_URL,
+  HEADER_WIZARD_SETTINGS,
+  HEADER_WIZARD_WITH_AMI_SETTINGS,
+} from "../../utils";
 
 const PATH = "settings";
 
@@ -38,6 +43,7 @@ export const settingsWizzard = {
     limitedAccessSpace: false,
     userNameRegex: "^[\\p{L}\\p{M}' \\-]+$",
     maxImageUploadSize: 0,
+    isAmi: false,
   },
   count: 1,
   links: [
@@ -49,6 +55,11 @@ export const settingsWizzard = {
   status: 0,
   statusCode: 200,
   ok: true,
+};
+
+export const settingsWizzardWithAmi = {
+  ...settingsWizzard,
+  response: { ...settingsWizzard.response, isAmi: true },
 };
 
 export const settingsAuth = {};
@@ -100,12 +111,19 @@ export const settingsNoAuth = {
 
 export const settings = (headers?: Headers): Response => {
   let isWizard = false;
+  let isWizardWithAmi = false;
 
   if (headers?.get(HEADER_WIZARD_SETTINGS)) {
     isWizard = true;
   }
 
+  if (headers?.get(HEADER_WIZARD_WITH_AMI_SETTINGS)) {
+    isWizardWithAmi = true;
+  }
+
   if (isWizard) return new Response(JSON.stringify(settingsWizzard));
+  if (isWizardWithAmi)
+    return new Response(JSON.stringify(settingsWizzardWithAmi));
 
   return new Response(JSON.stringify(settingsNoAuth));
 };

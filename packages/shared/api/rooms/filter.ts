@@ -24,109 +24,127 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-/* eslint-disable class-methods-use-this */
-/* eslint-disable guard-for-in */
-import transform from "lodash/transform";
 import { RoomSearchArea } from "../../enums";
 import {
   getObjectByLocation,
   toUrlParams,
   tryParseArray,
 } from "../../utils/common";
+import { TSortOrder, TSortBy, Nullable } from "../../types";
 
-const PAGE = "page";
-const PAGE_COUNT = "count";
+const DEFAULT_EXCLUDE_SUBJECT: Nullable<string | boolean> = false;
+const DEFAULT_FILTER_VALUE: Nullable<string> = null;
 const DEFAULT_PAGE = 0;
 const DEFAULT_PAGE_COUNT = 25;
+const DEFAULT_PROVIDER: Nullable<string> = null;
+const DEFAULT_QUOTA_FILTER: Nullable<string> = null;
+const DEFAULT_SEARCH_AREA: RoomSearchArea | string = RoomSearchArea.Active;
+const DEFAULT_SEARCH_IN_CONTENT: Nullable<boolean> = null;
+const DEFAULT_SEARCH_TYPE: Nullable<string | boolean> = null;
+const DEFAULT_SORT_BY: TSortBy | string = "DateAndTime";
+const DEFAULT_SORT_ORDER: TSortOrder | string = "descending";
+const DEFAULT_STORAGE_FILTER: Nullable<string> = null;
+const DEFAULT_SUBJECT_FILTER: Nullable<string> = null;
+const DEFAULT_SUBJECT_ID: Nullable<string> = null;
+const DEFAULT_TAGS: Nullable<string | string[]> = null;
 const DEFAULT_TOTAL = 0;
-
-const FILTER_VALUE = "filterValue";
-const DEFAULT_FILTER_VALUE = null;
-
-const PROVIDER = "provider";
-const DEFAULT_PROVIDER = null;
-
-const TYPE = "type";
-const DEFAULT_TYPE = null;
-
-const SUBJECT_ID = "subjectId";
-const DEFAULT_SUBJECT_ID = null;
-
-const SEARCH_IN_CONTENT = "searchInContent";
-const DEFAULT_SEARCH_IN_CONTENT = null;
-
-const SEARCH_TYPE = "withSubfolders";
-const DEFAULT_SEARCH_TYPE = null;
-
-const SEARCH_AREA = "searchArea";
-const DEFAULT_SEARCH_AREA = RoomSearchArea.Active;
-
-const TAGS = "tags";
-const DEFAULT_TAGS = null;
-
-const SORT_BY = "sortBy";
-const DEFAULT_SORT_BY = "DateAndTime";
-
-const SORT_ORDER = "sortOrder";
-const DEFAULT_SORT_ORDER = "descending";
+const DEFAULT_TYPE: Nullable<string | string[]> = null;
+const DEFAULT_WITHOUT_TAGS: Nullable<string | boolean> = false;
 
 const EXCLUDE_SUBJECT = "excludeSubject";
-const DEFAULT_EXCLUDE_SUBJECT = false;
-
-const WITHOUT_TAGS = "withoutTags";
-const DEFAULT_WITHOUT_TAGS = false;
-
-const SUBJECT_FILTER = "subjectFilter";
-const DEFAULT_SUBJECT_FILTER = null;
-
+const FILTER_VALUE = "filterValue";
+const PAGE = "page";
+const PAGE_COUNT = "count";
+const PROVIDER = "provider";
 const QUOTA_FILTER = "quotaFilter";
-const DEFAULT_QUOTA_FILTER = null;
-
+const SEARCH_AREA = "searchArea";
+const SEARCH_IN_CONTENT = "searchInContent";
+const SEARCH_TYPE = "withSubfolders";
+const SORT_BY = "sortBy";
+const SORT_ORDER = "sortOrder";
 const STORAGE_FILTER = "storageFilter";
-const DEFAULT_STORAGE_FILTER = null;
+const SUBJECT_FILTER = "subjectFilter";
+const SUBJECT_ID = "subjectId";
+const TAGS = "tags";
+const TYPE = "type";
+const WITHOUT_TAGS = "withoutTags";
 
-export const toJSON = (filter) => {
-  const filterObject = transform(
-    filter,
-    (result, value, key) => {
-      if (value instanceof Function) return result;
-      if (value === null || value === false) return result;
-
+export const toJSON = (filter: RoomsFilter) => {
+  const filterObject = Object.entries(filter).reduce(
+    (result, [key, value]) => {
+      if (typeof value === "function" || value === null || value === false) {
+        return result;
+      }
       result[key] = value;
+      return result;
     },
-    {},
+    {} as Record<string, string | number | boolean>,
   );
 
   return JSON.stringify(filterObject);
 };
 
 class RoomsFilter {
-  static getDefault(userId, searchArea) {
+  page: number;
+
+  pageCount: number;
+
+  total: number;
+
+  searchArea: RoomSearchArea | string;
+
+  filterValue: Nullable<string>;
+
+  provider: Nullable<string>;
+
+  type: Nullable<string | string[]>;
+
+  subjectId: Nullable<string>;
+
+  searchInContent: Nullable<boolean>;
+
+  withSubfolders: Nullable<string | boolean>;
+
+  tags: Nullable<string | string[]>;
+
+  sortBy: TSortBy | string;
+
+  sortOrder: TSortOrder | string;
+
+  excludeSubject: Nullable<string | boolean>;
+
+  withoutTags: Nullable<string | boolean>;
+
+  subjectFilter: Nullable<string>;
+
+  quotaFilter: Nullable<string>;
+
+  storageFilter: Nullable<string>;
+
+  static getDefault(userId?: string, searchArea: string = DEFAULT_SEARCH_AREA) {
     const defaultFilter = new RoomsFilter(
       DEFAULT_PAGE,
       DEFAULT_PAGE_COUNT,
       DEFAULT_TOTAL,
     );
-    defaultFilter.searchArea = searchArea || DEFAULT_SEARCH_AREA;
+
+    defaultFilter.searchArea = searchArea;
 
     if (userId) {
+      const storageKey =
+        defaultFilter.searchArea === RoomSearchArea.Active
+          ? `UserRoomsSharedFilter=${userId}`
+          : `UserRoomsArchivedFilter=${userId}`;
+
       try {
-        const filterStorageItem =
-          defaultFilter.searchArea === RoomSearchArea.Active
-            ? JSON.parse(
-                localStorage.getItem(`UserRoomsSharedFilter=${userId}`),
-              )
-            : JSON.parse(
-                localStorage.getItem(`UserRoomsArchivedFilter=${userId}`),
-              );
+        const filterStorageItem = JSON.parse(
+          localStorage.getItem(storageKey) || "{}",
+        );
         if (filterStorageItem) {
-          // eslint-disable-next-line no-restricted-syntax
-          for (const filterProperty in filterStorageItem) {
-            defaultFilter[filterProperty] = filterStorageItem[filterProperty];
-          }
+          Object.assign(defaultFilter, filterStorageItem);
         }
       } catch (e) {
-        return defaultFilter;
+        // console.log(e);
       }
     }
 
@@ -137,7 +155,7 @@ class RoomsFilter {
     return new RoomsFilter(DEFAULT_PAGE, DEFAULT_PAGE_COUNT, DEFAULT_TOTAL);
   }
 
-  static getFilter(location) {
+  static getFilter(location: Location) {
     if (!location) return this.getDefault();
 
     const urlFilter = getObjectByLocation(location);
@@ -146,62 +164,65 @@ class RoomsFilter {
 
     const defaultFilter = RoomsFilter.getDefault();
 
-    const page =
-      (urlFilter[PAGE] && +urlFilter[PAGE] - 1) || defaultFilter.page;
+    const {
+      [PAGE]: urlPage,
+      [PAGE_COUNT]: urlPageCount,
+      [FILTER_VALUE]: urlFilterValue,
+      [PROVIDER]: urlProvider,
+      [TYPE]: urlType,
+      [SUBJECT_ID]: urlSubjectId,
+      [SUBJECT_FILTER]: urlSubjectFilter,
+      [SEARCH_AREA]: urlSearchArea,
+      [TAGS]: urlTags,
+      [SORT_BY]: urlSortBy,
+      [SORT_ORDER]: urlSortOrder,
+      [EXCLUDE_SUBJECT]: urlExcludeSubject,
+      [WITHOUT_TAGS]: urlWithoutTags,
+      [QUOTA_FILTER]: urlQuotaFilter,
+      [STORAGE_FILTER]: urlStorageFilter,
+    } = urlFilter;
 
-    const pageCount =
-      (urlFilter[PAGE_COUNT] && +urlFilter[PAGE_COUNT]) ||
-      defaultFilter.pageCount;
+    const {
+      page: defaultPage,
+      pageCount: defaultPageCount,
+      filterValue: defaultFilterValue,
+      provider: defaultProvider,
+      type: defaultType,
+      subjectId: defaultSubjectId,
+      subjectFilter: defaultSubjectFilter,
+      searchArea: defaultSearchArea,
+      tags: defaultTags,
+      sortBy: defaultSortBy,
+      sortOrder: defaultSortOrder,
+      excludeSubject: defaultExcludeSubject,
+      withoutTags: defaultWithoutTags,
+      quotaFilter: defaultQuotaFilter,
+      storageFilter: defaultStorageFilter,
+    } = defaultFilter;
 
-    const filterValue =
-      (urlFilter[FILTER_VALUE] && urlFilter[FILTER_VALUE]) ||
-      defaultFilter.filterValue;
-
-    const provider =
-      (urlFilter[PROVIDER] && urlFilter[PROVIDER]) || defaultFilter.filterType;
-
-    const type = (urlFilter[TYPE] && urlFilter[TYPE]) || defaultFilter.type;
-
-    const subjectId =
-      (urlFilter[SUBJECT_ID] && urlFilter[SUBJECT_ID]) ||
-      defaultFilter.subjectId;
-
+    const page = (urlPage && +urlPage - 1) || defaultPage;
+    const pageCount = (urlPageCount && +urlPageCount) || defaultPageCount;
+    const filterValue = (urlFilterValue as string) || defaultFilterValue;
+    const provider = (urlProvider as string) || defaultProvider;
+    const type = urlType || defaultType;
+    const subjectId = (urlSubjectId as string) || defaultSubjectId;
     const subjectFilter =
-      (urlFilter[SUBJECT_FILTER]?.toString() &&
-        urlFilter[SUBJECT_FILTER]?.toString()) ||
-      defaultFilter.subjectFilter?.toString();
-
-    // TODO: remove it if search with subfolders and in content will be available
-    // const searchInContent = urlFilter[SEARCH_IN_CONTENT]
-    //   ? urlFilter[SEARCH_IN_CONTENT] === "true"
-    //   : defaultFilter.searchInContent;
-
-    // const withSubfolders = urlFilter[SEARCH_TYPE]
-    //   ? urlFilter[SEARCH_TYPE] === "true"
-    //   : defaultFilter.withSubfolders;
-
+      urlSubjectFilter?.toString() || defaultSubjectFilter?.toString();
     const searchInContent = false;
     const withSubfolders = false;
-
-    const searchArea =
-      (urlFilter[SEARCH_AREA] && urlFilter[SEARCH_AREA]) ||
-      defaultFilter.searchArea;
-
-    const tags = tryParseArray(urlFilter[TAGS]) || defaultFilter.tags;
-
-    const sortBy = urlFilter[SORT_BY] || defaultFilter.sortBy;
-
-    const sortOrder = urlFilter[SORT_ORDER] || defaultFilter.sortOrder;
-
+    const searchArea = (urlSearchArea as string) || defaultSearchArea;
+    const tags = tryParseArray(urlTags as string) || defaultTags;
+    const sortBy = (urlSortBy as string) || defaultSortBy;
+    const sortOrder = (urlSortOrder as string) || defaultSortOrder;
     const excludeSubject =
-      urlFilter[EXCLUDE_SUBJECT] || defaultFilter.excludeSubject;
+      (urlExcludeSubject as string) || defaultExcludeSubject;
+    const withoutTags = (urlWithoutTags as string) || defaultWithoutTags;
+    const quotaFilter = (urlQuotaFilter as string) || defaultQuotaFilter;
+    const storageFilter = (urlStorageFilter as string) || defaultStorageFilter;
 
-    const withoutTags = urlFilter[WITHOUT_TAGS] || defaultFilter.withoutTags;
-    const quotaFilter = urlFilter[QUOTA_FILTER] || defaultFilter.quotaFilter;
-
-    const storageFilter =
-      (urlFilter[STORAGE_FILTER] && urlFilter[STORAGE_FILTER]) ||
-      defaultFilter.storageFilter;
+    // TODO: remove it if search with subfolders and in content will be available and add it to the urlFilter and the defaultFilter
+    // const searchInContent = urlSearchInContent || defaultSearchInContent;
+    // const withSubfolders = urlSearchType || defaultSearchType;
 
     const newFilter = new RoomsFilter(
       page,
@@ -301,8 +322,8 @@ class RoomsFilter {
     } = this;
 
     const dtoFilter = {
-      count: pageCount,
       page,
+      pageCount,
       startIndex: this.getStartIndex(),
       filterValue: (filterValue ?? "").trim(),
       provider,
@@ -321,11 +342,10 @@ class RoomsFilter {
       storageFilter,
     };
 
-    const str = toUrlParams(dtoFilter, true);
-    return str;
+    return toUrlParams(dtoFilter, true);
   };
 
-  toUrlParams = (userId, withLocalStorage) => {
+  toUrlParams = (userId?: string, withLocalStorage?: boolean) => {
     const {
       page,
       pageCount,
@@ -346,73 +366,43 @@ class RoomsFilter {
       storageFilter,
     } = this;
 
-    const dtoFilter = {};
+    const dtoFilter: Record<string, unknown> = {
+      ...(filterValue && { [FILTER_VALUE]: filterValue }),
+      ...(provider && { [PROVIDER]: provider }),
+      ...(type && { [TYPE]: type }),
+      ...(subjectId && { [SUBJECT_ID]: subjectId }),
+      ...(searchInContent && { [SEARCH_IN_CONTENT]: searchInContent }),
+      ...(searchArea && { [SEARCH_AREA]: searchArea }),
+      ...(tags && { [TAGS]: tags }),
+      ...(pageCount !== DEFAULT_PAGE_COUNT && { [PAGE_COUNT]: pageCount }),
+      ...(excludeSubject && { [EXCLUDE_SUBJECT]: excludeSubject }),
+      ...(withoutTags && { [WITHOUT_TAGS]: withoutTags }),
+      ...(subjectFilter?.toString() && {
+        [SUBJECT_FILTER]: subjectFilter.toString(),
+      }),
+      ...(quotaFilter && { [QUOTA_FILTER]: quotaFilter }),
+      ...(storageFilter && { [STORAGE_FILTER]: storageFilter }),
+      [PAGE]: page + 1,
+      [SORT_BY]: sortBy,
+      [SORT_ORDER]: sortOrder,
+      [SEARCH_TYPE]: withSubfolders,
+    };
 
-    if (filterValue) {
-      dtoFilter[FILTER_VALUE] = filterValue;
-    }
-
-    if (provider) {
-      dtoFilter[PROVIDER] = provider;
-    }
-
-    if (type) {
-      dtoFilter[TYPE] = type;
-    }
-
-    if (subjectId) {
-      dtoFilter[SUBJECT_ID] = subjectId;
-    }
-
-    if (searchInContent) {
-      dtoFilter[SEARCH_IN_CONTENT] = searchInContent;
-    }
-
-    if (searchArea) {
-      dtoFilter[SEARCH_AREA] = searchArea;
-    }
-
-    if (tags) {
-      dtoFilter[TAGS] = tags;
-    }
-
-    if (pageCount !== DEFAULT_PAGE_COUNT) {
-      dtoFilter[PAGE_COUNT] = pageCount;
-    }
-
-    if (excludeSubject) {
-      dtoFilter[EXCLUDE_SUBJECT] = excludeSubject;
-    }
-
-    if (withoutTags) {
-      dtoFilter[WITHOUT_TAGS] = withoutTags;
-    }
-
-    if (subjectFilter?.toString()) {
-      dtoFilter[SUBJECT_FILTER] = subjectFilter.toString();
-    }
-
-    if (quotaFilter) dtoFilter[QUOTA_FILTER] = quotaFilter;
-    if (storageFilter) dtoFilter[STORAGE_FILTER] = storageFilter;
-
-    dtoFilter[PAGE] = page + 1;
-    dtoFilter[SORT_BY] = sortBy;
-    dtoFilter[SORT_ORDER] = sortOrder;
-    dtoFilter[SEARCH_TYPE] = withSubfolders;
+    const archivedFilterKey = `UserRoomsArchivedFilter=${userId}`;
+    const sharedFilterKey = `UserRoomsSharedFilter=${userId}`;
 
     let archivedStorageFilter = null;
     let sharedStorageFilter = null;
 
     try {
       archivedStorageFilter = JSON.parse(
-        localStorage.getItem(`UserRoomsArchivedFilter=${userId}`),
+        localStorage.getItem(archivedFilterKey) || "{}",
       );
-
       sharedStorageFilter = JSON.parse(
-        localStorage.getItem(`UserRoomsSharedFilter=${userId}`),
+        localStorage.getItem(sharedFilterKey) || "{}",
       );
     } catch (e) {
-      //  console.log(e);
+      // console.log(e);
     }
 
     const defaultFilter = new RoomsFilter(
@@ -422,21 +412,15 @@ class RoomsFilter {
     );
 
     if (!sharedStorageFilter && userId) {
-      localStorage.setItem(
-        `UserRoomsSharedFilter=${userId}`,
-        toJSON(defaultFilter),
-      );
+      localStorage.setItem(sharedFilterKey, toJSON(defaultFilter));
     }
 
     if (!archivedStorageFilter && userId) {
       defaultFilter.searchArea = RoomSearchArea.Archive;
-      localStorage.setItem(
-        `UserRoomsArchivedFilter=${userId}`,
-        toJSON(defaultFilter),
-      );
+      localStorage.setItem(archivedFilterKey, toJSON(defaultFilter));
     }
 
-    const filterJSON = toJSON(dtoFilter);
+    const filterJSON = toJSON(dtoFilter as unknown as RoomsFilter);
 
     const currentStorageFilter =
       dtoFilter.searchArea === RoomSearchArea.Active
@@ -450,14 +434,13 @@ class RoomsFilter {
 
     if (userId && !withLocalStorage) {
       if (dtoFilter.searchArea === RoomSearchArea.Active) {
-        localStorage.setItem(`UserRoomsSharedFilter=${userId}`, filterJSON);
+        localStorage.setItem(sharedFilterKey, filterJSON);
       } else {
-        localStorage.setItem(`UserRoomsArchivedFilter=${userId}`, filterJSON);
+        localStorage.setItem(archivedFilterKey, filterJSON);
       }
     }
 
-    const str = toUrlParams(urlParams, true);
-    return str;
+    return toUrlParams(urlParams, true);
   };
 
   getLastPage() {
@@ -487,31 +470,31 @@ class RoomsFilter {
     );
   }
 
-  equals(filter) {
-    const typeEqual =
-      this.type.length === filter.type.length &&
-      this.type.forEach((type) => filter.type.includes(type));
+  equals(filter: RoomsFilter) {
+    const typeEqual = Array.isArray(this.type)
+      ? this.type.every((t: string) => filter.type?.includes(t))
+      : this.type === filter.type;
 
-    const tagsEqual =
-      this.tags.length === filter.tags.length &&
-      this.tags.forEach((tag) => filter.tags.includes(tag));
+    const tagsEqual = Array.isArray(this.tags)
+      ? this.tags.every((t: string) => filter.tags?.includes(t))
+      : this.tags === filter.tags;
 
     const equals =
       this.page === filter.page &&
       this.pageCount === filter.pageCount &&
       this.provider === filter.provider &&
       this.filterValue === filter.filterValue &&
-      typeEqual &&
       this.subjectId === filter.subjectId &&
       this.searchInContent === filter.searchInContent &&
       this.withSubfolders === filter.withSubfolders &&
       this.searchArea === filter.searchArea &&
-      tagsEqual &&
       this.sortBy === filter.sortBy &&
       this.sortOrder === filter.sortOrder &&
       this.excludeSubject === filter.excludeSubject &&
       this.withoutTags === filter.withoutTags &&
-      this.subjectFilter === filter.subjectFilter;
+      this.subjectFilter === filter.subjectFilter &&
+      typeEqual &&
+      tagsEqual;
 
     return equals;
   }

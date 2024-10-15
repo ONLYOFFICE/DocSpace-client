@@ -29,18 +29,16 @@ import { useNavigate } from "react-router-dom";
 import { inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
-import SharedLinkIconURL from "PUBLIC_DIR/images/icons/24/shared.svg?url";
-
 import { isMobile } from "@docspace/shared/utils";
-
-import { FileType, FolderType } from "@docspace/shared/enums";
 import { Text } from "@docspace/shared/components/text";
+import { FileType, FolderType } from "@docspace/shared/enums";
+import { RoomIcon } from "@docspace/shared/components/room-icon";
+import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 
 import DetailsHelper from "../../helpers/DetailsHelper.js";
 import { StyledNoThumbnail, StyledThumbnail } from "../../styles/details";
 import { StyledProperties, StyledSubtitle } from "../../styles/common";
 
-import { RoomIcon } from "@docspace/shared/components/room-icon";
 const Details = ({
   t,
   selection,
@@ -106,9 +104,7 @@ const Details = ({
       ? selection?.logo
       : getInfoPanelItemIcon(selection, 96);
 
-  const isExternal = Boolean(selection?.external);
-
-  const badgeUrl = isExternal ? SharedLinkIconURL : "";
+  const badgeUrl = getRoomBadgeUrl(selection, 24);
 
   //console.log("InfoPanel->Details render", { selection });
 

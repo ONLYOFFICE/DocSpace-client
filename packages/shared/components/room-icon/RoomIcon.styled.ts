@@ -135,8 +135,8 @@ const StyledIcon = styled.div<{
   .room-icon_badge {
     z-index: 2;
     position: absolute;
-    margin-block: ${({ size }) => (size === "96px" ? "74px 0" : "24px 0")};
-    margin-inline: ${({ size }) => (size === "96px" ? "74px 0" : "24px 0")};
+    margin-block: ${({ size }) => (size === "96px" ? "80px 0" : "24px 0")};
+    margin-inline: ${({ size }) => (size === "96px" ? "80px 0" : "24px 0")};
 
     .room-icon-button {
       svg {
@@ -161,11 +161,16 @@ const StyledIcon = styled.div<{
     }
 
     .room-icon-button:has(svg:not(.link)) {
-      width: 12px;
-      height: 12px;
+      width: ${({ size }) => (size === "96px" ? "28px" : "12px")};
+      height: ${({ size }) => (size === "96px" ? "28px" : "12px")};
       border: ${(props) => `1px solid ${props.theme.backgroundColor}`};
       border-radius: 50%;
     }
+  }
+
+  .room-icon_badge:has(.link) {
+    margin-block: ${({ size }) => (size === "96px" ? "74px 0" : "24px 0")};
+    margin-inline: ${({ size }) => (size === "96px" ? "74px 0" : "24px 0")};
   }
 
   .room-icon-container {

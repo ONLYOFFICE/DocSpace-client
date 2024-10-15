@@ -1,5 +1,3 @@
-import { tfaAppValidate } from "./tfaAppValidate";
-
 export {
   colorTheme as colorThemeHandler,
   getSuccessColorTheme,
@@ -50,3 +48,15 @@ export {
   tfaAppValidateSuccess,
   PATH as TFA_APP_VALIDATE_PATH,
 } from "./tfaAppValidate";
+
+export {
+  owner as ownerHandler,
+  ownerSuccess,
+  PATH as OWNER_PATH,
+} from "./owner";
+
+export {
+  companyInfo as companyInfoHandler,
+  companyInfoSuccess,
+  PATH as COMPANY_INFO_PATH,
+} from "./companyInfo";

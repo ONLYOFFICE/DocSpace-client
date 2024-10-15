@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
-import * as Styled from "./index.styled";
+import * as Styled from "./RowView.styled";
 import { Link } from "@docspace/shared/components/link";
 import { withTranslation } from "react-i18next";
 import {

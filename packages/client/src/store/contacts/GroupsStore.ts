@@ -121,6 +121,9 @@ class GroupsStore {
   }
 
   get hasMoreGroups() {
+    if (this.clientLoadingStore.isLoading || this.groupsIsIsLoading)
+      return false;
+
     return this.groups.length < this.groupsFilterTotal;
   }
 
@@ -398,19 +401,21 @@ class GroupsStore {
   ) => {
     const { isRoomAdmin, isCollaborator } = this.userStore.user!;
 
-    return [
-      !isRoomAdmin &&
-        !isCollaborator &&
-        !item?.isLDAP && {
-          id: "edit-group",
-          key: "edit-group",
-          className: "group-menu_drop-down",
-          label: t("PeopleTranslations:EditGroup"),
-          title: t("PeopleTranslations:EditGroup"),
-          icon: PencilReactSvgUrl,
-          onClick: () => editGroup(item),
-        },
-      !forInfoPanel && {
+    const options = [];
+
+    if (!isRoomAdmin && !isCollaborator && !item?.isLDAP)
+      options.push({
+        id: "edit-group",
+        key: "edit-group",
+        className: "group-menu_drop-down",
+        label: t("PeopleTranslations:EditGroup"),
+        title: t("PeopleTranslations:EditGroup"),
+        icon: PencilReactSvgUrl,
+        onClick: () => editGroup(item),
+      });
+
+    if (!forInfoPanel)
+      options.push({
         id: "info",
         key: "group-info",
         className: "group-menu_drop-down",
@@ -428,25 +433,25 @@ class GroupsStore {
           }
           this.infoPanelStore.setIsVisible(true);
         },
-      },
-      !isRoomAdmin &&
-        !isCollaborator &&
-        !item?.isLDAP && {
-          key: "separator",
-          isSeparator: true,
-        },
-      !isRoomAdmin &&
-        !isCollaborator &&
-        !item?.isLDAP && {
-          id: "delete-group",
-          key: "delete-group",
-          className: "group-menu_drop-down",
-          label: t("Common:Delete"),
-          title: t("Common:Delete"),
-          icon: TrashReactSvgUrl,
-          onClick: () => this.deleteGroup(item, forInsideGroup),
-        },
-    ];
+      });
+
+    if (!isRoomAdmin && !isCollaborator && !item?.isLDAP) {
+      options.push({
+        key: "separator",
+        isSeparator: true,
+      });
+      options.push({
+        id: "delete-group",
+        key: "delete-group",
+        className: "group-menu_drop-down",
+        label: t("Common:Delete"),
+        title: t("Common:Delete"),
+        icon: TrashReactSvgUrl,
+        onClick: () => this.deleteGroup(item, forInsideGroup),
+      });
+    }
+
+    return options;
   };
 
   getModel = (t: TFunction, item: TGroup) => {

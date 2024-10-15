@@ -563,8 +563,6 @@ export const Component = inject(
       !groupsIsFiltered &&
       ((groups && groups.length === 0) || !Boolean(groups));
 
-    console.log(isEmptyGroups);
-
     if (!firstLoad) {
       if (isLoading) {
         showLoader();

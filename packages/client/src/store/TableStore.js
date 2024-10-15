@@ -93,8 +93,8 @@ class TableStore {
   sizeTrashColumnIsEnabled = true;
   typeTrashColumnIsEnabled = false;
 
-  peopleAccountsGroupsColumnIsEnabled = true;
-  managerAccountsGroupsColumnIsEnabled = true;
+  peopleGroupsColumnIsEnabled = true;
+  managerGroupsColumnIsEnabled = true;
 
   typePeopleColumnIsEnabled = true;
   groupPeopleColumnIsEnabled = true;
@@ -236,10 +236,10 @@ class TableStore {
   setTypeTrashColumn = (enable) => (this.typeTrashColumnIsEnabled = enable);
   setLastOpenedColumn = (enable) => (this.lastOpenedColumnIsEnabled = enable);
 
-  setAccountsGroupsColumnPeople = (enable) =>
-    (this.peopleAccountsGroupsColumnIsEnabled = enable);
-  setAccountsGroupsColumnManager = (enable) =>
-    (this.managerAccountsGroupsColumnIsEnabled = enable);
+  setGroupsColumnPeople = (enable) =>
+    (this.peopleGroupsColumnIsEnabled = enable);
+  setGroupsColumnManager = (enable) =>
+    (this.managerGroupsColumnIsEnabled = enable);
 
   setPeopleColumnType = (enable) => (this.typePeopleColumnIsEnabled = enable);
   setPeopleColumnEmail = (enable) => (this.emailPeopleColumnIsEnabled = enable);
@@ -292,10 +292,8 @@ class TableStore {
       }
 
       if (isContactsGroups) {
-        this.setAccountsGroupsColumnPeople(splitColumns.includes("People"));
-        this.setAccountsGroupsColumnManager(
-          splitColumns.includes("Head of Group"),
-        );
+        this.setGroupsColumnPeople(splitColumns.includes("People"));
+        this.setGroupsColumnManager(splitColumns.includes("Head of Group"));
         return;
       }
 
@@ -510,15 +508,11 @@ class TableStore {
         return;
 
       case "People":
-        this.setAccountsGroupsColumnPeople(
-          !this.peopleAccountsGroupsColumnIsEnabled,
-        );
+        this.setGroupsColumnPeople(!this.peopleGroupsColumnIsEnabled);
         return;
 
       case "Head of Group":
-        this.setAccountsGroupsColumnManager(
-          !this.managerAccountsGroupsColumnIsEnabled,
-        );
+        this.setGroupsColumnManager(!this.managerGroupsColumnIsEnabled);
         return;
 
       default:

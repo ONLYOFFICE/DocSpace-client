@@ -42,10 +42,10 @@ import GroupIcon from "PUBLIC_DIR/images/emptyview/group.svg";
 import { resetContactsGroupsFilter } from "SRC_DIR/helpers/contacts";
 
 type EmptyScreenGroupsProps = {
-  isRoomAdmin: boolean;
-  isCollaborator: boolean;
-  groupsIsFiltered: boolean;
-  setIsLoading: (value: boolean) => void;
+  isRoomAdmin?: boolean;
+  isCollaborator?: boolean;
+  groupsIsFiltered?: boolean;
+  setIsLoading?: (value: boolean) => void;
 };
 
 const EmptyScreenGroups = ({
@@ -71,7 +71,7 @@ const EmptyScreenGroups = ({
 
   const onResetFilter = (event: React.MouseEvent) => {
     event.preventDefault();
-    setIsLoading(true);
+    setIsLoading!(true);
     resetContactsGroupsFilter();
   };
 

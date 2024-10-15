@@ -24,63 +24,61 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
+import { useLocation } from "react-router-dom";
 
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
+import { Consumer } from "@docspace/shared/utils/context";
+import { RowsSkeleton, TableSkeleton } from "@docspace/shared/skeletons";
 
-import * as Styled from "./index.styled";
-import EmptyScreenGroups from "../../EmptyScreenGroups";
-import GroupsRow from "./GroupsRow";
+import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
+import UsersStore from "SRC_DIR/store/contacts/UsersStore";
 
-const RowView = ({
-  groups,
-  sectionWidth,
-  accountsViewAs,
-  setViewAs,
-  isFiltered,
-  hasMoreGroups,
-  fetchMoreGroups,
-  filterTotal,
-  currentDeviceType,
-}) => {
-  useViewEffect({
-    view: accountsViewAs,
-    setView: setViewAs,
-    currentDeviceType,
-  });
+import TableView from "./TableView";
+import RowView from "./RowView";
 
-  if (groups.length === 0) return <EmptyScreenGroups />;
+type GroupsProps = {
+  viewAs: PeopleStore["viewAs"];
+  isGroupsLoaded: boolean;
+  setUsersSelection: UsersStore["setSelection"];
+  setUsersBufferSelection: UsersStore["setBufferSelection"];
+};
+
+const Groups = ({
+  viewAs,
+  isGroupsLoaded,
+  setUsersSelection,
+  setUsersBufferSelection,
+}: GroupsProps) => {
+  const location = useLocation();
+
+  useEffect(() => {
+    setUsersSelection([]);
+
+    setUsersBufferSelection(null);
+  }, [location]);
+
+  if (!isGroupsLoaded) {
+    if (viewAs === "table") return <TableSkeleton />;
+    return <RowsSkeleton />;
+  }
 
   return (
-    <Styled.GroupsRowContainer
-      className="people-row-container"
-      useReactWindow
-      fetchMoreFiles={fetchMoreGroups}
-      hasMoreFiles={hasMoreGroups}
-      itemCount={filterTotal}
-      filesLength={groups.length}
-      itemHeight={58}
-    >
-      {groups.map((item, index) => (
-        <GroupsRow
-          key={item.id}
-          item={item}
-          itemIndex={index}
-          sectionWidth={sectionWidth}
-        />
-      ))}
-    </Styled.GroupsRowContainer>
+    <Consumer>
+      {(context) =>
+        viewAs === "table" ? (
+          <TableView sectionWidth={context.sectionWidth} />
+        ) : (
+          <RowView sectionWidth={context.sectionWidth} />
+        )
+      }
+    </Consumer>
   );
 };
 
-export default inject(({ peopleStore, settingsStore }) => ({
-  groups: peopleStore.groupsStore.groups,
-  accountsViewAs: peopleStore.viewAs,
-  setViewAs: peopleStore.setViewAs,
-
-  hasMoreGroups: peopleStore.groupsStore.hasMoreGroups,
-  fetchMoreGroups: peopleStore.groupsStore.fetchMoreGroups,
-  filterTotal: peopleStore.groupsStore.groupsFilterTotal,
-  isFiltered: peopleStore.groupsStore.groupsIsFiltered,
-  currentDeviceType: settingsStore.currentDeviceType,
-}))(observer(RowView));
+export default inject(({ peopleStore }: TStore) => ({
+  viewAs: peopleStore.viewAs,
+  isGroupsLoaded: peopleStore.groupsStore!.groups !== undefined,
+  setUsersSelection: peopleStore.usersStore.setSelection,
+  setUsersBufferSelection: peopleStore.usersStore.setBufferSelection,
+}))(observer(Groups));

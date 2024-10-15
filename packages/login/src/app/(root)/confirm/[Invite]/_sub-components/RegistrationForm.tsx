@@ -70,6 +70,9 @@ type RegistrationFormProps = {
   onKeyPress(e: KeyboardEvent<HTMLInputElement>): void;
   onValidatePassword(progressScore: boolean): void;
 
+  isChecked: boolean;
+  onChangeCheckbox(): void;
+
   onClickBack(): void;
   onSubmit(): void;
 
@@ -100,11 +103,15 @@ const RegistrationForm = ({
   onKeyPress,
   onValidatePassword,
 
+  isChecked,
+  onChangeCheckbox,
+
   onClickBack,
   onSubmit,
 
   licenseUrl,
   legalTerms,
+  isStandalone,
 }: RegistrationFormProps) => {
   const { t } = useTranslation(["Confirm", "Common"]);
 
@@ -246,10 +253,16 @@ const RegistrationForm = ({
         />
       </FieldContainer>
 
-      <div className="news-subscription">
-        <Checkbox className="checkbox-news" />
-        <Text>{t("Confirm:Newsletter")}</Text>
-      </div>
+      {!isStandalone && (
+        <div className="news-subscription">
+          <Checkbox
+            className="checkbox-news"
+            onChange={onChangeCheckbox}
+            isChecked={isChecked}
+          />
+          <Text>{t("Confirm:Newsletter")}</Text>
+        </div>
+      )}
 
       {termsConditionsComponent}
 

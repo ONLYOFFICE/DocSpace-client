@@ -93,6 +93,7 @@ async function Page({ searchParams, params }: LinkInviteProps) {
               thirdPartyProviders={thirdParty}
               legalTerms={settings.legalTerms}
               licenseUrl={settings.licenseUrl}
+              isStandalone={settings.standalone}
             />
           </FormWrapper>
         </>

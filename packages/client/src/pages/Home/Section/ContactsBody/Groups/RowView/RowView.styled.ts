@@ -85,6 +85,7 @@ export const GroupsRowContainer = styled(RowContainer)`
 export const GroupsRowWrapper = styled.div<{
   isChecked?: boolean;
   isActive?: boolean;
+  value?: string;
 }>`
   .group-item {
     border: 1px solid transparent;

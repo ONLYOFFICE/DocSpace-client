@@ -24,64 +24,72 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
-import * as Styled from "./RowView.styled";
-import { Link } from "@docspace/shared/components/link";
-import { withTranslation } from "react-i18next";
+
+import { Link, LinkTarget } from "@docspace/shared/components/link";
 import {
   Avatar,
   AvatarRole,
   AvatarSize,
 } from "@docspace/shared/components/avatar";
+import { TGroup } from "@docspace/shared/api/groups/types";
+
+import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
+
 import Badges from "../../Badges";
 
-const GroupsRow = ({
-  t,
+import {
+  GroupsRowWrapper,
+  GroupsRow,
+  GroupsRowContent,
+} from "./RowView.styled";
+
+type GroupsRowProps = {
+  item: TGroup;
+  sectionWidth: number;
+
+  selection?: GroupsStore["selection"];
+  bufferSelection?: GroupsStore["bufferSelection"];
+  getGroupContextOptions?: GroupsStore["getGroupContextOptions"];
+  getModel?: GroupsStore["getModel"];
+  openGroupAction?: GroupsStore["openGroupAction"];
+  changeGroupSelection?: GroupsStore["changeGroupSelection"];
+  changeGroupContextSelection?: GroupsStore["changeGroupContextSelection"];
+};
+
+const GroupsRowComponent = ({
   item,
   selection,
   bufferSelection,
   getGroupContextOptions,
   getModel,
   sectionWidth,
-  theme,
   openGroupAction,
   changeGroupSelection,
   changeGroupContextSelection,
-}) => {
-  const isChecked = selection.some((el) => el.id === item.id);
+}: GroupsRowProps) => {
+  const { t } = useTranslation(["People", "Common", "PeopleTranslations"]);
+
+  const isChecked = selection?.some((el) => el.id === item.id);
   const isActive = bufferSelection?.id === item?.id;
 
   const onSelect = () => {
-    changeGroupSelection(item, isChecked);
+    changeGroupSelection!(item, isChecked ?? false);
   };
 
-  const onRowContextClick = (rightMouseButtonClick) => {
-    changeGroupContextSelection(item, !rightMouseButtonClick);
+  const onRowContextClick = (rightMouseButtonClick?: boolean) => {
+    changeGroupContextSelection!(item, !rightMouseButtonClick);
   };
 
-  const onOpenGroup = (e) => {
-    openGroupAction(item.id, true, item.name, e);
+  const onOpenGroup = (e: React.MouseEvent) => {
+    openGroupAction!(item.id, true, item.name, e);
   };
 
-  const nameColor =
-    item.statusType === "pending" || item.statusType === "disabled"
-      ? theme.peopleTableRow.pendingNameColor
-      : theme.peopleTableRow.nameColor;
-  const sideInfoColor = theme.peopleTableRow.sideInfoColor;
-
-  const titleWithoutSpaces = item.name.replace(/\s+/g, " ").trim();
-  const indexAfterLastSpace = titleWithoutSpaces.lastIndexOf(" ");
-  const secondCharacter =
-    indexAfterLastSpace === -1
-      ? ""
-      : titleWithoutSpaces[indexAfterLastSpace + 1];
-
-  const groupName = (item.name[0] + secondCharacter).toUpperCase();
-
-  const getContextModel = () => getModel(t, item);
+  const getContextModel = () => getModel!(t, item);
 
   return (
-    <Styled.GroupsRowWrapper
+    <GroupsRowWrapper
       isChecked={isChecked}
       isActive={isActive}
       className={`group-item row-wrapper ${
@@ -89,49 +97,39 @@ const GroupsRow = ({
       } ${item.id}`}
       value={item.id}
     >
-      <div className={"group-item"}>
-        <Styled.GroupsRow
+      <div className="group-item">
+        <GroupsRow
           key={item.id}
-          data={item}
           onContextClick={onRowContextClick}
           onSelect={onSelect}
-          onDoubleClick={onOpenGroup}
-          onFilesClick={onOpenGroup}
+          onRowClick={onOpenGroup!}
+          isIndexEditingMode={false}
           element={
             <Avatar
               size={AvatarSize.min}
               userName={item.name}
-              isGroup={true}
+              isGroup
               role={AvatarRole.none}
               source=""
             />
           }
-          checked={isChecked}
+          checked={isChecked ?? false}
           isActive={isActive}
-          contextOptions={getGroupContextOptions(t, item)}
+          contextOptions={getGroupContextOptions!(t, item)}
           getContextModel={getContextModel}
-          sectionWidth={sectionWidth}
-          mode={"modern"}
-          className={"group-row"}
+          mode="modern"
+          className="group-row"
         >
-          <Styled.GroupsRowContent
-            sideColor={sideInfoColor}
-            sectionWidth={sectionWidth}
-            nameColor={nameColor}
-            sideInfoColor={sideInfoColor}
-          >
+          <GroupsRowContent sectionWidth={sectionWidth}>
             <Link
-              key={"group-title"}
-              containerWidth="28%"
-              target="_blank"
+              key="group-title"
+              target={LinkTarget.blank}
               title={item.name}
               fontWeight={600}
               fontSize="15px"
               lineHeight="20px"
-              color={nameColor}
-              isTextOverflow={true}
+              isTextOverflow
               onClick={onOpenGroup}
-              dir="auto"
             >
               {item.name}
             </Link>
@@ -139,42 +137,33 @@ const GroupsRow = ({
             <Badges isLDAP={item.isLDAP} />
 
             <Link
-              key={"group-title"}
-              containerWidth="28%"
-              target="_blank"
+              key="group-title"
+              target={LinkTarget.blank}
               title={item.name}
               fontWeight={600}
               fontSize="15px"
               lineHeight="20px"
-              color={nameColor}
-              isTextOverflow={true}
+              isTextOverflow
               onClick={onOpenGroup}
             >
               {t("PeopleTranslations:PeopleCount", {
                 count: item.membersCount,
               })}
             </Link>
-          </Styled.GroupsRowContent>
-        </Styled.GroupsRow>
+          </GroupsRowContent>
+        </GroupsRow>
       </div>
-    </Styled.GroupsRowWrapper>
+    </GroupsRowWrapper>
   );
 };
 
-export default inject(({ peopleStore, settingsStore }) => ({
-  selection: peopleStore.groupsStore.selection,
-  bufferSelection: peopleStore.groupsStore.bufferSelection,
-  getGroupContextOptions: peopleStore.groupsStore.getGroupContextOptions,
-  getModel: peopleStore.groupsStore.getModel,
-  openGroupAction: peopleStore.groupsStore.openGroupAction,
-  changeGroupSelection: peopleStore.groupsStore.changeGroupSelection,
+export default inject(({ peopleStore }: TStore) => ({
+  selection: peopleStore.groupsStore!.selection,
+  bufferSelection: peopleStore.groupsStore!.bufferSelection,
+  getGroupContextOptions: peopleStore.groupsStore!.getGroupContextOptions,
+  getModel: peopleStore.groupsStore!.getModel,
+  openGroupAction: peopleStore.groupsStore!.openGroupAction,
+  changeGroupSelection: peopleStore.groupsStore!.changeGroupSelection,
   changeGroupContextSelection:
-    peopleStore.groupsStore.changeGroupContextSelection,
-  theme: settingsStore.theme,
-}))(
-  withTranslation(
-    "People",
-    "Common",
-    "PeopleTranslations",
-  )(observer(GroupsRow)),
-);
+    peopleStore.groupsStore!.changeGroupContextSelection,
+}))(observer(GroupsRowComponent));

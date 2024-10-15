@@ -24,18 +24,54 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-export {
-  thirdPartyProvider as thirdPartyProviderHandler,
-  successThirdpartyProviders,
-} from "./thirdPartyProviders";
+import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
+import { expect, test } from "./fixtures/base";
+import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
-export { self as selfHandler, successSelf } from "./self";
+const URL = "/login/confirm/ProfileRemove";
 
-export {
-  PATH as SELF_PATH,
-  PATH_CHANGE_AUTH_DATA as SELF_PATH_CHANGE_AUTH_DATA,
-  PATH_ACTIVATION_STATUS as SELF_PATH_ACTIVATION_STATUS,
-  PATH_UPDATE_USER as SELF_PATH_UPDATE_USER,
-  PATH_DELETE_USER as SELF_PATH_DELETE_USER,
-  PATH_USER_BY_EMAIL as SELF_PATH_USER_BY_EMAIL,
-} from "./self";
+const QUERY_PARAMS = [
+  {
+    name: "type",
+    value: "ProfileRemove",
+  },
+  {
+    name: "key",
+    value: "123",
+  },
+  {
+    name: "email",
+    value: "mail@mail.com",
+  },
+  {
+    name: "uid",
+    value: "123",
+  },
+];
+
+const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
+
+test("profile remove render", async ({ page }) => {
+  await page.goto(URL_WITH_PARAMS);
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "profile-remove",
+    "profile-remove-render.png",
+  ]);
+});
+
+test("profile remove success", async ({ page, context, mockRequest }) => {
+  await mockRequest.router([endpoints.removeUser]);
+  await page.goto(URL_WITH_PARAMS);
+
+  await page.getByTestId("button").click();
+
+  await page.getByTestId("button").waitFor({ state: "detached" });
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "profile-remove",
+    "profile-remove-success.png",
+  ]);
+});

@@ -162,12 +162,12 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
               onClick={onClickBadgeAction}
               title={badgeTitle}
             >
-              {badgeComponent || !iconBadge ? (
+              {iconBadge ? (
+                <ReactSVG className="catalog-item__icon" src={iconBadge} />
+              ) : (
                 (badgeComponent ?? (
                   <Badge className="catalog-item__badge" label={labelBadge} />
                 ))
-              ) : (
-                <ReactSVG className="catalog-item__icon" src={iconBadge} />
               )}
             </StyledArticleItemBadgeWrapper>
           )}

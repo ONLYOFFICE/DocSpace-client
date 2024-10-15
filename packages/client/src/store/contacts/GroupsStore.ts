@@ -75,7 +75,7 @@ class GroupsStore {
   insideGroupTempTitle: string | null = null;
 
   constructor(
-    public peopleStore: any,
+    public peopleStore: TStore["peopleStore"],
     public infoPanelStore: InfoPanelStore,
     public clientLoadingStore: ClientLoadingStore,
     public userStore: UserStore,
@@ -211,7 +211,7 @@ class GroupsStore {
     this.selected = selected;
     this.setSelection(this.getGroupsBySelected(selected));
 
-    this.peopleStore.contactsHotkeysStore.setHotkeyCaret(null);
+    this.peopleStore.contactsHotkeysStore!.setHotkeyCaret(null);
     return selected;
   };
 
@@ -277,13 +277,13 @@ class GroupsStore {
 
   onDeleteClick = (name: string) => {
     this.setGroupName(name);
-    this.peopleStore.dialogStore.setDeleteGroupDialogVisible(true);
+    this.dialogStore.setDeleteGroupDialogVisible(true);
   };
 
   onDeleteGroup = async (t: TFunction, groupId: string) => {
     const { setInfoPanelSelectedGroup } = this.infoPanelStore;
     const isDeletingCurrentGroup =
-      this.peopleStore.usersStore.contatsTab === "inside_group" &&
+      this.peopleStore.usersStore!.contactsTab === "inside_group" &&
       this.currentGroup?.id === groupId;
 
     this.setIsLoading(true);
@@ -423,8 +423,8 @@ class GroupsStore {
               this.setBufferSelection(item);
             }
           } else {
-            this.peopleStore.usersStore.setSelection([]);
-            this.peopleStore.usersStore.setBufferSelection(null);
+            this.peopleStore.usersStore!.setSelection([]);
+            this.peopleStore.usersStore!.setBufferSelection(null);
           }
           this.infoPanelStore.setIsVisible(true);
         },
@@ -459,7 +459,7 @@ class GroupsStore {
     groupId: string,
     withBackURL: boolean,
     tempTitle: string,
-    e: React.MouseEvent<Element, MouseEvent>,
+    e?: React.MouseEvent<Element, MouseEvent>,
   ) => {
     const { setIsSectionBodyLoading, setIsSectionFilterLoading } =
       this.clientLoadingStore;
@@ -511,15 +511,15 @@ class GroupsStore {
       }
 
       if (
-        this.peopleStore.usersStore.contatsTab === "inside_group" &&
+        this.peopleStore.usersStore!.contactsTab === "inside_group" &&
         this.currentGroup?.id === groupId
       ) {
         this.setCurrentGroup(res);
         this.setInsideGroupTempTitle(res.name);
-        this.peopleStore.usersStore.getUsersList();
+        this.peopleStore.usersStore!.getUsersList();
       }
 
-      if (infoPanelSelection?.id === res.id) {
+      if ((infoPanelSelection as unknown as TGroup)?.id === res.id) {
         setInfoPanelSelection(res);
         setInfoPanelSelectedGroup(res);
       }
@@ -554,7 +554,7 @@ class GroupsStore {
     const isGroupSelected = !!this.selection.find((s) => s.id === group.id);
     const isSingleSelected = isGroupSelected && this.selection.length === 1;
 
-    this.peopleStore.usersStore.setBufferSelection(null);
+    this.peopleStore.usersStore!.setBufferSelection(null);
 
     if (this.bufferSelection) {
       this.setBufferSelection(null);
@@ -587,7 +587,7 @@ class GroupsStore {
   };
 
   changeGroupContextSelection = (group: TGroup, isSingleMenu: boolean) => {
-    this.peopleStore.usersStore.setBufferSelection(null);
+    this.peopleStore.usersStore!.setBufferSelection(null);
 
     if (isSingleMenu) {
       this.singleContextMenuAction(group);

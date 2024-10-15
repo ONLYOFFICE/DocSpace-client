@@ -251,19 +251,23 @@ const EditGroupDialog = ({
 
       {selectGroupMangerPanelIsVisible && (
         <SelectGroupManagerPanel
-          isVisible={selectGroupMangerPanelIsVisible}
           onClose={onHideSelectGroupManagerPanel}
           onParentPanelClose={onClose}
-          setGroupManager={addManager}
+          setGroupManager={(user) => {
+            addManager(user);
+            setSelectGroupMangerPanelIsVisible(false);
+          }}
         />
       )}
 
       {selectMembersPanelIsVisible && (
         <SelectMembersPanel
-          isVisible={selectMembersPanelIsVisible}
           onClose={onHideSelectMembersPanel}
           onParentPanelClose={onClose}
-          addMembers={addMembers}
+          addMembers={(users) => {
+            addMembers(users);
+            setSelectMembersPanelIsVisible(false);
+          }}
         />
       )}
     </>

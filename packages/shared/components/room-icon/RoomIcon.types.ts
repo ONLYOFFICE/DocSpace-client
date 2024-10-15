@@ -23,9 +23,9 @@ type RoomIconExpansion = {
   withEditing?: boolean;
   onChangeFile?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isEmptyIcon?: boolean;
-  dropDownManualX: string;
+  dropDownManualX?: string;
   model?: Model;
-  currentColorScheme: TColorScheme;
+  currentColorScheme?: TColorScheme;
   logo?: TLogo;
 };
 

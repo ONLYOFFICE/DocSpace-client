@@ -1,8 +1,9 @@
 import {
   API_PREFIX,
   BASE_URL,
-  HEADER_PORTAL_DEACTIVATE_SETTINGS,
   HEADER_WIZARD_SETTINGS,
+  HEADER_WIZARD_WITH_AMI_SETTINGS,
+  HEADER_PORTAL_DEACTIVATE_SETTINGS,
 } from "../../utils";
 
 const PATH = "settings";
@@ -43,6 +44,7 @@ export const settingsWizzard = {
     limitedAccessSpace: false,
     userNameRegex: "^[\\p{L}\\p{M}' \\-]+$",
     maxImageUploadSize: 0,
+    isAmi: false,
   },
   count: 1,
   links: [
@@ -54,6 +56,11 @@ export const settingsWizzard = {
   status: 0,
   statusCode: 200,
   ok: true,
+};
+
+export const settingsWizzardWithAmi = {
+  ...settingsWizzard,
+  response: { ...settingsWizzard.response, isAmi: true },
 };
 
 export const settingsAuth = {};
@@ -110,10 +117,15 @@ export const settingsPortalDeactivate = {
 
 export const settings = (headers?: Headers): Response => {
   let isWizard = false;
+  let isWizardWithAmi = false;
   let isPortalDeactivate = false;
 
   if (headers?.get(HEADER_WIZARD_SETTINGS)) {
     isWizard = true;
+  }
+
+  if (headers?.get(HEADER_WIZARD_WITH_AMI_SETTINGS)) {
+    isWizardWithAmi = true;
   }
 
   if (headers?.get(HEADER_PORTAL_DEACTIVATE_SETTINGS)) {
@@ -121,6 +133,8 @@ export const settings = (headers?: Headers): Response => {
   }
 
   if (isWizard) return new Response(JSON.stringify(settingsWizzard));
+  if (isWizardWithAmi)
+    return new Response(JSON.stringify(settingsWizzardWithAmi));
   if (isPortalDeactivate)
     return new Response(JSON.stringify(settingsPortalDeactivate));
 

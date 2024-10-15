@@ -5,6 +5,8 @@ export const API_PREFIX = "api/2.0";
 export const HEADER_LICENCE_REQUIRED = "x-test-data-license-required";
 
 export const HEADER_WIZARD_SETTINGS = "x-test-data-wizard-settings";
+export const HEADER_WIZARD_WITH_AMI_SETTINGS =
+  "x-test-data-wizard-with-ami-settings";
 export const HEADER_PORTAL_DEACTIVATE_SETTINGS =
   "x-test-data-portal-deactivate-settings";
 

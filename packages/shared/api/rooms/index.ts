@@ -124,10 +124,16 @@ export function getHistory(
   id,
   signal = null,
   requestToken,
+  filter,
 ) {
+  let params = "";
+
+  const str = toUrlParams(filter, false);
+  if (str) params = `?${str}`;
+
   const options = {
     method: "get",
-    url: `/files/${selectionType}/${id}/log`,
+    url: `/files/${selectionType}/${id}/log${params}`,
     signal,
   };
 

@@ -48,6 +48,8 @@ const UserContent = ({
   isDefaultUsersQuotaSet,
 
   standalone,
+
+  isRoomAdmin: isRoomAdminUser,
 }: UserContentProps) => {
   const { t } = useTranslation(["People", "Common"]);
   const theme = useTheme();
@@ -130,17 +132,19 @@ const UserContent = ({
       >
         {isGuests ? email : roleLabel}
       </Link>
-      <Link
-        type={LinkType.page}
-        title={email}
-        fontSize="12px"
-        fontWeight={400}
-        color={sideInfoColor}
-        isTextOverflow
-      >
-        {isGuests ? item.createdBy?.displayName : email}
-      </Link>
-      {isGuests && !isPending && !isDisabled && (
+      {(!isRoomAdminUser || !isGuests) && (
+        <Link
+          type={LinkType.page}
+          title={email}
+          fontSize="12px"
+          fontWeight={400}
+          color={sideInfoColor}
+          isTextOverflow
+        >
+          {isGuests ? item.createdBy?.displayName : email}
+        </Link>
+      )}
+      {isGuests && !isRoomAdminUser && !isPending && !isDisabled && (
         <Link
           type={LinkType.page}
           title={email}

@@ -70,6 +70,7 @@ const SUBJECT_ID = "subjectId";
 const TAGS = "tags";
 const TYPE = "type";
 const WITHOUT_TAGS = "withoutTags";
+const START_INDEX = "startIndex";
 
 export const toJSON = (filter: RoomsFilter) => {
   const filterObject = Object.entries(filter).reduce(
@@ -324,24 +325,24 @@ class RoomsFilter {
     } = this;
 
     const dtoFilter = {
-      page,
-      pageCount,
-      startIndex: this.getStartIndex(),
-      filterValue: (filterValue ?? "").trim(),
-      provider,
-      type,
-      subjectId,
-      searchInContent,
-      withSubfolders,
-      searchArea,
-      tags,
-      sortBy,
-      sortOrder,
-      excludeSubject,
-      withoutTags,
-      subjectFilter,
-      quotaFilter,
-      storageFilter,
+      [PAGE]: page,
+      [PAGE_COUNT]: pageCount,
+      [START_INDEX]: this.getStartIndex(),
+      [FILTER_VALUE]: (filterValue ?? "").trim(),
+      [PROVIDER]: provider,
+      [TYPE]: type,
+      [SUBJECT_ID]: subjectId,
+      [SEARCH_IN_CONTENT]: searchInContent,
+      [SEARCH_TYPE]: withSubfolders,
+      [SEARCH_AREA]: searchArea,
+      [TAGS]: tags,
+      [SORT_BY]: sortBy,
+      [SORT_ORDER]: sortOrder,
+      [EXCLUDE_SUBJECT]: excludeSubject,
+      [WITHOUT_TAGS]: withoutTags,
+      [SUBJECT_FILTER]: subjectFilter,
+      [QUOTA_FILTER]: quotaFilter,
+      [STORAGE_FILTER]: storageFilter,
     };
 
     return toUrlParams(dtoFilter, true);

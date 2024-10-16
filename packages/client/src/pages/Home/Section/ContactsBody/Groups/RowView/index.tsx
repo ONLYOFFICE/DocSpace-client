@@ -68,7 +68,7 @@ const RowView = ({
     setView: (view: string) => {
       setViewAs!(view as TContactsViewAs);
     },
-    currentDeviceType,
+    currentDeviceType: currentDeviceType!,
   });
 
   if (groups && groups?.length === 0) return <EmptyScreenGroups />;
@@ -85,7 +85,7 @@ const RowView = ({
       onScroll={() => {}}
     >
       {groups!.map((item) => (
-        <GroupsRow key={item.id} item={item} sectionWidth={sectionWidth} />
+        <GroupsRow key={item.id} item={item} sectionWidth={sectionWidth!} />
       ))}
     </GroupsRowContainer>
   );

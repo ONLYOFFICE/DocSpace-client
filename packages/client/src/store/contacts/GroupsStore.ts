@@ -477,6 +477,8 @@ class GroupsStore {
     const { setIsSectionBodyLoading, setIsSectionFilterLoading } =
       this.clientLoadingStore;
 
+    this.peopleStore.usersStore!.setContactsTab("inside_group");
+
     const insideGroupUrl = getContactsUrl("inside_group", groupId);
 
     if (openingNewTab(insideGroupUrl, e)) return;

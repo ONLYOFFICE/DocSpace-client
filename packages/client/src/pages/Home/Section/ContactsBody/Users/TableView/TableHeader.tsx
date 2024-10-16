@@ -62,6 +62,7 @@ class PeopleTableHeader extends React.Component<
       getColumns,
       contactsTab,
       tableStorageName,
+      isRoomAdmin,
     } = this.props;
 
     const isGuests = contactsTab === "guests";
@@ -145,7 +146,7 @@ class PeopleTableHeader extends React.Component<
       defaultColumns.splice(1, 0, typeColumn);
       defaultColumns.splice(2, 0, departmentColumn);
       if (showStorageInfo) defaultColumns.push(userQuotaColumn);
-    } else {
+    } else if (!isRoomAdmin) {
       defaultColumns.push(inviterColumn);
       defaultColumns.push(invitedDateColumn);
     }
@@ -272,7 +273,7 @@ export default inject(
 
       setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
 
-      userId: userStore.user?.id,
+      isRoomAdmin: userStore.user?.isRoomAdmin,
 
       infoPanelVisible,
 

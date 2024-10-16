@@ -101,7 +101,7 @@ const GroupsTableView = ({
     setView: (view: string) => {
       setViewAs!(view as TContactsViewAs);
     },
-    currentDeviceType,
+    currentDeviceType: currentDeviceType!,
   });
 
   return groups?.length ? (
@@ -109,7 +109,7 @@ const GroupsTableView = ({
       <GroupsTableHeader
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
-        sectionWidth={sectionWidth}
+        sectionWidth={sectionWidth!}
         containerRef={ref}
         navigate={navigate}
         location={location}

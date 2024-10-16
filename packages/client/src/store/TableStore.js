@@ -44,6 +44,7 @@ const COLUMNS_RECENT_SIZE = `recentColumnsSize_ver-${TableVersions.Recent}`;
 const COLUMNS_VDR_INDEXING_SIZE = `vdrIndexingColumnsSize_ver-${TableVersions.Rooms}`;
 const COLUMNS_PEOPLE_SIZE = `peopleColumnsSize_ver-${TableVersions.People}`;
 const COLUMNS_GUESTS_SIZE = `guestsColumnsSize_ver-${TableVersions.Guests}`;
+const COLUMNS_GROUPS_SIZE = `groupsColumnsSize_ver-${TableVersions.Groups}`;
 const COLUMNS_INSIDE_GROUPS_SIZE = `insideGroupColumnsSize_ver-${TableVersions.InsideGroup}`;
 
 const COLUMNS_SIZE_INFO_PANEL = `filesColumnsSizeInfoPanel_ver-${TableVersions.Files}`;
@@ -53,6 +54,7 @@ const COLUMNS_RECENT_SIZE_INFO_PANEL = `recentColumnsSizeInfoPanel_ver-${TableVe
 const COLUMNS_VDR_INDEXING_SIZE_INFO_PANEL = `vdrIndexingColumnsSizeInfoPanel_ver-${TableVersions.Recent}`;
 const COLUMNS_PEOPLE_INFO_PANEL_SIZE = `infoPanelPeopleColumnsSize_ver-${TableVersions.People}`;
 const COLUMNS_GUESTS_INFO_PANEL_SIZE = `infoPanelGuestsColumnsSize_ver-${TableVersions.Guests}`;
+const COLUMNS_GROUPS_INFO_PANEL_SIZE = `infoPanelGuestsColumnsSize_ver-${TableVersions.Groups}`;
 const COLUMNS_INSIDE_GROUPS_INFO_PANEL_SIZE = `infoPanelInsideGroupPeopleColumnsSize_ver-${TableVersions.InsideGroup}`;
 
 class TableStore {
@@ -598,6 +600,7 @@ class TableStore {
 
     const isContactsPeople = contactsTab === "people";
     const isContactsGuests = contactsTab === "guests";
+    const isContactsGroups = contactsTab === "groups";
     const isContactsInsideGroup = contactsTab === "inside_group";
 
     const isRooms = isRoomsFolder || isArchiveFolder;
@@ -619,7 +622,9 @@ class TableStore {
                 ? `${COLUMNS_GUESTS_SIZE}=${userId}`
                 : isContactsInsideGroup
                   ? `${COLUMNS_INSIDE_GROUPS_SIZE}=${userId}`
-                  : `${COLUMNS_SIZE}=${userId}`;
+                  : isContactsGroups
+                    ? `${COLUMNS_GROUPS_SIZE}=${userId}`
+                    : `${COLUMNS_SIZE}=${userId}`;
 
     return isFrame ? `SDK_${columnStorageName}` : columnStorageName;
   }
@@ -634,6 +639,7 @@ class TableStore {
 
     const isContactsPeople = contactsTab === "people";
     const isContactsGuests = contactsTab === "guests";
+    const isContactsGroups = contactsTab === "groups";
     const isContactsInsideGroup = contactsTab === "inside_group";
 
     const isRooms = isRoomsFolder || isArchiveFolder;
@@ -654,7 +660,9 @@ class TableStore {
                 ? `${COLUMNS_GUESTS_INFO_PANEL_SIZE}=${userId}`
                 : isContactsInsideGroup
                   ? `${COLUMNS_INSIDE_GROUPS_INFO_PANEL_SIZE}=${userId}`
-                  : `${COLUMNS_SIZE_INFO_PANEL}=${userId}`;
+                  : isContactsGroups
+                    ? `${COLUMNS_GROUPS_INFO_PANEL_SIZE}=${userId}`
+                    : `${COLUMNS_SIZE_INFO_PANEL}=${userId}`;
 
     return isFrame
       ? `SDK_${columnInfoPanelStorageName}`

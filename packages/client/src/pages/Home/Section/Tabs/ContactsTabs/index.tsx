@@ -54,6 +54,7 @@ type ContactsTabsProps = {
   setUsersSelection: UsersStore["setSelection"];
   setUsersBufferSelection: UsersStore["setBufferSelection"];
   isUsersFetched: UsersStore["isUsersFetched"];
+  setContactsTab: UsersStore["setContactsTab"];
 
   setGroupsSelection: GroupsStore["setSelection"];
   setGroupsBufferSelection: GroupsStore["setBufferSelection"];
@@ -81,6 +82,8 @@ const ContactsTabs = ({
 
   isUsersFetched,
   isGroupsFetched,
+
+  setContactsTab,
 }: ContactsTabsProps) => {
   const { t } = useTranslation(["Common"]);
   const location = useLocation();
@@ -94,6 +97,7 @@ const ContactsTabs = ({
     setGroupsSelection([]);
     setGroupsBufferSelection(null);
     setIsSectionBodyLoading(true, isUsersFetched);
+    setContactsTab("people");
     navigate(PEOPLE_ROUTE_WITH_FILTER);
   };
 
@@ -101,6 +105,7 @@ const ContactsTabs = ({
     setUsersSelection([]);
     setUsersBufferSelection(null);
     setIsSectionBodyLoading(true, isGroupsFetched);
+    setContactsTab("groups");
 
     navigate(GROUPS_ROUTE_WITH_FILTER);
   };
@@ -119,6 +124,7 @@ const ContactsTabs = ({
       filter.area = "guests";
       filter.inviterId = userId;
     }
+    setContactsTab("guests");
 
     navigate(`${GUESTS_ROUTE_WITH_FILTER}?${filter.toUrlParams()}`);
   };
@@ -194,6 +200,8 @@ export default inject(
       setBufferSelection: setUsersBufferSelection,
 
       isUsersFetched,
+
+      setContactsTab,
     } = usersStore!;
     const {
       setSelection: setGroupsSelection,
@@ -218,6 +226,8 @@ export default inject(
 
       isUsersFetched,
       isGroupsFetched,
+
+      setContactsTab,
     };
   },
 )(observer(ContactsTabs));

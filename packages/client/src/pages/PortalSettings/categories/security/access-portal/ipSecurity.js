@@ -79,11 +79,11 @@ const IpSecurity = (props) => {
     setIpRestrictionsEnable,
     ipRestrictions,
     setIpRestrictions,
-    initSettings,
     isInit,
     ipSettingsUrl,
     currentColorScheme,
     currentDeviceType,
+    loadSettings,
   } = props;
 
   const navigate = useNavigate();
@@ -126,14 +126,14 @@ const IpSecurity = (props) => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
 
-    if (!isInit) initSettings("ip").then(() => setIsLoading(true));
+    if (!isInit) loadSettings().then(() => setIsLoading(true));
     else setIsLoading(true);
 
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
   useEffect(() => {
-    if (!isInit) return;
+    if (!isLoading) return;
     const currentSettings = getFromSessionStorage("currentIPSettings");
     const defaultSettings = getFromSessionStorage("defaultIPSettings");
 
@@ -229,7 +229,7 @@ const IpSecurity = (props) => {
     setShowReminder(false);
   };
 
-  if (currentDeviceType !== DeviceType.desktop && !isInit && !isLoading) {
+  if (currentDeviceType !== DeviceType.desktop && !isLoading) {
     return <IpSecurityLoader />;
   }
 
@@ -324,19 +324,25 @@ export const IpSecuritySection = inject(({ settingsStore, setup }) => {
     ipSettingsUrl,
     currentColorScheme,
     currentDeviceType,
+    getIpRestrictionsEnable,
+    getIpRestrictions,
   } = settingsStore;
 
-  const { initSettings, isInit } = setup;
+  const { isInit } = setup;
 
+  const loadSettings = async () => {
+    await getIpRestrictionsEnable();
+    await getIpRestrictions();
+  };
   return {
     ipRestrictionEnable,
     setIpRestrictionsEnable,
     ipRestrictions,
     setIpRestrictions,
-    initSettings,
     isInit,
     ipSettingsUrl,
     currentColorScheme,
     currentDeviceType,
+    loadSettings,
   };
 })(withTranslation(["Settings", "Common"])(observer(IpSecurity)));

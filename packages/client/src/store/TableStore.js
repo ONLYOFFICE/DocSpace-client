@@ -559,13 +559,8 @@ class TableStore {
 
   // Column names
   get tableStorageName() {
-    const {
-      isRoomsFolder,
-      isArchiveFolder,
-      isTrashFolder,
-      isRecentTab,
-      isDocumentsFolder,
-    } = this.treeFoldersStore;
+    const { isRoomsFolder, isArchiveFolder, isTrashFolder, isRecentTab } =
+      this.treeFoldersStore;
 
     const { contactsTab } = this.peopleStore.usersStore;
 
@@ -578,6 +573,8 @@ class TableStore {
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
+
+    const isDocumentsFolder = !this.selectedFolderStore.isRooms;
 
     const tableStorageName = isRooms
       ? `${TABLE_ROOMS_COLUMNS}=${userId}`
@@ -599,18 +596,15 @@ class TableStore {
                       ? `${TABLE_COLUMNS}=${userId}`
                       : "";
 
-    return isFrame ? `SDK_${tableStorageName}` : tableStorageName;
+    return isFrame && tableStorageName
+      ? `SDK_${tableStorageName}`
+      : tableStorageName;
   }
 
   // Table column sizes
   get columnStorageName() {
-    const {
-      isRoomsFolder,
-      isArchiveFolder,
-      isTrashFolder,
-      isRecentTab,
-      isDocumentsFolder,
-    } = this.treeFoldersStore;
+    const { isRoomsFolder, isArchiveFolder, isTrashFolder, isRecentTab } =
+      this.treeFoldersStore;
 
     const { contactsTab } = this.peopleStore.usersStore;
 
@@ -622,6 +616,7 @@ class TableStore {
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
     const { isIndexedFolder } = this.selectedFolderStore;
+    const isDocumentsFolder = !this.selectedFolderStore.isRooms;
 
     const columnStorageName = isRooms
       ? `${COLUMNS_ROOMS_SIZE}=${userId}`
@@ -641,18 +636,15 @@ class TableStore {
                     ? `${COLUMNS_SIZE}=${userId}`
                     : "";
 
-    return isFrame ? `SDK_${columnStorageName}` : columnStorageName;
+    return isFrame && columnStorageName
+      ? `SDK_${columnStorageName}`
+      : columnStorageName;
   }
 
   // Column names for info-panel
   get columnInfoPanelStorageName() {
-    const {
-      isRoomsFolder,
-      isArchiveFolder,
-      isTrashFolder,
-      isRecentTab,
-      isDocumentsFolder,
-    } = this.treeFoldersStore;
+    const { isRoomsFolder, isArchiveFolder, isTrashFolder, isRecentTab } =
+      this.treeFoldersStore;
 
     const { isIndexedFolder } = this.selectedFolderStore;
     const { contactsTab } = this.peopleStore.usersStore;
@@ -664,6 +656,8 @@ class TableStore {
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
+
+    const isDocumentsFolder = !this.selectedFolderStore.isRooms;
 
     const columnInfoPanelStorageName = isRooms
       ? `${COLUMNS_ROOMS_SIZE_INFO_PANEL}=${userId}`
@@ -683,7 +677,7 @@ class TableStore {
                     ? `${COLUMNS_SIZE_INFO_PANEL}=${userId}`
                     : "";
 
-    return isFrame
+    return isFrame && columnInfoPanelStorageName
       ? `SDK_${columnInfoPanelStorageName}`
       : columnInfoPanelStorageName;
   }

@@ -50,7 +50,6 @@ const BruteForceProtection = (props) => {
     checkPeriod,
 
     getBruteForceProtection,
-    initSettings,
     isInit,
     bruteForceProtectionUrl,
     currentDeviceType,
@@ -94,16 +93,18 @@ const BruteForceProtection = (props) => {
   }, [currentNumberAttempt, currentBlockingTime, currentCheckPeriod]);
 
   useEffect(() => {
-    if (!isInit || !numberAttempt || !blockingTime || !checkPeriod) return;
+    if (!isGetSettingsLoaded || !numberAttempt || !blockingTime || !checkPeriod)
+      return;
     getSettings();
-  }, [isInit, numberAttempt, blockingTime, checkPeriod]);
+  }, [isGetSettingsLoaded, numberAttempt, blockingTime, checkPeriod]);
 
   useEffect(() => {
     checkWidth();
     window.addEventListener("resize", checkWidth);
 
-    if (!isInit) initSettings("brute-force-protection");
-
+    if (!isInit)
+      getBruteForceProtection().then(() => setIsGetSettingsLoaded(true));
+    else setIsGetSettingsLoaded(true);
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
 
@@ -355,7 +356,7 @@ export const BruteForceProtectionSection = inject(
       currentColorScheme,
     } = settingsStore;
 
-    const { initSettings, isInit } = setup;
+    const { isInit } = setup;
 
     return {
       numberAttempt,
@@ -363,7 +364,6 @@ export const BruteForceProtectionSection = inject(
       checkPeriod,
 
       getBruteForceProtection,
-      initSettings,
       isInit,
       bruteForceProtectionUrl,
       currentDeviceType,

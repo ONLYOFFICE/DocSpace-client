@@ -45,7 +45,7 @@ import { resetSessionStorage } from "../../utils";
 import config from "PACKAGE_FILE";
 
 const SecurityWrapper = (props) => {
-  const { t, initSettings, resetIsInit, currentDeviceType } = props;
+  const { t, initSettings, isInit, resetIsInit, currentDeviceType } = props;
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -78,7 +78,9 @@ const SecurityWrapper = (props) => {
   const currentTabId = getCurrentTabId();
 
   const load = async () => {
-    if (currentTabId === "access-portal") await initSettings();
+    !isInit &&
+      currentDeviceType !== DeviceType.mobile &&
+      (await initSettings());
     setIsLoading(true);
   };
 
@@ -122,9 +124,10 @@ const SecurityWrapper = (props) => {
 };
 
 export const Component = inject(({ settingsStore, setup }) => {
-  const { resetIsInit, initSettings } = setup;
+  const { resetIsInit, initSettings, isInit } = setup;
 
   return {
+    isInit,
     initSettings,
     resetIsInit,
     currentDeviceType: settingsStore.currentDeviceType,

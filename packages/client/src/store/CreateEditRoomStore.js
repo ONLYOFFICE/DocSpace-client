@@ -436,11 +436,11 @@ class CreateEditRoomStore {
       }
     } catch (err) {
       toastr.error(err);
-
+    } finally {
       this.setIsLoading(false);
       this.setConfirmDialogIsLoading(false);
       this.onClose();
-    } finally {
+
       processCreatingRoomFromData && setProcessCreatingRoomFromData(false);
     }
   };
@@ -449,10 +449,6 @@ class CreateEditRoomStore {
     const { setIsSectionFilterLoading } = this.clientLoadingStore;
     const { setSelection } = this.filesStore;
     const { setView, setIsVisible } = this.infoPanelStore;
-
-    const setIsLoading = (param) => {
-      setIsSectionFilterLoading(param);
-    };
 
     const state = {
       isRoot: false,
@@ -464,7 +460,8 @@ class CreateEditRoomStore {
 
     const newFilter = FilesFilter.getDefault();
     newFilter.folder = room.id;
-    setIsLoading(true);
+
+    setIsSectionFilterLoading(true);
 
     const path = getCategoryUrl(CategoryType.SharedRoom, room.id);
 
@@ -476,10 +473,6 @@ class CreateEditRoomStore {
       setIsVisible(true);
       setView("info_members");
     }
-
-    this.setIsLoading(false);
-    this.setConfirmDialogIsLoading(false);
-    this.onClose();
   };
 }
 

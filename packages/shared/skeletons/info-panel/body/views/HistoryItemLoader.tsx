@@ -24,43 +24,34 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-
 import { RectangleSkeleton } from "@docspace/shared/skeletons";
-import {
-  StyledAccountsLoader,
-  StyledProperty,
-  StyledSubtitleLoader,
-} from "../body.styled";
-import { propertyDimensions } from "../body.constant";
+import { StyledHistoryBlockLoader, StyledHistoryLoader } from "../body.styled";
 
-const AccountsLoader = () => {
+const HistoryItemLoader = () => {
   return (
-    <StyledAccountsLoader>
-      <StyledSubtitleLoader>
-        <RectangleSkeleton width="71px" height="16px" borderRadius="3px" />
-      </StyledSubtitleLoader>
-
-      <StyledProperty>
-        {propertyDimensions.map((property) => [
+    <StyledHistoryLoader>
+      <StyledHistoryBlockLoader>
+        <div className="content">
           <RectangleSkeleton
-            key={property.titleKey}
-            className="property-title"
-            width={property.propertyTitle}
-            height="20px"
-            borderRadius="3px"
-          />,
+            className="avatar"
+            width="32px"
+            height="32px"
+            borderRadius="50%"
+          />
+          <div className="message">
+            <RectangleSkeleton width="107px" height="16px" borderRadius="3px" />
+            <RectangleSkeleton width="176px" height="16px" borderRadius="3px" />
+          </div>
           <RectangleSkeleton
-            key={property.contentKey}
-            className="property-content"
-            width={property.propertyContent}
-            height="20px"
+            className="date"
+            width="107px"
+            height="16px"
             borderRadius="3px"
-          />,
-        ])}
-      </StyledProperty>
-    </StyledAccountsLoader>
+          />
+        </div>
+      </StyledHistoryBlockLoader>
+    </StyledHistoryLoader>
   );
 };
 
-export default AccountsLoader;
+export default HistoryItemLoader;

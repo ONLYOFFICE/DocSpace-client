@@ -281,9 +281,10 @@ class GroupsStore {
   };
 
   onDeleteGroup = async (t: TFunction, groupId: string) => {
-    const { getIsInsideGroup, setInfoPanelSelectedGroup } = this.infoPanelStore;
+    const { setInfoPanelSelectedGroup } = this.infoPanelStore;
     const isDeletingCurrentGroup =
-      getIsInsideGroup() && this.currentGroup?.id === groupId;
+      this.peopleStore.usersStore.contatsTab === "inside_group" &&
+      this.currentGroup?.id === groupId;
 
     this.setIsLoading(true);
 
@@ -494,7 +495,6 @@ class GroupsStore {
       infoPanelSelection,
       setInfoPanelSelection,
       setInfoPanelSelectedGroup,
-      getIsInsideGroup,
     } = this.infoPanelStore;
 
     try {
@@ -510,7 +510,10 @@ class GroupsStore {
         this.groups = this.groups.map((g) => (g.id === groupId ? res : g));
       }
 
-      if (getIsInsideGroup() && this.currentGroup?.id === groupId) {
+      if (
+        this.peopleStore.usersStore.contatsTab === "inside_group" &&
+        this.currentGroup?.id === groupId
+      ) {
         this.setCurrentGroup(res);
         this.setInsideGroupTempTitle(res.name);
         this.peopleStore.usersStore.getUsersList();

@@ -30,6 +30,9 @@ import React from "react";
 
 import { ButtonKeys } from "../../enums";
 
+import { Aside } from "../aside";
+import { Backdrop } from "../backdrop";
+
 import { Header } from "./sub-components/Header";
 import { Body } from "./sub-components/Body";
 import { Footer } from "./sub-components/Footer";
@@ -142,6 +145,11 @@ const Selector = ({
   infoText,
   infoBarData,
   withInfoBar,
+
+  useAside,
+  onClose,
+  withBlur,
+  withoutBackground,
 }: SelectorProps) => {
   const [footerVisible, setFooterVisible] = React.useState<boolean>(false);
 
@@ -566,7 +574,7 @@ const Selector = ({
     });
   }, [tabsData]);
 
-  return (
+  const selectorComponent = (
     <StyledSelector
       id={id}
       className={className}
@@ -638,6 +646,30 @@ const Selector = ({
         </InfoBarProvider>
       </EmptyScreenProvider>
     </StyledSelector>
+  );
+
+  return useAside ? (
+    <>
+      <Backdrop
+        onClick={onClose}
+        visible
+        zIndex={310}
+        isAside
+        withoutBackground={withoutBackground}
+        withoutBlur={!withBlur}
+      />
+      <Aside
+        className="header_aside-panel"
+        visible
+        onClose={onClose}
+        withoutBodyScroll
+        withoutHeader
+      >
+        {selectorComponent}
+      </Aside>
+    </>
+  ) : (
+    selectorComponent
   );
 };
 

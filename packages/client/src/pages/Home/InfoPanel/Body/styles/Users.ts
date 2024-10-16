@@ -24,12 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import { Base } from "@docspace/shared/themes";
-import { mobile, tablet } from "@docspace/shared/utils";
-import { TextUserSelect } from "@docspace/shared/utils";
+import styled from "styled-components";
+import { mobile, tablet, TextUserSelect } from "@docspace/shared/utils";
 
-const StyledAccountsItemTitle = styled.div`
+const StyledUsersTitle = styled.div`
   min-height: 80px;
   height: 80px;
   max-height: 104px;
@@ -102,9 +100,7 @@ const StyledAccountsItemTitle = styled.div`
   }
 `;
 
-StyledAccountsItemTitle.defaultProps = { theme: Base };
-
-const StyledAccountContent = styled.div`
+const StyledUsersContent = styled.div`
   margin-block: 0;
   margin-inline: 0 auto;
 
@@ -163,4 +159,4 @@ const StyledAccountContent = styled.div`
   }
 `;
 
-export { StyledAccountsItemTitle, StyledAccountContent };
+export { StyledUsersTitle, StyledUsersContent };

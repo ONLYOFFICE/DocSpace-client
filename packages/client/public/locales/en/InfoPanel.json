@@ -1,5 +1,6 @@
 {
-  "AccountsEmptyScreenText": "See users details here",
+  "UsersEmptyScreenText": "See users details here",
+  "GuestsEmptyScreenText": "See guests details here",
   "AddedRoomTags": "Tags added.",
   "Administration": "Administration",
   "AndMoreLabel": "and <1>{{count}} more</1>",
@@ -54,6 +55,7 @@
   "RoomsEmptyScreenTent": "See rooms details here",
   "RoomUpdateAccess": "has been assigned role",
   "SelectedUsers": "Selected accounts",
+  "SelectedGroups": "Selected groups",
   "StartedFillingItOut": "Started filling it out.",
   "StorageType": "Storage type",
   "SubmenuDetails": "Details",

@@ -68,6 +68,8 @@ class GroupsStore {
 
   groupsIsIsLoading = false;
 
+  isGroupsFetched = false;
+
   currentGroup: TGroup | null = null;
 
   insideGroupBackUrl: string | null = null;
@@ -75,7 +77,7 @@ class GroupsStore {
   insideGroupTempTitle: string | null = null;
 
   constructor(
-    public peopleStore: any,
+    public peopleStore: TStore["peopleStore"],
     public infoPanelStore: InfoPanelStore,
     public clientLoadingStore: ClientLoadingStore,
     public userStore: UserStore,
@@ -91,6 +93,10 @@ class GroupsStore {
 
     makeAutoObservable(this);
   }
+
+  setIsGroupsFetched = (isGroupsFetched: boolean) => {
+    this.isGroupsFetched = isGroupsFetched;
+  };
 
   // Groups Filter
 
@@ -121,6 +127,9 @@ class GroupsStore {
   }
 
   get hasMoreGroups() {
+    if (this.clientLoadingStore.isLoading || this.groupsIsIsLoading)
+      return false;
+
     return this.groups.length < this.groupsFilterTotal;
   }
 
@@ -150,6 +159,9 @@ class GroupsStore {
     this.clientLoadingStore.setIsSectionBodyLoading(true);
     const filterData = filter ? filter.clone() : GroupsFilter.getDefault();
 
+    this.setSelection([]);
+    this.setBufferSelection(null);
+
     const filterStorageItem = localStorage.getItem(
       `GroupsFilter=${this.userStore.user?.id}`,
     );
@@ -171,6 +183,8 @@ class GroupsStore {
 
     const res = await groupsApi.getGroups(filterData);
     filterData.total = res.total;
+
+    this.setIsGroupsFetched(true);
 
     if (updateFilter) this.setFilterParams(filterData);
 
@@ -211,7 +225,7 @@ class GroupsStore {
     this.selected = selected;
     this.setSelection(this.getGroupsBySelected(selected));
 
-    this.peopleStore.contactsHotkeysStore.setHotkeyCaret(null);
+    this.peopleStore.contactsHotkeysStore!.setHotkeyCaret(null);
     return selected;
   };
 
@@ -277,13 +291,13 @@ class GroupsStore {
 
   onDeleteClick = (name: string) => {
     this.setGroupName(name);
-    this.peopleStore.dialogStore.setDeleteGroupDialogVisible(true);
+    this.dialogStore.setDeleteGroupDialogVisible(true);
   };
 
   onDeleteGroup = async (t: TFunction, groupId: string) => {
     const { setInfoPanelSelectedGroup } = this.infoPanelStore;
     const isDeletingCurrentGroup =
-      this.peopleStore.usersStore.contatsTab === "inside_group" &&
+      this.peopleStore.usersStore!.contactsTab === "inside_group" &&
       this.currentGroup?.id === groupId;
 
     this.setIsLoading(true);
@@ -398,19 +412,21 @@ class GroupsStore {
   ) => {
     const { isRoomAdmin, isCollaborator } = this.userStore.user!;
 
-    return [
-      !isRoomAdmin &&
-        !isCollaborator &&
-        !item?.isLDAP && {
-          id: "edit-group",
-          key: "edit-group",
-          className: "group-menu_drop-down",
-          label: t("PeopleTranslations:EditGroup"),
-          title: t("PeopleTranslations:EditGroup"),
-          icon: PencilReactSvgUrl,
-          onClick: () => editGroup(item),
-        },
-      !forInfoPanel && {
+    const options = [];
+
+    if (!isRoomAdmin && !isCollaborator && !item?.isLDAP)
+      options.push({
+        id: "edit-group",
+        key: "edit-group",
+        className: "group-menu_drop-down",
+        label: t("PeopleTranslations:EditGroup"),
+        title: t("PeopleTranslations:EditGroup"),
+        icon: PencilReactSvgUrl,
+        onClick: () => editGroup(item),
+      });
+
+    if (!forInfoPanel)
+      options.push({
         id: "info",
         key: "group-info",
         className: "group-menu_drop-down",
@@ -423,30 +439,30 @@ class GroupsStore {
               this.setBufferSelection(item);
             }
           } else {
-            this.peopleStore.usersStore.setSelection([]);
-            this.peopleStore.usersStore.setBufferSelection(null);
+            this.peopleStore.usersStore!.setSelection([]);
+            this.peopleStore.usersStore!.setBufferSelection(null);
           }
           this.infoPanelStore.setIsVisible(true);
         },
-      },
-      !isRoomAdmin &&
-        !isCollaborator &&
-        !item?.isLDAP && {
-          key: "separator",
-          isSeparator: true,
-        },
-      !isRoomAdmin &&
-        !isCollaborator &&
-        !item?.isLDAP && {
-          id: "delete-group",
-          key: "delete-group",
-          className: "group-menu_drop-down",
-          label: t("Common:Delete"),
-          title: t("Common:Delete"),
-          icon: TrashReactSvgUrl,
-          onClick: () => this.deleteGroup(item, forInsideGroup),
-        },
-    ];
+      });
+
+    if (!isRoomAdmin && !isCollaborator && !item?.isLDAP) {
+      options.push({
+        key: "separator",
+        isSeparator: true,
+      });
+      options.push({
+        id: "delete-group",
+        key: "delete-group",
+        className: "group-menu_drop-down",
+        label: t("Common:Delete"),
+        title: t("Common:Delete"),
+        icon: TrashReactSvgUrl,
+        onClick: () => this.deleteGroup(item, forInsideGroup),
+      });
+    }
+
+    return options;
   };
 
   getModel = (t: TFunction, item: TGroup) => {
@@ -459,10 +475,12 @@ class GroupsStore {
     groupId: string,
     withBackURL: boolean,
     tempTitle: string,
-    e: React.MouseEvent<Element, MouseEvent>,
+    e?: React.MouseEvent<Element, MouseEvent>,
   ) => {
     const { setIsSectionBodyLoading, setIsSectionFilterLoading } =
       this.clientLoadingStore;
+
+    this.peopleStore.usersStore!.setContactsTab("inside_group");
 
     const insideGroupUrl = getContactsUrl("inside_group", groupId);
 
@@ -511,15 +529,15 @@ class GroupsStore {
       }
 
       if (
-        this.peopleStore.usersStore.contatsTab === "inside_group" &&
+        this.peopleStore.usersStore!.contactsTab === "inside_group" &&
         this.currentGroup?.id === groupId
       ) {
         this.setCurrentGroup(res);
         this.setInsideGroupTempTitle(res.name);
-        this.peopleStore.usersStore.getUsersList();
+        this.peopleStore.usersStore!.getUsersList();
       }
 
-      if (infoPanelSelection?.id === res.id) {
+      if ((infoPanelSelection as unknown as TGroup)?.id === res.id) {
         setInfoPanelSelection(res);
         setInfoPanelSelectedGroup(res);
       }
@@ -554,7 +572,7 @@ class GroupsStore {
     const isGroupSelected = !!this.selection.find((s) => s.id === group.id);
     const isSingleSelected = isGroupSelected && this.selection.length === 1;
 
-    this.peopleStore.usersStore.setBufferSelection(null);
+    this.peopleStore.usersStore!.setBufferSelection(null);
 
     if (this.bufferSelection) {
       this.setBufferSelection(null);
@@ -587,7 +605,7 @@ class GroupsStore {
   };
 
   changeGroupContextSelection = (group: TGroup, isSingleMenu: boolean) => {
-    this.peopleStore.usersStore.setBufferSelection(null);
+    this.peopleStore.usersStore!.setBufferSelection(null);
 
     if (isSingleMenu) {
       this.singleContextMenuAction(group);

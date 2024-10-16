@@ -47,6 +47,7 @@ import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_s
 
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 import {
+  getContactsView,
   getUserChecked,
   setContactsUsersFilterUrl,
   TChangeUserTypeDialogData,
@@ -116,6 +117,8 @@ class UsersStore {
     this.accessRightsStore = accessRightsStore;
     this.dialogStore = dialogStore;
     this.clientLoadingStore = clientLoadingStore;
+
+    this.contactsTab = getContactsView();
 
     makeAutoObservable(this);
   }

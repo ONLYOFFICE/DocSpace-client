@@ -70,7 +70,7 @@ class PeopleStore {
 
   contextOptionsStore: Nullable<ContactsConextOptionsStore> = null;
 
-  usersStore: Nullable<UsersStore> = null;
+  usersStore: UsersStore;
 
   constructor(
     public accessRightsStore: AccessRightsStore,

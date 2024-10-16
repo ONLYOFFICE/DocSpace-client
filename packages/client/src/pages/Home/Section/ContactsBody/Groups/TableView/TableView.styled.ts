@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base } from "@docspace/shared/themes";
+
 import { TableRow, TableContainer } from "@docspace/shared/components/table";
 
 const marginCss = css`
@@ -93,13 +93,14 @@ export const GroupsTableContainer = styled(TableContainer)`
   }
 `;
 
-GroupsTableContainer.defaultProps = { theme: Base };
-
-export const GroupsRowWrapper = styled.div`
+export const GroupsRowWrapper = styled.div<{ value?: string }>`
   display: contents;
 `;
 
-export const GroupsRow = styled(TableRow)`
+export const GroupsRow = styled(TableRow)<{
+  checked?: boolean;
+  isActive?: boolean;
+}>`
   .table-container_cell:not(.table-container_row-checkbox-wrapper) {
     height: auto;
     max-height: 48px;
@@ -160,5 +161,3 @@ export const GroupsRow = styled(TableRow)`
     }
   }
 `;
-
-GroupsRow.defaultProps = { theme: Base };

@@ -6,7 +6,7 @@
   "DescriptionForRegisteredUser": "Vyplnený formulár PDF sa uložil a môžete ho nájsť v priečinku Vyplnené. Ak chcete skontrolovať jeho stav, kontaktujte vlastníka formulára a uveďte pridelené číslo.",
   "FillItOutAgain": "Vyplňte ho znova",
   "FormCompletedSuccessfully": "Formulár je vyplnený",
-  "FormNumber": "Číslo formulára:",
+  "FormNumber": "Číslo formulára",
   "FormOwner": "Vlastník formulára",
   "Title": "Formulár je vyplnený"
 }

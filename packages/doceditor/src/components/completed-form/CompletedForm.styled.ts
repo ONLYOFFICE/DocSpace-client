@@ -82,6 +82,9 @@ export const CompletedFormLayout = styled.div`
   picture {
     margin-bottom: clamp(40px, 8vh, 125px);
     user-select: none;
+    img {
+      height: 44px;
+    }
   }
 
   .link {

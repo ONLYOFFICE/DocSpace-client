@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import isEmpty from "lodash/isEmpty";
+
 import { RoomSearchArea } from "../../enums";
 import {
   getObjectByLocation,
@@ -411,16 +413,18 @@ class RoomsFilter {
       DEFAULT_TOTAL,
     );
 
-    if (!sharedStorageFilter && userId) {
+    const filterJSON = toJSON(dtoFilter as unknown as RoomsFilter);
+
+    if (isEmpty(sharedStorageFilter) && userId) {
       localStorage.setItem(sharedFilterKey, toJSON(defaultFilter));
+      sharedStorageFilter = filterJSON;
     }
 
-    if (!archivedStorageFilter && userId) {
+    if (isEmpty(archivedStorageFilter) && userId) {
       defaultFilter.searchArea = RoomSearchArea.Archive;
       localStorage.setItem(archivedFilterKey, toJSON(defaultFilter));
+      archivedStorageFilter = filterJSON;
     }
-
-    const filterJSON = toJSON(dtoFilter as unknown as RoomsFilter);
 
     const currentStorageFilter =
       dtoFilter.searchArea === RoomSearchArea.Active

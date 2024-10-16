@@ -586,12 +586,6 @@ class TableStore {
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
 
-    console.log(
-      "store",
-      window.location.pathname.includes("accounts"),
-      contactsTab,
-    );
-
     const tableStorageName = isRooms
       ? `${TABLE_ROOMS_COLUMNS}=${userId}`
       : isContactsPeople
@@ -635,8 +629,6 @@ class TableStore {
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
     const { isIndexedFolder } = this.selectedFolderStore;
-
-    console.log(isRooms);
 
     const columnStorageName = isRooms
       ? `${COLUMNS_ROOMS_SIZE}=${userId}`

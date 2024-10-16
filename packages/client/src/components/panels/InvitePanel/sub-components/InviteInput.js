@@ -114,8 +114,6 @@ const InviteInput = ({
 }) => {
   const isPublicRoomType = roomType === RoomsType.PublicRoom;
 
-  const [invitedUsers, setInvitedUsers] = useState(new Map());
-
   const [isChangeLangMail, setIsChangeLangMail] = useState(false);
   const [isAddEmailPanelBlocked, setIsAddEmailPanelBlocked] = useState(true);
 
@@ -533,7 +531,7 @@ const InviteInput = ({
       );
     }
     return prevDropDownContent.current;
-  }, [usersList, inputValue]);
+  }, [usersList, inputValue, selectedAccess]);
 
   const onSelectAccess = (item) => {
     setSelectedAccess(item.access);
@@ -560,14 +558,6 @@ const InviteInput = ({
     document.addEventListener("keyup", onKeyPress);
     return () => document.removeEventListener("keyup", onKeyPress);
   });
-
-  useEffect(() => {
-    const newInviteItems = new Map();
-
-    inviteItems.forEach((item) => newInviteItems.set(item?.id, item));
-
-    setInvitedUsers((value) => new Map([...value, ...newInviteItems]));
-  }, [inviteItems]);
 
   return (
     <>

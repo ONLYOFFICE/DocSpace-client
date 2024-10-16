@@ -215,7 +215,7 @@ export default function withQuickButtons(WrappedComponent) {
       const { lockFileAction, setFavoriteAction, onSelectItem } =
         filesActionsStore;
       const {
-        isPersonalFolderRoot,
+        isDocumentsFolder,
         isArchiveFolderRoot,
         isTrashFolder,
         isPersonalRoom,
@@ -227,7 +227,7 @@ export default function withQuickButtons(WrappedComponent) {
       const { setSharingPanelVisible } = dialogsStore;
 
       const folderCategory =
-        isTrashFolder || isArchiveFolderRoot || isPersonalFolderRoot;
+        isTrashFolder || isArchiveFolderRoot || isDocumentsFolder;
 
       const { isPublicRoom } = publicRoomStore;
       const { getPrimaryFileLink, setShareChanged, infoPanelRoom } =

@@ -26,7 +26,7 @@
 
 import { makeAutoObservable } from "mobx";
 import moment from "moment";
-
+import clone from "lodash/clone";
 import { getUserById } from "@docspace/shared/api/people";
 import { getUserType } from "@docspace/shared/utils/common";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -54,6 +54,7 @@ import {
   addLinksToHistory,
   parseHistory,
 } from "SRC_DIR/pages/Home/InfoPanel/Body/helpers/HistoryHelper";
+import { getContactsView } from "SRC_DIR/helpers/contacts";
 
 const observedKeys = [
   "id",
@@ -70,6 +71,7 @@ const infoMembers = "info_members";
 const infoHistory = "info_history";
 const infoDetails = "info_details";
 const infoShare = "info_share";
+const infoPlugin = "info_plugin";
 
 class InfoPanelStore {
   userStore = null;
@@ -79,6 +81,7 @@ class InfoPanelStore {
 
   infoPanelSelection = null;
   selectionHistory = null;
+  selectionHistoryTotal = null;
 
   roomsView = infoMembers;
   fileView = infoHistory;
@@ -105,6 +108,12 @@ class InfoPanelStore {
   searchValue = "";
 
   infoPanelSelectedGroup = null;
+  historyFilter = {
+    page: 0,
+    pageCount: 100,
+    total: 0,
+    startIndex: 0,
+  };
 
   constructor(userStore) {
     this.userStore = userStore;
@@ -149,8 +158,10 @@ class InfoPanelStore {
 
   setSelectionHistory = (obj) => (this.selectionHistory = obj);
 
-  setSelectionHistory = (obj) => {
+  setSelectionHistory = (obj, total) => {
     this.selectionHistory = obj;
+    this.selectionHistoryTotal = total;
+
     if (obj)
       this.historyWithFileList =
         this.infoPanelSelection.isFolder || this.infoPanelSelection.isRoom;
@@ -162,7 +173,7 @@ class InfoPanelStore {
   };
 
   /**
-   * @param {infoMembers | infoHistory | infoDetails} view
+   * @param {infoMembers | infoHistory | infoDetails | infoShare | infoPlugin} view
    * @returns {void}
    */
   setView = (view) => {
@@ -198,12 +209,14 @@ class InfoPanelStore {
       bufferSelection: groupsBufferSelection,
     } = this.peopleStore.groupsStore;
 
-    if (this.getIsPeople() || this.getIsGroups()) {
+    const isGroups = this.getIsContacts() === "groups";
+
+    if (!isGroups) {
       if (peopleSelection.length) return [...peopleSelection];
       if (peopleBufferSelection) return [peopleBufferSelection];
     }
 
-    if (this.getIsGroups()) {
+    if (isGroups) {
       if (groupsSelection.length) return [...groupsSelection];
       if (groupsBufferSelection) return [groupsBufferSelection];
     }
@@ -218,7 +231,7 @@ class InfoPanelStore {
     const isRooms = this.getIsRooms();
     const { currentGroup } = this.peopleStore.groupsStore;
 
-    if (this.getIsGroups()) {
+    if (this.getIsContacts() === "groups") {
       return {
         ...currentGroup,
         isGroup: true,
@@ -289,7 +302,7 @@ class InfoPanelStore {
     }
 
     if (!selectedItems.length && !newInfoPanelSelection.parentId) {
-      this.setSelectionHistory(null);
+      this.setSelectionHistory(null, null);
       this.setInfoPanelSelectedGroup(null);
     }
 
@@ -447,7 +460,7 @@ class InfoPanelStore {
     const pathname = window.location.pathname.toLowerCase();
     const isFiles = this.getIsFiles(pathname);
     const isRooms = this.getIsRooms(pathname);
-    const isAccounts = this.getIsAccounts(pathname);
+    const isAccounts = this.getIsContacts(pathname);
     const isGallery = this.getIsGallery(pathname);
     return isRooms || isFiles || isGallery || isAccounts;
   };
@@ -468,30 +481,9 @@ class InfoPanelStore {
     );
   };
 
-  getIsAccounts = (givenPathName) => {
+  getIsContacts = (givenPathName) => {
     const pathname = givenPathName || window.location.pathname.toLowerCase();
-    return (
-      pathname.indexOf("accounts") !== -1 && !(pathname.indexOf("view") !== -1)
-    );
-  };
-
-  getIsPeople = (givenPathName) => {
-    const pathname = givenPathName || window.location.pathname.toLowerCase();
-    return pathname.indexOf("accounts/people") !== -1;
-  };
-
-  getIsGroups = (givenPathName) => {
-    const pathname = givenPathName || window.location.pathname.toLowerCase();
-    return pathname.indexOf("accounts/groups") !== -1;
-  };
-
-  getIsInsideGroup = (givenPathName) => {
-    const pathname = givenPathName || window.location.pathname.toLowerCase();
-    return (
-      pathname.indexOf("accounts") !== -1 &&
-      pathname.indexOf("groups/filter") === -1 &&
-      pathname.indexOf("people/filter") === -1
-    );
+    return getContactsView({ pathname });
   };
 
   getIsGallery = (givenPathName) => {
@@ -514,10 +506,10 @@ class InfoPanelStore {
     }
 
     if (
-      this.getIsPeople() &&
+      this.getIsContacts() &&
       (!infoPanelSelection.email || !infoPanelSelection.displayName)
     ) {
-      this.infoPanelSelection = infoPanelSelection.length
+      this.infoPanelSelection = !infoPanelSelection.length
         ? infoPanelSelection
         : null;
       return;
@@ -757,6 +749,10 @@ class InfoPanelStore {
     this.setIsMembersPanelUpdating(false);
   };
 
+  setHistoryFilter = (historyFilter) => {
+    this.historyFilter = historyFilter;
+  };
+
   fetchHistory = async (abortControllerSignal = null) => {
     const { getHistory, getRoomLinks } = this.filesStore;
     const { setExternalLinks } = this.publicRoomStore;
@@ -771,11 +767,24 @@ class InfoPanelStore {
         this.infoPanelSelection.roomType,
       );
 
+    this.setHistoryFilter({
+      page: 0,
+      pageCount: 100,
+      total: 0,
+      startIndex: 0,
+    });
+
+    const filter = {
+      startIndex: 0,
+      count: this.historyFilter.pageCount,
+    };
+
     return getHistory(
       selectionType,
       this.infoPanelSelection.id,
       abortControllerSignal,
       this.infoPanelSelection?.requestToken,
+      filter,
     )
       .then(async (data) => {
         if (withLinks) {
@@ -788,8 +797,89 @@ class InfoPanelStore {
       })
       .then((data) => {
         const parsedSelectionHistory = parseHistory(data);
-        this.setSelectionHistory(parsedSelectionHistory);
+        this.setSelectionHistory(parsedSelectionHistory, data.total);
         return parsedSelectionHistory;
+      })
+      .catch((err) => {
+        if (err.message !== "canceled") console.error(err);
+      });
+  };
+
+  fetchMoreHistory = async (abortControllerSignal = null) => {
+    const { getHistory, getRoomLinks } = this.filesStore;
+    const { setExternalLinks } = this.publicRoomStore;
+    const oldHistory = this.selectionHistory;
+
+    let selectionType = "file";
+
+    if (this.infoPanelSelection.isRoom || this.infoPanelSelection.isFolder)
+      selectionType = "folder";
+
+    const withLinks =
+      this.infoPanelSelection.isRoom &&
+      [RoomsType.FormRoom, RoomsType.CustomRoom, RoomsType.PublicRoom].includes(
+        this.infoPanelSelection.roomType,
+      );
+
+    let newFilter = clone(this.historyFilter);
+
+    newFilter.page += 1;
+    newFilter.startIndex = newFilter.page * newFilter.pageCount;
+
+    this.setHistoryFilter(newFilter);
+
+    const filter = {
+      startIndex: newFilter.startIndex,
+      count: this.historyFilter.pageCount,
+    };
+
+    return getHistory(
+      selectionType,
+      this.infoPanelSelection.id,
+      abortControllerSignal,
+      this.infoPanelSelection?.requestToken,
+      filter,
+    )
+      .then(async (data) => {
+        if (withLinks) {
+          const links = await getRoomLinks(this.infoPanelSelection.id);
+          const historyWithLinks = addLinksToHistory(data, links);
+          setExternalLinks(links);
+          return historyWithLinks;
+        }
+        return data;
+      })
+      .then((data) => {
+        const parsedSelectionHistory = parseHistory(data);
+
+        const lastOldDay = oldHistory[oldHistory.length - 1].day;
+        const newDay = parsedSelectionHistory[0].day;
+
+        const newHistory = JSON.parse(JSON.stringify(oldHistory));
+
+        let mergedHistory = [];
+
+        if (lastOldDay === newDay) {
+          const lastIndexNewHistory = newHistory.length - 1;
+          const mergedFeeds = newHistory[lastIndexNewHistory].feeds.concat(
+            parsedSelectionHistory[0].feeds,
+          );
+
+          newHistory[lastIndexNewHistory].feeds = mergedFeeds;
+
+          const newParsedSelectionHistory = JSON.parse(
+            JSON.stringify(parsedSelectionHistory),
+          );
+          newParsedSelectionHistory.splice(0, 1);
+
+          mergedHistory = newHistory.concat(newParsedSelectionHistory);
+        } else {
+          mergedHistory = newHistory.concat(parsedSelectionHistory);
+        }
+
+        this.setSelectionHistory(mergedHistory, data.total);
+
+        return mergedHistory;
       })
       .catch((err) => {
         if (err.message !== "canceled") console.error(err);

@@ -1,5 +1,5 @@
 {
-  "AccountsEmptyScreenText": "Detalizētu informāciju par lietotājiem skatīt šeit",
+  "UsersEmptyScreenText": "Detalizētu informāciju par lietotājiem skatīt šeit",
   "AddedRoomTags": "Pievienotas atzīmes.",
   "Administration": "Administrācija",
   "AndMoreLabel": "un <1>{{count}} vēl</1>",

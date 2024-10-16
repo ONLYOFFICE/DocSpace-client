@@ -498,14 +498,12 @@ const StyledInviteLanguage = styled.div`
     }
 
     .combo-button_closed:not(:hover) .combo-button-label {
-      color: ${(props) =>
-        props.theme.createEditRoomDialog.commonParam.descriptionColor};
+      color: ${(props) => props.theme.linkWithDropdown.color.active};
     }
     .combo-button_closed:not(:hover) .combo-buttons_arrow-icon {
       svg {
         path {
-          fill: ${(props) =>
-            props.theme.createEditRoomDialog.commonParam.descriptionColor};
+          fill: ${(props) => props.theme.linkWithDropdown.color.active};
         }
       }
     }

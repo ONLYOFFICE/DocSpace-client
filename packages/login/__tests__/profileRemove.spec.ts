@@ -24,33 +24,54 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import EmptyScreenPersonSvgUrl from "PUBLIC_DIR/images/empty_screen_persons.svg?url";
-import EmptyScreenPersonSvgDarkUrl from "PUBLIC_DIR/images/empty_screen_persons_dark.svg?url";
-import React from "react";
-import { inject, observer } from "mobx-react";
+import { getUrlWithQueryParams } from "./helpers/getUrlWithQueryParams";
+import { expect, test } from "./fixtures/base";
+import { endpoints } from "@docspace/shared/__mocks__/e2e";
 
-import { Text } from "@docspace/shared/components/text";
-import { StyledNoItemContainer } from "../../styles/noItem";
+const URL = "/login/confirm/ProfileRemove";
 
-const NoAccountsItem = ({ t, theme }) => {
-  const imgSrc = theme.isBase
-    ? EmptyScreenPersonSvgUrl
-    : EmptyScreenPersonSvgDarkUrl;
+const QUERY_PARAMS = [
+  {
+    name: "type",
+    value: "ProfileRemove",
+  },
+  {
+    name: "key",
+    value: "123",
+  },
+  {
+    name: "email",
+    value: "mail@mail.com",
+  },
+  {
+    name: "uid",
+    value: "123",
+  },
+];
 
-  return (
-    <StyledNoItemContainer>
-      <div className="no-thumbnail-img-wrapper no-accounts">
-        <img src={imgSrc} />
-      </div>
-      <Text className="no-item-text" textAlign="center">
-        {t("InfoPanel:AccountsEmptyScreenText")}
-      </Text>
-    </StyledNoItemContainer>
-  );
-};
+const URL_WITH_PARAMS = getUrlWithQueryParams(URL, QUERY_PARAMS);
 
-export default inject(({ settingsStore }) => {
-  return {
-    theme: settingsStore.theme,
-  };
-})(observer(NoAccountsItem));
+test("profile remove render", async ({ page }) => {
+  await page.goto(URL_WITH_PARAMS);
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "profile-remove",
+    "profile-remove-render.png",
+  ]);
+});
+
+test("profile remove success", async ({ page, context, mockRequest }) => {
+  await mockRequest.router([endpoints.removeUser]);
+  await page.goto(URL_WITH_PARAMS);
+
+  await page.getByTestId("button").click();
+
+  await page.getByTestId("button").waitFor({ state: "detached" });
+
+  await expect(page).toHaveScreenshot([
+    "desktop",
+    "profile-remove",
+    "profile-remove-success.png",
+  ]);
+});

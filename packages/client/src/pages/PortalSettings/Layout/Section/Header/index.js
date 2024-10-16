@@ -86,11 +86,6 @@ export const HeaderContainer = styled.div`
       ${({ theme }) =>
         theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
     }
-
-    @media ${tablet} {
-      padding-block: 8px;
-      padding-inline: 8px 0;
-    }
   }
 
   @media ${tablet} {

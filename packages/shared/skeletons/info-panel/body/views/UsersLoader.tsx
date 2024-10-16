@@ -25,22 +25,42 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import React from "react";
-import { withTranslation } from "react-i18next";
-import NoGalleryItem from "./NoGalleryItem";
-import NoRoomItem from "./NoRoomItem";
-import NoFileOrFolderItem from "./NoFileOrFolderItem";
-import NoAccountsItem from "./NoAccountsItem";
-import NoGroupsItem from "./NoGroupsItem";
 
-const NoItem = ({ t, isPeople, isGroups, isGallery, isRooms, isFiles }) => {
-  if (isPeople) return <NoAccountsItem t={t} />;
-  if (isGroups) return <NoGroupsItem t={t} />;
-  if (isGallery) return <NoGalleryItem t={t} />;
-  if (isFiles) return <NoFileOrFolderItem t={t} />;
-  if (isRooms) return <NoRoomItem t={t} />;
-  return null;
+import { RectangleSkeleton } from "@docspace/shared/skeletons";
+import {
+  StyledUsersLoader,
+  StyledProperty,
+  StyledSubtitleLoader,
+} from "../body.styled";
+import { propertyDimensions } from "../body.constant";
+
+const AccountsLoader = () => {
+  return (
+    <StyledUsersLoader>
+      <StyledSubtitleLoader>
+        <RectangleSkeleton width="71px" height="16px" borderRadius="3px" />
+      </StyledSubtitleLoader>
+
+      <StyledProperty>
+        {propertyDimensions.map((property) => [
+          <RectangleSkeleton
+            key={property.titleKey}
+            className="property-title"
+            width={property.propertyTitle}
+            height="20px"
+            borderRadius="3px"
+          />,
+          <RectangleSkeleton
+            key={property.contentKey}
+            className="property-content"
+            width={property.propertyContent}
+            height="20px"
+            borderRadius="3px"
+          />,
+        ])}
+      </StyledProperty>
+    </StyledUsersLoader>
+  );
 };
-export default withTranslation(["InfoPanel", "FormGallery"])(
-  NoItem,
-  // withLoader(NoItem)(<Loaders.InfoPanelViewLoader view="noItem" />)
-);
+
+export default AccountsLoader;

@@ -1,3 +1,4 @@
+import { AvatarRole } from "./../components/avatar/Avatar.enums";
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -278,6 +279,20 @@ export function isAdmin(currentUser: TUser) {
     (currentUser.listAdminModules && currentUser.listAdminModules?.length > 0)
   );
 }
+
+export const getUserAvatarRoleByType = (type: EmployeeType) => {
+  switch (type) {
+    case EmployeeType.Owner:
+      return AvatarRole.owner;
+    case EmployeeType.Admin:
+      return AvatarRole.admin;
+    case EmployeeType.RoomAdmin:
+      return AvatarRole.manager;
+
+    default:
+      return AvatarRole.user;
+  }
+};
 
 export const getUserType = (user: TUser) => {
   if (user.isOwner) return EmployeeType.Owner;
@@ -894,8 +909,8 @@ export const toUrlParams = (
 
     const item = obj[key];
 
-    // added for double employeetype
-    if (Array.isArray(item) && key === "employeetypes") {
+    // added for double employeetype or room type
+    if (Array.isArray(item) && (key === "employeetypes" || key === "type")) {
       for (let i = 0; i < item.length; i += 1) {
         str += `${key}=${encodeURIComponent(item[i])}`;
         if (i !== item.length - 1) {
@@ -916,9 +931,28 @@ export const toUrlParams = (
   return str;
 };
 
+const groupParamsByKey = (params: URLSearchParams) =>
+  Array.from(params.entries()).reduce(
+    (accumulator: { [key: string]: string | string[] }, [key, value]) => {
+      if (accumulator[key]) {
+        accumulator[key] = Array.isArray(accumulator[key])
+          ? [...accumulator[key], value]
+          : [accumulator[key], value];
+      } else {
+        accumulator[key] = value;
+      }
+      return accumulator;
+    },
+    {},
+  );
+
 export const parseURL = (searchUrl: string) => {
-  return Object.fromEntries(new URLSearchParams(searchUrl));
+  const params = new URLSearchParams(searchUrl);
+  const entries: { [key: string]: string | string[] } =
+    groupParamsByKey(params);
+  return entries;
 };
+
 export function getObjectByLocation(location: Location) {
   if (!location.search || !location.search.length) return null;
 

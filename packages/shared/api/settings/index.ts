@@ -576,17 +576,24 @@ export function setPortalOwner(
   timeZone,
   confirmKey,
   analytics,
+  amiId: string | null = null,
 ) {
+  const data = {
+    email,
+    PasswordHash: hash,
+    lng,
+    timeZone,
+    analytics,
+  };
+
+  if (amiId) {
+    data.amiId = amiId;
+  }
+
   const options = {
     method: "put",
     url: "/settings/wizard/complete",
-    data: {
-      email,
-      PasswordHash: hash,
-      lng,
-      timeZone,
-      analytics,
-    },
+    data,
   };
 
   if (confirmKey) {

@@ -25,33 +25,52 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useRef } from "react";
-import { withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
+import { decode } from "he";
 
 import { Text } from "@docspace/shared/components/text";
 import { Tooltip } from "@docspace/shared/components/tooltip";
-import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
 import { ContextMenuButton } from "@docspace/shared/components/context-menu-button";
 import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
 import { Badge } from "@docspace/shared/components/badge";
-import Badges from "SRC_DIR/pages/Home/Section/ContactsBody/Badges";
-import { StyledAccountsItemTitle } from "../../styles/accounts";
-
-import { decode } from "he";
+import { getUserAvatarRoleByType } from "@docspace/shared/utils/common";
 import { globalColors } from "@docspace/shared/themes";
 
-const AccountsItemTitle = ({
-  t,
+import DefaultUserPhoto from "PUBLIC_DIR/images/default_user_photo_size_82-82.png";
+
+import Badges from "SRC_DIR/pages/Home/Section/ContactsBody/Badges";
+import UsersStore from "SRC_DIR/store/contacts/UsersStore";
+import ContactsConextOptionsStore from "SRC_DIR/store/contacts/ContactsContextOptionsStore";
+
+import { StyledUsersTitle } from "../../styles/Users";
+
+type UsersItemTitleProps = {
+  isSeveralItems: boolean;
+  infoPanelSelection: ReturnType<UsersStore["getPeopleListItem"]>;
+  getUserContextOptions: ContactsConextOptionsStore["getUserContextOptions"];
+};
+
+const UsersItemTitle = ({
   isSeveralItems,
   infoPanelSelection,
   getUserContextOptions,
-}) => {
-  if (isSeveralItems) {
-    return <></>;
-  }
+}: UsersItemTitleProps) => {
+  const { t } = useTranslation([
+    "People",
+    "PeopleTranslations",
+    "InfoPanel",
+    "Common",
+    "Translations",
+    "DeleteProfileEverDialog",
+  ]);
 
   const theme = useTheme();
-  const itemTitleRef = useRef();
+  const itemTitleRef = useRef<HTMLDivElement>(null);
+
+  if (isSeveralItems) {
+    return null;
+  }
 
   const isPending =
     infoPanelSelection.statusType === "pending" ||
@@ -61,8 +80,13 @@ const AccountsItemTitle = ({
     const newOptions = infoPanelSelection.options?.filter(
       (option) => option !== "details",
     );
-    return getUserContextOptions(t, newOptions || [], infoPanelSelection);
+    return getUserContextOptions(
+      t,
+      newOptions || [],
+      infoPanelSelection,
+    ) as unknown as ContextMenuModel[];
   };
+
   const contextOptions = getData();
 
   const userAvatar = infoPanelSelection.hasAvatar
@@ -74,23 +98,20 @@ const AccountsItemTitle = ({
     ? decode(infoPanelSelection.displayName).trim()
     : "";
 
+  const role = getUserAvatarRoleByType(infoPanelSelection.role);
+
   return (
-    <StyledAccountsItemTitle
-      isPending={isPending}
-      isSSO={isSSO}
-      isLDAP={isLDAP}
-      ref={itemTitleRef}
-    >
+    <StyledUsersTitle ref={itemTitleRef}>
       <Avatar
         className="avatar"
-        role={infoPanelSelection.role ? infoPanelSelection.role : "user"}
+        role={role}
         size={AvatarSize.big}
         source={userAvatar}
       />
       <div className="info-panel__info-text">
         <div className="info-panel__info-wrapper">
           <Text
-            className={"info-text__name"}
+            className="info-text__name"
             noSelect
             title={displayName}
             truncate
@@ -98,14 +119,11 @@ const AccountsItemTitle = ({
             {isPending || !displayName ? infoPanelSelection.email : displayName}
           </Text>
           {isPending && (
-            <Badges
-              withoutPaid={true}
-              statusType={infoPanelSelection.statusType}
-            />
+            <Badges withoutPaid statusType={infoPanelSelection.statusType} />
           )}
         </div>
         {!isPending && !!displayName && (
-          <Text className={"info-text__email"} title={infoPanelSelection.email}>
+          <Text className="info-text__email" title={infoPanelSelection.email}>
             {infoPanelSelection.email}
           </Text>
         )}
@@ -121,10 +139,10 @@ const AccountsItemTitle = ({
                   ? globalColors.secondGreen
                   : globalColors.secondGreenDark
               }
-              fontSize={"9px"}
+              fontSize="9px"
               fontWeight={800}
               noHover
-              lineHeight={"13px"}
+              lineHeight="13px"
             />
             <Tooltip anchorSelect={`div[id='sso-badge-info-panel'] div`}>
               {t("PeopleTranslations:SSOAccountTooltip")}
@@ -144,10 +162,10 @@ const AccountsItemTitle = ({
                   ? globalColors.secondPurple
                   : globalColors.secondPurpleDark
               }
-              fontSize={"9px"}
+              fontSize="9px"
               fontWeight={800}
               noHover
-              lineHeight={"13px"}
+              lineHeight="13px"
             />
             <Tooltip anchorSelect={`div[id='ldap-badge-info-panel'] div`}>
               {t("PeopleTranslations:LDAPAccountTooltip")}
@@ -162,15 +180,8 @@ const AccountsItemTitle = ({
           getData={getData}
         />
       )}
-    </StyledAccountsItemTitle>
+    </StyledUsersTitle>
   );
 };
 
-export default withTranslation([
-  "People",
-  "PeopleTranslations",
-  "InfoPanel",
-  "Common",
-  "Translations",
-  "DeleteProfileEverDialog",
-])(AccountsItemTitle);
+export default UsersItemTitle;

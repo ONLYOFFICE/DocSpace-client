@@ -1,5 +1,5 @@
 {
-  "AccountsEmptyScreenText": "Detaliile utilizatorilor aici",
+  "UsersEmptyScreenText": "Detaliile utilizatorilor aici",
   "AddedRoomTags": "Etichete adăugate.",
   "Administration": "Administrare",
   "AndMoreLabel": "și <1>{{count}} mai multe</1>",

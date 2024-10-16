@@ -574,6 +574,8 @@ class TableStore {
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
 
+    const isDocumentsFolder = !this.selectedFolderStore.isRooms;
+
     const tableStorageName = isRooms
       ? `${TABLE_ROOMS_COLUMNS}=${userId}`
       : isContactsPeople
@@ -590,9 +592,13 @@ class TableStore {
                   ? `${TABLE_RECENT_COLUMNS}=${userId}`
                   : isIndexedFolder
                     ? `${TABLE_VDR_INDEXING_COLUMNS}=${userId}`
-                    : `${TABLE_COLUMNS}=${userId}`;
+                    : isDocumentsFolder
+                      ? `${TABLE_COLUMNS}=${userId}`
+                      : "";
 
-    return isFrame ? `SDK_${tableStorageName}` : tableStorageName;
+    return isFrame && tableStorageName
+      ? `SDK_${tableStorageName}`
+      : tableStorageName;
   }
 
   // Table column sizes
@@ -610,6 +616,7 @@ class TableStore {
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
     const { isIndexedFolder } = this.selectedFolderStore;
+    const isDocumentsFolder = !this.selectedFolderStore.isRooms;
 
     const columnStorageName = isRooms
       ? `${COLUMNS_ROOMS_SIZE}=${userId}`
@@ -625,9 +632,13 @@ class TableStore {
                 ? `${COLUMNS_GUESTS_SIZE}=${userId}`
                 : isContactsInsideGroup
                   ? `${COLUMNS_INSIDE_GROUPS_SIZE}=${userId}`
-                  : `${COLUMNS_SIZE}=${userId}`;
+                  : isDocumentsFolder
+                    ? `${COLUMNS_SIZE}=${userId}`
+                    : "";
 
-    return isFrame ? `SDK_${columnStorageName}` : columnStorageName;
+    return isFrame && columnStorageName
+      ? `SDK_${columnStorageName}`
+      : columnStorageName;
   }
 
   // Column names for info-panel
@@ -646,6 +657,8 @@ class TableStore {
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
 
+    const isDocumentsFolder = !this.selectedFolderStore.isRooms;
+
     const columnInfoPanelStorageName = isRooms
       ? `${COLUMNS_ROOMS_SIZE_INFO_PANEL}=${userId}`
       : isTrashFolder
@@ -660,9 +673,11 @@ class TableStore {
                 ? `${COLUMNS_GUESTS_INFO_PANEL_SIZE}=${userId}`
                 : isContactsInsideGroup
                   ? `${COLUMNS_INSIDE_GROUPS_INFO_PANEL_SIZE}=${userId}`
-                  : `${COLUMNS_SIZE_INFO_PANEL}=${userId}`;
+                  : isDocumentsFolder
+                    ? `${COLUMNS_SIZE_INFO_PANEL}=${userId}`
+                    : "";
 
-    return isFrame
+    return isFrame && columnInfoPanelStorageName
       ? `SDK_${columnInfoPanelStorageName}`
       : columnInfoPanelStorageName;
   }

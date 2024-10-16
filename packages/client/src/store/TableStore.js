@@ -646,8 +646,13 @@ class TableStore {
 
   // Column names for info-panel
   get columnInfoPanelStorageName() {
-    const { isRoomsFolder, isArchiveFolder, isTrashFolder, isRecentTab } =
-      this.treeFoldersStore;
+    const {
+      isRoomsFolder,
+      isArchiveFolder,
+      isTrashFolder,
+      isRecentTab,
+      isDocumentsFolder,
+    } = this.treeFoldersStore;
 
     const { isIndexedFolder } = this.selectedFolderStore;
     const { contactsTab } = this.peopleStore.usersStore;
@@ -674,7 +679,9 @@ class TableStore {
                 ? `${COLUMNS_GUESTS_INFO_PANEL_SIZE}=${userId}`
                 : isContactsInsideGroup
                   ? `${COLUMNS_INSIDE_GROUPS_INFO_PANEL_SIZE}=${userId}`
-                  : `${COLUMNS_SIZE_INFO_PANEL}=${userId}`;
+                  : isDocumentsFolder
+                    ? `${COLUMNS_SIZE_INFO_PANEL}=${userId}`
+                    : "";
 
     return isFrame
       ? `SDK_${columnInfoPanelStorageName}`

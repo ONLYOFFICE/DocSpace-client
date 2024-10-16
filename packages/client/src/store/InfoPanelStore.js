@@ -211,7 +211,7 @@ class InfoPanelStore {
 
     const contactsTab = this.peopleStore.usersStore.contactsTab;
 
-    const isGroups = contactsTab === "group";
+    const isGroups = contactsTab === "groups";
 
     if (!isGroups && contactsTab) {
       if (peopleSelection.length) return [...peopleSelection];

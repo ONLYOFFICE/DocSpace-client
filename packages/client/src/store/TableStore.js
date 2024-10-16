@@ -571,8 +571,13 @@ class TableStore {
 
   // Column names
   get tableStorageName() {
-    const { isRoomsFolder, isArchiveFolder, isTrashFolder, isRecentTab } =
-      this.treeFoldersStore;
+    const {
+      isRoomsFolder,
+      isArchiveFolder,
+      isTrashFolder,
+      isRecentTab,
+      isDocumentsFolder,
+    } = this.treeFoldersStore;
 
     const { contactsTab } = this.peopleStore.usersStore;
 
@@ -612,15 +617,22 @@ class TableStore {
                   ? `${TABLE_RECENT_COLUMNS}=${userId}`
                   : isIndexedFolder
                     ? `${TABLE_VDR_INDEXING_COLUMNS}=${userId}`
-                    : `${TABLE_COLUMNS}=${userId}`;
+                    : isDocumentsFolder
+                      ? `${TABLE_COLUMNS}=${userId}`
+                      : "";
 
     return isFrame ? `SDK_${tableStorageName}` : tableStorageName;
   }
 
   // Table column sizes
   get columnStorageName() {
-    const { isRoomsFolder, isArchiveFolder, isTrashFolder, isRecentTab } =
-      this.treeFoldersStore;
+    const {
+      isRoomsFolder,
+      isArchiveFolder,
+      isTrashFolder,
+      isRecentTab,
+      isDocumentsFolder,
+    } = this.treeFoldersStore;
 
     const { contactsTab } = this.peopleStore.usersStore;
 
@@ -660,7 +672,9 @@ class TableStore {
                   ? `${COLUMNS_INSIDE_GROUPS_SIZE}=${userId}`
                   : isContactsGroups
                     ? `${COLUMNS_GROUPS_SIZE}=${userId}`
-                    : `${COLUMNS_SIZE}=${userId}`;
+                    : isDocumentsFolder
+                      ? `${COLUMNS_SIZE}=${userId}`
+                      : "";
 
     return isFrame ? `SDK_${columnStorageName}` : columnStorageName;
   }

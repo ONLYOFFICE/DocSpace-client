@@ -222,11 +222,7 @@ class CreateEditRoomStore {
     const { uploadedFile, getUploadedLogoData } = this.avatarEditorDialogStore;
     const { changeRoomOwner, updateCurrentFolder } = this.filesActionsStore;
     const { createTag } = this.tagsStore;
-    const {
-      isRootFolder,
-      updateEditedSelectedRoom,
-      id: currentFolderId,
-    } = this.selectedFolderStore;
+    const { id: currentFolderId } = this.selectedFolderStore;
 
     const editRoomParams = {};
 
@@ -269,11 +265,11 @@ class CreateEditRoomStore {
           };
     }
 
-    const startTags = Object.values(room.tags);
     const tags = newParams.tags.map((tag) => tag.name);
-    const removedTags = startTags.filter((sT) => !tags.includes(sT));
-    const newTags = newParams.tags.filter((t) => t.isNew).map((t) => t.name);
-    const isTagsDeletion = removedTags.length > 0;
+    const prevTags = room.tags.sort();
+    const currTags = newParams.tags.map((t) => t.name).sort();
+
+    const isTagsChanged = !isEqual(prevTags, currTags);
 
     const isUpdatelogo = uploadedFile;
     const isDeleteLogo = !!room.logo.original && !newParams.icon.uploadedFile;
@@ -286,14 +282,8 @@ class CreateEditRoomStore {
       );
     }
 
-    for (let i = 0; i < newTags.length; i++) {
-      additionalRequest.push(createTag(newTags[i]));
-    }
-
-    const tagsToAddList = tags.filter((t) => !startTags.includes(t));
-
-    if (tags.length && tagsToAddList.length) {
-      editRoomParams.tags = tagsToAddList;
+    if (isTagsChanged) {
+      editRoomParams.tags = tags;
     }
 
     if (cover) {
@@ -334,17 +324,6 @@ class CreateEditRoomStore {
       if (indexingChanged)
         requests.push(updateCurrentFolder(null, currentFolderId));
 
-      if (isTagsDeletion) {
-        const removeTags = removeTagsFromRoom(room.id, removedTags).then(
-          (updatedRoomInfo) => {
-            isRootFolder
-              ? setFolder(updatedRoomInfo)
-              : updateEditedSelectedRoom({ tags: updatedRoomInfo.tags });
-          },
-        );
-        requests.push(removeTags);
-      }
-
       if (!!requests.length) {
         await Promise.all(requests);
       }
@@ -356,7 +335,6 @@ class CreateEditRoomStore {
   onCreateRoom = async (withConfirm = false, t) => {
     const roomParams = this.roomParams;
 
-    const { createTag } = this.tagsStore;
     const { processCreatingRoomFromData, setProcessCreatingRoomFromData } =
       this.filesActionsStore;
     const { deleteThirdParty } = this.thirdPartyStore;
@@ -386,7 +364,6 @@ class CreateEditRoomStore {
       }),
     };
 
-    const newTags = roomParams.tags.filter((t) => t.isNew).map((t) => t.name);
     const tagsToAddList = roomParams.tags.map((tag) => tag.name);
 
     const storageFolderId = roomParams.storageLocation.storageFolderId;
@@ -422,10 +399,6 @@ class CreateEditRoomStore {
 
     try {
       try {
-        for (let i = 0; i < newTags.length; i++) {
-          additionalRequest.push(createTag(newTags[i]));
-        }
-
         if (additionalRequest.length) {
           const [firstRequset, secondRequest] =
             await Promise.all(additionalRequest);

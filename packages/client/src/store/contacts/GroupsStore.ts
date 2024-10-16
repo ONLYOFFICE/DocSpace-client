@@ -159,6 +159,9 @@ class GroupsStore {
     this.clientLoadingStore.setIsSectionBodyLoading(true);
     const filterData = filter ? filter.clone() : GroupsFilter.getDefault();
 
+    this.setSelection([]);
+    this.setBufferSelection(null);
+
     const filterStorageItem = localStorage.getItem(
       `GroupsFilter=${this.userStore.user?.id}`,
     );

@@ -393,7 +393,9 @@ class TableHeaderComponent extends React.Component<
       setHideColumns,
     } = this.props;
 
-    if (!isDesktop()) return;
+    if (!isDesktop() || !columnStorageName || !columnInfoPanelStorageName) {
+      return;
+    }
 
     let activeColumnIndex = null;
 
@@ -1015,9 +1017,11 @@ class TableHeaderComponent extends React.Component<
         this.headerRef.current.style.width = `${containerWidth}px`;
       }
 
-      if (infoPanelVisible)
+      if (infoPanelVisible) {
         localStorage.setItem(columnInfoPanelStorageName || "", str);
-      else localStorage.setItem(columnStorageName, str);
+      } else {
+        localStorage.setItem(columnStorageName, str);
+      }
 
       if (!infoPanelVisible) {
         localStorage.removeItem(columnInfoPanelStorageName || "");

@@ -78,6 +78,36 @@ export type TCallback = {
   callback: (value: TOnCallback) => void;
 };
 
+/**
+ * A singleton helper class for managing socket connections and interactions.
+ *
+ * @class SocketHelper
+ *
+ * @example
+ * // Get the singleton instance
+ * const socketHelper = SocketHelper.getInstance();
+ *
+ * // Update connection settings
+ * socketHelper.updateSettings('http://example.com', 'publicRoomKey');
+ *
+ * // Emit an event
+ * socketHelper.emit({ command: 'subscribe', data: { roomParts: 'roomId' } });
+ *
+ * // Listen for an event
+ * socketHelper.on('eventName', (value) => {
+ *   console.log('Event received:', value);
+ * });
+ *
+ * @property {boolean} isEnabled - Indicates if the connection settings are set.
+ * @property {boolean} isReady - Indicates if the socket is ready for communication.
+ * @property {Set<string>} socketSubscribers - A set of current socket subscribers.
+ * @property {Socket<DefaultEventsMap, DefaultEventsMap> | null} socket - The socket client instance.
+ *
+ * @method getInstance - Returns the singleton instance of the SocketHelper.
+ * @method updateSettings - Updates the connection settings and attempts to connect.
+ * @method emit - Emits an event to the socket server.
+ * @method on - Registers an event listener on the socket client.
+ */
 class SocketHelper {
   private static instance: SocketHelper;
 
@@ -98,6 +128,13 @@ class SocketHelper {
     this.connectionSettings = null;
   }
 
+  /**
+   * Retrieves the singleton instance of the SocketHelper class.
+   * If an instance already exists, it returns that instance.
+   * Otherwise, it creates a new instance and returns it.
+   *
+   * @returns {SocketHelper} The singleton instance of the SocketHelper class.
+   */
   static getInstance() {
     if (this.instance) {
       return this.instance;
@@ -106,88 +143,139 @@ class SocketHelper {
     return this.instance;
   }
 
+  /**
+   * Attempts to establish a WebSocket connection using the provided connection settings.
+   *
+   * - If `connectionSettings` is not defined, the method returns immediately.
+   * - Extracts `url` and `publicRoomKey` from `connectionSettings`.
+   * - Constructs the WebSocket configuration object with credentials, transport methods, engine version, and path.
+   * - If `publicRoomKey` is provided, it adds it to the query parameters of the configuration.
+   * - Initializes the WebSocket client with the constructed configuration.
+   * - Sets up event listeners for connection events: `connect`, `connect_error`, `disconnect`, `connection-init`.
+   */
   private tryConnect() {
-    if (!this.connectionSettings) return;
+    try {
+      if (!this.connectionSettings) return;
 
-    const { url, publicRoomKey } = this.connectionSettings;
+      const { url, publicRoomKey } = this.connectionSettings;
 
-    const origin = window.location.origin;
+      const origin = window.location.origin;
 
-    const config: TConfig = {
-      withCredentials: true,
-      transports: ["websocket", "polling"],
-      eio: 4,
-      path: url,
-    };
-
-    if (publicRoomKey) {
-      config.query = {
-        share: publicRoomKey,
+      const config: TConfig = {
+        withCredentials: true,
+        transports: ["websocket", "polling"],
+        eio: 4,
+        path: url,
       };
+
+      if (publicRoomKey) {
+        config.query = {
+          share: publicRoomKey,
+        };
+      }
+
+      this.client = io(origin, config);
+
+      this.client.on("connect", () => {
+        console.log("[WS] socket is connected");
+      });
+
+      this.client.on("connect_error", (err) =>
+        console.log("[WS] socket connect error", err),
+      );
+
+      this.client.on("disconnect", () =>
+        console.log("[WS] socket is disconnected"),
+      );
+
+      this.client.on("connection-init", () => {
+        console.log("[WS] socket is ready (connection-init)");
+
+        this.isSocketReady = true;
+
+        if (this.callbacks.length) {
+          this.callbacks.forEach(({ eventName, callback }: TCallback) => {
+            this.on(eventName, callback);
+          });
+          this.callbacks = [];
+        }
+
+        if (this.emits.length) {
+          this.emits.forEach(({ command, data, room }) => {
+            this.emit({ command, data, room });
+          });
+          this.emits = [];
+        }
+      });
+    } catch (e) {
+      console.error("[WS] try connect error", e);
     }
-
-    this.client = io(origin, config);
-
-    this.client.on("connect", () => {
-      console.log("[WS] socket is connected");
-    });
-
-    this.client.on("connect_error", (err) =>
-      console.log("[WS] socket connect error", err),
-    );
-
-    this.client.on("disconnect", () =>
-      console.log("[WS] socket is disconnected"),
-    );
-    this.client.on("connection-init", this.onConnectionInit());
   }
 
-  private onConnectionInit(): () => void {
-    return () => {
-      console.log("[WS] socket is ready (connection-init)");
-
-      this.isSocketReady = true;
-
-      if (this.callbacks.length) {
-        this.callbacks.forEach(({ eventName, callback }: TCallback) => {
-          this.on(eventName, callback);
-        });
-        this.callbacks = [];
-      }
-
-      if (this.emits.length) {
-        this.emits.forEach(({ command, data, room }) => {
-          this.emit({ command, data, room });
-        });
-        this.emits = [];
-      }
-    };
-  }
-
-  get isEnabled() {
+  /**
+   * Checks if the socket connection is enabled.
+   *
+   * @returns {boolean} `true` if the connection settings are not null, indicating that the socket connection is enabled; otherwise, `false`.
+   */
+  get isEnabled(): boolean {
     return this.connectionSettings !== null;
   }
 
-  get isReady() {
+  /**
+   * Checks if the socket is ready.
+   *
+   * @returns {boolean} - Returns `true` if the socket is ready, otherwise `false`.
+   */
+  get isReady(): boolean {
     return this.isSocketReady;
   }
 
-  get socketSubscribers() {
+  /**
+   * Gets the list of current socket subscribers.
+   *
+   * @returns {Set} A list of subscribers.
+   */
+  get socketSubscribers(): Set<string> {
     return this.subscribers;
   }
 
+  /**
+   * Getter for the socket property.
+   *
+   * @returns The client instance associated with the socket.
+   */
   get socket() {
     return this.client;
   }
 
-  public updateSettings(url: string, publicRoomKey: string) {
+  /**
+   * Establishes a WebSocket connection using the provided URL and public room key.
+   * Logs the connection settings and attempts to connect.
+   *
+   * @param url - The WebSocket server URL to connect to.
+   * @param publicRoomKey - The key for the public room to join.
+   */
+  public connect(url: string, publicRoomKey: string) {
+    console.log("[WS] connect", { url, publicRoomKey });
+
     this.connectionSettings = { url, publicRoomKey } as ConnectionSettings;
     this.tryConnect();
   }
 
+  /**
+   * Emits a command with associated data to a specified room or globally.
+   * If the socket is not ready, the command is saved in a queue for later emission.
+   *
+   * @param {Object} param - The parameters for the emit function.
+   * @param {string} param.command - The command to emit.
+   * @param {any} param.data - The data to emit with the command.
+   * @param {string | null} [param.room=null] - The room to emit the command to. If null, the command is emitted globally.
+   *
+   * @returns {void}
+   */
   public emit = ({ command, data, room = null }: TEmit) => {
     if (!this.isEnabled || !this.isReady || !this.client) {
-      console.log("[WS] socket [emit] is not ready -> save in queue", {
+      console.log("[WS] socket [emit] is not ready -> save in a queue", {
         command,
         data,
         room,
@@ -196,7 +284,7 @@ class SocketHelper {
       return;
     }
 
-    console.log("[WS] emit", command, data, room);
+    console.log("[WS] emit", { command, data, room });
 
     const ids =
       !data || !data.roomParts
@@ -222,9 +310,17 @@ class SocketHelper {
       : this.client.emit(command, data);
   };
 
+  /**
+   * Registers an event listener for the specified event name.
+   * If the socket is not enabled, not ready, or the client is not available,
+   * the event listener is saved in a queue to be registered later.
+   *
+   * @param eventName - The name of the event to listen for.
+   * @param callback - The callback function to be executed when the event is triggered.
+   */
   public on = (eventName: string, callback: (value: TOnCallback) => void) => {
     if (!this.isEnabled || !this.isReady || !this.client) {
-      console.log("[WS] socket [on] is not ready -> save in queue", {
+      console.log("[WS] socket [on] is not ready -> save in a queue", {
         eventName,
         callback,
       });
@@ -232,7 +328,7 @@ class SocketHelper {
       return;
     }
 
-    console.log("[WS] on", eventName, callback);
+    console.log("[WS] on", { eventName, callback });
 
     this.client.on(eventName, callback);
   };

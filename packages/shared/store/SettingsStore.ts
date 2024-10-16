@@ -904,7 +904,7 @@ class SettingsStore {
     const socketUrl =
       isPublicRoom() && !this.publicRoomKey ? "" : this.socketUrl;
 
-    this.socketHelper.updateSettings(socketUrl, this.publicRoomKey);
+    this.socketHelper.connect(socketUrl, this.publicRoomKey);
   };
 
   setPublicRoomKey = (key: string) => {
@@ -912,7 +912,7 @@ class SettingsStore {
 
     const socketUrl = isPublicRoom() && !key ? "" : this.socketUrl;
 
-    this.socketHelper.updateSettings(socketUrl, key);
+    this.socketHelper.connect(socketUrl, key);
   };
 
   getBuildVersionInfo = async () => {

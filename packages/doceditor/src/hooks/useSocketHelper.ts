@@ -43,7 +43,8 @@ const useSocketHelper = ({ socketUrl, user }: UseSocketHelperProps) => {
 
   React.useEffect(() => {
     if (socketHelper) return;
-    const socketIOHelper = new SocketIOHelper(socketUrl, "");
+    const socketIOHelper = SocketIOHelper.getInstance(); // (socketUrl, "");
+    socketIOHelper.connect(socketUrl, "");
 
     socketIOHelper.emit({
       command: "subscribe",

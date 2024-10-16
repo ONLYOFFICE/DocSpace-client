@@ -325,7 +325,7 @@ class TreeFoldersStore {
     return FolderType.Archive === this.selectedFolderStore.rootFolderType;
   }
 
-  get isPersonalFolderRoot() {
+  get isDocumentsFolder() {
     return FolderType.USER === this.selectedFolderStore.rootFolderType;
   }
 

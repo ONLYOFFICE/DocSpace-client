@@ -6,7 +6,7 @@
   "DescriptionForRegisteredUser": "Het ingevulde PDF formulier wordt opgeslagen en is voor u beschikbaar in de Voltooid map. Om de status te controleren, neemt u contact op met de eigenaar van het formulier en geeft u het toegewezen nummer door.",
   "FillItOutAgain": "Vul het opnieuw in",
   "FormCompletedSuccessfully": "Formulier succesvol ingevuld",
-  "FormNumber": "Formuliernummer:",
+  "FormNumber": "Formuliernummer",
   "FormOwner": "Formulier eigenaar",
   "Title": "Het formulier is ingevuld"
 }

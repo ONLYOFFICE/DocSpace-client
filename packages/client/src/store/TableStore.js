@@ -575,6 +575,7 @@ class TableStore {
       this.treeFoldersStore;
 
     const { contactsTab } = this.peopleStore.usersStore;
+    const { isIndexedFolder } = this.selectedFolderStore;
 
     const contactsView = getContactsView();
 
@@ -591,12 +592,10 @@ class TableStore {
       ? contactsView === "inside_group"
       : contactsTab === "inside_group";
 
-    const { isIndexedFolder } = this.selectedFolderStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
-
-    const isDocumentsFolder = !this.selectedFolderStore.isRooms;
+    const isDocumentsFolder = !isRooms;
 
     const tableStorageName = isRooms
       ? `${TABLE_ROOMS_COLUMNS}=${userId}`
@@ -629,6 +628,7 @@ class TableStore {
       this.treeFoldersStore;
 
     const { contactsTab } = this.peopleStore.usersStore;
+    const { isIndexedFolder } = this.selectedFolderStore;
 
     const contactsView = getContactsView();
 
@@ -648,8 +648,7 @@ class TableStore {
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
-    const { isIndexedFolder } = this.selectedFolderStore;
-    const isDocumentsFolder = !this.selectedFolderStore.isRooms;
+    const isDocumentsFolder = !isRooms;
 
     const columnStorageName = isRooms
       ? `${COLUMNS_ROOMS_SIZE}=${userId}`
@@ -702,8 +701,7 @@ class TableStore {
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;
     const isFrame = this.settingsStore.isFrame;
-
-    const isDocumentsFolder = !this.selectedFolderStore.isRooms;
+    const isDocumentsFolder = !isRooms;
 
     const columnInfoPanelStorageName = isRooms
       ? `${COLUMNS_ROOMS_SIZE_INFO_PANEL}=${userId}`

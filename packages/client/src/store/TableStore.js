@@ -280,14 +280,18 @@ class TableStore {
 
       const contactsView = getContactsView();
 
-      const isContactsPeople =
-        contactsView === "people" || contactsTab === "people";
-      const isContactsGuests =
-        contactsView === "guests" || contactsTab === "guests";
-      const isContactsGroups =
-        contactsView === "groups" || contactsTab === "groups";
-      const isContactsInsideGroup =
-        contactsView === "inside_group" || contactsTab === "inside_group";
+      const isContactsPeople = !contactsTab
+        ? contactsView === "people"
+        : contactsTab === "people";
+      const isContactsGuests = !contactsTab
+        ? contactsView === "guests"
+        : contactsTab === "guests";
+      const isContactsGroups = !contactsTab
+        ? contactsView === "groups"
+        : contactsTab === "groups";
+      const isContactsInsideGroup = !contactsTab
+        ? contactsView === "inside_group"
+        : contactsTab === "inside_group";
 
       const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -376,10 +380,12 @@ class TableStore {
 
     const contactsView = getContactsView();
 
-    const isContactsPeople =
-      contactsView === "people" || contactsTab === "people";
-    const isContactsInsideGroup =
-      contactsView === "inside_group" || contactsTab === "inside_group";
+    const isContactsPeople = !contactsTab
+      ? contactsView === "people"
+      : contactsTab === "people";
+    const isContactsInsideGroup = !contactsTab
+      ? contactsView === "inside_group"
+      : contactsTab === "inside_group";
 
     const isRooms = isRoomsFolder || isArchiveFolder;
 
@@ -572,14 +578,18 @@ class TableStore {
 
     const contactsView = getContactsView();
 
-    const isContactsPeople =
-      contactsView === "people" || contactsTab === "people";
-    const isContactsGuests =
-      contactsView === "guests" || contactsTab === "guests";
-    const isContactsGroups =
-      contactsView === "groups" || contactsTab === "groups";
-    const isContactsInsideGroup =
-      contactsView === "inside_group" || contactsTab === "inside_group";
+    const isContactsPeople = !contactsTab
+      ? contactsView === "people"
+      : contactsTab === "people";
+    const isContactsGuests = !contactsTab
+      ? contactsView === "guests"
+      : contactsTab === "guests";
+    const isContactsGroups = !contactsTab
+      ? contactsView === "groups"
+      : contactsTab === "groups";
+    const isContactsInsideGroup = !contactsTab
+      ? contactsView === "inside_group"
+      : contactsTab === "inside_group";
 
     const { isIndexedFolder } = this.selectedFolderStore;
     const isRooms = isRoomsFolder || isArchiveFolder;
@@ -616,14 +626,18 @@ class TableStore {
 
     const contactsView = getContactsView();
 
-    const isContactsPeople =
-      contactsView === "people" || contactsTab === "people";
-    const isContactsGuests =
-      contactsView === "guests" || contactsTab === "guests";
-    const isContactsGroups =
-      contactsView === "groups" || contactsTab === "groups";
-    const isContactsInsideGroup =
-      contactsView === "inside_group" || contactsTab === "inside_group";
+    const isContactsPeople = !contactsTab
+      ? contactsView === "people"
+      : contactsTab === "people";
+    const isContactsGuests = !contactsTab
+      ? contactsView === "guests"
+      : contactsTab === "guests";
+    const isContactsGroups = !contactsTab
+      ? contactsView === "groups"
+      : contactsTab === "groups";
+    const isContactsInsideGroup = !contactsTab
+      ? contactsView === "inside_group"
+      : contactsTab === "inside_group";
 
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;
@@ -661,14 +675,18 @@ class TableStore {
 
     const contactsView = getContactsView();
 
-    const isContactsPeople =
-      contactsView === "people" || contactsTab === "people";
-    const isContactsGuests =
-      contactsView === "guests" || contactsTab === "guests";
-    const isContactsGroups =
-      contactsView === "groups" || contactsTab === "groups";
-    const isContactsInsideGroup =
-      contactsView === "inside_group" || contactsTab === "inside_group";
+    const isContactsPeople = !contactsTab
+      ? contactsView === "people"
+      : contactsTab === "people";
+    const isContactsGuests = !contactsTab
+      ? contactsView === "guests"
+      : contactsTab === "guests";
+    const isContactsGroups = !contactsTab
+      ? contactsView === "groups"
+      : contactsTab === "groups";
+    const isContactsInsideGroup = !contactsTab
+      ? contactsView === "inside_group"
+      : contactsTab === "inside_group";
 
     const isRooms = isRoomsFolder || isArchiveFolder;
     const userId = this.userStore.user?.id;

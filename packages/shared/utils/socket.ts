@@ -155,7 +155,7 @@ class SocketHelper {
    */
   private tryConnect() {
     try {
-      if (!this.connectionSettings) return;
+      if (!this.connectionSettings || !this.connectionSettings.url) return;
 
       const { url, publicRoomKey } = this.connectionSettings;
 
@@ -256,6 +256,8 @@ class SocketHelper {
    * @param publicRoomKey - The key for the public room to join.
    */
   public connect(url: string, publicRoomKey: string) {
+    if (!url) return;
+
     console.log("[WS] connect", { url, publicRoomKey });
 
     this.connectionSettings = { url, publicRoomKey } as ConnectionSettings;

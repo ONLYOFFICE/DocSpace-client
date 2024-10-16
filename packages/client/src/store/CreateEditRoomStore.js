@@ -212,16 +212,10 @@ class CreateEditRoomStore {
   onSaveEditRoom = async (t, newParams, room) => {
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
     const { cover } = this.dialogsStore;
-    const {
-      editRoom,
-      removeLogoFromRoom,
-      calculateRoomLogoParams,
-      removeTagsFromRoom,
-      setFolder,
-    } = this.filesStore;
+    const { editRoom, removeLogoFromRoom } = this.filesStore;
     const { uploadedFile, getUploadedLogoData } = this.avatarEditorDialogStore;
     const { changeRoomOwner, updateCurrentFolder } = this.filesActionsStore;
-    const { createTag } = this.tagsStore;
+
     const { id: currentFolderId } = this.selectedFolderStore;
 
     const editRoomParams = {};
@@ -296,15 +290,13 @@ class CreateEditRoomStore {
     try {
       try {
         if (additionalRequest.length) {
-          const [firstRequset, secondRequest] =
+          const [logoParamsData, uploadedData] =
             await Promise.all(additionalRequest);
 
-          if (isUpdatelogo) {
-            editRoomParams.logo = {
-              tmpFile: secondRequest.responseData.data,
-              ...firstRequset,
-            };
-          }
+          editRoomParams.logo = {
+            tmpFile: uploadedData.responseData.data,
+            ...logoParamsData,
+          };
         }
       } catch (e) {
         toastr.error(e);
@@ -397,24 +389,23 @@ class CreateEditRoomStore {
       );
     }
 
+    this.setIsLoading(true);
+
     try {
       try {
         if (additionalRequest.length) {
-          const [firstRequset, secondRequest] =
+          const [logoParamsData, uploadedData] =
             await Promise.all(additionalRequest);
 
-          if (isUpdatelogo) {
-            createRoomData.logo = {
-              tmpFile: secondRequest.responseData.data,
-              ...firstRequset,
-            };
-          }
+          createRoomData.logo = {
+            tmpFile: uploadedData.responseData.data,
+            ...logoParamsData,
+          };
         }
       } catch (e) {
         toastr.error(e);
       }
 
-      this.setIsLoading(true);
       withConfirm && this.setConfirmDialogIsLoading(true);
 
       // create room
@@ -425,15 +416,9 @@ class CreateEditRoomStore {
 
       this.dialogsStore.setIsNewRoomByCurrentUser(true);
 
-      room.isLogoLoading = true;
-
-      const requests = [];
-
       // delete thirdparty account if not needed
       if (!isThirdparty && storageFolderId)
-        requests.push(deleteThirdParty(thirdpartyAccount.providerId));
-
-      await Promise.all(requests);
+        await deleteThirdParty(thirdpartyAccount.providerId);
 
       this.onOpenNewRoom(room);
 
@@ -449,15 +434,12 @@ class CreateEditRoomStore {
           toastr.error(error),
         );
       }
-
-      this.roomIsCreated = true;
     } catch (err) {
       toastr.error(err);
-      console.log(err);
+
       this.setIsLoading(false);
       this.setConfirmDialogIsLoading(false);
       this.onClose();
-      this.roomIsCreated = true;
     } finally {
       processCreatingRoomFromData && setProcessCreatingRoomFromData(false);
     }

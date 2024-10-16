@@ -26,23 +26,29 @@
 
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-console */
-import { DefaultEventsMap } from "@socket.io/component-emitter";
 import io, { Socket } from "socket.io-client";
+import { DefaultEventsMap } from "@socket.io/component-emitter";
 
-export type TOnCallback = {
-  featureId: string;
-  value: number;
-  usedSpace: number;
-  quotaLimit: number;
-  customQuotaFeature: string;
-  enableQuota: boolean;
-  quota: number;
+export type ConnectionSettings = {
+  url: string;
+  publicRoomKey: string;
 };
-let globalClient: Socket<DefaultEventsMap, DefaultEventsMap> | null = null;
-let globalCallbacks: TCallback[] = [];
-let globalEmits: TEmit[] = [];
 
-const subscribers = new Set<string>();
+export type TConfig = {
+  withCredentials: boolean;
+  transports: string[];
+  eio: number;
+  path: string;
+  query?: {
+    [key: string]: string;
+  };
+};
+
+export type TEmit = {
+  command: string;
+  data: { roomParts: string | []; individual?: boolean };
+  room?: null | boolean;
+};
 
 type TOptQuota =
   | { customQuotaFeature: string; usedSpace: number; quotaLimit: number }
@@ -57,10 +63,14 @@ export type TOptSocket = {
   cmd?: "create" | "update" | "delete";
 } & TOptQuota;
 
-export type TEmit = {
-  command: string;
-  data: { roomParts: string | []; individual?: boolean };
-  room?: null | boolean;
+export type TOnCallback = {
+  featureId: string;
+  value: number;
+  usedSpace: number;
+  quotaLimit: number;
+  customQuotaFeature: string;
+  enableQuota: boolean;
+  quota: number;
 };
 
 export type TCallback = {
@@ -68,27 +78,38 @@ export type TCallback = {
   callback: (value: TOnCallback) => void;
 };
 
-export type TConfig = {
-  withCredentials: boolean;
-  transports: string[];
-  eio: number;
-  path: string;
-  query?: {
-    [key: string]: string;
-  };
-};
+class SocketHelper {
+  private static instance: SocketHelper;
 
-class SocketIOHelper {
-  private socketUrl: string | null = null;
+  private connectionSettings?: ConnectionSettings | null;
+
+  private client?: Socket<DefaultEventsMap, DefaultEventsMap> | null = null;
 
   private isSocketReady: boolean = false;
 
-  constructor(url: string, publicRoomKey: string) {
-    if (!url) return;
+  private callbacks: TCallback[] = [];
 
-    this.socketUrl = url;
+  private emits: TEmit[] = [];
 
-    if (globalClient) return;
+  private subscribers = new Set<string>();
+
+  private constructor() {
+    this.client = null;
+    this.connectionSettings = null;
+  }
+
+  static getInstance() {
+    if (this.instance) {
+      return this.instance;
+    }
+    this.instance = new SocketHelper();
+    return this.instance;
+  }
+
+  private tryConnect() {
+    if (!this.connectionSettings) return;
+
+    const { url, publicRoomKey } = this.connectionSettings;
 
     const origin = window.location.origin;
 
@@ -105,21 +126,20 @@ class SocketIOHelper {
       };
     }
 
-    globalClient = io(origin, config);
+    this.client = io(origin, config);
 
-    globalClient.on("connect", () => {
+    this.client.on("connect", () => {
       console.log("[WS] socket is connected");
     });
-    globalClient.on("connect_error", (err) =>
+
+    this.client.on("connect_error", (err) =>
       console.log("[WS] socket connect error", err),
     );
-    globalClient.on("disconnect", () =>
+
+    this.client.on("disconnect", () =>
       console.log("[WS] socket is disconnected"),
     );
-    globalClient.on("connection-init", this.onConnectionInit());
-
-    // DEV tests
-    // window.socketHelper = this;
+    this.client.on("connection-init", this.onConnectionInit());
   }
 
   private onConnectionInit(): () => void {
@@ -128,24 +148,24 @@ class SocketIOHelper {
 
       this.isSocketReady = true;
 
-      if (globalCallbacks.length) {
-        globalCallbacks.forEach(({ eventName, callback }: TCallback) => {
+      if (this.callbacks.length) {
+        this.callbacks.forEach(({ eventName, callback }: TCallback) => {
           this.on(eventName, callback);
         });
-        globalCallbacks = [];
+        this.callbacks = [];
       }
 
-      if (globalEmits.length) {
-        globalEmits.forEach(({ command, data, room }) => {
+      if (this.emits.length) {
+        this.emits.forEach(({ command, data, room }) => {
           this.emit({ command, data, room });
         });
-        globalEmits = [];
+        this.emits = [];
       }
     };
   }
 
   get isEnabled() {
-    return this.socketUrl !== null;
+    return this.connectionSettings !== null;
   }
 
   get isReady() {
@@ -153,21 +173,26 @@ class SocketIOHelper {
   }
 
   get socketSubscribers() {
-    return subscribers;
+    return this.subscribers;
   }
 
   get socket() {
-    return globalClient;
+    return this.client;
   }
 
-  emit = ({ command, data, room = null }: TEmit) => {
-    if (!this.isEnabled || !this.isReady || !globalClient) {
+  public updateSettings(url: string, publicRoomKey: string) {
+    this.connectionSettings = { url, publicRoomKey } as ConnectionSettings;
+    this.tryConnect();
+  }
+
+  public emit = ({ command, data, room = null }: TEmit) => {
+    if (!this.isEnabled || !this.isReady || !this.client) {
       console.log("[WS] socket [emit] is not ready -> save in queue", {
         command,
         data,
         room,
       });
-      globalEmits.push({ command, data, room });
+      this.emits.push({ command, data, room });
       return;
     }
 
@@ -182,35 +207,35 @@ class SocketIOHelper {
 
     ids.forEach((id: string) => {
       if (command === "subscribe") {
-        if (subscribers.has(id)) return;
+        if (this.subscribers.has(id)) return;
 
-        subscribers.add(id);
+        this.subscribers.add(id);
       }
 
       if (command === "unsubscribe") {
-        subscribers.delete(id);
+        this.subscribers.delete(id);
       }
     });
 
     return room
-      ? globalClient.to(room).emit(command, data)
-      : globalClient.emit(command, data);
+      ? this.client.to(room).emit(command, data)
+      : this.client.emit(command, data);
   };
 
-  on = (eventName: string, callback: (value: TOnCallback) => void) => {
-    if (!this.isEnabled || !this.isReady || !globalClient) {
+  public on = (eventName: string, callback: (value: TOnCallback) => void) => {
+    if (!this.isEnabled || !this.isReady || !this.client) {
       console.log("[WS] socket [on] is not ready -> save in queue", {
         eventName,
         callback,
       });
-      globalCallbacks.push({ eventName, callback });
+      this.callbacks.push({ eventName, callback });
       return;
     }
 
     console.log("[WS] on", eventName, callback);
 
-    globalClient.on(eventName, callback);
+    this.client.on(eventName, callback);
   };
 }
 
-export default SocketIOHelper;
+export default SocketHelper;

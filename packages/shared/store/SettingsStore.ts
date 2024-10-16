@@ -64,7 +64,7 @@ import {
 import { setCookie, getCookie } from "../utils/cookie";
 import { combineUrl } from "../utils/combineUrl";
 import FirebaseHelper from "../utils/firebase";
-import SocketIOHelper from "../utils/socket";
+import SocketHelper from "../utils/socket";
 import { TWhiteLabel } from "../utils/whiteLabelHelper";
 
 import {
@@ -246,6 +246,8 @@ class SettingsStore {
   debugInfo = false;
 
   socketUrl = "";
+
+  socketHelper = SocketHelper.getInstance();
 
   folderFormValidation = new RegExp('[*+:"<>?|\\\\/]', "gim");
 
@@ -564,13 +566,20 @@ class SettingsStore {
 
     Object.keys(newSettings).forEach((forEachKey) => {
       const key = forEachKey as keyof TSettings;
+
       if (key in this && newSettings) {
+        if (key === "socketUrl") {
+          this.setSocketUrl(newSettings[key]);
+          return;
+        }
+
         this.setValue(
           key as keyof SettingsStore,
           key === "defaultPage"
             ? combineUrl(window.ClientConfig?.proxy?.url, newSettings[key])
             : newSettings[key],
         );
+
         if (key === "culture") {
           if (newSettings?.wizardToken) return;
           const language = getCookie(LANGUAGE);
@@ -889,16 +898,22 @@ class SettingsStore {
     return window.firebaseHelper;
   }
 
-  setPublicRoomKey = (key: string) => {
-    this.publicRoomKey = key;
-  };
+  setSocketUrl = (url: string) => {
+    this.socketUrl = url;
 
-  get socketHelper() {
     const socketUrl =
       isPublicRoom() && !this.publicRoomKey ? "" : this.socketUrl;
 
-    return new SocketIOHelper(socketUrl, this.publicRoomKey);
-  }
+    this.socketHelper.updateSettings(socketUrl, this.publicRoomKey);
+  };
+
+  setPublicRoomKey = (key: string) => {
+    this.publicRoomKey = key;
+
+    const socketUrl = isPublicRoom() && !key ? "" : this.socketUrl;
+
+    this.socketHelper.updateSettings(socketUrl, key);
+  };
 
   getBuildVersionInfo = async () => {
     let versionInfo = null;

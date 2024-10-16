@@ -6,7 +6,7 @@
   "DescriptionForRegisteredUser": "Vyplněný formulář PDF je uložen a je vám k dispozici ve složce Kompletní. Chcete-li zkontrolovat stav, obraťte se na vlastníka formuláře s uvedením přiděleného čísla.",
   "FillItOutAgain": "Vyplňte jej znovu",
   "FormCompletedSuccessfully": "Formulář byl úspěšně vyplněn",
-  "FormNumber": "Číslo formuláře:",
+  "FormNumber": "Číslo formuláře",
   "FormOwner": "Vlastník formuláře",
   "Title": "Formulář je vyplněn"
 }

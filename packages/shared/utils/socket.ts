@@ -38,9 +38,9 @@ export type TOnCallback = {
   enableQuota: boolean;
   quota: number;
 };
-let client: Socket<DefaultEventsMap, DefaultEventsMap> | null = null;
-let callbacks: { eventName: string; callback: (value: TOnCallback) => void }[] =
-  [];
+let globalClient: Socket<DefaultEventsMap, DefaultEventsMap> | null = null;
+let globalCallbacks: TCallback[] = [];
+let globalEmits: TEmit[] = [];
 
 const subscribers = new Set<string>();
 
@@ -63,6 +63,11 @@ export type TEmit = {
   room?: null | boolean;
 };
 
+export type TCallback = {
+  eventName: string;
+  callback: (value: TOnCallback) => void;
+};
+
 export type TConfig = {
   withCredentials: boolean;
   transports: string[];
@@ -74,14 +79,16 @@ export type TConfig = {
 };
 
 class SocketIOHelper {
-  socketUrl: string | null = null;
+  private socketUrl: string | null = null;
+
+  private isSocketReady: boolean = false;
 
   constructor(url: string, publicRoomKey: string) {
     if (!url) return;
 
     this.socketUrl = url;
 
-    if (client) return;
+    if (globalClient) return;
 
     const origin = window.location.origin;
 
@@ -98,37 +105,71 @@ class SocketIOHelper {
       };
     }
 
-    client = io(origin, config);
+    globalClient = io(origin, config);
 
-    client.on("connect", () => {
-      console.log("socket is connected");
-      if (callbacks?.length > 0) {
-        callbacks.forEach(({ eventName, callback }) => {
-          if (!client) return;
-          client.on(eventName, callback);
-        });
-        callbacks = [];
-      }
+    globalClient.on("connect", () => {
+      console.log("[WS] socket is connected");
     });
-    client.on("connect_error", (err) =>
-      console.log("socket connect error", err),
+    globalClient.on("connect_error", (err) =>
+      console.log("[WS] socket connect error", err),
     );
-    client.on("disconnect", () => console.log("socket is disconnected"));
+    globalClient.on("disconnect", () =>
+      console.log("[WS] socket is disconnected"),
+    );
+    globalClient.on("connection-init", this.onConnectionInit());
 
     // DEV tests
     // window.socketHelper = this;
+  }
+
+  private onConnectionInit(): () => void {
+    return () => {
+      console.log("[WS] socket is ready (connection-init)");
+
+      this.isSocketReady = true;
+
+      if (globalCallbacks.length) {
+        globalCallbacks.forEach(({ eventName, callback }: TCallback) => {
+          this.on(eventName, callback);
+        });
+        globalCallbacks = [];
+      }
+
+      if (globalEmits.length) {
+        globalEmits.forEach(({ command, data, room }) => {
+          this.emit({ command, data, room });
+        });
+        globalEmits = [];
+      }
+    };
   }
 
   get isEnabled() {
     return this.socketUrl !== null;
   }
 
+  get isReady() {
+    return this.isSocketReady;
+  }
+
   get socketSubscribers() {
     return subscribers;
   }
 
+  get socket() {
+    return globalClient;
+  }
+
   emit = ({ command, data, room = null }: TEmit) => {
-    if (!this.isEnabled) return;
+    if (!this.isEnabled || !this.isReady || !globalClient) {
+      console.log("[WS] socket [emit] is not ready -> save in queue", {
+        command,
+        data,
+        room,
+      });
+      globalEmits.push({ command, data, room });
+      return;
+    }
 
     console.log("[WS] emit", command, data, room);
 
@@ -151,43 +192,24 @@ class SocketIOHelper {
       }
     });
 
-    if (!client) return;
-
-    if (!client.connected) {
-      client.on("connect", () => {
-        if (room !== null) {
-          if (!client) return;
-          // @ts-expect-error need refactoring
-          client.to(room).emit(command, data);
-        } else {
-          if (!client) return;
-          client.emit(command, data);
-        }
-      });
-    } else if (room) {
-      // @ts-expect-error need refactoring
-      client.to(room).emit(command, data);
-    } else {
-      client.emit(command, data);
-    }
+    return room
+      ? globalClient.to(room).emit(command, data)
+      : globalClient.emit(command, data);
   };
 
-  on = (eventName: string, callback: (value: TOptSocket) => void) => {
-    if (!this.isEnabled) {
-      callbacks.push({ eventName, callback });
+  on = (eventName: string, callback: (value: TOnCallback) => void) => {
+    if (!this.isEnabled || !this.isReady || !globalClient) {
+      console.log("[WS] socket [on] is not ready -> save in queue", {
+        eventName,
+        callback,
+      });
+      globalCallbacks.push({ eventName, callback });
       return;
     }
 
-    if (!client) return;
+    console.log("[WS] on", eventName, callback);
 
-    if (!client.connected) {
-      client.on("connect", () => {
-        if (!client) return;
-        client.on(eventName, callback);
-      });
-    } else {
-      client.on(eventName, callback);
-    }
+    globalClient.on(eventName, callback);
   };
 }
 

@@ -1015,7 +1015,12 @@ export function saveThirdParty(
     providerId,
     isRoomsStorage,
   };
-  return request({ method: "post", url: "files/thirdparty", data });
+  const skipRedirect = true;
+
+  return request(
+    { method: "post", url: "files/thirdparty", data },
+    skipRedirect,
+  );
 }
 
 // TODO: Need update res type

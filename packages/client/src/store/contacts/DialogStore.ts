@@ -27,93 +27,105 @@
 import { makeAutoObservable } from "mobx";
 
 class DialogStore {
+  data: unknown = {};
+
   changeOwner = false;
+
   deleteSelfProfile = false;
+
   deleteProfileEver = false;
-  data = {};
 
   changeUserStatusDialogVisible = false;
+
   disableDialogVisible = false;
+
   sendInviteDialogVisible = false;
+
   resetAuthDialogVisible = false;
+
   dataReassignmentDialogVisible = false;
+
   dataReassignmentDeleteProfile = false;
+
   isDeletingUserWithReassignment = false;
+
   changeEmailVisible = false;
+
   deleteGroupDialogVisible = false;
+
   removeGuestDialogVisible = false;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  setChangeOwnerDialogVisible = (visible) => {
-    this.changeOwner = visible;
-  };
-
-  setDeleteSelfProfileDialogVisible = (visible) => {
-    this.deleteSelfProfile = visible;
-  };
-
-  setDeleteProfileDialogVisible = (visible) => {
-    this.deleteProfileEver = visible;
-  };
-
-  setDataReassignmentDeleteProfile = (dataReassignmentDeleteProfile) => {
-    this.dataReassignmentDeleteProfile = dataReassignmentDeleteProfile;
-  };
-
-  setIsDeletingUserWithReassignment = (isDeletingUserWithReassignment) => {
-    this.isDeletingUserWithReassignment = isDeletingUserWithReassignment;
-  };
-
-  setDialogData = (data) => {
+  setDialogData = (data: unknown) => {
     this.data = data;
   };
 
-  setChangeUserStatusDialogVisible = (visible) => {
+  setDataReassignmentDeleteProfile = (
+    dataReassignmentDeleteProfile: boolean,
+  ) => {
+    this.dataReassignmentDeleteProfile = dataReassignmentDeleteProfile;
+  };
+
+  setIsDeletingUserWithReassignment = (
+    isDeletingUserWithReassignment: boolean,
+  ) => {
+    this.isDeletingUserWithReassignment = isDeletingUserWithReassignment;
+  };
+
+  setChangeOwnerDialogVisible = (visible: boolean) => {
+    this.changeOwner = visible;
+  };
+
+  setDeleteSelfProfileDialogVisible = (visible: boolean) => {
+    this.deleteSelfProfile = visible;
+  };
+
+  setDeleteProfileDialogVisible = (visible: boolean) => {
+    this.deleteProfileEver = visible;
+  };
+
+  setChangeUserStatusDialogVisible = (visible: boolean) => {
     this.changeUserStatusDialogVisible = visible;
   };
 
-  setSendInviteDialogVisible = (visible) => {
+  setSendInviteDialogVisible = (visible: boolean) => {
     this.sendInviteDialogVisible = visible;
   };
 
-  setResetAuthDialogVisible = (visible) => {
+  setResetAuthDialogVisible = (visible: boolean) => {
     this.resetAuthDialogVisible = visible;
   };
 
-  setDataReassignmentDialogVisible = (visible) => {
+  setDataReassignmentDialogVisible = (visible: boolean) => {
     this.dataReassignmentDialogVisible = visible;
   };
 
-  setChangeEmailVisible = (visible) => {
+  setChangeEmailVisible = (visible: boolean) => {
     this.changeEmailVisible = visible;
   };
 
-  setDeleteGroupDialogVisible = (visible) => {
+  setDeleteGroupDialogVisible = (visible: boolean) => {
     this.deleteGroupDialogVisible = visible;
   };
 
-  setRemoveGuestDialogVisible = (visible) => {
+  setRemoveGuestDialogVisible = (visible: boolean) => {
     this.removeGuestDialogVisible = visible;
   };
 
   closeDialogs = () => {
+    this.setDialogData({});
+
     this.setChangeOwnerDialogVisible(false);
     this.setDeleteSelfProfileDialogVisible(false);
     this.setDeleteProfileDialogVisible(false);
-    this.setDialogData({});
-
     this.setChangeUserStatusDialogVisible(false);
-
     this.setSendInviteDialogVisible(false);
     this.setResetAuthDialogVisible(false);
-
     this.setChangeEmailVisible(false);
-
     this.setDeleteGroupDialogVisible(false);
-
     this.setRemoveGuestDialogVisible(false);
   };
 }

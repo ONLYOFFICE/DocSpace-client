@@ -25,11 +25,12 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { RowContainer } from "@docspace/shared/components/row-container";
 import { isMobile, isTablet } from "react-device-detect";
+
+import { RowContainer } from "@docspace/shared/components/row-container";
 import { Row } from "@docspace/shared/components/row";
-import { Base, globalColors } from "@docspace/shared/themes";
-import { mobile, tablet } from "@docspace/shared/utils/device";
+import { globalColors } from "@docspace/shared/themes";
+import { tablet } from "@docspace/shared/utils/device";
 import { RowContent } from "@docspace/shared/components/row-content";
 
 const marginStyles = css`
@@ -81,7 +82,11 @@ export const GroupsRowContainer = styled(RowContainer)`
   }
 `;
 
-export const GroupsRowWrapper = styled.div`
+export const GroupsRowWrapper = styled.div<{
+  isChecked?: boolean;
+  isActive?: boolean;
+  value?: string;
+}>`
   .group-item {
     border: 1px solid transparent;
     border-inline: none;
@@ -115,7 +120,7 @@ const checkedStyle = css`
   }
 `;
 
-export const GroupsRow = styled(Row)`
+export const GroupsRow = styled(Row)<{ checked?: boolean; isActive?: boolean }>`
   ${({ checked, isActive }) => (checked || isActive) && checkedStyle};
 
   ${!isMobile &&
@@ -193,5 +198,3 @@ export const GroupsRowContent = styled(RowContent)`
     }
   }
 `;
-
-GroupsRow.defaultProps = { theme: Base };

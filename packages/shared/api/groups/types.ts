@@ -59,3 +59,8 @@ export type TGetGroupMembersInRoomFilter = {
   count?: number;
   filterValue?: string;
 };
+
+export type TGetGroupList = {
+  items: TGroup[];
+  total: number;
+};

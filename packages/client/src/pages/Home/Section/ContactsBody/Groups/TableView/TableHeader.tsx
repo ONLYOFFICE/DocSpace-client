@@ -27,21 +27,68 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
+import { NavigateFunction, Location } from "react-router-dom";
 
-import { TableHeader } from "@docspace/shared/components/table";
+import { TableHeader, TTableColumn } from "@docspace/shared/components/table";
 import { Events } from "@docspace/shared/enums";
-import { TableVersions } from "SRC_DIR/helpers/constants";
+import { Nullable, TTranslation } from "@docspace/shared/types";
 
-const TABLE_COLUMNS = `groupsTableColumns_ver-${TableVersions.Groups}`;
+import TableStore from "SRC_DIR/store/TableStore";
+import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
+import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
+import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
 
-class GroupsTableHeader extends React.Component {
-  constructor(props) {
+import { TableHeaderColumn } from "../../Users/TableView/TableView.types";
+
+type GroupsTableHeaderProps = {
+  t?: TTranslation;
+
+  peopleGroupsColumnIsEnabled?: boolean;
+  managerGroupsColumnIsEnabled?: boolean;
+
+  getColumns?: TableStore["getColumns"];
+  setColumnEnable?: TableStore["setColumnEnable"];
+  tableStorageName?: TableStore["tableStorageName"];
+  columnStorageName?: TableStore["columnStorageName"];
+  columnInfoPanelStorageName?: TableStore["columnInfoPanelStorageName"];
+
+  sectionWidth: number;
+
+  filter?: GroupsStore["groupsFilter"];
+  setFilter?: GroupsStore["setGroupsFilter"];
+
+  setIsLoading?: ClientLoadingStore["setIsSectionBodyLoading"];
+
+  infoPanelVisible?: InfoPanelStore["isVisible"];
+
+  navigate: NavigateFunction;
+  location: Location;
+
+  containerRef: React.MutableRefObject<
+    Nullable<React.ForwardedRef<HTMLDivElement>>
+  >;
+};
+
+type GroupTableHeaderState = { columns: TableHeaderColumn[] };
+
+class GroupsTableHeader extends React.Component<
+  GroupsTableHeaderProps,
+  GroupTableHeaderState
+> {
+  constructor(props: GroupsTableHeaderProps) {
     super(props);
+
+    const {
+      t,
+      peopleGroupsColumnIsEnabled,
+      managerGroupsColumnIsEnabled,
+      getColumns,
+    } = props;
 
     const defaultColumns = [
       {
         key: "Name",
-        title: props.t("Common:Title"),
+        title: t!("Common:Title"),
         resizable: true,
         enable: true,
         default: true,
@@ -51,8 +98,8 @@ class GroupsTableHeader extends React.Component {
       },
       {
         key: "People",
-        title: props.t("Common:People"),
-        enable: props.peopleAccountsGroupsColumnIsEnabled,
+        title: t!("Common:People"),
+        enable: peopleGroupsColumnIsEnabled,
         sortBy: "membersCount",
         onClick: this.onFilter,
         resizable: true,
@@ -60,8 +107,8 @@ class GroupsTableHeader extends React.Component {
       },
       {
         key: "Head of Group",
-        title: props.t("Common:HeadOfGroup"),
-        enable: props.managerAccountsGroupsColumnIsEnabled,
+        title: t!("Common:HeadOfGroup"),
+        enable: managerGroupsColumnIsEnabled,
         sortBy: "manager",
         onClick: this.onFilter,
         resizable: true,
@@ -69,36 +116,39 @@ class GroupsTableHeader extends React.Component {
       },
     ];
 
-    const columns = props.getColumns(defaultColumns);
+    const columns: TableHeaderColumn[] = getColumns!(defaultColumns);
+
     const tableColumns = columns.map((c) => c.enable && c.key);
-    this.setTableColumns(tableColumns);
+
+    this.setTableColumns(tableColumns as string[]);
 
     this.state = { columns };
   }
 
-  onColumnChange = (key) => {
+  onColumnChange = (key: string) => {
     const { columns } = this.state;
+    const { setColumnEnable } = this.props;
 
     const columnIndex = columns.findIndex((c) => c.key === key);
     if (columnIndex === -1) return;
 
-    this.props.setColumnEnable(key);
+    setColumnEnable!(key);
 
     columns[columnIndex].enable = !columns[columnIndex].enable;
     this.setState({ columns });
 
     const tableColumns = columns.map((c) => c.enable && c.key);
-    this.setTableColumns(tableColumns);
+
+    this.setTableColumns(tableColumns as string[]);
 
     const event = new Event(Events.CHANGE_COLUMN);
     window.dispatchEvent(event);
   };
 
-  onFilter = (sortBy) => {
+  onFilter = (sortBy: string) => {
     const { filter, setFilter, setIsLoading, navigate, location } = this.props;
-    console.log(filter);
 
-    const newFilter = filter.clone();
+    const newFilter = filter!.clone();
     const reverseSortOrder =
       newFilter.sortOrder === "ascending" ? "descending" : "ascending";
 
@@ -109,17 +159,20 @@ class GroupsTableHeader extends React.Component {
       if (sortBy === "AZ") newFilter.sortOrder = reverseSortOrder;
     }
 
-    setIsLoading(true);
-    setFilter(newFilter);
+    setIsLoading!(true);
+    setFilter!(newFilter);
     navigate(`${location.pathname}?${newFilter.toUrlParams()}`);
   };
 
-  setTableColumns = (tableColumns) => {
-    localStorage.setItem(`${TABLE_COLUMNS}=${this.props.userId}`, tableColumns);
+  setTableColumns = (tableColumns: string[]) => {
+    const { tableStorageName } = this.props;
+
+    localStorage.setItem(tableStorageName!, tableColumns.toString());
   };
 
   render() {
     const { columns } = this.state;
+
     const {
       containerRef,
       filter,
@@ -127,24 +180,25 @@ class GroupsTableHeader extends React.Component {
       infoPanelVisible,
       columnStorageName,
       columnInfoPanelStorageName,
-      setHideColumns,
+      tableStorageName,
     } = this.props;
-    const { sortOrder } = filter;
+
+    const sortBy = filter!.sortBy === "displayname" ? "AZ" : filter!.sortBy;
+    const sorted = filter!.sortOrder === "descending";
 
     return (
       <TableHeader
-        checkboxSize="48px"
-        sorted={sortOrder === "descending"}
-        sortBy={filter.sortBy}
-        containerRef={containerRef}
-        columns={columns}
-        columnStorageName={columnStorageName}
-        columnInfoPanelStorageName={columnInfoPanelStorageName}
+        sorted={sorted}
+        sortBy={sortBy}
+        containerRef={containerRef as unknown as { current: HTMLDivElement }}
+        columns={columns as TTableColumn[]}
+        columnStorageName={columnStorageName!}
+        columnInfoPanelStorageName={columnInfoPanelStorageName!}
+        tableStorageName={tableStorageName!}
         sectionWidth={sectionWidth}
-        checkboxMargin="12px"
         infoPanelVisible={infoPanelVisible}
         useReactWindow
-        setHideColumns={setHideColumns}
+        showSettings
       />
     );
   }
@@ -156,20 +210,18 @@ export default inject(
     clientLoadingStore,
     userStore,
     infoPanelStore,
-    settingsStore,
     tableStore,
-  }) => ({
-    filter: peopleStore.groupsStore.groupsFilter,
-    setFilter: peopleStore.groupsStore.setGroupsFilter,
+  }: TStore) => ({
+    filter: peopleStore.groupsStore!.groupsFilter,
+    setFilter: peopleStore.groupsStore!.setGroupsFilter,
     setIsLoading: clientLoadingStore.setIsSectionBodyLoading,
     userId: userStore.user?.id,
     infoPanelVisible: infoPanelStore.isVisible,
     getColumns: tableStore.getColumns,
     setColumnEnable: tableStore.setColumnEnable,
-    managerAccountsGroupsColumnIsEnabled:
-      tableStore.managerAccountsGroupsColumnIsEnabled,
-    peopleAccountsGroupsColumnIsEnabled:
-      tableStore.peopleAccountsGroupsColumnIsEnabled,
+    managerGroupsColumnIsEnabled: tableStore.managerGroupsColumnIsEnabled,
+    peopleGroupsColumnIsEnabled: tableStore.peopleGroupsColumnIsEnabled,
+    tableStorageName: tableStore.tableStorageName,
   }),
 )(
   withTranslation(["People", "Common", "PeopleTranslations"])(

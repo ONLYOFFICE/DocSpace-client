@@ -29,6 +29,7 @@ import Filter from "./filter";
 import { request } from "../client";
 import { checkFilterInstance, toUrlParams } from "../../utils/common";
 import {
+  TGetGroupList,
   TGetGroupMembersInRoom,
   TGetGroupMembersInRoomFilter,
   TGroup,
@@ -54,7 +55,7 @@ export const createGroup = (
 
 // * Read
 
-export const getGroups = (filter = Filter.getDefault()) => {
+export const getGroups = async (filter = Filter.getDefault()) => {
   let params = "";
 
   if (filter) {
@@ -63,10 +64,12 @@ export const getGroups = (filter = Filter.getDefault()) => {
     params = `?${filter.toApiUrlParams()}`;
   }
 
-  return request({
+  const res = (await request({
     method: "get",
     url: `/group${params}`,
-  });
+  })) as TGetGroupList;
+
+  return res;
 };
 
 export const getGroupById = (

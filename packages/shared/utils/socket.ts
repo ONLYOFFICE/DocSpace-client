@@ -31,6 +31,13 @@ import io, { Socket } from "socket.io-client";
 
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 
+/**
+ * Enum representing various socket events used in the application.
+ * These events are used for communication between the client and server.
+ *
+ * @enum {string}
+ * @readonly
+ */
 export const enum SocketEvents {
   RestoreBackup = "restore-backup",
   LogoutSession = "s:logout-session",
@@ -47,6 +54,12 @@ export const enum SocketEvents {
   ChangedQuotaUserUsedValue = "s:change-user-quota-used-value",
 }
 
+/**
+ * Enum representing the various commands that can be sent over a socket connection.
+ *
+ * @enum {string}
+ * @readonly
+ */
 export const enum SocketCommands {
   Subscribe = "subscribe",
   Unsubscribe = "unsubscribe",
@@ -54,11 +67,28 @@ export const enum SocketCommands {
   RestoreBackup = "restore-backup",
 }
 
+/**
+ * Represents the configuration for a socket connection.
+ *
+ * @typedef {Object} TSocketConnection
+ * @property {string} url - The URL of the socket server.
+ * @property {string} publicRoomKey - The key for the public room.
+ */
 export type TSocketConnection = {
   url: string;
   publicRoomKey: string;
 };
 
+/**
+ * Configuration options for the socket connection.
+ *
+ * @typedef {Object} TConfig
+ * @property {boolean} withCredentials - Indicates whether credentials such as cookies should be sent with the request.
+ * @property {string[]} transports - List of transport mechanisms to be used (e.g., 'polling', 'websocket').
+ * @property {number} eio - Engine.IO protocol version.
+ * @property {string} path - Path to the socket endpoint.
+ * @property {Object.<string, string>} [query] - Optional query parameters to be included in the connection URL.
+ */
 export type TConfig = {
   withCredentials: boolean;
   transports: string[];
@@ -69,14 +99,53 @@ export type TConfig = {
   };
 };
 
+/**
+ * Represents the data to be emitted through a socket connection.
+ *
+ * @typedef {Object} TEmitData
+ * @property {string | string[]} roomParts - The parts of the room to which the data is emitted.
+ * @property {boolean} [individual] - Optional flag indicating if the emission is for an individual.
+ */
 export type TEmitData = { roomParts: string | []; individual?: boolean };
 
+/**
+ * Represents the structure of an emit event for a socket connection.
+ *
+ * @typedef {Object} TEmit
+ * @property {SocketCommands} command - The command to be sent through the socket.
+ * @property {TEmitData} [data] - Optional data associated with the command.
+ */
 export type TEmit = { command: SocketCommands; data?: TEmitData };
 
+/**
+ * Represents an optional quota configuration.
+ *
+ * This type can either define a custom quota feature with specific usage and limit,
+ * or it can be left undefined to indicate no custom quota.
+ *
+ * @typedef {Object} TOptQuota
+ * @property {string} [customQuotaFeature] - The name of the custom quota feature.
+ * @property {number} [usedSpace] - The amount of space used under the custom quota.
+ * @property {number} [quotaLimit] - The limit of the custom quota.
+ */
 type TOptQuota =
   | { customQuotaFeature: string; usedSpace: number; quotaLimit: number }
   | { customQuotaFeature?: never; usedSpace?: never; quotaLimit?: never };
 
+/**
+ * Represents the options for a socket operation.
+ *
+ * @typedef {Object} TOptSocket
+ *
+ * @property {string} featureId - The ID of the feature.
+ * @property {number} value - The value associated with the operation.
+ * @property {string} [data] - Optional data related to the operation.
+ * @property {"folder" | "file"} [type] - Optional type of the item, either "folder" or "file".
+ * @property {string} [id] - Optional ID of the item.
+ * @property {"create" | "update" | "delete"} [cmd] - Optional command to be executed, either "create", "update", or "delete".
+ *
+ * @extends TOptQuota
+ */
 export type TOptSocket = {
   featureId: string;
   value: number;
@@ -86,6 +155,18 @@ export type TOptSocket = {
   cmd?: "create" | "update" | "delete";
 } & TOptQuota;
 
+/**
+ * Represents the callback data structure for socket events.
+ *
+ * @typedef {Object} TOnCallback
+ * @property {string} featureId - The unique identifier for the feature.
+ * @property {number} value - The value associated with the feature.
+ * @property {number} usedSpace - The amount of space used.
+ * @property {number} quotaLimit - The limit of the quota.
+ * @property {string} customQuotaFeature - The custom quota feature identifier.
+ * @property {boolean} enableQuota - Flag indicating if the quota is enabled.
+ * @property {number} quota - The quota value.
+ */
 export type TOnCallback = {
   featureId: string;
   value: number;
@@ -96,6 +177,13 @@ export type TOnCallback = {
   quota: number;
 };
 
+/**
+ * Represents a callback function to be used with socket events.
+ *
+ * @typedef {Object} TCallback
+ * @property {SocketEvents} eventName - The name of the socket event.
+ * @property {(value: TOnCallback) => void} callback - The function to be called when the event is triggered.
+ */
 export type TCallback = {
   eventName: SocketEvents;
   callback: (value: TOnCallback) => void;

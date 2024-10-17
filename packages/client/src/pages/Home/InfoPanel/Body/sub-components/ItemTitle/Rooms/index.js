@@ -181,6 +181,7 @@ const RoomsItemHeader = ({
             size={16}
           />
         )}
+        {/* Show after adding a calendar request
         {openHistory && (
           <CalendarComponent
             setCalendarDay={setCalendarDay}
@@ -188,7 +189,7 @@ const RoomsItemHeader = ({
             setIsScrollLocked={setIsScrollLocked}
             locale={i18n.language}
           />
-        )}
+        )} */}
         <RoomsContextBtn
           selection={selection}
           itemTitleRef={itemTitleRef}

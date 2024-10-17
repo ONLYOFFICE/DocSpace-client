@@ -68,7 +68,7 @@ const StyledCatalogSpamIcon = styled(CatalogSpamIcon)`
 `;
 
 type BadgeProps = {
-  statusType: string;
+  statusType?: string;
   withoutPaid?: boolean;
   isPaid?: boolean;
   filter?: Filter;

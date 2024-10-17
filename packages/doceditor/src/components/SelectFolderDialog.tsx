@@ -36,7 +36,6 @@ import { SelectFolderDialogProps } from "@/types";
 import { TSelectorCancelButton } from "@docspace/shared/components/selector/Selector.types";
 
 const SelectFolderDialog = ({
-  socketHelper,
   onSubmit,
   onClose,
   isVisible,
@@ -74,8 +73,6 @@ const SelectFolderDialog = ({
       onSubmit={onSubmit}
       submitButtonLabel={t("Common:SaveHereButton")}
       submitButtonId="select-file-modal-submit"
-      socketHelper={socketHelper}
-      socketSubscribers={socketHelper.socketSubscribers}
       footerInputHeader={t("Editor:FileName")}
       currentFooterInputValue={titleSelectorFolder}
       footerCheckboxLabel={t("Editor:OpenSavedDocument")}

@@ -28,34 +28,37 @@
 
 import React from "react";
 
-import SocketIOHelper from "@docspace/shared/utils/socket";
+import SocketHelper, {
+  SocketCommands,
+  SocketEvents,
+} from "@docspace/shared/utils/socket";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { getRestoreProgress } from "@docspace/shared/api/portal";
-import { getUser } from "@docspace/shared/api/people";
 import { EDITOR_ID } from "@docspace/shared/constants";
 
 import { UseSocketHelperProps } from "@/types";
 
-const useSocketHelper = ({ socketUrl, user }: UseSocketHelperProps) => {
-  const [socketHelper, setSocketHelper] = React.useState<SocketIOHelper | null>(
-    null,
-  );
+const useSocketHelper = ({
+  socketUrl,
+  user,
+  shareKey,
+}: UseSocketHelperProps) => {
+  React.useEffect(() => {
+    SocketHelper.connect(socketUrl, shareKey ?? "");
+  }, [shareKey, socketUrl]);
 
   React.useEffect(() => {
-    if (socketHelper) return;
-    const socketIOHelper = new SocketIOHelper(socketUrl, "");
-
-    socketIOHelper.emit({
-      command: "subscribe",
-      data: { roomParts: "backup-restore" },
+    SocketHelper.emit(SocketCommands.Subscribe, {
+      roomParts: "backup-restore",
     });
 
-    socketIOHelper.emit({
-      command: "subscribe",
-      data: { roomParts: user?.id || "" },
+    SocketHelper.emit(SocketCommands.Subscribe, {
+      roomParts: user?.id || "",
     });
+  }, [user?.id]);
 
-    socketIOHelper.on("restore-backup", async () => {
+  React.useEffect(() => {
+    const callback = async () => {
       try {
         const response = await getRestoreProgress();
 
@@ -74,9 +77,16 @@ const useSocketHelper = ({ socketUrl, user }: UseSocketHelperProps) => {
       } catch (e) {
         console.error("getRestoreProgress", e);
       }
-    });
+    };
+    SocketHelper.on(SocketEvents.RestoreBackup, callback);
 
-    socketIOHelper.on("s:logout-session", async (loginEventId) => {
+    return () => {
+      SocketHelper.off(SocketEvents.RestoreBackup, callback);
+    };
+  }, []);
+
+  React.useEffect(() => {
+    const callback = async (loginEventId: unknown) => {
       console.log(`[WS] "logout-session"`, loginEventId, user?.loginEventId);
 
       if (
@@ -92,12 +102,14 @@ const useSocketHelper = ({ socketUrl, user }: UseSocketHelperProps) => {
           combineUrl(window.ClientConfig?.proxy?.url, "/login"),
         );
       }
-    });
+    };
 
-    setSocketHelper(socketIOHelper);
-  }, [socketHelper, socketUrl, user?.id, user?.loginEventId]);
+    SocketHelper.on(SocketEvents.LogoutSession, callback);
 
-  return { socketHelper };
+    return () => {
+      SocketHelper.off(SocketEvents.LogoutSession, callback);
+    };
+  }, [user?.loginEventId]);
 };
 
 export default useSocketHelper;

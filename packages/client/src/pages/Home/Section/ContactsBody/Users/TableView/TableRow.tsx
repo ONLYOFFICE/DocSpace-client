@@ -83,6 +83,7 @@ const PeopleTableRow = ({
   storageColumnIsEnabled,
 
   isGuests,
+  isRoomAdmin,
 }: TableRowProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["People", "Common", "Settings"]);
@@ -351,7 +352,7 @@ const PeopleTableRow = ({
           <div />
         )}
 
-        {isGuests ? (
+        {isGuests && !isRoomAdmin ? (
           inviterColumnIsEnabled ? (
             <TableCell className="table-cell_inviter">
               <Text
@@ -371,7 +372,7 @@ const PeopleTableRow = ({
           )
         ) : null}
 
-        {isGuests ? (
+        {isGuests && !isRoomAdmin ? (
           invitedDateColumnIsEnabled ? (
             <TableCell className="table-cell_invited-date">
               <Text
@@ -406,13 +407,17 @@ const PeopleTableRow = ({
   );
 };
 
-export default inject(({ currentQuotaStore, peopleStore }: TableRowStores) => {
-  const { showStorageInfo } = currentQuotaStore;
+export default inject(
+  ({ currentQuotaStore, peopleStore, userStore }: TableRowStores) => {
+    const { showStorageInfo } = currentQuotaStore;
 
-  const { getUsersChangeTypeOptions } = peopleStore.contextOptionsStore!;
+    const { getUsersChangeTypeOptions } = peopleStore.contextOptionsStore!;
 
-  return {
-    showStorageInfo,
-    getUsersChangeTypeOptions,
-  };
-})(withContent(observer(PeopleTableRow)));
+    return {
+      showStorageInfo,
+      getUsersChangeTypeOptions,
+
+      isRoomAdmin: userStore.user?.isRoomAdmin,
+    };
+  },
+)(withContent(observer(PeopleTableRow)));

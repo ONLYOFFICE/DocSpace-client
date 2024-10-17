@@ -26,61 +26,78 @@
 
 import { inject, observer } from "mobx-react";
 
-import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
-import * as Styled from "./index.styled";
+import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
+import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
+import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
+import { TContactsViewAs } from "SRC_DIR/helpers/contacts";
+
 import EmptyScreenGroups from "../../EmptyScreenGroups";
+
+import { GroupsRowContainer } from "./RowView.styled";
+
 import GroupsRow from "./GroupsRow";
+
+type RowViewProps = {
+  sectionWidth?: number;
+
+  groups?: GroupsStore["groups"];
+  hasMoreGroups?: GroupsStore["hasMoreGroups"];
+  fetchMoreGroups?: GroupsStore["fetchMoreGroups"];
+  filterTotal?: GroupsStore["groupsFilterTotal"];
+
+  viewAs?: PeopleStore["viewAs"];
+  setViewAs?: PeopleStore["setViewAs"];
+
+  currentDeviceType?: SettingsStore["currentDeviceType"];
+};
 
 const RowView = ({
   groups,
   sectionWidth,
-  accountsViewAs,
+  viewAs,
   setViewAs,
-  isFiltered,
   hasMoreGroups,
   fetchMoreGroups,
   filterTotal,
   currentDeviceType,
-}) => {
+}: RowViewProps) => {
   useViewEffect({
-    view: accountsViewAs,
-    setView: setViewAs,
-    currentDeviceType,
+    view: viewAs as string,
+    setView: (view: string) => {
+      setViewAs!(view as TContactsViewAs);
+    },
+    currentDeviceType: currentDeviceType!,
   });
 
-  if (groups.length === 0) return <EmptyScreenGroups />;
+  if (groups && groups?.length === 0) return <EmptyScreenGroups />;
 
   return (
-    <Styled.GroupsRowContainer
+    <GroupsRowContainer
       className="people-row-container"
       useReactWindow
-      fetchMoreFiles={fetchMoreGroups}
-      hasMoreFiles={hasMoreGroups}
-      itemCount={filterTotal}
-      filesLength={groups.length}
+      fetchMoreFiles={fetchMoreGroups!}
+      hasMoreFiles={hasMoreGroups!}
+      itemCount={filterTotal!}
+      filesLength={groups!.length}
       itemHeight={58}
+      onScroll={() => {}}
     >
-      {groups.map((item, index) => (
-        <GroupsRow
-          key={item.id}
-          item={item}
-          itemIndex={index}
-          sectionWidth={sectionWidth}
-        />
+      {groups!.map((item) => (
+        <GroupsRow key={item.id} item={item} sectionWidth={sectionWidth!} />
       ))}
-    </Styled.GroupsRowContainer>
+    </GroupsRowContainer>
   );
 };
 
-export default inject(({ peopleStore, settingsStore }) => ({
-  groups: peopleStore.groupsStore.groups,
-  accountsViewAs: peopleStore.viewAs,
+export default inject(({ peopleStore, settingsStore }: TStore) => ({
+  groups: peopleStore.groupsStore!.groups,
+  viewAs: peopleStore.viewAs,
   setViewAs: peopleStore.setViewAs,
-
-  hasMoreGroups: peopleStore.groupsStore.hasMoreGroups,
-  fetchMoreGroups: peopleStore.groupsStore.fetchMoreGroups,
-  filterTotal: peopleStore.groupsStore.groupsFilterTotal,
-  isFiltered: peopleStore.groupsStore.groupsIsFiltered,
+  hasMoreGroups: peopleStore.groupsStore!.hasMoreGroups,
+  fetchMoreGroups: peopleStore.groupsStore!.fetchMoreGroups,
+  filterTotal: peopleStore.groupsStore!.groupsFilterTotal,
+  isFiltered: peopleStore.groupsStore!.groupsIsFiltered,
   currentDeviceType: settingsStore.currentDeviceType,
 }))(observer(RowView));

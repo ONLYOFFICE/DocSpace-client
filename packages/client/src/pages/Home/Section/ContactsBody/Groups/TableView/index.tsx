@@ -27,157 +27,168 @@
 import React, { useRef } from "react";
 import { inject, observer } from "mobx-react";
 import { useNavigate, useLocation } from "react-router-dom";
-import * as Styled from "./index.styled";
+
 import { TableBody } from "@docspace/shared/components/table";
+import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
+import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
+import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
+import InfoPanelStore from "SRC_DIR/store/InfoPanelStore";
+import TableStore from "SRC_DIR/store/TableStore";
+import { TContactsViewAs } from "SRC_DIR/helpers/contacts";
 
-import GroupsTableItem from "./GroupsTableItem";
-import GroupsTableHeader from "./GroupsTableHeader";
 import EmptyScreenGroups from "../../EmptyScreenGroups";
-import { TableVersions } from "SRC_DIR/helpers/constants";
 
-const COLUMNS_SIZE = `groupsColumnsSize_ver-${TableVersions.Groups}`;
-const INFO_PANEL_COLUMNS_SIZE = `infoPanelGroupsColumnsSize_ver-${TableVersions.Groups}`;
+import { GroupsTableContainer } from "./TableView.styled";
+
+import GroupsTableItem from "./TableItem";
+import GroupsTableHeader from "./TableHeader";
+
+type GroupsTableViewProps = {
+  groups?: GroupsStore["groups"];
+  selection?: GroupsStore["selection"];
+  fetchMoreGroups?: GroupsStore["fetchMoreGroups"];
+  hasMoreGroups?: GroupsStore["hasMoreGroups"];
+  groupsFilterTotal?: GroupsStore["groupsFilterTotal"];
+
+  sectionWidth?: number;
+
+  viewAs?: PeopleStore["viewAs"];
+  setViewAs?: PeopleStore["setViewAs"];
+
+  infoPanelVisible?: InfoPanelStore["isVisible"];
+
+  currentDeviceType?: SettingsStore["currentDeviceType"];
+
+  peopleGroupsColumnIsEnabled?: TableStore["peopleGroupsColumnIsEnabled"];
+  managerGroupsColumnIsEnabled?: TableStore["managerGroupsColumnIsEnabled"];
+
+  columnStorageName?: TableStore["columnStorageName"];
+  columnInfoPanelStorageName?: TableStore["columnInfoPanelStorageName"];
+};
 
 const GroupsTableView = ({
   groups,
   selection,
+
   sectionWidth,
-  accountsViewAs,
+
+  viewAs,
   setViewAs,
-  theme,
-  userId,
+
   infoPanelVisible,
 
   currentDeviceType,
 
   fetchMoreGroups,
   hasMoreGroups,
-  groupsIsFiltered,
   groupsFilterTotal,
 
-  peopleAccountsGroupsColumnIsEnabled,
-  managerAccountsGroupsColumnIsEnabled,
-}) => {
+  peopleGroupsColumnIsEnabled,
+  managerGroupsColumnIsEnabled,
+
+  columnStorageName,
+  columnInfoPanelStorageName,
+}: GroupsTableViewProps) => {
   const ref = useRef(null);
-  const [hideColumns, setHideColumns] = React.useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
 
   useViewEffect({
-    view: accountsViewAs,
-    setView: setViewAs,
-    currentDeviceType,
+    view: viewAs!,
+    setView: (view: string) => {
+      setViewAs!(view as TContactsViewAs);
+    },
+    currentDeviceType: currentDeviceType!,
   });
 
-  const columnStorageName = `${COLUMNS_SIZE}=${userId}`;
-  const columnInfoPanelStorageName = `${INFO_PANEL_COLUMNS_SIZE}=${userId}`;
-
-  return groups.length ? (
-    <Styled.GroupsTableContainer useReactWindow forwardedRef={ref}>
+  return groups?.length ? (
+    <GroupsTableContainer useReactWindow forwardedRef={ref}>
       <GroupsTableHeader
         columnStorageName={columnStorageName}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
-        sectionWidth={sectionWidth}
+        sectionWidth={sectionWidth!}
         containerRef={ref}
-        setHideColumns={setHideColumns}
         navigate={navigate}
         location={location}
       />
       <TableBody
-        columnStorageName={columnStorageName}
+        columnStorageName={columnStorageName!}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
         infoPanelVisible={infoPanelVisible}
-        fetchMoreFiles={fetchMoreGroups}
-        hasMoreFiles={hasMoreGroups}
-        itemCount={groupsFilterTotal}
+        fetchMoreFiles={fetchMoreGroups!}
+        hasMoreFiles={hasMoreGroups!}
+        itemCount={groupsFilterTotal!}
         filesLength={groups.length}
         itemHeight={48}
         useReactWindow
+        isIndexEditingMode={false}
       >
         {groups.map((item, index) => (
           <GroupsTableItem
-            theme={theme}
             key={item.id}
             item={item}
-            isChecked={selection.includes(item)}
-            hideColumns={hideColumns}
+            isChecked={selection?.includes(item) ?? false}
             itemIndex={index}
-            managerAccountsGroupsColumnIsEnabled={
-              managerAccountsGroupsColumnIsEnabled
-            }
-            peopleAccountsGroupsColumnIsEnabled={
-              peopleAccountsGroupsColumnIsEnabled
-            }
+            managerGroupsColumnIsEnabled={managerGroupsColumnIsEnabled ?? false}
+            peopleGroupsColumnIsEnabled={peopleGroupsColumnIsEnabled ?? false}
           />
         ))}
       </TableBody>
-    </Styled.GroupsTableContainer>
+    </GroupsTableContainer>
   ) : (
     <EmptyScreenGroups />
   );
 };
 
 export default inject(
-  ({
-    peopleStore,
-    accessRightsStore,
-    filesStore,
-    settingsStore,
-    infoPanelStore,
-    userStore,
-    tableStore,
-  }) => {
-    const {
-      usersStore,
-      groupsStore,
-      viewAs: accountsViewAs,
-      setViewAs,
-    } = peopleStore;
+  ({ peopleStore, settingsStore, infoPanelStore, tableStore }: TStore) => {
+    const { groupsStore, viewAs, setViewAs } = peopleStore;
 
     const {
       groups,
       selection,
-      setSelection,
 
       fetchMoreGroups,
       hasMoreGroups,
-      groupsIsFiltered,
-      groupsFilterTotal,
-    } = groupsStore;
 
-    const { theme, currentDeviceType } = settingsStore;
-    const { fetchMoreUsers } = usersStore;
-    const { id: userId } = userStore.user;
+      groupsFilterTotal,
+    } = groupsStore!;
+
+    const { currentDeviceType } = settingsStore;
 
     const { isVisible: infoPanelVisible } = infoPanelStore;
 
     const {
-      managerAccountsGroupsColumnIsEnabled,
-      peopleAccountsGroupsColumnIsEnabled,
+      managerGroupsColumnIsEnabled,
+      peopleGroupsColumnIsEnabled,
+
+      columnStorageName,
+      columnInfoPanelStorageName,
     } = tableStore;
 
     return {
       groups,
       selection,
-      accountsViewAs,
+
+      viewAs,
       setViewAs,
-      theme,
+
       infoPanelVisible,
 
-      fetchMoreUsers,
       currentDeviceType,
-
-      userId,
 
       fetchMoreGroups,
       hasMoreGroups,
-      groupsIsFiltered,
       groupsFilterTotal,
 
-      peopleAccountsGroupsColumnIsEnabled,
-      managerAccountsGroupsColumnIsEnabled,
+      peopleGroupsColumnIsEnabled,
+      managerGroupsColumnIsEnabled,
+
+      columnStorageName,
+      columnInfoPanelStorageName,
     };
   },
 )(observer(GroupsTableView));

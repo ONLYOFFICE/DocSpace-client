@@ -99,6 +99,8 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
+import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
+
 import api from "@docspace/shared/api";
 import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
@@ -476,12 +478,7 @@ class FilesActionStore {
             }
 
             if (currentFolderId) {
-              const { socketHelper } = this.settingsStore;
-
-              socketHelper.emit({
-                command: "refresh-folder",
-                data: currentFolderId,
-              });
+              SocketHelper.emit(SocketCommands.RefreshFolder, currentFolderId);
             }
           })
           .finally(() => {
@@ -2586,8 +2583,8 @@ class FilesActionStore {
     const { setSelectedNode } = this.treeFoldersStore;
     const { clearFiles, setBufferSelection } = this.filesStore;
     const { insideGroupBackUrl } = this.peopleStore.groupsStore;
+    const { setContactsTab } = this.peopleStore.usersStore;
     const { isLoading } = this.clientLoadingStore;
-
     if (isLoading) return;
 
     setBufferSelection(null);
@@ -2640,12 +2637,14 @@ class FilesActionStore {
     }
 
     if (categoryType === CategoryType.Accounts) {
+      const contactsTab = getContactsView();
+
       if (insideGroupBackUrl) {
+        setContactsTab("groups");
         window.DocSpace.navigate(insideGroupBackUrl);
 
         return;
       }
-      const contactsTab = getContactsView();
 
       const filter =
         contactsTab === "groups"
@@ -2658,10 +2657,14 @@ class FilesActionStore {
 
       if (window.location.search.includes("group")) {
         setSelectedNode(["accounts", "groups", "filter"]);
+        setContactsTab("groups");
+
         return window.DocSpace.navigate(`accounts/groups/filter?${params}`, {
           replace: true,
         });
       }
+      setContactsTab("people");
+
       setSelectedNode(["accounts", "people", "filter"]);
 
       if (fromHotkeys) return;

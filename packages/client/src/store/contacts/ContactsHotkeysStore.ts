@@ -27,10 +27,15 @@
 import { makeAutoObservable } from "mobx";
 import { isMobile } from "@docspace/shared/utils";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
-import { TUser, TUserGroup } from "@docspace/shared/api/people/types";
+import { TGroup } from "@docspace/shared/api/groups/types";
 import { TABLE_HEADER_HEIGHT } from "@docspace/shared/components/table/Table.constants";
+import GroupsStore from "./GroupsStore";
 
-type AccountsType = TUser | TUserGroup;
+type UsersStore = TStore["peopleStore"]["usersStore"];
+
+type TUserItem = ReturnType<UsersStore["getPeopleListItem"]>;
+
+type AccountsType = TUserItem | TGroup;
 
 class ContactsHotkeysStore {
   peopleStore;
@@ -41,81 +46,87 @@ class ContactsHotkeysStore {
 
   elemOffset: number = 0;
 
-  constructor(peopleStore: any) {
+  constructor(peopleStore: TStore["peopleStore"]) {
     this.peopleStore = peopleStore;
     makeAutoObservable(this);
   }
 
-  get isAccountsPage() {
-    const groupId = new URLSearchParams(window.location.search).get("group");
-
-    return (
-      window.location.pathname.includes("/accounts/people") ||
-      window.location.pathname.includes("/accounts/guests") ||
-      groupId
-    );
+  get contactsList() {
+    return this.peopleStore.usersStore!.contactsTab !== "groups"
+      ? this.peopleStore.usersStore!.peopleList
+      : this.peopleStore.groupsStore!.groups;
   }
 
-  get accountsList() {
-    return this.isAccountsPage
-      ? this.peopleStore.usersStore.peopleList
-      : this.peopleStore.groupsStore.groups;
-  }
-
-  get accountsSelection() {
-    return this.isAccountsPage
-      ? this.peopleStore.usersStore.selection
-      : this.peopleStore.groupsStore.selection;
+  get contactsSelection() {
+    return this.peopleStore.usersStore!.contactsTab !== "groups"
+      ? this.peopleStore.usersStore!.selection
+      : this.peopleStore.groupsStore!.selection;
   }
 
   get caretIndex() {
     const item = this.hotkeyCaret
       ? this.hotkeyCaret
-      : this.accountsSelection.length
-        ? this.accountsSelection.length === 1
-          ? this.accountsSelection[0]
-          : this.accountsSelection[this.accountsSelection.length - 1]
+      : this.contactsSelection.length
+        ? this.contactsSelection.length === 1
+          ? this.contactsSelection[0]
+          : this.contactsSelection[this.contactsSelection.length - 1]
         : null;
 
-    const caretIndex = this.accountsList.findIndex((f) => f.id === item?.id);
+    const caretIndex = this.contactsList.findIndex((f) => f.id === item?.id);
 
     if (caretIndex !== -1) return caretIndex;
+
     return null;
   }
 
   get prevFile() {
-    if (this.caretIndex !== -1) {
+    if (this.caretIndex !== -1 && this.caretIndex) {
       const prevCaretIndex = this.caretIndex - 1;
-      return this.accountsList[prevCaretIndex];
+      return this.contactsList[prevCaretIndex];
     }
 
     return null;
   }
 
   get nextFile() {
-    if (this.caretIndex !== -1) {
+    if (this.caretIndex !== -1 && this.caretIndex) {
       const nextCaretIndex = this.caretIndex + 1;
-      return this.accountsList[nextCaretIndex];
+      return this.contactsList[nextCaretIndex];
     }
+
     return null;
   }
 
   selectBottom = () => {
-    if (!this.hotkeyCaret && !this.accountsSelection.length)
+    if (!this.hotkeyCaret && !this.contactsSelection.length)
       return this.selectFirstFile();
-    if (this.nextFile) this.setSelectionWithCaret([this.nextFile]);
+    if (this.nextFile)
+      this.setSelectionWithCaret([this.nextFile] as
+        | UsersStore["selection"]
+        | GroupsStore["selection"]);
   };
 
   selectUpper = () => {
-    if (!this.hotkeyCaret && !this.accountsSelection.length)
+    if (!this.hotkeyCaret && !this.contactsSelection.length)
       return this.selectFirstFile();
-    if (this.prevFile) this.setSelectionWithCaret([this.prevFile]);
+    if (this.prevFile)
+      this.setSelectionWithCaret([this.prevFile] as
+        | UsersStore["selection"]
+        | GroupsStore["selection"]);
   };
 
-  setSelection = (selection: AccountsType[]) => {
-    return this.isAccountsPage
-      ? this.peopleStore.usersStore.setSelection(selection)
-      : this.peopleStore.groupsStore.setSelection(selection);
+  setSelection = (
+    selection: GroupsStore["selection"] | UsersStore["selection"],
+  ) => {
+    if (this.peopleStore.usersStore!.contactsTab !== "groups") {
+      return this.peopleStore.usersStore!.setSelection(
+        selection as UsersStore["selection"],
+      );
+    }
+
+    return this.peopleStore.groupsStore!.setSelection(
+      selection as GroupsStore["selection"],
+    );
   };
 
   setHotkeyCaret = (hotkeyCaret: AccountsType | null) => {
@@ -195,14 +206,16 @@ class ContactsHotkeysStore {
     if (offsetTop) this.elemOffset = offsetTop;
   };
 
-  setSelectionWithCaret = (selection: AccountsType[]) => {
+  setSelectionWithCaret = (
+    selection: GroupsStore["selection"] | UsersStore["selection"],
+  ) => {
     this.setSelection(selection);
     this.setCaret(selection[0]);
     this.setHotkeyCaretStart(selection[0]);
   };
 
   selectFirstFile = () => {
-    if (this.accountsList.length) {
+    if (this.contactsList.length) {
       // scroll to first element
       const scroll = isMobile()
         ? document.querySelector(
@@ -212,40 +225,47 @@ class ContactsHotkeysStore {
 
       scroll?.scrollTo(0, 0);
 
-      this.setSelection([this.accountsList[0]]);
-      this.setCaret(this.accountsList[0]);
-      this.setHotkeyCaretStart(this.accountsList[0]);
+      this.setSelection([this.contactsList[0]] as
+        | GroupsStore["selection"]
+        | UsersStore["selection"]);
+      this.setCaret(this.contactsList[0]);
+      this.setHotkeyCaretStart(this.contactsList[0]);
     }
   };
 
   deselectAll = () => {
-    const { setSelected } = this.isAccountsPage
-      ? this.peopleStore.usersStore
-      : this.peopleStore.groupsStore;
+    const { setSelected } =
+      this.peopleStore.usersStore!.contactsTab !== "groups"
+        ? this.peopleStore.usersStore!
+        : this.peopleStore.groupsStore!;
 
     this.elemOffset = 0;
     setSelected("none");
   };
 
   selectAll = () => {
-    const { selectAll } = this.isAccountsPage
-      ? this.peopleStore.usersStore
-      : this.peopleStore.groupsStore;
+    const { selectAll } =
+      this.peopleStore.usersStore!.contactsTab !== "groups"
+        ? this.peopleStore.usersStore!
+        : this.peopleStore.groupsStore!;
 
     selectAll();
   };
 
   openItem = () => {
     const someDialogIsOpen = checkDialogsOpen();
+
+    const item = this.contactsSelection[0];
+
     if (
-      this.isAccountsPage ||
-      this.accountsSelection.length !== 1 ||
-      someDialogIsOpen
+      this.peopleStore.usersStore!.contactsTab !== "groups" ||
+      this.contactsSelection.length !== 1 ||
+      someDialogIsOpen ||
+      !("name" in item)
     )
       return;
 
-    const item = this.accountsSelection[0];
-    this.peopleStore.groupsStore.openGroupAction(item.id, true, item.name);
+    this.peopleStore.groupsStore!.openGroupAction(item.id, true, item.name);
   };
 
   activateHotkeys = (e: KeyboardEvent) => {
@@ -280,9 +300,9 @@ class ContactsHotkeysStore {
       e.preventDefault();
     }
 
-    const selection = this.accountsSelection.length
-      ? this.accountsSelection
-      : this.accountsList;
+    const selection = this.contactsSelection.length
+      ? this.contactsSelection
+      : this.contactsList;
 
     if (!this.hotkeyCaret) {
       const scroll = document.getElementsByClassName(

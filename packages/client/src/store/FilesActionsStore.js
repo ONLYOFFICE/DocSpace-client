@@ -2526,8 +2526,8 @@ class FilesActionStore {
     const { setSelectedNode } = this.treeFoldersStore;
     const { clearFiles, setBufferSelection } = this.filesStore;
     const { insideGroupBackUrl } = this.peopleStore.groupsStore;
+    const { setContactsTab } = this.peopleStore.usersStore;
     const { isLoading } = this.clientLoadingStore;
-
     if (isLoading) return;
 
     setBufferSelection(null);
@@ -2580,12 +2580,14 @@ class FilesActionStore {
     }
 
     if (categoryType === CategoryType.Accounts) {
+      const contactsTab = getContactsView();
+
       if (insideGroupBackUrl) {
+        setContactsTab("groups");
         window.DocSpace.navigate(insideGroupBackUrl);
 
         return;
       }
-      const contactsTab = getContactsView();
 
       const filter =
         contactsTab === "groups"
@@ -2598,10 +2600,14 @@ class FilesActionStore {
 
       if (window.location.search.includes("group")) {
         setSelectedNode(["accounts", "groups", "filter"]);
+        setContactsTab("groups");
+
         return window.DocSpace.navigate(`accounts/groups/filter?${params}`, {
           replace: true,
         });
       }
+      setContactsTab("people");
+
       setSelectedNode(["accounts", "people", "filter"]);
 
       if (fromHotkeys) return;

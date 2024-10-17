@@ -73,6 +73,7 @@ const ArticleBodyContent = (props) => {
     campaigns,
     userId,
     isFrame,
+    setContactsTab,
   } = props;
 
   const location = useLocation();
@@ -187,7 +188,12 @@ const ArticleBodyContent = (props) => {
 
       let withTimer = isAccountsClick ? false : !!selectedFolderId;
 
-      if (isAccountsClick) clearFiles();
+      if (isAccountsClick) {
+        clearFiles();
+        setContactsTab("people");
+      } else {
+        setContactsTab(false);
+      }
 
       setHashDate(getHashDate);
 
@@ -206,7 +212,7 @@ const ArticleBodyContent = (props) => {
       recycleBinFolderId,
       activeItemId,
       selectedFolderId,
-
+      setContactsTab,
       setSelection,
     ],
   );
@@ -295,6 +301,7 @@ export default inject(
     clientLoadingStore,
     userStore,
     campaignsStore,
+    peopleStore,
   }) => {
     const { clearFiles, setSelection } = filesStore;
     const {
@@ -359,6 +366,7 @@ export default inject(
       currentDeviceType,
       campaigns,
       isFrame,
+      setContactsTab: peopleStore.usersStore.setContactsTab,
     };
   },
 )(withTranslation([])(observer(ArticleBodyContent)));

@@ -23,100 +23,128 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
+import { useTheme } from "styled-components";
 
-import { withTranslation } from "react-i18next";
 import { TableCell } from "@docspace/shared/components/table";
 import { Link } from "@docspace/shared/components/link";
 import { Checkbox } from "@docspace/shared/components/checkbox";
-import { inject, observer } from "mobx-react";
-
-import * as Styled from "./index.styled";
 import { Text } from "@docspace/shared/components/text";
-import { Avatar } from "@docspace/shared/components/avatar";
-import Badges from "../../Badges";
+import {
+  Avatar,
+  AvatarRole,
+  AvatarSize,
+} from "@docspace/shared/components/avatar";
 import { globalColors } from "@docspace/shared/themes";
+import { TGroup } from "@docspace/shared/api/groups/types";
+
+import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
+
+import Badges from "../../Badges";
+
+import { GroupsRowWrapper, GroupsRow } from "./TableView.styled";
+
+type GroupsTableItemProps = {
+  item: TGroup;
+  itemIndex: number;
+  isChecked: boolean;
+  peopleGroupsColumnIsEnabled: boolean;
+  managerGroupsColumnIsEnabled: boolean;
+
+  bufferSelection?: GroupsStore["bufferSelection"];
+  getGroupContextOptions?: GroupsStore["getGroupContextOptions"];
+  getModel?: GroupsStore["getModel"];
+  openGroupAction?: GroupsStore["openGroupAction"];
+  selectRow?: GroupsStore["selectRow"];
+  changeGroupSelection?: GroupsStore["changeGroupSelection"];
+  changeGroupContextSelection?: GroupsStore["changeGroupContextSelection"];
+};
 
 const GroupsTableItem = ({
-  t,
   item,
   itemIndex,
-  theme,
-  hideColumns,
   bufferSelection,
   getGroupContextOptions,
   getModel,
   openGroupAction,
-  peopleAccountsGroupsColumnIsEnabled,
-  managerAccountsGroupsColumnIsEnabled,
+  peopleGroupsColumnIsEnabled,
+  managerGroupsColumnIsEnabled,
 
   changeGroupSelection,
   changeGroupContextSelection,
   selectRow,
   isChecked,
-}) => {
+}: GroupsTableItemProps) => {
+  const { t } = useTranslation(["People", "Common", "PeopleTranslations"]);
+  const theme = useTheme();
   const isActive = bufferSelection?.id === item.id;
 
   const onChange = () => {
-    changeGroupSelection(item, isChecked);
+    changeGroupSelection!(item, isChecked);
   };
 
-  const onRowContextClick = (rightMouseButtonClick) => {
-    changeGroupContextSelection(item, !rightMouseButtonClick);
+  const onRowContextClick = (rightMouseButtonClick?: boolean) => {
+    changeGroupContextSelection!(item, !rightMouseButtonClick);
   };
 
-  const onOpenGroup = (e) => {
-    openGroupAction(item.id, true, item.name, e);
+  const onOpenGroup = (e: React.MouseEvent) => {
+    openGroupAction!(item.id, true, item.name, e);
   };
 
-  const onRowClick = (e) => {
+  const onRowClick = (e: React.MouseEvent<Element>) => {
+    const target = e.target as Element;
     if (
-      e.target?.tagName === "SPAN" ||
-      e.target?.tagName === "A" ||
-      e.target.closest(".checkbox") ||
-      e.target.closest(".table-container_row-checkbox") ||
+      target?.tagName === "SPAN" ||
+      target?.tagName === "A" ||
+      target.closest(".checkbox") ||
+      target.closest(".table-container_row-checkbox") ||
       e.detail === 0
     )
       return;
 
-    selectRow(item);
+    selectRow!(item);
   };
 
-  const getContextModel = () => getModel(t, item);
+  const getContextModel: () => ContextMenuModel[] = () => getModel!(t, item);
 
-  let value = `folder_${item.id}_false_index_${itemIndex}`;
+  const value = `folder_${item.id}_false_index_${itemIndex}`;
 
   return (
-    <Styled.GroupsRowWrapper
+    <GroupsRowWrapper
       className={`group-item ${
         (isChecked || isActive) && "table-row-selected"
       } ${item.id}`}
       value={value}
     >
-      <Styled.GroupsRow
+      <GroupsRow
         key={item.id}
         className="table-row"
-        sideInfoColor={theme.peopleTableRow.sideInfoColor}
         checked={isChecked}
         isActive={isActive}
         onClick={onRowClick}
         fileContextClick={onRowContextClick}
-        onDoubleClick={onOpenGroup}
-        hideColumns={hideColumns}
-        contextOptions={getGroupContextOptions(t, item)}
-        getContextModel={getContextModel}
+        contextOptions={
+          getGroupContextOptions!(t, item) as unknown as ContextMenuModel[]
+        }
+        getContextModel={getContextModel!}
+        badgeUrl=""
+        isIndexEditingMode={false}
       >
-        <TableCell className={"table-container_group-title-cell"}>
+        <TableCell className="table-container_group-title-cell">
           <TableCell
-            hasAccess={true}
+            hasAccess
             className="table-container_row-checkbox-wrapper"
             checked={isChecked}
           >
             <div className="table-container_element">
               <Avatar
                 className="avatar"
-                size={"min"}
+                size={AvatarSize.min}
                 userName={item.name}
-                isGroup={true}
+                isGroup
+                role={AvatarRole.user}
+                source=""
               />
             </div>
             <Checkbox
@@ -133,7 +161,6 @@ const GroupsTableItem = ({
             fontSize="12px"
             isTextOverflow
             className="table-cell_group-manager"
-            dir="auto"
           >
             {item.name}
           </Link>
@@ -141,13 +168,12 @@ const GroupsTableItem = ({
           <Badges isLDAP={item.isLDAP} />
         </TableCell>
 
-        {peopleAccountsGroupsColumnIsEnabled ? (
+        {peopleGroupsColumnIsEnabled ? (
           <TableCell className="table-container_group-people">
             <Text
-              title={item.membersCount}
+              title={item.membersCount.toString()}
               fontWeight="600"
               fontSize="13px"
-              isTextOverflow
               className="table-cell_group-people"
               color={theme.filesSection.tableView.row.sideColor}
             >
@@ -158,13 +184,12 @@ const GroupsTableItem = ({
           <div />
         )}
 
-        {managerAccountsGroupsColumnIsEnabled ? (
-          <TableCell className={"table-container_group-manager"}>
+        {managerGroupsColumnIsEnabled ? (
+          <TableCell className="table-container_group-manager">
             <Text
               title={item.manager?.displayName}
               fontWeight="600"
               fontSize="13px"
-              isTextOverflow
               className="table-cell_group-manager"
               color={globalColors.gray}
               dir="auto"
@@ -175,24 +200,18 @@ const GroupsTableItem = ({
         ) : (
           <div />
         )}
-      </Styled.GroupsRow>
-    </Styled.GroupsRowWrapper>
+      </GroupsRow>
+    </GroupsRowWrapper>
   );
 };
 
-export default inject(({ peopleStore }) => ({
-  bufferSelection: peopleStore.groupsStore.bufferSelection,
-  getGroupContextOptions: peopleStore.groupsStore.getGroupContextOptions,
-  getModel: peopleStore.groupsStore.getModel,
-  openGroupAction: peopleStore.groupsStore.openGroupAction,
-  changeGroupSelection: peopleStore.groupsStore.changeGroupSelection,
+export default inject(({ peopleStore }: TStore) => ({
+  bufferSelection: peopleStore.groupsStore!.bufferSelection,
+  getGroupContextOptions: peopleStore.groupsStore!.getGroupContextOptions,
+  getModel: peopleStore.groupsStore!.getModel,
+  openGroupAction: peopleStore.groupsStore!.openGroupAction,
+  changeGroupSelection: peopleStore.groupsStore!.changeGroupSelection,
   changeGroupContextSelection:
-    peopleStore.groupsStore.changeGroupContextSelection,
-  selectRow: peopleStore.groupsStore.selectRow,
-}))(
-  withTranslation(
-    "People",
-    "Common",
-    "PeopleTranslations",
-  )(observer(GroupsTableItem)),
-);
+    peopleStore.groupsStore!.changeGroupContextSelection,
+  selectRow: peopleStore.groupsStore!.selectRow,
+}))(observer(GroupsTableItem));

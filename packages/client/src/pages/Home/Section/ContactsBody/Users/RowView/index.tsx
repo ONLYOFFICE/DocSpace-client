@@ -48,6 +48,7 @@ const PeopleRowContainer = ({
   contactsTab,
   showStorageInfo,
   isDefaultUsersQuotaSet,
+  isRoomAdmin,
 }: RowViewProps) => {
   useViewEffect({
     view: viewAs!,
@@ -77,6 +78,7 @@ const PeopleRowContainer = ({
           contactsTab={contactsTab!}
           showStorageInfo={showStorageInfo}
           isDefaultUsersQuotaSet={isDefaultUsersQuotaSet}
+          isRoomAdmin={isRoomAdmin}
         />
       ))}
     </StyledRowContainer>
@@ -86,7 +88,12 @@ const PeopleRowContainer = ({
 };
 
 export default inject(
-  ({ peopleStore, settingsStore, currentQuotaStore }: RowViewStores) => {
+  ({
+    peopleStore,
+    settingsStore,
+    currentQuotaStore,
+    userStore,
+  }: RowViewStores) => {
     const { usersStore, viewAs, setViewAs } = peopleStore;
 
     const {
@@ -105,6 +112,8 @@ export default inject(
 
     const { showStorageInfo, isDefaultUsersQuotaSet } = currentQuotaStore;
 
+    const { isRoomAdmin } = userStore.user!;
+
     return {
       viewAs,
       setViewAs,
@@ -119,6 +128,7 @@ export default inject(
       contactsTab,
       showStorageInfo,
       isDefaultUsersQuotaSet,
+      isRoomAdmin,
     };
   },
 )(observer(PeopleRowContainer));

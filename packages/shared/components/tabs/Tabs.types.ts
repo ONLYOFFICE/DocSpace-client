@@ -24,13 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import React from "react";
 import { TabsTypes } from "./Tabs.enums";
 
 export type TTabItem = {
   /** Element id. */
   id: string;
   /** Tab text. */
-  name: string;
+  name: string | React.ReactNode;
   /** Content that is shown when you click on the tab.  */
   content: React.ReactNode;
   /** State of tab inclusion. State only works for tabs with a secondary theme. */
@@ -55,4 +56,6 @@ export interface TabsProps {
   className?: string;
   /** Sets a callback function that is triggered when the tab is selected. */
   onSelect?: (element: TTabItem) => void;
+
+  style?: React.CSSProperties;
 }

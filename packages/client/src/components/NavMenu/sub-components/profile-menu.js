@@ -133,8 +133,6 @@ export const MenuContainer = styled.div`
   cursor: default;
   box-sizing: border-box;
 
-  background: red;
-
   @media ${mobile} {
     max-width: 100vw;
     background: ${(props) => props.theme.menuContainer.background};

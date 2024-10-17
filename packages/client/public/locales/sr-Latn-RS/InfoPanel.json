@@ -1,5 +1,5 @@
 {
-  "AccountsEmptyScreenText": "Vidi korisničke detalje ovde",
+  "UsersEmptyScreenText": "Vidi korisničke detalje ovde",
   "AddedRoomTags": "Tagovi dodati.",
   "Administration": "Administracija",
   "AndMoreLabel": "i <1>{{count}} više</1>",
@@ -35,7 +35,6 @@
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> prostorija kopirana",
   "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> prostorija je kreirana",
   "HistoryThirdParty": "Prikaz Istorije nije dostupan za javne prostorije sa povezanim skladištima treće strane",
-  "InfoBanner": "Lista pozvanih korisnika uključuje vlasnika i/ili administratora ovog {{productName}}-a sa punim pristupom svim prostorijama. Vlasnik i/ili administrator ne mogu dobiti druge pristupne privilegije. Nakon dodavanja u prostoriju, biće obavešteni o svim promenama.",
   "ItemsSelected": "Stavke odabrane",
   "LastModifiedBy": "Zadnje modifikovano od strane",
   "NoRecordsFound": "Nema pronađenih zapisa",

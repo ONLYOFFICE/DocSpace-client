@@ -1,5 +1,5 @@
 {
-  "AccountsEmptyScreenText": "Podrobnosti o uživatelích naleznete zde",
+  "UsersEmptyScreenText": "Podrobnosti o uživatelích naleznete zde",
   "AddedRoomTags": "Přidané značky.",
   "Administration": "Správa",
   "AndMoreLabel": "a <1>{{count}} další</1>",
@@ -35,7 +35,6 @@
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> místnost zkopírována",
   "HistoryRoomCreated": "Vytvořena místnost <1>«{{roomTitle}}»</1> ",
   "HistoryThirdParty": "Zobrazení historie není k dispozici pro veřejné místnosti s připojenými úložišti třetích stran.",
-  "InfoBanner": "Seznam pozvaných uživatelů zahrnuje vlastníka a/nebo správce tohoto prostoru {{productName}} s plným přístupem do všech místností. Vlastníkovi a/nebo správci nelze přidělit jiná přístupová práva. Po přidání do místnosti budou informováni o všech změnách.",
   "ItemsSelected": "Vybrané položky",
   "LastModifiedBy": "Naposledy upravil(a)",
   "NoRecordsFound": "Nebyly nalezeny žádné záznamy",

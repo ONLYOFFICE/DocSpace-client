@@ -2825,6 +2825,8 @@ const Dark: TTheme = {
 
           dataFontColor: white,
           dataFontColorBlack: white,
+          notAvailableBackground: grayDark,
+          textColor: white,
         },
 
         companyInfo: {
@@ -3210,6 +3212,17 @@ const Dark: TTheme = {
 
   publicRoom: {
     border: `1px solid ${lightGraySelected}`,
+  },
+  newFilesPanel: {
+    borderColor: globalColors.grayDarkStrong,
+
+    borderRadius: "6px",
+    boxShadow: `0px 8px 16px 0px ${boxShadowDarkColor}`,
+
+    fileItem: {
+      borderColor: globalColors.grayDarkStrong,
+      fileExstColor: globalColors.grayDark,
+    },
   },
 
   logoCover: {

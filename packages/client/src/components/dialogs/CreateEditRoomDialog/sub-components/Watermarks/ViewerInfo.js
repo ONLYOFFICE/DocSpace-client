@@ -112,9 +112,10 @@ const getInitialRotate = (rotate, isEdit, t) => {
 const ViewerInfoWatermark = ({
   isEdit,
 
-  setWatermarks,
-
-  initialWatermarksSettings,
+  setRoomParams,
+  roomParams,
+  isImage,
+  initialSettings,
 }) => {
   const { t } = useTranslation(["CreateEditRoomDialog", "Common"]);
 
@@ -125,9 +126,9 @@ const ViewerInfoWatermark = ({
     initialInfo.current = {
       dataRotate: rotateOptions(t),
       dataTabs: tabsOptions(t),
-      tabs: getInitialTabs(initialWatermarksSettings?.additions, isEdit, t),
-      rotate: getInitialRotate(initialWatermarksSettings?.rotate, isEdit, t),
-      text: getInitialText(initialWatermarksSettings?.text, isEdit),
+      tabs: getInitialTabs(initialSettings?.additions, isEdit, t),
+      rotate: getInitialRotate(initialSettings?.rotate, isEdit, t),
+      text: getInitialText(initialSettings?.text, isEdit),
     };
 
     elements.current = getInitialState(initialInfo.current.tabs);
@@ -135,30 +136,31 @@ const ViewerInfoWatermark = ({
 
   const initialInfoRef = initialInfo.current;
 
-  useEffect(() => {
-    const { enabled, isImage } = initialWatermarksSettings;
-    if (isEdit && !isImage) {
-      setWatermarks({ ...initialWatermarksSettings, enabled: true }, true);
-
-      return;
-    }
-
-    setWatermarks({
-      rotate: initialInfoRef.rotate.key,
-      additions: WatermarkAdditions.UserName,
-      isImage: false,
-      enabled: true,
-      image: "",
-      imageWidth: 0,
-      imageHeight: 0,
-      imageScale: 0,
-    });
-  }, []);
-
   const [selectedPosition, setSelectedPosition] = useState(
     initialInfoRef.rotate,
   );
   const [textValue, setTextValue] = useState(initialInfoRef.text);
+
+  const watermark =
+    !isImage && initialSettings
+      ? initialSettings
+      : {
+          rotate: selectedPosition.key,
+          additions:
+            roomParams.watermark?.additions || WatermarkAdditions.UserName,
+          //image: "",
+          imageWidth: 0,
+          imageHeight: 0,
+          imageScale: 0,
+          ...(textValue && { text: textValue }),
+        };
+
+  useEffect(() => {
+    setRoomParams({
+      ...roomParams,
+      watermark,
+    });
+  }, []);
 
   const onSelect = (item) => {
     let elementsData = elements.current;
@@ -176,20 +178,29 @@ const ViewerInfoWatermark = ({
       }
     }
 
-    setWatermarks({ additions: flagsCount });
+    setRoomParams({
+      ...roomParams,
+      watermark: { ...watermark, additions: flagsCount },
+    });
   };
 
   const onPositionChange = (item) => {
     setSelectedPosition(item);
 
-    setWatermarks({ rotate: item.key });
+    setRoomParams({
+      ...roomParams,
+      watermark: { ...watermark, rotate: item.key },
+    });
   };
 
   const onTextChange = (e) => {
     const { value } = e.target;
     setTextValue(value);
 
-    setWatermarks({ text: value });
+    setRoomParams({
+      ...roomParams,
+      watermark: { ...watermark, text: value },
+    });
   };
 
   return (
@@ -229,11 +240,4 @@ const ViewerInfoWatermark = ({
   );
 };
 
-export default inject(({ createEditRoomStore }) => {
-  const { setWatermarks, initialWatermarksSettings } = createEditRoomStore;
-
-  return {
-    setWatermarks,
-    initialWatermarksSettings,
-  };
-})(observer(ViewerInfoWatermark));
+export default ViewerInfoWatermark;

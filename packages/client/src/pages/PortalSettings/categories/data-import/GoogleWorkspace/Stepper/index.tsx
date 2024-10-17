@@ -125,7 +125,7 @@ export const getStepsData = (t: TFunciton, isTypeSelectEmpty: boolean) => {
           t={t}
           serviceName="Google Workspace"
           usersExportDetails={{
-            name: t("Common:Accounts"),
+            name: t("Common:Contacts"),
             icon: PeopleIcon,
           }}
           personalExportDetails={{

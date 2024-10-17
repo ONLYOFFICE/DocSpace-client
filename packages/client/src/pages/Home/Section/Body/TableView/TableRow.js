@@ -35,6 +35,7 @@ import { classNames } from "@docspace/shared/utils";
 import RoomsRowDataComponent from "./sub-components/RoomsRowData";
 import TrashRowDataComponent from "./sub-components/TrashRowData";
 import RecentRowDataComponent from "./sub-components/RecentRowData";
+import IndexRowDataComponent from "./sub-components/IndexRowData";
 import RowDataComponent from "./sub-components/RowData";
 import { StyledTableRow, StyledDragAndDrop } from "./StyledTable";
 
@@ -95,7 +96,9 @@ const FilesTableRow = (props) => {
       color={item.logo?.color}
       isArchive={item.isArchive}
       badgeUrl={badgeUrl}
-      className={isIndexing && "icon-with-index-column"}
+      className={classNames({
+        ["icon-with-index-column"]: isIndexing,
+      })}
     />
   );
 
@@ -231,6 +234,15 @@ const FilesTableRow = (props) => {
             element={element}
             dragStyles={dragStyles}
             selectionProp={selectionProp}
+            {...props}
+          />
+        ) : isIndexing ? (
+          <IndexRowDataComponent
+            element={element}
+            dragStyles={dragStyles}
+            selectionProp={selectionProp}
+            isIndexEditingMode={isIndexEditingMode}
+            changeIndex={changeIndex}
             {...props}
           />
         ) : (

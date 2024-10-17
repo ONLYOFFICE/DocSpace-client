@@ -44,23 +44,25 @@ export const EmptyView = ({
           {description}
         </Text>
       </EmptyViewHeader>
-      <EmptyViewBody>
-        {isEmptyLinkOptions(options) ? (
-          <Link
-            className="ev-link"
-            to={options.to}
-            state={options.state}
-            onClick={options.onClick}
-          >
-            {options.icon}
-            <span>{options.description}</span>
-          </Link>
-        ) : (
-          options.map((option) => (
-            <EmptyViewItem {...option} key={option.key} />
-          ))
-        )}
-      </EmptyViewBody>
+      {options && (
+        <EmptyViewBody>
+          {isEmptyLinkOptions(options) ? (
+            <Link
+              className="ev-link"
+              to={options.to}
+              state={options.state}
+              onClick={options.onClick}
+            >
+              {options.icon}
+              <span>{options.description}</span>
+            </Link>
+          ) : (
+            options.map((option) => (
+              <EmptyViewItem {...option} key={option.key} />
+            ))
+          )}
+        </EmptyViewBody>
+      )}
     </EmptyViewWrapper>
   );
 };

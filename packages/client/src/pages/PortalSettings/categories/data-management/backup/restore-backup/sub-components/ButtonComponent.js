@@ -28,6 +28,7 @@ import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import config from "PACKAGE_FILE";
 import { useNavigate } from "react-router-dom";
+import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 import { Button } from "@docspace/shared/components/button";
 import { FloatingButton } from "@docspace/shared/components/floating-button";
 import { TenantStatus } from "@docspace/shared/enums";
@@ -49,7 +50,6 @@ const ButtonContainer = (props) => {
     isEnableRestore,
     t,
     buttonSize,
-    socketHelper,
     setTenantStatus,
     isFormReady,
     getStorageParams,
@@ -102,9 +102,7 @@ const ButtonContainer = (props) => {
       await startRestore(backupId, storageType, storageParams, isNotification);
       setTenantStatus(TenantStatus.PortalRestore);
 
-      socketHelper.emit({
-        command: "restore-backup",
-      });
+      SocketHelper.emit(SocketCommands.RestoreBackup);
 
       navigate(
         combineUrl(
@@ -154,7 +152,7 @@ const ButtonContainer = (props) => {
 };
 
 export default inject(({ settingsStore, backup, currentQuotaStore }) => {
-  const { socketHelper, setTenantStatus } = settingsStore;
+  const { setTenantStatus } = settingsStore;
   const {
     downloadingProgress,
     isFormReady,
@@ -171,7 +169,6 @@ export default inject(({ settingsStore, backup, currentQuotaStore }) => {
     setTenantStatus,
     isEnableRestore: isRestoreAndAutoBackupAvailable,
     downloadingProgress,
-    socketHelper,
     isFormReady,
     getStorageParams,
     restoreResource,

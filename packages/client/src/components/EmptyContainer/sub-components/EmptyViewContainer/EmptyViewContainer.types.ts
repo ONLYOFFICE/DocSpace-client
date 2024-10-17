@@ -8,6 +8,7 @@ import type {
   ShareAccessRights,
 } from "@docspace/shared/enums";
 import type { Nullable } from "@docspace/shared/types";
+import ContactsConextOptionsStore from "SRC_DIR/store/contacts/ContactsContextOptionsStore";
 
 export type UploadType = "pdf" | "file" | "folder";
 
@@ -44,8 +45,9 @@ export interface OutEmptyViewContainerProps {
 export interface InjectedEmptyViewContainerProps
   extends Pick<
       TStore["contextOptionsStore"],
-      "inviteUser" | "onCreateAndCopySharedLink" | "onClickInviteUsers"
+      "onCreateAndCopySharedLink" | "onClickInviteUsers"
     >,
+    Pick<ContactsConextOptionsStore, "inviteUser">,
     Pick<
       TStore["dialogsStore"],
       "setSelectFileFormRoomDialogVisible" | "setQuotaWarningDialogVisible"
@@ -82,7 +84,7 @@ export type OptionActions = {
   createAndCopySharedLink: VoidFunction;
   openInfoPanel: VoidFunction;
   onCreateRoom: VoidFunction;
-  inviteRootUser: TStore["contextOptionsStore"]["inviteUser"];
+  inviteRootUser: ContactsConextOptionsStore["inviteUser"];
   onGoToPersonal: () => LinkProps;
   onGoToShared: () => LinkProps;
 };

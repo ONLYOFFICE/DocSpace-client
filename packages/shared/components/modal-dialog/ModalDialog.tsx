@@ -33,10 +33,10 @@ import { Portal } from "../portal";
 import { Modal } from "./sub-components/Modal";
 
 import {
+  getCurrentDisplayType,
   handleTouchMove,
   handleTouchStart,
   parseChildren,
-  getCurrentDisplayType,
 } from "./ModalDialog.utils";
 import {
   MODAL_DIALOG_BODY_NAME,
@@ -80,13 +80,13 @@ const ModalDialog = ({
   embedded,
   withForm,
   blur,
+  withFooterBorder,
   zIndex = 310,
   isLarge = false,
   isHuge = false,
   isLoading = false,
   isCloseable = true,
   withBodyScroll = false,
-  withFooterBorder = false,
   containerVisible = false,
   withoutPadding = false,
   hideContent = false,
@@ -166,7 +166,9 @@ const ModalDialog = ({
           zIndex={zIndex}
           autoMaxHeight={autoMaxHeight}
           autoMaxWidth={autoMaxWidth}
-          withFooterBorder={withFooterBorder || false}
+          withFooterBorder={
+            withFooterBorder ?? displayType === ModalDialogType.aside
+          }
           onClose={onCloseEvent}
           isLoading={isLoading}
           header={header}

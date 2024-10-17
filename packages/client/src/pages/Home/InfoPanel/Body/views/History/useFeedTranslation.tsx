@@ -191,6 +191,11 @@ export const useFeedTranslation = (
       return t("InfoPanel:RoomDenyDownloadEnabled");
     case "RoomDenyDownloadDisabled":
       return t("InfoPanel:RoomDenyDownloadDisabled");
+    case "FormSubmit":
+      return t("InfoPanel:FilledOutForm");
+    case "FormOpenedForFilling":
+      return t("InfoPanel:StartedFillingItOut");
+
     default:
       return null;
   }

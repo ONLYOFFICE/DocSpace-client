@@ -41,6 +41,8 @@ import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 import DeleteIcon from "PUBLIC_DIR/images/mobile.actions.remove.react.svg";
 import { isMobile, desktop, commonInputStyles } from "@docspace/shared/utils";
 import Base from "@docspace/shared/themes/base";
+import { globalColors } from "@docspace/shared/themes";
+import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 
 const fillAvailableWidth = css`
   width: 100%;
@@ -109,6 +111,10 @@ const StyledInviteUserBody = styled.div`
   flex-direction: column;
   overflow: auto;
 
+  .group-name {
+    padding-top: 8px;
+  }
+
   .about-label {
     color: ${(props) => props.theme.filesPanels.invite.textColor};
   }
@@ -141,8 +147,9 @@ const StyledDescription = styled(Text)`
 StyledDescription.defaultProps = { theme: Base };
 
 const StyledRow = styled.div`
-  display: inline-flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: ${(props) =>
+    props.edit ? "32px 1fr 32px 32px" : "32px 1fr auto"};
   gap: 8px;
 
   min-height: 41px;
@@ -165,6 +172,12 @@ const StyledRow = styled.div`
 
   .warning {
     margin-inline-start: auto;
+  }
+
+  .role-access {
+    .role-warning {
+      padding-top: 4px;
+    }
   }
 `;
 
@@ -224,6 +237,7 @@ const StyledInviteInput = styled.div`
 
 const StyledEditInput = styled(TextInput)`
   width: 100%;
+  height: 32px;
 `;
 
 const StyledComboBox = styled(ComboBox)`
@@ -284,6 +298,24 @@ const StyledInviteInputContainer = styled.div`
 
   .access-selector {
     margin-inline-end: 0;
+
+    // Add space between access-selector's absolute positioned dropdown and modal footer
+    .dropdown-container {
+      overflow: unset;
+
+      ::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        height: ${ASIDE_PADDING_AFTER_LAST_ITEM};
+      }
+    }
+  }
+
+  .add-manually-dropdown {
+    inset-inline-start: 0;
+    border: ${`1px solid ${globalColors.grayStrong}`};
   }
 `;
 
@@ -294,7 +326,7 @@ const StyledDropDown = styled(DropDown)`
     display: flex;
     align-items: center;
     gap: 8px;
-    height: 48px;
+    height: 53px;
 
     .list-item_content {
       text-overflow: ellipsis;
@@ -308,27 +340,29 @@ const StyledDropDown = styled(DropDown)`
       overflow: hidden;
     }
 
+    .email-list_email-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      line-height: 16px;
+
+      .email-list_invite-as-guest {
+        color: ${(props) => props.theme.currentColorScheme.main.accent};
+      }
+    }
+
     .email-list_add-button {
       display: flex;
       margin-inline-start: auto;
       align-items: center;
       gap: 4px;
 
-      p {
-        color: ${(props) => props.theme.currentColorScheme.main.accent};
-        ${(props) =>
-          props.isRequestRunning &&
-          css`
-            opacity: 0.65;
-          `}
-      }
-
       svg {
         ${({ theme }) =>
           theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"};
 
         path {
-          fill: ${(props) => props.theme.currentColorScheme.main.accent};
+          fill: ${(props) => props.theme.inputBlock.iconColor};
           ${(props) =>
             props.isRequestRunning &&
             css`
@@ -464,14 +498,12 @@ const StyledInviteLanguage = styled.div`
     }
 
     .combo-button_closed:not(:hover) .combo-button-label {
-      color: ${(props) =>
-        props.theme.createEditRoomDialog.commonParam.descriptionColor};
+      color: ${(props) => props.theme.linkWithDropdown.color.active};
     }
     .combo-button_closed:not(:hover) .combo-buttons_arrow-icon {
       svg {
         path {
-          fill: ${(props) =>
-            props.theme.createEditRoomDialog.commonParam.descriptionColor};
+          fill: ${(props) => props.theme.linkWithDropdown.color.active};
         }
       }
     }

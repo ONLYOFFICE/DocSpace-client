@@ -64,12 +64,6 @@ import PluginActionsSvgUrl from "PUBLIC_DIR/images/plugin.actions.react.svg?url"
 import LeaveRoomSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
 import RemoveOutlineSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
-import PersonAdminReactSvgUrl from "PUBLIC_DIR/images/person.admin.react.svg?url";
-import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg?url";
-import PersonDefaultReactSvgUrl from "PUBLIC_DIR/images/person.default.react.svg?url";
-import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
-import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
-import GroupReactSvgUrl from "PUBLIC_DIR/images/group.react.svg?url";
 import ActionsDocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
 import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
 import ActionsPresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.react.svg?url";
@@ -81,6 +75,7 @@ import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
+import ReconnectReactSvgUrl from "PUBLIC_DIR/images/reconnect.svg?url";
 import ExportRoomIndexSvgUrl from "PUBLIC_DIR/images/icons/16/export-room-index.react.svg?url";
 
 import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
@@ -905,6 +900,8 @@ class ContextOptionsStore {
       setRestoreRoomDialogVisible(true);
     }
   };
+
+  onChangeRoomOwner = () => this.dialogsStore.setChangeRoomOwnerIsVisible(true);
 
   onLeaveRoom = () => {
     this.dialogsStore.setLeaveRoomDialogVisible(true);
@@ -1782,6 +1779,14 @@ class ContextOptionsStore {
         disabled: false,
       },
       {
+        id: "option_change-room-owner",
+        key: "change-room-owner",
+        label: t("Files:ChangeTheRoomOwner"),
+        icon: ReconnectReactSvgUrl,
+        onClick: this.onChangeRoomOwner,
+        disabled: false,
+      },
+      {
         id: "option_archive-room",
         key: "archive-room",
         label: t("MoveToArchive"),
@@ -2125,45 +2130,6 @@ class ContextOptionsStore {
     return newOptions;
   };
 
-  /**
-   * @param {EmployeeType} userType
-   * @returns {void}
-   */
-  inviteUser = (userType) => {
-    const { setQuotaWarningDialogVisible, setInvitePanelOptions } =
-      this.dialogsStore;
-
-    if (this.currentQuotaStore.showWarningDialog(userType)) {
-      setQuotaWarningDialogVisible(true);
-      return;
-    }
-
-    setInvitePanelOptions({
-      visible: true,
-      roomId: -1,
-      hideSelector: true,
-      defaultAccess: userType,
-    });
-  };
-
-  onInvite = (e) => {
-    const type = e.item["data-type"];
-    this.inviteUser(type);
-  };
-
-  onInviteAgain = (t) => {
-    resendInvitesAgain()
-      .then(() =>
-        toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios")),
-      )
-      .catch((err) => toastr.error(err));
-  };
-
-  onCreateGroup = () => {
-    const event = new Event(Events.GROUP_CREATE);
-    window.dispatchEvent(event);
-  };
-
   onCreateRoom = (item, fromItem) => {
     if (this.currentQuotaStore.isWarningRoomsDialog) {
       this.dialogsStore.setQuotaWarningDialogVisible(true);
@@ -2351,9 +2317,6 @@ class ContextOptionsStore {
       this.selectedFolderStore;
     const { isPublicRoom } = this.publicRoomStore;
 
-    const isAccountsPage =
-      window?.DocSpace?.location.pathname.includes("/accounts");
-
     const stateCanCreate = window?.DocSpace?.location?.state?.canCreate;
     const isSettingsPage =
       window?.DocSpace?.location.pathname.includes("/settings");
@@ -2364,107 +2327,19 @@ class ContextOptionsStore {
         ? stateCanCreate
         : security?.Create;
 
-    const groupId = new URLSearchParams(window.location.search).get("group");
-
-    const isInsideGroup = !!groupId;
-
-    const canCreate =
-      (currentCanCreate || isAccountsPage) &&
-      !isSettingsPage &&
-      !isPublicRoom &&
-      !isInsideGroup;
+    const canCreate = currentCanCreate && !isSettingsPage && !isPublicRoom;
 
     const someDialogIsOpen = checkDialogsOpen();
 
     if (!canCreate || (isSectionMenu && (isMobile || someDialogIsOpen)))
       return null;
 
-    const isOwner = this.userStore.user?.isOwner;
-    const isRoomAdmin = this.userStore.user?.isRoomAdmin;
     const { isRoomsFolder, isPrivacyFolder } = this.treeFoldersStore;
     const { mainButtonItemsList } = this.pluginStore;
     const { enablePlugins } = this.settingsStore;
     const isFormRoomType =
       roomType === RoomsType.FormRoom ||
       (parentRoomType === FolderType.FormRoom && isFolder);
-
-    const accountsUserOptions = [
-      isOwner && {
-        id: "accounts-add_administrator",
-        className: "main-button_drop-down",
-        icon: PersonAdminReactSvgUrl,
-        label: t("Common:PortalAdmin", {
-          productName: t("Common:ProductName"),
-        }),
-        onClick: this.onInvite,
-        "data-type": EmployeeType.Admin,
-        key: "administrator",
-      },
-      {
-        id: "accounts-add_manager",
-        className: "main-button_drop-down",
-        icon: PersonManagerReactSvgUrl,
-        label: t("Common:RoomAdmin"),
-        onClick: this.onInvite,
-        "data-type": EmployeeType.User,
-        key: "manager",
-      },
-      {
-        id: "accounts-add_collaborator",
-        className: "main-button_drop-down",
-        icon: PersonDefaultReactSvgUrl,
-        label: t("Common:PowerUser"),
-        onClick: this.onInvite,
-        "data-type": EmployeeType.Collaborator,
-        key: "collaborator",
-      },
-      {
-        id: "accounts-add_user",
-        className: "main-button_drop-down",
-        icon: PersonDefaultReactSvgUrl,
-        label: t("Common:User"),
-        onClick: this.onInvite,
-        "data-type": EmployeeType.Guest,
-        key: "user",
-      },
-      {
-        key: "separator",
-        isSeparator: true,
-      },
-      {
-        id: "accounts-add_invite-again",
-        className: "main-button_drop-down",
-        icon: InviteAgainReactSvgUrl,
-        label: t("People:LblInviteAgain"),
-        onClick: () => this.onInviteAgain(t),
-        "data-action": "invite-again",
-        key: "invite-again",
-      },
-    ];
-
-    const accountsFullOptions = [
-      {
-        id: "actions_invite_user",
-        className: "main-button_drop-down",
-        icon: PersonUserReactSvgUrl,
-        label: t("Common:Invite"),
-        key: "new-user",
-        items: accountsUserOptions,
-      },
-      {
-        id: "create_group",
-        className: "main-button_drop-down",
-        icon: GroupReactSvgUrl,
-        label: t("PeopleTranslations:CreateGroup"),
-        onClick: this.onCreateGroup,
-        action: "group",
-        key: "group",
-      },
-    ];
-
-    if (isAccountsPage) {
-      return isRoomAdmin ? accountsUserOptions : accountsFullOptions;
-    }
 
     const createNewDoc = {
       id: "personal_new-document",

@@ -1,5 +1,5 @@
 {
-  "AccountsEmptyScreenText": "Bekijk hier de details van de gebruikers",
+  "UsersEmptyScreenText": "Bekijk hier de details van de gebruikers",
   "AddedRoomTags": "Tags toegevoegd.",
   "Administration": "Beheer",
   "AndMoreLabel": "en <1>{{count}} meer</1>",
@@ -35,7 +35,6 @@
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> kamer gekopieerd",
   "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> kamer aangemaakt",
   "HistoryThirdParty": "Geschiedenisweergave is niet beschikbaar voor openbare kamers met aangesloten opslagruimten van derden",
-  "InfoBanner": "De lijst met uitgenodigde gebruikers bevat de eigenaar en/of beheerders van deze {{productName}} met volledige toegang tot alle ruimtes. Aan de eigenaar en/of beheerder kunnen geen andere toegangsrechten worden toegewezen. Zodra ze aan de kamer zijn toegevoegd, worden ze op de hoogte gebracht van alle wijzigingen.",
   "ItemsSelected": "Geselecteerde items",
   "LastModifiedBy": "Laatst aangepast door",
   "NoRecordsFound": "Geen records gevonden",

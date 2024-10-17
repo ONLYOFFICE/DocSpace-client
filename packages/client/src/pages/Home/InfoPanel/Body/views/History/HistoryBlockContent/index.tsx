@@ -61,7 +61,7 @@ const HistoryBlockContent = ({
       {(((targetType === "file" || targetType === "folder") &&
         actionType !== "delete") ||
         actionType === "reorderIndex") && (
-        <HistoryMainTextFolderInfo feed={feed} />
+        <HistoryMainTextFolderInfo feed={feed} actionType={actionType} />
       )}
 
       {(targetType === "file" || targetType === "folder") &&

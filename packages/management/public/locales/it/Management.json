@@ -5,7 +5,6 @@
   "CreateSpaceDescription": "Hai collegato con successo il tuo dominio al tuo indirizzo IP. Per modificare le impostazioni dell'indirizzo dello spazio è necessario impostare il futuro nome di {{productName}}",
   "CreatingPortal": "Creazione di un nuovo {{productName}}",
   "CurrentSpace": "Spazio attuale",
-  "DeletePortalText": "Ti preghiamo di notare: solo il proprietario può eliminare il {{productName}} selezionato. Il proprietario di <1>{{domain}}</1> è <1>{{displayName}}</1> (<5>{{email}}</5>). Se non sei il proprietario, non potrai accedere alle impostazioni di eliminazione di {{productName}} facendo clic sul pulsante ELIMINA e verrai reindirizzato alla sezione Stanze.",
   "DomainName": "Nome del dominio",
   "DomainNotFound": "Dominio non trovato, controlla le impostazioni DNS",
   "DomainSettings": "Impostazioni del dominio",

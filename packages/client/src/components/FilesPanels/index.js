@@ -38,7 +38,6 @@ import {
 import {
   UploadPanel,
   VersionHistoryPanel,
-  NewFilesPanel,
   HotkeysPanel,
   InvitePanel,
   EditLinkPanel,
@@ -100,7 +99,6 @@ const Panels = (props) => {
     lifetimeDialogVisible,
     downloadDialogVisible,
     emptyTrashDialogVisible,
-    newFilesPanelVisible,
     conflictResolveDialogVisible,
     convertDialogVisible,
     createMasterForm,
@@ -120,7 +118,6 @@ const Panels = (props) => {
     archiveDialogVisible,
     inviteQuotaWarningDialogVisible,
     preparationPortalDialogVisible,
-    changeUserTypeDialogVisible,
     restoreRoomDialogVisible,
     submitToGalleryDialogVisible,
     editGroupMembersDialogVisible,
@@ -254,14 +251,11 @@ const Panels = (props) => {
     emptyTrashDialogVisible && <EmptyTrashDialog key="empty-trash-dialog" />,
     downloadDialogVisible && <DownloadDialog key="download-dialog" />,
 
-    newFilesPanelVisible && <NewFilesPanel key="new-files-panel" />,
     conflictResolveDialogVisible && (
       <ConflictResolveDialog key="conflict-resolve-dialog" />
     ),
     convertDialogVisible && <ConvertDialog key="convert-dialog" />,
-    changeUserTypeDialogVisible && (
-      <ChangeUserTypeDialog key="change-user-type-dialog" />
-    ),
+
     // createRoomDialogVisible && <CreateRoomDialog key="create-room-dialog" />,
     (createRoomConfirmDialogVisible || confirmDialogIsLoading) && (
       <CreateRoomConfirmDialog key="create-room-confirm-dialog" />
@@ -369,7 +363,6 @@ export default inject(
       lifetimeDialogVisible,
       downloadDialogVisible,
       emptyTrashDialogVisible,
-      newFilesPanelVisible,
       conflictResolveDialogVisible,
       convertDialogVisible,
       createRoomDialogVisible,
@@ -389,7 +382,6 @@ export default inject(
       setSelectFileFormRoomDialogVisible,
       invitePanelOptions,
       inviteQuotaWarningDialogVisible,
-      changeUserTypeDialogVisible,
       changeQuotaDialogVisible,
       submitToGalleryDialogVisible,
       editGroupMembersDialogVisible,
@@ -460,7 +452,6 @@ export default inject(
       lifetimeDialogVisible,
       downloadDialogVisible,
       emptyTrashDialogVisible,
-      newFilesPanelVisible,
       conflictResolveDialogVisible,
       convertDialogVisible,
       createRoomDialogVisible,
@@ -479,7 +470,6 @@ export default inject(
       archiveDialogVisible,
       inviteQuotaWarningDialogVisible,
       confirmDialogIsLoading,
-      changeUserTypeDialogVisible,
       restoreRoomDialogVisible,
       submitToGalleryDialogVisible,
       editGroupMembersDialogVisible,

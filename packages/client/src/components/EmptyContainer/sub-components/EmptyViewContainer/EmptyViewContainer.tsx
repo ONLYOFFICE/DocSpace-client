@@ -49,6 +49,7 @@ const InjectedEmptyViewContainer = inject<
     userStore,
     currentQuotaStore,
     publicRoomStore,
+    peopleStore,
   }): InjectedEmptyViewContainerProps => {
     const { isWarningRoomsDialog } = currentQuotaStore;
     const { isPublicRoom } = publicRoomStore;
@@ -57,8 +58,10 @@ const InjectedEmptyViewContainer = inject<
 
     const { setIsSectionFilterLoading } = clientLoadingStore;
 
-    const { onClickInviteUsers, onCreateAndCopySharedLink, inviteUser } =
+    const { onClickInviteUsers, onCreateAndCopySharedLink } =
       contextOptionsStore;
+
+    const { inviteUser } = peopleStore.contextOptionsStore!;
 
     const {
       setIsVisible: setVisibleInfoPanel,

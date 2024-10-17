@@ -26,6 +26,11 @@ const StyledIcon = styled.div<{
 
   width: ${(props) => props.size};
 
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
   &:hover {
     cursor: pointer;
   }
@@ -89,8 +94,8 @@ const StyledIcon = styled.div<{
       display: flex;
       justify-content: center;
       align-items: center;
-      height: ${(props) => `${props.coverSize}px`};
-      width: ${(props) => `${props.coverSize}px`};
+      height: ${(props) => props.size};
+      width: ${(props) => props.size};
     }
   }
 

@@ -59,6 +59,8 @@ export interface RoomLogoCoverProps {
   forwardedRef?: React.ForwardedRef<HTMLDivElement>;
   scrollHeight: string;
   currentColorScheme: TColorScheme;
+  openColorPicker: boolean;
+  setOpenColorPicker: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export type CoverDialogProps = RoomLogoCoverProps & {
@@ -85,6 +87,8 @@ export interface SelectColorProps {
   selectedColor: string | null;
   onChangeColor: (value: string) => void;
   roomColor: string | null;
+  openColorPicker: boolean;
+  setOpenColorPicker: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface SelectIconProps {

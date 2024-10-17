@@ -139,7 +139,6 @@ const ChangePortalOwnerDialog = ({
       visible={visible}
       onClose={onCloseAction}
       withBodyScroll
-      withFooterBorder
       containerVisible={selectorVisible}
     >
       {selectorVisible && (
@@ -149,9 +148,9 @@ const ChangePortalOwnerDialog = ({
             cancelButtonLabel=""
             onCancel={onBackClick}
             excludeItems={[id]}
-            submitButtonLabel={t("Common:SelectAction")}
-            onSubmit={onAccept}
+            submitButtonLabel=""
             disableSubmitButton={false}
+            onSubmit={onAccept}
             withHeader
             headerProps={{
               onCloseClick: onCloseAction,

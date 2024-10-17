@@ -1,5 +1,5 @@
 {
-  "AccountsEmptyScreenText": "Detaliile utilizatorilor aici",
+  "UsersEmptyScreenText": "Detaliile utilizatorilor aici",
   "AddedRoomTags": "Etichete adăugate.",
   "Administration": "Administrare",
   "AndMoreLabel": "și <1>{{count}} mai multe</1>",
@@ -35,7 +35,6 @@
   "HistoryRoomCopied": "Sala <1>«{{roomTitle}}»</1> a fost copiată",
   "HistoryRoomCreated": "Sala <1>«{{roomTitle}}»</1>  a fost creată",
   "HistoryThirdParty": "Afișarea istoricului nu este disponibilă pentru sălile publice care sunt conectate la servicii terțe de stocare",
-  "InfoBanner": "Lista de invitați cuprinde proprietarul și/sau administratorii acestui spațiu {{productName}} acces complet la toate sălile. Proprietarului și/sau administratorului nu li se poate acorda alte drepturi de acces. Odată adăugate în sala, vor primi notificări despre toate modificări.",
   "ItemsSelected": "Elemente selectate",
   "LastModifiedBy": "Modificat ultima dată de către",
   "NoRecordsFound": "Nu s-au găsit înregistrări",

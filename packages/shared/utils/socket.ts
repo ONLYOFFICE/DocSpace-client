@@ -98,7 +98,7 @@ export type TOnCallback = {
 };
 
 export type TCallback = {
-  eventName: string;
+  eventName: SocketEvents;
   callback: (value: TOnCallback) => void;
 };
 
@@ -301,12 +301,14 @@ class SocketHelper {
    * If the socket is not ready, the command is saved in a queue for later emission.
    *
    * @param {Object} param - The parameters for the emit function.
-   * @param {string} param.command - The command to emit.
+   * @param {SocketCommands} param.command - The command to emit.
    * @param {any} param.data - The data to emit with the command.
    *
    * @returns {void}
    */
   public emit = ({ command, data }: TEmit) => {
+    if (command === SocketCommands.Subscribe && !data.roomParts) return;
+
     if (!this.isEnabled || !this.isReady || !this.client) {
       console.log("[WS] socket [emit] is not ready -> save in a queue", {
         command,

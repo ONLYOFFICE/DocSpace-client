@@ -28,7 +28,7 @@
 
 import React from "react";
 
-import SocketHelper from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { getRestoreProgress } from "@docspace/shared/api/portal";
 import { EDITOR_ID } from "@docspace/shared/constants";
@@ -77,10 +77,10 @@ const useSocketHelper = ({
         console.error("getRestoreProgress", e);
       }
     };
-    SocketHelper.on("restore-backup", callback);
+    SocketHelper.on(SocketEvents.RestoreBackup, callback);
 
     return () => {
-      SocketHelper.off("restore-backup", callback);
+      SocketHelper.off(SocketEvents.RestoreBackup, callback);
     };
   }, []);
 
@@ -103,10 +103,10 @@ const useSocketHelper = ({
       }
     };
 
-    SocketHelper.on("s:logout-session", callback);
+    SocketHelper.on(SocketEvents.LogoutSession, callback);
 
     return () => {
-      SocketHelper.off("s:logout-session", callback);
+      SocketHelper.off(SocketEvents.LogoutSession, callback);
     };
   }, [user?.loginEventId]);
 };

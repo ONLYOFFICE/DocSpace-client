@@ -26,7 +26,7 @@
 
 import React from "react";
 
-import SocketHelper from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 
 import { TSelectorItem } from "../../../components/selector";
 import { TFile, TFolder } from "../../../api/files/types";
@@ -288,7 +288,7 @@ const useSocketHelper = ({
 
     initRef.current = true;
 
-    SocketHelper.on("s:modify-folder", (opt?: TOptSocket) => {
+    SocketHelper.on(SocketEvents.ModifyFolder, (opt?: TOptSocket) => {
       switch (opt?.cmd) {
         case "create":
           addItem(opt);

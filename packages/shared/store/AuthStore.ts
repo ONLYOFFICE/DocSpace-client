@@ -27,7 +27,7 @@
 /* eslint-disable no-console */
 import { makeAutoObservable, runInAction } from "mobx";
 
-import SocketHelper from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 
 import api from "../api";
 import { setWithCredentialsStatus } from "../api/client";
@@ -97,7 +97,7 @@ class AuthStore {
 
     makeAutoObservable(this);
 
-    SocketHelper.on("s:change-quota-used-value", (res) => {
+    SocketHelper.on(SocketEvents.ChangedQuotaUsedValue, (res) => {
       console.log(
         `[WS] change-quota-used-value ${res?.featureId}:${res?.value}`,
       );
@@ -110,7 +110,7 @@ class AuthStore {
       });
     });
 
-    SocketHelper.on("s:change-quota-feature-value", (res) => {
+    SocketHelper.on(SocketEvents.ChangedQuotaFeatureValue, (res) => {
       console.log(
         `[WS] change-quota-feature-value ${res?.featureId}:${res?.value}`,
       );
@@ -127,7 +127,7 @@ class AuthStore {
         this.currentQuotaStore?.updateQuotaFeatureValue(featureId, value);
       });
     });
-    SocketHelper.on("s:change-user-quota-used-value", (options) => {
+    SocketHelper.on(SocketEvents.ChangedQuotaUserUsedValue, (options) => {
       console.log(`[WS] change-user-quota-used-value`, options);
 
       runInAction(() => {

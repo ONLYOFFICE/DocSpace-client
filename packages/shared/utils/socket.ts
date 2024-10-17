@@ -31,6 +31,22 @@ import io, { Socket } from "socket.io-client";
 
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 
+export const enum SocketEvents {
+  RestoreBackup = "restore-backup",
+  LogoutSession = "s:logout-session",
+  ModifyFolder = "s:modify-folder",
+  ModifyRoom = "s:modify-room",
+  UpdateHistory = "s:update-history",
+  RefreshFolder = "refresh-folder",
+  MarkAsNewFolder = "s:markasnew-folder",
+  MarkAsNewFile = "s:markasnew-file",
+  StartEditFile = "s:start-edit-file",
+  StopEditFile = "s:stop-edit-file",
+  ChangedQuotaUsedValue = "s:change-quota-used-value",
+  ChangedQuotaFeatureValue = "s:change-quota-feature-value",
+  ChangedQuotaUserUsedValue = "s:change-user-quota-used-value",
+}
+
 export type ConnectionSettings = {
   url: string;
   publicRoomKey: string;
@@ -325,7 +341,10 @@ class SocketHelper {
    * @param eventName - The name of the event to listen for.
    * @param callback - The callback function to be executed when the event is triggered.
    */
-  public on = (eventName: string, callback: (value: TOnCallback) => void) => {
+  public on = (
+    eventName: SocketEvents,
+    callback: (value: TOnCallback) => void,
+  ) => {
     if (!this.isEnabled || !this.isReady || !this.client) {
       console.log("[WS] socket [on] is not ready -> save in a queue", {
         eventName,
@@ -348,7 +367,10 @@ class SocketHelper {
    * @param eventName - The name of the event to listen for.
    * @param callback - The callback function to be executed when the event is triggered.
    */
-  public off = (eventName: string, callback: (value: TOnCallback) => void) => {
+  public off = (
+    eventName: SocketEvents,
+    callback: (value: TOnCallback) => void,
+  ) => {
     if (!this.isEnabled || !this.isReady || !this.client) {
       console.log("[WS] socket [off] is not ready -> remove from a queue", {
         eventName,

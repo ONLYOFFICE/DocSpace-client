@@ -42,7 +42,7 @@ import {
   FilterKeys,
   RoomSearchArea,
 } from "@docspace/shared/enums";
-import SocketHelper from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 
 import { RoomsTypes } from "@docspace/shared/utils";
 import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
@@ -234,7 +234,7 @@ class FilesStore {
     this.roomsController = new AbortController();
     this.filesController = new AbortController();
 
-    SocketHelper.on("s:modify-folder", async (opt) => {
+    SocketHelper.on(SocketEvents.ModifyFolder, async (opt) => {
       const { socketSubscribers } = SocketHelper;
 
       if (opt && opt.data) {
@@ -278,7 +278,7 @@ class FilesStore {
       this.treeFoldersStore.updateTreeFoldersItem(opt);
     });
 
-    SocketHelper.on("s:update-history", ({ id, type }) => {
+    SocketHelper.on(SocketEvents.UpdateHistory, ({ id, type }) => {
       const { infoPanelSelection, fetchHistory } = this.infoPanelStore;
 
       let infoPanelSelectionType = "file";
@@ -291,7 +291,7 @@ class FilesStore {
       }
     });
 
-    SocketHelper.on("refresh-folder", (id) => {
+    SocketHelper.on(SocketEvents.RefreshFolder, (id) => {
       const { socketSubscribers } = SocketHelper;
       const pathParts = `DIR-${id}`;
 
@@ -304,7 +304,7 @@ class FilesStore {
       //);
     });
 
-    SocketHelper.on("s:markasnew-folder", ({ folderId, count }) => {
+    SocketHelper.on(SocketEvents.MarkAsNewFolder, ({ folderId, count }) => {
       const { socketSubscribers } = SocketHelper;
       const pathParts = `DIR-${folderId}`;
 
@@ -322,7 +322,7 @@ class FilesStore {
       });
     });
 
-    SocketHelper.on("s:markasnew-file", ({ fileId, count }) => {
+    SocketHelper.on(SocketEvents.MarkAsNewFile, ({ fileId, count }) => {
       const { socketSubscribers } = SocketHelper;
       const pathParts = `FILE-${fileId}`;
 
@@ -345,7 +345,7 @@ class FilesStore {
     });
 
     //WAIT FOR RESPONSES OF EDITING FILE
-    SocketHelper.on("s:start-edit-file", (id) => {
+    SocketHelper.on(SocketEvents.StartEditFile, (id) => {
       const { socketSubscribers } = SocketHelper;
       const pathParts = `FILE-${id}`;
 
@@ -368,7 +368,7 @@ class FilesStore {
       );
     });
 
-    SocketHelper.on("s:modify-room", (option) => {
+    SocketHelper.on(SocketEvents.ModifyRoom, (option) => {
       switch (option.cmd) {
         case "create-form":
           setTimeout(() => this.wsCreatedPDFForm(option), LOADER_TIMEOUT * 2);
@@ -379,7 +379,7 @@ class FilesStore {
       }
     });
 
-    SocketHelper.on("s:stop-edit-file", (id) => {
+    SocketHelper.on(SocketEvents.StopEditFile, (id) => {
       const { socketSubscribers } = SocketHelper;
       const pathParts = `FILE-${id}`;
 

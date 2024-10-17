@@ -33,7 +33,7 @@ import { useTranslation } from "react-i18next";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
 import { toast as toastify } from "react-toastify";
 
-import SocketHelper from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
 import { Portal } from "@docspace/shared/components/portal";
 import { SnackBar } from "@docspace/shared/components/snackbar";
 import { Toast, toastr } from "@docspace/shared/components/toast";
@@ -172,10 +172,10 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
           console.error("getRestoreProgress", e);
         });
     };
-    SocketHelper.on("restore-backup", callback);
+    SocketHelper.on(SocketEvents.RestoreBackup, callback);
 
     return () => {
-      SocketHelper.off("restore-backup", callback);
+      SocketHelper.off(SocketEvents.RestoreBackup, callback);
     };
   }, [setPreparationPortalDialogVisible]);
 
@@ -190,10 +190,10 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       }
     };
 
-    SocketHelper.on("s:logout-session", callback);
+    SocketHelper.on(SocketEvents.LogoutSession, callback);
 
     return () => {
-      SocketHelper.off("s:logout-session", callback);
+      SocketHelper.off(SocketEvents.LogoutSession, callback);
     };
   }, [userLoginEventId]);
 

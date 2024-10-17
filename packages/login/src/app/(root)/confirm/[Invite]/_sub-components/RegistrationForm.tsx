@@ -240,7 +240,7 @@ const RegistrationForm = ({
           tooltipPasswordDigits={`${t("Common:PasswordLimitDigits")}`}
           tooltipPasswordCapital={`${t("Common:PasswordLimitUpperCase")}`}
           tooltipPasswordSpecial={`${t("Common:PasswordLimitSpecialSymbols")}`}
-          generatePasswordTitle={t("Wizard:GeneratePassword")}
+          generatePasswordTitle={t("Common:GeneratePassword")}
           tooltipAllowedCharacters={`${t("Common:AllowedCharacters")}: ${ALLOWED_PASSWORD_CHARACTERS}`}
         />
       </FieldContainer>

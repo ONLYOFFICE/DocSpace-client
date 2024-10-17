@@ -121,8 +121,6 @@ const FilesSelectorWrapper = ({
 
   includeFolder,
 
-  socketHelper,
-  socketSubscribers,
   setMoveToPublicRoomVisible,
   setBackupToPublicRoomVisible,
   setInfoPanelIsMobileHidden,
@@ -344,8 +342,6 @@ const FilesSelectorWrapper = ({
   return (
     <FilesSelector
       openRoot={openRootVar}
-      socketHelper={socketHelper}
-      socketSubscribers={socketSubscribers}
       disabledItems={disabledItems}
       filterParam={filterParam}
       getIcon={getIcon}
@@ -382,7 +378,7 @@ const FilesSelectorWrapper = ({
       descriptionText={
         !withSubtitle || !filterParam || filterParam === "ALL"
           ? ""
-          : descriptionText ?? t("Common:SelectDOCXFormat")
+          : (descriptionText ?? t("Common:SelectDOCXFormat"))
       }
       submitButtonId={
         isMove || isCopy || isRestore ? "select-file-modal-submit" : ""
@@ -453,9 +449,7 @@ export default inject(
 
     const { setIsMobileHidden: setInfoPanelIsMobileHidden } = infoPanelStore;
 
-    const { socketHelper, currentDeviceType } = settingsStore;
-
-    const socketSubscribesId = socketHelper.socketSubscribers;
+    const { currentDeviceType } = settingsStore;
 
     const {
       selection,
@@ -546,8 +540,7 @@ export default inject(
       setSelectedItems,
       setInfoPanelIsMobileHidden,
       includeFolder,
-      socketHelper,
-      socketSubscribers: socketSubscribesId,
+
       setMoveToPublicRoomVisible,
       setBackupToPublicRoomVisible,
       currentDeviceType,

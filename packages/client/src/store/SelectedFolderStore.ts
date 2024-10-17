@@ -27,6 +27,7 @@
 import { makeAutoObservable } from "mobx";
 
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 import {
   FolderType,
   RoomsType,
@@ -359,29 +360,25 @@ class SelectedFolderStore {
     // t: TTranslation,
     selectedFolder: TSetSelectedFolder | null,
   ) => void = (selectedFolder) => {
-    const socketHelper = this.settingsStore?.socketHelper;
-
     this.toDefault();
 
     if (
       this.id !== null &&
-      socketHelper &&
-      socketHelper.socketSubscribers.has(`DIR-${this.id}`)
+      SocketHelper.socketSubscribers.has(`DIR-${this.id}`)
     ) {
-      socketHelper.emit({
-        command: "unsubscribe",
-        data: { roomParts: `DIR-${this.id}`, individual: true },
+      SocketHelper.emit(SocketCommands.Unsubscribe, {
+        roomParts: `DIR-${this.id}`,
+        individual: true,
       });
     }
 
     if (
       selectedFolder &&
-      socketHelper &&
-      !socketHelper.socketSubscribers.has(`DIR-${selectedFolder.id}`)
+      !SocketHelper.socketSubscribers.has(`DIR-${selectedFolder.id}`)
     ) {
-      socketHelper.emit({
-        command: "subscribe",
-        data: { roomParts: `DIR-${selectedFolder.id}`, individual: true },
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: `DIR-${selectedFolder.id}`,
+        individual: true,
       });
     }
 

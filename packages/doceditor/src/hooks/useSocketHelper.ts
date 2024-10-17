@@ -57,7 +57,7 @@ const useSocketHelper = ({
   }, [user?.id]);
 
   React.useEffect(() => {
-    SocketHelper.on("restore-backup", async () => {
+    const callback = async () => {
       try {
         const response = await getRestoreProgress();
 
@@ -76,11 +76,16 @@ const useSocketHelper = ({
       } catch (e) {
         console.error("getRestoreProgress", e);
       }
-    });
+    };
+    SocketHelper.on("restore-backup", callback);
+
+    return () => {
+      SocketHelper.off("restore-backup", callback);
+    };
   }, []);
 
   React.useEffect(() => {
-    SocketHelper.on("s:logout-session", async (loginEventId) => {
+    const callback = async (loginEventId: unknown) => {
       console.log(`[WS] "logout-session"`, loginEventId, user?.loginEventId);
 
       if (
@@ -96,7 +101,13 @@ const useSocketHelper = ({
           combineUrl(window.ClientConfig?.proxy?.url, "/login"),
         );
       }
-    });
+    };
+
+    SocketHelper.on("s:logout-session", callback);
+
+    return () => {
+      SocketHelper.off("s:logout-session", callback);
+    };
   }, [user?.loginEventId]);
 };
 

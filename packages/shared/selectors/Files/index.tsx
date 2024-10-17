@@ -301,6 +301,8 @@ const FilesSelectorComponent = ({
       doubleClickCallback: () => Promise<void>,
     ) => {
       if (item.isFolder) {
+        if (isDoubleClick) return;
+
         setIsFirstLoad(true);
 
         // setItems([]);

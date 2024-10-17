@@ -24,8 +24,10 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { TUser } from "@docspace/shared/api/people/types";
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import { UserStore } from "@docspace/shared/store/UserStore";
 
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
@@ -34,6 +36,7 @@ export type RowViewStores = {
   peopleStore: PeopleStore;
   settingsStore: SettingsStore;
   currentQuotaStore: CurrentQuotasStore;
+  userStore: UserStore;
 };
 
 export type RowViewProps = {
@@ -54,6 +57,8 @@ export type RowViewProps = {
 
   showStorageInfo?: CurrentQuotasStore["showStorageInfo"];
   isDefaultUsersQuotaSet?: CurrentQuotasStore["isDefaultUsersQuotaSet"];
+
+  isRoomAdmin?: TUser["isRoomAdmin"];
 };
 
 export type TItem = ReturnType<UsersStore["getPeopleListItem"]>;
@@ -76,6 +81,7 @@ export type SimpleUserRowProps = {
   onUserContextClick: (item: TItem, isSingleMenu: boolean) => void;
 
   isOwner?: boolean;
+  isRoomAdmin?: TUser["isRoomAdmin"];
 
   hideColumns: boolean;
 
@@ -104,4 +110,6 @@ export type UserContentProps = {
   isDefaultUsersQuotaSet?: CurrentQuotasStore["isDefaultUsersQuotaSet"];
 
   standalone?: boolean;
+
+  isRoomAdmin?: TUser["isRoomAdmin"];
 };

@@ -49,7 +49,6 @@ export type TConfig = {
 export type TEmit = {
   command: string;
   data: { roomParts: string | []; individual?: boolean };
-  room?: null | boolean;
 };
 
 type TOptQuota =
@@ -211,8 +210,8 @@ class SocketHelper {
         }
 
         if (this.emits.length) {
-          this.emits.forEach(({ command, data, room }) => {
-            this.emit({ command, data, room });
+          this.emits.forEach(({ command, data }) => {
+            this.emit({ command, data });
           });
           this.emits = [];
         }
@@ -281,22 +280,20 @@ class SocketHelper {
    * @param {Object} param - The parameters for the emit function.
    * @param {string} param.command - The command to emit.
    * @param {any} param.data - The data to emit with the command.
-   * @param {string | null} [param.room=null] - The room to emit the command to. If null, the command is emitted globally.
    *
    * @returns {void}
    */
-  public emit = ({ command, data, room = null }: TEmit) => {
+  public emit = ({ command, data }: TEmit) => {
     if (!this.isEnabled || !this.isReady || !this.client) {
       console.log("[WS] socket [emit] is not ready -> save in a queue", {
         command,
         data,
-        room,
       });
-      this.emits.push({ command, data, room });
+      this.emits.push({ command, data });
       return;
     }
 
-    console.log("[WS] emit", { command, data, room });
+    console.log("[WS] emit", { command, data });
 
     const ids =
       !data || !data.roomParts

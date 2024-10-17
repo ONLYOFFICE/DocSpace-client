@@ -338,7 +338,7 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
     );
 
     const onChangeAction = useCallback(
-      (e: ChangeEvent<HTMLInputElement>) => {
+      (e: ChangeEvent<HTMLInputElement>, isGenerated?: boolean) => {
         if (refTooltip.current) {
           const tooltip = refTooltip.current as TooltipRefProps;
           if (tooltip?.isOpen) {
@@ -347,7 +347,7 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
         }
 
         let value = e.target.value;
-        if (isSimulateType) {
+        if (isSimulateType && !isGenerated) {
           value = setPasswordSettings(e.target.value);
         }
 
@@ -433,9 +433,12 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
         }
 
         checkPassword(newPassword);
-        onChangeAction?.({
-          target: { value: newPassword },
-        } as ChangeEvent<HTMLInputElement>);
+        onChangeAction?.(
+          {
+            target: { value: newPassword },
+          } as ChangeEvent<HTMLInputElement>,
+          true,
+        );
       },
       [checkPassword, getNewPassword, isDisabled, onChangeAction, state.type],
     );

@@ -1875,6 +1875,14 @@ class FilesStore {
 
           this.setRoomsFilter(filterData);
 
+          this.selectedFolderStore.setSelectedFolder({
+            folders: data.folders,
+            ...data.current,
+            pathParts: data.pathParts,
+            navigationPath: [],
+            ...{ new: data.new },
+          });
+
           runInAction(() => {
             const isEmptyList = data.folders.length === 0;
             if (filter && isEmptyList) {
@@ -1921,13 +1929,6 @@ class FilesStore {
           }
 
           this.infoPanelStore.setInfoPanelRoom(null);
-          this.selectedFolderStore.setSelectedFolder({
-            folders: data.folders,
-            ...data.current,
-            pathParts: data.pathParts,
-            navigationPath: [],
-            ...{ new: data.new },
-          });
 
           this.clientLoadingStore.setIsSectionHeaderLoading(false);
 

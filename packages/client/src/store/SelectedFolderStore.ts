@@ -367,10 +367,33 @@ class SelectedFolderStore {
     if (!("external" in selectedFolder)) this.external = false;
   };
 
+  unsubscribe: (selectedFolder: TSetSelectedFolder | null) => void = (
+    selectedFolder: TSetSelectedFolder | null,
+  ) => {
+    const roomParts = this.pathParts.slice(1).map((path) => `DIR-${path.id}`);
+
+    SocketHelper.emit(SocketCommands.Unsubscribe, {
+      roomParts,
+      individual: true,
+    });
+
+    if (selectedFolder) {
+      const newRoomParts =
+        selectedFolder.pathParts?.slice(1).map((path) => `DIR-${path.id}`) ??
+        [];
+
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: newRoomParts,
+        individual: true,
+      });
+    }
+  };
+
   setSelectedFolder: (
     // t: TTranslation,
     selectedFolder: TSetSelectedFolder | null,
   ) => void = (selectedFolder) => {
+    this.unsubscribe(selectedFolder);
     this.toDefault();
 
     if (

@@ -35,10 +35,14 @@ import { EDITOR_ID } from "@docspace/shared/constants";
 
 import { UseSocketHelperProps } from "@/types";
 
-const useSocketHelper = ({ socketUrl, user }: UseSocketHelperProps) => {
+const useSocketHelper = ({
+  socketUrl,
+  user,
+  shareKey,
+}: UseSocketHelperProps) => {
   React.useEffect(() => {
-    SocketHelper.connect(socketUrl, "");
-  }, [socketUrl]);
+    SocketHelper.connect(socketUrl, shareKey ?? "");
+  }, [shareKey, socketUrl]);
 
   React.useEffect(() => {
     SocketHelper.emit({

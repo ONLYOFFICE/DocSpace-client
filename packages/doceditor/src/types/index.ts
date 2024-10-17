@@ -336,6 +336,7 @@ export interface SelectFileDialogProps {
 export interface UseSocketHelperProps {
   socketUrl: string;
   user?: TUser;
+  shareKey?: string;
 }
 
 export interface UseEventsProps {

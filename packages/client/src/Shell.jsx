@@ -157,7 +157,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   }, [userId]);
 
   useEffect(() => {
-    SocketHelper.on("restore-backup", () => {
+    const callback = () => {
       getRestoreProgress()
         .then((response) => {
           if (!response) {
@@ -171,11 +171,16 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
         .catch((e) => {
           console.error("getRestoreProgress", e);
         });
-    });
+    };
+    SocketHelper.on("restore-backup", callback);
+
+    return () => {
+      SocketHelper.off("restore-backup", callback);
+    };
   }, [setPreparationPortalDialogVisible]);
 
   useEffect(() => {
-    SocketHelper.on("s:logout-session", (loginEventId) => {
+    const callback = (loginEventId) => {
       console.log(`[WS] "logout-session"`, loginEventId, userLoginEventId);
 
       if (userLoginEventId === loginEventId || loginEventId === 0) {
@@ -183,7 +188,13 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
           combineUrl(window.ClientConfig?.proxy?.url, "/login"),
         );
       }
-    });
+    };
+
+    SocketHelper.on("s:logout-session", callback);
+
+    return () => {
+      SocketHelper.off("s:logout-session", callback);
+    };
   }, [userLoginEventId]);
 
   const { t, ready } = useTranslation(["Common", "SmartBanner"]);

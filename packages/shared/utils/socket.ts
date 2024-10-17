@@ -26,7 +26,9 @@
 
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-console */
+
 import io, { Socket } from "socket.io-client";
+
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 
 export type ConnectionSettings = {
@@ -113,7 +115,7 @@ class SocketHelper {
 
   private connectionSettings?: ConnectionSettings | null;
 
-  private client?: Socket<DefaultEventsMap, DefaultEventsMap> | null = null;
+  private client: Socket<DefaultEventsMap, DefaultEventsMap> | null = null;
 
   private isSocketReady: boolean = false;
 
@@ -307,9 +309,7 @@ class SocketHelper {
       }
     });
 
-    return room
-      ? this.client.to(room).emit(command, data)
-      : this.client.emit(command, data);
+    return this.client.emit(command, data);
   };
 
   /**
@@ -336,4 +336,4 @@ class SocketHelper {
   };
 }
 
-export default SocketHelper;
+export default SocketHelper.getInstance();

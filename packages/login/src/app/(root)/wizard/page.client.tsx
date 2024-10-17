@@ -433,7 +433,7 @@ function WizardForm(props: WizardFormProps) {
           isHovered={true}
           onClick={generatePassword}
         >
-          {t("GeneratePassword")}
+          {t("Common:GeneratePassword")}
         </Link>
       </StyledLink>
 

@@ -4,7 +4,6 @@
   "ErrorLicenseBody": "许可无效。确保选择正确的文件",
   "ErrorPassword": "密码不符合要求",
   "ErrorUploadLicenseFile": "选择许可文件",
-  "GeneratePassword": "生成密码",
   "License": "接受条款：",
   "LicenseLink": "许可协议",
   "PlaceholderLicense": "您的许可文件",

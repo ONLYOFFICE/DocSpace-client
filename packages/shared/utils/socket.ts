@@ -69,10 +69,9 @@ export type TConfig = {
   };
 };
 
-export type TEmit = {
-  command: string;
-  data: { roomParts: string | []; individual?: boolean };
-};
+export type TEmitData = { roomParts: string | []; individual?: boolean };
+
+export type TEmit = { command: SocketCommands; data?: TEmitData };
 
 type TOptQuota =
   | { customQuotaFeature: string; usedSpace: number; quotaLimit: number }
@@ -115,9 +114,13 @@ export type TCallback = {
  * socketHelper.connect('ws://example.com', 'publicRoomKey');
  *
  * // Emit a message
- * socketHelper.emit({ command: 'message', data: { text: 'Hello, World!' } });
+ * socketHelper.emit('message', { text: 'Hello, World!' });
  *
  * // Register an event listener
+ * socketHelper.on('message', (data) => {
+ *   console.log('Received message:', data);
+ * });
+ * // Remove the event listener
  * socketHelper.on('message', (data) => {
  *   console.log('Received message:', data);
  * });
@@ -234,7 +237,7 @@ class SocketHelper {
 
         if (this.emits.length) {
           this.emits.forEach(({ command, data }) => {
-            this.emit({ command, data });
+            this.emit(command, data);
           });
           this.emits = [];
         }
@@ -300,14 +303,13 @@ class SocketHelper {
    * Emits a command with associated data to a specified room or globally.
    * If the socket is not ready, the command is saved in a queue for later emission.
    *
-   * @param {Object} param - The parameters for the emit function.
-   * @param {SocketCommands} param.command - The command to emit.
-   * @param {any} param.data - The data to emit with the command.
+   * @param {SocketCommands} command - The command to emit.
+   * @param {TEmitData} data - The parameters for the emit function.
    *
    * @returns {void}
    */
-  public emit = ({ command, data }: TEmit) => {
-    if (command === SocketCommands.Subscribe && !data.roomParts) return;
+  public emit = (command: SocketCommands, data?: TEmitData) => {
+    if (command === SocketCommands.Subscribe && !data?.roomParts) return;
 
     if (!this.isEnabled || !this.isReady || !this.client) {
       console.log("[WS] socket [emit] is not ready -> save in a queue", {

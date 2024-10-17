@@ -475,10 +475,7 @@ class FilesActionStore {
             }
 
             if (currentFolderId) {
-              SocketHelper.emit({
-                command: SocketCommands.RefreshFolder,
-                data: currentFolderId,
-              });
+              SocketHelper.emit(SocketCommands.RefreshFolder, currentFolderId);
             }
           })
           .finally(() => {

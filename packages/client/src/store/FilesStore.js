@@ -1026,24 +1026,18 @@ class FilesStore {
     if (files.length === 0 && this.files.length === 0) return;
 
     if (this.files?.length > 0) {
-      SocketHelper.emit({
-        command: SocketCommands.Unsubscribe,
-        data: {
-          roomParts: this.files.map((f) => `FILE-${f.id}`),
-          individual: true,
-        },
+      SocketHelper.emit(SocketCommands.Unsubscribe, {
+        roomParts: this.files.map((f) => `FILE-${f.id}`),
+        individual: true,
       });
     }
 
     this.files = files;
 
     if (this.files?.length > 0) {
-      SocketHelper.emit({
-        command: SocketCommands.Subscribe,
-        data: {
-          roomParts: this.files.map((f) => `FILE-${f.id}`),
-          individual: true,
-        },
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: this.files.map((f) => `FILE-${f.id}`),
+        individual: true,
       });
 
       // this.files?.forEach((file) =>
@@ -1066,24 +1060,18 @@ class FilesStore {
         .filter((id) => id);
 
       if (ids.length)
-        SocketHelper.emit({
-          command: SocketCommands.Unsubscribe,
-          data: {
-            roomParts: ids,
-            individual: true,
-          },
+        SocketHelper.emit(SocketCommands.Unsubscribe, {
+          roomParts: ids,
+          individual: true,
         });
     }
 
     this.folders = folders;
 
     if (this.folders?.length > 0) {
-      SocketHelper.emit({
-        command: SocketCommands.Subscribe,
-        data: {
-          roomParts: this.folders.map((f) => `DIR-${f.id}`),
-          individual: true,
-        },
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: this.folders.map((f) => `DIR-${f.id}`),
+        individual: true,
       });
     }
   };
@@ -2936,12 +2924,9 @@ class FilesStore {
 
       //console.log("[WS] subscribe to folder changes", item.id, item.title);
 
-      SocketHelper.emit({
-        command: SocketCommands.Subscribe,
-        data: {
-          roomParts: `DIR-${item.id}`,
-          individual: true,
-        },
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: `DIR-${item.id}`,
+        individual: true,
       });
     } else {
       const foundIndex = this.files.findIndex((x) => x.id === item?.id);
@@ -2949,9 +2934,9 @@ class FilesStore {
 
       //console.log("[WS] subscribe to file changes", item.id, item.title);
 
-      SocketHelper.emit({
-        command: SocketCommands.Subscribe,
-        data: { roomParts: `FILE-${item.id}`, individual: true },
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: `FILE-${item.id}`,
+        individual: true,
       });
 
       this.files.unshift(item);

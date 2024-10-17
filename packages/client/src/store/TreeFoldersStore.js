@@ -60,20 +60,14 @@ class TreeFoldersStore {
 
   listenTreeFolders = (treeFolders) => {
     if (treeFolders.length > 0) {
-      SocketHelper.emit({
-        command: SocketCommands.Unsubscribe,
-        data: {
-          roomParts: treeFolders.map((f) => `DIR-${f.id}`),
-          individual: true,
-        },
+      SocketHelper.emit(SocketCommands.Unsubscribe, {
+        roomParts: treeFolders.map((f) => `DIR-${f.id}`),
+        individual: true,
       });
 
-      SocketHelper.emit({
-        command: SocketCommands.Subscribe,
-        data: {
-          roomParts: treeFolders.map((f) => `DIR-${f.id}`),
-          individual: true,
-        },
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: treeFolders.map((f) => `DIR-${f.id}`),
+        individual: true,
       });
     }
   };

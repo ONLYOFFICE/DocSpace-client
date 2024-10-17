@@ -48,14 +48,12 @@ const useSocketHelper = ({
   }, [shareKey, socketUrl]);
 
   React.useEffect(() => {
-    SocketHelper.emit({
-      command: SocketCommands.Subscribe,
-      data: { roomParts: "backup-restore" },
+    SocketHelper.emit(SocketCommands.Subscribe, {
+      roomParts: "backup-restore",
     });
 
-    SocketHelper.emit({
-      command: SocketCommands.Subscribe,
-      data: { roomParts: user?.id || "" },
+    SocketHelper.emit(SocketCommands.Subscribe, {
+      roomParts: user?.id || "",
     });
   }, [user?.id]);
 

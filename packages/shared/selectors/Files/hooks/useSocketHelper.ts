@@ -64,12 +64,9 @@ const useSocketHelper = ({
     }
 
     if (id && !SocketHelper.socketSubscribers.has(`DIR-${id}`)) {
-      SocketHelper.emit({
-        command: SocketCommands.Unsubscribe,
-        data: {
-          roomParts: `DIR-${id}`,
-          individual: true,
-        },
+      SocketHelper.emit(SocketCommands.Unsubscribe, {
+        roomParts: `DIR-${id}`,
+        individual: true,
       });
     }
   }, []);
@@ -88,12 +85,9 @@ const useSocketHelper = ({
         unsubscribe(subscribedId.current, false);
       }
 
-      SocketHelper.emit({
-        command: SocketCommands.Subscribe,
-        data: {
-          roomParts: `DIR-${id}`,
-          individual: true,
-        },
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: `DIR-${id}`,
+        individual: true,
       });
 
       subscribedId.current = id;

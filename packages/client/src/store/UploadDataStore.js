@@ -1537,9 +1537,8 @@ class UploadDataStore {
       const toFolderId = this.files[0]?.toFolderId;
 
       if (toFolderId) {
-        SocketHelper.emit({
-          command: SocketCommands.RefreshFolder,
-          data: toFolderId,
+        SocketHelper.emit(SocketCommands.RefreshFolder, {
+          toFolderId,
         });
       }
     }

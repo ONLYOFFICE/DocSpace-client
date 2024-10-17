@@ -366,9 +366,9 @@ class SelectedFolderStore {
       this.id !== null &&
       SocketHelper.socketSubscribers.has(`DIR-${this.id}`)
     ) {
-      SocketHelper.emit({
-        command: SocketCommands.Unsubscribe,
-        data: { roomParts: `DIR-${this.id}`, individual: true },
+      SocketHelper.emit(SocketCommands.Unsubscribe, {
+        roomParts: `DIR-${this.id}`,
+        individual: true,
       });
     }
 
@@ -376,9 +376,9 @@ class SelectedFolderStore {
       selectedFolder &&
       !SocketHelper.socketSubscribers.has(`DIR-${selectedFolder.id}`)
     ) {
-      SocketHelper.emit({
-        command: SocketCommands.Subscribe,
-        data: { roomParts: `DIR-${selectedFolder.id}`, individual: true },
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: `DIR-${selectedFolder.id}`,
+        individual: true,
       });
     }
 

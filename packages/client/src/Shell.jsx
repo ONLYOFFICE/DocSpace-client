@@ -136,27 +136,22 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   }, []);
 
   useEffect(() => {
-    SocketHelper.emit({
-      command: SocketCommands.Subscribe,
-      data: { roomParts: "backup-restore" },
+    SocketHelper.emit(SocketCommands.Subscribe, {
+      roomParts: "backup-restore",
     });
 
-    SocketHelper.emit({
-      command: SocketCommands.Subscribe,
-      data: { roomParts: "quota" },
+    SocketHelper.emit(SocketCommands.Subscribe, {
+      roomParts: "quota",
     });
 
-    SocketHelper.emit({
-      command: SocketCommands.Subscribe,
-      data: { roomParts: "QUOTA", individual: true },
+    SocketHelper.emit(SocketCommands.Subscribe, {
+      roomParts: "QUOTA",
+      individual: true,
     });
   }, []);
 
   useEffect(() => {
-    SocketHelper.emit({
-      command: SocketCommands.Subscribe,
-      data: { roomParts: userId },
-    });
+    SocketHelper.emit(SocketCommands.Subscribe, { roomParts: userId });
   }, [userId]);
 
   useEffect(() => {

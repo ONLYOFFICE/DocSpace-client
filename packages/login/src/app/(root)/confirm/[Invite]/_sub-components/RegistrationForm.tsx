@@ -119,6 +119,10 @@ const RegistrationForm = ({
 
   const { linkData } = useContext(ConfirmRouteContext);
 
+  const newsletter = t("Newsletter", {
+    organizationName: t("Common:OrganizationName"),
+  });
+
   const termsConditionsComponent = (
     <div className="terms-conditions">
       <Text fontSize={"13px"} textAlign="center" lineHeight="20px">
@@ -262,7 +266,7 @@ const RegistrationForm = ({
             onChange={onChangeCheckbox}
             isChecked={isChecked}
           />
-          <Text>{t("Confirm:Newsletter")}</Text>
+          <Text>{newsletter}</Text>
         </div>
       )}
 

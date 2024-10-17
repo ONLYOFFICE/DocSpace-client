@@ -42,6 +42,7 @@ import {
   FilterKeys,
   RoomSearchArea,
 } from "@docspace/shared/enums";
+import SocketHelper from "@docspace/shared/utils/socket";
 
 import { RoomsTypes } from "@docspace/shared/utils";
 import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
@@ -232,10 +233,9 @@ class FilesStore {
 
     this.roomsController = new AbortController();
     this.filesController = new AbortController();
-    const { socketHelper } = settingsStore;
 
-    socketHelper.on("s:modify-folder", async (opt) => {
-      const { socketSubscribers } = socketHelper;
+    SocketHelper.on("s:modify-folder", async (opt) => {
+      const { socketSubscribers } = SocketHelper;
 
       if (opt && opt.data) {
         const data = JSON.parse(opt.data);
@@ -278,7 +278,7 @@ class FilesStore {
       this.treeFoldersStore.updateTreeFoldersItem(opt);
     });
 
-    socketHelper.on("s:update-history", ({ id, type }) => {
+    SocketHelper.on("s:update-history", ({ id, type }) => {
       const { infoPanelSelection, fetchHistory } = this.infoPanelStore;
 
       let infoPanelSelectionType = "file";
@@ -291,8 +291,8 @@ class FilesStore {
       }
     });
 
-    socketHelper.on("refresh-folder", (id) => {
-      const { socketSubscribers } = socketHelper;
+    SocketHelper.on("refresh-folder", (id) => {
+      const { socketSubscribers } = SocketHelper;
       const pathParts = `DIR-${id}`;
 
       if (!socketSubscribers.has(pathParts)) return;
@@ -304,8 +304,8 @@ class FilesStore {
       //);
     });
 
-    socketHelper.on("s:markasnew-folder", ({ folderId, count }) => {
-      const { socketSubscribers } = socketHelper;
+    SocketHelper.on("s:markasnew-folder", ({ folderId, count }) => {
+      const { socketSubscribers } = SocketHelper;
       const pathParts = `DIR-${folderId}`;
 
       if (!socketSubscribers.has(pathParts)) return;
@@ -322,8 +322,8 @@ class FilesStore {
       });
     });
 
-    socketHelper.on("s:markasnew-file", ({ fileId, count }) => {
-      const { socketSubscribers } = socketHelper;
+    SocketHelper.on("s:markasnew-file", ({ fileId, count }) => {
+      const { socketSubscribers } = SocketHelper;
       const pathParts = `FILE-${fileId}`;
 
       if (!socketSubscribers.has(pathParts)) return;
@@ -345,8 +345,8 @@ class FilesStore {
     });
 
     //WAIT FOR RESPONSES OF EDITING FILE
-    socketHelper.on("s:start-edit-file", (id) => {
-      const { socketSubscribers } = socketHelper;
+    SocketHelper.on("s:start-edit-file", (id) => {
+      const { socketSubscribers } = SocketHelper;
       const pathParts = `FILE-${id}`;
 
       if (!socketSubscribers.has(pathParts)) return;
@@ -368,7 +368,7 @@ class FilesStore {
       );
     });
 
-    socketHelper.on("s:modify-room", (option) => {
+    SocketHelper.on("s:modify-room", (option) => {
       switch (option.cmd) {
         case "create-form":
           setTimeout(() => this.wsCreatedPDFForm(option), LOADER_TIMEOUT * 2);
@@ -379,8 +379,8 @@ class FilesStore {
       }
     });
 
-    socketHelper.on("s:stop-edit-file", (id) => {
-      const { socketSubscribers } = socketHelper;
+    SocketHelper.on("s:stop-edit-file", (id) => {
+      const { socketSubscribers } = SocketHelper;
       const pathParts = `FILE-${id}`;
 
       const { isVisible, infoPanelSelection, setInfoPanelSelection } =
@@ -1020,12 +1020,10 @@ class FilesStore {
   };
 
   setFiles = (files) => {
-    const { socketHelper } = this.settingsStore;
-
     if (files.length === 0 && this.files.length === 0) return;
 
     if (this.files?.length > 0) {
-      socketHelper.emit({
+      SocketHelper.emit({
         command: "unsubscribe",
         data: {
           roomParts: this.files.map((f) => `FILE-${f.id}`),
@@ -1037,7 +1035,7 @@ class FilesStore {
     this.files = files;
 
     if (this.files?.length > 0) {
-      socketHelper.emit({
+      SocketHelper.emit({
         command: "subscribe",
         data: {
           roomParts: this.files.map((f) => `FILE-${f.id}`),
@@ -1054,7 +1052,6 @@ class FilesStore {
   };
 
   setFolders = (folders) => {
-    const { socketHelper } = this.settingsStore;
     if (folders.length === 0 && this.folders.length === 0) return;
 
     if (this.folders?.length > 0) {
@@ -1066,7 +1063,7 @@ class FilesStore {
         .filter((id) => id);
 
       if (ids.length)
-        socketHelper.emit({
+        SocketHelper.emit({
           command: "unsubscribe",
           data: {
             roomParts: ids,
@@ -1078,7 +1075,7 @@ class FilesStore {
     this.folders = folders;
 
     if (this.folders?.length > 0) {
-      socketHelper.emit({
+      SocketHelper.emit({
         command: "subscribe",
         data: {
           roomParts: this.folders.map((f) => `DIR-${f.id}`),
@@ -2924,8 +2921,6 @@ class FilesStore {
   };
 
   addItem = (item, isFolder) => {
-    const { socketHelper } = this.settingsStore;
-
     if (!this.showNewFilesInList) {
       return;
     }
@@ -2938,7 +2933,7 @@ class FilesStore {
 
       //console.log("[WS] subscribe to folder changes", item.id, item.title);
 
-      socketHelper.emit({
+      SocketHelper.emit({
         command: "subscribe",
         data: {
           roomParts: `DIR-${item.id}`,
@@ -2951,7 +2946,7 @@ class FilesStore {
 
       //console.log("[WS] subscribe to file changes", item.id, item.title);
 
-      socketHelper.emit({
+      SocketHelper.emit({
         command: "subscribe",
         data: { roomParts: `FILE-${item.id}`, individual: true },
       });
@@ -4110,7 +4105,6 @@ class FilesStore {
   setCreatedItem = (createdItem) => {
     this.createdItem = createdItem;
 
-    // const { socketHelper } = this.settingsStore;
     // if (createdItem?.type == "file") {
     //   console.log(
     //     "[WS] subscribe to file's changes",
@@ -4118,7 +4112,7 @@ class FilesStore {
     //     createdItem.title
     //   );
 
-    //   socketHelper.emit({
+    //   SocketHelper.emit({
     //     command: "subscribe",
     //     data: { roomParts: `FILE-${createdItem.id}`, individual: true },
     //   });

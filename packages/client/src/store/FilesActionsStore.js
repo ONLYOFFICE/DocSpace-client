@@ -96,6 +96,8 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
+import SocketHelper from "@docspace/shared/utils/socket";
+
 import api from "@docspace/shared/api";
 import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
@@ -473,9 +475,7 @@ class FilesActionStore {
             }
 
             if (currentFolderId) {
-              const { socketHelper } = this.settingsStore;
-
-              socketHelper.emit({
+              SocketHelper.emit({
                 command: "refresh-folder",
                 data: currentFolderId,
               });

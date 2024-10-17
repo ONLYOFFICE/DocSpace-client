@@ -29,6 +29,7 @@ import api from "@docspace/shared/api";
 import { size } from "@docspace/shared/utils";
 import { FileStatus } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
+import SocketHelper from "@docspace/shared/utils/socket";
 
 class VersionHistoryStore {
   isVisible = false;
@@ -48,9 +49,7 @@ class VersionHistoryStore {
     if (this.versions) {
       //TODO: Files store in not initialized on versionHistory page. Need socket.
 
-      const { socketHelper } = settingsStore;
-
-      socketHelper.on("s:start-edit-file", (id) => {
+      SocketHelper.on("s:start-edit-file", (id) => {
         //console.log(`VERSION STORE Call s:start-edit-file (id=${id})`);
         const verIndex = this.versions.findIndex((x) => x.id == id);
         if (verIndex == -1) return;
@@ -58,7 +57,7 @@ class VersionHistoryStore {
         runInAction(() => (this.isEditing = true));
       });
 
-      socketHelper.on("s:stop-edit-file", (id) => {
+      SocketHelper.on("s:stop-edit-file", (id) => {
         //console.log(`VERSION STORE Call s:stop-edit-file (id=${id})`);
         const verIndex = this.files.findIndex((x) => x.id === id);
         if (verIndex == -1) return;

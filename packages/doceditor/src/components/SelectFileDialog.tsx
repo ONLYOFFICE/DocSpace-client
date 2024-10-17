@@ -34,7 +34,6 @@ import { DeviceType, FilesSelectorFilterTypes } from "@docspace/shared/enums";
 import { SelectFileDialogProps } from "@/types";
 
 const SelectFileDialog = ({
-  socketHelper,
   fileTypeDetection,
   getIsDisabled,
   isVisible,
@@ -49,8 +48,8 @@ const SelectFileDialog = ({
   // const sessionPath = sessionStorage.getItem("filesSelectorPath");
 
   const headerLabel = fileTypeDetection.filterParam
-    ? t?.("Common:SelectFile") ?? ""
-    : t?.("Common:SelectAction") ?? "";
+    ? (t?.("Common:SelectFile") ?? "")
+    : (t?.("Common:SelectAction") ?? "");
 
   const getFileTypeTranslation = React.useCallback(() => {
     switch (fileTypeDetection.filterParam) {
@@ -84,8 +83,6 @@ const SelectFileDialog = ({
       withoutBackButton
       withSearch
       withBreadCrumbs
-      socketHelper={socketHelper}
-      socketSubscribers={socketHelper.socketSubscribers}
       disabledItems={[]}
       isPanelVisible={isVisible}
       onCancel={onClose}

@@ -27,6 +27,7 @@
 import { makeAutoObservable } from "mobx";
 import { getFoldersTree, getSubfolders } from "@docspace/shared/api/files";
 import { FolderType } from "@docspace/shared/enums";
+import SocketHelper from "@docspace/shared/utils/socket";
 
 class TreeFoldersStore {
   selectedFolderStore;
@@ -58,10 +59,8 @@ class TreeFoldersStore {
   };
 
   listenTreeFolders = (treeFolders) => {
-    const { socketHelper } = this.settingsStore;
-
     if (treeFolders.length > 0) {
-      socketHelper.emit({
+      SocketHelper.emit({
         command: "unsubscribe",
         data: {
           roomParts: treeFolders.map((f) => `DIR-${f.id}`),
@@ -69,7 +68,7 @@ class TreeFoldersStore {
         },
       });
 
-      socketHelper.emit({
+      SocketHelper.emit({
         command: "subscribe",
         data: {
           roomParts: treeFolders.map((f) => `DIR-${f.id}`),

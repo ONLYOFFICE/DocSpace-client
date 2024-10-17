@@ -38,7 +38,6 @@ import { TUser } from "@docspace/shared/api/people/types";
 import { TSettings } from "@docspace/shared/api/settings/types";
 import { TBreadCrumb } from "@docspace/shared/components/selector/Selector.types";
 import { TSelectedFileInfo } from "@docspace/shared/selectors/Files/FilesSelector.types";
-import SocketIOHelper from "@docspace/shared/utils/socket";
 import {
   ConflictResolveType,
   FilesSelectorFilterTypes,
@@ -268,7 +267,6 @@ export interface UseSelectFileDialogProps {
 }
 
 export interface SelectFolderDialogProps {
-  socketHelper: SocketIOHelper;
   titleSelectorFolder: string;
   isVisible: boolean;
   getIsDisabled: (
@@ -301,7 +299,6 @@ export interface SelectFolderDialogProps {
 }
 
 export interface SelectFileDialogProps {
-  socketHelper: SocketIOHelper;
   fileTypeDetection: {
     isSelect: boolean;
     filterParam: FilesSelectorFilterTypes;
@@ -410,7 +407,6 @@ export type TCatchError =
   | string;
 
 export type StartFillingSelectorDialogPprops = {
-  socketHelper: SocketIOHelper;
   fileInfo: TFile;
   isVisible: boolean;
   onClose: VoidFunction;

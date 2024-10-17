@@ -28,35 +28,32 @@
 
 import React from "react";
 
-import SocketIOHelper from "@docspace/shared/utils/socket";
+import SocketHelper from "@docspace/shared/utils/socket";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { getRestoreProgress } from "@docspace/shared/api/portal";
-import { getUser } from "@docspace/shared/api/people";
 import { EDITOR_ID } from "@docspace/shared/constants";
 
 import { UseSocketHelperProps } from "@/types";
 
 const useSocketHelper = ({ socketUrl, user }: UseSocketHelperProps) => {
-  const [socketHelper, setSocketHelper] = React.useState<SocketIOHelper | null>(
-    null,
-  );
+  React.useEffect(() => {
+    SocketHelper.connect(socketUrl, "");
+  }, [socketUrl]);
 
   React.useEffect(() => {
-    if (socketHelper) return;
-    const socketIOHelper = SocketIOHelper.getInstance(); // (socketUrl, "");
-    socketIOHelper.connect(socketUrl, "");
-
-    socketIOHelper.emit({
+    SocketHelper.emit({
       command: "subscribe",
       data: { roomParts: "backup-restore" },
     });
 
-    socketIOHelper.emit({
+    SocketHelper.emit({
       command: "subscribe",
       data: { roomParts: user?.id || "" },
     });
+  }, [user?.id]);
 
-    socketIOHelper.on("restore-backup", async () => {
+  React.useEffect(() => {
+    SocketHelper.on("restore-backup", async () => {
       try {
         const response = await getRestoreProgress();
 
@@ -76,8 +73,10 @@ const useSocketHelper = ({ socketUrl, user }: UseSocketHelperProps) => {
         console.error("getRestoreProgress", e);
       }
     });
+  }, []);
 
-    socketIOHelper.on("s:logout-session", async (loginEventId) => {
+  React.useEffect(() => {
+    SocketHelper.on("s:logout-session", async (loginEventId) => {
       console.log(`[WS] "logout-session"`, loginEventId, user?.loginEventId);
 
       if (
@@ -94,11 +93,7 @@ const useSocketHelper = ({ socketUrl, user }: UseSocketHelperProps) => {
         );
       }
     });
-
-    setSocketHelper(socketIOHelper);
-  }, [socketHelper, socketUrl, user?.id, user?.loginEventId]);
-
-  return { socketHelper };
+  }, [user?.loginEventId]);
 };
 
 export default useSocketHelper;

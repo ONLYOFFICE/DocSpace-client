@@ -247,8 +247,6 @@ class SettingsStore {
 
   socketUrl = "";
 
-  socketHelper = SocketHelper.getInstance();
-
   folderFormValidation = new RegExp('[*+:"<>?|\\\\/]', "gim");
 
   tenantStatus: TenantStatus | null = null;
@@ -904,7 +902,7 @@ class SettingsStore {
     const socketUrl =
       isPublicRoom() && !this.publicRoomKey ? "" : this.socketUrl;
 
-    this.socketHelper.connect(socketUrl, this.publicRoomKey);
+    SocketHelper.connect(socketUrl, this.publicRoomKey);
   };
 
   setPublicRoomKey = (key: string) => {
@@ -912,7 +910,7 @@ class SettingsStore {
 
     const socketUrl = isPublicRoom() && !key ? "" : this.socketUrl;
 
-    this.socketHelper.connect(socketUrl, key);
+    SocketHelper.connect(socketUrl, key);
   };
 
   getBuildVersionInfo = async () => {

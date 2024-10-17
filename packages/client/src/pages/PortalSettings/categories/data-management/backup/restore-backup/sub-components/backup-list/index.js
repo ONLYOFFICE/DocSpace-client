@@ -30,6 +30,7 @@ import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
+import SocketHelper from "@docspace/shared/utils/socket";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
@@ -147,7 +148,7 @@ const BackupListModalDialog = (props) => {
   };
   const onRestorePortal = () => {
     const { selectedFileId } = state;
-    const { isNotify, socketHelper, t, setTenantStatus } = props;
+    const { isNotify, t, setTenantStatus } = props;
 
     if (!selectedFileId) {
       toastr.error(t("RecoveryFileNotSelected"));
@@ -166,7 +167,7 @@ const BackupListModalDialog = (props) => {
     startRestore(backupId, storageType, storageParams, isNotify)
       .then(() => setTenantStatus(TenantStatus.PortalRestore))
       .then(() => {
-        socketHelper.emit({
+        SocketHelper.emit({
           command: "restore-backup",
         });
       })
@@ -329,13 +330,12 @@ BackupListModalDialog.propTypes = {
 
 export default inject(({ settingsStore, backup }) => {
   const { downloadingProgress } = backup;
-  const { socketHelper, theme, setTenantStatus, standalone } = settingsStore;
+  const { theme, setTenantStatus, standalone } = settingsStore;
   const isCopyingToLocal = downloadingProgress !== 100;
 
   return {
     setTenantStatus,
     theme,
-    socketHelper,
     isCopyingToLocal,
     standalone,
   };

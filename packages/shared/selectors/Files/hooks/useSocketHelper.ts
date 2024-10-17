@@ -26,6 +26,8 @@
 
 import React from "react";
 
+import SocketHelper from "@docspace/shared/utils/socket";
+
 import { TSelectorItem } from "../../../components/selector";
 import { TFile, TFolder } from "../../../api/files/types";
 import { TRoom } from "../../../api/rooms/types";
@@ -40,8 +42,6 @@ import { UseSocketHelperProps } from "../FilesSelector.types";
 import { SettingsContext } from "../contexts/Settings";
 
 const useSocketHelper = ({
-  socketHelper,
-  socketSubscribers,
   disabledItems,
   filterParam,
   withCreate,
@@ -55,36 +55,37 @@ const useSocketHelper = ({
 
   const subscribedId = React.useRef<null | number>(null);
 
-  const unsubscribe = React.useCallback(
-    (id: number, clear = true) => {
-      if (clear) {
-        subscribedId.current = null;
-      }
+  const unsubscribe = React.useCallback((id: number, clear = true) => {
+    if (clear) {
+      subscribedId.current = null;
+    }
 
-      if (id && !socketSubscribers.has(`DIR-${id}`)) {
-        socketHelper.emit({
-          command: "unsubscribe",
-          data: {
-            roomParts: `DIR-${id}`,
-            individual: true,
-          },
-        });
-      }
-    },
-    [socketHelper, socketSubscribers],
-  );
+    if (id && !SocketHelper.socketSubscribers.has(`DIR-${id}`)) {
+      SocketHelper.emit({
+        command: "unsubscribe",
+        data: {
+          roomParts: `DIR-${id}`,
+          individual: true,
+        },
+      });
+    }
+  }, []);
 
   const subscribe = React.useCallback(
     (id: number) => {
       const roomParts = `DIR-${id}`;
 
-      if (socketSubscribers.has(roomParts)) return (subscribedId.current = id);
+      if (SocketHelper.socketSubscribers.has(roomParts))
+        return (subscribedId.current = id);
 
-      if (subscribedId.current && !socketSubscribers.has(roomParts)) {
+      if (
+        subscribedId.current &&
+        !SocketHelper.socketSubscribers.has(roomParts)
+      ) {
         unsubscribe(subscribedId.current, false);
       }
 
-      socketHelper.emit({
+      SocketHelper.emit({
         command: "subscribe",
         data: {
           roomParts: `DIR-${id}`,
@@ -94,7 +95,7 @@ const useSocketHelper = ({
 
       subscribedId.current = id;
     },
-    [socketHelper, socketSubscribers, unsubscribe],
+    [unsubscribe],
   );
 
   const addItem = React.useCallback(
@@ -287,7 +288,7 @@ const useSocketHelper = ({
 
     initRef.current = true;
 
-    socketHelper.on("s:modify-folder", (opt?: TOptSocket) => {
+    SocketHelper.on("s:modify-folder", (opt?: TOptSocket) => {
       switch (opt?.cmd) {
         case "create":
           addItem(opt);
@@ -301,7 +302,7 @@ const useSocketHelper = ({
         default:
       }
     });
-  }, [addItem, updateItem, deleteItem, socketHelper]);
+  }, [addItem, updateItem, deleteItem]);
 
   return { subscribe, unsubscribe };
 };

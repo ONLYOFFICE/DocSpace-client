@@ -31,6 +31,8 @@ import uniqueid from "lodash/uniqueId";
 import sumBy from "lodash/sumBy";
 import uniqBy from "lodash/uniqBy";
 import { ConflictResolveType } from "@docspace/shared/enums";
+import SocketHelper from "@docspace/shared/utils/socket";
+
 import {
   getFileInfo,
   getFolderInfo,
@@ -1535,9 +1537,7 @@ class UploadDataStore {
       const toFolderId = this.files[0]?.toFolderId;
 
       if (toFolderId) {
-        const { socketHelper } = this.settingsStore;
-
-        socketHelper.emit({
+        SocketHelper.emit({
           command: "refresh-folder",
           data: toFolderId,
         });

@@ -81,34 +81,42 @@ export type TCallback = {
 };
 
 /**
- * A singleton helper class for managing socket connections and interactions.
+ * The `SocketHelper` class is a singleton that manages WebSocket connections and provides methods to interact with the WebSocket server.
+ * It handles connection establishment, event registration, and message emission.
  *
- * @class SocketHelper
- *
+ * @class
  * @example
- * // Get the singleton instance
+ * // Retrieve the singleton instance
  * const socketHelper = SocketHelper.getInstance();
  *
- * // Update connection settings
- * socketHelper.updateSettings('http://example.com', 'publicRoomKey');
+ * // Establish a connection
+ * socketHelper.connect('ws://example.com', 'publicRoomKey');
  *
- * // Emit an event
- * socketHelper.emit({ command: 'subscribe', data: { roomParts: 'roomId' } });
+ * // Emit a message
+ * socketHelper.emit({ command: 'message', data: { text: 'Hello, World!' } });
  *
- * // Listen for an event
- * socketHelper.on('eventName', (value) => {
- *   console.log('Event received:', value);
+ * // Register an event listener
+ * socketHelper.on('message', (data) => {
+ *   console.log('Received message:', data);
  * });
  *
- * @property {boolean} isEnabled - Indicates if the connection settings are set.
- * @property {boolean} isReady - Indicates if the socket is ready for communication.
- * @property {Set<string>} socketSubscribers - A set of current socket subscribers.
- * @property {Socket<DefaultEventsMap, DefaultEventsMap> | null} socket - The socket client instance.
+ * @property {SocketHelper} instance - The singleton instance of the SocketHelper class.
+ * @property {ConnectionSettings | null} connectionSettings - The settings used to establish the WebSocket connection.
+ * @property {Socket<DefaultEventsMap, DefaultEventsMap> | null} client - The WebSocket client instance.
+ * @property {boolean} isSocketReady - Indicates whether the socket is ready for communication.
+ * @property {TCallback[]} callbacks - A queue of callbacks to be registered once the socket is ready.
+ * @property {TEmit[]} emits - A queue of messages to be emitted once the socket is ready.
+ * @property {Set<string>} subscribers - A set of current socket subscribers.
  *
- * @method getInstance - Returns the singleton instance of the SocketHelper.
- * @method updateSettings - Updates the connection settings and attempts to connect.
- * @method emit - Emits an event to the socket server.
- * @method on - Registers an event listener on the socket client.
+ * @method static getInstance - Retrieves the singleton instance of the SocketHelper class.
+ * @method private tryConnect - Attempts to establish a WebSocket connection using the provided connection settings.
+ * @method get isEnabled - Checks if the socket connection is enabled.
+ * @method get isReady - Checks if the socket is ready.
+ * @method get socketSubscribers - Gets the list of current socket subscribers.
+ * @method get socket - Getter for the socket property.
+ * @method public connect - Establishes a WebSocket connection using the provided URL and public room key.
+ * @method public emit - Emits a command with associated data to a specified room or globally.
+ * @method public on - Registers an event listener for the specified event name.
  */
 class SocketHelper {
   private static instance: SocketHelper;

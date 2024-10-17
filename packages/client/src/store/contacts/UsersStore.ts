@@ -934,6 +934,14 @@ class UsersStore {
     return users.length > 0;
   }
 
+  get hasUsersToChangeType() {
+    const { canChangeUserType } = this.accessRightsStore;
+
+    const users = this.selection.filter((x) => canChangeUserType(x));
+
+    return users.length > 0;
+  }
+
   get getUsersToMakeEmployees() {
     const { canMakeEmployeeUser } = this.accessRightsStore;
 

@@ -133,6 +133,7 @@ class HeaderMenuStore {
   getContactsHeaderMenu = (t: TTranslation, isGroupsPage = false) => {
     const {
       hasUsersToMakeEmployees,
+      hasUsersToChangeType,
       hasUsersToActivate,
       hasUsersToDisable,
       hasUsersToInvite,
@@ -169,7 +170,7 @@ class HeaderMenuStore {
         id: "menu-change-type",
         key: "change-user",
         label: t("ChangeUserTypeDialog:ChangeUserTypeButton"),
-        disabled: !hasUsersToMakeEmployees,
+        disabled: isGuests ? !hasUsersToMakeEmployees : !hasUsersToChangeType,
         iconUrl: ChangeToEmployeeReactSvgUrl,
         onClick: isGuests
           ? () =>

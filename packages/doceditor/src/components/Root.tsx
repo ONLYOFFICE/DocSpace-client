@@ -122,6 +122,7 @@ const Root = ({
   useSocketHelper({
     socketUrl: user ? (settings?.socketUrl ?? "") : "",
     user,
+    shareKey,
   });
   const {
     onSDKRequestSaveAs,

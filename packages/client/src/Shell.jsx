@@ -153,7 +153,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   }, []);
 
   useEffect(() => {
-    console.log(userId);
     SocketHelper.emit({
       command: SocketCommands.Subscribe,
       data: { roomParts: userId },

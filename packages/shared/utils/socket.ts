@@ -334,6 +334,33 @@ class SocketHelper {
 
     this.client.on(eventName, callback);
   };
+
+  /**
+   * Remove an event listener for the specified event name.
+   * If the socket is not enabled, not ready, or the client is not available,
+   * the event listener is removed from a queue.
+   *
+   * @param eventName - The name of the event to listen for.
+   * @param callback - The callback function to be executed when the event is triggered.
+   */
+  public off = (eventName: string, callback: (value: TOnCallback) => void) => {
+    if (!this.isEnabled || !this.isReady || !this.client) {
+      console.log("[WS] socket [off] is not ready -> remove from a queue", {
+        eventName,
+        callback,
+      });
+
+      this.callbacks = this.callbacks.filter(
+        (c) => c.eventName !== eventName || c.callback !== callback,
+      );
+
+      return;
+    }
+
+    console.log("[WS] off", { eventName, callback });
+
+    this.client.off(eventName, callback);
+  };
 }
 
 export default SocketHelper.getInstance();

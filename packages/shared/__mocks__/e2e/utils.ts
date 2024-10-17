@@ -24,3 +24,6 @@ export const HEADER_LIST_THIRD_PARTY_PROVIDERS =
 
 export const HEADER_SELF_ERROR_404 = "x-test-data-self-error-404";
 export const HEADER_SELF_ERROR_400 = "x-test-data-self-error-400";
+
+export const HEADER_NO_STANDALONE_SETTINGS =
+  "x-test-data-no-standalone-settings";

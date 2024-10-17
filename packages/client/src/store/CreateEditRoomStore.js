@@ -218,71 +218,75 @@ class CreateEditRoomStore {
 
     const { id: currentFolderId } = this.selectedFolderStore;
 
-    const editRoomParams = {};
+    const {
+      quota,
+      denyDownload,
+      indexing,
+      lifetime,
+      watermark,
+      title,
+      roomOwner,
+      icon,
+    } = newParams;
 
-    const quotaLimit = newParams?.quota || room.quotaLimit;
-    const isTitleChanged = !isEqual(newParams.title, room.title);
-    const denyDownloadChanged = newParams?.denyDownload !== room.denyDownload;
-    const indexingChanged = newParams?.indexing !== room.indexing;
+    const quotaLimit = quota || room.quotaLimit;
+    const isTitleChanged = !isEqual(title, room.title);
+    const isDenyDownloadChanged = denyDownload !== room.denyDownload;
+    const isIndexingChanged = indexing !== room.indexing;
     const isQuotaChanged = quotaLimit !== room.quotaLimit;
-    const lifetimeChanged = !isEqual(newParams.lifetime, room.lifetime);
-    const isOwnerChanged = newParams?.roomOwner?.id !== room.createdBy.id;
-    const isWatermarkChanged = !isEqual(newParams.watermark, room.watermark);
+    const isLifetimeChanged = !isEqual(lifetime, room.lifetime);
+    const isOwnerChanged = roomOwner && roomOwner.id !== room.createdBy.id;
+    const isWatermarkChanged = !isEqual(watermark, room.watermark);
 
-    if (isDefaultRoomsQuotaSet && isQuotaChanged) {
-      editRoomParams.quota = +quotaLimit;
-    }
+    const tags = newParams.tags.map((tag) => tag.name);
+    const prevTags = room.tags.sort();
+    const currTags = newParams.tags.map((t) => t.name).sort();
+    const isTagsChanged = !isEqual(prevTags, currTags);
 
-    if (isTitleChanged) {
-      editRoomParams.title = newParams.title || t("Common:NewRoom");
-    }
+    const editRoomParams = {
+      ...(isTitleChanged && {
+        title: title || t("Common:NewRoom"),
+      }),
+      ...(isDenyDownloadChanged && {
+        denyDownload,
+      }),
+      ...(isIndexingChanged && {
+        indexing,
+      }),
+      ...(isTagsChanged && {
+        tags,
+      }),
+      ...(isLifetimeChanged && {
+        lifetime: lifetime ?? {
+          enabled: false,
+        },
+      }),
+      ...(isDefaultRoomsQuotaSet &&
+        isQuotaChanged && {
+          quota: +quotaLimit,
+        }),
+      ...(cover && {
+        cover: cover.cover,
+        color: cover.color,
+      }),
+    };
 
-    if (denyDownloadChanged) {
-      editRoomParams.denyDownload = newParams.denyDownload;
-    }
-
-    if (indexingChanged) {
-      editRoomParams.indexing = newParams.indexing;
-    }
-
-    if (lifetimeChanged) {
-      editRoomParams.lifetime = newParams.lifetime ?? {
-        enabled: false,
-      };
-    }
-
-    if (isWatermarkChanged && this.isCorrectWatermark(newParams.watermark)) {
-      editRoomParams.watermark = newParams.watermark
-        ? await this.getWatermarkRequest(newParams.watermark)
+    if (isWatermarkChanged && this.isCorrectWatermark(watermark)) {
+      editRoomParams.watermark = watermark
+        ? await this.getWatermarkRequest(watermark)
         : {
             enabled: false,
           };
     }
 
-    const tags = newParams.tags.map((tag) => tag.name);
-    const prevTags = room.tags.sort();
-    const currTags = newParams.tags.map((t) => t.name).sort();
-
-    const isTagsChanged = !isEqual(prevTags, currTags);
-
-    const isUpdatelogo = uploadedFile;
-    const isDeleteLogo = !!room.logo.original && !newParams.icon.uploadedFile;
+    const isDeleteLogo = !!room.logo.original && !icon.uploadedFile;
     const additionalRequest = [];
 
-    if (isUpdatelogo) {
+    if (uploadedFile) {
       additionalRequest.push(
-        this.getLogoParams(uploadedFile, newParams.icon),
+        this.getLogoParams(uploadedFile, icon),
         getUploadedLogoData(),
       );
-    }
-
-    if (isTagsChanged) {
-      editRoomParams.tags = tags;
-    }
-
-    if (cover) {
-      editRoomParams.cover = cover.cover;
-      editRoomParams.color = cover.color;
     }
 
     const requests = [];
@@ -306,14 +310,14 @@ class CreateEditRoomStore {
         await editRoom(room.id, editRoomParams);
 
       if (isOwnerChanged) {
-        requests.push(changeRoomOwner(t, newParams?.roomOwner?.id));
+        requests.push(changeRoomOwner(t, roomOwner.id));
       }
 
       if (isDeleteLogo) {
         requests.push(removeLogoFromRoom(room.id));
       }
 
-      if (indexingChanged)
+      if (isIndexingChanged)
         requests.push(updateCurrentFolder(null, currentFolderId));
 
       if (!!requests.length) {

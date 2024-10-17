@@ -28,7 +28,10 @@
 
 import React from "react";
 
-import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
+import SocketHelper, {
+  SocketCommands,
+  SocketEvents,
+} from "@docspace/shared/utils/socket";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { getRestoreProgress } from "@docspace/shared/api/portal";
 import { EDITOR_ID } from "@docspace/shared/constants";
@@ -46,12 +49,12 @@ const useSocketHelper = ({
 
   React.useEffect(() => {
     SocketHelper.emit({
-      command: "subscribe",
+      command: SocketCommands.Subscribe,
       data: { roomParts: "backup-restore" },
     });
 
     SocketHelper.emit({
-      command: "subscribe",
+      command: SocketCommands.Subscribe,
       data: { roomParts: user?.id || "" },
     });
   }, [user?.id]);

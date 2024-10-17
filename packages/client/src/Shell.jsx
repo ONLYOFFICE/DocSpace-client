@@ -33,7 +33,10 @@ import { useTranslation } from "react-i18next";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
 import { toast as toastify } from "react-toastify";
 
-import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
+import SocketHelper, {
+  SocketEvents,
+  SocketCommands,
+} from "@docspace/shared/utils/socket";
 import { Portal } from "@docspace/shared/components/portal";
 import { SnackBar } from "@docspace/shared/components/snackbar";
 import { Toast, toastr } from "@docspace/shared/components/toast";
@@ -134,24 +137,25 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
   useEffect(() => {
     SocketHelper.emit({
-      command: "subscribe",
+      command: SocketCommands.Subscribe,
       data: { roomParts: "backup-restore" },
     });
 
     SocketHelper.emit({
-      command: "subscribe",
+      command: SocketCommands.Subscribe,
       data: { roomParts: "quota" },
     });
 
     SocketHelper.emit({
-      command: "subscribe",
+      command: SocketCommands.Subscribe,
       data: { roomParts: "QUOTA", individual: true },
     });
   }, []);
 
   useEffect(() => {
+    console.log(userId);
     SocketHelper.emit({
-      command: "subscribe",
+      command: SocketCommands.Subscribe,
       data: { roomParts: userId },
     });
   }, [userId]);

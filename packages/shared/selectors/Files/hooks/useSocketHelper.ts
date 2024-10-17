@@ -26,7 +26,10 @@
 
 import React from "react";
 
-import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
+import SocketHelper, {
+  SocketCommands,
+  SocketEvents,
+} from "@docspace/shared/utils/socket";
 
 import { TSelectorItem } from "../../../components/selector";
 import { TFile, TFolder } from "../../../api/files/types";
@@ -62,7 +65,7 @@ const useSocketHelper = ({
 
     if (id && !SocketHelper.socketSubscribers.has(`DIR-${id}`)) {
       SocketHelper.emit({
-        command: "unsubscribe",
+        command: SocketCommands.Unsubscribe,
         data: {
           roomParts: `DIR-${id}`,
           individual: true,
@@ -86,7 +89,7 @@ const useSocketHelper = ({
       }
 
       SocketHelper.emit({
-        command: "subscribe",
+        command: SocketCommands.Subscribe,
         data: {
           roomParts: `DIR-${id}`,
           individual: true,

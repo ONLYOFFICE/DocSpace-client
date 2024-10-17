@@ -28,7 +28,7 @@ import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import config from "PACKAGE_FILE";
 import { useNavigate } from "react-router-dom";
-import SocketHelper from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 import { Button } from "@docspace/shared/components/button";
 import { FloatingButton } from "@docspace/shared/components/floating-button";
 import { TenantStatus } from "@docspace/shared/enums";
@@ -103,7 +103,7 @@ const ButtonContainer = (props) => {
       setTenantStatus(TenantStatus.PortalRestore);
 
       SocketHelper.emit({
-        command: "restore-backup",
+        command: SocketCommands.RestoreBackup,
       });
 
       navigate(

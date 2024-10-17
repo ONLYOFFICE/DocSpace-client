@@ -31,7 +31,7 @@ import uniqueid from "lodash/uniqueId";
 import sumBy from "lodash/sumBy";
 import uniqBy from "lodash/uniqBy";
 import { ConflictResolveType } from "@docspace/shared/enums";
-import SocketHelper from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 
 import {
   getFileInfo,
@@ -1538,7 +1538,7 @@ class UploadDataStore {
 
       if (toFolderId) {
         SocketHelper.emit({
-          command: "refresh-folder",
+          command: SocketCommands.RefreshFolder,
           data: toFolderId,
         });
       }

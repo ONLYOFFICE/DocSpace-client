@@ -30,7 +30,7 @@ import { inject, observer } from "mobx-react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import { withTranslation } from "react-i18next";
-import SocketHelper from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Text } from "@docspace/shared/components/text";
 import { Button } from "@docspace/shared/components/button";
@@ -168,7 +168,7 @@ const BackupListModalDialog = (props) => {
       .then(() => setTenantStatus(TenantStatus.PortalRestore))
       .then(() => {
         SocketHelper.emit({
-          command: "restore-backup",
+          command: SocketCommands.RestoreBackup,
         });
       })
       .then(() =>

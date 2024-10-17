@@ -42,7 +42,10 @@ import {
   FilterKeys,
   RoomSearchArea,
 } from "@docspace/shared/enums";
-import SocketHelper, { SocketEvents } from "@docspace/shared/utils/socket";
+import SocketHelper, {
+  SocketCommands,
+  SocketEvents,
+} from "@docspace/shared/utils/socket";
 
 import { RoomsTypes } from "@docspace/shared/utils";
 import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
@@ -1024,7 +1027,7 @@ class FilesStore {
 
     if (this.files?.length > 0) {
       SocketHelper.emit({
-        command: "unsubscribe",
+        command: SocketCommands.Unsubscribe,
         data: {
           roomParts: this.files.map((f) => `FILE-${f.id}`),
           individual: true,
@@ -1036,7 +1039,7 @@ class FilesStore {
 
     if (this.files?.length > 0) {
       SocketHelper.emit({
-        command: "subscribe",
+        command: SocketCommands.Subscribe,
         data: {
           roomParts: this.files.map((f) => `FILE-${f.id}`),
           individual: true,
@@ -1064,7 +1067,7 @@ class FilesStore {
 
       if (ids.length)
         SocketHelper.emit({
-          command: "unsubscribe",
+          command: SocketCommands.Unsubscribe,
           data: {
             roomParts: ids,
             individual: true,
@@ -1076,7 +1079,7 @@ class FilesStore {
 
     if (this.folders?.length > 0) {
       SocketHelper.emit({
-        command: "subscribe",
+        command: SocketCommands.Subscribe,
         data: {
           roomParts: this.folders.map((f) => `DIR-${f.id}`),
           individual: true,
@@ -2934,7 +2937,7 @@ class FilesStore {
       //console.log("[WS] subscribe to folder changes", item.id, item.title);
 
       SocketHelper.emit({
-        command: "subscribe",
+        command: SocketCommands.Subscribe,
         data: {
           roomParts: `DIR-${item.id}`,
           individual: true,
@@ -2947,7 +2950,7 @@ class FilesStore {
       //console.log("[WS] subscribe to file changes", item.id, item.title);
 
       SocketHelper.emit({
-        command: "subscribe",
+        command: SocketCommands.Subscribe,
         data: { roomParts: `FILE-${item.id}`, individual: true },
       });
 

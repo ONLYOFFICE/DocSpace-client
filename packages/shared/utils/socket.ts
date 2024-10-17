@@ -47,6 +47,13 @@ export const enum SocketEvents {
   ChangedQuotaUserUsedValue = "s:change-user-quota-used-value",
 }
 
+export const enum SocketCommands {
+  Subscribe = "subscribe",
+  Unsubscribe = "unsubscribe",
+  RefreshFolder = "refresh-folder",
+  RestoreBackup = "restore-backup",
+}
+
 export type ConnectionSettings = {
   url: string;
   publicRoomKey: string;

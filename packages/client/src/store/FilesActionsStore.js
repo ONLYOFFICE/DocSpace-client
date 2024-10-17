@@ -96,7 +96,7 @@ import {
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
-import SocketHelper from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 
 import api from "@docspace/shared/api";
 import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
@@ -476,7 +476,7 @@ class FilesActionStore {
 
             if (currentFolderId) {
               SocketHelper.emit({
-                command: "refresh-folder",
+                command: SocketCommands.RefreshFolder,
                 data: currentFolderId,
               });
             }

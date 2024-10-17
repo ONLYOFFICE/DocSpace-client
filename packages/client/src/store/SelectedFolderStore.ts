@@ -27,7 +27,7 @@
 import { makeAutoObservable } from "mobx";
 
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
-import SocketHelper from "@docspace/shared/utils/socket";
+import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 import {
   FolderType,
   RoomsType,
@@ -367,7 +367,7 @@ class SelectedFolderStore {
       SocketHelper.socketSubscribers.has(`DIR-${this.id}`)
     ) {
       SocketHelper.emit({
-        command: "unsubscribe",
+        command: SocketCommands.Unsubscribe,
         data: { roomParts: `DIR-${this.id}`, individual: true },
       });
     }
@@ -377,7 +377,7 @@ class SelectedFolderStore {
       !SocketHelper.socketSubscribers.has(`DIR-${selectedFolder.id}`)
     ) {
       SocketHelper.emit({
-        command: "subscribe",
+        command: SocketCommands.Subscribe,
         data: { roomParts: `DIR-${selectedFolder.id}`, individual: true },
       });
     }

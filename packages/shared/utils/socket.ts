@@ -54,7 +54,7 @@ export const enum SocketCommands {
   RestoreBackup = "restore-backup",
 }
 
-export type ConnectionSettings = {
+export type TSocketConnection = {
   url: string;
   publicRoomKey: string;
 };
@@ -126,7 +126,7 @@ export type TCallback = {
  * });
  *
  * @property {SocketHelper} instance - The singleton instance of the SocketHelper class.
- * @property {ConnectionSettings | null} connectionSettings - The settings used to establish the WebSocket connection.
+ * @property {TSocketConnection | null} connectionSettings - The settings used to establish the WebSocket connection.
  * @property {Socket<DefaultEventsMap, DefaultEventsMap> | null} client - The WebSocket client instance.
  * @property {boolean} isSocketReady - Indicates whether the socket is ready for communication.
  * @property {TCallback[]} callbacks - A queue of callbacks to be registered once the socket is ready.
@@ -146,7 +146,7 @@ export type TCallback = {
 class SocketHelper {
   private static instance: SocketHelper;
 
-  private connectionSettings?: ConnectionSettings | null;
+  private connectionSettings?: TSocketConnection | null;
 
   private client: Socket<DefaultEventsMap, DefaultEventsMap> | null = null;
 
@@ -295,7 +295,7 @@ class SocketHelper {
 
     console.log("[WS] connect", { url, publicRoomKey });
 
-    this.connectionSettings = { url, publicRoomKey } as ConnectionSettings;
+    this.connectionSettings = { url, publicRoomKey } as TSocketConnection;
     this.tryConnect();
   }
 

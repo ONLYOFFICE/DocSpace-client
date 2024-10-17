@@ -32,7 +32,6 @@ import HistoryGroupList from "./GroupList";
 import HistoryUserGroupRoleChange from "./UserGroupRoleChange";
 import HistoryRoomTagList from "./RoomTagList";
 import { getFeedInfo } from "../FeedInfo";
-import HistoryMainTextFolderInfo from "./MainTextFolderInfo";
 
 import { HistoryBlockContentProps } from "./HistoryBlockContent.types";
 
@@ -48,11 +47,6 @@ const HistoryBlockContent = ({
         actionType === "update" && <HistoryUserGroupRoleChange feed={feed} />}
 
       <HistoryMainText feed={feed} />
-
-      {(targetType === "file" || targetType === "folder") &&
-        actionType !== "delete" && (
-          <HistoryMainTextFolderInfo feed={feed} actionType={actionType} />
-        )}
 
       {(targetType === "file" || targetType === "folder") &&
         (actionType === "rename" || historyWithFileList) && (

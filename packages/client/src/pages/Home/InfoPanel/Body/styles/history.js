@@ -91,6 +91,8 @@ const StyledHistoryBlock = styled.div`
 
       .users-counter {
         margin-bottom: 1px;
+        font-weight: 600;
+        font-size: 14px;
       }
     }
 
@@ -98,6 +100,11 @@ const StyledHistoryBlock = styled.div`
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+
+      &-text {
+        font-size: 14px;
+        font-weight: 600;
+      }
     }
   }
 `;
@@ -109,8 +116,8 @@ const StyledHistoryDisplaynameBlock = styled.div`
 `;
 
 const StyledHistoryBlockMessage = styled.div`
-  font-weight: 400;
-  font-size: 13px;
+  font-weight: 600;
+  font-size: 14px;
   line-height: 20px;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -167,7 +174,7 @@ const StyledHistoryLink = styled.div`
   text-overflow: ellipsis;
 
   .text {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     display: inline-block;
   }
@@ -180,7 +187,6 @@ const StyledHistoryLink = styled.div`
 
     text-decoration: underline dashed;
     text-underline-offset: 2px;
-    margin-bottom: -5px;
   }
 
   .space {
@@ -307,7 +313,7 @@ const StyledHistoryBlockExpandLink = styled.div`
   &.user-list-expand-link {
     display: inline-block;
     position: relative;
-    top: -3px;
+    top: 0;
   }
 
   strong {

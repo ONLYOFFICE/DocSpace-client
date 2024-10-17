@@ -38,13 +38,13 @@ const StyledHistoryText = styled.div`
 
 const HistoryText = ({ title }: { title: string }) => (
   <StyledHistoryText title={title} className="history-text_wrapper">
-    <Text fontWeight={600} fontSize="13px" className="history-text">
+    <Text fontWeight={600} fontSize="14px" className="history-text">
       «
     </Text>
-    <Text fontWeight={600} fontSize="13px" truncate>
+    <Text fontWeight={600} fontSize="14px" truncate>
       {title}
     </Text>
-    <Text fontWeight={600} fontSize="13px" className="history-text">
+    <Text fontWeight={600} fontSize="14px" className="history-text">
       »
     </Text>
   </StyledHistoryText>

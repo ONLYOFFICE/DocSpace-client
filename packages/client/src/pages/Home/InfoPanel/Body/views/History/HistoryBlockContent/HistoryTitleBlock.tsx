@@ -54,7 +54,9 @@ const HistoryTitleBlock = ({ t, feed }: HistoryBlockContentProps) => {
       )}
 
       <div className="action-title">
-        <Text truncate>{useFeedTranslation(t, feed, hasRelatedItems)}</Text>
+        <Text className="action-title-text" truncate>
+          {useFeedTranslation(t, feed, hasRelatedItems)}
+        </Text>
       </div>
 
       {hasRelatedItems && (

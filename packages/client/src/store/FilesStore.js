@@ -1037,8 +1037,6 @@ class FilesStore {
       .map((f) => `FILE-${f.id}`)
       .filter((f) => !SocketHelper.socketSubscribers.has(f));
 
-    console.log(roomPartsToSub, roomPartsToUnsub, [...files]);
-
     if (roomPartsToUnsub.length > 0) {
       SocketHelper.emit(SocketCommands.Unsubscribe, {
         roomParts: roomPartsToUnsub,

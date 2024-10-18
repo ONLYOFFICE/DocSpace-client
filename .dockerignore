@@ -1,0 +1,6 @@
+**/node_modules
+**/.next
+**/test-results
+**/Dockerfile
+**/dist
+node_modules

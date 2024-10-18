@@ -1,37 +1,32 @@
-FROM node:20-alpine as base
+FROM debian:bookworm-slim as base
+RUN apt update && apt install -y git
 
-RUN corepack enable
-RUN corepack prepare yarn@stable --activate
+ARG BRANCH_NAME='develop'
+RUN git clone --depth=1 -b $BRANCH_NAME https://github.com/ONLYOFFICE/DocSpace-client.git /app
+
+FROM node:20-bookworm-slim
 
 WORKDIR /app
 
-FROM base AS deps
+COPY --from=base /app/.yarn/plugins .yarn/plugins
+COPY --from=base /app/.yarn/releases .yarn/releases/
+COPY --from=base /app/.yarnrc.yml .
+COPY --from=base /app/yarn.lock .
 
-COPY package.json  .
-COPY yarn.lock .
-COPY .yarn/cache/ .yarn/cache/
-COPY ./.yarn/plugins ./.yarn/plugins
-COPY ./.yarn/releases ./.yarn/releases/
-COPY ./.yarnrc.yml .
-
-COPY packages ./packages
-COPY public ./public
+COPY --from=base /app/package.json  .
+COPY --from=base /app/packages/login/package.json packages/login/package.json
+COPY --from=base /app/packages/shared/package.json packages/shared/package.json
+COPY --from=base /app/packages/client/package.json packages/client/package.json
 
 RUN yarn install
+RUN npx playwright install chromium --with-deps
 
-FROM deps AS runner
+COPY --from=base /app/packages/shared packages/shared
+COPY --from=base /app/public public
+COPY --from=base /app/packages/client packages/client
+COPY --from=base /app/packages/login packages/login
 
-WORKDIR /app
-
-COPY --from=deps /app/package.json .
-COPY --from=deps /app/.yarn/cache/ .yarn/cache/
-COPY --from=deps app/.yarn/plugins/ .yarn/plugins/
-COPY --from=deps app/.yarn/releases/ .yarn/releases/
-#COPY --from=deps /app/.pnp.cjs ./
-COPY --from=deps /app/yarn.lock .
-
-COPY --from=deps /app/packages ./packages
-COPY --from=deps /app/public ./public
+WORKDIR /app/packages/login
 
 RUN yarn test:build
 

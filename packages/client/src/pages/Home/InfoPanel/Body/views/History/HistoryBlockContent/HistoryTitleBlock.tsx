@@ -69,7 +69,8 @@ const HistoryTitleBlock = ({ t, feed }: HistoryBlockContentProps) => {
             "text-combined":
               isDisplayFolderInfo ||
               targetType === "group" ||
-              targetType === "user",
+              targetType === "user" ||
+              targetType === "roomExternalLink",
           })}
         >
           {useFeedTranslation(t, feed, hasRelatedItems)}

@@ -265,6 +265,7 @@ const RegistrationForm = ({
             className="checkbox-news"
             onChange={onChangeCheckbox}
             isChecked={isChecked}
+            isDisabled={isLoading}
           />
           <Text>{newsletter}</Text>
         </div>

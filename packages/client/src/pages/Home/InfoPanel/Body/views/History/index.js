@@ -71,7 +71,8 @@ const History = ({
   const [isLoading, setIsLoading] = useState(false);
   const [isShowLoader, setIsShowLoader] = useState(false);
 
-  const isThirdParty = infoPanelSelection?.providerType;
+  const isThirdParty = infoPanelSelection?.providerId;
+
   const [isLoadingNextPage, setIsLoadingNextPage] = useState(false);
   const [currentHistory, setCurrentHistory] = useState(selectionHistory);
 

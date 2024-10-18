@@ -119,9 +119,10 @@ const Root = ({
     email: user?.email,
   });
   const { filesSettings } = useFilesSettings({});
-  const { socketHelper } = useSocketHelper({
-    socketUrl: user ? settings?.socketUrl ?? "" : "",
+  useSocketHelper({
+    socketUrl: user ? (settings?.socketUrl ?? "") : "",
     user,
+    shareKey,
   });
   const {
     onSDKRequestSaveAs,
@@ -243,9 +244,8 @@ const Root = ({
         />
       )}
 
-      {isVisibleSelectFolderDialog && !!socketHelper && fileInfo && (
+      {isVisibleSelectFolderDialog && fileInfo && (
         <SelectFolderDialog
-          socketHelper={socketHelper}
           isVisible={isVisibleSelectFolderDialog}
           onSubmit={onSubmitSelectFolderDialog}
           onClose={onCloseSelectFolderDialog}
@@ -256,9 +256,8 @@ const Root = ({
           fileSaveAsExtension={extensionSelectorFolderDialog}
         />
       )}
-      {selectFileDialogVisible && !!socketHelper && fileInfo && (
+      {selectFileDialogVisible && fileInfo && (
         <SelectFileDialog
-          socketHelper={socketHelper}
           filesSettings={filesSettings}
           isVisible={selectFileDialogVisible}
           onSubmit={onSubmitSelectFileDialog}
@@ -269,17 +268,16 @@ const Root = ({
           shareKey={shareKey}
         />
       )}
-      {isSharingDialogVisible && !!socketHelper && fileInfo && (
+      {isSharingDialogVisible && fileInfo && (
         <SharingDialog
           isVisible={isSharingDialogVisible}
           fileInfo={fileInfo}
           onCancel={onCloseSharingDialog}
         />
       )}
-      {isVisibleStartFillingSelectDialog && !!socketHelper && fileInfo && (
+      {isVisibleStartFillingSelectDialog && fileInfo && (
         <StartFillingSelectorDialog
           fileInfo={fileInfo}
-          socketHelper={socketHelper}
           filesSettings={filesSettings}
           headerLabel={headerLabelSFSDialog}
           isVisible={

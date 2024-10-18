@@ -509,9 +509,9 @@ class InfoPanelStore {
 
     if (
       this.getIsContacts() &&
-      (!infoPanelSelection.email || !infoPanelSelection.displayName)
+      (!infoPanelSelection?.email || !infoPanelSelection?.displayName)
     ) {
-      this.infoPanelSelection = !infoPanelSelection.length
+      this.infoPanelSelection = !infoPanelSelection?.length
         ? infoPanelSelection
         : null;
       return;

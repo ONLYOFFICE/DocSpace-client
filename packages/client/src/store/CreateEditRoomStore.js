@@ -218,71 +218,75 @@ class CreateEditRoomStore {
 
     const { id: currentFolderId } = this.selectedFolderStore;
 
-    const editRoomParams = {};
+    const {
+      quota,
+      denyDownload,
+      indexing,
+      lifetime,
+      watermark,
+      title,
+      roomOwner,
+      icon,
+    } = newParams;
 
-    const quotaLimit = newParams?.quota || room.quotaLimit;
-    const isTitleChanged = !isEqual(newParams.title, room.title);
-    const denyDownloadChanged = newParams?.denyDownload !== room.denyDownload;
-    const indexingChanged = newParams?.indexing !== room.indexing;
+    const quotaLimit = quota || room.quotaLimit;
+    const isTitleChanged = !isEqual(title, room.title);
+    const isDenyDownloadChanged = denyDownload !== room.denyDownload;
+    const isIndexingChanged = indexing !== room.indexing;
     const isQuotaChanged = quotaLimit !== room.quotaLimit;
-    const lifetimeChanged = !isEqual(newParams.lifetime, room.lifetime);
-    const isOwnerChanged = newParams?.roomOwner?.id !== room.createdBy.id;
-    const isWatermarkChanged = !isEqual(newParams.watermark, room.watermark);
+    const isLifetimeChanged = !isEqual(lifetime, room.lifetime);
+    const isOwnerChanged = roomOwner && roomOwner.id !== room.createdBy.id;
+    const isWatermarkChanged = !isEqual(watermark, room.watermark);
 
-    if (isDefaultRoomsQuotaSet && isQuotaChanged) {
-      editRoomParams.quota = +quotaLimit;
-    }
+    const tags = newParams.tags.map((tag) => tag.name);
+    const prevTags = room.tags.sort();
+    const currTags = newParams.tags.map((t) => t.name).sort();
+    const isTagsChanged = !isEqual(prevTags, currTags);
 
-    if (isTitleChanged) {
-      editRoomParams.title = newParams.title || t("Common:NewRoom");
-    }
+    const editRoomParams = {
+      ...(isTitleChanged && {
+        title: title || t("Common:NewRoom"),
+      }),
+      ...(isDenyDownloadChanged && {
+        denyDownload,
+      }),
+      ...(isIndexingChanged && {
+        indexing,
+      }),
+      ...(isTagsChanged && {
+        tags,
+      }),
+      ...(isLifetimeChanged && {
+        lifetime: lifetime ?? {
+          enabled: false,
+        },
+      }),
+      ...(isDefaultRoomsQuotaSet &&
+        isQuotaChanged && {
+          quota: +quotaLimit,
+        }),
+      ...(cover && {
+        cover: cover.cover,
+        color: cover.color,
+      }),
+    };
 
-    if (denyDownloadChanged) {
-      editRoomParams.denyDownload = newParams.denyDownload;
-    }
-
-    if (indexingChanged) {
-      editRoomParams.indexing = newParams.indexing;
-    }
-
-    if (lifetimeChanged) {
-      editRoomParams.lifetime = newParams.lifetime ?? {
-        enabled: false,
-      };
-    }
-
-    if (isWatermarkChanged && this.isCorrectWatermark(newParams.watermark)) {
-      editRoomParams.watermark = newParams.watermark
-        ? await this.getWatermarkRequest(newParams.watermark)
+    if (isWatermarkChanged && this.isCorrectWatermark(watermark)) {
+      editRoomParams.watermark = watermark
+        ? await this.getWatermarkRequest(watermark)
         : {
             enabled: false,
           };
     }
 
-    const tags = newParams.tags.map((tag) => tag.name);
-    const prevTags = room.tags.sort();
-    const currTags = newParams.tags.map((t) => t.name).sort();
-
-    const isTagsChanged = !isEqual(prevTags, currTags);
-
-    const isUpdatelogo = uploadedFile;
-    const isDeleteLogo = !!room.logo.original && !newParams.icon.uploadedFile;
+    const isDeleteLogo = !!room.logo.original && !icon.uploadedFile;
     const additionalRequest = [];
 
-    if (isUpdatelogo) {
+    if (uploadedFile) {
       additionalRequest.push(
-        this.getLogoParams(uploadedFile, newParams.icon),
+        this.getLogoParams(uploadedFile, icon),
         getUploadedLogoData(),
       );
-    }
-
-    if (isTagsChanged) {
-      editRoomParams.tags = tags;
-    }
-
-    if (cover) {
-      editRoomParams.cover = cover.cover;
-      editRoomParams.color = cover.color;
     }
 
     const requests = [];
@@ -306,14 +310,14 @@ class CreateEditRoomStore {
         await editRoom(room.id, editRoomParams);
 
       if (isOwnerChanged) {
-        requests.push(changeRoomOwner(t, newParams?.roomOwner?.id));
+        requests.push(changeRoomOwner(t, roomOwner.id));
       }
 
       if (isDeleteLogo) {
         requests.push(removeLogoFromRoom(room.id));
       }
 
-      if (indexingChanged)
+      if (isIndexingChanged)
         requests.push(updateCurrentFolder(null, currentFolderId));
 
       if (!!requests.length) {
@@ -337,16 +341,35 @@ class CreateEditRoomStore {
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
     const { cover } = this.dialogsStore;
 
-    const isThirdparty = roomParams.storageLocation.isThirdparty;
-    const quotaLimit =
-      isDefaultRoomsQuotaSet && !isThirdparty ? roomParams.quota : null;
+    const {
+      denyDownload,
+      indexing,
+      lifetime,
+      tags,
+      storageLocation,
+      quota,
+      type,
+      title,
+      createAsNewFolder,
+      icon,
+      watermark,
+    } = roomParams;
+
+    const quotaLimit = isDefaultRoomsQuotaSet && !isThirdparty ? quota : null;
+
+    const isThirdparty = storageLocation.isThirdparty;
+    const storageFolderId = storageLocation.storageFolderId;
+    const thirdpartyAccount = storageLocation.thirdpartyAccount;
+    const isThirdPartyRoom = isThirdparty && storageFolderId;
+
+    const tagsToAddList = tags.map((tag) => tag.name);
 
     const createRoomData = {
-      roomType: roomParams.type,
-      title: roomParams.title || t("Common:NewRoom"),
-      indexing: roomParams.indexing,
-      denyDownload: roomParams.denyDownload,
-      createAsNewFolder: roomParams.createAsNewFolder ?? true,
+      roomType: type,
+      title: title || t("Common:NewRoom"),
+      ...(isThirdPartyRoom && {
+        createAsNewFolder: createAsNewFolder ?? true,
+      }),
       ...(quotaLimit && {
         quota: +quotaLimit,
       }),
@@ -354,37 +377,31 @@ class CreateEditRoomStore {
         cover: cover.cover,
         color: cover.color,
       }),
+      ...(denyDownload && {
+        denyDownload,
+      }),
+      ...(indexing && {
+        indexing,
+      }),
+      ...(lifetime && {
+        lifetime,
+      }),
+      ...(tagsToAddList.length && {
+        tags: tagsToAddList,
+      }),
     };
 
-    const tagsToAddList = roomParams.tags.map((tag) => tag.name);
-
-    const storageFolderId = roomParams.storageLocation.storageFolderId;
-    const thirdpartyAccount = roomParams.storageLocation.thirdpartyAccount;
-
-    const uploadLogoData = new FormData();
-    uploadLogoData.append(0, roomParams.icon.uploadedFile);
-
-    if (roomParams.lifetime) {
-      createRoomData.lifetime = roomParams.lifetime;
-    }
-
-    if (roomParams.watermark && this.isCorrectWatermark(roomParams.watermark)) {
-      createRoomData.watermark = await this.getWatermarkRequest(
-        roomParams.watermark,
-      );
-    }
-
-    if (tagsToAddList.length) {
-      createRoomData.tags = tagsToAddList;
+    if (watermark && this.isCorrectWatermark(watermark)) {
+      createRoomData.watermark = await this.getWatermarkRequest(watermark);
     }
 
     const additionalRequest = [];
 
-    const isUpdatelogo = roomParams.icon.uploadedFile;
+    const uploadedFile = icon.uploadedFile;
 
-    if (isUpdatelogo) {
+    if (uploadedFile) {
       additionalRequest.push(
-        this.getLogoParams(roomParams.icon.uploadedFile, roomParams.icon),
+        this.getLogoParams(uploadedFile, icon),
         getUploadedLogoData(),
       );
     }
@@ -408,17 +425,15 @@ class CreateEditRoomStore {
 
       withConfirm && this.setConfirmDialogIsLoading(true);
 
-      // create room
-      let room =
-        isThirdparty && storageFolderId
-          ? await createRoomInThirdpary(storageFolderId, createRoomData)
-          : await createRoom(createRoomData);
+      const room = isThirdPartyRoom
+        ? await createRoomInThirdpary(storageFolderId, createRoomData)
+        : await createRoom(createRoomData);
 
       this.dialogsStore.setIsNewRoomByCurrentUser(true);
 
       // delete thirdparty account if not needed
       if (!isThirdparty && storageFolderId)
-        await deleteThirdParty(thirdpartyAccount.providerId);
+        deleteThirdParty(thirdpartyAccount.providerId);
 
       this.onOpenNewRoom(room);
 

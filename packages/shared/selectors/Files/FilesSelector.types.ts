@@ -36,7 +36,6 @@ import {
   TFolder,
   TFolderSecurity,
 } from "../../api/files/types";
-import SocketIOHelper from "../../utils/socket";
 import { DeviceType, FolderType, RoomsType } from "../../enums";
 import { TRoomSecurity } from "../../api/rooms/types";
 
@@ -58,8 +57,6 @@ export interface UseRootHelperProps {
 }
 
 export type UseSocketHelperProps = {
-  socketHelper: SocketIOHelper;
-  socketSubscribers: Set<string>;
   setItems: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
   setBreadCrumbs: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
   setTotal: React.Dispatch<React.SetStateAction<number>>;
@@ -154,8 +151,6 @@ export type FilesSelectorProps = TSelectorHeader &
       }
     | { getIcon?: never; filesSettings: TFilesSettings }
   ) & {
-    socketHelper: SocketIOHelper;
-    socketSubscribers: Set<string>;
     disabledItems: (string | number)[];
     filterParam?: string;
     withoutBackButton: boolean;

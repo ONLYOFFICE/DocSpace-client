@@ -368,9 +368,21 @@ class SelectedFolderStore {
   };
 
   unsubscribe: (selectedFolder: TSetSelectedFolder | null) => void = (
-    selectedFolder: TSetSelectedFolder | null,
+    selectedFolder,
   ) => {
-    const roomParts = this.pathParts.slice(1).map((path) => `DIR-${path.id}`);
+    const roomParts = this.pathParts
+      .slice(1)
+      .filter(
+        (path) =>
+          !(
+            selectedFolder?.folders?.some((folder) => folder.id === path.id) ||
+            selectedFolder?.pathParts?.some(
+              (nextPath) => nextPath.id === path.id,
+            )
+          ),
+      )
+      .map((path) => `DIR-${path.id}`)
+      .filter((path) => SocketHelper.socketSubscribers.has(path));
 
     SocketHelper.emit(SocketCommands.Unsubscribe, {
       roomParts,
@@ -379,8 +391,10 @@ class SelectedFolderStore {
 
     if (selectedFolder) {
       const newRoomParts =
-        selectedFolder.pathParts?.slice(1).map((path) => `DIR-${path.id}`) ??
-        [];
+        selectedFolder.pathParts
+          ?.slice(1)
+          .map((path) => `DIR-${path.id}`)
+          .filter((path) => !SocketHelper.socketSubscribers.has(path)) ?? [];
 
       SocketHelper.emit(SocketCommands.Subscribe, {
         roomParts: newRoomParts,

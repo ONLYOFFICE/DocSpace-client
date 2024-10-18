@@ -1081,7 +1081,9 @@ class FilesStore {
 
     if (this.folders?.length > 0) {
       SocketHelper.emit(SocketCommands.Subscribe, {
-        roomParts: this.folders.map((f) => `DIR-${f.id}`),
+        roomParts: this.folders
+          .map((f) => `DIR-${f.id}`)
+          .filter((path) => !SocketHelper.socketSubscribers.has(path)),
         individual: true,
       });
     }

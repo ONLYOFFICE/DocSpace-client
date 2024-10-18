@@ -1,0 +1,14 @@
+services:
+  tests-local:
+    build:
+      context: ../..
+      dockerfile: packages/login/Dockerfile
+    working_dir: /app
+    volumes:
+      - ./__tests__:/app/packages/login/__tests__
+
+  tests-git:
+    build:
+      context: ../..
+      dockerfile: packages/login/Dockerfile
+    working_dir: /app

@@ -354,49 +354,39 @@ class SelectedFolderStore {
   //   };
   // };
 
-  handleSocketSubscriptions: (
-    selectedFolder: TSetSelectedFolder | null,
-  ) => void = (selectedFolder) => {
-    const roomParts = this.pathParts
-      .slice(1)
-      .filter(
-        (path) =>
-          !(
-            selectedFolder?.folders?.some((folder) => folder.id === path.id) ||
-            (selectedFolder?.pathParts?.some(
-              (nextPath) => nextPath.id === path.id,
-            ) &&
-              SocketHelper.socketSubscribers.has(`DIR-${path.id}`))
-          ),
-      )
-      .map((path) => `DIR-${path.id}`);
-
-    SocketHelper.emit(SocketCommands.Unsubscribe, {
-      roomParts,
-      individual: true,
-    });
-
-    if (selectedFolder) {
-      const newRoomParts =
-        selectedFolder.pathParts
-          ?.slice(1)
-          .map((path) => `DIR-${path.id}`)
-          .filter((path) => !SocketHelper.socketSubscribers.has(path)) ?? [];
-
-      SocketHelper.emit(SocketCommands.Subscribe, {
-        roomParts: newRoomParts,
-        individual: true,
-      });
-    }
-  };
-
   setSelectedFolder: (selectedFolder: TSetSelectedFolder | null) => void = (
     selectedFolder,
   ) => {
-    this.handleSocketSubscriptions(selectedFolder);
+    const currentId = this.id;
+    const isRoot = this?.rootFolderId === currentId;
     this.toDefault();
 
+    if (
+      currentId !== null &&
+      SocketHelper.socketSubscribers.has(`DIR-${currentId}`) &&
+      !isRoot
+    ) {
+      SocketHelper.emit(SocketCommands.Unsubscribe, {
+        roomParts: `DIR-${currentId}`,
+        individual: true,
+      });
+    }
+
+    if (
+      selectedFolder &&
+      !SocketHelper.socketSubscribers.has(`DIR-${selectedFolder.id}`)
+    ) {
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: `DIR-${selectedFolder.id}`,
+        individual: true,
+      });
+    }
+
     if (selectedFolder) {
+      const selectedFolderItems = Object.keys(selectedFolder);
+
+      if (!selectedFolderItems.includes("roomType")) this.roomType = null;
+
       setDocumentTitle(selectedFolder.title);
 
       Object.entries(selectedFolder).forEach(([key, item]) => {

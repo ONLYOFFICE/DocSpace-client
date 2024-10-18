@@ -317,11 +317,16 @@ class FilesStore {
 
       const foundIndex =
         folderId && this.folders.findIndex((x) => x.id === folderId);
-      if (foundIndex == -1) return;
+
+      const treeFoundIndex =
+        folderId &&
+        this.treeFoldersStore.treeFolders.findIndex((x) => x.id === folderId);
+      if (foundIndex === -1 && treeFoundIndex === -1) return;
 
       runInAction(() => {
-        this.folders[foundIndex].new = count >= 0 ? count : 0;
-        this.treeFoldersStore.fetchTreeFolders();
+        if (foundIndex > -1)
+          this.folders[foundIndex].new = count >= 0 ? count : 0;
+        if (treeFoundIndex > -1) this.treeFoldersStore.fetchTreeFolders();
       });
     });
 
@@ -1036,18 +1041,30 @@ class FilesStore {
   setFiles = (files) => {
     if (files.length === 0 && this.files.length === 0) return;
 
-    if (this.files?.length > 0) {
+    const roomPartsToUnsub = this.files
+      .filter(
+        (f) =>
+          !files.some((nf) => nf.id === f.id) &&
+          SocketHelper.socketSubscribers.has(`FILE-${f.id}`),
+      )
+      .map((f) => `FILE-${f.id}`);
+
+    const roomPartsToSub = files
+      .map((f) => `FILE-${f.id}`)
+      .filter((f) => !SocketHelper.socketSubscribers.has(f));
+
+    if (roomPartsToUnsub.length > 0) {
       SocketHelper.emit(SocketCommands.Unsubscribe, {
-        roomParts: this.files.map((f) => `FILE-${f.id}`),
+        roomParts: roomPartsToUnsub,
         individual: true,
       });
     }
 
     this.files = files;
 
-    if (this.files?.length > 0) {
+    if (roomPartsToSub.length > 0) {
       SocketHelper.emit(SocketCommands.Subscribe, {
-        roomParts: this.files.map((f) => `FILE-${f.id}`),
+        roomParts: roomPartsToSub,
         individual: true,
       });
 
@@ -1062,28 +1079,31 @@ class FilesStore {
   setFolders = (folders) => {
     if (folders.length === 0 && this.folders.length === 0) return;
 
-    if (this.folders?.length > 0) {
-      const ids = this.folders
-        .map((f) => {
-          if (this.selectedFolderStore.id === f.id) return "";
-          return `DIR-${f.id}`;
-        })
-        .filter((id) => id);
+    const roomPartsToUnsub = this.folders
+      .filter(
+        (f) =>
+          !folders.some((nf) => nf.id === f.id) &&
+          SocketHelper.socketSubscribers.has(`DIR-${f.id}`) &&
+          this.selectedFolderStore.id !== f.id,
+      )
+      .map((f) => `DIR-${f.id}`);
 
-      if (ids.length)
-        SocketHelper.emit(SocketCommands.Unsubscribe, {
-          roomParts: ids,
-          individual: true,
-        });
+    const roomPartsToSub = folders
+      .map((f) => `DIR-${f.id}`)
+      .filter((f) => !SocketHelper.socketSubscribers.has(f));
+
+    if (roomPartsToUnsub.length > 0) {
+      SocketHelper.emit(SocketCommands.Unsubscribe, {
+        roomParts: roomPartsToUnsub,
+        individual: true,
+      });
     }
 
     this.folders = folders;
 
-    if (this.folders?.length > 0) {
+    if (roomPartsToSub.length > 0) {
       SocketHelper.emit(SocketCommands.Subscribe, {
-        roomParts: this.folders
-          .map((f) => `DIR-${f.id}`)
-          .filter((path) => !SocketHelper.socketSubscribers.has(path)),
+        roomParts: roomPartsToSub,
         individual: true,
       });
     }
@@ -1637,18 +1657,18 @@ class FilesStore {
             .reverse();
         });
 
-        this.selectedFolderStore.setSelectedFolder({
-          folders: data.folders,
-          ...data.current,
-          inRoom: !!data.current.inRoom,
-          isRoom: !!data.current.roomType,
-          pathParts: data.pathParts,
-          navigationPath,
-          ...{ new: data.new },
-          // type,
-        });
-
         runInAction(() => {
+          this.selectedFolderStore.setSelectedFolder({
+            folders: data.folders,
+            ...data.current,
+            inRoom: !!data.current.inRoom,
+            isRoom: !!data.current.roomType,
+            pathParts: data.pathParts,
+            navigationPath,
+            ...{ new: data.new },
+            // type,
+          });
+
           const isEmptyList = [...data.folders, ...data.files].length === 0;
 
           if (filter && isEmptyList) {
@@ -1877,15 +1897,15 @@ class FilesStore {
 
           this.setRoomsFilter(filterData);
 
-          this.selectedFolderStore.setSelectedFolder({
-            folders: data.folders,
-            ...data.current,
-            pathParts: data.pathParts,
-            navigationPath: [],
-            ...{ new: data.new },
-          });
-
           runInAction(() => {
+            this.selectedFolderStore.setSelectedFolder({
+              folders: data.folders,
+              ...data.current,
+              pathParts: data.pathParts,
+              navigationPath: [],
+              ...{ new: data.new },
+            });
+
             const isEmptyList = data.folders.length === 0;
             if (filter && isEmptyList) {
               const {

@@ -59,14 +59,18 @@ class TreeFoldersStore {
   };
 
   listenTreeFolders = (treeFolders) => {
-    if (treeFolders.length > 0) {
-      SocketHelper.emit(SocketCommands.Unsubscribe, {
-        roomParts: treeFolders.map((f) => `DIR-${f.id}`),
-        individual: true,
-      });
+    const roomParts = treeFolders
+      .map((f) => `DIR-${f.id}`)
+      .filter((f) => !SocketHelper.socketSubscribers.has(f));
+
+    if (roomParts.length > 0) {
+      // SocketHelper.emit(SocketCommands.Unsubscribe, {
+      //   roomParts: treeFolders.map((f) => `DIR-${f.id}`),
+      //   individual: true,
+      // });
 
       SocketHelper.emit(SocketCommands.Subscribe, {
-        roomParts: treeFolders.map((f) => `DIR-${f.id}`),
+        roomParts,
         individual: true,
       });
     }

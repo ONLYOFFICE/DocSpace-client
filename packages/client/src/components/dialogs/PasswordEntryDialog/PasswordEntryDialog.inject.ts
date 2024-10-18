@@ -23,53 +23,25 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { observer, inject } from "mobx-react";
+import PasswordEntryDialog from "./PasswordEntryDialog.component";
+import {
+  ExternalPasswordEntryDialogProps,
+  InjectedPasswordEntryDialogProps,
+} from "./PasswordEntryDialog.types";
 
-import styled, { css } from "styled-components";
+export default inject<
+  TStore,
+  ExternalPasswordEntryDialogProps,
+  InjectedPasswordEntryDialogProps
+>(({ dialogsStore, filesActionsStore, contextOptionsStore }) => {
+  const { setPasswordEntryDialog: openPasswordEntryDialog } = dialogsStore;
+  const { openItemAction } = filesActionsStore;
+  const { onClickDownload } = contextOptionsStore;
 
-import { tablet, mobile } from "@docspace/shared/utils";
-import Headline from "@docspace/shared/components/headline/Headline";
-
-const StyledHeadline = styled(Headline)`
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 24px;
-  margin-inline-start: 18px;
-
-  @media ${tablet} {
-    font-size: 21px;
-    line-height: 28px;
-  }
-`;
-
-const StyledContainer = styled.div`
-  width: 100%;
-  height: 32px;
-  display: flex;
-
-  align-items: center;
-
-  .public-room-header_separator {
-    margin-block: 0;
-    margin-inline: 15px 16px;
-    border-inline-start: ${(props) => props.theme.publicRoom.border};
-    height: 21px;
-  }
-
-  @media ${tablet} {
-    width: 100%;
-    padding: 16px 0 0px;
-  }
-
-  @media ${mobile} {
-    width: 100%;
-    padding: 12px 0 0;
-  }
-`;
-
-const StyledToast = styled.div`
-  .public-toast_link {
-    color: ${(props) => props.theme.publicRoom.linkColor} !important;
-  }
-`;
-
-export { StyledHeadline, StyledContainer, StyledToast };
+  return {
+    onClose: openPasswordEntryDialog,
+    openItemAction,
+    onClickDownload,
+  };
+})(observer(PasswordEntryDialog as React.FC<ExternalPasswordEntryDialogProps>));

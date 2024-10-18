@@ -28,8 +28,8 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 
 import { DeviceType, RoomsType } from "@docspace/shared/enums";
-import Planet12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/planet.react.svg?url";
 import { toastr } from "@docspace/shared/components/toast";
+import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 
 export default function withFileActions(WrappedFileItem) {
   class WithFileActions extends React.Component {
@@ -322,13 +322,7 @@ export default function withFileActions(WrappedFileItem) {
 
       const checkedProps = id <= 0 ? false : isSelected;
 
-      const showPlanetIcon =
-        (item.roomType === RoomsType.PublicRoom ||
-          item.roomType === RoomsType.FormRoom ||
-          item.roomType === RoomsType.CustomRoom) &&
-        item.shared;
-
-      const badgeUrl = showPlanetIcon ? Planet12ReactSvgUrl : null;
+      const badgeUrl = getRoomBadgeUrl(item);
 
       return (
         <WrappedFileItem

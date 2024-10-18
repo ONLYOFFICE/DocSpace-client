@@ -24,52 +24,51 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+export const SHOW_LOADER_TIMER = 200;
+export const MIN_LOADER_TIMER = 500;
 
-import { tablet, mobile } from "@docspace/shared/utils";
-import Headline from "@docspace/shared/components/headline/Headline";
+export function createLoader(
+  loaderTimer = SHOW_LOADER_TIMER,
+  minLoaderTimer = MIN_LOADER_TIMER,
+) {
+  let timer: number | undefined;
+  let startedLoader: Date | undefined;
 
-const StyledHeadline = styled(Headline)`
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 24px;
-  margin-inline-start: 18px;
+  const clearState = () => {
+    startedLoader = undefined;
+    timer = undefined;
+  };
 
-  @media ${tablet} {
-    font-size: 21px;
-    line-height: 28px;
-  }
-`;
+  const startLoader = (callback: Function) => {
+    timer = window.setTimeout(() => {
+      startedLoader = new Date();
+      callback();
+    }, loaderTimer);
 
-const StyledContainer = styled.div`
-  width: 100%;
-  height: 32px;
-  display: flex;
+    return timer;
+  };
 
-  align-items: center;
+  const endLoader = (callback: Function): void => {
+    if (startedLoader) {
+      const currentDate = new Date();
+      const diff = Math.abs(startedLoader.getTime() - currentDate.getTime());
 
-  .public-room-header_separator {
-    margin-block: 0;
-    margin-inline: 15px 16px;
-    border-inline-start: ${(props) => props.theme.publicRoom.border};
-    height: 21px;
-  }
+      clearState();
 
-  @media ${tablet} {
-    width: 100%;
-    padding: 16px 0 0px;
-  }
+      if (diff >= minLoaderTimer) {
+        callback();
+        return;
+      }
 
-  @media ${mobile} {
-    width: 100%;
-    padding: 12px 0 0;
-  }
-`;
+      window.setTimeout(() => {
+        callback();
+      }, minLoaderTimer - diff);
+    }
 
-const StyledToast = styled.div`
-  .public-toast_link {
-    color: ${(props) => props.theme.publicRoom.linkColor} !important;
-  }
-`;
+    clearInterval(timer);
+    callback();
+    clearState();
+  };
 
-export { StyledHeadline, StyledContainer, StyledToast };
+  return { startLoader, endLoader };
+}

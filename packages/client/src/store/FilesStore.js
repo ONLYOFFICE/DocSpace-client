@@ -1031,11 +1031,13 @@ class FilesStore {
           !files.some((nf) => nf.id === f.id) &&
           SocketHelper.socketSubscribers.has(`FILE-${f.id}`),
       )
-      .map((f) => `FILE_${f.id}`);
+      .map((f) => `FILE-${f.id}`);
 
     const roomPartsToSub = files
-      .map((f) => `FILE_${f.id}`)
+      .map((f) => `FILE-${f.id}`)
       .filter((f) => !SocketHelper.socketSubscribers.has(f));
+
+    console.log(roomPartsToSub, roomPartsToUnsub, [...files]);
 
     if (roomPartsToUnsub.length > 0) {
       SocketHelper.emit(SocketCommands.Unsubscribe, {

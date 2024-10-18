@@ -452,7 +452,9 @@ const PeopleSelector = ({
     status?: EmployeeStatus,
   ) => {
     return (
-      <div style={{ width: "100%" }}>
+      <div
+        style={{ width: "100%", overflow: "hidden", marginInlineEnd: "16px" }}
+      >
         <Box displayProp="flex" alignItems="center" gapProp="8px">
           <Text
             className="label"

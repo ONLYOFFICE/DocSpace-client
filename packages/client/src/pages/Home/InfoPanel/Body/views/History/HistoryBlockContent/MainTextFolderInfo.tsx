@@ -84,7 +84,7 @@ const HistoryMainTextFolderInfo = ({
         className={className}
         title={isFromFolder ? fromParentTitle : parentTitle}
       >
-        {isFromFolder ? sourceDestination : destination}
+        {` ${isFromFolder ? sourceDestination : destination}`}
       </span>
     </StyledHistoryBlockMessage>
   );

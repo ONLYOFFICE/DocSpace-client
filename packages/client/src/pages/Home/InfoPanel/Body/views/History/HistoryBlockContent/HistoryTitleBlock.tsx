@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { Text } from "@docspace/shared/components/text";
+import { classNames } from "@docspace/shared/utils";
 import { useFeedTranslation } from "../useFeedTranslation";
 import { getDateTime } from "../../../helpers/HistoryHelper";
 import { getFeedInfo } from "../FeedInfo";
@@ -40,8 +41,16 @@ const HistoryTitleBlock = ({ t, feed }: HistoryBlockContentProps) => {
 
   const hasRelatedItems = feed.related.length > 0;
 
+  const isDisplayFolderInfo =
+    (targetType === "file" || targetType === "folder") &&
+    actionType !== "delete";
+
   return (
-    <div className="title">
+    <div
+      className={classNames("title", {
+        "without-break": targetType === "group",
+      })}
+    >
       {targetType === "user" && actionType === "update" && (
         <HistoryUserList feed={feed} />
       )}
@@ -54,14 +63,24 @@ const HistoryTitleBlock = ({ t, feed }: HistoryBlockContentProps) => {
       )}
 
       <div className="action-title">
-        <Text className="action-title-text" truncate>
+        <Text
+          as="span"
+          className={classNames("action-title-text", {
+            "text-combined":
+              isDisplayFolderInfo ||
+              targetType === "group" ||
+              targetType === "user",
+          })}
+        >
           {useFeedTranslation(t, feed, hasRelatedItems)}
         </Text>
+        {hasRelatedItems && (
+          <Text as="span" className="users-counter">
+            {` (${feed.related.length + 1}).`}
+          </Text>
+        )}
+        {isDisplayFolderInfo && <HistoryMainTextFolderInfo feed={feed} />}
       </div>
-
-      {hasRelatedItems && (
-        <Text className="users-counter">({feed.related.length + 1}).</Text>
-      )}
 
       {targetType === "roomExternalLink" && actionType === "create" && (
         <HistoryRoomExternalLink feedData={feed.data} />
@@ -70,9 +89,6 @@ const HistoryTitleBlock = ({ t, feed }: HistoryBlockContentProps) => {
       {feed.related.length === 0 &&
         targetType === "group" &&
         actionType !== "update" && <HistoryGroupList feed={feed} />}
-
-      {(targetType === "file" || targetType === "folder") &&
-        actionType !== "delete" && <HistoryMainTextFolderInfo feed={feed} />}
 
       {feed.related.length === 0 &&
         targetType === "user" &&

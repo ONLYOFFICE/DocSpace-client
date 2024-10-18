@@ -65,19 +65,16 @@ const StyledHistoryBlock = styled.div`
     overflow: hidden;
 
     .title {
+      font-size: 14px;
+      font-weight: 600;
       display: flex;
       flex-direction: row;
       align-items: center;
       gap: 4px;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
+      word-break: break-all;
       .name {
         font-weight: 600;
         font-size: 14px;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
       }
       .date {
         white-space: nowrap;
@@ -95,15 +92,20 @@ const StyledHistoryBlock = styled.div`
         font-size: 14px;
       }
     }
+    .without-break {
+      word-break: unset;
+    }
 
     .action-title {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-
+      text-wrap: nowrap;
       &-text {
         font-size: 14px;
         font-weight: 600;
+        text-wrap: wrap;
+      }
+
+      .text-combined {
+        text-wrap: nowrap;
       }
     }
   }
@@ -115,15 +117,11 @@ const StyledHistoryDisplaynameBlock = styled.div`
   }
 `;
 
-const StyledHistoryBlockMessage = styled.div`
+const StyledHistoryBlockMessage = styled.span`
   font-weight: 600;
   font-size: 14px;
   line-height: 20px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
 
-  display: inline-flex;
   gap: 4px;
   max-width: 100%;
 
@@ -149,9 +147,7 @@ const StyledHistoryBlockMessage = styled.div`
   .source-folder-label {
     max-width: 100%;
     color: ${(props) => props.theme.infoPanel.history.locationIconColor};
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+    text-wrap: wrap;
   }
 
   .source-folder-label {

@@ -48,4 +48,4 @@ export default inject<TStore>(({ infoPanelStore }) => {
   return {
     infoPanelSelection,
   };
-})(withTranslation(["InfoPanel"])(observer(HistoryMainText)));
+})(withTranslation(["InfoPanel", "Translations"])(observer(HistoryMainText)));

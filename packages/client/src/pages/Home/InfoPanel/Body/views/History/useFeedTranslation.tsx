@@ -35,6 +35,10 @@ export const useFeedTranslation = (
       return t("InfoPanel:FileCopied");
     case "FileDeleted":
       return t("InfoPanel:FileDeleted");
+    case "FileLocked":
+      return `${t("Translations:FileLocked")}.`;
+    case "FileUnlocked":
+      return `${t("Translations:FileUnlocked")}.`;
     case "FileIndexChanged":
     case "FolderIndexChanged":
       return t("InfoPanel:IndexChanged");
@@ -149,6 +153,8 @@ export const useFeedTranslation = (
       return t("InfoPanel:RoomGroupRemove");
     case "RoomWatermarkSet":
       return t("InfoPanel:RoomWatermarkSet");
+    case "RoomWatermarkDisabled":
+      return t("InfoPanel:RoomWatermarkDisabled");
     case "RoomIndexingEnabled":
       return t("InfoPanel:RoomIndexingEnabled");
     case "RoomIndexingDisabled":
@@ -191,6 +197,10 @@ export const useFeedTranslation = (
       return t("InfoPanel:RoomDenyDownloadEnabled");
     case "RoomDenyDownloadDisabled":
       return t("InfoPanel:RoomDenyDownloadDisabled");
+    case "RoomArchived":
+      return t("InfoPanel:RoomArchived");
+    case "RoomUnarchived":
+      return t("InfoPanel:RoomUnarchived");
     case "FormSubmit":
       return t("InfoPanel:FilledOutForm");
     case "FormOpenedForFilling":

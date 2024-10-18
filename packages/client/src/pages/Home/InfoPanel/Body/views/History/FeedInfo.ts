@@ -12,6 +12,10 @@ export enum FeedAction {
   Reorder = "reorderIndex",
   Submitted = "submitted",
   StartedFilling = "startedFilling",
+  Locked = "locked",
+  Unlocked = "unlocked",
+  Archived = "archived",
+  Unarchived = "unarchived",
 }
 
 enum FeedTarget {
@@ -90,7 +94,16 @@ export const feedInfo = [
     targetType: `${FeedTarget.File}`,
     actionType: `${FeedAction.StartedFilling}`,
   },
-  //
+  {
+    key: "FileLocked",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.Locked}`,
+  },
+  {
+    key: "FileUnlocked",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.Unlocked}`,
+  },
   // FOLDER
   {
     key: "FolderCreated",
@@ -150,6 +163,11 @@ export const feedInfo = [
     actionType: `${FeedAction.Create}`,
   },
   {
+    key: "RoomWatermarkDisabled",
+    targetType: `${FeedTarget.Room}`,
+    actionType: `${FeedAction.Delete}`,
+  },
+  {
     key: "RoomIndexingEnabled",
     targetType: `${FeedTarget.Room}`,
     actionType: `${FeedAction.Create}`,
@@ -159,7 +177,6 @@ export const feedInfo = [
     targetType: `${FeedTarget.Room}`,
     actionType: `${FeedAction.Delete}`,
   },
-
   {
     key: "RoomLifeTimeSet",
     targetType: `${FeedTarget.Room}`,
@@ -179,6 +196,16 @@ export const feedInfo = [
     key: "RoomDenyDownloadDisabled",
     targetType: `${FeedTarget.Room}`,
     actionType: `${FeedAction.Delete}`,
+  },
+  {
+    key: "RoomArchived",
+    targetType: `${FeedTarget.Room}`,
+    actionType: `${FeedAction.Archived}`,
+  },
+  {
+    key: "RoomUnarchived",
+    targetType: `${FeedTarget.Room}`,
+    actionType: `${FeedAction.Unarchived}`,
   },
   // ROOM TAGS
   {

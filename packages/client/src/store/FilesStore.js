@@ -317,11 +317,16 @@ class FilesStore {
 
       const foundIndex =
         folderId && this.folders.findIndex((x) => x.id === folderId);
-      if (foundIndex == -1) return;
+
+      const treeFoundIndex =
+        folderId &&
+        this.treeFoldersStore.treeFolders.findIndex((x) => x.id === folderId);
+      if (foundIndex === -1 && treeFoundIndex === -1) return;
 
       runInAction(() => {
-        this.folders[foundIndex].new = count >= 0 ? count : 0;
-        this.treeFoldersStore.fetchTreeFolders();
+        if (foundIndex > -1)
+          this.folders[foundIndex].new = count >= 0 ? count : 0;
+        if (treeFoundIndex > -1) this.treeFoldersStore.fetchTreeFolders();
       });
     });
 

@@ -23,53 +23,53 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import Planet12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/planet.react.svg?url";
+import Link12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/link.svg?url";
 
-import styled, { css } from "styled-components";
+import SharedLinkIconURL from "PUBLIC_DIR/images/icons/24/shared.svg?url";
+import PlanetIconURL from "PUBLIC_DIR/images/icons/24/planet.react.svg?url";
 
-import { tablet, mobile } from "@docspace/shared/utils";
-import Headline from "@docspace/shared/components/headline/Headline";
+import { RoomsType } from "../enums";
+import type { Nullable } from "../types";
 
-const StyledHeadline = styled(Headline)`
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 24px;
-  margin-inline-start: 18px;
+type ItemType = {
+  shared: boolean;
+  roomType: RoomsType;
+  external?: boolean;
+};
 
-  @media ${tablet} {
-    font-size: 21px;
-    line-height: 28px;
-  }
-`;
+type SizeIcon = 12 | 24;
+type IconsURLType = "link" | "planet";
+type IconsType = Record<SizeIcon, Record<IconsURLType, string>>;
 
-const StyledContainer = styled.div`
-  width: 100%;
-  height: 32px;
-  display: flex;
+const icons: IconsType = {
+  12: {
+    link: Link12ReactSvgUrl,
+    planet: Planet12ReactSvgUrl,
+  },
+  24: {
+    link: SharedLinkIconURL,
+    planet: PlanetIconURL,
+  },
+};
 
-  align-items: center;
+export const getRoomBadgeUrl = (
+  item?: Nullable<ItemType>,
+  size: SizeIcon = 12,
+) => {
+  if (!item) return null;
 
-  .public-room-header_separator {
-    margin-block: 0;
-    margin-inline: 15px 16px;
-    border-inline-start: ${(props) => props.theme.publicRoom.border};
-    height: 21px;
-  }
+  const { link, planet } = icons[size];
 
-  @media ${tablet} {
-    width: 100%;
-    padding: 16px 0 0px;
-  }
+  if (item.external) return link;
 
-  @media ${mobile} {
-    width: 100%;
-    padding: 12px 0 0;
-  }
-`;
+  const showPlanetIcon =
+    (item.roomType === RoomsType.PublicRoom ||
+      item.roomType === RoomsType.FormRoom ||
+      item.roomType === RoomsType.CustomRoom) &&
+    item.shared;
 
-const StyledToast = styled.div`
-  .public-toast_link {
-    color: ${(props) => props.theme.publicRoom.linkColor} !important;
-  }
-`;
+  if (showPlanetIcon) return planet;
 
-export { StyledHeadline, StyledContainer, StyledToast };
+  return null;
+};

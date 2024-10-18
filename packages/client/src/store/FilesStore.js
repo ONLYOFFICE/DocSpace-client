@@ -47,7 +47,7 @@ import SocketHelper, {
   SocketEvents,
 } from "@docspace/shared/utils/socket";
 
-import { RoomsTypes } from "@docspace/shared/utils";
+import { isLockedSharedRoom, RoomsTypes } from "@docspace/shared/utils";
 import { getViewForCurrentRoom } from "@docspace/shared/utils/getViewForCurrentRoom";
 
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -663,7 +663,18 @@ class FilesStore {
       });
     } else if (opt?.type === "folder" && opt?.id) {
       const foundIndex = this.folders.findIndex((x) => x.id === opt?.id);
-      if (foundIndex == -1) return;
+      if (foundIndex == -1) {
+        const removedId = opt.id;
+        const pathParts = this.selectedFolderStore.pathParts;
+
+        const includePathPart = pathParts.some(({ id }) => id === removedId);
+
+        if (includePathPart) {
+          window.DocSpace.navigate("/");
+        }
+
+        return;
+      }
 
       this.selectedFolderStore.setFoldersCount(
         this.selectedFolderStore.foldersCount - 1,
@@ -1070,7 +1081,9 @@ class FilesStore {
 
     if (this.folders?.length > 0) {
       SocketHelper.emit(SocketCommands.Subscribe, {
-        roomParts: this.folders.map((f) => `DIR-${f.id}`),
+        roomParts: this.folders
+          .map((f) => `DIR-${f.id}`)
+          .filter((path) => !SocketHelper.socketSubscribers.has(path)),
         individual: true,
       });
     }
@@ -1729,15 +1742,16 @@ class FilesStore {
 
         const isThirdPartyError = isNaN(+folderId);
 
-        if (requestCounter > 0 && !isThirdPartyError) return;
-
-        requestCounter++;
         const isUserError = [
           NotFoundHttpCode,
           ForbiddenHttpCode,
           PaymentRequiredHttpCode,
           UnauthorizedHttpCode,
         ].includes(err?.response?.status);
+
+        if (requestCounter > 0 && !isThirdPartyError && !isUserError) return;
+
+        requestCounter++;
 
         if (isUserError && !isThirdPartyError) {
           if (isPublicRoom()) return Promise.reject(err);
@@ -1863,6 +1877,14 @@ class FilesStore {
 
           this.setRoomsFilter(filterData);
 
+          this.selectedFolderStore.setSelectedFolder({
+            folders: data.folders,
+            ...data.current,
+            pathParts: data.pathParts,
+            navigationPath: [],
+            ...{ new: data.new },
+          });
+
           runInAction(() => {
             const isEmptyList = data.folders.length === 0;
             if (filter && isEmptyList) {
@@ -1909,13 +1931,6 @@ class FilesStore {
           }
 
           this.infoPanelStore.setInfoPanelRoom(null);
-          this.selectedFolderStore.setSelectedFolder({
-            folders: data.folders,
-            ...data.current,
-            pathParts: data.pathParts,
-            navigationPath: [],
-            ...{ new: data.new },
-          });
 
           this.clientLoadingStore.setIsSectionHeaderLoading(false);
 
@@ -2074,7 +2089,7 @@ class FilesStore {
     const canCopy = item.security?.Copy;
     const canCopyLink = item.security?.CopyLink;
     const canDuplicate = item.security?.Duplicate;
-    const canDownload = item.security?.Download;
+    const canDownload = item.security?.Download || isLockedSharedRoom(item);
     const canEmbed = item.security?.Embed;
 
     if (isFile) {
@@ -2420,7 +2435,7 @@ class FilesStore {
       const canEditRoom = item.security?.EditRoom;
       const canDuplicateRoom = item.security?.Duplicate;
 
-      const canViewRoomInfo = item.security?.Read;
+      const canViewRoomInfo = item.security?.Read || isLockedSharedRoom(item);
       const canMuteRoom = item.security?.Mute;
 
       const canChangeOwner = item.security?.ChangeOwner;
@@ -2455,7 +2470,12 @@ class FilesStore {
         "unarchive-room",
         "leave-room",
         "delete",
+        "remove-shared-room",
       ];
+
+      if (!item.external) {
+        roomOptions = this.removeOptions(roomOptions, ["remove-shared-room"]);
+      }
 
       if (optionsToRemove.length) {
         roomOptions = this.removeOptions(roomOptions, optionsToRemove);
@@ -3327,6 +3347,8 @@ class FilesStore {
         startFilling,
         draftLocation,
         expired,
+        external,
+        passwordProtected,
         watermark,
       } = item;
 
@@ -3504,6 +3526,8 @@ class FilesStore {
         startFilling,
         draftLocation,
         expired,
+        external,
+        passwordProtected,
         watermark,
       };
     });

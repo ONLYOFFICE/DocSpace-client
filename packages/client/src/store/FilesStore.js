@@ -1063,8 +1063,6 @@ class FilesStore {
   setFolders = (folders) => {
     if (folders.length === 0 && this.folders.length === 0) return;
 
-    console.log(SocketHelper.socketSubscribers.has(`DIR-13`));
-
     const roomPartsToUnsub = this.folders
       .filter(
         (f) =>

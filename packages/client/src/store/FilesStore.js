@@ -551,8 +551,6 @@ class FilesStore {
     const { infoPanelSelection, updateInfoPanelSelection } =
       this.infoPanelStore;
 
-    console.log(opt);
-
     if (opt?.type === "file" && opt?.data) {
       const file = JSON.parse(opt?.data);
       if (!file || !file.id) return;

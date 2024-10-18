@@ -27,6 +27,7 @@
 import PublicRoomIconUrl from "PUBLIC_DIR/images/public-room.react.svg?url";
 import LifetimeRoomIconUrl from "PUBLIC_DIR/images/lifetime-room.react.svg?url";
 import RoundedArrowSvgUrl from "PUBLIC_DIR/images/rounded arrow.react.svg?url";
+import SharedLinkSvgUrl from "PUBLIC_DIR/images/icons/16/shared.link.svg?url";
 
 import React from "react";
 import { inject, observer } from "mobx-react";
@@ -57,6 +58,7 @@ import { getLifetimePeriodTranslation } from "@docspace/shared/utils/common";
 import { globalColors } from "@docspace/shared/themes";
 import getFilesFromEvent from "@docspace/shared/components/drag-and-drop/get-files-from-event";
 import { toastr } from "@docspace/shared/components/toast";
+import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { useContactsHeader } from "./useContacts";
 
 const StyledContainer = styled.div`
@@ -126,11 +128,27 @@ const StyledContainer = styled.div`
     .title-icon {
       svg {
         path {
-          fill: ${(props) => props.theme.backgroundColor};
+          fill: ${({ theme, isExternalFolder }) =>
+            isExternalFolder
+              ? theme.roomIcon.linkIcon.path
+              : theme.backgroundColor};
         }
         rect {
           stroke: ${(props) => props.theme.backgroundColor};
         }
+      }
+    }
+
+    .header_sign-in-button {
+      margin-inline-start: auto;
+      display: block;
+
+      @media ${tablet} {
+        margin-inline-start: 16px;
+      }
+
+      @media ${mobile} {
+        display: none;
       }
     }
   }
@@ -236,6 +254,9 @@ const SectionHeaderContent = (props) => {
     setReorderDialogVisible,
     setGroupsBufferSelection,
     createFoldersTree,
+    showSignInButton,
+    onSignInClick,
+    signInButtonIsDisabled,
   } = props;
 
   const location = useLocation();
@@ -397,6 +418,16 @@ const SectionHeaderContent = (props) => {
     setReorderDialogVisible(true);
   };
 
+  const getTitleIcon = () => {
+    if (selectedFolder.external && !isPublicRoom) return SharedLinkSvgUrl;
+
+    if (isPublicRoomType && !isPublicRoom) return PublicRoomIconUrl;
+
+    if (isVirtualDataRoomType && selectedFolder.lifetime)
+      return LifetimeRoomIconUrl;
+
+    return "";
+  };
   const onLogoClick = () => {
     moveToPublicRoom(props.rootFolderId);
   };
@@ -514,9 +545,7 @@ const SectionHeaderContent = (props) => {
   const logo = getLogoUrl(WhiteLabelLogoType.LightSmall, !theme.isBase);
   const burgerLogo = getLogoUrl(WhiteLabelLogoType.LeftMenu, !theme.isBase);
 
-  const titleIcon =
-    (isPublicRoomType && !isPublicRoom && PublicRoomIconUrl) ||
-    (isVirtualDataRoomType && selectedFolder.lifetime && LifetimeRoomIconUrl);
+  const titleIcon = getTitleIcon();
 
   const titleIconTooltip = selectedFolder.lifetime
     ? t("Files:RoomFilesLifetime", {
@@ -541,6 +570,7 @@ const SectionHeaderContent = (props) => {
     <Consumer key="header">
       {(context) => (
         <StyledContainer
+          isExternalFolder={selectedFolder.external}
           isRecycleBinFolder={isRecycleBinFolder}
           isVirtualDataRoomType={isVirtualDataRoomType}
         >
@@ -615,6 +645,16 @@ const SectionHeaderContent = (props) => {
                 onContextOptionsClick={onContextOptionsClick}
                 onLogoClick={onLogoClick}
               />
+              {showSignInButton && (
+                <Button
+                  className="header_sign-in-button"
+                  label={t("Common:LoginButton")}
+                  size={ButtonSize.small}
+                  onClick={onSignInClick}
+                  isDisabled={signInButtonIsDisabled}
+                  primary
+                />
+              )}
             </div>
           )}
           {isFrame && (

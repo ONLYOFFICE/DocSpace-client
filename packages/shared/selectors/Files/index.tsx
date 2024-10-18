@@ -68,8 +68,6 @@ import { SettingsContextProvider } from "./contexts/Settings";
 import { LoadersContext, LoadersContextProvider } from "./contexts/Loaders";
 
 const FilesSelectorComponent = ({
-  socketHelper,
-  socketSubscribers,
   disabledItems,
   filterParam,
 
@@ -159,8 +157,6 @@ const FilesSelectorComponent = ({
   const [isInit, setIsInit] = React.useState(true);
 
   const { subscribe, unsubscribe } = useSocketHelper({
-    socketHelper,
-    socketSubscribers,
     disabledItems,
     filterParam,
     withCreate,
@@ -305,6 +301,8 @@ const FilesSelectorComponent = ({
       doubleClickCallback: () => Promise<void>,
     ) => {
       if (item.isFolder) {
+        if (isDoubleClick) return;
+
         setIsFirstLoad(true);
 
         // setItems([]);

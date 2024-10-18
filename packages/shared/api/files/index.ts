@@ -1015,7 +1015,12 @@ export function saveThirdParty(
     providerId,
     isRoomsStorage,
   };
-  return request({ method: "post", url: "files/thirdparty", data });
+  const skipRedirect = true;
+
+  return request(
+    { method: "post", url: "files/thirdparty", data },
+    skipRedirect,
+  );
 }
 
 // TODO: Need update res type
@@ -1513,4 +1518,14 @@ export async function checkIsPDFForm(fileId: string | number) {
     method: "get",
     url: `/files/file/${fileId}/isformpdf`,
   }) as Promise<boolean>;
+}
+
+export async function removeSharedFolder(folderIds: Array<string | number>) {
+  return request({
+    method: "delete",
+    url: `/files/recent`,
+    data: {
+      folderIds,
+    },
+  });
 }

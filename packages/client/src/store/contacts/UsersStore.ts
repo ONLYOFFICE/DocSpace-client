@@ -469,7 +469,10 @@ class UsersStore {
 
           options.push("details");
 
-          if (userRole !== EmployeeType.Guest) {
+          if (
+            userRole !== EmployeeType.Guest &&
+            userRole !== EmployeeType.User
+          ) {
             options.push("reassign-data");
           }
 

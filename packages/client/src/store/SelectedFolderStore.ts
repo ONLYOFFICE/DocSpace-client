@@ -361,7 +361,7 @@ class SelectedFolderStore {
     selectedFolder: TSetSelectedFolder | null,
   ) => void = (selectedFolder) => {
     const currentId = this.id;
-    const isRoot = selectedFolder?.rootFolderId === selectedFolder?.id;
+    const isRoot = this?.rootFolderId === currentId;
     this.toDefault();
 
     if (

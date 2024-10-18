@@ -360,14 +360,17 @@ class SelectedFolderStore {
     // t: TTranslation,
     selectedFolder: TSetSelectedFolder | null,
   ) => void = (selectedFolder) => {
+    const currentId = this.id;
+    const isRoot = selectedFolder?.rootFolderId === currentId;
     this.toDefault();
 
     if (
-      this.id !== null &&
-      SocketHelper.socketSubscribers.has(`DIR-${this.id}`)
+      currentId !== null &&
+      SocketHelper.socketSubscribers.has(`DIR-${currentId}`) &&
+      !isRoot
     ) {
       SocketHelper.emit(SocketCommands.Unsubscribe, {
-        roomParts: `DIR-${this.id}`,
+        roomParts: `DIR-${currentId}`,
         individual: true,
       });
     }

@@ -36,6 +36,7 @@ const {
   white,
   black,
   darkBlack,
+  blueRomb,
 
   grayLight,
   darkGrayLight,
@@ -1896,6 +1897,9 @@ const Dark: TTheme = {
       textColor: grayDark,
       tagColor: grayDarkStrong,
     },
+    expired: {
+      color: darkGrayDark,
+    },
   },
 
   filesArticleBody: {
@@ -3147,6 +3151,11 @@ const Dark: TTheme = {
     backgroundArchive: white,
     opacityBackground: "0.1",
     plusIcon: black,
+
+    linkIcon: {
+      background: black,
+      path: blueRomb,
+    },
   },
 
   plugins: {
@@ -3214,6 +3223,7 @@ const Dark: TTheme = {
 
   publicRoom: {
     border: `1px solid ${lightGraySelected}`,
+    linkColor: lightBlueMain,
   },
   newFilesPanel: {
     borderColor: globalColors.grayDarkStrong,

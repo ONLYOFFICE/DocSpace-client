@@ -75,22 +75,20 @@ export const NewFilesPanelComponent = ({
 
   const markAsReadAction = async () => {
     if (isMarkAsReadRunning) return;
+
     setIsMarkAsReadRunning(true);
-    const folderIDs = isRooms
-      ? data.map(({ items }) => {
-          const roomsIds = items.map((item) => {
-            if ("room" in item) return item.room.id;
 
-            return null;
-          });
+    const folderIDs = [];
 
-          // remove duplicate and null
-          return roomsIds.filter((r, index) => {
-            if (!r || index !== roomsIds.indexOf(r)) return false;
-            return true;
-          });
-        })
-      : [folderId];
+    if (isRooms) {
+      data.forEach(({ items }) => {
+        items.forEach((item) => {
+          if ("room" in item) folderIDs.push(item.room.id);
+        });
+      });
+    } else {
+      folderIDs.push(folderId);
+    }
 
     await markAsRead?.(folderIDs, []);
     setIsMarkAsReadRunning(false);

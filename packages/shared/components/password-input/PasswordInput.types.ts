@@ -70,7 +70,7 @@ export interface PasswordInputProps {
   /** Allows setting the component auto-complete */
   autoComplete?: string;
   /** Facilitates the correct display of values inside the input */
-  inputType: InputType.text | InputType.password;
+  inputType?: InputType.text | InputType.password;
   /** Input name */
   inputName?: string;
   /** Required to associate the password field with the email field */
@@ -156,5 +156,5 @@ export interface PasswordInputProps {
   /** Indicating the password type simulation. Disables the browser password window */
   isSimulateType?: boolean;
   /** Sets simulate input symbol */
-  simulateSymbol: string;
+  simulateSymbol?: string;
 }

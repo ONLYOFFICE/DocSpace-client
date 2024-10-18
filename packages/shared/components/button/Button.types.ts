@@ -62,6 +62,7 @@ export interface ButtonProps {
   minWidth?: string;
   /** Sets the action initiated upon clicking the button */
   onClick?: (e: React.MouseEvent) => void;
+  type?: HTMLButtonElement["type"];
 }
 
 export interface ButtonThemeProps extends ButtonProps {

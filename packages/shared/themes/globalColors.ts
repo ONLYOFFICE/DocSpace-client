@@ -124,6 +124,7 @@ export const globalColors = {
   linuxColor: "#F4BB40",
   androidColor: "#A8D548",
   twitterColor: "#2AA3EF",
+  moonstone: "#35A5D2",
   //
 
   tickColor: "#20D21F",

@@ -108,7 +108,7 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
       isAutoFocussed,
       tooltipAllowedCharacters,
       isSimulateType,
-      simulateSymbol,
+      simulateSymbol = "•",
     }: PasswordInputProps,
     ref,
   ) => {
@@ -711,7 +711,6 @@ PasswordInput.defaultProps = {
   },
   isFullWidth: false,
   isSimulateType: false,
-  simulateSymbol: "•",
 };
 
 export { PasswordInput };

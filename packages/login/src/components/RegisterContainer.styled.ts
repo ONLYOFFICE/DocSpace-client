@@ -28,7 +28,7 @@
 
 import styled from "styled-components";
 
-import { mobile, tablet } from "@docspace/shared/utils";
+import { mobile, tablet, mobileMore } from "@docspace/shared/utils";
 
 export const RegisterContainer = styled.div<{
   registrationForm?: boolean;
@@ -48,8 +48,8 @@ export const RegisterContainer = styled.div<{
     color: ${(props) => props.theme.invitePage.borderColor};
     padding: 32px 0;
 
-    @media ${mobile} {
-      padding: 24px 0;
+    p {
+      line-height: 20px;
     }
   }
 
@@ -67,15 +67,19 @@ export const RegisterContainer = styled.div<{
   .auth-form-fields {
     width: 100%;
 
-    .password-field{
+    .password-field {
       margin-bottom: 24px;
     }
 
-    .email-container{
+    .email-container {
       ${(props) => props.registrationForm && "display:none"};
+
+      .login-button {
+        margin-top: 8px;
+      }
     }
 
-    .terms-conditions{
+    .terms-conditions {
       margin: 20px 0;
     }
 
@@ -90,4 +94,55 @@ export const RegisterContainer = styled.div<{
   .password-field-wrapper {
     min-width: 100%;
   }
-}`;
+
+  .social-buttons-group {
+    button {
+      margin-top: 1px;
+      margin-bottom: 0px;
+    }
+
+    @media ${mobileMore} {
+      .buttonWrapper {
+        margin-bottom: 0px;
+      }
+    }
+  }
+
+  .invitation-info-container {
+    p {
+      line-height: 20px;
+    }
+  }
+
+  .news-subscription {
+    display: flex;
+    align-items: flex-start;
+    padding-bottom: 4px;
+
+    p {
+      line-height: 20px;
+    }
+
+    .checkbox-news {
+      padding-top: 2px;
+
+      svg {
+        margin-inline-end: 8px;
+      }
+    }
+  }
+
+  .login-button {
+    margin-top: 4px;
+  }
+
+  .sign-in-container {
+    p {
+      line-height: 22px !important;
+    }
+  }
+
+  .input-block-icon {
+    padding-inline-end: 12px;
+  }
+`;

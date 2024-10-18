@@ -225,9 +225,19 @@
             "tooltip": "🛠️ Start the \"frontend e2e tests\" task",
           },
           {
-            "label": "e2e model",
-            "task": "Test | Test e2e model",
-            "tooltip": "🛠️ Start the \"frontend e2e tests with generate model\" task",
+            "label": "e2e docker build",
+            "task": "Test | Test e2e docker build",
+            "tooltip": "🛠️ Start the \"test build in docker\" task",
+          },
+          {
+            "label": "e2e docker local",
+            "task": "Test | Test e2e docker local",
+            "tooltip": "🛠️ Start the \"local frontend e2e tests in docker\" task",
+          },
+          {
+            "label": "e2e docker git",
+            "task": "Test | Test e2e docker git",
+            "tooltip": "🛠️ Start the \"remote frontend e2e tests in docker\" task",
           },
         ],
         "tooltip": "🛠️ Client tests tasks",

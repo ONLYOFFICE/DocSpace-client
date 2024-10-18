@@ -165,6 +165,10 @@ class SelectedFolderStore {
 
   order: Nullable<string> = null;
 
+  external: boolean = false;
+
+  passwordProtected: boolean = false;
+
   constructor(settingsStore: SettingsStore) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -216,6 +220,8 @@ class SelectedFolderStore {
       isCustomQuota: this.isCustomQuota,
       order: this.order,
       watermark: this.watermark,
+      passwordProtected: this.passwordProtected,
+      external: this.external,
     };
   };
 
@@ -266,6 +272,8 @@ class SelectedFolderStore {
     this.isCustomQuota = undefined;
     this.order = null;
     this.watermark = null;
+    this.passwordProtected = false;
+    this.external = false;
   };
 
   setFilesCount = (filesCount: number) => {
@@ -346,52 +354,50 @@ class SelectedFolderStore {
   //   };
   // };
 
-  setDefaultValuesIfUndefined: (selectedFolder: TSetSelectedFolder) => void = (
-    selectedFolder,
-  ) => {
-    if (!("type" in selectedFolder)) this.type = null;
-    if (!("providerId" in selectedFolder)) this.providerId = null;
-    if (!("providerItem" in selectedFolder)) this.providerItem = null;
-    if (!("providerKey" in selectedFolder)) this.providerKey = null;
-    if (!("order" in selectedFolder)) this.order = null;
-  };
-
-  setSelectedFolder: (
-    // t: TTranslation,
+  handleSocketSubscriptions: (
     selectedFolder: TSetSelectedFolder | null,
   ) => void = (selectedFolder) => {
+    const roomParts = this.pathParts
+      .slice(1)
+      .filter(
+        (path) =>
+          !(
+            selectedFolder?.folders?.some((folder) => folder.id === path.id) ||
+            (selectedFolder?.pathParts?.some(
+              (nextPath) => nextPath.id === path.id,
+            ) &&
+              SocketHelper.socketSubscribers.has(`DIR-${path.id}`))
+          ),
+      )
+      .map((path) => `DIR-${path.id}`);
+
+    SocketHelper.emit(SocketCommands.Unsubscribe, {
+      roomParts,
+      individual: true,
+    });
+
+    if (selectedFolder) {
+      const newRoomParts =
+        selectedFolder.pathParts
+          ?.slice(1)
+          .map((path) => `DIR-${path.id}`)
+          .filter((path) => !SocketHelper.socketSubscribers.has(path)) ?? [];
+
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: newRoomParts,
+        individual: true,
+      });
+    }
+  };
+
+  setSelectedFolder: (selectedFolder: TSetSelectedFolder | null) => void = (
+    selectedFolder,
+  ) => {
+    this.handleSocketSubscriptions(selectedFolder);
     this.toDefault();
 
-    if (
-      this.id !== null &&
-      SocketHelper.socketSubscribers.has(`DIR-${this.id}`)
-    ) {
-      SocketHelper.emit(SocketCommands.Unsubscribe, {
-        roomParts: `DIR-${this.id}`,
-        individual: true,
-      });
-    }
-
-    if (
-      selectedFolder &&
-      !SocketHelper.socketSubscribers.has(`DIR-${selectedFolder.id}`)
-    ) {
-      SocketHelper.emit(SocketCommands.Subscribe, {
-        roomParts: `DIR-${selectedFolder.id}`,
-        individual: true,
-      });
-    }
-
-    if (!selectedFolder) {
-      this.toDefault();
-    } else {
-      const selectedFolderItems = Object.keys(selectedFolder);
-
-      if (!selectedFolderItems.includes("roomType")) this.roomType = null;
-
+    if (selectedFolder) {
       setDocumentTitle(selectedFolder.title);
-
-      this.setDefaultValuesIfUndefined(selectedFolder);
 
       Object.entries(selectedFolder).forEach(([key, item]) => {
         if (key in this) {
@@ -401,11 +407,11 @@ class SelectedFolderStore {
       });
 
       this.setChangeDocumentsTabs(false);
-    }
 
-    selectedFolder?.pathParts?.forEach((value) => {
-      if (value.roomType) this.setInRoom(true);
-    });
+      selectedFolder.pathParts?.forEach((value) => {
+        if (value.roomType) this.setInRoom(true);
+      });
+    }
   };
 }
 

@@ -125,6 +125,11 @@ class DialogsStore {
 
   shareFolderDialogVisible = false;
   cancelUploadDialogVisible = false;
+  passwordEntryDialogDate = {
+    visible: false,
+    item: null,
+    isDownload: false,
+  };
 
   selectFileFormRoomFilterParam = FilesSelectorFilterTypes.DOCX;
   selectFileFormRoomOpenRoot = false;
@@ -542,6 +547,23 @@ class DialogsStore {
 
   setShareFolderDialogVisible = (visible) => {
     this.shareFolderDialogVisible = visible;
+  };
+
+  /**
+   * @param {boolean =} visible
+   * @param {import("@docspace/shared/api/rooms/types").TRoom =} item
+   * @returns {void}
+   */
+  setPasswordEntryDialog = (
+    visible = false,
+    item = null,
+    isDownload = false,
+  ) => {
+    this.passwordEntryDialogDate = {
+      visible,
+      item,
+      isDownload,
+    };
   };
 
   setCancelUploadDialogVisible = (visible) => {

@@ -1519,3 +1519,13 @@ export async function checkIsPDFForm(fileId: string | number) {
     url: `/files/file/${fileId}/isformpdf`,
   }) as Promise<boolean>;
 }
+
+export async function removeSharedFolder(folderIds: Array<string | number>) {
+  return request({
+    method: "delete",
+    url: `/files/recent`,
+    data: {
+      folderIds,
+    },
+  });
+}

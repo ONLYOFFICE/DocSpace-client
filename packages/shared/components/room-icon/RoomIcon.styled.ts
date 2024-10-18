@@ -135,15 +135,10 @@ const StyledIcon = styled.div<{
   .room-icon_badge {
     z-index: 2;
     position: absolute;
-    margin-block: 24px 0;
-    margin-inline: 24px 0;
+    margin-block: ${({ size }) => (size === "96px" ? "80px 0" : "24px 0")};
+    margin-inline: ${({ size }) => (size === "96px" ? "80px 0" : "24px 0")};
 
     .room-icon-button {
-      width: 12px;
-      height: 12px;
-      border: ${(props) => `1px solid ${props.theme.backgroundColor}`};
-      border-radius: 50%;
-
       svg {
         path {
           fill: ${(props) => props.theme.backgroundColor};
@@ -152,7 +147,30 @@ const StyledIcon = styled.div<{
           stroke: ${(props) => props.theme.backgroundColor};
         }
       }
+
+      .link {
+        path {
+          fill: ${(props) => props.theme.roomIcon.linkIcon.path};
+        }
+
+        .link-background {
+          stroke: ${(props) => props.theme.roomIcon.linkIcon.background};
+          fill: ${(props) => props.theme.roomIcon.linkIcon.background};
+        }
+      }
     }
+
+    .room-icon-button:has(svg:not(.link)) {
+      width: ${({ size }) => (size === "96px" ? "28px" : "12px")};
+      height: ${({ size }) => (size === "96px" ? "28px" : "12px")};
+      border: ${(props) => `1px solid ${props.theme.backgroundColor}`};
+      border-radius: 50%;
+    }
+  }
+
+  .room-icon_badge:has(.link) {
+    margin-block: ${({ size }) => (size === "96px" ? "74px 0" : "24px 0")};
+    margin-inline: ${({ size }) => (size === "96px" ? "74px 0" : "24px 0")};
   }
 
   .room-icon-container {

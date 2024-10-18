@@ -47,7 +47,7 @@ const {
   white,
   black,
   darkBlack,
-
+  moonstone,
   lightGrayBlackout,
   grayLight,
   darkGrayLight,
@@ -1903,6 +1903,10 @@ export const getBaseTheme = () => {
         textColor: gray,
         tagColor: grayStrong,
       },
+
+      expired: {
+        color: grayText,
+      },
     },
 
     filesArticleBody: {
@@ -3159,6 +3163,11 @@ export const getBaseTheme = () => {
       backgroundArchive: gray,
       opacityBackground: "1",
       plusIcon: white,
+
+      linkIcon: {
+        background: white,
+        path: moonstone,
+      },
     },
 
     plugins: {
@@ -3226,6 +3235,7 @@ export const getBaseTheme = () => {
 
     publicRoom: {
       border: `1px solid ${lightGraySelected}`,
+      linkColor: lightBlueMain,
     },
 
     newFilesPanel: {

@@ -1892,14 +1892,6 @@ class FilesStore {
 
           this.setRoomsFilter(filterData);
 
-          this.selectedFolderStore.setSelectedFolder({
-            folders: data.folders,
-            ...data.current,
-            pathParts: data.pathParts,
-            navigationPath: [],
-            ...{ new: data.new },
-          });
-
           runInAction(() => {
             this.selectedFolderStore.setSelectedFolder({
               folders: data.folders,

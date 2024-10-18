@@ -382,9 +382,7 @@ class SelectedFolderStore {
       });
     }
 
-    if (!selectedFolder) {
-      this.toDefault();
-    } else {
+    if (selectedFolder) {
       const selectedFolderItems = Object.keys(selectedFolder);
 
       if (!selectedFolderItems.includes("roomType")) this.roomType = null;

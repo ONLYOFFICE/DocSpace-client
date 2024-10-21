@@ -148,7 +148,6 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const onCopyExternalLink = () => {
-    // copy(shareLink);
     copyRoomShareLink(link, t);
     onCloseContextMenu();
   };
@@ -218,16 +217,15 @@ const LinkRow = (props: LinkRowProps) => {
           isFormRoom,
         });
 
-        // copy(link?.sharedTo?.shareLink);
-
         if (linkData) {
           copyRoomShareLink(linkData, t);
         }
-        clearTimeout(timerId);
-        // toastr.success(t("Files:LinkEditedSuccessfully"));
       })
       .catch((err: Error) => toastr.error(err?.message))
-      .finally(() => setLoadingLinks([]));
+      .finally(() => {
+        clearTimeout(timerId);
+        setLoadingLinks([]);
+      });
   };
   const removedExpiredLink = (removeLink: TFileLink) => {
     setLoadingLinks([removeLink.sharedTo.id]);

@@ -36,7 +36,7 @@ import CopyToReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
 import OutlineReactSvgUrl from "PUBLIC_DIR/images/outline-true.react.svg?url";
 import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
-import { RoomsType } from "@docspace/shared/enums";
+import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 import { TTranslation } from "@docspace/shared/types";
 import { TFileLink } from "@docspace/shared/api/files/types";
 import { useState } from "react";
@@ -198,7 +198,10 @@ const LinkRow = (props: LinkRowProps) => {
         });
 
         copy(link?.sharedTo?.shareLink);
-        toastr.success(t("Files:LinkEditedSuccessfully"));
+
+        if (link.access === ShareAccessRights.FormFilling) {
+          toastr.success(t("Common:LinkSuccessfullyCopied"));
+        } else toastr.success(t("Files:LinkEditedSuccessfully"));
       })
       .catch((err: Error) => toastr.error(err?.message))
       .finally(() => setLoadingLinks([]));
@@ -207,6 +210,12 @@ const LinkRow = (props: LinkRowProps) => {
   const onAccessRightsSelect = (opt: TOption) => {
     const newLink = { ...link };
     if (opt.access) newLink.access = opt.access;
+    editExternalLinkAction(newLink);
+  };
+
+  const onClickForm = () => {
+    const newLink = { ...link };
+    newLink.access = ShareAccessRights.FormFilling;
     editExternalLinkAction(newLink);
   };
 
@@ -233,6 +242,8 @@ const LinkRow = (props: LinkRowProps) => {
       onAccessRightsSelect={onAccessRightsSelect}
       changeExpirationOption={changeExpirationOption}
       isArchiveFolder={isArchiveFolder}
+      isFormRoom={isFormRoom}
+      onClickForm={onClickForm}
     />
   );
 };

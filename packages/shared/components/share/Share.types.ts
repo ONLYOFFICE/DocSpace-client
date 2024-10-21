@@ -66,6 +66,8 @@ export type LinkRowProps =
       onOpenContextMenu?: undefined;
       onCloseContextMenu?: undefined;
       onAccessRightsSelect?: undefined;
+      isFormRoom?: boolean;
+      onClickForm?: () => void;
     }
   | {
       onAddClick: () => Promise<void>;
@@ -85,6 +87,8 @@ export type LinkRowProps =
       onOpenContextMenu: (e: React.MouseEvent) => void;
       onCloseContextMenu: () => void;
       onAccessRightsSelect: (option: TOption) => void;
+      isFormRoom?: boolean;
+      onClickForm?: () => void;
     };
 
 export type ExpiredComboBoxProps = {

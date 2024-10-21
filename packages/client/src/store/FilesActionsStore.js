@@ -67,16 +67,17 @@ import {
   FolderType,
   RoomsType,
   ShareAccessRights,
+  ValidationStatus,
   VDRIndexingAction,
 } from "@docspace/shared/enums";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
 import { checkProtocol } from "../helpers/files-helpers";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
-import { isDesktop } from "@docspace/shared/utils";
+import { isDesktop, isLockedSharedRoom } from "@docspace/shared/utils";
 import { getCategoryType } from "SRC_DIR/helpers/utils";
 import { muteRoomNotification } from "@docspace/shared/api/settings";
 import { CategoryType } from "SRC_DIR/helpers/constants";
@@ -91,11 +92,15 @@ import {
 } from "@docspace/shared/utils/common";
 import uniqueid from "lodash/uniqueId";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { createLoader } from "@docspace/shared/utils/createLoader";
+
 import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
+import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
+
 import api from "@docspace/shared/api";
 import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
@@ -473,12 +478,7 @@ class FilesActionStore {
             }
 
             if (currentFolderId) {
-              const { socketHelper } = this.settingsStore;
-
-              socketHelper.emit({
-                command: "refresh-folder",
-                data: currentFolderId,
-              });
+              SocketHelper.emit(SocketCommands.RefreshFolder, currentFolderId);
             }
           })
           .finally(() => {
@@ -2365,7 +2365,64 @@ class FilesActionStore {
 
   onMarkAsRead = (item) => this.markAsRead([], [`${item.id}`], item);
 
-  openFileAction = (item, t, e) => {
+  isExpiredLinkAsync = async (item) => {
+    const { clearActiveOperations } = this.uploadDataStore;
+    const { addActiveItems } = this.filesStore;
+
+    const { endLoader, startLoader } = createLoader();
+
+    try {
+      startLoader(() =>
+        runInAction(() => {
+          this.setGroupMenuBlocked(true);
+          addActiveItems(null, [item.id]);
+        }),
+      );
+
+      const response = await api.rooms.validatePublicRoomKey(item.requestToken);
+
+      const isExpired = response.status === ValidationStatus.Expired;
+      if (isExpired) {
+        const foundFolder = this.filesStore.folders.find(
+          (folder) => folder.id === item.id,
+        );
+
+        if (foundFolder && !foundFolder.expired) {
+          foundFolder.expired = true;
+        }
+      }
+
+      return isExpired;
+    } catch (error) {
+      console.log(error);
+      return false;
+    } finally {
+      endLoader(() =>
+        runInAction(() => {
+          this.setGroupMenuBlocked(false);
+          clearActiveOperations([], [item.id]);
+        }),
+      );
+    }
+  };
+
+  openFileAction = async (item, t, e) => {
+    if (
+      item.external &&
+      (item.expired || (await this.isExpiredLinkAsync(item)))
+    )
+      return toastr.error(
+        t("Common:RoomLinkExpired"),
+        t("Common:RoomNotAvailable"),
+      );
+
+    if (isLockedSharedRoom(item))
+      return this.dialogsStore.setPasswordEntryDialog(true, item);
+
+    this.openItemAction(item, t, e);
+  };
+
+  openItemAction = (item, t, e) => {
     const { openDocEditor, isPrivacyFolder, setSelection, categoryType } =
       this.filesStore;
     const { currentDeviceType } = this.settingsStore;
@@ -2526,8 +2583,8 @@ class FilesActionStore {
     const { setSelectedNode } = this.treeFoldersStore;
     const { clearFiles, setBufferSelection } = this.filesStore;
     const { insideGroupBackUrl } = this.peopleStore.groupsStore;
+    const { setContactsTab } = this.peopleStore.usersStore;
     const { isLoading } = this.clientLoadingStore;
-
     if (isLoading) return;
 
     setBufferSelection(null);
@@ -2580,12 +2637,14 @@ class FilesActionStore {
     }
 
     if (categoryType === CategoryType.Accounts) {
+      const contactsTab = getContactsView();
+
       if (insideGroupBackUrl) {
+        setContactsTab("groups");
         window.DocSpace.navigate(insideGroupBackUrl);
 
         return;
       }
-      const contactsTab = getContactsView();
 
       const filter =
         contactsTab === "groups"
@@ -2598,10 +2657,14 @@ class FilesActionStore {
 
       if (window.location.search.includes("group")) {
         setSelectedNode(["accounts", "groups", "filter"]);
+        setContactsTab("groups");
+
         return window.DocSpace.navigate(`accounts/groups/filter?${params}`, {
           replace: true,
         });
       }
+      setContactsTab("people");
+
       setSelectedNode(["accounts", "people", "filter"]);
 
       if (fromHotkeys) return;

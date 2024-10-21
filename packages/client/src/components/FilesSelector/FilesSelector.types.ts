@@ -35,7 +35,6 @@ import {
 } from "@docspace/shared/components/selector/Selector.types";
 import { DeviceType } from "@docspace/shared/enums";
 import { TTheme } from "@docspace/shared/themes";
-import SocketIOHelper from "@docspace/shared/utils/socket";
 
 export type FilesSelectorProps = TSelectorHeader & {
   isPanelVisible: boolean;
@@ -135,10 +134,6 @@ export type FilesSelectorProps = TSelectorHeader & {
   setSelectedItems: () => void;
 
   includeFolder?: boolean;
-
-  socketHelper: SocketIOHelper;
-  socketSubscribers: Set<string>;
-  currentDeviceType: DeviceType;
 
   embedded: boolean;
   withHeader: boolean;

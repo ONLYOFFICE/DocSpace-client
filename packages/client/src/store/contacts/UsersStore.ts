@@ -47,6 +47,7 @@ import DefaultUserPhotoSize32PngUrl from "PUBLIC_DIR/images/default_user_photo_s
 
 import { getUserStatus } from "SRC_DIR/helpers/people-helpers";
 import {
+  getContactsView,
   getUserChecked,
   setContactsUsersFilterUrl,
   TChangeUserTypeDialogData,
@@ -116,6 +117,8 @@ class UsersStore {
     this.accessRightsStore = accessRightsStore;
     this.dialogStore = dialogStore;
     this.clientLoadingStore = clientLoadingStore;
+
+    this.contactsTab = getContactsView();
 
     makeAutoObservable(this);
   }
@@ -466,7 +469,10 @@ class UsersStore {
 
           options.push("details");
 
-          if (userRole !== EmployeeType.Guest) {
+          if (
+            userRole !== EmployeeType.Guest &&
+            userRole !== EmployeeType.User
+          ) {
             options.push("reassign-data");
           }
 
@@ -927,6 +933,14 @@ class UsersStore {
     const { canMakeEmployeeUser } = this.accessRightsStore;
 
     const users = this.selection.filter((x) => canMakeEmployeeUser(x));
+
+    return users.length > 0;
+  }
+
+  get hasUsersToChangeType() {
+    const { canChangeUserType } = this.accessRightsStore;
+
+    const users = this.selection.filter((x) => canChangeUserType(x));
 
     return users.length > 0;
   }

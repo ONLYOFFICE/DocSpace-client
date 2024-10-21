@@ -33,6 +33,10 @@ import { useTranslation } from "react-i18next";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
 import { toast as toastify } from "react-toastify";
 
+import SocketHelper, {
+  SocketEvents,
+  SocketCommands,
+} from "@docspace/shared/utils/socket";
 import { Portal } from "@docspace/shared/components/portal";
 import { SnackBar } from "@docspace/shared/components/snackbar";
 import { Toast, toastr } from "@docspace/shared/components/toast";
@@ -68,7 +72,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     language,
     FirebaseHelper,
     setCheckedMaintenance,
-    socketHelper,
     setPreparationPortalDialogVisible,
     isBase,
     setTheme,
@@ -133,12 +136,26 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   }, []);
 
   useEffect(() => {
-    socketHelper.emit({
-      command: "subscribe",
-      data: { roomParts: "backup-restore" },
+    SocketHelper.emit(SocketCommands.Subscribe, {
+      roomParts: "backup-restore",
     });
 
-    socketHelper.on("restore-backup", () => {
+    SocketHelper.emit(SocketCommands.Subscribe, {
+      roomParts: "quota",
+    });
+
+    SocketHelper.emit(SocketCommands.Subscribe, {
+      roomParts: "QUOTA",
+      individual: true,
+    });
+  }, []);
+
+  useEffect(() => {
+    SocketHelper.emit(SocketCommands.Subscribe, { roomParts: userId });
+  }, [userId]);
+
+  useEffect(() => {
+    const callback = () => {
       getRestoreProgress()
         .then((response) => {
           if (!response) {
@@ -152,24 +169,16 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
         .catch((e) => {
           console.error("getRestoreProgress", e);
         });
-    });
+    };
+    SocketHelper.on(SocketEvents.RestoreBackup, callback);
 
-    socketHelper.emit({
-      command: "subscribe",
-      data: { roomParts: "quota" },
-    });
+    return () => {
+      SocketHelper.off(SocketEvents.RestoreBackup, callback);
+    };
+  }, [setPreparationPortalDialogVisible]);
 
-    socketHelper.emit({
-      command: "subscribe",
-      data: { roomParts: "QUOTA", individual: true },
-    });
-
-    socketHelper.emit({
-      command: "subscribe",
-      data: { roomParts: userId },
-    });
-
-    socketHelper.on("s:logout-session", (loginEventId) => {
+  useEffect(() => {
+    const callback = (loginEventId) => {
       console.log(`[WS] "logout-session"`, loginEventId, userLoginEventId);
 
       if (userLoginEventId === loginEventId || loginEventId === 0) {
@@ -177,13 +186,14 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
           combineUrl(window.ClientConfig?.proxy?.url, "/login"),
         );
       }
-    });
-  }, [
-    socketHelper,
-    userLoginEventId,
-    setPreparationPortalDialogVisible,
-    userId,
-  ]);
+    };
+
+    SocketHelper.on(SocketEvents.LogoutSession, callback);
+
+    return () => {
+      SocketHelper.off(SocketEvents.LogoutSession, callback);
+    };
+  }, [userLoginEventId]);
 
   const { t, ready } = useTranslation(["Common", "SmartBanner"]);
 
@@ -496,7 +506,6 @@ const ShellWrapper = inject(
       setCheckedMaintenance,
       setMaintenanceExist,
       setSnackbarExist,
-      socketHelper,
       setTheme,
       currentDeviceType,
       isFrame,
@@ -549,7 +558,6 @@ const ShellWrapper = inject(
       FirebaseHelper: firebaseHelper,
       setCheckedMaintenance,
       setMaintenanceExist,
-      socketHelper,
       setPreparationPortalDialogVisible,
       isBase,
       setTheme,

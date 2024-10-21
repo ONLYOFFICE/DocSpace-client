@@ -6,7 +6,7 @@
   "DescriptionForRegisteredUser": "작성된 PDF 양식은 완료 폴더에 저장되어 이용 가능하게 됩니다. 상태를 확인하려면 지정된 번호를 제공하는 양식 소유자에게 문의하세요.",
   "FillItOutAgain": "다시 작성",
   "FormCompletedSuccessfully": "양식 작성이 완료되었습니다",
-  "FormNumber": "양식 번호:",
+  "FormNumber": "양식 번호",
   "FormOwner": "양식 소유자",
   "Title": "양식 작성이 완료되었습니다"
 }

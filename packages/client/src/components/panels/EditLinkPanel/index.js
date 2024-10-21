@@ -372,7 +372,5 @@ export default inject(
     };
   },
 )(
-  withTranslation(["SharingPanel", "Common", "Files", "Wizard"])(
-    observer(EditLinkPanel),
-  ),
+  withTranslation(["SharingPanel", "Common", "Files"])(observer(EditLinkPanel)),
 );

@@ -179,7 +179,7 @@ const PureHome = (props) => {
   const contactsView = getContactsView(location);
   const isContactsPage = !!contactsView;
   const isContactsEmptyView =
-    (contactsView === "groups" && isEmptyGroups) || isUsersEmptyView;
+    contactsView === "groups" ? isEmptyGroups : isUsersEmptyView;
 
   const setIsLoading = React.useCallback(
     (param, withoutTimer, withHeaderLoader) => {

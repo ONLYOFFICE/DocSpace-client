@@ -191,124 +191,137 @@ class CreateEditRoomStore {
     });
   };
 
+  getLogoParams = (uploadedFile, icon) => {
+    const { calculateRoomLogoParams } = this.filesStore;
+
+    const img = new Image();
+    const url = URL.createObjectURL(uploadedFile);
+
+    return new Promise((resolve, reject) => {
+      img.onload = () => {
+        const { x, y, zoom } = icon;
+
+        return resolve({ ...calculateRoomLogoParams(img, x, y, zoom) });
+      };
+      img.onerror = (err) => reject(err);
+
+      img.src = url;
+    });
+  };
+
   onSaveEditRoom = async (t, newParams, room) => {
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
-    const { cover, setRoomLogoCover } = this.dialogsStore;
-    const {
-      editRoom,
-      removeLogoFromRoom,
-      addActiveItems,
-      addTagsToRoom,
-      removeTagsFromRoom,
-
-      setFolder,
-    } = this.filesStore;
-    const { uploadedFile, onSaveRoomLogo } = this.avatarEditorDialogStore;
+    const { cover } = this.dialogsStore;
+    const { editRoom, removeLogoFromRoom } = this.filesStore;
+    const { uploadedFile, getUploadedLogoData } = this.avatarEditorDialogStore;
     const { changeRoomOwner, updateCurrentFolder } = this.filesActionsStore;
-    const { createTag } = this.tagsStore;
+
+    const { id: currentFolderId } = this.selectedFolderStore;
+
     const {
-      isRootFolder,
-      updateEditedSelectedRoom,
-      id: currentFolderId,
-    } = this.selectedFolderStore;
+      quota,
+      denyDownload,
+      indexing,
+      lifetime,
+      watermark,
+      title,
+      roomOwner,
+      icon,
+    } = newParams;
 
-    const editRoomParams = {};
-
-    const quotaLimit = newParams?.quota || room.quotaLimit;
-    const isTitleChanged = !isEqual(newParams.title, room.title);
-    const denyDownloadChanged = newParams?.denyDownload !== room.denyDownload;
-    const indexingChanged = newParams?.indexing !== room.indexing;
+    const quotaLimit = quota || room.quotaLimit;
+    const isTitleChanged = !isEqual(title, room.title);
+    const isDenyDownloadChanged = denyDownload !== room.denyDownload;
+    const isIndexingChanged = indexing !== room.indexing;
     const isQuotaChanged = quotaLimit !== room.quotaLimit;
-    const lifetimeChanged = !isEqual(newParams.lifetime, room.lifetime);
-    const isOwnerChanged = newParams?.roomOwner?.id !== room.createdBy.id;
-    const isWatermarkChanged = !isEqual(newParams.watermark, room.watermark);
+    const isLifetimeChanged = !isEqual(lifetime, room.lifetime);
+    const isOwnerChanged = roomOwner && roomOwner.id !== room.createdBy.id;
+    const isWatermarkChanged = !isEqual(watermark, room.watermark);
 
-    if (isDefaultRoomsQuotaSet && isQuotaChanged) {
-      editRoomParams.quotaLimit = +quotaLimit;
-    }
+    const tags = newParams.tags.map((tag) => tag.name);
+    const prevTags = room.tags.sort();
+    const currTags = newParams.tags.map((t) => t.name).sort();
+    const isTagsChanged = !isEqual(prevTags, currTags);
 
-    if (isTitleChanged) {
-      editRoomParams.title = newParams.title || t("Common:NewRoom");
-    }
+    const editRoomParams = {
+      ...(isTitleChanged && {
+        title: title || t("Common:NewRoom"),
+      }),
+      ...(isDenyDownloadChanged && {
+        denyDownload,
+      }),
+      ...(isIndexingChanged && {
+        indexing,
+      }),
+      ...(isTagsChanged && {
+        tags,
+      }),
+      ...(isLifetimeChanged && {
+        lifetime: lifetime ?? {
+          enabled: false,
+        },
+      }),
+      ...(isDefaultRoomsQuotaSet &&
+        isQuotaChanged && {
+          quota: +quotaLimit,
+        }),
+      ...(cover && {
+        cover: cover.cover,
+        color: cover.color,
+      }),
+    };
 
-    if (denyDownloadChanged) {
-      editRoomParams.denyDownload = newParams.denyDownload;
-    }
-
-    if (indexingChanged) {
-      editRoomParams.indexing = newParams.indexing;
-    }
-
-    if (lifetimeChanged) {
-      editRoomParams.lifetime = newParams.lifetime ?? {
-        enabled: false,
-      };
-    }
-
-    if (isWatermarkChanged && this.isCorrectWatermark(newParams.watermark)) {
-      editRoomParams.watermark = newParams.watermark
-        ? await this.getWatermarkRequest(newParams.watermark)
+    if (isWatermarkChanged && this.isCorrectWatermark(watermark)) {
+      editRoomParams.watermark = watermark
+        ? await this.getWatermarkRequest(watermark)
         : {
             enabled: false,
           };
     }
 
-    const startTags = Object.values(room.tags);
-    const tags = newParams.tags.map((tag) => tag.name);
-    const removedTags = startTags.filter((sT) => !tags.includes(sT));
-    const newTags = newParams.tags.filter((t) => t.isNew).map((t) => t.name);
-    const isDeletionTags = removedTags.length > 0;
+    const isDeleteLogo = !!room.logo.original && !icon.uploadedFile;
+    const additionalRequest = [];
 
-    const isUpdatelogo = uploadedFile;
-    const isDeleteLogo = !!room.logo.original && !newParams.icon.uploadedFile;
+    if (uploadedFile) {
+      additionalRequest.push(
+        this.getLogoParams(uploadedFile, icon),
+        getUploadedLogoData(),
+      );
+    }
 
     const requests = [];
 
     try {
+      try {
+        if (additionalRequest.length) {
+          const [logoParamsData, uploadedData] =
+            await Promise.all(additionalRequest);
+
+          editRoomParams.logo = {
+            tmpFile: uploadedData.responseData.data,
+            ...logoParamsData,
+          };
+        }
+      } catch (e) {
+        toastr.error(e);
+      }
+
       if (Object.keys(editRoomParams).length)
         await editRoom(room.id, editRoomParams);
 
-      for (let i = 0; i < newTags.length; i++) {
-        requests.push(createTag(newTags[i]));
-      }
-
       if (isOwnerChanged) {
-        requests.push(changeRoomOwner(t, newParams?.roomOwner?.id));
-      }
-
-      if (isDeletionTags) {
-        requests.push(removeTagsFromRoom(room.id, removedTags));
+        requests.push(changeRoomOwner(t, roomOwner.id));
       }
 
       if (isDeleteLogo) {
         requests.push(removeLogoFromRoom(room.id));
       }
 
-      if (cover) {
-        requests.push(setRoomLogoCover(room.id));
-      }
-
-      if (!cover && isUpdatelogo) {
-        addActiveItems(null, [room.id]);
-        requests.push(onSaveRoomLogo(room.id, newParams.icon, room, true));
-      }
-
-      if (indexingChanged)
+      if (isIndexingChanged)
         requests.push(updateCurrentFolder(null, currentFolderId));
 
       if (!!requests.length) {
         await Promise.all(requests);
-      }
-
-      let updatedRoomInfo = null;
-
-      if (tags.length) {
-        const tagsToAddList = tags.filter((t) => !startTags.includes(t));
-        updatedRoomInfo = await addTagsToRoom(room.id, tagsToAddList);
-
-        isRootFolder
-          ? setFolder(updatedRoomInfo)
-          : updateEditedSelectedRoom({ tags: tags });
       }
     } catch (e) {
       toastr.error(e);
@@ -318,109 +331,111 @@ class CreateEditRoomStore {
   onCreateRoom = async (withConfirm = false, t) => {
     const roomParams = this.roomParams;
 
-    const { createTag } = this.tagsStore;
     const { processCreatingRoomFromData, setProcessCreatingRoomFromData } =
       this.filesActionsStore;
     const { deleteThirdParty } = this.thirdPartyStore;
-    const {
-      createRoom,
-      createRoomInThirdpary,
-      addTagsToRoom,
-      selection,
-      bufferSelection,
-    } = this.filesStore;
+    const { createRoom, createRoomInThirdpary, selection, bufferSelection } =
+      this.filesStore;
     const { preparingDataForCopyingToRoom } = this.filesActionsStore;
-
+    const { getUploadedLogoData } = this.avatarEditorDialogStore;
     const { isDefaultRoomsQuotaSet } = this.currentQuotaStore;
+    const { cover } = this.dialogsStore;
 
-    const isThirdparty = roomParams.storageLocation.isThirdparty;
-    const quotaLimit =
-      isDefaultRoomsQuotaSet && !isThirdparty ? roomParams.quota : null;
+    const {
+      denyDownload,
+      indexing,
+      lifetime,
+      tags,
+      storageLocation,
+      quota,
+      type,
+      title,
+      createAsNewFolder,
+      icon,
+      watermark,
+    } = roomParams;
+
+    const quotaLimit = isDefaultRoomsQuotaSet && !isThirdparty ? quota : null;
+
+    const isThirdparty = storageLocation.isThirdparty;
+    const storageFolderId = storageLocation.storageFolderId;
+    const thirdpartyAccount = storageLocation.thirdpartyAccount;
+    const isThirdPartyRoom = isThirdparty && storageFolderId;
+
+    const tagsToAddList = tags.map((tag) => tag.name);
 
     const createRoomData = {
-      roomType: roomParams.type,
-      title: roomParams.title || t("Common:NewRoom"),
-      indexing: roomParams.indexing,
-      denyDownload: roomParams.denyDownload,
-      createAsNewFolder: roomParams.createAsNewFolder ?? true,
+      roomType: type,
+      title: title || t("Common:NewRoom"),
+      ...(isThirdPartyRoom && {
+        createAsNewFolder: createAsNewFolder ?? true,
+      }),
       ...(quotaLimit && {
         quota: +quotaLimit,
       }),
+      ...(cover && {
+        cover: cover.cover,
+        color: cover.color,
+      }),
+      ...(denyDownload && {
+        denyDownload,
+      }),
+      ...(indexing && {
+        indexing,
+      }),
+      ...(lifetime && {
+        lifetime,
+      }),
+      ...(tagsToAddList.length && {
+        tags: tagsToAddList,
+      }),
     };
 
-    const createTagsData = roomParams.tags
-      .filter((t) => t.isNew)
-      .map((t) => t.name);
-    const addTagsData = roomParams.tags.map((tag) => tag.name);
-
-    const storageFolderId = roomParams.storageLocation.storageFolderId;
-    const thirdpartyAccount = roomParams.storageLocation.thirdpartyAccount;
-
-    const uploadLogoData = new FormData();
-    uploadLogoData.append(0, roomParams.icon.uploadedFile);
-
-    if (roomParams.lifetime) {
-      createRoomData.lifetime = roomParams.lifetime;
+    if (watermark && this.isCorrectWatermark(watermark)) {
+      createRoomData.watermark = await this.getWatermarkRequest(watermark);
     }
 
-    if (roomParams.watermark && this.isCorrectWatermark(roomParams.watermark)) {
-      createRoomData.watermark = await this.getWatermarkRequest(
-        roomParams.watermark,
+    const additionalRequest = [];
+
+    const uploadedFile = icon.uploadedFile;
+
+    if (uploadedFile) {
+      additionalRequest.push(
+        this.getLogoParams(uploadedFile, icon),
+        getUploadedLogoData(),
       );
     }
+
+    this.setIsLoading(true);
+
     try {
-      this.setIsLoading(true);
+      try {
+        if (additionalRequest.length) {
+          const [logoParamsData, uploadedData] =
+            await Promise.all(additionalRequest);
+
+          createRoomData.logo = {
+            tmpFile: uploadedData.responseData.data,
+            ...logoParamsData,
+          };
+        }
+      } catch (e) {
+        toastr.error(e);
+      }
+
       withConfirm && this.setConfirmDialogIsLoading(true);
 
-      // create room
-      let room =
-        isThirdparty && storageFolderId
-          ? await createRoomInThirdpary(storageFolderId, createRoomData)
-          : await createRoom(createRoomData);
+      const room = isThirdPartyRoom
+        ? await createRoomInThirdpary(storageFolderId, createRoomData)
+        : await createRoom(createRoomData);
 
       this.dialogsStore.setIsNewRoomByCurrentUser(true);
 
-      room.isLogoLoading = true;
-
-      const actions = [];
-
-      const requests = [];
-
       // delete thirdparty account if not needed
       if (!isThirdparty && storageFolderId)
-        requests.push(deleteThirdParty(thirdpartyAccount.providerId));
+        deleteThirdParty(thirdpartyAccount.providerId);
 
-      await Promise.all(requests);
-      // create new tags
-      for (let i = 0; i < createTagsData.length; i++) {
-        actions.push(createTag(createTagsData[i]));
-      }
-
-      if (!!actions.length) await Promise.all(actions);
-
-      // add new tags to room
-      if (!!addTagsData.length)
-        room = await addTagsToRoom(room.id, addTagsData);
-      if (this.dialogsStore.cover) {
-        await this.dialogsStore.setRoomLogoCover(room.id);
-
-        this.onOpenNewRoom(room);
-      }
-      // calculate and upload logo to room
-      else if (roomParams.icon.uploadedFile) {
-        try {
-          await this.avatarEditorDialogStore.onSaveRoomLogo(
-            room.id,
-            roomParams.icon,
-          );
-          this.onOpenNewRoom(room);
-        } catch (e) {
-          toastr.error(e);
-          this.setIsLoading(false);
-          this.setConfirmDialogIsLoading(false);
-          this.onClose();
-        }
-      } else this.onOpenNewRoom(room);
+      this.onOpenNewRoom(room);
 
       if (processCreatingRoomFromData) {
         const selections =
@@ -434,16 +449,13 @@ class CreateEditRoomStore {
           toastr.error(error),
         );
       }
-
-      this.roomIsCreated = true;
     } catch (err) {
       toastr.error(err);
-      console.log(err);
+    } finally {
       this.setIsLoading(false);
       this.setConfirmDialogIsLoading(false);
       this.onClose();
-      this.roomIsCreated = true;
-    } finally {
+
       processCreatingRoomFromData && setProcessCreatingRoomFromData(false);
     }
   };
@@ -452,10 +464,6 @@ class CreateEditRoomStore {
     const { setIsSectionFilterLoading } = this.clientLoadingStore;
     const { setSelection } = this.filesStore;
     const { setView, setIsVisible } = this.infoPanelStore;
-
-    const setIsLoading = (param) => {
-      setIsSectionFilterLoading(param);
-    };
 
     const state = {
       isRoot: false,
@@ -467,7 +475,8 @@ class CreateEditRoomStore {
 
     const newFilter = FilesFilter.getDefault();
     newFilter.folder = room.id;
-    setIsLoading(true);
+
+    setIsSectionFilterLoading(true);
 
     const path = getCategoryUrl(CategoryType.SharedRoom, room.id);
 
@@ -479,10 +488,6 @@ class CreateEditRoomStore {
       setIsVisible(true);
       setView("info_members");
     }
-
-    this.setIsLoading(false);
-    this.setConfirmDialogIsLoading(false);
-    this.onClose();
   };
 }
 

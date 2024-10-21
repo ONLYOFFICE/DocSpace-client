@@ -106,7 +106,7 @@ export type TBreadCrumb = {
   isRoom?: boolean;
   minWidth?: string;
   roomType?: RoomsType;
-  shared?: Boolean;
+  shared?: boolean;
   onClick?: TOnBreadCrumbClick;
 };
 
@@ -166,8 +166,8 @@ export type TSelectorSearch =
       isSearchLoading: boolean;
       searchPlaceholder?: string;
       searchValue?: string;
-      onSearch: (value: string, callback?: Function) => void;
-      onClearSearch: (callback?: Function) => void;
+      onSearch: (value: string, callback?: VoidFunction) => void;
+      onClearSearch: (callback?: VoidFunction) => void;
     }
   | {
       withSearch?: undefined;

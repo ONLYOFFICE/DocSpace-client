@@ -24,6 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import isEmpty from "lodash/isEmpty";
+
 import { RoomSearchArea } from "../../enums";
 import {
   getObjectByLocation,
@@ -68,6 +70,7 @@ const SUBJECT_ID = "subjectId";
 const TAGS = "tags";
 const TYPE = "type";
 const WITHOUT_TAGS = "withoutTags";
+const START_INDEX = "startIndex";
 
 export const toJSON = (filter: RoomsFilter) => {
   const filterObject = Object.entries(filter).reduce(
@@ -322,24 +325,24 @@ class RoomsFilter {
     } = this;
 
     const dtoFilter = {
-      page,
-      pageCount,
-      startIndex: this.getStartIndex(),
-      filterValue: (filterValue ?? "").trim(),
-      provider,
-      type,
-      subjectId,
-      searchInContent,
-      withSubfolders,
-      searchArea,
-      tags,
-      sortBy,
-      sortOrder,
-      excludeSubject,
-      withoutTags,
-      subjectFilter,
-      quotaFilter,
-      storageFilter,
+      [PAGE]: page,
+      [PAGE_COUNT]: pageCount,
+      [START_INDEX]: this.getStartIndex(),
+      [FILTER_VALUE]: (filterValue ?? "").trim(),
+      [PROVIDER]: provider,
+      [TYPE]: type,
+      [SUBJECT_ID]: subjectId,
+      [SEARCH_IN_CONTENT]: searchInContent,
+      [SEARCH_TYPE]: withSubfolders,
+      [SEARCH_AREA]: searchArea,
+      [TAGS]: tags,
+      [SORT_BY]: sortBy,
+      [SORT_ORDER]: sortOrder,
+      [EXCLUDE_SUBJECT]: excludeSubject,
+      [WITHOUT_TAGS]: withoutTags,
+      [SUBJECT_FILTER]: subjectFilter,
+      [QUOTA_FILTER]: quotaFilter,
+      [STORAGE_FILTER]: storageFilter,
     };
 
     return toUrlParams(dtoFilter, true);
@@ -411,16 +414,18 @@ class RoomsFilter {
       DEFAULT_TOTAL,
     );
 
-    if (!sharedStorageFilter && userId) {
+    const filterJSON = toJSON(dtoFilter as unknown as RoomsFilter);
+
+    if (isEmpty(sharedStorageFilter) && userId) {
       localStorage.setItem(sharedFilterKey, toJSON(defaultFilter));
+      sharedStorageFilter = filterJSON;
     }
 
-    if (!archivedStorageFilter && userId) {
+    if (isEmpty(archivedStorageFilter) && userId) {
       defaultFilter.searchArea = RoomSearchArea.Archive;
       localStorage.setItem(archivedFilterKey, toJSON(defaultFilter));
+      archivedStorageFilter = filterJSON;
     }
-
-    const filterJSON = toJSON(dtoFilter as unknown as RoomsFilter);
 
     const currentStorageFilter =
       dtoFilter.searchArea === RoomSearchArea.Active

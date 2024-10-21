@@ -65,6 +65,7 @@ export type TableHeaderStores = {
 export type TableRowStores = {
   currentQuotaStore: CurrentQuotasStore;
   peopleStore: PeopleStore;
+  userStore: UserStore;
 };
 
 export type TableColumns = {
@@ -157,7 +158,7 @@ export type TableHeaderProps = {
 
   setIsLoading?: ClientLoadingStore["setIsSectionBodyLoading"];
 
-  userId?: TUser["id"];
+  isRoomAdmin?: TUser["isRoomAdmin"];
 
   infoPanelVisible?: InfoPanelStore["isVisible"];
 
@@ -194,6 +195,8 @@ export type TableRowProps = {
   canChangeUserType: AccessRightsStore["canChangeUserType"];
 
   hideColumns: boolean;
+
+  isRoomAdmin?: TUser["isRoomAdmin"];
 
   value?: string;
   standalone?: boolean;

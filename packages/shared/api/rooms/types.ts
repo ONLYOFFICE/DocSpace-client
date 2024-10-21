@@ -106,6 +106,10 @@ export type TRoom = {
   isArchive?: boolean;
   security: TRoomSecurity;
   lifetime: TRoomLifetime;
+  external?: boolean;
+  passwordProtected?: boolean;
+  requestToken?: string;
+  expired?: boolean;
 };
 
 export type TGetRooms = {

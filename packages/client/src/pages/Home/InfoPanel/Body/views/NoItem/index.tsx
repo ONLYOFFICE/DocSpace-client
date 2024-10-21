@@ -27,10 +27,14 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
+import type { TRoom } from "@docspace/shared/api/rooms/types";
+
 import NoGalleryItem from "./NoGalleryItem";
 import NoRoomItem from "./NoRoomItem";
 import NoFileOrFolderItem from "./NoFileOrFolderItem";
 import NoContactsItem from "./NoContactsItem";
+import ExpiredItem from "./ExpiredItem";
+import LockedItem from "./LockedItem";
 
 type NoItemsProps = {
   isUsers: boolean;
@@ -39,6 +43,8 @@ type NoItemsProps = {
   isGallery: boolean;
   isRooms: boolean;
   isFiles: boolean;
+  isLockedSharedRoom: boolean;
+  infoPanelSelection: TRoom;
 };
 
 const NoItem = ({
@@ -48,8 +54,13 @@ const NoItem = ({
   isGallery,
   isRooms,
   isFiles,
+  isLockedSharedRoom,
+  infoPanelSelection,
 }: NoItemsProps) => {
   const { t } = useTranslation(["InfoPanel", "FormGallery"]);
+
+  if (infoPanelSelection?.expired) return <ExpiredItem />;
+  if (isLockedSharedRoom) return <LockedItem t={t} item={infoPanelSelection} />;
 
   if (isGroups || isUsers || isGuests)
     return <NoContactsItem t={t} isGuests={isGuests} isGroups={isGroups} />;

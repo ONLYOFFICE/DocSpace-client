@@ -27,6 +27,7 @@
 import { makeAutoObservable } from "mobx";
 
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 import {
   FolderType,
   RoomsType,
@@ -164,6 +165,10 @@ class SelectedFolderStore {
 
   order: Nullable<string> = null;
 
+  external: boolean = false;
+
+  passwordProtected: boolean = false;
+
   constructor(settingsStore: SettingsStore) {
     makeAutoObservable(this);
     this.settingsStore = settingsStore;
@@ -215,6 +220,8 @@ class SelectedFolderStore {
       isCustomQuota: this.isCustomQuota,
       order: this.order,
       watermark: this.watermark,
+      passwordProtected: this.passwordProtected,
+      external: this.external,
     };
   };
 
@@ -265,6 +272,8 @@ class SelectedFolderStore {
     this.isCustomQuota = undefined;
     this.order = null;
     this.watermark = null;
+    this.passwordProtected = false;
+    this.external = false;
   };
 
   setFilesCount = (filesCount: number) => {
@@ -345,56 +354,40 @@ class SelectedFolderStore {
   //   };
   // };
 
-  setDefaultValuesIfUndefined: (selectedFolder: TSetSelectedFolder) => void = (
+  setSelectedFolder: (selectedFolder: TSetSelectedFolder | null) => void = (
     selectedFolder,
   ) => {
-    if (!("type" in selectedFolder)) this.type = null;
-    if (!("providerId" in selectedFolder)) this.providerId = null;
-    if (!("providerItem" in selectedFolder)) this.providerItem = null;
-    if (!("providerKey" in selectedFolder)) this.providerKey = null;
-    if (!("order" in selectedFolder)) this.order = null;
-  };
-
-  setSelectedFolder: (
-    // t: TTranslation,
-    selectedFolder: TSetSelectedFolder | null,
-  ) => void = (selectedFolder) => {
-    const socketHelper = this.settingsStore?.socketHelper;
-
+    const currentId = this.id;
+    const isRoot = this?.rootFolderId === currentId;
     this.toDefault();
 
     if (
-      this.id !== null &&
-      socketHelper &&
-      socketHelper.socketSubscribers.has(`DIR-${this.id}`)
+      currentId !== null &&
+      SocketHelper.socketSubscribers.has(`DIR-${currentId}`) &&
+      !isRoot
     ) {
-      socketHelper.emit({
-        command: "unsubscribe",
-        data: { roomParts: `DIR-${this.id}`, individual: true },
+      SocketHelper.emit(SocketCommands.Unsubscribe, {
+        roomParts: `DIR-${currentId}`,
+        individual: true,
       });
     }
 
     if (
       selectedFolder &&
-      socketHelper &&
-      !socketHelper.socketSubscribers.has(`DIR-${selectedFolder.id}`)
+      !SocketHelper.socketSubscribers.has(`DIR-${selectedFolder.id}`)
     ) {
-      socketHelper.emit({
-        command: "subscribe",
-        data: { roomParts: `DIR-${selectedFolder.id}`, individual: true },
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: `DIR-${selectedFolder.id}`,
+        individual: true,
       });
     }
 
-    if (!selectedFolder) {
-      this.toDefault();
-    } else {
+    if (selectedFolder) {
       const selectedFolderItems = Object.keys(selectedFolder);
 
       if (!selectedFolderItems.includes("roomType")) this.roomType = null;
 
       setDocumentTitle(selectedFolder.title);
-
-      this.setDefaultValuesIfUndefined(selectedFolder);
 
       Object.entries(selectedFolder).forEach(([key, item]) => {
         if (key in this) {
@@ -404,11 +397,11 @@ class SelectedFolderStore {
       });
 
       this.setChangeDocumentsTabs(false);
-    }
 
-    selectedFolder?.pathParts?.forEach((value) => {
-      if (value.roomType) this.setInRoom(true);
-    });
+      selectedFolder.pathParts?.forEach((value) => {
+        if (value.roomType) this.setInRoom(true);
+      });
+    }
   };
 }
 

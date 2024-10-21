@@ -31,17 +31,17 @@ import { getTitleWithoutExtension } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
 import { inject, observer } from "mobx-react";
 import PersonPlusReactSvgUrl from "PUBLIC_DIR/images/person+.react.svg?url";
-import Planet12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/planet.react.svg?url";
 import Camera10ReactSvgUrl from "PUBLIC_DIR/images/icons/10/cover.camera.react.svg?url";
 import SearchIconReactSvgUrl from "PUBLIC_DIR/images/search.react.svg?url";
 
+import { getRoomBadgeUrl } from "@docspace/shared/utils/getRoomBadgeUrl";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { StyledTitle } from "../../../styles/common";
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import RoomsContextBtn from "./context-btn";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 import CalendarComponent from "../Calendar";
-import { FolderType, RoomsType } from "@docspace/shared/enums";
+import { FolderType } from "@docspace/shared/enums";
 
 import Search from "../../Search";
 
@@ -78,14 +78,10 @@ const RoomsItemHeader = ({
   const showDefaultRoomIcon = !isLoadedRoomIcon && selection.isRoom;
   const security = infoPanelSelection ? infoPanelSelection.security : {};
   const canInviteUserInRoomAbility = security?.EditAccess;
-  const showPlanetIcon =
-    (selection.roomType === RoomsType.PublicRoom ||
-      selection.roomType === RoomsType.FormRoom ||
-      selection.roomType === RoomsType.CustomRoom) &&
-    isShared;
 
-  const badgeUrl = showPlanetIcon ? Planet12ReactSvgUrl : null;
   const isRoomMembersPanel = selection?.isRoom && roomsView === "info_members";
+
+  const badgeUrl = getRoomBadgeUrl(selection);
 
   const isFile = !!selection.fileExst;
   let title = selection.title;
@@ -138,7 +134,11 @@ const RoomsItemHeader = ({
           imgClassName={`icon ${selection.isRoom && "is-room"}`}
           logo={icon}
           badgeUrl={badgeUrl ? badgeUrl : ""}
-          hoverSrc={selection.isRoom && Camera10ReactSvgUrl}
+          hoverSrc={
+            selection.isRoom &&
+            selection.security?.EditRoom &&
+            Camera10ReactSvgUrl
+          }
           model={model}
           onChangeFile={onChangeFileContext}
         />
@@ -181,6 +181,7 @@ const RoomsItemHeader = ({
             size={16}
           />
         )}
+        {/* Show after adding a calendar request
         {openHistory && (
           <CalendarComponent
             setCalendarDay={setCalendarDay}
@@ -188,7 +189,7 @@ const RoomsItemHeader = ({
             setIsScrollLocked={setIsScrollLocked}
             locale={i18n.language}
           />
-        )}
+        )} */}
         <RoomsContextBtn
           selection={selection}
           itemTitleRef={itemTitleRef}

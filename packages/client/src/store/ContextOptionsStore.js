@@ -36,6 +36,7 @@ import FolderLocationReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.s
 import TickRoundedSvgUrl from "PUBLIC_DIR/images/tick.rounded.svg?url";
 import FavoritesReactSvgUrl from "PUBLIC_DIR/images/favorites.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
+import CircleCrossSvgUrl from "PUBLIC_DIR/images/icons/16/circle.cross.svg?url";
 import DownloadAsReactSvgUrl from "PUBLIC_DIR/images/download-as.react.svg?url";
 import RenameReactSvgUrl from "PUBLIC_DIR/images/rename.react.svg?url";
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.svg?url";
@@ -87,7 +88,11 @@ import { isMobile, isTablet } from "react-device-detect";
 import config from "PACKAGE_FILE";
 import { toastr } from "@docspace/shared/components/toast";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { isDesktop, trimSeparator } from "@docspace/shared/utils";
+import {
+  isDesktop,
+  isLockedSharedRoom,
+  trimSeparator,
+} from "@docspace/shared/utils";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import {
@@ -109,7 +114,11 @@ import {
   FileExtensions,
 } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { getFileLink, getFolderLink } from "@docspace/shared/api/files";
+import {
+  getFileLink,
+  getFolderLink,
+  removeSharedFolder,
+} from "@docspace/shared/api/files";
 import { resendInvitesAgain } from "@docspace/shared/api/people";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
@@ -190,7 +199,18 @@ class ContextOptionsStore {
     this.clientLoadingStore = clientLoadingStore;
   }
 
-  onOpenFolder = (item) => {
+  onOpenFolder = async (item, t) => {
+    const { isExpiredLinkAsync } = this.filesActionsStore;
+
+    if (item.external && (item.expired || (await isExpiredLinkAsync(item))))
+      return toastr.error(
+        t("Common:RoomLinkExpired"),
+        t("Common:RoomNotAvailable"),
+      );
+
+    if (isLockedSharedRoom(item))
+      return this.dialogsStore.setPasswordEntryDialog(true, item);
+
     this.filesActionsStore.openLocationAction(item);
   };
 
@@ -499,6 +519,14 @@ class ContextOptionsStore {
   };
 
   onCreateAndCopySharedLink = async (item, t) => {
+    const { isExpiredLinkAsync } = this.filesActionsStore;
+
+    if (item.external && (item.expired || (await isExpiredLinkAsync(item))))
+      return toastr.error(
+        t("Common:RoomLinkExpired"),
+        t("Common:RoomNotAvailable"),
+      );
+
     const primaryLink = await this.filesStore.getPrimaryLink(item.id);
 
     if (primaryLink) {
@@ -540,6 +568,27 @@ class ContextOptionsStore {
   //       window.matchMedia("(display-mode: " + displayMode + ")").matches,
   //   );
   // };
+
+  onRemoveSharedRooms = async (items) => {
+    if (!Array.isArray(items) || items.length === 0) return;
+
+    const { setGroupMenuBlocked } = this.filesActionsStore;
+    const { addActiveItems } = this.filesStore;
+    const { clearActiveOperations } = this.uploadDataStore;
+
+    const folderIds = items.map((item) => item.id);
+
+    try {
+      setGroupMenuBlocked(true);
+      addActiveItems(null, folderIds);
+      await removeSharedFolder(folderIds);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setGroupMenuBlocked(false);
+      clearActiveOperations([], folderIds);
+    }
+  };
 
   onClickDownload = (item, t) => {
     const { viewUrl, isFolder } = item;
@@ -1050,7 +1099,9 @@ class ContextOptionsStore {
         label: t("PinToTop"),
         icon: PinReactSvgUrl,
         onClick: (e) => this.onClickPin(e, item.id, t),
-        disabled: this.publicRoomStore.isPublicRoom,
+        disabled:
+          this.publicRoomStore.isPublicRoom ||
+          Boolean(item.external && item.expired),
         "data-action": "pin",
         action: "pin",
       },
@@ -1060,7 +1111,9 @@ class ContextOptionsStore {
         label: t("Unpin"),
         icon: UnpinReactSvgUrl,
         onClick: (e) => this.onClickPin(e, item.id, t),
-        disabled: this.publicRoomStore.isPublicRoom,
+        disabled:
+          this.publicRoomStore.isPublicRoom ||
+          Boolean(item.external && item.expired),
         "data-action": "unpin",
         action: "unpin",
       },
@@ -1449,8 +1502,8 @@ class ContextOptionsStore {
         key: "open",
         label: t("Open"),
         icon: FolderReactSvgUrl,
-        onClick: () => this.onOpenFolder(item),
-        disabled: false,
+        onClick: () => this.onOpenFolder(item, t),
+        disabled: Boolean(item.external && item.expired),
       },
       {
         id: "option_fill-form",
@@ -1590,14 +1643,16 @@ class ContextOptionsStore {
         label: t("Files:CopyLink"),
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onCopyLink(item, t),
-        disabled: isPublicRoomType && hasShareLinkRights,
+        disabled:
+          (isPublicRoomType && hasShareLinkRights) ||
+          Boolean(item.external && (item.expired || item.passwordProtected)),
       },
       {
         id: "option_copy-external-link",
         key: "external-link",
         label: t("Files:CopySharedLink"),
         icon: TabletLinkReactSvgUrl,
-        disabled: !hasShareLinkRights,
+        disabled: !hasShareLinkRights || Boolean(item.external && item.expired),
         onClick: () => this.onCreateAndCopySharedLink(item, t),
         // onLoad: () => this.onLoadLinks(t, item),
       },
@@ -1607,7 +1662,7 @@ class ContextOptionsStore {
         label: t("Common:Info"),
         icon: InfoOutlineReactSvgUrl,
         onClick: () => this.onShowInfoPanel(item),
-        disabled: isPublicRoom,
+        disabled: isPublicRoom || Boolean(item.external && item.expired),
       },
       ...pinOptions,
       ...muteOptions,
@@ -1729,8 +1784,23 @@ class ContextOptionsStore {
         key: "download",
         label: t("Common:Download"),
         icon: DownloadReactSvgUrl,
-        onClick: () => this.onClickDownload(item, t),
-        disabled: !item.security?.Download,
+        onClick: () => {
+          if (isLockedSharedRoom(item))
+            return this.dialogsStore.setPasswordEntryDialog(true, item, true);
+
+          this.onClickDownload(item, t);
+        },
+        disabled:
+          (!item.security?.Download && !isLockedSharedRoom(item)) ||
+          Boolean(item.external && item.expired),
+      },
+      {
+        id: "option_remove-shared-room",
+        key: "remove-shared-room",
+        label: t("Files:RemoveFromList"),
+        icon: CircleCrossSvgUrl,
+        onClick: () => this.onRemoveSharedRooms([item]),
+        disabled: !item.external,
       },
       {
         id: "option_download-as",
@@ -1802,7 +1872,8 @@ class ContextOptionsStore {
         label: t("LeaveTheRoom"),
         icon: LeaveRoomSvgUrl,
         onClick: this.onLeaveRoom,
-        disabled: isArchive || !item.inRoom || isPublicRoom,
+        disabled:
+          isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),
       },
       {
         id: "option_unarchive-room",

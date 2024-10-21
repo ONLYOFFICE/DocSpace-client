@@ -209,9 +209,11 @@ class InfoPanelStore {
       bufferSelection: groupsBufferSelection,
     } = this.peopleStore.groupsStore;
 
-    const isGroups = this.getIsContacts() === "groups";
+    const contactsTab = this.peopleStore.usersStore.contactsTab;
 
-    if (!isGroups) {
+    const isGroups = contactsTab === "groups";
+
+    if (!isGroups && contactsTab) {
       if (peopleSelection.length) return [...peopleSelection];
       if (peopleBufferSelection) return [peopleBufferSelection];
     }
@@ -507,9 +509,9 @@ class InfoPanelStore {
 
     if (
       this.getIsContacts() &&
-      (!infoPanelSelection.email || !infoPanelSelection.displayName)
+      (!infoPanelSelection?.email || !infoPanelSelection?.displayName)
     ) {
-      this.infoPanelSelection = !infoPanelSelection.length
+      this.infoPanelSelection = !infoPanelSelection?.length
         ? infoPanelSelection
         : null;
       return;

@@ -27,10 +27,9 @@
 "use client";
 
 import styled from "styled-components";
-import { tablet, mobile } from "../../../utils";
-import { Base } from "../../../themes";
+import { tablet, mobile, injectDefaultTheme } from "../../../utils";
 
-const LoginContainer = styled.div<{
+const LoginContainer = styled.div.attrs(injectDefaultTheme)<{
   type: string;
   isRegisterContainerVisible: boolean;
 }>`
@@ -285,7 +284,5 @@ const LoginContainer = styled.div<{
     height: 20px;
   }
 `;
-
-LoginContainer.defaultProps = { theme: Base };
 
 export default LoginContainer;

@@ -1,11 +1,12 @@
 import hexRgb from "hex-rgb";
 import styled, { css } from "styled-components";
 import { RefObject } from "react";
-import { Base, globalColors, TColorScheme } from "../../themes";
+import { globalColors, TColorScheme } from "../../themes";
+import { injectDefaultTheme } from "../../utils";
 
 const COVER_DEFAULT_SIZE = 20;
 
-const StyledIcon = styled.div<{
+const StyledIcon = styled.div.attrs(injectDefaultTheme)<{
   size: string;
   radius: string;
   isArchive?: boolean;
@@ -217,8 +218,6 @@ const StyledIcon = styled.div<{
       }
     `}
 `;
-
-StyledIcon.defaultProps = { theme: Base };
 
 const EditWrapper = styled.div<{
   size: string;

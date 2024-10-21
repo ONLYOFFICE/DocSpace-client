@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { Base } from "../../../themes";
+import { injectDefaultTheme } from "../../../utils";
 
-const StyledLoadingButton = styled.div`
+const StyledLoadingButton = styled.div.attrs(injectDefaultTheme)`
   width: 12px;
   height: 12px;
   border-radius: 50%;
@@ -41,7 +41,5 @@ const StyledLoadingButton = styled.div`
   font-weight: bold;
   color: ${(props) => props.theme.filesPanels.upload.loadingButton.color};
 `;
-
-StyledLoadingButton.defaultProps = { theme: Base };
 
 export default StyledLoadingButton;

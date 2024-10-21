@@ -25,8 +25,8 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base, globalColors } from "../../themes";
-import { mobile, tablet } from "../../utils";
+import { globalColors } from "../../themes";
+import { injectDefaultTheme, mobile, tablet } from "../../utils";
 import { IconButton } from "../icon-button";
 import { Scrollbar } from "../scrollbar";
 import { ColorTheme } from "../color-theme";
@@ -41,7 +41,9 @@ const reactWindowBodyStyles = css`
   height: 100%;
 `;
 
-const StyledTableContainer = styled.div<{ useReactWindow?: boolean }>`
+const StyledTableContainer = styled.div.attrs(injectDefaultTheme)<{
+  useReactWindow?: boolean;
+}>`
   user-select: none;
   display: grid;
   width: 100%;
@@ -134,11 +136,9 @@ const StyledTableContainer = styled.div<{ useReactWindow?: boolean }>`
   ${({ useReactWindow }) => useReactWindow && reactWindowContainerStyles}
 `;
 
-StyledTableContainer.defaultProps = {
-  theme: Base,
-};
-
-const StyledTableGroupMenu = styled.div<{ checkboxMargin?: string }>`
+const StyledTableGroupMenu = styled.div.attrs(injectDefaultTheme)<{
+  checkboxMargin?: string;
+}>`
   position: relative;
 
   background: ${(props) => props.theme.tableContainer.groupMenu.background};
@@ -232,9 +232,9 @@ const StyledTableGroupMenu = styled.div<{ checkboxMargin?: string }>`
   }
 `;
 
-StyledTableGroupMenu.defaultProps = { theme: Base };
-
-const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme)<{
+const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme).attrs(
+  injectDefaultTheme,
+)<{
   isInfoPanelVisible?: boolean;
 }>`
   ${(props) =>
@@ -270,11 +270,8 @@ const StyledInfoPanelToggleColorThemeWrapper = styled(ColorTheme)<{
       theme.interfaceDirection === "rtl" && `transform: scaleX(-1);`}
   }
 `;
-StyledInfoPanelToggleColorThemeWrapper.defaultProps = {
-  theme: Base,
-};
 
-const StyledTableHeader = styled.div<{
+const StyledTableHeader = styled.div.attrs(injectDefaultTheme)<{
   checkboxMargin?: string;
   interfaceDirection?: string;
 }>`
@@ -297,11 +294,7 @@ const StyledTableHeader = styled.div<{
   }
 `;
 
-StyledTableHeader.defaultProps = {
-  theme: Base,
-};
-
-const StyledTableHeaderCell = styled.div<{
+const StyledTableHeaderCell = styled.div.attrs(injectDefaultTheme)<{
   showIcon?: boolean;
   sortingVisible?: boolean;
   isActive?: boolean;
@@ -399,10 +392,6 @@ const StyledTableHeaderCell = styled.div<{
   }
 `;
 
-StyledTableHeaderCell.defaultProps = {
-  theme: Base,
-};
-
 const StyledTableBody = styled.div<{
   useReactWindow?: boolean;
   infoPanelVisible?: boolean;
@@ -420,7 +409,7 @@ const StyledTableBody = styled.div<{
   }
 `;
 
-const StyledTableRow = styled.div<{
+const StyledTableRow = styled.div.attrs(injectDefaultTheme)<{
   dragging?: boolean;
   isIndexEditingMode?: boolean;
   isActive?: boolean;
@@ -468,7 +457,10 @@ const StyledTableRow = styled.div<{
   }
 `;
 
-const StyledTableCell = styled.div<{ hasAccess?: boolean; checked?: boolean }>`
+const StyledTableCell = styled.div.attrs(injectDefaultTheme)<{
+  hasAccess?: boolean;
+  checked?: boolean;
+}>`
   /* padding-right: 8px; */
   height: 48px;
   max-height: 48px;
@@ -506,10 +498,6 @@ const StyledTableCell = styled.div<{ hasAccess?: boolean; checked?: boolean }>`
     `}
 `;
 
-StyledTableCell.defaultProps = {
-  theme: Base,
-};
-
 const StyledTableSettings = styled.div`
   margin-block: 14px 0px;
   margin-inline: 0 2px;
@@ -543,9 +531,7 @@ const StyledScrollbar = styled(Scrollbar)`
   }
 `;
 
-StyledTableRow.defaultProps = { theme: Base };
-
-const StyledSettingsIcon = styled(IconButton)`
+const StyledSettingsIcon = styled(IconButton).attrs(injectDefaultTheme)`
   ${(props) =>
     props.isDisabled &&
     css`
@@ -557,10 +543,6 @@ const StyledSettingsIcon = styled(IconButton)`
       }
     `}
 `;
-
-StyledSettingsIcon.defaultProps = {
-  theme: Base,
-};
 
 export {
   StyledTableContainer,

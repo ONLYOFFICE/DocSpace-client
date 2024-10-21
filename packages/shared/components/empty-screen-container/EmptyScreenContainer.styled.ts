@@ -30,10 +30,10 @@ import {
   tablet,
   transitionalScreenSize,
   NoUserSelect,
+  injectDefaultTheme,
 } from "../../utils";
-import { Base } from "../../themes";
 
-const EmptyContentBody = styled.div<{
+const EmptyContentBody = styled.div.attrs(injectDefaultTheme)<{
   withoutFilter?: boolean;
   subheadingText?: boolean;
   descriptionText?: boolean;
@@ -140,8 +140,6 @@ const EmptyContentBody = styled.div<{
     }
   }
 `;
-
-EmptyContentBody.defaultProps = { theme: Base };
 
 const EmptyContentImage = styled.img`
   background: no-repeat 0 0 transparent;

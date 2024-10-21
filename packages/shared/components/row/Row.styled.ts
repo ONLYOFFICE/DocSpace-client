@@ -32,12 +32,12 @@ import {
   mobile,
   tablet,
   getCorrectFourValuesStyle,
+  injectDefaultTheme,
 } from "../../utils";
-import { Base } from "../../themes";
 
 import { TMode } from "./Row.types";
 
-const StyledRow = styled.div<{
+const StyledRow = styled.div.attrs(injectDefaultTheme)<{
   withoutBorder?: boolean;
   checked?: boolean;
   mode: TMode;
@@ -100,9 +100,8 @@ const StyledRow = styled.div<{
       }
     `}
 `;
-StyledRow.defaultProps = { theme: Base };
 
-const StyledContent = styled.div`
+const StyledContent = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   flex-basis: 100%;
 
@@ -115,7 +114,6 @@ const StyledContent = styled.div`
     height: ${(props) => props.theme.rowContent.height};
   }
 `;
-StyledContent.defaultProps = { theme: Base };
 
 const StyledCheckbox = styled.div<{
   mode: TMode;
@@ -148,7 +146,7 @@ const StyledCheckbox = styled.div<{
     `}
 `;
 
-const StyledElement = styled.div`
+const StyledElement = styled.div.attrs(injectDefaultTheme)`
   flex: 0 0 auto;
   display: flex;
   margin-inline-end: ${({ theme }) => theme.row.element.marginRight};
@@ -162,7 +160,6 @@ const StyledElement = styled.div`
     margin: 4px 0 0 28px;
   } */
 `;
-StyledElement.defaultProps = { theme: Base };
 
 const StyledContentElement = styled.div`
   margin-top: 0px;
@@ -176,7 +173,9 @@ const StyledContentElement = styled.div`
   }
 `;
 
-const StyledOptionButton = styled.div<{ spacerWidth?: string }>`
+const StyledOptionButton = styled.div.attrs(injectDefaultTheme)<{
+  spacerWidth?: string;
+}>`
   display: flex;
   width: ${(props) => props.spacerWidth && props.spacerWidth};
   justify-content: flex-end;
@@ -205,7 +204,6 @@ const StyledOptionButton = styled.div<{ spacerWidth?: string }>`
     margin-top: unset;
   }
 `;
-StyledOptionButton.defaultProps = { theme: Base };
 
 export {
   StyledOptionButton,

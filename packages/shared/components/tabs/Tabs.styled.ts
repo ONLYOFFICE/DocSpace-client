@@ -26,10 +26,10 @@
 
 import styled, { css } from "styled-components";
 import { Scrollbar } from "../scrollbar";
-import { Base } from "../../themes";
 import { TabsTypes } from "./Tabs.enums";
+import { injectDefaultTheme } from "../../utils";
 
-export const StyledTabs = styled.div<{
+export const StyledTabs = styled.div.attrs(injectDefaultTheme)<{
   stickyTop?: string;
   multiple: boolean;
 }>`
@@ -109,8 +109,6 @@ export const StyledTabs = styled.div<{
   }
 `;
 
-StyledTabs.defaultProps = { theme: Base };
-
 export const ScrollbarTabs = styled(Scrollbar)<{
   $type?: TabsTypes;
 }>`
@@ -144,7 +142,7 @@ export const ScrollbarTabs = styled(Scrollbar)<{
   }
 `;
 
-export const TabList = styled.div<{
+export const TabList = styled.div.attrs(injectDefaultTheme)<{
   $type?: TabsTypes;
   multiple: boolean;
 }>`
@@ -169,9 +167,7 @@ export const TabList = styled.div<{
     css`1px solid ${props.theme.tabs.lineColor}`};
 `;
 
-TabList.defaultProps = { theme: Base };
-
-export const Tab = styled.div<{
+export const Tab = styled.div.attrs(injectDefaultTheme)<{
   isActive: boolean;
   isDisabled?: boolean;
   $type?: TabsTypes;
@@ -257,8 +253,6 @@ export const Tab = styled.div<{
       css`1px solid ${props.theme.tabs.pressedBackgroundColorSecondary}`};
   };
 `;
-
-Tab.defaultProps = { theme: Base };
 
 export const TabSubLine = styled.div<{
   isActive?: boolean;

@@ -25,13 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useState } from "react";
+import { inject, observer } from "mobx-react";
 import { Trans, withTranslation } from "react-i18next";
 import { useNavigate, NavigateFunction } from "react-router-dom";
+import { TTranslation } from "@docspace/shared/types";
 import { decode } from "he";
-import { inject, observer } from "mobx-react";
 import { Link } from "@docspace/shared/components/link";
 import { Text } from "@docspace/shared/components/text";
-import { TTranslation } from "@docspace/shared/types";
+import { Feed } from "./HistoryBlockContent.types";
 import {
   StyledHistoryBlockExpandLink,
   StyledHistoryLink,
@@ -41,10 +42,11 @@ const EXPANSION_THRESHOLD = 8;
 
 interface HistoryUserListProps {
   t: TTranslation;
-  feed: any;
+  feed: Feed;
   openUser?: (user: any, navigate: NavigateFunction) => void;
   isVisitor?: boolean;
   isCollaborator?: boolean;
+  withWrapping?: boolean;
 }
 
 const HistoryUserList = ({
@@ -53,6 +55,7 @@ const HistoryUserList = ({
   openUser,
   isVisitor,
   isCollaborator,
+  withWrapping,
 }: HistoryUserListProps) => {
   const navigate = useNavigate();
 
@@ -77,7 +80,13 @@ const HistoryUserList = ({
         const userName = decode(user.displayName);
 
         return (
-          <StyledHistoryLink key={user.id} className="StyledHistoryLink">
+          <StyledHistoryLink
+            key={user.id}
+            className="StyledHistoryLink"
+            style={
+              withWrapping && { display: "inline", wordBreak: "break-all" }
+            }
+          >
             {isVisitor || isCollaborator ? (
               <Text as="span" className="text">
                 {userName}
@@ -86,6 +95,7 @@ const HistoryUserList = ({
               <Link
                 className="text link"
                 onClick={() => openUser!(user, navigate)}
+                style={withWrapping && { display: "inline", textWrap: "wrap" }}
                 title={userName}
               >
                 {userName}
@@ -93,6 +103,7 @@ const HistoryUserList = ({
             )}
 
             {withComma && ","}
+            {feed.related.length > 0 && <div className="space" />}
           </StyledHistoryLink>
         );
       })}

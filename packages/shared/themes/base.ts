@@ -1882,6 +1882,8 @@ export const getBaseTheme = () => {
         renamedItemColor: gray,
         oldRoleColor: lightGrayDark,
         messageColor: black,
+        itemBorderColor: grayLightMid,
+        fileBackgroundColor: lightGraySelected,
       },
 
       details: {

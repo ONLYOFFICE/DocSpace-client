@@ -28,11 +28,12 @@ import { inject, observer } from "mobx-react";
 import { TTranslation } from "@docspace/shared/types";
 import { FolderType } from "@docspace/shared/enums";
 import { StyledHistoryBlockMessage } from "../../../styles/history";
+import { Feed } from "./HistoryBlockContent.types";
 import { FeedAction } from "../FeedInfo";
 
 type HistoryMainTextFolderInfoProps = {
   t: TTranslation;
-  feed: any;
+  feed: Feed;
   selectedFolderId?: number;
   actionType: string;
 };
@@ -83,7 +84,7 @@ const HistoryMainTextFolderInfo = ({
         className={className}
         title={isFromFolder ? fromParentTitle : parentTitle}
       >
-        {isFromFolder ? sourceDestination : destination}
+        {` ${isFromFolder ? sourceDestination : destination}`}
       </span>
     </StyledHistoryBlockMessage>
   );

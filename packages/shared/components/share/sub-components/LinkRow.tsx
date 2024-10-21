@@ -47,6 +47,7 @@ import {
   getAccessOptions,
   getRoomAccessOptions,
   copyDocumentShareLink,
+  copyRoomShareLink,
 } from "../Share.helpers";
 import { LinkRowProps } from "../Share.types";
 
@@ -81,6 +82,10 @@ const LinkRow = ({
   const roomAccessOptions = isRoomsLink ? getRoomAccessOptions(t) : [];
 
   const onCopyLink = (link: TFileLink) => {
+    if (isRoomsLink) {
+      return copyRoomShareLink(link, t);
+    }
+
     copyDocumentShareLink(link, t);
   };
 

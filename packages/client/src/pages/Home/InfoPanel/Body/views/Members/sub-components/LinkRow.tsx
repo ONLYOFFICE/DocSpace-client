@@ -24,23 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import moment from "moment";
+import { useState } from "react";
+import copy from "copy-to-clipboard";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import copy from "copy-to-clipboard";
-import moment from "moment";
-import LinkRowComponent from "@docspace/shared/components/share/sub-components/LinkRow";
-import { toastr } from "@docspace/shared/components/toast";
+
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import CopyToReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
 import OutlineReactSvgUrl from "PUBLIC_DIR/images/outline-true.react.svg?url";
 import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
+
 import { RoomsType } from "@docspace/shared/enums";
-import { TTranslation } from "@docspace/shared/types";
-import { TFileLink } from "@docspace/shared/api/files/types";
-import { useState } from "react";
-import { TOption } from "@docspace/shared/components/combobox";
+import { toastr } from "@docspace/shared/components/toast";
+import { copyRoomShareLink } from "@docspace/shared/components/share/Share.helpers";
+import LinkRowComponent from "@docspace/shared/components/share/sub-components/LinkRow";
+
+import type { TTranslation } from "@docspace/shared/types";
+import type { TFileLink } from "@docspace/shared/api/files/types";
+import type { TOption } from "@docspace/shared/components/combobox";
 
 type LinkRowProps = {
   t: TTranslation;
@@ -129,7 +133,7 @@ const LinkRow = (props: LinkRowProps) => {
 
   const onCopyExternalLink = () => {
     copy(shareLink);
-    toastr.success(t("Common:LinkSuccessfullyCopied"));
+    copyRoomShareLink(link, t);
     onCloseContextMenu();
   };
 
@@ -198,7 +202,12 @@ const LinkRow = (props: LinkRowProps) => {
         });
 
         copy(link?.sharedTo?.shareLink);
-        toastr.success(t("Files:LinkEditedSuccessfully"));
+
+        if (linkData) {
+          copyRoomShareLink(linkData, t);
+        }
+
+        // toastr.success(t("Files:LinkEditedSuccessfully"));
       })
       .catch((err: Error) => toastr.error(err?.message))
       .finally(() => setLoadingLinks([]));

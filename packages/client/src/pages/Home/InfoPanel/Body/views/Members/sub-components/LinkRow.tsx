@@ -185,7 +185,9 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const editExternalLinkAction = (newLink: TFileLink) => {
-    setLoadingLinks([newLink.sharedTo.id]);
+    const timerId = setTimeout(() => {
+      setLoadingLinks([newLink.sharedTo.id]);
+    }, 100);
 
     editExternalLink(roomId, newLink)
       .then((linkData: TFileLink) => {
@@ -199,6 +201,7 @@ const LinkRow = (props: LinkRowProps) => {
 
         copy(link?.sharedTo?.shareLink);
         toastr.success(t("Files:LinkEditedSuccessfully"));
+        clearTimeout(timerId);
       })
       .catch((err: Error) => toastr.error(err?.message))
       .finally(() => setLoadingLinks([]));

@@ -35,6 +35,7 @@ export const OAuthRow = (props: RowProps) => {
       onSelect={() => setSelection && setSelection(item.clientId)}
       onRowClick={() => {}}
       className={`oauth2-row${isChecked ? " oauth2-row-selected" : ""}`}
+      isIndexEditingMode={false}
     >
       <RowContent
         sectionWidth={sectionWidth}

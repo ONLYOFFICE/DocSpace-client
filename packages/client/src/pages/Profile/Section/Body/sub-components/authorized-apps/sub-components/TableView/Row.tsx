@@ -39,6 +39,8 @@ const Row = (props: RowProps) => {
       <StyledTableRow
         contextOptions={contextOptions}
         getContextModel={getContextMenuModel}
+        isIndexEditingMode={false}
+        badgeUrl=""
       >
         <TableCell className="table-container_file-name-cell">
           <NameCell

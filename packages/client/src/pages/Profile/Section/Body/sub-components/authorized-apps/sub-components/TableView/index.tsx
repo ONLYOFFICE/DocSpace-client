@@ -79,6 +79,7 @@ const TableView = ({
         fetchMoreFiles={fetchMoreFiles}
         hasMoreFiles={hasNextPage || false}
         itemCount={itemCount || 0}
+        isIndexEditingMode={false}
       >
         {items.map((item) => (
           <Row

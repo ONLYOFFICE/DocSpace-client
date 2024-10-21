@@ -2,5 +2,6 @@
 **/.next
 **/test-results
 **/Dockerfile
+**/yarn/cache
 **/dist
 node_modules

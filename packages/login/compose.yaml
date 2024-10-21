@@ -7,6 +7,7 @@ services:
     working_dir: /app
     volumes:
       - ./__tests__:/app/packages/login/__tests__
+      - ./playwright.config.ts:/app/packages/login/playwright.config.ts
 
   # running tests from a remote folder on the develop branch
   tests-git:

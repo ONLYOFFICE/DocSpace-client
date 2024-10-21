@@ -45,8 +45,6 @@ const HistoryTitleBlock = ({ t, feed }: HistoryBlockContentProps) => {
     (targetType === "file" || targetType === "folder") &&
     actionType !== "delete";
 
-  console.log(actionType, targetType);
-
   return (
     <div
       className={classNames("title", {

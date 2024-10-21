@@ -85,6 +85,7 @@ const useFilesHelper = ({
   withCreate,
   setSelectedItemId,
   setSelectedItemType,
+  shareKey,
 }: UseFilesHelpersProps) => {
   const { t } = useTranslation(["Common"]);
   const {
@@ -227,7 +228,7 @@ const useFilesHelper = ({
         isErrorPath = false,
       ) => {
         if (initRef.current && getRootData && folderId !== "@my") {
-          const folder = await getFolderInfo(folderId, true);
+          const folder = await getFolderInfo(folderId, true, shareKey);
 
           const isArchive = folder.rootFolderType === FolderType.Archive;
 
@@ -254,7 +255,12 @@ const useFilesHelper = ({
           }
         }
 
-        const currentFolder = await getFolder(folderId, filter);
+        const currentFolder = await getFolder(
+          folderId,
+          filter,
+          undefined,
+          shareKey,
+        );
 
         const { folders, files, total, count, pathParts, current } =
           currentFolder;
@@ -444,6 +450,7 @@ const useFilesHelper = ({
       setSelectedItemType,
       setSelectedItemId,
       rootThirdPartyId,
+      shareKey,
     ],
   );
 

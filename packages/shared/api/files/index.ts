@@ -120,10 +120,18 @@ export async function getReferenceData(data: TGetReferenceData) {
 export async function getFolderInfo(
   folderId: number | string,
   skipRedirect = false,
+  share?: string,
 ) {
+  const headers = share
+    ? {
+        "Request-Token": share,
+      }
+    : undefined;
+
   const options: AxiosRequestConfig = {
     method: "get",
     url: `/files/folder/${folderId}`,
+    headers,
   };
 
   const res = (await request(options, skipRedirect)) as TFolder;
@@ -145,6 +153,7 @@ export async function getFolder(
   folderId: string | number,
   filter: FilesFilter,
   signal?: AbortSignal,
+  share?: string,
 ) {
   let params = folderId;
 
@@ -158,10 +167,17 @@ export async function getFolder(
     params = `${folderId}?${filter.toApiUrlParams()}`;
   }
 
+  const headers = share
+    ? {
+        "Request-Token": share,
+      }
+    : undefined;
+
   const options: AxiosRequestConfig = {
     method: "get",
     url: `/files/${params}`,
     signal,
+    headers,
   };
 
   const skipRedirect = true;

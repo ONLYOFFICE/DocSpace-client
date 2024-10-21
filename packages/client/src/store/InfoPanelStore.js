@@ -892,6 +892,10 @@ class InfoPanelStore {
     this.setView(infoShare);
     this.isVisible = true;
   };
+  openMembersTab = () => {
+    this.setView(infoMembers);
+    this.isVisible = true;
+  };
 
   getPrimaryFileLink = async (fileId) => {
     const file = this.filesStore.files.find((item) => item.id === fileId);

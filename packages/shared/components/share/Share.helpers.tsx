@@ -282,10 +282,15 @@ export const canShowManageLink = (
   buffer: TFile,
   infoPanelVisible: boolean,
   infoPanelView: string,
+  isRoom: boolean = false,
 ) => {
   const isEqual = equal(item, buffer);
 
-  return !isEqual || infoPanelView !== "info_share" || !infoPanelVisible;
+  const view =
+    (isRoom && infoPanelView !== "info_members") ||
+    (!isRoom && infoPanelView !== "info_share");
+
+  return !isEqual || view || !infoPanelVisible;
 };
 
 export const copyRoomShareLink = (
@@ -334,16 +339,13 @@ export const copyRoomShareLink = (
       {roleText} {passwordText} {restrictionText} {date}
       {date && <Strong>.</Strong>}
       {linkOptions?.canShowLink && linkOptions?.onClickLink && (
-        <>
-          &nbsp;
-          <Link
-            color={globalColors.lightBlueMain}
-            isHovered
-            onClick={linkOptions.onClickLink}
-          >
-            {t("Notifications:ManageNotifications")}
-          </Link>
-        </>
+        <Link
+          color={globalColors.lightBlueMain}
+          isHovered
+          onClick={linkOptions.onClickLink}
+        >
+          {t("Notifications:ManageNotifications")}
+        </Link>
       )}
     </span>,
   );

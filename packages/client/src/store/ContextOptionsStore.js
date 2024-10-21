@@ -98,6 +98,7 @@ import { copyShareLink } from "@docspace/shared/utils/copy";
 import {
   canShowManageLink,
   copyDocumentShareLink,
+  copyRoomShareLink,
 } from "@docspace/shared/components/share/Share.helpers";
 
 import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helpers/filesUtils";
@@ -530,10 +531,16 @@ class ContextOptionsStore {
     const primaryLink = await this.filesStore.getPrimaryLink(item.id);
 
     if (primaryLink) {
-      copyShareLink(primaryLink.sharedTo.shareLink);
-      item.shared
-        ? toastr.success(t("Common:LinkSuccessfullyCopied"))
-        : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+      copyRoomShareLink(
+        primaryLink,
+        t,
+        true,
+        this.getManageLinkOptions(item, true),
+      );
+      // copyShareLink(primaryLink.sharedTo.shareLink);
+      // item.shared
+      //   ? toastr.success(t("Common:LinkSuccessfullyCopied"))
+      //   : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
 
       this.publicRoomStore.setExternalLink(primaryLink);
     }
@@ -1266,18 +1273,29 @@ class ContextOptionsStore {
     return this.getFilesContextOptions(item, t, false, true);
   };
 
-  getManageLinkOptions = (item) => {
+  getManageLinkOptions = (item, isRoom = false) => {
+    const openTab = () => {
+      if (isRoom) return this.infoPanelStore.openMembersTab();
+
+      this.infoPanelStore.openShareTab();
+    };
+
+    const infoView = isRoom
+      ? this.infoPanelStore.roomsView
+      : this.infoPanelStore.fileView;
+
     return {
       canShowLink: canShowManageLink(
         item,
         this.filesStore.bufferSelection,
         this.infoPanelStore.isVisible,
-        this.infoPanelStore.fileView,
+        infoView,
+        isRoom,
       ),
       onClickLink: () => {
         this.filesStore.setSelection([]);
         this.filesStore.setBufferSelection(item);
-        this.infoPanelStore.openShareTab();
+        openTab();
       },
     };
   };

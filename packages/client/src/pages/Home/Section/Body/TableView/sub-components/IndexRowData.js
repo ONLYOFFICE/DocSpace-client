@@ -180,8 +180,8 @@ const IndexRowDataComponent = (props) => {
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
-            lastColumn === "Author" ? "no-extra-space" : "",
-            lastColumn === "Author" && isIndexEditingMode
+            lastColumn === "AuthorIndexing" ? "no-extra-space" : "",
+            lastColumn === "AuthorIndexing" && isIndexEditingMode
               ? "index-buttons"
               : "",
           )}
@@ -190,7 +190,7 @@ const IndexRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Author" ? lastColumnContent : <></>}
+          {lastColumn === "AuthorIndexing" ? lastColumnContent : <></>}
         </TableCell>
       ) : (
         <div />
@@ -202,8 +202,8 @@ const IndexRowDataComponent = (props) => {
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
-            lastColumn === "Created" ? "no-extra-space" : "",
-            lastColumn === "Created" && isIndexEditingMode
+            lastColumn === "CreatedIndexing" ? "no-extra-space" : "",
+            lastColumn === "CreatedIndexing" && isIndexEditingMode
               ? "index-buttons"
               : "",
           )}
@@ -213,7 +213,7 @@ const IndexRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Created" ? lastColumnContent : <></>}
+          {lastColumn === "CreatedIndexing" ? lastColumnContent : <></>}
         </TableCell>
       ) : (
         <div />
@@ -225,8 +225,8 @@ const IndexRowDataComponent = (props) => {
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
-            lastColumn === "Modified" ? "no-extra-space" : "",
-            lastColumn === "Modified" && isIndexEditingMode
+            lastColumn === "ModifiedIndexing" ? "no-extra-space" : "",
+            lastColumn === "ModifiedIndexing" && isIndexEditingMode
               ? "index-buttons"
               : "",
           )}
@@ -235,7 +235,7 @@ const IndexRowDataComponent = (props) => {
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Modified" ? lastColumnContent : <></>}
+          {lastColumn === "ModifiedIndexing" ? lastColumnContent : <></>}
         </TableCell>
       ) : (
         <div />
@@ -247,15 +247,17 @@ const IndexRowDataComponent = (props) => {
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
-            lastColumn === "Size" ? "no-extra-space" : "",
-            lastColumn === "Size" && isIndexEditingMode ? "index-buttons" : "",
+            lastColumn === "SizeIndexing" ? "no-extra-space" : "",
+            lastColumn === "SizeIndexing" && isIndexEditingMode
+              ? "index-buttons"
+              : "",
           )}
         >
           <SizeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Size" ? lastColumnContent : <></>}
+          {lastColumn === "SizeIndexing" ? lastColumnContent : <></>}
         </TableCell>
       ) : (
         <div />
@@ -267,15 +269,17 @@ const IndexRowDataComponent = (props) => {
           {...selectionProp}
           className={classNames(
             selectionProp?.className,
-            lastColumn === "Type" ? "no-extra-space" : "",
-            lastColumn === "Type" && isIndexEditingMode ? "index-buttons" : "",
+            lastColumn === "TypeIndexing" ? "no-extra-space" : "",
+            lastColumn === "TypeIndexing" && isIndexEditingMode
+              ? "index-buttons"
+              : "",
           )}
         >
           <TypeCell
             sideColor={theme.filesSection.tableView.row.sideColor}
             {...props}
           />
-          {lastColumn === "Type" ? lastColumnContent : <></>}
+          {lastColumn === "TypeIndexing" ? lastColumnContent : <></>}
         </TableCell>
       ) : (
         <div />

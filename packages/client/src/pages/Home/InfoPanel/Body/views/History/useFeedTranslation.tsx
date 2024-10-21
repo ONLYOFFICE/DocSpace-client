@@ -76,8 +76,8 @@ export const useFeedTranslation = (
           ns="InfoPanel"
           i18nKey="RoomRenamed"
           values={{
-            roomTitle: feed.data.newTitle,
             oldRoomTitle: feed.data.oldTitle,
+            roomTitle: feed.data.newTitle,
           }}
           components={{
             1: <HistoryText title={feed.data.oldTitle} />,

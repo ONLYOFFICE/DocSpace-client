@@ -106,6 +106,7 @@ const StyledHistoryBlock = styled.div`
 
       .text-combined {
         text-wrap: nowrap;
+        padding-right: 4px;
       }
     }
   }

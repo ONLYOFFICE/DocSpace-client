@@ -52,6 +52,7 @@ interface HistoryGroupListProps {
   setFilesSelection?: (newSelection: any[]) => void;
   setFilesBufferSelection?: (newBufferSelection: any) => void;
   setSelectedFolder?: (selectedFolder: TSetSelectedFolder | null) => void;
+  withWrapping?: boolean;
 }
 
 const HistoryGroupList = ({
@@ -64,6 +65,7 @@ const HistoryGroupList = ({
   setFilesSelection,
   setFilesBufferSelection,
   setSelectedFolder,
+  withWrapping,
 }: HistoryGroupListProps) => {
   const navigate = useNavigate();
 
@@ -94,7 +96,12 @@ const HistoryGroupList = ({
           ? i < EXPANSION_THRESHOLD - 1
           : i < groupsData.length - 1;
         return (
-          <StyledHistoryLink key={group.id}>
+          <StyledHistoryLink
+            key={group.id}
+            style={
+              withWrapping && { display: "inline", wordBreak: "break-all" }
+            }
+          >
             {isVisitor || isCollaborator ? (
               <Text as="span" className="text" fontWeight={600}>
                 {decode(group.name)}
@@ -103,6 +110,7 @@ const HistoryGroupList = ({
               <Link
                 className="text link"
                 onClick={() => onGroupClick(group.id)}
+                style={withWrapping && { display: "inline", textWrap: "wrap" }}
               >
                 {decode(group.name)}
               </Link>

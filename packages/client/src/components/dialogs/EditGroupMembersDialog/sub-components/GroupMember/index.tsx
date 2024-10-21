@@ -43,6 +43,7 @@ import { HelpButton } from "@docspace/shared/components/help-button";
 import { getUserRoleOptions } from "@docspace/shared/utils/room-members/getUserRoleOptions";
 import { EmployeeStatus, ShareAccessRights } from "@docspace/shared/enums";
 import {
+  getUserAvatarRoleByType,
   getUserType,
   getUserTypeTranslation,
 } from "@docspace/shared/utils/common";
@@ -82,6 +83,8 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
 
   const type = getUserType(user);
 
+  const avatarRole = getUserAvatarRoleByType(type);
+
   const typeLabel = getUserTypeTranslation(type, t);
 
   let selectedUserRoleCBOption;
@@ -113,7 +116,7 @@ const GroupMember = ({ member, infoPanelSelection }: GroupMemberProps) => {
   return (
     <Styled.GroupMember isExpect={user.isExpect} key={user.id}>
       <Avatar
-        role={role}
+        role={avatarRole}
         className="avatar"
         size="min"
         userName={user.isExpect ? "" : user.displayName || user.name}

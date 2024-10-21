@@ -2,6 +2,7 @@ FROM debian:bookworm-slim as base
 RUN apt update && apt install -y git
 
 ARG BRANCH_NAME='develop'
+ADD "https://api.github.com/repos/ONLYOFFICE/DocSpace-client/commits?per_page=1&sha=${BRANCH_NAME}" latest_commit
 RUN git clone --depth=1 -b $BRANCH_NAME https://github.com/ONLYOFFICE/DocSpace-client.git /app
 
 FROM node:20-bookworm-slim

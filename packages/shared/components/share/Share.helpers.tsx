@@ -241,6 +241,8 @@ export const getNameAccess = (access: ShareAccessRights, t: TTranslation) => {
       return t("Common:Comment");
     case ShareAccessRights.ReadOnly:
       return t("Common:ReadOnly");
+    case ShareAccessRights.FormFilling:
+      return t("Common:FillInOut");
     default:
       return "";
   }

@@ -70,16 +70,25 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
       inputValue,
       clipActionResource,
       emailInputName,
-      passwordSettings,
+      passwordSettings = {
+        minLength: 8,
+        upperCase: false,
+        digits: false,
+        specSymbols: false,
+        digitsRegexStr: "(?=.*\\d)",
+        upperCaseRegexStr: "(?=.*[A-Z])",
+        specSymbolsRegexStr:
+          "(?=.*[\\x21-\\x2F\\x3A-\\x40\\x5B-\\x60\\x7B-\\x7E])",
+      },
       onBlur,
       onKeyDown,
       onValidateInput,
       onChange,
-      isDisabled,
-      simpleView,
-      generatorSpecial,
+      isDisabled = false,
+      simpleView = false,
+      generatorSpecial = "!@#$%^&*",
 
-      clipCopiedResource,
+      clipCopiedResource = "Copied",
 
       tooltipPasswordTitle,
       tooltipPasswordLength,
@@ -87,8 +96,8 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
       tooltipPasswordCapital,
       tooltipPasswordSpecial,
       generatePasswordTitle,
-      inputName,
-      scale,
+      inputName = "passwordInput",
+      scale = true,
       size,
       hasError,
       hasWarning,
@@ -96,19 +105,21 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
       tabIndex,
       maxLength,
       id,
-      autoComplete,
+      autoComplete = "new-password",
       forwardedRef,
-      isDisableTooltip,
+      isDisableTooltip = false,
       inputWidth,
-      className,
+      className = "",
       style,
-      isFullWidth,
+      isFullWidth = false,
       tooltipOffsetLeft,
       tooltipOffsetTop,
       isAutoFocussed,
       tooltipAllowedCharacters,
-      isSimulateType,
+      isSimulateType = false,
       simulateSymbol = "•",
+      // clipEmailResource = "E-mail ",
+      // clipPasswordResource = "Password ",
     }: PasswordInputProps,
     ref,
   ) => {
@@ -682,36 +693,6 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
 );
 
 PasswordInput.displayName = "PasswordInput";
-
-PasswordInput.defaultProps = {
-  inputName: "passwordInput",
-  autoComplete: "new-password",
-  isDisabled: false,
-
-  scale: true,
-
-  isDisableTooltip: false,
-  isTextTooltipVisible: false,
-
-  clipEmailResource: "E-mail ",
-  clipPasswordResource: "Password ",
-  clipCopiedResource: "Copied",
-
-  generatorSpecial: "!@#$%^&*",
-  className: "",
-  simpleView: false,
-  passwordSettings: {
-    minLength: 8,
-    upperCase: false,
-    digits: false,
-    specSymbols: false,
-    digitsRegexStr: "(?=.*\\d)",
-    upperCaseRegexStr: "(?=.*[A-Z])",
-    specSymbolsRegexStr: "(?=.*[\\x21-\\x2F\\x3A-\\x40\\x5B-\\x60\\x7B-\\x7E])",
-  },
-  isFullWidth: false,
-  isSimulateType: false,
-};
 
 export { PasswordInput };
 

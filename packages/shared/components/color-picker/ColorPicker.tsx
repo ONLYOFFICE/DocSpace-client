@@ -42,14 +42,14 @@ import { globalColors } from "../../themes";
 const ColorPicker = ({
   className,
   id,
-  onClose,
-  onApply,
-  appliedColor,
-  applyButtonLabel,
-  cancelButtonLabel,
-  isPickerOnly,
+  onClose = () => {},
+  onApply = () => {},
+  appliedColor = globalColors.lightBlueMain,
+  applyButtonLabel = "Apply",
+  cancelButtonLabel = "Cancel",
+  isPickerOnly = false,
   handleChange,
-  hexCodeLabel,
+  hexCodeLabel = "Hex code",
   forwardedRef,
 }: ColorPickerProps) => {
   const [color, setColor] = useState(
@@ -134,16 +134,6 @@ const ColorPicker = ({
       </div>
     </Wrapper>
   );
-};
-
-ColorPicker.defaultProps = {
-  isPickerOnly: false,
-  onClose: () => {},
-  onApply: () => {},
-  appliedColor: globalColors.lightBlueMain,
-  applyButtonLabel: "Apply",
-  cancelButtonLabel: "Cancel",
-  hexCodeLabel: "Hex code",
 };
 
 export { ColorPicker };

@@ -1,5 +1,4 @@
 {
-  "UsersEmptyScreenText": "Δείτε λεπτομέρειες για τους χρήστες εδώ",
   "AddedRoomTags": "Οι ετικέτες προστέθηκαν.",
   "Administration": "Διαχείριση",
   "AndMoreLabel": "και <1>{{count}} περισσότερα</1>",
@@ -57,5 +56,6 @@
   "SubmenuHistory": "Ιστορικό",
   "UserFileUpdated": "Το αρχείο ενημερώθηκε.",
   "Users": "Χρήστες",
+  "UsersEmptyScreenText": "Δείτε λεπτομέρειες για τους χρήστες εδώ",
   "Versions": "Εκδόσεις"
 }

@@ -1,5 +1,4 @@
 {
-  "UsersEmptyScreenText": "Bekijk hier de details van de gebruikers",
   "AddedRoomTags": "Tags toegevoegd.",
   "Administration": "Beheer",
   "AndMoreLabel": "en <1>{{count}} meer</1>",
@@ -57,5 +56,6 @@
   "SubmenuHistory": "Geschiedenis",
   "UserFileUpdated": "Bestand bijgewerkt.",
   "Users": "Gebruikers",
+  "UsersEmptyScreenText": "Bekijk hier de details van de gebruikers",
   "Versions": "Versies"
 }

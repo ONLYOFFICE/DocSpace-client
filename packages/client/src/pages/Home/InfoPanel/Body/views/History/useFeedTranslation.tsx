@@ -80,8 +80,8 @@ export const useFeedTranslation = (
             oldRoomTitle: feed.data.oldTitle,
           }}
           components={{
-            1: <HistoryText title={feed.data.newTitle} />,
-            2: <HistoryText title={feed.data.oldTitle} />,
+            1: <HistoryText title={feed.data.oldTitle} />,
+            2: <HistoryText title={feed.data.newTitle} />,
           }}
         />
       );

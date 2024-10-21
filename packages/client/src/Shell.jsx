@@ -102,6 +102,16 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     setConvertPasswordDialogVisible,
   });
 
+  const location = useLocation();
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+
+    const toastError = searchParams.get("errorMessage");
+
+    if (toastError) toastr.error(toastError);
+  }, [location.search]);
+
   useEffect(() => {
     const regex = /(\/){2,}/g;
     const replaceRegex = /(\/)+/g;
@@ -451,7 +461,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     ) : (
       <Toast />
     );
-  const location = useLocation();
 
   const withoutNavMenu =
     isEditor ||

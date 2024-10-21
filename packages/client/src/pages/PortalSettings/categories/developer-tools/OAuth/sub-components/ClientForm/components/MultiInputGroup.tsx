@@ -68,10 +68,12 @@ const MultiInputGroup = ({
 
   const onFocus = () => {
     setIsFocus(true);
+    if (isValidUrl(value)) setIsAddVisible(true);
   };
 
   const onBlur = () => {
     setIsFocus(false);
+    setIsAddVisible(false);
     if (value) {
       if (isValidUrl(value)) {
         setIsError(false);

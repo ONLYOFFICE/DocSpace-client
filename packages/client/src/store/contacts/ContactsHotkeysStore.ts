@@ -80,7 +80,7 @@ class ContactsHotkeysStore {
   }
 
   get prevFile() {
-    if (this.caretIndex !== -1 && this.caretIndex) {
+    if (this.caretIndex !== -1 && this.caretIndex !== null) {
       const prevCaretIndex = this.caretIndex - 1;
       return this.contactsList[prevCaretIndex];
     }
@@ -89,7 +89,7 @@ class ContactsHotkeysStore {
   }
 
   get nextFile() {
-    if (this.caretIndex !== -1 && this.caretIndex) {
+    if (this.caretIndex !== -1 && this.caretIndex !== null) {
       const nextCaretIndex = this.caretIndex + 1;
       return this.contactsList[nextCaretIndex];
     }

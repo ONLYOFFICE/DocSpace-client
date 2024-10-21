@@ -66,6 +66,7 @@ const LinkRow = ({
   loadingLinks,
   isRoomsLink,
   isPrimaryLink,
+  isFormRoom,
   isArchiveFolder,
   getData,
   onOpenContextMenu,
@@ -188,17 +189,19 @@ const LinkRow = ({
             )}
             {isRoomsLink ? (
               <>
-                <AccessRightSelect
-                  selectedOption={roomSelectedOptions ?? ({} as TOption)}
-                  onSelect={onAccessRightsSelect}
-                  accessOptions={roomAccessOptions}
-                  noBorder
-                  directionX="right"
-                  directionY="bottom"
-                  type="onlyIcon"
-                  manualWidth="300px"
-                  isDisabled={isExpiredLink || isLoaded || isArchiveFolder}
-                />
+                {!isFormRoom && (
+                  <AccessRightSelect
+                    selectedOption={roomSelectedOptions ?? ({} as TOption)}
+                    onSelect={onAccessRightsSelect}
+                    accessOptions={roomAccessOptions}
+                    noBorder
+                    directionX="right"
+                    directionY="bottom"
+                    type="onlyIcon"
+                    manualWidth="300px"
+                    isDisabled={isExpiredLink || isLoaded || isArchiveFolder}
+                  />
+                )}
                 {!isArchiveFolder && (
                   <ContextMenuButton
                     getData={getData}

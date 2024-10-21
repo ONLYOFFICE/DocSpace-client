@@ -255,6 +255,7 @@ const LinkRow = (props: LinkRowProps) => {
       onAccessRightsSelect={onAccessRightsSelect}
       changeExpirationOption={changeExpirationOption}
       isArchiveFolder={isArchiveFolder}
+      isFormRoom
     />
   );
 };

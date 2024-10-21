@@ -66,6 +66,7 @@ export type LinkRowProps =
       onOpenContextMenu?: undefined;
       onCloseContextMenu?: undefined;
       onAccessRightsSelect?: undefined;
+      isFormRoom?: boolean;
     }
   | {
       onAddClick: () => Promise<void>;
@@ -81,6 +82,7 @@ export type LinkRowProps =
       isRoomsLink?: boolean;
       isPrimaryLink: boolean;
       isArchiveFolder: boolean;
+      isFormRoom?: boolean;
       getData: () => ContextMenuModel[];
       onOpenContextMenu: (e: React.MouseEvent) => void;
       onCloseContextMenu: () => void;

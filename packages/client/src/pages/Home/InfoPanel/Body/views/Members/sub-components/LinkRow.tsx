@@ -37,12 +37,12 @@ import OutlineReactSvgUrl from "PUBLIC_DIR/images/outline-true.react.svg?url";
 import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 
-import { RoomsType } from "@docspace/shared/enums";
+import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
 import { toastr } from "@docspace/shared/components/toast";
 import { copyRoomShareLink } from "@docspace/shared/components/share/Share.helpers";
 import LinkRowComponent from "@docspace/shared/components/share/sub-components/LinkRow";
 
-import type { TTranslation } from "@docspace/shared/types";
+import type { Nullable, TTranslation } from "@docspace/shared/types";
 import type { TFileLink } from "@docspace/shared/api/files/types";
 import type { TOption } from "@docspace/shared/components/combobox";
 
@@ -76,6 +76,7 @@ type LinkRowProps = {
     roomId: string | number,
     link: TFileLink,
   ) => Promise<TFileLink>;
+  deleteExternalLink: (link: Nullable<TFileLink>, linkId: string) => void;
 };
 
 const LinkRow = (props: LinkRowProps) => {
@@ -95,9 +96,10 @@ const LinkRow = (props: LinkRowProps) => {
     isPrimaryLink,
     editExternalLink,
     setExternalLink,
+    deleteExternalLink,
   } = props;
 
-  const { shareLink, password, isExpired, primary } = link.sharedTo;
+  const { password, isExpired, primary } = link.sharedTo;
 
   const isLocked = !!password;
   const isDisabled = isExpired;
@@ -225,6 +227,18 @@ const LinkRow = (props: LinkRowProps) => {
       .catch((err: Error) => toastr.error(err?.message))
       .finally(() => setLoadingLinks([]));
   };
+  const removedExpiredLink = (removeLink: TFileLink) => {
+    setLoadingLinks([removeLink.sharedTo.id]);
+
+    editExternalLink(roomId, { ...removeLink, access: ShareAccessRights.None })
+      .then(() => {
+        deleteExternalLink(null, removeLink.sharedTo.id);
+
+        toastr.success(t("Files:LinkDeletedSuccessfully"));
+      })
+      .catch((err: Error) => toastr.error(err?.message))
+      .finally(() => setLoadingLinks([]));
+  };
 
   const onAccessRightsSelect = (opt: TOption) => {
     const newLink = { ...link };
@@ -250,6 +264,7 @@ const LinkRow = (props: LinkRowProps) => {
       getData={getData}
       onOpenContextMenu={onOpenContextMenu}
       onCloseContextMenu={onCloseContextMenu}
+      removedExpiredLink={removedExpiredLink}
       isRoomsLink
       isPrimaryLink={isPrimaryLink}
       onAccessRightsSelect={onAccessRightsSelect}
@@ -281,7 +296,8 @@ export default inject<TStore>(
 
     const { id, roomType } = infoPanelSelection!;
 
-    const { editExternalLink, setExternalLink } = publicRoomStore;
+    const { editExternalLink, setExternalLink, deleteExternalLink } =
+      publicRoomStore;
 
     return {
       setLinkParams,
@@ -297,6 +313,7 @@ export default inject<TStore>(
       isCustomRoom: roomType === RoomsType.CustomRoom,
       editExternalLink,
       setExternalLink,
+      deleteExternalLink,
     };
   },
 )(

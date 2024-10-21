@@ -72,6 +72,7 @@ const LinkRow = ({
   onOpenContextMenu,
   onCloseContextMenu,
   onAccessRightsSelect,
+  removedExpiredLink,
 }: LinkRowProps) => {
   const { t } = useTranslation(["Common", "Translations"]);
 
@@ -173,6 +174,7 @@ const LinkRow = ({
                 isDisabled={isLoaded || isArchiveFolder}
                 isRoomsLink={isRoomsLink}
                 changeAccessOption={changeAccessOption}
+                removedExpiredLink={removedExpiredLink}
               />
             )}
           </div>

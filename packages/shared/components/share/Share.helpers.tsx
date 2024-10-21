@@ -242,7 +242,7 @@ export const getNameAccess = (access: ShareAccessRights, t: TTranslation) => {
     case ShareAccessRights.ReadOnly:
       return t("Common:ReadOnly");
     case ShareAccessRights.FormFilling:
-      return t("SharingPanel:FormFilling");
+      return t("Common:FillInOut");
     default:
       return "";
   }

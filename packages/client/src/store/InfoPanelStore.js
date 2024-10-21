@@ -424,7 +424,7 @@ class InfoPanelStore {
     const path = [
       window.ClientConfig?.proxy?.url,
       config.homepage,
-      "/accounts/people",
+      user.isVisitor ? "/accounts/guests" : "/accounts/people",
     ];
 
     const newFilter = Filter.getDefault();

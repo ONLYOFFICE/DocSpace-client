@@ -87,6 +87,8 @@ const Row = (props: RowProps) => {
         contextOptions={contextOptions || []}
         onClick={handleRowClick}
         getContextModel={getContextMenuModel}
+        isIndexEditingMode={false}
+        badgeUrl=""
       >
         <TableCell className="table-container_file-name-cell">
           <NameCell

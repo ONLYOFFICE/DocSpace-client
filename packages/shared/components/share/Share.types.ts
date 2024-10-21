@@ -68,6 +68,7 @@ export type LinkRowProps =
       onAccessRightsSelect?: undefined;
       isFormRoom?: boolean;
       removedExpiredLink?: never;
+      onClickForm?: () => void;
     }
   | {
       onAddClick: () => Promise<void>;
@@ -89,6 +90,7 @@ export type LinkRowProps =
       onCloseContextMenu: () => void;
       onAccessRightsSelect: (option: TOption) => void;
       removedExpiredLink: (link: TFileLink) => void;
+      onClickForm?: () => void;
     };
 
 export type ExpiredComboBoxProps = {

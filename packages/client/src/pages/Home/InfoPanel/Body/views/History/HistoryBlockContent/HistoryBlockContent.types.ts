@@ -23,46 +23,50 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { TTranslation } from "@docspace/shared/types";
 
-import AtReactSvgUrl from "PUBLIC_DIR/images/@.react.svg?url";
-import { Avatar } from "@docspace/shared/components/avatar";
-import { StyledHistoryBlock } from "../../styles/history";
-import DefaultUserAvatarSmall from "PUBLIC_DIR/images/default_user_photo_size_32-32.png";
-import HistoryTitleBlock from "./HistoryBlockContent/HistoryTitleBlock";
-import HistoryBlockContent from "./HistoryBlockContent";
+export interface HistoryBlockContentProps {
+  t: TTranslation;
+  feed: Feed;
+  historyWithFileList?: boolean;
+}
 
-const HistoryBlock = ({ t, feed, isLastEntity }) => {
-  const { action, initiator, date } = feed;
+interface UserData {
+  avatar: string;
+  avatarSmall: string;
+  avatarMedium: string;
+  avatarMax: string;
+  avatarOriginal: string;
+  displayName: string;
+  hasAvatar: boolean;
+  id: string;
+  isAnonim: boolean;
+  profileUrl: string;
+  tags: [];
+  access: string;
+  oldAccess: string;
+  parentId: number;
+  toFolderId: number;
+  parentTitle: string;
+  parentType: number;
+  fromParentType: number;
+  fromParentTitle: string;
+}
 
-  const isUserAction =
-    action.key === "RoomCreateUser" ||
-    action.key === "RoomUpdateAccessForUser" ||
-    action.key === "RoomRemoveUser";
+interface RelatedAction {
+  action: UserData;
+  initiator: UserData;
+  date: string;
+  data: UserData;
+}
 
-  return (
-    <StyledHistoryBlock
-      className={date}
-      withBottomDivider={!isLastEntity}
-      isUserAction={isUserAction}
-    >
-      <Avatar
-        role="user"
-        className="avatar"
-        size="min"
-        userName={initiator.displayName}
-        source={
-          initiator.hasAvatar
-            ? initiator.avatar
-            : DefaultUserAvatarSmall ||
-              (initiator.displayName ? "" : initiator.email && AtReactSvgUrl)
-        }
-      />
-      <div className="info">
-        <HistoryTitleBlock t={t} feed={feed} />
-        <HistoryBlockContent feed={feed} />
-      </div>
-    </StyledHistoryBlock>
-  );
-};
-
-export default HistoryBlock;
+export interface Feed {
+  action: {
+    id: number;
+    key: string;
+  };
+  data: UserData;
+  date: string;
+  initiator: UserData;
+  related: RelatedAction[];
+}

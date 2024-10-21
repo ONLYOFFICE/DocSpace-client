@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { StyledHistoryBlockMessage } from "../../../styles/history";
+import { Feed } from "./HistoryBlockContent.types";
 
 interface HistoryUserRoleChangeProps {
-  feed: any;
+  feed: Feed;
 }
 
 const HistoryUserGroupRoleChange = ({ feed }: HistoryUserRoleChangeProps) => {

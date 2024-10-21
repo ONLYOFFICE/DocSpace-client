@@ -23,7 +23,11 @@ enum FeedTarget {
   Group = "group",
 }
 
-export type AnyFeedInfo = (typeof feedInfo)[number];
+export type AnyFeedInfo = {
+  key: string;
+  actionType: FeedAction;
+  targetType: FeedTarget;
+};
 
 export type ActionByTarget<T extends `${FeedTarget}`> = Extract<
   AnyFeedInfo,

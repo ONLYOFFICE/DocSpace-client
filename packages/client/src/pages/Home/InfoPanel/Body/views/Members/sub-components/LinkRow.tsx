@@ -204,7 +204,9 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const editExternalLinkAction = (newLink: TFileLink) => {
-    setLoadingLinks([newLink.sharedTo.id]);
+    const timerId = setTimeout(() => {
+      setLoadingLinks([newLink.sharedTo.id]);
+    }, 100);
 
     editExternalLink(roomId, newLink)
       .then((linkData: TFileLink) => {
@@ -221,7 +223,7 @@ const LinkRow = (props: LinkRowProps) => {
         if (linkData) {
           copyRoomShareLink(linkData, t);
         }
-
+        clearTimeout(timerId);
         // toastr.success(t("Files:LinkEditedSuccessfully"));
       })
       .catch((err: Error) => toastr.error(err?.message))
@@ -243,6 +245,12 @@ const LinkRow = (props: LinkRowProps) => {
   const onAccessRightsSelect = (opt: TOption) => {
     const newLink = { ...link };
     if (opt.access) newLink.access = opt.access;
+    editExternalLinkAction(newLink);
+  };
+
+  const onClickForm = () => {
+    const newLink = { ...link };
+    newLink.access = ShareAccessRights.FormFilling;
     editExternalLinkAction(newLink);
   };
 
@@ -270,7 +278,8 @@ const LinkRow = (props: LinkRowProps) => {
       onAccessRightsSelect={onAccessRightsSelect}
       changeExpirationOption={changeExpirationOption}
       isArchiveFolder={isArchiveFolder}
-      isFormRoom
+      isFormRoom={isFormRoom}
+      onClickForm={onClickForm}
     />
   );
 };

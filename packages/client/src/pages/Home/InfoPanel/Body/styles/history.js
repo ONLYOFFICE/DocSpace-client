@@ -39,7 +39,7 @@ const StyledHistorySubtitle = styled.div`
   top: 80px;
   z-index: 99;
 
-  padding: 8px 0 12px;
+  padding: 16px 0 12px;
   font-weight: 600;
   font-size: 13px;
   line-height: 20px;

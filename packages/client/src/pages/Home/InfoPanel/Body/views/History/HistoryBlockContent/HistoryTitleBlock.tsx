@@ -77,7 +77,7 @@ const HistoryTitleBlock = ({ t, feed }: HistoryBlockContentProps) => {
         </Text>
         {hasRelatedItems && (
           <Text as="span" className="users-counter">
-            {` (${feed.related.length + 1}).`}
+            {`(${feed.related.length + 1}).`}
           </Text>
         )}
         {isDisplayFolderInfo && <HistoryMainTextFolderInfo feed={feed} />}

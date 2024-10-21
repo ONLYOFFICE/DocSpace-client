@@ -84,19 +84,18 @@ const HistoryTitleBlock = ({ t, feed }: HistoryBlockContentProps) => {
         {feed.related.length === 0 &&
           targetType === "group" &&
           actionType !== "update" && (
-            <HistoryGroupList feed={feed} withWrapping={true} />
+            <HistoryGroupList feed={feed} withWrapping />
           )}
 
         {feed.related.length === 0 &&
           targetType === "user" &&
           actionType !== "update" && (
-            <HistoryUserList feed={feed} withWrapping={true} />
+            <HistoryUserList feed={feed} withWrapping />
           )}
+        {targetType === "roomExternalLink" && actionType === "create" && (
+          <HistoryRoomExternalLink feedData={feed.data} withWrapping />
+        )}
       </div>
-
-      {targetType === "roomExternalLink" && actionType === "create" && (
-        <HistoryRoomExternalLink feedData={feed.data} />
-      )}
 
       <Text className="date">{getDateTime(feed.date)}</Text>
     </div>

@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components";
 
 import { TableRow, TableContainer } from "@docspace/shared/components/table";
-import { Base } from "@docspace/shared/themes";
 
 export const TableWrapper = styled(TableContainer)`
   margin-top: 0px;
@@ -93,7 +92,5 @@ const StyledTableRow = styled(TableRow)`
     }
   }
 `;
-
-StyledTableRow.defaultProps = { theme: Base };
 
 export { StyledRowWrapper, StyledTableRow };

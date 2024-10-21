@@ -25,6 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
+import { ReactSVG } from "react-svg";
 
 import { Base } from "../../themes";
 import { mobile } from "../../utils";
@@ -96,8 +97,12 @@ const StyledItemDescription = styled.div`
 
 StyledItemDescription.defaultProps = { theme: Base };
 
-const StyledItemIcon = styled.img<{ isShortenIcon?: boolean }>`
+const StyledItemIcon = styled(ReactSVG)<{ isShortenIcon?: boolean }>`
   margin-inline-end: 8px;
+
+  path[fill] {
+    fill: ${(props) => props.theme.dropDownItem.icon.color};
+  }
 
   ${({ isShortenIcon }) =>
     isShortenIcon &&

@@ -605,7 +605,12 @@ class FilesStore {
       }
 
       if (folder.id === this.selectedFolderStore.id) {
-        this.selectedFolderStore.setSelectedFolder({ ...folder });
+        const navigationPath = this.selectedFolderStore.navigationPath;
+
+        this.selectedFolderStore.setSelectedFolder({
+          ...folder,
+          navigationPath,
+        });
       }
 
       if (

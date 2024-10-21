@@ -1,6 +1,6 @@
 {
   "name": "@docspace/management",
-  "version": "2.6.3",
+  "version": "3.0.0",
   "private": true,
   "homepage": "/management",
   "scripts": {

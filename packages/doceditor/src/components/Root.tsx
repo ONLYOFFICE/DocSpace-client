@@ -88,6 +88,8 @@ const Root = ({
   fileId,
   hash,
   shareKey,
+
+  isSkipError,
 }: TResponse) => {
   const editorRef = React.useRef<null | HTMLElement>(null);
 
@@ -95,12 +97,6 @@ const Root = ({
   const fileInfo = config?.file;
 
   const instanceId = config?.document?.referenceData.instanceId;
-
-  const isSkipError =
-    error?.status === "not-found" ||
-    (error?.status === "access-denied" && !!error.editorUrl) ||
-    error?.status === "not-supported" ||
-    error?.status === "quota-exception";
 
   const { t } = useTranslation(["Editor", "Common"]);
 

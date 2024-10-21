@@ -45,6 +45,8 @@ const HistoryTitleBlock = ({ t, feed }: HistoryBlockContentProps) => {
     (targetType === "file" || targetType === "folder") &&
     actionType !== "delete";
 
+  console.log(actionType, targetType);
+
   return (
     <div
       className={classNames("title", {
@@ -70,7 +72,7 @@ const HistoryTitleBlock = ({ t, feed }: HistoryBlockContentProps) => {
               isDisplayFolderInfo ||
               targetType === "group" ||
               targetType === "user" ||
-              targetType === "roomExternalLink",
+              (targetType === "roomExternalLink" && actionType === "create"),
           })}
         >
           {useFeedTranslation(t, feed, hasRelatedItems)}

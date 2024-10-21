@@ -56,6 +56,7 @@ type LinkRowProps = {
     link: TFileLink;
     isPublic?: boolean;
     isFormRoom?: boolean;
+    isCustomRoom?: boolean;
   }) => void;
   setEditLinkPanelIsVisible: (value: boolean) => void;
   setDeleteLinkDialogVisible: (value: boolean) => void;
@@ -69,6 +70,12 @@ type LinkRowProps = {
   isPublicRoomType: boolean;
   isFormRoom: boolean;
   isPrimaryLink: boolean;
+  isCustomRoom: boolean;
+  setExternalLink: (link: TFileLink) => void;
+  editExternalLink: (
+    roomId: string | number,
+    link: TFileLink,
+  ) => Promise<TFileLink>;
 };
 
 const LinkRow = (props: LinkRowProps) => {
@@ -84,6 +91,7 @@ const LinkRow = (props: LinkRowProps) => {
     setIsScrollLocked,
     isPublicRoomType,
     isFormRoom,
+    isCustomRoom,
     isPrimaryLink,
     editExternalLink,
     setExternalLink,
@@ -126,13 +134,19 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const onDeleteLink = () => {
-    setLinkParams({ link, roomId, isPublic: isPublicRoomType, isFormRoom });
+    setLinkParams({
+      link,
+      roomId,
+      isPublic: isPublicRoomType,
+      isFormRoom,
+      isCustomRoom,
+    });
     setDeleteLinkDialogVisible(true);
     onCloseContextMenu();
   };
 
   const onCopyExternalLink = () => {
-    copy(shareLink);
+    // copy(shareLink);
     copyRoomShareLink(link, t);
     onCloseContextMenu();
   };
@@ -149,28 +163,27 @@ const LinkRow = (props: LinkRowProps) => {
         icon: SettingsReactSvgUrl,
         onClick: onEditLink,
       },
-      !isDisabled && {
+      {
         key: "copy-link-settings-key",
         label: t("Files:CopySharedLink"),
         icon: CopyToReactSvgUrl,
         onClick: onCopyExternalLink,
+        disabled: isDisabled,
       },
-
-      !isDisabled &&
-        isLocked && {
-          key: "copy-link-password-key",
-          label: t("Files:CopyLinkPassword"),
-          icon: LockedReactSvgUrl,
-          onClick: onCopyPassword,
-        },
-
-      !isDisabled && {
+      {
+        key: "copy-link-password-key",
+        label: t("Files:CopyLinkPassword"),
+        icon: LockedReactSvgUrl,
+        onClick: onCopyPassword,
+        disabled: isDisabled || !isLocked,
+      },
+      {
         key: "embedding-settings-key",
         label: t("Files:Embed"),
         icon: CodeReactSvgUrl,
         onClick: onEmbeddingClick,
+        disabled: isDisabled,
       },
-
       {
         key: "delete-link-separator",
         isSeparator: true,
@@ -201,7 +214,7 @@ const LinkRow = (props: LinkRowProps) => {
           isFormRoom,
         });
 
-        copy(link?.sharedTo?.shareLink);
+        // copy(link?.sharedTo?.shareLink);
 
         if (linkData) {
           copyRoomShareLink(linkData, t);
@@ -280,6 +293,7 @@ export default inject<TStore>(
       isPublicRoomType:
         roomType === RoomsType.PublicRoom || roomType === RoomsType.FormRoom,
       isFormRoom: roomType === RoomsType.FormRoom,
+      isCustomRoom: roomType === RoomsType.CustomRoom,
       editExternalLink,
       setExternalLink,
     };

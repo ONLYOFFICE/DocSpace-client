@@ -146,7 +146,7 @@ const EditLinkPanel = (props) => {
 
           // toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
         }
-        copyRoomShareLink(link, t);
+        copyRoomShareLink(link, t, false);
         onClose();
       })
       .catch((err) => {

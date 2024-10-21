@@ -291,6 +291,7 @@ export const canShowManageLink = (
 export const copyRoomShareLink = (
   link: TFileLink,
   t: TTranslation,
+  withCopy = true,
   linkOptions?: {
     canShowLink: boolean;
     onClickLink: VoidFunction;
@@ -301,8 +302,7 @@ export const copyRoomShareLink = (
   const role = getNameAccess(link.access, t).toLowerCase();
 
   if (!role) return;
-
-  copy(shareLink);
+  if (withCopy) copy(shareLink);
 
   const roleText = (
     <Trans

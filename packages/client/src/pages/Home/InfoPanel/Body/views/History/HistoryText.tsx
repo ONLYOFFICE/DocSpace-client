@@ -27,8 +27,7 @@
 import styled from "styled-components";
 import { Text } from "@docspace/shared/components/text";
 
-const StyledHistoryText = styled.div`
-  display: flex;
+const StyledHistoryText = styled.span`
   overflow: hidden;
 
   .history-text {
@@ -38,13 +37,18 @@ const StyledHistoryText = styled.div`
 
 const HistoryText = ({ title }: { title: string }) => (
   <StyledHistoryText title={title} className="history-text_wrapper">
-    <Text fontWeight={600} fontSize="13px" className="history-text">
+    <Text fontWeight={600} as="span" fontSize="14px" className="history-text">
       «
     </Text>
-    <Text fontWeight={600} fontSize="13px" truncate>
+    <Text
+      fontWeight={600}
+      as="span"
+      fontSize="14px"
+      style={{ textWrap: "wrap" }}
+    >
       {title}
     </Text>
-    <Text fontWeight={600} fontSize="13px" className="history-text">
+    <Text fontWeight={600} as="span" fontSize="14px" className="history-text">
       »
     </Text>
   </StyledHistoryText>

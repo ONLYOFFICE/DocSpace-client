@@ -1572,7 +1572,7 @@ const Dark: TTheme = {
 
   toggleButton: {
     fillColorDefault: lightBlueMain,
-    fillColorOff: black,
+    fillColorOff: grayDarkMid,
     hoverFillColorOff: lightDarkGrayHover,
 
     fillCircleColor: white,

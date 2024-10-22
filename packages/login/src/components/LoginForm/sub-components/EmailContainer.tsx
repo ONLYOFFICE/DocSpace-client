@@ -52,6 +52,7 @@ interface IEmailContainer {
 
   onChangeLogin: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlurEmail: () => void;
+  handleAnimationStart: (e: React.AnimationEvent<HTMLInputElement>) => void;
   onValidateEmail: (res: TValidate) => undefined;
   isLdapLogin: boolean;
   ldapDomain?: string;
@@ -69,6 +70,7 @@ const EmailContainer = ({
   onValidateEmail,
   isLdapLogin,
   ldapDomain,
+  handleAnimationStart,
 }: IEmailContainer) => {
   const { t } = useTranslation(["Login", "Common"]);
 
@@ -161,6 +163,7 @@ const EmailContainer = ({
           onChange={onChangeLogin}
           onBlur={onBlurEmail}
           onValidateInput={onValidateEmail}
+          handleAnimationStart={handleAnimationStart}
         />
       )}
     </FieldContainer>

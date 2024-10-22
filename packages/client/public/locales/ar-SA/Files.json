@@ -37,7 +37,6 @@
   "DateLastOpened": "تاريخ آخر فتح",
   "DaysRemaining": "الأيام المتبقية: {{daysRemaining}}",
   "DeleteLink": "حذف رابط",
-  "DeleteLinkNote": "سيتم حذف الرابط بشكل دائم. لن تتمكن من التراجع عن هذا الإجراء.",
   "DeleteSharedLink": "سيصبح الرابط السابق غير متاح. سيتم إنشاء رابط مشترك جديد.",
   "DisableDownload": "تقييد نسخ محتوى الملف وتنزيل الملف وطباعته",
   "DisableNotifications": "أوقف التنبيهات",

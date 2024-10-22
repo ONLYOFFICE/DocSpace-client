@@ -47,6 +47,7 @@ const ExpiredComboBox = ({
   isRoomsLink,
   changeAccessOption,
   availableExternalRights,
+  removedExpiredLink,
 }: ExpiredComboBoxProps) => {
   const { t, i18n } = useTranslation(["Common"]);
   const calendarRef = useRef<HTMLDivElement | null>(null);
@@ -97,6 +98,8 @@ const ExpiredComboBox = ({
   };
 
   const onRemoveLink = () => {
+    if (isRoomsLink) return removedExpiredLink?.(link);
+
     if (availableExternalRights.None)
       changeAccessOption(
         {

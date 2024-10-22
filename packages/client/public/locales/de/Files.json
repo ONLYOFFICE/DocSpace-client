@@ -37,7 +37,6 @@
   "DateLastOpened": "Datum der letzten Öffnung",
   "DaysRemaining": "Verbleibende Tage: {{daysRemaining}}",
   "DeleteLink": "Link löschen",
-  "DeleteLinkNote": "Der Link wird dauerhaft gelöscht. Sie können diesen Vorgang nicht rückgängig machen.",
   "DeleteSharedLink": "Der vorherige Link ist nicht mehr verfügbar. Ein neuer freigegebener Link wird erstellt.",
   "DisableDownload": "Beschränken Sie das Kopieren, Herunterladen und Drucken von Dateiinhalten",
   "DisableNotifications": "Benachrichtigungen deaktivieren",

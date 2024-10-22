@@ -48,6 +48,7 @@ import {
   getAccessOptions,
   getRoomAccessOptions,
   copyDocumentShareLink,
+  copyRoomShareLink,
 } from "../Share.helpers";
 import { LinkRowProps } from "../Share.types";
 
@@ -71,6 +72,7 @@ const LinkRow = ({
   onOpenContextMenu,
   onCloseContextMenu,
   onAccessRightsSelect,
+  removedExpiredLink,
   isFormRoom,
   onClickForm,
 }: LinkRowProps) => {
@@ -84,6 +86,10 @@ const LinkRow = ({
   const roomAccessOptions = isRoomsLink ? getRoomAccessOptions(t) : [];
 
   const onCopyLink = (link: TFileLink) => {
+    if (isRoomsLink) {
+      return copyRoomShareLink(link, t);
+    }
+
     copyDocumentShareLink(link, t);
   };
 
@@ -170,6 +176,7 @@ const LinkRow = ({
                 isDisabled={isLoaded || isArchiveFolder}
                 isRoomsLink={isRoomsLink}
                 changeAccessOption={changeAccessOption}
+                removedExpiredLink={removedExpiredLink}
               />
             )}
           </div>

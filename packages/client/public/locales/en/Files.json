@@ -1,4 +1,5 @@
 {
+  "ActionCannotUndone": "This action cannot be undone. Are you sure you want to continue?",
   "AddedToClipboard": "Items added to clipboard",
   "AddMembersDescription": "You can add new team members manually or invite them via link.",
   "AddNewLink": "Add new link",
@@ -37,7 +38,6 @@
   "DateLastOpened": "Date last opened",
   "DaysRemaining": "Days remaining: {{daysRemaining}}",
   "DeleteLink": "Delete link",
-  "DeleteLinkNote": "The link will be deleted permanently. You will not be able to undo this action.",
   "DeleteSharedLink": "The previous link will become unavailable. A new shared link will be created.",
   "DisableDownload": "Restrict file content copy, file download and printing",
   "DisableNotifications": "Disable notifications",
@@ -146,6 +146,9 @@
   "ReorderIndex": "The Reorder action will remove spaces in the indexes. The files will be re-indexed in order with offset to fill in missing indexes.",
   "RestoreAll": "Restore all",
   "RevokeLink": "Revoke link",
+  "RevokeSharedLinkDescriptionCustomRoom": "Links to all files in the room will be deleted. Previous links to room files and embedded documents will become unavailable.",
+  "RevokeSharedLinkDescriptionFormRoom": "Links to all forms in the room will be re-generated. Previous links to room forms and embedded forms will become unavailable.",
+  "RevokeSharedLinkDescriptionPublicRoom": "Links to all files in the room will be re-generated. Previous links to room files and embedded documents will become unavailable.",
   "RoomAvailableViaExternalLink": "Room available via external link",
   "RoomAvailableViaSharedLink": "Room available via shared link",
   "RoomCreated": "Room created",

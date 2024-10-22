@@ -1,5 +1,4 @@
 {
-  "UsersEmptyScreenText": "انظر تفاصيل المستخدمين هنا",
   "AddedRoomTags": "تمت إضافة العلامات.",
   "Administration": "الإدارة",
   "AndMoreLabel": "و <1> {{count}} المزيد </ 1>",
@@ -56,5 +55,6 @@
   "SubmenuHistory": "التاريخ",
   "UserFileUpdated": "تم تحديث الملف.",
   "Users": "المستخدمين",
+  "UsersEmptyScreenText": "انظر تفاصيل المستخدمين هنا",
   "Versions": "إصدارات"
 }

@@ -1,5 +1,4 @@
 {
-  "UsersEmptyScreenText": "Oglej si podrobnosti o uporabnikih tukaj",
   "AddedRoomTags": "Oznake dodane.",
   "Administration": "Administracija",
   "AndMoreLabel": "in <1>{{count}} več</1>",
@@ -57,5 +56,6 @@
   "SubmenuHistory": "Zgodovina",
   "UserFileUpdated": "Datoteka posodobljena.",
   "Users": "Uporabniki",
+  "UsersEmptyScreenText": "Oglej si podrobnosti o uporabnikih tukaj",
   "Versions": "Verzije"
 }

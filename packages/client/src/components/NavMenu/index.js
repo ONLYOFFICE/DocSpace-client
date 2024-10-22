@@ -28,7 +28,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled, { css } from "styled-components";
 
-import { isMobile, mobile } from "@docspace/shared/utils";
+import { injectDefaultTheme, isMobile, mobile } from "@docspace/shared/utils";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Aside } from "@docspace/shared/components/aside";
 
@@ -42,11 +42,10 @@ import { NavMenuHeaderLoader } from "@docspace/shared/skeletons/nav-menu";
 
 import { inject, observer } from "mobx-react";
 import PreparationPortalDialog from "../dialogs/PreparationPortalDialog";
-import { Base } from "@docspace/shared/themes";
 import { DeviceType } from "@docspace/shared/enums";
 import { isPublicPreview } from "@docspace/shared/utils/common";
 
-const StyledContainer = styled.header`
+const StyledContainer = styled.header.attrs(injectDefaultTheme)`
   height: ${(props) => props.theme.header.height};
   position: relative;
   align-items: center;
@@ -80,8 +79,6 @@ const StyledContainer = styled.header`
           }
         `}
 `;
-
-StyledContainer.defaultProps = { theme: Base };
 
 const NavMenu = (props) => {
   const timeout = React.useRef(null);

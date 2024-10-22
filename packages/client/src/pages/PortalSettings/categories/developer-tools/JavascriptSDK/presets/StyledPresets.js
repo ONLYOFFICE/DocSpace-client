@@ -32,8 +32,8 @@ import {
   desktop,
 } from "@docspace/shared/utils/device";
 import { Box } from "@docspace/shared/components/box";
-import Base from "@docspace/shared/themes/base";
 import { showPreviewThreshold } from "../constants";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
 export const SDKContainer = styled(Box)`
   .integration-examples-bottom {
@@ -199,7 +199,7 @@ export const ControlsSection = styled(Box)`
   gap: 16px;
 `;
 
-export const Frame = styled(Box)`
+export const Frame = styled(Box).attrs(injectDefaultTheme)`
   margin-top: 16px;
   position: relative;
 
@@ -251,8 +251,6 @@ export const Frame = styled(Box)`
     height: 100% !important;
   }
 `;
-
-Frame.defaultProps = { theme: Base };
 
 export const Container = styled(Box)`
   width: 100%;

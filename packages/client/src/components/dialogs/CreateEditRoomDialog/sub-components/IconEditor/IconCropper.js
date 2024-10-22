@@ -28,7 +28,7 @@ import IconCropperGridSvgUrl from "PUBLIC_DIR/images/icon-cropper-grid.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
 import ZoomMinusReactSvgUrl from "PUBLIC_DIR/images/zoom-minus.react.svg?url";
 import ZoomPlusReactSvgUrl from "PUBLIC_DIR/images/zoom-plus.react.svg?url";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { ReactSVG } from "react-svg";
 import throttle from "lodash/throttle";
@@ -37,9 +37,9 @@ import AvatarEditor from "react-avatar-editor";
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { Slider } from "@docspace/shared/components/slider";
 
-import { Base } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const StyledIconCropper = styled.div`
+const StyledIconCropper = styled.div.attrs(injectDefaultTheme)`
   max-width: 368px;
 
   .icon_cropper-crop_area {
@@ -124,8 +124,6 @@ const StyledIconCropper = styled.div`
     }
   }
 `;
-
-StyledIconCropper.defaultProps = { theme: Base };
 
 const IconCropper = ({
   t,

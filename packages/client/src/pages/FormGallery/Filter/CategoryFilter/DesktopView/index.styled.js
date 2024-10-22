@@ -29,7 +29,7 @@ import styled, { css } from "styled-components";
 import { DropDown } from "@docspace/shared/components/drop-down";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
 import { ComboBox } from "@docspace/shared/components/combobox";
-import { Base } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
 export const CategoryFilterWrapper = styled.div`
   position: relative;
@@ -54,7 +54,9 @@ export const CategoryFilter = styled(ComboBox)`
   }
 `;
 
-export const CategoryFilterItem = styled(DropDownItem)`
+export const CategoryFilterItem = styled(DropDownItem).attrs(
+  injectDefaultTheme,
+)`
   width: 220px;
   height: 32px;
 
@@ -88,9 +90,8 @@ export const CategoryFilterItem = styled(DropDownItem)`
     }
   }
 `;
-CategoryFilterItem.defaultProps = { theme: Base };
 
-export const CategoryFilterSubList = styled(DropDown)`
+export const CategoryFilterSubList = styled(DropDown).attrs(injectDefaultTheme)`
   position: absolute;
   top: 0;
   margin-top: ${({ marginTop }) => marginTop};
@@ -125,7 +126,6 @@ export const CategoryFilterSubList = styled(DropDown)`
     height: 100%;
   }
 `;
-CategoryFilterSubList.defaultProps = { theme: Base };
 
 export const CategoryFilterSubListItem = styled(DropDownItem)`
   width: 208px;

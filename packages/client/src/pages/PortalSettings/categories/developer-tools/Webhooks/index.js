@@ -34,9 +34,8 @@ import { inject, observer } from "mobx-react";
 
 import styled from "styled-components";
 import { WebhookConfigsLoader } from "./sub-components/Loaders";
-import { Base } from "@docspace/shared/themes";
 
-import { isMobile } from "@docspace/shared/utils";
+import { injectDefaultTheme, isMobile } from "@docspace/shared/utils";
 
 import { useTranslation } from "react-i18next";
 
@@ -53,7 +52,7 @@ const MainWrapper = styled.div`
   }
 `;
 
-const ButtonSeating = styled.div`
+const ButtonSeating = styled.div.attrs(injectDefaultTheme)`
   position: fixed;
   z-index: 2;
   width: 100vw;
@@ -67,8 +66,6 @@ const ButtonSeating = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
-ButtonSeating.defaultProps = { theme: Base };
 
 const StyledCreateButton = styled(Button)`
   width: calc(100% - 32px);

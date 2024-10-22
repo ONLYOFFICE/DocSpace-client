@@ -24,16 +24,16 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-import { Base } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
 const StyledHistoryList = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-const StyledHistorySubtitle = styled.div`
+const StyledHistorySubtitle = styled.div.attrs(injectDefaultTheme)`
   position: sticky;
   background: ${(props) => props.theme.infoPanel.backgroundColor};
   top: 80px;
@@ -46,7 +46,7 @@ const StyledHistorySubtitle = styled.div`
   color: ${(props) => props.theme.infoPanel.history.subtitleColor};
 `;
 
-const StyledHistoryBlock = styled.div`
+const StyledHistoryBlock = styled.div.attrs(injectDefaultTheme)`
   width: 100%;
   display: flex;
   gap: 8px;
@@ -88,7 +88,7 @@ const StyledHistoryBlock = styled.div`
   }
 `;
 
-const StyledHistoryBlockMessage = styled.div`
+const StyledHistoryBlockMessage = styled.div.attrs(injectDefaultTheme)`
   font-weight: 400;
   font-size: 13px;
   line-height: 20px;
@@ -173,7 +173,7 @@ const StyledHistoryBlockTagList = styled.div`
   gap: 4px;
 `;
 
-const StyledHistoryBlockFilesList = styled.div`
+const StyledHistoryBlockFilesList = styled.div.attrs(injectDefaultTheme)`
   margin-top: 8px;
   display: flex;
   flex-direction: column;
@@ -182,7 +182,7 @@ const StyledHistoryBlockFilesList = styled.div`
   border-radius: 3px;
 `;
 
-const StyledHistoryBlockFile = styled.div`
+const StyledHistoryBlockFile = styled.div.attrs(injectDefaultTheme)`
   padding: 4px 16px;
   display: flex;
   gap: 8px;
@@ -257,12 +257,6 @@ const StyledHistoryBlockExpandLink = styled.div`
     text-underline-offset: 2px;
   }
 `;
-
-StyledHistorySubtitle.defaultProps = { theme: Base };
-StyledHistoryBlock.defaultProps = { theme: Base };
-StyledHistoryBlockMessage.defaultProps = { theme: Base };
-StyledHistoryBlockFilesList.defaultProps = { theme: Base };
-StyledHistoryBlockFile.defaultProps = { theme: Base };
 
 export {
   StyledHistoryList,

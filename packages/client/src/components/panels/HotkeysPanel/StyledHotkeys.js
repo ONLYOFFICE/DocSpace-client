@@ -25,10 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { Base } from "@docspace/shared/themes";
-import { tablet, mobile } from "@docspace/shared/utils";
 
-const StyledHotkeysPanel = styled.div`
+import { tablet, mobile, injectDefaultTheme } from "@docspace/shared/utils";
+
+const StyledHotkeysPanel = styled.div.attrs(injectDefaultTheme)`
   .hotkeys_sub-header {
     font-weight: 700;
     font-size: 16px;
@@ -75,7 +75,5 @@ const StyledHotkeysPanel = styled.div`
     }
   }
 `;
-
-StyledHotkeysPanel.defaultProps = { theme: Base };
 
 export { StyledHotkeysPanel };

@@ -27,7 +27,7 @@
 import styled from "styled-components";
 import { isMobileOnly } from "react-device-detect";
 
-import { Base } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
 const StyledEmptyContainer = styled.div`
   width: 100%;
@@ -55,7 +55,9 @@ const PluginListContainer = styled.div`
   gap: 20px;
 `;
 
-const StyledPluginItem = styled.div<{ description?: string }>`
+const StyledPluginItem = styled.div.attrs(injectDefaultTheme)<{
+  description?: string;
+}>`
   width: 100%;
 
   height: 135px;
@@ -102,8 +104,6 @@ const StyledPluginItem = styled.div<{ description?: string }>`
 
   ${(props) => !props.description && isMobileOnly && `max-height: 112px;`}
 `;
-
-StyledPluginItem.defaultProps = { theme: Base };
 
 const StyledPluginHeader = styled.div`
   width: 100%;

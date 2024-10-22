@@ -31,12 +31,16 @@ import React from "react";
 import { ReactSVG } from "react-svg";
 import styled, { css } from "styled-components";
 import { ContextMenu } from "@docspace/shared/components/context-menu";
-import { tablet, isMobile as isMobileUtils } from "@docspace/shared/utils";
+import {
+  tablet,
+  isMobile as isMobileUtils,
+  injectDefaultTheme,
+} from "@docspace/shared/utils";
 import { isMobile } from "react-device-detect";
 import { withTheme } from "styled-components";
 import { Link } from "@docspace/shared/components/link";
 import { Loader } from "@docspace/shared/components/loader";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 import { Tags } from "@docspace/shared/components/tags";
 import { Tag } from "@docspace/shared/components/tag";
 import { getRoomTypeName } from "SRC_DIR/helpers/filesUtils";
@@ -406,7 +410,7 @@ const StyledElement = styled.div`
   width: 32px;
 `;
 
-const StyledOptionButton = styled.div`
+const StyledOptionButton = styled.div.attrs(injectDefaultTheme)`
   display: block;
 
   .expandButton > div:first-child {
@@ -414,8 +418,6 @@ const StyledOptionButton = styled.div`
     padding-inline: 12px 21px;
   }
 `;
-
-StyledOptionButton.defaultProps = { theme: Base };
 
 const badgesPosition = css`
   inset-inline-start: 9px;
@@ -456,7 +458,7 @@ const quickButtonsPosition = css`
   }
 `;
 
-const StyledIcons = styled.div`
+const StyledIcons = styled.div.attrs(injectDefaultTheme)`
   position: absolute;
   top: 8px;
 
@@ -474,8 +476,6 @@ const StyledIcons = styled.div`
     box-shadow: 0px 2px 4px ${globalColors.badgeShadow};
   }
 `;
-
-StyledIcons.defaultProps = { theme: Base };
 
 class Tile extends React.PureComponent {
   constructor(props) {

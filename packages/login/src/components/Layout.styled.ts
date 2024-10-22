@@ -28,10 +28,11 @@
 
 import styled from "styled-components";
 
-import { Base } from "@docspace/shared/themes";
-import { mobile, tablet } from "@docspace/shared/utils";
+import { injectDefaultTheme, mobile, tablet } from "@docspace/shared/utils";
 
-export const ContentWrapper = styled.div<{ bgPattern: string }>`
+export const ContentWrapper = styled.div.attrs(injectDefaultTheme)<{
+  bgPattern: string;
+}>`
   width: 100%;
   height: 100dvh;
 
@@ -144,8 +145,6 @@ export const ContentWrapper = styled.div<{ bgPattern: string }>`
     }
   }
 `;
-
-ContentWrapper.defaultProps = { theme: Base };
 
 export const StyledPage = styled.div`
   display: flex;

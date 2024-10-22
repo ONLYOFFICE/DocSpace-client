@@ -26,20 +26,30 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { inject, observer } from "mobx-react";
 
 import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { isMobile } from "@docspace/shared/utils";
-import { EmployeeType } from "@docspace/shared/enums";
 
 import AccessSelector from "SRC_DIR/components/AccessSelector";
 import StyledInputWrapper from "./styled-containers/StyledInputWrapper";
 
-const UsersType = () => {
-  const { t } = useTranslation(["Ldap", "Common"]);
+interface UsersTypeProps {
+  usersType: number;
+  setUsersType: (value: number) => void;
+  enableSso: boolean;
+  isLoadingXml: boolean;
+}
 
-  const onChangeUserType = () => {};
+const UsersType = (props: UsersTypeProps) => {
+  const { t } = useTranslation(["Ldap", "Common"]);
+  const { usersType, setUsersType, enableSso, isLoadingXml } = props;
+
+  const onChangeUserType = (option: any) => {
+    setUsersType(option.access);
+  };
 
   return (
     <Box displayProp="flex" flexDirection="column" marginProp="24px 0">
@@ -68,11 +78,11 @@ const UsersType = () => {
           t={t}
           manualWidth={352}
           roomType={-1}
-          defaultAccess={EmployeeType.User}
+          defaultAccess={usersType}
           onSelectAccess={onChangeUserType}
           isOwner
           isMobileView={isMobile()}
-          isDisabled={false}
+          isDisabled={!enableSso || isLoadingXml}
           directionX="left"
         />
       </StyledInputWrapper>
@@ -80,4 +90,13 @@ const UsersType = () => {
   );
 };
 
-export default UsersType;
+export default inject(({ ssoStore }) => {
+  const { usersType, setUsersType, enableSso, isLoadingXml } = ssoStore;
+
+  return {
+    usersType,
+    setUsersType,
+    enableSso,
+    isLoadingXml,
+  };
+})(observer(UsersType));

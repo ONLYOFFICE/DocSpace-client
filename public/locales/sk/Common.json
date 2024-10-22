@@ -206,6 +206,7 @@
   "FromDevice": "Zo zariadenia",
   "FromPortal": "Z {{productName}}",
   "FullAccess": "Úplný prístup",
+  "GeneratePassword": "Vytvoriť heslo",
   "Gigabyte": "GB",
   "GoBack": "Vráťte sa späť",
   "Group": "Skupina",
@@ -504,6 +505,5 @@
   "Website": "Web stránka",
   "Yes": "Áno",
   "Yesterday": "Včera",
-  "You": "Vy",
-  "GeneratePassword": "Vytvoriť heslo"
+  "You": "Vy"
 }

@@ -6,7 +6,7 @@ import { HeaderProps } from "../TableView.types";
 
 const Header = (props: HeaderProps) => {
   const { sectionWidth, tableRef, columnStorageName, tagRef } = props;
-  const { t } = useTranslation(["Oauth", "Files", "Webhooks", "Common"]);
+  const { t } = useTranslation(["OAYuth", "Files", "Webhooks", "Common"]);
 
   const defaultColumns: TTableColumn[] = [
     {

@@ -1,5 +1,4 @@
 {
-  "UsersEmptyScreenText": "Vedi i dettagli degli utenti qui",
   "AddedRoomTags": "Tag aggiunti.",
   "Administration": "Amministrazione",
   "AndMoreLabel": "e <1>{{count}} in più</1>",
@@ -57,5 +56,6 @@
   "SubmenuHistory": "Cronologia",
   "UserFileUpdated": "File aggiornato.",
   "Users": "Utenti",
+  "UsersEmptyScreenText": "Vedi i dettagli degli utenti qui",
   "Versions": "Versioni"
 }

@@ -1,5 +1,4 @@
 {
-  "UsersEmptyScreenText": "Xem chi tiết người dùng tại đây",
   "AddedRoomTags": "Đã thêm thẻ.",
   "Administration": "Quản lý ",
   "AndMoreLabel": "và  <1>{{count}} hơn thế nữa</1>",
@@ -57,5 +56,6 @@
   "SubmenuHistory": "Lịch sử",
   "UserFileUpdated": "Tập tin đã được cập nhật. vai trò",
   "Users": "Người dùng",
+  "UsersEmptyScreenText": "Xem chi tiết người dùng tại đây",
   "Versions": "Phiên Bản"
 }

@@ -34,6 +34,7 @@ import { Button } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { Portal } from "@docspace/shared/components/portal";
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
+import { copyRoomShareLink } from "@docspace/shared/components/share/Share.helpers";
 import { StyledEditLinkBodyContent } from "./StyledEditLinkPanel";
 
 import LinkBlock from "./LinkBlock";
@@ -139,12 +140,13 @@ const EditLinkPanel = (props) => {
 
         if (isEdit) {
           copy(linkValue);
-          toastr.success(t("Files:LinkEditedSuccessfully"));
+          // toastr.success(t("Files:LinkEditedSuccessfully"));
         } else {
           copy(link?.sharedTo?.shareLink);
 
-          toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+          // toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
         }
+        copyRoomShareLink(link, t, false);
         onClose();
       })
       .catch((err) => {

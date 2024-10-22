@@ -1,5 +1,4 @@
 {
-  "UsersEmptyScreenText": "İstifadəçi detallarına burada baxın",
   "AddedRoomTags": "Teqlər əlavə edildi.",
   "Administration": "İdarəetmə",
   "AndMoreLabel": "və <1>{{count}} daha çox</1>",
@@ -57,5 +56,6 @@
   "SubmenuHistory": "Tarixçə",
   "UserFileUpdated": "Fayl yeniləndi.",
   "Users": "İstifadəçilər",
+  "UsersEmptyScreenText": "İstifadəçi detallarına burada baxın",
   "Versions": "Versiyalar"
 }

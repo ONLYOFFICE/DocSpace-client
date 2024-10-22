@@ -1,5 +1,4 @@
 {
-  "UsersEmptyScreenText": "Podrobnosti o uživatelích naleznete zde",
   "AddedRoomTags": "Přidané značky.",
   "Administration": "Správa",
   "AndMoreLabel": "a <1>{{count}} další</1>",
@@ -57,5 +56,6 @@
   "SubmenuHistory": "Historie",
   "UserFileUpdated": "Soubor aktualizován.",
   "Users": "Uživatelé",
+  "UsersEmptyScreenText": "Podrobnosti o uživatelích naleznete zde",
   "Versions": "Verze"
 }

@@ -2476,7 +2476,7 @@ const Dark: TTheme = {
     },
 
     upload: {
-      color: black,
+      color: white,
       tooltipColor: darkToastInfo,
       iconColor: darkErrorStatus,
 

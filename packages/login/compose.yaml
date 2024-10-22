@@ -5,9 +5,12 @@ services:
       context: ../..
       dockerfile: packages/login/Dockerfile
     working_dir: /app
+    ports:
+      - "5111:5111"
     volumes:
       - ./__tests__:/app/packages/login/__tests__
       - ./playwright.config.ts:/app/packages/login/playwright.config.ts
+      - ../../playwright-report/login:/app/playwright-report/login
 
   # running tests from a remote folder on the develop branch
   tests-git:
@@ -15,3 +18,7 @@ services:
       context: ../..
       dockerfile: packages/login/Dockerfile
     working_dir: /app
+    ports:
+      - "5111:5111"
+    volumes:
+      - ../../playwright-report/login:/app/playwright-report/login

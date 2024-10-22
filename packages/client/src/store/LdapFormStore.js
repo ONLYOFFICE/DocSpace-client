@@ -151,7 +151,7 @@ class LdapFormStore {
       mail: MailAttribute,
       avatarAttribute: AvatarAttribute,
       userQuotaLimit: UserQuotaLimit,
-      userType: EmployeeType.Guest,
+      userType: EmployeeType.User,
     };
 
     this.authentication = authentication;

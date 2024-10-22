@@ -139,10 +139,10 @@ export const getOptions = (
   isRootEmptyPage: boolean,
   rootFolderType: Nullable<FolderType>,
   actions: OptionActions,
+  isVisitor: boolean = true,
 ): EmptyViewOptionsType => {
   const isFormFiller = access === ShareAccessRights.FormFilling;
   const isCollaborator = access === ShareAccessRights.Collaborator;
-
   const isNotAdmin = isUser(access);
 
   const {
@@ -318,30 +318,30 @@ export const getOptions = (
   };
 
   if (isRootEmptyPage) {
-    return match([rootFolderType, access])
+    return match([rootFolderType, access, isVisitor])
       .returnType<EmptyViewOptionsType>()
-      .with([FolderType.Rooms, ShareAccessRights.None], () => [
+      .with([FolderType.Rooms, ShareAccessRights.None, P._], () => [
         createRoom,
         inviteRootRoom,
         migrationData,
       ])
-      .with([FolderType.USER, ShareAccessRights.None], () => [
+      .with([FolderType.USER, ShareAccessRights.None, P._], () => [
         createDoc,
         createSpreadsheet,
         createPresentation,
         createForm,
       ])
-      .with([FolderType.Recent, P._], () => ({
+      .with([FolderType.Recent, P._, P._], () => ({
         ...actions.onGoToPersonal(),
         icon: <PersonIcon />,
         description: t("Files:GoToPersonal"),
       }))
-      .with([FolderType.Archive, ShareAccessRights.None], () => ({
+      .with([FolderType.Archive, ShareAccessRights.None, P._], () => ({
         ...actions.onGoToShared(),
         icon: <FolderIcon />,
         description: t("Files:GoToMyRooms"),
       }))
-      .with([FolderType.TRASH, P._], () => ({
+      .with([FolderType.TRASH, P._, P.when((item) => !item)], () => ({
         ...actions.onGoToPersonal(),
         icon: <PersonIcon />,
         description: t("Files:GoToPersonal"),

@@ -25,10 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { mobile } from "@docspace/shared/utils";
-import { Base } from "@docspace/shared/themes";
+import { injectDefaultTheme, mobile } from "@docspace/shared/utils";
 
-export const StyledSimpleNav = styled.div`
+export const StyledSimpleNav = styled.div.attrs(injectDefaultTheme)`
   width: 100%;
   display: flex;
   align-items: center;
@@ -37,8 +36,6 @@ export const StyledSimpleNav = styled.div`
   background-color: ${(props) => props.theme?.deepLink?.navBackground};
   margin-bottom: 32px;
 `;
-
-StyledSimpleNav.defaultProps = { theme: Base };
 
 export const StyledDeepLink = styled.div`
   width: 100%;
@@ -70,7 +67,7 @@ export const StyledBodyWrapper = styled.div`
   }
 `;
 
-export const StyledFileTile = styled.div`
+export const StyledFileTile = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   gap: 16px;
   padding: 8px 16px;
@@ -78,8 +75,6 @@ export const StyledFileTile = styled.div`
   border-radius: 3px;
   align-items: center;
 `;
-
-StyledFileTile.defaultProps = { theme: Base };
 
 export const StyledActionsWrapper = styled.div`
   display: flex;

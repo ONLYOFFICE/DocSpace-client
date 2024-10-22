@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import { Text } from "../text";
 
@@ -8,18 +7,8 @@ import {
   EmptyViewHeader,
   EmptyViewWrapper,
 } from "./EmptyView.styled";
-import { EmptyViewItem } from "./EmptyView.item";
-import type {
-  EmptyViewLinkType,
-  EmptyViewOptionsType,
-  EmptyViewProps,
-} from "./EmptyView.types";
-
-const isEmptyLinkOptions = (
-  options: EmptyViewOptionsType,
-): options is EmptyViewLinkType => {
-  return typeof options === "object" && "to" in options;
-};
+import EmptyViewOption from "./EmptyView.option";
+import type { EmptyViewProps } from "./EmptyView.types";
 
 export const EmptyView = ({
   description,
@@ -46,21 +35,9 @@ export const EmptyView = ({
       </EmptyViewHeader>
       {options && (
         <EmptyViewBody>
-          {isEmptyLinkOptions(options) ? (
-            <Link
-              className="ev-link"
-              to={options.to}
-              state={options.state}
-              onClick={options.onClick}
-            >
-              {options.icon}
-              <span>{options.description}</span>
-            </Link>
-          ) : (
-            options.map((option) => (
-              <EmptyViewItem {...option} key={option.key} />
-            ))
-          )}
+          {options.map((option) => (
+            <EmptyViewOption key={option.key} option={option} />
+          ))}
         </EmptyViewBody>
       )}
     </EmptyViewWrapper>

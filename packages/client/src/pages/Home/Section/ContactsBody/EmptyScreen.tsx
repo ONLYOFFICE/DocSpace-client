@@ -128,12 +128,15 @@ const EmptyScreen = ({
     }
 
     if (isFiltered)
-      return {
-        to: "",
-        description: t("Common:ClearFilter"),
-        icon: <ClearEmptyFilterSvg />,
-        onClick: onResetFilter,
-      };
+      return [
+        {
+          to: "",
+          description: t("Common:ClearFilter"),
+          icon: <ClearEmptyFilterSvg />,
+          onClick: onResetFilter,
+          key: "empty-view-group-clear-filer",
+        },
+      ];
 
     return null;
   };

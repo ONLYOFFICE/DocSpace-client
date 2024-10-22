@@ -31,5 +31,3 @@ WORKDIR /app/packages/login
 
 RUN yarn test:build
 
-CMD ["yarn", "test:e2e"]
-

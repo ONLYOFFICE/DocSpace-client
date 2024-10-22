@@ -1,12 +1,13 @@
 services:
   # running tests from a local folder login/__tests__
   tests-local:
+    image: tests
     build:
       context: ../..
       dockerfile: packages/login/Dockerfile
-    working_dir: /app
     ports:
       - "5111:5111"
+    command: "npx playwright test"
     volumes:
       - ./__tests__:/app/packages/login/__tests__
       - ./playwright.config.ts:/app/packages/login/playwright.config.ts
@@ -14,10 +15,8 @@ services:
 
   # running tests from a remote folder on the develop branch
   tests-git:
-    build:
-      context: ../..
-      dockerfile: packages/login/Dockerfile
-    working_dir: /app
+    image: tests
+    command: "npx playwright test"
     ports:
       - "5111:5111"
     volumes:

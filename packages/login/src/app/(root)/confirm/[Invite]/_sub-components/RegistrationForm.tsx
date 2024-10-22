@@ -266,8 +266,8 @@ const RegistrationForm = ({
             onChange={onChangeCheckbox}
             isChecked={isChecked}
             isDisabled={isLoading}
+            label={newsletter}
           />
-          <Text>{newsletter}</Text>
         </div>
       )}
 

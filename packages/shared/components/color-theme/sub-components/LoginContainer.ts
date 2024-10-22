@@ -241,6 +241,18 @@ const LoginContainer = styled.div<{
         margin-top: 24px;
       }
     } */
+
+    @keyframes autofill {
+      from {
+      }
+      to {
+      }
+    }
+
+    input:-webkit-autofill {
+      animation-name: autofill;
+      animation-duration: 1ms;
+    }
   }
 
   .logo-wrapper {

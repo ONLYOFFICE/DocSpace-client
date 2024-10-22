@@ -126,8 +126,8 @@ export const convertFilesToItems: (
 
 export const convertRoomsToItems: (
   rooms: TRoom[],
-  t: TTranslation,
-) => TSelectorItem[] = (rooms: TRoom[], t: TTranslation) => {
+  t?: TTranslation,
+) => TSelectorItem[] = (rooms: TRoom[], t?: TTranslation) => {
   const items = rooms.map((room) => {
     const {
       id,

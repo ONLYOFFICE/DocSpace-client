@@ -31,6 +31,7 @@ import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";
 import PeopleIcon from "PUBLIC_DIR/images/people.react.svg?url";
 import CopyIcon from "PUBLIC_DIR/images/copy.react.svg?url";
 import LockedReactSvg from "PUBLIC_DIR/images/icons/12/locked.react.svg";
+import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 
 import { RowSkeleton } from "../../../skeletons/share";
 import { TFileLink } from "../../../api/files/types";
@@ -47,6 +48,7 @@ import {
   getAccessOptions,
   getRoomAccessOptions,
   copyDocumentShareLink,
+  copyRoomShareLink,
 } from "../Share.helpers";
 import { LinkRowProps } from "../Share.types";
 
@@ -70,6 +72,9 @@ const LinkRow = ({
   onOpenContextMenu,
   onCloseContextMenu,
   onAccessRightsSelect,
+  removedExpiredLink,
+  isFormRoom,
+  onClickForm,
 }: LinkRowProps) => {
   const { t } = useTranslation(["Common", "Translations"]);
 
@@ -81,6 +86,10 @@ const LinkRow = ({
   const roomAccessOptions = isRoomsLink ? getRoomAccessOptions(t) : [];
 
   const onCopyLink = (link: TFileLink) => {
+    if (isRoomsLink) {
+      return copyRoomShareLink(link, t);
+    }
+
     copyDocumentShareLink(link, t);
   };
 
@@ -167,6 +176,7 @@ const LinkRow = ({
                 isDisabled={isLoaded || isArchiveFolder}
                 isRoomsLink={isRoomsLink}
                 changeAccessOption={changeAccessOption}
+                removedExpiredLink={removedExpiredLink}
               />
             )}
           </div>
@@ -183,17 +193,25 @@ const LinkRow = ({
             )}
             {isRoomsLink ? (
               <>
-                <AccessRightSelect
-                  selectedOption={roomSelectedOptions ?? ({} as TOption)}
-                  onSelect={onAccessRightsSelect}
-                  accessOptions={roomAccessOptions}
-                  noBorder
-                  directionX="right"
-                  directionY="bottom"
-                  type="onlyIcon"
-                  manualWidth="300px"
-                  isDisabled={isExpiredLink || isLoaded || isArchiveFolder}
-                />
+                {isFormRoom ? (
+                  <IconButton
+                    iconName={FormFillRectSvgUrl}
+                    onClick={onClickForm}
+                    size={16}
+                  />
+                ) : (
+                  <AccessRightSelect
+                    selectedOption={roomSelectedOptions ?? ({} as TOption)}
+                    onSelect={onAccessRightsSelect}
+                    accessOptions={roomAccessOptions}
+                    noBorder
+                    directionX="right"
+                    directionY="bottom"
+                    type="onlyIcon"
+                    manualWidth="300px"
+                    isDisabled={isExpiredLink || isLoaded || isArchiveFolder}
+                  />
+                )}
                 {!isArchiveFolder && (
                   <ContextMenuButton
                     getData={getData}

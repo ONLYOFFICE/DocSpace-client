@@ -53,7 +53,7 @@ export const NewFilesPanelItem = ({
                 key={`${date}-${value.room.id}`}
                 className="room-items-container"
               >
-                <NewFilesPanelItemRoom {...value} />
+                <NewFilesPanelItemRoom {...value} onClose={onClose} />
                 <NewFilesPanelFileList
                   items={value.items}
                   isRooms

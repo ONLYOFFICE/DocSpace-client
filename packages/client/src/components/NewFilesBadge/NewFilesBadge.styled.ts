@@ -115,6 +115,8 @@ export const StyledRoomItem = styled.div`
   align-items: center;
   gap: 8px;
 
+  cursor: pointer;
+
   .room-icon {
     min-width: 24px;
     .room-image {

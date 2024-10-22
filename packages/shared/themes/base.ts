@@ -2378,7 +2378,14 @@ export const getBaseTheme = () => {
     },
 
     emptyView: {
-      linkColor: lightBlueMain,
+      link: {
+        color: lightBlueMain,
+        background: white,
+        hoverBackground: lightGrayHover,
+        hoverColor: lightBlueMainHover,
+        PressedBackground: lightGraySelected,
+        PressedColor: lightBlueMainPressed,
+      },
 
       items: {
         hoverColor: grayLight,

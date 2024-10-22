@@ -134,7 +134,7 @@ const EmptyScreen = ({
           description: t("Common:ClearFilter"),
           icon: <ClearEmptyFilterSvg />,
           onClick: onResetFilter,
-          key: "empty-view-group-clear-filer",
+          key: "empty-view-contacts-clear-filter",
         },
       ];
 

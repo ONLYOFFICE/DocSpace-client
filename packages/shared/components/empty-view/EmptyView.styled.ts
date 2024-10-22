@@ -65,10 +65,15 @@ export const EmptyViewBody = styled.div`
     align-items: center;
     flex-wrap: nowrap;
 
+    padding: 6px 10px;
+
     max-width: fit-content;
     text-decoration: none;
 
-    color: ${(props) => props.theme.emptyView.linkColor};
+    color: ${(props) => props.theme.emptyView.link.color};
+    background: ${(props) => props.theme.emptyView.link.background};
+
+    border-radius: 6px;
 
     svg {
       color: inherit;
@@ -84,6 +89,18 @@ export const EmptyViewBody = styled.div`
       line-height: 15px;
       text-decoration: underline dotted;
       text-underline-offset: 2px;
+    }
+
+    @media (hover: hover) {
+      :hover {
+        background: ${(props) => props.theme.emptyView.link.hoverBackground};
+        color: ${(props) => `${props.theme.emptyView.link.hoverColor}`};
+      }
+    }
+
+    :active {
+      background: ${(props) => props.theme.emptyView.link.PressedBackground};
+      color: ${(props) => props.theme.emptyView.link.PressedColor};
     }
   }
 `;

@@ -64,9 +64,9 @@ export const StyledPanel = styled.div<{ position: TPanelPosition }>`
 `;
 
 export const StyledItem = styled.div<{
-  isRooms: boolean;
-  isFirst: boolean;
-  isLoader: boolean;
+  isRooms?: boolean;
+  isFirst?: boolean;
+  isLoader?: boolean;
 }>`
   padding: 0;
   margin: 0;

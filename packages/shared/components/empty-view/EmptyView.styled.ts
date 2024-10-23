@@ -55,8 +55,11 @@ export const EmptyViewBody = styled.div`
   width: 100%;
 
   &:has(> .ev-link) {
-    align-items: center;
     margin-top: 2px;
+  }
+
+  .empty-view--margin {
+    margin-top: 18px;
   }
 
   .ev-link {
@@ -64,6 +67,7 @@ export const EmptyViewBody = styled.div`
     gap: 8px;
     align-items: center;
     flex-wrap: nowrap;
+    align-self: center;
 
     padding: 6px 10px;
 
@@ -87,8 +91,8 @@ export const EmptyViewBody = styled.div`
       font-weight: 600;
       font-size: 13px;
       line-height: 15px;
-      text-decoration: underline dotted;
-      text-underline-offset: 2px;
+      /* text-decoration: underline dotted; */
+      /* text-underline-offset: 2px; */
     }
 
     @media (hover: hover) {

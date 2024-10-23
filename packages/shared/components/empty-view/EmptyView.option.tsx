@@ -26,6 +26,8 @@
 
 import { Link } from "react-router-dom";
 
+import { classNames } from "../../utils";
+
 import { EmptyViewItem } from "./EmptyView.item";
 import { isEmptyLinkOptions } from "./EmptyView.utils";
 
@@ -35,7 +37,7 @@ function EmptyViewOption({ option }: EmptyViewOptionProps) {
   if (isEmptyLinkOptions(option))
     return (
       <Link
-        className="ev-link"
+        className={classNames("ev-link", option.className)}
         to={option.to}
         state={option.state}
         onClick={option.onClick}

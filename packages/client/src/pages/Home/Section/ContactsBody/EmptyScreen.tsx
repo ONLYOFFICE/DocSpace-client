@@ -29,9 +29,13 @@ import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
-import { EmptyView } from "@docspace/shared/components/empty-view";
+import {
+  EmptyView,
+  EmptyViewOptionsType,
+} from "@docspace/shared/components/empty-view";
 import { UserStore } from "@docspace/shared/store/UserStore";
-import { TUser } from "@docspace/shared/api/people/types";
+import type { TUser } from "@docspace/shared/api/people/types";
+import type { Nullable } from "@docspace/shared/types";
 
 import InviteUserIcon from "PUBLIC_DIR/images/emptyview/invite.user.svg";
 import TrashIcon from "PUBLIC_DIR/images/emptyview/trash.svg";
@@ -52,6 +56,7 @@ type EmptyScreenProps = {
   currentGroup?: GroupsStore["currentGroup"];
   setIsSectionBodyLoading?: ClientLoadingStore["setIsSectionBodyLoading"];
   deleteGroup?: GroupsStore["deleteGroup"];
+  getContactsModel: PeopleStore["contextOptionsStore"]["getContactsModel"];
 };
 
 const EmptyScreen = ({
@@ -61,6 +66,7 @@ const EmptyScreen = ({
   isFiltered,
   setIsSectionBodyLoading,
   deleteGroup,
+  getContactsModel,
 }: EmptyScreenProps) => {
   const { t } = useTranslation([
     "People",
@@ -105,7 +111,7 @@ const EmptyScreen = ({
     <EmptyScreenPersonSvgDark />
   );
 
-  const getOptions = () => {
+  const getOptions = (): Nullable<EmptyViewOptionsType> => {
     if (isEmptyGroup && currentGroup) {
       return [
         {
@@ -130,7 +136,19 @@ const EmptyScreen = ({
     if (isFiltered)
       return [
         {
+          key: "empty-view-invite-new-users",
+          title: "Invite new users",
+          description:
+            "Send an invitation letter to add new members to the portal",
+          disabled: isRoomAdmin || currentGroup?.isLDAP,
+          icon: <InviteUserIcon />,
+          model: (getContactsModel(t, false) ?? []).filter(
+            (m) => typeof m !== "boolean",
+          ) as ContextMenuModel[],
+        },
+        {
           to: "",
+          className: "empty-view--margin",
           description: t("Common:ClearFilter"),
           icon: <ClearEmptyFilterSvg />,
           onClick: onResetFilter,
@@ -181,6 +199,7 @@ export default inject(
       setIsSectionBodyLoading,
 
       deleteGroup,
+      getContactsModel: peopleStore.contextOptionsStore.getContactsModel,
     };
   },
 )(observer(EmptyScreen));

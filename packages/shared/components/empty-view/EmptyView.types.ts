@@ -10,6 +10,7 @@ export type EmptyViewLinkType = {
   icon: React.ReactElement;
   description: string;
   onClick?: React.MouseEventHandler<HTMLAnchorElement>;
+  className?: string;
 };
 
 export type EmptyViewItemType = {
@@ -19,7 +20,7 @@ export type EmptyViewItemType = {
   icon: React.ReactElement;
   onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   disabled?: boolean;
-  model?: ContextMenuModel[];
+  model?: Nullable<ContextMenuModel[]>;
 };
 
 export type EmptyViewOptionsType = (EmptyViewItemType | EmptyViewLinkType)[];

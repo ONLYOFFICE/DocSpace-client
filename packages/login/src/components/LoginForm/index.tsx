@@ -305,8 +305,6 @@ const LoginForm = ({
               ? portals[0].portalName
               : `${portals[0].portalName}.${baseDomain}`;
 
-          console.log(name);
-
           const redirectUrl = getCookie(
             "x-redirect-authorization-uri",
           )?.replace(window.location.origin, name);

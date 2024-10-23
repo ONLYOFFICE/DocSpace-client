@@ -208,6 +208,7 @@
   "FromDevice": "デバイスから",
   "FromPortal": "{{productName}}から",
   "FullAccess": "フルアクセス可能",
+  "GeneratePassword": "パスワードの生成",
   "Gigabyte": "GB",
   "GoBack": "戻る",
   "Group": "グループ",
@@ -507,6 +508,5 @@
   "Website": "ウェブサイト",
   "Yes": "はい",
   "Yesterday": "昨日",
-  "You": "あなた",
-  "GeneratePassword": "パスワードの生成"
+  "You": "あなた"
 }

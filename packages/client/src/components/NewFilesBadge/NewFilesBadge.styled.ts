@@ -64,15 +64,15 @@ export const StyledPanel = styled.div<{ position: TPanelPosition }>`
 `;
 
 export const StyledItem = styled.div<{
-  isRooms: boolean;
-  isFirst: boolean;
-  isLoader: boolean;
+  isRooms?: boolean;
+  isFirst?: boolean;
+  isLoader?: boolean;
 }>`
   padding: 0;
   margin: 0;
 
   .date-item {
-    margin-bottom: ${(props) => (props.isLoader ? "8px" : "12px")};
+    margin-bottom: 0;
     margin-top: ${(props) => (props.isFirst ? "20px" : "8px")};
   }
 
@@ -92,7 +92,7 @@ export const StyledItem = styled.div<{
 
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 8px;
 
     padding: ${(props) => (props.isRooms ? 0 : "16px 0 ")};
 
@@ -114,6 +114,8 @@ export const StyledRoomItem = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 8px;
+
+  cursor: pointer;
 
   .room-icon {
     min-width: 24px;

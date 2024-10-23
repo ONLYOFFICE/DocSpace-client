@@ -1572,7 +1572,7 @@ const Dark: TTheme = {
 
   toggleButton: {
     fillColorDefault: lightBlueMain,
-    fillColorOff: black,
+    fillColorOff: grayDarkMid,
     hoverFillColorOff: lightDarkGrayHover,
 
     fillCircleColor: white,
@@ -2483,7 +2483,7 @@ const Dark: TTheme = {
     },
 
     upload: {
-      color: black,
+      color: white,
       tooltipColor: darkToastInfo,
       iconColor: darkErrorStatus,
 

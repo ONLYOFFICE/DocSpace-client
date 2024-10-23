@@ -100,7 +100,7 @@ const SelectGroup = ({
         onChange={onSelect}
         onClick={onInputClick}
         style={{ display: "none" }}
-        accept="image/png, image/jpeg, svg"
+        accept="image/png, image/jpeg, image/svg+xml"
       />
     </StyledInputGroup>
   );

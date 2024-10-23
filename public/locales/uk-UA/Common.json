@@ -206,6 +206,7 @@
   "FromDevice": "З пристрою",
   "FromPortal": "З {{productName}}",
   "FullAccess": "Повний доступ",
+  "GeneratePassword": "Створити пароль",
   "Gigabyte": "ГБ",
   "GoBack": "Повернутися",
   "Group": "Група",
@@ -504,6 +505,5 @@
   "Website": "Веб-сайт",
   "Yes": "Так",
   "Yesterday": "Вчора",
-  "You": "Ви",
-  "GeneratePassword": "Створити пароль"
+  "You": "Ви"
 }

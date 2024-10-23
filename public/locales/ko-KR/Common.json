@@ -206,6 +206,7 @@
   "FromDevice": "장치에서",
   "FromPortal": "{{productName}}에서",
   "FullAccess": "전체 액세스",
+  "GeneratePassword": "비밀번호 생성",
   "Gigabyte": "GB",
   "GoBack": "돌아가기",
   "Group": "그룹",
@@ -504,6 +505,5 @@
   "Website": "웹사이트",
   "Yes": "네",
   "Yesterday": "어제",
-  "You": "나",
-  "GeneratePassword": "비밀번호 생성"
+  "You": "나"
 }

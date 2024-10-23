@@ -206,6 +206,7 @@
   "FromDevice": "Z urządzenia",
   "FromPortal": "Z {{productName}}",
   "FullAccess": "Pełen dostęp",
+  "GeneratePassword": "Wygeneruj hasło",
   "Gigabyte": "GB",
   "GoBack": "Wróć",
   "Group": "Grupa",
@@ -504,6 +505,5 @@
   "Website": "Strona internetowa",
   "Yes": "Tak",
   "Yesterday": "Wczoraj",
-  "You": "Ty",
-  "GeneratePassword": "Wygeneruj hasło"
+  "You": "Ty"
 }

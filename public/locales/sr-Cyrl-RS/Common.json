@@ -206,6 +206,7 @@
   "FromDevice": "Iz uređaja",
   "FromPortal": "Iz {{productName}}",
   "FullAccess": "Потпуни приступ",
+  "GeneratePassword": "Генериши лозинку",
   "Gigabyte": "ГБ",
   "GoBack": "Иди назад",
   "Group": "Група",
@@ -504,6 +505,5 @@
   "Website": "Вебсајт",
   "Yes": "Да",
   "Yesterday": "Јуче",
-  "You": "Ви",
-  "GeneratePassword": "Генериши лозинку"
+  "You": "Ви"
 }

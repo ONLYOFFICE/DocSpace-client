@@ -207,6 +207,7 @@
   "FromDevice": "De pe dispozitivul",
   "FromPortal": "De la {{productName}}",
   "FullAccess": "Acces complet",
+  "GeneratePassword": "Generează o parolă",
   "Gigabyte": "GO",
   "GoBack": "Înapoi",
   "Group": "Grup",
@@ -506,6 +507,5 @@
   "Website": "Pagină web",
   "Yes": "Da",
   "Yesterday": "Ieri",
-  "You": "Dvs",
-  "GeneratePassword": "Generează o parolă"
+  "You": "Dvs"
 }

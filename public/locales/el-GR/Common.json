@@ -206,6 +206,7 @@
   "FromDevice": "Από τη συσκευή",
   "FromPortal": "Από {{productName}}",
   "FullAccess": "Πλήρης πρόσβαση",
+  "GeneratePassword": "Δημιουργία κωδικού πρόσβασης",
   "Gigabyte": "GB",
   "GoBack": "Επιστροφή",
   "Group": "Ομάδα",
@@ -504,6 +505,5 @@
   "Website": "Ιστότοπος",
   "Yes": "Ναι",
   "Yesterday": "Χθες",
-  "You": "Εσείς",
-  "GeneratePassword": "Δημιουργία κωδικού πρόσβασης"
+  "You": "Εσείς"
 }

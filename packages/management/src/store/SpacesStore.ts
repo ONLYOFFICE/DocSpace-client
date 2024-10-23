@@ -40,9 +40,6 @@ class SpacesStore {
   createPortalDialogVisible = false;
   deletePortalDialogVisible = false;
   domainDialogVisible = false;
-  spaceCreatedDialogVisible = false;
-
-  referenceLink: URL | string = "";
 
   currentPortal = null;
 
@@ -101,10 +98,6 @@ class SpacesStore {
     this.currentPortal = portal;
   };
 
-  setReferenceLink = (link: URL | string) => {
-    this.referenceLink = link;
-  };
-
   setCreatePortalDialogVisible = (createPortalDialogVisible: boolean) => {
     this.createPortalDialogVisible = createPortalDialogVisible;
   };
@@ -115,9 +108,6 @@ class SpacesStore {
 
   setDeletePortalDialogVisible = (deletePortalDialogVisible: boolean) => {
     this.deletePortalDialogVisible = deletePortalDialogVisible;
-  };
-  setSpaceCreatedDialogVisible = (spaceCreatedDialogVisible: boolean) => {
-    this.spaceCreatedDialogVisible = spaceCreatedDialogVisible;
   };
 }
 

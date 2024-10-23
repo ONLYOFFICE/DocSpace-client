@@ -490,7 +490,10 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
     }, [caretPosition, state.type, state.value, isSimulateType]);
 
     useEffect(() => {
-      if (isSimulateType && inputValue !== prevInputValue) {
+      if (
+        (isSimulateType && inputValue !== prevInputValue) ||
+        (inputValue === "" && prevInputValue !== "")
+      ) {
         onChangeAction?.({
           target: { value: inputValue },
         } as ChangeEvent<HTMLInputElement>);

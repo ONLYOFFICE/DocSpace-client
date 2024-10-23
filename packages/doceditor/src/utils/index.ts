@@ -64,6 +64,8 @@ export const getBackUrl = (
   const url = window.location.href;
   const origin = url.substring(0, url.indexOf("/doceditor"));
 
+  console.log("goback url", `${combineUrl(origin, backUrl)}`);
+
   return `${combineUrl(origin, backUrl)}`;
 };
 

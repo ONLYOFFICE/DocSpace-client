@@ -319,6 +319,8 @@ class LdapFormStore {
 
   restoreToDefault = async (t) => {
     const settingsRes = await getLdapDefaultSettings();
+    settingsRes.password = "";
+
     this.mapSettings(settingsRes);
 
     this.save(t, true);
@@ -420,6 +422,10 @@ class LdapFormStore {
     const settings = this.getSettings();
     const respose = await saveLdapSettings(settings);
     this.setServerSettings();
+
+    if (turnOff) {
+      this.password = "";
+    }
 
     if (respose?.id) {
       this.inProgress = true;

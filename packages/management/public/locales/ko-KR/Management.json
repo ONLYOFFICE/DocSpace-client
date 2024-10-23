@@ -10,14 +10,10 @@
   "DomainSettings": "도메인 설정",
   "EnterDomain": "도메인 이름을 입력하세요",
   "EnterName": "공간 이름을 입력하세요",
-  "GoToSpace": "공간으로 이동",
   "NewSpace": "새로운 공간",
   "PortalName": "{{productName}} 이름",
   "PortalStats": "방: {{roomCount}} | 사용자: {{userCount}} | 사용된 스토리지 공간: {{storageSpace}}",
   "RestrictAccess": "공간 관리에 대한 액세스 제한",
-  "SpaceCreated": "공간이 생성되었습니다",
-  "SpaceCreatedTitle": "공간이 생성되었습니다. '공간으로 이동'을 클릭하여 해당 공간으로 이동할 수 있습니다. 여러 공간을 생성하려면 설정에 머무세요.",
-  "StayInSettings": "설정에 머물기",
   "Subheader": "이 섹션을 이용하여 여러 공간을 생성하고 사용자가 액세스할 수 있도록 만드세요",
   "VisitSpace": "생성 후 이 공간 방문"
 }

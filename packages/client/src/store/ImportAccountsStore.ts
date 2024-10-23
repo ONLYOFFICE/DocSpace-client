@@ -84,7 +84,7 @@ class ImportAccountsStore {
   UserTypes = {
     PortalAdmin: "DocSpaceAdmin",
     RoomAdmin: "RoomAdmin",
-    User: "Collaborator",
+    User: "User",
   };
 
   fileLoadingStatus: LoadingState = "none";

@@ -206,6 +206,7 @@
   "FromDevice": "Laitteesta",
   "FromPortal": "{{productName}}:sta",
   "FullAccess": "Täysi pääsy",
+  "GeneratePassword": "Luo salasana",
   "Gigabyte": "GB",
   "GoBack": "Palaa",
   "Group": "Ryhmä",
@@ -504,6 +505,5 @@
   "Website": "Sivusto",
   "Yes": "Kyllä",
   "Yesterday": "Eilen",
-  "You": "Sinä",
-  "GeneratePassword": "Luo salasana"
+  "You": "Sinä"
 }

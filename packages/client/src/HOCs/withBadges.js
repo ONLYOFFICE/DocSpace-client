@@ -109,6 +109,9 @@ export default function withBadges(WrappedComponent) {
     setConvertDialogVisible = () => {
       this.props.setConvertItem(this.props.item);
       this.props.setConvertDialogVisible(true);
+      this.props.setConvertDialogData({
+        files: this.props.item,
+      });
     };
 
     onCopyPrimaryLink = async () => {
@@ -233,7 +236,8 @@ export default function withBadges(WrappedComponent) {
       } = filesActionsStore;
       const { isTabletView, isDesktopClient, theme } = settingsStore;
       const { setIsVerHistoryPanel, fetchFileVersions } = versionHistoryStore;
-      const { setConvertDialogVisible, setConvertItem } = dialogsStore;
+      const { setConvertDialogVisible, setConvertItem, setConvertDialogData } =
+        dialogsStore;
       const { setIsLoading, isMuteCurrentRoomNotifications, getPrimaryLink } =
         filesStore;
       const { roomType, mute } = item;
@@ -255,6 +259,7 @@ export default function withBadges(WrappedComponent) {
         markAsRead,
         setIsLoading,
         setConvertDialogVisible,
+        setConvertDialogData,
         setConvertItem,
         isDesktopClient,
         setPinAction,

@@ -87,9 +87,19 @@ export const StyledBody = styled.div`
   }
 
   .greeting-title {
+    display: flex;
+    justify-content: center;
+
     max-width: 480px;
     margin-bottom: 32px;
     text-align: center;
+
+    @media ${mobile} {
+      width: 100%;
+      overflow: hidden;
+      display: block;
+      text-overflow: ellipsis;
+    }
   }
 
   .portal-logo {

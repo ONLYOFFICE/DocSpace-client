@@ -240,7 +240,7 @@ const ComboBoxPure = (props: ComboboxProps) => {
         (!displaySelectedOption && option?.label === selectedOption?.label);
 
       const isActiveOption = withLabel
-        ? option.label === selectedOption.label
+        ? option.label === selectedOption?.label
         : option.key === selectedOption.key;
 
       const isActive = displaySelectedOption && isActiveOption;

@@ -212,6 +212,7 @@
   "FromDevice": "С устройства",
   "FromPortal": "От {{productName}}",
   "FullAccess": "Полный доступ",
+  "GeneratePassword": "Сгенерировать пароль",
   "Gigabyte": "Гб",
   "GoBack": "Назад",
   "Group": "Группа",
@@ -517,6 +518,5 @@
   "WithoutIcon": "Без иконки",
   "Yes": "Да",
   "Yesterday": "Вчера",
-  "You": "Вы",
-  "GeneratePassword": "Сгенерировать пароль"
+  "You": "Вы"
 }

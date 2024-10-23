@@ -246,12 +246,6 @@ const LinkRow = (props: LinkRowProps) => {
     editExternalLinkAction(newLink);
   };
 
-  const onClickForm = () => {
-    const newLink = { ...link };
-    newLink.access = ShareAccessRights.FormFilling;
-    editExternalLinkAction(newLink);
-  };
-
   const changeExpirationOption = async (
     linkData: TFileLink,
     expirationDate: moment.Moment | null,
@@ -277,7 +271,6 @@ const LinkRow = (props: LinkRowProps) => {
       changeExpirationOption={changeExpirationOption}
       isArchiveFolder={isArchiveFolder}
       isFormRoom={isFormRoom}
-      onClickForm={onClickForm}
     />
   );
 };

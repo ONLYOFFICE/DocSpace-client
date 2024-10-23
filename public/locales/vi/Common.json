@@ -206,6 +206,7 @@
   "FromDevice": "Từ thiết bị",
   "FromPortal": "Từ {{productName}}",
   "FullAccess": "Toàn quyền truy cập",
+  "GeneratePassword": "Tạo mật khẩu",
   "Gigabyte": "GB",
   "GoBack": "Quay lại",
   "Group": "Nhóm",
@@ -504,6 +505,5 @@
   "Website": "Website",
   "Yes": "Có",
   "Yesterday": "Hôm qua",
-  "You": "Bạn",
-  "GeneratePassword": "Tạo mật khẩu"
+  "You": "Bạn"
 }

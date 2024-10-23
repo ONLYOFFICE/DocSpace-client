@@ -89,7 +89,7 @@ const styleBlock = `<style>
 </style>`;
 
 const linkParams =
-  "width=800,height=800,status=no,toolbar=no,menubar=no,resizable=yes,scrollbars=no";
+  "width=800,height=800,status='no',toolbar='no',menubar='no',resizable='yes',scrollbars='no'";
 
 interface PreviewDialogProps {
   visible: boolean;

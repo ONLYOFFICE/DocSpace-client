@@ -15,7 +15,7 @@ export default async function Page({
 }) {
   const settings = await getSettings();
 
-  const { portals } = JSON.parse(searchParams.portals);
+  // const { portals } = JSON.parse(searchParams.portals);
   const clientId = searchParams.clientId;
 
   const isRegisterContainerVisible =
@@ -37,11 +37,7 @@ export default async function Page({
               greetingSettings={settings?.greetingSettings}
               culture={culture}
             />
-            <TenantList
-              portals={portals}
-              clientId={clientId}
-              baseDomain={settings.baseDomain}
-            />
+            <TenantList clientId={clientId} baseDomain={settings.baseDomain} />
           </>
         </ColorTheme>
       )}

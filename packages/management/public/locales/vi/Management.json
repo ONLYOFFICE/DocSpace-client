@@ -10,14 +10,10 @@
   "DomainSettings": "Cài đặt tên miền",
   "EnterDomain": "Nhập tên miền",
   "EnterName": "Nhập tên không gian",
-  "GoToSpace": "Đến không gian",
   "NewSpace": "Không gian mới",
   "PortalName": "Tên {{productName}}",
   "PortalStats": "Phòng: {{roomCount}} | Người dùng: {{userCount}} | Không gian lưu trữ đã sử dụng: {{storageSpace}}",
   "RestrictAccess": "Hạn chế quyền truy cập vào không gian quản lý",
-  "SpaceCreated": "Đã tạo không gian",
-  "SpaceCreatedTitle": "Không gian đã được tạo thành công, bạn có thể chuyển sang không gian đó bằng cách nhấp vào “Đến không gian”. Để tạo nhiều không gian, hãy ở lại phần cài đặt.",
-  "StayInSettings": "Ở lại phần Cài đặt",
   "Subheader": "Sử dụng phần này để tạo một số không gian và giúp người dùng của bạn có thể truy cập chúng",
   "VisitSpace": "Truy cập không gian này sau khi tạo"
 }

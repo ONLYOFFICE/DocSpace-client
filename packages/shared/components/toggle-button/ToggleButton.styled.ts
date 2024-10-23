@@ -100,6 +100,14 @@ const ToggleButtonContainer = styled.label<StyledToggleButtonProps>`
                 props.theme.toggleButton.hoverFillColorOff};
               }
             }
+            ${!props.isDisabled &&
+            `
+               &:active {
+                rect {
+                  fill: ${props.theme.toggleButton.fillColorOff};
+                }
+               }
+              `}
           `}
     ${(props) =>
       props.theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}

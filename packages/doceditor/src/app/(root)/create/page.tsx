@@ -129,10 +129,6 @@ async function Page({ searchParams }: { searchParams: TSearchParams }) {
   ) {
     const documentserverUrl = await getEditorUrl();
 
-    if (error.message) {
-      redirect(`${baseURL}?errorMessage=${error.message}`);
-    }
-
     return (
       <Editor
         documentserverUrl={documentserverUrl?.docServiceUrl ?? ""}

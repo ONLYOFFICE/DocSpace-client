@@ -24,18 +24,31 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import { useTheme } from "styled-components";
+import { inject, observer } from "mobx-react";
 
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import { Text } from "@docspace/shared/components/text";
 
+import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
+
 import { StyledRoomItem } from "../NewFilesBadge.styled";
 import { NewFilesPanelItemRoomProps } from "../NewFilesBadge.types";
 
-export const NewFilesPanelItemRoom = ({ room }: NewFilesPanelItemRoomProps) => {
+const NewFilesPanelItemRoomComponent = ({
+  room,
+
+  openItemAction,
+  onClose,
+}: NewFilesPanelItemRoomProps) => {
   const theme = useTheme();
 
+  const onClick = () => {
+    openItemAction!({ ...room, isFolder: true });
+    onClose();
+  };
+
   return (
-    <StyledRoomItem>
+    <StyledRoomItem onClick={onClick}>
       <RoomIcon
         className="room-icon"
         imgClassName="room-image"
@@ -59,3 +72,11 @@ export const NewFilesPanelItemRoom = ({ room }: NewFilesPanelItemRoomProps) => {
     </StyledRoomItem>
   );
 };
+
+export const NewFilesPanelItemRoom = inject(
+  ({ filesActionsStore }: { filesActionsStore: FilesActionStore }) => {
+    const { openItemAction } = filesActionsStore;
+
+    return { openItemAction };
+  },
+)(observer(NewFilesPanelItemRoomComponent));

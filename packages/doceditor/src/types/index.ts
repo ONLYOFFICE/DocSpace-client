@@ -205,7 +205,6 @@ export type TResponse =
       fileId?: string;
       hash?: string;
       shareKey?: string;
-      isSkipError?: boolean;
     }
   | {
       error: TError;
@@ -219,7 +218,6 @@ export type TResponse =
       fileId?: string;
       hash?: string;
       shareKey?: string;
-      isSkipError?: boolean;
     };
 
 export type EditorProps = {

@@ -27,11 +27,10 @@
 import { headers } from "next/headers";
 import Script from "next/script";
 import dynamic from "next/dynamic";
-import { permanentRedirect } from "next/navigation";
+
 import { getSelectorsByUserAgent } from "react-device-detect";
 
 import { ValidationStatus } from "@docspace/shared/enums";
-import { getBaseUrl } from "@docspace/shared/utils/next-ssr-helper";
 
 import { getData, validatePublicRoomKey } from "@/utils/actions";
 import { RootPageProps } from "@/types";
@@ -108,21 +107,9 @@ async function Page({ searchParams }: RootPageProps) {
     }
   }
 
-  const isSkipError =
-    data?.error?.status === "not-found" ||
-    (data?.error?.status === "access-denied" && !!data?.error.editorUrl) ||
-    data?.error?.status === "not-supported" ||
-    data?.error?.status === "quota-exception";
-
-  if (isSkipError) {
-    const url = getBaseUrl();
-
-    permanentRedirect(`${url}?errorMessage=${data.error?.message}`);
-  }
-
   return (
     <>
-      <Root {...data} shareKey={share} isSkipError={isSkipError} />
+      <Root {...data} shareKey={share} />
       <Script id="editor-api" strategy="beforeInteractive" src={docApiUrl} />
     </>
   );

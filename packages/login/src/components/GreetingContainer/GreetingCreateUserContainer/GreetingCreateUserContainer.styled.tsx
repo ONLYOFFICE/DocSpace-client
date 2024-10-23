@@ -52,24 +52,13 @@ export const GreetingContainer = styled.div`
       text-align: center;
       line-height: 22px;
 
-      strong:first-child {
-        display: flex;
-        justify-content: center;
-        text-align: center;
-      }
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     @media ${mobile} {
       margin-top: 0;
       padding: 0 25px;
-    }
-
-    @media ${tablet}{
-      p strong:first-child {
-        display: block;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
     }
   }
 

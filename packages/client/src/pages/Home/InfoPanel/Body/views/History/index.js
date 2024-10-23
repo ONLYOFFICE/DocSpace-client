@@ -260,7 +260,7 @@ const History = ({
           </StyledHistorySubtitle>,
           ...feeds.map((feed, i) => (
             <HistoryBlock
-              key={`${feed.action.id}_${feed.date}`}
+              key={`${feed.action.id}_${feed.date}_${i}`}
               t={t}
               feed={feed}
               selectedFolder={selectedFolder}

@@ -28,8 +28,8 @@ import MediaDownloadReactSvgUrl from "PUBLIC_DIR/images/media.download.react.svg
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 import React, { useState, useRef, useCallback } from "react";
 import { inject, observer } from "mobx-react";
-import copy from "copy-to-clipboard";
 
+import { copyShareLink } from "@docspace/shared/utils/copy";
 import { toastr } from "@docspace/shared/components/toast";
 import { objectToGetParams } from "@docspace/shared/utils/common";
 
@@ -165,7 +165,8 @@ const ExternalLinks = ({
           days_count: 7,
         })}`,
       );
-      copy(link);
+
+      copyShareLink(link);
     }
   };
 

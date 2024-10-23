@@ -417,6 +417,34 @@ const Selector = ({
     };
   }, [inputItemVisible, onCancel]);
 
+  React.useEffect(() => {
+    const onKeyboardAction = (e: KeyboardEvent) => {
+      if (inputItemVisible) return;
+
+      const isSubmitDisabled = !withFooterInput
+        ? disableSubmitButton
+        : disableSubmitButton || !newFooterInputValue.trim();
+
+      if (
+        (e.key === ButtonKeys.enter || e.key === ButtonKeys.numpadEnter) &&
+        !isSubmitDisabled
+      ) {
+        onSubmitAction();
+      }
+    };
+
+    window.addEventListener("keyup", onKeyboardAction);
+    return () => {
+      window.removeEventListener("keyup", onKeyboardAction);
+    };
+  }, [
+    disableSubmitButton,
+    inputItemVisible,
+    newFooterInputValue,
+    onSubmitAction,
+    withFooterInput,
+  ]);
+
   React.useLayoutEffect(() => {
     if (items) {
       if (

@@ -93,6 +93,9 @@ const Editor = ({
 
   const openOnNewPage = IS_ZOOM ? false : !filesSettings?.openEditorInSameTab;
 
+  console.log("config", { ...config });
+  console.log("user", { ...user });
+
   const {
     onDocumentReady,
     onSDKRequestOpen,
@@ -163,6 +166,8 @@ const Editor = ({
       }
     )?.["FileLocation"]; // t("FileLocation");
 
+    console.log(editorGoBack, window?.ClientConfig?.editor?.requestClose);
+
     if (editorGoBack === "false" || user?.isVisitor || !user) {
     } else if (editorGoBack === "event") {
       goBack = {
@@ -174,7 +179,7 @@ const Editor = ({
       goBack = {
         requestClose:
           typeof window !== "undefined"
-            ? window.ClientConfig?.editor?.requestClose ?? false
+            ? (window.ClientConfig?.editor?.requestClose ?? false)
             : false,
         text: openFileLocationText,
         blank: openOnNewPage,

@@ -125,6 +125,7 @@ export const useOptions = (
     setQuotaWarningDialogVisible,
     setSelectFileFormRoomDialogVisible,
     inviteUser: inviteRootUser,
+    isVisitor,
   }: EmptyViewContainerProps,
   t: TTranslation,
 ) => {
@@ -267,6 +268,7 @@ export const useOptions = (
           onGoToPersonal,
           onGoToShared,
         },
+        isVisitor,
       ),
     [
       type,
@@ -290,6 +292,7 @@ export const useOptions = (
       navigate,
       onGoToPersonal,
       onGoToShared,
+      isVisitor,
     ],
   );
 

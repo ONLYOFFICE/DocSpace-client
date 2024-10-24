@@ -10,14 +10,10 @@
   "DomainSettings": "Nastavitve domene",
   "EnterDomain": "Vnesi ime domene",
   "EnterName": "Vnesi ime prostora",
-  "GoToSpace": "Pojdi v prostor",
   "NewSpace": "Nov prostor",
   "PortalName": "Ime {{productName}}",
   "PortalStats": "Sobe: {{roomCount}} | Uporabniki: {{userCount}} | Uporabljen prostor za shranjevanje: {{storageSpace}}",
   "RestrictAccess": "Omejite dostop do upravljanja prostorov",
-  "SpaceCreated": "Prostor ustvarjen",
-  "SpaceCreatedTitle": "Prostor je bil uspešno ustvarjen, vanj lahko preklopite s klikom na “Pojdi na prostor”. Če želite ustvariti več prostorov, ostanite pri nastavitvah.",
-  "StayInSettings": "Ostanite pri Nastavitvah",
   "Subheader": "Uporabite ta razdelek, da ustvarite več prostorov in omogočite dostop do njih svojim uporabnikom",
   "VisitSpace": "Po kreiranju obiščite ta prostor"
 }

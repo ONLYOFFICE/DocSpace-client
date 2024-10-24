@@ -762,7 +762,7 @@ const ArticleMainButtonContent = (props) => {
 
       <input
         id="customFileInput"
-        className="custom-file-input"
+        className="custom-file-input custom-file-input-article"
         multiple
         type="file"
         onChange={onFileChange}

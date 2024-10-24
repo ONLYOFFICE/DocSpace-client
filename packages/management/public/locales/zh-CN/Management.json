@@ -10,14 +10,10 @@
   "DomainSettings": "网域设置",
   "EnterDomain": "输入域名",
   "EnterName": "输入协作空间名称",
-  "GoToSpace": "前往协作空间",
   "NewSpace": "新协作空间",
   "PortalName": "{{productName}}名称",
   "PortalStats": "房间：{{roomCount}} | 用户：{{userCount}} | 已用存储空间：{{storageSpace}}",
   "RestrictAccess": "对管理协作空间进行访问限制",
-  "SpaceCreated": "协作空间已创建",
-  "SpaceCreatedTitle": "协作空间创建成功，点击“前往协作空间”即可切换到该空间。如要创建多个协作空间，请不要离开“设置”页面。",
-  "StayInSettings": "不要离开“设置”页面",
   "Subheader": "您可以使用这个板块创建多个协作空间，并让您的用户可以访问",
   "VisitSpace": "协作空间创建后进行访问"
 }

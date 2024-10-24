@@ -48,7 +48,9 @@ const OnlyofficeWorkspace = (props: WorkspaceProps) => {
   } = props as InjectedWorkspaceProps;
 
   const { t, ready }: { t: TFunciton; ready: boolean } = useTranslation([
-    "Common, SMTPSettings, Settings",
+    "Common",
+    "SMTPSettings",
+    "Settings",
   ]);
 
   const StepsData = getStepsData(t, filteredUsers.length === 0);

@@ -195,7 +195,7 @@ export const useOptions = (
   const onUploadAction = useCallback((uploadType: UploadType) => {
     const element =
       uploadType === "file"
-        ? document.getElementById("customFileInput")
+        ? (document.querySelector(".custom-file-input-article") as HTMLElement)
         : uploadType === "pdf"
           ? document.getElementById("customPDFInput")
           : document.getElementById("customFolderInput");

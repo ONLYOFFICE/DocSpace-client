@@ -1078,14 +1078,15 @@ export const getLogoFromPath = (path: string) => {
 };
 
 export type FolderTypeValueOf = (typeof FolderType)[keyof typeof FolderType];
+
 export const getIconPathByFolderType = (
   folderType?: FolderTypeValueOf,
 ): string => {
   const defaultPath = "folder.svg";
 
   const folderIconPath: Partial<Record<FolderTypeValueOf, string>> = {
-    [FolderType.Done]: "done.svg",
-    [FolderType.InProgress]: "inProgress.svg",
+    [FolderType.Done]: "folderComplete.svg",
+    [FolderType.InProgress]: "folderInProgress.svg",
     [FolderType.DEFAULT]: defaultPath,
   };
 

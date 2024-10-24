@@ -50,7 +50,7 @@ const NewFilesPanelItemFileComponent = ({
 
   displayFileExtension,
 }: NewFilesPanelItemFileProps) => {
-  const icon = getIcon?.(24, item.fileExst);
+  const icon = getIcon?.(32, item.fileExst);
 
   const onOpenFileLocation = () => {
     checkAndOpenLocationAction!(item);

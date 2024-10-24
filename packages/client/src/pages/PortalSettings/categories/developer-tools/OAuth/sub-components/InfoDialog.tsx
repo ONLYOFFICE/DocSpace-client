@@ -23,7 +23,7 @@ import { TTranslation } from "@docspace/shared/types";
 import { ContextMenuModel } from "@docspace/shared/components/context-menu";
 import { Tag } from "@docspace/shared/components/tag";
 
-import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
+import OAuthStore from "SRC_DIR/store/OAuthStore";
 
 import { StyledInfoContainer } from "../OAuth.styled";
 
@@ -347,7 +347,7 @@ const InfoDialog = ({
   );
 };
 
-export default inject(({ oauthStore }: { oauthStore: OAuthStoreProps }) => {
+export default inject(({ oauthStore }: { oauthStore: OAuthStore }) => {
   const {
     setInfoDialogVisible,
     bufferSelection,

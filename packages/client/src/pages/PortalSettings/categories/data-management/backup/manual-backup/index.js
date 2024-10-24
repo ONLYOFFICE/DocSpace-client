@@ -181,8 +181,7 @@ class ManualBackup extends React.Component {
       setDownloadingProgress(1);
       getIntervalProgress(t);
     } catch (e) {
-      toastr.error(t("BackupCreatedError"));
-      console.error(err);
+      toastr.error(e);
     }
   };
   onClickDownloadBackup = () => {
@@ -244,9 +243,7 @@ class ManualBackup extends React.Component {
       setTemporaryLink("");
       getIntervalProgress(t);
     } catch (err) {
-      toastr.error(t("BackupCreatedError"));
-      console.error(err);
-      //clearLocalStorage();
+      toastr.error(err);
     }
   };
   render() {

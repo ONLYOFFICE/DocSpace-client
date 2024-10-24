@@ -563,10 +563,16 @@ class ContextOptionsStore {
     this.gotoDocEditor(true, item);
   };
 
-  gotoDocEditor = (preview = false, item) => {
+  gotoDocEditor = (
+    preview = false,
+    item,
+    shareKey = null,
+    editForm = false,
+    fillForm = false,
+  ) => {
     const { id } = item;
 
-    this.filesStore.openDocEditor(id, preview);
+    this.filesStore.openDocEditor(id, preview, shareKey, editForm, fillForm);
   };
 
   // isPwa = () => {

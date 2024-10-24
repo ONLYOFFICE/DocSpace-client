@@ -23,9 +23,31 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-export interface CardProps {
-  title: string;
-  description: string;
-  buttonLabel: string;
-  onClick: VoidFunction;
+
+import { Link } from "react-router-dom";
+
+import { classNames } from "../../utils";
+
+import { EmptyViewItem } from "./EmptyView.item";
+import { isEmptyLinkOptions } from "./EmptyView.utils";
+
+import type { EmptyViewOptionProps } from "./EmptyView.types";
+
+function EmptyViewOption({ option }: EmptyViewOptionProps) {
+  if (isEmptyLinkOptions(option))
+    return (
+      <Link
+        className={classNames("ev-link", option.className)}
+        to={option.to}
+        state={option.state}
+        onClick={option.onClick}
+      >
+        {option.icon}
+        <span>{option.description}</span>
+      </Link>
+    );
+
+  return <EmptyViewItem {...option} key={option.key} />;
 }
+
+export default EmptyViewOption;

@@ -62,6 +62,7 @@ const {
   lightSecondMainDisabled,
 
   mainOrange,
+  mainRed,
 
   darkErrorStatus,
   favoritesStatus,
@@ -1770,7 +1771,7 @@ const Dark: TTheme = {
     rootFolderTitleColor: darkGrayDark,
     boxShadow: `0px 8px 16px 0px ${boxShadowDarkColor}`,
     lifetimeIconFill: "none",
-    lifetimeIconStroke: "#657077",
+    lifetimeIconStroke: mainRed,
 
     icon: {
       fill: darkLink,
@@ -2359,7 +2360,14 @@ const Dark: TTheme = {
   },
 
   emptyView: {
-    linkColor: lightBlueMain,
+    link: {
+      color: lightBlueMain,
+      background: black,
+      hoverBackground: lightDarkGrayHover,
+      hoverColor: lightBlueMainHover,
+      PressedBackground: black,
+      PressedColor: lightBlueMainPressed,
+    },
     items: {
       hoverColor: darkGrayLight,
       pressColor: grayDarkStrong,
@@ -3242,6 +3250,8 @@ const Dark: TTheme = {
     selectColor: {
       backgroundColor: lightDarkGrayHover,
     },
+
+    iconColor: darkGrayDark,
     textColor: darkGrayDark,
     selectedBackgroundColor: grayDarkMid,
     selectedBorderColor: grayDarkMid,

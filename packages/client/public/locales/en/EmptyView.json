@@ -35,6 +35,7 @@
   "MigrationDataDescription": "Import data to your {{productName}} from {{organizationName}} Workspace, Google Workspace, or Nextcloud.",
   "MigrationDataTitle": "Migration Data",
   "PublicRoomEmptyTitle": "Welcome to the Public room",
+  "SendInvitationLetter": "Send an invitation letter to add new members to the portal",
   "ShareOptionDescription": "Copy a public access link or invite other users to the room to start the form filling process.",
   "ShareOptionTitle": "Share a room",
   "SharePublicRoomOptionDescription": "Enable external link access to other users.",

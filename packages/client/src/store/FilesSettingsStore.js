@@ -34,12 +34,11 @@ import axios from "axios";
 import { makeAutoObservable } from "mobx";
 import { presentInArray } from "@docspace/shared/utils";
 import {
-  iconSize24,
   iconSize32,
   iconSize64,
   iconSize96,
 } from "@docspace/shared/utils/image-helpers";
-import { HTML_EXST } from "@docspace/shared/constants";
+import { HTML_EXST, EBOOK_EXST } from "@docspace/shared/constants";
 import {
   getIconPathByFolderType,
   isPublicPreview,
@@ -101,8 +100,6 @@ class FilesSettingsStore {
   internalFormats = {};
   masterFormExtension = "";
   canSearchByContent = false;
-
-  ebook = [".fb2", ".ibk", ".prc", ".epub"];
 
   constructor(
     thirdPartyStore,
@@ -319,7 +316,7 @@ class FilesSettingsStore {
 
   isHtml = (extension) => presentInArray(HTML_EXST, extension);
 
-  isEbook = (extension) => presentInArray(this.ebook, extension);
+  isEbook = (extension) => presentInArray(EBOOK_EXST, extension);
 
   isDocument = (extension) => presentInArray(this.extsDocument, extension);
 
@@ -343,7 +340,7 @@ class FilesSettingsStore {
    * @returns {string | undefined}
    */
   getIcon = (
-    size = 24,
+    size = 32,
     fileExst = null,
     providerKey = null,
     contentLength = null,
@@ -356,6 +353,7 @@ class FilesSettingsStore {
       const isImageItem = this.isImage(fileExst);
       const isSoundItem = this.isSound(fileExst);
       const isHtmlItem = this.isHtml(fileExst);
+      const isEbookItem = this.isEbook(fileExst);
 
       const icon = this.getFileIcon(
         fileExst,
@@ -364,6 +362,7 @@ class FilesSettingsStore {
         isImageItem,
         isSoundItem,
         isHtmlItem,
+        isEbookItem,
       );
       return icon;
     } else if (roomType) {
@@ -371,7 +370,7 @@ class FilesSettingsStore {
     } else if (folderType) {
       return this.getIconByFolderType(folderType, size);
     } else {
-      return this.getFolderIcon(providerKey, size);
+      return this.getFolderIcon(size);
     }
   };
 
@@ -380,16 +379,17 @@ class FilesSettingsStore {
     return this.getIconBySize(size, path);
   };
 
-  getIconBySize = (size, path = 32) => {
+  getIconBySize = (size = 32, path) => {
+    const getOrDefault = (container) =>
+      container.has(path) ? container.get(path) : container.get("file.svg");
+
     switch (+size) {
-      case 24:
-        return iconSize24.get(path);
       case 32:
-        return iconSize32.get(path);
+        return getOrDefault(iconSize32);
       case 64:
-        return iconSize64.get(path);
+        return getOrDefault(iconSize64);
       case 96:
-        return iconSize96.get(path);
+        return getOrDefault(iconSize96);
     }
   };
 
@@ -403,17 +403,8 @@ class FilesSettingsStore {
         case RoomsType.CustomRoom:
           path = "custom.svg";
           break;
-        case RoomsType.FillingFormsRoom:
-          path = "filling.form.svg";
-          break;
         case RoomsType.EditingRoom:
           path = "editing.svg";
-          break;
-        case RoomsType.ReadOnlyRoom:
-          path = "view.only.svg";
-          break;
-        case RoomsType.ReviewRoom:
-          path = "review.svg";
           break;
         case RoomsType.PublicRoom:
           path = "public.svg";
@@ -423,245 +414,42 @@ class FilesSettingsStore {
           break;
         case RoomsType.FormRoom:
           path = "form.svg";
+          break;
+        default:
+          path = "custom.svg";
       }
     }
 
     return this.getIconBySize(size, path);
   };
 
-  getFolderIcon = (providerKey, size = 32) => {
-    let path = "";
+  getFolderIcon = (size = 32) => {
+    return this.getIconBySize(size, "folder.svg");
+  };
 
-    switch (providerKey) {
-      case "Box":
-      case "BoxNet":
-        path = "box.svg";
-        break;
-      case "DropBox":
-      case "DropboxV2":
-        path = "dropbox.svg";
-        break;
-      case "Google":
-      case "GoogleDrive":
-        path = "google.svg";
-        break;
-      case "OneDrive":
-        path = "onedrive.svg";
-        break;
-      case "SharePoint":
-        path = "sharepoint.svg";
-        break;
-      case "Yandex":
-        path = "yandex.svg";
-        break;
-      case "kDrive":
-        path = "kdrive.svg";
-        break;
-      case "WebDav":
-        path = "webdav.svg";
-        break;
-      default:
-        path = "folder.svg";
-        break;
+  determineIconPath = (extension, enablePlugins, fileItemsList) => {
+    let path = `${extension.replace(/^\./, "")}.svg`;
+
+    if (enablePlugins && fileItemsList) {
+      fileItemsList.forEach(({ value }) => {
+        if (value.extension === extension && value.fileIcon) {
+          path = value.fileIcon;
+        }
+      });
     }
 
-    return this.getIconBySize(size, path);
+    return path;
   };
 
   getIconUrl = (extension, size) => {
-    let path = "";
+    const { enablePlugins } = this.settingsStore;
+    const { fileItemsList } = this.pluginStore;
 
-    switch (extension) {
-      case ".avi":
-        path = "avi.svg";
-        break;
-      case ".csv":
-        path = "csv.svg";
-        break;
-      case ".djvu":
-        path = "djvu.svg";
-        break;
-      case ".doc":
-        path = "doc.svg";
-        break;
-      case ".docm":
-        path = "docm.svg";
-        break;
-      case ".docx":
-        path = "docx.svg";
-        break;
-      case ".dotx":
-        path = "dotx.svg";
-        break;
-      case ".dvd":
-        path = "dvd.svg";
-        break;
-      case ".epub":
-        path = "epub.svg";
-        break;
-      case ".pb2":
-      case ".fb2":
-        path = "fb2.svg";
-        break;
-      case ".flv":
-        path = "flv.svg";
-        break;
-      case ".fodt":
-        path = "fodt.svg";
-        break;
-      case ".iaf":
-        path = "iaf.svg";
-        break;
-      case ".ics":
-        path = "ics.svg";
-        break;
-      case ".m2ts":
-        path = "m2ts.svg";
-        break;
-      case ".mht":
-        path = "mht.svg";
-        break;
-      case ".mkv":
-        path = "mkv.svg";
-        break;
-      case ".mov":
-        path = "mov.svg";
-        break;
-      case ".mp4":
-        path = "mp4.svg";
-        break;
-      case ".mpg":
-        path = "mpg.svg";
-        break;
-      case ".odp":
-        path = "odp.svg";
-        break;
-      case ".ods":
-        path = "ods.svg";
-        break;
-      case ".odt":
-        path = "odt.svg";
-        break;
-      case ".otp":
-        path = "otp.svg";
-        break;
-      case ".ots":
-        path = "ots.svg";
-        break;
-      case ".ott":
-        path = "ott.svg";
-        break;
-      case ".pdf":
-        path = "pdf.svg";
-        break;
-      case ".pot":
-        path = "pot.svg";
-        break;
-      case ".pps":
-        path = "pps.svg";
-        break;
-      case ".ppsx":
-        path = "ppsx.svg";
-        break;
-      case ".ppt":
-        path = "ppt.svg";
-        break;
-      case ".pptm":
-        path = "pptm.svg";
-        break;
-      case ".pptx":
-        path = "pptx.svg";
-        break;
-      case ".rtf":
-        path = "rtf.svg";
-        break;
-      case ".svg":
-        path = "svg.svg";
-        break;
-      case ".txt":
-        path = "txt.svg";
-        break;
-      case ".webm":
-        path = "webm.svg";
-        break;
-      case ".xls":
-        path = "xls.svg";
-        break;
-      case ".xlsm":
-        path = "xlsm.svg";
-        break;
-      case ".xlsx":
-        path = "xlsx.svg";
-        break;
-      case ".xlsb":
-        path = "xlsb.svg";
-        break;
-      case ".xps":
-        path = "xps.svg";
-        break;
-      case ".xml":
-        path = "xml.svg";
-        break;
-      case ".oform":
-        path = "oform.svg";
-        break;
-      case ".docxf":
-        path = "docxf.svg";
-        break;
-      case ".sxc":
-        path = "sxc.svg";
-        break;
-      case ".et":
-        path = "et.svg";
-        break;
-      case ".ett":
-        path = "ett.svg";
-        break;
-      case ".sxw":
-        path = "sxw.svg";
-        break;
-      case ".stw":
-        path = "stw.svg";
-        break;
-      case ".wps":
-        path = "wps.svg";
-        break;
-      case ".wpt":
-        path = "wpt.svg";
-        break;
-      case ".mhtml":
-        path = "mhtml.svg";
-        break;
-      case ".dps":
-        path = "dps.svg";
-        break;
-      case ".dpt":
-        path = "dpt.svg";
-        break;
-      case ".sxi":
-        path = "sxi.svg";
-        break;
-      default:
-        const { enablePlugins } = this.settingsStore;
-
-        if (enablePlugins) {
-          const { fileItemsList } = this.pluginStore;
-
-          if (fileItemsList) {
-            fileItemsList.forEach(({ key, value }) => {
-              if (value.extension === extension && value.fileIcon)
-                path = value.fileIcon;
-            });
-
-            if (path) return path;
-          }
-        }
-
-        path = "file.svg";
-
-        break;
-    }
-
+    const path = this.determineIconPath(
+      extension,
+      enablePlugins,
+      fileItemsList,
+    );
     return this.getIconBySize(size, path);
   };
 
@@ -672,10 +460,11 @@ class FilesSettingsStore {
     image = false,
     sound = false,
     html = false,
+    ebook = false,
   ) => {
     let path = "";
 
-    if (archive) path = "file_archive.svg";
+    if (archive) path = "archive.svg";
 
     if (image) path = "image.svg";
 
@@ -683,21 +472,25 @@ class FilesSettingsStore {
 
     if (html) path = "html.svg";
 
+    if (ebook) path = "ebook.svg";
+
     if (path) return this.getIconBySize(size, path);
 
     return this.getIconUrl(extension, size);
   };
 
-  getIconSrc = (ext, size = 24) => {
+  getIconSrc = (ext, size = 32) => {
     let path = "";
 
-    if (presentInArray(this.extsArchive, ext, true)) path = "file_archive.svg";
+    if (presentInArray(this.extsArchive, ext, true)) path = "archive.svg";
 
     if (presentInArray(this.extsImage, ext, true)) path = "image.svg";
 
     if (presentInArray(this.extsAudio, ext, true)) path = "sound.svg";
 
     if (presentInArray(HTML_EXST, ext, true)) path = "html.svg";
+
+    if (presentInArray(EBOOK_EXST, ext, true)) path = "ebook.svg";
 
     if (path) return this.getIconBySize(size, path);
 

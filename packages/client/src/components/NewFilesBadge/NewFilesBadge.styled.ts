@@ -138,6 +138,8 @@ export const StyledFileItem = styled.div<{ isRooms: boolean }>`
   align-items: center;
   gap: 4px;
 
+  curstor: pointer;
+
   .info-container {
     width: auto;
     max-width: calc(100% - 20px);

@@ -120,7 +120,7 @@ const PasswordInput = React.forwardRef<PasswordInputHandle, PasswordInputProps>(
       return inputValueRef.current;
     };
 
-    const prevInputValue = usePrevious(inputValue ?? "");
+    const prevInputValue = usePrevious(inputValue ?? "") ?? "";
 
     const [state, setState] = useState<TState>({
       type: inputType,

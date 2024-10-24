@@ -23,7 +23,7 @@ import { Link } from "@docspace/shared/components/link";
 
 import CopyReactSvgUrl from "PUBLIC_DIR/images/copy.react.svg?url";
 
-import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
+import OAuthStore from "SRC_DIR/store/OAuthStore";
 import { StyledGenerateDevelopTokenContainer } from "../OAuth.styled";
 
 type GenerateDeveloperTokenDialogProps = {
@@ -234,7 +234,7 @@ export default inject(
     oauthStore,
     userStore,
   }: {
-    oauthStore: OAuthStoreProps;
+    oauthStore: OAuthStore;
     userStore: UserStore;
   }) => {
     const { setGenerateDeveloperTokenDialogVisible, bufferSelection } =

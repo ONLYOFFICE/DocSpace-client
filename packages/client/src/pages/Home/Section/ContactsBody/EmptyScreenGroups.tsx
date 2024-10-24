@@ -99,12 +99,15 @@ const EmptyScreenGroups = ({
 
   const getOptions = () => {
     if (groupsIsFiltered) {
-      return {
-        to: "",
-        description: t("Common:ClearFilter"),
-        icon: <ClearEmptyFilterSvg />,
-        onClick: onResetFilter,
-      };
+      return [
+        {
+          to: "",
+          description: t("Common:ClearFilter"),
+          icon: <ClearEmptyFilterSvg />,
+          onClick: onResetFilter,
+          key: "empty-view-groups-clear-filter",
+        },
+      ];
     }
 
     if (isRoomAdmin || isCollaborator) return [];

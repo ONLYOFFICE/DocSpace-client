@@ -331,21 +331,30 @@ export const getOptions = (
         createPresentation,
         createForm,
       ])
-      .with([FolderType.Recent, P._, P._], () => ({
-        ...actions.onGoToPersonal(),
-        icon: <PersonIcon />,
-        description: t("Files:GoToPersonal"),
-      }))
-      .with([FolderType.Archive, ShareAccessRights.None, P._], () => ({
-        ...actions.onGoToShared(),
-        icon: <FolderIcon />,
-        description: t("Files:GoToMyRooms"),
-      }))
-      .with([FolderType.TRASH, P._, P.when((item) => !item)], () => ({
-        ...actions.onGoToPersonal(),
-        icon: <PersonIcon />,
-        description: t("Files:GoToPersonal"),
-      }))
+      .with([FolderType.Recent, P._, P._], () => [
+        {
+          ...actions.onGoToPersonal(),
+          icon: <PersonIcon />,
+          description: t("Files:GoToPersonal"),
+          key: "empty-view-goto-personal",
+        },
+      ])
+      .with([FolderType.Archive, ShareAccessRights.None, P._], () => [
+        {
+          ...actions.onGoToShared(),
+          icon: <FolderIcon />,
+          description: t("Files:GoToMyRooms"),
+          key: "empty-view-goto-shared",
+        },
+      ])
+      .with([FolderType.TRASH, P._, P.when((item) => !item)], () => [
+        {
+          ...actions.onGoToPersonal(),
+          icon: <PersonIcon />,
+          description: t("Files:GoToPersonal"),
+          key: "empty-view-trash-goto-personal",
+        },
+      ])
       .otherwise(() => []);
   }
 

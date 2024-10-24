@@ -24,46 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Text } from "../text";
+import { Link } from "react-router-dom";
 
-import {
-  EmptyViewBody,
-  EmptyViewHeader,
-  EmptyViewWrapper,
-} from "./EmptyView.styled";
-import EmptyViewOption from "./EmptyView.option";
-import type { EmptyViewProps } from "./EmptyView.types";
+import { classNames } from "../../utils";
 
-export const EmptyView = ({
-  description,
-  icon,
-  options,
-  title,
-}: EmptyViewProps) => {
-  return (
-    <EmptyViewWrapper>
-      <EmptyViewHeader>
-        {icon}
-        <Text
-          as="h3"
-          fontWeight="700"
-          lineHeight="22px"
-          className="ev-header"
-          noSelect
-        >
-          {title}
-        </Text>
-        <Text as="p" fontSize="12px" className="ev-subheading" noSelect>
-          {description}
-        </Text>
-      </EmptyViewHeader>
-      {options && (
-        <EmptyViewBody>
-          {options.map((option) => (
-            <EmptyViewOption key={option.key} option={option} />
-          ))}
-        </EmptyViewBody>
-      )}
-    </EmptyViewWrapper>
-  );
-};
+import { EmptyViewItem } from "./EmptyView.item";
+import { isEmptyLinkOptions } from "./EmptyView.utils";
+
+import type { EmptyViewOptionProps } from "./EmptyView.types";
+
+function EmptyViewOption({ option }: EmptyViewOptionProps) {
+  if (isEmptyLinkOptions(option))
+    return (
+      <Link
+        className={classNames("ev-link", option.className)}
+        to={option.to}
+        state={option.state}
+        onClick={option.onClick}
+      >
+        {option.icon}
+        <span>{option.description}</span>
+      </Link>
+    );
+
+  return <EmptyViewItem {...option} key={option.key} />;
+}
+
+export default EmptyViewOption;

@@ -22,48 +22,16 @@
 //
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { Text } from "../text";
+import type {
+  EmptyViewLinkType,
+  EmptyViewOptionsType,
+} from "./EmptyView.types";
 
-import {
-  EmptyViewBody,
-  EmptyViewHeader,
-  EmptyViewWrapper,
-} from "./EmptyView.styled";
-import EmptyViewOption from "./EmptyView.option";
-import type { EmptyViewProps } from "./EmptyView.types";
-
-export const EmptyView = ({
-  description,
-  icon,
-  options,
-  title,
-}: EmptyViewProps) => {
-  return (
-    <EmptyViewWrapper>
-      <EmptyViewHeader>
-        {icon}
-        <Text
-          as="h3"
-          fontWeight="700"
-          lineHeight="22px"
-          className="ev-header"
-          noSelect
-        >
-          {title}
-        </Text>
-        <Text as="p" fontSize="12px" className="ev-subheading" noSelect>
-          {description}
-        </Text>
-      </EmptyViewHeader>
-      {options && (
-        <EmptyViewBody>
-          {options.map((option) => (
-            <EmptyViewOption key={option.key} option={option} />
-          ))}
-        </EmptyViewBody>
-      )}
-    </EmptyViewWrapper>
-  );
+export const isEmptyLinkOptions = (
+  options: EmptyViewOptionsType[number],
+): options is EmptyViewLinkType => {
+  return typeof options === "object" && "to" in options;
 };

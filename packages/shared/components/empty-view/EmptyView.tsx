@@ -1,5 +1,4 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
 
 import { Text } from "../text";
 
@@ -7,6 +6,7 @@ import {
   EmptyViewBody,
   EmptyViewHeader,
   EmptyViewWrapper,
+  StyledLink,
 } from "./EmptyView.styled";
 import { EmptyViewItem } from "./EmptyView.item";
 import type {
@@ -14,6 +14,9 @@ import type {
   EmptyViewOptionsType,
   EmptyViewProps,
 } from "./EmptyView.types";
+
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
+import { ThemeContext } from "styled-components";
 
 const isEmptyLinkOptions = (
   options: EmptyViewOptionsType,
@@ -27,6 +30,10 @@ export const EmptyView = ({
   options,
   title,
 }: EmptyViewProps) => {
+  const defaultTheme = useContext(ThemeContext);
+
+  const currentColorScheme = defaultTheme?.currentColorScheme;
+
   return (
     <EmptyViewWrapper>
       <EmptyViewHeader>
@@ -47,15 +54,16 @@ export const EmptyView = ({
       {options && (
         <EmptyViewBody>
           {isEmptyLinkOptions(options) ? (
-            <Link
+            <StyledLink
               className="ev-link"
               to={options.to}
               state={options.state}
               onClick={options.onClick}
+              $currentColorScheme={currentColorScheme}
             >
               {options.icon}
               <span>{options.description}</span>
-            </Link>
+            </StyledLink>
           ) : (
             options.map((option) => (
               <EmptyViewItem {...option} key={option.key} />

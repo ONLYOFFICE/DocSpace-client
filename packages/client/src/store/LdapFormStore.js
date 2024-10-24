@@ -186,6 +186,8 @@ class LdapFormStore {
   };
 
   load = async (t) => {
+    if (this.isLoaded) return;
+
     const [settingsRes, cronRes, defaultRes] = await Promise.allSettled([
       getLdapSettings(),
       getCronLdap(),
@@ -287,6 +289,11 @@ class LdapFormStore {
 
   setIsAuthentication = () => {
     this.authentication = !this.authentication;
+
+    if (!this.authentication) {
+      this.errors.login = false;
+      this.errors.password = false;
+    }
   };
 
   setIsSendWelcomeEmail = (sendWelcomeEmail) => {
@@ -406,7 +413,7 @@ class LdapFormStore {
         }
       }
 
-      if (this.authentication) {
+      if (this.authentication && !isErrorExist) {
         this.errors.login = this.login.trim() === "";
         this.errors.password = this.password.trim() === "";
 

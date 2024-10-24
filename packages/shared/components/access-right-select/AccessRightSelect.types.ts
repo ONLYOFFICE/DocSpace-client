@@ -47,6 +47,7 @@ type PropsFromCombobox = Pick<
   | "type"
   | "noBorder"
   | "isDisabled"
+  | "isMobileView"
 >;
 
 export type AccessRightSelectProps = PropsFromCombobox & {

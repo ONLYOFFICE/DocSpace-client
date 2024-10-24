@@ -63,7 +63,7 @@ async function Page({ searchParams, params }: LinkInviteProps) {
       getUserFromConfirm(uid, confirmKey),
       getThirdPartyProviders(),
       getCapabilities(),
-      getPortalPasswordSettings(),
+      getPortalPasswordSettings(confirmKey),
     ]);
 
   const settingsCulture =

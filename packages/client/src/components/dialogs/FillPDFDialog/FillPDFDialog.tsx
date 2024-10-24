@@ -88,13 +88,13 @@ const FillPDFDialog = inject<TStore>(
                 title={t("FillPDFDialog:FillOutTitle")}
                 description={t("FillPDFDialog:FillOutDescription")}
                 buttonLabel={t("FillPDFDialog:FillOutButtonLabel")}
-                onCick={openEditorFill}
+                onClick={openEditorFill}
               />
               <Card
                 title={t("FillPDFDialog:ShareCollectTitle")}
                 description={t("FillPDFDialog:ShareCollectDescription")}
                 buttonLabel={t("FillPDFDialog:ShareCollectButtonLabel")}
-                onCick={openSelector}
+                onClick={openSelector}
               />
             </Container>
           </ModalDialog.Body>

@@ -186,6 +186,8 @@ class LdapFormStore {
   };
 
   load = async (t) => {
+    if (this.isLoaded) return;
+
     const [settingsRes, cronRes, defaultRes] = await Promise.allSettled([
       getLdapSettings(),
       getCronLdap(),

@@ -60,7 +60,11 @@ const CreateGroupDialog = ({
   getGroups,
 }: CreateGroupDialogProps) => {
   const navigate = useNavigate();
-  const { t } = useTranslation(["Common", "PeopleTranslations"]);
+  const { t } = useTranslation([
+    "Common",
+    "PeopleTranslations",
+    "InviteDialog",
+  ]);
 
   const [groupParams, setGroupParams] = useState<GroupParams>({
     groupName: "",
@@ -118,7 +122,7 @@ const CreateGroupDialog = ({
     });
 
     if (showErrorWasSelected) {
-      toastr.warning("Some users have already been added");
+      toastr.warning(t("InviteDialog:UsersAlreadyAdded"));
     }
 
     setGroupMembers(resultGroupMembers);

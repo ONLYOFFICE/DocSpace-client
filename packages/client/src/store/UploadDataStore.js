@@ -32,7 +32,7 @@ import sumBy from "lodash/sumBy";
 import uniqBy from "lodash/uniqBy";
 import { ConflictResolveType } from "@docspace/shared/enums";
 import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
-
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 import {
   getFileInfo,
   getFolderInfo,
@@ -57,7 +57,6 @@ import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
-import { Link } from "@docspace/shared/components/link";
 import { globalColors } from "@docspace/shared/themes";
 
 class UploadDataStore {
@@ -1492,7 +1491,9 @@ class UploadDataStore {
                 i18nKey="Files:PasswordProtectedFiles"
                 t={t}
                 components={[
-                  <Link
+                  <ColorTheme
+                    tag="a"
+                    themeId={ThemeId.Link}
                     isHovered
                     color={globalColors.link}
                     onClick={() => {

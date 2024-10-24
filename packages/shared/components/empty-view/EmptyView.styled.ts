@@ -1,6 +1,8 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { Link } from "react-router-dom";
+
 import { mobile } from "@docspace/shared/utils";
-import { globalColors } from "../../themes";
+import { globalColors, TColorScheme } from "../../themes";
 
 export const EmptyViewWrapper = styled.div`
   margin-inline: auto;
@@ -68,8 +70,6 @@ export const EmptyViewBody = styled.div`
     max-width: fit-content;
     text-decoration: none;
 
-    color: ${(props) => props.theme.emptyView.linkColor};
-
     svg {
       color: inherit;
       g {
@@ -85,7 +85,19 @@ export const EmptyViewBody = styled.div`
       text-decoration: underline dotted;
       text-underline-offset: 2px;
     }
+
+    cusros: pointer;
   }
+`;
+
+export const StyledLink = styled(Link)<{
+  $currentColorScheme?: TColorScheme;
+}>`
+  ${(props) =>
+    props.$currentColorScheme &&
+    css`
+      color: ${props.$currentColorScheme.main?.accent};
+    `};
 `;
 
 export const EmptyViewItemWrapper = styled.div`

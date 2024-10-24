@@ -9,7 +9,7 @@ import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 import { Text } from "@docspace/shared/components/text";
 
-import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
+import OAuthStore from "SRC_DIR/store/OAuthStore";
 
 interface DisableClientDialogProps {
   isVisible?: boolean;
@@ -89,10 +89,11 @@ const DisableClientDialog = (props: DisableClientDialogProps) => {
   );
 };
 
-export default inject(({ oauthStore }: { oauthStore: OAuthStoreProps }) => {
+export default inject(({ oauthStore }: { oauthStore: OAuthStore }) => {
   const {
     bufferSelection,
     selection,
+    selectionToDisable,
 
     setDisableDialogVisible,
     setActiveClient,
@@ -101,23 +102,21 @@ export default inject(({ oauthStore }: { oauthStore: OAuthStoreProps }) => {
     disableDialogVisible,
   } = oauthStore;
 
-  const isGroup = !!selection.length;
+  const isGroup = selectionToDisable.length > 1;
 
   const onClose = () => {
     setDisableDialogVisible(false);
   };
 
   const onDisable = async () => {
-    if (isGroup) {
-      const actions: Promise<void>[] = [];
+    if (selection.length) {
+      const disable = async (item: string) => {
+        await changeClientStatus(item, false);
+      };
 
-      selection.forEach((item) => {
-        const disable = async () => {
-          await changeClientStatus(item, false);
-        };
-
-        actions.push(disable());
-      });
+      const actions: Promise<void>[] = selectionToDisable.map((item) =>
+        disable(item),
+      );
 
       await Promise.all(actions);
 
@@ -125,7 +124,9 @@ export default inject(({ oauthStore }: { oauthStore: OAuthStoreProps }) => {
       setSelection("");
     } else {
       if (!bufferSelection) return;
+
       await changeClientStatus(bufferSelection.clientId, false);
+
       setActiveClient("");
       setSelection("");
     }

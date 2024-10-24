@@ -3151,6 +3151,7 @@ const Dark: TTheme = {
     backgroundArchive: white,
     opacityBackground: "0.1",
     plusIcon: black,
+    emptyBorder: `2px dashed ${grayDarkStrong}`,
 
     linkIcon: {
       background: black,

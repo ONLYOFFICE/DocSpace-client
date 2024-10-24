@@ -28,6 +28,7 @@ import FolderLocationReactSvgUrl from "PUBLIC_DIR/images/folder-location.react.s
 import { useState } from "react";
 import { Trans, withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
@@ -104,6 +105,20 @@ const HistoryItemList = ({
   const isDisabledOpenLocationButton = !(isStartedFilling || isSubmitted);
 
   const handleOpenFile = (item) => {
+    const isMedia =
+      item.accessibility.ImageView || item.accessibility.MediaView;
+
+    if (isMedia) {
+      return window.open(
+        combineUrl(
+          window.ClientConfig?.proxy?.url,
+          config.homepage,
+          MEDIA_VIEW_URL,
+          item.id,
+        ),
+      );
+    }
+
     return (
       !isFolder &&
       window.open(

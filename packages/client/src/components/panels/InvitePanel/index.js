@@ -538,8 +538,9 @@ const InvitePanel = ({
               headerLabel: t("Common:ListAccounts"),
               withoutBackButton: false,
               withoutBorder: true,
-              onBackClick: onClose,
-              onClose: () => {
+              isCloseable: true,
+              onBackClick: closeUsersPanel,
+              onCloseClick: () => {
                 onClose();
                 closeUsersPanel();
               },

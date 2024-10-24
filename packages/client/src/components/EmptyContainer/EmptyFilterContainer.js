@@ -111,12 +111,15 @@ const EmptyFilterContainer = ({
     }
   };
 
-  const options = {
-    to: "",
-    description: t("Common:ClearFilter"),
-    icon: <ClearEmptyFilterSvg />,
-    onClick: onResetFilter,
-  };
+  const options = [
+    {
+      key: "empty-view-filter",
+      to: "",
+      description: t("Common:ClearFilter"),
+      icon: <ClearEmptyFilterSvg />,
+      onClick: onResetFilter,
+    },
+  ];
 
   const imageSrc = getIconURL();
 

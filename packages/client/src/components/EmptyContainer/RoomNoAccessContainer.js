@@ -86,12 +86,15 @@ const RoomNoAccessContainer = (props) => {
     ),
     options: isFrame
       ? []
-      : {
-          description: t("GoToMyRooms"),
-          icon: <FolderIcon />,
-          to: "",
-          onClick: onGoToShared,
-        },
+      : [
+          {
+            to: "",
+            icon: <FolderIcon />,
+            onClick: onGoToShared,
+            key: "empty-view-goto-rooms",
+            description: t("GoToMyRooms"),
+          },
+        ],
   };
 
   return <EmptyView {...propsRoomNotFoundOrMoved} />;

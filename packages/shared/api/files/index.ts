@@ -623,11 +623,16 @@ export async function removeFiles(
 export async function setFileOwner(userId: string, folderIds: number[]) {
   const data = { userId, folderIds };
 
-  const res = (await request({
-    method: "post",
-    url: "/files/owner",
-    data,
-  })) as TFolder[];
+  const skipRedirect = true;
+
+  const res = (await request(
+    {
+      method: "post",
+      url: "/files/owner",
+      data,
+    },
+    skipRedirect,
+  )) as TFolder[];
 
   return res;
 }

@@ -56,4 +56,5 @@ export interface RadioButtonProps {
   /** Position of radiobuttons */
   orientation?: "horizontal" | "vertical";
   classNameInput?: string;
+  autoFocus?: boolean;
 }

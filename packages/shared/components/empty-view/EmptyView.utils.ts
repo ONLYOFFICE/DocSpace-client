@@ -22,56 +22,16 @@
 //
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
+
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import type {
+  EmptyViewLinkType,
+  EmptyViewOptionsType,
+} from "./EmptyView.types";
 
-import StyledText, { StyledAutoDirSpan } from "./Text.styled";
-import { TextProps } from "./Text.types";
-
-const TextPure = ({
-  title,
-  tag,
-  as,
-  fontSize = "13px",
-  fontWeight,
-  color,
-  textAlign = "left",
-  onClick,
-  dir,
-  children,
-  view,
-  ...rest
-}: TextProps) => {
-  const isAutoDir = dir === "auto";
-  const dirProp = isAutoDir ? {} : { dir };
-
-  return (
-    <StyledText
-      fontSizeProp={fontSize}
-      fontWeightProp={fontWeight}
-      colorProp={color}
-      textAlign={textAlign}
-      as={!as && tag ? tag : as}
-      title={title}
-      data-testid="text"
-      onClick={onClick}
-      {...dirProp}
-      {...rest}
-    >
-      {isAutoDir ? (
-        <StyledAutoDirSpan view={view} dir="auto">
-          {children}
-        </StyledAutoDirSpan>
-      ) : (
-        children
-      )}
-    </StyledText>
-  );
+export const isEmptyLinkOptions = (
+  options: EmptyViewOptionsType[number],
+): options is EmptyViewLinkType => {
+  return typeof options === "object" && "to" in options;
 };
-
-const Text = React.memo<TextProps>(TextPure);
-
-Text.displayName = "Text";
-
-export { Text, TextPure };

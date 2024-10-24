@@ -156,6 +156,8 @@ const Consent = ({ client, scopes, user, baseUrl }: IConsentProps) => {
       window.location.replace(
         `${baseUrl}/login?client_id=${client.clientId}&type=oauth2`,
       );
+
+      return;
     }
 
     router.push(`/?client_id=${client.clientId}&type=oauth2`);

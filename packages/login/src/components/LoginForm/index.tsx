@@ -308,6 +308,7 @@ const LoginForm = ({
           const redirectUrl = getCookie(
             "x-redirect-authorization-uri",
           )?.replace(window.location.origin, name);
+
           // deleteCookie("x-redirect-authorization-uri");
 
           window.open(
@@ -322,10 +323,13 @@ const LoginForm = ({
 
         const portalsString = JSON.stringify({ portals });
 
-        searchParams.set("portals", portalsString);
+        // searchParams.set("portals", portalsString);
         searchParams.set("clientId", client.clientId);
 
+        sessionStorage.setItem("tenant-list", portalsString);
+
         router.push(`/tenant-list?${searchParams.toString()}`);
+
         setIsLoading(false);
         return;
       } catch (error) {

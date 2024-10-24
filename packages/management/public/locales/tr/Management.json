@@ -10,14 +10,10 @@
   "DomainSettings": "Alan(Domain) ayarları",
   "EnterDomain": "Alan(Domain) adını girin",
   "EnterName": "Alan adını girin",
-  "GoToSpace": "Alana git",
   "NewSpace": "Yeni alan",
   "PortalName": "{{productName}} adı",
   "PortalStats": "Odalar: {{roomCount}} | Kullanıcılar: {{userCount}} | Kullanılan depolama alanı: {{storageSpace}}",
   "RestrictAccess": "Yönetim alanlarına erişimi kısıtlayın",
-  "SpaceCreated": "Alan oluşturuldu",
-  "SpaceCreatedTitle": "Alan başarıyla oluşturuldu, \"Alana git\" seçeneğine tıklayarak alana geçiş yapabilirsiniz. Birden fazla alan oluşturmak için ayarlarda kalın.",
-  "StayInSettings": "Ayarlarda Kal",
   "Subheader": "Çeşitli alanlar oluşturmak ve bunları kullanıcılarınız için erişilebilir kılmak için bu bölümü kullanın",
   "VisitSpace": "Oluşturduktan sonra bu alanı ziyaret edin"
 }

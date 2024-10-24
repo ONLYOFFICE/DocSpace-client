@@ -10,14 +10,10 @@
   "DomainSettings": "Domein instellingen",
   "EnterDomain": "Voer domeinnaam in",
   "EnterName": "Voer de naam van de ruimte in",
-  "GoToSpace": "Ga naar ruimte",
   "NewSpace": "Nieuwe ruimte",
   "PortalName": "{{productName}} naam",
   "PortalStats": "Kamers: {{roomCount}} | Gebruikers: {{userCount}} | Gebruikte opslagruimte: {{storageSpace}}",
   "RestrictAccess": "Beperk de toegang tot het beheer van ruimtes",
-  "SpaceCreated": "Ruimte aangemaakt",
-  "SpaceCreatedTitle": "De ruimte is met succes aangemaakt, u kunt ernaar overschakelen door op \"Ga naar ruimte\" te klikken. Blijf in instellingen om meerdere ruimtes te maken.",
-  "StayInSettings": "Blijf in Instellingen",
   "Subheader": "Gebruik dit gedeelte om verschillende ruimtes aan te maken en ze toegankelijk te maken voor uw gebruikers",
   "VisitSpace": "Bezoek deze ruimte na het aanmaken"
 }

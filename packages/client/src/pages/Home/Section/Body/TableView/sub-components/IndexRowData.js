@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { TableCell } from "@docspace/shared/components/table";
 import FileNameCell from "./FileNameCell";
@@ -66,36 +66,28 @@ const IndexRowDataComponent = (props) => {
     columnStorageName,
     isIndexEditingMode,
     changeIndex,
+    isIndexedFolder,
   } = props;
 
-  const [lastColumn, setLastColumn] = React.useState(
+  const [lastColumn, setLastColumn] = useState(
     getLastColumn(
       tableStorageName,
       localStorage.getItem(columnStorageName),
-      isIndexEditingMode,
+      isIndexedFolder,
     ),
   );
 
-  const onResize = React.useCallback(() => {
+  useEffect(() => {
     const newLastColumn = getLastColumn(
       tableStorageName,
       localStorage.getItem(columnStorageName),
-      isIndexEditingMode,
+      isIndexedFolder,
     );
 
-    setLastColumn(newLastColumn);
-  }, [
-    localStorage.getItem(columnStorageName),
-    isIndexEditingMode,
-    tableStorageName,
-  ]);
-
-  React.useEffect(() => {
-    onResize();
-    window.addEventListener("resize", onResize);
-
-    return () => window.removeEventListener("resize", onResize);
-  }, [isIndexEditingMode, localStorage.getItem(columnStorageName)]);
+    if (newLastColumn && newLastColumn !== lastColumn) {
+      setLastColumn(newLastColumn);
+    }
+  });
 
   const quickButtonsComponentNode = (
     <StyledQuickButtonsContainer>
@@ -288,7 +280,7 @@ const IndexRowDataComponent = (props) => {
   );
 };
 
-export default inject(({ tableStore }) => {
+export default inject(({ tableStore, selectedFolderStore }) => {
   const {
     authorVDRColumnIsEnabled,
     modifiedVDRColumnIsEnabled,
@@ -299,6 +291,8 @@ export default inject(({ tableStore }) => {
     columnStorageName,
   } = tableStore;
 
+  const { isIndexedFolder } = selectedFolderStore;
+
   return {
     authorVDRColumnIsEnabled,
     modifiedVDRColumnIsEnabled,
@@ -307,5 +301,7 @@ export default inject(({ tableStore }) => {
     typeVDRColumnIsEnabled,
     tableStorageName,
     columnStorageName,
+
+    isIndexedFolder,
   };
 })(observer(IndexRowDataComponent));

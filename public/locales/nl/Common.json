@@ -206,6 +206,7 @@
   "FromDevice": "Van apparaat",
   "FromPortal": "Van {{productName}}",
   "FullAccess": "Volledige toegang",
+  "GeneratePassword": "Genereer wachtwoord",
   "Gigabyte": "GB",
   "GoBack": "Ga terug",
   "Group": "Groep",
@@ -504,6 +505,5 @@
   "Website": "Website",
   "Yes": "Ja",
   "Yesterday": "Gisteren",
-  "You": "U",
-  "GeneratePassword": "Genereer wachtwoord"
+  "You": "U"
 }

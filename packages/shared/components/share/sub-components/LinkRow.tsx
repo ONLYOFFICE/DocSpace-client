@@ -25,14 +25,14 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { useTranslation } from "react-i18next";
-
+import { useState, useEffect } from "react";
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg?url";
 import UniverseIcon from "PUBLIC_DIR/images/universe.react.svg?url";
 import PeopleIcon from "PUBLIC_DIR/images/people.react.svg?url";
 import CopyIcon from "PUBLIC_DIR/images/copy.react.svg?url";
 import LockedReactSvg from "PUBLIC_DIR/images/icons/12/locked.react.svg";
-import FormFillRectSvgUrl from "PUBLIC_DIR/images/form.fill.rect.svg?url";
 
+import { isMobile } from "@docspace/shared/utils";
 import { RowSkeleton } from "../../../skeletons/share";
 import { TFileLink } from "../../../api/files/types";
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
@@ -74,9 +74,9 @@ const LinkRow = ({
   onAccessRightsSelect,
   removedExpiredLink,
   isFormRoom,
-  onClickForm,
 }: LinkRowProps) => {
   const { t } = useTranslation(["Common", "Translations"]);
+  const [isMobileViewLink, setIsMobileViewLink] = useState(isMobile());
 
   const shareOptions = getShareOptions(t, availableExternalRights) as TOption[];
   const accessOptions = availableExternalRights
@@ -84,6 +84,18 @@ const LinkRow = ({
     : [];
 
   const roomAccessOptions = isRoomsLink ? getRoomAccessOptions(t) : [];
+
+  const onCheckHeight = () => {
+    setIsMobileViewLink(isMobile());
+  };
+
+  useEffect(() => {
+    onCheckHeight();
+    window.addEventListener("resize", onCheckHeight);
+    return () => {
+      window.removeEventListener("resize", onCheckHeight);
+    };
+  }, []);
 
   const onCopyLink = (link: TFileLink) => {
     if (isRoomsLink) {
@@ -194,11 +206,7 @@ const LinkRow = ({
             {isRoomsLink ? (
               <>
                 {isFormRoom ? (
-                  <IconButton
-                    iconName={FormFillRectSvgUrl}
-                    onClick={onClickForm}
-                    size={16}
-                  />
+                  <></>
                 ) : (
                   <AccessRightSelect
                     selectedOption={roomSelectedOptions ?? ({} as TOption)}
@@ -210,6 +218,8 @@ const LinkRow = ({
                     type="onlyIcon"
                     manualWidth="300px"
                     isDisabled={isExpiredLink || isLoaded || isArchiveFolder}
+                    isMobileView={isMobileViewLink}
+                    fixedDirection={isMobileViewLink}
                   />
                 )}
                 {!isArchiveFolder && (

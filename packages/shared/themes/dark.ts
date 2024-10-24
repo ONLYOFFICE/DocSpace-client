@@ -62,6 +62,7 @@ const {
   lightSecondMainDisabled,
 
   mainOrange,
+  mainRed,
 
   darkErrorStatus,
   favoritesStatus,
@@ -1770,7 +1771,7 @@ const Dark: TTheme = {
     rootFolderTitleColor: darkGrayDark,
     boxShadow: `0px 8px 16px 0px ${boxShadowDarkColor}`,
     lifetimeIconFill: "none",
-    lifetimeIconStroke: "#657077",
+    lifetimeIconStroke: mainRed,
 
     icon: {
       fill: darkLink,

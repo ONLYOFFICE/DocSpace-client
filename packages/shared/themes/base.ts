@@ -70,6 +70,7 @@ const {
   lightSecondMainDisabled,
 
   mainGreen,
+  mainRed,
 
   lightErrorStatus,
   favoritesStatus,
@@ -1777,8 +1778,8 @@ export const getBaseTheme = () => {
       background: white,
       rootFolderTitleColor: gray,
       boxShadow: `0px 8px 16px 0px ${boxShadowColor}`,
-      lifetimeIconFill: "#f2675a",
-      lifetimeIconStroke: "#f2675a",
+      lifetimeIconFill: mainRed,
+      lifetimeIconStroke: mainRed,
 
       icon: {
         fill: link,
@@ -1997,7 +1998,7 @@ export const getBaseTheme = () => {
       hoverBorderColor: lightGrayDark,
       tableCellBorder: `1px solid ${grayLightMid}`,
 
-      indexingSeparator: "#4781D1",
+      indexingSeparator: lightBlueMain,
 
       groupMenu: {
         background: white,

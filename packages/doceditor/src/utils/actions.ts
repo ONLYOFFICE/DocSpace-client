@@ -49,7 +49,7 @@ import type {
   TResponse,
 } from "@/types";
 
-import { REPLACED_URL_PATH } from "./constants";
+import { availableActions, REPLACED_URL_PATH } from "./constants";
 
 export async function getFillingSession(
   fillingSessionId: string,
@@ -240,19 +240,18 @@ export async function getData(
   editorType?: string,
 ) {
   const view = action === "view";
-  const edit = action === "edit";
 
   try {
     const searchParams = new URLSearchParams();
 
-    if (view) searchParams.append("view", "true");
+    if (action && availableActions[action]) searchParams.append(action, "true");
+
     if (version) {
       searchParams.append("version", version);
     }
     if (doc) searchParams.append("doc", doc);
     if (share) searchParams.append("share", share);
     if (editorType) searchParams.append("editorType", editorType);
-    if (edit) searchParams.append("edit", "true");
 
     const [config, user, settings] = await Promise.all([
       openEdit(fileId, searchParams.toString(), share),

@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
-import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
+import OAuthStore from "SRC_DIR/store/OAuthStore";
 import { setDocumentTitle } from "SRC_DIR/helpers/utils";
 
 import { OAuthContainer } from "./OAuth.styled";
@@ -125,7 +125,7 @@ export default inject(
     oauthStore,
     settingsStore,
   }: {
-    oauthStore: OAuthStoreProps;
+    oauthStore: OAuthStore;
     settingsStore: SettingsStore;
   }) => {
     const { currentDeviceType } = settingsStore;

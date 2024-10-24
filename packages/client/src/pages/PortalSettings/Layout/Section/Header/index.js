@@ -115,20 +115,25 @@ export const HeaderContainer = styled.div`
 `;
 
 export const StyledContainer = styled.div`
-  .group-button-menu-container {
-    ${(props) =>
-      props.viewAs === "table"
-        ? css`
-            margin: 0px -20px;
-            width: calc(100% + 40px);
-          `
-        : css`
-            margin: 0px -20px;
-            width: calc(100% + 40px);
-          `}
+  .table-container_group-menu {
+    margin-block: 0;
+    margin-inline: -20px 0;
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
+
+    width: calc(100% + 40px);
+    height: 68px;
 
     @media ${tablet} {
-      margin: 0 -16px;
+      height: 61px;
+      margin-block: 0;
+      margin-inline: -16px 0;
+      width: calc(100% + 32px);
+    }
+
+    @media ${mobile} {
+      height: 52px !important;
+      margin-block: 0;
+      margin-inline: -16px 0;
       width: calc(100% + 32px);
     }
   }
@@ -143,11 +148,15 @@ const SectionHeaderContent = (props) => {
     isSSOAvailable,
     workspace,
     standalone,
+    getHeaderMenuItems,
+    setSelections,
   } = props;
 
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
+
+  const isOAuth = location.pathname.includes("oauth");
 
   const [state, setState] = React.useState({
     header: "",
@@ -253,6 +262,11 @@ const SectionHeaderContent = (props) => {
   };
 
   const onCheck = (checked) => {
+    if (isOAuth) {
+      setSelections(checked);
+      return;
+    }
+
     const { setSelected } = props;
     setSelected(checked ? "all" : "close");
   };
@@ -291,14 +305,16 @@ const SectionHeaderContent = (props) => {
     </>
   );
 
-  const headerMenu = [
-    {
-      label: t("Common:Delete"),
-      disabled: !selection || !selection.length > 0,
-      onClick: removeAdmins,
-      iconUrl: DeleteReactSvgUrl,
-    },
-  ];
+  const headerMenu = isOAuth
+    ? getHeaderMenuItems(t, true)
+    : [
+        {
+          label: t("Common:Delete"),
+          disabled: !selection || !selection.length > 0,
+          onClick: removeAdmins,
+          iconUrl: DeleteReactSvgUrl,
+        },
+      ];
 
   const translatedHeader =
     header === IMPORT_HEADER_CONST
@@ -316,16 +332,16 @@ const SectionHeaderContent = (props) => {
   return (
     <StyledContainer isHeaderVisible={isHeaderVisible}>
       {isHeaderVisible ? (
-        <div className="group-button-menu-container">
-          <TableGroupMenu
-            checkboxOptions={menuItems}
-            onChange={onCheck}
-            isChecked={isHeaderChecked}
-            isIndeterminate={isHeaderIndeterminate}
-            headerMenu={headerMenu}
-            withComboBox
-          />
-        </div>
+        <TableGroupMenu
+          checkboxOptions={menuItems}
+          onChange={onCheck}
+          isChecked={isHeaderChecked}
+          isIndeterminate={isHeaderIndeterminate}
+          headerMenu={headerMenu}
+          withComboBox={false}
+          withoutInfoPanelToggler
+          isMobileView={false}
+        />
       ) : !isLoadedSectionHeader ? (
         <LoaderSectionHeader />
       ) : (
@@ -390,6 +406,7 @@ export default inject(
     common,
     importAccountsStore,
     settingsStore,
+    oauthStore,
   }) => {
     const {
       isCustomizationAvailable,
@@ -414,15 +431,17 @@ export default inject(
     const { workspace } = importAccountsStore;
     const { standalone } = settingsStore;
 
+    const { getHeaderMenuItems } = oauthStore;
     return {
       addUsers,
       removeAdmins,
       selected,
       setSelected,
       admins,
-      isHeaderIndeterminate,
-      isHeaderChecked,
-      isHeaderVisible,
+      isHeaderIndeterminate:
+        isHeaderIndeterminate || oauthStore.isHeaderIndeterminate,
+      isHeaderChecked: isHeaderChecked || oauthStore.isHeaderChecked,
+      isHeaderVisible: isHeaderVisible || oauthStore.isHeaderVisible,
       deselectUser,
       selectAll,
       toggleSelector,
@@ -435,12 +454,18 @@ export default inject(
       isSSOAvailable,
       workspace,
       standalone,
+      getHeaderMenuItems,
+      setSelections: oauthStore.setSelections,
     };
   },
 )(
   withLoading(
-    withTranslation(["Settings", "SingleSignOn", "Common", "JavascriptSdk"])(
-      observer(SectionHeaderContent),
-    ),
+    withTranslation([
+      "Settings",
+      "SingleSignOn",
+      "Common",
+      "JavascriptSdk",
+      "OAuth",
+    ])(observer(SectionHeaderContent)),
   ),
 );

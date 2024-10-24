@@ -149,6 +149,7 @@ const FilesTileContent = ({
           color={theme.filesSection.tilesView.color}
           isTextOverflow
           dir="auto"
+          view="tile"
         >
           {titleWithoutExt}
           {displayFileExtension && (

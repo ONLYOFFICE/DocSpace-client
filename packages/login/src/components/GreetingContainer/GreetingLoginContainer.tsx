@@ -45,7 +45,7 @@ export const GreetingLoginContainer = ({
   greetingSettings,
   culture,
 }: GreetingContainersProps) => {
-  const { t } = useTranslation(["Login", "Wizard"]);
+  const { t } = useTranslation(["Login", "Wizard", "TenantList"]);
   const theme = useTheme();
 
   const logoUrl = getLogoUrl(
@@ -94,7 +94,7 @@ export const GreetingLoginContainer = ({
           className="greeting-title"
         >
           {pathname === "/tenant-list"
-            ? "Choose your portal"
+            ? t("TenantList:ChoosePortal")
             : greetingSettings}
         </Text>
       )}

@@ -91,6 +91,9 @@ const LoginContainer = styled.div<{
   }
 
   .greeting-title {
+    display: flex;
+    justify-content: center;
+
     width: 100%;
     max-width: 480px;
     padding-bottom: 29px;
@@ -99,6 +102,10 @@ const LoginContainer = styled.div<{
     color: ${(props) => props.theme.login.headerColor};
 
     @media ${mobile} {
+      overflow: hidden;
+      display: block;
+      text-overflow: ellipsis;
+
       padding-top: 32px;
       padding-bottom: 32px;
     }

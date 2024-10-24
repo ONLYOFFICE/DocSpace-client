@@ -11,7 +11,6 @@
   "DomainSettings": "Domain settings",
   "EnterDomain": "Enter domain name",
   "EnterName": "Enter space name",
-  "GoToSpace": "Go to space",
   "NewSpace": "New space",
   "PortalDeleted": "{{productName}} permanently deleted",
   "PortalName": "{{productName}} name",
@@ -19,9 +18,6 @@
   "RestrictAccess": "Restrict access to managing spaces",
   "SettingsDisabled": "These settings will be available once the second space is created and applied to all your spaces.",
   "SettingsForAll": "These settings will be effective for all of your spaces.",
-  "SpaceCreated": "Space created",
-  "SpaceCreatedTitle": "The space was successfully created, you can switch to it by clicking “Go to space”. To create several spaces, stay in settings.",
-  "StayInSettings": "Stay in Settings",
   "Subheader": "Use this section to create several spaces and make them accessible for your users",
   "VisitSpace": "Visit this space after creating"
 }

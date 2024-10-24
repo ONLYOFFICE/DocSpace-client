@@ -37,7 +37,7 @@ export const Card = ({
   title,
   description,
   buttonLabel,
-  onCick,
+  onClick,
 }: CardProps) => {
   return (
     <Wrapper>
@@ -50,7 +50,7 @@ export const Card = ({
       <Button
         scale
         isClicked
-        onClick={onCick}
+        onClick={onClick}
         label={buttonLabel}
         icon={<ArrowIcon />}
         size={ButtonSize.normal}

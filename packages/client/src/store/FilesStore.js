@@ -4060,7 +4060,13 @@ class FilesStore {
     return folderInfo;
   };
 
-  openDocEditor = (id, preview = false, shareKey = null, editForm = false) => {
+  openDocEditor = (
+    id,
+    preview = false,
+    shareKey = null,
+    editForm = false,
+    fillForm = false,
+  ) => {
     const { openOnNewPage } = this.filesSettingsStore;
 
     const share = shareKey ? shareKey : this.publicRoomStore.publicRoomKey;
@@ -4071,6 +4077,7 @@ class FilesStore {
     if (share) searchParams.append("share", share);
     if (preview) searchParams.append("action", "view");
     if (editForm) searchParams.append("action", "edit");
+    if (fillForm) searchParams.append("action", "fill");
 
     const url = combineUrl(
       window.ClientConfig?.proxy?.url,

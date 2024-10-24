@@ -177,10 +177,9 @@ export const Tab = styled.div<{
   $type?: TabsTypes;
   multiple?: boolean;
 }>`
-  display: flex;
-  white-space: nowrap;
-  flex-direction: column;
-  gap: 4px;
+    white-space: nowrap;
+    display: grid;
+    gap: 4px;
 
   width: max-content;
   height: inhert;
@@ -260,10 +259,19 @@ export const Tab = styled.div<{
 
 Tab.defaultProps = { theme: Base };
 
+export const TabText = styled.div`
+  grid-area: 1/1;
+`;
+
+export const TabBadge = styled.div`
+  grid-area: 1/2;
+`;
+
 export const TabSubLine = styled.div<{
   isActive?: boolean;
   $type?: TabsTypes;
 }>`
+  grid-area: 2/1;
   z-index: 1;
   width: 100%;
   height: 4px;

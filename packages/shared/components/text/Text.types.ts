@@ -63,6 +63,7 @@ export interface TextProps {
   children?: React.ReactNode;
   onClick?: (e: React.MouseEvent<Element>) => void;
   htmlFor?: string;
+  view?: string;
 }
 
 export interface StyledTextProps {
@@ -70,4 +71,5 @@ export interface StyledTextProps {
   fontWeightProp?: string;
   colorProp?: string;
   textAlign?: string;
+  view?: string;
 }

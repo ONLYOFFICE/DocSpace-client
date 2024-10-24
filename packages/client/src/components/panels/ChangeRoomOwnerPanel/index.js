@@ -30,7 +30,7 @@ import styled, { css } from "styled-components";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import { withTranslation } from "react-i18next";
 import Filter from "@docspace/shared/api/people/filter";
-import { EmployeeType } from "@docspace/shared/enums";
+import { EmployeeType, EmployeeStatus } from "@docspace/shared/enums";
 import {
   ModalDialog,
   ModalDialogType,
@@ -114,6 +114,7 @@ const ChangeRoomOwner = (props) => {
 
   const filter = Filter.getDefault();
   filter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
+  filter.employeeStatus = EmployeeStatus.Active;
 
   const selectorComponent = (
     <PeopleSelector

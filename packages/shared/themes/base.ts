@@ -70,6 +70,7 @@ const {
   lightSecondMainDisabled,
 
   mainGreen,
+  mainRed,
 
   lightErrorStatus,
   favoritesStatus,
@@ -1777,8 +1778,8 @@ export const getBaseTheme = () => {
       background: white,
       rootFolderTitleColor: gray,
       boxShadow: `0px 8px 16px 0px ${boxShadowColor}`,
-      lifetimeIconFill: "#f2675a",
-      lifetimeIconStroke: "#f2675a",
+      lifetimeIconFill: mainRed,
+      lifetimeIconStroke: mainRed,
 
       icon: {
         fill: link,
@@ -1997,7 +1998,7 @@ export const getBaseTheme = () => {
       hoverBorderColor: lightGrayDark,
       tableCellBorder: `1px solid ${grayLightMid}`,
 
-      indexingSeparator: "#4781D1",
+      indexingSeparator: lightBlueMain,
 
       groupMenu: {
         background: white,
@@ -2378,7 +2379,14 @@ export const getBaseTheme = () => {
     },
 
     emptyView: {
-      linkColor: lightBlueMain,
+      link: {
+        color: lightBlueMain,
+        background: white,
+        hoverBackground: lightGrayHover,
+        hoverColor: lightBlueMainHover,
+        PressedBackground: lightGraySelected,
+        PressedColor: lightBlueMainPressed,
+      },
 
       items: {
         hoverColor: grayLight,
@@ -3165,6 +3173,7 @@ export const getBaseTheme = () => {
       backgroundArchive: gray,
       opacityBackground: "1",
       plusIcon: white,
+      emptyBorder: `2px dashed ${grayStrong}`,
 
       linkIcon: {
         background: white,
@@ -3256,6 +3265,7 @@ export const getBaseTheme = () => {
         backgroundColor: lightGrayHover,
       },
 
+      iconColor: lightGrayDark,
       textColor: lightGrayDark,
       selectedBackgroundColor: grayLightMid,
       selectedBorderColor: grayLightMid,

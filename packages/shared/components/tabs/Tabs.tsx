@@ -35,8 +35,10 @@ import {
   ScrollbarTabs,
   StyledTabs,
   Tab,
+  TabBadge,
   TabList,
   TabSubLine,
+  TabText,
 } from "./Tabs.styled";
 import { TabsProps, TTabItem } from "./Tabs.types";
 import { TabsTypes } from "./Tabs.enums";
@@ -161,6 +163,7 @@ const Tabs = (props: TabsProps) => {
         const isActive = multiple
           ? multipleItems.indexOf(index) !== -1
           : index === currentItem;
+        const showBadge = type === TabsTypes.Primary && !!item.badge;
 
         return (
           <Tab
@@ -174,8 +177,11 @@ const Tabs = (props: TabsProps) => {
               setSelectedItem(item, index);
             }}
           >
-            {item.name}
+            <TabText>{item.name}</TabText>
             <TabSubLine isActive={isActive} $type={type} />
+            {showBadge && (
+              <TabBadge className="tab-badge">{item.badge}</TabBadge>
+            )}
           </Tab>
         );
       })}

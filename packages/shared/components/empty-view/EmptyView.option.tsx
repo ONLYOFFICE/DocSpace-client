@@ -24,48 +24,30 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
-import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
-import { ComboBox } from "@docspace/shared/components/combobox";
-import { Text } from "@docspace/shared/components/text";
-import { toastr } from "@docspace/shared/components/toast";
+import { classNames } from "../../utils";
 
-import { StyledRow } from "./styled-main-profile";
-import { isMobile } from "@docspace/shared/utils";
+import { EmptyViewItem } from "./EmptyView.item";
+import { isEmptyLinkOptions } from "./EmptyView.utils";
 
-const TimezoneCombo = ({ title }) => {
-  const { t } = useTranslation("Wizard");
+import type { EmptyViewOptionProps } from "./EmptyView.types";
 
-  const timezones = [{ key: "03", label: "(UTC) +03 Moscow" }];
-  const selectedTimezone = { key: "03", label: "(UTC) +03 Moscow" };
+function EmptyViewOption({ option }: EmptyViewOptionProps) {
+  if (isEmptyLinkOptions(option))
+    return (
+      <Link
+        className={classNames("ev-link", option.className)}
+        to={option.to}
+        state={option.state}
+        onClick={option.onClick}
+      >
+        {option.icon}
+        <span>{option.description}</span>
+      </Link>
+    );
 
-  return (
-    <StyledRow title={title}>
-      <Text as="div" className="label">
-        {t("Wizard:Timezone")}
-      </Text>
-      <ComboBox
-        onClick={() => toastr.warning("Work in progress (timezones)")}
-        className="combo"
-        directionY="both"
-        options={timezones}
-        selectedOption={selectedTimezone}
-        //onSelect={onTimezoneSelect}
-        isDisabled={false}
-        noBorder={!isMobile()}
-        scaled={isMobile()}
-        scaledOptions={false}
-        size="content"
-        showDisabledItems={true}
-        dropDownMaxHeight={364}
-        manualWidth="250px"
-        isDefaultMode={!isMobile()}
-        withBlur={isMobile()}
-        fillIcon={false}
-      />
-    </StyledRow>
-  );
-};
+  return <EmptyViewItem {...option} key={option.key} />;
+}
 
-export default TimezoneCombo;
+export default EmptyViewOption;

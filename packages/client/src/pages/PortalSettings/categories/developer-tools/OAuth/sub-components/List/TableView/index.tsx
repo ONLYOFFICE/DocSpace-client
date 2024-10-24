@@ -5,7 +5,7 @@ import elementResizeDetectorMaker from "element-resize-detector";
 import { UserStore } from "@docspace/shared/store/UserStore";
 import { TableBody } from "@docspace/shared/components/table";
 
-import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
+import OAuthStore from "SRC_DIR/store/OAuthStore";
 
 import Row from "./sub-components/Row";
 import Header from "./sub-components/Header";
@@ -27,6 +27,7 @@ const TableView = ({
   selection,
   activeClients,
   setSelection,
+  setBufferSelection,
   getContextMenuItems,
   changeClientStatus,
   userId,
@@ -111,6 +112,12 @@ const TableView = ({
     [fetchNextClients],
   );
 
+  React.useEffect(() => {
+    return () => {
+      setSelection!("");
+    };
+  }, [setSelection]);
+
   return (
     <TableWrapper forwardedRef={tableRef} useReactWindow>
       <Header
@@ -137,6 +144,7 @@ const TableView = ({
             isChecked={selection?.includes(item.clientId) || false}
             inProgress={activeClients?.includes(item.clientId) || false}
             setSelection={setSelection}
+            setBufferSelection={setBufferSelection}
             changeClientStatus={changeClientStatus}
             getContextMenuItems={getContextMenuItems}
             tagCount={tagCount}
@@ -153,7 +161,7 @@ export default inject(
     oauthStore,
   }: {
     userStore: UserStore;
-    oauthStore: OAuthStoreProps;
+    oauthStore: OAuthStore;
   }) => {
     const userId = userStore.user?.id;
 

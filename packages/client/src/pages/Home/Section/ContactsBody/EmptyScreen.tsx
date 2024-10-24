@@ -137,9 +137,8 @@ const EmptyScreen = ({
       return [
         {
           key: "empty-view-invite-new-users",
-          title: "Invite new users",
-          description:
-            "Send an invitation letter to add new members to the portal",
+          title: t("EmptyView:InviteNewUsers"),
+          description: t("EmptyView:SendInvitationLetter"),
           disabled: isRoomAdmin || currentGroup?.isLDAP,
           icon: <InviteUserIcon />,
           model: (getContactsModel(t, false) ?? []).filter(

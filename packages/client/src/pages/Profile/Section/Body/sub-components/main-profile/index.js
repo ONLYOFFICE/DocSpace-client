@@ -52,7 +52,6 @@ import {
 import BetaBadge from "../../../../../../components/BetaBadgeWrapper";
 
 import { Trans } from "react-i18next";
-//import TimezoneCombo from "./timezoneCombo";
 
 import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 

@@ -104,7 +104,7 @@ class AvatarEditorDialogStore {
       updateRoom,
     } = this.filesStore;
 
-    const data = await getUploadedLogoData();
+    const data = await this.getUploadedLogoData();
     const { responseData, url, img } = data;
 
     const promise = new Promise((resolve) => {

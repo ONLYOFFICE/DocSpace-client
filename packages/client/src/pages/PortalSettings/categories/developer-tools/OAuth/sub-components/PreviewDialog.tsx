@@ -18,7 +18,7 @@ import { SettingsStore } from "@docspace/shared/store/SettingsStore";
 import OnlyofficeLight from "PUBLIC_DIR/images/onlyoffice.light.react.svg";
 import OnlyofficeDark from "PUBLIC_DIR/images/onlyoffice.dark.react.svg";
 
-import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
+import OAuthStore from "SRC_DIR/store/OAuthStore";
 import {
   StyledContainer,
   StyledPreviewContainer,
@@ -292,7 +292,7 @@ export default inject(
     settingsStore,
   }: {
     settingsStore: SettingsStore;
-    oauthStore: OAuthStoreProps;
+    oauthStore: OAuthStore;
   }) => {
     const { setPreviewDialogVisible, bufferSelection } = oauthStore;
 

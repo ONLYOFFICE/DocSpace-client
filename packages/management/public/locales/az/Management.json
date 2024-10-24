@@ -10,14 +10,10 @@
   "DomainSettings": "Domen parametrləri",
   "EnterDomain": "Domen adını daxil edin",
   "EnterName": "Sahə adını daxil edin",
-  "GoToSpace": "Sahəyə keçid edin",
   "NewSpace": "Yeni sahə",
   "PortalName": "{{productName}} adı",
   "PortalStats": "Otaqlar: {{roomCount}} | İstifadəçilər: {{userCount}} | İstifadə olunan yaddaş sahəsi: {{storageSpace}}",
   "RestrictAccess": "Sahələri idarə etmək üçün girişi məhdudlaşdırın",
-  "SpaceCreated": "Sahə yaradıldı",
-  "SpaceCreatedTitle": "Sahə uğurla yaradıldı, “Kosmosa keçid edin” düyməsini klikləməklə bu sahəyə keçə bilərsiniz. Bir neçə sahə yaratmaq üçün parametrlərdə qalın.",
-  "StayInSettings": "Parametrlərdə qalın.",
   "Subheader": "Bir neçə sahə yaratmaq və onları istifadəçiləriniz üçün əlçatan etmək üçün bu bölmədən istifadə edin",
   "VisitSpace": "Yaradıldıqdan sonra bu sahəyə baş çəkin"
 }

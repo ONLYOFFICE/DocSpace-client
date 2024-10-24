@@ -51,11 +51,13 @@ export const GreetingContainer = styled.div`
     p {
       text-align: center;
       line-height: 22px;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     @media ${mobile} {
       margin-top: 0;
-
       padding: 0 25px;
     }
   }

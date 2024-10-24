@@ -206,6 +206,7 @@
   "FromDevice": "No ierīces",
   "FromPortal": "No {{productName}}",
   "FullAccess": "Pilna piekļuve",
+  "GeneratePassword": "Ģenerēt paroli",
   "Gigabyte": "GB",
   "GoBack": "Atgriezties",
   "Group": "Grupa",
@@ -504,6 +505,5 @@
   "Website": "Vietne",
   "Yes": "Jā",
   "Yesterday": "어제",
-  "You": "Jūs",
-  "GeneratePassword": "Ģenerēt paroli"
+  "You": "Jūs"
 }

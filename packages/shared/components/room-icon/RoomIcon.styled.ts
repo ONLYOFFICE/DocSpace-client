@@ -49,7 +49,7 @@ const StyledIcon = styled.div.attrs(injectDefaultTheme)<{
       position: relative;
       box-sizing: border-box;
 
-      border: 2px dashed rgb(208, 213, 218);
+      border: ${props.theme.roomIcon.emptyBorder};
       border-radius: 10px;
       min-width: 64px;
     `};

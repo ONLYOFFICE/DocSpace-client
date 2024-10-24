@@ -1,7 +1,6 @@
 import styled, { css } from "styled-components";
 
 import { TableRow, TableContainer } from "@docspace/shared/components/table";
-import { Base } from "@docspace/shared/themes";
 import { injectDefaultTheme } from "@docspace/shared/utils";
 
 export const TableWrapper = styled(TableContainer)`

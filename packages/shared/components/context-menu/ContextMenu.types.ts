@@ -68,7 +68,7 @@ export type ContextMenuType = {
   onClick?: ContextMenuTypeOnClick;
   isSeparator?: undefined;
   url?: string;
-  items?: ContextMenuType[];
+  items?: ContextMenuModel[];
   action?: string;
   className?: string;
   disableColor?: string;

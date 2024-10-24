@@ -90,6 +90,9 @@ const LoginContainer = styled.div.attrs(injectDefaultTheme)<{
   }
 
   .greeting-title {
+    display: flex;
+    justify-content: center;
+
     width: 100%;
     max-width: 480px;
     padding-bottom: 29px;
@@ -98,6 +101,10 @@ const LoginContainer = styled.div.attrs(injectDefaultTheme)<{
     color: ${(props) => props.theme.login.headerColor};
 
     @media ${mobile} {
+      overflow: hidden;
+      display: block;
+      text-overflow: ellipsis;
+
       padding-top: 32px;
       padding-bottom: 32px;
     }
@@ -240,6 +247,18 @@ const LoginContainer = styled.div.attrs(injectDefaultTheme)<{
         margin-top: 24px;
       }
     } */
+
+    @keyframes autofill {
+      from {
+      }
+      to {
+      }
+    }
+
+    input:-webkit-autofill {
+      animation-name: autofill;
+      animation-duration: 1ms;
+    }
   }
 
   .logo-wrapper {

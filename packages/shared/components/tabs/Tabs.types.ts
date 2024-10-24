@@ -38,6 +38,8 @@ export type TTabItem = {
   isDisabled?: boolean;
   /** Sets a callback function that is triggered when the tab is selected */
   onClick?: () => void;
+  /** Badge shown after tab. Only for primary tabs type */
+  badge?: React.ReactNode;
 };
 
 export interface TabsProps {

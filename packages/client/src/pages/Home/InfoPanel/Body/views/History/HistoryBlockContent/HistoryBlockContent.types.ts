@@ -23,49 +23,50 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import { TTranslation } from "@docspace/shared/types";
 
-import React from "react";
-import { useTranslation } from "react-i18next";
+export interface HistoryBlockContentProps {
+  t: TTranslation;
+  feed: Feed;
+  historyWithFileList?: boolean;
+}
 
-import { ComboBox } from "@docspace/shared/components/combobox";
-import { Text } from "@docspace/shared/components/text";
-import { toastr } from "@docspace/shared/components/toast";
+interface UserData {
+  avatar: string;
+  avatarSmall: string;
+  avatarMedium: string;
+  avatarMax: string;
+  avatarOriginal: string;
+  displayName: string;
+  hasAvatar: boolean;
+  id: string;
+  isAnonim: boolean;
+  profileUrl: string;
+  tags: [];
+  access: string;
+  oldAccess: string;
+  parentId: number;
+  toFolderId: number;
+  parentTitle: string;
+  parentType: number;
+  fromParentType: number;
+  fromParentTitle: string;
+}
 
-import { StyledRow } from "./styled-main-profile";
-import { isMobile } from "@docspace/shared/utils";
+interface RelatedAction {
+  action: UserData;
+  initiator: UserData;
+  date: string;
+  data: UserData;
+}
 
-const TimezoneCombo = ({ title }) => {
-  const { t } = useTranslation("Wizard");
-
-  const timezones = [{ key: "03", label: "(UTC) +03 Moscow" }];
-  const selectedTimezone = { key: "03", label: "(UTC) +03 Moscow" };
-
-  return (
-    <StyledRow title={title}>
-      <Text as="div" className="label">
-        {t("Wizard:Timezone")}
-      </Text>
-      <ComboBox
-        onClick={() => toastr.warning("Work in progress (timezones)")}
-        className="combo"
-        directionY="both"
-        options={timezones}
-        selectedOption={selectedTimezone}
-        //onSelect={onTimezoneSelect}
-        isDisabled={false}
-        noBorder={!isMobile()}
-        scaled={isMobile()}
-        scaledOptions={false}
-        size="content"
-        showDisabledItems={true}
-        dropDownMaxHeight={364}
-        manualWidth="250px"
-        isDefaultMode={!isMobile()}
-        withBlur={isMobile()}
-        fillIcon={false}
-      />
-    </StyledRow>
-  );
-};
-
-export default TimezoneCombo;
+export interface Feed {
+  action: {
+    id: number;
+    key: string;
+  };
+  data: UserData;
+  date: string;
+  initiator: UserData;
+  related: RelatedAction[];
+}

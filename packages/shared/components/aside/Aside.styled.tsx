@@ -68,7 +68,7 @@ const StyledAside = styled(Container).attrs(injectDefaultTheme)`
   box-sizing: border-box;
 
   @media ${tablet} {
-    max-width: calc(100% - 69px);
+    //max-width: calc(100% - 69px);
 
     ${(props) =>
       props.theme.interfaceDirection === "rtl"

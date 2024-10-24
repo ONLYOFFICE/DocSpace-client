@@ -10,14 +10,10 @@
   "DomainSettings": "Verkkotunnuksen asetukset",
   "EnterDomain": "Syötä verkkotunnuksen nimi",
   "EnterName": "Syötä tilan nimi",
-  "GoToSpace": "Mene tilaan",
   "NewSpace": "Uusi tila",
   "PortalName": "{{productName}}-nimi",
   "PortalStats": "Huoneet: {{roomCount}} | Käyttäjät: {{userCount}} | Käytetty tilan muisti: {{storageSpace}}",
   "RestrictAccess": "Rajoita pääsyä hallintatiloihin",
-  "SpaceCreated": "Tila luotu",
-  "SpaceCreatedTitle": "Tila luotiin onnistuneesti, voit vaihtaa siihen klikkaamalla ”Mene tilaan”. Luodaksesi useita tiloja, pysy asetuksissa.",
-  "StayInSettings": "Pysy asetuksissa",
   "Subheader": "Käytä tätä osiota luodaksesi useita tiloja ja lisätäksesi käyttäjillesi niihin oikeudet.",
   "VisitSpace": "Käy tässä tilassa sen luomisen jälkeen"
 }

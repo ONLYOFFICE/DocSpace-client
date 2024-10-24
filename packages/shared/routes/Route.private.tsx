@@ -105,6 +105,10 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       "portal-settings/customization/branding",
     );
 
+    const isPortalManagement = location.pathname.includes(
+      "/portal-settings/management",
+    );
+    const isFileManagement = location.pathname.includes("file-management");
     const isManagement = location.pathname.includes("management");
     const isPaymentPageUnavailable =
       location.pathname.includes("payments") && isCommunity;
@@ -214,7 +218,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       );
     }
 
-    if (isManagement) {
+    if (isManagement && !isPortalManagement && !isFileManagement) {
       if (isLoaded && !isAuthenticated) return <Navigate replace to="/" />;
       if ((user && !user?.isAdmin) || limitedAccessSpace)
         return <Navigate replace to="/error/403" />;

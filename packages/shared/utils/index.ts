@@ -175,7 +175,7 @@ export const getTitleWithoutExtension = (
 export const getLastColumn = (
   tableStorageName: string,
   storageColumnsSize?: string,
-  isIndexEditingMode?: boolean,
+  isIndexedFolder?: boolean,
 ) => {
   if (!tableStorageName) return;
 
@@ -188,18 +188,27 @@ export const getLastColumn = (
   );
   let hideColumnsTable = false;
 
-  if (isIndexEditingMode) {
-    hideColumnsTable = !storageColumnsSize
-      ?.split(" ")
-      .filter(
-        (item, index, array) =>
-          index !== 0 && index !== 1 && index !== array.length - 1,
-      )
+  if (storageColumnsSize) {
+    const enabledColumn = storageColumnsSize
+      .split(" ")
+      .filter((_, index, array) => {
+        if (isIndexedFolder) {
+          return index !== 0 && index !== 1 && index !== array.length - 1;
+        }
+        return index !== 0 && index !== array.length - 1;
+      })
       .find((item) => item !== "0px");
+
+    hideColumnsTable = !enabledColumn;
   }
 
-  if (hideColumnsTable) return filterColumns[1];
-  if (filterColumns.length > 0) return filterColumns[filterColumns.length - 1];
+  if (hideColumnsTable) {
+    return isIndexedFolder ? filterColumns[1] : filterColumns[0];
+  }
+
+  if (filterColumns.length > 0) {
+    return filterColumns[filterColumns.length - 1];
+  }
   return null;
 };
 

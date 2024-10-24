@@ -80,7 +80,7 @@ const StyledText = styled.p.attrs(injectDefaultTheme)<
   ${(props) => props.noSelect && NoUserSelect}
 `;
 
-export const StyledAutoDirSpan = styled.span`
+export const StyledAutoDirSpan = styled.span<StyledTextProps>`
   display: inherit;
   white-space: inherit;
   overflow: inherit;
@@ -90,6 +90,14 @@ export const StyledAutoDirSpan = styled.span`
   max-width: inherit;
   -webkit-line-clamp: inherit;
   -webkit-box-orient: inherit;
+
+  ${(props) =>
+    props.view === "tile" &&
+    css`
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    `}
 `;
 
 export default StyledText;

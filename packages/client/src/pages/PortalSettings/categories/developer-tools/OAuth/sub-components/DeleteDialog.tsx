@@ -8,7 +8,7 @@ import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { toastr } from "@docspace/shared/components/toast";
 import { TData } from "@docspace/shared/components/toast/Toast.type";
 
-import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
+import OAuthStore from "SRC_DIR/store/OAuthStore";
 
 interface DeleteClientDialogProps {
   isVisible?: boolean;
@@ -84,7 +84,7 @@ const DeleteClientDialog = (props: DeleteClientDialogProps) => {
   );
 };
 
-export default inject(({ oauthStore }: { oauthStore: OAuthStoreProps }) => {
+export default inject(({ oauthStore }: { oauthStore: OAuthStore }) => {
   const {
     bufferSelection,
     selection,
@@ -96,14 +96,14 @@ export default inject(({ oauthStore }: { oauthStore: OAuthStoreProps }) => {
     deleteDialogVisible,
   } = oauthStore;
 
-  const isGroup = !!selection.length;
+  const isGroup = selection.length > 1;
 
   const onClose = () => {
     setDeleteDialogVisible(false);
   };
 
   const onDelete = async () => {
-    if (isGroup) {
+    if (selection.length) {
       await deleteClient(selection);
 
       setActiveClient("");

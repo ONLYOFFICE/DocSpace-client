@@ -27,10 +27,9 @@ import { useTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
 
 import { Text } from "@docspace/shared/components/text";
-import { Link } from "@docspace/shared/components/link";
 import { toastr } from "@docspace/shared/components/toast";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { globalColors } from "@docspace/shared/themes";
+import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 const PaidQuotaLimitError = ({
   isRoomAdmin,
@@ -60,13 +59,13 @@ const PaidQuotaLimitError = ({
     <>
       <Text>{t("Common:QuotaPaidUserLimitError")}</Text>
       {!isRoomAdmin && (
-        <Link
-          color={globalColors.link}
+        <ColorTheme
+          themeId={ThemeId.Link}
           isHovered={true}
           onClick={onClickPayments}
         >
           {t("Common:PaymentsTitle")}
-        </Link>
+        </ColorTheme>
       )}
     </>
   );

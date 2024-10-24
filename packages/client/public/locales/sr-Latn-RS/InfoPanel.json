@@ -1,5 +1,4 @@
 {
-  "UsersEmptyScreenText": "Vidi korisničke detalje ovde",
   "AddedRoomTags": "Tagovi dodati.",
   "Administration": "Administracija",
   "AndMoreLabel": "i <1>{{count}} više</1>",
@@ -57,5 +56,6 @@
   "SubmenuHistory": "Istorija",
   "UserFileUpdated": "Datoteka ažurirana.",
   "Users": "Korisnici",
+  "UsersEmptyScreenText": "Vidi korisničke detalje ovde",
   "Versions": "Verzije"
 }

@@ -37,7 +37,6 @@
   "DateLastOpened": "Son açıldığı tarih",
   "DaysRemaining": "Kalan gün sayısı: {{daysRemaining}}",
   "DeleteLink": "Bağlantıyı sil",
-  "DeleteLinkNote": "Bağlantı kalıcı olarak silinecek. Bu işlem geri alınamaz.",
   "DeleteSharedLink": "Önceki bağlantı kullanılamaz hale gelecektir. Yeni bir paylaşılan bağlantı oluşturulacaktır.",
   "DisableDownload": "Dosya içeriği kopyalamayı, dosya indirmeyi ve yazdırmayı kısıtla",
   "DisableNotifications": "Bildirimleri devre dışı bırak",

@@ -62,7 +62,8 @@ export const getBackUrl = (
   }
 
   const url = window.location.href;
-  const origin = url.substring(0, url.indexOf("/doceditor"));
+  // const origin = url.substring(0, url.indexOf("/doceditor"));
+  const origin = window.location.origin;
 
   return `${combineUrl(origin, backUrl)}`;
 };

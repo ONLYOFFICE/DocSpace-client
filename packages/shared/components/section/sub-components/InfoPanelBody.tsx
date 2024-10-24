@@ -53,6 +53,25 @@ const SubInfoPanelBody = ({
       setScrollLocked(scrollYPossible && isInfoPanelScrollLocked);
   }, [scrollYPossible, isInfoPanelScrollLocked, scrollLocked]);
 
+  // Prevent triggering main scroll if infopanel's scroll is focused
+  useEffect(() => {
+    const scrollBody = scrollRef.current?.contentElement;
+    const onKeyDown = (e: KeyboardEvent) => {
+      const isScrollKey =
+        ["PageUp", "PageDown", "Home", "End"].indexOf(e.code) > -1;
+
+      if (isScrollKey) {
+        e.stopPropagation();
+      }
+    };
+
+    scrollBody?.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      scrollBody?.removeEventListener("keydown", onKeyDown);
+    };
+  }, []);
+
   return (
     <StyledScrollbar
       // @ts-expect-error error from custom scrollbar
@@ -61,7 +80,6 @@ const SubInfoPanelBody = ({
       noScrollY={scrollLocked}
       scrollClass="section-scroll info-panel-scroll"
       createContext
-      tabIndex={null}
     >
       {children}
     </StyledScrollbar>

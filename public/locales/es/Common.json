@@ -208,6 +208,7 @@
   "FromDevice": "Desde el dispositivo",
   "FromPortal": "De {{productName}}",
   "FullAccess": "Acceso total",
+  "GeneratePassword": "Generar contraseña",
   "Gigabyte": "GB",
   "GoBack": "Volver ",
   "Group": "Grupo",
@@ -507,6 +508,5 @@
   "Website": "Sitio web",
   "Yes": "Sí",
   "Yesterday": "Ayer",
-  "You": "Usted",
-  "GeneratePassword": "Generar contraseña"
+  "You": "Usted"
 }

@@ -179,6 +179,7 @@
   "FormRoom": "ආකෘතිපත්‍ර කාමරය",
   "Free": "නොමිලේ",
   "FullAccess": "පූර්ණ ප්‍රවේශය",
+  "GeneratePassword": "මුරපදයක් උත්පාදනය",
   "Gigabyte": "ගි.බ.",
   "GoBack": "ආපසු යන්න",
   "Group": "සමූහය",
@@ -447,6 +448,5 @@
   "Website": "අඩවිය",
   "Yes": "ඔව්",
   "Yesterday": "ඊයේ",
-  "You": "ඔබ",
-  "GeneratePassword": "මුරපදයක් උත්පාදනය"
+  "You": "ඔබ"
 }

@@ -119,7 +119,15 @@ export const RegisterContainer = styled.div<{
     align-items: flex-start;
     padding-bottom: 4px;
 
-    p {
+    label {
+      align-items: flex-start;
+
+      svg {
+        padding-top: 1px;
+      }
+    }
+
+    span {
       line-height: 20px;
     }
 

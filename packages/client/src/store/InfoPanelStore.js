@@ -424,7 +424,7 @@ class InfoPanelStore {
     const path = [
       window.ClientConfig?.proxy?.url,
       config.homepage,
-      "/accounts/people",
+      user.isVisitor ? "/accounts/guests" : "/accounts/people",
     ];
 
     const newFilter = Filter.getDefault();
@@ -890,6 +890,10 @@ class InfoPanelStore {
 
   openShareTab = () => {
     this.setView(infoShare);
+    this.isVisible = true;
+  };
+  openMembersTab = () => {
+    this.setView(infoMembers);
     this.isVisible = true;
   };
 

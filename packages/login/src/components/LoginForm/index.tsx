@@ -35,6 +35,7 @@ import React, {
   useLayoutEffect,
 } from "react";
 import { useTranslation } from "react-i18next";
+import { isSafari } from "react-device-detect";
 import ReCAPTCHA from "react-google-recaptcha";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { useTheme } from "styled-components";
@@ -307,6 +308,7 @@ const LoginForm = ({
           const redirectUrl = getCookie(
             "x-redirect-authorization-uri",
           )?.replace(window.location.origin, name);
+
           // deleteCookie("x-redirect-authorization-uri");
 
           window.open(
@@ -321,10 +323,13 @@ const LoginForm = ({
 
         const portalsString = JSON.stringify({ portals });
 
-        searchParams.set("portals", portalsString);
+        // searchParams.set("portals", portalsString);
         searchParams.set("clientId", client.clientId);
 
+        sessionStorage.setItem("tenant-list", portalsString);
+
         router.push(`/tenant-list?${searchParams.toString()}`);
+
         setIsLoading(false);
         return;
       } catch (error) {
@@ -515,6 +520,13 @@ const LoginForm = ({
     };
   }, [isModalOpen, onSubmit]);
 
+  const handleAnimationStart = (e: React.AnimationEvent<HTMLInputElement>) => {
+    if (!isSafari) return;
+    if (e.animationName === "autofill") {
+      onSubmit();
+    }
+  };
+
   const passwordErrorMessage = errorMessage();
 
   if (authError && ready) {
@@ -555,6 +567,7 @@ const LoginForm = ({
         onValidateEmail={onValidateEmail}
         isLdapLogin={isLdapLoginChecked}
         ldapDomain={ldapDomain}
+        handleAnimationStart={handleAnimationStart}
       />
       <PasswordContainer
         isLoading={isLoading}

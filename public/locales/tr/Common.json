@@ -206,6 +206,7 @@
   "FromDevice": "Cihazdan",
   "FromPortal": "{{productName}} kaynağından",
   "FullAccess": "Tam erişim",
+  "GeneratePassword": "Şifre üret",
   "Gigabyte": "GB",
   "GoBack": "Geri git",
   "Group": "Grup",
@@ -504,6 +505,5 @@
   "Website": "İnternet Sitesi",
   "Yes": "Evet",
   "Yesterday": "Dün",
-  "You": "Siz",
-  "GeneratePassword": "Şifre üret"
+  "You": "Siz"
 }

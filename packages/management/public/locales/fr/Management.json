@@ -10,14 +10,10 @@
   "DomainSettings": "Paramètres de domaine",
   "EnterDomain": "Saisissez le nom de domaine",
   "EnterName": "Saisissez le nom de l'espace",
-  "GoToSpace": "Aller dans l'espace",
   "NewSpace": "Nouvel espace",
   "PortalName": "Nom de {{productName}}",
   "PortalStats": "Salles : {{roomCount}} | Utilisateurs : {{userCount}} | Espace de stockage utilisé : {{storageSpace}}",
   "RestrictAccess": "Restreindre l'accès à la gestion des espaces",
-  "SpaceCreated": "Espace créé",
-  "SpaceCreatedTitle": "L'espace a été créé avec succès, vous pouvez y accéder en cliquant sur \"Aller dans l'espace\". Pour créer plusieurs espaces, restez dans les paramètres.",
-  "StayInSettings": "Rester dans les paramètres",
   "Subheader": "Utilisez cette section pour créer plusieurs espaces et les rendre accessibles à vos utilisateurs",
   "VisitSpace": "Visiter cet espace après la création"
 }

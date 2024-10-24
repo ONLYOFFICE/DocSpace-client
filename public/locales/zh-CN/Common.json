@@ -208,6 +208,7 @@
   "FromDevice": "来自设备",
   "FromPortal": "来自{{productName}}",
   "FullAccess": "完全访问权限",
+  "GeneratePassword": "生成密码",
   "Gigabyte": "GB",
   "GoBack": "返回",
   "Group": "群组",
@@ -507,6 +508,5 @@
   "Website": "网站",
   "Yes": "是",
   "Yesterday": "昨天",
-  "You": "您",
-  "GeneratePassword": "生成密码"
+  "You": "您"
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 
-import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
+import OAuthStore from "SRC_DIR/store/OAuthStore";
 
 import { OAuthRow } from "./Row";
 
@@ -31,6 +31,12 @@ const RowView = (props: RowViewProps) => {
     [fetchNextClients],
   );
 
+  React.useEffect(() => {
+    return () => {
+      setSelection!("");
+    };
+  }, [setSelection]);
+
   return (
     <StyledRowContainer
       itemHeight={59}
@@ -57,7 +63,7 @@ const RowView = (props: RowViewProps) => {
   );
 };
 
-export default inject(({ oauthStore }: { oauthStore: OAuthStoreProps }) => {
+export default inject(({ oauthStore }: { oauthStore: OAuthStore }) => {
   const {
     viewAs,
     setViewAs,

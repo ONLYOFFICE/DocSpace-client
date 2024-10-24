@@ -456,7 +456,8 @@ const StyledSortButton = styled.div.attrs(injectDefaultTheme)<{
       }
 
       .selected-option-item {
-        background: ${(props) => props.theme.filterInput.sort.hoverBackground};
+        background: ${(props) =>
+          props.theme.dropDownItem.selectedBackgroundColor};
         cursor: pointer;
 
         .selected-option-item__icon {

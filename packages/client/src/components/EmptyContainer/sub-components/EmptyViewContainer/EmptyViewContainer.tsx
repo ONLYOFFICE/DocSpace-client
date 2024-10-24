@@ -98,6 +98,7 @@ const InjectedEmptyViewContainer = inject<
       onCreateAndCopySharedLink,
       setSelectFileFormRoomDialogVisible,
       setQuotaWarningDialogVisible,
+      isVisitor: userStore?.user?.isVisitor,
     };
   },
 )(EmptyViewContainer as React.FC<OutEmptyViewContainerProps>);

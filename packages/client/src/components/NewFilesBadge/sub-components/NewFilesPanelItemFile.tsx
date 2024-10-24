@@ -45,25 +45,33 @@ const NewFilesPanelItemFileComponent = ({
 
   getIcon,
   checkAndOpenLocationAction,
+  markAsRead,
+  openDocEditor,
 
   displayFileExtension,
 }: NewFilesPanelItemFileProps) => {
   const icon = getIcon?.(24, item.fileExst);
 
   const onOpenFileLocation = () => {
-    checkAndOpenLocationAction?.(item);
+    checkAndOpenLocationAction!(item);
+    onClose();
+  };
+
+  const onClick = async () => {
+    openDocEditor!(item.id);
+
+    await markAsRead!([], [item.id]);
     onClose();
   };
 
   return (
     <StyledFileItem isRooms={isRooms}>
-      <div className="info-container">
+      <div className="info-container" onClick={onClick}>
         <RoomIcon
           className="file-icon"
-          logo={icon}
+          logo={icon!}
           showDefault={false}
           title={item.title}
-          imgSrc=""
         />
         <Text
           noSelect
@@ -92,10 +100,18 @@ export const NewFilesPanelItemFile = inject(
   ({
     filesSettingsStore,
     filesActionsStore,
+    filesStore,
   }: NewFilesPanelItemFileInjectStore) => {
     const { displayFileExtension, getIcon } = filesSettingsStore;
-    const { checkAndOpenLocationAction } = filesActionsStore;
+    const { checkAndOpenLocationAction, markAsRead } = filesActionsStore;
+    const { openDocEditor } = filesStore;
 
-    return { displayFileExtension, getIcon, checkAndOpenLocationAction };
+    return {
+      displayFileExtension,
+      getIcon,
+      checkAndOpenLocationAction,
+      markAsRead,
+      openDocEditor,
+    };
   },
 )(observer(NewFilesPanelItemFileComponent));

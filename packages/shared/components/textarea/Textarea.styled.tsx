@@ -80,17 +80,6 @@ const StyledScrollbar = styled(ClearScrollbar).attrs(injectDefaultTheme)`
       }} + 2px
   ) !important;
 
-  textarea {
-    height: ${(props) => {
-      return props.heightScale
-        ? "65vh"
-        : props.isFullHeight
-          ? `${props.fullHeight}px`
-          : props.heightTextAreaProp
-            ? props.heightTextAreaProp
-            : "89px";
-    }};
-  }
   background-color: ${(props) =>
     props.isDisabled && props.theme.textArea.disabledColor};
 `;

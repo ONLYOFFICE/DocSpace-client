@@ -6,7 +6,7 @@ import { HeaderProps } from "../TableView.types";
 
 const Header = (props: HeaderProps) => {
   const { sectionWidth, tableRef, columnStorageName, tagRef } = props;
-  const { t } = useTranslation(["Oauth", "Files", "Webhooks", "Common"]);
+  const { t } = useTranslation(["OAuth", "Files", "Webhooks", "Common"]);
 
   const defaultColumns: TTableColumn[] = [
     {
@@ -54,7 +54,8 @@ const Header = (props: HeaderProps) => {
       containerRef={{ current: tableRef }}
       columns={defaultColumns}
       columnStorageName={columnStorageName}
-      tableStorageName={columnStorageName}
+      tableStorageName="ouathTable"
+      columnInfoPanelStorageName="oauthInfoPanelTable"
       sectionWidth={sectionWidth}
       showSettings={false}
       useReactWindow

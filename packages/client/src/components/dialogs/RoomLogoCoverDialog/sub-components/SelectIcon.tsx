@@ -87,6 +87,12 @@ const StyledIconContainer = styled.div<{
   }
   border-radius: 4px;
 
+  svg {
+    path {
+      fill: ${(props) => props.theme.logoCover.iconColor};
+    }
+  }
+
   &:hover {
     cursor: pointer;
     svg {

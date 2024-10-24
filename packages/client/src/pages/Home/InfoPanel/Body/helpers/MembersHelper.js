@@ -158,6 +158,13 @@ class MembersHelper {
         ];
       case RoomsType.PublicRoom:
         return [options.roomAdmin, options.collaborator, ...deleteOption];
+      case RoomsType.VirtualDataRoom:
+        return [
+          options.collaborator,
+          options.editor,
+          options.viewer,
+          ...deleteOption,
+        ];
       default:
         return [];
     }

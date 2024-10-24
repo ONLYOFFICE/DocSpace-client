@@ -52,7 +52,7 @@ export type TGoBack = {
   url?: string;
 };
 
-export type ActionType = "view" | "edit";
+export type ActionType = "view" | "edit" | "fill";
 
 export type TDocumentInfoSharingSettings = {
   user: string;

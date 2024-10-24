@@ -24,8 +24,8 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled from "styled-components";
-
+import styled, { css } from "styled-components";
+import { isMobile } from "react-device-detect";
 import { tablet } from "@docspace/shared/utils";
 
 import { TPanelPosition } from "./NewFilesBadge.types";
@@ -166,6 +166,11 @@ export const StyledFileItem = styled.div<{ isRooms: boolean }>`
     cursor: pointer;
 
     display: none;
+
+    ${isMobile &&
+    css`
+      display: block;
+    `}
 
     @media ${tablet} {
       display: block;

@@ -3265,6 +3265,7 @@ export const getBaseTheme = () => {
         backgroundColor: lightGrayHover,
       },
 
+      iconColor: lightGrayDark,
       textColor: lightGrayDark,
       selectedBackgroundColor: grayLightMid,
       selectedBorderColor: grayLightMid,

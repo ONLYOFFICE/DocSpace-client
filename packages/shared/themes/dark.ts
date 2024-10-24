@@ -3250,6 +3250,8 @@ const Dark: TTheme = {
     selectColor: {
       backgroundColor: lightDarkGrayHover,
     },
+
+    iconColor: darkGrayDark,
     textColor: darkGrayDark,
     selectedBackgroundColor: grayDarkMid,
     selectedBorderColor: grayDarkMid,

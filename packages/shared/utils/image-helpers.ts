@@ -24,122 +24,135 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+enum IconNames {
+  Word = "word.svg",
+  WordCommon = "wordCommon.svg",
+  Cell = "cell.svg",
+  CellCommon = "cellCommon.svg",
+  Slide = "slide.svg",
+  SlideCommon = "slideCommon.svg",
+  Pdf = "pdf.svg",
+  Form = "form.svg",
+  Archive = "archive.svg",
+  Calendar = "calendar.svg",
+  Ebook = "ebook.svg",
+  Html = "html.svg",
+  Image = "image.svg",
+  Letter = "letter.svg",
+  Sound = "sound.svg",
+  Svg = "svg.svg",
+  Text = "text.svg",
+  Video = "video.svg",
+  File = "file.svg",
+  Folder = "folder.svg",
+  FolderComplete = "folderComplete.svg",
+  FolderInProgress = "folderInProgress.svg",
+}
+
+const iconsMap: Record<IconNames, string[]> = {
+  [IconNames.Word]: [".docx", ".dotx", ".docm", ".dotm"],
+  [IconNames.WordCommon]: [
+    ".fodt",
+    ".doc",
+    ".ott",
+    ".odt",
+    ".rtf",
+    ".stw",
+    ".sxw",
+    ".wps",
+    ".wpt",
+  ],
+  [IconNames.Cell]: [".xlsx", ".xltx", ".xlsb", ".xltm", ".xlsm"],
+  [IconNames.CellCommon]: [
+    ".xls",
+    ".ods",
+    ".csv",
+    ".fods",
+    ".et",
+    ".ett",
+    ".ots",
+    ".sxc",
+  ],
+  [IconNames.Slide]: [".pptx", ".potx", ".ppsx", ".pptm", ".ppsm", ".potm"],
+  [IconNames.SlideCommon]: [
+    ".ppt",
+    ".odp",
+    ".otp",
+    ".pps",
+    ".fodp",
+    ".dps",
+    ".dpt",
+    ".sxi",
+    ".pot",
+  ],
+  [IconNames.Pdf]: [".pdf"],
+  [IconNames.Form]: [".docxf", ".oform"],
+  [IconNames.Archive]: ["archive"],
+  [IconNames.Calendar]: [".ics"],
+  [IconNames.Ebook]: ["ebook"],
+  [IconNames.Html]: ["html", ".xps", ".md", ".xml", ".oxps"],
+  [IconNames.Letter]: [".iaf"],
+  [IconNames.Svg]: [".svg"],
+  [IconNames.Text]: [".txt"],
+  [IconNames.Video]: [
+    ".3gp",
+    ".asf",
+    ".avi",
+    ".f4v",
+    ".fla",
+    ".flv",
+    ".m2ts",
+    ".m4v",
+    ".mkv",
+    ".mov",
+    ".mp4",
+    ".mpeg",
+    ".mpg",
+    ".mts",
+    ".ogv",
+    ".svi",
+    ".vob",
+    ".webm",
+    ".wmv",
+  ],
+  [IconNames.Image]: ["image"],
+  [IconNames.Sound]: ["sound"],
+  [IconNames.File]: ["file"],
+  [IconNames.Folder]: ["folder"],
+  [IconNames.FolderComplete]: ["folderComplete"],
+  [IconNames.FolderInProgress]: ["folderInProgress"],
+};
+
 /* eslint-disable import/no-dynamic-require, global-require */
 const getSvgByName = (name: string): string => `${name.replace(/^\./, "")}.svg`;
 
-const getUrlByName = (name: string, size: string | number, type = "") =>
-  require(`PUBLIC_DIR/images/icons/${size}${type}/${getSvgByName(name)}?url`);
+const getUrlByName = (name: string, size: number): string =>
+  require(`PUBLIC_DIR/images/icons/${size}/${name}?url`);
 
-const getIconsMap = (
-  size: string | number,
-  formats: string[],
-  folders: string[],
-  rooms: string[] = [],
-): Map<string, string> => {
-  const mapIcons = (icons: string[], type = ""): [string, string][] =>
-    icons.map((icon) => [getSvgByName(icon), getUrlByName(icon, size, type)]);
+const findIconKey = (format: string): string =>
+  Object.keys(iconsMap).find((icon) =>
+    iconsMap[icon as IconNames]?.includes(format),
+  ) || IconNames.File;
 
-  const formatsMap = mapIcons(formats);
-  const foldersMap = mapIcons(folders, "/folder");
-  const roomsMap = mapIcons(rooms, "/room");
-
-  return new Map([...formatsMap, ...foldersMap, ...roomsMap]);
+const generateSvgUrlPair = (format: string, size: number): [string, string] => {
+  const key = findIconKey(format);
+  return [getSvgByName(format), getUrlByName(key, size)];
 };
 
-const formatIcons = [
-  ".avi",
-  ".csv",
-  ".djvu",
-  ".doc",
-  ".docm",
-  ".docx",
-  ".docxf",
-  ".dotx",
-  ".dps",
-  ".dpt",
-  ".dvd",
-  ".epub",
-  ".et",
-  ".ett",
-  ".fb2",
-  ".flv",
-  ".fodt",
-  ".iaf",
-  ".ics",
-  ".m2ts",
-  ".mht",
-  ".mhtml",
-  ".mkv",
-  ".mov",
-  ".mp4",
-  ".mpg",
-  ".odp",
-  ".ods",
-  ".odt",
-  ".oform",
-  ".otp",
-  ".ots",
-  ".ott",
-  ".pdf",
-  ".pot",
-  ".pps",
-  ".ppsx",
-  ".ppt",
-  ".pptm",
-  ".pptx",
-  ".rtf",
-  ".stw",
-  ".svg",
-  ".sxc",
-  ".sxi",
-  ".sxw",
-  ".txt",
-  ".webm",
-  ".wps",
-  ".wpt",
-  ".xls",
-  ".xlsm",
-  ".xlsb",
-  ".xlsx",
-  ".xml",
-  ".xps",
-  "file_archive",
-  "file",
-  "folder",
-  "html",
-  "image",
-  "sound",
-];
-const folderIcons = [
-  "box",
-  "done",
-  "dropbox",
-  "google",
-  "inProgress",
-  "kdrive",
-  "nextcloud",
-  "onedrive",
-  "owncloud",
-  "sharepoint",
-  "webdav",
-  "yandex",
-];
+const getIconsMap = (size: number): Map<string, string> => {
+  const iconMap = new Map<string, string>();
+  const formats = Object.values(iconsMap).flat();
 
-const roomIcons = [
-  "archive",
-  "custom",
-  "editing",
-  "filling.form",
-  "form",
-  "public",
-  "review",
-  "view.only",
-];
+  formats.forEach((format) => {
+    const [svg, url] = generateSvgUrlPair(format, size);
+    iconMap.set(svg, url);
+  });
 
-export const iconSize24 = getIconsMap(24, formatIcons, folderIcons);
+  return iconMap;
+};
 
-export const iconSize32 = getIconsMap(32, formatIcons, folderIcons, roomIcons);
+export const iconSize32 = getIconsMap(32);
 
-export const iconSize64 = getIconsMap(64, formatIcons, folderIcons);
+export const iconSize64 = getIconsMap(64);
 
-export const iconSize96 = getIconsMap(96, formatIcons, folderIcons);
+export const iconSize96 = getIconsMap(96);

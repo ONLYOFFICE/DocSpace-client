@@ -3165,6 +3165,7 @@ export const getBaseTheme = () => {
       backgroundArchive: gray,
       opacityBackground: "1",
       plusIcon: white,
+      emptyBorder: `2px dashed ${grayStrong}`,
 
       linkIcon: {
         background: white,

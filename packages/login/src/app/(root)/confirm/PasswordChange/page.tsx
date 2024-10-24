@@ -28,13 +28,20 @@ import { FormWrapper } from "@docspace/shared/components/form-wrapper";
 
 import { GreetingContainer } from "@/components/GreetingContainer";
 import { getPortalPasswordSettings, getSettings } from "@/utils/actions";
+import { getStringFromSearchParams } from "@/utils";
 
 import PasswordChangeForm from "./page.client";
 
-async function Page() {
+type PasswordChangeProps = {
+  searchParams: { [key: string]: string };
+};
+
+async function Page({ searchParams }: PasswordChangeProps) {
+  const confirmKey = getStringFromSearchParams(searchParams);
+
   const [settings, passwordSettings] = await Promise.all([
     getSettings(),
-    getPortalPasswordSettings(),
+    getPortalPasswordSettings(confirmKey),
   ]);
 
   return (

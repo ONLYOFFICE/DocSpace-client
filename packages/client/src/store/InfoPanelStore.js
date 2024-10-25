@@ -262,7 +262,7 @@ class InfoPanelStore {
   }
 
   get withPublicRoomBlock() {
-    return this.infoPanelCurrentSelection.security.EditAccess;
+    return this.infoPanelCurrentSelection?.security?.EditAccess;
   }
 
   getViewItem = () => {

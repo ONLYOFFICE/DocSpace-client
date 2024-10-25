@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base, TColorScheme } from "../../../themes";
+import { TColorScheme } from "../../../themes";
 import StyledFilterBlockItemTag from "../sub-components/StyledFilterBlockItemTag";
 
 const getDefaultStyles = ({
@@ -50,9 +50,5 @@ const getDefaultStyles = ({
       border-color: ${$currentColorScheme.main?.accent};
     }
   `;
-
-StyledFilterBlockItemTag.defaultProps = {
-  theme: Base,
-};
 
 export default styled(StyledFilterBlockItemTag)(getDefaultStyles);

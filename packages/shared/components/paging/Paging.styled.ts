@@ -25,10 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { Base } from "../../themes";
-import { tablet, mobile } from "../../utils";
+import { tablet, mobile, injectDefaultTheme } from "../../utils";
 
-const StyledPaging = styled.div`
+const StyledPaging = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -69,9 +68,8 @@ const StyledPaging = styled.div`
     margin-inline-end: ${({ theme }) => theme.paging.button.marginRight};
   }
 `;
-StyledPaging.defaultProps = { theme: Base };
 
-const StyledOnPage = styled.div`
+const StyledOnPage = styled.div.attrs(injectDefaultTheme)`
   width: 125px;
 
   @media ${tablet} {
@@ -116,9 +114,8 @@ const StyledOnPage = styled.div`
     display: none;
   }
 `;
-StyledOnPage.defaultProps = { theme: Base };
 
-const StyledPage = styled.div`
+const StyledPage = styled.div.attrs(injectDefaultTheme)`
   width: 83px;
   margin-inline-end: ${({ theme }) => theme.paging.page.marginRight};
 
@@ -152,6 +149,5 @@ const StyledPage = styled.div`
     }
   }
 `;
-StyledPage.defaultProps = { theme: Base };
 
 export { StyledPage, StyledOnPage, StyledPaging };

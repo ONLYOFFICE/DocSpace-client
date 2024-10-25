@@ -79,7 +79,7 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
     onClose,
 
     alert,
-    withMenu,
+    withMenu = true,
     onClick,
     onAlertClick,
     withAlertClick,
@@ -403,10 +403,6 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
       </div>
     </>
   );
-};
-
-MainButtonMobile.defaultProps = {
-  withMenu: true,
 };
 
 export { MainButtonMobile };

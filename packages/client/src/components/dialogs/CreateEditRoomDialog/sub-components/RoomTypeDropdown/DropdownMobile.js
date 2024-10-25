@@ -32,9 +32,10 @@ import { RoomsTypeValues } from "@docspace/shared/utils/common";
 import { Backdrop } from "@docspace/shared/components/backdrop";
 import { Portal } from "@docspace/shared/components/portal";
 
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const StyledDropdownMobile = styled.div`
+const StyledDropdownMobile = styled.div.attrs(injectDefaultTheme)`
   visibility: ${(props) => (props.isOpen ? "visible" : "hidden")};
   position: fixed;
   bottom: 0;
@@ -45,8 +46,6 @@ const StyledDropdownMobile = styled.div`
   background: ${(props) =>
     props.theme.createEditRoomDialog.roomTypeDropdown.mobile.background};
 `;
-
-StyledDropdownMobile.defaultProps = { theme: Base };
 
 const DropdownMobile = ({
   t,

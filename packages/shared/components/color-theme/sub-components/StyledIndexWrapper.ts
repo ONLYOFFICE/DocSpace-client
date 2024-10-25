@@ -25,9 +25,10 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 import styled from "styled-components";
 
-import { Base, TColorScheme } from "../../../themes";
+import { TColorScheme } from "../../../themes";
+import { injectDefaultTheme } from "../../../utils";
 
-const StyledIndexWrapper = styled.div<{
+const StyledIndexWrapper = styled.div.attrs(injectDefaultTheme)<{
   $currentColorScheme: TColorScheme | undefined;
 }>`
   width: 24px;
@@ -67,7 +68,5 @@ const StyledIndexWrapper = styled.div<{
     }
   }
 `;
-
-StyledIndexWrapper.defaultProps = { theme: Base };
 
 export default StyledIndexWrapper;

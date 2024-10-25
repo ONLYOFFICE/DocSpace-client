@@ -30,10 +30,9 @@ import CategoryFilter from "./CategoryFilter";
 import LanguageFilter from "./LanguageFilter";
 import SearchFilter from "./SearchFilter";
 import SortFilter from "./SortFilter";
-import { mobile, tablet } from "@docspace/shared/utils";
-import { Base } from "@docspace/shared/themes";
+import { injectDefaultTheme, mobile, tablet } from "@docspace/shared/utils";
 
-export const StyledFilter = styled.div`
+export const StyledFilter = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -85,8 +84,6 @@ export const StyledFilter = styled.div`
     }
   }
 `;
-
-StyledFilter.defaultProps = { theme: Base };
 
 const SectionFilterContent = ({}) => {
   return (

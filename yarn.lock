@@ -2790,7 +2790,7 @@ __metadata:
     re-resizable: "npm:^6.10.0"
     react: "npm:^18.3.1"
     react-autosize-textarea: "npm:^7.1.0"
-    react-content-loader: "npm:^5.1.4"
+    react-content-loader: "npm:^7.0.2"
     react-countdown: "npm:2.3.6"
     react-device-detect: "npm:^2.2.3"
     react-docgen-typescript-plugin: "npm:^1.0.8"
@@ -23028,12 +23028,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-content-loader@npm:^5.1.4":
-  version: 5.1.4
-  resolution: "react-content-loader@npm:5.1.4"
+"react-content-loader@npm:^7.0.2":
+  version: 7.0.2
+  resolution: "react-content-loader@npm:7.0.2"
   peerDependencies:
     react: ">=16.0.0"
-  checksum: 10/b614755d7d6245ee57cd05b54f083790650411c556574a2a79705e0cea60b61dba7a05b771ec03b1514e7d0e7864c980f9cf5be21136a7e98507a4c8cb73ae0d
+  checksum: 10/8f7d7b84a50cfc6a7595fb858ccf9b801a80ccf764a07af0434da6ba9b06d8f64e21d77821ba6699f6cb9edde1fa670fd00ebd023f12c8dd245f8833aa12e245
   languageName: node
   linkType: hard
 

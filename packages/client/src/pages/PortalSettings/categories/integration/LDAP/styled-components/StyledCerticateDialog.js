@@ -25,10 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { Box } from "@docspace/shared/components/box";
-import { Base } from "@docspace/shared/themes";
 
-const StyledCertificateDialogBody = styled(Box)`
+import { Box } from "@docspace/shared/components/box";
+import { injectDefaultTheme } from "@docspace/shared/utils";
+
+const StyledCertificateDialogBody = styled(Box).attrs(injectDefaultTheme)`
   max-width: 520px;
 
   .ldap-settings-crt-confirmation {
@@ -60,9 +61,5 @@ const StyledCertificateDialogBody = styled(Box)`
       props.theme.client.settings.integration.ldap.errorColor};
   }
 `;
-
-StyledCertificateDialogBody.defaultProps = {
-  theme: Base,
-};
 
 export default StyledCertificateDialogBody;

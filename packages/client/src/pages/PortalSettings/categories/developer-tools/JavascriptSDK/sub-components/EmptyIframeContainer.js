@@ -27,10 +27,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import { RectangleSkeleton } from "@docspace/shared/skeletons/rectangle";
-import { Base } from "@docspace/shared/themes";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const StyledContainer = styled.div`
+const StyledContainer = styled.div.attrs(injectDefaultTheme)`
   width: ${(props) => props.width};
   height: ${(props) => props.height};
 
@@ -54,7 +53,6 @@ const StyledContainer = styled.div`
     text-align: center;
   }
 `;
-StyledContainer.defaultProps = { theme: Base };
 
 const EmptyIframeContainer = ({ text, width, height }) => {
   return (

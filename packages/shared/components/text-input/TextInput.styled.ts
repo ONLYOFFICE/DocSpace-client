@@ -49,6 +49,7 @@ const StyledTextInput = styled(Input).attrs((props) => ({
   autoComplete: props.autoComplete,
   tabIndex: props.tabIndex,
   disabled: props.isDisabled ? "disabled" : "",
+  theme: props.theme || Base,
 }))`
   ${commonInputStyles}
   -webkit-appearance: ${(props) => props.theme.textInput.appearance};
@@ -168,7 +169,5 @@ const StyledTextInput = styled(Input).attrs((props) => ({
 
   ${(props) => !props.withBorder && `border: none;`}
 `;
-
-StyledTextInput.defaultProps = { theme: Base };
 
 export { StyledTextInput };

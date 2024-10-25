@@ -27,12 +27,11 @@
 import styled, { css } from "styled-components";
 import { ReactSVG } from "react-svg";
 
-import { Base } from "../../themes";
-import { mobile } from "../../utils";
+import { injectDefaultTheme, mobile } from "../../utils";
 
 import { ComboBox } from "../combobox";
 
-const StyledWrapper = styled(ComboBox)`
+const StyledWrapper = styled(ComboBox).attrs(injectDefaultTheme)`
   .combo-button {
     padding-inline: 8px;
   }
@@ -67,9 +66,7 @@ const StyledWrapper = styled(ComboBox)`
   }
 `;
 
-StyledWrapper.defaultProps = { theme: Base };
-
-const StyledItem = styled.div`
+const StyledItem = styled.div.attrs(injectDefaultTheme)`
   width: auto;
 
   display: flex;
@@ -83,9 +80,7 @@ const StyledItem = styled.div`
   font-style: normal;
 `;
 
-StyledItem.defaultProps = { theme: Base };
-
-const StyledItemDescription = styled.div`
+const StyledItemDescription = styled.div.attrs(injectDefaultTheme)`
   margin: 1px 0px;
 
   font-size: 13px;
@@ -94,8 +89,6 @@ const StyledItemDescription = styled.div`
   line-height: 16px;
   color: ${(props) => props.theme.accessRightSelect.descriptionColor};
 `;
-
-StyledItemDescription.defaultProps = { theme: Base };
 
 const StyledItemIcon = styled(ReactSVG)<{ isShortenIcon?: boolean }>`
   margin-inline-end: 8px;

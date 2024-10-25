@@ -34,7 +34,7 @@ import { onEdgeScrolling, clearEdgeScrollingTimer } from "../../utils";
 
 const SelectionArea = ({
   onMove,
-  selectableClass,
+  selectableClass = "",
   scrollClass,
   viewAs,
   itemsContainerClass,
@@ -500,10 +500,6 @@ const SelectionArea = ({
   }, [isRooms, viewAs]);
 
   return <StyledSelectionArea className="selection-area" ref={areaRef} />;
-};
-
-SelectionArea.defaultProps = {
-  selectableClass: "",
 };
 
 export { SelectionArea };

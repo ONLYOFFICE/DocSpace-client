@@ -26,10 +26,11 @@ import { Page } from "@playwright/test";
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { mobile } from "../../utils";
-import { Base } from "../../themes";
+import { injectDefaultTheme, mobile } from "../../utils";
 
-const StyledImageCropper = styled.div<{ disableImageRescaling?: boolean }>`
+const StyledImageCropper = styled.div.attrs(injectDefaultTheme)<{
+  disableImageRescaling?: boolean;
+}>`
   max-width: 368px;
 
   .icon_cropper-crop_area {
@@ -142,7 +143,9 @@ const StyledImageCropper = styled.div<{ disableImageRescaling?: boolean }>`
   }
 `;
 
-const StyledPreviewTile = styled.div<{ isGeneratedPreview?: boolean }>`
+const StyledPreviewTile = styled.div.attrs(injectDefaultTheme)<{
+  isGeneratedPreview?: boolean;
+}>`
   background: ${(props) =>
     props.theme.createEditRoomDialog.previewTile.background};
   width: 214px;
@@ -206,8 +209,5 @@ const StyledPreviewTile = styled.div<{ isGeneratedPreview?: boolean }>`
     }
   }
 `;
-StyledPreviewTile.defaultProps = { theme: Base };
-
-StyledImageCropper.defaultProps = { theme: Base };
 
 export { StyledImageCropper, StyledPreviewTile };

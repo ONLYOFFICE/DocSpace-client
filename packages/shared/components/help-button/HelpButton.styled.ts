@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { Base } from "../../themes";
+import { injectDefaultTheme } from "../../utils";
 
-const Content = styled.div`
+const Content = styled.div.attrs(injectDefaultTheme)`
   box-sizing: border-box;
   position: relative;
   width: ${(props) => props.theme.helpButton.width};
@@ -41,12 +41,10 @@ const Content = styled.div`
     font-weight: ${(props) => props.theme.helpButton.fontWeight};
   }
 `;
-Content.defaultProps = { theme: Base };
 
-const Body = styled.div`
+const Body = styled.div.attrs(injectDefaultTheme)`
   position: relative;
   padding: ${(props) => props.theme.helpButton.bodyPadding};
 `;
-Body.defaultProps = { theme: Base };
 
 export { Content, Body };

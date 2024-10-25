@@ -26,12 +26,11 @@
 
 import styled, { css } from "styled-components";
 
-import Base from "@docspace/shared/themes/base";
-import { mobile, tablet } from "@docspace/shared/utils";
+import { injectDefaultTheme, mobile, tablet } from "@docspace/shared/utils";
 
 import type { StyledBottomProps } from "./Tiles.types";
 
-export const StyledTile = styled.div`
+export const StyledTile = styled.div.attrs(injectDefaultTheme)`
   position: relative;
   display: grid;
   width: 100%;
@@ -48,8 +47,6 @@ export const StyledTile = styled.div`
     }
   }
 `;
-
-StyledTile.defaultProps = { theme: Base };
 
 export const StyledMainContent = styled.div`
   height: 156px;

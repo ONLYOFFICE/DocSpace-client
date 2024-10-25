@@ -25,11 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { Base } from "@docspace/shared/themes";
-import { mobile } from "@docspace/shared/utils";
+
+import { injectDefaultTheme, mobile } from "@docspace/shared/utils";
 import { UnavailableStyles } from "../../../utils/commonSettingsStyles";
 
-const WhiteLabelWrapper = styled.div`
+const WhiteLabelWrapper = styled.div.attrs(injectDefaultTheme)`
   .subtitle {
     margin-bottom: 20px;
     color: ${(props) => props.theme.client.settings.common.descriptionColor};
@@ -230,7 +230,5 @@ const WhiteLabelWrapper = styled.div`
 
   ${(props) => !props.isSettingPaid && UnavailableStyles}
 `;
-
-WhiteLabelWrapper.defaultProps = { theme: Base };
 
 export default WhiteLabelWrapper;

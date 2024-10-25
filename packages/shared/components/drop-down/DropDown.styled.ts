@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import Base from "../../themes/base";
+import { injectDefaultTheme } from "../../utils";
 
-const StyledDropdown = styled.div<{
+const StyledDropdown = styled.div.attrs(injectDefaultTheme)<{
   maxHeight?: number;
   manualWidth?: string;
   directionY?: "top" | "bottom" | "both";
@@ -128,7 +128,5 @@ const StyledDropdown = styled.div<{
       `}
   }
 `;
-
-StyledDropdown.defaultProps = { theme: Base };
 
 export default StyledDropdown;

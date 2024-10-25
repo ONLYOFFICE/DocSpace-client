@@ -27,10 +27,12 @@
 import styled, { css } from "styled-components";
 import { Base, globalColors } from "../../themes";
 import { SliderThemeProps } from "./Slider.types";
+import { injectDefaultTheme } from "../../utils";
 
-const StyledSlider = styled.input.attrs((props: SliderThemeProps) => ({
+const StyledSlider = styled.input.attrs<SliderThemeProps>((props) => ({
   type: "range",
   disabled: props.isDisabled,
+  theme: props.theme || Base,
 }))<SliderThemeProps>`
   width: ${(props) => props.theme.avatarEditorBody.slider.width};
   margin: ${(props) => props.theme.avatarEditorBody.slider.margin};
@@ -184,13 +186,14 @@ const StyledSlider = styled.input.attrs((props: SliderThemeProps) => ({
       props.theme.avatarEditorBody.slider.fillUpper.focusBackground};
   }
 `;
-StyledSlider.defaultProps = { theme: Base };
 
 const StyledRangeSlider = styled.div`
   background: red;
 `;
 
-const StyledSliderTheme = styled(StyledSlider)<SliderThemeProps>`
+const StyledSliderTheme = styled(StyledSlider).attrs(
+  injectDefaultTheme,
+)<SliderThemeProps>`
   background-image: ${(props) =>
     props.withPouring &&
     ((props.theme.isBase &&
@@ -221,6 +224,5 @@ const StyledSliderTheme = styled(StyledSlider)<SliderThemeProps>`
       opacity: 0.32;
     `}
 `;
-StyledSliderTheme.defaultProps = { theme: Base };
 
 export { StyledSlider, StyledRangeSlider, StyledSliderTheme };

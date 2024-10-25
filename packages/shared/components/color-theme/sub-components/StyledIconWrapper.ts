@@ -25,9 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { Base } from "../../../themes";
+import { injectDefaultTheme } from "../../../utils";
 
-const StyledIconWrapper = styled.div<{ isRoot?: boolean }>`
+const StyledIconWrapper = styled.div.attrs(injectDefaultTheme)<{
+  isRoot?: boolean;
+}>`
   width: 17px;
   display: flex;
   align-items: ${(props) => (props.isRoot ? "center" : "flex-end")};
@@ -48,7 +50,5 @@ const StyledIconWrapper = styled.div<{ isRoot?: boolean }>`
     }
   }
 `;
-
-StyledIconWrapper.defaultProps = { theme: Base };
 
 export default StyledIconWrapper;

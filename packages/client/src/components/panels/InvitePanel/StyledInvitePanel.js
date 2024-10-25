@@ -35,12 +35,17 @@ import { Button } from "@docspace/shared/components/button";
 import { HelpButton } from "@docspace/shared/components/help-button";
 import { Link } from "@docspace/shared/components/link";
 import { ToggleButton } from "@docspace/shared/components/toggle-button";
-import { mobile, commonIconsStyles } from "@docspace/shared/utils";
+import {
+  mobile,
+  commonIconsStyles,
+  injectDefaultTheme,
+} from "@docspace/shared/utils";
 import CheckIcon from "PUBLIC_DIR/images/check.edit.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/cross.edit.react.svg";
 import DeleteIcon from "PUBLIC_DIR/images/mobile.actions.remove.react.svg";
 import { isMobile, desktop, commonInputStyles } from "@docspace/shared/utils";
-import Base from "@docspace/shared/themes/base";
+import { globalColors } from "@docspace/shared/themes";
+import { ASIDE_PADDING_AFTER_LAST_ITEM } from "@docspace/shared/constants";
 
 const fillAvailableWidth = css`
   width: 100%;
@@ -109,6 +114,10 @@ const StyledInviteUserBody = styled.div`
   flex-direction: column;
   overflow: auto;
 
+  .group-name {
+    padding-top: 8px;
+  }
+
   .about-label {
     color: ${(props) => props.theme.filesPanels.invite.textColor};
   }
@@ -128,7 +137,7 @@ const StyledSubHeader = styled(Heading)`
     `};
 `;
 
-const StyledDescription = styled(Text)`
+const StyledDescription = styled(Text).attrs(injectDefaultTheme)`
   color: ${(props) =>
     props.theme.createEditRoomDialog.commonParam.descriptionColor};
   margin-bottom: 16px;
@@ -138,11 +147,10 @@ const StyledDescription = styled(Text)`
   line-height: 16px;
 `;
 
-StyledDescription.defaultProps = { theme: Base };
-
 const StyledRow = styled.div`
-  display: inline-flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: ${(props) =>
+    props.edit ? "32px 1fr 32px 32px" : "32px 1fr auto"};
   gap: 8px;
 
   min-height: 41px;
@@ -165,6 +173,12 @@ const StyledRow = styled.div`
 
   .warning {
     margin-inline-start: auto;
+  }
+
+  .role-access {
+    .role-warning {
+      padding-top: 4px;
+    }
   }
 `;
 
@@ -224,6 +238,7 @@ const StyledInviteInput = styled.div`
 
 const StyledEditInput = styled(TextInput)`
   width: 100%;
+  height: 32px;
 `;
 
 const StyledComboBox = styled(ComboBox)`
@@ -284,6 +299,24 @@ const StyledInviteInputContainer = styled.div`
 
   .access-selector {
     margin-inline-end: 0;
+
+    // Add space between access-selector's absolute positioned dropdown and modal footer
+    .dropdown-container {
+      overflow: unset;
+
+      ::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        height: ${ASIDE_PADDING_AFTER_LAST_ITEM};
+      }
+    }
+  }
+
+  .add-manually-dropdown {
+    inset-inline-start: 0;
+    border: ${`1px solid ${globalColors.grayStrong}`};
   }
 `;
 
@@ -294,7 +327,7 @@ const StyledDropDown = styled(DropDown)`
     display: flex;
     align-items: center;
     gap: 8px;
-    height: 48px;
+    height: 53px;
 
     .list-item_content {
       text-overflow: ellipsis;
@@ -308,27 +341,29 @@ const StyledDropDown = styled(DropDown)`
       overflow: hidden;
     }
 
+    .email-list_email-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      line-height: 16px;
+
+      .email-list_invite-as-guest {
+        color: ${(props) => props.theme.currentColorScheme.main.accent};
+      }
+    }
+
     .email-list_add-button {
       display: flex;
       margin-inline-start: auto;
       align-items: center;
       gap: 4px;
 
-      p {
-        color: ${(props) => props.theme.currentColorScheme.main.accent};
-        ${(props) =>
-          props.isRequestRunning &&
-          css`
-            opacity: 0.65;
-          `}
-      }
-
       svg {
         ${({ theme }) =>
           theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"};
 
         path {
-          fill: ${(props) => props.theme.currentColorScheme.main.accent};
+          fill: ${(props) => props.theme.inputBlock.iconColor};
           ${(props) =>
             props.isRequestRunning &&
             css`
@@ -340,7 +375,7 @@ const StyledDropDown = styled(DropDown)`
   }
 `;
 
-const SearchItemText = styled(Text)`
+const SearchItemText = styled(Text).attrs(injectDefaultTheme)`
   line-height: 16px;
 
   text-overflow: ellipsis;
@@ -355,8 +390,6 @@ const SearchItemText = styled(Text)`
       : props.theme.text.emailColor};
   ${(props) => props.info && `margin-inline-start: auto`}
 `;
-
-SearchItemText.defaultProps = { theme: Base };
 
 const StyledEditButton = styled(Button)`
   width: 32px;
@@ -374,31 +407,25 @@ const iconStyles = css`
   }
 `;
 
-const StyledCheckIcon = styled(CheckIcon)`
+const StyledCheckIcon = styled(CheckIcon).attrs(injectDefaultTheme)`
   ${iconStyles}
 `;
 
-StyledCheckIcon.defaultProps = { theme: Base };
-
-const StyledCrossIcon = styled(CrossIcon)`
+const StyledCrossIcon = styled(CrossIcon).attrs(injectDefaultTheme)`
   ${iconStyles}
 `;
 
-StyledCrossIcon.defaultProps = { theme: Base };
-
-const StyledDeleteIcon = styled(DeleteIcon)`
+const StyledDeleteIcon = styled(DeleteIcon).attrs(injectDefaultTheme)`
   cursor: pointer;
 
   ${iconStyles}
 `;
 
-StyledDeleteIcon.defaultProps = { theme: Base };
-
 const StyledHelpButton = styled(HelpButton)`
   margin-inline-start: 8px;
 `;
 
-const StyledButtons = styled(Box)`
+const StyledButtons = styled(Box).attrs(injectDefaultTheme)`
   padding: 16px;
   display: flex;
   align-items: center;
@@ -424,8 +451,6 @@ const ResetLink = styled(Link)`
   font-style: normal;
   line-height: 15px;
 `;
-
-StyledButtons.defaultProps = { theme: Base };
 
 const StyledToggleButton = styled(ToggleButton)`
   inset-inline-end: 8px;
@@ -464,14 +489,12 @@ const StyledInviteLanguage = styled.div`
     }
 
     .combo-button_closed:not(:hover) .combo-button-label {
-      color: ${(props) =>
-        props.theme.createEditRoomDialog.commonParam.descriptionColor};
+      color: ${(props) => props.theme.linkWithDropdown.color.active};
     }
     .combo-button_closed:not(:hover) .combo-buttons_arrow-icon {
       svg {
         path {
-          fill: ${(props) =>
-            props.theme.createEditRoomDialog.commonParam.descriptionColor};
+          fill: ${(props) => props.theme.linkWithDropdown.color.active};
         }
       }
     }
@@ -483,8 +506,6 @@ const StyledInviteLanguage = styled.div`
     gap: 2px;
   }
 `;
-
-StyledCrossIcon.defaultProps = { theme: Base };
 
 const ErrorWrapper = styled.div`
   display: flex;

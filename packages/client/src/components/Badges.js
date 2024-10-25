@@ -44,11 +44,18 @@ import { Badge } from "@docspace/shared/components/badge";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 
-import { isTablet, isDesktop, size, classNames } from "@docspace/shared/utils";
+import {
+  isTablet,
+  isDesktop,
+  size,
+  classNames,
+  injectDefaultTheme,
+} from "@docspace/shared/utils";
+import NewFilesBadge from "./NewFilesBadge";
 
-const StyledWrapper = styled.div`
+const StyledWrapper = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -58,8 +65,6 @@ const StyledWrapper = styled.div`
   border-radius: 4px;
   box-shadow: 0px 2px 4px ${globalColors.badgeShadow};
 `;
-
-StyledWrapper.defaultProps = { theme: Base };
 
 const BadgeWrapper = ({ onClick, isTile, children: badge }) => {
   if (!isTile) return badge;
@@ -93,9 +98,6 @@ const Badges = ({
   newItems,
   item,
   isTrashFolder,
-  isPrivacyFolder,
-  isDesktopClient,
-  accessToEdit,
   showNew,
   onFilesClick,
   onShowVersionHistory,
@@ -107,7 +109,6 @@ const Badges = ({
   onUnmuteClick,
   isMutedBadge,
   isArchiveFolderRoot,
-  isVisitor,
   onCopyPrimaryLink,
   isArchiveFolder,
   isRecentTab,
@@ -115,7 +116,6 @@ const Badges = ({
 }) => {
   const {
     id,
-    locked,
     version,
     versionGroup,
     fileExst,
@@ -130,16 +130,9 @@ const Badges = ({
     // startFilling,
   } = item;
 
-  const showEditBadge = !locked || item.access === 0;
-  const isPrivacy = isPrivacyFolder && isDesktopClient;
-  const isForm = fileExst === ".oform";
-  const isPdf = fileExst === ".pdf";
   const isTile = viewAs === "tile";
-  const isViewTable = viewAs === "table";
 
   const countVersions = versionGroup > 999 ? "999+" : versionGroup;
-
-  const contentNewItems = newItems > 999 ? "999+" : newItems;
 
   const isLargeTabletDevice =
     isMobileDevice && window.innerWidth >= size.desktop;
@@ -298,12 +291,12 @@ const Badges = ({
           <Badge
             {...commonBadgeProps}
             className="badge-version badge-new-version tablet-badge icons-group"
-            label={t("New")}
+            label={t("Files:New")}
             onClick={onBadgeClick}
           />
         </BadgeWrapper>
       )}
-      {/* {isForm  && ( 
+      {/* {isForm  && (
         <BadgeWrapper isTile={isTile}>
           <HelpButton
             place="bottom"
@@ -364,11 +357,12 @@ const Badges = ({
         />
       )}
       {showNew && (
-        <Badge
-          {...commonBadgeProps}
-          className="new-items tablet-badge"
-          label={contentNewItems}
-          onClick={onBadgeClick}
+        <NewFilesBadge
+          className="tablet-badge"
+          newFilesCount={newItems}
+          folderId={id}
+          mute={mute}
+          isRoom={isRoom}
         />
       )}
     </div>

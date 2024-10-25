@@ -1,5 +1,4 @@
 {
-  "AccountsEmptyScreenText": "Oglej si podrobnosti o uporabnikih tukaj",
   "AddedRoomTags": "Oznake dodane.",
   "Administration": "Administracija",
   "AndMoreLabel": "in <1>{{count}} več</1>",
@@ -35,7 +34,6 @@
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> soba kopirana",
   "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> soba ustvarjena",
   "HistoryThirdParty": "Prikaz zgodovine ni na voljo za javne sobe s povezanimi shrambami tretjih oseb",
-  "InfoBanner": "Seznam povabljenih uporabnikov vključuje lastnika in/ali skrbnike tega prostora {{productName}} s polnim dostopom do vseh sob. Lastniku in/ali skrbniku ni mogoče dodeliti drugih pravic dostopa. Ko bodo dodani v sobo, bodo obveščeni o vseh spremembah.",
   "ItemsSelected": "Predmeti izbrani",
   "LastModifiedBy": "Nazadnje spremenjeno",
   "NoRecordsFound": "Ni najdenih zapisov",
@@ -58,5 +56,6 @@
   "SubmenuHistory": "Zgodovina",
   "UserFileUpdated": "Datoteka posodobljena.",
   "Users": "Uporabniki",
+  "UsersEmptyScreenText": "Oglej si podrobnosti o uporabnikih tukaj",
   "Versions": "Verzije"
 }

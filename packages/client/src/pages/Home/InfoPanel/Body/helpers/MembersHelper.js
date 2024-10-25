@@ -51,7 +51,7 @@ class MembersHelper {
       },
       collaborator: {
         key: "collaborator",
-        label: this.t("Common:PowerUser"),
+        label: this.t("Common:ContentCreator"),
         access: ShareAccessRights.Collaborator,
         type: "collaborator",
       },
@@ -158,6 +158,13 @@ class MembersHelper {
         ];
       case RoomsType.PublicRoom:
         return [options.roomAdmin, options.collaborator, ...deleteOption];
+      case RoomsType.VirtualDataRoom:
+        return [
+          options.collaborator,
+          options.editor,
+          options.viewer,
+          ...deleteOption,
+        ];
       default:
         return [];
     }

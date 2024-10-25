@@ -1,5 +1,4 @@
 {
-  "AccountsEmptyScreenText": "Siehe Benutzerdetails hier",
   "AddedRoomTags": "Tags hinzugefügt.",
   "Administration": "Verwaltung",
   "AndMoreLabel": "und <1>{{count}} mehr</1>",
@@ -35,7 +34,6 @@
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> Raum kopiert",
   "HistoryRoomCreated": " <1>«{{roomTitle}}»</1> Raum erstellt",
   "HistoryThirdParty": "Die Verlaufsanzeige ist für öffentliche Räume mit angeschlossenen Drittanbieterspeichern nicht verfügbar",
-  "InfoBanner": "Die Liste der eingeladenen Benutzer enthält den Besitzer und/oder den Administrator dieses {{productName}} mit vollem Zugang zu allen Räumen. Besitzer und/oder Administrator können keine weiteren Zugriffsrechte zugewiesen werden. Sobald sie dem Raum hinzugefügt wurden, werden sie über alle Änderungen informiert.",
   "ItemsSelected": "Ausgewählte Elemente",
   "LastModifiedBy": "Zuletzt geändert von",
   "NoRecordsFound": "Keine Einträge gefunden",
@@ -58,5 +56,6 @@
   "SubmenuHistory": "Geschichte",
   "UserFileUpdated": "Datei aktualisiert.",
   "Users": "Benutzer",
+  "UsersEmptyScreenText": "Siehe Benutzerdetails hier",
   "Versions": "Versionen"
 }

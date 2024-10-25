@@ -44,7 +44,6 @@ export default function withContent(WrappedContent) {
       resetSelections,
       openGroupAction,
 
-      theme,
       getModel,
       itemIndex,
     } = props;
@@ -158,7 +157,7 @@ export default function withContent(WrappedContent) {
     const { theme, standalone } = settingsStore;
 
     const { getTargetUser } = peopleStore.targetUserStore;
-    const { selectionStore, contextOptionsStore } = peopleStore;
+    const { contextOptionsStore, usersStore } = peopleStore;
     const { openGroupAction } = peopleStore.groupsStore;
 
     const { getModel } = contextOptionsStore;
@@ -173,7 +172,7 @@ export default function withContent(WrappedContent) {
       singleContextMenuAction,
       multipleContextMenuAction,
       resetSelections,
-    } = selectionStore;
+    } = usersStore;
 
     return {
       theme,

@@ -1,3 +1,4 @@
+import { Page } from "@playwright/test";
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -25,10 +26,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { mobile } from "../../utils";
-import { Base } from "../../themes";
+import { injectDefaultTheme, mobile } from "../../utils";
 
-const StyledImageCropper = styled.div<{ disableImageRescaling?: boolean }>`
+const StyledImageCropper = styled.div.attrs(injectDefaultTheme)<{
+  disableImageRescaling?: boolean;
+}>`
   max-width: 368px;
 
   .icon_cropper-crop_area {
@@ -64,7 +66,7 @@ const StyledImageCropper = styled.div<{ disableImageRescaling?: boolean }>`
       `};
   }
 
-  .icon_cropper-delete_button {
+  .icon_cropper-change_button {
     cursor: pointer;
     display: flex;
     flex-direction: row;
@@ -115,6 +117,12 @@ const StyledImageCropper = styled.div<{ disableImageRescaling?: boolean }>`
     height: 24px;
     gap: 12px;
 
+    svg {
+      rect {
+        fill: ${(props) => props.theme.iconButton.color};
+      }
+    }
+
     &-slider {
       margin: 0;
     }
@@ -122,10 +130,22 @@ const StyledImageCropper = styled.div<{ disableImageRescaling?: boolean }>`
     &-button {
       user-select: none;
     }
+
+    .icon_cropper-zoom-container-button {
+      &:hover {
+        svg {
+          rect {
+            fill: ${(props) => props.theme.iconButton.hoverColor};
+          }
+        }
+      }
+    }
   }
 `;
 
-const StyledPreviewTile = styled.div<{ isGeneratedPreview?: boolean }>`
+const StyledPreviewTile = styled.div.attrs(injectDefaultTheme)<{
+  isGeneratedPreview?: boolean;
+}>`
   background: ${(props) =>
     props.theme.createEditRoomDialog.previewTile.background};
   width: 214px;
@@ -189,8 +209,5 @@ const StyledPreviewTile = styled.div<{ isGeneratedPreview?: boolean }>`
     }
   }
 `;
-StyledPreviewTile.defaultProps = { theme: Base };
-
-StyledImageCropper.defaultProps = { theme: Base };
 
 export { StyledImageCropper, StyledPreviewTile };

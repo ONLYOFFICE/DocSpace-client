@@ -6,7 +6,7 @@
   "DescriptionForRegisteredUser": "Wypełniony formularz PDF zostanie zapisany i będzie dostępny w katalogu Gotowe. Aby sprawdzić status, skontaktuj się z właścicielem formularza, podając przypisany numer.",
   "FillItOutAgain": "Wypełnij ponownie",
   "FormCompletedSuccessfully": "Formularz został pomyślnie wypełniony",
-  "FormNumber": "Numer formularza:",
+  "FormNumber": "Numer formularza",
   "FormOwner": "Właściciel formularza",
   "Title": "Formularz został wypełniony"
 }

@@ -1,8 +1,11 @@
 {
+  "ChangeGuestsTypeMessage": "Guest <strong>{{userName}}</strong> will be moved to the People section and assigned the User type. Users have their own Documents section, are able to create and edit files, but aren't able to create rooms.",
+  "ChangeGuestsTypeMessageMulti": "The selected guests will be moved to the People section and assigned the User type. Users have their own Documents section, are able to create and edit files, but aren't able to create rooms.",
   "ChangeUserTypeButton": "Change type",
   "ChangeUserTypeHeader": "Change user type",
-  "ChangeUserTypeMessage": "Users with the '{{ firstType }}' type will be moved to '{{ secondType }}' type.",
-  "ChangeUserTypeMessageMulti": "The selected users will be moved to '{{ secondType }}' type.",
+  "ChangeUserTypeMessage": "Users with the <strong>'{{ firstType }}'</strong> type will be moved to <strong>'{{ secondType }}'</strong> type.",
+  "ChangeUserTypeMessageMulti": "The selected users will be moved to <strong>'{{ secondType }}'</strong> type.",
   "ChangeUserTypeMessageWarning": "You can't change the type for the {{productName}} administrators and for yourself.",
+  "SuccessChangeGuestType": "The guest type was successfully changed",
   "SuccessChangeUserType": "The user type was successfully changed"
 }

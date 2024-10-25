@@ -26,22 +26,23 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import { commonIconsStyles, mobile } from "@docspace/shared/utils";
+import {
+  commonIconsStyles,
+  injectDefaultTheme,
+  mobile,
+} from "@docspace/shared/utils";
 import TrashIcon from "PUBLIC_DIR/images/trash.react.svg";
 import PlusIcon from "PUBLIC_DIR/images/plus.react.svg";
 import { Link } from "@docspace/shared/components/link";
 import { TextInput } from "@docspace/shared/components/text-input";
-import { Base } from "@docspace/shared/themes";
 
-const StyledPlusIcon = styled(PlusIcon)`
+const StyledPlusIcon = styled(PlusIcon).attrs(injectDefaultTheme)`
   ${commonIconsStyles}
 
   path {
     fill: ${(props) => props.theme.client.settings.iconFill};
   }
 `;
-
-StyledPlusIcon.defaultProps = { theme: Base };
 
 const StyledTrashIcon = styled(TrashIcon)`
   ${commonIconsStyles}

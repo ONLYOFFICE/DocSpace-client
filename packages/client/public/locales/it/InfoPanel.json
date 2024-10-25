@@ -1,5 +1,4 @@
 {
-  "AccountsEmptyScreenText": "Vedi i dettagli degli utenti qui",
   "AddedRoomTags": "Tag aggiunti.",
   "Administration": "Amministrazione",
   "AndMoreLabel": "e <1>{{count}} in più</1>",
@@ -35,7 +34,6 @@
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> stanza copiata",
   "HistoryRoomCreated": " <1>«{{roomTitle}}»</1> stanza creata",
   "HistoryThirdParty": "La visualizzazione della cronologia non è disponibile per le stanze pubbliche con archivi di terze parti collegati",
-  "InfoBanner": "L'elenco degli utenti invitati include il proprietario e/o gli amministratori di questo {{productName}} con accesso completo a tutte le stanze. Al proprietario e/o all'amministratore non possono essere assegnati altri diritti di accesso. Una volta aggiunti alla stanza, verranno informati di tutte le modifiche.",
   "ItemsSelected": "Elementi selezionati",
   "LastModifiedBy": "Ultima modifica di",
   "NoRecordsFound": "Nessun record trovato",
@@ -58,5 +56,6 @@
   "SubmenuHistory": "Cronologia",
   "UserFileUpdated": "File aggiornato.",
   "Users": "Utenti",
+  "UsersEmptyScreenText": "Vedi i dettagli degli utenti qui",
   "Versions": "Versioni"
 }

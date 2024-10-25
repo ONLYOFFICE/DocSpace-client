@@ -67,21 +67,23 @@ import {
   FolderType,
   RoomsType,
   ShareAccessRights,
+  ValidationStatus,
   VDRIndexingAction,
 } from "@docspace/shared/enums";
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { TIMEOUT } from "@docspace/client/src/helpers/filesConstants";
 import { checkProtocol } from "../helpers/files-helpers";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import config from "PACKAGE_FILE";
-import { isDesktop } from "@docspace/shared/utils";
+import { isDesktop, isLockedSharedRoom } from "@docspace/shared/utils";
 import { getCategoryType } from "SRC_DIR/helpers/utils";
 import { muteRoomNotification } from "@docspace/shared/api/settings";
 import { CategoryType } from "SRC_DIR/helpers/constants";
 import RoomsFilter from "@docspace/shared/api/rooms/filter";
-import AccountsFilter from "@docspace/shared/api/people/filter";
+import UsersFilter from "@docspace/shared/api/people/filter";
+import GroupsFilter from "@docspace/shared/api/groups/filter";
 import { RoomSearchArea, UrlActionType } from "@docspace/shared/enums";
 import {
   getConvertedQuota,
@@ -90,17 +92,18 @@ import {
 } from "@docspace/shared/utils/common";
 import uniqueid from "lodash/uniqueId";
 import FilesFilter from "@docspace/shared/api/files/filter";
+import { createLoader } from "@docspace/shared/utils/createLoader";
+
 import {
   getCategoryTypeByFolderType,
   getCategoryUrl,
 } from "SRC_DIR/helpers/utils";
 import { openingNewTab } from "@docspace/shared/utils/openingNewTab";
-import {
-  changeRoomLifetime,
-  editRoomSettings,
-} from "@docspace/shared/api/rooms";
+import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
+
 import api from "@docspace/shared/api";
 import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
+import { getContactsView } from "SRC_DIR/helpers/contacts";
 
 class FilesActionStore {
   settingsStore;
@@ -181,15 +184,8 @@ class FilesActionStore {
     const { clearSecondaryProgressData } =
       this.uploadDataStore.secondaryProgressDataStore;
 
-    const {
-      fetchFiles,
-      fetchRooms,
-      filter,
-      roomsFilter,
-      scrollToTop,
-      isEmptyLastPageAfterOperation,
-      resetFilterPage,
-    } = this.filesStore;
+    const { fetchFiles, fetchRooms, filter, roomsFilter, scrollToTop } =
+      this.filesStore;
 
     const { isRoomsFolder, isArchiveFolder, isArchiveFolderRoot } =
       this.treeFoldersStore;
@@ -200,13 +196,6 @@ class FilesActionStore {
       fileIds && folderIds
         ? fileIds.length + folderIds.length
         : fileIds?.length || folderIds?.length;
-
-    if (
-      selectionFilesLength &&
-      isEmptyLastPageAfterOperation(selectionFilesLength)
-    ) {
-      newFilter = resetFilterPage();
-    }
 
     let updatedFolder = this.selectedFolderStore.id;
 
@@ -302,9 +291,9 @@ class FilesActionStore {
     const { setPrimaryProgressBarData, clearPrimaryProgressData } =
       this.uploadDataStore.primaryProgressDataStore;
 
-    const roomFolder = this.selectedFolderStore.navigationPath.find(
-      (r) => r.isRoom,
-    );
+    const roomFolder =
+      this.selectedFolderStore.navigationPath.find((r) => r.isRoom) ??
+      this.selectedFolderStore.getSelectedFolder();
 
     const withoutHiddenFiles = Object.values(files).filter((f) => {
       const isHidden = /(^|\/)\.[^\/\.]/g.test(f.name);
@@ -332,8 +321,6 @@ class FilesActionStore {
       }
     }
 
-    const operationId = uniqueid("operation_");
-
     const toFolderId = folderId ? folderId : this.selectedFolderStore.id;
 
     const pbData = {
@@ -350,8 +337,6 @@ class FilesActionStore {
 
     const filesList = [];
     await this.createFolderTree(tree, toFolderId, filesList);
-
-    // this.updateCurrentFolder(null, [folderId], null, operationId);
 
     if (!filesList.length) {
       setTimeout(() => clearPrimaryProgressData(), TIMEOUT);
@@ -391,7 +376,6 @@ class FilesActionStore {
       this.uploadDataStore;
     const { setSecondaryProgressBarData, clearSecondaryProgressData } =
       secondaryProgressDataStore;
-    const { withPaging } = this.settingsStore;
 
     let selection = newSelection
       ? newSelection
@@ -451,7 +435,6 @@ class FilesActionStore {
 
     if (folderIds.length || fileIds.length) {
       try {
-        this.filesStore.setOperationAction(true);
         this.setGroupMenuBlocked(true);
         await removeFiles(folderIds, fileIds, deleteAfter, immediately)
           .then(async (res) => {
@@ -478,7 +461,7 @@ class FilesActionStore {
               return toastr.success(translations.FolderRemoved);
             };
 
-            if (withPaging || this.dialogsStore.isFolderActions) {
+            if (this.dialogsStore.isFolderActions) {
               this.updateCurrentFolder(fileIds, folderIds, false, operationId);
               showToast();
             } else {
@@ -495,12 +478,7 @@ class FilesActionStore {
             }
 
             if (currentFolderId) {
-              const { socketHelper } = this.settingsStore;
-
-              socketHelper.emit({
-                command: "refresh-folder",
-                data: currentFolderId,
-              });
+              SocketHelper.emit(SocketCommands.RefreshFolder, currentFolderId);
             }
           })
           .finally(() => {
@@ -517,7 +495,6 @@ class FilesActionStore {
         setTimeout(() => clearSecondaryProgressData(operationId), TIMEOUT);
         return toastr.error(err.message ? err.message : err);
       } finally {
-        this.filesStore.setOperationAction(false);
         this.setGroupMenuBlocked(false);
       }
     }
@@ -895,7 +872,6 @@ class FilesActionStore {
 
   deleteItemOperation = (isFile, itemId, translations, isRoom, operationId) => {
     const { addActiveItems, getIsEmptyTrash } = this.filesStore;
-    const { withPaging } = this.settingsStore;
     const { isRecycleBinFolder, recycleBinFolderId } = this.treeFoldersStore;
 
     const pbData = {
@@ -904,32 +880,23 @@ class FilesActionStore {
       operationId,
     };
 
-    this.filesStore.setOperationAction(true);
-
     const destFolderId = isRecycleBinFolder ? null : recycleBinFolderId;
 
     if (isFile) {
       addActiveItems([itemId], null, destFolderId);
-      return deleteFile(itemId)
-        .then(async (res) => {
-          if (res[0]?.error) return Promise.reject(res[0].error);
-          const data = res[0] ? res[0] : null;
-          await this.uploadDataStore.loopFilesOperations(data, pbData);
+      return deleteFile(itemId).then(async (res) => {
+        if (res[0]?.error) return Promise.reject(res[0].error);
+        const data = res[0] ? res[0] : null;
+        await this.uploadDataStore.loopFilesOperations(data, pbData);
 
-          if (withPaging) {
-            this.updateCurrentFolder([itemId], null, null, operationId);
-            toastr.success(translations.successRemoveFile);
-          } else {
-            this.updateFilesAfterDelete(operationId);
-            this.filesStore.removeFiles(
-              [itemId],
-              null,
-              () => toastr.success(translations.successRemoveFile),
-              destFolderId,
-            );
-          }
-        })
-        .finally(() => this.filesStore.setOperationAction(false));
+        this.updateFilesAfterDelete(operationId);
+        this.filesStore.removeFiles(
+          [itemId],
+          null,
+          () => toastr.success(translations.successRemoveFile),
+          destFolderId,
+        );
+      });
     } else if (isRoom) {
       const items = Array.isArray(itemId) ? itemId : [itemId];
       addActiveItems(null, items);
@@ -951,32 +918,24 @@ class FilesActionStore {
         )
         .finally(() => {
           this.setGroupMenuBlocked(false);
-          this.filesStore.setOperationAction(false);
         });
     } else {
       addActiveItems(null, [itemId], destFolderId);
-      return deleteFolder(itemId)
-        .then(async (res) => {
-          if (res[0]?.error) return Promise.reject(res[0].error);
-          const data = res[0] ? res[0] : null;
-          await this.uploadDataStore.loopFilesOperations(data, pbData);
+      return deleteFolder(itemId).then(async (res) => {
+        if (res[0]?.error) return Promise.reject(res[0].error);
+        const data = res[0] ? res[0] : null;
+        await this.uploadDataStore.loopFilesOperations(data, pbData);
 
-          if (withPaging) {
-            this.updateCurrentFolder(null, [itemId], null, operationId);
-            toastr.success(translations.successRemoveFolder);
-          } else {
-            this.updateFilesAfterDelete(operationId);
-            this.filesStore.removeFiles(
-              null,
-              [itemId],
-              () => toastr.success(translations.successRemoveFolder),
-              destFolderId,
-            );
-          }
+        this.updateFilesAfterDelete(operationId);
+        this.filesStore.removeFiles(
+          null,
+          [itemId],
+          () => toastr.success(translations.successRemoveFolder),
+          destFolderId,
+        );
 
-          getIsEmptyTrash();
-        })
-        .finally(() => this.filesStore.setOperationAction(false));
+        getIsEmptyTrash();
+      });
     }
   };
 
@@ -1311,7 +1270,6 @@ class FilesActionStore {
               window.DocSpace.navigate("/");
             }
 
-            // this.updateCurrentFolder(null, null, null, operationId);
             this.dialogsStore.setIsFolderActions(false);
             return setTimeout(
               () => clearSecondaryProgressData(operationId),
@@ -1369,7 +1327,6 @@ class FilesActionStore {
 
             await this.uploadDataStore.loopFilesOperations(data, pbData);
 
-            // this.updateCurrentFolder(null, [items], null, operationId);
             this.dialogsStore.setIsFolderActions(false);
             return setTimeout(
               () => clearSecondaryProgressData(operationId),
@@ -2408,7 +2365,64 @@ class FilesActionStore {
 
   onMarkAsRead = (item) => this.markAsRead([], [`${item.id}`], item);
 
-  openFileAction = (item, t, e) => {
+  isExpiredLinkAsync = async (item) => {
+    const { clearActiveOperations } = this.uploadDataStore;
+    const { addActiveItems } = this.filesStore;
+
+    const { endLoader, startLoader } = createLoader();
+
+    try {
+      startLoader(() =>
+        runInAction(() => {
+          this.setGroupMenuBlocked(true);
+          addActiveItems(null, [item.id]);
+        }),
+      );
+
+      const response = await api.rooms.validatePublicRoomKey(item.requestToken);
+
+      const isExpired = response.status === ValidationStatus.Expired;
+      if (isExpired) {
+        const foundFolder = this.filesStore.folders.find(
+          (folder) => folder.id === item.id,
+        );
+
+        if (foundFolder && !foundFolder.expired) {
+          foundFolder.expired = true;
+        }
+      }
+
+      return isExpired;
+    } catch (error) {
+      console.log(error);
+      return false;
+    } finally {
+      endLoader(() =>
+        runInAction(() => {
+          this.setGroupMenuBlocked(false);
+          clearActiveOperations([], [item.id]);
+        }),
+      );
+    }
+  };
+
+  openFileAction = async (item, t, e) => {
+    if (
+      item.external &&
+      (item.expired || (await this.isExpiredLinkAsync(item)))
+    )
+      return toastr.error(
+        t("Common:RoomLinkExpired"),
+        t("Common:RoomNotAvailable"),
+      );
+
+    if (isLockedSharedRoom(item))
+      return this.dialogsStore.setPasswordEntryDialog(true, item);
+
+    this.openItemAction(item, t, e);
+  };
+
+  openItemAction = (item, t, e) => {
     const { openDocEditor, isPrivacyFolder, setSelection, categoryType } =
       this.filesStore;
     const { currentDeviceType } = this.settingsStore;
@@ -2568,10 +2582,9 @@ class FilesActionStore {
     const { roomType } = this.selectedFolderStore;
     const { setSelectedNode } = this.treeFoldersStore;
     const { clearFiles, setBufferSelection } = this.filesStore;
-    const { clearInsideGroup, insideGroupBackUrl } =
-      this.peopleStore.groupsStore;
+    const { insideGroupBackUrl } = this.peopleStore.groupsStore;
+    const { setContactsTab } = this.peopleStore.usersStore;
     const { isLoading } = this.clientLoadingStore;
-
     if (isLoading) return;
 
     setBufferSelection(null);
@@ -2624,23 +2637,34 @@ class FilesActionStore {
     }
 
     if (categoryType === CategoryType.Accounts) {
+      const contactsTab = getContactsView();
+
       if (insideGroupBackUrl) {
+        setContactsTab("groups");
         window.DocSpace.navigate(insideGroupBackUrl);
-        clearInsideGroup();
+
         return;
       }
-      const accountsFilter = AccountsFilter.getDefault();
-      const params = accountsFilter.toUrlParams();
+
+      const filter =
+        contactsTab === "groups"
+          ? GroupsFilter.getDefault()
+          : UsersFilter.getDefault();
+      const params = filter.toUrlParams();
       const path = getCategoryUrl(CategoryType.Accounts);
 
       clearFiles();
 
       if (window.location.search.includes("group")) {
         setSelectedNode(["accounts", "groups", "filter"]);
-        return window.DocSpace.navigate(`accounts/groups?${params}`, {
+        setContactsTab("groups");
+
+        return window.DocSpace.navigate(`accounts/groups/filter?${params}`, {
           replace: true,
         });
       }
+      setContactsTab("people");
+
       setSelectedNode(["accounts", "people", "filter"]);
 
       if (fromHotkeys) return;
@@ -2703,7 +2727,6 @@ class FilesActionStore {
       rootFolderType: rootFolderType,
     };
 
-    setIsSectionFilterLoading(true);
     window.DocSpace.navigate(
       `${path}?key=${publicRoomKey}&${filter.toUrlParams()}`,
       { state },
@@ -2870,6 +2893,7 @@ class FilesActionStore {
         if (isLeaveChecked) await this.onLeaveRoom(t);
         else toastr.success(t("Files:AppointNewOwner"));
       })
+      .catch((e) => toastr.error(e))
       .finally(() => {
         setSelected("none");
       });
@@ -2887,14 +2911,6 @@ class FilesActionStore {
 
     await deleteFilesFromRecent(fileIds);
     await refreshFiles();
-  };
-
-  changeRoomLifetime = (roomId, lifetime) => {
-    return changeRoomLifetime(roomId, lifetime);
-  };
-
-  editRoomSettings = (roomId, data) => {
-    return editRoomSettings(roomId, data);
   };
 
   copyFromTemplateForm = async (fileInfo, t) => {

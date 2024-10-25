@@ -25,10 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 import { TableRow } from "@docspace/shared/components/table";
 import DragAndDrop from "@docspace/shared/components/drag-and-drop/DragAndDrop";
 import CursorPalmSvgUrl from "PUBLIC_DIR/images/cursor.palm.react.svg?url";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
 const hotkeyBorderStyle = css`
   border-image-slice: 1;
@@ -45,7 +46,7 @@ const rowCheckboxDraggingStyle = css`
 
   border-bottom: 1px solid;
   border-image-slice: 1;
-  border-image-source: ${(props) => `linear-gradient(to right, 
+  border-image-source: ${(props) => `linear-gradient(to right,
           ${props.theme.filesSection.tableView.row.borderColorTransition} 17px, ${props.theme.filesSection.tableView.row.borderColor} 31px)`};
 `;
 
@@ -220,6 +221,12 @@ const StyledTableRow = styled(TableRow)`
     border-bottom: unset;
     margin-inline-start: -20px;
     padding-inline-start: 20px;
+
+    ${(props) =>
+      props.isIndexing &&
+      css`
+        min-width: 36px;
+      `}
   }
 
   .table-container_element-container {
@@ -229,6 +236,13 @@ const StyledTableRow = styled(TableRow)`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    ${(props) =>
+      props.isIndexing &&
+      css`
+        width: 28px;
+        justify-content: flex-start;
+      `}
   }
 
   .table-container_row-loader {
@@ -239,6 +253,12 @@ const StyledTableRow = styled(TableRow)`
 
   .table-container_row-checkbox {
     width: 12px;
+
+    ${(props) =>
+      props.isIndexing &&
+      css`
+        padding-inline-start: 8px;
+      `}
   }
 
   .table-container_file-name-cell,
@@ -357,6 +377,11 @@ const StyledTableRow = styled(TableRow)`
   .index-buttons-name {
     width: calc(100% + 24px);
   }
+
+  .icon-with-index-column {
+    width: 28px;
+    justify-content: flex-start;
+  }
 `;
 
 const StyledDragAndDrop = styled(DragAndDrop)`
@@ -423,7 +448,7 @@ const StyledBadgesContainer = styled.div`
   }
 `;
 
-const StyledQuickButtonsContainer = styled.div`
+const StyledQuickButtonsContainer = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -458,8 +483,6 @@ const StyledQuickButtonsContainer = styled.div`
     -webkit-tap-highlight-color: ${globalColors.tapHighlight};
   }
 `;
-
-StyledQuickButtonsContainer.defaultProps = { theme: Base };
 
 export {
   StyledBadgesContainer,

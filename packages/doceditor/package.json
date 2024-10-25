@@ -1,6 +1,6 @@
 {
   "name": "@docspace/doceditor",
-  "version": "2.6.2",
+  "version": "3.0.0",
   "private": true,
   "scripts": {
     "build": "node ./scripts/buildTranslations.js && next build",
@@ -15,22 +15,22 @@
   "dependencies": {
     "@onlyoffice/document-editor-react": "^1.5.1",
     "i18next": "^20.6.1",
-    "next": "^14.2.8",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-i18next": "^13.2.1",
-    "sass": "^1.59.3",
-    "styled-components": "^5.3.9"
+    "next": "^14.2.15",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-i18next": "^13.5.0",
+    "sass": "^1.79.5",
+    "styled-components": "^5.3.11"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
-    "@types/node": "^20",
-    "@types/react": "^18.2.53",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "14.0.4",
-    "prettier": "^3.2.4",
+    "@types/node": "^22.7.5",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "14.2.15",
+    "prettier": "^3.3.3",
     "shx": "^0.3.4",
-    "typescript": "5.3"
+    "typescript": "5.6.3"
   }
 }

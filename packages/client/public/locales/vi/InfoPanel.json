@@ -1,5 +1,4 @@
 {
-  "AccountsEmptyScreenText": "Xem chi tiết người dùng tại đây",
   "AddedRoomTags": "Đã thêm thẻ.",
   "Administration": "Quản lý ",
   "AndMoreLabel": "và  <1>{{count}} hơn thế nữa</1>",
@@ -35,7 +34,6 @@
   "HistoryRoomCopied": "Đã sao chép phòng <1>«{{roomTitle}}»</1> ",
   "HistoryRoomCreated": "Đã tạo phòng <1>«{{roomTitle}}»</1> ",
   "HistoryThirdParty": "Hiển thị lịch sử không khả dụng cho các phòng công cộng có kho lưu trữ của bên thứ ba được kết nối",
-  "InfoBanner": "Danh sách người dùng được mời bao gồm chủ sở hữu và/hoặc quản trị viên của {{productName}} này có toàn quyền truy cập vào tất cả các phòng. Chủ sở hữu và/hoặc quản trị viên không thể được chỉ định các quyền truy cập khác. Sau khi được thêm vào phòng, họ sẽ được thông báo về tất cả các thay đổi.",
   "ItemsSelected": "Các mục đã chọn",
   "LastModifiedBy": "Sửa lần cuối bởi",
   "NoRecordsFound": "Không tìm thấy bản ghi nào",
@@ -58,5 +56,6 @@
   "SubmenuHistory": "Lịch sử",
   "UserFileUpdated": "Tập tin đã được cập nhật. vai trò",
   "Users": "Người dùng",
+  "UsersEmptyScreenText": "Xem chi tiết người dùng tại đây",
   "Versions": "Phiên Bản"
 }

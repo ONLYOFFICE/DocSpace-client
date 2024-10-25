@@ -30,18 +30,25 @@ import { isMobile as isMobileUtils } from "../../../utils";
 import { Portal } from "../../portal";
 import { Backdrop } from "../../backdrop";
 
+import { Scrollbar } from "../../scrollbar";
+
 import { StyledCreateDropDown } from "../Selector.styled";
 
 export const DROPDOWN_CLASS_NAME = "selector-create-new-dropdown";
+
+const DROPDOWN_CONTAINER_WITH_PADDING = 560;
+const PADDING = 80;
 
 const NewItemDropDown = ({
   dropDownItems,
   isEmpty,
   onCloseDropDown,
+  listHeight,
 }: {
   dropDownItems: React.ReactElement[];
   isEmpty?: boolean;
   onCloseDropDown: (e?: MouseEvent) => void;
+  listHeight?: number;
 }) => {
   const [isMobile, setIsMobile] = React.useState(
     isMobileUtils(window.innerWidth),
@@ -77,7 +84,13 @@ const NewItemDropDown = ({
         className={DROPDOWN_CLASS_NAME}
         isEmpty={isEmpty ?? false}
       >
-        {dropDownItems.map((item) => item)}
+        {listHeight && listHeight < DROPDOWN_CONTAINER_WITH_PADDING ? (
+          <Scrollbar style={{ height: listHeight - PADDING }}>
+            {dropDownItems.map((item) => item)}
+          </Scrollbar>
+        ) : (
+          dropDownItems.map((item) => item)
+        )}
       </StyledCreateDropDown>
     ) : null;
 

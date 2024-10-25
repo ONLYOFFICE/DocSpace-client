@@ -30,9 +30,6 @@ import {
   FolderType,
   RoomsType,
   ShareAccessRights,
-  FolderType,
-  RoomsType,
-  ShareAccessRights,
   ValidationStatus,
 } from "../../enums";
 import { TCreatedBy, TPathParts } from "../../types";
@@ -75,6 +72,14 @@ export type TRoomLifetime = {
   value: number;
 };
 
+export type TWatermark = {
+  additions: number;
+  imageHeight: number;
+  imageScale: number;
+  imageWidth: number;
+  rotate: number;
+  imageUrl?: string;
+};
 export type TRoom = {
   parentId: number;
   filesCount: number;
@@ -101,6 +106,10 @@ export type TRoom = {
   isArchive?: boolean;
   security: TRoomSecurity;
   lifetime: TRoomLifetime;
+  external?: boolean;
+  passwordProtected?: boolean;
+  requestToken?: string;
+  expired?: boolean;
 };
 
 export type TGetRooms = {
@@ -130,4 +139,11 @@ export type TPublicRoomPassword = {
   shared: boolean;
   status: ValidationStatus;
   tenantId: string | number;
+};
+
+export type TNewFilesItem = TFile[] | { room: TRoom; items: TFile[] };
+
+export type TNewFiles = {
+  date: string;
+  items: TNewFilesItem[];
 };

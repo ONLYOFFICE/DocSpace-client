@@ -30,7 +30,7 @@ import styled, { css } from "styled-components";
 import PeopleSelector from "@docspace/shared/selectors/People";
 import { withTranslation } from "react-i18next";
 import Filter from "@docspace/shared/api/people/filter";
-import { EmployeeType } from "@docspace/shared/enums";
+import { EmployeeType, EmployeeStatus } from "@docspace/shared/enums";
 import {
   ModalDialog,
   ModalDialogType,
@@ -112,19 +112,18 @@ const ChangeRoomOwner = (props) => {
     onClose();
   };
 
-  const filter = new Filter();
-  filter.role = [EmployeeType.Admin, EmployeeType.User];
+  const filter = Filter.getDefault();
+  filter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
+  filter.employeeStatus = EmployeeStatus.Active;
 
   const selectorComponent = (
     <PeopleSelector
       withCancelButton
-      cancelButtonLabel=""
       onCancel={onClose}
-      onSubmit={onChangeRoomOwner}
-      submitButtonLabel={
-        showBackButton ? t("Common:SelectAction") : t("Files:AssignOwner")
-      }
+      cancelButtonLabel=""
       disableSubmitButton={false}
+      submitButtonLabel={showBackButton ? "" : t("Files:AssignOwner")}
+      onSubmit={onChangeRoomOwner}
       withHeader
       headerProps={{
         onCloseClick: onClose,
@@ -133,7 +132,6 @@ const ChangeRoomOwner = (props) => {
         headerLabel: t("Files:ChangeTheRoomOwner"),
       }}
       filter={filter}
-      isLoading={isLoading}
       withFooterCheckbox={!showBackButton}
       footerCheckboxLabel={t("Files:LeaveTheRoom")}
       isChecked={!showBackButton}

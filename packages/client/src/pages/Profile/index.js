@@ -35,7 +35,7 @@ import Section from "@docspace/shared/components/section";
 
 import SectionWrapper from "SRC_DIR/components/Section";
 import PrivateRoute from "SRC_DIR/components/PrivateRouteWrapper";
-import Dialogs from "SRC_DIR/pages/Home/Section/AccountsBody/Dialogs";
+import Dialogs from "SRC_DIR/pages/Home/Section/ContactsBody/Dialogs";
 import withCultureNames from "SRC_DIR/HOCs/withCultureNames";
 
 import { SectionHeaderContent, SectionBodyContent } from "./Section";

@@ -79,7 +79,7 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
     onClose,
 
     alert,
-    withMenu,
+    withMenu = true,
     onClick,
     onAlertClick,
     withAlertClick,
@@ -103,6 +103,25 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
   useEffect(() => {
     setIsOpen(opened);
   }, [opened]);
+
+  const usePrevious = (value?: string) => {
+    const prevRef = useRef<string>();
+
+    useEffect(() => {
+      prevRef.current = value;
+    });
+
+    return prevRef.current;
+  };
+
+  const currentLocation = window.location.href;
+  const prevLocation = usePrevious(window.location.href);
+
+  useEffect(() => {
+    if (prevLocation !== currentLocation) {
+      setIsOpen(false);
+    }
+  }, [prevLocation, currentLocation]);
 
   const setDialogBackground = (scrollHeight: number) => {
     if (!buttonBackground) {
@@ -384,10 +403,6 @@ const MainButtonMobile = (props: MainButtonMobileProps) => {
       </div>
     </>
   );
-};
-
-MainButtonMobile.defaultProps = {
-  withMenu: true,
 };
 
 export { MainButtonMobile };

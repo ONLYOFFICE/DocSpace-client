@@ -26,9 +26,11 @@
 
 import styled, { css } from "styled-components";
 
-import { Base } from "../../themes";
+import { injectDefaultTheme } from "../../utils";
 
-const StyledSearchInput = styled.div<{ isScale?: boolean }>`
+const StyledSearchInput = styled.div.attrs(injectDefaultTheme)<{
+  isScale?: boolean;
+}>`
   font-family: ${(props) => props.theme.fontFamily};
   font-style: normal;
 
@@ -61,5 +63,4 @@ const StyledSearchInput = styled.div<{ isScale?: boolean }>`
   }
 `;
 
-StyledSearchInput.defaultProps = { theme: Base };
 export default StyledSearchInput;

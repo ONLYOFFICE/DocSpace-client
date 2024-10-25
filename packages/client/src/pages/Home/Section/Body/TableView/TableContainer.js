@@ -41,7 +41,7 @@ import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 import { Base } from "@docspace/shared/themes";
 import { TableContainer } from "@docspace/shared/components/table";
 import { TableBody } from "@docspace/shared/components/table";
-import { Context } from "@docspace/shared/utils";
+import { Context, injectDefaultTheme } from "@docspace/shared/utils";
 
 import TableRow from "./TableRow";
 import TableHeader from "./TableHeader";
@@ -56,7 +56,7 @@ const contextCss = css`
   padding-inline-end: 20px;
 `;
 
-const StyledTableContainer = styled(TableContainer)`
+const StyledTableContainer = styled(TableContainer).attrs(injectDefaultTheme)`
   .table-row-selected {
     .table-container_file-name-cell {
       ${fileNameCss}
@@ -123,8 +123,6 @@ const StyledTableContainer = styled(TableContainer)`
   }
 `;
 
-StyledTableContainer.defaultProps = { theme: Base };
-
 const elementResizeDetector = elementResizeDetectorMaker({
   strategy: "scroll",
   callOnAdd: false,
@@ -144,7 +142,6 @@ const Table = ({
   isRooms,
   isTrashFolder,
   isIndexEditingMode,
-  withPaging,
   columnStorageName,
   columnInfoPanelStorageName,
   highlightFile,
@@ -247,7 +244,7 @@ const Table = ({
 
   return (
     <StyledTableContainer
-      useReactWindow={!withPaging}
+      useReactWindow
       forwardedRef={ref}
       isIndexEditingMode={isIndexEditingMode}
     >
@@ -269,7 +266,7 @@ const Table = ({
         filesLength={filesList.length}
         hasMoreFiles={hasMoreFiles}
         itemCount={filterTotal}
-        useReactWindow={!withPaging}
+        useReactWindow
         infoPanelVisible={infoPanelVisible}
         isIndexEditingMode={isIndexEditingMode}
         columnInfoPanelStorageName={columnInfoPanelStorageName}
@@ -318,7 +315,7 @@ export default inject(
     const { isIndexEditingMode } = indexingStore;
     const { changeIndex } = filesActionsStore;
     const { isIndexedFolder } = selectedFolderStore;
-    const { withPaging, theme, currentDeviceType } = settingsStore;
+    const { theme, currentDeviceType } = settingsStore;
 
     return {
       filesList,
@@ -336,7 +333,6 @@ export default inject(
       isTrashFolder,
       isIndexEditingMode,
       isIndexing: isIndexedFolder,
-      withPaging,
       columnStorageName,
       columnInfoPanelStorageName,
       highlightFile,

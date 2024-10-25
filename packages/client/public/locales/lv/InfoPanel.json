@@ -1,5 +1,4 @@
 {
-  "AccountsEmptyScreenText": "Detalizētu informāciju par lietotājiem skatīt šeit",
   "AddedRoomTags": "Pievienotas atzīmes.",
   "Administration": "Administrācija",
   "AndMoreLabel": "un <1>{{count}} vēl</1>",
@@ -35,7 +34,6 @@
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> telpa ir nokopēta",
   "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> telpa ir izveidota",
   "HistoryThirdParty": "Vēstures displejs nav pieejams sabiedriskām telpām ar saistītām trešo pušu krātuvēm",
-  "InfoBanner": "Uzaicināto lietotāju sarakstā ir šīs {{productName}} īpašnieks un/vai administratori ar pilnu piekļuvi visām telpām. Īpašniekam un/vai administratoram nevar piešķirt citas piekļuves tiesības. Pēc pievienošanas telpai viņi tiks informēti par visām izmaiņām.",
   "ItemsSelected": "Atlasītie vienumi",
   "LastModifiedBy": "Pēdējo reizi modificēja:",
   "NoRecordsFound": "Ieraksti nav atrasti",
@@ -58,5 +56,6 @@
   "SubmenuHistory": "Vēsture",
   "UserFileUpdated": "Fails ir atjaunināts.",
   "Users": "Lietotāji",
+  "UsersEmptyScreenText": "Detalizētu informāciju par lietotājiem skatīt šeit",
   "Versions": "Versijas"
 }

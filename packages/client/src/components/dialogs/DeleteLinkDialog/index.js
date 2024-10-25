@@ -32,6 +32,7 @@ import { Text } from "@docspace/shared/components/text";
 import { toastr } from "@docspace/shared/components/toast";
 
 import { withTranslation } from "react-i18next";
+import { DeleteLinkDialogContainer } from "./DeleteLinkDialog.styled";
 
 const DeleteLinkDialogComponent = (props) => {
   const {
@@ -44,6 +45,8 @@ const DeleteLinkDialogComponent = (props) => {
     deleteExternalLink,
     editExternalLink,
     isPublicRoomType,
+    isFormRoom,
+    isCustomRoom,
     setRoomShared,
   } = props;
 
@@ -88,6 +91,24 @@ const DeleteLinkDialogComponent = (props) => {
       });
   };
 
+  const getDescription = () => {
+    if (link.sharedTo.primary) {
+      if (isCustomRoom) return t("Files:RevokeSharedLinkDescriptionCustomRoom");
+
+      if (isFormRoom) return t("Files:RevokeSharedLinkDescriptionFormRoom");
+
+      if (isPublicRoomType)
+        return t("Files:RevokeSharedLinkDescriptionPublicRoom");
+    }
+
+    return t("Files:DeleteSharedLink");
+  };
+
+  console.debug({
+    primary: link.sharedTo.primary,
+    isPublicRoomType,
+  });
+
   return (
     <ModalDialog isLoading={!tReady} visible={visible} onClose={onClose}>
       <ModalDialog.Header>
@@ -96,13 +117,16 @@ const DeleteLinkDialogComponent = (props) => {
           : t("Files:DeleteLink")}
       </ModalDialog.Header>
       <ModalDialog.Body>
-        <div className="modal-dialog-content-body">
-          <Text noSelect>
-            {link.sharedTo.primary && isPublicRoomType
-              ? t("Files:DeleteSharedLink")
-              : t("Files:DeleteLinkNote")}
+        <DeleteLinkDialogContainer className="modal-dialog-content-body">
+          <Text lineHeight="20px" noSelect>
+            {getDescription()}
           </Text>
-        </div>
+          {link.sharedTo.primary && (
+            <Text lineHeight="20px" noSelect>
+              {t("Files:ActionCannotUndone")}
+            </Text>
+          )}
+        </DeleteLinkDialogContainer>
       </ModalDialog.Body>
       <ModalDialog.Footer>
         <Button
@@ -144,6 +168,7 @@ export default inject(({ dialogsStore, publicRoomStore, filesStore }) => {
     linkParams,
   } = dialogsStore;
   const { editExternalLink, deleteExternalLink } = publicRoomStore;
+  const { isFormRoom, isCustomRoom } = linkParams;
 
   return {
     visible,
@@ -152,6 +177,8 @@ export default inject(({ dialogsStore, publicRoomStore, filesStore }) => {
     link: linkParams.link,
     editExternalLink,
     deleteExternalLink,
+    isFormRoom,
+    isCustomRoom,
     isPublicRoomType: linkParams.isPublic,
     setRoomShared: filesStore.setRoomShared,
   };

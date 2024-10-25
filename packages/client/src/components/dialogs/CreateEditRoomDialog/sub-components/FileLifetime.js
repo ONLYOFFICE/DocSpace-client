@@ -20,25 +20,28 @@ const StyledFileLifetime = styled.div`
     .virtual-data-room_file-lifetime_date {
       display: flex;
       align-items: center;
+      gap: 4px;
+
+      @media ${mobile} {
+        gap: 8px;
+      }
     }
 
     .virtual-data-room_file-lifetime_input {
       min-width: 150px;
-      margin-right: 4px;
 
       @media ${mobile} {
-        margin-right: 8px;
         width: 165px;
       }
     }
 
     .virtual-data-room_file-lifetime_combo-box {
-      margin-right: 16px;
+      margin-inline-end: 16px;
       width: 92px;
       min-width: 92px;
 
       @media ${mobile} {
-        margin-right: 0px;
+        margin-inline-end: 0px;
         width: 165px;
       }
     }
@@ -139,7 +142,7 @@ const FileLifetime = ({ t, roomParams, setRoomParams }) => {
 
   return (
     <StyledFileLifetime className="virtual-data-room_file-lifetime">
-      <Text fontWeight={600} fontSize="13px">
+      <Text fontWeight={600} fontSize="13px" noSelect>
         {t("FilesOlderThan")}
       </Text>
 

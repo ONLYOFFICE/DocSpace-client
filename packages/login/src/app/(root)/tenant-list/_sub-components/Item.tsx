@@ -30,7 +30,7 @@
 
 import { Text } from "@docspace/shared/components/text";
 import { IconButton } from "@docspace/shared/components/icon-button";
-import { deleteCookie, getCookie } from "@docspace/shared/utils/cookie";
+import { getCookie } from "@docspace/shared/utils/cookie";
 
 import ArrowRightSvrUrl from "PUBLIC_DIR/images/arrow.right.react.svg?url";
 import DefaultLogoUrl from "PUBLIC_DIR/images/logo/leftmenu.svg?url";
@@ -52,6 +52,7 @@ const Item = ({ portal, baseDomain }: ItemProps) => {
       name,
     );
     // deleteCookie("x-redirect-authorization-uri");
+    sessionStorage.removeItem("tenant-list");
 
     window.open(`${portal.portalLink}&referenceUrl=${redirectUrl}`, "_self");
   };

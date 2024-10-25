@@ -129,53 +129,23 @@ class SettingsSetupStore {
     makeAutoObservable(this);
   }
 
-  initSettings = async (page) => {
+  initSettings = async () => {
     const isMobileView =
       this.settingsStore.currentDeviceType === DeviceType.mobile;
 
     if (this.isInit && isMobileView) return;
 
-    if (this.authStore.isAuthenticated) {
-      if (isMobileView) {
-        switch (page) {
-          case "password":
-            await this.settingsStore.getPortalPasswordSettings();
-            break;
-          case "tfa":
-            await this.tfaStore.getTfaType();
-            break;
-          case "trusted-mail":
-            break;
-          case "ip":
-            await this.settingsStore.getIpRestrictionsEnable();
-            await this.settingsStore.getIpRestrictions();
-            break;
-          case "brute-force-protection":
-            await this.settingsStore.getBruteForceProtection();
-            break;
-          case "admin-message":
-            break;
-          case "lifetime":
-            await this.settingsStore.getSessionLifetime();
-
-            break;
-
-          default:
-            break;
-        }
-      } else {
-        await Promise.all([
-          this.settingsStore.getPortalPasswordSettings(),
-          this.tfaStore.getTfaType(),
-          this.settingsStore.getIpRestrictionsEnable(),
-          this.settingsStore.getIpRestrictions(),
-          this.settingsStore.getSessionLifetime(),
-          this.settingsStore.getBruteForceProtection(),
-        ]);
-      }
+    if (this.authStore.isAuthenticated && !isMobileView) {
+      await Promise.all([
+        this.settingsStore.getPortalPasswordSettings(),
+        this.tfaStore.getTfaType(),
+        this.settingsStore.getIpRestrictionsEnable(),
+        this.settingsStore.getIpRestrictions(),
+        this.settingsStore.getSessionLifetime(),
+        this.settingsStore.getBruteForceProtection(),
+      ]);
+      this.setIsInit(true);
     }
-
-    this.isInit = true;
   };
 
   setIsLoadingDownloadReport = (state) => {

@@ -1,5 +1,4 @@
 {
-  "AccountsEmptyScreenText": "在此查看用户详情",
   "AddedRoomTags": "已添加标签。",
   "Administration": "管理",
   "AndMoreLabel": "以及<1>另外 {{count}} 个</1>",
@@ -35,7 +34,6 @@
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1>房间已复制",
   "HistoryRoomCreated": "<1>«{{roomTitle}}»</1>房间已创建",
   "HistoryThirdParty": "历史记录显示不适用于已连接第三方存储的公共房间",
-  "InfoBanner": "受邀用户列表包括此{{productName}}的所有者和/或管理员，他们拥有所有房间的完全访问权限。所有者和/或管理员不能被分配其他访问权限。一旦添加到房间，他们将收到所有更改的通知。",
   "ItemsSelected": "选定的项目",
   "LastModifiedBy": "上次修改时间",
   "NoRecordsFound": "未找到记录",
@@ -58,5 +56,6 @@
   "SubmenuHistory": "历史记录",
   "UserFileUpdated": "文件已更新。",
   "Users": "用户",
+  "UsersEmptyScreenText": "在此查看用户详情",
   "Versions": "版本"
 }

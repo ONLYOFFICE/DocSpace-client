@@ -26,7 +26,7 @@
 
 import styled, { css } from "styled-components";
 
-import { Base } from "../../../themes";
+import { injectDefaultTheme } from "../../../utils";
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -35,7 +35,7 @@ const StyledContainer = styled.div`
   box-sizing: border-box;
 `;
 
-const StyledBlock = styled.div<{ isLast?: boolean }>`
+const StyledBlock = styled.div.attrs(injectDefaultTheme)<{ isLast?: boolean }>`
   padding: 12px 0 16px;
 
   margin-bottom: 4px;
@@ -67,7 +67,5 @@ const StyledBlock = styled.div<{ isLast?: boolean }>`
     gap: 8px;
   }
 `;
-
-StyledBlock.defaultProps = { theme: Base };
 
 export { StyledContainer, StyledBlock };

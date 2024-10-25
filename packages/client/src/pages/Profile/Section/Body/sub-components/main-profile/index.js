@@ -44,7 +44,7 @@ import { isMobileOnly } from "react-device-detect";
 import { toastr } from "@docspace/shared/components/toast";
 import { showEmailActivationToast } from "SRC_DIR/helpers/people-helpers";
 import {
-  getUserRole,
+  getUserType,
   convertLanguage,
   getUserTypeName,
   getUserTypeDescription,
@@ -52,7 +52,6 @@ import {
 import BetaBadge from "../../../../../../components/BetaBadgeWrapper";
 
 import { Trans } from "react-i18next";
-//import TimezoneCombo from "./timezoneCombo";
 
 import { AvatarEditorDialog } from "SRC_DIR/components/dialogs";
 
@@ -149,7 +148,7 @@ const MainProfile = (props) => {
     }
   }, []);
 
-  const role = getUserRole(profile);
+  const role = getUserType(profile);
 
   const sendActivationLinkAction = () => {
     sendActivationLink && sendActivationLink().then(showEmailActivationToast);

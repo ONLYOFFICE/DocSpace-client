@@ -38,7 +38,6 @@ import {
 import {
   UploadPanel,
   VersionHistoryPanel,
-  NewFilesPanel,
   HotkeysPanel,
   InvitePanel,
   EditLinkPanel,
@@ -86,6 +85,7 @@ import { FillPDFDialog } from "../dialogs/FillPDFDialog";
 import { ShareCollectSelector } from "../ShareCollectSelector";
 import { saveToLocalStorage } from "SRC_DIR/pages/PortalSettings/utils";
 import { CreatedPDFFormDialog } from "../dialogs/CreatedPDFFormDialog";
+import { PasswordEntryDialog } from "../dialogs/PasswordEntryDialog";
 
 const Panels = (props) => {
   const {
@@ -101,7 +101,6 @@ const Panels = (props) => {
     lifetimeDialogVisible,
     downloadDialogVisible,
     emptyTrashDialogVisible,
-    newFilesPanelVisible,
     conflictResolveDialogVisible,
     convertDialogVisible,
     createMasterForm,
@@ -121,7 +120,6 @@ const Panels = (props) => {
     archiveDialogVisible,
     inviteQuotaWarningDialogVisible,
     preparationPortalDialogVisible,
-    changeUserTypeDialogVisible,
     restoreRoomDialogVisible,
     submitToGalleryDialogVisible,
     editGroupMembersDialogVisible,
@@ -149,6 +147,7 @@ const Panels = (props) => {
     resetQuotaItem,
     isShowWarningDialog,
     roomLogoCoverDialogVisible,
+    passwordEntryDialogDate,
   } = props;
 
   const [sharePDFForm, setSharePDFForm] = useState({
@@ -256,14 +255,11 @@ const Panels = (props) => {
     emptyTrashDialogVisible && <EmptyTrashDialog key="empty-trash-dialog" />,
     downloadDialogVisible && <DownloadDialog key="download-dialog" />,
 
-    newFilesPanelVisible && <NewFilesPanel key="new-files-panel" />,
     conflictResolveDialogVisible && (
       <ConflictResolveDialog key="conflict-resolve-dialog" />
     ),
     convertDialogVisible && <ConvertDialog key="convert-dialog" />,
-    changeUserTypeDialogVisible && (
-      <ChangeUserTypeDialog key="change-user-type-dialog" />
-    ),
+
     // createRoomDialogVisible && <CreateRoomDialog key="create-room-dialog" />,
     (createRoomConfirmDialogVisible || confirmDialogIsLoading) && (
       <CreateRoomConfirmDialog key="create-room-confirm-dialog" />
@@ -347,6 +343,13 @@ const Panels = (props) => {
     roomLogoCoverDialogVisible && (
       <RoomLogoCoverDialog key="room-logo-cover-dialog" />
     ),
+    passwordEntryDialogDate.visible && (
+      <PasswordEntryDialog
+        key="password-entry-dialog"
+        item={passwordEntryDialogDate.item}
+        isDownload={passwordEntryDialogDate.isDownload}
+      />
+    ),
   ];
 };
 
@@ -373,7 +376,6 @@ export default inject(
       lifetimeDialogVisible,
       downloadDialogVisible,
       emptyTrashDialogVisible,
-      newFilesPanelVisible,
       conflictResolveDialogVisible,
       convertDialogVisible,
       createRoomDialogVisible,
@@ -393,7 +395,6 @@ export default inject(
       setSelectFileFormRoomDialogVisible,
       invitePanelOptions,
       inviteQuotaWarningDialogVisible,
-      changeUserTypeDialogVisible,
       changeQuotaDialogVisible,
       submitToGalleryDialogVisible,
       editGroupMembersDialogVisible,
@@ -417,6 +418,7 @@ export default inject(
       setIsNewUserByCurrentUser,
       isNewUserByCurrentUser,
       isNewRoomByCurrentUser,
+      passwordEntryDialogDate,
     } = dialogsStore;
 
     const { preparationPortalDialogVisible } = backup;
@@ -465,7 +467,6 @@ export default inject(
       lifetimeDialogVisible,
       downloadDialogVisible,
       emptyTrashDialogVisible,
-      newFilesPanelVisible,
       conflictResolveDialogVisible,
       convertDialogVisible,
       createRoomDialogVisible,
@@ -484,7 +485,6 @@ export default inject(
       archiveDialogVisible,
       inviteQuotaWarningDialogVisible,
       confirmDialogIsLoading,
-      changeUserTypeDialogVisible,
       restoreRoomDialogVisible,
       submitToGalleryDialogVisible,
       editGroupMembersDialogVisible,
@@ -511,6 +511,7 @@ export default inject(
       setQuotaWarningDialogVisible,
       resetQuotaItem,
       isShowWarningDialog,
+      passwordEntryDialogDate,
     };
   },
 )(observer(Panels));

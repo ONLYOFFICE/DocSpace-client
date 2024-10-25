@@ -1,5 +1,4 @@
 {
-  "AccountsEmptyScreenText": "Podrobnosti o používateľoch nájdete tu",
   "AddedRoomTags": "Tagy pridané.",
   "Administration": "Administrácia",
   "AndMoreLabel": "a ďalšie <1>{{count}}</1>",
@@ -35,7 +34,6 @@
   "HistoryRoomCopied": "Miestnosť <1>«{{roomTitle}}»</1> skopírovaná",
   "HistoryRoomCreated": "Miestnosť <1>«{{roomTitle}}»</1> vytvorená",
   "HistoryThirdParty": "Zobrazenie histórie nie je možné pre verejné miestnosti s pripojenými úložiskami tretích strán",
-  "InfoBanner": "Zoznam pozvaných používateľov zahŕňa vlastníka a/alebo administrátorov tohto {{productName}} s plným prístupom do všetkých miestností. Vlastníkovi a/alebo administrátorovi nemožno prideliť iné prístupové práva. Po pridaní do miestnosti oni budú informovaní o všetkých zmenách.",
   "ItemsSelected": "Vybraté položky",
   "LastModifiedBy": "Naposledy upravené",
   "NoRecordsFound": "Nenašli sa žiadne záznamy",
@@ -58,5 +56,6 @@
   "SubmenuHistory": "História",
   "UserFileUpdated": "Súbor aktualizovaný.",
   "Users": "Používatelia",
+  "UsersEmptyScreenText": "Podrobnosti o používateľoch nájdete tu",
   "Versions": "Verzie"
 }

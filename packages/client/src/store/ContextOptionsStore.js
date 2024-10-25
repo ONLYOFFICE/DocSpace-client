@@ -36,6 +36,7 @@ import FolderLocationReactSvgUrl from "PUBLIC_DIR/images/folder.location.react.s
 import TickRoundedSvgUrl from "PUBLIC_DIR/images/tick.rounded.svg?url";
 import FavoritesReactSvgUrl from "PUBLIC_DIR/images/favorites.react.svg?url";
 import DownloadReactSvgUrl from "PUBLIC_DIR/images/download.react.svg?url";
+import CircleCrossSvgUrl from "PUBLIC_DIR/images/icons/16/circle.cross.svg?url";
 import DownloadAsReactSvgUrl from "PUBLIC_DIR/images/download-as.react.svg?url";
 import RenameReactSvgUrl from "PUBLIC_DIR/images/rename.react.svg?url";
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.svg?url";
@@ -64,12 +65,6 @@ import PluginActionsSvgUrl from "PUBLIC_DIR/images/plugin.actions.react.svg?url"
 import LeaveRoomSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import CatalogRoomsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.rooms.react.svg?url";
 import RemoveOutlineSvgUrl from "PUBLIC_DIR/images/remove.react.svg?url";
-import PersonAdminReactSvgUrl from "PUBLIC_DIR/images/person.admin.react.svg?url";
-import PersonManagerReactSvgUrl from "PUBLIC_DIR/images/person.manager.react.svg?url";
-import PersonDefaultReactSvgUrl from "PUBLIC_DIR/images/person.default.react.svg?url";
-import InviteAgainReactSvgUrl from "PUBLIC_DIR/images/invite.again.react.svg?url";
-import PersonUserReactSvgUrl from "PUBLIC_DIR/images/person.user.react.svg?url";
-import GroupReactSvgUrl from "PUBLIC_DIR/images/group.react.svg?url";
 import ActionsDocumentsReactSvgUrl from "PUBLIC_DIR/images/actions.documents.react.svg?url";
 import SpreadsheetReactSvgUrl from "PUBLIC_DIR/images/spreadsheet.react.svg?url";
 import ActionsPresentationReactSvgUrl from "PUBLIC_DIR/images/actions.presentation.react.svg?url";
@@ -81,6 +76,7 @@ import ActionsUploadReactSvgUrl from "PUBLIC_DIR/images/actions.upload.react.svg
 import PluginMoreReactSvgUrl from "PUBLIC_DIR/images/plugin.more.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
+import ReconnectReactSvgUrl from "PUBLIC_DIR/images/reconnect.svg?url";
 import ExportRoomIndexSvgUrl from "PUBLIC_DIR/images/icons/16/export-room-index.react.svg?url";
 
 import { getCategoryUrl } from "@docspace/client/src/helpers/utils";
@@ -92,12 +88,17 @@ import { isMobile, isTablet } from "react-device-detect";
 import config from "PACKAGE_FILE";
 import { toastr } from "@docspace/shared/components/toast";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
-import { isDesktop, trimSeparator } from "@docspace/shared/utils";
+import {
+  isDesktop,
+  isLockedSharedRoom,
+  trimSeparator,
+} from "@docspace/shared/utils";
 import { getDefaultAccessUser } from "@docspace/shared/utils/getDefaultAccessUser";
 import { copyShareLink } from "@docspace/shared/utils/copy";
 import {
   canShowManageLink,
   copyDocumentShareLink,
+  copyRoomShareLink,
 } from "@docspace/shared/components/share/Share.helpers";
 
 import { connectedCloudsTypeTitleTranslation } from "@docspace/client/src/helpers/filesUtils";
@@ -114,7 +115,11 @@ import {
   FileExtensions,
 } from "@docspace/shared/enums";
 import FilesFilter from "@docspace/shared/api/files/filter";
-import { getFileLink, getFolderLink } from "@docspace/shared/api/files";
+import {
+  getFileLink,
+  getFolderLink,
+  removeSharedFolder,
+} from "@docspace/shared/api/files";
 import { resendInvitesAgain } from "@docspace/shared/api/people";
 import { checkDialogsOpen } from "@docspace/shared/utils/checkDialogsOpen";
 
@@ -195,7 +200,18 @@ class ContextOptionsStore {
     this.clientLoadingStore = clientLoadingStore;
   }
 
-  onOpenFolder = (item) => {
+  onOpenFolder = async (item, t) => {
+    const { isExpiredLinkAsync } = this.filesActionsStore;
+
+    if (item.external && (item.expired || (await isExpiredLinkAsync(item))))
+      return toastr.error(
+        t("Common:RoomLinkExpired"),
+        t("Common:RoomNotAvailable"),
+      );
+
+    if (isLockedSharedRoom(item))
+      return this.dialogsStore.setPasswordEntryDialog(true, item);
+
     this.filesActionsStore.openLocationAction(item);
   };
 
@@ -504,13 +520,27 @@ class ContextOptionsStore {
   };
 
   onCreateAndCopySharedLink = async (item, t) => {
+    const { isExpiredLinkAsync } = this.filesActionsStore;
+
+    if (item.external && (item.expired || (await isExpiredLinkAsync(item))))
+      return toastr.error(
+        t("Common:RoomLinkExpired"),
+        t("Common:RoomNotAvailable"),
+      );
+
     const primaryLink = await this.filesStore.getPrimaryLink(item.id);
 
     if (primaryLink) {
-      copyShareLink(primaryLink.sharedTo.shareLink);
-      item.shared
-        ? toastr.success(t("Common:LinkSuccessfullyCopied"))
-        : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
+      copyRoomShareLink(
+        primaryLink,
+        t,
+        true,
+        this.getManageLinkOptions(item, true),
+      );
+      // copyShareLink(primaryLink.sharedTo.shareLink);
+      // item.shared
+      //   ? toastr.success(t("Common:LinkSuccessfullyCopied"))
+      //   : toastr.success(t("Files:LinkSuccessfullyCreatedAndCopied"));
 
       this.publicRoomStore.setExternalLink(primaryLink);
     }
@@ -533,10 +563,16 @@ class ContextOptionsStore {
     this.gotoDocEditor(true, item);
   };
 
-  gotoDocEditor = (preview = false, item) => {
+  gotoDocEditor = (
+    preview = false,
+    item,
+    shareKey = null,
+    editForm = false,
+    fillForm = false,
+  ) => {
     const { id } = item;
 
-    this.filesStore.openDocEditor(id, preview);
+    this.filesStore.openDocEditor(id, preview, shareKey, editForm, fillForm);
   };
 
   // isPwa = () => {
@@ -545,6 +581,27 @@ class ContextOptionsStore {
   //       window.matchMedia("(display-mode: " + displayMode + ")").matches,
   //   );
   // };
+
+  onRemoveSharedRooms = async (items) => {
+    if (!Array.isArray(items) || items.length === 0) return;
+
+    const { setGroupMenuBlocked } = this.filesActionsStore;
+    const { addActiveItems } = this.filesStore;
+    const { clearActiveOperations } = this.uploadDataStore;
+
+    const folderIds = items.map((item) => item.id);
+
+    try {
+      setGroupMenuBlocked(true);
+      addActiveItems(null, folderIds);
+      await removeSharedFolder(folderIds);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setGroupMenuBlocked(false);
+      clearActiveOperations([], folderIds);
+    }
+  };
 
   onClickDownload = (item, t) => {
     const { viewUrl, isFolder } = item;
@@ -906,6 +963,8 @@ class ContextOptionsStore {
     }
   };
 
+  onChangeRoomOwner = () => this.dialogsStore.setChangeRoomOwnerIsVisible(true);
+
   onLeaveRoom = () => {
     this.dialogsStore.setLeaveRoomDialogVisible(true);
   };
@@ -1053,7 +1112,9 @@ class ContextOptionsStore {
         label: t("PinToTop"),
         icon: PinReactSvgUrl,
         onClick: (e) => this.onClickPin(e, item.id, t),
-        disabled: this.publicRoomStore.isPublicRoom,
+        disabled:
+          this.publicRoomStore.isPublicRoom ||
+          Boolean(item.external && item.expired),
         "data-action": "pin",
         action: "pin",
       },
@@ -1063,7 +1124,9 @@ class ContextOptionsStore {
         label: t("Unpin"),
         icon: UnpinReactSvgUrl,
         onClick: (e) => this.onClickPin(e, item.id, t),
-        disabled: this.publicRoomStore.isPublicRoom,
+        disabled:
+          this.publicRoomStore.isPublicRoom ||
+          Boolean(item.external && item.expired),
         "data-action": "unpin",
         action: "unpin",
       },
@@ -1216,18 +1279,29 @@ class ContextOptionsStore {
     return this.getFilesContextOptions(item, t, false, true);
   };
 
-  getManageLinkOptions = (item) => {
+  getManageLinkOptions = (item, isRoom = false) => {
+    const openTab = () => {
+      if (isRoom) return this.infoPanelStore.openMembersTab();
+
+      this.infoPanelStore.openShareTab();
+    };
+
+    const infoView = isRoom
+      ? this.infoPanelStore.roomsView
+      : this.infoPanelStore.fileView;
+
     return {
       canShowLink: canShowManageLink(
         item,
         this.filesStore.bufferSelection,
         this.infoPanelStore.isVisible,
-        this.infoPanelStore.fileView,
+        infoView,
+        isRoom,
       ),
       onClickLink: () => {
         this.filesStore.setSelection([]);
         this.filesStore.setBufferSelection(item);
-        this.infoPanelStore.openShareTab();
+        openTab();
       },
     };
   };
@@ -1452,8 +1526,8 @@ class ContextOptionsStore {
         key: "open",
         label: t("Open"),
         icon: FolderReactSvgUrl,
-        onClick: () => this.onOpenFolder(item),
-        disabled: false,
+        onClick: () => this.onOpenFolder(item, t),
+        disabled: Boolean(item.external && item.expired),
       },
       {
         id: "option_fill-form",
@@ -1593,14 +1667,16 @@ class ContextOptionsStore {
         label: t("Files:CopyLink"),
         icon: InvitationLinkReactSvgUrl,
         onClick: () => this.onCopyLink(item, t),
-        disabled: isPublicRoomType && hasShareLinkRights,
+        disabled:
+          (isPublicRoomType && hasShareLinkRights) ||
+          Boolean(item.external && (item.expired || item.passwordProtected)),
       },
       {
         id: "option_copy-external-link",
         key: "external-link",
         label: t("Files:CopySharedLink"),
         icon: TabletLinkReactSvgUrl,
-        disabled: !hasShareLinkRights,
+        disabled: !hasShareLinkRights || Boolean(item.external && item.expired),
         onClick: () => this.onCreateAndCopySharedLink(item, t),
         // onLoad: () => this.onLoadLinks(t, item),
       },
@@ -1610,7 +1686,7 @@ class ContextOptionsStore {
         label: t("Common:Info"),
         icon: InfoOutlineReactSvgUrl,
         onClick: () => this.onShowInfoPanel(item),
-        disabled: isPublicRoom,
+        disabled: isPublicRoom || Boolean(item.external && item.expired),
       },
       ...pinOptions,
       ...muteOptions,
@@ -1732,8 +1808,23 @@ class ContextOptionsStore {
         key: "download",
         label: t("Common:Download"),
         icon: DownloadReactSvgUrl,
-        onClick: () => this.onClickDownload(item, t),
-        disabled: !item.security?.Download,
+        onClick: () => {
+          if (isLockedSharedRoom(item))
+            return this.dialogsStore.setPasswordEntryDialog(true, item, true);
+
+          this.onClickDownload(item, t);
+        },
+        disabled:
+          (!item.security?.Download && !isLockedSharedRoom(item)) ||
+          Boolean(item.external && item.expired),
+      },
+      {
+        id: "option_remove-shared-room",
+        key: "remove-shared-room",
+        label: t("Files:RemoveFromList"),
+        icon: CircleCrossSvgUrl,
+        onClick: () => this.onRemoveSharedRooms([item]),
+        disabled: !item.external,
       },
       {
         id: "option_download-as",
@@ -1782,6 +1873,14 @@ class ContextOptionsStore {
         disabled: false,
       },
       {
+        id: "option_change-room-owner",
+        key: "change-room-owner",
+        label: t("Files:ChangeTheRoomOwner"),
+        icon: ReconnectReactSvgUrl,
+        onClick: this.onChangeRoomOwner,
+        disabled: false,
+      },
+      {
         id: "option_archive-room",
         key: "archive-room",
         label: t("MoveToArchive"),
@@ -1797,7 +1896,8 @@ class ContextOptionsStore {
         label: t("LeaveTheRoom"),
         icon: LeaveRoomSvgUrl,
         onClick: this.onLeaveRoom,
-        disabled: isArchive || !item.inRoom || isPublicRoom,
+        disabled:
+          isArchive || !item.inRoom || isPublicRoom || Boolean(item.external),
       },
       {
         id: "option_unarchive-room",
@@ -2125,45 +2225,6 @@ class ContextOptionsStore {
     return newOptions;
   };
 
-  /**
-   * @param {EmployeeType} userType
-   * @returns {void}
-   */
-  inviteUser = (userType) => {
-    const { setQuotaWarningDialogVisible, setInvitePanelOptions } =
-      this.dialogsStore;
-
-    if (this.currentQuotaStore.showWarningDialog(userType)) {
-      setQuotaWarningDialogVisible(true);
-      return;
-    }
-
-    setInvitePanelOptions({
-      visible: true,
-      roomId: -1,
-      hideSelector: true,
-      defaultAccess: userType,
-    });
-  };
-
-  onInvite = (e) => {
-    const type = e.item["data-type"];
-    this.inviteUser(type);
-  };
-
-  onInviteAgain = (t) => {
-    resendInvitesAgain()
-      .then(() =>
-        toastr.success(t("PeopleTranslations:SuccessSentMultipleInvitatios")),
-      )
-      .catch((err) => toastr.error(err));
-  };
-
-  onCreateGroup = () => {
-    const event = new Event(Events.GROUP_CREATE);
-    window.dispatchEvent(event);
-  };
-
   onCreateRoom = (item, fromItem) => {
     if (this.currentQuotaStore.isWarningRoomsDialog) {
       this.dialogsStore.setQuotaWarningDialogVisible(true);
@@ -2351,9 +2412,6 @@ class ContextOptionsStore {
       this.selectedFolderStore;
     const { isPublicRoom } = this.publicRoomStore;
 
-    const isAccountsPage =
-      window?.DocSpace?.location.pathname.includes("/accounts");
-
     const stateCanCreate = window?.DocSpace?.location?.state?.canCreate;
     const isSettingsPage =
       window?.DocSpace?.location.pathname.includes("/settings");
@@ -2364,107 +2422,19 @@ class ContextOptionsStore {
         ? stateCanCreate
         : security?.Create;
 
-    const groupId = new URLSearchParams(window.location.search).get("group");
-
-    const isInsideGroup = !!groupId;
-
-    const canCreate =
-      (currentCanCreate || isAccountsPage) &&
-      !isSettingsPage &&
-      !isPublicRoom &&
-      !isInsideGroup;
+    const canCreate = currentCanCreate && !isSettingsPage && !isPublicRoom;
 
     const someDialogIsOpen = checkDialogsOpen();
 
     if (!canCreate || (isSectionMenu && (isMobile || someDialogIsOpen)))
       return null;
 
-    const isOwner = this.userStore.user?.isOwner;
-    const isRoomAdmin = this.userStore.user?.isRoomAdmin;
     const { isRoomsFolder, isPrivacyFolder } = this.treeFoldersStore;
     const { mainButtonItemsList } = this.pluginStore;
     const { enablePlugins } = this.settingsStore;
     const isFormRoomType =
       roomType === RoomsType.FormRoom ||
       (parentRoomType === FolderType.FormRoom && isFolder);
-
-    const accountsUserOptions = [
-      isOwner && {
-        id: "accounts-add_administrator",
-        className: "main-button_drop-down",
-        icon: PersonAdminReactSvgUrl,
-        label: t("Common:PortalAdmin", {
-          productName: t("Common:ProductName"),
-        }),
-        onClick: this.onInvite,
-        "data-type": EmployeeType.Admin,
-        key: "administrator",
-      },
-      {
-        id: "accounts-add_manager",
-        className: "main-button_drop-down",
-        icon: PersonManagerReactSvgUrl,
-        label: t("Common:RoomAdmin"),
-        onClick: this.onInvite,
-        "data-type": EmployeeType.User,
-        key: "manager",
-      },
-      {
-        id: "accounts-add_collaborator",
-        className: "main-button_drop-down",
-        icon: PersonDefaultReactSvgUrl,
-        label: t("Common:PowerUser"),
-        onClick: this.onInvite,
-        "data-type": EmployeeType.Collaborator,
-        key: "collaborator",
-      },
-      {
-        id: "accounts-add_user",
-        className: "main-button_drop-down",
-        icon: PersonDefaultReactSvgUrl,
-        label: t("Common:User"),
-        onClick: this.onInvite,
-        "data-type": EmployeeType.Guest,
-        key: "user",
-      },
-      {
-        key: "separator",
-        isSeparator: true,
-      },
-      {
-        id: "accounts-add_invite-again",
-        className: "main-button_drop-down",
-        icon: InviteAgainReactSvgUrl,
-        label: t("People:LblInviteAgain"),
-        onClick: () => this.onInviteAgain(t),
-        "data-action": "invite-again",
-        key: "invite-again",
-      },
-    ];
-
-    const accountsFullOptions = [
-      {
-        id: "actions_invite_user",
-        className: "main-button_drop-down",
-        icon: PersonUserReactSvgUrl,
-        label: t("Common:Invite"),
-        key: "new-user",
-        items: accountsUserOptions,
-      },
-      {
-        id: "create_group",
-        className: "main-button_drop-down",
-        icon: GroupReactSvgUrl,
-        label: t("PeopleTranslations:CreateGroup"),
-        onClick: this.onCreateGroup,
-        action: "group",
-        key: "group",
-      },
-    ];
-
-    if (isAccountsPage) {
-      return isRoomAdmin ? accountsUserOptions : accountsFullOptions;
-    }
 
     const createNewDoc = {
       id: "personal_new-document",

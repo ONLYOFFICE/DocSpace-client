@@ -38,6 +38,7 @@ import {
   sortInDisplayOrder,
 } from "../../utils/common";
 
+import { TNewFiles } from "../rooms/types";
 import { request } from "../client";
 
 import FilesFilter from "./filter";
@@ -120,10 +121,18 @@ export async function getReferenceData(data: TGetReferenceData) {
 export async function getFolderInfo(
   folderId: number | string,
   skipRedirect = false,
+  share?: string,
 ) {
+  const headers = share
+    ? {
+        "Request-Token": share,
+      }
+    : undefined;
+
   const options: AxiosRequestConfig = {
     method: "get",
     url: `/files/folder/${folderId}`,
+    headers,
   };
 
   const res = (await request(options, skipRedirect)) as TFolder;
@@ -145,6 +154,7 @@ export async function getFolder(
   folderId: string | number,
   filter: FilesFilter,
   signal?: AbortSignal,
+  share?: string,
 ) {
   let params = folderId;
 
@@ -158,10 +168,17 @@ export async function getFolder(
     params = `${folderId}?${filter.toApiUrlParams()}`;
   }
 
+  const headers = share
+    ? {
+        "Request-Token": share,
+      }
+    : undefined;
+
   const options: AxiosRequestConfig = {
     method: "get",
     url: `/files/${params}`,
     signal,
+    headers,
   };
 
   const skipRedirect = true;
@@ -606,11 +623,16 @@ export async function removeFiles(
 export async function setFileOwner(userId: string, folderIds: number[]) {
   const data = { userId, folderIds };
 
-  const res = (await request({
-    method: "post",
-    url: "/files/owner",
-    data,
-  })) as TFolder[];
+  const skipRedirect = true;
+
+  const res = (await request(
+    {
+      method: "post",
+      url: "/files/owner",
+      data,
+    },
+    skipRedirect,
+  )) as TFolder[];
 
   return res;
 }
@@ -777,11 +799,20 @@ export async function markAsRead(folderIds: number[], fileIds: number[]) {
   return res;
 }
 
-export async function getNewFiles(folderId: number) {
+export async function getNewFiles(folderId: number | string) {
   const res = (await request({
     method: "get",
     url: `/files/${folderId}/news`,
-  })) as TFile[];
+  })) as TNewFiles[];
+
+  return res;
+}
+
+export async function getNewFolderFiles(folderId: number | string) {
+  const res = (await request({
+    method: "get",
+    url: `/files/rooms/${folderId}/news`,
+  })) as TNewFiles[];
 
   return res;
 }
@@ -989,7 +1020,12 @@ export function saveThirdParty(
     providerId,
     isRoomsStorage,
   };
-  return request({ method: "post", url: "files/thirdparty", data });
+  const skipRedirect = true;
+
+  return request(
+    { method: "post", url: "files/thirdparty", data },
+    skipRedirect,
+  );
 }
 
 // TODO: Need update res type
@@ -1487,4 +1523,14 @@ export async function checkIsPDFForm(fileId: string | number) {
     method: "get",
     url: `/files/file/${fileId}/isformpdf`,
   }) as Promise<boolean>;
+}
+
+export async function removeSharedFolder(folderIds: Array<string | number>) {
+  return request({
+    method: "delete",
+    url: `/files/recent`,
+    data: {
+      folderIds,
+    },
+  });
 }

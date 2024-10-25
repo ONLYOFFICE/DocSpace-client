@@ -49,7 +49,7 @@ const HotkeysPanel = ({
   visible,
   setHotkeyPanelVisible,
   t,
-  theme,
+  theme = Base,
   tReady,
   isVisitor,
 }) => {
@@ -165,8 +165,6 @@ const HotkeysPanel = ({
     </ModalDialog>
   );
 };
-
-HotkeysPanel.defaultProps = { theme: Base };
 
 export default inject(({ settingsStore, publicRoomStore, userStore }) => {
   const { hotkeyPanelVisible, setHotkeyPanelVisible, theme } = settingsStore;

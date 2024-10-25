@@ -110,6 +110,7 @@ const RoomLogoCoverDialog = ({
 
   const [height, setHeight] = React.useState(`${defaultHeight}px`);
   const [view, setView] = React.useState(isDesktop() ? "desktop" : "tablet");
+  const [openColorPicker, setOpenColorPicker] = React.useState<boolean>(false);
   const contentRef = React.useRef();
 
   const recalculateHeight = React.useCallback(() => {
@@ -173,6 +174,7 @@ const RoomLogoCoverDialog = ({
   }, [getCovers]);
 
   const onCloseRoomLogo = (withSelection = true) => {
+    if (openColorPicker) return;
     setRoomCoverDialogProps({
       ...roomCoverDialogProps,
       withoutIcon: true,
@@ -211,6 +213,8 @@ const RoomLogoCoverDialog = ({
           forwardedRef={contentRef}
           scrollHeight={scrollH}
           covers={covers}
+          openColorPicker={openColorPicker}
+          setOpenColorPicker={setOpenColorPicker}
         />
       </ModalDialog.Body>
 

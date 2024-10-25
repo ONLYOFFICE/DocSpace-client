@@ -173,6 +173,7 @@
   "NoSessionsHere": "No other sessions here yet",
   "NoEmail": "NO EMAIL",
   "NoEventsHereYet": "No events here yet",
+  "NotAvailableUnderLicense": "Not available under this license",
   "NoUsersInBackup": "No users found. Try again or upload other backup files.",
   "NumberOfActiveEmployees": "Number of active employees: {{count}}",
   "NumberOfAttempts": "Number of attempts",

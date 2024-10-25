@@ -139,7 +139,7 @@ const RoomIcon = ({
   );
 
   const prefetchImage = React.useCallback(() => {
-    if (!imgSrc) return;
+    if (!imgSrc || typeof imgSrc !== "string") return;
     setCorrectImage(true);
     const img = new Image();
 
@@ -153,6 +153,8 @@ const RoomIcon = ({
   React.useEffect(() => {
     prefetchImage();
   }, [prefetchImage]);
+
+  const isBigSize = size === "96px";
 
   const coverSize = size.replace("px", "") * 0.625;
 
@@ -218,12 +220,12 @@ const RoomIcon = ({
         </div>
       )}
 
-      {badgeUrl && (
+      {badgeUrl && !withEditing && (
         <div className="room-icon_badge">
           <IconButton
             onClick={onBadgeClick}
             iconName={badgeUrl}
-            size={12}
+            size={isBigSize ? 28 : 12}
             className="room-icon-button"
             isFill
           />

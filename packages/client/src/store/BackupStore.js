@@ -539,7 +539,7 @@ class BackupStore {
 
           if (error.length > 0 && progress !== 100) {
             clearInterval(timerId);
-            this.timerId && toastr.error(t("BackupCreatedError"));
+            this.timerId && toastr.error(error);
             this.timerId = null;
             //this.clearLocalStorage();
             this.downloadingProgress = 100;
@@ -577,7 +577,7 @@ class BackupStore {
         clearInterval(this.timerId);
         // this.clearLocalStorage();
         this.downloadingProgress = 100;
-        this.timerId && toastr.error(t("BackupCreatedError"));
+        this.timerId && toastr.error(e);
         this.timerId = null;
       }
     }, 1000);

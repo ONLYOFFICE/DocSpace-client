@@ -322,7 +322,7 @@ const SetRoomParams = ({
     <ItemIcon
       id={selection?.id}
       fileExst={selection?.fileExst}
-      isRoom={selection?.isRoom}
+      isRoom={true}
       title={previewTitle}
       className="room-params-icon"
       logo={
@@ -442,6 +442,7 @@ const SetRoomParams = ({
 
       {isEdit && (
         <ChangeRoomOwner
+          canChangeOwner={roomParams.canChangeRoomOwner}
           roomOwner={roomParams.roomOwner}
           onOwnerChange={onOwnerChange}
         />

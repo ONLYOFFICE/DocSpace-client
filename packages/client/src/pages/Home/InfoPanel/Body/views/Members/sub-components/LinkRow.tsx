@@ -24,23 +24,27 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import moment from "moment";
+import { useState } from "react";
+import copy from "copy-to-clipboard";
 import { observer, inject } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import copy from "copy-to-clipboard";
-import moment from "moment";
-import LinkRowComponent from "@docspace/shared/components/share/sub-components/LinkRow";
-import { toastr } from "@docspace/shared/components/toast";
+
 import SettingsReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.settings.react.svg?url";
 import CodeReactSvgUrl from "PUBLIC_DIR/images/code.react.svg?url";
 import CopyToReactSvgUrl from "PUBLIC_DIR/images/copyTo.react.svg?url";
 import OutlineReactSvgUrl from "PUBLIC_DIR/images/outline-true.react.svg?url";
 import LockedReactSvgUrl from "PUBLIC_DIR/images/icons/16/locked.react.svg?url";
 import TrashReactSvgUrl from "PUBLIC_DIR/images/trash.react.svg?url";
-import { RoomsType } from "@docspace/shared/enums";
-import { TTranslation } from "@docspace/shared/types";
-import { TFileLink } from "@docspace/shared/api/files/types";
-import { useState } from "react";
-import { TOption } from "@docspace/shared/components/combobox";
+
+import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
+import { toastr } from "@docspace/shared/components/toast";
+import { copyRoomShareLink } from "@docspace/shared/components/share/Share.helpers";
+import LinkRowComponent from "@docspace/shared/components/share/sub-components/LinkRow";
+
+import type { Nullable, TTranslation } from "@docspace/shared/types";
+import type { TFileLink } from "@docspace/shared/api/files/types";
+import type { TOption } from "@docspace/shared/components/combobox";
 
 type LinkRowProps = {
   t: TTranslation;
@@ -52,6 +56,7 @@ type LinkRowProps = {
     link: TFileLink;
     isPublic?: boolean;
     isFormRoom?: boolean;
+    isCustomRoom?: boolean;
   }) => void;
   setEditLinkPanelIsVisible: (value: boolean) => void;
   setDeleteLinkDialogVisible: (value: boolean) => void;
@@ -65,6 +70,13 @@ type LinkRowProps = {
   isPublicRoomType: boolean;
   isFormRoom: boolean;
   isPrimaryLink: boolean;
+  isCustomRoom: boolean;
+  setExternalLink: (link: TFileLink) => void;
+  editExternalLink: (
+    roomId: string | number,
+    link: TFileLink,
+  ) => Promise<TFileLink>;
+  deleteExternalLink: (link: Nullable<TFileLink>, linkId: string) => void;
 };
 
 const LinkRow = (props: LinkRowProps) => {
@@ -80,12 +92,14 @@ const LinkRow = (props: LinkRowProps) => {
     setIsScrollLocked,
     isPublicRoomType,
     isFormRoom,
+    isCustomRoom,
     isPrimaryLink,
     editExternalLink,
     setExternalLink,
+    deleteExternalLink,
   } = props;
 
-  const { shareLink, password, isExpired, primary } = link.sharedTo;
+  const { password, isExpired, primary } = link.sharedTo;
 
   const isLocked = !!password;
   const isDisabled = isExpired;
@@ -122,14 +136,19 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const onDeleteLink = () => {
-    setLinkParams({ link, roomId, isPublic: isPublicRoomType, isFormRoom });
+    setLinkParams({
+      link,
+      roomId,
+      isPublic: isPublicRoomType,
+      isFormRoom,
+      isCustomRoom,
+    });
     setDeleteLinkDialogVisible(true);
     onCloseContextMenu();
   };
 
   const onCopyExternalLink = () => {
-    copy(shareLink);
-    toastr.success(t("Common:LinkSuccessfullyCopied"));
+    copyRoomShareLink(link, t);
     onCloseContextMenu();
   };
 
@@ -145,28 +164,27 @@ const LinkRow = (props: LinkRowProps) => {
         icon: SettingsReactSvgUrl,
         onClick: onEditLink,
       },
-      !isDisabled && {
+      {
         key: "copy-link-settings-key",
         label: t("Files:CopySharedLink"),
         icon: CopyToReactSvgUrl,
         onClick: onCopyExternalLink,
+        disabled: isDisabled,
       },
-
-      !isDisabled &&
-        isLocked && {
-          key: "copy-link-password-key",
-          label: t("Files:CopyLinkPassword"),
-          icon: LockedReactSvgUrl,
-          onClick: onCopyPassword,
-        },
-
-      !isDisabled && {
+      {
+        key: "copy-link-password-key",
+        label: t("Files:CopyLinkPassword"),
+        icon: LockedReactSvgUrl,
+        onClick: onCopyPassword,
+        disabled: isDisabled || !isLocked,
+      },
+      {
         key: "embedding-settings-key",
         label: t("Files:Embed"),
         icon: CodeReactSvgUrl,
         onClick: onEmbeddingClick,
+        disabled: isDisabled,
       },
-
       {
         key: "delete-link-separator",
         isSeparator: true,
@@ -185,7 +203,9 @@ const LinkRow = (props: LinkRowProps) => {
   };
 
   const editExternalLinkAction = (newLink: TFileLink) => {
-    setLoadingLinks([newLink.sharedTo.id]);
+    const timerId = setTimeout(() => {
+      setLoadingLinks([newLink.sharedTo.id]);
+    }, 100);
 
     editExternalLink(roomId, newLink)
       .then((linkData: TFileLink) => {
@@ -197,8 +217,24 @@ const LinkRow = (props: LinkRowProps) => {
           isFormRoom,
         });
 
-        copy(link?.sharedTo?.shareLink);
-        toastr.success(t("Files:LinkEditedSuccessfully"));
+        if (linkData) {
+          copyRoomShareLink(linkData, t);
+        }
+      })
+      .catch((err: Error) => toastr.error(err?.message))
+      .finally(() => {
+        clearTimeout(timerId);
+        setLoadingLinks([]);
+      });
+  };
+  const removedExpiredLink = (removeLink: TFileLink) => {
+    setLoadingLinks([removeLink.sharedTo.id]);
+
+    editExternalLink(roomId, { ...removeLink, access: ShareAccessRights.None })
+      .then(() => {
+        deleteExternalLink(null, removeLink.sharedTo.id);
+
+        toastr.success(t("Files:LinkDeletedSuccessfully"));
       })
       .catch((err: Error) => toastr.error(err?.message))
       .finally(() => setLoadingLinks([]));
@@ -228,11 +264,13 @@ const LinkRow = (props: LinkRowProps) => {
       getData={getData}
       onOpenContextMenu={onOpenContextMenu}
       onCloseContextMenu={onCloseContextMenu}
+      removedExpiredLink={removedExpiredLink}
       isRoomsLink
       isPrimaryLink={isPrimaryLink}
       onAccessRightsSelect={onAccessRightsSelect}
       changeExpirationOption={changeExpirationOption}
       isArchiveFolder={isArchiveFolder}
+      isFormRoom={isFormRoom}
     />
   );
 };
@@ -258,7 +296,8 @@ export default inject<TStore>(
 
     const { id, roomType } = infoPanelSelection!;
 
-    const { editExternalLink, setExternalLink } = publicRoomStore;
+    const { editExternalLink, setExternalLink, deleteExternalLink } =
+      publicRoomStore;
 
     return {
       setLinkParams,
@@ -271,8 +310,10 @@ export default inject<TStore>(
       isPublicRoomType:
         roomType === RoomsType.PublicRoom || roomType === RoomsType.FormRoom,
       isFormRoom: roomType === RoomsType.FormRoom,
+      isCustomRoom: roomType === RoomsType.CustomRoom,
       editExternalLink,
       setExternalLink,
+      deleteExternalLink,
     };
   },
 )(

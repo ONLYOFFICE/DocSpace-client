@@ -81,6 +81,7 @@ async function Page() {
             wizardToken={objectSettings?.wizardToken}
             passwordHash={objectSettings?.passwordHash}
             documentationEmail={objectSettings?.documentationEmail}
+            isAmi={objectSettings?.isAmi}
           />
         </FormWrapper>
       </>

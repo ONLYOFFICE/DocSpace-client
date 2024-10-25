@@ -28,9 +28,9 @@ import React from "react";
 
 import styled, { css } from "styled-components";
 import { tablet } from "@docspace/shared/utils";
-
+import { TColorScheme } from "@docspace/shared/themes";
 import hexRgb from "hex-rgb";
-import { ICover, SelectIconProps } from "../RoomLogoCoverDialog.types";
+import { ILogo, SelectIconProps } from "../RoomLogoCoverDialog.types";
 
 interface WithoutIconProps {
   isSelected?: boolean;
@@ -69,7 +69,10 @@ const StyledWithoutIcon = styled.div<WithoutIconProps>`
     `}
 `;
 
-const StyledIconContainer = styled.div`
+const StyledIconContainer = styled.div<{
+  $currentColorScheme?: TColorScheme;
+  isSelected: boolean;
+}>`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -83,6 +86,12 @@ const StyledIconContainer = styled.div`
     height: 40px;
   }
   border-radius: 4px;
+
+  svg {
+    path {
+      fill: ${(props) => props.theme.logoCover.iconColor};
+    }
+  }
 
   &:hover {
     cursor: pointer;
@@ -131,7 +140,7 @@ export const SelectIcon = ({
 }: SelectIconProps) => {
   const toggleWithoutIcon = () => setWithoutIcon(!withoutIcon);
 
-  const onSelectIcon = (icon: ICover) => {
+  const onSelectIcon = (icon: ILogo | string | null) => {
     setIcon(icon);
   };
 

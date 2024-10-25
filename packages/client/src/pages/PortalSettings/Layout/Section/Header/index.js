@@ -92,11 +92,6 @@ export const HeaderContainer = styled.div`
       ${({ theme }) =>
         theme.interfaceDirection === "rtl" && "transform: scaleX(-1);"}
     }
-
-    @media ${tablet} {
-      padding-block: 8px;
-      padding-inline: 8px 0;
-    }
   }
 
   @media ${tablet} {
@@ -126,40 +121,25 @@ export const HeaderContainer = styled.div`
 `;
 
 export const StyledContainer = styled.div`
-  .group-button-menu-container {
-    height: 69px;
-    position: absolute;
-    z-index: 201;
-    top: 0px;
-    left: 0px;
-    width: 100%;
+  .table-container_group-menu {
+    margin-block: 0;
+    margin-inline: -20px 0;
+    -webkit-tap-highlight-color: ${globalColors.tapHighlight};
 
-    .table-container_group-menu {
-      border-image-slice: 0;
-      border-image-source: none;
-      border-bottom: 1px solid
-        ${(props) => props.theme.filesSection.tableView.row.borderColor};
-      padding: 0px;
-    }
-
-    .table-container_group-menu-separator {
-      margin: 0 16px;
-    }
-
-    ${(props) =>
-      props.viewAs === "table"
-        ? css`
-            margin: 0px -20px;
-            width: calc(100% + 40px);
-          `
-        : css`
-            margin: 0px -20px;
-            width: calc(100% + 40px);
-          `}
+    width: calc(100% + 40px);
+    height: 68px;
 
     @media ${tablet} {
-      height: 60px;
-      margin: 0 -16px;
+      height: 61px;
+      margin-block: 0;
+      margin-inline: -16px 0;
+      width: calc(100% + 32px);
+    }
+
+    @media ${mobile} {
+      height: 52px !important;
+      margin-block: 0;
+      margin-inline: -16px 0;
       width: calc(100% + 32px);
     }
 
@@ -171,18 +151,23 @@ export const StyledContainer = styled.div`
 
 const SectionHeaderContent = (props) => {
   const {
-    isBrandingAndCustomizationAvailable,
+    isCustomizationAvailable,
     isRestoreAndAutoBackupAvailable,
     tReady,
     setIsLoadedSectionHeader,
     isSSOAvailable,
     workspace,
+    standalone,
+    getHeaderMenuItems,
+    setSelections,
     organizationName,
   } = props;
 
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
+
+  const isOAuth = location.pathname.includes("oauth");
 
   const isSessionsPage = location.pathname.includes("/sessions");
 
@@ -196,15 +181,15 @@ const SectionHeaderContent = (props) => {
   const isAvailableSettings = (key) => {
     switch (key) {
       case "DNSSettings":
-        return isBrandingAndCustomizationAvailable;
+        return isCustomizationAvailable;
       case "RestoreBackup":
         return isRestoreAndAutoBackupAvailable;
       case "WhiteLabel":
-        return isBrandingAndCustomizationAvailable;
+        return isCustomizationAvailable || standalone;
       case "CompanyInfoSettings":
-        return isBrandingAndCustomizationAvailable;
+        return isCustomizationAvailable || standalone;
       case "AdditionalResources":
-        return isBrandingAndCustomizationAvailable;
+        return isCustomizationAvailable || standalone;
       case "SingleSignOn:ServiceProviderSettings":
       case "SingleSignOn:SpMetadata":
         return isSSOAvailable;
@@ -290,10 +275,13 @@ const SectionHeaderContent = (props) => {
   };
 
   const onCheck = (checked) => {
-    const { setupSetSelected, peopleSetSelected } = props;
-    isSessionsPage
-      ? peopleSetSelected(checked ? "all" : "close", isSessionsPage)
-      : setupSetSelected(checked ? "all" : "close");
+    if (isOAuth) {
+      setSelections(checked);
+      return;
+    }
+
+    const { setSelected } = props;
+    setSelected(checked ? "all" : "close");
   };
 
   const onSelectAll = () => {
@@ -376,22 +364,23 @@ const SectionHeaderContent = (props) => {
     </>
   );
 
-  const onClickSessions = () => {
-    setItems(peopleSelection[0]);
-    setUserSessionPanelVisible(true);
-  };
+  /* HEADER LOGIC FOR ACTIVE SESSIONS
+    const onClickSessions = () => {
+      setItems(peopleSelection[0]);
+      setUserSessionPanelVisible(true);
+    };
 
-  const onClickLogout = () => {
-    setDisplayName(peopleSelection[0].displayName);
-    setLogoutAllDialogVisible(true);
-  };
+    const onClickLogout = () => {
+      setDisplayName(peopleSelection[0].displayName);
+      setLogoutAllDialogVisible(true);
+    };
 
-  const onClickDisable = () => {
-    setDisableDialogVisible(true);
-  };
+    const onClickDisable = () => {
+      setDisableDialogVisible(true);
+    };
 
-  const headerMenu = isSessionsPage
-    ? [
+    const headerMenu = isSessionsPage
+      ? [
         {
           id: "sessions",
           key: "Sessions",
@@ -415,11 +404,14 @@ const SectionHeaderContent = (props) => {
           iconUrl: RemoveSvgUrl,
           disabled: isMe,
         },
-      ]
+      ]*/
+
+  const headerMenu = isOAuth
+    ? getHeaderMenuItems(t, true)
     : [
         {
           label: t("Common:Delete"),
-          disabled: !setupSelection || !setupSelection.length > 0,
+          disabled: !selection || !selection.length > 0,
           onClick: removeAdmins,
           iconUrl: DeleteReactSvgUrl,
         },
@@ -455,17 +447,16 @@ const SectionHeaderContent = (props) => {
   return (
     <StyledContainer isHeaderVisible={isHeaderVisible}>
       {isHeaderVisible ? (
-        <div className="group-button-menu-container">
-          <TableGroupMenu
-            checkboxOptions={menuItems}
-            onChange={onCheck}
-            isChecked={isHeaderChecked}
-            isIndeterminate={isHeaderIndeterminate}
-            headerMenu={headerMenu}
-            withComboBox
-            withoutInfoPanelToggler={withoutInfoPanelToggler}
-          />
-        </div>
+        <TableGroupMenu
+          checkboxOptions={menuItems}
+          onChange={onCheck}
+          isChecked={isHeaderChecked}
+          isIndeterminate={isHeaderIndeterminate}
+          headerMenu={headerMenu}
+          withComboBox={false}
+          withoutInfoPanelToggler
+          isMobileView={false}
+        />
       ) : !isLoadedSectionHeader ? (
         <LoaderSectionHeader />
       ) : (
@@ -528,20 +519,20 @@ export default inject(
     currentQuotaStore,
     setup,
     common,
-    peopleStore,
-    dialogsStore,
-    settingsStore,
     importAccountsStore,
+    settingsStore,
+    oauthStore,
+     peopleStore,
+     dialogsStore,
   }) => {
     const { addUsers, removeAdmins } = setup.headerAction;
     const { organizationName } = settingsStore;
-    const { workspace } = importAccountsStore;
     const { admins, selectorIsOpen } = setup.security.accessRight;
     const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
     const { setUserSessionPanelVisible } = dialogsStore;
 
     const {
-      isBrandingAndCustomizationAvailable,
+      isCustomizationAvailable,
       isRestoreAndAutoBackupAvailable,
       isSSOAvailable,
     } = currentQuotaStore;
@@ -564,6 +555,9 @@ export default inject(
       selection: setupSelection,
     } = setup.selectionStore;
 
+    const { workspace } = importAccountsStore;
+    const { standalone } = settingsStore;
+
     const {
       isHeaderIndeterminate: isPeopleHeaderIndeterminate,
       isHeaderChecked: isPeopleHeaderChecked,
@@ -577,12 +571,17 @@ export default inject(
       isMe,
     } = peopleStore.selectionStore;
 
+    const { getHeaderMenuItems } = oauthStore;
     return {
       addUsers,
       removeAdmins,
       selected,
       setupSetSelected,
       admins,
+      isHeaderIndeterminate:
+        isHeaderIndeterminate || oauthStore.isHeaderIndeterminate,
+      isHeaderChecked: isHeaderChecked || oauthStore.isHeaderChecked,
+      isHeaderVisible: isHeaderVisible || oauthStore.isHeaderVisible,
       isSetupHeaderIndeterminate,
       isSetupHeaderChecked,
       isSetupHeaderVisible,
@@ -593,7 +592,7 @@ export default inject(
       setupSelection,
       isLoadedSectionHeader,
       setIsLoadedSectionHeader,
-      isBrandingAndCustomizationAvailable,
+      isCustomizationAvailable,
       isRestoreAndAutoBackupAvailable,
       isSSOAvailable,
       peopleSetSelected,
@@ -612,12 +611,19 @@ export default inject(
       isMe,
       organizationName,
       workspace,
+      standalone,
+      getHeaderMenuItems,
+      setSelections: oauthStore.setSelections,
     };
   },
 )(
   withLoading(
-    withTranslation(["Settings", "SingleSignOn", "Common", "JavascriptSdk"])(
-      observer(SectionHeaderContent),
-    ),
+    withTranslation([
+      "Settings",
+      "SingleSignOn",
+      "Common",
+      "JavascriptSdk",
+      "OAuth",
+    ])(observer(SectionHeaderContent)),
   ),
 );

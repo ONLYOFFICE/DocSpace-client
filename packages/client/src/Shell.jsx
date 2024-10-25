@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import moment from "moment-timezone";
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
@@ -33,8 +33,10 @@ import { useTranslation } from "react-i18next";
 import { isMobile, isIOS, isFirefox } from "react-device-detect";
 import { toast as toastify } from "react-toastify";
 
-import config from "PACKAGE_FILE";
-
+import SocketHelper, {
+  SocketEvents,
+  SocketCommands,
+} from "@docspace/shared/utils/socket";
 import { Portal } from "@docspace/shared/components/portal";
 import { SnackBar } from "@docspace/shared/components/snackbar";
 import { Toast, toastr } from "@docspace/shared/components/toast";
@@ -46,6 +48,8 @@ import indexedDbHelper from "@docspace/shared/utils/indexedDBHelper";
 import { useThemeDetector } from "@docspace/shared/hooks/useThemeDetector";
 import { sendToastReport } from "@docspace/shared/utils/crashReport";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
+
+import config from "PACKAGE_FILE";
 
 import Main from "./components/Main";
 import Layout from "./components/Layout";
@@ -68,7 +72,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     language,
     FirebaseHelper,
     setCheckedMaintenance,
-    socketHelper,
     setPreparationPortalDialogVisible,
     isBase,
     setTheme,
@@ -89,11 +92,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     pagesWithoutNavMenu,
     isFrame,
     barTypeInFrame,
-    setDataFromSocket,
-    updateDataFromSocket,
-    sessionLogout,
-    setMultiConnections,
-    sessionMultiLogout,
   } = rest;
 
   const theme = useTheme();
@@ -112,23 +110,6 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     if (regex.test(pathname)) {
       window.location.replace(pathname.replace(replaceRegex, "$1"));
     }
-  }, []);
-
-  const moveToLastSession = useCallback((data) => {
-    return data.map((item) => {
-      if (item.status === "online" && item.sessions.length !== 0) {
-        const {
-          sessions: [first, ...ohterElement],
-          ...otherField
-        } = item;
-
-        return {
-          ...otherField,
-          sessions: [...ohterElement, first],
-        };
-      }
-      return item;
-    });
   }, []);
 
   useEffect(() => {
@@ -155,56 +136,26 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   }, []);
 
   useEffect(() => {
-    if (!socketHelper.isEnabled) return;
-
-    socketHelper.emit({
-      command: "subscribeToPortal",
+    SocketHelper.emit(SocketCommands.Subscribe, {
+      roomParts: "backup-restore",
     });
 
-    socketHelper.emit({
-      command: "getSessionsInPortal",
+    SocketHelper.emit(SocketCommands.Subscribe, {
+      roomParts: "quota",
     });
 
-    socketHelper.on("statuses-in-portal", (data) => {
-      const newData = moveToLastSession(data);
-
-      setDataFromSocket(newData);
+    SocketHelper.emit(SocketCommands.Subscribe, {
+      roomParts: "QUOTA",
+      individual: true,
     });
-
-    socketHelper.on("enter-in-portal", (data) => {
-      const [newData] = moveToLastSession([data]);
-
-      updateDataFromSocket(newData);
-    });
-
-    socketHelper.on("leave-in-portal", (data) => {
-      sessionLogout(data);
-    });
-
-    socketHelper.on("enter-session-in-portal", (data) => {
-      setMultiConnections(data);
-    });
-
-    socketHelper.on("leave-session-in-portal", (data) => {
-      sessionMultiLogout(data);
-    });
-  }, [
-    socketHelper,
-    setDataFromSocket,
-    updateDataFromSocket,
-    sessionLogout,
-    setMultiConnections,
-    moveToLastSession,
-    sessionMultiLogout,
-  ]);
+  }, []);
 
   useEffect(() => {
-    socketHelper.emit({
-      command: "subscribe",
-      data: { roomParts: "backup-restore" },
-    });
+    SocketHelper.emit(SocketCommands.Subscribe, { roomParts: userId });
+  }, [userId]);
 
-    socketHelper.on("restore-backup", () => {
+  useEffect(() => {
+    const callback = () => {
       getRestoreProgress()
         .then((response) => {
           if (!response) {
@@ -218,24 +169,16 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
         .catch((e) => {
           console.error("getRestoreProgress", e);
         });
-    });
+    };
+    SocketHelper.on(SocketEvents.RestoreBackup, callback);
 
-    socketHelper.emit({
-      command: "subscribe",
-      data: { roomParts: "quota" },
-    });
+    return () => {
+      SocketHelper.off(SocketEvents.RestoreBackup, callback);
+    };
+  }, [setPreparationPortalDialogVisible]);
 
-    socketHelper.emit({
-      command: "subscribe",
-      data: { roomParts: "QUOTA", individual: true },
-    });
-
-    socketHelper.emit({
-      command: "subscribe",
-      data: { roomParts: userId },
-    });
-
-    socketHelper.on("s:logout-session", (loginEventId) => {
+  useEffect(() => {
+    const callback = (loginEventId) => {
       console.log(`[WS] "logout-session"`, loginEventId, userLoginEventId);
 
       if (userLoginEventId === loginEventId || loginEventId === 0) {
@@ -243,13 +186,14 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
           combineUrl(window.ClientConfig?.proxy?.url, "/login"),
         );
       }
-    });
-  }, [
-    socketHelper,
-    userLoginEventId,
-    setPreparationPortalDialogVisible,
-    userId,
-  ]);
+    };
+
+    SocketHelper.on(SocketEvents.LogoutSession, callback);
+
+    return () => {
+      SocketHelper.off(SocketEvents.LogoutSession, callback);
+    };
+  }, [userLoginEventId]);
 
   const { t, ready } = useTranslation(["Common", "SmartBanner"]);
 
@@ -542,16 +486,8 @@ const ShellWrapper = inject(
     userStore,
     currentTariffStatusStore,
     dialogsStore,
-    peopleStore,
   }) => {
     const { i18n } = useTranslation();
-    const {
-      setDataFromSocket,
-      updateDataFromSocket,
-      sessionLogout,
-      setMultiConnections,
-      sessionMultiLogout,
-    } = peopleStore.selectionStore;
 
     const {
       init,
@@ -570,7 +506,6 @@ const ShellWrapper = inject(
       setCheckedMaintenance,
       setMaintenanceExist,
       setSnackbarExist,
-      socketHelper,
       setTheme,
       currentDeviceType,
       isFrame,
@@ -623,7 +558,6 @@ const ShellWrapper = inject(
       FirebaseHelper: firebaseHelper,
       setCheckedMaintenance,
       setMaintenanceExist,
-      socketHelper,
       setPreparationPortalDialogVisible,
       isBase,
       setTheme,
@@ -641,11 +575,6 @@ const ShellWrapper = inject(
       pagesWithoutNavMenu,
       isFrame,
       barTypeInFrame: frameConfig?.showHeaderBanner,
-      setDataFromSocket,
-      updateDataFromSocket,
-      sessionLogout,
-      setMultiConnections,
-      sessionMultiLogout,
     };
   },
 )(observer(Shell));

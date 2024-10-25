@@ -35,6 +35,7 @@ import React, {
   useLayoutEffect,
 } from "react";
 import { useTranslation } from "react-i18next";
+import { isSafari } from "react-device-detect";
 import ReCAPTCHA from "react-google-recaptcha";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { useTheme } from "styled-components";
@@ -52,11 +53,13 @@ import { login } from "@docspace/shared/utils/loginUtils";
 import { toastr } from "@docspace/shared/components/toast";
 import { thirdPartyLogin, checkConfirmLink } from "@docspace/shared/api/user";
 import { setWithCredentialsStatus } from "@docspace/shared/api/client";
+import { deletePortal } from "@docspace/shared/api/management";
 import { TValidate } from "@docspace/shared/components/email-input/EmailInput.types";
 import { ButtonKeys, RecaptchaType } from "@docspace/shared/enums";
 import { getAvailablePortals } from "@docspace/shared/api/management";
 import { getCookie } from "@docspace/shared/utils";
 import { deleteCookie } from "@docspace/shared/utils/cookie";
+import { PUBLIC_STORAGE_KEY } from "@docspace/shared/constants";
 
 import { LoginFormProps } from "@/types";
 import { getEmailFromInvitation, getConfirmDataFromInvitation } from "@/utils";
@@ -102,6 +105,8 @@ const LoginForm = ({
   const referenceUrl = searchParams.get("referenceUrl");
   const loginData = searchParams.get("loginData");
   const linkData = searchParams.get("linkData");
+  const isPublicAuth = searchParams.get("publicAuth");
+  const deletePortalData = searchParams.get("deletePortalData");
 
   const isDesktop =
     typeof window !== "undefined" && window["AscDesktopEditor"] !== undefined;
@@ -164,6 +169,11 @@ const LoginForm = ({
           return window.location.replace(response.confirmUrl);
         }
 
+        if (isPublicAuth) {
+          localStorage.setItem(PUBLIC_STORAGE_KEY, "true");
+          window.close();
+        }
+
         const redirectPath =
           referenceUrl || sessionStorage.getItem("referenceUrl");
 
@@ -180,7 +190,7 @@ const LoginForm = ({
         );
       }
     },
-    [t, referenceUrl, currentCulture],
+    [t, referenceUrl, currentCulture, isPublicAuth],
   );
 
   useEffect(() => {
@@ -298,6 +308,7 @@ const LoginForm = ({
           const redirectUrl = getCookie(
             "x-redirect-authorization-uri",
           )?.replace(window.location.origin, name);
+
           // deleteCookie("x-redirect-authorization-uri");
 
           window.open(
@@ -312,10 +323,13 @@ const LoginForm = ({
 
         const portalsString = JSON.stringify({ portals });
 
-        searchParams.set("portals", portalsString);
+        // searchParams.set("portals", portalsString);
         searchParams.set("clientId", client.clientId);
 
+        sessionStorage.setItem("tenant-list", portalsString);
+
         router.push(`/tenant-list?${searchParams.toString()}`);
+
         setIsLoading(false);
         return;
       } catch (error) {
@@ -369,7 +383,12 @@ const LoginForm = ({
         }
         return res;
       })
-      .then((res: string | object | undefined) => {
+      .then(async (res: string | object | undefined) => {
+        if (isPublicAuth) {
+          localStorage.setItem(PUBLIC_STORAGE_KEY, "true");
+          window.close();
+        }
+
         const isConfirm = typeof res === "string" && res.includes("confirm");
         const redirectPath =
           referenceUrl || sessionStorage.getItem("referenceUrl");
@@ -377,6 +396,24 @@ const LoginForm = ({
           sessionStorage.removeItem("referenceUrl");
           window.location.href = redirectPath;
           return;
+        }
+
+        if (deletePortalData) {
+          try {
+            const deleteData = decodeURIComponent(deletePortalData);
+            await deletePortal({ portalName: deleteData });
+            window.opener.postMessage(
+              JSON.stringify({ type: "portalDeletedSuccess" }),
+              "*",
+            );
+          } catch (e) {
+            console.error(e);
+            window.opener.postMessage(
+              JSON.stringify({ type: "portalDeletedError", error: e }),
+              "*",
+            );
+          }
+          window.close();
         }
 
         if (typeof res === "string") window.location.replace(res);
@@ -423,11 +460,13 @@ const LoginForm = ({
     currentCulture,
     reCaptchaType,
     isCaptchaSuccessful,
+    linkData,
     router,
     clientId,
     referenceUrl,
     baseDomain,
-    linkData,
+    isPublicAuth,
+    deletePortalData,
   ]);
 
   const onBlurEmail = () => {
@@ -481,6 +520,13 @@ const LoginForm = ({
     };
   }, [isModalOpen, onSubmit]);
 
+  const handleAnimationStart = (e: React.AnimationEvent<HTMLInputElement>) => {
+    if (!isSafari) return;
+    if (e.animationName === "autofill") {
+      onSubmit();
+    }
+  };
+
   const passwordErrorMessage = errorMessage();
 
   if (authError && ready) {
@@ -490,9 +536,15 @@ const LoginForm = ({
 
   return (
     <form className="auth-form-container">
-      {!emailFromInvitation && !client && (
+      {!emailFromInvitation && !client && !deletePortalData && (
         <Text fontSize="16px" fontWeight="600" className="sign-in-subtitle">
           {t("Common:LoginButton")}
+        </Text>
+      )}
+
+      {deletePortalData && (
+        <Text fontSize="16px" fontWeight="600" className="sign-in-subtitle">
+          {t("EnterCredentials", { productName: t("Common:ProductName") })}:
         </Text>
       )}
 
@@ -515,6 +567,7 @@ const LoginForm = ({
         onValidateEmail={onValidateEmail}
         isLdapLogin={isLdapLoginChecked}
         ldapDomain={ldapDomain}
+        handleAnimationStart={handleAnimationStart}
       />
       <PasswordContainer
         isLoading={isLoading}
@@ -524,12 +577,14 @@ const LoginForm = ({
         password={password}
         onChangePassword={onChangePassword}
       />
-      <ForgotContainer
-        cookieSettingsEnabled={cookieSettingsEnabled}
-        isChecked={isChecked}
-        identifier={identifier}
-        onChangeCheckbox={onChangeCheckbox}
-      />
+      {!deletePortalData && (
+        <ForgotContainer
+          cookieSettingsEnabled={cookieSettingsEnabled}
+          isChecked={isChecked}
+          identifier={identifier}
+          onChangeCheckbox={onChangeCheckbox}
+        />
+      )}
 
       {ldapDomain && ldapEnabled && (
         <LDAPContainer
@@ -571,7 +626,11 @@ const LoginForm = ({
         size={ButtonSize.medium}
         scale
         label={
-          isLoading ? t("Common:LoadingProcessing") : t("Common:LoginButton")
+          isLoading
+            ? t("Common:LoadingProcessing")
+            : deletePortalData
+              ? `${t("Common:Delete")} ${t("Common:ProductName")}`
+              : t("Common:LoginButton")
         }
         tabIndex={5}
         isDisabled={isLoading}

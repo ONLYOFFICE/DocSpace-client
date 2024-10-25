@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { TableCell } from "@docspace/shared/components/table";
 import FileNameCell from "./FileNameCell";
@@ -32,9 +32,7 @@ import TypeCell from "./TypeCell";
 import AuthorCell from "./AuthorCell";
 import DateCell from "./DateCell";
 import SizeCell from "./SizeCell";
-import IndexCell from "./IndexCell";
 import { classNames, getLastColumn } from "@docspace/shared/utils";
-import { RoomsType } from "@docspace/shared/enums";
 import {
   StyledBadgesContainer,
   StyledQuickButtonsContainer,
@@ -50,8 +48,6 @@ const RowDataComponent = (props) => {
     modifiedColumnIsEnabled,
     sizeColumnIsEnabled,
     typeColumnIsEnabled,
-    indexColumnIsEnabled,
-    quickButtonsColumnIsEnabled,
 
     dragStyles,
     selectionProp,
@@ -65,41 +61,32 @@ const RowDataComponent = (props) => {
     badgesComponent,
     quickButtonsComponent,
 
-    isIndexing,
     tableStorageName,
     columnStorageName,
     isIndexEditingMode,
     changeIndex,
+    isIndexedFolder,
   } = props;
 
-  const [lastColumn, setLastColumn] = React.useState(
+  const [lastColumn, setLastColumn] = useState(
     getLastColumn(
       tableStorageName,
       localStorage.getItem(columnStorageName),
-      isIndexEditingMode,
+      isIndexedFolder,
     ),
   );
 
-  const onResize = React.useCallback(() => {
+  useEffect(() => {
     const newLastColumn = getLastColumn(
       tableStorageName,
       localStorage.getItem(columnStorageName),
-      isIndexEditingMode,
+      isIndexedFolder,
     );
 
-    setLastColumn(newLastColumn);
-  }, [
-    localStorage.getItem(columnStorageName),
-    isIndexEditingMode,
-    tableStorageName,
-  ]);
-
-  React.useEffect(() => {
-    onResize();
-    window.addEventListener("resize", onResize);
-
-    return () => window.removeEventListener("resize", onResize);
-  }, [isIndexEditingMode, localStorage.getItem(columnStorageName)]);
+    if (newLastColumn && newLastColumn !== lastColumn) {
+      setLastColumn(newLastColumn);
+    }
+  });
 
   const quickButtonsComponentNode = (
     <StyledQuickButtonsContainer>
@@ -139,24 +126,6 @@ const RowDataComponent = (props) => {
 
   return (
     <>
-      {indexColumnIsEnabled && isIndexing && (
-        <TableCell
-          className={classNames(
-            selectionProp?.className,
-            "table-container_index-cell",
-          )}
-          style={
-            !indexColumnIsEnabled ? { background: "none" } : dragStyles.style
-          }
-          value={value}
-        >
-          <IndexCell
-            sideColor={theme.filesSection.tableView.row.sideColor}
-            {...props}
-          />
-        </TableCell>
-      )}
-
       <TableCell
         {...dragStyles}
         className={classNames(
@@ -306,26 +275,28 @@ const RowDataComponent = (props) => {
   );
 };
 
-export default inject(({ tableStore }) => {
+export default inject(({ tableStore, selectedFolderStore }) => {
   const {
     authorColumnIsEnabled,
     createdColumnIsEnabled,
     modifiedColumnIsEnabled,
     sizeColumnIsEnabled,
-    indexColumnIsEnabled,
     typeColumnIsEnabled,
     tableStorageName,
     columnStorageName,
   } = tableStore;
+
+  const { isIndexedFolder } = selectedFolderStore;
 
   return {
     authorColumnIsEnabled,
     createdColumnIsEnabled,
     modifiedColumnIsEnabled,
     sizeColumnIsEnabled,
-    indexColumnIsEnabled,
     typeColumnIsEnabled,
     tableStorageName,
     columnStorageName,
+
+    isIndexedFolder,
   };
 })(observer(RowDataComponent));

@@ -36,7 +36,6 @@ import {
   TFolder,
   TFolderSecurity,
 } from "../../api/files/types";
-import SocketIOHelper from "../../utils/socket";
 import { DeviceType, FolderType, RoomsType } from "../../enums";
 import { TRoomSecurity } from "../../api/rooms/types";
 
@@ -58,8 +57,6 @@ export interface UseRootHelperProps {
 }
 
 export type UseSocketHelperProps = {
-  socketHelper: SocketIOHelper;
-  socketSubscribers: Set<string>;
   setItems: React.Dispatch<React.SetStateAction<TSelectorItem[]>>;
   setBreadCrumbs: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
   setTotal: React.Dispatch<React.SetStateAction<number>>;
@@ -88,7 +85,7 @@ export type UseRoomsHelperProps = {
   setSelectedItemType: React.Dispatch<
     React.SetStateAction<"rooms" | "files" | undefined>
   >;
-  subscribe: (id: number) => string | number | undefined;
+  subscribe: (id: number) => void;
 };
 
 export type UseFilesHelpersProps = {
@@ -124,6 +121,7 @@ export type UseFilesHelpersProps = {
   getFilesArchiveError: (name: string) => string;
   isInit: boolean;
   withCreate: boolean;
+  shareKey?: string;
   setSelectedItemId: (value: number | string) => void;
   setSelectedItemType: (value?: "rooms" | "files") => void;
 };
@@ -153,14 +151,13 @@ export type FilesSelectorProps = TSelectorHeader &
       }
     | { getIcon?: never; filesSettings: TFilesSettings }
   ) & {
-    socketHelper: SocketIOHelper;
-    socketSubscribers: Set<string>;
     disabledItems: (string | number)[];
     filterParam?: string;
     withoutBackButton: boolean;
     withBreadCrumbs: boolean;
     withSearch: boolean;
     cancelButtonLabel: string;
+    shareKey?: string;
 
     treeFolders?: TFolder[];
     onSetBaseFolderPath?: (

@@ -58,6 +58,7 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
 
     identityServerEnabled,
     baseDomain,
+    limitedAccessSpace,
   } = props;
 
   const location = useLocation();
@@ -99,6 +100,20 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       "portal-settings/developer-tools/oauth",
     );
     const isAuthorizedAppsPage = location.pathname.includes("authorized-apps");
+
+    const isBrandingPage = location.pathname.includes(
+      "portal-settings/customization/branding",
+    );
+
+    const isPortalManagement = location.pathname.includes(
+      "/portal-settings/management",
+    );
+    const isFileManagement = location.pathname.includes("file-management");
+    const isManagement = location.pathname.includes("management");
+    const isPaymentPageUnavailable =
+      location.pathname.includes("payments") && isCommunity;
+    const isBonusPageUnavailable =
+      location.pathname.includes("bonus") && !isCommunity;
 
     if (isLoaded && !isAuthenticated) {
       if (isPortalDeactivate) {
@@ -203,6 +218,19 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
       );
     }
 
+    if (isManagement && !isPortalManagement && !isFileManagement) {
+      if (isLoaded && !isAuthenticated) return <Navigate replace to="/" />;
+      if ((user && !user?.isAdmin) || limitedAccessSpace)
+        return <Navigate replace to="/error/403" />;
+
+      if (isPaymentPageUnavailable)
+        return <Navigate replace to="/management/bonus" />;
+      if (isBonusPageUnavailable)
+        return <Navigate replace to="/management/payments" />;
+
+      return children;
+    }
+
     if (!isLoaded) {
       return <AppLoader />;
     }
@@ -223,7 +251,10 @@ export const PrivateRoute = (props: PrivateRouteProps) => {
     //   );
     // }
 
-    if (isPortalRenameUrl && !enablePortalRename) {
+    if (
+      (isPortalRenameUrl && !enablePortalRename) ||
+      (isCommunity && isBrandingPage)
+    ) {
       return <Navigate replace to="/error/404" />;
     }
 

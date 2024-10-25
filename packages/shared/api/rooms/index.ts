@@ -124,10 +124,16 @@ export function getHistory(
   id,
   signal = null,
   requestToken,
+  filter,
 ) {
+  let params = "";
+
+  const str = toUrlParams(filter, false);
+  if (str) params = `?${str}`;
+
   const options = {
     method: "get",
-    url: `/files/${selectionType}/${id}/log`,
+    url: `/files/${selectionType}/${id}/log${params}`,
     signal,
   };
 
@@ -180,14 +186,6 @@ export function createRoomInThirdpary(id, data) {
 
 export function editRoom(id, data) {
   const options = { method: "put", url: `/files/rooms/${id}`, data };
-
-  return request(options).then((res) => {
-    return res;
-  });
-}
-
-export function editRoomSettings(id, data) {
-  const options = { method: "put", url: `/files/rooms/${id}/settings`, data };
 
   return request(options).then((res) => {
     return res;
@@ -469,11 +467,13 @@ export function validatePublicRoomKey(key) {
 export async function validatePublicRoomPassword(
   key: string,
   passwordHash: string,
+  signal?: AbortSignal,
 ) {
   const res = (await request({
     method: "post",
     url: `files/share/${key}/password`,
     data: { password: passwordHash },
+    signal,
   })) as TPublicRoomPassword;
 
   return res;
@@ -506,20 +506,6 @@ export function resetRoomQuota(roomIds) {
   return request(options);
 }
 
-export function changeRoomLifetime(
-  roomId: string | number,
-  lifetime: TRoomLifetime | null,
-) {
-  const data = lifetime ? { ...lifetime } : null;
-  const options = {
-    method: "put",
-    url: `files/rooms/${roomId}/lifetime`,
-    data,
-  };
-
-  return request(options);
-}
-
 export function getRoomCovers() {
   const options = {
     method: "get",
@@ -543,28 +529,6 @@ export function getExportRoomIndexProgress() {
   }) as Promise<TExportRoomIndexTask>;
 }
 
-export function setWatermarkSettings(
-  roomId: number | string,
-  data: {
-    enabled: boolean;
-    rotate: number;
-    text: string;
-    additions: number;
-    imageScale: number;
-    imageUrl: string;
-    imageWidth: string;
-    imageHeight: string;
-  },
-) {
-  const options = {
-    method: "put",
-    url: `files/rooms/${roomId}/watermark`,
-    data,
-  };
-
-  return request(options);
-}
-
 export function setRoomCover(roomId, cover) {
   const data = {
     Color: cover.color,
@@ -577,18 +541,4 @@ export function setRoomCover(roomId, cover) {
   };
 
   return request(options);
-}
-
-export function getWatermarkSettings(roomId: number | string) {
-  return request({
-    method: "get",
-    url: `files/rooms/${roomId}/watermark`,
-  });
-}
-
-export function deleteWatermarkSettings(roomId: number | string) {
-  return request({
-    method: "delete",
-    url: `files/rooms/${roomId}/watermark`,
-  });
 }

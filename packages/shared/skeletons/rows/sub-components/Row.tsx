@@ -34,7 +34,7 @@ const RowSkeleton = ({
   id,
   className,
   style,
-  isRectangle,
+  isRectangle = true,
   ...rest
 }: {
   id?: string;
@@ -127,13 +127,6 @@ const RowSkeleton = ({
       />
     </StyledRow>
   );
-};
-
-RowSkeleton.defaultProps = {
-  id: undefined,
-  className: undefined,
-  style: undefined,
-  isRectangle: true,
 };
 
 export default RowSkeleton;

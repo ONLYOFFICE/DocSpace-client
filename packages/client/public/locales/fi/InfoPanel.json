@@ -1,5 +1,4 @@
 {
-  "AccountsEmptyScreenText": "Katso käyttäjätiedot täältä",
   "AddedRoomTags": "Tägit lisätty.",
   "Administration": "Hallinto",
   "AndMoreLabel": "ja <1>{{count}} enemmän</1>",
@@ -35,7 +34,6 @@
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> huone kopioitu",
   "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> huone luotu",
   "HistoryThirdParty": "Historian näyttö ei ole saatavilla julkisiin huoneisiin, jotka ovat yhteydessä kolmansien osapuolien muisteihin. ",
-  "InfoBanner": "Kutsuttujen käyttäjien lista sisältää tämän {{productName}}-n omistajan ja/tai järjestelmänvalvojat, joilla on täysi pääsy kaikkiin huoneisiin. Omistaja ja/tai järjestelmänvalvojalle ei voi antaa muita pääsyoikeuksia. Heille ilmoitetaan kaikista muutoksista, kun heidät on lisätty huoneeseen.",
   "ItemsSelected": "Valitut kohteet",
   "LastModifiedBy": "Viimeksi muokannut",
   "NoRecordsFound": "Merkintöjä ei löydy",
@@ -58,5 +56,6 @@
   "SubmenuHistory": "Historia",
   "UserFileUpdated": "Tiedosto päivitetty.",
   "Users": "Käyttäjät",
+  "UsersEmptyScreenText": "Katso käyttäjätiedot täältä",
   "Versions": "Versiot"
 }

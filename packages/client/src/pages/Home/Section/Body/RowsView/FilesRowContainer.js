@@ -30,13 +30,12 @@ import { inject, observer } from "mobx-react";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
 
-import { Base } from "@docspace/shared/themes";
-import { Context } from "@docspace/shared/utils";
+import { Context, injectDefaultTheme } from "@docspace/shared/utils";
 import { RowContainer } from "@docspace/shared/components/row-container";
 
 import SimpleFilesRow from "./SimpleFilesRow";
 
-const StyledRowContainer = styled(RowContainer)`
+const StyledRowContainer = styled(RowContainer).attrs(injectDefaultTheme)`
   .row-list-item:first-child {
     .row-wrapper {
       height: 57px;
@@ -59,8 +58,6 @@ const StyledRowContainer = styled(RowContainer)`
   }
 `;
 
-StyledRowContainer.defaultProps = { theme: Base };
-
 const FilesRowContainer = ({
   filesList,
   viewAs,
@@ -71,7 +68,6 @@ const FilesRowContainer = ({
   hasMoreFiles,
   isRooms,
   isTrashFolder,
-  withPaging,
   highlightFile,
   currentDeviceType,
   isIndexEditingMode,
@@ -121,7 +117,7 @@ const FilesRowContainer = ({
       fetchMoreFiles={fetchMoreFiles}
       hasMoreFiles={hasMoreFiles}
       draggable
-      useReactWindow={!withPaging}
+      useReactWindow
       itemHeight={58}
     >
       {filesListNode}
@@ -150,7 +146,7 @@ export default inject(
     } = filesStore;
     const { isVisible: infoPanelVisible } = infoPanelStore;
     const { isRoomsFolder, isArchiveFolder, isTrashFolder } = treeFoldersStore;
-    const { withPaging, currentDeviceType } = settingsStore;
+    const { currentDeviceType } = settingsStore;
     const { isIndexEditingMode } = indexingStore;
 
     const isRooms = isRoomsFolder || isArchiveFolder;
@@ -165,7 +161,6 @@ export default inject(
       hasMoreFiles,
       isRooms,
       isTrashFolder,
-      withPaging,
       highlightFile,
       currentDeviceType,
       isIndexEditingMode,

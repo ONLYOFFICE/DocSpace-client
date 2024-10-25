@@ -27,6 +27,7 @@
 import { makeAutoObservable } from "mobx";
 
 import { SettingsStore } from "@docspace/shared/store/SettingsStore";
+import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 import {
   FolderType,
   RoomsType,
@@ -45,12 +46,13 @@ import {
   TLogo,
   TRoomLifetime,
   TRoomSecurity,
+  TWatermark,
 } from "@docspace/shared/api/rooms/types";
 
 import { setDocumentTitle } from "../helpers/utils";
 
 export type TNavigationPath = {
-  id: number;
+  id: number | string;
   title: string;
   isRoom: boolean;
   roomType: RoomsType;
@@ -149,6 +151,8 @@ class SelectedFolderStore {
 
   lifetime: TRoomLifetime | null = null;
 
+  watermark: TWatermark | null = null;
+
   denyDownload: boolean | undefined;
 
   usedSpace: number | undefined;
@@ -160,6 +164,10 @@ class SelectedFolderStore {
   changeDocumentsTabs = false;
 
   order: Nullable<string> = null;
+
+  external: boolean = false;
+
+  passwordProtected: boolean = false;
 
   constructor(settingsStore: SettingsStore) {
     makeAutoObservable(this);
@@ -211,6 +219,9 @@ class SelectedFolderStore {
       quotaLimit: this.quotaLimit,
       isCustomQuota: this.isCustomQuota,
       order: this.order,
+      watermark: this.watermark,
+      passwordProtected: this.passwordProtected,
+      external: this.external,
     };
   };
 
@@ -260,6 +271,17 @@ class SelectedFolderStore {
     this.quotaLimit = undefined;
     this.isCustomQuota = undefined;
     this.order = null;
+    this.watermark = null;
+    this.passwordProtected = false;
+    this.external = false;
+  };
+
+  setFilesCount = (filesCount: number) => {
+    this.filesCount = filesCount;
+  };
+
+  setFoldersCount = (foldersCount: number) => {
+    this.foldersCount = foldersCount;
   };
 
   setParentId = (parentId: number) => {
@@ -301,87 +323,105 @@ class SelectedFolderStore {
     this.inRoom = inRoom;
   };
 
-  addDefaultLogoPaths = () => {
-    const cachebreaker = new Date().getTime();
-    this.logo = {
-      small: `/storage/room_logos/root/${this.id}_small.png?${cachebreaker}`,
-      medium: `/storage/room_logos/root/${this.id}_medium.png?${cachebreaker}`,
-      large: `/storage/room_logos/root/${this.id}_large.png?${cachebreaker}`,
-      original: `/storage/room_logos/root/${this.id}_original.png?${cachebreaker}`,
-    };
+  // addDefaultLogoPaths = () => {
+  //   const cachebreaker = new Date().getTime();
+  //   this.logo = {
+  //     small: `/storage/room_logos/root/${this.id}_small.png?${cachebreaker}`,
+  //     medium: `/storage/room_logos/root/${this.id}_medium.png?${cachebreaker}`,
+  //     large: `/storage/room_logos/root/${this.id}_large.png?${cachebreaker}`,
+  //     original: `/storage/room_logos/root/${this.id}_original.png?${cachebreaker}`,
+  //   };
+  // };
+
+  // removeLogoPaths = () => {
+  //   this.logo = {
+  //     small: "",
+  //     medium: "",
+  //     large: "",
+  //     original: "",
+  //   };
+  // };
+
+  // updateLogoPathsCacheBreaker = () => {
+  //   if (!this.logo?.original) return;
+
+  //   const cachebreaker = new Date().getTime();
+  //   this.logo = {
+  //     small: `${this.logo.small.split("?")[0]}?${cachebreaker}`,
+  //     medium: `${this.logo.medium.split("?")[0]}?${cachebreaker}`,
+  //     large: `${this.logo.large.split("?")[0]}?${cachebreaker}`,
+  //     original: `${this.logo.original.split("?")[0]}?${cachebreaker}`,
+  //   };
+  // };
+
+  updateNavigationPath = (navigationPath: TNavigationPath[]) => {
+    this.navigationPath = navigationPath;
   };
 
-  removeLogoPaths = () => {
-    this.logo = {
-      small: "",
-      medium: "",
-      large: "",
-      original: "",
-    };
-  };
-
-  updateLogoPathsCacheBreaker = () => {
-    if (!this.logo?.original) return;
-
-    const cachebreaker = new Date().getTime();
-    this.logo = {
-      small: `${this.logo.small.split("?")[0]}?${cachebreaker}`,
-      medium: `${this.logo.medium.split("?")[0]}?${cachebreaker}`,
-      large: `${this.logo.large.split("?")[0]}?${cachebreaker}`,
-      original: `${this.logo.original.split("?")[0]}?${cachebreaker}`,
-    };
-  };
-
-  setDefaultValuesIfUndefined: (selectedFolder: TSetSelectedFolder) => void = (
+  setSelectedFolder: (selectedFolder: TSetSelectedFolder | null) => void = (
     selectedFolder,
   ) => {
-    if (!("type" in selectedFolder)) this.type = null;
-    if (!("providerId" in selectedFolder)) this.providerId = null;
-    if (!("providerItem" in selectedFolder)) this.providerItem = null;
-    if (!("providerKey" in selectedFolder)) this.providerKey = null;
-    if (!("order" in selectedFolder)) this.order = null;
-  };
-
-  setSelectedFolder: (
-    // t: TTranslation,
-    selectedFolder: TSetSelectedFolder | null,
-  ) => void = (selectedFolder) => {
-    const socketHelper = this.settingsStore?.socketHelper;
+    const currentId = this.id;
+    const navPath = [{ id: currentId }, ...this.navigationPath];
 
     this.toDefault();
 
-    if (
-      this.id !== null &&
-      socketHelper &&
-      socketHelper.socketSubscribers.has(`DIR-${this.id}`)
-    ) {
-      socketHelper.emit({
-        command: "unsubscribe",
-        data: { roomParts: `DIR-${this.id}`, individual: true },
-      });
-    }
+    const socketUnsub = selectedFolder
+      ? navPath.filter((p, index) => {
+          return (
+            !selectedFolder?.navigationPath?.some((np) => np.id === p.id) &&
+            !selectedFolder?.folders?.some((np) => np.id === p.id) &&
+            SocketHelper.socketSubscribers.has(`DIR-${p.id}`) &&
+            selectedFolder?.id !== p.id &&
+            index !== navPath.length - 1
+          );
+        })
+      : navPath.filter((p, index) => index !== navPath.length - 1);
+
+    // if (
+    //   currentId !== null &&
+    //   SocketHelper.socketSubscribers.has(`DIR-${currentId}`) &&
+    //   !selectedFolder?.navigationPath?.some((np) => np.id === currentId) &&
+    //   !selectedFolder?.folders?.some((np) => np.id === currentId) &&
+    //   !isRoot
+    // ) {
+    //   socketUnsub.push({
+    //     id: currentId,
+    //   } as TNavigationPath);
+    // }
+
+    const socketSub = selectedFolder
+      ? (selectedFolder.navigationPath
+          ?.map((p) => `DIR-${p.id}`)
+          .filter((p) => !SocketHelper.socketSubscribers.has(p)) ?? [])
+      : [];
 
     if (
       selectedFolder &&
-      socketHelper &&
-      !socketHelper.socketSubscribers.has(`DIR-${selectedFolder.id}`)
-    ) {
-      socketHelper.emit({
-        command: "subscribe",
-        data: { roomParts: `DIR-${selectedFolder.id}`, individual: true },
+      !SocketHelper.socketSubscribers.has(`DIR-${selectedFolder.id}`)
+    )
+      socketSub.push(`DIR-${selectedFolder.id}`);
+
+    if (socketUnsub.length > 0) {
+      SocketHelper.emit(SocketCommands.Unsubscribe, {
+        roomParts: socketUnsub.map((p) => `DIR-${p.id}`),
+        individual: true,
       });
     }
 
-    if (!selectedFolder) {
-      this.toDefault();
-    } else {
+    if (socketSub.length > 0) {
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts: socketSub,
+        individual: true,
+      });
+    }
+
+    if (selectedFolder) {
       const selectedFolderItems = Object.keys(selectedFolder);
 
       if (!selectedFolderItems.includes("roomType")) this.roomType = null;
 
       setDocumentTitle(selectedFolder.title);
-
-      this.setDefaultValuesIfUndefined(selectedFolder);
 
       Object.entries(selectedFolder).forEach(([key, item]) => {
         if (key in this) {
@@ -391,11 +431,11 @@ class SelectedFolderStore {
       });
 
       this.setChangeDocumentsTabs(false);
-    }
 
-    selectedFolder?.pathParts?.forEach((value) => {
-      if (value.roomType) this.setInRoom(true);
-    });
+      selectedFolder.pathParts?.forEach((value) => {
+        if (value.roomType) this.setInRoom(true);
+      });
+    }
   };
 }
 

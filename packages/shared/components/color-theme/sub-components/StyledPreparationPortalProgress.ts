@@ -25,9 +25,11 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { Base } from "../../../themes";
+import { injectDefaultTheme } from "../../../utils";
 
-const StyledPreparationPortalProgress = styled.div<{ percent?: number }>`
+const StyledPreparationPortalProgress = styled.div.attrs(injectDefaultTheme)<{
+  percent?: number;
+}>`
   .preparation-portal_progress {
     display: flex;
     margin-bottom: 16px;
@@ -61,7 +63,5 @@ const StyledPreparationPortalProgress = styled.div<{ percent?: number }>`
     }
   }
 `;
-
-StyledPreparationPortalProgress.defaultProps = { theme: Base };
 
 export default StyledPreparationPortalProgress;

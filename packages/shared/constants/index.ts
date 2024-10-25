@@ -55,6 +55,7 @@ export const USERS = "users";
 export const USERS_IN_ROOM = "usersInRoom";
 export const PDF_FORM_DIALOG_KEY = "pdf_form_dialog";
 export const CREATED_FORM_KEY = "created_form_key";
+export const PUBLIC_STORAGE_KEY = "public-auth";
 
 export const OPEN_BACKUP_CODES_DIALOG = "openBackupCodesDialog";
 
@@ -64,6 +65,7 @@ export const PERCENTAGE_FOR_SHOWING_BAR = 90;
 export const LANGUAGE = "asc_language";
 
 export const MOBILE_FOOTER_HEIGHT = "64px";
+export const ASIDE_PADDING_AFTER_LAST_ITEM = "12px";
 
 export const COOKIE_EXPIRATION_YEAR = 31536000000;
 export const ARTICLE_PINNED_KEY = "asc_article_pinned_key";

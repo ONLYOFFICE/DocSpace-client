@@ -27,6 +27,7 @@
 import { makeAutoObservable } from "mobx";
 import { getFoldersTree, getSubfolders } from "@docspace/shared/api/files";
 import { FolderType } from "@docspace/shared/enums";
+import SocketHelper, { SocketCommands } from "@docspace/shared/utils/socket";
 
 class TreeFoldersStore {
   selectedFolderStore;
@@ -58,23 +59,19 @@ class TreeFoldersStore {
   };
 
   listenTreeFolders = (treeFolders) => {
-    const { socketHelper } = this.settingsStore;
+    const roomParts = treeFolders
+      .map((f) => `DIR-${f.id}`)
+      .filter((f) => !SocketHelper.socketSubscribers.has(f));
 
-    if (treeFolders.length > 0) {
-      socketHelper.emit({
-        command: "unsubscribe",
-        data: {
-          roomParts: treeFolders.map((f) => `DIR-${f.id}`),
-          individual: true,
-        },
-      });
+    if (roomParts.length > 0) {
+      // SocketHelper.emit(SocketCommands.Unsubscribe, {
+      //   roomParts: treeFolders.map((f) => `DIR-${f.id}`),
+      //   individual: true,
+      // });
 
-      socketHelper.emit({
-        command: "subscribe",
-        data: {
-          roomParts: treeFolders.map((f) => `DIR-${f.id}`),
-          individual: true,
-        },
+      SocketHelper.emit(SocketCommands.Subscribe, {
+        roomParts,
+        individual: true,
       });
     }
   };
@@ -246,23 +243,6 @@ class TreeFoldersStore {
     return this.recycleBinFolder ? this.recycleBinFolder.id : null;
   }
 
-  getIsAccountsPeople = () => {
-    return window.location.pathname.includes("accounts/people");
-  };
-
-  getIsAccountsInsideGroup = () => {
-    const insideGroupPattern = /accounts\/groups\/.*\/filter/;
-
-    return insideGroupPattern.test(window.location.pathname);
-  };
-
-  getIsAccountsGroups = () => {
-    return (
-      window.location.pathname.includes("accounts/groups") &&
-      !this.getIsAccountsInsideGroup()
-    );
-  };
-
   get isPersonalRoom() {
     return (
       this.myFolder &&
@@ -342,7 +322,7 @@ class TreeFoldersStore {
     return FolderType.Archive === this.selectedFolderStore.rootFolderType;
   }
 
-  get isPersonalFolderRoot() {
+  get isDocumentsFolder() {
     return FolderType.USER === this.selectedFolderStore.rootFolderType;
   }
 

@@ -91,6 +91,7 @@ export type CreateUserFormProps = {
   thirdPartyProviders?: TThirdPartyProvider[];
   firstName?: string;
   lastName?: string;
+  isStandalone: boolean;
 };
 
 const CreateUserForm = (props: CreateUserFormProps) => {
@@ -105,6 +106,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     lastName,
     licenseUrl,
     legalTerms,
+    isStandalone,
   } = props;
   const { linkData, roomData } = useContext(ConfirmRouteContext);
   const { t, i18n } = useTranslation(["Confirm", "Common"]);
@@ -131,6 +133,8 @@ const CreateUserForm = (props: CreateUserFormProps) => {
   const [fnameValid, setFnameValid] = useState(true);
   const [sname, setSname] = useState("");
   const [snameValid, setSnameValid] = useState(true);
+
+  const [isChecked, setIsChecked] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
   const [errorText, setErrorText] = useState("");
@@ -302,6 +306,7 @@ const CreateUserForm = (props: CreateUserFormProps) => {
       lastName: sname.trim(),
       email: email,
       cultureName: currentCultureName,
+      spam: isChecked,
     };
 
     confirmUser.fromInviteLink = fromInviteLink;
@@ -350,6 +355,10 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     const { userName, passwordHash } = confirmUserData;
     const res = await login(userName, passwordHash);
 
+    if (res && res.tfa && res.confirmUrl) {
+      return window.location.replace(res.confirmUrl);
+    }
+
     const finalUrl = roomData.roomId
       ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}`
       : defaultPage;
@@ -384,6 +393,10 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     setPassword(e.target.value);
     setErrorText("");
     setIsPasswordErrorShow(false);
+  };
+
+  const onChangeCheckbox = () => {
+    setIsChecked(!isChecked);
   };
 
   const onKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -519,11 +532,14 @@ const CreateUserForm = (props: CreateUserFormProps) => {
             onChangeFname={onChangeFname}
             onChangeSname={onChangeSname}
             onChangePassword={onChangePassword}
+            onChangeCheckbox={onChangeCheckbox}
+            isChecked={isChecked}
             onBlurPassword={onBlurPassword}
             onKeyPress={onKeyPress}
             onValidatePassword={onValidatePassword}
             onClickBack={onClickBack}
             onSubmit={onSubmit}
+            isStandalone={isStandalone}
           />
         )}
       </div>

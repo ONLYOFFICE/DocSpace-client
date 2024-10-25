@@ -24,13 +24,22 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState, useEffect, useRef, useTransition } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useTransition,
+  useCallback,
+  useContext,
+} from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
 
 import { StyledHistoryList, StyledHistorySubtitle } from "../../styles/history";
 
 import InfoPanelViewLoader from "@docspace/shared/skeletons/info-panel/body";
+import ScrollbarContext from "@docspace/shared/components/scrollbar/custom-scrollbar/ScrollbarContext";
+import HistoryItemLoader from "@docspace/shared/skeletons/info-panel/body/views/HistoryItemLoader";
 import { getRelativeDateDay } from "./../../helpers/HistoryHelper";
 import HistoryBlock from "./HistoryBlock";
 import NoHistory from "../NoItem/NoHistory";
@@ -50,14 +59,24 @@ const History = ({
   isCollaborator,
   calendarDay,
   setCalendarDay,
+  selectionHistoryTotal,
+  fetchMoreHistory,
 }) => {
+  const scrollContext = useContext(ScrollbarContext);
+  const scrollElement = scrollContext.parentScrollbar?.scrollerElement;
+
   const isMount = useRef(true);
   const abortControllerRef = useRef(new AbortController());
 
   const [isLoading, setIsLoading] = useState(false);
   const [isShowLoader, setIsShowLoader] = useState(false);
 
-  const isThirdParty = infoPanelSelection?.providerType;
+  const isThirdParty = infoPanelSelection?.providerId;
+
+  const [isLoadingNextPage, setIsLoadingNextPage] = useState(false);
+  const [currentHistory, setCurrentHistory] = useState(selectionHistory);
+
+  let loading = false;
 
   const getHistory = async (item) => {
     if (!item?.id) return;
@@ -73,6 +92,61 @@ const History = ({
     }
   };
 
+  useEffect(() => {
+    if (selectionHistory !== currentHistory) {
+      loading = false;
+      setCurrentHistory(selectionHistory);
+    }
+  }, [selectionHistory]);
+
+  useEffect(() => {
+    scrollElement?.addEventListener("scroll", onScroll);
+
+    return () => {
+      scrollElement?.removeEventListener("scroll", onScroll);
+    };
+  }, [scrollElement, selectionHistory]);
+
+  const onFetchMoreHistory = async () => {
+    setIsLoadingNextPage(true);
+    loading = true;
+    await fetchMoreHistory();
+    setIsLoadingNextPage(false);
+  };
+
+  const onCheckListScroll = () => {
+    if (loading) return;
+    const all = scrollElement.scrollHeight;
+    const current = scrollElement.scrollTop;
+    const more = all - (current + scrollElement.clientHeight) <= 10;
+
+    if (more) onFetchMoreHistory();
+  };
+
+  const onCheckNextPage = useCallback(() => {
+    if (!selectionHistory) return;
+    let feedsRelatedLength = 0;
+
+    selectionHistory.map(({ feeds }) => {
+      feeds.map((feed) => {
+        if (feed.related.length) feedsRelatedLength += feed.related.length;
+      });
+
+      feedsRelatedLength += feeds.length;
+    });
+
+    const hasNextItems = feedsRelatedLength < selectionHistoryTotal;
+
+    return hasNextItems;
+  }, [selectionHistory?.length, selectionHistoryTotal, selectionHistory]);
+
+  const onScroll = useCallback(() => {
+    if (!selectionHistory || loading) return;
+
+    const hasNextPage = onCheckNextPage();
+
+    if (hasNextPage) onCheckListScroll();
+  }, [selectionHistory, loading]);
   useEffect(() => {
     if (!isMount.current || isThirdParty) return;
 
@@ -178,29 +252,32 @@ const History = ({
   if (!selectionHistory?.length) return <NoHistory t={t} />;
 
   return (
-    <StyledHistoryList id="history-list-info-panel">
-      {selectionHistory.map(({ day, feeds }) => [
-        <StyledHistorySubtitle key={day}>
-          {getRelativeDateDay(t, feeds[0].date)}
-        </StyledHistorySubtitle>,
-        ...feeds.map((feed, i) => (
-          <HistoryBlock
-            key={`${feed.action.id}_${feed.date}`}
-            t={t}
-            feed={feed}
-            selectedFolder={selectedFolder}
-            infoPanelSelection={infoPanelSelection}
-            getInfoPanelItemIcon={getInfoPanelItemIcon}
-            checkAndOpenLocationAction={checkAndOpenLocationAction}
-            openUser={openUser}
-            isVisitor={isVisitor}
-            isCollaborator={isCollaborator}
-            withFileList={historyWithFileList}
-            isLastEntity={i === feeds.length - 1}
-          />
-        )),
-      ])}
-    </StyledHistoryList>
+    <>
+      <StyledHistoryList id="history-list-info-panel">
+        {selectionHistory.map(({ day, feeds }) => [
+          <StyledHistorySubtitle key={day}>
+            {getRelativeDateDay(t, feeds[0].date)}
+          </StyledHistorySubtitle>,
+          ...feeds.map((feed, i) => (
+            <HistoryBlock
+              key={`${feed.action.id}_${feed.date}_${i}`}
+              t={t}
+              feed={feed}
+              selectedFolder={selectedFolder}
+              infoPanelSelection={infoPanelSelection}
+              getInfoPanelItemIcon={getInfoPanelItemIcon}
+              checkAndOpenLocationAction={checkAndOpenLocationAction}
+              openUser={openUser}
+              isVisitor={isVisitor}
+              isCollaborator={isCollaborator}
+              withFileList={historyWithFileList}
+              isLastEntity={i === feeds.length - 1 && !isLoadingNextPage}
+            />
+          )),
+        ])}
+      </StyledHistoryList>
+      {isLoadingNextPage ? <HistoryItemLoader /> : <></>}
+    </>
   );
 };
 
@@ -210,11 +287,13 @@ export default inject(
       infoPanelSelection,
       fetchHistory,
       selectionHistory,
+      selectionHistoryTotal,
       historyWithFileList,
       getInfoPanelItemIcon,
       openUser,
       calendarDay,
       setCalendarDay,
+      fetchMoreHistory,
     } = infoPanelStore;
     const { culture } = settingsStore;
 
@@ -227,6 +306,7 @@ export default inject(
     return {
       culture,
       selectionHistory,
+      selectionHistoryTotal,
       historyWithFileList,
       infoPanelSelection,
       getInfoPanelItemIcon,
@@ -237,6 +317,7 @@ export default inject(
       isCollaborator,
       calendarDay,
       setCalendarDay,
+      fetchMoreHistory,
     };
   },
 )(withTranslation(["InfoPanel", "Common", "Translations"])(observer(History)));

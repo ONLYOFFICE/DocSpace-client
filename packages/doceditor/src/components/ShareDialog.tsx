@@ -34,18 +34,16 @@ import {
   ModalDialogType,
 } from "@docspace/shared/components/modal-dialog";
 import { NoUserSelect } from "@docspace/shared/utils/commonStyles";
-import { Base } from "@docspace/shared/themes";
 import { TFile } from "@docspace/shared/api/files/types";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const StyledWrapper = styled.div`
+const StyledWrapper = styled.div.attrs(injectDefaultTheme)`
   ${NoUserSelect}
   margin-top: 16px;
   height: 100%;
   display: flex;
   flex-direction: column;
 `;
-
-StyledWrapper.defaultProps = { theme: Base };
 
 type SharingDialogProps = {
   fileInfo: TFile;

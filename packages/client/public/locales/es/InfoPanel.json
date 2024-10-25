@@ -1,5 +1,4 @@
 {
-  "AccountsEmptyScreenText": "Vea los detalles de los usuarios aquí",
   "AddedRoomTags": "Etiquetas añadidas.",
   "Administration": "Administración",
   "AndMoreLabel": "y <1>{{count}} más</1>",
@@ -35,7 +34,6 @@
   "HistoryRoomCopied": "La sala <1>«{{roomTitle}}»</1> se ha copiado",
   "HistoryRoomCreated": "La sala <1>«{{roomTitle}}»</1> se ha creado",
   "HistoryThirdParty": "La visualización del historial no está disponible para salas públicas con almacenamientos de terceros conectados",
-  "InfoBanner": "La lista de usuarios invitados incluye al propietario y/o administrador de este {{productName}} con acceso completo a todas las salas. Al propietario y/o administrador no se le pueden asignar otros permisos de acceso. Una vez añadidos a la sala, se les notificarán todos los cambios.",
   "ItemsSelected": "Elementos seleccionados",
   "LastModifiedBy": "Ultima modificación por",
   "NoRecordsFound": "No se ha encontrado ningún registro",
@@ -58,5 +56,6 @@
   "SubmenuHistory": "Historial",
   "UserFileUpdated": "Archivo actualizado.",
   "Users": "Usuarios",
+  "UsersEmptyScreenText": "Vea los detalles de los usuarios aquí",
   "Versions": "Versiones"
 }

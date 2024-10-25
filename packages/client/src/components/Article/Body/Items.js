@@ -46,6 +46,7 @@ import AccountsItem from "./AccountsItem";
 
 import ClearTrashReactSvgUrl from "PUBLIC_DIR/images/clear.trash.react.svg?url";
 import { toastr } from "@docspace/shared/components/toast";
+import NewFilesBadge from "SRC_DIR/components/NewFilesBadge";
 
 const StyledDragAndDrop = styled(DragAndDrop)`
   display: contents;
@@ -62,11 +63,10 @@ const Item = ({
   getFolderIcon,
   setBufferSelection,
   isActive,
-  getEndOfBlock,
+  isLastItem,
   showText,
   onClick,
   onMoveTo,
-  onBadgeClick,
   showDragItems,
   startUpload,
   createFoldersTree,
@@ -78,6 +78,8 @@ const Item = ({
   currentColorScheme,
   isIndexEditingMode,
   getLinkData,
+  onBadgeClick,
+  roomsFolderId,
 }) => {
   const [isDragActive, setIsDragActive] = useState(false);
 
@@ -175,7 +177,7 @@ const Item = ({
         isActive={isActive}
         onClick={onClickAction}
         onDrop={onMoveTo}
-        isEndOfBlock={getEndOfBlock(item)}
+        isEndOfBlock={isLastItem}
         isDragging={isDragging}
         isDragActive={isDragActive && isDragging}
         value={value}
@@ -184,6 +186,14 @@ const Item = ({
         onClickBadge={onBadgeClick}
         iconBadge={iconBadge}
         badgeTitle={labelBadge ? "" : t("EmptyRecycleBin")}
+        badgeComponent={
+          <NewFilesBadge
+            newFilesCount={labelBadge}
+            folderId={item.id === roomsFolderId ? "rooms" : item.id}
+            parentDOMId={folderId}
+            onBadgeClick={onBadgeClick}
+          />
+        }
         linkData={linkData}
         $currentColorScheme={currentColorScheme}
       />
@@ -197,7 +207,6 @@ const Items = ({
   showText,
 
   onClick,
-  onBadgeClick,
 
   dragging,
   setDragging,
@@ -233,18 +242,8 @@ const Items = ({
   isIndexEditingMode,
 
   getLinkData,
+  roomsFolderId,
 }) => {
-  const getEndOfBlock = React.useCallback((item) => {
-    switch (item.key) {
-      case "0-3":
-      case "0-5":
-      case "0-6":
-        return true;
-      default:
-        return false;
-    }
-  }, []);
-
   const getFolderIcon = React.useCallback((item) => {
     return getCatalogIconUrlByType(item.rootFolderType);
   }, []);
@@ -320,6 +319,10 @@ const Items = ({
     setEmptyTrashDialogVisible(true);
   };
 
+  const onBadgeClick = () => {
+    if (currentDeviceType === DeviceType.mobile) onHide();
+  };
+
   const getItems = React.useCallback(
     (data) => {
       const items = data.map((item, index) => {
@@ -344,7 +347,7 @@ const Items = ({
             dragging={dragging}
             getFolderIcon={getFolderIcon}
             isActive={item.id === activeItemId}
-            getEndOfBlock={getEndOfBlock}
+            isLastItem={index === data.length - 1}
             showText={showText}
             onClick={onClick}
             getLinkData={getLinkData}
@@ -356,12 +359,14 @@ const Items = ({
             iconBadge={iconBadge}
             folderId={`document_catalog-${FOLDER_NAMES[item.rootFolderType]}`}
             currentColorScheme={currentColorScheme}
+            roomsFolderId={roomsFolderId}
+            onHide={onHide}
             isIndexEditingMode={isIndexEditingMode}
           />
         );
       });
 
-      if (!isVisitor && !isCollaborator)
+      if (!isVisitor)
         items.splice(
           3,
           0,
@@ -388,8 +393,6 @@ const Items = ({
       onClick,
       getLinkData,
       onMoveTo,
-      getEndOfBlock,
-      onBadgeClick,
       showDragItems,
       showText,
       setDragging,
@@ -431,10 +434,11 @@ export default inject(
     indexingStore,
     currentTariffStatusStore,
   }) => {
-    const { isPaymentPageAvailable, currentDeviceType } = authStore;
+    const { isPaymentPageAvailable } = authStore;
+
     const { isCommunity } = currentTariffStatusStore;
 
-    const { showText, currentColorScheme } = settingsStore;
+    const { showText, currentColorScheme, currentDeviceType } = settingsStore;
 
     const {
       selection,
@@ -453,8 +457,13 @@ export default inject(
 
     const { startUpload } = uploadDataStore;
 
-    const { treeFolders, myFolderId, commonFolderId, isPrivacyFolder } =
-      treeFoldersStore;
+    const {
+      treeFolders,
+      myFolderId,
+      commonFolderId,
+      isPrivacyFolder,
+      roomsFolderId,
+    } = treeFoldersStore;
 
     const { id, access: folderAccess } = selectedFolderStore;
     const {
@@ -500,6 +509,7 @@ export default inject(
       currentDeviceType,
       folderAccess,
       currentColorScheme,
+      roomsFolderId,
       isIndexEditingMode,
     };
   },

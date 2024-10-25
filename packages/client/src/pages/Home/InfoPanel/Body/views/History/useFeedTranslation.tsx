@@ -6,11 +6,13 @@ import { HistoryText } from "./HistoryText";
 export const useFeedTranslation = (
   t: TTranslation,
   feed: { action: { key: AnyFeedInfo["key"] }; data: any },
+  hasRelatedItems: boolean,
 ) => {
   switch (feed.action.key) {
     case "FileCreated":
       return t("InfoPanel:FileCreated");
     case "FileUploaded":
+      if (hasRelatedItems) return t("InfoPanel:FileUploaded").slice(0, -1);
       return t("InfoPanel:FileUploaded");
     case "UserFileUpdated":
       return t("InfoPanel:UserFileUpdated");
@@ -39,10 +41,13 @@ export const useFeedTranslation = (
     case "FolderRenamed":
       return t("InfoPanel:FolderRenamed");
     case "FolderMoved":
+      if (hasRelatedItems) return t("InfoPanel:FolderMoved").slice(0, -1);
       return t("InfoPanel:FolderMoved");
     case "FolderCopied":
+      if (hasRelatedItems) return t("InfoPanel:FolderCopied").slice(0, -1);
       return t("InfoPanel:FolderCopied");
     case "FolderDeleted":
+      if (hasRelatedItems) return t("InfoPanel:FolderDeleted").slice(0, -1);
       return t("InfoPanel:FolderDeleted");
     case "RoomCreated":
       return (
@@ -71,12 +76,12 @@ export const useFeedTranslation = (
           ns="InfoPanel"
           i18nKey="RoomRenamed"
           values={{
-            roomTitle: feed.data.newTitle,
             oldRoomTitle: feed.data.oldTitle,
+            roomTitle: feed.data.newTitle,
           }}
           components={{
-            1: <HistoryText title={feed.data.newTitle} />,
-            2: <HistoryText title={feed.data.oldTitle} />,
+            1: <HistoryText title={feed.data.oldTitle} />,
+            2: <HistoryText title={feed.data.newTitle} />,
           }}
         />
       );
@@ -130,17 +135,25 @@ export const useFeedTranslation = (
         />
       );
     case "RoomCreateUser":
+      if (hasRelatedItems) return t("InfoPanel:RoomCreateUser").slice(0, -1);
       return t("InfoPanel:RoomCreateUser");
     case "RoomUpdateAccessForUser":
       return t("InfoPanel:RoomUpdateAccess");
     case "RoomRemoveUser":
       return t("InfoPanel:RoomRemoveUser");
     case "RoomGroupAdded":
+      if (hasRelatedItems) return t("InfoPanel:RoomGroupAdded").slice(0, -1);
       return t("InfoPanel:RoomGroupAdded");
     case "RoomUpdateAccessForGroup":
       return t("InfoPanel:RoomUpdateAccess");
     case "RoomGroupRemove":
       return t("InfoPanel:RoomGroupRemove");
+
+    case "FormSubmit":
+      return t("InfoPanel:FilledOutForm");
+    case "FormOpenedForFilling":
+      return t("InfoPanel:StartedFillingItOut");
+
     default:
       return null;
   }

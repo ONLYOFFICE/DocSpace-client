@@ -26,6 +26,7 @@
 
 import React from "react";
 import styled from "styled-components";
+import { BrowserRouter } from "react-router-dom";
 import { Meta, StoryObj } from "@storybook/react";
 
 import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
@@ -52,6 +53,13 @@ const meta = {
       url: "https://www.figma.com/file/ZiW5KSwb4t7Tj6Nz5TducC/UI-Kit-DocSpace-1.0.0?type=design&node-id=474-2027&mode=design&t=TBNCKMQKQMxr44IZ-0",
     },
   },
+  decorators: [
+    (Story) => (
+      <BrowserRouter>
+        <Story />
+      </BrowserRouter>
+    ),
+  ],
 } satisfies Meta<typeof ArticleItemPure>;
 type Story = StoryObj<typeof ArticleItemPure>;
 
@@ -92,6 +100,10 @@ const OnlyIcon = () => {
         text="My documents"
         showText={false}
         showBadge={false}
+        linkData={{
+          path: "",
+          state: {},
+        }}
       />
     </CatalogWrapper>
   );
@@ -107,6 +119,10 @@ const OnlyIconWithBadge = () => {
         text="My documents"
         showText={false}
         showBadge
+        linkData={{
+          path: "",
+          state: {},
+        }}
       />
     </CatalogWrapper>
   );
@@ -124,6 +140,10 @@ const InitialIcon = () => {
         showBadge={false}
         showInitial
         onClick={() => {}}
+        linkData={{
+          path: "",
+          state: {},
+        }}
       />
     </CatalogWrapper>
   );
@@ -140,6 +160,10 @@ const WithBadgeIcon = () => {
         showText
         showBadge
         iconBadge={CatalogTrashReactSvgUrl}
+        linkData={{
+          path: "",
+          state: {},
+        }}
       />
     </CatalogWrapper>
   );
@@ -159,6 +183,10 @@ const TwoItem = () => {
         isEndOfBlock
         labelBadge={3}
         onClickBadge={() => {}}
+        linkData={{
+          path: "",
+          state: {},
+        }}
       />
       <ArticleItemPure
         icon={CatalogFolderReactSvgUrl}
@@ -168,6 +196,10 @@ const TwoItem = () => {
         onClick={() => {}}
         iconBadge={CatalogTrashReactSvgUrl}
         onClickBadge={() => {}}
+        linkData={{
+          path: "",
+          state: {},
+        }}
       />
     </CatalogWrapper>
   );

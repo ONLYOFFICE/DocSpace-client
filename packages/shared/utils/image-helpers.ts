@@ -40,7 +40,6 @@ enum IconNames {
   Image = "image.svg",
   Letter = "letter.svg",
   Sound = "sound.svg",
-  Svg = "svg.svg",
   Text = "text.svg",
   Video = "video.svg",
   File = "file.svg",
@@ -92,7 +91,6 @@ const iconsMap: Record<IconNames, string[]> = {
   [IconNames.Ebook]: ["ebook"],
   [IconNames.Html]: ["html", ".xps", ".md", ".xml", ".oxps"],
   [IconNames.Letter]: [".iaf"],
-  [IconNames.Svg]: [".svg"],
   [IconNames.Text]: [".txt"],
   [IconNames.Video]: [
     ".3gp",

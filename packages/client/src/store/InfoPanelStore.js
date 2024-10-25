@@ -262,11 +262,7 @@ class InfoPanelStore {
   }
 
   get withPublicRoomBlock() {
-    return (
-      this.infoPanelCurrentSelection?.access ===
-        ShareAccessRights.RoomManager ||
-      this.infoPanelCurrentSelection?.access === ShareAccessRights.None
-    );
+    return this.infoPanelCurrentSelection.security.EditAccess;
   }
 
   getViewItem = () => {

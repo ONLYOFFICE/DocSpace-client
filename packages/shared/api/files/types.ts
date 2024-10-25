@@ -298,6 +298,7 @@ export type TFilesSettings = {
   templatesSection: boolean;
   updateIfExist: boolean;
   openEditorInSameTab: boolean;
+  displayFileExtension: boolean;
 };
 
 export type TPresignedUri = {

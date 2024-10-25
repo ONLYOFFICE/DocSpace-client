@@ -34,6 +34,7 @@ import axios from "axios";
 import { makeAutoObservable } from "mobx";
 import { presentInArray } from "@docspace/shared/utils";
 import {
+  iconSize24,
   iconSize32,
   iconSize64,
   iconSize96,
@@ -384,6 +385,8 @@ class FilesSettingsStore {
       container.has(path) ? container.get(path) : container.get("file.svg");
 
     switch (+size) {
+      case 24:
+        return getOrDefault(iconSize24);
       case 32:
         return getOrDefault(iconSize32);
       case 64:

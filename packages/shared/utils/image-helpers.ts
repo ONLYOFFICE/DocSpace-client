@@ -123,10 +123,10 @@ const iconsMap: Record<IconNames, string[]> = {
   [IconNames.FolderInProgress]: ["folderInProgress"],
 };
 
-/* eslint-disable import/no-dynamic-require, global-require */
 const getSvgByName = (name: string): string => `${name.replace(/^\./, "")}.svg`;
 
 const getUrlByName = (name: string, size: number): string =>
+  // eslint-disable-next-line import/no-dynamic-require, global-require
   require(`PUBLIC_DIR/images/icons/${size}/${name}?url`);
 
 const findIconKey = (format: string): string =>
@@ -150,6 +150,8 @@ const getIconsMap = (size: number): Map<string, string> => {
 
   return iconMap;
 };
+
+export const iconSize24 = getIconsMap(24);
 
 export const iconSize32 = getIconsMap(32);
 

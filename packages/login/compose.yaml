@@ -1,23 +1,25 @@
 services:
-  # running tests from a local folder login/__tests__
-  tests-local:
+  # running tests from a remote folder on the develop branch
+  tests-git:
     image: tests
     build:
       context: ../..
       dockerfile: packages/login/Dockerfile
+      args:
+        BRANCH_NAME: ${BRANCH_NAME:-develop}
     ports:
       - "5111:5111"
-    command: "npx playwright test"
+    # command: "npx playwright test"
     volumes:
-      - ./__tests__:/app/packages/login/__tests__
-      - ./playwright.config.ts:/app/packages/login/playwright.config.ts
       - ../../playwright-report/login:/app/playwright-report/login
 
-  # running tests from a remote folder on the develop branch
-  tests-git:
+  # running tests from a local folder login/__tests__
+  tests-local:
     image: tests
     command: "npx playwright test"
     ports:
       - "5111:5111"
     volumes:
+      - ./__tests__:/app/packages/login/__tests__
+      - ./playwright.config.ts:/app/packages/login/playwright.config.ts
       - ../../playwright-report/login:/app/playwright-report/login

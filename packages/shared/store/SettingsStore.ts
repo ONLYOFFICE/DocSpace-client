@@ -325,6 +325,8 @@ class SettingsStore {
 
   displayAbout: boolean = false;
 
+  isDefaultPasswordProtection: boolean = false;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -1019,6 +1021,7 @@ class SettingsStore {
     this.numberAttempt = settings.attemptCount;
     this.blockingTime = settings.blockTime;
     this.checkPeriod = settings.checkPeriod;
+    this.isDefaultPasswordProtection = settings.isDefault;
   };
 
   getBruteForceProtection = async () => {

@@ -17,11 +17,9 @@ jobs:
         with:
           compose-file: packages/login/compose.yaml
           up-flags: --build --force-recreate
-          services: tests-git
-          test-container: tests-git
+          services: tests-ci
+          test-container: tests-ci
           test-command: npx playwright test
-        env:
-          BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
   eslint:
     name: "Login and doceditor lint"
     runs-on: ubuntu-latest

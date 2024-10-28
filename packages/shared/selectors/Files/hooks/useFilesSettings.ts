@@ -115,7 +115,12 @@ const useFilesSettings = (
     [filesSettings, getIconProp, determineIconPath],
   );
 
-  return { getIcon, extsWebEdited: filesSettings?.extsWebEdited, isLoading };
+  return {
+    getIcon,
+    extsWebEdited: filesSettings?.extsWebEdited,
+    isLoading,
+    displayFileExtension: filesSettings?.displayFileExtension,
+  };
 };
 
 export default useFilesSettings;

@@ -200,9 +200,7 @@ const PaymentContainer = (props) => {
   };
 
   const planSuggestion = () => {
-    if (isNonProfit) return;
-
-    if (isFreeTariff) {
+    if (isFreeTariff && !isNonProfit) {
       return (
         <Text
           noSelect
@@ -217,7 +215,7 @@ const PaymentContainer = (props) => {
       );
     }
 
-    if (isPaidPeriod) {
+    if (isPaidPeriod && !isNonProfit) {
       return (
         <Text
           noSelect
@@ -267,7 +265,7 @@ const PaymentContainer = (props) => {
   };
 
   const planDescription = () => {
-    if (isFreeTariff || isNonProfit) return;
+    if (isFreeTariff) return;
 
     if (isGracePeriod)
       return (
@@ -288,7 +286,7 @@ const PaymentContainer = (props) => {
         </Text>
       );
 
-    if (isPaidPeriod && isPaymentDateValid)
+    if (isPaidPeriod && isPaymentDateValid && !isNonProfit)
       return (
         <Text
           noSelect

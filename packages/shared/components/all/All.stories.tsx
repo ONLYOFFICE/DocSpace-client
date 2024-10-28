@@ -33,8 +33,7 @@ import moment from "moment";
 
 import SettingsReactSvg from "PUBLIC_DIR/images/settings.react.svg";
 import CatalogFolderReactSvg from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg";
-import CatalogEmployeeReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.employee.react.svg?url";
-import ItemActiveReactSvgUrl from "PUBLIC_DIR/images/item.active.react.svg?url";
+import CatalogEmployeeReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.react.svg?url";
 
 import { Avatar, AvatarRole, AvatarSize } from "../avatar";
 import { Button, ButtonSize } from "../button";
@@ -142,13 +141,13 @@ const elementIcon = <CatalogFolderReactSvg />;
 const elementComboBox = (
   <ComboBox
     options={[
-      { key: 1, icon: ItemActiveReactSvgUrl, label: "Open" },
+      { key: 1, icon: CatalogEmployeeReactSvgUrl, label: "Open" },
       { key: 2, icon: "CheckIcon", label: "Closed" },
     ]}
     onSelect={() => {}}
     selectedOption={{
       key: 0,
-      icon: ItemActiveReactSvgUrl,
+      icon: CatalogEmployeeReactSvgUrl,
       label: "",
     }}
     scaled={false}

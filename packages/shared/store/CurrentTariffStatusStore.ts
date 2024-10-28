@@ -141,7 +141,12 @@ class CurrentTariffStatusStore {
   get gracePeriodEndDate() {
     moment.locale(this.language);
     if (this.delayDueDate === null) return "";
-    return moment(this.delayDueDate).tz(window.timezone).format("LL");
+
+    const endDate = isValidDate(this.delayDueDate)
+      ? this.delayDueDate
+      : this.dueDate;
+
+    return moment(endDate).tz(window.timezone).format("LL");
   }
 
   get delayDaysCount() {

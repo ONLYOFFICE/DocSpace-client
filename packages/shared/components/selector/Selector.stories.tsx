@@ -30,7 +30,7 @@ import { Meta, StoryObj } from "@storybook/react";
 
 import ArchiveSvgUrl from "PUBLIC_DIR/images/room.archive.svg?url";
 import FolderSvgUrl from "PUBLIC_DIR/images/icons/32/folder.svg?url";
-import EmptyScreenFilter from "PUBLIC_DIR/images/empty_screen_filter.png";
+import EmptyScreenFilter from "PUBLIC_DIR/images/emptyFilter/empty.filter.rooms.light.svg";
 
 import { RoomsTypeValues } from "../../utils";
 

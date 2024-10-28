@@ -54,6 +54,8 @@ const BruteForceProtection = (props) => {
     bruteForceProtectionUrl,
     currentDeviceType,
     currentColorScheme,
+    isDefaultPasswordProtection,
+    setBruteForceProtectionSettings,
   } = props;
 
   const defaultNumberAttempt = numberAttempt?.toString();
@@ -66,6 +68,7 @@ const BruteForceProtection = (props) => {
     useState(defaultBlockingTime);
   const [currentCheckPeriod, setCurrentCheckPeriod] =
     useState(defaultCheckPeriod);
+  const [isDefault, setIsDefault] = useState(isDefaultPasswordProtection);
 
   const [showReminder, setShowReminder] = useState(false);
   const [isGetSettingsLoaded, setIsGetSettingsLoaded] = useState(false);
@@ -163,6 +166,7 @@ const BruteForceProtection = (props) => {
     setCurrentNumberAttempt(defaultNumberAttempt);
     setCurrentBlockingTime(defaultBlockingTime);
     setCurrentCheckPeriod(defaultCheckPeriod);
+    setIsDefault(isDefaultPasswordProtection);
     setIsGetSettingsLoaded(true);
   };
 
@@ -233,14 +237,10 @@ const BruteForceProtection = (props) => {
       });
   };
 
-  const onCancelClick = () => {
-    const defaultSettings = getFromSessionStorage(
-      "defaultBruteForceProtection",
-    );
-    setCurrentNumberAttempt(defaultSettings?.numberAttempt || "5");
-    setCurrentBlockingTime(defaultSettings?.blockingTime || "60");
-    setCurrentCheckPeriod(defaultSettings?.checkPeriod || "60");
-    setShowReminder(false);
+  const onCancelClick = async () => {
+    const result = await api.settings.deleteBruteForceProtection();
+
+    setBruteForceProtectionSettings(result);
   };
 
   if (currentDeviceType !== DeviceType.desktop && !isGetSettingsLoaded)
@@ -330,14 +330,14 @@ const BruteForceProtection = (props) => {
         onSaveClick={onSaveClick}
         onCancelClick={onCancelClick}
         showReminder={showReminder}
-        reminderText={t("YouHaveUnsavedChanges")}
         saveButtonLabel={t("Common:SaveButton")}
-        cancelButtonLabel={t("Common:CancelButton")}
+        cancelButtonLabel={t("RestoreToDefault")}
         displaySettings={true}
         hasScroll={false}
         additionalClassSaveButton="brute-force-protection-save"
         additionalClassCancelButton="brute-force-protection-cancel"
         isSaving={isLoadingSave}
+        disableRestoreToDefault={isDefault}
       />
     </StyledBruteForceProtection>
   );
@@ -349,11 +349,12 @@ export const BruteForceProtectionSection = inject(
       numberAttempt,
       blockingTime,
       checkPeriod,
-
+      isDefaultPasswordProtection,
       getBruteForceProtection,
       bruteForceProtectionUrl,
       currentDeviceType,
       currentColorScheme,
+      setBruteForceProtectionSettings,
     } = settingsStore;
 
     const { isInit } = setup;
@@ -362,7 +363,8 @@ export const BruteForceProtectionSection = inject(
       numberAttempt,
       blockingTime,
       checkPeriod,
-
+      isDefaultPasswordProtection,
+      setBruteForceProtectionSettings,
       getBruteForceProtection,
       isInit,
       bruteForceProtectionUrl,

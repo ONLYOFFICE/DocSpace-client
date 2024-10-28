@@ -483,24 +483,9 @@
       }
     },
     {
-      "label": "Test | Test e2e docker local",
+      "label": "Test | Test e2e docker start",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn test:e2e:docker:local ; ",
-      "group": {
-         "kind": "build",
-         "isDefault": true
-      },
-      "presentation": {
-         "reveal": "always",
-         "panel": "new",
-         "focus": true,
-         "close": false
-      }
-    },
-    {
-      "label": "Test | Test e2e docker git",
-      "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn test:e2e:docker:git ; ",
+      "command": "cd ${workspaceFolder} ; yarn test:e2e:docker:start ; ",
       "group": {
          "kind": "build",
          "isDefault": true

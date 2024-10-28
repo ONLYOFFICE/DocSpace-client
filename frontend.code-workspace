@@ -220,14 +220,9 @@
             "tooltip": "🛠️ Start the \"test build in docker\" task",
           },
           {
-            "label": "e2e docker local",
-            "task": "Test | Test e2e docker local",
+            "label": "e2e docker start",
+            "task": "Test | Test e2e docker start",
             "tooltip": "🛠️ Start the \"local frontend e2e tests in docker\" task",
-          },
-          {
-            "label": "e2e docker git",
-            "task": "Test | Test e2e docker git",
-            "tooltip": "🛠️ Start the \"remote frontend e2e tests in docker\" task",
           },
           {
             "label": "e2e docker clear",

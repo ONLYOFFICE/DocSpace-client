@@ -538,7 +538,7 @@ class BackupStore {
           const { progress, link, error } = response;
 
           if (error.length > 0 && progress !== 100) {
-            clearInterval(timerId);
+            clearInterval(this.timerId);
             this.timerId && toastr.error(error);
             this.timerId = null;
             //this.clearLocalStorage();

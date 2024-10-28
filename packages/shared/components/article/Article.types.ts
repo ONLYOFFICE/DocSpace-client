@@ -106,7 +106,6 @@ export interface ArticleProps {
   setArticleOpen: (value: boolean) => void;
   withSendAgain: boolean;
   mainBarVisible: boolean;
-  isBannerVisible: boolean;
 
   isLiveChatAvailable: boolean;
   isShowLiveChat: boolean;

@@ -148,14 +148,14 @@ const SetRoomParams = ({
   covers,
   setCover,
 }) => {
-  const [previewIcon, setPreviewIcon] = useState(null);
+  const [previewIcon, setPreviewIcon] = useState(roomParams.previewIcon);
   const [createNewFolderIsChecked, setCreateNewFolderIsChecked] =
     useState(true);
   const [horizontalOrientation, setHorizontalOrientation] = useState(false);
   const [disableImageRescaling, setDisableImageRescaling] = useState(isEdit);
 
   const [previewTitle, setPreviewTitle] = useState(selection?.title || "");
-  const [createRoomTitle, setCreateRoomTitleTitle] = useState("");
+  const [createRoomTitle, setCreateRoomTitleTitle] = useState(roomParams.title);
 
   const [forceHideRoomTypeDropdown, setForceHideRoomTypeDropdown] =
     useState(false);
@@ -178,6 +178,15 @@ const SetRoomParams = ({
     window.addEventListener("resize", checkWidth);
     return () => window.removeEventListener("resize", checkWidth);
   }, []);
+
+  React.useEffect(() => {
+    if (roomParams.previewIcon !== previewIcon) {
+      setRoomParams({
+        ...roomParams,
+        previewIcon: previewIcon,
+      });
+    }
+  }, [previewIcon, roomParams.previewIcon]);
 
   const getCoverLogo = () => {
     if (cover) {
@@ -342,6 +351,7 @@ const SetRoomParams = ({
       }
       color={cover ? cover.color : selection?.logo?.color}
       size={isMobile() && !horizontalOrientation ? "96px" : "64px"}
+      radius={isMobile() && !horizontalOrientation ? "18px" : "12px"}
       withEditing={true}
       model={isEditRoomModel}
       onChangeFile={onChangeFile}
@@ -354,6 +364,7 @@ const SetRoomParams = ({
         cover && cover.cover ? false : !previewIcon || avatarEditorDialogVisible
       }
       size={isMobile() && !horizontalOrientation ? "96px" : "64px"}
+      radius={isMobile() && !horizontalOrientation ? "18px" : "12px"}
       imgClassName={"react-svg-icon"}
       model={model}
       className="room-params-icon"

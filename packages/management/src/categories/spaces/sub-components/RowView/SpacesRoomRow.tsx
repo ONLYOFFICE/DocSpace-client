@@ -38,6 +38,7 @@ import { observer } from "mobx-react";
 import { ReactSVG } from "react-svg";
 
 import { Row } from "@docspace/shared/components/row";
+import { toastr } from "@docspace/shared/components/toast";
 import { RoomContent } from "./RoomContent";
 
 import ChangeStorageQuotaDialog from "client/ChangeStorageQuotaDialog";
@@ -62,19 +63,21 @@ type TRow = {
   item: TPortals;
 };
 const SpacesRoomRow = ({ item }: TRow) => {
+  const { t } = useTranslation(["Common", "Files", "Settings", "Management"]);
   const { spacesStore, settingsStore } = useStore();
   const { setDeletePortalDialogVisible, setCurrentPortal } = spacesStore;
-  const { tenantAlias, getAllPortals, theme } = settingsStore;
+  const { tenantAlias, getAllPortals, theme, portals } = settingsStore;
 
   const [isVisibleDialog, setIsVisibleDialog] = useState(false);
   const [isDisableQuota, setIsDisableQuota] = useState(false);
 
   const onDelete = () => {
+    if (portals.length === 1) {
+      return toastr.error(t("Management:DeleteWarning"));
+    }
     setCurrentPortal(item);
     setDeletePortalDialogVisible(true);
   };
-
-  const { t } = useTranslation(["Common", "Files", "Settings"]);
 
   const logoElement = <ReactSVG id={item.portalName} src={DefaultLogoUrl} />;
 

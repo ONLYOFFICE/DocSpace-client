@@ -216,6 +216,7 @@ export type TLoginSettings = {
   attemptCount: number;
   blockTime: number;
   checkPeriod: number;
+  isDefault: boolean;
 };
 
 export type TCapabilities = {

@@ -23,7 +23,8 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import React, { useState, useEffect } from "react";
+
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { observer } from "mobx-react";
@@ -41,17 +42,11 @@ import ConnectDialog from "client/ConnectDialog";
 const Settings = () => {
   const { t } = useTranslation(["Common", "Settings"]);
   const navigate = useNavigate();
-  const { dialogsStore } = useStore();
+  const { dialogsStore, currentTariffStatusStore } = useStore();
   const { connectDialogVisible } = dialogsStore;
-
-  const [currentTabId, setCurrentTabId] = useState("branding");
+  const { isCommunity } = currentTariffStatusStore;
 
   const data = [
-    {
-      id: "branding",
-      name: t("Settings:Branding"),
-      content: <Branding />,
-    },
     {
       id: "data-backup",
       name: t("Settings:DataBackup"),
@@ -69,18 +64,30 @@ const Settings = () => {
     },
   ];
 
+  if (!isCommunity) {
+    data.unshift({
+      id: "branding",
+      name: t("Settings:Branding"),
+      content: <Branding />,
+    });
+  }
+
   const onSelect = (element: TTabItem) => {
     navigate(
-      combineUrl(window.ClientConfig?.proxy?.url, `/settings/${element.id}`)
+      combineUrl(
+        window.ClientConfig?.proxy?.url,
+        `/management/settings/${element.id}`
+      )
     );
-    setCurrentTabId(element.id);
   };
 
-  useEffect(() => {
+  const getCurrentTabId = () => {
     const path = location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
-    if (currentTab !== undefined && data.length) setCurrentTabId(currentTab.id);
-  }, [location.pathname]);
+    return currentTab && data.length ? currentTab.id : data[0].id;
+  };
+
+  const currentTabId = getCurrentTabId();
 
   return (
     <>

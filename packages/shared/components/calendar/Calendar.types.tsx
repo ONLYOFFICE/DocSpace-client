@@ -49,6 +49,7 @@ export interface CalendarProps {
   initialDate?: moment.Moment | Date;
   isMobile?: boolean;
   forwardedRef?: React.RefObject<HTMLDivElement>;
+  isScroll?: boolean;
 }
 
 export interface DaysProps {
@@ -60,6 +61,7 @@ export interface DaysProps {
   minDate: moment.Moment;
   maxDate: moment.Moment;
   isMobile: boolean;
+  isScroll?: boolean;
 }
 
 export interface DaysHeaderProps {
@@ -78,6 +80,7 @@ export interface DaysBodyProps {
   minDate: moment.Moment;
   maxDate: moment.Moment;
   isMobile: boolean;
+  isScroll?: boolean;
 }
 
 export interface HeaderButtonsProps {
@@ -96,6 +99,7 @@ export interface MonthsProps {
   minDate: moment.Moment;
   maxDate: moment.Moment;
   isMobile: boolean;
+  isScroll?: boolean;
 }
 
 export interface MonthsBodyProps {
@@ -106,6 +110,7 @@ export interface MonthsBodyProps {
   minDate: moment.Moment;
   maxDate: moment.Moment;
   isMobile: boolean;
+  isScroll?: boolean;
 }
 
 export interface MonthsHeaderProps {
@@ -125,6 +130,7 @@ export interface YearsProps {
   minDate: moment.Moment;
   maxDate: moment.Moment;
   isMobile: boolean;
+  isScroll?: boolean;
 }
 
 export interface YearsHeaderProps {

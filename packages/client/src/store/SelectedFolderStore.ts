@@ -38,10 +38,15 @@ import type {
   Nullable,
   TCreatedBy,
   TPathParts,
-  TTranslation,
+  // TTranslation,
 } from "@docspace/shared/types";
 import { TFolder, TFolderSecurity } from "@docspace/shared/api/files/types";
-import { TLogo, TRoomSecurity } from "@docspace/shared/api/rooms/types";
+import {
+  TLogo,
+  TRoomLifetime,
+  TRoomSecurity,
+  TWatermark,
+} from "@docspace/shared/api/rooms/types";
 
 import { setDocumentTitle } from "../helpers/utils";
 
@@ -139,7 +144,15 @@ class SelectedFolderStore {
 
   canShare = false;
 
+  indexing = false;
+
   parentRoomType: Nullable<FolderType> = null;
+
+  lifetime: TRoomLifetime | null = null;
+
+  watermark: TWatermark | null = null;
+
+  denyDownload: boolean | undefined;
 
   usedSpace: number | undefined;
 
@@ -148,6 +161,8 @@ class SelectedFolderStore {
   isCustomQuota: boolean | undefined;
 
   changeDocumentsTabs = false;
+
+  order: Nullable<string> = null;
 
   constructor(settingsStore: SettingsStore) {
     makeAutoObservable(this);
@@ -192,11 +207,20 @@ class SelectedFolderStore {
       type: this.type,
       isRootFolder: this.isRootFolder,
       parentRoomType: this.parentRoomType,
+      lifetime: this.lifetime,
+      indexing: this.indexing,
+      denyDownload: this.denyDownload,
       usedSpace: this.usedSpace,
       quotaLimit: this.quotaLimit,
       isCustomQuota: this.isCustomQuota,
+      order: this.order,
+      watermark: this.watermark,
     };
   };
+
+  get isIndexedFolder() {
+    return !!(this.indexing || this.order);
+  }
 
   get isRootFolder() {
     return this.pathParts && this.pathParts.length <= 1;
@@ -233,9 +257,22 @@ class SelectedFolderStore {
     this.type = null;
     this.inRoom = false;
     this.parentRoomType = null;
+    this.lifetime = null;
+    this.indexing = false;
+    this.denyDownload = false;
     this.usedSpace = undefined;
     this.quotaLimit = undefined;
     this.isCustomQuota = undefined;
+    this.order = null;
+    this.watermark = null;
+  };
+
+  setFilesCount = (filesCount: number) => {
+    this.filesCount = filesCount;
+  };
+
+  setFoldersCount = (foldersCount: number) => {
+    this.foldersCount = foldersCount;
   };
 
   setParentId = (parentId: number) => {
@@ -262,45 +299,51 @@ class SelectedFolderStore {
     this.changeDocumentsTabs = changeDocumentsTabs;
   };
 
-  updateEditedSelectedRoom = (title = this.title, tags = this.tags) => {
-    this.title = title;
-    this.tags = tags;
+  updateEditedSelectedRoom: (selectedFolder: TSetSelectedFolder) => void = (
+    selectedFolder,
+  ) => {
+    Object.entries(selectedFolder).forEach(([key, item]) => {
+      if (key in this) {
+        // @ts-expect-error its always be good
+        this[key] = item;
+      }
+    });
   };
 
   setInRoom = (inRoom: boolean) => {
     this.inRoom = inRoom;
   };
 
-  addDefaultLogoPaths = () => {
-    const cachebreaker = new Date().getTime();
-    this.logo = {
-      small: `/storage/room_logos/root/${this.id}_small.png?${cachebreaker}`,
-      medium: `/storage/room_logos/root/${this.id}_medium.png?${cachebreaker}`,
-      large: `/storage/room_logos/root/${this.id}_large.png?${cachebreaker}`,
-      original: `/storage/room_logos/root/${this.id}_original.png?${cachebreaker}`,
-    };
-  };
+  // addDefaultLogoPaths = () => {
+  //   const cachebreaker = new Date().getTime();
+  //   this.logo = {
+  //     small: `/storage/room_logos/root/${this.id}_small.png?${cachebreaker}`,
+  //     medium: `/storage/room_logos/root/${this.id}_medium.png?${cachebreaker}`,
+  //     large: `/storage/room_logos/root/${this.id}_large.png?${cachebreaker}`,
+  //     original: `/storage/room_logos/root/${this.id}_original.png?${cachebreaker}`,
+  //   };
+  // };
 
-  removeLogoPaths = () => {
-    this.logo = {
-      small: "",
-      medium: "",
-      large: "",
-      original: "",
-    };
-  };
+  // removeLogoPaths = () => {
+  //   this.logo = {
+  //     small: "",
+  //     medium: "",
+  //     large: "",
+  //     original: "",
+  //   };
+  // };
 
-  updateLogoPathsCacheBreaker = () => {
-    if (!this.logo?.original) return;
+  // updateLogoPathsCacheBreaker = () => {
+  //   if (!this.logo?.original) return;
 
-    const cachebreaker = new Date().getTime();
-    this.logo = {
-      small: `${this.logo.small.split("?")[0]}?${cachebreaker}`,
-      medium: `${this.logo.medium.split("?")[0]}?${cachebreaker}`,
-      large: `${this.logo.large.split("?")[0]}?${cachebreaker}`,
-      original: `${this.logo.original.split("?")[0]}?${cachebreaker}`,
-    };
-  };
+  //   const cachebreaker = new Date().getTime();
+  //   this.logo = {
+  //     small: `${this.logo.small.split("?")[0]}?${cachebreaker}`,
+  //     medium: `${this.logo.medium.split("?")[0]}?${cachebreaker}`,
+  //     large: `${this.logo.large.split("?")[0]}?${cachebreaker}`,
+  //     original: `${this.logo.original.split("?")[0]}?${cachebreaker}`,
+  //   };
+  // };
 
   setDefaultValuesIfUndefined: (selectedFolder: TSetSelectedFolder) => void = (
     selectedFolder,
@@ -309,10 +352,11 @@ class SelectedFolderStore {
     if (!("providerId" in selectedFolder)) this.providerId = null;
     if (!("providerItem" in selectedFolder)) this.providerItem = null;
     if (!("providerKey" in selectedFolder)) this.providerKey = null;
+    if (!("order" in selectedFolder)) this.order = null;
   };
 
   setSelectedFolder: (
-    t: TTranslation,
+    // t: TTranslation,
     selectedFolder: TSetSelectedFolder | null,
   ) => void = (selectedFolder) => {
     const socketHelper = this.settingsStore?.socketHelper;

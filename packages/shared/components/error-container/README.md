@@ -5,7 +5,7 @@ Used to display full page error
 ### Usage
 
 ```js
-import ErrorContainer from "@docspace/common/components/ErrorContainer";
+import ErrorContainer from "@docspace/shared/components/ErrorContainer";
 ```
 
 ```jsx

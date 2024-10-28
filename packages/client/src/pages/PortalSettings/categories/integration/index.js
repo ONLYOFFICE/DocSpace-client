@@ -113,7 +113,7 @@ const IntegrationWrapper = (props) => {
   const getCurrentTabId = () => {
     const path = location.pathname;
     const currentTab = data.find((item) => path.includes(item.id));
-    return currentTab !== -1 && data.length ? currentTab.id : data[0].id;
+    return currentTab && data.length ? currentTab.id : data[0].id;
   };
 
   const currentTabId = getCurrentTabId();

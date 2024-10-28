@@ -5,7 +5,6 @@
   "CreateSpaceDescription": "Úspěšně jste připojili doménu k vaší IP adrese. Chcete-li upravit nastavení adresy prostoru, musíte nastavit budoucí název {{productName}}",
   "CreatingPortal": "Vytvoření nového prostoru {{productName}}",
   "CurrentSpace": "Aktuální prostor",
-  "DeletePortalText": "Upozornění: vybraný prostor {{productName}} může odstranit pouze jeho vlastník. Vlastníkem <1>{{domain}}</1>  je <1>{{displayName}}</1>  (<5>{{email}}</5>). Pokud nejste vlastníkem, nebudete mít přístup k nastavení mazání prostoru {{productName}} kliknutím na tlačítko DELETE a budete přesměrováni do sekce Pokoje.",
   "DomainName": "Název domény",
   "DomainNotFound": "Doména nenalezena, zkontrolujte prosím nastavení DNS",
   "DomainSettings": "Nastavení domény",

@@ -63,7 +63,7 @@ import { Context, Provider, Consumer } from "./context";
 import commonIconsStyles, { IconSizeType } from "./common-icons-style";
 import { classNames } from "./classNames";
 import { getBannerAttribute, getLanguage } from "./banner";
-import { NoUserSelect } from "./commonStyles";
+import { NoUserSelect, TextUserSelect } from "./commonStyles";
 import { commonInputStyles } from "./commonInputStyles";
 import { commonTextStyles } from "./commonTextStyles";
 import {
@@ -89,6 +89,7 @@ export {
   parseAddresses,
   getParts,
   NoUserSelect,
+  TextUserSelect,
   commonInputStyles,
   commonTextStyles,
   INFO_PANEL_WIDTH,
@@ -168,7 +169,11 @@ export const getTitleWithoutExtension = (
     : item.title;
 };
 
-export const getLastColumn = (tableStorageName: string) => {
+export const getLastColumn = (
+  tableStorageName: string,
+  storageColumnsSize?: string,
+  isIndexEditingMode?: boolean,
+) => {
   if (!tableStorageName) return;
 
   const storageColumns = localStorage.getItem(tableStorageName);
@@ -178,8 +183,19 @@ export const getLastColumn = (tableStorageName: string) => {
   const filterColumns = columns.filter(
     (column) => column !== "false" && column !== "QuickButtons",
   );
+  let hideColumnsTable = false;
 
+  if (isIndexEditingMode) {
+    hideColumnsTable = !storageColumnsSize
+      ?.split(" ")
+      .filter(
+        (item, index, array) =>
+          index !== 0 && index !== 1 && index !== array.length - 1,
+      )
+      .find((item) => item !== "0px");
+  }
+
+  if (hideColumnsTable) return filterColumns[1];
   if (filterColumns.length > 0) return filterColumns[filterColumns.length - 1];
-
   return null;
 };

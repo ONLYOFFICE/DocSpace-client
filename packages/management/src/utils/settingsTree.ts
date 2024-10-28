@@ -55,7 +55,7 @@ export const settingsTree = [
     key: "1-1",
     icon: "",
     link: "branding",
-    tKey: "Settings",
+    tKey: "Common:Settings",
     isHeader: true,
   },
   {
@@ -84,7 +84,7 @@ export const settingsTree = [
     key: "1-2",
     icon: DataManagementIconUrl,
     link: "data-backup",
-    tKey: "Settings",
+    tKey: "Common:Settings",
     isHeader: true,
   },
   {
@@ -92,7 +92,7 @@ export const settingsTree = [
     key: "1-3",
     icon: DataManagementIconUrl,
     link: "auto-backup",
-    tKey: "Settings",
+    tKey: "Common:Settings",
     isHeader: true,
   },
   {
@@ -100,7 +100,7 @@ export const settingsTree = [
     key: "1-4",
     icon: RestoreIconUrl,
     link: "restore",
-    tKey: "Settings",
+    tKey: "Common:Settings",
     isHeader: true,
   },
   {

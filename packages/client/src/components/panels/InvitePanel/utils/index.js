@@ -30,6 +30,7 @@ import {
   EmployeeType,
 } from "@docspace/shared/enums";
 import { globalColors } from "@docspace/shared/themes";
+import { getUserTypeTranslation } from "@docspace/shared/utils/common";
 import { checkIfAccessPaid } from "SRC_DIR/helpers";
 
 /**
@@ -41,9 +42,10 @@ const getRoomAdminDescription = (roomType, t) => {
   switch (roomType) {
     case RoomsType.FormRoom:
       return t("Translations:RoleRoomAdminFormRoomDescription");
-
-    default:
+    case -1:
       return t("Translations:RoleRoomAdminDescription");
+    default:
+      return t("Translations:RoleRoomManagerDescription");
   }
 };
 /**
@@ -51,13 +53,14 @@ const getRoomAdminDescription = (roomType, t) => {
  * @param {(key: string)=> string} t
  * @returns {string}
  */
-const getPowerUserDescription = (roomType, t) => {
+const getUserDescription = (roomType, t) => {
   switch (roomType) {
     case RoomsType.FormRoom:
       return t("Translations:RolePowerUserFormRoomDescription");
-
+    case -1:
+      return t("Translations:RoleNewUserDescription");
     default:
-      return t("Translations:RolePowerUserDescription");
+      return t("Translations:RoleContentCreatorDescription");
   }
 };
 
@@ -82,13 +85,14 @@ export const getAccessOptions = (
   withRemove = false,
   withSeparator = false,
   isOwner = false,
+  isAdmin = false,
   standalone = false,
 ) => {
   let options = [];
   const accesses = {
     portalAdmin: {
-      key: "portalAdmin",
-      label: t("Common:PortalAdmin", { productName: t("Common:ProductName") }),
+      key: EmployeeType.Admin,
+      label: getUserTypeTranslation(EmployeeType.Admin, t),
       description: t("Translations:RolePortalAdminDescription", {
         productName: t("Common:ProductName"),
       }),
@@ -96,71 +100,82 @@ export const getAccessOptions = (
       color: globalColors.favoritesStatus,
       access:
         roomType === -1 ? EmployeeType.Admin : ShareAccessRights.FullAccess,
-      type: "admin",
+      type: EmployeeType.Admin,
     },
     roomAdmin: {
       key: "roomAdmin",
-      label: t("Common:RoomAdmin"),
+      label: getUserTypeTranslation(EmployeeType.RoomAdmin, t),
       description: getRoomAdminDescription(roomType, t),
       ...(!standalone && { quota: t("Common:Paid") }),
       color: globalColors.favoritesStatus,
       access:
-        roomType === -1 ? EmployeeType.User : ShareAccessRights.RoomManager,
-      type: "manager",
+        roomType === -1
+          ? EmployeeType.RoomAdmin
+          : ShareAccessRights.RoomManager,
+      type: EmployeeType.RoomAdmin,
     },
-    collaborator: {
-      key: "collaborator",
-      label: t("Common:PowerUser"),
-      description: getPowerUserDescription(roomType, t),
+    roomManager: {
+      key: "roomManager",
+      label: t("Common:RoomManager"),
+      description: getRoomAdminDescription(roomType, t),
       ...(!standalone && { quota: t("Common:Paid") }),
       color: globalColors.favoritesStatus,
       access:
         roomType === -1
-          ? EmployeeType.Collaborator
-          : ShareAccessRights.Collaborator,
-      type: "collaborator",
+          ? EmployeeType.RoomAdmin
+          : ShareAccessRights.RoomManager,
+      type: EmployeeType.RoomAdmin,
     },
     user: {
-      key: "user",
-      label: t("Common:User"),
-      description: t("Translations:RoleUserDescription"),
-      access: EmployeeType.Guest,
-      type: "user",
+      key: "newUser",
+      label: getUserTypeTranslation(EmployeeType.User, t),
+      description: getUserDescription(roomType, t),
+      access:
+        roomType === -1 ? EmployeeType.User : ShareAccessRights.Collaborator,
+      type: EmployeeType.User,
+    },
+    contentCreator: {
+      key: "contentCreator",
+      label: t("Common:ContentCreator"),
+      description: getUserDescription(roomType, t),
+      access:
+        roomType === -1 ? EmployeeType.User : ShareAccessRights.Collaborator,
+      type: EmployeeType.User,
     },
     editor: {
       key: "editor",
       label: t("Common:Editor"),
       description: t("Translations:RoleEditorDescription"),
       access: ShareAccessRights.Editing,
-      type: "user",
+      type: EmployeeType.User,
     },
     formFiller: {
       key: "formFiller",
       label: t("Translations:RoleFormFiller"),
       description: getFormFillerDescription(roomType, t),
       access: ShareAccessRights.FormFilling,
-      type: "user",
+      type: EmployeeType.User,
     },
     reviewer: {
       key: "reviewer",
       label: t("Translations:RoleReviewer"),
       description: t("Translations:RoleReviewerDescription"),
       access: ShareAccessRights.Review,
-      type: "user",
+      type: EmployeeType.User,
     },
     commentator: {
       key: "commentator",
       label: t("Translations:RoleCommentator"),
       description: t("Translations:RoleCommentatorDescription"),
       access: ShareAccessRights.Comment,
-      type: "user",
+      type: EmployeeType.User,
     },
     viewer: {
       key: "viewer",
       label: t("Translations:RoleViewer"),
       description: t("Translations:RoleViewerDescription"),
       access: ShareAccessRights.ReadOnly,
-      type: "user",
+      type: EmployeeType.User,
     },
   };
 
@@ -168,26 +183,26 @@ export const getAccessOptions = (
     case RoomsType.FillingFormsRoom:
       options = [
         accesses.roomAdmin,
-        accesses.collaborator,
         { key: "s1", isSeparator: withSeparator },
+        accesses.contentCreator,
         accesses.formFiller,
         accesses.viewer,
       ];
       break;
     case RoomsType.EditingRoom:
       options = [
-        accesses.roomAdmin,
-        accesses.collaborator,
+        accesses.roomManager,
         { key: "s1", isSeparator: withSeparator },
+        accesses.contentCreator,
         accesses.editor,
         accesses.viewer,
       ];
       break;
     case RoomsType.ReviewRoom:
       options = [
-        accesses.roomAdmin,
-        accesses.collaborator,
+        accesses.roomManager,
         { key: "s1", isSeparator: withSeparator },
+        accesses.contentCreator,
         accesses.reviewer,
         accesses.commentator,
         accesses.viewer,
@@ -195,17 +210,17 @@ export const getAccessOptions = (
       break;
     case RoomsType.ReadOnlyRoom:
       options = [
-        accesses.roomAdmin,
-        accesses.collaborator,
+        accesses.roomManager,
         { key: "s1", isSeparator: withSeparator },
+        accesses.contentCreator,
         accesses.viewer,
       ];
       break;
     case RoomsType.CustomRoom:
       options = [
-        accesses.roomAdmin,
-        accesses.collaborator,
+        accesses.roomManager,
         { key: "s1", isSeparator: withSeparator },
+        accesses.contentCreator,
         accesses.editor,
         accesses.formFiller,
         accesses.reviewer,
@@ -214,27 +229,44 @@ export const getAccessOptions = (
       ];
       break;
     case RoomsType.PublicRoom:
-      options = [accesses.roomAdmin, accesses.collaborator];
+      options = [accesses.roomManager, accesses.contentCreator];
       break;
 
     case RoomsType.FormRoom:
       options = [
-        accesses.roomAdmin,
-        accesses.collaborator,
+        accesses.roomManager,
         { key: "s1", isSeparator: withSeparator },
+        accesses.contentCreator,
         accesses.formFiller,
       ];
       break;
+
+    case RoomsType.VirtualDataRoom:
+      options = [
+        accesses.roomAdmin,
+        { key: "s1", isSeparator: withSeparator },
+        accesses.contentCreator,
+        accesses.editor,
+        accesses.viewer,
+      ];
+      break;
+
     case -1:
       if (isOwner) options.push(accesses.portalAdmin);
 
-      options = [
-        ...options,
-        accesses.roomAdmin,
-        accesses.collaborator,
-        { key: "s1", isSeparator: withSeparator },
-        accesses.user,
-      ];
+      if (isAdmin || isOwner) {
+        options.push(
+          ...[
+            accesses.roomAdmin,
+            {
+              key: "s1",
+              isSeparator: withSeparator,
+            },
+          ],
+        );
+      }
+
+      options = [...options, accesses.user];
       break;
   }
 
@@ -263,13 +295,12 @@ export const getTopFreeRole = (t, roomType) => {
 export const isPaidUserRole = (selectedAccess) => {
   return (
     selectedAccess === ShareAccessRights.FullAccess ||
-    selectedAccess === ShareAccessRights.Collaborator ||
     selectedAccess === ShareAccessRights.RoomManager
   );
 };
 
 export const getFreeUsersTypeArray = () => {
-  return [EmployeeType.Guest];
+  return [EmployeeType.User];
 };
 
 export const getFreeUsersRoleArray = () => {
@@ -279,5 +310,25 @@ export const getFreeUsersRoleArray = () => {
     ShareAccessRights.FormFilling,
     ShareAccessRights.ReadOnly,
     ShareAccessRights.Review,
+    ShareAccessRights.Collaborator,
   ];
+};
+
+export const fixAccess = (item, t, roomType) => {
+  const topFreeRole = getTopFreeRole(t, roomType);
+  makeFreeRole(item, t, topFreeRole);
+};
+
+export const makeFreeRole = (item, t, freeRole) => {
+  if (!freeRole) return item;
+
+  item.access = freeRole.access;
+  item.warning = item.isGroup
+    ? t("GroupMaxAvailableRoleWarning", {
+        roleName: freeRole.label,
+      })
+    : t("UserMaxAvailableRoleWarning", {
+        productName: t("Common:ProductName"),
+      });
+  return item;
 };

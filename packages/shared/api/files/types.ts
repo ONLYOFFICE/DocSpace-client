@@ -26,7 +26,6 @@
 
 import moment from "moment";
 import { TCreatedBy, TPathParts } from "../../types";
-import { TUser } from "../people/types";
 import {
   EmployeeActivationStatus,
   EmployeeStatus,
@@ -36,6 +35,7 @@ import {
   RoomsType,
   ShareAccessRights,
 } from "../../enums";
+import { TUser } from "../people/types";
 
 export type TFileViewAccessibility = {
   CanConvert: boolean;

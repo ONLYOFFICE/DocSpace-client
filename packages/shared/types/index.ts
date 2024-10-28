@@ -29,7 +29,6 @@ import {
   TSettings,
   TVersionBuild,
 } from "../api/settings/types";
-import { TUser } from "../api/people/types";
 import { RoomsType } from "../enums";
 import { TTheme } from "../themes";
 import FirebaseHelper from "../utils/firebase";
@@ -64,6 +63,9 @@ export type ThirdPartyAccountType = {
   disabled: boolean;
   className?: string;
 };
+
+export type TSortOrder = "descending" | "ascending";
+export type TSortBy = "DateAndTime" | "Tags" | "AZ";
 
 export type TTranslation = (
   key: string,
@@ -122,7 +124,7 @@ declare global {
   interface Window {
     firebaseHelper: FirebaseHelper;
     __ASC_INITIAL_EDITOR_STATE__?: {
-      user: TUser;
+      user: unknown;
       portalSettings: TSettings;
       appearanceTheme: TGetColorTheme;
       versionInfo: TVersionBuild;
@@ -138,6 +140,7 @@ declare global {
     snackbar?: {};
     DocSpace: {
       navigate: (path: string, state?: { [key: string]: unknown }) => void;
+      location: Location;
     };
     ClientConfig?: {
       pdfViewerUrl: string;

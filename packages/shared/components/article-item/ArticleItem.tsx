@@ -68,8 +68,10 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
     isFirstHeader = false,
     folderId,
     badgeTitle,
+    badgeComponent,
     $currentColorScheme,
     title,
+    linkData,
   } = props;
 
   const onClickAction = (e: React.MouseEvent) => {
@@ -107,62 +109,70 @@ export const ArticleItemPure = (props: ArticleItemProps) => {
 
   const renderItem = () => {
     return (
-      <StyledArticleItemTheme
-        className={className}
-        style={style}
-        showText={showText}
-        isEndOfBlock={isEndOfBlock}
-        isActive={isActive}
-        data-testid="article-item"
-        $currentColorScheme={$currentColorScheme}
-        title={tooltipTitle}
+      <Link
+        style={{ textDecoration: "none" }}
+        to={linkData?.path}
+        state={linkData?.state}
       >
-        <StyledArticleItemSibling
-          id={folderId}
+        <StyledArticleItemTheme
+          className={className}
+          style={style}
+          showText={showText}
+          isEndOfBlock={isEndOfBlock}
           isActive={isActive}
-          isDragging={isDragging}
-          isDragActive={isDragActive}
-          onClick={onClickAction}
-          onMouseUp={onMouseUpAction}
-          onMouseDown={onMouseDown}
-        />
-        <StyledArticleItemImg isActive={isActive}>
-          <ReactSVG className="icon" src={icon} />
-          {!showText && (
-            <>
-              {showInitial && (
-                <StyledArticleItemInitialText>
-                  {getInitial(text)}
-                </StyledArticleItemInitialText>
-              )}
-              {showBadge && !iconBadge && (
-                <StyledArticleItemBadgeWrapper
-                  onClick={onClickBadgeAction}
-                  showText={showText}
-                />
-              )}
-            </>
-          )}
-        </StyledArticleItemImg>
-        {showText && (
-          <StyledArticleItemText isActive={isActive} noSelect>
-            {text}
-          </StyledArticleItemText>
-        )}
-        {showBadge && showText && (
-          <StyledArticleItemBadgeWrapper
-            showText={showText}
-            onClick={onClickBadgeAction}
-            title={badgeTitle}
-          >
-            {!iconBadge ? (
-              <Badge className="catalog-item__badge" label={labelBadge} />
-            ) : (
-              <ReactSVG className="catalog-item__icon" src={iconBadge} />
+          data-testid="article-item"
+          $currentColorScheme={$currentColorScheme}
+          title={tooltipTitle}
+        >
+          <StyledArticleItemSibling
+            id={folderId}
+            isActive={isActive}
+            isDragging={isDragging}
+            isDragActive={isDragActive}
+            onClick={onClickAction}
+            onMouseUp={onMouseUpAction}
+            onMouseDown={onMouseDown}
+          />
+          <StyledArticleItemImg isActive={isActive}>
+            <ReactSVG className="icon" src={icon} />
+            {!showText && (
+              <>
+                {showInitial && (
+                  <StyledArticleItemInitialText>
+                    {getInitial(text)}
+                  </StyledArticleItemInitialText>
+                )}
+                {showBadge && !iconBadge && (
+                  <StyledArticleItemBadgeWrapper
+                    onClick={onClickBadgeAction}
+                    showText={showText}
+                  />
+                )}
+              </>
             )}
-          </StyledArticleItemBadgeWrapper>
-        )}
-      </StyledArticleItemTheme>
+          </StyledArticleItemImg>
+          {showText && (
+            <StyledArticleItemText isActive={isActive} noSelect>
+              {text}
+            </StyledArticleItemText>
+          )}
+          {showBadge && showText && (
+            <StyledArticleItemBadgeWrapper
+              showText={showText}
+              onClick={onClickBadgeAction}
+              title={badgeTitle}
+            >
+              {badgeComponent || !iconBadge ? (
+                (badgeComponent ?? (
+                  <Badge className="catalog-item__badge" label={labelBadge} />
+                ))
+              ) : (
+                <ReactSVG className="catalog-item__icon" src={iconBadge} />
+              )}
+            </StyledArticleItemBadgeWrapper>
+          )}
+        </StyledArticleItemTheme>
+      </Link>
     );
   };
 

@@ -28,9 +28,22 @@ import styled, { css } from "styled-components";
 import { isMobileOnly } from "react-device-detect";
 import { globalColors } from "../../themes";
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ isPickerOnly: boolean }>`
   .save-button {
     inset-inline-end: 10px;
+  }
+
+  .hex-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+  }
+
+  .hex-text {
+    &:hover {
+      cursor: default;
+    }
   }
 
   .hex-color-picker .react-colorful {
@@ -47,10 +60,17 @@ const Wrapper = styled.div`
   .hex-color-picker .react-colorful__interactive {
     width: 183px;
 
+    ${({ theme }) => theme.interfaceDirection === "rtl" && "right: 13px;"}
+
     ${isMobileOnly &&
     css`
       width: calc(100vw - 76px);
     `}
+  }
+
+  .react-colorful__last-control .react-colorful__interactive {
+    left: 6px;
+    ${({ theme }) => theme.interfaceDirection === "rtl" && "right: 6px;"}
   }
 
   .hex-color-picker .react-colorful__saturation-pointer {
@@ -123,6 +143,18 @@ const Wrapper = styled.div`
   .hex-button {
     order: 3;
   }
+
+  ${(props) =>
+    props.isPickerOnly &&
+    css`
+      .react-colorful__saturation {
+        margin-block: 16px 24px;
+      }
+
+      .hex-color-picker {
+        padding-bottom: 0px;
+      }
+    `}
 `;
 
 export default Wrapper;

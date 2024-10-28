@@ -1,8 +1,8 @@
 {
   "ChangeUserTypeButton": "Mainīt veidu",
   "ChangeUserTypeHeader": "Mainiet lietotāja veidu",
-  "ChangeUserTypeMessage": "Lietotāji ar '{{ firstType }}' veidu tiks pārvietoti uz '{{ secondType }}' veidu.",
-  "ChangeUserTypeMessageMulti": "Atlasītie lietotāji tiks pārvietoti uz'{{ secondType }}' tipu.",
+  "ChangeUserTypeMessage": "Lietotāji ar <strong>'{{ firstType }}'</strong> veidu tiks pārvietoti uz <strong>'{{ secondType }}'</strong> veidu.",
+  "ChangeUserTypeMessageMulti": "Atlasītie lietotāji tiks pārvietoti uz<strong>'{{ secondType }}'</strong> tipu.",
   "ChangeUserTypeMessageWarning": "Jūs nevarat mainīt veidu {{productName}} administratoriem un sev.",
   "SuccessChangeUserType": "Lietotāja veids ir veiksmīgi nomainīts"
 }

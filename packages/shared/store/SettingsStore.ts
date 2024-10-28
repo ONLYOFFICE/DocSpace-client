@@ -223,8 +223,6 @@ class SettingsStore {
 
   hasShortenService = false;
 
-  withPaging = false;
-
   customSchemaList: TCustomSchema[] = [];
 
   firebase: TFirebaseSettings = {
@@ -324,6 +322,8 @@ class SettingsStore {
   recaptchaPublicKey: string | null = null;
 
   recaptchaType: RecaptchaType | null = null;
+
+  displayAbout: boolean = false;
 
   constructor() {
     makeAutoObservable(this);

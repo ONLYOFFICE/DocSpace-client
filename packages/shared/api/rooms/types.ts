@@ -26,6 +26,7 @@
 
 import { TFile, TFolder } from "../files/types";
 import {
+  ExportRoomIndexTaskStatus,
   FolderType,
   RoomsType,
   ShareAccessRights,
@@ -33,7 +34,13 @@ import {
 } from "../../enums";
 import { TCreatedBy, TPathParts } from "../../types";
 
+export type ICover = {
+  data: string;
+  id: string;
+};
+
 export type TLogo = {
+  cover: ICover;
   original: string;
   large: string;
   medium: string;
@@ -59,6 +66,20 @@ export type TRoomSecurity = {
   CopySharedLink: boolean;
 };
 
+export type TRoomLifetime = {
+  deletePermanently: boolean;
+  period: number;
+  value: number;
+};
+
+export type TWatermark = {
+  additions: number;
+  imageHeight: number;
+  imageScale: number;
+  imageWidth: number;
+  rotate: number;
+  imageUrl?: string;
+};
 export type TRoom = {
   parentId: number;
   filesCount: number;
@@ -84,6 +105,7 @@ export type TRoom = {
   updatedBy: TCreatedBy;
   isArchive?: boolean;
   security: TRoomSecurity;
+  lifetime: TRoomLifetime;
 };
 
 export type TGetRooms = {
@@ -97,9 +119,27 @@ export type TGetRooms = {
   new: number;
 };
 
+export type TExportRoomIndexTask = {
+  id: string;
+  error: string;
+  percentage: number;
+  isCompleted: boolean;
+  status: ExportRoomIndexTaskStatus;
+  resultFileId: number;
+  resultFileName: string;
+  resultFileUrl: string;
+};
+
 export type TPublicRoomPassword = {
   linkId: string;
   shared: boolean;
   status: ValidationStatus;
   tenantId: string | number;
+};
+
+export type TNewFilesItem = TFile[] | { room: TRoom; items: TFile[] };
+
+export type TNewFiles = {
+  date: string;
+  items: TNewFilesItem[];
 };

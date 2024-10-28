@@ -1,3 +1,4 @@
+import { AvatarRole } from "./../components/avatar/Avatar.enums";
 // (c) Copyright Ascensio System SIA 2009-2024
 //
 // This program is a free software product.
@@ -28,12 +29,14 @@
 /* eslint-disable no-multi-str */
 /* eslint-disable no-plusplus */
 
+import type { Location } from "@remix-run/router";
 import find from "lodash/find";
 import moment from "moment-timezone";
 import { findWindows } from "windows-iana";
 import { isMobile } from "react-device-detect";
 import { I18nextProviderProps } from "react-i18next";
 import sjcl from "sjcl";
+import resizeImage from "resize-image";
 
 import { flagsIcons } from "@docspace/shared/utils/image-flags";
 
@@ -62,6 +65,7 @@ import {
   ThemeKeys,
   ErrorKeys,
   WhiteLabelLogoType,
+  EmployeeType,
 } from "../enums";
 import {
   COOKIE_EXPIRATION_YEAR,
@@ -135,26 +139,6 @@ export const isPublicRoom = () => {
 
 export const isPublicPreview = () => {
   return window.location.pathname.includes("/share/preview/");
-};
-
-export const getUserTypeLabel = (
-  role: "owner" | "admin" | "user" | "collaborator" | "manager" | undefined,
-  t: TTranslation,
-) => {
-  switch (role) {
-    case "owner":
-      return t("Common:Owner");
-    case "admin":
-      return t("Common:PortalAdmin", { productName: t("Common:ProductName") });
-    case "manager":
-      return t("Common:RoomAdmin");
-    case "collaborator":
-      return t("Common:PowerUser");
-    case "user":
-      return t("Common:User");
-    default:
-      return t("Common:User");
-  }
 };
 
 export const parseDomain = (
@@ -296,21 +280,45 @@ export function isAdmin(currentUser: TUser) {
   );
 }
 
-export const getUserRole = (user: TUser) => {
-  if (user.isOwner) return "owner";
-  if (
-    isAdmin(user) ||
-    user.access === ShareAccessRights.RoomManager ||
-    user.access === ShareAccessRights.Collaborator
-  )
-    // TODO: Change to People Product Id const
-    return "admin";
-  // TODO: Need refactoring
-  if (user.isVisitor) return "user";
-  if (user.isCollaborator) return "collaborator";
-  if (user.isRoomAdmin) return "manager";
+export const getUserAvatarRoleByType = (type: EmployeeType) => {
+  switch (type) {
+    case EmployeeType.Owner:
+      return AvatarRole.owner;
+    case EmployeeType.Admin:
+      return AvatarRole.admin;
+    case EmployeeType.RoomAdmin:
+      return AvatarRole.manager;
 
-  return "user";
+    default:
+      return AvatarRole.user;
+  }
+};
+
+export const getUserType = (user: TUser) => {
+  if (user.isOwner) return EmployeeType.Owner;
+  if (isAdmin(user)) return EmployeeType.Admin;
+  if (user.isRoomAdmin) return EmployeeType.RoomAdmin;
+  if (user.isCollaborator) return EmployeeType.User;
+  if (user.isVisitor) return EmployeeType.Guest;
+  return EmployeeType.Guest;
+};
+
+export const getUserTypeTranslation = (type: EmployeeType, t: TTranslation) => {
+  switch (type) {
+    case EmployeeType.Owner:
+      return t("Common:Owner");
+    case EmployeeType.Admin:
+      return t("Common:PortalAdmin", {
+        productName: t("Common:ProductName"),
+      });
+    case EmployeeType.RoomAdmin:
+      return t("Common:RoomAdmin");
+    case EmployeeType.User:
+      return t("Common:User");
+    case EmployeeType.Guest:
+    default:
+      return t("Common:Guest");
+  }
 };
 
 export function clickBackdrop() {
@@ -416,6 +424,24 @@ export function getProviderLabel(provider: string, t: (key: string) => string) {
       return "";
   }
 }
+
+export const getLifetimePeriodTranslation = (
+  period: number,
+  t: TTranslation,
+) => {
+  switch (period) {
+    case 0:
+      return t("Common:Days").toLowerCase();
+    case 1:
+      return t("Common:Months").toLowerCase();
+    case 2:
+      return t("Common:Years").toLowerCase();
+
+    default:
+      return t("Common:Days").toLowerCase();
+  }
+};
+
 export const isLanguageRtl = (lng: string) => {
   if (!lng) return;
 
@@ -883,8 +909,8 @@ export const toUrlParams = (
 
     const item = obj[key];
 
-    // added for double employeetype
-    if (Array.isArray(item) && key === "employeetypes") {
+    // added for double employeetype or room type
+    if (Array.isArray(item) && (key === "employeetypes" || key === "type")) {
       for (let i = 0; i < item.length; i += 1) {
         str += `${key}=${encodeURIComponent(item[i])}`;
         if (i !== item.length - 1) {
@@ -905,9 +931,28 @@ export const toUrlParams = (
   return str;
 };
 
+const groupParamsByKey = (params: URLSearchParams) =>
+  Array.from(params.entries()).reduce(
+    (accumulator: { [key: string]: string | string[] }, [key, value]) => {
+      if (accumulator[key]) {
+        accumulator[key] = Array.isArray(accumulator[key])
+          ? [...accumulator[key], value]
+          : [accumulator[key], value];
+      } else {
+        accumulator[key] = value;
+      }
+      return accumulator;
+    },
+    {},
+  );
+
 export const parseURL = (searchUrl: string) => {
-  return Object.fromEntries(new URLSearchParams(searchUrl));
+  const params = new URLSearchParams(searchUrl);
+  const entries: { [key: string]: string | string[] } =
+    groupParamsByKey(params);
+  return entries;
 };
+
 export function getObjectByLocation(location: Location) {
   if (!location.search || !location.search.length) return null;
 
@@ -1172,7 +1217,7 @@ export const getUserTypeName = (
 
   if (isRoomAdmin) return t("Common:RoomAdmin");
 
-  if (isCollaborator) return t("Common:PowerUser");
+  if (isCollaborator) return t("Common:User");
 
   return t("Common:User");
 };
@@ -1190,7 +1235,7 @@ export const getUserTypeDescription = (
 
   if (isRoomAdmin) return t("Translations:RoleRoomAdminDescription");
 
-  if (isCollaborator) return t("Translations:RolePowerUserDescription");
+  if (isCollaborator) return t("Translations:RoleNewUserDescription");
 
   return t("Translations:RoleViewerDescription");
 };
@@ -1212,3 +1257,66 @@ export function setLanguageForUnauthorized(culture: string) {
 
   window.location.reload();
 }
+
+export const imageProcessing = async (file: File, maxSize?: number) => {
+  const ONE_MEGABYTE = 1024 * 1024;
+  const COMPRESSION_RATIO = 2;
+  const NO_COMPRESSION_RATIO = 1;
+
+  const maxImageSize = maxSize ?? ONE_MEGABYTE;
+  const imageBitMap = await createImageBitmap(file);
+
+  const width = imageBitMap.width;
+  const height = imageBitMap.height;
+
+  // @ts-expect-error imageBitMap
+  const canvas = resizeImage.resize2Canvas(imageBitMap, width, height);
+
+  async function resizeRecursiveAsync(
+    img: { width: number; height: number },
+    compressionRatio = COMPRESSION_RATIO,
+    depth = 0,
+  ): Promise<unknown> {
+    const data = resizeImage.resize(
+      // @ts-expect-error canvas
+      canvas,
+      img.width / compressionRatio,
+      img.height / compressionRatio,
+      resizeImage.JPEG,
+    );
+
+    const newFile = await fetch(data)
+      .then((res) => res.blob())
+      .then((blob) => {
+        const f = new File([blob], "File name", {
+          type: "image/jpg",
+        });
+        return f;
+      });
+
+    // const stepMessage = `Step ${depth + 1}`;
+    // const sizeMessage = `size = ${file.size} bytes`;
+    // const compressionRatioMessage = `compressionRatio = ${compressionRatio}`;
+
+    // console.log(`${stepMessage} ${sizeMessage} ${compressionRatioMessage}`);
+
+    if (newFile.size < maxImageSize) {
+      return newFile;
+    }
+
+    if (depth > 5) {
+      // console.log("start");
+      throw new Error("recursion depth exceeded");
+    }
+
+    return new Promise((resolve) => {
+      // eslint-disable-next-line no-promise-executor-return
+      return resolve(newFile);
+    }).then(() => resizeRecursiveAsync(img, compressionRatio + 1, depth + 1));
+  }
+
+  return resizeRecursiveAsync(
+    { width, height },
+    file.size > maxImageSize ? COMPRESSION_RATIO : NO_COMPRESSION_RATIO,
+  );
+};

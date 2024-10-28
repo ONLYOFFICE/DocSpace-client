@@ -1,4 +1,4 @@
-enum FeedAction {
+export enum FeedAction {
   Create = "create",
   Upload = "upload",
   Update = "update",
@@ -8,6 +8,8 @@ enum FeedAction {
   Move = "move",
   Copy = "copy",
   Revoke = "revoke",
+  Submitted = "submitted",
+  StartedFilling = "startedFilling",
 }
 
 enum FeedTarget {
@@ -70,6 +72,16 @@ export const feedInfo = [
     key: "FileDeleted",
     targetType: `${FeedTarget.File}`,
     actionType: `${FeedAction.Delete}`,
+  },
+  {
+    key: "FormSubmit",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.Submitted}`,
+  },
+  {
+    key: "FormOpenedForFilling",
+    targetType: `${FeedTarget.File}`,
+    actionType: `${FeedAction.StartedFilling}`,
   },
   //
   // FOLDER

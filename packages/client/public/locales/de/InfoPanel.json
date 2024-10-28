@@ -1,5 +1,5 @@
 {
-  "AccountsEmptyScreenText": "Siehe Benutzerdetails hier",
+  "UsersEmptyScreenText": "Siehe Benutzerdetails hier",
   "AddedRoomTags": "Tags hinzugefügt.",
   "Administration": "Verwaltung",
   "AndMoreLabel": "und <1>{{count}} mehr</1>",
@@ -35,7 +35,6 @@
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> Raum kopiert",
   "HistoryRoomCreated": " <1>«{{roomTitle}}»</1> Raum erstellt",
   "HistoryThirdParty": "Die Verlaufsanzeige ist für öffentliche Räume mit angeschlossenen Drittanbieterspeichern nicht verfügbar",
-  "InfoBanner": "Die Liste der eingeladenen Benutzer enthält den Besitzer und/oder den Administrator dieses {{productName}} mit vollem Zugang zu allen Räumen. Besitzer und/oder Administrator können keine weiteren Zugriffsrechte zugewiesen werden. Sobald sie dem Raum hinzugefügt wurden, werden sie über alle Änderungen informiert.",
   "ItemsSelected": "Ausgewählte Elemente",
   "LastModifiedBy": "Zuletzt geändert von",
   "NoRecordsFound": "Keine Einträge gefunden",
@@ -49,7 +48,7 @@
   "RoomGroupRemove": "Gruppe entfernt",
   "RoomLogoChanged": "Icon geändert",
   "RoomRemoveUser": "Benutzer entfernt.",
-  "RoomRenamed": "Raum <1>«{{oldRoomTitle}}»</1> umbenannt in <1>«{{roomTitle}}»</1>",
+  "RoomRenamed": "Raum <1>«{{oldRoomTitle}}»</1> umbenannt in <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "Siehe Details von Räumen hier",
   "RoomUpdateAccess": "wurde zugewiesen",
   "SelectedUsers": "Ausgewählte Konten",

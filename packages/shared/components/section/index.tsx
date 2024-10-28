@@ -117,6 +117,7 @@ const Section = (props: SectionProps) => {
     canDisplay,
     anotherDialogOpen,
     getContextModel,
+    isIndexEditingMode,
   } = props;
 
   const [sectionSize, setSectionSize] = React.useState<{
@@ -256,6 +257,7 @@ const Section = (props: SectionProps) => {
               isFormGallery={isFormGallery}
               currentDeviceType={currentDeviceType}
               getContextModel={getContextModel}
+              isIndexEditingMode={isIndexEditingMode}
             >
               {isSectionHeaderAvailable &&
                 currentDeviceType === DeviceType.mobile && (

@@ -327,7 +327,6 @@
   "Owner": "Владелец",
   "PageOfTotalPage": "{{page}} из {{totalPage}}",
   "Paid": "Платный",
-  "PaidUsersExceedsLimit": "Количество администраторов превышает лимит: {{count}} / {{limit}}.",
   "Password": "Пароль",
   "PasswordLimitDigits": "цифры",
   "PasswordLimitMessage": "Пароль должен содержать",

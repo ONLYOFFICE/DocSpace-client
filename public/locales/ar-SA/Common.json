@@ -319,7 +319,6 @@
   "Owner": "المالك",
   "PageOfTotalPage": "الصفحة {{page}} من {{totalPage}}",
   "Paid": "مدفوع",
-  "PaidUsersExceedsLimit": "يتجاوز عدد المسؤولين الحد الأقصى: {{count}} / {{limit}}.",
   "Password": "كلمة المرور",
   "PasswordLimitDigits": "الأرقام",
   "PasswordLimitMessage": "يجب أن تحتوي كلمة المرور على",

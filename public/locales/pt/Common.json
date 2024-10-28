@@ -317,7 +317,6 @@
   "Owner": "Proprietário",
   "PageOfTotalPage": "{{page}} de {{totalPage}}",
   "Paid": "Pago",
-  "PaidUsersExceedsLimit": "O número de administradores excede o limite: {{count}} / {{limit}}.",
   "Password": "Palavra-chave",
   "PasswordLimitDigits": "dígitos",
   "PasswordLimitMessage": "A palavra-chave tem de conter",

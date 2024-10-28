@@ -319,7 +319,6 @@
   "Owner": "Proprietar",
   "PageOfTotalPage": "{{page}} din {{totalPage}}",
   "Paid": "Plătit",
-  "PaidUsersExceedsLimit": "Număr de administratori depășește limita permisă {{count}} / {{limit}}.",
   "Password": "Parola",
   "PasswordLimitDigits": "cifre",
   "PasswordLimitMessage": "Parola trebuie să conțină",

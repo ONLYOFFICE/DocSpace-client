@@ -93,7 +93,11 @@ const useSocketHelper = ({
     (id: number) => {
       const roomParts = `DIR-${id}`;
 
-      if (SocketHelper.socketSubscribers.has(roomParts)) return;
+      if (SocketHelper.socketSubscribers.has(roomParts)) {
+        subscribedId.current = id;
+
+        return;
+      }
 
       if (subscribedId.current) unsubscribe(subscribedId.current);
 
@@ -110,9 +114,12 @@ const useSocketHelper = ({
 
   const addItem = React.useCallback(
     (opt: TOptSocket) => {
+      console.log("add");
       if (!opt?.data) return;
 
       const data: TFile | TFolder | TRoom = JSON.parse(opt.data);
+
+      console.log({ ...data }, data.parentId, subscribedId.current);
 
       if (
         "folderId" in data && data.folderId

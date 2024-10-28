@@ -317,7 +317,6 @@
   "Owner": "Właściciel",
   "PageOfTotalPage": "{{page}} z {{totalPage}}",
   "Paid": "Płatny",
-  "PaidUsersExceedsLimit": "Przekroczono limit administratorów: {{count}} / {{limit}}.",
   "Password": "Hasło",
   "PasswordLimitDigits": "cyfry",
   "PasswordLimitMessage": "Hasło musi zawierać",

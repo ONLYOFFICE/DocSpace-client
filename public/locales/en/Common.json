@@ -363,7 +363,6 @@
   "Owner": "Owner",
   "PageOfTotalPage": "{{page}} of {{totalPage}}",
   "Paid": "Paid",
-  "PaidUsersExceedsLimit": "The number of admins exceeds the limit: {{count}} / {{limit}}.",
   "Password": "Password",
   "PasswordLimitDigits": "digits",
   "PasswordLimitMessage": "Password must contain",

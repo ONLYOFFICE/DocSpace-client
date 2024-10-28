@@ -317,7 +317,6 @@
   "Owner": "Omistaja",
   "PageOfTotalPage": "{{page}} - {{totalPage}}",
   "Paid": "Maksettu",
-  "PaidUsersExceedsLimit": "Pääkäyttäjien määrä ylittää rajatun määrän: {{count}} / {{limit}}.",
   "Password": "Salasana",
   "PasswordLimitDigits": "numerot",
   "PasswordLimitMessage": "Salasanan on sisällettävä",

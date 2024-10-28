@@ -1,20 +1,9 @@
 services:
-  # running tests from a remote folder on the develop branch
-  tests-git:
+  tests:
     image: tests
     build:
       context: ../..
       dockerfile: packages/login/Dockerfile
-      args:
-        BRANCH_NAME: ${BRANCH_NAME:-develop}
-    ports:
-      - "5111:5111"
-    volumes:
-      - ../../playwright-report/login:/app/playwright-report/login
-
-  # running tests from a local folder login/__tests__
-  tests-local:
-    image: tests
     ports:
       - "5111:5111"
     volumes:

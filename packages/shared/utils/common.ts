@@ -605,8 +605,6 @@ export function getLoginLink(token: string, code: string) {
 
 const FRAME_NAME = "frameDocSpace";
 
-const referrer = window.document?.referrer || "*";
-
 const getFrameId = () => {
   return window.self.name.replace(`${FRAME_NAME}__#`, "");
 };
@@ -618,7 +616,7 @@ export const frameCallbackData = (methodReturnData: unknown) => {
       frameId: getFrameId(),
       methodReturnData,
     }),
-    referrer,
+    window.parent.origin,
   );
 };
 
@@ -629,7 +627,7 @@ export const frameCallEvent = (eventReturnData: unknown) => {
       frameId: getFrameId(),
       eventReturnData,
     }),
-    referrer,
+    window.parent.origin,
   );
 };
 
@@ -644,7 +642,7 @@ export const frameCallCommand = (
       commandName,
       commandData,
     }),
-    referrer,
+    window.parent.origin,
   );
 };
 

@@ -27,9 +27,6 @@
 import DeleteReactSvgUrl from "PUBLIC_DIR/images/delete.react.svg?url";
 import ArrowPathReactSvgUrl from "PUBLIC_DIR/images/arrow.path.react.svg?url";
 import ActionsHeaderTouchReactSvgUrl from "PUBLIC_DIR/images/actions.header.touch.react.svg?url";
-import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
-import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
-import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import React from "react";
 import { inject, observer } from "mobx-react";
 import styled, { css, useTheme } from "styled-components";
@@ -58,11 +55,9 @@ export const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   max-width: calc(100vw - 32px);
-
   .settings-section_header {
     display: flex;
     align-items: center;
-
     .settings-section_badge {
       margin-inline-start: 8px;
       cursor: auto;
@@ -75,7 +70,6 @@ export const HeaderContainer = styled.div`
       color: ${(props) => props.theme.client.settings.headerTitleColor};
     }
   }
-
   .action-wrapper {
     flex-grow: 1;
 
@@ -142,10 +136,6 @@ export const StyledContainer = styled.div`
       margin-inline: -16px 0;
       width: calc(100% + 32px);
     }
-
-    @media ${mobile} {
-      margin: 0px -2px;
-    }
   }
 `;
 
@@ -160,7 +150,6 @@ const SectionHeaderContent = (props) => {
     standalone,
     getHeaderMenuItems,
     setSelections,
-    organizationName,
   } = props;
 
   const navigate = useNavigate();
@@ -168,8 +157,6 @@ const SectionHeaderContent = (props) => {
   const theme = useTheme();
 
   const isOAuth = location.pathname.includes("oauth");
-
-  const isSessionsPage = location.pathname.includes("/sessions");
 
   const [state, setState] = React.useState({
     header: "",
@@ -285,20 +272,8 @@ const SectionHeaderContent = (props) => {
   };
 
   const onSelectAll = () => {
-    const { setupSetSelected, peopleSetSelected } = props;
-    isSessionsPage
-      ? peopleSetSelected("all", isSessionsPage)
-      : setupSetSelected("all");
-  };
-
-  const onSelectOnline = () => {
-    const { peopleSetSelected } = props;
-    peopleSetSelected("online", isSessionsPage);
-  };
-
-  const onSelectOffline = () => {
-    const { peopleSetSelected } = props;
-    peopleSetSelected("offline", isSessionsPage);
+    const { setSelected } = props;
+    setSelected("all");
   };
 
   const removeAdmins = () => {
@@ -309,50 +284,17 @@ const SectionHeaderContent = (props) => {
 
   const {
     t,
-    isMe,
     isLoadedSectionHeader,
 
-    isSetupleHeaderIndeterminate,
-    isSetupHeaderVisible,
-    isSetupHeaderChecked,
-
-    isPeopleHeaderIndeterminate,
-    isPeopleHeaderVisible,
-    isPeopleHeaderChecked,
-    setupSelection,
-    setDisableDialogVisible,
-    setLogoutAllDialogVisible,
-    isSeveralSelection,
-    peopleSelection,
-    setItems,
-    setUserSessionPanelVisible,
-    setDisplayName,
+    isHeaderIndeterminate,
+    isHeaderChecked,
+    isHeaderVisible,
+    selection,
   } = props;
   const { header, isCategoryOrHeader, isNeedPaidIcon } = state;
   const arrayOfParams = getArrayOfParams();
 
-  const menuItems = isSessionsPage ? (
-    <>
-      <DropDownItem
-        key="all"
-        label={t("Files:All")}
-        data-index={1}
-        onClick={onSelectAll}
-      />
-      <DropDownItem
-        key="online"
-        label={t("Common:online")}
-        data-index={2}
-        onClick={onSelectOnline}
-      />
-      <DropDownItem
-        key="offline"
-        label={t("Common:offline")}
-        data-index={3}
-        onClick={onSelectOffline}
-      />
-    </>
-  ) : (
+  const menuItems = (
     <>
       <DropDownItem
         key="all"
@@ -360,51 +302,8 @@ const SectionHeaderContent = (props) => {
         data-index={1}
         onClick={onSelectAll}
       />
-      <></>
     </>
   );
-
-  /* HEADER LOGIC FOR ACTIVE SESSIONS
-    const onClickSessions = () => {
-      setItems(peopleSelection[0]);
-      setUserSessionPanelVisible(true);
-    };
-
-    const onClickLogout = () => {
-      setDisplayName(peopleSelection[0].displayName);
-      setLogoutAllDialogVisible(true);
-    };
-
-    const onClickDisable = () => {
-      setDisableDialogVisible(true);
-    };
-
-    const headerMenu = isSessionsPage
-      ? [
-        {
-          id: "sessions",
-          key: "Sessions",
-          label: t("Common:Sessions"),
-          disabled: isSeveralSelection,
-          onClick: onClickSessions,
-          iconUrl: HistoryFinalizedReactSvgUrl,
-        },
-        {
-          id: "logout",
-          key: "Logout",
-          label: t("Common:Logout"),
-          onClick: onClickLogout,
-          iconUrl: LogoutReactSvgUrl,
-        },
-        {
-          id: "disable",
-          key: "Disable",
-          label: t("Common:DisableUserButton"),
-          onClick: onClickDisable,
-          iconUrl: RemoveSvgUrl,
-          disabled: isMe,
-        },
-      ]*/
 
   const headerMenu = isOAuth
     ? getHeaderMenuItems(t, true)
@@ -416,20 +315,6 @@ const SectionHeaderContent = (props) => {
           iconUrl: DeleteReactSvgUrl,
         },
       ];
-
-  const isHeaderVisible = isSessionsPage
-    ? isPeopleHeaderVisible
-    : isSetupHeaderVisible;
-
-  const isHeaderChecked = isSessionsPage
-    ? isPeopleHeaderChecked
-    : isSetupHeaderChecked;
-
-  const isHeaderIndeterminate = isSessionsPage
-    ? isPeopleHeaderIndeterminate
-    : isSetupleHeaderIndeterminate;
-
-  const withoutInfoPanelToggler = isSessionsPage ? true : false;
 
   const translatedHeader =
     header === IMPORT_HEADER_CONST
@@ -522,94 +407,51 @@ export default inject(
     importAccountsStore,
     settingsStore,
     oauthStore,
-     peopleStore,
-     dialogsStore,
   }) => {
-    const { addUsers, removeAdmins } = setup.headerAction;
-    const { organizationName } = settingsStore;
-    const { admins, selectorIsOpen } = setup.security.accessRight;
-    const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
-    const { setUserSessionPanelVisible } = dialogsStore;
-
     const {
       isCustomizationAvailable,
       isRestoreAndAutoBackupAvailable,
       isSSOAvailable,
     } = currentQuotaStore;
-
-    const {
-      toggleSelector,
-      setDisableDialogVisible,
-      setLogoutDialogVisible,
-      setLogoutAllDialogVisible,
-    } = setup;
-
+    const { addUsers, removeAdmins } = setup.headerAction;
+    const { toggleSelector } = setup;
     const {
       selected,
-      setSelected: setupSetSelected,
-      isHeaderIndeterminate: isSetupHeaderIndeterminate,
-      isHeaderChecked: isSetupHeaderChecked,
-      isHeaderVisible: isSetupHeaderVisible,
+      setSelected,
+      isHeaderIndeterminate,
+      isHeaderChecked,
+      isHeaderVisible,
       deselectUser,
       selectAll,
-      selection: setupSelection,
+      selection,
     } = setup.selectionStore;
+    const { admins, selectorIsOpen } = setup.security.accessRight;
+    const { isLoadedSectionHeader, setIsLoadedSectionHeader } = common;
 
     const { workspace } = importAccountsStore;
     const { standalone } = settingsStore;
-
-    const {
-      isHeaderIndeterminate: isPeopleHeaderIndeterminate,
-      isHeaderChecked: isPeopleHeaderChecked,
-      isHeaderVisible: isPeopleHeaderVisible,
-      setSelected: peopleSetSelected,
-      isSeveralSelection,
-      selection: peopleSelection,
-      setItems,
-      setDisplayName,
-      allSessions,
-      isMe,
-    } = peopleStore.selectionStore;
 
     const { getHeaderMenuItems } = oauthStore;
     return {
       addUsers,
       removeAdmins,
       selected,
-      setupSetSelected,
+      setSelected,
       admins,
       isHeaderIndeterminate:
         isHeaderIndeterminate || oauthStore.isHeaderIndeterminate,
       isHeaderChecked: isHeaderChecked || oauthStore.isHeaderChecked,
       isHeaderVisible: isHeaderVisible || oauthStore.isHeaderVisible,
-      isSetupHeaderIndeterminate,
-      isSetupHeaderChecked,
-      isSetupHeaderVisible,
       deselectUser,
       selectAll,
       toggleSelector,
       selectorIsOpen,
-      setupSelection,
+      selection,
       isLoadedSectionHeader,
       setIsLoadedSectionHeader,
       isCustomizationAvailable,
       isRestoreAndAutoBackupAvailable,
       isSSOAvailable,
-      peopleSetSelected,
-      peopleSelection,
-      isPeopleHeaderIndeterminate,
-      isPeopleHeaderChecked,
-      isPeopleHeaderVisible,
-      isSeveralSelection,
-      setDisableDialogVisible,
-      setLogoutDialogVisible,
-      setLogoutAllDialogVisible,
-      setItems,
-      setUserSessionPanelVisible,
-      setDisplayName,
-      allSessions,
-      isMe,
-      organizationName,
       workspace,
       standalone,
       getHeaderMenuItems,

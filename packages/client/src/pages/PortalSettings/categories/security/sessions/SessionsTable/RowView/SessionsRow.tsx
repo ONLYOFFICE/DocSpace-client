@@ -259,7 +259,7 @@ const SessionsRow = (props: SessionsTableRowProps) => {
 };
 
 export default inject<TStore>(
-  ({ setup, dialogsStore, settingsStore, userStore, peopleStore }) => {
+  ({ setup, dialogsStore, settingsStore, userStore, activeSessionsStore }) => {
     const { setUserSessionPanelVisible } = dialogsStore;
     const { setLogoutAllDialogVisible, setDisableDialogVisible } = setup;
     const { culture } = settingsStore;
@@ -273,7 +273,7 @@ export default inject<TStore>(
       convertDate,
       getFromDateAgo,
       setFromDateAgo,
-    } = peopleStore.selectionStore as unknown as SelectionPeopleStore;
+    } = activeSessionsStore;
 
     return {
       isMe,

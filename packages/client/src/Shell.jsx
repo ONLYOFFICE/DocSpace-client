@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import moment from "moment-timezone";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { useTheme } from "styled-components";
 import { inject, observer } from "mobx-react";
@@ -92,6 +92,11 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     pagesWithoutNavMenu,
     isFrame,
     barTypeInFrame,
+    setDataFromSocket,
+    updateDataFromSocket,
+    sessionLogout,
+    setMultiConnections,
+    sessionMultiLogout,
   } = rest;
 
   const theme = useTheme();
@@ -101,6 +106,23 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     setFormCreationInfo,
     setConvertPasswordDialogVisible,
   });
+
+  const moveToLastSession = useCallback((data) => {
+    return data.map((item) => {
+      if (item.status === "online" && item.sessions.length !== 0) {
+        const {
+          sessions: [first, ...otherElement],
+          ...otherField
+        } = item;
+
+        return {
+          ...otherField,
+          sessions: [...otherElement, first],
+        };
+      }
+      return item;
+    });
+  }, []);
 
   useEffect(() => {
     const regex = /(\/){2,}/g;
@@ -134,6 +156,43 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
     moment.locale(language);
   }, []);
+
+  useEffect(() => {
+    SocketHelper.emit("subscribeToPortal");
+
+    SocketHelper.emit("getSessionsInPortal");
+
+    SocketHelper.on("statuses-in-portal", (data) => {
+      const newData = moveToLastSession(data);
+
+      setDataFromSocket(newData);
+    });
+
+    SocketHelper.on("enter-in-portal", (data) => {
+      const [newData] = moveToLastSession([data]);
+
+      updateDataFromSocket(newData);
+    });
+
+    SocketHelper.on("leave-in-portal", (data) => {
+      sessionLogout(data);
+    });
+
+    SocketHelper.on("enter-session-in-portal", (data) => {
+      setMultiConnections(data);
+    });
+
+    SocketHelper.on("leave-session-in-portal", (data) => {
+      sessionMultiLogout(data);
+    });
+  }, [
+    setDataFromSocket,
+    updateDataFromSocket,
+    sessionLogout,
+    setMultiConnections,
+    moveToLastSession,
+    sessionMultiLogout,
+  ]);
 
   useEffect(() => {
     SocketHelper.emit(SocketCommands.Subscribe, {
@@ -486,6 +545,7 @@ const ShellWrapper = inject(
     userStore,
     currentTariffStatusStore,
     dialogsStore,
+    activeSessionsStore,
   }) => {
     const { i18n } = useTranslation();
 
@@ -540,6 +600,14 @@ const ShellWrapper = inject(
       isPortalRestoring ||
       (isNotPaidPeriod && !user?.isOwner && !user?.isAdmin);
 
+    const {
+      setDataFromSocket,
+      updateDataFromSocket,
+      sessionLogout,
+      setMultiConnections,
+      sessionMultiLogout,
+    } = activeSessionsStore;
+
     return {
       loadBaseInfo: async () => {
         await init(false, i18n);
@@ -575,6 +643,11 @@ const ShellWrapper = inject(
       pagesWithoutNavMenu,
       isFrame,
       barTypeInFrame: frameConfig?.showHeaderBanner,
+      setDataFromSocket,
+      updateDataFromSocket,
+      sessionLogout,
+      setMultiConnections,
+      sessionMultiLogout,
     };
   },
 )(observer(Shell));

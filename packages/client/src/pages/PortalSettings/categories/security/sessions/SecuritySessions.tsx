@@ -27,19 +27,16 @@
 import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
-import { mobile, tablet } from "@docspace/shared/utils";
-import SessionsLoader from "@docspace/shared/skeletons/sessions";
 import styled from "styled-components";
 
+import { mobile, tablet } from "@docspace/shared/utils";
+import SessionsLoader from "@docspace/shared/skeletons/sessions";
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { TTranslation } from "@docspace/shared/types";
-import { TEmit } from "@docspace/shared/utils/socket";
+import SocketHelper from "@docspace/shared/utils/socket";
 
 import useViewEffect from "SRC_DIR/Hooks/useViewEffect";
-import type UsersStore from "SRC_DIR/store/UsersStore";
-import type SelectionPeopleStore from "SRC_DIR/store/SelectionPeopleStore";
-
 import { DisableUserDialog } from "SRC_DIR/components/dialogs/DisableUserDialog";
 import { LogoutSessionDialog } from "SRC_DIR/components/dialogs/LogoutSessionDialog";
 import { LogoutAllSessionDialog } from "SRC_DIR/components/dialogs/LogoutAllSessionDialog";
@@ -128,7 +125,6 @@ const Sessions = ({
   setUserSessionPanelVisible,
   isSeveralSelection,
   isSessionsLoaded,
-  socketHelper,
 }: SessionsProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Settings",
@@ -138,15 +134,13 @@ const Sessions = ({
   ]);
 
   useEffect(() => {
-    socketHelper.emit({
-      command: "getSessionsInPortal",
-    } as TEmit);
+    SocketHelper.emit("getSessionsInPortal");
 
     fetchData();
     return () => {
       clearSelection();
     };
-  }, [socketHelper, fetchData, clearSelection]);
+  }, [fetchData, clearSelection]);
 
   useViewEffect({
     view: viewAs,
@@ -231,10 +225,15 @@ const Sessions = ({
 };
 
 export const SecuritySessions = inject<TStore>(
-  ({ settingsStore, setup, peopleStore, dialogsStore }) => {
-    const { updateUserStatus } =
-      peopleStore.usersStore as unknown as UsersStore;
-    const { currentDeviceType, socketHelper } = settingsStore;
+  ({
+    settingsStore,
+    setup,
+    peopleStore,
+    dialogsStore,
+    activeSessionsStore,
+  }) => {
+    const { updateUserStatus } = peopleStore.usersStore;
+    const { currentDeviceType } = settingsStore;
     const { setUserSessionPanelVisible } = dialogsStore;
     const {
       allSessions,
@@ -251,7 +250,7 @@ export const SecuritySessions = inject<TStore>(
       onClickLogoutAllExceptThis,
       onClickRemoveSession,
       isSessionsLoaded,
-    } = peopleStore.selectionStore as unknown as SelectionPeopleStore;
+    } = activeSessionsStore;
 
     const {
       viewAs,
@@ -294,7 +293,6 @@ export const SecuritySessions = inject<TStore>(
       setUserSessionPanelVisible,
       isSeveralSelection,
       isSessionsLoaded,
-      socketHelper,
     };
   },
 )(observer(Sessions));

@@ -87,6 +87,8 @@ import AvatarEditorDialogStore from "./AvatarEditorDialogStore";
 
 import OAuthStore from "./OAuthStore";
 
+import ActiveSessionsStore from "./ActiveSessionsStore";
+
 const oauthStore = new OAuthStore(userStore);
 
 const selectedFolderStore = new SelectedFolderStore(settingsStore);
@@ -326,6 +328,8 @@ const campaignsStore = new CampaignsStore(settingsStore, userStore);
 
 const editGroupStore = new EditGroupStore(peopleStore);
 
+const activeSessionsStore = new ActiveSessionsStore(setupStore, peopleStore);
+
 const store = {
   authStore,
   userStore,
@@ -384,6 +388,7 @@ const store = {
   indexingStore,
   editGroupStore,
   avatarEditorDialogStore,
+  activeSessionsStore,
 };
 
 export default store;

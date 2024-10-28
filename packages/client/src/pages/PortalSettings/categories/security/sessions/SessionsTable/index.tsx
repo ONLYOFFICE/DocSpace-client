@@ -28,7 +28,6 @@ import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { Consumer } from "@docspace/shared/utils";
 
-import type SelectionPeopleStore from "SRC_DIR/store/SelectionPeopleStore";
 import { SessionsTableProps } from "../SecuritySessions.types";
 
 import TableView from "./TableView";
@@ -89,11 +88,10 @@ const SessionsTable = ({
   );
 };
 
-export default inject<TStore>(({ setup, peopleStore, userStore }) => {
+export default inject<TStore>(({ setup, userStore, activeSessionsStore }) => {
   const userId = userStore.user?.id ?? null;
   const { viewAs } = setup;
-  const { setSelection, setBufferSelection } =
-    peopleStore.selectionStore as unknown as SelectionPeopleStore;
+  const { setSelection, setBufferSelection } = activeSessionsStore;
 
   return {
     viewAs,

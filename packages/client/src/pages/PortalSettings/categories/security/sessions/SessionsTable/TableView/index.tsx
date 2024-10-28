@@ -24,16 +24,15 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
 import { inject, observer } from "mobx-react";
-import { Base } from "@docspace/shared/themes";
 import styled, { css } from "styled-components";
 
 import { TableBody, TableContainer } from "@docspace/shared/components/table";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
 import SessionsTableHeader from "./SessionsTableHeader";
 import SessionsTableRow from "./SessionsTableRow";
-
 import { SessionsTableProps } from "../../SecuritySessions.types";
 
 const TABLE_VERSION = "4";
@@ -76,7 +75,7 @@ const contextCss = css`
   ${marginCss}
 `;
 
-const StyledTableContainer = styled(TableContainer)`
+const StyledTableContainer = styled(TableContainer).attrs(injectDefaultTheme)`
   margin: 0 0 24px;
 
   .table-container_header {
@@ -154,8 +153,6 @@ const StyledTableContainer = styled(TableContainer)`
     }
   }
 `;
-
-StyledTableContainer.defaultProps = { theme: Base };
 
 const TableView = ({
   t,

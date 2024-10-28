@@ -317,7 +317,6 @@
   "Owner": "Sahibi",
   "PageOfTotalPage": "{{totalPage}} sayfanın {{page}} tanesi",
   "Paid": "Ücretli",
-  "PaidUsersExceedsLimit": "Yönetici/uzman kullanıcı sayısı sınırı aşıyor: {{count}} / {{limit}}.",
   "Password": "Şifre",
   "PasswordLimitDigits": "karakter",
   "PasswordLimitMessage": "Şifre şunları içermelidir",

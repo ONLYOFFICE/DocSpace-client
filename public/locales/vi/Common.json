@@ -317,7 +317,6 @@
   "Owner": "Chủ sở hữu",
   "PageOfTotalPage": "{{page}} trên {{totalPage}}",
   "Paid": "Đã thanh toán",
-  "PaidUsersExceedsLimit": "Số lượng quản trị viên/người dùng cấp cao vượt quá giới hạn: {{count}} / {{limit}}.",
   "Password": "Mật khẩu",
   "PasswordLimitDigits": "chữ số",
   "PasswordLimitMessage": "Mật khẩu cần phải bao gồm",

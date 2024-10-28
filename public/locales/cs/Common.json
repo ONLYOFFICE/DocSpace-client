@@ -317,7 +317,6 @@
   "Owner": "Vlastník",
   "PageOfTotalPage": "{{page}} z {{totalPage}}",
   "Paid": "Placené",
-  "PaidUsersExceedsLimit": "Počet administrátorů/pokročilých uživatelů překročil limit: {{count}} / {{limit}}.",
   "Password": "Heslo",
   "PasswordLimitDigits": "číslice",
   "PasswordLimitMessage": "Heslo musí obsahovat",

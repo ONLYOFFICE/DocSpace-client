@@ -317,7 +317,6 @@
   "Owner": "Portal sahibi",
   "PageOfTotalPage": "{{page}} üzrə {{totalPage}}",
   "Paid": "Ödənildi",
-  "PaidUsersExceedsLimit": "Administrator/güc istifadəçilərinin sayı aşağıdakı limiti keçir: {{count}} / {{limit}}.",
   "Password": "Şifrə",
   "PasswordLimitDigits": "Rəqəmlər",
   "PasswordLimitMessage": "Şifrədə olmalıdır",

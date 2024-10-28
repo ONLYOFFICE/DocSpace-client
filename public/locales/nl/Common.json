@@ -317,7 +317,6 @@
   "Owner": "Eigenaar",
   "PageOfTotalPage": "{{page}} van {{totalPage}}",
   "Paid": "Betaald",
-  "PaidUsersExceedsLimit": "Het aantal beheerders/power users overschrijdt de limiet: {{count}} / {{limit}}.",
   "Password": "Wachtwoord",
   "PasswordLimitDigits": "getallen",
   "PasswordLimitMessage": "Wachtwoord moet bevatten",

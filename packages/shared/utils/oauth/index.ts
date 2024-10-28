@@ -208,8 +208,12 @@ export function generatePKCEPair() {
   // const HASH_ALG = "sha256";
 
   const randomVerifier = crypto.lib.WordArray.random(NUM_OF_BYTES).toString();
-  const randomState = crypto.lib.WordArray.random(NUM_OF_BYTES).toString();
   const hash = sha256(randomVerifier).toString(crypto.enc.Base64);
 
-  return { verifier: randomVerifier, challenge: hash, state: randomState };
+  const challenge = hash
+    .replace(/\+/g, "-")
+    .replace(/\//g, "_")
+    .replace(/=+$/, ""); // Clean base64 to make it URL safe
+
+  return { verifier: randomVerifier, challenge };
 }

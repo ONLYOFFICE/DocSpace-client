@@ -75,13 +75,12 @@ const InvitePanel = ({
   filter,
   isRoomAdmin,
   setIsNewUserByCurrentUser,
-  setInvitePaidUsersCount,
+
   isOwner,
   isAdmin,
   standalone,
   hideSelector,
   isUserTariffLimit,
-  isPaidUserAccess,
 }) => {
   const [invitePanelIsLoding, setInvitePanelIsLoading] = useState(
     roomId !== -1,
@@ -326,7 +325,6 @@ const InvitePanel = ({
         setIsNewUserByCurrentUser(true);
       }
       setIsLoading(false);
-      setInvitePaidUsersCount(0);
 
       onClose();
       toastr.success(t("Common:UsersInvited"));
@@ -369,9 +367,6 @@ const InvitePanel = ({
       const isUnique = !unique.some((obj) =>
         obj.isGroup ? obj.id === current.id : obj.email === current.email,
       );
-
-      if (!isUnique && isPaidUserAccess(current.access))
-        setInvitePaidUsersCount(-1);
 
       isUnique && unique.push(current);
 
@@ -596,8 +591,6 @@ export default inject(
       setInvitePanelOptions,
       setInviteLanguage,
       setIsNewUserByCurrentUser,
-      setInvitePaidUsersCount,
-      isPaidUserAccess,
     } = dialogsStore;
 
     const { getFolderInfo, setRoomSecurity, getRoomSecurityInfo, folders } =
@@ -630,12 +623,10 @@ export default inject(
       isRoomAdmin,
 
       setIsNewUserByCurrentUser,
-      setInvitePaidUsersCount,
       isOwner,
       standalone,
       hideSelector: invitePanelOptions.hideSelector,
       isUserTariffLimit,
-      isPaidUserAccess,
       isAdmin,
     };
   },

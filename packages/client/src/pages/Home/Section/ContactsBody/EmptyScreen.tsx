@@ -48,6 +48,7 @@ import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
 import ClientLoadingStore from "SRC_DIR/store/ClientLoadingStore";
 import GroupsStore from "SRC_DIR/store/contacts/GroupsStore";
 import UsersStore from "SRC_DIR/store/contacts/UsersStore";
+import { classNames } from "@docspace/shared/utils";
 
 type EmptyScreenProps = {
   isRoomAdmin?: TUser["isRoomAdmin"];
@@ -139,7 +140,7 @@ const EmptyScreen = ({
           key: "empty-view-invite-new-users",
           title: t("EmptyView:InviteNewUsers"),
           description: t("EmptyView:SendInvitationLetter"),
-          disabled: isRoomAdmin || currentGroup?.isLDAP,
+          disabled: isRoomAdmin || currentGroup?.isLDAP || isEmptyGuests,
           icon: <InviteUserIcon />,
           model: (getContactsModel(t, false) ?? []).filter(
             (m) => typeof m !== "boolean",
@@ -147,7 +148,9 @@ const EmptyScreen = ({
         },
         {
           to: "",
-          className: "empty-view--margin",
+          className: classNames({
+            "empty-view--margin": !isEmptyGuests,
+          }),
           description: t("Common:ClearFilter"),
           icon: <ClearEmptyFilterSvg />,
           onClick: onResetFilter,

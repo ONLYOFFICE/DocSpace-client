@@ -2698,6 +2698,7 @@ __metadata:
     "@babel/runtime": "npm:^7.25.7"
     "@emotion/babel-preset-css-prop": "npm:^10.2.1"
     "@emotion/styled": "npm:^10.3.0"
+    "@onlyoffice/docspace-sdk-js": "file:./onlyoffice-docspace-sdk-js-v0.0.1.tgz"
     "@playwright/test": "npm:^1.48.0"
     "@react-spring/web": "npm:^9.7.5"
     "@react-theming/storybook-addon": "npm:^1.1.10"
@@ -4618,6 +4619,13 @@ __metadata:
     mkdirp: "npm:^1.0.4"
     rimraf: "npm:^3.0.2"
   checksum: 10/c96381d4a37448ea280951e46233f7e541058cf57a57d4094dd4bdcaae43fa5872b5f2eb6bfb004591a68e29c5877abe3cdc210cb3588cbf20ab2877f31a7de7
+  languageName: node
+  linkType: hard
+
+"@onlyoffice/docspace-sdk-js@file:./onlyoffice-docspace-sdk-js-v0.0.1.tgz::locator=%40docspace%2Fshared%40workspace%3Apackages%2Fshared":
+  version: 0.0.1
+  resolution: "@onlyoffice/docspace-sdk-js@file:./onlyoffice-docspace-sdk-js-v0.0.1.tgz#./onlyoffice-docspace-sdk-js-v0.0.1.tgz::hash=6b01b3&locator=%40docspace%2Fshared%40workspace%3Apackages%2Fshared"
+  checksum: 10/8c50a0b5db75b89120412d76be9fd88c4e6d5f12f98be88c568a61bd756b5a620ca7039c2df69631b7fd77c330491f9d0229a94c6ba8997cc8eef9de7ada8298
   languageName: node
   linkType: hard
 

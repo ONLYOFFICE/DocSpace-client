@@ -327,6 +327,8 @@ class SettingsStore {
 
   isDefaultPasswordProtection: boolean = false;
 
+  isBannerVisible = false;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -1173,6 +1175,10 @@ class SettingsStore {
 
   checkEnablePortalSettings = (isPaid: boolean) => {
     return isManagement() && this.portals?.length === 1 ? false : isPaid;
+  };
+
+  setIsBannerVisible = (visible: boolean) => {
+    this.isBannerVisible = visible;
   };
 }
 

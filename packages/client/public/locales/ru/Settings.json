@@ -122,7 +122,7 @@
   "ErrorOccuredDownloadLog": "При импорте данных произошли ошибки. Загрузите журнал для проверки.",
   "ErrorsWereFound": "{{errors}} ошибок было найдено",
   "ForcePathStyle": "Принудительно использовать стиль пути",
-  "GroupsDescription": "Пользователи, которых вы выбрали на предыдущем шаге, будут импортированы в группы, созданные в {{serviceName}}. Группы появятся в разделе Аккаунты.",
+  "GroupsDescription": "Пользователи, которых вы выбрали на предыдущем шаге, будут импортированы в группы, созданные в {{serviceName}}. Группы появятся в разделе {{contactsName}}.",
   "HexCode": "Шестнадцатеричный код",
   "Import": "Импортировать",
   "ImportCompleteDescriptionGoogle": "Импорт данных из Google Workspace в {{organizationName}} {{productName}} завершен!",

@@ -122,7 +122,7 @@
   "ErrorOccuredDownloadLog": "Veri içe aktarma sırasında hatalar oluştu. Kontrol etmek için günlüğü indirin.",
   "ErrorsWereFound": "{{errors}} hata bulundu",
   "ForcePathStyle": "Zorla Yol Stili",
-  "GroupsDescription": "Önceki adımda seçtiğiniz kullanıcılar {{serviceName}} içinde oluşturulan gruplara aktarılacaktır. Gruplar Hesaplar bölümünde görünecektir.",
+  "GroupsDescription": "Önceki adımda seçtiğiniz kullanıcılar {{serviceName}} içinde oluşturulan gruplara aktarılacaktır. Gruplar {{contactsName}} bölümünde görünecektir.",
   "HexCode": "Onaltılık kod",
   "Import": "İçe aktar",
   "ImportCompleteDescriptionGoogle": "Google Workspace’ten {{organizationName}} {{productName}}’e veri aktarımı tamamlandı!",

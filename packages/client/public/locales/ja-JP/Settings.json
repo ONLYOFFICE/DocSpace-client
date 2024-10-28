@@ -122,7 +122,6 @@
   "ErrorOccuredDownloadLog": "データのインポート中にエラーが発生しました。ログをダウンロードして確認してください。",
   "ErrorsWereFound": "{{errors}} エラーが見つかりました",
   "ForcePathStyle": "強制パススタイル",
-  "GroupsDescription": "前のステップで選択したユーザーは、{{serviceName}}に作成されたグループにインポートされます。グループは「アカウント」セクションに表示されます。",
   "HexCode": "HEXコード",
   "Import": "インポート",
   "ImportCompleteDescriptionGoogle": "Google Workspaceから{{organizationName}} {{productName}}へのデータインポートが完了しました！",

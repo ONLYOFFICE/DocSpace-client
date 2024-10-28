@@ -122,7 +122,7 @@
   "ErrorOccuredDownloadLog": "Došlo je do grešaka prilikom uvoza podataka. Preuzmite zapisnik da biste ih proverili.",
   "ErrorsWereFound": "{{errors}} greške su pronađene",
   "ForcePathStyle": "Prisili Stil putanje",
-  "GroupsDescription": "Korisnici koje ste odabrali u prethodnom koraku biće uvezeni u grupe kreirane u {{serviceName}}. Grupe će se pojaviti u odeljku Računi.",
+  "GroupsDescription": "Korisnici koje ste odabrali u prethodnom koraku biće uvezeni u grupe kreirane u {{serviceName}}. Grupe će se pojaviti u odeljku {{contactsName}}.",
   "HexCode": "Hex kod",
   "Import": "Uvezi",
   "ImportCompleteDescriptionGoogle": "Uvoz podataka sa Google Workspace na {{organizationName}} {{productName}} je završen!",

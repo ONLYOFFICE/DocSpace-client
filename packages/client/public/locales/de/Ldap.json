@@ -69,8 +69,8 @@
   "LdapUserDNTooltip": "Geben Sie den Namen des Verzeichnisses mit den Benutzern ein, die Sie hinzufügen möchten.",
   "LdapUserFilter": "Benutzerfilter",
   "LdapUserFilterTooltip": "Verwenden Sie den LDAP-Suchfilter, um die Benutzer auszuwählen, die importiert werden sollen.",
-  "LdapUserQuotaTooltip": "Um die Quo­te für Benutzer festzulegen, fügen Sie ein Attribut im LDAP-Verzeichnis hinzu (z.B. UsersQuotaLimit) und geben Sie einen ganzzahligen Wert für dieses Attribut ein. Der Quo­tewert wird in Bytes angezeigt. Geben Sie hier nur den Attributnamen an. Dieses Attribut wird nur während der ersten Einrichtung angewendet und kann später manuell im Abschnitt \"Konten\" geändert werden.",
+  "LdapUserQuotaTooltip": "Um die Quo­te für Benutzer festzulegen, fügen Sie ein Attribut im LDAP-Verzeichnis hinzu (z.B. UsersQuotaLimit) und geben Sie einen ganzzahligen Wert für dieses Attribut ein. Der Quo­tewert wird in Bytes angezeigt. Geben Sie hier nur den Attributnamen an. Dieses Attribut wird nur während der ersten Einrichtung angewendet und kann später manuell im Abschnitt \"{{contactsName}}\" geändert werden.",
   "LdapUsersType": "Benutzertyp",
-  "LdapUsersTypeInfo": "Benutzer können nur auf die Räume zugreifen, zu denen sie von Administratoren eingeladen wurden, und können keine eigenen Räume, Ordner oder Dateien erstellen. Wählen Sie unten einen anderen Typ, um mehr Berechtigungen zu vergeben. Andernfalls können Sie den Typ manuell im Abschnitt Konten ändern.",
+  "LdapUsersTypeInfo": "Benutzer können nur auf die Räume zugreifen, zu denen sie von Administratoren eingeladen wurden, und können keine eigenen Räume, Ordner oder Dateien erstellen. Wählen Sie unten einen anderen Typ, um mehr Berechtigungen zu vergeben. Andernfalls können Sie den Typ manuell im Abschnitt {{contactsName}} ändern.",
   "LdapUserTypeTooltip": "Alle Benutzer werden zu {{productName}} mit dem ausgewählten Typ hinzugefügt."
 }

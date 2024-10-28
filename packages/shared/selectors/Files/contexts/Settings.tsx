@@ -34,7 +34,13 @@ export const SettingsContext = createContext<{
   getIcon: (fileExst: string) => string;
   filesSettingsLoading: boolean;
   extsWebEdited: string[];
-}>({ getIcon: () => "", extsWebEdited: [], filesSettingsLoading: false });
+  displayFileExtension: boolean;
+}>({
+  getIcon: () => "",
+  extsWebEdited: [],
+  filesSettingsLoading: false,
+  displayFileExtension: false,
+});
 
 export const SettingsContextProvider = ({
   settings,
@@ -45,18 +51,23 @@ export const SettingsContextProvider = ({
   getIcon?: TGetIcon;
   children: ReactNode;
 }) => {
-  const { getIcon, extsWebEdited, isLoading } = useFilesSettings(
-    getIconProp,
-    settings,
-  );
+  const { getIcon, extsWebEdited, isLoading, displayFileExtension } =
+    useFilesSettings(getIconProp, settings);
+
+  let displayExts = displayFileExtension;
+
+  if ("displayFileExtension" in window.DocSpace) {
+    displayExts = window.DocSpace.displayFileExtension as boolean;
+  }
 
   const value = useMemo(
     () => ({
       getIcon,
       extsWebEdited: extsWebEdited ?? [],
       filesSettingsLoading: isLoading,
+      displayFileExtension: displayExts,
     }),
-    [getIcon, extsWebEdited, isLoading],
+    [getIcon, extsWebEdited, isLoading, displayExts],
   );
 
   return (

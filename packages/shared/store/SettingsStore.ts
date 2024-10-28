@@ -325,6 +325,10 @@ class SettingsStore {
 
   displayAbout: boolean = false;
 
+  isDefaultPasswordProtection: boolean = false;
+
+  isBannerVisible = false;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -1019,6 +1023,7 @@ class SettingsStore {
     this.numberAttempt = settings.attemptCount;
     this.blockingTime = settings.blockTime;
     this.checkPeriod = settings.checkPeriod;
+    this.isDefaultPasswordProtection = settings.isDefault;
   };
 
   getBruteForceProtection = async () => {
@@ -1170,6 +1175,10 @@ class SettingsStore {
 
   checkEnablePortalSettings = (isPaid: boolean) => {
     return isManagement() && this.portals?.length === 1 ? false : isPaid;
+  };
+
+  setIsBannerVisible = (visible: boolean) => {
+    this.isBannerVisible = visible;
   };
 }
 

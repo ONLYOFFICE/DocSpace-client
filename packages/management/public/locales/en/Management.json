@@ -6,6 +6,7 @@
   "CreatingPortal": "Creating new {{productName}}",
   "CurrentSpace": "Current space",
   "DeletePortalText": "You are going to permanently delete the <1>{{domain}}</1> space with all the stored data and accounts. This action cannot be undone.",
+  "DeleteWarning": "The last full access space cannot be deleted",
   "DomainName": "Domain name",
   "DomainNotFound": "Domain not found, please check in DNS settings",
   "DomainSettings": "Domain settings",

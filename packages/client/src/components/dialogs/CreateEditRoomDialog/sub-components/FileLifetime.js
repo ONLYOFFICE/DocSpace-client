@@ -156,6 +156,7 @@ const FileLifetime = ({ t, roomParams, setRoomParams }) => {
             value={inputValue}
             onChange={onChange}
             scale
+            maxLength={4}
           />
           <ComboBox
             className="virtual-data-room_file-lifetime_combo-box"

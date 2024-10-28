@@ -106,7 +106,7 @@ const HistoryItemList = ({
 
   const handleOpenFile = (item) => {
     const isMedia =
-      item.accessibility.ImageView || item.accessibility.MediaView;
+      item?.accessibility?.ImageView || item?.accessibility?.MediaView;
 
     if (isMedia) {
       return window.open(
@@ -117,6 +117,10 @@ const HistoryItemList = ({
           item.id,
         ),
       );
+    }
+
+    if (!item?.accessibility?.WebView) {
+      return window.open(item.viewUrl, "_self");
     }
 
     return (

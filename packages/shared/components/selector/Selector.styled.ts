@@ -278,6 +278,10 @@ const StyledItem = styled.div<{
 
     .label {
       width: unset;
+
+      .item-file-exst {
+        color: ${(props) => props.theme.filesSection.tableView.fileExstColor};
+      }
     }
 
     svg {

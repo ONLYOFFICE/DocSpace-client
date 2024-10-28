@@ -28,7 +28,6 @@ import React from "react";
 import { inject, observer } from "mobx-react";
 
 import { UserStore } from "@docspace/shared/store/UserStore";
-import { BannerStore } from "@docspace/shared/store/BannerStore";
 
 import Article from "@docspace/shared/components/article";
 
@@ -108,7 +107,6 @@ export default inject(
     authStore: any;
     uploadDataStore: any;
     userStore: UserStore;
-    bannerStore: BannerStore;
     settingsStore: any;
   }) => {
     const { languageBaseName, isLiveChatAvailable } = authStore;

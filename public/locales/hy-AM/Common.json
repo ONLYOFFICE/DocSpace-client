@@ -319,7 +319,6 @@
   "Owner": "Սեփականատեր",
   "PageOfTotalPage": "{{page}} {{totalPage}}-ի",
   "Paid": "Վճարովի",
-  "PaidUsersExceedsLimit": "Ադմինիստրատորների/հզոր օգտատերերի թիվը գերազանցում է սահմանը՝ {{count}} / {{limit}}:",
   "Password": "Գաղտնաբառ",
   "PasswordLimitDigits": "թվանիշեր",
   "PasswordLimitMessage": "Գաղտնաբառը պետք է պարունակի",

@@ -317,7 +317,6 @@
   "Owner": "Īpašnieks",
   "PageOfTotalPage": "{{page}} lapa no {{totalPage}}",
   "Paid": "Samaksāts",
-  "PaidUsersExceedsLimit": "Administratoru/pieredzējušo lietotāju skaits pārsniedz ierobežojumu: {{count}} / {{limit}}.",
   "Password": "Parole",
   "PasswordLimitDigits": "cipari",
   "PasswordLimitMessage": "Parolei ir jāsatur",

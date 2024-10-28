@@ -320,7 +320,6 @@
   "Owner": "Propietario",
   "PageOfTotalPage": "{{page}} de {{totalPage}}",
   "Paid": "De pago",
-  "PaidUsersExceedsLimit": "El número de administradores/usuarios avanzados supera el límite: {{count}} / {{limit}}.",
   "Password": "Contraseña",
   "PasswordLimitDigits": "dígitos",
   "PasswordLimitMessage": "La contraseña debe contener",

@@ -317,7 +317,6 @@
   "Owner": "Собственик",
   "PageOfTotalPage": "{{page}} от {{totalPage}}",
   "Paid": "Платен",
-  "PaidUsersExceedsLimit": "Броят на администраторите/опитните потребители надвишава лимита: {{count}} / {{limit}}.",
   "Password": "Парола",
   "PasswordLimitDigits": "числа",
   "PasswordLimitMessage": "Паролата трябва да съдържа",

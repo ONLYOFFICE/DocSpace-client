@@ -317,7 +317,6 @@
   "Owner": "Lastnik",
   "PageOfTotalPage": "{{page}} od {{totalPage}}",
   "Paid": "Plačano",
-  "PaidUsersExceedsLimit": "Število skrbnikov/naprednih uporabnikov presega omejitev: {{count}} / {{limit}}.",
   "Password": "Geslo",
   "PasswordLimitDigits": "številk",
   "PasswordLimitMessage": "Geslo mora vsebovati",

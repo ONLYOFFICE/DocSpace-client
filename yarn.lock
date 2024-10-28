@@ -2704,6 +2704,7 @@ __metadata:
     "@storybook/addon-actions": "npm:7.6.20"
     "@storybook/addon-contexts": "npm:^5.3.21"
     "@storybook/addon-controls": "npm:7.6.20"
+    "@storybook/addon-designs": "npm:^8.0.3"
     "@storybook/addon-docs": "npm:7.6.20"
     "@storybook/addon-essentials": "npm:7.6.20"
     "@storybook/addon-links": "npm:7.6.20"
@@ -2823,7 +2824,6 @@ __metadata:
     sjcl: "npm:^1.0.8"
     socket.io-client: "npm:^4.8.0"
     storybook: "npm:7.6.20"
-    storybook-addon-designs: "npm:^6.3.1"
     storybook-dark-mode: "npm:^3.0.3"
     style-loader: "npm:^3.3.4"
     styled-components: "npm:^5.3.11"
@@ -5907,6 +5907,32 @@ __metadata:
     lodash: "npm:^4.17.21"
     ts-dedent: "npm:^2.0.0"
   checksum: 10/27b0f4d5e751445c16e1a86de4013ee8d60136cc040914cc8e7a9cc53ca93084094335d4bc78fa74cb566d38ce519d5a5dd3cd7f4985cc4c2062f70ad9ebe3b9
+  languageName: node
+  linkType: hard
+
+"@storybook/addon-designs@npm:^8.0.3":
+  version: 8.0.3
+  resolution: "@storybook/addon-designs@npm:8.0.3"
+  dependencies:
+    "@figspec/react": "npm:^1.0.0"
+  peerDependencies:
+    "@storybook/blocks": ^8.0.0
+    "@storybook/components": ^8.0.0
+    "@storybook/theming": ^8.0.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  peerDependenciesMeta:
+    "@storybook/blocks":
+      optional: true
+    "@storybook/components":
+      optional: true
+    "@storybook/theming":
+      optional: true
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 10/e1a4fdbb23bf4fda53cc53a4c1c1fbd579d3a174687452fa35a63c9e97a442056b95acc697f4a6c9b976b2fa67f61e6c974e89bc33999bafbcc279de96c5d86c
   languageName: node
   linkType: hard
 
@@ -25600,15 +25626,6 @@ __metadata:
   version: 2.14.3
   resolution: "store2@npm:2.14.3"
   checksum: 10/f95f6fbacff14cc3bb9e5e16ced2f29e2d706e30b248c16cf19abed8b2bb31d8f3907c8ccf1a5284d806fdcaf06e96710e4f4f52195e51522a452536beaf7af9
-  languageName: node
-  linkType: hard
-
-"storybook-addon-designs@npm:^6.3.1":
-  version: 6.3.1
-  resolution: "storybook-addon-designs@npm:6.3.1"
-  dependencies:
-    "@figspec/react": "npm:^1.0.0"
-  checksum: 10/ff766b5adfdc13c1feee8ce1fddef4c078b105430d01b620ab10127836f24cf91fe6db22b2b867f94a054797398566a06bfa5029e10a8740c5bff8b5946e6434
   languageName: node
   linkType: hard
 

@@ -16,7 +16,7 @@ module.exports = {
     getAbsolutePath("@storybook/addon-viewport"),
     getAbsolutePath("@storybook/addon-contexts"),
     getAbsolutePath("@react-theming/storybook-addon"),
-    getAbsolutePath("storybook-addon-designs"),
+    getAbsolutePath("@storybook/addon-designs"),
     {
       name: "@storybook/addon-docs",
       options: {

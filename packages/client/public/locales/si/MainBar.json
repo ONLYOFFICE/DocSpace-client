@@ -5,8 +5,6 @@
   "PersonalUserQuotaDescription": "නව ගොනු සහ බහාලුම් උඩුගත කිරීමට සහ සෑදීමට කරුණාකර තැටියේ ඉඩක් ලබා ගන්න හෝ ආචයක සලාකය වැඩි කර ගැනීමට {{productName}} පරිපාලක අමතන්න.",
   "RequestActivation": "නැවත වරක් සක්‍රියනය ඉල්ලන්න",
   "RoomQuotaHeader": "කාමර ගණන ඉක්මවීමට ආසන්නයි: {{currentValue}} / {{maxValue}}",
-  "StorageAndUserHeader": "ආචයනය සහ පරිපාලකයින්/බලවත් පරිශ්‍රීලකයින්ගේ සීමා ඉක්මවා යාමට ආසන්නයි.",
   "StorageQuotaHeader": "ආචයනයේ ඉඩ ඉක්මවීමට ආසන්නයි: {{currentValue}} / {{maxValue}}",
-  "TenantCustomQuotaDescription": "ඔබට <1>ආචයන කළමනාකරණ සැකසුම්</1> මගින් අනවශ්‍ය ගොනු ඉවත් කිරීමට හෝ සලාකය වෙනස් කිරීමට හැකිය.",
-  "UserQuotaHeader": "පරිපාලකයින්/බලවත් පරිශ්‍රීලකයින් ගණන ඉක්මවීමට ආසන්නයි: {{currentValue}} / {{maxValue}}."
+  "TenantCustomQuotaDescription": "ඔබට <1>ආචයන කළමනාකරණ සැකසුම්</1> මගින් අනවශ්‍ය ගොනු ඉවත් කිරීමට හෝ සලාකය වෙනස් කිරීමට හැකිය."
 }

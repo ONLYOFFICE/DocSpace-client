@@ -317,7 +317,7 @@
   "Owner": "Majiteľ",
   "PageOfTotalPage": "{{page}} z {{totalPage}}",
   "Paid": "Zaplatené",
-  "PaidUsersExceedsLimit": "Počet administrátorov/oprávnených používateľov prekročil limit: {{count}} / {{limit}}.",
+  "PaidUsersExceedsLimit": "Počet administrátorov prekročil limit: {{count}} / {{limit}}.",
   "Password": "Heslo",
   "PasswordLimitDigits": "číslice",
   "PasswordLimitMessage": "Heslo musí obsahovať",

@@ -83,6 +83,7 @@ const CreateRoomDialog = ({
     indexing: false,
     denyDownload: false,
     withCover: false,
+    previewIcon: null,
   };
 
   const [roomParams, setRoomParams] = useState({ ...startRoomParams });

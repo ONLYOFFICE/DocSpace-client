@@ -26,8 +26,8 @@
 
 import React from "react";
 import styled, { css } from "styled-components";
-import { tablet, mobile } from "../../utils";
-import { Base, globalColors } from "../../themes";
+import { tablet, mobile, injectDefaultTheme } from "../../utils";
+import { globalColors } from "../../themes";
 
 import { Text } from "../text";
 
@@ -48,7 +48,7 @@ const SimpleInput = ({
   style?: React.CSSProperties;
 }) => <div {...props} />;
 
-const StyledInput = styled(SimpleInput)<{
+const StyledInput = styled(SimpleInput).attrs(injectDefaultTheme)<{
   $isFullWidth?: boolean;
   isDisabled?: boolean;
 }>`
@@ -141,9 +141,10 @@ const StyledInput = styled(SimpleInput)<{
     }
   }
 `;
-StyledInput.defaultProps = { theme: Base };
 
-const PasswordProgress = styled.div<{ inputWidth?: string }>`
+const PasswordProgress = styled.div.attrs(injectDefaultTheme)<{
+  inputWidth?: string;
+}>`
   ${(props) =>
     props.inputWidth ? `width: ${props.inputWidth};` : `flex: auto;`}
   .input-relative {
@@ -160,7 +161,6 @@ const PasswordProgress = styled.div<{ inputWidth?: string }>`
     box-sizing: border-box;
   }
 `;
-PasswordProgress.defaultProps = { theme: Base };
 
 const TooltipStyle = styled.div`
   width: 294px;
@@ -173,7 +173,7 @@ const TooltipStyle = styled.div`
   }
 `;
 
-const StyledTooltipContainer = styled(Text)`
+const StyledTooltipContainer = styled(Text).attrs(injectDefaultTheme)`
   // margin: 8px 16px 16px 16px;
   color: ${(props) => props.theme.passwordInput.tooltipTextColor};
 
@@ -181,8 +181,6 @@ const StyledTooltipContainer = styled(Text)`
     margin-top: 10px;
   }
 `;
-
-StyledTooltipContainer.defaultProps = { theme: Base };
 
 const StyledTooltipItem = styled(Text)<{ valid?: boolean }>`
   //height: 24px;

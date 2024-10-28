@@ -52,7 +52,7 @@ import {
 import { setDocumentTitle } from "../helpers/utils";
 
 export type TNavigationPath = {
-  id: number;
+  id: number | string;
   title: string;
   isRoom: boolean;
   roomType: RoomsType;
@@ -354,30 +354,64 @@ class SelectedFolderStore {
   //   };
   // };
 
+  updateNavigationPath = (navigationPath: TNavigationPath[]) => {
+    this.navigationPath = navigationPath;
+  };
+
   setSelectedFolder: (selectedFolder: TSetSelectedFolder | null) => void = (
     selectedFolder,
   ) => {
     const currentId = this.id;
-    const isRoot = this?.rootFolderId === currentId;
+    const navPath = [{ id: currentId }, ...this.navigationPath];
+
     this.toDefault();
 
-    if (
-      currentId !== null &&
-      SocketHelper.socketSubscribers.has(`DIR-${currentId}`) &&
-      !isRoot
-    ) {
-      SocketHelper.emit(SocketCommands.Unsubscribe, {
-        roomParts: `DIR-${currentId}`,
-        individual: true,
-      });
-    }
+    const socketUnsub = selectedFolder
+      ? navPath.filter((p, index) => {
+          return (
+            !selectedFolder?.navigationPath?.some((np) => np.id === p.id) &&
+            !selectedFolder?.folders?.some((np) => np.id === p.id) &&
+            SocketHelper.socketSubscribers.has(`DIR-${p.id}`) &&
+            selectedFolder?.id !== p.id &&
+            index !== navPath.length - 1
+          );
+        })
+      : navPath.filter((p, index) => index !== navPath.length - 1);
+
+    // if (
+    //   currentId !== null &&
+    //   SocketHelper.socketSubscribers.has(`DIR-${currentId}`) &&
+    //   !selectedFolder?.navigationPath?.some((np) => np.id === currentId) &&
+    //   !selectedFolder?.folders?.some((np) => np.id === currentId) &&
+    //   !isRoot
+    // ) {
+    //   socketUnsub.push({
+    //     id: currentId,
+    //   } as TNavigationPath);
+    // }
+
+    const socketSub = selectedFolder
+      ? (selectedFolder.navigationPath
+          ?.map((p) => `DIR-${p.id}`)
+          .filter((p) => !SocketHelper.socketSubscribers.has(p)) ?? [])
+      : [];
 
     if (
       selectedFolder &&
       !SocketHelper.socketSubscribers.has(`DIR-${selectedFolder.id}`)
-    ) {
+    )
+      socketSub.push(`DIR-${selectedFolder.id}`);
+
+    if (socketUnsub.length > 0) {
+      SocketHelper.emit(SocketCommands.Unsubscribe, {
+        roomParts: socketUnsub.map((p) => `DIR-${p.id}`),
+        individual: true,
+      });
+    }
+
+    if (socketSub.length > 0) {
       SocketHelper.emit(SocketCommands.Subscribe, {
-        roomParts: `DIR-${selectedFolder.id}`,
+        roomParts: socketSub,
         individual: true,
       });
     }

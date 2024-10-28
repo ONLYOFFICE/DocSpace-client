@@ -234,13 +234,13 @@ const ComboBoxPure = (props: ComboboxProps) => {
 
   const dropDownBody =
     (advancedOptions as React.ReactNode) ||
-    (options.map((option: TOption) => {
+    (options?.map((option: TOption) => {
       const disabled =
         option.disabled ||
-        (!displaySelectedOption && option.label === selectedOption.label);
+        (!displaySelectedOption && option?.label === selectedOption?.label);
 
       const isActiveOption = withLabel
-        ? option.label === selectedOption.label
+        ? option.label === selectedOption?.label
         : option.key === selectedOption.key;
 
       const isActive = displaySelectedOption && isActiveOption;

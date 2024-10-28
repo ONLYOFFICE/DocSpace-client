@@ -30,13 +30,13 @@ import { inject, observer } from "mobx-react";
 
 import { ModalDialog } from "@docspace/shared/components/modal-dialog";
 import { Portal } from "@docspace/shared/components/portal";
-import { Base } from "@docspace/shared/themes";
 
 import WrappedComponent from "SRC_DIR/helpers/plugins/WrappedComponent";
 import { PluginComponents } from "SRC_DIR/helpers/plugins/enums";
 import { messageActions } from "SRC_DIR/helpers/plugins/utils";
+import { injectDefaultTheme } from "@docspace/shared/utils";
 
-const StyledFullScreen = styled.div`
+const StyledFullScreen = styled.div.attrs(injectDefaultTheme)`
   position: fixed;
   top: 0;
   // doesn't require mirroring for RTL
@@ -47,8 +47,6 @@ const StyledFullScreen = styled.div`
   width: 100%;
   height: 100%;
 `;
-
-StyledFullScreen.defaultProps = { theme: Base };
 
 const PluginDialog = ({
   isVisible,

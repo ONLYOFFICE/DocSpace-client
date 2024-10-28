@@ -26,10 +26,9 @@
 
 import styled, { css } from "styled-components";
 
-import { NoUserSelect } from "../../utils";
-import { Base } from "../../themes";
+import { injectDefaultTheme, NoUserSelect } from "../../utils";
 
-const StyledSelectedItem = styled.div<{
+const StyledSelectedItem = styled.div.attrs(injectDefaultTheme)<{
   isInline?: boolean;
   isDisabled?: boolean;
 }>`
@@ -76,7 +75,5 @@ const StyledLabel = styled.div<{ isDisabled?: boolean; truncate?: boolean }>`
       text-overflow: ellipsis;
     `}
 `;
-
-StyledSelectedItem.defaultProps = { theme: Base };
 
 export { StyledSelectedItem, StyledLabel };

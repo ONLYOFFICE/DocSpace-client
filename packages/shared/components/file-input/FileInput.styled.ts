@@ -24,9 +24,9 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import styled, { css } from "styled-components";
-import { Base, TTheme } from "../../themes";
-import { getCorrectBorderRadius } from "../../utils";
+import styled from "styled-components";
+import { TTheme } from "../../themes";
+import { getCorrectBorderRadius, injectDefaultTheme } from "../../utils";
 import { InputSize } from "../text-input";
 
 const paddingRightStyle = (props: { theme: TTheme; size: InputSize }) =>
@@ -40,7 +40,7 @@ const widthIconButtonStyle = (props: { theme: TTheme; size: InputSize }) =>
 const heightInputStyle = (props: { theme: TTheme; size: InputSize }) =>
   props.theme.fileInput.height[props.size];
 
-const StyledFileInput = styled.div<{
+const StyledFileInput = styled.div.attrs(injectDefaultTheme)<{
   size: InputSize;
   scale?: boolean;
   hasError?: boolean;
@@ -139,6 +139,5 @@ const StyledFileInput = styled.div<{
     width: ${(props) => widthIconButtonStyle(props)};
   }
 `;
-StyledFileInput.defaultProps = { theme: Base };
 
 export default StyledFileInput;

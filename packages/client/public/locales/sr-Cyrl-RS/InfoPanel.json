@@ -1,5 +1,4 @@
 {
-  "UsersEmptyScreenText": "Види корисничке детаље овде",
   "AddedRoomTags": "Тагови додати.",
   "Administration": "Администрација",
   "AndMoreLabel": "и <1>{{count}} више</1>",
@@ -57,5 +56,6 @@
   "SubmenuHistory": "Историја",
   "UserFileUpdated": "Датотека ажурирана.",
   "Users": "Корисници",
+  "UsersEmptyScreenText": "Види корисничке детаље овде",
   "Versions": "Верзије"
 }

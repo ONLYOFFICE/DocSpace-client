@@ -22,7 +22,7 @@ import {
 } from "@docspace/shared/components/text-input";
 import { UserStore } from "@docspace/shared/store/UserStore";
 
-import { OAuthStoreProps } from "SRC_DIR/store/OAuthStore";
+import OAuthStore from "SRC_DIR/store/OAuthStore";
 
 type GenerateDeveloperTokenDialogProps = {
   client?: IClientProps;
@@ -174,7 +174,7 @@ export default inject(
     oauthStore,
     userStore,
   }: {
-    oauthStore: OAuthStoreProps;
+    oauthStore: OAuthStore;
     userStore: UserStore;
   }) => {
     const { setRevokeDeveloperTokenDialogVisible, bufferSelection } =

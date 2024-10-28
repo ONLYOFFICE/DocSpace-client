@@ -10,14 +10,10 @@
   "DomainSettings": "Setări domeniu",
   "EnterDomain": "Introducere nume domeniu",
   "EnterName": "Introducere nume spațiu",
-  "GoToSpace": "Acces spațiu",
   "NewSpace": "Spaţiu nou",
   "PortalName": "Nume {{productName}}",
   "PortalStats": "Săli: {{roomCount}} | Utilizatori: {{userCount}} | Spaţiul de stocare utilizat: {{storageSpace}}",
   "RestrictAccess": "Restricționare acces la gestiunea spațiilor",
-  "SpaceCreated": "Spațiu a fost creat",
-  "SpaceCreatedTitle": "Spațiul a fost creat cu succes,  îl puteți accesa făcând clic pe Accesare spațiu. Pentru a crea mai multe spații, rămâneți în secția Setări.",
-  "StayInSettings": "Rămâne în Setări",
   "Subheader": "Folosiți această secțiune pentru a crea mai multe spații și a le face accesibile pentru utilizatorii dvs.",
   "VisitSpace": "Vizitați acest spațiu după creare"
 }

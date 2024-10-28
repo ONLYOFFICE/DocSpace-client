@@ -25,8 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base, TColorScheme } from "../../../themes";
+import { TColorScheme } from "../../../themes";
 import StyledInfoPanelToggleWrapper from "../sub-components/StyledWrapper";
+import { injectDefaultTheme } from "../../../utils";
 
 const getDefaultStyles = ({
   $currentColorScheme,
@@ -50,6 +51,6 @@ const getDefaultStyles = ({
     }
   `;
 
-StyledInfoPanelToggleWrapper.defaultProps = { theme: Base };
-
-export default styled(StyledInfoPanelToggleWrapper)(getDefaultStyles);
+export default styled(StyledInfoPanelToggleWrapper).attrs(injectDefaultTheme)(
+  getDefaultStyles,
+);

@@ -27,10 +27,9 @@
 "use client";
 
 import styled from "styled-components";
-import { tablet, mobile } from "../../../utils";
-import { Base } from "../../../themes";
+import { tablet, mobile, injectDefaultTheme } from "../../../utils";
 
-const LoginContainer = styled.div<{
+const LoginContainer = styled.div.attrs(injectDefaultTheme)<{
   type: string;
   isRegisterContainerVisible: boolean;
 }>`
@@ -91,6 +90,9 @@ const LoginContainer = styled.div<{
   }
 
   .greeting-title {
+    display: flex;
+    justify-content: center;
+
     width: 100%;
     max-width: 480px;
     padding-bottom: 29px;
@@ -99,6 +101,10 @@ const LoginContainer = styled.div<{
     color: ${(props) => props.theme.login.headerColor};
 
     @media ${mobile} {
+      overflow: hidden;
+      display: block;
+      text-overflow: ellipsis;
+
       padding-top: 32px;
       padding-bottom: 32px;
     }
@@ -241,6 +247,18 @@ const LoginContainer = styled.div<{
         margin-top: 24px;
       }
     } */
+
+    @keyframes autofill {
+      from {
+      }
+      to {
+      }
+    }
+
+    input:-webkit-autofill {
+      animation-name: autofill;
+      animation-duration: 1ms;
+    }
   }
 
   .logo-wrapper {
@@ -285,7 +303,5 @@ const LoginContainer = styled.div<{
     height: 20px;
   }
 `;
-
-LoginContainer.defaultProps = { theme: Base };
 
 export default LoginContainer;

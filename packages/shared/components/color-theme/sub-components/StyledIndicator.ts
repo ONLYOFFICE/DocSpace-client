@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled from "styled-components";
-import { Base } from "../../../themes";
+import { injectDefaultTheme } from "../../../utils";
 
-const StyledIndicator = styled.div`
+const StyledIndicator = styled.div.attrs(injectDefaultTheme)`
   border-radius: 50%;
   width: 8px;
   height: 8px;
@@ -39,7 +39,5 @@ const StyledIndicator = styled.div`
 
   z-index: 10;
 `;
-
-StyledIndicator.defaultProps = { theme: Base };
 
 export default StyledIndicator;

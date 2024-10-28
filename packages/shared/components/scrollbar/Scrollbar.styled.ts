@@ -29,10 +29,9 @@ import { isIOS, isIOS13, isIPad13 } from "react-device-detect";
 
 import { Scrollbar } from "./custom-scrollbar";
 
-import { Base } from "../../themes";
-import { mobile, desktop, tablet } from "../../utils";
+import { mobile, desktop, tablet, injectDefaultTheme } from "../../utils";
 
-const StyledScrollbar = styled(Scrollbar)<{
+const StyledScrollbar = styled(Scrollbar).attrs(injectDefaultTheme)<{
   $fixedSize?: boolean;
   $paddingAfterLastItem?: string;
 }>`
@@ -211,9 +210,5 @@ const StyledScrollbar = styled(Scrollbar)<{
     }
   }
 `;
-
-StyledScrollbar.defaultProps = {
-  theme: Base,
-};
 
 export default StyledScrollbar;

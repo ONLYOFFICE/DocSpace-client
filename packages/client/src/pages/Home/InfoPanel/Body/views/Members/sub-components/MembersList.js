@@ -240,6 +240,7 @@ const MembersList = (props) => {
                       scrollTop={scrollTop}
                       // React virtualized sets "LTR" by default.
                       style={{ direction: "inherit" }}
+                      tabIndex={null}
                     />
                   );
                 }}

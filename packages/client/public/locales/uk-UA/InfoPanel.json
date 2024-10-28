@@ -1,5 +1,4 @@
 {
-  "UsersEmptyScreenText": "Див. інформацію про користувачів тут",
   "AddedRoomTags": "Теги додано.",
   "Administration": "Адміністрування",
   "AndMoreLabel": "і ще <1>{{count}}</1>",
@@ -57,5 +56,6 @@
   "SubmenuHistory": "Історія",
   "UserFileUpdated": "Файл оновлено.",
   "Users": "Користувачі",
+  "UsersEmptyScreenText": "Див. інформацію про користувачів тут",
   "Versions": "Версії"
 }

@@ -355,6 +355,10 @@ const CreateUserForm = (props: CreateUserFormProps) => {
     const { userName, passwordHash } = confirmUserData;
     const res = await login(userName, passwordHash);
 
+    if (res && res.tfa && res.confirmUrl) {
+      return window.location.replace(res.confirmUrl);
+    }
+
     const finalUrl = roomData.roomId
       ? `/rooms/shared/${roomData.roomId}/filter?folder=${roomData.roomId}`
       : defaultPage;

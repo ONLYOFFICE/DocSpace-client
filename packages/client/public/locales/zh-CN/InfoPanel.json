@@ -1,5 +1,4 @@
 {
-  "UsersEmptyScreenText": "在此查看用户详情",
   "AddedRoomTags": "已添加标签。",
   "Administration": "管理",
   "AndMoreLabel": "以及<1>另外 {{count}} 个</1>",
@@ -57,5 +56,6 @@
   "SubmenuHistory": "历史记录",
   "UserFileUpdated": "文件已更新。",
   "Users": "用户",
+  "UsersEmptyScreenText": "在此查看用户详情",
   "Versions": "版本"
 }

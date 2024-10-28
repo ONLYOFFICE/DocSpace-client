@@ -26,19 +26,22 @@
 
 import styled from "styled-components";
 
-import { Base, TTheme, globalColors } from "../../themes";
-import { commonIconsStyles, NoUserSelect } from "../../utils";
+import { TTheme, globalColors } from "../../themes";
+import {
+  commonIconsStyles,
+  injectDefaultTheme,
+  NoUserSelect,
+} from "../../utils";
 
 import { CameraReactSvg } from "./svg";
 import { AvatarSize } from "./Avatar.enums";
 
-const EmptyIcon = styled(CameraReactSvg)`
+const EmptyIcon = styled(CameraReactSvg).attrs(injectDefaultTheme)`
   ${commonIconsStyles}
   border-radius: ${(props) => props.theme.avatar.image.borderRadius};
 `;
-EmptyIcon.defaultProps = { theme: Base };
 
-const EditContainer = styled.div`
+const EditContainer = styled.div.attrs(injectDefaultTheme)`
   position: absolute;
   display: flex;
 
@@ -61,9 +64,8 @@ const EditContainer = styled.div`
     }
   }
 `;
-EditContainer.defaultProps = { theme: Base };
 
-const AvatarWrapper = styled.div<{
+const AvatarWrapper = styled.div.attrs(injectDefaultTheme)<{
   source: string;
   userName: string;
   isGroup: boolean;
@@ -94,14 +96,13 @@ const AvatarWrapper = styled.div<{
     }
   }
 `;
-AvatarWrapper.defaultProps = { theme: Base };
 
 const rightStyle = (props: { size: AvatarSize; theme: TTheme }) =>
   props.theme.avatar.roleWrapperContainer.right[props.size];
 const bottomStyle = (props: { size: AvatarSize; theme: TTheme }) =>
   props.theme.avatar.roleWrapperContainer.bottom[props.size];
 
-const RoleWrapper = styled.div<{
+const RoleWrapper = styled.div.attrs(injectDefaultTheme)<{
   size: AvatarSize;
   theme: TTheme;
 }>`
@@ -132,7 +133,6 @@ const RoleWrapper = styled.div<{
       props.theme.avatar.roleWrapperContainer.width.medium) ||
     "12px"};
 `;
-RoleWrapper.defaultProps = { theme: Base };
 
 const fontSizeStyle = ({
   size,
@@ -149,7 +149,10 @@ const fontSizeStyle = ({
   return theme.avatar.initialsContainer.fontSize[size];
 };
 
-const NamedAvatar = styled.div<{ size: AvatarSize; isGroup: boolean }>`
+const NamedAvatar = styled.div.attrs(injectDefaultTheme)<{
+  size: AvatarSize;
+  isGroup: boolean;
+}>`
   position: absolute;
   color: ${(props) =>
     props.isGroup
@@ -169,9 +172,9 @@ const NamedAvatar = styled.div<{ size: AvatarSize; isGroup: boolean }>`
   ${NoUserSelect}
 `;
 
-NamedAvatar.defaultProps = { theme: Base };
-
-const StyledImage = styled.img<{ isDefault?: boolean }>`
+const StyledImage = styled.img.attrs(injectDefaultTheme)<{
+  isDefault?: boolean;
+}>`
   width: ${(props) => props.theme.avatar.image.width};
   height: ${(props) => props.theme.avatar.image.height};
   border-radius: ${(props) => props.theme.avatar.image.borderRadius};
@@ -179,9 +182,8 @@ const StyledImage = styled.img<{ isDefault?: boolean }>`
   content: ${(props) => props.isDefault && props.theme.avatar.defaultImage};
   ${NoUserSelect};
 `;
-StyledImage.defaultProps = { theme: Base };
 
-const StyledIconWrapper = styled.div`
+const StyledIconWrapper = styled.div.attrs(injectDefaultTheme)`
   width: 100%;
   height: 100%;
   display: flex;
@@ -197,14 +199,16 @@ const StyledIconWrapper = styled.div`
     }
   }
 `;
-StyledIconWrapper.defaultProps = { theme: Base };
 
 const widthStyle = ({ size, theme }: { size: AvatarSize; theme: TTheme }) =>
   theme.avatar.width[size];
 const heightStyle = ({ size, theme }: { size: AvatarSize; theme: TTheme }) =>
   theme.avatar.height[size];
 
-const StyledAvatar = styled.div<{ size: AvatarSize; theme: TTheme }>`
+const StyledAvatar = styled.div.attrs(injectDefaultTheme)<{
+  size: AvatarSize;
+  theme: TTheme;
+}>`
   position: relative;
   width: ${(props) => widthStyle(props)};
   min-width: ${(props) => widthStyle(props)};
@@ -250,7 +254,6 @@ const StyledAvatar = styled.div<{ size: AvatarSize; theme: TTheme }>`
     }
   }
 `;
-StyledAvatar.defaultProps = { theme: Base };
 
 export {
   EmptyIcon,

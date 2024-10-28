@@ -1,6 +1,4 @@
 {
-  "UsersEmptyScreenText": "See users details here",
-  "GuestsEmptyScreenText": "See guests details here",
   "AddedRoomTags": "Tags added.",
   "Administration": "Administration",
   "AndMoreLabel": "and <1>{{count}} more</1>",
@@ -33,6 +31,7 @@
   "FolderRenamed": "Folder renamed.",
   "GalleryEmptyScreenText": "See form template details here",
   "GroupsEmptyScreenText": "See group details here",
+  "GuestsEmptyScreenText": "See guests details here",
   "HistoryEmptyScreenText": "Activity history will be shown here",
   "HistoryRoomCopied": "<1>«{{roomTitle}}»</1> room copied",
   "HistoryRoomCreated": "<1>«{{roomTitle}}»</1> room created",
@@ -54,13 +53,14 @@
   "RoomRenamed": "Room <1>«{{oldRoomTitle}}»</1> renamed to <2>«{{roomTitle}}»</2>",
   "RoomsEmptyScreenTent": "See rooms details here",
   "RoomUpdateAccess": "has been assigned role",
-  "SelectedUsers": "Selected accounts",
   "SelectedGroups": "Selected groups",
+  "SelectedUsers": "Selected accounts",
   "StartedFillingItOut": "Started filling it out.",
   "StorageType": "Storage type",
   "SubmenuDetails": "Details",
   "SubmenuHistory": "History",
   "UserFileUpdated": "File updated.",
   "Users": "Users",
+  "UsersEmptyScreenText": "See users details here",
   "Versions": "Versions"
 }

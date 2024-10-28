@@ -32,10 +32,9 @@ import CatalogFolderReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.folder.
 import CatalogGuestReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.guest.react.svg?url";
 import CatalogTrashReactSvgUrl from "PUBLIC_DIR/images/icons/16/catalog.trash.react.svg?url";
 
-import { Base } from "../../themes";
-
 import { ArticleItemPure } from "./ArticleItem";
 import { ArticleItemProps } from "./ArticleItem.types";
+import { injectDefaultTheme } from "../../utils";
 
 const meta = {
   title: "Components/ArticleItem",
@@ -57,12 +56,10 @@ type Story = StoryObj<typeof ArticleItemPure>;
 
 export default meta;
 
-const CatalogWrapper = styled.div`
+const CatalogWrapper = styled.div.attrs(injectDefaultTheme)`
   background-color: ${(props) => props.theme.catalogItem.container.background};
   padding: 15px;
 `;
-
-CatalogWrapper.defaultProps = { theme: Base };
 
 const Template = (args: ArticleItemProps) => {
   return (

@@ -579,42 +579,55 @@ class FilesStore {
 
       api.files
         .getFolderInfo(folder.id)
-        .then(this.setFolder)
+        .then((f) => {
+          console.log("[WS] update folder", f.id, f.title);
+
+          if (this.selection?.length) {
+            const foundIndex = this.selection?.findIndex((x) => x.id === f.id);
+            if (foundIndex > -1) {
+              runInAction(() => {
+                this.selection[foundIndex] = f;
+              });
+            }
+          }
+
+          if (this.bufferSelection) {
+            if (
+              this.bufferSelection.id === f.id &&
+              (this.bufferSelection.isFolder || this.bufferSelection.isRoom)
+            ) {
+              this.setBufferSelection(f);
+            }
+          }
+
+          const navigationPath = [...this.selectedFolderStore.navigationPath];
+
+          const idx = navigationPath.findIndex((p) => p.id === f.id);
+
+          if (idx !== -1) {
+            navigationPath[idx].title = f?.title;
+          }
+
+          if (f.id === this.selectedFolderStore.id) {
+            this.selectedFolderStore.setSelectedFolder({
+              ...f,
+              navigationPath,
+            });
+          }
+
+          if (
+            infoPanelSelection?.id == f.id &&
+            (infoPanelSelection?.isFolder || infoPanelSelection?.isRoom)
+          ) {
+            const newInfoPanelSelection = this.getFilesListItems([f]);
+            updateInfoPanelSelection(newInfoPanelSelection[0]);
+          }
+
+          this.setFolder(f);
+        })
         .catch(() => {
           // console.log("Folder deleted")
         });
-
-      console.log("[WS] update folder", folder.id, folder.title);
-
-      if (this.selection?.length) {
-        const foundIndex = this.selection?.findIndex((x) => x.id === folder.id);
-        if (foundIndex > -1) {
-          runInAction(() => {
-            this.selection[foundIndex] = folder;
-          });
-        }
-      }
-
-      if (this.bufferSelection) {
-        if (
-          this.bufferSelection.id === folder.id &&
-          (this.bufferSelection.isFolder || this.bufferSelection.isRoom)
-        ) {
-          this.setBufferSelection(folder);
-        }
-      }
-
-      if (folder.id === this.selectedFolderStore.id) {
-        this.selectedFolderStore.setSelectedFolder({ ...folder });
-      }
-
-      if (
-        infoPanelSelection?.id == folder.id &&
-        (infoPanelSelection?.isFolder || infoPanelSelection?.isRoom)
-      ) {
-        const newInfoPanelSelection = this.getFilesListItems([folder]);
-        updateInfoPanelSelection(newInfoPanelSelection[0]);
-      }
     }
   };
 
@@ -4050,7 +4063,13 @@ class FilesStore {
     return folderInfo;
   };
 
-  openDocEditor = (id, preview = false, shareKey = null, editForm = false) => {
+  openDocEditor = (
+    id,
+    preview = false,
+    shareKey = null,
+    editForm = false,
+    fillForm = false,
+  ) => {
     const { openOnNewPage } = this.filesSettingsStore;
 
     const share = shareKey ? shareKey : this.publicRoomStore.publicRoomKey;
@@ -4061,6 +4080,7 @@ class FilesStore {
     if (share) searchParams.append("share", share);
     if (preview) searchParams.append("action", "view");
     if (editForm) searchParams.append("action", "edit");
+    if (fillForm) searchParams.append("action", "fill");
 
     const url = combineUrl(
       window.ClientConfig?.proxy?.url,

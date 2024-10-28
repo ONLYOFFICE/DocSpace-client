@@ -44,12 +44,18 @@ import { Badge } from "@docspace/shared/components/badge";
 import { ColorTheme, ThemeId } from "@docspace/shared/components/color-theme";
 
 import { RoomsType, ShareAccessRights } from "@docspace/shared/enums";
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 
-import { isTablet, isDesktop, size, classNames } from "@docspace/shared/utils";
+import {
+  isTablet,
+  isDesktop,
+  size,
+  classNames,
+  injectDefaultTheme,
+} from "@docspace/shared/utils";
 import NewFilesBadge from "./NewFilesBadge";
 
-const StyledWrapper = styled.div`
+const StyledWrapper = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,8 +65,6 @@ const StyledWrapper = styled.div`
   border-radius: 4px;
   box-shadow: 0px 2px 4px ${globalColors.badgeShadow};
 `;
-
-StyledWrapper.defaultProps = { theme: Base };
 
 const BadgeWrapper = ({ onClick, isTile, children: badge }) => {
   if (!isTile) return badge;
@@ -292,7 +296,7 @@ const Badges = ({
           />
         </BadgeWrapper>
       )}
-      {/* {isForm  && ( 
+      {/* {isForm  && (
         <BadgeWrapper isTile={isTile}>
           <HelpButton
             place="bottom"

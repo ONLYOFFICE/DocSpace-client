@@ -51,10 +51,10 @@ const RoomLogoPure = ({
   style,
   type,
 
-  isArchive,
-  withCheckbox,
-  isChecked,
-  isIndeterminate,
+  isArchive = false,
+  withCheckbox = false,
+  isChecked = false,
+  isIndeterminate = false,
   onChange,
 }: RoomLogoProps) => {
   const getIcon = () => {
@@ -116,14 +116,6 @@ const RoomLogoPure = ({
       )}
     </StyledContainer>
   );
-};
-
-RoomLogoPure.defaultProps = {
-  isPrivacy: false,
-  isArchive: false,
-  withCheckbox: false,
-  isChecked: false,
-  isIndeterminate: false,
 };
 
 export { RoomLogoPure };

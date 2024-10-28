@@ -26,9 +26,13 @@
 
 import styled, { css } from "styled-components";
 
-import { NoUserSelect, commonTextStyles } from "../../utils";
+import {
+  NoUserSelect,
+  commonTextStyles,
+  injectDefaultTheme,
+} from "../../utils";
 
-import { Base, TTheme } from "../../themes";
+import { TTheme } from "../../themes";
 import { HeadingSize } from "./Heading.enums";
 
 const fontSizeStyle = (props: { size: HeadingSize; theme: TTheme }) =>
@@ -50,14 +54,12 @@ const styleCss = css<{
     `};
 `;
 
-const StyledHeading = styled.h1`
+const StyledHeading = styled.h1.attrs(injectDefaultTheme)`
   ${styleCss};
 
   ${commonTextStyles};
 
   ${NoUserSelect};
 `;
-
-StyledHeading.defaultProps = { theme: Base };
 
 export default StyledHeading;

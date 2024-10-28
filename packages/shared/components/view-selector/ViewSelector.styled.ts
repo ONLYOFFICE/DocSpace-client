@@ -25,9 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import styled, { css } from "styled-components";
-import { Base } from "../../themes";
+import { injectDefaultTheme } from "../../utils";
 
-const StyledViewSelector = styled.div<{
+const StyledViewSelector = styled.div.attrs(injectDefaultTheme)<{
   isFilter?: boolean;
   countItems: number;
 }>`
@@ -70,7 +70,7 @@ const lastItemStyle = css`
   border-end-end-radius: 3px;
 `;
 
-const IconWrapper = styled.div<{
+const IconWrapper = styled.div.attrs(injectDefaultTheme)<{
   isDisabled?: boolean;
   isChecked?: boolean;
   firstItem?: boolean;
@@ -156,9 +156,5 @@ const IconWrapper = styled.div<{
           `};
   }
 `;
-
-IconWrapper.defaultProps = { theme: Base };
-
-StyledViewSelector.defaultProps = { theme: Base };
 
 export { StyledViewSelector, IconWrapper };

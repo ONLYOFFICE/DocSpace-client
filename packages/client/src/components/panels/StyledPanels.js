@@ -26,8 +26,13 @@
 
 import styled, { css } from "styled-components";
 import { Link } from "@docspace/shared/components/link";
-import { desktop, mobile, tablet } from "@docspace/shared/utils";
-import { Base, globalColors } from "@docspace/shared/themes";
+import {
+  desktop,
+  injectDefaultTheme,
+  mobile,
+  tablet,
+} from "@docspace/shared/utils";
+import { globalColors } from "@docspace/shared/themes";
 
 const PanelStyles = css`
   .panel_combo-box {
@@ -56,7 +61,7 @@ const PanelStyles = css`
   }
 `;
 
-const StyledAsidePanel = styled.div`
+const StyledAsidePanel = styled.div.attrs(injectDefaultTheme)`
   z-index: 310;
 
   .sharing_panel-header {
@@ -80,13 +85,11 @@ const StyledAsidePanel = styled.div`
   ${PanelStyles}
 `;
 
-StyledAsidePanel.defaultProps = { theme: Base };
-
 const StyledEmbeddingPanel = styled.div`
   ${PanelStyles}
 `;
 
-const StyledContent = styled.div`
+const StyledContent = styled.div.attrs(injectDefaultTheme)`
   box-sizing: border-box;
   position: relative;
   width: 100%;
@@ -135,9 +138,7 @@ const StyledContent = styled.div`
   }
 `;
 
-StyledContent.defaultProps = { theme: Base };
-
-const StyledBody = styled.div`
+const StyledBody = styled.div.attrs(injectDefaultTheme)`
   height: 100%;
   width: 100%;
 
@@ -204,8 +205,6 @@ const StyledBody = styled.div`
   }
 `;
 
-StyledBody.defaultProps = { theme: Base };
-
 const StyledNewFilesBody = styled.div`
   height: 100%;
   width: 100%;
@@ -217,7 +216,7 @@ const StyledNewFilesBody = styled.div`
   }
 `;
 
-const StyledFooter = styled.div`
+const StyledFooter = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   position: fixed;
   bottom: 0;
@@ -268,9 +267,7 @@ const StyledFooter = styled.div`
   }
 `;
 
-StyledFooter.defaultProps = { theme: Base };
-
-const StyledLinkRow = styled.div`
+const StyledLinkRow = styled.div.attrs(injectDefaultTheme)`
   margin-inline-end: -16px;
   padding: 0 16px;
   box-sizing: border-box;
@@ -329,9 +326,7 @@ const StyledLinkRow = styled.div`
   }
 `;
 
-StyledLinkRow.defaultProps = { theme: Base };
-
-const StyledModalRowContainer = styled.div`
+const StyledModalRowContainer = styled.div.attrs(injectDefaultTheme)`
   display: flex;
   flex-direction: column;
   min-height: 47px;
@@ -460,8 +455,6 @@ const StyledModalRowContainer = styled.div`
 const StyledLink = styled(Link)`
   color: ${(props) => props.theme.filesPanels.color};
 `;
-
-StyledModalRowContainer.defaultProps = { theme: Base };
 
 const StyledUploadBody = styled.div`
   width: calc(100% + 16px);

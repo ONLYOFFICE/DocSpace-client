@@ -30,14 +30,16 @@ import { Button } from "@docspace/shared/components/button";
 import { Text } from "@docspace/shared/components/text";
 import { TextInput } from "@docspace/shared/components/text-input";
 
-import { commonIconsStyles, tablet } from "@docspace/shared/utils";
+import {
+  commonIconsStyles,
+  injectDefaultTheme,
+  tablet,
+} from "@docspace/shared/utils";
 
 import CheckIcon from "PUBLIC_DIR/images/check.react.svg";
 import CrossIcon from "PUBLIC_DIR/images/icons/12/cross.react.svg";
 
-import { Base } from "@docspace/shared/themes";
-
-const StyledCheckIcon = styled(CheckIcon)`
+const StyledCheckIcon = styled(CheckIcon).attrs(injectDefaultTheme)`
   ${commonIconsStyles}
   path {
     fill: ${(props) => props.theme.filesEditingWrapper.fill} !important;
@@ -47,9 +49,7 @@ const StyledCheckIcon = styled(CheckIcon)`
   }
 `;
 
-StyledCheckIcon.defaultProps = { theme: Base };
-
-const StyledCrossIcon = styled(CrossIcon)`
+const StyledCrossIcon = styled(CrossIcon).attrs(injectDefaultTheme)`
   ${commonIconsStyles}
   path {
     fill: ${(props) => props.theme.filesEditingWrapper.fill} !important;
@@ -58,15 +58,13 @@ const StyledCrossIcon = styled(CrossIcon)`
     fill: ${(props) => props.theme.filesEditingWrapper.hoverFill} !important;
   }
 `;
-
-StyledCrossIcon.defaultProps = { theme: Base };
 
 export const okIcon = <StyledCheckIcon className="edit-ok-icon" size="scale" />;
 export const cancelIcon = (
   <StyledCrossIcon className="edit-cancel-icon" size="scale" />
 );
 
-const EditingWrapper = styled.div`
+const EditingWrapper = styled.div.attrs(injectDefaultTheme)`
   width: 100%;
   display: inline-flex;
   align-items: center;
@@ -211,8 +209,6 @@ const EditingWrapper = styled.div`
     padding: 1px;
   }
 `;
-
-EditingWrapper.defaultProps = { theme: Base };
 
 const EditingWrapperComponent = (props) => {
   const {

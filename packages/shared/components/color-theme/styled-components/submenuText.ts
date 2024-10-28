@@ -26,7 +26,8 @@
 
 import styled, { css } from "styled-components";
 import StyledText from "../../text/Text.styled";
-import { Base, TColorScheme, TTheme } from "../../../themes";
+import { TColorScheme, TTheme } from "../../../themes";
+import { injectDefaultTheme } from "../../../utils";
 
 const getDefaultStyles = ({
   $currentColorScheme,
@@ -50,6 +51,4 @@ const getDefaultStyles = ({
     }
   `;
 
-StyledText.defaultProps = { theme: Base };
-
-export default styled(StyledText)(getDefaultStyles);
+export default styled(StyledText).attrs(injectDefaultTheme)(getDefaultStyles);

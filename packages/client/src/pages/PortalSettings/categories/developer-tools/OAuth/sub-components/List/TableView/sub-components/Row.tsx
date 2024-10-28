@@ -24,6 +24,7 @@ const Row = (props: RowProps) => {
     getContextMenuItems,
     setSelection,
     tagCount,
+    setBufferSelection,
   } = props;
   const navigate = useNavigate();
 
@@ -86,7 +87,14 @@ const Row = (props: RowProps) => {
       <StyledTableRow
         contextOptions={contextOptions || []}
         onClick={handleRowClick}
+        fileContextClick={(isRightClick) => {
+          if (isRightClick) return;
+          setSelection!("");
+          setBufferSelection!(item.clientId);
+        }}
         getContextModel={getContextMenuModel}
+        isIndexEditingMode={false}
+        badgeUrl=""
       >
         <TableCell className="table-container_file-name-cell">
           <NameCell

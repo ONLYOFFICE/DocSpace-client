@@ -26,9 +26,10 @@
 
 import styled, { css } from "styled-components";
 
-import { Base, globalColors } from "@docspace/shared/themes";
+import { globalColors } from "@docspace/shared/themes";
 import { DropDown } from "@docspace/shared/components/drop-down";
 import { DropDownItem } from "@docspace/shared/components/drop-down-item";
+import { injectDefaultTheme } from "../../utils";
 
 type StyledButtonScrollProps = {
   orientation: "left" | "right";
@@ -43,7 +44,7 @@ type StyledViewerContainerProps = {
   visible: boolean;
 };
 
-export const ControlBtn = styled.div`
+export const ControlBtn = styled.div.attrs(injectDefaultTheme)`
   display: inline-block;
   height: 30px;
   line-height: 25px;
@@ -58,8 +59,6 @@ export const ControlBtn = styled.div`
       props.theme.mediaViewer.controlBtn.backgroundColor};
   }
 `;
-
-ControlBtn.defaultProps = { theme: Base };
 
 export const StyledDropDown = styled(DropDown)`
   background: ${globalColors.black};
@@ -154,7 +153,9 @@ export const StyledSwitchToolbar = styled.div<StyledSwitchToolbarProps>`
   }
 `;
 
-export const StyledViewerContainer = styled.div<StyledViewerContainerProps>`
+export const StyledViewerContainer = styled.div.attrs(
+  injectDefaultTheme,
+)<StyledViewerContainerProps>`
   color: ${(props) => props.theme.mediaViewer.color};
   display: ${(props) => (props.visible ? "block" : "none")};
   overflow: hidden;
@@ -246,5 +247,3 @@ export const StyledViewerContainer = styled.div<StyledViewerContainerProps>`
     inset: 0;
   }
 `;
-
-StyledViewerContainer.defaultProps = { theme: Base };

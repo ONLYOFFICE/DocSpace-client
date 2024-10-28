@@ -27,13 +27,14 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
 import { withTranslation } from "react-i18next";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import {
   isMobile,
   isTablet,
   mobile,
   tablet,
   desktop,
+  injectDefaultTheme,
 } from "@docspace/shared/utils";
 
 import { Link } from "@docspace/shared/components/link";
@@ -41,8 +42,6 @@ import { Text } from "@docspace/shared/components/text";
 import { RowContent } from "@docspace/shared/components/row-content";
 
 import withContent from "../../../../../HOCs/withContent";
-
-import { Base } from "@docspace/shared/themes";
 
 import {
   connectedCloudsTypeTitleTranslation,
@@ -52,7 +51,7 @@ import {
 import { SortByFieldName } from "SRC_DIR/helpers/constants";
 import { getSpaceQuotaAsText } from "@docspace/shared/utils/common";
 
-const SimpleFilesRowContent = styled(RowContent)`
+const SimpleFilesRowContent = styled(RowContent).attrs(injectDefaultTheme)`
   .row-main-container-wrapper {
     width: 100%;
     max-width: min-content;
@@ -156,8 +155,6 @@ const SimpleFilesRowContent = styled(RowContent)`
     }
   }
 `;
-
-SimpleFilesRowContent.defaultProps = { theme: Base };
 
 const FilesRowContent = ({
   t,

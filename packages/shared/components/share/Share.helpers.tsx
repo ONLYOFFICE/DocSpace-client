@@ -241,6 +241,8 @@ export const getNameAccess = (access: ShareAccessRights, t: TTranslation) => {
       return t("Common:Comment");
     case ShareAccessRights.ReadOnly:
       return t("Common:ReadOnly");
+    case ShareAccessRights.FormFilling:
+      return t("Common:FillInOut");
     default:
       return "";
   }
@@ -280,10 +282,73 @@ export const canShowManageLink = (
   buffer: TFile,
   infoPanelVisible: boolean,
   infoPanelView: string,
+  isRoom: boolean = false,
 ) => {
   const isEqual = equal(item, buffer);
 
-  return !isEqual || infoPanelView !== "info_share" || !infoPanelVisible;
+  const view =
+    (isRoom && infoPanelView !== "info_members") ||
+    (!isRoom && infoPanelView !== "info_share");
+
+  return !isEqual || view || !infoPanelVisible;
+};
+
+export const copyRoomShareLink = (
+  link: TFileLink,
+  t: TTranslation,
+  withCopy = true,
+  linkOptions?: {
+    canShowLink: boolean;
+    onClickLink: VoidFunction;
+  },
+) => {
+  const { password, shareLink, expirationDate, denyDownload } = link.sharedTo;
+  const hasPassword = Boolean(password);
+  const role = getNameAccess(link.access, t).toLowerCase();
+
+  if (!role) return;
+  if (withCopy) copy(shareLink);
+
+  const roleText = (
+    <Trans
+      t={t}
+      ns="Common"
+      i18nKey="RoomShareLinkRole"
+      values={{ role }}
+      components={{ 1: <Strong /> }}
+    />
+  );
+
+  const passwordText = hasPassword ? t("Common:RoomShareLinkPassword") : "";
+  const restrictionText = denyDownload
+    ? t("Common:RoomShareLinkRestrictionActivated")
+    : "";
+
+  const date = expirationDate ? (
+    <Trans
+      t={t}
+      ns="Common"
+      i18nKey="LinkIsValid"
+      values={{ date: moment(expirationDate).format("lll") }}
+      components={{ 1: <Strong /> }}
+    />
+  ) : null;
+
+  toastr.success(
+    <span>
+      {roleText} {passwordText} {restrictionText} {date}
+      {date && <Strong>.</Strong>}
+      {linkOptions?.canShowLink && linkOptions?.onClickLink && (
+        <Link
+          color={globalColors.lightBlueMain}
+          isHovered
+          onClick={linkOptions.onClickLink}
+        >
+          {t("Notifications:ManageNotifications")}
+        </Link>
+      )}
+    </span>,
+  );
 };
 
 export const copyDocumentShareLink = (

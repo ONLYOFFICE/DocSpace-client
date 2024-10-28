@@ -15,7 +15,7 @@ module.exports = {
     getAbsolutePath("@storybook/addon-controls"),
     getAbsolutePath("@storybook/addon-viewport"),
     getAbsolutePath("@storybook/addon-contexts"),
-    getAbsolutePath("@react-theming/storybook-addon"),
+    // getAbsolutePath("@react-theming/storybook-addon"),
     getAbsolutePath("@storybook/addon-designs"),
     {
       name: "@storybook/addon-docs",
@@ -33,7 +33,7 @@ module.exports = {
         },
       },
     },
-    getAbsolutePath("@storybook/addon-mdx-gfm"),
+    // getAbsolutePath("@storybook/addon-mdx-gfm"),
     getAbsolutePath("storybook-dark-mode"),
   ],
 

@@ -3179,7 +3179,7 @@ class FilesStore {
 
     if (this.selection.length === 1) {
       return getIcon(
-        24,
+        32,
         this.selection[0].fileExst,
         this.selection[0].providerKey,
       );
@@ -3250,10 +3250,9 @@ class FilesStore {
 
     if (items.length && items[0].id === -1) return; //TODO: if change media collection from state remove this;
 
-    const iconSize = this.viewAs === "table" ? 24 : 32;
     const icon = extension
-      ? getFileIcon(`.${extension}`, iconSize)
-      : getFolderIcon(null, iconSize);
+      ? getFileIcon(`.${extension}`, 32)
+      : getFolderIcon(32);
 
     items.unshift({
       id: -1,
@@ -3405,8 +3404,6 @@ class FilesStore {
       const contextOptions = this.getFilesContextOptions(item);
       const isThirdPartyFolder = providerKey && id === rootFolderId;
 
-      const iconSize = this.viewAs === "table" ? 24 : 32;
-
       let isFolder = false;
       this.folders.map((x) => {
         if (x.id === item.id && x.parentId === item.parentId) isFolder = true;
@@ -3439,7 +3436,7 @@ class FilesStore {
         isRoom && logo?.medium
           ? logo?.medium
           : getIcon(
-              iconSize,
+              32,
               fileExst,
               providerKey,
               contentLength,
@@ -3450,7 +3447,7 @@ class FilesStore {
 
       const defaultRoomIcon = isRoom
         ? getIcon(
-            iconSize,
+            32,
             fileExst,
             providerKey,
             contentLength,
@@ -4063,7 +4060,13 @@ class FilesStore {
     return folderInfo;
   };
 
-  openDocEditor = (id, preview = false, shareKey = null, editForm = false) => {
+  openDocEditor = (
+    id,
+    preview = false,
+    shareKey = null,
+    editForm = false,
+    fillForm = false,
+  ) => {
     const { openOnNewPage } = this.filesSettingsStore;
 
     const share = shareKey ? shareKey : this.publicRoomStore.publicRoomKey;
@@ -4074,6 +4077,7 @@ class FilesStore {
     if (share) searchParams.append("share", share);
     if (preview) searchParams.append("action", "view");
     if (editForm) searchParams.append("action", "edit");
+    if (fillForm) searchParams.append("action", "fill");
 
     const url = combineUrl(
       window.ClientConfig?.proxy?.url,

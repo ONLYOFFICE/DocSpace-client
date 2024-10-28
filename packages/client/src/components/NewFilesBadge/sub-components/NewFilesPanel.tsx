@@ -130,6 +130,7 @@ export const NewFilesPanelComponent = ({
         setIsLoading(false);
       } catch (e) {
         requestRunning.current = false;
+        onClose();
         setIsLoading(false);
         toastr.error(e as string);
       }

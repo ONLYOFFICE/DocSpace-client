@@ -24,13 +24,14 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React from "react";
+import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { ReactSVG } from "react-svg";
 
 import Planet12ReactSvgUrl from "PUBLIC_DIR/images/icons/12/planet.react.svg?url";
 import LifetimeRoomIconUrl from "PUBLIC_DIR/images/lifetime-room.react.svg?url";
 
+import { SettingsContext } from "../../../selectors/Files/contexts/Settings";
 import { getUserTypeTranslation } from "../../../utils/common";
 import { Avatar, AvatarRole, AvatarSize } from "../../avatar";
 import { Text } from "../../text";
@@ -81,6 +82,8 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
   }: Data = data;
   const { t } = useTranslation(["Common"]);
 
+  const { displayFileExtension } = useContext(SettingsContext);
+
   const isLoaded = isItemLoaded(index);
 
   const renderItem = () => {
@@ -119,6 +122,7 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
       lifetimeTooltip,
       cover,
       userType,
+      fileExst: ext,
     } = item;
 
     if (isInputItem) {
@@ -256,6 +260,9 @@ const Item = React.memo(({ index, style, data }: ItemProps) => {
               dir="auto"
             >
               {label}
+              {displayFileExtension && ext && (
+                <span className="item-file-exst">{ext}</span>
+              )}
             </Text>
 
             {lifetimeTooltip && (

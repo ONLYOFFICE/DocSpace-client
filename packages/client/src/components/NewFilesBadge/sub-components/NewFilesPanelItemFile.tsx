@@ -25,6 +25,9 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { inject, observer } from "mobx-react";
+import config from "PACKAGE_FILE";
+import { combineUrl } from "@docspace/shared/utils/combineUrl";
+import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
 import { RoomIcon } from "@docspace/shared/components/room-icon";
 import { Text } from "@docspace/shared/components/text";
@@ -58,6 +61,23 @@ const NewFilesPanelItemFileComponent = ({
   };
 
   const onClick = async () => {
+    const isMedia =
+      item.viewAccessibility.ImageView || item.viewAccessibility.MediaView;
+
+    if (isMedia) {
+      return window.open(
+        combineUrl(
+          window.ClientConfig?.proxy?.url,
+          config.homepage,
+          MEDIA_VIEW_URL,
+          item.id,
+        ),
+      );
+    }
+
+    if (!item.viewAccessibility.WebView) {
+      return window.open(item.viewUrl, "_self");
+    }
     openDocEditor!(item.id);
 
     await markAsRead!([], [item.id]);

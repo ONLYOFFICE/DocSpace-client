@@ -32,8 +32,7 @@
     "lint:fix": "yarn workspaces foreach -vptiR --from '{@docspace/login,@docspace/doceditor}' run lint:fix",
     "test:build": "yarn workspace @docspace/login test:build",
     "test:e2e:docker:build": "yarn workspace @docspace/login test:e2e:docker:build",
-    "test:e2e:docker:local": "yarn workspace @docspace/login test:e2e:docker:local",
-    "test:e2e:docker:git": "yarn workspace @docspace/login test:e2e:docker:git",
+    "test:e2e:docker:start": "yarn workspace @docspace/login test:e2e:docker:start",
     "test:e2e:docker:clear": "yarn workspace @docspace/login test:e2e:docker:clear"
   },
   "old-scripts": {

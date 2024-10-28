@@ -9,14 +9,12 @@ services:
         BRANCH_NAME: ${BRANCH_NAME:-develop}
     ports:
       - "5111:5111"
-    # command: "npx playwright test"
     volumes:
       - ../../playwright-report/login:/app/playwright-report/login
 
   # running tests from a local folder login/__tests__
   tests-local:
     image: tests
-    command: "npx playwright test"
     ports:
       - "5111:5111"
     volumes:

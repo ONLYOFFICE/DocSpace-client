@@ -351,6 +351,7 @@ const SetRoomParams = ({
       }
       color={cover ? cover.color : selection?.logo?.color}
       size={isMobile() && !horizontalOrientation ? "96px" : "64px"}
+      radius={isMobile() && !horizontalOrientation ? "18px" : "12px"}
       withEditing={true}
       model={isEditRoomModel}
       onChangeFile={onChangeFile}
@@ -363,6 +364,7 @@ const SetRoomParams = ({
         cover && cover.cover ? false : !previewIcon || avatarEditorDialogVisible
       }
       size={isMobile() && !horizontalOrientation ? "96px" : "64px"}
+      radius={isMobile() && !horizontalOrientation ? "18px" : "12px"}
       imgClassName={"react-svg-icon"}
       model={model}
       className="room-params-icon"

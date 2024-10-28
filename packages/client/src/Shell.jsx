@@ -458,16 +458,19 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     pagesWithoutNavMenu ||
     location.pathname === "/access-restricted";
 
+  const isMobileOnly = currentDeviceType === DeviceType.mobile;
+
   return (
     <Layout>
       {toast}
-      <ReactSmartBanner t={t} ready={ready} />
+      {isMobileOnly && <ReactSmartBanner t={t} ready={ready} />}
       {withoutNavMenu ? <></> : <NavMenu />}
       <IndicatorLoader />
       <ScrollToTop />
       <DialogsWrapper t={t} />
 
       <Main isDesktop={isDesktop}>
+        {!isMobileOnly && <ReactSmartBanner t={t} ready={ready} />}
         {barTypeInFrame !== "none" && <MainBar />}
         <div className="main-container">
           <Outlet />

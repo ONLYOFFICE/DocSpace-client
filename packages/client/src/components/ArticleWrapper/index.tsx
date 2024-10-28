@@ -40,7 +40,6 @@ export default inject<TStore>(
     uploadDataStore,
     profileActionsStore,
     userStore,
-    bannerStore,
     currentTariffStatusStore,
     currentQuotaStore,
     settingsStore,
@@ -54,8 +53,6 @@ export default inject<TStore>(
     const { getActions, onProfileClick, isShowLiveChat } = profileActionsStore;
 
     const { withSendAgain, user } = userStore;
-
-    const { isBannerVisible } = bannerStore;
 
     const { primaryProgressDataStore, secondaryProgressDataStore } =
       uploadDataStore;
@@ -138,8 +135,6 @@ export default inject<TStore>(
       setArticleOpen,
       withSendAgain,
       mainBarVisible,
-      isBannerVisible,
-
       isLiveChatAvailable,
       isShowLiveChat,
 

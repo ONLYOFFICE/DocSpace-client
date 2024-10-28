@@ -26,12 +26,14 @@
 
 export const showPreviewThreshold = 720;
 
-export const dataDimensions = [
+export const dimensionsModel = [
   { key: "percent", label: "%", default: true },
   { key: "pixel", label: "px" },
 ];
 
-export const defaultWidthDimension = dataDimensions[0];
-export const defaultHeightDimension = dataDimensions[0];
-export const defaultWidth = "100";
-export const defaultHeight = "100";
+export const defaultSize = {
+  width: "100",
+  height: "100",
+};
+
+export const defaultDimension = dimensionsModel[0];

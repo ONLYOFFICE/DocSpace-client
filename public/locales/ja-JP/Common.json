@@ -320,7 +320,6 @@
   "Owner": "所有者",
   "PageOfTotalPage": "{{page}}の{{totalPage}}",
   "Paid": "有料",
-  "PaidUsersExceedsLimit": "管理者/パワーユーザーの数が制限を超えています：{{count}} / {{limit}}。",
   "Password": "パスワード",
   "PasswordLimitDigits": "桁",
   "PasswordLimitMessage": "パスワードには、以下が含まれていなければなりません。",

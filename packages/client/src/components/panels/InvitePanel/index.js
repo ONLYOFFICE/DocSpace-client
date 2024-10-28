@@ -74,8 +74,6 @@ const InvitePanel = ({
   getUsersList,
   filter,
   isRoomAdmin,
-  maxCountManagersByQuota,
-  invitePaidUsersCount,
   setIsNewUserByCurrentUser,
   setInvitePaidUsersCount,
   isOwner,
@@ -597,7 +595,6 @@ export default inject(
       setInviteItems,
       setInvitePanelOptions,
       setInviteLanguage,
-      invitePaidUsersCount,
       setIsNewUserByCurrentUser,
       setInvitePaidUsersCount,
       isPaidUserAccess,
@@ -608,7 +605,7 @@ export default inject(
 
     const { isRoomAdmin } = authStore;
 
-    const { maxCountManagersByQuota, isUserTariffLimit } = currentQuotaStore;
+    const { isUserTariffLimit } = currentQuotaStore;
 
     const { isOwner, isAdmin } = userStore.user;
 
@@ -631,8 +628,7 @@ export default inject(
       getUsersList,
       filter,
       isRoomAdmin,
-      maxCountManagersByQuota,
-      invitePaidUsersCount,
+
       setIsNewUserByCurrentUser,
       setInvitePaidUsersCount,
       isOwner,

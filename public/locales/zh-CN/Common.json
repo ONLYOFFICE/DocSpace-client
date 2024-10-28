@@ -320,7 +320,6 @@
   "Owner": "所有者",
   "PageOfTotalPage": "{{page}}/{{totalPage}}",
   "Paid": "付费",
-  "PaidUsersExceedsLimit": "管理员/高级用户的数量超出限制：{{count}} / {{limit}}。",
   "Password": "密码",
   "PasswordLimitDigits": "数字",
   "PasswordLimitMessage": "密码必须包含",

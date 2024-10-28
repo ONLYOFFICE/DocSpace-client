@@ -317,7 +317,6 @@
   "Owner": "Vlasnik",
   "PageOfTotalPage": "{{page}} od {{totalPage}}",
   "Paid": "Plaćeno",
-  "PaidUsersExceedsLimit": "Broj admina/naprednih korisnika prelazi limit: {{count}} / {{limit}}.",
   "Password": "Lozinka",
   "PasswordLimitDigits": "cifre",
   "PasswordLimitMessage": "Lozinka mora da sadrži",

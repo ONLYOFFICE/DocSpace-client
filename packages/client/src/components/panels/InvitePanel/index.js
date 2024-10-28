@@ -265,7 +265,7 @@ const InvitePanel = ({
     });
   };
 
-  const getError = () => {
+  const getError = (error) => {
     const paymentLink = (
       <Trans
         t={t}
@@ -286,17 +286,13 @@ const InvitePanel = ({
 
     return (
       <>
-        <Text as="span">
-          {t("Common:PaidUsersExceedsLimit", {
-            count: maxCountManagersByQuota + invitePaidUsersCount,
-            limit: maxCountManagersByQuota,
-          })}
-        </Text>
+        {error}
         &nbsp;
         {!isRoomAdmin && paymentLink}
       </>
     );
   };
+
   const onClickSend = async (e) => {
     const invitations = inviteItems.map((item) => {
       let newItem = {};
@@ -348,7 +344,7 @@ const InvitePanel = ({
       let error = err;
 
       if (err?.response?.status === 402) {
-        error = getError();
+        error = getError(err?.response?.data?.error?.message);
       }
 
       toastr.error(error);

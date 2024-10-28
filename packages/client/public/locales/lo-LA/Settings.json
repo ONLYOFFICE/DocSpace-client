@@ -118,7 +118,6 @@
   "ErrorMessageBruteForceProtection": "ອາກິວເມັນທີ່ລະບຸນັ້ນຢູ່ນອກຂອບເຂດຂອງຄ່າທີ່ຖືກຕ້ອງ.",
   "ErrorsWereFound": "ພົບ {{errors}} ຂໍ້ຜິດພາດ",
   "ForcePathStyle": "ບັງຄັບ ເສັ້ນທາງ ແບບ",
-  "GroupsDescription": "ຜູ້​ໃຊ້​ທີ່​ທ່ານ​ເລືອກ​ໃນ​ຂັ້ນ​ຕອນ​ກ່ອນ​ຫນ້າ​ນີ້​ຈະ​ຖືກ​ນໍາ​ເຂົ້າ​ໄປ​ໃນ​ກຸ່ມ​ທີ່​ສ້າງ​ຕັ້ງ​ຂຶ້ນ​ໃນ {{serviceName}}. ກຸ່ມຈະປາກົດຢູ່ໃນພາກສ່ວນບັນຊີ.",
   "HexCode": "ລະຫັດ Hex",
   "Import": "ນໍາເຂົ້າ",
   "ImportCompleteDescriptionGoogle": "ການນຳເຂົ້າຂໍ້ມູນຈາກ Google Workspace ໄປຫາ {{organizationName}} {{productName}} ແມ່ນສຳເລັດແລ້ວ!",

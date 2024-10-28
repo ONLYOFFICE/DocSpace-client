@@ -125,7 +125,7 @@
   "ErrorsWereFound": "{{errors}} errors were found",
   "ForcePathStyle": "Force Path Style",
   "GoogleDriveFiles": "Google Drive's Files",
-  "GroupsDescription": "Users which you selected in the previous step will be imported into groups created in {{serviceName}}. Groups will appear in the Accounts section.",
+  "GroupsDescription": "Users which you selected in the previous step will be imported into groups created in {{serviceName}}. Groups will appear in the {{contactsName}} section.",
   "HexCode": "Hex code",
   "Import": "Import",
   "ImportCompleteDescriptionGoogle": "Data import from Google Workspace to {{organizationName}} {{productName}} is complete!",

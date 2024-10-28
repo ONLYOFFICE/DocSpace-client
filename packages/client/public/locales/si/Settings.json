@@ -113,7 +113,6 @@
   "ErrorMessageBruteForceProtection": "නිරූපිත විස්තාරය වලංගු අගයන් පරාසයෙන් පිටත වේ.",
   "ErrorsWereFound": "දෝෂ {{errors}} ක් හමු විය",
   "ForcePathStyle": "පථයේ රටාව බලාත්මක කරන්න",
-  "GroupsDescription": "ඔබ කලින් පියවරේ දී තෝරාගත් පරිශ්‍රීලකයින් {{serviceName}} තුළ සාදන ලද සමූහ වලට ආයාත කරනු ලැබේ. ගිණුම් කොටසේ සමූහ දිස්වනු ඇත.",
   "HexCode": "Hex කේතය",
   "Import": "ආයාත කරන්න",
   "ImportedUsers": "පරිශ්‍රීලකයින් {{selectedUsers}}/{{importedUsers}} ක්  සාර්ථකව ආයාත කෙරිණි.",

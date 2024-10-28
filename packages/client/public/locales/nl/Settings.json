@@ -122,7 +122,7 @@
   "ErrorOccuredDownloadLog": "Er zijn fouten opgetreden tijdens het importeren van gegevens. Download het logbestand om dit te controleren.",
   "ErrorsWereFound": "{{errors}} fouten gevonden",
   "ForcePathStyle": "Forceer Path Style",
-  "GroupsDescription": "Gebruikers die u in de vorige stap hebt geselecteerd, worden geïmporteerd in groepen die zijn aangemaakt in {{serviceName}}. Groepen verschijnen in het gedeelte Accounts.",
+  "GroupsDescription": "Gebruikers die u in de vorige stap hebt geselecteerd, worden geïmporteerd in groepen die zijn aangemaakt in {{serviceName}}. Groepen verschijnen in het gedeelte {{contactsName}}.",
   "HexCode": "Hexcode",
   "Import": "Import",
   "ImportCompleteDescriptionGoogle": "Het importeren van gegevens van Google Workspace naar {{organizationName}} {{productName}} is voltooid!",

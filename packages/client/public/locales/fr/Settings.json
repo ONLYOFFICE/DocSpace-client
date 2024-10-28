@@ -122,7 +122,7 @@
   "ErrorOccuredDownloadLog": "Les erreurs se sont produites lors de l’importation des données. Téléchargez le journal pour les vérifier.",
   "ErrorsWereFound": "{{errors}} erreurs ont été détectées",
   "ForcePathStyle": "Force le style de chemin",
-  "GroupsDescription": "Les utilisateurs que vous avez sélectionnés à l'étape précédente seront importés vers les groupes qu'on a créé dans {{serviceName}}. Groupes apparaîtront dans la section Comptes.",
+  "GroupsDescription": "Les utilisateurs que vous avez sélectionnés à l'étape précédente seront importés vers les groupes qu'on a créé dans {{serviceName}}. Groupes apparaîtront dans la section {{contactsName}}.",
   "HexCode": "Code hexadécimal ",
   "Import": "Importer",
   "ImportCompleteDescriptionGoogle": "Importation des données de Google Workspace vers {{organizationName}} {{productName}} est terminée !",

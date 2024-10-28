@@ -66,8 +66,8 @@
   "LdapUserDNTooltip": "Eklemek istediğiniz kullanıcıları içeren dizinin ayırt edici adını girin.",
   "LdapUserFilter": "Kullanıcı Filtresi",
   "LdapUserFilterTooltip": "İçe aktarılması gereken kullanıcıları seçmek için arama LDAP filtresini kullanın.",
-  "LdapUserQuotaTooltip": "Kullanıcı için bir depolama kotası ayarlamak için, LDAP dizinine bir özellik ekleyin (örneğin, UsersQuotaLimit) ve bu özellik için bir tamsayı değeri girin. Kota değerini bayt cinsinden gösterecektir. Burada sadece özellik adını belirtin. Bu özellik yalnızca ilk kurulum sırasında uygulanacaktır, daha sonra Hesaplar bölümünde manuel olarak değiştirilebilir.",
+  "LdapUserQuotaTooltip": "Kullanıcı için bir depolama kotası ayarlamak için, LDAP dizinine bir özellik ekleyin (örneğin, UsersQuotaLimit) ve bu özellik için bir tamsayı değeri girin. Kota değerini bayt cinsinden gösterecektir. Burada sadece özellik adını belirtin. Bu özellik yalnızca ilk kurulum sırasında uygulanacaktır, daha sonra {{contactsName}} bölümünde manuel olarak değiştirilebilir.",
   "LdapUsersType": "Kullanıcı tipi",
-  "LdapUsersTypeInfo": "Kullanıcılar yalnızca yöneticiler tarafından davet edildikleri odalara erişebilir ve kendi odalarını, klasörlerini veya dosyalarını oluşturamazlar. Daha fazla izin sağlamak için aşağıdan başka bir tür seçin. Aksi halde, türü Hesaplar bölümünden manuel olarak değiştirebilirsiniz.",
+  "LdapUsersTypeInfo": "Kullanıcılar yalnızca yöneticiler tarafından davet edildikleri odalara erişebilir ve kendi odalarını, klasörlerini veya dosyalarını oluşturamazlar. Daha fazla izin sağlamak için aşağıdan başka bir tür seçin. Aksi halde, türü {{contactsName}} bölümünden manuel olarak değiştirebilirsiniz.",
   "LdapUserTypeTooltip": "Tüm kullanıcılar {{productName}} içerisine seçilen türle eklenecektir."
 }

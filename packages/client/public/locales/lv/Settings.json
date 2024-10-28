@@ -122,7 +122,7 @@
   "ErrorOccuredDownloadLog": "Datu importēšanas laikā radās kļūdas. Lejupielādējiet žurnālu, lai tos pārbaudītu.",
   "ErrorsWereFound": "tika atrasta (-s){{errors}} kļūda (-s)",
   "ForcePathStyle": "Uzspiest ceļa stilu",
-  "GroupsDescription": "Lietotāji, kurus atlasījāt iepriekšējā darbībā, tiks importēti grupās, kas izveidotas {{serviceName}}. Grupas tiks parādītas sadaļā Konti.",
+  "GroupsDescription": "Lietotāji, kurus atlasījāt iepriekšējā darbībā, tiks importēti grupās, kas izveidotas {{serviceName}}. Grupas tiks parādītas sadaļā {{contactsName}}.",
   "HexCode": "Heksadecimālais kods",
   "Import": "Importēt",
   "ImportCompleteDescriptionGoogle": "Datu importēšana no Google Workspace uz {{organizationName}} {{productName}} ir pabeigta!",

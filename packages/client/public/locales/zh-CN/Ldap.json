@@ -69,8 +69,6 @@
   "LdapUserDNTooltip": "输入包含要添加的用户的目录的专有名称。",
   "LdapUserFilter": "用户过滤器",
   "LdapUserFilterTooltip": "使用搜索 LDAP 过滤器选择必须导入的用户。",
-  "LdapUserQuotaTooltip": "要为用户设置存储配额，请在 LDAP 目录中添加一个属性（例如，UsersQuotaLimit），并为该属性输入一个整数值。它将以字节为单位显示配额值。只需在这里设置属性名称。仅在第一次设置时，此属性会被应用，之后可以在“帐户”板块手动更改。",
   "LdapUsersType": "用户类型",
-  "LdapUsersTypeInfo": "用户只能访问管理员邀请他们加入的房间，不能创建自己的房间、文件夹或文件。选择下面的其他类型以提供更多权限。否则，您可以在“帐户”部分手动更改类型。",
   "LdapUserTypeTooltip": "所有用户都将使用所选类型添加到{{productName}}。"
 }

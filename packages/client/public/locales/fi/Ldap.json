@@ -66,8 +66,8 @@
   "LdapUserDNTooltip": "Syötä hakemistoon erottuvat nimi, joka sisältää käyttäjät, jotka haluat lisätä.",
   "LdapUserFilter": "Käyttäjäsuodatin",
   "LdapUserFilterTooltip": "Käytä haussa LDAP-suodatinta valitaksesi käyttäjät, jotka tuodaan.",
-  "LdapUserQuotaTooltip": "Asettaaksesi käyttäjälle muistikiintiön, lisää attribuutti LDAP-hakemistossa (esimerkiksi, KäyttäjienKiintiöraja) ja syötä kokonaislukuarvo tälle attribuutille. Se näyttää kiintiöarvon bitteinä. Määrittele tähän vain attribuutin nimi. Tämä attribuutti annetaan vain ensimmäisten asetusten aikana ja voidaan muuttaa myöhemmin manuaalisesti Tilit-osiossa.",
+  "LdapUserQuotaTooltip": "Asettaaksesi käyttäjälle muistikiintiön, lisää attribuutti LDAP-hakemistossa (esimerkiksi, KäyttäjienKiintiöraja) ja syötä kokonaislukuarvo tälle attribuutille. Se näyttää kiintiöarvon bitteinä. Määrittele tähän vain attribuutin nimi. Tämä attribuutti annetaan vain ensimmäisten asetusten aikana ja voidaan muuttaa myöhemmin manuaalisesti {{contactsName}}-osiossa.",
   "LdapUsersType": "Käyttäjät-tyyppi",
-  "LdapUsersTypeInfo": "Käyttäjillä on pääsy huoneisiin vain, jos pääkäyttäjät ovat kutsuneet heidät, ja he eivät voi luoda omia huoneita, kansioita tai tiedostoja. Valitse alta toinen tyyppi antaaksesi enemmän oikeuksia. Muutoin, voit muuttaa tyyppiä manuaalisesti Tilit-osiossa.",
+  "LdapUsersTypeInfo": "Käyttäjillä on pääsy huoneisiin vain, jos pääkäyttäjät ovat kutsuneet heidät, ja he eivät voi luoda omia huoneita, kansioita tai tiedostoja. Valitse alta toinen tyyppi antaaksesi enemmän oikeuksia. Muutoin, voit muuttaa tyyppiä manuaalisesti {{contactsName}}-osiossa.",
   "LdapUserTypeTooltip": "Kaikki käyttäjät lisätään {{productName}}:iin valitun tyypin mukaisesti."
 }

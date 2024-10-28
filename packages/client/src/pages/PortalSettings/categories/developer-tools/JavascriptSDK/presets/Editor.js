@@ -193,6 +193,39 @@ const Editor = (props) => {
               defaultFrameId={config.frameId}
               setConfig={setConfig}
             />
+
+            {/* <InterfaceElements>
+            <Label className="label">{t("InterfaceElements")}</Label>
+            <Checkbox
+              className="checkbox"
+              label={t("RightPanelCollapsed")}
+              onChange={() => {}}
+              isChecked
+            />
+            <Checkbox
+              className="checkbox"
+              label={t("TabPlugins")}
+              onChange={() => {}}
+              isChecked
+            />
+            <RowContainer>
+              <Checkbox label={t("Chat")} onChange={() => {}} isChecked />
+              <Text color="gray">({t("InLeftPanel")})</Text>
+            </RowContainer>
+            <RowContainer>
+              <Checkbox label={t("FeedbackAndSupport")} onChange={() => {}} isChecked />
+              <Text color="gray">({t("InLeftPanel")})</Text>
+            </RowContainer>
+          </InterfaceElements>
+          <CategorySubHeader>{t("AddWatermarks")}</CategorySubHeader>
+          <ControlsGroup>
+            <LabelGroup>
+              <Label className="label" text={t("SelectImage")} />
+            </LabelGroup>
+            <FilesSelectorInputWrapper>
+              <FilesSelectorInput onSelectFolder={() = {}} isSelect />
+            </FilesSelectorInputWrapper>
+          </ControlsGroup> */}
           </ControlsSection>
 
           <Integration

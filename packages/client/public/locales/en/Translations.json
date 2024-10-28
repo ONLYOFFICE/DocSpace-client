@@ -36,7 +36,7 @@
   "RoleFormFillerFormRoomDescription": "Form fillers can fill out forms and view only their completed/started forms within the Complete and In Process folders.",
   "RoleNewUserDescription": "Users can create and edit files in the room, but can't create rooms, manage users, or access settings.",
   "RolePortalAdminDescription": "{{productName}} admins can access {{productName}} settings, manage and archive rooms, invite new users and assign roles below their level. All admins have access to the Documents section.",
-  "RolePowerUserFormRoomDescription": "Power users can upload forms to the room and have full access to the Complete and In Process folders.",
+  "RolePowerUserFormRoomDescription": "Users can upload forms to the room and have full access to the Complete and In Process folders.",
   "RoleReviewer": "Reviewer",
   "RoleReviewerDescription": "Operations with existing files: viewing, reviewing, commenting.",
   "RoleRoomAdminDescription": "Room admins can create and manage the assigned rooms, invite new users, and assign roles of room admin and lower. All admins have access to the Documents section.",

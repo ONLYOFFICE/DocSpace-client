@@ -326,7 +326,7 @@
   "PasswordRequired": "Απαιτείται κωδικός πρόσβασης",
   "PaymentsTitle": "Πληρωμές",
   "People": "Άτομα",
-  "PerUserMonth": "<1>{{currencySymbol}}</1><1>{{price}}</1> ανά διαχειριστή/χρήστη ισχύος/μήνα",
+  "PerUserMonth": "<1>{{currencySymbol}}</1><1>{{price}}</1> ανά διαχειριστή/μήνα",
   "Petabyte": "PB",
   "Phone": "Τηλέφωνο",
   "Plugins": "Πρόσθετα",

@@ -329,7 +329,7 @@
   "PasswordRequired": "パスワードが必要",
   "PaymentsTitle": "お支払い",
   "People": "方々",
-  "PerUserMonth": "<1>{{currencySymbol}}</1><1>{{price}}</1> 管理者 / パワーユザーあたり / 月額",
+  "PerUserMonth": "<1>{{currencySymbol}}</1><1>{{price}}</1> 管理者 / 月額",
   "Petabyte": "PB",
   "Phone": "電話",
   "Plugins": "プラグイン",

@@ -326,7 +326,7 @@
   "PasswordRequired": "Vyžadováno heslo",
   "PaymentsTitle": "Platby",
   "People": "Lidé",
-  "PerUserMonth": "<1>{{currencySymbol}}</1><1>{{price}}</1> za administrátora/pověřeného uživatele/měsíc",
+  "PerUserMonth": "<1>{{currencySymbol}}</1><1>{{price}}</1> za administrátora/měsíc",
   "Petabyte": "PB",
   "Phone": "Telefon",
   "Plugins": "Zásuvné moduly",

@@ -39,7 +39,6 @@ module.exports = {
         },
       },
     },
-    // getAbsolutePath("@storybook/addon-mdx-gfm"),
     getAbsolutePath("storybook-dark-mode"),
   ],
 

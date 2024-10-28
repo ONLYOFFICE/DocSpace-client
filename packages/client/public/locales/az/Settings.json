@@ -122,7 +122,7 @@
   "ErrorOccuredDownloadLog": "Məlumatı idxal edərkən xətalar baş verdi. Onları yoxlamaq üçün jurnalı endirin.",
   "ErrorsWereFound": "{{errors}} xətalar tapıldı",
   "ForcePathStyle": "Məcburi Keçid Üslubu",
-  "GroupsDescription": "Əvvəlki addımda seçdiyiniz istifadəçilər {{serviceName}} daxilində yaradılmış qruplara köçürüləcək. Qruplar Hesablar bölməsində görünəcək.",
+  "GroupsDescription": "Əvvəlki addımda seçdiyiniz istifadəçilər {{serviceName}} daxilində yaradılmış qruplara köçürüləcək. Qruplar {{contactsName}} bölməsində görünəcək.",
   "HexCode": "Hex kodu",
   "Import": "İdxal edin",
   "ImportCompleteDescriptionGoogle": "Google Workspace-dən {{organizationName}} {{productName}}-ə məlumat idxalı tamamlandı!",

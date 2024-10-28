@@ -122,7 +122,6 @@
   "ErrorOccuredDownloadLog": "데이터를 가져오기하는 동안 오류가 발생했습니다. 로그를 다운로드하여 확인하세요.",
   "ErrorsWereFound": "{{errors}}개의 오류가 발견되었습니다",
   "ForcePathStyle": "경로 스타일 강제",
-  "GroupsDescription": "이전 단계에서 선택한 사용자가 {{serviceName}}에서 생성된 그룹으로 가져오기됩니다. 그룹은 계정 섹션에 표시됩니다.",
   "HexCode": "헥스 코드",
   "Import": "가져오기",
   "ImportCompleteDescriptionGoogle": "Google Workspace에서 {{organizationName}} {{productName}}로 데이터 가져오기가 완료되었습니다!",

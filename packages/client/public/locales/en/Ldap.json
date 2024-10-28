@@ -69,8 +69,8 @@
   "LdapUserDNTooltip": "Enter the distinguished name to the directory containing users you want to add.",
   "LdapUserFilter": "User Filter",
   "LdapUserFilterTooltip": "Use the search LDAP filter to select the users who must be imported.",
-  "LdapUserQuotaTooltip": "To set a storage quota for user, add an attribute in the LDAP directory (for example, UsersQuotaLimit) and enter an integer value for this attribute. It will display the quota value in bytes. Here, specify the attribute name only. This attribute will be applied only during the first setup and can be later changed manually in the Accounts section.",
+  "LdapUserQuotaTooltip": "To set a storage quota for user, add an attribute in the LDAP directory (for example, UsersQuotaLimit) and enter an integer value for this attribute. It will display the quota value in bytes. Here, specify the attribute name only. This attribute will be applied only during the first setup and can be later changed manually in the {{contactsName}} section.",
   "LdapUsersType": "Users type",
-  "LdapUsersTypeInfo": "Users can only access the rooms they are invited to by admins, and can't create own rooms, folders or files. Select another type below to provide more permissions. Otherwise, you can change the type manually in the Accounts section.",
+  "LdapUsersTypeInfo": "Users can only access the rooms they are invited to by admins, and can't create own rooms, folders or files. Select another type below to provide more permissions. Otherwise, you can change the type manually in the {{contactsName}} section.",
   "LdapUserTypeTooltip": "All users will be added to {{productName}} with the selected type."
 }

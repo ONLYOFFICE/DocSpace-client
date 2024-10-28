@@ -122,7 +122,7 @@
   "ErrorOccuredDownloadLog": "Si sono verificati errori durante l'importazione dei dati. Scarica il registro per controllarli.",
   "ErrorsWereFound": "Sono stati rilevati {{errors}} errori",
   "ForcePathStyle": "Forza percorso stile",
-  "GroupsDescription": "Gli utenti selezionati nel passaggio precedente verranno importati nei gruppi creati in {{serviceName}}. I gruppi verranno visualizzati nella sezione Account.",
+  "GroupsDescription": "Gli utenti selezionati nel passaggio precedente verranno importati nei gruppi creati in {{serviceName}}. I gruppi verranno visualizzati nella sezione {{contactsName}}.",
   "HexCode": "Codice esadecimale",
   "Import": "Importa",
   "ImportCompleteDescriptionGoogle": "L'importazione dei dati da Google Workspace a {{organizationName}} {{productName}} è completata!",

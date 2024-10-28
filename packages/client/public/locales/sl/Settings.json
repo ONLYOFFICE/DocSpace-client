@@ -122,7 +122,7 @@
   "ErrorOccuredDownloadLog": "Med uvozom podatkov je prišlo do napak. Prenesite dnevnik, da jih preverite.",
   "ErrorsWereFound": "Najdenih je bilo {{errors}} napak",
   "ForcePathStyle": "Stil vsiljene poti",
-  "GroupsDescription": "Uporabniki, ki ste jih izbrali v prejšnjem koraku, bodo uvoženi v skupine, ustvarjene v {{serviceName}}. Skupine bodo prikazane v razdelku Računi.",
+  "GroupsDescription": "Uporabniki, ki ste jih izbrali v prejšnjem koraku, bodo uvoženi v skupine, ustvarjene v {{serviceName}}. Skupine bodo prikazane v razdelku {{contactsName}}.",
   "HexCode": "Hex koda",
   "Import": "Uvoz",
   "ImportCompleteDescriptionGoogle": "Uvoz podatkov iz Google Workspace v {{organizationName}} {{productName}} je končan!",

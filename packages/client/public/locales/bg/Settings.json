@@ -122,7 +122,7 @@
   "ErrorOccuredDownloadLog": "Възникнаха грешки по време на импортиране на данни. Изтеглете дневника, за да ги проверите.",
   "ErrorsWereFound": "{{errors}} грешки бяха открити",
   "ForcePathStyle": "Стил на Force Path",
-  "GroupsDescription": "Потребителите, които сте избрали в предишната стъпка, ще бъдат входирани в групи, създадени в {{serviceName}}. Групите ще се появят в секцията Профили.",
+  "GroupsDescription": "Потребителите, които сте избрали в предишната стъпка, ще бъдат входирани в групи, създадени в {{serviceName}}. Групите ще се появят в секцията {{contactsName}}.",
   "HexCode": "Шестнадесетичен код",
   "Import": "Входиране",
   "ImportCompleteDescriptionGoogle": "Входирането на данни от Google Workspace към {{organizationName}} {{productName}} приключи!",

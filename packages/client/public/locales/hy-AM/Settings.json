@@ -122,7 +122,7 @@
   "ErrorOccuredDownloadLog": "Սխալներ են տեղի ունեցել տվյալների ներմուծման ժամանակ: Ներբեռնեք գրանցամատյանը՝ դրանք ստուգելու համար:",
   "ErrorsWereFound": "{{errors}} Գտնվել են սխալներ",
   "ForcePathStyle": "Պարտադրել ուղու ոճ",
-  "GroupsDescription": "Նախորդ քայլում ձեր ընտրած օգտատերերը կներմուծվեն {{serviceName}}-ում ստեղծված խմբերում: Խմբերը կհայտնվեն «Հաշիվներ» բաժնում:",
+  "GroupsDescription": "Նախորդ քայլում ձեր ընտրած օգտատերերը կներմուծվեն {{serviceName}}-ում ստեղծված խմբերում: Խմբերը կհայտնվեն «{{contactsName}}» բաժնում:",
   "HexCode": "Հեքս կոդը",
   "Import": "Ներմուծում",
   "ImportCompleteDescriptionGoogle": "Google Workspace-ից տվյալների ներմուծումը {{organizationName}} {{productName}} ավարտված է:",

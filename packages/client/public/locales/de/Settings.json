@@ -122,7 +122,7 @@
   "ErrorOccuredDownloadLog": "Beim Datenimport sind Fehler aufgetreten. Laden Sie das Protokoll herunter, um sie zu überprüfen.",
   "ErrorsWereFound": "Es wurden {{errors}} Fehler gefunden",
   "ForcePathStyle": "Erzwinge Pfad-Stil",
-  "GroupsDescription": "Benutzer, die Sie im vorherigen Schritt ausgewählt haben, werden in Gruppen importiert, die in {{serviceName}} erstellt wurden. Gruppen werden im Abschnitt „Konten“ angezeigt.",
+  "GroupsDescription": "Benutzer, die Sie im vorherigen Schritt ausgewählt haben, werden in Gruppen importiert, die in {{serviceName}} erstellt wurden. Gruppen werden im Abschnitt „{{contactsName}}“ angezeigt.",
   "HexCode": "Hex-Code",
   "Import": "Importieren",
   "ImportCompleteDescriptionGoogle": "Der Datenimport von Google Workspace nach {{organizationName}} {{productName}} ist abgeschlossen!",

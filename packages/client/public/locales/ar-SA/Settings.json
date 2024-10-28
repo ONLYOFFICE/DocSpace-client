@@ -122,7 +122,6 @@
   "ErrorOccuredDownloadLog": "حدثت أخطاء أثناء استيراد البيانات. قم بتنزيل السجل للتحقق منها.",
   "ErrorsWereFound": "تم العثور على أخطاء {{errors}}",
   "ForcePathStyle": "فرض نمط المسار",
-  "GroupsDescription": "سيتم استيراد المستخدمين الذين حددتهم في الخطوة السابقة إلى مجموعات تم إنشاؤها في {{serviceName}}. ستظهر المجموعات في قسم الحسابات.",
   "HexCode": "رمز سداسي عشري",
   "Import": "استيراد",
   "ImportCompleteDescriptionGoogle": "اكتمل استيراد البيانات من مساحة عمل Google إلى {{organizationName}} {{productName}}!",

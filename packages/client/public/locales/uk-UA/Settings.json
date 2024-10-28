@@ -122,7 +122,7 @@
   "ErrorOccuredDownloadLog": "Під час імпорту даних виникли помилки. Завантажте журнал, щоб їх подивитися.",
   "ErrorsWereFound": "Було знайдено помилок: {{errors}}",
   "ForcePathStyle": "Примусово використати стиль шляху",
-  "GroupsDescription": "Користувачів, яких ви вибрали на попередньому кроці, буде імпортовано до груп, створених у {{serviceName}}. Групи з’являться в розділі «Облікові записи».",
+  "GroupsDescription": "Користувачів, яких ви вибрали на попередньому кроці, буде імпортовано до груп, створених у {{serviceName}}. Групи з’являться в розділі «{{contactsName}}».",
   "HexCode": "Шістнадцятковий код",
   "Import": "Імпортувати",
   "ImportCompleteDescriptionGoogle": "Імпорт даних із Google Workspace до {{organizationName}} {{productName}} завершено!",

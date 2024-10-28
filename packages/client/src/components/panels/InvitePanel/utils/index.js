@@ -222,7 +222,6 @@ export const getAccessOptions = (
         { key: "s1", isSeparator: withSeparator },
         accesses.contentCreator,
         accesses.editor,
-        accesses.formFiller,
         accesses.reviewer,
         accesses.commentator,
         accesses.viewer,

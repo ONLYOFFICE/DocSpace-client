@@ -122,7 +122,7 @@
   "ErrorOccuredDownloadLog": "Tietojen tuonnin aikana tapahtui virheitä. Lataa loki tarkistaaksesi ne.",
   "ErrorsWereFound": "{{errors}} virhettä löytyi",
   "ForcePathStyle": "Pakota polku -tyyli",
-  "GroupsDescription": "Käyttäjät, jotka valitsit edellisessä vaiheessa tuodaan huoneisiin,  jotka on luotu {{serviceName}}ssa. Ryhmät ilmestyvät Tilit-osioon.",
+  "GroupsDescription": "Käyttäjät, jotka valitsit edellisessä vaiheessa tuodaan huoneisiin,  jotka on luotu {{serviceName}}ssa. Ryhmät ilmestyvät {{contactsName}}-osioon.",
   "HexCode": "Hex-koodi",
   "Import": "Tuonti",
   "ImportCompleteDescriptionGoogle": "Tietojen tuonti Google Workspacesta {{organizationName}} {{productName}}:n on suoritettu!",

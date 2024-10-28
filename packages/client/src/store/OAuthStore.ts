@@ -438,7 +438,16 @@ class OAuthStore {
     this.setRevokeDeveloperTokenDialogVisible(false);
   };
 
-  onRevoke = () => {
+  onRevoke = (clientId: string) => {
+    if (this.selection.length === 1) {
+      this.setBufferSelection(this.selection[0]);
+      this.setSelection("");
+    }
+
+    if (!this.selection.length) {
+      this.setBufferSelection(clientId);
+    }
+
     this.setPreviewDialogVisible(false);
     this.setInfoDialogVisible(false);
     this.setRevokeDialogVisible(true);
@@ -567,7 +576,7 @@ class OAuthStore {
         key: "revoke",
         icon: OauthRevokeSvgUrl,
         label: t("Revoke"),
-        onClick: this.onRevoke,
+        onClick: () => this.onRevoke(clientId),
         disabled: false,
       });
 

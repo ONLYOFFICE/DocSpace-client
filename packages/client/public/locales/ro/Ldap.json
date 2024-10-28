@@ -69,8 +69,8 @@
   "LdapUserDNTooltip": "Introduceți un nume distinct în repertoarul care conține utilizatorii pe care le doriți să adăugați.",
   "LdapUserFilter": "Filtru de utilizator",
   "LdapUserFilterTooltip": "Folosiți filtru de căutare LDAP pentru a selecta utilizatorii pentru importul.",
-  "LdapUserQuotaTooltip": "Pentru stabilirea cotei de stocare pentru acest utilizator, adăugați atributul în repertoarul LDAP (de exemplu, UsersQuotaLimit) și introduceți o valoare întreagă pentru acest atribut. Cota va fi afișată în octeți. Aici, indicați numai numele atributului. Acest atribut va fi aplicat numai la prima configurare și poate fi modificat manual mai târziu în secțiunea Conturi.",
+  "LdapUserQuotaTooltip": "Pentru stabilirea cotei de stocare pentru acest utilizator, adăugați atributul în repertoarul LDAP (de exemplu, UsersQuotaLimit) și introduceți o valoare întreagă pentru acest atribut. Cota va fi afișată în octeți. Aici, indicați numai numele atributului. Acest atribut va fi aplicat numai la prima configurare și poate fi modificat manual mai târziu în secțiunea {{contactsName}}.",
   "LdapUsersType": "Tip utilizator",
-  "LdapUsersTypeInfo": "Utilizatorii pot accesa doar sălile în care sunt invitaţi de către administratori și nu pot crea săli proprii, foldere sau fișiere. Selecționați un alt tip de mai jos pentru a oferi mai multe permisiuni. De asemenea, puteți schimba tipul de utilizator manual în secțiunea Conturi.",
+  "LdapUsersTypeInfo": "Utilizatorii pot accesa doar sălile în care sunt invitaţi de către administratori și nu pot crea săli proprii, foldere sau fișiere. Selecționați un alt tip de mai jos pentru a oferi mai multe permisiuni. De asemenea, puteți schimba tipul de utilizator manual în secțiunea {{contactsName}}.",
   "LdapUserTypeTooltip": "Toți utilizatorii vor fi adăugate în {{productName}} cu tipul selectat."
 }

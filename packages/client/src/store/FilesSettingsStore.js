@@ -430,29 +430,21 @@ class FilesSettingsStore {
     return this.getIconBySize(size, "folder.svg");
   };
 
-  determineIconPath = (extension, enablePlugins, fileItemsList) => {
-    let path = `${extension.replace(/^\./, "")}.svg`;
-
-    if (enablePlugins && fileItemsList) {
-      fileItemsList.forEach(({ value }) => {
-        if (value.extension === extension && value.fileIcon) {
-          path = value.fileIcon;
-        }
-      });
-    }
-
-    return path;
-  };
-
   getIconUrl = (extension, size) => {
     const { enablePlugins } = this.settingsStore;
     const { fileItemsList } = this.pluginStore;
 
-    const path = this.determineIconPath(
-      extension,
-      enablePlugins,
-      fileItemsList,
-    );
+    let path = `${extension.replace(/^\./, "")}.svg`;
+
+    if (enablePlugins && fileItemsList) {
+      const fileItem = fileItemsList.find(
+        ({ value }) => value.extension === extension && value.fileIcon,
+      );
+      if (fileItem) {
+        return fileItem.value.fileIcon;
+      }
+    }
+
     return this.getIconBySize(size, path);
   };
 

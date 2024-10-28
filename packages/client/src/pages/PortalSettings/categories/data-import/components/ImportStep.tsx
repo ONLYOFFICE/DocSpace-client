@@ -117,7 +117,10 @@ const ImportStep = (props: ImportStepProps) => {
         isChecked={importOptions.importGroups}
         onChange={(e) => onChange(e, "importGroups")}
         sectionName={t("Common:Groups")}
-        description={t("Settings:GroupsDescription", { serviceName })}
+        description={t("Settings:GroupsDescription", {
+          serviceName,
+          contactsName: t("Common:Contacts"),
+        })}
         exportSection={{
           sectionName: t("Common:Groups"),
           workspace: serviceName,

@@ -17,15 +17,15 @@
   "RoomQuotaHeaderLimit": "Limit počtu miestností je dosiahnutý: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Limit pre úložný priestor a počet miestností bude prekročený",
   "StorageAndRoomLimitHeader": "Limit pre úložný priestor a počet miestností je dosiahnutý",
-  "StorageAndUserHeader": "Objem úložísk a maximálny počet administrátorov/pokročilých používateľov budú čoskoro prekročené.",
-  "StorageAndUserTariffLimitHeader": "Limit pre úložný priestor a počet administrátorov/oprávnených používateľov je dosiahnutý",
+  "StorageAndUserHeader": "Objem úložísk a maximálny počet administrátorov budú čoskoro prekročené.",
+  "StorageAndUserTariffLimitHeader": "Limit pre úložný priestor a počet administrátorov je dosiahnutý",
   "StorageLimitHeader": "Limit pre úložný priestor je dosiahnutý: {{currentValue}} / {{maxValue}}",
   "StorageQuotaHeader": "Veľkosť úložného priestoru bude čoskoro prekročená: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Nepotrebné súbory môžete odstrániť alebo zmeniť kvótu v <1> Nastaveniach spravovania úložísk.</1>",
-  "UserQuotaHeader": "Maximálny počet administrátorov/pokročilých používateľov bude čoskoro prekročený: {{currentValue}} / {{maxValue}}.",
-  "UserTariffAlmostReached": "Po dosiahnutí limitu budú všetci používatelia pridávaní len s povolením používateľa. Ak chcete mať možnosť pridávať ďalších administrátorov/oprávnených používateľov, obráťte sa na administrátora {{productName}}, aby vám zvýšil tarifný plán.",
-  "UserTariffAlmostReachedForAdmins": "Po dosiahnutí limitu budú všetci používatelia pridávaní len s povolením používateľa. Ak chcete mať možnosť pridávať ďalších administrátorov/oprávnených používateľov, <1>kliknite sem</1> a aktualizujte svoj tarifný plán.",
-  "UserTariffLimitHeader": "Limit počtu administrátorov/oprávnených používateľov je dosiahnutý: {{currentValue}} / {{maxValue}}",
-  "UserTariffReached": "Všetci používatelia budú pridávaní len s povolením používateľa. Ak chcete mať možnosť pridávať ďalších administrátorov/oprávnených používateľov, obráťte sa na administrátora {{productName}}, aby vám zvýšil tarifný plán.",
-  "UserTariffReachedForAdmins": "Všetci používatelia budú pridávaní len s povolením používateľa. Ak chcete mať možnosť pridávať ďalších administrátorov/oprávnených používateľov, <1>kliknite sem</1> a aktualizujte svoj tarifný plán."
+  "UserQuotaHeader": "Maximálny počet administrátorov bude čoskoro prekročený: {{currentValue}} / {{maxValue}}.",
+  "UserTariffAlmostReached": "Po dosiahnutí limitu budú všetci používatelia pridávaní len s povolením používateľa. Ak chcete mať možnosť pridávať ďalších administrátorov, obráťte sa na administrátora {{productName}}, aby vám zvýšil tarifný plán.",
+  "UserTariffAlmostReachedForAdmins": "Po dosiahnutí limitu budú všetci používatelia pridávaní len s povolením používateľa. Ak chcete mať možnosť pridávať ďalších administrátorov, <1>kliknite sem</1> a aktualizujte svoj tarifný plán.",
+  "UserTariffLimitHeader": "Limit počtu administrátorov je dosiahnutý: {{currentValue}} / {{maxValue}}",
+  "UserTariffReached": "Všetci používatelia budú pridávaní len s povolením používateľa. Ak chcete mať možnosť pridávať ďalších administrátorov, obráťte sa na administrátora {{productName}}, aby vám zvýšil tarifný plán.",
+  "UserTariffReachedForAdmins": "Všetci používatelia budú pridávaní len s povolením používateľa. Ak chcete mať možnosť pridávať ďalších administrátorov, <1>kliknite sem</1> a aktualizujte svoj tarifný plán."
 }

@@ -100,7 +100,7 @@ const Sdk = ({
   }, [handleMessage]);
 
   const callCommand = useCallback(
-    () => frameCallCommand("setConfig"),
+    () => frameCallCommand("setConfig", { src: window.location.origin }),
     [frameCallCommand],
   );
 

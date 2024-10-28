@@ -207,7 +207,7 @@ const useSDK = ({
   }, [handleMessage]);
 
   useEffect(() => {
-    frameCallCommand("setConfig");
+    frameCallCommand("setConfig", { src: window.location.origin });
   }, [frameConfig?.frameId]);
 
   useEffect(() => {

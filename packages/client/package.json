@@ -14,9 +14,11 @@
     "start-prod:internal": "serve dist -s -p 5001",
     "analyze": "webpack --profile --json  --env mode=analyze  && webpack-bundle-analyzer bundle/output/path/stats.json",
     "test:build": "node ./scripts/buildTranslations.js && PORT=5110 E2E_TEST=true yarn build",
+    "test:start": "PORT=5111 NODE_ENV=production E2E_TEST=true node server.js",
     "test:e2e:docker:build": "docker-compose build",
     "test:e2e:docker:local": "docker-compose up tests-local",
-    "test:e2e:docker:git": "docker-compose up tests-git"
+    "test:e2e:docker:git": "docker-compose up tests-git",
+    "test:e2e:docker:clear": "docker rmi tests"
   },
   "old-scripts": {
     "build:test": "webpack --env minimize=false --mode production",

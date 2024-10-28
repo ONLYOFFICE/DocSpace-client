@@ -2509,6 +2509,7 @@ __metadata:
     react-virtualized-auto-sizer: "npm:^1.0.24"
     react-window: "npm:^1.8.10"
     react-window-infinite-loader: "npm:^1.0.9"
+    remark-gfm: "npm:^4.0.0"
     resize-image: "npm:^0.1.0"
     sass-loader: "npm:^13.3.3"
     screenfull: "npm:^5.2.0"

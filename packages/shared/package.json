@@ -159,6 +159,7 @@
     "react-docgen-typescript-plugin": "^1.0.8",
     "react-json-pretty": "^2.2.0",
     "react-values": "^0.3.3",
+    "remark-gfm": "^4.0.0",
     "sass-loader": "^13.3.3",
     "serve": "^14.2.3",
     "storybook": "7.6.20",

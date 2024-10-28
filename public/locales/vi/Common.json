@@ -326,7 +326,7 @@
   "PasswordRequired": "Cần có mật khẩu",
   "PaymentsTitle": "Thanh toán",
   "People": "Người",
-  "PerUserMonth": "<1>{{price}} </1><1>{{currencySymbol}} </1> mỗi quản trị viên/người dùng cấp cao/tháng",
+  "PerUserMonth": "<1>{{price}} </1><1>{{currencySymbol}} </1> mỗi quản trị viên/tháng",
   "Petabyte": "PB",
   "Phone": "Điện thoại",
   "Plugins": "Plugins",

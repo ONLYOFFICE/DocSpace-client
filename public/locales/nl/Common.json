@@ -326,7 +326,7 @@
   "PasswordRequired": "Wachtwoord vereist",
   "PaymentsTitle": "Betalingen",
   "People": "Mensen",
-  "PerUserMonth": "<1>{{currencySymbol}}</1><1>{{price}}</1> per beheerder/power user/maand",
+  "PerUserMonth": "<1>{{currencySymbol}}</1><1>{{price}}</1> per beheerder/maand",
   "Petabyte": "PB",
   "Phone": "Telefoon",
   "Plugins": "Plugins",

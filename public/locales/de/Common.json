@@ -329,7 +329,7 @@
   "PasswordRequired": "Passwort erforderlich",
   "PaymentsTitle": "Zahlungen",
   "People": "Personen",
-  "PerUserMonth": "<1>{{currencySymbol}}</1><1>{{price}}</1> pro Admin/Power-Benutzer/Monat",
+  "PerUserMonth": "<1>{{currencySymbol}}</1><1>{{price}}</1> pro Admin/Monat",
   "Petabyte": "PB",
   "Phone": "Telefon",
   "Plugins": "Plugins",

@@ -329,7 +329,7 @@
   "PasswordRequired": "需要密码",
   "PaymentsTitle": "付款",
   "People": "人员",
-  "PerUserMonth": "<1>{{currencySymbol}}</1><1>{{price}}</1> 每个管理员/高级用户/月",
+  "PerUserMonth": "<1>{{currencySymbol}}</1><1>{{price}}</1> 每个管理员/月",
   "Petabyte": "PB",
   "Phone": "电话",
   "Plugins": "插件",

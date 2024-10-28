@@ -326,7 +326,7 @@
   "PasswordRequired": "비밀번호가 필요합니다",
   "PaymentsTitle": "결제",
   "People": "사람들",
-  "PerUserMonth": "<1>{{currencySymbol}}</1><1>{{price}}</1>/관리자, 고급 사용자, 월",
+  "PerUserMonth": "<1>{{currencySymbol}}</1><1>{{price}}</1>/관리자, 월",
   "Petabyte": "PB",
   "Phone": "휴대전화",
   "Plugins": "플러그인",

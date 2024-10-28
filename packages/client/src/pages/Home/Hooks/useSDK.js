@@ -206,9 +206,16 @@ const useSDK = ({
     };
   }, [handleMessage]);
 
+  const callSetConfig = useCallback(
+    () => frameCallCommand("setConfig", { src: window.location.origin }),
+    [frameCallCommand, frameConfig?.frameId],
+  );
+
   useEffect(() => {
-    frameCallCommand("setConfig", { src: window.location.origin });
-  }, [frameConfig?.frameId]);
+    if (window.parent && !frameConfig?.frameId) {
+      callSetConfig();
+    }
+  }, [callSetConfig]);
 
   useEffect(() => {
     if (!isLoading) frameCallCommand("setIsLoaded");

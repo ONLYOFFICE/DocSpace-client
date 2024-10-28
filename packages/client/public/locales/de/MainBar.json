@@ -17,15 +17,15 @@
   "RoomQuotaHeaderLimit": "Das Limit für die Anzahl der Räume ist erreicht: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Das Limit für Speicherplatz und Anzahl der Räume wird bald überschritten",
   "StorageAndRoomLimitHeader": "Das Limit für Speicherplatz und Anzahl der Räume ist erreicht",
-  "StorageAndUserHeader": "Limits für Speicherplatz und Admins/Power-User werden bald überschritten sein.",
-  "StorageAndUserTariffLimitHeader": "Das Limit für Speicherplatz und Anzahl der Administratoren/Power-User ist erreicht",
+  "StorageAndUserHeader": "Limits für Speicherplatz und Admins werden bald überschritten sein.",
+  "StorageAndUserTariffLimitHeader": "Das Limit für Speicherplatz und Anzahl der Administratoren ist erreicht",
   "StorageLimitHeader": "Das Speicherplatzlimit ist erreicht: {{currentValue}} / {{maxValue}}",
   "StorageQuotaHeader": "Das Speicherplatzlimit wird bald überschritten: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Sie können unnötige Dateien entfernen oder die Quote in den <1>Speicherverwaltungseinstellungen</1> ändern",
-  "UserQuotaHeader": "Die Anzahl der Admins/Power-User wird bald überschritten sein: {{currentValue}} / {{maxValue}}.",
-  "UserTariffAlmostReached": "Sobald das Limit erreicht ist, werden alle Benutzer nur mit Benutzerberechtigungen hinzugefügt. Um weitere Administratoren/Power-User hinzufügen zu können, wenden Sie sich an den Administrator von {{productName}}, um den Tarifplan zu aktualisieren.",
-  "UserTariffAlmostReachedForAdmins": "Sobald das Limit erreicht ist, werden alle Benutzer nur mit Benutzerberechtigungen hinzugefügt. Um weitere Administratoren/Power-User hinzufügen zu können, <1>klicken Sie hier</1>, um Ihren Tarifplan zu aktualisieren.",
-  "UserTariffLimitHeader": "Das Limit für die Anzahl der Administratoren/Power-User ist erreicht: {{currentValue}} / {{maxValue}}",
-  "UserTariffReached": "Alle Benutzer werden nur mit Benutzerberechtigungen hinzugefügt. Um weitere Admins/Power-User hinzufügen zu können, kontaktieren Sie den Administrator von {{productName}}, um den Tarifplan zu aktualisieren.",
-  "UserTariffReachedForAdmins": "Alle Benutzer werden nur mit Benutzerberechtigungen hinzugefügt. Um weitere Administratoren/Power-User hinzufügen zu können, <1>klicken Sie hier</1>, um Ihren Tarifplan zu aktualisieren."
+  "UserQuotaHeader": "Die Anzahl der Admins wird bald überschritten sein: {{currentValue}} / {{maxValue}}.",
+  "UserTariffAlmostReached": "Sobald das Limit erreicht ist, werden alle Benutzer nur mit Benutzerberechtigungen hinzugefügt. Um weitere Administratoren hinzufügen zu können, wenden Sie sich an den Administrator von {{productName}}, um den Tarifplan zu aktualisieren.",
+  "UserTariffAlmostReachedForAdmins": "Sobald das Limit erreicht ist, werden alle Benutzer nur mit Benutzerberechtigungen hinzugefügt. Um weitere Administratoren hinzufügen zu können, <1>klicken Sie hier</1>, um Ihren Tarifplan zu aktualisieren.",
+  "UserTariffLimitHeader": "Das Limit für die Anzahl der Administratoren ist erreicht: {{currentValue}} / {{maxValue}}",
+  "UserTariffReached": "Alle Benutzer werden nur mit Benutzerberechtigungen hinzugefügt. Um weitere Admins hinzufügen zu können, kontaktieren Sie den Administrator von {{productName}}, um den Tarifplan zu aktualisieren.",
+  "UserTariffReachedForAdmins": "Alle Benutzer werden nur mit Benutzerberechtigungen hinzugefügt. Um weitere Administratoren hinzufügen zu können, <1>klicken Sie hier</1>, um Ihren Tarifplan zu aktualisieren."
 }

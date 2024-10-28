@@ -61,7 +61,6 @@ export const getBackUrl = (
     }
   }
 
-  const url = window.location.href;
   // const origin = url.substring(0, url.indexOf("/doceditor"));
   const origin = window.location.origin;
 
@@ -83,7 +82,7 @@ export const showDocEditorMessage = async (
 };
 
 export const convertDocumentUrl = async (fileId: number | string) => {
-  const convert = await convertFile(fileId, null, true);
+  const convert = await convertFile(fileId, null);
   return convert && convert[0]?.result;
 };
 

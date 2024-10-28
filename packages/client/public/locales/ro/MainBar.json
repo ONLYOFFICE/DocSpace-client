@@ -17,15 +17,15 @@
   "RoomQuotaHeaderLimit": "Limita maximă permisă de săli a fost atinsă: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Limita maximă permisă de stocare și de săli este pe punctul de a fi depăşit",
   "StorageAndRoomLimitHeader": "Limita maximă permisă de stocare și de săli a fost atinsă",
-  "StorageAndUserHeader": "Limite de stocare pentru administratori/utilizatori avansați sunt pe punctul de a fi depăşiti.",
-  "StorageAndUserTariffLimitHeader": "Limita maximă permisă de stocare și de administratori/utilizatori avansați a fost atinsă",
+  "StorageAndUserHeader": "Limite de stocare pentru administratori sunt pe punctul de a fi depăşiti.",
+  "StorageAndUserTariffLimitHeader": "Limita maximă permisă de stocare și de administratori a fost atinsă",
   "StorageLimitHeader": "Limita permisă de stocare a fost atinsă: {{currentValue}} / {{maxValue}}",
   "StorageQuotaHeader": "Cota spaţiului de stocare este pe punctul de a fi depăşită: {{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Puteţi elimina fişierele inutile sau modifica cotă de stocare din secțiunea <1>Setările de gestionare a spațiului de stocare.</1>.",
-  "UserQuotaHeader": "Numărul maxim de administratori/utilizatori avansați este pe punctul de a fi depăşit. {{currentValue}} / {{maxValue}}.",
-  "UserTariffAlmostReached": "Odată ce limita a fost atinsă, toți utilizatorii vor fi adăugați numai cu permisiunea de Utilizator. Pentru a adăuga administratori/utilizatori avansați în continuare, contactați administratorul {{productName}}  pentru a schimba planul tarifar.",
-  "UserTariffAlmostReachedForAdmins": "Odată ce limita a fost atinsă, toți utilizatorii vor fi adăugați numai cu permisiunea de Utilizator. Pentru a adăuga administratori/utilizatori avansați în continuare,  <1>apăsați aici</1> pentru a schimba planul tarifar.",
-  "UserTariffLimitHeader": "Limita maximă permisă de administratori/utilizatori avansaţi a fost atinsă: {{currentValue}} / {{maxValue}}",
-  "UserTariffReached": "Toți utilizatorii vor fi adăugați numai cu permisiunea de Utilizator. Pentru a adăuga administratori/utilizatori avansați în continuare, contactați administratorul {{productName}}  pentru a schimba planul tarifar.",
-  "UserTariffReachedForAdmins": "Toți utilizatorii vor fi adăugați numai cu permisiunea de Utilizator. Pentru a adăuga administratori/utilizatori avansați în continuare,  <1>apăsați aici</1> pentru a schimba planul tarifar."
+  "UserQuotaHeader": "Numărul maxim de administratori este pe punctul de a fi depăşit. {{currentValue}} / {{maxValue}}.",
+  "UserTariffAlmostReached": "Odată ce limita a fost atinsă, toți utilizatorii vor fi adăugați numai cu permisiunea de Utilizator. Pentru a adăuga administratori, contactați administratorul {{productName}}  pentru a schimba planul tarifar.",
+  "UserTariffAlmostReachedForAdmins": "Odată ce limita a fost atinsă, toți utilizatorii vor fi adăugați numai cu permisiunea de Utilizator. Pentru a adăuga administratori,  <1>apăsați aici</1> pentru a schimba planul tarifar.",
+  "UserTariffLimitHeader": "Limita maximă permisă de administratori a fost atinsă: {{currentValue}} / {{maxValue}}",
+  "UserTariffReached": "Toți utilizatorii vor fi adăugați numai cu permisiunea de Utilizator. Pentru a adăuga administratori în continuare, contactați administratorul {{productName}}  pentru a schimba planul tarifar.",
+  "UserTariffReachedForAdmins": "Toți utilizatorii vor fi adăugați numai cu permisiunea de Utilizator. Pentru a adăuga administratori în continuare,  <1>apăsați aici</1> pentru a schimba planul tarifar."
 }

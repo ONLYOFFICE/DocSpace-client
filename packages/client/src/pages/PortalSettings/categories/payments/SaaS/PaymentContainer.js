@@ -337,7 +337,7 @@ const PaymentContainer = (props) => {
                 >
                   <Trans t={t} i18nKey="PerUserMonth" ns="Common">
                     From {{ currencySymbol }}
-                    {{ price: startValue }} per admin/power user /month
+                    {{ price: startValue }} per admin/month
                   </Trans>
                 </Text>
 

@@ -328,7 +328,7 @@
   "PasswordRequired": "Պահանջվում է գաղտնաբառ",
   "PaymentsTitle": "Վճարումներ",
   "People": "Մարդիկ",
-  "PerUserMonth": "<1>{{currencySymbol}}</1><1>{{price}}</1> մեկ ադմինիստրատորի / հզոր օգտագործողի / ամսվա համար",
+  "PerUserMonth": "<1>{{currencySymbol}}</1><1>{{price}}</1> մեկ ադմինիստրատորի / ամսվա համար",
   "Petabyte": "PB",
   "Phone": "Հեռախոս",
   "Plugins": "Միացումներ",

@@ -326,7 +326,7 @@
   "PasswordRequired": "Zahtevano je geslo",
   "PaymentsTitle": "Plačila",
   "People": "Ljudje",
-  "PerUserMonth": "<1>{{currencySymbol}}</1><1>{{price}}</1> na skrbnika/naprednega uporabnika/mesec",
+  "PerUserMonth": "<1>{{currencySymbol}}</1><1>{{price}}</1> na skrbnika/mesec",
   "Petabyte": "PB",
   "Phone": "Telefon",
   "Plugins": "Vtičniki",

@@ -326,7 +326,7 @@
   "PasswordRequired": "Senha necessária",
   "PaymentsTitle": "Pagamentos",
   "People": "Pessoas",
-  "PerUserMonth": "<1>{{currencySymbol}}</1><1>{{price}}</1> por administrador/utilizadores com poder utilizador/mês",
+  "PerUserMonth": "<1>{{currencySymbol}}</1><1>{{price}}</1> por administrador/mês",
   "Petabyte": "PB",
   "Phone": "Telemóvel",
   "Plugins": "Plugins",

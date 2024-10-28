@@ -1,7 +1,7 @@
 {
-  "CannotChangePlan": "Ne možete da promenite svoj plan jer korišćeni obim memorijskog prostora ili broj administratora/naprednih korisnika premašuju ograničenja izabranog plana:",
+  "CannotChangePlan": "Ne možete da promenite svoj plan jer korišćeni obim memorijskog prostora ili broj administratora premašuju ograničenja izabranog plana:",
   "ChangePricingPlan": "Promeni plan tarifiranja",
   "PlanStorageLimit": "Nova ograničenja tarife su <1>{{storageValue}}</1> prostora za skladištenje, a vaš trenutno korišćeni prostor za skladištenje je <1>{{currentStorageValue}}</1>.",
-  "PlanUsersLimit": "Želite da smanjite tim na <1>{{usersCount}}</1> administratora/naprednih korisnika, a trenutni broj takvih korisnika u vašem {{productName}}-u je <1>{{currentUsersCount}}</1>.",
+  "PlanUsersLimit": "Želite da smanjite tim na <1>{{usersCount}}</1> administratora, a trenutni broj takvih korisnika u vašem {{productName}}-u je <1>{{currentUsersCount}}</1>.",
   "SaveOrChange": "Molimo vas eliminišite neusklađenost u konfliktnom parametru da biste nastavili ili zadržite vaš aktivni plan tarifiranja."
 }

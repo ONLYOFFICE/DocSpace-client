@@ -17,15 +17,15 @@
   "RoomQuotaHeaderLimit": "Đã đạt đến giới hạn số lượng phòng: {{currentValue}} / {{maxValue}}",
   "StorageAndRoomHeader": "Sắp vượt quá giới hạn về không gian lưu trữ và số lượng phòng",
   "StorageAndRoomLimitHeader": "Đã đạt đến giới hạn về không gian lưu trữ và số lượng phòng",
-  "StorageAndUserHeader": "Sắp vượt quá giới hạn lưu trữ và quản trị viên/người dùng cấp cao.",
-  "StorageAndUserTariffLimitHeader": "Đã đạt đến giới hạn về không gian lưu trữ và số lượng quản trị viên/người dùng cấp cao",
+  "StorageAndUserHeader": "Sắp vượt quá giới hạn lưu trữ và quản trị viên.",
+  "StorageAndUserTariffLimitHeader": "Đã đạt đến giới hạn về không gian lưu trữ và số lượng quản trị viên",
   "StorageLimitHeader": "Đã đạt đến giới hạn không gian lưu trữ: {{currentValue}}/ {{maxValue}} ",
   "StorageQuotaHeader": "Dung lượng lưu trữ sắp vượt quá:{{currentValue}} / {{maxValue}}",
   "TenantCustomQuotaDescription": "Bạn có thể xóa các tập tin không cần thiết hoặc thay đổi hạn mức trong cài đặt Quản lý lưu trữ <1>.</1>",
-  "UserQuotaHeader": "Sắp vượt quá số lượng quản trị viên/người dùng cấp cao:{{currentValue}}/{{maxValue}}.",
-  "UserTariffAlmostReached": "Khi đạt đến giới hạn, tất cả người dùng sẽ chỉ được thêm là Người dùng bình thường. Để có thể thêm quản trị viên/người dùng cấp cao khác, hãy liên hệ với quản trị viên {{productName}} để nâng cấp gói dịch vụ.",
-  "UserTariffAlmostReachedForAdmins": "Khi đạt đến giới hạn, tất cả người dùng sẽ chỉ được thêm là Người dùng bình thường. Để có thể thêm quản trị viên/người dùng cấp cao khác, hãy <1>nhấp vào đây</1> để nâng cấp gói dịch vụ của bạn.",
-  "UserTariffLimitHeader": "Đã đạt đến giới hạn số lượng quản trị viên/người dùng cấp cao: {{currentValue}}/ {{maxValue}} ",
-  "UserTariffReached": "Tất cả người dùng sẽ chỉ được thêm là Người dùng bình thường. Để có thể thêm quản trị viên/người dùng cấp cao khác, hãy liên hệ với quản trị viên {{productName}} để nâng cấp gói dịch vụ.",
-  "UserTariffReachedForAdmins": "Tất cả người dùng sẽ chỉ được thêm là Người dùng bình thường. Để có thể thêm quản trị viên/người dùng cấp cao khác, hãy <1>nhấp vào đây</1> để nâng cấp gói dịch vụ của bạn."
+  "UserQuotaHeader": "Sắp vượt quá số lượng quản trị viên:{{currentValue}}/{{maxValue}}.",
+  "UserTariffAlmostReached": "Khi đạt đến giới hạn, tất cả người dùng sẽ chỉ được thêm là Người dùng bình thường. Để có thể thêm quản trị viên, hãy liên hệ với quản trị viên {{productName}} để nâng cấp gói dịch vụ.",
+  "UserTariffAlmostReachedForAdmins": "Khi đạt đến giới hạn, tất cả người dùng sẽ chỉ được thêm là Người dùng bình thường. Để có thể thêm quản trị viên, hãy <1>nhấp vào đây</1> để nâng cấp gói dịch vụ của bạn.",
+  "UserTariffLimitHeader": "Đã đạt đến giới hạn số lượng quản trị viên: {{currentValue}}/ {{maxValue}} ",
+  "UserTariffReached": "Tất cả người dùng sẽ chỉ được thêm là Người dùng bình thường. Để có thể thêm quản trị viên, hãy liên hệ với quản trị viên {{productName}} để nâng cấp gói dịch vụ.",
+  "UserTariffReachedForAdmins": "Tất cả người dùng sẽ chỉ được thêm là Người dùng bình thường. Để có thể thêm quản trị viên, hãy <1>nhấp vào đây</1> để nâng cấp gói dịch vụ của bạn."
 }

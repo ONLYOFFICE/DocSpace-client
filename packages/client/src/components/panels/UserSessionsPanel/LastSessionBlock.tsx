@@ -24,11 +24,13 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { observer, inject } from "mobx-react";
+import { inject, observer } from "mobx-react";
+import styled, { css } from "styled-components";
+
 import {
   Avatar,
-  AvatarSize,
   AvatarRole,
+  AvatarSize,
 } from "@docspace/shared/components/avatar";
 import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
@@ -36,12 +38,11 @@ import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
 } from "@docspace/shared/components/context-menu-button";
-import styled, { css } from "styled-components";
+
 import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
-
-import type SelectionPeopleStore from "SRC_DIR/store/SelectionPeopleStore";
 import { IAllSessions } from "SRC_DIR/pages/PortalSettings/categories/security/sessions/SecuritySessions.types";
+
 import { LastSessionBlockProps } from "./UserSessionsPanel.types";
 
 const StyledUserInfoBlock = styled.div`
@@ -271,11 +272,11 @@ const LastSessionBlock = (props: LastSessionBlockProps) => {
   );
 };
 
-export default inject<TStore>(({ setup, peopleStore }) => {
+export default inject<TStore>(({ setup, activeSessionsStore }) => {
   const { setDisableDialogVisible, setLogoutAllDialogVisible } = setup;
 
   const { getItems, isMe, getFromDateAgo, setDisplayName } =
-    peopleStore.selectionStore as unknown as SelectionPeopleStore;
+    activeSessionsStore;
 
   return {
     isMe,

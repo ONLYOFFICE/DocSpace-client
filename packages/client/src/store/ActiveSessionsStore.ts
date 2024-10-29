@@ -24,18 +24,21 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { makeAutoObservable } from "mobx";
 import moment from "moment-timezone";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { EmployeeStatus } from "@docspace/shared/enums";
+
 import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
-import { makeAutoObservable } from "mobx";
 
 class ActiveSessionsStore {
-  sessionsData = [];
+  sessionsData = []; // Sessions inited in fetchData.
 
-  dataFromSocket = [];
+  dataFromSocket = []; // Sessions from socket (all sessions, include closed sessions or from deleted users)
+
+  activeSessionsMap = new Map();
 
   displayName = "";
 
@@ -193,6 +196,9 @@ class ActiveSessionsStore {
       };
     }
 
+    // Remove all active sessions for this user (sessionLogout calls after last user's session logout)
+    this.activeSessionsMap.delete(userId);
+
     if (index === -1) return;
 
     newData[index] = {
@@ -220,6 +226,12 @@ class ActiveSessionsStore {
     } else {
       this.dataFromSocket[index].sessions[existingSessionIndex] = session;
     }
+
+    // Add new active session
+    // Need to test with working backend
+    const userActiveSessions = this.activeSessionsMap.get(userId) ?? [];
+    userActiveSessions.push(session);
+    this.activeSessionsMap.set(userId, userActiveSessions);
   };
 
   sessionMultiLogout = ({ sessionId, userId, date }) => {
@@ -256,6 +268,16 @@ class ActiveSessionsStore {
       date,
       status: "offline",
     });
+
+    // remove active session that was logged out
+    const userActiveSessions = this.activeSessionsMap.get(userId);
+
+    if (userActiveSessions) {
+      this.activeSessionsMap.set(
+        userId,
+        userActiveSessions.filter((item) => item.id !== sessionId),
+      );
+    }
   };
 
   updateDataFromSocket = (data) => {
@@ -266,6 +288,17 @@ class ActiveSessionsStore {
     );
 
     const { sessions, status } = data;
+
+    // create active session after user's first login (updateDataFromSocket calls from socket enter-in-portal)
+    this.activeSessionsMap.set(data.userId, data.sessions);
+
+    // if (data.userId === this.items.userId) {
+    //   const newActiveSessionsPanelItems = {
+    //     ...this.items,
+    //     sessions: data.sessions,
+    //   };
+    //   this.setItems(newActiveSessionsPanelItems);
+    // }
 
     if (currentSesstionIndex !== -1) {
       this.sessionsData[currentSesstionIndex] = {
@@ -304,6 +337,7 @@ class ActiveSessionsStore {
     return session.connections;
   };
 
+  // Merge initial sessions and sessions from socket
   get allSessions() {
     const dataFromSocketMap = new Map(
       this.dataFromSocket.map((data) => [data.userId, data]),
@@ -318,6 +352,7 @@ class ActiveSessionsStore {
     return sessions.filter((session) => session.connections.length !== 0);
   }
 
+  // Get 100 users, then get sessions for each user separately. What if there are more than 100 users?
   fetchData = async () => {
     const { getUserSessionsById } = this.settingsSetupStore;
     const { getUsersList } = this.peopleStore.usersStore;
@@ -329,6 +364,11 @@ class ActiveSessionsStore {
         .map((user) => getUserSessionsById(user.id));
 
       const sessions = await Promise.all(sessionsPromises);
+
+      // Initialize active sessions
+      sessions.forEach((item) => {
+        this.activeSessionsMap.set(item.id, item.connections);
+      });
 
       this.setSessionsData(sessions);
     } catch (error) {
@@ -352,6 +392,9 @@ class ActiveSessionsStore {
       this.setItems(newData);
       // const index = this.findSessionIndexByUserId(userId);
       // this.dataFromSocket[index] = newData;
+
+      // Remove all active sessions for this user
+      this.activeSessionsMap.delete(userId);
 
       toastr.success(
         t("Settings:LoggedOutByUser", {
@@ -405,6 +448,13 @@ class ActiveSessionsStore {
       (session) => session.id === sessionId,
     );
 
+    // Remove specific active session
+    const activeSessions = this.activeSessionsMap.get(this.items.userId);
+    this.activeSessionsMap.set(
+      this.items.userId,
+      activeSessions.filter((item) => item.id !== sessionId),
+    );
+
     if (!foundConnection) return;
 
     try {
@@ -442,6 +492,9 @@ class ActiveSessionsStore {
     try {
       this.setIsLoading(true);
       await logoutAllUsers(userIds);
+
+      // Remove all active sessions for this user
+      this.activeSessionsMap.delete(userIds[0]);
 
       const newData = {
         ...this.items,

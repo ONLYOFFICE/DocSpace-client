@@ -25,15 +25,16 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { observer, inject } from "mobx-react";
+import styled from "styled-components";
+
 import { mobile } from "@docspace/shared/utils";
 import { Text } from "@docspace/shared/components/text";
 import { Button, ButtonSize } from "@docspace/shared/components/button";
 import { EmptyScreenContainer } from "@docspace/shared/components/empty-screen-container";
-import styled from "styled-components";
-import type SelectionPeopleStore from "SRC_DIR/store/SelectionPeopleStore";
 
 import EmptyScreenSessionsReactSvgUrl from "PUBLIC_DIR/images/empty_screen_from_sessions.svg?url";
 import { IAllSessions } from "SRC_DIR/pages/PortalSettings/categories/security/sessions/SecuritySessions.types";
+
 import { AllSessionsBlockProps } from "./UserSessionsPanel.types";
 
 import RowWrapper from "./sub-components";
@@ -116,7 +117,7 @@ const AllSessionsBlock = (props: AllSessionsBlockProps) => {
   );
 };
 
-export default inject<TStore>(({ peopleStore, setup }) => {
+export default inject<TStore>(({ setup, activeSessionsStore }) => {
   const {
     getItems,
     isLoading,
@@ -124,7 +125,7 @@ export default inject<TStore>(({ peopleStore, setup }) => {
     isDisabled,
     activeSessionsMap,
     setDisplayName,
-  } = peopleStore.selectionStore as unknown as SelectionPeopleStore;
+  } = activeSessionsStore;
 
   const { setLogoutAllDialogVisible } = setup;
 

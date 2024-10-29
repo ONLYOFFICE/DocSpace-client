@@ -23,14 +23,13 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import { useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import { Row } from "@docspace/shared/components/row";
-import { IconButton } from "@docspace/shared/components/icon-button";
 import styled from "styled-components";
 
-import type SelectionPeopleStore from "SRC_DIR/store/SelectionPeopleStore";
+import { Row } from "@docspace/shared/components/row";
+import { IconButton } from "@docspace/shared/components/icon-button";
 import RemoveSessionSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
+
 import SessionsRowContent from "./SessionsRowContent";
 import { SessionsRowProps } from "../../UserSessionsPanel.types";
 
@@ -78,10 +77,10 @@ const SessionsRow = (props: SessionsRowProps) => {
   );
 };
 
-export default inject<TStore>(({ setup, peopleStore }) => {
+export default inject<TStore>(({ setup, activeSessionsStore }) => {
   const { setLogoutDialogVisible, setPlatformModalData } = setup;
   const { platformData, setPlatformData, items, setIsDisabled } =
-    peopleStore.selectionStore as unknown as SelectionPeopleStore;
+    activeSessionsStore;
 
   return {
     connections: items.connections[0],

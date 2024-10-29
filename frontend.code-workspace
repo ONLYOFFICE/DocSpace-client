@@ -210,11 +210,6 @@
             "tooltip": "🛠️ Start the \"Test | Jest:unit\" task",
           },
           {
-            "label": "e2e build",
-            "task": "Test | Test build",
-            "tooltip": "🛠️ Start the \"test build\" task",
-          },
-          {
             "label": "e2e docker build",
             "task": "Test | Test e2e docker build",
             "tooltip": "🛠️ Start the \"test build in docker\" task",

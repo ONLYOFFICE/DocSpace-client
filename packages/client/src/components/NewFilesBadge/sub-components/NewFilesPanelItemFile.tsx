@@ -23,9 +23,8 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
+import React from "react";
 import { inject, observer } from "mobx-react";
-import config from "PACKAGE_FILE";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
@@ -34,6 +33,7 @@ import { Text } from "@docspace/shared/components/text";
 import { IconButton } from "@docspace/shared/components/icon-button";
 
 import FolderLocationIconSvgUrl from "PUBLIC_DIR/images/folder.location.react.svg?url";
+import config from "PACKAGE_FILE";
 
 import { StyledFileItem } from "../NewFilesBadge.styled";
 import {

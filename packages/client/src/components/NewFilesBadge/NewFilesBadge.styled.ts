@@ -73,7 +73,8 @@ export const StyledItem = styled.div<{
 
   .date-item {
     margin-bottom: 0;
-    margin-top: ${(props) => (props.isFirst ? "20px" : "8px")};
+    margin-top: ${(props) =>
+      props.isFirst ? (props.isLoader ? "16px" : "20px") : "8px"};
   }
 
   .room-items-container {

@@ -42,6 +42,8 @@ export const getBaseUrl = () => {
 export const getAPIUrl = (apiSystem?: boolean) => {
   const baseUrl = process.env.API_HOST?.trim() ?? getBaseUrl();
 
+  console.log("API URL: ", baseUrl);
+
   const baseAPIUrl = `${baseUrl}/${!apiSystem ? API_PREFIX : "apisystem"}`;
 
   return baseAPIUrl;

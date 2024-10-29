@@ -116,6 +116,7 @@ export type NewFilesPanelItemFileProps = {
   checkAndOpenLocationAction?: CheckAndOpenLocationAction;
   markAsRead?: FilesActionStore["markAsRead"];
   openDocEditor?: FilesStore["openDocEditor"];
+  openItemAction?: FilesActionStore["openItemAction"];
 
   displayFileExtension?: boolean;
 };

@@ -453,64 +453,49 @@
       }
     },
     {
-      "label": "Test | Test build",
+      "label": "Test | Test e2e docker build",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn test:build ; ",
+      "command": "cd ${workspaceFolder} ; yarn test:e2e:docker:build ; ",
       "group": {
-        "kind": "build",
-        "isDefault": true
+         "kind": "build",
+         "isDefault": true
       },
       "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
+         "reveal": "always",
+         "panel": "new",
+         "focus": true,
+         "close": false
       }
     },
     {
-      "label": "Test | Test e2e",
+      "label": "Test | Test e2e docker start",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn test:e2e ; ",
+      "command": "cd ${workspaceFolder} ; yarn test:e2e:docker:start ; ",
       "group": {
-        "kind": "build",
-        "isDefault": true
+         "kind": "build",
+         "isDefault": true
       },
       "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
+         "reveal": "always",
+         "panel": "new",
+         "focus": true,
+         "close": false
       }
     },
     {
-      "label": "Test | Test e2e model",
+      "label": "Test | Test e2e docker clear",
       "type": "shell",
-      "command": "cd ${workspaceFolder} ; yarn test:e2e:model ; ",
+      "command": "cd ${workspaceFolder} ; yarn test:e2e:docker:clear ; ",
       "group": {
-        "kind": "build",
-        "isDefault": true
+          "kind": "build",
+          "isDefault": true
       },
       "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
+          "reveal": "always",
+          "panel": "new",
+          "focus": true,
+          "close": false
       }
-    },
-    {
-      "label": "Test | e2e playwright setup",
-      "type": "shell",
-      "command": "cd ${workspaceFolder} ; npx playwright install ; ",
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "focus": true,
-        "close": false
       }
-    }
   ]
 }

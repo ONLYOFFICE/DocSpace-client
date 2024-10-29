@@ -138,7 +138,7 @@ const StyledUsersContent = styled.div`
 
     .info_field {
       line-height: 20px;
-      height: 20px;
+
       padding: 4px 0;
     }
 

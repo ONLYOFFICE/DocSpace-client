@@ -34,7 +34,7 @@
   "RoleFormFillerDescription": "Mövcud fayllarla əməliyyatlar: baxmaq, formaları doldurmaq, nəzərdən keçirmək, şərh etmək.",
   "RoleFormFillerFormRoomDescription": "Forma dolduranlar formaları tamamlaya və yalnız Tamamlanmış və Prosesdə olan qovluqlarda tamamlanmış/başlanmış formalara baxa bilər.",
   "RolePortalAdminDescription": "{{productName}} adminləri {{productName}} parametrlərinə daxil ola, otaqları idarə edə və arxivləşdirə, yeni istifadəçiləri dəvət edə və öz səviyyələrindən aşağı rollar təyin edə bilərlər. Bütün idarəçilərin Sənədlər bölməyə girişi var.",
-  "RolePowerUserFormRoomDescription": "Güclü istifadəçilər otağa formalar yükləyə və Tamamlanmış və Prosesdə olan qovluqlara tam giriş əldə edə bilərlər.",
+  "RolePowerUserFormRoomDescription": "Istifadəçilər otağa formalar yükləyə və Tamamlanmış və Prosesdə olan qovluqlara tam giriş əldə edə bilərlər.",
   "RoleReviewer": "Rəyçi",
   "RoleReviewerDescription": "Mövcud fayllarla əməliyyatlar: baxmaq, nəzərdən keçirmək, şərh etmək.",
   "RoleRoomAdminDescription": "Otaq administratorları təyin olunmuş otaqlar yarada və idarə edə, yeni istifadəçilər dəvət edə və otaq administratoruna və aşağı səviyyəli şəxslərə rollar təyin edə bilər. Bütün idarəçilərin Sənədlər bölməyə girişi var.",

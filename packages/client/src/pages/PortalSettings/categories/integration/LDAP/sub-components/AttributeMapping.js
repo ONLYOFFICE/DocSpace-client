@@ -206,7 +206,9 @@ const AttributeMapping = (props) => {
           labelVisible={true}
           hasError={errors.userQuotaLimit}
           labelText={t("LdapQuota")}
-          tooltipContent={t("LdapUserQuotaTooltip")}
+          tooltipContent={t("LdapUserQuotaTooltip", {
+            contactsName: t("Common:Contacts"),
+          })}
           inlineHelpButton
         >
           <TextInput
@@ -261,7 +263,9 @@ const AttributeMapping = (props) => {
             />
           </Box>
           <Text fontWeight={400} fontSize="12px" lineHeight="16px">
-            {t("LdapUsersTypeInfo")}
+            {t("LdapUsersTypeInfo", {
+              contactsName: t("Common:Contacts"),
+            })}
           </Text>
         </Box>
         <Box className="access-selector-wrapper">

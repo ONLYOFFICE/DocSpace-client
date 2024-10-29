@@ -170,18 +170,17 @@ const elementProps = getElementProps(element);
 
 const rowContent = (
   <Row
-    key="1"
     {...checkedProps}
     {...elementProps}
     onRowClick={() => {}}
     contextOptions={[
       {
-        key: "key1",
+        key: "key-1",
         label: "Edit",
         onClick: () => {},
       },
       {
-        key: "key2",
+        key: "key-2",
         label: "Delete",
         onClick: () => {},
       },
@@ -447,9 +446,10 @@ const Template = () => (
     </div>
     <div style={{ justifySelf: "center" }}>
       <div style={{ padding: "8px 0" }}>
-        {rowArray[0]}
-        {rowArray.map((item) => {
-          return <div key={`${item.key}`}>{item}</div>;
+        {/* {rowArray[0]} */}
+        {rowArray.map((item, idx) => {
+          // eslint-disable-next-line react/no-array-index-key
+          return <div key={`${idx}`}>{item}</div>;
         })}
       </div>
     </div>

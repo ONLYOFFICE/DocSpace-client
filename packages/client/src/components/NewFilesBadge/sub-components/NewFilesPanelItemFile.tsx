@@ -49,7 +49,7 @@ const NewFilesPanelItemFileComponent = ({
   getIcon,
   checkAndOpenLocationAction,
   markAsRead,
-  openDocEditor,
+  openItemAction,
 
   displayFileExtension,
 }: NewFilesPanelItemFileProps) => {
@@ -75,12 +75,9 @@ const NewFilesPanelItemFileComponent = ({
       );
     }
 
-    if (!item.viewAccessibility.WebView) {
-      return window.open(item.viewUrl, "_self");
-    }
-    openDocEditor!(item.id);
-
+    openItemAction({ ...item });
     await markAsRead!([], [item.id]);
+
     onClose();
   };
 
@@ -123,7 +120,8 @@ export const NewFilesPanelItemFile = inject(
     filesStore,
   }: NewFilesPanelItemFileInjectStore) => {
     const { displayFileExtension, getIcon } = filesSettingsStore;
-    const { checkAndOpenLocationAction, markAsRead } = filesActionsStore;
+    const { checkAndOpenLocationAction, markAsRead, openItemAction } =
+      filesActionsStore;
     const { openDocEditor } = filesStore;
 
     return {
@@ -132,6 +130,7 @@ export const NewFilesPanelItemFile = inject(
       checkAndOpenLocationAction,
       markAsRead,
       openDocEditor,
+      openItemAction,
     };
   },
 )(observer(NewFilesPanelItemFileComponent));

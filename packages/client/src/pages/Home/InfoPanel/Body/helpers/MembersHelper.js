@@ -142,7 +142,6 @@ class MembersHelper {
           options.roomAdmin,
           options.collaborator,
           options.editor,
-          options.formFiller,
           options.reviewer,
           options.commentator,
           options.viewer,

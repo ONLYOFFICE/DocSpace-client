@@ -401,21 +401,24 @@ const FilesSelectorComponent = ({
     setIsFirstLoad,
   ]);
 
-  const onSearchAction = React.useCallback(
-    (value: string, callback?: Function) => {
+  const onSearchAction = (value: string, callback?: VoidFunction) => {
+    setSearchValue(value);
+
+    callback?.();
+    afterSearch.current = true;
+  };
+
+  React.useEffect(() => {
+    if (!selectedItemType) return;
+
+    if (searchValue) {
       setIsFirstLoad(true);
       setItems([]);
-
-      setSearchValue(value);
-
-      callback?.();
-      afterSearch.current = true;
-    },
-    [setIsFirstLoad],
-  );
+    }
+  }, [searchValue, selectedItemType, setIsFirstLoad]);
 
   const onClearSearchAction = React.useCallback(
-    (callback?: Function) => {
+    (callback?: VoidFunction) => {
       if (!searchValue) return;
       setIsFirstLoad(true);
       setItems([]);

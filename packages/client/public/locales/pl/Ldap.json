@@ -66,8 +66,8 @@
   "LdapUserDNTooltip": "Wprowadź nazwę wyróżniającą do katalogu zawierającego użytkowników, których chcesz dodać.",
   "LdapUserFilter": "Filtr użytkowników",
   "LdapUserFilterTooltip": "Użyj filtru wyszukiwania LDAP, aby wybrać użytkowników, którzy mają zostać zaimportowani.",
-  "LdapUserQuotaTooltip": "Aby skonfigurować limit pamięci dla użytkownika, dodaj atrybut w katalogu LDAP (np. UsersQuotaLimit) i wpisz wartość całkowitą dla danego atrybutu. Wartość limitu zostanie wyświetlona w bajtach. Tutaj określ wyłącznie nazwę atrybutu. Dany atrybut zostanie zastosowany tylko podczas pierwszej konfiguracji i może później zostać zmieniony ręcznie w ustawieniach konta.",
+  "LdapUserQuotaTooltip": "Aby skonfigurować limit pamięci dla użytkownika, dodaj atrybut w katalogu LDAP (np. UsersQuotaLimit) i wpisz wartość całkowitą dla danego atrybutu. Wartość limitu zostanie wyświetlona w bajtach. Tutaj określ wyłącznie nazwę atrybutu. Dany atrybut zostanie zastosowany tylko podczas pierwszej konfiguracji i może później zostać zmieniony ręcznie w ustawieniach {{contactsName}}.",
   "LdapUsersType": "Typ użytkowników",
-  "LdapUsersTypeInfo": "Użytkownicy mają dostęp wyłącznie do pokoi, do których zostali zaproszeni przez administratorów i nie mogą tworzyć własnych pokoi, katalogów ani plików. Wybierz inny typ poniżej, aby zapewnić więcej uprawnień. W przeciwnym razie możesz zmienić typ ręcznie w sekcji Konta.",
+  "LdapUsersTypeInfo": "Użytkownicy mają dostęp wyłącznie do pokoi, do których zostali zaproszeni przez administratorów i nie mogą tworzyć własnych pokoi, katalogów ani plików. Wybierz inny typ poniżej, aby zapewnić więcej uprawnień. W przeciwnym razie możesz zmienić typ ręcznie w sekcji {{contactsName}}.",
   "LdapUserTypeTooltip": "Wszyscy użytkownicy zostaną dodani do {{productName}} z wybranym typem."
 }

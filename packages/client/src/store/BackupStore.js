@@ -586,7 +586,19 @@ class BackupStore {
   clearProgressInterval = () => {
     this.timerId && clearInterval(this.timerId);
     this.timerId = null;
+
+    if (
+      typeof window !== "undefined" &&
+      !window.location.pathname.includes("data-backup") &&
+      !window.location.pathname.includes("restore-backup")
+    ) {
+      this.downloadingProgress = 100;
+    }
   };
+
+  get isBackupProgressVisible() {
+    return this.downloadingProgress > 0 && this.downloadingProgress !== 100;
+  }
 
   setDownloadingProgress = (progress) => {
     this.downloadingProgress = progress;

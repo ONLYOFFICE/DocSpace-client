@@ -93,9 +93,13 @@ export async function getSettings() {
     "GET",
   );
 
+  console.log("start requests settings");
+
   const settingsRes = IS_TEST
     ? settingsHandler(headers())
     : await fetch(getSettings);
+
+  console.log("end request settings", settingsRes);
 
   if (settingsRes.status === 403) return `access-restricted`;
 
@@ -125,6 +129,8 @@ export async function getVersionBuild() {
 }
 
 export async function getColorTheme() {
+  console.log("start requests color theme");
+
   const [getColorTheme] = createRequest(
     [`/settings/colortheme`],
     [["", ""]],
@@ -132,6 +138,8 @@ export async function getColorTheme() {
   );
 
   const res = IS_TEST ? colorThemeHandler() : await fetch(getColorTheme);
+
+  console.log("end requests color theme", res);
 
   if (!res.ok) return;
 

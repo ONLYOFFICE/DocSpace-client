@@ -616,7 +616,7 @@ export const frameCallbackData = (methodReturnData: unknown) => {
       frameId: getFrameId(),
       methodReturnData,
     }),
-    "*",
+    window.parent.origin,
   );
 };
 
@@ -627,7 +627,7 @@ export const frameCallEvent = (eventReturnData: unknown) => {
       frameId: getFrameId(),
       eventReturnData,
     }),
-    "*",
+    window.parent.origin,
   );
 };
 
@@ -642,7 +642,7 @@ export const frameCallCommand = (
       commandName,
       commandData,
     }),
-    "*",
+    window.parent.origin,
   );
 };
 

@@ -16,6 +16,8 @@ export enum FeedAction {
   Unlocked = "unlocked",
   Archived = "archived",
   Unarchived = "unarchived",
+  Export = "export",
+  Invite = "invite",
 }
 
 enum FeedTarget {
@@ -207,6 +209,11 @@ export const feedInfo = [
     targetType: `${FeedTarget.Room}`,
     actionType: `${FeedAction.Unarchived}`,
   },
+  {
+    key: "RoomIndexExportSaved",
+    targetType: `${FeedTarget.Room}`,
+    actionType: `${FeedAction.Export}`,
+  },
   // ROOM TAGS
   {
     key: "AddedRoomTags",
@@ -266,6 +273,11 @@ export const feedInfo = [
     key: "RoomRemoveUser",
     targetType: `${FeedTarget.User}`,
     actionType: `${FeedAction.Delete}`,
+  },
+  {
+    key: "RoomInviteResend",
+    targetType: `${FeedTarget.User}`,
+    actionType: `${FeedAction.Invite}`,
   },
   //
   // GROUP

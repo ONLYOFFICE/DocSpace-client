@@ -145,6 +145,8 @@ export const useFeedTranslation = (
       return t("InfoPanel:RoomUpdateAccess");
     case "RoomRemoveUser":
       return t("InfoPanel:RoomRemoveUser");
+    case "RoomInviteResend":
+      return t("InfoPanel:RoomInviteResend");
     case "RoomGroupAdded":
       return t("InfoPanel:RoomGroupAdded");
     case "RoomUpdateAccessForGroup":
@@ -201,6 +203,8 @@ export const useFeedTranslation = (
       return t("InfoPanel:RoomArchived");
     case "RoomUnarchived":
       return t("InfoPanel:RoomUnarchived");
+    case "RoomIndexExportSaved":
+      return t("InfoPanel:RoomIndexExportSaved");
     case "FormSubmit":
       return t("InfoPanel:FilledOutForm");
     case "FormOpenedForFilling":

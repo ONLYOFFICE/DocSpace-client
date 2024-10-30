@@ -671,7 +671,7 @@ export const useContactsFilter = ({
         if (isPeople) filterOptions.push(...groupItems);
         filterOptions.push(...statusItems);
         if (!isGuests) filterOptions.push(...typeItems);
-        if (!standalone) filterOptions.push(...accountItems);
+        if (!standalone && !isGuests) filterOptions.push(...accountItems);
         filterOptions.push(...accountLoginTypeItems);
         if (showStorageInfo && isDefaultRoomsQuotaSet && !isGuests)
           filterOptions.push(...quotaFilter);

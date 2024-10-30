@@ -132,6 +132,7 @@ const StyledTableRow = styled(TableRow)`
               ? `${props.theme.filesSection.tableView.row.indexActive} !important`
               : `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
         }
+
         .table-container_file-name-cell,
         .table-container_index-cell {
           margin-inline-start: -24px;
@@ -155,6 +156,12 @@ const StyledTableRow = styled(TableRow)`
             ? `${props.theme.filesSection.tableView.row.indexUpdate} !important`
             : `${props.theme.filesSection.tableView.row.backgroundActive} !important`};
       }
+
+      &:hover .table-container_cell {
+        background: ${(props) =>
+          `${props.theme.filesSection.tableView.row.indexActive} !important`};
+      }
+
       .table-container_file-name-cell,
       .table-container_index-cell {
         ${(props) =>

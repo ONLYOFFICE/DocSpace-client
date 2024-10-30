@@ -41,6 +41,8 @@ import * as useClickOutside from "./useClickOutside";
 import { trimSeparator } from "./trimSeparator";
 import getCorrectDate from "./getCorrectDate";
 import { handleAnyClick } from "./event";
+import { getTextColor } from "./getTextColor";
+
 import DomHelpers from "./domHelpers";
 import ObjectUtils from "./objectUtils";
 import {
@@ -132,6 +134,7 @@ export {
   isMobileDevice,
   onEdgeScrolling,
   clearEdgeScrollingTimer,
+  getTextColor,
 };
 
 export const getModalType = () => {

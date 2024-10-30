@@ -23,15 +23,21 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import hexRgb from "hex-rgb";
+import { globalColors } from "../themes";
 
-export const showPreviewThreshold = 720;
+export const getTextColor = (color, brightnessDiff = 128) => {
+  const black = globalColors.black;
+  const white = globalColors.white;
 
-export const dataDimensions = [
-  { key: "percent", label: "%", default: true },
-  { key: "pixel", label: "px" },
-];
+  const rgba = hexRgb(color);
 
-export const defaultWidthDimension = dataDimensions[0];
-export const defaultHeightDimension = dataDimensions[0];
-export const defaultWidth = "100";
-export const defaultHeight = "100";
+  const r = rgba.red;
+  const g = rgba.green;
+  const b = rgba.blue;
+
+  const textColor =
+    (r * 299 + g * 587 + b * 114) / 1000 > brightnessDiff ? black : white;
+
+  return textColor;
+};

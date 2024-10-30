@@ -189,16 +189,7 @@ const TableView = ({
         fetchMoreFiles={() => {}}
       >
         {sessionsData.map((item) => (
-          <SessionsTableRow
-            t={t}
-            key={item.id}
-            userId={item.id}
-            item={item}
-            hideColumns={hideColumns}
-            displayName={item.displayName}
-            status={item.status}
-            connections={item.connections}
-          />
+          <SessionsTableRow t={t} key={item.userId} item={item} />
         ))}
       </TableBody>
     </StyledTableContainer>

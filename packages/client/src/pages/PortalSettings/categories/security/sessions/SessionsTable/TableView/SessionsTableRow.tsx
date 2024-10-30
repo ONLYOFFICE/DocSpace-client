@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useEffect, useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { Base } from "@docspace/shared/themes";
 import styled, { css } from "styled-components";
@@ -39,6 +39,8 @@ import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 
 import { SessionsTableRowProps } from "../../SecuritySessions.types";
+import { decode } from "he";
+import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
 
 const Wrapper = styled.div`
   display: contents;
@@ -171,17 +173,10 @@ const SessionsTableRow = (props: SessionsTableRowProps) => {
   const {
     t,
     item,
-    element,
     onContentRowSelect,
     onContentRowClick,
     onUserContextClick,
-    isActive,
-    checkedProps,
-    displayName,
     hideColumns,
-    status,
-    userId,
-    connections,
     isMe,
     locale,
     setLogoutAllDialogVisible,
@@ -194,10 +189,13 @@ const SessionsTableRow = (props: SessionsTableRowProps) => {
     setFromDateAgo,
   } = props;
 
-  const { platform, browser, ip, city, country, date } = connections[0] ?? {};
+  // const { platform, browser, ip, city, country, date } = connections[0] ?? {};
+  const { userId, displayName, avatar, session } = item;
+  const { platform, browser, ip, city, country, date, status } = session;
 
   const fromDateAgo = getFromDateAgo(userId);
-  const isChecked = checkedProps?.checked;
+  const isChecked = false;
+  const isActive = false;
   const isOnline = status === "online";
 
   useEffect(() => {
@@ -297,7 +295,14 @@ const SessionsTableRow = (props: SessionsTableRowProps) => {
             checked={isChecked}
             hasAccess
           >
-            <div className="table-container_element">{element}</div>
+            <div className="table-container_element">
+              <Avatar
+                size={AvatarSize.min}
+                // role={role}
+                userName={displayName}
+                source={avatar}
+              />
+            </div>
             <Checkbox
               className="table-container_row-checkbox"
               isChecked={isChecked}
@@ -305,7 +310,7 @@ const SessionsTableRow = (props: SessionsTableRowProps) => {
             />
           </TableCell>
           <Text className="table-cell_username" fontWeight="600">
-            {displayName}
+            {decode(displayName)}
           </Text>
         </TableCell>
 

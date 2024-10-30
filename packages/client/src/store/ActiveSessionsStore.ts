@@ -29,11 +29,14 @@ import moment from "moment-timezone";
 
 import { toastr } from "@docspace/shared/components/toast";
 import { EmployeeStatus } from "@docspace/shared/enums";
+import SocketHelper from "@docspace/shared/utils/socket";
 
 import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
 
 class ActiveSessionsStore {
+  usersWithLastSession = [];
+
   sessionsData = []; // Sessions inited in fetchData.
 
   dataFromSocket = []; // Sessions from socket (all sessions, include closed sessions or from deleted users)
@@ -71,6 +74,20 @@ class ActiveSessionsStore {
   get isSeveralSelection() {
     return this.selection.length > 1;
   }
+
+  fetchUsersWithLastSession = () => {
+    return new Promise((resolve) => {
+      SocketHelper.emit("getSessionsInPortal");
+      SocketHelper.on("sessions-in-portal", (data) => {
+        this.setUsersWithLastSession(data);
+        resolve();
+      });
+    });
+  };
+
+  setUsersWithLastSession = (usersWithLastSession) => {
+    this.usersWithLastSession = usersWithLastSession;
+  };
 
   setSelection = (selection) => {
     this.selection = selection;

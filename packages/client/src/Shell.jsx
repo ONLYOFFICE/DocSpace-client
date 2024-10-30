@@ -160,13 +160,13 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
   useEffect(() => {
     SocketHelper.emit("subscribeToPortal");
 
-    SocketHelper.emit("getSessionsInPortal");
+    // SocketHelper.emit("getSessionsInPortal");
 
-    SocketHelper.on("statuses-in-portal", (data) => {
-      const newData = moveToLastSession(data);
-
-      setDataFromSocket(newData);
-    });
+    // SocketHelper.on("statuses-in-portal", (data) => {
+    //   const newData = moveToLastSession(data);
+    //
+    //   setDataFromSocket(newData);
+    // });
 
     SocketHelper.on("enter-in-portal", (data) => {
       const [newData] = moveToLastSession([data]);

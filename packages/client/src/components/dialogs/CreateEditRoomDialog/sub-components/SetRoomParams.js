@@ -400,6 +400,17 @@ const SetRoomParams = ({
           forceHideDropdown={forceHideRoomTypeDropdown}
         />
       )}
+      {isEdit && (
+        <PermanentSettings
+          t={t}
+          title={roomParams.title}
+          isThirdparty={roomParams.isThirdparty}
+          storageLocation={roomParams.storageLocation}
+          isPrivate={roomParams.isPrivate}
+          isDisabled={isDisabled}
+        />
+      )}
+
       <div className="logo-name-container">
         {element}
         <InputParam
@@ -431,16 +442,6 @@ const SetRoomParams = ({
         onFocus={() => setForceHideRoomTypeDropdown(true)}
         onBlur={() => setForceHideRoomTypeDropdown(false)}
       />
-      {isEdit && (
-        <PermanentSettings
-          t={t}
-          title={roomParams.title}
-          isThirdparty={roomParams.isThirdparty}
-          storageLocation={roomParams.storageLocation}
-          isPrivate={roomParams.isPrivate}
-          isDisabled={isDisabled}
-        />
-      )}
 
       {/* //TODO: Uncomment when private rooms are done
       {!isEdit && (

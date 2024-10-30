@@ -23,122 +23,77 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-
-import styled from "styled-components";
-
-import { HelpButton } from "@docspace/shared/components/help-button";
+import { inject, observer } from "mobx-react";
+import { useTranslation } from "react-i18next";
 import { Text } from "@docspace/shared/components/text";
-import { mobile } from "@docspace/shared/utils";
+import { HelpButton } from "@docspace/shared/components/help-button";
+import { Box } from "@docspace/shared/components/box";
+import { StyledUsersInfoWrapper } from "../StyledDataImport";
 import { UsersInfoBlockProps } from "../types";
 
-const Wrapper = styled.div`
-  margin: 16px 0;
-
-  .license-limit-warning {
-    font-size: 12px;
-    font-weight: 600;
-    margin-bottom: 16px;
-    color: ${(props) => props.theme.client.settings.migration.errorTextColor};
-  }
-`;
-
-const UsersInfoWrapper = styled.div<{
-  selectedUsers: number;
-  totalLicenceLimit: number;
-}>`
-  display: flex;
-  align-items: center;
-  width: fit-content;
-  min-width: 660px;
-  background: ${(props) =>
-    props.theme.client.settings.migration.infoBlockBackground};
-  box-sizing: border-box;
-  padding: 12px 16px;
-  border-radius: 6px;
-  margin: 16px 0;
-
-  @media (max-width: 1140px) {
-    width: 100%;
-  }
-
-  @media ${mobile} {
-    flex-wrap: wrap;
-    min-width: auto;
-    gap: 12px;
-  }
-
-  .selected-users-count {
-    margin-inline-end: 24px;
-    color: ${(props) =>
-      props.theme.client.settings.migration.infoBlockTextColor};
-    font-weight: 700;
-    font-size: 14px;
-  }
-
-  .selected-admins-count {
-    margin-inline-end: 8px;
-    color: ${(props) =>
-      props.theme.client.settings.migration.infoBlockTextColor};
-    font-weight: 700;
-    font-size: 14px;
-
-    span {
-      font-weight: 700;
-      font-size: 14px;
-      margin-inline-start: 4px;
-      color: ${(props) =>
-        props.selectedUsers > props.totalLicenceLimit
-          ? props.theme.client.settings.migration.errorTextColor
-          : props.theme.client.settings.migration.infoBlockTextColor};
-    }
-  }
-`;
-
-const UsersInfoBlock = ({
-  t,
-  selectedUsers,
-  totalUsers,
+const UsersInfo = ({
+  quota,
   totalUsedUsers,
-  totalLicenceLimit,
+  numberOfSelectedUsers,
+  totalUsers,
 }: UsersInfoBlockProps) => {
-  return (
-    <Wrapper>
-      {totalUsedUsers > totalLicenceLimit && (
-        <Text className="license-limit-warning">
-          {t("Settings:UserLimitExceeded", {
-            productName: t("Common:ProductName"),
-          })}
-        </Text>
-      )}
+  const { t } = useTranslation(["Settings"]);
 
-      <UsersInfoWrapper
+  return (
+    quota.max && (
+      <StyledUsersInfoWrapper
         selectedUsers={totalUsedUsers}
-        totalLicenceLimit={totalLicenceLimit}
+        totalLicenceLimit={quota.max}
       >
-        <Text className="selected-users-count" truncate>
-          {t("Settings:SelectedUsersCounter", { selectedUsers, totalUsers })}
-        </Text>
-        <Text as="div" className="selected-admins-count" truncate>
-          {t("Settings:LicenseLimitCounter")}
-          <Text as="span">
-            {totalUsedUsers}/{totalLicenceLimit}
+        {totalUsedUsers > quota.max && (
+          <Text className="license-limit-warning">
+            {t("Settings:UserLimitExceeded", {
+              productName: t("Common:ProductName"),
+            })}
           </Text>
-        </Text>
-        <HelpButton
-          place="right"
-          offsetRight={0}
-          tooltipContent={
-            <Text fontSize="12px">
-              {t("Settings:LicenseLimitDescription", {
-                productName: t("Common:ProductName"),
-                maxLimit: totalLicenceLimit,
-              })}
+        )}
+
+        <Box className="users-info-wrapper">
+          <Text className="selected-users-count" truncate>
+            {t("Settings:SelectedUsersCounter", {
+              selectedUsers: numberOfSelectedUsers,
+              totalUsers,
+            })}
+          </Text>
+          <Text as="div" className="selected-admins-count" truncate>
+            {t("Settings:LicenseLimitCounter")}
+            <Text as="span">
+              {totalUsedUsers}/{quota.max}
             </Text>
-          }
-        />
-      </UsersInfoWrapper>
-    </Wrapper>
+          </Text>
+          <HelpButton
+            place="right"
+            offsetRight={0}
+            tooltipContent={
+              <Text fontSize="12px">
+                {t("Settings:LicenseLimitDescription", {
+                  productName: t("Common:ProductName"),
+                  maxLimit: quota.max,
+                })}
+              </Text>
+            }
+          />
+        </Box>
+      </StyledUsersInfoWrapper>
+    )
   );
 };
 
-export default UsersInfoBlock;
+const UsersInfoBlock = inject<TStore>(({ importAccountsStore }) => {
+  const { quota, totalUsedUsers, numberOfSelectedUsers, totalUsers } =
+    importAccountsStore;
+
+  return {
+    quota,
+    totalUsedUsers,
+    numberOfSelectedUsers,
+    totalUsers,
+  };
+})(observer(UsersInfo));
+
+export default () => <UsersInfoBlock />;

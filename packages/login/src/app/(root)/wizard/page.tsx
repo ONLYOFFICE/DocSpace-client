@@ -47,6 +47,8 @@ async function Page() {
 
   const objectSettings = typeof settings === "string" ? undefined : settings;
 
+  console.log("wizzard token", objectSettings?.wizardToken);
+
   if (!objectSettings || !objectSettings.wizardToken) {
     redirect("/");
   }

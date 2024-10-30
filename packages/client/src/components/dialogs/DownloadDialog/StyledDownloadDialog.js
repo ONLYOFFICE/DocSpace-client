@@ -115,6 +115,12 @@ const StyledDownloadContent = styled.div`
           padding-inline-end: 0;
           text-underline-offset: 1px;
         }
+
+        .expander {
+          svg {
+            padding-bottom: 2px;
+          }
+        }
       }
       .download-dialog-other-text {
         text-align: end;

@@ -37,6 +37,27 @@ import {
   TGroup,
 } from "./types";
 
+const decodeGroup = (group: TGroup) => {
+  const newGroup = { ...group };
+  if (newGroup.manager)
+    newGroup.manager = {
+      ...newGroup.manager,
+      displayName: Encoder.htmlDecode(newGroup.manager?.displayName ?? ""),
+    };
+
+  if (newGroup.members)
+    newGroup.members = newGroup.members.map((m) => ({
+      ...m,
+      displayName: Encoder.htmlDecode(m.displayName),
+    }));
+
+  return newGroup;
+};
+
+const decodeGroups = (groups: TGroup[]) => {
+  return groups.map((group) => decodeGroup(group));
+};
+
 // * Create
 
 export const createGroup = async (
@@ -54,19 +75,7 @@ export const createGroup = async (
     },
   })) as TGroup;
 
-  if (res.manager)
-    res.manager = {
-      ...res.manager,
-      displayName: Encoder.htmlDecode(res.manager?.displayName ?? ""),
-    };
-
-  if (res.members)
-    res.members = res.members.map((m) => ({
-      ...m,
-      displayName: Encoder.htmlDecode(m.displayName),
-    }));
-
-  return res;
+  return decodeGroup(res);
 };
 
 // * Read
@@ -85,22 +94,7 @@ export const getGroups = async (filter = Filter.getDefault()) => {
     url: `/group${params}`,
   })) as TGetGroupList;
 
-  res.items = res.items.map((group) => {
-    const newGroup = { ...group };
-    if (newGroup.manager)
-      newGroup.manager = {
-        ...newGroup.manager,
-        displayName: Encoder.htmlDecode(newGroup.manager?.displayName ?? ""),
-      };
-
-    if (newGroup.members)
-      newGroup.members = newGroup.members.map((m) => ({
-        ...m,
-        displayName: Encoder.htmlDecode(m.displayName),
-      }));
-
-    return newGroup;
-  });
+  res.items = decodeGroups(res.items);
 
   return res;
 };
@@ -142,22 +136,7 @@ export const getGroupsByName = async (
     data: { groupName },
   })) as { items: TGroup[]; total: number };
 
-  res.items = res.items.map((group) => {
-    const newGroup = { ...group };
-    if (newGroup.manager)
-      newGroup.manager = {
-        ...newGroup.manager,
-        displayName: Encoder.htmlDecode(newGroup.manager?.displayName ?? ""),
-      };
-
-    if (newGroup.members)
-      newGroup.members = newGroup.members.map((m) => ({
-        ...m,
-        displayName: Encoder.htmlDecode(m.displayName),
-      }));
-
-    return newGroup;
-  });
+  res.items = decodeGroups(res.items);
 
   return res;
 };
@@ -193,18 +172,20 @@ export const getGroupMembersInRoom = async (
 
 // * Update
 
-export const updateGroup = (
+export const updateGroup = async (
   groupId: string,
   groupName: string,
   groupManager: string | undefined,
   membersToAdd: string[],
   membersToRemove: string[],
 ) => {
-  return request({
+  const res = (await request({
     method: "put",
     url: `/group/${groupId}`,
     data: { groupName, groupManager, membersToAdd, membersToRemove },
-  }) as Promise<TGroup>;
+  })) as TGroup;
+
+  return decodeGroup(res);
 };
 
 export const addGroupMembers = (groupId: string, members: string) => {

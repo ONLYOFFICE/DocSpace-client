@@ -70,6 +70,9 @@ export const createRequest = (
 
   if (baseURL && process.env.API_HOST?.trim()) hdrs.set("origin", baseURL);
 
+  console.log("origin", baseURL);
+  console.log("apiUrl", apiURL);
+
   // hdrs.set("x-docspace-address", baseURL);
 
   const authToken = cookieStore.get("asc_auth_key")?.value;

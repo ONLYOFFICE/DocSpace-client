@@ -23,15 +23,21 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
+import hexRgb from "hex-rgb";
+import { globalColors } from "../themes";
 
-import React from "react";
+export const getTextColor = (color, brightnessDiff = 128) => {
+  const black = globalColors.black;
+  const white = globalColors.white;
 
-export interface PublicRoomBarProps {
-  headerText: string | React.ReactNode;
-  bodyText: string | React.ReactNode;
-  iconName?: string;
-  onClose?: () => void;
-  className?: string;
-  style?: React.CSSProperties;
-  barIsVisible?: boolean;
-}
+  const rgba = hexRgb(color);
+
+  const r = rgba.red;
+  const g = rgba.green;
+  const b = rgba.blue;
+
+  const textColor =
+    (r * 299 + g * 587 + b * 114) / 1000 > brightnessDiff ? black : white;
+
+  return textColor;
+};

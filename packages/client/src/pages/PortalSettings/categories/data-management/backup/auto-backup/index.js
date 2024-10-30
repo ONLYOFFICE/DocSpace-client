@@ -436,6 +436,7 @@ class AutomaticBackup extends React.PureComponent {
       isEnableAuto,
       automaticBackupUrl,
       currentColorScheme,
+      isBackupProgressVisible,
     } = this.props;
 
     const {
@@ -444,11 +445,6 @@ class AutomaticBackup extends React.PureComponent {
       isError,
       isEmptyContentBeforeLoader,
     } = this.state;
-
-    // const isDisabledThirdPartyList =
-    //   isCheckedThirdParty || isDocSpace
-    //     ? false
-    //     : commonThirdPartyList?.length === 0;
 
     const commonProps = {
       isLoadingData,
@@ -606,7 +602,7 @@ class AutomaticBackup extends React.PureComponent {
           onCancelModuleSettings={this.onCancelModuleSettings}
         />
 
-        {downloadingProgress > 0 && downloadingProgress !== 100 && (
+        {isBackupProgressVisible && (
           <FloatingButton
             className="layout-progress-bar"
             icon="file"
@@ -666,6 +662,7 @@ export default inject(
       setConnectedThirdPartyAccount,
       setStorageRegions,
       defaultFolderId,
+      isBackupProgressVisible,
     } = backup;
 
     const { updateBaseFolderPath, resetNewFolderPath } = filesSelectorInput;
@@ -730,6 +727,7 @@ export default inject(
 
       automaticBackupUrl,
       currentColorScheme,
+      isBackupProgressVisible,
     };
   },
 )(withTranslation(["Settings", "Common"])(observer(AutomaticBackup)));

@@ -312,7 +312,7 @@ const createEditRoomStore = new CreateEditRoomStore(
 );
 
 const webhooksStore = new WebhooksStore(settingsStore);
-const importAccountsStore = new ImportAccountsStore();
+const importAccountsStore = new ImportAccountsStore(currentQuotaStore);
 const storageManagement = new StorageManagement(
   filesStore,
   peopleStore,

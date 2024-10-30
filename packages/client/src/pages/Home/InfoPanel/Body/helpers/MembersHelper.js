@@ -45,7 +45,7 @@ class MembersHelper {
       },
       roomAdmin: {
         key: "roomAdmin",
-        label: this.t("Common:RoomAdmin"),
+        label: this.t("Common:RoomManager"),
         access: ShareAccessRights.RoomManager,
         type: "manager",
       },

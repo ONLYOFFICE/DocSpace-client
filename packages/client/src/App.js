@@ -43,6 +43,15 @@ import "@docspace/shared/styles/custom.scss";
 import router from "./router";
 
 const App = () => {
+  React.useEffect(() => {
+    const regex = /(\/){2,}/g;
+    const replaceRegex = /(\/)+/g;
+    const pathname = window.location.pathname;
+
+    if (regex.test(pathname))
+      window.location.replace(pathname.replace(replaceRegex, "$1"));
+  }, []);
+
   return (
     <MobxProvider {...store}>
       <I18nextProvider i18n={i18n}>

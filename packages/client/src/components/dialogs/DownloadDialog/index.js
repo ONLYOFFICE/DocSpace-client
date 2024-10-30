@@ -238,6 +238,42 @@ class DownloadDialogComponent extends React.Component {
     }
   };
 
+  /**
+   * @returns {number}
+   */
+  getCheckedFileLength = () => {
+    const documents = this.state.documents.files;
+    const spreadsheets = this.state.spreadsheets.files;
+    const presentations = this.state.presentations.files;
+    const masterForms = this.state.masterForms.files;
+    const other = this.state.other.files;
+
+    return (
+      documents.filter((f) => f.checked).length +
+      spreadsheets.filter((f) => f.checked).length +
+      presentations.filter((f) => f.checked).length +
+      masterForms.filter((f) => f.checked).length +
+      other.filter((f) => f.checked).length
+    );
+  };
+
+  /**
+   * @param {KeyboardEvent} event
+   */
+  handleKeyUp = (event) => {
+    if (event.key === "Enter" && this.getCheckedFileLength() > 0) {
+      this.onDownload();
+    }
+  };
+
+  componentDidMount = () => {
+    document.addEventListener("keyup", this.handleKeyUp);
+  };
+
+  componentWillUnmount = () => {
+    document.removeEventListener("keyup", this.handleKeyUp);
+  };
+
   render() {
     const { t, tReady, visible, extsConvertible, theme } = this.props;
 
@@ -275,12 +311,7 @@ class DownloadDialogComponent extends React.Component {
       isIndeterminate: indeterminateOtherTitle,
     } = this.state.other;
 
-    const isCheckedLength =
-      documents.filter((f) => f.checked).length +
-      spreadsheets.filter((f) => f.checked).length +
-      presentations.filter((f) => f.checked).length +
-      masterForms.filter((f) => f.checked).length +
-      other.filter((f) => f.checked).length;
+    const isCheckedLength = this.getCheckedFileLength();
 
     const isSingleFile = isCheckedLength <= 1;
 

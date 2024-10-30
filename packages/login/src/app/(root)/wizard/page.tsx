@@ -42,6 +42,7 @@ import WizardForm from "./page.client";
 import WizardGreeting from "@/components/WizardGreeting/index.client";
 
 async function Page() {
+  console.log("start wizzard requests");
   const settings = await getSettings();
 
   const objectSettings = typeof settings === "string" ? undefined : settings;

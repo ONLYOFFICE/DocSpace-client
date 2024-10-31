@@ -39,7 +39,7 @@ class ActiveSessionsStore {
 
   userSessions = [];
 
-  currentUserId = null;
+  currentUser = null;
 
   sessionsData = []; // Sessions inited in fetchData.
 
@@ -91,9 +91,9 @@ class ActiveSessionsStore {
 
   fetchUserSessions = () => {
     return new Promise((resolve) => {
-      SocketHelper.emit("getSessions", { id: this.currentUserId });
+      SocketHelper.emit("getSessions", { id: this.currentUser.userId });
       SocketHelper.on("user-sessions", (data) => {
-        console.log({ data });
+        this.setUserSessions(data);
         resolve();
       });
     });
@@ -107,13 +107,19 @@ class ActiveSessionsStore {
     this.usersWithLastSession = usersWithLastSession;
   };
 
-  setCurrentUserId = (id: string) => {
-    this.currentUserId = id;
+  setUserSessions = (userSessions) => {
+    this.userSessions = userSessions;
+  };
+
+  setCurrentUser = (user) => {
+    this.currentUser = user;
   };
 
   setSelection = (selection) => {
     this.selection = selection;
   };
+
+  //////////////////////////////////////////////////////////////////////////////
 
   setBufferSelection = (bufferSelection) => {
     this.bufferSelection = bufferSelection;

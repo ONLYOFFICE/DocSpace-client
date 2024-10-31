@@ -52,7 +52,7 @@ const StyledScrollbar = styled(Scrollbar)`
 `;
 
 export const UserSessionsPanel = (props: UserSessionsPanelProps) => {
-  const { visible, setVisible, fetchUserSessions } = props;
+  const { visible, setVisible, userSessions, fetchUserSessions } = props;
   const { t } = useTranslation(["Settings", "Profile", "Common"]);
   const scrollRef = useRef(null);
 
@@ -87,11 +87,12 @@ export const SessionsPanel = inject<TStore>(
   ({ dialogsStore, activeSessionsStore }) => {
     const { userSessionsPanelVisible, setUserSessionPanelVisible } =
       dialogsStore;
-    const { fetchUserSessions } = activeSessionsStore;
+    const { userSessions, fetchUserSessions } = activeSessionsStore;
 
     return {
       visible: userSessionsPanelVisible,
       setVisible: setUserSessionPanelVisible,
+      userSessions,
       fetchUserSessions,
     };
   },

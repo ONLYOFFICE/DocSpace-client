@@ -44,6 +44,7 @@ import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 import { IAllSessions } from "SRC_DIR/pages/PortalSettings/categories/security/sessions/SecuritySessions.types";
 
 import { LastSessionBlockProps } from "./UserSessionsPanel.types";
+import { decode } from "he";
 
 const StyledUserInfoBlock = styled.div`
   display: flex;
@@ -141,40 +142,46 @@ const LastSessionBlock = (props: LastSessionBlockProps) => {
     setDisableDialogVisible = () => {},
     setLogoutAllDialogVisible = () => {},
     getFromDateAgo = () => {},
+    currentUser,
+    userSessions,
   } = props;
 
-  const {
-    id,
-    avatar,
-    displayName,
-    isAdmin,
-    isOwner,
-    isRoomAdmin,
-    isCollaborator,
-    connections,
-    sessions,
-  } = items;
+  // const {
+  //   id,
+  //   avatar,
+  //   isAdmin,
+  //   isOwner,
+  //   isRoomAdmin,
+  //   isCollaborator,
+  //   connections,
+  //   sessions,
+  // } = items;
 
-  const fromDateAgo = getFromDateAgo(id);
+  const { userId, displayName, avatar } = currentUser;
+
+  const fromDateAgo = getFromDateAgo(userId);
 
   const isOnline = fromDateAgo === "online";
+  // const { platform, browser, ip, city, country } =
+  //   (connections[0] || sessions[0]) ?? {};
+
   const { platform, browser, ip, city, country } =
-    (connections[0] || sessions[0]) ?? {};
+    userSessions[0] || currentUser.session;
 
-  const getUserType = (): string => {
-    if (isOwner) return t("Common:Owner");
-    if (isAdmin)
-      return t("Common:PortalAdmin", { productName: t("Common:ProductName") });
-    if (isRoomAdmin) return t("Common:RoomAdmin");
-    if (isCollaborator) return t("Common:PowerUser");
-    return t("Common:User");
-  };
+  // const getUserType = (): string => {
+  //   if (isOwner) return t("Common:Owner");
+  //   if (isAdmin)
+  //     return t("Common:PortalAdmin", { productName: t("Common:ProductName") });
+  //   if (isRoomAdmin) return t("Common:RoomAdmin");
+  //   if (isCollaborator) return t("Common:PowerUser");
+  //   return t("Common:User");
+  // };
 
-  const role = isOwner
-    ? AvatarRole.owner
-    : isAdmin
-      ? AvatarRole.admin
-      : AvatarRole.none;
+  // const role = isOwner
+  //   ? AvatarRole.owner
+  //   : isAdmin
+  //     ? AvatarRole.admin
+  //     : AvatarRole.none;
 
   const onClickLogout = () => {
     setLogoutAllDialogVisible(true);
@@ -214,14 +221,14 @@ const LastSessionBlock = (props: LastSessionBlockProps) => {
         <Box displayProp="flex" alignItems="center" justifyContent="center">
           <Avatar
             className="avatar"
-            role={role}
+            // role={role}
             size={AvatarSize.big}
             userName={displayName}
             source={avatar}
           />
           <Box displayProp="flex" flexDirection="column">
-            <Text className="username">{displayName}</Text>
-            <span>{getUserType()}</span>
+            <Text className="username">{decode(displayName)}</Text>
+            {/*<span>{getUserType()}</span>*/}
           </Box>
         </Box>
 
@@ -275,8 +282,14 @@ const LastSessionBlock = (props: LastSessionBlockProps) => {
 export default inject<TStore>(({ setup, activeSessionsStore }) => {
   const { setDisableDialogVisible, setLogoutAllDialogVisible } = setup;
 
-  const { getItems, isMe, getFromDateAgo, setDisplayName } =
-    activeSessionsStore;
+  const {
+    getItems,
+    isMe,
+    getFromDateAgo,
+    setDisplayName,
+    currentUser,
+    userSessions,
+  } = activeSessionsStore;
 
   return {
     isMe,
@@ -285,5 +298,7 @@ export default inject<TStore>(({ setup, activeSessionsStore }) => {
     setDisplayName,
     setDisableDialogVisible,
     setLogoutAllDialogVisible,
+    currentUser,
+    userSessions,
   };
 })(observer(LastSessionBlock));

@@ -187,7 +187,7 @@ const SessionsTableRow = (props: SessionsTableRowProps) => {
     convertDate,
     getFromDateAgo,
     setFromDateAgo,
-    setCurrentUserId,
+    setCurrentUser,
   } = props;
 
   // const { platform, browser, ip, city, country, date } = connections[0] ?? {};
@@ -219,7 +219,7 @@ const SessionsTableRow = (props: SessionsTableRowProps) => {
   }, [t, date, status, locale, userId, isOnline, convertDate, setFromDateAgo]);
 
   const onClickSessions = () => {
-    setCurrentUserId(userId);
+    setCurrentUser(item);
     setItems(item);
     setUserSessionPanelVisible(true);
   };
@@ -364,7 +364,7 @@ export default inject<TStore>(
       convertDate,
       getFromDateAgo,
       setFromDateAgo,
-      setCurrentUserId,
+      setCurrentUser,
     } = activeSessionsStore;
 
     return {
@@ -378,7 +378,7 @@ export default inject<TStore>(
       convertDate,
       getFromDateAgo,
       setFromDateAgo,
-      setCurrentUserId,
+      setCurrentUser,
     };
   },
 )(withContent(observer(SessionsTableRow)));

@@ -30,16 +30,21 @@ import moment from "moment-timezone";
 import { toastr } from "@docspace/shared/components/toast";
 import { EmployeeStatus } from "@docspace/shared/enums";
 import SocketHelper from "@docspace/shared/utils/socket";
+import {
+  TLastPortalSession,
+  TSession,
+} from "@docspace/shared/types/ActiveSessions";
+import { Nullable } from "@docspace/shared/types";
 
 import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
 
 class ActiveSessionsStore {
-  usersWithLastSession = [];
+  lastPortalSessions: TLastPortalSession[] = [];
 
-  userSessions = [];
+  userSessions: TSession[] = [];
 
-  currentUser = null;
+  currentPortalSession: Nullable<TLastPortalSession> = null;
 
   sessionsData = []; // Sessions inited in fetchData.
 
@@ -75,15 +80,11 @@ class ActiveSessionsStore {
     makeAutoObservable(this);
   }
 
-  get isSeveralSelection() {
-    return this.selection.length > 1;
-  }
-
-  fetchUsersWithLastSession = () => {
+  fetchLastPortalSessions = () => {
     return new Promise((resolve) => {
       SocketHelper.emit("getSessionsInPortal");
-      SocketHelper.on("sessions-in-portal", (data) => {
-        this.setUsersWithLastSession(data);
+      SocketHelper.on("sessions-in-portal", (data: TLastPortalSession[]) => {
+        this.setLastPortalSessions(data);
         resolve();
       });
     });
@@ -91,7 +92,11 @@ class ActiveSessionsStore {
 
   fetchUserSessions = () => {
     return new Promise((resolve) => {
-      SocketHelper.emit("getSessions", { id: this.currentUser.userId });
+      if (!this.currentPortalSession) return;
+
+      SocketHelper.emit("getSessions", {
+        id: this.currentPortalSession.userId,
+      });
       SocketHelper.on("user-sessions", (data) => {
         this.setUserSessions(data);
         resolve();
@@ -103,23 +108,27 @@ class ActiveSessionsStore {
     // update sessions
   };
 
-  setUsersWithLastSession = (usersWithLastSession) => {
-    this.usersWithLastSession = usersWithLastSession;
+  setLastPortalSessions = (lastPortalSessions: TLastPortalSession[]) => {
+    this.lastPortalSessions = lastPortalSessions;
   };
 
-  setUserSessions = (userSessions) => {
+  setUserSessions = (userSessions: TSession[]) => {
     this.userSessions = userSessions;
   };
 
-  setCurrentUser = (user) => {
-    this.currentUser = user;
+  setCurrentPortalSession = (portalSession: TLastPortalSession) => {
+    this.currentPortalSession = portalSession;
   };
+
+  //////////////////////////////////////////////////////////////////////////////
+
+  get isSeveralSelection() {
+    return this.selection.length > 1;
+  }
 
   setSelection = (selection) => {
     this.selection = selection;
   };
-
-  //////////////////////////////////////////////////////////////////////////////
 
   setBufferSelection = (bufferSelection) => {
     this.bufferSelection = bufferSelection;

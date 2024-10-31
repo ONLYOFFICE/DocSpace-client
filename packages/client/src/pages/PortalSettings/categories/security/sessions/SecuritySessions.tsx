@@ -125,8 +125,8 @@ const Sessions = ({
   setUserSessionPanelVisible,
   isSeveralSelection,
   isSessionsLoaded,
-  usersWithLastSession,
-  fetchUsersWithLastSession,
+  lastPortalSessions,
+  fetchLastPortalSessions,
 }: SessionsProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Settings",
@@ -137,13 +137,13 @@ const Sessions = ({
 
   useEffect(() => {
     // SocketHelper.emit("getSessionsInPortal");
-    fetchUsersWithLastSession();
+    fetchLastPortalSessions();
 
     fetchData();
     return () => {
       clearSelection();
     };
-  }, [fetchUsersWithLastSession, fetchData, clearSelection]);
+  }, [fetchLastPortalSessions, fetchData, clearSelection]);
 
   useViewEffect({
     view: viewAs,
@@ -158,17 +158,13 @@ const Sessions = ({
       ? [bufferSelection.id, ...selectionUserId]
       : [...selectionUserId];
 
-  if (!usersWithLastSession.length) return <SessionsLoader viewAs={viewAs} />;
+  if (!lastPortalSessions.length) return <SessionsLoader viewAs={viewAs} />;
 
   return (
     <MainContainer>
       <Text className="subtitle">{t("SessionsSubtitle")}</Text>
 
-      <SessionsTable
-        t={t}
-        sessionsData={usersWithLastSession}
-        sectionWidth={0}
-      />
+      <SessionsTable t={t} sessionsData={lastPortalSessions} sectionWidth={0} />
 
       <DownLoadWrapper>
         <Button
@@ -256,8 +252,8 @@ export const SecuritySessions = inject<TStore>(
       onClickLogoutAllExceptThis,
       onClickRemoveSession,
       isSessionsLoaded,
-      usersWithLastSession,
-      fetchUsersWithLastSession,
+      lastPortalSessions,
+      fetchLastPortalSessions,
     } = activeSessionsStore;
 
     const {
@@ -301,8 +297,8 @@ export const SecuritySessions = inject<TStore>(
       setUserSessionPanelVisible,
       isSeveralSelection,
       isSessionsLoaded,
-      usersWithLastSession,
-      fetchUsersWithLastSession,
+      lastPortalSessions,
+      fetchLastPortalSessions,
     };
   },
 )(observer(Sessions));

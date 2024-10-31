@@ -142,7 +142,7 @@ const LastSessionBlock = (props: LastSessionBlockProps) => {
     setDisableDialogVisible = () => {},
     setLogoutAllDialogVisible = () => {},
     getFromDateAgo = () => {},
-    currentUser,
+    currentPortalSession,
     userSessions,
   } = props;
 
@@ -157,7 +157,7 @@ const LastSessionBlock = (props: LastSessionBlockProps) => {
   //   sessions,
   // } = items;
 
-  const { userId, displayName, avatar } = currentUser;
+  const { userId, displayName, avatar } = currentPortalSession;
 
   const fromDateAgo = getFromDateAgo(userId);
 
@@ -166,7 +166,7 @@ const LastSessionBlock = (props: LastSessionBlockProps) => {
   //   (connections[0] || sessions[0]) ?? {};
 
   const { platform, browser, ip, city, country } =
-    userSessions[0] || currentUser.session;
+    userSessions[0] || currentPortalSession.session;
 
   // const getUserType = (): string => {
   //   if (isOwner) return t("Common:Owner");
@@ -287,7 +287,7 @@ export default inject<TStore>(({ setup, activeSessionsStore }) => {
     isMe,
     getFromDateAgo,
     setDisplayName,
-    currentUser,
+    currentPortalSession,
     userSessions,
   } = activeSessionsStore;
 
@@ -298,7 +298,7 @@ export default inject<TStore>(({ setup, activeSessionsStore }) => {
     setDisplayName,
     setDisableDialogVisible,
     setLogoutAllDialogVisible,
-    currentUser,
+    currentPortalSession,
     userSessions,
   };
 })(observer(LastSessionBlock));

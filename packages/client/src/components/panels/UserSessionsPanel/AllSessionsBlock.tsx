@@ -73,13 +73,17 @@ const AllSessionsBlock = (props: AllSessionsBlockProps) => {
     activeSessionsMap,
     setDisplayName = () => {},
     setLogoutAllDialogVisible = () => {},
+    userSessions,
+    currentPortalSession,
   } = props;
-  const { displayName } = items;
 
-  const exceptId = items.connections[0]?.id;
-  const sessions = items.connections;
+  const { displayName } = currentPortalSession;
+  // const { displayName } = items;
+  //
+  // const exceptId = items.connections[0]?.id;
+  // const sessions = items.connections;
 
-  const filteredSessions = activeSessionsMap.get(items.userId) || [];
+  // const filteredSessions = activeSessionsMap.get(items.userId) || [];
   // .filter((session) => session.id !== exceptId)
   // .reverse();
 
@@ -93,7 +97,7 @@ const AllSessionsBlock = (props: AllSessionsBlockProps) => {
       <Wrapper>
         <Text className="subtitle">{t("Profile:AllSessions")}</Text>
         <Text className="desciption">{t("Profile:PanelDescription")}</Text>
-        {filteredSessions.length > 0 ? (
+        {userSessions.length > 0 ? (
           <Button
             label={t("Profile:LogoutFromAllSessions")}
             size={ButtonSize.small}
@@ -112,7 +116,7 @@ const AllSessionsBlock = (props: AllSessionsBlockProps) => {
         )}
       </Wrapper>
 
-      <RowWrapper t={t} sessions={filteredSessions} sectionWidth={0} />
+      <RowWrapper t={t} sessions={userSessions} sectionWidth={0} />
     </>
   );
 };
@@ -125,6 +129,8 @@ export default inject<TStore>(({ setup, activeSessionsStore }) => {
     isDisabled,
     activeSessionsMap,
     setDisplayName,
+    userSessions,
+    currentPortalSession,
   } = activeSessionsStore;
 
   const { setLogoutAllDialogVisible } = setup;
@@ -137,5 +143,7 @@ export default inject<TStore>(({ setup, activeSessionsStore }) => {
     activeSessionsMap,
     setDisplayName,
     setLogoutAllDialogVisible,
+    userSessions,
+    currentPortalSession,
   };
 })(observer(AllSessionsBlock));

@@ -48,6 +48,7 @@ import {
 
 import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
 import { parseQuota } from "SRC_DIR/pages/PortalSettings/utils/parseQuota";
+import { getUserByEmail } from "@docspace/shared/api/people";
 
 type TUsers = {
   new: TEnhancedMigrationUser[];
@@ -145,6 +146,12 @@ class ImportAccountsStore {
       (user) =>
         !this.users.existing.some(
           (existingUser) => existingUser.key === user.key,
+        ) &&
+        !this.users.withoutEmail.some(
+          (withoutEmailUser) =>
+            !!withoutEmailUser.email &&
+            withoutEmailUser.isDuplicate &&
+            withoutEmailUser.key === user.key,
         ),
     );
   }
@@ -268,12 +275,43 @@ class ImportAccountsStore {
   };
 
   changeEmail = (key: string, email: string) => {
-    this.users = {
-      ...this.users,
-      withoutEmail: this.users.withoutEmail.map((user) =>
-        user.key === key ? { ...user, email } : user,
-      ),
-    };
+    getUserByEmail(email)
+      .then((response) => {
+        console.log(`getUserByEmail(email='${email}') user found:`, {
+          response,
+        });
+
+        runInAction(() => {
+          this.users = {
+            ...this.users,
+            withoutEmail: this.users.withoutEmail.map((user) =>
+              user.key === key ? { ...user, email, isDuplicate: true } : user,
+            ),
+          };
+        });
+
+        console.log("changeEmail", {
+          users: this.users,
+          checkedUsers: this.checkedUsers,
+        });
+      })
+      .catch((error) => {
+        console.log(
+          `getUserByEmail(email='${email}') ${error.response.status !== 404 ? "search user failed" : "user not found"} :`,
+          {
+            error,
+          },
+        );
+
+        runInAction(() => {
+          this.users = {
+            ...this.users,
+            withoutEmail: this.users.withoutEmail.map((user) =>
+              user.key === key ? { ...user, email } : user,
+            ),
+          };
+        });
+      });
   };
 
   toggleAccount = (

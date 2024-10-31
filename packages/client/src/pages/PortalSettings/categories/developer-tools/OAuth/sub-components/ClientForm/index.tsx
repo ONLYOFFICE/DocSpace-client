@@ -408,6 +408,7 @@ const ClientForm = ({
               selectedScopes={form.scopes}
               onAddScope={onChangeForm}
               isEdit={isEdit}
+              requiredErrorFields={requiredErrorFields}
             />
             <SupportBlock
               t={t}

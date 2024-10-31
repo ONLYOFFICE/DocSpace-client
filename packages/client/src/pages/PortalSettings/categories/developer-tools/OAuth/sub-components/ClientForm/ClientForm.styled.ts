@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { mobile } from "@docspace/shared/utils/device";
 import { Base, globalColors } from "@docspace/shared/themes";
@@ -167,7 +167,7 @@ const StyledChipsContainer = styled.div`
   gap: 4px;
 `;
 
-const StyledScopesContainer = styled.div`
+const StyledScopesContainer = styled.div<{ isRequiredError?: boolean }>`
   width: 100%;
 
   display: grid;
@@ -184,7 +184,18 @@ const StyledScopesContainer = styled.div`
     padding-right: 24px;
     margin-right: -12px;
 
-    border-bottom: ${(props) => props.theme.oauth.clientForm.headerBorder};
+    border-bottom: ${(props) =>
+      props.isRequiredError
+        ? `1px solid ${
+            props.theme.isBase
+              ? globalColors.lightErrorStatus
+              : globalColors.darkErrorStatus
+          }`
+        : props.theme.oauth.clientForm.headerBorder};
+  }
+
+  .header-error {
+    margin-top: -8px;
   }
 
   .header-last {

@@ -66,9 +66,9 @@ class ActiveSessionsStore {
 
   isDisabled = false;
 
-  selection = [];
+  selection: TLastPortalSession[] = [];
 
-  bufferSelection = null;
+  bufferSelection: Nullable<TLastPortalSession> = null;
 
   constructor(
     public settingsSetupStore: SettingsSetupStore,
@@ -97,10 +97,13 @@ class ActiveSessionsStore {
       SocketHelper.emit("getSessions", {
         id: this.currentPortalSession.userId,
       });
-      SocketHelper.on("user-sessions", (data) => {
-        this.setUserSessions(data);
-        resolve();
-      });
+      SocketHelper.on(
+        "user-sessions",
+        (data: { id: string; sessions: TSession }) => {
+          this.setUserSessions(data.sessions);
+          resolve();
+        },
+      );
     });
   };
 
@@ -120,19 +123,77 @@ class ActiveSessionsStore {
     this.currentPortalSession = portalSession;
   };
 
+  setSelection = (selection: TLastPortalSession[]) => {
+    this.selection = selection;
+  };
+
+  setBufferSelection = (bufferSelection: Nullable<TLastPortalSession>) => {
+    this.bufferSelection = bufferSelection;
+  };
+
+  selectRow = (item: TLastPortalSession) => {
+    const isItemSelected = this.selection.some((s) => s.userId === item.userId);
+    const isSingleSelected = isItemSelected && this.selection.length === 1;
+
+    if (this.bufferSelection) {
+      this.setBufferSelection(null);
+    }
+
+    if (isSingleSelected) {
+      this.deselectSession(item);
+    } else {
+      this.clearSelection();
+      this.selectSession(item);
+    }
+  };
+
+  selectCheckbox = (isChecked: boolean, item: TLastPortalSession) => {
+    this.setBufferSelection(null);
+
+    if (isChecked) {
+      this.selectSession(item);
+    } else {
+      this.deselectSession(item);
+    }
+  };
+
+  selectSession = (session: TLastPortalSession) => {
+    this.setSelection([...this.selection, session]);
+  };
+
+  deselectSession = (session: TLastPortalSession) => {
+    if (!this.selection.length) return;
+
+    const newSelection = this.selection.filter(
+      (s) => s.userId !== session.userId,
+    );
+
+    this.setSelection(newSelection);
+  };
+
+  singleContextMenuAction = (item: typeof this.bufferSelection) => {
+    if (this.selection.length) {
+      this.clearSelection();
+    }
+
+    this.setBufferSelection(item);
+  };
+
+  multipleContextMenuAction = (item: TLastPortalSession) => {
+    const isItemSelected = this.selection.some((s) => s.userId === item.userId);
+    const isSingleSelected = isItemSelected && this.selection.length === 1;
+
+    if (!isItemSelected || isSingleSelected) {
+      this.clearSelection();
+      this.setBufferSelection(item);
+    }
+  };
+
   //////////////////////////////////////////////////////////////////////////////
 
   get isSeveralSelection() {
     return this.selection.length > 1;
   }
-
-  setSelection = (selection) => {
-    this.selection = selection;
-  };
-
-  setBufferSelection = (bufferSelection) => {
-    this.bufferSelection = bufferSelection;
-  };
 
   clearSelection = () => {
     this.setSelection([]);

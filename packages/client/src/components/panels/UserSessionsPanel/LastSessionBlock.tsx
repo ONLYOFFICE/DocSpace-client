@@ -26,12 +26,9 @@
 
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
+import { decode } from "he";
 
-import {
-  Avatar,
-  AvatarRole,
-  AvatarSize,
-} from "@docspace/shared/components/avatar";
+import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
 import { Box } from "@docspace/shared/components/box";
 import { Text } from "@docspace/shared/components/text";
 import {
@@ -44,7 +41,6 @@ import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 import { IAllSessions } from "SRC_DIR/pages/PortalSettings/categories/security/sessions/SecuritySessions.types";
 
 import { LastSessionBlockProps } from "./UserSessionsPanel.types";
-import { decode } from "he";
 
 const StyledUserInfoBlock = styled.div`
   display: flex;

@@ -159,6 +159,8 @@ const TableView = ({
   userId,
   sectionWidth,
   sessionsData,
+  selection,
+  bufferSelection,
 }: SessionsTableProps) => {
   const [hideColumns, setHideColumns] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -188,18 +190,32 @@ const TableView = ({
         itemCount={sessionsData.length}
         fetchMoreFiles={() => {}}
       >
-        {sessionsData.map((item) => (
-          <SessionsTableRow t={t} key={item.userId} item={item} />
-        ))}
+        {sessionsData.map((item) => {
+          const isChecked = selection.some((s) => s.userId === item.userId);
+          const isActive = bufferSelection?.userId === item.userId;
+          return (
+            <SessionsTableRow
+              t={t}
+              key={item.userId}
+              item={item}
+              isChecked={isChecked}
+              isActive={isActive}
+            />
+          );
+        })}
       </TableBody>
     </StyledTableContainer>
   );
 };
 
-export default inject<TStore>(({ userStore }) => {
+export default inject<TStore>(({ userStore, activeSessionsStore }) => {
   const userId = userStore.user?.id ?? null;
+
+  const { selection, bufferSelection } = activeSessionsStore;
 
   return {
     userId,
+    selection,
+    bufferSelection,
   };
 })(observer(TableView));

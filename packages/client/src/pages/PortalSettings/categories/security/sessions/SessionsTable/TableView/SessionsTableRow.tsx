@@ -188,6 +188,12 @@ const SessionsTableRow = (props: SessionsTableRowProps) => {
     getFromDateAgo,
     setFromDateAgo,
     setCurrentPortalSession,
+    selectRow,
+    selectCheckbox,
+    singleContextMenuAction,
+    multipleContextMenuAction,
+    isChecked,
+    isActive,
   } = props;
 
   // const { platform, browser, ip, city, country, date } = connections[0] ?? {};
@@ -195,8 +201,6 @@ const SessionsTableRow = (props: SessionsTableRowProps) => {
   const { platform, browser, ip, city, country, date, status } = session;
 
   const fromDateAgo = getFromDateAgo(userId);
-  const isChecked = false;
-  const isActive = false;
   const isOnline = status === "online";
 
   useEffect(() => {
@@ -261,18 +265,29 @@ const SessionsTableRow = (props: SessionsTableRowProps) => {
   ];
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (onContentRowSelect) onContentRowSelect(e.target.checked, item);
+    selectCheckbox(e.target.checked, item);
   };
 
-  const onRowContextClick = useCallback(
-    (rightMouseButtonClick?: boolean) => {
-      if (onUserContextClick) onUserContextClick(item, !rightMouseButtonClick);
-    },
-    [item, onUserContextClick],
-  );
+  const onRowContextClick = (rightMouseButtonClick?: boolean) => {
+    if (rightMouseButtonClick) {
+      multipleContextMenuAction(item);
+    } else {
+      singleContextMenuAction(item);
+    }
+  };
 
   const onRowClick = (e: React.MouseEvent) => {
-    if (onContentRowClick) onContentRowClick(e, item);
+    if (
+      e.target instanceof Element &&
+      (e.target?.tagName === "A" ||
+        e.target?.closest(".checkbox") ||
+        e.target?.closest(".table-container_row-checkbox") ||
+        e.detail === 0)
+    ) {
+      return;
+    }
+
+    selectRow(item);
   };
 
   return (
@@ -365,6 +380,10 @@ export default inject<TStore>(
       getFromDateAgo,
       setFromDateAgo,
       setCurrentPortalSession,
+      selectRow,
+      selectCheckbox,
+      singleContextMenuAction,
+      multipleContextMenuAction,
     } = activeSessionsStore;
 
     return {
@@ -379,6 +398,10 @@ export default inject<TStore>(
       getFromDateAgo,
       setFromDateAgo,
       setCurrentPortalSession,
+      selectRow,
+      selectCheckbox,
+      singleContextMenuAction,
+      multipleContextMenuAction,
     };
   },
-)(withContent(observer(SessionsTableRow)));
+)(observer(SessionsTableRow));

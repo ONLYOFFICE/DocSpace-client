@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import styled, { css } from "styled-components";
 
 import { Button } from "@docspace/shared/components/button";
@@ -49,11 +49,24 @@ const CreateRoomDialog = ({
   fetchThirdPartyProviders,
   enableThirdParty,
   startRoomType,
+  processCreatingRoomFromData,
+  selectionItems,
 }) => {
   const [isScrollLocked, setIsScrollLocked] = useState(false);
   const [isOauthWindowOpen, setIsOauthWindowOpen] = useState(false);
   const [isWrongTitle, setIsWrongTitle] = useState(false);
   const isMountRef = React.useRef(true);
+
+  const disabledFormRoom = useMemo(() => {
+    if (
+      !processCreatingRoomFromData ||
+      !selectionItems ||
+      selectionItems.length === 0
+    )
+      return false;
+
+    return !selectionItems.every((item) => item.isPDFForm);
+  }, [selectionItems, processCreatingRoomFromData]);
 
   React.useEffect(() => {
     return () => {
@@ -161,7 +174,11 @@ const CreateRoomDialog = ({
 
       <ModalDialog.Body>
         {!roomParams.type ? (
-          <RoomTypeList t={t} setRoomType={setRoomType} />
+          <RoomTypeList
+            t={t}
+            setRoomType={setRoomType}
+            disabledFormRoom={disabledFormRoom}
+          />
         ) : (
           <SetRoomParams
             t={t}

@@ -76,6 +76,8 @@ export interface TextareaProps {
   isFullHeight?: boolean;
   /** Calculated height of content depending on number of lines in pixels */
   fullHeight?: number;
+  /** Minimum height of the textarea. */
+  minHeight?: string;
 
   classNameCopyIcon?: string;
   paddingLeftProp?: string;

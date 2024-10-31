@@ -75,8 +75,8 @@ const NewFilesPanelItemFileComponent = ({
       );
     }
 
-    openItemAction({ ...item });
-    await markAsRead!([], [item.id]);
+    openItemAction!({ ...item });
+    markAsRead!([], [item.id]);
 
     onClose();
   };

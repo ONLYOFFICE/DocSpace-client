@@ -43,8 +43,8 @@ const StyledChangeRoomOwner = styled.div`
     overflow: visible;
   }
 
-  ${({ showBackButton }) =>
-    !showBackButton &&
+  ${({ withFooterCheckbox }) =>
+    withFooterCheckbox &&
     css`
       .arrow-button {
         display: none;
@@ -116,6 +116,8 @@ const ChangeRoomOwner = (props) => {
   filter.role = [EmployeeType.Admin, EmployeeType.RoomAdmin];
   filter.employeeStatus = EmployeeStatus.Active;
 
+  const ownerIsCurrentUser = roomOwnerId === userId;
+
   const selectorComponent = (
     <PeopleSelector
       withCancelButton
@@ -132,7 +134,7 @@ const ChangeRoomOwner = (props) => {
         headerLabel: t("Files:ChangeTheRoomOwner"),
       }}
       filter={filter}
-      withFooterCheckbox={!showBackButton}
+      withFooterCheckbox={!showBackButton && ownerIsCurrentUser}
       footerCheckboxLabel={t("Files:LeaveTheRoom")}
       isChecked={!showBackButton}
       withOutCurrentAuthorizedUser
@@ -160,7 +162,9 @@ const ChangeRoomOwner = (props) => {
       withoutPadding
     >
       <ModalDialog.Body>
-        <StyledChangeRoomOwner showBackButton={showBackButton}>
+        <StyledChangeRoomOwner
+          withFooterCheckbox={!showBackButton && ownerIsCurrentUser}
+        >
           {selectorComponent}
         </StyledChangeRoomOwner>
       </ModalDialog.Body>

@@ -37,6 +37,10 @@ import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
 class ActiveSessionsStore {
   usersWithLastSession = [];
 
+  userSessions = [];
+
+  currentUserId = null;
+
   sessionsData = []; // Sessions inited in fetchData.
 
   dataFromSocket = []; // Sessions from socket (all sessions, include closed sessions or from deleted users)
@@ -85,8 +89,26 @@ class ActiveSessionsStore {
     });
   };
 
+  fetchUserSessions = () => {
+    return new Promise((resolve) => {
+      SocketHelper.emit("getSessions", { id: this.currentUserId });
+      SocketHelper.on("user-sessions", (data) => {
+        console.log({ data });
+        resolve();
+      });
+    });
+  };
+
+  subscribeToUserSessions = () => {
+    // update sessions
+  };
+
   setUsersWithLastSession = (usersWithLastSession) => {
     this.usersWithLastSession = usersWithLastSession;
+  };
+
+  setCurrentUserId = (id: string) => {
+    this.currentUserId = id;
   };
 
   setSelection = (selection) => {

@@ -24,7 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { observer, inject } from "mobx-react";
 import styled from "styled-components";
@@ -52,13 +52,17 @@ const StyledScrollbar = styled(Scrollbar)`
 `;
 
 export const UserSessionsPanel = (props: UserSessionsPanelProps) => {
-  const { visible, setVisible } = props;
+  const { visible, setVisible, fetchUserSessions } = props;
   const { t } = useTranslation(["Settings", "Profile", "Common"]);
   const scrollRef = useRef(null);
 
   const onClose = () => {
     setVisible(false);
   };
+
+  useEffect(() => {
+    fetchUserSessions();
+  }, []);
 
   return (
     <StyledSessionsPanel>
@@ -79,11 +83,16 @@ export const UserSessionsPanel = (props: UserSessionsPanelProps) => {
   );
 };
 
-export const SessionsPanel = inject<TStore>(({ dialogsStore }) => {
-  const { userSessionsPanelVisible, setUserSessionPanelVisible } = dialogsStore;
+export const SessionsPanel = inject<TStore>(
+  ({ dialogsStore, activeSessionsStore }) => {
+    const { userSessionsPanelVisible, setUserSessionPanelVisible } =
+      dialogsStore;
+    const { fetchUserSessions } = activeSessionsStore;
 
-  return {
-    visible: userSessionsPanelVisible,
-    setVisible: setUserSessionPanelVisible,
-  };
-})(observer(UserSessionsPanel));
+    return {
+      visible: userSessionsPanelVisible,
+      setVisible: setUserSessionPanelVisible,
+      fetchUserSessions,
+    };
+  },
+)(observer(UserSessionsPanel));

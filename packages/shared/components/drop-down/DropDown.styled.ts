@@ -117,6 +117,8 @@ const StyledDropdown = styled.div<{
     margin-top: 4px;
   }
 
+  padding: 8px 0;
+
   @media (orientation: portrait) {
     ${(props) =>
       props.isMobileView &&

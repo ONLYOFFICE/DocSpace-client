@@ -159,6 +159,7 @@ class MembersHelper {
         return [options.roomAdmin, options.collaborator, ...deleteOption];
       case RoomsType.VirtualDataRoom:
         return [
+          options.roomAdmin,
           options.collaborator,
           options.editor,
           options.viewer,

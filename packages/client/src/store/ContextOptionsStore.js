@@ -1696,7 +1696,7 @@ class ContextOptionsStore {
         label: t("Files:ExportRoomIndex"),
         icon: ExportRoomIndexSvgUrl,
         onClick: () => this.onExportRoomIndex(t, item.id),
-        disabled: !item.indexing,
+        disabled: !item.indexing || !item.security?.EditRoom,
       },
       {
         id: "option_owner-change",

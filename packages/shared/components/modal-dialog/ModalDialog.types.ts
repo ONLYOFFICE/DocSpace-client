@@ -95,6 +95,7 @@ export interface ModalDialogProps {
   withoutPadding?: boolean;
   hideContent?: boolean;
   blur?: number;
+  isInvitePanelLoader?: boolean;
 }
 
 export interface ModalProps {
@@ -167,4 +168,5 @@ export type ModalSubComponentsProps = AsideHeaderProps & {
   withoutPadding?: boolean;
   hideContent?: boolean;
   blur?: number;
+  isInvitePanelLoader?: boolean;
 };

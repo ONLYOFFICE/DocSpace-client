@@ -16,6 +16,7 @@ const RowView = (props: RowViewProps) => {
     changeClientStatus,
     selection,
     setSelection,
+    setBufferSelection,
 
     activeClients,
     getContextMenuItems,
@@ -54,6 +55,7 @@ const RowView = (props: RowViewProps) => {
           isChecked={selection?.includes(item.clientId) || false}
           inProgress={activeClients?.includes(item.clientId) || false}
           setSelection={setSelection}
+          setBufferSelection={setBufferSelection}
           changeClientStatus={changeClientStatus}
           getContextMenuItems={getContextMenuItems}
           sectionWidth={sectionWidth}
@@ -68,6 +70,7 @@ export default inject(({ oauthStore }: { oauthStore: OAuthStore }) => {
     viewAs,
     setViewAs,
     selection,
+    setBufferSelection,
     setSelection,
     changeClientStatus,
     getContextMenuItems,
@@ -83,6 +86,7 @@ export default inject(({ oauthStore }: { oauthStore: OAuthStore }) => {
     changeClientStatus,
     selection,
     setSelection,
+    setBufferSelection,
     activeClients,
     getContextMenuItems,
     hasNextPage,

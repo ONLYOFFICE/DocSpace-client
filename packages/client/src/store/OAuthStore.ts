@@ -374,7 +374,7 @@ class OAuthStore {
     }
   };
 
-  onEnable = async (t: TTranslation) => {
+  onEnable = async (t: TTranslation, clientId: string) => {
     this.setPreviewDialogVisible(false);
     this.setInfoDialogVisible(false);
     this.setRevokeDialogVisible(false);
@@ -409,7 +409,7 @@ class OAuthStore {
     } else {
       // this.setActiveClient(clientId);
 
-      await this.changeClientStatus(this.bufferSelection!.clientId, true);
+      await this.changeClientStatus(clientId, true);
 
       // this.setActiveClient("");
       this.setSelection("");
@@ -418,7 +418,15 @@ class OAuthStore {
     }
   };
 
-  onDisable = () => {
+  onDisable = (clientId: string) => {
+    if (this.selection.length === 1) {
+      this.setBufferSelection(this.selection[0]);
+      this.setSelection("");
+    }
+
+    if (!this.selection.length) {
+      this.setBufferSelection(clientId);
+    }
     this.setPreviewDialogVisible(false);
     this.setInfoDialogVisible(false);
     this.setRevokeDialogVisible(false);
@@ -428,7 +436,16 @@ class OAuthStore {
     this.setRevokeDeveloperTokenDialogVisible(false);
   };
 
-  onDelete = () => {
+  onDelete = (clientId: string) => {
+    if (this.selection.length === 1) {
+      this.setBufferSelection(this.selection[0]);
+      this.setSelection("");
+    }
+
+    if (!this.selection.length) {
+      this.setBufferSelection(clientId);
+    }
+
     this.setPreviewDialogVisible(false);
     this.setInfoDialogVisible(false);
     this.setRevokeDialogVisible(false);
@@ -601,14 +618,14 @@ class OAuthStore {
       key: "enable",
       icon: EnableReactSvgUrl,
       label: t("Common:Enable"),
-      onClick: () => this.onEnable(t),
+      onClick: () => this.onEnable(t, clientId),
     };
 
     const disableOption = {
       key: "disable",
       icon: RemoveReactSvgUrl,
       label: t("Common:Disable"),
-      onClick: this.onDisable,
+      onClick: () => this.onDisable(clientId),
     };
 
     const generateDeveloperTokenOption = {
@@ -630,7 +647,7 @@ class OAuthStore {
         key: "delete",
         label: t("Common:Delete"),
         icon: DeleteIconUrl,
-        onClick: this.onDelete,
+        onClick: () => this.onDelete(clientId),
       },
     ];
 
@@ -686,7 +703,7 @@ class OAuthStore {
         key: "enable",
         iconUrl: EnableReactSvgUrl,
         label: t("Common:Enable"),
-        onClick: () => this.onEnable(t),
+        onClick: () => this.onEnable(t, ""),
         disabled: !this.withEnabledOptions,
       },
       {

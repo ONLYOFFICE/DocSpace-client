@@ -244,7 +244,9 @@ class ContactsConextOptionsStore {
             id: "option_delete-user",
             key: option,
             icon: TrashReactSvgUrl,
-            label: t("DeleteProfileEverDialog:DeleteUser"),
+            label: item.isVisitor
+              ? t("DeleteProfileEverDialog:DeleteGuest")
+              : t("DeleteProfileEverDialog:DeleteUser"),
             onClick: () => this.toggleDeleteProfileEverDialog([item]),
           };
 

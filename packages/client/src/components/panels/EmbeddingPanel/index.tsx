@@ -469,6 +469,7 @@ const EmbeddingPanelComponent = (props: EmbeddingPanelProps) => {
                 headerText={barTitle}
                 bodyText={barSubTitle}
                 iconName={TabletLinkReactSvgUrl}
+                barIsVisible={barIsVisible}
               />
             )}
 

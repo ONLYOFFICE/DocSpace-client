@@ -46,6 +46,9 @@ import {
   TMigrationStatusResult,
 } from "@docspace/shared/api/settings/types";
 
+import { CurrentQuotasStore } from "@docspace/shared/store/CurrentQuotaStore";
+import { parseQuota } from "SRC_DIR/pages/PortalSettings/utils/parseQuota";
+
 type TUsers = {
   new: TEnhancedMigrationUser[];
   existing: TEnhancedMigrationUser[];
@@ -66,6 +69,8 @@ type LoadingState = "none" | "upload" | "proceed" | "done";
 type TMigrationPhase = "" | "setup" | "migrating" | "complete";
 
 class ImportAccountsStore {
+  private currentQuotaStore: CurrentQuotasStore | null = null;
+
   services: TWorkspaceService[] = [];
 
   users: TUsers = {
@@ -114,7 +119,8 @@ class ImportAccountsStore {
 
   migrationPhase: TMigrationPhase = "";
 
-  constructor() {
+  constructor(currentQuotaStoreConst: CurrentQuotasStore) {
+    this.currentQuotaStore = currentQuotaStoreConst;
     makeAutoObservable(this);
   }
 
@@ -141,6 +147,28 @@ class ImportAccountsStore {
           (existingUser) => existingUser.key === user.key,
         ),
     );
+  }
+
+  get quota() {
+    return parseQuota(this.currentQuotaStore?.quotaCharacteristics[1]);
+  }
+
+  get totalUsedUsers() {
+    const totalPaidUsers =
+      this.quota.used +
+      this.finalUsers.filter((user) => user.userType !== "User").length;
+
+    return totalPaidUsers;
+  }
+
+  get numberOfSelectedUsers() {
+    return (
+      this.checkedUsers.withEmail.length + this.checkedUsers.withoutEmail.length
+    );
+  }
+
+  get totalUsers() {
+    return this.withEmailUsers.length + this.users.withoutEmail.length;
   }
 
   setStep = (step: number) => {

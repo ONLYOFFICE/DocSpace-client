@@ -79,7 +79,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
     roomsMode,
     setSnackbarExist,
     userTheme,
-    //user,
+    // user,
     userId,
     userLoginEventId,
     currentDeviceType,
@@ -172,6 +172,8 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       console.log(`[WS] "logout-session"`, loginEventId, userLoginEventId);
 
       if (userLoginEventId === loginEventId || loginEventId === 0) {
+        sessionStorage.setItem("referenceUrl", window.location.href);
+
         window.location.replace(
           combineUrl(window.ClientConfig?.proxy?.url, "/login"),
         );
@@ -278,7 +280,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
       parentElementId: "main-bar",
       headerText: t("Attention"),
       text: `${t("BarMaintenanceDescription", {
-        targetDate: targetDate,
+        targetDate,
         productName: `${t("Common:OrganizationName")} ${t("Common:ProductName")}`,
       })} ${t("BarMaintenanceDisclaimer")}`,
       isMaintenance: true,
@@ -437,7 +439,7 @@ const Shell = ({ items = [], page = "home", ...rest }) => {
 
   const toast =
     currentDeviceType === DeviceType.mobile ? (
-      <Portal element={<Toast />} appendTo={rootElement} visible={true} />
+      <Portal element={<Toast />} appendTo={rootElement} visible />
     ) : (
       <Toast />
     );

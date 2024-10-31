@@ -109,6 +109,7 @@ export const MainElementParameter = ({
         selected={selectedElementType}
         onClick={toggleButtonMode}
         spacing="8px"
+        isDisabled={true}
       />
       {config.isButtonMode && (
         <>

@@ -10,6 +10,7 @@ const StyledIcon = styled.div<{
   radius: string;
   isArchive?: boolean;
   color?: string;
+  textColor?: string;
   wrongImage: boolean;
   withHover: boolean;
   coverSize: number;
@@ -86,7 +87,7 @@ const StyledIcon = styled.div<{
         props.coverSize &&
         `scale(${props.coverSize / COVER_DEFAULT_SIZE}) translateY(0)`};
       path {
-        fill: ${globalColors.white};
+        fill: ${(props) => props.textColor};
       }
     }
 
@@ -122,7 +123,7 @@ const StyledIcon = styled.div<{
     color: ${(props) =>
       props.wrongImage && props.theme.isBase
         ? globalColors.black
-        : globalColors.white};
+        : props.textColor};
     position: relative;
     ${(props) =>
       !props.theme.isBase &&

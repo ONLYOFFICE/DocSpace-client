@@ -23,19 +23,17 @@
 // All the Product's GUI elements, including illustrations and icon sets, as well as technical writing
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
-import debounce from "lodash.debounce";
-import { objectToGetParams, loadScript } from "@docspace/shared/utils/common";
 
-export const loadFrame = debounce((config, scriptUrl) => {
-  const script = document.getElementById("integration");
+export const showPreviewThreshold = 720;
 
-  if (script) {
-    script.remove();
-  }
+export const dimensionsModel = [
+  { key: "percent", label: "%", default: true },
+  { key: "pixel", label: "px" },
+];
 
-  const params = objectToGetParams(config);
+export const defaultSize = {
+  width: "100",
+  height: "100",
+};
 
-  loadScript(`${scriptUrl}${params}`, "integration", () =>
-    window.DocSpace.SDK.initFrame(config),
-  );
-}, 500);
+export const defaultDimension = dimensionsModel[0];

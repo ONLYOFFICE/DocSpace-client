@@ -40,3 +40,5 @@ export type TSession = {
   platform: string;
   status: TOnlineStatus;
 };
+
+export type TSessionsSelected = "all" | "none" | TOnlineStatus;

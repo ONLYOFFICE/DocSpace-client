@@ -150,6 +150,8 @@ const SectionHeaderContent = (props) => {
     standalone,
     getHeaderMenuItems,
     setSelections,
+    setSessionsSelected,
+    getSessionsHeaderMenuItems,
   } = props;
 
   const navigate = useNavigate();
@@ -157,6 +159,7 @@ const SectionHeaderContent = (props) => {
   const theme = useTheme();
 
   const isOAuth = location.pathname.includes("oauth");
+  const isSessionsPage = location.pathname.includes("sessions");
 
   const [state, setState] = React.useState({
     header: "",
@@ -267,13 +270,30 @@ const SectionHeaderContent = (props) => {
       return;
     }
 
+    if (isSessionsPage) {
+      setSessionsSelected(checked ? "all" : "none");
+      return;
+    }
+
     const { setSelected } = props;
     setSelected(checked ? "all" : "close");
   };
 
   const onSelectAll = () => {
+    if (isSessionsPage) {
+      setSessionsSelected("all");
+      return;
+    }
+
     const { setSelected } = props;
     setSelected("all");
+  };
+
+  const onSelectOnline = () => {
+    setSessionsSelected("online");
+  };
+  const onSelectOffline = () => {
+    setSessionsSelected("offline");
   };
 
   const removeAdmins = () => {
@@ -294,7 +314,32 @@ const SectionHeaderContent = (props) => {
   const { header, isCategoryOrHeader, isNeedPaidIcon } = state;
   const arrayOfParams = getArrayOfParams();
 
-  const menuItems = (
+  const sessionsCheckboxOptions = (
+    <>
+      <DropDownItem
+        key="all"
+        label={t("Files:All")}
+        data-index={1}
+        onClick={onSelectAll}
+      />
+      <DropDownItem
+        key="online"
+        label={t("Common:online")}
+        data-index={2}
+        onClick={onSelectOnline}
+      />
+      <DropDownItem
+        key="offline"
+        label={t("Common:offline")}
+        data-index={3}
+        onClick={onSelectOffline}
+      />
+    </>
+  );
+
+  const menuItems = isSessionsPage ? (
+    sessionsCheckboxOptions
+  ) : (
     <>
       <DropDownItem
         key="all"
@@ -305,16 +350,18 @@ const SectionHeaderContent = (props) => {
     </>
   );
 
-  const headerMenu = isOAuth
-    ? getHeaderMenuItems(t, true)
-    : [
-        {
-          label: t("Common:Delete"),
-          disabled: !selection || !selection.length > 0,
-          onClick: removeAdmins,
-          iconUrl: DeleteReactSvgUrl,
-        },
-      ];
+  const headerMenu = isSessionsPage
+    ? getSessionsHeaderMenuItems(t)
+    : isOAuth
+      ? getHeaderMenuItems(t, true)
+      : [
+          {
+            label: t("Common:Delete"),
+            disabled: !selection || !selection.length > 0,
+            onClick: removeAdmins,
+            iconUrl: DeleteReactSvgUrl,
+          },
+        ];
 
   const translatedHeader =
     header === IMPORT_HEADER_CONST
@@ -338,8 +385,8 @@ const SectionHeaderContent = (props) => {
           isChecked={isHeaderChecked}
           isIndeterminate={isHeaderIndeterminate}
           headerMenu={headerMenu}
-          withComboBox={false}
-          withoutInfoPanelToggler
+          withComboBox={isSessionsPage}
+          withoutInfoPanelToggler={isSessionsPage}
           isMobileView={false}
         />
       ) : !isLoadedSectionHeader ? (
@@ -407,6 +454,7 @@ export default inject(
     importAccountsStore,
     settingsStore,
     oauthStore,
+    sessionsStore,
   }) => {
     const {
       isCustomizationAvailable,
@@ -432,6 +480,15 @@ export default inject(
     const { standalone } = settingsStore;
 
     const { getHeaderMenuItems } = oauthStore;
+
+    const {
+      setSelected: setSessionsSelected,
+      getHeaderMenuItems: getSessionsHeaderMenuItems,
+      isHeaderVisible: isSessionsHeaderVisible,
+      isHeaderChecked: isSessionsHeaderChecked,
+      isHeaderIndeterminate: isSessionsHeaderIndeterminate,
+    } = sessionsStore;
+
     return {
       addUsers,
       removeAdmins,
@@ -439,9 +496,17 @@ export default inject(
       setSelected,
       admins,
       isHeaderIndeterminate:
-        isHeaderIndeterminate || oauthStore.isHeaderIndeterminate,
-      isHeaderChecked: isHeaderChecked || oauthStore.isHeaderChecked,
-      isHeaderVisible: isHeaderVisible || oauthStore.isHeaderVisible,
+        isHeaderIndeterminate ||
+        oauthStore.isHeaderIndeterminate ||
+        isSessionsHeaderIndeterminate,
+      isHeaderChecked:
+        isHeaderChecked ||
+        oauthStore.isHeaderChecked ||
+        isSessionsHeaderChecked,
+      isHeaderVisible:
+        isHeaderVisible ||
+        oauthStore.isHeaderVisible ||
+        isSessionsHeaderVisible,
       deselectUser,
       selectAll,
       toggleSelector,
@@ -456,6 +521,8 @@ export default inject(
       standalone,
       getHeaderMenuItems,
       setSelections: oauthStore.setSelections,
+      setSessionsSelected,
+      getSessionsHeaderMenuItems,
     };
   },
 )(

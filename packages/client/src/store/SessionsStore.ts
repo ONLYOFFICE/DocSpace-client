@@ -33,6 +33,7 @@ import SocketHelper from "@docspace/shared/utils/socket";
 import {
   TLastPortalSession,
   TSession,
+  TSessionsSelected,
 } from "@docspace/shared/types/ActiveSessions";
 import { Nullable, TTranslation } from "@docspace/shared/types";
 
@@ -72,6 +73,8 @@ class SessionsStore {
 
   bufferSelection: Nullable<TLastPortalSession> = null;
 
+  selected: TSessionsSelected = "none";
+
   constructor(
     public settingsSetupStore: SettingsSetupStore,
     public peopleStore: PeopleStore,
@@ -101,7 +104,7 @@ class SessionsStore {
       });
       SocketHelper.on(
         "user-sessions",
-        (data: { id: string; sessions: TSession }) => {
+        (data: { id: string; sessions: TSession[] }) => {
           this.setUserSessions(data.sessions);
           resolve();
         },
@@ -217,6 +220,42 @@ class SessionsStore {
     ];
   };
 
+  getHeaderMenuItems = (t: TTranslation) => {
+    return [
+      {
+        id: "sessions",
+        key: "Sessions",
+        label: t("Common:Sessions"),
+        disabled: this.isSeveralSelection,
+        onClick: () => {
+          this.setBufferSelection(this.selection[0]);
+          this.dialogsStore.setUserSessionPanelVisible(true);
+        },
+        iconUrl: HistoryFinalizedReactSvgUrl,
+      },
+      {
+        id: "logout",
+        key: "Logout",
+        label: t("Common:Logout"),
+        onClick: () => {
+          if (!this.isSeveralSelection) {
+            this.setBufferSelection(this.selection[0]);
+          }
+          this.settingsSetupStore.setLogoutAllDialogVisible(true);
+        },
+        iconUrl: LogoutReactSvgUrl,
+      },
+      {
+        id: "disable",
+        key: "Disable",
+        label: t("Common:DisableUserButton"),
+        onClick: () => this.settingsSetupStore.setDisableDialogVisible(true),
+        iconUrl: RemoveSvgUrl,
+        disabled: this.hasMeInSelections,
+      },
+    ];
+  };
+
   get hasMeInSelections() {
     const { user } = this.peopleStore.userStore;
 
@@ -226,6 +265,51 @@ class SessionsStore {
     const hasMeInBufferSelection = this.bufferSelection?.userId === user.id;
 
     return hasMeInSelection || hasMeInBufferSelection;
+  }
+
+  setSelected = (selected: TSessionsSelected) => {
+    this.bufferSelection = null;
+    this.selected = selected;
+    this.setSelection(this.getSessionsBySelected(selected));
+
+    return selected;
+  };
+
+  getSessionsBySelected = (selected: TSessionsSelected) => {
+    switch (selected) {
+      case "all":
+        return [...this.lastPortalSessions];
+
+      case "none":
+        return [];
+
+      case "online":
+      case "offline":
+        return this.lastPortalSessions.filter(
+          (s) => s.session.status === selected,
+        );
+
+      default:
+        return [];
+    }
+  };
+
+  get isHeaderVisible() {
+    return this.selection.length > 0;
+  }
+
+  get isHeaderChecked() {
+    return (
+      this.isHeaderVisible &&
+      this.selection.length === this.lastPortalSessions.length
+    );
+  }
+
+  get isHeaderIndeterminate() {
+    return (
+      this.isHeaderVisible &&
+      this.selection.length !== this.lastPortalSessions.length
+    );
   }
 
   //////////////////////////////////////////////////////////////////////////////

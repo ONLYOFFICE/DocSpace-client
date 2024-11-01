@@ -105,6 +105,8 @@ import api from "@docspace/shared/api";
 import { showSuccessExportRoomIndexToast } from "SRC_DIR/helpers/toast-helpers";
 import { getContactsView } from "SRC_DIR/helpers/contacts";
 
+import { getRoomInfo } from "@docspace/shared/api/rooms";
+
 class FilesActionStore {
   settingsStore;
   uploadDataStore;
@@ -2874,7 +2876,7 @@ class FilesActionStore {
   changeRoomOwner = (t, userId, isLeaveChecked = false) => {
     const { setRoomOwner, setFolder, setSelected, selection, bufferSelection } =
       this.filesStore;
-    const { isRootFolder, setCreatedBy, id, setInRoom } =
+    const { isRootFolder, setCreatedBy, id, setInRoom, setSelectedFolder } =
       this.selectedFolderStore;
 
     const roomId = selection.length
@@ -2896,6 +2898,9 @@ class FilesActionStore {
 
         if (isLeaveChecked) await this.onLeaveRoom(t);
         else toastr.success(t("Files:AppointNewOwner"));
+
+        const newInfo = await getRoomInfo(roomId);
+        setSelectedFolder(newInfo);
       })
       .catch((e) => toastr.error(e))
       .finally(() => {

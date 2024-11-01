@@ -194,7 +194,11 @@
   "WantLeaveRoom": "Do you really want to leave this room? You will be able to join it again via new invitation by a room admin.",
   "WantToRestoreTheRoom": "All shared links in this room will become active, and its contents will be available to everyone with the link. Do you want to restore the room?",
   "WantToRestoreTheRooms": "All shared links in restored rooms will become active, and their contents will be available to everyone with the room links. Do you want to restore the rooms?",
+  "WarningCopyToFormRoom": "The file cannot be copied to this room. Please try to copy the {{ organizationName }} PDF form.",
+  "WarningCopyToFormRoomServal": "Copying several files to the Form Filling room is not supported. Copy one {{ organizationName }} PDF form at a time.",
   "WarningCreationFormRoom": "Creation based on several files and folders is not available for this type of room. To create such a room, go to the Rooms section or use one of the PDF forms.",
+  "WarningMoveToFormRoom": "The file cannot be moved to this room. Please try to move the {{ organizationName }} PDF form.",
+  "WarningMoveToFormRoomServal": "Moving several files to the Form Filling room is not supported. Move one {{ organizationName }} PDF form at a time.",
   "WithSubfolders": "With subfolders",
   "YouLeftTheRoom": "You have left the room"
 }

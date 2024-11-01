@@ -44,6 +44,11 @@ export type TCreateDefineRoom = {
   type: RoomsType;
 };
 
+export type FormPropsType = {
+  message: string;
+  isRoomFormAccessible: boolean;
+};
+
 export interface UseRootHelperProps {
   setBreadCrumbs: React.Dispatch<React.SetStateAction<TBreadCrumb[]>>;
   setTotal: React.Dispatch<React.SetStateAction<number>>;
@@ -217,4 +222,5 @@ export type FilesSelectorProps = TSelectorHeader &
     withCreate: boolean;
     createDefineRoomLabel?: string;
     createDefineRoomType?: RoomsType;
+    formProps?: FormPropsType;
   };

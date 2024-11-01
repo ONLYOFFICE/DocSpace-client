@@ -25,7 +25,7 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 /* eslint-disable no-restricted-syntax */
-import React from "react";
+import React, { useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import { useTranslation } from "react-i18next";
 
@@ -183,6 +183,40 @@ const FilesSelectorWrapper = ({
       disabledItems = [];
     };
   }, []);
+
+  const formProps = useMemo(() => {
+    let isRoomFormAccessible = true;
+
+    if (isCopy || isMove)
+      isRoomFormAccessible = selection.every(
+        (item) => "isPDFForm" in item && item.isPDFForm,
+      );
+
+    const getMessage = () => {
+      const several = selection.length > 1;
+
+      const option = { organizationName: t("Common:OrganizationName") };
+
+      if (isCopy)
+        return several
+          ? t("Files:WarningCopyToFormRoomServal", option)
+          : t("Files:WarningCopyToFormRoom", option);
+
+      if (isMove)
+        return several
+          ? t("Files:WarningMoveToFormRoomServal", option)
+          : t("Files:WarningMoveToFormRoom", option);
+
+      return "";
+    };
+
+    const message = getMessage();
+
+    return {
+      message,
+      isRoomFormAccessible,
+    };
+  }, [selection, isCopy, isMove, t]);
 
   const onAccept = async (
     selectedItemId: string | number | undefined,
@@ -390,6 +424,7 @@ const FilesSelectorWrapper = ({
       withCreate={(isMove || isCopy || isRestore || isRestoreAll) ?? false}
       filesSettings={filesSettings}
       headerProps={headerProps}
+      formProps={formProps}
     />
   );
 };

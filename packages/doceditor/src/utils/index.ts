@@ -82,8 +82,9 @@ export const showDocEditorMessage = async (
 };
 
 export const convertDocumentUrl = async (fileId: number | string) => {
-  const convert = await convertFile(fileId, null);
-  return convert && convert[0]?.result;
+  const conversionInfo = await convertFile(fileId, null, null, true);
+
+  return conversionInfo && conversionInfo[0]?.result;
 };
 
 export const getDataSaveAs = async (params: string) => {

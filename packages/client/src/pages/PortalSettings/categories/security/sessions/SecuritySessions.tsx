@@ -125,6 +125,7 @@ const Sessions = ({
   isSessionsLoaded,
   lastPortalSessions,
   fetchLastPortalSessions,
+  subscribeToLastPortalSessions,
 }: SessionsProps) => {
   const { t }: { t: TTranslation } = useTranslation([
     "Settings",
@@ -136,12 +137,18 @@ const Sessions = ({
   useEffect(() => {
     // SocketHelper.emit("getSessionsInPortal");
     fetchLastPortalSessions();
+    subscribeToLastPortalSessions();
 
     fetchData();
     return () => {
       clearSelection();
     };
-  }, [fetchLastPortalSessions, fetchData, clearSelection]);
+  }, [
+    fetchLastPortalSessions,
+    subscribeToLastPortalSessions,
+    fetchData,
+    clearSelection,
+  ]);
 
   useViewEffect({
     view: viewAs,
@@ -241,6 +248,7 @@ export const SecuritySessions = inject<TStore>(
       isSessionsLoaded,
       lastPortalSessions,
       fetchLastPortalSessions,
+      subscribeToLastPortalSessions,
     } = sessionsStore;
 
     const {
@@ -284,6 +292,7 @@ export const SecuritySessions = inject<TStore>(
       isSessionsLoaded,
       lastPortalSessions,
       fetchLastPortalSessions,
+      subscribeToLastPortalSessions,
     };
   },
 )(observer(Sessions));

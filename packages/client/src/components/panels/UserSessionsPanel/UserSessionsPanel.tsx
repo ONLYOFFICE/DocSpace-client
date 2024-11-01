@@ -58,6 +58,7 @@ export const UserSessionsPanel = (props: UserSessionsPanelProps) => {
     fetchUserSessions,
     currentPortalSession,
     setBufferSelection,
+    subscribeToUserSessions,
   } = props;
   const { t } = useTranslation(["Settings", "Profile", "Common"]);
   const scrollRef = useRef(null);
@@ -68,7 +69,8 @@ export const UserSessionsPanel = (props: UserSessionsPanelProps) => {
   };
 
   useEffect(() => {
-    fetchUserSessions(currentPortalSession.id);
+    fetchUserSessions(currentPortalSession.userId);
+    subscribeToUserSessions(currentPortalSession.userId);
     // eslint-disable-next-line
   }, []);
 
@@ -95,13 +97,18 @@ export const SessionsPanel = inject<TStore>(
   ({ dialogsStore, sessionsStore }) => {
     const { userSessionsPanelVisible, setUserSessionPanelVisible } =
       dialogsStore;
-    const { fetchUserSessions, bufferSelection, setBufferSelection } =
-      sessionsStore;
+    const {
+      fetchUserSessions,
+      subscribeToUserSessions,
+      bufferSelection,
+      setBufferSelection,
+    } = sessionsStore;
 
     return {
       visible: userSessionsPanelVisible,
       setVisible: setUserSessionPanelVisible,
       fetchUserSessions,
+      subscribeToUserSessions,
       currentPortalSession: bufferSelection,
       setBufferSelection,
     };

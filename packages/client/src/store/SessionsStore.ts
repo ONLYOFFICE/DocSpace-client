@@ -112,8 +112,35 @@ class SessionsStore {
     });
   };
 
-  subscribeToUserSessions = () => {
-    // update sessions
+  subscribeToLastPortalSessions = () => {
+    SocketHelper.emit("subscribeToPortal");
+    SocketHelper.on("enter-in-portal", this.handleUserEnterPortal);
+    SocketHelper.on("leave-in-portal", this.handleUserLeavePortal);
+  };
+
+  subscribeToUserSessions = (id: string) => {
+    SocketHelper.emit("subscribeToUser", { id });
+    // SocketHelper.on("enter-in-portal", this.handleUserEnterPortal);
+    // SocketHelper.on("leave-in-portal", this.handleUserLeavePortal);
+  };
+
+  handleUserEnterPortal = (data: TLastPortalSession) => {
+    // Todo: Fix type after changing back
+    const newObj = { ...data.u, userId: data.u.id };
+    this.lastPortalSessions.forEach((s) => {
+      // Todo: Fix type after changing back
+      if (s.userId === newObj.userId) {
+        s.session = newObj.session;
+      }
+    });
+  };
+
+  handleUserLeavePortal = (data: { userId: string }) => {
+    this.lastPortalSessions.forEach((s) => {
+      if (s.userId === data.userId) {
+        s.session.status = "offline";
+      }
+    });
   };
 
   setLastPortalSessions = (lastPortalSessions: TLastPortalSession[]) => {

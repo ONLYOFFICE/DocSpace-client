@@ -467,7 +467,10 @@ export default inject(
       filesActionsStore;
     const { itemOperationToFolder, clearActiveOperations } = uploadDataStore;
 
-    const { treeFolders, roomsFolderId } = treeFoldersStore;
+    const { treeFolders, roomsFolderId, recentFolder, isRecentFolder } =
+      treeFoldersStore;
+
+    console.log(isRecentFolder, currentFolderIdProp, id);
 
     const {
       restorePanelVisible,
@@ -540,11 +543,13 @@ export default inject(
       (rootFolderType === FolderType.Archive ||
       rootFolderType === FolderType.TRASH
         ? undefined
-        : selectedId === selectionsWithoutEditing[0]?.id &&
-            "isFolder" in selectionsWithoutEditing[0] &&
-            selectionsWithoutEditing[0]?.isFolder
-          ? parentId
-          : selectedId);
+        : rootFolderType === FolderType.Recent
+          ? "@my"
+          : selectedId === selectionsWithoutEditing[0]?.id &&
+              "isFolder" in selectionsWithoutEditing[0] &&
+              selectionsWithoutEditing[0]?.isFolder
+            ? parentId
+            : selectedId);
 
     const folderId = fromFolderId;
 

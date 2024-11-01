@@ -177,15 +177,16 @@ const WhiteLabelWrapper = styled.div`
   }
 
   .logo-docs-editor {
-    width: 172px;
+    width: 88px;
     height: 21px;
     padding: 0;
-    padding-right: 138px;
+    padding-right: 221px;
   }
 
   .logo-embedded-editor {
-    width: 172px;
-    height: 20px;
+    width: 88px;
+    height: 21px;
+    left: 5px;
     padding: 0;
     margin-bottom: 8px;
   }

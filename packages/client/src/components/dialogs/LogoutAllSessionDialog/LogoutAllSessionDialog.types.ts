@@ -25,7 +25,6 @@
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
 import { TTranslation } from "@docspace/shared/types";
-import { IAllSessions } from "SRC_DIR/pages/PortalSettings/categories/security/sessions/SecuritySessions.types";
 
 export interface LogoutAllSessionDialogProps {
   t: TTranslation;
@@ -33,9 +32,7 @@ export interface LogoutAllSessionDialogProps {
   isLoading: boolean;
   userIds: string[];
   displayName: string;
-  selection: IAllSessions[];
-  bufferSelection: IAllSessions | undefined;
-  isSeveralSelection: boolean;
+  isSeveralSelection: boolean; // Todo: check if this is necessary
   onClose: () => void;
   onClosePanel: () => void;
   onRemoveAllSessions?: () => Promise<void>;

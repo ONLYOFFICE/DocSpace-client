@@ -34,17 +34,19 @@ import {
   TLastPortalSession,
   TSession,
 } from "@docspace/shared/types/ActiveSessions";
-import { Nullable } from "@docspace/shared/types";
+import { Nullable, TTranslation } from "@docspace/shared/types";
 
+import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
+import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
+import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 import SettingsSetupStore from "SRC_DIR/store/SettingsSetupStore";
 import PeopleStore from "SRC_DIR/store/contacts/PeopleStore";
+import DialogsStore from "./DialogsStore";
 
-class ActiveSessionsStore {
+class SessionsStore {
   lastPortalSessions: TLastPortalSession[] = [];
 
   userSessions: TSession[] = [];
-
-  currentPortalSession: Nullable<TLastPortalSession> = null;
 
   sessionsData = []; // Sessions inited in fetchData.
 
@@ -73,9 +75,11 @@ class ActiveSessionsStore {
   constructor(
     public settingsSetupStore: SettingsSetupStore,
     public peopleStore: PeopleStore,
+    public dialogsStore: DialogsStore,
   ) {
     this.settingsSetupStore = settingsSetupStore;
     this.peopleStore = peopleStore;
+    this.dialogsStore = dialogsStore;
 
     makeAutoObservable(this);
   }
@@ -90,12 +94,10 @@ class ActiveSessionsStore {
     });
   };
 
-  fetchUserSessions = () => {
+  fetchUserSessions = (userId: string) => {
     return new Promise((resolve) => {
-      if (!this.currentPortalSession) return;
-
       SocketHelper.emit("getSessions", {
-        id: this.currentPortalSession.userId,
+        id: userId,
       });
       SocketHelper.on(
         "user-sessions",
@@ -117,10 +119,6 @@ class ActiveSessionsStore {
 
   setUserSessions = (userSessions: TSession[]) => {
     this.userSessions = userSessions;
-  };
-
-  setCurrentPortalSession = (portalSession: TLastPortalSession) => {
-    this.currentPortalSession = portalSession;
   };
 
   setSelection = (selection: TLastPortalSession[]) => {
@@ -189,6 +187,47 @@ class ActiveSessionsStore {
     }
   };
 
+  getContextOptions = (t: TTranslation, forSessionsPanel?: boolean) => {
+    return [
+      {
+        key: "ViewSessions",
+        label: t("Settings:ViewSessions"),
+        icon: HistoryFinalizedReactSvgUrl,
+        onClick: () => this.dialogsStore.setUserSessionPanelVisible(true),
+        disabled: forSessionsPanel || this.isSeveralSelection,
+      },
+      {
+        key: "LogoutAllSessions",
+        label: t("Settings:LogoutAllSessions"),
+        icon: LogoutReactSvgUrl,
+        onClick: () => this.settingsSetupStore.setLogoutAllDialogVisible(true),
+      },
+      {
+        key: "Separator",
+        isSeparator: true,
+        disabled: this.hasMeInSelections,
+      },
+      {
+        key: "Disable",
+        label: t("Common:DisableUserButton"),
+        icon: RemoveSvgUrl,
+        onClick: () => this.settingsSetupStore.setDisableDialogVisible(true),
+        disabled: this.hasMeInSelections,
+      },
+    ];
+  };
+
+  get hasMeInSelections() {
+    const { user } = this.peopleStore.userStore;
+
+    if (!user) return false;
+
+    const hasMeInSelection = this.selection.some((s) => s.userId === user.id);
+    const hasMeInBufferSelection = this.bufferSelection?.userId === user.id;
+
+    return hasMeInSelection || hasMeInBufferSelection;
+  }
+
   //////////////////////////////////////////////////////////////////////////////
 
   get isSeveralSelection() {
@@ -242,19 +281,6 @@ class ActiveSessionsStore {
   getFromDateAgo = (sessionId) => {
     return this.fromDateAgo[sessionId] || "";
   };
-
-  get isMe() {
-    const { id } = this.peopleStore.userStore.user;
-
-    const selectionUserId = this.selection.map((user) => user.id);
-
-    const userIds =
-      this.bufferSelection?.id !== undefined
-        ? [this.bufferSelection.id, ...selectionUserId]
-        : [...selectionUserId];
-
-    return userIds.includes(id);
-  }
 
   get getItems() {
     if (!this.items) return {};
@@ -633,4 +659,4 @@ class ActiveSessionsStore {
   };
 }
 
-export default ActiveSessionsStore;
+export default SessionsStore;

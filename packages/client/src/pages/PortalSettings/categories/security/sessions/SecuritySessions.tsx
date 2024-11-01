@@ -98,8 +98,6 @@ const DownLoadWrapper = styled.div`
 `;
 
 const Sessions = ({
-  allSessions,
-  displayName,
   clearSelection,
   platformData,
   selection,
@@ -153,10 +151,9 @@ const Sessions = ({
 
   const selectionUserId = selection.map((user) => user.id);
 
-  const userIds =
-    bufferSelection?.id !== undefined
-      ? [bufferSelection.id, ...selectionUserId]
-      : [...selectionUserId];
+  const userIds = bufferSelection
+    ? [bufferSelection.userId]
+    : [...selectionUserId];
 
   if (!lastPortalSessions.length) return <SessionsLoader viewAs={viewAs} />;
 
@@ -211,9 +208,7 @@ const Sessions = ({
           visible={logoutAllDialogVisible}
           isLoading={isLoading}
           userIds={userIds}
-          displayName={displayName}
-          selection={selection}
-          bufferSelection={bufferSelection}
+          displayName={bufferSelection?.displayName || ""}
           isSeveralSelection={isSeveralSelection}
           onClose={() => setLogoutAllDialogVisible(false)}
           onClosePanel={() => setUserSessionPanelVisible(false)}
@@ -227,19 +222,11 @@ const Sessions = ({
 };
 
 export const SecuritySessions = inject<TStore>(
-  ({
-    settingsStore,
-    setup,
-    peopleStore,
-    dialogsStore,
-    activeSessionsStore,
-  }) => {
+  ({ settingsStore, setup, peopleStore, dialogsStore, sessionsStore }) => {
     const { updateUserStatus } = peopleStore.usersStore;
     const { currentDeviceType } = settingsStore;
     const { setUserSessionPanelVisible } = dialogsStore;
     const {
-      allSessions,
-      displayName,
       clearSelection,
       platformData,
       fetchData,
@@ -254,7 +241,7 @@ export const SecuritySessions = inject<TStore>(
       isSessionsLoaded,
       lastPortalSessions,
       fetchLastPortalSessions,
-    } = activeSessionsStore;
+    } = sessionsStore;
 
     const {
       viewAs,
@@ -270,8 +257,6 @@ export const SecuritySessions = inject<TStore>(
     } = setup;
 
     return {
-      allSessions,
-      displayName,
       clearSelection,
       platformData,
       selection,

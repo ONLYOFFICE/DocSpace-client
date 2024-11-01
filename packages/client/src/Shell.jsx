@@ -545,7 +545,7 @@ const ShellWrapper = inject(
     userStore,
     currentTariffStatusStore,
     dialogsStore,
-    activeSessionsStore,
+    sessionsStore,
   }) => {
     const { i18n } = useTranslation();
 
@@ -606,7 +606,7 @@ const ShellWrapper = inject(
       sessionLogout,
       setMultiConnections,
       sessionMultiLogout,
-    } = activeSessionsStore;
+    } = sessionsStore;
 
     return {
       loadBaseInfo: async () => {

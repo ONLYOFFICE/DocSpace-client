@@ -38,7 +38,6 @@ import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.rea
 import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
 import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
 
-import type SelectionPeopleStore from "SRC_DIR/store/SelectionPeopleStore";
 import { SessionsTableRowProps } from "../../SecuritySessions.types";
 import SessionsRowContent from "./SessionsRowContent";
 
@@ -259,7 +258,7 @@ const SessionsRow = (props: SessionsTableRowProps) => {
 };
 
 export default inject<TStore>(
-  ({ setup, dialogsStore, settingsStore, userStore, activeSessionsStore }) => {
+  ({ setup, dialogsStore, settingsStore, userStore, sessionsStore }) => {
     const { setUserSessionPanelVisible } = dialogsStore;
     const { setLogoutAllDialogVisible, setDisableDialogVisible } = setup;
     const { culture } = settingsStore;
@@ -273,7 +272,7 @@ export default inject<TStore>(
       convertDate,
       getFromDateAgo,
       setFromDateAgo,
-    } = activeSessionsStore;
+    } = sessionsStore;
 
     return {
       isMe,

@@ -68,7 +68,6 @@ const AllSessionsBlock = (props: AllSessionsBlockProps) => {
     t,
     isLoading,
     isDisabled,
-    items = {} as IAllSessions,
     onClickLogoutAllSessions = () => {},
     activeSessionsMap,
     setDisplayName = () => {},
@@ -78,14 +77,6 @@ const AllSessionsBlock = (props: AllSessionsBlockProps) => {
   } = props;
 
   const { displayName } = currentPortalSession;
-  // const { displayName } = items;
-  //
-  // const exceptId = items.connections[0]?.id;
-  // const sessions = items.connections;
-
-  // const filteredSessions = activeSessionsMap.get(items.userId) || [];
-  // .filter((session) => session.id !== exceptId)
-  // .reverse();
 
   const onClickLogout = () => {
     setLogoutAllDialogVisible(true);
@@ -121,29 +112,27 @@ const AllSessionsBlock = (props: AllSessionsBlockProps) => {
   );
 };
 
-export default inject<TStore>(({ setup, activeSessionsStore }) => {
+export default inject<TStore>(({ setup, sessionsStore }) => {
   const {
-    getItems,
     isLoading,
     onClickLogoutAllSessions,
     isDisabled,
     activeSessionsMap,
     setDisplayName,
     userSessions,
-    currentPortalSession,
-  } = activeSessionsStore;
+    bufferSelection,
+  } = sessionsStore;
 
   const { setLogoutAllDialogVisible } = setup;
 
   return {
     isDisabled,
-    items: getItems,
     isLoading,
     onClickLogoutAllSessions,
     activeSessionsMap,
     setDisplayName,
     setLogoutAllDialogVisible,
     userSessions,
-    currentPortalSession,
+    currentPortalSession: bufferSelection,
   };
 })(observer(AllSessionsBlock));

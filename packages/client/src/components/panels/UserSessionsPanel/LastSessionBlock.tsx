@@ -24,6 +24,7 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
+import { useCallback } from "react";
 import { inject, observer } from "mobx-react";
 import styled, { css } from "styled-components";
 import { decode } from "he";
@@ -35,10 +36,6 @@ import {
   ContextMenuButton,
   ContextMenuButtonDisplayType,
 } from "@docspace/shared/components/context-menu-button";
-
-import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
-import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
-import { IAllSessions } from "SRC_DIR/pages/PortalSettings/categories/security/sessions/SecuritySessions.types";
 
 import { LastSessionBlockProps } from "./UserSessionsPanel.types";
 
@@ -132,14 +129,10 @@ const StyledLastSessionBlock = styled.div`
 const LastSessionBlock = (props: LastSessionBlockProps) => {
   const {
     t,
-    isMe,
-    items = {} as IAllSessions,
-    setDisplayName = () => {},
-    setDisableDialogVisible = () => {},
-    setLogoutAllDialogVisible = () => {},
     getFromDateAgo = () => {},
     currentPortalSession,
     userSessions,
+    getContextOptions,
   } = props;
 
   // const {
@@ -154,15 +147,10 @@ const LastSessionBlock = (props: LastSessionBlockProps) => {
   // } = items;
 
   const { userId, displayName, avatar } = currentPortalSession;
-
+  const lastSession = userSessions[0] || currentPortalSession.session;
+  const { platform, browser, ip, city, country } = lastSession;
   const fromDateAgo = getFromDateAgo(userId);
-
   const isOnline = fromDateAgo === "online";
-  // const { platform, browser, ip, city, country } =
-  //   (connections[0] || sessions[0]) ?? {};
-
-  const { platform, browser, ip, city, country } =
-    userSessions[0] || currentPortalSession.session;
 
   // const getUserType = (): string => {
   //   if (isOwner) return t("Common:Owner");
@@ -179,37 +167,10 @@ const LastSessionBlock = (props: LastSessionBlockProps) => {
   //     ? AvatarRole.admin
   //     : AvatarRole.none;
 
-  const onClickLogout = () => {
-    setLogoutAllDialogVisible(true);
-    setDisplayName(displayName);
-  };
-
-  const onClickDisable = () => {
-    setDisableDialogVisible(true);
-  };
-
-  const contextOptions = () => {
-    return [
-      {
-        key: "LogoutAllSessions",
-        label: t("Settings:LogoutAllSessions"),
-        icon: LogoutReactSvgUrl,
-        onClick: onClickLogout,
-      },
-      {
-        key: "Separator",
-        isSeparator: true,
-        disabled: isMe,
-      },
-      {
-        key: "Disable",
-        label: t("Common:DisableUserButton"),
-        icon: RemoveSvgUrl,
-        onClick: onClickDisable,
-        disabled: isMe,
-      },
-    ];
-  };
+  const getContextData = useCallback(
+    () => getContextOptions(t, true),
+    [getContextOptions, t],
+  );
 
   return (
     <>
@@ -233,7 +194,7 @@ const LastSessionBlock = (props: LastSessionBlockProps) => {
           displayType={ContextMenuButtonDisplayType.dropdown}
           className="context-button"
           data={[]}
-          getData={contextOptions}
+          getData={getContextData}
         />
       </StyledUserInfoBlock>
 
@@ -275,26 +236,14 @@ const LastSessionBlock = (props: LastSessionBlockProps) => {
   );
 };
 
-export default inject<TStore>(({ setup, activeSessionsStore }) => {
-  const { setDisableDialogVisible, setLogoutAllDialogVisible } = setup;
-
-  const {
-    getItems,
-    isMe,
-    getFromDateAgo,
-    setDisplayName,
-    currentPortalSession,
-    userSessions,
-  } = activeSessionsStore;
+export default inject<TStore>(({ sessionsStore }) => {
+  const { getFromDateAgo, bufferSelection, userSessions, getContextOptions } =
+    sessionsStore;
 
   return {
-    isMe,
-    items: getItems,
     getFromDateAgo,
-    setDisplayName,
-    setDisableDialogVisible,
-    setLogoutAllDialogVisible,
-    currentPortalSession,
+    currentPortalSession: bufferSelection,
     userSessions,
+    getContextOptions,
   };
 })(observer(LastSessionBlock));

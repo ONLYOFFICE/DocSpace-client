@@ -208,10 +208,10 @@ const TableView = ({
   );
 };
 
-export default inject<TStore>(({ userStore, activeSessionsStore }) => {
+export default inject<TStore>(({ userStore, sessionsStore }) => {
   const userId = userStore.user?.id ?? null;
 
-  const { selection, bufferSelection } = activeSessionsStore;
+  const { selection, bufferSelection } = sessionsStore;
 
   return {
     userId,

@@ -24,23 +24,18 @@
 // content are licensed under the terms of the Creative Commons Attribution-ShareAlike 4.0
 // International. See the License terms at http://creativecommons.org/licenses/by-sa/4.0/legalcode
 
-import { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { inject, observer } from "mobx-react";
 import { Base } from "@docspace/shared/themes";
 import styled, { css } from "styled-components";
-import withContent from "SRC_DIR/HOCs/withPeopleContent";
+import { decode } from "he";
 
 import { TableCell, TableRow } from "@docspace/shared/components/table";
 import { Text } from "@docspace/shared/components/text";
 import { Checkbox } from "@docspace/shared/components/checkbox";
-
-import HistoryFinalizedReactSvgUrl from "PUBLIC_DIR/images/history-finalized.react.svg?url";
-import RemoveSvgUrl from "PUBLIC_DIR/images/remove.session.svg?url";
-import LogoutReactSvgUrl from "PUBLIC_DIR/images/logout.react.svg?url";
+import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
 
 import { SessionsTableRowProps } from "../../SecuritySessions.types";
-import { decode } from "he";
-import { Avatar, AvatarSize } from "@docspace/shared/components/avatar";
 
 const Wrapper = styled.div`
   display: contents;
@@ -173,27 +168,18 @@ const SessionsTableRow = (props: SessionsTableRowProps) => {
   const {
     t,
     item,
-    onContentRowSelect,
-    onContentRowClick,
-    onUserContextClick,
     hideColumns,
-    isMe,
     locale,
-    setLogoutAllDialogVisible,
-    setDisableDialogVisible,
-    setUserSessionPanelVisible,
-    setItems,
-    setDisplayName,
     convertDate,
     getFromDateAgo,
     setFromDateAgo,
-    setCurrentPortalSession,
     selectRow,
     selectCheckbox,
     singleContextMenuAction,
     multipleContextMenuAction,
     isChecked,
     isActive,
+    getContextOptions,
   } = props;
 
   // const { platform, browser, ip, city, country, date } = connections[0] ?? {};
@@ -222,48 +208,6 @@ const SessionsTableRow = (props: SessionsTableRowProps) => {
     return () => clearInterval(intervalId);
   }, [t, date, status, locale, userId, isOnline, convertDate, setFromDateAgo]);
 
-  const onClickSessions = () => {
-    setCurrentPortalSession(item);
-    setItems(item);
-    setUserSessionPanelVisible(true);
-  };
-
-  const onClickLogout = () => {
-    setLogoutAllDialogVisible(true);
-    setDisplayName(displayName);
-  };
-
-  const onClickDisable = () => {
-    setDisableDialogVisible(true);
-  };
-
-  const contextOptions = [
-    {
-      key: "ViewSessions",
-      label: t("Settings:ViewSessions"),
-      icon: HistoryFinalizedReactSvgUrl,
-      onClick: onClickSessions,
-    },
-    {
-      key: "LogoutAllSessions",
-      label: t("Settings:LogoutAllSessions"),
-      icon: LogoutReactSvgUrl,
-      onClick: onClickLogout,
-    },
-    {
-      key: "Separator",
-      isSeparator: true,
-      disabled: isMe,
-    },
-    {
-      key: "Disable",
-      label: t("Common:DisableUserButton"),
-      icon: RemoveSvgUrl,
-      onClick: onClickDisable,
-      disabled: isMe,
-    },
-  ];
-
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     selectCheckbox(e.target.checked, item);
   };
@@ -290,6 +234,15 @@ const SessionsTableRow = (props: SessionsTableRowProps) => {
     selectRow(item);
   };
 
+  const contextOptions = useMemo(
+    () => getContextOptions(t),
+    [getContextOptions, t],
+  );
+  const getContextModel = useCallback(
+    () => getContextOptions(t),
+    [getContextOptions, t],
+  );
+
   return (
     <Wrapper
       className={`user-item ${
@@ -305,6 +258,7 @@ const SessionsTableRow = (props: SessionsTableRowProps) => {
         fileContextClick={onRowContextClick}
         hideColumns={hideColumns}
         contextOptions={contextOptions}
+        getContextModel={getContextModel}
       >
         <TableCell className="table-container_user-name-cell">
           <TableCell
@@ -364,44 +318,31 @@ const SessionsTableRow = (props: SessionsTableRowProps) => {
   );
 };
 
-export default inject<TStore>(
-  ({ setup, dialogsStore, settingsStore, userStore, activeSessionsStore }) => {
-    const { setUserSessionPanelVisible } = dialogsStore;
-    const { setLogoutAllDialogVisible, setDisableDialogVisible } = setup;
-    const { culture } = settingsStore;
-    const { user } = userStore;
-    const locale = (user && user.cultureName) || culture || "en";
+export default inject<TStore>(({ settingsStore, userStore, sessionsStore }) => {
+  const { culture } = settingsStore;
+  const { user } = userStore;
+  const locale = (user && user.cultureName) || culture || "en";
 
-    const {
-      isMe,
-      setItems,
-      setDisplayName,
-      convertDate,
-      getFromDateAgo,
-      setFromDateAgo,
-      setCurrentPortalSession,
-      selectRow,
-      selectCheckbox,
-      singleContextMenuAction,
-      multipleContextMenuAction,
-    } = activeSessionsStore;
+  const {
+    convertDate,
+    getFromDateAgo,
+    setFromDateAgo,
+    selectRow,
+    selectCheckbox,
+    singleContextMenuAction,
+    multipleContextMenuAction,
+    getContextOptions,
+  } = sessionsStore;
 
-    return {
-      isMe,
-      locale,
-      setLogoutAllDialogVisible,
-      setDisableDialogVisible,
-      setUserSessionPanelVisible,
-      setItems,
-      setDisplayName,
-      convertDate,
-      getFromDateAgo,
-      setFromDateAgo,
-      setCurrentPortalSession,
-      selectRow,
-      selectCheckbox,
-      singleContextMenuAction,
-      multipleContextMenuAction,
-    };
-  },
-)(observer(SessionsTableRow));
+  return {
+    locale,
+    convertDate,
+    getFromDateAgo,
+    setFromDateAgo,
+    selectRow,
+    selectCheckbox,
+    singleContextMenuAction,
+    multipleContextMenuAction,
+    getContextOptions,
+  };
+})(observer(SessionsTableRow));

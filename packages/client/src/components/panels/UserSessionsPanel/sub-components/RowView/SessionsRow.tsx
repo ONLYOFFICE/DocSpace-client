@@ -77,9 +77,9 @@ const SessionsRow = (props: SessionsRowProps) => {
   );
 };
 
-export default inject<TStore>(({ setup, activeSessionsStore }) => {
+export default inject<TStore>(({ setup, sessionsStore }) => {
   const { setLogoutDialogVisible, setPlatformModalData } = setup;
-  const { platformData, setPlatformData, setIsDisabled } = activeSessionsStore;
+  const { platformData, setPlatformData, setIsDisabled } = sessionsStore;
 
   return {
     setLogoutDialogVisible,

@@ -88,10 +88,10 @@ const SessionsTable = ({
   );
 };
 
-export default inject<TStore>(({ setup, userStore, activeSessionsStore }) => {
+export default inject<TStore>(({ setup, userStore, sessionsStore }) => {
   const userId = userStore.user?.id ?? null;
   const { viewAs } = setup;
-  const { setSelection, setBufferSelection } = activeSessionsStore;
+  const { setSelection, setBufferSelection } = sessionsStore;
 
   return {
     viewAs,

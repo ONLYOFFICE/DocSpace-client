@@ -570,5 +570,6 @@
   "Yes": "Yes",
   "Yesterday": "Yesterday",
   "You": "You",
-  "orContinueWith": "or continue with"
+  "orContinueWith": "or continue with",
+  "SectionRequired": "This section is required"
 }

@@ -453,6 +453,7 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
       const isAvatarExist = header?.avatar;
       const withHeader = !!header?.title;
       const defaultIcon = !!header?.color;
+      const isCoverExist = !!header?.cover;
 
       return (
         <StyledContextMenu
@@ -462,6 +463,7 @@ const ContextMenu = React.forwardRef<ContextMenuRefType, ContextMenuProps>(
           fillIcon={fillIcon}
           isIconExist={isIconExist}
           data-testid="context-menu"
+          isCoverExist={isCoverExist}
         >
           <CSSTransition
             nodeRef={menuRef}

@@ -176,7 +176,7 @@ export const SelectColor = ({
             open={openColorPicker}
             clickOutsideAction={() => setOpenColorPicker(false)}
           >
-            <DropDownItem className="drop-down-item-hex">
+            <DropDownItem className="drop-down-item-hex" noHover noActive>
               <ColorPicker
                 id="accent-hex"
                 onClose={() => setOpenColorPicker(false)}

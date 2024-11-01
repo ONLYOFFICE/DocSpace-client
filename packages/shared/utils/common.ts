@@ -616,7 +616,7 @@ export const frameCallbackData = (methodReturnData: unknown) => {
       frameId: getFrameId(),
       methodReturnData,
     }),
-    window.parent.origin,
+    "*",
   );
 };
 
@@ -627,7 +627,7 @@ export const frameCallEvent = (eventReturnData: unknown) => {
       frameId: getFrameId(),
       eventReturnData,
     }),
-    window.parent.origin,
+    "*",
   );
 };
 
@@ -642,7 +642,7 @@ export const frameCallCommand = (
       commandName,
       commandData,
     }),
-    window.parent.origin,
+    "*",
   );
 };
 
@@ -1220,7 +1220,7 @@ export const getUserTypeName = (
 
   if (isCollaborator) return t("Common:User");
 
-  return t("Common:User");
+  return t("Common:Guest");
 };
 
 export const getUserTypeDescription = (
@@ -1238,7 +1238,7 @@ export const getUserTypeDescription = (
 
   if (isCollaborator) return t("Translations:RoleNewUserDescription");
 
-  return t("Translations:RoleViewerDescription");
+  return t("Translations:RoleGuestDescriprion");
 };
 export function setLanguageForUnauthorized(culture: string) {
   setCookie(LANGUAGE, culture, {

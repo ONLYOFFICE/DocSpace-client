@@ -343,6 +343,14 @@ const InvitePanel = ({
         error = getError(err?.response?.data?.error?.message);
       }
 
+      if (err.response?.data?.response?.errors) {
+        const { Invitations } = err.response.data.response.errors;
+
+        if (Invitations) {
+          error = Invitations[0];
+        }
+      }
+
       toastr.error(error);
       setIsLoading(false);
     } finally {
@@ -499,6 +507,7 @@ const InvitePanel = ({
       containerVisible={!hideSelector && addUsersPanelVisible}
       isLoading={invitePanelIsLoding}
       withBodyScroll
+      isInvitePanelLoader={true}
     >
       {!hideSelector && addUsersPanelVisible && (
         <ModalDialog.Container>

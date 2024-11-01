@@ -547,12 +547,16 @@ class ContextOptionsStore {
   };
 
   onClickLinkEdit = (item) => {
-    const { setConvertItem, setConvertDialogVisible } = this.dialogsStore;
+    const { setConvertItem, setConvertDialogVisible, setConvertDialogData } =
+      this.dialogsStore;
     const canConvert =
       item.viewAccessibility?.MustConvert && item.security?.Convert;
 
     if (canConvert) {
       setConvertItem({ ...item, isOpen: true });
+      setConvertDialogData({
+        files: item,
+      });
       setConvertDialogVisible(true);
     } else {
       this.gotoDocEditor(false, item);

@@ -2432,7 +2432,8 @@ class FilesActionStore {
     const { isLoading, setIsSectionFilterLoading } = this.clientLoadingStore;
     const { isRecycleBinFolder, isRecentTab } = this.treeFoldersStore;
     const { setMediaViewerData, getUrl } = this.mediaViewerDataStore;
-    const { setConvertDialogVisible, setConvertItem } = this.dialogsStore;
+    const { setConvertDialogVisible, setConvertItem, setConvertDialogData } =
+      this.dialogsStore;
 
     const { roomType, title: currentTitle } = this.selectedFolderStore;
 
@@ -2521,6 +2522,9 @@ class FilesActionStore {
     } else {
       if (canConvert) {
         setConvertItem({ ...item, isOpen: true });
+        setConvertDialogData({
+          files: item,
+        });
         setConvertDialogVisible(true);
         return;
       }

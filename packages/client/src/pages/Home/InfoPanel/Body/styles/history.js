@@ -239,9 +239,9 @@ const StyledHistoryBlockFile = styled.div`
     padding: 6px 8px;
 
     &:hover {
-      cursor: ${(props) => (props.isFolder ? "auto" : "pointer")};
+      cursor: pointer;
       background-color: ${(props) =>
-        !props.isFolder && props.theme.infoPanel.history.fileBackgroundColor};
+        props.theme.infoPanel.history.fileBackgroundColor};
     }
   }
 

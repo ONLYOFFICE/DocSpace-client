@@ -154,7 +154,6 @@ const HistoryItemList = ({
           <>
             <StyledHistoryBlockFile
               isRoom={false}
-              isFolder={item.isFolder}
               key={`${feed.action.id}_${item.id}`}
             >
               <div

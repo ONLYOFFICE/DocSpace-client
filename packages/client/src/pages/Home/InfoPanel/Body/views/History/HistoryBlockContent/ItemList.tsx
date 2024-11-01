@@ -28,13 +28,19 @@ import FolderLocationReactSvgUrl from "PUBLIC_DIR/images/folder-location.react.s
 import { useState } from "react";
 import { Trans, withTranslation } from "react-i18next";
 import { inject, observer } from "mobx-react";
+
+import FilesActionStore from "SRC_DIR/store/FilesActionsStore";
+import FilesStore from "SRC_DIR/store/FilesStore";
 import { MEDIA_VIEW_URL } from "@docspace/shared/constants";
 
 import { IconButton } from "@docspace/shared/components/icon-button";
 import { combineUrl } from "@docspace/shared/utils/combineUrl";
 import { ReactSVG } from "react-svg";
 import { TTranslation } from "@docspace/shared/types";
-import { getFileExtension } from "@docspace/shared/utils/common";
+import {
+  getFileExtension,
+  getObjectByLocation,
+} from "@docspace/shared/utils/common";
 import config from "PACKAGE_FILE";
 import {
   StyledHistoryBlockExpandLink,
@@ -54,6 +60,9 @@ type HistoryItemListProps = {
   nameWithoutExtension?: (title: string) => string;
   getInfoPanelItemIcon?: (item: any, size: number) => string;
   checkAndOpenLocationAction?: (item: any, actionType: string) => void;
+  openItemAction?: FilesActionStore["openItemAction"];
+  getFileInfo?: FilesStore["getFileInfo"];
+  getFolderInfo?: FilesStore["getFolderInfo"];
 } & (
   | {
       actionType: ActionByTarget<"file">;
@@ -73,6 +82,9 @@ const HistoryItemList = ({
   nameWithoutExtension,
   getInfoPanelItemIcon,
   checkAndOpenLocationAction,
+  openItemAction,
+  getFileInfo,
+  getFolderInfo,
 }: HistoryItemListProps) => {
   const totalItems = feed.related.length + 1;
   const isExpandable = totalItems > EXPANSION_THRESHOLD;
@@ -104,35 +116,34 @@ const HistoryItemList = ({
 
   const isDisabledOpenLocationButton = !(isStartedFilling || isSubmitted);
 
-  const handleOpenFile = (item) => {
-    const isMedia =
-      item?.accessibility?.ImageView || item?.accessibility?.MediaView;
+  const handleOpenFile = async (item) => {
+    try {
+      const isMedia =
+        item?.accessibility?.ImageView || item?.accessibility?.MediaView;
+      if (isMedia) {
+        return window.open(
+          combineUrl(
+            window.ClientConfig?.proxy?.url,
+            config.homepage,
+            MEDIA_VIEW_URL,
+            item.id,
+          ),
+        );
+      }
 
-    if (isMedia) {
-      return window.open(
-        combineUrl(
-          window.ClientConfig?.proxy?.url,
-          config.homepage,
-          MEDIA_VIEW_URL,
-          item.id,
-        ),
-      );
+      if (isFolder) {
+        const folderId = getObjectByLocation(window.location)?.folder;
+        if (Number(folderId) === item.id) return;
+        return await getFolderInfo(item.id).then((res) => {
+          openItemAction!({ ...res, isFolder: true });
+        });
+      }
+      await getFileInfo(item.id).then((res) => {
+        openItemAction!({ ...res });
+      });
+    } catch (e) {
+      console.log(e);
     }
-
-    if (!item?.accessibility?.WebView) {
-      return window.open(item.viewUrl, "_self");
-    }
-
-    return (
-      !isFolder &&
-      window.open(
-        combineUrl(
-          window.ClientConfig?.proxy?.url,
-          config.homepage,
-          `/doceditor?fileId=${item.id}`,
-        ),
-      )
-    );
   };
 
   return (
@@ -230,17 +241,23 @@ const HistoryItemList = ({
   );
 };
 
-export default inject<TStore>(({ infoPanelStore, filesActionsStore }) => {
-  const { getInfoPanelItemIcon } = infoPanelStore;
-  const { nameWithoutExtension, checkAndOpenLocationAction } =
-    filesActionsStore;
+export default inject<TStore>(
+  ({ infoPanelStore, filesActionsStore, filesStore }) => {
+    const { getInfoPanelItemIcon } = infoPanelStore;
+    const { getFileInfo, getFolderInfo } = filesStore;
+    const { nameWithoutExtension, checkAndOpenLocationAction, openItemAction } =
+      filesActionsStore;
 
-  return {
-    getInfoPanelItemIcon,
-    nameWithoutExtension,
-    checkAndOpenLocationAction,
-  };
-})(
+    return {
+      getInfoPanelItemIcon,
+      nameWithoutExtension,
+      checkAndOpenLocationAction,
+      openItemAction,
+      getFileInfo,
+      getFolderInfo,
+    };
+  },
+)(
   withTranslation(["InfoPanel", "Common", "Translations"])(
     observer(HistoryItemList),
   ),

@@ -35,10 +35,10 @@ async function Page({ searchParams }: PageProps) {
 
   const session = await getFillingSession(fillingSessionId!, share);
 
-  const isShreFile = is_file === "true";
+  const isShareFile = is_file === "true";
 
   return (
-    <CompletedForm session={session} share={share} isShreFile={isShreFile} />
+    <CompletedForm session={session} share={share} isShareFile={isShareFile} />
   );
 }
 

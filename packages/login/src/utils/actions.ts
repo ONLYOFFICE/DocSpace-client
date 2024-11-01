@@ -279,7 +279,7 @@ export async function getCompanyInfoSettings() {
     ? companyInfoHandler()
     : await fetch(getCompanyInfoSettings);
 
-  if (!res.ok) throw new Error(res.statusText);
+  if (!res.ok) return;
 
   const passwordSettings = await res.json();
 

@@ -71,6 +71,7 @@ const StyledContextMenu = styled.div<{
   isIconExist?: boolean;
   noHover?: boolean;
   fillIcon?: boolean;
+  isCoverExist?: boolean;
 }>`
   .p-contextmenu {
     position: absolute;
@@ -135,12 +136,16 @@ const StyledContextMenu = styled.div<{
           `}
       }
 
-      svg {
-        &:not(:root) {
-          width: 100%;
-          height: 100%;
-        }
-      }
+      ${(props) =>
+        !props.isCoverExist &&
+        css`
+          svg {
+            &:not(:root) {
+              width: 100%;
+              height: 100%;
+            }
+          }
+        `}
     }
 
     .avatar-wrapper {

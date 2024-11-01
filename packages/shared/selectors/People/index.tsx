@@ -499,7 +499,7 @@ const PeopleSelector = ({
           tabsData: [
             {
               id: PEOPLE_TAB_ID,
-              name: t("Common:People"),
+              name: t("Common:Employees"),
               onClick: () => changeActiveTab(PEOPLE_TAB_ID),
               content: null,
             },

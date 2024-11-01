@@ -42,6 +42,7 @@ import { Selector, TSelectorItem } from "../../components/selector";
 import { Aside } from "../../components/aside";
 import { Backdrop } from "../../components/backdrop";
 import { Portal } from "../../components/portal";
+import { toastr } from "../../components/toast";
 import {
   RowLoader,
   SearchLoader,
@@ -114,6 +115,7 @@ const FilesSelectorComponent = ({
   infoBarData,
   headerProps,
   shareKey,
+  formProps,
 }: FilesSelectorProps) => {
   const theme = useTheme();
   const { t } = useTranslation(["Common"]);
@@ -303,6 +305,11 @@ const FilesSelectorComponent = ({
       if (item.isFolder) {
         if (isDoubleClick) return;
 
+        const isFormRoom = item.roomType === RoomsType.FormRoom;
+
+        if (isFormRoom && formProps?.isRoomFormAccessible === false)
+          return toastr.warning(formProps.message);
+
         setIsFirstLoad(true);
 
         // setItems([]);
@@ -348,7 +355,12 @@ const FilesSelectorComponent = ({
         }
       }
     },
-    [breadCrumbs, setIsFirstLoad],
+    [
+      breadCrumbs,
+      setIsFirstLoad,
+      formProps?.isRoomFormAccessible,
+      formProps?.message,
+    ],
   );
 
   React.useEffect(() => {

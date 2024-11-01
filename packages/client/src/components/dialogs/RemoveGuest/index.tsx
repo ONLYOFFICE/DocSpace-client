@@ -71,6 +71,7 @@ const RemoveGuestDialog = ({
     removeGuests(ids)
       .then(() => {
         toastr.success(t("GuestsRemoved"));
+        onClose();
       })
       .catch((e: unknown) => {
         toastr.error(e as string);
@@ -78,7 +79,6 @@ const RemoveGuestDialog = ({
       .finally(() => {
         setIsRequestRunning(false);
         setSelected("close");
-        onClose();
       });
   }, [guests, isRequestRunning, onClose, removeGuests, setSelected, t]);
 
@@ -103,6 +103,8 @@ const RemoveGuestDialog = ({
     };
   }, [onKeyUpHandler]);
 
+  console.log(guests);
+
   return (
     <ModalDialog
       visible={visible}
@@ -120,7 +122,7 @@ const RemoveGuestDialog = ({
               i18nKey="RemoveGuestDescription"
               ns="PeopleTranslations"
               t={t}
-              values={{ userName: guests[0].displayName }}
+              values={{ userName: guests[0]?.displayName }}
             />
           ) : (
             t("RemoveGuestsDescription")

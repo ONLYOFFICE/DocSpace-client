@@ -1,10 +1,6 @@
 {
   "AccentColor": "උදාත්තය",
-  "AccessRightsAccessToProduct": "{{product}} ඒකකයට ප්‍රවේශය ලැබී ඇත",
-  "AccessRightsAllUsers": "සියළුම {{users}}",
   "AccessRightsChangeOwnerConfirmText": "වි-තැපෑලෙන් සත්‍යාපනය කිරීමෙන් පසු වෙනස්කම් යොදනු ලැබේ.",
-  "AccessRightsProductUsersCan": "{{category}} පරිශ්‍රීලකයින්ට හැකි දෑ",
-  "AccessRightsUsersFromList": "{{users}} ලේඛනයෙන් පරිශ්‍රීලකයින්",
   "AccountsWithoutEmails": "වි-තැපෑලක් රහිත <1>පරිශ්‍රීලකයින් {{users}} දෙනෙක්</1> හමු විය. ඔබට ඔවුන්ගේ වි-තැපැල් පිරවීමට හෝ නොසලකා හැර ඉදිරියට යාමට හැකිය.",
   "AddAllowedIP": "ඉඩදෙන අ.ජා.කෙ. (IP) ලිපින යොදන්න",
   "AddEmails": "අසම්පූර්ණ ගිණුම් වලට වි-තැපැල් එක් කරන්න",
@@ -177,7 +173,6 @@
   "PortalRenamingNavDescription": "මෙහි අවකාශයේ ලිපිනය වෙනස් කිරීමට හැකිය.",
   "PortalRenamingNote": "<strong>සටහන:</strong> ඔබ සුරකින්න බොත්තම එබූ පසු ඔබගේ අවකාශයේ පරණ ලිපිනය නව පරිශ්‍රීලකයින්ට ලබා ගැනීමට නොහැකිය.",
   "PortalSecurityTitle": "මෙම අනුකොටස පරිශ්‍රීලකයින්ට ද්වාරය වෙත ප්‍රවේශ වීමට ආරක්‍ෂිත සහ පහසු ක්‍රම ලබා දීමට ඉඩ සලසයි.",
-  "ProductUserOpportunities": "පැතිකඩ සහ සමූහ බලන්න",
   "ProjectsDescription": "එක් එක් ව්‍යාපෘති කාමර ලෙස ආයාත වන අතර මෙම ව්‍යාපෘතියේ සියලුම ලේඛන සහ පරිශ්‍රීලකයින් අඩංගු වේ. ව්‍යාපෘතියේ කළමනාකරු කාමරයේ හිමිකරු බවට පත්වනු ඇත",
   "QuotaPerRoom": "කාමරයකට සලාකය",
   "QuotaPerUser": "පරිශ්‍රීලකයෙක්ට සලාකය",
